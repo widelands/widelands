@@ -182,7 +182,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 		return;
 	}
 
-	lce.picture = g_gr->convert_sdl_surface_to_picture(text_surface);
+	lce.picture = g_gr->convert_sdl_surface_to_picture(text_surface, true);
 	lce.width = lce.picture->get_w();
 	lce.height = lce.picture->get_h();
 }
