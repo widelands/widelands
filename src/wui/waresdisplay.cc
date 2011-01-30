@@ -235,23 +235,47 @@ void AbstractWaresDisplay::draw_ware
 }
 
 // Wares highlighting/selecting
-void AbstractWaresDisplay::select_ware(Widelands::Ware_Index ware) {
+void AbstractWaresDisplay::select_ware(Widelands::Ware_Index ware)
+{
+	if (m_selected[ware])
+		return;
+
 	m_selected[ware] = true;
+	update();
 }
-void AbstractWaresDisplay::unselect_ware(Widelands::Ware_Index ware) {
+
+void AbstractWaresDisplay::unselect_ware(Widelands::Ware_Index ware)
+{
+	if (!m_selected[ware])
+		return;
+
 	m_selected[ware] = false;
+	update();
 }
+
 bool AbstractWaresDisplay::ware_selected(Widelands::Ware_Index ware) {
 	return m_selected[ware];
 }
 
 // Wares hiding
-void AbstractWaresDisplay::hide_ware(Widelands::Ware_Index ware) {
+void AbstractWaresDisplay::hide_ware(Widelands::Ware_Index ware)
+{
+	if (m_hidden[ware])
+		return;
+
 	m_hidden[ware] = true;
+	update();
 }
-void AbstractWaresDisplay::unhide_ware(Widelands::Ware_Index ware) {
+
+void AbstractWaresDisplay::unhide_ware(Widelands::Ware_Index ware)
+{
+	if (!m_hidden[ware])
+		return;
+
 	m_hidden[ware] = false;
+	update();
 }
+
 bool AbstractWaresDisplay::ware_hidden(Widelands::Ware_Index ware) {
 	return m_hidden[ware];
 }

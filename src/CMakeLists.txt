@@ -57,7 +57,7 @@ else (DEFINED MSVC)
   endif (DEFINED MINGW)
 endif (DEFINED MSVC)
 
-add_library (widelands_all ${WL_SRCS_CC} ${WL_SRCS_H})
+add_library (widelands_all STATIC ${WL_SRCS_CC} ${WL_SRCS_H})
 
 set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
@@ -98,60 +98,46 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
   add_dependencies(widelands codecheck)
 endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
-macro(LinkExecutable exe_name is_test)
-  target_link_libraries(${exe_name} widelands_all)
-
-  target_link_libraries(${exe_name} ${SDLIMAGE_LIBRARY})
-  target_link_libraries(${exe_name} ${SDLMIXER_LIBRARY})
-  target_link_libraries(${exe_name} ${SDLNET_LIBRARY})
-  target_link_libraries(${exe_name} ${SDLTTF_LIBRARY})
-  target_link_libraries(${exe_name} ${SDLGFX_LIBRARY})
-
-  if (NOT ${is_test} STREQUAL TRUE)
-    target_link_libraries(${exe_name} ${SDL_LIBRARY})
-  endif (NOT ${is_test} STREQUAL TRUE)
-
-  target_link_libraries(${exe_name} ${LUA_LIBRARY})
-  target_link_libraries(${exe_name} ${PNG_LIBRARY})
-  target_link_libraries(${exe_name} ${ZLIB_LIBRARY})
-  target_link_libraries(${exe_name} ${GGZ_CORE_LIBRARY})
-  target_link_libraries(${exe_name} ${OPENGL_gl_LIBRARY})
-
-  if (${is_test} STREQUAL TRUE)
-    target_link_libraries(${exe_name} ${Boost_LIBRARIES})
-  endif (${is_test} STREQUAL TRUE)
-
-  if (DEFINED WL_EXTRA_LINK_LIBRARIES)
-    target_link_libraries(${exe_name} ${WL_EXTRA_LINK_LIBRARIES})
-  endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
-endmacro(LinkExecutable exe_name is_test)
-
 #the subdirectories are only used for test definition
 #temporarily disabled the 'old' tests due to incompatibility
 #add_subdirectory(economy)
 #add_subdirectory(io)
 add_subdirectory(scripting)
 
-LinkExecutable(widelands FALSE)
+target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
+target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
+target_link_libraries(widelands_all ${SDLNET_LIBRARY})
+target_link_libraries(widelands_all ${SDLTTF_LIBRARY})
+target_link_libraries(widelands_all ${SDLGFX_LIBRARY})
+target_link_libraries(widelands_all ${LUA_LIBRARY})
+target_link_libraries(widelands_all ${PNG_LIBRARY})
+target_link_libraries(widelands_all ${ZLIB_LIBRARY})
+target_link_libraries(widelands_all ${GGZ_CORE_LIBRARY})
+target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
+if (DEFINED WL_EXTRA_LINK_LIBRARIES)
+  target_link_libraries(widelands_all ${WL_EXTRA_LINK_LIBRARIES})
+endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
+
+target_link_libraries(widelands widelands_all)
+target_link_libraries(widelands ${SDL_LIBRARY})
 
 if (APPLE OR WIN32)
-  target_link_libraries(widelands ${INTL_LIBRARY})
+  target_link_libraries(widelands_all ${INTL_LIBRARY})
 endif (APPLE OR WIN32)
 
 if (WIN32)
   if (DEFINED MSVC)
-    target_link_libraries(widelands ws2_32)
+    target_link_libraries(widelands_all ws2_32)
 
-    #GGZ on MSVC using 3rdparty bundle needs expat library
-    #if expat is not found, then 3rdparty bundle is not in use, so just continue.
+    #GGZ on MSVC using 3rdparty bundle needs expat and iconv library
     find_package(EXPAT REQUIRED)
-    target_link_libraries(widelands ${EXPAT_LIBRARY})
+    target_link_libraries(widelands_all ${EXPAT_LIBRARY})
     find_library(ICONV iconv libiconv REQUIRED)
-    target_link_libraries(widelands ${ICONV_LIBRARY})
+    target_link_libraries(widelands_all ${ICONV_LIBRARY})
 
   else (DEFINED MSVC)
-    target_link_libraries(widelands wsock32)
+    target_link_libraries(widelands_all wsock32)
   endif (DEFINED MSVC)
 endif (WIN32)
 
-install(TARGETS widelands DESTINATION ${WLBUILD_INSTALL_BINDIR} COMPONENT ExecutableFiles)
+install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

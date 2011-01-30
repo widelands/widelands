@@ -1,4 +1,5 @@
-help=_Wheat is essential for surviving. Delicious pitta bread and strong ales can be made of this wheat.
+help=_Wheat is essential for surviving. It is produced in farms and consumed by bakeries, micro breweries and breweries. Also Cattle farms need to be supplied with wheat.
+
 preciousness=12
 default_target_quantity=25
 

@@ -1,4 +1,4 @@
-help=_Weapons and tools are made of iron.
+help=_Iron is obtained out of iron ores in the smelting works. It is used to produce weapons and tools in the metalwork shop, axefactory, war mill and in the helmsmithy.
 preciousness=4
 default_target_quantity=10
 

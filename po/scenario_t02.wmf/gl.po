@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-11-05 09:18+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -390,6 +390,10 @@ msgstr ""
 "construír unha granxa? Agradeceríase un pouco de pita aínda quente para "
 "variar...»"
 
+#: ../../campaigns/t02.wmf/elemental:7
+msgid "02 - A Place to call Home"
+msgstr ""
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
 msgstr "Unha fermosa mañá"
@@ -637,6 +641,12 @@ msgstr ""
 "mineiros.<br />Ese non é máis que o primeiro exemplo dun material que ten\n"
 "que procesarse antes de utilizalo nun segundo edificio. Haberá máis."
 
+#: ../../campaigns/t02.wmf/elemental:9
+msgid ""
+"In this scenario the higher production buildings, including mining and the "
+"military expansions will be introduced."
+msgstr ""
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
 msgstr "Khantrukh olla sobre a chaira..."
@@ -705,16 +715,6 @@ msgstr "Subminístralles alimentos aos teus mineiros"
 msgid "Refine your mined resources"
 msgstr "Refina os produtos das minas"
 
-#: ../../campaigns/t02.wmf/elemental:9
-msgid ""
-"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
-"higher production buildings, including mining and the military expansions "
-"will be introduced."
-msgstr ""
-"Segunda misión da campaña titorial dos bárbaros. Neste titorial aprenderás o "
-"básico sobre os edificios de produción maior, entre eles a minería e as "
-"instalacións militares."
-
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
 msgstr "Comeza a construción de minas na montaña"
@@ -775,10 +775,6 @@ msgstr "Thron asinte..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:439
 msgid "Thron speaks..."
 msgstr "Thron di..."
-
-#: ../../campaigns/t02.wmf/elemental:7
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Titorial 2 ─ Un futuro fogar"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
@@ -991,6 +987,18 @@ msgstr "Os teus compañeiros leais"
 
 #~ msgid "OK"
 #~ msgstr "Aceptar"
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Titorial 2 ─ Un futuro fogar"
+
+#~ msgid ""
+#~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
+#~ "higher production buildings, including mining and the military expansions "
+#~ "will be introduced."
+#~ msgstr ""
+#~ "Segunda misión da campaña titorial dos bárbaros. Neste titorial aprenderás o "
+#~ "básico sobre os edificios de produción maior, entre eles a minería e as "
+#~ "instalacións militares."
 
 #~ msgid ""
 #~ " \"The war goes on. More and more of our brothers and sisters flee the "

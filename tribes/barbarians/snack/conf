@@ -1,4 +1,8 @@
-help=_A bit bigger, for the advanced miners. They will need a big morsel.
+help=_A bigger morsel than the ration to provide miners in deep mines. It is produced in an inn or a big inn out of fish/meat, pitta bread and beer.
+
+
+
+
 preciousness=5
 default_target_quantity=10
 

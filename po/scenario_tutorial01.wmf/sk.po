@@ -7,29 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-05 10:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"PO-Revision-Date: 2010-11-11 15:22+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:23+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
 "A message has been sent to you. See how the button at the bottom of the\n"
-"screen has changed appearance? You should now burn this quarry down as it "
-"is\n"
+"screen has changed appearance? You might now burn this quarry down as it is\n"
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
-"Bola vám odoslaná správa. Vidíte, ako zmenilo tlačidlo na spodku\n"
-"obrazovky vzhľad? Teraz by ste mali spáliť tento kameňolom, kedže\n"
-"už viac nie je užitočný a len blokuje miesto. Aby ste tak vykonali, "
-"kliknite\n"
-"na kameňolom a vyberte tlačidlo na zničenie."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
 msgid ""
@@ -240,13 +234,8 @@ msgid ""
 "your\n"
 "construction site, click on the build road icon then click on the flag in "
 "front\n"
-"of your headquarters."
+"of your headquarters. Wait for the completion of the stonemason's hut."
 msgstr ""
-"Pripojte svoje stavenisko kameňolomu k základni s cestou. Keď postavíte\n"
-"nové stavenisko, režim stavania ciest bude zapnutý. Ale teraz nie je. Aby\n"
-"ste postavili úplne novú cestu, kliknite na vlajku pred staveniskom, "
-"kliknite\n"
-"na ikonu stavania ciest, potom kliknite na vlajku pred svojou základňou."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
@@ -480,6 +469,16 @@ msgid ""
 "then select\n"
 "the tab - and finally I'll choose the building."
 msgstr ""
+"Najprv kliknem ľavým tlačidlom myši na symbol, kde chcem, aby bola\n"
+"postavená drevorubačova chatrč. Zobrazí sa okno, kde si môžem vybrať medzi\n"
+"budovami. Pretože kliknem na žltý symbol domu, ktorý znamená, že v jeho "
+"oblasti\n"
+"možno postaviť stredné a malé budovy, dozviem sa o všetkých stredných\n"
+"budovách, ktoré môžem postaviť. Drevorubačova chatrč je malá budova,\n"
+"takže vyberiem záložku malých budov. Potom vyberiem\n"
+"drevorubačovu chatrč.\n"
+"Ak ma chcete sledovať, kliknite na tlačidlo \"OK\". Pôjdem naozaj pomaly:\n"
+"Kliknem, potom vyberiem záložku a nakoniec vyberiem budovu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:498
 msgid ""
@@ -493,11 +492,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
 msgid "Getting a quarry up."
-msgstr ""
+msgstr "Stavanie kameňolomu"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:240
 msgid "Great. Now about that quarry..."
-msgstr ""
+msgstr "Skvelé. A teraz ten kameňolom..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:391
 msgid ""
@@ -529,6 +528,10 @@ msgid ""
 "everything out for yourself. Otherwise, please bear with me, I am not the\n"
 "youngest and quickest anymore."
 msgstr ""
+"Je mi ľúto, ale musím to vrátiť. Možno tu neskoršie budeme potrebovať\n"
+"miesto. Ak som pre vás príliš pomalý, môžete skúsiť hrať naozajstnú hru\n"
+"a všetko si zistiť sám(a). Inakšie, prosím, majte strpenie, už nie som\n"
+"najmladší a najrýchlejší."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
 msgid ""
@@ -574,16 +577,27 @@ msgid ""
 "If you place something on a field, the surrounding fields might have less\n"
 " space for holding buildings, so choose your fields wisely."
 msgstr ""
+"Ak niečo umiestníte na políčku, na okolitých políčkach sa môže zmenšiť\n"
+" miesto pre budovy, takže vyberajte políčka rozumne."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:583
 msgid ""
-"If you want to come back to this eastern part of your realm, just scroll "
-"here\n"
+"If you want to come back to this south-western part of your realm, just "
+"scroll here\n"
 "via right-button scrolling or open the minimap by clicking on the"
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid "Introducing messages"
+msgstr "Úvod k správam"
+
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:95
+msgid ""
+"It is easier to understand what is allowed to be built on which field when\n"
+"the build help symbols are enabled. Do so now either by pressing SPACE or "
+"by\n"
+"clicking the fourth button from the left at the very bottom of the screen.\n"
+"Click the \"OK\" button and then give it a try."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
@@ -634,6 +648,9 @@ msgid ""
 "geologist\n"
 "to it. I'll show you how it's done."
 msgstr ""
+"Poďme hľadať zásoby v tejto hore. Najprv postavíme cestu do hôr\n"
+"a umiestníme vlajku. Potom klikneme na vlajku a zavoláme k nej geológa.\n"
+"Ukážem vám, ako na to."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -643,10 +660,14 @@ msgid ""
 "beneficial\n"
 "close to mountains because you can't build houses in mountains."
 msgstr ""
+"Teraz to vyskúšajme: postavte niekoľko vojenských budov na juhovýchodnej\n"
+"hranici. Chceme obsadiť časť z tejto hory, aby sme tu mohli hľadať zásoby.\n"
+"Väčšie budovy obsadia väčšie územie, čo môže byť užitočné blízko hôr, lebo\n"
+"v horách nemožno postaviť domy."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
-msgstr ""
+msgstr "Počkajme a zistime, čo nájdu geológovia v hore."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid "Lumberjack is done"
@@ -670,15 +691,15 @@ msgstr "Záver z baníctva"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Presuňte svoj pohľad kurzorovými klávesami"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Presuňte svoj pohľad s myšou"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Presúvanie pohľadu"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -691,6 +712,13 @@ msgid ""
 "move\n"
 "your mouse around and you'll see the view scroll."
 msgstr ""
+"Je dôležité presúvať váš pohľad, aby ste získali kompletný prehľad o celej\n"
+"ekonomike. Vo Widelands môžete presúvať svoj pohľad dvomi spôsobmi. V prvom\n"
+"je potrebné použiť kurzorové klávesy na klávesnici. Druhý je viac známy a "
+"rýchlejší:\n"
+"stlačte a podržte pravé tlačidlo myši hocikde na mape, potom presuňte svoju "
+"myš\n"
+"okolo a uvidíte, že sa pohľad presunie."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Nice and easy does it all the time"
@@ -848,12 +876,10 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:558
 msgid ""
 "So our geologist found a lot of coal on this mountain. You should therefore\n"
-"build a coal mine here. Building a mine is like building a house. The build\n"
-"help symbol for where a mine can be built is"
+"build a coal mine here. Building a mine is like building a house. The build "
+"help\n"
+"symbol for where a mine can be built is"
 msgstr ""
-"No a náš geológ našiel veľa uhlia v tejto hore. A tak by ste tu\n"
-"mali postaviť uhoľnú baňu. Stavať baňu je ako stavať dom.\n"
-"Symbol pomoci pri stavaní, kde možno postaviť baňu, je"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
@@ -945,7 +971,7 @@ msgid ""
 "to\n"
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags\n"
-"and player indicators on and off inside the map."
+"and player indicators on and off inside the minimap."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:169
@@ -1000,7 +1026,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:332
 msgid ""
-"There is a small slope to climb to reach this field. This means you're\n"
+"There is a small slope to climb to reach this field. This means your\n"
 "workers are faster walking downwards than they are walking upwards."
 msgstr ""
 
@@ -1214,6 +1240,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
 msgstr ""
+"tlačidlo archivovania správ, aby ste ich presunuli do svojho archívu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid "build flag symbol."
@@ -1242,11 +1269,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."
-msgstr ""
+msgstr "symbolu na zrušenie."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:299
 msgid "the road building symbol."
-msgstr ""
+msgstr "symbolu na stavenie ciest."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:561
 msgid "this one."
@@ -1255,3 +1282,41 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
 msgstr ""
+
+#~ msgid ""
+#~ "A message has been sent to you. See how the button at the bottom of the\n"
+#~ "screen has changed appearance? You should now burn this quarry down as it "
+#~ "is\n"
+#~ "no longer of any use and is just blocking space. To do that, click on the\n"
+#~ "quarry and select the destroy button."
+#~ msgstr ""
+#~ "Bola vám odoslaná správa. Vidíte, ako zmenilo tlačidlo na spodku\n"
+#~ "obrazovky vzhľad? Teraz by ste mali spáliť tento kameňolom, kedže\n"
+#~ "už viac nie je užitočný a len blokuje miesto. Aby ste tak vykonali, "
+#~ "kliknite\n"
+#~ "na kameňolom a vyberte tlačidlo na zničenie."
+
+#~ msgid ""
+#~ "Connect your quarry construction site to your headquarters with a road. You\n"
+#~ "are directly in road building mode when you ordered a new site. But now, "
+#~ "you\n"
+#~ "aren't. To build a completely new road just click on the flag in front of "
+#~ "your\n"
+#~ "construction site, click on the build road icon then click on the flag in "
+#~ "front\n"
+#~ "of your headquarters."
+#~ msgstr ""
+#~ "Pripojte svoje stavenisko kameňolomu k základni s cestou. Keď postavíte\n"
+#~ "nové stavenisko, režim stavania ciest bude zapnutý. Ale teraz nie je. Aby\n"
+#~ "ste postavili úplne novú cestu, kliknite na vlajku pred staveniskom, "
+#~ "kliknite\n"
+#~ "na ikonu stavania ciest, potom kliknite na vlajku pred svojou základňou."
+
+#~ msgid ""
+#~ "So our geologist found a lot of coal on this mountain. You should therefore\n"
+#~ "build a coal mine here. Building a mine is like building a house. The build\n"
+#~ "help symbol for where a mine can be built is"
+#~ msgstr ""
+#~ "No a náš geológ našiel veľa uhlia v tejto hore. A tak by ste tu\n"
+#~ "mali postaviť uhoľnú baňu. Stavať baňu je ako stavať dom.\n"
+#~ "Symbol pomoci pri stavaní, kde možno postaviť baňu, je"

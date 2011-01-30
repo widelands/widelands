@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-08-30 23:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"PO-Revision-Date: 2010-12-15 00:24+0000\n"
+"Last-Translator: Miguel Valdiri Badillo <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -347,7 +347,6 @@ msgstr ""
 "mayor rango visual en nuestro alrededor para proteger a nuestro pueblo de "
 "los ataques repentinos.\" "
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
@@ -436,6 +435,17 @@ msgstr ""
 "* Destruye todos los refuerzos de los dos hermanos  Thron para liberar el "
 "círculo del trono."
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+"* Mejore sus trabajos de metalistería a una fábrica de hachas o - tan pronto "
+"como el herrero alcanze su siguiente nivel (maestro herrero) - incluso a un "
+"molino de la guerra y acumule otros trabajos de metalistería para asegurar "
+"la producción de herramientas."
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -503,6 +513,10 @@ msgstr ""
 "que no es defendido por soldados. A menudo es conveniente construir un "
 "almacén cuando tu territorio está creciendo y las rutas de acceso a tu "
 "cuartel se hacen más largas cada vez."
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr "03 - Esta Tierra es nuestra Tierra"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -669,12 +683,11 @@ msgstr "La historia continúa"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Tercera misión de la campaña tutorial bárbara. Este tutorial explica la "
-"parte militar y finalmente la lucha."
+"Este tutorial explica el manejo de militares y edificios de entrenamiento, "
+"así como la introducción a la guerra."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -697,10 +710,6 @@ msgstr "Thron habla:"
 msgid "Tracks"
 msgstr "Vías"
 
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
-msgstr "Tutorial 3 - Esta es nuestra tierra"
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
 msgstr "El invierno por delante"
@@ -716,6 +725,17 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
 msgstr "Tu compañero fiel"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Tutorial 3 - Esta es nuestra tierra"
+
+#~ msgid ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
+#~ msgstr ""
+#~ "Tercera misión de la campaña tutorial bárbara. Este tutorial explica la "
+#~ "parte militar y finalmente la lucha."
 
 #~ msgid ""
 #~ " \"The last days we came closer to our capital. Many people have already "

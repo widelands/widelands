@@ -531,6 +531,7 @@ struct Player :
 private:
 	void update_building_statistics(Building &, losegain_t);
 	void update_team_players();
+	void play_message_sound(const std::string & sender);
 
 private:
 	MessageQueue           m_messages;

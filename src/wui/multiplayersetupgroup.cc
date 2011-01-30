@@ -183,6 +183,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			 std::string(), std::string(), true, false);
 		tribe->set_font(font);
 		add(tribe, UI::Box::AlignCenter);
+		tribe->set_draw_flat_background(true);
 		init = new UI::Callback_Button
 			(this, "player_init",
 			 0, 0, w - 4 * h, h,
@@ -193,7 +194,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init->set_font(font);
 		add(init, UI::Box::AlignCenter);
 		team = new UI::Callback_Button
-			(this, "player_init",
+			(this, "player_team",
 			 0, 0, h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 boost::bind
@@ -327,6 +328,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team ->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
+			tribe->set_flat(false);
 			init ->set_visible(false);
 			init ->set_enabled(false);
 			return;
@@ -337,6 +339,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team ->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
+			tribe->set_flat(false);
 			init ->set_visible(false);
 			init ->set_enabled(false);
 			return;
@@ -362,7 +365,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			team ->set_visible(false);
 			team ->set_enabled(false);
-			tribe->set_enabled(initaccess);
+			// Flat ~= icon
+			tribe->set_flat(!initaccess);
+			tribe->set_enabled(true);
 
 			if (shared_in_tribe != settings.players.at(player.shared_in - 1).tribe) {
 				s->setPlayerTribe(m_id, settings.players.at(player.shared_in - 1).tribe);
@@ -400,6 +405,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			tribe->set_tooltip(m_tribenames[player.tribe].c_str());
 			tribe->set_pic(m_tribepics[player.tribe]);
+			tribe->set_flat(false);
 
 			if (player.team) {
 				char buf[64];

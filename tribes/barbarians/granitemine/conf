@@ -18,6 +18,7 @@ ration=8
 work=_Work
 
 [work]
+return=skipped when economy needs ration and not economy needs raw_stone
 consume=ration
 sleep=20000
 animate=working 20000

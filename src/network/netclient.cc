@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -297,12 +297,12 @@ bool NetClient::canChangePlayerState(uint8_t)
 
 bool NetClient::canChangePlayerTribe(uint8_t number)
 {
-	return (number == d->settings.playernum) && !d->settings.scenario;
+	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
 bool NetClient::canChangePlayerTeam(uint8_t number)
 {
-	return (number == d->settings.playernum) && !d->settings.scenario;
+	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
 bool NetClient::canChangePlayerInit(uint8_t)
@@ -626,7 +626,11 @@ void NetClient::handle_packet(RecvPacket & packet)
 		file->filename = path;
 		file->md5sum = md5;
 
+#ifdef WIN32
+		path.resize(path.rfind('\\', path.size() - 2));
+#else
 		path.resize(path.rfind('/', path.size() - 2));
+#endif
 
 		g_fs->EnsureDirectoryExists(path);
 		break;

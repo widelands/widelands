@@ -270,6 +270,34 @@ std::string ProductionSite::get_statistics_string()
 	return m_statistics_buffer;
 }
 
+/**
+ * Detect if the workers are experienced enough for an upgrade
+ * @param idx Index of the enhanchement
+ */
+bool ProductionSite::has_workers(Building_Index targetSite, Game & game)
+{
+	// bld holds the description of the building we want to have
+	if (upcast(ProductionSite_Descr const, bld, tribe().get_building_descr(targetSite))) {
+		// if he has workers
+		if (bld->nr_working_positions()) {
+			Ware_Index need = bld->working_positions()[0].first;
+			for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
+				if (!working_positions()[i].worker) {
+					return false; // no one is in this house
+				} else {
+					Ware_Index have = working_positions()[i].worker->worker_index();
+					if (tribe().get_worker_descr(have)->can_act_as(need)) {
+						return true; // he found a lead worker
+					}
+				}
+			}
+			return false;
+		}
+		return true;
+	} else return true;
+}
+
+
 
 WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
 	container_iterate_const(Input_Queues, m_input_queues, i)

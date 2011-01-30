@@ -20,14 +20,14 @@
 #include "militarysite.h"
 
 #include "battle.h"
+#include "economy/flag.h"
+#include "economy/request.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "i18n.h"
+#include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
-#include "economy/flag.h"
-#include "economy/request.h"
-#include "message_queue.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "worker.h"
@@ -217,7 +217,7 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
 				 descname().c_str());
 			send_message
 				(*game,
-				 "military_occupied",
+				 "site_occupied",
 				 descname(),
 				 message);
 		}

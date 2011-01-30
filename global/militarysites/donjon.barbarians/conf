@@ -3,18 +3,10 @@ max_soldiers=5
 heal_per_second=2
 conquers=8
 vision_range=17
-
-[buildcost]
-blackwood=7
-trunk=1
-raw_stone=4
-
-[build]
-pics=donjon_b_??.png
-hotspot=55 84
+buildable=no
 
 [idle]
-pics=donjon_i_??.png
+pics=../../../tribes/barbarians/donjon/donjon_i_??.png
 hotspot=55 84
 playercolor=true
 fps=10

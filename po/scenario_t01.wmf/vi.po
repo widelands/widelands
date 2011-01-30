@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-11-05 10:51+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:43+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
@@ -242,6 +242,10 @@ msgstr ""
 "tượng ngôi nhà màu đỏ cho thấy bạn có thể xây một công trình nhỏ - như kho "
 "chứa gỗ - ở đó.<br>"
 
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "01 - Eyes in the Dark"
+msgstr ""
+
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
 msgstr "Một ông cụ già nói..."
@@ -266,19 +270,15 @@ msgstr "Dựng một kho chứa gỗ khác"
 msgid "Build two quarries"
 msgstr "Dựng hai xưởng khai thác đá"
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
-msgstr ""
-"Nhiệm vụ đầu tiên của bài hướng dẫn Chiến dịch chống người mọi rợ. Ở bài tập "
-"này cách chơi và điều khiển cơ bản cùng những kiểu nhà sản xuất (gỗ, đá, "
-"v.v...) sẽ được giới thiệu."
-
 #: ../../campaigns/t01.wmf/scripting/texts.lua:101
 msgid "In the night"
 msgstr "Trong đêm"
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"In this tutorial the basic gameplay and control as well as basic production "
+"buildings of the Barbarians are introduced."
+msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -350,6 +350,14 @@ msgstr "Thron thở dài..."
 msgid "Thron speaks..."
 msgstr "Thron nói..."
 
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Bài tập 1 - Cặp mắt trong bóng tối"
+#~ msgid ""
+#~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+#~ "gameplay and control as well as basic production buildings (wood, stone, "
+#~ "etc.) will be introduced."
+#~ msgstr ""
+#~ "Nhiệm vụ đầu tiên của bài hướng dẫn Chiến dịch chống người mọi rợ. Ở bài tập "
+#~ "này cách chơi và điều khiển cơ bản cùng những kiểu nhà sản xuất (gỗ, đá, "
+#~ "v.v...) sẽ được giới thiệu."
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Bài tập 1 - Cặp mắt trong bóng tối"

@@ -349,7 +349,7 @@ _[[ "My brothers and their soldiers are dead and left fire and destruction behin
 "<br><br>" ..
 _"--------------------- VICTORY! ----------------------" ..
 "<br><br>" ..
-_"You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission." ..
+_"You have completed the last mission of the barbarian tutorial campaign. You may continue playing if you wish, otherwise move on to the next campaign." ..
 "</p></rt>",
 }
 
