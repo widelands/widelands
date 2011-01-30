@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -345,10 +345,10 @@ Immovable::Immovable(const Immovable_Descr & imm_descr) :
 BaseImmovable (imm_descr),
 m_owner(0),
 m_anim        (0),
-m_anim_construction_total(0),
-m_anim_construction_done(0),
 m_program     (0),
 m_program_ptr (0),
+m_anim_construction_total(0),
+m_anim_construction_done(0),
 m_program_step(0),
 m_action_data(0),
 m_reserved_by_worker(false)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
 #include "ui_basic/messagebox.h"
 
 #include <cstdio>
@@ -125,12 +126,37 @@ void Fullscreen_Menu_LoadGame::clicked_delete()
 	}
 }
 
+/**
+ * Update buttons and labels to reflect that no loadable game is selected.
+ */
+void Fullscreen_Menu_LoadGame::no_selection()
+{
+	m_ok.set_enabled(false);
+	m_delete.set_enabled(false);
 
-void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
+	m_tamapname .set_text(std::string());
+	m_tagametime.set_text(std::string());
+}
+
+
+void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
+{
+	if (!m_list.has_selection()) {
+		no_selection();
+		return;
+	}
+
 	if (const char * const name = m_list.get_selected()) {
-		Widelands::Game_Loader gl(name, m_game);
 		Widelands::Game_Preload_Data_Packet gpdp;
-		gl.preload_game(gpdp); //  This has worked before, no problem
+
+		try {
+			Widelands::Game_Loader gl(name, m_game);
+			gl.preload_game(gpdp);
+		} catch (const _wexception & e) {
+			log("Save game '%s' must have changed from under us\nException: %s\n", name, e.what());
+			m_list.remove(selected);
+			return;
+		}
 
 		m_ok.set_enabled(true);
 		m_delete.set_enabled(true);
@@ -146,8 +172,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 		sprintf(buf, "%02i:%02i", hours, minutes);
 		m_tagametime.set_text(buf);
 	} else {
-		m_tamapname .set_text(std::string());
-		m_tagametime.set_text(std::string());
+		no_selection();
 	}
 }
 
