@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,7 +176,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 	SDL_Surface * text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
 	if (!text_surface) {
 		log
-			("Font_Handler::create_single_line_text_surface, an error : %s\n",
+			("Font_Handler::render_line, an error : %s\n",
 			 TTF_GetError());
 		log("Text was: '%s'\n", lce.text.c_str());
 		return;
@@ -241,7 +241,7 @@ void Font_Handler::draw_multiline
  * windows ...) this is the death, for a whole new surface is rendered
  * with everything that has been written so far.
  */
-// TODO: rename this to draw text
+// TODO: get rid of this (depends on refactor of Multiline_Textarea)
 void Font_Handler::draw_string
 	(RenderTarget & dst,
 	 std::string const & fontname,
@@ -251,9 +251,7 @@ void Font_Handler::draw_string
 	 Align               const align,
 	 uint32_t            const wrap,
 	 Widget_Cache        const widget_cache,
-	 PictureID         *       widget_cache_id,
-	 uint32_t            const caret,
-	 bool                const transparent)
+	 PictureID         *       widget_cache_id)
 {
 	TTF_Font & font = *Font::get(fontname, fontsize)->get_ttf_font();
 	//Width and height of text, needed for alignment
@@ -269,9 +267,9 @@ void Font_Handler::draw_string
 		style.bold = true;
 
 		if (wrap == std::numeric_limits<uint32_t>::max() && text.find('\n') == std::string::npos) {
-			draw_text(dst, style, dstpoint, text, align, caret);
+			draw_text(dst, style, dstpoint, text, align);
 		} else {
-			draw_multiline(dst, style, dstpoint, text, align, wrap, caret);
+			draw_multiline(dst, style, dstpoint, text, align, wrap);
 		}
 
 		return;
@@ -283,31 +281,15 @@ void Font_Handler::draw_string
 		// We need to (re)create the picid for the widget.
 		// The old picture is freed automatically
 		*widget_cache_id =
-			create_text_surface
-				(font, fg, bg, text, align, wrap, 0, caret, transparent);
+			convert_sdl_surface
+				(*create_sdl_text_surface
+				 (font, fg, bg, text, align, wrap, 0),
+				 bg, true);
 		g_gr->get_picture_size(*widget_cache_id, w, h);
 		picid = *widget_cache_id;
 	}
 	do_align(align, dstpoint.x, dstpoint.y, w, h);
 	dst.blit(dstpoint, picid);
-}
-
-/*
-* Creates a Widelands surface of the given text, checks if multiline or not
-*/
-PictureID Font_Handler::create_text_surface
-	(TTF_Font & font, RGBColor const fg, RGBColor const bg,
-	 std::string const & text, Align const align,
-	 uint32_t            const wrap,
-	 uint32_t            const linespacing,
-	 uint32_t            const caret,
-	 bool                const transparent)
-{
-	return
-		convert_sdl_surface
-			(*create_sdl_text_surface
-			 	(font, fg, bg, text, align, wrap, linespacing, caret),
-			 bg, transparent);
 }
 
 /*
@@ -317,8 +299,7 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 	(TTF_Font & font,
 	 RGBColor const fg, RGBColor const bg,
 	 std::string       text,
-	 Align,
-	 uint32_t    const caret)
+	 Align)
 {
 	// render this block in a SDL Surface
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
@@ -351,10 +332,6 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 		SDL_Rect r; r.x = LINE_MARGIN, r.y = 0;
 		SDL_BlitSurface(text_surface, 0, surface, &r);
 		SDL_FreeSurface(text_surface);
-		if (caret != std::numeric_limits<uint32_t>::max()) {
-			std::string const text_caret_pos = text.substr(0, caret);
-			render_caret(font, *surface, text_caret_pos);
-		}
 		return surface;
 	} else {
 		log
@@ -378,8 +355,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	 std::string const & text,
 	 Align       const align,
 	 uint32_t            const wrap,
-	 uint32_t            const linespacing,
-	 uint32_t                  caret)
+	 uint32_t            const linespacing)
 {
 	assert(wrap != std::numeric_limits<uint32_t>::max());
 	assert(2 * LINE_MARGIN < wrap);
@@ -391,9 +367,6 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
 	SDL_Color sdl_bg = {bg.r(), bg.g(), bg.b(), 0};
-
-	uint32_t cur_text_pos = 0;
-	uint32_t i = 0;
 
 	std::string const lines = word_wrap_text(font, text, wrap);
 	std::string::size_type const lines_size = lines.size();
@@ -434,17 +407,6 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 			SDL_Rect r; r.x = LINE_MARGIN, r.y = 0;
 			SDL_BlitSurface(text_surface, 0, surface, &r);
 			SDL_FreeSurface(text_surface);
-			if (caret != std::numeric_limits<uint32_t>::max()) {
-				uint32_t const new_text_pos = cur_text_pos + line_size;
-				if (new_text_pos >= caret - i) {
-					int32_t const caret_line_pos = caret - cur_text_pos - i;
-					line.resize(caret_line_pos);
-					render_caret(font, *surface, line);
-					caret = std::numeric_limits<uint32_t>::max();
-				} else
-					cur_text_pos = new_text_pos;
-				++i;
-			}
 
 			m_rendered_lines.push_back(surface);
 			global_surface_height += surface->h + linespacing;
@@ -468,36 +430,6 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 			 m_rendered_lines, bg, align, linespacing);
 
 }
-
-void Font_Handler::render_caret
-	(TTF_Font          & font,
-	 SDL_Surface       & line,
-	 std::string const & text_caret_pos)
-{
-	int32_t caret_x, caret_y;
-
-	TTF_SizeUTF8(&font, text_caret_pos.c_str(), &caret_x, &caret_y);
-	caret_x += LINE_MARGIN;
-
-	//TODO: Implement caret rendering for opengl
-	if (!g_opengl)
-	{
-		PictureID caret = g_gr->get_picture(PicMod_Game, "pics/caret.png");
-		upcast(SurfaceSDL, sdlsurf, caret.get());
-		assert(sdlsurf);
-		SDL_Surface * const caret_surf_sdl = sdlsurf->get_sdl_surface();
-
-		SDL_Rect r;
-		r.x = caret_x - caret_surf_sdl->w;
-		r.y = (caret_y - caret_surf_sdl->h) / 2;
-
-		SDL_BlitSurface(caret_surf_sdl, 0, &line, &r);
-	} else {
-		log("WARNING: Should render caret here but it is not implemented\n");
-	}
-
-}
-
 
 /**
  * Draw the caret for the given text rendered exactly at the given point
@@ -552,15 +484,14 @@ SDL_Surface * Font_Handler::create_sdl_text_surface
 	 std::string const & text,
 	 Align               const align,
 	 uint32_t            const wrap,
-	 uint32_t            const linespacing,
-	 uint32_t            const caret)
+	 uint32_t            const linespacing)
 {
 	return
 		wrap != std::numeric_limits<uint32_t>::max()  ?
 		create_static_long_text_surface
-			(font, fg, bg, text, align, wrap, linespacing, caret)
+			(font, fg, bg, text, align, wrap, linespacing)
 		:
-		create_single_line_text_surface(font, fg, bg, text, align, caret);
+		create_single_line_text_surface(font, fg, bg, text, align);
 }
 
 /*

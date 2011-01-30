@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,9 +75,7 @@ struct Font_Handler {
 		 Align               align           = Align_CenterLeft,
 		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
 		 Widget_Cache        widget_cache    = Widget_Cache_None,
-		 PictureID         * widget_cache_id = 0,
-		 uint32_t            caret        = std::numeric_limits<uint32_t>::max(),
-		 bool                transparent     = true);
+		 PictureID         * widget_cache_id = 0);
 	void get_size
 		(std::string const & fontname, int32_t size,
 		 std::string text,
@@ -140,15 +138,6 @@ private:
 	boost::scoped_ptr<Data> d;
 
 private:
-	PictureID create_text_surface
-		(TTF_Font &,
-		 RGBColor fg, RGBColor bg,
-		 std::string const & text,
-		 Align,
-		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
-		 uint32_t            line_spacing = 0,
-		 uint32_t            caret        = std::numeric_limits<uint32_t>::max(),
-		 bool transparent = true);
 	PictureID convert_sdl_surface
 		(SDL_Surface &, const RGBColor bg, bool transparent = false);
 	SDL_Surface * draw_string_sdl_surface
@@ -164,19 +153,16 @@ private:
 		 std::string const & text,
 		 Align,
 		 uint32_t            wrap        = std::numeric_limits<uint32_t>::max(),
-		 uint32_t            linespacing = 0,
-		 uint32_t            caret       = std::numeric_limits<uint32_t>::max());
+		 uint32_t            linespacing = 0);
 	SDL_Surface * create_static_long_text_surface
 		(TTF_Font &, RGBColor fg, RGBColor bg,
 		 std::string const & text,
 		 Align,
 		 uint32_t            wrap        = std::numeric_limits<uint32_t>::max(),
-		 uint32_t            linespacing = 0,
-		 uint32_t            caret       = std::numeric_limits<uint32_t>::max());
+		 uint32_t            linespacing = 0);
 	SDL_Surface * create_single_line_text_surface
 		(TTF_Font &, RGBColor fg, RGBColor bg,
-		 std::string text, Align,
-		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+		 std::string text, Align);
 	SDL_Surface * create_empty_sdl_surface(uint32_t w, uint32_t h);
 	SDL_Surface * join_sdl_surfaces
 		(uint32_t w, uint32_t h,
@@ -189,10 +175,6 @@ private:
 	SDL_Surface * load_image(std::string file);
 	SDL_Surface * render_space
 		(Text_Block &, RGBColor bg, int32_t style = TTF_STYLE_NORMAL);
-	void render_caret
-		(TTF_Font &,
-		 SDL_Surface & line,
-		 const std::string & text_caret_pos);
 
 	void draw_caret
 		(RenderTarget &,

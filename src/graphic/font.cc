@@ -107,7 +107,7 @@ uint32_t Font::height() const
 }
 
 /**
- * \return the number of pixels between lines in this font.
+ * \return the number of pixels between lines in this font (from baseline to baseline).
  */
 uint32_t Font::lineskip() const
 {
