@@ -207,9 +207,6 @@ void Textarea::collapse()
  */
 void Textarea::expand()
 {
-	if (!m_text.length())
-		return;
-
 	int32_t x = get_x();
 	int32_t y = get_y();
 	uint32_t w = m_textstyle.calc_bare_width(m_text);
