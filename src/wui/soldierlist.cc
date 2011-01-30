@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,6 +68,15 @@ private:
 		uint32_t row;
 		uint32_t col;
 		Point pos;
+
+		/**
+		 * Keep track of how we last rendered this soldier,
+		 * so that we can update when its status changes.
+		 */
+		/*@{*/
+		uint32_t cache_level;
+		uint32_t cache_health;
+		/*@}*/
 	};
 
 	Widelands::Editor_Game_Base & m_egbase;
@@ -213,6 +222,9 @@ void SoldierPanel::think()
 			icon.pos.x = std::max(icon.pos.x, static_cast<int32_t>(icon_it.current->pos.x + m_icon_width));
 		}
 
+		icon.cache_health = 0;
+		icon.cache_level = 0;
+
 		m_icons.insert(insertpos, icon);
 		changes = true;
 	}
@@ -235,6 +247,21 @@ void SoldierPanel::think()
 			changes = true;
 
 		icon.pos += dp;
+
+		// Check whether health and/or level of the soldier has changed
+		Soldier * soldier = icon.soldier.get(egbase());
+		uint32_t level = soldier->get_attack_level();
+		level = level * (soldier->get_max_defense_level() + 1) + soldier->get_defense_level();
+		level = level * (soldier->get_max_evade_level() + 1) + soldier->get_evade_level();
+		level = level * (soldier->get_max_hp_level() + 1) + soldier->get_hp_level();
+
+		uint32_t health = soldier->get_current_hitpoints();
+
+		if (health != icon.cache_health || level != icon.cache_level) {
+			icon.cache_level = level;
+			icon.cache_health = health;
+			changes = true;
+		}
 	}
 
 	if (changes)
