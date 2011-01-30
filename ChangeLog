@@ -1,4 +1,6 @@
 ### Build 16 (until now)
+- Removed barbarian Stronghold from list of buildable military sites as
+  it did not have a real purpose.
 - Added a help button + window function (e.g. to explain the multi player
   menu).
 - Play a fanfare when a military site gets occupied and another fanfare
