@@ -245,7 +245,6 @@ void GameTips::show_tip(int32_t index) {
 	UI::TextStyle ts;
 	ts.font = UI::Font::get(UI_FONT_NAME, m_font_size);
 	ts.fg = m_color;
-	ts.bg = m_bgcolor;
 	ts.bold = true;
 
 	UI::g_fh->draw_multiline

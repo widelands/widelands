@@ -70,7 +70,6 @@ struct TextStyle {
 	TextStyle() :
 		font(0),
 		fg(255, 255, 255),
-		bg(0, 0, 0),
 		bold(false),
 		italics(false),
 		underline(false)
@@ -91,14 +90,13 @@ struct TextStyle {
 
 	Font * font;
 	RGBColor fg;
-	RGBColor bg; //TODO get rid of this
 	bool bold : 1;
 	bool italics : 1;
 	bool underline : 1;
 
 	bool operator== (const TextStyle & o) const {
 		return
-			font == o.font && fg == o.fg && bg == o.bg &&
+			font == o.font && fg == o.fg &&
 			bold == o.bold && italics == o.italics && underline == o.underline;
 	}
 	bool operator!= (const TextStyle & o) const {

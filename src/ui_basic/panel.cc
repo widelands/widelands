@@ -1098,7 +1098,6 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	if (!tooltip_style.font) {
 		tooltip_style.font = Font::get(UI_FONT_TOOLTIP);
 		tooltip_style.fg = RGBColor(255, 255, 0);
-		tooltip_style.bg = RGBColor(63, 52, 34);
 		tooltip_style.bold = true;
 	}
 

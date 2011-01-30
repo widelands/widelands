@@ -199,7 +199,6 @@ const TextStyle & TextStyle::ui_big()
 	if (!init) {
 		style.font = Font::ui_big();
 		style.fg = UI_FONT_CLR_FG;
-		style.bg = UI_FONT_CLR_BG;
 		style.bold = true;
 		init = true;
 	}
@@ -215,7 +214,6 @@ const TextStyle & TextStyle::ui_small()
 	if (!init) {
 		style.font = Font::ui_small();
 		style.fg = UI_FONT_CLR_FG;
-		style.bg = UI_FONT_CLR_BG;
 		style.bold = true;
 		init = true;
 	}
@@ -231,7 +229,6 @@ const TextStyle & TextStyle::ui_ultrasmall()
 	if (!init) {
 		style.font = Font::ui_ultrasmall();
 		style.fg = UI_FONT_CLR_FG;
-		style.bg = UI_FONT_CLR_BG;
 		style.bold = true;
 		init = true;
 	}

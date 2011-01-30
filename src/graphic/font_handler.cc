@@ -262,7 +262,6 @@ void Font_Handler::draw_string
 	if (widget_cache == Widget_Cache_None) {
 		TextStyle style;
 		style.font = Font::get(fontname, fontsize);
-		style.bg = bg;
 		style.fg = fg;
 		style.bold = true;
 
