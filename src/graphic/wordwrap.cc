@@ -82,8 +82,8 @@ uint32_t WordWrap::wrapwidth() const
  */
 void WordWrap::wrap(const std::string & text)
 {
-	static int count = 0;
-	log("word_wrap_text(%u): %i\n", m_wrapwidth, ++count);
+	//static int count = 0;
+	//log("word_wrap_text(%u): %i\n", m_wrapwidth, ++count);
 
 	m_lines.clear();
 
