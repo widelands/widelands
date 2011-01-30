@@ -76,9 +76,15 @@ struct Font_Handler {
 		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
 		 Widget_Cache        widget_cache    = Widget_Cache_None,
 		 PictureID         * widget_cache_id = 0);
+
+	void get_size
+		(const TextStyle &,
+		 const std::string & text,
+		 uint32_t & w, uint32_t & h,
+		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
 	void get_size
 		(std::string const & fontname, int32_t size,
-		 std::string text,
+		 const std::string & text,
 		 uint32_t & w, uint32_t & h,
 		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
 	int32_t calc_linewidth(TTF_Font &, const std::string & text);

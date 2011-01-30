@@ -1017,45 +1017,6 @@ std::string Font_Handler::word_wrap_text
 			 max_width);
 }
 
-
-//calculates size of a given text
-void Font_Handler::get_size
-	(std::string const & fontname, int32_t const fontsize,
-	 std::string text,
-	 uint32_t & w, uint32_t & h,
-	 uint32_t const wrap)
-{
-	TTF_Font & font = *Font::get(fontname, fontsize)->get_ttf_font();
-
-	if (wrap < std::numeric_limits<uint32_t>::max())
-		text = word_wrap_text(font, text, wrap);
-
-	w = 0;
-	h = 0;
-	std::string::size_type const text_size = text.size();
-	struct {std::string::size_type pos; bool done;} j = {0, false};
-	for (; not j.done;)
-	{
-		std::string::size_type line_end = text.find('\n', j.pos);
-		if (line_end == std::string::npos) {
-			line_end = text_size;
-			j.done = true;
-		}
-		std::string::size_type line_size = line_end - j.pos;
-		std::string line = text.substr(j.pos, line_size);
-
-		int32_t line_w, line_h;
-		TTF_SizeUTF8(&font, line.empty() ? " " : line.c_str(), &line_w, &line_h);
-
-		if (static_cast<int32_t>(w) < line_w)
-			w = line_w;
-		h += line_h;
-
-		j.pos = line_end + 1;
-	}
-	w += 2 * LINE_MARGIN;
-}
-
 //calcultes linewidth of a given text
 int32_t Font_Handler::calc_linewidth(TTF_Font & font, std::string const & text)
 {
@@ -1064,4 +1025,33 @@ int32_t Font_Handler::calc_linewidth(TTF_Font & font, std::string const & text)
 	return w;
 }
 
+/**
+ * Compute the total size of the given text, when wrapped to the given
+ * maximum width and rendered in the given text style.
+ */
+void Font_Handler::get_size
+	(const TextStyle & textstyle,
+	 const std::string & text,
+	 uint32_t & w, uint32_t & h,
+	 uint32_t wrap)
+{
+	WordWrap ww(textstyle, wrap);
+	ww.wrap(text);
+	w = ww.width();
+	h = ww.height();
 }
+
+/**
+ * Calculates size of a given text.
+ */
+void Font_Handler::get_size
+	(std::string const & fontname, int32_t const fontsize,
+	 const std::string & text,
+	 uint32_t & w, uint32_t & h,
+	 uint32_t const wrap)
+{
+	// use bold style by default for historical reasons
+	get_size(TextStyle::makebold(Font::get(fontname, fontsize), RGBColor(255, 255, 255)), text, w, h, wrap);
+}
+
+} // namespace UI
