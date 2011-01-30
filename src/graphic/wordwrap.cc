@@ -210,15 +210,15 @@ uint32_t WordWrap::width() const
 	return width + 2 * LINE_MARGIN;
 }
 
-
 /**
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const
 {
 	uint32_t fontheight = m_style.font->height();
+	uint32_t lineskip = m_style.font->lineskip();
 
-	return m_lines.size() * (fontheight + 1) + 1;
+	return fontheight + (m_lines.size() - 1) * lineskip;
 }
 
 /**
@@ -264,21 +264,22 @@ uint32_t WordWrap::line_offset(uint32_t line) const
 void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret)
 {
 	uint32_t fontheight = m_style.font->height();
+	uint32_t lineskip = m_style.font->lineskip();
 	uint32_t caretline, caretpos;
 
 	calc_wrapped_pos(caret, caretline, caretpos);
 
 	if ((align & Align_Vertical) != Align_Top) {
-		uint32_t height = m_lines.size() * (fontheight + 1) + 1;
+		uint32_t h = height();
 
 		if ((align & Align_Vertical) == Align_VCenter)
-			where.y -= (height + 1) / 2;
+			where.y -= (h + 1) / 2;
 		else
-			where.y -= height;
+			where.y -= h;
 	}
 
 	++where.y;
-	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += fontheight + 1) {
+	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += lineskip) {
 		if (where.y >= dst.get_h() || int32_t(where.y + fontheight) <= 0)
 			continue;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,6 +66,27 @@ Font::Font(const std::string & name, int size)
 	m_font = TTF_OpenFontIndexRW(ops, 1, size, 0);
 	if (!m_font)
 		throw wexception("could not load font!: %s", TTF_GetError());
+
+	// Compute the line skip based on some glyphs by sampling some letters,
+	// special characters, and accented/umlauted versions of capital A
+	// It seems more reasonable to use TTF_FontLineSkip(), but the fonts
+	// we use claim to have a very excessive line skip.
+	static uint16_t glyphs[] = {'A', '_', '@', ',', 'q', 'y', '"', 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5};
+	int32_t minminy = 0;
+	int32_t maxmaxy = 0;
+
+	for (unsigned int idx = 0; idx < sizeof(glyphs) / sizeof(glyphs[0]); ++idx) {
+		int miny, maxy;
+		if (TTF_GlyphMetrics(m_font, glyphs[idx], 0, 0, &miny, &maxy, 0) < 0)
+			continue; // error, e.g. glyph not found
+
+		if (miny < minminy)
+			minminy = miny;
+		if (maxy > maxmaxy)
+			maxmaxy = maxy;
+	}
+
+	m_computed_lineskip = maxmaxy - minminy + 1;
 }
 
 /**
@@ -85,6 +106,13 @@ uint32_t Font::height() const
 	return TTF_FontHeight(m_font);
 }
 
+/**
+ * \return the number of pixels between lines in this font.
+ */
+uint32_t Font::lineskip() const
+{
+	return m_computed_lineskip;
+}
 
 /**
  * Return the font for the given name and size.

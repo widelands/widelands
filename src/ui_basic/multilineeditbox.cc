@@ -509,7 +509,8 @@ void Multiline_Editbox::Data::scroll_cursor_into_view()
 	ww.calc_wrapped_pos(cursor_pos, cursorline, cursorpos);
 
 	int32_t lineheight = textstyle.font->height();
-	int32_t top = cursorline * (lineheight + 1);
+	int32_t lineskip = textstyle.font->lineskip();
+	int32_t top = cursorline * lineskip;
 
 	if (top < int32_t(scrollbar.get_scrollpos())) {
 		scrollbar.set_scrollpos(top - lineheight);
