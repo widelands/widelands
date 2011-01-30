@@ -264,8 +264,11 @@ void SoldierPanel::think()
 		}
 	}
 
-	if (changes)
+	if (changes) {
+		Point mousepos = get_mouse_position();
+		m_mouseover_fn(find_soldier(mousepos.x, mousepos.y));
 		update();
+	}
 }
 
 void SoldierPanel::draw(RenderTarget & dst)

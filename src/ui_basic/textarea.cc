@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -137,6 +137,8 @@ void Textarea::set_text(const std::string & text) {
 		expand();
 	else if (m_layoutmode == Layouted)
 		update_desired_size();
+
+	update();
 }
 
 std::string Textarea::get_text() {
