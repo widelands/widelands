@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1097,7 +1097,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	static TextStyle tooltip_style;
 	if (!tooltip_style.font) {
 		tooltip_style.font = Font::get(UI_FONT_TOOLTIP);
-		tooltip_style.fg = RGBColor(255, 255, 0);
+		tooltip_style.fg = UI_FONT_TOOLTIP_CLR;
 		tooltip_style.bold = true;
 	}
 
@@ -1119,7 +1119,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
 		r.y -= 35 + r.h;
 
-	dst.fill_rect(r, RGBColor(230, 200, 50));
+	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
 
 	ww.draw(dst, r + Point(2, 2));
