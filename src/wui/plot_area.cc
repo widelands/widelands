@@ -20,6 +20,7 @@
 #include "plot_area.h"
 
 #include "constants.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -119,6 +120,9 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	//  No Arrow here, since this doesn't continue.
 
 	//  draw xticks
+	UI::TextStyle xtickstyle(UI::TextStyle::ui_small());
+	xtickstyle.fg = RGBColor(255, 0, 0);
+
 	float sub = xline_length / how_many_ticks[m_time];
 	float posx = get_inner_w() - space_at_right;
 	char buffer[200];
@@ -132,20 +136,13 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			(buffer, sizeof(buffer),
 			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
 
-		UI::g_fh->draw_string
-			(dst,
-			 UI_FONT_SMALL,
-			 RGBColor(255, 0, 0), RGBColor(255, 255, 255),
+		UI::g_fh->draw_text
+			(dst, xtickstyle,
 			 Point
 			 	(static_cast<int32_t>(posx),
 			 	 get_inner_h() - space_at_bottom + 4),
 			 buffer,
-			 UI::Align_Center,
-			 std::numeric_limits<uint32_t>::max(),
-			 UI::Widget_Cache_None,
-			 0,
-			 std::numeric_limits<uint32_t>::max(),
-			 false);
+			 UI::Align_Center);
 		posx -= sub;
 	}
 
@@ -200,18 +197,13 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 
 	//  print the maximal value
 	sprintf(buffer, "%u", max);
-	UI::g_fh->draw_string
-		(dst,
-		 UI_FONT_SMALL,
-		 RGBColor(120, 255, 0), RGBColor(255, 255, 255),
+	UI::TextStyle ymarkstyle(UI::TextStyle::ui_small());
+	ymarkstyle.fg = RGBColor(120, 255, 0);
+
+	UI::g_fh->draw_text
+		(dst, ymarkstyle,
 		 Point(get_inner_w() - space_at_right - 2, spacing),
-		 buffer,
-		 UI::Align_CenterRight,
-		 std::numeric_limits<uint32_t>::max(),
-		 UI::Widget_Cache_None,
-		 0,
-		 std::numeric_limits<uint32_t>::max(),
-		 false);
+		 buffer, UI::Align_CenterRight);
 
 	//  plot the pixels
 	sub =

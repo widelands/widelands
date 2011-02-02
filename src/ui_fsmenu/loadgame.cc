@@ -34,8 +34,8 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-	m_butw (m_xres / 4),
-	m_buth (m_yres * 9 / 200),
+	m_butw (get_w() / 4),
+	m_buth (get_h() * 9 / 200),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
 
@@ -45,48 +45,49 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 // Buttons
 	m_back
 		(this, "back",
-		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind(&Fullscreen_Menu_LoadGame::end_modal, boost::ref(*this), 0),
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
-		 m_xres * 71 / 100, m_yres * 15 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind(&Fullscreen_Menu_LoadGame::clicked_ok, boost::ref(*this)),
-		 _("OK"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("OK"), std::string(), false, false),
 	m_delete
 		(this, "delete",
-		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_LoadGame::clicked_delete, boost::ref(*this)),
-		 _("Delete"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("Delete"), std::string(), false, false),
 
 // Replay list
 	m_list
-		(this, m_xres * 47 / 2500, m_yres * 3417 / 10000,
-		 m_xres * 711 / 1250, m_yres * 6083 / 10000),
+		(this, get_w() * 47 / 2500, get_h() * 3417 / 10000,
+		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
 
 // Text areas
 	m_title
 		(this,
-		 m_xres / 2, m_yres * 3 / 20,
+		 get_w() / 2, get_h() * 3 / 20,
 		 _("Choose saved game!"), UI::Align_HCenter),
 	m_label_mapname
 		(this,
-		 m_xres * 7 / 10,  m_yres * 17 / 50,
+		 get_w() * 7 / 10,  get_h() * 17 / 50,
 		 _("Map Name:"), UI::Align_Right),
-	m_tamapname(this, m_xres * 71 / 100, m_yres * 17 / 50),
+	m_tamapname(this, get_w() * 71 / 100, get_h() * 17 / 50),
 	m_label_gametime
 		(this,
-		 m_xres * 7 / 10,  m_yres * 3 / 8,
+		 get_w() * 7 / 10,  get_h() * 3 / 8,
 		 _("Gametime:"), UI::Align_Right),
-	m_tagametime(this, m_xres * 71 / 100, m_yres * 3 / 8)
+	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8)
 {
+	m_back.set_font(font_small());
+	m_ok.set_font(font_small());
+	m_delete.set_font(font_small());
+
 	m_title         .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_mapname .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_tamapname     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);

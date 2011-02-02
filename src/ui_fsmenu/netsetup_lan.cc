@@ -28,94 +28,93 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 	Fullscreen_Menu_Base("singleplmenu.jpg"), //  FIXME change this
 
 // Values for alignment and size
-	m_butx (m_xres * 13 / 40),
-	m_butw (m_xres / 4),
-	m_buth (m_yres * 19 / 400),
-	m_lisw (m_xres * 9 / 16),
-	m_fs   (fs_small()),
-	m_fn   (ui_fn()),
+	m_butx (get_w() * 13 / 40),
+	m_butw (get_w() / 4),
+	m_buth (get_h() * 19 / 400),
+	m_lisw (get_w() * 9 / 16),
 
 // Text labels
 	title
 		(this,
-		 m_xres / 2, m_yres / 10,
+		 get_w() / 2, get_h() / 10,
 		 _("Begin Network Game"), UI::Align_HCenter),
 	m_opengames
 		(this,
-		 m_xres * 3 / 50, m_yres * 27 / 100,
+		 get_w() * 3 / 50, get_h() * 27 / 100,
 		 _("List of games in your local network:")),
 	m_playername
 		(this,
-		 m_xres * 16 / 25, m_yres * 27 / 100,
+		 get_w() * 16 / 25, get_h() * 27 / 100,
 		 _("Your nickname:")),
 	m_hostname
 		(this,
-		 m_xres * 16 / 25, m_yres * 17 / 40,
+		 get_w() * 16 / 25, get_h() * 17 / 40,
 		 _("Host to connect:")),
 
 // Buttons
 	joingame
 		(this, "join_game",
-		 m_xres * 16 / 25, m_yres * 5333 / 10000, m_butw, m_buth,
+		 get_w() * 16 / 25, get_h() * 5333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_NetSetupLAN::clicked_joingame, boost::ref(*this)),
-		 _("Join this game"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Join this game"), std::string(), true, false),
 	hostgame
 		(this, "host_game",
-		 m_xres * 16 / 25, m_yres * 6083 / 10000, m_butw, m_buth,
+		 get_w() * 16 / 25, get_h() * 6083 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_NetSetupLAN::clicked_hostgame, boost::ref(*this)),
-		 _("Host a new game"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Host a new game"), std::string(), true, false),
 	back
 		(this, "back",
-		 m_xres * 16 / 25, m_yres * 8333 / 10000, m_butw, m_buth,
+		 get_w() * 16 / 25, get_h() * 8333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_NetSetupLAN::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(CANCEL)),
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Back"), std::string(), true, false),
 	loadlasthost
 		(this, "load_previous_host",
-		 m_xres * 171 / 200, m_yres * 19 / 40, m_buth, m_buth,
+		 get_w() * 171 / 200, get_h() * 19 / 40, m_buth, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_NetSetupLAN::clicked_lasthost, boost::ref(*this)),
-		 _("Load previous host"), true, false,
-		 m_fn, m_fs),
+		 _("Load previous host"), true, false),
 
 // Edit boxes
 	playername
-		(this, m_xres * 16 / 25, m_yres * 3333 / 10000, m_butw,       m_buth,
+		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,       m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 	hostname
-		(this, m_xres * 16 / 25, m_yres * 19 / 40,  m_xres * 17 / 80, m_buth,
+		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 
 // List
 	opengames
 		(this,
-		 m_xres * 3 / 50, m_yres * 3333 / 10000, m_lisw, m_yres * 5433 / 10000)
+		 get_w() * 3 / 50, get_h() * 3333 / 10000, m_lisw, get_h() * 5433 / 10000)
 {
 	Section & s = g_options.pull_section("global"); //  for playername
 
-	title       .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_playername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_hostname  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	joingame.set_font(font_small());
+	hostgame.set_font(font_small());
+	back.set_font(font_small());
+	loadlasthost.set_font(font_small());
+
+	title       .set_textstyle(ts_big());
+	m_opengames .set_textstyle(ts_small());
+	m_playername.set_textstyle(ts_small());
+	m_hostname  .set_textstyle(ts_small());
 	hostname    .changed.set
 		(this, &Fullscreen_Menu_NetSetupLAN::change_hostname);
-	hostname    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	hostname    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	playername  .setText  (s.get_string("nickname", (_("nobody"))));
 	playername  .changed.set
 		(this, &Fullscreen_Menu_NetSetupLAN::change_playername);
-	playername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	opengames   .set_font(m_fn, m_fs);
+	playername  .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	opengames   .set_font(ui_fn(), fs_small());
 	opengames   .add_column(m_lisw * 2 / 5, _("Host"));
 	opengames   .add_column(m_lisw * 2 / 5, _("Map"));
 	opengames   .add_column(m_lisw     / 5, _("State"));

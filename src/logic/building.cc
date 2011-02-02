@@ -30,6 +30,7 @@
 #include "productionsite.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
@@ -734,10 +735,8 @@ void Building::draw_help
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
 		//  TODO make more here
-		UI::g_fh->draw_string
-			(dst,
-			 UI_FONT_SMALL,
-			 UI_FONT_SMALL_CLR,
+		UI::g_fh->draw_text
+			(dst, UI::TextStyle::ui_small(),
 			 pos - Point(0, 45),
 			 info_string(igbase.building_census_format()),
 			 UI::Align_Center);
@@ -749,10 +748,8 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		UI::g_fh->draw_string
-			(dst,
-			 UI_FONT_SMALL,
-			 UI_FONT_SMALL_CLR,
+		UI::g_fh->draw_text
+			(dst, UI::TextStyle::ui_small(),
 			 pos - Point(0, 35),
 			 info_string(igbase.building_statistics_format()),
 			 UI::Align_Center);

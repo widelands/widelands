@@ -36,10 +36,10 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	Fullscreen_Menu_Base("internetmenu.jpg"),
 
 // Values for alignment and size
-	m_butx (m_xres * 13 / 40),
-	m_butw (m_xres * 36 / 125),
-	m_buth (m_yres * 19 / 400),
-	m_lisw (m_xres * 623 / 1000),
+	m_butx (get_w() * 13 / 40),
+	m_butw (get_w() * 36 / 125),
+	m_buth (get_h() * 19 / 400),
+	m_lisw (get_w() * 623 / 1000),
 	m_namechange(0),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
@@ -47,80 +47,77 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 // Text labels
 	title
 		(this,
-		 m_xres / 2, m_yres / 20,
+		 get_w() / 2, get_h() / 20,
 		 _("Metaserver Lobby"), UI::Align_HCenter),
 	m_users
 		(this,
-		 m_xres * 4 / 125, m_yres * 15 / 100,
+		 get_w() * 4 / 125, get_h() * 15 / 100,
 		 _("Users online:")),
 	m_opengames
 		(this,
-		 m_xres * 17 / 25, m_yres * 15 / 100,
+		 get_w() * 17 / 25, get_h() * 15 / 100,
 		 _("List of games:")),
 	m_servername
 		(this,
-		 m_xres * 17 / 25, m_yres * 63 / 100,
+		 get_w() * 17 / 25, get_h() * 63 / 100,
 		 _("Name of your server:")),
 	m_maxplayers
 		(this,
-		 m_xres * 17 / 25, m_yres * 73 / 100,
+		 get_w() * 17 / 25, get_h() * 73 / 100,
 		 _("Maximum of players:")),
 
 // Spinboxes
 	maxplayers
 		(this,
-		 m_xres * 17 / 25, m_yres * 77 / 100, m_butw, m_buth * 7 / 10,
+		 get_w() * 17 / 25, get_h() * 77 / 100, m_butw, m_buth * 7 / 10,
 		 7, 1, 7), //  start/min./max. value dummy initializations
 
 // Buttons
 	joingame
 		(this, "join_game",
-		 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
+		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_NetSetupGGZ::clicked_joingame,
 			  boost::ref(*this)),
-		 _("Join this game"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
-		 m_xres * 17 / 25, m_yres * 81 / 100, m_butw, m_buth,
+		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_NetSetupGGZ::clicked_hostgame,
 			  boost::ref(*this)),
-		 _("Open a new game"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
-		 m_xres * 17 / 25, m_yres * 90 / 100, m_butw, m_buth,
+		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_NetSetupGGZ::end_modal,
 			  boost::ref(*this), static_cast<int32_t>(CANCEL)),
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Back"), std::string(), true, false),
 
 // Edit boxes
 	servername
-		(this, m_xres * 17 / 25, m_yres * 68 / 100, m_butw, m_buth,
+		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 
 // List
 	usersonline
 		(this,
-		 m_xres * 4 / 125, m_yres     / 5,
-		 m_lisw,          m_yres * 3 / 10),
+		 get_w() * 4 / 125, get_h()     / 5,
+		 m_lisw,          get_h() * 3 / 10),
 	opengames
 		(this,
-		 m_xres * 17 / 25, m_yres    / 5,
-		 m_butw,  m_yres * 7 / 20),
+		 get_w() * 17 / 25, get_h()    / 5,
+		 m_butw,  get_h() * 7 / 20),
 
 // The chat UI
 	chat
 		(this,
-		 m_xres * 4 / 125,    m_yres * 51 / 100,
-		 m_lisw, m_yres * 44 / 100,
+		 get_w() * 4 / 125,    get_h() * 51 / 100,
+		 m_lisw, get_h() * 44 / 100,
 		 NetGGZ::ref()),
 
 // Login information
@@ -128,6 +125,10 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	password(pwd),
 	reg(registered)
 {
+	back.set_font(font_small());
+	joingame.set_font(font_small());
+	hostgame.set_font(font_small());
+
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
 

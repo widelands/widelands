@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@ struct Rect : public Point {
 	Rect(const Point p, const uint32_t W, const uint32_t H) throw ()
 		: Point(p), w(W), h(H)
 	{}
-	Point bottom_left() const {return *this + Point(w, h);}
+	Point bottom_right() const {return *this + Point(w, h);}
 
 	/**
 	 * Returns true if this rectangle contains the given point.
