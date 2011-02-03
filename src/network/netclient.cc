@@ -588,8 +588,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 		// Check whether the file or a file with that name already exists
 		if (g_fs->FileExists(path)) {
-			// TODO if it is a directory, we should send some kind of a warning else this might lead to desyncs,
-			// TODO when the client runs WL with nozip=true and e.g. the wl_autosave.wgf should be replaced.
+			// If the file is a directory, we have to rename the file and replace it with the version of the
+			// host. If it is a ziped file, we can check, whether the host and the client have got the same file.
 			if (!g_fs->IsDirectory(path)) {
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());

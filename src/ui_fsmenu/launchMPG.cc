@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 #include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "ui_basic/window.h"
+#include "ui_basic/messagebox.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
@@ -370,6 +370,21 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 	m_nr_players = s.get_safe_int("nr_players");
 
 	m_settings->setMap(mapname, filename, m_nr_players, true);
+
+	// Check for sendability
+	if (g_fs->IsDirectory(filename)) {
+		// Send a warning
+		UI::WLMessageBox warning
+			(this, _("Saved game is directory"),
+			 _
+			  ("WARNING:\n"
+			   "The saved game you selected is a directory. This happens, if you set the option \"nozip\" to "
+			   "true or did manually unzip the saved game.\n"
+			   "Widelands is not able to transfer directory structures to the clients, please select another "
+			   "saved game or zip the directories content."),
+			 UI::WLMessageBox::OK);
+		warning.run();
+	}
 }
 
 /**
