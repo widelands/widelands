@@ -21,6 +21,7 @@
 
 #include "constants.h"
 #include "io/fileread.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
@@ -241,10 +242,12 @@ void GameTips::show_tip(int32_t index) {
 	text_area.h -= m_pading_t + m_pading_b;
 	Point center(text_area.x + text_area.w / 2, text_area.y + text_area.h / 2);
 
-	UI::g_fh->draw_string
-		(rt, UI_FONT_NAME, m_font_size,
-		 m_color, m_bgcolor, //RGBColor(107, 87, 55),
-		 center, m_tips[index].text,
-		 UI::Align_Center, text_area.w);
+	UI::TextStyle ts;
+	ts.font = UI::Font::get(UI_FONT_NAME, m_font_size);
+	ts.fg = m_color;
+	ts.bold = true;
+
+	UI::g_fh->draw_multiline
+		(rt, ts, center, m_tips[index].text, UI::Align_Center, text_area.w);
 	g_gr->update_rectangle(tips_area);
 }

@@ -1,4 +1,4 @@
-help=_An enhanced mask for barbarian warriors.
+help=_A warhelmet is an enhanced armour for barbarian warriors. It is produced in a helmsmithy and used in a trainingscamp - together with food - to train soldiers from healthpoints level 1 to level 2.
 preciousness=2
 
 [idle]

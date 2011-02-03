@@ -40,7 +40,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		(UI::Panel            * const parent, uint8_t id,
 		 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 		 GameSettingsProvider * const settings,
-		 std::string const & fname, uint32_t const fsize)
+		 UI::Font * font)
 		 :
 		 UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
 		 type_icon(0),
@@ -52,7 +52,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		set_size(w, h);
 		name = new UI::Textarea
 			(this, 0, 0, w - h - UI::Scrollbar::Size * 11 / 5, h);
-		name->set_font(fname, fsize, UI_FONT_CLR_FG);
+		name->set_textstyle(UI::TextStyle::makebold(font, UI_FONT_CLR_FG));
 		add(name, UI::Box::AlignCenter);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) { // Our Client
@@ -62,7 +62,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 boost::bind
 					 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)),
-				 std::string(), std::string(), true, false, fname, fsize);
+				 std::string(), std::string(), true, false);
+			type->set_font(font);
 			add(type, UI::Box::AlignCenter);
 		} else { // just a shown client
 			type_icon = new UI::Icon
@@ -143,7 +144,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		(UI::Panel            * const parent, uint8_t id,
 		 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 		 GameSettingsProvider * const settings,
-		 std::string const & fname, uint32_t const fsize,
+		 UI::Font * font,
 		 std::map<std::string, PictureID> & tp,
 		 std::map<std::string, std::string> & tn)
 		 :
@@ -170,7 +171,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)),
-			 std::string(), std::string(), true, false, fname, fsize);
+			 std::string(), std::string(), true, false);
+		type->set_font(font);
 		add(type, UI::Box::AlignCenter);
 		tribe = new UI::Callback_Button
 			(this, "player_tribe",
@@ -178,23 +180,27 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)),
-			 std::string(), std::string(), true, false, fname, fsize);
+			 std::string(), std::string(), true, false);
+		tribe->set_font(font);
 		add(tribe, UI::Box::AlignCenter);
+		tribe->set_draw_flat_background(true);
 		init = new UI::Callback_Button
 			(this, "player_init",
 			 0, 0, w - 4 * h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)),
-			 std::string(), std::string(), true, false, fname, fsize);
+			 std::string(), std::string(), true, false);
+		init->set_font(font);
 		add(init, UI::Box::AlignCenter);
 		team = new UI::Callback_Button
-			(this, "player_init",
+			(this, "player_team",
 			 0, 0, h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)),
-			 std::string(), std::string(), true, false, fname, fsize);
+			 std::string(), std::string(), true, false);
+		team->set_font(font);
 		add(team, UI::Box::AlignCenter);
 	}
 
@@ -322,6 +328,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team ->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
+			tribe->set_flat(false);
 			init ->set_visible(false);
 			init ->set_enabled(false);
 			return;
@@ -332,6 +339,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			team ->set_enabled(false);
 			tribe->set_visible(false);
 			tribe->set_enabled(false);
+			tribe->set_flat(false);
 			init ->set_visible(false);
 			init ->set_enabled(false);
 			return;
@@ -357,7 +365,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			team ->set_visible(false);
 			team ->set_enabled(false);
-			tribe->set_enabled(initaccess);
+			// Flat ~= icon
+			tribe->set_flat(!initaccess);
+			tribe->set_enabled(true);
 
 			if (shared_in_tribe != settings.players.at(player.shared_in - 1).tribe) {
 				s->setPlayerTribe(m_id, settings.players.at(player.shared_in - 1).tribe);
@@ -395,6 +405,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			tribe->set_tooltip(m_tribenames[player.tribe].c_str());
 			tribe->set_pic(m_tribepics[player.tribe]);
+			tribe->set_flat(false);
 
 			if (player.team) {
 				char buf[64];
@@ -461,6 +472,8 @@ m_buth(buth),
 m_fsize(fsize),
 m_fname(fname)
 {
+	UI::TextStyle tsmaller(UI::TextStyle::makebold(UI::Font::get(fname, fsize * 3 / 4), UI_FONT_CLR_FG));
+
 	// Clientbox and labels
 	labels.push_back
 		(new UI::Textarea
@@ -468,7 +481,7 @@ m_fname(fname)
 			 UI::Scrollbar::Size * 6 / 5, buth / 3,
 			 w / 3 - buth - UI::Scrollbar::Size * 2, buth));
 	labels.back()->set_text(_("Client name"));
-	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+	labels.back()->set_textstyle(tsmaller);
 
 	labels.push_back
 		(new UI::Textarea
@@ -476,7 +489,7 @@ m_fname(fname)
 			 w / 3 - buth - UI::Scrollbar::Size * 6 / 5, buth / 3,
 			 buth * 2, buth));
 	labels.back()->set_text(_("Role"));
-	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+	labels.back()->set_textstyle(tsmaller);
 
 	clientbox.set_size(w / 3, h - buth);
 	clientbox.set_scrolling(true);
@@ -492,7 +505,7 @@ m_fname(fname)
 			 w * 6 / 15, buth / 3,
 			 buth, buth));
 	labels.back()->set_text(_("Start"));
-	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+	labels.back()->set_textstyle(tsmaller);
 
 	labels.push_back
 		(new UI::Textarea
@@ -500,7 +513,7 @@ m_fname(fname)
 			 w * 6 / 15 + buth, buth / 3,
 			 buth, buth));
 	labels.back()->set_text(_("Type"));
-	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+	labels.back()->set_textstyle(tsmaller);
 
 	labels.push_back
 		(new UI::Textarea
@@ -508,7 +521,7 @@ m_fname(fname)
 			 w * 6 / 15 + buth * 2, buth / 3,
 			 buth, buth));
 	labels.back()->set_text(_("Tribe"));
-	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+	labels.back()->set_textstyle(tsmaller);
 
 	labels.push_back
 		(new UI::Textarea
@@ -516,11 +529,11 @@ m_fname(fname)
 			 w * 6 / 15 + buth * 3, buth / 3,
 			 w * 9 / 15 - 4 * buth, buth));
 	labels.back()->set_text(_("Initialization"));
-	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+	labels.back()->set_textstyle(tsmaller);
 
 	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth));
 	labels.back()->set_text(_("Team"));
-	labels.back()->set_font(fname, fsize * 3 / 4, UI_FONT_CLR_FG);
+	labels.back()->set_textstyle(tsmaller);
 
 	playerbox.set_size(w * 9 / 15, h - buth);
 	p.resize(MAX_PLAYERS);
@@ -528,7 +541,7 @@ m_fname(fname)
 		p.at(i) = new MultiPlayerPlayerGroup
 			(&playerbox, i,
 			 0, 0, playerbox.get_w(), buth,
-			 s, fname, fsize,
+			 s, UI::Font::get(fname, fsize),
 			 m_tribepics, m_tribenames);
 		playerbox.add(&*p.at(i), 1);
 	}
@@ -557,7 +570,7 @@ void MultiPlayerSetupGroup::refresh()
 			c.at(i) = new MultiPlayerClientGroup
 				(&clientbox, i,
 				 0, 0, clientbox.get_w(), m_buth,
-				 s, m_fname, m_fsize);
+				 s, UI::Font::get(m_fname, m_fsize));
 			clientbox.add(&*c.at(i), 1);
 		}
 		c.at(i)->refresh();

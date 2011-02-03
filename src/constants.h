@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,7 @@
 #define UI_FONT_BIG_CLR     UI_FONT_CLR_FG, UI_FONT_CLR_BG
 /// small is used for ultrasmall, too
 #define UI_FONT_SMALL_CLR   UI_FONT_CLR_FG, UI_FONT_CLR_BG
-#define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0), RGBColor(63, 52, 34)
+#define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0)
 //@}
 
 /// the actual game logic doesn't know about frames

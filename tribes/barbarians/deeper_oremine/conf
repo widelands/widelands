@@ -22,6 +22,7 @@ meal=6
 work=_Work
 
 [work]
+return=skipped when economy needs meal and not economy needs ironore
 consume=meal
 sleep=40000
 animate=working 16000

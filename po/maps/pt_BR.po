@@ -7,23 +7,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
-"PO-Revision-Date: 2010-06-06 22:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"PO-Revision-Date: 2010-12-11 17:57+0000\n"
+"Last-Translator: Júlio Cezar Santos Pires <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:15+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/cconfig:24
-msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Tutorial) Bárbaros - O segundo Império"
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr ""
 
-#: ../../campaigns/cconfig:84
-msgid "01 - From nemesis to genesis"
-msgstr "01 - Do nêmesis para a gênese"
+#: ../../campaigns/cconfig:91
+msgid "01 - From Nemesis to Genesis"
+msgstr ""
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr ""
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr "02 - Um lugar para chamar de lar"
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr ""
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -100,13 +116,17 @@ msgstr ""
 "tesouros de seus inimigos no altar antigo, construir ali um castelo "
 "esplêndido e de boa vontade e ganhar o respeito dos deuses."
 
-#: ../../campaigns/cconfig:36
-msgid "Atlanteans - the new rise"
-msgstr "Atlantes - a nova ascensão"
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
+msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
 msgstr "Atol"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr "Bárbaros - O Segundo Império"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -119,6 +139,10 @@ msgstr "Ilha Cometa"
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
 msgstr "Cratera"
+
+#: ../../maps/Desert Tournament.wmf/elemental:7
+msgid "Desert Tournament"
+msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -137,21 +161,21 @@ msgstr ""
 "marcam fontes de água adicional. Dica 3: Cada montanha contém apenas um "
 "recurso."
 
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr ""
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr ""
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Florestas élfica"
 
-#: ../../campaigns/cconfig:30
-msgid "Empire - The months of exile"
-msgstr "Império - Os meses de exílio"
-
-#: ../../campaigns/cconfig:74
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Tutorial Império1 - Os litorais de Malac'Mor"
-
-#: ../../campaigns/cconfig:79
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Império Tutorial2 - Um posto avançado para o exílio"
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
+msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -194,6 +218,13 @@ msgstr "Quatro Castelos"
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
 msgstr "Quatro Montanhas"
+
+#: ../../maps/Desert Tournament.wmf/elemental:9
+msgid ""
+"Four tribes struggle with their nearest neighbour to be the first to reach "
+"the mountain of gold that primises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -241,6 +272,12 @@ msgstr ""
 "Diz-se que até mesmo o sol e a lua devem encontrar seu caminho entre as "
 "torres destas montanhas. DICA: Monolitos marcam pontos de minério. Não perca "
 "tempo enviando Geólogos em outro lugar."
+
+#: ../../maps/Swamp Monks.wmf/elemental:9
+msgid ""
+"It is said, that the old war monks, living in the even older swamps are the "
+"key to the control of the whole island."
+msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -333,7 +370,7 @@ msgstr "Encontro"
 msgid "Riverlands"
 msgstr "Terra de rios"
 
-#: ../../campaigns/cconfig:33
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -357,10 +394,6 @@ msgstr ""
 "despreparado foi atacado por 100 homens de infantaria dos bárbaros, e foram "
 "completamente dispersas. Somente ele e um punhado de seus soldados "
 "sobreviveram..."
-
-#: ../../campaigns/cconfig:39
-msgid "Some descriptive texts..."
-msgstr "Alguns textos descritivos"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -393,6 +426,10 @@ msgstr ""
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Ilha do Pântano"
+
+#: ../../maps/Swamp Monks.wmf/elemental:7
+msgid "Swamp Monks"
+msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -490,18 +527,6 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Três Guerreiros"
 
-#: ../../campaigns/cconfig:57
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tutorial1 - Olhos nas Trevas"
-
-#: ../../campaigns/cconfig:62
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorial2 - Um lugar para chamar de Lar"
-
-#: ../../campaigns/cconfig:67
-msgid "Tutorial3 - This land is our land"
-msgstr "Tutorial3 - Esta terra é nossa terra"
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Ondas Cintilantes"
@@ -526,7 +551,7 @@ msgstr ""
 "Bem protegidos em suas fortalezas poderosas, quatro senhores da guerra com "
 "fome de poder estão concluindo seus esquemas para dominar essas terras ..."
 
-#: ../../campaigns/cconfig:27
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -555,6 +580,15 @@ msgstr ""
 "Thron e poucos ele deixou de assegurar as fronteiras de Al'thunran, o jovem "
 "guerreiro visa reunir seus irmãos ambiciosos e forçar as tribos a marchar, "
 "mais uma vez, sob uma bandeira comum"
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -611,12 +645,36 @@ msgstr ""
 "difícil de se obter, mas fácil de perder, por isso, se o quer, tome cuidado "
 "com os outros clãs ."
 
+#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
+#~ msgstr "Tutorial Império1 - Os litorais de Malac'Mor"
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Tutorial1 - Olhos nas Trevas"
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Tutorial2 - Um lugar para chamar de Lar"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Tutorial3 - Esta terra é nossa terra"
+
+#~ msgid "Empire - The months of exile"
+#~ msgstr "Império - Os meses de exílio"
+
+#~ msgid "(Tutorial) Barbarians - The second Empire"
+#~ msgstr "(Tutorial) Bárbaros - O segundo Império"
+
+#~ msgid "Empire Tutorial2 - An outpost for exile"
+#~ msgstr "Império Tutorial2 - Um posto avançado para o exílio"
+
 #~ msgid ""
 #~ "Long after a meteor crashed into a couple of mountains life blossoms in the "
 #~ "crater. Two tribes are now fighting about the rich resources."
 #~ msgstr ""
 #~ "Muito tempo após um meteoro ter se chocado contra um grupo de montanhas, a "
 #~ "vida floresce na cratera. Duas tribos lutam agora pelos ricos recursos."
+
+#~ msgid "01 - From nemesis to genesis"
+#~ msgstr "01 - Do nêmesis para a gênese"
 
 #~ msgid ""
 #~ "The breath-taking beauty of these emerald lands has lured many a tribe into "
@@ -644,6 +702,12 @@ msgstr ""
 #~ "Ninguém mexeu com você e os recursos foram suficientes para a sua tribo "
 #~ "inteira, mas há alguns meses uma outra tribo veio para as montanhas e se "
 #~ "estabeleceram. E você tem certeza, que só há lugar suficiente para uma tribo."
+
+#~ msgid "Some descriptive texts..."
+#~ msgstr "Alguns textos descritivos"
+
+#~ msgid "Atlanteans - the new rise"
+#~ msgstr "Atlantes - a nova ascensão"
 
 #~ msgid ""
 #~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "

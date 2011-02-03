@@ -93,8 +93,6 @@ private:
 	uint32_t                          m_vbutw;
 	uint32_t                          m_butw;
 	uint32_t                          m_buth;
-	uint32_t                          m_fs;
-	std::string                       m_fn;
 	UI::Callback_Button           m_advanced_options, m_cancel, m_apply;
 	UI::SpinBox                       m_sb_maxfps, m_sb_autosave;
 	UI::SpinBox                       m_sb_remove_replays;
@@ -153,8 +151,6 @@ private:
 	uint32_t                    m_vbutw;
 	uint32_t                    m_butw;
 	uint32_t                    m_buth;
-	uint32_t                    m_fs;
-	std::string                 m_fn;
 
 	UI::Callback_Button     m_cancel, m_apply;
 	UI::SpinBox                 m_sb_speed, m_sb_dis_panel, m_sb_dis_border;

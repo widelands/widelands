@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,6 +63,11 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 			 g_gr->get_picture(PicMod_UI, pic_tab_workers),
 			 new Economy_Options_Worker_Panel(&m_tabpanel, parent, economy),
 			 _("Workers"));
+
+		// Until we can find a non-stupid way of automatically updating
+		// the window when one of the target quantities changes,
+		// simply disable caching.
+		set_cache(false);
 	}
 
 private:

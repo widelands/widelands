@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-06 14:59+0000\n"
-"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"PO-Revision-Date: 2010-11-22 06:44+0000\n"
+"Last-Translator: Massol <Unknown>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-07 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -358,6 +358,10 @@ msgstr ""
 "покажет Вам где могут быть построены малые строения, такие как хижина "
 "лесоруба.<br>"
 
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Глаза во Тьме"
+
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
 msgstr "Старик говорит..."
@@ -382,18 +386,17 @@ msgstr "Построить ещё одну хижину лесоруба"
 msgid "Build two quarries"
 msgstr "Построить две каменоломни"
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
-"gameplay and control as well as basic production buildings (wood, stone, "
-"etc.) will be introduced."
-msgstr ""
-"Это первая миссия в обучающей кампании Варваров. Здесь будут показаны основы "
-"игрового процесса, управления и постройки зданий."
-
 #: ../../campaigns/t01.wmf/scripting/texts.lua:101
 msgid "In the night"
 msgstr "Ночью"
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"In this tutorial the basic gameplay and control as well as basic production "
+"buildings of the Barbarians are introduced."
+msgstr ""
+"В этом обучении рассматриваются основы геймплея и управления, а так же "
+"постройка основных сооружений  Варваров."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -465,10 +468,6 @@ msgstr "Трон вздыхает..."
 msgid "Thron speaks..."
 msgstr "Трон говорит..."
 
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Глаза во тьме (Обучение 1)"
-
 #~ msgid "OK"
 #~ msgstr "OK"
 
@@ -537,6 +536,14 @@ msgstr "Глаза во тьме (Обучение 1)"
 
 #~ msgid "Order7"
 #~ msgstr "Задание7"
+
+#~ msgid ""
+#~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
+#~ "gameplay and control as well as basic production buildings (wood, stone, "
+#~ "etc.) will be introduced."
+#~ msgstr ""
+#~ "Это первая миссия в обучающей кампании Варваров. Здесь будут показаны основы "
+#~ "игрового процесса, управления и постройки зданий."
 
 #~ msgid ""
 #~ " \"As father told me, there will be times to fight and times to lie and "
@@ -746,3 +753,6 @@ msgstr "Глаза во тьме (Обучение 1)"
 #~ "подготовится к грядущим сражениям.<br><br>--------------------- ПОБЕДА! -----"
 #~ "-----------------<br><br> Вы можете продолжить если хотите. Иначе, двигаемся "
 #~ "к следующей миссии.\" "
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Глаза во тьме (Обучение 1)"

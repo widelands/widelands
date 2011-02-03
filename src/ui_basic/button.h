@@ -31,6 +31,8 @@
 
 namespace UI {
 
+struct Font;
+
 /// This is simply a button. Override void clicked() to react to the click.
 /// This is all that is needed in most cases, but if there is a need to give a
 /// callback function to the button, there are some templates for that below.
@@ -43,9 +45,7 @@ struct Button : public NamedPanel {
 		 std::string const & title_text,
 		 std::string const & tooltip_text = std::string(),
 		 bool const _enabled = true,
-		 bool const flat    = false,
-		 std::string const & fontname = UI_FONT_NAME,
-		 uint32_t const      fontsize = UI_FONT_SIZE_SMALL);
+		 bool const flat    = false);
 	Button /// for pictorial buttons
 		(Panel * const parent,
 		 std::string const & name,
@@ -54,9 +54,7 @@ struct Button : public NamedPanel {
 		 const PictureID foreground_picture_id,
 		 std::string const & tooltip_text = std::string(),
 		 bool const _enabled = true,
-		 bool const flat     = false,
-		 const std::string & fontname = UI_FONT_NAME,
-		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL);
+		 bool const flat     = false);
 	~Button();
 
 	void set_pic(PictureID picid);
@@ -67,10 +65,7 @@ struct Button : public NamedPanel {
 	void set_enabled(bool on);
 	void set_repeating(bool const on) {m_repeating = on;}
 	void set_draw_caret(bool draw_caret) {m_draw_caret = draw_caret;}
-	void set_font(std::string const & name, int32_t size) {
-		m_fontname = name;
-		m_fontsize = size;
-	}
+	void set_font(Font * font) {m_font = font;}
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
@@ -85,6 +80,11 @@ struct Button : public NamedPanel {
 	// Set the permanently pressed state of the button
 	void set_perm_pressed(bool state);
 
+	// Set button to flat / not flat
+	void set_flat(bool flat);
+	// If no background is drawn, the button is drawn over the current background
+	void set_draw_flat_background(bool set);
+
 protected:
 	virtual void clicked() = 0; /// Override this to react on the click.
 
@@ -94,6 +94,7 @@ protected:
 	bool        m_enabled;
 	bool        m_repeating;
 	bool        m_flat;
+	bool        m_draw_flat_background;
 
 	int32_t     m_time_nextact;
 
@@ -102,8 +103,7 @@ protected:
 	PictureID   m_pic_background; //  background texture (picture ID)
 	PictureID   m_pic_custom;     //  custom icon on the button
 	PictureID   m_pic_custom_disabled;
-	std::string m_fontname;
-	uint32_t    m_fontsize;
+	Font * m_font;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"
 	bool        m_draw_caret;
@@ -121,9 +121,7 @@ struct Callback_Button : public Button {
 		 const std::string & title_text,
 		 std::string const & tooltip_text = std::string(),
 		 bool const _enabled = true,
-		 bool const flat     = false,
-		 const std::string & fontname = UI_FONT_NAME,
-		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
+		 bool const flat     = false)
 		:
 		Button
 			(parent, name,
@@ -131,9 +129,7 @@ struct Callback_Button : public Button {
 			 background_pictute_id,
 			 title_text,
 			 tooltip_text,
-			 _enabled, flat,
-			 fontname,
-			 fontsize),
+			 _enabled, flat),
 		_callback_function     (callback_function)
 	{}
 	Callback_Button /// for pictorial buttons
@@ -145,9 +141,7 @@ struct Callback_Button : public Button {
 		 boost::function<void()> callback_function,
 		 std::string const & tooltip_text = std::string(),
 		 bool const _enabled = true,
-		 bool const flat     = false,
-		 const std::string & fontname = UI_FONT_NAME,
-		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
+		 bool const flat     = false)
 		:
 		Button
 			(parent, name,
@@ -155,9 +149,7 @@ struct Callback_Button : public Button {
 			 background_pictute_id,
 			 foreground_picture_id,
 			 tooltip_text,
-			 _enabled, flat,
-			 fontname,
-			 fontsize),
+			 _enabled, flat),
 		_callback_function     (callback_function)
 	{}
 

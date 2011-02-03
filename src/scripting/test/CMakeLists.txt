@@ -5,36 +5,5 @@ add_executable(test_widelands_scripting ${WL_SCRIPTING_TEST_SRCS} ${CMAKE_CURREN
 target_link_libraries(test_widelands_scripting widelands_all)
 target_link_libraries(test_widelands_scripting ${Boost_LIBRARIES})
 
-set(SDL_LIBRARY_NOMAIN ${SDL_LIBRARY})
-list(REMOVE_ITEM SDL_LIBRARY_NOMAIN  ${SDLMAIN_LIBRARY}) 
-
-if (GGZ_CORE_FOUND)
-  target_link_libraries(test_widelands_scripting ${GGZ_CORE_LIBRARY})
-endif (GGZ_CORE_FOUND)
-
-if (APPLE)
-  target_link_libraries(test_widelands_scripting ${INTL_LIBRARY})
-endif (APPLE)
-
-if (WIN32)
-if (DEFINED MSVC)
-  target_link_libraries(test_widelands_scripting ${INTL_LIBRARY})
-  target_link_libraries(test_widelands_scripting ws2_32)
-  #static linking with MSVC using 3rdparty bundle needs expat and iconv libraries
-  #if expat/iconv is not found, then 3rdparty bundle is not in use, so just continue.
-  find_library(EXPAT_LIBRARY libexpat)
-  if (EXPAT_LIBRARY)
-    target_link_libraries(test_widelands_scripting  ${EXPAT_LIBRARY})
-  endif ()
-  find_library(ICONV_LIBRARY iconv libiconv)
-  if (ICONV_LIBRARY)
-    target_link_libraries(test_widelands_scripting ${ICONV_LIBRARY})
-  endif ()
-else (DEFINED MSVC)
-  target_link_libraries(test_widelands_scripting intl)
-  target_link_libraries(test_widelands_scripting wsock32)
-endif (DEFINED MSVC) 
-endif (WIN32)
-
-
 add_test(test_widelands_scripting test_widelands_scripting)
+

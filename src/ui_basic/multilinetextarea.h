@@ -31,10 +31,6 @@ struct Scrollbar;
 /**
  * This defines an area, where a text can easily be printed.
  * The textarea transparently handles explicit line-breaks and word wrapping.
- *
- * Do not use it blindly for big texts: the font handler needs to re-break the
- * entire text whenever the textarea is drawn, this is a trade-off which greatly
- * simplifies this class.
  */
 struct Multiline_Textarea : public Panel {
 	enum ScrollMode {

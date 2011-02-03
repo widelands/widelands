@@ -30,21 +30,22 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 	:
 	Fullscreen_Menu_Base("fileviewmenu.jpg"),
 
-	title (this, m_xres * 3 / 50, m_yres / 10),
+	title (this, get_w() * 3 / 50, get_h() / 10),
 
 	textview
 		(this,
-		 m_xres *   3 /   80, m_yres * 283 / 1000,
-		 m_xres * 919 / 1000, m_yres *  11 /   20),
+		 get_w() *   3 /   80, get_h() * 283 / 1000,
+		 get_w() * 919 / 1000, get_h() *  11 /   20),
 
 	close_button
 		(this, "close",
-		 m_xres * 3 / 8, m_yres * 9 / 10, m_xres / 4, m_yres * 9 / 200,
+		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind(&Fullscreen_Menu_TextView::end_modal, boost::ref(*this), 0),
-		 _("Close"), std::string(), true, false,
-		 ui_fn(), fs_small())
+		 _("Close"), std::string(), true, false)
 {
+	close_button.set_font(font_small());
+
 	Profile prof(filename.c_str(), "global", "texts"); //  section-less file
 	Section & section = prof.get_safe_section("global");
 
@@ -53,7 +54,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	title.set_pos
-		(Point((get_inner_w() - title.get_w()) / 2, m_yres * 167 / 1000));
+		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
 
 	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 }

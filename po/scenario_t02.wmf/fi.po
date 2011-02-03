@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2010-12-20 18:13+0000\n"
 "PO-Revision-Date: 2010-02-15 19:36+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -183,15 +183,10 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
 msgid ""
 " \"While this is true, we should consider it later, for now other obstacles "
-"are at hand. The miners will definately demand greater rations for working "
+"are at hand. The miners will definitely demand greater rations for working "
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
-" \"Vaikka tämä onkin totta, meidän tulisi jättää sen miettiminen myöhemmälle "
-"- juuri nyt meillä on muita ongelmia ratkottavana. Kaivostyöläiset "
-"tarvitsevat tavallista tuhdimpia ruoka-annoksia työskennellessään vuorella "
-"näin purevan kylmässä säässä. Näiden ruoka-annosten valmistaminen ei käy "
-"käden käänteessä.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391
 msgid ""
@@ -320,6 +315,10 @@ msgid ""
 "plain - why don't we use the space Mother Nature gave us and build a farm? "
 "I\n"
 "sure would enjoy a freshly baken pitta bread for a change...\""
+msgstr ""
+
+#: ../../campaigns/t02.wmf/elemental:7
+msgid "02 - A Place to call Home"
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
@@ -510,6 +509,12 @@ msgid ""
 "secondary building - others will follow."
 msgstr ""
 
+#: ../../campaigns/t02.wmf/elemental:9
+msgid ""
+"In this scenario the higher production buildings, including mining and the "
+"military expansions will be introduced."
+msgstr ""
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
 msgstr "Khantrukh katsoo tasangoille..."
@@ -575,16 +580,6 @@ msgstr "Toimita kaivostyöläisillesi ruokaa"
 msgid "Refine your mined resources"
 msgstr "Jalosta kaivostesi tuotteita"
 
-#: ../../campaigns/t02.wmf/elemental:9
-msgid ""
-"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
-"higher production buildings, including mining and the military expansions "
-"will be introduced."
-msgstr ""
-"Barbaarien opastuskampanjan toinen komennus. Tällä opastuskomennuksella "
-"esitellään lisää tuotantorakennuksia, kaivokset ja armeijan vaikutusvalta-"
-"alueen laajentaminen."
-
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
 msgstr "Aloita kaivoksien rakentaminen vuorilla"
@@ -642,10 +637,6 @@ msgstr "Thron pudistaa päätään..."
 msgid "Thron speaks..."
 msgstr "Thron puhuu..."
 
-#: ../../campaigns/t02.wmf/elemental:7
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Opastus 2 - Paikka, jota kutsua kodiksi"
-
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
 msgstr ""
@@ -682,6 +673,18 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:368
 msgid "Your loyal companion"
 msgstr "Uskollinen kumppanisi"
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Opastus 2 - Paikka, jota kutsua kodiksi"
+
+#~ msgid ""
+#~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
+#~ "higher production buildings, including mining and the military expansions "
+#~ "will be introduced."
+#~ msgstr ""
+#~ "Barbaarien opastuskampanjan toinen komennus. Tällä opastuskomennuksella "
+#~ "esitellään lisää tuotantorakennuksia, kaivokset ja armeijan vaikutusvalta-"
+#~ "alueen laajentaminen."
 
 #~ msgid ""
 #~ " \"The war goes on. More and more of our brothers and sisters flee the "
@@ -1098,6 +1101,18 @@ msgstr "Uskollinen kumppanisi"
 #~ "Punainen - rautamalmi<br> Keltainen - kulta<br> Harmaa - graniitti.<br> "
 #~ "Kaivoksia voi rakentaa vain vuoristoon. Rakentamiseen sopivat paikat näkyvät "
 #~ "ristikkäisenä vasarana ja hakkuna rakennusavussa."
+
+#~ msgid ""
+#~ " \"While this is true, we should consider it later, for now other obstacles "
+#~ "are at hand. The miners will definately demand greater rations for working "
+#~ "high up on the mountain in this bitter cold, and providing these supplies "
+#~ "may not be easy.\" "
+#~ msgstr ""
+#~ " \"Vaikka tämä onkin totta, meidän tulisi jättää sen miettiminen myöhemmälle "
+#~ "- juuri nyt meillä on muita ongelmia ratkottavana. Kaivostyöläiset "
+#~ "tarvitsevat tavallista tuhdimpia ruoka-annoksia työskennellessään vuorella "
+#~ "näin purevan kylmässä säässä. Näiden ruoka-annosten valmistaminen ei käy "
+#~ "käden käänteessä.\" "
 
 #~ msgid ""
 #~ " \"I have to give it to you, you are right here, old man.<br> There seem to "

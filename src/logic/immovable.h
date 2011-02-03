@@ -195,12 +195,28 @@ protected:
 
 	uint32_t                     m_anim;
 	int32_t                      m_animstart;
-	uint32_t m_anim_construction_total;
-	uint32_t m_anim_construction_done;
 
 	const ImmovableProgram * m_program;
 	uint32_t m_program_ptr; ///< index of next instruction to execute
-	int32_t                      m_program_step; ///< time of next step
+
+/* GCC 4.0 has problems with friend declarations: It doesn't allow
+ * substructures of friend classes private access but we rely on this behaviour
+ * for ImmovableProgram::ActConstruction. As a dirty workaround, we make the
+ * following variables public for this versions but keep the protected for
+ * other GCC versions.
+ * See the related bug lp:688832.
+ */
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 0)
+public:
+	uint32_t m_anim_construction_total;
+	uint32_t m_anim_construction_done;
+	int32_t m_program_step;
+protected:
+#else
+	uint32_t m_anim_construction_total;
+	uint32_t m_anim_construction_done;
+	int32_t m_program_step; ///< time of next step
+#endif
 
 	/**
 	 * Private persistent data for the currently active program action.

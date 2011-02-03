@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
 #include "ui_basic/messagebox.h"
 
 #include <cstdio>
@@ -33,8 +34,8 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-	m_butw (m_xres / 4),
-	m_buth (m_yres * 9 / 200),
+	m_butw (get_w() / 4),
+	m_buth (get_h() * 9 / 200),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
 
@@ -44,48 +45,49 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 // Buttons
 	m_back
 		(this, "back",
-		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind(&Fullscreen_Menu_LoadGame::end_modal, boost::ref(*this), 0),
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
-		 m_xres * 71 / 100, m_yres * 15 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind(&Fullscreen_Menu_LoadGame::clicked_ok, boost::ref(*this)),
-		 _("OK"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("OK"), std::string(), false, false),
 	m_delete
 		(this, "delete",
-		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_LoadGame::clicked_delete, boost::ref(*this)),
-		 _("Delete"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("Delete"), std::string(), false, false),
 
 // Replay list
 	m_list
-		(this, m_xres * 47 / 2500, m_yres * 3417 / 10000,
-		 m_xres * 711 / 1250, m_yres * 6083 / 10000),
+		(this, get_w() * 47 / 2500, get_h() * 3417 / 10000,
+		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
 
 // Text areas
 	m_title
 		(this,
-		 m_xres / 2, m_yres * 3 / 20,
+		 get_w() / 2, get_h() * 3 / 20,
 		 _("Choose saved game!"), UI::Align_HCenter),
 	m_label_mapname
 		(this,
-		 m_xres * 7 / 10,  m_yres * 17 / 50,
+		 get_w() * 7 / 10,  get_h() * 17 / 50,
 		 _("Map Name:"), UI::Align_Right),
-	m_tamapname(this, m_xres * 71 / 100, m_yres * 17 / 50),
+	m_tamapname(this, get_w() * 71 / 100, get_h() * 17 / 50),
 	m_label_gametime
 		(this,
-		 m_xres * 7 / 10,  m_yres * 3 / 8,
+		 get_w() * 7 / 10,  get_h() * 3 / 8,
 		 _("Gametime:"), UI::Align_Right),
-	m_tagametime(this, m_xres * 71 / 100, m_yres * 3 / 8)
+	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8)
 {
+	m_back.set_font(font_small());
+	m_ok.set_font(font_small());
+	m_delete.set_font(font_small());
+
 	m_title         .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_mapname .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_tamapname     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -124,12 +126,37 @@ void Fullscreen_Menu_LoadGame::clicked_delete()
 	}
 }
 
+/**
+ * Update buttons and labels to reflect that no loadable game is selected.
+ */
+void Fullscreen_Menu_LoadGame::no_selection()
+{
+	m_ok.set_enabled(false);
+	m_delete.set_enabled(false);
 
-void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
+	m_tamapname .set_text(std::string());
+	m_tagametime.set_text(std::string());
+}
+
+
+void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
+{
+	if (!m_list.has_selection()) {
+		no_selection();
+		return;
+	}
+
 	if (const char * const name = m_list.get_selected()) {
-		Widelands::Game_Loader gl(name, m_game);
 		Widelands::Game_Preload_Data_Packet gpdp;
-		gl.preload_game(gpdp); //  This has worked before, no problem
+
+		try {
+			Widelands::Game_Loader gl(name, m_game);
+			gl.preload_game(gpdp);
+		} catch (const _wexception & e) {
+			log("Save game '%s' must have changed from under us\nException: %s\n", name, e.what());
+			m_list.remove(selected);
+			return;
+		}
 
 		m_ok.set_enabled(true);
 		m_delete.set_enabled(true);
@@ -145,8 +172,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 		sprintf(buf, "%02i:%02i", hours, minutes);
 		m_tagametime.set_text(buf);
 	} else {
-		m_tamapname .set_text(std::string());
-		m_tagametime.set_text(std::string());
+		no_selection();
 	}
 }
 

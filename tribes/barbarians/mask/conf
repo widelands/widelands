@@ -1,4 +1,5 @@
-help=_An enhanced version of the helmet.
+help=_This is the most enhanced Barbarian armour. It is produced in the helmsmithy and used in the trainingscamp - together with food - to train soldiers from healthpoints level 2 to healthpoints level 3.
+
 preciousness=1
 
 [idle]
