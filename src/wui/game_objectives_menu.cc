@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -100,6 +100,11 @@ void GameObjectivesMenu::think() {
 			} else if (&list[j] == &mom[i]) { //  the objective is in our list
 				if (not should_show)
 					list.remove(j);
+				else if (list[j].descname() != mom[i].descname() || list[j].descr() != mom[i].descr()) {
+					// Update
+					list.remove(j);
+					list.add(mom[i].descname().c_str(), mom[i]);
+				}
 				break;
 			}
 	}
@@ -108,8 +113,8 @@ void GameObjectivesMenu::think() {
 		list.select(0);
 }
 
-/*
- * Something has been selected
+/**
+ * An entry in the objectives menu has been selected
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
 	objectivetext.set_text

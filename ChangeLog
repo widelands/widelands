@@ -1,4 +1,5 @@
 ### Build 16 (until now)
+- Improved and refactored font handler.
 - Removed barbarian Stronghold from list of buildable military sites as
   it did not have a real purpose.
 - Added a help button + window function (e.g. to explain the multi player
@@ -70,6 +71,10 @@
 - Added command line option to tell Widelands where to search for translations.
 - Improved some of the exisiting maps.
 - Improved the "user friendly" compile script and moved it to compile.sh
+- Fixed bug #580073: Objectives menu update
+- Fixed bug #695735: Scrollbar damaged in multiline textboxes in (unique)
+  windows in FS menu
+- Fixed bug #659884: Problem with network savegame loading under windows
 - Fixed bug #683082: copy constructor should take const argument
 - Fixed bug #669085: Wood Lance (Empire ware) is practically invisible
   in ware encyclopedia
