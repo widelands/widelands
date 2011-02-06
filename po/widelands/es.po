@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-01-04 13:25+0100\n"
-"PO-Revision-Date: 2011-01-11 16:20+0000\n"
-"Last-Translator: Martín V. <Unknown>\n"
+"PO-Revision-Date: 2011-02-05 14:32+0000\n"
+"Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-01-12 04:40+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 04:46+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3745,7 +3745,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Saved game"
-msgstr ""
+msgstr "Partida guardada"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Select a saved game"
@@ -3765,7 +3765,7 @@ msgstr "Comenzar juego"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:145
 msgid "Show the help window"
-msgstr ""
+msgstr "Mostrar ventana de ayuda"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:152 ../../src/ui_fsmenu/launchMPG.cc:615
 msgid "Multiplayer Game Setup"
@@ -3837,7 +3837,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:581
 msgid "There was an error!"
-msgstr ""
+msgstr "¡Ha ocurrido un error!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:581
 msgid "The map file seems to be invalid!"
@@ -3845,17 +3845,17 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:598
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Información sobre el mapa:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:599
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Tamaño: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:600
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i jugadores\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:601
 #, c-format
@@ -6433,6 +6433,10 @@ msgstr "<sin descripción>"
 #~ msgid "No trigger selected!"
 #~ msgstr "¡No se ha seleccionado activador!"
 
+#~ msgid "kick acknowlegement cancled: No name given!"
+#~ msgstr ""
+#~ "Reconocimiento para hechar ha sido cancelado: Ningun nombre ha sido dado!"
+
 #~ msgid ""
 #~ "Available host commands are:<br>/help  -  Shows this help<br>/announce <msg> "
 #~ " -  Send a chatmessage as announcement (system chat)<br>/warn <name> "
@@ -6447,6 +6451,10 @@ msgstr "<sin descripción>"
 #~ "porque <razón><br>/kick <nombre> <razón>  -  Hecha al usuario <nombre> "
 #~ "porque <razón><br>/forcePause  -  Fuerza al juego a una "
 #~ "pausa.<br>/endForcedPause  -  Saca al juego de la pausa."
+
+#~ msgid "kick acknowlegement cancled: Wrong name given!"
+#~ msgstr ""
+#~ "Reconocimiento para hechar ha sido cancelado: El nombre dado es incorrecto!"
 
 #~ msgid "Help "
 #~ msgstr "Ayuda "
