@@ -175,6 +175,8 @@ struct Game : public Editor_Game_Base {
 
 	void sample_statistics();
 
+	const std::string & get_win_condition_string() {return m_win_condition_string;}
+
 private:
 	void SyncReset();
 
@@ -232,10 +234,13 @@ private:
 
 	SaveHandler          m_savehandler;
 
-	ReplayReader * m_replayreader;
-	ReplayWriter * m_replaywriter;
+	ReplayReader       * m_replayreader;
+	ReplayWriter       * m_replaywriter;
 
 	General_Stats_vector m_general_stats;
+
+	/// For save games and statistics generation
+	std::string          m_win_condition_string;
 
 private:
 	// no copying

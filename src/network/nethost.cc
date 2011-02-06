@@ -22,6 +22,8 @@
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
+#include "game_io/game_loader.h"
+#include "game_io/game_preload_data_packet.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "logic/game.h"
 #include "wui/game_tips.h"
@@ -677,6 +679,15 @@ void NetHost::run(bool const autorun)
 		game.set_game_controller(this);
 		Interactive_GameBase * igb;
 		uint8_t pn = d->settings.playernum + 1;
+
+		if (d->settings.savegame) {
+			// Read and broadcast original win condition
+			Widelands::Game_Loader gl(d->settings.mapfilename, game);
+			Widelands::Game_Preload_Data_Packet gpdp;
+			gl.preload_game(gpdp);
+
+			setWinCondition(gpdp.get_win_condition());
+		}
 		if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
 			igb =
 				new Interactive_Player

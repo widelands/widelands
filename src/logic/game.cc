@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -121,13 +121,14 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 Game::Game() :
 	Editor_Game_Base(create_LuaGameInterface(this)),
-	m_syncwrapper      (*this, m_synchash),
-	m_ctrl             (0),
-	m_writereplay      (true),
-	m_writesyncstream  (false),
-	m_state            (gs_notrunning),
-	m_cmdqueue         (*this),
-	m_replaywriter     (0)
+	m_syncwrapper         (*this, m_synchash),
+	m_ctrl                (0),
+	m_writereplay         (true),
+	m_writesyncstream     (false),
+	m_state               (gs_notrunning),
+	m_cmdqueue            (*this),
+	m_replaywriter        (0),
+	m_win_condition_string("not_set")
 {
 }
 
@@ -331,9 +332,9 @@ void Game::init_newgame
 	maploader->load_map_complete(*this, settings.scenario);
 
 	// Check for win_conditions
+	m_win_condition_string = settings.win_condition;
 	LuaCoroutine * cr = lua().run_script
-		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
-		 ".lua", "win_conditions")
+		(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
 		->get_coroutine("func");
 	enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
 }
@@ -361,6 +362,7 @@ void Game::init_savegame
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
+		m_win_condition_string = gpdp.get_win_condition();
 		loaderUI.set_background(background);
 
 		loaderUI.step(_("Loading..."));

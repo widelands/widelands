@@ -401,7 +401,7 @@ msgstr "Tudo pode ser construido no simbolo da casa verde."
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
 msgstr ""
-"Tudo, exceto grandes construções, podem ser construídos no símbolo da\r\n"
+"Tudo, exceto grandes construções, podem ser construídos no símbolo da\n"
 "casa amarela."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:294
@@ -845,7 +845,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
-"Agora já sabemos o que se está passando. Vamos esperar que a construção\r\n"
+"Agora já sabemos o que se está passando. Vamos esperar que a construção\n"
 "da Pedreira termine."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306

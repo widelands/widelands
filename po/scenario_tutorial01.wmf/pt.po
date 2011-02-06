@@ -840,7 +840,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
-"Agora já sabemos o que se está a passar. Vamos esperar que a construção\r\n"
+"Agora já sabemos o que se está a passar. Vamos esperar que a construção\n"
 "da Pedreira fique concluída."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306

@@ -1075,7 +1075,7 @@ msgid ""
 msgstr ""
 "Os comandos hipotéticos `show w' e `show c' devem mostrar as partes "
 "apropriadas da Licença Pública Geral. Claro, os comandos que você usar podem "
-"ser activados de outra forma que `show w' e `show c'; eles podem\r\n"
+"ser activados de outra forma que `show w' e `show c'; eles podem\n"
 "até ser cliques do dispositivo apontador ou itens de um menu -- o que melhor "
 "se adequar ao programa."
 
