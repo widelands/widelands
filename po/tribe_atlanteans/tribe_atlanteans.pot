@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-02-06 16:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -604,7 +604,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid ""
-"Mills wheat to produce flour."
+"Mills blackroot and corn to produce blackroot flour and corn flour, respectively."
 msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25

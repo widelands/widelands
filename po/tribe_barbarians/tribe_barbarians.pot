@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-02-06 16:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -430,7 +430,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
-"Gold is the most valuable of all metals; only very important things are garnished with it. It is obtained out of goldstone in a smelting works. It is used as a precious building material and to produce different axes (in the war mill) and different armours (in the helmsmithy)."
+"Gold is the most valuable of all metals; only very important things are garnished with it. It is obtained out of gold ore in a smelting works. It is used as a precious building material and to produce different axes (in the war mill) and different armours (in the helmsmithy)."
 msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:5
