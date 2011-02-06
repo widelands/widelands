@@ -78,7 +78,7 @@ UI::Textarea & MilitaryBox::add_text
 	 uint32_t      fontsize)
 {
 	UI::Textarea & result = *new UI::Textarea(&parent, 0, 0, str.c_str());
-	result.set_font(fontname, fontsize, UI_FONT_CLR_FG);
+	result.set_textstyle(UI::TextStyle::makebold(UI::Font::get(fontname, fontsize), UI_FONT_CLR_FG));
 	parent.add(&result, alignment);
 	return result;
 }

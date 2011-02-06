@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 19:17+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"PO-Revision-Date: 2010-11-29 10:58+0000\n"
+"Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -190,14 +190,14 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
 msgid ""
 " \"While this is true, we should consider it later, for now other obstacles "
-"are at hand. The miners will definately demand greater rations for working "
+"are at hand. The miners will definitely demand greater rations for working "
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
 " \"While this is true, we should consider it later, for now other obstacles "
-"are at hand. The miners will surely demand greater rations for working high "
-"up on the mountain in this bitter cold, and providing these supplies may not "
-"be easy.\" "
+"are at hand. The miners will definitely demand better rations for working "
+"high up on the mountain in this bitter cold, and providing these supplies "
+"may not be easy.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391
 msgid ""
@@ -397,6 +397,10 @@ msgstr ""
 "plain — let us use the space Mother Nature gave us and build a farm? I "
 "would\n"
 "surely enjoy a freshly baked pitta bread for a change...\""
+
+#: ../../campaigns/t02.wmf/elemental:7
+msgid "02 - A Place to call Home"
+msgstr "02 — A Place to Call Home"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
@@ -643,6 +647,12 @@ msgstr ""
 "first example of a ware which has to be refined before being used in a\n"
 "secondary building — others will follow."
 
+#: ../../campaigns/t02.wmf/elemental:9
+msgid ""
+"In this scenario the higher production buildings, including mining and the "
+"military expansions will be introduced."
+msgstr ""
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
 msgstr "Khantrukh gazes over the plains..."
@@ -711,16 +721,6 @@ msgstr "Provide your miners with food"
 msgid "Refine your mined resources"
 msgstr "Refine your mined resources"
 
-#: ../../campaigns/t02.wmf/elemental:9
-msgid ""
-"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
-"higher production buildings, including mining and the military expansions "
-"will be introduced."
-msgstr ""
-"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
-"higher production buildings, including mining and the military expansions "
-"will be introduced."
-
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
 msgstr "Start building mines on the mountain"
@@ -782,10 +782,6 @@ msgstr "Thron shakes his head..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:439
 msgid "Thron speaks..."
 msgstr "Thron speaks..."
-
-#: ../../campaigns/t02.wmf/elemental:7
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorial 2 — A Place to Call Home"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
@@ -855,6 +851,15 @@ msgstr "Your loyal companion"
 
 #~ msgid "OK"
 #~ msgstr "OK"
+
+#~ msgid ""
+#~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
+#~ "higher production buildings, including mining and the military expansions "
+#~ "will be introduced."
+#~ msgstr ""
+#~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
+#~ "higher production buildings, including mining and the military expansions "
+#~ "will be introduced."
 
 #~ msgid ""
 #~ " \"The war goes on. More and more of our brothers and sisters flee the "
@@ -1208,3 +1213,17 @@ msgstr "Your loyal companion"
 #~ "course enhance all mines to deep mines instantly - bigger mines work a bit "
 #~ "faster, smaller mines need cheaper food. It's up to you which strategy you "
 #~ "prefer."
+
+#~ msgid ""
+#~ " \"While this is true, we should consider it later, for now other obstacles "
+#~ "are at hand. The miners will definately demand greater rations for working "
+#~ "high up on the mountain in this bitter cold, and providing these supplies "
+#~ "may not be easy.\" "
+#~ msgstr ""
+#~ " \"While this is true, we should consider it later, for now other obstacles "
+#~ "are at hand. The miners will surely demand greater rations for working high "
+#~ "up on the mountain in this bitter cold, and providing these supplies may not "
+#~ "be easy.\" "
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Tutorial 2 — A Place to Call Home"

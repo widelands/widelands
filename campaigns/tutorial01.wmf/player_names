@@ -8,5 +8,5 @@ tribe=barbarians
 [player_2]
 name=Sparing Partner
 tribe=empire
-ai="Defensive"
+ai="None"
 

@@ -7,24 +7,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-08 15:46+0000\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"PO-Revision-Date: 2011-01-02 12:49+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-09 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
 "A message has been sent to you. See how the button at the bottom of the\n"
-"screen has changed appearance? You should now burn this quarry down as it "
-"is\n"
+"screen has changed appearance? You might now burn this quarry down as it is\n"
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
+"Du har mottatt en melding. Ser du hvordan knappen på bunnen av\n"
+"skjermen har endret utseende? Du kan nå rive steinbruddet siden det\n"
+"ikke er nyttig lenger og bare tar opp plass. For å rive det, klikk på\n"
+"steinbruddet og velg knappen merket «Ødelegg»."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
 msgid ""
@@ -53,12 +56,17 @@ msgid ""
 "screen.\n"
 "Close the messages window now by right clicking into it."
 msgstr ""
+"Alle vinduer i Widelands kan lukkes ved å høyreklikke i dem. Noen\n"
+"vinduer kan også vises/skjules ved hjelp av knappene på bunnen av skjermen.\n"
+"Lukk «Meldinger»-vinduet nå ved å høyreklikke på det."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid ""
 "Alternatively, you can directly click the flag where\n"
 "the road should end like so."
 msgstr ""
+"Alternativt, kan du direkte klikke på flagget der\n"
+"du vil veien skal lede. Som dette:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
 msgid "And finally the yellow flag symbol only allows for flags."
@@ -88,12 +96,21 @@ msgid ""
 "vulnerable: any military site from another player can conquer the land. You\n"
 "therefore need military sites to keep military influence over your land."
 msgstr ""
+"Så fort en militær bygning er bemannet, vil den utvide territoriet ditt. Om "
+"du trenger\n"
+"plassen den tar opp, kan du brenne den ned, men legg merke til at dette vil "
+"gjøre territoriet \n"
+"ditt sårbart, siden enhver militær bygning hos en annen spiller vil kunne "
+"erobre landområdet. For \n"
+"å kunne holde på landområdene dine, trenger du derfor de militære bygningene."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:683
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
 msgstr ""
+"Angrip og erobre alle fiendtlige militære bygninger og ødelegg fiendens\n"
+"hovedkvarter."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
@@ -102,6 +119,8 @@ msgstr "Angrip:"
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
 msgstr ""
+"Grunnleggende innføring - kart basert på Winterwinds innføring 1 for "
+"barbarer."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
@@ -130,10 +149,17 @@ msgid ""
 "activated\n"
 "earlier."
 msgstr ""
+"Bygg et steinbrudd ved siden av steinene her. Husker du hvordan jeg gjorde "
+"det tidligere?\n"
+"Sjekk at byggehjelp er på, så klikk på stedet du vil plassere\n"
+"bygningen, og velg steinbrudd fra vinduet som åpnes og det blir plassert. "
+"Kanskje\n"
+"dette er et godt tidspunkt  å forklare hva alle symbolene i byggehjelp\n"
+"betyr."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
-msgstr ""
+msgstr "Bygg en sammenknyttende vei"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
 msgid "Building the lumberjack"
@@ -166,7 +192,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
 msgid "Close the messages window"
-msgstr ""
+msgstr "Lukke vinduet med meldinger"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:427
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:448
@@ -195,16 +221,16 @@ msgid ""
 "your\n"
 "construction site, click on the build road icon then click on the flag in "
 "front\n"
-"of your headquarters."
+"of your headquarters. Wait for the completion of the stonemason's hut."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
-msgstr ""
+msgstr "Erobre et område hvor vi kan bygge gruver"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Conquer the mountain to the south west"
-msgstr ""
+msgstr "Erobre fjellene i sørvest"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -219,11 +245,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid "Defeat the enemy"
-msgstr ""
+msgstr "Overvinn fienden"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "Vinn over den andre stammen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:690
 msgid ""
@@ -235,7 +261,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
 msgid "Defeat your enemy"
-msgstr ""
+msgstr "Vinn over fienden din"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:629
 msgid ""
@@ -257,12 +283,12 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Diving in"
-msgstr ""
+msgstr "Hoppe i det"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid "Enable the build help"
-msgstr ""
+msgstr "Skru på byggehjelp"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhance this fortress"
@@ -295,7 +321,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "Oppgradere bygninger"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
 msgid ""
@@ -306,16 +332,17 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
-msgstr ""
+msgstr "Unnvik:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
-msgstr ""
+msgstr "Der det grønne huset vises, kan alt bygges."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:262
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
 msgstr ""
+"Alt, unntatt de største bygningene kan bygges der man har et gult hus."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:294
 msgid ""
@@ -365,7 +392,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:470
 msgid "Expanding your territory!"
-msgstr ""
+msgstr "Utvide territoriet ditt!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
 msgid ""
@@ -408,6 +435,11 @@ msgid ""
 "your\n"
 "tribe, won or lost military buildings, resources found..."
 msgstr ""
+"Hei, det er meg igjen! Denne gangen sendte jeg deg en melding. Widelands vil "
+"sende deg\n"
+"meldinger for å informere deg om viktige hendelser: tomme gruver, når du "
+"blir\n"
+"angrepet, erobringer eller tap av militære bygninger, ressurser funnet..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:620
 msgid "Hitpoints:"
@@ -426,6 +458,13 @@ msgid ""
 "everything out for yourself. Otherwise, please bear with me, I am not the\n"
 "youngest and quickest anymore."
 msgstr ""
+"Jeg beklager, men jeg må nok fjerne dette. Det kan hende vi trenger plassen "
+"her\n"
+"senere. Hvis det virker for sakte for deg, kan du spille et ordentlig spill "
+"hvor du\n"
+"kan finne alt ut på egenhånd. Ellers får du ha meg unnskyldt, jeg er ikke "
+"den\n"
+"yngste og raskeste lenger."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
 msgid ""
@@ -461,13 +500,22 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:583
 msgid ""
-"If you want to come back to this eastern part of your realm, just scroll "
-"here\n"
+"If you want to come back to this south-western part of your realm, just "
+"scroll here\n"
 "via right-button scrolling or open the minimap by clicking on the"
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid "Introducing messages"
+msgstr "Introduksjon til meldinger"
+
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:95
+msgid ""
+"It is easier to understand what is allowed to be built on which field when\n"
+"the build help symbols are enabled. Do so now either by pressing SPACE or "
+"by\n"
+"clicking the fourth button from the left at the very bottom of the screen.\n"
+"Click the \"OK\" button and then give it a try."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
@@ -476,6 +524,8 @@ msgid ""
 "buildings\n"
 "tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
+"Bare klikk på et av hus-symbolene ved siden av steinene, velg fliken med de\n"
+"små bygningene i vinduet som dukker opp, og klikk på steinbruddet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid ""
@@ -509,6 +559,10 @@ msgid ""
 "geologist\n"
 "to it. I'll show you how it's done."
 msgstr ""
+"La oss søke etter ressurser i dette fjellet. Først bygger vi en vei\n"
+"til fjellene og plasserer et flagg. Så klikker vi på flagget og tilkaller en "
+"geolog.\n"
+"Jeg skal vise deg hvordan man gjør det."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -541,7 +595,7 @@ msgstr "Meldinger"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
-msgstr ""
+msgstr "Gruvedrift konklusjon"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
@@ -603,6 +657,8 @@ msgid ""
 "Now please rebuild the road between your quarry and your headquarters.\n"
 "We'll wait until the quarry is completed."
 msgstr ""
+"Vennligst bygg opp veien mellom steinbruddet og hovedkvarteret ditt igjen.\n"
+"Vi venter til steinbruddet er ferdig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:149
 msgid ""
@@ -614,7 +670,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
-msgstr ""
+msgstr "Nå vet vi hva som foregår. La oss vente til steinbruddet er ferdig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
@@ -683,7 +739,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
-msgstr ""
+msgstr "Hvordan finne ressurser"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:366
 msgid ""
@@ -696,8 +752,9 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:558
 msgid ""
 "So our geologist found a lot of coal on this mountain. You should therefore\n"
-"build a coal mine here. Building a mine is like building a house. The build\n"
-"help symbol for where a mine can be built is"
+"build a coal mine here. Building a mine is like building a house. The build "
+"help\n"
+"symbol for where a mine can be built is"
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
@@ -754,6 +811,9 @@ msgid ""
 "various\n"
 "resources:"
 msgstr ""
+"Geologen vil snart ankomme flagget og starte undersøkelse av\n"
+"områdene rundt. Han vil plassere følgende skilt for de forskjellige\n"
+"ressursene:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:395
 msgid ""
@@ -785,7 +845,7 @@ msgid ""
 "to\n"
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags\n"
-"and player indicators on and off inside the map."
+"and player indicators on and off inside the minimap."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:169
@@ -841,7 +901,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:332
 msgid ""
-"There is a small slope to climb to reach this field. This means you're\n"
+"There is a small slope to climb to reach this field. This means your\n"
 "workers are faster walking downwards than they are walking upwards."
 msgstr ""
 
@@ -997,6 +1057,8 @@ msgid ""
 "like.\n"
 "To leave this game and return to the main menu click on the"
 msgstr ""
+"Du kan fortsette å spille, eller du kan avslutte når du vil.\n"
+"For å avslutte spillet og komme til hovedmenyen trykk på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:59
 msgid "You can dismiss this box by left-clicking on the button below."
@@ -1054,7 +1116,7 @@ msgstr "en god del jern"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
-msgstr ""
+msgstr "arkiver-knappen som flytter dem til arkivet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid "build flag symbol."

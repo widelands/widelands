@@ -65,8 +65,6 @@ private:
 	uint32_t                                    m_butw;
 	uint32_t                                    m_buth;
 	uint32_t                                    m_lisw;
-	uint32_t                                    m_fs;
-	std::string                                 m_fn;
 	UI::Textarea                                title, m_opengames;
 	UI::Textarea                                m_playername, m_hostname;
 	UI::Callback_Button                     joingame, hostgame, back, loadlasthost;

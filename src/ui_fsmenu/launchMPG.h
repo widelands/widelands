@@ -23,6 +23,7 @@
 #include "base.h"
 
 #include "ui_basic/button.h"
+#include "ui_basic/helpwindow.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/listselect.h"
@@ -81,8 +82,9 @@ private:
 	UI::Callback_Button       m_help_button;
 	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map;
 	UI::Multiline_Textarea    m_map_info, m_client_info;
+	UI::HelpWindow          * m_help;
 	GameSettingsProvider    * m_settings;
-	GameController          * m_ctrl; // optional
+	GameController          * m_ctrl;
 	GameChatPanel           * m_chat;
 	MultiPlayerSetupGroup   * m_mpsg;
 	std::string               m_filename_proof; // local variable to check state

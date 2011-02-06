@@ -7,47 +7,58 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
 "PO-Revision-Date: 2010-08-30 23:36+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:50+0000\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
-msgid "A special tabard for atlantian soldiers."
-msgstr "Спеціальні накидки для солдат Атлантів"
+msgid ""
+"A golden tabard is produced in an Atlatean weaving-mill out of gold yarn. It "
+"is used in the trainingscamp - together with food - to train soldiers from "
+"healthpoints level 0 to level 1."
+msgstr ""
 
-#: ../../tribes/atlanteans/conf:51
-msgid "Advanced Shield"
-msgstr "Покращений щит"
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"A saw is needed by the woodcutter and the carpenter. It is produced by the "
+"toolsmith."
+msgstr ""
+
+#: ../../tribes/atlanteans/ship/conf:1
+msgid "A sea-worthy ship"
+msgstr ""
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
-"All atlantean soldiers have to wear the sign of their country on their "
-"chests."
-msgstr "Всі солдати Атлантів мають носити на грудях герб своєї країни"
-
-#: ../../tribes/atlanteans/double_trident/conf:1
-msgid ""
-"Already one of the best tridents of the Atlanteans. Only used by very good "
-"fighters."
+"A tabard and a light trident are the basic equipment for young soldiers. "
+"Tabards are produced in the weaving-mill."
 msgstr ""
-"Уже один з кращих тризубців Атлантів. Використовують лише одні з кращих "
-"бійців."
 
-#: ../../tribes/atlanteans/conf:104
+#: ../../tribes/atlanteans/conf:58
+msgid "Advanced Shield"
+msgstr "Покращений щит"
+
+#: ../../tribes/atlanteans/conf:111
 msgid "Armoursmith"
 msgstr "Цех обладунків"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:183
 msgid "Armoursmithy"
 msgstr "Майстер обладунків"
 
-#: ../../tribes/atlanteans/conf:27
+#: ../../tribes/atlanteans/smoked_fish/conf:1
+msgid ""
+"As no Atlantean likes raw fish, smoking it in a smokery is the most common "
+"way to make it edible."
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
 msgstr "Попелище"
 
@@ -55,11 +66,11 @@ msgstr "Попелище"
 msgid "Atlanteans"
 msgstr "Атланти"
 
-#: ../../tribes/atlanteans/conf:105
+#: ../../tribes/atlanteans/conf:112
 msgid "Baker"
 msgstr "Пекар"
 
-#: ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
 msgstr "Пекарня"
 
@@ -67,7 +78,7 @@ msgstr "Пекарня"
 msgid "Bakes bread for workers."
 msgstr "Пече хліб для робочих"
 
-#: ../../tribes/atlanteans/conf:52
+#: ../../tribes/atlanteans/conf:59
 msgid "Bakingtray"
 msgstr "Кухонне приладдя"
 
@@ -84,59 +95,56 @@ msgstr "Застава"
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
 msgstr "Великі відра, для Заводчика риби - виготовляється в Кузні."
 
-#: ../../tribes/atlanteans/conf:54
+#: ../../tribes/atlanteans/conf:61
 msgid "Blackroot"
 msgstr "Чорний корінь"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:188
 msgid "Blackroot Farm"
 msgstr "Ферма чорного коріння"
 
-#: ../../tribes/atlanteans/conf:53
+#: ../../tribes/atlanteans/conf:60
 msgid "Blackroot Flour"
 msgstr "Мука з чорного коріння"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
-"Blackroot Flour is produced out of blackroots and is one of three parts of "
-"the atlantian bread."
+"Blackroot Flour is produced in mills out of blackroots. It is used in "
+"bakeries to make a tasty bread."
 msgstr ""
-"Мука з чорного коріння, виготовляється з Чорного коріння і є одним з трьох "
-"інгредієнтів хліба Атлантів."
 
-#: ../../tribes/atlanteans/conf:106
+#: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
 msgstr "Фермер"
 
-#: ../../tribes/atlanteans/conf:28
+#: ../../tribes/atlanteans/conf:34
 msgid "Blackrootfield"
 msgstr "Грядка чорного коріння"
 
-#: ../../tribes/atlanteans/conf:29
+#: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
 msgstr "Грядка чорного коріння прибрана"
 
-#: ../../tribes/atlanteans/conf:30
+#: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"
 msgstr "Середня грядка чорного коріння"
 
-#: ../../tribes/atlanteans/conf:31
+#: ../../tribes/atlanteans/conf:37
 msgid "Blackrootfield small"
 msgstr "Мала грядка чорного коріння"
 
-#: ../../tribes/atlanteans/conf:32
+#: ../../tribes/atlanteans/conf:38
 msgid "Blackrootfield tiny"
 msgstr "Крихітна грядка чорного коріння"
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
-"Blackroots are a special kind of roots. The Atlanteans like their strong "
-"taste and use its flour for making bread."
+"Blackroots are a special kind of root produced in blackroot farms and "
+"processed in mills. The Atlanteans like their strong taste and use its flour "
+"for making bread."
 msgstr ""
-"Чорний корінь - це особливий вид коріння. Атлантам подобається його міцний "
-"смак, використовується для виготовлення хліба."
 
-#: ../../tribes/atlanteans/conf:55
+#: ../../tribes/atlanteans/conf:62
 msgid "Bread"
 msgstr "Хліб"
 
@@ -152,15 +160,15 @@ msgstr "Розводить павуків для паутини."
 msgid "Breeds the strong atlantean horses"
 msgstr "Розводить сильних коней Атлантів."
 
-#: ../../tribes/atlanteans/conf:56
+#: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
 msgstr "Відра"
 
-#: ../../tribes/atlanteans/conf:107
+#: ../../tribes/atlanteans/conf:114
 msgid "Builder"
 msgstr "Будівельник"
 
-#: ../../tribes/atlanteans/conf:108
+#: ../../tribes/atlanteans/conf:115
 msgid "Burner"
 msgstr "Випалювач углю"
 
@@ -168,7 +176,7 @@ msgstr "Випалювач углю"
 msgid "Burns coal."
 msgstr "Випалює уголь."
 
-#: ../../tribes/atlanteans/conf:97
+#: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
 msgstr "Носій"
 
@@ -176,8 +184,8 @@ msgstr "Носій"
 msgid "Carries items along your roads."
 msgstr "Переносить вантажі по Вашим дорогам."
 
-#: ../../tribes/atlanteans/conf:138
 #: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:201
 msgid "Castle"
 msgstr "Замок"
 
@@ -185,7 +193,7 @@ msgstr "Замок"
 msgid "Castle village"
 msgstr "Замок з поселенням."
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:179
 msgid "Charcoal Burner's House"
 msgstr "Будиночок випалювача углю"
 
@@ -193,59 +201,57 @@ msgstr "Будиночок випалювача углю"
 msgid "Citadel"
 msgstr "Цитадель"
 
-#: ../../tribes/atlanteans/spidercloth/conf:1
-msgid "Cloth made out of spideryarn."
-msgstr "Тканина з паутини"
-
-#: ../../tribes/atlanteans/conf:57
+#: ../../tribes/atlanteans/conf:64
 msgid "Coal"
 msgstr "Уголь"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:190
 msgid "Coal Mine"
 msgstr "Вугільна шахта"
 
-#: ../../tribes/atlanteans/conf:131
+#: ../../tribes/atlanteans/shipyard/conf:18
+msgid "Constructing ship"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
 msgstr "Будівельний майданчик"
 
-#: ../../tribes/atlanteans/conf:59
+#: ../../tribes/atlanteans/conf:66
 msgid "Corn"
 msgstr "Кукурудза"
 
-#: ../../tribes/atlanteans/conf:33
+#: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
 msgstr "Кукурудзяне поле"
 
-#: ../../tribes/atlanteans/conf:34
+#: ../../tribes/atlanteans/conf:40
 msgid "Cornfield harvested"
 msgstr "Кукурудзяне поле прибрано"
 
-#: ../../tribes/atlanteans/conf:35
+#: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
 msgstr "Середнє кукурудзяне поле"
 
-#: ../../tribes/atlanteans/conf:36
+#: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
 msgstr "Мале кукурудзяне поле"
 
-#: ../../tribes/atlanteans/conf:37
+#: ../../tribes/atlanteans/conf:43
 msgid "Cornfield tiny"
 msgstr "Крихітне кукурудзяне поле"
 
-#: ../../tribes/atlanteans/conf:58
+#: ../../tribes/atlanteans/conf:65
 msgid "Cornflour"
 msgstr "Кукурудзяна мука"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
-"Cornflour is produced out of corn and is one of three parts of the atlantian "
-"bread."
+"Cornflour is produced in a mill out of corn and is one of three parts of the "
+"Atlantean bread produced in bakeries."
 msgstr ""
-"Кукурудзяна мука виготовляється з Кукурудзи і є однією з трьох складових "
-"хліба Атлантів."
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
 msgstr "Шахта кришталю."
 
@@ -257,11 +263,11 @@ msgstr ""
 msgid "Defend and Conquer!"
 msgstr "Захищай та владарюй!"
 
-#: ../../tribes/atlanteans/conf:38
+#: ../../tribes/atlanteans/conf:44
 msgid "Destroyed building"
 msgstr "Зруйнована будівля."
 
-#: ../../tribes/atlanteans/conf:60
+#: ../../tribes/atlanteans/conf:67
 msgid "Diamond"
 msgstr "Діамант"
 
@@ -273,19 +279,19 @@ msgstr "Шукає корисні копалини."
 msgid "Donjon"
 msgstr "Оглядова вежа"
 
-#: ../../tribes/atlanteans/conf:61
+#: ../../tribes/atlanteans/conf:68
 msgid "Double Trident"
 msgstr "Здвоєний тризуб"
 
-#: ../../tribes/atlanteans/conf:134
+#: ../../tribes/atlanteans/conf:205
 msgid "Dungeon"
 msgstr "Темниця"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:187
 msgid "Farm"
 msgstr "Ферма"
 
-#: ../../tribes/atlanteans/conf:109
+#: ../../tribes/atlanteans/conf:117
 msgid "Farmer"
 msgstr "Фермер"
 
@@ -293,43 +299,46 @@ msgstr "Фермер"
 msgid "Fells trees."
 msgstr "Рубає дерева."
 
-#: ../../tribes/atlanteans/conf:62
+#: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
 msgstr "Щіпці коваля."
 
-#: ../../tribes/atlanteans/conf:64
+#: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Риба"
 
-#: ../../tribes/atlanteans/conf:110
+#: ../../tribes/atlanteans/conf:118
 msgid "Fish Breeder"
 msgstr "Заводчик риби"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:170
 msgid "Fish Breeder's House"
 msgstr "Будиночок заводчика риби"
 
 #: ../../tribes/atlanteans/fish/conf:1
-msgid "Fish is one of the biggest food-resources of the Atlanteans."
-msgstr "Рибе є одним з найбільших продуктових ресурсів Атлантів."
+msgid ""
+"Fish is one of the biggest food-resources of the Atlanteans. It has to be "
+"smoked in a smokery before being delivered to mines, training sites and "
+"scouts."
+msgstr ""
 
-#: ../../tribes/atlanteans/conf:111
+#: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
 msgstr "Рибак"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:169
 msgid "Fisher's House"
 msgstr "Будиночок рибака"
 
-#: ../../tribes/atlanteans/conf:63
+#: ../../tribes/atlanteans/conf:70
 msgid "Fishing Net"
 msgstr "Риболовні сіті"
 
-#: ../../tribes/atlanteans/conf:112
+#: ../../tribes/atlanteans/conf:120
 msgid "Forester"
 msgstr "Лісник"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:167
 msgid "Forester's House"
 msgstr "Будиночок лісника"
 
@@ -338,50 +347,55 @@ msgstr "Будиночок лісника"
 msgid "Fortress"
 msgstr "Фортеця"
 
-#: ../../tribes/atlanteans/conf:113
+#: ../../tribes/atlanteans/conf:121
 msgid "Geologist"
 msgstr "Геолог"
 
-#: ../../tribes/atlanteans/conf:67
+#: ../../tribes/atlanteans/conf:74
 msgid "Gold"
 msgstr "Золото"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:192
 msgid "Gold Mine"
 msgstr "Золота копальня"
 
-#: ../../tribes/atlanteans/conf:66
+#: ../../tribes/atlanteans/conf:73
 msgid "Gold Ore"
 msgstr "Золота руда"
 
-#: ../../tribes/atlanteans/conf:68
+#: ../../tribes/atlanteans/conf:75
 msgid "Gold Yarn"
 msgstr "Золоті нитки"
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
-"Gold is one of the most valuable materials. Only important things are "
-"garnished with it."
+"Gold is one of the most valuable materials. It is produced out of gold ore "
+"in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
+"and the goldweaver."
 msgstr ""
-"Золото одним із найцінніших матеріалів. Їм прикрашають лише важливі речі."
 
-#: ../../tribes/atlanteans/conf:65
+#: ../../tribes/atlanteans/goldore/conf:1
+msgid ""
+"Gold ores are mined in gold mines and processed to gold in smelting works."
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
 msgstr "Золота накидка"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:168
 msgid "Goldweaver"
 msgstr "Ткач золота"
 
-#: ../../tribes/atlanteans/conf:139
+#: ../../tribes/atlanteans/conf:197
 msgid "Guardhall"
 msgstr "Форт"
 
-#: ../../tribes/atlanteans/conf:140
+#: ../../tribes/atlanteans/conf:196
 msgid "Guardhouse"
 msgstr "Будиночок гвардії"
 
-#: ../../tribes/atlanteans/conf:69
+#: ../../tribes/atlanteans/conf:76
 msgid "Hammer"
 msgstr "Молоток"
 
@@ -401,79 +415,96 @@ msgstr "Штаб"
 msgid "Headquarters medium"
 msgstr "Середній штаб"
 
-#: ../../tribes/atlanteans/conf:70
+#: ../../tribes/atlanteans/conf:77
 msgid "Heavy Double Trident"
 msgstr "Важкий здоєний тризуб"
 
-#: ../../tribes/atlanteans/horse/conf:1
-msgid "Helps to carry items at heavy used roads."
-msgstr "Допомагає перевозити вантажі на завантажених дорогах."
-
-#: ../../tribes/atlanteans/conf:141
+#: ../../tribes/atlanteans/conf:198
 msgid "High Tower"
 msgstr "Висока вежа."
 
-#: ../../tribes/atlanteans/conf:71
+#: ../../tribes/atlanteans/conf:78
 msgid "Hook pole"
 msgstr "Багор"
 
-#: ../../tribes/atlanteans/conf:98
+#: ../../tribes/atlanteans/conf:105
 msgid "Horse"
 msgstr "Кінь"
 
-#: ../../tribes/atlanteans/conf:128
+#: ../../tribes/atlanteans/conf:136
 msgid "Horse Breeder"
 msgstr "Заводчик коней"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
 msgstr "Ферма коней"
 
-#: ../../tribes/atlanteans/conf:114
+#: ../../tribes/atlanteans/horse/conf:1
+msgid ""
+"Horses help to carry items at heavily used roads. They are raised in a horse "
+"farm."
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
 msgstr "Мисливець"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:171
 msgid "Hunter's House"
 msgstr "Будиночок мисливця"
 
-#: ../../tribes/atlanteans/conf:72
+#: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
 msgstr "Мисливський лук"
 
-#: ../../tribes/atlanteans/conf:74
+#: ../../tribes/atlanteans/conf:81
 msgid "Iron"
 msgstr "Залізо"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:191
 msgid "Iron Mine"
 msgstr "Шахта заліза"
 
-#: ../../tribes/atlanteans/conf:73
+#: ../../tribes/atlanteans/conf:80
 msgid "Iron Ore"
 msgstr "Залізна руда"
 
-#: ../../tribes/atlanteans/conf:135
+#: ../../tribes/atlanteans/iron/conf:1
+msgid ""
+"Iron is made out of iron ores in the smelting works. It is used in the "
+"toolsmithy, armoursmithy and weapon smithy."
+msgstr ""
+
+#: ../../tribes/atlanteans/ironore/conf:1
+msgid ""
+"Iron ores are mined in iron mines. They get smelted in a smelting works to "
+"retrieve the iron."
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
 msgstr "Лабіринт"
 
-#: ../../tribes/atlanteans/conf:75
+#: ../../tribes/atlanteans/conf:82
 msgid "Light trident"
 msgstr "Легкий тризуб"
 
-#: ../../tribes/atlanteans/conf:76
+#: ../../tribes/atlanteans/conf:83
 msgid "Long Trident"
 msgstr "Довгий тризуб"
 
-#: ../../tribes/atlanteans/conf:77
+#: ../../tribes/atlanteans/conf:84
 msgid "Meat"
 msgstr "М'ясо"
 
 #: ../../tribes/atlanteans/meat/conf:1
-msgid "Meat is one food-resource of the Atlanteans."
-msgstr "М'ясо є одним з продовольчих ресурсів Атлантів."
+msgid ""
+"Meat is one food resource of the Atlanteans. It is gained out of wild game "
+"taken by the hunter and has to be smoked in a smokery before being delivered "
+"to mines and training sites (dungeon and labyrinth)."
+msgstr ""
 
-#: ../../tribes/atlanteans/conf:78
+#: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
 msgstr "Щипці для доїння"
 
@@ -485,11 +516,11 @@ msgstr ""
 "Щіпці для доїння використовує заводчик павуків, щоб доїти пауків. "
 "Виробляються в кузні."
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:176
 msgid "Mill"
 msgstr "Млин"
 
-#: ../../tribes/atlanteans/conf:115
+#: ../../tribes/atlanteans/conf:123
 msgid "Miller"
 msgstr "Мельник"
 
@@ -509,15 +540,19 @@ msgstr "Добувати кварц"
 msgid "Mine stone"
 msgstr "Добувати каміння"
 
-#: ../../tribes/atlanteans/conf:116
+#: ../../tribes/atlanteans/conf:124
 msgid "Miner"
 msgstr "Шахтер"
+
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
+msgid "Not enough space"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
 msgstr "Форпост"
 
-#: ../../tribes/atlanteans/conf:80
+#: ../../tribes/atlanteans/conf:87
 msgid "Pick"
 msgstr "Кірка"
 
@@ -527,13 +562,16 @@ msgid ""
 "toolsmith."
 msgstr "Кірки використовують каменотеси та шахтарі. Виготовляються в кузні."
 
-#: ../../tribes/atlanteans/conf:81
+#: ../../tribes/atlanteans/conf:88
 msgid "Planks"
 msgstr "Доски"
 
 #: ../../tribes/atlanteans/planks/conf:1
-msgid "Planks are an important build material of the Atlanteans."
-msgstr "Доски, важливий будматерал Атлантів."
+msgid ""
+"Planks are an important building material of the Atlanteans. They are "
+"produced out of trunks by the sawmill. The weapon smithy and the shipyard "
+"also use planks to produce the different tridents and mighty ships."
+msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -680,82 +718,75 @@ msgstr "Виготовляє інструмент для робочих"
 msgid "Produces weapons for the soldiers."
 msgstr "Виготовляє зброю для солдат"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:165
 msgid "Quarry"
 msgstr "Кар’єр"
 
-#: ../../tribes/atlanteans/conf:79
+#: ../../tribes/atlanteans/conf:86
 msgid "Quartz"
 msgstr "Кварц"
 
-#: ../../tribes/atlanteans/conf:39
+#: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator coal little"
 msgstr "Індикатор ресурсів: мало вугілля"
 
-#: ../../tribes/atlanteans/conf:40
+#: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator coal much"
 msgstr "Індикатор ресурсів: багато вугілля"
 
-#: ../../tribes/atlanteans/conf:41
+#: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator gold little"
 msgstr "Індикатор ресурсів: мало золота"
 
-#: ../../tribes/atlanteans/conf:42
+#: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator gold much"
 msgstr "Індикатор ресурсів: багато золота"
 
-#: ../../tribes/atlanteans/conf:43
+#: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator granite little"
 msgstr "Індикатор ресурсів: мало граніту"
 
-#: ../../tribes/atlanteans/conf:44
+#: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator granite much"
 msgstr "Індикатор ресурсів: багато граніту"
 
-#: ../../tribes/atlanteans/conf:45
+#: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator iron little"
 msgstr "Індикатор ресурсів: мало заліза"
 
-#: ../../tribes/atlanteans/conf:46
+#: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator iron much"
 msgstr "Індикатор ресурсів: багато заліза"
 
-#: ../../tribes/atlanteans/conf:47
+#: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator no resource"
 msgstr "Індикатор ресурсів: пусто"
 
-#: ../../tribes/atlanteans/conf:48
+#: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator water"
 msgstr "Індикатор ресурсів: вода"
 
-#: ../../tribes/atlanteans/conf:82
+#: ../../tribes/atlanteans/conf:89
 msgid "Saw"
 msgstr "Пилка"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:174
 msgid "Sawmill"
 msgstr "Лісопилка"
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
-"produced by the toolsmith."
-msgstr ""
-"Пилка потрібна лісопильщику, дроворубу та ковалю. Виготовляються в кузні."
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
 msgstr "Розпилює деревину для вигитовлення досок."
 
-#: ../../tribes/atlanteans/conf:117
+#: ../../tribes/atlanteans/conf:125
 msgid "Sawyer"
 msgstr "Лісопильщик"
 
-#: ../../tribes/atlanteans/conf:127
+#: ../../tribes/atlanteans/conf:135
 msgid "Scout"
 msgstr "Розвідник"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:173
 msgid "Scout's House"
 msgstr "Будиночок розвідника"
 
@@ -764,7 +795,7 @@ msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr "Розвідник, розвідує невідому місцевість, відкриває нові землі."
 
-#: ../../tribes/atlanteans/conf:83
+#: ../../tribes/atlanteans/conf:90
 msgid "Scythe"
 msgstr "Коса"
 
@@ -773,7 +804,23 @@ msgstr "Коса"
 msgid "Sentry"
 msgstr "Сторожа"
 
-#: ../../tribes/atlanteans/conf:84
+#: ../../tribes/atlanteans/conf:139
+msgid "Ship"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:55
+msgid "Ship construction site"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:116
+msgid "Shipwright"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:177
+msgid "Shipyard"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:91
 msgid "Shovel"
 msgstr "Лопата"
 
@@ -785,12 +832,12 @@ msgstr ""
 "Лопати потрібні, для догляду за рослинами. Використовують: лісник, фермер, "
 "вирощувач чорного коріння. Виготовляються в кузні."
 
-#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/dungeon/conf:30
 #: ../../tribes/atlanteans/labyrinth/conf:36
 msgid "Sleep"
 msgstr "Сон"
 
-#: ../../tribes/atlanteans/conf:142
+#: ../../tribes/atlanteans/conf:199
 msgid "Small Tower"
 msgstr "Мала вежа"
 
@@ -802,11 +849,11 @@ msgstr "Плавити золото"
 msgid "Smelt iron"
 msgstr "Плавити залізо"
 
-#: ../../tribes/atlanteans/conf:118
+#: ../../tribes/atlanteans/conf:126
 msgid "Smelter"
 msgstr "Ливарник"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:180
 msgid "Smelting Works"
 msgstr "Ливарня"
 
@@ -822,19 +869,26 @@ msgstr "Коптить рибу"
 msgid "Smoke meat"
 msgstr "Коптить м'ясо"
 
-#: ../../tribes/atlanteans/conf:85
+#: ../../tribes/atlanteans/conf:92
 msgid "Smoked fish"
 msgstr "Копчена риба"
 
-#: ../../tribes/atlanteans/conf:86
+#: ../../tribes/atlanteans/conf:93
 msgid "Smoked meat"
 msgstr "Копчене м'ясо"
 
-#: ../../tribes/atlanteans/conf:119
+#: ../../tribes/atlanteans/smoked_meat/conf:1
+msgid ""
+"Smoked meat is made out of meat in a smokery. It is delivered to the mines "
+"and training sites (labyrinth and dungeon) where the miners and soldiers "
+"prepare a nutricious lunch for themselves."
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
 msgstr "Коптильник"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:175
 msgid "Smokery"
 msgstr "Коптильня"
 
@@ -842,43 +896,59 @@ msgstr "Коптильня"
 msgid "Smokes meat and fish."
 msgstr "Коптить м'ясо та рибу"
 
-#: ../../tribes/atlanteans/conf:101
+#: ../../tribes/atlanteans/conf:108
 msgid "Soldier"
 msgstr "Солдат"
 
-#: ../../tribes/atlanteans/conf:120
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:104
+msgid ""
+"Some of your starting buildings didn't have enough room and \n"
+"weren't build. You are at an disadvantage with this; consider restarting \n"
+"this map with a fair starting condition."
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
 msgstr "Заводчик павуків"
 
-#: ../../tribes/atlanteans/conf:87
+#: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
 msgstr "Павукова тканина"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/spidercloth/conf:1
+msgid ""
+"Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
+"toolsmithy and the shipyard. Also some higher developed buildings need "
+"spidercloth for their construction."
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
 msgstr "Паукова ферма"
 
-#: ../../tribes/atlanteans/conf:88
+#: ../../tribes/atlanteans/conf:95
 msgid "Spideryarn"
 msgstr "Павутина"
 
-#: ../../tribes/atlanteans/conf:89
+#: ../../tribes/atlanteans/conf:96
 msgid "Steel Shield"
 msgstr "Сталевий щит"
 
-#: ../../tribes/atlanteans/conf:90
+#: ../../tribes/atlanteans/conf:97
 msgid "Steel Trident"
 msgstr "Сталевий тризуб"
 
-#: ../../tribes/atlanteans/conf:91
+#: ../../tribes/atlanteans/conf:98
 msgid "Stone"
 msgstr "Камінь"
 
 #: ../../tribes/atlanteans/stone/conf:1
-msgid "Stone is one basic build ware type of the Atlanteans."
-msgstr "Камінь є одним з основних будматеріалів Атлантів."
+msgid ""
+"Stone is one basic building ware of the Atlanteans. It is produced in a "
+"quarry or a crystal mine."
+msgstr ""
 
-#: ../../tribes/atlanteans/conf:121
+#: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
 msgstr "Каменяр"
 
@@ -886,9 +956,16 @@ msgstr "Каменяр"
 msgid "Stronghold"
 msgstr "Опорний пункт"
 
-#: ../../tribes/atlanteans/conf:92
+#: ../../tribes/atlanteans/conf:99
 msgid "Tabard"
 msgstr "Накидка"
+
+#: ../../tribes/atlanteans/coal/conf:1
+msgid ""
+"The Atlantean fires in smelting works, armoursmithies and weaponsmithies are "
+"fed with coal. This coal is mined in coal mines or produced out of trunks by "
+"a charcoal burner."
+msgstr ""
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -903,13 +980,12 @@ msgstr "Коса є інструментом фермерів. Виготовл�
 msgid "The Widelands Development Team"
 msgstr "Команда розробників Widelands"
 
-#: ../../tribes/atlanteans/bakingtray/conf:1
+#: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
-"The bakingtray is the tool of the baker, each baker needs its own. It is "
-"produced by the toolsmith."
+"The double trident is one of the best tridents produced by the Atlantean "
+"weapon smithy. It is used in a dungeon - together with food - to train "
+"soldiers from attack level 2 to level 3."
 msgstr ""
-"Кухонне приладдя є інструментом пекаря, кожен пекар потребує свого власного "
-"приладдя. Виготовляється в кузні."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
@@ -937,92 +1013,90 @@ msgstr ""
 "зброярю та виготовлювачу броні. Переконайтесь, що у вас завжди є деякий "
 "запас! Виготовляється в кузні."
 
+#: ../../tribes/atlanteans/long_trident/conf:1
+msgid ""
+"The long trident is the first trident in the training of soldiers. It is "
+"produced in the weapon smithy and used in the dungeon - together with food - "
+"to train soldiers from attack level 0 to level 1."
+msgstr ""
+
+#: ../../tribes/atlanteans/bakingtray/conf:1
+msgid ""
+"The peel is the tool of the baker, each baker needs its own. It is produced "
+"by the toolsmith."
+msgstr ""
+
 #: ../../tribes/atlanteans/advanced_shield/conf:1
-msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr "Ці щити використовуються кращими солдатами Атлантів."
+msgid ""
+"These advanced shields are used by the best soldiers of the Atlanteans. They "
+"are produced in the armoursmithy and used in the labyrinth - together with "
+"food - to train soldiers from Defense level 1 to level 2."
+msgstr ""
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
-"These transparent quartz' are used for some exclusive buildings and tools."
+"These transparent quartz' are used to build some exclusive buildings. They "
+"are produced in a crystal mine."
 msgstr ""
-"Прозорий кварц використовується для деяких особливих будівель та "
-"інструментів."
+
+#: ../../tribes/atlanteans/diamond/conf:1
+msgid ""
+"These wonderful diamonds are used to build some exclusive buildings. They "
+"are mined in a crystal mine."
+msgstr ""
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
-msgid "This bow is used by the atlantian hunter."
-msgstr "Лук використовується мисливчем атлантів."
+msgid ""
+"This bow is used by the Atlantean hunter. It is produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
-"This corn is the base of the fine cornflour, that every atlantian baker "
-"needs for a good bread."
+"This corn is processed in the mill to fine cornflour that every Atlantean "
+"baker needs for a good bread. Also horse farms and spiderfarms need to be "
+"provided with corn."
 msgstr ""
-"Кукурудза є основою кукурудзяної муки, яка необхідна для смачного хліба "
-"Атлантів."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
-"top of the smoke-house. It is created by the toolsmith."
+"top of the smokery. It is created by the toolsmith."
 msgstr ""
-"Багор використовується коптильником, щоб повісити все м'ясо і рибу в "
-"коптильні. Виготовляється в кузні."
-
-#: ../../tribes/atlanteans/long_trident/conf:1
-msgid "This is an advanced trident for more experienced soldiers."
-msgstr "Покращений тризуб для більш досвідчених солдат."
-
-#: ../../tribes/atlanteans/ironore/conf:1
-msgid "This is red iron ore."
-msgstr "Це червона залізна руда."
-
-#: ../../tribes/atlanteans/smoked_fish/conf:1
-msgid ""
-"This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
-"common way to make it eatable."
-msgstr ""
-"Це копчена риба - Атланти не люблять сиру рибу, коптіння є найбільш "
-"поширеним способом зробити рибу смачною."
-
-#: ../../tribes/atlanteans/smoked_meat/conf:1
-msgid ""
-"This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is "
-"a common way to make it eatable."
-msgstr ""
-"Це копчене м'ясо - Атланти не люблять сире м'ясо, коптіння є найбільш "
-"поширеним способом зробити м'ясо смачним."
 
 #: ../../tribes/atlanteans/light_trident/conf:1
-msgid "This is the basic weapon for atlantian soldiers."
-msgstr "Це основна зброя солдат атлантів."
+msgid ""
+"This is the basic weapon for Atlantean soldiers. Together with a tabard it "
+"makes the equipment for young soldiers. Light tridents are produced in the "
+"weapon smithy as are all other tridents."
+msgstr ""
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
-msgid "This is the medium trident - used by advanced soldiers."
-msgstr "Це середній тризуб - використовують передові солдати."
+msgid ""
+"This is the medium trident. It is produced in the weapon smithy and used by "
+"advanced soldiers in the dungeon to train from attack level 1 to level 2 "
+"(together with food)."
+msgstr ""
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
-"This is the most dangerous weapon of the atlantian military. Only the best "
-"of the best soldiers may use it."
+"This is the most dangerous weapon of the Atlantean military. Only the best "
+"of the best soldiers may use it. It is produced in the weapon smithy and "
+"used in the dungeon - together with food - to train soldiers from attack "
+"level 3 to level 4."
 msgstr ""
-"Це найнебезпечніша зброя Атлантів. Тільки кращі з кращих солдат можуть "
-"використовувати її."
-
-#: ../../tribes/atlanteans/goldore/conf:1
-msgid "This is the yellow gold ore."
-msgstr "Жовта золота руда."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
-msgid "This steel shield is used by experienced soldiers."
-msgstr "Це сталевий щит, який використовують досвідчені солдати."
+msgid ""
+"This steel shield is produced in the armoursmithy and used in the labyrinth -"
+"together with food - to train soldiers from Defense level 0 to level 1."
+msgstr ""
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
-"This tasty bread is made out of corn- and blackrootflour and is one part of "
-"miners meal."
+"This tasty bread is made in bakeries out of cornflour, blackroot flour and "
+"water. It is appreciated as basic food for miners, scouts and soldiers in "
+"training sites (labyrinth and dungeon)."
 msgstr ""
-"Цей смачний хліб випікається з кукурудзяної муки та муки з чорного коріння, "
-"потрібен для харчування шахтарів."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1030,45 +1104,32 @@ msgid ""
 "Atlantis."
 msgstr "Це плем'я відоме з давніх легенд. Сини та дочки Атлантиди."
 
-#: ../../tribes/atlanteans/diamond/conf:1
-msgid ""
-"This wonderful diamonds are used for some exclusive buildings and tools."
-msgstr ""
-"Ці красиві алмази використовуються для особливих будівель та інструментів."
-
 #: ../../tribes/atlanteans/spideryarn/conf:1
-msgid "This yarn is produced by spiders, which are bred on spiderfarms."
+msgid ""
+"This yarn is produced by spiders, which are bred on spiderfarms. It is "
+"processed to spidercloth in a weaving-mill."
 msgstr ""
-"Ця паутина виготовляється павуками, яких розводять на паукових фермах."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
-msgid "This yarn, made of gold, is used for weaving exclusive cloth."
-msgstr ""
-"Ця пряжа, виготовлена з золота, використовується для плетіння особливих "
-"тканин."
-
-#: ../../tribes/atlanteans/coal/conf:1
 msgid ""
-"To make the fine atlantian steel a hot fire is needed. But a fire of wood "
-"isn't hot enough -this coal brings the needed heat."
+"This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
+"golden tabard in the weaving-mill."
 msgstr ""
-"для виготовлення сталі потрібне гаряче полум'я. Дерево не може дати стільки "
-"тепла, тому використовується вугілля."
 
-#: ../../tribes/atlanteans/conf:122
+#: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
 msgstr "Коваль"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:181
 msgid "Toolsmithy"
 msgstr "Кузня"
 
-#: ../../tribes/atlanteans/conf:143
 #: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:200
 msgid "Tower"
 msgstr "Вежа"
 
-#: ../../tribes/atlanteans/conf:123
+#: ../../tribes/atlanteans/conf:131
 msgid "Trainer"
 msgstr "Тренер"
 
@@ -1076,23 +1137,22 @@ msgstr "Тренер"
 msgid "Trains the soldiers."
 msgstr "Тренує солдат"
 
-#: ../../tribes/atlanteans/conf:93
+#: ../../tribes/atlanteans/conf:100
 msgid "Trunk"
 msgstr "Колода"
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
 "Trunks are the base for planks, which are used in nearly every building of "
-"the Atlanteans."
+"the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
+"the smokery also need trunks for their work."
 msgstr ""
-"Колоди використовуються для виготовлення доски, які використовуються майже у "
-"всіх будівлях Атлантів."
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
 msgstr "Покращення атаки солдат 0"
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:32
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1100,11 +1160,11 @@ msgstr ""
 "Покращення атаки солдат 0 (лише для сумісності із старими збереженнями гри  "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:33
 msgid "Upgrade soldier attack 1"
 msgstr "Покращення атаки солдат 1"
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:34
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1112,11 +1172,11 @@ msgstr ""
 "Покращення атаки солдат 1 (лише для сумісності із збереженнями старих версій "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:35
 msgid "Upgrade soldier attack 2"
 msgstr "Покращення атаки солдат 2"
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:36
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1124,11 +1184,11 @@ msgstr ""
 "Покращення атаки солдат 2 (лише для сумісності із збереженнями старих версій "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:37
 msgid "Upgrade soldier attack 3"
 msgstr "Покращення атаки солдат 3"
 
-#: ../../tribes/atlanteans/dungeon/conf:39
+#: ../../tribes/atlanteans/dungeon/conf:38
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1198,47 +1258,41 @@ msgstr ""
 msgid "Warehouse"
 msgstr "Склад"
 
-#: ../../tribes/atlanteans/conf:94
+#: ../../tribes/atlanteans/conf:101
 msgid "Water"
 msgstr "Вода"
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""
-"Water is the most essential essence for life! This water is used in many "
-"places, for example to make bread."
+"Water is the essence for life! It is used in the bakery, the horse farm and "
+"the spiderfarm."
 msgstr ""
-"Без води нема життя! Вода використовується в багатьох місцях, наприклад, для "
-"випікання смачного хліба."
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"
 msgstr "Зброярня"
 
-#: ../../tribes/atlanteans/iron/conf:1
-msgid "Weapons and Tools are made of iron."
-msgstr "Зброя та інструменти виготовляються із заліза"
-
-#: ../../tribes/atlanteans/conf:124
+#: ../../tribes/atlanteans/conf:132
 msgid "Weaponsmith"
 msgstr "Зброяр"
 
-#: ../../tribes/atlanteans/conf:125
+#: ../../tribes/atlanteans/conf:133
 msgid "Weaver"
 msgstr "Ткач"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:186
 msgid "Weaving-Mill"
 msgstr "Ткацький цех"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:172
 msgid "Well"
 msgstr "Криниця"
 
-#: ../../tribes/atlanteans/conf:126
+#: ../../tribes/atlanteans/conf:134
 msgid "Woodcutter"
 msgstr "Лісоруб"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:166
 msgid "Woodcutter's House"
 msgstr "Будиночок лісоруба"
 
@@ -1261,6 +1315,7 @@ msgstr "Будиночок лісоруба"
 #: ../../tribes/atlanteans/quarry/conf:16
 #: ../../tribes/atlanteans/sawmill/conf:19
 #: ../../tribes/atlanteans/scouts_house/conf:18
+#: ../../tribes/atlanteans/shipyard/conf:19
 #: ../../tribes/atlanteans/smelting_works/conf:25
 #: ../../tribes/atlanteans/smokery/conf:27
 #: ../../tribes/atlanteans/spiderfarm/conf:17
@@ -1276,6 +1331,193 @@ msgstr "Робота"
 msgid "Works at construction sites to create a new building."
 msgstr "Працюють на будмайданчиках, будують нові будівлі."
 
+#: ../../tribes/atlanteans/shipwright/conf:1
+msgid "Works at the shipyard and constructs new ships."
+msgstr ""
+
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr "Працює в глибоких шахтах, видобуває вугілля, залізо та золото."
+
+#~ msgid ""
+#~ "Already one of the best tridents of the Atlanteans. Only used by very good "
+#~ "fighters."
+#~ msgstr ""
+#~ "Уже один з кращих тризубців Атлантів. Використовують лише одні з кращих "
+#~ "бійців."
+
+#~ msgid "A special tabard for atlantian soldiers."
+#~ msgstr "Спеціальні накидки для солдат Атлантів"
+
+#~ msgid ""
+#~ "All atlantean soldiers have to wear the sign of their country on their "
+#~ "chests."
+#~ msgstr "Всі солдати Атлантів мають носити на грудях герб своєї країни"
+
+#~ msgid ""
+#~ "Blackroot Flour is produced out of blackroots and is one of three parts of "
+#~ "the atlantian bread."
+#~ msgstr ""
+#~ "Мука з чорного коріння, виготовляється з Чорного коріння і є одним з трьох "
+#~ "інгредієнтів хліба Атлантів."
+
+#~ msgid ""
+#~ "Blackroots are a special kind of roots. The Atlanteans like their strong "
+#~ "taste and use its flour for making bread."
+#~ msgstr ""
+#~ "Чорний корінь - це особливий вид коріння. Атлантам подобається його міцний "
+#~ "смак, використовується для виготовлення хліба."
+
+#~ msgid "Cloth made out of spideryarn."
+#~ msgstr "Тканина з паутини"
+
+#~ msgid ""
+#~ "Cornflour is produced out of corn and is one of three parts of the atlantian "
+#~ "bread."
+#~ msgstr ""
+#~ "Кукурудзяна мука виготовляється з Кукурудзи і є однією з трьох складових "
+#~ "хліба Атлантів."
+
+#~ msgid "Fish is one of the biggest food-resources of the Atlanteans."
+#~ msgstr "Рибе є одним з найбільших продуктових ресурсів Атлантів."
+
+#~ msgid ""
+#~ "Gold is one of the most valuable materials. Only important things are "
+#~ "garnished with it."
+#~ msgstr ""
+#~ "Золото одним із найцінніших матеріалів. Їм прикрашають лише важливі речі."
+
+#~ msgid "Helps to carry items at heavy used roads."
+#~ msgstr "Допомагає перевозити вантажі на завантажених дорогах."
+
+#~ msgid "Meat is one food-resource of the Atlanteans."
+#~ msgstr "М'ясо є одним з продовольчих ресурсів Атлантів."
+
+#~ msgid "Planks are an important build material of the Atlanteans."
+#~ msgstr "Доски, важливий будматерал Атлантів."
+
+#~ msgid ""
+#~ "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
+#~ "produced by the toolsmith."
+#~ msgstr ""
+#~ "Пилка потрібна лісопильщику, дроворубу та ковалю. Виготовляються в кузні."
+
+#~ msgid "Stone is one basic build ware type of the Atlanteans."
+#~ msgstr "Камінь є одним з основних будматеріалів Атлантів."
+
+#~ msgid ""
+#~ "The bakingtray is the tool of the baker, each baker needs its own. It is "
+#~ "produced by the toolsmith."
+#~ msgstr ""
+#~ "Кухонне приладдя є інструментом пекаря, кожен пекар потребує свого власного "
+#~ "приладдя. Виготовляється в кузні."
+
+#~ msgid ""
+#~ "This corn is the base of the fine cornflour, that every atlantian baker "
+#~ "needs for a good bread."
+#~ msgstr ""
+#~ "Кукурудза є основою кукурудзяної муки, яка необхідна для смачного хліба "
+#~ "Атлантів."
+
+#~ msgid "These shields are used by the best soldiers of the Atlanteans."
+#~ msgstr "Ці щити використовуються кращими солдатами Атлантів."
+
+#~ msgid "This is an advanced trident for more experienced soldiers."
+#~ msgstr "Покращений тризуб для більш досвідчених солдат."
+
+#~ msgid ""
+#~ "These transparent quartz' are used for some exclusive buildings and tools."
+#~ msgstr ""
+#~ "Прозорий кварц використовується для деяких особливих будівель та "
+#~ "інструментів."
+
+#~ msgid "This bow is used by the atlantian hunter."
+#~ msgstr "Лук використовується мисливчем атлантів."
+
+#~ msgid ""
+#~ "This hook pole is used by the smoker to hang up all the meat and fish to the "
+#~ "top of the smoke-house. It is created by the toolsmith."
+#~ msgstr ""
+#~ "Багор використовується коптильником, щоб повісити все м'ясо і рибу в "
+#~ "коптильні. Виготовляється в кузні."
+
+#~ msgid "This is red iron ore."
+#~ msgstr "Це червона залізна руда."
+
+#~ msgid ""
+#~ "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is "
+#~ "a common way to make it eatable."
+#~ msgstr ""
+#~ "Це копчене м'ясо - Атланти не люблять сире м'ясо, коптіння є найбільш "
+#~ "поширеним способом зробити м'ясо смачним."
+
+#~ msgid ""
+#~ "This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
+#~ "common way to make it eatable."
+#~ msgstr ""
+#~ "Це копчена риба - Атланти не люблять сиру рибу, коптіння є найбільш "
+#~ "поширеним способом зробити рибу смачною."
+
+#~ msgid "This is the medium trident - used by advanced soldiers."
+#~ msgstr "Це середній тризуб - використовують передові солдати."
+
+#~ msgid ""
+#~ "This wonderful diamonds are used for some exclusive buildings and tools."
+#~ msgstr ""
+#~ "Ці красиві алмази використовуються для особливих будівель та інструментів."
+
+#~ msgid "This yarn is produced by spiders, which are bred on spiderfarms."
+#~ msgstr ""
+#~ "Ця паутина виготовляється павуками, яких розводять на паукових фермах."
+
+#~ msgid "This steel shield is used by experienced soldiers."
+#~ msgstr "Це сталевий щит, який використовують досвідчені солдати."
+
+#~ msgid ""
+#~ "This tasty bread is made out of corn- and blackrootflour and is one part of "
+#~ "miners meal."
+#~ msgstr ""
+#~ "Цей смачний хліб випікається з кукурудзяної муки та муки з чорного коріння, "
+#~ "потрібен для харчування шахтарів."
+
+#~ msgid ""
+#~ "This is the most dangerous weapon of the atlantian military. Only the best "
+#~ "of the best soldiers may use it."
+#~ msgstr ""
+#~ "Це найнебезпечніша зброя Атлантів. Тільки кращі з кращих солдат можуть "
+#~ "використовувати її."
+
+#~ msgid "This yarn, made of gold, is used for weaving exclusive cloth."
+#~ msgstr ""
+#~ "Ця пряжа, виготовлена з золота, використовується для плетіння особливих "
+#~ "тканин."
+
+#~ msgid "This is the yellow gold ore."
+#~ msgstr "Жовта золота руда."
+
+#~ msgid "This is the basic weapon for atlantian soldiers."
+#~ msgstr "Це основна зброя солдат атлантів."
+
+#~ msgid ""
+#~ "Trunks are the base for planks, which are used in nearly every building of "
+#~ "the Atlanteans."
+#~ msgstr ""
+#~ "Колоди використовуються для виготовлення доски, які використовуються майже у "
+#~ "всіх будівлях Атлантів."
+
+#~ msgid ""
+#~ "To make the fine atlantian steel a hot fire is needed. But a fire of wood "
+#~ "isn't hot enough -this coal brings the needed heat."
+#~ msgstr ""
+#~ "для виготовлення сталі потрібне гаряче полум'я. Дерево не може дати стільки "
+#~ "тепла, тому використовується вугілля."
+
+#~ msgid ""
+#~ "Water is the most essential essence for life! This water is used in many "
+#~ "places, for example to make bread."
+#~ msgstr ""
+#~ "Без води нема життя! Вода використовується в багатьох місцях, наприклад, для "
+#~ "випікання смачного хліба."
+
+#~ msgid "Weapons and Tools are made of iron."
+#~ msgstr "Зброя та інструменти виготовляються із заліза"

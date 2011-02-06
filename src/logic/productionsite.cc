@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,19 +66,14 @@ ProductionSite_Descr::ProductionSite_Descr
 		try {
 			if (Ware_Index idx = tribe().ware_index(op->get_string())) {
 				if (m_output_ware_types.count(idx))
-					throw wexception
-						(_("this ware type has already been declared as an output"));
+					throw wexception(_("this ware type has already been declared as an output"));
 				m_output_ware_types.insert(idx);
 			} else if ((idx = tribe().worker_index(op->get_string()))) {
 				if (m_output_worker_types.count(idx))
-					throw wexception
-						(_
-						 	("this worker type has already been declared as an "
-						 	 "output"));
+					throw wexception(_("this worker type has already been declared as an output"));
 				m_output_worker_types.insert(idx);
 			} else
-				throw wexception
-					("tribe does not define a ware or worker type with this name");
+				throw wexception("tribe does not define a ware or worker type with this name");
 		} catch (_wexception const & e) {
 			throw wexception("output \"%s\": %s", op->get_string(), e.what());
 		}
@@ -98,38 +93,29 @@ ProductionSite_Descr::ProductionSite_Descr
 					throw wexception
 						("tribe does not define a ware type with this name");
 			} catch (_wexception const & e) {
-				throw wexception
-					("input \"%s=%s\": %s",
-					 val->get_name(), val->get_string(), e.what());
+				throw wexception("input \"%s=%s\": %s", val->get_name(), val->get_string(), e.what());
 			}
 
 	// Are we only a production site?
 	// If not, we might not have a worker
-	if
-		(Section * const working_positions_s =
-		 	prof.get_section("working positions"))
-		while
-			(Section::Value const * const v = working_positions_s->get_next_val())
+	if (Section * const working_positions_s = prof.get_section("working positions"))
+		while (Section::Value const * const v = working_positions_s->get_next_val())
 			try {
 				if (Ware_Index const woi = tribe().worker_index(v->get_name())) {
 					container_iterate_const(Ware_Types, working_positions(), i)
 						if (i.current->first == woi)
 							throw wexception("duplicated");
-					m_working_positions.push_back
-						(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
+					m_working_positions.push_back(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
 				} else
 					throw wexception("invalid");
 			} catch (_wexception const & e) {
-				throw wexception
-					("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
+				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
 	if (working_positions().empty() and not global_s.has_val("max_soldiers"))
 		throw wexception("no working/soldier positions");
 
 	// Get programs
-	if
-		(Section * const programs_s =
-		 	prof.get_section("programs"))
+	if (Section * const programs_s = prof.get_section("programs"))
 	while (Section::Value const * const v = programs_s->get_next_val()) {
 		std::string program_name = v->get_name();
 		std::transform
@@ -269,6 +255,34 @@ std::string ProductionSite::get_statistics_string()
 
 	return m_statistics_buffer;
 }
+
+/**
+ * Detect if the workers are experienced enough for an upgrade
+ * @param idx Index of the enhanchement
+ */
+bool ProductionSite::has_workers(Building_Index targetSite, Game & game)
+{
+	// bld holds the description of the building we want to have
+	if (upcast(ProductionSite_Descr const, bld, tribe().get_building_descr(targetSite))) {
+		// if he has workers
+		if (bld->nr_working_positions()) {
+			Ware_Index need = bld->working_positions()[0].first;
+			for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
+				if (!working_positions()[i].worker) {
+					return false; // no one is in this house
+				} else {
+					Ware_Index have = working_positions()[i].worker->worker_index();
+					if (tribe().get_worker_descr(have)->can_act_as(need)) {
+						return true; // he found a lead worker
+					}
+				}
+			}
+			return false;
+		}
+		return true;
+	} else return true;
+}
+
 
 
 WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
@@ -490,7 +504,7 @@ Request & ProductionSite::request_worker(Ware_Index const wareid) {
 void ProductionSite::request_worker_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 Ware_Index,
+	 Ware_Index              widx,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
@@ -499,13 +513,56 @@ void ProductionSite::request_worker_callback
 	assert(w);
 	assert(w->get_location(game) == &psite);
 
-	for (Working_Position * wp = psite.m_working_positions;; ++wp)
-		//  Assume that rq must be in worker_requests.
+	// If there is more than one working position, it's possible, that different level workers are
+	// requested and therefor possible, that a higher qualified worker answers a request for a lower
+	// leveled worker, although a worker with equal level (as the arrived worker has) is needed as well.
+	// Therefor, we first check whether the worker exactly fits the requested one. If yes, we place the
+	// worker and everything is fine, else we shuffle through the working positions, whether one of them
+	// needs a worker like the one just arrived. That way it is of course still possible, that the worker is
+	// placed on the slot that originally requested the arrived worker.
+	bool worker_placed = false;
+	Ware_Index     idx = widx;
+	for (Working_Position * wp = psite.m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
-			delete &rq;
-			*wp = Working_Position(0, w);
+			if (wp->worker_request->get_index() == idx) {
+				// Place worker
+				delete &rq;
+				*wp = Working_Position(0, w);
+				worker_placed = true;
+			} else {
+				// Set new request for this slot
+				Ware_Index workerid = wp->worker_request->get_index();
+				delete &rq;
+				wp->worker_request = &psite.request_worker(workerid);
+			}
 			break;
 		}
+	}
+	while (!worker_placed) {
+		uint8_t pos = 0;
+		for (Working_Position * wp = psite.m_working_positions;; ++wp) {
+			// Find a fitting slot
+			if ((wp->worker_request) && !worker_placed)
+				if (wp->worker_request->get_index() == idx) {
+					delete wp->worker_request;
+					*wp = Working_Position(0, w);
+					worker_placed = true;
+				}
+			pos++;
+		}
+		// Find the next smaller version of this worker
+		Ware_Index nuwo    = psite.tribe().get_nrworkers();
+		Ware_Index current = Ware_Index(static_cast<size_t>(0));
+		for (; current < nuwo; ++nuwo) {
+			Worker_Descr const * worker = psite.tribe().get_worker_descr(current);
+			if (worker->becomes() == idx) {
+				idx = current;
+				break;
+			}
+		}
+		if (current == nuwo)
+			throw wexception("Something went wrong! No fitting place for worker found!");
+	}
 
 	// It's always the first worker doing building work,
 	// the others only idle. Still, we need to wake up the

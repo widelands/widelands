@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
+#include "game_io/game_loader.h"
+#include "game_io/game_preload_data_packet.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "logic/game.h"
 #include "wui/game_tips.h"
@@ -193,7 +195,10 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			 ||
 			 settings().players.at(number).state == PlayerSettings::stateComputer
 			 ||
-			 settings().players.at(number).state == PlayerSettings::stateShared)
+			 settings().players.at(number).state == PlayerSettings::stateShared
+			 ||
+			 settings().players.at(number).state == PlayerSettings::stateOpen // For savegame loading
+			)
 			h->setPlayerTribe(number, tribe);
 	}
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
@@ -674,6 +679,15 @@ void NetHost::run(bool const autorun)
 		game.set_game_controller(this);
 		Interactive_GameBase * igb;
 		uint8_t pn = d->settings.playernum + 1;
+
+		if (d->settings.savegame) {
+			// Read and broadcast original win condition
+			Widelands::Game_Loader gl(d->settings.mapfilename, game);
+			Widelands::Game_Preload_Data_Packet gpdp;
+			gl.preload_game(gpdp);
+
+			setWinCondition(gpdp.get_win_condition());
+		}
 		if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
 			igb =
 				new Interactive_Player
@@ -1071,6 +1085,10 @@ void NetHost::setMap
 		d->settings.players.size();
 
 	SendPacket s;
+
+	// Care about the host
+	if (static_cast<int32_t>(maxplayers) <= d->settings.playernum)
+		setPlayerNumber(UserSettings::none());
 
 	while (oldplayers > maxplayers) {
 		--oldplayers;

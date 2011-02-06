@@ -20,6 +20,7 @@
 #include "progresswindow.h"
 
 #include "constants.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
@@ -143,9 +144,10 @@ void ProgressWindow::step(const std::string & description) {
 	draw_background(rt, xres, yres);
 
 	rt.fill_rect(m_label_rectangle, PROGRESS_FONT_COLOR_BG);
-	UI::g_fh->draw_string
-		(rt, UI_FONT_SMALL, PROGRESS_FONT_COLOR,
-		 m_label_center, description, Align_Center);
+
+	UI::TextStyle ts(UI::TextStyle::ui_small());
+	ts.fg = PROGRESS_FONT_COLOR_FG;
+	UI::g_fh->draw_text(rt, ts, m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);
 
 	update(true);

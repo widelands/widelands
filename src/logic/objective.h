@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2008, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,10 @@ struct Objective : public Named {
 	const std::string & descr() const throw ()    {return m_descr;}
 	bool visible() const throw () {return m_visible;}
 	bool done() const throw () {return m_done;}
-	void set_descname(std::string const & new_name)  {m_descname = new_name;}
+	void set_descname(std::string const & new_name) {
+		m_descname = new_name;
+		Named::set_name(new_name);
+	}
 	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
 	void set_visible(const bool t) throw ()    {m_visible = t;}
 	void set_done(bool t) {m_done = t;}

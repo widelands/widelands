@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,10 +107,22 @@ void Multiline_Textarea::set_scrollpos(int32_t const pixels)
 /**
  * Change the scroll mode. This will not change the current scroll position;
  * it only affects the behaviour of set_text().
-*/
+ */
 void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 {
 	m_scrollmode = mode;
+}
+
+
+/// Take care about scrollbar and call parents set_size() afterwards
+void Multiline_Textarea::set_size(const uint32_t nw, const uint32_t nh)
+{
+	// Take care about the scrollbar
+	m_scrollbar.set_pos(Point(nw - scrollbar_w(), 0));
+	m_scrollbar.set_size(scrollbar_w(), nh);
+
+	// Now call parent
+	Panel::set_size(nw, nh);
 }
 
 

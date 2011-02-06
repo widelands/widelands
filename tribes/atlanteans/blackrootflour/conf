@@ -1,4 +1,6 @@
-help=_Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread.
+help=_Blackroot Flour is produced in mills out of blackroots. It is used in bakeries to make a tasty bread.
+
+
 preciousness=2
 
 [idle]

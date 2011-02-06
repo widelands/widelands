@@ -1,0 +1,8 @@
+[global]
+packet_version="2"
+
+[player_1]
+name="Dummy player"
+tribe="barbarians"
+ai=
+closeable="false"

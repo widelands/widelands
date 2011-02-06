@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-04 15:52+0000\n"
-"PO-Revision-Date: 2010-11-06 23:03+0000\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"PO-Revision-Date: 2010-12-05 21:53+0000\n"
 "Last-Translator: Almufadado <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-08 05:07+0000\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -347,7 +347,6 @@ msgstr ""
 "Menagem, para termos mais alcance visual sobre a área à volta do nosso "
 "Quartel-general e assim protegermos o nosso povo de ataques surpresa.\" "
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:111
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
 "* As soon as the blacksmith reaches his next level (master blacksmith) "
@@ -435,6 +434,17 @@ msgstr ""
 "* Destrói todas as fortificações dos dois irmãos do Thron para libertar o "
 "Circulo-do-trono."
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:111
+msgid ""
+"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
+"reaches his next level (master blacksmith) - even to a war mill and build up "
+"another metalworks to ensure the production of tools."
+msgstr ""
+"* Melhora o edifício do Ferramenteiro para Fábrica de Machados assim que o "
+"Ferreiro alcance o nível seguinte (Mestre Ferreiro). ou até Fábrica de "
+"Guerra. Constrói outro Ferramenteiro para assegurar a produção de "
+"ferramentas."
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
 msgid ""
@@ -502,6 +512,10 @@ msgstr ""
 "diferença que não pode ser defendido por guerreiros. É muito aconselhável "
 "construir um Armazém quanto o teu território estiver a crescer e o caminhos "
 "para o Quartel-general se tornarem cada vez mais longos."
+
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 - This Land is our Land"
+msgstr "03 - Esta é a nossa terra"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -667,12 +681,11 @@ msgstr "A história prossegue"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
-"Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
-"handling of military and training site buildings and will finally introduce "
-"fighting."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Terceira Missão da Campanha Tutorial dos Bárbaros. Este tutorial explica a "
-"gestão e treino militar e irá finalmente introduzir as batalhas."
+"Este tutorial explica a gestão e treino militar e ainda fazer a introdução "
+"às batalhas."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -695,22 +708,34 @@ msgstr "Thron diz:"
 msgid "Tracks"
 msgstr "Trilhos"
 
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "Tutorial3 - This land is our land"
-msgstr "Tutorial3 - Esta terra é a nossa terra"
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
 msgstr "O Inverno aproxima-se"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:352
 msgid ""
-"You have completed this mission. You may continue playing if you wish, "
-"otherwise move on to the next mission."
+"You have completed the last mission of the barbarian tutorial campaign. You "
+"may continue playing if you wish, otherwise move on to the next campaign."
 msgstr ""
-"Concluíste esta missão. Se quiseres podes continuar a jogar ou sair e passar "
-"à próxima missão."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
 msgstr "O teu Leal Companheiro"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Tutorial3 - Esta terra é a nossa terra"
+
+#~ msgid ""
+#~ "You have completed this mission. You may continue playing if you wish, "
+#~ "otherwise move on to the next mission."
+#~ msgstr ""
+#~ "Concluíste esta missão. Se quiseres podes continuar a jogar ou sair e passar "
+#~ "à próxima missão."
+
+#~ msgid ""
+#~ "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the "
+#~ "handling of military and training site buildings and will finally introduce "
+#~ "fighting."
+#~ msgstr ""
+#~ "Terceira Missão da Campanha Tutorial dos Bárbaros. Este tutorial explica a "
+#~ "gestão e treino militar e irá finalmente introduzir as batalhas."

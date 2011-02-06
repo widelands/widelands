@@ -21,6 +21,7 @@
 
 #include "mouse_constants.h"
 
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
@@ -393,17 +394,13 @@ void EditBox::draw(RenderTarget & odst)
 
 	pos.x += m->scrolloffset;
 
-	UI::g_fh->draw_string
+	UI::g_fh->draw_text
 		(dst,
-		 m->fontname, m->fontsize, m->fontcolor, UI_FONT_CLR_BG,
+		 TextStyle::makebold(Font::get(m->fontname, m->fontsize), m->fontcolor),
 		 pos,
 		 m->text,
 		 align(),
-		 std::numeric_limits<uint32_t>::max(),
-		 Widget_Cache_None,
-		 0,
-		 has_focus() ? static_cast<int32_t>(m->caret) :
-		 std::numeric_limits<uint32_t>::max());
+		 has_focus() ? static_cast<int32_t>(m->caret) : std::numeric_limits<uint32_t>::max());
 }
 
 /**

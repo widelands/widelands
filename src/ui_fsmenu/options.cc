@@ -39,196 +39,194 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	Fullscreen_Menu_Base("optionsmenu.jpg"),
 
 // Values for alignment and size
-	m_vbutw(m_yres * 333 / 10000),
-	m_butw (m_xres / 4),
-	m_buth (m_yres * 9 / 200),
-	m_fs   (fs_small()),
-	m_fn   (ui_fn()),
+	m_vbutw(get_h() * 333 / 10000),
+	m_butw (get_w() / 4),
+	m_buth (get_h() * 9 / 200),
 
 // Buttons
 	m_advanced_options
 		(this, "advanced_options",
-		 m_xres * 9 / 80, m_yres * 19 / 20, m_butw, m_buth,
+		 get_w() * 9 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind(&Fullscreen_Menu_Options::advanced_options, boost::ref(*this)),
-		 _("Advanced Options"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Advanced Options"), std::string(), true, false),
 	m_cancel
 		(this, "cancel",
-		 m_xres * 51 / 80, m_yres * 19 / 20, m_butw, m_buth,
+		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_cancel)),
-		 _("Cancel"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
-		 m_xres * 3 / 8, m_yres * 19 / 20, m_butw, m_buth,
+		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_ok)),
-		 _("Apply"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
 	m_sb_maxfps
 		(this,
-		 m_xres / 2, m_yres * 3833 / 10000, m_xres / 5, m_vbutw,
+		 get_w() / 2, get_h() * 3833 / 10000, get_w() / 5, m_vbutw,
 		 opt.maxfps, 0, 100, "",
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_sb_autosave
 		(this,
-		 m_xres * 6767 / 10000, m_yres * 8167 / 10000, m_xres / 4, m_vbutw,
+		 get_w() * 6767 / 10000, get_h() * 8167 / 10000, get_w() / 4, m_vbutw,
 		 opt.autosave / 60, 0, 100, _("min."),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
 
 	m_sb_remove_replays
 		(this,
-		 m_xres * 6767 / 10000, m_yres * 8631 / 10000, m_xres / 4, m_vbutw,
+		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
 		 opt.remove_replays, 0, 365, _("days"),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
 
 // Title
 	m_title
 		(this,
-		 m_xres / 2, m_yres / 40,
+		 get_w() / 2, get_h() / 40,
 		 _("General Options"), UI::Align_HCenter),
 
 // First options block 'general options'
-	m_fullscreen (this, Point(m_xres * 3563 / 10000, m_yres * 1667 / 10000)),
+	m_fullscreen (this, Point(get_w() * 3563 / 10000, get_h() * 1667 / 10000)),
 	m_label_fullscreen
 		(this,
-		 m_xres * 1969 / 5000, m_yres * 1833 / 10000,
+		 get_w() * 1969 / 5000, get_h() * 1833 / 10000,
 		 _("Fullscreen"), UI::Align_VCenter),
 
-	m_inputgrab (this, Point(m_xres * 3563 / 10000, m_yres * 2167 / 10000)),
+	m_inputgrab (this, Point(get_w() * 3563 / 10000, get_h() * 2167 / 10000)),
 	m_label_inputgrab
 		(this,
-		 m_xres * 1969 / 5000, m_yres * 2333 / 10000,
+		 get_w() * 1969 / 5000, get_h() * 2333 / 10000,
 		 _("Grab Input"), UI::Align_VCenter),
 
-	m_music (this, Point(m_xres * 3563 / 10000, m_yres * 2667 / 10000)),
+	m_music (this, Point(get_w() * 3563 / 10000, get_h() * 2667 / 10000)),
 	m_label_music
 		(this,
-		 m_xres * 1969 / 5000, m_yres * 2833 / 10000,
+		 get_w() * 1969 / 5000, get_h() * 2833 / 10000,
 		 _("Enable Music"), UI::Align_VCenter),
 
-	m_fx (this, Point(m_xres * 3563 / 10000, m_yres * 3167 / 10000)),
+	m_fx (this, Point(get_w() * 3563 / 10000, get_h() * 3167 / 10000)),
 	m_label_fx
 		(this,
-		 m_xres * 1969 / 5000, m_yres * 3333 / 10000,
+		 get_w() * 1969 / 5000, get_h() * 3333 / 10000,
 		 _("Enable Sound"), UI::Align_VCenter),
 
 	m_label_maxfps
 		(this,
-		 m_xres * 3563 / 10000, m_yres * 2 / 5,
+		 get_w() * 3563 / 10000, get_h() * 2 / 5,
 		 _("Maximum FPS:"), UI::Align_VCenter),
 
 	m_reslist
 		(this,
-		 m_xres      / 10, m_yres * 1667 / 10000,
-		 m_xres * 19 / 80, m_yres * 2833 / 10000,
+		 get_w()      / 10, get_h() * 1667 / 10000,
+		 get_w() * 19 / 80, get_h() * 2833 / 10000,
 		 UI::Align_Left, true),
 	m_label_resolution
 		(this,
-		 m_xres * 1063 / 10000, m_yres * 1417 / 10000,
+		 get_w() * 1063 / 10000, get_h() * 1417 / 10000,
 		 _("In-game resolution"), UI::Align_VCenter),
 
 	m_label_language
 		(this,
-		 m_xres * 133 / 200, m_yres * 1417 / 10000,
+		 get_w() * 133 / 200, get_h() * 1417 / 10000,
 		 _("Language"), UI::Align_VCenter),
 	m_language_list
 		(this,
-		 m_xres * 6563 / 10000, m_yres * 1667 / 10000,
-		 m_xres *   21 /    80, m_yres * 2833 / 10000,
+		 get_w() * 6563 / 10000, get_h() * 1667 / 10000,
+		 get_w() *   21 /    80, get_h() * 2833 / 10000,
 		 UI::Align_Left, true),
 
 // Title 2
 	m_label_game_options
 		(this,
-		 m_xres / 2, m_yres / 2,
+		 get_w() / 2, get_h() / 2,
 		 _("In-game Options"), UI::Align_HCenter),
 
 // Second options block 'In-game options'
-	m_single_watchwin (this, Point(m_xres * 19 / 200, m_yres * 5833 / 10000)),
+	m_single_watchwin (this, Point(get_w() * 19 / 200, get_h() * 5833 / 10000)),
 	m_label_single_watchwin
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 3 / 5,
+		 get_w() * 1313 / 10000, get_h() * 3 / 5,
 		 _("Use single Watchwindow Mode"), UI::Align_VCenter),
 
-	m_auto_roadbuild_mode (this, Point(m_xres * 19 / 200, m_yres * 63 / 100)),
+	m_auto_roadbuild_mode (this, Point(get_w() * 19 / 200, get_h() * 63 / 100)),
 	m_label_auto_roadbuild_mode
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 6467 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
 		 _("Start roadbuilding after placing flag"), UI::Align_VCenter),
 
 	m_show_workarea_preview
-		(this, Point(m_xres * 19 / 200, m_yres * 6767 / 10000)),
+		(this, Point(get_w() * 19 / 200, get_h() * 6767 / 10000)),
 	m_label_show_workarea_preview
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 6933 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 6933 / 10000,
 		 _("Show buildings area preview"), UI::Align_VCenter),
 
 	m_snap_windows_only_when_overlapping
-		(this, Point(m_xres * 19 / 200, m_yres * 7233 / 10000)),
+		(this, Point(get_w() * 19 / 200, get_h() * 7233 / 10000)),
 	m_label_snap_windows_only_when_overlapping
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 37 / 50,
+		 get_w() * 1313 / 10000, get_h() * 37 / 50,
 		 _("Snap windows only when overlapping"), UI::Align_VCenter),
 
-	m_dock_windows_to_edges (this, Point(m_xres * 19 / 200, m_yres * 77 / 100)),
+	m_dock_windows_to_edges (this, Point(get_w() * 19 / 200, get_h() * 77 / 100)),
 	m_label_dock_windows_to_edges
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 7867 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 7867 / 10000,
 		 _("Dock windows to edges"), UI::Align_VCenter),
 
 	m_label_autosave
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 8333 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 8333 / 10000,
 		 _("Save game automatically every"), UI::Align_VCenter),
 	m_label_remove_replays
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 8799 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 8799 / 10000,
 		 _("Remove Replays older than:"), UI::Align_VCenter),
 
 	os(opt)
 {
+	m_advanced_options.set_font(font_small());
+	m_apply.set_font(font_small());
+	m_cancel.set_font(font_small());
+
 	m_sb_autosave     .add_replacement(0, _("Off"));
 
-	m_sb_maxfps       .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_sb_autosave     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_sb_remove_replays.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_fullscreen.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_sb_maxfps       .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_sb_autosave     .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_sb_remove_replays.set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_title           .set_textstyle(ts_big());
+	m_label_fullscreen.set_textstyle(ts_small());
 	m_fullscreen      .set_state(opt.fullscreen);
-	m_label_inputgrab .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_inputgrab .set_textstyle(ts_small());
 	m_inputgrab       .set_state(opt.inputgrab);
-	m_label_music     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_music     .set_textstyle(ts_small());
 	m_music           .set_state(opt.music);
 	m_music           .set_enabled(not g_sound_handler.m_lock_audio_disabling);
-	m_label_fx        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_fx        .set_textstyle(ts_small());
 	m_fx              .set_state(opt.fx);
 	m_fx              .set_enabled(not g_sound_handler.m_lock_audio_disabling);
-	m_label_maxfps    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_resolution.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_reslist         .set_font(m_fn, m_fs);
-	m_label_language  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_language_list   .set_font(m_fn, m_fs);
+	m_label_maxfps    .set_textstyle(ts_small());
+	m_label_resolution.set_textstyle(ts_small());
+	m_reslist         .set_font(ui_fn(), fs_small());
+	m_label_language  .set_textstyle(ts_small());
+	m_language_list   .set_font(ui_fn(), fs_small());
 
-	m_label_game_options             .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_single_watchwin          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_game_options             .set_textstyle(ts_big());
+	m_label_single_watchwin          .set_textstyle(ts_small());
 	m_single_watchwin                .set_state(opt.single_watchwin);
-	m_label_auto_roadbuild_mode      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_auto_roadbuild_mode      .set_textstyle(ts_small());
 	m_auto_roadbuild_mode            .set_state(opt.auto_roadbuild_mode);
-	m_label_show_workarea_preview    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_show_workarea_preview    .set_textstyle(ts_small());
 	m_show_workarea_preview          .set_state(opt.show_warea);
-	m_label_snap_windows_only_when_overlapping.set_font
-		(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_snap_windows_only_when_overlapping.set_textstyle(ts_small());
 	m_snap_windows_only_when_overlapping.set_state
 		(opt.snap_windows_only_when_overlapping);
-	m_label_dock_windows_to_edges    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_dock_windows_to_edges    .set_textstyle(ts_small());
 	m_dock_windows_to_edges          .set_state(opt.dock_windows_to_edges);
-	m_label_autosave                 .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_remove_replays           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_autosave                 .set_textstyle(ts_small());
+	m_label_remove_replays           .set_textstyle(ts_small());
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	// take a copy to not change real video info structure
@@ -376,48 +374,44 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	Fullscreen_Menu_Base("optionsmenu.jpg"),
 
 // Values for alignment and size
-	m_vbutw (m_yres * 333 / 10000),
-	m_butw  (m_xres / 4),
-	m_buth  (m_yres * 9 / 200),
-	m_fs    (fs_small()),
-	m_fn    (ui_fn()),
+	m_vbutw (get_h() * 333 / 10000),
+	m_butw  (get_w() / 4),
+	m_buth  (get_h() * 9 / 200),
 
 // Buttons
 	m_cancel
 		(this, "cancel",
-		 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
+		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind
 			(&Fullscreen_Menu_Advanced_Options::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(om_cancel)),
-		 _("Cancel"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
-		 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
+		 get_w() / 4,   get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind
 			(&Fullscreen_Menu_Advanced_Options::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(om_ok)),
-		 _("Apply"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
 	m_sb_speed
 		(this,
-		 m_xres * 18 / 25, m_yres * 63 / 100, m_xres / 4, m_vbutw,
+		 get_w() * 18 / 25, get_h() * 63 / 100, get_w() / 4, m_vbutw,
 		 opt.speed_of_new_game / 1000, 0, 100, _("x"),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_sb_dis_panel
 		(this,
-		 m_xres * 18 / 25, m_yres * 6768 / 10000, m_xres / 4, m_vbutw,
+		 get_w() * 18 / 25, get_h() * 6768 / 10000, get_w() / 4, m_vbutw,
 		 opt.panel_snap_distance, 0, 100, _("px."),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_sb_dis_border
 		(this,
-		 m_xres * 18 / 25, m_yres * 7235 / 10000, m_xres / 4, m_vbutw,
+		 get_w() * 18 / 25, get_h() * 7235 / 10000, get_w() / 4, m_vbutw,
 		 opt.border_snap_distance, 0, 100, _("px."),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 
@@ -425,91 +419,94 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 // Title
 	m_title
 		(this,
-		 m_xres / 2, m_yres / 40,
+		 get_w() / 2, get_h() / 40,
 		 _("Advanced Options"), UI::Align_HCenter),
 
 // First options block
 	m_ui_font_list
 		(this,
-		 m_xres / 10, m_yres * 1667 / 10000,
-		 m_xres /  4, m_yres * 2833 / 10000,
+		 get_w() / 10, get_h() * 1667 / 10000,
+		 get_w() /  4, get_h() * 2833 / 10000,
 		 UI::Align_Left, true),
 	m_label_ui_font
 		(this,
-		 m_xres * 1063 / 10000, m_yres * 1417 / 10000,
+		 get_w() * 1063 / 10000, get_h() * 1417 / 10000,
 		 _("Main menu font:"), UI::Align_VCenter),
 	m_message_sound
-		(this, Point(m_xres * 29 / 80, m_yres * 171 / 1000)),
+		(this, Point(get_w() * 29 / 80, get_h() * 171 / 1000)),
 	m_label_message_sound
 		(this,
-		 m_xres * 4 / 10, m_yres * 1883 / 10000,
+		 get_w() * 4 / 10, get_h() * 1883 / 10000,
 		 _("Play a sound at message arrival."),
 		 UI::Align_VCenter),
 
 // Second options block
-	m_nozip (this, Point(m_xres * 19 / 200, m_yres * 5833 / 10000)),
+	m_nozip (this, Point(get_w() * 19 / 200, get_h() * 5833 / 10000)),
 	m_label_nozip
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 3 / 5,
+		 get_w() * 1313 / 10000, get_h() * 3 / 5,
 		 _("Do not zip widelands data files (maps, replays and savegames)."),
 		 UI::Align_VCenter),
 	m_label_speed
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 6467 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
 		 _("Speed of a new game:"), UI::Align_VCenter),
 	m_label_snap_dis_panel
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 6933 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 6933 / 10000,
 		 _("Distance for windows to snap to other panels:"), UI::Align_VCenter),
 	m_label_snap_dis_border
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 37 / 50,
+		 get_w() * 1313 / 10000, get_h() * 37 / 50,
 		 _("Distance for windows to snap to borders:"), UI::Align_VCenter),
 
-	m_remove_syncstreams (this, Point(m_xres * 19 / 200, m_yres * 7715 / 10000)),
+	m_remove_syncstreams (this, Point(get_w() * 19 / 200, get_h() * 7715 / 10000)),
 	m_label_remove_syncstreams
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 7865 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 7865 / 10000,
 		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
 
-	m_opengl (this, Point(m_xres * 19 / 200, m_yres * 8180 / 10000)),
+	m_opengl (this, Point(get_w() * 19 / 200, get_h() * 8180 / 10000)),
 	m_label_opengl
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 8330 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,
 		 _("OpenGL rendering *Highly experimental!*"), UI::Align_VCenter),
-	m_transparent_chat (this, Point(m_xres * 19 / 200, m_yres * 8645 / 10000)),
+	m_transparent_chat (this, Point(get_w() * 19 / 200, get_h() * 8645 / 10000)),
 	m_label_transparent_chat
 		(this,
-		 m_xres * 1313 / 10000, m_yres * 8795 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 8795 / 10000,
 		 _("Show in game chat with transparent background"), UI::Align_VCenter),
 
 	os(opt)
 {
-	m_title                .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_message_sound  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_cancel.set_font(font_small());
+	m_apply.set_font(font_small());
+
+	m_title                .set_textstyle(ts_big());
+	m_label_message_sound  .set_textstyle(ts_small());
 	m_message_sound        .set_state(opt.message_sound);
-	m_label_nozip          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_nozip          .set_textstyle(ts_small());
 	m_nozip                .set_state(opt.nozip);
-	m_label_speed          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_snap_dis_border.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_snap_dis_panel .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_remove_syncstreams.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_speed          .set_textstyle(ts_small());
+	m_label_snap_dis_border.set_textstyle(ts_small());
+	m_label_snap_dis_panel .set_textstyle(ts_small());
+	m_label_remove_syncstreams.set_textstyle(ts_small());
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
-	m_label_opengl         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_opengl         .set_textstyle(ts_small());
 	m_opengl               .set_state(opt.opengl);
 #ifndef USE_OPENGL
 	m_opengl               .set_enabled(false);
 #endif
-	m_label_transparent_chat.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_transparent_chat.set_textstyle(ts_small());
 	m_transparent_chat     .set_state(opt.transparent_chat);
-	m_sb_speed             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_sb_dis_border        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_sb_dis_panel         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_sb_speed             .set_textstyle(ts_small());
+	m_sb_dis_border        .set_textstyle(ts_small());
+	m_sb_dis_panel         .set_textstyle(ts_small());
 
 	m_sb_speed.add_replacement(0, _("Pause"));
 
-	m_label_ui_font.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_ui_font_list .set_font(m_fn, m_fs);
+	m_label_ui_font.set_textstyle(ts_small());
+	m_ui_font_list .set_font(ui_fn(), fs_small());
 
 	// Fill the font list.
 	{ // For use of string ui_font take a look at fullscreen_menu_base.cc

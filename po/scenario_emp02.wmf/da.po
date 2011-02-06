@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
 "PO-Revision-Date: 2010-08-30 23:30+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:97
@@ -229,6 +229,10 @@ msgid ""
 "meat OR fish."
 msgstr ""
 
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid "02 - An Outpost for Exile"
+msgstr ""
+
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:230
 msgid "7 days later..."
 msgstr "7 dage senere..."
@@ -288,15 +292,12 @@ msgstr "Knus den barbariske stamme"
 msgid "Diary of Lutius"
 msgstr "Lutius dagbog"
 
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Imperium prøvespil2 - En forpost for eksil"
-
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
 "Finally the ship was repaired, so Lutius and his people again went on the "
-"quest to find a good place for a new beginning. Only few days later they "
-"land on a green, mediterranean island, looking like paradise."
+"quest to find a good place for a new beginning. Only a few days later they "
+"land on a green, mediterranean island, looking like paradise. Overjoyed, "
+"they set out to explore this new living space."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
@@ -366,3 +367,6 @@ msgstr "Sejr"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:116
 msgid "Wood for the colony"
 msgstr "Tømmer til lejren"
+
+#~ msgid "Empire Tutorial2 - An outpost for exile"
+#~ msgstr "Imperium prøvespil2 - En forpost for eksil"

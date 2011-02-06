@@ -1,4 +1,5 @@
-help=_This is an advanced trident for more experienced soldiers.
+help=_The long trident is the first trident in the training of soldiers. It is produced in the weapon smithy and used in the dungeon - together with food - to train soldiers from attack level 0 to level 1. 
+
 preciousness=1
 
 # A simple, but long trident.

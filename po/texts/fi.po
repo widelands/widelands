@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
 "PO-Revision-Date: 2010-08-30 22:36+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:49+0000\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -27,11 +27,11 @@ msgstr "(CTRL+) 0-9 Tallenna ja mene aikaisemmin tallennettuihin paikkoihin"
 msgid ", / .       Go to previous / next location"
 msgstr ", / .       Mene edelliseen / seuraavaan paikkaan"
 
-#: ../../txts/README:121
+#: ../../txts/README:123
 msgid "- how to reproduce the bug"
 msgstr "- kuinka ongelma voidaan toistaa, ja"
 
-#: ../../txts/README:125
+#: ../../txts/README:127
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
@@ -40,7 +40,7 @@ msgstr ""
 "mikäli virhe tapahtui pelin aikana. Pelien toisto -luku alla selittää tämän "
 "tarkemmin.  Viimeiseksi,"
 
-#: ../../txts/README:127
+#: ../../txts/README:129
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) session record if possible, unless "
 "the<br>bug is trivial to reproduce. In fact, it may be a good idea to always "
@@ -53,14 +53,14 @@ msgstr ""
 "että jokin virhe ilmaantuu. Sessiotallenteen luonti -osio alla antaa "
 "lisätietoa aiheesta."
 
-#: ../../txts/README:119
+#: ../../txts/README:121
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
 "- mitä Widelands-versiota käytit (so. build-numero tai käännös SVN:stä),"
 
-#: ../../txts/README:123
+#: ../../txts/README:125
 msgid "- which map you were playing"
 msgstr "- mitä karttaa pelasit. Lisäksi"
 
@@ -266,7 +266,7 @@ msgid ""
 "contact you by electronic and paper mail."
 msgstr ""
 
-#: ../../txts/README:155
+#: ../../txts/README:157
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
@@ -309,7 +309,7 @@ msgstr ""
 "tietenkin käyttäjäyhteisömme keskustelufoorumit odottavat sinua osoitteessa "
 "www.widelands.org."
 
-#: ../../txts/developers:135
+#: ../../txts/developers:139
 msgid "Barbarian"
 msgstr "Barbaarit"
 
@@ -337,7 +337,7 @@ msgstr "Ctrl+L   Lataa kartta"
 msgid "CTRL+S   Save Map"
 msgstr "Ctrl+S   Tallenna kartta"
 
-#: ../../txts/developers:132
+#: ../../txts/developers:136
 msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
@@ -361,23 +361,23 @@ msgid ""
 "allowed.<br>"
 msgstr ""
 
-#: ../../txts/README:143
+#: ../../txts/README:145
 msgid "Creating a Session Record</p>"
 msgstr "Sessiotallenteen luonti</p>"
 
-#: ../../txts/README:79
+#: ../../txts/README:81
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr ""
 
-#: ../../txts/developers:155
+#: ../../txts/developers:159
 msgid "Czech"
 msgstr "Tsekki"
 
-#: ../../txts/README:90
+#: ../../txts/README:92
 msgid "DELETE      Archive the current message"
 msgstr ""
 
-#: ../../txts/developers:162
+#: ../../txts/developers:166
 msgid "Dansk"
 msgstr "Tanska"
 
@@ -385,11 +385,11 @@ msgstr "Tanska"
 msgid "Development"
 msgstr "Kehitys"
 
-#: ../../txts/developers:297
+#: ../../txts/developers:301
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentaatio, Ohje ja Wiki"
 
-#: ../../txts/developers:168
+#: ../../txts/developers:172
 msgid "Dutch"
 msgstr "Hollanti"
 
@@ -401,7 +401,7 @@ msgstr "E        Näytä/piilota tapahtumavalikko"
 msgid "Elders"
 msgstr "Vanhimmat"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:145
 msgid "Empire"
 msgstr "Keisarikunta"
 
@@ -417,27 +417,27 @@ msgstr "F               Kokoruudun tila päälle/pois"
 msgid "F        Toggles fullscreen"
 msgstr "F        Koko ruudun tila käyttöön/pois"
 
-#: ../../txts/README:81
+#: ../../txts/README:83
 msgid "F11         Take a screenshot"
 msgstr "F11        Ota ruudunkaappaus"
 
-#: ../../txts/README:77
+#: ../../txts/README:79
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6          Näytä debug-konsoli (vain debug-versioissa)"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:179
 msgid "Finnish"
 msgstr "Suomi"
 
-#: ../../txts/developers:311
+#: ../../txts/developers:315
 msgid "Former elders"
 msgstr "Entiset vanhimmat"
 
-#: ../../txts/developers:181
+#: ../../txts/developers:185
 msgid "French"
 msgstr "Ranska"
 
-#: ../../txts/README:88
+#: ../../txts/README:90
 msgid "G           Go to location corresponding to current message"
 msgstr ""
 
@@ -451,7 +451,7 @@ msgid ""
 "and modification"
 msgstr ""
 
-#: ../../txts/developers:188
+#: ../../txts/developers:192
 msgid "Galician"
 msgstr "Galego"
 
@@ -459,16 +459,16 @@ msgstr "Galego"
 msgid "General game control"
 msgstr "Yleinen pelin hallinta"
 
-#: ../../txts/developers:193
+#: ../../txts/developers:197
 msgid "German"
 msgstr "Saksa"
 
-#: ../../txts/developers:70
+#: ../../txts/developers:73
 msgid "Graphicians"
 msgstr "Graafikot"
 
 #: ../../txts/developers:19
-#: ../../txts/developers:322
+#: ../../txts/developers:326
 msgid "Graphics"
 msgstr "Grafiikka"
 
@@ -476,7 +476,7 @@ msgstr "Grafiikka"
 msgid "H        Toggles main menu"
 msgstr "H        Näytä/piilota päävalikko"
 
-#: ../../txts/developers:205
+#: ../../txts/developers:209
 msgid "Hebrew"
 msgstr "Heprea"
 
@@ -498,11 +498,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home       Keskitä päänäkymä aloituspisteeseen"
 
 #: ../../txts/developers:24
-#: ../../txts/developers:315
+#: ../../txts/developers:319
 msgid "Homepage"
 msgstr "Kotisivu"
 
-#: ../../txts/developers:288
+#: ../../txts/developers:292
 msgid "Homepage Coders"
 msgstr "Kotisivun koodarit"
 
@@ -510,7 +510,7 @@ msgstr "Kotisivun koodarit"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Miten näitä ehtoja voi soveltaa uusiin ohjelmiin?"
 
-#: ../../txts/developers:210
+#: ../../txts/developers:214
 msgid "Hungarian"
 msgstr "Unkari"
 
@@ -555,7 +555,7 @@ msgstr ""
 "ohjelmasta vapaa, jolloin kuka tahansa voi näiden ehtojen mukaisesti muuttaa "
 "ja levittää sitä edelleen."
 
-#: ../../txts/README:99
+#: ../../txts/README:101
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
@@ -565,7 +565,7 @@ msgstr ""
 "verkko-ohjeet osoitteesta"
 
 # TODO: all url-endians should use %s to place the url; missing period in at least this message (in the middle)
-#: ../../txts/README:111
+#: ../../txts/README:113
 msgid ""
 "If you want to report bugs, please send your report to the mailing list, "
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
@@ -574,7 +574,7 @@ msgstr ""
 "Jos haluat tehdä raportin viasta, lähetä raportti postituslistallemme, "
 "<widelands-public@list.sourceforge.net>.<br>Voit liittyä listalle osoitteessa"
 
-#: ../../txts/README:86
+#: ../../txts/README:88
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
@@ -597,7 +597,7 @@ msgid ""
 "licensee cannot impose that choice."
 msgstr ""
 
-#: ../../txts/developers:215
+#: ../../txts/developers:219
 msgid "Italian"
 msgstr "italialainen"
 
@@ -631,7 +631,7 @@ msgstr ""
 "liikkuvia objekteja (eläimiä) tai maastotyyppejä eli tekstuureja Ctrl-"
 "napsautuksella."
 
-#: ../../txts/developers:255
+#: ../../txts/developers:259
 msgid "Linux Distributions"
 msgstr "Linux-jakelut"
 
@@ -643,7 +643,7 @@ msgstr "M               Näytä/piilota minikartta"
 msgid "M        Toggles minimap"
 msgstr "M        Näytä/piilota minikartta"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:122
 msgid "Maps and Missions"
 msgstr "Kartat ja missiot"
 
@@ -651,7 +651,7 @@ msgstr "Kartat ja missiot"
 msgid "Miners will only work if supplied with food."
 msgstr "Kaivostyöläiset tekevät töitä vain, kun saavat ruokaa."
 
-#: ../../txts/developers:98
+#: ../../txts/developers:101
 msgid "Musicians"
 msgstr "Muusikot"
 
@@ -659,7 +659,7 @@ msgstr "Muusikot"
 msgid "N               Toggle messages ('news')"
 msgstr ""
 
-#: ../../txts/developers:150
+#: ../../txts/developers:154
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -669,11 +669,11 @@ msgstr ""
 msgid "No warranty"
 msgstr ""
 
-#: ../../txts/developers:277
+#: ../../txts/developers:281
 msgid "Non Unix Distributions"
 msgstr "Muut kuin Unix-jakelut"
 
-#: ../../txts/README:158
+#: ../../txts/README:160
 msgid ""
 "Note that while recorded files are platform independent, they generally "
 "won't work across different versions of Widelands, because the user "
@@ -691,7 +691,7 @@ msgstr ""
 msgid "O               Toggle objectives display"
 msgstr "O               Näytä/piilota tavoitteet"
 
-#: ../../txts/README:152
+#: ../../txts/README:154
 msgid ""
 "On Windows, create a shortcut to the file widelands.exe (right-click on "
 "widelands.exe and choose Create Shortcut). Then edit the shortcut (right-"
@@ -707,15 +707,15 @@ msgstr ""
 "parametri sen loppuun näin: C:\\Ohjelmatiedostot\\widelands\\widelands.exe --"
 "record=tallenne.rec."
 
-#: ../../txts/README:95
+#: ../../txts/README:97
 msgid "Online Help"
 msgstr "Verkko-ohje"
 
-#: ../../txts/developers:340
+#: ../../txts/developers:344
 msgid "Other"
 msgstr "Muut"
 
-#: ../../txts/developers:266
+#: ../../txts/developers:270
 msgid "Other Unix Distributions"
 msgstr "Muut Unix-jakelut"
 
@@ -741,7 +741,11 @@ msgstr "PageDown    Vähennä pelinopeutta"
 msgid "PAGEUP         Increase gamespeed"
 msgstr "PageUp         Lisää pelinopeutta"
 
-#: ../../txts/developers:251
+#: ../../txts/README:76
+msgid "PAUSE         Pauses the game (only for local games)"
+msgstr ""
+
+#: ../../txts/developers:255
 msgid "Packagers"
 msgstr "Paketoijat"
 
@@ -749,13 +753,13 @@ msgstr "Paketoijat"
 msgid "Please look into our enduser manuals in our wiki-pages at:"
 msgstr "Katso myös loppukäyttäjien ohjekirjoja wikisivuillamme osoitteessa"
 
-#: ../../txts/README:116
+#: ../../txts/README:118
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 "Toivomme sinun littävän raporttiin riittävät taustatiedot virheen "
 "paikantamiseksi. Kerro meille:"
 
-#: ../../txts/developers:220
+#: ../../txts/developers:224
 msgid "Polish"
 msgstr "Puola"
 
@@ -775,7 +779,7 @@ msgstr "Ohje karttamuokkaimelle"
 msgid "README for the Widelands Editor"
 msgstr "Ohje Widelandsin karttamuokkaimelle"
 
-#: ../../txts/README:139
+#: ../../txts/README:141
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic code, so we "
 "ask you to attach replay files to all bug reports that you submit. The "
@@ -791,15 +795,15 @@ msgstr ""
 "replays-alihakemistoon."
 
 # TODO: if we can't start the paragraph, including the end tag is really an unnecessary error source
-#: ../../txts/README:132
+#: ../../txts/README:134
 msgid "Replays</p>"
 msgstr "Pelien toisto</p>"
 
-#: ../../txts/README:107
+#: ../../txts/README:109
 msgid "Reporting Bugs"
 msgstr "Vikaraportit"
 
-#: ../../txts/developers:228
+#: ../../txts/developers:232
 msgid "Russian"
 msgstr "Venäjä"
 
@@ -827,13 +831,13 @@ msgstr ""
 "Välilyönti toimii kuten pelissäkin, näyttäen tai piilottaen "
 "rakennusapusymbolit."
 
-#: ../../txts/developers:151
+#: ../../txts/developers:155
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 
-#: ../../txts/developers:233
+#: ../../txts/developers:237
 msgid "Slovak"
 msgstr "Slovakki"
 
@@ -848,15 +852,15 @@ msgstr ""
 "rakennus on puiden tai teiden ympäröimä, sen tuotanto lakkaa."
 
 #: ../../txts/developers:29
-#: ../../txts/developers:328
+#: ../../txts/developers:332
 msgid "Sound"
 msgstr "Ääni"
 
-#: ../../txts/developers:109
+#: ../../txts/developers:112
 msgid "Sound Effects"
 msgstr "Äänitehosteet"
 
-#: ../../txts/developers:238
+#: ../../txts/developers:242
 msgid "Spanish"
 msgstr "Espanja"
 
@@ -872,7 +876,7 @@ msgstr ""
 msgid "Status"
 msgstr "Tila"
 
-#: ../../txts/developers:243
+#: ../../txts/developers:247
 msgid "Swedish"
 msgstr "Ruotsi"
 
@@ -1018,7 +1022,7 @@ msgstr ""
 msgid "To close an open window, right click it."
 msgstr "Ikkuna sulkeutuu hiiren oikealla napilla."
 
-#: ../../txts/README:149
+#: ../../txts/README:151
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
@@ -1043,11 +1047,11 @@ msgstr ""
 "Ikkuna minimoituu/maksimoituu kun otsikkokenttää klikataan hiiren "
 "keskinapilla tai hiiren vasemmalla napilla samalla pitäen CTRL alhaalla."
 
-#: ../../txts/developers:333
+#: ../../txts/developers:337
 msgid "Translation"
 msgstr "Käännökset"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:151
 msgid "Translators"
 msgstr "Kääntäjät"
 
@@ -1073,7 +1077,7 @@ msgstr ""
 "Käytä 'Muuta talouden asetuksia' -valikkoa (napsauta lippua löytääksesi sen) "
 "asettaaksesi tietyn tuotteen tuotannolle tavoitemäärät."
 
-#: ../../txts/README:137
+#: ../../txts/README:139
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -1096,7 +1100,7 @@ msgstr ""
 "Versio 2, kesäkuuta 1991 (epäviralliset käännökset muille kielille ks. "
 "http://www.gnu.org/licenses/translations.html)<br></p></rt>"
 
-#: ../../txts/README:84
+#: ../../txts/README:86
 msgid ""
 "When finishing a road, if Ctrl is down, place flags along the road. Default "
 "is to place flags from end to start. If Shift is also down, place flags from "
@@ -1111,7 +1115,7 @@ msgstr ""
 msgid "Widelands Development Team"
 msgstr "Widelands-kehittäjät"
 
-#: ../../txts/README:146
+#: ../../txts/README:148
 msgid ""
 "Widelands can record all your keypresses and mouse movements to a file. It "
 "can then replay an entire session from starting the game to exiting it. This "
@@ -1155,7 +1159,7 @@ msgstr ""
 "kehittyäkseen. Sinun (kyllä, juuri sinun) apuasi tarvitaan Widelandsin "
 "parantamiseksi; erityisesti grafiikat kaipaavat kehittämistä."
 
-#: ../../txts/README:135
+#: ../../txts/README:137
 msgid ""
 "Widelands records every game you play in two files. One of these files has a "
 ".wrpl.wgf extension and contains an initial savegame. The other file has "

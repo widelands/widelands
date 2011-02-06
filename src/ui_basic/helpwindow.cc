@@ -23,6 +23,7 @@
 #include "i18n.h"
 #include "window.h"
 #include "button.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "wlapplication.h"
 
@@ -38,8 +39,7 @@ HelpWindow::HelpWindow
 	 uint32_t width, uint32_t height)
 	:
 	Window(parent, "help_window", 0, 0, 20, 20, (_("Help: ") + caption).c_str()),
-	textarea
-		(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
+	textarea(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
 	m_h1((format("%u") % (fontsize < 12 ? 18 : fontsize * 3 / 2)).str()),
 	m_h2((format("%u") % (fontsize < 12 ? 12 : fontsize)).str()),
 	m_p ((format("%u") % (fontsize < 12 ? 10  : fontsize * 5 / 6)).str()),
@@ -67,19 +67,16 @@ HelpWindow::HelpWindow
 	int32_t in_height = out_height - 60;
 
 	set_inner_size(in_width, in_height);
-	set_pos
-		(Point
-			((g_gr->get_xres() - out_width) / 2,
-			 (g_gr->get_yres() - out_height) / 2));
+	set_pos(Point((g_gr->get_xres() - out_width) / 2, (g_gr->get_yres() - out_height) / 2));
 
-	new Callback_Button
+	Button * btn = new Callback_Button
 		(this, "ok",
 		 in_width / 3, in_height - but_height * 3 / 2,
 		 in_width / 3, but_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind(&HelpWindow::pressedOk, boost::ref(*this)),
-		 _("OK"), std::string(), true, false,
-		 UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize));
+		 _("OK"), std::string(), true, false);
+	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
 }
@@ -129,13 +126,25 @@ void HelpWindow::add_block(std::string block) {
 	lastentry = BLOCK;
 }
 
+void HelpWindow::add_picture_li(std::string block, std::string picpath) {
+	m_text += "<rt image=";
+	m_text += picpath;
+	m_text += " image-align=left><p font-face=";
+	m_text += m_fn;
+	m_text += " font-size=";
+	m_text += m_p;
+	m_text += ">";
+	lastentry = BLOCK;
+	return add_block(block);
+}
+
 
 /**
  * Handle mouseclick.
  *
  * Clicking the right mouse button inside the window acts like pressing Ok.
  */
-bool HelpWindow::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
@@ -144,14 +153,20 @@ bool HelpWindow::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 	return true;
 }
 
-bool HelpWindow::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool HelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t)
 {
 	return true;
 }
 
 void HelpWindow::pressedOk()
 {
-	end_modal(0);
+	if (is_modal())
+		end_modal(0);
+	else {
+		// do not call die() here - could lead to broken pointers.
+		// the window should get deleted with the parent anyways.
+		set_visible(false);
+	}
 }
 
 }

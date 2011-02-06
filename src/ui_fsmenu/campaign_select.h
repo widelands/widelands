@@ -79,8 +79,6 @@ struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
 	void set_campaign(uint32_t);
 
 private:
-	uint32_t    m_xres;
-	uint32_t    m_yres;
 	uint32_t    m_butw;
 	uint32_t    m_buth;
 	uint32_t    m_fs;

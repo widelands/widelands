@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-25 09:43+0000\n"
-"PO-Revision-Date: 2010-10-18 20:47+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"PO-Revision-Date: 2010-11-21 10:39+0000\n"
+"Last-Translator: Siz <siz-asuka@hotmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-19 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:33+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -198,13 +198,10 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:293
 msgid ""
 " \"While this is true, we should consider it later, for now other obstacles "
-"are at hand. The miners will definately demand greater rations for working "
+"are at hand. The miners will definitely demand greater rations for working "
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
-" \"Aunque esto es cierto, debemos considerarlo más tarde, por ahora tenemos "
-"otros obstáculos. Los mineros necesitan mayores raciones para trabajar en la "
-"montaña con este frío, y suministrarlas no será fácil.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391
 msgid ""
@@ -407,6 +404,10 @@ msgstr ""
 "planicie - ¿por qué no usar el espacio que la madre naturaleza nos dio y "
 "construimos una granja? Yo\n"
 "a cambio disfrutaría de un pan de pita recién cocido...\""
+
+#: ../../campaigns/t02.wmf/elemental:7
+msgid "02 - A Place to call Home"
+msgstr "02 - Un lugar al que llamar Hogar"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
@@ -670,6 +671,12 @@ msgstr ""
 "utilizado en un\n"
 "edificio secundario - hay otros más adelante."
 
+#: ../../campaigns/t02.wmf/elemental:9
+msgid ""
+"In this scenario the higher production buildings, including mining and the "
+"military expansions will be introduced."
+msgstr ""
+
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
 msgstr "Khantrukh observa sobre las llanuras..."
@@ -741,16 +748,6 @@ msgstr "Provee a tus mineros de comida"
 msgid "Refine your mined resources"
 msgstr "Refina tus recursos minados"
 
-#: ../../campaigns/t02.wmf/elemental:9
-msgid ""
-"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
-"higher production buildings, including mining and the military expansions "
-"will be introduced."
-msgstr ""
-"Segunda misión de la Campaña Tutorial de los Bárbaros. En este tutorial se "
-"presentarán los edificios de alta producción incluyendo minas y expansiones "
-"militares."
-
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
 msgstr "Empieza a construir minas en la montaña"
@@ -814,10 +811,6 @@ msgstr "Thron sacude su cabeza..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:439
 msgid "Thron speaks..."
 msgstr "Thron habla..."
-
-#: ../../campaigns/t02.wmf/elemental:7
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutorial 2 - Un lugar al que llamar Hogar"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
@@ -1033,8 +1026,20 @@ msgstr "Tu compañero fiel"
 #~ msgid "OK"
 #~ msgstr "Aceptar"
 
+#~ msgid ""
+#~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
+#~ "higher production buildings, including mining and the military expansions "
+#~ "will be introduced."
+#~ msgstr ""
+#~ "Segunda misión de la Campaña Tutorial de los Bárbaros. En este tutorial se "
+#~ "presentarán los edificios de alta producción incluyendo minas y expansiones "
+#~ "militares."
+
 #~ msgid "Khantrukh joins the both of you..."
 #~ msgstr "Khantrukh se une a ambos..."
+
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Tutorial 2 - Un lugar al que llamar Hogar"
 
 #~ msgid ""
 #~ " \"The war goes on. More and more of our brothers and sisters flee the "
@@ -1067,3 +1072,13 @@ msgstr "Tu compañero fiel"
 #~ "faldas<br>Expandámonos al este. Hay una oportunidad para que los ancianos "
 #~ "sean útiles. Enviemos a aquellos que entienden la lengua de la piedra a "
 #~ "descifrar los secretos de la montaña.<br><br>-- NUEVO OBJETIVO --<br> "
+
+#~ msgid ""
+#~ " \"While this is true, we should consider it later, for now other obstacles "
+#~ "are at hand. The miners will definately demand greater rations for working "
+#~ "high up on the mountain in this bitter cold, and providing these supplies "
+#~ "may not be easy.\" "
+#~ msgstr ""
+#~ " \"Aunque esto es cierto, debemos considerarlo más tarde, por ahora tenemos "
+#~ "otros obstáculos. Los mineros necesitan mayores raciones para trabajar en la "
+#~ "montaña con este frío, y suministrarlas no será fácil.\" "

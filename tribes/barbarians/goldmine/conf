@@ -21,6 +21,7 @@ ration=6
 work=_Work
 
 [work]
+return=skipped when economy needs ration and not economy needs goldstone
 sleep=45000
 consume=ration
 animate=working 20000

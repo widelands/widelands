@@ -46,8 +46,6 @@ private:
 	uint32_t                                    m_butx;
 	uint32_t                                    m_butw;
 	uint32_t                                    m_buth;
-	uint32_t                                    m_fs;
-	std::string                                 m_fn;
 	std::string                                 wlcr;
 	UI::Callback_Button                     playtutorial;
 	UI::Callback_Button                     singleplayer;

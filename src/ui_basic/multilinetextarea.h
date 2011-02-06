@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,10 +31,6 @@ struct Scrollbar;
 /**
  * This defines an area, where a text can easily be printed.
  * The textarea transparently handles explicit line-breaks and word wrapping.
- *
- * Do not use it blindly for big texts: the font handler needs to re-break the
- * entire text whenever the textarea is drawn, this is a trade-off which greatly
- * simplifies this class.
  */
 struct Multiline_Textarea : public Panel {
 	enum ScrollMode {
@@ -57,6 +53,8 @@ struct Multiline_Textarea : public Panel {
 	void set_align(Align);
 	void set_scrollpos(int32_t pixels);
 	void set_scrollmode(ScrollMode mode);
+
+	void set_size(uint32_t nw, uint32_t nh);
 
 	uint32_t scrollbar_w() const throw () {return 24;}
 	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}

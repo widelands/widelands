@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,6 @@
 
 #include <cstring>
 #include <iostream>
-#include <boost/scoped_array.hpp>
 
 Graphic * g_gr;
 bool g_opengl;
@@ -604,6 +603,38 @@ PictureID Graphic::get_resized_picture
 		SDL_Rect dstrc = {destrect.x, destrect.y};
 		SDL_SetAlpha(zoomed, 0, 0);
 		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc);
+
+		Uint32 fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
+
+		if (destrect.x > 0) {
+			dstrc.x = 0;
+			dstrc.y = destrect.y;
+			dstrc.w = destrect.x;
+			dstrc.h = zoomed->h;
+			SDL_FillRect(placed, &dstrc, fillcolor);
+		}
+		if (destrect.x + zoomed->w < placed->w) {
+			dstrc.x = destrect.x + zoomed->w;
+			dstrc.y = destrect.y;
+			dstrc.w = placed->w - destrect.x - zoomed->w;
+			dstrc.h = zoomed->h;
+			SDL_FillRect(placed, &dstrc, fillcolor);
+		}
+		if (destrect.y > 0) {
+			dstrc.x = 0;
+			dstrc.y = 0;
+			dstrc.w = placed->w;
+			dstrc.h = destrect.y;
+			SDL_FillRect(placed, &dstrc, fillcolor);
+		}
+		if (destrect.y + zoomed->h < placed->h) {
+			dstrc.x = 0;
+			dstrc.y = destrect.y + zoomed->h;
+			dstrc.w = placed->w;
+			dstrc.h = placed->h - destrect.y - zoomed->h;
+			SDL_FillRect(placed, &dstrc, fillcolor);
+		}
+
 		SDL_FreeSurface(zoomed);
 		zoomed = placed;
 	}

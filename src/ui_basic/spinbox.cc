@@ -57,11 +57,6 @@ struct SpinBoxImpl {
 	/// Special names for specific Values
 	std::vector<IntValueTextReplacement> valrep;
 
-	/// Font variables
-	std::string fontname;
-	uint32_t    fontsize;
-	RGBColor    fontcolor;
-
 	/// The UI parts
 	Textarea * text;
 	Callback_Button * butPlus;
@@ -97,9 +92,6 @@ SpinBox::SpinBox
 
 	sbi->background = background;
 	sbi->align      = alignm;
-	sbi->fontname   = UI_FONT_NAME;
-	sbi->fontsize   = UI_FONT_SIZE_SMALL;
-	sbi->fontcolor  = UI_FONT_CLR_FG;
 
 	if (w < 20)
 		throw wexception("Not enough space to draw spinbox");
@@ -115,7 +107,6 @@ SpinBox::SpinBox
 
 	sbi->text = new UI::Textarea
 		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
-	sbi->text->set_font(sbi->fontname, sbi->fontsize, sbi->fontcolor);
 	sbi->butPlus =
 		new Callback_Button
 			(this, "+",
@@ -123,7 +114,7 @@ SpinBox::SpinBox
 			 sbi->background,
 			 boost::bind(&SpinBox::changeValue, boost::ref(*this), 1),
 			 "+", _("Increase the value"),
-			 true, false, sbi->fontname, sbi->fontsize);
+			 true, false);
 	sbi->butMinus =
 		new Callback_Button
 			(this, "-",
@@ -131,7 +122,7 @@ SpinBox::SpinBox
 			 sbi->background,
 			 boost::bind(&SpinBox::changeValue, boost::ref(*this), -1),
 			 "-", _("Decrease the value"),
-			 true, false, sbi->fontname, sbi->fontsize);
+			 true, false);
 	sbi->butPlus->set_repeating(true);
 	sbi->butMinus->set_repeating(true);
 	if (m_big) {
@@ -142,7 +133,7 @@ SpinBox::SpinBox
 				 sbi->background,
 				 boost::bind(&SpinBox::changeValue, boost::ref(*this), 10),
 				 "++", _("Increase the value by 10"),
-				 true, false, sbi->fontname, sbi->fontsize);
+				 true, false);
 		sbi->butTenMinus =
 			new Callback_Button
 				(this, "--",
@@ -150,10 +141,12 @@ SpinBox::SpinBox
 				 sbi->background,
 				 boost::bind(&SpinBox::changeValue, boost::ref(*this), -10),
 				 "--", _("Decrease the value by 10"),
-				 true, false, sbi->fontname, sbi->fontsize);
+				 true, false);
 		sbi->butTenPlus->set_repeating(true);
 		sbi->butTenMinus->set_repeating(true);
 	}
+
+	set_font(UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
 
 
@@ -269,19 +262,25 @@ void SpinBox::setAlign(Align alignm)
 
 /**
  * Sets the font of all UI elements
+ *
+ * @deprecated, see set_textstyle
  */
 void SpinBox::set_font(std::string const & name, int32_t size, RGBColor color)
 {
-	sbi->fontname = name;
-	sbi->fontsize = size;
-	sbi->fontcolor = color;
+	set_textstyle(TextStyle::makebold(Font::get(name, size), color));
+}
 
-	sbi->text->set_font(name, size, color);
-	sbi->butPlus->set_font(name, size);
-	sbi->butMinus->set_font(name, size);
+/**
+ * Sets the font and textstyle of all UI elements
+ */
+void SpinBox::set_textstyle(const TextStyle & textstyle)
+{
+	sbi->text->set_textstyle(textstyle);
+	sbi->butPlus->set_font(textstyle.font);
+	sbi->butMinus->set_font(textstyle.font);
 	if (m_big) {
-		sbi->butTenPlus->set_font(name, size);
-		sbi->butTenMinus->set_font(name, size);
+		sbi->butTenPlus->set_font(textstyle.font);
+		sbi->butTenMinus->set_font(textstyle.font);
 	}
 	update();
 }

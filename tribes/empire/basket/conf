@@ -1,4 +1,4 @@
-help=_This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith.
+help=_This basket is needed by the vinefarmer for harvesting the grapes. It is produced by the toolsmith.
 
 [idle]
 pics=idle.png

@@ -2,23 +2,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-09-03 20:16+0000\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
 "PO-Revision-Date: 2010-06-06 21:16+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-06 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-01-05 04:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../../campaigns/cconfig:24
-msgid "(Tutorial) Barbarians - The second Empire"
-msgstr "(Lektion) Barbarer - Det andra imperiet"
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr ""
 
-#: ../../campaigns/cconfig:84
-msgid "01 - From nemesis to genesis"
-msgstr "Från nemesis till genesis"
+#: ../../campaigns/cconfig:98
+msgid "01 - From Nemesis to Genesis"
+msgstr ""
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr ""
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr ""
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr ""
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -93,13 +109,21 @@ msgstr ""
 "sina fienders skatter på det uråldriga altaret, bygga ett ståtligt slott på "
 "dess plats och få gudarnas respekt och välsignelse."
 
-#: ../../campaigns/cconfig:36
-msgid "Atlanteans - the new rise"
-msgstr "Atlanterna - återuppståndelsen"
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
+msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
 msgstr "Atoll"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr ""
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -112,6 +136,10 @@ msgstr "Kometön"
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
 msgstr "Krater"
+
+#: ../../maps/Desert Tournament.wmf/elemental:7
+msgid "Desert Tournament"
+msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -129,21 +157,21 @@ msgstr ""
 "2: Snögubbar utmärker ytterligare vattentillgångar. Ledtråd 3: Varje berg "
 "innehåller endast ett slags tillgång."
 
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr ""
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr ""
+
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
 msgstr "Alvskogen"
 
-#: ../../campaigns/cconfig:30
-msgid "Empire - The months of exile"
-msgstr "Imperiet - Månaderna i exil"
-
-#: ../../campaigns/cconfig:74
-msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr "Imperiet Lektion1 - Malac' Mors stränder"
-
-#: ../../campaigns/cconfig:79
-msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Imperiet Lektion2 - En utpost för exil"
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
+msgstr ""
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -185,6 +213,13 @@ msgstr "De fyra slotten"
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
 msgstr "Fyra berg"
+
+#: ../../maps/Desert Tournament.wmf/elemental:9
+msgid ""
+"Four tribes struggle with their nearest neighbour to be the first to reach "
+"the mountain of gold that primises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -231,6 +266,12 @@ msgstr ""
 "Det sägs att även solen och månen måste leta sig igenom dessa bergstoppar. "
 "TIPS: Monoliter markerar malmfyndigheter. Bry dig inte om att skicka "
 "geologer någon annanstans."
+
+#: ../../maps/Swamp Monks.wmf/elemental:9
+msgid ""
+"It is said, that the old war monks, living in the even older swamps are the "
+"key to the control of the whole island."
+msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -302,6 +343,11 @@ msgstr ""
 msgid "Mystical Maze"
 msgstr "Mystisk labyrint"
 
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+msgid "Not yet implemented"
+msgstr ""
+
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
@@ -323,7 +369,7 @@ msgstr "Mötesplats"
 msgid "Riverlands"
 msgstr "Flodernas land"
 
-#: ../../campaigns/cconfig:33
+#: ../../campaigns/cconfig:38
 msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -336,10 +382,6 @@ msgid ""
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
 msgstr ""
-
-#: ../../campaigns/cconfig:39
-msgid "Some descriptive texts..."
-msgstr "Några beskrivande texter..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -370,6 +412,10 @@ msgstr ""
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Träskön"
+
+#: ../../maps/Swamp Monks.wmf/elemental:7
+msgid "Swamp Monks"
+msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -466,18 +512,6 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Tre krigare"
 
-#: ../../campaigns/cconfig:57
-msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Lektion1 - Ögon i mörkret"
-
-#: ../../campaigns/cconfig:62
-msgid "Tutorial2 - A Place to call Home"
-msgstr "Lektion2 - En plats att kalla Hemma"
-
-#: ../../campaigns/cconfig:67
-msgid "Tutorial3 - This land is our land"
-msgstr "Lektion3 - Det här landet är vårt"
-
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Glittrande vågor"
@@ -502,7 +536,7 @@ msgstr ""
 "Väl beskyddade i sina mäktiga fästningar smider fyra makthungriga "
 "krigsherrar sina planer för att dominera dessa markerna..."
 
-#: ../../campaigns/cconfig:27
+#: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -517,6 +551,15 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
+msgstr ""
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
 msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:9
@@ -572,6 +615,9 @@ msgstr ""
 "mäktig hemlighet. Den Gröna Platån, svår att komma till, men lätt att bli av "
 "med. Om du vill ha den, tag dig i akt för dom andra klanerna!"
 
+#~ msgid "(Tutorial) Barbarians - The second Empire"
+#~ msgstr "(Lektion) Barbarer - Det andra imperiet"
+
 #~ msgid ""
 #~ "When Chat’Karuth died, he was an old man, father to three strong and "
 #~ "ambitious sons and warlord to an army that could match any enemy willing to "
@@ -589,6 +635,12 @@ msgstr ""
 #~ "När Chat'Karuth dog, var han en gammal man, far till tre starka och "
 #~ "ambitiösa söner och krigsherre över en armé som kunde ..."
 
+#~ msgid "Empire - The months of exile"
+#~ msgstr "Imperiet - Månaderna i exil"
+
+#~ msgid "Tutorial1 - Eyes in the Dark"
+#~ msgstr "Lektion1 - Ögon i mörkret"
+
 #~ msgid ""
 #~ "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic "
 #~ "gameplay and control as well as basic production buildings (wood, stone, "
@@ -598,11 +650,17 @@ msgstr ""
 #~ "introduceras grundläggande spelsätt och kontroll såväl som grundläggande "
 #~ "producerande byggnader (trä, sten, etc)."
 
+#~ msgid "Tutorial2 - A Place to call Home"
+#~ msgstr "Lektion2 - En plats att kalla Hemma"
+
 #~ msgid ""
 #~ "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the "
 #~ "higher production buildings, including mining and the military expansions "
 #~ "will be introduced."
 #~ msgstr "Andra uppdraget i barbarernas lektionskampanj."
+
+#~ msgid "Empire Tutorial2 - An outpost for exile"
+#~ msgstr "Imperiet Lektion2 - En utpost för exil"
 
 #~ msgid ""
 #~ "Finally the ship was repaired, so Lutius and his people again went on the "
@@ -619,6 +677,12 @@ msgstr ""
 #~ msgstr ""
 #~ "Den skönhet som får dig att hålla andan i dessa smaragdmarker har lockat "
 #~ "många stammar till att"
+
+#~ msgid "Atlanteans - the new rise"
+#~ msgstr "Atlanterna - återuppståndelsen"
+
+#~ msgid "Some descriptive texts..."
+#~ msgstr "Några beskrivande texter..."
 
 #~ msgid ""
 #~ "Long after a meteor crashed into a couple of mountains life blossoms in the "
@@ -695,6 +759,9 @@ msgstr ""
 #~ "Det finns två stora frågor: Vem byggde denna ofantligt stora labyrint, och "
 #~ "vad kan man finna i den?"
 
+#~ msgid "01 - From nemesis to genesis"
+#~ msgstr "Från nemesis till genesis"
+
 #~ msgid ""
 #~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
 #~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
@@ -769,3 +836,9 @@ msgstr ""
 #~ "sin potentiella fiende. Det var deras misstag. En natt i mars attackerades "
 #~ "hans oförberedda armé av 100 av barbarernas fotfolk och blev skingrade. Det "
 #~ "var ren tur att han och en handfull soldater överlevde."
+
+#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
+#~ msgstr "Imperiet Lektion1 - Malac' Mors stränder"
+
+#~ msgid "Tutorial3 - This land is our land"
+#~ msgstr "Lektion3 - Det här landet är vårt"
