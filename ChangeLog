@@ -71,6 +71,7 @@
 - Added command line option to tell Widelands where to search for translations.
 - Improved some of the exisiting maps.
 - Improved the "user friendly" compile script and moved it to compile.sh
+- Fixed bug #536149: miner/master miner mixed up after enhancing to deep mine
 - Fixed bug #580073: Objectives menu update
 - Fixed bug #695735: Scrollbar damaged in multiline textboxes in (unique)
   windows in FS menu
