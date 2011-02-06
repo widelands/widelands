@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-12-03 13:15+0000\n"
-"Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"PO-Revision-Date: 2011-01-07 12:43+0000\n"
+"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:15+0000\n"
+"X-Launchpad-Export-Date: 2011-01-08 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "01 - Eyes in the Dark"
 msgstr "01 - Occhi nelle Tenebre"
 
-#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
 msgstr "01 - Dalla Nemesi alla Genesi"
 
@@ -131,6 +131,10 @@ msgstr "Atollo"
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
 msgstr "Barbari - Il Secondo Impero"
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr "Impegnativo. Introduce gli Atlanti"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -355,6 +359,11 @@ msgstr ""
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
 msgstr "Labirinto mistico"
+
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+msgid "Not yet implemented"
+msgstr "Non ancora implementato"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""

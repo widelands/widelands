@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-12-20 19:13+0100\n"
-"PO-Revision-Date: 2010-10-18 20:47+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-01-04 13:25+0100\n"
+"PO-Revision-Date: 2011-02-05 14:32+0000\n"
+"Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:21+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-06 04:46+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -357,7 +357,7 @@ msgstr "Widelands no ha sido capaz de conectar con el anfitrión."
 msgid "The address of the game server is invalid"
 msgstr "La dirección del servidor del juego no es válida."
 
-#: ../../src/wlapplication.cc:1814 ../../src/network/nethost.cc:1635
+#: ../../src/wlapplication.cc:1814 ../../src/network/nethost.cc:1639
 msgid "Player"
 msgstr "Jugador"
 
@@ -905,11 +905,11 @@ msgstr "Documentación para el comando de programa playFX"
 
 #: ../../src/writeHTML.cc:1387
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Documentación para constructo de comandos de programa"
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "constructo"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -1025,71 +1025,71 @@ msgstr ""
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1182
+#: ../../src/network/nethost.cc:1186
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "¡El anfitrión envió al jugador %s a la sala de espera!"
 
-#: ../../src/network/nethost.cc:1576
+#: ../../src/network/nethost.cc:1580
 #, c-format
 msgid "Computer%u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1660
+#: ../../src/network/nethost.cc:1664
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
 "AVISO: %s usa la versión: %s, mientras que el anfitrión utiliza la versión: "
 "%s"
 
-#: ../../src/network/nethost.cc:1719
+#: ../../src/network/nethost.cc:1723
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s se ha unido al juego"
 
-#: ../../src/network/nethost.cc:1729
+#: ../../src/network/nethost.cc:1733
 #, c-format
 msgid ""
 "This is a dedicated server send \"@%s /help\" to get a full list of "
 "available commands. \"@%s /start\" starts the server."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1759
+#: ../../src/network/nethost.cc:1763
 msgid "Client reports time to host that is running backwards."
 msgstr ""
 "El cliente informa de que el tiempo para comenzar está corriendo hacia atrás."
 
-#: ../../src/network/nethost.cc:1762
+#: ../../src/network/nethost.cc:1766
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr ""
 "La simulación del cliente se ejecuta por debajo del tiempo permitido por el "
 "anfitrión."
 
-#: ../../src/network/nethost.cc:1766
+#: ../../src/network/nethost.cc:1770
 msgid "Client did not submit sync report in time."
 msgstr "El cliente no ha enviado un informe de sincronización en el tiempo."
 
-#: ../../src/network/nethost.cc:1973
+#: ../../src/network/nethost.cc:1977
 msgid "Client and host have become desynchronized."
 msgstr "El cliente y el anfitrión se han desincronizado."
 
-#: ../../src/network/nethost.cc:2020
+#: ../../src/network/nethost.cc:2024
 msgid "The game has already started."
 msgstr "El juego ya ha comenzado."
 
-#: ../../src/network/nethost.cc:2038
+#: ../../src/network/nethost.cc:2042
 msgid "Connection to client lost."
 msgstr "Se ha perdido la conexión con el cliente."
 
-#: ../../src/network/nethost.cc:2052
+#: ../../src/network/nethost.cc:2056
 msgid "Client sent malformed commands: "
 msgstr "El cliente ha enviado comandos mal formados: "
 
-#: ../../src/network/nethost.cc:2085
+#: ../../src/network/nethost.cc:2089
 msgid "Game is running already, but client has not connected fully"
 msgstr "El juego ya se está ejecutando, pero el cliente no se ha conectado"
 
-#: ../../src/network/nethost.cc:2089
+#: ../../src/network/nethost.cc:2093
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
@@ -1098,67 +1098,67 @@ msgstr ""
 "El primer comando enviado por el cliente es %u en lugar de HELLO. Lo más "
 "probable es que el cliente este ejecutando una versión incompatible."
 
-#: ../../src/network/nethost.cc:2095
+#: ../../src/network/nethost.cc:2099
 msgid "Server uses a different protocol version."
 msgstr "El servidor utiliza una versión diferente de protocolo."
 
-#: ../../src/network/nethost.cc:2134
+#: ../../src/network/nethost.cc:2138
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 "El cliente ha enviado un comando TIME incluso aunque el juego todavía no "
 "está ejecutandose."
 
-#: ../../src/network/nethost.cc:2142
+#: ../../src/network/nethost.cc:2146
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 "El cliente ha enviado el comando PLAYERCOMMAND aunque el juego no está "
 "ejecutándose."
 
-#: ../../src/network/nethost.cc:2155
+#: ../../src/network/nethost.cc:2159
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 "El cliente %u (%u) ha enviado un comando de jugador (%i) para un jugador "
 "diferente (%i)."
 
-#: ../../src/network/nethost.cc:2165
+#: ../../src/network/nethost.cc:2169
 msgid "Client sent unexpected synchronization report."
 msgstr "El cliente ha enviado un informe de sincronización inesperado."
 
-#: ../../src/network/nethost.cc:2201 ../../src/network/nethost.cc:2213
+#: ../../src/network/nethost.cc:2205 ../../src/network/nethost.cc:2217
 msgid "Client requests file altough none is available to send."
 msgstr "El cliente demanda un archivo aunque no hay disponibles para envíar."
 
-#: ../../src/network/nethost.cc:2203
+#: ../../src/network/nethost.cc:2207
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Empezando a envíar archivo %s a %s!"
 
-#: ../../src/network/nethost.cc:2224
+#: ../../src/network/nethost.cc:2228
 msgid "Client requests file part that does not exist."
 msgstr "El cliente demanda una parte de archivo inexistente."
 
-#: ../../src/network/nethost.cc:2227
+#: ../../src/network/nethost.cc:2231
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "transferencia de archivo %s to %s completa"
 
-#: ../../src/network/nethost.cc:2235
+#: ../../src/network/nethost.cc:2239
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr "Enviando parte %u/%u del archivo %s to %s"
 
-#: ../../src/network/nethost.cc:2245
+#: ../../src/network/nethost.cc:2249
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "El cliente ha enviado un número de comando desconocido %u"
 
-#: ../../src/network/nethost.cc:2302
+#: ../../src/network/nethost.cc:2306
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s ha abandonado el juego (%s)"
 
-#: ../../src/network/nethost.cc:2322
+#: ../../src/network/nethost.cc:2326
 #, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "Usuario desconocido ha dejado el juego (%s)"
@@ -1209,36 +1209,36 @@ msgstr ""
 msgid "Server uses a different protocol version"
 msgstr "El servidor utiliza una versión diferente del protocolo."
 
-#: ../../src/network/netclient.cc:699
+#: ../../src/network/netclient.cc:703
 msgid "/me 's file failed md5 checksumming."
 msgstr "/me 's archivo error en suma de verificación md5."
 
-#: ../../src/network/netclient.cc:769
+#: ../../src/network/netclient.cc:773
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Inesperadamente se ha recibido el comando LAUNCH desde el servidor."
 
-#: ../../src/network/netclient.cc:789
+#: ../../src/network/netclient.cc:793
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr ""
 "El servidor ha enviado un PLAYERCOMAND incluso aunque no hay un juego "
 "ejecutándose."
 
-#: ../../src/network/netclient.cc:802
+#: ../../src/network/netclient.cc:806
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr ""
 "El servidor ha enviado un SYNCREQUEST incluso aunque no hay un juego "
 "ejecutándose."
 
-#: ../../src/network/netclient.cc:829
+#: ../../src/network/netclient.cc:833
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr "El servidor ha enviado un comando desconocido (número de comando %u)"
 
-#: ../../src/network/netclient.cc:863
+#: ../../src/network/netclient.cc:867
 msgid "Something went wrong: "
 msgstr "Algo ha ido mal: "
 
-#: ../../src/network/netclient.cc:894
+#: ../../src/network/netclient.cc:898
 msgid " An automatic savegame will be created."
 msgstr " Se ha guardado el juego atomáticamente."
 
@@ -1389,28 +1389,28 @@ msgid "Please enter your password!"
 msgstr "Por favor introduzca su contraseña!"
 
 #: ../../src/wui/playerdescrgroup.cc:103
-#: ../../src/wui/multiplayersetupgroup.cc:518
+#: ../../src/wui/multiplayersetupgroup.cc:524
 msgid "Initialization"
 msgstr "Inicialización"
 
 #: ../../src/wui/playerdescrgroup.cc:157
-#: ../../src/wui/multiplayersetupgroup.cc:329
+#: ../../src/wui/multiplayersetupgroup.cc:331
 #: ../../src/ui_fsmenu/netsetup_lan.cc:188
 msgid "Open"
 msgstr "Abierto"
 
 #: ../../src/wui/playerdescrgroup.cc:170
-#: ../../src/wui/multiplayersetupgroup.cc:371
+#: ../../src/wui/multiplayersetupgroup.cc:376
 msgid "Computer"
 msgstr "Ordenador"
 
 #: ../../src/wui/playerdescrgroup.cc:172
-#: ../../src/wui/multiplayersetupgroup.cc:374
+#: ../../src/wui/multiplayersetupgroup.cc:379
 msgid "AI: "
 msgstr "AI: "
 
 #: ../../src/wui/playerdescrgroup.cc:176
-#: ../../src/wui/multiplayersetupgroup.cc:379
+#: ../../src/wui/multiplayersetupgroup.cc:384
 msgid "Human"
 msgstr "Humano"
 
@@ -1805,12 +1805,12 @@ msgstr " ya existe. ¿Sobreescribir?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:270
 msgid "File deletion"
-msgstr ""
+msgstr "Eliminación de archivo"
 
 #: ../../src/wui/game_main_menu_save_game.cc:272
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "¿Desea eliminar el archivo %s?"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
@@ -1826,7 +1826,7 @@ msgstr "Opciones económicas"
 
 #: ../../src/wui/transport_ui.cc:144 ../../src/wui/transport_ui.cc:239
 msgid "Increase target"
-msgstr ""
+msgstr "Aumentar objetivo"
 
 #: ../../src/wui/transport_ui.cc:146 ../../src/wui/transport_ui.cc:241
 msgid "Decrease target"
@@ -1834,7 +1834,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:148 ../../src/wui/transport_ui.cc:243
 msgid "Reset to default"
-msgstr ""
+msgstr "Restaurar al valor predeterminado"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
@@ -1925,57 +1925,58 @@ msgid "<free>"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:114
-#: ../../src/wui/multiplayersetupgroup.cc:353
+#: ../../src/wui/multiplayersetupgroup.cc:356
+#: ../../src/ui_fsmenu/launchMPG.cc:434
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Reproductor %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
-#: ../../src/ui_fsmenu/launchMPG.cc:447
+#: ../../src/ui_fsmenu/launchMPG.cc:436
 #, c-format
 msgid "Spectator"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:319
+#: ../../src/wui/multiplayersetupgroup.cc:320
 #: ../../src/ui_fsmenu/netsetup_lan.cc:189
 msgid "Closed"
 msgstr "Cerrado"
 
-#: ../../src/wui/multiplayersetupgroup.cc:348
+#: ../../src/wui/multiplayersetupgroup.cc:351
 msgid "Shared in"
-msgstr ""
+msgstr "Compartido en"
 
-#: ../../src/wui/multiplayersetupgroup.cc:415
+#: ../../src/wui/multiplayersetupgroup.cc:421
 #: ../../src/ui_fsmenu/launchMPG.cc:274 ../../src/ui_fsmenu/launchSPG.cc:222
 msgid "Scenario"
 msgstr "Escenario"
 
-#: ../../src/wui/multiplayersetupgroup.cc:417
+#: ../../src/wui/multiplayersetupgroup.cc:423
 #: ../../src/ui_fsmenu/launchMPG.cc:278
 msgid "Savegame"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:470
+#: ../../src/wui/multiplayersetupgroup.cc:476
 msgid "Client name"
-msgstr ""
+msgstr "Nombre del cliente"
 
-#: ../../src/wui/multiplayersetupgroup.cc:478
+#: ../../src/wui/multiplayersetupgroup.cc:484
 msgid "Role"
-msgstr ""
+msgstr "Rol"
 
-#: ../../src/wui/multiplayersetupgroup.cc:494
+#: ../../src/wui/multiplayersetupgroup.cc:500
 msgid "Start"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:502
+#: ../../src/wui/multiplayersetupgroup.cc:508
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
-#: ../../src/wui/multiplayersetupgroup.cc:510
+#: ../../src/wui/multiplayersetupgroup.cc:516
 msgid "Tribe"
-msgstr ""
+msgstr "Tribu"
 
-#: ../../src/wui/multiplayersetupgroup.cc:522
+#: ../../src/wui/multiplayersetupgroup.cc:528
 #: ../../src/ui_fsmenu/launchSPG.cc:105
 msgid "Team"
 msgstr "Equipo"
@@ -3744,7 +3745,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Saved game"
-msgstr ""
+msgstr "Partida guardada"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Select a saved game"
@@ -3764,9 +3765,9 @@ msgstr "Comenzar juego"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:145
 msgid "Show the help window"
-msgstr ""
+msgstr "Mostrar ventana de ayuda"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:152 ../../src/ui_fsmenu/launchMPG.cc:618
+#: ../../src/ui_fsmenu/launchMPG.cc:152 ../../src/ui_fsmenu/launchMPG.cc:615
 msgid "Multiplayer Game Setup"
 msgstr ""
 
@@ -3815,14 +3816,14 @@ msgid ""
 "you, please write the host about this problem."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:448
+#: ../../src/ui_fsmenu/launchMPG.cc:437
 #, c-format
 msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:449
+#: ../../src/ui_fsmenu/launchMPG.cc:438
 msgid "Click on the \"?\" in the right top corner to get help."
 msgstr ""
 
@@ -3834,94 +3835,94 @@ msgstr ""
 msgid "<closed>"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:583
+#: ../../src/ui_fsmenu/launchMPG.cc:581
 msgid "There was an error!"
-msgstr ""
+msgstr "¡Ha ocurrido un error!"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:583
+#: ../../src/ui_fsmenu/launchMPG.cc:581
 msgid "The map file seems to be invalid!"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:599
+#: ../../src/ui_fsmenu/launchMPG.cc:598
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Información sobre el mapa:\n"
+
+#: ../../src/ui_fsmenu/launchMPG.cc:599
+#, c-format
+msgid "* Size: %ux%u\n"
+msgstr "* Tamaño: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:600
 #, c-format
-msgid "* Size: %ux%u\n"
-msgstr ""
+msgid "* %i Players\n"
+msgstr "* %i jugadores\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:601
-#, c-format
-msgid "* %i Players\n"
-msgstr ""
-
-#: ../../src/ui_fsmenu/launchMPG.cc:602
 #, c-format
 msgid "* World type: %s\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:604
+#: ../../src/ui_fsmenu/launchMPG.cc:603
 msgid "* Scenario mode selected\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:619
+#: ../../src/ui_fsmenu/launchMPG.cc:616
 msgid "You are in the multi player launch game menu."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:620
+#: ../../src/ui_fsmenu/launchMPG.cc:617
 msgid "Client settings"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:623
+#: ../../src/ui_fsmenu/launchMPG.cc:620
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:627
+#: ../../src/ui_fsmenu/launchMPG.cc:624
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share the control over the player (\"shared kingdom "
 "mode\")."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:631
+#: ../../src/ui_fsmenu/launchMPG.cc:628
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:633
+#: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "Player settings"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:636
+#: ../../src/ui_fsmenu/launchMPG.cc:633
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:639
+#: ../../src/ui_fsmenu/launchMPG.cc:636
 msgid "Connected to one or more clients (see \"Client settings\")."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:642
+#: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicates the strength of the currently selected computer "
 "player)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:645
+#: ../../src/ui_fsmenu/launchMPG.cc:642
 msgid "Set as shared in starting position for another player."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:646
+#: ../../src/ui_fsmenu/launchMPG.cc:643
 msgid "Closed."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:649
+#: ../../src/ui_fsmenu/launchMPG.cc:646
 msgid ""
 "The later three are only setable by the hosting client by left clicking the "
 "\"type\" button of a player. Hosting players can further set the "
@@ -3929,17 +3930,17 @@ msgid ""
 "player starts with) and the tribe an team for computer players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:654
+#: ../../src/ui_fsmenu/launchMPG.cc:651
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:656
+#: ../../src/ui_fsmenu/launchMPG.cc:653
 msgid "Map informations"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:659
+#: ../../src/ui_fsmenu/launchMPG.cc:656
 msgid ""
 "On the right side are informations about the selected map or savegame. A "
 "button right to the map name allows the host to change to a different one. "
@@ -6432,6 +6433,10 @@ msgstr "<sin descripción>"
 #~ msgid "No trigger selected!"
 #~ msgstr "¡No se ha seleccionado activador!"
 
+#~ msgid "kick acknowlegement cancled: No name given!"
+#~ msgstr ""
+#~ "Reconocimiento para hechar ha sido cancelado: Ningun nombre ha sido dado!"
+
 #~ msgid ""
 #~ "Available host commands are:<br>/help  -  Shows this help<br>/announce <msg> "
 #~ " -  Send a chatmessage as announcement (system chat)<br>/warn <name> "
@@ -6446,6 +6451,10 @@ msgstr "<sin descripción>"
 #~ "porque <razón><br>/kick <nombre> <razón>  -  Hecha al usuario <nombre> "
 #~ "porque <razón><br>/forcePause  -  Fuerza al juego a una "
 #~ "pausa.<br>/endForcedPause  -  Saca al juego de la pausa."
+
+#~ msgid "kick acknowlegement cancled: Wrong name given!"
+#~ msgstr ""
+#~ "Reconocimiento para hechar ha sido cancelado: El nombre dado es incorrecto!"
 
 #~ msgid "Help "
 #~ msgstr "Ayuda "

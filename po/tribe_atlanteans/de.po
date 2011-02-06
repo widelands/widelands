@@ -6,44 +6,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-11-18 14:13+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"PO-Revision-Date: 2011-01-14 22:10+0000\n"
+"Last-Translator: fraang <florian.angermeier@desaster-games.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:17+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-15 04:44+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Language: German\n"
+
+#: ../../tribes/atlanteans/golden_tabard/conf:1
+msgid ""
+"A golden tabard is produced in an Atlatean weaving-mill out of gold yarn. It "
+"is used in the trainingscamp - together with food - to train soldiers from "
+"healthpoints level 0 to level 1."
+msgstr ""
+"Der goldene Wappenrock wird in der atlantischen Weberei aus Goldgarn "
+"hergestellt. Er wird im Trainingslager - zusammen mit Nahrung - benutzt um "
+"Soldaten von der Gesundheitsstufe 0 auf 1 zu trainieren."
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"A saw is needed by the woodcutter and the carpenter. It is produced by the "
+"toolsmith."
+msgstr ""
+"Sägen werden von Holzfällern und Schreinern gebraucht. Sie werden von einem "
+"Werkzeugschmied hergestellt."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr "Ein seetaugliches Schiff"
+msgstr "Ein seetüchtiges Schiff"
 
-#: ../../tribes/atlanteans/golden_tabard/conf:1
-msgid "A special tabard for atlantian soldiers."
-msgstr "Ein spezieller Wappenrock für atlanter Soldaten."
+#: ../../tribes/atlanteans/tabard/conf:1
+msgid ""
+"A tabard and a light trident are the basic equipment for young soldiers. "
+"Tabards are produced in the weaving-mill."
+msgstr ""
+"Ein Wappenrock und ein leichter Dreitzack sind die Grundausrüstung für junge "
+"Soldaten. Wappenröcke werden in der Weberei hergestellt."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
 msgstr "Verbesserter Schild"
-
-#: ../../tribes/atlanteans/tabard/conf:1
-msgid ""
-"All atlantean soldiers have to wear the sign of their country on their "
-"chests."
-msgstr ""
-"Jeder atlantische Soldat muss das Zeichen seines Landes auf seiner Brust "
-"tragen."
-
-#: ../../tribes/atlanteans/double_trident/conf:1
-msgid ""
-"Already one of the best tridents of the Atlanteans. Only used by very good "
-"fighters."
-msgstr ""
-"Bereits eine der besten und gefährlichsten Dreizack-Arten der Atlanter. Wird "
-"nur von sehr guten Kämpfern benutzt."
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Armoursmith"
@@ -52,6 +58,14 @@ msgstr "Rüstungsschmied"
 #: ../../tribes/atlanteans/conf:183
 msgid "Armoursmithy"
 msgstr "Rüstungsschmiede"
+
+#: ../../tribes/atlanteans/smoked_fish/conf:1
+msgid ""
+"As no Atlantean likes raw fish, smoking it in a smokery is the most common "
+"way to make it edible."
+msgstr ""
+"Da die Atlanter Fisch nicht roh mögen, ist der übliche Weg, ihn essbar zu "
+"machen, ihn in einer Räucherei zu räuchern."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -104,11 +118,11 @@ msgstr "Schwarzwurzelmehl"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
-"Blackroot Flour is produced out of blackroots and is one of three parts of "
-"the atlantian bread."
+"Blackroot Flour is produced in mills out of blackroots. It is used in "
+"bakeries to make a tasty bread."
 msgstr ""
-"Schwarzwurzelmehl wird aus Schwarzwurzel hergestellt und ist eine von drei "
-"Zutaten des atlantanischen Brotes."
+"Schwarzwurzel-Mehl wird in Mühlen aus Schwarzwurzeln hergestellt. Es wird in "
+"Bäckereien verwendet, um leckeres Brot zu produzieren."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -136,11 +150,14 @@ msgstr "frisch gesätes Schwarzwurzelfeld"
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
-"Blackroots are a special kind of roots. The Atlanteans like their strong "
-"taste and use its flour for making bread."
+"Blackroots are a special kind of root produced in blackroot farms and "
+"processed in mills. The Atlanteans like their strong taste and use its flour "
+"for making bread."
 msgstr ""
-"Schwarzwurzeln sind eine spezielle Wurzelart. Die Atlanter mögen den starken "
-"Geschmack und benutzen gemahlene Schwarzwurzeln beim Backen ihrer Brote."
+"Schwarzwurzeln sind eine besondere Art von Wurzeln, die auf Schwarzwurzel-"
+"Farmen hergestellt und in Mühlen verarbeitet werden. Die Atlanter mögen ihre "
+"kräftigen Geschmack und verwenden das aus ihnen gewonnene Mehl zur "
+"Brotherstellung."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -199,10 +216,6 @@ msgstr "Köhlerei"
 msgid "Citadel"
 msgstr "Zitadelle"
 
-#: ../../tribes/atlanteans/spidercloth/conf:1
-msgid "Cloth made out of spideryarn."
-msgstr "Stoff aus Spinnengarn."
-
 #: ../../tribes/atlanteans/conf:64
 msgid "Coal"
 msgstr "Kohle"
@@ -249,11 +262,11 @@ msgstr "Maismehl"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
-"Cornflour is produced out of corn and is one of three parts of the atlantian "
-"bread."
+"Cornflour is produced in a mill out of corn and is one of three parts of the "
+"Atlantean bread produced in bakeries."
 msgstr ""
-"Maismehl wird aus Mais hergestellt und ist eine von drei Zutaten für das "
-"atlantische Brot."
+"Maismehl wird in einer Mühle aus Mais hergestellt und ist einer der drei "
+"Zutaten des atlantischen Brots welches in der Bäckerei hergestellt wird."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -320,8 +333,14 @@ msgid "Fish Breeder's House"
 msgstr "Fischzüchterhütte"
 
 #: ../../tribes/atlanteans/fish/conf:1
-msgid "Fish is one of the biggest food-resources of the Atlanteans."
-msgstr "Fisch ist eine der größten Lebensmittelquellen der Atlanter."
+msgid ""
+"Fish is one of the biggest food-resources of the Atlanteans. It has to be "
+"smoked in a smokery before being delivered to mines, training sites and "
+"scouts."
+msgstr ""
+"Fisch ist einer der Hauptnahrungsquellen der Atlanter. Er muss in einer "
+"Räucherei geräuchert werden bevor er zu den Minen, Ausbildungsplätzen und "
+"Kundschaftern gebracht wird."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -370,11 +389,20 @@ msgstr "Goldgarn"
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
-"Gold is one of the most valuable materials. Only important things are "
-"garnished with it."
+"Gold is one of the most valuable materials. It is produced out of gold ore "
+"in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
+"and the goldweaver."
 msgstr ""
-"Gold ist eines der wertvollsten Materialen. Nur wichtige Sachen werden mit "
-"ihm geschmückt."
+"Gold ist einer der wertvollsten Materialien. Es wird in der Gießerei aus "
+"Golderz hergestellt. Gold wird vom Rüstungsschmied, Waffenschmied und "
+"Goldweber verwendet."
+
+#: ../../tribes/atlanteans/goldore/conf:1
+msgid ""
+"Gold ores are mined in gold mines and processed to gold in smelting works."
+msgstr ""
+"Golderz wird in Goldminen abgebaut und in Gießerein zu Gold "
+"weiterverarbeitet."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -416,10 +444,6 @@ msgstr "normales Hauptquartier"
 msgid "Heavy Double Trident"
 msgstr "schwerer Doppel-Dreizack"
 
-#: ../../tribes/atlanteans/horse/conf:1
-msgid "Helps to carry items at heavy used roads."
-msgstr "Hilft, Waren auf viel benutzten Straßen zu transportieren."
-
 #: ../../tribes/atlanteans/conf:198
 msgid "High Tower"
 msgstr "Bergfried"
@@ -439,6 +463,14 @@ msgstr "Pferdezüchter"
 #: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
 msgstr "Pferdezucht"
+
+#: ../../tribes/atlanteans/horse/conf:1
+msgid ""
+"Horses help to carry items at heavily used roads. They are raised in a horse "
+"farm."
+msgstr ""
+"Pferde helfen Waren auf viel benützten Straßen zu transportieren. Sie werden "
+"in einem Pferdehof gezüchtet."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -464,6 +496,22 @@ msgstr "Eisenmine"
 msgid "Iron Ore"
 msgstr "Eisenerz"
 
+#: ../../tribes/atlanteans/iron/conf:1
+msgid ""
+"Iron is made out of iron ores in the smelting works. It is used in the "
+"toolsmithy, armoursmithy and weapon smithy."
+msgstr ""
+"Eisen wird in Gießerein aus Eisenerz hergestellt. Es wird in der "
+"Werkzeugschmied, Rüstungsschmied und Waffenschmied verwendet."
+
+#: ../../tribes/atlanteans/ironore/conf:1
+msgid ""
+"Iron ores are mined in iron mines. They get smelted in a smelting works to "
+"retrieve the iron."
+msgstr ""
+"Eisenerz wird in Eisenminen abgebaut. Sie werden in Gießerein geschmolzen um "
+"Eisen zu erhalten."
+
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
 msgstr "Labyrinth"
@@ -481,8 +529,14 @@ msgid "Meat"
 msgstr "Fleisch"
 
 #: ../../tribes/atlanteans/meat/conf:1
-msgid "Meat is one food-resource of the Atlanteans."
-msgstr "Fleisch ist eine Nahrungsquelle der Atlanter."
+msgid ""
+"Meat is one food resource of the Atlanteans. It is gained out of wild game "
+"taken by the hunter and has to be smoked in a smokery before being delivered "
+"to mines and training sites (dungeon and labyrinth)."
+msgstr ""
+"Fleisch ist eine der Nahrungsquellen der Atlanter. Es wird vom Jäger aus "
+"Wild gewonnen und muss in einer Räucherei geräuchert werdenbevor es zu Minen "
+"und Ausbildungsplätzen (Kerker und Labyrinth) gebracht wird."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -549,8 +603,14 @@ msgid "Planks"
 msgstr "Bretter"
 
 #: ../../tribes/atlanteans/planks/conf:1
-msgid "Planks are an important build material of the Atlanteans."
-msgstr "Bretter sind ein wichtiges Baumaterial der Atlanter"
+msgid ""
+"Planks are an important building material of the Atlanteans. They are "
+"produced out of trunks by the sawmill. The weapon smithy and the shipyard "
+"also use planks to produce the different tridents and mighty ships."
+msgstr ""
+"Bretter sind ein wichtiges Baumaterial der Atlanter. Sie werden in der "
+"Sägemühle aus Stämmen hergestellt. Der Waffenschmied sowie die Werft "
+"benötigen sie für Dreizacke und mächtige Schiffe."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -754,14 +814,6 @@ msgstr "Säge"
 msgid "Sawmill"
 msgstr "Sägemühle"
 
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
-"produced by the toolsmith."
-msgstr ""
-"Sägen werden vom Säger, dem Holzfäller und dem Werkzeugmacher gebraucht. Sie "
-"werden vom Werkzeugmacher hergestellt."
-
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
 msgstr "Sägt Holz um Bretter herzustellen."
@@ -868,6 +920,17 @@ msgstr "Räucherfisch"
 msgid "Smoked meat"
 msgstr "Räucherfleisch"
 
+#: ../../tribes/atlanteans/smoked_meat/conf:1
+msgid ""
+"Smoked meat is made out of meat in a smokery. It is delivered to the mines "
+"and training sites (labyrinth and dungeon) where the miners and soldiers "
+"prepare a nutricious lunch for themselves."
+msgstr ""
+"Geräuchertes Fleisch wird in der Räucherei aus Fleich hergestellt. Es wird "
+"zu den Minen und Ausbildugsplätzen (Kerker und Labyrinth) gebrach, wo es von "
+"den Bergleuten und Soldaten verwendet wird um ein nahrhaftes Essen für sich "
+"zuzubereiten."
+
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
 msgstr "Räucherer"
@@ -902,6 +965,16 @@ msgstr "Spinnenzüchter"
 msgid "Spidercloth"
 msgstr "Spinnenstoff"
 
+#: ../../tribes/atlanteans/spidercloth/conf:1
+msgid ""
+"Spidercloth is made out of spideryarn in a weaving-mill. It is used in the "
+"toolsmithy and the shipyard. Also some higher developed buildings need "
+"spidercloth for their construction."
+msgstr ""
+"Spinnenstoffe wird in einer Weberei aus Spinnengarn hergestellt. Es wird vom "
+"Werkzeugschmied und der Werft verwendet. Einige höher entwickelte Gebäude "
+"baruchen ebenfalls Spinnenstoffe für ihre Errichtung."
+
 #: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
 msgstr "Spinnenfarm"
@@ -923,8 +996,12 @@ msgid "Stone"
 msgstr "Stein"
 
 #: ../../tribes/atlanteans/stone/conf:1
-msgid "Stone is one basic build ware type of the Atlanteans."
-msgstr "Steine gehören zu den Grundbaustoffen der Atlanter."
+msgid ""
+"Stone is one basic building ware of the Atlanteans. It is produced in a "
+"quarry or a crystal mine."
+msgstr ""
+"Stein ist einer der Grundbaumaterialien der Atlanter. Er wird in einem "
+"Steinbruch oder in einer Kristallmine hergestellt."
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -937,6 +1014,16 @@ msgstr "Bastion"
 #: ../../tribes/atlanteans/conf:99
 msgid "Tabard"
 msgstr "Wappenrock"
+
+#: ../../tribes/atlanteans/coal/conf:1
+msgid ""
+"The Atlantean fires in smelting works, armoursmithies and weaponsmithies are "
+"fed with coal. This coal is mined in coal mines or produced out of trunks by "
+"a charcoal burner."
+msgstr ""
+"Die atlantischen Feuer in Gießerein, Rüstungsschmieden und Waffenschmieden "
+"werden mit Kohle geheizt. Diese Kohle wird in Kohleminen abgebaut oder in "
+"Köhlereien aus Stämmen hergestellt."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -953,13 +1040,15 @@ msgstr ""
 msgid "The Widelands Development Team"
 msgstr "Das Widelands-Entwicklerteam"
 
-#: ../../tribes/atlanteans/bakingtray/conf:1
+#: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
-"The bakingtray is the tool of the baker, each baker needs its own. It is "
-"produced by the toolsmith."
+"The double trident is one of the best tridents produced by the Atlantean "
+"weapon smithy. It is used in a dungeon - together with food - to train "
+"soldiers from attack level 2 to level 3."
 msgstr ""
-"Das Backblech ist das Werkzeug des Bäckers - ein jeder braucht sein eigenes. "
-"Es wird vom Werkzeugmacher hergestellt."
+"Der Doppeldreizack ist einer der besten Dreizacke der Atlanter, produziert "
+"vom atlantischen Waffenschmied. Er wird in einem Kerker - zusammen mit "
+"Nahrung - verwendet um Soldaten von der Angriffsstufe 2 auf 3 zu trainieren."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
@@ -988,95 +1077,128 @@ msgstr ""
 "Bauarbeiter und den Schmieden verwendet. Versuche immer ein paar Hämmer in "
 "Reserve zu behalten. Hammer werden vom Werkzeugmacher hergestellt."
 
-#: ../../tribes/atlanteans/advanced_shield/conf:1
-msgid "These shields are used by the best soldiers of the Atlanteans."
+#: ../../tribes/atlanteans/long_trident/conf:1
+msgid ""
+"The long trident is the first trident in the training of soldiers. It is "
+"produced in the weapon smithy and used in the dungeon - together with food - "
+"to train soldiers from attack level 0 to level 1."
 msgstr ""
-"Diese Schilde werden nur von den besten Soldaten der Atlanter benutzt."
+"Der lange Dreizack ist der erste Dreizack im Training der Soldaten. Er wird "
+"in der Waffenschmiede hergestellt und im Kerker - zusammen mit Nahrung - "
+"verwendet um Soldaten von der Angriffsstufe 0 auf 1 zu trainieren."
+
+#: ../../tribes/atlanteans/bakingtray/conf:1
+msgid ""
+"The peel is the tool of the baker, each baker needs its own. It is produced "
+"by the toolsmith."
+msgstr ""
+"Der Brotschieber ist das Werkzeug des Bäckers. Jeder Bäcker benötigt seinen "
+"eigenen. Er wird in der Werkzeugschiede hergestellt."
+
+#: ../../tribes/atlanteans/advanced_shield/conf:1
+msgid ""
+"These advanced shields are used by the best soldiers of the Atlanteans. They "
+"are produced in the armoursmithy and used in the labyrinth - together with "
+"food - to train soldiers from Defense level 1 to level 2."
+msgstr ""
+"Der verbesserten Schilde werden von den besten Soldaten der Atlanter "
+"verwendet. Sie werden in der Rüstungsschmiede hergestellt und im Labyrinth - "
+"zusammen mit Nahrung - verwendet um Soldaten von der Verteidungsstufe 1 auf "
+"2 zu trainieren."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
-"These transparent quartz' are used for some exclusive buildings and tools."
+"These transparent quartz' are used to build some exclusive buildings. They "
+"are produced in a crystal mine."
 msgstr ""
-"Diese durchscheinenden Bergkristalle werden für einige exclusive Gebäude und "
-"Werkzeuge verwendet."
+"Diese transparenten Quarze werden beim Bau einiger besonderer Gebäude "
+"verwendet. Sie werden in der Kristallmine abgebaut."
+
+#: ../../tribes/atlanteans/diamond/conf:1
+msgid ""
+"These wonderful diamonds are used to build some exclusive buildings. They "
+"are mined in a crystal mine."
+msgstr ""
+"Diese wunderbaren Diamanten werden beim Bau einiger besonderer Gebäude "
+"verwendet. Sie werden in der Kristallmine abgebaut."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
-msgid "This bow is used by the atlantian hunter."
-msgstr "Dieser Bogen wird vom atlantischen Jäger verwandt."
+msgid ""
+"This bow is used by the Atlantean hunter. It is produced by the toolsmith."
+msgstr ""
+"Dieser Bogen wird von atlantischen Jägern verwendet. Er wird vom "
+"Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
-"This corn is the base of the fine cornflour, that every atlantian baker "
-"needs for a good bread."
+"This corn is processed in the mill to fine cornflour that every Atlantean "
+"baker needs for a good bread. Also horse farms and spiderfarms need to be "
+"provided with corn."
 msgstr ""
-"Mais ist die Basis für Maismehl, das wiederum von jedem atlanter Bäcker "
-"benötigt wird, um Brot zu backen."
+"Dieser Mais wird in der Mühle zu Maismehl weiterverarbeitet, welches jeder "
+"atlantischer Bäcker für gutes Brot benötigt. Auch Pferdehöfe und "
+"Spinnenfarmen müssen mit Mais beliefert werden."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
-"top of the smoke-house. It is created by the toolsmith."
+"top of the smokery. It is created by the toolsmith."
 msgstr ""
-"Die Hakenstange wird vom Räucherer verwendet, um das Fleisch und den Fisch "
-"in die Spitze der Räucherei zu hängen. Sie wird vom Werkzeugmacher "
+"Die Hakenstange wird vom Räucherer verwendet um all das Fleich und den Fisch "
+"auf der Spitze der Räucherei aufzuhängen. Sie wird vom Werkzeugschmied "
 "hergestellt."
 
-#: ../../tribes/atlanteans/long_trident/conf:1
-msgid "This is an advanced trident for more experienced soldiers."
-msgstr ""
-"Dies ist ein verbesserter Dreizack für die etwas erfahreneren Soldaten."
-
-#: ../../tribes/atlanteans/ironore/conf:1
-msgid "This is red iron ore."
-msgstr "Dies ist rotes Eisenerz."
-
-#: ../../tribes/atlanteans/smoked_fish/conf:1
-msgid ""
-"This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
-"common way to make it eatable."
-msgstr ""
-"Dieser Fisch ist geräuchert - da die Atlanter keinen rohen Fisch mögen, ist "
-"dies ein beliebter Weg um den Fisch genießbar zu machen."
-
-#: ../../tribes/atlanteans/smoked_meat/conf:1
-msgid ""
-"This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is "
-"a common way to make it eatable."
-msgstr ""
-"Dieses Fleisch ist geräuchert - da die Atlanter kein rohes Fleisch mögen, "
-"ist dies ein beliebter Weg um das Fleisch genießbar zu machen."
-
 #: ../../tribes/atlanteans/light_trident/conf:1
-msgid "This is the basic weapon for atlantian soldiers."
-msgstr "Dies ist die Grundwaffe für jeden atlanter Soldaten."
+msgid ""
+"This is the basic weapon for Atlantean soldiers. Together with a tabard it "
+"makes the equipment for young soldiers. Light tridents are produced in the "
+"weapon smithy as are all other tridents."
+msgstr ""
+"Dies ist die Grundwaffe der atlantischen Soldaten. Zusammen mit dem "
+"Wappanrock sind sie die Grundausrüstung für junge Soldaten. Leichte "
+"Dreizacke werden, wie alle anderen Dreizacke, in der Waffenschmiede "
+"hergestellt."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
-msgid "This is the medium trident - used by advanced soldiers."
-msgstr "Dies ist der Dreizack für fortgeschrittenere Soldaten."
+msgid ""
+"This is the medium trident. It is produced in the weapon smithy and used by "
+"advanced soldiers in the dungeon to train from attack level 1 to level 2 "
+"(together with food)."
+msgstr ""
+"Das ist der mittlere Dreizack. Er wird in der Waffenschmiede hergestellt und "
+"von fortgeschrittenen Soldaten - zusammen mit Nahrung - im Kerker verwendet "
+"um die Angriffsstuffe von 1 auf 2 zu trainieren."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
-"This is the most dangerous weapon of the atlantian military. Only the best "
-"of the best soldiers may use it."
+"This is the most dangerous weapon of the Atlantean military. Only the best "
+"of the best soldiers may use it. It is produced in the weapon smithy and "
+"used in the dungeon - together with food - to train soldiers from attack "
+"level 3 to level 4."
 msgstr ""
-"Dies ist die absolut gefährlichste Waffe des atlantischen Militärs. Nur die "
-"allerbesten Soldaten dürfen sie benutzen."
-
-#: ../../tribes/atlanteans/goldore/conf:1
-msgid "This is the yellow gold ore."
-msgstr "Dies ist gelbes Golderz."
+"Das ist die gefährlichste Waffe des atlantischen Militärs. Nur die besten "
+"Soldaten mögen sie verwenden. Sie wird in der Waffenschmiede hergestellt und "
+"im Kerker - zusammen mit Nahrung - verwendet um die Angriffsstufe von "
+"Soldaten von 3 auf 4 zu trainieren."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
-msgid "This steel shield is used by experienced soldiers."
-msgstr "Das Stahlschild wird von erfahrenen Soldaten benutzt."
+msgid ""
+"This steel shield is produced in the armoursmithy and used in the labyrinth -"
+"together with food - to train soldiers from Defense level 0 to level 1."
+msgstr ""
+"Dieser Stahlschild wird in der Rüstungsschmiede hergestellt und im Labyrinth "
+"- zusammen mit Nahrung - verwendet um die Verteidigungsstufe von Soldaten "
+"von 0 auf 1 zu trainiren."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
-"This tasty bread is made out of corn- and blackrootflour and is one part of "
-"miners meal."
+"This tasty bread is made in bakeries out of cornflour, blackroot flour and "
+"water. It is appreciated as basic food for miners, scouts and soldiers in "
+"training sites (labyrinth and dungeon)."
 msgstr ""
-"Dieses leckere Brot wird aus Mais- und Schwarzwurzelmehl hergestellt und ist "
-"ein Teil der Nahrung der Bergarbeiter."
+"Dieses köstliche Brot wird in Bäckerein aus Maismehl, Schwarzwurzelmehl und "
+"Wasser hergestellt. Es wird von Bergleuten, Kundschaftern und Soldaten in "
+"Ausbildungsplätzen (Kerker und Labyrinth) als Grundnahrungsmittel geschätzt."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1086,33 +1208,21 @@ msgstr ""
 "Dieses Volk wird schon in den ältesten Sagen erwähnt. Die Söhne und Töchter "
 "von Atlantis."
 
-#: ../../tribes/atlanteans/diamond/conf:1
-msgid ""
-"This wonderful diamonds are used for some exclusive buildings and tools."
-msgstr ""
-"Diese wundervollen Diamanten werden beim Bau einiger exklusiver Gebäude und "
-"Werkzeuge verwandt."
-
 #: ../../tribes/atlanteans/spideryarn/conf:1
-msgid "This yarn is produced by spiders, which are bred on spiderfarms."
+msgid ""
+"This yarn is produced by spiders, which are bred on spiderfarms. It is "
+"processed to spidercloth in a weaving-mill."
 msgstr ""
-"Dieses Garn wird von Spinnen, die auf den Spinnenfarmen gezüchtet werden, "
-"hergestellt."
+"Dieses Garn wird von Spinnen hergestellt, welche in Spinnenfarmen gezüchtet "
+"werden. Es wird in Weberein zu Spinnenstoffen weiterverarbeitet."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
-msgid "This yarn, made of gold, is used for weaving exclusive cloth."
-msgstr ""
-"Dieses Garn, das aus Gold hergestellt wird, wird zum weben exklusiver "
-"Kleidung verwandt."
-
-#: ../../tribes/atlanteans/coal/conf:1
 msgid ""
-"To make the fine atlantian steel a hot fire is needed. But a fire of wood "
-"isn't hot enough -this coal brings the needed heat."
+"This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
+"golden tabard in the weaving-mill."
 msgstr ""
-"Um den vorzüglichen atlantischen Stahl herzustellen, wird ein heißes Feuer "
-"benötigt, doch ein Holzfeuer ist nicht heiß genug - diese Kohle bringt die "
-"benötigte Hitze."
+"Dieses Garn, das der Goldweber aus Gold herstellt, wird verwendet, um in der "
+"Weberei die exklusiven goldenen Tapperts herzustellen."
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
@@ -1142,10 +1252,12 @@ msgstr "Stamm"
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
 "Trunks are the base for planks, which are used in nearly every building of "
-"the Atlanteans."
+"the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
+"the smokery also need trunks for their work."
 msgstr ""
-"Aus Stämmen macht man Bretter, die in fast jedem Gebäude der Atlanter "
-"verwendet werden."
+"Stämme sind die Basis für Bretter, welche in fast allen gebäuden der "
+"Atlanter verwendet werden. Auch die Sägemühle, der Köhler, die "
+"Werkzeugschmiede und die Räucherei benötigen Stämme."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
@@ -1263,19 +1375,15 @@ msgstr "Wasser"
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""
-"Water is the most essential essence for life! This water is used in many "
-"places, for example to make bread."
+"Water is the essence for life! It is used in the bakery, the horse farm and "
+"the spiderfarm."
 msgstr ""
-"Wasser ist der Hauptbestandteil des Lebens! Es wird für viele Dinge, wie zum "
-"Beispiel zum Brotbacken, verwandt."
+"Wasser ist Leben! Es wird in der Bäckerei, der Pferdezucht und der "
+"Spinnenfarm verwendet."
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"
 msgstr "Waffenschmied"
-
-#: ../../tribes/atlanteans/iron/conf:1
-msgid "Weapons and Tools are made of iron."
-msgstr "Waffen und Werkzeuge werden aus Eisen hergestellt."
 
 #: ../../tribes/atlanteans/conf:132
 msgid "Weaponsmith"
@@ -1344,14 +1452,147 @@ msgstr "Arbeitet in der Werft und erstellt neue Schiffe."
 msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr "Arbeitet tief in den Minen um Kohle, Eisen und Gold zu schürfen."
 
+#~ msgid "These shields are used by the best soldiers of the Atlanteans."
+#~ msgstr ""
+#~ "Diese Schilde werden nur von den besten Soldaten der Atlanter benutzt."
+
+#~ msgid ""
+#~ "The bakingtray is the tool of the baker, each baker needs its own. It is "
+#~ "produced by the toolsmith."
+#~ msgstr ""
+#~ "Das Backblech ist das Werkzeug des Bäckers - ein jeder braucht sein eigenes. "
+#~ "Es wird vom Werkzeugmacher hergestellt."
+
+#~ msgid ""
+#~ "Blackroot Flour is produced out of blackroots and is one of three parts of "
+#~ "the atlantian bread."
+#~ msgstr ""
+#~ "Schwarzwurzelmehl wird aus Schwarzwurzel hergestellt und ist eine von drei "
+#~ "Zutaten des atlantanischen Brotes."
+
+#~ msgid ""
+#~ "This tasty bread is made out of corn- and blackrootflour and is one part of "
+#~ "miners meal."
+#~ msgstr ""
+#~ "Dieses leckere Brot wird aus Mais- und Schwarzwurzelmehl hergestellt und ist "
+#~ "ein Teil der Nahrung der Bergarbeiter."
+
 #~ msgid "Resource indicator granit little"
 #~ msgstr "Ressourcen Anzeige für wenig Granit"
 
 #~ msgid "Resource indicator granit much"
 #~ msgstr "Ressourcen Anzeige für viel Granit"
 
+#~ msgid ""
+#~ "Cornflour is produced out of corn and is one of three parts of the atlantian "
+#~ "bread."
+#~ msgstr ""
+#~ "Maismehl wird aus Mais hergestellt und ist eine von drei Zutaten für das "
+#~ "atlantische Brot."
+
+#~ msgid ""
+#~ "Already one of the best tridents of the Atlanteans. Only used by very good "
+#~ "fighters."
+#~ msgstr ""
+#~ "Bereits eine der besten und gefährlichsten Dreizack-Arten der Atlanter. Wird "
+#~ "nur von sehr guten Kämpfern benutzt."
+
+#~ msgid "Fish is one of the biggest food-resources of the Atlanteans."
+#~ msgstr "Fisch ist eine der größten Lebensmittelquellen der Atlanter."
+
+#~ msgid ""
+#~ "Gold is one of the most valuable materials. Only important things are "
+#~ "garnished with it."
+#~ msgstr ""
+#~ "Gold ist eines der wertvollsten Materialen. Nur wichtige Sachen werden mit "
+#~ "ihm geschmückt."
+
+#~ msgid "A special tabard for atlantian soldiers."
+#~ msgstr "Ein spezieller Wappenrock für atlanter Soldaten."
+
+#~ msgid "This is the yellow gold ore."
+#~ msgstr "Dies ist gelbes Golderz."
+
+#~ msgid "This yarn, made of gold, is used for weaving exclusive cloth."
+#~ msgstr ""
+#~ "Dieses Garn, das aus Gold hergestellt wird, wird zum weben exklusiver "
+#~ "Kleidung verwandt."
+
+#~ msgid ""
+#~ "This is the most dangerous weapon of the atlantian military. Only the best "
+#~ "of the best soldiers may use it."
+#~ msgstr ""
+#~ "Dies ist die absolut gefährlichste Waffe des atlantischen Militärs. Nur die "
+#~ "allerbesten Soldaten dürfen sie benutzen."
+
+#~ msgid "This bow is used by the atlantian hunter."
+#~ msgstr "Dieser Bogen wird vom atlantischen Jäger verwandt."
+
+#~ msgid "Weapons and Tools are made of iron."
+#~ msgstr "Waffen und Werkzeuge werden aus Eisen hergestellt."
+
+#~ msgid "This is red iron ore."
+#~ msgstr "Dies ist rotes Eisenerz."
+
+#~ msgid "This is the basic weapon for atlantian soldiers."
+#~ msgstr "Dies ist die Grundwaffe für jeden atlanter Soldaten."
+
+#~ msgid "This is an advanced trident for more experienced soldiers."
+#~ msgstr ""
+#~ "Dies ist ein verbesserter Dreizack für die etwas erfahreneren Soldaten."
+
+#~ msgid "Meat is one food-resource of the Atlanteans."
+#~ msgstr "Fleisch ist eine Nahrungsquelle der Atlanter."
+
+#~ msgid "Planks are an important build material of the Atlanteans."
+#~ msgstr "Bretter sind ein wichtiges Baumaterial der Atlanter"
+
+#~ msgid ""
+#~ "These transparent quartz' are used for some exclusive buildings and tools."
+#~ msgstr ""
+#~ "Diese durchscheinenden Bergkristalle werden für einige exclusive Gebäude und "
+#~ "Werkzeuge verwendet."
+
+#~ msgid ""
+#~ "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
+#~ "produced by the toolsmith."
+#~ msgstr ""
+#~ "Sägen werden vom Säger, dem Holzfäller und dem Werkzeugmacher gebraucht. Sie "
+#~ "werden vom Werkzeugmacher hergestellt."
+
+#~ msgid ""
+#~ "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is "
+#~ "a common way to make it eatable."
+#~ msgstr ""
+#~ "Dieses Fleisch ist geräuchert - da die Atlanter kein rohes Fleisch mögen, "
+#~ "ist dies ein beliebter Weg um das Fleisch genießbar zu machen."
+
+#~ msgid "Cloth made out of spideryarn."
+#~ msgstr "Stoff aus Spinnengarn."
+
+#~ msgid "This yarn is produced by spiders, which are bred on spiderfarms."
+#~ msgstr ""
+#~ "Dieses Garn wird von Spinnen, die auf den Spinnenfarmen gezüchtet werden, "
+#~ "hergestellt."
+
+#~ msgid "This steel shield is used by experienced soldiers."
+#~ msgstr "Das Stahlschild wird von erfahrenen Soldaten benutzt."
+
+#~ msgid "This is the medium trident - used by advanced soldiers."
+#~ msgstr "Dies ist der Dreizack für fortgeschrittenere Soldaten."
+
+#~ msgid "Stone is one basic build ware type of the Atlanteans."
+#~ msgstr "Steine gehören zu den Grundbaustoffen der Atlanter."
+
 #~ msgid "Cuts raw pieces of granit out of laying stones."
 #~ msgstr "Hackt Granitblöcke aus Steinbergen heraus."
+
+#~ msgid ""
+#~ "All atlantean soldiers have to wear the sign of their country on their "
+#~ "chests."
+#~ msgstr ""
+#~ "Jeder atlantische Soldat muss das Zeichen seines Landes auf seiner Brust "
+#~ "tragen."
 
 #~ msgid "Toolsmith's Shop"
 #~ msgstr "Werkzeugmacher"
@@ -1370,6 +1611,30 @@ msgstr "Arbeitet tief in den Minen um Kohle, Eisen und Gold zu schürfen."
 #~ "weiterverarbeitet werden um zu hochklassiger Kohle zu werden."
 
 #~ msgid ""
+#~ "Blackroots are a special kind of roots. The Atlanteans like their strong "
+#~ "taste and use its flour for making bread."
+#~ msgstr ""
+#~ "Schwarzwurzeln sind eine spezielle Wurzelart. Die Atlanter mögen den starken "
+#~ "Geschmack und benutzen gemahlene Schwarzwurzeln beim Backen ihrer Brote."
+
+#~ msgid ""
+#~ "This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
+#~ "common way to make it eatable."
+#~ msgstr ""
+#~ "Dieser Fisch ist geräuchert - da die Atlanter keinen rohen Fisch mögen, ist "
+#~ "dies ein beliebter Weg um den Fisch genießbar zu machen."
+
+#~ msgid "Helps to carry items at heavy used roads."
+#~ msgstr "Hilft, Waren auf viel benutzten Straßen zu transportieren."
+
+#~ msgid ""
+#~ "Trunks are the base for planks, which are used in nearly every building of "
+#~ "the Atlanteans."
+#~ msgstr ""
+#~ "Aus Stämmen macht man Bretter, die in fast jedem Gebäude der Atlanter "
+#~ "verwendet werden."
+
+#~ msgid ""
 #~ "Some of your starting buildings didn't have enough room and \n"
 #~ "weren't build. You are at an disadvantage with this; consider restarting\n"
 #~ "this map with a fair starting condition."
@@ -1377,3 +1642,39 @@ msgstr "Arbeitet tief in den Minen um Kohle, Eisen und Gold zu schürfen."
 #~ "Ein paar deiner Startgebäude konnten nicht gesetzt werden, da kein Platz für "
 #~ "sie gefunden wurde. Dadurch bist du benachteiligt und solltest in Betracht "
 #~ "ziehen, die Karte noch einmal mit einer anderen Startbedingung neuzustarten."
+
+#~ msgid ""
+#~ "This corn is the base of the fine cornflour, that every atlantian baker "
+#~ "needs for a good bread."
+#~ msgstr ""
+#~ "Mais ist die Basis für Maismehl, das wiederum von jedem atlanter Bäcker "
+#~ "benötigt wird, um Brot zu backen."
+
+#~ msgid ""
+#~ "This hook pole is used by the smoker to hang up all the meat and fish to the "
+#~ "top of the smoke-house. It is created by the toolsmith."
+#~ msgstr ""
+#~ "Die Hakenstange wird vom Räucherer verwendet, um das Fleisch und den Fisch "
+#~ "in die Spitze der Räucherei zu hängen. Sie wird vom Werkzeugmacher "
+#~ "hergestellt."
+
+#~ msgid ""
+#~ "To make the fine atlantian steel a hot fire is needed. But a fire of wood "
+#~ "isn't hot enough -this coal brings the needed heat."
+#~ msgstr ""
+#~ "Um den vorzüglichen atlantischen Stahl herzustellen, wird ein heißes Feuer "
+#~ "benötigt, doch ein Holzfeuer ist nicht heiß genug - diese Kohle bringt die "
+#~ "benötigte Hitze."
+
+#~ msgid ""
+#~ "This wonderful diamonds are used for some exclusive buildings and tools."
+#~ msgstr ""
+#~ "Diese wundervollen Diamanten werden beim Bau einiger exklusiver Gebäude und "
+#~ "Werkzeuge verwandt."
+
+#~ msgid ""
+#~ "Water is the most essential essence for life! This water is used in many "
+#~ "places, for example to make bread."
+#~ msgstr ""
+#~ "Wasser ist der Hauptbestandteil des Lebens! Es wird für viele Dinge, wie zum "
+#~ "Beispiel zum Brotbacken, verwandt."
