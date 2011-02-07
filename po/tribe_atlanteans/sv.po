@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-02-06 16:28+0000\n"
 "PO-Revision-Date: 2010-06-06 22:38+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-07 05:05+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -524,8 +524,10 @@ msgid "Miller"
 msgstr "Mjölnare"
 
 #: ../../tribes/atlanteans/miller/conf:1
-msgid "Mills wheat to produce flour."
-msgstr "Mal vete för att framställa mjöl."
+msgid ""
+"Mills blackroot and corn to produce blackroot flour and corn flour, "
+"respectively."
+msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -1452,6 +1454,9 @@ msgstr ""
 
 #~ msgid "This is red iron ore."
 #~ msgstr "Detta är röd järnmalm."
+
+#~ msgid "Mills wheat to produce flour."
+#~ msgstr "Mal vete för att framställa mjöl."
 
 #~ msgid "This is an advanced trident for more experienced soldiers."
 #~ msgstr "Detta är en avancerad treudd för mer erfarna soldater."
