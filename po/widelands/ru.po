@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-06 17:28+0100\n"
-"PO-Revision-Date: 2011-01-31 15:19+0000\n"
+"PO-Revision-Date: 2011-02-07 07:35+0000\n"
 "Last-Translator: Georgiy <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-02-07 05:09+0000\n"
+"X-Launchpad-Export-Date: 2011-02-08 04:32+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -916,6 +916,12 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"<br>Основные команды:<br>/help  -  Просмотр справки<br>/announce <сообщение> "
+" -  Отправить сообщение как объявление в чат<br>/warn <имя> <причина>  -  "
+"Предупреждение пользователю <имя> по поводу <причина><br>/kick <имя> "
+"<причина>  -  Отключить пользователя <имя> из-за <причина><br>/forcePause    "
+"        -  Установить игру на паузу принудительно.<br>/endForcedPause        "
+"-  Продолжить игру с нормальной скоростью."
 
 #: ../../src/network/nethost.cc:349
 msgid "Wrong use, should be: /announce <message>"
@@ -946,7 +952,7 @@ msgstr "Если да, наберите: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:395
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "Процесс отключения отменен: Не указано имя!"
 
 #: ../../src/network/nethost.cc:397
 msgid "Wrong use, should be: /ack_kick <name>"
@@ -958,11 +964,11 @@ msgstr "Процесс отключения отменен: Неправильн
 
 #: ../../src/network/nethost.cc:414
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Пауза установлена принудительно - игра должна быть приостановлена."
 
 #: ../../src/network/nethost.cc:425
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Это не принудительная пауза - ничего не окончено."
 
 #: ../../src/network/nethost.cc:435
 msgid "Invalid command! Type /help for a list of commands."
@@ -1010,7 +1016,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1005
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr ""
+msgstr "Неизвестная серверу команда \"%s\"!"
 
 #: ../../src/network/nethost.cc:1189
 #, c-format
@@ -1050,7 +1056,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1773
 msgid "Client did not submit sync report in time."
-msgstr ""
+msgstr "Клиент не может отправить пакет синхронизации в данный момент."
 
 #: ../../src/network/nethost.cc:1980
 msgid "Client and host have become desynchronized."
@@ -1097,10 +1103,11 @@ msgstr "Клиент послал команду PLAYERCOMMAND, хотя игр�
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
+"Клиент %u (%u) отправил игровую команду (%i) для выбранного игрока (%i)."
 
 #: ../../src/network/nethost.cc:2172
 msgid "Client sent unexpected synchronization report."
-msgstr ""
+msgstr "Клиент отправил непонятный синхронизационный пакет."
 
 #: ../../src/network/nethost.cc:2208 ../../src/network/nethost.cc:2220
 msgid "Client requests file altough none is available to send."
@@ -1113,7 +1120,7 @@ msgstr "Передача файла %s к %s!"
 
 #: ../../src/network/nethost.cc:2231
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "Клиент запршивает часть файла, которая не существует."
 
 #: ../../src/network/nethost.cc:2234
 #, c-format
@@ -1185,7 +1192,7 @@ msgstr "Сервер использую другую версию протоко
 
 #: ../../src/network/netclient.cc:702
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me некорректная проверка суммы md5."
 
 #: ../../src/network/netclient.cc:772
 msgid "Unexpectedly received LAUNCH command from server."
@@ -1743,7 +1750,7 @@ msgstr "Время игры: "
 #: ../../src/wui/game_main_menu_save_game.cc:117
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
-msgstr ""
+msgstr "%02uдн%02uч%02uмин%02uсек%03u"
 
 #: ../../src/wui/game_main_menu_save_game.cc:194
 msgid ""
@@ -1930,7 +1937,7 @@ msgstr "Клиент"
 
 #: ../../src/wui/multiplayersetupgroup.cc:491
 msgid "Role"
-msgstr ""
+msgstr "Роль"
 
 #: ../../src/wui/multiplayersetupgroup.cc:507
 msgid "Start"
@@ -2008,19 +2015,19 @@ msgstr "Работники на складах"
 
 #: ../../src/wui/warehousewindow.cc:128
 msgid "Normal policy"
-msgstr ""
+msgstr "Нормальная политика"
 
 #: ../../src/wui/warehousewindow.cc:129
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "Предпочтительно хранить выбранные изделия здесь"
 
 #: ../../src/wui/warehousewindow.cc:130
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Не сохранять выбранные изделия здесь"
 
 #: ../../src/wui/warehousewindow.cc:131
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Удалить выбранные изделия отсюда"
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
@@ -2340,7 +2347,7 @@ msgstr "В игре нет игроков!"
 #: ../../src/game_io/game_interactive_player_data_packet.cc:80
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "Игрок онлайн: %s"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
@@ -2370,12 +2377,12 @@ msgstr "данные: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:274
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "изделия: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:287
 #, c-format
 msgid "constructionsite: %s"
-msgstr ""
+msgstr "Строительная площадка: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:467
 #, c-format

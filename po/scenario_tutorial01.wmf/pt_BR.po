@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-06 16:28+0000\n"
-"PO-Revision-Date: 2010-11-12 00:45+0000\n"
-"Last-Translator: Almufadado <Unknown>\n"
+"PO-Revision-Date: 2011-02-07 06:41+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-07 05:12+0000\n"
+"X-Launchpad-Export-Date: 2011-02-08 04:32+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -401,7 +401,7 @@ msgstr "Tudo pode ser construido no simbolo da casa verde."
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
 msgstr ""
-"Tudo, exceto grandes construções, podem ser construídos no símbolo da\r\n"
+"Tudo, exceto grandes construções, podem ser construídos no símbolo da\n"
 "casa amarela."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:294
@@ -845,7 +845,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
-"Agora já sabemos o que se está passando. Vamos esperar que a construção\r\n"
+"Agora já sabemos o que se está passando. Vamos esperar que a construção\n"
 "da Pedreira termine."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306

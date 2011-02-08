@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-06 16:28+0000\n"
-"PO-Revision-Date: 2011-01-24 20:36+0000\n"
+"PO-Revision-Date: 2011-02-07 09:36+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-07 05:04+0000\n"
+"X-Launchpad-Export-Date: 2011-02-08 04:31+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -561,6 +561,7 @@ msgid ""
 "Mills blackroot and corn to produce blackroot flour and corn flour, "
 "respectively."
 msgstr ""
+"Maalt helmkruit en maïs tot respectievelijk helmkruitmeel en maïsmeel."
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
