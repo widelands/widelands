@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-06 17:28+0100\n"
-"PO-Revision-Date: 2011-02-07 07:06+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-02-08 19:00+0000\n"
+"Last-Translator: Pierre Rudloff <tael67@gmail.com>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-02-08 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-02-09 04:51+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: ../../src/wlapplication.cc:369
@@ -3803,7 +3803,7 @@ msgstr "Type : "
 
 #: ../../src/ui_fsmenu/launchMPG.cc:378
 msgid "Saved game is directory"
-msgstr ""
+msgstr "La sauvegarde est un répertoire"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:380
 msgid ""
@@ -3813,6 +3813,13 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, "
 "please select another saved game or zip the directories content."
 msgstr ""
+"ATTENTION :\n"
+"La sauvegarde que vous avez sélectionné est un répertoire. Cela arrive, si "
+"vous avez activé l'option \"nozip\" ou si vous avez manuellement dézippé la "
+"sauvegarde.\n"
+"Widelands n'est pas capable de transférer la structure d'un répertoire, "
+"veuillez sélectionner une autre sauvegarde ou compresser le contenu des "
+"répertoires."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:397 ../../src/ui_fsmenu/launchSPG.cc:252
 msgid "File not found"

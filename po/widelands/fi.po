@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-06 17:28+0100\n"
-"PO-Revision-Date: 2010-06-06 20:58+0000\n"
+"PO-Revision-Date: 2011-02-08 16:44+0000\n"
 "Last-Translator: Mad_Mac <destroyerko@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-07 05:07+0000\n"
+"X-Launchpad-Export-Date: 2011-02-09 04:51+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -926,7 +926,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:435
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Virheellinen komento! Kirjoita /help nähdäksesi komennot."
 
 #: ../../src/network/nethost.cc:572
 msgid "Server has left the game."
@@ -942,7 +942,7 @@ msgstr "Palvelin on kaatunut ja tehnyt hätätallennuksen."
 
 #: ../../src/network/nethost.cc:940
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Et pysty potkaisemaan itseäsi!"
 
 #: ../../src/network/nethost.cc:961
 msgid "There is no connected user with that nickname!"
@@ -951,7 +951,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:980
 #, c-format
 msgid "%s tried to start the game, but the server is not launchable."
-msgstr ""
+msgstr "%s yritti aloittaa pelin, mutta palvelin ei ole käynnistettävissä."
 
 #: ../../src/network/nethost.cc:984
 #, c-format
@@ -967,7 +967,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1005
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr ""
+msgstr "Tuntematon palvelinkomento \"%s\"!"
 
 #: ../../src/network/nethost.cc:1189
 #, c-format
@@ -1774,7 +1774,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:153 ../../src/wui/transport_ui.cc:248
 msgid "Reset to default"
-msgstr ""
+msgstr "Palauta oletus"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
@@ -1869,13 +1869,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:453
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Pelaaja %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:117
 #: ../../src/ui_fsmenu/launchMPG.cc:455
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Katsoja"
 
 #: ../../src/wui/multiplayersetupgroup.cc:325
 #: ../../src/ui_fsmenu/netsetup_lan.cc:188
@@ -1889,12 +1889,12 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:426
 #: ../../src/ui_fsmenu/launchMPG.cc:278 ../../src/ui_fsmenu/launchSPG.cc:224
 msgid "Scenario"
-msgstr ""
+msgstr "Skenaario"
 
 #: ../../src/wui/multiplayersetupgroup.cc:428
 #: ../../src/ui_fsmenu/launchMPG.cc:282
 msgid "Savegame"
-msgstr ""
+msgstr "Tallennus"
 
 #: ../../src/wui/multiplayersetupgroup.cc:483
 msgid "Client name"
@@ -1902,24 +1902,24 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:491
 msgid "Role"
-msgstr ""
+msgstr "Rooli"
 
 #: ../../src/wui/multiplayersetupgroup.cc:507
 msgid "Start"
-msgstr ""
+msgstr "Aloitus"
 
 #: ../../src/wui/multiplayersetupgroup.cc:515
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
 #: ../../src/wui/multiplayersetupgroup.cc:523
 msgid "Tribe"
-msgstr ""
+msgstr "Heimo"
 
 #: ../../src/wui/multiplayersetupgroup.cc:535
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 msgid "Team"
-msgstr ""
+msgstr "Joukkue"
 
 #: ../../src/wui/attack_box.cc:174
 msgid "Soldiers:"
@@ -1997,7 +1997,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Worker"
-msgstr ""
+msgstr "Työntekijä"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
@@ -2683,7 +2683,7 @@ msgstr "liput: %s"
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
 msgid "lua function: %s"
-msgstr ""
+msgstr "lua funktio: %s"
 
 #: ../../src/logic/world.cc:623
 #, c-format
@@ -3491,7 +3491,7 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:671
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr ""
+msgstr "Sinun %s on hyökkäyksen alaisena.</p>"
 
 #: ../../src/logic/militarysite.cc:679
 msgid "You are under attack"
@@ -3669,27 +3669,27 @@ msgstr "Paina ESC tai napsauta hiirellä jatkaaksesi."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Valitse"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
-msgstr ""
+msgstr "Valitse kartta"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Tallennettu peli"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Valitse tallennettu peli"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84
 msgid "Cancel selection"
-msgstr ""
+msgstr "Kumoa valinta"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:113
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Vaihda kartta tai tallennettu peli"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:120 ../../src/ui_fsmenu/launchSPG.cc:77
 msgid "Start game"
@@ -3697,11 +3697,11 @@ msgstr "Aloita peli"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
-msgstr ""
+msgstr "Näytä ohjeikkuna"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:634
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Moninpeli asetukset"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
@@ -3729,7 +3729,7 @@ msgstr "Tyyppi: "
 
 #: ../../src/ui_fsmenu/launchMPG.cc:378
 msgid "Saved game is directory"
-msgstr ""
+msgstr "Tallennettu peli on kansio"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:380
 msgid ""
@@ -3770,7 +3770,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:457
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "Klikkaa \"?\" oikeassa ylänurkassa saadaksesi apua."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:518
 msgid "Saved players are:"
@@ -3778,7 +3778,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:538
 msgid "<closed>"
-msgstr ""
+msgstr "<suljettu>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:600
 msgid "There was an error!"
@@ -3786,7 +3786,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:600
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "Kartta tiedosto näyttää olevan viallinen!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:617
 msgid "Map informations:\n"
@@ -3840,7 +3840,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Player settings"
-msgstr ""
+msgstr "Pelaaja asetukset"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3865,7 +3865,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:662
 msgid "Closed."
-msgstr ""
+msgstr "Suljettu."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid ""
@@ -4162,7 +4162,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
-msgstr ""
+msgstr "Kartan nimi"
 
 #: ../../src/ui_fsmenu/mapselect.cc:235
 msgid "(directory)"
@@ -4252,11 +4252,11 @@ msgstr "nimetön"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 msgid "<Directory>"
-msgstr ""
+msgstr "<Hakemisto>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"
-msgstr ""
+msgstr "<Ei kartta tiedosto>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 msgid " exists already. Overwrite?"
