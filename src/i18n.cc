@@ -116,7 +116,7 @@ void init_locale() {
 	locale = "C";
 	std::setlocale(LC_ALL, "C");
 	std::setlocale(LC_MESSAGES, "");
-#endif	
+#endif
 }
 
 /**
@@ -142,7 +142,7 @@ void set_locale(std::string name) {
 	} else {
 		// otherwise, read alternatives from file
 		Profile loc("txts/locales");
-		Section *s = &loc.pull_section("alternatives");
+		Section * s = &loc.pull_section("alternatives");
 		alt_str = s->get_string(lang.c_str(), lang.c_str());
 		alt_str += ",";
 	}
@@ -166,15 +166,15 @@ void set_locale(std::string name) {
 #endif
 
 #ifdef linux
-	char *res = NULL;
-	char const *encoding[] = { "", ".utf-8", "@euro", ".UTF-8" };
-	std::size_t found = alt_str.find(",", 0);
+	char * res = NULL;
+	char const * encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
+	std::size_t found = alt_str.find(',', 0);
 	bool leave_while = false;
 	while (found != std::string::npos) {
 		std::string base_locale = alt_str.substr(0, int(found));
-		alt_str = alt_str.erase(0, int(found)+1);
-		
-		for(int j=0; j<4; ++j) {
+		alt_str = alt_str.erase(0, int(found) + 1);
+
+		for (int j = 0; j < 4; ++j) {
 			std::string try_locale = base_locale + encoding[j];
 			res = std::setlocale(LC_MESSAGES, try_locale.c_str());
 			if (res) {
@@ -187,8 +187,8 @@ void set_locale(std::string name) {
 			}
 		}
 		if (leave_while) break;
-		
-		found = alt_str.find(",", 0);
+
+		found = alt_str.find(',', 0);
 	}
 	if (leave_while) {
 		setenv("LANG", locale.c_str(), 1);

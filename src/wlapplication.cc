@@ -286,7 +286,7 @@ m_redirected_stdio(false)
 	init_settings();
 	if (m_default_datadirs)
 		setup_searchpaths(m_commandline["EXENAME"]);
-	init_language();	// search paths must already be set up
+	init_language(); // search paths must already be set up
 	cleanup_replays();
 	init_hardware();
 
