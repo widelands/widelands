@@ -30,6 +30,8 @@
 
 #ifdef __APPLE__
 #define SETLOCALE libintl_setlocale
+#elif _MSC_VER
+#define SETLOCALE setlocale
 #else
 #define SETLOCALE std::setlocale
 #endif
