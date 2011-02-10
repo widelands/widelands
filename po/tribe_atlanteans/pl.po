@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-06 16:28+0000\n"
-"PO-Revision-Date: 2011-02-08 15:20+0000\n"
+"PO-Revision-Date: 2011-02-09 13:07+0000\n"
 "Last-Translator: Michal Maslanko <burak326@o2.pl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-09 04:50+0000\n"
+"X-Launchpad-Export-Date: 2011-02-10 04:32+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -42,6 +42,8 @@ msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
+"Kamizelka i lekki trójząb są podstawowym ekwipunkiem młodego żołnierza. "
+"Kamizelki są produkowane w warsztacie tkackim."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -60,6 +62,8 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
+"Żaden Atlanta nie lubi surowych ryb, a wędzenie ich w wędzarni jest "
+"najprostszym sposobem by zrobić z nich pokarm."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -115,6 +119,8 @@ msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
 msgstr ""
+"Mąka z czarnego korzenia jest mielona w młynie. Wypieka się z niej w "
+"piekarni smakowity chleb."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -146,6 +152,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
+"Czarny korzeń jest specjalnym rodzajem korzenia uprawianym na farmach i "
+"przetwarzam w młynach. Atlanci lubią jego mocny smak i pieką z jego mąki "
+"chleb."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -253,6 +262,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Mąka kukurydziana jest mielona w młynie i jest jednym z trzech składników "
+"potrzebnych do pieczenia w piekarniach Atlantyckiego chleba."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -324,6 +335,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Ryby są najważniejszym składnikiem żywieniowym dla Atlantów. Wędzi się je w "
+"wędzarniach zanim zostaną dostarczone do kopalń, placów treningowych i "
+"zwiadowców."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -376,11 +390,14 @@ msgid ""
 "in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"Złoto jest najbardziej cennym materiałem. Wytapia się je ze złotej rudy w "
+"hucie. Złoto używane jest przez płatnerza, zbrojmistrza i tkacza złota."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Ruda złota jest wydobywana w kopalniach i przetapiana na złoto w hutach."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -447,6 +464,8 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
 msgstr ""
+"Konie pomagają przenosić towary na często używanych drogach. Konie rodzą się "
+"je w stadninach."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -477,6 +496,8 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
+"Żelazo jest wytapiane z rudy żelaza w hucie. Używa się je w warsztacie, u "
+"płatnerza i zbrojmistrza."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
@@ -1113,6 +1134,9 @@ msgid ""
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
 msgstr ""
+"Smakowity chleb jest wypiekany w piekarniach z mąki kukurydzianej, mąki z "
+"czarnego korzenia i wody. Jest podstawowym pokarmem dla górników, zwiadowców "
+"i na placach treningowych (labirynt i podziemia)."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1132,6 +1156,8 @@ msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
 "golden tabard in the weaving-mill."
 msgstr ""
+"Ta przędza, wytworzona ze złota przez tkacza złota, używana jest do tkania "
+"ekskluzywnych złotych kamizelek w warsztacie tkackim."
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
