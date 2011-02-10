@@ -28,6 +28,12 @@
 #include <cstdlib>
 #include <utility>
 
+#ifdef __APPLE__
+#define SETLOCALE libintl_setlocale
+#else
+#define SETLOCALE std::setlocale
+#endif
+
 extern int _nl_msg_cat_cntr;
 
 namespace i18n {
@@ -110,12 +116,12 @@ void init_locale() {
 #ifdef _WIN32
 	env_locale = "";
 	locale = "English";
-	std::setlocale(LC_ALL, "English");
+	SETLOCALE(LC_ALL, "English");
 #else
 	env_locale = getenv("LANG");  // save environment variable
 	locale = "C";
-	std::setlocale(LC_ALL, "C");
-	std::setlocale(LC_MESSAGES, "");
+	SETLOCALE(LC_ALL, "C");
+	SETLOCALE(LC_MESSAGES, "");
 #endif
 }
 
@@ -176,7 +182,7 @@ void set_locale(std::string name) {
 
 		for (int j = 0; j < 4; ++j) {
 			std::string try_locale = base_locale + encoding[j];
-			res = std::setlocale(LC_MESSAGES, try_locale.c_str());
+			res = SETLOCALE(LC_MESSAGES, try_locale.c_str());
 			if (res) {
 				locale = try_locale;
 				log("using locale %s\n", try_locale.c_str());
@@ -200,8 +206,8 @@ void set_locale(std::string name) {
 	++_nl_msg_cat_cntr;
 #endif
 
-	std::setlocale(LC_NUMERIC, NULL);
-	std::setlocale(LC_ALL,     NULL);
+	SETLOCALE(LC_NUMERIC, NULL);
+	SETLOCALE(LC_ALL,     NULL);
 
 	if (textdomains.size()) {
 		char const * const domain = textdomains.back().first.c_str();
