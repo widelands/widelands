@@ -22,13 +22,35 @@
 
 #include "io/filesystem/disk_filesystem.h"
 
+#ifdef _MSC_VER
+#include <sstream>
+static std::string Win32Path(std::string s)
+{
+	for(size_t i=0;i<s.size();i++)
+		if (s[i] == '/') s[i] = '\\';
+	if (s.size()>0 && s[0] == '\\')
+		s.insert(0, "T:");
+	return s;
+}
+static int setenv(const char *envname, const char *envval, int overwrite)
+{
+	std::stringstream s;
+	s << envname << "=" << Win32Path(envval);
+	return _putenv(s.str().c_str());
+}
+#else
 // BOOST_CHECK_EQUAL generates an old-style cast usage warning, so ignore
 #pragma GCC diagnostic ignored "-Wold-style-cast"
+#endif
 
 BOOST_AUTO_TEST_SUITE(FileSystemTests)
-
+#ifndef WIN32
 #define TEST_CANONICALIZE_NAME(root, path, expected)                          \
-   BOOST_CHECK_EQUAL(RealFSImpl(root).FS_CanonicalizeName(path), expected);   \
+   BOOST_CHECK_EQUAL(RealFSImpl(root).FS_CanonicalizeName(path), expected);   
+#else
+#define TEST_CANONICALIZE_NAME(root, path, expected)                          \
+   BOOST_CHECK_EQUAL(RealFSImpl(Win32Path(root)).FS_CanonicalizeName(path), Win32Path(expected));
+#endif
 
 BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	setenv("HOME", "/home/test", 1);
@@ -102,6 +124,8 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	TEST_CANONICALIZE_NAME("/home/test/.", "./path", "/home/test/path");
 }
 
+// Skip testing tilde expansion on windows.
+#ifndef WIN32
 // ~ gets expanded to $HOME
 BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
 	setenv("HOME", "/my/home", 1);
@@ -155,6 +179,6 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
 	TEST_CANONICALIZE_NAME("/opt", "a/~path/here", "/opt/a/~path/here");
 	TEST_CANONICALIZE_NAME("/opt", "a/path~/here", "/opt/a/path~/here");
 }
-
+#endif
 BOOST_AUTO_TEST_SUITE_END()
 

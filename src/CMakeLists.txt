@@ -107,7 +107,7 @@ if (WL_UNIT_TESTS)
   list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY}) 
 
   add_subdirectory(economy)
-#add_subdirectory(io)
+  add_subdirectory(io)
   add_subdirectory(scripting)
 endif (WL_UNIT_TESTS)
 
