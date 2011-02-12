@@ -286,6 +286,7 @@ m_redirected_stdio(false)
 	init_settings();
 	if (m_default_datadirs)
 		setup_searchpaths(m_commandline["EXENAME"]);
+	init_language(); // search paths must already be set up
 	cleanup_replays();
 	init_hardware();
 
@@ -780,16 +781,6 @@ bool WLApplication::init_settings() {
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
 
-	// Set Locale and grab default domain
-	i18n::set_locale(s.get_string("language", ""));
-
-	std::string localedir = s.get_string("localedir", INSTALL_LOCALEDIR);
-	i18n::set_localedir(find_relative_locale_path(localedir));
-
-	i18n::grab_textdomain("widelands");
-
-	log("using locale %s\n", i18n::get_locale().c_str());
-
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
@@ -832,6 +823,23 @@ bool WLApplication::init_settings() {
 	// KLUDGE!
 
 	return true;
+}
+
+/**
+ * Initialize language settings
+ */
+void WLApplication::init_language() {
+	// retrieve configuration settings
+	Section & s = g_options.pull_section("global");
+
+	// Initialize locale and grab "widelands" textdomain
+	i18n::init_locale();
+	std::string localedir = s.get_string("localedir", INSTALL_LOCALEDIR);
+	i18n::set_localedir(find_relative_locale_path(localedir));
+	i18n::grab_textdomain("widelands");
+
+	// Set locale corresponding to selected language
+	i18n::set_locale(s.get_string("language", ""));
 }
 
 /**

@@ -19,6 +19,7 @@
 
 #include "i18n.h"
 #include "log.h"
+#include "profile/profile.h"
 
 #include <config.h>
 
@@ -26,6 +27,14 @@
 
 #include <cstdlib>
 #include <utility>
+
+#ifdef __APPLE__
+#define SETLOCALE libintl_setlocale
+#elif _MSC_VER
+#define SETLOCALE setlocale
+#else
+#define SETLOCALE std::setlocale
+#endif
 
 extern int _nl_msg_cat_cntr;
 
@@ -36,6 +45,7 @@ namespace i18n {
 /// \see grab_texdomain()
 std::vector<std::pair<std::string, std::string> > textdomains;
 
+std::string env_locale;
 std::string locale;
 std::string localedir;
 
@@ -70,8 +80,8 @@ void grab_textdomain(std::string const & domain)
 	char const * const dom = domain.c_str();
 	char const * const ldir = localedir.c_str();
 
-	bind_textdomain_codeset(dom, "UTF-8");
 	bindtextdomain(dom, ldir);
+	bind_textdomain_codeset(dom, "UTF-8");
 	// log("textdomain %s @ %s\n", dom, ldir);
 	textdomain(dom);
 	textdomains.push_back(std::make_pair(dom, ldir));
@@ -100,55 +110,116 @@ void release_textdomain() {
 }
 
 /**
- * Set the locale to the given string
+ * Initialize locale to English.
+ * Save system language (for later selection).
+ * Code inspired by wesnoth.org
+ */
+void init_locale() {
+#ifdef _WIN32
+	env_locale = "";
+	locale = "English";
+	SETLOCALE(LC_ALL, "English");
+#else
+	// first, save environment variable
+	env_locale = getenv("LANG");
+	if (env_locale.empty()) env_locale = getenv("LANGUAGE");
+	
+	locale = "C";
+	SETLOCALE(LC_ALL, "C");
+	SETLOCALE(LC_MESSAGES, "");
+#endif
+}
+
+/**
+ * Set the locale to the given string.
+ * Code inspired by wesnoth.org
  */
 void set_locale(std::string name) {
 	std::string lang(name);
+
+	log("selected language: %s\n", lang.empty()?"(system language)":lang.c_str());
+
+#ifndef _WIN32
+#ifndef __AMIGAOS4__
+#ifndef __APPLE__
+	unsetenv ("LANGUAGE"); // avoid problems with this variable
+#endif
+#endif
+#endif
+
+	std::string alt_str;
+	if (lang.empty()) {
+		// reload system language, if selected
+		lang = env_locale;
+		alt_str = env_locale + ",";
+	} else {
+		// otherwise, read alternatives from file
+		Profile loc("txts/locales");
+		Section * s = &loc.pull_section("alternatives");
+		alt_str = s->get_string(lang.c_str(), lang.c_str());
+		alt_str += ",";
+	}
 
 	// Somehow setlocale doesn't behave same on
 	// some systems.
 #ifdef __BEOS__
 	setenv ("LANG",   lang.c_str(), 1);
 	setenv ("LC_ALL", lang.c_str(), 1);
+	locale = lang;
 #endif
 #ifdef __APPLE__
 	setenv ("LANGUAGE", lang.c_str(), 1);
 	setenv ("LC_ALL",   lang.c_str(), 1);
+	locale = lang;
 #endif
-
 #ifdef _WIN32
 	putenv(const_cast<char *>((std::string("LANG=") + lang).c_str()));
+	locale = lang;
 #endif
 
 #ifdef linux
-	// hopefully this gets gettext to run on all linux distributions - some like
-	// ubuntu are very problematic with setting language variables.
-	// If this doesn't solve the problem on your linux-distribution, here comes
-	// a quote from
-	// http://www.gnu.org/software/automake/manual/
-	//  gettext/Locale-Environment-Variables.html
-	//
-	//   Some systems, unfortunately, set LC_ALL in /etc/profile or in similar
-	//   initialization files. As a user, you therefore have to unset this
-	//   variable if you want to set LANG and optionally some of the other LC_xxx
-	//   variables.
+	char * res = NULL;
+	char const * encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
+	std::size_t found = alt_str.find(',', 0);
+	bool leave_while = false;
+	// try every possible combination of alternative and encoding
+	while (found != std::string::npos) {
+		std::string base_locale = alt_str.substr(0, int(found));
+		alt_str = alt_str.erase(0, int(found) + 1);
 
-	/* If lang is empty, fill it with $LANG */
-	if (lang.size() < 1)
-		if (char const * const l = getenv("LANG"))
-			lang = l;
-	/* Than set the variables */
-	setenv ("LANG",     lang.c_str(), 1);
-	setenv ("LANGUAGE", lang.c_str(), 1);
-	log
-		("LANG %s, LANGUAGE %s:%s\n",
-		 lang.c_str(), lang.c_str(), + lang.substr(0, 2).c_str());
+		for (int j = 0; j < 4; ++j) {
+			std::string try_locale = base_locale + encoding[j];
+			res = SETLOCALE(LC_MESSAGES, try_locale.c_str());
+			if (res) {
+				locale = try_locale;
+				log("using locale %s\n", try_locale.c_str());
+				leave_while = true;
+				break;
+			} else {
+				//log("locale is not working: %s\n", try_locale.c_str());
+			}
+		}
+		if (leave_while) break;
+
+		found = alt_str.find(',', 0);
+	}
+	if (leave_while) {
+		setenv("LANG", locale.c_str(), 1);
+	} else {
+		log("No corresponding locale found - trying to set it via LANGUAGE=%s\n", lang.c_str());
+		setenv("LANGUAGE", lang.c_str(), 1);
+		SETLOCALE(LC_MESSAGES, "");    // set locale according to the env. variables
+		                               // --> see  $ man 3 setlocale
+		// assume that it worked
+		// maybe, do another check with the return value (?)
+		locale = lang;
+	}
 
 	/* Finally make changes known.  */
 	++_nl_msg_cat_cntr;
 #endif
-	setlocale(LC_ALL, ""); //  call to libintl
-	locale = lang.c_str();
+
+	SETLOCALE(LC_ALL, ""); //  call to libintl
 
 	if (textdomains.size()) {
 		char const * const domain = textdomains.back().first.c_str();
