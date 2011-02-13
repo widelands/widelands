@@ -132,7 +132,7 @@ if (WIN32)
     #GGZ on MSVC using 3rdparty bundle needs expat and iconv library
     find_package(EXPAT REQUIRED)
     target_link_libraries(widelands_all ${EXPAT_LIBRARY})
-    find_library(ICONV iconv libiconv REQUIRED)
+    find_library(ICONV_LIBRARY iconv libiconv REQUIRED)
     target_link_libraries(widelands_all ${ICONV_LIBRARY})
 
   else (DEFINED MSVC)

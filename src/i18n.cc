@@ -120,7 +120,10 @@ void init_locale() {
 	locale = "English";
 	SETLOCALE(LC_ALL, "English");
 #else
-	env_locale = getenv("LANG");  // save environment variable
+	// first, save environment variable
+	env_locale = getenv("LANG");
+	if (env_locale.empty()) env_locale = getenv("LANGUAGE");
+	
 	locale = "C";
 	SETLOCALE(LC_ALL, "C");
 	SETLOCALE(LC_MESSAGES, "");
@@ -134,13 +137,15 @@ void init_locale() {
 void set_locale(std::string name) {
 	std::string lang(name);
 
+	log("selected language: %s\n", lang.empty()?"(system language)":lang.c_str());
+
 #ifndef _WIN32
 #ifndef __AMIGAOS4__
+#ifndef __APPLE__
 	unsetenv ("LANGUAGE"); // avoid problems with this variable
 #endif
 #endif
-
-	log("selected language: %s\n", lang.empty()?"(system language)":lang.c_str());
+#endif
 
 	std::string alt_str;
 	if (lang.empty()) {
@@ -178,6 +183,7 @@ void set_locale(std::string name) {
 	char const * encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
 	std::size_t found = alt_str.find(',', 0);
 	bool leave_while = false;
+	// try every possible combination of alternative and encoding
 	while (found != std::string::npos) {
 		std::string base_locale = alt_str.substr(0, int(found));
 		alt_str = alt_str.erase(0, int(found) + 1);
@@ -201,15 +207,20 @@ void set_locale(std::string name) {
 	if (leave_while) {
 		setenv("LANG", locale.c_str(), 1);
 	} else {
-		log("No corresponding locale was found!\n");
+		log("No corresponding locale found - trying to set it via LANGUAGE=%s\n", lang.c_str());
+		setenv("LANGUAGE", lang.c_str(), 1);
+		SETLOCALE(LC_MESSAGES, "");    // set locale according to the env. variables
+		                               // --> see  $ man 3 setlocale
+		// assume that it worked
+		// maybe, do another check with the return value (?)
+		locale = lang;
 	}
 
 	/* Finally make changes known.  */
 	++_nl_msg_cat_cntr;
 #endif
 
-	SETLOCALE(LC_NUMERIC, NULL);
-	SETLOCALE(LC_ALL,     NULL);
+	SETLOCALE(LC_ALL, ""); //  call to libintl
 
 	if (textdomains.size()) {
 		char const * const domain = textdomains.back().first.c_str();
