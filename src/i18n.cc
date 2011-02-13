@@ -123,7 +123,7 @@ void init_locale() {
 	// first, save environment variable
 	env_locale = getenv("LANG");
 	if (env_locale.empty()) env_locale = getenv("LANGUAGE");
-	
+
 	locale = "C";
 	SETLOCALE(LC_ALL, "C");
 	SETLOCALE(LC_MESSAGES, "");
