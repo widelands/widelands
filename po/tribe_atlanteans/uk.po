@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-06 16:28+0000\n"
+"POT-Creation-Date: 2011-02-13 15:44+0000\n"
 "PO-Revision-Date: 2010-08-30 23:36+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-07 05:05+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-14 04:35+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -302,6 +302,12 @@ msgstr "Рубає дерева."
 #: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
 msgstr "Щіпці коваля."
+
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -989,14 +995,6 @@ msgid ""
 "soldiers from attack level 2 to level 3."
 msgstr ""
 
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Кліщі коваля є інструментом ливарника, що працює в ливарні. Виготовлєються в "
-"кузні."
-
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
 msgstr "Рибак ловить смачну рибу."
@@ -1416,6 +1414,13 @@ msgstr "Працює в глибоких шахтах, видобуває вуг
 #~ msgstr ""
 #~ "Кухонне приладдя є інструментом пекаря, кожен пекар потребує свого власного "
 #~ "приладдя. Виготовляється в кузні."
+
+#~ msgid ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "Кліщі коваля є інструментом ливарника, що працює в ливарні. Виготовлєються в "
+#~ "кузні."
 
 #~ msgid ""
 #~ "This corn is the base of the fine cornflour, that every atlantian baker "

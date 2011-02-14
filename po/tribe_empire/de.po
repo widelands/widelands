@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-06 16:28+0000\n"
+"POT-Creation-Date: 2011-02-13 15:44+0000\n"
 "PO-Revision-Date: 2011-01-15 04:13+0000\n"
 "Last-Translator: fraang <florian.angermeier@desaster-games.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-07 05:06+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-14 04:36+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -292,6 +292,12 @@ msgstr "frisch gesätes Feld"
 #: ../../tribes/empire/conf:66
 msgid "Fire Tongs"
 msgstr "Feuerzange"
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/empire/conf:67
 msgid "Fish"
@@ -959,14 +965,6 @@ msgstr ""
 "Nahrung - benötigt um die Gesundheitsstufe von Soldaten von 2 auf 3 zu "
 "trainieren."
 
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Die Feuerzange ist das Werkzeug des Hüttenarbeiters. Sie wird vom "
-"Werkzeugmacher hergestellt."
-
 #: ../../tribes/empire/coal/conf:1
 msgid ""
 "The fires of the Empire smelting works, armour smithies and weapon smithies "
@@ -1508,6 +1506,13 @@ msgstr "Arbeitet im Sägewerk."
 
 #~ msgid "Resource indicator granit much"
 #~ msgstr "Ressourcen Anzeige für viel Granit"
+
+#~ msgid ""
+#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "Die Feuerzange ist das Werkzeug des Hüttenarbeiters. Sie wird vom "
+#~ "Werkzeugmacher hergestellt."
 
 #~ msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
 #~ msgstr "Neben Brot und Fleisch wird im Imperium auch gerne Fisch verspeist."

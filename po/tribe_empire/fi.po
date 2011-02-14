@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-06 16:28+0000\n"
+"POT-Creation-Date: 2011-02-13 15:44+0000\n"
 "PO-Revision-Date: 2010-08-30 23:41+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-07 05:06+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-14 04:36+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -283,6 +283,12 @@ msgstr "Pelto hyvin pieni"
 #: ../../tribes/empire/conf:66
 msgid "Fire Tongs"
 msgstr "Pihdit"
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/empire/conf:67
 msgid "Fish"
@@ -914,14 +920,6 @@ msgid ""
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
 
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Sulattaja käyttää tultakestäviä pihtejä sulattamossa työskennellessään. "
-"Työkaluseppä valmistaa ne."
-
 #: ../../tribes/empire/coal/conf:1
 msgid ""
 "The fires of the Empire smelting works, armour smithies and weapon smithies "
@@ -1417,6 +1415,13 @@ msgstr ""
 
 #~ msgid "Resource indicator granit much"
 #~ msgstr "Resurssimerkki graniitti paljon"
+
+#~ msgid ""
+#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "Sulattaja käyttää tultakestäviä pihtejä sulattamossa työskennellessään. "
+#~ "Työkaluseppä valmistaa ne."
 
 #~ msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
 #~ msgstr "Kala on Keisarikunnan asukkaiden ruokaa lihan ja leivän ohella."

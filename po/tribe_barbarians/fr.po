@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-06 16:28+0000\n"
+"POT-Creation-Date: 2011-02-13 15:44+0000\n"
 "PO-Revision-Date: 2011-02-08 18:58+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-09 04:50+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-14 04:35+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -339,6 +339,13 @@ msgstr "Champ très petit"
 #: ../../tribes/barbarians/conf:78
 msgid "Fire Tongs"
 msgstr "Tenailles"
+
+#: ../../tribes/barbarians/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. "
+"Produced in the metal works (but ceases to be produced by the building if it "
+"is enhanced to an axefactory and war mill)."
+msgstr ""
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
@@ -1056,16 +1063,6 @@ msgstr ""
 "La hache d'abattage est l'outil des bucherons pour abattre les arbres. Elle "
 "est produite dans une quincaillerie (mais cesse d'être produit si le "
 "bâtiment est amélioré en usine de hache et moulin de guerre)."
-
-#: ../../tribes/barbarians/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"Produced in the metal works (but ceases to be produced by the building if it "
-"is enhanced to an axefactory and war mill)."
-msgstr ""
-"Les pinces à feu sont l'outil du fondeur, qui travaille dans la fonderie. "
-"Produites dans la quincaillerie (mais cesse d'être produites par le bâtiment "
-"si amélioré en usine de hache et moulin de guerre)."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -1846,3 +1843,12 @@ msgstr ""
 #~ "utilisé comme un matériau de construction précieux et pour produire "
 #~ "différentes haches (dans le moulin de guerre) et différentes armures (dans "
 #~ "la forge de casques)."
+
+#~ msgid ""
+#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
+#~ "Produced in the metal works (but ceases to be produced by the building if it "
+#~ "is enhanced to an axefactory and war mill)."
+#~ msgstr ""
+#~ "Les pinces à feu sont l'outil du fondeur, qui travaille dans la fonderie. "
+#~ "Produites dans la quincaillerie (mais cesse d'être produites par le bâtiment "
+#~ "si amélioré en usine de hache et moulin de guerre)."

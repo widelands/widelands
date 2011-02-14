@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-06 16:28+0000\n"
+"POT-Creation-Date: 2011-02-13 15:44+0000\n"
 "PO-Revision-Date: 2010-08-30 23:27+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-07 05:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-14 04:35+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -302,6 +302,12 @@ msgstr "Tira árbores."
 #: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
 msgstr "Tenaces para o lume"
+
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -991,14 +997,6 @@ msgid ""
 "soldiers from attack level 2 to level 3."
 msgstr ""
 
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"As tenazas para o lume son ferramentas de fundidor, e úsanse nas fundicións. "
-"Prodúceas o ferreiro."
-
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
 msgstr "O pescador pesca delicioso pescado."
@@ -1413,6 +1411,13 @@ msgstr "Traballa duro nas minas para producir carbón, ferro ou ouro."
 #~ msgstr ""
 #~ "Un dos mellores tridentes dos atlánticos. Reservado para os mellores "
 #~ "guerreiros."
+
+#~ msgid ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "As tenazas para o lume son ferramentas de fundidor, e úsanse nas fundicións. "
+#~ "Prodúceas o ferreiro."
 
 #~ msgid "Fish is one of the biggest food-resources of the Atlanteans."
 #~ msgstr "O pescado é un dos principais recursos alimenticios dos atlánticos."
