@@ -28,7 +28,8 @@
 #include <cstdlib>
 #include <utility>
 
-#ifdef __APPLE__
+#if __APPLE__  && LIBINTL_VERSION >= 0x001201
+// for older libintl versions, setlocale is just fine
 #define SETLOCALE libintl_setlocale
 #elif _MSC_VER
 #define SETLOCALE setlocale
