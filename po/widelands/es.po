@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-13 16:44+0100\n"
-"PO-Revision-Date: 2011-02-05 14:32+0000\n"
-"Last-Translator: zer berros <cerverros@gmail.com>\n"
+"PO-Revision-Date: 2011-02-14 13:54+0000\n"
+"Last-Translator: Monkey <monkey.libre@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-14 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-02-15 04:32+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -2769,7 +2769,7 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr ""
+msgstr "Ayuda: "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -2910,7 +2910,7 @@ msgstr "Pulse ESCAPE o un botón del ratón para continuar..."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Seleccione"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66 ../../src/ui_fsmenu/launchMPG.cc:165
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
@@ -2919,7 +2919,7 @@ msgstr "Mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
-msgstr ""
+msgstr "Escoja un mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
@@ -2940,7 +2940,7 @@ msgstr "Cancelar"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84
 msgid "Cancel selection"
-msgstr ""
+msgstr "Cancelar selección"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:113
 msgid "Change map or saved game"
@@ -2960,7 +2960,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Clientes"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:200 ../../src/ui_fsmenu/launchSPG.cc:277
 msgid "(no map)"
@@ -3056,7 +3056,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:538
 msgid "<closed>"
-msgstr ""
+msgstr "<cerrado>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:600
 msgid "There was an error!"
@@ -3143,7 +3143,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:662
 msgid "Closed."
-msgstr ""
+msgstr "Cerrado."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid ""
@@ -3305,11 +3305,11 @@ msgstr "Cargar como escenario: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:138
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
-msgstr ""
+msgstr "Nombre del mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:235
 msgid "(directory)"
@@ -4155,7 +4155,7 @@ msgstr "Rol"
 
 #: ../../src/wui/multiplayersetupgroup.cc:507
 msgid "Start"
-msgstr ""
+msgstr "Iniciar"
 
 #: ../../src/wui/multiplayersetupgroup.cc:515
 msgid "Type"
