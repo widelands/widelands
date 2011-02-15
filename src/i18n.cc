@@ -208,8 +208,9 @@ void set_locale(std::string name) {
 	if (leave_while) {
 		setenv("LANG", locale.c_str(), 1);
 	} else {
-		log("No corresponding locale found - trying to set it via LANGUAGE=%s\n", lang.c_str());
+		log("No corresponding locale found - trying to set it via LANGUAGE=%s, LANG=%s\n", lang.c_str(), lang.c_str());
 		setenv("LANGUAGE", lang.c_str(), 1);
+		setenv("LANG",     lang.c_str(), 1);
 		SETLOCALE(LC_MESSAGES, "");    // set locale according to the env. variables
 		                               // --> see  $ man 3 setlocale
 		// assume that it worked
