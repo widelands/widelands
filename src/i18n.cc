@@ -123,7 +123,8 @@ void init_locale() {
 #else
 	// first, save environment variable
 	env_locale = getenv("LANG");
-	if (env_locale.empty()) env_locale = getenv("LANGUAGE");
+	if (env_locale.empty())
+		env_locale = getenv("LANGUAGE");
 
 	locale = "C";
 	SETLOCALE(LC_ALL, "C");
@@ -206,9 +207,12 @@ void set_locale(std::string name) {
 		found = alt_str.find(',', 0);
 	}
 	if (leave_while) {
-		setenv("LANG", locale.c_str(), 1);
+		setenv("LANG",     locale.c_str(), 1);
+		setenv("LANGUAGE", locale.c_str(), 1);
 	} else {
-		log("No corresponding locale found - trying to set it via LANGUAGE=%s, LANG=%s\n", lang.c_str(), lang.c_str());
+		log
+			("No corresponding locale found - trying to set it via LANGUAGE=%s, LANG=%s\n",
+			 lang.c_str(), lang.c_str());
 		setenv("LANGUAGE", lang.c_str(), 1);
 		setenv("LANG",     lang.c_str(), 1);
 		SETLOCALE(LC_MESSAGES, "");    // set locale according to the env. variables
