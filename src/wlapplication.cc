@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1941,6 +1941,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual std::string getWinCondition() {return s.win_condition;}
 	virtual void setWinCondition(std::string wc) {s.win_condition = wc;}
+	virtual void nextWinCondition() {assert(false);} // not implemented - feel free to do so, if you need it.
 
 private:
 	GameSettings s;

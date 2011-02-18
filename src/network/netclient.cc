@@ -392,6 +392,10 @@ void NetClient::setWinCondition(std::string) {
 	// Clients are not allowed to change this
 }
 
+void NetClient::nextWinCondition() {
+	// Clients are not allowed to change this
+}
+
 void NetClient::setPlayerNumber(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need

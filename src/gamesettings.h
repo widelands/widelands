@@ -136,6 +136,7 @@ struct GameSettingsProvider {
 	virtual void setPlayerCloseable(uint8_t number, bool closeable) = 0;
 	virtual void setPlayerShared   (uint8_t number, uint8_t shared) = 0;
 	virtual void setWinCondition   (std::string wc) = 0;
+	virtual void nextWinCondition      () = 0;
 	virtual std::string getWinCondition() = 0;
 
 	struct No_Tribe {};

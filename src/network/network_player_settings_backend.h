@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,24 +17,30 @@
  *
  */
 
-#ifndef TRIBEBASICINFO_H
-#define TRIBEBASICINFO_H
+#ifndef NETWORK_PLAYER_SETTINGS_BACKEND_H
+#define NETWORK_PLAYER_SETTINGS_BACKEND_H
 
-#include <vector>
-#include <string>
-#include <stdint.h>
+#include "constants.h"
+#include "gamesettings.h"
 
-/// Basic information about the tribe that is determined only from the conf
-/// file and needed before the actual game.
-struct TribeBasicInfo {
-	std::string name;
+struct NetworkPlayerSettingsBackend {
 
-	/// Relative position of this tribe in a list of tribes.
-	uint8_t uiposition;
+	NetworkPlayerSettingsBackend(GameSettingsProvider * const settings)
+	:
+	s(settings)
+	{
+		for (uint8_t i = 0; i < MAX_PLAYERS; ++i)
+			shared_in_tribe[i] = std::string();
+	};
 
-	typedef std::pair<std::string, std::string> Initialization;
-	typedef std::vector<Initialization> Initializations;
-	Initializations initializations;
+	void toggle_type (uint8_t id);
+	void toggle_tribe(uint8_t id);
+	void toggle_init (uint8_t id);
+	void toggle_team (uint8_t id);
+	void refresh     (uint8_t id);
+
+	GameSettingsProvider * const s;
+	std::string            shared_in_tribe[MAX_PLAYERS];
 };
 
 #endif

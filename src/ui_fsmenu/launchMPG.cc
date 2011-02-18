@@ -179,14 +179,8 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_help_button.set_font(font_small());
 	m_change_map_or_save.set_font(font_small());
 
-	// Register win condition scripts
 	m_lua = create_LuaInterface();
 	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-
-	ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
-	container_iterate_const(ScriptContainer, sc, wc)
-		m_win_conditions.push_back(wc->first);
-	m_cur_wincondition = -1;
 	win_condition_clicked();
 
 	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -261,12 +255,7 @@ void Fullscreen_Menu_LaunchMPG::back_clicked()
  */
 void Fullscreen_Menu_LaunchMPG::win_condition_clicked()
 {
-	if (m_settings->canChangeMap()) {
-		m_cur_wincondition++;
-		m_cur_wincondition %= m_win_conditions.size();
-		m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
-	}
-
+	m_settings->nextWinCondition();
 	win_condition_update();
 }
 

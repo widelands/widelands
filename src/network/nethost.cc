@@ -25,28 +25,32 @@
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "ui_fsmenu/launchMPG.h"
-#include "logic/game.h"
-#include "wui/game_tips.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "wui/interactive_dedicated_server.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
+#include "logic/game.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
+#include "logic/tribe.h"
+#include "map_io/widelands_map_loader.h"
 #include "md5.h"
 #include "network_ggz.h"
 #include "network_lan_promotion.h"
+#include "network_player_settings_backend.h"
 #include "network_protocol.h"
 #include "network_system.h"
-#include "logic/player.h"
-#include "logic/playercommand.h"
 #include "profile/profile.h"
-#include "logic/tribe.h"
+#include "scripting/scripting.h"
+#include "ui_basic/progresswindow.h"
 #include "wexception.h"
 #include "wlapplication.h"
+#include "wui/game_tips.h"
+#include "wui/interactive_dedicated_server.h"
+#include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
-#include "ui_basic/progresswindow.h"
 #include <boost/format.hpp>
+#include <sstream>
 using boost::format;
 
 
@@ -262,8 +266,30 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setWinCondition(wc);
 	}
 
+	virtual void nextWinCondition() {
+		if (m_win_conditions.size() < 1) {
+			// Register win condition scripts
+			m_lua = create_LuaInterface();
+			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+
+			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
+			container_iterate_const(ScriptContainer, sc, wc)
+			m_win_conditions.push_back(wc->first);
+			m_cur_wincondition = -1;
+		}
+
+		if (canChangeMap()) {
+			m_cur_wincondition++;
+			m_cur_wincondition %= m_win_conditions.size();
+			setWinCondition(m_win_conditions[m_cur_wincondition]);
+		}
+	}
+
 private:
-	NetHost * h;
+	NetHost                * h;
+	LuaInterface           * m_lua;
+	int16_t                  m_cur_wincondition;
+	std::vector<std::string> m_win_conditions;
 };
 
 struct HostChatProvider : public ChatProvider {
@@ -296,25 +322,7 @@ struct HostChatProvider : public ChatProvider {
 
 			// Split up in "cmd" "arg1" "arg2"
 			std::string cmd, arg1, arg2;
-			std::string::size_type const space = c.msg.find(' ');
-			if (space > c.msg.size())
-				// Only cmd
-				cmd = c.msg.substr(1);
-			else {
-				cmd = c.msg.substr(1, space - 1);
-				std::string::size_type const space2 = c.msg.find(' ', space + 1);
-				if (space2 != std::string::npos) {
-					// cmd + arg1 + arg2
-					arg1 = c.msg.substr(space + 1, space2 - space - 1);
-					arg2 = c.msg.substr(space2 + 1);
-				} else if (space + 1 < c.msg.size())
-					// cmd + arg1
-					arg1 = c.msg.substr(space + 1);
-			}
-			if (arg1.empty())
-				arg1 = "";
-			if (arg2.empty())
-				arg2 = "";
+			h->splitCommandArray(c.msg, cmd, arg1, arg2);
 			log("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat
@@ -474,6 +482,8 @@ struct NetHostImpl {
 	std::string localplayername;
 	uint32_t localdesiredspeed;
 	HostChatProvider chat;
+	HostGameSettingsProvider hp;
+	NetworkPlayerSettingsBackend npsb;
 
 	LAN_Game_Promoter * promoter;
 	TCPsocket svsock;
@@ -520,14 +530,14 @@ struct NetHostImpl {
 	md5_checksum syncreport;
 	bool syncreport_arrived;
 
-	NetHostImpl(NetHost * const h) : chat(h) {}
+	NetHostImpl(NetHost * const h) : chat(h), hp(h), npsb(&hp) {}
 };
 
 NetHost::NetHost (std::string const & playername, bool ggz)
 	:
 	d(new NetHostImpl(this)),
 	use_ggz(ggz),
-	m_autolaunch(false),
+	m_is_dedicated(false),
 	m_forced_pause(false)
 {
 	log("[Host] starting up.\n");
@@ -628,11 +638,10 @@ void NetHost::initComputerPlayers()
 
 void NetHost::run(bool const autorun)
 {
-	m_autolaunch = autorun;
-	HostGameSettingsProvider hp(this);
+	m_is_dedicated = autorun;
 	{
-		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&hp, this);
-		if (m_autolaunch)
+		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&d->hp, this);
+		if (m_is_dedicated)
 			d->modal = lm;
 		lm->setChatProvider(d->chat);
 		const int32_t code = lm->run();
@@ -668,7 +677,7 @@ void NetHost::run(bool const autorun)
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
 		try {
-			tipstext.push_back(hp.getPlayersTribe());
+			tipstext.push_back(d->hp.getPlayersTribe());
 		} catch (GameSettingsProvider::No_Tribe) {
 		}
 		GameTips tips (loaderUI, tipstext);
@@ -784,7 +793,10 @@ void NetHost::think()
 
 		for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
 			d->computerplayers.at(i)->think();
-	}
+	} else if (m_is_dedicated)
+		// Take care that every player gets updated during set up time
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+			d->npsb.refresh(i);
 }
 
 void NetHost::sendPlayerCommand(Widelands::PlayerCommand & pc)
@@ -841,7 +853,7 @@ void NetHost::send(ChatMessage msg)
 		// Is this pm for the host player?
 		if (d->localplayername == msg.recipient) {
 			// If this is a dedicated server, handle commands
-			if (m_autolaunch)
+			if (m_is_dedicated)
 				handle_dserver_command(msg.msg, msg.sender);
 			d->chat.receive(msg);
 			// Write the SendPacket - will be used below to show that the message
@@ -909,7 +921,7 @@ void NetHost::send(ChatMessage msg)
 		else if (d->localplayername == msg.sender)
 			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
-			if (d->localplayername == msg.recipient && m_autolaunch)
+			if (d->localplayername == msg.recipient && m_is_dedicated)
 				return; // There will be an immediate answer from the host
 			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
@@ -939,9 +951,6 @@ void NetHost::send(ChatMessage msg)
 /**
 * If the host sends a chat message with formation /kick <name> <reason>
 * This function will handle this command and try to kick the user.
-*
-* \note perhaps we should add some kind of user interaction like
-*       "do you really want to kick <name>?", to avoid abuse of this feature.
 */
 void NetHost::kickUser(std::string name, std::string reason)
 {
@@ -976,45 +985,170 @@ void NetHost::kickUser(std::string name, std::string reason)
 	disconnectClient(client, "Kicked by the host: " + reason);
 }
 
-/// This function is used to handle commands for the dedicated server
-///
-/// TODO add more functions, like register one player to have admin rights,
-/// TODO and give that player access to the host commands
-void NetHost::handle_dserver_command(std::string cmd, std::string sender)
-{
-	assert(m_autolaunch);
 
-	if (cmd == "/start") {
+/// Split up a user entered string in "cmd", "arg1" and "arg2"
+/// \note the cmd must begin with "/"
+void NetHost::splitCommandArray
+	(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2)
+{
+	assert(cmdarray.size() > 1 && cmdarray[0] == '/');
+
+	std::string::size_type const space = cmdarray.find(' ');
+	if (space > cmdarray.size())
+		// only cmd
+		cmd = cmdarray.substr(1);
+	else {
+		cmd = cmdarray.substr(1, space - 1);
+		std::string::size_type const space2 = cmdarray.find(' ', space + 1);
+		if (space2 != std::string::npos) {
+			// cmd + arg1 + arg2
+			arg1 = cmdarray.substr(space + 1, space2 - space - 1);
+			arg2 = cmdarray.substr(space2 + 1);
+		} else if (space + 1 < cmdarray.size())
+			// cmd + arg1
+			arg1 = cmdarray.substr(space + 1);
+	}
+	if (arg1.empty())
+		arg1 = "";
+	if (arg2.empty())
+		arg2 = "";
+}
+
+
+/**
+ * This function is used to handle commands for the dedicated server
+ *
+ * TODO add more functions, like register one player to have admin rights,
+ * TODO and give that player access to the host commands
+ */
+void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
+{
+	assert(m_is_dedicated);
+
+	ChatMessage c;
+	c.time = time(0);
+	c.playern = -2;
+	c.sender = d->localplayername;
+	c.recipient = sender;
+
+	if (cmdarray.size() < 1 || cmdarray[0] != '/') {
+		c.msg = _("I could not handle your request. If you are unsure how commands work send me \"/help\"!");
+		send(c);
+		return;
+	}
+
+	// Split up in "cmd" "arg1" "arg2"
+	std::string cmd, arg1, arg2;
+	splitCommandArray(cmdarray, cmd, arg1, arg2);
+
+	// /help
+	if (cmd == "help") {
+		c.msg =
+			_
+			 ("<br>Available host commands are:<br>"
+			  "/help           - Shows this help<br>"
+			  "/start          - Starts the server<br>"
+			  ""//"/ls_saved_games - Shows a list of saved games<br>"
+			  ""//"/ls_maps        - Shows a list of maps<br>"
+			  ""//"/switch_save  $ - Switch to saved game $<br>"
+			  "/switch_map   $ - Switch to map $<br>"
+			  "/toggle_type  # - Toggles the type of player #<br>"
+			  "/toggle_init  # - Toggles the initialization of player #<br>"
+			  "/toggle_tribe # - Toggles the tribe of player #<br>"
+			  "/toggle_team  # - Toggles the team of player #<br>"
+			  "/toggle_win_con - Toggles the win_condition<br>"
+			  "/host         $ - Tries to run the host command $");
+		send(c);
+
+	// /start
+	} else if (cmd == "start") {
 		if (!canLaunch()) {
 			// The Server is not yet ready
-			sendSystemChat
-				(_("%s tried to start the game, but the server is not launchable."),
-				 sender.c_str());
+			sendSystemChat(_("%s tried to start the game, but the server is not launchable."), sender.c_str());
 		} else {
-			sendSystemChat
-				(_("%s send the signal to start the game."), sender.c_str());
+			sendSystemChat(_("%s send the signal to start the game."), sender.c_str());
 			assert(d->modal);
 			if (d->settings.savegame)
 				d->modal->end_modal(1 + d->settings.scenario);
 			else
 				d->modal->end_modal(3 + d->settings.scenario);
 		}
-	} else {
-		ChatMessage c;
-		c.time = time(0);
-		c.playern = -2;
-		c.sender = d->localplayername;
-		c.recipient = sender;
-		if (cmd == "/help") {
-			c.msg =
-				_
-				 ("<br>Available host commands are:<br>"
-				  "/help  - Shows this help<br>"
-				  "/start - Starts the server.");
-		} else { // default
-			c.msg =
-				(format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
+
+	// /ls_saved_games
+
+	// /ls_maps
+
+	// /switch_save
+
+	// /switch_map
+	} else if (cmd == "switch_map") {
+		std::string path("maps/");
+		path += arg1;
+		if (g_fs->FileExists(path)) {
+			// Check if file is a map and if yes read out the needed Data
+			Widelands::Map   map;
+			i18n::Textdomain td("maps");
+			Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
+			if (ml) {
+				// Yes it is a map file :)
+				map.set_filename(path.c_str());
+				ml->preload_map(true);
+				d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
+				return;
+			}
 		}
+		c.msg = (format(_("Can not use \"%s\" as map file!")) % arg1).str();
+		send(c);
+
+	// Player commands
+	} else if (cmd == "toggle_type" || cmd == "toggle_init" || cmd == "toggle_tribe" || cmd == "toggle_team") {
+		std::istringstream temp(arg1);
+		// Conversion fails with uint8_t or similiar, so we convert to int.
+		// This should not be a problem anyways, as this function runs only server sided.
+		int plr;
+		if (!(temp >> plr)) {
+			c.msg = _("Invalid value # for player - should be a player number");
+			send(c);
+			return;
+		}
+		--plr; // 0 based
+		if (plr < 0 || plr >= static_cast<int32_t>(d->settings.players.size())) {
+			c.msg = _("Invalid value # for player - should be a player number");
+			send(c);
+			return;
+		}
+
+		// /toggle_type #
+		if      (cmd == "toggle_type")
+			d->npsb.toggle_type(plr);
+
+		// /toggle_init #
+		else if (cmd == "toggle_init")
+			d->npsb.toggle_init(plr);
+
+		// /toggle_tribe #
+		else if (cmd == "toggle_tribe")
+			d->npsb.toggle_tribe(plr);
+
+		// /toggle_team #
+		else if (cmd == "toggle_team")
+			d->npsb.toggle_team(plr);
+
+	// /toggle_win_con
+	} else if (cmd == "toggle_win_con") {
+		d->hp.nextWinCondition();
+
+	// /host
+	} else if (cmd == "host") {
+		std::string temp = arg1 + " " + arg2;
+		c.msg = (format(_("%s told me to run the command: \"%s\"")) % sender % temp).str();
+		c.recipient = "";
+		send(c);
+		d->chat.send(temp);
+
+	// default
+	} else {
+		c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
 		send(c);
 	}
 }
@@ -1737,7 +1871,7 @@ void NetHost::welcomeClient
 	sendSystemChat(_("%s has joined the game"), effective_name.c_str());
 
 	// If this is a dedicated server, tell the player about the net commands
-	if (m_autolaunch) {
+	if (m_is_dedicated) {
 		ChatMessage c;
 		c.time = time(0);
 		c.playern = -2;
