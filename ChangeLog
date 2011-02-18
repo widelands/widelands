@@ -73,6 +73,9 @@
 - Improved the "user friendly" compile script and moved it to compile.sh
 - Fixed the translation system - users should now be able to select any
   compiled and installed translation of Widelands.
+- Fixed bug #708328: infinite loop(s) in building_statistics_menu.cc
+- Fixed bug #720338: Options show wrong resulution as selected if no
+  ~/.widelands/conf exists
 - Fixed bug #536149: miner/master miner mixed up after enhancing to deep mine
 - Fixed bug #580073: Objectives menu update
 - Fixed bug #695735: Scrollbar damaged in multiline textboxes in (unique)

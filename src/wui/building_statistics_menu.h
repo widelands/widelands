@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,6 +64,7 @@ private:
 	uint32_t                  m_end_of_table_y;
 	UI::Callback_Button * m_btn[6];
 	int32_t                   m_last_building_index;
+	uint32_t                  m_last_table_index;
 
 	void clicked_help();
 	void clicked_jump(Jump_Targets);
