@@ -435,16 +435,16 @@ void Building_Statistics_Menu::update() {
 		{
 			char const * pic = "pics/novalue.png";
 			if (building.get_ismine()) {
-				pic = "pics/mine.png";
+				pic = "pics/menu_tab_buildmine.png";
 			} else switch (building.get_size()) {
 			case Widelands::BaseImmovable::SMALL:
-				pic = "pics/small.png";
+				pic = "pics/menu_tab_buildsmall.png";
 				break;
 			case Widelands::BaseImmovable::MEDIUM:
-				pic = "pics/medium.png";
+				pic = "pics/menu_tab_buildmedium.png";
 				break;
 			case Widelands::BaseImmovable::BIG:
-				pic = "pics/big.png";
+				pic = "pics/menu_tab_buildbig.png";
 				break;
 			default:
 				assert(false);
