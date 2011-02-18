@@ -599,9 +599,9 @@ void Options_Ctrl::handle_menu()
 Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	Options_Struct opt;
 	opt.xres                = m_opt_section.get_int
-		("xres",                 640);
+		("xres",                XRES);
 	opt.yres                = m_opt_section.get_int
-		("yres",                 480);
+		("yres",                YRES);
 	opt.depth               = m_opt_section.get_int
 		("depth",                 16);
 	opt.inputgrab           = m_opt_section.get_bool
