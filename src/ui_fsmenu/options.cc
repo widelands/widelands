@@ -266,7 +266,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
 		sprintf
-			(buf, "%ix%i %i bit", m_resolutions[i].xres,
+			(buf, _("%ix%i %i bit"), m_resolutions[i].xres,
 			 m_resolutions[i].yres, m_resolutions[i].depth);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
