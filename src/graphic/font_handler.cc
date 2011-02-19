@@ -164,14 +164,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 		return;
 	}
 
-	int32_t font_style = TTF_STYLE_NORMAL;
-	if (lce.style.bold)
-		font_style |= TTF_STYLE_BOLD;
-	if (lce.style.italics)
-		font_style |= TTF_STYLE_ITALIC;
-	if (lce.style.underline)
-		font_style |= TTF_STYLE_UNDERLINE;
-	TTF_SetFontStyle(font, font_style);
+	lce.style.setup();
 
 	SDL_Surface * text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
 	if (!text_surface) {

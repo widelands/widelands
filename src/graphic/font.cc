@@ -23,6 +23,7 @@
 
 #include "constants.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "utf8.h"
 
 namespace {
 
@@ -72,21 +73,19 @@ Font::Font(const std::string & name, int size)
 	// It seems more reasonable to use TTF_FontLineSkip(), but the fonts
 	// we use claim to have a very excessive line skip.
 	static uint16_t glyphs[] = {'A', '_', '@', ',', 'q', 'y', '"', 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5};
-	int32_t minminy = 0;
-	int32_t maxmaxy = 0;
+	m_computed_typical_miny = 0;
+	m_computed_typical_maxy = 0;
 
 	for (unsigned int idx = 0; idx < sizeof(glyphs) / sizeof(glyphs[0]); ++idx) {
 		int miny, maxy;
 		if (TTF_GlyphMetrics(m_font, glyphs[idx], 0, 0, &miny, &maxy, 0) < 0)
 			continue; // error, e.g. glyph not found
 
-		if (miny < minminy)
-			minminy = miny;
-		if (maxy > maxmaxy)
-			maxmaxy = maxy;
+		if (miny < m_computed_typical_miny)
+			m_computed_typical_miny = miny;
+		if (maxy > m_computed_typical_maxy)
+			m_computed_typical_maxy = maxy;
 	}
-
-	m_computed_lineskip = maxmaxy - minminy + 1;
 }
 
 /**
@@ -107,11 +106,19 @@ uint32_t Font::height() const
 }
 
 /**
+ * \return the maximum ascent from the font baseline
+ */
+uint32_t Font::ascent() const
+{
+	return TTF_FontAscent(m_font);
+}
+
+/**
  * \return the number of pixels between lines in this font (from baseline to baseline).
  */
 uint32_t Font::lineskip() const
 {
-	return m_computed_lineskip;
+	return m_computed_typical_maxy - m_computed_typical_miny;
 }
 
 /**
@@ -150,13 +157,54 @@ void Font::shutdown()
 }
 
 /**
+ * Prepare the TTF style settings for rendering in this style.
+ */
+void TextStyle::setup() const
+{
+	int32_t font_style = TTF_STYLE_NORMAL;
+	if (bold)
+		font_style |= TTF_STYLE_BOLD;
+	if (italics)
+		font_style |= TTF_STYLE_ITALIC;
+	if (underline)
+		font_style |= TTF_STYLE_UNDERLINE;
+	TTF_SetFontStyle(font->get_ttf_font(), font_style);
+}
+
+/**
  * Compute the bare width (without caret padding) of the given string.
  */
 uint32_t TextStyle::calc_bare_width(const std::string & text) const
 {
 	int w, h;
+	setup();
 	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
 	return w;
+}
+
+/**
+ * \note Please only use this function once you understand the definitions
+ * of ascent/descent etc.
+ *
+ * Computes the actual line height we should use for rendering the given text.
+ * This is heuristic, because it pre-initializes the miny and maxy values to
+ * the ones that are typical for Latin scripts, so that lineskips should always
+ * be the same for such scripts.
+ */
+void TextStyle::calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const
+{
+	miny = font->m_computed_typical_miny;
+	maxy = font->m_computed_typical_maxy;
+
+	setup();
+	std::string::size_type pos = 0;
+	while (pos < text.size()) {
+		uint16_t ch = Utf8::utf8_to_unicode(text, pos);
+		int32_t glyphminy, glyphmaxy;
+		TTF_GlyphMetrics(font->get_ttf_font(), ch, 0, 0, &glyphminy, &glyphmaxy, 0);
+		miny = std::min(miny, glyphminy);
+		maxy = std::max(maxy, glyphmaxy);
+	}
 }
 
 

@@ -254,7 +254,6 @@ void RichText::parse(const std::string & text)
 			style.underline = text_it->get_font_decoration() == "underline";
 
 			uint32_t lineheight = style.font->height();
-			uint32_t lineskip = style.font->lineskip() + text_it->get_line_spacing();
 			uint32_t spacewidth = style.calc_bare_width(" ");
 
 			// Do the actual layouting
@@ -267,7 +266,7 @@ void RichText::parse(const std::string & text)
 
 			while (word_cnt < words.size() || br_it != line_breaks.end()) {
 				if (br_it != line_breaks.end() && *br_it <= word_cnt) {
-					text_y += lineskip;
+					text_y += style.font->lineskip() + text_it->get_line_spacing();
 					br_it++;
 					continue;
 				}
@@ -277,8 +276,11 @@ void RichText::parse(const std::string & text)
 
 				// Now eat up words up to the next line break
 				assert(word_cnt < words.size());
-				uint32_t linewidth = style.calc_bare_width(words[word_cnt]);
 				uint32_t nrwords = 1;
+				uint32_t linewidth = style.calc_bare_width(words[word_cnt]);
+				int32_t lineminy;
+				int32_t linemaxy;
+				style.calc_bare_height_heuristic(words[word_cnt], lineminy, linemaxy);
 
 				while (word_cnt + nrwords < words.size()) {
 					if (br_it != line_breaks.end() && *br_it <= word_cnt + nrwords) {
@@ -291,13 +293,19 @@ void RichText::parse(const std::string & text)
 					if (linewidth + spacewidth + wordwidth > maxtextwidth)
 						break;
 
+					int32_t wordminy, wordmaxy;
+					style.calc_bare_height_heuristic(words[word_cnt + nrwords], wordminy, wordmaxy);
+					linemaxy = std::max(linemaxy, wordmaxy);
+					lineminy = std::min(lineminy, wordminy);
+
 					linewidth += spacewidth + wordwidth;
 					++nrwords;
 				}
 
+				// Compute bounding box for line based on alignment settings
 				Rect bbox;
 				bbox.x = 0;
-				bbox.y = text_y;
+				bbox.y = text_y - style.font->ascent() + linemaxy;
 				bbox.w = linewidth;
 				bbox.h = lineheight;
 
@@ -332,7 +340,7 @@ void RichText::parse(const std::string & text)
 						 words.begin() + word_cnt, words.begin() + word_cnt + nrwords));
 
 				word_cnt += nrwords;
-				text_y += lineskip;
+				text_y += linemaxy - lineminy + text_it->get_line_spacing();
 			}
 		}
 
