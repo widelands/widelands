@@ -164,16 +164,16 @@ void NetClient::run ()
 #endif
 
 	try {
-		UI::ProgressWindow loaderUI("pics/progress.png");
+		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("pics/progress.png");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
 		try {
 			tipstext.push_back(getPlayersTribe());
 		} catch (No_Tribe) {}
-		GameTips tips (loaderUI, tipstext);
+		GameTips tips (*loaderUI, tipstext);
 
-		loaderUI.step(_("Preparing game"));
+		loaderUI->step(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);

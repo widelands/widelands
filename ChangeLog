@@ -1,4 +1,5 @@
 ### Build 16 (until now)
+- Added a dedicated server function for terminal use.
 - Improved and refactored font handler.
 - Removed barbarian Stronghold from list of buildable military sites as
   it did not have a real purpose.

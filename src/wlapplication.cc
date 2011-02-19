@@ -277,6 +277,7 @@ m_redirected_stdio(false)
 		m_homedir = m_commandline["homedir"];
 		m_commandline.erase("homedir");
 	}
+	bool dedicated = m_commandline.count("dedicated");
 #ifdef REDIRECT_OUTPUT
 	if (!redirect_output())
 		redirect_output(m_homedir);
@@ -288,7 +289,11 @@ m_redirected_stdio(false)
 		setup_searchpaths(m_commandline["EXENAME"]);
 	init_language(); // search paths must already be set up
 	cleanup_replays();
-	init_hardware();
+
+	if (!dedicated)
+		init_hardware();
+	else
+		g_gr = 0;
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
@@ -360,6 +365,8 @@ void WLApplication::run()
 	} else if (m_game_type == GGZ) {
 		Widelands::Game game;
 		try {
+			// disable sound completely
+			g_sound_handler.m_nosound = true;
 
 			// setup some ggz details about a dedicated server
 			Section & s = g_options.pull_section("global");
@@ -1991,8 +1998,8 @@ bool WLApplication::new_game()
 			game.set_ibase
 				(new Interactive_Player
 				 	(game, g_options.pull_section("global"), pn, false, false));
-			game.init_newgame(loaderUI, sp.settings());
-			game.run(loaderUI, Widelands::Game::NewNonScenario);
+			game.init_newgame(&loaderUI, sp.settings());
+			game.run(&loaderUI, Widelands::Game::NewNonScenario);
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -2185,7 +2192,7 @@ void WLApplication::replay()
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 
-		game.run(loaderUI, Widelands::Game::Loaded);
+		game.run(&loaderUI, Widelands::Game::Loaded);
 	} catch (...) {
 		emergency_save(game);
 		m_filename.clear();
