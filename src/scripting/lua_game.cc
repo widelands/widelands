@@ -570,7 +570,6 @@ int L_Player::forbid_buildings(lua_State * L) {
 */
 int L_Player::add_objective(lua_State * L) {
 	Game & game = get_game(L);
-	Player & p = get(L, game);
 
 	Map * map = game.get_map();
 	Manager<Objective> & mom = map->mom();
