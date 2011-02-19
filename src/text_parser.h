@@ -149,7 +149,7 @@ private:
 		 const std::string & format_end,
 		 const std::string & block_end);
 	Align set_align(std::string const &);
-	void split_words(std::string in, std::vector<std::string> * plist);
+	void split_words(const std::string & in, std::vector<std::string> * plist);
 };
 
 }
