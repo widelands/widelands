@@ -1791,7 +1791,6 @@ bool DefaultAI::check_mines(int32_t const gametime)
 		// Only enhance buildings that are allowed (scenario mode)
 		if (player->is_building_type_allowed(*x.current)) {
 			Building_Descr const & bld = *tribe->get_building_descr(*x.current);
-			BuildingObserver & en_bo = get_building_observer(bld.name().c_str());
 
 			// Check if mine needs an enhancement to mine more resources
 			uint8_t const until =
