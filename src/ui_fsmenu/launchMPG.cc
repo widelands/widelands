@@ -237,8 +237,6 @@ void Fullscreen_Menu_LaunchMPG::setChatProvider(ChatProvider & chat)
 	delete m_chat;
 	m_chat = new GameChatPanel
 		(this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80, get_h() * 3 / 10, chat);
-	// For better readability
-	m_chat->set_bg_color(RGBColor(50, 50, 50));
 }
 
 

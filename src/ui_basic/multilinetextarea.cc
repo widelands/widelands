@@ -47,8 +47,7 @@ Multiline_Textarea::Multiline_Textarea
 	m(new Impl),
 	m_text      (text),
 	m_scrollbar (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
-	m_scrollmode(ScrollNormal),
-	m_bg_color(RGBColor(107, 87, 55))
+	m_scrollmode(ScrollNormal)
 {
 	assert(scrollbar_w() <= w);
 	set_think(false);
@@ -193,15 +192,4 @@ bool Multiline_Textarea::handle_mousepress
 		m_scrollbar.handle_mousepress(btn, x, y) : false;
 }
 
-int32_t Multiline_Textarea::get_halign()
-{
-	int32_t x = 0;
-	//  only HAlignment is allowed
-	if      (m_align & Align_HCenter)
-		x += get_w() / 2;
-	else if (m_align & Align_Right)
-		x += get_w();
-	return x;
-}
-
-}
+} // namespace UI

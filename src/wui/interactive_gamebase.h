@@ -23,7 +23,6 @@
 #include "interactive_base.h"
 #include "logic/game.h"
 #include "graphic/graphic.h"
-#include "ui_basic/widget_cache.h"
 
 struct ChatOverlay;
 struct ChatProvider;

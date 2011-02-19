@@ -87,8 +87,6 @@ private:
 	boost::scoped_ptr<Data> d;
 
 private:
-	//SDL_Surface * load_image(std::string file); // TODO deprecate
-
 	void draw_caret
 		(RenderTarget &,
 		 const TextStyle &,

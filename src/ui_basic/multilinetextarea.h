@@ -60,14 +60,13 @@ struct Multiline_Textarea : public Panel {
 	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
 
 	void set_color(RGBColor fg) {m_fcolor = fg;}
-	void set_bg_color(RGBColor bgc) {m_bg_color = bgc;} // TODO deprecated
 
 	// Drawing and event handlers
 	void draw(RenderTarget &);
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 
-	const char *  get_font_name() {return m_fontname.c_str();} //TODO deprecate these?
+	const char *  get_font_name() {return m_fontname.c_str();}
 	int32_t       get_font_size() {return m_fontsize;}
 	RGBColor &    get_font_clr () {return m_fcolor;}
 
@@ -90,9 +89,6 @@ protected:
 	std::string  m_fontname;
 	int32_t  m_fontsize;
 	RGBColor m_fcolor;
-	RGBColor m_bg_color;    //TODO deprecated
-
-	int32_t get_halign(); // TODO deprecated?
 };
 
 }

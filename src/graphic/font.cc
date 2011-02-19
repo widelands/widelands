@@ -138,10 +138,6 @@ Font * Font::get(const std::string & name, int size)
 		it = g_fontmap.insert(std::make_pair(descr, font)).first;
 	}
 
-	//TODO: get rid of this nasty hack
-	//This is required until Font_Handler completely switches to the new render_line()-based functionality
-	TTF_SetFontStyle(it->second->get_ttf_font(), TTF_STYLE_BOLD);
-
 	return it->second;
 }
 
