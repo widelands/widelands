@@ -615,8 +615,7 @@ void NetHost::clearComputerPlayers()
 void NetHost::initComputerPlayer(Widelands::Player_Number p)
 {
 	d->computerplayers.push_back
-		(Computer_Player::getImplementation(d->game->get_player(p)->getAI())
-		 ->instantiate(*d->game, p));
+		(Computer_Player::getImplementation(d->game->get_player(p)->getAI())->instantiate(*d->game, p));
 }
 
 void NetHost::initComputerPlayers()
@@ -1017,9 +1016,6 @@ void NetHost::splitCommandArray
 
 /**
  * This function is used to handle commands for the dedicated server
- *
- * TODO add more functions, like register one player to have admin rights,
- * TODO and give that player access to the host commands
  */
 void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 {
@@ -1048,9 +1044,9 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			 ("<br>Available host commands are:<br>"
 			  "/help           - Shows this help<br>"
 			  "/start          - Starts the server<br>"
-			  ""//"/ls_saved_games - Shows a list of saved games<br>"
-			  ""//"/ls_maps        - Shows a list of maps<br>"
-			  ""//"/switch_save  $ - Switch to saved game $<br>"
+			  "/ls_saved_games - Shows a list of saved games<br>"
+			  "/ls_maps        - Shows a list of maps<br>"
+			  "/switch_save  $ - Switch to saved game $<br>"
 			  "/switch_map   $ - Switch to map $<br>"
 			  "/toggle_type  # - Toggles the type of player #<br>"
 			  "/toggle_init  # - Toggles the initialization of player #<br>"
@@ -1075,17 +1071,76 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		}
 
 	// /ls_saved_games
+	} else if (cmd == "ls_saved_games") {
+		std::string temp(_("Available saved games:<br>"));
+		filenameset_t files;
+		g_fs->FindFiles("save", "*", &files, 0);
+		Widelands::Game game;
+		Widelands::Game_Preload_Data_Packet gpdp;
+		const filenameset_t & gamefiles = files;
+		container_iterate_const(filenameset_t, gamefiles, i) {
+			char const * const name = i.current->c_str();
+			try {
+				Widelands::Game_Loader gl(name, game);
+				gl.preload_game(gpdp);
+				temp += i.current->substr(5, i.current->size() - 1);
+				temp += "; ";
+			} catch (_wexception const & e) {}
+		}
+		c.msg = temp;
+		send(c);
 
 	// /ls_maps
+	} else if (cmd == "ls_maps") {
+		std::string temp(_("Available maps:<br>"));
+		filenameset_t files;
+		g_fs->FindFiles("maps", "*", &files, 0);
+		Widelands::Map map;
+		const filenameset_t & gamefiles = files;
+		container_iterate_const(filenameset_t, gamefiles, i) {
+			char const * const name = i.current->c_str();
+			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+			if (ml) {
+				temp += i.current->substr(5, i.current->size() - 1);
+				temp += "; ";
+			}
+		}
+		c.msg = temp;
+		send(c);
 
 	// /switch_save
+	} else if (cmd == "switch_save") {
+		std::string path("save/");
+		path += arg1;
+		if (g_fs->FileExists(path)) {
+			// Check if file is a saved game and if yes read out the needed data
+			try {
+				Widelands::Game game;
+				Widelands::Game_Preload_Data_Packet gpdp;
+				Widelands::Game_Loader gl(path, game);
+				gl.preload_game(gpdp);
+
+				// If we are here, it is a saved game file :)
+				// Read the needed data from file "elemental" of the used map.
+				FileSystem & sg_fs = g_fs->MakeSubFileSystem(path.c_str());
+				Profile prof;
+				prof.read("map/elemental", 0, sg_fs);
+				Section & s = prof.get_safe_section("global");
+				uint8_t nr_players = s.get_safe_int("nr_players");
+
+				d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
+				return;
+			} catch (_wexception const & e) {}
+		}
+		c.msg = (format(_("Can not use \"%s\" as saved game file!")) % arg1).str();
+		send(c);
 
 	// /switch_map
 	} else if (cmd == "switch_map") {
 		std::string path("maps/");
 		path += arg1;
 		if (g_fs->FileExists(path)) {
-			// Check if file is a map and if yes read out the needed Data
+			// Check if file is a map and if yes read out the needed data
 			Widelands::Map   map;
 			i18n::Textdomain td("maps");
 			Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
@@ -2233,8 +2288,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	if (client.playernum == UserSettings::notConnected()) {
 		if (d->game)
-			throw DisconnectException
-				(_("Game is running already, but client has not connected fully"));
+			throw DisconnectException(_("Game is running already, but client has not connected fully"));
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
 				(_
@@ -2243,8 +2297,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 				 cmd);
 		uint8_t version = r.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
-			throw DisconnectException
-				(_("Server uses a different protocol version."));
+			throw DisconnectException(_("Server uses a different protocol version."));
 
 		std::string clientname = r.String();
 		client.build_id = r.String();
@@ -2282,20 +2335,15 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_TIME:
 		if (!d->game)
-			throw DisconnectException
-				(_("Client sent TIME command even though game is not running."));
+			throw DisconnectException(_("Client sent TIME command even though game is not running."));
 		recvClientTime(i, r.Signed32());
 		break;
 
 	case NETCMD_PLAYERCOMMAND: {
 		if (!d->game)
-			throw DisconnectException
-				(_
-				 	("Client sent PLAYERCOMMAND command even though game is not "
-				 	 "running."));
+			throw DisconnectException(_("Client sent PLAYERCOMMAND command even though game is not running."));
 		int32_t time = r.Signed32();
-		Widelands::PlayerCommand & plcmd =
-			*Widelands::PlayerCommand::deserialize(r);
+		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
 			("[Host] client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
