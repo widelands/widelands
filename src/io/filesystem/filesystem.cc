@@ -64,7 +64,7 @@
 FileSystem::FileSystem()
 {
 #ifdef WIN32
-	m_root = getWorkingDirectory();
+	m_root = "";
 	m_filesep = '\\';
 #else
 	m_root = "/";
@@ -80,6 +80,12 @@ FileSystem::FileSystem()
 bool FileSystem::pathIsAbsolute(std::string const & path) const {
 	std::string::size_type const path_size = path  .size();
 	std::string::size_type const root_size = m_root.size();
+
+#ifdef WIN32
+	// Handle drive letters on windows
+	if (path.size()>3 && path[1] == ':' && path[2] == '\\')
+		return true;
+#endif
 	if (path_size < root_size)
 		return false;
 
@@ -268,8 +274,16 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 			}
 			//remove double dot and the preceding component (if any)
 			else if (*str == '.' && *(str + 1) == '\0') {
-				if (i != components.begin())
+				if (i != components.begin()) {
+#ifdef WIN32
+					// On windows don't remove driveletter in this error condition
+					if (--i != components.begin())
+						i = components.erase(i);
+					else ++i;
+#else
 					i = components.erase(--i);
+#endif
+				}
 				i = components.erase(i);
 				continue;
 			}
