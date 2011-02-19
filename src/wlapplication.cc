@@ -373,42 +373,57 @@ void WLApplication::run()
 			char const * const meta = s.get_string("metaserver", WL_METASERVER);
 			char const * const name = s.get_string("nickname", "dedicated");
 			char const * const server = s.get_string("servername", name);
-			if (!NetGGZ::ref().initcore(meta, name, "", false)) {
-				log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
-				return;
+			for (;;) { // endless loop
+				if (!NetGGZ::ref().initcore(meta, name, "", false)) {
+					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
+					return;
+				}
+				std::string realservername(server);
+				bool name_valid = false;
+				while (not name_valid) {
+					name_valid = true;
+					std::vector<Net_Game_Info> const & hosts = NetGGZ::ref().tables();
+					for (uint32_t i = 0; i < hosts.size(); ++i) {
+						if (hosts[i].hostname == realservername)
+							name_valid = false;
+					}
+					if (not name_valid)
+						realservername += "*";
+				}
+
+				NetGGZ::ref().set_local_servername(realservername);
+				NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
+
+				NetHost netgame(name, true);
+
+				// Load the requested map
+				Widelands::Map map;
+				i18n::Textdomain td("maps");
+				map.set_filename(m_filename.c_str());
+				Widelands::Map_Loader * const ml = map.get_correct_loader
+					(m_filename.c_str());
+				ml->preload_map(true);
+
+				// fill in the mapdata structure
+				MapData mapdata;
+				mapdata.filename = m_filename;
+				mapdata.name = map.get_name();
+				mapdata.author = map.get_author();
+				mapdata.description = map.get_description();
+				mapdata.world = map.get_world_name();
+				mapdata.nrplayers = map.get_nrplayers();
+				mapdata.width = map.get_width();
+				mapdata.height = map.get_height();
+
+				// set the map
+				netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+
+				// run the network game
+				// -> autostarts when a player sends "/start" as pm to the server.
+				netgame.run(true);
+
+				NetGGZ::ref().deinitcore();
 			}
-			NetGGZ::ref().set_local_servername(server);
-			NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
-
-			NetHost netgame(name, true);
-
-			// Load the requested map
-			Widelands::Map map;
-			i18n::Textdomain td("maps");
-			map.set_filename(m_filename.c_str());
-			Widelands::Map_Loader * const ml = map.get_correct_loader
-				(m_filename.c_str());
-			ml->preload_map(true);
-
-			// fill in the mapdata structure
-			MapData mapdata;
-			mapdata.filename = m_filename;
-			mapdata.name = map.get_name();
-			mapdata.author = map.get_author();
-			mapdata.description = map.get_description();
-			mapdata.world = map.get_world_name();
-			mapdata.nrplayers = map.get_nrplayers();
-			mapdata.width = map.get_width();
-			mapdata.height = map.get_height();
-
-			// set the map
-			netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
-
-			// run the network game
-			// -> autostarts when a player sends "/start" as pm to the server.
-			netgame.run(true);
-
-			NetGGZ::ref().deinitcore();
 		} catch (...) {
 			emergency_save(game);
 			throw;

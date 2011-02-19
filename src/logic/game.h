@@ -119,6 +119,7 @@ struct Game : public Editor_Game_Base {
 	 * or \c false otherwise.
 	 */
 	bool is_loaded() {return m_state == gs_running;}
+	void end_dedicated_game();
 
 	void cleanup_for_load
 		(const bool flush_graphics = true, const bool flush_animations = true);

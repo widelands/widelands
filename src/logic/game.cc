@@ -578,13 +578,15 @@ bool Game::run
 
 		g_gr->flush(PicMod_Game);
 		g_anim.flush();
+
+		m_state = gs_notrunning;
 	} else {
 		// dedicated server
 		m_state = gs_running;
 		//handle network
-		while (true) {
+		while (m_state == gs_running) {
 #ifndef WIN32
-			if (usleep(50) == -1)
+			if (usleep(100) == -1)
 				break;
 #else
 			// TODO  take care about Windows, else we end up with 100% cpu usage.
@@ -592,8 +594,6 @@ bool Game::run
 			think();
 		}
 	}
-
-	m_state = gs_notrunning;
 
 	return true;
 }
@@ -622,6 +622,11 @@ void Game::think()
 	}
 }
 
+/// (Only) called by the dedicated server, to end a game once all players left
+void Game::end_dedicated_game() {
+	assert(not g_gr);
+	m_state = gs_notrunning;
+}
 
 /**
  * Cleanup for load
