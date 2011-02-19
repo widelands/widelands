@@ -442,9 +442,11 @@ void Game::postload()
 {
 	Editor_Game_Base::postload();
 
-	assert(get_ibase() != 0);
-
-	get_ibase()->postload();
+	if (g_gr) {
+		assert(get_ibase() != 0);
+		get_ibase()->postload();
+	} else
+		log("Note, Widelands runs without graphics, properly in dedicated server mode!");
 }
 
 
@@ -470,10 +472,7 @@ void Game::postload()
 bool Game::run
 	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)
 {
-	if (loader_ui)
-		postload();
-	else
-		Editor_Game_Base::postload();
+	postload();
 
 	if (start_game_type != Loaded) {
 		Player_Number const nr_players = map().get_nrplayers();
@@ -580,7 +579,8 @@ bool Game::run
 		m_state = gs_running;
 		//handle network
 		while (true)
-			usleep(50);
+			if(usleep(50) == -1)
+				break;
 			think();
 	}
 

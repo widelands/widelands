@@ -292,6 +292,8 @@ m_redirected_stdio(false)
 
 	if (!dedicated)
 		init_hardware();
+	else
+		g_gr = 0;
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
