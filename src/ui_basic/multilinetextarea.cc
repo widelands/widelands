@@ -26,6 +26,8 @@
 
 namespace UI {
 
+static const uint32_t RICHTEXT_MARGIN = 2;
+
 struct Multiline_Textarea::Impl {
 	bool isrichtext;
 	WordWrap ww;
@@ -113,12 +115,12 @@ void Multiline_Textarea::recompute()
 		m->isrichtext = false;
 		m->ww.set_wrapwidth(get_eff_w());
 		m->ww.wrap(m_text);
-		height = m->ww.height();
+		height = m->ww.height() + 2 * RICHTEXT_MARGIN;
 	} else {
 		m->isrichtext = true;
-		m->rt.set_width(get_eff_w());
+		m->rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
 		m->rt.parse(m_text);
-		height = m->rt.height();
+		height = m->rt.height() + 2 * RICHTEXT_MARGIN;
 	}
 
 	bool setbottom = false;
@@ -178,7 +180,7 @@ void Multiline_Textarea::layout()
 void Multiline_Textarea::draw(RenderTarget & dst)
 {
 	if (m->isrichtext)
-		m->rt.draw(dst, Point(0, -m_scrollbar.get_scrollpos()));
+		m->rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - m_scrollbar.get_scrollpos()));
 	else
 		m->ww.draw(dst, Point(0, -m_scrollbar.get_scrollpos()), m_align);
 }
