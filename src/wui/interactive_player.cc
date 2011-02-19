@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 #include <libintl.h>
 
 #include "building_statistics_menu.h"
-#include "chat.h"
+#include "chatoverlay.h"
 #include "debugconsole.h"
 #include "economy/flag.h"
 #include "encyclopedia_window.h"
@@ -54,10 +54,8 @@
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "overlay_manager.h"
 #include "profile/profile.h"
 #include "stock_menu.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
 #include "ware_statistics_menu.h"
@@ -65,75 +63,6 @@
 using Widelands::Building;
 using Widelands::Map;
 using boost::format;
-
-
-#define CHAT_DISPLAY_TIME 5 // Show chat messages as overlay for 5 seconds
-
-ChatDisplay::ChatDisplay
-	(UI::Panel * const parent,
-	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
-	: UI::Panel(parent, x, y, w, h), m_chat(0)
-{}
-ChatDisplay::~ChatDisplay()
-{
-}
-
-void ChatDisplay::setChatProvider(ChatProvider & chat)
-{
-	m_chat = &chat;
-}
-
-struct Displayed {
-	std::string text;
-	uint32_t    h;
-};
-
-void ChatDisplay::draw(RenderTarget & dst)
-{
-	if (!m_chat)
-		return;
-
-	// delete pictures of all old messages that we won't use again
-	// this is important to save space
-	m_cache_id.resize(0);
-
-	int32_t const now = time(0);
-
-	std::vector<ChatMessage> const & msgs = m_chat->getMessages();
-	std::vector<Displayed> displaylist;
-	uint32_t totalheight = 0;
-	uint32_t idx = msgs.size();
-
-	while (idx && now - msgs[idx - 1].time <= CHAT_DISPLAY_TIME) {
-		uint32_t w;
-
-		Displayed d = {msgs[idx - 1].toPrintable(), 0};
-
-		UI::g_fh->get_size(UI_FONT_SMALL, d.text, w, d.h, get_w());
-		if (d.h + totalheight > static_cast<uint32_t>(get_h()))
-			break;
-
-		displaylist.push_back(d);
-		--idx;
-	}
-
-	uint32_t y = 0;
-
-	Section & s = g_options.pull_section("global");
-	bool transparent_chat = s.get_bool("transparent_chat", true);
-	container_iterate_const(std::vector<Displayed>, displaylist, i) {
-		PictureID picid;
-		UI::g_fh->draw_richtext
-			(dst,
-			 RGBColor(50, 50, 50),
-			 Point(0, get_inner_h() -60 -y),
-			 "<rt>" + i.current->text + "</rt>",
-			 get_w(),
-			 m_cache_mode, &picid, transparent_chat);
-		y += i.current->h;
-		m_cache_id.push_back(picid);
-	}
-}
 
 
 // This function is the callback for recalculation of field overlays
@@ -222,8 +151,8 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	if (multiplayer) {
 		m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
-		m_chatDisplay =
-			new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
+		m_chatOverlay =
+			new ChatOverlay(this, 10, 25, get_w() - 10, get_h() - 25);
 		m_toggle_chat.set_visible(false);
 		m_toggle_chat.set_enabled(false);
 	} else

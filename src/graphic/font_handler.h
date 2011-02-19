@@ -66,18 +66,6 @@ struct Font_Handler {
 		 uint32_t wrap = std::numeric_limits<uint32_t>::max(),
 		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 
-	void draw_string
-		(RenderTarget &,
-		 const std::string & font,
-		 int32_t             size,
-		 RGBColor fg, RGBColor bg,
-		 Point               dstpoint,
-		 const std::string & text,
-		 Align               align           = Align_CenterLeft,
-		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
-		 Widget_Cache        widget_cache    = Widget_Cache_None,
-		 PictureID         * widget_cache_id = 0);
-
 	void get_size
 		(const TextStyle &,
 		 const std::string & text,

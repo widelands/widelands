@@ -242,66 +242,6 @@ void Font_Handler::draw_multiline
 
 
 /*
- * Draw this string, if it is not cached, create the cache for it.
- *
- * The whole text block is rendered in one Surface, this surface is cached
- * for reuse.
- * This is a really fast approach for static texts, but for text areas
- * which keep changing (like Multiline editboxes or chat windows, debug
- * windows ...) this is the death, for a whole new surface is rendered
- * with everything that has been written so far.
- */
-// TODO: get rid of this (depends on refactor of Multiline_Textarea)
-void Font_Handler::draw_string
-	(RenderTarget & dst,
-	 std::string const & fontname,
-	 int32_t const fontsize, RGBColor const fg, RGBColor const bg,
-	 Point                     dstpoint,
-	 std::string const &       text,
-	 Align               const align,
-	 uint32_t            const wrap,
-	 Widget_Cache        const widget_cache,
-	 PictureID         *       widget_cache_id)
-{
-	TTF_Font & font = *Font::get(fontname, fontsize)->get_ttf_font();
-	//Width and height of text, needed for alignment
-	uint32_t w, h;
-	PictureID picid;
-	//log("Font_Handler::draw_string(%s)\n", text.c_str());
-	//Fontrender takes care of caching
-	if (widget_cache == Widget_Cache_None) {
-		TextStyle style;
-		style.font = Font::get(fontname, fontsize);
-		style.fg = fg;
-		style.bold = true;
-
-		if (wrap == std::numeric_limits<uint32_t>::max() && text.find('\n') == std::string::npos) {
-			draw_text(dst, style, dstpoint, text, align);
-		} else {
-			draw_multiline(dst, style, dstpoint, text, align, wrap);
-		}
-
-		return;
-	} else if (widget_cache == Widget_Cache_Use) {
-		//  Widget gave us an explicit picid.
-		g_gr->get_picture_size(*widget_cache_id, w, h);
-		picid = *widget_cache_id;
-	} else {
-		// We need to (re)create the picid for the widget.
-		// The old picture is freed automatically
-		*widget_cache_id =
-			convert_sdl_surface
-				(*create_sdl_text_surface
-				 (font, fg, bg, text, align, wrap, 0),
-				 bg, true);
-		g_gr->get_picture_size(*widget_cache_id, w, h);
-		picid = *widget_cache_id;
-	}
-	do_align(align, dstpoint.x, dstpoint.y, w, h);
-	dst.blit(dstpoint, picid);
-}
-
-/*
  * This function renders a short (single line) text surface
  */
 SDL_Surface * Font_Handler::create_single_line_text_surface
