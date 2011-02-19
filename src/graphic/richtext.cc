@@ -24,8 +24,6 @@
 #include "picture.h"
 #include "rect.h"
 #include "text_parser.h"
-#include <scripting/pdep/lobject.h>
-#include <boost/concept_check.hpp>
 #include "rendertarget.h"
 #include "font_handler.h"
 
@@ -77,7 +75,10 @@ struct TextlineElement : Element {
 			uint32_t spacewidth = style.calc_bare_width(" ");
 
 			do {
-				x += spacewidth;
+				if (style.underline)
+					x += g_fh->draw_text_raw(dst, style, Point(x, 0), " ");
+				else
+					x += spacewidth;
 				x += g_fh->draw_text_raw(dst, style, Point(x, 0), *it++);
 			} while (it != words.end());
 		}
@@ -305,11 +306,11 @@ void RichText::parse(const std::string & text)
 
 				if (text_y < m->height + images_height) {
 					if ((richtext_it->get_image_align() & Align_Horizontal) == Align_Right) {
-						alignref_left += images_width + h_space;
+						alignref_right -= images_width + h_space;
 					} else {
 						// Note: center image alignment with text is not properly supported
 						// It is unclear what the semantics should be.
-						alignref_right -= images_width + h_space;
+						alignref_left += images_width + h_space;
 					}
 				}
 
