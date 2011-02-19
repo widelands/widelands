@@ -23,7 +23,8 @@
 #include "align.h"
 #include "panel.h"
 #include "scrollbar.h"
-#include "widget_cache.h"
+
+#include <boost/scoped_ptr.hpp>
 
 namespace UI {
 struct Scrollbar;
@@ -51,55 +52,47 @@ struct Multiline_Textarea : public Panel {
 
 	void set_text(std::string const &);
 	void set_align(Align);
-	void set_scrollpos(int32_t pixels);
 	void set_scrollmode(ScrollMode mode);
 
-	void set_size(uint32_t nw, uint32_t nh);
+	void set_font(std::string name, int32_t size, RGBColor fg);
 
 	uint32_t scrollbar_w() const throw () {return 24;}
 	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
 
-	void set_font(std::string name, int32_t size, RGBColor fg) {
-		m_fontname = name;
-		m_fontsize = size;
-		m_fcolor   = fg;
-		set_text(m_text.c_str());
-	}
-
 	void set_color(RGBColor fg) {m_fcolor = fg;}
-	void set_bg_color(RGBColor bgc) {m_bg_color = bgc;}
+	void set_bg_color(RGBColor bgc) {m_bg_color = bgc;} // TODO deprecated
 
 	// Drawing and event handlers
 	void draw(RenderTarget &);
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 
-	const char *  get_font_name() {return m_fontname.c_str();}
+	const char *  get_font_name() {return m_fontname.c_str();} //TODO deprecate these?
 	int32_t       get_font_size() {return m_fontsize;}
 	RGBColor &    get_font_clr () {return m_fcolor;}
 
 private:
+	struct Impl;
+
+	boost::scoped_ptr<Impl> m;
+
+	void recompute();
+	void scrollpos_changed(int32_t pixels);
+
 	std::string m_text;
 	Scrollbar   m_scrollbar;
 	ScrollMode  m_scrollmode;
 
 protected:
+	virtual void layout();
+
 	Align        m_align;
-	PictureID    m_cache_id; ///picid of the whole textarea surface
-
-	///set to Widget_Cache_Update if the whole textarea has to be rebuild
-	Widget_Cache m_cache_mode;
-
 	std::string  m_fontname;
 	int32_t  m_fontsize;
 	RGBColor m_fcolor;
-	RGBColor m_bg_color;    ///< background color of the text.
-	uint32_t m_textheight;  ///< total height of wrapped text, in pixels
-	uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
+	RGBColor m_bg_color;    //TODO deprecated
 
-	int32_t get_m_textpos() const {return m_textpos;}
-	void    draw_scrollbar();
-	int32_t get_halign();
+	int32_t get_halign(); // TODO deprecated?
 };
 
 }

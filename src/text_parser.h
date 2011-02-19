@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,11 @@
 
 namespace UI {
 
+/**
+ * Corresponds to a richtext block that is enclosed in <p></p> tags.
+ * Has uniform font style, contains text pre-split into words, and keeps track of
+ * manual line breaks (<br>) in a separate structure.
+ */
 struct Text_Block {
 	Text_Block();
 	Text_Block(const Text_Block & src);
@@ -83,6 +88,16 @@ private:
 	std::string                                      m_font_face;
 	int32_t                                          m_line_spacing;
 	std::vector<std::string>                         m_words;
+
+	/**
+	 * Position of manual line breaks (<br>) with respect to @ref m_words.
+	 * Sorted in ascending order.
+	 * An entry j in this vector means that a manual line break occurs
+	 * before the j-th word in @ref m_words. In particular, an entry 0
+	 * means that a manual line break occurs before the first word.
+	 * Entries can appear with multiplicity, indicating that multiple
+	 * manual line breaks exist without any words in-between.
+	 */
 	std::vector<std::vector<std::string>::size_type> m_line_breaks;
 };
 

@@ -210,6 +210,23 @@ void Font_Handler::draw_text
 }
 
 /**
+ * Draw unwrapped, un-aligned single-line text at the given point, and return the width of the text.
+ */
+uint32_t Font_Handler::draw_text_raw
+	(RenderTarget & dst,
+	 const UI::TextStyle & style,
+	 Point dstpoint,
+	 const std::string & text)
+{
+	const LineCacheEntry & lce = d->get_line(style, text);
+
+	if (lce.picture && lce.picture->valid())
+		dst.blit(dstpoint, lce.picture);
+
+	return lce.width;
+}
+
+/**
  * Draw multi-line text, optionally with wrapping.
  *
  * @note Consider using @ref WordWrap directly, if the same multi-line

@@ -22,6 +22,7 @@
 
 namespace UI {
 
+	//TODO this is deprecated
 enum Widget_Cache {
 	Widget_Cache_None   = 0,
 	Widget_Cache_Use    = 1,
