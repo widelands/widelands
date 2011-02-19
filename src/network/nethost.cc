@@ -45,12 +45,16 @@
 #include "wexception.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
-#include "wui/interactive_dedicated_server.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
 #include <boost/format.hpp>
 #include <sstream>
+
+#ifndef WIN32
+#include <unistd.h> // for usleep
+#endif
+
 using boost::format;
 
 
@@ -644,9 +648,17 @@ void NetHost::run(bool const autorun)
 		// Initializing
 		d->hp.nextWinCondition();
 		// Setup by the users
+		log ("[Dedicated] Entering set up mode, waiting for user interaction!");
 		while (not d->dedicated_start) {
 			handle_network();
+#ifndef WIN32
+			if (usleep(200) == -1)
+				return;
+#else
+			// Quite slow and does not react on SIG*** commands.
+			// If there is something like usleep for Windows, we should better replace sleep(1) here.
 			sleep(1);
+#endif
 		}
 		d->dedicated_start = false;
 	} else {
@@ -678,48 +690,64 @@ void NetHost::run(bool const autorun)
 #endif
 
 	try {
-		UI::ProgressWindow loaderUI("pics/progress.png");
-		std::vector<std::string> tipstext;
-		tipstext.push_back("general_game");
-		tipstext.push_back("multiplayer");
-		try {
-			tipstext.push_back(d->hp.getPlayersTribe());
-		} catch (GameSettingsProvider::No_Tribe) {
+		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
+		// NOTE  to check whether the pointer is valid.
+		UI::ProgressWindow * loaderUI = 0;
+		if (m_is_dedicated) {
+			log ("[Dedicated] Starting the game...");
+			d->game = &game;
+			game.set_game_controller(this);
+
+			if (d->settings.savegame) {
+				// Read and broadcast original win condition
+				Widelands::Game_Loader gl(d->settings.mapfilename, game);
+				Widelands::Game_Preload_Data_Packet gpdp;
+				gl.preload_game(gpdp);
+
+				setWinCondition(gpdp.get_win_condition());
+			}
+		} else {
+			loaderUI = new UI::ProgressWindow ("pics/progress.png");
+			std::vector<std::string> tipstext;
+			tipstext.push_back("general_game");
+			tipstext.push_back("multiplayer");
+			try {
+				tipstext.push_back(d->hp.getPlayersTribe());
+			} catch (GameSettingsProvider::No_Tribe) {
+			}
+			GameTips tips (*loaderUI, tipstext);
+
+			loaderUI->step(_("Preparing game"));
+
+			d->game = &game;
+			game.set_game_controller(this);
+			Interactive_GameBase * igb;
+			uint8_t pn = d->settings.playernum + 1;
+
+			if (d->settings.savegame) {
+				// Read and broadcast original win condition
+				Widelands::Game_Loader gl(d->settings.mapfilename, game);
+				Widelands::Game_Preload_Data_Packet gpdp;
+				gl.preload_game(gpdp);
+
+				setWinCondition(gpdp.get_win_condition());
+			}
+
+			if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
+				igb =
+					new Interactive_Player
+						(game, g_options.pull_section("global"),
+						pn, d->settings.scenario, true);
+			} else
+				igb =
+					new Interactive_Spectator
+						(game, g_options.pull_section("global"), true);
+			igb->set_chat_provider(d->chat);
+			game.set_ibase(igb);
 		}
-		GameTips tips (loaderUI, tipstext);
 
-		loaderUI.step(_("Preparing game"));
-
-		d->game = &game;
-		game.set_game_controller(this);
-		Interactive_GameBase * igb;
-		uint8_t pn = d->settings.playernum + 1;
-
-		if (d->settings.savegame) {
-			// Read and broadcast original win condition
-			Widelands::Game_Loader gl(d->settings.mapfilename, game);
-			Widelands::Game_Preload_Data_Packet gpdp;
-			gl.preload_game(gpdp);
-
-			setWinCondition(gpdp.get_win_condition());
-		}
-		if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
-			igb =
-				new Interactive_Player
-					(game, g_options.pull_section("global"),
-					 pn, d->settings.scenario, true);
-		} else if (!autorun) {
-			igb =
-				new Interactive_Spectator
-					(game, g_options.pull_section("global"), true);
-		} else
-			igb =
-				new Interactive_DServer
-					(game, g_options.pull_section("global"));
-		igb->set_chat_provider(d->chat);
-		game.set_ibase(igb);
 		if (!d->settings.savegame) // new game
-			game.init_newgame(loaderUI, d->settings);
+			game.init_newgame (loaderUI, d->settings);
 		else                      // savegame
 			game.init_savegame(loaderUI, d->settings);
 		d->pseudo_networktime = game.get_gametime();
@@ -738,9 +766,7 @@ void NetHost::run(bool const autorun)
 		initComputerPlayers();
 		game.run
 			(loaderUI,
-			 d->settings.savegame ?
-			 Widelands::Game::Loaded
-			 : d->settings.scenario ?
+			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
 #if HAVE_GGZ
 		// if this is a ggz game, tell the metaserver that the game is done.

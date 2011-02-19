@@ -1994,8 +1994,8 @@ bool WLApplication::new_game()
 			game.set_ibase
 				(new Interactive_Player
 				 	(game, g_options.pull_section("global"), pn, false, false));
-			game.init_newgame(loaderUI, sp.settings());
-			game.run(loaderUI, Widelands::Game::NewNonScenario);
+			game.init_newgame(&loaderUI, sp.settings());
+			game.run(&loaderUI, Widelands::Game::NewNonScenario);
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -2188,7 +2188,7 @@ void WLApplication::replay()
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 
-		game.run(loaderUI, Widelands::Game::Loaded);
+		game.run(&loaderUI, Widelands::Game::Loaded);
 	} catch (...) {
 		emergency_save(game);
 		m_filename.clear();

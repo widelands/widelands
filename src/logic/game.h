@@ -101,12 +101,12 @@ struct Game : public Editor_Game_Base {
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame (UI::ProgressWindow &, GameSettings const &);
-	void init_savegame(UI::ProgressWindow &, GameSettings const &);
+	void init_newgame (UI::ProgressWindow *, GameSettings const &);
+	void init_savegame(UI::ProgressWindow *, GameSettings const &);
 	bool run_splayer_scenario_direct(char const * mapname);
 	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow & loader_ui, Start_Game_Type);
+	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type);
 
 	virtual void postload();
 
