@@ -95,7 +95,8 @@ throw (_wexception)
 								read_priorities (building, fr);
 
 							//  Reference the players tribe if in editor.
-							ibase.reference_player_tribe(p, &tribe);
+							if (g_gr) // but not on dedicated servers ;)
+								ibase.reference_player_tribe(p, &tribe);
 						} else
 							throw game_data_error(_("player %u does not exist"), p);
 					}

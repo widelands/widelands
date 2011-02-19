@@ -2560,8 +2560,7 @@ void NetHost::disconnectClient
 		writeSettingUser(s, client.usernum);
 		broadcast(s);
 	} else
-		sendSystemChat
-			(_("Unknown user has left the game (%s)"), reason.c_str());
+		sendSystemChat(_("Unknown user has left the game (%s)"), reason.c_str());
 
 	log("[Host]: disconnectClient(%u, %s)\n", number, reason.c_str());
 
@@ -2578,8 +2577,18 @@ void NetHost::disconnectClient
 		client.sock = 0;
 	}
 
-	if (d->game)
+	if (d->game) {
 		checkHungClients();
+		if (m_is_dedicated) {
+			// Check whether there is at least one client connected. If not, stop the game.
+			for (uint32_t i = 0; i < d->clients.size(); ++i)
+				if (d->clients.at(i).playernum != UserSettings::notConnected())
+					return;
+			d->game->end_dedicated_game();
+			log("[Dedicated] Stopping the running game...\n");
+		}
+	}
+
 }
 
 /**
