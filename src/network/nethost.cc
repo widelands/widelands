@@ -493,8 +493,8 @@ struct NetHostImpl {
 	/// order as players. In fact, a client must not be assigned to a player.
 	std::vector<Client> clients;
 
-	/// Currently active modal panel.
-	UI::Panel * modal;
+	/// Set to true, once the dedicated server should start
+	bool dedicated_start;
 
 	/// The game itself; only non-null while game is running
 	Widelands::Game * game;
@@ -530,7 +530,9 @@ struct NetHostImpl {
 	md5_checksum syncreport;
 	bool syncreport_arrived;
 
-	NetHostImpl(NetHost * const h) : chat(h), hp(h), npsb(&hp) {}
+	NetHostImpl(NetHost * const h) : chat(h), hp(h), npsb(&hp) {
+		dedicated_start = false;
+	}
 };
 
 NetHost::NetHost (std::string const & playername, bool ggz)
@@ -638,13 +640,19 @@ void NetHost::initComputerPlayers()
 void NetHost::run(bool const autorun)
 {
 	m_is_dedicated = autorun;
-	{
+	if (m_is_dedicated) {
+		// Initializing
+		d->hp.nextWinCondition();
+		// Setup by the users
+		while (not d->dedicated_start) {
+			handle_network();
+			sleep(1);
+		}
+		d->dedicated_start = false;
+	} else {
 		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&d->hp, this);
-		if (m_is_dedicated)
-			d->modal = lm;
 		lm->setChatProvider(d->chat);
 		const int32_t code = lm->run();
-		d->modal = 0;
 		if (code <= 0)
 			return;
 	}
@@ -657,8 +665,7 @@ void NetHost::run(bool const autorun)
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients.at(i).playernum == UserSettings::notConnected())
-			disconnectClient
-				(i, _("The game has started just after you tried to connect."));
+			disconnectClient(i, _("The game has started just after you tried to connect."));
 	}
 
 	SendPacket s;
@@ -1063,11 +1070,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			sendSystemChat(_("%s tried to start the game, but the server is not launchable."), sender.c_str());
 		} else {
 			sendSystemChat(_("%s send the signal to start the game."), sender.c_str());
-			assert(d->modal);
-			if (d->settings.savegame)
-				d->modal->end_modal(1 + d->settings.scenario);
-			else
-				d->modal->end_modal(3 + d->settings.scenario);
+			d->dedicated_start = true;
 		}
 
 	// /ls_saved_games

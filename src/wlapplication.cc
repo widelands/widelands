@@ -277,6 +277,7 @@ m_redirected_stdio(false)
 		m_homedir = m_commandline["homedir"];
 		m_commandline.erase("homedir");
 	}
+	bool dedicated = m_commandline.count("dedicated");
 #ifdef REDIRECT_OUTPUT
 	if (!redirect_output())
 		redirect_output(m_homedir);
@@ -288,7 +289,9 @@ m_redirected_stdio(false)
 		setup_searchpaths(m_commandline["EXENAME"]);
 	init_language(); // search paths must already be set up
 	cleanup_replays();
-	init_hardware();
+
+	if (!dedicated)
+		init_hardware();
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
