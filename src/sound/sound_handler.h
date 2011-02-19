@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2008 by the Widelands Development Team
+ * Copyright (C) 2005-2008, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -224,8 +224,8 @@ public:
 	*/
 	Widelands::Editor_Game_Base * m_egbase;
 
-	/** Only for buffering the command line option --nosound until real
-	 * initialization is done.
+	/** Only for buffering the command line option --nosound until real initialization is done.
+	 *  And disabling sound on dedicated servers
 	 * \see Sound_Handler::Sound_Handler()
 	 * \see Sound_Handler::init()
 	 * \todo This is ugly. Find a better way to do it

@@ -57,6 +57,10 @@
 #include <cstring>
 #include <string>
 
+#ifndef WIN32
+#include <unistd.h> // for usleep
+#endif
+
 namespace Widelands {
 
 /// Define this to get lots of debugging output concerned with syncs
@@ -446,7 +450,7 @@ void Game::postload()
 		assert(get_ibase() != 0);
 		get_ibase()->postload();
 	} else
-		log("Note, Widelands runs without graphics, properly in dedicated server mode!");
+		log("Note: Widelands runs without graphics, probably in dedicated server mode!\n");
 }
 
 
@@ -578,10 +582,15 @@ bool Game::run
 		// dedicated server
 		m_state = gs_running;
 		//handle network
-		while (true)
-			if(usleep(50) == -1)
+		while (true) {
+#ifndef WIN32
+			if (usleep(50) == -1)
 				break;
+#else
+			// TODO  take care about Windows, else we end up with 100% cpu usage.
+#endif
 			think();
+		}
 	}
 
 	m_state = gs_notrunning;
@@ -605,7 +614,8 @@ void Game::think()
 	if (m_state == gs_running) {
 		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
 
-		g_gr->animate_maptextures(get_gametime());
+		if (g_gr) // not in dedicated server mode
+			g_gr->animate_maptextures(get_gametime());
 
 		// check if autosave is needed
 		m_savehandler.think(*this, WLApplication::get()->get_time());

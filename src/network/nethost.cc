@@ -648,7 +648,7 @@ void NetHost::run(bool const autorun)
 		// Initializing
 		d->hp.nextWinCondition();
 		// Setup by the users
-		log ("[Dedicated] Entering set up mode, waiting for user interaction!");
+		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
 		while (not d->dedicated_start) {
 			handle_network();
 #ifndef WIN32
@@ -694,7 +694,7 @@ void NetHost::run(bool const autorun)
 		// NOTE  to check whether the pointer is valid.
 		UI::ProgressWindow * loaderUI = 0;
 		if (m_is_dedicated) {
-			log ("[Dedicated] Starting the game...");
+			log ("[Dedicated] Starting the game...\n");
 			d->game = &game;
 			game.set_game_controller(this);
 
@@ -1072,163 +1072,176 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 
 	// /help
 	if (cmd == "help") {
-		c.msg =
-			_
-			 ("<br>Available host commands are:<br>"
-			  "/help           - Shows this help<br>"
-			  "/start          - Starts the server<br>"
-			  "/ls_saved_games - Shows a list of saved games<br>"
-			  "/ls_maps        - Shows a list of maps<br>"
-			  "/switch_save  $ - Switch to saved game $<br>"
-			  "/switch_map   $ - Switch to map $<br>"
-			  "/toggle_type  # - Toggles the type of player #<br>"
-			  "/toggle_init  # - Toggles the initialization of player #<br>"
-			  "/toggle_tribe # - Toggles the tribe of player #<br>"
-			  "/toggle_team  # - Toggles the team of player #<br>"
-			  "/toggle_win_con - Toggles the win_condition<br>"
-			  "/host         $ - Tries to run the host command $");
+		if (d->game)
+			c.msg =
+				_
+				("<br>Available host commands are:<br>"
+				 "/help   - Shows this help<br>"
+				 "/host $ - Tries to run the host command $");
+		else
+			c.msg =
+				_
+				("<br>Available host commands are:<br>"
+				 "/help           - Shows this help<br>"
+				 "/start          - Starts the server<br>"
+				 "/ls_saved_games - Shows a list of saved games<br>"
+				 "/ls_maps        - Shows a list of maps<br>"
+				 "/switch_save  $ - Switch to saved game $<br>"
+				 "/switch_map   $ - Switch to map $<br>"
+				 "/toggle_type  # - Toggles the type of player #<br>"
+				 "/toggle_init  # - Toggles the initialization of player #<br>"
+				 "/toggle_tribe # - Toggles the tribe of player #<br>"
+				 "/toggle_team  # - Toggles the team of player #<br>"
+				 "/toggle_win_con - Toggles the win_condition<br>"
+				 "/host         $ - Tries to run the host command $");
 		send(c);
 
-	// /start
-	} else if (cmd == "start") {
-		if (!canLaunch()) {
-			// The Server is not yet ready
-			sendSystemChat(_("%s tried to start the game, but the server is not launchable."), sender.c_str());
-		} else {
-			sendSystemChat(_("%s send the signal to start the game."), sender.c_str());
-			d->dedicated_start = true;
-		}
-
-	// /ls_saved_games
-	} else if (cmd == "ls_saved_games") {
-		std::string temp(_("Available saved games:<br>"));
-		filenameset_t files;
-		g_fs->FindFiles("save", "*", &files, 0);
-		Widelands::Game game;
-		Widelands::Game_Preload_Data_Packet gpdp;
-		const filenameset_t & gamefiles = files;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
-			try {
-				Widelands::Game_Loader gl(name, game);
-				gl.preload_game(gpdp);
-				temp += i.current->substr(5, i.current->size() - 1);
-				temp += "; ";
-			} catch (_wexception const & e) {}
-		}
-		c.msg = temp;
-		send(c);
-
-	// /ls_maps
-	} else if (cmd == "ls_maps") {
-		std::string temp(_("Available maps:<br>"));
-		filenameset_t files;
-		g_fs->FindFiles("maps", "*", &files, 0);
-		Widelands::Map map;
-		const filenameset_t & gamefiles = files;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
-			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
-			if (ml) {
-				temp += i.current->substr(5, i.current->size() - 1);
-				temp += "; ";
-			}
-		}
-		c.msg = temp;
-		send(c);
-
-	// /switch_save
-	} else if (cmd == "switch_save") {
-		std::string path("save/");
-		path += arg1;
-		if (g_fs->FileExists(path)) {
-			// Check if file is a saved game and if yes read out the needed data
-			try {
-				Widelands::Game game;
-				Widelands::Game_Preload_Data_Packet gpdp;
-				Widelands::Game_Loader gl(path, game);
-				gl.preload_game(gpdp);
-
-				// If we are here, it is a saved game file :)
-				// Read the needed data from file "elemental" of the used map.
-				FileSystem & sg_fs = g_fs->MakeSubFileSystem(path.c_str());
-				Profile prof;
-				prof.read("map/elemental", 0, sg_fs);
-				Section & s = prof.get_safe_section("global");
-				uint8_t nr_players = s.get_safe_int("nr_players");
-
-				d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
-				return;
-			} catch (_wexception const & e) {}
-		}
-		c.msg = (format(_("Can not use \"%s\" as saved game file!")) % arg1).str();
-		send(c);
-
-	// /switch_map
-	} else if (cmd == "switch_map") {
-		std::string path("maps/");
-		path += arg1;
-		if (g_fs->FileExists(path)) {
-			// Check if file is a map and if yes read out the needed data
-			Widelands::Map   map;
-			i18n::Textdomain td("maps");
-			Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
-			if (ml) {
-				// Yes it is a map file :)
-				map.set_filename(path.c_str());
-				ml->preload_map(true);
-				d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
-				return;
-			}
-		}
-		c.msg = (format(_("Can not use \"%s\" as map file!")) % arg1).str();
-		send(c);
-
-	// Player commands
-	} else if (cmd == "toggle_type" || cmd == "toggle_init" || cmd == "toggle_tribe" || cmd == "toggle_team") {
-		std::istringstream temp(arg1);
-		// Conversion fails with uint8_t or similiar, so we convert to int.
-		// This should not be a problem anyways, as this function runs only server sided.
-		int plr;
-		if (!(temp >> plr)) {
-			c.msg = _("Invalid value # for player - should be a player number");
-			send(c);
-			return;
-		}
-		--plr; // 0 based
-		if (plr < 0 || plr >= static_cast<int32_t>(d->settings.players.size())) {
-			c.msg = _("Invalid value # for player - should be a player number");
-			send(c);
-			return;
-		}
-
-		// /toggle_type #
-		if      (cmd == "toggle_type")
-			d->npsb.toggle_type(plr);
-
-		// /toggle_init #
-		else if (cmd == "toggle_init")
-			d->npsb.toggle_init(plr);
-
-		// /toggle_tribe #
-		else if (cmd == "toggle_tribe")
-			d->npsb.toggle_tribe(plr);
-
-		// /toggle_team #
-		else if (cmd == "toggle_team")
-			d->npsb.toggle_team(plr);
-
-	// /toggle_win_con
-	} else if (cmd == "toggle_win_con") {
-		d->hp.nextWinCondition();
-
-	// /host
+		// /host
 	} else if (cmd == "host") {
 		std::string temp = arg1 + " " + arg2;
 		c.msg = (format(_("%s told me to run the command: \"%s\"")) % sender % temp).str();
 		c.recipient = "";
 		send(c);
 		d->chat.send(temp);
+
+	} else if (not d->game) {
+
+		// /start
+		if (cmd == "start") {
+			if (!canLaunch()) {
+				// The Server is not yet ready
+				sendSystemChat
+					(_("%s tried to start the game, but the server is not launchable."), sender.c_str());
+			} else {
+				sendSystemChat(_("%s send the signal to start the game."), sender.c_str());
+				d->dedicated_start = true;
+			}
+
+		// /ls_saved_games
+		} else if (cmd == "ls_saved_games") {
+			std::string temp(_("Available saved games:<br>"));
+			filenameset_t files;
+			g_fs->FindFiles("save", "*", &files, 0);
+			Widelands::Game game;
+			Widelands::Game_Preload_Data_Packet gpdp;
+			const filenameset_t & gamefiles = files;
+			container_iterate_const(filenameset_t, gamefiles, i) {
+				char const * const name = i.current->c_str();
+				try {
+					Widelands::Game_Loader gl(name, game);
+					gl.preload_game(gpdp);
+					temp += i.current->substr(5, i.current->size() - 1);
+					temp += "; ";
+				} catch (_wexception const & e) {}
+			}
+			c.msg = temp;
+			send(c);
+
+		// /ls_maps
+		} else if (cmd == "ls_maps") {
+			std::string temp(_("Available maps:<br>"));
+			filenameset_t files;
+			g_fs->FindFiles("maps", "*", &files, 0);
+			Widelands::Map map;
+			const filenameset_t & gamefiles = files;
+			container_iterate_const(filenameset_t, gamefiles, i) {
+				char const * const name = i.current->c_str();
+				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				if (ml) {
+					temp += i.current->substr(5, i.current->size() - 1);
+					temp += "; ";
+				}
+			}
+			c.msg = temp;
+			send(c);
+
+		// /switch_save
+		} else if (cmd == "switch_save") {
+			std::string path("save/");
+			path += arg1;
+			if (g_fs->FileExists(path)) {
+				// Check if file is a saved game and if yes read out the needed data
+				try {
+					Widelands::Game game;
+					Widelands::Game_Preload_Data_Packet gpdp;
+					Widelands::Game_Loader gl(path, game);
+					gl.preload_game(gpdp);
+
+					// If we are here, it is a saved game file :)
+					// Read the needed data from file "elemental" of the used map.
+					FileSystem & sg_fs = g_fs->MakeSubFileSystem(path.c_str());
+					Profile prof;
+					prof.read("map/elemental", 0, sg_fs);
+					Section & s = prof.get_safe_section("global");
+					uint8_t nr_players = s.get_safe_int("nr_players");
+
+					d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
+					return;
+				} catch (_wexception const & e) {}
+			}
+			c.msg = (format(_("Can not use \"%s\" as saved game file!")) % arg1).str();
+			send(c);
+
+		// /switch_map
+		} else if (cmd == "switch_map") {
+			std::string path("maps/");
+			path += arg1;
+			if (g_fs->FileExists(path)) {
+				// Check if file is a map and if yes read out the needed data
+				Widelands::Map   map;
+				i18n::Textdomain td("maps");
+				Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
+				if (ml) {
+					// Yes it is a map file :)
+					map.set_filename(path.c_str());
+					ml->preload_map(true);
+					d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
+					return;
+				}
+			}
+			c.msg = (format(_("Can not use \"%s\" as map file!")) % arg1).str();
+			send(c);
+
+		// Player commands
+		} else if
+			(cmd == "toggle_type" || cmd == "toggle_init" || cmd == "toggle_tribe" || cmd == "toggle_team")
+		{
+			std::istringstream temp(arg1);
+			// Conversion fails with uint8_t or similiar, so we convert to int.
+			// This should not be a problem anyways, as this function runs only server sided.
+			int plr;
+			if (!(temp >> plr)) {
+				c.msg = _("Invalid value # for player - should be a player number");
+				send(c);
+				return;
+			}
+			--plr; // 0 based
+			if (plr < 0 || plr >= static_cast<int32_t>(d->settings.players.size())) {
+				c.msg = _("Invalid value # for player - should be a player number");
+				send(c);
+				return;
+			}
+
+			// /toggle_type #
+			if      (cmd == "toggle_type")
+				d->npsb.toggle_type(plr);
+
+			// /toggle_init #
+			else if (cmd == "toggle_init")
+				d->npsb.toggle_init(plr);
+
+			// /toggle_tribe #
+			else if (cmd == "toggle_tribe")
+				d->npsb.toggle_tribe(plr);
+
+			// /toggle_team #
+			else if (cmd == "toggle_team")
+				d->npsb.toggle_team(plr);
+
+		// /toggle_win_con
+		} else if (cmd == "toggle_win_con") {
+			d->hp.nextWinCondition();
+		}
 
 	// default
 	} else {

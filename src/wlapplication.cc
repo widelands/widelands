@@ -365,6 +365,8 @@ void WLApplication::run()
 	} else if (m_game_type == GGZ) {
 		Widelands::Game game;
 		try {
+			// disable sound completely
+			g_sound_handler.m_nosound = true;
 
 			// setup some ggz details about a dedicated server
 			Section & s = g_options.pull_section("global");
