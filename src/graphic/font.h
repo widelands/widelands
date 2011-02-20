@@ -42,12 +42,15 @@ namespace UI {
  * name) and the size of the font.
  */
 struct Font {
+	friend struct TextStyle;
+
 	static void shutdown();
 	static Font * get(const std::string & name, int size);
 	static Font * ui_big();
 	static Font * ui_small();
 	static Font * ui_ultrasmall();
 
+	uint32_t ascent() const;
 	uint32_t height() const;
 	uint32_t lineskip() const;
 
@@ -59,7 +62,13 @@ private:
 
 	FileRead m_fontfile;
 	TTF_Font * m_font;
-	uint32_t m_computed_lineskip;
+
+	/**
+	 * Work around weird fonts with very large lineskip, to get something
+	 * that makes more sense as the default skip in Latin scripts.
+	 */
+	int32_t m_computed_typical_miny;
+	int32_t m_computed_typical_maxy;
 };
 
 /**
@@ -87,6 +96,8 @@ struct TextStyle {
 	static const TextStyle & ui_small();
 	static const TextStyle & ui_ultrasmall();
 	uint32_t calc_bare_width(const std::string & text) const;
+	void calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const;
+	void setup() const;
 
 	Font * font;
 	RGBColor fg;

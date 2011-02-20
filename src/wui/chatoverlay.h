@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,18 +17,31 @@
  *
  */
 
-#ifndef WIDGET_CACHE_H
-#define WIDGET_CACHE_H
+#ifndef CHATOVERLAY_H
+#define CHATOVERLAY_H
 
-namespace UI {
+#include "ui_basic/panel.h"
 
-enum Widget_Cache {
-	Widget_Cache_None   = 0,
-	Widget_Cache_Use    = 1,
-	Widget_Cache_New    = 2,
-	Widget_Cache_Update = 3
+#include <boost/scoped_ptr.hpp>
+
+struct ChatProvider;
+
+/**
+ * The overlay that displays all new chat messages for some timeout on the main window.
+ *
+ * \see GameChatPanel, GameChatMenu
+ */
+struct ChatOverlay : public UI::Panel {
+	ChatOverlay(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
+	~ChatOverlay();
+
+	void setChatProvider(ChatProvider &);
+	virtual void draw(RenderTarget &);
+	virtual void think();
+
+private:
+	struct Impl;
+	boost::scoped_ptr<Impl> m;
 };
 
-}
-
-#endif
+#endif // CHATOVERLAY_H
