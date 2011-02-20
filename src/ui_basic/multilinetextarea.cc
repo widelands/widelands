@@ -114,7 +114,7 @@ void Multiline_Textarea::recompute()
 		m->isrichtext = false;
 		m->ww.set_wrapwidth(get_eff_w());
 		m->ww.wrap(m_text);
-		height = m->ww.height() + 2 * RICHTEXT_MARGIN;
+		height = m->ww.height();
 	} else {
 		m->isrichtext = true;
 		m->rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
@@ -178,10 +178,21 @@ void Multiline_Textarea::layout()
  */
 void Multiline_Textarea::draw(RenderTarget & dst)
 {
-	if (m->isrichtext)
+	if (m->isrichtext) {
 		m->rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - m_scrollbar.get_scrollpos()));
-	else
-		m->ww.draw(dst, Point(0, -m_scrollbar.get_scrollpos()), m_align);
+	} else {
+		int32_t anchor = 0;
+
+		switch (m_align & Align_Horizontal) {
+		case Align_HCenter:
+			anchor = get_eff_w() / 2;
+			break;
+		case Align_Right:
+			anchor = get_eff_w();
+			break;
+		}
+		m->ww.draw(dst, Point(anchor, -m_scrollbar.get_scrollpos()), m_align);
+	}
 }
 
 bool Multiline_Textarea::handle_mousepress
