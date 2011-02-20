@@ -589,7 +589,7 @@ bool Game::run
 			if (usleep(100) == -1)
 				break;
 #else
-			// TODO  take care about Windows, else we end up with 100% cpu usage.
+			Sleep(100);
 #endif
 			think();
 		}

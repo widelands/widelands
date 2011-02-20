@@ -656,9 +656,7 @@ void NetHost::run(bool const autorun)
 			if (usleep(200) == -1)
 				return;
 #else
-			// Quite slow and does not react on SIG*** commands.
-			// If there is something like usleep for Windows, we should better replace sleep(1) here.
-			Sleep(1000);
+			Sleep(200);
 #endif
 		}
 		d->dedicated_start = false;
