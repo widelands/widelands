@@ -29,6 +29,10 @@
 
 namespace UI {
 
+namespace {
+int32_t const h_space = 3;
+}
+
 /**
  * Layouted rich text is essentially a bunch of drawable elements, each with a
  * rectangular bounding box.
@@ -88,7 +92,7 @@ struct TextlineElement : Element {
 	std::vector<std::string> words;
 };
 
-struct RichText::Impl {
+struct RichTextImpl {
 	/// Layouted elements
 	std::vector<Element *> elements;
 
@@ -99,14 +103,14 @@ struct RichText::Impl {
 	/// Height of parsed rich-text area, determined by layouting
 	uint32_t height;
 
-	Impl();
-	~Impl();
+	RichTextImpl();
+	~RichTextImpl();
 
 	void clear();
 };
 
 RichText::RichText()
-	: m(new Impl)
+	: m(new RichTextImpl)
 {
 }
 
@@ -114,13 +118,13 @@ RichText::~RichText()
 {
 }
 
-RichText::Impl::Impl()
+RichTextImpl::RichTextImpl()
 {
 	width = 0;
 	height = 0;
 }
 
-RichText::Impl::~Impl()
+RichTextImpl::~RichTextImpl()
 {
 	clear();
 }
@@ -128,7 +132,7 @@ RichText::Impl::~Impl()
 /**
  * Reset all layouting data.
  */
-void RichText::Impl::clear()
+void RichTextImpl::clear()
 {
 	while (elements.size()) {
 		delete elements.back();
@@ -163,35 +167,147 @@ uint32_t RichText::height()
 	return m->height;
 }
 
+struct TextBuilder {
+	RichTextImpl & rti;
+
+	/// Current richtext block
+	std::vector<Richtext_Block>::iterator richtext;
+
+	/// Extent of images in the current richtext block
+	/*@{*/
+	uint32_t images_width;
+	uint32_t images_height;
+	/*@}*/
+
+	/// Maximum width, in pixels, for current line of text
+	uint32_t maxwidth;
+
+	/// y-coordinate of top of current line of text
+	uint32_t text_y;
+
+	/// Width of the current line, in pixels
+	uint32_t linewidth;
+
+	/// Current text block
+	std::vector<Text_Block>::const_iterator textblock;
+	TextStyle style;
+	uint32_t spacewidth;
+	uint32_t linespacing;
+
+	struct Elt {
+		TextlineElement * element;
+		int32_t miny, maxy;
+	};
+
+	/// Elements in the current line (also already added to the full richtext list
+	/// of elements, but we keep this around to store miny/maxy data to adjust all
+	/// parts of a line onto the same text baseline).
+	std::vector<Elt> elements;
+
+	TextBuilder(RichTextImpl & _rti) : rti(_rti) {}
+
+	/**
+	 * Update data that is specific to the current @ref textblock.
+	 */
+	void reset_block()
+	{
+		style.font = Font::get(textblock->get_font_face(), textblock->get_font_size());
+		style.fg = textblock->get_font_color();
+
+		style.bold = textblock->get_font_weight() == "bold";
+		style.italics = textblock->get_font_style() == "italic";
+		style.underline = textblock->get_font_decoration() == "underline";
+
+		spacewidth = style.calc_bare_width(" ");
+		linespacing = textblock->get_line_spacing();
+	}
+
+	/**
+	 * Properly align elements in the current line, and advance @ref text_y and
+	 * other data so that we can begin the next line.
+	 */
+	void advance_line()
+	{
+		int32_t miny = 0;
+		int32_t maxy = 0;
+
+		if (elements.empty()) {
+			style.calc_bare_height_heuristic(" ", miny, maxy);
+		} else {
+			int32_t alignref_left = 0;
+			int32_t alignref_right = rti.width;
+
+			if (text_y < rti.height + images_height) {
+				if ((richtext->get_image_align() & Align_Horizontal) == Align_Right) {
+					alignref_right -= images_width + h_space;
+				} else {
+					// Note: center image alignment with text is not properly supported
+					// It is unclear what the semantics should be.
+					alignref_left += images_width + h_space;
+				}
+			}
+
+			int32_t textleft;
+
+			switch (richtext->get_text_align() & Align_Horizontal) {
+			case Align_Right:
+				textleft = alignref_right - int32_t(linewidth);
+				break;
+			case Align_HCenter:
+				textleft = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
+				break;
+			default:
+				textleft = alignref_left;
+				break;
+			}
+
+			for (std::vector<Elt>::const_iterator it = elements.begin(); it != elements.end(); ++it) {
+				it->element->bbox.x += textleft;
+				miny = std::min(miny, it->miny);
+				maxy = std::max(maxy, it->maxy);
+			}
+
+			int32_t baseline = text_y + maxy;
+			for (std::vector<Elt>::const_iterator it = elements.begin(); it != elements.end(); ++it)
+				it->element->bbox.y = baseline - it->element->style.font->ascent();
+		}
+
+		text_y += maxy - miny + linespacing;
+		if (text_y >= rti.height + images_height)
+			maxwidth = rti.width;
+
+		elements.clear();
+		linewidth = 0;
+	}
+};
+
 /**
  * Parse and layout the given rich text.
  */
-void RichText::parse(const std::string & text)
+void RichText::parse(const std::string & rtext)
 {
 	m->clear();
 
 	std::vector<Richtext_Block> blocks;
 	Text_Parser p;
-	std::string copy(text);
+	std::string copy(rtext);
 	p.parse(copy, blocks);
 
 	// Guard against weirdness in text and image alignment
 	m->width = std::min(m->width, uint32_t(std::numeric_limits<int32_t>::max()));
 
-	for
-		(std::vector<Richtext_Block>::iterator richtext_it = blocks.begin();
-		 richtext_it != blocks.end();
-		 ++richtext_it)
-	{
-		const std::vector<Text_Block> & cur_text_blocks = richtext_it->get_text_blocks();
-		const std::vector<std::string> & cur_block_images = richtext_it->get_images();
+	TextBuilder text(*m);
+
+	for (text.richtext = blocks.begin(); text.richtext != blocks.end(); ++text.richtext) {
+		const std::vector<Text_Block> & cur_text_blocks = text.richtext->get_text_blocks();
+		const std::vector<std::string> & cur_block_images = text.richtext->get_images();
 
 		// First obtain the data of all images of this richtext block and prepare
 		// the corresponding elements, then do the alignment once the total width
 		// is known
 		const uint32_t firstimageelement = m->elements.size();
-		uint32_t images_height = 0;
-		uint32_t images_width = 0;
+		text.images_height = 0;
+		text.images_width = 0;
 
 		for
 			(std::vector<std::string>::const_iterator img_it = cur_block_images.begin();
@@ -203,13 +319,13 @@ void RichText::parse(const std::string & text)
 				continue;
 
 			Rect bbox;
-			bbox.x = images_width;
+			bbox.x = text.images_width;
 			bbox.y = m->height;
 			bbox.w = image->get_w();
 			bbox.h = image->get_h();
 
-			images_height = std::max(images_height, bbox.h);
-			images_width += bbox.w;
+			text.images_height = std::max(text.images_height, bbox.h);
+			text.images_width += bbox.w;
 
 			m->elements.push_back(new ImageElement(bbox, image));
 		}
@@ -217,135 +333,111 @@ void RichText::parse(const std::string & text)
 		// Fix up the alignment
 		int32_t imagealigndelta = 0;
 
-		if ((richtext_it->get_image_align() & Align_Horizontal) == Align_HCenter)
-			imagealigndelta = (int32_t(m->width) - int32_t(images_width)) / 2;
-		else if ((richtext_it->get_image_align() & Align_Horizontal) == Align_Right)
-			imagealigndelta = int32_t(m->width) - int32_t(images_width);
+		if ((text.richtext->get_image_align() & Align_Horizontal) == Align_HCenter)
+			imagealigndelta = (int32_t(m->width) - int32_t(text.images_width)) / 2;
+		else if ((text.richtext->get_image_align() & Align_Horizontal) == Align_Right)
+			imagealigndelta = int32_t(m->width) - int32_t(text.images_width);
 
 		for (uint32_t idx = firstimageelement; idx < m->elements.size(); ++idx)
 			m->elements[idx]->bbox.x += imagealigndelta;
 
 		// Now layout the text elements; they are already broken down to words,
 		// which makes our job a bit easier.
-		int32_t const h_space = 3;
-		uint32_t maxtextwidth = m->width;
+		text.text_y = m->height;
+		text.maxwidth = m->width;
+		text.linewidth = 0;
 
-		uint32_t text_y = m->height;
-
-		if (images_height > 0) {
-			if (h_space + images_width < maxtextwidth)
-				maxtextwidth -= h_space + images_width;
+		if (text.images_height > 0) {
+			if (h_space + text.images_width < text.maxwidth)
+				text.maxwidth -= h_space + text.images_width;
 			else
-				text_y = m->height + images_height;
+				text.text_y = m->height + text.images_height;
 		}
 
-		for
-			(std::vector<Text_Block>::const_iterator text_it = cur_text_blocks.begin();
-			 text_it != cur_text_blocks.end();
-			 ++text_it)
-		{
-			// Set up font for this block
-			TextStyle style;
-			style.font = Font::get(text_it->get_font_face(), text_it->get_font_size());
-			style.fg = text_it->get_font_color();
+		text.textblock = cur_text_blocks.begin();
 
-			style.bold = text_it->get_font_weight() == "bold";
-			style.italics = text_it->get_font_style() == "italic";
-			style.underline = text_it->get_font_decoration() == "underline";
+		while (text.textblock != cur_text_blocks.end()) {
+			text.reset_block();
 
-			uint32_t lineheight = style.font->height();
-			uint32_t spacewidth = style.calc_bare_width(" ");
-
-			// Do the actual layouting
-			const std::vector<std::string> & words = text_it->get_words();
+			const std::vector<std::string> & words = text.textblock->get_words();
 			const std::vector<std::vector<std::string>::size_type> & line_breaks =
-				text_it->get_line_breaks();
+				text.textblock->get_line_breaks();
 
 			uint32_t word_cnt = 0;
 			std::vector<std::vector<std::string>::size_type>::const_iterator br_it = line_breaks.begin();
 
 			while (word_cnt < words.size() || br_it != line_breaks.end()) {
 				if (br_it != line_breaks.end() && *br_it <= word_cnt) {
-					text_y += style.font->lineskip() + text_it->get_line_spacing();
+					text.advance_line();
 					br_it++;
 					continue;
 				}
 
-				if (text_y >= m->height + images_height)
-					maxtextwidth = m->width;
-
 				// Now eat up words up to the next line break
 				assert(word_cnt < words.size());
-				uint32_t nrwords = 1;
-				uint32_t linewidth = style.calc_bare_width(words[word_cnt]);
-				int32_t lineminy;
-				int32_t linemaxy;
-				style.calc_bare_height_heuristic(words[word_cnt], lineminy, linemaxy);
 
-				while (word_cnt + nrwords < words.size()) {
-					if (br_it != line_breaks.end() && *br_it <= word_cnt + nrwords) {
-						br_it++;
+				bool wrap = false;
+				uint32_t nrwords = 0;
+				TextBuilder::Elt elt;
+				elt.miny = elt.maxy = 0;
+
+				Rect bbox;
+				bbox.x = text.linewidth ? text.linewidth + text.spacewidth : 0;
+				bbox.y = 0; // filled in later
+				bbox.w = 0;
+				bbox.h = text.style.font->height();
+
+				do {
+					uint32_t wordwidth = text.style.calc_bare_width(words[word_cnt + nrwords]);
+
+					if (nrwords)
+						wordwidth += text.spacewidth;
+
+					// Break only if this is not the first word of the line
+					if
+						((text.linewidth || nrwords) &&
+						 bbox.x + bbox.w + wordwidth > text.maxwidth)
+					{
+						wrap = true;
 						break;
 					}
-
-					uint32_t wordwidth = style.calc_bare_width(words[word_cnt + nrwords]);
-
-					if (linewidth + spacewidth + wordwidth > maxtextwidth)
-						break;
 
 					int32_t wordminy, wordmaxy;
-					style.calc_bare_height_heuristic(words[word_cnt + nrwords], wordminy, wordmaxy);
-					linemaxy = std::max(linemaxy, wordmaxy);
-					lineminy = std::min(lineminy, wordminy);
+					text.style.calc_bare_height_heuristic(words[word_cnt + nrwords], wordminy, wordmaxy);
+					elt.maxy = std::max(elt.maxy, wordmaxy);
+					elt.miny = std::min(elt.miny, wordminy);
 
-					linewidth += spacewidth + wordwidth;
+					bbox.w += wordwidth;
 					++nrwords;
+				} while
+					(word_cnt + nrwords < words.size() &&
+					 (br_it == line_breaks.end() || *br_it > word_cnt + nrwords));
+
+				if (nrwords) {
+					m->elements.push_back
+						(new TextlineElement
+							(bbox, text.style,
+							 words.begin() + word_cnt, words.begin() + word_cnt + nrwords));
+					word_cnt += nrwords;
+
+					elt.element = static_cast<TextlineElement *>(m->elements.back());
+					text.elements.push_back(elt);
+					text.linewidth = bbox.x + bbox.w;
 				}
 
-				// Compute bounding box for line based on alignment settings
-				Rect bbox;
-				bbox.x = 0;
-				bbox.y = text_y - style.font->ascent() + linemaxy;
-				bbox.w = linewidth;
-				bbox.h = lineheight;
-
-				int32_t alignref_left = 0;
-				int32_t alignref_right = m->width;
-
-				if (text_y < m->height + images_height) {
-					if ((richtext_it->get_image_align() & Align_Horizontal) == Align_Right) {
-						alignref_right -= images_width + h_space;
-					} else {
-						// Note: center image alignment with text is not properly supported
-						// It is unclear what the semantics should be.
-						alignref_left += images_width + h_space;
-					}
-				}
-
-				switch (richtext_it->get_text_align() & Align_Horizontal) {
-				case Align_Right:
-					bbox.x = alignref_right - int32_t(linewidth);
-					break;
-				case Align_HCenter:
-					bbox.x = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
-					break;
-				default:
-					bbox.x = alignref_left;
-					break;
-				}
-
-				m->elements.push_back
-					(new TextlineElement
-						(bbox, style,
-						 words.begin() + word_cnt, words.begin() + word_cnt + nrwords));
-
-				word_cnt += nrwords;
-				text_y += linemaxy - lineminy + text_it->get_line_spacing();
+				if (wrap)
+					text.advance_line();
 			}
+
+			text.textblock++;
 		}
 
+		if (!text.elements.empty())
+			text.advance_line();
+
 		// Update total height
-		m->height = std::max(m->height + images_height, text_y);
+		printf("height = %u  text_y = %u\n", m->height, text.text_y);
+		m->height = std::max(m->height + text.images_height, text.text_y);
 	}
 }
 

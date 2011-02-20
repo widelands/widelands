@@ -32,6 +32,8 @@ struct RenderTarget;
 
 namespace UI {
 
+struct RichTextImpl;
+
 /**
  * Provides rich-text layouting and rendering functionality.
  *
@@ -51,9 +53,7 @@ struct RichText {
 	void draw(RenderTarget & dst, Point offset);
 
 private:
-	struct Impl;
-
-	boost::scoped_ptr<Impl> m;
+	boost::scoped_ptr<RichTextImpl> m;
 };
 
 } // namespace UI
