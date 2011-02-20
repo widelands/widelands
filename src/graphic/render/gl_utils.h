@@ -20,6 +20,10 @@
 #define GL_UTILS_H
 
 #include <stdint.h>
+#ifdef WIN32
+#define NO_SDL_GLEXT
+#include <GL/glew.h>
+#endif
 #include <SDL_opengl.h>
 
 struct SDL_PixelFormat;

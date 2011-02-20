@@ -21,6 +21,10 @@
 
 #include <boost/scoped_array.hpp>
 
+#ifdef WIN32
+#define NO_SDL_GLEXT
+#include <GL/glew.h>
+#endif
 #include <SDL_opengl.h>
 
 #include "graphic/picture.h"
