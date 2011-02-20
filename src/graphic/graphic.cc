@@ -187,10 +187,10 @@ Graphic::Graphic
 			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
 
-		str = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
+		const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
-			(strstr(str, "GL_ARB_texture_non_power_of_two") == 0);
+			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);
 
 		log("Graphics: OpenGL: Textures ");
 		log
@@ -198,6 +198,13 @@ Graphic::Graphic
 			 "may have any size\n");
 
 		m_caps.offscreen_rendering = false;
+
+		m_caps.gl.imaging = false;
+		if (m_caps.gl.major_version >= 2 || m_caps.gl.minor_version >= 4) {
+			m_caps.gl.imaging = true;
+		} else if (strstr(extensions, "GL_ARB_imaging")) {
+			m_caps.gl.imaging = true;
+		}
 	}
 #endif
 

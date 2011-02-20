@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "gl_surface_screen.h"
+
+#include <cmath>
 
 #include "gl_picture_texture.h"
 #include "gl_utils.h"
@@ -162,6 +164,13 @@ void GLSurfaceScreen::brighten_rect(const Rect rc, const int32_t factor)
 	assert(rc.h >= 1);
 	assert(g_opengl);
 
+	if (factor < 0) {
+		if (!g_gr->caps().gl.imaging)
+			return;
+
+		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+	}
+
 	/* glBlendFunc is a very nice feature of opengl. You can specify how the
 	* color is calculated.
 	*
@@ -181,14 +190,17 @@ void GLSurfaceScreen::brighten_rect(const Rect rc, const int32_t factor)
 	// (this is the source color) over the region
 	glBegin(GL_QUADS); {
 		glColor3f
-			((static_cast<GLfloat>(factor) / 256.0f),
-			 (static_cast<GLfloat>(factor) / 256.0f),
-			 (static_cast<GLfloat>(factor) / 256.0f));
+			((fabsf(factor) / 256.0f),
+			 (fabsf(factor) / 256.0f),
+			 (fabsf(factor) / 256.0f));
 		glVertex2f(rc.x,        rc.y);
 		glVertex2f(rc.x + rc.w, rc.y);
 		glVertex2f(rc.x + rc.w, rc.y + rc.h);
 		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
+
+	if (factor < 0)
+		glBlendEquation(GL_FUNC_ADD);
 }
 
 void GLSurfaceScreen::draw_line
