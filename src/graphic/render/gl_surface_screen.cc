@@ -57,22 +57,44 @@ const SDL_PixelFormat & GLSurfaceScreen::format() const
 	return gl_rgba_format();
 }
 
+/**
+ * Swap order of rows in m_pixels, to compensate for the upside-down nature of the
+ * OpenGL coordinate system.
+ */
+void GLSurfaceScreen::swap_rows()
+{
+	uint8_t * begin_row = m_pixels.get();
+	uint8_t * end_row = m_pixels.get() + (m_w * (m_h - 1) * 4);
+
+	while (begin_row < end_row) {
+		for (uint32_t x = 0; x < m_w * 4; ++x)
+			std::swap(begin_row[x], end_row[x]);
+
+		begin_row += m_w * 4;
+		end_row -= m_w * 4;
+	}
+}
+
 void GLSurfaceScreen::lock(IPixelAccess::LockMode mode)
 {
 	assert(!m_pixels);
 
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
-	if (mode == Lock_Normal)
+	if (mode == Lock_Normal) {
 		glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+		swap_rows();
+	}
 }
 
 void GLSurfaceScreen::unlock(IPixelAccess::UnlockMode mode)
 {
 	assert(m_pixels);
 
-	if (mode == Unlock_Update)
+	if (mode == Unlock_Update) {
+		swap_rows();
 		glDrawPixels(m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+	}
 
 	m_pixels.reset(0);
 }
