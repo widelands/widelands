@@ -326,7 +326,8 @@ struct HostChatProvider : public ChatProvider {
 
 			// Split up in "cmd" "arg1" "arg2"
 			std::string cmd, arg1, arg2;
-			h->splitCommandArray(c.msg, cmd, arg1, arg2);
+			std::string temp = c.msg.substr(1); // cut off '/'
+			h->splitCommandArray(temp, cmd, arg1, arg2);
 			log("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat
@@ -657,7 +658,7 @@ void NetHost::run(bool const autorun)
 #else
 			// Quite slow and does not react on SIG*** commands.
 			// If there is something like usleep for Windows, we should better replace sleep(1) here.
-			sleep(1);
+			Sleep(1000);
 #endif
 		}
 		d->dedicated_start = false;
@@ -1023,14 +1024,14 @@ void NetHost::kickUser(std::string name, std::string reason)
 void NetHost::splitCommandArray
 	(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2)
 {
-	assert(cmdarray.size() > 1 && cmdarray[0] == '/');
+	assert(cmdarray.size() > 1);
 
 	std::string::size_type const space = cmdarray.find(' ');
 	if (space > cmdarray.size())
 		// only cmd
-		cmd = cmdarray.substr(1);
+		cmd = cmdarray.substr(0);
 	else {
-		cmd = cmdarray.substr(1, space - 1);
+		cmd = cmdarray.substr(0, space);
 		std::string::size_type const space2 = cmdarray.find(' ', space + 1);
 		if (space2 != std::string::npos) {
 			// cmd + arg1 + arg2
@@ -1060,9 +1061,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	c.sender = d->localplayername;
 	c.recipient = sender;
 
-	if (cmdarray.size() < 1 || cmdarray[0] != '/') {
-		c.msg = _("I could not handle your request. If you are unsure how commands work send me \"/help\"!");
-		send(c);
+	if (cmdarray.size() < 1) {
 		return;
 	}
 
@@ -1070,33 +1069,33 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	std::string cmd, arg1, arg2;
 	splitCommandArray(cmdarray, cmd, arg1, arg2);
 
-	// /help
+	// help
 	if (cmd == "help") {
 		if (d->game)
 			c.msg =
 				_
 				("<br>Available host commands are:<br>"
-				 "/help   - Shows this help<br>"
-				 "/host $ - Tries to run the host command $");
+				 "help   - Shows this help<br>"
+				 "host $ - Tries to run the host command $");
 		else
 			c.msg =
 				_
 				("<br>Available host commands are:<br>"
-				 "/help           - Shows this help<br>"
-				 "/start          - Starts the server<br>"
-				 "/ls_saved_games - Shows a list of saved games<br>"
-				 "/ls_maps        - Shows a list of maps<br>"
-				 "/switch_save  $ - Switch to saved game $<br>"
-				 "/switch_map   $ - Switch to map $<br>"
-				 "/toggle_type  # - Toggles the type of player #<br>"
-				 "/toggle_init  # - Toggles the initialization of player #<br>"
-				 "/toggle_tribe # - Toggles the tribe of player #<br>"
-				 "/toggle_team  # - Toggles the team of player #<br>"
-				 "/toggle_win_con - Toggles the win_condition<br>"
-				 "/host         $ - Tries to run the host command $");
+				 "help           - Shows this help<br>"
+				 "start          - Starts the server<br>"
+				 "ls_saved_games - Shows a list of saved games<br>"
+				 "ls_maps        - Shows a list of maps<br>"
+				 "switch_save  $ - Switch to saved game $<br>"
+				 "switch_map   $ - Switch to map $<br>"
+				 "toggle_type  # - Toggles the type of player #<br>"
+				 "toggle_init  # - Toggles the initialization of player #<br>"
+				 "toggle_tribe # - Toggles the tribe of player #<br>"
+				 "toggle_team  # - Toggles the team of player #<br>"
+				 "toggle_win_con - Toggles the win_condition<br>"
+				 "host         $ - Tries to run the host command $");
 		send(c);
 
-		// /host
+		// host
 	} else if (cmd == "host") {
 		std::string temp = arg1 + " " + arg2;
 		c.msg = (format(_("%s told me to run the command: \"%s\"")) % sender % temp).str();
@@ -1106,7 +1105,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 
 	} else if (not d->game) {
 
-		// /start
+		// start
 		if (cmd == "start") {
 			if (!canLaunch()) {
 				// The Server is not yet ready
@@ -1117,7 +1116,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 				d->dedicated_start = true;
 			}
 
-		// /ls_saved_games
+		// ls_saved_games
 		} else if (cmd == "ls_saved_games") {
 			std::string temp(_("Available saved games:<br>"));
 			filenameset_t files;
@@ -1137,7 +1136,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = temp;
 			send(c);
 
-		// /ls_maps
+		// ls_maps
 		} else if (cmd == "ls_maps") {
 			std::string temp(_("Available maps:<br>"));
 			filenameset_t files;
@@ -1155,10 +1154,14 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = temp;
 			send(c);
 
-		// /switch_save
+		// switch_save
 		} else if (cmd == "switch_save") {
 			std::string path("save/");
 			path += arg1;
+			if (arg2.size() > 0) {
+				path += " ";
+				path += arg2;
+			}
 			if (g_fs->FileExists(path)) {
 				// Check if file is a saved game and if yes read out the needed data
 				try {
@@ -1182,10 +1185,14 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = (format(_("Can not use \"%s\" as saved game file!")) % arg1).str();
 			send(c);
 
-		// /switch_map
+		// switch_map
 		} else if (cmd == "switch_map") {
 			std::string path("maps/");
 			path += arg1;
+			if (arg2.size() > 0) {
+				path += " ";
+				path += arg2;
+			}
 			if (g_fs->FileExists(path)) {
 				// Check if file is a map and if yes read out the needed data
 				Widelands::Map   map;
@@ -1222,23 +1229,23 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 				return;
 			}
 
-			// /toggle_type #
+			// toggle_type #
 			if      (cmd == "toggle_type")
 				d->npsb.toggle_type(plr);
 
-			// /toggle_init #
+			// toggle_init #
 			else if (cmd == "toggle_init")
 				d->npsb.toggle_init(plr);
 
-			// /toggle_tribe #
+			// toggle_tribe #
 			else if (cmd == "toggle_tribe")
 				d->npsb.toggle_tribe(plr);
 
-			// /toggle_team #
+			// toggle_team #
 			else if (cmd == "toggle_team")
 				d->npsb.toggle_team(plr);
 
-		// /toggle_win_con
+		// toggle_win_con
 		} else if (cmd == "toggle_win_con") {
 			d->hp.nextWinCondition();
 		}
@@ -1975,8 +1982,8 @@ void NetHost::welcomeClient
 		c.sender = d->localplayername;
 		c.msg =
 			(format
-				(_("This is a dedicated server send \"@%s /help\" to get a full "
-				   "list of available commands. \"@%s /start\" starts the server."))
+				(_("This is a dedicated server send \"@%s help\" to get a full "
+				   "list of available commands. \"@%s start\" starts the server."))
 				% d->localplayername % d->localplayername)
 			.str();
 		c.recipient = d->settings.users.at(client.usernum).name;
@@ -2560,8 +2567,7 @@ void NetHost::disconnectClient
 		writeSettingUser(s, client.usernum);
 		broadcast(s);
 	} else
-		sendSystemChat
-			(_("Unknown user has left the game (%s)"), reason.c_str());
+		sendSystemChat(_("Unknown user has left the game (%s)"), reason.c_str());
 
 	log("[Host]: disconnectClient(%u, %s)\n", number, reason.c_str());
 
@@ -2578,8 +2584,18 @@ void NetHost::disconnectClient
 		client.sock = 0;
 	}
 
-	if (d->game)
+	if (d->game) {
 		checkHungClients();
+		if (m_is_dedicated) {
+			// Check whether there is at least one client connected. If not, stop the game.
+			for (uint32_t i = 0; i < d->clients.size(); ++i)
+				if (d->clients.at(i).playernum != UserSettings::notConnected())
+					return;
+			d->game->end_dedicated_game();
+			log("[Dedicated] Stopping the running game...\n");
+		}
+	}
+
 }
 
 /**
