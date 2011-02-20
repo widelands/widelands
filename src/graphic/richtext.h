@@ -26,6 +26,7 @@
 #include <boost/scoped_ptr.hpp>
 
 #include "point.h"
+#include "rgbcolor.h"
 
 
 struct RenderTarget;
@@ -45,12 +46,13 @@ struct RichText {
 	~RichText();
 
 	void set_width(uint32_t width = std::numeric_limits<uint32_t>::max());
+	void set_background_color(RGBColor color);
 
 	uint32_t width();
 	uint32_t height();
 
 	void parse(const std::string & text);
-	void draw(RenderTarget & dst, Point offset);
+	void draw(RenderTarget & dst, Point offset, bool background = false);
 
 private:
 	boost::scoped_ptr<RichTextImpl> m;

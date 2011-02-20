@@ -93,6 +93,9 @@ struct TextlineElement : Element {
 };
 
 struct RichTextImpl {
+	/// Solid background color for all elements
+	RGBColor background_color;
+
 	/// Layouted elements
 	std::vector<Element *> elements;
 
@@ -119,6 +122,8 @@ RichText::~RichText()
 }
 
 RichTextImpl::RichTextImpl()
+:
+background_color(0, 0, 0)
 {
 	width = 0;
 	height = 0;
@@ -149,6 +154,15 @@ void RichTextImpl::clear()
 void RichText::set_width(uint32_t width)
 {
 	m->width = width;
+}
+
+/**
+ * Set a solid background color that is used by @ref draw when a
+ * solid background is requested.
+ */
+void RichText::set_background_color(RGBColor color)
+{
+	m->background_color = color;
 }
 
 /**
@@ -436,7 +450,6 @@ void RichText::parse(const std::string & rtext)
 			text.advance_line();
 
 		// Update total height
-		printf("height = %u  text_y = %u\n", m->height, text.text_y);
 		m->height = std::max(m->height + text.images_height, text.text_y);
 	}
 }
@@ -444,10 +457,13 @@ void RichText::parse(const std::string & rtext)
 /**
  * Draw pre-parsed and layouted rich text content at the given offset.
  *
+ * @p background if true, all richtext elements are given a solid background,
+ * per the color set by @ref set_background_color
+ *
  * @note this function may draw content outside the box given offset
  * and @ref width and @ref height, if there were wrapping problems.
  */
-void RichText::draw(RenderTarget & dst, Point offset)
+void RichText::draw(RenderTarget & dst, Point offset, bool background)
 {
 	for
 		(std::vector<Element *>::const_iterator elt = m->elements.begin();
@@ -460,6 +476,8 @@ void RichText::draw(RenderTarget & dst, Point offset)
 		bbox += offset;
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
+			if (background)
+				dst.fill_rect(Rect(Point(0, 0), bbox.w, bbox.h), m->background_color);
 			(*elt)->draw(dst);
 			dst.set_window(oldbox, oldofs);
 		}

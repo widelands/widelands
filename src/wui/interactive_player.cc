@@ -151,8 +151,10 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	if (multiplayer) {
 		m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
+		// Limit chat width to half the screen, to limit the damage lamers can do
+		// by flooding chat messages
 		m_chatOverlay =
-			new ChatOverlay(this, 10, 25, get_w() - 10, get_h() - 25);
+			new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25);
 		m_toggle_chat.set_visible(false);
 		m_toggle_chat.set_enabled(false);
 	} else

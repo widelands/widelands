@@ -31,6 +31,7 @@ static const int32_t CHAT_DISPLAY_TIME = 10;
 static const uint32_t MARGIN = 2;
 
 struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage> {
+	bool transparent;
 	ChatProvider * chat;
 	bool havemessages;
 
@@ -51,8 +52,12 @@ ChatOverlay::ChatOverlay
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 	: UI::Panel(parent, x, y, w, h), m(new Impl())
 {
+	Section & s = g_options.pull_section("global");
+	m->transparent = s.get_bool("transparent_chat", true);
+
 	set_think(true);
-	m->rt.set_width(w);
+	m->rt.set_width(w - 2 * MARGIN);
+	m->rt.set_background_color(RGBColor(50, 50, 50));
 }
 
 ChatOverlay::~ChatOverlay()
@@ -114,12 +119,7 @@ void ChatOverlay::draw(RenderTarget & dst)
 		return;
 
 	int32_t height = m->rt.height();
-	int32_t top = get_h() - height + 2 * MARGIN;
-	Section & s = g_options.pull_section("global");
-	bool transparent_chat = s.get_bool("transparent_chat", true);
+	int32_t top = get_h() - height - 2 * MARGIN;
 
-	if (!transparent_chat)
-		dst.fill_rect(Rect(Point(0, top), get_w(), height + 2 * MARGIN), RGBColor(50, 50, 50));
-
-	m->rt.draw(dst, Point(MARGIN, top + MARGIN));
+	m->rt.draw(dst, Point(MARGIN, top + MARGIN), !m->transparent);
 }
