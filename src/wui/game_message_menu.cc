@@ -126,6 +126,7 @@ void GameMessageMenu::think()
 		if (!list.find(id.value())) {
 			List::Entry_Record & er = list.add(id.value());
 			update_record(er, message);
+			list.sort();
 		}
 	}
 
