@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 
 #include <boost/scoped_array.hpp>
 
+#define NO_SDL_GLEXT
+#include <GL/glew.h>
 #include <SDL_opengl.h>
 
 #include "graphic/picture.h"

@@ -157,6 +157,13 @@ Graphic::Graphic
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
 		log ("Graphics: OpenGL: OpenGL enabled\n");
+
+		GLenum err = glewInit();
+		if (err != GLEW_OK) {
+			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken.\n", err);
+			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
+		}
+
 		g_opengl = true;
 
 		GLboolean glBool;
@@ -199,12 +206,7 @@ Graphic::Graphic
 
 		m_caps.offscreen_rendering = false;
 
-		m_caps.gl.imaging = false;
-		if (m_caps.gl.major_version >= 2 || m_caps.gl.minor_version >= 4) {
-			m_caps.gl.imaging = true;
-		} else if (strstr(extensions, "GL_ARB_imaging")) {
-			m_caps.gl.imaging = true;
-		}
+		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
 	}
 #endif
 

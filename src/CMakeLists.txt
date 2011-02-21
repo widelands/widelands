@@ -114,6 +114,8 @@ target_link_libraries(widelands_all ${PNG_LIBRARY})
 target_link_libraries(widelands_all ${ZLIB_LIBRARY})
 target_link_libraries(widelands_all ${GGZ_CORE_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
+target_link_libraries(widelands_all ${GLEW_LIBRARY})
+
 if (DEFINED WL_EXTRA_LINK_LIBRARIES)
   target_link_libraries(widelands_all ${WL_EXTRA_LINK_LIBRARIES})
 endif (DEFINED WL_EXTRA_LINK_LIBRARIES)

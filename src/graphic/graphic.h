@@ -73,8 +73,8 @@ struct GLCaps
 	int stencil_buffer_bits;
 	/// How many Aux Buffers the opengl context support
 	int aux_buffers;
-	/// Whether the imaging subset is supported
-	bool imaging;
+	/// Whether the BlendEquation support is available
+	bool blendequation;
 };
 
 /**

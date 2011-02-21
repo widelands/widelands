@@ -187,7 +187,7 @@ void GLSurfaceScreen::brighten_rect(const Rect rc, const int32_t factor)
 	assert(g_opengl);
 
 	if (factor < 0) {
-		if (!g_gr->caps().gl.imaging)
+		if (!g_gr->caps().gl.blendequation)
 			return;
 
 		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);

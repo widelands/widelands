@@ -16,6 +16,7 @@ for Widelands makes direct use of them:
    - SDL_net
    - SDL_ttf >= 2.0.0
    - SDL_gfx
+   - GLEW, when compiling with OpenGL support
    - boost >= 1.35
    - gettext (look at FAQ if you have problems with -lintl)
    - libpng
@@ -72,11 +73,11 @@ If you want to do it manually, follow this path:
 
 - Create a build directory.
   CMake is a so called out of source build tool. That means, the build runs in a different
-  directory than where the sources are located, avoiding polluting the sources 
+  directory than where the sources are located, avoiding polluting the sources
   directory (and the ignore entries for the VCS systems). If you know SCons, this is different.
   The build directory can either be a path within your sources directory, or a directory
   at a completely independent location. In this example, we are using the subdirectory way:
-  Go to your widelands directory, and issue:  
+  Go to your widelands directory, and issue:
 
   $ mkdir -p build/compile
 
@@ -155,7 +156,7 @@ If you want to do it manually, follow this path:
   - Build type (Release or Debug build)
     When omitting the Build type, CMake decides upon finding of WL_RELEASE file if it should do
     a Release or Debug build.
-    
+
     $ cmake -DCMAKE_BUILD_TYPE=Release ../..
     $ cmake -DCMAKE_BUILD_TYPE=Debug ../..
 
@@ -182,7 +183,7 @@ If you want to do it manually, follow this path:
     Instead of having all languages installed, you may want to control which languages are available.
 
     $ cmake -DWL_LINGUAS="de;en_GB;eo" ../..
-    
+
     This setting only makes the languages German, English (Great Britain) and Esperanto available.
     You can also select only one language; and you have to use the semicolon character if you want
     to create a list of languages.
