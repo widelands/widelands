@@ -112,10 +112,10 @@ void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
 #ifdef __APPLE__
-		// on mac, the default data dir is relative to the current directory
-		log ("Adding directory:Widelands.app/Contents/Resources/\n");
-		g_fs->AddFileSystem
-			(FileSystem::Create("Widelands.app/Contents/Resources/"));
+		// on mac, the default data dir is relative to the executable directory
+		std::string s = get_executable_path();
+		log("Adding executable directory to search path");
+		g_fs->AddFileSystem(FileSystem::Create(s));
 #else
 		// first, try the data directory used in the last scons invocation
 		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
@@ -886,6 +886,35 @@ void WLApplication::shutdown_settings()
 }
 
 /**
+ * Returns the widelands executable path.
+ */
+std::string WLApplication::get_executable_path()
+{
+	std::string executabledir;
+#ifdef __APPLE__
+	uint32_t buffersize = 0;
+	_NSGetExecutablePath(NULL, &buffersize);
+	char buffer[buffersize];
+	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
+	if (check != 0) {
+		throw wexception (_("could not find the path of the main executable"));
+	}
+	executabledir = std::string(buffer);
+	executabledir.resize(executabledir.rfind('/') + 1);
+#elif linux
+	char buffer[PATH_MAX];
+	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
+	if (size <= 0) {
+		throw wexception (_("could not find the path of the main executable"));
+	}
+	executabledir = std::string(buffer, size);
+	executabledir.resize(executabledir.rfind('/') + 1);
+#endif
+	log("Widelands executable directory: %s\n", executabledir.c_str());
+	return executabledir;
+}
+
+/**
  * In case that the localedir is defined in a relative manner to the
  * executable file.
  *
@@ -893,32 +922,11 @@ void WLApplication::shutdown_settings()
  */
 std::string WLApplication::find_relative_locale_path(std::string localedir)
 {
-#ifdef __APPLE__
+#ifndef WIN32
 	if (localedir[0] != '/') {
-		uint32_t buffersize = 0;
-		_NSGetExecutablePath(NULL, &buffersize);
-		char buffer[buffersize];
-		int32_t check = _NSGetExecutablePath(buffer, &buffersize);
-		if (check != 0) {
-			throw wexception (_("could not find the path of the main executable"));
-		}
-		std::string executabledir = buffer;
-		executabledir.resize(executabledir.rfind('/') + 1);
+		std::string executabledir = get_executable_path();
 		executabledir+= localedir;
 		log ("localedir: %s\n", executabledir.c_str());
-		return executabledir;
-	}
-#elif linux
-	if (localedir[0] != '/') {
-		char buffer[PATH_MAX];
-		size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
-		if (size <= 0) {
-			throw wexception (_("could not find the path of the main executable"));
-		}
-		std::string executabledir(buffer, size);
-		executabledir.resize(executabledir.rfind('/') + 1);
-		executabledir += localedir;
-		log ("localedir : %s\n", executabledir.c_str());
 		return executabledir;
 	}
 #endif
