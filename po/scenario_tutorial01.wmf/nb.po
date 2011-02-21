@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2011-01-02 12:49+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"PO-Revision-Date: 2011-02-12 16:18+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:41+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:45+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -421,7 +421,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
 msgid "Getting a quarry up."
-msgstr ""
+msgstr "Få et steinbrudd i gang."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:240
 msgid "Great. Now about that quarry..."
@@ -517,6 +517,10 @@ msgid ""
 "clicking the fourth button from the left at the very bottom of the screen.\n"
 "Click the \"OK\" button and then give it a try."
 msgstr ""
+"Det er enklere å forstå hva som kan bygges på hvilke steder når\n"
+"byggehjelpen vises. Slå den på enten ved å trykke MELLOMROM eller\n"
+"ved å klikke på den fjerde knappen fra venstre nederst på skjermen.\n"
+"Klikk på «OK» og prøv."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
 msgid ""
@@ -536,7 +540,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
-msgstr ""
+msgstr "Venstreklikk «OK»-knappen for å lukke denne boksen og prøve det ut."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
@@ -572,6 +576,10 @@ msgid ""
 "beneficial\n"
 "close to mountains because you can't build houses in mountains."
 msgstr ""
+"La oss prøve det nå: bygg et par militære bygninger langs grensen i\n"
+"sørvest. Vi ønsker å erobre noe av fjellet her for å kunne lete etter\n"
+"ressurser. Større bygninger vil erobre mer land, som kan være en fordel\n"
+"i nærheten av fjell, siden man ikke kan bygge vanlige bygninger i fjellene."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
@@ -607,7 +615,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Flytte synsfeltet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -686,7 +694,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
 "Okay, now we own some of the area on this mountain. Mountains are very\n"
-"important, because they contain resources: coal, iron ore, goldstone and\n"
+"important, because they contain resources: coal, iron ore, gold ore and\n"
 "granite.  Each tribe uses the resources differently, but all need mines to "
 "get\n"
 "the resources out of the ground."
@@ -756,6 +764,9 @@ msgid ""
 "help\n"
 "symbol for where a mine can be built is"
 msgstr ""
+"Geologen vår fant en del kull i dette fjellet. Derfor burde du\n"
+"bygge en kullgruve her. Gruver bygges på samme måten som hus. Symbolet\n"
+"byggehjelpen viser hvor hvor en gruve kan bygges er"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
@@ -1162,3 +1173,38 @@ msgstr "dette."
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
 msgstr "vann"
+
+#~ msgid ""
+#~ "Everything except for big buildings can be build on a yellow house symbol."
+#~ msgstr ""
+#~ "Alt unntatt de største bygningene kan bygges på de gule hus-symbolene."
+
+#~ msgid "Everything can be build on the green house symbol."
+#~ msgstr "Alt kan bygges der det grønne hus-symbolet vises."
+
+#~ msgid ""
+#~ "If you decide you do not want to build a road at this time, you can cancel\n"
+#~ " road building by clicking on the starting flag of the road and selecting"
+#~ msgstr ""
+#~ "Hvis du bestemmer deg for at du ikke vil bygge en vei akkurat nå, kan du "
+#~ "avbryte\n"
+#~ " veibyggingen ved å klikke på flagget der veien starter og velge"
+
+#~ msgid ""
+#~ "There is a small slope to climb to reach this field. This means you're\n"
+#~ " workers are faster walking downwards than they are walking upwards."
+#~ msgstr ""
+#~ "Det er en liten kneik å forsere for å nå dette feltet. Dette betyr at\n"
+#~ " arbeiderne dine vil bevege seg raskere når de går nedover enn når de går "
+#~ "oppover."
+
+#~ msgid ""
+#~ "Keep the slopes in mind while placing roads and use them to your advantage.\n"
+#~ " Also try to keep roads as short as possible and always remember to place "
+#~ "as\n"
+#~ " many flags as you can on road segments to share the load better."
+#~ msgstr ""
+#~ "Tenk på høydeforskjellene når du plasserer veiene dine og bruk dem til din "
+#~ "fordel. \n"
+#~ " Prøv også å holde veiene så korte som mulige og alltid husk å plassere så\n"
+#~ " mange flagg som du kan langs veistykkene for å fordele byrden bedre."

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2010-11-26 15:45+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -302,6 +302,12 @@ msgstr "Rúbe stromy."
 msgid "Fire Tongs"
 msgstr "Kliešte na uhlie"
 
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
+
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Ryby"
@@ -524,8 +530,10 @@ msgid "Miller"
 msgstr "Mlynár"
 
 #: ../../tribes/atlanteans/miller/conf:1
-msgid "Mills wheat to produce flour."
-msgstr "Melie pšenicu na múku"
+msgid ""
+"Mills blackroot and corn to produce blackroot flour and corn flour, "
+"respectively."
+msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -993,14 +1001,6 @@ msgid ""
 "soldiers from attack level 2 to level 3."
 msgstr ""
 
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Kliešte na uhlie sú nástroje zlievača pracujúceho v zlievarni. Vyrába ich "
-"kováč nástrojov."
-
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
 msgstr "Rybár loví chutné ryby."
@@ -1351,6 +1351,9 @@ msgstr "Pracuje hlboko v baniach, aby vyrobil uhlie, železo a zlato."
 #~ msgid "This is the medium trident - used by advanced soldiers."
 #~ msgstr "Toto je stredný trojzubec používaný pokročilými vojakmi."
 
+#~ msgid "Mills wheat to produce flour."
+#~ msgstr "Melie pšenicu na múku"
+
 #~ msgid "This is an advanced trident for more experienced soldiers."
 #~ msgstr "Toto je pokročilý trojzubec pre skúsenejších vojakov."
 
@@ -1408,6 +1411,13 @@ msgstr "Pracuje hlboko v baniach, aby vyrobil uhlie, železo a zlato."
 
 #~ msgid "This bow is used by the atlantian hunter."
 #~ msgstr "Tento luk používa atlantský lovec."
+
+#~ msgid ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "Kliešte na uhlie sú nástroje zlievača pracujúceho v zlievarni. Vyrába ich "
+#~ "kováč nástrojov."
 
 #~ msgid ""
 #~ "This corn is the base of the fine cornflour, that every atlantian baker "

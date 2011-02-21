@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2010-11-19 16:25+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"PO-Revision-Date: 2011-02-20 19:39+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:36+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-21 04:46+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -279,6 +279,12 @@ msgstr "Ager parvulus"
 #: ../../tribes/empire/conf:66
 msgid "Fire Tongs"
 msgstr "Forceps"
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/empire/conf:67
 msgid "Fish"
@@ -562,7 +568,7 @@ msgstr "Fossor metallicus"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
-msgstr ""
+msgstr "spatium non satis est"
 
 #: ../../tribes/empire/conf:201
 msgid "Outpost"
@@ -901,12 +907,6 @@ msgid ""
 "The chain-armour is a medium armour for Empire soldiers. It is produced in "
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
-msgstr ""
-
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/empire/coal/conf:1
@@ -1325,6 +1325,12 @@ msgstr ""
 msgid "Works in the sawmill."
 msgstr ""
 
+#~ msgid "Resource indicator granit little"
+#~ msgstr "Est indicatum hic granatum paucum situm"
+
+#~ msgid "Resource indicator granit much"
+#~ msgstr "Est indicatum hic granatum multum situm"
+
 #~ msgid "This is the red iron ore."
 #~ msgstr "Hoc est aes ferri rubrum."
 
@@ -1338,11 +1344,21 @@ msgstr ""
 #~ "Flour is produced out of wheat and is needed for the tasty Empire bread."
 #~ msgstr "Imperiani farina ex tritico molita panes finguntur."
 
+#~ msgid "The backers of the Empire make really tasty bread."
+#~ msgstr "Imperiani pistores panem boni saporis fingit."
+
 #~ msgid "This is the yellow goldstone."
 #~ msgstr "Hoc est fulvum aes aureum."
 
 #~ msgid "A real meal which satisfies all miners needs."
 #~ msgstr "Cena propria quae omnes fossores satisfacit."
+
+#~ msgid ""
+#~ "Cloth is needed for Empire ships and few bigger buildings. It is produced "
+#~ "out of wool."
+#~ msgstr ""
+#~ "Imperiani ad navia nonnullaque aedificia construenda texto utuntur, quod "
+#~ "fabricant e lana."
 
 #~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 #~ msgstr ""

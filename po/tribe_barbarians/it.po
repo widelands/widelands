@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 11:56+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2010-12-03 13:34+0000\n"
 "Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -319,6 +319,13 @@ msgstr "Campo minuscolo"
 msgid "Fire Tongs"
 msgstr "Molle per il fuoco"
 
+#: ../../tribes/barbarians/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. "
+"Produced in the metal works (but ceases to be produced by the building if it "
+"is enhanced to an axefactory and war mill)."
+msgstr ""
+
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
 msgstr "Pesce"
@@ -378,9 +385,9 @@ msgstr "Oro Estraibile"
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
-"garnished with it. It is obtained out of goldstone in a smelting works. It "
-"is used as a precious building material and to produce different axes (in "
-"the war mill) and different armours (in the helmsmithy)."
+"garnished with it. It is obtained out of gold ore in a smelting works. It is "
+"used as a precious building material and to produce different axes (in the "
+"war mill) and different armours (in the helmsmithy)."
 msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:5
@@ -982,13 +989,6 @@ msgid ""
 "it is enhanced to an axefactory and war mill)."
 msgstr ""
 
-#: ../../tribes/barbarians/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"Produced in the metal works (but ceases to be produced by the building if it "
-"is enhanced to an axefactory and war mill)."
-msgstr ""
-
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
 "The fires of the barbarians are usually fed with coal. It is produced in "
@@ -1452,6 +1452,16 @@ msgstr ""
 #~ "uomini forti e senza paura."
 
 #~ msgid ""
+#~ "Fire-hardened wood, hard as iron and can not burn, used for military "
+#~ "buildings."
+#~ msgstr ""
+#~ "Il legno indurito al fuoco, duro come il ferro e incombustibile, è usato per "
+#~ "gli edifici militari."
+
+#~ msgid "Carries items along your roads."
+#~ msgstr "Trasporta gli oggetti lungo le strade."
+
+#~ msgid ""
 #~ "The bronze axe is considered a hard to handle weapon: it makes a lot of "
 #~ "damage, but it's durability is not the best. Only skilled warriors can use "
 #~ "this. Produced in the axe factory."
@@ -1480,6 +1490,14 @@ msgstr ""
 
 #~ msgid "Grows flax and thatch reed."
 #~ msgstr "Coltiva lino e canne di paglia."
+
+#~ msgid "Flax is a beautiful flower, which are used to make cloth."
+#~ msgstr "Il lino è un bellissimo fiore che viene utilizzato per fare tessuti."
+
+#~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
+#~ msgstr ""
+#~ "Le canne da pesca sono necessarie per il pescatore barbaro. Sono prodotte "
+#~ "dal fabbro degli strumenti."
 
 #~ msgid "Harvest flax"
 #~ msgstr "Raccoglie il lino"
@@ -1572,6 +1590,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Un po' più grandi, per i minatori avanzati. Avranno bisogno di un boccone "
 #~ "più grosso."
+
+#~ msgid "Cuts raw pieces of granit out of laying stones."
+#~ msgstr "Taglia pezzi grezzi di granito dalle pietre."
 
 #~ msgid ""
 #~ "Only this beer is acceptable for the old warriors. Some say, the whole power "

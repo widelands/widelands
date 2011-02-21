@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 11:56+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2010-11-19 22:12+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:38+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -316,6 +316,13 @@ msgstr "Maličké pole"
 msgid "Fire Tongs"
 msgstr "Kliešte na uhlie"
 
+#: ../../tribes/barbarians/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. "
+"Produced in the metal works (but ceases to be produced by the building if it "
+"is enhanced to an axefactory and war mill)."
+msgstr ""
+
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
 msgstr "Ryby"
@@ -375,9 +382,9 @@ msgstr "Zlatá ruda"
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
-"garnished with it. It is obtained out of goldstone in a smelting works. It "
-"is used as a precious building material and to produce different axes (in "
-"the war mill) and different armours (in the helmsmithy)."
+"garnished with it. It is obtained out of gold ore in a smelting works. It is "
+"used as a precious building material and to produce different axes (in the "
+"war mill) and different armours (in the helmsmithy)."
 msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:5
@@ -974,13 +981,6 @@ msgid ""
 "The felling axe is the tool of the lumberjack to take down trees. It is "
 "produced in the metalwork shop (but ceases to be produced by the building if "
 "it is enhanced to an axefactory and war mill)."
-msgstr ""
-
-#: ../../tribes/barbarians/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"Produced in the metal works (but ceases to be produced by the building if it "
-"is enhanced to an axefactory and war mill)."
 msgstr ""
 
 #: ../../tribes/barbarians/coal/conf:1

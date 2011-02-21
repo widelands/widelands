@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2010-11-29 10:48+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"PO-Revision-Date: 2011-02-14 15:14+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -29,16 +29,20 @@ msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
 msgstr ""
+"A saw is needed by the woodcutter and the carpenter. It is produced by the "
+"toolsmith."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "A sea-worthy ship"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
+"A tabard and light trident are the basic equipment of young soldiers. "
+"Tabards are produced in the weaving-mill."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -112,6 +116,8 @@ msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
 msgstr ""
+"Blackroot Flour is produced in mills out of blackroots. It is used in "
+"bakeries to make tasty bread."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -143,6 +149,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
+"Blackroot is a special kind of root produced on blackroot farms and "
+"processed in mills. The Atlanteans like its strong taste and use its flour "
+"to make bread."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -211,7 +220,7 @@ msgstr "Coal Mine"
 
 #: ../../tribes/atlanteans/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Constructing ship"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
@@ -250,6 +259,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Cornflour is produced in a mill from corn and is one of the three "
+"ingredients of the Atlantean bread produced in bakeries."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -303,6 +314,14 @@ msgstr "Fells trees."
 msgid "Fire Tongs"
 msgstr "Fire Tongs"
 
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Fish"
@@ -321,6 +340,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Fish is one of the most important foods of the Atlanteans. It has to be "
+"smoked in a smokery before being delivered to mines, training sites and "
+"scouts."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -373,11 +395,16 @@ msgid ""
 "in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"Gold is one of the most valuable materials. It is produced out of gold ore "
+"in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
+"and the goldweaver."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Gold ore is mined in gold mines and is the source of gold extracted in the "
+"smelting works."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -444,6 +471,7 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
 msgstr ""
+"Horses help carry items along busy roads. They are raised on a horse farm."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -474,12 +502,16 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
+"Iron is extracted from iron ore in the smelting works. It is used in the "
+"toolsmithy, armoursmithy, and weapon smithy."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Iron ore is mined in iron mines; it is smelted in the smelting works to "
+"retrieve the iron."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -525,8 +557,10 @@ msgid "Miller"
 msgstr "Miller"
 
 #: ../../tribes/atlanteans/miller/conf:1
-msgid "Mills wheat to produce flour."
-msgstr "Mills wheat to produce flour."
+msgid ""
+"Mills blackroot and corn to produce blackroot flour and corn flour, "
+"respectively."
+msgstr "Mills blackroot and corn to their respective flours."
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -574,6 +608,9 @@ msgid ""
 "produced out of trunks by the sawmill. The weapon smithy and the shipyard "
 "also use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Planks are an important building material of the Atlanteans. They are "
+"produced from trunks by the sawmill. The weapon smithy and the shipyard also "
+"use planks in making the various tridents and mighty ships."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -812,7 +849,7 @@ msgstr "Ship"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship construction site"
-msgstr ""
+msgstr "Ship construction site"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Shipwright"
@@ -926,6 +963,9 @@ msgid ""
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
+"Spidercloth is made from spideryarn in a weaving-mill. It is used in the "
+"toolsmithy and the shipyard. Also, some of the more advanced buildings need "
+"spidercloth for their construction."
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
@@ -952,6 +992,8 @@ msgid ""
 "Stone is one basic building ware of the Atlanteans. It is produced in a "
 "quarry or a crystal mine."
 msgstr ""
+"Stone is one of the basic construction materials of the Atlanteans. It is "
+"produced in a quarry or a crystal mine."
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -971,6 +1013,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"The fires in Atlantean smelting works, armoursmithies, and weaponsmithies "
+"are fed with coal. This coal is mined from coal mines or produced from "
+"trunks by a charcoal burner."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -992,14 +1037,9 @@ msgid ""
 "weapon smithy. It is used in a dungeon - together with food - to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
-
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
+"The double trident is one of the best tridents produced by the Atlantean "
+"weapon smithy. It is used in a dungeon — together with food — to train "
+"soldiers from attack level 2 to level 3."
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
@@ -1025,12 +1065,17 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"The long trident is the first trident soldiers are trained with. It is "
+"produced in the weapon smithy and used in the dungeon — together with food — "
+"to train soldiers from attack level 0 to level 1."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
+"The peel is the tool of the baker, each baker needs his own. It is produced "
+"by the toolsmith."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -1038,6 +1083,9 @@ msgid ""
 "are produced in the armoursmithy and used in the labyrinth - together with "
 "food - to train soldiers from Defense level 1 to level 2."
 msgstr ""
+"These advanced shields are used by the best Atlantean soldiers. They are "
+"produced in the armoursmithy and used in the labyrinth — together with food "
+"— to train soldiers from Defence level 1 to level 2."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1075,6 +1123,9 @@ msgid ""
 "makes the equipment for young soldiers. Light tridents are produced in the "
 "weapon smithy as are all other tridents."
 msgstr ""
+"This is the basic weapon of Atlantean soldiers. Together with a tabard it "
+"comprises the basic equipment of young soldiers. Light tridents are produced "
+"in the weapon smithy as are all other tridents."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1410,6 +1461,13 @@ msgstr "Works deep in the mines to produce coal, iron or gold."
 #~ "Already one of the best tridents of the Atlanteans. Only used by very good "
 #~ "fighters."
 
+#~ msgid ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+
 #~ msgid "Fish is one of the biggest food-resources of the Atlanteans."
 #~ msgstr "Fish is one of the biggest food-resources of the Atlanteans."
 
@@ -1463,6 +1521,9 @@ msgstr "Works deep in the mines to produce coal, iron or gold."
 
 #~ msgid "This is the basic weapon for atlantian soldiers."
 #~ msgstr "This is the basic weapon for Atlantean soldiers."
+
+#~ msgid "Mills wheat to produce flour."
+#~ msgstr "Mills wheat to produce flour."
 
 #~ msgid "Planks are an important build material of the Atlanteans."
 #~ msgstr "Planks are an important build material of the Atlanteans."

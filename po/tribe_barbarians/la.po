@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-04 11:56+0000\n"
-"PO-Revision-Date: 2010-11-19 16:49+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"PO-Revision-Date: 2011-02-20 19:41+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-21 04:46+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -316,6 +316,13 @@ msgstr "Ager parvulus"
 msgid "Fire Tongs"
 msgstr "Forceps"
 
+#: ../../tribes/barbarians/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. "
+"Produced in the metal works (but ceases to be produced by the building if it "
+"is enhanced to an axefactory and war mill)."
+msgstr ""
+
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
 msgstr "Piscis"
@@ -370,14 +377,14 @@ msgstr "Metallum auri"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Gold Ore"
-msgstr ""
+msgstr "Aes aureum"
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
-"garnished with it. It is obtained out of goldstone in a smelting works. It "
-"is used as a precious building material and to produce different axes (in "
-"the war mill) and different armours (in the helmsmithy)."
+"garnished with it. It is obtained out of gold ore in a smelting works. It is "
+"used as a precious building material and to produce different axes (in the "
+"war mill) and different armours (in the helmsmithy)."
 msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:5
@@ -567,7 +574,7 @@ msgstr "Fossor metallicus"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
-msgstr ""
+msgstr "spatium non satis est"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -853,7 +860,7 @@ msgstr "Dormit"
 
 #: ../../tribes/barbarians/conf:153
 msgid "Small Tower"
-msgstr ""
+msgstr "Turris parva"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
@@ -896,7 +903,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:139
 msgid "Stonemason"
-msgstr ""
+msgstr "Camentarius"
 
 #: ../../tribes/barbarians/conf:101
 msgid "Strong Beer"
@@ -967,13 +974,6 @@ msgid ""
 "The felling axe is the tool of the lumberjack to take down trees. It is "
 "produced in the metalwork shop (but ceases to be produced by the building if "
 "it is enhanced to an axefactory and war mill)."
-msgstr ""
-
-#: ../../tribes/barbarians/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"Produced in the metal works (but ceases to be produced by the building if it "
-"is enhanced to an axefactory and war mill)."
 msgstr ""
 
 #: ../../tribes/barbarians/coal/conf:1
@@ -1304,6 +1304,15 @@ msgid ""
 "soldiers from attack level 0 to level 1."
 msgstr ""
 
+#~ msgid "Resource indicator granit little"
+#~ msgstr "Est indicatum hic granatum paucum situm"
+
+#~ msgid "Resource indicator granit much"
+#~ msgstr "Est indicatum hic granatum multum situm"
+
+#~ msgid "Works at construction sites to create a new building."
+#~ msgstr "In areis ad novum aedificium construendum laborat."
+
 #~ msgid ""
 #~ "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
 #~ msgstr "Praeter panem carnemque Barbari libenter paucum piscis edunt."
@@ -1337,6 +1346,9 @@ msgstr ""
 
 #~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
 #~ msgstr "Cannae untuntur, ut tecta barbararum domuum tegantur."
+
+#~ msgid "The mighty tribes of the eastern lands!"
+#~ msgstr "Nationes fortissimae ex oriente!"
 
 #~ msgid "A small bite to keep miners strong and working."
 #~ msgstr "Morsa parva, ut fossores melius laborent."

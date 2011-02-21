@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2010-06-06 20:54+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:36+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:39+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
@@ -280,6 +280,12 @@ msgstr "Vetefält, nysått"
 #: ../../tribes/empire/conf:66
 msgid "Fire Tongs"
 msgstr "Eldtång"
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/empire/conf:67
 msgid "Fish"
@@ -905,14 +911,6 @@ msgid ""
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
 
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Eldtängerna är smältmästarens verktyg, när han arbetar i smältverket. Dom "
-"tillvörkas av verktygssmeden."
-
 #: ../../tribes/empire/coal/conf:1
 msgid ""
 "The fires of the Empire smelting works, armour smithies and weapon smithies "
@@ -1388,6 +1386,13 @@ msgstr ""
 
 #~ msgid "The backers of the Empire make really tasty bread."
 #~ msgstr "Imperiets uppbackare gör riktigt gott bröd."
+
+#~ msgid ""
+#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "Eldtängerna är smältmästarens verktyg, när han arbetar i smältverket. Dom "
+#~ "tillvörkas av verktygssmeden."
 
 #~ msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
 #~ msgstr "Förutom bröd och kött, är fisk en födokälla för imperiet."

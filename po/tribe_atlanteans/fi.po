@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2010-08-30 23:39+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:34+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:36+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -304,6 +304,12 @@ msgstr "Kaataa puita."
 msgid "Fire Tongs"
 msgstr "Pihdit"
 
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
+
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Kala"
@@ -526,8 +532,10 @@ msgid "Miller"
 msgstr "Mylläri"
 
 #: ../../tribes/atlanteans/miller/conf:1
-msgid "Mills wheat to produce flour."
-msgstr "Jauhaa vehnää jauhoiksi"
+msgid ""
+"Mills blackroot and corn to produce blackroot flour and corn flour, "
+"respectively."
+msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -994,14 +1002,6 @@ msgid ""
 "soldiers from attack level 2 to level 3."
 msgstr ""
 
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Sulattaja käyttää pihtejä työskennellessään sulattamolla. Työkaluseppä "
-"valmistaa pihdit."
-
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
 msgstr "Kalastaja pyydystää herkullista kalaa."
@@ -1421,6 +1421,13 @@ msgstr "Työskentelee syvällä kaivoksissa louhien hiiltä, rautaa tai kultaa."
 #~ "Tämä on jo yksi parhaista atlantislaisista atraimista. Sitä käyttävät vain "
 #~ "erittäin taitavat taistelijat."
 
+#~ msgid ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "Sulattaja käyttää pihtejä työskennellessään sulattamolla. Työkaluseppä "
+#~ "valmistaa pihdit."
+
 #~ msgid "Fish is one of the biggest food-resources of the Atlanteans."
 #~ msgstr "Kala on yksi keskeisimmistä atlantislaisten ruokaresursseista."
 
@@ -1544,6 +1551,9 @@ msgstr "Työskentelee syvällä kaivoksissa louhien hiiltä, rautaa tai kultaa."
 #~ msgstr ""
 #~ "Vesi on elämän eliksiiriä! Vettä käytetään moneen, muun muassa leivän "
 #~ "leipomiseen."
+
+#~ msgid "Mills wheat to produce flour."
+#~ msgstr "Jauhaa vehnää jauhoiksi"
 
 #~ msgid "Helps to carry items at heavy used roads."
 #~ msgstr "Auttaa tavaroiden kuljettamisessa teillä."

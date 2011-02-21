@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2010-11-21 10:32+0000\n"
 "Last-Translator: Siz <siz-asuka@hotmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -302,6 +302,12 @@ msgstr "Derriba arboles."
 msgid "Fire Tongs"
 msgstr "Tenazas"
 
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
+
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Pescado"
@@ -524,8 +530,10 @@ msgid "Miller"
 msgstr "Molinero"
 
 #: ../../tribes/atlanteans/miller/conf:1
-msgid "Mills wheat to produce flour."
-msgstr "Produce harina moliendo trigo"
+msgid ""
+"Mills blackroot and corn to produce blackroot flour and corn flour, "
+"respectively."
+msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -994,14 +1002,6 @@ msgid ""
 "soldiers from attack level 2 to level 3."
 msgstr ""
 
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Los alicates son las herramientas del forjador, que trabaja en la forja. Las "
-"fabrica el herrero."
-
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
 msgstr "El pescador pesca peces deliciosos."
@@ -1379,6 +1379,13 @@ msgstr ""
 #~ "Uno de los mejores tridentes de los atlantes. Solo se utilizan por guerreros "
 #~ "muy buenos."
 
+#~ msgid ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "Los alicates son las herramientas del forjador, que trabaja en la forja. Las "
+#~ "fabrica el herrero."
+
 #~ msgid "Fish is one of the biggest food-resources of the Atlanteans."
 #~ msgstr ""
 #~ "El pescado es una de las mayores fuentes de alimento de los Atlantes."
@@ -1522,6 +1529,9 @@ msgstr ""
 #~ msgstr ""
 #~ "La harina de las raíces negras se obtiene de las raíces negras y es uno de "
 #~ "los tres ingredientes del plan atlante."
+
+#~ msgid "Mills wheat to produce flour."
+#~ msgstr "Produce harina moliendo trigo"
 
 #~ msgid "Helps to carry items at heavy used roads."
 #~ msgstr "Ayuda al transporte en caminos muy concurridos."

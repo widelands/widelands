@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2010-11-22 15:26+0000\n"
-"Last-Translator: Massol <Unknown>\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"PO-Revision-Date: 2011-02-07 09:55+0000\n"
+"Last-Translator: Georgiy <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -22,12 +22,15 @@ msgid ""
 "is used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 0 to level 1."
 msgstr ""
+"Золотая накидка Атлантов производится на ткацкой фабрике из золотой пряжи. "
+"Она используется в тренировочном лагере - вместе с пищей - с целью "
+"переподготовки солдат с  уровня здоровья 0 до уровня 1."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
-msgstr ""
+msgstr "Пила требуется лесорубу и лесопилке. Она производится кузнецом."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -38,6 +41,8 @@ msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
+"Накидка и трезубец это основное обмундирование молодых солдат. Накидка "
+"производится на ткацкой фабрике."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -56,6 +61,8 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
+"Атланты не любят сырую рубы, ее копчение в коптильнях самый простой путь "
+"сделать ее съедобной."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -111,6 +118,8 @@ msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
 msgstr ""
+"Чернокорневая мука производится на фабриках из черных корней. Она "
+"используется в пекарнях, для приготовления вкусного хлеба."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -142,6 +151,8 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
+"Черные корни это особые корни выращиваемые на ферме и перерабатываемые на "
+"мельнице. Атланты любят их терпкий вкус и применяют для выпекания хлеба."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -249,6 +260,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Кукурузный крахмал производится на мельнице из зерна и является одним из "
+"трех составляющих хлеба Атлантов, выпекаемого в пекарнях."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -302,6 +315,12 @@ msgstr "Рубит деревья."
 msgid "Fire Tongs"
 msgstr "Щипцы"
 
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
+
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Рыба"
@@ -320,6 +339,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Рыба - один из основных пищевых ресурсов Атлантов. Она должна быть "
+"обработана в коптильнях перед отправкой в шахты, на тренировочные площадки и "
+"скаутам."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -372,11 +394,16 @@ msgid ""
 "in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"Золото - один из самых ценных материалов. Оно производится из золотой руды в "
+"плавильнях. Золото используется кузницами брони и оружия, ткацкими "
+"мастерскими."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Золотая руда добывается на золотых рудниках и перерабатывается плавильнями в "
+"золото."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -443,6 +470,8 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
 msgstr ""
+"Лошади помогают перемещать изделия и ресурсы на загруженных дорогах. Они "
+"выращиваются на конюшнях."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -473,12 +502,16 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
+"Сталь изготавливается из железной руды в плавильнях. Она используется "
+"изготовителем инструментов, кузницами брони и оружия."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Железная руда добывается на железных рудниках. Она переплавляется в "
+"плавильнях для получения чистой стали."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -502,6 +535,9 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Мясо - один из источников пищи Атлантов. Добывается охотниками, должно быть "
+"приготовлено в коптильне перед поставкой в шахты и на тренировочные площадки "
+"(темница и лабиринт)."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -524,8 +560,10 @@ msgid "Miller"
 msgstr "Мельник"
 
 #: ../../tribes/atlanteans/miller/conf:1
-msgid "Mills wheat to produce flour."
-msgstr "Мелет пшеницу в муку."
+msgid ""
+"Mills blackroot and corn to produce blackroot flour and corn flour, "
+"respectively."
+msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -572,6 +610,9 @@ msgid ""
 "produced out of trunks by the sawmill. The weapon smithy and the shipyard "
 "also use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Доски - важный строительный материал Атлантов. Они производятся из стволов "
+"добытых лесопилкой. Кузница оружия и верфь используют доски для производства "
+"различных клинков и мощных кораблей."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -884,6 +925,9 @@ msgid ""
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutricious lunch for themselves."
 msgstr ""
+"Копченое мясо приготавливается из мяса в коптильнях. Оно поставляется на "
+"шахты и тренировочные площадки (темница и лабиринт), где шахтеры и солдаты "
+"готовят себе из него обед."
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
@@ -951,6 +995,8 @@ msgid ""
 "Stone is one basic building ware of the Atlanteans. It is produced in a "
 "quarry or a crystal mine."
 msgstr ""
+"Камень один из основных строительных материалов Атлантов. Добывается на "
+"каменоломнях или кристальных шахтах."
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -970,6 +1016,8 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"В плавильнях, кузницах брони и оружия Атлантов огонь поддерживается при "
+"помощи угля. Уголь добывается в шахтах или производится из бревен в углярках."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -990,12 +1038,6 @@ msgid ""
 "weapon smithy. It is used in a dungeon - together with food - to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
-
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr "Щипцы основной инструмент плавильщика. Изготавливаются кузнецом."
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
@@ -1412,8 +1454,16 @@ msgstr ""
 #~ "Пекарская лопатка основной инструмент пекаря и каждому пекарю нужна своя "
 #~ "собственная. Изготавливается кузнецом."
 
+#~ msgid ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr "Щипцы основной инструмент плавильщика. Изготавливаются кузнецом."
+
 #~ msgid "Helps to carry items at heavy used roads."
 #~ msgstr "Помогает перевозить грузы на сильно загруженных дорогах."
+
+#~ msgid "Mills wheat to produce flour."
+#~ msgstr "Мелет пшеницу в муку."
 
 #~ msgid ""
 #~ "Already one of the best tridents of the Atlanteans. Only used by very good "

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2010-06-06 22:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"PO-Revision-Date: 2011-02-20 20:10+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:41+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-21 04:46+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -293,7 +293,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "Aedificia augenda"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
 msgid ""
@@ -540,11 +540,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:460
 msgid "Message arrived!"
-msgstr ""
+msgstr "Nuntius advenit!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid "Messages"
-msgstr ""
+msgstr "Nuntia"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
@@ -637,7 +637,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
 "Okay, now we own some of the area on this mountain. Mountains are very\n"
-"important, because they contain resources: coal, iron ore, goldstone and\n"
+"important, because they contain resources: coal, iron ore, gold ore and\n"
 "granite.  Each tribe uses the resources differently, but all need mines to "
 "get\n"
 "the resources out of the ground."
@@ -676,7 +676,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "Placing another flag"
-msgstr ""
+msgstr "Insigne alium deponere"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:264
 msgid "Red building symbols can only hold small buildings and flags."
@@ -686,11 +686,11 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:316
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:325
 msgid "Road building"
-msgstr ""
+msgstr "Viam facere"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
-msgstr ""
+msgstr "Aes inquirere"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:366
 msgid ""
@@ -1080,7 +1080,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:547
 msgid "nothing was found here"
-msgstr ""
+msgstr "nullum invenitum"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:711
 msgid ""
@@ -1102,4 +1102,4 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
-msgstr ""
+msgstr "aqua"

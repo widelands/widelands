@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2010-12-03 12:57+0000\n"
 "Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:34+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -305,6 +305,12 @@ msgstr "Abbatte alberi."
 msgid "Fire Tongs"
 msgstr "Molle per il fuoco"
 
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
+
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
 msgstr "Pesce"
@@ -527,8 +533,10 @@ msgid "Miller"
 msgstr "Mugnaio"
 
 #: ../../tribes/atlanteans/miller/conf:1
-msgid "Mills wheat to produce flour."
-msgstr "Macina il grano per produrre farina."
+msgid ""
+"Mills blackroot and corn to produce blackroot flour and corn flour, "
+"respectively."
+msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -998,14 +1006,6 @@ msgid ""
 "weapon smithy. It is used in a dungeon - together with food - to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
-
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"Le pinze per il fuoco sono gli strumenti del fonditore, lavorando in "
-"fonderia. Essi sono prodotti dal fabbro."
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
@@ -1539,11 +1539,21 @@ msgstr "I lavoratori nelle profonde miniere producono carbone, ferro e oro."
 #~ "carni e il pesce alla parte superiore del affumicatoio. E' creata dal fabbro."
 
 #~ msgid ""
+#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "Le pinze per il fuoco sono gli strumenti del fonditore, lavorando in "
+#~ "fonderia. Essi sono prodotti dal fabbro."
+
+#~ msgid ""
 #~ "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
 #~ "produced by the toolsmith."
 #~ msgstr ""
 #~ "Seghe sono necessarie al falegname, al boscaiolo e al fabbro. Sono prodotte "
 #~ "dal fabbro."
+
+#~ msgid "Mills wheat to produce flour."
+#~ msgstr "Macina il grano per produrre farina."
 
 #~ msgid "Helps to carry items at heavy used roads."
 #~ msgstr "Aiuta a trasportare oggetti pesanti sulle strade usate."

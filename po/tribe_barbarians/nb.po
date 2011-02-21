@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-01-04 11:56+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2011-01-04 13:46+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -315,6 +315,13 @@ msgstr ""
 msgid "Fire Tongs"
 msgstr "Ildtang"
 
+#: ../../tribes/barbarians/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. "
+"Produced in the metal works (but ceases to be produced by the building if it "
+"is enhanced to an axefactory and war mill)."
+msgstr ""
+
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
 msgstr "Fisk"
@@ -374,9 +381,9 @@ msgstr "Gullmalm"
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
-"garnished with it. It is obtained out of goldstone in a smelting works. It "
-"is used as a precious building material and to produce different axes (in "
-"the war mill) and different armours (in the helmsmithy)."
+"garnished with it. It is obtained out of gold ore in a smelting works. It is "
+"used as a precious building material and to produce different axes (in the "
+"war mill) and different armours (in the helmsmithy)."
 msgstr ""
 
 #: ../../tribes/barbarians/goldstone/conf:5
@@ -971,13 +978,6 @@ msgid ""
 "it is enhanced to an axefactory and war mill)."
 msgstr ""
 
-#: ../../tribes/barbarians/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"Produced in the metal works (but ceases to be produced by the building if it "
-"is enhanced to an axefactory and war mill)."
-msgstr ""
-
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
 "The fires of the barbarians are usually fed with coal. It is produced in "
@@ -1339,6 +1339,9 @@ msgstr ""
 #~ "Gull er det mest verdifulle av alle metaller, og brukes kun til meget "
 #~ "viktige ting."
 
+#~ msgid "The mighty tribes of the eastern lands!"
+#~ msgstr "Den mektige stammen fra de østlige landene!"
+
 #~ msgid ""
 #~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
 #~ "the blacksmiths and the helmsmiths. Make sure you always got some in "
@@ -1471,3 +1474,57 @@ msgstr ""
 #~ msgstr ""
 #~ "Ildtangen er verktøyet smelteren bruker når han jobber i smelteverket. "
 #~ "Produseres på metallverket."
+
+#~ msgid "A real meal which satisfies all miners needs."
+#~ msgstr "Et skikkelig måltid som gir gruvearbeiderne alt de trenger."
+
+#~ msgid ""
+#~ "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
+#~ msgstr "Ved siden av pitabrød og kjøtt, spiser barbarene også fisk."
+
+#~ msgid "A bit bigger, for the advanced miners. They will need a big morsel."
+#~ msgstr ""
+#~ "Litt større, for de mer erfarne gruvearbeiderne. De trenger en større bit."
+
+#~ msgid "Helps to carry items at heavy used roads."
+#~ msgstr "Hjelper til å frakte varer langs sterkt trafikkerte veier."
+
+#~ msgid ""
+#~ "Only this beer is acceptable for the old warriors. Some say, the whole power "
+#~ "of the barbarians is in this ale."
+#~ msgstr ""
+#~ "De eldre krigerne godtar kun dette ølet. Noen sier tilogmed at barbarenes "
+#~ "styrke kommer fra dette brygget."
+
+#~ msgid ""
+#~ "The bronze axe is considered a hard to handle weapon: it makes a lot of "
+#~ "damage, but it's durability is not the best. Only skilled warriors can use "
+#~ "this. Produced in the axe factory."
+#~ msgstr ""
+#~ "Bronseøksen blir sett på som et våpen som er vanskelig å håndtere. Selv om "
+#~ "det gjør mye skade, er ikke holdbarheten den beste. Kun erfarne krigere blir "
+#~ "utstyrt med disse. Lages på øksefabrikken."
+
+#~ msgid "This is gold ore mined from deep within the mountains."
+#~ msgstr "Gullmalmen som blir hentet ut fra dypt inne i fjellene."
+
+#~ msgid ""
+#~ "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
+#~ "produced in the axe factory."
+#~ msgstr ""
+#~ "Krigere med en grunnleggende forståelse for kamp blir utstyrt med bredøkser. "
+#~ "De blir produsert av øksefabrikken."
+
+#~ msgid ""
+#~ "Water is the most essential essence for life! This water is used in many "
+#~ "places, be it to make bread or beer or to produce grout."
+#~ msgstr ""
+#~ "Vann er den viktigste forutsetningen for liv. Vann blir brukt mange steder, "
+#~ "om det så er for å lage brød, øl, eller sementmørtel."
+
+#~ msgid ""
+#~ "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
+#~ "be made of this wheat."
+#~ msgstr ""
+#~ "Hvete er essensielt for å kunne overleve. Etter innhøstningen kan hveten "
+#~ "brukes til å lage deilig pitabrød eller brygge øl."

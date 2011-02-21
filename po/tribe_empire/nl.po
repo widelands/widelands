@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
-"PO-Revision-Date: 2011-01-20 09:17+0000\n"
-"Last-Translator: Foppe Benedictus <Unknown>\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"PO-Revision-Date: 2011-02-13 22:07+0000\n"
+"Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-21 04:35+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:38+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -291,6 +291,14 @@ msgstr "Klein veld"
 #: ../../tribes/empire/conf:66
 msgid "Fire Tongs"
 msgstr "Vuurtang"
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
+"Vuurtangen zijn werktuigen van de smelter, die in de hoogoven werkt. Ze "
+"worden door de werktuigsmid gemaakt."
 
 #: ../../tribes/empire/conf:67
 msgid "Fish"
@@ -956,14 +964,6 @@ msgstr ""
 "samen met voedsel, om soldaten te trainen van levenspuntenniveau 2 naar "
 "niveau 3."
 
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"They are produced by the toolsmith."
-msgstr ""
-"De vuurtang is het gereedschap van de smelter, die werkt in de hoogoven. Hij "
-"wordt gemaakt door de werktuigsmid."
-
 #: ../../tribes/empire/coal/conf:1
 msgid ""
 "The fires of the Empire smelting works, armour smithies and weapon smithies "
@@ -1586,6 +1586,13 @@ msgstr "Werkt in de houtzagerij"
 #~ msgstr ""
 #~ "Marmer is prachtige steen die wordt gewonnen uit de bergen en wordt gebruikt "
 #~ "voor prachtige gebouwen en zuilen."
+
+#~ msgid ""
+#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
+#~ "They are produced by the toolsmith."
+#~ msgstr ""
+#~ "De vuurtang is het gereedschap van de smelter, die werkt in de hoogoven. Hij "
+#~ "wordt gemaakt door de werktuigsmid."
 
 #~ msgid ""
 #~ "This basket is needed by the winegrower, for harvesting the grapes. It is "
