@@ -53,7 +53,6 @@ struct Objective : public Named {
 	bool done() const throw () {return m_done;}
 	void set_descname(std::string const & new_name) {
 		m_descname = new_name;
-		Named::set_name(new_name);
 	}
 	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
 	void set_visible(const bool t) throw ()    {m_visible = t;}
