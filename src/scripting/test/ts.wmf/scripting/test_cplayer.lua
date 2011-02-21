@@ -10,9 +10,9 @@
 -- this bleeding doesn't matter.
 player_tests = lunit.TestCase("Player tests")
 function player_tests:test_tribe_property()
-   assert_equal("barbarians", player1.tribe)
-   assert_equal("empire", player2.tribe)
-   assert_equal("atlanteans", player3.tribe)
+   assert_equal("barbarians", player1.tribe_name)
+   assert_equal("empire", player2.tribe_name)
+   assert_equal("atlanteans", player3.tribe_name)
 end
 
 function player_tests:test_number_property()

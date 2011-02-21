@@ -646,7 +646,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_tribe(lua_State *);
+	int get_tribe_name(lua_State *);
 	int get_name(lua_State *);
 	int get_starting_field(lua_State *);
 
