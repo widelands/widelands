@@ -114,7 +114,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 #ifdef __APPLE__
 		// on mac, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
-		log("Adding executable directory to search path");
+		log("Adding executable directory to search path\n");
 		g_fs->AddFileSystem(FileSystem::Create(s));
 #else
 		// first, try the data directory used in the last scons invocation
