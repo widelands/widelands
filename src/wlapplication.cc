@@ -117,7 +117,6 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		log("Adding executable directory to search path\n");
 		g_fs->AddFileSystem(FileSystem::Create(s));
 #else
-		// first, try the data directory used in the last scons invocation
 		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
 		g_fs->AddFileSystem //  see config.h
 			(FileSystem::Create

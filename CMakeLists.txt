@@ -404,8 +404,6 @@ install(
   DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
-  PATTERN "*.svn*" EXCLUDE
-  PATTERN "SCons*" EXCLUDE
 )
 
 install(
@@ -424,8 +422,6 @@ install(
   DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug
   COMPONENT DocFiles
-  PATTERN "*.svn*" EXCLUDE
-  PATTERN "SCons*" EXCLUDE
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
@@ -439,8 +435,6 @@ install(
   DESTINATION ${WL_INSTALL_DATADIR}/locale
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
-  PATTERN "*.svn*" EXCLUDE
-  PATTERN "SCons*" EXCLUDE
 )
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})

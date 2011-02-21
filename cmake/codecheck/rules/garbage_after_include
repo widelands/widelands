@@ -3,7 +3,7 @@
 #
 
 """
-SCons CPPChecker broke down because of this wrong line. 
+Python CPPChecker broke down because of this wrong line.
 I add a style fix for it now, so it won't bother us
 again.
 """
