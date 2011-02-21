@@ -59,6 +59,8 @@
 
 #ifndef WIN32
 #include <unistd.h> // for usleep
+#else
+#include <windows.h>
 #endif
 
 namespace Widelands {
@@ -589,7 +591,7 @@ bool Game::run
 			if (usleep(100) == -1)
 				break;
 #else
-			Sleep(100);
+			Sleep(0.1);
 #endif
 			think();
 		}

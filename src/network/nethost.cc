@@ -656,7 +656,7 @@ void NetHost::run(bool const autorun)
 			if (usleep(200) == -1)
 				return;
 #else
-			Sleep(200);
+			Sleep(0.2);
 #endif
 		}
 		d->dedicated_start = false;
