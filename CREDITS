@@ -6,9 +6,7 @@ which are distributed by other Open-Source Projects.
 And you really can believe, that widelands still
 would be in the stoneage, if not for using these files :-).
 
-The Widelands Development Team wants to thank
-the following projects:
-
+The Widelands Development Team thanks the following projects:
 
     libSDL
     libSDL_mixer
@@ -80,6 +78,11 @@ the following projects:
     * by Lablua, PUC-Rio
     * http://www.lua.org
 
+    Pluto
+    * by Ben Sunshine-Hill, Rob Hoelz
+    * http://luaforge.net/projects/pluto/
+
+
 and last but not least:
     http://www.launchpad.org
     * for their bazaar service
@@ -92,5 +95,5 @@ A big thank you goes to "Studio 10a", owned by Stichting Voorburgse en
 Leidschendamse Lokale Omroep Midvliet, for supporting the recording of
 some of our sound effects!
 
-March 2010
+February 2011
 
