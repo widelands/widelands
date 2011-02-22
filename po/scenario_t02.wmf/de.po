@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-11-18 14:41+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"POT-Creation-Date: 2011-02-21 12:15+0000\n"
+"PO-Revision-Date: 2011-02-21 07:31+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-02-22 04:43+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -539,7 +539,7 @@ msgstr "Der tapfere Boldreth tritt neben dich..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr "Errichte einen Rinderhof"
+msgstr "Errichte eine Rinderzucht"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -569,7 +569,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
 msgid "Build a fernery"
-msgstr "Errichte einen Reet- und Flachshof"
+msgstr "Errichte einen Reethof"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
@@ -765,8 +765,7 @@ msgid ""
 "fernery."
 msgstr ""
 "Das dritte Material, das für die besseren Gebäude notwendig ist, ist Reet, "
-"der für die Dächer verwendet wird. Er wird auf einem Reet- und Flachshof "
-"angebaut."
+"der für die Dächer verwendet wird. Er wird auf einem Reethof angebaut."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
@@ -807,7 +806,7 @@ msgstr ""
 "Träger reicht gewöhnlich nicht aus, um die Güter zügig zu transportieren. "
 "Warenstau ist die Folge davon. Diese Straßen benötigen daher einen zweiten "
 "Träger: Einen Ochsen, der hilft, die Waren zu tragen, was die "
-"Transportkapazität verdoppelt.<br> Ochsen werden im Rinderhof unter "
+"Transportkapazität verdoppelt.<br> Ochsen werden in der Rinderzucht unter "
 "Verwendung von Weizen und Wasser gezüchtet."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
