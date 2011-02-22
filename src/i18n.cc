@@ -126,7 +126,8 @@ void init_locale() {
 	lang = getenv("LANG");
 	if (lang != NULL) {
 		env_locale = lang;
-	} else {
+	}
+	if (env_locale.empty()) {
 		lang = getenv("LANGUAGE");
 		if (lang != NULL) {
 			env_locale = lang;
