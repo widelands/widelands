@@ -591,7 +591,7 @@ bool Game::run
 			if (usleep(100) == -1)
 				break;
 #else
-			Sleep(0.1);
+			Sleep(10);
 #endif
 			think();
 		}
