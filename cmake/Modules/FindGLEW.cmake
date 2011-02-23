@@ -21,10 +21,18 @@ if( WIN32 )
    endif( MSVC71 )
    FIND_PATH( GLEW_INCLUDE_DIR gl/glew.h gl/wglew.h
               PATHS c:/glew/include ${COMPILER_PATH}/PlatformSDK/Include )
-   SET( GLEW_NAMES glew32 )
+   SET( GLEW_NAMES glew32 glew32s)
    FIND_LIBRARY( GLEW_LIBRARY
                  NAMES ${GLEW_NAMES}
                  PATHS c:/glew/lib ${COMPILER_PATH}/PlatformSDK/Lib )
+   # Static library version requires extra flag
+   GET_FILENAME_COMPONENT( GLEW_LIBRARY_NAME ${GLEW_LIBRARY} NAME_WE )
+   if ( GLEW_LIBRARY_NAME STREQUAL "glew32s" )
+       SET(GLEW_EXTRA_DEFINITIONS "-DGLEW_STATIC")
+   else ( GLEW_LIBRARY_NAME STREQUAL "glew32s" )
+       SET(GLEW_EXTRA_DEFINITIONS )
+   endif()
+
 else( WIN32 )
    FIND_PATH( GLEW_INCLUDE_DIR glew.h wglew.h
               PATHS /usr/local/include /usr/include
@@ -43,5 +51,6 @@ IF (GLEW_INCLUDE_DIR AND GLEW_LIBRARY)
 ELSE (GLEW_INCLUDE_DIR AND GLEW_LIBRARY)
    SET( GLEW_FOUND FALSE )
    SET( GLEW_LIBRARY_DIR )
+   SET( GLEW_EXTRA_DEFINITIONS )
 ENDIF (GLEW_INCLUDE_DIR AND GLEW_LIBRARY)
 
