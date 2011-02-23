@@ -116,16 +116,23 @@ void release_textdomain() {
  * Code inspired by wesnoth.org
  */
 void init_locale() {
+	env_locale = std::string();
 #ifdef _WIN32
-	env_locale = "";
 	locale = "English";
 	SETLOCALE(LC_ALL, "English");
 #else
 	// first, save environment variable
-	env_locale = getenv("LANG");
-	if (env_locale.empty())
-		env_locale = getenv("LANGUAGE");
-
+	char * lang;
+	lang = getenv("LANG");
+	if (lang != NULL) {
+		env_locale = lang;
+	}
+	if (env_locale.empty()) {
+		lang = getenv("LANGUAGE");
+		if (lang != NULL) {
+			env_locale = lang;
+		}
+	}
 	locale = "C";
 	SETLOCALE(LC_ALL, "C");
 	SETLOCALE(LC_MESSAGES, "");

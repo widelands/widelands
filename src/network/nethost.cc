@@ -1246,6 +1246,10 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		// toggle_win_con
 		} else if (cmd == "toggle_win_con") {
 			d->hp.nextWinCondition();
+		// default
+		}  else {
+			c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
+			send(c);
 		}
 
 	// default
