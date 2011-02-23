@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-21 12:15+0000\n"
-"PO-Revision-Date: 2010-11-23 09:34+0000\n"
+"PO-Revision-Date: 2011-02-22 08:49+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-22 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-02-23 04:34+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Poedit-Language: Dutch\n"
@@ -28,7 +28,7 @@ msgstr ", / .       Ga naar vorige / volgende locatie"
 
 #: ../../txts/tips/general_game.tip:38
 msgid ",' (comma) and '."
-msgstr ""
+msgstr ",' (komma) en '."
 
 #: ../../txts/README:123
 msgid "- how to reproduce the bug"
@@ -862,7 +862,7 @@ msgstr "N               Zet berichten aan ('nieuws')"
 
 #: ../../txts/tips/general_game.tip:34
 msgid "N' for News to access the messages window, then use 'G"
-msgstr ""
+msgstr "N' voor nieuws, om het berichtenvenster te bekijken, gebruik 'G"
 
 #: ../../txts/developers:159
 msgid ""
@@ -974,6 +974,8 @@ msgstr "Voorwoord"
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them"
 msgstr ""
+"Druk Ctrl+(0-9) om belangrijke locaties op te slaan, druk daarna 0-9 om ze "
+"terug te halen"
 
 #: ../../txts/README:1
 msgid "README"
