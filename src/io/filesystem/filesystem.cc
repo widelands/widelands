@@ -63,11 +63,10 @@
 
 FileSystem::FileSystem()
 {
-#ifdef WIN32
 	m_root = "";
+#ifdef WIN32
 	m_filesep = '\\';
 #else
-	m_root = "/";
 	m_filesep = '/';
 #endif
 }
@@ -83,7 +82,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 
 #ifdef WIN32
 	// Handle drive letters on windows
-	if (path.size()>3 && path[1] == ':' && path[2] == '\\')
+	if (path.size() > 3 && path[1] == ':' && path[2] == '\\')
 		return true;
 #endif
 	if (path_size < root_size)
