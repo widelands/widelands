@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-21 13:15+0100\n"
-"PO-Revision-Date: 2010-12-31 04:13+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-02-23 20:33+0000\n"
+"Last-Translator: ThomasMarquart <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-22 04:49+0000\n"
+"X-Launchpad-Export-Date: 2011-02-24 04:34+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: ../../src/computer_player.cc:38
@@ -166,6 +166,9 @@ msgid ""
 "                      Enables opengl rendering\n"
 "                      *EXPERIMENTAL*\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Aktivera rendering med OpenGL\n"
+"                      *EXPERIMENTELLT*\n"
 
 #: ../../src/wlapplication.cc:1358
 msgid ""
@@ -218,7 +221,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1386
 msgid " --verbose            Enable verbose debug messages\n"
-msgstr ""
+msgstr " --verbose Aktivera utförliga meddelanden för felsökning\n"
 
 #: ../../src/wlapplication.cc:1387
 msgid " --help               Show this help\n"

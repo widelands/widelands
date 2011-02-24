@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-21 12:15+0000\n"
-"PO-Revision-Date: 2010-12-31 04:26+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-02-23 23:00+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-22 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-02-24 04:33+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: ../../txts/README:69
@@ -27,7 +27,7 @@ msgstr ", / . Aller au lieu précédent / suivant"
 
 #: ../../txts/tips/general_game.tip:38
 msgid ",' (comma) and '."
-msgstr ""
+msgstr ",' (virgule) et '."
 
 #: ../../txts/README:123
 msgid "- how to reproduce the bug"
@@ -867,6 +867,8 @@ msgstr "N Afficher/Cacher la fenêtre de messages ('nouvelles')"
 #: ../../txts/tips/general_game.tip:34
 msgid "N' for News to access the messages window, then use 'G"
 msgstr ""
+"N' comme Nouvelles pour avoir accéder à la fenêtre des messages, puis "
+"utilisez 'G"
 
 #: ../../txts/developers:159
 msgid ""
@@ -978,6 +980,8 @@ msgstr "Préambule"
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them"
 msgstr ""
+"Appuyez sur Ctrl+(0-9) pour enregistrer des endroits importants, puis "
+"appuyez  sur 0-9 pour les rappeler"
 
 #: ../../txts/README:1
 msgid "README"

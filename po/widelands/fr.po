@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-21 13:15+0100\n"
-"PO-Revision-Date: 2011-02-08 19:00+0000\n"
-"Last-Translator: Pierre Rudloff <tael67@gmail.com>\n"
+"PO-Revision-Date: 2011-02-23 23:19+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-02-22 04:47+0000\n"
+"X-Launchpad-Export-Date: 2011-02-24 04:34+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: ../../src/computer_player.cc:38
@@ -2547,6 +2547,8 @@ msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $"
 msgstr ""
+"<br>Les commandes hôtes disponibles sont:<br>help - Montre cette "
+"aide<br>host $ - Essaie d'exécuter les commandes hôtes $"
 
 #: ../../src/network/nethost.cc:1081
 msgid ""
@@ -2559,11 +2561,20 @@ msgid ""
 "#<br>toggle_team  # - Toggles the team of player #<br>toggle_win_con - "
 "Toggles the win_condition<br>host         $ - Tries to run the host command $"
 msgstr ""
+"<br>Les commandes hôtes disponibles sont:<br>help - Montre cette "
+"aide<br>start - Démarre le serveur<br>ls_saved_games - Montre une liste des "
+"jeux sauvegardés<br>ls_maps - Montre une liste des cartes<br>switch_save $ - "
+"Change vers le jeu sauvegardé $<br>switch_map $ - Change vers la carte "
+"$<br>toggle_type # - Bascule le type du joueur #<br>toggle_init # - Bascule "
+"l'initialisation du joueur #<br>toggle_tribe # - Bascule la tribue du joueur "
+"#<br>toggle_team # - Bascule l'équipe du joueur #<br>toggle_win_con - "
+"Bascule les conditions de victoire<br>host $ - Essaie d'exécuter les "
+"commandes hôtes $"
 
 #: ../../src/network/nethost.cc:1099
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr ""
+msgstr "%s m'a dit d'exécuter la commande: \"%s\""
 
 #: ../../src/network/nethost.cc:1111
 #, c-format
@@ -2577,25 +2588,25 @@ msgstr "%s a envoyé le signal pour démarrer le jeu."
 
 #: ../../src/network/nethost.cc:1119
 msgid "Available saved games:<br>"
-msgstr ""
+msgstr "Parties sauvegardées disponibles:<br>"
 
 #: ../../src/network/nethost.cc:1139
 msgid "Available maps:<br>"
-msgstr ""
+msgstr "Cartes disponibles:<br>"
 
 #: ../../src/network/nethost.cc:1183
 #, c-format
 msgid "Can not use \"%s\" as saved game file!"
-msgstr ""
+msgstr "Ne pouvont utiliser \"%s\" comme fichier de jeu sauvegardé!"
 
 #: ../../src/network/nethost.cc:1207
 #, c-format
 msgid "Can not use \"%s\" as map file!"
-msgstr ""
+msgstr "Ne pouvont utiliser \"%s\" comme fichier de carte!"
 
 #: ../../src/network/nethost.cc:1219 ../../src/network/nethost.cc:1225
 msgid "Invalid value # for player - should be a player number"
-msgstr ""
+msgstr "Valeur invalide # pour le joueur - devrait être un noméro de joueur"
 
 #: ../../src/network/nethost.cc:1253
 #, c-format
@@ -2629,6 +2640,8 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands. \"@%s start\" starts the server."
 msgstr ""
+"Ceci est un serveur dédié envoyez \"@%s help\" pour avoir une liste complète "
+"des commandes disponibles. \"@%s start\" démarre le serveur."
 
 #: ../../src/network/nethost.cc:2013
 msgid "Client reports time to host that is running backwards."
@@ -3585,7 +3598,7 @@ msgstr "Arrêt"
 #: ../../src/ui_fsmenu/options.cc:269
 #, c-format
 msgid "%ix%i %i bit"
-msgstr ""
+msgstr "%ix%i %i bit"
 
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Try system language"
