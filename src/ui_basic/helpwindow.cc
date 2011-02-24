@@ -23,6 +23,7 @@
 #include "i18n.h"
 #include "window.h"
 #include "button.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "wlapplication.h"
 
@@ -68,14 +69,14 @@ HelpWindow::HelpWindow
 	set_inner_size(in_width, in_height);
 	set_pos(Point((g_gr->get_xres() - out_width) / 2, (g_gr->get_yres() - out_height) / 2));
 
-	new Callback_Button
+	Button * btn = new Callback_Button
 		(this, "ok",
 		 in_width / 3, in_height - but_height * 3 / 2,
 		 in_width / 3, but_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind(&HelpWindow::pressedOk, boost::ref(*this)),
-		 _("OK"), std::string(), true, false,
-		 UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize));
+		 _("OK"), std::string(), true, false);
+	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
 }

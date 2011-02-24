@@ -164,16 +164,16 @@ void NetClient::run ()
 #endif
 
 	try {
-		UI::ProgressWindow loaderUI("pics/progress.png");
+		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("pics/progress.png");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
 		try {
 			tipstext.push_back(getPlayersTribe());
 		} catch (No_Tribe) {}
-		GameTips tips (loaderUI, tipstext);
+		GameTips tips (*loaderUI, tipstext);
 
-		loaderUI.step(_("Preparing game"));
+		loaderUI->step(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
@@ -392,6 +392,10 @@ void NetClient::setWinCondition(std::string) {
 	// Clients are not allowed to change this
 }
 
+void NetClient::nextWinCondition() {
+	// Clients are not allowed to change this
+}
+
 void NetClient::setPlayerNumber(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need
@@ -588,6 +592,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 		// Check whether the file or a file with that name already exists
 		if (g_fs->FileExists(path)) {
+			// If the file is a directory, we have to rename the file and replace it with the version of the
+			// host. If it is a ziped file, we can check, whether the host and the client have got the same file.
 			if (!g_fs->IsDirectory(path)) {
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
@@ -625,14 +631,11 @@ void NetClient::handle_packet(RecvPacket & packet)
 		file->bytes = bytes;
 		file->filename = path;
 		file->md5sum = md5;
-
-#ifdef WIN32
-		path.resize(path.rfind('\\', path.size() - 2));
-#else
-		path.resize(path.rfind('/', path.size() - 2));
-#endif
-
-		g_fs->EnsureDirectoryExists(path);
+		size_t position = path.rfind(g_fs->fileSeparator(), path.size() - 2);
+		if (position != std::string::npos) {
+			path.resize(position);
+			g_fs->EnsureDirectoryExists(path);
+		}
 		break;
 	}
 

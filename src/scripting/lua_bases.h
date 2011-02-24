@@ -88,7 +88,7 @@ public:
 	 * Properties
 	 */
 	int get_number(lua_State * L);
-	int get_tribe(lua_State * L);
+	int get_tribe_name(lua_State * L);
 
 	/*
 	 * Lua methods

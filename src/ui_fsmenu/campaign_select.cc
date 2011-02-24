@@ -40,55 +40,56 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-	m_butw (m_xres / 4),
-	m_buth (m_yres * 9 / 200),
+	m_butw (get_w() / 4),
+	m_buth (get_h() * 9 / 200),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
 
 // Text labels
 	title
 		(this,
-		 m_xres / 2, m_yres * 9 / 50,
+		 get_w() / 2, get_h() * 9 / 50,
 		 _("Select a campaign"), UI::Align_HCenter),
 	label_campname
-		(this, m_xres *  3 /   5, m_yres * 17 / 50, _("Campaign:")),
+		(this, get_w() *  3 /   5, get_h() * 17 / 50, _("Campaign:")),
 	tacampname
-		(this, m_xres * 61 / 100, m_yres *  3 /  8, ""),
+		(this, get_w() * 61 / 100, get_h() *  3 /  8, ""),
 	label_difficulty
-		(this, m_xres *  3 /   5, m_yres * 17 / 40, _("Difficulty:")),
+		(this, get_w() *  3 /   5, get_h() * 17 / 40, _("Difficulty:")),
 	tadifficulty
-		(this, m_xres * 61 / 100, m_yres * 23 / 50, ""),
+		(this, get_w() * 61 / 100, get_h() * 23 / 50, ""),
 	label_campdescr
-		(this, m_xres *  3 /   5, m_yres * 51 / 100, _("Description:")),
+		(this, get_w() *  3 /   5, get_h() * 51 / 100, _("Description:")),
 	tacampdescr
 		(this,
-		 m_xres * 61 / 100, m_yres * 11 / 20, m_xres * 9 / 25, m_yres * 7 / 25,
+		 get_w() * 61 / 100, get_h() * 11 / 20, get_w() * 9 / 25, get_h() * 7 / 25,
 		 ""),
 
 // Buttons
 	b_ok
 		(this, "ok",
-		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_CampaignSelect::clicked_ok, boost::ref(*this)),
-		 _("OK"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
-		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_CampaignSelect::end_modal, boost::ref(*this), 0),
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Back"), std::string(), true, false),
 
 // Campaign list
 	m_list
 		(this,
-		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
-		 m_xres * 711 / 1250, m_yres * 6083 / 10000)
+		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
+		 get_w() * 711 / 1250, get_h() * 6083 / 10000)
 {
+	back.set_font(font_small());
+	b_ok.set_font(font_small());
+
 	title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	label_campname  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	tacampname      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -251,51 +252,50 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-	m_xres (gr_x()),
-	m_yres (gr_y()),
-	m_butw (m_xres / 4),
-	m_buth (m_yres * 9 / 200),
+	m_butw (get_w() / 4),
+	m_buth (get_h() * 9 / 200),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
 
 // Text labels
 	title
 		(this,
-		 m_xres / 2, m_yres * 9 / 50, _("Choose your map!"),
+		 get_w() / 2, get_h() * 9 / 50, _("Choose your map!"),
 		 UI::Align_HCenter),
-	label_mapname (this, m_xres * 3 / 5,  m_yres * 17 / 50, _("Name:")),
-	tamapname     (this, m_xres * 61 / 100, m_yres * 3 / 8, ""),
-	label_author  (this, m_xres * 3 / 5,  m_yres * 17 / 40, _("Author:")),
-	taauthor      (this, m_xres * 61 / 100, m_yres * 23 / 50, ""),
-	label_mapdescr(this, m_xres * 3 / 5,  m_yres * 51 / 100, _("Description:")),
+	label_mapname (this, get_w() * 3 / 5,  get_h() * 17 / 50, _("Name:")),
+	tamapname     (this, get_w() * 61 / 100, get_h() * 3 / 8, ""),
+	label_author  (this, get_w() * 3 / 5,  get_h() * 17 / 40, _("Author:")),
+	taauthor      (this, get_w() * 61 / 100, get_h() * 23 / 50, ""),
+	label_mapdescr(this, get_w() * 3 / 5,  get_h() * 51 / 100, _("Description:")),
 	tamapdescr
 		(this,
-		 m_xres * 61 / 100, m_yres * 11 / 20, m_xres * 9 / 25, m_yres * 7 / 25),
+		 get_w() * 61 / 100, get_h() * 11 / 20, get_w() * 9 / 25, get_h() * 7 / 25),
 
 // Buttons
 	b_ok
 		(this, "ok",
-		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_CampaignMapSelect::clicked_ok, boost::ref(*this)),
-		 _("OK"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
-		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_CampaignMapSelect::end_modal, boost::ref(*this), 0),
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Back"), std::string(), true, false),
 
 // Campaign map list
 	m_list
 		(this,
-		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
-		 m_xres * 711 / 1250, m_yres * 6083 / 10000)
+		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
+		 get_w() * 711 / 1250, get_h() * 6083 / 10000)
 {
+	b_ok.set_font(font_small());
+	back.set_font(font_small());
+
 	title         .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	label_mapname .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	tamapname     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);

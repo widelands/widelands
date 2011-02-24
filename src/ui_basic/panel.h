@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,7 +98,7 @@ struct Panel : public Object {
 	virtual void end();
 
 	// Geometry
-	virtual void set_size(uint32_t nw, uint32_t nh);
+	void set_size(uint32_t nw, uint32_t nh);
 	void set_desired_size(uint32_t w, uint32_t h);
 	void set_pos(Point);
 	virtual void move_inside_parent();
@@ -282,7 +282,7 @@ private:
 	char * _tooltip;
 
 protected:
-	static void draw_tooltip(RenderTarget &, char const * const text);
+	static void draw_tooltip(RenderTarget &, const std::string & text);
 
 public:
 	void set_tooltip(const char * const);

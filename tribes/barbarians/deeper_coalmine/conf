@@ -22,7 +22,6 @@ meal=6
 work=_Work
 
 [work]
-return=skipped when economy needs meal and not economy needs coal
 sleep=40000
 consume=meal
 animate=working 16000
@@ -33,8 +32,15 @@ produce=coal:3
 
 [idle]
 pics=deeper_coalmine_i_??.png
-hotspot=45 45
+hotspot=60 37
+playercolor=true
 
 [working]
-pics=deeper_coalmine_i_??.png
-hotspot=45 45
+pics=deeper_coalmine_w_??.png
+hotspot=60 37
+playercolor=true
+
+[build]
+pics=deeper_coalmine_b_??.png
+hotspot=60 37
+playercolor=true

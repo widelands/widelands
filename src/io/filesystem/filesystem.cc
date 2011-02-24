@@ -108,21 +108,19 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
  * on locale OS.
  */
 std::string FileSystem::fixCrossFile(std::string const & path) const {
-#ifdef WIN32
-	// We simply keep it as it is and do not care about slashes - they will
-	// be replaced with backslashes in file read actions.
-	return path;
-#else
-	std::string fixedpath(path);
-	std::string temp;
 	uint32_t path_size = path.size();
+	std::string fixedPath(path);
+	std::string temp;
 	for (uint32_t i = 0; i < path_size; ++i) {
-		temp = fixedpath.at(i);
+		temp = path.at(i);
+#ifdef WIN32
+		if (temp == "/")
+#else
 		if (temp == "\\")
-			fixedpath.at(i) = m_filesep;
-	}
-	return fixedpath;
 #endif
+			fixedPath.at(i) = m_filesep;
+	}
+	return fixedPath;
 }
 
 /**
@@ -133,10 +131,7 @@ std::string FileSystem::getWorkingDirectory() const {
 	char cwd[PATH_MAX + 1];
 	char * const result = getcwd(cwd, PATH_MAX);
 	if (! result)
-		throw File_error
-			("FileSystem::getWorkingDirectory()",
-			 "widelands",
-			 "ca not run getcwd");
+		throw File_error("FileSystem::getWorkingDirectory()", "widelands", "can not run getcwd");
 
 	return std::string(cwd);
 #else

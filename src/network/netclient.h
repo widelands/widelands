@@ -87,6 +87,7 @@ struct NetClient :
 	virtual void setPlayerCloseable(uint8_t number, bool closeable);
 	virtual void setPlayerShared   (uint8_t number, uint8_t shared);
 	virtual void setWinCondition   (std::string);
+	virtual void nextWinCondition  ();
 	virtual std::string getWinCondition();
 
 	// ChatProvider interface

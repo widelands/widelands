@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,10 @@
 #include "rgbcolor.h"
 #include "graphic.h"
 #include "picture_id.h"
-#include "ui_basic/widget_cache.h"
 
 #include <SDL_ttf.h>
+
+#include <boost/scoped_ptr.hpp>
 
 #include <list>
 #include <cstring>
@@ -36,145 +37,65 @@
 struct RenderTarget;
 
 namespace UI {
-struct Text_Block;
-struct Font_Loader;
 
-/** class Font_Handler
- *
- * This class generates font Pictures out of strings and returns them
+struct TextStyle;
+
+/**
+ * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
 struct Font_Handler {
 	Font_Handler();
 	~Font_Handler();
-	void draw_string
+
+	void draw_text
 		(RenderTarget &,
-		 const std::string & font,
-		 int32_t             size,
-		 RGBColor fg, RGBColor bg,
-		 Point               dstpoint,
+		 const TextStyle &,
+		 Point dstpoint,
 		 const std::string & text,
-		 Align               align           = Align_CenterLeft,
-		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
-		 Widget_Cache        widget_cache    = Widget_Cache_None,
-		 PictureID         * widget_cache_id = 0,
-		 uint32_t            caret        = std::numeric_limits<uint32_t>::max(),
-		 bool                transparent     = true);
+		 Align align = Align_CenterLeft,
+		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+	uint32_t draw_text_raw(RenderTarget &, const TextStyle &, Point dstpoint, const std::string & text);
+	void draw_multiline
+		(RenderTarget &,
+		 const TextStyle &,
+		 Point dstpoint,
+		 const std::string & text,
+		 Align align = Align_CenterLeft,
+		 uint32_t wrap = std::numeric_limits<uint32_t>::max(),
+		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+
 	void get_size
-		(std::string const & fontname, int32_t size,
-		 std::string text,
+		(const TextStyle &,
+		 const std::string & text,
 		 uint32_t & w, uint32_t & h,
 		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
-	int32_t calc_linewidth(TTF_Font &, const std::string & text);
+	void get_size
+		(std::string const & fontname, int32_t size,
+		 const std::string & text,
+		 uint32_t & w, uint32_t & h,
+		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
 	uint32_t get_fontheight(std::string const & name, int32_t size);
-	std::string word_wrap_text
-		(TTF_Font &,
-		 const std::string & unwrapped_text,
-		 int32_t max_width);
-	std::string word_wrap_text
-		(std::string const & font, int32_t size,
-		 std::string const & unwrapped_text, int32_t max_width);
 	void do_align
 		(Align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
 	// This deletes all cached pictures, it is called
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
 	void flush_cache();
-	void draw_richtext
+
+private:
+	struct Data;
+	boost::scoped_ptr<Data> d;
+
+private:
+	void draw_caret
 		(RenderTarget &,
-		 RGBColor bg,
+		 const TextStyle &,
 		 Point dstpoint,
-		 std::string text,
-		 int32_t wrap,
-		 Widget_Cache widget_cache = Widget_Cache_None,
-		 PictureID * widget_cache_id = 0,
-		 bool transparent = true);
-	void get_size_from_cache
-		(PictureID widget_cache_id, uint32_t & w, uint32_t & h);
-
-private:
-	struct _Cache_Infos {
-		PictureID picture_id;
-		std::string str;
-		const TTF_Font * f;
-		RGBColor fg;
-		RGBColor bg;
-		int32_t caret;
-		uint32_t      w;
-		uint32_t      h;
-
-		bool operator== (_Cache_Infos const & who) const {
-			return
-				str == who.str &&
-				f   == who.f   &&
-				fg  == who.fg  &&
-				bg  == who.bg &&
-				caret == who.caret;
-		}
-	};
-
-private:
-	static const uint32_t CACHE_ARRAY_SIZE = 500;
-
-	Font_Loader           * m_font_loader;
-	std::list<_Cache_Infos> m_cache;
-
-private:
-	PictureID create_text_surface
-		(TTF_Font &,
-		 RGBColor fg, RGBColor bg,
-		 std::string const & text,
-		 Align,
-		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
-		 uint32_t            line_spacing = 0,
-		 uint32_t            caret        = std::numeric_limits<uint32_t>::max(),
-		 bool transparent = true);
-	PictureID convert_sdl_surface
-		(SDL_Surface &, const RGBColor bg, bool transparent = false);
-	SDL_Surface * draw_string_sdl_surface
-		(std::string const & fontname, int32_t fontsize,
-		 RGBColor fg, RGBColor bg,
 		 const std::string & text,
-		 Align,
-		 uint32_t            wrap        = std::numeric_limits<uint32_t>::max(),
-		 int32_t style = TTF_STYLE_NORMAL,
-		 uint32_t            linespacing = 0);
-	SDL_Surface * create_sdl_text_surface
-		(TTF_Font &, RGBColor fg, RGBColor bg,
-		 std::string const & text,
-		 Align,
-		 uint32_t            wrap        = std::numeric_limits<uint32_t>::max(),
-		 uint32_t            linespacing = 0,
-		 uint32_t            caret       = std::numeric_limits<uint32_t>::max());
-	SDL_Surface * create_static_long_text_surface
-		(TTF_Font &, RGBColor fg, RGBColor bg,
-		 std::string const & text,
-		 Align,
-		 uint32_t            wrap        = std::numeric_limits<uint32_t>::max(),
-		 uint32_t            linespacing = 0,
-		 uint32_t            caret       = std::numeric_limits<uint32_t>::max());
-	SDL_Surface * create_single_line_text_surface
-		(TTF_Font &, RGBColor fg, RGBColor bg,
-		 std::string text, Align,
-		 uint32_t caret = std::numeric_limits<uint32_t>::max());
-	SDL_Surface * create_empty_sdl_surface(uint32_t w, uint32_t h);
-	SDL_Surface * join_sdl_surfaces
-		(uint32_t w, uint32_t h,
-		 const std::vector<SDL_Surface *> & surfaces,
-		 RGBColor bg,
-		 Align align        = Align_Left,
-		 int32_t spacing        = 0,
-		 bool vertical      = false,
-		 bool keep_surfaces = false);
-	SDL_Surface * load_image(std::string file);
-	SDL_Surface * render_space
-		(Text_Block &, RGBColor bg, int32_t style = TTF_STYLE_NORMAL);
-	void render_caret
-		(TTF_Font &,
-		 SDL_Surface & line,
-		 const std::string & text_caret_pos);
+		 uint32_t caret);
 };
 
-extern Font_Handler * g_fh; // the default font
+extern Font_Handler * g_fh;
 
 }
 

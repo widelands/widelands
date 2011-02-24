@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,8 @@
 #include "align.h"
 #include "panel.h"
 #include "scrollbar.h"
-#include "widget_cache.h"
+
+#include <boost/scoped_ptr.hpp>
 
 namespace UI {
 struct Scrollbar;
@@ -31,10 +32,6 @@ struct Scrollbar;
 /**
  * This defines an area, where a text can easily be printed.
  * The textarea transparently handles explicit line-breaks and word wrapping.
- *
- * Do not use it blindly for big texts: the font handler needs to re-break the
- * entire text whenever the textarea is drawn, this is a trade-off which greatly
- * simplifies this class.
  */
 struct Multiline_Textarea : public Panel {
 	enum ScrollMode {
@@ -55,21 +52,14 @@ struct Multiline_Textarea : public Panel {
 
 	void set_text(std::string const &);
 	void set_align(Align);
-	void set_scrollpos(int32_t pixels);
 	void set_scrollmode(ScrollMode mode);
+
+	void set_font(std::string name, int32_t size, RGBColor fg);
 
 	uint32_t scrollbar_w() const throw () {return 24;}
 	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
 
-	void set_font(std::string name, int32_t size, RGBColor fg) {
-		m_fontname = name;
-		m_fontsize = size;
-		m_fcolor   = fg;
-		set_text(m_text.c_str());
-	}
-
 	void set_color(RGBColor fg) {m_fcolor = fg;}
-	void set_bg_color(RGBColor bgc) {m_bg_color = bgc;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget &);
@@ -81,27 +71,24 @@ struct Multiline_Textarea : public Panel {
 	RGBColor &    get_font_clr () {return m_fcolor;}
 
 private:
+	struct Impl;
+
+	boost::scoped_ptr<Impl> m;
+
+	void recompute();
+	void scrollpos_changed(int32_t pixels);
+
 	std::string m_text;
 	Scrollbar   m_scrollbar;
 	ScrollMode  m_scrollmode;
 
 protected:
+	virtual void layout();
+
 	Align        m_align;
-	PictureID    m_cache_id; ///picid of the whole textarea surface
-
-	///set to Widget_Cache_Update if the whole textarea has to be rebuild
-	Widget_Cache m_cache_mode;
-
 	std::string  m_fontname;
 	int32_t  m_fontsize;
 	RGBColor m_fcolor;
-	RGBColor m_bg_color;    ///< background color of the text.
-	uint32_t m_textheight;  ///< total height of wrapped text, in pixels
-	uint32_t m_textpos;     ///< current scrolling position in pixels (0 is top)
-
-	int32_t get_m_textpos() const {return m_textpos;}
-	void    draw_scrollbar();
-	int32_t get_halign();
 };
 
 }

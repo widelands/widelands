@@ -22,7 +22,6 @@ meal=6
 work=_Work
 
 [work]
-return=skipped when economy needs meal and not economy needs ironore
 consume=meal
 sleep=40000
 animate=working 16000
@@ -37,8 +36,15 @@ produce=ironore:2
 
 [idle]
 pics=deeper_oremine_i_??.png
-hotspot=45 45
+hotspot=60 37
+playercolor=true
 
 [working]
-pics=deeper_oremine_i_??.png
-hotspot=45 45
+pics=deeper_oremine_w_??.png
+hotspot=60 37
+playercolor=true
+
+[build]
+pics=deeper_oremine_b_??.png
+hotspot=60 37
+playercolor=true

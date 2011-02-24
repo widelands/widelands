@@ -21,6 +21,7 @@
 
 #include "constants.h"
 #include "io/filesystem/filesystem.h"
+#include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "log.h"
 #include "profile/profile.h"
@@ -38,6 +39,12 @@ Fullscreen_Menu_Base
 ==============================================================================
 */
 
+struct Fullscreen_Menu_Base::Data {
+	PictureID res_background;
+	UI::TextStyle textstyle_small;
+	UI::TextStyle textstyle_big;
+};
+
 /**
  * Initialize a pre-game menu
  *
@@ -45,10 +52,8 @@ Fullscreen_Menu_Base
  */
 Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	: UI::Panel(0, 0, 0, gr_x(), gr_y()),
-	// Switch graphics mode if necessary
-	m_xres(gr_x()), m_yres(gr_y())
+	d(new Data)
 {
-
 	Section & s = g_options.pull_section("global");
 
 #if USE_OPENGL
@@ -57,7 +62,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 #define GET_BOOL_USE_OPENGL false
 #endif
 	WLApplication::get()->init_graphics
-		(m_xres, m_yres,
+		(get_w(), get_h(),
 		 s.get_int("depth", 16),
 		 s.get_bool("fullscreen", false),
 		 GET_BOOL_USE_OPENGL);
@@ -73,8 +78,14 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 			("could not open splash screen; make sure that all data files are "
 			 "installed");
 
-	m_res_background = g_gr->get_resized_picture
-			(background, m_xres, m_yres, Graphic::ResizeMode_Loose);
+	d->res_background = g_gr->get_resized_picture
+			(background, get_w(), get_h(), Graphic::ResizeMode_Loose);
+
+	d->textstyle_small = UI::TextStyle::ui_small();
+	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());
+
+	d->textstyle_big = UI::TextStyle::ui_big();
+	d->textstyle_big.font = UI::Font::get(ui_fn(), fs_big());
 }
 
 Fullscreen_Menu_Base::~Fullscreen_Menu_Base()
@@ -86,7 +97,7 @@ Fullscreen_Menu_Base::~Fullscreen_Menu_Base()
  * Draw the background / splash screen
 */
 void Fullscreen_Menu_Base::draw(RenderTarget & dst) {
-	dst.blit(Point(0, 0), m_res_background);
+	dst.blit(Point(0, 0), d->res_background);
 }
 
 
@@ -100,9 +111,29 @@ uint32_t Fullscreen_Menu_Base::gr_y() {
 
 
 uint32_t Fullscreen_Menu_Base::fs_small() {
-	return UI_FONT_SIZE_SMALL * gr_y() / 600;
+	return UI_FONT_SIZE_SMALL * get_h() / 600;
 }
 
 uint32_t Fullscreen_Menu_Base::fs_big() {
-	return UI_FONT_SIZE_BIG * gr_y() / 600;
+	return UI_FONT_SIZE_BIG * get_h() / 600;
+}
+
+UI::TextStyle & Fullscreen_Menu_Base::ts_small()
+{
+	return d->textstyle_small;
+}
+
+UI::TextStyle & Fullscreen_Menu_Base::ts_big()
+{
+	return d->textstyle_big;
+}
+
+UI::Font * Fullscreen_Menu_Base::font_small()
+{
+	return d->textstyle_small.font;
+}
+
+UI::Font * Fullscreen_Menu_Base::font_big()
+{
+	return d->textstyle_big.font;
 }

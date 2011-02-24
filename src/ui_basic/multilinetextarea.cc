@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,20 @@
 
 #include "constants.h"
 #include "graphic/font_handler.h"
+#include "graphic/richtext.h"
+#include "graphic/wordwrap.h"
 
 namespace UI {
+
+static const uint32_t RICHTEXT_MARGIN = 2;
+
+struct Multiline_Textarea::Impl {
+	bool isrichtext;
+	WordWrap ww;
+	RichText rt;
+
+	Impl() : isrichtext(false) {}
+};
 
 Multiline_Textarea::Multiline_Textarea
 	(Panel * const parent,
@@ -32,21 +44,17 @@ Multiline_Textarea::Multiline_Textarea
 	 const bool always_show_scrollbar)
 	:
 	Panel       (parent, x, y, w, h),
+	m(new Impl),
 	m_text      (text),
 	m_scrollbar (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
-	m_scrollmode(ScrollNormal),
-	m_cache_id  (g_gr->get_no_picture()),
-	m_cache_mode(Widget_Cache_New),
-	m_bg_color(RGBColor(107, 87, 55)),
-	m_textheight(0),
-	m_textpos   (0)
+	m_scrollmode(ScrollNormal)
 {
 	assert(scrollbar_w() <= w);
 	set_think(false);
 
 	set_align(align);
 
-	m_scrollbar.moved.set(this, &Multiline_Textarea::set_scrollpos);
+	m_scrollbar.moved.set(this, &Multiline_Textarea::scrollpos_changed);
 
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_BIG));
@@ -66,103 +74,124 @@ Multiline_Textarea::~Multiline_Textarea()
 {
 }
 
+/**
+ * Change the font used for non-richtext text.
+ */
+void Multiline_Textarea::set_font(std::string name, int32_t size, RGBColor fg)
+{
+	m_fontname = name;
+	m_fontsize = size;
+	m_fcolor = fg;
+
+	TextStyle style;
+	style.font = Font::get(m_fontname, m_fontsize);
+	style.fg = m_fcolor;
+	style.bold = true; // for historic reasons
+
+	m->ww.set_style(style);
+	recompute();
+}
 
 /**
  * Replace the current text with a new one.
  * Fix up scrolling state if necessary.
-*/
-void Multiline_Textarea::set_text(const std::string & text) {
+ */
+void Multiline_Textarea::set_text(const std::string & text)
+{
 	m_text = text;
-	if (text.empty()) { //  clear the field
-		m_textheight = 0;
-		m_textpos    = 0;
-		m_scrollbar.set_steps(1);
-	}
-	if (m_cache_mode != Widget_Cache_New)
-		m_cache_mode = Widget_Cache_Update;
-	update(0, 0, get_eff_w(), get_h());
+	recompute();
 }
 
 /**
+ * Recompute the word wrapping or rich-text layouting,
+ * and adjust scrollbar settings accordingly.
+ */
+void Multiline_Textarea::recompute()
+{
+	uint32_t height;
+
+	if (m_text.compare(0, 3, "<rt")) {
+		m->isrichtext = false;
+		m->ww.set_wrapwidth(get_eff_w());
+		m->ww.wrap(m_text);
+		height = m->ww.height();
+	} else {
+		m->isrichtext = true;
+		m->rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
+		m->rt.parse(m_text);
+		height = m->rt.height() + 2 * RICHTEXT_MARGIN;
+	}
+
+	bool setbottom = false;
+
+	if (m_scrollmode == ScrollLog)
+		if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
+			setbottom = true;
+
+	m_scrollbar.set_steps(height - get_h());
+	if (setbottom)
+		m_scrollbar.set_scrollpos(height - get_h());
+
+	update(0, 0, get_eff_w(), get_h());
+}
+
+
+/**
  * Change alignment of the textarea
-*/
+ */
 void Multiline_Textarea::set_align(Align const align)
 {
 	//  do not allow vertical alignment as it does not make sense
 	m_align = static_cast<Align>(align & Align_Horizontal);
 }
 
-
 /**
- * Scroll to the given position.
-*/
-void Multiline_Textarea::set_scrollpos(int32_t const pixels)
+ * Callback from the scrollbar.
+ */
+void Multiline_Textarea::scrollpos_changed(int32_t const pixels)
 {
-	m_textpos = pixels;
-
 	update(0, 0, get_eff_w(), get_h());
 }
-
 
 /**
  * Change the scroll mode. This will not change the current scroll position;
  * it only affects the behaviour of set_text().
-*/
+ */
 void Multiline_Textarea::set_scrollmode(ScrollMode mode)
 {
 	m_scrollmode = mode;
 }
 
 
-/**
- * Redraw the textarea
-*/
-void Multiline_Textarea::draw(RenderTarget & dst)
+/// Take care about scrollbar on resize
+void Multiline_Textarea::layout()
 {
-	if (m_text.length()) {
-		//  Let the font handler worry about all the complicated stuff..
-		if (m_text.compare(0, 3, "<rt"))
-			UI::g_fh->draw_string
-				(dst,
-				 m_fontname,
-				 m_fontsize,
-				 m_fcolor, m_bg_color,
-				 Point(get_halign(), 0 - m_textpos),
-				 m_text,
-				 m_align,
-				 get_eff_w(),
-				 m_cache_mode, &m_cache_id);
-		else
-			UI::g_fh->draw_richtext
-				(dst,
-				 m_bg_color,
-				 Point(get_halign(), 0 - m_textpos),
-				 m_text,
-				 get_eff_w(),
-				 m_cache_mode, &m_cache_id);
-		draw_scrollbar();
-		m_cache_mode = Widget_Cache_Use;
-	}
+	recompute();
+
+	// Take care about the scrollbar
+	m_scrollbar.set_pos(Point(get_w() - scrollbar_w(), 0));
+	m_scrollbar.set_size(scrollbar_w(), get_h());
 }
 
-void Multiline_Textarea::draw_scrollbar() {
-	if (m_cache_mode != Widget_Cache_Use) {
-		bool setbottom = false;
+/**
+ * Redraw the textarea
+ */
+void Multiline_Textarea::draw(RenderTarget & dst)
+{
+	if (m->isrichtext) {
+		m->rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - m_scrollbar.get_scrollpos()));
+	} else {
+		int32_t anchor = 0;
 
-		if (m_scrollmode == ScrollLog)
-			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
-				setbottom = true;
-
-		if (m_cache_id != g_gr->get_no_picture()) {
-			uint32_t width;
-			UI::g_fh->get_size_from_cache(m_cache_id, width, m_textheight);
+		switch (m_align & Align_Horizontal) {
+		case Align_HCenter:
+			anchor = get_eff_w() / 2;
+			break;
+		case Align_Right:
+			anchor = get_eff_w();
+			break;
 		}
-
-		if (setbottom || m_textpos > m_textheight - get_h())
-			m_textpos = m_textheight - get_h();
-
-		m_scrollbar.set_steps(m_textheight - get_h());
-		m_scrollbar.set_scrollpos(m_textpos);
+		m->ww.draw(dst, Point(anchor, -m_scrollbar.get_scrollpos()), m_align);
 	}
 }
 
@@ -174,14 +203,4 @@ bool Multiline_Textarea::handle_mousepress
 		m_scrollbar.handle_mousepress(btn, x, y) : false;
 }
 
-int32_t Multiline_Textarea::get_halign() {
-	int32_t x = 0;
-	//  only HAlignment is allowed
-	if      (m_align & Align_HCenter)
-		x += get_w() / 2;
-	else if (m_align & Align_Right)
-		x += get_w();
-	return x;
-}
-
-}
+} // namespace UI

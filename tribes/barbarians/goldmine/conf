@@ -21,7 +21,6 @@ ration=6
 work=_Work
 
 [work]
-return=skipped when economy needs ration and not economy needs goldstone
 sleep=45000
 consume=ration
 animate=working 20000
@@ -30,8 +29,15 @@ produce=goldstone
 
 [idle]
 pics=goldmine_i_??.png
-hotspot=15 28
+hotspot=21 36
+playercolor=true
+
+[build]
+pics=goldmine_b_??.png
+hotspot=21 36
+playercolor=true
 
 [working]
-pics=goldmine_i_??.png
-hotspot=15 28
+pics=goldmine_w_??.png
+hotspot=21 36
+playercolor=true

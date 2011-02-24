@@ -4,14 +4,6 @@
 # Tries to find out the repository revision of the current working directory
 # using bzr or git
 
-###############################################
-#
-# ATTENTION CMAKE-TRANSITION
-# This (in utils directory) is the future location of this file.
-# The other file (in build/scons-utils) is for scons only and can be deleted after transition
-#
-###############################################
-
 import os
 import sys
 import os.path as p

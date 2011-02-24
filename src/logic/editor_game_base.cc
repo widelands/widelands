@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -134,8 +134,10 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 	delete m_lua;
 
-	assert(this == g_sound_handler.m_egbase);
-	g_sound_handler.m_egbase = 0;
+	if (g_gr) { // dedicated does not use the sound_handler
+		assert(this == g_sound_handler.m_egbase);
+		g_sound_handler.m_egbase = 0;
+	}
 }
 
 void Editor_Game_Base::think()
@@ -534,10 +536,12 @@ void Editor_Game_Base::cleanup_for_load
 
 	//  We do not flush the animations in the editor since all tribes are loaded
 	//  and animations can not change a lot, or?
-	if (flush_animations)
-		g_anim.flush();
-	if (flush_graphics) {
-		g_gr->flush_animations(); // flush all world animations
+	//  And we especially do not flush anything, if nothing is loaded == dedicated server
+	if (g_gr) {
+		if (flush_animations)
+			g_anim.flush();
+		if (flush_graphics)
+			g_gr->flush_animations(); // flush all world animations
 	}
 
 	const Player * const * const players_end = m_players + MAX_PLAYERS;
