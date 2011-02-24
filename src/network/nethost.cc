@@ -856,15 +856,6 @@ void NetHost::send(ChatMessage msg)
 	if (msg.msg.empty())
 		return;
 
-	// Make sure that msg is free of richtext formation tags. Such tags could not
-	// just be abused by the user, but could also break the whole text formation.
-	//  FIXME It would be better to escape < as &lt; and then render that as <
-	//  FIXME instead of replacing < with braces in chat messages.
-	if (msg.playern != -2) // System messages may have special formations
-		container_iterate(std::string, msg.msg, i)
-			if (*i.current == '<')
-				*i.current = '{';
-
 	if (msg.recipient.empty()) {
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);
