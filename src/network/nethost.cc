@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,29 +22,39 @@
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
+#include "game_io/game_loader.h"
+#include "game_io/game_preload_data_packet.h"
 #include "ui_fsmenu/launchMPG.h"
-#include "logic/game.h"
-#include "wui/game_tips.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "wui/interactive_dedicated_server.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
+#include "logic/game.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
+#include "logic/tribe.h"
+#include "map_io/widelands_map_loader.h"
 #include "md5.h"
 #include "network_ggz.h"
 #include "network_lan_promotion.h"
+#include "network_player_settings_backend.h"
 #include "network_protocol.h"
 #include "network_system.h"
-#include "logic/player.h"
-#include "logic/playercommand.h"
 #include "profile/profile.h"
-#include "logic/tribe.h"
+#include "scripting/scripting.h"
+#include "ui_basic/progresswindow.h"
 #include "wexception.h"
 #include "wlapplication.h"
+#include "wui/game_tips.h"
+#include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
-#include "ui_basic/progresswindow.h"
 #include <boost/format.hpp>
+#include <sstream>
+
+#ifndef WIN32
+#include <unistd.h> // for usleep
+#endif
+
 using boost::format;
 
 
@@ -193,7 +203,10 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			 ||
 			 settings().players.at(number).state == PlayerSettings::stateComputer
 			 ||
-			 settings().players.at(number).state == PlayerSettings::stateShared)
+			 settings().players.at(number).state == PlayerSettings::stateShared
+			 ||
+			 settings().players.at(number).state == PlayerSettings::stateOpen // For savegame loading
+			)
 			h->setPlayerTribe(number, tribe);
 	}
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
@@ -257,8 +270,30 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setWinCondition(wc);
 	}
 
+	virtual void nextWinCondition() {
+		if (m_win_conditions.size() < 1) {
+			// Register win condition scripts
+			m_lua = create_LuaInterface();
+			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+
+			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
+			container_iterate_const(ScriptContainer, sc, wc)
+			m_win_conditions.push_back(wc->first);
+			m_cur_wincondition = -1;
+		}
+
+		if (canChangeMap()) {
+			m_cur_wincondition++;
+			m_cur_wincondition %= m_win_conditions.size();
+			setWinCondition(m_win_conditions[m_cur_wincondition]);
+		}
+	}
+
 private:
-	NetHost * h;
+	NetHost                * h;
+	LuaInterface           * m_lua;
+	int16_t                  m_cur_wincondition;
+	std::vector<std::string> m_win_conditions;
 };
 
 struct HostChatProvider : public ChatProvider {
@@ -291,25 +326,8 @@ struct HostChatProvider : public ChatProvider {
 
 			// Split up in "cmd" "arg1" "arg2"
 			std::string cmd, arg1, arg2;
-			std::string::size_type const space = c.msg.find(' ');
-			if (space > c.msg.size())
-				// Only cmd
-				cmd = c.msg.substr(1);
-			else {
-				cmd = c.msg.substr(1, space - 1);
-				std::string::size_type const space2 = c.msg.find(' ', space + 1);
-				if (space2 != std::string::npos) {
-					// cmd + arg1 + arg2
-					arg1 = c.msg.substr(space + 1, space2 - space - 1);
-					arg2 = c.msg.substr(space2 + 1);
-				} else if (space + 1 < c.msg.size())
-					// cmd + arg1
-					arg1 = c.msg.substr(space + 1);
-			}
-			if (arg1.empty())
-				arg1 = "";
-			if (arg2.empty())
-				arg2 = "";
+			std::string temp = c.msg.substr(1); // cut off '/'
+			h->splitCommandArray(temp, cmd, arg1, arg2);
 			log("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat
@@ -469,6 +487,8 @@ struct NetHostImpl {
 	std::string localplayername;
 	uint32_t localdesiredspeed;
 	HostChatProvider chat;
+	HostGameSettingsProvider hp;
+	NetworkPlayerSettingsBackend npsb;
 
 	LAN_Game_Promoter * promoter;
 	TCPsocket svsock;
@@ -478,8 +498,8 @@ struct NetHostImpl {
 	/// order as players. In fact, a client must not be assigned to a player.
 	std::vector<Client> clients;
 
-	/// Currently active modal panel.
-	UI::Panel * modal;
+	/// Set to true, once the dedicated server should start
+	bool dedicated_start;
 
 	/// The game itself; only non-null while game is running
 	Widelands::Game * game;
@@ -515,14 +535,16 @@ struct NetHostImpl {
 	md5_checksum syncreport;
 	bool syncreport_arrived;
 
-	NetHostImpl(NetHost * const h) : chat(h) {}
+	NetHostImpl(NetHost * const h) : chat(h), hp(h), npsb(&hp) {
+		dedicated_start = false;
+	}
 };
 
 NetHost::NetHost (std::string const & playername, bool ggz)
 	:
 	d(new NetHostImpl(this)),
 	use_ggz(ggz),
-	m_autolaunch(false),
+	m_is_dedicated(false),
 	m_forced_pause(false)
 {
 	log("[Host] starting up.\n");
@@ -600,8 +622,7 @@ void NetHost::clearComputerPlayers()
 void NetHost::initComputerPlayer(Widelands::Player_Number p)
 {
 	d->computerplayers.push_back
-		(Computer_Player::getImplementation(d->game->get_player(p)->getAI())
-		 ->instantiate(*d->game, p));
+		(Computer_Player::getImplementation(d->game->get_player(p)->getAI())->instantiate(*d->game, p));
 }
 
 void NetHost::initComputerPlayers()
@@ -623,15 +644,26 @@ void NetHost::initComputerPlayers()
 
 void NetHost::run(bool const autorun)
 {
-	m_autolaunch = autorun;
-	HostGameSettingsProvider hp(this);
-	{
-		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&hp, this);
-		if (m_autolaunch)
-			d->modal = lm;
+	m_is_dedicated = autorun;
+	if (m_is_dedicated) {
+		// Initializing
+		d->hp.nextWinCondition();
+		// Setup by the users
+		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
+		while (not d->dedicated_start) {
+			handle_network();
+#ifndef WIN32
+			if (usleep(200) == -1)
+				return;
+#else
+			Sleep(20);
+#endif
+		}
+		d->dedicated_start = false;
+	} else {
+		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&d->hp, this);
 		lm->setChatProvider(d->chat);
 		const int32_t code = lm->run();
-		d->modal = 0;
 		if (code <= 0)
 			return;
 	}
@@ -644,8 +676,7 @@ void NetHost::run(bool const autorun)
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients.at(i).playernum == UserSettings::notConnected())
-			disconnectClient
-				(i, _("The game has started just after you tried to connect."));
+			disconnectClient(i, _("The game has started just after you tried to connect."));
 	}
 
 	SendPacket s;
@@ -658,39 +689,64 @@ void NetHost::run(bool const autorun)
 #endif
 
 	try {
-		UI::ProgressWindow loaderUI("pics/progress.png");
-		std::vector<std::string> tipstext;
-		tipstext.push_back("general_game");
-		tipstext.push_back("multiplayer");
-		try {
-			tipstext.push_back(hp.getPlayersTribe());
-		} catch (GameSettingsProvider::No_Tribe) {
+		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
+		// NOTE  to check whether the pointer is valid.
+		UI::ProgressWindow * loaderUI = 0;
+		if (m_is_dedicated) {
+			log ("[Dedicated] Starting the game...\n");
+			d->game = &game;
+			game.set_game_controller(this);
+
+			if (d->settings.savegame) {
+				// Read and broadcast original win condition
+				Widelands::Game_Loader gl(d->settings.mapfilename, game);
+				Widelands::Game_Preload_Data_Packet gpdp;
+				gl.preload_game(gpdp);
+
+				setWinCondition(gpdp.get_win_condition());
+			}
+		} else {
+			loaderUI = new UI::ProgressWindow ("pics/progress.png");
+			std::vector<std::string> tipstext;
+			tipstext.push_back("general_game");
+			tipstext.push_back("multiplayer");
+			try {
+				tipstext.push_back(d->hp.getPlayersTribe());
+			} catch (GameSettingsProvider::No_Tribe) {
+			}
+			GameTips tips (*loaderUI, tipstext);
+
+			loaderUI->step(_("Preparing game"));
+
+			d->game = &game;
+			game.set_game_controller(this);
+			Interactive_GameBase * igb;
+			uint8_t pn = d->settings.playernum + 1;
+
+			if (d->settings.savegame) {
+				// Read and broadcast original win condition
+				Widelands::Game_Loader gl(d->settings.mapfilename, game);
+				Widelands::Game_Preload_Data_Packet gpdp;
+				gl.preload_game(gpdp);
+
+				setWinCondition(gpdp.get_win_condition());
+			}
+
+			if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
+				igb =
+					new Interactive_Player
+						(game, g_options.pull_section("global"),
+						pn, d->settings.scenario, true);
+			} else
+				igb =
+					new Interactive_Spectator
+						(game, g_options.pull_section("global"), true);
+			igb->set_chat_provider(d->chat);
+			game.set_ibase(igb);
 		}
-		GameTips tips (loaderUI, tipstext);
 
-		loaderUI.step(_("Preparing game"));
-
-		d->game = &game;
-		game.set_game_controller(this);
-		Interactive_GameBase * igb;
-		uint8_t pn = d->settings.playernum + 1;
-		if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
-			igb =
-				new Interactive_Player
-					(game, g_options.pull_section("global"),
-					 pn, d->settings.scenario, true);
-		} else if (!autorun) {
-			igb =
-				new Interactive_Spectator
-					(game, g_options.pull_section("global"), true);
-		} else
-			igb =
-				new Interactive_DServer
-					(game, g_options.pull_section("global"));
-		igb->set_chat_provider(d->chat);
-		game.set_ibase(igb);
 		if (!d->settings.savegame) // new game
-			game.init_newgame(loaderUI, d->settings);
+			game.init_newgame (loaderUI, d->settings);
 		else                      // savegame
 			game.init_savegame(loaderUI, d->settings);
 		d->pseudo_networktime = game.get_gametime();
@@ -709,9 +765,7 @@ void NetHost::run(bool const autorun)
 		initComputerPlayers();
 		game.run
 			(loaderUI,
-			 d->settings.savegame ?
-			 Widelands::Game::Loaded
-			 : d->settings.scenario ?
+			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
 #if HAVE_GGZ
 		// if this is a ggz game, tell the metaserver that the game is done.
@@ -770,7 +824,10 @@ void NetHost::think()
 
 		for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
 			d->computerplayers.at(i)->think();
-	}
+	} else if (m_is_dedicated)
+		// Take care that every player gets updated during set up time
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+			d->npsb.refresh(i);
 }
 
 void NetHost::sendPlayerCommand(Widelands::PlayerCommand & pc)
@@ -799,15 +856,6 @@ void NetHost::send(ChatMessage msg)
 	if (msg.msg.empty())
 		return;
 
-	// Make sure that msg is free of richtext formation tags. Such tags could not
-	// just be abused by the user, but could also break the whole text formation.
-	//  FIXME It would be better to escape < as &lt; and then render that as <
-	//  FIXME instead of replacing < with braces in chat messages.
-	if (msg.playern != -2) // System messages may have special formations
-		container_iterate(std::string, msg.msg, i)
-			if (*i.current == '<')
-				*i.current = '{';
-
 	if (msg.recipient.empty()) {
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);
@@ -827,7 +875,7 @@ void NetHost::send(ChatMessage msg)
 		// Is this pm for the host player?
 		if (d->localplayername == msg.recipient) {
 			// If this is a dedicated server, handle commands
-			if (m_autolaunch)
+			if (m_is_dedicated)
 				handle_dserver_command(msg.msg, msg.sender);
 			d->chat.receive(msg);
 			// Write the SendPacket - will be used below to show that the message
@@ -895,7 +943,7 @@ void NetHost::send(ChatMessage msg)
 		else if (d->localplayername == msg.sender)
 			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
-			if (d->localplayername == msg.recipient && m_autolaunch)
+			if (d->localplayername == msg.recipient && m_is_dedicated)
 				return; // There will be an immediate answer from the host
 			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
@@ -925,9 +973,6 @@ void NetHost::send(ChatMessage msg)
 /**
 * If the host sends a chat message with formation /kick <name> <reason>
 * This function will handle this command and try to kick the user.
-*
-* \note perhaps we should add some kind of user interaction like
-*       "do you really want to kick <name>?", to avoid abuse of this feature.
 */
 void NetHost::kickUser(std::string name, std::string reason)
 {
@@ -962,45 +1007,245 @@ void NetHost::kickUser(std::string name, std::string reason)
 	disconnectClient(client, "Kicked by the host: " + reason);
 }
 
-/// This function is used to handle commands for the dedicated server
-///
-/// TODO add more functions, like register one player to have admin rights,
-/// TODO and give that player access to the host commands
-void NetHost::handle_dserver_command(std::string cmd, std::string sender)
-{
-	assert(m_autolaunch);
 
-	if (cmd == "/start") {
-		if (!canLaunch()) {
-			// The Server is not yet ready
-			sendSystemChat
-				(_("%s tried to start the game, but the server is not launchable."),
-				 sender.c_str());
-		} else {
-			sendSystemChat
-				(_("%s send the signal to start the game."), sender.c_str());
-			assert(d->modal);
-			if (d->settings.savegame)
-				d->modal->end_modal(1 + d->settings.scenario);
-			else
-				d->modal->end_modal(3 + d->settings.scenario);
-		}
-	} else {
-		ChatMessage c;
-		c.time = time(0);
-		c.playern = -2;
-		c.sender = d->localplayername;
-		c.recipient = sender;
-		if (cmd == "/help") {
+/// Split up a user entered string in "cmd", "arg1" and "arg2"
+/// \note the cmd must begin with "/"
+void NetHost::splitCommandArray
+	(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2)
+{
+	assert(cmdarray.size() > 1);
+
+	std::string::size_type const space = cmdarray.find(' ');
+	if (space > cmdarray.size())
+		// only cmd
+		cmd = cmdarray.substr(0);
+	else {
+		cmd = cmdarray.substr(0, space);
+		std::string::size_type const space2 = cmdarray.find(' ', space + 1);
+		if (space2 != std::string::npos) {
+			// cmd + arg1 + arg2
+			arg1 = cmdarray.substr(space + 1, space2 - space - 1);
+			arg2 = cmdarray.substr(space2 + 1);
+		} else if (space + 1 < cmdarray.size())
+			// cmd + arg1
+			arg1 = cmdarray.substr(space + 1);
+	}
+	if (arg1.empty())
+		arg1 = "";
+	if (arg2.empty())
+		arg2 = "";
+}
+
+
+/**
+ * This function is used to handle commands for the dedicated server
+ */
+void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
+{
+	assert(m_is_dedicated);
+
+	ChatMessage c;
+	c.time = time(0);
+	c.playern = -2;
+	c.sender = d->localplayername;
+	c.recipient = sender;
+
+	if (cmdarray.size() < 1) {
+		return;
+	}
+
+	// Split up in "cmd" "arg1" "arg2"
+	std::string cmd, arg1, arg2;
+	splitCommandArray(cmdarray, cmd, arg1, arg2);
+
+	// help
+	if (cmd == "help") {
+		if (d->game)
 			c.msg =
 				_
-				 ("<br>Available host commands are:<br>"
-				  "/help  - Shows this help<br>"
-				  "/start - Starts the server.");
-		} else { // default
+				("<br>Available host commands are:<br>"
+				 "help   - Shows this help<br>"
+				 "host $ - Tries to run the host command $");
+		else
 			c.msg =
-				(format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
+				_
+				("<br>Available host commands are:<br>"
+				 "help           - Shows this help<br>"
+				 "start          - Starts the server<br>"
+				 "ls_saved_games - Shows a list of saved games<br>"
+				 "ls_maps        - Shows a list of maps<br>"
+				 "switch_save  $ - Switch to saved game $<br>"
+				 "switch_map   $ - Switch to map $<br>"
+				 "toggle_type  # - Toggles the type of player #<br>"
+				 "toggle_init  # - Toggles the initialization of player #<br>"
+				 "toggle_tribe # - Toggles the tribe of player #<br>"
+				 "toggle_team  # - Toggles the team of player #<br>"
+				 "toggle_win_con - Toggles the win_condition<br>"
+				 "host         $ - Tries to run the host command $");
+		send(c);
+
+		// host
+	} else if (cmd == "host") {
+		std::string temp = arg1 + " " + arg2;
+		c.msg = (format(_("%s told me to run the command: \"%s\"")) % sender % temp).str();
+		c.recipient = "";
+		send(c);
+		d->chat.send(temp);
+
+	} else if (not d->game) {
+
+		// start
+		if (cmd == "start") {
+			if (!canLaunch()) {
+				// The Server is not yet ready
+				sendSystemChat
+					(_("%s tried to start the game, but the server is not launchable."), sender.c_str());
+			} else {
+				sendSystemChat(_("%s send the signal to start the game."), sender.c_str());
+				d->dedicated_start = true;
+			}
+
+		// ls_saved_games
+		} else if (cmd == "ls_saved_games") {
+			std::string temp(_("Available saved games:<br>"));
+			filenameset_t files;
+			g_fs->FindFiles("save", "*", &files, 0);
+			Widelands::Game game;
+			Widelands::Game_Preload_Data_Packet gpdp;
+			const filenameset_t & gamefiles = files;
+			container_iterate_const(filenameset_t, gamefiles, i) {
+				char const * const name = i.current->c_str();
+				try {
+					Widelands::Game_Loader gl(name, game);
+					gl.preload_game(gpdp);
+					temp += i.current->substr(5, i.current->size() - 1);
+					temp += "; ";
+				} catch (_wexception const & e) {}
+			}
+			c.msg = temp;
+			send(c);
+
+		// ls_maps
+		} else if (cmd == "ls_maps") {
+			std::string temp(_("Available maps:<br>"));
+			filenameset_t files;
+			g_fs->FindFiles("maps", "*", &files, 0);
+			Widelands::Map map;
+			const filenameset_t & gamefiles = files;
+			container_iterate_const(filenameset_t, gamefiles, i) {
+				char const * const name = i.current->c_str();
+				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				if (ml) {
+					temp += i.current->substr(5, i.current->size() - 1);
+					temp += "; ";
+				}
+			}
+			c.msg = temp;
+			send(c);
+
+		// switch_save
+		} else if (cmd == "switch_save") {
+			std::string path("save/");
+			path += arg1;
+			if (arg2.size() > 0) {
+				path += " ";
+				path += arg2;
+			}
+			if (g_fs->FileExists(path)) {
+				// Check if file is a saved game and if yes read out the needed data
+				try {
+					Widelands::Game game;
+					Widelands::Game_Preload_Data_Packet gpdp;
+					Widelands::Game_Loader gl(path, game);
+					gl.preload_game(gpdp);
+
+					// If we are here, it is a saved game file :)
+					// Read the needed data from file "elemental" of the used map.
+					FileSystem & sg_fs = g_fs->MakeSubFileSystem(path.c_str());
+					Profile prof;
+					prof.read("map/elemental", 0, sg_fs);
+					Section & s = prof.get_safe_section("global");
+					uint8_t nr_players = s.get_safe_int("nr_players");
+
+					d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
+					return;
+				} catch (_wexception const & e) {}
+			}
+			c.msg = (format(_("Can not use \"%s\" as saved game file!")) % arg1).str();
+			send(c);
+
+		// switch_map
+		} else if (cmd == "switch_map") {
+			std::string path("maps/");
+			path += arg1;
+			if (arg2.size() > 0) {
+				path += " ";
+				path += arg2;
+			}
+			if (g_fs->FileExists(path)) {
+				// Check if file is a map and if yes read out the needed data
+				Widelands::Map   map;
+				i18n::Textdomain td("maps");
+				Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
+				if (ml) {
+					// Yes it is a map file :)
+					map.set_filename(path.c_str());
+					ml->preload_map(true);
+					d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
+					return;
+				}
+			}
+			c.msg = (format(_("Can not use \"%s\" as map file!")) % arg1).str();
+			send(c);
+
+		// Player commands
+		} else if
+			(cmd == "toggle_type" || cmd == "toggle_init" || cmd == "toggle_tribe" || cmd == "toggle_team")
+		{
+			std::istringstream temp(arg1);
+			// Conversion fails with uint8_t or similiar, so we convert to int.
+			// This should not be a problem anyways, as this function runs only server sided.
+			int plr;
+			if (!(temp >> plr)) {
+				c.msg = _("Invalid value # for player - should be a player number");
+				send(c);
+				return;
+			}
+			--plr; // 0 based
+			if (plr < 0 || plr >= static_cast<int32_t>(d->settings.players.size())) {
+				c.msg = _("Invalid value # for player - should be a player number");
+				send(c);
+				return;
+			}
+
+			// toggle_type #
+			if      (cmd == "toggle_type")
+				d->npsb.toggle_type(plr);
+
+			// toggle_init #
+			else if (cmd == "toggle_init")
+				d->npsb.toggle_init(plr);
+
+			// toggle_tribe #
+			else if (cmd == "toggle_tribe")
+				d->npsb.toggle_tribe(plr);
+
+			// toggle_team #
+			else if (cmd == "toggle_team")
+				d->npsb.toggle_team(plr);
+
+		// toggle_win_con
+		} else if (cmd == "toggle_win_con") {
+			d->hp.nextWinCondition();
+		// default
+		}  else {
+			c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
+			send(c);
 		}
+
+	// default
+	} else {
+		c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
 		send(c);
 	}
 }
@@ -1723,15 +1968,15 @@ void NetHost::welcomeClient
 	sendSystemChat(_("%s has joined the game"), effective_name.c_str());
 
 	// If this is a dedicated server, tell the player about the net commands
-	if (m_autolaunch) {
+	if (m_is_dedicated) {
 		ChatMessage c;
 		c.time = time(0);
 		c.playern = -2;
 		c.sender = d->localplayername;
 		c.msg =
 			(format
-				(_("This is a dedicated server send \"@%s /help\" to get a full "
-				   "list of available commands. \"@%s /start\" starts the server."))
+				(_("This is a dedicated server send \"@%s help\" to get a full "
+				   "list of available commands. \"@%s start\" starts the server."))
 				% d->localplayername % d->localplayername)
 			.str();
 		c.recipient = d->settings.users.at(client.usernum).name;
@@ -2085,8 +2330,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	if (client.playernum == UserSettings::notConnected()) {
 		if (d->game)
-			throw DisconnectException
-				(_("Game is running already, but client has not connected fully"));
+			throw DisconnectException(_("Game is running already, but client has not connected fully"));
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
 				(_
@@ -2095,8 +2339,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 				 cmd);
 		uint8_t version = r.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
-			throw DisconnectException
-				(_("Server uses a different protocol version."));
+			throw DisconnectException(_("Server uses a different protocol version."));
 
 		std::string clientname = r.String();
 		client.build_id = r.String();
@@ -2134,20 +2377,15 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_TIME:
 		if (!d->game)
-			throw DisconnectException
-				(_("Client sent TIME command even though game is not running."));
+			throw DisconnectException(_("Client sent TIME command even though game is not running."));
 		recvClientTime(i, r.Signed32());
 		break;
 
 	case NETCMD_PLAYERCOMMAND: {
 		if (!d->game)
-			throw DisconnectException
-				(_
-				 	("Client sent PLAYERCOMMAND command even though game is not "
-				 	 "running."));
+			throw DisconnectException(_("Client sent PLAYERCOMMAND command even though game is not running."));
 		int32_t time = r.Signed32();
-		Widelands::PlayerCommand & plcmd =
-			*Widelands::PlayerCommand::deserialize(r);
+		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
 			("[Host] client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
@@ -2322,8 +2560,7 @@ void NetHost::disconnectClient
 		writeSettingUser(s, client.usernum);
 		broadcast(s);
 	} else
-		sendSystemChat
-			(_("Unknown user has left the game (%s)"), reason.c_str());
+		sendSystemChat(_("Unknown user has left the game (%s)"), reason.c_str());
 
 	log("[Host]: disconnectClient(%u, %s)\n", number, reason.c_str());
 
@@ -2340,8 +2577,18 @@ void NetHost::disconnectClient
 		client.sock = 0;
 	}
 
-	if (d->game)
+	if (d->game) {
 		checkHungClients();
+		if (m_is_dedicated) {
+			// Check whether there is at least one client connected. If not, stop the game.
+			for (uint32_t i = 0; i < d->clients.size(); ++i)
+				if (d->clients.at(i).playernum != UserSettings::notConnected())
+					return;
+			d->game->end_dedicated_game();
+			log("[Dedicated] Stopping the running game...\n");
+		}
+	}
+
 }
 
 /**

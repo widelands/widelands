@@ -513,7 +513,7 @@ mining_00 = {
    title = _ "Searching for resources",
    body = rt(p(_
 [[Okay, now we own some of the area on this mountain. Mountains are very
-important, because they contain resources: coal, iron ore, goldstone and
+important, because they contain resources: coal, iron ore, gold ore and
 granite.  Each tribe uses the resources differently, but all need mines to get
 the resources out of the ground.]]
    ) .. p(_

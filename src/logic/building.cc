@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #include "productionsite.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
@@ -109,12 +110,10 @@ Building_Descr::Building_Descr
 				}
 			} else
 				throw wexception
-					("\"%s\" has not beed defined as a building type (wrong "
-					 "declaration order?)",
+					("\"%s\" has not been defined as a building type (wrong declaration order?)",
 					 target_name.c_str());
 		} catch (_wexception const & e) {
-			throw wexception
-				("\"enhancements=%s\": %s", v->get_string(), e.what());
+			throw wexception("\"enhancements=%s\": %s", v->get_string(), e.what());
 		}
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
 	m_global = directory.find("global/") < directory.size();
@@ -318,7 +317,7 @@ Flag & Building::base_flag()
 uint32_t Building::get_playercaps() const throw () {
 	uint32_t caps = 0;
 	if (descr().is_destructible())
-		caps                                |= 1 << PCap_Bulldoze;
+		caps |= 1 << PCap_Bulldoze;
 	if (descr().enhancements().size())
 		caps |= 1 << PCap_Enhancable;
 	return caps;
@@ -734,10 +733,8 @@ void Building::draw_help
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
 		//  TODO make more here
-		UI::g_fh->draw_string
-			(dst,
-			 UI_FONT_SMALL,
-			 UI_FONT_SMALL_CLR,
+		UI::g_fh->draw_text
+			(dst, UI::TextStyle::ui_small(),
 			 pos - Point(0, 45),
 			 info_string(igbase.building_census_format()),
 			 UI::Align_Center);
@@ -749,10 +746,8 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		UI::g_fh->draw_string
-			(dst,
-			 UI_FONT_SMALL,
-			 UI_FONT_SMALL_CLR,
+		UI::g_fh->draw_text
+			(dst, UI::TextStyle::ui_small(),
 			 pos - Point(0, 35),
 			 info_string(igbase.building_statistics_format()),
 			 UI::Align_Center);

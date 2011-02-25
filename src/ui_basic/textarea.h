@@ -22,6 +22,7 @@
 
 #include "align.h"
 #include "constants.h"
+#include "graphic/font.h"
 #include "panel.h"
 
 namespace UI {
@@ -59,20 +60,20 @@ struct Textarea : public Panel {
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 std::string const & text = std::string(),
-		 Align align = Align_Left, bool multiline = false);
+		 Align align = Align_Left);
 	Textarea
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left, bool multiline = false);
+		 Align align = Align_Left);
 	Textarea
 		(Panel *  const parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const std::string & text,
-		 Align align = Align_Left, bool multiline = false);
+		 Align align = Align_Left);
 	Textarea
 		(Panel * parent,
 		 const std::string & text = std::string(),
-		 Align align = Align_Left, bool multiline = false, uint32_t width = 0);
+		 Align align = Align_Left, uint32_t width = 0);
 
 	void set_layout_mode(LayoutMode lm);
 	void set_fixed_size(const std::string & text);
@@ -83,22 +84,23 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &);
 
-	void set_font(std::string const & name, int32_t size, RGBColor fg);
+	void set_textstyle(const TextStyle & style);
+	const TextStyle & get_textstyle() const {return m_textstyle;}
+
+	void set_font(const std::string & name, int size, RGBColor clr);
 
 protected:
 	virtual void update_desired_size();
 
 private:
+	void init();
 	void collapse();
 	void expand();
 
 	LayoutMode m_layoutmode;
 	std::string m_text;
-	Align       m_align;
-	bool        m_multiline;
-	std::string m_fontname;
-	int32_t     m_fontsize;
-	RGBColor    m_fcolor;
+	Align m_align;
+	TextStyle m_textstyle;
 };
 
 }

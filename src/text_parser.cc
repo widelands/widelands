@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,19 +154,24 @@ bool Text_Parser::parse_textblock
 	return extract_more;
 }
 
-void Text_Parser::split_words(std::string in, std::vector<std::string>* plist) {
-	std::replace(in.begin(), in.end(), '\n', ' ');
-	while (in.size()) {
-		std::string::size_type const text_start = in.find_first_not_of(' ');
-		if (text_start > 0) {
-			plist->push_back(in.substr(0, text_start));
-			in.erase(0, text_start);
-		}
-		else {
-			std::string::size_type const text_end = in.find(' ');
-			plist->push_back(in.substr(0, text_end));
-			in.erase(0, text_end);
-		}
+void Text_Parser::split_words(const std::string & in, std::vector<std::string>* plist)
+{
+	std::string::size_type pos = 0;
+
+	while (pos < in.size()) {
+		while (pos < in.size() && isspace(in[pos]))
+			++pos;
+		if (pos >= in.size())
+			break;
+
+		std::string::size_type nextspace = pos;
+		while (nextspace < in.size() && !isspace(in[nextspace]))
+			++nextspace;
+
+		if (nextspace > pos)
+			plist->push_back(in.substr(pos, nextspace - pos));
+
+		pos = nextspace;
 	}
 }
 

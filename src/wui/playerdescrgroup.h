@@ -25,8 +25,11 @@
 
 #include <string>
 
-struct GameSettingsProvider;
+namespace UI {
+struct Font;
+}
 
+struct GameSettingsProvider;
 struct PlayerDescriptionGroupImpl;
 
 /** class PlayerDescriptionGroup
@@ -40,8 +43,7 @@ struct PlayerDescriptionGroup : public UI::Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
 		 uint32_t plnum,
-		 std::string const & fname = UI_FONT_NAME,
-		 uint32_t fsize = UI_FONT_SIZE_SMALL);
+		 UI::Font * font);
 	~PlayerDescriptionGroup();
 
 	void refresh();

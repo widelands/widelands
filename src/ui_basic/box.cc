@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,8 @@ Box::Box
 
 	m_scrolling(false),
 	m_scrollbar(0),
-	m_orientation(orientation)
+	m_orientation(orientation),
+	m_mindesiredbreadth(0)
 {}
 
 /**
@@ -64,12 +65,27 @@ void Box::set_scrolling(bool scroll)
 }
 
 /**
+ * Set the minimum desired breadth.
+ *
+ * The breadth is the dimension of the box that is orthogonal to
+ * its orientation.
+ */
+void Box::set_min_desired_breadth(uint32_t min)
+{
+	if (min == m_mindesiredbreadth)
+		return;
+
+	m_mindesiredbreadth = min;
+	update_desired_size();
+}
+
+/**
  * Compute the desired size based on our children.
  */
 void Box::update_desired_size()
 {
 	uint32_t totaldepth = 0;
-	uint32_t maxbreadth = 0;
+	uint32_t maxbreadth = m_mindesiredbreadth;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		uint32_t depth, breadth;

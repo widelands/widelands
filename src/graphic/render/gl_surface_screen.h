@@ -64,6 +64,8 @@ struct GLSurfaceScreen : Surface, IPixelAccess {
 	//@}
 
 private:
+	void swap_rows();
+
 	/// Size of the screen
 	uint32_t m_w, m_h;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2009-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2009-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
 		throw wexception
 			("buffer too small (%lu) for picture name temlplate of size %lu\n",
-			 sizeof(filename), picnametempl_size);
+			 static_cast<long unsigned>(sizeof(filename)), static_cast<long unsigned>(picnametempl_size));
 	strcpy(filename, data->picnametempl.c_str());
 
 	//  Find out where in the picture name template the number is. Search

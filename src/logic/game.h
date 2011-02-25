@@ -101,12 +101,12 @@ struct Game : public Editor_Game_Base {
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame (UI::ProgressWindow &, GameSettings const &);
-	void init_savegame(UI::ProgressWindow &, GameSettings const &);
+	void init_newgame (UI::ProgressWindow *, GameSettings const &);
+	void init_savegame(UI::ProgressWindow *, GameSettings const &);
 	bool run_splayer_scenario_direct(char const * mapname);
 	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow & loader_ui, Start_Game_Type);
+	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type);
 
 	virtual void postload();
 
@@ -119,6 +119,7 @@ struct Game : public Editor_Game_Base {
 	 * or \c false otherwise.
 	 */
 	bool is_loaded() {return m_state == gs_running;}
+	void end_dedicated_game();
 
 	void cleanup_for_load
 		(const bool flush_graphics = true, const bool flush_animations = true);
@@ -174,6 +175,8 @@ struct Game : public Editor_Game_Base {
 	void WriteStatistics(FileWrite &);
 
 	void sample_statistics();
+
+	const std::string & get_win_condition_string() {return m_win_condition_string;}
 
 private:
 	void SyncReset();
@@ -232,10 +235,13 @@ private:
 
 	SaveHandler          m_savehandler;
 
-	ReplayReader * m_replayreader;
-	ReplayWriter * m_replaywriter;
+	ReplayReader       * m_replayreader;
+	ReplayWriter       * m_replaywriter;
 
 	General_Stats_vector m_general_stats;
+
+	/// For save games and statistics generation
+	std::string          m_win_condition_string;
 
 private:
 	// no copying

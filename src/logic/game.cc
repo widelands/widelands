@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,12 @@
 
 #include <cstring>
 #include <string>
+
+#ifndef WIN32
+#include <unistd.h> // for usleep
+#else
+#include <windows.h>
+#endif
 
 namespace Widelands {
 
@@ -121,13 +127,14 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 Game::Game() :
 	Editor_Game_Base(create_LuaGameInterface(this)),
-	m_syncwrapper      (*this, m_synchash),
-	m_ctrl             (0),
-	m_writereplay      (true),
-	m_writesyncstream  (false),
-	m_state            (gs_notrunning),
-	m_cmdqueue         (*this),
-	m_replaywriter     (0)
+	m_syncwrapper         (*this, m_synchash),
+	m_ctrl                (0),
+	m_writereplay         (true),
+	m_writesyncstream     (false),
+	m_state               (gs_notrunning),
+	m_cmdqueue            (*this),
+	m_replaywriter        (0),
+	m_win_condition_string("not_set")
 {
 }
 
@@ -262,7 +269,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
 	try {
-		bool const result = run(loaderUI, NewSPScenario);
+		bool const result = run(&loaderUI, NewSPScenario);
 		delete m_ctrl;
 		m_ctrl = 0;
 		return result;
@@ -276,13 +283,16 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 /**
  * Initialize the game based on the given settings.
+ *
+ * \note loaderUI can be NULL, if this is run as dedicated server.
  */
 void Game::init_newgame
-	(UI::ProgressWindow & loaderUI, GameSettings const & settings)
+	(UI::ProgressWindow * loaderUI, GameSettings const & settings)
 {
-	g_gr->flush(PicMod_Menu);
-
-	loaderUI.step(_("Preloading map"));
+	if (loaderUI) {
+		g_gr->flush(PicMod_Menu);
+		loaderUI->step(_("Preloading map"));
+	}
 
 	assert(!get_map());
 	set_map(new Map);
@@ -291,12 +301,13 @@ void Game::init_newgame
 		(map().get_correct_loader(settings.mapfilename.c_str()));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
-	if (background.size() > 0)
-		loaderUI.set_background(background);
-	else
-		loaderUI.set_background(map().get_world_name());
-
-	loaderUI.step(_("Configuring players"));
+	if (loaderUI) {
+		if (background.size() > 0)
+			loaderUI->set_background(background);
+		else
+			loaderUI->set_background(map().get_world_name());
+		loaderUI->step(_("Configuring players"));
+	}
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
@@ -327,13 +338,14 @@ void Game::init_newgame
 			->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	loaderUI.step(_("Loading map"));
+	if (loaderUI)
+		loaderUI->step(_("Loading map"));
 	maploader->load_map_complete(*this, settings.scenario);
 
 	// Check for win_conditions
+	m_win_condition_string = settings.win_condition;
 	LuaCoroutine * cr = lua().run_script
-		(*g_fs, "scripting/win_conditions/" + settings.win_condition +
-		 ".lua", "win_conditions")
+		(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
 		->get_coroutine("func");
 	enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
 }
@@ -345,25 +357,31 @@ void Game::init_newgame
  * At return the game is at the same state like a map loaded with Game::init()
  * Only difference is, that players are already initialized.
  * run(loaderUI, true) takes care about this difference.
+ *
+ * \note loaderUI can be NULL, if this is run as dedicated server.
  */
 void Game::init_savegame
-	(UI::ProgressWindow & loaderUI, GameSettings const & settings)
+	(UI::ProgressWindow * loaderUI, GameSettings const & settings)
 {
-	g_gr->flush(PicMod_Menu);
-
-	loaderUI.step(_("Preloading map"));
+	if (loaderUI) {
+		g_gr->flush(PicMod_Menu);
+		loaderUI->step(_("Preloading map"));
+	}
 
 	assert(!get_map());
 	set_map(new Map);
 	try {
 		Game_Loader gl(settings.mapfilename, *this);
 
+
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp);
-		std::string background(gpdp.get_background());
-		loaderUI.set_background(background);
-
-		loaderUI.step(_("Loading..."));
+		m_win_condition_string = gpdp.get_win_condition();
+		if (loaderUI) {
+			std::string background(gpdp.get_background());
+			loaderUI->set_background(background);
+			loaderUI->step(_("Loading..."));
+		}
 		gl.load_game(settings.multiplayer);
 	} catch (...) {
 		throw;
@@ -406,10 +424,9 @@ bool Game::run_load_game(std::string filename) {
 		gl.load_game();
 	}
 
-	set_game_controller
-		(GameController::createSinglePlayer(*this, true, player_nr));
+	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
 	try {
-		bool const result = run(loaderUI, Loaded);
+		bool const result = run(&loaderUI, Loaded);
 		delete m_ctrl;
 		m_ctrl = 0;
 		return result;
@@ -431,9 +448,11 @@ void Game::postload()
 {
 	Editor_Game_Base::postload();
 
-	assert(get_ibase() != 0);
-
-	get_ibase()->postload();
+	if (g_gr) {
+		assert(get_ibase() != 0);
+		get_ibase()->postload();
+	} else
+		log("Note: Widelands runs without graphics, probably in dedicated server mode!\n");
 }
 
 
@@ -453,9 +472,11 @@ void Game::postload()
  * 3.  After this has happened, the game graphics are loaded.
  *
  * \return true if a game actually took place, false otherwise
+ *
+ * \note loader_ui can be NULL, if this is run as dedicated server.
  */
 bool Game::run
-	(UI::ProgressWindow & loader_ui, Start_Game_Type const start_game_type)
+	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)
 {
 	postload();
 
@@ -464,8 +485,10 @@ bool Game::run
 		if (start_game_type == NewNonScenario) {
 			std::string step_description = _("Creating player infrastructure");
 			iterate_players_existing(p, nr_players, *this, plr) {
-				step_description += ".";
-				loader_ui.step(step_description);
+				if (loader_ui) {
+					step_description += ".";
+					loader_ui->step(step_description);
+				}
 				plr->create_default_infrastructure();
 
 			}
@@ -540,24 +563,39 @@ bool Game::run
 
 	SyncReset();
 
-	load_graphics(loader_ui);
+	if (loader_ui) {
+		load_graphics(*loader_ui);
 
-	g_sound_handler.change_music("ingame", 1000, 0);
+		g_sound_handler.change_music("ingame", 1000, 0);
 
-	m_state = gs_running;
+		m_state = gs_running;
 
-	get_ibase()->run();
+		get_ibase()->run();
 
-	g_sound_handler.change_music("menu", 1000, 0);
+		g_sound_handler.change_music("menu", 1000, 0);
 
-	cleanup_objects();
-	delete get_ibase();
-	set_ibase(0);
+		cleanup_objects();
+		delete get_ibase();
+		set_ibase(0);
 
-	g_gr->flush(PicMod_Game);
-	g_anim.flush();
+		g_gr->flush(PicMod_Game);
+		g_anim.flush();
 
-	m_state = gs_notrunning;
+		m_state = gs_notrunning;
+	} else {
+		// dedicated server
+		m_state = gs_running;
+		//handle network
+		while (m_state == gs_running) {
+#ifndef WIN32
+			if (usleep(100) == -1)
+				break;
+#else
+			Sleep(10);
+#endif
+			think();
+		}
+	}
 
 	return true;
 }
@@ -578,13 +616,19 @@ void Game::think()
 	if (m_state == gs_running) {
 		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
 
-		g_gr->animate_maptextures(get_gametime());
+		if (g_gr) // not in dedicated server mode
+			g_gr->animate_maptextures(get_gametime());
 
 		// check if autosave is needed
 		m_savehandler.think(*this, WLApplication::get()->get_time());
 	}
 }
 
+/// (Only) called by the dedicated server, to end a game once all players left
+void Game::end_dedicated_game() {
+	assert(not g_gr);
+	m_state = gs_notrunning;
+}
 
 /**
  * Cleanup for load

@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"POT-Creation-Date: 2011-02-18 14:37+0000\n"
 "PO-Revision-Date: 2010-12-11 17:57+0000\n"
 "Last-Translator: Júlio Cezar Santos Pires <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:15+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-19 04:34+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
 msgstr ""
 
-#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
 msgstr ""
 
@@ -127,6 +127,10 @@ msgstr "Atol"
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
 msgstr "Bárbaros - O Segundo Império"
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -347,6 +351,11 @@ msgstr ""
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
 msgstr "Labirinto Místico"
+
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+msgid "Not yet implemented"
+msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -821,3 +830,25 @@ msgstr ""
 #~ "tempos. Quando sua tribo veio para este lugar, você estava certo que ele "
 #~ "oferecia espaço suficiente para uma vida pacífica. Mas pode sua tribo viver "
 #~ "em paz com seus vizinhos?"
+
+#~ msgid ""
+#~ "Six months ago, Lutius - a young general of the Empire - was send with 150 "
+#~ "soldiers to the frontier beyond the northern forests where Barbarian-tribes "
+#~ "and official Empire-land are crossing. His task was to defend the Empire-"
+#~ "land. At first, everything was calm. He even talked to a few barbarian "
+#~ "children and thought about a peaceful life - side by side with this archaic "
+#~ "folk. He began to feel safer and his army began to drop their attention off "
+#~ "the potential enemy. That was their fault. At one night in march his "
+#~ "unprepared army was attacked by 100 barbarian footmen and was completely "
+#~ "scattered. Only with his bare life he and a handful of his soldiers survived."
+#~ msgstr ""
+#~ "Seis meses atrás, Lutius - um jovem general do Império - foi enviado com 150 "
+#~ "soldados para a fronteira além das florestas do norte, onde terras oficiais "
+#~ "do Império e tribos bárbaras se cruzam. Sua tarefa era defender a terra do "
+#~ "Império. No início, tudo estava calmo. Ele até conversou com algumas "
+#~ "crianças bárbaras e pensou em uma vida tranquila - lado a lado com essa "
+#~ "gente arcaica. Ele começou a se sentir mais seguro e seu exército começou a "
+#~ "cair a sua atenção para o inimigo potencial. Essa foi sua falha. Em uma "
+#~ "noite de março o seu exército despreparado foi atacado por 100 homens de "
+#~ "infantaria dos bárbaros, e foi completamente disperso. Somente com suas "
+#~ "vidas ele e um punhado de seus soldados sobreviveram."
