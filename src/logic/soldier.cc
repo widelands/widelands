@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -861,28 +861,30 @@ void Soldier::attack_update(Game & game, State & state)
 	{
 		// Injured soldiers will try to return to safe site at home.
 		if (state.ui32var3 > get_current_hitpoints() and defenders) {
-			state.coords = Coords(0, 0);
+			state.coords = Coords::Null();
 			state.objvar1 = 0;
 		}
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
 		// destroyed.
-		BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
-		upcast(MilitarySite, newsite, newimm);
-		if (newsite and (&newsite->owner() == &owner())) {
-			if (upcast(SoldierControl, ctrl, newsite)) {
-				state.objvar1 = 0;
-				if
-					(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
-					 location->base_flag().get_position()
-					 !=
-					 newsite ->base_flag().get_position())
-				{
-					molog("[attack] enemy belongs to us now, move in\n");
-					pop_task(game);
-					set_location(newsite);
-					newsite->update_soldier_request();
-					return schedule_act(game, 10);
+		if (state.coords) {
+			BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
+			upcast(MilitarySite, newsite, newimm);
+			if (newsite and (&newsite->owner() == &owner())) {
+				if (upcast(SoldierControl, ctrl, newsite)) {
+					state.objvar1 = 0;
+					if
+						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
+						location->base_flag().get_position()
+						!=
+						newsite ->base_flag().get_position())
+					{
+						molog("[attack] enemy belongs to us now, move in\n");
+						pop_task(game);
+						set_location(newsite);
+						newsite->update_soldier_request();
+						return schedule_act(game, 10);
+					}
 				}
 			}
 		}
@@ -922,7 +924,7 @@ void Soldier::attack_update(Game & game, State & state)
 			molog
 				("[attack] failed to move towards building flag, cancel attack "
 				 "and return home!\n");
-			state.coords = Coords(0, 0);
+			state.coords = Coords::Null();
 			state.objvar1 = 0;
 			return schedule_act(game, 10);
 		}
