@@ -328,8 +328,11 @@ If the graphics system is to be replaced at runtime, the function must be
 called after that has happened.
 ===============
 */
-void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui) {
+void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
+{
 	loader_ui.step(_("Loading world data"));
+	g_gr->flush_animations();
+
 	m_map->load_graphics(); // especially loads world data
 
 	container_iterate_const(Tribe_Vector, m_tribes, i) {

@@ -580,6 +580,7 @@ bool Game::run
 
 		g_gr->flush(PicMod_Game);
 		g_anim.flush();
+		g_gr->flush_animations();
 
 		m_state = gs_notrunning;
 	} else {
