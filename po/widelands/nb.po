@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-21 13:15+0100\n"
-"PO-Revision-Date: 2011-01-12 18:16+0000\n"
+"PO-Revision-Date: 2011-03-01 22:22+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-22 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-03-02 04:33+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: ../../src/computer_player.cc:38
@@ -743,7 +743,7 @@ msgstr "stedets program %s"
 
 #: ../../src/writeHTML.cc:1105
 msgid "Documentation for program command worker"
-msgstr ""
+msgstr "Dokumentasjon for programkommando arbeider"
 
 #: ../../src/writeHTML.cc:1107
 msgid "worker"
@@ -756,7 +756,7 @@ msgstr "%s's program %s"
 
 #: ../../src/writeHTML.cc:1133
 msgid "Documentation for program command sleep"
-msgstr ""
+msgstr "Dokumentasjon for programkommando sov"
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
@@ -769,7 +769,7 @@ msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command animate"
-msgstr ""
+msgstr "Dokumentasjon for programkommando animer"
 
 #: ../../src/writeHTML.cc:1155
 msgid "animate"
@@ -777,7 +777,7 @@ msgstr "animer"
 
 #: ../../src/writeHTML.cc:1174
 msgid "Documentation for program command consume"
-msgstr ""
+msgstr "Dokumentasjon for programkommando forbruk"
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
@@ -785,7 +785,7 @@ msgstr "konsumer"
 
 #: ../../src/writeHTML.cc:1217 ../../src/writeHTML.cc:1254
 msgid "Documentation for program command produce"
-msgstr ""
+msgstr "Dokumentasjon for programkommando produser"
 
 #: ../../src/writeHTML.cc:1219
 msgid "produce"
@@ -801,7 +801,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1322
 msgid "Documentation for program command check_soldier"
-msgstr "Dokumentasjon for programkommandoen check_soldier"
+msgstr "Dokumentasjon for programkommando sjekk_soldat"
 
 #: ../../src/writeHTML.cc:1324
 msgid "check soldier"
@@ -825,7 +825,7 @@ msgstr "unnvik"
 
 #: ../../src/writeHTML.cc:1346
 msgid "Documentation for program command train"
-msgstr "Dokumentasjon for programkommandoen train"
+msgstr "Dokumentasjon for programkommando tren"
 
 #: ../../src/writeHTML.cc:1348
 msgid "train"
@@ -837,7 +837,7 @@ msgstr "Dokumentasjon for programkommandoen playFX"
 
 #: ../../src/writeHTML.cc:1387
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Dokumentasjon for programkommando konstruer"
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
@@ -2445,25 +2445,25 @@ msgstr "%s sendte signal om å starte spillet."
 
 #: ../../src/network/nethost.cc:1119
 msgid "Available saved games:<br>"
-msgstr ""
+msgstr "Tilgjengelige lagrede spill:<br>"
 
 #: ../../src/network/nethost.cc:1139
 msgid "Available maps:<br>"
-msgstr ""
+msgstr "Tilgjengelige kart:<br>"
 
 #: ../../src/network/nethost.cc:1183
 #, c-format
 msgid "Can not use \"%s\" as saved game file!"
-msgstr ""
+msgstr "Kan ikke bruke «%s» som en fil med lagret spill!"
 
 #: ../../src/network/nethost.cc:1207
 #, c-format
 msgid "Can not use \"%s\" as map file!"
-msgstr ""
+msgstr "Kan ikke bruke «%s» som en kartfil!"
 
 #: ../../src/network/nethost.cc:1219 ../../src/network/nethost.cc:1225
 msgid "Invalid value # for player - should be a player number"
-msgstr ""
+msgstr "Ugyldig verdi # for spiller - burde være et spillernummer"
 
 #: ../../src/network/nethost.cc:1253
 #, c-format
@@ -3231,7 +3231,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:59
 msgid "List of games:"
-msgstr ""
+msgstr "Liste over spill:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:63
 msgid "Name of your server:"
@@ -3248,11 +3248,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:91
 msgid "Open a new game"
-msgstr ""
+msgstr "Åpne et nytt spill"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:151
 msgid "Points"
-msgstr ""
+msgstr "Poeng"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:152
 msgid "Server"
@@ -3264,7 +3264,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:44
 msgid "List of games in your local network:"
-msgstr ""
+msgstr "Liste over spill på ditt lokale nettverk:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:48
 msgid "Your nickname:"
@@ -3311,7 +3311,7 @@ msgstr "Bruk"
 
 #: ../../src/ui_fsmenu/options.cc:75
 msgid "min."
-msgstr ""
+msgstr "min."
 
 #: ../../src/ui_fsmenu/options.cc:81
 msgid "days"
@@ -4005,7 +4005,7 @@ msgstr "Zoom"
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr ""
+msgstr "<ledig>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
@@ -4409,7 +4409,7 @@ msgstr "Opprett mappe"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:208
 msgid "unnamed"
-msgstr ""
+msgstr "navnløs"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 msgid "<Directory>"
@@ -4518,7 +4518,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tool Menu"
-msgstr ""
+msgstr "Verktøymeny"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Change height"
