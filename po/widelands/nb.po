@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-02-21 13:15+0100\n"
-"PO-Revision-Date: 2011-03-01 22:22+0000\n"
+"PO-Revision-Date: 2011-03-04 21:31+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-02 04:33+0000\n"
+"X-Launchpad-Export-Date: 2011-03-05 04:32+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1390,12 +1390,12 @@ msgstr[1] "%u(+%u) soldater"
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "Soldatene har bemannet din %s."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Fienden har beseiret soldatene dine ved %s."
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
@@ -1404,7 +1404,7 @@ msgstr "Militær bygning tapt!"
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Soldatene dine har beseiret fienden ved %s."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
@@ -1418,7 +1418,7 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:671
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr ""
+msgstr "Din %s er under angrep.</p>"
 
 #: ../../src/logic/militarysite.cc:679
 msgid "You are under attack"
@@ -1433,7 +1433,7 @@ msgstr "spiller %u finnes ikke"
 #: ../../src/logic/playercommand.cc:136
 #, c-format
 msgid "player command: %s"
-msgstr ""
+msgstr "spillerkommando: %s"
 
 #: ../../src/logic/playercommand.cc:178
 #, c-format
@@ -1550,7 +1550,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1352
 #, c-format
 msgid "player message: %s"
-msgstr ""
+msgstr "spillermelding: %s"
 
 #: ../../src/logic/production_program.cc:87
 #, c-format
@@ -1686,7 +1686,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:721
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "forventet vare_type1[,vare_type2[,...]][:N] ..."
 
 #: ../../src/logic/production_program.cc:820
 msgid " is missing"
@@ -1734,7 +1734,7 @@ msgstr "prosent"
 #: ../../src/logic/production_program.cc:1175
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Tom for ressurser!"
 
 #: ../../src/logic/production_program.cc:1196
 msgid "Mine empty"
@@ -1804,7 +1804,7 @@ msgstr ""
 #: ../../src/logic/ship.cc:263
 #, c-format
 msgid "loading ship: %s"
-msgstr ""
+msgstr "laster skip: %s"
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
@@ -1817,7 +1817,7 @@ msgstr "forventet positivt heltall >= %u men fant \"%s\""
 
 #: ../../src/logic/soldier.cc:182
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"anim_navn[,annen_anim,...]\""
 
 #: ../../src/logic/soldier.cc:1250
 #, c-format
@@ -1915,11 +1915,11 @@ msgstr "En geolog fant ressurser."
 #: ../../src/logic/worker.cc:1737
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Din %s kan ikke finne en vei hjem og vil sannsynligvis dø."
 
 #: ../../src/logic/worker.cc:1744
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Arbeider gikk seg bort!"
 
 #: ../../src/logic/worker.cc:2938
 #, c-format
@@ -1969,7 +1969,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:306
 #, c-format
 msgid "reading path: %s"
-msgstr ""
+msgstr "leser sti: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:369
 #, c-format
@@ -2136,12 +2136,12 @@ msgstr "eierskap: %s"
 #: ../../src/map_io/widelands_map_object_packet.cc:99
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "ukjent objekthode %u"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:102
 #, c-format
 msgid "map objects: %s"
-msgstr ""
+msgstr "kartobjekter: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
@@ -2565,7 +2565,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:2450
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Startet overføring av filen %s til %s!"
 
 #: ../../src/network/nethost.cc:2471
 msgid "Client requests file part that does not exist."
@@ -2852,7 +2852,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Klienter"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:194 ../../src/ui_fsmenu/launchSPG.cc:277
 msgid "(no map)"
@@ -2865,7 +2865,7 @@ msgstr "Verten har ikke valgt et kart eller lagret spill enda."
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
 msgid "Scenario"
-msgstr ""
+msgstr "Scenario"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
@@ -2886,7 +2886,7 @@ msgstr "Type: "
 
 #: ../../src/ui_fsmenu/launchMPG.cc:365
 msgid "Saved game is directory"
-msgstr ""
+msgstr "Lagret spill er en mappe"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:367
 msgid ""
@@ -2937,14 +2937,16 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"Akkurat nå er du %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:444
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "Klikk på «?» i øvre høyre hjørnet for å få hjelp."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:505
 msgid "Saved players are:"
-msgstr ""
+msgstr "Lagrede spillere er:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
@@ -2994,6 +2996,8 @@ msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
 msgstr ""
+"På venstresiden er en liste med alle klientene, inkludert deg. Med knappen "
+"bak kallenavnet ditt, kan du endre din rolle. Tilgjengelige roller er:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid ""
@@ -3082,7 +3086,7 @@ msgstr "Spillertype"
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 #: ../../src/wui/multiplayersetupgroup.cc:446
 msgid "Team"
-msgstr ""
+msgstr "Lag"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Player's tribe"
