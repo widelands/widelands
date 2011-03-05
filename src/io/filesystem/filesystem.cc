@@ -74,17 +74,12 @@ FileSystem::FileSystem()
 
 /**
  * \param path A file or directory name
- * \return True if ref path is absolute, false otherwise
+ * \return True if ref path is absolute and within this FileSystem, false otherwise
  */
 bool FileSystem::pathIsAbsolute(std::string const & path) const {
 	std::string::size_type const path_size = path  .size();
 	std::string::size_type const root_size = m_root.size();
 
-#ifdef WIN32
-	// Handle drive letters on windows
-	if (path.size() > 3 && path[1] == ':' && path[2] == '\\')
-		return true;
-#endif
 	if (path_size < root_size)
 		return false;
 
@@ -94,6 +89,12 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 	if (path.compare(0, m_root.size(), m_root))
 		return false;
 
+#ifdef WIN32
+	if (path.size() >= 3 && path[1] == ':' && path[2] == '\\') //"C:\"
+	{
+		return true;
+	}
+#endif
 	assert(root_size < path_size); //  Otherwise an invalid read happens below.
 	if (path[root_size] != m_filesep)
 		return false;
@@ -299,11 +300,9 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 		canonpath += '\\';
 	}
 
-	if (canonpath.size()) canonpath.erase(canonpath.end() - 1); //remove trailing slash
+	//remove trailing slash
+	if (canonpath.size()>1) canonpath.erase(canonpath.end() - 1); 
 #endif
-
-	//debug info
-	//printf("canonpath = %s\n", canonpath.c_str());
 
 	return canonpath;
 }

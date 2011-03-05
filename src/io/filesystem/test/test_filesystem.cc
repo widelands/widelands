@@ -126,6 +126,12 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	// ...but not a '..' coming from two different strings...
 
 	TEST_CANONICALIZE_NAME("/home/test/.", "./path", "/home/test/path");
+
+#ifdef WIN32
+	// Check drive letter handling.
+	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").FS_CanonicalizeName("C:\\"), "C:");
+	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").FS_CanonicalizeName("D:\\"), "C:\\D:"); 
+#endif
 }
 
 // Skip testing tilde expansion on windows.
