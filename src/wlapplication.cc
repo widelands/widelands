@@ -1506,8 +1506,6 @@ void WLApplication::mainmenu()
 					Widelands::Game game;
 					try {
 						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
-					} catch (Widelands::game_data_error const & e) {
-						log("Scenario not started: Game data error: %s\n", e.what());
 					} catch (...) {
 						emergency_save(game);
 						throw;
