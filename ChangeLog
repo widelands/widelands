@@ -1,3 +1,6 @@
+### Build 15.1
+- Fixed a potential security issue in internet games
+
 ### Build 15 rc2
 - Removed registering functionality for metaserver. This is to be compatible
   with future changes to the metaserver.

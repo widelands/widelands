@@ -88,6 +88,9 @@ struct NetClient :
 	std::vector<ChatMessage> const & getMessages() const;
 
 private:
+	/// for unique backupname
+	std::string backupFileName(std::string & path) {return path + "~backup";}
+
 	NetTransferFile * file;
 
 	void syncreport();

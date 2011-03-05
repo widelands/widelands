@@ -112,6 +112,10 @@ std::string FileSystem::fixCrossFile(std::string path) {
 		temp = fixedpath.at(i);
 		if (temp == "\\")
 			fixedpath.at(i) = m_filesep;
+		// As a security measure, eat all dots and tildes away when file is
+		// tranferred over network.
+		if (temp == "." || temp == "~")
+			 fixedpath.at(i) = '-';
 	}
 	return fixedpath;
 #endif
