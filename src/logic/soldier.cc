@@ -1359,6 +1359,24 @@ void Soldier::battle_update(Game & game, State &)
 		return pop_task(game);
 	}
 
+	Map & map = game.map();
+	Soldier & opponent = *m_battle->opponent(*this);
+	if (opponent.get_position() != get_position()) {
+		if (upcast(Building, building, map[get_position()].get_immovable())) {
+			// Note that this does not use the "leavebuilding" task,
+			// because that task is geared towards orderly workers leaving
+			// their location, whereas this case can also happen when
+			// a player starts a construction site over a waiting soldier.
+			molog("[battle] we are in a building, leave it\n");
+			return
+				start_task_move
+					(game,
+					 WALK_SE,
+					 &descr().get_right_walk_anims(does_carry_ware()),
+					 true);
+		}
+	}
+
 	if (stayHome()) {
 		if (this == m_battle->first()) {
 			molog("[battle] stayHome, so reverse roles\n");
@@ -1370,8 +1388,6 @@ void Soldier::battle_update(Game & game, State &)
 			}
 		}
 	} else {
-		Soldier & opponent = *m_battle->opponent(*this);
-
 		if (opponent.stayHome() and (this == m_battle->second())) {
 			// Wait until correct roles are assigned
 			new Battle(game, *m_battle->second(), *m_battle->first());
@@ -1379,16 +1395,16 @@ void Soldier::battle_update(Game & game, State &)
 		}
 
 		if (opponent.get_position() != get_position()) {
-			Map & map = game.map();
-			uint32_t const dist =
-				map.calc_distance(get_position(), opponent.get_position());
+			Coords dest = opponent.get_position();
+
+			if (upcast(Building, building, map[dest].get_immovable()))
+				dest = building->base_flag().get_position();
+
+			uint32_t const dist = map.calc_distance(get_position(), dest);
 
 			if (dist >= 2 || this == m_battle->first()) {
-				//  Only make small steps at a time, so we can adjust to the
-				//  opponent's change of position.
-				Coords dest = opponent.get_position();
-				if (upcast(Building, building, map[dest].get_immovable()))
-					dest = building->base_flag().get_position();
+				// Only make small steps at a time, so we can adjust to the
+				// opponent's change of position.
 				if
 					(start_task_movepath
 					 	(game,
@@ -1398,8 +1414,8 @@ void Soldier::battle_update(Game & game, State &)
 					 	 false, (dist + 3) / 4))
 				{
 					molog
-						("[battle] player %u's soldier started task_movepath\n",
-						 owner().player_number());
+						("[battle] player %u's soldier started task_movepath to (%i,%i)\n",
+						 owner().player_number(), dest.x, dest.y);
 					return;
 				} else {
 					BaseImmovable const * const immovable_position =
@@ -1685,8 +1701,10 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 	molog ("CombatWalkingStart: %i\n", m_combat_walkstart);
 	molog ("CombatWalkEnd:      %i\n", m_combat_walkend);
 	molog ("HasBattle:   %s\n", m_battle ? "yes" : "no");
-	if (m_battle)
+	if (m_battle) {
 		molog("BattleSerial: %u\n", m_battle->serial());
+		molog("Opponent: %u\n", m_battle->has_opponent(*this) ? m_battle->opponent(*this)->serial() : 0);
+	}
 }
 
 /*
