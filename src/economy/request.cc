@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -179,7 +179,7 @@ void Request::Read
 
 						if (upcast(Worker, worker, obj)) {
 							transfer = worker->get_transfer();
-							if (m_type != WORKER || worker->worker_index() != m_index) {
+							if (m_type != WORKER || !worker->descr().can_act_as(m_index)) {
 								log("Request::Read: incompatible transfer type\n");
 								if (!fudged_type)
 									throw wexception
