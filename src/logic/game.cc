@@ -588,11 +588,12 @@ bool Game::run
 		m_state = gs_running;
 		//handle network
 		while (m_state == gs_running) {
+			// TODO this should be improved.
 #ifndef WIN32
-			if (usleep(100) == -1)
-				break;
+			if (usleep(200) == -1)
+				return;
 #else
-			Sleep(10);
+			Sleep(1);
 #endif
 			think();
 		}
