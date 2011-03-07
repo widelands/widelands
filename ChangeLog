@@ -85,6 +85,16 @@
 - Fixed the translation system - users should now be able to select any
   compiled and installed translation of Widelands.
 - Removed scons and replaced it with cmake.
+- Fixed two potential security issues (internet gaming)
+- Fixed bug #729772: Selection of Widelands.ttf via options menu
+- Fixed bug #687342: No longer complain when a master miner is transferred to
+  a mine to fill a junior position.
+- Fixed bug #612348: Soldiers always move out of buildings to battle
+- Fixed bug #670980: Cmd_EnemyFlagAction::Write handles disappeared flag
+- Fixed bug #697375: Handle state.coords == Null() correctly in soldier attack code
+- Fixed bug #691909: Compatibility with old savegames with barbarian battlearena
+- Fixed bug #722789: Always flush animations before loading
+- Fixed bug #724169: Military site window no longer changes size erratically
 - Fixed bug #708328: infinite loop(s) in building_statistics_menu.cc
 - Fixed bug #720338: Options show wrong resulution as selected if no
   ~/.widelands/conf exists
