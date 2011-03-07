@@ -590,8 +590,8 @@ bool Game::run
 		while (m_state == gs_running) {
 			// TODO this should be improved.
 #ifndef WIN32
-			if (usleep(200) == -1)
-				return;
+			if (usleep(100) == -1)
+				break;
 #else
 			Sleep(1);
 #endif
