@@ -67,7 +67,7 @@ FileSystem::FileSystem()
 	m_root = getWorkingDirectory();
 	m_filesep = '\\';
 #else
-	m_root = "";  // must not contain filesep! see m_root declaration
+	m_root = "/";
 	m_filesep = '/';
 #endif
 }
