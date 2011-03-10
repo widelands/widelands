@@ -1128,9 +1128,9 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	typedef std::map<uint32_t, const Worker *> TWorkerMap;
 	TWorkerMap workermap;
 	container_iterate_const
-		(std::vector<OPtr<Worker> >, warehouse.m_incorporated_workers, i)
+		(std::vector<Worker *>, warehouse.m_incorporated_workers, i)
 	{
-		Worker const & w = *i.current->get(game);
+		Worker const & w = *(*i);
 		assert(mos.is_object_known(w));
 		workermap.insert
 			(std::pair<uint32_t, const Worker *>

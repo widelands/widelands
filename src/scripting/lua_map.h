@@ -280,7 +280,7 @@ struct L_HasSoldiers {
 	virtual int set_soldiers(lua_State * L) = 0;
 	virtual int get_soldiers(lua_State * L) = 0;
 
-	typedef std::vector<const Widelands::Soldier *> SoldiersList;
+	typedef std::vector<Widelands::Soldier *> SoldiersList;
 	typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
 	typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
 
