@@ -1,7 +1,6 @@
 -- =================================
 -- Island Hopping Fun Map Scripting 
 -- =================================
-
 use("aux", "coroutine")
 use("aux", "infrastructure")
 use("aux", "formatting")
@@ -45,6 +44,12 @@ end
 function add_workers(hq, workers) 
    for name, count in pairs(workers) do
       hq:set_workers(name, hq:get_workers(name) + count)
+   end
+end
+
+function add_soldiers(hq, soldiers) 
+   for descr, count in pairs(soldiers) do
+      hq:set_soldiers(descr, hq:get_soldiers(descr) + count)
    end
 end
 
@@ -140,7 +145,7 @@ function initialize()
    place_headquarters()
 
    for idx,plr in ipairs(game.players) do
-      run(function() run_island1(plr) end)
+      run(function() run_island(plr, 1) end)
    end
 end
 

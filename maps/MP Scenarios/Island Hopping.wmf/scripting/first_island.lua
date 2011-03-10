@@ -1,26 +1,42 @@
 -- ==========================
 -- Code for the first island 
 -- ==========================
-_nplayers_finished_first_island = 0
-_island1_finishs = {
-   map:get_field(136,125):region(3), -- player 1
-   map:get_field(136, 70):region(3), -- player 2
-   map:get_field( 57, 68):region(3), -- player 3
-   map:get_field( 56,122):region(3)  -- player 4
-}
-_island1_finish_rewards = {
-   { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish 
-   { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish 
-   { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish 
-   { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish 
+_nplayers_finished_island = { 0, 0 }
+_start_fields = {
+   { -- Island 1
+      map.player_slots[1].starting_field,
+      map.player_slots[2].starting_field,
+      map.player_slots[3].starting_field,
+      map.player_slots[4].starting_field
+   },
+   { -- Island 2
+      map:get_field(143, 148),
+      map:get_field(142,  45),
+      map:get_field( 51,  44),
+      map:get_field( 49, 147)
+   }
 }
 
--- TODO: move into its own file
-_island2_starts = {
-   map:get_field(143, 148),
-   map:get_field(142,  45),
-   map:get_field( 51,  44),
-   map:get_field( 49, 147)
+_finish_areas = {
+   { -- Island 1
+      map:get_field(136,125):region(3), -- player 1
+      map:get_field(136, 70):region(3), -- player 2
+      map:get_field( 57, 68):region(3), -- player 3
+      map:get_field( 56,122):region(3)  -- player 4
+   },
+   { -- Island 2 : TODO
+   }
+}
+
+_finish_rewards = {
+   { -- Island 1
+      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish 
+      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish 
+      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish 
+      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish 
+   },
+   { -- Island 2 TODO
+   }
 }
 
 -- TODO: remove this
@@ -28,42 +44,32 @@ function cheat()
    game.players[1]:place_building("castle", map:get_field(136, 125), 0, 1)
 end
 
-function run_island1(plr)
-   sleep(200)
-   
-   while not check_for_buildings(plr, {castle=1}, _island1_finishs[plr.number]) do
-      sleep(1237)
-   end
-   _nplayers_finished_first_island = _nplayers_finished_first_island + 1
-
-   local sf = map.player_slots[plr.number].starting_field
-   finished_island(plr, sf, _island2_starts[plr.number],
-      1, _nplayers_finished_first_island,
-      _island1_finish_rewards[_nplayers_finished_first_island]
-   )
-
-   -- TODO: inform at the beginning about the rewards for finishing this island
-   -- TODO: message when reaching island 2
-   -- TODO: write island 2
-   -- run_island2(plr)
-end
-
--- TODO: transfer of soldiers?
-function finished_island(plr, old_hq_field, new_hq_field, island_no, rank, rewards)
-   -- TODO: next lines into their own function
-   send_to_all(rt(
-      p(msgs_finished_island[rank]:format(plr.number, island_no)) .. 
-      p(finished_island_continues:format(format_rewards(rewards)))
-   ))
+-- TODO: rename this file to something more true
+-- TODO: transfer of soldiers
+function _hop_to_next_island(plr, island_idx)
+   local old_hq_field = _start_fields[island_idx][plr.number]
+   local new_hq_field = _start_fields[island_idx + 1][plr.number]
 
    -- Remove all other workers and immovable of this player
    local workers = {}
    local wares = {}
+   local soldiers = {}
    for x=0, map.width-1 do
       for y=0, map.height-1 do
          local f = map:get_field(x, y)
          local imm = f.immovable
          if imm and imm.owner == plr then
+            -- salvage soldiers
+            -- TODO: warehouse set_soldiers cannot reduce the number of soldiers!
+            -- TODO: write a test case for this problem, similar to this and fix this bug.
+            if imm.get_soldiers then
+               for descr, count in pairs(imm:get_soldiers("all")) do
+                  soldiers[descr] = count
+                  imm:set_soldiers(descr, 0)
+               end
+               if imm.set_workers then imm:set_workers("soldier", 0) end
+            end
+
             -- salvage workers
             if imm.get_workers then
                for name, count in pairs(imm:get_workers("all")) do
@@ -88,9 +94,45 @@ function finished_island(plr, old_hq_field, new_hq_field, island_no, rank, rewar
       end
    end
 
-   -- Place the new HQ, completely empty
+   -- Place the new HQ
    local new_hq = plr:place_building("headquarters", new_hq_field, false, true)
+
+   -- Fill it with all the stuff from the last island
+   add_soldiers(new_hq, soldiers)
    add_workers(new_hq, workers)
    add_wares(new_hq, wares)
-   add_wares(new_hq, rewards)
+
+   return new_hq
 end
+
+function _wait_for_castle_on_finish_area(plr, island_idx)
+   local finish_area = _finish_areas[island_idx][plr.number]
+   while not check_for_buildings(plr, {castle=1}, finish_area) do
+      sleep(1237)
+   end
+end
+
+function run_island(plr, island_idx)
+   sleep(200)
+   -- TODO: special case island 3
+   
+   -- TODO: inform at the beginning about the rewards for finishing this island
+   _wait_for_castle_on_finish_area(plr, island_idx)
+
+   local rank = _nplayers_finished_island[island_idx] + 1
+   _nplayers_finished_island[island_idx] = rank
+
+   -- TODO: next lines into their own function
+   local rewards = _finish_rewards[island_idx][rank]
+   send_to_all(rt(
+      p(msgs_finished_island[rank]:format(plr.number, island_idx)) .. 
+      p(finished_island_continues:format(format_rewards(rewards)))
+   ))
+
+
+   local new_hq = _hop_to_next_island(plr, island_idx)
+   add_wares(new_hq, rewards)
+
+   run_island(plr, island_idx + 1)
+end
+
