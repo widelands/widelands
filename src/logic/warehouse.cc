@@ -491,7 +491,7 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 		m_incorporated_workers.pop_back();
 
 		if (upcast(Game, game, &egbase))
-			if(egbase.objects().object_still_available(w))
+			if (egbase.objects().object_still_available(w))
 				w->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 	}
 
@@ -630,18 +630,6 @@ WareList const & Warehouse::get_workers() const
 {
 	return m_supply->get_workers();
 }
-
-std::vector<Soldier *> Warehouse::get_soldiers(Editor_Game_Base & egbase) const
-{
-	std::vector<Soldier *> rv;
-
-	container_iterate_const(std::vector<Worker *>, m_incorporated_workers, i)
-		if (upcast(Soldier, soldier, *i.current))
-			rv.push_back(soldier);
-
-	return rv;
-}
-
 
 /// Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
@@ -1283,6 +1271,24 @@ void Warehouse::check_remove_stock(Game & game)
 		worker.start_task_leavebuilding(game, true);
 		break;
 	}
+}
+
+/*
+ * SoldierControl implementations
+ */
+std::vector<Soldier *> Warehouse::get_soldiers() const
+{
+	std::vector<Soldier *> rv;
+
+	container_iterate_const(std::vector<Worker *>, m_incorporated_workers, i)
+		if (upcast(Soldier, soldier, *i.current))
+			rv.push_back(soldier);
+
+	return rv;
+}
+int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
+	incorporate_worker(egbase, soldier);
+	return 0;
 }
 
 

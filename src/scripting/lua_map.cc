@@ -1747,15 +1747,14 @@ int L_Warehouse::set_soldiers(lua_State * L) {
 
 // documented in parent class
 int L_Warehouse::get_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	Warehouse * wh = get(L, egbase);
+	Warehouse * wh = get(L, get_egbase(L));
 	Tribe_Descr const & tribe = wh->owner().tribe();
 
 	Soldier_Descr const & soldier_descr =  //  soldiers
 			 ref_cast<Soldier_Descr const, Worker_Descr const>
 						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
-	SoldiersList in_warehouse = wh->get_soldiers(egbase);
+	SoldiersList in_warehouse = wh->get_soldiers();
 
 	return m_handle_get_soldiers(L, soldier_descr, in_warehouse);
 }
