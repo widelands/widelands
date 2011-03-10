@@ -152,6 +152,7 @@ public:
 		throw wexception("Not implemented for a Warehouse!");
 	}
 	int incorporateSoldier(Editor_Game_Base &, Soldier &);
+	int outcorporateSoldier(Editor_Game_Base &, Soldier &);
 
 	virtual bool fetch_from_flag(Game &);
 

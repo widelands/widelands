@@ -144,13 +144,19 @@ function warehouse_tests:test_set_soldiers()
 end
 function warehouse_tests:test_reduce_soldiers_number()
    self.w:set_soldiers{
+      [{0,0,0,0}] = 10,
+      [{1,1,0,1}] = 20,
+   }
+   assert_equal(10, self.w:get_soldiers({0,0,0,0}))
+   assert_equal(20, self.w:get_soldiers({1,1,0,1}))
+   assert_equal(30, _cnt(self.w:get_soldiers("all")))
+   self.w:set_soldiers{
       [{0,0,0,0}] = 1,
       [{1,1,0,1}] = 2,
    }
-   self.w:set_soldiers({0,0,0,0}, 0)
-   assert_equal(0, self.w:get_soldiers({0,0,0,0}))
+   assert_equal(1, self.w:get_soldiers({0,0,0,0}))
    assert_equal(2, self.w:get_soldiers({1,1,0,1}))
-   assert_equal(2, _cnt(self.w:get_soldiers("all")))
+   assert_equal(3, _cnt(self.w:get_soldiers("all")))
 end
 function warehouse_tests:test_set_soldiers_by_list()
    self.w:set_soldiers{

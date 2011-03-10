@@ -693,13 +693,12 @@ uint32_t Warehouse::count_workers
 
 	// NOTE: This code lies about the tAttributes of non-instantiated workers.
 
-	// TODO SirVer: Something here is fishy!
-	// container_iterate
-		// (std::vector<Worker*>, m_incorporated_workers, i)
-			// if (std::find(subs.begin(), subs.end(), &(i.current->descr())) != subs.end())
-				// //  This is one of the workers in our sum.
-				// if (!req.check(*i.current))
-					// --sum;
+	container_iterate
+		(std::vector<Worker*>, m_incorporated_workers, i)
+			if (std::find(subs.begin(), subs.end(), &(*i)->descr()) != subs.end())
+				//  This is one of the workers in our sum.
+				if (!req.check(*(*i)))
+					--sum;
 
 	return sum;
 }
@@ -1280,9 +1279,10 @@ std::vector<Soldier *> Warehouse::get_soldiers() const
 {
 	std::vector<Soldier *> rv;
 
-	container_iterate_const(std::vector<Worker *>, m_incorporated_workers, i)
-		if (upcast(Soldier, soldier, *i.current))
+	container_iterate_const(std::vector<Worker *>, m_incorporated_workers, i) {
+		if (upcast(Soldier, soldier, *i))
 			rv.push_back(soldier);
+	}
 
 	return rv;
 }
@@ -1291,5 +1291,19 @@ int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) 
 	return 0;
 }
 
+int Warehouse::outcorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
+	std::vector<Worker *>::iterator i = std::find
+		(m_incorporated_workers.begin(), m_incorporated_workers.end(), &soldier);
+
+#ifdef DEBUG
+	if (i == m_incorporated_workers.end())
+		throw wexception("outcorporateSoldier: soldier not in this warehouse!");
+#endif
+	m_incorporated_workers.erase(i);
+
+	m_supply->remove_workers(tribe().safe_worker_index("soldier"), 1);
+
+	return 0;
+}
 
 }
