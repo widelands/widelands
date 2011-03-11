@@ -1275,7 +1275,7 @@ void Warehouse::check_remove_stock(Game & game)
 /*
  * SoldierControl implementations
  */
-std::vector<Soldier *> Warehouse::get_soldiers() const
+std::vector<Soldier *> Warehouse::presentSoldiers() const
 {
 	std::vector<Soldier *> rv;
 

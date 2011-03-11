@@ -128,7 +128,6 @@ public:
 
 	WareList const & get_wares() const;
 	WareList const & get_workers() const;
-	std::vector<Soldier *> get_soldiers() const;
 
 	void insert_wares  (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
@@ -136,9 +135,7 @@ public:
 	void remove_workers(Ware_Index, uint32_t count);
 
 	/* SoldierControl implementation */
-	std::vector<Soldier *> presentSoldiers() const {
-		return get_soldiers();
-	}
+	std::vector<Soldier *> presentSoldiers() const;
 	std::vector<Soldier *> stationedSoldiers() const {
 		return presentSoldiers();
 	}
