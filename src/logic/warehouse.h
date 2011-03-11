@@ -22,6 +22,7 @@
 
 #include "attackable.h"
 #include "building.h"
+#include "soldiercontrol.h"
 
 struct Interactive_Player;
 struct Profile;
@@ -57,7 +58,7 @@ private:
 };
 
 
-class Warehouse : public Building, public Attackable {
+class Warehouse : public Building, public Attackable, public SoldierControl {
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
@@ -127,12 +128,28 @@ public:
 
 	WareList const & get_wares() const;
 	WareList const & get_workers() const;
-	std::vector<const Soldier *> get_soldiers(Editor_Game_Base &) const;
 
 	void insert_wares  (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
 	void insert_workers(Ware_Index, uint32_t count);
 	void remove_workers(Ware_Index, uint32_t count);
+
+	/* SoldierControl implementation */
+	std::vector<Soldier *> presentSoldiers() const;
+	std::vector<Soldier *> stationedSoldiers() const {
+		return presentSoldiers();
+	}
+	uint32_t minSoldierCapacity() const {return 0;}
+	uint32_t maxSoldierCapacity() const {return 4294967295;}
+	uint32_t soldierCapacity() const {return maxSoldierCapacity();}
+	void setSoldierCapacity(uint32_t capacity) {
+		throw wexception("Not implemented for a Warehouse!");
+	}
+	void dropSoldier(Soldier &) {
+		throw wexception("Not implemented for a Warehouse!");
+	}
+	int incorporateSoldier(Editor_Game_Base &, Soldier &);
+	int outcorporateSoldier(Editor_Game_Base &, Soldier &);
 
 	virtual bool fetch_from_flag(Game &);
 
@@ -211,7 +228,7 @@ private:
 	std::vector<StockPolicy> m_worker_policy;
 
 	// Workers who live here at the moment
-	std::vector<OPtr<Worker> > m_incorporated_workers;
+	std::vector<Worker *> m_incorporated_workers;
 	uint32_t                 * m_next_worker_without_cost_spawn;
 	uint32_t                   m_next_military_act;
 	uint32_t m_next_stock_remove_act;

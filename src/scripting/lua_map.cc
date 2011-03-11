@@ -301,6 +301,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 						 (*s.current)->get_evade_level());
 
 					if (is == sp->first) {
+						sc->outcorporateSoldier(egbase, **s);
 						(*s.current)->remove(egbase);
 						++d;
 						break;
@@ -1718,47 +1719,6 @@ WH_GET(ware, Ware);
 // documented in parent class
 WH_GET(worker, Worker);
 #undef GET
-
-// documented in parent class
-int L_Warehouse::set_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	Warehouse * wh = get(L, egbase);
-	Tribe_Descr const & tribe = wh->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-		ref_cast<Soldier_Descr const, Worker_Descr const>
-			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
-
-	container_iterate_const(SoldiersMap, setpoints, s) {
-		for (uint32_t i = 0; i < s.current->second; i++) {
-			Soldier & soldier =
-				ref_cast<Soldier, Worker>
-				(soldier_descr.create(egbase, wh->owner(), wh, wh->get_position()));
-			soldier.set_level
-				(s.current->first.hp, s.current->first.at,
-				 s.current->first.de, s.current->first.ev);
-			wh->incorporate_worker(egbase, soldier);
-		}
-	}
-	return 0;
-}
-
-// documented in parent class
-int L_Warehouse::get_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	Warehouse * wh = get(L, egbase);
-	Tribe_Descr const & tribe = wh->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-			 ref_cast<Soldier_Descr const, Worker_Descr const>
-						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	SoldiersList in_warehouse = wh->get_soldiers(egbase);
-
-	return m_handle_get_soldiers(L, soldier_descr, in_warehouse);
-}
 
 /*
  ==========================================================

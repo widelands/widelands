@@ -280,7 +280,7 @@ struct L_HasSoldiers {
 	virtual int set_soldiers(lua_State * L) = 0;
 	virtual int get_soldiers(lua_State * L) = 0;
 
-	typedef std::vector<const Widelands::Soldier *> SoldiersList;
+	typedef std::vector<Widelands::Soldier *> SoldiersList;
 	typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
 	typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
 
@@ -411,7 +411,7 @@ public:
 
 
 class L_Warehouse : public L_Building,
-	public L_HasWares, public L_HasWorkers, public L_HasSoldiers
+	public L_HasWares, public L_HasWorkers, public _SoldierEmployer
 {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
@@ -433,13 +433,16 @@ public:
 	int get_wares(lua_State *);
 	int set_workers(lua_State *);
 	int get_workers(lua_State *);
-	int set_soldiers(lua_State *);
-	int get_soldiers(lua_State *);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse);
+	Widelands::SoldierControl * get_sc
+		(lua_State * L, Widelands::Editor_Game_Base & g)
+	{
+		return get(L, g);
+	}
 };
 
 
