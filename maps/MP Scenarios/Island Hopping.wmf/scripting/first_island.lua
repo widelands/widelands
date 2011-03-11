@@ -45,7 +45,6 @@ function cheat()
 end
 
 -- TODO: rename this file to something more true
--- TODO: transfer of soldiers
 function _hop_to_next_island(plr, island_idx)
    local old_hq_field = _start_fields[island_idx][plr.number]
    local new_hq_field = _start_fields[island_idx + 1][plr.number]
@@ -60,14 +59,13 @@ function _hop_to_next_island(plr, island_idx)
          local imm = f.immovable
          if imm and imm.owner == plr then
             -- salvage soldiers
-            -- TODO: warehouse set_soldiers cannot reduce the number of soldiers!
-            -- TODO: write a test case for this problem, similar to this and fix this bug.
             if imm.get_soldiers then
                for descr, count in pairs(imm:get_soldiers("all")) do
-                  soldiers[descr] = count
-                  imm:set_soldiers(descr, 0)
+                  local sdescr = ("%i:%i:%i:%i"):format(unpack(descr))
+                  if not soldiers[sdescr] then soldiers[sdescr] = 0 end
+                  soldiers[sdescr] = soldiers[sdescr] + count
                end
-               if imm.set_workers then imm:set_workers("soldier", 0) end
+               imm:set_soldiers({0,0,0,0}, 0)
             end
 
             -- salvage workers

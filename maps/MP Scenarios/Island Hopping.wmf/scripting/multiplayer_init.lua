@@ -47,10 +47,13 @@ function add_workers(hq, workers)
    end
 end
 
+-- TODO: the add functions do not really belong here
 function add_soldiers(hq, soldiers) 
-   for descr, count in pairs(soldiers) do
-      hq:set_soldiers(descr, hq:get_soldiers(descr) + count)
+   local setpoints = {}
+   for sdescr, count in pairs(soldiers) do
+      setpoints[ {sdescr:match("(%d):(%d):(%d):(%d)")} ] = count
    end
+   hq:set_soldiers(setpoints)
 end
 
 -- ===============
