@@ -694,7 +694,7 @@ uint32_t Warehouse::count_workers
 	// NOTE: This code lies about the tAttributes of non-instantiated workers.
 
 	container_iterate
-		(std::vector<Worker*>, m_incorporated_workers, i)
+		(std::vector<Worker *>, m_incorporated_workers, i)
 			if (std::find(subs.begin(), subs.end(), &(*i)->descr()) != subs.end())
 				//  This is one of the workers in our sum.
 				if (!req.check(*(*i)))
