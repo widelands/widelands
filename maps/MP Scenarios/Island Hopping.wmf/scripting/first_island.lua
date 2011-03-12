@@ -14,6 +14,12 @@ _start_fields = {
       map:get_field(142,  45),
       map:get_field( 51,  44),
       map:get_field( 49, 147)
+   },
+   { -- Island 3
+      map:get_field(180, 182),
+      map:get_field(180,  10),
+      map:get_field( 13,   9),
+      map:get_field( 13, 182)
    }
 }
 
@@ -24,10 +30,15 @@ _finish_areas = {
       map:get_field( 57, 68):region(3), -- player 3
       map:get_field( 56,122):region(3)  -- player 4
    },
-   { -- Island 2 : TODO
+   { -- Island 2
+      map:get_field(167,164):region(3), -- player 1
+      map:get_field(167, 28):region(3), -- player 2
+      map:get_field( 27, 27):region(3), -- player 3
+      map:get_field( 26,161):region(3)  -- player 4
    }
 }
 
+-- TODO: come up with proper ones
 _finish_rewards = {
    { -- Island 1
       { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish 
@@ -35,16 +46,23 @@ _finish_rewards = {
       { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish 
       { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish 
    },
-   { -- Island 2 TODO
+   { -- Island 2
+      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish 
+      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish 
+      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish 
+      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish 
    }
 }
 
 -- TODO: remove this
-function cheat()
-   game.players[1]:place_building("castle", map:get_field(136, 125), 0, 1)
+function cheat(plr, island_idx)
+   game.players[plr]:place_building("castle", 
+      _finish_areas[island_idx][plr][19] , 0, 1
+   )
 end
 
 -- TODO: rename this file to something more true
+-- TODO: carriers and worker bobs are not transferred. Check road workers and bobs
 function _hop_to_next_island(plr, island_idx)
    local old_hq_field = _start_fields[island_idx][plr.number]
    local new_hq_field = _start_fields[island_idx + 1][plr.number]
@@ -111,8 +129,12 @@ function _wait_for_castle_on_finish_area(plr, island_idx)
 end
 
 function run_island(plr, island_idx)
+   if island_idx == 3 then 
+      -- TODO: special case island 3
+      return 
+   end
    sleep(200)
-   -- TODO: special case island 3
+   print(("Running Island %i for player %i!"):format(island_idx, plr.number))
    
    -- TODO: inform at the beginning about the rewards for finishing this island
    _wait_for_castle_on_finish_area(plr, island_idx)
