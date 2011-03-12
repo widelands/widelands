@@ -67,15 +67,25 @@ namespace LuaMap {
  * object available.
  */
 #define CAST_TO_LUA(k) to_lua<L_ ##k> \
-   (L, new L_ ##k(*static_cast<k *>(bi)))
-int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
-	if (!bi)
+   (L, new L_ ##k(*static_cast<k *>(mo)))
+int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
+	if (!mo)
 		return 0;
 
-	switch  (bi->get_type()) {
+	const char * type_name = mo->type_name();
+	if (!strcmp(type_name, "worker"))
+		return CAST_TO_LUA(Worker);
+
+	return to_lua<L_Bob>(L, new L_Bob(*mo));
+}
+int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
+	if (!mo)
+		return 0;
+
+	switch  (mo->get_type()) {
 		case Map_Object::BUILDING:
 		{
-			const char * type_name = bi->type_name();
+			const char * type_name = mo->type_name();
 			if (!strcmp(type_name, "constructionsite"))
 				return CAST_TO_LUA(ConstructionSite);
 			else if (!strcmp(type_name, "productionsite"))
@@ -95,7 +105,7 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 		case Map_Object::ROAD:
 			return CAST_TO_LUA(Road);
 	}
-	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
+	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
 #undef CAST_TO_LUA
 
@@ -2022,6 +2032,57 @@ int L_Bob::has_caps(lua_State * L) {
  ==========================================================
  */
 
+/* RST
+Worker
+------
+
+.. class:: Worker
+
+	Child of: :class:`Bob`
+
+	All workers that are visible on the map are of this kind.
+*/
+
+const char L_Worker::className[] = "Worker";
+const MethodType<L_Worker> L_Worker::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Worker> L_Worker::Properties[] = {
+	PROP_RO(L_Worker, owner),
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: owner
+
+		(RO) The :class:`wl.game.Player` who owns this worker.
+*/
+// UNTESTED
+int L_Worker::get_owner(lua_State * L) {
+	get_factory(L).push_player
+		(L, get(L, get_egbase(L))->get_owner()->player_number());
+	return 1;
+}
+
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
 
 /* RST
 Field
@@ -2260,7 +2321,7 @@ int L_Field::get_bobs(lua_State * L) {
 	uint32_t cidx = 1;
 	while (b) {
 		lua_pushuint32(L, cidx++);
-		to_lua<L_Bob>(L, new L_Bob(*b));
+		upcasted_bob_to_lua(L, b);
 		lua_rawset(L, -3);
 		b = b->get_next_bob();
 	}
@@ -2660,6 +2721,11 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_Bob>(L, "map", true);
 	add_parent<L_Bob, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Worker>(L, "map", true);
+	add_parent<L_Worker, L_Bob>(L);
+	add_parent<L_Worker, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_BaseImmovable>(L, "map", true);

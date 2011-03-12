@@ -32,6 +32,7 @@
 #include "logic/productionsite.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
+#include "logic/worker.h"
 
 #include "luna.h"
 
@@ -559,6 +560,30 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(Bob);
+};
+
+class L_Worker : public L_Bob {
+public:
+	LUNA_CLASS_HEAD(L_Worker);
+
+	L_Worker() {}
+	L_Worker(Widelands::Worker & w) : L_Bob(w) {}
+	L_Worker(lua_State * L) : L_Bob(L) {}
+	virtual ~L_Worker() {}
+
+	/*
+	 * Properties
+	 */
+	int get_owner(lua_State * L);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(Worker);
 };
 
 #undef CASTED_GET
