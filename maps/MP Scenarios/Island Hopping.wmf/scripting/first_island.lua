@@ -1,5 +1,5 @@
 -- ==========================
--- Code for the first island 
+-- Code for the first island
 -- ==========================
 _nplayers_finished_island = { 0, 0 }
 _start_fields = {
@@ -41,22 +41,22 @@ _finish_areas = {
 -- TODO: come up with proper ones
 _finish_rewards = {
    { -- Island 1
-      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish 
-      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish 
-      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish 
-      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish 
+      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish
+      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish
+      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish
+      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish
    },
    { -- Island 2
-      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish 
-      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish 
-      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish 
-      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish 
+      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish
+      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish
+      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish
+      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish
    }
 }
 
 -- TODO: remove this
 function cheat(plr, island_idx)
-   game.players[plr]:place_building("castle", 
+   game.players[plr]:place_building("castle",
       _finish_areas[island_idx][plr][19] , 0, 1
    )
 end
@@ -107,6 +107,27 @@ function _hop_to_next_island(plr, island_idx)
             -- Remove this object
             imm:remove()
          end
+
+         -- Salvages remaining bobs. This includes workers/soldiers on the move
+         -- Note that this is not bug free: e.g. a stonecutter that is
+         -- currently walking around will be counted twice: once in his
+         -- building and once in this bobs loop.  The player effectively gains
+         -- a worker through this.
+         -- Also, Soldiers are always counted as {0,0,0,0} as we cannot access
+         -- their levels at this point in time.
+         for idx,b in ipairs(f.bobs) do
+            if b.owner == plr then
+               local name = b.name
+               if name == "soldier" then
+                  if not soldiers["0:0:0:0"] then soldiers["0:0:0:0"] = 0 end
+                  soldiers["0:0:0:0"] = soldiers["0:0:0:0"] + 1
+               else
+                  if not workers[name] then workers[name] = 0 end
+                  workers[name] = workers[name] + 1
+               end
+               b:remove()
+            end
+         end
       end
    end
 
@@ -129,13 +150,13 @@ function _wait_for_castle_on_finish_area(plr, island_idx)
 end
 
 function run_island(plr, island_idx)
-   if island_idx == 3 then 
+   if island_idx == 3 then
       -- TODO: special case island 3
-      return 
+      return
    end
    sleep(200)
    print(("Running Island %i for player %i!"):format(island_idx, plr.number))
-   
+
    -- TODO: inform at the beginning about the rewards for finishing this island
    _wait_for_castle_on_finish_area(plr, island_idx)
 
@@ -145,7 +166,7 @@ function run_island(plr, island_idx)
    -- TODO: next lines into their own function
    local rewards = _finish_rewards[island_idx][rank]
    send_to_all(rt(
-      p(msgs_finished_island[rank]:format(plr.number, island_idx)) .. 
+      p(msgs_finished_island[rank]:format(plr.number, island_idx)) ..
       p(finished_island_continues:format(format_rewards(rewards)))
    ))
 
