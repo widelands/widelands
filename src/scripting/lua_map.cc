@@ -73,8 +73,12 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 		return 0;
 
 	const char * type_name = mo->type_name();
-	if (!strcmp(type_name, "worker"))
+	if (!strcmp(type_name, "worker")) {
+		if (mo->name() == "soldier")
+			return CAST_TO_LUA(Soldier);
+
 		return CAST_TO_LUA(Worker);
+	}
 
 	return to_lua<L_Bob>(L, new L_Bob(*mo));
 }
@@ -2085,6 +2089,92 @@ int L_Worker::get_owner(lua_State * L) {
 
 
 /* RST
+Soldier
+-------
+
+.. class:: Soldier
+
+	Child of: :class:`Worker`
+
+	All soldiers that are on the map are represented by this class.
+*/
+
+const char L_Soldier::className[] = "Soldier";
+const MethodType<L_Soldier> L_Soldier::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Soldier> L_Soldier::Properties[] = {
+	PROP_RO(L_Soldier, attack_level),
+	PROP_RO(L_Soldier, defense_level),
+	PROP_RO(L_Soldier, hp_level),
+	PROP_RO(L_Soldier, evade_level),
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: attack_level
+
+		(RO) The current attack level of this soldier
+*/
+// UNTESTED
+int L_Soldier::get_attack_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_attack_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: defense_level
+
+		(RO) The current defense level of this soldier
+*/
+// UNTESTED
+int L_Soldier::get_defense_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_defense_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: hp_level
+
+		(RO) The current hp level of this soldier
+*/
+// UNTESTED
+int L_Soldier::get_hp_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_hp_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: evade_level
+
+		(RO) The current evade level of this soldier
+*/
+// UNTESTED
+int L_Soldier::get_evade_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_evade_level());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
 Field
 -----
 
@@ -2726,6 +2816,12 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_Worker>(L, "map", true);
 	add_parent<L_Worker, L_Bob>(L);
 	add_parent<L_Worker, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Soldier>(L, "map", true);
+	add_parent<L_Soldier, L_Worker>(L);
+	add_parent<L_Soldier, L_Bob>(L);
+	add_parent<L_Soldier, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_BaseImmovable>(L, "map", true);

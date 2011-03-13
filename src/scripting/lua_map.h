@@ -30,6 +30,7 @@
 #include "logic/game.h"
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
+#include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
@@ -586,6 +587,32 @@ public:
 	CASTED_GET(Worker);
 };
 
+class L_Soldier : public L_Worker {
+public:
+	LUNA_CLASS_HEAD(L_Soldier);
+
+	L_Soldier() {}
+	L_Soldier(Widelands::Soldier & w) : L_Worker(w) {}
+	L_Soldier(lua_State * L) : L_Worker(L) {}
+	virtual ~L_Soldier() {}
+
+	/*
+	 * Properties
+	 */
+	int get_attack_level(lua_State *);
+	int get_defense_level(lua_State *);
+	int get_hp_level(lua_State *);
+	int get_evade_level(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(Soldier);
+};
 #undef CASTED_GET
 
 class L_Field : public L_MapModuleClass {
