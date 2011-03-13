@@ -2053,6 +2053,7 @@ const MethodType<L_Worker> L_Worker::Methods[] = {
 };
 const PropertyType<L_Worker> L_Worker::Properties[] = {
 	PROP_RO(L_Worker, owner),
+	PROP_RO(L_Worker, location),
 	{0, 0, 0},
 };
 
@@ -2073,6 +2074,28 @@ int L_Worker::get_owner(lua_State * L) {
 		(L, get(L, get_egbase(L))->get_owner()->player_number());
 	return 1;
 }
+
+/* RST
+	.. attribute:: location
+
+		(RO) The location where this worker is situated. This will be either a
+		:class:`Building`, :class:`Road`, :class:`Flag` or :const:`nil`. Note
+		that a worker that is stored in a warehouse has a location :const:`nil`.
+		A worker that is out working (e.g. hunter) has as a location his
+		building. A stationed soldier has his military building as location.
+		Workers on transit usually have the Road they are currently on as
+		location.
+*/
+// UNTESTED
+int L_Worker::get_location(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+	return
+		upcasted_immovable_to_lua
+			(L, static_cast<BaseImmovable *>
+			 	(get(L, egbase)->get_location(egbase)));
+}
+
+
 
 
 /*

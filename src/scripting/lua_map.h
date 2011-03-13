@@ -576,6 +576,7 @@ public:
 	 * Properties
 	 */
 	int get_owner(lua_State * L);
+	int get_location(lua_State *);
 
 	/*
 	 * Lua methods
