@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-21 13:15+0100\n"
-"PO-Revision-Date: 2011-02-28 19:59+0000\n"
+"PO-Revision-Date: 2011-03-12 19:25+0000\n"
 "Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-01 04:32+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-13 04:44+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1054,7 +1054,7 @@ msgstr "Lataan heimoa: %s"
 
 #: ../../src/editor/editorinteractive.cc:176
 msgid "Creating players"
-msgstr ""
+msgstr "Luon pelaajia"
 
 #: ../../src/editor/editorinteractive.cc:183
 #: ../../src/logic/editor_game_base.cc:332
@@ -1224,7 +1224,7 @@ msgstr "iso"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "tilaston luonti funktio: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
@@ -1464,12 +1464,12 @@ msgstr[1] "%u(+%u) sotilasta"
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "Sotilaais ottivat haltuun kohteen %s."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Vihollinen kukisti sotilaasi kohteessa %s."
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
@@ -1478,7 +1478,7 @@ msgstr "Armeijarakennus menetty!"
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Sotilaasi voittivat vihollisen kohteessa %s."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
@@ -1487,7 +1487,7 @@ msgstr "Vihollinen kukistettu!"
 #: ../../src/logic/militarysite.cc:670
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Sinun %s havaitsi hyökkääjän.</p>"
 
 #: ../../src/logic/militarysite.cc:671
 #, c-format
@@ -1798,7 +1798,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:917
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Tuotettu %s"
 
 #: ../../src/logic/production_program.cc:992
 msgid "Recruited "
@@ -1816,7 +1816,7 @@ msgstr "prosenttiosuus"
 #: ../../src/logic/production_program.cc:1175
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Resurssit ovat loppuneet!"
 
 #: ../../src/logic/production_program.cc:1196
 msgid "Mine empty"
@@ -1837,6 +1837,7 @@ msgstr "sotilastyyppi"
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
+"odotettiin {\"hp\"|\"attack\"|\"defense\"|\"evade\"} mutta löytyi \"%s\""
 
 #: ../../src/logic/production_program.cc:1234
 #: ../../src/logic/production_program.cc:1306
@@ -1847,7 +1848,7 @@ msgstr "taso"
 #: ../../src/logic/production_program.cc:1340
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr ""
+msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 
 #: ../../src/logic/production_program.cc:1316
 #, c-format
@@ -1889,7 +1890,7 @@ msgstr ""
 #: ../../src/logic/ship.cc:263
 #, c-format
 msgid "loading ship: %s"
-msgstr ""
+msgstr "lataan laivaa: %s"
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
@@ -1971,7 +1972,7 @@ msgstr "heimo %s %s"
 #: ../../src/logic/warehouse.cc:460
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr ""
+msgstr "Uusi %s on lisätty talouteesi."
 
 #: ../../src/logic/worker.cc:107
 #, c-format
@@ -2009,16 +2010,16 @@ msgstr "Geologi llöysi resursseja"
 #: ../../src/logic/worker.cc:1737
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Sinun %s ei löydä tietä kotiin ja todennäköisesti kuolee."
 
 #: ../../src/logic/worker.cc:1744
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Työläinen eksyi!"
 
 #: ../../src/logic/worker.cc:2938
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "lataan työläistä: %s"
 
 #: ../../src/logic/world.cc:623
 #, c-format
@@ -2447,53 +2448,59 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"<br>Tarjolla olevat palvelinkomennot ovat:<br>/help - Näyttää tämän "
+"ohjeen<br>/announce <viesti> - Lähettää viestin tiedotteena "
+"kaikille<br>/warn <nimi> <aihe> - Varoittaa käyttäjää <nimi> aiheesta "
+"<aihe><br>/kick <nimi> <syy> - Potkaisee käyttäjän <nimi> ulos aiheesta "
+"<aihe><br>/forcePause - Pakottaa pelin pysähtymään.<br>/endForcedPause - "
+"Palauttaa pelin normaaliin pelinopeuteen."
 
 #: ../../src/network/nethost.cc:364
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Käyttövirhe, pitäisi olla: /announce <viesti>"
 
 #: ../../src/network/nethost.cc:376
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Käyttövirhe, pitäisi olla: /warn <nimi> <aihe>"
 
 #: ../../src/network/nethost.cc:387
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Käyttövirhe, pitäisi olla: /kick <nimi> <aihe>"
 
 #: ../../src/network/nethost.cc:395
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Oletko varma, että haluat potkaista käyttäjän %s ulos?<br>"
 
 #: ../../src/network/nethost.cc:398
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "Aihe oli:%s<br>"
 
 #: ../../src/network/nethost.cc:401
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Jos kyllä, kirjoita /ack_kick %s"
 
 #: ../../src/network/nethost.cc:410
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "Ulospotkaisu peruttu, koska nimi puuttui!"
 
 #: ../../src/network/nethost.cc:412
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Käyttövirhe, pitäisi olla: /ack_kick <nimi>"
 
 #: ../../src/network/nethost.cc:419
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "Ulospotkaisu peruttu, koska nimi oli väärä!"
 
 #: ../../src/network/nethost.cc:429
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Pelitauko oli jo pakotettu - pelin pitäisi olla pysähtynyt."
 
 #: ../../src/network/nethost.cc:440
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Pelitaukoa ei ole pakotettu."
 
 #: ../../src/network/nethost.cc:450
 msgid "Invalid command! Type /help for a list of commands."
@@ -2517,7 +2524,7 @@ msgstr "Et pysty potkaisemaan itseäsi!"
 
 #: ../../src/network/nethost.cc:1012
 msgid "There is no connected user with that nickname!"
-msgstr ""
+msgstr "Annettu käyttäjänimi ei ole liittyneenä peliin!"
 
 #: ../../src/network/nethost.cc:1075
 msgid ""
