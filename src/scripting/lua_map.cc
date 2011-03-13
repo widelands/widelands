@@ -1510,9 +1510,15 @@ int L_Road::get_road_type(lua_State * L) {
 L_HasWorkers::WorkersMap L_Road::_valid_workers
 		(PlayerImmovable & pi)
 {
+	Road & r = static_cast<Road &>(pi);
+
 	WorkersMap valid_workers;
 	valid_workers.insert
-		(WorkerAmount(pi.owner().tribe().worker_index("carrier"), 1));
+		(WorkerAmount(r.owner().tribe().worker_index("carrier"), 1));
+
+	if (r.get_roadtype() == Road_Busy)
+		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
+
 	return valid_workers;
 }
 int L_Road::_new_worker
