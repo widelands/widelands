@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-21 13:15+0100\n"
-"PO-Revision-Date: 2010-08-30 23:26+0000\n"
-"Last-Translator: Papp Bence <papp.bence89@gmail.com>\n"
+"PO-Revision-Date: 2011-03-15 13:09+0000\n"
+"Last-Translator: jzombi <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-22 04:47+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-16 04:44+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1732,7 +1732,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:917
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Termelt: %s"
 
 #: ../../src/logic/production_program.cc:992
 msgid "Recruited "
@@ -1759,7 +1759,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1198
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
-msgstr ""
+msgstr "A bánya kiürült. Fontold meg a kibővítését, esetleg a lerombolását."
 
 #: ../../src/logic/production_program.cc:1212
 #: ../../src/logic/production_program.cc:1285
