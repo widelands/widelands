@@ -100,25 +100,32 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
  * on locale OS.
  */
 std::string FileSystem::fixCrossFile(std::string path) {
-#ifdef WIN32
-	// We simply keep it as it is and do not care about slashes - they will
-	// be replaced with backslashes in file read actions.
-	return path;
-#else
-	std::string fixedpath(path);
-	std::string temp;
 	uint32_t path_size = path.size();
+	std::string fixedPath(path);
+	std::string temp;
 	for (uint32_t i = 0; i < path_size; ++i) {
-		temp = fixedpath.at(i);
+		temp = path.at(i);
+#ifdef WIN32
+		if (temp == "/")
+#else
 		if (temp == "\\")
-			fixedpath.at(i) = m_filesep;
-		// As a security measure, eat all dots and tildes away when file is
-		// tranferred over network.
-		if (temp == "." || temp == "~")
-			 fixedpath.at(i) = '-';
-	}
-	return fixedpath;
 #endif
+			fixedPath.at(i) = m_filesep;
+		// As a security measure, eat all:
+		// * tildes
+		// * double dots
+		// * dots with following slash/backslash (but not a single dot - we need it in e.g. "xyz.wmf")
+		// away to avoid misuse of the file transfer function.
+		if (temp == "~")
+			fixedPath.at(i) = '_';
+		if (temp == "." && (i + 1 < path_size)) {
+			std::string temp2;
+			temp2 = path.at(i + 1);
+			if (temp2 == "." || temp2 == "\\" || temp2 == "/")
+				fixedPath.at(i) = '_';
+		}
+	}
+	return fixedPath;
 }
 
 /**
