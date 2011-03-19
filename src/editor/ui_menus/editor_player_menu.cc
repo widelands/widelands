@@ -218,23 +218,23 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	Widelands::Player_Number const old_nr_players = map.get_nrplayers();
 	Widelands::Player_Number const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
-	// SirVer TODO: this must be back in
-   //      if (not menu.is_player_tribe_referenced(old_nr_players)) {
-   //              if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
-   //                      //  Remove starting position marker.
-   //                      char picsname[] = "pics/editor_player_00_starting_pos.png";
-   //                      picsname[19] += old_nr_players / 10;
-   //                      picsname[20] += old_nr_players % 10;
-   //                      map.overlay_manager().remove_overlay
-   //                              (sp, g_gr->get_picture(PicMod_Game, picsname));
-   //              }
-   //              std::string const & name  = map.get_scenario_player_name (nr_players);
-   //              std::string const & tribe = map.get_scenario_player_tribe(nr_players);
-   //
-   //    posx = spacing;
-   //    posy+=size+spacing;
-   // }
-   // set_inner_size(get_inner_w(),posy+spacing);
+
+	if (not menu.is_player_tribe_referenced(old_nr_players)) {
+		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
+			//  Remove starting position marker.
+			char picsname[] = "pics/editor_player_00_starting_pos.png";
+			picsname[19] += old_nr_players / 10;
+			picsname[20] += old_nr_players % 10;
+			map.overlay_manager().remove_overlay
+				(sp, g_gr->get_picture(PicMod_Game, picsname));
+		}
+	}
+	map.set_nrplayers(nr_players);
+	m_remove_last_player.set_enabled(1 < nr_players);
+
+	update();
+	// SirVer TODO: Take steps when the player is referenced in some place. Not
+	// SirVer TODO: currently possible in the editor though.
 }
 
 /*
