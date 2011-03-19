@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-08-30 23:30+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-02-21 12:15+0000\n"
+"PO-Revision-Date: 2011-02-25 11:48+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:33+0000\n"
+"X-Launchpad-Export-Date: 2011-02-26 04:42+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "I - De oculis in caligone"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
@@ -31,7 +31,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "II - Locus quam domicilium"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "III - Hic nostrum territorium"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -65,9 +65,9 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only enough place for one tribe."
 msgstr ""
-"Longe te duce gens apud hoc lacu colunt. Nemo vos turbabat et satis materiei "
-"aderant sed paucis mentibus ante alia gens per montes advenit et vicum "
-"condidit. Tu solum satis terrae pro una gente esse non nescis!"
+"Longe te duce gens apud hoc lacum colunt. Nemo vos turbabat et satis "
+"materiei aderant sed paucis mentibus ante alia gens per montes advenit et "
+"vicum condidit. Tu solum satis terrae pro una gente esse non nescis!"
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
@@ -114,7 +114,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlantides - Via ad ignem"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -122,7 +122,7 @@ msgstr "Atollum"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "Barbari - Secundum imperium"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
@@ -142,7 +142,7 @@ msgstr "Crater"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Certamen vastitatis"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -173,7 +173,7 @@ msgstr "Alforum saltus"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "Imperium - Menses exilii"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -339,7 +339,7 @@ msgstr "Labyrinthus mysticus"
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Non iam perfectum"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -393,7 +393,7 @@ msgstr "Insula paludis"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
-msgstr ""
+msgstr "Monachi paludis"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"

@@ -6,41 +6,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-08-30 23:28+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-02-21 12:15+0000\n"
+"PO-Revision-Date: 2011-03-14 08:12+0000\n"
+"Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:33+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-15 04:52+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Oči v temnotě"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - od Nemesis až k Genesis"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Prameny Malac' Mor"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Místo nazývané domov"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
-msgstr ""
+msgstr "02 - Výspa pro vyhnanství"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Tahle země patří nám"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -117,7 +117,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlanťané - Závod o oheň"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -125,11 +125,11 @@ msgstr "Atol"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "Barbaři - Druhé impérium"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Náročný. Úvod k Atlanťanům"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -145,7 +145,7 @@ msgstr "Kráter"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Pouštní turnaj"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -165,11 +165,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Jednoduché. Úvod k brabarům"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Jednoduché. Úvod k Impériu"
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -177,7 +177,7 @@ msgstr "Elfí les"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "Impérium - měsíce vyhnanství"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -225,6 +225,9 @@ msgid ""
 "the mountain of gold that primises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Čtyři kmeny zápasí se svými nejbližšími sousedy o prvenství v dosažení zlaté "
+"hory, která slibuje bohatství nade všechny představy. Ale mohou poslední dva "
+"zbývající moudře sdílet suroviny?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -277,6 +280,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Říká se, že staří mniši války, žijící v ještě starších bažinách, vládnou "
+"celému ostrovu."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -350,7 +355,7 @@ msgstr "Mystický labyrint"
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Ještě nezavedeno"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -428,7 +433,7 @@ msgstr "Bažiny"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
-msgstr ""
+msgstr "Mniši z bažin"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -587,6 +592,11 @@ msgid ""
 "a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
+"Když bohové ztratili víru v Atlanťany a potopili jejich ostrov, zápas jedné "
+"ženy o právo a druhou šanci pro její lid se stal legendou. Zatímco vedla "
+"zbylé Atlanťany k nové budoucnosti v nové části světa, Jundlina se stala "
+"nejmocnějším člověkem svého její doby, ale zaplatila vysokou cenu: ztratila "
+"lidskost i svou duši."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""

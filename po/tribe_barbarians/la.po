@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2011-02-20 19:41+0000\n"
+"POT-Creation-Date: 2011-02-21 12:15+0000\n"
+"PO-Revision-Date: 2011-02-25 11:06+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-21 04:46+0000\n"
+"X-Launchpad-Export-Date: 2011-02-26 04:42+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -450,7 +450,7 @@ msgstr "Galearum fabrica"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Res per magnas vias portari adiuvat."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
@@ -514,7 +514,7 @@ msgstr "Instrumenta culinaria"
 
 #: ../../tribes/barbarians/conf:178
 msgid "Lime Kiln"
-msgstr ""
+msgstr "fornix calcaria"
 
 #: ../../tribes/barbarians/conf:134
 msgid "Lime-Burner"
@@ -586,7 +586,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
-msgstr ""
+msgstr "specula"
 
 #: ../../tribes/barbarians/conf:111
 msgid "Ox"
@@ -602,7 +602,7 @@ msgstr "Dolabra"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Pitta Bread"
-msgstr ""
+msgstr "pita"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
@@ -751,13 +751,15 @@ msgstr "Cibus"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Raw Stone"
-msgstr ""
+msgstr "saxum"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Saxa sunt Barbaris prima materia aedificandi. Quae sunt exhauruntur in "
+"lapidicinis metallisque."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
@@ -1072,7 +1074,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:216
 msgid "Trainingscamp"
-msgstr ""
+msgstr "Castra exercendi"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1241,7 +1243,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"
-msgstr ""
+msgstr "Aper"
 
 #: ../../tribes/barbarians/conf:177
 msgid "Wood Hardener"
