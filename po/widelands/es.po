@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-02-21 13:15+0100\n"
-"PO-Revision-Date: 2011-03-05 18:41+0000\n"
-"Last-Translator: Miguel adre <Unknown>\n"
+"PO-Revision-Date: 2011-03-19 03:37+0000\n"
+"Last-Translator: zer berros <cerverros@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-06 04:46+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-19 04:56+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2018,7 +2018,7 @@ msgstr "Un geologo encontró recursos."
 #: ../../src/logic/worker.cc:1737
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Tu %s no puede encontrar un camino a casa y es probable que muera."
 
 #: ../../src/logic/worker.cc:1744
 msgid "Worker got lost!"
@@ -2966,7 +2966,7 @@ msgstr "Partida guardada"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Selecciona una partida guardada"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84 ../../src/ui_fsmenu/options.cc:58
 #: ../../src/ui_fsmenu/options.cc:390 ../../src/wui/login_box.cc:70
@@ -3103,7 +3103,7 @@ msgstr "¡Ha ocurrido un error!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "¡El archivo de mapa parece ser inválido!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:604
 msgid "Map informations:\n"
@@ -3157,7 +3157,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:636
 msgid "Player settings"
-msgstr ""
+msgstr "Opciones de jugador"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid ""
@@ -3200,7 +3200,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:659
 msgid "Map informations"
-msgstr ""
+msgstr "Información del mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:662
 msgid ""
@@ -4165,7 +4165,7 @@ msgstr "Ampliación"
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr ""
+msgstr "<libre>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
