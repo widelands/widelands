@@ -49,7 +49,7 @@ function show_story_box(t, m, pos, gposx, gposy)
       posx = gposx or 0
       posy = gposy or 80
    end
-   plr:message_box(t, m, { posx = posx, posy = posy })
+   plr:message_box(t, m, { posx = posx, posy = posy, h = 400 })
    if pts then
       timed_scroll(array_reverse(pts))
    end

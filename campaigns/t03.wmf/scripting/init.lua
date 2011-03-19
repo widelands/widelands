@@ -21,6 +21,7 @@ use("map", "texts")
 
 -- Some messages that spare some typing
 function send_msg(msg)
+   msg.h = 400
    p1:message_box(msg.title, msg.body, msg)
 end
 function add_obj(t)
