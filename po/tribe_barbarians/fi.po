@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-08-30 23:28+0000\n"
-"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
+"PO-Revision-Date: 2011-03-20 21:08+0000\n"
+"Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-03-21 04:33+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -25,6 +25,9 @@ msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
+"Ruoka-annosta isompi eväs keskisyvän kaivoksen kaivostyöläisille. Se "
+"valmistetaan majatalossa tai suuressa majatalossa kalasta/lihasta, "
+"pitaleivästä ja oluesta."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -32,12 +35,18 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
+"Kypärä on sotilaan yksinkertainen suojavaruste. Se valmistetaan "
+"kypäräpajassa ja käytetään harjoitusleirillä, ruuan kanssa, kun sotilaita "
+"harjoitetaan voimapistetasolta 0 voimapistetasolle 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Ateria valmistetaan pitaleivästä, vahvasta oluesta ja kalasta/lihasta "
+"suuressa majatalossa. Tämä tuhti tuoka on juuri sitä, mitä syvien kaivosten "
+"kaivostyöläiset tarvitsevat."
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -45,6 +54,10 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
+"Pieni suupala, joka pitää kaivostyöläiset vahvoina ja kaivamassa. Myös "
+"tiedustelija tarvitsee tiedusteluretkillään ruoka-annoksia. Ruoka-annokset "
+"tuotetaan krouvissa, majatalossa tai isossa majatalossa kalasta, lihasta tai "
+"pitaleivästä."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -52,6 +65,9 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"Sotakypärä on kehittynyt haarniska barbaarisotureille. Se taotaan "
+"kypäräpajassa ja käytetään harjoitusleirillä, ruuan kanssa, kun  sotilaita "
+"harjoitetaan voimapistetasolta 1 voimapistetasolle 2."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -108,6 +124,8 @@ msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce "
 "snacks."
 msgstr ""
+"Olutta tuotetaan pienpanimoissa ja käytetään majataloissa ja isoissa "
+"majataloissa välipalojen valmistukseen."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -115,6 +133,9 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
+"Pitaleivän ja lihan ohella, kala kuuluu barbaarien ruokavalioon. Sitä "
+"käytetään krouveissa, majataloissa, isoissa majataloissa ja "
+"harjoituspaikoilla (harjoitusleiri ja taisteluareena)."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Big Inn"
@@ -210,6 +231,7 @@ msgstr "Kangas"
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
 msgstr ""
+"Kangasta tarvitaan barbaarien laivoihin. Sitä tuotetaan kaislanoljista."
 
 #: ../../tribes/barbarians/conf:76
 msgid "Coal"
@@ -281,7 +303,7 @@ msgstr "Viljelijä"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Felling Axe"
-msgstr ""
+msgstr "Hakkuukirves"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
@@ -325,6 +347,9 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
+"Pihdit ovat sulattamossa työskentelevän sulattajan työkalut. Niitä tuotetaan "
+"metallipajoissa (mutta tuotanto loppuu, jos pajasta tehdään kirvestehdas tai "
+"sotamylly)."
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
@@ -348,6 +373,9 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Kalastusvavalla barbaarikalastajat kalastavat. Se on yksi perustuotteista, "
+"joita tuotetaan metallipajassa (mutta ei enää, jos pajaa laajennetaan "
+"kirvestehtaaksi tai sotamyllyksi)."
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
@@ -381,7 +409,7 @@ msgstr "Kultakaivos"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Gold Ore"
-msgstr ""
+msgstr "Kultamalmi"
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
@@ -390,6 +418,10 @@ msgid ""
 "used as a precious building material and to produce different axes (in the "
 "war mill) and different armours (in the helmsmithy)."
 msgstr ""
+"Kulta on kallisarvoisin metalli; vain hyvin tärkeät tavarat koristellaan "
+"kullalla. Sitä saadaan sulattamalla kultamalmia sulattamossa. Sitä käytetään "
+"arvokkaiden rakennusten rakentamiseen ja erilaisten kirveiden (sotamyllyssä) "
+"ja haarniskojen (kypäräpaja) tuottamiseen."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -397,6 +429,9 @@ msgid ""
 "gold, which is used as a precious building material and to produce weapons "
 "and armours."
 msgstr ""
+"Kultamalmia louhitaan kultakaivoksessa. Sulattamossa sulatuksen jälkeen "
+"siitä tulee kultaa, jota käytetään arvokkaana rakennusmateriaalina, ja "
+"aseiden ja haarniskojen raaka-aineena."
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -408,7 +443,7 @@ msgstr "Laasti"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Kasvattaa kaislanolkia."
 
 #: ../../tribes/barbarians/conf:150
 msgid "Guardhall"
@@ -454,7 +489,7 @@ msgstr "Kypäräpaja"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Auttaa kantamaan tavaroita vilkkailla teillä."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
@@ -466,6 +501,10 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Miten kukaan voisikaan tehdä ateriaa, välipalaa tai ruoka-annosta ilman "
+"keittiövälineitä. Pidä huoli, että metallipajasta valmistuu näitä karkeitä "
+"työkaluja. (Jos pajaa laajennetaan kirvestehtaaksi tai sotamyllyksi, "
+"valmistus loppuu)"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Hunter"
@@ -505,12 +544,16 @@ msgid ""
 "produce weapons and tools in the metalwork shop, axefactory, war mill and in "
 "the helmsmithy."
 msgstr ""
+"Rautaa saadaan rautamalmista sulattamossa. Sitä käytetään aseisiin ja "
+"työkaluihin metallipajassa, kirvestehtaassa, sotamyllyssä ja kypäräpajassa."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
+"Rautamalmia louhitaan rautakaivoksissa. Siitä saadaan rautaa sulattamalla "
+"sulattamossa."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -563,6 +606,10 @@ msgid ""
 "miners. It is also consumed in the training sites (trainingscamp and battle "
 "arena)."
 msgstr ""
+"Lihassa on paljon energiaa. Lihaa saadaan metsästäjiltä ja sitä käytetään "
+"krouveissa, majataloissa ja suurissa majataloissa ruoka-annosten, "
+"välipalojen ja aterioiden tekemiseen kaivostyöläisille. Sitä kuluu myös "
+"harjoituspaikoilla (harjoitusleiri ja taisteluareena)."
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
@@ -578,7 +625,7 @@ msgstr "Kaivostyöläinen"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
-msgstr ""
+msgstr "Ei ole tapeeksi tilaa"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -587,6 +634,10 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
+"Vain tämä olut kelpaa taisteluareenan sotureille. Jotkut sanovat, että koko "
+"barbaarien voima on tässä oluessa. Se auttaa harjoittamaan sotilaiden "
+"välttökykyä tasolta 0 tasoilel 1 ja 2. Vahvaa olutta tarvitaan myös isoissa "
+"majataloissa aterioiden valmistamiseen."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -649,7 +700,7 @@ msgstr "Valmista pronssikirves"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
-msgstr ""
+msgstr "Tuota hakkuukirves"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
