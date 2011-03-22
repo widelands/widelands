@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-03-20 11:09+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-03-21 09:03+0000\n"
+"Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-21 04:33+0000\n"
+"X-Launchpad-Export-Date: 2011-03-22 04:32+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -41,7 +41,7 @@ msgid ""
 msgstr ""
 "- Trat der Fehler während eines laufenden Spiels auf, so sende uns eine "
 "komprimierte Aufnahme. Mehr Informationen zu Aufnahmen findest Du im "
-"Abschnitt zu Aufnahmen weiter unten."
+"Abschnitt 'Aufnahmen' weiter unten."
 
 #: ../../txts/README:129
 msgid ""
@@ -52,9 +52,9 @@ msgid ""
 msgstr ""
 "- Sende uns, wenn möglich, ein verpacktes Spielprotokoll (zip, gzip, bzip) "
 "zu, es sei denn, der Fehler ist leicht zu reproduzieren.<br>Es ist daher "
-"sinnvoll, wenn Du einfach immer ein Spielprotokoll mitschreiben lässt, denn "
-"falls dann ein Fehler auftreten sollte, hast Du direkt das Spielprotokoll zu "
-"diesem Fehler."
+"sinnvoll, wenn Du einfach immer ein Spielprotokoll mitschreiben "
+"lässt,<br>denn falls dann ein Fehler auftreten sollte, hast Du direkt das "
+"Spielprotokoll zu diesem Fehler. Für weitere Erklärungen siehe weiter unten."
 
 #: ../../txts/README:121
 msgid ""
@@ -451,27 +451,27 @@ msgstr ""
 
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr "ALT(gehalten)     Wählt das zweite alternative Werkzeug aus"
+msgstr "ALT (gehalten) Wählt das zweite alternative Werkzeug aus"
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
-"Baue immer ein Förster- und ein Fischzüchterhaus, damit du nie ohne Holz "
+"Baue immer einen Förster und ein Fischzüchterhaus, damit du nie ohne Holz "
 "oder Nahrung da stehst."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr "Baue immer eine Försterhütte, damit du nie ohne Holz da stehst."
+msgstr "Baue immer einen Förster, damit du nie ohne Holz da stehst."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
-"Baue immer eine Förster- und eine Wildhüterhütte, damit du nie ohne Holz "
-"oder Nahrung da stehst."
+"Baue immer einen Förster und einen Wildhüter, damit du nie ohne Holz oder "
+"Nahrung da stehst."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -498,7 +498,7 @@ msgstr ""
 
 #: ../../txts/README:57
 msgid "C               Toggle census"
-msgstr "C                  Schaltet die Namen an/aus"
+msgstr "C Schaltet die Namen an/aus."
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
@@ -514,7 +514,7 @@ msgstr "CTRL+S   Karte speichern"
 
 #: ../../txts/developers:137
 msgid "Campaign Story"
-msgstr "Kampagnen Hintergrund"
+msgstr "Hintergrundgeschichte der Kampagne"
 
 #: ../../txts/README:16
 msgid "Check out the Widelands project homepage:"
@@ -552,11 +552,11 @@ msgstr ""
 
 #: ../../txts/README:145
 msgid "Creating a Session Record</p>"
-msgstr "Erstellen eines Spielprotokolls</p>"
+msgstr "Erstellen eines Spielprotokolls.</p>"
 
 #: ../../txts/README:81
 msgid "Ctrl+F10    Quit the game immediately"
-msgstr "Strg+F10 Schliesst das Spiel sofort"
+msgstr "Strg+F10 Schließt das Spiel sofort."
 
 #: ../../txts/developers:165
 msgid "Czech"
@@ -564,7 +564,7 @@ msgstr "Tschechisch"
 
 #: ../../txts/README:92
 msgid "DELETE      Archive the current message"
-msgstr "Entf Archiviere die aktuelle Nachricht"
+msgstr "Entf Archiviere die aktuelle Nachricht."
 
 #: ../../txts/developers:172
 msgid "Dansk"
@@ -576,7 +576,7 @@ msgstr "Entwicklung"
 
 #: ../../txts/developers:307
 msgid "Documentation, Help and Wiki"
-msgstr "Dokumentation, Hilfe und Wiki"
+msgstr "Dokumentation, Hilfe und Wiki."
 
 #: ../../txts/developers:178
 msgid "Dutch"
@@ -584,7 +584,7 @@ msgstr "Niederländisch"
 
 #: ../../txts/editor_readme:25
 msgid "E        Toggles event menu"
-msgstr "E              Zeigt das Ereignismenü"
+msgstr "E Zeigt das Ereignismenü."
 
 #: ../../txts/developers:14
 msgid "Elders"
@@ -596,7 +596,7 @@ msgstr "Imperium"
 
 #: ../../txts/COPYING:82
 msgid "End of Terms and Conditions"
-msgstr "Ende der Bedingungen"
+msgstr "Ende der Bedingungen."
 
 #: ../../txts/README:63
 msgid "F               Toggle Fullscreen"
@@ -604,7 +604,7 @@ msgstr "F                  Schaltet den Vollbildmodus an/aus"
 
 #: ../../txts/editor_readme:27
 msgid "F        Toggles fullscreen"
-msgstr "F              Schaltet den Vollbildmodus an/aus"
+msgstr "F              Schaltet den Vollbildmodus an/aus."
 
 #: ../../txts/README:83
 msgid "F11         Take a screenshot"
@@ -612,7 +612,7 @@ msgstr "F11              Erstellt einen Schnappschuss des Bildschirms"
 
 #: ../../txts/README:79
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr "F6                Zeigt die Debug Konsole (nur in Debug-Version)"
+msgstr "F6                Zeigt die Debug Konsole (nur in Debug-Version)."
 
 #: ../../txts/developers:185
 msgid "Finnish"
@@ -628,7 +628,7 @@ msgstr "Französisch"
 
 #: ../../txts/README:90
 msgid "G           Go to location corresponding to current message"
-msgstr "G Springe zu dem Standpunkt, auf den sich die Nachricht bezieht"
+msgstr "G Gehe zu dem Standort, auf den die Nachricht sich bezieht."
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
@@ -640,7 +640,7 @@ msgid ""
 "and modification"
 msgstr ""
 "Allgemeine Öffentliche GNU-Lizenz Bedingungen für die Vervielfältigung, "
-"Verbreitung und Bearbeitung"
+"Verbreitung und Bearbeitung."
 
 #: ../../txts/developers:198
 msgid "Galician"
@@ -665,7 +665,7 @@ msgstr "Grafik"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
-msgstr "H              Zeigt das Hauptmenü"
+msgstr "H              Zeigt das Hauptmenü."
 
 #: ../../txts/developers:215
 msgid "Hebrew"
@@ -689,7 +689,7 @@ msgstr ""
 
 #: ../../txts/README:65
 msgid "Home        Center main mapview on starting location"
-msgstr "Pos1           Bringt Dich zum Hauptquartier zurück"
+msgstr "Pos1           Bringt Dich zum Hauptquartier zurück."
 
 #: ../../txts/developers:23
 #: ../../txts/developers:326
@@ -698,13 +698,13 @@ msgstr "Homepage"
 
 #: ../../txts/developers:298
 msgid "Homepage Coders"
-msgstr "Homepage Entwickler"
+msgstr "Homepage-Entwickler"
 
 #: ../../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
 msgstr ""
 "Anhang: Wie Sie diese Bedingungen auf Ihre eigenen, neuen Programme anwenden "
-"können"
+"können."
 
 #: ../../txts/developers:220
 msgid "Hungarian"
@@ -761,7 +761,7 @@ msgid ""
 msgstr ""
 "<br>Wenn Sie ein neues Programm entwickeln und wollen, daß es vom "
 "größtmöglichen Nutzen für die Allgemeinheit ist, dann erreichen Sie das am "
-"besten, indem Sie es zu freier Software machen, die jeder unter diesen "
+"einfachsten, indem Sie es zu freier Software machen, die jeder unter diesen "
 "Bestimmungen weiterverbreiten und verändern kann."
 
 #: ../../txts/README:101
@@ -787,7 +787,8 @@ msgstr ""
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
-"Im Nachrichtenfenster sind folgende zusätzliche Tastenkombinationen verfügbar"
+"Im Nachrichtenfenster sind folgende zusätzliche Tastenkombinationen "
+"verfügbar:"
 
 #: ../../txts/README:9
 #: ../../txts/editor_readme:7
@@ -852,11 +853,11 @@ msgstr ""
 
 #: ../../txts/developers:264
 msgid "Linux Distributions"
-msgstr "Linux Distributionen"
+msgstr "Linux-Distributionen"
 
 #: ../../txts/README:53
 msgid "M               Toggle minimap"
-msgstr "M                  Zeigt die Minikarte"
+msgstr "M                  Zeigt die Minikarte."
 
 #: ../../txts/editor_readme:31
 msgid "M        Toggles minimap"
@@ -882,7 +883,8 @@ msgstr "N Halte Nachrichten fest"
 #: ../../txts/tips/general_game.tip:34
 msgid "N' for News to access the messages window, then use 'G"
 msgstr ""
-"N' (wie Nachrichten) zum Anzeigen des Mitteilungsfensters, dann verwende 'G"
+"'N' (wie Nachrichten) zum Anzeigen des Mitteilungsfensters, dann verwende "
+"'G'."
 
 #: ../../txts/developers:160
 msgid ""
@@ -890,15 +892,15 @@ msgid ""
 "launchpad.net. "
 msgstr ""
 "HINWEIS: Diese Liste enthält die Personen, die Widelands übersetzt haben, "
-"bevor wir zu Launchpad gewechselt haben. "
+"bevor wir zu Launchpad gewechselt sind. "
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
-msgstr "Keine Gewährleistung"
+msgstr "Keine Gewährleistung."
 
 #: ../../txts/developers:286
 msgid "Non Unix Distributions"
-msgstr "Nicht Unix Distributionen"
+msgstr "Nicht Unix-Distributionen"
 
 #: ../../txts/README:160
 msgid ""
@@ -908,16 +910,16 @@ msgid ""
 "change between versions. Session records are not intended to serve as demo "
 "files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr ""
-"Beachte bitte, dass die aufgezeichneten Spiele auf Deinem System und Deiner "
+"Beachte bitte, daß die aufgezeichneten Spiele auf Deinem System und Deiner "
 "Einstellung basieren und somit nicht auf jedem Rechner, mit jeder Version "
 "bzw. jedem Betriebssystem abgespielt werden können. Spielprotokolle sollten "
-"nicht als Demo benutzt werden, da Sie wahrscheinlich auf den meisten "
+"nicht als Demo benutzt werden, da sie wahrscheinlich auf den meisten "
 "Systemen nicht funktionieren. Die Funktion der Spielprotokolle ist einzig "
 "und allein für die Fehlerbehebung erstellt worden."
 
 #: ../../txts/README:61
 msgid "O               Toggle objectives display"
-msgstr "O               Zeigt das Aufgabenfenster an"
+msgstr "O               Zeigt das Aufgabenfenster an."
 
 #: ../../txts/README:154
 msgid ""
@@ -944,19 +946,19 @@ msgstr "Andere"
 
 #: ../../txts/developers:275
 msgid "Other Unix Distributions"
-msgstr "Andere Unix Distributionen"
+msgstr "Andere Unix-Distributionen"
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
 msgstr ""
-"Unsere Computer Spieler sind zu langweilig? Besuche unsere Webseite unter "
-"www.Widelands.org und spiele mit anderen Spielern online."
+"Unsere Computerspieler sind zu langweilig? Besuche unsere Webseite unter "
+"www.widelands.org und spiele mit anderen Spielern online."
 
 #: ../../txts/editor_readme:33
 msgid "P        Toggles player menu"
-msgstr "P              Zeigt das Spielermenü"
+msgstr "P              Zeigt das Spielermenü."
 
 #: ../../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
@@ -968,7 +970,7 @@ msgstr "BildHoch    Schnelleres Spieltempo"
 
 #: ../../txts/README:76
 msgid "PAUSE         Pauses the game (only for local games)"
-msgstr "PAUSE Hält das Spiel an (nur für lokale Spiele)"
+msgstr "PAUSE Hält das Spiel an (nur für lokale Spiele)."
 
 #: ../../txts/developers:260
 msgid "Packagers"
@@ -1003,11 +1005,11 @@ msgstr "Lies Mich"
 
 #: ../../txts/editor_readme:4
 msgid "README for the Editor"
-msgstr "Lies Mich des Editors"
+msgstr "Lies Mich des Editors."
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr "Lies Mich für den Widelands Editor"
+msgstr "Lies Mich für den Widelands Editor."
 
 #: ../../txts/README:141
 msgid ""
@@ -1018,10 +1020,10 @@ msgid ""
 "Windows."
 msgstr ""
 "Aufnahmen sind nützliche Instrumente um Fehler in der Logik des Spiels zu "
-"finden. Daher bitten wir Dich die Aufnahmedateien an jeden Deiner "
+"finden. Daher bitten wir dich, die Aufnahmedateien an jeden deiner "
 "Fehlerberichte anzuhängen. Die Dateien sind unter Linux im Verzeichnis "
 "~/.widelands/replays im Heimatverzeichnis gespeichert. Unter Windows finden "
-"sie sich im replays Unterverzeichnis der Widelands Installation."
+"sie sich im replays-Unterverzeichnis der Widelandsinstallation."
 
 #: ../../txts/README:134
 msgid "Replays</p>"
@@ -1029,7 +1031,7 @@ msgstr "Aufnahmen</p>"
 
 #: ../../txts/README:109
 msgid "Reporting Bugs"
-msgstr "Berichten von Fehlern"
+msgstr "Berichten von Fehlern."
 
 #: ../../txts/developers:238
 msgid "Russian"
@@ -1037,19 +1039,19 @@ msgstr "Russisch"
 
 #: ../../txts/README:59
 msgid "S               Toggle statistics"
-msgstr "S                  Zeigt die Statistiken"
+msgstr "S                  Zeigt die Statistiken."
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr "SHIFT(gehalten)    Wählt das erste alternative Werkzeug aus"
+msgstr "SHIFT(gehalten)    Wählt das erste alternative Werkzeug aus."
 
 #: ../../txts/README:51
 msgid "SPACE       Toggle build-help"
-msgstr "Leertaste     Schaltet die Bauhilfe an/aus"
+msgstr "Leertaste     Schaltet die Bauhilfe an/aus."
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
-msgstr "Leertaste     Zeigt die Bauhilfe"
+msgstr "Leertaste     Zeigt die Bauhilfe."
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
@@ -1063,7 +1065,7 @@ msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
-"Auf https://translations.launchpad.net/widelands Sind alle Personen "
+"Auf https://translations.launchpad.net/widelands sind alle Personen "
 "gelistet, die nun über Launchpad bei der Übersetzung mitgeholfen haben."
 
 #: ../../txts/developers:243
@@ -1112,7 +1114,7 @@ msgstr "Schwedisch"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
-msgstr "T              Zeigt das Werkzeugmenü"
+msgstr "T              Zeigt das Werkzeugmenü."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -1131,11 +1133,11 @@ msgid ""
 "sign a copyright disclaimer for the program, if necessary.  Here is a "
 "sample; alter the names:"
 msgstr ""
-"Die hypothetischen Kommandos `show w' und `show c'  sollten die "
+"Die hypothetischen Kommandos 'show w' und 'show c'  sollten die "
 "entsprechenden Teile der GNU-GPL anzeigen. Natürlich können die von Ihnen "
-"verwendeten Kommandos anders heißen als `show w' und `show c'; es könnten "
+"verwendeten Kommandos anders heißen als 'show w' und 'show c'; es könnten "
 "auch Mausklicks oder Menüpunkte sein – was immer am besten in Ihr Programm "
-"paßt.<br><br>Soweit vorhanden, sollten Sie auch Ihren Arbeitgeber (wenn Sie "
+"paßt.<br><br>Soweit vorhanden, sollten sie auch Ihren Arbeitgeber (wenn Sie "
 "als Programmierer arbeiten) oder Ihre Schule einen Copyright-Verzicht für "
 "das Programm unterschreiben lassen. Hier ein Beispiel. Die Namen müssen Sie "
 "natürlich ändern:"
@@ -1305,7 +1307,7 @@ msgid ""
 "longer and more complete."
 msgstr ""
 "Der Editor ist für Spieler gedacht, die gerne ihre eigenen Karten erstellen "
-"und spielen würden.<br>Wie Du sehen kannst, wird am Editor noch hart "
+"und spielen würden.<br>Wie du sehen kannst, wird am Editor noch hart "
 "gearbeitet. Und so wird mit dem immer besser werdenden Editor auch dieser "
 "Text schon bald länger und länger werden."
 
@@ -1336,8 +1338,8 @@ msgid ""
 "Those pages might be more complete and up to date than this file. And there "
 "you further can find a short tutorial about building a map."
 msgstr ""
-"Jene Seiten sollten aktueller und kompletter sein als diese Datei und selbst "
-"ein kurzes Tutorial zum Map erstellen ist dort zu finden."
+"Jene Seiten sollten aktueller und kompletter sein als diese Datei. Selbst "
+"ein kurzes Tutorial zum Karten erstellen ist dort zu finden."
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
@@ -1349,8 +1351,8 @@ msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
-"Um ein Spielprotokoll zu erstellen, musst Du das Spiel mit dem --record "
-"Parameter starten. Unter Linux würde der Befehl wie folgt aussehen: $ "
+"Um ein Spielprotokoll zu erstellen, musst Du das Spiel mit dem Parameter '--"
+"record' starten. Unter Linux würde der Befehl wie folgt aussehen: $ "
 "./widelands --record=filename.rec"
 
 #: ../../txts/COPYING:93
@@ -1360,7 +1362,7 @@ msgid ""
 "exclusion of warranty; and each file should have at least the copyright line "
 "and a pointer to where the full notice is found."
 msgstr ""
-"Um dies zu erreichen, fügen Sie die folgenden Vermerke zu Ihrem Programm "
+"Um dies zu erreichen, fügen sie die folgenden Vermerke zu Ihrem Programm "
 "hinzu. Am sichersten ist es, sie an den Anfang einer jeden Quelldatei zu "
 "stellen, um den Gewährleistungsausschluß möglichst deutlich darzustellen; "
 "zumindest aber sollte jede Datei eine Copyright-Zeile besitzen sowie einen "
@@ -1403,7 +1405,7 @@ msgid ""
 "Use the 'configure economy' menu to adjust the target quantity of a specific "
 "ware."
 msgstr ""
-"Benutze das 'Wirtschaftseinstellungen' Menü um den Zielwert einer Ware "
+"Benutze das Menü für die Wirtschaftseinstellungen um den Zielwert einer Ware "
 "einzustellen."
 
 #: ../../txts/README:139
@@ -1416,12 +1418,12 @@ msgid ""
 "players has a different version of the game."
 msgstr ""
 "Über den Aufnahmeknopf im Hauptmenü kannst Du Dir ein vorher gespieltes "
-"Spiel in einer genauen Ablaufrekonstruktion ansehen. Beachte aber, dass "
+"Spiel in einer genauen Ablaufrekonstruktion ansehen. Beachte aber, daß "
 "selbst kleine Änderungen an den Spieldaten oder der ausführbaren "
-"Widelandsdatei dazu führen können, dass die Spielaufnahmen unbrauchbar "
-"werden und die nicht mehr synchron laufen. Dieser Effekt ähnelt dem "
-"Fehlverhalten bei Netzwerkspielen in denen einer der Spieler einer andere "
-"Version des Spiels verwendet."
+"Widelandsdatei dazu führen können, daß die Spielaufnahmen unbrauchbar werden "
+"und die nicht mehr synchron laufen. Dieser Effekt ähnelt dem Fehlverhalten "
+"bei Netzwerkspielen in denen einer der Spieler einer andere Version des "
+"Spiels verwendet."
 
 #: ../../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
@@ -1478,7 +1480,7 @@ msgid ""
 "main menu."
 msgstr ""
 "Widelands ist unter der GNU General Public License (GPL) lizenziert. Die "
-"Lizenz ist in der Datei 'COPYING' beigefügt. Um diese Lizenz zu lesen öffne "
+"Lizenz ist in der Datei 'COPYING' beigefügt. Um diese Lizenz zu lesen, öffne "
 "entweder obige Datei direkt oder wähle im Hauptmenü den Knopf 'Lizenz'."
 
 #: ../../txts/README:31
@@ -1503,9 +1505,9 @@ msgid ""
 "players, such as building a road or attacking an enemy. The rest of the "
 "filenames will tell you the time you started the game."
 msgstr ""
-"Jedes von Dir gespielte Spiel nimmt Widelands in zwei Dateien auf. Eine "
+"Jedes von dir gespielte Spiel nimmt Widelands in zwei Dateien auf. Eine "
 "dieser Dateien endet mit .wrpl.wgf und enthält einen initialen "
-"Speicherstand. Die zweite Datei endet mit .wrpl und enthält alle Kommandos "
+"Speicherstand. Die zweite Datei endet mit .wrpl und enthält alle Kommandos, "
 "die von den Spielern abgegeben wurden. Dazu gehören auch Gebäude oder der "
 "Angriff auf einen Gegner. Der übrige Teil der Dateinamen zeigt die Startzeit "
 "des aufgezeichneten Spiels."
@@ -1567,7 +1569,7 @@ msgstr ""
 
 #: ../../txts/README:5
 msgid "an open source strategy game"
-msgstr "Ein Open Source Strategiespiel"
+msgstr "Ein Open Source Strategiespiel."
 
 #~ msgid "F10         Quit the game immediately"
 #~ msgstr "F10              Beendet das Spiel unmittelbar"
