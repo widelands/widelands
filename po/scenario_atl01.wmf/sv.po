@@ -7,26 +7,26 @@ msgstr ""
 "Project-Id-Version: Widelands svn4685\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-03-25 19:00+0000\n"
-"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
+"PO-Revision-Date: 2011-03-22 10:14+0000\n"
+"Last-Translator: ThomasMarquart <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-03-23 04:32+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "\"%s\""
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - Från Nemesis till Genesis"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:531
 msgid "A dangerous finding"
-msgstr ""
+msgstr "Ett farligt fynd"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:624
 msgid ""
@@ -41,17 +41,19 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:402
 msgid "A man comes to Jundlina"
-msgstr ""
+msgstr "En man kommer till Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:598
 msgid "A young man approaches"
-msgstr ""
+msgstr "En ung man kommer fram"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
+"Efter att ha landat på en märklig ö nära Atlantis försöker de resterande "
+"atlanterna att bygga ett nytt hem."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid ""
@@ -92,7 +94,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:555
 msgid "Another building."
-msgstr ""
+msgstr "En byggnad till."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:180
 msgid ""
@@ -117,39 +119,40 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:199
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "Bygg tre skepp för att fly från ön."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:104
 msgid ""
 "Build a quarry, two woodcutter's houses, two forester's houses and a\n"
 "sawmill."
 msgstr ""
+"Bygg ett stenbrott, två skogshuggarhus, två skogsvaktarhus och ett sågverk."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:146
 msgid "Build a spiderfarm and a weaving mill"
-msgstr ""
+msgstr "Bygg en spindelgård och en väveri"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:189
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:190
 msgid "Build a warehouse and a horsefarm"
-msgstr ""
+msgstr "Bygg ett varuhus och en hästgård"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:161
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:162
 msgid "Build industry and mines"
-msgstr ""
+msgstr "Bygg industri och gruvor"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:178
 msgid "Build training buildings"
-msgstr ""
+msgstr "Bygg träningsbyggnader"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:179
 msgid "Build training buildings to improve your soldiers"
-msgstr ""
+msgstr "Bygg träningsbyggnader för att förbättra dina soldater"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:75
 msgid "Building lost!"
-msgstr ""
+msgstr "Byggnad förlorad!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:238
 msgid ""
@@ -177,35 +180,35 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:254
 msgid "Chaos emerges..."
-msgstr ""
+msgstr "Kaos bryter ut..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:348
 msgid "Colionder arrives"
-msgstr ""
+msgstr "Colionder kommer fram"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:365
 msgid "Colionder is in thought"
-msgstr ""
+msgstr "Colionder tänker efter"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:654
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulerar"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid "Ensure the supply of build wares"
-msgstr ""
+msgstr "Säkerställ tillgång till byggvaror"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:200
 msgid "Escape from the island"
-msgstr ""
+msgstr "Fly från ön"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Establish a food production"
-msgstr ""
+msgstr "Säkerställ matproduktionen"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Säkerställ en stabil matproduktion"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "Establish a spidercloth production"

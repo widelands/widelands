@@ -3,38 +3,38 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-06-06 21:16+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-03-22 09:48+0000\n"
+"Last-Translator: ThomasMarquart <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-03-23 04:32+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Ögon i mörkret"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - Från Nemesis till Genesis"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Malac' Mors stränder"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Hemma bäst"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
-msgstr ""
+msgstr "02 - En utpost för exilen"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Detta land är vårt land"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -111,7 +111,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlanterna - Flykten till elden"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -119,11 +119,11 @@ msgstr "Atoll"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "Barbarerna - Det andra riket"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Krävande. Introducerar Atlanterna"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -139,7 +139,7 @@ msgstr "Krater"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Ökenutmaningen"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -159,11 +159,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Enkel. Introducerar Barbarerna"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Enkel. Introducerar Imperiet"
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -171,7 +171,7 @@ msgstr "Alvskogen"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "Imperiet - Månader i exil"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -220,6 +220,9 @@ msgid ""
 "the mountain of gold that primises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Fyra stammar slåss med var sin närmaste granne om att först nå berget av "
+"guld som lovar ofattbar rikedom. Men lyckas de två som återstår dela på "
+"ressurserna?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -272,6 +275,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Det sägs att de gamla munkarna som bor i änu äldre sumpmarker är nyckeln "
+"till att behärska hela ön."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -346,7 +351,7 @@ msgstr "Mystisk labyrint"
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Inte implementerad ännu"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -382,6 +387,15 @@ msgid ""
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
 msgstr ""
+"För sex månader sedan skickades Lutius - en ung general i imperiet - med 150 "
+"soldater till gränsen bakom norra skogen där barbarernas stammar trängde in "
+"i imperiets område. Has uppgift var att försvara landet och först var "
+"allting lugnt. Han talade även med några av barbarernas barn och drömde om "
+"ett fredullt liv - sida vid sida med detta arkaiska folket. Han började "
+"känna sig trygg och hans armé tappade uppmärksamheten från den möjliga "
+"fienden. Det var deras undergång. En natt i mars attackerades hans "
+"oförberedda män av 100 barbarer och de blev helt överrumplade. Med bara hans "
+"liv och en handfull soldater kunde Lutius ta sig därifrån."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -415,7 +429,7 @@ msgstr "Träskön"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
-msgstr ""
+msgstr "Sumpmarksmunkar"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -552,6 +566,19 @@ msgid ""
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
 msgstr ""
+"När Chat’Karuth dog var han en gammal man, far till tre starka, "
+"uppåtsträvande söner och krigsherre med en armé som kunde hålla emot alla "
+"fiender som trängde in i gamla skogen. Mot slutet av sitt ärorika härskande, "
+"bestämde Chat’Karuth att hans äldsta son, Thron, skulle bli hans "
+"efterträdare - ett beslut som lämnade de två bröderna otillfredsställda. Den "
+"gamla krigsherren visste detta. Som has far hade sagt åt honom lämnade Tron "
+"huvudstaden Al’thunran där tronen mellan träden befann sig, och drog "
+"tillbaka sina styrkor till högarna där han begravde sin fars kropp. Där svor "
+"han till gudarna och sin fars ande att han skulle återvända och skapa "
+"ordning igen. Medan hans bröder rasade i krig mot Thron och styrkorna som "
+"han lämnade för att säkra Al’thunrans gränser, försöker den unga krigsherren "
+"att återförena sina bröder och tvinga stammarna att återigen tåga under en "
+"gemensam flagga."
 
 #: ../../campaigns/cconfig:45
 msgid ""
@@ -561,6 +588,11 @@ msgid ""
 "a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
+"När guden tappade tron på atlanterna och dränkte deras ö, en kvinnas kamp "
+"för rättvisa och en andra chans för sitt folk skulle bli legendarisk. Medan "
+"hon ledde de resterande atlanterna till en ny framtid i en ny del av världen "
+"blev Jundlina mäktigast under sin tid, dock med ett högt pris: hennes "
+"medmäsklighet och själ."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""

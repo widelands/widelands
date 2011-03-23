@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-03-21 09:03+0000\n"
-"Last-Translator: LAZA <Unknown>\n"
+"PO-Revision-Date: 2011-03-22 07:23+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-22 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-03-23 04:32+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -446,8 +446,7 @@ msgid ""
 msgstr ""
 "Es wird eine binäre Datei mit dem Namen filname.rec erstellt. Um diese "
 "abzuspielen, musst Du die selben Schritte wie oben erklärt durchführen. "
-"Hierbei muss der Parameter --record durch den Parameter --playback ersetzt "
-"werden."
+"Hierbei muss der Parameter '--record' durch '--playback' ersetzt werden."
 
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
@@ -683,8 +682,8 @@ msgid ""
 "cases the complete opposite of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
-"Halten der GROSSSCHREIBTASTE aktiviert das erste alternative Werkzeug. "
-"Dieses Werkzeug tut meistens das Gegenteil dessen, was das normale tut "
+"Festhalten der Umschalttaste aktiviert das erste alternative Werkzeug. "
+"Dieses Werkzeug macht meistens das Gegenteil dessen, was das normale tut "
 "(beispielsweise das Entfernen eines Objektes anstatt des Plazierens)."
 
 #: ../../txts/README:65
@@ -878,7 +877,7 @@ msgstr "Musiker"
 
 #: ../../txts/README:55
 msgid "N               Toggle messages ('news')"
-msgstr "N Halte Nachrichten fest"
+msgstr "N öffnet das Nachrichtenfenster"
 
 #: ../../txts/tips/general_game.tip:34
 msgid "N' for News to access the messages window, then use 'G"
@@ -931,10 +930,11 @@ msgid ""
 msgstr ""
 "Unter Windows müsstest Du Widelands entweder über die Konsole (mit dem "
 "Parameter) starten oder einen Link zur Widelands.exe erstellen. Das geht wie "
-"folgt:<br>*rechtsklick auf Widelands.exe und Verknüpfung erstellen "
-"auswählen<br>*editiere  den Link.<br>->In der Eingabezeile des Links sollte "
+"folgt:<br>*Rechtsklick auf Widelands.exe und Verknüpfung erstellen "
+"auswählen<br>*Editiere den Link.<br>->In der Eingabezeile des Links sollte "
 "eine Zeile stehen in der etwas ähnliches wie C:\\Programme\\Widelands\\"
-"widelands.exe steht. Hier fügst Du einfach --record=filename.rec hinten an."
+"widelands.exe steht. Hier fügst Du einfach den Parameter '--"
+"record=filename.rec' hinten an."
 
 #: ../../txts/README:97
 msgid "Online Help"
@@ -962,11 +962,11 @@ msgstr "P              Zeigt das Spielermenü."
 
 #: ../../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr "BildRunter  Langsameres Spieltempo / Pause"
+msgstr "Bild-Runter  Langsameres Spieltempo / Pause."
 
 #: ../../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
-msgstr "BildHoch    Schnelleres Spieltempo"
+msgstr "Bild-Hoch    Schnelleres Spieltempo."
 
 #: ../../txts/README:76
 msgid "PAUSE         Pauses the game (only for local games)"
@@ -1389,7 +1389,7 @@ msgstr "Übersetzer"
 msgid ""
 "Use '@name' at the beginning of a chat message to send it to only one player."
 msgstr ""
-"Benutzen Sie '@name' am Anfang einer Chat-Nachricht um diese nur einem "
+"Benutze '@name' am Anfang einer Chat-Nachricht um diese nur demjenigen "
 "Spieler zu senden."
 
 #: ../../txts/tips/general_game.tip:26
@@ -1468,10 +1468,11 @@ msgstr ""
 "Widelands ist ein Strategiespiel, das ein Spielprinzip ähnlich dem von "
 "BlueBytes Siedler II anstrebt.<br>In diesem Spiel beginnt der Spieler auf "
 "einem kleinen Stück Land, das nicht mehr als ein paar nützliche Ressourcen "
-"birgt. Diese gebrauchend, kann er sich ein Reich mit tausenden von "
-"Einwohnern schaffen. Auf dem Weg zu diesem Ziel muss er eine wirtschaftliche "
-"Infrastruktur errichten, die umliegenden Ländereien erkunden und Feinden "
-"gegenübertreten, die versuchen, die Spielwelt zu beherrschen wie er."
+"birgt. Diese richtig eingesetzt, kann er sich ein Reich mit tausenden von "
+"Einwohnern schaffen. Auf dem Weg zu diesem Ziel muss der Spieler eine "
+"wirtschaftliche Infrastruktur errichten, die umliegenden Ländereien erkunden "
+"und Feinden gegenübertreten, die versuchen, die Spielwelt zu beherrschen wie "
+"er."
 
 #: ../../txts/README:22
 msgid ""

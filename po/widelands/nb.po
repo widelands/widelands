@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-03-04 21:31+0000\n"
+"PO-Revision-Date: 2011-03-22 23:10+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-03-23 04:32+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1081,7 +1081,7 @@ msgstr "ukjent/uhåndtert versjon %i"
 #: ../../src/game_io/game_preload_data_packet.cc:65
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "forhåndslast: %s"
 
 #: ../../src/graphic/animation.cc:138 ../../src/logic/building.cc:77
 #: ../../src/logic/immovable.cc:195 ../../src/logic/immovable.cc:824
@@ -1128,7 +1128,7 @@ msgstr "Laster animasjoner: %d%% ferdig"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[kamp] soldat %u taper kamp\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
@@ -1463,7 +1463,7 @@ msgstr "bygg vei: %s"
 #: ../../src/logic/playercommand.cc:425
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "flagg %u: %s"
 
 #: ../../src/logic/playercommand.cc:431
 #, c-format
@@ -1565,12 +1565,14 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"feil rekkefølge på varer innenfor gruppe: varetype %s opptrer etter varetype "
+"%s (fiks rekkefølgen!)"
 
 #: ../../src/logic/production_program.cc:114
 #: ../../src/logic/production_program.cc:866
 #: ../../src/logic/production_program.cc:961
 msgid "count"
-msgstr ""
+msgstr "antall"
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
@@ -1598,7 +1600,7 @@ msgstr "arbeidere trenger erfaring"
 
 #: ../../src/logic/production_program.cc:272
 msgid "ware type or worker type"
-msgstr ""
+msgstr "varetype eller arbeidertype"
 
 #: ../../src/logic/production_program.cc:335
 #, c-format
@@ -2112,12 +2114,12 @@ msgstr "%u: %s"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
 msgid "flagdata: %s"
-msgstr ""
+msgstr "flaggdata: %s"
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "høyder: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:84
 msgid "Invalid World"
@@ -2151,7 +2153,7 @@ msgstr "%s: %s"
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Mål: %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
@@ -2227,6 +2229,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"forventet 1, men fant %u plasser til bærere i vei lagret med pakkeversjon 2 "
+"(gammel)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
