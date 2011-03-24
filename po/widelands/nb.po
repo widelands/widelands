@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-03-22 23:10+0000\n"
+"PO-Revision-Date: 2011-03-23 18:52+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-23 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:45+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1335,7 +1335,7 @@ msgstr ""
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr ""
+msgstr "ødelegg kartobjekt: %s"
 
 #: ../../src/logic/instances.cc:124
 #, c-format
@@ -1610,11 +1610,11 @@ msgstr ""
 #: ../../src/logic/production_program.cc:350
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
-msgstr ""
+msgstr "forventet{«feilet»|«ferdig»|«hoppet over»} men fant «%s»"
 
 #: ../../src/logic/production_program.cc:363
 msgid "expected \"and\" or end of input"
-msgstr ""
+msgstr "forventet «og» eller slutt på inndata"
 
 #: ../../src/logic/production_program.cc:372
 msgid "expected condition at end of input"
@@ -1622,7 +1622,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:378
 msgid "expected \"or\" or end of input"
-msgstr ""
+msgstr "forventet «eller» eller slutt på inndata"
 
 #: ../../src/logic/production_program.cc:418
 #: ../../src/logic/production_program.cc:817
@@ -1641,7 +1641,7 @@ msgstr " eller "
 
 #: ../../src/logic/production_program.cc:431
 msgid " because not: "
-msgstr ""
+msgstr " fordi ikke: "
 
 #: ../../src/logic/production_program.cc:480
 #, c-format
@@ -1659,28 +1659,28 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:502
 msgid "failure"
-msgstr ""
+msgstr "feil"
 
 #: ../../src/logic/production_program.cc:507
 msgid "completion"
-msgstr ""
+msgstr "ferdig"
 
 #: ../../src/logic/production_program.cc:512
 msgid "skip"
-msgstr ""
+msgstr "hopp over"
 
 #: ../../src/logic/production_program.cc:517
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{«feil»|«ferdig»|«hopp over»}"
 
 #: ../../src/logic/production_program.cc:531
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{«feil»|«ferdig»|«hopp over»|«gjenta»}"
 
 #: ../../src/logic/production_program.cc:651
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "sov: %s"
 
 #: ../../src/logic/production_program.cc:672
 msgid "idle animation is default; calling is not allowed"
@@ -1873,7 +1873,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:274
 #, c-format
 msgid "flag styles: %s"
-msgstr ""
+msgstr "flaggstiler: %s"
 
 #: ../../src/logic/tribe.cc:316
 #, c-format
@@ -1883,7 +1883,7 @@ msgstr "stamme %s: %s"
 #: ../../src/logic/warehouse.cc:460
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr ""
+msgstr "En ny %s ble lagt til økonomien din."
 
 #: ../../src/logic/worker.cc:107
 #, c-format
@@ -2006,7 +2006,7 @@ msgstr "bygninger: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
 msgid "buildingdata: %s"
-msgstr ""
+msgstr "bygningdata: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:274
 #, c-format
@@ -2033,17 +2033,17 @@ msgstr "varhus: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:617
 #, c-format
 msgid "militarysite: %s"
-msgstr ""
+msgstr "militært sted: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:774
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
+msgstr "program %s ble hoppet over ved tid %u, men tid er bare %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:972
 #, c-format
 msgid "trainingsite: %s"
-msgstr ""
+msgstr "treningsted: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
@@ -2053,7 +2053,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
 msgid "seen: %s"
-msgstr ""
+msgstr "sett: %s"
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
 #, c-format
@@ -2088,17 +2088,17 @@ msgstr "flagg: %s"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr ""
+msgstr "feil flagg (%u) ved gitt posisjon (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "intet flagg ved gitt posisjon (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
 msgid "has building %u at (%i, %i), which is not at the top left node"
-msgstr ""
+msgstr "har bygning %u på (%i, %i), som ikke er på øvre venstre node"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
@@ -2163,7 +2163,7 @@ msgstr "spillernavn og stammer: %s"
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:61
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "spillerposisjoner: %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format

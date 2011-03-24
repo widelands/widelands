@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-06-06 22:42+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-03-23 07:51+0000\n"
+"Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:46+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../worlds/greenland/conf:58
@@ -118,7 +118,7 @@ msgstr "Kohle"
 #: ../../worlds/greenland/conf:16
 #: ../../worlds/greenland/conf:17
 msgid "Dead Tree"
-msgstr "Toter Baum"
+msgstr "toter Baum"
 
 #: ../../worlds/greenland/conf:84
 msgid "Deer"
@@ -134,7 +134,7 @@ msgstr "Elch"
 
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
-msgstr "Gefällter Baum"
+msgstr "gefällter Baum"
 
 #: ../../worlds/greenland/resconf:41
 msgid "Fish"

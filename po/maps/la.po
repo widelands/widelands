@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-02-25 11:48+0000\n"
+"PO-Revision-Date: 2011-03-23 14:55+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:45+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/cconfig:64
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "I - De Malac'Mor litoribus"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
@@ -161,11 +161,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Facilis. Barbari introducuntur."
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Facilis. Imperium introducitur."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
