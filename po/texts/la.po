@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-02-25 07:27+0000\n"
+"PO-Revision-Date: 2011-03-24 08:19+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-03-25 04:35+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../txts/README:69
@@ -468,7 +468,7 @@ msgstr "CTRL+S Tabulam servare"
 
 #: ../../txts/developers:137
 msgid "Campaign Story"
-msgstr ""
+msgstr "Fabula contentionis"
 
 #: ../../txts/README:16
 msgid "Check out the Widelands project homepage:"
@@ -804,7 +804,7 @@ msgstr "Musici"
 
 #: ../../txts/README:55
 msgid "N               Toggle messages ('news')"
-msgstr ""
+msgstr "N Nuntia monstrare"
 
 #: ../../txts/tips/general_game.tip:34
 msgid "N' for News to access the messages window, then use 'G"
@@ -868,7 +868,7 @@ msgstr ""
 
 #: ../../txts/editor_readme:33
 msgid "P        Toggles player menu"
-msgstr ""
+msgstr "P Indicem ludoris monstrare"
 
 #: ../../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
@@ -942,7 +942,7 @@ msgstr "Ruthenica lingua"
 
 #: ../../txts/README:59
 msgid "S               Toggle statistics"
-msgstr ""
+msgstr "S Census monstrare"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -1008,7 +1008,7 @@ msgstr "Suecica lingua"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
-msgstr ""
+msgstr "T Instrumentorum indicem monstrat"
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""

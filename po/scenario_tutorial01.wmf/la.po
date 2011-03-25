@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-02-24 10:32+0000\n"
+"PO-Revision-Date: 2011-03-24 12:29+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
+"X-Launchpad-Export-Date: 2011-03-25 04:36+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -49,6 +49,17 @@ msgid ""
 "level 2 evade. This is one fearsome warrior then! The individual statistics\n"
 "have the following meaning:"
 msgstr ""
+"A soldier is created as any normal worker: a carrier grabs a tool in a\n"
+"Miles creatur uti alii operarii: Portator instrumentum in horreo capit, \n"
+"cum operarius pro quadam professione quaeritur. Arma Barbari militis\n"
+"sunt asciae. Militi novo gradus 0 est. Ut miles melius pugnare possit,\n"
+"exercere debet. Hoc facit in locis exercendi ut castris exercendi vel "
+"arena:\n"
+"Milites eo eunt (uti nunc nostri amiculi), tum aliquas res consumentes \n"
+"unum gradum meliorantur. Si Barbarus miles exercitissimus est, ei \n"
+"gradus vitae punctae 3 et gradus aggressionis 5 et gradus defensionis 0 \n"
+"et gradus vitationis 2 sunt. Horribilis est hic miles! Unus quisque censuum\n"
+"explicatur:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:438
 msgid ""
@@ -152,7 +163,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
 msgid "Census and statistics"
-msgstr ""
+msgstr "Aedificiorum nomina censusque"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:650
 msgid ""
@@ -309,7 +320,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
-msgstr ""
+msgstr "Vitatio:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
