@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-21 12:15+0000\n"
-"PO-Revision-Date: 2011-03-10 10:14+0000\n"
-"Last-Translator: LAZA <Unknown>\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-03-24 17:40+0000\n"
+"Last-Translator: David Allwicher <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-11 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-03-25 04:35+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:38
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
 " \"Finally, the Gods were with us!<br> We landed on an unknown coast and "
 "found peaceful rest under the palm trees growing at the shore. But that is "
@@ -27,18 +27,15 @@ msgid ""
 "under the only palm trees existing in this far-away sandy desert. I fear we "
 "won't find the help we need to get our ship repaired in good time.\" "
 msgstr ""
-" „Letztendlich standen die Götter uns bei!<br>\r\n"
-"Wir strandeten an einer unbekannten Küste und fanden Ruhe und Frieden unter "
-"den Palmen die am Strand wuchsen. Aber ob das wirklich so gut ist. Die "
-"Wahrheit ist:<br>\r\n"
-"als ich heute morgen aufwachte, sah ich nichts als Sand um uns herum.<br>\r\n"
-"In Wirklichkeit sieht es so aus, als ob wir unter den einzigen existieren "
-"Palmen gelandet wären\r\n"
-"in dieser endlosen Wüste aus Sand. Ich befürchte wir werden hier keine Hilfe "
-"finden\r\n"
-"um unser Schiff beizeiten zu reparieren.“ "
+" „Letztendlich standen die Götter uns bei!<br> Wir strandeten an einer "
+"unbekannten Küste und fanden Ruhe und Frieden unter den Palmen die am Strand "
+"wuchsen. Aber ob das wirklich so gut ist. Die Wahrheit ist:<br> als ich "
+"heute morgen aufwachte, sah ich nichts als Sand um uns herum.<br> In "
+"Wirklichkeit sieht es so aus, als ob wir unter den einzigen existieren "
+"Palmen gelandet wären in dieser endlosen Wüste aus Sand. Ich befürchte wir "
+"werden hier keine Hilfe finden um unser Schiff beizeiten zu reparieren.“ "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:90
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
 " \"Hey Lutius, I got the message that our first lumberjack started his work "
 "today. Perhaps it would be a good idea to wait until he cleans enough space "
@@ -48,20 +45,16 @@ msgid ""
 "needs, too. So we should build up a sawmill - as soon as we have enough "
 "space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" „Hallo, Lutius, ich wurde benachrichtigt, dass unser erster Holzfäller "
-"heute seine Arbeit aufgenommen hat.\r\n"
-"Vielleicht wäre es eine gute Idee zu warten, bis er genügend Platz abgeholzt "
-"hat, um\r\n"
-"zwei weitere Holzfäller zu errichten. Damit könnten wir dann schneller an "
-"Stämme kommen.<br>\r\n"
-"Aber leider sind bloße Stämme für die Reparatur unseres Schiffes untauglich -"
-" wir brauchen also Bretter,\r\n"
-"wie es für jedes Schiff oder auch größere Gebäude benötigt wird. Daher "
-"sollten wir ein Sägewerk errichten, sobald auch dafür ausreichend Raum "
-"besteht.“\r\n"
-"<br><br>-- NEUE AUFGABE --<br> "
+" „Hallo Lutius, ich wurde benachrichtigt, dass unser erster Holzfäller heute "
+"seine Arbeit aufgenommen hat. Vielleicht wäre es eine gute Idee zu warten, "
+"bis er genügend Platz abgeholzt hat, um zwei weitere Holzfäller zu "
+"errichten. Damit könnten wir dann schneller an Stämme kommen.<br> Aber "
+"leider sind bloße Stämme für die Reparatur unseres Schiffes untauglich - wir "
+"brauchen also Bretter, wie es für jedes Schiff oder auch größere Gebäude "
+"benötigt wird. Daher sollten wir ein Sägewerk errichten, sobald auch dafür "
+"ausreichend Raum besteht.“<br><br>-- NEUE AUFGABE --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:73
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid ""
 " \"Hey Lutius, I just met Saledus outside.<br> He told me about the "
 "barracks. Well, I am not one of those girls who think we need more barracks -"
@@ -70,32 +63,27 @@ msgid ""
 "yesterday and found a nice place for a lumberjack's house, south of our "
 "provisional headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" „Hey, Lutius, ich traf gerade Saledus draußen.<br>Er erzählte mir von der "
-"Baracke.\r\n"
-"Nun, ich bin nicht eine dieser Frauen, die glauben, dass wir mehr Baracken "
-"brauchen -\r\n"
-"vielmehr sollten wir uns nun auf andere Dinge konzentrieren.<br>\r\n"
-"Es ist absolut klar, dass wir Holz benötigen, um unser Schiff zu "
-"reparieren.\r\n"
-"Daher lief ich gestern etwas durch den Wald und fand einen netten Ort für "
-"eine Holzfällerhütte,\r\n"
-"südlich unseres provisorischen Hauptquartiers gelegen.“\r\n"
-"<br><br>--NEUE AUFGABE--<br> "
+" „Hallo Lutius, ich traf gerade Saledus draußen.<br> Er erzählte mir von der "
+"Baracke. Nun, ich bin nicht eine dieser Frauen, die glauben, dass wir mehr "
+"Baracken brauchen - vielmehr sollten wir uns nun auf andere Dinge "
+"konzentrieren.<br> Es ist absolut klar, dass wir Holz benötigen, um unser "
+"Schiff zu reparieren. Daher lief ich gestern etwas durch den Wald und fand "
+"einen netten Ort für eine Holzfällerhütte, südlich unseres provisorischen "
+"Hauptquartiers gelegen.“ <br><br>--NEUE AUFGABE--<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:126
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:117
 msgid ""
 " \"Hey Lutius, today we got a lot closer to our first castle. The quarry to "
 "the south began its work today and will soon provide us with stones and "
 "beautiful marble.<br> Now we truly can look forward to settling down on "
 "another island.\" "
 msgstr ""
-" „Hallo, Lutius! Heute sind wir unserer ersten eigenen Burg ein Stück näher "
-"gekommen.\r\n"
-"Der Steinbruch im Süden hat heute seine Arbeit aufgenommen und wird uns "
-"schon bald mit Steinen und schönem Marmor versorgen. Jetzt können wir uns "
-"darauf freuen, auf einer besseren Insel zu siedeln.“ "
+" „Hallo Lutius! Heute sind wir unserer ersten eigenen Burg ein Stück näher "
+"gekommen. Der Steinbruch im Süden hat heute seine Arbeit aufgenommen und "
+"wird uns schon bald mit Steinen und schönem Marmor versorgen. Jetzt können "
+"wir uns darauf freuen, auf einer besseren Insel zu siedeln.“ "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:114
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:106
 msgid ""
 " \"Hey, my good old friend. I just thought about the rocks standing on the "
 "south shore of this land. Perhaps we could cut out some useful hard stones "
@@ -104,15 +92,13 @@ msgid ""
 "buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 " „Na, mein guter alter Freund. Ich dachte gerade über die Felsen am "
-"südlichen Strand dieses Landes nach.\r\n"
-"Vielleicht können wir einige brauchbare harte Steine und wunderschönen Mamor "
-"aus diesen herausschlagen.<br>\r\n"
-"Die Reparatur unseres Schiffes wird immerhin noch einige Wochen dauern und "
-"die Ressourcen, die wir jetzt sammeln, könnten die Basis für solide und "
-"große Gebäude in einem anderen Land sein.\"\r\n"
-"<br><br>-- NEUE AUFGABE --<br> "
+"südlichen Strand dieses Landes nach. Vielleicht können wir einige brauchbare "
+"harte Steine und wunderschönen Mamor aus diesen herausschlagen.<br> Die "
+"Reparatur unseres Schiffes wird immerhin noch einige Wochen dauern und die "
+"Ressourcen, die wir jetzt sammeln, könnten die Basis für solide und große "
+"Gebäude in einem anderen Land sein.\" <br><br>-- NEUE AUFGABE --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:102
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:95
 msgid ""
 " \"Hi Lutius, I've got two important things to talk about... First the good "
 "news:<br> I saw that the construction of the sawmill is complete, so we can "
@@ -125,23 +111,19 @@ msgid ""
 "this island a complete desert.<br> Lutius, I beg you: find someone who takes "
 "care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" „Hallo, Lutius, es gibt zwei wichtige Dinge zu besprechen... Zuerst die "
-"guten Neuigkeiten:<br>\r\n"
-"Ich sah, dass der Bau des Sägewerks abgeschlossen ist und wir beginnen "
-"können, die Stämme unserer Holzfäller zu Brettern zu verarbeiten.<br>\r\n"
-"Aber das ist auch schon das einzig Positive, das ich zu sagen habe. Die "
-"schlechte Nachricht ist nämlich,\r\n"
-"dass unsere Holzfäller mit unglaublicher Geschwindigkeit das Wäldchen "
-"roden.\r\n"
-"Es gibt auf dieser Insel schon beinahe keine Bäume mehr!<br>\r\n"
-"Lutius, diese Bäume bieten uns Schutz vor den Sandstürmen der Wüste, "
-"Schatten an den heißen Tagen\r\n"
-"und sie sind die Heimat vieler liebenswürdiger Tiere. Wir sollten diese "
-"Insel nicht gänzlich wüst hinterlassen.<br> Lutius, ich bitte Dich: finde "
-"jemanden, der sich darum kümmert, neue Bäume zu pflanzen.“\r\n"
-"<br><br>-- NEUE AUFGABE --<br> "
+" „Hallo Lutius, es gibt zwei wichtige Dinge zu besprechen... Zuerst die "
+"guten Neuigkeiten:<br> Ich sah, dass der Bau des Sägewerks abgeschlossen ist "
+"und wir beginnen können, die Stämme unserer Holzfäller zu Brettern zu "
+"verarbeiten.<br> Aber das ist auch schon das einzig Positive, das ich zu "
+"sagen habe. Die schlechte Nachricht ist nämlich, dass unsere Holzfäller mit "
+"unglaublicher Geschwindigkeit das Wäldchen roden. Es gibt auf dieser Insel "
+"schon beinahe keine Bäume mehr!<br> Lutius, diese Bäume bieten uns Schutz "
+"vor den Sandstürmen der Wüste, Schatten an den heißen Tagen und sie sind die "
+"Heimat vieler liebenswürdiger Tiere. Wir sollten diese Insel nicht gänzlich "
+"wüst hinterlassen.<br> Lutius, ich bitte Dich: finde jemanden, der sich "
+"darum kümmert, neue Bäume zu pflanzen.“<br><br>-- NEUE AUFGABE --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:26
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:25
 msgid ""
 " \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. "
 "Nature was against us and drove us into a dark, wild storm. I really don't "
@@ -151,16 +133,15 @@ msgid ""
 "this black night with our lives.\" "
 msgstr ""
 " „Offensichtlich haben wir einen großen Fehler begangen, als wir gestern in "
-"den Perlen-Golf gesegelt sind.\r\n"
-"Die Natur scheint sich gegen uns aufzuwiegeln. Seit Stunden hängen wir nun "
-"in diesem dunklen, wilden Sturm fest.\r\n"
-"Unser Schiff taumelt zwischen den meterhohen Wellen, die längst höher als "
-"unser Mast geworden sind.<br>\r\n"
-"Und nun ist unser Schiff auch noch Leck geschlagen. Es füllt sich immer "
-"weiter mit Wasser. So schlecht wie es jetzt gerade aussieht, können wir den "
-"Göttern danken, wenn wir morgen früh noch unser nacktes Leben besitzen.“ "
+"den Perlen-Golf gesegelt sind. Die Natur scheint sich gegen uns "
+"aufzuwiegeln. Seit Stunden hängen wir nun in diesem dunklen, wilden Sturm "
+"fest. Unser Schiff taumelt zwischen den meterhohen Wellen, die längst höher "
+"als unser Mast geworden sind.<br> Und nun ist unser Schiff auch noch Leck "
+"geschlagen. Es füllt sich immer weiter mit Wasser. So schlecht wie es jetzt "
+"gerade aussieht, können wir den Göttern danken, wenn wir morgen früh noch "
+"unser nacktes Leben besitzen.“ "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:50
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:47
 msgid ""
 " \"Sire, I fear we are not safe in this foreign land. Who knows what "
 "terrible creatures live beyond this forest, in that mighty desert? What if "
@@ -174,16 +155,14 @@ msgstr ""
 " „Herr, ich fürchte, wir sind nicht sicher in diesem fremden Land. Wer weiß, "
 "welche schrecklichen Kreaturen hinter diesem Wäldchen in der mächtigen Wüste "
 "leben? Was, wenn diese Kreaturen den Wald betreten und darauf warten, uns "
-"anzugreifen?<br>\r\n"
-"Nun, vielleicht ist meine Furcht unbegründet, aber es kann nicht verkehrt "
-"sein, wachsam zu bleiben, damit wir sicher sein können, mögliche Feinde zu "
-"entdecken, bevor sie uns finden.<br>\r\n"
-"Wir sollten wirklich eine Baracke im östlichen Teil des Wäldchens errichten. "
-"Dann kann einer von uns nachts Wache halten und uns vor diesen Kreaturen "
-"schützen.“\r\n"
-"<br><br>-- NEUE AUFGABE --<br> "
+"anzugreifen <br> Nun, vielleicht ist meine Furcht unbegründet, aber es kann "
+"nicht verkehrt sein, wachsam zu bleiben, damit wir sicher sein können, "
+"mögliche Feinde zu entdecken, bevor sie uns finden.<br> Wir sollten wirklich "
+"eine Baracke im östlichen Teil des Wäldchens errichten. Dann kann einer von "
+"uns nachts Wache halten und uns vor diesen Kreaturen schützen.“ <br><br>-- "
+"NEUE AUFGABE --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:63
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:59
 msgid ""
 " \"Sire, I saw that the construction of the barracks was complete, so I "
 "assigned one of my best soldiers to it to keep watch on the desert.<br> This "
@@ -192,11 +171,11 @@ msgid ""
 msgstr ""
 " „Herr, ich habe gerade gesehen, dass die Baracke fertiggestellt ist. Ich "
 "habe gleich einen meiner besten Männer dorthin geschickt, der nun die Wüste "
-"beobachten und uns rechtzeitig vor jeder Gefahr warnen wird.<br>\r\n"
-"Wunderbar, jetzt können wir uns endlich etwas sicherer fühlen und uns auch "
-"der Reparatur des Schiffes zuwenden.“ "
+"beobachten und uns rechtzeitig vor jeder Gefahr warnen wird.<br> Wunderbar, "
+"jetzt können wir uns endlich etwas sicherer fühlen und uns auch der "
+"Reparatur des Schiffes zuwenden.“ "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:135
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:125
 msgid ""
 " \"Today I got the message that our ship is completely repaired. At the "
 "moment my people are loading everything onto our newly repaired ship, hoping "
@@ -209,13 +188,12 @@ msgid ""
 msgstr ""
 " „Heute bekam ich die Nachricht, dass unser Schiff wieder komplett repariert "
 "ist. Im Moment laden meine Leute alles Wichtige auf das Schiff in der "
-"Hoffnung, dass unsere Reise diesmal ruhiger verlaufen wird.<br>\r\n"
-"Diese Nacht wird unsere letzte auf dieser Insel sein. Morgen früh werden wir "
-"wieder aufbrechen und endlich nach einem geeigneten Ort für unsere neue "
-"Siedlung suchen.<br>\r\n"
-"Doch irgendwie frage ich mich immer noch, ob ich Fremil jemals wiedersehen "
-"werde.“<br><br>----------------------SIEG!-----------------------<br><br>\r\n"
-"Du hast diese Mission abgeschlossen. Wenn Du möchtest, kannst Du "
+"Hoffnung, dass unsere Reise diesmal ruhiger verlaufen wird.<br> Diese Nacht "
+"wird unsere letzte auf dieser Insel sein. Morgen früh werden wir wieder "
+"aufbrechen und endlich nach einem geeigneten Ort für unsere neue Siedlung "
+"suchen.<br> Doch irgendwie frage ich mich immer noch, ob ich Fremil jemals "
+"wiedersehen werde.“<br><br>----------------------SIEG!-----------------------"
+"<br><br> Du hast diese Mission abgeschlossen. Wenn Du möchtest, kannst Du "
 "weiterspielen, ansonsten starte einfach die nächste Mission. "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:14
@@ -271,7 +249,7 @@ msgstr ""
 "Familie, einigen guten Kriegern und Handwerkern habe ich soeben die Segel "
 "gesetzt und Kurs auf den Perlen-Golf genommen.“ "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:145
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:135
 msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
@@ -279,8 +257,8 @@ msgstr ""
 " \"Du hast diese Halbinsel zu einem sehr sicheren Ort gemacht. Es ist Zeit "
 "fortzufahren!\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:51
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:156
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:48
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:146
 msgid ""
 "* Build a barracks at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
@@ -288,14 +266,14 @@ msgstr ""
 "* Errichte eine Barracke beim roten Bausymbol östlich des Waldes, rechts von "
 "Deinem provisorischen Hauptquartier."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:103
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:181
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:96
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:171
 msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
 msgstr ""
 "* Baue ein Forsthaus um den Baumbestand auf dieser Insel zu erhalten."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:74
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:69
 msgid ""
 "* Build a lumberjack's house at the red house symbol, south of your "
 "provisional headquarters. Cutting down enough trees for more buildings will "
@@ -308,7 +286,7 @@ msgstr ""
 "beschleunigen, indem Du die Taste ‚BILD-HOCH‘ verwendest und es mit ‚BILD-"
 "RUNTER‘ wieder verlangsamen."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:163
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:153
 msgid ""
 "* Build a lumberjack's house at the red point, south of your provisional "
 "headquarters. Cutting down enough trees for more buildings will take a "
@@ -321,8 +299,8 @@ msgstr ""
 "beschleunigen, indem Du die Taste ‚BILD-HOCH‘ verwendest und es mit ‚BILD-"
 "RUNTER‘ wieder verlangsamen."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:115
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:188
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:107
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:178
 msgid ""
 "* Build a quarry in the south to cut some stones and marble out of the "
 "rocks.<br> These might be used for future buildings."
@@ -330,8 +308,8 @@ msgstr ""
 "* Baue einen Steinbruch im Süden, um Stein und Marmor aus den Felsen zu "
 "schlagen.<br> Diese benötigen wir für zukünftige Gebäude."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:91
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:174
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:85
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:164
 msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
@@ -347,11 +325,11 @@ msgstr "01 - Strände von Malac' Mor"
 msgid "A dark night"
 msgstr "Eine dunkle Nacht"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:46
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "A foreboding"
 msgstr "Eine Vorahnung"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:122
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "A step forward"
 msgstr "Ein Schritt nach vorne"
 
@@ -370,91 +348,91 @@ msgstr ""
 "Menge Glück gelingt es ihm, das beschädigte Schiff an einen unbekannten "
 "Wüstenstrand zu leiten und seine Mannschaft zu retten. Fürs Erste."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:100
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:93
 msgid "Amalea comes in..."
 msgstr "Amalea kommt herein..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:88
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:82
 msgid "Amalea recommends..."
 msgstr "Amalea empfiehlt..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:71
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Amalea smiles..."
 msgstr "Amalea lächelt..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:154
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid "Build a barracks"
 msgstr "Baue eine Baracke"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:179
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Build a forester's house"
 msgstr "Baue ein Forsthaus"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:161
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Build a lumberjack's house"
 msgstr "Baue ein Holzfällerhaus"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:186
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Build a quarry"
 msgstr "Baue einen Steinbruch"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:172
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr "Baue zwei Holzfällerhäuser und ein Sägewerk"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:24
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:36
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:23
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Diary of Lutius"
 msgstr "Tagebuch von Lutius"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:133
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "Mission Complete"
 msgstr "Mission erfüllt!"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:141
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:131
 msgid "Safe Peninsula"
 msgstr "Sichere Halbinsel"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:59
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Safe for now"
 msgstr "Vorerst sicher"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:48
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Saledus looks around nervously..."
 msgstr "Saledus schaut sich nervös um..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:124
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 msgid "Saledus looks promising..."
 msgstr "Saledus lächelt verheißungsvoll..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:112
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:104
 msgid "Saledus notes..."
 msgstr "Saledus bemerkt..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:61
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Saledus speaks with a sigh of relief..."
 msgstr "Saledus spricht erleichtert..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:143
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid "Saledus speaks:"
 msgstr "Saledus sagt:"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:34
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:32
 msgid "Survivor"
 msgstr "Überlebende"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:22
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:21
 msgid "The rough sea"
 msgstr "Die raue See"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:110
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid "Thinking about the future"
 msgstr "Gedanken über die Zukunft"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:69
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:86
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:98
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:64
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:80
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:91
 msgid "Young Amalea"
 msgstr "Die junge Amalea"
 

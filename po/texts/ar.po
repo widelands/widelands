@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-21 12:15+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
 "PO-Revision-Date: 2010-04-12 09:14+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-22 04:43+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -348,7 +348,11 @@ msgid ""
 "can be found at www.widelands.org."
 msgstr ""
 
-#: ../../txts/developers:144
+#: ../../txts/developers:150
+msgid "Atlantean"
+msgstr ""
+
+#: ../../txts/developers:140
 msgid "Barbarian"
 msgstr ""
 
@@ -373,7 +377,7 @@ msgstr ""
 msgid "CTRL+S   Save Map"
 msgstr ""
 
-#: ../../txts/developers:141
+#: ../../txts/developers:137
 msgid "Campaign Story"
 msgstr ""
 
@@ -381,11 +385,11 @@ msgstr ""
 msgid "Check out the Widelands project homepage:"
 msgstr ""
 
-#: ../../txts/developers:9
+#: ../../txts/developers:8
 msgid "Chieftain"
 msgstr ""
 
-#: ../../txts/developers:38
+#: ../../txts/developers:34
 msgid "Coders"
 msgstr ""
 
@@ -405,7 +409,7 @@ msgstr ""
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr ""
 
-#: ../../txts/developers:164
+#: ../../txts/developers:165
 msgid "Czech"
 msgstr ""
 
@@ -413,7 +417,7 @@ msgstr ""
 msgid "DELETE      Archive the current message"
 msgstr ""
 
-#: ../../txts/developers:171
+#: ../../txts/developers:172
 msgid "Dansk"
 msgstr ""
 
@@ -425,7 +429,7 @@ msgstr "التّطوير"
 msgid "Documentation, Help and Wiki"
 msgstr ""
 
-#: ../../txts/developers:177
+#: ../../txts/developers:178
 msgid "Dutch"
 msgstr "الألمانية"
 
@@ -433,11 +437,11 @@ msgstr "الألمانية"
 msgid "E        Toggles event menu"
 msgstr ""
 
-#: ../../txts/developers:15
+#: ../../txts/developers:14
 msgid "Elders"
 msgstr ""
 
-#: ../../txts/developers:150
+#: ../../txts/developers:146
 msgid "Empire"
 msgstr ""
 
@@ -461,7 +465,7 @@ msgstr ""
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../txts/developers:184
+#: ../../txts/developers:185
 msgid "Finnish"
 msgstr "الفنلندية"
 
@@ -469,7 +473,7 @@ msgstr "الفنلندية"
 msgid "Former elders"
 msgstr ""
 
-#: ../../txts/developers:190
+#: ../../txts/developers:191
 msgid "French"
 msgstr "الفرنسية"
 
@@ -487,7 +491,7 @@ msgid ""
 "and modification"
 msgstr ""
 
-#: ../../txts/developers:197
+#: ../../txts/developers:198
 msgid "Galician"
 msgstr ""
 
@@ -495,15 +499,15 @@ msgstr ""
 msgid "General game control"
 msgstr ""
 
-#: ../../txts/developers:202
+#: ../../txts/developers:203
 msgid "German"
 msgstr ""
 
-#: ../../txts/developers:76
+#: ../../txts/developers:72
 msgid "Graphicians"
 msgstr ""
 
-#: ../../txts/developers:19
+#: ../../txts/developers:18
 #: ../../txts/developers:333
 msgid "Graphics"
 msgstr ""
@@ -512,7 +516,7 @@ msgstr ""
 msgid "H        Toggles main menu"
 msgstr ""
 
-#: ../../txts/developers:214
+#: ../../txts/developers:215
 msgid "Hebrew"
 msgstr ""
 
@@ -531,7 +535,7 @@ msgstr ""
 msgid "Home        Center main mapview on starting location"
 msgstr ""
 
-#: ../../txts/developers:24
+#: ../../txts/developers:23
 #: ../../txts/developers:326
 msgid "Homepage"
 msgstr "الصفحة الرئيسية"
@@ -544,7 +548,7 @@ msgstr ""
 msgid "How to Apply These Terms to Your New Programs"
 msgstr ""
 
-#: ../../txts/developers:219
+#: ../../txts/developers:220
 msgid "Hungarian"
 msgstr ""
 
@@ -634,7 +638,7 @@ msgstr ""
 "أو المساهم الحق في اختيار طرق أخرى للتوزيع، وليس للمرخَّص له فرض هذا "
 "الاختيار."
 
-#: ../../txts/developers:224
+#: ../../txts/developers:225
 msgid "Italian"
 msgstr "الإيطالية"
 
@@ -675,7 +679,7 @@ msgstr ""
 msgid "M        Toggles minimap"
 msgstr ""
 
-#: ../../txts/developers:127
+#: ../../txts/developers:123
 msgid "Maps and Missions"
 msgstr "الخرائط و المهمات"
 
@@ -683,7 +687,7 @@ msgstr "الخرائط و المهمات"
 msgid "Miners will only work if supplied with food."
 msgstr ""
 
-#: ../../txts/developers:106
+#: ../../txts/developers:102
 msgid "Musicians"
 msgstr ""
 
@@ -695,7 +699,7 @@ msgstr ""
 msgid "N' for News to access the messages window, then use 'G"
 msgstr ""
 
-#: ../../txts/developers:159
+#: ../../txts/developers:160
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -777,7 +781,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/developers:229
+#: ../../txts/developers:230
 msgid "Polish"
 msgstr "البولندية"
 
@@ -819,7 +823,7 @@ msgstr ""
 msgid "Reporting Bugs"
 msgstr ""
 
-#: ../../txts/developers:237
+#: ../../txts/developers:238
 msgid "Russian"
 msgstr "الروسية"
 
@@ -844,13 +848,13 @@ msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
 
-#: ../../txts/developers:160
+#: ../../txts/developers:161
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 
-#: ../../txts/developers:242
+#: ../../txts/developers:243
 msgid "Slovak"
 msgstr "السلوفاكية"
 
@@ -862,16 +866,16 @@ msgid ""
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
 
-#: ../../txts/developers:29
+#: ../../txts/developers:28
 #: ../../txts/developers:339
 msgid "Sound"
 msgstr "الصوت"
 
-#: ../../txts/developers:117
+#: ../../txts/developers:113
 msgid "Sound Effects"
 msgstr "المؤثرات الصوتية"
 
-#: ../../txts/developers:247
+#: ../../txts/developers:248
 msgid "Spanish"
 msgstr "الأسبانية"
 
@@ -885,7 +889,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ../../txts/developers:252
+#: ../../txts/developers:253
 msgid "Swedish"
 msgstr ""
 
@@ -1052,7 +1056,7 @@ msgstr ""
 msgid "Translation"
 msgstr "الترجمة"
 
-#: ../../txts/developers:156
+#: ../../txts/developers:157
 msgid "Translators"
 msgstr "المترجمون"
 

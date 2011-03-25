@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-21 13:15+0100\n"
-"PO-Revision-Date: 2011-02-26 06:53+0000\n"
+"POT-Creation-Date: 2011-03-19 16:11+0100\n"
+"PO-Revision-Date: 2011-03-23 11:42+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-02-27 04:32+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:45+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -27,42 +27,42 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr ""
 "Est Tabula ludi Bluebyte Coloniorum II. Commentarium definitum non est!"
 
-#: ../../src/wlapplication.cc:378
+#: ../../src/wlapplication.cc:377
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:903 ../../src/wlapplication.cc:916
+#: ../../src/wlapplication.cc:899 ../../src/wlapplication.cc:907
 msgid "could not find the path of the main executable"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1018
+#: ../../src/wlapplication.cc:1025
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1155
+#: ../../src/wlapplication.cc:1162
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1158
+#: ../../src/wlapplication.cc:1165
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double uti non potes. Emendandi aedes non est!"
 
-#: ../../src/wlapplication.cc:1281
+#: ../../src/wlapplication.cc:1288
 msgid "This is Widelands-"
 msgstr "Hic est Widelands-"
 
-#: ../../src/wlapplication.cc:1283
+#: ../../src/wlapplication.cc:1290
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1284
+#: ../../src/wlapplication.cc:1291
 msgid ""
 "Options:\n"
 "\n"
@@ -70,7 +70,7 @@ msgstr ""
 "Optiones:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1288
+#: ../../src/wlapplication.cc:1295
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -82,11 +82,11 @@ msgid ""
 "                      files, savegames and replays\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1296
+#: ../../src/wlapplication.cc:1303
 msgid "                      Default is ~/.widelands\n"
 msgstr "                      Regula est ~/.widelands\n"
 
-#: ../../src/wlapplication.cc:1299
+#: ../../src/wlapplication.cc:1306
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback\n"
@@ -104,7 +104,7 @@ msgid ""
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1314
+#: ../../src/wlapplication.cc:1321
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -121,11 +121,11 @@ msgid ""
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1328
+#: ../../src/wlapplication.cc:1335
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1332
+#: ../../src/wlapplication.cc:1339
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -146,14 +146,14 @@ msgid ""
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1352
+#: ../../src/wlapplication.cc:1359
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables opengl rendering\n"
 "                      *EXPERIMENTAL*\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1358
+#: ../../src/wlapplication.cc:1365
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -176,22 +176,22 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1382
+#: ../../src/wlapplication.cc:1389
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1386
+#: ../../src/wlapplication.cc:1393
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1387
+#: ../../src/wlapplication.cc:1394
 msgid " --help               Show this help\n"
 msgstr " --help Hoc adiutorium monstra\n"
 
-#: ../../src/wlapplication.cc:1391
+#: ../../src/wlapplication.cc:1398
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -206,19 +206,19 @@ msgstr ""
 "Speramus, ut hic ludus placeat.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1542
+#: ../../src/wlapplication.cc:1547
 msgid "Warning: "
 msgstr "Cave: "
 
-#: ../../src/wlapplication.cc:1546
+#: ../../src/wlapplication.cc:1551
 msgid "Game data error"
 msgstr "Error datorum ludi"
 
-#: ../../src/wlapplication.cc:1551
+#: ../../src/wlapplication.cc:1556
 msgid "Unexpected error during the game"
 msgstr "Ludente error praeter expectationem advenit."
 
-#: ../../src/wlapplication.cc:1555
+#: ../../src/wlapplication.cc:1560
 msgid ""
 "\n"
 "\n"
@@ -231,7 +231,7 @@ msgstr ""
 "Hunc errorem, quaeso, nunties, ut Widelands ludus emendetur et melius fiat. "
 "Plus in regulare editione (stdout.txt in Windows systemate). Uteris aedem "
 
-#: ../../src/wlapplication.cc:1561
+#: ../../src/wlapplication.cc:1566
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -243,50 +243,50 @@ msgstr ""
 "Widelands ludum servare conatur, si errorem adesset. Qua de re ludum saepe "
 "non semper retollere continuereque potes.\n"
 
-#: ../../src/wlapplication.cc:1670
+#: ../../src/wlapplication.cc:1675
 msgid "Connection timeouted"
-msgstr ""
+msgstr "Tempus coniunctionis longius"
 
-#: ../../src/wlapplication.cc:1672
+#: ../../src/wlapplication.cc:1677
 msgid ""
 "Widelands has not been able to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on side\n"
 "of the server.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1694 ../../src/network/network_ggz.cc:370
+#: ../../src/wlapplication.cc:1699 ../../src/network/network_ggz.cc:370
 msgid "Connection problem"
 msgstr "Problema connectionis"
 
-#: ../../src/wlapplication.cc:1696
+#: ../../src/wlapplication.cc:1701
 msgid "Widelands has not been able to connect to the host."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1738
+#: ../../src/wlapplication.cc:1743
 msgid "The address of the game server is invalid"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1844 ../../src/network/nethost.cc:1889
+#: ../../src/wlapplication.cc:1849 ../../src/network/nethost.cc:1885
 msgid "Player"
 msgstr "Ludor"
 
-#: ../../src/wlapplication.cc:2010 ../../src/network/netclient.cc:176
-#: ../../src/network/nethost.cc:719
+#: ../../src/wlapplication.cc:2015 ../../src/network/netclient.cc:178
+#: ../../src/network/nethost.cc:720
 msgid "Preparing game"
 msgstr "Ludum paro"
 
-#: ../../src/wlapplication.cc:2118
+#: ../../src/wlapplication.cc:2123
 msgid "End of replay"
 msgstr ""
 
-#: ../../src/wlapplication.cc:2120
+#: ../../src/wlapplication.cc:2125
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/wlapplication.cc:2203 ../../src/logic/game.cc:381
-#: ../../src/logic/game.cc:421
+#: ../../src/wlapplication.cc:2208 ../../src/logic/game.cc:383
+#: ../../src/logic/game.cc:423
 msgid "Loading..."
 msgstr "Tollo..."
 
@@ -339,7 +339,7 @@ msgstr "Auctum"
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:170
 msgid "Stop"
-msgstr "Siste"
+msgstr "Sistere"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
@@ -357,18 +357,18 @@ msgstr "Metallum"
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:510
 msgid "Small"
-msgstr ""
+msgstr "parvum"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
 #: ../../src/logic/building.cc:511
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "Medium"
-msgstr ""
+msgstr "medium"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:381
 #: ../../src/logic/building.cc:511
 msgid "Big"
-msgstr ""
+msgstr "magnum"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:98
@@ -394,15 +394,15 @@ msgstr "Metallum est."
 
 #: ../../src/writeHTML.cc:383
 msgid "Is big."
-msgstr ""
+msgstr "magnum est."
 
 #: ../../src/writeHTML.cc:388
 msgid "Is medium."
-msgstr ""
+msgstr "medium est."
 
 #: ../../src/writeHTML.cc:394
 msgid "Is small."
-msgstr ""
+msgstr "parvum est."
 
 #: ../../src/writeHTML.cc:401
 msgid "Is not buildable."
@@ -410,7 +410,7 @@ msgstr "Aedificari non potest."
 
 #: ../../src/writeHTML.cc:408
 msgid "Is enhanced."
-msgstr ""
+msgstr "auctum est."
 
 #: ../../src/writeHTML.cc:415
 #, c-format
@@ -424,7 +424,7 @@ msgstr "Regio visa est %u."
 
 #: ../../src/writeHTML.cc:431 ../../src/writeHTML.cc:656
 msgid "Build cost"
-msgstr ""
+msgstr "aedificandi pretia"
 
 #: ../../src/writeHTML.cc:441
 #, c-format
@@ -465,6 +465,7 @@ msgstr ""
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Vita est %u, %u additum in quoque gradu super 0 (gradus maximus est %u)."
 
 #: ../../src/writeHTML.cc:601
 #, c-format
@@ -479,7 +480,7 @@ msgstr ""
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Agressio est %u, %u additum in quoque gradu super 0 (gradus maximus est %u)."
+"Defensus est %u, %u additum in quoque gradu super 0 (gradus maximus est %u)."
 
 #: ../../src/writeHTML.cc:621
 #, c-format
@@ -499,12 +500,12 @@ msgstr "In horreis creatur."
 #: ../../src/writeHTML.cc:698
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Ei experientia e %u laborando necessaria est, ut fiat"
 
 #: ../../src/writeHTML.cc:706
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "%s promovetur"
 
 #: ../../src/writeHTML.cc:717 ../../src/writeHTML.cc:862
 msgid "Programs"
@@ -513,7 +514,7 @@ msgstr "Programmata"
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
 msgid "mine"
-msgstr "metallum"
+msgstr "exhaurit"
 
 #: ../../src/writeHTML.cc:755
 msgid "breed"
@@ -569,7 +570,7 @@ msgstr "Dele rem"
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr "Aes quaere"
+msgstr "geologus"
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
@@ -855,8 +856,8 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:285
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:534
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:588
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:860
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:916
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:887
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:943
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:93
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:96
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:118
@@ -946,17 +947,17 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:170
 #: ../../src/editor/editorinteractive.cc:575
-#: ../../src/logic/editor_game_base.cc:336
+#: ../../src/logic/editor_game_base.cc:339
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Tollo gentem: %s"
 
 #: ../../src/editor/editorinteractive.cc:176
 msgid "Creating players"
-msgstr "Creo ludorem"
+msgstr "Creo ludores"
 
 #: ../../src/editor/editorinteractive.cc:183
-#: ../../src/logic/editor_game_base.cc:332
+#: ../../src/logic/editor_game_base.cc:333
 msgid "Loading world data"
 msgstr "Tollo data mundi"
 
@@ -1085,7 +1086,7 @@ msgstr "Expectavi %s sed \"%s\" inveni"
 msgid "frame number"
 msgstr ""
 
-#: ../../src/graphic/graphic.cc:1017
+#: ../../src/graphic/graphic.cc:1019
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr ""
@@ -1108,17 +1109,17 @@ msgstr ""
 #: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
-msgstr ""
+msgstr "parvum"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "medium"
-msgstr ""
+msgstr "mediocre"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
-msgstr ""
+msgstr "magnum"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -1153,47 +1154,47 @@ msgstr "%u%% aedificatum"
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
 msgid "loading critter: %s"
-msgstr ""
+msgstr "animalem tollo: %s"
 
-#: ../../src/logic/game.cc:228
+#: ../../src/logic/game.cc:230
 msgid "Preloading a map"
 msgstr "Tollo partem tabulae"
 
-#: ../../src/logic/game.cc:240
+#: ../../src/logic/game.cc:242
 msgid "Loading a world"
 msgstr "Tollo mundum"
 
-#: ../../src/logic/game.cc:246
+#: ../../src/logic/game.cc:248
 #, c-format
 msgid "Adding player %u"
 msgstr "Ludorem %u addo"
 
-#: ../../src/logic/game.cc:259
+#: ../../src/logic/game.cc:261
 msgid "Loading a map"
 msgstr "Tabulam tollo"
 
-#: ../../src/logic/game.cc:292 ../../src/logic/game.cc:366
-#: ../../src/logic/game.cc:403
+#: ../../src/logic/game.cc:294 ../../src/logic/game.cc:368
+#: ../../src/logic/game.cc:405
 msgid "Preloading map"
 msgstr "Tollo partes tabulae"
 
-#: ../../src/logic/game.cc:307
+#: ../../src/logic/game.cc:309
 msgid "Configuring players"
 msgstr ""
 
-#: ../../src/logic/game.cc:340
+#: ../../src/logic/game.cc:342
 msgid "Loading map"
 msgstr "Tabulam tollo"
 
-#: ../../src/logic/game.cc:484
+#: ../../src/logic/game.cc:486
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:498 ../../src/logic/player.cc:142
+#: ../../src/logic/game.cc:500 ../../src/logic/player.cc:142
 msgid "Missing starting position"
 msgstr "Loco primo egeo"
 
-#: ../../src/logic/game.cc:500 ../../src/logic/player.cc:144
+#: ../../src/logic/game.cc:502 ../../src/logic/player.cc:144
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1371,7 +1372,7 @@ msgstr "Aedificium militare ab hostem capitur!"
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Milites tui hostem apud %s vicerunt."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
@@ -1380,7 +1381,7 @@ msgstr "Aedificium hostis captum!"
 #: ../../src/logic/militarysite.cc:670
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr "%s hostem aggredientem invenit.>/p>"
+msgstr "%s hostem aggredientem invenit.</p>"
 
 #: ../../src/logic/militarysite.cc:671
 #, c-format
@@ -1435,7 +1436,7 @@ msgstr "insigne %u: %s"
 #: ../../src/logic/playercommand.cc:431
 #, c-format
 msgid "flag action: %s"
-msgstr ""
+msgstr "actio insignis: %s"
 
 #: ../../src/logic/playercommand.cc:482 ../../src/logic/playercommand.cc:540
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
@@ -1467,22 +1468,22 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:680
 #, c-format
 msgid "change target quantity: %s"
-msgstr ""
+msgstr "pretium appetitum muta: %s"
 
 #: ../../src/logic/playercommand.cc:743
 #, c-format
 msgid "set ware target quantity: %s"
-msgstr ""
+msgstr "Numerum rerum appetitum indice: %s"
 
 #: ../../src/logic/playercommand.cc:865
 #, c-format
 msgid "set worker target quantity: %s"
-msgstr ""
+msgstr "Numerum operariorum appetitum indice: %s"
 
 #: ../../src/logic/playercommand.cc:990
 #, c-format
 msgid "change training options: %s"
-msgstr ""
+msgstr "optiones exercendi muta: %s"
 
 #: ../../src/logic/playercommand.cc:1054
 #, c-format
@@ -1576,6 +1577,8 @@ msgstr ""
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
+"expectavi {\"male evenit\"|\"bene evenit\"|\"praeteritur\"}, sed inveni "
+"\"%s\""
 
 #: ../../src/logic/production_program.cc:363
 msgid "expected \"and\" or end of input"
@@ -1653,7 +1656,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:721
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "expectavi ware_type1[,ware_type2[,...]][:N] ..."
 
 #: ../../src/logic/production_program.cc:820
 msgid " is missing"
@@ -1701,7 +1704,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1175
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Non inveni aliquid aeris relictum!"
 
 #: ../../src/logic/production_program.cc:1196
 msgid "Mine empty"
@@ -1786,12 +1789,12 @@ msgstr "Expectavi numerum integrum positivum >0 %u sed inveni \"%s\""
 msgid "\"anim_name[,another_anim,...]\""
 msgstr "\"anim_name[,another_anim,...]\""
 
-#: ../../src/logic/soldier.cc:1250
+#: ../../src/logic/soldier.cc:1252
 #, c-format
 msgid "bad direction '%d'"
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1411
+#: ../../src/logic/soldier.cc:1429
 #, c-format
 msgid ""
 "The game engine has encountered a logic error. The %s #%u of player %u could "
@@ -1801,11 +1804,11 @@ msgid ""
 "has been implemented yet. (bug #1951113) (The game has been paused.)"
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1422 ../../src/logic/soldier.cc:1427
+#: ../../src/logic/soldier.cc:1440 ../../src/logic/soldier.cc:1445
 msgid "no"
 msgstr "Non"
 
-#: ../../src/logic/soldier.cc:1434 ../../src/logic/soldier.cc:1442
+#: ../../src/logic/soldier.cc:1452 ../../src/logic/soldier.cc:1460
 msgid "Logic error"
 msgstr ""
 
@@ -1997,17 +2000,17 @@ msgstr "horreum: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:617
 #, c-format
 msgid "militarysite: %s"
-msgstr ""
+msgstr "Aedificium militare: %s"
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:747
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:774
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:945
+#: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:972
 #, c-format
 msgid "trainingsite: %s"
-msgstr ""
+msgstr "locum exercendi: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
@@ -2222,70 +2225,70 @@ msgstr "res %u: %s"
 msgid "waredata: %s"
 msgstr "data rerum: %s"
 
-#: ../../src/network/netclient.cc:98
+#: ../../src/network/netclient.cc:100
 msgid "Could not establish connection to host"
 msgstr ""
 
-#: ../../src/network/netclient.cc:100
+#: ../../src/network/netclient.cc:102
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
 
-#: ../../src/network/netclient.cc:132
+#: ../../src/network/netclient.cc:134
 msgid "Client has left the game."
 msgstr ""
 
-#: ../../src/network/netclient.cc:214
+#: ../../src/network/netclient.cc:216
 msgid "Client crashed and performed an emergency save."
 msgstr ""
 
-#: ../../src/network/netclient.cc:461
+#: ../../src/network/netclient.cc:463
 msgid "Server sent a player update for a player that does not exist."
 msgstr ""
 
-#: ../../src/network/netclient.cc:478
+#: ../../src/network/netclient.cc:480
 msgid "Server sent an user update for a user that does not exist."
 msgstr ""
 
-#: ../../src/network/netclient.cc:553
+#: ../../src/network/netclient.cc:555
 #, c-format
 msgid ""
 "Expected a HELLO packet from server, but received command number %u. Maybe "
 "the server is running a different version of Widelands?"
 msgstr ""
 
-#: ../../src/network/netclient.cc:560
+#: ../../src/network/netclient.cc:562
 msgid "Server uses a different protocol version"
 msgstr ""
 
-#: ../../src/network/netclient.cc:706
+#: ../../src/network/netclient.cc:708
 msgid "/me 's file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/netclient.cc:776
+#: ../../src/network/netclient.cc:812
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr ""
 
-#: ../../src/network/netclient.cc:796
+#: ../../src/network/netclient.cc:832
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr ""
 
-#: ../../src/network/netclient.cc:809
+#: ../../src/network/netclient.cc:845
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr ""
 
-#: ../../src/network/netclient.cc:836
+#: ../../src/network/netclient.cc:872
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr ""
 
-#: ../../src/network/netclient.cc:870
+#: ../../src/network/netclient.cc:906
 msgid "Something went wrong: "
 msgstr "Aliquid male evenit: "
 
-#: ../../src/network/netclient.cc:901
+#: ../../src/network/netclient.cc:937
 msgid " An automatic savegame will be created."
 msgstr " Ludum a programmate servetur."
 
@@ -2354,29 +2357,29 @@ msgstr ""
 msgid "Server has left the game."
 msgstr ""
 
-#: ../../src/network/nethost.cc:679
+#: ../../src/network/nethost.cc:680
 msgid "The game has started just after you tried to connect."
 msgstr ""
 
-#: ../../src/network/nethost.cc:783
+#: ../../src/network/nethost.cc:784
 msgid "Server has crashed and performed an emergency save."
 msgstr ""
 
-#: ../../src/network/nethost.cc:991
+#: ../../src/network/nethost.cc:983
 msgid "You can not kick yourself!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1012
+#: ../../src/network/nethost.cc:1004
 msgid "There is no connected user with that nickname!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1075
+#: ../../src/network/nethost.cc:1067
 msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1081
+#: ../../src/network/nethost.cc:1073
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this "
 "help<br>start          - Starts the server<br>ls_saved_games - Shows a list "
@@ -2388,169 +2391,169 @@ msgid ""
 "Toggles the win_condition<br>host         $ - Tries to run the host command $"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1099
+#: ../../src/network/nethost.cc:1091
 #, c-format
 msgid "%s told me to run the command: \"%s\""
 msgstr ""
 
-#: ../../src/network/nethost.cc:1111
+#: ../../src/network/nethost.cc:1103
 #, c-format
 msgid "%s tried to start the game, but the server is not launchable."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1113
+#: ../../src/network/nethost.cc:1105
 #, c-format
 msgid "%s send the signal to start the game."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1119
+#: ../../src/network/nethost.cc:1111
 msgid "Available saved games:<br>"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1139
+#: ../../src/network/nethost.cc:1131
 msgid "Available maps:<br>"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1183
+#: ../../src/network/nethost.cc:1175
 #, c-format
 msgid "Can not use \"%s\" as saved game file!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1207
+#: ../../src/network/nethost.cc:1199
 #, c-format
 msgid "Can not use \"%s\" as map file!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1219 ../../src/network/nethost.cc:1225
+#: ../../src/network/nethost.cc:1211 ../../src/network/nethost.cc:1217
 msgid "Invalid value # for player - should be a player number"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1253
+#: ../../src/network/nethost.cc:1243 ../../src/network/nethost.cc:1249
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1436
+#: ../../src/network/nethost.cc:1432
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1830
+#: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1914
+#: ../../src/network/nethost.cc:1910
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1973
+#: ../../src/network/nethost.cc:1969
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s ad ludum venit."
 
-#: ../../src/network/nethost.cc:1983
+#: ../../src/network/nethost.cc:1979
 #, c-format
 msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands. \"@%s start\" starts the server."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2013
+#: ../../src/network/nethost.cc:2009
 msgid "Client reports time to host that is running backwards."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2016
+#: ../../src/network/nethost.cc:2012
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2020
+#: ../../src/network/nethost.cc:2016
 msgid "Client did not submit sync report in time."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2227
+#: ../../src/network/nethost.cc:2223
 msgid "Client and host have become desynchronized."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2274
+#: ../../src/network/nethost.cc:2270
 msgid "The game has already started."
 msgstr "Ludus iam incepit."
 
-#: ../../src/network/nethost.cc:2292
+#: ../../src/network/nethost.cc:2288
 msgid "Connection to client lost."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2306
+#: ../../src/network/nethost.cc:2302
 msgid "Client sent malformed commands: "
 msgstr ""
 
-#: ../../src/network/nethost.cc:2338
+#: ../../src/network/nethost.cc:2334
 msgid "Game is running already, but client has not connected fully"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2342
+#: ../../src/network/nethost.cc:2338
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2347
+#: ../../src/network/nethost.cc:2343
 msgid "Server uses a different protocol version."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2385
+#: ../../src/network/nethost.cc:2381
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2391
+#: ../../src/network/nethost.cc:2387
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2402
+#: ../../src/network/nethost.cc:2398
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2412
+#: ../../src/network/nethost.cc:2408
 msgid "Client sent unexpected synchronization report."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2448 ../../src/network/nethost.cc:2460
+#: ../../src/network/nethost.cc:2444 ../../src/network/nethost.cc:2456
 msgid "Client requests file altough none is available to send."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2450
+#: ../../src/network/nethost.cc:2446
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2471
+#: ../../src/network/nethost.cc:2467
 msgid "Client requests file part that does not exist."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2474
+#: ../../src/network/nethost.cc:2470
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2482
+#: ../../src/network/nethost.cc:2478
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2492
+#: ../../src/network/nethost.cc:2488
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2549
+#: ../../src/network/nethost.cc:2545
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s ludum reliquit (%s)"
 
-#: ../../src/network/nethost.cc:2568
+#: ../../src/network/nethost.cc:2564
 #, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "Ludor ignotus ludum reliquit (%s)"
@@ -2620,7 +2623,7 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr ""
+msgstr "Adiutorium: "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -2669,7 +2672,7 @@ msgstr "Descriptio:"
 #: ../../src/ui_fsmenu/netsetup_lan.cc:76
 #: ../../src/ui_fsmenu/singleplayer.cc:74
 msgid "Back"
-msgstr "Reverte"
+msgstr "Revertere"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:162
 #: ../../src/ui_fsmenu/campaign_select.cc:164
@@ -2811,7 +2814,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "clientes"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:194 ../../src/ui_fsmenu/launchSPG.cc:277
 msgid "(no map)"
@@ -2858,7 +2861,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:384 ../../src/ui_fsmenu/launchSPG.cc:252
 msgid "File not found"
-msgstr ""
+msgstr "Plica non inventa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:386
 #, c-format
@@ -2901,7 +2904,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:444
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "Crepe \"?\" in dextro superiore angulo situm, ut adiuveris."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:505
 msgid "Saved players are:"
@@ -2909,7 +2912,7 @@ msgstr "Ludores servati sunt:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
-msgstr ""
+msgstr "<clausum>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
@@ -2926,7 +2929,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:605
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Magnitudo: %u%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:606
 #, c-format
@@ -2936,7 +2939,7 @@ msgstr "* %i Ludores\n"
 #: ../../src/ui_fsmenu/launchMPG.cc:607
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Mundi genus: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:609
 msgid "* Scenario mode selected\n"
@@ -2996,7 +2999,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Clausum."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3043,7 +3046,7 @@ msgstr "Genus ludoris"
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 #: ../../src/wui/multiplayersetupgroup.cc:446
 msgid "Team"
-msgstr ""
+msgstr "Societas"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Player's tribe"
@@ -3088,7 +3091,7 @@ msgstr "Tempus ludendi:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:114
 msgid "Delete file"
-msgstr ""
+msgstr "Plicam delere"
 
 #: ../../src/ui_fsmenu/loadgame.cc:115
 msgid "Do you really want to delete "
@@ -3127,7 +3130,7 @@ msgstr "Optiones"
 #: ../../src/ui_fsmenu/main.cc:90
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "View Readme"
-msgstr "Legemi"
+msgstr "Legeme"
 
 #: ../../src/ui_fsmenu/main.cc:98 ../../src/wui/game_options_menu.cc:65
 msgid "License"
@@ -3139,7 +3142,7 @@ msgstr "Ludum finire"
 
 #: ../../src/ui_fsmenu/main.cc:112
 msgid "Version "
-msgstr "Aedes: "
+msgstr "Aedes "
 
 #: ../../src/ui_fsmenu/main.cc:117
 msgid "by the Widelands Development Team"
@@ -3167,7 +3170,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:51
 msgid "Internet game"
-msgstr ""
+msgstr "Ludus interretialis"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:59
 msgid "LAN / Direct IP"
@@ -3205,15 +3208,15 @@ msgstr ""
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:83
 #: ../../src/ui_fsmenu/netsetup_lan.cc:61
 msgid "Join this game"
-msgstr ""
+msgstr "Ad hunc ludum advenire"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:91
 msgid "Open a new game"
-msgstr ""
+msgstr "Ludum novum aperire"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:151
 msgid "Points"
-msgstr ""
+msgstr "Punctae"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:152
 msgid "Server"
@@ -3249,22 +3252,22 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:187
 #: ../../src/wui/multiplayersetupgroup.cc:261
 #: ../../src/wui/playerdescrgroup.cc:157
 msgid "Open"
-msgstr ""
+msgstr "Aperire"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:188
 #: ../../src/wui/multiplayersetupgroup.cc:250
 msgid "Closed"
-msgstr ""
+msgstr "Clausum"
 
 #: ../../src/ui_fsmenu/options.cc:52 ../../src/ui_fsmenu/options.cc:423
 msgid "Advanced Options"
-msgstr ""
+msgstr "Optiones Intricatae"
 
 #: ../../src/ui_fsmenu/options.cc:64 ../../src/ui_fsmenu/options.cc:399
 msgid "Apply"
@@ -3272,7 +3275,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:75
 msgid "min."
-msgstr ""
+msgstr "min."
 
 #: ../../src/ui_fsmenu/options.cc:81
 msgid "days"
@@ -3312,7 +3315,7 @@ msgstr "Lingua"
 
 #: ../../src/ui_fsmenu/options.cc:144
 msgid "In-game Options"
-msgstr ""
+msgstr "Optiones ludi"
 
 #: ../../src/ui_fsmenu/options.cc:151
 msgid "Use single Watchwindow Mode"
@@ -3349,7 +3352,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:269
 #, c-format
 msgid "%ix%i %i bit"
-msgstr ""
+msgstr "%i × %i, %i bit"
 
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Try system language"
@@ -3417,7 +3420,7 @@ msgstr "Novus ludus"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:59
 msgid "Campaigns"
-msgstr ""
+msgstr "Contentiones"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:68
 msgid "Load Game"
@@ -3454,7 +3457,7 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:79
 #: ../../src/wui/game_main_menu.cc:66
 msgid "Building Statistics"
-msgstr ""
+msgstr "Census aedificiorum"
 
 #: ../../src/wui/building_statistics_menu.cc:89
 msgid "Total Productivity: "
@@ -3515,7 +3518,7 @@ msgstr "Regio laborandi non monstra"
 
 #: ../../src/wui/buildingwindow.cc:235
 msgid "Debug"
-msgstr ""
+msgstr "Emendere"
 
 #: ../../src/wui/buildingwindow.cc:352
 msgid "Show workarea"
@@ -3532,7 +3535,7 @@ msgstr "Aedificium deleatur?"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
-msgstr ""
+msgstr "Thesaurus rerum gentis"
 
 #: ../../src/wui/encyclopedia_window.cc:87
 msgid "Consumed ware type(s)"
@@ -3544,15 +3547,15 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:246
 msgid "Build small buildings"
-msgstr ""
+msgstr "Aedificia parva facere"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build medium buildings"
-msgstr ""
+msgstr "Aedificia mediocra facere"
 
 #: ../../src/wui/fieldaction.cc:248
 msgid "Build large buildings"
-msgstr ""
+msgstr "Aedificia magna facere"
 
 #: ../../src/wui/fieldaction.cc:280
 msgid "Action"
@@ -3616,7 +3619,7 @@ msgstr "Impetum incipere"
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
-msgstr ""
+msgstr "Impetus"
 
 #: ../../src/wui/fieldaction.cc:584
 msgid "Build mines"
@@ -3646,12 +3649,12 @@ msgstr "Index princeps"
 #: ../../src/wui/game_main_menu.cc:52
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
-msgstr ""
+msgstr "Census generales"
 
 #: ../../src/wui/game_main_menu.cc:59
 #: ../../src/wui/ware_statistics_menu.cc:349
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Census rerum"
 
 #: ../../src/wui/game_main_menu.cc:73 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/waresdisplay.cc:50
@@ -3693,20 +3696,20 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:210
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
 msgid "A File with the name "
-msgstr ""
+msgstr "Plica nominata "
 
 #: ../../src/wui/game_main_menu_save_game.cc:214
 msgid " already exists. Overwrite?"
-msgstr ""
+msgstr " iam est. Superscribamne?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:270
 msgid "File deletion"
-msgstr ""
+msgstr "plica delenda"
 
 #: ../../src/wui/game_main_menu_save_game.cc:272
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "Num plica %s deleatur?"
 
 #: ../../src/wui/game_message_menu.cc:44 ../../src/wui/game_message_menu.h:148
 msgid "Message Menu: Inbox"
@@ -3718,7 +3721,7 @@ msgstr "Index agendorum"
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
-msgstr ""
+msgstr "Victoriam accipere"
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
@@ -3735,15 +3738,15 @@ msgstr "Auctores"
 #: ../../src/wui/game_options_menu.cc:81
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
-msgstr ""
+msgstr "Optiones sonorum"
 
 #: ../../src/wui/game_options_sound_menu.cc:33
 msgid "Ingame Music"
-msgstr ""
+msgstr "Musica"
 
 #: ../../src/wui/game_options_sound_menu.cc:39
 msgid "Sound FX"
-msgstr ""
+msgstr "Sonores"
 
 #: ../../src/wui/game_options_sound_menu.cc:43
 msgid "Ingame Music Volume"
@@ -3785,11 +3788,11 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:208
 msgid "Military buildings defeated"
-msgstr ""
+msgstr "Militaria aedificia victa"
 
 #: ../../src/wui/general_statistics_menu.cc:214
 msgid "Civilian buildings lost"
-msgstr ""
+msgstr "Civilia aedificia perdita"
 
 #: ../../src/wui/general_statistics_menu.cc:220
 msgid "Military"
@@ -3798,22 +3801,22 @@ msgstr ""
 #: ../../src/wui/general_statistics_menu.cc:246
 #: ../../src/wui/ware_statistics_menu.cc:423
 msgid "15 m"
-msgstr "15 m"
+msgstr "XV m"
 
 #: ../../src/wui/general_statistics_menu.cc:255
 #: ../../src/wui/ware_statistics_menu.cc:432
 msgid "30 m"
-msgstr "30 m"
+msgstr "XXX m"
 
 #: ../../src/wui/general_statistics_menu.cc:264
 #: ../../src/wui/ware_statistics_menu.cc:441
 msgid "1 h"
-msgstr "1 h"
+msgstr "I h"
 
 #: ../../src/wui/general_statistics_menu.cc:273
 #: ../../src/wui/ware_statistics_menu.cc:450
 msgid "2 h"
-msgstr "2 h"
+msgstr "II h"
 
 #: ../../src/wui/general_statistics_menu.cc:284
 #: ../../src/wui/ware_statistics_menu.cc:461
@@ -3823,17 +3826,17 @@ msgstr "Auxilium"
 #: ../../src/wui/general_statistics_menu.cc:293
 #: ../../src/wui/ware_statistics_menu.cc:470
 msgid "4 h"
-msgstr "4 h"
+msgstr "IV h"
 
 #: ../../src/wui/general_statistics_menu.cc:301
 #: ../../src/wui/ware_statistics_menu.cc:479
 msgid "8 h"
-msgstr "8 h"
+msgstr "VIII h"
 
 #: ../../src/wui/general_statistics_menu.cc:310
 #: ../../src/wui/ware_statistics_menu.cc:488
 msgid "16 h"
-msgstr "16 h"
+msgstr "XVI h"
 
 #: ../../src/wui/interactive_base.cc:270
 #, c-format
@@ -3861,7 +3864,7 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:128
 #: ../../src/wui/interactive_spectator.cc:65
 msgid "Statistics"
-msgstr ""
+msgstr "Census"
 
 #: ../../src/wui/interactive_player.cc:131
 msgid "Objectives"
@@ -3933,7 +3936,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:100
 msgid "Empty Password"
-msgstr "Tessera inane"
+msgstr "Tessera inanis"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
@@ -3966,7 +3969,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr ""
+msgstr "<vacatum>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
@@ -3989,7 +3992,7 @@ msgstr "Homo"
 
 #: ../../src/wui/multiplayersetupgroup.cc:394
 msgid "Client name"
-msgstr ""
+msgstr "Nomen clientis"
 
 #: ../../src/wui/multiplayersetupgroup.cc:402
 msgid "Role"
@@ -3997,7 +4000,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Start"
-msgstr ""
+msgstr "Incipere"
 
 #: ../../src/wui/multiplayersetupgroup.cc:426
 msgid "Type"
@@ -4037,7 +4040,8 @@ msgstr "(veniens)"
 msgid "Capacity"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:380 ../../src/wui/soldierlist.cc:400
+#: ../../src/wui/soldierlist.cc:381 ../../src/wui/soldierlist.cc:394
+#: ../../src/wui/soldierlist.cc:407
 msgid "Click soldier to send away"
 msgstr "Super militem crepe, ut amittatur"
 
@@ -4132,7 +4136,7 @@ msgstr " insigne"
 
 #: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " mine"
-msgstr ""
+msgstr " metallum"
 
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " port"
@@ -4288,7 +4292,7 @@ msgstr "Numerus ludorum:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:418
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "Latitudo: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:161
@@ -4383,7 +4387,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 msgid " exists already. Overwrite?"
-msgstr " iam adest. Superscribam?"
+msgstr " iam adest. Superscribamne?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:405
@@ -4484,7 +4488,7 @@ msgstr "Selectio praesens"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tool Menu"
-msgstr ""
+msgstr "Index instrumentorum"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Change height"
@@ -4621,7 +4625,7 @@ msgstr "Nuntia electa restituere"
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
-msgstr "Nuntios novos monstrare"
+msgstr "Nuntia nova monstrare"
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
