@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-03-23 18:52+0000\n"
+"PO-Revision-Date: 2011-03-25 23:57+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-24 04:45+0000\n"
+"X-Launchpad-Export-Date: 2011-03-26 04:42+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1316,7 +1316,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:931
 msgid "illegal transformation to the same type"
-msgstr ""
+msgstr "ulovlig omgjøring til samme type"
 
 #: ../../src/logic/immovable.cc:975 ../../src/logic/immovable.cc:1061
 #, c-format
@@ -1345,7 +1345,7 @@ msgstr "objekt %u: %s"
 #: ../../src/logic/instances.cc:133
 #, c-format
 msgid "act: %s"
-msgstr ""
+msgstr "del: %s"
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
@@ -1353,7 +1353,7 @@ msgstr "Spiller 1"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:67
 msgid "\"min-max\""
-msgstr ""
+msgstr "«min-maks»"
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
@@ -1448,7 +1448,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:236
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "bygg: %s"
 
 #: ../../src/logic/playercommand.cc:284
 #, c-format
@@ -1605,7 +1605,7 @@ msgstr "varetype eller arbeidertype"
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "invalid condition: %s"
-msgstr ""
+msgstr "ugyldig tilstand: %s"
 
 #: ../../src/logic/production_program.cc:350
 #, c-format
@@ -1618,7 +1618,7 @@ msgstr "forventet «og» eller slutt på inndata"
 
 #: ../../src/logic/production_program.cc:372
 msgid "expected condition at end of input"
-msgstr ""
+msgstr "forventet tilstand på slutten av inndata"
 
 #: ../../src/logic/production_program.cc:378
 msgid "expected \"or\" or end of input"
@@ -1859,7 +1859,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:242 ../../src/logic/tribe.cc:263
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "«%s» er kopiert"
 
 #: ../../src/logic/tribe.cc:251 ../../src/logic/tribe.cc:272
 msgid "none found"
@@ -2198,6 +2198,8 @@ msgid ""
 "message should have expired at %u; sent at %u with duration %u but gametime "
 "is already %u"
 msgstr ""
+"melding skulle utløpt %u; ble sendt %u med varighet %u men spilletid er "
+"allerede %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
@@ -2273,6 +2275,9 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"Widelands kunne ikke koble til den gitte adressen.\n"
+"Enten er det ingen Widelands-tjener som kjører på den antatte porten eller\n"
+"så ble tjeneren slått av mens du forsøkte å koble deg til."
 
 #: ../../src/network/netclient.cc:134
 msgid "Client has left the game."
@@ -2298,6 +2303,8 @@ msgid ""
 "Expected a HELLO packet from server, but received command number %u. Maybe "
 "the server is running a different version of Widelands?"
 msgstr ""
+"Forventet en HELLO-pakke fra tjeneren, men mottok kommando nummer %u. "
+"Kanskje tjeneren kjører en annen versjon av Widelands?"
 
 #: ../../src/network/netclient.cc:562
 msgid "Server uses a different protocol version"
@@ -2309,7 +2316,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:812
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
+msgstr "Mottok uventet en LAUNCH-kommando fra tjeneren."
 
 #: ../../src/network/netclient.cc:832
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
@@ -2539,6 +2546,8 @@ msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 msgstr ""
+"Første kommandoen sendt fra klienten var %u istedenfor HELLO. Sannsynligvis "
+"kjører klienten en versjon som ikke samspiller."
 
 #: ../../src/network/nethost.cc:2343
 msgid "Server uses a different protocol version."
@@ -2634,11 +2643,11 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:741
 msgid " joined the metaserver."
-msgstr ""
+msgstr " sluttet seg til metatjeneren."
 
 #: ../../src/network/network_ggz.cc:750
 msgid " left the metaserver."
-msgstr ""
+msgstr " forlot metatjeneren."
 
 #: ../../src/scripting/lua_game.cc:435 ../../src/ui_basic/helpwindow.cc:78
 #: ../../src/ui_basic/messagebox.cc:91
@@ -2726,7 +2735,7 @@ msgstr "[Ingen verdi funnet]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:169
 msgid "[Invalid entry]"
-msgstr ""
+msgstr "[Ugyldig element]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:263
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
@@ -2794,7 +2803,7 @@ msgstr "Beskr.:"
 #: ../../src/ui_fsmenu/mapselect.cc:297
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:217
 msgid "<parent>"
-msgstr ""
+msgstr "<forelder>"
 
 #: ../../src/ui_fsmenu/fileview.cc:45 ../../src/wui/watchwindow.cc:181
 msgid "Close"
@@ -2921,6 +2930,8 @@ msgid ""
 "The selected file can not be found. If it is not automatically transfered to "
 "you, please write the host about this problem."
 msgstr ""
+"Den valgte filen ble ikke funnet. Hvis den ikke blir overført til deg "
+"automatisk, vennligst skriv til verten om dette problemet."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:440
 #: ../../src/wui/multiplayersetupgroup.cc:115
@@ -2958,11 +2969,11 @@ msgstr "<lukket>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
-msgstr ""
+msgstr "Det var en feil!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "Kartfilen ser ut til å være ugyldig!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:604
 msgid "Map informations:\n"
@@ -3043,7 +3054,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Lukket."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3222,7 +3233,7 @@ msgstr "Lokalt nettverk (LAN) / Direkte IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:86
 msgid "Show login dialog"
-msgstr ""
+msgstr "Vis dialog for innlogging"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:114
 #: ../../src/ui_fsmenu/netsetup_lan.cc:113 ../../src/wui/login_box.cc:73
@@ -3235,7 +3246,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:55
 msgid "Users online:"
-msgstr ""
+msgstr "Brukere tilkoblet:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:59
 msgid "List of games:"
@@ -3243,7 +3254,7 @@ msgstr "Liste over spill:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:63
 msgid "Name of your server:"
-msgstr ""
+msgstr "Navnet på tjeneren din:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:67
 msgid "Maximum of players:"
@@ -3268,7 +3279,7 @@ msgstr "Tjener"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:40
 msgid "Begin Network Game"
-msgstr ""
+msgstr "Start spill over nettverk"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:44
 msgid "List of games in your local network:"
@@ -3396,7 +3407,7 @@ msgstr "Av"
 #: ../../src/ui_fsmenu/options.cc:269
 #, c-format
 msgid "%ix%i %i bit"
-msgstr ""
+msgstr "%ix%i %i bit"
 
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Try system language"
@@ -3488,7 +3499,7 @@ msgstr "Send flere soldater"
 
 #: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:129
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Retrett: Aldri!"
 
 #: ../../src/wui/attack_box.cc:239 ../../src/wui/military_box.cc:148
 msgid "Supported damage before retreat"
@@ -3571,7 +3582,7 @@ msgstr "Vis arbeidsområde"
 #: ../../src/wui/bulldozeconfirm.cc:58
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "Vil du virkelig ødelegge %s?"
 
 #: ../../src/wui/bulldozeconfirm.cc:105
 msgid "Destroy building?"
@@ -3659,11 +3670,11 @@ msgstr "Militære innstillinger"
 
 #: ../../src/wui/fieldaction.cc:500
 msgid "Start attack"
-msgstr ""
+msgstr "Start angrep"
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
-msgstr ""
+msgstr "Angrip"
 
 #: ../../src/wui/fieldaction.cc:584
 msgid "Build mines"
@@ -3936,7 +3947,7 @@ msgstr "Avslutt reprise"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr ""
+msgstr "Metatjener innlogging"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
@@ -3952,11 +3963,11 @@ msgstr "ADVARSEL: Passord vil bli vist og lagret lesbart!"
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "Logg inn med en registrert konto"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "Bruk denne informasjonen til å logge inn automatisk fra nå av."
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
@@ -4135,11 +4146,11 @@ msgstr ""
 
 #: ../../src/wui/warehousewindow.cc:130
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Ikke lagre valgte varer her"
 
 #: ../../src/wui/warehousewindow.cc:131
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Fjern valgte varer herfra"
 
 #: ../../src/wui/waresqueuedisplay.cc:274
 msgid "Highest priority"
@@ -4426,7 +4437,7 @@ msgstr "<Mappe>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"
-msgstr ""
+msgstr "<Ikke en kartfil>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 msgid " exists already. Overwrite?"
@@ -4447,7 +4458,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
-msgstr ""
+msgstr "Skriv inn mappenavn: "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:42
 msgid "Player Options"
