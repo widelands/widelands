@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2010-11-16 12:49+0000\n"
+"PO-Revision-Date: 2011-03-29 08:47+0000\n"
 "Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-03-30 04:32+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -549,7 +549,7 @@ msgstr "Si genera nei magazzini."
 #: ../../src/writeHTML.cc:698
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Necessita esperienza di lavoro %u volte per diventare"
 
 #: ../../src/writeHTML.cc:706
 #, c-format
