@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-02-09 13:07+0000\n"
-"Last-Translator: Michal Maslanko <burak326@o2.pl>\n"
+"PO-Revision-Date: 2011-04-09 23:13+0000\n"
+"Last-Translator: Gabriel Fortin <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-10 04:45+0000\n"
+"X-Generator: Launchpad (build 12735)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -153,7 +153,7 @@ msgid ""
 "for making bread."
 msgstr ""
 "Czarny korzeń jest specjalnym rodzajem korzenia uprawianym na farmach i "
-"przetwarzam w młynach. Atlanci lubią jego mocny smak i pieką z jego mąki "
+"przetwarzanym w młynach. Atlanci lubią jego mocny smak i pieką z jego mąki "
 "chleb."
 
 #: ../../tribes/atlanteans/conf:62
@@ -243,7 +243,7 @@ msgstr "Zebrane pole kukurydzy"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
-msgstr "Wysokie pole kukurydzy"
+msgstr "Średnie pole kukurydzy"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
