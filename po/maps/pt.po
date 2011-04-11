@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-01-05 21:35+0000\n"
-"Last-Translator: David Rodrigues <david.rodrigues@gmail.com>\n"
+"PO-Revision-Date: 2011-04-10 10:30+0000\n"
+"Last-Translator: trewe <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:32+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-11 04:33+0000\n"
+"X-Generator: Launchpad (build 12735)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -130,7 +130,7 @@ msgstr "Barbarians - O segundo Império"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Desafiante. Apresenta os Atlanditas"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
