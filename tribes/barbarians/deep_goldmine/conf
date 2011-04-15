@@ -26,11 +26,11 @@ work=_Work
 sleep=42000
 consume=snack
 animate=working 18000
-mine=coal 2 66 5
-produce=gold:2
+mine=gold 2 66 5
+produce=goldstone:2
 animate=working 18000
 mine=gold 2 66 5
-produce=gold:2
+produce=goldstone:2
 
 [idle]
 pics=deep_goldmine_i_??.png
