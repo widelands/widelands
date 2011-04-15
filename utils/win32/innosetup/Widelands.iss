@@ -23,10 +23,10 @@
 
 ;Version String
 #define Name "Widelands"
-#define VerName "Widelands Build14"
-#define VerNumber "0.14.1.2"
-#define Copyright "Widelands Development Team 2001-2009"
-#define SetupFileName "Widelands-Build14-win32"
+#define VerName "Widelands Build16"
+#define VerNumber "0.16.0.1"
+#define Copyright "Widelands Development Team 2001-2011"
+#define SetupFileName "Widelands-Build16-win32"
 
 ;General String
 #define Publisher "Widelands Development Team"
