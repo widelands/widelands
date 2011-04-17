@@ -1,4 +1,4 @@
-# Javanese translation for widelands
+# Norwegian Nynorsk translation for widelands
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-04-16 03:32+0000\n"
-"Last-Translator: zaenal arifin <Unknown>\n"
-"Language-Team: Javanese <jv@li.org>\n"
+"PO-Revision-Date: 2011-04-16 18:55+0000\n"
+"Last-Translator: Odin Hørthe Omdal <odin.omdal@gmail.com>\n"
+"Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,9 +20,9 @@ msgstr ""
 #: ../../campaigns/dummy.wmf/elemental:7
 #: ../../campaigns/dummy.wmf/scripting/init.lua:10
 msgid "Not yet implemented"
-msgstr "Isih durung diterapno"
+msgstr "Enno ikkje laga"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 #: ../../campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Sorry, this map is not yet implemented."
-msgstr "Ngapurone, map iki yoiku Isih durung diterapno."
+msgstr "Orsak, dette kartet er enno ikkje laga."
