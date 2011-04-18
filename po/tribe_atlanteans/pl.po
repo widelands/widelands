@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-04-09 23:13+0000\n"
-"Last-Translator: Gabriel Fortin <Unknown>\n"
+"PO-Revision-Date: 2011-04-17 11:40+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-11 04:33+0000\n"
+"X-Launchpad-Export-Date: 2011-04-18 04:44+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -322,6 +322,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Szczypce stanowią narzędzia hutnika pracującego w hucie. Produkowane są "
+"przez rzemieślnika."
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -979,7 +981,7 @@ msgstr "Stalowa tarcza"
 
 #: ../../tribes/atlanteans/conf:97
 msgid "Steel Trident"
-msgstr "Stalowy trójząb"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:98
 msgid "Stone"
@@ -1060,7 +1062,7 @@ msgstr ""
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
-msgstr ""
+msgstr "Łopatka do chleba to narzędzie piekarza. Wytwarza ją rzemieślnik."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -1112,6 +1114,9 @@ msgid ""
 "advanced soldiers in the dungeon to train from attack level 1 to level 2 "
 "(together with food)."
 msgstr ""
+"Średni trójząb produkowany jest przez zbrojmistrza i wykorzystywany w "
+"podziemiach przez doświadczonych żołnierzy do treningu umiejętności ataku z "
+"poziomu 1 do poziomu 2 (razem z jedzeniem)."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
