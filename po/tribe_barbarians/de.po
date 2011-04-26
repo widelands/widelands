@@ -7,16 +7,20 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-04-24 17:36+0000\n"
+"PO-Revision-Date: 2011-04-25 06:26+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-25 04:46+0000\n"
+"X-Launchpad-Export-Date: 2011-04-26 04:35+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
+
+#: ../../tribes/barbarians/conf:72
+msgid "Blackwood"
+msgstr "Hartholz"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -143,10 +147,6 @@ msgstr "Gaststätte"
 #: ../../tribes/barbarians/conf:119
 msgid "Blacksmith"
 msgstr "Schmied"
-
-#: ../../tribes/barbarians/conf:72
-msgid "Blackwood"
-msgstr "Schwarzholz"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."

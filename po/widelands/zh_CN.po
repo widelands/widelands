@@ -1,25 +1,26 @@
-# Widelands po/he_HE/widelands.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Chinese (Simplified) translation for widelands
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-25 08:46+0000\n"
+"PO-Revision-Date: 2011-04-25 22:32+0000\n"
 "Last-Translator: raymond <Unknown>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-26 04:35+0000\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2011-04-26 04:36+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
-msgstr "ללא"
+msgstr "无"
 
 #: ../../src/s2map.cc:223
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -59,16 +60,12 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
-"Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1291
 msgid ""
 "Options:\n"
 "\n"
 msgstr ""
-"Options:\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1295
 msgid ""
@@ -120,23 +117,10 @@ msgid ""
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
-"Sound options:\n"
-" --nosound            Starts the game with sound disabled.\n"
-" --disable_fx         Disable sound effects.\n"
-" --disable_music      Disable music.\n"
-"\n"
-" --nozip              Do not save files as binary zip archives.\n"
-"\n"
-" --editor             Directly starts the Widelands editor.\n"
-"                      You can add a =FILENAME to directly load\n"
-"                      the map FILENAME in editor.\n"
-" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-"                      map.\n"
-" --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 
 #: ../../src/wlapplication.cc:1335
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
-msgstr " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1339
 msgid ""
@@ -188,25 +172,6 @@ msgid ""
 "                      panel.\n"
 "\n"
 msgstr ""
-"\n"
-"Options for the internal window manager:\n"
-" --border_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the screen\n"
-"                      when the edge of the window comes within\n"
-"                      this distance from the edge of the screen.\n"
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Eliminate a window's border towards the\n"
-"                      edge of the screen when the edge of the\n"
-"                      window is next to the edge of the screen.\n"
-" --panel_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the panel when\n"
-"                      the edge of the window comes within this\n"
-"                      distance from the edge of the panel.\n"
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Only move a window to the edge of a panel\n"
-"                      if the window is overlapping with the\n"
-"                      panel.\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1389
 msgid ""
@@ -214,9 +179,6 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
-" --double             Start the game twice (for localhost network\n"
-"                      testing)\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1393
 msgid " --verbose            Enable verbose debug messages\n"
@@ -224,7 +186,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1394
 msgid " --help               Show this help\n"
-msgstr " --help               Show this help\n"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1398
 msgid ""
@@ -237,7 +199,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1547
 msgid "Warning: "
-msgstr "אזהרה: "
+msgstr "警告： "
 
 #: ../../src/wlapplication.cc:1551
 msgid "Game data error"
@@ -277,7 +239,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1699 ../../src/network/network_ggz.cc:370
 msgid "Connection problem"
-msgstr "בעיה בתקשורת"
+msgstr "连接问题"
 
 #: ../../src/wlapplication.cc:1701
 msgid "Widelands has not been able to connect to the host."
@@ -289,7 +251,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1849 ../../src/network/nethost.cc:1885
 msgid "Player"
-msgstr "שחקן"
+msgstr "播放器"
 
 #: ../../src/wlapplication.cc:2015 ../../src/network/netclient.cc:178
 #: ../../src/network/nethost.cc:720
@@ -309,15 +271,15 @@ msgstr ""
 #: ../../src/wlapplication.cc:2208 ../../src/logic/game.cc:383
 #: ../../src/logic/game.cc:423
 msgid "Loading..."
-msgstr "טוען..."
+msgstr ""
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
-msgstr "דורשים"
+msgstr ""
 
 #: ../../src/writeHTML.cc:59
 msgid "Providers"
-msgstr "ספקים"
+msgstr ""
 
 #: ../../src/writeHTML.cc:74
 msgid "Successors"
@@ -329,38 +291,38 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:104
 msgid "Employers"
-msgstr "מעסיקים"
+msgstr "雇主"
 
 #: ../../src/writeHTML.cc:267 ../../src/writeHTML.cc:273
 msgid "Building types"
-msgstr "סוגי מבנים"
+msgstr ""
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:515
 #: ../../src/writeHTML.cc:1437
 msgid "Icon"
-msgstr "סמל"
+msgstr ""
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:517
 #: ../../src/writeHTML.cc:1439 ../../src/ui_fsmenu/netsetup_ggz.cc:150
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Name"
-msgstr "שם"
+msgstr "名"
 
 #: ../../src/writeHTML.cc:282 ../../src/wui/building_statistics_menu.cc:113
 msgid "Size"
-msgstr "גודל"
+msgstr ""
 
 #: ../../src/writeHTML.cc:284 ../../src/writeHTML.cc:519
 msgid "Buildable"
-msgstr "ניתן לבניה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
-msgstr "משופר"
+msgstr ""
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:170
 msgid "Stop"
-msgstr "עצור"
+msgstr ""
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
@@ -373,65 +335,65 @@ msgstr ""
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:376
 #: ../../src/logic/building.cc:509
 msgid "Mine"
-msgstr "מכרה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:510
 msgid "Small"
-msgstr "קטן"
+msgstr ""
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
 #: ../../src/logic/building.cc:511
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "Medium"
-msgstr "בינוני"
+msgstr ""
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:381
 #: ../../src/logic/building.cc:511
 msgid "Big"
-msgstr "גדול"
+msgstr "大"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr "כן"
+msgstr ""
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:105
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr "לא"
+msgstr ""
 
 #: ../../src/writeHTML.cc:355
 msgid "building_types.xhtml"
-msgstr "building_types_he_HE.xhtml"
+msgstr ""
 
 #: ../../src/writeHTML.cc:378
 msgid "Is mine."
-msgstr "מכרה."
+msgstr ""
 
 #: ../../src/writeHTML.cc:383
 msgid "Is big."
-msgstr "גדול."
+msgstr ""
 
 #: ../../src/writeHTML.cc:388
 msgid "Is medium."
-msgstr "בינוני."
+msgstr ""
 
 #: ../../src/writeHTML.cc:394
 msgid "Is small."
-msgstr "קטן."
+msgstr ""
 
 #: ../../src/writeHTML.cc:401
 msgid "Is not buildable."
-msgstr "לא ניתן לבנייה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:408
 msgid "Is enhanced."
-msgstr "משופר"
+msgstr ""
 
 #: ../../src/writeHTML.cc:415
 #, c-format
@@ -445,7 +407,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:431 ../../src/writeHTML.cc:656
 msgid "Build cost"
-msgstr "עלות בנייה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:441
 #, c-format
@@ -454,7 +416,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
-msgstr "שיפורים"
+msgstr "增强"
 
 #: ../../src/writeHTML.cc:463
 #, c-format
@@ -463,7 +425,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:504 ../../src/writeHTML.cc:510
 msgid "Worker types"
-msgstr "סוגי עובדים"
+msgstr ""
 
 #: ../../src/writeHTML.cc:523
 msgid "Needed<br/>experience"
@@ -475,7 +437,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:577
 msgid "worker_types.xhtml"
-msgstr "worker_types_he_HE.xhtml"
+msgstr ""
 
 #: ../../src/writeHTML.cc:584
 msgid "Combat Properties"
@@ -530,11 +492,11 @@ msgstr ""
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
 msgid "mine"
-msgstr "שלי"
+msgstr ""
 
 #: ../../src/writeHTML.cc:755
 msgid "breed"
-msgstr ""
+msgstr "品种"
 
 #: ../../src/writeHTML.cc:756
 msgid "createitem"
@@ -570,7 +532,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
-msgstr ""
+msgstr "对象"
 
 #: ../../src/writeHTML.cc:765
 msgid "plant"
@@ -586,7 +548,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr "גאולוג"
+msgstr ""
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
@@ -598,17 +560,17 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:771
 msgid "UNKNOWN"
-msgstr ""
+msgstr "未知"
 
 #: ../../src/writeHTML.cc:778
 msgid "Production"
-msgstr "ייצור"
+msgstr ""
 
 #: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:166
 #: ../../src/wui/productionsitewindow.cc:84 ../../src/wui/transport_ui.cc:65
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Workers"
-msgstr "עובדים"
+msgstr ""
 
 #: ../../src/writeHTML.cc:793
 #, c-format
@@ -617,7 +579,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:803
 msgid "Inputs"
-msgstr "תשומות"
+msgstr ""
 
 #: ../../src/writeHTML.cc:814
 #, c-format
@@ -650,11 +612,11 @@ msgstr ""
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:793
 msgid "failed"
-msgstr "נכשל"
+msgstr "失败"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
-msgstr "הושלם"
+msgstr "完成"
 
 #: ../../src/writeHTML.cc:908 ../../src/logic/production_program.cc:412
 msgid "skipped"
@@ -666,7 +628,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:914
 msgid "when"
-msgstr "כאשר"
+msgstr "当"
 
 #: ../../src/writeHTML.cc:916
 msgid "or"
@@ -674,19 +636,19 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
-msgstr "אלא אם כן"
+msgstr ""
 
 #: ../../src/writeHTML.cc:948 ../../src/writeHTML.cc:970
 msgid "economy"
-msgstr "כלכלה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:950 ../../src/writeHTML.cc:972
 msgid "needs"
-msgstr "צריך"
+msgstr ""
 
 #: ../../src/writeHTML.cc:990
 msgid "site"
-msgstr "אתר"
+msgstr ""
 
 #: ../../src/writeHTML.cc:992
 msgid "has"
@@ -694,11 +656,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
-msgstr "עובדי האתר"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
-msgstr "עובדים"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1026
 msgid "</span></a> <span class=\"keyword\">"
@@ -710,7 +672,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1029
 msgid "experience"
-msgstr "חוויה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1043
 msgid "Documentation for program command call"
@@ -718,7 +680,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1045
 msgid "call"
-msgstr "שיחה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1052
 #, c-format
@@ -731,7 +693,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1107
 msgid "worker"
-msgstr "עובד"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1118
 #, c-format
@@ -744,7 +706,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
-msgstr "לישון"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
@@ -765,7 +727,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
-msgstr "לצרוך"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1217 ../../src/writeHTML.cc:1254
 msgid "Documentation for program command produce"
@@ -773,7 +735,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1219
 msgid "produce"
-msgstr "ייצור"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1256
 msgid "recruit"
@@ -789,7 +751,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1324
 msgid "check soldier"
-msgstr "בדיקת החייל"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1330 ../../src/writeHTML.cc:1354
 msgid "hp"
@@ -797,11 +759,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
 msgid "attack"
-msgstr "מתקפה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "defense"
-msgstr "הגנה"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1333 ../../src/writeHTML.cc:1357
 msgid "evade"
@@ -813,7 +775,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1348
 msgid "train"
-msgstr "רכבת"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1370
 msgid "Documentation for program command playFX"
@@ -825,7 +787,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr "לבנות"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -833,7 +795,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1466
 msgid "ware_types.xhtml"
-msgstr "ware_types_he_HE.xhtml"
+msgstr ""
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/request.cc:243 ../../src/economy/wares_queue.cc:257
@@ -4503,7 +4465,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Resource"
-msgstr ""
+msgstr "资源"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
@@ -4588,7 +4550,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear selection"
@@ -4625,102 +4587,3 @@ msgstr ""
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
 msgstr ""
-
-#~ msgid ""
-#~ " --<config-entry-name>=value overwrites any config file setting\n"
-#~ "\n"
-#~ " --logfile=FILENAME   Log output to file FILENAME instead of \n"
-#~ "                      terminal output\n"
-#~ " --datadir=DIRNAME    Use specified direction for the widelands\n"
-#~ "                      data files\n"
-#~ " --record=FILENAME    Record all events to the given filename for\n"
-#~ "                      later playback\n"
-#~ " --playback=FILENAME  Playback given filename (see --record)\n"
-#~ "\n"
-#~ " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-#~ "                      of using the SDL\n"
-#~ " --language=[de_DE|sv_SE|...]\n"
-#~ "                      The locale to use.\n"
-#~ " --remove_syncstreams=[true|false]\n"
-#~ "                      Remove syncstream files on startup\n"
-#~ " --remove_replays=[...]\n"
-#~ "                      Remove replays after this amount of days.\n"
-#~ "                      If this is 0 replays are not deleted.\n"
-#~ msgstr ""
-#~ " --<config-entry-name>=value overwrites any config file setting\n"
-#~ "\n"
-#~ " --logfile=FILENAME   Log output to file FILENAME instead of \n"
-#~ "                      terminal output\n"
-#~ " --datadir=DIRNAME    Use specified direction for the widelands\n"
-#~ "                      data files\n"
-#~ " --record=FILENAME    Record all events to the given filename for\n"
-#~ "                      later playback\n"
-#~ " --playback=FILENAME  Playback given filename (see --record)\n"
-#~ "\n"
-#~ " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-#~ "                      of using the SDL\n"
-#~ " --language=[de_DE|sv_SE|...]\n"
-#~ "                      The locale to use.\n"
-#~ " --remove_syncstreams=[true|false]\n"
-#~ "                      Remove syncstream files on startup\n"
-#~ " --remove_replays=[...]\n"
-#~ "                      Remove replays after this amount of days.\n"
-#~ "                      If this is 0 replays are not deleted.\n"
-
-#~ msgid ""
-#~ " --speed_of_new_game  The speed that the new game will run at\n"
-#~ "                      when started, with factor 1000 (0 is pause,\n"
-#~ "                      1000 is normal speed).\n"
-#~ " --auto_roadbuild_mode=[yes|no]\n"
-#~ "                      Whether to enter roadbuilding mode\n"
-#~ "                      automatically after placing a flag that is\n"
-#~ "                      not connected to a road.\n"
-#~ " --write_HTML=[yes|no]\n"
-#~ "                      Write HTML-helpfiles for parsed game data.\n"
-#~ "\n"
-#~ "Graphic options:\n"
-#~ " --fullscreen=[yes|no]\n"
-#~ "                      Whether to use the whole display for the\n"
-#~ "                      game screen.\n"
-#~ " --depth=[16|32]      Color depth in number of bits per pixel.\n"
-#~ " --xres=[...]         Width of the window in pixel.\n"
-#~ " --yres=[...]         Height of the window in pixel.\n"
-#~ " --hw_improvements=[0|1]\n"
-#~ "                      Activate hardware acceleration\n"
-#~ "                      *HIGHLY EXPERIMENTAL*\n"
-#~ " --double_buffer=[0|1]\n"
-#~ "                      Enables double buffering\n"
-#~ "                      *HIGHLY EXPERIMENTAL*\n"
-#~ msgstr ""
-#~ " --speed_of_new_game  The speed that the new game will run at\n"
-#~ "                      when started, with factor 1000 (0 is pause,\n"
-#~ "                      1000 is normal speed).\n"
-#~ " --auto_roadbuild_mode=[yes|no]\n"
-#~ "                      Whether to enter roadbuilding mode\n"
-#~ "                      automatically after placing a flag that is\n"
-#~ "                      not connected to a road.\n"
-#~ " --write_HTML=[yes|no]\n"
-#~ "                      Write HTML-helpfiles for parsed game data.\n"
-#~ "\n"
-#~ "Graphic options:\n"
-#~ " --fullscreen=[yes|no]\n"
-#~ "                      Whether to use the whole display for the\n"
-#~ "                      game screen.\n"
-#~ " --depth=[16|32]      Color depth in number of bits per pixel.\n"
-#~ " --xres=[...]         Width of the window in pixel.\n"
-#~ " --yres=[...]         Height of the window in pixel.\n"
-#~ " --hw_improvements=[0|1]\n"
-#~ "                      Activate hardware acceleration\n"
-#~ "                      *HIGHLY EXPERIMENTAL*\n"
-#~ " --double_buffer=[0|1]\n"
-#~ "                      Enables double buffering\n"
-#~ "                      *HIGHLY EXPERIMENTAL*\n"
-
-#~ msgid ""
-#~ " --opengl=[0|1]\n"
-#~ "                      Enables opengl rendering\n"
-#~ "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"
-#~ msgstr ""
-#~ " --opengl=[0|1]\n"
-#~ "                      Enables opengl rendering\n"
-#~ "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"
