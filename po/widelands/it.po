@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-03-29 08:47+0000\n"
-"Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
+"PO-Revision-Date: 2011-04-26 12:54+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-30 04:32+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-27 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1073,7 +1073,7 @@ msgstr "giocatore %u: %s"
 #: ../../src/game_io/game_player_economies_data_packet.cc:75
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "economie: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
@@ -1542,7 +1542,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1054
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "soldato %u: %s"
 
 #: ../../src/logic/playercommand.cc:1060
 #, c-format
@@ -1592,7 +1592,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:866
 #: ../../src/logic/production_program.cc:961
 msgid "count"
-msgstr ""
+msgstr "conteggio"
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
@@ -1679,7 +1679,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:502
 msgid "failure"
-msgstr ""
+msgstr "fallito"
 
 #: ../../src/logic/production_program.cc:507
 msgid "completion"
