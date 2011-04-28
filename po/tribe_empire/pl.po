@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-04-17 09:52+0000\n"
-"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
+"PO-Revision-Date: 2011-04-27 17:42+0000\n"
+"Last-Translator: Mateusz Greń <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-18 04:44+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"X-Launchpad-Export-Date: 2011-04-28 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -160,7 +160,7 @@ msgstr "Kolczuga"
 
 #: ../../tribes/empire/conf:177
 msgid "Charcoal Burner"
-msgstr "Piec do węgla drzewnego"
+msgstr "Retora"
 
 #: ../../tribes/empire/conf:149
 msgid "Citadel"
@@ -921,6 +921,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"Paleniska Imperialnych hut, warsztatów płatnerskich i zbrojowni zazwyczaj "
+"opalane są węglem. Wydobywa się go w kopalniach węgla lub produkuje w "
+"retorach przy użyciu kłód drzewa."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -1076,6 +1079,9 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"Kłody drzew są jednym z podstawowych materiałów budowlanych Imperium. Drwale "
+"ścinają drzewa, leśnicy zapewniają nowe drzewa. Kłody drzew używane są także "
+"w retorach, warsztatach rzemieślniczych i tartakach."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"

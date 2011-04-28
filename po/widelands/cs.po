@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-01-07 20:15+0000\n"
-"Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
+"PO-Revision-Date: 2011-04-27 08:45+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:36+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-28 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -2743,7 +2743,7 @@ msgstr "CHYBA: Zvukové zařízení otevřeno vícekrát, tkouším zavřít"
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr ""
+msgstr "Nápověda: "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -2884,7 +2884,7 @@ msgstr "Pro pokračování klikni nebo stiskni ESC..."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Prosím vyberte"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66 ../../src/ui_fsmenu/launchMPG.cc:165
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
@@ -3011,7 +3011,7 @@ msgstr "Hráč%i"
 #: ../../src/wui/multiplayersetupgroup.cc:117
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Divák"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:443
 #, c-format
@@ -3030,7 +3030,7 @@ msgstr "Uložení hráči jsou:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
-msgstr ""
+msgstr "<zavřeno>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
@@ -4098,7 +4098,7 @@ msgstr "Lupa"
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr ""
+msgstr "<zdarma>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
@@ -4503,7 +4503,7 @@ msgstr "ID mapy:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Hráči: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
