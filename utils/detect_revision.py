@@ -9,6 +9,7 @@ import sys
 import os.path as p
 import subprocess
 import re
+import string
 
 # Support for bzr local branches
 try:
@@ -32,12 +33,14 @@ def detect_debian_version():
         return None
     f = open(fname)
     version = f.readline()
-    #~bzr5905[trunk]
-    pattern = re.compile("~bzr[0-9]+\[.+\]")
+    #~bzr5905+trunk+
+    pattern = re.compile("~bzr[0-9]+\+.+\+")
     m = pattern.search(version)
     if m == None:
         return None
     version = version[m.start() + 1 :m.end()]
+    version = string.replace(version,'+','[',1)
+    version = string.replace(version,'+',']',1)
     return version
 
 
