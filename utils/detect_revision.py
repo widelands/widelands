@@ -8,6 +8,7 @@ import os
 import sys
 import os.path as p
 import subprocess
+import re
 
 # Support for bzr local branches
 try:
@@ -19,6 +20,27 @@ except ImportError:
     __has_bzrlib = False
 
 base_path = p.abspath(p.join(p.dirname(__file__),p.pardir))
+
+def detect_debian_version():
+    """
+    Parse bzr revision and branch information from debian/changelog
+    """
+    if sys.platform.startswith('win'):
+        return None
+    fname = p.join(base_path, "debian/changelog")
+    if not p.exists(fname):
+        return None
+    f = open(fname)
+    version = f.readline()
+    #~bzr5905[trunk]
+    pattern = re.compile("~bzr[0-9]+\[.+\]")
+    m = pattern.search(version)
+    if m == None:
+        return None
+    version = version[m.start() + 1 :m.end()]
+    return version
+
+
 
 def check_for_explicit_version():
     """
@@ -67,7 +89,8 @@ def detect_revision():
     for func in (
         check_for_explicit_version,
         detect_git_revision,
-        detect_bzr_revision):
+        detect_bzr_revision,
+        detect_debian_version):
         rv = func()
         if rv:
             return rv
