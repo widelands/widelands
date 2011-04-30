@@ -81,11 +81,14 @@ def detect_bzr_revision():
     else:
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
-        run_bzr = lambda subcmd: subprocess.Popen(
-                ["bzr",subcmd], stdout=subprocess.PIPE, cwd=base_path
-            ).stdout.read().strip().decode("utf-8")
-        revno = run_bzr("revno")
-        nick = run_bzr("nick")
+        try:
+            run_bzr = lambda subcmd: subprocess.Popen(
+                    ["bzr",subcmd], stdout=subprocess.PIPE, cwd=base_path
+                ).stdout.read().strip().decode("utf-8")
+            revno = run_bzr("revno")
+            nick = run_bzr("nick")
+        except OSError:
+            return None
     return "bzr%s[%s] " % (revno,nick)
 
 def detect_revision():
