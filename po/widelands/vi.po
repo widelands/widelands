@@ -1,47 +1,44 @@
-# Ukrainian translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Vietnamese translation for widelands
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-29 22:35+0000\n"
-"Last-Translator: Fedik <Unknown>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2011-04-29 14:25+0000\n"
+"Last-Translator: raymond <Unknown>\n"
+"Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2011-04-30 04:32+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
-msgstr "Пусто"
+msgstr ""
 
 #: ../../src/s2map.cc:223
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Карта Bluebyte Settlers II. Коментарі відсутні!"
+msgstr ""
 
 #: ../../src/wlapplication.cc:377
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr "Помилка: Не вдалось підключитись до сервера (помилка вище)!\\n\n"
+msgstr ""
 
 #: ../../src/wlapplication.cc:899 ../../src/wlapplication.cc:907
 msgid "could not find the path of the main executable"
-msgstr "не можливо найти шлях до основного виконуваного файлу"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1025
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"Зачекайте 5 сек. поки закриється програма. Щоб усунути проблему оновіть Ваш "
-"звуковий драйвер та/або SDL.\n"
 
 #: ../../src/wlapplication.cc:1162
 msgid ""
@@ -49,32 +46,27 @@ msgid ""
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
-"\n"
-"На жаль налагодження  double-instance на WIN32 не підтримується\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1165
 msgid "--double is disabled. This is not a debug build!"
-msgstr "--double відключає. Це не збірка налагодження!"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1288
 msgid "This is Widelands-"
-msgstr "Це Widelands -"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1290
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
-"Використання: widelands <опція0>=<значення0> ... <опціяN>=<значеняN>\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1291
 msgid ""
 "Options:\n"
 "\n"
 msgstr ""
-"Опції:\n"
+"Tùy chọn:\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1295
@@ -88,21 +80,10 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
-" --<назва-параметру-налаштування>=значення переписує вказаний параметр в "
-"налаштуваннях\n"
-"\n"
-"\n"
-" --logfile=ІМ'Я_ФАЙЛУ запис логу до вказаного файлу із\n"
-"                      виводу термінала\n"
-" ----datadir=ІМ'Я_ПАПКИ використовувати вказану папку для файлів даних,\n"
-"                      гри widelands\n"
-" --homedir=ІМ'Я_ПАПКИ  використовувати вказану папку для файлів "
-"налаштування\n"
-"                      збурежень, та повторів\n"
 
 #: ../../src/wlapplication.cc:1303
 msgid "                      Default is ~/.widelands\n"
-msgstr "                      За замовчуванням ~/.widelands\n"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1306
 msgid ""
@@ -121,20 +102,6 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
-" --record=ІМ'Я_ФАЙЛУ запис всіх дій до вказаного файлу для\n"
-"                      подальшого перегляду\n"
-" --playback=ІМ'Я_ФАЙЛУ Перегляд вказаного фпйлу (див.--record)\n"
-"\n"
-" --coredump=[yes|no] збирати дамп ядра при помилках сегментації\n"
-"                      використанням SDL\n"
-" --language=[de_DE|uk_UA|...]\n"
-"                      Використовувана локалізація\n"
-" --localedir=ІМ'Я_ПАПКИ Використовувати вказану папка з файлами перекладу\n"
-" --remove_syncstreams=[true|false]\n"
-"                      Видалити файли синхронізації при старті\n"
-" --remove_replays=[...]\n"
-"                      Видалити повтори через вказану кількість днів.\n"
-"                      Якщо тут 0, то повтори не видаляються\n"
 
 #: ../../src/wlapplication.cc:1321
 msgid ""
@@ -152,24 +119,10 @@ msgid ""
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
-"Параметри звуку:\n"
-" --nosound            Запуск гри без звуку.\n"
-" --disable_fx         Вимкнути звукові ефекти.\n"
-" --disable_music      Вимкнути музику.\n"
-"\n"
-" --nozip              Не зберігати файли в zip архівах.\n"
-"\n"
-" --editor             Запустити редактор Widelands.\n"
-"                      Ви можете додати =ІМ'Я_ФАЙЛУ для відкриття\n"
-"                      файлу ІМ'Я_ФАЙЛУ в редакторі.\n"
-" --scenario=ІМ'Я_ФАЙЛУ  Запустити гру на карті ІМ'Я_ФАЙЛУ\n"
-"                      \n"
-" --loadgame=ІМ'Я_ФАЙЛУ  Завантажити збереження гри ІМ'Я_ФАЙЛУ.\n"
 
 #: ../../src/wlapplication.cc:1335
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
 msgstr ""
-" --dedicated=ІМ'Я_ФАЙЛУ Запустити хост ggz з файлом ІМ'Я_ФАЙЛУ як картою\n"
 
 #: ../../src/wlapplication.cc:1339
 msgid ""
@@ -191,21 +144,6 @@ msgid ""
 " --xres=[...]         Width of the window in pixel.\n"
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
-" --speed_of_new_game  Швидкість гри в мілісекундах\n"
-"                      від 0 (пауза) до 1000 (нормальна).\n"
-" --auto_roadbuild_mode=[yes|no]\n"
-"                      При встановлення прапорця\n"
-"                      автоматично прокладається\n"
-"                      дорога.\n"
-" --write_HTML=[yes|no]\n"
-"                      Записувати HTML-файли для аналізу.\n"
-"\n"
-"Параметри зображення:\n"
-" --fullscreen=[yes|no]\n"
-"                      Повноекранний режим.\n"
-" --depth=[16|32]      Глибина кольору.\n"
-" --xres=[...]         Довжина вікна в пікселях.\n"
-" --yres=[...]         Висота вікна в пікселях.\n"
 
 #: ../../src/wlapplication.cc:1359
 msgid ""
@@ -213,9 +151,6 @@ msgid ""
 "                      Enables opengl rendering\n"
 "                      *EXPERIMENTAL*\n"
 msgstr ""
-" --opengl=[0|1]\n"
-"                      Ввімкнути OpenGL рендер\n"
-"                      *ЕКСПЕРЕМЕНТАЛЬНО*\n"
 
 #: ../../src/wlapplication.cc:1365
 msgid ""
@@ -239,25 +174,6 @@ msgid ""
 "                      panel.\n"
 "\n"
 msgstr ""
-"\n"
-"Параметри внутрішнього менеджера вікна:\n"
-" --border_snap_distance=[0 ...]\n"
-"                      Рухати вікно до межі екрану поки\n"
-"                      край вікна не буде на заданій \n"
-"                      відстані від краю екрана.\n"
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Прибрати рамку вікна з тієї\n"
-"                      сторони якою вікно торкається\n"
-"                      краю екрана.\n"
-" --panel_snap_distance=[0 ...]\n"
-"                      Рухати вікно до краю панелі, поки\n"
-"                      край вікна не буде на заданій\n"
-"                      відстані від краю панелі.\n"
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Рухати вікно до краю панелі лише\n"
-"                      коли воно перекриває(-ться)\n"
-"                      панель(-лю).\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1389
 msgid ""
@@ -265,17 +181,14 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
-" --double             Запустити дві копії гри (для тестування\n"
-"                      локальної мережі)\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1393
 msgid " --verbose            Enable verbose debug messages\n"
-msgstr " --verbose            Ввімкнути дедальні повідомлення налагодження\n"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1394
 msgid " --help               Show this help\n"
-msgstr " --help               Показати цю довідку\n"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1398
 msgid ""
@@ -285,23 +198,18 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
-"Маєте повідомлення пр помилки? Пропозиції? Заходьте на сайт:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Маємо надію що гра вам сподобається!\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1547
 msgid "Warning: "
-msgstr "Попередження: "
+msgstr "Cảnh báo : "
 
 #: ../../src/wlapplication.cc:1551
 msgid "Game data error"
-msgstr "Помилка даних гри"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1556
 msgid "Unexpected error during the game"
-msgstr "Не передбачена помилка гри"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1560
 msgid ""
@@ -311,11 +219,6 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build "
 msgstr ""
-"\n"
-"\n"
-"Будь ласка повідомте пр цю проблему, це допоможе нам покращити Widelands. "
-"Повідомлення яке стосується даної помилки Ви знайдете в стандартному виводі "
-"(stdout.txt в Windows). Ви використовуєте збірку "
 
 #: ../../src/wlapplication.cc:1566
 msgid ""
@@ -324,15 +227,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
-". Будь ласка, додайте цю інформацію до звіту.\n"
-"\n"
-"Widelands намагається створити збереження, при вимкненні помилки під час "
-"гри. В більшості випадків, хоча не завжди, можна завантажити його і "
-"продовжити гру\n"
 
 #: ../../src/wlapplication.cc:1675
 msgid "Connection timeouted"
-msgstr "Перевищено час очікування на з'єднання"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1677
 msgid ""
@@ -340,47 +238,42 @@ msgid ""
 "There seems to be a network problem, either on your side or on side\n"
 "of the server.\n"
 msgstr ""
-"Widelands не зміг отримати IP адресу сервера.\n"
-"Можливі проблеми з мережею, або на Вашій стороні, або на\n"
-"стороні сервера.\n"
 
 #: ../../src/wlapplication.cc:1699 ../../src/network/network_ggz.cc:370
 msgid "Connection problem"
-msgstr "Проблема зв'язку"
+msgstr "Kết nối có vấn đề"
 
 #: ../../src/wlapplication.cc:1701
 msgid "Widelands has not been able to connect to the host."
-msgstr "Widelands не вдалось підключитись до хосту."
+msgstr ""
 
 #: ../../src/wlapplication.cc:1743
 msgid "The address of the game server is invalid"
-msgstr "Не вірна адреса ігрового сервера"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1849 ../../src/network/nethost.cc:1885
 msgid "Player"
-msgstr "Гравець"
+msgstr ""
 
 #: ../../src/wlapplication.cc:2015 ../../src/network/netclient.cc:178
 #: ../../src/network/nethost.cc:720
 msgid "Preparing game"
-msgstr "Підготовка гри"
+msgstr ""
 
 #: ../../src/wlapplication.cc:2123
 msgid "End of replay"
-msgstr "Кінець повтору"
+msgstr ""
 
 #: ../../src/wlapplication.cc:2125
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
-"Повтор закінчено і гра зупанена. Якщо бажаєте, Ви можете знову запустити гру "
-"і продовжити перегляд,"
 
 #: ../../src/wlapplication.cc:2208 ../../src/logic/game.cc:383
 #: ../../src/logic/game.cc:423
 msgid "Loading..."
-msgstr "Завантаження..."
+msgstr ""
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
@@ -388,7 +281,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:59
 msgid "Providers"
-msgstr "Постачальники"
+msgstr ""
 
 #: ../../src/writeHTML.cc:74
 msgid "Successors"
@@ -396,85 +289,85 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:89
 msgid "Predecessors"
-msgstr "Попередники"
+msgstr ""
 
 #: ../../src/writeHTML.cc:104
 msgid "Employers"
-msgstr "Роботодавці"
+msgstr "Sử dụng lao động"
 
 #: ../../src/writeHTML.cc:267 ../../src/writeHTML.cc:273
 msgid "Building types"
-msgstr "Типи будівель"
+msgstr ""
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:515
 #: ../../src/writeHTML.cc:1437
 msgid "Icon"
-msgstr "Значок"
+msgstr "Biểu tượng"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:517
 #: ../../src/writeHTML.cc:1439 ../../src/ui_fsmenu/netsetup_ggz.cc:150
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Name"
-msgstr "Ім'я"
+msgstr "Tên"
 
 #: ../../src/writeHTML.cc:282 ../../src/wui/building_statistics_menu.cc:113
 msgid "Size"
-msgstr "Розмір"
+msgstr ""
 
 #: ../../src/writeHTML.cc:284 ../../src/writeHTML.cc:519
 msgid "Buildable"
-msgstr "Будівництво можливе"
+msgstr ""
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
-msgstr "Покращення"
+msgstr ""
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:170
 msgid "Stop"
-msgstr "Стоп"
+msgstr ""
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
-msgstr "Дальність<br/>захвату"
+msgstr ""
 
 #: ../../src/writeHTML.cc:293 ../../src/writeHTML.cc:521
 msgid "Vision<br/>range"
-msgstr "Дальність<br/>огляду"
+msgstr ""
 
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:376
 #: ../../src/logic/building.cc:509
 msgid "Mine"
-msgstr "Шахта"
+msgstr ""
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:510
 msgid "Small"
-msgstr "Мала"
+msgstr "Nhỏ"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
 #: ../../src/logic/building.cc:511
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "Medium"
-msgstr "Середня"
+msgstr "Trung bình"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:381
 #: ../../src/logic/building.cc:511
 msgid "Big"
-msgstr "Велика"
+msgstr "Lớn"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr "Гаразд"
+msgstr ""
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:105
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr "Ні"
+msgstr "Không"
 
 #: ../../src/writeHTML.cc:355
 msgid "building_types.xhtml"
@@ -482,50 +375,50 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:378
 msgid "Is mine."
-msgstr "Шахта"
+msgstr ""
 
 #: ../../src/writeHTML.cc:383
 msgid "Is big."
-msgstr "Велика"
+msgstr ""
 
 #: ../../src/writeHTML.cc:388
 msgid "Is medium."
-msgstr "Середня"
+msgstr ""
 
 #: ../../src/writeHTML.cc:394
 msgid "Is small."
-msgstr "Мала"
+msgstr ""
 
 #: ../../src/writeHTML.cc:401
 msgid "Is not buildable."
-msgstr "Будівництво не можливе"
+msgstr ""
 
 #: ../../src/writeHTML.cc:408
 msgid "Is enhanced."
-msgstr "Покращена"
+msgstr ""
 
 #: ../../src/writeHTML.cc:415
 #, c-format
 msgid "Conquer range is %u."
-msgstr "Дальність захвату %u."
+msgstr ""
 
 #: ../../src/writeHTML.cc:423 ../../src/writeHTML.cc:649
 #, c-format
 msgid "Vision range is %u."
-msgstr "Дальність огляду %u."
+msgstr ""
 
 #: ../../src/writeHTML.cc:431 ../../src/writeHTML.cc:656
 msgid "Build cost"
-msgstr "Вартість будівництва"
+msgstr ""
 
 #: ../../src/writeHTML.cc:441
 #, c-format
 msgid "%s's constructionsite"
-msgstr "%s побудовано"
+msgstr ""
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
-msgstr "Покращення"
+msgstr ""
 
 #: ../../src/writeHTML.cc:463
 #, c-format
@@ -534,30 +427,29 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:504 ../../src/writeHTML.cc:510
 msgid "Worker types"
-msgstr "Типи робочих"
+msgstr ""
 
 #: ../../src/writeHTML.cc:523
 msgid "Needed<br/>experience"
-msgstr "Потрібен<br/>досвід"
+msgstr ""
 
 #: ../../src/writeHTML.cc:525
 msgid "Becomes"
-msgstr "Стає"
+msgstr ""
 
 #: ../../src/writeHTML.cc:577
 msgid "worker_types.xhtml"
-msgstr "worker_types_uk_UA.xhtml"
+msgstr ""
 
 #: ../../src/writeHTML.cc:584
 msgid "Combat Properties"
-msgstr "параметри бою"
+msgstr ""
 
 #: ../../src/writeHTML.cc:591
 #, c-format
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Бонусів  %u, плюс %u  за кожен рівень вищий від 0 (максимальний рівень %u)."
 
 #: ../../src/writeHTML.cc:601
 #, c-format
@@ -565,150 +457,145 @@ msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
-"Атака між %u і %u, плюс %u за кожен рівень вищий від 0 (максимальний рівень "
-"%u)."
 
 #: ../../src/writeHTML.cc:611
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Захист дорівнює %u, плюс %u за кожний рівень більше 0 (максимальний рівень "
-"дорzвнює %u)."
 
 #: ../../src/writeHTML.cc:621
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Захист %u, плюс  %u за кожен рівень вищий від 0 (максимальний рівень  %u)."
 
 #: ../../src/writeHTML.cc:667 ../../src/writeHTML.cc:678
 #, c-format
 msgid "%s's creation"
-msgstr "%s виготовлено"
+msgstr ""
 
 #: ../../src/writeHTML.cc:689
 msgid "Spawns in warehouses."
-msgstr "З'являються на складах."
+msgstr ""
 
 #: ../../src/writeHTML.cc:698
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr "Потрібен досвід роботи %u раз, щоб стати"
+msgstr ""
 
 #: ../../src/writeHTML.cc:706
 #, c-format
 msgid "%s's promotion"
-msgstr "Просування по службі %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:717 ../../src/writeHTML.cc:862
 msgid "Programs"
-msgstr "Програми"
+msgstr "Chương trình"
 
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
 msgid "mine"
-msgstr "шахта"
+msgstr ""
 
 #: ../../src/writeHTML.cc:755
 msgid "breed"
-msgstr "плем`я"
+msgstr ""
 
 #: ../../src/writeHTML.cc:756
 msgid "createitem"
-msgstr "створено одиниць"
+msgstr ""
 
 #: ../../src/writeHTML.cc:757
 msgid "setdescription"
-msgstr "встаноити опис"
+msgstr ""
 
 #: ../../src/writeHTML.cc:758
 msgid "setbobdescription"
-msgstr "setbobdescription"
+msgstr ""
 
 #: ../../src/writeHTML.cc:759
 msgid "findobject"
-msgstr "знайти об'єкт"
+msgstr ""
 
 #: ../../src/writeHTML.cc:760
 msgid "findspace"
-msgstr "знайти простір"
+msgstr ""
 
 #: ../../src/writeHTML.cc:761
 msgid "walk"
-msgstr "рух"
+msgstr "đi bộ"
 
 #: ../../src/writeHTML.cc:762
 msgid "animation"
-msgstr "анімація"
+msgstr ""
 
 #: ../../src/writeHTML.cc:763 ../../src/writeHTML.cc:902
 msgid "return"
-msgstr "певернутись"
+msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
-msgstr "об'єкт"
+msgstr ""
 
 #: ../../src/writeHTML.cc:765
 msgid "plant"
-msgstr "завод"
+msgstr ""
 
 #: ../../src/writeHTML.cc:766
 msgid "create_bob"
-msgstr "create_bob"
+msgstr ""
 
 #: ../../src/writeHTML.cc:767
 msgid "removeobject"
-msgstr "видалити об'єкт"
+msgstr ""
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr "геолог"
+msgstr "địa chất học"
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
-msgstr "geologist_find"
+msgstr ""
 
 #: ../../src/writeHTML.cc:770 ../../src/writeHTML.cc:1372
 msgid "playFX"
-msgstr "playFX"
+msgstr ""
 
 #: ../../src/writeHTML.cc:771
 msgid "UNKNOWN"
-msgstr "НЕВІДОМЕ"
+msgstr "KHÔNG RÕ"
 
 #: ../../src/writeHTML.cc:778
 msgid "Production"
-msgstr "Виробництво"
+msgstr ""
 
 #: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:166
 #: ../../src/wui/productionsitewindow.cc:84 ../../src/wui/transport_ui.cc:65
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Workers"
-msgstr "Робочі"
+msgstr "Công nhân"
 
 #: ../../src/writeHTML.cc:793
 #, c-format
 msgid "%s's employee"
-msgstr "працює %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:803
 msgid "Inputs"
-msgstr "Отримує"
+msgstr ""
 
 #: ../../src/writeHTML.cc:814
 #, c-format
 msgid "%s's input"
-msgstr "Отримує %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:826
 msgid "Output"
-msgstr "Виробляє"
+msgstr ""
 
 #: ../../src/writeHTML.cc:837 ../../src/writeHTML.cc:851
 #, c-format
 msgid "%s's output"
-msgstr "Виробив %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:898 ../../src/writeHTML.cc:1041
 #: ../../src/writeHTML.cc:1103 ../../src/writeHTML.cc:1131
@@ -718,7 +605,7 @@ msgstr "Виробив %s"
 #: ../../src/writeHTML.cc:1344 ../../src/writeHTML.cc:1368
 #: ../../src/writeHTML.cc:1385
 msgid "productionsite_program_reference.xhtml"
-msgstr "productionsite_program_reference.xhtml"
+msgstr ""
 
 #: ../../src/writeHTML.cc:900
 msgid "Documentation for program command return"
@@ -727,67 +614,67 @@ msgstr ""
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:793
 msgid "failed"
-msgstr "невдача"
+msgstr "Không thành công"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
-msgstr "виконано"
+msgstr ""
 
 #: ../../src/writeHTML.cc:908 ../../src/logic/production_program.cc:412
 msgid "skipped"
-msgstr "пропущено"
+msgstr ""
 
 #: ../../src/writeHTML.cc:913
 msgid "and"
-msgstr "та"
+msgstr "và"
 
 #: ../../src/writeHTML.cc:914
 msgid "when"
-msgstr "коли"
+msgstr ""
 
 #: ../../src/writeHTML.cc:916
 msgid "or"
-msgstr "або"
+msgstr ""
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
-msgstr "якщо не"
+msgstr ""
 
 #: ../../src/writeHTML.cc:948 ../../src/writeHTML.cc:970
 msgid "economy"
-msgstr "економіка"
+msgstr ""
 
 #: ../../src/writeHTML.cc:950 ../../src/writeHTML.cc:972
 msgid "needs"
-msgstr "потреби"
+msgstr ""
 
 #: ../../src/writeHTML.cc:990
 msgid "site"
-msgstr "місце"
+msgstr ""
 
 #: ../../src/writeHTML.cc:992
 msgid "has"
-msgstr "є"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
-msgstr "робітники цієї ділянки"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
-msgstr "робітники"
+msgstr "công nhân"
 
 #: ../../src/writeHTML.cc:1026
 msgid "</span></a> <span class=\"keyword\">"
-msgstr "</span></a> <span class=\"keyword\">"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1027
 msgid "need"
-msgstr "потрібно"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1029
 msgid "experience"
-msgstr "досвід"
+msgstr "kinh nghiệm"
 
 #: ../../src/writeHTML.cc:1043
 msgid "Documentation for program command call"
@@ -795,7 +682,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1045
 msgid "call"
-msgstr "виклик"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1052
 #, c-format
@@ -808,7 +695,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1107
 msgid "worker"
-msgstr "робітник"
+msgstr "công nhân"
 
 #: ../../src/writeHTML.cc:1118
 #, c-format
@@ -821,80 +708,80 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
-msgstr "сон"
+msgstr "ngủ"
 
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
 msgid " %u.%03u s"
-msgstr " %u.%03u"
+msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command animate"
-msgstr "Довідка по анімації"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1155
 msgid "animate"
-msgstr "анімація"
+msgstr "động"
 
 #: ../../src/writeHTML.cc:1174
 msgid "Documentation for program command consume"
-msgstr "Довідка по споживанню"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
-msgstr "споживання"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1217 ../../src/writeHTML.cc:1254
 msgid "Documentation for program command produce"
-msgstr "Довідка по продукції"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1219
 msgid "produce"
-msgstr "продукт"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1256
 msgid "recruit"
-msgstr "вербувати"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1295
 msgid "Documentation for program command mine"
-msgstr "Довідка по шахтам"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1322
 msgid "Documentation for program command check_soldier"
-msgstr "Довідка про check_soldier"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1324
 msgid "check soldier"
-msgstr "Огляд армії"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1330 ../../src/writeHTML.cc:1354
 msgid "hp"
-msgstr "зд."
+msgstr ""
 
 #: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
 msgid "attack"
-msgstr "атака"
+msgstr "tấn công"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "defense"
-msgstr "захист"
+msgstr "quốc phòng"
 
 #: ../../src/writeHTML.cc:1333 ../../src/writeHTML.cc:1357
 msgid "evade"
-msgstr "ухилення"
+msgstr "trốn"
 
 #: ../../src/writeHTML.cc:1346
 msgid "Documentation for program command train"
-msgstr "Довідка по тренування"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1348
 msgid "train"
-msgstr "тренування"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1370
 msgid "Documentation for program command playFX"
-msgstr "Довідка про playFX"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1387
 msgid "Documentation for program command construct"
@@ -902,15 +789,15 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr "побудувати"
+msgstr "xây dựng"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
-msgstr "Типи товарів"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1466
 msgid "ware_types.xhtml"
-msgstr "ware_types_uk_UA.xhtml"
+msgstr ""
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/request.cc:243 ../../src/economy/wares_queue.cc:257
@@ -966,70 +853,70 @@ msgstr "ware_types_uk_UA.xhtml"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:206
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr "невідома/необроблена версія  %u"
+msgstr ""
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr "перегляд економіки: %s"
+msgstr ""
 
 #: ../../src/economy/economy_data_packet.cc:63
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr "запис для %s вже існує"
+msgstr ""
 
 #: ../../src/economy/economy_data_packet.cc:94
 #, c-format
 msgid "target quantities: %s"
-msgstr "запланована кількість: %s"
+msgstr ""
 
 #: ../../src/economy/economy_data_packet.cc:98
 #, c-format
 msgid "unknown version %u"
-msgstr "невідома версія %u"
+msgstr ""
 
 #: ../../src/economy/economy_data_packet.cc:101
 #, c-format
 msgid "economy: %s"
-msgstr "економіка: %s"
+msgstr ""
 
 #: ../../src/economy/wares_queue.cc:259
 #, c-format
 msgid "waresqueue: %s"
-msgstr "складовано: %s"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
-msgstr "Меню"
+msgstr "Thực đơn"
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr "Сервіс"
+msgstr "Công cụ"
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
-msgstr "Розмір інструментів"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:72
 #: ../../src/wui/interactive_player.cc:134
 #: ../../src/wui/interactive_spectator.cc:68
 msgid "Minimap"
-msgstr "Мінікарта"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:75
 #: ../../src/wui/interactive_player.cc:137
 msgid "Buildhelp"
-msgstr "Допомога в будівництві"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
-msgstr "Гравці"
+msgstr "Người chơi"
 
 #: ../../src/editor/editorinteractive.cc:150
 msgid "Unsupported format"
-msgstr "Формат не підтримується"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:152
 #, c-format
@@ -1037,37 +924,35 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
-"Не вдається завантажити файл \"%s\". Можливо, не сумісний він в несумісному "
-"форматі."
 
 #: ../../src/editor/editorinteractive.cc:170
 #: ../../src/editor/editorinteractive.cc:575
 #: ../../src/logic/editor_game_base.cc:339
 #, c-format
 msgid "Loading tribe: %s"
-msgstr "Завантаження племені: %s"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:176
 msgid "Creating players"
-msgstr "Створення гравців"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:183
 #: ../../src/logic/editor_game_base.cc:333
 msgid "Loading world data"
-msgstr "Завантажую дані про світ"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:186
 #: ../../src/editor/editorinteractive.cc:579
 msgid "Loading graphics..."
-msgstr "Завантажую малюнки..."
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:234
 msgid "Map unsaved"
-msgstr "Мапа не збережена"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:235
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr "Мапа не збережена, Ви впевнені, що хочете вийти?"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:566
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -1075,7 +960,7 @@ msgstr "Мапа не збережена, Ви впевнені, що хочет
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:184
 #: ../../src/logic/map.h:184
 msgid "No Name"
-msgstr "Без назви"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:568
 #: ../../src/ui_fsmenu/netsetup_lan.cc:189
@@ -1083,12 +968,12 @@ msgstr "Без назви"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:474
 #: ../../src/logic/map.h:185
 msgid "Unknown"
-msgstr "Невідомо"
+msgstr ""
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
 msgid "command queue: %s"
-msgstr "черга: %s"
+msgstr ""
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
@@ -1097,7 +982,7 @@ msgstr ""
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr "В грі нема гравців!"
+msgstr ""
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:80
 #, c-format
@@ -1106,28 +991,28 @@ msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:67
 msgid "there is no flag at the specified location"
-msgstr "у вказаному місці відсутній прапорець"
+msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:69
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
 #, c-format
 msgid "player %u: %s"
-msgstr "гравеця %u: %s"
+msgstr "máy nghe nhạc %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:75
 #, c-format
 msgid "economies: %s"
-msgstr "економія: %s"
+msgstr "các nền kinh tế: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr "номер гравця (%i) поза діапазоном (1 .. %u)"
+msgstr ""
 
 #: ../../src/game_io/game_player_info_data_packet.cc:145
 #, c-format
 msgid "player info: %s"
-msgstr "Інфо про гравця: %s"
+msgstr ""
 
 #: ../../src/game_io/game_preload_data_packet.cc:63
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1137,12 +1022,12 @@ msgstr "Інфо про гравця: %s"
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:79
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr "невідома/необроблена версія %i"
+msgstr ""
 
 #: ../../src/game_io/game_preload_data_packet.cc:65
 #, c-format
 msgid "preload: %s"
-msgstr "попереднє завантаження: %s"
+msgstr ""
 
 #: ../../src/graphic/animation.cc:138 ../../src/logic/building.cc:77
 #: ../../src/logic/immovable.cc:195 ../../src/logic/immovable.cc:824
@@ -1175,16 +1060,16 @@ msgstr "попереднє завантаження: %s"
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr "очікували %s , але знайшли \"%s\""
+msgstr ""
 
 #: ../../src/graphic/animation.cc:139
 msgid "frame number"
-msgstr "номер кадра"
+msgstr ""
 
 #: ../../src/graphic/graphic.cc:1019
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr "Завантаження анімації: %d%% завершено"
+msgstr ""
 
 #: ../../src/logic/battle.cc:178
 #, c-format
@@ -1199,22 +1084,22 @@ msgstr ""
 #: ../../src/logic/bob.cc:83 ../../src/logic/immovable.cc:207
 #, c-format
 msgid "bad attribute \"%s\""
-msgstr "поганий атрибут \"%s\""
+msgstr ""
 
 #: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
-msgstr "малий"
+msgstr "nhỏ"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "medium"
-msgstr "середній"
+msgstr "trung bình"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
-msgstr "великий"
+msgstr "lớn"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -1239,12 +1124,12 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:178
 #, c-format
 msgid "game logic: %s"
-msgstr "логіка гри: %s"
+msgstr ""
 
 #: ../../src/logic/constructionsite.cc:177
 #, c-format
 msgid "%u%% built"
-msgstr "%u%% побудовано"
+msgstr ""
 
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
@@ -1253,41 +1138,41 @@ msgstr ""
 
 #: ../../src/logic/game.cc:230
 msgid "Preloading a map"
-msgstr "Передзавантаження мапи"
+msgstr ""
 
 #: ../../src/logic/game.cc:242
 msgid "Loading a world"
-msgstr "Завантаження світу"
+msgstr ""
 
 #: ../../src/logic/game.cc:248
 #, c-format
 msgid "Adding player %u"
-msgstr "Додати гравця %u"
+msgstr ""
 
 #: ../../src/logic/game.cc:261
 msgid "Loading a map"
-msgstr "Завантаження мапи"
+msgstr ""
 
 #: ../../src/logic/game.cc:294 ../../src/logic/game.cc:368
 #: ../../src/logic/game.cc:405
 msgid "Preloading map"
-msgstr "Попереднє завантаження мапи"
+msgstr ""
 
 #: ../../src/logic/game.cc:309
 msgid "Configuring players"
-msgstr "Налаштування гравців"
+msgstr ""
 
 #: ../../src/logic/game.cc:342
 msgid "Loading map"
-msgstr "Завантаження мапи"
+msgstr ""
 
 #: ../../src/logic/game.cc:486
 msgid "Creating player infrastructure"
-msgstr "Створити інфраструктуру гравця"
+msgstr ""
 
 #: ../../src/logic/game.cc:500 ../../src/logic/player.cc:142
 msgid "Missing starting position"
-msgstr "Стартова позиція відсутня"
+msgstr ""
 
 #: ../../src/logic/game.cc:502 ../../src/logic/player.cc:144
 #, c-format
@@ -1297,17 +1182,15 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
-"Неможливо розпочати грау, тому, в гравця %u відсутня стартова позиція.\n"
-"Ви можете додати стартову позицію в редакторв Widelands."
 
 #: ../../src/logic/immovable.cc:144 ../../src/logic/production_program.cc:1600
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr "невідома команда \"%s\""
+msgstr ""
 
 #: ../../src/logic/immovable.cc:148
 msgid "no actions"
-msgstr "нема дій"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:221
 msgid "this program has already been declared"
@@ -1316,16 +1199,16 @@ msgstr ""
 #: ../../src/logic/immovable.cc:227
 #, c-format
 msgid "program %s: %s"
-msgstr "програма %s: %s"
+msgstr "chương trình %s: %s"
 
 #: ../../src/logic/immovable.cc:259 ../../src/logic/immovable.cc:274
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr "очікували 0 .. 255 а отримали %u"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:261 ../../src/logic/immovable.cc:276
 msgid "duplicated"
-msgstr "дублікат"
+msgstr "nhân bản"
 
 #: ../../src/logic/immovable.cc:279
 #, c-format
@@ -1345,7 +1228,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:775
 #, c-format
 msgid "unknown tribe %s"
-msgstr "невідоме плем'я %s"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:781
 #, c-format
@@ -1360,16 +1243,16 @@ msgstr ""
 #: ../../src/logic/immovable.cc:825 ../../src/logic/production_program.cc:647
 #: ../../src/logic/production_program.cc:689
 msgid "duration in ms"
-msgstr "тривалість в мс."
+msgstr ""
 
 #: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1394
 msgid "priority"
-msgstr "пріоритет"
+msgstr "Ưu tiên"
 
 #: ../../src/logic/immovable.cc:901 ../../src/logic/immovable.cc:1082
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr "очікувалась можливість в межах [1, 254], а виявлено \"%s\""
+msgstr ""
 
 #: ../../src/logic/immovable.cc:920
 #, c-format
@@ -1379,7 +1262,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:931
 msgid "illegal transformation to the same type"
-msgstr "заборонено перетворення в той самий тип"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:975 ../../src/logic/immovable.cc:1061
 #, c-format
@@ -1393,78 +1276,76 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:1028
 msgid "probability in range [1, 254]"
-msgstr "можливість в межах[1, 254]"
+msgstr ""
 
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr "знищити об'єкт: %s"
+msgstr ""
 
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr "об'єкт %u: %s"
+msgstr ""
 
 #: ../../src/logic/instances.cc:133
 #, c-format
 msgid "act: %s"
-msgstr "дія: %s"
+msgstr ""
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
-msgstr "Гравець 1"
+msgstr "Thủ 1"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:67
 msgid "\"min-max\""
-msgstr "\"min-max\""
+msgstr ""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr "позитивне ціле <= 100"
+msgstr ""
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr "очікувалось позитивне ціле >= %u <= 100, а отримали\"%s\""
+msgstr ""
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr "очікувалось позитивне ціле >= %u <= %u, а отримали \"%u\""
+msgstr ""
 
 #: ../../src/logic/militarysite.cc:62 ../../src/logic/warehouse.cc:255
 msgid " conquer"
-msgstr " завоювати"
+msgstr " chinh phục"
 
 #: ../../src/logic/militarysite.cc:113
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] "%u солдат"
-msgstr[1] "%u солдати"
-msgstr[2] "%u солдат"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../src/logic/militarysite.cc:118
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] "%u(+%u) солдат"
-msgstr[1] "%u(+%u) солдат"
-msgstr[2] "%u(+%u) солдат"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr "Ваші солдати зайняли %s."
+msgstr ""
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr "Ворог переміг Ваших солдат на %s."
+msgstr ""
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
-msgstr "Втрачено військову будівлю!"
+msgstr ""
 
 #: ../../src/logic/militarysite.cc:622
 #, c-format
@@ -1473,7 +1354,7 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
-msgstr "Ворога переможено!"
+msgstr ""
 
 #: ../../src/logic/militarysite.cc:670
 #, c-format
@@ -1483,17 +1364,17 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:671
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr "Ваш %s атаковано.</p>"
+msgstr ""
 
 #: ../../src/logic/militarysite.cc:679
 msgid "You are under attack"
-msgstr "Вас атакують"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:130
 #: ../../src/map_io/widelands_map_building_data_packet.cc:101
 #, c-format
 msgid "player %u does not exist"
-msgstr "гравець %u не існує"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:136
 #, c-format
@@ -1508,17 +1389,17 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:184
 #, c-format
 msgid "bulldoze: %s"
-msgstr "знести: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:236
 #, c-format
 msgid "build: %s"
-msgstr "будувати: %s"
+msgstr "xây dựng: %s"
 
 #: ../../src/logic/playercommand.cc:284
 #, c-format
 msgid "build flag: %s"
-msgstr "встановити прапорець: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:371
 #, c-format
@@ -1528,44 +1409,44 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:425
 #, c-format
 msgid "flag %u: %s"
-msgstr "прапорець %u: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:431
 #, c-format
 msgid "flag action: %s"
-msgstr "Дія прапорця: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:482 ../../src/logic/playercommand.cc:540
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #, c-format
 msgid "building %u: %s"
-msgstr "будівля %u: %s"
+msgstr "xây dựng %u: %s"
 
 #: ../../src/logic/playercommand.cc:488
 #, c-format
 msgid "start/stop building: %s"
-msgstr "почати/зупини: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:549
 #, c-format
 msgid "enhance building: %s"
-msgstr "покращити будівлю: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:621 ../../src/logic/playercommand.cc:1047
 #: ../../src/logic/playercommand.cc:1125
 #, c-format
 msgid "site %u: %s"
-msgstr "місце %u: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:631
 #, c-format
 msgid "set ware priority: %s"
-msgstr "встановити приорітет для товару: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:680
 #, c-format
 msgid "change target quantity: %s"
-msgstr "змінити заплановану кількість: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:743
 #, c-format
@@ -1585,17 +1466,17 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1054
 #, c-format
 msgid "soldier %u: %s"
-msgstr "солдат %u: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1060
 #, c-format
 msgid "drop soldier: %s"
-msgstr "звільнити солдат: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1132
 #, c-format
 msgid "change soldier capacity: %s"
-msgstr "змінити силу солдат: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1297
 #, c-format
@@ -1605,7 +1486,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1308
 #, c-format
 msgid "change military config: %s"
-msgstr "змінити налаштування армії: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1347
 #, c-format
@@ -1615,7 +1496,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1352
 #, c-format
 msgid "player message: %s"
-msgstr "повідомлення гравця: %s"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:87
 #, c-format
@@ -1635,7 +1516,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:866
 #: ../../src/logic/production_program.cc:961
 msgid "count"
-msgstr "кількість"
+msgstr "đếm"
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
@@ -1646,12 +1527,12 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:149
 msgid "not "
-msgstr "ні "
+msgstr "không "
 
 #: ../../src/logic/production_program.cc:171
 #: ../../src/logic/production_program.cc:192
 msgid "economy needs "
-msgstr "потреби економіки "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:221
 msgid "site has "
@@ -1659,16 +1540,16 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:247
 msgid "workers need experience"
-msgstr "працівникам потрібен досвід"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:272
 msgid "ware type or worker type"
-msgstr "тип товару чи працівника"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "invalid condition: %s"
-msgstr "Поганий стан:  %s"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:350
 #, c-format
@@ -1690,21 +1571,21 @@ msgstr ""
 #: ../../src/logic/production_program.cc:418
 #: ../../src/logic/production_program.cc:817
 msgid " and "
-msgstr " та "
+msgstr " và "
 
 #: ../../src/logic/production_program.cc:419
 #: ../../src/logic/production_program.cc:796
 msgid " because: "
-msgstr " тому, що: "
+msgstr " vì: "
 
 #: ../../src/logic/production_program.cc:430
 #: ../../src/wui/encyclopedia_window.cc:192
 msgid " or "
-msgstr " або "
+msgstr " hoặc "
 
 #: ../../src/logic/production_program.cc:431
 msgid " because not: "
-msgstr " тому, що ні: "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:480
 #, c-format
@@ -1722,28 +1603,28 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:502
 msgid "failure"
-msgstr "невдача"
+msgstr "thất bại"
 
 #: ../../src/logic/production_program.cc:507
 msgid "completion"
-msgstr "завершення"
+msgstr "hoàn thành"
 
 #: ../../src/logic/production_program.cc:512
 msgid "skip"
-msgstr "пропустити"
+msgstr "bỏ qua"
 
 #: ../../src/logic/production_program.cc:517
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr "{\"failure\"|\"completion\"|\"skip\"}"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:531
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:651
 #, c-format
 msgid "sleep: %s"
-msgstr "сон: %s"
+msgstr "ngủ: %s"
 
 #: ../../src/logic/production_program.cc:672
 msgid "idle animation is default; calling is not allowed"
@@ -1751,14 +1632,13 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:721
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr "очікується ware_type1[,ware_type2[,...]][:N] ..."
+msgstr ""
 
 #: ../../src/logic/production_program.cc:820
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] " відсутній"
-msgstr[1] " відсутні"
-msgstr[2] " відсутні"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../src/logic/production_program.cc:880
 #: ../../src/logic/production_program.cc:975
@@ -1782,20 +1662,20 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:917
 #, c-format
 msgid "Produced %s"
-msgstr "Продукція %s"
+msgstr "Sản xuất %s"
 
 #: ../../src/logic/production_program.cc:992
 msgid "Recruited "
-msgstr "Підготовлено "
+msgstr "Tuyển dụng "
 
 #: ../../src/logic/production_program.cc:1039
 msgid "distance"
-msgstr "дистанція"
+msgstr "khoảng cách"
 
 #: ../../src/logic/production_program.cc:1050
 #: ../../src/logic/production_program.cc:1061
 msgid "percentage"
-msgstr "відсоток"
+msgstr "tỷ lệ phần trăm"
 
 #: ../../src/logic/production_program.cc:1175
 #, c-format
@@ -1804,28 +1684,27 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:1196
 msgid "Mine empty"
-msgstr "В шахті пусто"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1198
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
-msgstr "В цій шахті пусто. Розширьте або знесіть її."
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1212
 #: ../../src/logic/production_program.cc:1285
 msgid "soldier type"
-msgstr "тип солдата"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1225
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
-"очікувалось {\"hp\"|\"attack\"|\"defense\"|\"evade\"} а отримано \"%s\""
 
 #: ../../src/logic/production_program.cc:1234
 #: ../../src/logic/production_program.cc:1306
 msgid "level"
-msgstr "рівень"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1253
 #: ../../src/logic/production_program.cc:1340
@@ -1836,7 +1715,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1316
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr "очікувався рівень > %u та отримано \"%s\""
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:69
 msgid "this ware type has already been declared as an output"
@@ -1848,19 +1727,18 @@ msgstr ""
 
 #: ../../src/logic/productionsite.cc:241
 msgid "(not occupied)"
-msgstr "(не занйято)"
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:246
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] "Не вистачає робітника"
-msgstr[1] "Не вистачає робочих"
-msgstr[2] "Не вистачає робочих"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../src/logic/productionsite.cc:254
 msgid "(stopped)"
-msgstr "(зупинено)"
+msgstr "(dừng)"
 
 #: ../../src/logic/requirements.cc:223
 #, c-format
@@ -1876,21 +1754,21 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
-msgstr "додатне ціле число"
+msgstr ""
 
 #: ../../src/logic/soldier.cc:79
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr "очікувалось додатне ціле >= %u а отримано \"%s\""
+msgstr ""
 
 #: ../../src/logic/soldier.cc:182
 msgid "\"anim_name[,another_anim,...]\""
-msgstr "\"anim_name[,another_anim,...]\""
+msgstr ""
 
 #: ../../src/logic/soldier.cc:1252
 #, c-format
 msgid "bad direction '%d'"
-msgstr "невірний напрям  '%d'"
+msgstr ""
 
 #: ../../src/logic/soldier.cc:1429
 #, c-format
@@ -1904,19 +1782,19 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:1440 ../../src/logic/soldier.cc:1445
 msgid "no"
-msgstr "ні"
+msgstr "không"
 
 #: ../../src/logic/soldier.cc:1452 ../../src/logic/soldier.cc:1460
 msgid "Logic error"
-msgstr "Логічна помилка"
+msgstr ""
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
-msgstr "Відпочинок"
+msgstr ""
 
 #: ../../src/logic/trainingsite.cc:175
 msgid "Not Working"
-msgstr "Не працює"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:125
 msgid "constructionsite type \"constructionsite\" is missing"
@@ -1925,26 +1803,26 @@ msgstr ""
 #: ../../src/logic/tribe.cc:242 ../../src/logic/tribe.cc:263
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr "\"%s\" дубльований"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:251 ../../src/logic/tribe.cc:272
 msgid "none found"
-msgstr "нічого не знайдено"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:253
 #, c-format
 msgid "frontier styles: %s"
-msgstr "стиль кордону: %s"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:274
 #, c-format
 msgid "flag styles: %s"
-msgstr "стиль прапорця: %s"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:316
 #, c-format
 msgid "tribe %s: %s"
-msgstr "плем'я %s: %s"
+msgstr "bộ lạc %s: %s"
 
 #: ../../src/logic/warehouse.cc:460
 #, c-format
@@ -1957,8 +1835,6 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
-"шахта має добувати %s , якого нема на цій карті; плем'я не сумісне з цією "
-"картою"
 
 #: ../../src/logic/worker.cc:209
 #, c-format
@@ -1966,7 +1842,6 @@ msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
-"має отримати %s, що не існує в цьому світі; плем'я не сумісне з цією картою"
 
 #: ../../src/logic/worker.cc:592
 msgid "Out of "
@@ -1976,11 +1851,11 @@ msgstr ""
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
-msgstr "Робітник цієї будівлі більше не може знайти ресурсів: "
+msgstr ""
 
 #: ../../src/logic/worker.cc:942
 msgid "A geologist found resources."
-msgstr "Геолог знайшов ресурси."
+msgstr ""
 
 #: ../../src/logic/worker.cc:1737
 #, c-format
@@ -1994,22 +1869,22 @@ msgstr ""
 #: ../../src/logic/worker.cc:2938
 #, c-format
 msgid "loading worker: %s"
-msgstr "завантаження працівника: %s"
+msgstr ""
 
 #: ../../src/logic/world.cc:623
 #, c-format
 msgid "%s: too many terrain types, can not be more than 16"
-msgstr "%s: занадто багато типів місцевості, максиму дозволено 16"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
 msgid "allowed buildings: %s"
-msgstr "доступні будівлі: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr "дозволеня типи працівників: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
@@ -2019,17 +1894,17 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr "плем'я \"%s\" не існує"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:139
 #, c-format
 msgid "bobs: %s"
-msgstr "bobs: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr "невідоме завдання \"%s\""
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:231
 #, c-format
@@ -2039,52 +1914,52 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:306
 #, c-format
 msgid "reading path: %s"
-msgstr "шлях огляду: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:369
 #, c-format
 msgid "bob %u: %s"
-msgstr "bob %u: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:376
 #, c-format
 msgid "bobdata: %s"
-msgstr "bobdata: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:391
 #, c-format
 msgid "critter bob: %s"
-msgstr "critter bob: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:486
 #, c-format
 msgid "soldier: %s"
-msgstr "солдат: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:502
 #, c-format
 msgid "carrier: %s"
-msgstr "носій: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:107
 #, c-format
 msgid "buildings: %s"
-msgstr "будівлі: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
 msgid "buildingdata: %s"
-msgstr "Інфо про будівлю: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:274
 #, c-format
 msgid "wares: %s"
-msgstr "вироби: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:287
 #, c-format
 msgid "constructionsite: %s"
-msgstr "будівельний майданчик: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:467
 #, c-format
@@ -2096,7 +1971,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:536
 #, c-format
 msgid "warehouse: %s"
-msgstr "склад: %s"
+msgstr "kho: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:617
 #, c-format
@@ -2111,67 +1986,67 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:972
 #, c-format
 msgid "trainingsite: %s"
-msgstr "навчальна частина: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
 msgid "elemental data: %s"
-msgstr "початкові дані: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
 msgid "seen: %s"
-msgstr "бачив: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
 #, c-format
 msgid "extradata: %s"
-msgstr "додаткові дані: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr "вузол належить гравцю %u"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr "належить гравцю%u"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr "має прапорець (%u)"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr "сусідній вузол (%i, %i): %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr "прапорці: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr "невірний прапорець (%u) на даній позиції (%i, %i)"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr "тут нема прапорця (%i, %i)"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
 msgid "has building %u at (%i, %i), which is not at the top left node"
-msgstr "є бідівля %u в (%i, %i), яка не в лівому верхньому куті вузла"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr "будівля (%u): %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
@@ -2182,36 +2057,36 @@ msgstr "%u: %s"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
 msgid "flagdata: %s"
-msgstr "інфо прапорця: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr "висота: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:84
 msgid "Invalid World"
-msgstr "Невірний світ"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:86
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
-msgstr "Карта світу \"%s\" не існує."
+msgstr ""
 
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
 msgid "ownership: %s"
-msgstr "власність: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_object_packet.cc:99
 #, c-format
 msgid "unknown object header %u"
-msgstr "невідомий заголовок об'єкта  %u"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_object_packet.cc:102
 #, c-format
 msgid "map objects: %s"
-msgstr "об'єкти карти: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
@@ -2221,30 +2096,27 @@ msgstr "%s: %s"
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
 msgid "Objectives: %s"
-msgstr "Цілі: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
 msgid "player names and tribes: %s"
-msgstr "імена гравців та поселенців: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:61
 #, c-format
 msgid "player positions: %s"
-msgstr "позиції гравця: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
-"повідомлення в будь-якому порядку: відправлено %u , але попереднє надіслано "
-"на %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
 msgstr ""
-"повідомлення будуть відправлені пізніше: відправлено %u але час гри лише %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
@@ -2275,7 +2147,7 @@ msgstr "\"%s\": %s"
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:155
 #, c-format
 msgid "messages for player %u: %s"
-msgstr "повідомлення для гравця %u: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:123
 #, c-format
@@ -2285,11 +2157,11 @@ msgstr ""
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr "дорога: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr "нема місць"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -2301,37 +2173,37 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr "дорога %u: %s"
+msgstr "đường %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
 msgid "roaddata: %s"
-msgstr "інфо про дорогу: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr "місцевість: %s"
+msgstr "địa hình: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
 msgid "ware data: %s"
-msgstr "інфо забезпечення: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:131
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:201
 #, c-format
 msgid "item %u: %s"
-msgstr "деталь %u: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
 #, c-format
 msgid "waredata: %s"
-msgstr "інфо про товар:  %s"
+msgstr ""
 
 #: ../../src/network/netclient.cc:100
 msgid "Could not establish connection to host"
-msgstr "Не вдалося підключитися до хоста"
+msgstr ""
 
 #: ../../src/network/netclient.cc:102
 msgid ""
@@ -2339,22 +2211,18 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
-"Widelands не зміг підключитись за даною адресою.\n"
-"Або сервер Widelands працює з іншим портом, або\n"
-"сервер вимкнено."
 
 #: ../../src/network/netclient.cc:134
 msgid "Client has left the game."
-msgstr "Гравець вийшов з гри."
+msgstr ""
 
 #: ../../src/network/netclient.cc:216
 msgid "Client crashed and performed an emergency save."
 msgstr ""
-"Програма аварійно закінчила роботу, і спробувала створити збереження."
 
 #: ../../src/network/netclient.cc:463
 msgid "Server sent a player update for a player that does not exist."
-msgstr "Сервер вислав інформацию про дії неіснуючого гравця."
+msgstr ""
 
 #: ../../src/network/netclient.cc:480
 msgid "Server sent an user update for a user that does not exist."
@@ -2369,7 +2237,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:562
 msgid "Server uses a different protocol version"
-msgstr "Сервер використовує іншу версію протоколу."
+msgstr ""
 
 #: ../../src/network/netclient.cc:708
 msgid "/me 's file failed md5 checksumming."
@@ -2377,32 +2245,28 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:812
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr "Команда LAUNCH несподівано отримана від сервера."
+msgstr ""
 
 #: ../../src/network/netclient.cc:832
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr ""
-"Сервер вислав команду PLAYERCOMMAND, не дивлячись на те що жодної гри не "
-"запущено."
 
 #: ../../src/network/netclient.cc:845
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr ""
-"Сервер вислав команду SYNCREQUEST, не дивлячись на те що жодної гри не "
-"запущено."
 
 #: ../../src/network/netclient.cc:872
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
-msgstr "Сервер надіслав невідому команду (команда номер %u)"
+msgstr ""
 
 #: ../../src/network/netclient.cc:906
 msgid "Something went wrong: "
-msgstr "Щось не так: "
+msgstr ""
 
 #: ../../src/network/netclient.cc:937
 msgid " An automatic savegame will be created."
-msgstr " Автозбереження."
+msgstr ""
 
 #: ../../src/network/nethost.cc:348
 msgid ""
@@ -2416,20 +2280,20 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:364
 msgid "Wrong use, should be: /announce <message>"
-msgstr "Неправильне використання, має бути: /announce <повідомлення>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:376
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Неправильне використання, має бути: /warn <ім`я> <причина>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:387
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr "Неправильне використання, має бути: /kick <ім`я> <причина>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:395
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr "Ви впевненні що хочете викинути %s?<br />"
+msgstr ""
 
 #: ../../src/network/nethost.cc:398
 #, c-format
@@ -2439,7 +2303,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:401
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr "Якщо так, наберіть: /ack_kick %s"
+msgstr ""
 
 #: ../../src/network/nethost.cc:410
 msgid "kick acknowledgement cancelled: No name given!"
@@ -2447,7 +2311,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:412
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr "Неправильне використання, маэ бути: /ack_kick <ім`я>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:419
 msgid "kick acknowledgement cancelled: Wrong name given!"
@@ -2463,11 +2327,11 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:450
 msgid "Invalid command! Type /help for a list of commands."
-msgstr "Неправильна команда! Наберіть /help щоб побачити список комманд."
+msgstr ""
 
 #: ../../src/network/nethost.cc:591
 msgid "Server has left the game."
-msgstr "Сервер закінчив гру."
+msgstr ""
 
 #: ../../src/network/nethost.cc:680
 msgid "The game has started just after you tried to connect."
@@ -2479,11 +2343,11 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:983
 msgid "You can not kick yourself!"
-msgstr "Ви не можете викинути самого себе!"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1004
 msgid "There is no connected user with that nickname!"
-msgstr "Немає підключеного користувача з таким ім`ям."
+msgstr ""
 
 #: ../../src/network/nethost.cc:1067
 msgid ""
@@ -2553,17 +2417,17 @@ msgstr ""
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr "Комп'ютер%u"
+msgstr "Máy tính%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
-msgstr "Увага: %s ваша версія: %s, хост використовує версію: %s"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1969
 #, c-format
 msgid "%s has joined the game"
-msgstr "%s під'єднався до гри"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1979
 #, c-format
@@ -2590,15 +2454,15 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:2270
 msgid "The game has already started."
-msgstr "Гра вже запущена."
+msgstr ""
 
 #: ../../src/network/nethost.cc:2288
 msgid "Connection to client lost."
-msgstr "З'єднання втрачено."
+msgstr ""
 
 #: ../../src/network/nethost.cc:2302
 msgid "Client sent malformed commands: "
-msgstr "Клієнт надіслав невірні команди: "
+msgstr ""
 
 #: ../../src/network/nethost.cc:2334
 msgid "Game is running already, but client has not connected fully"
@@ -2613,7 +2477,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:2343
 msgid "Server uses a different protocol version."
-msgstr "Сервер використовує іншу версію протоколу."
+msgstr ""
 
 #: ../../src/network/nethost.cc:2381
 msgid "Client sent TIME command even though game is not running."
@@ -2639,7 +2503,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:2446
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr "Почато передачу файла %s для %s!"
+msgstr ""
 
 #: ../../src/network/nethost.cc:2467
 msgid "Client requests file part that does not exist."
@@ -2648,7 +2512,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:2470
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr "Передачу файлу %s для %s завершено"
+msgstr ""
 
 #: ../../src/network/nethost.cc:2478
 #, c-format
@@ -2658,12 +2522,12 @@ msgstr ""
 #: ../../src/network/nethost.cc:2488
 #, c-format
 msgid "Client sent unknown command number %u"
-msgstr "Клієнт надіслав невідому команду номер %u"
+msgstr ""
 
 #: ../../src/network/nethost.cc:2545
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr "%s покинув гру (%s)"
+msgstr ""
 
 #: ../../src/network/nethost.cc:2564
 #, c-format
@@ -2672,7 +2536,7 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:276
 msgid "Closed the connection to the metaserver."
-msgstr "З'єднання з сервером закрите."
+msgstr ""
 
 #: ../../src/network/network_ggz.cc:372
 msgid ""
@@ -2688,27 +2552,27 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:587
 msgid "Server MOTD:"
-msgstr "Сервер MOTD:"
+msgstr ""
 
 #: ../../src/network/network_ggz.cc:593
 msgid "Reconnected to the metaserver."
-msgstr "Перепід'днатись до сервера."
+msgstr ""
 
 #: ../../src/network/network_ggz.cc:598
 msgid "NOTE: The Internet gaming implementation is in very early state."
-msgstr "Примітка: Реалізація гри через Інтернет в дуже початковому стані."
+msgstr ""
 
 #: ../../src/network/network_ggz.cc:602
 msgid "Please take a look at the notes at:"
-msgstr "Будь ласка, зверніть увагу на примітки за адресою:"
+msgstr ""
 
 #: ../../src/network/network_ggz.cc:741
 msgid " joined the metaserver."
-msgstr " під'єднано до сервера."
+msgstr ""
 
 #: ../../src/network/network_ggz.cc:750
 msgid " left the metaserver."
-msgstr " покинув сервер."
+msgstr ""
 
 #: ../../src/scripting/lua_game.cc:435 ../../src/ui_basic/helpwindow.cc:78
 #: ../../src/ui_basic/messagebox.cc:91
@@ -2722,58 +2586,57 @@ msgstr " покинув сервер."
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
 #: ../../src/wui/game_main_menu_save_game.h:77
 msgid "OK"
-msgstr "Гаразд"
+msgstr ""
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
 msgid "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
-msgstr "Sound_Handler час закриття %i, частота %i, формат %i, канал %i\n"
+msgstr ""
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
 msgstr ""
-"Помилка: звуковий пристрій відкритий декілька разів, спробуйте закрити."
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr "Довідка: "
+msgstr ""
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
-msgstr "Підготовка..."
+msgstr ""
 
 #: ../../src/ui_basic/spinbox.cc:116
 msgid "Increase the value"
-msgstr "Збільшити значення"
+msgstr ""
 
 #: ../../src/ui_basic/spinbox.cc:124
 msgid "Decrease the value"
-msgstr "Зменшити значення"
+msgstr ""
 
 #: ../../src/ui_basic/spinbox.cc:135
 msgid "Increase the value by 10"
-msgstr "Збільшувати значення по 10"
+msgstr ""
 
 #: ../../src/ui_basic/spinbox.cc:143
 msgid "Decrease the value by 10"
-msgstr "Зменшувати значення по10"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
-msgstr "Оберіть компанію"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:54
 msgid "Campaign:"
-msgstr "Кампанія:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Difficulty:"
-msgstr "Складність:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:269
 msgid "Description:"
-msgstr "Опис:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:82
 #: ../../src/ui_fsmenu/campaign_select.cc:288 ../../src/ui_fsmenu/editor.cc:55
@@ -2785,7 +2648,7 @@ msgstr "Опис:"
 #: ../../src/ui_fsmenu/netsetup_lan.cc:76
 #: ../../src/ui_fsmenu/singleplayer.cc:74
 msgid "Back"
-msgstr "Назад"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:162
 #: ../../src/ui_fsmenu/campaign_select.cc:164
@@ -2803,20 +2666,20 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:48
 msgid "Choose your map!"
-msgstr "Оберіть Вашу карту!"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:265
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 #: ../../src/ui_fsmenu/mapselect.cc:58
 msgid "Name:"
-msgstr "Ім’я:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:60
 #: ../../src/ui_fsmenu/mapselect.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:94
 msgid "Author:"
-msgstr "Автор:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
@@ -2825,55 +2688,55 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
-msgstr "Меню редактора"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
 msgid "New Map"
-msgstr "Нова мапа"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor.cc:49
 #: ../../src/editor/ui_menus/editor_main_menu.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:50
 msgid "Load Map"
-msgstr "Завантажити мапу"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:65
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
 msgid "Size:"
-msgstr "Розмір:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:70
 #: ../../src/ui_fsmenu/mapselect.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:89
 msgid "World:"
-msgstr "Світ:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 #: ../../src/ui_fsmenu/mapselect.cc:82
 msgid "Players:"
-msgstr "Гравці:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:80
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Descr:"
-msgstr "Опис:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:219
 #: ../../src/ui_fsmenu/mapselect.cc:297
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:217
 msgid "<parent>"
-msgstr "<батько>"
+msgstr ""
 
 #: ../../src/ui_fsmenu/fileview.cc:45 ../../src/wui/watchwindow.cc:181
 msgid "Close"
-msgstr "Закрити"
+msgstr ""
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr "Натисніть ESC, або кляцніть мишкою для продовження ..."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
@@ -2882,7 +2745,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:66 ../../src/ui_fsmenu/launchMPG.cc:165
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
 msgid "Map"
-msgstr "Мапа"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
@@ -2903,7 +2766,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:70
 #: ../../src/wui/game_main_menu_save_game.h:92
 msgid "Cancel"
-msgstr "Скасувати"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84
 msgid "Cancel selection"
@@ -2915,7 +2778,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:120 ../../src/ui_fsmenu/launchSPG.cc:77
 msgid "Start game"
-msgstr "Розпочати гру"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
@@ -2927,11 +2790,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr "Клієнти"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:194 ../../src/ui_fsmenu/launchSPG.cc:277
 msgid "(no map)"
-msgstr "(нема мапи)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:195
 msgid "The host has not yet selected a map or saved game."
@@ -2940,7 +2803,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
 msgid "Scenario"
-msgstr "Сценарій"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
@@ -2957,7 +2820,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:281 ../../src/ui_fsmenu/launchSPG.cc:236
 msgid "Type: "
-msgstr "Тип: "
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:365
 msgid "Saved game is directory"
@@ -2974,7 +2837,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:384 ../../src/ui_fsmenu/launchSPG.cc:252
 msgid "File not found"
-msgstr "Файл не знайдено"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:386
 #, c-format
@@ -2998,13 +2861,13 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:277
 #, c-format
 msgid "Player %i"
-msgstr "Гравець %i"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:442
 #: ../../src/wui/multiplayersetupgroup.cc:117
 #, c-format
 msgid "Spectator"
-msgstr "Глядач"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:443
 #, c-format
@@ -3023,7 +2886,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
-msgstr "<закрито>"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
@@ -3040,7 +2903,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:605
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr "* Розмір: %ux%u\n"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:606
 #, c-format
@@ -3110,7 +2973,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr "Закрито."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3140,28 +3003,28 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:56
 msgid "Select map"
-msgstr "Оберіть мапу"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:83
 msgid "Launch Game"
-msgstr "Запустити гру"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:91
 msgid "Player's name"
-msgstr "Ім'я гравця"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:95
 msgid "Player's type"
-msgstr "Тип гравця"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 #: ../../src/wui/multiplayersetupgroup.cc:446
 msgid "Team"
-msgstr "Команда"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Player's tribe"
-msgstr "Плем'я гравця"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:107
 msgid "Start type"
@@ -3169,7 +3032,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:155
 msgid "Switch to position"
-msgstr "перемкнутись на позицію"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:254
 #, c-format
@@ -3185,32 +3048,32 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:64
 #: ../../src/wui/game_main_menu_save_game.h:107
 msgid "Delete"
-msgstr "Видалити"
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:75
 msgid "Choose saved game!"
-msgstr "Оберіть збережену гру!"
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Map Name:"
-msgstr "Ім'я мапи:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:84
 msgid "Gametime:"
-msgstr "Час гри:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:114
 msgid "Delete file"
-msgstr "Видалити файл"
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:115
 msgid "Do you really want to delete "
-msgstr "Ви впевнені що хочете видалити "
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadreplay.cc:60
 msgid "Choose a replay!"
-msgstr "Оберіть повтор!"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:42
 msgid "Play Tutorial"
@@ -3218,54 +3081,54 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Single Player"
-msgstr "Один гравець"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:58
 msgid "Multi Player"
-msgstr "Багатокористувацька"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:66
 msgid "Watch Replay"
-msgstr "Переглянути повтор"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:74
 msgid "Editor"
-msgstr "Редактор"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:82 ../../src/wui/game_options_menu.cc:47
 #: ../../src/wui/interactive_player.cc:125
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Options"
-msgstr "Параметри"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:90
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "View Readme"
-msgstr "Дивитись Readme"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:98 ../../src/wui/game_options_menu.cc:65
 msgid "License"
-msgstr "Ліцензія"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:106 ../../src/wui/game_options_menu.cc:100
 msgid "Exit Game"
-msgstr "Вихід з гри"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:112
 msgid "Version "
-msgstr "Версія "
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:117
 msgid "by the Widelands Development Team"
-msgstr "Команда розробників Widelands"
+msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:53
 msgid "Load Map as scenario: "
-msgstr "Завантажити мапу як сценарій: "
+msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:138
 msgid "#"
-msgstr "#"
+msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
@@ -3273,28 +3136,28 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:235
 msgid "(directory)"
-msgstr "(каталог)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
-msgstr "Оберіть тип гри"
+msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:51
 msgid "Internet game"
-msgstr "Інтернет гра"
+msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:59
 msgid "LAN / Direct IP"
-msgstr "LAN / Direct IP"
+msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:86
 msgid "Show login dialog"
-msgstr "Показати діалог входу"
+msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:114
 #: ../../src/ui_fsmenu/netsetup_lan.cc:113 ../../src/wui/login_box.cc:73
 msgid "nobody"
-msgstr "Нікого"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:51
 msgid "Metaserver Lobby"
@@ -3302,52 +3165,52 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:55
 msgid "Users online:"
-msgstr "Користувачі онлайн:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:59
 msgid "List of games:"
-msgstr "Список ігор:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:63
 msgid "Name of your server:"
-msgstr "Им'я вашого сервера:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:67
 msgid "Maximum of players:"
-msgstr "Максимум гравців:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:83
 #: ../../src/ui_fsmenu/netsetup_lan.cc:61
 msgid "Join this game"
-msgstr "Приєднатись до цієї гри"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:91
 msgid "Open a new game"
-msgstr "Відкрити нову гру"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:151
 msgid "Points"
-msgstr "Крапки"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:152
 msgid "Server"
-msgstr "Сервер"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:40
 msgid "Begin Network Game"
-msgstr "Почати мережеву гру"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:44
 msgid "List of games in your local network:"
-msgstr "Список ігр у Вашій локальній мережі:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:48
 msgid "Your nickname:"
-msgstr "Ваш псевдонім:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:52
 msgid "Host to connect:"
-msgstr "Хост для підключення:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:68
 msgid "Host a new game"
@@ -3355,110 +3218,110 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:84
 msgid "Load previous host"
-msgstr "Завантажити попередній хост"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "Host"
-msgstr "Хост"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120
 msgid "State"
-msgstr "Стан"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:187
 #: ../../src/wui/multiplayersetupgroup.cc:261
 #: ../../src/wui/playerdescrgroup.cc:157
 msgid "Open"
-msgstr "Відкрити"
+msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:188
 #: ../../src/wui/multiplayersetupgroup.cc:250
 msgid "Closed"
-msgstr "Закрито"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:52 ../../src/ui_fsmenu/options.cc:423
 msgid "Advanced Options"
-msgstr "Додаткові параметри"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:64 ../../src/ui_fsmenu/options.cc:399
 msgid "Apply"
-msgstr "Застосувати"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:75
 msgid "min."
-msgstr "хв."
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:81
 msgid "days"
-msgstr "дні"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:88
 msgid "General Options"
-msgstr "Загальні параметри"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:95
 msgid "Fullscreen"
-msgstr "На весь екран"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:101
 msgid "Grab Input"
-msgstr "Перехват вводу"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:107
 msgid "Enable Music"
-msgstr "Вкл. музику"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:113
 msgid "Enable Sound"
-msgstr "Увімкнути звук"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:118
 msgid "Maximum FPS:"
-msgstr "Максимум FPS:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:128
 msgid "In-game resolution"
-msgstr "Розширення в грі"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:133
 msgid "Language"
-msgstr "Мова"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:144
 msgid "In-game Options"
-msgstr "Налаштування гри"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:151
 msgid "Use single Watchwindow Mode"
-msgstr "Використовувати віконний режим"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:157
 msgid "Start roadbuilding after placing flag"
-msgstr "Будувати дорогу після розміщення прапорця"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:164
 msgid "Show buildings area preview"
-msgstr "Попередній перегляд зони будівництва"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:171
 msgid "Snap windows only when overlapping"
-msgstr "Вирівнювати вікна лише при накладання"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:177
 msgid "Dock windows to edges"
-msgstr "Клеїти вікна до країв"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:182
 msgid "Save game automatically every"
-msgstr "Автоматично зберігати гру кожні"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:186
 msgid "Remove Replays older than:"
-msgstr "Видалити повтор старший ніж:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:194
 msgid "Off"
-msgstr "Викл."
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:269
 #, c-format
@@ -3467,31 +3330,31 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Try system language"
-msgstr "Спробувати системну мову"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "x"
-msgstr "x"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:410 ../../src/ui_fsmenu/options.cc:415
 msgid "px."
-msgstr "px."
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:434
 msgid "Main menu font:"
-msgstr "Шрифт головного меню:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:440
 msgid "Play a sound at message arrival."
-msgstr "Сигналити коли отримано повідомлення."
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:448
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Не стискати дані гри (мапи, збереження)."
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:453
 msgid "Speed of a new game:"
-msgstr "Швидкість нової гри:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:457
 msgid "Distance for windows to snap to other panels:"
@@ -3507,7 +3370,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:473
 msgid "OpenGL rendering *Highly experimental!*"
-msgstr "OpenGL рендеринг *Експерементально!*"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:478
 msgid "Show in game chat with transparent background"
@@ -3515,186 +3378,186 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:506
 msgid "Pause"
-msgstr "Пауза"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:517
 msgid "FreeSerif (Default)"
-msgstr "FreeSerif (Default)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:39
 msgid "Single Player Menu"
-msgstr "Меню самостійної гри"
+msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:50
 msgid "New Game"
-msgstr "Нова гра"
+msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:59
 msgid "Campaigns"
-msgstr "Кампанії"
+msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:68
 msgid "Load Game"
-msgstr "Завантажити гру"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:174
 msgid "Soldiers:"
-msgstr "Солдати:"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:182
 msgid "Send less soldiers"
-msgstr "Відправити менше солдат"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:199
 msgid "Number of soldiers"
-msgstr "Кількість солдат"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:209
 msgid "Send more soldiers"
-msgstr "Відправити більше солдат"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:129
 msgid "Retreat: Never!"
-msgstr "Відступ: Ніколи!"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:239 ../../src/wui/military_box.cc:148
 msgid "Supported damage before retreat"
-msgstr "Пошкодження перед відступом"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:241 ../../src/wui/military_box.cc:150
 msgid "Once injured"
-msgstr "Коли поранені"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:79
 #: ../../src/wui/game_main_menu.cc:66
 msgid "Building Statistics"
-msgstr "Статистика будівель"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:89
 msgid "Total Productivity: "
-msgstr "Загальна продуктивність: "
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:93
 msgid "Owned: "
-msgstr "Зайнято: "
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:99
 msgid "In Build: "
-msgstr "Будується: "
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:105
 msgid "Jump to unproductive: "
-msgstr "Перейти до безробітного: "
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:114
 msgid "Prod"
-msgstr "Продукція"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:115
 msgid "Owned"
-msgstr "Зайнято"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:116
 msgid "Build"
-msgstr "Будувати"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:133
 #: ../../src/wui/building_statistics_menu.cc:153
 #: ../../src/wui/building_statistics_menu.cc:173
 msgid "Show previous"
-msgstr "Показати попередні"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:143
 #: ../../src/wui/building_statistics_menu.cc:163
 #: ../../src/wui/building_statistics_menu.cc:183
 msgid "Show next"
-msgstr "Показати наступного"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:170
 msgid "Continue"
-msgstr "Продовжити"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:185
 #, c-format
 msgid "Enhance to %s"
-msgstr "Підвищити до %s"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:209
 msgid "Destroy"
-msgstr "Знищити"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:222 ../../src/wui/buildingwindow.cc:335
 msgid "Hide workarea"
-msgstr "Приховати робочу область"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:235
 msgid "Debug"
-msgstr "Відладження"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:352
 msgid "Show workarea"
-msgstr "Показати робочу область"
+msgstr ""
 
 #: ../../src/wui/bulldozeconfirm.cc:58
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr "Ви впевнені, що %s потрібно зруйнувати?"
+msgstr ""
 
 #: ../../src/wui/bulldozeconfirm.cc:105
 msgid "Destroy building?"
-msgstr "Зруйнувати будівлю?"
+msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
-msgstr "Енциклопедія товарів поселенців"
+msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:87
 msgid "Consumed ware type(s)"
-msgstr "Необхідні товари"
+msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:88
 msgid "Quantity"
-msgstr "Кількість"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:246
 msgid "Build small buildings"
-msgstr "Будувати малі будівлі"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build medium buildings"
-msgstr "Будувати середні будівлі"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:248
 msgid "Build large buildings"
-msgstr "Будувати великі будівлі"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:280
 msgid "Action"
-msgstr "Дія"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:371
 msgid "Build road"
-msgstr "Прокласти дорогу"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:383
 msgid "Destroy this flag"
-msgstr "Знищити цей прапорець"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:391
 msgid "Configure economy"
-msgstr "Налаштувати економіку"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:397
 msgid "Send geologist to explore site"
-msgstr "Надіслати геолога для дослідження території"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:415
 msgid "Put a flag"
-msgstr "Прибрати прапорець"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:422
 msgid "Destroy a road"
-msgstr "Знищити дорогу"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:440
 msgid "Watch field in a separate window"
@@ -3702,94 +3565,94 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:445
 msgid "Toggle building statistics display"
-msgstr "Відсоток будівництва"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:451
 msgid "Toggle building label display"
-msgstr "Назви будівель"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:458
 msgid "Debug window"
-msgstr "Вікно відлагоджувача"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:465 ../../src/wui/fieldaction.cc:607
 msgid "Build roads"
-msgstr "Будувати дороги"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:467 ../../src/wui/watchwindow.cc:237
 msgid "Watch"
-msgstr "Дивитись"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:474
 msgid "Military settings"
-msgstr "Військові налаштування"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:500
 msgid "Start attack"
-msgstr "Почати напад"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
-msgstr "Напад"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:584
 msgid "Build mines"
-msgstr "будувати шахти"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:600
 msgid "Build flag"
-msgstr "Встановити прапорець"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:604
 msgid "Cancel road"
-msgstr "Відмінити дорогу"
+msgstr ""
 
 #: ../../src/wui/game_chat_menu.cc:37
 msgid "Chat Menu"
-msgstr "Меню повідомлень"
+msgstr ""
 
 #: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
-msgstr "Поле відлагодження"
+msgstr ""
 
 #: ../../src/wui/game_main_menu.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
 msgid "Main Menu"
-msgstr "Головне меню"
+msgstr ""
 
 #: ../../src/wui/game_main_menu.cc:52
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
-msgstr "Загальна статистика"
+msgstr ""
 
 #: ../../src/wui/game_main_menu.cc:59
 #: ../../src/wui/ware_statistics_menu.cc:349
 msgid "Ware Statistics"
-msgstr "Статистика товарів"
+msgstr ""
 
 #: ../../src/wui/game_main_menu.cc:73 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/waresdisplay.cc:50
 msgid "Stock"
-msgstr "Запаси"
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:61
 #: ../../src/wui/game_options_menu.cc:90
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Save Game"
-msgstr "Зберегти гру"
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:66
 msgid "Map Name: "
-msgstr "І'мя мапи: "
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:70
 msgid "Game Time: "
-msgstr "Час гри: "
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:117
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
-msgstr "%02ud%02uh%02u'%02u\"%03u"
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:194
 msgid ""
@@ -3798,24 +3661,20 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
-"Помилка збереження гри!\n"
-"Файл збереження мое бути пошкодженим!\n"
-"\n"
-"Причина:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:198
 #: ../../src/wui/game_main_menu_save_game.cc:209
 msgid "Save Game Error!!"
-msgstr "Помилка збереження гри!!!"
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:210
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
 msgid "A File with the name "
-msgstr "Файл з таким ім'ям "
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:214
 msgid " already exists. Overwrite?"
-msgstr " вже існує. Перезаписати?"
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:270
 msgid "File deletion"
@@ -3828,195 +3687,194 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:44 ../../src/wui/game_message_menu.h:148
 msgid "Message Menu: Inbox"
-msgstr "Меню повідомлень: вхідні"
+msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:45
 msgid "Objectives Menu"
-msgstr "Меню завдань"
+msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
-msgstr "Умови перемоги"
+msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
-msgstr "Перезавантажити місію."
+msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:57
 msgid "README"
-msgstr "README"
+msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:73
 msgid "Authors"
-msgstr "Автори"
+msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:81
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
-msgstr "Параметри звуку"
+msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:33
 msgid "Ingame Music"
-msgstr "Музика в грі"
+msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:39
 msgid "Sound FX"
-msgstr "Звук ефектів"
+msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:43
 msgid "Ingame Music Volume"
-msgstr "Гучність музики в грі"
+msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:57
 msgid "Sound FX Volume"
-msgstr "Гічність ефектів"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:160
 msgid "Land"
-msgstr "Земля"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:172 ../../src/wui/minimap.cc:175
 msgid "Buildings"
-msgstr "Будівлі"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:178
 #: ../../src/wui/productionsitewindow.cc:62 ../../src/wui/transport_ui.cc:60
 #: ../../src/wui/warehousewindow.cc:191
 msgid "Wares"
-msgstr "Вироби"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:184
 msgid "Productivity"
-msgstr "Продуктивність"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:190
 msgid "Casualties"
-msgstr "Жертви"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:196
 msgid "Kills"
-msgstr "Вбито"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:202
 msgid "Military buildings lost"
-msgstr "Втрачено військову будівлю"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:208
 msgid "Military buildings defeated"
-msgstr "Знищено військову бцдівлю"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:214
 msgid "Civilian buildings lost"
-msgstr "Втрачено цивільну будівлю"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:220
 msgid "Military"
-msgstr "Військо"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:246
 #: ../../src/wui/ware_statistics_menu.cc:423
 msgid "15 m"
-msgstr "15 хв."
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:255
 #: ../../src/wui/ware_statistics_menu.cc:432
 msgid "30 m"
-msgstr "30 хв."
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:264
 #: ../../src/wui/ware_statistics_menu.cc:441
 msgid "1 h"
-msgstr "1 год."
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:273
 #: ../../src/wui/ware_statistics_menu.cc:450
 msgid "2 h"
-msgstr "2 го."
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:284
 #: ../../src/wui/ware_statistics_menu.cc:461
 msgid "Help"
-msgstr "Допомога"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:293
 #: ../../src/wui/ware_statistics_menu.cc:470
 msgid "4 h"
-msgstr "4 год."
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:301
 #: ../../src/wui/ware_statistics_menu.cc:479
 msgid "8 h"
-msgstr "8 год."
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:310
 #: ../../src/wui/ware_statistics_menu.cc:488
 msgid "16 h"
-msgstr "16 год."
+msgstr ""
 
 #: ../../src/wui/interactive_base.cc:270
 #, c-format
 msgid "%u.%ux"
-msgstr "%u.%ux"
+msgstr ""
 
 #: ../../src/wui/interactive_base.cc:273
 msgid "PAUSE"
-msgstr "ПАУЗА"
+msgstr ""
 
 #: ../../src/wui/interactive_base.cc:293
 #, c-format
 msgid "%s (%s)"
-msgstr "%s (%s)"
+msgstr ""
 
 #: ../../src/wui/interactive_base.cc:298
 msgid "NO GAME CONTROLLER"
-msgstr "ІГРОВИ КОНТРОЛЕР ВІДСУТНІЙ"
+msgstr ""
 
 #: ../../src/wui/interactive_player.cc:122
 #: ../../src/wui/interactive_spectator.cc:55
 msgid "Chat"
-msgstr "Чат"
+msgstr ""
 
 #: ../../src/wui/interactive_player.cc:128
 #: ../../src/wui/interactive_spectator.cc:65
 msgid "Statistics"
-msgstr "Статистика"
+msgstr ""
 
 #: ../../src/wui/interactive_player.cc:131
 msgid "Objectives"
-msgstr "Задания"
+msgstr ""
 
 #: ../../src/wui/interactive_player.cc:140
 #: ../../src/wui/interactive_player.cc:284
 msgid "Messages"
-msgstr "Повідомлення"
+msgstr ""
 
 #: ../../src/wui/interactive_player.cc:143
 msgid "Ware help"
-msgstr "Допомога по виробах"
+msgstr ""
 
 #: ../../src/wui/interactive_player.cc:292
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] "%u нове повідомлення"
-msgstr[1] "%u нових повідомлень"
-msgstr[2] "%u нових повідомлень"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Exit Replay"
-msgstr "Вийти з повтору"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr "Логин"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr "Псевдонім:"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
-msgstr "Пароль:"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
@@ -4032,60 +3890,60 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr "Увійти"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
-msgstr "Псевдонім не введено"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:85
 msgid "Please enter a nickname!"
-msgstr "Будь ласка введіть псевдонім"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:92
 msgid "Space in Nickname"
-msgstr "Пробіл в псевдонімі"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:93
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr "Вибачте, пробіли в псевдонімах заборонені!"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:100
 msgid "Empty Password"
-msgstr "Невказано пароль"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr "Будь ласка введіть пароль!"
+msgstr ""
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr "Солдати"
+msgstr ""
 
 #: ../../src/wui/minimap.cc:147
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Terrain"
-msgstr "Місцевість"
+msgstr ""
 
 #: ../../src/wui/minimap.cc:154
 msgid "Owner"
-msgstr "Власник"
+msgstr ""
 
 #: ../../src/wui/minimap.cc:161
 msgid "Flags"
-msgstr "Прапорці"
+msgstr ""
 
 #: ../../src/wui/minimap.cc:168
 msgid "Roads"
-msgstr "Дороги"
+msgstr ""
 
 #: ../../src/wui/minimap.cc:182
 msgid "Zoom"
-msgstr "Масштабування"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr "<безкоштовно>"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
@@ -4094,17 +3952,17 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:292
 #: ../../src/wui/playerdescrgroup.cc:170
 msgid "Computer"
-msgstr "Комп'ютер"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:295
 #: ../../src/wui/playerdescrgroup.cc:172
 msgid "AI: "
-msgstr "Ш. І.: "
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:300
 #: ../../src/wui/playerdescrgroup.cc:176
 msgid "Human"
-msgstr "Людина"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:394
 msgid "Client name"
@@ -4112,11 +3970,11 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:402
 msgid "Role"
-msgstr "Роль"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Start"
-msgstr "Почати"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:426
 msgid "Type"
@@ -4124,29 +3982,29 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:434
 msgid "Tribe"
-msgstr "Плем'я"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:442
 #: ../../src/wui/playerdescrgroup.cc:103
 msgid "Initialization"
-msgstr "Ініціалізація"
+msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Worker"
-msgstr "Робітники"
+msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
-msgstr "Досв."
+msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:73
 msgid "Next Level"
-msgstr "Наступний рівень"
+msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(vacant)"
-msgstr "(вільно)"
+msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:140
 msgid "(coming)"
@@ -4154,36 +4012,36 @@ msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:76
 msgid "Capacity"
-msgstr "Ємність"
+msgstr ""
 
 #: ../../src/wui/soldierlist.cc:381 ../../src/wui/soldierlist.cc:394
 #: ../../src/wui/soldierlist.cc:407
 msgid "Click soldier to send away"
-msgstr "Клікніть на солдатів щоб надіслати їх"
+msgstr ""
 
 #: ../../src/wui/stock_menu.cc:53
 msgid "Wares (total)"
-msgstr "Вироби (усі)"
+msgstr ""
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Workers (total)"
-msgstr "Робітники (усі)"
+msgstr ""
 
 #: ../../src/wui/stock_menu.cc:64
 msgid "Wares in warehouses"
-msgstr "Товари на складах"
+msgstr ""
 
 #: ../../src/wui/stock_menu.cc:71
 msgid "Workers in warehouses"
-msgstr "Працівники складів"
+msgstr ""
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
-msgstr "Солдати тренуються"
+msgstr ""
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
-msgstr "Параметри економіки"
+msgstr ""
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:244
 msgid "Increase target"
@@ -4215,27 +4073,27 @@ msgstr ""
 
 #: ../../src/wui/waresqueuedisplay.cc:274
 msgid "Highest priority"
-msgstr "Найвищий пріоритет"
+msgstr ""
 
 #: ../../src/wui/waresqueuedisplay.cc:285
 msgid "Normal priority"
-msgstr "Нормальний пріоритет"
+msgstr ""
 
 #: ../../src/wui/waresqueuedisplay.cc:296
 msgid "Lowest priority"
-msgstr "Низький пріорітет"
+msgstr ""
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
-msgstr "Сліувати"
+msgstr ""
 
 #: ../../src/wui/watchwindow.cc:156
 msgid "Center mainview on this"
-msgstr "Центрувати екран тут"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
-msgstr "Інфо про поле"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:55
 #, c-format
@@ -4245,30 +4103,26 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
-"1) Інфо про вузол\n"
-" Координати: (%i, %i)\n"
-" Висота: %u\n"
-" Caps: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " flag"
-msgstr " прапорець"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " mine"
-msgstr " шахта"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " port"
-msgstr " порт"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " walk"
-msgstr " йти"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " swim"
-msgstr " пливти"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #, c-format
@@ -4284,8 +4138,6 @@ msgid ""
 "2) Terrain Info\n"
 " Name: "
 msgstr ""
-"2) Інфо про місцевість\n"
-" Ім'я: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:87
 #, c-format
@@ -4293,16 +4145,12 @@ msgid ""
 "\n"
 " Texture Number: %i\n"
 msgstr ""
-"\n"
-" Номер текстури: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
 msgid ""
 "4) Map Info\n"
 " Name: "
 msgstr ""
-"4) Про мапу\n"
-" Ім'я: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
 #, c-format
@@ -4311,9 +4159,6 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
-"\n"
-" Розмір: %ix%i\n"
-" Автор: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:109
@@ -4321,8 +4166,6 @@ msgid ""
 "\n"
 " Descr: "
 msgstr ""
-"\n"
-" Опис: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #, c-format
@@ -4330,73 +4173,67 @@ msgid ""
 "\n"
 " Number of Players: %i\n"
 msgstr ""
-"\n"
-" Кількість гравців: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:105
 msgid ""
 "5) World Info\n"
 " Name: "
 msgstr ""
-"5) Про світ\n"
-"  Ім'я: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:107
 msgid ""
 "\n"
 " Author: "
 msgstr ""
-"\n"
-" Автор: "
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:62
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 msgid "New Random Map"
-msgstr "Нова випадкова мапа"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:74
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
 msgid "Save Map"
-msgstr "Зберегти мапу"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:80
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:61
 msgid "Map Options"
-msgstr "Параметри мапи"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:92
 msgid "Exit Editor"
-msgstr "Вийти з редактора"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
 msgid "Name: "
-msgstr "Ім'я: "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:75
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
 msgid "Author: "
-msgstr "Автор: "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
 msgid "Size: "
-msgstr "Розмір: "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:89
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
 msgid "World: "
-msgstr "Світ: "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:96
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:111
 msgid "Players: "
-msgstr "Гравці: "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:104
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:118
 msgid "Descr: "
-msgstr "Опис: "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
 msgid "Set origin"
@@ -4410,7 +4247,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:85
 msgid "Nr Players:"
-msgstr "Кількість гравців:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:157
@@ -4418,7 +4255,7 @@ msgstr "Кількість гравців:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:418
 #, c-format
 msgid "Width: %u"
-msgstr "Ширина: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:161
@@ -4426,99 +4263,99 @@ msgstr "Ширина: %u"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:422
 #, c-format
 msgid "Height: %u"
-msgstr "Висота: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:125
 msgid "Create Map"
-msgstr "Створити мапу"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:69
 msgid "Random Number:"
-msgstr "Випадковий номер:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:162
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #, c-format
 msgid "Water: %u %%"
-msgstr "Вода: %u %%"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:186
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Land: %u %%"
-msgstr "Суходіл: %u %%"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:210
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr "Пустир: %u %%"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:220
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Mountains: %u %%"
-msgstr "Гори: %u %%"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:237
 msgid "Island mode:"
-msgstr "Режим острова:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:244
 msgid "Resources:"
-msgstr "Ресурси:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Low"
-msgstr "Низько"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:249
 msgid "High"
-msgstr "Високо"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:285
 msgid "Map ID:"
-msgstr "ID мапи:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:317
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr "Гравці: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
-msgstr "Згенерувати мапу:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:476
 msgid "Generating random map..."
-msgstr "Генерую випадкову мапу..."
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:150
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
 msgid "Make Directory"
-msgstr "Створити каталог"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:208
 msgid "unnamed"
-msgstr "без назви"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 msgid "<Directory>"
-msgstr "<Папка>"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"
-msgstr "<Це не файл мапи>"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 msgid " exists already. Overwrite?"
-msgstr " уже існує. Перезаписати?"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:405
 msgid "Save Map Error!!"
-msgstr "Помилка збереження мапи!!!"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:401
 msgid ""
@@ -4527,38 +4364,34 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
-"Помилка збереження мапи!\n"
-"Збережена мапа може бути пошкодженою\n"
-"\n"
-"Причина:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
-msgstr "Введіть назву каталога "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:42
 msgid "Player Options"
-msgstr "Налаштування гравця"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:49
 msgid "Add player"
-msgstr "Додати гравця"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:57
 msgid "Remove last player"
-msgstr "Видалити останнього гравця"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:68
 msgid "Number of Players"
-msgstr "Кількість гравців"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:200
 msgid "Player "
-msgstr "Гравець "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:319
 msgid "Error!"
-msgstr "Помилка!"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:321
 msgid ""
@@ -4568,27 +4401,27 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
-msgstr "Доступні будівлі"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:61
 msgid "Allowed Buildings:"
-msgstr "Доступні будівлі"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:67
 msgid "Forbidden Buildings:"
-msgstr "Блоковані будівлі"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
 msgid "Forbid"
-msgstr "Заборонити"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "<-"
-msgstr "<-"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:95
 msgid "Allow"
-msgstr "Дозволити"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
@@ -4597,28 +4430,28 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
 msgid "In-/Decrease Value"
-msgstr "Більше/Менше"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:82
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:86
 msgid "Set Value"
-msgstr "Встановити значення"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:44
 msgid "Resources Tools Options"
-msgstr "Налаштування ресурсів"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:111
 msgid "Current Selection"
-msgstr "Поточне виділення"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tool Menu"
-msgstr "Меню інструментів"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Change height"
-msgstr "Змінити висоту"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 msgid "Noise height"
@@ -4626,15 +4459,15 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 msgid "Immovable"
-msgstr "Нерухомо"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Bob"
-msgstr "Bob"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Resource"
-msgstr "Ресурс"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
@@ -4643,21 +4476,21 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:138
 #, c-format
 msgid "Minimum: %u"
-msgstr "Мінімум: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:140
 #, c-format
 msgid "Maximum: %u"
-msgstr "Максимум: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:145
 #, c-format
 msgid "Set value: %u"
-msgstr "Встановити значення: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
 msgid "Bobs Menu"
-msgstr "Bobs меню"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs Menu"
@@ -4665,12 +4498,12 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
-msgstr "Обрати місцевість"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:176
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:229
 msgid "Current:"
-msgstr "Поточний:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:40
 msgid "Toolsize Menu"
@@ -4683,35 +4516,35 @@ msgstr ""
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
-msgstr "Наполегливо"
+msgstr ""
 
 #: ../../src/ai/defaultai.h:94
 msgid "Normal"
-msgstr "Звичайний"
+msgstr ""
 
 #: ../../src/ai/defaultai.h:103
 msgid "Defensive"
-msgstr "Оборонний"
+msgstr ""
 
 #: ../../src/logic/map.h:186
 msgid "no description defined"
-msgstr "без опису"
+msgstr ""
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr "без опису"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:67
 msgid "Select"
-msgstr "Обрати"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:68
 msgid "Status"
-msgstr "Стан"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:69
 msgid "Title"
-msgstr "Заголовок"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:70
 msgid "Time sent"
@@ -4719,93 +4552,40 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear"
-msgstr "Очистити"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear selection"
-msgstr "Очистити обране"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert"
-msgstr "Інвертувати"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert selection"
-msgstr "Інвертувати вибір"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:119 ../../src/wui/game_message_menu.h:152
 msgid "Archive selected messages"
-msgstr "Архівувати обрані повідомлення"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:130 ../../src/wui/game_message_menu.h:153
 msgid "Show Archive"
-msgstr "Показати архів"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
-msgstr "Меню повідомлень: Архів"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Restore selected messages"
-msgstr "Відновити обрані повідомлення"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
-msgstr "Показати вхідні"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
 msgstr ""
-
-#, c-format
-#~ msgid "Computer %u"
-#~ msgstr "Комп'ютер %u"
-
-#~ msgid "New User"
-#~ msgstr "Новий користувач"
-
-#~ msgid "Reset"
-#~ msgstr "Скинути"
-
-#~ msgid "Produced "
-#~ msgstr "Виготовлено "
-
-#~ msgid "nothing"
-#~ msgstr "нічого"
-
-#~ msgid "Select Savegame"
-#~ msgstr "Оберіть збереження гри"
-
-#~ msgid "Original:"
-#~ msgstr "Оригінал:"
-
-#~ msgid "Ready"
-#~ msgstr "Готово"
-
-#~ msgid "(Save): "
-#~ msgstr "(Збереження): "
-
-#~ msgid "Be vigilant"
-#~ msgstr "Будьте на сторожі"
-
-#~ msgid "Easy living"
-#~ msgstr "Легке життя"
-
-#~ msgid "Hard struggle"
-#~ msgstr "Важка боротьба"
-
-#, c-format
-#~ msgid "Wasteland: %i %%"
-#~ msgstr "Пустир: %i %%"
-
-#, c-format
-#~ msgid "Mountains: %i %%"
-#~ msgstr "Гори: %i %%"
-
-#, c-format
-#~ msgid "Water: %i %%"
-#~ msgstr "Вода: %i %%"
-
-#, c-format
-#~ msgid "Land: %i %%"
-#~ msgstr "Суходіл: %i %%"
