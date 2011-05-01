@@ -301,11 +301,14 @@ Flag & Request::target_flag() const
 int32_t Request::get_base_required_time
 	(Editor_Game_Base & egbase, uint32_t const nr) const
 {
-	if (m_count <= nr)
-		log
-			("Request::get_base_required_time: WARNING nr = %u but count is %u, "
-			 "which is not allowed according to the comment for this function\n",
-			 nr, m_count);
+	if (m_count <= nr) {
+		if (not(m_count == 1 and nr == 1)) {
+			log
+				("Request::get_base_required_time: WARNING nr = %u but count is %u, "
+				"which is not allowed according to the comment for this function\n",
+				nr, m_count);
+		}
+	}
 	int32_t const curtime = egbase.get_gametime();
 
 	if (!nr || !m_required_interval)
