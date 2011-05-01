@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-01-04 13:46+0000\n"
+"PO-Revision-Date: 2011-03-27 21:01+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-03-28 04:32+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -506,6 +506,8 @@ msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
+"Jernmalm blir gravd ut i jerngruvene. Den blir så smeltet om til jern i "
+"smelteverket."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -758,6 +760,8 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Grov stein er et av de grunnleggende byggematerialene for barbarene. Steinen "
+"blir produsert i steinbrudd og granittgruver."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""

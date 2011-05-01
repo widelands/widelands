@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-02-23 20:33+0000\n"
-"Last-Translator: ThomasMarquart <Unknown>\n"
+"PO-Revision-Date: 2011-04-21 10:56+0000\n"
+"Last-Translator: Michael Rydén <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:39+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-22 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1322,6 +1322,8 @@ msgstr "förväntade sannolikhet i intervallet [1, 254] men fann \"%s\""
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
+"okänd omfattning \"%s\" given för måltypen (måste vara \"world\" eller "
+"\"tribe\")"
 
 #: ../../src/logic/immovable.cc:931
 msgid "illegal transformation to the same type"
@@ -1753,7 +1755,7 @@ msgstr "hundradel"
 #: ../../src/logic/production_program.cc:1175
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Inga kvarlämnade resurser hittades!"
 
 #: ../../src/logic/production_program.cc:1196
 msgid "Mine empty"
@@ -1909,7 +1911,7 @@ msgstr "stam %s: %s"
 #: ../../src/logic/warehouse.cc:460
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr ""
+msgstr "Din ekonomi utökades med en/ett ny(tt) %s."
 
 #: ../../src/logic/worker.cc:107
 #, c-format
@@ -1951,12 +1953,12 @@ msgstr "Dina %s kan inte finna en väg hem och kommer troligen att dö."
 
 #: ../../src/logic/worker.cc:1744
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Arbetaren gick vilse."
 
 #: ../../src/logic/worker.cc:2938
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "lastar på arbetare: %s"
 
 #: ../../src/logic/world.cc:623
 #, c-format
@@ -2385,6 +2387,12 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"<br>Tillgängliga värdkommandon är:<br>/help - Visar denna hjälp<br>/announce "
+"<medd> - Skicka ett chattmeddelande som en kungörelse (systemchatt)<br>/warn "
+"<namn> <anledning> - Varna användaren <namn> pga. <anledning><br>/kick "
+"<namn> <anledning> - Sparka ut användaren <namn> pga. "
+"<anledning><br>/forcePause - Tvinga spelet att pausas.<br>/endForcedPause - "
+"Sätter tillbaka spelet i normal hastighet."
 
 #: ../../src/network/nethost.cc:364
 msgid "Wrong use, should be: /announce <message>"
@@ -2478,7 +2486,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1091
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr ""
+msgstr "%s sa till mig att köra kommando: \"%s\""
 
 #: ../../src/network/nethost.cc:1103
 #, c-format
@@ -2488,34 +2496,34 @@ msgstr "%s försökte starta spelet, men servern kan inte startas."
 #: ../../src/network/nethost.cc:1105
 #, c-format
 msgid "%s send the signal to start the game."
-msgstr ""
+msgstr "%s sände signalen att starta spelet."
 
 #: ../../src/network/nethost.cc:1111
 msgid "Available saved games:<br>"
-msgstr ""
+msgstr "Tillgängliga spel som är sparade:<br>"
 
 #: ../../src/network/nethost.cc:1131
 msgid "Available maps:<br>"
-msgstr ""
+msgstr "Tillgängliga kartor:<br>"
 
 #: ../../src/network/nethost.cc:1175
 #, c-format
 msgid "Can not use \"%s\" as saved game file!"
-msgstr ""
+msgstr "Kan inte använda \"%s\" som sparad spelfil!"
 
 #: ../../src/network/nethost.cc:1199
 #, c-format
 msgid "Can not use \"%s\" as map file!"
-msgstr ""
+msgstr "Kan inte använda \"%s\" som sprad kartfil!"
 
 #: ../../src/network/nethost.cc:1211 ../../src/network/nethost.cc:1217
 msgid "Invalid value # for player - should be a player number"
-msgstr ""
+msgstr "Fel värde # för spelare - skall vara ett nummer för spelaren"
 
 #: ../../src/network/nethost.cc:1243 ../../src/network/nethost.cc:1249
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr ""
+msgstr "Okänt kommando för dedikerad server \"%s\"!"
 
 #: ../../src/network/nethost.cc:1432
 #, c-format
@@ -2525,7 +2533,7 @@ msgstr "Värden flyttade spelare %s till väntrummet!"
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Dator%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
@@ -2543,6 +2551,8 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands. \"@%s start\" starts the server."
 msgstr ""
+"Detta är en dedikerad server, sänd \"@%s help\" för en full lista med "
+"kommandon. \"@%s start\" startar servern."
 
 #: ../../src/network/nethost.cc:2009
 msgid "Client reports time to host that is running backwards."
@@ -2939,7 +2949,7 @@ msgstr "Slag: "
 
 #: ../../src/ui_fsmenu/launchMPG.cc:365
 msgid "Saved game is directory"
-msgstr ""
+msgstr "Sparat spel är en katalog"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:367
 msgid ""
@@ -3107,7 +3117,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Stängd."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -4097,11 +4107,11 @@ msgstr "Zooma"
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr ""
+msgstr "<ledig>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
-msgstr ""
+msgstr "Delad i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:292
 #: ../../src/wui/playerdescrgroup.cc:170
@@ -4128,7 +4138,7 @@ msgstr "Roll"
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: ../../src/wui/multiplayersetupgroup.cc:426
 msgid "Type"
@@ -4199,11 +4209,11 @@ msgstr "Ekonomialternativ"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:244
 msgid "Increase target"
-msgstr ""
+msgstr "Öka mål"
 
 #: ../../src/wui/transport_ui.cc:151 ../../src/wui/transport_ui.cc:246
 msgid "Decrease target"
-msgstr ""
+msgstr "Minska mål"
 
 #: ../../src/wui/transport_ui.cc:153 ../../src/wui/transport_ui.cc:248
 msgid "Reset to default"
@@ -4211,7 +4221,7 @@ msgstr "Återställ till standardvärden"
 
 #: ../../src/wui/warehousewindow.cc:128
 msgid "Normal policy"
-msgstr ""
+msgstr "Normal policy"
 
 #: ../../src/wui/warehousewindow.cc:129
 msgid "Preferably store selected wares here"

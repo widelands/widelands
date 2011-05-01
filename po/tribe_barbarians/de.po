@@ -7,16 +7,20 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-03-03 20:45+0000\n"
-"Last-Translator: Martin <Unknown>\n"
+"PO-Revision-Date: 2011-04-27 19:51+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-28 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
+
+#: ../../tribes/barbarians/conf:72
+msgid "Blackwood"
+msgstr "Hartholz"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -143,10 +147,6 @@ msgstr "Gaststätte"
 #: ../../tribes/barbarians/conf:119
 msgid "Blacksmith"
 msgstr "Schmied"
-
-#: ../../tribes/barbarians/conf:72
-msgid "Blackwood"
-msgstr "Hartholz"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -390,7 +390,7 @@ msgstr "Wildhüter"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Gamekeeper's Hut"
-msgstr "Widlhüterhütte"
+msgstr "Wildhüterhütte"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Geologist"
@@ -1472,8 +1472,8 @@ msgid ""
 "soldiers from attack level 0 to level 1."
 msgstr ""
 "Junge Krieger warten nur darauf, das Kämpfen mit dieser mächtigen Waffe zu "
-"erlernen. Die scharfe Axt ist schwerer und schärfer als die herkömmliche. "
-"Sie wird in Axtmanufaktur oder Waffenschmiede hergestellt. Im "
+"erlernen. Die scharfe Axt ist schwerer und schärfer als die Herkömmliche. "
+"Sie wird in der Axtmanufaktur oder Waffenschmiede hergestellt. Im "
 "Ausbildungslager erhöht sie - bei entsprechender Verpflegung - die "
 "Angriffsstärke eines Kriegers von Stufe 0 auf Stufe 1."
 

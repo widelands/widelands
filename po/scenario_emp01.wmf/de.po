@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-03-24 17:40+0000\n"
-"Last-Translator: David Allwicher <Unknown>\n"
+"PO-Revision-Date: 2011-03-31 07:22+0000\n"
+"Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-25 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-04-01 04:43+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -68,8 +68,8 @@ msgstr ""
 "Baracken brauchen - vielmehr sollten wir uns nun auf andere Dinge "
 "konzentrieren.<br> Es ist absolut klar, dass wir Holz benötigen, um unser "
 "Schiff zu reparieren. Daher lief ich gestern etwas durch den Wald und fand "
-"einen netten Ort für eine Holzfällerhütte, südlich unseres provisorischen "
-"Hauptquartiers gelegen.“ <br><br>--NEUE AUFGABE--<br> "
+"einen netten Ort für eine Holzfällerhütte, südlich von unserem "
+"provisorischen Hauptquartiers gelegen.“ <br><br>--NEUE AUFGABE--<br> "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:117
 msgid ""
@@ -152,15 +152,15 @@ msgid ""
 "the forest. Then one of us can keep watch in the darkness and keep us safe "
 "from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" „Herr, ich fürchte, wir sind nicht sicher in diesem fremden Land. Wer weiß, "
-"welche schrecklichen Kreaturen hinter diesem Wäldchen in der mächtigen Wüste "
-"leben? Was, wenn diese Kreaturen den Wald betreten und darauf warten, uns "
-"anzugreifen <br> Nun, vielleicht ist meine Furcht unbegründet, aber es kann "
-"nicht verkehrt sein, wachsam zu bleiben, damit wir sicher sein können, "
-"mögliche Feinde zu entdecken, bevor sie uns finden.<br> Wir sollten wirklich "
-"eine Baracke im östlichen Teil des Wäldchens errichten. Dann kann einer von "
-"uns nachts Wache halten und uns vor diesen Kreaturen schützen.“ <br><br>-- "
-"NEUE AUFGABE --<br> "
+" „Herr, ich fürchte, wir sind nicht sicher in diesem fremden Land. Wer "
+"weiss, welche schrecklichen Kreaturen hinter diesem Wäldchen in der "
+"mächtigen Wüste leben? Was, wenn diese Kreaturen den Wald betreten und "
+"darauf warten, uns anzugreifen <br> Nun, vielleicht ist meine Furcht "
+"unbegründet, aber es kann nicht verkehrt sein, wachsam zu bleiben, damit wir "
+"sicher sein können, mögliche Feinde zu entdecken, bevor sie uns finden.<br> "
+"Wir sollten wirklich eine Baracke im östlichen Teil des Wäldchens errichten. "
+"Dann kann einer von uns nachts Wache halten und uns vor diesen Kreaturen "
+"schützen.“ <br><br>-- NEUE AUFGABE --<br> "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:59
 msgid ""
@@ -169,7 +169,7 @@ msgid ""
 "is a good step forward. Now we can feel a bit safer and can look forward to "
 "repair our ship.\" "
 msgstr ""
-" „Herr, ich habe gerade gesehen, dass die Baracke fertiggestellt ist. Ich "
+" „Herr, ich habe gerade gesehen, dass die Baracke fertiggestellt wurde. Ich "
 "habe gleich einen meiner besten Männer dorthin geschickt, der nun die Wüste "
 "beobachten und uns rechtzeitig vor jeder Gefahr warnen wird.<br> Wunderbar, "
 "jetzt können wir uns endlich etwas sicherer fühlen und uns auch der "
@@ -263,7 +263,7 @@ msgid ""
 "* Build a barracks at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
 msgstr ""
-"* Errichte eine Barracke beim roten Bausymbol östlich des Waldes, rechts von "
+"* Errichte eine Baracke beim roten Bausymbol östlich des Waldes, rechts von "
 "Deinem provisorischen Hauptquartier."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:96
@@ -283,8 +283,8 @@ msgstr ""
 "* Errichte eine Holzfällerhütte beim roten Bausymbol südlich Deines "
 "provisorischen Hauptquartiers. Genügend Bäume zu fällen, damit Platz für "
 "weitere Gebäude entsteht, kann eine Weile dauern. Du kannst das Spiel "
-"beschleunigen, indem Du die Taste ‚BILD-HOCH‘ verwendest und es mit ‚BILD-"
-"RUNTER‘ wieder verlangsamen."
+"beschleunigen, indem Du die Taste 'Bild-hoch' verwendest und es mit 'Bild-"
+"runter' wieder verlangsamen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:153
 msgid ""
@@ -314,12 +314,12 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
-"* Baue zwei weitere Holzfällerhäuser und ein Sägewerk, sobald genug Platz "
+"* Baue zwei weitere Holzfällerhütten und ein Sägewerk, sobald genug Platz "
 "vorhanden ist."
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "01 - The Strands of Malac' Mor"
-msgstr "01 - Strände von Malac' Mor"
+msgstr "01 - Die Strände von Malac' Mor"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid "A dark night"
@@ -362,23 +362,23 @@ msgstr "Amalea lächelt..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid "Build a barracks"
-msgstr "Baue eine Baracke"
+msgstr "Baue eine Baracke."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Build a forester's house"
-msgstr "Baue ein Forsthaus"
+msgstr "Baue ein Forsthaus."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Build a lumberjack's house"
-msgstr "Baue ein Holzfällerhaus"
+msgstr "Baue ein Holzfällerhaus."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Build a quarry"
-msgstr "Baue einen Steinbruch"
+msgstr "Baue einen Steinbruch."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr "Baue zwei Holzfällerhäuser und ein Sägewerk"
+msgstr "Baue zwei Holzfällerhütten und ein Sägewerk."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:23
@@ -428,7 +428,7 @@ msgstr "Die raue See"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid "Thinking about the future"
-msgstr "Gedanken über die Zukunft"
+msgstr "Gedanken über die Zukunft."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80

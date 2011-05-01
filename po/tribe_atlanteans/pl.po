@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-02-09 13:07+0000\n"
-"Last-Translator: Michal Maslanko <burak326@o2.pl>\n"
+"PO-Revision-Date: 2011-04-27 17:33+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-28 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -153,7 +153,7 @@ msgid ""
 "for making bread."
 msgstr ""
 "Czarny korzeń jest specjalnym rodzajem korzenia uprawianym na farmach i "
-"przetwarzam w młynach. Atlanci lubią jego mocny smak i pieką z jego mąki "
+"przetwarzanym w młynach. Atlanci lubią jego mocny smak i pieką z jego mąki "
 "chleb."
 
 #: ../../tribes/atlanteans/conf:62
@@ -243,7 +243,7 @@ msgstr "Zebrane pole kukurydzy"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
-msgstr "Wysokie pole kukurydzy"
+msgstr "Średnie pole kukurydzy"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
@@ -322,6 +322,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Szczypce stanowią narzędzia hutnika pracującego w hucie. Produkowane są "
+"przez rzemieślnika."
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -510,6 +512,8 @@ msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Ruda żelaza wydobywana jest w kopalniach żelaza. Wytapia się ją w hucie "
+"celem uzyskania żelaza."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -533,6 +537,10 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Mięso jest jednym ze żródeł pożywienia dla Atlantów. Uzyskuje się je z "
+"dzikiej zwierzyny, którą po upolowaniu przez myśliwego należy uwędzić w "
+"wędzarni. Następnie dostarcza się je do kopalń i placów treningowych "
+"(podziemi i labiryntu)."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -559,6 +567,8 @@ msgid ""
 "Mills blackroot and corn to produce blackroot flour and corn flour, "
 "respectively."
 msgstr ""
+"Mieli czarny korzeń i kukurydzę, by uzyskać z nich odpowiednio: Mąkę z "
+"czarnego korzenia i mąkę kukurydzianą."
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -605,6 +615,9 @@ msgid ""
 "produced out of trunks by the sawmill. The weapon smithy and the shipyard "
 "also use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Deski to ważny materiał budowlany Atlantów. Produkowane są z pni drzew w "
+"tartaku. Deski wykorzystywane są przez zbrojmistrza i stocznię do produkcji "
+"różnych trójzębów oraz potężnych statków."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -922,6 +935,9 @@ msgid ""
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutricious lunch for themselves."
 msgstr ""
+"Wędzone mięso przygotowuje się w wędzarni. Dostarczane jest do kopalń i "
+"placów treningowych (labiryntu i podziemi), gdzie górnicy i żołnierze "
+"przygotowują sobie z nich pożywny posiłek."
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
@@ -964,6 +980,9 @@ msgid ""
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
+"Pajęcza tkanina powstaje z pajęczej przędzy w warsztacie tkackim. "
+"Wykorzystywana jest w warsztacie oraz stoczni. Oprócz tego używana jest do "
+"konstrukcji niektórych zaawansowanych budynków."
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
@@ -979,7 +998,7 @@ msgstr "Stalowa tarcza"
 
 #: ../../tribes/atlanteans/conf:97
 msgid "Steel Trident"
-msgstr "Stalowy trójząb"
+msgstr "Stalowy Trójząb"
 
 #: ../../tribes/atlanteans/conf:98
 msgid "Stone"
@@ -990,6 +1009,8 @@ msgid ""
 "Stone is one basic building ware of the Atlanteans. It is produced in a "
 "quarry or a crystal mine."
 msgstr ""
+"Kamień to jeden z podstawowych surowców Atlantów. Wydobywany jest w "
+"kamieniołomie lub kopalni kryształów."
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -1009,6 +1030,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"Atlantydzkie piece w hutach, warsztatach płatnerskich i zbrojmistrzowskich "
+"zasilane są węglem. Wydobywany jest on w kopalniach węgla lub produkowany z "
+"pni drzew przez smolarza."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1029,6 +1053,10 @@ msgid ""
 "weapon smithy. It is used in a dungeon - together with food - to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
+"Podwójny trójząb to jeden z najlepszych trójzębów produkowanych przez "
+"atlantydzkich zbrojmistrzów. Wykorzystywany jest w podziemiach - razem z "
+"jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 2 do "
+"poziomu 3."
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
@@ -1055,12 +1083,16 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"Długi trójząb to pierwszy trójząb wykorzystywany w szkoleniu żołnierzy. "
+"Produkowany jest u zbrojmistrza i wykorzystywany w podziemiach - razem z "
+"jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 0 do "
+"poziomu 1."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
-msgstr ""
+msgstr "Łopatka do chleba to narzędzie piekarza. Wytwarza ją rzemieślnik."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -1068,23 +1100,32 @@ msgid ""
 "are produced in the armoursmithy and used in the labyrinth - together with "
 "food - to train soldiers from Defense level 1 to level 2."
 msgstr ""
+"Te zaawansowane tarcze używane są przez najlepszych atlantydzkich żołnierzy. "
+"Produkowane są u płatnerza i wykorzystywane w labiryncie razem z jedzeniem "
+"do podnoszenia umiejętności obrony żołnierzy z poziomu 1 do poziomu 2."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz' are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
+"Ten przezroczysty kwarc używany jest do budowy niektórych ekskluzywnych "
+"budynków. Wydobywany jest w kopalni kryształów."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
 "These wonderful diamonds are used to build some exclusive buildings. They "
 "are mined in a crystal mine."
 msgstr ""
+"Drogocenne diamenty używane są do budowy niektórych ekskluzywnych budynków. "
+"Wydobywane są w kopalni kryształów."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
 msgstr ""
+"Ten łuk wykorzystywany jest przez atlantydzkich myśliwych. Produkowany jest "
+"przez rzemieślnika."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -1092,12 +1133,17 @@ msgid ""
 "baker needs for a good bread. Also horse farms and spiderfarms need to be "
 "provided with corn."
 msgstr ""
+"Kukurydza mielona jest w młynie celem uzyskania doskonałej mąki, której "
+"potrzebuje każdy atlantydzki piekarz do wyrobu dobrego chleba. Także "
+"stadniny i fermy pająków muszą być zaopatrywane w kukurydzę."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
 "top of the smokery. It is created by the toolsmith."
 msgstr ""
+"Te haki używane są przez wędzarza do wieszania mięsa i ryb na szczycie "
+"wędzarni. Produkowane są przez rzemieślnika."
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1105,6 +1151,9 @@ msgid ""
 "makes the equipment for young soldiers. Light tridents are produced in the "
 "weapon smithy as are all other tridents."
 msgstr ""
+"Jest to podstawowa broń atlantydzkich żołnierzy. Razem z kamizelką stanowi "
+"wyposażenie młodych żołnierzy. Lekkie trójzęby produkowane są przez "
+"zbrojmistrzów - tak, jak wszystkie inne trójzęby."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1112,6 +1161,9 @@ msgid ""
 "advanced soldiers in the dungeon to train from attack level 1 to level 2 "
 "(together with food)."
 msgstr ""
+"Średni trójząb produkowany jest przez zbrojmistrza i wykorzystywany w "
+"podziemiach przez doświadczonych żołnierzy do treningu umiejętności ataku z "
+"poziomu 1 do poziomu 2 (razem z jedzeniem)."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1120,12 +1172,19 @@ msgid ""
 "used in the dungeon - together with food - to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
+"To najgroźniejsza broń atlantydzkiej armii. Jedynie najlepsi z żołnierzy "
+"mogą jej używać. Produkowana jest u zbrojmistrza i wykorzystywana w "
+"podziemiach razem z jedzeniem do podnoszenia umiejętności ataku żołnierzy z "
+"poziomu 3 do poziomu 4."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
 "This steel shield is produced in the armoursmithy and used in the labyrinth -"
 "together with food - to train soldiers from Defense level 0 to level 1."
 msgstr ""
+"Stalowa tarcza produkowana jest u zbrojmistrza i wykorzystywana w labiryncie "
+"razem z jedzeniem do podnoszenia umiejętności obrony żołnierzy z poziomu 0 "
+"do poziomu 1."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -1149,6 +1208,8 @@ msgid ""
 "This yarn is produced by spiders, which are bred on spiderfarms. It is "
 "processed to spidercloth in a weaving-mill."
 msgstr ""
+"Przędza ta jest produkowana przez pająki hodowane na fermach pająków. "
+"Wykorzystuje się ją do tworzenia pajęczej tkaniny warsztacie tkackim."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
@@ -1189,6 +1250,9 @@ msgid ""
 "the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
 "the smokery also need trunks for their work."
 msgstr ""
+"Z pni drzew produkuje się deski używane do konstrukcji niemal każdego "
+"atlantydzkiego budynku. Poza tartakiem, retora, warsztat rzemieślniczy i "
+"wędzarnia również wymagają pni drzew do poprawnego działania."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
@@ -1318,6 +1382,8 @@ msgid ""
 "Water is the essence for life! It is used in the bakery, the horse farm and "
 "the spiderfarm."
 msgstr ""
+"Woda to esencja życia! Niezbędna jest do funkcjonowania piekarni, stadniny "
+"oraz fermy pająków."
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"

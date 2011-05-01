@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-03-19 03:37+0000\n"
-"Last-Translator: zer berros <cerverros@gmail.com>\n"
+"PO-Revision-Date: 2011-04-27 22:11+0000\n"
+"Last-Translator: David Pérez <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:39+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-28 04:34+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2604,7 +2604,7 @@ msgstr "¡El anfitrión envió al jugador %s a la sala de espera!"
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Equipo%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
@@ -3021,7 +3021,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:269
 #: ../../src/wui/multiplayersetupgroup.cc:339
 msgid "Savegame"
-msgstr ""
+msgstr "Juego guardado"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:271
 msgid "The game is a saved game - the win condition was set before."
@@ -3076,7 +3076,7 @@ msgstr "Reproductor %i"
 #: ../../src/wui/multiplayersetupgroup.cc:117
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Espectador"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:443
 #, c-format

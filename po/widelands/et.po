@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2010-08-30 23:32+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-04-29 22:58+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:37+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-01 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
-msgstr ""
+msgstr "Mitte ükski"
 
 #: ../../src/s2map.cc:223
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -60,12 +60,16 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Kasutus: widelands <valik0>=<väärtus0> ... <valikN>=<väärtusN>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1291
 msgid ""
 "Options:\n"
 "\n"
 msgstr ""
+"Valikud:\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1295
 msgid ""
@@ -199,7 +203,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1547
 msgid "Warning: "
-msgstr ""
+msgstr "Hoiatus: "
 
 #: ../../src/wlapplication.cc:1551
 msgid "Game data error"
@@ -251,7 +255,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1849 ../../src/network/nethost.cc:1885
 msgid "Player"
-msgstr ""
+msgstr "Mängija"
 
 #: ../../src/wlapplication.cc:2015 ../../src/network/netclient.cc:178
 #: ../../src/network/nethost.cc:720
@@ -271,7 +275,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2208 ../../src/logic/game.cc:383
 #: ../../src/logic/game.cc:423
 msgid "Loading..."
-msgstr ""
+msgstr "Laadimine..."
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
@@ -487,7 +491,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:717 ../../src/writeHTML.cc:862
 msgid "Programs"
-msgstr ""
+msgstr "Programmid"
 
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
@@ -564,13 +568,13 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:778
 msgid "Production"
-msgstr ""
+msgstr "Tootmine"
 
 #: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:166
 #: ../../src/wui/productionsitewindow.cc:84 ../../src/wui/transport_ui.cc:65
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Workers"
-msgstr ""
+msgstr "Töötajad"
 
 #: ../../src/writeHTML.cc:793
 #, c-format
@@ -632,7 +636,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:916
 msgid "or"
-msgstr ""
+msgstr "või"
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
@@ -660,7 +664,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
-msgstr ""
+msgstr "töötajate"
 
 #: ../../src/writeHTML.cc:1026
 msgid "</span></a> <span class=\"keyword\">"
@@ -706,7 +710,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
-msgstr ""
+msgstr "uni"
 
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
@@ -759,7 +763,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
 msgid "attack"
-msgstr ""
+msgstr "rünnak"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "defense"
@@ -787,7 +791,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "ehitama"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -890,7 +894,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr ""
+msgstr "Tööriistad"
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
@@ -910,7 +914,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
-msgstr ""
+msgstr "Mängijad"
 
 #: ../../src/editor/editorinteractive.cc:150
 msgid "Unsupported format"
@@ -1087,17 +1091,17 @@ msgstr ""
 #: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
-msgstr ""
+msgstr "väike"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "medium"
-msgstr ""
+msgstr "keskmine"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
-msgstr ""
+msgstr "suur"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -1245,7 +1249,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1394
 msgid "priority"
-msgstr ""
+msgstr "prioriteet"
 
 #: ../../src/logic/immovable.cc:901 ../../src/logic/immovable.cc:1082
 #, c-format
@@ -1293,7 +1297,7 @@ msgstr ""
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
-msgstr ""
+msgstr "Mängija 1"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:67
 msgid "\"min-max\""
@@ -1315,7 +1319,7 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:62 ../../src/logic/warehouse.cc:255
 msgid " conquer"
-msgstr ""
+msgstr " vallutama"
 
 #: ../../src/logic/militarysite.cc:113
 #, c-format
@@ -1464,7 +1468,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1054
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "sõdur %u: %s"
 
 #: ../../src/logic/playercommand.cc:1060
 #, c-format
@@ -1525,7 +1529,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:149
 msgid "not "
-msgstr ""
+msgstr "ei "
 
 #: ../../src/logic/production_program.cc:171
 #: ../../src/logic/production_program.cc:192
@@ -1569,7 +1573,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:418
 #: ../../src/logic/production_program.cc:817
 msgid " and "
-msgstr ""
+msgstr " ja "
 
 #: ../../src/logic/production_program.cc:419
 #: ../../src/logic/production_program.cc:796
@@ -1622,7 +1626,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:651
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "uni: %s"
 
 #: ../../src/logic/production_program.cc:672
 msgid "idle animation is default; calling is not allowed"
@@ -1668,12 +1672,12 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:1039
 msgid "distance"
-msgstr ""
+msgstr "kaugus"
 
 #: ../../src/logic/production_program.cc:1050
 #: ../../src/logic/production_program.cc:1061
 msgid "percentage"
-msgstr ""
+msgstr "protsent"
 
 #: ../../src/logic/production_program.cc:1175
 #, c-format
@@ -1780,7 +1784,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:1440 ../../src/logic/soldier.cc:1445
 msgid "no"
-msgstr ""
+msgstr "ei"
 
 #: ../../src/logic/soldier.cc:1452 ../../src/logic/soldier.cc:1460
 msgid "Logic error"
@@ -1820,7 +1824,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:316
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "hõim %s: %s"
 
 #: ../../src/logic/warehouse.cc:460
 #, c-format
@@ -1932,7 +1936,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:486
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "sõdur: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:502
 #, c-format
@@ -1969,7 +1973,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:536
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "ladu: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:617
 #, c-format
@@ -2050,7 +2054,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
@@ -2089,7 +2093,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
@@ -2140,7 +2144,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:155
 #, c-format
@@ -2155,7 +2159,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "tee: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
@@ -2171,7 +2175,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "tee %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
@@ -2181,7 +2185,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr ""
+msgstr "maastik: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
@@ -2597,7 +2601,7 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr ""
+msgstr "Abi: "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -2715,7 +2719,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 #: ../../src/ui_fsmenu/mapselect.cc:82
 msgid "Players:"
-msgstr ""
+msgstr "Mängijad:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:80
 #: ../../src/ui_fsmenu/mapselect.cc:88
@@ -3097,7 +3101,7 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:125
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Options"
-msgstr ""
+msgstr "Valikud"
 
 #: ../../src/ui_fsmenu/main.cc:90
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
@@ -3710,7 +3714,7 @@ msgstr ""
 #: ../../src/wui/game_options_menu.cc:81
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
-msgstr ""
+msgstr "Helide valikud"
 
 #: ../../src/wui/game_options_sound_menu.cc:33
 msgid "Ingame Music"
@@ -3793,7 +3797,7 @@ msgstr ""
 #: ../../src/wui/general_statistics_menu.cc:284
 #: ../../src/wui/ware_statistics_menu.cc:461
 msgid "Help"
-msgstr ""
+msgstr "Abi"
 
 #: ../../src/wui/general_statistics_menu.cc:293
 #: ../../src/wui/ware_statistics_menu.cc:470
@@ -4369,7 +4373,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:42
 msgid "Player Options"
-msgstr ""
+msgstr "Pleieri valikud"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:49
 msgid "Add player"
@@ -4385,7 +4389,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:200
 msgid "Player "
-msgstr ""
+msgstr "Pleieri "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:319
 msgid "Error!"

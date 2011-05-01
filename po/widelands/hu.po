@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-03-17 10:54+0000\n"
-"Last-Translator: jzombi <Unknown>\n"
+"PO-Revision-Date: 2011-04-27 08:55+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:37+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-28 04:33+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -654,7 +654,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:826
 msgid "Output"
-msgstr ""
+msgstr "Kimenet"
 
 #: ../../src/writeHTML.cc:837 ../../src/writeHTML.cc:851
 #, c-format
@@ -702,7 +702,7 @@ msgstr "vagy"
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
-msgstr ""
+msgstr "kivéve, ha"
 
 #: ../../src/writeHTML.cc:948 ../../src/writeHTML.cc:970
 msgid "economy"
@@ -772,7 +772,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
-msgstr ""
+msgstr "alvás"
 
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
@@ -833,7 +833,7 @@ msgstr "védekezés"
 
 #: ../../src/writeHTML.cc:1333 ../../src/writeHTML.cc:1357
 msgid "evade"
-msgstr ""
+msgstr "elkerüljék"
 
 #: ../../src/writeHTML.cc:1346
 msgid "Documentation for program command train"
@@ -1063,7 +1063,7 @@ msgstr "Nincs zászló a megadott helyen"
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "játékos %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:75
 #, c-format
@@ -1278,7 +1278,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:261 ../../src/logic/immovable.cc:276
 msgid "duplicated"
-msgstr ""
+msgstr "duplikált"
 
 #: ../../src/logic/immovable.cc:279
 #, c-format
@@ -1464,7 +1464,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:236
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "épít: %s"
 
 #: ../../src/logic/playercommand.cc:284
 #, c-format
@@ -1536,7 +1536,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1054
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "katona %u: %s"
 
 #: ../../src/logic/playercommand.cc:1060
 #, c-format
@@ -1586,7 +1586,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:866
 #: ../../src/logic/production_program.cc:961
 msgid "count"
-msgstr ""
+msgstr "száma"
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
@@ -1641,7 +1641,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:418
 #: ../../src/logic/production_program.cc:817
 msgid " and "
-msgstr ""
+msgstr " és "
 
 #: ../../src/logic/production_program.cc:419
 #: ../../src/logic/production_program.cc:796
@@ -1722,12 +1722,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1000
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:914
 #: ../../src/logic/production_program.cc:1007
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:917
 #, c-format
@@ -1892,7 +1892,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:316
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "törzs %s: %s"
 
 #: ../../src/logic/warehouse.cc:460
 #, c-format
@@ -2041,7 +2041,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:536
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "raktár: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:617
 #, c-format
@@ -2122,7 +2122,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
@@ -2161,7 +2161,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
@@ -2212,7 +2212,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:155
 #, c-format
@@ -2494,7 +2494,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Számítógépes%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
@@ -2807,7 +2807,7 @@ msgstr "Leírás:"
 #: ../../src/ui_fsmenu/mapselect.cc:297
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:217
 msgid "<parent>"
-msgstr ""
+msgstr "<szülő>"
 
 #: ../../src/ui_fsmenu/fileview.cc:45 ../../src/wui/watchwindow.cc:181
 msgid "Close"

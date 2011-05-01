@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2010-11-20 20:58+0000\n"
+"PO-Revision-Date: 2011-04-29 22:35+0000\n"
 "Last-Translator: Fedik <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:39+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-01 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -521,7 +521,7 @@ msgstr "Вартість будівництва"
 #: ../../src/writeHTML.cc:441
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "%s побудовано"
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
@@ -902,7 +902,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "побудувати"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -1782,7 +1782,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:917
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Продукція %s"
 
 #: ../../src/logic/production_program.cc:992
 msgid "Recruited "
@@ -1957,6 +1957,8 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"шахта має добувати %s , якого нема на цій карті; плем'я не сумісне з цією "
+"картою"
 
 #: ../../src/logic/worker.cc:209
 #, c-format
@@ -2114,7 +2116,7 @@ msgstr "навчальна частина: %s"
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
 msgid "elemental data: %s"
-msgstr ""
+msgstr "початкові дані: %s"
 
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
@@ -2129,7 +2131,7 @@ msgstr "додаткові дані: %s"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "вузол належить гравцю %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -2164,7 +2166,7 @@ msgstr "тут нема прапорця (%i, %i)"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
 msgid "has building %u at (%i, %i), which is not at the top left node"
-msgstr ""
+msgstr "є бідівля %u в (%i, %i), яка не в лівому верхньому куті вузла"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
@@ -2194,7 +2196,7 @@ msgstr "Невірний світ"
 #: ../../src/map_io/widelands_map_loader.cc:86
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
-msgstr ""
+msgstr "Карта світу \"%s\" не існує."
 
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
@@ -2235,6 +2237,8 @@ msgstr "позиції гравця: %s"
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
+"повідомлення в будь-якому порядку: відправлено %u , але попереднє надіслано "
+"на %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
@@ -2335,6 +2339,9 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"Widelands не зміг підключитись за даною адресою.\n"
+"Або сервер Widelands працює з іншим портом, або\n"
+"сервер вимкнено."
 
 #: ../../src/network/netclient.cc:134
 msgid "Client has left the game."
@@ -2546,7 +2553,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Комп'ютер%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
@@ -2591,7 +2598,7 @@ msgstr "З'єднання втрачено."
 
 #: ../../src/network/nethost.cc:2302
 msgid "Client sent malformed commands: "
-msgstr ""
+msgstr "Клієнт надіслав невірні команди: "
 
 #: ../../src/network/nethost.cc:2334
 msgid "Game is running already, but client has not connected fully"
@@ -2729,7 +2736,7 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr ""
+msgstr "Довідка: "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -2858,7 +2865,7 @@ msgstr "Опис:"
 #: ../../src/ui_fsmenu/mapselect.cc:297
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:217
 msgid "<parent>"
-msgstr ""
+msgstr "<батько>"
 
 #: ../../src/ui_fsmenu/fileview.cc:45 ../../src/wui/watchwindow.cc:181
 msgid "Close"
@@ -2920,7 +2927,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Клієнти"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:194 ../../src/ui_fsmenu/launchSPG.cc:277
 msgid "(no map)"
@@ -2933,7 +2940,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
 msgid "Scenario"
-msgstr ""
+msgstr "Сценарій"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
@@ -2991,13 +2998,13 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:277
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Гравець %i"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:442
 #: ../../src/wui/multiplayersetupgroup.cc:117
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Глядач"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:443
 #, c-format
@@ -3016,7 +3023,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
-msgstr ""
+msgstr "<закрито>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
@@ -3033,7 +3040,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:605
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Розмір: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:606
 #, c-format
@@ -3103,7 +3110,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Закрито."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3258,7 +3265,7 @@ msgstr "Завантажити мапу як сценарій: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:138
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
@@ -3460,7 +3467,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Try system language"
-msgstr ""
+msgstr "Спробувати системну мову"
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "x"
@@ -4078,7 +4085,7 @@ msgstr "Масштабування"
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr ""
+msgstr "<безкоштовно>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
@@ -4105,11 +4112,11 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:402
 msgid "Role"
-msgstr ""
+msgstr "Роль"
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Start"
-msgstr ""
+msgstr "Почати"
 
 #: ../../src/wui/multiplayersetupgroup.cc:426
 msgid "Type"
@@ -4117,7 +4124,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:434
 msgid "Tribe"
-msgstr ""
+msgstr "Плем'я"
 
 #: ../../src/wui/multiplayersetupgroup.cc:442
 #: ../../src/wui/playerdescrgroup.cc:103
@@ -4238,6 +4245,10 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
+"1) Інфо про вузол\n"
+" Координати: (%i, %i)\n"
+" Висота: %u\n"
+" Caps: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " flag"
@@ -4473,7 +4484,7 @@ msgstr "ID мапи:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Гравці: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
@@ -4646,7 +4657,7 @@ msgstr "Встановити значення: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
 msgid "Bobs Menu"
-msgstr ""
+msgstr "Bobs меню"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs Menu"

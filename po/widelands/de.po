@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-03-23 10:16+0000\n"
-"Last-Translator: Sonnrain <Unknown>\n"
+"PO-Revision-Date: 2011-04-26 14:25+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-24 04:45+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-27 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/network/nethost.cc:2398
 #, c-format
@@ -1702,8 +1702,8 @@ msgstr "Ungültige Verhältnisse: %s"
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
-"erwarte {\"missglückt\"|\"vollständig\"|\"übersprungen\"}, gefunden wurde "
-"jedoch \"%s\""
+"erwarte {\"fehlgeschlagen\"|\"vollständig\"|\"übersprungen\"}, gefunden "
+"wurde jedoch \"%s\""
 
 #: ../../src/logic/production_program.cc:363
 msgid "expected \"and\" or end of input"
@@ -2992,7 +2992,7 @@ msgstr "Eine Karte auswählen"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr "Gespeichertes Spiel"
+msgstr "Gesp. Spiel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
@@ -3297,11 +3297,11 @@ msgstr "Starte Spiel"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:91
 msgid "Player's name"
-msgstr "Name des Spielers"
+msgstr "Spielername"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:95
 msgid "Player's type"
-msgstr "Art des Spielers"
+msgstr "Art"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 #: ../../src/wui/multiplayersetupgroup.cc:446
@@ -3310,7 +3310,7 @@ msgstr "Team"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Player's tribe"
-msgstr "Volk des Spielers"
+msgstr "Volk"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:107
 msgid "Start type"
@@ -3558,7 +3558,7 @@ msgstr "Vollbild"
 
 #: ../../src/ui_fsmenu/options.cc:101
 msgid "Grab Input"
-msgstr "Feste Maus"
+msgstr "Fange Maus (im Fenstermodus)"
 
 #: ../../src/ui_fsmenu/options.cc:107
 msgid "Enable Music"
@@ -3574,7 +3574,7 @@ msgstr "Maximum FPS:"
 
 #: ../../src/ui_fsmenu/options.cc:128
 msgid "In-game resolution"
-msgstr "Grafikauflösung im Spiel"
+msgstr "Auflösung"
 
 #: ../../src/ui_fsmenu/options.cc:133
 msgid "Language"
@@ -3610,7 +3610,7 @@ msgstr "Speichere das Spiel automatisch alle"
 
 #: ../../src/ui_fsmenu/options.cc:186
 msgid "Remove Replays older than:"
-msgstr "Entferne Aufnahmen, die älter sind als:"
+msgstr "Lösche Aufnahmen, die älter sind als:"
 
 #: ../../src/ui_fsmenu/options.cc:194
 msgid "Off"
@@ -3623,7 +3623,7 @@ msgstr "%i × %i, %i Bit"
 
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Try system language"
-msgstr "Verwende Systemsprache, wenn möglich"
+msgstr "Systemsprache"
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "x"
@@ -3665,7 +3665,7 @@ msgstr "Entferne Synchronisationsstream-Ausgabe beim Starten"
 
 #: ../../src/ui_fsmenu/options.cc:473
 msgid "OpenGL rendering *Highly experimental!*"
-msgstr "OpenGL Grafikunterstützung *hochgradig* experimentell!"
+msgstr "OpenGL Grafikunterstützung *hochgradig experimentell!*"
 
 #: ../../src/ui_fsmenu/options.cc:478
 msgid "Show in game chat with transparent background"
@@ -4265,7 +4265,7 @@ msgstr "Mensch"
 
 #: ../../src/wui/multiplayersetupgroup.cc:394
 msgid "Client name"
-msgstr "Benutzer Name"
+msgstr "Benutzername"
 
 #: ../../src/wui/multiplayersetupgroup.cc:402
 msgid "Role"
@@ -4892,7 +4892,7 @@ msgstr "Auswahl aufheben"
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert"
-msgstr "Invertieren"
+msgstr "Umkehren"
 
 #: ../../src/wui/game_message_menu.h:101
 msgid "Invert selection"
@@ -4904,7 +4904,7 @@ msgstr "Ausgewählte Nachrichten archivieren"
 
 #: ../../src/wui/game_message_menu.h:130 ../../src/wui/game_message_menu.h:153
 msgid "Show Archive"
-msgstr "Archiv anzeigen"
+msgstr "Archiv zeigen"
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
@@ -4916,7 +4916,7 @@ msgstr "Stelle ausgewählte Nachrichten wieder her."
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
-msgstr "Zeige Nachrichteneingang"
+msgstr "Posteingang"
 
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"

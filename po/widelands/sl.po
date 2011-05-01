@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2010-10-18 20:53+0000\n"
-"Last-Translator: Klemen Košir <klemen.kosir@gmx.com>\n"
+"PO-Revision-Date: 2011-03-26 23:57+0000\n"
+"Last-Translator: Matevž Jekovec <matevz.jekovec@gmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:39+0000\n"
+"X-Launchpad-Export-Date: 2011-03-28 04:32+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../src/computer_player.cc:38
@@ -494,7 +494,7 @@ msgstr "Tipi delavcev"
 
 #: ../../src/writeHTML.cc:523
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Potrebno<br/>znanje"
 
 #: ../../src/writeHTML.cc:525
 msgid "Becomes"
@@ -544,7 +544,7 @@ msgstr "Mresti v skladiščih"
 #: ../../src/writeHTML.cc:698
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Potrebno delati %u-krat, da postane"
 
 #: ../../src/writeHTML.cc:706
 #, c-format
@@ -1199,7 +1199,7 @@ msgstr "%u%% zgrajen"
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
 msgid "loading critter: %s"
-msgstr ""
+msgstr "nalagam ljubljenčka: %s"
 
 #: ../../src/logic/game.cc:230
 msgid "Preloading a map"
@@ -1412,12 +1412,12 @@ msgstr[3] "%u(+%u) vojakov"
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "Vaši vojaki so zasedli %s."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Sovražnik je premagal vaše vojake pri %s."
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
@@ -1426,7 +1426,7 @@ msgstr "Vojaška zgradba izgubljena!"
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Vaši vojaki so premagali sovražnika pri %s."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
@@ -1435,12 +1435,12 @@ msgstr "Sovražnik je premagan!"
 #: ../../src/logic/militarysite.cc:670
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Vaš %s je odkril sovražnika.</p>"
 
 #: ../../src/logic/militarysite.cc:671
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr ""
+msgstr "Vaš %s je napaden.</p>"
 
 #: ../../src/logic/militarysite.cc:679
 msgid "You are under attack"
@@ -1748,7 +1748,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:917
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Proizvedeno %s"
 
 #: ../../src/logic/production_program.cc:992
 msgid "Recruited "
@@ -1766,7 +1766,7 @@ msgstr "odstotki"
 #: ../../src/logic/production_program.cc:1175
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Zmanjkalo zaloge!"
 
 #: ../../src/logic/production_program.cc:1196
 msgid "Mine empty"
@@ -1797,7 +1797,7 @@ msgstr "raven"
 #: ../../src/logic/production_program.cc:1340
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr ""
+msgstr "Za to stopnjo urjenja ni najdenih nobenih vojakov!"
 
 #: ../../src/logic/production_program.cc:1316
 #, c-format
@@ -1841,7 +1841,7 @@ msgstr ""
 #: ../../src/logic/ship.cc:263
 #, c-format
 msgid "loading ship: %s"
-msgstr ""
+msgstr "nalagam ladjo: %s"
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
@@ -1918,7 +1918,7 @@ msgstr "pleme %s: %s"
 #: ../../src/logic/warehouse.cc:460
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr ""
+msgstr "V vaše gospodarstvo je dodan nov %s."
 
 #: ../../src/logic/worker.cc:107
 #, c-format
@@ -1953,16 +1953,16 @@ msgstr "Geolog je našel vire."
 #: ../../src/logic/worker.cc:1737
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Vaš %s ne najde poti domov in bo verjetno umrl."
 
 #: ../../src/logic/worker.cc:1744
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Delavec se je izgubil!"
 
 #: ../../src/logic/worker.cc:2938
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "nalagam delavca: %s"
 
 #: ../../src/logic/world.cc:623
 #, c-format
@@ -2388,6 +2388,12 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"<br>Za gostitelja so na voljo sledeči ukazi:<br>/help - Prikaže "
+"pomoč.<br>/announce <sporočilo> - Pošlje sporočilo kot najavo (sistemski "
+"pogovor).<br>/warn <uporabnik> <razlog> - Opozori <uporabnika> zaradi "
+"<razloga>.<br>/kick <uporabnik> <razlog> - Brcne <uporabnika> iz igre zaradi "
+"<razloga>.<br>/forcePause - Začasno zaustavi igro.<br>/endForcePause - "
+"Nadaljuje igro."
 
 #: ../../src/network/nethost.cc:364
 msgid "Wrong use, should be: /announce <message>"
@@ -2404,21 +2410,21 @@ msgstr "Napačna raba, moralo bi biti: /kick <ime> <razlog>"
 #: ../../src/network/nethost.cc:395
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Ali ste prepričani, da želite brcniti uporabnika %s iz igre?<br>"
 
 #: ../../src/network/nethost.cc:398
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "Razlog je: %s<br>"
 
 #: ../../src/network/nethost.cc:401
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Za potrditev vpišite: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:410
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "Ukaz kick preklican: Ni podanega imena!"
 
 #: ../../src/network/nethost.cc:412
 msgid "Wrong use, should be: /ack_kick <name>"
@@ -2426,11 +2432,11 @@ msgstr "Napačna raba, moralo bi biti: /ack_kick <ime>"
 
 #: ../../src/network/nethost.cc:419
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "Ukaz kick preklican: Podano ime neveljavno!"
 
 #: ../../src/network/nethost.cc:429
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Začasna zaustavitev že v teku - igra bo zaustavljena."
 
 #: ../../src/network/nethost.cc:440
 msgid "There is no forced pause - nothing to end."
@@ -2454,17 +2460,19 @@ msgstr "Strežnik se je zrušil inzasilno shranil igro."
 
 #: ../../src/network/nethost.cc:983
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Ni mogoče brcniti iz igre samega sebe!"
 
 #: ../../src/network/nethost.cc:1004
 msgid "There is no connected user with that nickname!"
-msgstr ""
+msgstr "Uporabnika s tem imenom ni prijavljenega!"
 
 #: ../../src/network/nethost.cc:1067
 msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $"
 msgstr ""
+"<br>Za gostitelja so na voljo naslednji ukazi:<br>help - Prikaže to "
+"pomoč.<br>host $ - Poskusi pognati ukaz $."
 
 #: ../../src/network/nethost.cc:1073
 msgid ""
@@ -2477,48 +2485,56 @@ msgid ""
 "#<br>toggle_team  # - Toggles the team of player #<br>toggle_win_con - "
 "Toggles the win_condition<br>host         $ - Tries to run the host command $"
 msgstr ""
+"<br>Za gostitelja so na voljo naslednji ukazi:<br>help - Prikaže to "
+"pomoč.<br>start - Zažene strežnik.<br>ls_saved_games - Prikaže seznam "
+"shranjenih iger.<br>ls_maps - Prikaže seznam zemljevidov.<br>switch_save $ - "
+"Preklopi na shranjeno igro $.<br>switch_map $ - Preklopi na zemljevid "
+"$.<br>toggle_type # - Preklopi tip igralca na #.<br>toggle_init # - Preklopi "
+"inicializacijo igralca #.<br>toggle_tribe # - Preklopi igralčevo pleme na "
+"#.<br>toggle_team # - Preklopi igralčevo ekipo na #.<br>toggle_win_con - "
+"Preklopi kriterije za zmago.<br>host $ - Poskusi pognati ukaz $."
 
 #: ../../src/network/nethost.cc:1091
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr ""
+msgstr "%s mi je sporočil, naj izvedem ukaz: \"%s\""
 
 #: ../../src/network/nethost.cc:1103
 #, c-format
 msgid "%s tried to start the game, but the server is not launchable."
-msgstr ""
+msgstr "%s je poskusil začeti z igro vendar strežnika ni mogoče zagnati."
 
 #: ../../src/network/nethost.cc:1105
 #, c-format
 msgid "%s send the signal to start the game."
-msgstr ""
+msgstr "%s sporoča, naj se igra začne."
 
 #: ../../src/network/nethost.cc:1111
 msgid "Available saved games:<br>"
-msgstr ""
+msgstr "Shranjene igre:<br>"
 
 #: ../../src/network/nethost.cc:1131
 msgid "Available maps:<br>"
-msgstr ""
+msgstr "Zemljevidi:<br>"
 
 #: ../../src/network/nethost.cc:1175
 #, c-format
 msgid "Can not use \"%s\" as saved game file!"
-msgstr ""
+msgstr "Ni mogoče uporabiti \"%s\" kot shranjeno igro!"
 
 #: ../../src/network/nethost.cc:1199
 #, c-format
 msgid "Can not use \"%s\" as map file!"
-msgstr ""
+msgstr "Ni mogoče uporabiti \"%s\" kot zemljevid!"
 
 #: ../../src/network/nethost.cc:1211 ../../src/network/nethost.cc:1217
 msgid "Invalid value # for player - should be a player number"
-msgstr ""
+msgstr "Napačna vrednost za igralca # - mora biti številka"
 
 #: ../../src/network/nethost.cc:1243 ../../src/network/nethost.cc:1249
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr ""
+msgstr "Neznan strežniški ukaz \"%s\"!"
 
 #: ../../src/network/nethost.cc:1432
 #, c-format
@@ -2648,7 +2664,7 @@ msgstr "%s je zapustil igro (%s)"
 #: ../../src/network/nethost.cc:2564
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Neznan uporabnik je zapustil igro (%s)"
 
 #: ../../src/network/network_ggz.cc:276
 msgid "Closed the connection to the metaserver."
@@ -2718,7 +2734,7 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr ""
+msgstr "Pomoč: "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -2859,7 +2875,7 @@ msgstr "Pritisnite ESC ali kliknite za nadaljevanje ..."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Prosimo izberite"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66 ../../src/ui_fsmenu/launchMPG.cc:165
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
@@ -2868,15 +2884,15 @@ msgstr "Zemljevid"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
-msgstr ""
+msgstr "Izberite zemljevid"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Shranjena igra"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Izberite shranjeno igro"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84 ../../src/ui_fsmenu/options.cc:58
 #: ../../src/ui_fsmenu/options.cc:390 ../../src/wui/login_box.cc:70
@@ -2889,11 +2905,11 @@ msgstr "Prekliči"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84
 msgid "Cancel selection"
-msgstr ""
+msgstr "Prekliči izbiro"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:113
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Spremeni zemljevid ali shranjeno igro"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:120 ../../src/ui_fsmenu/launchSPG.cc:77
 msgid "Start game"
@@ -2901,15 +2917,15 @@ msgstr "Začni igro"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
-msgstr ""
+msgstr "Prikaži okno s pomočjo"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:621
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Nastavitve večigralske igre"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Odjemalci"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:194 ../../src/ui_fsmenu/launchSPG.cc:277
 msgid "(no map)"
@@ -2917,25 +2933,26 @@ msgstr "(ni zemljevida)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:195
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "Gostitelj še ni izbral zemljevida ali shranjene igre."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
 msgid "Scenario"
-msgstr ""
+msgstr "Scenarij"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "Zmagovalni kriteriji so določeni v scenariju"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:269
 #: ../../src/wui/multiplayersetupgroup.cc:339
 msgid "Savegame"
-msgstr ""
+msgstr "Shranjena igra"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:271
 msgid "The game is a saved game - the win condition was set before."
 msgstr ""
+"Igra je shranjena igra - zmagovalni kriteriji so že bili nastavljeni."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:281 ../../src/ui_fsmenu/launchSPG.cc:236
 msgid "Type: "
@@ -2943,7 +2960,7 @@ msgstr "Vrsta: "
 
 #: ../../src/ui_fsmenu/launchMPG.cc:365
 msgid "Saved game is directory"
-msgstr ""
+msgstr "Shranjena igra je mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:367
 msgid ""
@@ -2953,6 +2970,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, "
 "please select another saved game or zip the directories content."
 msgstr ""
+"POZOR:\n"
+"Shranjena igra je mapa. To se zgodi, če vklopite vrednost \"nozip\" ali če "
+"ročno raztegnete shranjeno igro.\n"
+"Widelands ne more prenesti celotne mape odjemalcem, zato izberite drugo "
+"shranjeno igro ali stisnite vsebino mape."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:384 ../../src/ui_fsmenu/launchSPG.cc:252
 msgid "File not found"
@@ -2968,25 +2990,32 @@ msgid ""
 "Normally such a file should be send from the host to you, but perhaps the "
 "transfer was not yet finnished!?!"
 msgstr ""
+"Widelands je poskusil začeti igro z datoteko, ki je ni bilo mogoče najti.\n"
+"Pot je bila: %s\n"
+"Pogosto se to zgodi, ko gostitelj izbere datoteko, ki je vi nimate. Običajno "
+"bi morala biti ta datoteka samodejno poslana tudi vam. Mogoče prenos še ni "
+"zaključen?"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:415
 msgid ""
 "The selected file can not be found. If it is not automatically transfered to "
 "you, please write the host about this problem."
 msgstr ""
+"Izbrane datoteke ni mogoče najti. Če ni samodejno prenešena k vam, o tem "
+"obvestite gostitelja."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:440
 #: ../../src/wui/multiplayersetupgroup.cc:115
 #: ../../src/wui/multiplayersetupgroup.cc:277
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Igralec %i"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:442
 #: ../../src/wui/multiplayersetupgroup.cc:117
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Opazovalec"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:443
 #, c-format
@@ -2994,57 +3023,59 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"Trenutno ste %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:444
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "Za pomoč v zgornjem desnem kotu kliknite na \"?\"."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:505
 msgid "Saved players are:"
-msgstr ""
+msgstr "Shranjeni igralci so:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
-msgstr ""
+msgstr "<zaprto>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
-msgstr ""
+msgstr "Pojavila se je napaka!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "Datoteka z mapo ni veljavna!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:604
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Podatki o zemljevidu:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:605
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Velikost: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:606
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i Igralci\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:607
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Tip sveta: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:609
 msgid "* Scenario mode selected\n"
-msgstr ""
+msgstr "* Izbran način scenarija\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:622
 msgid "You are in the multi player launch game menu."
-msgstr ""
+msgstr "Ste v večigralskem meniju za zagon igre."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:623
 msgid "Client settings"
-msgstr ""
+msgstr "Nastavitve odjemalca"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:626
 msgid ""
@@ -3067,7 +3098,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:636
 msgid "Player settings"
-msgstr ""
+msgstr "Nastavitve igralca"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid ""
@@ -3092,7 +3123,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Zaprto."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3110,7 +3141,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:659
 msgid "Map informations"
-msgstr ""
+msgstr "Informacije o zemljevidu"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:662
 msgid ""
@@ -3253,11 +3284,11 @@ msgstr "Naloži zemljevid kot scenarij: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:138
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
-msgstr ""
+msgstr "Ime zemljevida"
 
 #: ../../src/ui_fsmenu/mapselect.cc:235
 msgid "(directory)"

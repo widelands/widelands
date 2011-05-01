@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-02-21 16:41+0000\n"
-"Last-Translator: KroArtem <feeblehamster@mail.ru>\n"
+"PO-Revision-Date: 2011-04-27 18:01+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:38+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-28 04:33+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1730,7 +1730,7 @@ msgstr "пропустить"
 
 #: ../../src/logic/production_program.cc:517
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"провал\"|\"завершения\"|\"не показывать\"}"
 
 #: ../../src/logic/production_program.cc:531
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
@@ -1739,7 +1739,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:651
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "спать: %s"
 
 #: ../../src/logic/production_program.cc:672
 msgid "idle animation is default; calling is not allowed"
@@ -2316,7 +2316,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:201
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "пункт %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
 #, c-format
@@ -2546,7 +2546,7 @@ msgstr "Неизвестная серверу команда \"%s\"!"
 #: ../../src/network/nethost.cc:1432
 #, c-format
 msgid "Host sent player %s to the lobby!"
-msgstr ""
+msgstr "Хост отправил игрока %s в атаку!"
 
 #: ../../src/network/nethost.cc:1826
 #, c-format
@@ -2933,7 +2933,7 @@ msgstr "Подготовка сетевой игры"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Клиенты"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:194 ../../src/ui_fsmenu/launchSPG.cc:277
 msgid "(no map)"
@@ -3120,7 +3120,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Закрыто."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3970,7 +3970,7 @@ msgstr "16 ч."
 #: ../../src/wui/interactive_base.cc:270
 #, c-format
 msgid "%u.%ux"
-msgstr ""
+msgstr "%u.%ux"
 
 #: ../../src/wui/interactive_base.cc:273
 msgid "PAUSE"
@@ -4205,7 +4205,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:151 ../../src/wui/transport_ui.cc:246
 msgid "Decrease target"
-msgstr ""
+msgstr "Уменьшить цель"
 
 #: ../../src/wui/transport_ui.cc:153 ../../src/wui/transport_ui.cc:248
 msgid "Reset to default"
@@ -4634,11 +4634,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Bob"
-msgstr ""
+msgstr "Боб"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Resource"
-msgstr ""
+msgstr "Ресурс"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-03-21 10:11+0000\n"
+"PO-Revision-Date: 2011-03-26 12:23+0000\n"
 "Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-22 04:33+0000\n"
+"X-Launchpad-Export-Date: 2011-03-27 04:33+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -289,9 +289,9 @@ msgid ""
 "the\n"
 "number of attacking soldiers, then send them via the attack button."
 msgstr ""
-"Besiege den nahen Gegner. Um ein Gebäude anzugreifen, klicke auf seine "
-"Türen, wähle die Anzahl der angreifenden Soldaten und sende sie mit dem "
-"„Angriff starten“-Knopf los."
+"Besiege den benachbarten Gegner. Um ein Gebäude anzugreifen, klicke auf "
+"seine Türen, wähle die Anzahl der angreifenden Soldaten und sende sie mit "
+"dem „Angriff starten“-Knopf los."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
@@ -1393,19 +1393,19 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:535
 msgid "a bit of coal"
-msgstr "Ein bisschen Kohle"
+msgstr "Ein wenig Kohle"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:539
 msgid "a bit of gold"
-msgstr "Ein bisschen Gold"
+msgstr "Ein wenig Gold"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:542
 msgid "a bit of granite"
-msgstr "Ein bisschen Granit"
+msgstr "Ein wenig Granit"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:537
 msgid "a bit of iron"
-msgstr "Ein bisschen Eisen"
+msgstr "Ein wenig Eisen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:536
 msgid "a lot of coal"
@@ -1467,7 +1467,7 @@ msgstr "das „Baue Straße“-Symbol."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:561
 msgid "this one."
-msgstr "„Baue Minen“-Symbol"
+msgstr "diese hier."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
