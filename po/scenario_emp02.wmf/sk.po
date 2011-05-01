@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-02-10 20:30+0000\n"
-"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"PO-Revision-Date: 2011-04-30 22:56+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:33+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-01 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid ""
@@ -286,7 +286,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:185
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Denník Lucia"
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -358,7 +358,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:194
 msgid "Victory"
-msgstr ""
+msgstr "Víťazstvo"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:110
 msgid "Wood for the colony"

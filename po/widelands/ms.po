@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2010-08-30 23:07+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-04-30 23:56+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:38+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-01 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -66,6 +66,8 @@ msgid ""
 "Options:\n"
 "\n"
 msgstr ""
+"Pilihan:\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1295
 msgid ""
@@ -199,7 +201,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1547
 msgid "Warning: "
-msgstr ""
+msgstr "Amaran: "
 
 #: ../../src/wlapplication.cc:1551
 msgid "Game data error"
@@ -416,7 +418,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
-msgstr ""
+msgstr "Alat tambahan"
 
 #: ../../src/writeHTML.cc:463
 #, c-format
@@ -492,7 +494,7 @@ msgstr "Program"
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
 msgid "mine"
-msgstr ""
+msgstr "tambang"
 
 #: ../../src/writeHTML.cc:755
 msgid "breed"
@@ -520,7 +522,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:761
 msgid "walk"
-msgstr ""
+msgstr "berjalan"
 
 #: ../../src/writeHTML.cc:762
 msgid "animation"
@@ -532,11 +534,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
-msgstr ""
+msgstr "objek"
 
 #: ../../src/writeHTML.cc:765
 msgid "plant"
-msgstr ""
+msgstr "tanaman"
 
 #: ../../src/writeHTML.cc:766
 msgid "create_bob"
@@ -548,7 +550,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr ""
+msgstr "ahli geologi"
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
@@ -612,7 +614,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:793
 msgid "failed"
-msgstr ""
+msgstr "gagal"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
@@ -624,7 +626,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:913
 msgid "and"
-msgstr ""
+msgstr "dan"
 
 #: ../../src/writeHTML.cc:914
 msgid "when"
@@ -640,7 +642,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:948 ../../src/writeHTML.cc:970
 msgid "economy"
-msgstr ""
+msgstr "ekonomi"
 
 #: ../../src/writeHTML.cc:950 ../../src/writeHTML.cc:972
 msgid "needs"
@@ -660,7 +662,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
-msgstr ""
+msgstr "pekerja"
 
 #: ../../src/writeHTML.cc:1026
 msgid "</span></a> <span class=\"keyword\">"
@@ -672,7 +674,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1029
 msgid "experience"
-msgstr ""
+msgstr "pengalaman"
 
 #: ../../src/writeHTML.cc:1043
 msgid "Documentation for program command call"
@@ -706,7 +708,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
-msgstr ""
+msgstr "tidur"
 
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
@@ -719,7 +721,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1155
 msgid "animate"
-msgstr ""
+msgstr "menghidupkan"
 
 #: ../../src/writeHTML.cc:1174
 msgid "Documentation for program command consume"
@@ -727,7 +729,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
-msgstr ""
+msgstr "menghabiskan"
 
 #: ../../src/writeHTML.cc:1217 ../../src/writeHTML.cc:1254
 msgid "Documentation for program command produce"
@@ -759,7 +761,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
 msgid "attack"
-msgstr ""
+msgstr "serang"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "defense"
@@ -877,7 +879,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:101
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "ekonomi: %s"
 
 #: ../../src/economy/wares_queue.cc:259
 #, c-format
@@ -910,7 +912,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
-msgstr ""
+msgstr "Pemain"
 
 #: ../../src/editor/editorinteractive.cc:150
 msgid "Unsupported format"
@@ -995,12 +997,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "Pemain %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:75
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "ekonomi: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
@@ -1087,17 +1089,17 @@ msgstr ""
 #: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
-msgstr ""
+msgstr "kecil"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "medium"
-msgstr ""
+msgstr "sederhana"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
-msgstr ""
+msgstr "besar"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -1245,7 +1247,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1394
 msgid "priority"
-msgstr ""
+msgstr "keutamaan"
 
 #: ../../src/logic/immovable.cc:901 ../../src/logic/immovable.cc:1082
 #, c-format
@@ -1293,7 +1295,7 @@ msgstr ""
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
-msgstr ""
+msgstr "Pemain 1"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:67
 msgid "\"min-max\""
@@ -1514,7 +1516,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:866
 #: ../../src/logic/production_program.cc:961
 msgid "count"
-msgstr ""
+msgstr "menghitung"
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
@@ -1569,17 +1571,17 @@ msgstr ""
 #: ../../src/logic/production_program.cc:418
 #: ../../src/logic/production_program.cc:817
 msgid " and "
-msgstr ""
+msgstr " dan "
 
 #: ../../src/logic/production_program.cc:419
 #: ../../src/logic/production_program.cc:796
 msgid " because: "
-msgstr ""
+msgstr " kerana: "
 
 #: ../../src/logic/production_program.cc:430
 #: ../../src/wui/encyclopedia_window.cc:192
 msgid " or "
-msgstr ""
+msgstr " atau "
 
 #: ../../src/logic/production_program.cc:431
 msgid " because not: "
@@ -1613,16 +1615,16 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:517
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"kegagalan\"|\"penyelesaian\"|\"skip\"}"
 
 #: ../../src/logic/production_program.cc:531
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"gagal\"|\"lengkap\"|\"skip\"|\"ulangi\"}"
 
 #: ../../src/logic/production_program.cc:651
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "tidur: %s"
 
 #: ../../src/logic/production_program.cc:672
 msgid "idle animation is default; calling is not allowed"
@@ -1650,12 +1652,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1000
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:914
 #: ../../src/logic/production_program.cc:1007
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:917
 #, c-format
@@ -1673,7 +1675,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1050
 #: ../../src/logic/production_program.cc:1061
 msgid "percentage"
-msgstr ""
+msgstr "peratusan"
 
 #: ../../src/logic/production_program.cc:1175
 #, c-format
@@ -1780,7 +1782,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:1440 ../../src/logic/soldier.cc:1445
 msgid "no"
-msgstr ""
+msgstr "tidak"
 
 #: ../../src/logic/soldier.cc:1452 ../../src/logic/soldier.cc:1460
 msgid "Logic error"

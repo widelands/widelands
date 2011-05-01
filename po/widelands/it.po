@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-26 12:54+0000\n"
+"PO-Revision-Date: 2011-04-30 13:26+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-27 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-05-01 04:32+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -1098,7 +1098,7 @@ msgstr "versione sconosciuta/non gestita %i"
 #: ../../src/game_io/game_preload_data_packet.cc:65
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "precarico: %s"
 
 #: ../../src/graphic/animation.cc:138 ../../src/logic/building.cc:77
 #: ../../src/logic/immovable.cc:195 ../../src/logic/immovable.cc:824
@@ -1603,7 +1603,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:149
 msgid "not "
-msgstr ""
+msgstr "non "
 
 #: ../../src/logic/production_program.cc:171
 #: ../../src/logic/production_program.cc:192
@@ -1683,7 +1683,7 @@ msgstr "fallito"
 
 #: ../../src/logic/production_program.cc:507
 msgid "completion"
-msgstr ""
+msgstr "completamento"
 
 #: ../../src/logic/production_program.cc:512
 msgid "skip"
@@ -1700,7 +1700,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:651
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "sonno: %s"
 
 #: ../../src/logic/production_program.cc:672
 msgid "idle animation is default; calling is not allowed"
@@ -2032,7 +2032,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:274
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "biscotteria: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:287
 #, c-format
@@ -2174,7 +2174,7 @@ msgstr "%s: %s"
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Obiettivi: %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
@@ -2274,7 +2274,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:201
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "articolo %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
 #, c-format
@@ -2846,7 +2846,7 @@ msgstr "Premi ESC o clicca per continuare ..."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Si prega di selezionare"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66 ../../src/ui_fsmenu/launchMPG.cc:165
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
@@ -2909,7 +2909,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
 msgid "Scenario"
-msgstr ""
+msgstr "Scenario"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
@@ -2992,7 +2992,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
-msgstr ""
+msgstr "<chiuso>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
@@ -3079,7 +3079,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Chiuso."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3234,7 +3234,7 @@ msgstr "Carica la mappa come scenario: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:138
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
@@ -4082,7 +4082,7 @@ msgstr "Nome client"
 
 #: ../../src/wui/multiplayersetupgroup.cc:402
 msgid "Role"
-msgstr ""
+msgstr "Ruolo"
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Start"
