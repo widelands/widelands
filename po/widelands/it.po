@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-30 13:26+0000\n"
+"PO-Revision-Date: 2011-05-01 13:05+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-01 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-05-02 04:32+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -2140,7 +2140,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "altezze: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:84
 msgid "Invalid World"
@@ -2896,7 +2896,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Clienti"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:194 ../../src/ui_fsmenu/launchSPG.cc:277
 msgid "(no map)"
@@ -3009,7 +3009,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:605
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Dimensioni: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:606
 #, c-format
@@ -4460,7 +4460,7 @@ msgstr "ID Mappa:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Giocatori: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
@@ -4481,7 +4481,7 @@ msgstr "senza nome"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 msgid "<Directory>"
-msgstr ""
+msgstr "<Elenco>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"

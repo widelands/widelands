@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-27 08:55+0000\n"
+"PO-Revision-Date: 2011-05-01 13:27+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-28 04:33+0000\n"
+"X-Launchpad-Export-Date: 2011-05-02 04:32+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
@@ -155,6 +155,18 @@ msgid ""
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
+"Hang opciók:\n"
+" --nosound            Hang nélkül indítja a játékot.\n"
+" --disable_fx         Hangeffektek kikapcsolása.\n"
+" --disable_music      Zene kikapcsolása.\n"
+"\n"
+" --nozip              A mentéseket ne tömörített zip formátumban tárolja.\n"
+"\n"
+" --editor             Egyből a Widelands pályaszerkesztőt indítsa el.\n"
+"                      Hozzáírva a =FILENAME szöveget betölti a\n"
+"                      FILENAME néven mentett térképet a szerkesztőbe.\n"
+" --scenario=FILENAME  Közvetlenül a FILENAME térképet indítja scenarioként.\n"
+" --loadgame=FILENAME  Közvetlenül betölti a FILENAME néven mentett állást.\n"
 
 #: ../../src/wlapplication.cc:1335
 msgid " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
@@ -718,7 +730,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:992
 msgid "has"
-msgstr ""
+msgstr "a"
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
@@ -777,7 +789,7 @@ msgstr "alvás"
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
 msgid " %u.%03u s"
-msgstr ""
+msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command animate"
@@ -853,7 +865,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "konstrukció"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -1068,7 +1080,7 @@ msgstr "játékos %u: %s"
 #: ../../src/game_io/game_player_economies_data_packet.cc:75
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "gazdaságok: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
@@ -1685,16 +1697,16 @@ msgstr "kihagyás"
 
 #: ../../src/logic/production_program.cc:517
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"hiba\"|\"befejezését\"|\"skip\"}"
 
 #: ../../src/logic/production_program.cc:531
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"nem\"|\"teljes\"|\"skip\"|\"ismétlés\"}"
 
 #: ../../src/logic/production_program.cc:651
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "alvás: %s"
 
 #: ../../src/logic/production_program.cc:672
 msgid "idle animation is default; calling is not allowed"
@@ -1856,7 +1868,7 @@ msgstr "nem"
 
 #: ../../src/logic/soldier.cc:1452 ../../src/logic/soldier.cc:1460
 msgid "Logic error"
-msgstr ""
+msgstr "Logikai hiba"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
@@ -2116,7 +2128,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "épület (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
@@ -2227,7 +2239,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "út: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
@@ -2243,7 +2255,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "út %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
@@ -2832,7 +2844,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Mentett játszma"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
@@ -2916,7 +2928,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:384 ../../src/ui_fsmenu/launchSPG.cc:252
 msgid "File not found"
-msgstr ""
+msgstr "A fájl nem található"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:386
 #, c-format
@@ -2946,7 +2958,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:117
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Néző"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:443
 #, c-format
@@ -2982,7 +2994,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:605
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Méret: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:606
 #, c-format
@@ -3052,7 +3064,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Zárva."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3099,7 +3111,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 #: ../../src/wui/multiplayersetupgroup.cc:446
 msgid "Team"
-msgstr ""
+msgstr "Csapat"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Player's tribe"
@@ -3248,7 +3260,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:59
 msgid "List of games:"
-msgstr ""
+msgstr "A játékok listája:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:63
 msgid "Name of your server:"
@@ -3269,7 +3281,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:151
 msgid "Points"
-msgstr ""
+msgstr "Pont"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:152
 msgid "Server"
@@ -3332,7 +3344,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:81
 msgid "days"
-msgstr ""
+msgstr "nap"
 
 #: ../../src/ui_fsmenu/options.cc:88
 msgid "General Options"
@@ -3413,11 +3425,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:410 ../../src/ui_fsmenu/options.cc:415
 msgid "px."
-msgstr ""
+msgstr "px."
 
 #: ../../src/ui_fsmenu/options.cc:434
 msgid "Main menu font:"
@@ -3459,7 +3471,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:506
 msgid "Pause"
-msgstr ""
+msgstr "Szünet"
 
 #: ../../src/ui_fsmenu/options.cc:517
 msgid "FreeSerif (Default)"
@@ -3483,7 +3495,7 @@ msgstr "Játék betöltése"
 
 #: ../../src/wui/attack_box.cc:174
 msgid "Soldiers:"
-msgstr ""
+msgstr "Katonák:"
 
 #: ../../src/wui/attack_box.cc:182
 msgid "Send less soldiers"
@@ -3733,7 +3745,7 @@ msgstr "Játékidő: "
 #: ../../src/wui/game_main_menu_save_game.cc:117
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
-msgstr ""
+msgstr "%02ud%02uh%02u'%02u\"%03u"
 
 #: ../../src/wui/game_main_menu_save_game.cc:194
 msgid ""
@@ -3900,7 +3912,7 @@ msgstr "16 óra"
 #: ../../src/wui/interactive_base.cc:270
 #, c-format
 msgid "%u.%ux"
-msgstr ""
+msgstr "%u.%ux"
 
 #: ../../src/wui/interactive_base.cc:273
 msgid "PAUSE"
@@ -3909,7 +3921,7 @@ msgstr "SZÜNET"
 #: ../../src/wui/interactive_base.cc:293
 #, c-format
 msgid "%s (%s)"
-msgstr ""
+msgstr "%s (%s)"
 
 #: ../../src/wui/interactive_base.cc:298
 msgid "NO GAME CONTROLLER"
@@ -4030,7 +4042,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr ""
+msgstr "<ingyen>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
@@ -4057,7 +4069,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:402
 msgid "Role"
-msgstr ""
+msgstr "Szerep"
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Start"
@@ -4065,16 +4077,16 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:426
 msgid "Type"
-msgstr ""
+msgstr "Típus"
 
 #: ../../src/wui/multiplayersetupgroup.cc:434
 msgid "Tribe"
-msgstr ""
+msgstr "Törzs"
 
 #: ../../src/wui/multiplayersetupgroup.cc:442
 #: ../../src/wui/playerdescrgroup.cc:103
 msgid "Initialization"
-msgstr ""
+msgstr "Inicializálás"
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
@@ -4378,13 +4390,13 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #, c-format
 msgid "Water: %u %%"
-msgstr ""
+msgstr "Víz: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:186
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Land: %u %%"
-msgstr ""
+msgstr "Szárazföldi: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:210
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
@@ -4422,7 +4434,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Játékosok: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
@@ -4575,7 +4587,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Resource"
-msgstr ""
+msgstr "Forrás"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
@@ -4652,7 +4664,7 @@ msgstr "Állapot"
 
 #: ../../src/wui/game_message_menu.h:69
 msgid "Title"
-msgstr ""
+msgstr "Cím"
 
 #: ../../src/wui/game_message_menu.h:70
 msgid "Time sent"
