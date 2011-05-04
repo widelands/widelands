@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-27 18:37+0000\n"
+"PO-Revision-Date: 2011-05-03 23:05+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-28 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-05-04 04:31+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 
 #: ../../src/computer_player.cc:38
@@ -281,7 +281,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:59
 msgid "Providers"
-msgstr ""
+msgstr "Hornitzaileak"
 
 #: ../../src/writeHTML.cc:74
 msgid "Successors"
@@ -302,17 +302,17 @@ msgstr ""
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:515
 #: ../../src/writeHTML.cc:1437
 msgid "Icon"
-msgstr ""
+msgstr "Ikonoa"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:517
 #: ../../src/writeHTML.cc:1439 ../../src/ui_fsmenu/netsetup_ggz.cc:150
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Name"
-msgstr ""
+msgstr "Izena"
 
 #: ../../src/writeHTML.cc:282 ../../src/wui/building_statistics_menu.cc:113
 msgid "Size"
-msgstr ""
+msgstr "Tamaina"
 
 #: ../../src/writeHTML.cc:284 ../../src/writeHTML.cc:519
 msgid "Buildable"
@@ -324,7 +324,7 @@ msgstr "Hobetua"
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:170
 msgid "Stop"
-msgstr ""
+msgstr "Gelditu"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
@@ -342,13 +342,13 @@ msgstr "Mina"
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:510
 msgid "Small"
-msgstr ""
+msgstr "Txiki"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
 #: ../../src/logic/building.cc:511
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "Medium"
-msgstr ""
+msgstr "Ertaina"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:381
 #: ../../src/logic/building.cc:511
@@ -360,14 +360,14 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr ""
+msgstr "Bai"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:105
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr ""
+msgstr "Ez"
 
 #: ../../src/writeHTML.cc:355
 msgid "building_types.xhtml"
@@ -526,7 +526,7 @@ msgstr "oinez"
 
 #: ../../src/writeHTML.cc:762
 msgid "animation"
-msgstr ""
+msgstr "animazioa"
 
 #: ../../src/writeHTML.cc:763 ../../src/writeHTML.cc:902
 msgid "return"
@@ -534,11 +534,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
-msgstr ""
+msgstr "objektua"
 
 #: ../../src/writeHTML.cc:765
 msgid "plant"
-msgstr ""
+msgstr "landare"
 
 #: ../../src/writeHTML.cc:766
 msgid "create_bob"
@@ -550,7 +550,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr ""
+msgstr "Geologo"
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
@@ -572,7 +572,7 @@ msgstr "Ekoizpena"
 #: ../../src/wui/productionsitewindow.cc:84 ../../src/wui/transport_ui.cc:65
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Workers"
-msgstr ""
+msgstr "Langileak"
 
 #: ../../src/writeHTML.cc:793
 #, c-format
@@ -590,7 +590,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:826
 msgid "Output"
-msgstr ""
+msgstr "Irteera"
 
 #: ../../src/writeHTML.cc:837 ../../src/writeHTML.cc:851
 #, c-format
@@ -634,7 +634,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:916
 msgid "or"
-msgstr ""
+msgstr "edo"
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
@@ -708,7 +708,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
-msgstr ""
+msgstr "lo"
 
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
@@ -729,7 +729,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
-msgstr ""
+msgstr "kontsumitzen"
 
 #: ../../src/writeHTML.cc:1217 ../../src/writeHTML.cc:1254
 msgid "Documentation for program command produce"
@@ -737,11 +737,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1219
 msgid "produce"
-msgstr ""
+msgstr "ekoizteko"
 
 #: ../../src/writeHTML.cc:1256
 msgid "recruit"
-msgstr ""
+msgstr "bildu"
 
 #: ../../src/writeHTML.cc:1295
 msgid "Documentation for program command mine"
@@ -765,7 +765,7 @@ msgstr "erasoa"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "defense"
-msgstr ""
+msgstr "defentsa"
 
 #: ../../src/writeHTML.cc:1333 ../../src/writeHTML.cc:1357
 msgid "evade"
@@ -912,7 +912,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
-msgstr ""
+msgstr "Jokalariak"
 
 #: ../../src/editor/editorinteractive.cc:150
 msgid "Unsupported format"
@@ -1099,7 +1099,7 @@ msgstr ""
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
-msgstr ""
+msgstr "handia"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -1247,7 +1247,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1394
 msgid "priority"
-msgstr ""
+msgstr "lehentasuna"
 
 #: ../../src/logic/immovable.cc:901 ../../src/logic/immovable.cc:1082
 #, c-format
