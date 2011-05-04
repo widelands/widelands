@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-11-18 14:41+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-03-21 14:11+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:35+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-22 04:32+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid ""
@@ -28,7 +28,7 @@ msgstr ""
 "war, wurde mir schlagartig bewusst, wie wichtig dieses kleine Gebäude für "
 "meine Leute ist. Ihre Lieder klangen bis tief in die Nacht und dennoch waren "
 "sie heute Morgen besser gelaunt, als sie die letzten paar Monate je gewesen "
-"waren.<br>Vielleicht errichten wir hier mittlerweile einen Ort, den man... "
+"waren.<br> Vielleicht errichten wir hier mittlerweile einen Ort, den man... "
 "Heimat nennen könnte.“ "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:269
@@ -51,7 +51,7 @@ msgstr ""
 "ist, wenn man bedenkt, dass wir immer noch in Baracken und Zelten hausen. "
 "Aber eigentlich hatte ich auch nie vorgehabt, so lange in der Wildniss zu "
 "bleiben. Doch woher hätte ich wissen sollen, dass meine Brüder sich so lange "
-"in einen so sinnlosen Krieg verstricken?<br>Vielleicht sollten wir es uns "
+"in einen so sinnlosen Krieg verstricken?<br> Vielleicht sollten wir es uns "
 "hier doch etwas gemütlicher machen, vielleicht sogar eine neue Heimat "
 "einrichten, um denen aus unserem Volk, die noch immer vereinigt denken und "
 "leben, das zu ersetzen, was für uns verloren ist. Bis zu dem Tage, an dem "
@@ -63,8 +63,8 @@ msgid ""
 "this coal and iron ore for!<br> It might even be enough to...\" "
 msgstr ""
 " „Bei Chat'Karuth's Bart, das ist wundervoll! Überleg nur, was wir alles aus "
-"der Kohle und dem Eisenerz produzieren könnten! Es könnte sogar ausreichen "
-"um...“ "
+"dieser Kohle und diesem Eisenerz produzieren könnten! Es könnte sogar "
+"ausreichen um...“ "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:243
 msgid ""
@@ -74,8 +74,8 @@ msgid ""
 msgstr ""
 " „Ich bitte um Verzeihung, Häuptling, doch wir müssen über eine ernste Sache "
 "sprechen. Die Felsen im Westen unseres Lagers schrumpfen schnell unter den "
-"Spitzhacken unserer Arbeiterund es ist nur eine Frage kurzer Zeit, bis sie "
-"alle völlig abgetragen sind.“ "
+"Spitzhacken unserer Arbeiter und es ist nur eine Frage kurzer Zeit, bis sie "
+"völlig abgetragen sind.“ "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:326
 msgid ""
@@ -116,8 +116,8 @@ msgid ""
 "all clans!\" "
 msgstr ""
 " „Unsere Jäger sind gerade in den Wäldern unterwegs, um Dir das schönste "
-"Stück zu erlegen Thron.<br>Ich verspreche Dir, noch vor Sonnenuntergang wird "
-"Dir ein Mahl vorgesetzt, wie es nur dem Häuptling aller Klans zustehen "
+"Stück zu erlegen Thron.<br> Ich verspreche Dir, noch vor Sonnenuntergang "
+"wird Dir ein Mahl vorgesetzt, wie es nur dem Häuptling aller Klans zustehen "
 "kann!“ "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:235
@@ -150,7 +150,7 @@ msgstr ""
 "Ich verbrachte Nächte damit, wachzuliegen, ruhelos, viel erschöpfter, als "
 "ich jemals dachte, dass es jemand sein könnte. Doch, wenn ich meine Augen "
 "schließe, sehe ich, wie die Festung, die mein Vater erbaute, von Flammen "
-"verzehrt wird. Der Thron unter den Bäumen, das Symbol der Einigkeit und des "
+"verzehrt wird. Der Thron Unter Cen Bäumen, das Symbol der Einigkeit und des "
 "Friedens unter unserer Sippe, wurde zum Keil, der uns auseinander treibt.“ "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:433
@@ -165,7 +165,7 @@ msgstr ""
 "leider müssen wir weiter ausharren. Der Tag an dem wir endlich nach Hause "
 "zurückkehren können, kann nicht mehr weit entfernt sein - er darf es nicht. "
 "Ich habe gebetet, dass es wieder wärmer werde, und dafür, dass der Krieg "
-"endlich ein Ende fände.<br>Doch so wie es aussieht, wurde keines meiner "
+"endlich ein Ende fände.<br> Doch so wie es aussieht, wurde keines meiner "
 "Gebete erhört.“</p> "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:219
@@ -187,7 +187,7 @@ msgstr ""
 "beherrscht von Instinkten. Keiner meiner Brüder wird jemals die Kontrolle "
 "über den hölzernen Thron erlangen und halten, keiner der Stämme wird stark "
 "genug sein, die anderen zu unterwerfen. Das Schlachten wird kein Ende "
-"nehmen, bis... Ist es das? Wie Vater es mir sagte?<br> Stehe auf, gegen "
+"nehmen, bis... Ist es das? Wie Vater es mir sagte?<br> Stehe auf gegen "
 "jeden, der unsere schiere Existenz bedroht, möge er auch einer von Deinem "
 "eigenen Blute oder Geiste sein?“ "
 
@@ -231,7 +231,7 @@ msgid ""
 msgstr ""
 "„Wie ich gerade feststellte, geht uns das Hartholz aus! Wir können unsere "
 "Krieger nicht in windschiefe Verschläge stecken, noch weniger in solch "
-"gefährlichen Zeiten!<br>Wir brauchen einen Holzhärter, und wir brauchen ihn "
+"gefährlichen Zeiten!<br> Wir brauchen einen Holzhärter, und wir brauchen ihn "
 "jetzt!“"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:414
@@ -270,7 +270,7 @@ msgstr ""
 "mächtige Befestigungen und große Gebäude gewinnen können - nur hilft das "
 "nicht gegen undichte Dächer! Vielleicht genießen die Jungen ja ihre Nächte "
 "im Regen, aber ich kann einfach keinen Schlaf finden, während mir die "
-"Regeltropfen aufs Gesicht fallen!<br> Das ist jedenfalls ein Problem, um das "
+"Regentropfen ins Gesicht fallen!<br> Das ist jedenfalls ein Problem um das "
 "wir uns kümmern sollten!“"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:301
@@ -286,7 +286,7 @@ msgstr ""
 "„Ich muss dir zustimmen, damit hast du Recht, alter Mann.<br> Es scheinen "
 "sich durchaus einige Tiere hier in den Wäldern aufzuhalten - wir können "
 "durchaus mehr von ihnen jagen. Und natürlich würden sich die Leute für eine "
-"neue Taverne begeistern - hey, wir könnten sie ‚Throns Stolz‘ oder so "
+"neue Taverne begeistern - hey, wir könnten sie 'Throns Stolz' oder so "
 "nennen, wenn Du möchtest!“"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:276
@@ -334,7 +334,7 @@ msgid ""
 "want. And we need the coal to keep the smelter's ovens burning.\""
 msgstr ""
 "„Da wir nun sowohl die Minen, als auch die Nahrung, um diese zu unterhalten, "
-"haben, sollten wir das, was unsere Bergarbeiter uns schürfen, in einen "
+"haben; sollten wir das, was unsere Bergarbeiter uns schürfen, in einen "
 "nützlicheren Zustand bringen. Das Eisenerz muß zu Eisen geschmolzen werden, "
 "damit es zu allem, was wir brauchen, geschmiedet werden kann. Außerdem "
 "brauchen wir Kohle, um den Hochofen des Schmelzers am Brennen zu halten.“"
@@ -373,7 +373,7 @@ msgstr ""
 "„Nun, alter Freund, dies sollte sicherstellen, dass unsere Befestigungen "
 "nicht unter dem ersten Kampfschrei unserer Feinde zusammenbrechen! Jetzt "
 "können wir uns ungefährdet weiter ausbreiten!<br> Dennoch, es würde nicht "
-"schaden, etwas Mörtel für unsere weitere Kampagne zu produzieren; damit "
+"schaden, etwas Mörtel für unsere weiteren Aktionen zu produzieren; damit "
 "könnten wir, wenn wir müssten, eine Festung errichten, wie sie die Welt noch "
 "nicht gesehen hat!“"
 
@@ -415,7 +415,7 @@ msgstr "Eines schönen Morgens"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:438
 msgid "A friendly village joined us!"
-msgstr "Ein freundliches Dorf hat sich uns angeschlossen!"
+msgstr "Ein freundlich gesinntes Dorf hat sich uns angeschlossen!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:143
 msgid ""
@@ -478,12 +478,13 @@ msgid ""
 "mountain. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr ""
 "Bessere Gebäude können zusätzlich andere verarbeitete Materialien als "
-"Hartholz benötigen. Eine davon ist Mörtel, der aus rohem Stein, Wasser und "
-"Kohle in einer Kalkbrennerei hergestellt wird. Wasser erhältst Du, indem Du "
-"einen Brunnen auf einer Wasserader errichtest. Deine Geologen können "
-"Wasseradern entdecken, wenn Du sie zu einer Flagge schickst, die nicht in "
-"den Bergen liegt. Kohle wird entweder von der Köhlerei oder einer Kohlemine "
-"geliefert."
+"Hartholz benötigen.\n"
+"Eine davon ist Mörtel, der aus rohem Stein, Wasser und Kohle in einer\n"
+"Kalkbrennerei hergestellt wird. Wasser erhältst Du, indem Du einen Brunnen\n"
+"auf einer Wasserader errichtest. Deine Geologen können Wasseradern "
+"entdecken,\n"
+"wenn Du sie zu einer Flagge schickst, die nicht in den Bergen liegt.\n"
+"Kohle wird entweder von der Köhlerei oder einer Kohlemine geliefert."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:164
 msgid ""
@@ -539,7 +540,7 @@ msgstr "Der tapfere Boldreth tritt neben dich..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr "Errichte einen Rinderhof"
+msgstr "Errichte eine Rinderzucht."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -557,23 +558,27 @@ msgid ""
 "mountain terrain. Suitable places for mines are displayed as hammer and pick."
 msgstr ""
 "Errichte eine Kohlemine und eine Eisenmine. Um dies zu tun, plaziere eine "
-"Flagge auf dem Berghang im Osten (auf dem Gebirge selbst, nicht auf der "
-"Bergwiese). Wenn Du auf die Flagge klickst, kannst Du Geologen dorthin "
-"entsenden. Da die Flagge in den Bergen liegt, werden diese nach Erzen "
-"spüren; sonst würden sie nach Wasser suchen. Dann errichte eine Mine für "
-"beide Ressourcen, die er finden wird, an der richtigen Stelle:<br> Schwarz - "
-"Kohle<br> Rot - Eisenerz<br> Gelb - Gold<br> Grau - Granit<br> Minen können "
-"nur auf Berggebiet errichtet werden. Passende Orte für Minen werden durch "
+"Flagge auf dem Berghang\n"
+"im Osten (auf dem Gebirge selbst, nicht auf der Bergwiese). Wenn Du auf die "
+"Flagge klickst,\n"
+"kannst Du Geologen dorthin entsenden.\n"
+"Da die Flagge in den Bergen liegt, werden diese nach Erzen spüren;\n"
+"sonst würden sie nach Wasser suchen.\n"
+"Dann errichte eine Mine für beide Ressourcen, die er finden wird, an der "
+"richtigen Stelle:<br> Schwarz - Kohle<br> Rot - Eisenerz<br> Gelb - Gold<br> "
+"Grau - Granit<br>\n"
+"Minen können nur auf Berggebiet errichtet werden. Passende Orte für Minen "
+"werden durch\n"
 "das Hammer-und-Spitzhacken-Symbol gekennzeichnet."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
 msgid "Build a fernery"
-msgstr "Errichte einen Reet- und Flachshof"
+msgstr "Errichte einen Reethof."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Erbaue einen Jäger, eine Wildhüterhütte und eine Taverne"
+msgstr "Erbaue eine Jägerhütte, eine Wildhüterhütte und eine Taverne."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
@@ -583,24 +588,24 @@ msgstr "Baue einen Kalkbrenner und Kohlewirtschaft"
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
 msgstr ""
 "Errichte eine Kalkbrennerei, einen Brunnen und eine Köhlerei oder eine "
-"Kohlemine"
+"Kohlemine."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr "Baue einen Hochofen"
+msgstr "Baue einen Hochofen."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr "Baue einen Brunnen, einen Hof und eine Bäkerei"
+msgstr "Baue einen Brunnen, einen Hof und eine Bäckerei."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
 msgid "Build a wood hardener"
-msgstr "Baue einen Holzhärter"
+msgstr "Baue einen Holzhärter."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr "Errichte Kohle- und Eisenminen"
+msgstr "Errichte Kohle- und Eisenminen."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
@@ -613,7 +618,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:139
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Baue Gebäude aus und errichte Kleinbrauerei"
+msgstr "Baue Gebäude aus und errichte eine Kleinbrauerei."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
@@ -625,11 +630,11 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Expand north-east and build a quarry"
-msgstr "Stoße nach Nordosten vor und baue einen Steinbruch"
+msgstr "Stoße nach Nordosten vor und baue einen Steinbruch."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Expand north-east to the stones"
-msgstr "Expandiere nordöstlich zu den Steinen"
+msgstr "Expandiere nordöstlich zu den Steinen."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -641,11 +646,13 @@ msgid ""
 "secondary building - others will follow."
 msgstr ""
 "Um zu arbeiten, benötigen Deine Bergleute Nahrung.<br> Ein Jäger kann Tiere "
-"jagen, während ein Wildhüter dafür sorgt, dass diese nicht aussterben. Das "
-"Fleisch wird dann in einer Taverne zu Essensrationen für die Bergarbeiter "
-"verarbeitet.<br> Dies ist erst das erste Beispiel einer Ware, die "
-"verarbeitet werden muss, bevor sie in einem anderen Gebäude verwendet werden "
-"kann. Andere werden hinzukommen."
+"jagen,\n"
+"während ein Wildhüter dafür sorgt, dass diese nicht aussterben. Das Fleisch "
+"wird dann\n"
+"in einer Taverne zu Essensrationen für die Bergarbeiter verarbeitet.<br> "
+"Dies ist\n"
+"das erste Beispiel einer Ware, die verarbeitet werden muss, bevor sie\n"
+"in einem anderen Gebäude verwendet werden kann. Andere werden hinzukommen."
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -701,7 +708,7 @@ msgstr "Neue Aufgaben"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:424
 msgid "One fullmoon night"
-msgstr "In einer Vollmondnacht"
+msgstr "In einer Vollmondnacht."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:121
 msgid ""
@@ -710,15 +717,15 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well at a spot\n"
 "where your geologists find a water source."
 msgstr ""
-"Andere Möglichkeiten, Nahrung herzustellen - andere Arten von Nahrung - sind "
-"Fischer und Jäger. Der Weizen der Höfe muss zuerst zusammen mit Wasser in "
-"der Bäckerei verarbeitet werden, bevor er essbar wird. Wasser kann durch den "
-"Bau eines Brunnen über einer von Geologen entdeckten Wasserader gewonnen "
-"werden."
+"Andere Möglichkeiten, Nahrung herzustellen - andere Arten von Nahrung -\n"
+"sind Fischer und Jäger. Der Weizen der Höfe muss zuerst zusammen\n"
+"mit Wasser in der Bäckerei verarbeitet werden, bevor er essbar wird.\n"
+"Wasser kann durch den Bau eines Brunnen über einer von Geologen entdeckten\n"
+"Wasserader gewonnen werden."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid "Provide your miners with food"
-msgstr "Versorge deine Bergarbeiter mit Nahrung"
+msgstr "Versorge Deine Bergarbeiter mit Nahrung."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Refine your mined resources"
@@ -726,7 +733,7 @@ msgstr "Veredle deine Erze"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
-msgstr "Beginne damit, Minen in den Bergen zu errichten"
+msgstr "Beginne damit, Minen in den Bergen zu errichten."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:241
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:259
@@ -750,7 +757,8 @@ msgid ""
 "into iron first."
 msgstr ""
 "Das Eisenerz, das die Bergleute schürfen, ist noch nicht zu gebrauchen - es "
-"muss zuerst zu Eisen geschmolzen werden."
+"muss zuerst\n"
+"zu Eisen geschmolzen werden."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
@@ -765,8 +773,7 @@ msgid ""
 "fernery."
 msgstr ""
 "Das dritte Material, das für die besseren Gebäude notwendig ist, ist Reet, "
-"der für die Dächer verwendet wird. Er wird auf einem Reet- und Flachshof "
-"angebaut."
+"der für die Dächer verwendet wird. Er wird auf einem Reethof angebaut."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
@@ -804,11 +811,13 @@ msgid ""
 "out of wheat and water."
 msgstr ""
 "Die Straßen sind seit einer langen Zeit schwerer Last ausgesetzt und ein "
-"Träger reicht gewöhnlich nicht aus, um die Güter zügig zu transportieren. "
-"Warenstau ist die Folge davon. Diese Straßen benötigen daher einen zweiten "
-"Träger: Einen Ochsen, der hilft, die Waren zu tragen, was die "
-"Transportkapazität verdoppelt.<br> Ochsen werden im Rinderhof unter "
-"Verwendung von Weizen und Wasser gezüchtet."
+"Träger\n"
+"reicht gewöhnlich nicht aus, um die Güter zügig zu transportieren. Warenstau "
+"ist die Folge davon.\n"
+"Diese Straßen benötigen daher einen zweiten Träger: Einen Ochsen, der hilft, "
+"die Waren zu befördern,\n"
+"was die Transportkapazität verdoppelt.<br> Ochsen werden in der Rinderzucht "
+"unter Verwendung von Weizen und Wasser gezüchtet."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
 msgid ""
@@ -816,7 +825,8 @@ msgid ""
 "otherwise move on to the next mission."
 msgstr ""
 "Du hast diese Mission abgeschlossen. Du kannst weiterspielen, wenn Du dies "
-"möchtest. Fahre ansonsten mit der nächsten Mission fort."
+"möchtest.\n"
+"Fahre ansonsten mit der nächsten Mission fort."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:248
@@ -828,7 +838,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:359
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:368
 msgid "Your loyal companion"
-msgstr "Dein treuer Begleiter"
+msgstr "Dein treuer Begleiter."
 
 #~ msgid "Tutorial2 - A Place to call Home"
 #~ msgstr "Tutorial2 - Ein Ort wie zuhause"

@@ -7,43 +7,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-03-25 18:56+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-04-16 18:51+0000\n"
+"Last-Translator: Odin Hørthe Omdal <odin.omdal@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:33+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-04-17 04:32+0000\n"
+"X-Generator: Launchpad (build 12735)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Augo i myrkret"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - Frå fiende til ny byrjing"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Strendene i Malac' Mor"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Ein heim"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
-msgstr ""
+msgstr "02 - Ein eksil-utpost"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Dette landet er vårt"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr ""
+msgstr "Eit fleirspelar kampkart på ei X-forma øy"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -53,6 +53,11 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
+"Eit par mil utanfor Gerion-kysten ligg ei lita, namnlaus øy. Til no har du "
+"ikkje hatt nokon grunn til å segla dit, men i går kom ei stor eldkule frå "
+"himmelen og slo ned midt i øya. Er det eit teikn frå gudane? Du trur so, og "
+"vonar stammen din vil finna skatten på denne øya, før dei andre stammane "
+"fylgjer etter"
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -61,16 +66,22 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only enough place for one tribe."
 msgstr ""
+"Stammen din budde lengje ved dette vakre og einsame isbrevatnet. Ingen plaga "
+"dykk og det var ressursar nok til heile stamma, men for eit par månadar "
+"sidan kom ei anna stamme over fjellet og busette seg. Her er ikkje plass til "
+"meir enn ein stamme, det er du trygg på."
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr ""
+msgstr "Eit fleirspelar-kart for kamp på ei lita sirkelforma øy."
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
 msgstr ""
+"Eit mystisk land, fullt av forskjellege landskap som alle kryssast av eit "
+"par store elver."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -78,12 +89,17 @@ msgid ""
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
 msgstr ""
+"Etter ein astroide slo ned, og den harde vinteren som fylgde, har tre øyer "
+"no vorte samanknytt av is og stein. Det vart slutten på den fredelege "
+"sameksistensen mellom tre stammar."
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
+"Ein anna underleg test frå gudane. Den einaste måten å koma til den andre "
+"sida, er å taka over landområda til fiendane dine."
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
@@ -96,39 +112,39 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlantarne - flammesprinten"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr ""
+msgstr "Atoll"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "Barbarar - det andre imperiet"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Utfordrande. Introduserer atlantarne"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
-msgstr ""
+msgstr "Sjakkmatt"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr ""
+msgstr "Kometøya"
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
-msgstr ""
+msgstr "Krater"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Ørkenturnering"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "Inntørka elveleie"
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -137,34 +153,37 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Kvar stamme er omringa av fire mektige fjell. Kven vert fyrste erobrar for å "
+"få ressursane til si eigi stamme? Hint: Vatn finst rundt elvi, snjomenn "
+"merkar meir vatn, kvart av fjelli har berre ein ressurs kvar."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Lett. Introduserar barbarane"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Lett. Introduserer Imperiet"
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
-msgstr ""
+msgstr "Alviske skogar"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "Imperiet - Månedane i eksil"
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
-msgstr ""
+msgstr "Fiende i sikte"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr ""
+msgstr "Dei finske sjøar"
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
-msgstr ""
+msgstr "Leik med elden"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -183,11 +202,11 @@ msgstr ""
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
-msgstr ""
+msgstr "Fire slott"
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
-msgstr ""
+msgstr "Fire fjell"
 
 #: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
@@ -198,15 +217,15 @@ msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Isbresjøen"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Gylden halvøy"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
-msgstr ""
+msgstr "Nedslag"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -224,7 +243,7 @@ msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
-msgstr ""
+msgstr "Øyer i krig"
 
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
@@ -263,11 +282,11 @@ msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Stillheitens sjø"
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
-msgstr ""
+msgstr "Siste bastion"
 
 #: ../../maps/Crater.wmf/elemental:9
 msgid ""
@@ -290,12 +309,12 @@ msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
-msgstr ""
+msgstr "Mystisk labyrint"
 
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Enno ikkje laga"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -308,11 +327,11 @@ msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
-msgstr ""
+msgstr "Avtalt møte"
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
-msgstr ""
+msgstr "Elveland"
 
 #: ../../campaigns/cconfig:38
 msgid ""
@@ -345,23 +364,23 @@ msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
-msgstr ""
+msgstr "Sumpøya"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
-msgstr ""
+msgstr "Sumpmunker"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
-msgstr ""
+msgstr "Det fjerne nord"
 
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
-msgstr ""
+msgstr "Det grøne platået"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "Oasetriangelet"
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
@@ -373,7 +392,7 @@ msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
-msgstr ""
+msgstr "Den store innsjøen"
 
 #: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
@@ -383,17 +402,19 @@ msgstr ""
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
-msgstr ""
+msgstr "Den lange vegen"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The pass through the mountains"
-msgstr ""
+msgstr "Fjellpasset"
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
 "There are two big questions around: Who created this unbelievably big maze "
 "and what can be found inside?"
 msgstr ""
+"De to viktugaste spørsmåli er: Kven laga denne digre labyrinten og kva finn "
+"me her?"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
@@ -427,7 +448,7 @@ msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
-msgstr ""
+msgstr "Tre krigarar"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -435,7 +456,7 @@ msgstr ""
 
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
-msgstr ""
+msgstr "To frontar"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
@@ -443,7 +464,7 @@ msgstr ""
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
-msgstr ""
+msgstr "Krigen om dalane"
 
 #: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
@@ -504,7 +525,7 @@ msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
-msgstr ""
+msgstr "Visentdalen"
 
 #: ../../maps/Plateau.wmf/elemental:9
 msgid ""

@@ -12,6 +12,7 @@ build_materials_done = false
 cattle_farm_done = false
 
 function send_msg(t)
+   t.h = 400
    plr:message_box(t.title, t.body, t)
 end
 

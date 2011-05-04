@@ -580,6 +580,7 @@ bool Game::run
 
 		g_gr->flush(PicMod_Game);
 		g_anim.flush();
+		g_gr->flush_animations();
 
 		m_state = gs_notrunning;
 	} else {
@@ -587,11 +588,12 @@ bool Game::run
 		m_state = gs_running;
 		//handle network
 		while (m_state == gs_running) {
+			// TODO this should be improved.
 #ifndef WIN32
 			if (usleep(100) == -1)
 				break;
 #else
-			Sleep(10);
+			Sleep(1);
 #endif
 			think();
 		}

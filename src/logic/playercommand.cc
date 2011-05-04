@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1216,7 +1216,7 @@ void Cmd_EnemyFlagAction::Read
 			fr           .Unsigned8 ();
 			uint32_t const flag_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<Map_Object>(flag_serial).serial();
+				serial = flag_serial ? mol.get<Map_Object>(flag_serial).serial() : 0;
 			} catch (_wexception const & e) {
 				throw game_data_error("flag %u: %s", flag_serial, e.what());
 			}
@@ -1242,8 +1242,8 @@ void Cmd_EnemyFlagAction::Write
 	fw.Unsigned8 (0);
 
 	// Now serial
-	Map_Object const & obj = *egbase.objects().get_object(serial);
-	fw.Unsigned32(mos.get_object_file_index(obj));
+	Map_Object const * obj = egbase.objects().get_object(serial);
+	fw.Unsigned32(mos.get_object_file_index_or_zero(obj));
 
 	// Now param
 	fw.Unsigned8 (sender());

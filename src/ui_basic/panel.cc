@@ -1138,14 +1138,13 @@ std::string Panel::ui_fn() {
 		return UI_FONT_NAME_SERIF;
 	if (style == "sans")
 		return UI_FONT_NAME_SANS;
-	std::string const temp(g_fs->FS_CanonicalizeName("fonts/" + style));
-	if (g_fs->FileExists(temp))
+	if (g_fs->FileExists("fonts/" + style))
 		return style;
 	log
 		("Could not find font file \"%s\"\n"
 		 "Make sure the path is given relative to Widelands font directory. "
 		 "Widelands will use standard font.\n",
-		 temp.c_str());
+		 style.c_str());
 	return UI_FONT_NAME;
 }
 

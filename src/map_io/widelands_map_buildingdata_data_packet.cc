@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -681,26 +681,53 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 
 			uint16_t nr_workers = fr.Unsigned16();
 			for (uint16_t i = nr_workers; i; --i) {
-				Worker & worker = mol.get<Worker>(fr.Unsigned32());
+				Worker * worker = &mol.get<Worker>(fr.Unsigned32());
 
 				const std::vector<std::string> & compat =
-					descr.compatibility_working_positions(worker.descr().name());
+					descr.compatibility_working_positions(worker->descr().name());
 				if (!compat.empty()) {
 					if (compat[0] == "flash") {
 						if (compat.size() != 2)
 							throw game_data_error
 								("working position '%s' compat usage: flash other-name",
-								 worker.descr().name().c_str());
+								 worker->descr().name().c_str());
 
-						worker.flash(compat[1]);
+						worker->flash(compat[1]);
+					} else if (compat[0] == "replace") {
+						if (compat.size() != 2)
+							throw game_data_error
+								("working position '%s' compat usage: replace other-name",
+								 worker->descr().name().c_str());
+
+						const Tribe_Descr & tribe = worker->tribe();
+
+						log
+							("COMPAT(%s): replace '%s' (%u) by '%s' in '%s' (%u)\n",
+							 tribe.name().c_str(),
+							 worker->descr().name().c_str(), worker->serial(),
+							 compat[1].c_str(),
+							 descr.name().c_str(), productionsite.serial());
+
+						mol.schedule_destroy(*worker);
+
+						const Worker_Descr & descr =
+							*tribe.get_worker_descr
+							(tribe.safe_worker_index(compat[1]));
+						worker = &descr.create
+							(game,
+							 productionsite.owner(),
+							 &productionsite,
+							 worker->get_position());
+						worker->start_task_buildingwork(game);
+						mol.schedule_act(*worker);
 					} else
 						throw game_data_error
 							("unknown compat '%s' for working position '%s'",
-							 compat[0].c_str(), worker.descr().name().c_str());
+							 compat[0].c_str(), worker->descr().name().c_str());
 				}
 
 				//  Find a working position that matches this worker.
-				Worker_Descr const & worker_descr = worker.descr();
+				Worker_Descr const & worker_descr = worker->descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
 					(wl_const_range<Ware_Types> j(working_positions);;
@@ -724,7 +751,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						wp += count;
 				end_working_position:;
 				}
-				wp->worker = &worker;
+				wp->worker = worker;
 			}
 
 			if (nr_worker_requests + nr_workers < descr.nr_working_positions())

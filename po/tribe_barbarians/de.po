@@ -6,17 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2011-02-14 14:27+0000\n"
-"Last-Translator: Martin <Unknown>\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-04-27 19:51+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-04-28 04:32+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
+
+#: ../../tribes/barbarians/conf:72
+msgid "Blackwood"
+msgstr "Hartholz"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -104,11 +108,11 @@ msgstr "Baracke"
 #: ../../tribes/barbarians/conf:157
 #: ../../tribes/barbarians/conf:207
 msgid "Barrier"
-msgstr "Grenzposten"
+msgstr "Barriere"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Battle Arena"
-msgstr "Turnierplatz"
+msgstr "Arena"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Battle Axe"
@@ -134,7 +138,7 @@ msgid ""
 msgstr ""
 "Fisch ist neben Fladenbrot und Fleisch ein Grundnahrungsmittel der Barbaren. "
 "Er wird in Tavernen, Wirtshäusern, Gaststätten und Ausbildungslagern sowie "
-"auf Turnierplätzen benötigt."
+"auf Arenen benötigt."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Big Inn"
@@ -143,10 +147,6 @@ msgstr "Gaststätte"
 #: ../../tribes/barbarians/conf:119
 msgid "Blacksmith"
 msgstr "Schmied"
-
-#: ../../tribes/barbarians/conf:72
-msgid "Blackwood"
-msgstr "Hartholz"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -386,11 +386,11 @@ msgstr "Festung"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Gamekeeper"
-msgstr "Wildpfleger"
+msgstr "Wildhüter"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Gamekeeper's Hut"
-msgstr "Wildpflegerhütte"
+msgstr "Wildhüterhütte"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Geologist"
@@ -420,9 +420,9 @@ msgid ""
 "war mill) and different armours (in the helmsmithy)."
 msgstr ""
 "Gold ist das wertvollste Metall; nur sehr wichtige Dinge werden damit "
-"verziert. Es wird im Schmelzofen aus Golderz erzeugt. Gold wird als "
-"kostbares Baumaterial verwendet und zur Herstellung höherwertiger"
-"Waffen und Helme in den entsprechenden Schmieden."
+"verziert. Es wird im Hochofen aus Golderz erzeugt. Gold wird als kostbares "
+"Baumaterial verwendet und zur Herstellung höherwertiger Waffen und Helme in "
+"den entsprechenden Schmieden."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -545,7 +545,7 @@ msgid ""
 "produce weapons and tools in the metalwork shop, axefactory, war mill and in "
 "the helmsmithy."
 msgstr ""
-"Die Herstellung von Eisen erfolgt im Schmelzofen aus Eisenerz. Eisen wird "
+"Die Herstellung von Eisen erfolgt im Hochofen aus Eisenerz. Eisen wird "
 "benötigt, um Werkzeuge in der Werkzeugschmiede bzw. Waffen in der "
 "Axtmanufaktur, Waffenschmiede oder Helmschmiede anzufertigen."
 
@@ -554,8 +554,7 @@ msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
-"Eisenerz wird in Eisenminen gefördert. Im Schmelzofen wird daraus später "
-"Eisen."
+"Eisenerz wird in Eisenminen gefördert. Im Hochofen wird daraus später Eisen."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -611,7 +610,7 @@ msgstr ""
 "Fleisch enthält viel Energie. Es wird von Jägern durch das Erlegen von Wild "
 "zu Verfügung gestellt und dient in Tavernen, Wirtshäusern und Gaststätten "
 "zum Erzeugen von Rationen, Snacks und Mahlzeiten für Bergleute. Fleisch wird "
-"außerdem im Ausbildungslager und auf dem Turnierplatz verspeist."
+"außerdem im Ausbildungslager und in der Arena verspeist."
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
@@ -636,11 +635,11 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
-"Nur dieses Bier ist gut genug für die Krieger auf dem Turnierplatz. Man "
-"sagt, die ganze Kraft der Barbaren liege darin. Starkbier hilft den "
-"Kriegern, ihre Ausweichfertigkeiten von Stufe 0 über Stufe 1 bis zur Stufe 2 "
-"zu trainieren. Starkbier wird außerdem in Gaststätten für das Zubereiten von "
-"Mahlzeiten benötigt."
+"Nur dieses Bier ist gut genug für die Krieger in der Arena. Man sagt, die "
+"ganze Kraft der Barbaren liege darin. Starkbier hilft den Kriegern, ihre "
+"Ausweichfertigkeiten von Stufe 0 über Stufe 1 bis zur Stufe 2 zu trainieren. "
+"Starkbier wird außerdem in Gaststätten für das Zubereiten von Mahlzeiten "
+"benötigt."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -917,7 +916,7 @@ msgstr "Scharfe Axt"
 msgid "Shovel"
 msgstr "Schaufel"
 
-#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
 msgstr "Schlaf"
@@ -940,7 +939,7 @@ msgstr "Hüttenarbeiter"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Smelting Works"
-msgstr "Schmelzofen"
+msgstr "Hochofen"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -1008,7 +1007,7 @@ msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
-"Der Wildpfleger sorgt dafür, dass die Population der Wildtiere stabil bleibt."
+"Der Wildhüter sorgt dafür, dass die Population der Wildtiere stabil bleibt."
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -1031,7 +1030,7 @@ msgstr ""
 "Fladenbrot. Nach diesem Rezept sind Weizen und Wasser die einzigen Zutaten. "
 "Tavernen, Wirtshäuser und Gaststätten benötigen Fladenbrote für die "
 "Zubereitung von Rationen, Snacks und Mahlzeiten. Fladenbrote werden außerdem "
-"im Ausbildungslager und auf dem Turnierplatz verzehrt."
+"im Ausbildungslager und in der Arena verzehrt."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -1074,7 +1073,7 @@ msgid ""
 "several buildings: lime kiln, smelting works, axefactory, war mill, "
 "helmsmithy."
 msgstr ""
-"Kohle dient bei den Barbaren gewöhnlich zum Feuern von Schmelzofen, "
+"Kohle dient bei den Barbaren gewöhnlich zum Feuern von Hochofen, "
 "Axtmanufaktur, Waffenschmiede, Helmschmiede und Kalkbrennerei. Kohle wird "
 "vor allem in Kohlenminen gefördert. Die Köhlerei hingegen produziert Kohle "
 "aus Baumstämmen."
@@ -1294,22 +1293,22 @@ msgstr ""
 "Verbessert Angriff des Soldaten 4 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
-#: ../../tribes/barbarians/battlearena/conf:26
+#: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Verbessert Ausweichen des Soldaten von 0 auf 1"
 
-#: ../../tribes/barbarians/battlearena/conf:27
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Verbessert Ausweichen des Soldaten 0 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)."
 
-#: ../../tribes/barbarians/battlearena/conf:28
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Verbessert Ausweichen des Soldaten von 1 auf 2"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
@@ -1473,8 +1472,8 @@ msgid ""
 "soldiers from attack level 0 to level 1."
 msgstr ""
 "Junge Krieger warten nur darauf, das Kämpfen mit dieser mächtigen Waffe zu "
-"erlernen. Die scharfe Axt ist schwerer und schärfer als die herkömmliche. "
-"Sie wird in Axtmanufaktur oder Waffenschmiede hergestellt. Im "
+"erlernen. Die scharfe Axt ist schwerer und schärfer als die Herkömmliche. "
+"Sie wird in der Axtmanufaktur oder Waffenschmiede hergestellt. Im "
 "Ausbildungslager erhöht sie - bei entsprechender Verpflegung - die "
 "Angriffsstärke eines Kriegers von Stufe 0 auf Stufe 1."
 

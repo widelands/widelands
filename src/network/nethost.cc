@@ -652,11 +652,12 @@ void NetHost::run(bool const autorun)
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
 		while (not d->dedicated_start) {
 			handle_network();
+			// TODO this should be improved.
 #ifndef WIN32
 			if (usleep(200) == -1)
 				return;
 #else
-			Sleep(20);
+			Sleep(1);
 #endif
 		}
 		d->dedicated_start = false;

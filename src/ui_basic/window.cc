@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
+#include "log.h"
 
 #include "compile_assert.h"
 
@@ -137,6 +138,16 @@ void Window::update_desired_size()
 	if (m_center_panel) {
 		uint32_t innerw, innerh;
 		m_center_panel->get_desired_size(innerw, innerh);
+
+		// Never bigger than maximum available size
+		// TODO fix this properly with a scrollbar after release of build16
+		// -->
+		if ((innerh + get_tborder() + get_bborder()) > get_parent()->get_h())
+			innerh = get_parent()->get_h() - get_tborder() - get_bborder();
+		if ((innerw + get_lborder() + get_rborder()) > get_parent()->get_w())
+			innerw = get_parent()->get_w() - get_lborder() - get_rborder();
+		// <--
+
 		set_desired_size
 			(innerw + get_lborder() + get_rborder(),
 			 innerh + get_tborder() + get_bborder());

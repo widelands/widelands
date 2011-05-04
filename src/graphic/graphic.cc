@@ -475,6 +475,7 @@ const PictureID & Graphic::get_picture
 
 		try {
 			rec.picture = load_image(fname, alpha);
+			rec.modules = 0;
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());

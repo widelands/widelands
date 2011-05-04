@@ -18,6 +18,8 @@ use("map", "texts")
 
 -- Some messages that spare some typing
 function send_msg(msg)
+   if not msg.h then msg.h = 400 end
+   if not msg.w then msg.w = 450 end
    p1:message_box(msg.title, msg.body, msg)
 end
 function add_obj(t)

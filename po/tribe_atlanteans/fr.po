@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2011-02-08 18:55+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-02-23 23:45+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:36+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -89,7 +89,7 @@ msgstr "Cuit du pain pour les travailleurs"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bakingtray"
-msgstr "Le plateau à four"
+msgstr "Plaque de cuisson"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
@@ -114,15 +114,16 @@ msgstr "Ferme de racines noires"
 
 #: ../../tribes/atlanteans/conf:60
 msgid "Blackroot Flour"
-msgstr "Fleur de racine noire"
+msgstr "Farine de racine noire"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
 msgstr ""
-"La farine de radis noir est produite dans les moulins à partir de radis "
-"noir. Elle est utilisée dans les boulangeries pour faire du pain délicieux."
+"La farine de racines noires est produite dans les moulins à partir de "
+"raciness noires. Elle est utilisée dans les boulangeries pour faire du pain "
+"délicieux."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -130,23 +131,23 @@ msgstr "Fermier de racines noires"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Blackrootfield"
-msgstr "Champs de racine noire"
+msgstr "Champs de racines noires"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
-msgstr "Champs de racine noire récolté"
+msgstr "Champs de racines noires récolté"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"
-msgstr "Champs de racine noire moyen"
+msgstr "Champs de racines noires moyen"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Blackrootfield small"
-msgstr "Champs de racine noire petit"
+msgstr "Champs de racines noires petit"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Blackrootfield tiny"
-msgstr "Champs de racine noire très petit"
+msgstr "Champs de racines noires minuscule"
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -154,9 +155,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
-"Les radis noirs sont une sorte spéciale de tubercule produit dans les fermes "
-"à radis noirs et moulut dans les moulins. Les Atlantes aiment sont gout "
-"prononcé et utilisent sa farine pour faire du pain."
+"Les racines noires sont une sorte spéciale de racine produites dans les "
+"fermes à racines noires et pilées dans les moulins. Les Atlantes aiment sont "
+"gout prononcé et utilisent sa farine pour faire du pain."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -180,7 +181,7 @@ msgstr "Seaux"
 
 #: ../../tribes/atlanteans/conf:114
 msgid "Builder"
-msgstr "Constructeur"
+msgstr "Bâtisseur"
 
 #: ../../tribes/atlanteans/conf:115
 msgid "Burner"
@@ -188,7 +189,7 @@ msgstr "Brûleur"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr "Produit du Charbon"
+msgstr "Brûle du charbon."
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
@@ -196,7 +197,7 @@ msgstr "Porteur"
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Porte des élements sur tes routes."
+msgstr "Transporte des marchandises sur vos routes"
 
 #: ../../tribes/atlanteans/conf:155
 #: ../../tribes/atlanteans/conf:201
@@ -209,7 +210,7 @@ msgstr "Village fortifié"
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Charcoal Burner's House"
-msgstr "Charbonnier"
+msgstr "Maison du Charbonnier"
 
 #: ../../tribes/atlanteans/conf:147
 msgid "Citadel"
@@ -221,7 +222,7 @@ msgstr "Charbon"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Coal Mine"
-msgstr "Mine de charbon"
+msgstr "Mine de Charbon"
 
 #: ../../tribes/atlanteans/shipyard/conf:18
 msgid "Constructing ship"
@@ -324,6 +325,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Les pincettes de feu sont un outil du fondeur, qui travaille à la fonderie. "
+"Elles sont produites par le forgeron."
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2011-02-08 18:58+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-02-23 22:54+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -346,6 +346,9 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
+"Les pinces à feu sont l'outil du fondeur, qui travaille dans la fonderie. "
+"Elles sont produites dans la ferronnerie (mais cessent d'êtres produites par "
+"le bâtiment siil est  amélioré en usine de hache ou moulin de guerre)."
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
@@ -914,7 +917,7 @@ msgstr "Hache pointue"
 msgid "Shovel"
 msgstr "Pelle"
 
-#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
 msgstr "Au repos"
@@ -1285,22 +1288,22 @@ msgstr ""
 "Augmente l'attaque des soldats 0 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes (build 13))"
 
-#: ../../tribes/barbarians/battlearena/conf:26
+#: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Améliore l'esquive des soldats 0"
 
-#: ../../tribes/barbarians/battlearena/conf:27
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Améliore l'esquive des soldats 0 (Seulement pour compatibilité avec les "
 "vieilles sauvegardes (Build 13))"
 
-#: ../../tribes/barbarians/battlearena/conf:28
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Améliore l'esquive du soldat 1"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
