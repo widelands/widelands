@@ -10,8 +10,8 @@ use("aux", "set")
 -- ==========
 -- Constants 
 -- ==========
--- TODO: parse the scripts and create a new catalog for it
--- set_textdomain("scenario_atl01.wmf")
+set_textdomain("mp_scenario_island_hopping.wmf")
+
 -- TODO: transfer of horses does not work, because of missing scripting of roads?
 -- TODO: bug report: position of players in multiplayer scenarios is fixed to blue or red
 -- TODO: endless game is always starting, also in scenarios

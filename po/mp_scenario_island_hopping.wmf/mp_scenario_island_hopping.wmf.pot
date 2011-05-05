@@ -1,0 +1,51 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2011 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2011-05-05 18:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:36
+msgid ""
+"%i %s<br>"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:10
+msgid ""
+"As a reward, he receives:<br><br>%s"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:29
+msgid ""
+"Game Status"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
+msgid ""
+"Player %i was the first to finished the Island number %i."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
+msgid ""
+"Player %i was the fourth to finished the Island number %i."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
+msgid ""
+"Player %i was the second to finished the Island number %i."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:7
+msgid ""
+"Player %i was the third to finished the Island number %i."
+msgstr ""
+

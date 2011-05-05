@@ -48,10 +48,10 @@ MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"]
 # This is a list with structure:
 #       - target .pot file mask
 #       - base directory to scan for catalogs (referred to Widelands' base dir)
-#       - List of source paths for catalog creation: tells the program which files
-#                       to use for building .pot files (referred to "po/pot/<path_to_pot/"
-#                       dir, so the file pointers inside .pot files actually point
-#                       somewhere useful)
+#       - List of source paths for catalog creation: tells the program which
+#         files to use for building .pot files (referred to
+#         "po/pot/<path_to_pot/" dir, so the file pointers inside .pot files
+#         actually point somewhere useful)
 #
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
@@ -64,6 +64,9 @@ ITERATIVEPOTS = [
     ),
     ("map_%(name)s/map_%(name)s", "maps/",
          [ "../../maps/%(name)s/scripting/*.lua", ]
+    ),
+    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP Scenarios/",
+         [ "../../maps/MP Scenarios/%(name)s/scripting/*.lua", ]
     ),
     ("tribe_%(name)s/tribe_%(name)s", "tribes/",
         ["../../tribes/%(name)s/conf",
@@ -212,7 +215,7 @@ def do_update_potfiles():
 
         # Generate .pot catalogs
         for pot, srcfiles in potfiles:
-            pot = pot.lower()
+            pot = pot.lower().replace(" ", "_")
             path = os.path.normpath("po/" + os.path.dirname(pot))
             do_makedirs(path)
             oldcwd = os.getcwd()
