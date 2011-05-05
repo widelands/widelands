@@ -12,20 +12,12 @@
 
 from glob import glob
 from itertools import takewhile
-from time import strftime,gmtime
 import os
-import re
-import string
 import subprocess
 import sys
 
-from detect_revision import detect_revision
 from lua_xgettext import Lua_GetText
 import confgettext
-
-# The current version of source
-SRCVERSION=detect_revision()
-HEADER_YEAR = strftime("%Y",gmtime())
 
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
@@ -84,22 +76,26 @@ ITERATIVEPOTS = [
     )
 ]
 
+# Paths to search for exectuables
+PATHS = [
+    "/bin", "/usr/bin",
+    "/opt/local/bin", "/sw/bin",
+    "/usr/local/bin"
+]
+def find_exectuable(cmd):
+    """
+    Try to find the executable given some paths. Defaults to just return
+    the cmd if it is not found in any paths
+    """
+    for p in PATHS:
+        full_path = os.path.join(p, cmd)
+        if os.path.isfile(full_path) and os.access(full_path, os.X_OK):
+            return full_path
+    return cmd
 
-# Some useful regular expressions
-RE_NO_DOTFILE="^[^\.]"          # Matches everything but dot-leaded filenames.
-RE_ISO639="^[a-z]{2,2}(_[A-Z]{2,2})?$"  # Matches ISO-639 language codes
-                                        # structure. Note that this doesn't
-                                        # garantees correctness of code.
+MSGMERGE = find_exectuable("msgmerge")
+XGETTEXT = find_exectuable("xgettext")
 
-#Mac OS X hack to support XCode and macports default path
-MACPORTSPATH = "/opt/local/bin/"
-MSGMERGE = "msgmerge"
-if os.path.isfile(MACPORTSPATH + MSGMERGE) and os.access(MACPORTSPATH + MSGMERGE, os.X_OK):
-    MSGMERGE = MACPORTSPATH + MSGMERGE
-
-XGETTEXT = "xgettext"
-if os.path.isfile(MACPORTSPATH + XGETTEXT) and os.access(MACPORTSPATH + XGETTEXT, os.X_OK):
-    XGETTEXT = MACPORTSPATH + XGETTEXT
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"
@@ -110,7 +106,7 @@ XGETTEXTOPTS+=" --msgid-bugs-address=\"widelands-public@lists.sourceforge.net\""
 MSGMERGEOPTS="-q --no-wrap"
 
 
-def do_check_root():
+def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
     if (not os.path.isdir("po")):
         print "Error: no 'po/' subdir found.\n"
@@ -203,24 +199,6 @@ def do_find_iterative(prefix, basedir, srcmasks):
 
 ##############################################################################
 #
-# Find files under "root" matching given pattern
-#
-##############################################################################
-def do_find_files(root, pattern):
-    res = []
-    p = re.compile(pattern)
-
-    for base, dirs, files in os.walk(root):
-            for f in (files):
-                    file = ("%s/%s" % (base[len(root):], f))
-                    if p.match(file):
-                            res.append(file)
-
-    return res
-
-
-##############################################################################
-#
 # Regenerate all .pot files specified above and place them under pot/ tree
 #
 ##############################################################################
@@ -265,10 +243,10 @@ def do_update_potfiles():
 #
 ##############################################################################
 def do_buildpo(po, pot, dst):
-        rv = os.system(MSGMERGE + " %s %s %s -o %s" % (MSGMERGEOPTS, po, pot, dst))
-        if rv:
-            raise RuntimeError("msgmerge exited with errorcode %i!" % rv)
-        return rv
+    rv = os.system(MSGMERGE + " %s %s %s -o %s" % (MSGMERGEOPTS, po, pot, dst))
+    if rv:
+        raise RuntimeError("msgmerge exited with errorcode %i!" % rv)
+    return rv
 
 
 ##############################################################################
@@ -309,42 +287,42 @@ def do_tunepo(src, dst):
 #
 ##############################################################################
 def do_update_po(lang, files):
-        sys.stdout.write("\t%s:\t" % lang)
+    sys.stdout.write("\t%s:\t" % lang)
 
-        for f in files:
-                # File names to use
-                pot = os.path.normpath("po/%s" % f)
-                po = os.path.join(os.path.dirname(pot), lang + '.po')
-                tmp = "tmp.po"
+    for f in files:
+        # File names to use
+        pot = os.path.normpath("po/%s" % f)
+        po = os.path.join(os.path.dirname(pot), lang + '.po')
+        tmp = "tmp.po"
 
-                if not (os.path.exists(po)):
-                        # No need to call msgmerge if there's no translation
-                        # to merge with. We can use .pot file as input file
-                        # below, but we need to make sure the target dir is
-                        # ready.
-                        do_makedirs(os.path.dirname(po))
-                        tmp = pot
-                        fail = 0
-                else:
-                        fail = do_buildpo(po, pot, tmp)
+        if not (os.path.exists(po)):
+            # No need to call msgmerge if there's no translation
+            # to merge with. We can use .pot file as input file
+            # below, but we need to make sure the target dir is
+            # ready.
+            do_makedirs(os.path.dirname(po))
+            tmp = pot
+            fail = 0
+        else:
+            fail = do_buildpo(po, pot, tmp)
 
-                if not fail:
-                        # tmp file is ready, but we need to tune some aspects
-                        # of it
-                        do_tunepo(tmp, po)
+        if not fail:
+            # tmp file is ready, but we need to tune some aspects
+            # of it
+            do_tunepo(tmp, po)
 
-                        if tmp == "tmp.po":
-                                os.remove("tmp.po")
+            if tmp == "tmp.po":
+                os.remove("tmp.po")
 
-                        sys.stdout.write(".")
-                        sys.stdout.flush()
+            sys.stdout.write(".")
+            sys.stdout.flush()
 
-        sys.stdout.write("\n")
+    sys.stdout.write("\n")
 
 
 if __name__ == "__main__":
     # Sanity checks
-    do_check_root()
+    are_we_in_root_directory()
 
     # Make sure .pot files are up to date.
     do_update_potfiles()
