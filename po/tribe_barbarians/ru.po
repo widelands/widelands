@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-03-20 06:22+0000\n"
-"Last-Translator: Georgiy <Unknown>\n"
+"PO-Revision-Date: 2011-05-04 12:03+0000\n"
+"Last-Translator: Izon <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-21 04:33+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-05 04:34+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -363,6 +363,9 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Удочки необходимы рыбакам варваров для рыбной ловли. Это - один из основных "
+"инструментов, изготавливаемых в мастерских по металлу (но не производиться, "
+"если здание было переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
@@ -411,6 +414,8 @@ msgid ""
 "gold, which is used as a precious building material and to produce weapons "
 "and armours."
 msgstr ""
+"Золотая руда добывается на золотых рудниках. В плавильне ее переплавляют в "
+"золото, которое используется в строительстве или ковке оружия и брони."
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -468,7 +473,7 @@ msgstr "Шлемная мастерская"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Помогает переносить ресурсы на загруженных дорогах."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
@@ -480,6 +485,10 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Как можно приготовить закуску, большую закуску или огромную закуску, если "
+"нет никакой кухонной утвари? Проверьте есть ли у вас мастерская по металлу, "
+"которая производит этот вид инструмента (он не производится если мастерская "
+"была переоборудована в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/conf:132
 msgid "Hunter"
@@ -519,12 +528,17 @@ msgid ""
 "produce weapons and tools in the metalwork shop, axefactory, war mill and in "
 "the helmsmithy."
 msgstr ""
+"Железо получают из железной руды в плавильне. Оно используется для "
+"производства инструмента и оружия в мастерских по металлу, на фабрике "
+"топоров, на военном заводе и в кузнице брони."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
+"Железная руда добывается на железных рудниках. Она перерабатывается в чистое "
+"железо в плавильне."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -577,6 +591,10 @@ msgid ""
 "miners. It is also consumed in the training sites (trainingscamp and battle "
 "arena)."
 msgstr ""
+"Мясо - источник энергии. Добывается охотниками и используется тавернами, "
+"трактирами и большими трактирами для приготовления закуски, большой закуски "
+"и огромной закуски для шахтеров. Кроме того необходимо тренировочным "
+"площадкам (учебный плац и арена для сражений)."
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
@@ -601,6 +619,10 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
+"Только это пиво является приемлемым для воинов на арене для сражений. "
+"Некоторые говорят, что вся сила варваров находится в этом пиве. Оно помогает "
+"переподготавливать солдат с уровня уклонения 0 до уровня 1 и 2. Крепкое пиво "
+"также используется в крупных гостиницах, для приготовления еды."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -777,12 +799,16 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Грубые камни основной строительный материал варваров. Они добываются на "
+"каменоломнях и гранитных рудниках."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
+"Грубый камень может быть переработан в бетон, прочный негорючий материал. "
+"Бетон приготавливается на растворном узле."
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
@@ -947,6 +973,8 @@ msgid ""
 "Thatch reed is produced in a fernery and used to make the roofs of buildings "
 "waterproof."
 msgstr ""
+"Тростник выращивается в оранжерее и используется в строительстве, чтобы "
+"сделать крыши зданий водонепроницаемыми."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
