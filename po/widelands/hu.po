@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-05-04 20:24+0000\n"
+"PO-Revision-Date: 2011-05-07 20:19+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-05 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-05-08 04:31+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
@@ -2144,7 +2144,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "magasságok: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:84
 msgid "Invalid World"
@@ -2265,7 +2265,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr ""
+msgstr "terep: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
@@ -2276,7 +2276,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:201
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "tétel %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
 #, c-format
@@ -2977,7 +2977,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
-msgstr ""
+msgstr "<zárva>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
