@@ -224,7 +224,7 @@ if (DEFINED MSVC)
   add_definitions( -Dmkdir=_mkdir )
   add_definitions( -DREDIRECT_OUTPUT )
 
-  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
+  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBRARIES
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
   set(Boost_LIBRARIES "")
   include_directories(${Boost_INCLUDE_DIR})
