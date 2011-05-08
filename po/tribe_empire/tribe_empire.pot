@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -325,6 +325,11 @@ msgstr ""
 #: ../../tribes/empire/conf:66
 msgid ""
 "Fire Tongs"
+msgstr ""
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They are produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/empire/conf:67
@@ -1056,11 +1061,6 @@ msgstr ""
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
 "The chain-armour is a medium armour for Empire soldiers. It is produced in an armour smithy and used in a trainingscamp - together with food - to train soldiers from healthpoints level 2 to level 3."
-msgstr ""
-
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/empire/coal/conf:1

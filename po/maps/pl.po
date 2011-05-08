@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-11-29 21:56+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-01-11 17:39+0000\n"
 "Last-Translator: Mateusz Micał <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:15+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:32+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
 msgstr "01 - Oczy w mroku"
 
-#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
 msgstr "01 - Nowy początek"
 
@@ -123,6 +123,10 @@ msgstr "Atol"
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
 msgstr "Barbarzyńcy - Drugie Imperium"
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr "Trudne. Wprowadza Atlantów"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -345,6 +349,11 @@ msgstr ""
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
 msgstr "Mistyczny labirynt"
+
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+msgid "Not yet implemented"
+msgstr "Jeszcze nie zaimplementowane"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -639,6 +648,9 @@ msgstr ""
 "środku - zielone pogórze, które jest ciężko zdobyć ale łatwo stracić, także "
 "jeśli je chcesz, uważaj na inne plemiona."
 
+#~ msgid "Finish Lakes"
+#~ msgstr "Fińskie jeziora"
+
 #~ msgid "(Tutorial) Barbarians - The second Empire"
 #~ msgstr "(Samouczek) Barbarzyńcy - Drugie Imperium"
 
@@ -823,6 +835,14 @@ msgstr ""
 #~ "zgodzie z sąsiadami?"
 
 #~ msgid ""
+#~ "For centuries you lived peaceful together with the other tribe on the "
+#~ "neighboured island. This peace seems to end now. - Your neighbour begins to "
+#~ "expand."
+#~ msgstr ""
+#~ "Setki lat żyłeś w pokoju z plemieniem na sąsiedniej wyspie. Ale ten pokój "
+#~ "zaczyna się kończyć - twój sąsiad zaczyna się rozwijać."
+
+#~ msgid ""
 #~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
 #~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
 #~ "and official Empire-land are crossing. His task was to defend the Empire-"
@@ -845,3 +865,24 @@ msgstr ""
 
 #~ msgid "01 - From nemesis to genesis"
 #~ msgstr "01 - Od zagłady do odrodzenia"
+
+#~ msgid ""
+#~ "Six months ago, Lutius - a young general of the Empire - was send with 150 "
+#~ "soldiers to the frontier beyond the northern forests where Barbarian-tribes "
+#~ "and official Empire-land are crossing. His task was to defend the Empire-"
+#~ "land. At first, everything was calm. He even talked to a few barbarian "
+#~ "children and thought about a peaceful life - side by side with this archaic "
+#~ "folk. He began to feel safer and his army began to drop their attention off "
+#~ "the potential enemy. That was their fault. At one night in march his "
+#~ "unprepared army was attacked by 100 barbarian footmen and was completely "
+#~ "scattered. Only with his bare life he and a handful of his soldiers survived."
+#~ msgstr ""
+#~ "Sześć miesięcy temu Lucjusz, młody generał Imperium, został wysłany z "
+#~ "oddziałem 150 żołnierzy na granicę wśród północnych lasów, gdzie krzyżują "
+#~ "się ziemie Barbarzyńców i Imperium. Miał za zadanie bronić tej ziemi. Na "
+#~ "początku było spokojnie, nawet rozmawiał z dziećmi barbarzyńców i myślał o "
+#~ "spokojnym życiu w harmonii z tym archaicznym ludem. Poczuł się bezpieczniej, "
+#~ "a jego armia poświęcała mniej uwagi potencjałowi wroga. To był ich błąd. "
+#~ "Pewnej marcowej nocy jego nieprzygotowany do obrony oddział został "
+#~ "zaatakowany przez 100 barbarzyńskich piechurów i zdziesiątkowany. Tylko "
+#~ "dzięki czystemu przypadkowi on i garstka jego żołnierzy zdołali przeżyć."

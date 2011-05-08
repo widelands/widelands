@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
 "PO-Revision-Date: 2010-08-30 23:24+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:17+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -26,6 +26,10 @@ msgstr "(CTRL+) 0-9 Zapamatovat a jít na předchozí zapamatované lokace"
 #: ../../txts/README:67
 msgid ", / .       Go to previous / next location"
 msgstr ", / . Jít na předchozí / další lokaci"
+
+#: ../../txts/tips/general_game.tip:38
+msgid ",' (comma) and '."
+msgstr ""
 
 #: ../../txts/README:123
 msgid "- how to reproduce the bug"
@@ -438,7 +442,11 @@ msgstr ""
 "Máš další otázky? Naše FAQ, wiki a samozřejmě komunitní forum najdeš na "
 "www.widelands.org"
 
-#: ../../txts/developers:139
+#: ../../txts/developers:150
+msgid "Atlantean"
+msgstr ""
+
+#: ../../txts/developers:140
 msgid "Barbarian"
 msgstr "Barbaři"
 
@@ -465,7 +473,7 @@ msgstr "CTRL+L   Otevřít mapu"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Uložit mapu"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:137
 msgid "Campaign Story"
 msgstr "Kampaně"
 
@@ -473,11 +481,11 @@ msgstr "Kampaně"
 msgid "Check out the Widelands project homepage:"
 msgstr "Navštiv domovskou stránku projektu Widelands:"
 
-#: ../../txts/developers:9
+#: ../../txts/developers:8
 msgid "Chieftain"
 msgstr "Náčelník"
 
-#: ../../txts/developers:38
+#: ../../txts/developers:34
 msgid "Coders"
 msgstr "Programátoři"
 
@@ -501,7 +509,7 @@ msgstr "Vytvoření záznamu relace</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10 Ukončí okamžitě hru"
 
-#: ../../txts/developers:159
+#: ../../txts/developers:165
 msgid "Czech"
 msgstr "Čeština"
 
@@ -509,7 +517,7 @@ msgstr "Čeština"
 msgid "DELETE      Archive the current message"
 msgstr "DELETE Uloží aktuální zprávu"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:172
 msgid "Dansk"
 msgstr "Dánština"
 
@@ -517,11 +525,11 @@ msgstr "Dánština"
 msgid "Development"
 msgstr "Vývoj"
 
-#: ../../txts/developers:301
+#: ../../txts/developers:307
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentace, nápověda a wiki"
 
-#: ../../txts/developers:172
+#: ../../txts/developers:178
 msgid "Dutch"
 msgstr "Holandština"
 
@@ -529,11 +537,11 @@ msgstr "Holandština"
 msgid "E        Toggles event menu"
 msgstr "E        Přepíná nabídku událostí"
 
-#: ../../txts/developers:15
+#: ../../txts/developers:14
 msgid "Elders"
 msgstr "Rada starších"
 
-#: ../../txts/developers:145
+#: ../../txts/developers:146
 msgid "Empire"
 msgstr "Císařství"
 
@@ -557,15 +565,15 @@ msgstr "F11         Uloží snímek obrazovky"
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6           Zobrazí ladicí konzoli (pouze v testovacím sestavení)"
 
-#: ../../txts/developers:179
+#: ../../txts/developers:185
 msgid "Finnish"
 msgstr "Finština"
 
-#: ../../txts/developers:315
+#: ../../txts/developers:322
 msgid "Former elders"
 msgstr "Dřívější starší členové"
 
-#: ../../txts/developers:185
+#: ../../txts/developers:191
 msgid "French"
 msgstr "Francouzština"
 
@@ -583,7 +591,7 @@ msgid ""
 "and modification"
 msgstr "Ustanovení a podmínky pro kopírování, distribuci a modifikaci"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:198
 msgid "Galician"
 msgstr "Galicijština"
 
@@ -591,16 +599,16 @@ msgstr "Galicijština"
 msgid "General game control"
 msgstr "Obecné ovládání hry"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:203
 msgid "German"
 msgstr "Němčina"
 
-#: ../../txts/developers:73
+#: ../../txts/developers:72
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:19
-#: ../../txts/developers:326
+#: ../../txts/developers:18
+#: ../../txts/developers:333
 msgid "Graphics"
 msgstr "Grafika"
 
@@ -608,7 +616,7 @@ msgstr "Grafika"
 msgid "H        Toggles main menu"
 msgstr "H        Přepíná hlavní nabídku"
 
-#: ../../txts/developers:209
+#: ../../txts/developers:215
 msgid "Hebrew"
 msgstr "Hebrejština"
 
@@ -628,12 +636,12 @@ msgstr ""
 msgid "Home        Center main mapview on starting location"
 msgstr "Home        Vystředí mapu na počáteční pozici"
 
-#: ../../txts/developers:24
-#: ../../txts/developers:319
+#: ../../txts/developers:23
+#: ../../txts/developers:326
 msgid "Homepage"
 msgstr "Domovská stránka"
 
-#: ../../txts/developers:292
+#: ../../txts/developers:298
 msgid "Homepage Coders"
 msgstr "Programátoři domovské stránky"
 
@@ -641,7 +649,7 @@ msgstr "Programátoři domovské stránky"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Doplněk: Jak uplatnit tato ustanovení na vaše nové programy"
 
-#: ../../txts/developers:214
+#: ../../txts/developers:220
 msgid "Hungarian"
 msgstr "Maďarština"
 
@@ -750,7 +758,7 @@ msgstr ""
 "přeje šířit software pomocí nějakého jiného systému a žádný uživatel licence "
 "nemůže takové rozhodnutí zpochybňovat."
 
-#: ../../txts/developers:219
+#: ../../txts/developers:225
 msgid "Italian"
 msgstr "Italština"
 
@@ -783,7 +791,7 @@ msgstr ""
 "Stejně jako přírodní objekty (boby), můžeš pomocí CTRL+ kliku myši označit "
 "více zvířat nebo pozemních textur."
 
-#: ../../txts/developers:259
+#: ../../txts/developers:264
 msgid "Linux Distributions"
 msgstr "Linuxové distribuce"
 
@@ -795,7 +803,7 @@ msgstr "M               Přepíná náhledovou mapku"
 msgid "M        Toggles minimap"
 msgstr "M        Přepíná náhledovou mapku"
 
-#: ../../txts/developers:122
+#: ../../txts/developers:123
 msgid "Maps and Missions"
 msgstr "Mapy a mise"
 
@@ -803,7 +811,7 @@ msgstr "Mapy a mise"
 msgid "Miners will only work if supplied with food."
 msgstr "Horníci pracují pouze pokud jsou zásobováni jídlem."
 
-#: ../../txts/developers:101
+#: ../../txts/developers:102
 msgid "Musicians"
 msgstr "Hudebníci"
 
@@ -811,7 +819,11 @@ msgstr "Hudebníci"
 msgid "N               Toggle messages ('news')"
 msgstr "N Přepne zprávy ('novinky')"
 
-#: ../../txts/developers:154
+#: ../../txts/tips/general_game.tip:34
+msgid "N' for News to access the messages window, then use 'G"
+msgstr ""
+
+#: ../../txts/developers:160
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -823,7 +835,7 @@ msgstr ""
 msgid "No warranty"
 msgstr "ZÁRUKA SE NEPOSKYTUJE"
 
-#: ../../txts/developers:281
+#: ../../txts/developers:286
 msgid "Non Unix Distributions"
 msgstr "Nelinuxové distribuce"
 
@@ -863,11 +875,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Nápověda online"
 
-#: ../../txts/developers:344
+#: ../../txts/developers:351
 msgid "Other"
 msgstr "Další"
 
-#: ../../txts/developers:270
+#: ../../txts/developers:275
 msgid "Other Unix Distributions"
 msgstr "Další linuxové distribuce"
 
@@ -895,7 +907,7 @@ msgstr "Page Up        Zvýší rychlost hry"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr ""
 
-#: ../../txts/developers:255
+#: ../../txts/developers:260
 msgid "Packagers"
 msgstr "Baliči"
 
@@ -907,13 +919,18 @@ msgstr "Prosím podívej se do uživatelského manuálu v naší wiki na:"
 msgid "Please provide enough background information. Tell us:"
 msgstr "Prosím specifikuj dostatek souvisejících informací. Zejména:"
 
-#: ../../txts/developers:224
+#: ../../txts/developers:230
 msgid "Polish"
 msgstr "Polština"
 
 #: ../../txts/COPYING:11
 msgid "Preamble"
 msgstr "Preambule"
+
+#: ../../txts/tips/general_game.tip:42
+msgid ""
+"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them"
+msgstr ""
 
 #: ../../txts/README:1
 msgid "README"
@@ -948,7 +965,7 @@ msgstr "Přehrávání</p>"
 msgid "Reporting Bugs"
 msgstr "Hlášení chyb"
 
-#: ../../txts/developers:232
+#: ../../txts/developers:238
 msgid "Russian"
 msgstr "Ruština"
 
@@ -975,7 +992,7 @@ msgstr ""
 "Klávesa SPACE funguje jako v normální hře. Zapíná a vypíná nápovědu k "
 "výstavbě."
 
-#: ../../txts/developers:155
+#: ../../txts/developers:161
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -983,7 +1000,7 @@ msgstr ""
 "Seznam lidí, kteří pomohli s překladem Widelands přes launchpad.net, je na "
 "https://translations.launchpad.net/widelands"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:243
 msgid "Slovak"
 msgstr "Slovenština"
 
@@ -997,16 +1014,16 @@ msgstr ""
 "Některé budovy, jako například statek, mají velmi malou pracovní oblast. "
 "Pokud je budova obklopena stromy nebo cestami, výroba se zastaví."
 
-#: ../../txts/developers:29
-#: ../../txts/developers:332
+#: ../../txts/developers:28
+#: ../../txts/developers:339
 msgid "Sound"
 msgstr "Zvuk"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:113
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
-#: ../../txts/developers:242
+#: ../../txts/developers:248
 msgid "Spanish"
 msgstr "Španělština"
 
@@ -1021,7 +1038,7 @@ msgstr ""
 msgid "Status"
 msgstr "Stav"
 
-#: ../../txts/developers:247
+#: ../../txts/developers:253
 msgid "Swedish"
 msgstr "Švédština"
 
@@ -1266,11 +1283,11 @@ msgstr ""
 "Pro minimalizování/maximalizování okna klikněte na záhlaví okna buď pravým "
 "tlačítkem myši, nebo podržte klávesu CRTL a klikněte levým tlačítkem myši."
 
-#: ../../txts/developers:337
+#: ../../txts/developers:344
 msgid "Translation"
 msgstr "Překlad"
 
-#: ../../txts/developers:151
+#: ../../txts/developers:157
 msgid "Translators"
 msgstr "Překladatelé"
 

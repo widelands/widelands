@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,12 +112,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
 #ifdef __APPLE__
-		// on mac, the default data dir is relative to the current directory
-		log ("Adding directory:Widelands.app/Contents/Resources/\n");
-		g_fs->AddFileSystem
-			(FileSystem::Create("Widelands.app/Contents/Resources/"));
+		// on mac, the default data dir is relative to the executable directory
+		std::string s = get_executable_path();
+		log("Adding executable directory to search path\n");
+		g_fs->AddFileSystem(FileSystem::Create(s));
 #else
-		// first, try the data directory used in the last scons invocation
 		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
 		g_fs->AddFileSystem //  see config.h
 			(FileSystem::Create
@@ -277,6 +276,7 @@ m_redirected_stdio(false)
 		m_homedir = m_commandline["homedir"];
 		m_commandline.erase("homedir");
 	}
+	bool dedicated = m_commandline.count("dedicated");
 #ifdef REDIRECT_OUTPUT
 	if (!redirect_output())
 		redirect_output(m_homedir);
@@ -286,8 +286,13 @@ m_redirected_stdio(false)
 	init_settings();
 	if (m_default_datadirs)
 		setup_searchpaths(m_commandline["EXENAME"]);
+	init_language(); // search paths must already be set up
 	cleanup_replays();
-	init_hardware();
+
+	if (!dedicated)
+		init_hardware();
+	else
+		g_gr = 0;
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
@@ -408,48 +413,65 @@ void WLApplication::run()
 	} else if (m_game_type == GGZ) {
 		Widelands::Game game;
 		try {
+			// disable sound completely
+			g_sound_handler.m_nosound = true;
 
 			// setup some ggz details about a dedicated server
 			Section & s = g_options.pull_section("global");
 			char const * const meta = s.get_string("metaserver", WL_METASERVER);
 			char const * const name = s.get_string("nickname", "dedicated");
 			char const * const server = s.get_string("servername", name);
-			if (!NetGGZ::ref().initcore(meta, name, "", false)) {
-				log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
-				return;
-			}
-			NetGGZ::ref().set_local_servername(server);
-			NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
+			for (;;) { // endless loop
+				if (!NetGGZ::ref().initcore(meta, name, "", false)) {
+					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
+					return;
+				}
+				std::string realservername(server);
+				bool name_valid = false;
+				while (not name_valid) {
+					name_valid = true;
+					std::vector<Net_Game_Info> const & hosts = NetGGZ::ref().tables();
+					for (uint32_t i = 0; i < hosts.size(); ++i) {
+						if (hosts[i].hostname == realservername)
+							name_valid = false;
+					}
+					if (not name_valid)
+						realservername += "*";
+				}
 
-			NetHost netgame(name, true);
+				NetGGZ::ref().set_local_servername(realservername);
+				NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
 
-			// Load the requested map
-			Widelands::Map map;
-			i18n::Textdomain td("maps");
-			map.set_filename(m_filename.c_str());
-			Widelands::Map_Loader * const ml = map.get_correct_loader
-				(m_filename.c_str());
-			ml->preload_map(true);
+				NetHost netgame(name, true);
 
-			// fill in the mapdata structure
-			MapData mapdata;
-			mapdata.filename = m_filename;
-			mapdata.name = map.get_name();
-			mapdata.author = map.get_author();
-			mapdata.description = map.get_description();
-			mapdata.world = map.get_world_name();
-			mapdata.nrplayers = map.get_nrplayers();
-			mapdata.width = map.get_width();
-			mapdata.height = map.get_height();
+				// Load the requested map
+				Widelands::Map map;
+				i18n::Textdomain td("maps");
+				map.set_filename(m_filename.c_str());
+				Widelands::Map_Loader * const ml = map.get_correct_loader
+					(m_filename.c_str());
+				ml->preload_map(true);
 
-			// set the map
-			netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+				// fill in the mapdata structure
+				MapData mapdata;
+				mapdata.filename = m_filename;
+				mapdata.name = map.get_name();
+				mapdata.author = map.get_author();
+				mapdata.description = map.get_description();
+				mapdata.world = map.get_world_name();
+				mapdata.nrplayers = map.get_nrplayers();
+				mapdata.width = map.get_width();
+				mapdata.height = map.get_height();
 
-			// run the network game
-			// -> autostarts when a player sends "/start" as pm to the server.
-			netgame.run(true);
+				// set the map
+				netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+
+				// run the network game
+				// -> autostarts when a player sends "/start" as pm to the server.
+				netgame.run(true);
 
 			NetGGZ::ref().deinit();
+			}
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -828,16 +850,6 @@ bool WLApplication::init_settings() {
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
 
-	// Set Locale and grab default domain
-	i18n::set_locale(s.get_string("language", ""));
-
-	std::string localedir = s.get_string("localedir", INSTALL_LOCALEDIR);
-	i18n::set_localedir(find_relative_locale_path(localedir));
-
-	i18n::grab_textdomain("widelands");
-
-	log("using locale %s\n", i18n::get_locale().c_str());
-
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
@@ -883,6 +895,23 @@ bool WLApplication::init_settings() {
 }
 
 /**
+ * Initialize language settings
+ */
+void WLApplication::init_language() {
+	// retrieve configuration settings
+	Section & s = g_options.pull_section("global");
+
+	// Initialize locale and grab "widelands" textdomain
+	i18n::init_locale();
+	std::string localedir = s.get_string("localedir", INSTALL_LOCALEDIR);
+	i18n::set_localedir(find_relative_locale_path(localedir));
+	i18n::grab_textdomain("widelands");
+
+	// Set locale corresponding to selected language
+	i18n::set_locale(s.get_string("language", ""));
+}
+
+/**
  * Remember the last settings: write them into the config file
  */
 void WLApplication::shutdown_settings()
@@ -904,6 +933,35 @@ void WLApplication::shutdown_settings()
 }
 
 /**
+ * Returns the widelands executable path.
+ */
+std::string WLApplication::get_executable_path()
+{
+	std::string executabledir;
+#ifdef __APPLE__
+	uint32_t buffersize = 0;
+	_NSGetExecutablePath(NULL, &buffersize);
+	char buffer[buffersize];
+	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
+	if (check != 0) {
+		throw wexception (_("could not find the path of the main executable"));
+	}
+	executabledir = std::string(buffer);
+	executabledir.resize(executabledir.rfind('/') + 1);
+#elif linux
+	char buffer[PATH_MAX];
+	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
+	if (size <= 0) {
+		throw wexception (_("could not find the path of the main executable"));
+	}
+	executabledir = std::string(buffer, size);
+	executabledir.resize(executabledir.rfind('/') + 1);
+#endif
+	log("Widelands executable directory: %s\n", executabledir.c_str());
+	return executabledir;
+}
+
+/**
  * In case that the localedir is defined in a relative manner to the
  * executable file.
  *
@@ -911,32 +969,11 @@ void WLApplication::shutdown_settings()
  */
 std::string WLApplication::find_relative_locale_path(std::string localedir)
 {
-#ifdef __APPLE__
+#ifndef WIN32
 	if (localedir[0] != '/') {
-		uint32_t buffersize = 0;
-		_NSGetExecutablePath(NULL, &buffersize);
-		char buffer[buffersize];
-		int32_t check = _NSGetExecutablePath(buffer, &buffersize);
-		if (check != 0) {
-			throw wexception (_("could not find the path of the main executable"));
-		}
-		std::string executabledir = buffer;
-		executabledir.resize(executabledir.rfind('/') + 1);
+		std::string executabledir = get_executable_path();
 		executabledir+= localedir;
 		log ("localedir: %s\n", executabledir.c_str());
-		return executabledir;
-	}
-#elif linux
-	if (localedir[0] != '/') {
-		char buffer[PATH_MAX];
-		size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
-		if (size <= 0) {
-			throw wexception (_("could not find the path of the main executable"));
-		}
-		std::string executabledir(buffer, size);
-		executabledir.resize(executabledir.rfind('/') + 1);
-		executabledir += localedir;
-		log ("localedir : %s\n", executabledir.c_str());
 		return executabledir;
 	}
 #endif
@@ -1514,8 +1551,6 @@ void WLApplication::mainmenu()
 					Widelands::Game game;
 					try {
 						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
-					} catch (Widelands::game_data_error const & e) {
-						log("Scenario not started: Game data error: %s\n", e.what());
 					} catch (...) {
 						emergency_save(game);
 						throw;
@@ -1969,6 +2004,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual std::string getWinCondition() {return s.win_condition;}
 	virtual void setWinCondition(std::string wc) {s.win_condition = wc;}
+	virtual void nextWinCondition() {assert(false);} // not implemented - feel free to do so, if you need it.
 
 private:
 	GameSettings s;
@@ -2018,8 +2054,8 @@ bool WLApplication::new_game()
 			game.set_ibase
 				(new Interactive_Player
 				 	(game, g_options.pull_section("global"), pn, false, false));
-			game.init_newgame(loaderUI, sp.settings());
-			game.run(loaderUI, Widelands::Game::NewNonScenario);
+			game.init_newgame(&loaderUI, sp.settings());
+			game.run(&loaderUI, Widelands::Game::NewNonScenario);
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -2212,7 +2248,7 @@ void WLApplication::replay()
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 
-		game.run(loaderUI, Widelands::Game::Loaded);
+		game.run(&loaderUI, Widelands::Game::Loaded);
 	} catch (...) {
 		emergency_save(game);
 		m_filename.clear();

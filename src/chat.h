@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,9 @@ struct ChatMessage {
 	time_t time;
 
 	/**
-	 * The playercolor (just used to colorize the senders name).
+	 * The playercolor. Used to colorize the senders name;
+	 * negative numbers indicate system messages for which richtext is
+	 * allowed.
 	 */
 	int16_t playern;
 

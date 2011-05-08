@@ -89,8 +89,6 @@ private:
 	MultiPlayerSetupGroup   * m_mpsg;
 	std::string               m_filename_proof; // local variable to check state
 	int16_t                   m_nr_players;
-	std::vector<std::string>  m_win_conditions;
-	uint8_t                   m_cur_wincondition;
 };
 
 

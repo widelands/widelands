@@ -89,8 +89,8 @@ local function _calc_points(plr)
 
 	local points = 0
 	local descr = { _("Status for Player %i<br>"):format(plr.number) }
-	for idx, ware in ipairs(point_table[plr.tribe .. "_order"]) do
-		local value = point_table[plr.tribe][ware]
+	for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
+		local value = point_table[plr.tribe_name][ware]
 		local count = 0
 		for idx,b in ipairs(bs) do
 			count = count + b:get_wares(ware)

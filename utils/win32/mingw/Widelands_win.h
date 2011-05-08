@@ -23,7 +23,7 @@
 #include "wlversion.h"
 
 /* VERSION DEFINITIONS */
-#define VER_STRING	"0.0.0.14"
+#define VER_STRING	"0.0.0.16"
 #define VER_MAJOR	0
 #define VER_MINOR	0
 #define VER_RELEASE	0

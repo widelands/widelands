@@ -242,6 +242,9 @@ void Panel::end() {}
 
 /**
  * Resizes the panel.
+ *
+ * \note NEVER override this function. If you feel the urge to override this
+ * function, you probably want to override \ref layout.
  */
 void Panel::set_size(const uint32_t nw, const uint32_t nh)
 {
@@ -295,6 +298,8 @@ void Panel::get_desired_size(uint32_t & w, uint32_t & h) const
  * panel and its children that are not derived from layout routines.
  * In particular, it must be independent of the panel's position on the screen
  * or of its actual size.
+ *
+ * \note NEVER override this function
  */
 void Panel::set_desired_size(uint32_t w, uint32_t h)
 {
@@ -1133,14 +1138,13 @@ std::string Panel::ui_fn() {
 		return UI_FONT_NAME_SERIF;
 	if (style == "sans")
 		return UI_FONT_NAME_SANS;
-	std::string const temp(g_fs->FS_CanonicalizeName("fonts/" + style));
-	if (g_fs->FileExists(temp))
+	if (g_fs->FileExists("fonts/" + style))
 		return style;
 	log
 		("Could not find font file \"%s\"\n"
 		 "Make sure the path is given relative to Widelands font directory. "
 		 "Widelands will use standard font.\n",
-		 temp.c_str());
+		 style.c_str());
 	return UI_FONT_NAME;
 }
 

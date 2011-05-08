@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "gl_surface_screen.h"
+
+#include <cmath>
 
 #include "gl_picture_texture.h"
 #include "gl_utils.h"
@@ -55,22 +57,44 @@ const SDL_PixelFormat & GLSurfaceScreen::format() const
 	return gl_rgba_format();
 }
 
+/**
+ * Swap order of rows in m_pixels, to compensate for the upside-down nature of the
+ * OpenGL coordinate system.
+ */
+void GLSurfaceScreen::swap_rows()
+{
+	uint8_t * begin_row = m_pixels.get();
+	uint8_t * end_row = m_pixels.get() + (m_w * (m_h - 1) * 4);
+
+	while (begin_row < end_row) {
+		for (uint32_t x = 0; x < m_w * 4; ++x)
+			std::swap(begin_row[x], end_row[x]);
+
+		begin_row += m_w * 4;
+		end_row -= m_w * 4;
+	}
+}
+
 void GLSurfaceScreen::lock(IPixelAccess::LockMode mode)
 {
 	assert(!m_pixels);
 
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
-	if (mode == Lock_Normal)
+	if (mode == Lock_Normal) {
 		glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+		swap_rows();
+	}
 }
 
 void GLSurfaceScreen::unlock(IPixelAccess::UnlockMode mode)
 {
 	assert(m_pixels);
 
-	if (mode == Unlock_Update)
+	if (mode == Unlock_Update) {
+		swap_rows();
 		glDrawPixels(m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+	}
 
 	m_pixels.reset(0);
 }
@@ -162,6 +186,13 @@ void GLSurfaceScreen::brighten_rect(const Rect rc, const int32_t factor)
 	assert(rc.h >= 1);
 	assert(g_opengl);
 
+	if (factor < 0) {
+		if (!g_gr->caps().gl.blendequation)
+			return;
+
+		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+	}
+
 	/* glBlendFunc is a very nice feature of opengl. You can specify how the
 	* color is calculated.
 	*
@@ -181,14 +212,17 @@ void GLSurfaceScreen::brighten_rect(const Rect rc, const int32_t factor)
 	// (this is the source color) over the region
 	glBegin(GL_QUADS); {
 		glColor3f
-			((static_cast<GLfloat>(factor) / 256.0f),
-			 (static_cast<GLfloat>(factor) / 256.0f),
-			 (static_cast<GLfloat>(factor) / 256.0f));
+			((fabsf(factor) / 256.0f),
+			 (fabsf(factor) / 256.0f),
+			 (fabsf(factor) / 256.0f));
 		glVertex2f(rc.x,        rc.y);
 		glVertex2f(rc.x + rc.w, rc.y);
 		glVertex2f(rc.x + rc.w, rc.y + rc.h);
 		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
+
+	if (factor < 0)
+		glBlendEquation(GL_FUNC_ADD);
 }
 
 void GLSurfaceScreen::draw_line

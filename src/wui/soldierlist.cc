@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 
 #include "container_iterate.h"
+#include "graphic/font.h"
 #include "graphic/rendertarget.h"
 #include "interactive_gamebase.h"
 #include "logic/building.h"
@@ -387,6 +388,13 @@ m_infotext(this, _("Click soldier to send away"))
 
 	m_soldierpanel.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
 	m_soldierpanel.set_click(boost::bind(&SoldierList::eject, this, _1));
+
+	const UI::TextStyle & style = UI::TextStyle::ui_small();
+	// Note the extra character in the HP: string below to fix bug 724169
+	uint32_t maxtextwidth = std::max
+		(style.calc_bare_width(_("Click soldier to send away")),
+		 style.calc_bare_width("HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"));
+	set_min_desired_breadth(maxtextwidth + 4);
 }
 
 SoldierControl & SoldierList::soldiers() const

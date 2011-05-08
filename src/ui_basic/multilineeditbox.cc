@@ -25,8 +25,8 @@
 #include "graphic/rendertarget.h"
 #include "graphic/wordwrap.h"
 #include "helper.h"
+#include "utf8.h"
 #include "wlapplication.h"
-#include <scripting/pdep/llimits.h>
 
 namespace UI {
 
@@ -70,9 +70,6 @@ struct Multiline_Editbox::Data {
 
 	void erase_bytes(uint32_t start, uint32_t end);
 	void insert(uint32_t where, const std::string & s);
-
-	bool is_utf8_extended(char ch) const;
-	std::string unicode_to_utf8(uint16_t unicode) const;
 
 private:
 	Multiline_Editbox & owner;
@@ -187,38 +184,6 @@ uint32_t Multiline_Editbox::get_maximum_bytes() const
 }
 
 /**
- * Return @c true iff the given character is an extended byte of
- * a multi-byte UTF8 character.
- */
-bool Multiline_Editbox::Data::is_utf8_extended(char ch) const
-{
-	return (ch & 0xc0) == 0x80;
-}
-
-/**
- * Convert a unicode character into a multi-byte utf8 string.
- */
-std::string Multiline_Editbox::Data::unicode_to_utf8(uint16_t unicode) const
-{
-	unsigned char buf[4];
-
-	memset(buf, 0, sizeof(buf));
-
-	if (unicode < 0x80) {
-		buf[0] = unicode;
-	} else if (unicode < 0x800) {
-		buf[0] = ((unicode & 0x7c0) >> 6) | 0xc0;
-		buf[1] = (unicode & 0x3f) | 0x80;
-	} else {
-		buf[0] = ((unicode & 0xf000) >> 12) | 0xe0;
-		buf[1] = ((unicode & 0xfc0) >> 6) | 0x80;
-		buf[2] = (unicode & 0x3f) | 0x80;
-	}
-
-	return reinterpret_cast<char *>(buf);
-}
-
-/**
  * Erase the given range of bytes, adjust the cursor position, and update.
  */
 void Multiline_Editbox::Data::erase_bytes(uint32_t start, uint32_t end)
@@ -248,7 +213,7 @@ uint32_t Multiline_Editbox::Data::prev_char(uint32_t cursor)
 
 	do {
 		--cursor;
-	} while (cursor > 0 && is_utf8_extended(text[cursor]));
+	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;
 }
@@ -265,7 +230,7 @@ uint32_t Multiline_Editbox::Data::next_char(uint32_t cursor)
 
 	do {
 		++cursor;
-	} while (cursor < text.size() && is_utf8_extended(text[cursor]));
+	} while (cursor < text.size() && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;
 }
@@ -275,7 +240,7 @@ uint32_t Multiline_Editbox::Data::next_char(uint32_t cursor)
  */
 uint32_t Multiline_Editbox::Data::snap_to_char(uint32_t cursor)
 {
-	while (cursor > 0 && is_utf8_extended(text[cursor]))
+	while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]))
 		--cursor;
 	return cursor;
 }
@@ -419,7 +384,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			// as a 0 on keystroke, the o then as the unicode character. We simply
 			// ignore the 0.
 			if (is_printable(code) and code.unicode) {
-				std::string utf8 = d->unicode_to_utf8(code.unicode);
+				std::string utf8 = Utf8::unicode_to_utf8(code.unicode);
 
 				if (d->text.size() + utf8.size() <= d->maxbytes) {
 					d->insert(d->cursor_pos, utf8);

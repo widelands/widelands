@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,8 @@
 
 #include <boost/scoped_ptr.hpp>
 #include <SDL_keyboard.h>
+
+#define CHAT_HISTORY_SIZE 5
 
 namespace UI {
 
@@ -58,6 +60,8 @@ struct EditBox : public Panel {
 	void setAlign(Align);
 	void set_font(std::string const & name, int32_t size, RGBColor color);
 
+	void activate_history(bool activate) {m_history_active = activate;}
+
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_keysym);
@@ -68,6 +72,10 @@ private:
 	boost::scoped_ptr<EditBoxImpl> m;
 
 	void check_caret();
+
+	bool        m_history_active;
+	int16_t     m_history_position;
+	std::string m_history[CHAT_HISTORY_SIZE];
 };
 
 }

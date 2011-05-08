@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-11-12 15:23+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-01-02 11:57+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:24+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
@@ -43,10 +43,13 @@ msgid ""
 "your territory than any other player. The game will end after 4 hours of\n"
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
+"Som skogsgnom liker du store skoger, så målet er å ha flere trær innenfor\n"
+"ditt område enn de andre spillerne. Spillet vil vare i 4 timer.\n"
+"Vinneren er den spilleren med flest trær når spillet er slutt."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:10
 msgid "Autocrat"
-msgstr "Autokrat"
+msgstr "Enevelde"
 
 #: ../../scripting/win_conditions/02_collectors.lua:11
 msgid "Collectors"
@@ -107,11 +110,11 @@ msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:79
 msgid "The game will end in %i minutes."
-msgstr "Spillet vil avslutte om %i minutter."
+msgstr "%i minutter til spillet er slutt."
 
 #: ../../scripting/win_conditions/02_collectors.lua:118
 msgid "The game will end in %s."
-msgstr ""
+msgstr "%s til spillet er slutt."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -135,7 +138,7 @@ msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:11
 msgid "Wood Gnome"
-msgstr ""
+msgstr "Skogsgnom"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:24
 #: ../../scripting/win_conditions/01_defeat_all.lua:24
@@ -159,6 +162,8 @@ msgid ""
 "You get points for precious wares in your warehouses, the player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
+"Du får poeng for verdifulle varer i varehusene dine. Spilleren med flest "
+"varer etter 4 timer vinner spillet."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:145
 msgid "You have lost this game!"
@@ -172,6 +177,8 @@ msgstr "Du har tapt dette spillet!"
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
+"Du har ikke noe igjen å kommandere. Hvis du vil, kan du fortsette som "
+"tilskuer."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:32
 msgid "You have won this game!"

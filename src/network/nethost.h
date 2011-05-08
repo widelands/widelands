@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,6 +86,8 @@ struct NetHost : public GameController, private SyncCallback {
 
 	//  Host command related stuff
 	void kickUser(std::string, std::string);
+	void splitCommandArray
+		(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2);
 	void handle_dserver_command(std::string, std::string);
 
 	void report_result(int player, int points, bool win, std::string extra);
@@ -151,7 +153,7 @@ private:
 
 	NetHostImpl * d;
 	bool use_ggz;
-	bool m_autolaunch;
+	bool m_is_dedicated;
 	bool m_forced_pause;
 };
 

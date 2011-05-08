@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,7 +105,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		 _("Jump to unproductive: "), UI::Align_CenterLeft),
 	m_anim               (0),
 	m_lastupdate         (0),
-	m_last_building_index(0)
+	m_last_building_index(0),
+	m_last_table_index   (0)
 {
 	//  building list
 	m_table.add_column(206, _("Name"));
@@ -229,10 +230,13 @@ int32_t Building_Statistics_Menu::validate_pointer
 
 void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 	assert(m_table.has_selection());
+	if (m_last_table_index != m_table.selection_index())
+		m_last_building_index = 0;
+	m_last_table_index = m_table.selection_index();
 	const std::vector<Widelands::Player::Building_Stats> & vec =
 		iplayer().get_player()->get_building_statistics
 			(Widelands::Building_Index
-			 	(static_cast<size_t>(m_table.get_selected())));
+				(static_cast<size_t>(m_table.get_selected())));
 	Widelands::Map const & map = iplayer().egbase().map();
 
 	bool found = true; //  we think, we always find a proper building
@@ -263,8 +267,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 	case Prev_Unproductive: {
 		int32_t const curindex = m_last_building_index;
 		found = false;
-		while
-			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
+		while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
 			if (not vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
@@ -435,16 +438,16 @@ void Building_Statistics_Menu::update() {
 		{
 			char const * pic = "pics/novalue.png";
 			if (building.get_ismine()) {
-				pic = "pics/mine.png";
+				pic = "pics/menu_tab_buildmine.png";
 			} else switch (building.get_size()) {
 			case Widelands::BaseImmovable::SMALL:
-				pic = "pics/small.png";
+				pic = "pics/menu_tab_buildsmall.png";
 				break;
 			case Widelands::BaseImmovable::MEDIUM:
-				pic = "pics/medium.png";
+				pic = "pics/menu_tab_buildmedium.png";
 				break;
 			case Widelands::BaseImmovable::BIG:
-				pic = "pics/big.png";
+				pic = "pics/menu_tab_buildbig.png";
 				break;
 			default:
 				assert(false);

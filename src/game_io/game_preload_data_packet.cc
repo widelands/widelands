@@ -29,7 +29,7 @@ namespace Widelands {
 
 // Note: releases up to build15 used version number 1 to indicate
 // a savegame without interactive player
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 3
 
 
 void Game_Preload_Data_Packet::Read
@@ -47,11 +47,16 @@ void Game_Preload_Data_Packet::Read
 			if (packet_version >= 2) {
 				m_background = s.get_safe_string("background");
 				m_player_nr  = s.get_safe_int   ("player_nr");
+				if (packet_version >= 3)
+					m_win_condition = s.get_safe_string("win_condition");
+				else
+					m_win_condition = "00_endless_game";
 			} else {
 				m_background = "pics/progress.png";
 				// Of course this is wrong, but at least player 1 is always in game
 				// so widelands won't crash with this setting.
 				m_player_nr  = 1;
+				m_win_condition = "00_endless_game";
 			}
 		} else
 			throw game_data_error
@@ -84,15 +89,19 @@ void Game_Preload_Data_Packet::Write
 		// pretend that the first player that is actually
 		// there has saved the game
 		for (int i = 1; i <= MAX_PLAYERS; ++i) {
-			if (game.get_player(i))
+			if (game.get_player(i)) {
 				s.set_int("player_nr", i);
+				break;
+			}
 		}
 	}
 
 	std::string bg(map.get_background());
 	if (bg.empty())
 		bg = map.get_world_name();
-	s.set_string("background",  bg);
+	s.set_string("background", bg);
+
+	s.set_string("win_condition", game.get_win_condition_string());
 
 	prof.write("preload", false, fs);
 }

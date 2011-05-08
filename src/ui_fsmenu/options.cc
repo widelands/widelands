@@ -266,7 +266,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
 		sprintf
-			(buf, "%ix%i %i bit", m_resolutions[i].xres,
+			(buf, _("%ix%i %i bit"), m_resolutions[i].xres,
 			 m_resolutions[i].yres, m_resolutions[i].depth);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
@@ -599,9 +599,9 @@ void Options_Ctrl::handle_menu()
 Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	Options_Struct opt;
 	opt.xres                = m_opt_section.get_int
-		("xres",                 640);
+		("xres",                XRES);
 	opt.yres                = m_opt_section.get_int
-		("yres",                 480);
+		("yres",                YRES);
 	opt.depth               = m_opt_section.get_int
 		("depth",                 16);
 	opt.inputgrab           = m_opt_section.get_bool

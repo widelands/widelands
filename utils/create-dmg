@@ -46,7 +46,7 @@ if [ -z $1 ]; then
 	print_usage
 	exit 1
 elif [ $1 = svn ]; then
-	revision=`\`dirname $0\`/../../build/scons-tools/detect_revision.py`
+	revision=`\`dirname $0\`/../../utils/detect_revision.py`
 elif [ $1 = release ]; then
 	if [ -z $2 ]; then
 		print_usage

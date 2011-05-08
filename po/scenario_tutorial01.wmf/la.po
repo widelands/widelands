@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-06-06 22:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-03-24 12:29+0000\n"
+"Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:23+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-25 04:36+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -24,6 +24,11 @@ msgid ""
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
+"Nuntium ad te missum est. Videsne species globuli in imo monitore siti "
+"mutavisse?\n"
+"Nunc deleas lapidicinas, qui utilitatem non iam afferens spatium obsidet. "
+"Lapidicinis\n"
+"crepitis globulum delendi elegens hoc facere potes."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
 msgid ""
@@ -44,6 +49,17 @@ msgid ""
 "level 2 evade. This is one fearsome warrior then! The individual statistics\n"
 "have the following meaning:"
 msgstr ""
+"A soldier is created as any normal worker: a carrier grabs a tool in a\n"
+"Miles creatur uti alii operarii: Portator instrumentum in horreo capit, \n"
+"cum operarius pro quadam professione quaeritur. Arma Barbari militis\n"
+"sunt asciae. Militi novo gradus 0 est. Ut miles melius pugnare possit,\n"
+"exercere debet. Hoc facit in locis exercendi ut castris exercendi vel "
+"arena:\n"
+"Milites eo eunt (uti nunc nostri amiculi), tum aliquas res consumentes \n"
+"unum gradum meliorantur. Si Barbarus miles exercitissimus est, ei \n"
+"gradus vitae punctae 3 et gradus aggressionis 5 et gradus defensionis 0 \n"
+"et gradus vitationis 2 sunt. Horribilis est hic miles! Unus quisque censuum\n"
+"explicatur:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:438
 msgid ""
@@ -95,7 +111,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
-msgstr ""
+msgstr "Impetus:"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
@@ -111,11 +127,11 @@ msgstr "Pone insigne, ut viam ad lignatorem ducentem dividas."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Build a quarry"
-msgstr ""
+msgstr "Lapidicinas aedifica"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid "Build a quarry next to the stones"
-msgstr ""
+msgstr "Prope saxa lapidicinas aedifica"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:250
 msgid ""
@@ -147,7 +163,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
 msgid "Census and statistics"
-msgstr ""
+msgstr "Aedificiorum nomina censusque"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:650
 msgid ""
@@ -174,11 +190,11 @@ msgstr "De fenestras claudendo"
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:698
 msgid "Conclusion"
-msgstr ""
+msgstr "Conclusio"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "Lapidicinas cum principiis coniunge"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:347
 msgid "Connect your construction site"
@@ -198,11 +214,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
-msgstr ""
+msgstr "Cape regionem ubi metalla aedificare possimus"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Conquer the mountain to the south west"
-msgstr ""
+msgstr "Cape montem inter occasum solis et meridiem situm"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -293,7 +309,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "Aedificia augenda"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
 msgid ""
@@ -304,7 +320,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
-msgstr ""
+msgstr "Vitatio:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
@@ -348,6 +364,8 @@ msgid ""
 "to\n"
 "the raw stone."
 msgstr ""
+"Bene! Casa lignatoris facta! Lignator ibi immgraverit et arbores cadere "
+"inceperit, satis ligna trabalia habebimus. Nunc ad saxa."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:477
 msgid ""
@@ -363,7 +381,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:470
 msgid "Expanding your territory!"
-msgstr ""
+msgstr "Territorium auge!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
 msgid ""
@@ -392,7 +410,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
 msgid "Getting a quarry up."
-msgstr ""
+msgstr "De lapidicinarum aedificando"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:240
 msgid "Great. Now about that quarry..."
@@ -413,7 +431,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid "How to build a quarry"
-msgstr ""
+msgstr "Quomodo lapidicinas aedifices"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
 msgid ""
@@ -494,6 +512,8 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
 msgstr ""
+"Sinistra crepe globulum \"Fac ita\" dicentem, ut fenestram claudas, et id "
+"explora."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
@@ -540,15 +560,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:460
 msgid "Message arrived!"
-msgstr ""
+msgstr "Nuntius advenit!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid "Messages"
-msgstr ""
+msgstr "Nuntia"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
-msgstr ""
+msgstr "Conclusio de metallis"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
@@ -610,6 +630,8 @@ msgid ""
 "Now please rebuild the road between your quarry and your headquarters.\n"
 "We'll wait until the quarry is completed."
 msgstr ""
+"Nunc iterum fac viam inter lapidicinas principiaque. Tum praestolemus "
+"lapidicinam aedificatam."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:149
 msgid ""
@@ -637,7 +659,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
 "Okay, now we own some of the area on this mountain. Mountains are very\n"
-"important, because they contain resources: coal, iron ore, goldstone and\n"
+"important, because they contain resources: coal, iron ore, gold ore and\n"
 "granite.  Each tribe uses the resources differently, but all need mines to "
 "get\n"
 "the resources out of the ground."
@@ -668,7 +690,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Onward to the quarry"
-msgstr ""
+msgstr "Ad lapidicinas"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:225
 msgid "Other ways to move the view"
@@ -676,21 +698,22 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "Placing another flag"
-msgstr ""
+msgstr "Insigne alium deponere"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:264
 msgid "Red building symbols can only hold small buildings and flags."
 msgstr ""
+"Sola parvae casae insigneque super rubas domus imagines aedificari potest."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:292
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:316
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:325
 msgid "Road building"
-msgstr ""
+msgstr "Viam facere"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
-msgstr ""
+msgstr "Aes inquirere"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:366
 msgid ""
@@ -710,7 +733,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
-msgstr ""
+msgstr "De militibus et bella gerendo"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:199
 msgid "Some stones were found"
@@ -740,6 +763,9 @@ msgid ""
 "the\n"
 "blue flag in front of my headquarters."
 msgstr ""
+"Non satis est. Casa lignatoris cum aliis viis coniungere debeo. Cum area "
+"facta statim aedificandi modus inceperit, solum caeruleum pro principiis "
+"insigne crepere possum."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:624
 msgid ""
@@ -907,23 +933,23 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial01"
-msgstr ""
+msgstr "Tutorialis 01"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:529
 msgid "Waiting for the geologist"
-msgstr ""
+msgstr "Geologo praestolari"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:177
 msgid "Waiting for the hut to be finished"
-msgstr ""
+msgstr "Casam factam praestolari"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:146
 msgid "Waiting for the lumberjack to go up"
-msgstr ""
+msgstr "Lignatori praestolari"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:573
 msgid "Warfare and Training"
-msgstr ""
+msgstr "De bello gerendo et de exercendo"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:83
 msgid ""
@@ -936,11 +962,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:54
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Salve ad Widelands ludum!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:52
 msgid "Welcome to the Widelands tutorial!"
-msgstr ""
+msgstr "Salve ad Widelands ludi tutorialem!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:450
 msgid ""
@@ -1029,35 +1055,35 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:535
 msgid "a bit of coal"
-msgstr ""
+msgstr "paulus carbo"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:539
 msgid "a bit of gold"
-msgstr ""
+msgstr "paulum aurum"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:542
 msgid "a bit of granite"
-msgstr ""
+msgstr "paulum granitum"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:537
 msgid "a bit of iron"
-msgstr ""
+msgstr "paulum ferrum"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:536
 msgid "a lot of coal"
-msgstr ""
+msgstr "multus carbo"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
 msgid "a lot of gold"
-msgstr ""
+msgstr "multum aurum"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:544
 msgid "a lot of granite"
-msgstr ""
+msgstr "multum granitum"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:538
 msgid "a lot of iron"
-msgstr ""
+msgstr "multum ferrum"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
@@ -1065,11 +1091,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid "build flag symbol."
-msgstr ""
+msgstr "imago insignis deponendi"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:714
 msgid "exit game button."
-msgstr ""
+msgstr "globulum ludi finiendi"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:586
 msgid ""
@@ -1080,7 +1106,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:547
 msgid "nothing was found here"
-msgstr ""
+msgstr "nullum invenitum"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:711
 msgid ""
@@ -1090,11 +1116,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."
-msgstr ""
+msgstr "imago dimmittendi"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:299
 msgid "the road building symbol."
-msgstr ""
+msgstr "imago viam faciendi"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:561
 msgid "this one."
@@ -1102,4 +1128,4 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
-msgstr ""
+msgstr "aqua"

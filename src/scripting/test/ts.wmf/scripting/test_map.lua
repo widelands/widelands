@@ -23,9 +23,9 @@ function test_map:test_playerslots_name()
 end
 
 function test_map:test_playerslots_tribes()
-   assert_equal("barbarians", map.player_slots[1].tribe)
-   assert_equal("empire", map.player_slots[2].tribe)
-   assert_equal("atlanteans", map.player_slots[3].tribe)
+   assert_equal("barbarians", map.player_slots[1].tribe_name)
+   assert_equal("empire", map.player_slots[2].tribe_name)
+   assert_equal("atlanteans", map.player_slots[3].tribe_name)
 end
 
 function test_map:test_playerslots_starting_field()

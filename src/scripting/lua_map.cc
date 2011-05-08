@@ -2614,7 +2614,7 @@ const MethodType<L_PlayerSlot> L_PlayerSlot::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_PlayerSlot> L_PlayerSlot::Properties[] = {
-	PROP_RO(L_PlayerSlot, tribe),
+	PROP_RO(L_PlayerSlot, tribe_name),
 	PROP_RO(L_PlayerSlot, name),
 	PROP_RO(L_PlayerSlot, starting_field),
 	{0, 0, 0},
@@ -2633,11 +2633,11 @@ void L_PlayerSlot::__unpersist(lua_State * L) {
  ==========================================================
  */
 /* RST
-	.. attribute:: tribe
+	.. attribute:: tribe_name
 
 		(RO) The name of the tribe suggested for this player in this map
 */
-int L_PlayerSlot::get_tribe(lua_State * L) {
+int L_PlayerSlot::get_tribe_name(lua_State * L) {
 	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_tribe(m_plr));
 	return 1;
 }

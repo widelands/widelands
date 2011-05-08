@@ -157,6 +157,13 @@ Graphic::Graphic
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
 		log ("Graphics: OpenGL: OpenGL enabled\n");
+
+		GLenum err = glewInit();
+		if (err != GLEW_OK) {
+			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken.\n", err);
+			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
+		}
+
 		g_opengl = true;
 
 		GLboolean glBool;
@@ -187,10 +194,10 @@ Graphic::Graphic
 			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
 
-		str = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
+		const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
-			(strstr(str, "GL_ARB_texture_non_power_of_two") == 0);
+			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);
 
 		log("Graphics: OpenGL: Textures ");
 		log
@@ -198,6 +205,8 @@ Graphic::Graphic
 			 "may have any size\n");
 
 		m_caps.offscreen_rendering = false;
+
+		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
 	}
 #endif
 
@@ -466,6 +475,7 @@ const PictureID & Graphic::get_picture
 
 		try {
 			rec.picture = load_image(fname, alpha);
+			rec.modules = 0;
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());

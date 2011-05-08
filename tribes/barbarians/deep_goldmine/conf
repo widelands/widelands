@@ -23,20 +23,26 @@ snack=6
 work=_Work
 
 [work]
-return=skipped when economy needs snack and not economy needs goldstone
-sleep=43000
+sleep=42000
 consume=snack
 animate=working 18000
 mine=gold 2 66 5
-produce=goldstone
+produce=goldstone:2
 animate=working 18000
 mine=gold 2 66 5
-produce=goldstone
+produce=goldstone:2
 
 [idle]
 pics=deep_goldmine_i_??.png
-hotspot=25 38
+hotspot=21 37
+playercolor=true
+
+[build]
+pics=deep_goldmine_b_??.png
+hotspot=21 37
+playercolor=true
 
 [working]
-pics=deep_goldmine_i_??.png
-hotspot=25 38
+pics=deep_goldmine_w_??.png
+hotspot=21 37
+playercolor=true

@@ -18,7 +18,6 @@ ration=8
 work=_Work
 
 [work]
-return=skipped when economy needs ration and not economy needs raw_stone
 consume=ration
 sleep=20000
 animate=working 20000
@@ -26,9 +25,16 @@ mine=granit 2 100 5
 produce=raw_stone:2
 
 [idle]
-pics=i_??.png
-hotspot=44 48
+pics=granitemine_i_??.png
+hotspot=42 38
+playercolor=true
 
 [working]
-pics=i_??.png
-hotspot=44 48
+pics=granitemine_w_??.png
+hotspot=42 38
+playercolor=true
+
+[build]
+pics=granitemine_b_??.png
+hotspot=42 38
+playercolor=true

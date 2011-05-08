@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 #include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "ui_basic/window.h"
+#include "ui_basic/messagebox.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
@@ -179,14 +179,8 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_help_button.set_font(font_small());
 	m_change_map_or_save.set_font(font_small());
 
-	// Register win condition scripts
 	m_lua = create_LuaInterface();
 	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-
-	ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
-	container_iterate_const(ScriptContainer, sc, wc)
-		m_win_conditions.push_back(wc->first);
-	m_cur_wincondition = -1;
 	win_condition_clicked();
 
 	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -243,8 +237,6 @@ void Fullscreen_Menu_LaunchMPG::setChatProvider(ChatProvider & chat)
 	delete m_chat;
 	m_chat = new GameChatPanel
 		(this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80, get_h() * 3 / 10, chat);
-	// For better readability
-	m_chat->set_bg_color(RGBColor(50, 50, 50));
 }
 
 
@@ -261,12 +253,7 @@ void Fullscreen_Menu_LaunchMPG::back_clicked()
  */
 void Fullscreen_Menu_LaunchMPG::win_condition_clicked()
 {
-	if (m_settings->canChangeMap()) {
-		m_cur_wincondition++;
-		m_cur_wincondition %= m_win_conditions.size();
-		m_settings->setWinCondition(m_win_conditions[m_cur_wincondition]);
-	}
-
+	m_settings->nextWinCondition();
 	win_condition_update();
 }
 
@@ -370,6 +357,21 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 	m_nr_players = s.get_safe_int("nr_players");
 
 	m_settings->setMap(mapname, filename, m_nr_players, true);
+
+	// Check for sendability
+	if (g_fs->IsDirectory(filename)) {
+		// Send a warning
+		UI::WLMessageBox warning
+			(this, _("Saved game is directory"),
+			 _
+			  ("WARNING:\n"
+			   "The saved game you selected is a directory. This happens, if you set the option \"nozip\" to "
+			   "true or did manually unzip the saved game.\n"
+			   "Widelands is not able to transfer directory structures to the clients, please select another "
+			   "saved game or zip the directories content."),
+			 UI::WLMessageBox::OK);
+		warning.run();
+	}
 }
 
 /**

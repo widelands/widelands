@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@
 #include <typeinfo>
 
 namespace Widelands {
+struct Bob;
 class Map_Object;
 struct Editor_Game_Base;
 
@@ -85,11 +86,19 @@ struct Map_Map_Object_Loader {
 
 	void mark_object_as_loaded(Map_Object &);
 
+	void schedule_destroy(Map_Object &);
+	void schedule_act(Bob &);
+
+	void load_finish_game(Game & g);
+
 private:
 	typedef std::map<Serial, Map_Object *> Reverse_Map_Object_Map;
 
 	std::map<Map_Object *, bool> m_loaded_obj;
 	Reverse_Map_Object_Map m_objects;
+
+	std::vector<Map_Object *> m_schedule_destroy;
+	std::vector<Bob *> m_schedule_act;
 };
 
 }

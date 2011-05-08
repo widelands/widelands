@@ -21,6 +21,7 @@
 #define SUPPLY_LIST_H
 
 #include <vector>
+#include <cstddef>
 
 namespace Widelands {
 

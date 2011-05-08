@@ -16,28 +16,27 @@ for Widelands makes direct use of them:
    - SDL_net
    - SDL_ttf >= 2.0.0
    - SDL_gfx
+   - GLEW, when compiling with OpenGL support
    - boost >= 1.35
+   - lua >= 5.1
    - gettext (look at FAQ if you have problems with -lintl)
    - libpng
    - zlib
    - libiconv (only needed under win32)
    - libintl (only needed under win32)
 
-Make sure you have them all. If you encounter library versions that do not work,
-please tell us.
-
-Optional you will need the following libraries for Widelands' metaserver usage:
+You will need the following libraries for Widelands' metaserver usage:
    - ggz-base-libs >= 0.99.5
 or
    - ggz-client-libs == 0.14.1
    - libggz == 0.14.1
 
+Make sure you have them all. If you encounter library versions that do not work,
+please tell us.
+
 For compiling, you will also need
-   - Python >= 2.3
-   - CMake 2.6 (strictly recommended)
-   - scons >= 1.0.0 (optional, if you don't want to use CMake yet, see below)
-If you have a desparate need to use older Python versions then tell us. It'd be
-possible, but the inconvenience seems not to be worthwile so far.
+   - Python >= 2.3 but < 3
+   - CMake >= 2.6
 
 If you are a developer, you might (optionally!) make use of the following software:
    - ctags
@@ -56,14 +55,12 @@ If you are a developer, you might (optionally!) make use of the following softwa
      Used to generate source code documentation.
 
 
-============
-=Unix/Linux=
-============
+=======================
+= Unix/Mac OS X/Linux =
+=======================
 
 CMake
 ------------------
-There is only one way to build Widelands: using CMake.
-
 The easiest way to start with CMake is the script compile.sh, which is primarily
 used as entry point for beginners. It creates the out of source build directory
 (see below for details), initializes the cmake commands, compiles the sources and then starts the game.
@@ -72,11 +69,11 @@ If you want to do it manually, follow this path:
 
 - Create a build directory.
   CMake is a so called out of source build tool. That means, the build runs in a different
-  directory than where the sources are located, avoiding polluting the sources 
-  directory (and the ignore entries for the VCS systems). If you know SCons, this is different.
+  directory than where the sources are located, avoiding polluting the sources
+  directory (and the ignore entries for the VCS systems).
   The build directory can either be a path within your sources directory, or a directory
   at a completely independent location. In this example, we are using the subdirectory way:
-  Go to your widelands directory, and issue:  
+  Go to your widelands directory, and issue:
 
   $ mkdir -p build/compile
 
@@ -112,6 +109,12 @@ If you want to do it manually, follow this path:
   Now everything is installed in /usr/local, and you can run widelands:
 
   $ widelands
+
+- Find your libraries: Adapt your library search path.
+  Specifies a path which will be used by the cmake commands.  It contains the "base" directories,
+  cmake adds  /bin, /lib, /include appropriate to each of the directories.
+
+  $ cmake -DCMAKE_PREFIX_PATH="/tmp/widelands/libraries"
 
 - Tweak the setup: different install directory.
   Say, you don't want to install in /usr/local, but in /usr. This can be done by issuing
@@ -155,7 +158,7 @@ If you want to do it manually, follow this path:
   - Build type (Release or Debug build)
     When omitting the Build type, CMake decides upon finding of WL_RELEASE file if it should do
     a Release or Debug build.
-    
+
     $ cmake -DCMAKE_BUILD_TYPE=Release ../..
     $ cmake -DCMAKE_BUILD_TYPE=Debug ../..
 
@@ -182,7 +185,7 @@ If you want to do it manually, follow this path:
     Instead of having all languages installed, you may want to control which languages are available.
 
     $ cmake -DWL_LINGUAS="de;en_GB;eo" ../..
-    
+
     This setting only makes the languages German, English (Great Britain) and Esperanto available.
     You can also select only one language; and you have to use the semicolon character if you want
     to create a list of languages.
@@ -202,22 +205,6 @@ If you want to do it manually, follow this path:
   - make doc
     This runs source code documentation. Takes very long and lots of disk space.
     Obviously a developer command.
-
-
-localization
-------------
-If you choose to install widelands, you'll probably want to take care of proper
-l10n setup. Widelands will normally look for it's locale definitions in
-<install_prefix>/<localedir> (see "scons -h"). To change this setting, use a
-commandline like "scons localedir=foo/bar/baz" (relative to install_prefix)
-or "scons localedir=/foo/bar/baz" (absolute path). If you aren't using scons,
-set INSTALL_LOCALEDIR in src/config.h before starting the compile.
-
-Unless you are doing a release build, you will have to manually call
-"scons locale" to create the message catalogs. Release builds do this by default.
-
-Be aware that our installer does not yet put the files in the correct location.
-You will have to move/copy them yourself!
 
 
 

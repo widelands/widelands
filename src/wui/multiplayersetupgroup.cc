@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,13 +19,13 @@
 
 #include "multiplayersetupgroup.h"
 
-#include "constants.h"
 #include "gamesettings.h"
 #include "i18n.h"
 #include "log.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "network/network_player_settings_backend.h"
 #include "profile/profile.h"
 #include "wexception.h"
 
@@ -144,6 +144,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		(UI::Panel            * const parent, uint8_t id,
 		 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 		 GameSettingsProvider * const settings,
+		 NetworkPlayerSettingsBackend * const npsb,
 		 UI::Font * font,
 		 std::map<std::string, PictureID> & tp,
 		 std::map<std::string, std::string> & tn)
@@ -154,6 +155,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 tribe(0),
 		 init(0),
 		 s(settings),
+		 n(npsb),
 		 m_id(id),
 		 m_tribepics(tp),
 		 m_tribenames(tn)
@@ -206,101 +208,22 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 	/// Toggle through the types
 	void toggle_type() {
-		if (m_id >= s->settings().players.size())
-			return;
-
-		assert(s->settings().usernum == 0);
-
-		s->nextPlayerState(m_id);
+		n->toggle_type(m_id);
 	}
 
 	/// Toggle through the tribes + handle shared in players
 	void toggle_tribe() {
-		GameSettings const & settings = s->settings();
-
-		if (m_id >= settings.players.size())
-			return;
-
-		if (settings.players.at(m_id).state != PlayerSettings::stateShared) {
-			std::string const & currenttribe = settings.players.at(m_id).tribe;
-			std::string nexttribe = settings.tribes.at(0).name;
-
-			for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
-				if (settings.tribes[i].name == currenttribe) {
-					nexttribe = settings.tribes.at(i + 1).name;
-					break;
-				}
-			s->setPlayerTribe(m_id, nexttribe);
-		} else {
-			// This button is temporarily used to select the player that uses this starting position
-			uint8_t sharedplr = settings.players.at(m_id).shared_in;
-			for (; sharedplr < settings.players.size(); ++sharedplr) {
-				if
-					(settings.players.at(sharedplr).state != PlayerSettings::stateClosed
-					 &&
-					 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
-					break;
-			}
-			if (sharedplr < settings.players.size()) {
-				// We have already found the next player
-				s->setPlayerShared(m_id, sharedplr + 1);
-				return;
-			}
-			sharedplr = 0;
-			for (; sharedplr < settings.players.at(m_id).shared_in; ++sharedplr) {
-				if
-					(settings.players.at(sharedplr).state != PlayerSettings::stateClosed
-					 &&
-					 settings.players.at(sharedplr).state != PlayerSettings::stateShared)
-					break;
-			}
-			if (sharedplr < settings.players.at(m_id).shared_in) {
-				// We have found the next player
-				s->setPlayerShared(m_id, sharedplr + 1);
-				return;
-			} else {
-				// No fitting player found
-				return toggle_type();
-			}
-		}
+		n->toggle_tribe(m_id);
 	}
 
 	/// Toggle through the initializations
 	void toggle_init() {
-		GameSettings const & settings = s->settings();
-
-		if (m_id >= settings.players.size())
-			return;
-
-		PlayerSettings const & player = settings.players[m_id];
-		container_iterate_const(std::vector<TribeBasicInfo>, settings.tribes, j)
-			if (j.current->name == player.tribe)
-				return
-					s->setPlayerInit
-						(m_id,
-						 (player.initialization_index + 1)
-						 %
-						 j.current->initializations.size());
-		assert(false);
+		n->toggle_init(m_id);
 	}
 
 	/// Toggle through the teams
 	void toggle_team() {
-		const GameSettings & settings = s->settings();
-
-		if (m_id >= settings.players.size())
-			return;
-
-		Widelands::TeamNumber currentteam = settings.players.at(m_id).team;
-		Widelands::TeamNumber maxteam = settings.players.size() / 2;
-		Widelands::TeamNumber newteam;
-
-		if (currentteam >= maxteam)
-			newteam = 0;
-		else
-			newteam = currentteam + 1;
-
-		s->setPlayerTeam(m_id, newteam);
+		n->toggle_team(m_id);
 	}
 
 	/// Refresh all user interfaces
@@ -311,6 +234,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			set_visible(false);
 			return;
 		}
+
+		n->refresh(m_id);
 
 		set_visible(true);
 
@@ -344,15 +269,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init ->set_enabled(false);
 			return;
 		} else if (player.state == PlayerSettings::stateShared) {
-			// ensure that the shared_in player is able to use this starting position
-			if (player.shared_in > settings.players.size())
-				toggle_tribe();
-			if
-				(settings.players.at(player.shared_in - 1).state == PlayerSettings::stateClosed
-				 ||
-				 settings.players.at(player.shared_in - 1).state == PlayerSettings::stateShared)
-				toggle_tribe();
-
 			type ->set_tooltip(_("Shared in"));
 			type ->set_pic(g_gr->get_picture(PicMod_UI, "pics/shared_in.png"));
 
@@ -368,11 +284,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			// Flat ~= icon
 			tribe->set_flat(!initaccess);
 			tribe->set_enabled(true);
-
-			if (shared_in_tribe != settings.players.at(player.shared_in - 1).tribe) {
-				s->setPlayerTribe(m_id, settings.players.at(player.shared_in - 1).tribe);
-				shared_in_tribe = settings.players.at(m_id).tribe;
-			}
 		} else {
 			std::string title;
 			std::string pic = "pics/";
@@ -445,16 +356,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 
-	UI::Icon               * player;
-	UI::Button             * type;
-	UI::Button             * tribe;
-	UI::Button             * init;
-	UI::Button             * team;
-	GameSettingsProvider   * const s;
-	uint8_t                  const m_id;
-	std::map<std::string, PictureID> & m_tribepics;
+	UI::Icon                     *       player;
+	UI::Button                   *       type;
+	UI::Button                   *       tribe;
+	UI::Button                   *       init;
+	UI::Button                   *       team;
+	GameSettingsProvider         * const s;
+	NetworkPlayerSettingsBackend * const n;
+	uint8_t                        const m_id;
+	std::map<std::string, PictureID>   & m_tribepics;
 	std::map<std::string, std::string> & m_tribenames;
-	std::string              shared_in_tribe;
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup
@@ -537,11 +448,12 @@ m_fname(fname)
 
 	playerbox.set_size(w * 9 / 15, h - buth);
 	p.resize(MAX_PLAYERS);
+	NetworkPlayerSettingsBackend * npsb = new NetworkPlayerSettingsBackend(s);
 	for (uint8_t i = 0; i < p.size(); ++i) {
 		p.at(i) = new MultiPlayerPlayerGroup
 			(&playerbox, i,
 			 0, 0, playerbox.get_w(), buth,
-			 s, UI::Font::get(fname, fsize),
+			 s, npsb, UI::Font::get(fname, fsize),
 			 m_tribepics, m_tribenames);
 		playerbox.add(&*p.at(i), 1);
 	}

@@ -9,13 +9,13 @@ use("aux", "objective_utils")
 function check_quarries() 
    while not check_for_buildings(p, {quarry = 2},
       wl.Game().map:get_field(8,13):region(3)) do sleep(5000) end
-   p.objectives.quarries.done = true
+   objq.done = true
 end
 
 function check_ranger() 
    while not check_for_buildings(p, {rangers_hut = 1},
       wl.Game().map:get_field(17,11):region(3)) do sleep(5000) end
-   p.objectives.ranger.done = true
+   objr.done = true
 end
 
 function tutorial_thread()
@@ -33,8 +33,8 @@ function tutorial_thread()
       wl.Game().map:get_field(15,11):region(2)) do sleep(5000) end
    o.done = true
 
-   p:message_box(_"The advisor", khantrukh_4)
-   p:message_box(_"The advisor", khantrukh_5)
+   p:message_box(_"The advisor", khantrukh_4, { h = 400 })
+   p:message_box(_"The advisor", khantrukh_5, { h = 400 })
    o = start_lumberjack_02(p)
 
    -- Wait till the hut is build.
@@ -42,20 +42,20 @@ function tutorial_thread()
          wl.Game().map:get_field(12,13):region(2)) do sleep(5000) end
    o.done = true
 
-   p:message_box(_"The advisor", khantrukh_6)
+   p:message_box(_"The advisor", khantrukh_6, { h = 400 })
    p:allow_buildings{"rangers_hut", "quarry"}
-   start_quarries(p)
-   start_ranger(p)
+   objq = start_quarries(p)
+   objr = start_ranger(p)
    run(check_ranger)
    run(check_quarries)
 
-   p:message_box(_"The advisor", khantrukh_7)
-   while not (p.objectives.ranger.done and p.objectives.quarries.done) do
+   p:message_box(_"The advisor", khantrukh_7, { h = 400 })
+   while not (objr.done and objq.done) do
       sleep(5000)
    end
 
    p:reveal_scenario("barbariantut01")
-   p:message_box(_"Mission Complete", khantrukh_8)
+   p:message_box(_"Mission Complete", khantrukh_8, { h = 400 })
 end
 
 run(tutorial_thread)

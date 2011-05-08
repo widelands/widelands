@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-01-04 12:25+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -351,6 +351,11 @@ msgid ""
 "Fire Tongs"
 msgstr ""
 
+#: ../../tribes/atlanteans/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They are produced by the toolsmith."
+msgstr ""
+
 #: ../../tribes/atlanteans/conf:71
 msgid ""
 "Fish"
@@ -604,7 +609,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid ""
-"Mills wheat to produce flour."
+"Mills blackroot and corn to produce blackroot flour and corn flour, respectively."
 msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
@@ -1139,11 +1144,6 @@ msgstr ""
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
 "The double trident is one of the best tridents produced by the Atlantean weapon smithy. It is used in a dungeon - together with food - to train soldiers from attack level 2 to level 3."
-msgstr ""
-
-#: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid ""
-"The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/atlanteans/fisher/conf:1

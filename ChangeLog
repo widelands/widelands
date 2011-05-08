@@ -1,4 +1,7 @@
-### Build 16 (until now)
+### Build 16
+- Many new graphics, new sounds.
+- Added a dedicated server function for terminal use.
+- Improved and refactored font handler.
 - Removed barbarian Stronghold from list of buildable military sites as
   it did not have a real purpose.
 - Added a help button + window function (e.g. to explain the multi player
@@ -9,8 +12,14 @@
   control the same in game player together (share the kingdom) and other
   starting positions can be "shared" in as second (third, fourth, ...)
   starting position of a player.
+- Add a new Atlantean campaign map.
+- Add rudimentary support for ships (you can build them, but they are not yet
+  useful)
+- Add support for multiplayer scenarios. No scenario is shipped yet though.
 - Added column for the maximal number of players to the map selection menu.
 - Reordered wares and workers in logical groups (e.g. food production, ...).
+  Also fix the Economy Preferences Menu to be similar to the new Warehouse
+  windows.
 - Barbarian lumberjacks now need a felling_axe which is produce in the metal
   workshop. The axe is now only produced in the war mill and the axe factory.
   This delays barbarian soldier production in the early game, giving the other
@@ -23,6 +32,8 @@
   Now it is possible to rename maps and savegames but it is not possible
   to load maps from version after this change with versions before this change
 - Added a dotted frame border to the mini map.
+- Work area preview is now on by default.
+- New maps: Desert Tournament, Swamp Monks.
 - Improved and added many new animations for workers
 - Improved and added fighting animations for soldiers
 - Implemented teamview for allied players
@@ -64,12 +75,34 @@
 - New keyboard shortcuts for the message window: N, G, Delete.
 - New keyboard shortcuts for quick navigation: comma, period, and (Ctrl+)0-9.
 - Experience required by workers per level is no longer random.
+- Made the empire barracks a little more useful.
 - Improved stock menu: Use tabs and add warehouse-only tabs.
 - Changed the boss key from F10 to Ctrl+F10.
 - Story Message Boxes are nomore closed by right clicking.
 - Added command line option to tell Widelands where to search for translations.
 - Improved some of the exisiting maps.
 - Improved the "user friendly" compile script and moved it to compile.sh
+- Fixed the translation system - users should now be able to select any
+  compiled and installed translation of Widelands.
+- Removed scons and replaced it with cmake.
+- Fixed two potential security issues (internet gaming)
+- Fixed bug #729772: Selection of Widelands.ttf via options menu
+- Fixed bug #687342: No longer complain when a master miner is transferred to
+  a mine to fill a junior position.
+- Fixed bug #612348: Soldiers always move out of buildings to battle
+- Fixed bug #670980: Cmd_EnemyFlagAction::Write handles disappeared flag
+- Fixed bug #697375: Handle state.coords == Null() correctly in soldier attack code
+- Fixed bug #691909: Compatibility with old savegames with barbarian battlearena
+- Fixed bug #722789: Always flush animations before loading
+- Fixed bug #724169: Military site window no longer changes size erratically
+- Fixed bug #708328: infinite loop(s) in building_statistics_menu.cc
+- Fixed bug #720338: Options show wrong resulution as selected if no
+  ~/.widelands/conf exists
+- Fixed bug #536149: miner/master miner mixed up after enhancing to deep mine
+- Fixed bug #580073: Objectives menu update
+- Fixed bug #695735: Scrollbar damaged in multiline textboxes in (unique)
+  windows in FS menu
+- Fixed bug #659884: Problem with network savegame loading under windows
 - Fixed bug #683082: copy constructor should take const argument
 - Fixed bug #669085: Wood Lance (Empire ware) is practically invisible
   in ware encyclopedia
