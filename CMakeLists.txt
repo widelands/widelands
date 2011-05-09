@@ -260,6 +260,12 @@ find_package(GGZ_Core REQUIRED)
 include_directories(${GGZ_CORE_INCLUDE_DIR})
 add_definitions("-DUSE_GGZ")
 
+#on freeBSD this must be explicitely linked
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD") 
+  find_library(EXECINFO_LIBRARY NAMES execinfo)
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
+
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path
 find_package(OpenGL)

@@ -963,7 +963,7 @@ bool WLApplication::init_hardware() {
 	int result = -1;
 
 	//add default video mode
-#ifdef linux
+#if defined(linux) || defined(__FreeBSD__)
 	videomode.push_back("x11");
 #elif WIN32
 	videomode.push_back("windib");
