@@ -202,10 +202,10 @@ function barbarians_thread()
    -- Wait for various buildings to go up
    while true do
       local rv = p1:get_buildings{
-         "marblemine", "oremine", "deep_oremine", 
+         "marblemine", "deep_marblemine", "oremine", "deep_oremine",
          "coalmine", "deep_coalmine", "burners_house"
       }
-      local mm = #rv.marblemine
+      local mm = #rv.marblemine + #rv.deep_marblemine
       local ore = #rv.oremine + #rv.deep_oremine
       local coal = #rv.coalmine + #rv.deep_coalmine + #rv.burners_house
 
@@ -225,6 +225,7 @@ function barbarians_thread()
    send_msg(diary_page_8)
    local o = add_obj(obj_build_bigger_military_buildings)
    p1:allow_buildings{"outpost", "barrier", "tower"}
+   p2:allow_buildings{"quarry"}
 
    -- Wait for one of the buildings to go up
    while true do
