@@ -7,24 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-05-08 21:28+0000\n"
-"Last-Translator: Lucki <Unknown>\n"
+"PO-Revision-Date: 2011-05-11 15:19+0000\n"
+"Last-Translator: Flames_in_Paradise <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-09 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-05-12 04:31+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
-
-#: ../../campaigns/cconfig:64
-msgid "01 - Eyes in the Dark"
-msgstr "01 - Augen im Dunkel"
-
-#: ../../campaigns/cconfig:98
-msgid "01 - From Nemesis to Genesis"
-msgstr "01 - Vom Untergang zum Neuanfang"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
@@ -32,11 +24,50 @@ msgstr "01 - Die Strände von Malac' Mor"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr "02 - Ein Ort wie Zuhause"
+msgstr "Ein Platz zum Wohlfühlen, das neue Zuhause"
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. During solstice they listened to the oracle and went on "
+"to war. The only survivor will sacrifice his enemies' treasures on the "
+"ancient altar, build there a splendid castle and gain goodwill and the "
+"respect of the Gods."
+msgstr ""
+"Noch eine Schneeschmelze setzt sein. Drei Völker hatten am Fuße der "
+"mächtigen Berge Schutz vor dem harten Winter gesucht. Während der "
+"Sonnenwende haben sie die Orakel befragt und ziehen nun in den Krieg. Nur "
+"Einer wird den Göttern die Schätze seiner Feinde auf dem uralten Altar den "
+"Göttern darbringen können. Dort eine prächtige Burg errichten und damit das "
+"Wohlwollen und den Respekt der Götter gewinnen."
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr "Herausfordernd. Stellt die Atlanter vor."
+
+#: ../../maps/Checkmate.wmf/elemental:7
+msgid "Checkmate"
+msgstr "Schachmatt"
+
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Kometeninsel"
+
+#: ../../maps/Crater.wmf/elemental:7
+msgid "Crater"
+msgstr "Krater"
+
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Augen im Dunkeln"
+
+#: ../../campaigns/cconfig:98
+msgid "01 - From Nemesis to Genesis"
+msgstr "01 - Vom Untergang zum Neuanfang"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
-msgstr "02 - Ein Außenposten fürs Exil"
+msgstr "02 -Ein Aussenposten fürs Exil"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
@@ -55,11 +86,11 @@ msgid ""
 "of this island, before other tribes will follow."
 msgstr ""
 "Ein paar Meilen vor der Küste Gerions liegt seit eh und je eine kleine, "
-"namenlose Insel. Bisher gab es für dich nie einen Grund zu ihr herüber zu "
-"fahren, doch gestern fiel urplötzlich ein großer Feuerball vom Himmel, der "
+"namenlose Insel. Bisher gab es für Dich nie einen Grund zu ihr herüber zu "
+"fahren. Doch gestern fiel urplötzlich ein großer Feuerball vom Himmel, der "
 "in der Mitte der Insel zu Boden ging. War dies ein Zeichen der Götter? Du "
-"glaubst das und hoffst, dein Stamm wird die Schätze dieser Insel finden, "
-"bevor ein anderen Stämme diesen findet."
+"glaubst das und hoffst, Dein Stamm wird die Schätze dieser Insel finden, "
+"bevor einer der anderen Stämme dem Zeichen folgt."
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -68,11 +99,11 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only enough place for one tribe."
 msgstr ""
-"Schon seit langer Zeit wohnt dein Stamm an diesem schönen, einsamen "
-"Gletschersee. Niemand störte Euch und an Rohstoffen  mangelte es nicht. Doch "
-"vor einigen Monaten kam ein anderer Stamm über die Berge und ließ sich "
-"nieder. Du bist Dir sicher, dass der Lebensraum nur für einen Stamm "
-"vorgesehen ist."
+"Schon seit langer Zeit wohnt Dein Stamm an diesem schönen und einsamen "
+"Gletschersee. Niemand hat euch je gestört und ihr ward immer ausreichend "
+"versorgt. Doch vor einigen Monaten kam ein anderer Stamm über die Berge und "
+"ließ sich dort nieder. Du bist Dir sicher, dass hier nur genug Platz für "
+"einen Stamm ist"
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
@@ -102,23 +133,8 @@ msgid ""
 "no other way, than occupying the land of your enemies."
 msgstr ""
 "Ein weiterer seltsamer Test der Götter. Um die andere Seite zu erreichen, "
-"scheint es keinen anderen Weg zu geben, als das Land deiner Gegner zu "
+"scheint es keinen anderen Weg zu geben, als das Land Deiner Gegner zu "
 "besetzen."
-
-#: ../../maps/The Thaw.wmf/elemental:11
-msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
-"majestic mountains. During solstice they listened to the oracle and went on "
-"to war. The only survivor will sacrifice his enemies' treasures on the "
-"ancient altar, build there a splendid castle and gain goodwill and the "
-"respect of the Gods."
-msgstr ""
-"Eine weitere Schneeschmelze setzt sein. Drei Völker hatten am Fuße der "
-"mächtigen Berge Schutz vor dem harten Winter gesucht. Während der "
-"Sonnenwende haben sie die Orakel befragt und ziehen nun in den Krieg. Nur "
-"einer wird die Schätze seiner Feinde auf dem uralten Altar den Göttern "
-"darbringen können, um ihren Respekt zu gewinnen und die prächtige Burg zu "
-"beziehen."
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
@@ -131,22 +147,6 @@ msgstr "Atoll"
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
 msgstr "Barbaren - Das zweite Reich"
-
-#: ../../campaigns/cconfig:44
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Herausfordernd. Führt die Atlanter ein."
-
-#: ../../maps/Checkmate.wmf/elemental:7
-msgid "Checkmate"
-msgstr "Schachmatt"
-
-#: ../../maps/Comet Island.wmf/elemental:7
-msgid "Comet Island"
-msgstr "Kometeninsel"
-
-#: ../../maps/Crater.wmf/elemental:7
-msgid "Crater"
-msgstr "Krater"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -263,10 +263,10 @@ msgid ""
 "if you are alone, but no-one knows, what might happen if you meet an "
 "opponent tribe?"
 msgstr ""
-"Ist es ein Test der Götter oder ein böser Plan von jemand anderem, dass "
-"deine Gefolgschaft und du heute morgen auf dieser Insel zwischen Feuer und "
-"Lava erwachen musstet? Bisher scheint alles ruhig und verlassen zu sein. "
-"Doch niemand weiß, was kommen mag, wenn du auf einen gegnerischen Stamm "
+"Ist es ein Test der Götter oder ein böser Plan von jemand Anderem, dass "
+"Deine Gefolgschaft und Du heute morgen auf dieser Insel zwischen Feuer und "
+"Lava erwachen mussten? Bisher scheint alles ruhig und verlassen zu sein. "
+"Doch niemand weiß, was kommen mag, wenn Du auf einen gegnerischen Stamm "
 "triffst."
 
 #: ../../maps/Islands at war.wmf/elemental:9
@@ -299,9 +299,9 @@ msgid ""
 "with your neighbours?"
 msgstr ""
 "Es scheint, als ob dieses magische Tal schon seit dem Anbeginn der Zeit von "
-"Wisents bewohnt und beherrscht wurde. Als dein Volk an diesen Platz kam, "
-"warst du dir noch sicher, dass es hier mehr als genug Platz für ein "
-"friedliches Leben gibt, doch kann dein Volk auch wirklich friedlich mit "
+"Wisenten bewohnt und beherrscht wurde. Als Dein Volk an diesen Platz kam, "
+"warst Du Dir noch sicher, dass es hier mehr als genug Platz für ein "
+"friedliches Leben gibt. Doch kann dein Volk auch wirklich friedlich mit "
 "euren Nachbarn zusammenleben?"
 
 #: ../../maps/Swamp Island.wmf/elemental:11
@@ -311,7 +311,7 @@ msgid ""
 "it, defend it! "
 msgstr ""
 "Es riecht nach Sumpf, es sieht so aus, wie Sumpf und es ist ein Sumpf! Aber "
-"hier bist du geboren und hast dein ganzes Leben verbracht. Wenn du ihn nicht "
+"hier bist Du geboren und hast Dein ganzes Leben verbracht. Wenn Du ihn nicht "
 "verlieren willst, verteidige ihn! "
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
@@ -347,7 +347,7 @@ msgid ""
 "thousand waves, twinkling in the sun."
 msgstr ""
 "Viele wunderschöne, grüne Inseln warten auf die, die tapfer genug sind, um "
-"die tausenden glitzernden Wellen zu passieren."
+"die Tausend glitzernden Wellen zu passieren."
 
 #: ../../maps/Three Warriors.wmf/elemental:11
 msgid ""
@@ -430,7 +430,7 @@ msgid ""
 "die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
 msgstr ""
 "Man sagt, dass die undurchdringlichen Ländereien im hohen Norden selbst die "
-"mutigsten Siedler und die tapfersten der tapferen Soldaten abgeschreckt "
+"mutigsten Siedler und die Tapfersten der tapferen Soldaten abgeschreckt "
 "haben. Riesige, uralte Wälder, voll mit Großwild, unterbrochen nur von "
 "Feuchtgebieten und Hügeln, blieben geheimnisumwittert. Die Wenigen, die es "
 "geschafft haben, zurückzukehren, berichten von gewaltigen Bauten, reich "
@@ -438,7 +438,7 @@ msgstr ""
 "Wildnis. Dutzende Jahre später zeugen nur noch einige moosüberwucherte "
 "Ruinen von den guten alten Zeiten. Ihre Gestalt deutet die Kunstfertigkeiten "
 "ihrer Erbauer nur an. Niemand weiß, warum sie verschwunden sind. Die Leute "
-"erzählen, dass Wagemutigen nun nichts auf dem Weg zu Reichtum mehr im Wege "
+"erzählen, dass Wagemutigen auf dem Weg zu Reichtum nun nichts mehr im Wege "
 "steht. Aber viele werden von Wölfen zerrissen werden oder in den Sümpfen "
 "versinken... umzingelt von feindlichen Stämmen."
 
@@ -468,7 +468,7 @@ msgstr "Die Schneeschmelze"
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
-msgstr "Uralte Sonne des Feuers"
+msgstr "Die uralte Sonne des Feuers"
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
@@ -504,10 +504,10 @@ msgid ""
 "oases, which no one found out about yet. Perhaps you will be the one, but be "
 "aware of the others, who are searching too!"
 msgstr ""
-"Es hat etwas Mystisches, wie eine graue Atmosphäre, die diese drei Oasen "
-"umhüllt. Und doch hat bisher niemand den Grund hierfür finden können. "
-"Vielleicht wirst du der Erste sein, der das Geheimnis lüftet. Doch bedenke, "
-"dass du nicht der Einzige bist, der danach sucht."
+"Etwas Mystisches, wie eine graue Atmosphäre, umhüllt diese drei Oasent. Und "
+"doch hat bisher niemand den Grund hierfür finden können. Vielleicht wirst Du "
+"der Erste sein, der das Geheimnis lüftet. Doch bedenke, dass Du nicht der "
+"Einzige bist, der danach sucht."
 
 #: ../../maps/Finlakes.wmf/elemental:11
 msgid ""
@@ -515,7 +515,7 @@ msgid ""
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
 "Dies sind die wunderschönen finnischen Lande, die sich vor allem durch Seen, "
-"Flüsse, uralte Wälder und Berge auszeichnen. Nun ist es an dir, deinen Weg "
+"Flüsse, uralte Wälder und Berge auszeichnen. Nun ist es an Dir, Deinen Weg "
 "hindurch zu finden..."
 
 #: ../../maps/The big lake.wmf/elemental:9
@@ -654,7 +654,7 @@ msgstr ""
 "höchsten Berg mit genügend Platz und Golderz für nur einen Stamm - führen "
 "zwei gegenüberliegende Pfade. Beachte aber, dass der verbleibende Platz "
 "klein und die Rohstoffe gering sind. Vergiss nicht, immer für genug "
-"Holznachschub zu sorgen, du wirst ihn brauchen."
+"Holznachschub zu sorgen, Du wirst ihn brauchen."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
@@ -662,7 +662,7 @@ msgstr "Wer wird der wirkliche König des großen Atoll sein?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
-msgstr "Das Tal der Wisents"
+msgstr "Das Tal der Wisente"
 
 #: ../../maps/Plateau.wmf/elemental:9
 msgid ""
@@ -673,7 +673,7 @@ msgid ""
 msgstr ""
 "Du stehst auf einer Insel, die von mächtigen Bergen gekrönt wird. Sie "
 "behüten den wundervollen Schatz in ihrer Mitte - Das Grüne Plateau. Es ist "
-"schwer zu bekommen und schnell wieder verloren. Wenn du es also halten "
+"schwer zu bekommen und schnell wieder verloren. Wenn Du es also halten "
 "willst, beobachte jeden Schritt deiner Gegner."
 
 #~ msgid "(Tutorial) Barbarians - The second Empire"
