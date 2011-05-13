@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-05-07 20:19+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2011-05-12 13:29+0000\n"
+"Last-Translator: jzombi <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-08 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-05-13 04:32+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1719,8 +1719,8 @@ msgstr ""
 #: ../../src/logic/production_program.cc:820
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " hiányzik"
+msgstr[1] " hiányzanak"
 
 #: ../../src/logic/production_program.cc:880
 #: ../../src/logic/production_program.cc:975
@@ -1766,7 +1766,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:1196
 msgid "Mine empty"
-msgstr ""
+msgstr "A bánya üres."
 
 #: ../../src/logic/production_program.cc:1198
 msgid ""
@@ -1792,7 +1792,7 @@ msgstr "szint"
 #: ../../src/logic/production_program.cc:1340
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr ""
+msgstr "Nem található katona ehhez az edzettségi szinthez!"
 
 #: ../../src/logic/production_program.cc:1316
 #, c-format

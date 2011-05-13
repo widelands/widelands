@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-26 12:21+0000\n"
+"PO-Revision-Date: 2011-05-12 23:42+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-04-27 04:32+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-13 04:32+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2599,7 +2599,7 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr ""
+msgstr "幫助： "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -2672,14 +2672,14 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 #: ../../src/ui_fsmenu/mapselect.cc:58
 msgid "Name:"
-msgstr ""
+msgstr "名稱:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:60
 #: ../../src/ui_fsmenu/mapselect.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:94
 msgid "Author:"
-msgstr ""
+msgstr "作者:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
@@ -2706,7 +2706,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
 msgid "Size:"
-msgstr ""
+msgstr "尺寸:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:70
 #: ../../src/ui_fsmenu/mapselect.cc:76
@@ -2745,7 +2745,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:66 ../../src/ui_fsmenu/launchMPG.cc:165
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
 msgid "Map"
-msgstr ""
+msgstr "地圖"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
@@ -2803,7 +2803,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
 msgid "Scenario"
-msgstr ""
+msgstr "方案"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
@@ -2820,7 +2820,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:281 ../../src/ui_fsmenu/launchSPG.cc:236
 msgid "Type: "
-msgstr ""
+msgstr "類型: "
 
 #: ../../src/ui_fsmenu/launchMPG.cc:365
 msgid "Saved game is directory"
@@ -3048,7 +3048,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:64
 #: ../../src/wui/game_main_menu_save_game.h:107
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: ../../src/ui_fsmenu/loadgame.cc:75
 msgid "Choose saved game!"
@@ -3108,7 +3108,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:98 ../../src/wui/game_options_menu.cc:65
 msgid "License"
-msgstr ""
+msgstr "許可證"
 
 #: ../../src/ui_fsmenu/main.cc:106 ../../src/wui/game_options_menu.cc:100
 msgid "Exit Game"
@@ -3128,7 +3128,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:138
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
@@ -3157,7 +3157,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayer.cc:114
 #: ../../src/ui_fsmenu/netsetup_lan.cc:113 ../../src/wui/login_box.cc:73
 msgid "nobody"
-msgstr ""
+msgstr "沒有人"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:51
 msgid "Metaserver Lobby"
@@ -3245,7 +3245,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:64 ../../src/ui_fsmenu/options.cc:399
 msgid "Apply"
-msgstr ""
+msgstr "應用"
 
 #: ../../src/ui_fsmenu/options.cc:75
 msgid "min."
@@ -3261,7 +3261,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:95
 msgid "Fullscreen"
-msgstr ""
+msgstr "全屏"
 
 #: ../../src/ui_fsmenu/options.cc:101
 msgid "Grab Input"
@@ -3285,7 +3285,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:133
 msgid "Language"
-msgstr ""
+msgstr "語言"
 
 #: ../../src/ui_fsmenu/options.cc:144
 msgid "In-game Options"
@@ -3334,7 +3334,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:410 ../../src/ui_fsmenu/options.cc:415
 msgid "px."
@@ -3378,7 +3378,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:506
 msgid "Pause"
-msgstr ""
+msgstr "暫停"
 
 #: ../../src/ui_fsmenu/options.cc:517
 msgid "FreeSerif (Default)"
@@ -3390,11 +3390,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:50
 msgid "New Game"
-msgstr ""
+msgstr "新遊戲"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:59
 msgid "Campaigns"
-msgstr ""
+msgstr "推廣活動"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:68
 msgid "Load Game"
@@ -3475,7 +3475,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:170
 msgid "Continue"
-msgstr ""
+msgstr "繼續"
 
 #: ../../src/wui/buildingwindow.cc:185
 #, c-format
@@ -3517,7 +3517,7 @@ msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:88
 msgid "Quantity"
-msgstr ""
+msgstr "數量"
 
 #: ../../src/wui/fieldaction.cc:246
 msgid "Build small buildings"
@@ -3593,7 +3593,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
-msgstr ""
+msgstr "攻擊"
 
 #: ../../src/wui/fieldaction.cc:584
 msgid "Build mines"
@@ -3770,7 +3770,7 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:220
 msgid "Military"
-msgstr ""
+msgstr "軍事"
 
 #: ../../src/wui/general_statistics_menu.cc:246
 #: ../../src/wui/ware_statistics_menu.cc:423
@@ -3795,7 +3795,7 @@ msgstr ""
 #: ../../src/wui/general_statistics_menu.cc:284
 #: ../../src/wui/ware_statistics_menu.cc:461
 msgid "Help"
-msgstr ""
+msgstr "幫助"
 
 #: ../../src/wui/general_statistics_menu.cc:293
 #: ../../src/wui/ware_statistics_menu.cc:470
@@ -3824,7 +3824,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:293
 #, c-format
 msgid "%s (%s)"
-msgstr ""
+msgstr "%s (%s)"
 
 #: ../../src/wui/interactive_base.cc:298
 msgid "NO GAME CONTROLLER"
@@ -3833,12 +3833,12 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:122
 #: ../../src/wui/interactive_spectator.cc:55
 msgid "Chat"
-msgstr ""
+msgstr "聊天"
 
 #: ../../src/wui/interactive_player.cc:128
 #: ../../src/wui/interactive_spectator.cc:65
 msgid "Statistics"
-msgstr ""
+msgstr "統計"
 
 #: ../../src/wui/interactive_player.cc:131
 msgid "Objectives"
@@ -3874,7 +3874,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
-msgstr ""
+msgstr "密碼:"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
@@ -3918,12 +3918,12 @@ msgstr ""
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr ""
+msgstr "士兵"
 
 #: ../../src/wui/minimap.cc:147
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Terrain"
-msgstr ""
+msgstr "地形"
 
 #: ../../src/wui/minimap.cc:154
 msgid "Owner"
@@ -3962,7 +3962,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:300
 #: ../../src/wui/playerdescrgroup.cc:176
 msgid "Human"
-msgstr ""
+msgstr "人類"
 
 #: ../../src/wui/multiplayersetupgroup.cc:394
 msgid "Client name"
@@ -3970,19 +3970,19 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:402
 msgid "Role"
-msgstr ""
+msgstr "角色"
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Start"
-msgstr ""
+msgstr "開始"
 
 #: ../../src/wui/multiplayersetupgroup.cc:426
 msgid "Type"
-msgstr ""
+msgstr "類型"
 
 #: ../../src/wui/multiplayersetupgroup.cc:434
 msgid "Tribe"
-msgstr ""
+msgstr "部落"
 
 #: ../../src/wui/multiplayersetupgroup.cc:442
 #: ../../src/wui/playerdescrgroup.cc:103
@@ -3992,7 +3992,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Worker"
-msgstr ""
+msgstr "工人"
 
 #: ../../src/wui/productionsitewindow.cc:72
 msgid "Exp"
@@ -4012,7 +4012,7 @@ msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:76
 msgid "Capacity"
-msgstr ""
+msgstr "容量"
 
 #: ../../src/wui/soldierlist.cc:381 ../../src/wui/soldierlist.cc:394
 #: ../../src/wui/soldierlist.cc:407
@@ -4208,7 +4208,7 @@ msgstr "退出編輯器"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
 msgid "Name: "
-msgstr ""
+msgstr "名稱: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:75
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
@@ -4307,7 +4307,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Low"
-msgstr ""
+msgstr "低"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:249
 msgid "High"
@@ -4387,11 +4387,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:200
 msgid "Player "
-msgstr ""
+msgstr "播放器 "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:319
 msgid "Error!"
-msgstr ""
+msgstr "錯誤!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:321
 msgid ""
@@ -4417,11 +4417,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:95
 msgid "Allow"
-msgstr ""
+msgstr "允許"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
@@ -4467,7 +4467,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Resource"
-msgstr ""
+msgstr "資源"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
@@ -4540,7 +4540,7 @@ msgstr "選擇"
 
 #: ../../src/wui/game_message_menu.h:68
 msgid "Status"
-msgstr ""
+msgstr "狀態"
 
 #: ../../src/wui/game_message_menu.h:69
 msgid "Title"
