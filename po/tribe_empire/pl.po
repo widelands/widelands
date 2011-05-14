@@ -7,20 +7,22 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-04-27 17:42+0000\n"
+"PO-Revision-Date: 2011-05-13 16:27+0000\n"
 "Last-Translator: Mateusz Greń <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-28 04:32+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-14 04:32+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Prawdziwy posiłek produkowany jest w gospodach z chleba i ryb/mięsa. "
+"Zaspokaja potrzeby górników w głębokich kopalniach."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -28,6 +30,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"Mała przekąska, by górnicy mogli zachować pełnię sił i pracować dalej. Racje "
+"spożywane są także przez zwiadowców w trakcie prowadzenia misji. Produkuje "
+"się je w tawernach z ryb lub mięsa lub chleba."
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
@@ -99,6 +104,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Poza chlebem i mięsem, ryby są także częścią zaplecza żywieniowego Imperium. "
+"Ryby wykorzystuje się w tawernach, karczmach i budynkach treningowych "
+"(arena, koloseum, obóz treningowy)."
 
 #: ../../tribes/empire/conf:62
 msgid "Bread"
@@ -175,6 +183,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"Sukno potrzebne jest wymagane podczas budowy niektórych obiektów. "
+"Wykorzystuje się je także w warsztatach płatnerskich."
 
 #: ../../tribes/empire/conf:65
 msgid "Coal"
@@ -285,6 +295,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Szczypce stanowią narzędzia hutnika pracującego w hucie. Produkowane są "
+"przez rzemieślnika."
 
 #: ../../tribes/empire/conf:67
 msgid "Fish"
@@ -316,6 +328,8 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Mąkę produkuje się w młynach z pszenicy i wykorzystuje w piekarni do "
+"produkcji smakowitego Imperialnego chleba."
 
 #: ../../tribes/empire/conf:117
 msgid "Forester"
@@ -352,6 +366,9 @@ msgid ""
 "with it. It is produced in the smelting works out of goldstone and processed "
 "in the armour smithy and the weapon smithy."
 msgstr ""
+"Złoto jest najcenniejszym z metali; dekoruje się nim zbroje i broń. "
+"Produkuje się je w hutach ze złotych samorodków i przetwarza w warsztatach "
+"płatnerskich i zbrojowniach."
 
 #: ../../tribes/empire/conf:71
 msgid "Goldstone"
@@ -360,6 +377,7 @@ msgstr "Skała złotonośna"
 #: ../../tribes/empire/goldstone/conf:1
 msgid "Goldstones are mined in goldmines and processed in smelting works."
 msgstr ""
+"Złote samorodki wydobywa się w kopalniach złota i przetwarza w hutach."
 
 #: ../../tribes/empire/conf:72
 msgid "Grape"
@@ -423,6 +441,8 @@ msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
+"Jak można produkować racje lub posiłki bez narzędzi kuchennych? Produkuje "
+"się je w warsztatach rzemieślniczych i wykorzystuje w tawernach i karczmach."
 
 #: ../../tribes/empire/conf:119
 msgid "Hunter"
@@ -461,6 +481,8 @@ msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"Ruda żelaza musi być wytopiona w hucie celem pozyskania żelaza. Rudę żelaza "
+"wydobywa się w kopalniach żelaza."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -500,6 +522,9 @@ msgid ""
 "for nearly every bigger building. They are produced out of marble in a "
 "stonemason's house."
 msgstr ""
+"Marmurowe kolumny reprezentują wysoki poziom kultury w Imperium, więc "
+"wymagane są do budowy niemalże każdego większego budynku. Produkuje się je z "
+"marmuru w zakładach kamieniarskich."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -527,6 +552,11 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"Mięso ma bardzo dużą wartość energetyczną. Wykorzystuje się je w karczmach i "
+"tawernach do przygotowywania przekąsek dla górników i jest spożywane w "
+"obiektach treningowych (arena, koloseum, obóz treningowy). Są dwa źródła "
+"mięsa: wieprzowina ze świniarni i mięso z dzikiej zwierzyny upolowanej przez "
+"myśliwych."
 
 #: ../../tribes/empire/conf:170
 msgid "Mill"
@@ -874,6 +904,8 @@ msgid ""
 "Stones are a basic building material of the Empire. It is produced in "
 "quarries and marble mines."
 msgstr ""
+"Kamienie są podstawowym materiałem budowlanym w Imperium. Produkuje się je w "
+"kamieniołomach i kopalniach marmuru."
 
 #: ../../tribes/empire/conf:153
 msgid "Stronghold"
@@ -907,6 +939,10 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Piekarze Imperium produkują wyjątkowo smakowity chleb z mąki i wody. "
+"Wykorzystuje się go w tawernach i karczmach by produkować racje i posiłki. "
+"Chleb jest także wykorzystywany w obiektach treningowych (arena, koloseum, "
+"obóz treningowy)."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -914,6 +950,9 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"Kolczuga to średnia zbroja żołnierzy Imperium. Wytwarza się ją w zakładach "
+"płatnerskich i wykorzystuje w obozach treningowych - wraz z jedzeniem - przy "
+"zwiększaniu punktów życia żołnierzy z poziomu 2 do 3."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -931,6 +970,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"Młot jest niezbędnym narzędziem. Potrzebują go geolodzy, budowniczy, "
+"płatnerzy i zbrojmistrze. Upewnij się, że zawsze masz kilka w rezerwie! "
+"Produkuje je zbrojmistrz."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -939,6 +981,10 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"Hełm to podstawa obrony dla wojownika. Produkują go zakłady płatnerskie. "
+"Wraz z drewnianymi lancami stanowią wyposażenie młodych żołnierzy. Hełmy "
+"wykorzystuje się także w obozach treningowych - wraz z jedzeniem - przy "
+"zwiększaniu punktów życia żołnierzy z poziomu 0 do 1."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -952,6 +998,10 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"Zbroja płytowa to najsilniejszy typ zbroi na wyposażeniu żołnierzy Imperium. "
+"Wytwarza się ją w zakładach płatnerskich i wykorzystuje w obozach "
+"treningowych - wraz z jedzeniem - przy zwiększaniu punktów życia żołnierzy z "
+"poziomu 3 do 4."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -966,18 +1016,24 @@ msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
+"Te winogrona to baza dla dobrego wina. Zbiera się je w winnicach i "
+"przetwarza w winiarniach."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Ten koszyk jest potrzebny pracownikom winnic do zbierania winogron. "
+"Produkuje go rzemieślnik."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"To piwo produkuje się w browarze z pszenicy i wody. Spożywają go górnicy w "
+"kopalniach węgla i żelaza."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -985,6 +1041,9 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"To jest mocna lanca ze stalowym czubkiem i niewielkim ostrzem. Produkuje się "
+"ją w zbrojowni i wykorzystuje w obozach treningowych - wraz z jedzeniem - "
+"przy zwiększaniu siły ataku żołnierzy z poziomu 2 do 3."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -992,6 +1051,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"To jest zaawansowana lanca ze stalowym czubkiem. Produkuje się ją w "
+"zbrojowni i wykorzystuje w obozach treningowych - wraz z jedzeniem - przy "
+"zwiększaniu siły ataku żołnierzy z poziomu 1 do 2."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -999,6 +1061,10 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"To jest najlepsza i najostrzejsza broń stworzona przez Imperialnych "
+"zbrojmistrzów dla jego wojowników. Wykorzystuje się ją w obozach "
+"treningowych - wraz z jedzeniem - przy zwiększaniu siły ataku żołnierzy z "
+"poziomu 3 do 4."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -1010,6 +1076,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Ta lanca ma żelazny kolec. Produkuje się ją w zbrojowniach i wykorzystuje w "
+"obozach treningowych - wraz z jedzeniem - przy zwiększaniu siły ataku "
+"żołnierzy z poziomu 0 do 1."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1021,7 +1090,7 @@ msgstr ""
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
+msgstr "Ta piła potrzebna jest traczom. Produkuje ją rzemieślnik."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1036,6 +1105,8 @@ msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"To smakowite wino spożywane jest w kopalniach złota i marmuru. Produkuje się "
+"je w winiarniach."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1043,6 +1114,9 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"Ta drewniana lanca jest podstawową bronią w systemie wojskowym Imperium. "
+"Produkuje się ją w zbrojowni. Wraz z hełmem stanowi wyposażenie każdego "
+"młodego żołnierza."
 
 #: ../../tribes/empire/conf:129
 msgid "Toolsmith"
@@ -1255,6 +1329,8 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"Woda to esencja życia! Wykorzystują ją piekarnie i browary. Także ośla "
+"farma, owczarnia i świniarnia muszą być zaopatrywane w wodę."
 
 #: ../../tribes/empire/conf:186
 msgid "Weapon Smithy"
@@ -1265,6 +1341,8 @@ msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Broń, zbroje i narzędzia robi się z żelaza. Uzyskuje się je z rudy żelaza w "
+"hutach."
 
 #: ../../tribes/empire/conf:131
 msgid "Weaponsmith"
@@ -1292,6 +1370,9 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Pszenica to podstawa przetrwania. Produkuje się ją w farmach i przetwarza w "
+"młynach i browarach. Także ośle farmy, owczarnie i świniarnie muszą być "
+"zaopatrywane w pszenicę."
 
 #: ../../tribes/empire/conf:96
 msgid "Wine"
@@ -1314,6 +1395,8 @@ msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"Drewno to podstawowy materiał budowlany Imperium. Potrzebne jest także w "
+"zbrojowni."
 
 #: ../../tribes/empire/conf:99
 msgid "Wool"
