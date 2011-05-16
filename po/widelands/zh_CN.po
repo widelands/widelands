@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-26 10:07+0000\n"
+"PO-Revision-Date: 2011-05-15 22:46+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-04-27 04:32+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-16 04:36+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -271,7 +271,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2208 ../../src/logic/game.cc:383
 #: ../../src/logic/game.cc:423
 msgid "Loading..."
-msgstr ""
+msgstr "载入中..."
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
@@ -318,7 +318,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
-msgstr ""
+msgstr "增强"
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:170
 msgid "Stop"
@@ -340,7 +340,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:510
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
 #: ../../src/logic/building.cc:511
@@ -487,7 +487,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:717 ../../src/writeHTML.cc:862
 msgid "Programs"
-msgstr ""
+msgstr "程序"
 
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
@@ -524,7 +524,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:762
 msgid "animation"
-msgstr ""
+msgstr "动画"
 
 #: ../../src/writeHTML.cc:763 ../../src/writeHTML.cc:902
 msgid "return"
@@ -564,7 +564,7 @@ msgstr "未知"
 
 #: ../../src/writeHTML.cc:778
 msgid "Production"
-msgstr ""
+msgstr "生产"
 
 #: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:166
 #: ../../src/wui/productionsitewindow.cc:84 ../../src/wui/transport_ui.cc:65
@@ -624,7 +624,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:913
 msgid "and"
-msgstr ""
+msgstr "和"
 
 #: ../../src/writeHTML.cc:914
 msgid "when"
@@ -719,7 +719,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1155
 msgid "animate"
-msgstr ""
+msgstr "动画"
 
 #: ../../src/writeHTML.cc:1174
 msgid "Documentation for program command consume"
@@ -877,7 +877,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:101
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "经济: %s"
 
 #: ../../src/economy/wares_queue.cc:259
 #, c-format
@@ -890,7 +890,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr ""
+msgstr "工具"
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
@@ -966,7 +966,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:474
 #: ../../src/logic/map.h:185
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
@@ -1087,7 +1087,7 @@ msgstr ""
 #: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
-msgstr ""
+msgstr "小"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:62
@@ -1245,7 +1245,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1394
 msgid "priority"
-msgstr ""
+msgstr "优先"
 
 #: ../../src/logic/immovable.cc:901 ../../src/logic/immovable.cc:1082
 #, c-format
@@ -1293,7 +1293,7 @@ msgstr ""
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
-msgstr ""
+msgstr "玩家 1"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:67
 msgid "\"min-max\""
@@ -1315,7 +1315,7 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:62 ../../src/logic/warehouse.cc:255
 msgid " conquer"
-msgstr ""
+msgstr " 征服"
 
 #: ../../src/logic/militarysite.cc:113
 #, c-format
@@ -1514,7 +1514,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:866
 #: ../../src/logic/production_program.cc:961
 msgid "count"
-msgstr ""
+msgstr "次数"
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
@@ -1525,7 +1525,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:149
 msgid "not "
-msgstr ""
+msgstr "未 "
 
 #: ../../src/logic/production_program.cc:171
 #: ../../src/logic/production_program.cc:192
@@ -1569,7 +1569,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:418
 #: ../../src/logic/production_program.cc:817
 msgid " and "
-msgstr ""
+msgstr " 和 "
 
 #: ../../src/logic/production_program.cc:419
 #: ../../src/logic/production_program.cc:796
@@ -1655,7 +1655,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:914
 #: ../../src/logic/production_program.cc:1007
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:917
 #, c-format
@@ -1673,7 +1673,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1050
 #: ../../src/logic/production_program.cc:1061
 msgid "percentage"
-msgstr ""
+msgstr "百分比"
 
 #: ../../src/logic/production_program.cc:1175
 #, c-format
@@ -1820,7 +1820,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:316
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "部落 %s: %s"
 
 #: ../../src/logic/warehouse.cc:460
 #, c-format
@@ -2050,7 +2050,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
@@ -2089,7 +2089,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
@@ -2140,7 +2140,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:155
 #, c-format
@@ -2415,7 +2415,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "计算机%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
@@ -2597,7 +2597,7 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
-msgstr ""
+msgstr "帮助： "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -2646,7 +2646,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/netsetup_lan.cc:76
 #: ../../src/ui_fsmenu/singleplayer.cc:74
 msgid "Back"
-msgstr ""
+msgstr "返回"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:162
 #: ../../src/ui_fsmenu/campaign_select.cc:164
@@ -2704,13 +2704,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
 msgid "Size:"
-msgstr ""
+msgstr "尺寸："
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:70
 #: ../../src/ui_fsmenu/mapselect.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:89
 msgid "World:"
-msgstr ""
+msgstr "世界:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 #: ../../src/ui_fsmenu/mapselect.cc:82
@@ -2801,7 +2801,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
 msgid "Scenario"
-msgstr ""
+msgstr "方案"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
