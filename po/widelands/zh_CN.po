@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-05-15 22:46+0000\n"
+"PO-Revision-Date: 2011-05-16 23:41+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-05-16 04:36+0000\n"
+"X-Launchpad-Export-Date: 2011-05-17 04:35+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
@@ -322,7 +322,7 @@ msgstr "增强"
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:170
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
@@ -528,7 +528,7 @@ msgstr "动画"
 
 #: ../../src/writeHTML.cc:763 ../../src/writeHTML.cc:902
 msgid "return"
-msgstr ""
+msgstr "返回"
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
@@ -579,7 +579,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:803
 msgid "Inputs"
-msgstr ""
+msgstr "输入"
 
 #: ../../src/writeHTML.cc:814
 #, c-format
@@ -588,7 +588,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:826
 msgid "Output"
-msgstr ""
+msgstr "输出"
 
 #: ../../src/writeHTML.cc:837 ../../src/writeHTML.cc:851
 #, c-format
@@ -632,7 +632,7 @@ msgstr "当"
 
 #: ../../src/writeHTML.cc:916
 msgid "or"
-msgstr ""
+msgstr "或"
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
@@ -640,7 +640,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:948 ../../src/writeHTML.cc:970
 msgid "economy"
-msgstr ""
+msgstr "经济"
 
 #: ../../src/writeHTML.cc:950 ../../src/writeHTML.cc:972
 msgid "needs"
@@ -735,11 +735,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1219
 msgid "produce"
-msgstr ""
+msgstr "生产"
 
 #: ../../src/writeHTML.cc:1256
 msgid "recruit"
-msgstr ""
+msgstr "招募"
 
 #: ../../src/writeHTML.cc:1295
 msgid "Documentation for program command mine"
@@ -759,15 +759,15 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
 msgid "attack"
-msgstr ""
+msgstr "冲击"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "defense"
-msgstr ""
+msgstr "国防"
 
 #: ../../src/writeHTML.cc:1333 ../../src/writeHTML.cc:1357
 msgid "evade"
-msgstr ""
+msgstr "逃避"
 
 #: ../../src/writeHTML.cc:1346
 msgid "Documentation for program command train"
@@ -1092,7 +1092,7 @@ msgstr "小"
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "medium"
-msgstr ""
+msgstr "中"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:63
