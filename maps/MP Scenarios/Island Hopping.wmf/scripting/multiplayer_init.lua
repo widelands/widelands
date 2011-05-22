@@ -12,14 +12,64 @@ use("aux", "set")
 -- ==========
 set_textdomain("mp_scenario_island_hopping.wmf")
 
--- TODO: transfer of horses does not work, because of missing scripting of roads?
 -- TODO: bug report: position of players in multiplayer scenarios is fixed to blue or red
 -- TODO: endless game is always starting, also in scenarios
 game = wl.Game()
 map = game.map
 
-use("map", "texts")
-use("map", "first_island")
+_nplayers_finished_island = {0, 0}
+_start_fields = {
+   { -- Island 1
+      map.player_slots[1].starting_field,
+      map.player_slots[2].starting_field,
+      map.player_slots[3].starting_field,
+      map.player_slots[4].starting_field
+   },
+   { -- Island 2
+      map:get_field(143, 148),
+      map:get_field(142,  45),
+      map:get_field( 51,  44),
+      map:get_field( 49, 147)
+   },
+   { -- Island 3
+      map:get_field(180, 182),
+      map:get_field(180,  10),
+      map:get_field( 13,   9),
+      map:get_field( 13, 182)
+   }
+}
+
+_finish_areas = {
+   { -- Island 1
+      map:get_field(136,125):region(3), -- player 1
+      map:get_field(136, 70):region(3), -- player 2
+      map:get_field( 57, 68):region(3), -- player 3
+      map:get_field( 56,122):region(3)  -- player 4
+   },
+   { -- Island 2
+      map:get_field(167,164):region(3), -- player 1
+      map:get_field(167, 28):region(3), -- player 2
+      map:get_field( 27, 27):region(3), -- player 3
+      map:get_field( 26,161):region(3)  -- player 4
+   }
+}
+
+-- TODO: come up with proper ones
+_finish_rewards = {
+   { -- Island 1
+      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish
+      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish
+      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish
+      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish
+   },
+   { -- Island 2
+      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish
+      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish
+      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish
+      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish
+   }
+}
+hill = map:get_field(0,0):region(3)
 
 -- ==================
 -- Utility functions 
@@ -38,26 +88,10 @@ function format_rewards(r)
    return table.concat(rv)
 end
 
-function add_wares(hq, wares) 
-   for name, count in pairs(wares) do
-      hq:set_wares(name, hq:get_wares(name) + count)
-   end
-end
 
-function add_workers(hq, workers) 
-   for name, count in pairs(workers) do
-      hq:set_workers(name, hq:get_workers(name) + count)
-   end
-end
-
--- TODO: the add functions do not really belong here
-function add_soldiers(hq, soldiers) 
-   local setpoints = {}
-   for sdescr, count in pairs(soldiers) do
-      setpoints[ {sdescr:match("(%d):(%d):(%d):(%d)")} ] = count
-   end
-   hq:set_soldiers(setpoints)
-end
+use("map", "texts")
+use("map", "hop_island")
+use("map", "first_island")
 
 -- ===============
 -- Initialization 
@@ -150,9 +184,13 @@ function initialize()
    reveal_everything_for_everybody()
    place_headquarters()
 
+   send_to_all(welcome_msg)
+
    for idx,plr in ipairs(game.players) do
       run(function() run_island(plr, 1) end)
    end
+
+   run(watch_hill)
 end
 
 

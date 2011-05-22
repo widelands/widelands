@@ -51,10 +51,33 @@ end
 --    :returns: A paragraph with s formatted as heading.
 -- 
 function h2(s)
-   return "<p font=FreeSerif font-size=12 font-weight=bold font-color=D1D1D1>"
+   return "<p font=FreeSerif font-size=14 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
+-- RST
+-- .. function:: h3(s)
+-- 
+--    Like :func:`h2` but smaller.
+-- 
+--    :returns: A paragraph with s formatted as heading.
+-- 
+function h3(s)
+   return "<p font=FreeSerif font-size=13 font-weight=italic font-color=D1D1D1>"
+      ..  s .. "<br></p><p font-size=4> <br></p>"
+end
+
+-- RST
+-- .. function:: h4(s)
+-- 
+--    Like :func:`h3` but smaller.
+-- 
+--    :returns: A paragraph with s formatted as heading.
+-- 
+function h4(s)
+   return "<p font=FreeSerif font-size=12 font-weight=italic font-color=D1D1D1>"
+      ..  s .. "<br></p><p font-size=4> <br></p>"
+end
 
 -- RST
 -- .. function:: p(text_or_options[, text = nil])
