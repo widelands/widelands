@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-05-07 20:06+0000\n"
+"PO-Revision-Date: 2011-05-22 14:51+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-08 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-05-23 04:31+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
@@ -244,7 +244,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1699 ../../src/network/network_ggz.cc:370
 msgid "Connection problem"
-msgstr ""
+msgstr "Problema de connexió"
 
 #: ../../src/wlapplication.cc:1701
 msgid "Widelands has not been able to connect to the host."
@@ -327,7 +327,7 @@ msgstr "Millorat"
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:170
 msgid "Stop"
-msgstr ""
+msgstr "Atura"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
@@ -492,7 +492,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:717 ../../src/writeHTML.cc:862
 msgid "Programs"
-msgstr ""
+msgstr "Programes"
 
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
@@ -1092,7 +1092,7 @@ msgstr ""
 #: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
-msgstr ""
+msgstr "petit"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:62
@@ -1102,7 +1102,7 @@ msgstr "mitjà"
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
-msgstr ""
+msgstr "gran"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -1614,15 +1614,15 @@ msgstr "finalització"
 
 #: ../../src/logic/production_program.cc:512
 msgid "skip"
-msgstr ""
+msgstr "salta"
 
 #: ../../src/logic/production_program.cc:517
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"fracàs\"|\"conclusió\"|\"salta\"}"
 
 #: ../../src/logic/production_program.cc:531
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"no\"|\"complet\"|\"salta\"|\"repetir\"}"
 
 #: ../../src/logic/production_program.cc:651
 #, c-format
@@ -1785,7 +1785,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:1440 ../../src/logic/soldier.cc:1445
 msgid "no"
-msgstr ""
+msgstr "no"
 
 #: ../../src/logic/soldier.cc:1452 ../../src/logic/soldier.cc:1460
 msgid "Logic error"

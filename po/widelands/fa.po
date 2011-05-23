@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-05-19 00:02+0000\n"
+"PO-Revision-Date: 2011-05-23 00:45+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-05-20 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-05-23 04:31+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
@@ -66,6 +66,8 @@ msgid ""
 "Options:\n"
 "\n"
 msgstr ""
+"گزینه ها :\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1295
 msgid ""
@@ -291,7 +293,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:104
 msgid "Employers"
-msgstr ""
+msgstr "کارفرمایان"
 
 #: ../../src/writeHTML.cc:267 ../../src/writeHTML.cc:273
 msgid "Building types"
@@ -340,7 +342,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:510
 msgid "Small"
-msgstr ""
+msgstr "کوچک"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
 #: ../../src/logic/building.cc:511
@@ -528,7 +530,7 @@ msgstr "انیمیشن"
 
 #: ../../src/writeHTML.cc:763 ../../src/writeHTML.cc:902
 msgid "return"
-msgstr ""
+msgstr "بازگشت"
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
@@ -548,7 +550,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr ""
+msgstr "زمینشناس"
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
@@ -612,7 +614,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:793
 msgid "failed"
-msgstr ""
+msgstr "ناموفق"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
@@ -877,7 +879,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:101
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "اقتصاد : %s"
 
 #: ../../src/economy/wares_queue.cc:259
 #, c-format
@@ -910,7 +912,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
-msgstr ""
+msgstr "بازیکنان"
 
 #: ../../src/editor/editorinteractive.cc:150
 msgid "Unsupported format"
