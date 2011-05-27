@@ -83,7 +83,6 @@ p2:allow_buildings{
    "rangers_hut",
    "sentry",
    "lime_kiln",
-   "stronghold",
    "tavern",
    "well",
 }

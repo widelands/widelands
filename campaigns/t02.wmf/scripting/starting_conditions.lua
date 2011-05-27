@@ -8,8 +8,7 @@ plr:allow_buildings{
    "lumberjacks_hut",
    "quarry", 
    "rangers_hut", 
-   "sentry",
-   "stronghold"
+   "sentry"
 }
 
 -- Place hq and fill it with wares
