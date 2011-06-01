@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-05-12 13:29+0000\n"
-"Last-Translator: jzombi <Unknown>\n"
+"PO-Revision-Date: 2011-05-31 07:26+0000\n"
+"Last-Translator: HUNStree <hunstree@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-13 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-06-01 04:32+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4221,7 +4221,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " swim"
-msgstr ""
+msgstr " úszik"
 
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #, c-format
@@ -4264,6 +4264,9 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
+"\n"
+" Méret: %ix%i\n"
+" Készítő: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:109
@@ -4302,7 +4305,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu.cc:62
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 msgid "New Random Map"
-msgstr ""
+msgstr "Új véletlen térkép"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:74
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
@@ -4357,6 +4360,8 @@ msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
+"Állítsd be a (0,0) koordináták helyét. Ez lesz a bal felső sarka a "
+"létrehozott mini-térképnek."
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:85
 msgid "Nr Players:"
@@ -4384,7 +4389,7 @@ msgstr "Térkép létrehozása"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:69
 msgid "Random Number:"
-msgstr ""
+msgstr "Véletlen szám"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:162
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
@@ -4402,17 +4407,17 @@ msgstr "Szárazföldi: %u %%"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr ""
+msgstr "Puszta: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:220
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Mountains: %u %%"
-msgstr ""
+msgstr "Hegyek: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:237
 msgid "Island mode:"
-msgstr ""
+msgstr "Sziget mód"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:244
 msgid "Resources:"
@@ -4688,19 +4693,19 @@ msgstr "Kijelölés megfordítása"
 
 #: ../../src/wui/game_message_menu.h:119 ../../src/wui/game_message_menu.h:152
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Archiváld a kijelölt üzeneteket"
 
 #: ../../src/wui/game_message_menu.h:130 ../../src/wui/game_message_menu.h:153
 msgid "Show Archive"
-msgstr ""
+msgstr "Mutasd az archívumot"
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Üzenet menü: Archiválás"
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Állítsd vissza a kijelölt üzeneteket"
 
 #: ../../src/wui/game_message_menu.h:144
 msgid "Show Inbox"
