@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4410\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-05-27 21:37+0000\n"
-"Last-Translator: Joe Hansen <Unknown>\n"
+"PO-Revision-Date: 2011-06-01 17:41+0000\n"
+"Last-Translator: larsch <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-28 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-06-02 04:32+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
@@ -911,7 +911,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "konstruktion"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -2586,7 +2586,7 @@ msgstr "Vært sendte spiller %s til lobbyen!"
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Computer%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
@@ -3138,7 +3138,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:636
 msgid "Player settings"
-msgstr ""
+msgstr "Spillerindstillinger"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid ""
@@ -3163,7 +3163,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Lukket."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3181,7 +3181,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:659
 msgid "Map informations"
-msgstr ""
+msgstr "Kortinformation:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:662
 msgid ""
@@ -3328,7 +3328,7 @@ msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
-msgstr ""
+msgstr "Kortnavn"
 
 #: ../../src/ui_fsmenu/mapselect.cc:235
 msgid "(directory)"
@@ -4175,7 +4175,7 @@ msgstr "Rolle"
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: ../../src/wui/multiplayersetupgroup.cc:426
 msgid "Type"
@@ -4547,7 +4547,7 @@ msgstr "Kort-id:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Spillere: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
