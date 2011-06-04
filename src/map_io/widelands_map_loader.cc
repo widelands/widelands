@@ -258,7 +258,7 @@ int32_t WL_Map_Loader::load_map_complete
 	log("done!\n ");
 
 	if (have_oldwares) {
-		log("Reading Waredata Data ... ");
+		log("Reading Ware Data ... ");
 		{Map_Waredata_Data_Packet    p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 		log("done!\n ");
 	}
