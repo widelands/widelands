@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-05-18 09:09+0000\n"
-"Last-Translator: Flames_in_Paradise <Unknown>\n"
+"PO-Revision-Date: 2011-06-13 20:58+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-19 04:36+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-14 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -22,40 +22,13 @@ msgstr ""
 msgid "01 - The Strands of Malac' Mor"
 msgstr "01 - Die Strände von Malac' Mor"
 
-#: ../../maps/The Thaw.wmf/elemental:11
-msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
-"majestic mountains. During solstice they listened to the oracle and went on "
-"to war. The only survivor will sacrifice his enemies' treasures on the "
-"ancient altar, build there a splendid castle and gain goodwill and the "
-"respect of the Gods."
-msgstr ""
-"Noch eine Schneeschmelze setzt sein. Drei Völker hatten am Fuße der "
-"mächtigen Berge Schutz vor dem harten Winter gesucht. Während der "
-"Sonnenwende haben sie die Orakel befragt und ziehen nun in den Krieg. Nur "
-"Einer wird den Göttern die Schätze seiner Feinde auf dem uralten Altar den "
-"Göttern darbringen können. Dort eine prächtige Burg errichten und damit das "
-"Wohlwollen und den Respekt der Götter gewinnen."
-
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
 msgstr "Herausfordernd. Stellt die Atlanter vor."
 
-#: ../../maps/Checkmate.wmf/elemental:7
-msgid "Checkmate"
-msgstr "Schachmatt"
-
-#: ../../maps/Comet Island.wmf/elemental:7
-msgid "Comet Island"
-msgstr "Kometeninsel"
-
-#: ../../maps/Crater.wmf/elemental:7
-msgid "Crater"
-msgstr "Krater"
-
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr "01 - Augen im Dunkeln"
+msgstr "01 - Augen im Dunkel"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
@@ -136,9 +109,24 @@ msgstr ""
 "scheint es keinen anderen Weg zu geben, als das Land Deiner Gegner zu "
 "besetzen."
 
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. During solstice they listened to the oracle and went on "
+"to war. The only survivor will sacrifice his enemies' treasures on the "
+"ancient altar, build there a splendid castle and gain goodwill and the "
+"respect of the Gods."
+msgstr ""
+"Eine weitere Schneeschmelze setzt sein. Drei Völker hatten am Fuße der "
+"mächtigen Berge Schutz vor dem harten Winter gesucht. Während der "
+"Sonnenwende haben sie die Orakel befragt und ziehen nun in den Krieg. Nur "
+"einer wird die Schätze seiner Feinde auf dem uralten Altar den Göttern "
+"darbringen können, um ihren Respekt zu gewinnen und die prächtige Burg zu "
+"beziehen."
+
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr "Atlanter - Der Weg zum Feuer"
+msgstr "Atlantis - Die Jagd nach dem Feuer"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -147,6 +135,18 @@ msgstr "Atoll"
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
 msgstr "Barbaren - Das zweite Reich"
+
+#: ../../maps/Checkmate.wmf/elemental:7
+msgid "Checkmate"
+msgstr "Schachmatt"
+
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Kometeninsel"
+
+#: ../../maps/Crater.wmf/elemental:7
+msgid "Crater"
+msgstr "Krater"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -202,9 +202,9 @@ msgid ""
 "neighboured island. This peace seems to end now - your neighbour begins to "
 "expand."
 msgstr ""
-"Über Jahrhunderte lebte euer Volk in Frieden mit dem Stamm auf der "
-"Nachbarinsel. Dieser Frieden scheint nun vorbei zu sein - euer Nachbar "
-"beginnt zu expandieren."
+"Seit Jahrhunderten lebten Sie mit den anderen Stamm auf der benachbarten "
+"Insel friedlich zusammen. Dieser Friede scheint nun beendet zu sein - Ihr "
+"Nachbar beginnt zu expandieren."
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
