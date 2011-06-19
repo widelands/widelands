@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-08-30 23:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-06-18 17:20+0000\n"
+"Last-Translator: MadkaT <Unknown>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:33+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-19 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -248,6 +248,8 @@ msgid ""
 "* Build a barracks at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
 msgstr ""
+"* Construye un cuartel en el símbolo de la casa roja en el lado este de los "
+"bosques, a la derecha de tu cuartel provisional."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:96
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:171
@@ -264,6 +266,10 @@ msgid ""
 "take a while. You can speed the game up using PAGE UP and slow it down again "
 "with PAGE DOWN."
 msgstr ""
+"* Construye una casa de leñador en el símbolo de la casa roja, al sur de tu "
+"cuartel provisional. Tala los árboles suficientes para que puedas construir "
+"más edificios. Puede acelerar el juego con AV PÁG y desacelerar de nuevo con "
+"RE PÁG."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:153
 msgid ""
@@ -293,7 +299,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Las Hebras de Malac' Mor"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid "A dark night"
