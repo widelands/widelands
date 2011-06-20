@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-06-06 22:05+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"PO-Revision-Date: 2011-06-19 16:10+0000\n"
+"Last-Translator: Dios <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-20 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -23,12 +23,14 @@ msgid ""
 "is used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 0 to level 1."
 msgstr ""
+"黄金の羽織はアトランティス人の織物工場で金糸を使って作られます。\r\n"
+"それは兵士のHPをレベル0からレベル1に訓練するために、食料とともに訓練所で使用されます。"
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
-msgstr ""
+msgstr "のこぎりは木こりと大工が必要とします。それは工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -42,15 +44,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
-msgstr "先進的な匿"
+msgstr "強化された盾"
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Armoursmith"
-msgstr ""
+msgstr "鎧鍛冶屋"
 
 #: ../../tribes/atlanteans/conf:183
 msgid "Armoursmithy"
-msgstr ""
+msgstr "鎧鍛冶"
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
 msgid ""
@@ -64,11 +66,11 @@ msgstr "灰"
 
 #: ../../tribes/atlanteans/conf:5
 msgid "Atlanteans"
-msgstr "アトランティス"
+msgstr "アトランティス人"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
-msgstr "ベーカー"
+msgstr "パン屋"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
@@ -89,7 +91,7 @@ msgstr "兵舎。"
 #: ../../tribes/atlanteans/conf:146
 #: ../../tribes/atlanteans/conf:154
 msgid "Barrier"
-msgstr ""
+msgstr "関所"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
@@ -150,11 +152,11 @@ msgstr "パン"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr "魚を作成する"
+msgstr "魚を育てる"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "糸を作るために蜘蛛を育てる"
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -174,7 +176,7 @@ msgstr "バーナー"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr "石炭を燃える。"
+msgstr "石炭を燃やす"
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
@@ -195,7 +197,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "炭焼き小屋"
 
 #: ../../tribes/atlanteans/conf:147
 msgid "Citadel"
@@ -219,11 +221,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:66
 msgid "Corn"
-msgstr ""
+msgstr "トウモロコシ"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
-msgstr "麦畑"
+msgstr "トウモロコシ畑"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield harvested"
@@ -231,19 +233,19 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
-msgstr ""
+msgstr "トウモロコシ畑（中）"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
-msgstr "麦畑小"
+msgstr "トウモロコシ畑（小）"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield tiny"
-msgstr ""
+msgstr "トウモロコシ畑（極小）"
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Cornflour"
-msgstr ""
+msgstr "トウモロコシ粉"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
@@ -253,7 +255,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
-msgstr "鉱山結晶"
+msgstr "クリスタル鉱山"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -261,15 +263,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "守れと勝つ！"
+msgstr "守って攻めろ！"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed building"
-msgstr ""
+msgstr "破壊された建物"
 
 #: ../../tribes/atlanteans/conf:67
 msgid "Diamond"
-msgstr "金剛石"
+msgstr "ダイアモンド"
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -293,7 +295,7 @@ msgstr "農場"
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Farmer"
-msgstr "農家"
+msgstr "農夫"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
@@ -319,7 +321,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Fish Breeder's House"
-msgstr ""
+msgstr "養魚場"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid ""
@@ -334,7 +336,7 @@ msgstr "漁師"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Fisher's House"
-msgstr ""
+msgstr "漁師の家"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Fishing Net"
@@ -351,7 +353,7 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:149
 #: ../../tribes/atlanteans/conf:156
 msgid "Fortress"
-msgstr "フォートレス"
+msgstr "要塞"
 
 #: ../../tribes/atlanteans/conf:121
 msgid "Geologist"
@@ -363,15 +365,15 @@ msgstr "金"
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Gold Mine"
-msgstr "金鉱"
+msgstr "金鉱山"
 
 #: ../../tribes/atlanteans/conf:73
 msgid "Gold Ore"
-msgstr "金鉱"
+msgstr "金鉱石"
 
 #: ../../tribes/atlanteans/conf:75
 msgid "Gold Yarn"
-msgstr ""
+msgstr "金糸"
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
@@ -443,7 +445,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
-msgstr ""
+msgstr "馬牧場"
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
@@ -453,15 +455,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
-msgstr "猟人"
+msgstr "狩人"
 
 #: ../../tribes/atlanteans/conf:171
 msgid "Hunter's House"
-msgstr ""
+msgstr "狩人小屋"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
-msgstr ""
+msgstr "弓矢"
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Iron"
@@ -469,7 +471,7 @@ msgstr "鉄"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Iron Mine"
-msgstr ""
+msgstr "鉄鉱山"
 
 #: ../../tribes/atlanteans/conf:80
 msgid "Iron Ore"
@@ -522,11 +524,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Mill"
-msgstr ""
+msgstr "粉挽き風車"
 
 #: ../../tribes/atlanteans/conf:123
 msgid "Miller"
-msgstr "ミラー"
+msgstr "粉引き屋"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid ""
@@ -560,7 +562,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:87
 msgid "Pick"
-msgstr ""
+msgstr "つるはし"
 
 #: ../../tribes/atlanteans/pick/conf:1
 msgid ""
@@ -570,7 +572,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:88
 msgid "Planks"
-msgstr ""
+msgstr "木材"
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid ""

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-03-13 01:11+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"PO-Revision-Date: 2011-06-19 16:27+0000\n"
+"Last-Translator: Dios <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-20 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -64,11 +64,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:117
 msgid "Baker"
-msgstr "ベーカー"
+msgstr "パン職人"
 
 #: ../../tribes/barbarians/conf:180
 msgid "Bakery"
-msgstr ""
+msgstr "パン屋"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
@@ -76,7 +76,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
-msgstr ""
+msgstr "バーバリアン"
 
 #: ../../tribes/barbarians/conf:156
 msgid "Barracks"
@@ -89,11 +89,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:215
 msgid "Battle Arena"
-msgstr ""
+msgstr "闘技場"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Battle Axe"
-msgstr ""
+msgstr "戦斧"
 
 #: ../../tribes/barbarians/conf:71
 msgid "Beer"
@@ -130,11 +130,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:121
 msgid "Brewer"
-msgstr ""
+msgstr "醸造職人"
 
 #: ../../tribes/barbarians/conf:181
 msgid "Brewery"
-msgstr ""
+msgstr "醸造所"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Broad Axe"
@@ -154,7 +154,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr "石炭を燃える。"
+msgstr "石炭を燃やす"
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
@@ -183,7 +183,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:186
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "炭焼き小屋"
 
 #: ../../tribes/barbarians/conf:125
 msgid "Chief Miner"
@@ -191,7 +191,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:210
 msgid "Citadel"
-msgstr "根城"
+msgstr "城塞"
 
 #: ../../tribes/barbarians/conf:220
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
@@ -200,7 +200,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:75
 msgid "Cloth"
-msgstr ""
+msgstr "生地"
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
@@ -213,7 +213,7 @@ msgstr "石炭"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Coal mine"
-msgstr ""
+msgstr "炭鉱"
 
 #: ../../tribes/barbarians/conf:146
 msgid "Construction Site"
@@ -253,11 +253,11 @@ msgstr "鹿"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "守って攻めろ！"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Destroyed building"
-msgstr ""
+msgstr "破壊された建物"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -273,7 +273,7 @@ msgstr "農場"
 
 #: ../../tribes/barbarians/conf:126
 msgid "Farmer"
-msgstr ""
+msgstr "農夫"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Felling Axe"
@@ -328,7 +328,7 @@ msgstr "魚"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Fisher"
-msgstr "百姓"
+msgstr "漁師"
 
 #: ../../tribes/barbarians/conf:172
 msgid "Fisher's Hut"
@@ -348,7 +348,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
 msgid "Fortress"
-msgstr "フォートレス"
+msgstr "要塞"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Gamekeeper"
@@ -356,11 +356,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:174
 msgid "Gamekeeper's Hut"
-msgstr ""
+msgstr "猟場管理所"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Geologist"
-msgstr ""
+msgstr "地質学者"
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
@@ -372,11 +372,11 @@ msgstr "金"
 
 #: ../../tribes/barbarians/conf:204
 msgid "Gold Mine"
-msgstr "金鉱"
+msgstr "金鉱山"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Gold Ore"
-msgstr ""
+msgstr "金鉱石"
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
@@ -395,7 +395,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
-msgstr ""
+msgstr "採石場"
 
 #: ../../tribes/barbarians/conf:83
 msgid "Grout"
@@ -411,7 +411,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:151
 msgid "Guardhouse"
-msgstr ""
+msgstr "警備小屋"
 
 #: ../../tribes/barbarians/conf:84
 msgid "Hammer"
@@ -428,7 +428,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:164
 #: ../../tribes/barbarians/conf:165
 msgid "Headquarters"
-msgstr ""
+msgstr "本部"
 
 #: ../../tribes/barbarians/conf:219
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
@@ -441,11 +441,11 @@ msgstr "兜"
 
 #: ../../tribes/barbarians/conf:131
 msgid "Helmsmith"
-msgstr ""
+msgstr "兜鍛冶屋"
 
 #: ../../tribes/barbarians/conf:194
 msgid "Helmsmithy"
-msgstr ""
+msgstr "兜鍛冶"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
@@ -464,11 +464,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:132
 msgid "Hunter"
-msgstr "猟人"
+msgstr "狩人"
 
 #: ../../tribes/barbarians/conf:173
 msgid "Hunter's Hut"
-msgstr ""
+msgstr "狩人小屋"
 
 #: ../../tribes/barbarians/conf:86
 msgid "Hunting Spear"
@@ -476,7 +476,7 @@ msgstr "狩り槍"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Inn"
-msgstr "旅館"
+msgstr "宿屋"
 
 #: ../../tribes/barbarians/conf:133
 msgid "Innkeeper"
@@ -492,7 +492,7 @@ msgstr "鉄鉱石"
 
 #: ../../tribes/barbarians/conf:201
 msgid "Iron Ore Mine"
-msgstr "鉄鉱石鉱山"
+msgstr "鉄鉱山"
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid ""
@@ -509,7 +509,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "調理用具"
 
 #: ../../tribes/barbarians/conf:178
 msgid "Lime Kiln"
@@ -521,11 +521,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:135
 msgid "Lumberjack"
-msgstr ""
+msgstr "木こり"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Lumberjack's Hut"
-msgstr ""
+msgstr "木こりの小屋"
 
 #: ../../tribes/barbarians/conf:90
 msgid "Mask"
@@ -597,11 +597,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:93
 msgid "Pick"
-msgstr ""
+msgstr "つるはし"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Pitta Bread"
-msgstr ""
+msgstr "ピタパン"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
@@ -659,7 +659,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr ""
+msgstr "兜を生産する"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
@@ -738,15 +738,15 @@ msgstr "採石場"
 
 #: ../../tribes/barbarians/conf:137
 msgid "Ranger"
-msgstr "特殊部隊"
+msgstr "森林保護官"
 
 #: ../../tribes/barbarians/conf:171
 msgid "Ranger's Hut"
-msgstr ""
+msgstr "森林管理所"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Ration"
-msgstr "定額"
+msgstr "糧食"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Raw Stone"
@@ -853,7 +853,7 @@ msgstr "ショベル"
 #: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
-msgstr "眠る"
+msgstr "休止"
 
 #: ../../tribes/barbarians/conf:153
 msgid "Small Tower"
@@ -885,7 +885,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:100
 msgid "Snack"
-msgstr ""
+msgstr "軽食"
 
 #: ../../tribes/barbarians/conf:114
 msgid "Soldier"
@@ -912,7 +912,7 @@ msgstr "牙城"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Tavern"
-msgstr ""
+msgstr "酒場"
 
 #: ../../tribes/barbarians/conf:102
 msgid "Thatch Reed"
@@ -1061,7 +1061,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/conf:161
 msgid "Tower"
-msgstr "タワー"
+msgstr "塔"
 
 #: ../../tribes/barbarians/conf:140
 msgid "Trainer"
@@ -1069,7 +1069,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:216
 msgid "Trainingscamp"
-msgstr ""
+msgstr "訓練所"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1077,7 +1077,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:103
 msgid "Trunk"
-msgstr "幹"
+msgstr "丸太"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid ""
@@ -1196,7 +1196,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:166
 msgid "Warehouse"
-msgstr ""
+msgstr "倉庫"
 
 #: ../../tribes/barbarians/conf:105
 msgid "Warriors Axe"
