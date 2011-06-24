@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-05-01 13:05+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2011-06-23 16:24+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-05-02 04:32+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-06-24 04:32+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -338,7 +338,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2208 ../../src/logic/game.cc:383
 #: ../../src/logic/game.cc:423
 msgid "Loading..."
-msgstr "Sto caricando..."
+msgstr "Caricamento in corso..."
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
@@ -927,7 +927,7 @@ msgstr "versione sconosciuta/non gestita %u"
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "chiama il bilancio economico: %s"
 
 #: ../../src/economy/economy_data_packet.cc:63
 #: ../../src/economy/economy_data_packet.cc:82
@@ -1001,7 +1001,7 @@ msgstr ""
 #: ../../src/logic/editor_game_base.cc:339
 #, c-format
 msgid "Loading tribe: %s"
-msgstr "Caricamento tribù: %s"
+msgstr "Caricamento tribù in corso: %s"
 
 #: ../../src/editor/editorinteractive.cc:176
 msgid "Creating players"
@@ -1010,12 +1010,12 @@ msgstr "Creazione dei giocatori"
 #: ../../src/editor/editorinteractive.cc:183
 #: ../../src/logic/editor_game_base.cc:333
 msgid "Loading world data"
-msgstr "Caricamento dati della mappa"
+msgstr "Caricamento dati della mappa in corso"
 
 #: ../../src/editor/editorinteractive.cc:186
 #: ../../src/editor/editorinteractive.cc:579
 msgid "Loading graphics..."
-msgstr "Caricamento della grafica..."
+msgstr "Caricamento della grafica in corso..."
 
 #: ../../src/editor/editorinteractive.cc:234
 msgid "Map unsaved"
@@ -1145,7 +1145,7 @@ msgstr "Caricamento animazioni completata al: %d%%"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[battaglia] il soldato %u perde la battaglia\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
@@ -1155,7 +1155,7 @@ msgstr ""
 #: ../../src/logic/bob.cc:83 ../../src/logic/immovable.cc:207
 #, c-format
 msgid "bad attribute \"%s\""
-msgstr ""
+msgstr "attributo \"%s\" errato"
 
 #: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:61
@@ -1175,17 +1175,17 @@ msgstr "grande"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "calcola la funzione delle statistiche: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
 msgid "lua function: %s"
-msgstr ""
+msgstr "funzione lua: %s"
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
 msgid "lua: %s"
-msgstr ""
+msgstr "lua: %s"
 
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format
@@ -1195,7 +1195,7 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:178
 #, c-format
 msgid "game logic: %s"
-msgstr ""
+msgstr "logica della partita: %s"
 
 #: ../../src/logic/constructionsite.cc:177
 #, c-format
@@ -1209,11 +1209,11 @@ msgstr ""
 
 #: ../../src/logic/game.cc:230
 msgid "Preloading a map"
-msgstr "Precarica una mappa"
+msgstr "Precaricamento di una mappa in corso"
 
 #: ../../src/logic/game.cc:242
 msgid "Loading a world"
-msgstr "Carica un mondo"
+msgstr "Caricamento di un mondo in corso"
 
 #: ../../src/logic/game.cc:248
 #, c-format
@@ -1222,12 +1222,12 @@ msgstr "Aggiungi un giocatore %u"
 
 #: ../../src/logic/game.cc:261
 msgid "Loading a map"
-msgstr "Carica una mappa"
+msgstr "Caricamento di una mappa in corso"
 
 #: ../../src/logic/game.cc:294 ../../src/logic/game.cc:368
 #: ../../src/logic/game.cc:405
 msgid "Preloading map"
-msgstr "Precarica mappa"
+msgstr "Precaricamento della mappa in corso"
 
 #: ../../src/logic/game.cc:309
 msgid "Configuring players"
@@ -1235,7 +1235,7 @@ msgstr "Configura giocatori"
 
 #: ../../src/logic/game.cc:342
 msgid "Loading map"
-msgstr "Caricamento mappa"
+msgstr "Caricamento della mappa in corso"
 
 #: ../../src/logic/game.cc:486
 msgid "Creating player infrastructure"
@@ -1269,7 +1269,7 @@ msgstr "nessuna azione"
 
 #: ../../src/logic/immovable.cc:221
 msgid "this program has already been declared"
-msgstr ""
+msgstr "questo programma è già stato dichiarato"
 
 #: ../../src/logic/immovable.cc:227
 #, c-format
@@ -1288,7 +1288,7 @@ msgstr "duplicato"
 #: ../../src/logic/immovable.cc:279
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr ""
+msgstr "[affinità del tereno] \"%s\" (non nel mondo corrente): %s"
 
 #: ../../src/logic/immovable.cc:315
 #, c-format
@@ -1367,7 +1367,7 @@ msgstr "oggetto %u: %s"
 #: ../../src/logic/instances.cc:133
 #, c-format
 msgid "act: %s"
-msgstr ""
+msgstr "atto: %s"
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
@@ -1412,12 +1412,12 @@ msgstr[1] "%u(+%u) soldati"
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "I tuoi soldati hanno occupato il tuo %s."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati al %s."
 
 #: ../../src/logic/militarysite.cc:576
 msgid "Militarysite lost!"
@@ -1426,7 +1426,7 @@ msgstr "Edificio militare perso!"
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico al %s."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
@@ -1435,12 +1435,12 @@ msgstr "Nemico sconfitto!"
 #: ../../src/logic/militarysite.cc:670
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Il tuo %s ha scoperto un aggressore.</p>"
 
 #: ../../src/logic/militarysite.cc:671
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr ""
+msgstr "Il tuo %s è sotto attacco. </p>"
 
 #: ../../src/logic/militarysite.cc:679
 msgid "You are under attack"
@@ -1455,7 +1455,7 @@ msgstr "il giocatore %u non esiste"
 #: ../../src/logic/playercommand.cc:136
 #, c-format
 msgid "player command: %s"
-msgstr ""
+msgstr "comando del giocatore: %s"
 
 #: ../../src/logic/playercommand.cc:178
 #, c-format
@@ -1465,7 +1465,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:184
 #, c-format
 msgid "bulldoze: %s"
-msgstr ""
+msgstr "demolisci: %s"
 
 #: ../../src/logic/playercommand.cc:236
 #, c-format
@@ -1506,23 +1506,23 @@ msgstr "start/stop costruzione: %s"
 #: ../../src/logic/playercommand.cc:549
 #, c-format
 msgid "enhance building: %s"
-msgstr ""
+msgstr "migliora l'edificio: %s"
 
 #: ../../src/logic/playercommand.cc:621 ../../src/logic/playercommand.cc:1047
 #: ../../src/logic/playercommand.cc:1125
 #, c-format
 msgid "site %u: %s"
-msgstr ""
+msgstr "sito %u: %s"
 
 #: ../../src/logic/playercommand.cc:631
 #, c-format
 msgid "set ware priority: %s"
-msgstr ""
+msgstr "imposta la priorità degli oggetti: %s"
 
 #: ../../src/logic/playercommand.cc:680
 #, c-format
 msgid "change target quantity: %s"
-msgstr ""
+msgstr "cambia la quantità del bersaglio: %s"
 
 #: ../../src/logic/playercommand.cc:743
 #, c-format
@@ -1537,7 +1537,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:990
 #, c-format
 msgid "change training options: %s"
-msgstr ""
+msgstr "cambia le opzioni di allenamento: %s"
 
 #: ../../src/logic/playercommand.cc:1054
 #, c-format
@@ -1552,7 +1552,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1132
 #, c-format
 msgid "change soldier capacity: %s"
-msgstr ""
+msgstr "cambia la capacità del soldato: %s"
 
 #: ../../src/logic/playercommand.cc:1297
 #, c-format
@@ -1562,17 +1562,17 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1308
 #, c-format
 msgid "change military config: %s"
-msgstr ""
+msgstr "cambia la configurazione militare: %s"
 
 #: ../../src/logic/playercommand.cc:1347
 #, c-format
 msgid "(player %u): message id is null"
-msgstr ""
+msgstr "(giocatore %u): l'id del messaggio è vuoto"
 
 #: ../../src/logic/playercommand.cc:1352
 #, c-format
 msgid "player message: %s"
-msgstr ""
+msgstr "messaggio del giocatore: %s"
 
 #: ../../src/logic/production_program.cc:87
 #, c-format
@@ -1612,20 +1612,20 @@ msgstr "l'economia ha bisogno di "
 
 #: ../../src/logic/production_program.cc:221
 msgid "site has "
-msgstr ""
+msgstr "il sito ha "
 
 #: ../../src/logic/production_program.cc:247
 msgid "workers need experience"
-msgstr ""
+msgstr "i lavoratori hanno bisogno di esperienza"
 
 #: ../../src/logic/production_program.cc:272
 msgid "ware type or worker type"
-msgstr ""
+msgstr "tipo di oggetto o tipo di lavoratore"
 
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "invalid condition: %s"
-msgstr ""
+msgstr "condizione non valida: %s"
 
 #: ../../src/logic/production_program.cc:350
 #, c-format
@@ -1638,7 +1638,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:372
 msgid "expected condition at end of input"
-msgstr ""
+msgstr "condizione prevista alla fine dell'input"
 
 #: ../../src/logic/production_program.cc:378
 msgid "expected \"or\" or end of input"
@@ -1687,7 +1687,7 @@ msgstr "completamento"
 
 #: ../../src/logic/production_program.cc:512
 msgid "skip"
-msgstr ""
+msgstr "salta"
 
 #: ../../src/logic/production_program.cc:517
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
@@ -1738,7 +1738,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:917
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Prodotto %s"
 
 #: ../../src/logic/production_program.cc:992
 msgid "Recruited "
@@ -1756,7 +1756,7 @@ msgstr "percentuale"
 #: ../../src/logic/production_program.cc:1175
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Nessuna risorsa rimasta trovata!"
 
 #: ../../src/logic/production_program.cc:1196
 msgid "Mine empty"
@@ -1770,7 +1770,7 @@ msgstr "Questa miniera ormai è vuota. Dovresti espanderla o distruggerla."
 #: ../../src/logic/production_program.cc:1212
 #: ../../src/logic/production_program.cc:1285
 msgid "soldier type"
-msgstr ""
+msgstr "tipo di soldato"
 
 #: ../../src/logic/production_program.cc:1225
 #, c-format
@@ -1786,7 +1786,7 @@ msgstr "livello"
 #: ../../src/logic/production_program.cc:1340
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr ""
+msgstr "Nessun soldato per questo livello di allenamento trovato!"
 
 #: ../../src/logic/production_program.cc:1316
 #, c-format
@@ -1826,7 +1826,7 @@ msgstr ""
 #: ../../src/logic/ship.cc:263
 #, c-format
 msgid "loading ship: %s"
-msgstr ""
+msgstr "caricamento della nave in corso: %s"
 
 #: ../../src/logic/soldier.cc:75
 msgid "positive integer"
@@ -1844,7 +1844,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1252
 #, c-format
 msgid "bad direction '%d'"
-msgstr ""
+msgstr "direzione '%d' errata"
 
 #: ../../src/logic/soldier.cc:1429
 #, c-format
@@ -1883,7 +1883,7 @@ msgstr "\"%s\" è duplicato"
 
 #: ../../src/logic/tribe.cc:251 ../../src/logic/tribe.cc:272
 msgid "none found"
-msgstr ""
+msgstr "nessuno trovato"
 
 #: ../../src/logic/tribe.cc:253
 #, c-format
@@ -1903,7 +1903,7 @@ msgstr "tribù %s: %s"
 #: ../../src/logic/warehouse.cc:460
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr ""
+msgstr "Un nuovo %s è stato aggiunto alla tua economia."
 
 #: ../../src/logic/worker.cc:107
 #, c-format
@@ -1942,12 +1942,12 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:1744
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Il lavoratore si è perso!"
 
 #: ../../src/logic/worker.cc:2938
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "caricamento del lavoratore in corso: %s"
 
 #: ../../src/logic/world.cc:623
 #, c-format
@@ -1992,7 +1992,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:306
 #, c-format
 msgid "reading path: %s"
-msgstr ""
+msgstr "leggendo il percorso: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:369
 #, c-format
@@ -2094,7 +2094,7 @@ msgstr "è di proprietà del giocatore %u"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "ha una bandiera (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
@@ -2124,7 +2124,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "edficio (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
@@ -2164,7 +2164,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_object_packet.cc:102
 #, c-format
 msgid "map objects: %s"
-msgstr ""
+msgstr "oggetti della mappa: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
@@ -2184,7 +2184,7 @@ msgstr "nomi dei giocatori e tribù: %s"
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:61
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "posizioni del giocatore: %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format
@@ -2462,7 +2462,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1091
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr ""
+msgstr "%s mi ha detto di eseguire il comando: \"%s\""
 
 #: ../../src/network/nethost.cc:1103
 #, c-format
@@ -2476,11 +2476,11 @@ msgstr "%s ha inviato il segnale per iniziare la partita."
 
 #: ../../src/network/nethost.cc:1111
 msgid "Available saved games:<br>"
-msgstr ""
+msgstr "Partite salvate disponibili:<br>"
 
 #: ../../src/network/nethost.cc:1131
 msgid "Available maps:<br>"
-msgstr ""
+msgstr "Mappe disponibili:<br>"
 
 #: ../../src/network/nethost.cc:1175
 #, c-format
@@ -2632,7 +2632,7 @@ msgstr "%s ha lasciato il gioco (%s)"
 #: ../../src/network/nethost.cc:2564
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Un utente sconosciuto ha abbandonato la partita (%s)"
 
 #: ../../src/network/network_ggz.cc:276
 msgid "Closed the connection to the metaserver."
@@ -2855,15 +2855,15 @@ msgstr "Mappa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
-msgstr ""
+msgstr "Seleziona una mappa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Partita salvata"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Seleziona una partita salvata"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84 ../../src/ui_fsmenu/options.cc:58
 #: ../../src/ui_fsmenu/options.cc:390 ../../src/wui/login_box.cc:70
@@ -2876,11 +2876,11 @@ msgstr "Annulla"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84
 msgid "Cancel selection"
-msgstr ""
+msgstr "Annulla selezione"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:113
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Cambia la mappa o la partita salvata"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:120 ../../src/ui_fsmenu/launchSPG.cc:77
 msgid "Start game"
@@ -2888,11 +2888,11 @@ msgstr "Avvia gioco"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
-msgstr ""
+msgstr "Mostra la finestra di aiuto"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:621
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Impostazioni partita multiplayer"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
@@ -2904,7 +2904,7 @@ msgstr "(nessuna mappa)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:195
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "L'host non ha ancora selezionato una mappa o una partita salvata."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
@@ -2913,7 +2913,7 @@ msgstr "Scenario"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "La condizione di vittoria è impostata attraverso lo scenario"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:269
 #: ../../src/wui/multiplayersetupgroup.cc:339
@@ -2923,6 +2923,8 @@ msgstr "Salvataggio"
 #: ../../src/ui_fsmenu/launchMPG.cc:271
 msgid "The game is a saved game - the win condition was set before."
 msgstr ""
+"La partita è una partita salvata - la condizione di vittoria è stata "
+"impostata prima."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:281 ../../src/ui_fsmenu/launchSPG.cc:236
 msgid "Type: "
@@ -2930,7 +2932,7 @@ msgstr "Tipo: "
 
 #: ../../src/ui_fsmenu/launchMPG.cc:365
 msgid "Saved game is directory"
-msgstr ""
+msgstr "La partita salvata è una cartella"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:367
 msgid ""
@@ -2981,14 +2983,16 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"Al momento sei %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:444
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "Clicca su \"?\" nell'angolo in alto a destra per ottenere aiuto."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:505
 msgid "Saved players are:"
-msgstr ""
+msgstr "I giocatori salvati sono:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:525
 msgid "<closed>"
@@ -2996,15 +3000,15 @@ msgstr "<chiuso>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "There was an error!"
-msgstr ""
+msgstr "C'è stato un errore!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:587
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "Sembra che il file della mappa non sia valido!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:604
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Informazioni sulla mappa:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:605
 #, c-format
@@ -3014,24 +3018,24 @@ msgstr "* Dimensioni: %ux%u\n"
 #: ../../src/ui_fsmenu/launchMPG.cc:606
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i giocatori\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:607
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Tipo di mondo: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:609
 msgid "* Scenario mode selected\n"
-msgstr ""
+msgstr "* Modalità scenario selezionata\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:622
 msgid "You are in the multi player launch game menu."
-msgstr ""
+msgstr "Sei nel menù di avvio di una partita in multiplayer."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:623
 msgid "Client settings"
-msgstr ""
+msgstr "Impostazioni client"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:626
 msgid ""
@@ -3054,7 +3058,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:636
 msgid "Player settings"
-msgstr ""
+msgstr "Impostazioni del giocatore"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid ""
@@ -3076,6 +3080,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:648
 msgid "Set as shared in starting position for another player."
 msgstr ""
+"Imposta come condiviso in posizione di inizio per un altro giocatore."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
@@ -3097,7 +3102,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:659
 msgid "Map informations"
-msgstr ""
+msgstr "Informazioni sulla mappa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:662
 msgid ""
@@ -3183,7 +3188,7 @@ msgstr "Scegli un replay!"
 
 #: ../../src/ui_fsmenu/main.cc:42
 msgid "Play Tutorial"
-msgstr ""
+msgstr "Gioca il tutorial"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Single Player"
@@ -3238,7 +3243,7 @@ msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
-msgstr ""
+msgstr "Nome della mappa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:235
 msgid "(directory)"
@@ -3432,11 +3437,11 @@ msgstr "Spento"
 #: ../../src/ui_fsmenu/options.cc:269
 #, c-format
 msgid "%ix%i %i bit"
-msgstr ""
+msgstr "%ix%i %i bit"
 
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Try system language"
-msgstr ""
+msgstr "Prova la lingua del sistema"
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "x"
@@ -3482,7 +3487,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:478
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Mostra la chat integrata con lo sfondo trasparente"
 
 #: ../../src/ui_fsmenu/options.cc:506
 msgid "Pause"
@@ -3799,7 +3804,7 @@ msgstr "Sicuro di voler eliminare il documento %s?"
 
 #: ../../src/wui/game_message_menu.cc:44 ../../src/wui/game_message_menu.h:148
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Menù dei messaggi: Messaggi in arrivo"
 
 #: ../../src/wui/game_objectives_menu.cc:45
 msgid "Objectives Menu"
@@ -4059,7 +4064,7 @@ msgstr "<libero>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
-msgstr ""
+msgstr "Condiviso in"
 
 #: ../../src/wui/multiplayersetupgroup.cc:292
 #: ../../src/wui/playerdescrgroup.cc:170
@@ -4485,7 +4490,7 @@ msgstr "<Elenco>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"
-msgstr ""
+msgstr "<Non un file mappa>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 msgid " exists already. Overwrite?"
@@ -4691,7 +4696,7 @@ msgstr "Titolo"
 
 #: ../../src/wui/game_message_menu.h:70
 msgid "Time sent"
-msgstr ""
+msgstr "Tempo inviato"
 
 #: ../../src/wui/game_message_menu.h:84
 msgid "Clear"
@@ -4719,7 +4724,7 @@ msgstr "Mostra l'archivio"
 
 #: ../../src/wui/game_message_menu.h:139
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Menù dei messaggi: Archivia"
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Restore selected messages"

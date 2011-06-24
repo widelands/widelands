@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-12-10 10:09+0000\n"
-"Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
+"PO-Revision-Date: 2011-06-23 13:46+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:32+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-24 04:31+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "\"%s\""
@@ -39,6 +39,13 @@ msgid ""
 "plan,\n"
 "but I think, it could work."
 msgstr ""
+"Un mio amico ha esplorato l'isola per conto suo e mi ha detto di un grande "
+"lago\n"
+"in cima alla montagna. Suggerisco di costruire le navi in questo lago e "
+"aspettare\n"
+"fino a che l'isola non anneghi sotto di noi. Poi potremo salpare via. È un "
+"piano ardito,\n"
+"però penso che potrebbe funzionare."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:402
 msgid "A man comes to Jundlina"
@@ -53,6 +60,8 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
+"Dopo l'atterraggio su una misteriosa isola vicina ad Atlantide, i rimanenti "
+"atlantidini lottano per creare una nuova casa per loro stessi."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid ""
@@ -135,12 +144,12 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:189
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:190
 msgid "Build a warehouse and a horsefarm"
-msgstr ""
+msgstr "Costruisci un magazzino e una fattoria per cavalli"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:161
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:162
 msgid "Build industry and mines"
-msgstr ""
+msgstr "Costruisci industria e miniere"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:178
 msgid "Build training buildings"
@@ -289,6 +298,8 @@ msgid ""
 "this\n"
 "a priority for now. You shall get your industry and soon!"
 msgstr ""
+"Ho considerato ciò, Sidolus. Penso che sia ora. Renderemo ciò\n"
+"una priorità per ora. Dovresti ottenere la tua industria e presto!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:501
 msgid ""
@@ -367,7 +378,7 @@ msgstr "Jundlina è preoccupata"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:458
 msgid "Jundlina nods"
-msgstr ""
+msgstr "Jundlina annuisce"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:499
 msgid "Jundlina received a letter"
@@ -495,6 +506,9 @@ msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the\n"
 "god?"
 msgstr ""
+"Possa Satul riscaldarti, Jundlina. Posso essere di qualche servizio a te o "
+"al\n"
+"dio?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:448
 msgid ""
