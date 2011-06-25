@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-06-23 16:24+0000\n"
+"PO-Revision-Date: 2011-06-24 22:23+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-06-24 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-06-25 04:31+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -175,6 +175,9 @@ msgid ""
 "                      Enables opengl rendering\n"
 "                      *EXPERIMENTAL*\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Abilita il rendering opengl\n"
+"                      *SPERIMENTALE*\n"
 
 #: ../../src/wlapplication.cc:1365
 msgid ""
@@ -1150,7 +1153,7 @@ msgstr "[battaglia] il soldato %u perde la battaglia\n"
 #: ../../src/logic/battle.cc:182
 #, c-format
 msgid "[battle] waking up winner %d\n"
-msgstr ""
+msgstr "[battaglia] svegliando il vincitore %d\n"
 
 #: ../../src/logic/bob.cc:83 ../../src/logic/immovable.cc:207
 #, c-format
@@ -1293,12 +1296,12 @@ msgstr "[affinità del tereno] \"%s\" (non nel mondo corrente): %s"
 #: ../../src/logic/immovable.cc:315
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr ""
+msgstr "il fisso %s non ha un programma \"%s\""
 
 #: ../../src/logic/immovable.cc:772
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr ""
+msgstr "la tribù %s non definisce il tipo fisso \"%s\""
 
 #: ../../src/logic/immovable.cc:775
 #, c-format
@@ -1308,12 +1311,12 @@ msgstr "tribù sconosciuta %s"
 #: ../../src/logic/immovable.cc:781
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr ""
+msgstr "il mondo non definisce il tipo fisso \"%s\""
 
 #: ../../src/logic/immovable.cc:791
 #, c-format
 msgid "immovable type %s"
-msgstr ""
+msgstr "tipo fisso %s"
 
 #: ../../src/logic/immovable.cc:825 ../../src/logic/production_program.cc:647
 #: ../../src/logic/production_program.cc:689
@@ -1460,7 +1463,7 @@ msgstr "comando del giocatore: %s"
 #: ../../src/logic/playercommand.cc:178
 #, c-format
 msgid "player immovable %u: %s"
-msgstr ""
+msgstr "giocatore fisso %u%s:"
 
 #: ../../src/logic/playercommand.cc:184
 #, c-format
@@ -1527,12 +1530,12 @@ msgstr "cambia la quantità del bersaglio: %s"
 #: ../../src/logic/playercommand.cc:743
 #, c-format
 msgid "set ware target quantity: %s"
-msgstr ""
+msgstr "imposta la quantità bersaglio dell'articolo: %s"
 
 #: ../../src/logic/playercommand.cc:865
 #, c-format
 msgid "set worker target quantity: %s"
-msgstr ""
+msgstr "imposta la quantità bersaglio del lavoratore: %s"
 
 #: ../../src/logic/playercommand.cc:990
 #, c-format
@@ -1547,7 +1550,7 @@ msgstr "soldato %u: %s"
 #: ../../src/logic/playercommand.cc:1060
 #, c-format
 msgid "drop soldier: %s"
-msgstr ""
+msgstr "deponi il soldato: %s"
 
 #: ../../src/logic/playercommand.cc:1132
 #, c-format
@@ -3099,6 +3102,8 @@ msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
 msgstr ""
+"Ogni client connesso a un giocatore (il giocatore \"ruolo\" impostato) può "
+"impostare la tribù e la squadra per quel giocatore"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:659
 msgid "Map informations"
@@ -3483,7 +3488,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:473
 msgid "OpenGL rendering *Highly experimental!*"
-msgstr ""
+msgstr "Rendering OpenGL *Altamente sperimentale!*"
 
 #: ../../src/ui_fsmenu/options.cc:478
 msgid "Show in game chat with transparent background"

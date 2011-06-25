@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-06-23 13:46+0000\n"
+"PO-Revision-Date: 2011-06-24 14:51+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-24 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-06-25 04:31+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
@@ -53,7 +53,7 @@ msgstr "Un uomo arriva a Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:598
 msgid "A young man approaches"
-msgstr "Un giovane si avvicinca"
+msgstr "Un giovane si avvicina"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -102,7 +102,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:555
 msgid "Another building."
-msgstr "Un altro edificio"
+msgstr "Un altro edificio."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:180
 msgid ""
@@ -221,7 +221,7 @@ msgstr "Instaura una consistente produzione di cibo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "Establish a spidercloth production"
-msgstr ""
+msgstr "Instaura una produzione di tessuto di ragno"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:112
 msgid "Expand and Explore"
@@ -269,6 +269,11 @@ msgid ""
 "accepted their fate while others tried to change the god's mind by offering\n"
 "animals in his temple. But to no avail..."
 msgstr ""
+"Riempito di colpa, il re si suicidò. Senza un monarca, il popolo\n"
+"si rivolse al clero, ma non aveva aiuto da offrire. La maggior parte\n"
+"accettò il suo destino, mentre altri provarono a far cambiare idea al dio "
+"offrendo\n"
+"animali nel suo tempio. Ma inutilmente..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:478
 msgid ""
