@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-11-19 22:12+0000\n"
+"PO-Revision-Date: 2011-07-03 23:15+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-04 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -50,6 +50,9 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"Vojenská helma je vylepšená zbroj pre barbarských vojakov. Vyrába sa vo "
+"vyhni na helmy a používa sa vo výcvikovom tábore - spolu s jedlom - na "
+"trénovanie bodov zdravia vojakov z úrovne 1 na úroveň 2."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -112,6 +115,9 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
+"Okrem pita chleba a mäsa, potraviny barbarov tvoria tiež ryby. Využívajú sa "
+"v krčmách, hostincoch a veľkých hostincoch a vo výcvikových stavbách "
+"(výcvikový tábor a zápasnícka aréna)."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Big Inn"
@@ -345,6 +351,9 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Udice potrebujú barbarskí rybári na rybárčenie. Sú jedným zo základných "
+"nástrojov, ktoré sa vyrábajú v kovodielni (prestanú sa v nej vyrábať, ak sa "
+"vylepší na továreň na sekery alebo vojenský závod)."
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
@@ -386,6 +395,10 @@ msgid ""
 "used as a precious building material and to produce different axes (in the "
 "war mill) and different armours (in the helmsmithy)."
 msgstr ""
+"Zlato je najhodnotnejším zo všetkých kovov; zdobia sa ním len veľmi dôležité "
+"veci. Získava sa zo zlatej rudy v taviarni. Používa sa ako cenný stavebný "
+"materiál a na výrobu rôznych sekier (vo vojenskom závode) a zbrojí (vo vyhni "
+"na zbroje)."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -507,6 +520,8 @@ msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
+"Železné rudy sa ťažia v železnorudných baniach. Po tavení v taviarni z nich "
+"vznikne železo."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -583,6 +598,10 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
+"Len toto pivo je prípustné pre vojakov v zápasníckej aréne. Niektorí "
+"hovoria, že celá sila barbarov sa ukrýva v tomto pive. Pomáha pri trénovaní "
+"uhýbania vojakov z úrovne 0 na 1 a na 2. Zo silného piva sa vo veľkých "
+"hostincoch pripravujú obedy."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -759,6 +778,8 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Nespracované kamene sú základným stavebným materiálom barbarov. Produkujú sa "
+"v kameňolomoch a žulových lomoch."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
@@ -873,11 +894,11 @@ msgstr "Taviť železo"
 
 #: ../../tribes/barbarians/conf:138
 msgid "Smelter"
-msgstr "Zlievač"
+msgstr "Tavič"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Smelting Works"
-msgstr "Zlievareň"
+msgstr "Taviareň"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -990,6 +1011,9 @@ msgid ""
 "several buildings: lime kiln, smelting works, axefactory, war mill, "
 "helmsmithy."
 msgstr ""
+"Barbari zvyčajne pridávajú do ohňa uhlie. Ťaží sa v uhoľných baniach alebo "
+"sa vyrába z kmeňov stromov v sídle uhliara. Míňa ho viacero budov: vápenka, "
+"taviareň, továreň na sekery, vojenský závod, vyhňa na helmy."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -1272,7 +1296,7 @@ msgstr "Divá sviňa"
 
 #: ../../tribes/barbarians/conf:177
 msgid "Wood Hardener"
-msgstr "Stolárska dielňa"
+msgstr "Lakovňa dreva"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21

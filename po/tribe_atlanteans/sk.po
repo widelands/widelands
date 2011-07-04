@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-06-22 14:18+0000\n"
+"PO-Revision-Date: 2011-07-03 18:44+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-23 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-07-04 04:30+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -23,8 +23,8 @@ msgid ""
 "healthpoints level 0 to level 1."
 msgstr ""
 "Zlatý kabátec sa vyrába v atlantídskom tkacom závode zo zlatého vlákna. "
-"Používa sa vo výcvikovom tábore - spolu s jedlom - na trénovanie vojakov s "
-"bodmi zdravia na úrovni 0 až 1."
+"Používa sa vo výcvikovom tábore - spolu s jedlom - na trénovanie bodov "
+"zdravia vojakov z úrovne 0 na úroveň 1."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -398,14 +398,14 @@ msgid ""
 "and the goldweaver."
 msgstr ""
 "Zlato je jedným z najhodnotnejších materiálov. Vyrába sa zo zlatej rudy v "
-"zlievárni. Používa sa vo vyhniach na výrobu zbrojí a zbraní a v tkacom "
-"závode na zlato."
+"taviarni. Používa sa vo vyhniach na zbroje a zbrane a v tkacom závode na "
+"zlato."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
-"Zlatá ruda sa ťaží v zlatých baniach a spracováva sa na zlato v zlievárni."
+"Zlatá ruda sa ťaží v zlatých baniach a spracováva sa na zlato v taviarni."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -503,16 +503,16 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
-"Železo sa vyrába zo železnej rudy v zlievarni. Používa sa vo vyhniach na "
-"výrobu nástrojov, zbrojí a zbraní."
+"Železo sa vyrába zo železnej rudy v taviarni. Používa sa vo vyhniach na "
+"nástroje, zbroje a zbrane."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
-"Železná ruda sa ťaží v železnorudných baniach. Taví sa v zlievárni, "
-"následkom čoho vznikne železo."
+"Železná ruda sa ťaží v železnorudných baniach. Taví sa v taviarni, následkom "
+"čoho vznikne železo."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -898,11 +898,11 @@ msgstr "Taviť železo"
 
 #: ../../tribes/atlanteans/conf:126
 msgid "Smelter"
-msgstr "Zlievač"
+msgstr "Tavič"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Smelting Works"
-msgstr "Zlievareň"
+msgstr "Taviareň"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1019,6 +1019,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"Atlantíďania do ohňov v taviarňach, vyhniach na zbroje a zbrane pridávajú "
+"uhlie. Toto uhlie sa ťaží v uhoľných baniach alebo ho vyrába uhliar z kmeňov "
+"stromov."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1063,9 +1066,9 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
-"Dlhý trojzubec je prvý trojzubec vo výcviku vojakov. Vyrába sa vo vyhni sa "
-"výrobu zbraní a používa sa v kobke - spolu s jedlom - na trénovanie vojakov "
-"s útokom na úrovni 0 až 1."
+"Dlhý trojzubec je prvý trojzubec vo výcviku vojakov. Vyrába sa vo vyhni na "
+"zbrane a používa sa v kobke - spolu s jedlom - na trénovanie útoku vojakov z "
+"úrovne 0 na úroveň 1."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
@@ -1082,8 +1085,8 @@ msgid ""
 "food - to train soldiers from Defense level 1 to level 2."
 msgstr ""
 "Tieto pokročilé štíty používajú najlepší vojaci Atlantíďanov. Vyrábajú sa vo "
-"vyhni zbrojí a používajú sa v labyrinte - spolu s jedlom - na trénovanie "
-"vojakov s obranou na úrovni 1 až 2."
+"vyhni na zbroje a používajú sa v labyrinte - spolu s jedlom - na trénovanie "
+"obrany vojakov z úrovne 1 na úroveň 2."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
