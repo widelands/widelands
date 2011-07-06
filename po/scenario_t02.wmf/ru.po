@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-05-20 09:13+0000\n"
-"Last-Translator: Denis Deryabin <Unknown>\n"
+"PO-Revision-Date: 2011-07-05 15:41+0000\n"
+"Last-Translator: Alexander Glukhov <Unknown>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-21 04:41+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-07-06 04:31+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -371,11 +371,11 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:431
 msgid "Another cold day"
-msgstr ""
+msgstr "Еще один холодный день"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:119
 msgid "Bake bread"
-msgstr ""
+msgstr "Печь хлеб"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:175
 msgid ""
@@ -439,7 +439,7 @@ msgstr "Бравый Болдреф подошёл к вам..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr ""
+msgstr "Построить ранчо"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -460,11 +460,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
 msgid "Build a fernery"
-msgstr ""
+msgstr "Построить оранжерею"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Построить хижину охотника, хижину егеря и таверну."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
@@ -473,23 +473,24 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:174
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
 msgstr ""
+"Построить цементную печь, колодец и домик углежога или угольную шахту."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Построить плавильню."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Построить колодец, ферму и пекарню."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Построить лесопилку"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Построить угольную шахту и рудник."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
@@ -557,7 +558,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Хантрух говорит"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
@@ -569,15 +570,15 @@ msgstr "Подошел Хантрух..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
 msgid "Mission Complete"
-msgstr ""
+msgstr "Миссия завершена"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:69
 msgid "New Objectives"
-msgstr ""
+msgstr "Новые цели"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:424
 msgid "One fullmoon night"
-msgstr ""
+msgstr "Однажды в полнолуние"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:121
 msgid ""
@@ -589,15 +590,15 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Обеспечить шахтеров едой"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Переплавить добытые ресурсы"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Начать строить шахты на горе"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:241
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:259
