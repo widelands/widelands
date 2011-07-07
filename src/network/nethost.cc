@@ -336,7 +336,7 @@ struct HostChatProvider : public ChatProvider {
 				return;
 			}
 
-			// Everything handled from now on will be system stuff - an so will be
+			// Everything handled from now on will be system stuff - and so will be
 			// messages send because of that commands
 			c.playern = -2;
 			c.sender = "";
@@ -1066,7 +1066,8 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 				_
 				("<br>Available host commands are:<br>"
 				 "help   - Shows this help<br>"
-				 "host $ - Tries to run the host command $");
+				 "host $ - Tries to run the host command $<br>"
+				 "save $ - Saves the current game state as $.wgf");
 		else
 			c.msg =
 				_
@@ -1092,6 +1093,27 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		c.recipient = "";
 		send(c);
 		d->chat.send(temp);
+
+	} else if (cmd == "save") {
+		// Check whether saving is allowed at all
+		Section & s = g_options.pull_section("global");
+		if (!s.get_bool("dedicated_saving", true)) {
+			c.msg = _("Sorry! Saving was deactivated on this dedicated server!");
+			send(c);
+		} else if (!d->game) {
+			c.msg = _("Can not save, as long as no game is running!");
+			send(c);
+		} else {
+			//try to save the game
+			std::string savename =  "save/" + arg1 + " " + arg2 + ".wgf";
+			std::string * error = new std::string();
+			SaveHandler & sh = d->game->save_handler();
+			if (sh.save_game(*d->game, savename, error))
+				c.msg = _("Game successfully saved!");
+			else
+				c.msg = (format(_("Could not save the game to the file \"%s\"! (%s)")) % savename % error).str();
+			send(c);
+		}
 
 	} else if (not d->game) {
 
