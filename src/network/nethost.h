@@ -102,6 +102,8 @@ struct NetHost : public GameController, private SyncCallback {
 
 	bool forcedPause() {return m_forced_pause;}
 
+	bool isDedicated() {return m_is_dedicated;}
+
 private:
 	NetTransferFile * file;
 
