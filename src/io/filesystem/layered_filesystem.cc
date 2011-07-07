@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,10 +107,13 @@ bool LayeredFileSystem::m_read_version_from_version_file
 {
 	FileRead fr;
 	if (fr.TryOpen(fs, "VERSION")) {
-		std::string version = fr.CString();
-		// Truncate extra information like branch name , (debug)
-		version = version.substr(0, build_id().size());
-		*rv = version;
+		if (!fr.EndOfFile()) {
+			std::string version = fr.CString();
+			// Truncate extra information like branch name , (debug)
+			version = version.substr(0, build_id().size());
+			*rv = version;
+		} else
+			*rv = std::string();
 		return true;
 	}
 	return false;

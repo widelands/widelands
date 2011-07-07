@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,45 @@ int32_t Map_Map_Object_Loader::get_nr_unloaded_objects()
 		if (!it->second)
 			++result;
 	return result;
+}
+
+/**
+ * Mark this object to be scheduled for destruction after loading has finished.
+ *
+ * \note Only use this for compatibility hacks!
+ */
+void Map_Map_Object_Loader::schedule_destroy(Map_Object & obj)
+{
+	m_schedule_destroy.push_back(&obj);
+}
+
+/**
+ * Mark this bob to have a forced act scheduled, so that it can refresh itself
+ * and update states properly.
+ *
+ * \note Only use this for compatibility hacks!
+ */
+void Map_Map_Object_Loader::schedule_act(Bob & bob)
+{
+	m_schedule_act.push_back(&bob);
+}
+
+/**
+ * Part of compatibility hacks that need to be run after the load has finished.
+ *
+ * \note Only use this for compatibility hacks!
+ */
+void Map_Map_Object_Loader::load_finish_game(Game & g)
+{
+	while (!m_schedule_destroy.empty()) {
+		m_schedule_destroy.back()->schedule_destroy(g);
+		m_schedule_destroy.pop_back();
+	}
+
+	while (!m_schedule_act.empty()) {
+		m_schedule_act.back()->schedule_act(g, 1);
+		m_schedule_act.pop_back();
+	}
 }
 
 }

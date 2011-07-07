@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,11 @@
 
 #include "interactive_gamebase.h"
 
+#include "chatoverlay.h"
 #include "profile/profile.h"
 
 #include "logic/game.h"
+
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s,
 	 PlayerType pt, bool const chatenabled)
@@ -54,7 +56,7 @@ Widelands::Game & Interactive_GameBase::    game() const
 void Interactive_GameBase::set_chat_provider(ChatProvider & chat)
 {
 	m_chatProvider = &chat;
-	m_chatDisplay->setChatProvider(chat);
+	m_chatOverlay->setChatProvider(chat);
 
 	m_chatenabled = true;
 }

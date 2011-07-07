@@ -6,36 +6,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-12-13 14:26+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-02-23 22:54+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:18+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
-msgid "A bit bigger, for the advanced miners. They will need a big morsel."
+msgid ""
+"A bigger morsel than the ration to provide miners in deep mines. It is "
+"produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
-"Un peu plus gros, pour les mineurs avancés qui veulent un gros morceau."
+"Un plus gros morceau pour fournir aux mines profondes. Il est produit dans "
+"une auberge ou une grande auberge à partir de poisson/viande, de pain pitta "
+"et de bière."
+
+#: ../../tribes/barbarians/helm/conf:1
+msgid ""
+"A helmet is basic tool to protect warriors. It is produced in the helmsmithy "
+"and used in the trainingscamp - together with food -  to train soldiers from "
+"healthpoints level 0 to healphpoints level 1."
+msgstr ""
+"Un casque est l'outil de base de protection des guerriers. Il est produit "
+"dans la forge de casques et utilisé dans les camps d'entrainement - avec de "
+"la nourriture - pour entrainer les soldats en points de santé du niveau 0 "
+"vers les points de santé niveau 1."
 
 #: ../../tribes/barbarians/meal/conf:1
-msgid "A real meal which satisfies all miners needs."
-msgstr "Un vrai repas qui satisfait tous les besoins des mineurs."
+msgid ""
+"A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
+"This substantial food is exactly what workers in a deeper mine need."
+msgstr ""
+"Un repas est fait à partir de pain pitta, de la bière forte et du "
+"poisson/viande dans une grande auberge. Cette nourriture substantielle est "
+"exactement ce dont les mineurs des mines profondes ont besoin."
 
 #: ../../tribes/barbarians/ration/conf:1
-msgid "A small bite to keep miners strong and working."
-msgstr "Un petit en cas pour redonner des forces aux mineurs."
+msgid ""
+"A small bite to keep miners strong and working. Also the scout consumes "
+"rations on his scouting trips. Rations are produced in a tavern, an inn or a "
+"big inn out of fish or meat or pitta bread."
+msgstr ""
+"Une petite bouchée pour garder les mineurs et optimistes et travailleurs. "
+"L'éclaireur consomme aussi des rations pendant ses voyages d'exploration. "
+"Les rations sont produites dans la taverne, l'auberge ou la grande auberge à "
+"partir de pain ou de pain pitta."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
-msgid "An enhanced mask for barbarian warriors."
-msgstr "Un masque amélioré, pour les guerriers barbares."
-
-#: ../../tribes/barbarians/mask/conf:1
-msgid "An enhanced version of the helmet."
-msgstr "Une version améliorée du casque."
+msgid ""
+"A warhelmet is an enhanced armour for barbarian warriors. It is produced in "
+"a helmsmithy and used in a trainingscamp - together with food - to train "
+"soldiers from healthpoints level 1 to level 2."
+msgstr ""
+"Un casque de guerre est une pièce avancée de l'armurerie des guerriers "
+"barbares. Il est produit dans les forges de casques et utilisé dans les "
+"camps d'entrainement - avec de la nourriture - pour les points de santé des "
+"soldats du niveau 1 au niveau 2."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -74,10 +104,6 @@ msgstr "Caserne"
 msgid "Barrier"
 msgstr "Barricade"
 
-#: ../../tribes/barbarians/helm/conf:1
-msgid "Basic defence of a warrior."
-msgstr "La défense de base d'un soldat."
-
 #: ../../tribes/barbarians/conf:215
 msgid "Battle Arena"
 msgstr "Arène"
@@ -90,12 +116,24 @@ msgstr "Hache de bataille"
 msgid "Beer"
 msgstr "Bière"
 
+#: ../../tribes/barbarians/beer/conf:1
+msgid ""
+"Beer is produced in micro breweries used in inns and big inns to produce "
+"snacks."
+msgstr ""
+"La bière est produite dans les micro brasseries et utilisé dans les grandes "
+"auberges pour produire des collations."
+
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
-"Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
+"Besides pitta bread and meat, fish is also a foodstuff for the barbarians. "
+"It is used in the taverns, inns and big inns and in the trainingsites "
+"(trainingscamp and battle arena)."
 msgstr ""
-"En plus des miches de pain et de la viande, le poisson est également une "
-"source de nourriture pour les barbares."
+"À part le pain pitta et la viande, Le poisson est aussi un élément de "
+"consommation pour les barbares. Il est utilisé dans les tavernes, les "
+"auberges, les grandes auberges et les sites d'entrainement (camp "
+"d'entrainement et arène de combat)."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Big Inn"
@@ -302,13 +340,15 @@ msgstr "Champ très petit"
 msgid "Fire Tongs"
 msgstr "Tenailles"
 
-#: ../../tribes/barbarians/blackwood/conf:1
+#: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
-"Fire-hardened wood, as hard as iron and cannot burn, used for military "
-"buildings."
+"Fire tongs are tools of the smelter, who works in the smelting works. "
+"Produced in the metal works (but ceases to be produced by the building if it "
+"is enhanced to an axefactory and war mill)."
 msgstr ""
-"Du bois durcit par le feu, aussi dur que l'acier et résistant au feu. "
-"Utilisé pour les bâtiments militaires."
+"Les pinces à feu sont l'outil du fondeur, qui travaille dans la fonderie. "
+"Elles sont produites dans la ferronnerie (mais cessent d'êtres produites par "
+"le bâtiment siil est  amélioré en usine de hache ou moulin de guerre)."
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
@@ -327,9 +367,15 @@ msgid "Fishing Rod"
 msgstr "Canne à pêche"
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
-msgid "Fishing rods are needed by barbarian fishers for fishing."
+msgid ""
+"Fishing rods are needed by barbarian fishers for fishing. It is one of the "
+"basic tools produced in a metalwork shop (but ceases to be produced by the "
+"building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Des cannes à pêche sont nécessaires pour que les pêcheurs puissent pêcher."
+"Les cannes à pêche sont nécessaires aux pêcheurs barbares pour pêcher. C'est "
+"l'un des outils de base produit dans la quincaillerie (mais est cessé de "
+"produire si le bâtiment est amélioré en usine de hache et en moulin de "
+"guerre."
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
@@ -367,10 +413,25 @@ msgstr "Minerai d'or"
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
 "Gold is the most valuable of all metals; only very important things are "
-"garnished with it."
+"garnished with it. It is obtained out of gold ore in a smelting works. It is "
+"used as a precious building material and to produce different axes (in the "
+"war mill) and different armours (in the helmsmithy)."
 msgstr ""
-"L'or est le plus précieux de tous les métaux ; seulement les choses très "
-"importantes en sont garnies."
+"L'or est le plus précieux des métaux; seule des choses très importantes en "
+"sont incrustées. Il est épuré du minerai d'or dans la fonderie. Il est "
+"utilisé comme précieux matériau de construction et pour produire différentes "
+"haches (dans le moulin de guerre) et différentes armures (dans la forge de "
+"casques)."
+
+#: ../../tribes/barbarians/goldstone/conf:5
+msgid ""
+"Gold ore is mined in a goldmine. Smelted in a smelting works it becomes "
+"gold, which is used as a precious building material and to produce weapons "
+"and armours."
+msgstr ""
+"Le minerai d'or est miné dans les mines d'or. Fondu dans une fonderie il "
+"deviendra de l'or, qui est utilisé comme un matériau de construction "
+"précieux et pour produire des armes et des armures."
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -427,18 +488,23 @@ msgid "Helmsmithy"
 msgstr "Forgeron de heaumes"
 
 #: ../../tribes/barbarians/ox/conf:1
-msgid "Helps to carry items at heavy used roads."
-msgstr "Aide à transporter des articles sur des routes très utilisées"
+msgid "Helps to carry items at heavily used roads."
+msgstr "Aide à transporter les objets sur les routes surchargées de trafic."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
 msgstr "Tour haute"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
-msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
+msgid ""
+"How can one create a meal, snack or ration, if there are no kitchen tools? "
+"Be sure to have a metalworks to produce this basic tool (but ceases to be "
+"produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Comment préparer un repas, un casse-croûte ou une ration, s'il n'y a pas "
-"d'ustensiles de cuisine ?"
+"Comment pouvons nous créer un repas, une collation ou une ration, si nous "
+"n'avons pas d'outils de cuisine ? Assurez vous d'avoir un quincailler pour "
+"produire les outils de base (mais cesse de les produire si le bâtiment est "
+"amélioré en usine de haches et moulin de guerre)."
 
 #: ../../tribes/barbarians/conf:132
 msgid "Hunter"
@@ -471,6 +537,24 @@ msgstr "Minerai de fer"
 #: ../../tribes/barbarians/conf:201
 msgid "Iron Ore Mine"
 msgstr "Mine de fer"
+
+#: ../../tribes/barbarians/iron/conf:1
+msgid ""
+"Iron is obtained out of iron ores in the smelting works. It is used to "
+"produce weapons and tools in the metalwork shop, axefactory, war mill and in "
+"the helmsmithy."
+msgstr ""
+"Le fer est extrait des minerais de fer dans les fonderies. Il est utilisé "
+"pour produire des armes et des outils dans la quincaillerie, l'usine de "
+"hache, le moulin de guerre et la forge de casques."
+
+#: ../../tribes/barbarians/ironore/conf:1
+msgid ""
+"Iron ores are mined in iron mines. They deliver iron when smelted in a "
+"smelting works."
+msgstr ""
+"Les minerais de fer sont minés dans les mines de fers. Ils donnent du fer "
+"quand ils sont fondus dans une fonderie."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -518,13 +602,15 @@ msgstr "Viande"
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
-"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-"lunch for the miners and in the soldier trainingcamps to keep warriors "
-"strong."
+"Meat contains a lot of energy. It is produced by the hunters and used in the "
+"taverns, inns and big inns to prepare rations, snacks and meals for the "
+"miners. It is also consumed in the training sites (trainingscamp and battle "
+"arena)."
 msgstr ""
-"La viande contient beaucoup d'énergie. Elle est utilisée dans les auberges "
-"et les tavernes pour préparer les repas des mineurs et dans les camps "
-"d'entraînement afin de garder les soldats en forme."
+"Le repas contient beaucoup d'énergie. Il est produit par les chasseurs et "
+"utilisé dans les tavernes, auberges et grandes auberges pour préparer des "
+"rations, des collations et des repas pour les mineurs. Il est aussi consommé "
+"dans les sites d'entrainement (camp d'entrainement et arène de combat)."
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
@@ -544,11 +630,16 @@ msgstr "Pas assez de place"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
-"Only this beer is acceptable for the old warriors. Some say, the whole power "
-"of the barbarians is in this ale."
+"Only this beer is acceptable for the warriors in a battle arena. Some say, "
+"the whole power of the barbarians is in this ale. It helps to train the "
+"soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
+"to prepare meals."
 msgstr ""
-"Seule cette bière est acceptable pour les guerriers vétérans. Certains "
-"disent que toute la puissance des barbares se trouve dans cette bière."
+"Seule cette bière est acceptable pour les guerriers dans l'arène de combat. "
+"Certains disent, que toute la puissance des barbares est dans cette bière. "
+"Elle aide les soldats à entrainer leur niveau d'évasion du niveau 0 à 1 et "
+"2. La bière forte est aussi utilisé dans les grandes tavernes pour préparer "
+"des repas."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -722,27 +813,21 @@ msgid "Raw Stone"
 msgstr "Pierre"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
-msgid "Raw Stones are the secondary build material of the barbarians."
-msgstr "Les pierres sont la deuxième ressource de construction des barbares."
+msgid ""
+"Raw Stones are a basic building material of the barbarians. It is produced "
+"in quarries and granite mines."
+msgstr ""
+"Les pierres brutes sont le matériau de base de construction des barbares. "
+"Elles sont produites dans les carrières et les mines de granit."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
-"Raw stone can be enhanced to grout which delivers solid, non burning build "
-"material."
+"Raw stone can be processed into grout which provides a solid, non burning "
+"building material. Grout is produced in a lime kiln."
 msgstr ""
-"La pierre brute peut être transformée en ciment, qui fournit un matériau de "
-"construction solide et ignifugé."
-
-#: ../../tribes/barbarians/sharpaxe/conf:1
-msgid ""
-"Real warriors consider the sharp axe the first real weapon, after being able "
-"to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
-"than the ordinary axe. Build in the axe factory."
-msgstr ""
-"Les vrais guerriers considèrent la hache pointue comme la première véritable "
-"arme, une fois qu'ils sont capables de manier la hache ordinaire, ils "
-"s'attaquent à celle-ci. Elle est plus lourde et plus aiguisée que la hache "
-"ordinaire. Elle est construite à la fabrique de haches."
+"La pierre brute peut être transformée en ciment qui donne un matériau de "
+"construction solide et ininflammable. Le ciment est produit dans un four à "
+"chaux."
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
@@ -832,7 +917,7 @@ msgstr "Hache pointue"
 msgid "Shovel"
 msgstr "Pelle"
 
-#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
 msgstr "Au repos"
@@ -905,9 +990,12 @@ msgid "Thatch Reed"
 msgstr "Chaume de roseau"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
-msgid "Thatch reed is used to make the roofs of buildings waterproof."
+msgid ""
+"Thatch reed is produced in a fernery and used to make the roofs of buildings "
+"waterproof."
 msgstr ""
-"Le chaume de roseau est utilisé pour construire des toits imperméables."
+"Le chaume de roseau est produit dans une ferme à fougères et utilisé pour "
+"rendre les toits des constructions imperméable."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -935,52 +1023,73 @@ msgstr "L'équipe de développement de Widelands"
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""
-"The barbarian bakers are best in making this flat and tasty pitta bread."
+"The barbarian bakers are best in making this flat and tasty pitta bread. It "
+"is made out of wheat and water following a secret recipe. Pitta bread is "
+"used in the taverns, inns and big inns to prepare rations, snacks and meals. "
+"It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
-"Les boulangers barbares sont les meilleurs pour faire ces miches de pain, "
-"plates et délicieuses."
+"Les boulangers barbares sont meilleurs à la préparation de ce plat et "
+"savoureux pain pitta. Il est fait à partir de farine et d'eau en suivant une "
+"recette secrète. Le pain pitta est utilisé dans les tavernes, les auberges "
+"et les grandes auberges pour préparer des rations, des collations et des "
+"repas. Il est aussi consommé dans les sites d'entrainement (camps "
+"d'entrainement et arène de combat)."
+
+#: ../../tribes/barbarians/broadaxe/conf:1
+msgid ""
+"The broad axe is produced in the axefactory and the war mill. It is used in "
+"the trainingscamp - together with food- to train warriors with a fundamental "
+"fighting knowledge (from attack level 1 to attack level 2)."
+msgstr ""
+"La grande hache est produite dans l'usine de hache et le moulin de guerre. "
+"Elle est utilisé dans les camps d'entrainement - avec de la nourriture - "
+"pour entrainer les guerriers aux principes fondamentaux du combat (du niveau "
+"d'attaque 1 ou niveau 2)."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
-"The bronze axe is considered a hard to handle weapon: it makes a lot of "
-"damage, but it's durability is not the best. Only skilled warriors can use "
-"this. Produced in the axe factory."
+"The bronze axe is considered a hard to handle weapon. Only skilled warriors "
+"can use this. It is produced in the war mill and used in the trainingscamp "
+"(trains -together with food - from attack level 2 to level 3)."
 msgstr ""
-"La hache de bronze est considérée comme difficile à manier : elle cause "
-"beaucoup de dommages, mais sa durée de vie n'est pas la meilleure. Seuls les "
-"guerriers chevronnés peuvent l'utiliser. Elle est produite à la fabrique de "
-"haches."
+"La hache de bronze est considérée comme une arme difficile à manier. Seuls "
+"les guerriers les plus habiles peuvent l'utiliser. Elle est produite dans le "
+"moulin de guerre et utilisé dans les camps d'entrainement (entraine - avec "
+"de la nourriture - l'attaque du niveau 2 au niveau 3)."
 
 #: ../../tribes/barbarians/felling_axe/conf:1
-msgid "The felling axe is the tool of the lumberjack to take down trees."
-msgstr ""
-"La cognée est un outil que les bûcherons utilisent pour couper les arbres."
-
-#: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
-"The fire tongs are the tool of the smelter, working in the smelting works. "
-"Produced in the metal works."
+"The felling axe is the tool of the lumberjack to take down trees. It is "
+"produced in the metalwork shop (but ceases to be produced by the building if "
+"it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Les tenailles sont l'outil du fondeur, qui travaille à la fonderie. Elles "
-"sont produites à la ferronnerie."
+"La hache d'abattage est l'outil des bucherons pour abattre les arbres. Elle "
+"est produite dans une quincaillerie (mais cesse d'être produit si le "
+"bâtiment est amélioré en usine de hache et moulin de guerre)."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
-"The fires of the barbarians are usually fed with wood, but sometimes, wood "
-"just does not burn hot enough. Then, coal is used."
+"The fires of the barbarians are usually fed with coal. It is produced in "
+"coal mines or out of trunks in a charcoal burner's house. Consumers are "
+"several buildings: lime kiln, smelting works, axefactory, war mill, "
+"helmsmithy."
 msgstr ""
-"Les feux des barbares sont habituellement alimentées avec du bois, mais "
-"parfois il ne chauffe pas assez. Dans ce cas, le charbon est utilisé."
+"Les feux des barbares sont couramment nourris avec du charbon. Il est "
+"produit dans les mines de charbon ou fait à partir de troncs dans la maison "
+"du bruleur de charbon de bois."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the worker, "
-"the blacksmiths and the helmsmiths. Make sure you always got some in "
-"reserve! Build at the metal works."
+"The hammer is an essential tool. It is needed by the geologist, the builder, "
+"the blacksmith and the helmsmith. Make sure you always have some in reserve! "
+"It is one of the basic tools produced at the metalwork shop, (but ceases to "
+"be produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Le marteau est un outil essentiel. Il est utilisé par le géologue, l'ouvrier "
-"et toutes les sortes de forgerons. Assurez-vous de toujours en avoir en "
-"réserve ! Il est produit à la ferronnerie."
+"Le marteau est un outil essentiel. Il est nécessaire par le géologue, les "
+"bâtisseur, le forgeron et l'armurier forgeron. Assurez vous de toujours en "
+"avoir en réserve! C'est un outil basique produit dans la quincaillerie, "
+"(mais cesse d'être produit par le bâtiment si amélioré en usine de hache et "
+"moulin de guerre)."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
@@ -989,69 +1098,99 @@ msgstr "La puissante tribu des terres de l'est !"
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
 "The peel is a tool of the baker and each baker needs his own. It is produced "
-"in the metal works like all other tools."
+"in the metal works like all other tools (but it ceases to be produced by the "
+"building if the metal works is enhanced to an axefactory and war mill)."
 msgstr ""
-"Une pelle à enfourner est l'outil du boulanger : chaque boulanger doit en "
-"avoir une. Elle est produite à la ferronerie, comme tous les autres outils."
+"La pelle à défourner est l'outil du boulanger et chaque boulanger doit avoir "
+"la sienne. Elle est produite dans la quincaillerie comme les autres outils "
+"(mais est cessé de produire si le bâtiment quincaillerie est amélioré en "
+"usine de hache et moulin de guerre)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
-"The scythe is the tool of the farmers. It is produced in the metal works."
+"The scythe is the tool of the farmers. It is produced in the metalwork shop "
+"(but ceases to be produced by the building if it is enhanced to an "
+"axefactory and war mill)."
 msgstr ""
-"La faux est l'outil des fermiers. Elle est produite à la ferronnerie."
+"La faux est l'outil des fermiers. Elle est produite dans la quincaillerie "
+"(mais cesse d'être produite par le bâtiment si il est amélioré en usine de "
+"hache et moulin de guerre."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the ferner and "
-"the ranger use it. Build at the metal works."
+"the ranger use it. Produced at the metalwork shop (but ceases to be produced "
+"by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"La pelle est nécessaire à la plantation. Elle est utilisée par "
-"l'horticulteur et le garde forestier. Elle est produite à la ferronnerie."
+"La pelle est nécessaire à la bonne manutention des plantes. Par conséquent, "
+"le fourrager et le garde forestier l'utilisent. Produite dans la "
+"quincaillerie (mais cesse d'être produite par le bâtiment si amélioré vers "
+"usine de hache et moulin de guerre)."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
-"The warriors axe is the most dangerous of all weapons. Only a few warriors "
-"ever were able to handle those huge and powerful axes. Build at the axe "
-"factory."
+"The warriors axe is the most dangerous of all Barbarian weapons. Only a few "
+"warriors ever were able to handle those huge and powerful axes. It is "
+"produced in a war mill and used -together with food - in a trainingscamp to "
+"train soldiers from attack level 4 to level 5."
 msgstr ""
-"La hache de guerrier est la plus dangereuse de toutes les armes. Seuls "
-"quelques guerriers sont capables de manipuler ces gigantesques et puissantes "
-"haches. Elles sont faites à la fabrique de haches."
+"La hache des guerriers est la plus dangereuse de toutes les armes barbares. "
+"Seules quelques guerriers sont capables de manier ces énormes et puissantes "
+"haches. Elles sont produites dans un moulin de guerre et utilisés - avec de "
+"la nourriture - dans les camps d'entrainement pour entrainer les soldats en "
+"attaque du niveau 4 au niveau 5."
 
-#: ../../tribes/barbarians/goldstone/conf:5
-msgid "This is gold ore mined from deep within the mountains."
-msgstr "Ceci est du minerai d'or miné des profondeurs des montagnes."
-
-#: ../../tribes/barbarians/ironore/conf:1
-msgid "This is the red iron ore."
-msgstr "Ceci est le minerai de fer rouge."
+#: ../../tribes/barbarians/blackwood/conf:1
+msgid ""
+"This fire-hardened wood is as hard as iron and it is used for several "
+"buildings. It is produced out of trunks in the wood hardener."
+msgstr ""
+"Le bois durcit au feu est aussi dur que le fer et est utilisé pour plusieurs "
+"bâtiments. Il est produit à partir de troncs par le durcisseur de bois."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
-"This is the second most dangerous weapon the barbarians are able to produce. "
-"Only trained warriors are able to yield such a weapon. It is produced in the "
-"axe factory."
+"This is a dangerous weapon the barbarians are able to produce. It is "
+"produced in the axe factory. Only trained warriors are able to wield such a "
+"weapon. It is used (together with food) in the trainingscamp to train "
+"soldiers from attack level 3 to 4."
 msgstr ""
-"C'est la deuxième arme la plus dangereuse que les Barbares sont capables de "
-"produire. Seuls les guerriers entrainés peuvent s'en servir. Elle est "
-"produite à la fabrique de hache."
+"C'est une arme dangereuse que les barbares sont capables de produire. Elle "
+"est produite dans l'usine de hache. Seuls les guerriers entrainés peuvent "
+"manier une telle arme. Elle est utilisée (avec de la nourriture) dans les "
+"camps d'entrainement pour entrainer les soldats en attaque du niveau 3 vers "
+"4."
+
+#: ../../tribes/barbarians/mask/conf:1
+msgid ""
+"This is the most enhanced Barbarian armour. It is produced in the helmsmithy "
+"and used in the trainingscamp - together with food - to train soldiers from "
+"healthpoints level 2 to healthpoints level 3."
+msgstr ""
+"C'est l'armure barbare la plus perfectionnée. Elle est produite dans la "
+"forge de casques et utilisé"
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced in the "
-"metal works."
+"metalwork shop (but ceases to be produced by the building if it is enhanced "
+"to an axefactory and war mill)."
 msgstr ""
-"Cette pioche est utilisée par les tailleurs de pierre et les mineurs. Elle "
-"est produite à la ferronnerie."
+"Cette pioche est utilisé par les maçons et les mineurs. Elle est produite "
+"dans la quincaillerie (mais cesse d'être produite si le bâtiment est "
+"amélioré en usine de hache et moulin de guerre)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters. Produced in the metal works."
+"in one blow. It is only used by the hunters. Produced in the metal works "
+"(but ceases to be produced by the building if it is enhanced to an "
+"axefactory and war mill)."
 msgstr ""
-"Cette lance est suffisamment légère pour être projetée, mais suffisamment "
-"lourde pour tuer un animal d'un coup. Elle est uniquement utilisée par les "
-"chasseurs. Elle est produite à la ferronnerie."
+"Cette lance est assez légère pour être lancée, mais assez lourde pour tuer "
+"n'importe quel animal en un coup. Elle est utilisée seulement par les "
+"chasseurs. Produite dans la quincaillerie (mais cesse d'être produite si le "
+"bâtiment est amélioré en usine de hache et moulin de guerre)."
 
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/conf:161
@@ -1075,8 +1214,19 @@ msgid "Trunk"
 msgstr "Rondin"
 
 #: ../../tribes/barbarians/trunk/conf:1
-msgid "Trunks are the primary build material of the barbarians."
-msgstr "Les rondins sont la permière ressource de construction des barbares."
+msgid ""
+"Trunks are a principal building material of the barbarians. The trees are "
+"felled by lumberjacks; rangers care for the supply of trees. Trunks are also "
+"used in the metalwork shop to build basic tools, and in the charcoal "
+"burner's house in the production of coal. The wood hardener refines trunks "
+"by hardening them in the fire which gives blackwood."
+msgstr ""
+"Les troncs sont le matériau principal de construction des barbares. Les "
+"arbres sont abattus par les bûcherons; les gardes forestiers s'occupent de "
+"l'approvisionnement en arbres. Les troncs sont aussi utilisés dans la "
+"quincaillerie pour construire des outils de base, et dans la maison du "
+"bruleur de charbon de bois pour la production du charbon. Le durcisseur de "
+"bois transforme les troncs en les durcissant au feu ce qui donne du bois dur."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1138,22 +1288,22 @@ msgstr ""
 "Augmente l'attaque des soldats 0 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes (build 13))"
 
-#: ../../tribes/barbarians/battlearena/conf:26
+#: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Améliore l'esquive des soldats 0"
 
-#: ../../tribes/barbarians/battlearena/conf:27
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Améliore l'esquive des soldats 0 (Seulement pour compatibilité avec les "
 "vieilles sauvegardes (Build 13))"
 
-#: ../../tribes/barbarians/battlearena/conf:28
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Améliore l'esquive du soldat 1"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
@@ -1212,29 +1362,19 @@ msgstr "Entrepôt"
 msgid "Warriors Axe"
 msgstr "Hache de guerrier"
 
-#: ../../tribes/barbarians/broadaxe/conf:1
-msgid ""
-"Warriors with a fundamental fighting knowledge gain a broad axe. It is "
-"produced in the axe factory."
-msgstr ""
-"Les guerriers avec une connaissance  fondamentale du combat obtiennent une "
-"grande hache. Elle est produite à la fabrique de haches."
-
 #: ../../tribes/barbarians/conf:106
 msgid "Water"
 msgstr "Eau"
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
-"Water is the most essential essence for life! This water is used in many "
-"places, be it to make bread or beer or to produce grout."
+"Water is the essence for life! It is used in the bakery, the micro brewery "
+"and the brewery. Also the lime kiln and the cattle farm need to be supplied "
+"with water."
 msgstr ""
-"L'eau est l'essence même de la vie ! Cette eau est utilisée à beaucoup "
-"d'endroits, pour faire du pain, de la bière, ou du ciment."
-
-#: ../../tribes/barbarians/iron/conf:1
-msgid "Weapons and tools are made of iron."
-msgstr "Les armes et les outils sont faits en fer."
+"L'eau est l'essence de la vie! Elle est utilisée dans les boulangeries, les "
+"micro brasseries et les brasseries. La cimenterie et la ferme d'élevage ont "
+"aussi besoins d'être approvisionné en eau."
 
 #: ../../tribes/barbarians/conf:141
 msgid "Weaver"
@@ -1254,11 +1394,13 @@ msgstr "Blé"
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
-"Wheat is essential for surviving. Delicious pitta bread and strong ales can "
-"be made of this wheat."
+"Wheat is essential for surviving. It is produced in farms and consumed by "
+"bakeries, micro breweries and breweries. Also Cattle farms need to be "
+"supplied with wheat."
 msgstr ""
-"Le blé est essentiel pour la survie, les bonnes miches de pain et les bières "
-"fortes en sont tirées."
+"La farine est essentielle pour survivre. Elle est produite dans les fermes "
+"et utilisé dans les boulangeries, micro brasseries et brasseries. Les fermes "
+"d'élevage ont aussi besoin d'être approvisionné en farine."
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"
@@ -1320,13 +1462,18 @@ msgstr ""
 "Travaille profondément dans la mine pour obtenir du charbon, du fer, ou de "
 "l'or"
 
-#: ../../tribes/barbarians/beer/conf:1
+#: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
-"Young warriors need some encouragement. This drink makes a man fearless and "
-"strong."
+"Young warriors are proud to learn to fight with this powerful weapon. It is "
+"heavier and sharper than the ordinary axe. It is produced in axefactories "
+"and war mills. In trainingscamps, it is used - together with food- to train "
+"soldiers from attack level 0 to level 1."
 msgstr ""
-"Les jeunes guerriers ont besoin de motivation. Cette boisson rend les hommes "
-"forts et courageux."
+"Les jeunes guerriers sont fiers d'apprendre à combattre avec cette puissante "
+"arme. Elle est plus lourde et plus tranchante que la hache ordinaire. Elle "
+"est produite dans les usines de hache et les moulins de guerre. Dans les "
+"camps d'entrainement, elle est utilisée - avec de la nourriture - pour "
+"entrainer les soldats en attaque du niveau 0 vers le niveau 1."
 
 #~ msgid ""
 #~ "The Axe is the basic weapon and tool for the barbarians. All young soldiers "
@@ -1354,22 +1501,59 @@ msgstr ""
 #~ "arme. Elle est produite à la fabrique de haches."
 
 #~ msgid ""
+#~ "Young warriors need some encouragement. This drink makes a man fearless and "
+#~ "strong."
+#~ msgstr ""
+#~ "Les jeunes guerriers ont besoin de motivation. Cette boisson rend les hommes "
+#~ "forts et courageux."
+
+#~ msgid ""
 #~ "Fire-hardened wood, hard as iron and can not burn, used for military "
 #~ "buildings."
 #~ msgstr ""
 #~ "Le bois durci au feu, aussi dur que le fer et ignifugé, est utilisé pour les "
 #~ "bâtiments militaires."
 
+#~ msgid ""
+#~ "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
+#~ "produced in the axe factory."
+#~ msgstr ""
+#~ "Les guerriers avec une connaissance  fondamentale du combat obtiennent une "
+#~ "grande hache. Elle est produite à la fabrique de haches."
+
+#~ msgid ""
+#~ "The bronze axe is considered a hard to handle weapon: it makes a lot of "
+#~ "damage, but it's durability is not the best. Only skilled warriors can use "
+#~ "this. Produced in the axe factory."
+#~ msgstr ""
+#~ "La hache de bronze est considérée comme difficile à manier : elle cause "
+#~ "beaucoup de dommages, mais sa durée de vie n'est pas la meilleure. Seuls les "
+#~ "guerriers chevronnés peuvent l'utiliser. Elle est produite à la fabrique de "
+#~ "haches."
+
 #~ msgid "Cloth is needed for barbarian ships. It is produced out of flax."
 #~ msgstr ""
 #~ "Le tissu est nécessaire pour les navires barbares. Il est produit à partir "
 #~ "du lin."
+
+#~ msgid ""
+#~ "The fires of the barbarians are usually fed with wood, but sometimes, wood "
+#~ "just does not burn hot enough. Then, coal is used."
+#~ msgstr ""
+#~ "Les feux des barbares sont habituellement alimentées avec du bois, mais "
+#~ "parfois il ne chauffe pas assez. Dans ce cas, le charbon est utilisé."
 
 #~ msgid "Flax"
 #~ msgstr "Lin"
 
 #~ msgid "Goldstone"
 #~ msgstr "Pépite d'or"
+
+#~ msgid ""
+#~ "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
+#~ msgstr ""
+#~ "En plus des miches de pain et de la viande, le poisson est également une "
+#~ "source de nourriture pour les barbares."
 
 #~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
 #~ msgstr ""
@@ -1379,8 +1563,101 @@ msgstr ""
 #~ msgid "Flax is a beautiful flower, which are used to make cloth."
 #~ msgstr "Le lin est une belle plante, utilisée pour fabriquer du tissu."
 
+#~ msgid ""
+#~ "Gold is the most valuable of all metals; only very important things are "
+#~ "garnished with it."
+#~ msgstr ""
+#~ "L'or est le plus précieux de tous les métaux ; seulement les choses très "
+#~ "importantes en sont garnies."
+
 #~ msgid "This is the yellow goldstone."
 #~ msgstr "Ceci est la pépite d'or jaune."
+
+#~ msgid ""
+#~ "This spear is light enough to be thrown, but heavy enough to kill any animal "
+#~ "in one blow. It is only used by the hunters. Produced in the metal works."
+#~ msgstr ""
+#~ "Cette lance est suffisamment légère pour être projetée, mais suffisamment "
+#~ "lourde pour tuer un animal d'un coup. Elle est uniquement utilisée par les "
+#~ "chasseurs. Elle est produite à la ferronnerie."
+
+#~ msgid "This is the red iron ore."
+#~ msgstr "Ceci est le minerai de fer rouge."
+
+#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
+#~ msgstr ""
+#~ "Comment préparer un repas, un casse-croûte ou une ration, s'il n'y a pas "
+#~ "d'ustensiles de cuisine ?"
+
+#~ msgid "An enhanced version of the helmet."
+#~ msgstr "Une version améliorée du casque."
+
+#~ msgid ""
+#~ "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+#~ "lunch for the miners and in the soldier trainingcamps to keep warriors "
+#~ "strong."
+#~ msgstr ""
+#~ "La viande contient beaucoup d'énergie. Elle est utilisée dans les auberges "
+#~ "et les tavernes pour préparer les repas des mineurs et dans les camps "
+#~ "d'entraînement afin de garder les soldats en forme."
+
+#~ msgid ""
+#~ "This pick is used by the stonemasons and the miners. It is produced in the "
+#~ "metal works."
+#~ msgstr ""
+#~ "Cette pioche est utilisée par les tailleurs de pierre et les mineurs. Elle "
+#~ "est produite à la ferronnerie."
+
+#~ msgid "A small bite to keep miners strong and working."
+#~ msgstr "Un petit en cas pour redonner des forces aux mineurs."
+
+#~ msgid "Raw Stones are the secondary build material of the barbarians."
+#~ msgstr "Les pierres sont la deuxième ressource de construction des barbares."
+
+#~ msgid ""
+#~ "The scythe is the tool of the farmers. It is produced in the metal works."
+#~ msgstr ""
+#~ "La faux est l'outil des fermiers. Elle est produite à la ferronnerie."
+
+#~ msgid ""
+#~ "Real warriors consider the sharp axe the first real weapon, after being able "
+#~ "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
+#~ "than the ordinary axe. Build in the axe factory."
+#~ msgstr ""
+#~ "Les vrais guerriers considèrent la hache pointue comme la première véritable "
+#~ "arme, une fois qu'ils sont capables de manier la hache ordinaire, ils "
+#~ "s'attaquent à celle-ci. Elle est plus lourde et plus aiguisée que la hache "
+#~ "ordinaire. Elle est construite à la fabrique de haches."
+
+#~ msgid ""
+#~ "The shovel is needed for proper handling of plants. Therefore the ferner and "
+#~ "the ranger use it. Build at the metal works."
+#~ msgstr ""
+#~ "La pelle est nécessaire à la plantation. Elle est utilisée par "
+#~ "l'horticulteur et le garde forestier. Elle est produite à la ferronnerie."
+
+#~ msgid "A bit bigger, for the advanced miners. They will need a big morsel."
+#~ msgstr ""
+#~ "Un peu plus gros, pour les mineurs avancés qui veulent un gros morceau."
+
+#~ msgid ""
+#~ "Only this beer is acceptable for the old warriors. Some say, the whole power "
+#~ "of the barbarians is in this ale."
+#~ msgstr ""
+#~ "Seule cette bière est acceptable pour les guerriers vétérans. Certains "
+#~ "disent que toute la puissance des barbares se trouve dans cette bière."
+
+#~ msgid "An enhanced mask for barbarian warriors."
+#~ msgstr "Un masque amélioré, pour les guerriers barbares."
+
+#~ msgid ""
+#~ "The warriors axe is the most dangerous of all weapons. Only a few warriors "
+#~ "ever were able to handle those huge and powerful axes. Build at the axe "
+#~ "factory."
+#~ msgstr ""
+#~ "La hache de guerrier est la plus dangereuse de toutes les armes. Seuls "
+#~ "quelques guerriers sont capables de manipuler ces gigantesques et puissantes "
+#~ "haches. Elles sont faites à la fabrique de haches."
 
 #~ msgid "Forester"
 #~ msgstr "Sylviculteur"
@@ -1431,11 +1708,27 @@ msgstr ""
 #~ msgid "Plant flax"
 #~ msgstr "Plante du lin"
 
+#~ msgid "A real meal which satisfies all miners needs."
+#~ msgstr "Un vrai repas qui satisfait tous les besoins des mineurs."
+
 #~ msgid "Cuts raw pieces of granit out of laying stones."
 #~ msgstr "Coupe des morceaux bruts de granit à partir de pierres."
 
+#~ msgid "Helps to carry items at heavy used roads."
+#~ msgstr "Aide à transporter des articles sur des routes très utilisées"
+
 #~ msgid "The mighty tribes of the eastern lands!"
 #~ msgstr "Les puissantes tribus des terres orientales !"
+
+#~ msgid ""
+#~ "Fire-hardened wood, as hard as iron and cannot burn, used for military "
+#~ "buildings."
+#~ msgstr ""
+#~ "Du bois durcit par le feu, aussi dur que l'acier et résistant au feu. "
+#~ "Utilisé pour les bâtiments militaires."
+
+#~ msgid "Fishes in the sea."
+#~ msgstr "Pêche dans la mer."
 
 #~ msgid ""
 #~ "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
@@ -1444,11 +1737,87 @@ msgstr ""
 #~ "La hache est l'arme de base des Barbares, ainsi qu'un outil. Les jeunes "
 #~ "soldats et les bucherons utilisent le même modèle."
 
+#~ msgid ""
+#~ "The peel is a tool of the baker and each baker needs his own. It is produced "
+#~ "in the metal works like all other tools."
+#~ msgstr ""
+#~ "Une pelle à enfourner est l'outil du boulanger : chaque boulanger doit en "
+#~ "avoir une. Elle est produite à la ferronerie, comme tous les autres outils."
+
+#~ msgid ""
+#~ "This is the second most dangerous weapon the barbarians are able to produce. "
+#~ "Only trained warriors are able to yield such a weapon. It is produced in the "
+#~ "axe factory."
+#~ msgstr ""
+#~ "C'est la deuxième arme la plus dangereuse que les Barbares sont capables de "
+#~ "produire. Seuls les guerriers entrainés peuvent s'en servir. Elle est "
+#~ "produite à la fabrique de hache."
+
+#~ msgid "Basic defence of a warrior."
+#~ msgstr "La défense de base d'un soldat."
+
+#~ msgid "Fishing rods are needed by barbarian fishers for fishing."
+#~ msgstr ""
+#~ "Des cannes à pêche sont nécessaires pour que les pêcheurs puissent pêcher."
+
 #~ msgid "Flax is a beautiful flower, which is used for making cloth."
 #~ msgstr "Le lin est une belle fleur dont on se sert pour faire du tissu."
 
+#~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
+#~ msgstr ""
+#~ "Le chaume de roseau est utilisé pour construire des toits imperméables."
+
+#~ msgid ""
+#~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
+#~ "the blacksmiths and the helmsmiths. Make sure you always got some in "
+#~ "reserve! Build at the metal works."
+#~ msgstr ""
+#~ "Le marteau est un outil essentiel. Il est utilisé par le géologue, l'ouvrier "
+#~ "et toutes les sortes de forgerons. Assurez-vous de toujours en avoir en "
+#~ "réserve ! Il est produit à la ferronnerie."
+
+#~ msgid ""
+#~ "The barbarian bakers are best in making this flat and tasty pitta bread."
+#~ msgstr ""
+#~ "Les boulangers barbares sont les meilleurs pour faire ces miches de pain, "
+#~ "plates et délicieuses."
+
+#~ msgid ""
+#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
+#~ "Produced in the metal works."
+#~ msgstr ""
+#~ "Les tenailles sont l'outil du fondeur, qui travaille à la fonderie. Elles "
+#~ "sont produites à la ferronnerie."
+
+#~ msgid "Weapons and tools are made of iron."
+#~ msgstr "Les armes et les outils sont faits en fer."
+
+#~ msgid ""
+#~ "Water is the most essential essence for life! This water is used in many "
+#~ "places, be it to make bread or beer or to produce grout."
+#~ msgstr ""
+#~ "L'eau est l'essence même de la vie ! Cette eau est utilisée à beaucoup "
+#~ "d'endroits, pour faire du pain, de la bière, ou du ciment."
+
+#~ msgid ""
+#~ "Raw stone can be enhanced to grout which delivers solid, non burning build "
+#~ "material."
+#~ msgstr ""
+#~ "La pierre brute peut être transformée en ciment, qui fournit un matériau de "
+#~ "construction solide et ignifugé."
+
 #~ msgid "Grows flax and thatch reed."
 #~ msgstr "Cultive le chaume de roseau et le lin"
+
+#~ msgid ""
+#~ "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
+#~ "be made of this wheat."
+#~ msgstr ""
+#~ "Le blé est essentiel pour la survie, les bonnes miches de pain et les bières "
+#~ "fortes en sont tirées."
+
+#~ msgid "Trunks are the primary build material of the barbarians."
+#~ msgstr "Les rondins sont la permière ressource de construction des barbares."
 
 #~ msgid ""
 #~ "Some of your starting buildings didn't have enough room and \n"
@@ -1458,3 +1827,31 @@ msgstr ""
 #~ "Certains de vos bâtiments initiaux n'ont pas trouvé assez de place et n'ont\n"
 #~ "pas pu être construits. Vous avez maintenant un net désavantage. Pensez\n"
 #~ "à recommencer cette carte avec une position de départ plus juste."
+
+#~ msgid "The felling axe is the tool of the lumberjack to take down trees."
+#~ msgstr ""
+#~ "La cognée est un outil que les bûcherons utilisent pour couper les arbres."
+
+#~ msgid "This is gold ore mined from deep within the mountains."
+#~ msgstr "Ceci est du minerai d'or miné des profondeurs des montagnes."
+
+#~ msgid ""
+#~ "Gold is the most valuable of all metals; only very important things are "
+#~ "garnished with it. It is obtained out of goldstone in a smelting works. It "
+#~ "is used as a precious building material and to produce different axes (in "
+#~ "the war mill) and different armours (in the helmsmithy)."
+#~ msgstr ""
+#~ "L'or est le plus précieux des métaux; Seules des choses très importantes en "
+#~ "sont pourvues. Il est extrait de pépites d'or dans les fonderies. Il est "
+#~ "utilisé comme un matériau de construction précieux et pour produire "
+#~ "différentes haches (dans le moulin de guerre) et différentes armures (dans "
+#~ "la forge de casques)."
+
+#~ msgid ""
+#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
+#~ "Produced in the metal works (but ceases to be produced by the building if it "
+#~ "is enhanced to an axefactory and war mill)."
+#~ msgstr ""
+#~ "Les pinces à feu sont l'outil du fondeur, qui travaille dans la fonderie. "
+#~ "Produites dans la quincaillerie (mais cesse d'être produites par le bâtiment "
+#~ "si amélioré en usine de hache et moulin de guerre)."

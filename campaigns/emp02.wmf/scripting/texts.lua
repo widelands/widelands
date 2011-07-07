@@ -76,8 +76,6 @@ _"* Finally, build up a fortress on the peninsula<br> (near where the barbarian 
 -- =====================
 diary_page_5 = {
    title =_ "A new island",
-   width = 450,
-   height = 350,
    posy= 1,
    body = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
@@ -88,8 +86,6 @@ _[[ "Finally! This island appears to be made for us, it is a gift from the Gods 
 
 diary_page_5_1 = {
    title =_ "The green forests",
-   width = 450, 
-   height = 350,
    posy = 1,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
@@ -101,8 +97,6 @@ _"* Build three lumberjack's houses, a forester's house and a sawmill." ..
 
 diary_page_5_2 = {
    title =_ "The rocks",
-   width = 450,
-   height = 350,
    posy = 1,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
@@ -114,8 +108,6 @@ _"* Build a quarry to the south of your headquarters." ..
 
 diary_page_6 = {
    title =_ "Wood for the colony",
-   width=450,
-   height=350,
    posy=1,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
@@ -126,8 +118,6 @@ _[[ "Good news! Today our wood economy was completed. Now we can be sure to have
 
 diary_page_7 = {
    title =_ "Stone for the colony",
-   width=450,
-   height=350,
    posy=1,
    body="<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
@@ -138,8 +128,6 @@ _[[ "Great! Today the building of the quarry was completed. Now we get enough st
 
 saledus_1 = {
    title =_ "Dangerous shipparts",
-   width=450,
-   height=350,
    posy = 1,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
 _"Saledus looks unhappy" ..
@@ -151,8 +139,6 @@ _"* Build some barracks and sentries around the colony." ..
 
 saledus_2 = {
    title =_ "Marble on the mountain",
-   width=450,
-   height=350,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
 _"Saledus smiles" ..
 "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
@@ -163,8 +149,6 @@ _"* Expand to the east, to start mining marble from the mountain." ..
 
 saledus_3 = {
    title =_ "Further mountains",
-   width = 450,
-   height = 350,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
 _"Saledus is amazed" ..
 "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
@@ -175,8 +159,6 @@ _"* Build a stonemason and then a complete mining and production infrastructure 
 
 amalea_1 = {
    title =_ "Food for the miners",
-   width=450,
-   height=350,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=AF7511>" ..
 _"Amalea comes in..." ..
 "</p></rt><rt image=map:Amalea.png><p line-spacing=3 font-size=12><br>" ..
@@ -187,8 +169,6 @@ _"* To produce some sustaining food for our miners, we could build up a tavern. 
 
 diary_page_8 = {
    title =_ "The Barbarians",
-   width=450, 
-   height=350, 
    posy=1, 
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
@@ -200,8 +180,6 @@ _"* Build up stronger military buildings, such as an outpost, a barrier or a tow
 
 diary_page_9 = {
    title =_ "Command for Attack",
-   width=450,
-   height=350,
    posy=1,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
@@ -214,8 +192,6 @@ _"* Finally, build up a fortress on the peninsula<br> (near where the barbarian 
 
 diary_page_10 = {
    title =_ "Victory",
-   width=450, 
-   height=350,
    posy=1,
    body="<rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Today is a proud day. We have fought for our new home and risen victorious.<br> There are still a few barbarians hiding on our island, but I am sure that we will find them soon.<br> Every barbarian who doesn't attack us will be put in a boat with the other peaceful ones, and sent back to their country."<br><br>--------------------- VICTORY! ----------------------]] ..
@@ -224,8 +200,8 @@ _[[ "Today is a proud day. We have fought for our new home and risen victorious.
 
 seven_days_later = {
    title =_ "As time is running by",
-   width=200,
-   height=150,
+   w=200,
+   h=150,
    body="<rt><p line-spacing=3 font-size=12>" ..
 _"7 days later..." ..
 "</p></rt>",
@@ -233,8 +209,6 @@ _"7 days later..." ..
 
 diary_page_11 = {
    title =_ "A Message",
-   width=450, 
-   height=350,
    posy=1,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
@@ -245,8 +219,6 @@ _[[ "Today a pigeon landed on our island.<br> It brought a message which fills m
 
 amalea_2 = {
    title =_ "Our new tavern",
-   width=450,
-   height=350,
    body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=AF7511>" ..
 _"Amalea smiles" ..
 "</p></rt><rt image=map:Amalea.png><p line-spacing=3 font-size=12><br>" ..

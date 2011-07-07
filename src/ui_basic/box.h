@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,6 +58,8 @@ public:
 	void add_space(uint32_t space);
 	bool is_snap_target() const {return true;}
 
+	void set_min_desired_breadth(uint32_t min);
+
 protected:
 	virtual void layout();
 	virtual void update_desired_size();
@@ -94,6 +96,7 @@ private:
 	bool m_scrolling;
 	Scrollbar * m_scrollbar;
 	uint32_t m_orientation;
+	uint32_t m_mindesiredbreadth;
 
 	std::vector<Item> m_items;
 };

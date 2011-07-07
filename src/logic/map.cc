@@ -628,6 +628,12 @@ void Map::set_nrplayers(Player_Number const nrplayers) {
 	while (m_nrplayers < nrplayers)
 		m_starting_pos[m_nrplayers++] = Coords(-1, -1);
 
+	m_scenario_tribes.resize(nrplayers);
+	m_scenario_ais.resize(nrplayers);
+	m_scenario_closeables.resize(nrplayers);
+	m_scenario_names.resize(nrplayers);
+	m_scenario_tribes.resize(nrplayers);
+
 	m_nrplayers = nrplayers; // in case the number players got less
 }
 

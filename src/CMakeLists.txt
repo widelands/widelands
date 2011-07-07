@@ -114,6 +114,11 @@ target_link_libraries(widelands_all ${PNG_LIBRARY})
 target_link_libraries(widelands_all ${ZLIB_LIBRARY})
 target_link_libraries(widelands_all ${GGZ_CORE_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
+target_link_libraries(widelands_all ${GLEW_LIBRARY})
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD") 
+  target_link_libraries(widelands_all ${EXECINFO_LIBRARY})
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
 if (DEFINED WL_EXTRA_LINK_LIBRARIES)
   target_link_libraries(widelands_all ${WL_EXTRA_LINK_LIBRARIES})
 endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
@@ -122,22 +127,21 @@ target_link_libraries(widelands widelands_all)
 target_link_libraries(widelands ${SDL_LIBRARY})
 
 if (APPLE OR WIN32)
-  target_link_libraries(widelands ${INTL_LIBRARY})
+  target_link_libraries(widelands_all ${INTL_LIBRARY})
 endif (APPLE OR WIN32)
 
 if (WIN32)
   if (DEFINED MSVC)
-    target_link_libraries(widelands ws2_32)
+    target_link_libraries(widelands_all ws2_32)
 
-    #GGZ on MSVC using 3rdparty bundle needs expat library
-    #if expat is not found, then 3rdparty bundle is not in use, so just continue.
+    #GGZ on MSVC using 3rdparty bundle needs expat and iconv library
     find_package(EXPAT REQUIRED)
-    target_link_libraries(widelands ${EXPAT_LIBRARY})
-    find_library(ICONV iconv libiconv REQUIRED)
-    target_link_libraries(widelands ${ICONV_LIBRARY})
+    target_link_libraries(widelands_all ${EXPAT_LIBRARY})
+    find_library(ICONV_LIBRARY iconv libiconv REQUIRED)
+    target_link_libraries(widelands_all ${ICONV_LIBRARY})
 
   else (DEFINED MSVC)
-    target_link_libraries(widelands wsock32)
+    target_link_libraries(widelands_all wsock32)
   endif (DEFINED MSVC)
 endif (WIN32)
 

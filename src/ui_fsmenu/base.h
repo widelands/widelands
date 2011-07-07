@@ -20,8 +20,15 @@
 #ifndef FULLSCREEN_MENU_BASE_H
 #define FULLSCREEN_MENU_BASE_H
 
+#include <boost/scoped_ptr.hpp>
+
 #include "ui_basic/panel.h"
 #include <string>
+
+namespace UI {
+struct Font;
+struct TextStyle;
+}
 
 /**
  * This class is the base class for a fullscreen menu.
@@ -35,19 +42,25 @@ struct Fullscreen_Menu_Base : public UI::Panel {
 	virtual void draw(RenderTarget &);
 
 public:
-///\return the x/y value of current set resolution
-uint32_t gr_x();
-uint32_t gr_y();
+	///\return the size for texts fitting to current resolution
+	uint32_t fs_small();
+	uint32_t fs_big();
 
-///\return the size for texts fitting to current resolution
-uint32_t fs_small();
-uint32_t fs_big();
+	UI::TextStyle & ts_small();
+	UI::TextStyle & ts_big();
 
-protected:
-	uint32_t m_xres;
-	uint32_t m_yres;
+	UI::Font * font_small();
+	UI::Font * font_big();
+
 private:
-	PictureID m_res_background;
+	/**
+	 * Query the configured screen resolution.
+	 */
+	uint32_t gr_x();
+	uint32_t gr_y();
+
+	struct Data;
+	boost::scoped_ptr<Data> d;
 };
 
 

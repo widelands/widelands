@@ -20,22 +20,24 @@
 #include "netclient.h"
 
 #include "build_info.h"
-#include "ui_fsmenu/launchMPG.h"
-#include "logic/game.h"
-#include "wui/game_tips.h"
+#include "game_io/game_loader.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
+#include "logic/game.h"
+#include "logic/playercommand.h"
+#include "map_io/widelands_map_loader.h"
 #include "network_protocol.h"
 #include "network_system.h"
-#include "logic/playercommand.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ui_fsmenu/launchMPG.h"
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
+#include "wui/game_tips.h"
+#include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -164,16 +166,16 @@ void NetClient::run ()
 #endif
 
 	try {
-		UI::ProgressWindow loaderUI("pics/progress.png");
+		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("pics/progress.png");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
 		try {
 			tipstext.push_back(getPlayersTribe());
 		} catch (No_Tribe) {}
-		GameTips tips (loaderUI, tipstext);
+		GameTips tips (*loaderUI, tipstext);
 
-		loaderUI.step(_("Preparing game"));
+		loaderUI->step(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
@@ -392,6 +394,10 @@ void NetClient::setWinCondition(std::string) {
 	// Clients are not allowed to change this
 }
 
+void NetClient::nextWinCondition() {
+	// Clients are not allowed to change this
+}
+
 void NetClient::setPlayerNumber(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need
@@ -588,6 +594,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 		// Check whether the file or a file with that name already exists
 		if (g_fs->FileExists(path)) {
+			// If the file is a directory, we have to rename the file and replace it with the version of the
+			// host. If it is a ziped file, we can check, whether the host and the client have got the same file.
 			if (!g_fs->IsDirectory(path)) {
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
@@ -610,7 +618,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 				}
 			}
 			// Don't overwrite the file, better rename the original one
-			g_fs->Rename(path, "backup-" + path);
+			g_fs->Rename(path, backupFileName(path));
 		}
 
 		// Yes we need the file!
@@ -625,14 +633,11 @@ void NetClient::handle_packet(RecvPacket & packet)
 		file->bytes = bytes;
 		file->filename = path;
 		file->md5sum = md5;
-
-#ifdef WIN32
-		path.resize(path.rfind('\\', path.size() - 2));
-#else
-		path.resize(path.rfind('/', path.size() - 2));
-#endif
-
-		g_fs->EnsureDirectoryExists(path);
+		size_t position = path.rfind(g_fs->fileSeparator(), path.size() - 2);
+		if (position != std::string::npos) {
+			path.resize(position);
+			g_fs->EnsureDirectoryExists(path);
+		}
 		break;
 	}
 
@@ -702,6 +707,40 @@ void NetClient::handle_packet(RecvPacket & packet)
 				s.Unsigned8(NETCMD_CHAT);
 				s.String(_("/me 's file failed md5 checksumming."));
 				s.send(d->sock);
+				g_fs->Unlink(file->filename);
+			}
+			// Check file for validity
+			bool invalid = false;
+			if (d->settings.savegame) {
+				// Saved game check - does Widelands recognize the file as saved game?
+				Widelands::Game game;
+				try {
+					Widelands::Game_Loader gl(file->filename, game);
+				} catch (...) {
+					invalid = true;
+				}
+			} else {
+				// Map check - does Widelands recognize the file as map?
+				Widelands::Map map;
+				Widelands::Map_Loader * const ml = map.get_correct_loader(file->filename.c_str());
+				if (!ml)
+					invalid = true;
+			}
+			if (invalid) {
+				g_fs->Unlink(file->filename);
+				// Restore original file, if there was one before
+				if (g_fs->FileExists(backupFileName(file->filename)))
+					g_fs->Rename(backupFileName(file->filename), file->filename);
+
+				/* TODO Uncomment after Build16 string freeze
+				s.reset();
+				s.Unsigned8(NETCMD_CHAT);
+				s.String
+					(_
+					  ("/me checked the recieved file. Although md5 check summing succeded, "
+					   "I can not handle the file."));
+				s.send(d->sock);
+				*/
 			}
 		}
 		break;

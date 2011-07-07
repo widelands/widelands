@@ -358,13 +358,13 @@ void FieldActionWindow::add_buttons_auto()
 
 	if (not igbase or igbase->can_see(owner)) {
 		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_node);
+		bool const can_act = igbase ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
 		buildbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
-			bool const can_act = igbase ? igbase->can_act(owner) : true;
 			if (can_act) {
 				add_button
 					(buildbox, "build_road",
@@ -416,7 +416,7 @@ void FieldActionWindow::add_buttons_auto()
 					 &FieldActionWindow::act_buildflag,
 					 _("Put a flag"));
 
-			if (dynamic_cast<Widelands::Road const *>(imm))
+			if (can_act && dynamic_cast<Widelands::Road const *>(imm))
 				add_button
 					(buildbox, "destroy_road",
 					 pic_remroad,

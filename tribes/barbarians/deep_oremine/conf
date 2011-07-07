@@ -23,7 +23,6 @@ snack=6
 work=_Work
 
 [work]
-return=skipped when economy needs snack and not economy needs ironore
 sleep=43000
 consume=snack
 animate=working 18000
@@ -33,10 +32,17 @@ animate=working 18000
 mine=iron 2 66 5
 produce=ironore:1
 
+[build]
+pics=deep_oremine_b_??.png
+hotspot=21 37
+playercolor=true
+
 [idle]
 pics=deep_oremine_i_??.png
-hotspot=25 38
+hotspot=21 37
+playercolor=true
 
 [working]
-pics=deep_oremine_i_??.png
-hotspot=25 38
+pics=deep_oremine_w_??.png
+hotspot=21 37
+playercolor=true

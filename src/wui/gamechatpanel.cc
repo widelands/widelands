@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@ GameChatPanel::GameChatPanel
 	editbox.ok.set(this, &GameChatPanel::keyEnter);
 	editbox.cancel.set(this, &GameChatPanel::keyEscape);
 	editbox.setAlign(UI::Align_Left);
+	editbox.activate_history(true);
 
 	connect(m_chat);
 	recalculate();

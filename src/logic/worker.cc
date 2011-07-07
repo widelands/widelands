@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1409,7 +1409,7 @@ void Worker::transfer_update(Game & game, State & state) {
 	std::string const signal = get_signal();
 
 	if (signal.size()) {
-		// The caller requested a route update, or the previously calulcated route
+		// The caller requested a route update, or the previously calculated route
 		// failed.
 		// We will recalculate the route on the next update().
 		if (signal == "road" || signal == "fail" || signal == "transfer") {
@@ -1482,25 +1482,15 @@ void Worker::transfer_update(Game & game, State & state) {
 	// Initiate the next step
 	if        (upcast(Building, building, location)) {
 		if (&building->base_flag() != nextstep)
-			throw wexception
-				("MO(%u): [transfer]: in building, nextstep is not building's "
-				 "flag",
-				 serial());
+			throw wexception("MO(%u): [transfer]: in building, nextstep is not building's flag", serial());
 
 		return start_task_leavebuilding(game, true);
 	} else if (upcast(Flag,     flag,     location)) {
 		if        (upcast(Building, nextbuild, nextstep)) { //  Flag to Building
 			if (&nextbuild->base_flag() != location)
-				throw wexception
-					("MO(%u): [transfer]: next step is building, but we are "
-					 "nowhere near",
-					 serial());
+				throw wexception("MO(%u): [transfer]: next step is building, but we are nowhere near", serial());
 
-			return
-				start_task_move
-					(game,
-					 WALK_NW, &descr().get_right_walk_anims(does_carry_ware()),
-					 true);
+			return start_task_move(game, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
 		} else if (upcast(Flag,     nextflag,  nextstep)) { //  Flag to Flag
 			Road & road = *flag->get_road(*nextflag);
 
@@ -1509,12 +1499,8 @@ void Worker::transfer_update(Game & game, State & state) {
 			if (nextstep != &road.get_flag(Road::FlagEnd))
 				path.reverse();
 
-			molog
-				("[transfer]: starting task [movepath] and setting location to "
-				 "road %u\n",
-				 road.serial());
-			start_task_movepath
-				(game, path, descr().get_right_walk_anims(does_carry_ware()));
+			molog("[transfer]: starting task [movepath] and setting location to road %u\n", road.serial());
+			start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware()));
 			set_location(&road);
 		} else if (upcast(Road,    road,      nextstep)) { //  Flag to Road
 			if

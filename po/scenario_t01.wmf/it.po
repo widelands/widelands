@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-06-06 22:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-02-13 10:47+0000\n"
+"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:33+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -25,6 +25,9 @@ msgid ""
 "trying not to fall asleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
+" \"Come mio padre mi disse, ci sono tempi per combattere e tempi per mentire "
+"ed aspettare, cercando di non addormentarsi o di morire prima del tempo "
+"arrivi. E così io faccio... aspetto.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:45
 msgid ""
@@ -45,6 +48,14 @@ msgid ""
 "a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
 "NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Sono ben consapevole, comandante, che né tu né i tuoi guerrieri avete il "
+"desiderio di rimanere in questo luogo abbandonato per molto tempo. Ma anche "
+"così, la nostra guerra per riconquistare la nostra casa potrebbe richiedere "
+"molto tempo e mi sembra opportuno fare i preparativi.<br> Vorrei consigliare "
+"che si tengano pietre per il futuro - chissà che fortificazioni potremmo "
+"essere costretti ad erigere al più presto. E - come un dono del destino - ci "
+"sono infatti grandi rocce nelle immediate vicinanze...\"<br><br>-- NUOVO "
+"OBBIETTIVO --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:105
 msgid ""
@@ -53,6 +64,10 @@ msgid ""
 "legacy.<br> They are a constant reminder why we have to hide here... and why "
 "we must return in the end!\" "
 msgstr ""
+" \"In un'altra notte insonne, Sono andato fino alla collina e ho guardato "
+"verso il nord. I fuochi stanno ancora bruciando, soddisfacendo la loro fame "
+"sull'eredità di mio padre.<br> Sono un richiamo costante sul perché dobbiamo "
+"nasconderci qui... e sul perché dobbiamo tornare alla fine!\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:11
 msgid ""
@@ -74,6 +89,12 @@ msgid ""
 "my spirits high and those of my warriors awake, not to let greed or despair "
 "destroy the bonds between us as well.\" "
 msgstr ""
+" \"Le ossa di mio padre stanno pacificamente sotto la terra su cui una volta "
+"già terminò lo spargimento di sangue senza senso che nuovamente ci assale. "
+"Mi addolora che la sua pace sia durata una sola generazione.<br> Boldreth, "
+"mio leale compagno ed amico è fonte di pace e consolazione per me in questi "
+"momenti bui. Tiene alto il mio spirito e tiene i miei guerrieri svegli, "
+"senza lasciare che avidità e disperazione distruggano i nostri legami.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:51
 msgid ""
@@ -84,6 +105,13 @@ msgid ""
 "harsh lands. I believe to the east of our campsite are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" \"Niente, ma gli dei sanno quanto tempo dobbiamo rimanere nascosti qui. I "
+"guerrieri sperano si possa tornare marciando gloriosamente un giorno "
+"qualsiasi da ora, ma dubito fortemente che succederà presto. E i giorni sono "
+"già diventati corti e freddi...<br> Dovremmo prepararci, nel caso sia "
+"necessario affrontare l'inverno in queste crudeli terre. Credo che ad est "
+"del nostro campo ci siano alcuni posti dove potremmo erigere una capanna del "
+"boscaiolo.\"<br><br>-- NUOVO OBBIETTIVO --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:60
 msgid ""
@@ -136,6 +164,11 @@ msgid ""
 "people. More trees wait for our axes just south of our new crossroads - let "
 "us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"I venti del nord ci dicono che sta arrivando un l'inverno lungo e "
+"crudele. Una capanna del boscaiolo non sarà abbastanza per adattarsi alle "
+"esigenze del nostro popolo. Più alberi aspettano le nostre asce appena a sud "
+"del nostro nuovo incrocio - lasciaci erigere una seconda capanna del "
+"boscaiolo qui!\"<br><br>-- NUOVO OBBIETTIVO --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:67
 msgid ""
@@ -143,6 +176,10 @@ msgid ""
 "crossroads on the way between our headquarters and the lumberjack's hut "
 "would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"C'è un vecchio detto:<br> 'Un carico diviso è più facile da "
+"sopportare.'<br> Un incrocio sulla via tra il nostro quartier generale e la "
+"capanna del boscaiolo dovrebbe facilitare il lavoro dei nostri "
+"corrieri.\"<br><br>-- NUOVO OBBIETTIVO --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
@@ -163,6 +200,11 @@ msgid ""
 "VICTORY! ----------------------<br><br> You may continue to play this map if "
 "you wish. Otherwise, move on to the next mission.\" "
 msgstr ""
+" \"Molto ben fatto, comandante. Noi ora abbiamo tutto ciò di cui abbiamo "
+"bisogno per affrontare l'inverno e possiamo prepararci per le prossime "
+"battaglie.<br><br>--------------------- VITTORIA! ----------------------"
+"<br><br> Puoi continuare a giocare questa mappa se lo desideri. Altrimenti, "
+"passa alla prossima missione.\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
 msgid ""
@@ -180,6 +222,9 @@ msgid ""
 "* Build a lumberjack's hut at the red house symbol just right of your "
 "headquarters by clicking on it and selecting a lumberjack's hut.<br>"
 msgstr ""
+"* Costruisci una capanna del boscaiolo sul simbolo con la casa rossa appena "
+"alla destra del tuo quartier generale premendoci sopra e selezionando la "
+"capanna del boscaiolo.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:27
 #: ../../campaigns/t01.wmf/scripting/texts.lua:82
@@ -238,6 +283,13 @@ msgid ""
 "additional flags in between make them arrive at their destination faster, "
 "thus improving your infrastructure.<br>"
 msgstr ""
+"* Posiziona una bandiera nel mezzo della strada.<br> C'è il simbolo di una "
+"bandiera nel mezzo di una strada appena costruita. Puoi creare una bandiera "
+"premendo su questo simbolo e scegliendo il bottone bandiera nel menu che si "
+"apre. Questo divide la via sulla quale viene trasportato il legno in due "
+"parti con un corriere per ognuna.<br> Quando molte merci sono da trasportare "
+"tra due punti, bandiere addizionali nel mezzo possono farle arrivare a "
+"destinazione più velocemente, questo migliora la tua infrastruttura.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:20
 #: ../../campaigns/t01.wmf/scripting/texts.lua:75
@@ -248,6 +300,12 @@ msgid ""
 "step by step, you may also click directly at its destination to build the "
 "entire road at once."
 msgstr ""
+"* Posiziona una capanna del boscaiolo appena a sud della bandiera che hai "
+"appena posizionato sulla strada. Successivamente unisci la bandiera che hai "
+"appena ricavato con la bandiera sul luogo di costruzione della nuova capanna "
+"del boscaiolo.<br> Nota che al posto della costruzione di una strada passo "
+"dopo passo, puoi anche premere direttamente sulla destinazione per costruire "
+"l'intera strada in una volta."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:9
 #: ../../campaigns/t01.wmf/scripting/texts.lua:52
@@ -255,10 +313,13 @@ msgid ""
 "* Press SPACE to see where you can build.<br> The red house symbols show you "
 "where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
+"* Premi SPAZIO per vedere dove puoi costruire.<br> Il simbolo della casa "
+"rossa ti mostra dove una piccola costruzione - ad esempio una capanna del "
+"boscaiolo - potrebbe essere costruita.<br>"
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Occhi nelle Tenebre"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
@@ -266,7 +327,7 @@ msgstr "Un vecchio uomo dice..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:111
 msgid "At the tomb"
-msgstr ""
+msgstr "Alla tomba"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:7
 msgid "Build a lumberjack's hut"
@@ -293,6 +354,8 @@ msgid ""
 "In this tutorial the basic gameplay and control as well as basic production "
 "buildings of the Barbarians are introduced."
 msgstr ""
+"Questo tutorial introduce i controlli di base del gioco e le costruzioni per "
+"le produzioni di base dei Barbari."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -312,7 +375,7 @@ msgstr "Missione Completa"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
-msgstr ""
+msgstr "Qualcuno viene da te"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29

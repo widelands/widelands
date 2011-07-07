@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,12 @@
 #include "graphic/font_handler.h"
 #include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
+#include "graphic/wordwrap.h"
 #include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include <boost/concept_check.hpp>
 
 namespace UI {
 
@@ -240,6 +242,9 @@ void Panel::end() {}
 
 /**
  * Resizes the panel.
+ *
+ * \note NEVER override this function. If you feel the urge to override this
+ * function, you probably want to override \ref layout.
  */
 void Panel::set_size(const uint32_t nw, const uint32_t nh)
 {
@@ -293,6 +298,8 @@ void Panel::get_desired_size(uint32_t & w, uint32_t & h) const
  * panel and its children that are not derived from layout routines.
  * In particular, it must be independent of the panel's position on the screen
  * or of its actual size.
+ *
+ * \note NEVER override this function
  */
 void Panel::set_desired_size(uint32_t w, uint32_t h)
 {
@@ -1089,39 +1096,38 @@ void Panel::set_tooltip(const char * const text) {
 /**
  * Draw the tooltip.
  */
-void Panel::draw_tooltip(RenderTarget & dst, char const * const text)
+void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 {
-#define TIP_WIDTH_MAX 360
-	uint32_t tip_width, tip_height;
-	UI::g_fh->get_size
-		(UI_FONT_TOOLTIP, text, tip_width, tip_height, TIP_WIDTH_MAX);
-	tip_width += 4;
-	tip_height += 4;
+	static const uint32_t TIP_WIDTH_MAX = 360;
+	static TextStyle tooltip_style;
+	if (!tooltip_style.font) {
+		tooltip_style.font = Font::get(UI_FONT_TOOLTIP);
+		tooltip_style.fg = UI_FONT_TOOLTIP_CLR;
+		tooltip_style.bold = true;
+	}
+
+	WordWrap ww(tooltip_style, TIP_WIDTH_MAX);
+
+	ww.wrap(text);
+
+	uint32_t tip_width = ww.width() + 4;
+	uint32_t tip_height = ww.height() + 4;
+
 	const WLApplication & wlapplication = *WLApplication::get();
 	Rect r
 		(wlapplication.get_mouse_position() + Point(2, 32),
 		 tip_width, tip_height);
-	const Point tooltip_bottom_left = r.bottom_left();
-	const Point screen_bottom_left(g_gr->get_xres(), g_gr->get_yres());
-	if (screen_bottom_left.x < tooltip_bottom_left.x)
+	const Point tooltip_bottom_right = r.bottom_right();
+	const Point screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
+	if (screen_bottom_right.x < tooltip_bottom_right.x)
 		r.x -=  4 + r.w;
-	if (screen_bottom_left.y < tooltip_bottom_left.y)
+	if (screen_bottom_right.y < tooltip_bottom_right.y)
 		r.y -= 35 + r.h;
 
-	dst.fill_rect(r, RGBColor(230, 200, 50));
+	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	UI::g_fh->draw_string
-		(dst,
-		 UI_FONT_TOOLTIP,
-		 UI_FONT_TOOLTIP_CLR,
-		 r + Point(2, 2),
-		 text,
-		 Align_Left,
-		 TIP_WIDTH_MAX,
-		 Widget_Cache_None,
-		 0,
-		 std::numeric_limits<uint32_t>::max(),
-		 false);
+
+	ww.draw(dst, r + Point(2, 2));
 }
 
 std::string Panel::ui_fn() {
@@ -1132,14 +1138,13 @@ std::string Panel::ui_fn() {
 		return UI_FONT_NAME_SERIF;
 	if (style == "sans")
 		return UI_FONT_NAME_SANS;
-	std::string const temp(g_fs->FS_CanonicalizeName("fonts/" + style));
-	if (g_fs->FileExists(temp))
+	if (g_fs->FileExists("fonts/" + style))
 		return style;
 	log
 		("Could not find font file \"%s\"\n"
 		 "Make sure the path is given relative to Widelands font directory. "
 		 "Widelands will use standard font.\n",
-		 temp.c_str());
+		 style.c_str());
 	return UI_FONT_NAME;
 }
 

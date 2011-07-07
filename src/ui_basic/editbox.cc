@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include "mouse_constants.h"
 
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
@@ -70,7 +71,9 @@ EditBox::EditBox
 	 Align _align)
 	:
 	Panel(parent, x, y, w, h),
-	m(new EditBoxImpl)
+	m(new EditBoxImpl),
+	m_history_active(false),
+	m_history_position(-1)
 {
 	set_think(false);
 
@@ -88,6 +91,10 @@ EditBox::EditBox
 
 	set_handle_mouse(true);
 	set_can_focus(true);
+
+	// Initialize history as empty string
+	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i)
+		m_history[i] = "";
 }
 
 EditBox::~EditBox()
@@ -229,6 +236,15 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
+			// Save history if active and text is not empty
+			if (m_history_active) {
+				if (m->text.size() > 0) {
+					for (uint8_t i = CHAT_HISTORY_SIZE - 1; i > 0; --i)
+						m_history[i] = m_history[i - 1];
+					m_history[0] = m->text;
+					m_history_position = -1;
+				}
+			}
 			ok.call();
 			okid.call(m->id);
 			return true;
@@ -301,6 +317,35 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				update();
 			}
 			return true;
+
+		case SDLK_UP:
+			// Load entry from history if active and text is not empty
+			if (m_history_active) {
+				if (m_history_position > CHAT_HISTORY_SIZE - 2)
+					m_history_position = CHAT_HISTORY_SIZE - 2;
+				if (m_history[++m_history_position].size() > 0) {
+					m->text = m_history[m_history_position];
+					m->caret = m->text.size();
+					check_caret();
+					update();
+				}
+			}
+			return true;
+
+		case SDLK_DOWN:
+			// Load entry from history if active and text is not equivalent to the current one
+			if (m_history_active) {
+				if (m_history_position < 1)
+					m_history_position = 1;
+				if (m_history[--m_history_position] != m->text) {
+					m->text = m_history[m_history_position];
+					m->caret = m->text.size();
+					check_caret();
+					update();
+				}
+			}
+			return true;
+
 
 		default:
 			// Nullbytes happen on MacOS X when entering Multiline Chars, like for
@@ -393,17 +438,13 @@ void EditBox::draw(RenderTarget & odst)
 
 	pos.x += m->scrolloffset;
 
-	UI::g_fh->draw_string
+	UI::g_fh->draw_text
 		(dst,
-		 m->fontname, m->fontsize, m->fontcolor, UI_FONT_CLR_BG,
+		 TextStyle::makebold(Font::get(m->fontname, m->fontsize), m->fontcolor),
 		 pos,
 		 m->text,
 		 align(),
-		 std::numeric_limits<uint32_t>::max(),
-		 Widget_Cache_None,
-		 0,
-		 has_focus() ? static_cast<int32_t>(m->caret) :
-		 std::numeric_limits<uint32_t>::max());
+		 has_focus() ? static_cast<int32_t>(m->caret) : std::numeric_limits<uint32_t>::max());
 }
 
 /**

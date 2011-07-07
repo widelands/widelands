@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,8 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	void fill_list     ();
 
 private:
+	void no_selection();
+
 	uint32_t    m_butw;
 	uint32_t    m_buth;
 	uint32_t    m_fs;

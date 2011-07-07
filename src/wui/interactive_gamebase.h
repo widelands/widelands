@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,22 +23,9 @@
 #include "interactive_base.h"
 #include "logic/game.h"
 #include "graphic/graphic.h"
-#include "ui_basic/widget_cache.h"
 
+struct ChatOverlay;
 struct ChatProvider;
-
-struct ChatDisplay : public UI::Panel {
-	ChatDisplay(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
-	~ChatDisplay();
-
-	void setChatProvider(ChatProvider &);
-	virtual void draw(RenderTarget &);
-
-private:
-	ChatProvider * m_chat;
-	std::vector<PictureID> m_cache_id;
-	UI::Widget_Cache       m_cache_mode;
-};
 
 enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};
 
@@ -94,7 +81,7 @@ struct Interactive_GameBase : public Interactive_Base {
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
-	ChatDisplay            * m_chatDisplay;
+	ChatOverlay            * m_chatOverlay;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
 	std::string              m_building_tooltip_format;

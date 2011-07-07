@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include "interactive_spectator.h"
 
 #include "chat.h"
+#include "chatoverlay.h"
 #include "fieldaction.h"
 #include "game_chat_menu.h"
 #include "game_main_menu_save_game.h"
@@ -79,8 +80,8 @@ Interactive_Spectator::Interactive_Spectator
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	if (multiplayer) {
-		m_chatDisplay =
-			new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
+		m_chatOverlay =
+			new ChatOverlay(this, 10, 25, get_w() - 10, get_h() - 25);
 		m_exit.set_visible(false);
 		m_exit.set_enabled(false);
 		m_save.set_visible(false);

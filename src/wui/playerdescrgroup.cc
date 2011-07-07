@@ -49,7 +49,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 GameSettingsProvider * const settings,
 	 uint32_t               const plnum,
-	 std::string const & fname, uint32_t const fsize)
+	 UI::Font * font)
 :
 UI::Panel(parent, x, y, w, h),
 d(new PlayerDescriptionGroupImpl)
@@ -63,7 +63,7 @@ d(new PlayerDescriptionGroupImpl)
 	int32_t xplayertribe = w * 60 / 125;
 	int32_t xplayerinit = w * 85 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
-	d->plr_name->set_font(fname, fsize, UI_FONT_CLR_FG);
+	d->plr_name->set_textstyle(UI::TextStyle::makebold(font, UI_FONT_CLR_FG));
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
 	d->btnEnablePlayer->changedto.set
 		(this, &PlayerDescriptionGroup::enable_player);
@@ -74,8 +74,8 @@ d(new PlayerDescriptionGroupImpl)
 		 boost::bind
 			 (&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)),
 		 std::string(), std::string(),
-		 true, false,
-		 fname, fsize);
+		 true, false);
+	d->btnPlayerType->set_font(font);
 	d->btnPlayerTeam = new UI::Callback_Button
 		(this, "player_team",
 		 xplayerteam, 0, xplayertribe - xplayerteam - 2, h,
@@ -83,8 +83,8 @@ d(new PlayerDescriptionGroupImpl)
 		 boost::bind
 			 (&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)),
 		 std::string(), std::string(),
-		 true, false,
-		 fname, fsize);
+		 true, false);
+	d->btnPlayerTeam->set_font(font);
 	d->btnPlayerTribe = new UI::Callback_Button
 		(this, "player_tribe",
 		 xplayertribe, 0, xplayerinit - xplayertribe - 2, h,
@@ -92,8 +92,8 @@ d(new PlayerDescriptionGroupImpl)
 		 boost::bind
 			 (&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)),
 		 std::string(), std::string(),
-		 true, false,
-		 fname, fsize);
+		 true, false);
+	d->btnPlayerTribe->set_font(font);
 	d->btnPlayerInit = new UI::Callback_Button
 		(this, "player_initialization",
 		 xplayerinit, 0, w - xplayerinit, h,
@@ -101,8 +101,8 @@ d(new PlayerDescriptionGroupImpl)
 		 boost::bind
 			 (&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)),
 		 std::string(), _("Initialization"),
-		 true, false,
-		 fname, fsize);
+		 true, false);
+	d->btnPlayerInit->set_font(font);
 
 	refresh();
 }

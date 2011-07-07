@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,6 @@
 
 #include <cstring>
 #include <iostream>
-#include <boost/scoped_array.hpp>
 
 Graphic * g_gr;
 bool g_opengl;
@@ -158,6 +157,13 @@ Graphic::Graphic
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
 		log ("Graphics: OpenGL: OpenGL enabled\n");
+
+		GLenum err = glewInit();
+		if (err != GLEW_OK) {
+			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken.\n", err);
+			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
+		}
+
 		g_opengl = true;
 
 		GLboolean glBool;
@@ -188,10 +194,10 @@ Graphic::Graphic
 			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
 
-		str = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
+		const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
-			(strstr(str, "GL_ARB_texture_non_power_of_two") == 0);
+			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);
 
 		log("Graphics: OpenGL: Textures ");
 		log
@@ -199,6 +205,8 @@ Graphic::Graphic
 			 "may have any size\n");
 
 		m_caps.offscreen_rendering = false;
+
+		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
 	}
 #endif
 
@@ -467,6 +475,7 @@ const PictureID & Graphic::get_picture
 
 		try {
 			rec.picture = load_image(fname, alpha);
+			rec.modules = 0;
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
@@ -604,6 +613,38 @@ PictureID Graphic::get_resized_picture
 		SDL_Rect dstrc = {destrect.x, destrect.y};
 		SDL_SetAlpha(zoomed, 0, 0);
 		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc);
+
+		Uint32 fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
+
+		if (destrect.x > 0) {
+			dstrc.x = 0;
+			dstrc.y = destrect.y;
+			dstrc.w = destrect.x;
+			dstrc.h = zoomed->h;
+			SDL_FillRect(placed, &dstrc, fillcolor);
+		}
+		if (destrect.x + zoomed->w < placed->w) {
+			dstrc.x = destrect.x + zoomed->w;
+			dstrc.y = destrect.y;
+			dstrc.w = placed->w - destrect.x - zoomed->w;
+			dstrc.h = zoomed->h;
+			SDL_FillRect(placed, &dstrc, fillcolor);
+		}
+		if (destrect.y > 0) {
+			dstrc.x = 0;
+			dstrc.y = 0;
+			dstrc.w = placed->w;
+			dstrc.h = destrect.y;
+			SDL_FillRect(placed, &dstrc, fillcolor);
+		}
+		if (destrect.y + zoomed->h < placed->h) {
+			dstrc.x = 0;
+			dstrc.y = destrect.y + zoomed->h;
+			dstrc.w = placed->w;
+			dstrc.h = placed->h - destrect.y - zoomed->h;
+			SDL_FillRect(placed, &dstrc, fillcolor);
+		}
+
 		SDL_FreeSurface(zoomed);
 		zoomed = placed;
 	}

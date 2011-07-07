@@ -73,7 +73,7 @@ void SurfaceSDL::draw_rect(const Rect rc, const RGBColor clr) {
 	//log("SurfaceSDL::draw_rect()\n");
 	const uint32_t color = clr.map(format());
 
-	const Point bl = rc.bottom_left() - Point(1, 1);
+	const Point bl = rc.bottom_right() - Point(1, 1);
 
 	for (int32_t x = rc.x + 1; x < bl.x; ++x) {
 		set_pixel(x, rc.y, color);
@@ -126,7 +126,7 @@ void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
 
 	//log("SurfaceSDL::brighten_rect()\n");
 
-	const Point bl = rc.bottom_left();
+	const Point bl = rc.bottom_right();
 
 	lock(IPixelAccess::Lock_Normal);
 

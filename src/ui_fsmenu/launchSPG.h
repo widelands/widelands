@@ -74,8 +74,6 @@ private:
 
 	uint32_t    m_butw;
 	uint32_t    m_buth;
-	uint32_t    m_fs;
-	std::string m_fn;
 
 	UI::Callback_Button       m_select_map, m_wincondition, m_back, m_ok;
 	UI::Callback_Button     * m_pos[MAX_PLAYERS];

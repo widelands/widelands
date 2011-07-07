@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,11 @@
 #include "window.h"
 
 #include "constants.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
+#include "log.h"
 
 #include "compile_assert.h"
 
@@ -136,6 +138,16 @@ void Window::update_desired_size()
 	if (m_center_panel) {
 		uint32_t innerw, innerh;
 		m_center_panel->get_desired_size(innerw, innerh);
+
+		// Never bigger than maximum available size
+		// TODO fix this properly with a scrollbar after release of build16
+		// -->
+		if ((innerh + get_tborder() + get_bborder()) > get_parent()->get_h())
+			innerh = get_parent()->get_h() - get_tborder() - get_bborder();
+		if ((innerw + get_lborder() + get_rborder()) > get_parent()->get_w())
+			innerw = get_parent()->get_w() - get_lborder() - get_rborder();
+		// <--
+
 		set_desired_size
 			(innerw + get_lborder() + get_rborder(),
 			 innerh + get_tborder() + get_bborder());
@@ -308,11 +320,10 @@ void Window::draw_border(RenderTarget & dst)
 
 	// draw the title if we have one
 	if (m_title.length())
-		UI::g_fh->draw_string
-			(dst,
-			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+		UI::g_fh->draw_text
+			(dst, UI::TextStyle::ui_small(),
 			 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-			 m_title.c_str(), Align_Center);
+			 m_title, Align_Center);
 
 	if (not _is_minimal) {
 		const int32_t vt_bar_end = get_h() -

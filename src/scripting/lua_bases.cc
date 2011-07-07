@@ -166,7 +166,7 @@ const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
 };
 const PropertyType<L_PlayerBase> L_PlayerBase::Properties[] = {
 	PROP_RO(L_PlayerBase, number),
-	PROP_RO(L_PlayerBase, tribe),
+	PROP_RO(L_PlayerBase, tribe_name),
 	{0, 0, 0},
 };
 
@@ -193,11 +193,11 @@ int L_PlayerBase::get_number(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: tribe
+	.. attribute:: tribe_name
 
 		(RO) The name of the tribe of this player.
 */
-int L_PlayerBase::get_tribe(lua_State * L) {
+int L_PlayerBase::get_tribe_name(lua_State * L) {
 	lua_pushstring(L, get(L, get_egbase(L)).tribe().name());
 	return 1;
 }

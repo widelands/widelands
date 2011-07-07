@@ -21,6 +21,8 @@
 #define TRIBEBASICINFO_H
 
 #include <vector>
+#include <string>
+#include <stdint.h>
 
 /// Basic information about the tribe that is determined only from the conf
 /// file and needed before the actual game.

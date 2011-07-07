@@ -25,7 +25,7 @@ if (WIN32 OR APPLE OR WL_PORTABLE)
   if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
     set (WL_INSTALL_PREFIX ".")
   endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-  
+
   if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
     set (WL_INSTALL_DATADIR ".")
   endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
@@ -41,7 +41,7 @@ elseif (WIN32 OR APPLE OR WL_PORTABLE)
   if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
     set (WL_INSTALL_PREFIX "/usr/local")
   endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
-  
+
   if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
     set (WL_INSTALL_DATADIR "share/games/widelands")
   endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
@@ -224,7 +224,7 @@ if (DEFINED MSVC)
   add_definitions( -Dmkdir=_mkdir )
   add_definitions( -DREDIRECT_OUTPUT )
 
-  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
+  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBRARIES
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
   set(Boost_LIBRARIES "")
   include_directories(${Boost_INCLUDE_DIR})
@@ -260,12 +260,24 @@ find_package(GGZ_Core REQUIRED)
 include_directories(${GGZ_CORE_INCLUDE_DIR})
 add_definitions("-DUSE_GGZ")
 
+#on freeBSD this must be explicitely linked
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD") 
+  find_library(EXECINFO_LIBRARY NAMES execinfo)
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
+
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path
 find_package(OpenGL)
 if (OPENGL_FOUND)
   # OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
   add_definitions("-DUSE_OPENGL")
+  find_package(GLEW)
+  if (GLEW_FOUND)
+    add_definitions(${GLEW_EXTRA_DEFINITIONS})
+  else (GLEW FOUND)
+    message (STATUS "GLEW library not found, check your libraries path and installed packages!")
+  endif (GLEW_FOUND)
 else (OPENGL_FOUND)
   message (STATUS "OpenGL support disabled, check your libraries path and installed packages!")
 endif (OPENGL_FOUND)
@@ -399,8 +411,6 @@ install(
   DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
-  PATTERN "*.svn*" EXCLUDE
-  PATTERN "SCons*" EXCLUDE
 )
 
 install(
@@ -419,8 +429,6 @@ install(
   DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug
   COMPONENT DocFiles
-  PATTERN "*.svn*" EXCLUDE
-  PATTERN "SCons*" EXCLUDE
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
@@ -434,8 +442,6 @@ install(
   DESTINATION ${WL_INSTALL_DATADIR}/locale
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
-  PATTERN "*.svn*" EXCLUDE
-  PATTERN "SCons*" EXCLUDE
 )
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})

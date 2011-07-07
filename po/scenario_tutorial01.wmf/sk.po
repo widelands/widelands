@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-20 18:13+0000\n"
-"PO-Revision-Date: 2010-11-11 15:22+0000\n"
+"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"PO-Revision-Date: 2011-01-19 21:02+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:23+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -795,15 +795,11 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
 "Okay, now we own some of the area on this mountain. Mountains are very\n"
-"important, because they contain resources: coal, iron ore, goldstone and\n"
+"important, because they contain resources: coal, iron ore, gold ore and\n"
 "granite.  Each tribe uses the resources differently, but all need mines to "
 "get\n"
 "the resources out of the ground."
 msgstr ""
-"Dobre, teraz vlastníme časť z územia na tejto hore. Hory sú veľmi\n"
-"dôležité, pretože obsahujú zdroje: uhlie, železná ruda, zlato a žula.\n"
-"Každý kmeň využíva zdroje inak, ale všetky potrebujú bane, aby\n"
-"zdroje vybrali zo zeme."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:575
 msgid ""
@@ -1227,15 +1223,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
 msgid "a lot of gold"
-msgstr ""
+msgstr "veľa zlata"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:544
 msgid "a lot of granite"
-msgstr ""
+msgstr "veľa žuly"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:538
 msgid "a lot of iron"
-msgstr ""
+msgstr "veľa železa"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
@@ -1311,6 +1307,18 @@ msgstr ""
 #~ "ste postavili úplne novú cestu, kliknite na vlajku pred staveniskom, "
 #~ "kliknite\n"
 #~ "na ikonu stavania ciest, potom kliknite na vlajku pred svojou základňou."
+
+#~ msgid ""
+#~ "Okay, now we own some of the area on this mountain. Mountains are very\n"
+#~ "important, because they contain resources: coal, iron ore, goldstone and\n"
+#~ "granite.  Each tribe uses the resources differently, but all need mines to "
+#~ "get\n"
+#~ "the resources out of the ground."
+#~ msgstr ""
+#~ "Dobre, teraz vlastníme časť z územia na tejto hore. Hory sú veľmi\n"
+#~ "dôležité, pretože obsahujú zdroje: uhlie, železná ruda, zlato a žula.\n"
+#~ "Každý kmeň využíva zdroje inak, ale všetky potrebujú bane, aby\n"
+#~ "zdroje vybrali zo zeme."
 
 #~ msgid ""
 #~ "So our geologist found a lot of coal on this mountain. You should therefore\n"

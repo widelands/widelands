@@ -30,45 +30,43 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-	m_butw (m_xres / 4),
-	m_buth (m_yres * 19 / 400),
-	m_fs   (fs_small()),
-	m_fn   (ui_fn()),
+	m_butw (get_w() / 4),
+	m_buth (get_h() * 19 / 400),
 
 // Buttons
 	m_back
 		(this, "back",
-		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind
 			 (&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0),
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
-		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)),
-		 _("OK"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("OK"), std::string(), false, false),
 
 // Replay list
 	m_list
 		(this,
-		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
-		 m_xres * 711 / 1250, m_yres * 6083 / 10000),
+		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
+		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
 
 // Text area
 	m_title
 		(this,
-		 m_xres / 2, m_yres * 3 / 20, _("Choose a replay!"),
+		 get_w() / 2, get_h() * 3 / 20, _("Choose a replay!"),
 		 UI::Align_HCenter)
 {
-	m_title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_list .set_font(m_fn, m_fs);
+	m_title.set_textstyle(ts_big());
+	m_list .set_font(ui_fn(), fs_small());
 	m_list .selected.set(this, &Fullscreen_Menu_LoadReplay::replay_selected);
 	m_list .double_clicked.set
 		(this, &Fullscreen_Menu_LoadReplay::double_clicked);
+	m_back.set_font(font_small());
+	m_ok.set_font(font_small());
 	fill_list();
 }
 

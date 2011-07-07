@@ -4,18 +4,12 @@
 # Tries to find out the repository revision of the current working directory
 # using bzr or git
 
-###############################################
-#
-# ATTENTION CMAKE-TRANSITION
-# This (in utils directory) is the future location of this file.
-# The other file (in build/scons-utils) is for scons only and can be deleted after transition
-#
-###############################################
-
 import os
 import sys
 import os.path as p
 import subprocess
+import re
+import string
 
 # Support for bzr local branches
 try:
@@ -27,6 +21,29 @@ except ImportError:
     __has_bzrlib = False
 
 base_path = p.abspath(p.join(p.dirname(__file__),p.pardir))
+
+def detect_debian_version():
+    """
+    Parse bzr revision and branch information from debian/changelog
+    """
+    if sys.platform.startswith('win'):
+        return None
+    fname = p.join(base_path, "debian/changelog")
+    if not p.exists(fname):
+        return None
+    f = open(fname)
+    version = f.readline()
+    #bzr5905+trunk+
+    pattern = re.compile("bzr[0-9]+\+.+\+")
+    m = pattern.search(version)
+    if m == None:
+        return None
+    version = version[m.start():m.end()]
+    version = string.replace(version,'+','[',1)
+    version = string.replace(version,'+',']',1)
+    return version
+
+
 
 def check_for_explicit_version():
     """
@@ -64,18 +81,22 @@ def detect_bzr_revision():
     else:
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
-        run_bzr = lambda subcmd: subprocess.Popen(
-                ["bzr",subcmd], stdout=subprocess.PIPE, cwd=base_path
-            ).stdout.read().strip().decode("utf-8")
-        revno = run_bzr("revno")
-        nick = run_bzr("nick")
+        try:
+            run_bzr = lambda subcmd: subprocess.Popen(
+                    ["bzr",subcmd], stdout=subprocess.PIPE, cwd=base_path
+                ).stdout.read().strip().decode("utf-8")
+            revno = run_bzr("revno")
+            nick = run_bzr("nick")
+        except OSError:
+            return None
     return "bzr%s[%s] " % (revno,nick)
 
 def detect_revision():
     for func in (
         check_for_explicit_version,
         detect_git_revision,
-        detect_bzr_revision):
+        detect_bzr_revision,
+        detect_debian_version):
         rv = func()
         if rv:
             return rv

@@ -39,74 +39,75 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-	m_butw (m_xres / 4),
-	m_buth (m_yres * 9 / 200),
+	m_butw (get_w() / 4),
+	m_buth (get_h() * 9 / 200),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
 
 // Text labels
 	m_title
 		(this,
-		 m_xres / 2, m_yres * 9 / 50,
+		 get_w() / 2, get_h() * 9 / 50,
 		 _("Choose your map!"), UI::Align_HCenter),
 	m_label_name
 		(this,
-		 m_xres * 7 / 10, m_yres * 17 / 50,
+		 get_w() * 7 / 10, get_h() * 17 / 50,
 		 _("Name:"), UI::Align_Right),
-	m_name (this, m_xres * 71 / 100, m_yres * 17 / 50, std::string()),
+	m_name (this, get_w() * 71 / 100, get_h() * 17 / 50, std::string()),
 	m_label_author
 		(this,
-		 m_xres * 7 / 10, m_yres * 3 / 8,
+		 get_w() * 7 / 10, get_h() * 3 / 8,
 		 _("Author:"), UI::Align_Right),
-	m_author (this, m_xres * 71 / 100, m_yres * 3 / 8, std::string()),
+	m_author (this, get_w() * 71 / 100, get_h() * 3 / 8, std::string()),
 	m_label_size
 		(this,
-		 m_xres * 7 / 10, m_yres * 41 / 100,
+		 get_w() * 7 / 10, get_h() * 41 / 100,
 		 _("Size:"), UI::Align_Right),
-	m_size (this, m_xres * 71 / 100, m_yres * 41 / 100, std::string()),
+	m_size (this, get_w() * 71 / 100, get_h() * 41 / 100, std::string()),
 	m_label_world
 		(this,
-		 m_xres * 7 / 10, m_yres * 89 / 200,
+		 get_w() * 7 / 10, get_h() * 89 / 200,
 		 _("World:"), UI::Align_Right),
-	m_world (this, m_xres * 71 / 100, m_yres * 89 / 200, std::string()),
+	m_world (this, get_w() * 71 / 100, get_h() * 89 / 200, std::string()),
 	m_label_nr_players
 		(this,
-		 m_xres * 7 / 10, m_yres * 12 / 25,
+		 get_w() * 7 / 10, get_h() * 12 / 25,
 		 _("Players:"), UI::Align_Right),
-	m_nr_players (this, m_xres * 71 / 100, m_yres * 12 / 25, std::string()),
+	m_nr_players (this, get_w() * 71 / 100, get_h() * 12 / 25, std::string()),
 	m_label_descr
 		(this,
-		 m_xres * 7 / 10, m_yres * 103 / 200,
+		 get_w() * 7 / 10, get_h() * 103 / 200,
 		 _("Descr:"), UI::Align_Right),
 	m_descr
 		(this,
-		 m_xres * 71 / 100, m_yres * 13 / 25, m_xres / 4, m_yres * 63 / 200),
+		 get_w() * 71 / 100, get_h() * 13 / 25, get_w() / 4, get_h() * 63 / 200),
 
 // Buttons
 	m_back
 		(this, "back",
-		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 boost::bind(&Fullscreen_Menu_Editor_MapSelect::end_modal, boost::ref(*this), 0),
-		 _("Back"), std::string(), true, false,
-		 m_fn, m_fs),
+		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
-		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 boost::bind(&Fullscreen_Menu_Editor_MapSelect::ok, boost::ref(*this)),
-		 _("OK"), std::string(), false, false,
-		 m_fn, m_fs),
+		 _("OK"), std::string(), false, false),
 
 // Map list
 	m_list
 		(this,
-		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
-		 m_xres * 711 / 1250, m_yres * 6083 / 10000),
+		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
+		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
 
 // Runtime variables
 	m_curdir("maps"), m_basedir("maps")
 {
+	m_back.set_font(font_small());
+	m_ok.set_font(font_small());
+
 	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_name      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_name            .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
