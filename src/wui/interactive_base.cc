@@ -891,8 +891,6 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 			if (get_display_flag(dfDebug)) {
 				new GameChatMenu
 					(this, m_debugconsole, *DebugConsole::getChatProvider());
-				ref_cast<GameChatMenu, UI::UniqueWindow>(*m_debugconsole.window)
-					.enter_chat_message(false);
 			}
 			return true;
 #endif
