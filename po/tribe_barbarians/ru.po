@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-07-05 21:54+0000\n"
+"PO-Revision-Date: 2011-07-07 22:32+0000\n"
 "Last-Translator: Alexander Glukhov <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-06 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-07-08 04:41+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -641,7 +641,7 @@ msgstr "Бык"
 
 #: ../../tribes/barbarians/conf:69
 msgid "Peel"
-msgstr "Лопатка пекаря"
+msgstr "Лопатка"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Pick"
@@ -1076,6 +1076,9 @@ msgid ""
 "in the metal works like all other tools (but it ceases to be produced by the "
 "building if the metal works is enhanced to an axefactory and war mill)."
 msgstr ""
+"Лопатка - инструмент пекаря и каждому пекарю нужна своя. Производится в "
+"мастерской по металлу, как все остальные инструменты (но не производиться, "
+"если здание было переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1093,6 +1096,9 @@ msgid ""
 "the ranger use it. Produced at the metalwork shop (but ceases to be produced "
 "by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Лопата нужна для ухода за растениями. Поэтому садовник и лесник используют "
+"ее. Производится в мастерской по металлу (но не производиться, если здание "
+"было переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -1323,6 +1329,8 @@ msgid ""
 "and the brewery. Also the lime kiln and the cattle farm need to be supplied "
 "with water."
 msgstr ""
+"Вода - основа жизни! Она используется в пекарне, микро-пивоварне и "
+"пивоварне. Цементная печь и ранчо также нуждаются в воде."
 
 #: ../../tribes/barbarians/conf:141
 msgid "Weaver"
@@ -1346,6 +1354,8 @@ msgid ""
 "bakeries, micro breweries and breweries. Also Cattle farms need to be "
 "supplied with wheat."
 msgstr ""
+"Пшеница важна для выживания. Она выращивается на ферме и используется в "
+"пекарнях, пивоварнях и микро-пивоварнях. Для ранчо также нужна пшеница."
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"
