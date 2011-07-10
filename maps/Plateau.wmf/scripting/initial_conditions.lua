@@ -88,15 +88,15 @@ prefilled_buildings(p2,
       [{3,1,0,0}] = 3,
       [{0,0,0,0}] = 1,
    }},
-   { "stronghold", 43, 44, soldiers = {
+   { "barrier", 43, 44, soldiers = {
       [{0,0,0,0}] = 2,
    }},
-   { "stronghold", 20, 71, soldiers = {
+   { "barrier", 20, 71, soldiers = {
       [{0,1,0,1}] = 1,
       [{1,0,0,0}] = 1,
       [{0,0,0,0}] = 1,
    }},
-   { "stronghold", 50, 30, soldiers = {
+   { "barrier", 50, 30, soldiers = {
       [{0,0,0,0}] = 1,
    }},
    { "sentry", 43, 29, soldiers = {
@@ -149,7 +149,6 @@ p3:allow_buildings{
    "barrier",
    "donjon",
    "sentry",
-   "stronghold",
 }
 
 prefilled_buildings(p3, 

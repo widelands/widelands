@@ -82,7 +82,7 @@ obj_claim_northeastern_rocks = {
    name = "mission quarry",
    title =_"Expand north-east and build a quarry",
    body = obj_text(_"Expand north-east to the stones", _
-[[Build military buildings (like sentries and strongholds) to expand your
+[[Build military buildings (like sentries) to expand your
 territory. Get to the rocks northeast from you and build a quarry there.]]
    ),
 }
