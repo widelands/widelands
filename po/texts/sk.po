@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-11-05 06:42+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-07-10 13:16+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-11 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -307,7 +307,7 @@ msgstr ""
 
 #: ../../txts/developers:150
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlantíďania"
 
 #: ../../txts/developers:140
 msgid "Barbarian"
@@ -430,7 +430,7 @@ msgstr "Fínčina"
 
 #: ../../txts/developers:322
 msgid "Former elders"
-msgstr ""
+msgstr "Bývalá rada starších"
 
 #: ../../txts/developers:191
 msgid "French"
@@ -438,7 +438,7 @@ msgstr "Francúzština"
 
 #: ../../txts/README:90
 msgid "G           Go to location corresponding to current message"
-msgstr "G Ísť na miesto zodpovedajúceho aktuálnej správe"
+msgstr "G Ísť na miesto zodpovedajúce aktuálnej správe"
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
@@ -611,7 +611,7 @@ msgstr "Klávesové skratky"
 
 #: ../../txts/README:47
 msgid "Keyboard shortcuts (in-game)"
-msgstr "Klávesové zkratky (počas hry)"
+msgstr "Klávesové skratky (počas hry)"
 
 #: ../../txts/COPYING:1
 msgid "License"
@@ -625,7 +625,7 @@ msgstr ""
 
 #: ../../txts/developers:264
 msgid "Linux Distributions"
-msgstr ""
+msgstr "Linuxové distribúcie"
 
 #: ../../txts/README:53
 msgid "M               Toggle minimap"
@@ -669,7 +669,7 @@ msgstr "ZÁRUKA SA NEPOSKYTUJE"
 
 #: ../../txts/developers:286
 msgid "Non Unix Distributions"
-msgstr ""
+msgstr "Neunixové distribúcie"
 
 #: ../../txts/README:160
 msgid ""
@@ -703,7 +703,7 @@ msgstr ""
 
 #: ../../txts/developers:275
 msgid "Other Unix Distributions"
-msgstr ""
+msgstr "Iné unixové distribúcie"
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
@@ -727,7 +727,7 @@ msgstr "PAGEUP         Zvýši rýchlosť hry"
 
 #: ../../txts/README:76
 msgid "PAUSE         Pauses the game (only for local games)"
-msgstr ""
+msgstr "PAUSE         Pozastaví hru (len pre lokálne hry)"
 
 #: ../../txts/developers:260
 msgid "Packagers"
@@ -774,6 +774,11 @@ msgid ""
 "Linux and in the replays subdirectory of your Widelands installation on "
 "Windows."
 msgstr ""
+"Nahrávky sú veľmi dôležitým nástrojom na hľadanie chýb v hernom kóde, a tak "
+"vás žiadame, aby ste priložili aj súbor s nahrávkou ku chybám, ktoré "
+"nahlásite. Tieto súbory sú uložené v domovskom priečinku "
+"~/.widelands/replays na Linuxe a v podadresári 'replays' (kde ste "
+"nainštalovali Widelands) pod Windowsom."
 
 #: ../../txts/README:134
 msgid "Replays</p>"
@@ -970,7 +975,7 @@ msgid ""
 "longer and more complete."
 msgstr ""
 "Editor je určený pre hráčov, ktorí by radi zostavili svoju vlastnú mapu do "
-"Widelands.<br>Ako vidíte, editor je ťažká práca vo vývoji a keďže sa stále "
+"Widelands.<br>Ako vidíte, editor je stále vo vývoji a keďže sa časom "
 "zlepšuje, tento text sa tiež predĺži a viac dokončí."
 
 #: ../../txts/COPYING:104
@@ -1051,6 +1056,7 @@ msgid ""
 "Use the 'configure economy' menu to adjust the target quantity of a specific "
 "ware."
 msgstr ""
+"Cieľové množstvo určitého tovaru možno nastaviť v menu nastavenia ekonomiky."
 
 #: ../../txts/README:139
 msgid ""
@@ -1061,6 +1067,11 @@ msgid ""
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
 msgstr ""
+"Voľba 'Pozrieť nahrávky' v hlavnom menu vám umožňuje prehrať predošlú hru. "
+"Pamätajte však, že aj malá zmena v herných dátových súboroch alebo vo "
+"Widelands spúšťači môže spôsobiť stratu kompatibility a synchronizácie "
+"nahrávky. Je to podobné, ako keď má sieťová hra problémy so synchronizáciou, "
+"ak má jeden z hráčov odlišnú verziu hry."
 
 #: ../../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
@@ -1075,7 +1086,7 @@ msgstr ""
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr "Vývojový tým Widelands"
+msgstr "Vývojový tím Widelands"
 
 #: ../../txts/README:148
 msgid ""

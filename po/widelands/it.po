@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-06-24 22:23+0000\n"
+"PO-Revision-Date: 2011-07-10 12:24+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-06-25 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-07-11 04:30+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -956,7 +956,7 @@ msgstr "economia: %s"
 #: ../../src/economy/wares_queue.cc:259
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "coda delle merci: %s"
 
 #: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
@@ -1052,7 +1052,7 @@ msgstr "coda dei comandi: %s"
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "classe_gioco: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -1798,11 +1798,11 @@ msgstr ""
 
 #: ../../src/logic/productionsite.cc:69
 msgid "this ware type has already been declared as an output"
-msgstr ""
+msgstr "questo tipo di merce è stato già dichiarato come un output"
 
 #: ../../src/logic/productionsite.cc:73
 msgid "this worker type has already been declared as an output"
-msgstr ""
+msgstr "questo tipo di lavoratore è stato già dichiarato come un output"
 
 #: ../../src/logic/productionsite.cc:241
 msgid "(not occupied)"
@@ -1877,7 +1877,7 @@ msgstr "Non al lavoro"
 
 #: ../../src/logic/tribe.cc:125
 msgid "constructionsite type \"constructionsite\" is missing"
-msgstr ""
+msgstr "il tipo di cantiere \"cantiere\" è assente"
 
 #: ../../src/logic/tribe.cc:242 ../../src/logic/tribe.cc:263
 #, c-format
@@ -1970,7 +1970,7 @@ msgstr "tipi di lavoratori permessi: %s"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
 msgid "unknown bob type %u"
-msgstr ""
+msgstr "tipo di bob %u sconosciuto"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
@@ -1980,12 +1980,12 @@ msgstr "la tribù \"%s\" non esiste"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:139
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "bob: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr ""
+msgstr "tipo di compito \"%s\" sconosciuto"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:231
 #, c-format
@@ -2000,12 +2000,12 @@ msgstr "leggendo il percorso: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:369
 #, c-format
 msgid "bob %u: %s"
-msgstr ""
+msgstr "bob %u: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:376
 #, c-format
 msgid "bobdata: %s"
-msgstr ""
+msgstr "dati dei bob: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:391
 #, c-format
@@ -2030,7 +2030,7 @@ msgstr "edifici: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
 msgid "buildingdata: %s"
-msgstr ""
+msgstr "dati degli edifici: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:274
 #, c-format
@@ -2077,12 +2077,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
 msgid "seen: %s"
-msgstr ""
+msgstr "visti: %s"
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
 #, c-format
 msgid "extradata: %s"
-msgstr ""
+msgstr "dati aggiuntivi: %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
@@ -2102,7 +2102,7 @@ msgstr "ha una bandiera (%u)"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "nodo del vicino (%i, %i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
@@ -2138,7 +2138,7 @@ msgstr "%u: %s"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
 msgid "flagdata: %s"
-msgstr ""
+msgstr "dati delle bandiere: %s"
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
@@ -2244,7 +2244,7 @@ msgstr "strada: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr ""
+msgstr "nessuno slot trasportatore"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -2261,7 +2261,7 @@ msgstr "strada %u: %s"
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "dati delle strade: %s"
 
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
@@ -2271,7 +2271,7 @@ msgstr "terreno: %s"
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
 msgid "ware data: %s"
-msgstr ""
+msgstr "dati delle merci: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:131
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:201
@@ -2282,7 +2282,7 @@ msgstr "articolo %u: %s"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "dati delle merci: %s"
 
 #: ../../src/network/netclient.cc:100
 msgid "Could not establish connection to host"
@@ -2417,7 +2417,7 @@ msgstr "Pausa già richiesta - la partita dovrebbe essere in pausa."
 
 #: ../../src/network/nethost.cc:440
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Non c'è nessuna pausa forzata - nulla da terminare."
 
 #: ../../src/network/nethost.cc:450
 msgid "Invalid command! Type /help for a list of commands."
@@ -2489,15 +2489,17 @@ msgstr "Mappe disponibili:<br>"
 #, c-format
 msgid "Can not use \"%s\" as saved game file!"
 msgstr ""
+"Non è possibile utilizzare \"%s\" come file di salvataggio di partita!"
 
 #: ../../src/network/nethost.cc:1199
 #, c-format
 msgid "Can not use \"%s\" as map file!"
-msgstr ""
+msgstr "Non è possibile utilizzare \"%s\" come file di mappa!"
 
 #: ../../src/network/nethost.cc:1211 ../../src/network/nethost.cc:1217
 msgid "Invalid value # for player - should be a player number"
 msgstr ""
+"Valore # per il giocatore non valido - dovrebbe essere un numero di giocatore"
 
 #: ../../src/network/nethost.cc:1243 ../../src/network/nethost.cc:1249
 #, c-format
@@ -3071,7 +3073,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:642
 msgid "Connected to one or more clients (see \"Client settings\")."
-msgstr ""
+msgstr "Connesso a uno o più client (guarda \"Impostazioni client\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:645
 msgid ""
