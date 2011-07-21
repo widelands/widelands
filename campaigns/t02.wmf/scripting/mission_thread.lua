@@ -183,10 +183,10 @@ end
 function build_materials_thread()
    local plr = wl.Game().players[1]
 
-   -- Wait for a barrier or a sentry to be build
+   -- Wait for a sentry to be build
    while true do
-      local rv = plr:get_buildings{"sentry", "stronghold"}
-      if #rv.sentry + #rv.stronghold > 0 then
+      local rv = plr:get_buildings{"sentry"}
+      if #rv.sentry > 0 then
          break
       end
       sleep(5421)

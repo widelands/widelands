@@ -336,7 +336,7 @@ struct HostChatProvider : public ChatProvider {
 				return;
 			}
 
-			// Everything handled from now on will be system stuff - an so will be
+			// Everything handled from now on will be system stuff - and so will be
 			// messages send because of that commands
 			c.playern = -2;
 			c.sender = "";
@@ -347,22 +347,21 @@ struct HostChatProvider : public ChatProvider {
 					_
 					 ("<br>Available host commands are:<br>"
 					  "/help  -  Shows this help<br>"
-					  "/announce <msg>  -  Send a chatmessage as announcement"
-					  " (system chat)<br>"
-					  "/warn <name> <reason>  -  Warn the user <name> because of"
-					  " <reason><br>"
-					  "/kick <name> <reason>  -  Kick the user <name> because of"
-					  " <reason><br>"
+					  "/announce <msg>  -  Send a chatmessage as announcement (system chat)<br>"
+					  "/warn <name> <reason>  -  Warn the user <name> because of <reason><br>"
+					  "/kick <name> <reason>  -  Kick the user <name> because of <reason><br>"
 					  "/forcePause            -  Force the game to pause.<br>"
 					  "/endForcedPause        -  Puts game back to normal speed.");
-				c.recipient = h->getLocalPlayername();
+				if (!h->isDedicated())
+					c.recipient = h->getLocalPlayername();
 			}
 
 			// Announce
 			else if (cmd == "announce") {
 				if (arg1.empty()) {
 					c.msg = _("Wrong use, should be: /announce <message>");
-					c.recipient = h->getLocalPlayername();
+					if (!h->isDedicated())
+						c.recipient = h->getLocalPlayername();
 				} else {
 					if (arg2.size())
 						arg1 += " " + arg2;
@@ -374,7 +373,8 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "warn") {
 				if (arg1.empty() && arg2.empty()) {
 					c.msg = _("Wrong use, should be: /warn <name> <reason>");
-					c.recipient = h->getLocalPlayername();
+					if (!h->isDedicated())
+						c.recipient = h->getLocalPlayername();
 				} else {
 					c.msg  = (format("HOST WARNING FOR %s: ") % arg1).str();
 					c.msg += arg2;
@@ -400,7 +400,8 @@ struct HostChatProvider : public ChatProvider {
 					c.msg +=
 						(format(_("If yes, type: /ack_kick %s")) % arg1).str();
 				}
-				c.recipient = h->getLocalPlayername();
+				if (!h->isDedicated())
+					c.recipient = h->getLocalPlayername();
 			}
 
 			// Acknowledge kick
@@ -415,19 +416,20 @@ struct HostChatProvider : public ChatProvider {
 						h->kickUser(kickUser, kickReason);
 						return;
 					} else
-						c.msg =
-							_("kick acknowledgement cancelled: Wrong name given!");
+						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
 				}
 				kickUser   = "";
 				kickReason = "";
-				c.recipient = h->getLocalPlayername();
+				if (!h->isDedicated())
+					c.recipient = h->getLocalPlayername();
 			}
 
 			// Force Pause
 			else if (cmd == "forcePause") {
 				if (h->forcedPause()) {
 					c.msg = _("Pause was already forced - game should be paused.");
-					c.recipient = h->getLocalPlayername();
+					if (!h->isDedicated())
+						c.recipient = h->getLocalPlayername();
 				} else {
 					c.msg = "HOST FORCED THE GAME TO PAUSE!";
 					h->forcePause();
@@ -438,7 +440,8 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "endForcedPause") {
 				if (!h->forcedPause()) {
 					c.msg = _("There is no forced pause - nothing to end.");
-					c.recipient = h->getLocalPlayername();
+					if (!h->isDedicated())
+						c.recipient = h->getLocalPlayername();
 				} else {
 					c.msg = "HOST ENDED THE FORCED GAME PAUSE!";
 					h->endForcedPause();
@@ -448,7 +451,8 @@ struct HostChatProvider : public ChatProvider {
 			// Default
 			else {
 				c.msg = _("Invalid command! Type /help for a list of commands.");
-				c.recipient = h->getLocalPlayername();
+				if (!h->isDedicated())
+					c.recipient = h->getLocalPlayername();
 			}
 		}
 		h->send(c);
@@ -1078,7 +1082,8 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 				_
 				("<br>Available host commands are:<br>"
 				 "help   - Shows this help<br>"
-				 "host $ - Tries to run the host command $");
+				 "host $ - Tries to run the host command $<br>"
+				 "save $ - Saves the current game state as $.wgf");
 		else
 			c.msg =
 				_
@@ -1104,6 +1109,30 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		c.recipient = "";
 		send(c);
 		d->chat.send(temp);
+
+	} else if (cmd == "save") {
+		// Check whether saving is allowed at all
+		Section & s = g_options.pull_section("global");
+		if (!s.get_bool("dedicated_saving", true)) {
+			c.msg = _("Sorry! Saving was deactivated on this dedicated server!");
+			send(c);
+		} else if (!d->game) {
+			c.msg = _("Can not save, as long as no game is running!");
+			send(c);
+		} else {
+			//try to save the game
+			std::string savename =  "save/" + arg1;
+			if (arg2.size() > 0) // only add space and arg2, if arg2 has anything to print.
+				savename += " " + arg2;
+			savename += ".wgf";
+			std::string * error = new std::string();
+			SaveHandler & sh = d->game->save_handler();
+			if (sh.save_game(*d->game, savename, error))
+				c.msg = _("Game successfully saved!");
+			else
+				c.msg = (format(_("Could not save the game to the file \"%s\"! (%s)")) % savename % error).str();
+			send(c);
+		}
 
 	} else if (not d->game) {
 

@@ -880,6 +880,7 @@ bool WLApplication::init_settings() {
 	s.get_bool("remove_syncstreams");
 	s.get_bool("sound_at_message");
 	s.get_bool("transparent_chat");
+	s.get_bool("dedicated_saving"); // saving via chatcommand on dedicated servers -> nethost.cc
 	s.get_string("registered");
 	s.get_string("nickname");
 	s.get_string("password");
@@ -1011,7 +1012,7 @@ bool WLApplication::init_hardware() {
 	int result = -1;
 
 	//add default video mode
-#ifdef linux
+#if defined(linux) || defined(__FreeBSD__)
 	videomode.push_back("x11");
 #elif WIN32
 	videomode.push_back("windib");

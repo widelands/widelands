@@ -78,11 +78,11 @@ prefilled_buildings(p2,
    {"barrier", 104, 18, soldiers = {[{0,0,0,0}]=4}},
    {"barrier", 102, 103, soldiers = {[{0,0,0,0}]=2, [{0,1,0,1}]=1}},
    {"barrier", 103, 96, soldiers = {[{0,0,0,0}]=3}}, 
-   {"stronghold", 104, 110, soldiers = {[{0,0,0,0}]=2}},
-   {"stronghold", 104, 30, soldiers = {
+   {"barrier", 104, 110, soldiers = {[{0,0,0,0}]=2}},
+   {"barrier", 104, 30, soldiers = {
       [{0,1,0,1}]=1, [{1,0,0,0}]=1, [{0,0,0,0}]=1
    }},
-   {"stronghold", 102, 90, soldiers = {[{0,0,0,0}]=1}},
+   {"barrier", 102, 90, soldiers = {[{0,0,0,0}]=1}},
    {"sentry", 108, 3, soldiers = {[{0,0,0,0}]=2}},
    {"sentry", 107, 104, soldiers = {[{0,0,0,0}]=1}},
    {"sentry", 110, 19, soldiers = {[{0,0,0,0}]=2}},
@@ -101,7 +101,7 @@ prefilled_buildings(p3,
    {"fortress", 135, 85, soldiers = {
       [{0,0,0,0}]=4, [{1,0,0,0}]=2, [{1,1,0,0}]=2,
    }},
-   {"stronghold", 132, 78, soldiers = {
+   {"barrier", 132, 78, soldiers = {
       [{0,0,0,0}]=1, [{1,1,0,1}]=1, [{0,1,0,0}]=1,
    }}
 )
@@ -125,7 +125,7 @@ prefilled_buildings(p4,
    {"donjon", 132, 7, soldiers = {
       [{0,0,0,0}]=2, [{1,1,0,0}]=1, [{1,0,0,1}]=1,
    }},
-   {"stronghold", 132, 3, soldiers = {
+   {"barrier", 132, 3, soldiers = {
       [{0,0,0,0}]=1, [{1,0,0,1}]=1, [{0,1,0,1}]=1, 
    }},
    {"warmill", 135, 7}
