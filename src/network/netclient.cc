@@ -434,8 +434,8 @@ void NetClient::setPlayerNumber(uint8_t const number)
 		  d->settings.players.at(number).state == PlayerSettings::stateComputer))
 		return;
 
-	
-	
+
+
 	// Send request
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGEPOSITION);

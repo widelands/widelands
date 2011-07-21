@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 The Widelands Development Team
+* Copyright (C) 2010, 2011 The Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #include <string>
 #include "protocol.h"
 
-class WidelandsMap 
+class WidelandsMap
 {
 	public:
 		WidelandsMap():
@@ -30,11 +30,11 @@ class WidelandsMap
 			m_w(0),
 			m_h(0)
 			{}
-		unsigned int w() {return m_w; } 
+		unsigned int w() {return m_w; }
 		unsigned int h() {return m_w; }
 		std::string name() {return m_name; }
 		WLGGZGameType gametype() { return m_gametype; }
-		
+
 		void set_name(std::string name) { m_name = name; }
 		void set_size(int w, int h) { m_w = w; m_h = h; }
 		void set_gametype(WLGGZGameType type) { m_gametype=type; }

@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 The Widelands Development Team
+* Copyright (C) 2010, 2011 The Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ public:
 	std::string name() const { return m_name; }
 	bool reported_game() const {return m_reported; }
 	bool support_build16_proto() const {
-		/*wllog   
+		/*wllog
                         (DL_DUMP, "get support post build 16 for \"%s\": %b (%i)",
                          name().c_str(), m_proto_maj > 0, m_proto_maj);*/
 			 return m_proto_maj > 0;
@@ -59,14 +59,14 @@ public:
 	std::string version() const { return m_version; }
 	std::string build() const { return m_build; }
 
-	void set_ggz_number(int num) { 
+	void set_ggz_number(int num) {
 		wllog
 			(DL_DUMP, "Set ggz number for \"%s\": %i",
 			 name().c_str(), num);
 		m_ggz_number = num;
 	}
 
-	void set_wl_number(int num) { 
+	void set_wl_number(int num) {
 		wllog
 			(DL_DUMP, "Set wl number for \"%s\": %i",
 			 name().c_str(), num);
@@ -93,7 +93,7 @@ public:
 	void set_type(WLGGZPlayerType t) {
 		 m_playertype = t;
 	}
-	
+
 	bool connection_failed, desync;
 	int hard_error_count, soft_error_count;
 

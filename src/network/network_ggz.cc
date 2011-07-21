@@ -170,7 +170,7 @@ int NetGGZ::process(int timeout)
 		//	 ggzmod().data_pending(),
 		//	 wlmodule().data_pending());
 		i--;
-	} 
+	}
 
 	if (i <= 0)
 		log("GGZ ## ERROR process loop exited by limit\n");
@@ -307,7 +307,7 @@ void NetGGZ::set_players(GameSettings & settings)
 		 static_cast<int>(settings.playernum),
 		 static_cast<int>(settings.usernum),
 		 settings.win_condition.c_str());
- 
+
 	if (settings.win_condition.compare("00_endless_game") == 0)
 		win_condition = gametype_endless;
 	else if (settings.win_condition.compare("01_defeat_all") == 0)

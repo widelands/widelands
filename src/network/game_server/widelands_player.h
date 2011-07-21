@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 The Widelands Development Team
+* Copyright (C) 2010, 2011 The Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -89,7 +89,7 @@ class WidelandsPlayer
 
 		void set_team(unsigned int t)
 			{ m_team = t; }
-			
+
 		void set_name(std::string name)
 			{ m_name = name; }
 

@@ -1,6 +1,6 @@
 // Widelands server for GGZ
 // Copyright (C) 2004 Josef Spillner <josef@ggzgamingzone.org>
-// Copyright (C) 2009 The Widelands Development Team
+// Copyright (C) 2009-2011 The Widelands Development Team
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 #include "widelands_map.h"
 
 // GGZ includes. class GGZGameServer
-#include "ggzgameserver.h"
+#include <ggzgameserver.h>
 
 #include <string>
 #include <vector>
@@ -55,15 +55,15 @@ class WidelandsServer : public GGZGameServer
 		WidelandsClient * get_client_by_name(std::string name, bool create = false);
 		//WidelandsPlayer * get_player_by_wlid(int);
 		//WidelandsClient * get_client_by_ggzid(int);
-		
+
 		GGZGameServer::State game_state() { return state(); }
-		
-		int numberofplayers() 
+
+		int numberofplayers()
 			{ return playercount(Seat::player) + playercount(Seat::bot); }
-		
+
 		bool is_host(const WidelandsClient * client);
 		bool is_host(const Client * client);
-		
+
 		StatisticsHandler & stat_handler();
 		ProtocolHandler & proto_handler();
 

@@ -1,6 +1,6 @@
 // Widelands server for GGZ
 // Copyright (C) 2004 Josef Spillner <josef@ggzgamingzone.org>
-// Copyright (C) 2009 The Widelands Development Team
+// Copyright (C) 2009-2011 The Widelands Development Team
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@
 
 // GGZ includes
 #include <ggz.h>
+#include <ggzdmod.h>
 
 // System includes
 #include <cstdlib>
@@ -151,7 +152,7 @@ void WidelandsServer::stateEvent()
 void WidelandsServer::joinEvent(Client * const client)
 {
 	if (not client) {
-		wllog(DL_INFO, "joinEvent without client ?!?\n"); 
+		wllog(DL_INFO, "joinEvent without client ?!?\n");
 		return;
 	}
 
@@ -336,7 +337,7 @@ void WidelandsServer::set_state_done()
 {
 	if (wlstat.have_stats())
 		game_done();
-	changeState(GGZGameServer::done); 
+	changeState(GGZGameServer::done);
 }
 
 void WidelandsServer::seatEvent(Seat* seat)
@@ -362,7 +363,7 @@ void WidelandsServer::seatEvent(Seat* seat)
 			if (it->second->ggz_number() == seat->client->number) {
 				delete it->second;
 				m_clients.erase(it);
-			} else 
+			} else
 				it++;
 	}
 */
@@ -468,10 +469,10 @@ void WidelandsServer::game_done()
 				wincond = "wood gnome";
 				break;
 		}
-		
+
 		mfile << "Win condition: " << wincond << " (" << wlstat.map().gametype() << ")" << std::endl;
 
-		mfile << std::endl << 
+		mfile << std::endl <<
 			"#################################################################" <<
 			std::endl << "Players:" << std::endl << std::endl;
 
@@ -521,7 +522,7 @@ void WidelandsServer::game_done()
 			mfile << "Version: " << player.version() << std::endl;
 			mfile << "Build: " << player.build() << std::endl;
 */
-			
+
 			mfile << std::endl <<
 				"(land, buildings, milbuildingslost, civbuildingslost, "
 				"buildingsdefeat, milbuildingsconq, economystrength, "
@@ -541,7 +542,7 @@ void WidelandsServer::game_done()
 			mfile << player.last_stats.productivity << ", ";
 			mfile << player.last_stats.casualties << ", ";
 			mfile << player.last_stats.kills << ")" << std::endl;
-			
+
 			mfile << std::endl << "Statistics (avg, min, max) every five minutes:"
 				<< std::endl;
 
@@ -676,7 +677,7 @@ void WidelandsServer::game_done()
 					{
 						results[it->second->ggz_player_number()] = GGZ_GAME_LOSS;
 						score[it->second->ggz_player_number()] = -1;
-					} else 
+					} else
 						results[it->second->ggz_player_number()] = GGZ_GAME_FORFEIT;
 				}
 			}
@@ -809,11 +810,11 @@ _wlggzexception::_wlggzexception
 			ost << '[' << file << ':' << line << "] " << buffer;
 			m_what = ost.str();
 	}
-	
+
 	_wlggzexception::~_wlggzexception() throw () {}
-	
+
 	char const * _wlggzexception::what() const throw ()
 	{
 		return m_what.c_str();
 	}
-	
+

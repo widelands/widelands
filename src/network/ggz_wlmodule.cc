@@ -73,7 +73,7 @@ void ggz_wlmodule::process()
 			return;
 		}
 		log("GGZWLMODULE/process ## received opcode: %i (%i)\n", op, ret);
-		
+
 	}
 
 	switch (op) {
@@ -114,7 +114,7 @@ void ggz_wlmodule::process()
 	case op_reply_protocol_ext:
 		log("GGZWLMODULE/process ## got extended protocol version: ");
 		{
-			std::list<WLGGZParameter> parlist = 
+			std::list<WLGGZParameter> parlist =
 			wlggz_read_parameter_list(m_data_fd);
 			if (parlist.size() < 2) {
 				log
@@ -135,7 +135,7 @@ void ggz_wlmodule::process()
 			ggz_write_int(m_data_fd, 0);
 		}
 		break;
-	default: 
+	default:
 		if (m_server_ver > 0)
 			switch(op) {
 			case op_debug_string:
@@ -267,7 +267,7 @@ void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 			assert(cur > 0);
 			if (cur < sample_count)
 				avg *= sample_count / (cur);
-			
+
 			wr.open_list(c / sample_count);
 			wr << static_cast<int>(avg);
 			wr << static_cast<int>(min);
@@ -306,7 +306,7 @@ bool ggz_wlmodule::send_statistics
 		log
 			("GGZWLMODULE ## resultvec size: %d, playerinfo size: %d\n",
 			 resultvec.size(), playerinfo.size());
- 
+
 		for (unsigned int i = 0; i < playerinfo.size(); i++) {
 			w.open_list(gamestat_playernumber);
 			w << static_cast<int>(i);
