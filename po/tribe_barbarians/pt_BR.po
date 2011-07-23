@@ -8,20 +8,23 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-12-11 17:48+0000\n"
-"Last-Translator: Júlio Cezar Santos Pires <Unknown>\n"
+"PO-Revision-Date: 2011-07-22 20:45+0000\n"
+"Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-23 04:30+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
+"Um bocado maior do que a usual para os mineiros das minas profundas. É "
+"produzido na hospedaria ou grande hospedaria através de peixe/carne, pão "
+"pitta e cerveja."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -29,12 +32,18 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
+"O elmo é uma ferramenta básica para proteger os guerreiros. É produzida pelo "
+"ferreiro de elmos e é usado no campo de treinamento - junto com alimentos - "
+"para aumentar os pontos de vida dos soldados do nível 0 para o nível 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Uma refeição é feita de pão pitta, cerveja forte e peixe/carne na grande "
+"hospedaria. Esta comida farta é exatamente o que os trabalhadores das minas "
+"muito profundas necessitam."
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -42,6 +51,9 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
+"Uma pequena porção para manter os mineiros fortes e trabalhando. Os "
+"escoteiros também consumem rações nas suas incursões. Rações são produzidas "
+"na taverna, hospedaria ou grande hospedaria."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -49,6 +61,10 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"O elmo de guerra é uma armadura fortalecida para guerreiros bárbaros. É "
+"produzida no ferreiro de elmos e usada no campo de treinamento - junto com "
+"alimentos - para aumentar os pontos de vida dos soldados de nível1 para "
+"nível 2."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -104,6 +120,8 @@ msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce "
 "snacks."
 msgstr ""
+"Cerveja é produzida em micro cervejarias e usada nas hospedarias e grandes "
+"hospedarias para produzir lanches."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -111,6 +129,9 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
+"Além de pão pitta e carne, peixe também é alimento para os bárbaros. É usado "
+"em tavernas, hospedaria e grandes hospedarias em locais de treinamento "
+"(campo de treino e arena de batalha)."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Big Inn"
@@ -323,6 +344,9 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
+"Pinças-de-fogo são ferramentas do fundidor, que trabalha na fundição. "
+"Produzido na serralheria (mas deixa de ser produzido quando esta construção "
+"for aprimorada para uma fábrica de machados e usina de guerra)."
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
@@ -346,6 +370,10 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Varas de pescar são necessárias pelos pescadores bárbaros. É uma das "
+"ferramentas básicas produzidas na serralheria (mas deixa de ser produzida "
+"quando esta construção for aprimorada para uma fábrica de machados e usina "
+"de guerra)."
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
@@ -387,6 +415,10 @@ msgid ""
 "used as a precious building material and to produce different axes (in the "
 "war mill) and different armours (in the helmsmithy)."
 msgstr ""
+"Ouro é o mais precioso dos metais; apenas artigos muito importantes são "
+"fabricados com isto. É obtido a partir de ouro bruto na fundição. É usada "
+"como material de construção precioso e para produzir diferentes tipos de "
+"machados (na usina de guerra) e distintas armaduras (pelo ferreiro de elmos)."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -394,6 +426,9 @@ msgid ""
 "gold, which is used as a precious building material and to produce weapons "
 "and armours."
 msgstr ""
+"Ouro bruto é retirado na mina de ouro. Derretido na fundição ele pode ser "
+"usado como material precioso para construções e para produzir armas e "
+"armaduras."
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -451,7 +486,7 @@ msgstr "Ferreiro de Elmos"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Ajuda a carregar itens em estradas muito utilizadas."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
@@ -463,6 +498,10 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Como alguém pode produzir uma refeição, lanche ou ração, se não há "
+"ferramentas de cozinha? Garanta a existência de uma serralheria (mas deixa "
+"de ser produzida quando esta construção for aprimorada para uma fábrica de "
+"machados e usina de guerra)."
 
 #: ../../tribes/barbarians/conf:132
 msgid "Hunter"
@@ -502,12 +541,17 @@ msgid ""
 "produce weapons and tools in the metalwork shop, axefactory, war mill and in "
 "the helmsmithy."
 msgstr ""
+"Ferro é obtido a partir de ferro bruto na fundição. É usado para produzir "
+"armas e ferramentas na serralheria, fábrica de machados, usina de guerra e "
+"no ferreiro de elmos."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
+"Ferro bruto é retirado nas minas de ferro. É derretido para obter ferro na "
+"fundição."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -560,6 +604,10 @@ msgid ""
 "miners. It is also consumed in the training sites (trainingscamp and battle "
 "arena)."
 msgstr ""
+"Carne contém muita energia. É produzida por caçadores e usada nas tavernas, "
+"hospedarias e grandes hospedarias para preparar rações, lanches e refeições "
+"para os mineiros. Também são consumidas nos locais de treinamento (campos de "
+"treino e arena de batalha)."
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
@@ -584,6 +632,9 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
+"Somente esta cerveja é aceitável para os guerreiros na arena de batalha. Há "
+"quem diga que o poder dos bárbaros está nesta bebida. Ajuda a treinar os "
+"soldados na técnica de evasão do nível 0 para o nível 1 e nível 2."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -761,12 +812,16 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Pedra bruta é um material de construção básico para os bárbaros. É produzida "
+"nas pedreiras e minas de granito."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
+"Pedra bruta pode ser processada em argamassa que fornecem um material sólido "
+"e não inflamável. Argamassa é produzida no forno de cal."
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
@@ -901,6 +956,10 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
+"Algumas das suas construções iniciais não possuíam espaço suficiente e \n"
+"não foram finalizadas. Vocês está em desvantagem em função disto; procure "
+"reiniciar \n"
+"este mapa com uma condição inicial justa."
 
 #: ../../tribes/barbarians/conf:139
 msgid "Stonemason"
@@ -927,6 +986,8 @@ msgid ""
 "Thatch reed is produced in a fernery and used to make the roofs of buildings "
 "waterproof."
 msgstr ""
+"Palha de junco é produzida na fazenda de junco e usada para tornar os "
+"telhados das construções impermeáveis."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -959,6 +1020,11 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
+"Os padeiros bárbaros são os melhores em fazer estes achatados e deliciosos "
+"pães pitta. É feito de trigo e água seguindo uma receita secreta. Pão pitta "
+"é usado nas tavernas, hospedarias e grandes hospedarias para preparar "
+"rações, lanches e refeições. Também são consumidos nos locais de treinamento "
+"(campo de treino e arena de batalha)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -966,6 +1032,9 @@ msgid ""
 "the trainingscamp - together with food- to train warriors with a fundamental "
 "fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"O machado largo é produzido na fábrica de machados e na usina de guerra. É "
+"usado no campo de treino - junto com alimentos - para aumentar o ataque dos "
+"soldados do nível 1 para o nível 2)"
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -973,6 +1042,10 @@ msgid ""
 "can use this. It is produced in the war mill and used in the trainingscamp "
 "(trains -together with food - from attack level 2 to level 3)."
 msgstr ""
+"O machado de bronze é considerado uma arma difícil de lidar. Apenas soldados "
+"experientes podem usá-lo. É produzido na usina de guerra e utilizado no "
+"campo de treino - junto com alimentos - para aumentar o ataque do nível 2 "
+"para o nível 3."
 
 #: ../../tribes/barbarians/felling_axe/conf:1
 msgid ""
@@ -980,6 +1053,9 @@ msgid ""
 "produced in the metalwork shop (but ceases to be produced by the building if "
 "it is enhanced to an axefactory and war mill)."
 msgstr ""
+"O machado de corte é uma ferramenta usada pelo lenhador para derrubar "
+"árvores. É produzido na serralheria (mas deixa de ser produzido quando esta "
+"é aprimorada para uma fábrica de machados ou usina de guerra)."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -988,6 +1064,10 @@ msgid ""
 "several buildings: lime kiln, smelting works, axefactory, war mill, "
 "helmsmithy."
 msgstr ""
+"Os fogos dos bárbaros são usualmente alimentados por carvão, que é produzido "
+"em minas de carvão ou através da queima de troncos de madeira na carvoaria. "
+"Várias construções o utilizam: forno de cal, fundição, fábrica de machados, "
+"usina de guerra, ferreiro de elmos."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -996,6 +1076,11 @@ msgid ""
 "It is one of the basic tools produced at the metalwork shop, (but ceases to "
 "be produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"O martelo é uma ferramenta essencial. É necessária para o geólogo, o "
+"construtor e os ferreiros. Garanta que sempre haja algum de reserva! É uma "
+"das ferramentas básicas produzidas na serralheria (mas deixa de ser "
+"produzido quando esta é aprimorada para uma fábrica de machados ou usina de "
+"guerra)."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
@@ -1007,6 +1092,10 @@ msgid ""
 "in the metal works like all other tools (but it ceases to be produced by the "
 "building if the metal works is enhanced to an axefactory and war mill)."
 msgstr ""
+"A casca é a ferramenta do padeiro e cada padeiro precisa da sua própria. É "
+"produzida na serralheria como todas as outras ferramentas (mas deixa de ser "
+"produzida quando esta for aprimorada para uma fábrica de machados ou usina "
+"de guerra)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1014,6 +1103,9 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"A foice é a ferramenta dos fazendeiros. É produzida na serralheria como "
+"todas as outras ferramentas (mas deixa de ser produzida quando esta for "
+"aprimorada para uma fábrica de machados ou usina de guerra)."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -1021,6 +1113,10 @@ msgid ""
 "the ranger use it. Produced at the metalwork shop (but ceases to be produced "
 "by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"A pá é necessária para o cuidado com as plantas. Portanto, o fazendeiro de "
+"palha de junco e o guarda florestal utilizam-na. É produzida na serralheria "
+"como todas as outras ferramentas (mas deixa de ser produzida quando esta for "
+"aprimorada para uma fábrica de machados ou usina de guerra)."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -1029,12 +1125,18 @@ msgid ""
 "produced in a war mill and used -together with food - in a trainingscamp to "
 "train soldiers from attack level 4 to level 5."
 msgstr ""
+"O machado de guerreiro é a mais perigosa de todas as armas Bárbaras. Apenas "
+"alguns guerreiros conseguem manejar este enorme e poderoso machado. É "
+"produzida na usina de guerra e usado - junto com alimentos - no campo de "
+"treino para aumentar o ataque dos soldados do nível 4 para o nível 5."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of trunks in the wood hardener."
 msgstr ""
+"A madeira endurecida no fogo é tão dura como metal e é utilizada em várias "
+"construções. É produzida com troncos de madeira no endurecedor de madeira."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1043,6 +1145,9 @@ msgid ""
 "weapon. It is used (together with food) in the trainingscamp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"Esta é uma arma perigosa produzida pelos Bárbaros. É feita na fábrica de "
+"machados. É utilizada - junto com alimentos - no campo de treino para "
+"aumentar o ataque dos soldados do nível 3 para o nível 4."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -1050,6 +1155,9 @@ msgid ""
 "and used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 2 to healthpoints level 3."
 msgstr ""
+"Esta é a mais aprimorada armadura Bárbara. É produzida no ferreiro de elmos "
+"e utilizada no campo de treino - junto com alimentos - para aumentar os "
+"pontos de vida dos soldados do nível 2 para o nível 3."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1057,6 +1165,9 @@ msgid ""
 "metalwork shop (but ceases to be produced by the building if it is enhanced "
 "to an axefactory and war mill)."
 msgstr ""
+"Esta picareta é usada pelos pedreiros e mineiros. É produzida na serralheria "
+"(mas deixa de ser produzida quando esta for aprimorada para uma fábrica de "
+"machados ou usina de guerra)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -1065,6 +1176,10 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Esta lança é leve o bastante para ser arremessada, mas pesada o bastante "
+"para matar qualquer animal em uma única estocada. É utilizada apenas por "
+"caçadores. É produzida na serralheria (mas deixa de ser produzida quando "
+"esta for aprimorada para uma fábrica de machados ou usina de guerra)."
 
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/conf:161
@@ -1095,6 +1210,11 @@ msgid ""
 "burner's house in the production of coal. The wood hardener refines trunks "
 "by hardening them in the fire which gives blackwood."
 msgstr ""
+"Troncos de madeira são o principal material de construção dos Bárbaros. As "
+"árvores são derrubadas pelos lenhadores; os guardas florestais garantem a "
+"reposição destas árvores. Troncos também são utilizados nas serralherias "
+"para produzir ferramentas e na carvoaria para produzir carvão. O endurecedor "
+"de madeira refina os troncos no fogo para produzir madeira escura."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1240,6 +1360,8 @@ msgid ""
 "and the brewery. Also the lime kiln and the cattle farm need to be supplied "
 "with water."
 msgstr ""
+"Água é a essência da vida! É utilizada na padaria, na micro cervejaria e na "
+"cervejaria. O forno de cal e a fazenda de gado também necessitam de água."
 
 #: ../../tribes/barbarians/conf:141
 msgid "Weaver"
@@ -1263,6 +1385,9 @@ msgid ""
 "bakeries, micro breweries and breweries. Also Cattle farms need to be "
 "supplied with wheat."
 msgstr ""
+"Trigo é essencial para sobrevivência. É produzido em fazendas e consumido "
+"nas padarias, micro cervejarias e cervejarias. As fazendas de gado também "
+"necessitam de trigo."
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"
@@ -1328,6 +1453,10 @@ msgid ""
 "and war mills. In trainingscamps, it is used - together with food- to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
+"Jovens guerreiros têm orgulho de aprender a lutar com esta poderosa arma. É "
+"mais pesada e afiada do que os machados usuais. É produzido na fábrica de "
+"machados e usinas de guerra. Em campos de treino é usada - junto com "
+"alimentos - para aumentar o ataque dos soldados do nível 0 para o nível 1."
 
 #~ msgid ""
 #~ "This is the second most dangerous weapon, the barbarians are able to "
