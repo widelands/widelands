@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-07-22 15:22+0000\n"
+"PO-Revision-Date: 2011-07-23 19:52+0000\n"
 "Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-07-23 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-07-24 04:30+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1218,7 +1218,7 @@ msgstr "grande"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "função para cálculo estatítico: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
@@ -1330,7 +1330,7 @@ msgstr "duplicado"
 #: ../../src/logic/immovable.cc:279
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr "[terrain affinity] \"%s\" (não no mundo actual): %s"
+msgstr "[terrain affinity] \"%s\" (não no mundo atual): %s"
 
 #: ../../src/logic/immovable.cc:315
 #, c-format
@@ -2390,13 +2390,11 @@ msgstr "O cliente crashou e foi feita uma salvaguarda de emergência do jogo."
 
 #: ../../src/network/netclient.cc:463
 msgid "Server sent a player update for a player that does not exist."
-msgstr ""
-"O Servidor enviou uma actualização de jogador para um que não existe."
+msgstr "O Servidor enviou uma atualização de jogador para um que não existe."
 
 #: ../../src/network/netclient.cc:480
 msgid "Server sent an user update for a user that does not exist."
-msgstr ""
-"O Servidor enviou uma actualização de usuário para um que não existe."
+msgstr "O Servidor enviou uma atualização de usuário para um que não existe."
 
 #: ../../src/network/netclient.cc:555
 #, c-format
@@ -2450,6 +2448,12 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"<br>Comandos host disponíveis são:<br>/help - Mostra esta ajuda<br>/announce "
+"<msg> - Envia uma mensagem de chat como anúncio (chat do sistema)<br>/warn "
+"<nome> <motivo> - Avisa o usuário <nome> em função do <motivo><br>/kick "
+"<nome> <motivo> - Chuta o usuário <nome> em função do  "
+"<motivo><br>/forcePause - Força uma pausa no jogo.<br>/endForcedPause - "
+"Retorna o jogo à velocidade normal."
 
 #: ../../src/network/nethost.cc:364
 msgid "Wrong use, should be: /announce <message>"
@@ -2527,6 +2531,8 @@ msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $"
 msgstr ""
+"<br>Comandos host disponíveis são:<br>help - Motra esta ajuda<br>host $ - "
+"Tenta executar o comando host $"
 
 #: ../../src/network/nethost.cc:1073
 msgid ""
@@ -2539,11 +2545,19 @@ msgid ""
 "#<br>toggle_team  # - Toggles the team of player #<br>toggle_win_con - "
 "Toggles the win_condition<br>host         $ - Tries to run the host command $"
 msgstr ""
+"Comandos host disponíveis são:<br>help - Motra esta ajuda<br>start - Inicia "
+"o servidor<br>ls_saved_games - Mostra uma lista de jogos salvos<br>ls_maps - "
+"Mostra uma lista de mapas<br>switch_save $ - Muda para o jogo salvo "
+"$<br>switch_map $ - Muda para o mapa $<br>toggle_type # - Altera o tipo do "
+"jogador #<br>toggle_init # - Altera a inicialização do jogador "
+"#<br>toggle_tribe # - Altera a tribo do jogador #<br>toggle_team # - Altera "
+"o time do jogador #<br>toggle_win_con - Altera a condição de vitória "
+"win_condition<br>host $ - Tenta executar o comando host $"
 
 #: ../../src/network/nethost.cc:1091
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr ""
+msgstr "%s solicitou execução do comando: \"%s\""
 
 #: ../../src/network/nethost.cc:1103
 #, c-format
@@ -2609,6 +2623,8 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands. \"@%s start\" starts the server."
 msgstr ""
+"Este é um servidor dedicado, envie \"@%s help\" para obter a lista completa "
+"de comandos disponíveis. \"@%s start\" inicia o servidor."
 
 #: ../../src/network/nethost.cc:2009
 msgid "Client reports time to host that is running backwards."
@@ -3028,7 +3044,7 @@ msgstr ""
 "O jogo salvo selecionado é um diretório. Isto acontece se você marca a opção "
 "\"nozip\" como verdadeira ou manualmente efetua a descompactação (unzip) do "
 "jogo salvo.\n"
-"Widelands não é capaz de transferir struturas de diretórios para os "
+"Widelands não é capaz de transferir estruturas de diretórios para os "
 "clientes, por favor selecione outro jogo salvo ou compacte (zip) o conteúdo "
 "do diretório."
 
@@ -3200,12 +3216,19 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
+"As próximas três são configuráveis apenas pelo cliente host clicando o botão "
+"\"tipo\" (type) de um jogador. Jogadores host podem também configurar a "
+"inicialização de cada jogador (o conjunto de construções, bens e "
+"trabalhadores com os quais o jogador inicia) e a tribo e time dos jogadores "
+"do computador."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:657
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
 msgstr ""
+"Todos os clientes conectados a um jogador (\"role\" player) podem selecionar "
+"a tribo e o time daquele jogador."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:659
 msgid "Map informations"
@@ -4290,7 +4313,7 @@ msgstr "Restaurar valor padrão"
 
 #: ../../src/wui/warehousewindow.cc:128
 msgid "Normal policy"
-msgstr ""
+msgstr "Política normal"
 
 #: ../../src/wui/warehousewindow.cc:129
 msgid "Preferably store selected wares here"
@@ -4298,11 +4321,11 @@ msgstr "Preferencialmente guarde as ferramentas selecionadas aqui"
 
 #: ../../src/wui/warehousewindow.cc:130
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Não armazenar estes bens aqui"
 
 #: ../../src/wui/warehousewindow.cc:131
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Remover os bens selecionados daqui."
 
 #: ../../src/wui/waresqueuedisplay.cc:274
 msgid "Highest priority"
@@ -4662,9 +4685,9 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
-"Não é possível remover o jogador. Existe algures uma referencia a ele. "
-"Remova todos os Edifícios e Naturezas que dependem deste jogador e começe de "
-"novo."
+"Não é possível remover o jogador. Existe uma referencia a ele em algum "
+"lugar. Remova todos os Edifícios e Naturezas que dependem deste jogador e "
+"começe de novo."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
@@ -4710,7 +4733,7 @@ msgstr "Opções das Ferramentas dos Recursos"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:111
 msgid "Current Selection"
-msgstr "Seleção actual"
+msgstr "Seleção Atual"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tool Menu"
@@ -4761,7 +4784,7 @@ msgstr "Menu Natureza (bobs)"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs Menu"
-msgstr "Menu Natureza (bobs) amovível"
+msgstr "Menu Natureza (bobs) imovível"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
@@ -4770,7 +4793,7 @@ msgstr "Terreno selecionado"
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:176
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:229
 msgid "Current:"
-msgstr "Actual:"
+msgstr "Atual:"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:40
 msgid "Toolsize Menu"
@@ -4779,7 +4802,7 @@ msgstr "Menu Tamanho da ferramenta"
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:73
 #, c-format
 msgid "Current Size: %u"
-msgstr "Tamanho actual: %u"
+msgstr "Tamanho atual: %u"
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
