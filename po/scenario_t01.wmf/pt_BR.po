@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-08-30 23:27+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"PO-Revision-Date: 2011-07-25 15:07+0000\n"
+"Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:33+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:30+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
 msgid ""
@@ -51,7 +51,7 @@ msgstr ""
 "e seria sábio fazer os preparativos. <br> eu recomendaria que obtivessemos "
 "pedras para o futuro - quem sabe que fortificações que podemos ser forçado a "
 "construir muito em breve. E - como um presente do destino - não são "
-"realmente pedras grandes muito próximas ...\"<br><br>-- NEW OBJECTIVE --<br> "
+"realmente pedras grandes muito próximas ...\"<br><br>-- NOVO OBJETIVO --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:105
 msgid ""
@@ -121,7 +121,7 @@ msgstr ""
 "uma estrada entre a nossa sala e a cabana do lenhador. Ela não é uma "
 "suposição rígida que os homens apreciam uma caminho mais curto e simples "
 "possível - a madeira vai certamente ser forte o suficiente, todavia. "
-".\"<br><br>-- NEW OBJECTIVE --<br> "
+".\"<br><br>-- NOVOS OBJETIVOS --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:81
 msgid ""
@@ -139,8 +139,8 @@ msgstr ""
 "confiada a nós por nossos antepassados. Devemos sempre respeitar e cuidar "
 "deles. Aquilo que tomamos, temos de dar de volta. <br> Assim, a fim de "
 "substituir as árvores nos derrubar, devemos construir uma cabana de guarda "
-"florestal, de preferência perto da cabana do lenhador.\"<br><br>-- NEW "
-"OBJECTIVE --<br> "
+"florestal, de preferência perto da cabana do lenhador.\"<br><br>-- NOVO "
+"OBJETIVO --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid ""
@@ -184,7 +184,7 @@ msgstr ""
 "Cabana Um lenhador não será suficiente para atender às necessidades do nosso "
 "povo. Árvores mais esperar para o nosso eixo, a sul da nossa nova "
 "encruzilhada - vamos levantar uma segunda cabana do lenhador está "
-"lá!\"<br><br>-- NEW OBJECTIVE --<br> "
+"lá!\"<br><br>-- NOVO OBJETIVO --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:67
 msgid ""
@@ -194,7 +194,7 @@ msgid ""
 msgstr ""
 " \"Há um velho ditado:<br>\" A carga dividida é mais fácil de suportar.'<br> "
 "Encruzilhada no caminho entre a nossa sede e cabana do lenhador iria "
-"facilitar o trabalho das nossas operadoras.\"<br><br>-- NEW OBJECTIVE --<br> "
+"facilitar o trabalho das nossas operadoras.\"<br><br>-- NOVO OBJETIVO --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
@@ -360,7 +360,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Olhos no Escuro"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
@@ -395,6 +395,8 @@ msgid ""
 "In this tutorial the basic gameplay and control as well as basic production "
 "buildings of the Barbarians are introduced."
 msgstr ""
+"Neste tutorial, o controle e jogabilidade básica, assim como as construções "
+"de produção básicas dos Bárbaros são introduzidas."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."

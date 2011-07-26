@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-12-11 18:43+0000\n"
-"Last-Translator: Júlio Cezar Santos Pires <Unknown>\n"
+"PO-Revision-Date: 2011-07-25 16:48+0000\n"
+"Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:30+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -26,6 +26,12 @@ msgid ""
 "chance to secure the mountains from enemy hands: We must build a fortress to "
 "the east of the mountains!\" "
 msgstr ""
+" \"Boldreth e eu estivemos explorando a região das três montanhas. Um dos "
+"maiores problemas estratégicos com esta região é que existem apenas duas "
+"grandes passagens para o meio da montanha: uma ao Norte e outra ao Sul. "
+"Estas passagens são muito difíceis de controlar de modo que me parece só "
+"existir uma forma de defender o local para que não caia em mãos inimigas: "
+"Temos que construir uma Fortaleza a Leste das montanhas !\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:242
 msgid ""
@@ -74,6 +80,10 @@ msgid ""
 "our fortifications to the borders of Kalitath’s territory and reunite with "
 "his forces. I have to keep an eye on everything that happens here.\" "
 msgstr ""
+" \"Porém o Thron não quer ouvir as minhas preocupações. Ele está tentando "
+"expandir as nossas fortificações até à fronteiro do Território do Kalitah e "
+"reunir-se com as suas forças ai estacionadas. Tenho que estar muito atento "
+"ao que está passando.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:197
 msgid ""
@@ -84,6 +94,13 @@ msgid ""
 "time I wait won't be lost. I will further upgrade my soldiers and prepare "
 "for battle.\" "
 msgstr ""
+" \"Eu enviei alguns homens para se encontrarem com o Kaliath na sua "
+"Fortaleza. Ele barricou a antiga entrada principal para a capital Al’thunran "
+"e agora está tentando fechar o cerco à cidade. Ele não irá deixar ninguém "
+"entrar ou sair da cidade enquanto não houver brechas no cerco. Até agora, "
+"ele não respondeu a nenhuma das minhas mensagens. Mas enquanto espero uma "
+"resposta, irei treinar os meus guerreiros para que estejam a bom nível para "
+"a batalha que ai vem.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:298
 msgid ""
@@ -91,6 +108,10 @@ msgid ""
 "brought a smile to my face - even if the hardest part is still waiting to be "
 "done, now our smiths will give their best to further ease our lives.\" "
 msgstr ""
+" \"Acabo de ser informado que a nossa economia mineira começou a operar. "
+"Esta noticia fez-me sorrir apesar de ter consciência que a parte mais "
+"difícil ainda está por fazer. Os nossos ferreiros darão o seu melhor para "
+"nos facilitar mais a vida.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:286
 msgid ""
@@ -100,12 +121,19 @@ msgid ""
 "remember, most of the mountains west to Al'thunran hold coal and some metal "
 "ores.\" "
 msgstr ""
+" \"Acabei de falar com o líder da nossa patrulha. Ele disse-me que "
+"encontraram umas montanhas a Nordeste e a Leste do nosso território. Com um "
+"pouco de sorte teremos uma nova chance de rearmar os homens porque, se bem "
+"me lembro, a maioria das montanhas a Oeste de Al'Thunran são ricas em carvão "
+"e outros minérios.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid ""
 " \"Khantrukh just informed me, that our basic food economy was built up "
 "successfully. Finally none of us has to fear starvation anymore."
 msgstr ""
+" \"Khantrukh acaba de me informar que a nossa economia-base de alimentos foi "
+"construida com sucesso. Finalmente nenhum de nós terá medo de morrer de fome."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:348
 msgid ""
@@ -120,6 +148,16 @@ msgid ""
 "not hesitate to rebuild it with all the strength my people have. I can't "
 "wait to see it again in it's old beauty.\" "
 msgstr ""
+" \"Os meus irmãos e os seus soldados estão mortos e para trás só deixaram "
+"morte e destruição. Ainda não encontrei um homem ou mulher do povo por entre "
+"as ruínas e só espero que eles tenham conseguido escapar a toda esta "
+"destruição e tenham começado uma vida nova num outro local qualquer. Não "
+"ficou pedra sobre pedra  para me trazer à memória a beleza de outrora, "
+"apenas um monte de escombros é o que resta da velha capital. Estou triste e "
+"ao mesmo tempo aliviado. Já não tinha esperanças de rever a velha beleza de "
+"Al'Thunran. Agora a velha cidade está de novo nas minhas mãos e eu e o meu "
+"povo não hesitaremos em reconstruí-la. Tenho arrepios só de pensar em poder "
+"ver o seu antigo esplendor.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:326
 msgid ""
@@ -127,6 +165,10 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
+" \"A nossa economia mineira parece estar trabalhando bem, o que são boas "
+"noticias ! Mas ainda há muita gente no Quartel-general à espera de emprego, "
+"à espera de poderem preparar os nossos guerreiros para as batalhas que se "
+"aproximam."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:360
 msgid ""
@@ -138,6 +180,14 @@ msgid ""
 "newborn lamb in the honour of my father whose eyes are set upon me "
 "today.<br>So be it!\" "
 msgstr ""
+" \"Assim seja ! Os generais estão preparando as tropas e o Boldreth irá em "
+"pessoa liderar o primeiro ataque. Eu marcharei a seu lado para libertar "
+"Al’thunran desta guerra e trazer de novo a paz à capital. Quando o sol "
+"começar a despontar por entre as árvores, irei ordenar o primeiro assalto. "
+"No lusco-fusco do crepúsculo, espero já estar celebrando a minha vitória na "
+"casa do Senhor da Guerra e, para comemorar esse feito, sacrificarei um "
+"cordeiro recém-nascido em honra de meu Pai cujos olhos estão de certo postos "
+"em mim neste dia.<br> Assim seja !\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid ""
@@ -152,6 +202,17 @@ msgid ""
 "an eye on the raging wars on our doorsteps. THEN we will be prepared once "
 "trouble seeks to capture our woods.\" "
 msgstr ""
+" \"A primeira fortificação que o Thron ordenou está concluída. De momento "
+"ele espera trazer confiança e fé àqueles que vivem dentro do nosso espaço "
+"vital a que chamamos 'Ondun', que quer dizer 'aqueles que esperam' no "
+"dialeto antigo. Mas o Thron ainda não está satisfeito e eu entendo bem os "
+"seus receios: As florestas são extensas e a fronteira com Al'Thunran está "
+"perto demais. Tenho a certeza que devem haver mais perigos nestes trilhos "
+"desconhecidos.<br> Para ter uma melhor visão do que se passa à volta da "
+"nossa casa temos de explorar as redondezas construindo mais guardas e "
+"escoteiros para observar a fronteira e a guerra que se desenrola aqui mesmo "
+"na soleira da nossa porta. AÍ SIM estaremos preparados quando os problemas "
+"nos baterem à porta.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:189
 msgid ""
@@ -162,6 +223,14 @@ msgid ""
 "linked by a good and defendable infrastructure. Still I hope I will not walk "
 "alone on this mission, I hope Kalitath son of Kun will follow my call.\" "
 msgstr ""
+" \"A linha de fronteira das minhas forças exapandiu-se para o limite das "
+"florestas. Já tivemos que suportar um longo e duro inverno e muitos "
+"quilômetros de marcha. A fortificação que erguemos nas fronteiras de Ondum "
+"irá garantir o fornecimento de homens e bens e assim que Al'thunran estiver "
+"na nossa posse de novo, as duas cidades irão ficar ligadas por uma "
+"infraestrutura defensável e eficiente. Ainda espero não seguir nesta missão "
+"sozinho, tenho esperanças que o Kalitath filho de Kun irá responder ao meu "
+"chamado.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:161
 msgid ""
@@ -172,6 +241,13 @@ msgid ""
 "vulnerable. As my scouts report, he has set foot on the lower grounds around "
 "the capitol, securing the outer fortification rings.\" "
 msgstr ""
+" \"As novidades que a patrulha me trouxe não foram boas de ouvir. Os nossos "
+"espiões dizem-me que as outras tribos ainda continuam em guerra mas que "
+"alguns dos seus veteranos de guerra e dos lideres tribais estão ficando "
+"cansados desta guerra sem sentido. Kalitath, filho de Kun, é o primeiro "
+"chefe-guerreiro a deixar Al'Thunran, deixando assim o seu flanco vulnerável. "
+"Os meus escoteiros relataram que ele fortificou-se nos campos baixos à volta "
+"da capital, defendendo assim a linha exterior de fortificações.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:222
 msgid ""
@@ -188,6 +264,20 @@ msgid ""
 "about to strike them. However they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe.\" "
 msgstr ""
+" \"O traidor fugiu quando viu que não conseguiria parar os nossos ataques, "
+"deixando os seus exércitos à nossa mercê. Kalitath desapareceu no calor da "
+"batalha mas isso agora já não tem importância. Que ele vá e não volte, que "
+"seja esquecido para toda a eternidade como o líder tribal que não se curvou "
+"ao Trono de madeira que agora é meu. O melhor é que a sua fuga nos trouxe "
+"uma grande vantagem: durante o tempo todo o Kalitath esteve tão ocupado "
+"guerreando que nem se preocupou em armazenar comida para os seus homens. "
+"Agora que ele fugiu, a fome fez com que alguns dos seu jovens seguidores "
+"desertassem. Este grupo está em poder de uma forte posição na área do anel "
+"principal. Mas há mais novidades: Os meus escoteiros relatam que as duas "
+"tribos em guerra dos meus irmãos estão num caos total e nem sequer dão conta "
+"do perigo que vai se abater sobre eles. E creio que mesmo que notassem, não "
+"iriam se importar pois estão tão cegos pela raiva e pelo ódio que já não dão "
+"importância a nada.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:151
 msgid ""
@@ -196,6 +286,11 @@ msgid ""
 "are not strong enough to take up the battle with my brothers.<br>For now we "
 "rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
+" \"Nos últimos dias aproximamo-nos da nossa capital. Muitas pessoas já se "
+"juntaram a nós na nossa marcha e depositaram as suas esperanças em mim. "
+"Porém, temo que não estejamos suficientemente fortes para confrontar os meus "
+"irmãos no campo de batalha.<br>Por agora permanecemos junto à fronteira da "
+"velha floresta preparando o que há de vir.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:206
 msgid ""
@@ -204,6 +299,10 @@ msgid ""
 "our troops with their own blood! We cannot accept this behaviour. From now "
 "on there is war between Kalitath and us!\" "
 msgstr ""
+" \"Maldito ! Apenas um dos nossos homens regressou com vida da patrulha. Ele "
+"levava uma mensagem para Kalitath ameaçando que qualquer movimento das "
+"nossas tropas seria pago com sangue. Não podemos aceitar este comportamento. "
+"A partir de agora estamos em guerra com o Kalitath !\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:232
 msgid ""
@@ -213,6 +312,11 @@ msgid ""
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!\" "
 msgstr ""
+" \"Esta manhã encontrei o Thron preocupado. Ele regressou da sua patrulha "
+"bem à noitinha e sentou-se junto a uma árvore observando o acampamento. A "
+"quantidade de discussões e disputas está aumentando e o inverno continua "
+"apertando. Temos de começar a armazenar comida para conseguirmos resistir a "
+"este longo e frio inverno !\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -223,6 +327,13 @@ msgid ""
 "before the banner of Chat’Karuth. Why should he march with his son to "
 "reclaim his heritage and the throne?\" "
 msgstr ""
+" \"O Thron quer acreditar que o Kalitath está farto de combater e está "
+"disposto a juntar-se a nós, assim que nos pusermos em marcha para "
+"reestabelecer a lei e a ordem em Al'thunran. Mas eu não acredito nisso ! O "
+"Kalitath é filho de um dos mais poderosos generais das nossas forças e a sua "
+"família nunca gostou da ideia de ter de se curvar perante a Bandeira de "
+"Chat'Karuth. Por que é que ele iria marchar com o seu filho para reclamar "
+"herança e o trono de Chat'Karuth ?\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:262
 msgid ""
@@ -231,6 +342,10 @@ msgid ""
 "range on the area around our hall to protect our people from sudden "
 "attacks.\" "
 msgstr ""
+" \"O Thron contou-me que descobriu trilhos na neve a Nordeste do nosso "
+"acampamento. Ele deu instruções para que construíssemos uma Torre de "
+"Menagem, para termos mais alcance visual sobre a área à volta do nosso "
+"Quartel-general e assim protegermos o nosso povo de ataques surpresa.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
@@ -238,14 +353,16 @@ msgid ""
 "enhance your metalworks to an axefactory or even a war mill and build up "
 "another metalworks to ensure the production of tools."
 msgstr ""
+"* Assim que Ferreiro alcance o nível seguinte (Mestre Ferreiro) melhora o "
+"edifício do Ferreiro para Fábrica de Machados ou até Fábrica de Guerra e "
+"constrói outra Ferraria para assegurar a produção de ferramentas."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:101
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
 msgid ""
 "* Build a battle arena and a trainings camp to the west of the mountains."
 msgstr ""
-"* Construir uma arena de batalha e um acampamento de treinamentos para o "
-"oeste das montanhas."
+"* Constrói uma Arena de Batalha e uma Campo de Treinos a oeste das montanhas."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
 msgid ""
@@ -300,6 +417,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
 msgstr ""
+"* Destrua o exército de Kalitaths e expanda seu território para o leste."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
@@ -312,6 +430,8 @@ msgid ""
 "* Destroy all enforcements of Thron’s two brothers to liberate the throne-"
 "circle."
 msgstr ""
+"* Destrua todas as fortificações dos dois irmãos do Thron para libertar o "
+"Circulo-do-trono."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
@@ -319,6 +439,9 @@ msgid ""
 "reaches his next level (master blacksmith) - even to a war mill and build up "
 "another metalworks to ensure the production of tools."
 msgstr ""
+"* Melhora o edifício do Ferreiro para Fábrica de Machados assim que o "
+"Ferreiro alcance o nível seguinte (Mestre Ferreiro). ou até Fábrica de "
+"Guerra. Constrói outra Ferraria para assegurar a produção de ferramentas."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
@@ -327,6 +450,9 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"* Expanda o seu território para as montanhas, envie geólogos para procurar "
+"minerais e carvão e ponha em marcha a economia mineira construindo Minas, "
+"Tabernas, Fundições e a Ferraria."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -355,6 +481,10 @@ msgid ""
 "that should attack. When you are ready with setting the number, click on the "
 "cross ('start attack')"
 msgstr ""
+"-> Para atacar um inimigo tens de clicar na porta do edifício militar do "
+"adversário. Abrirá um menu que te permite selecionar a quantidade de "
+"soldados que deverão atacar. Quando tiveres escolhido o número clica na cuz "
+"(\"Atacar\")"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 msgid ""
@@ -363,6 +493,11 @@ msgid ""
 "important in fights and the better a soldier is, the higher is the chance to "
 "win a fight.<br>Attributes are: health points, attack, defense and evade."
 msgstr ""
+"-> Os Campos de treino assim como a Arena de Batalha são usados para treinar "
+"os guerreiros nos seus diferentes atributos. Estes atributos são importantes "
+"nas batalhas pois quanto melhor for o guerreiro, melhor será a sua chances "
+"de ganhar essa escaramuça.<br>OS atributos são: Resistência, Ataque, Defesa "
+"e Evasão."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid ""
@@ -378,7 +513,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Esta Terra é a Nossa Terra"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -392,10 +527,15 @@ msgid ""
 " of your oxen to help transport wares quicker. Remember to build a cattle\n"
 " farm!"
 msgstr ""
+"À medida que as estradas crescem e a tua economia fica maior, tu deves fazer "
+"uso\n"
+" dos bois para ajudar a transportar as mercadorias mais rapidamente. Lembra-"
+"te por\n"
+" isso de construir um Criador de Bois !"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
-msgstr ""
+msgstr "Bodreth sacode a cabeça."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:204
 msgid "Boldreth shouts out!"
@@ -427,7 +567,7 @@ msgstr "Construa minas"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:99
 msgid "Build trainingssites"
-msgstr ""
+msgstr "Construir um Campo de treinos"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:40
 msgid "Build up a small food economy"
@@ -435,7 +575,7 @@ msgstr "Construa uma pequena economia de alimento"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "Build weapon productions"
-msgstr ""
+msgstr "Construir os Produtores de armas"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:146
 msgid "Close to home"
@@ -451,7 +591,7 @@ msgstr "Dúvidas"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
-msgstr ""
+msgstr "Melhorar a economia e o treino"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
@@ -511,6 +651,14 @@ msgid ""
 "neither have a good weapon nor are they well trained. We should build up "
 "trainingssites to prepare them for their future tasks.\" "
 msgstr ""
+"Os nossos geólogos encontraram mais depósitos de minério de ferro, carvão e "
+"até ouro. Temos de melhorar as nossas minas atuais assim que os mineiros "
+"ficarem mais experientes. Devemos construir mais minas, uma infraestrutura "
+"de alimentação maior para podermos abastecer os nossos trabalhadores com "
+"comida suficiente e podermos avançar a economia. Mas isto não é tudo pois a "
+"maioria dos nossos guerreiros é muito jovem e não estão nem bem armados nem "
+"estão bem treinados. Temos, por isso, que construir um Campo de treinos para "
+"os preparar para as suas missões futuras.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
@@ -522,7 +670,7 @@ msgstr "Fortificação renegada"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:238
 msgid "The advisor"
-msgstr "O assessor"
+msgstr "O Conselheiro"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:177
 #: ../../campaigns/t03.wmf/scripting/texts.lua:195
@@ -534,6 +682,8 @@ msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
 msgstr ""
+"Este tutorial explica a gestão e treino militar e ainda faz a introdução às "
+"batalhas."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -565,10 +715,12 @@ msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr ""
+"Completaste a última missão do tutorial dos Bárbaros. Podes continuar "
+"jogando este cenário ou prosseguir para a próxima campanha."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
-msgstr "Vossa companhia leal"
+msgstr "O teu Leal Companheiro"
 
 #~ msgid "Tutorial3 - This land is our land"
 #~ msgstr "Tutorial3 - Esta terra é nossa terra"
