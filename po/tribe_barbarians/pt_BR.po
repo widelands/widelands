@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-07-25 20:28+0000\n"
+"PO-Revision-Date: 2011-07-27 20:52+0000\n"
 "Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:30+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:31+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Um bocado maior do que a usual para os mineiros das minas profundas. É "
 "produzido na hospedaria ou grande hospedaria através de peixe/carne, pão "
-"pitta e cerveja."
+"sírio e cerveja."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -41,7 +41,7 @@ msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
-"Uma refeição é feita de pão pitta, cerveja forte e peixe/carne na grande "
+"Uma refeição é feita de pão sírio, cerveja forte e peixe/carne na grande "
 "hospedaria. Esta comida farta é exatamente o que os trabalhadores das minas "
 "muito profundas necessitam."
 
@@ -53,7 +53,7 @@ msgid ""
 msgstr ""
 "Uma pequena porção para manter os mineiros fortes e trabalhando. Os "
 "escoteiros também consumem rações nas suas incursões. Rações são produzidas "
-"na taverna, hospedaria ou grande hospedaria."
+"na taverna, hospedaria ou grande hospedaria com peixe, carne ou pão sírio."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -129,7 +129,7 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
-"Além de pão pitta e carne, peixe também é alimento para os bárbaros. É usado "
+"Além de pão sírio e carne, peixe também é alimento para os bárbaros. É usado "
 "em tavernas, hospedaria e grandes hospedarias em locais de treinamento "
 "(campo de treino e arena de batalha)."
 
@@ -382,11 +382,11 @@ msgstr "Fortaleza"
 
 #: ../../tribes/barbarians/conf:129
 msgid "Gamekeeper"
-msgstr "Veterinário"
+msgstr "Guarda de caça"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Gamekeeper's Hut"
-msgstr "Cabana do Veterinário"
+msgstr "Guarda de caça"
 
 #: ../../tribes/barbarians/conf:130
 msgid "Geologist"
@@ -611,7 +611,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
-msgstr "Oficina de Metalurgia"
+msgstr "Serralheria"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Micro Brewery"
@@ -971,7 +971,7 @@ msgstr "Cerveja Forte"
 
 #: ../../tribes/barbarians/conf:209
 msgid "Stronghold"
-msgstr "Baluarte"
+msgstr "Forte"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Tavern"
@@ -1002,7 +1002,7 @@ msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
-"O Veterinário se certifica que a população natural dos animais selvagens "
+"O Guarda de caça se certifica que a população natural dos animais selvagens "
 "nunca fique muito baixa."
 
 #: ../../tribes/barbarians/hunter/conf:1
@@ -1021,7 +1021,7 @@ msgid ""
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
 "Os padeiros bárbaros são os melhores em fazer estes achatados e deliciosos "
-"pães pitta. É feito de trigo e água seguindo uma receita secreta. Pão pitta "
+"pães sírios. É feito de trigo e água seguindo uma receita secreta. Pão sírio "
 "é usado nas tavernas, hospedarias e grandes hospedarias para preparar "
 "rações, lanches e refeições. Também são consumidos nos locais de treinamento "
 "(campo de treino e arena de batalha)."
@@ -1218,63 +1218,63 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr "Aprimora o ataque do soldado 0"
+msgstr "Aprimorar o ataque do soldado 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Aprimora o ataque do soldado 0 (somente para compatibilidade com velhos "
+"Aprimorar o ataque do soldado 0 (somente para compatibilidade com velhos "
 "savegames (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr "Aprimora o ataque do soldado 1"
+msgstr "Aprimorar o ataque do soldado 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Aprimora o ataque do soldado 1 (somente para compatibilidade com velhos "
+"Aprimorar o ataque do soldado 1 (somente para compatibilidade com velhos "
 "savegames (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr "Aprimora o ataque do soldado 2"
+msgstr "Aprimorar o ataque do soldado 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Aprimora o ataque do soldado 2 (somente para compatibilidade com velhos "
+"Aprimorar o ataque do soldado 2 (somente para compatibilidade com velhos "
 "savegames (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr "Aprimora o ataque do soldado 3"
+msgstr "Aprimorar o ataque do soldado 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Aprimora o ataque do soldado 3 (somente para compatibilidade com velhos "
+"Aprimorar o ataque do soldado 3 (somente para compatibilidade com velhos "
 "savegames (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr "Aprimora o ataque do soldado 4"
+msgstr "Aprimorar o ataque do soldado 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Aprimora o ataque do soldado para 4 (somente para compatibilidade com velhos "
-"savegames (build13))"
+"Aprimorar o ataque do soldado para 4 (somente para compatibilidade com "
+"velhos savegames (build13))"
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
@@ -1300,38 +1300,38 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Aprimora os pontos de vida do soldado 0"
+msgstr "Aprimorar os pontos de vida do soldado 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Aprimora os pontos de vida do soldado 0 (somente para compatibilidade com "
+"Aprimorar os pontos de vida do soldado 0 (somente para compatibilidade com "
 "velhos savegames (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Aprimora os pontos de vida do soldado 1"
+msgstr "Aprimorar os pontos de vida do soldado 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Aprimora os pontos de vida do soldado 1 (somente para compatibilidade com "
+"Aprimorar os pontos de vida do soldado 1 (somente para compatibilidade com "
 "velhos savegames (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Aprimora os pontos de vida do soldado 2"
+msgstr "Aprimorar os pontos de vida do soldado 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Aprimora os pontos de vida do soldado 2 (somente para compatibilidade com "
+"Aprimorar os pontos de vida do soldado 2 (somente para compatibilidade com "
 "velhos savegames (build13))"
 
 #: ../../tribes/barbarians/conf:104

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-07-25 19:50+0000\n"
+"PO-Revision-Date: 2011-07-27 16:00+0000\n"
 "Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:30+0000\n"
+"X-Launchpad-Export-Date: 2011-07-28 04:31+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1457,7 +1457,7 @@ msgstr[1] "%u(+%u) soldados"
 #: ../../src/logic/militarysite.cc:216
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr "Seus soldados ocuparam o seu %s."
+msgstr "Seus soldados ocuparam o(a) %s."
 
 #: ../../src/logic/militarysite.cc:571
 #, c-format
@@ -1471,7 +1471,7 @@ msgstr "Edificação militar perdida!"
 #: ../../src/logic/militarysite.cc:622
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr "seus soldados derrotaram o inimigo em %s."
+msgstr "seus soldados derrotaram o inimigo no(a) %s."
 
 #: ../../src/logic/militarysite.cc:627
 msgid "Enemy at site defeated!"
