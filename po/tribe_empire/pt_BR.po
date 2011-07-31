@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-07-25 11:53+0000\n"
+"PO-Revision-Date: 2011-07-30 21:30+0000\n"
 "Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:30+0000\n"
+"X-Launchpad-Export-Date: 2011-07-31 04:30+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -49,7 +49,7 @@ msgstr "Armadura"
 
 #: ../../tribes/empire/conf:180
 msgid "Armour Smithy"
-msgstr "Ferreiro"
+msgstr "Ferreiro de armaduras"
 
 #: ../../tribes/empire/conf:109
 msgid "Armoursmith"
@@ -377,7 +377,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:71
 msgid "Goldstone"
-msgstr "Aventurina"
+msgstr "Ouro bruto"
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "Goldstones are mined in goldmines and processed in smelting works."
@@ -438,7 +438,7 @@ msgstr "Ajuda a carregar itens pelas movimentas estradas."
 
 #: ../../tribes/empire/conf:145
 msgid "High Tower"
-msgstr "Torreão"
+msgstr "Torre Alta"
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
@@ -529,7 +529,7 @@ msgid ""
 msgstr ""
 "Coluna de mármore representam a cultura elevada do Império, de modo que elas "
 "são necessárias em praticamente todas as grandes construções. Elas são "
-"feitas de mármore na casa do pedreiro."
+"feitas de mármore na marmoraria."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -539,7 +539,7 @@ msgid ""
 msgstr ""
 "Mármore é uma linda pedra, obtidas nas montanhas ou produzidas nas "
 "pedreiras. Mármore é utilizado como material de construção e é transformado "
-"em colunas de mármore na casa do pedreiro."
+"em colunas de mármore na marmoraria."
 
 #: ../../tribes/empire/conf:122
 msgid "Master Miner"
@@ -892,11 +892,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:128
 msgid "Stonemason"
-msgstr "Pedreiro"
+msgstr "Marmoreiro"
 
 #: ../../tribes/empire/conf:168
 msgid "Stonemason's House"
-msgstr "Casa do pedreiro"
+msgstr "Maramoraria"
 
 #: ../../tribes/empire/conf:91
 msgid "Stones"
@@ -1090,7 +1090,8 @@ msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "toolsmith."
 msgstr ""
-"Esta picareta é usada pelos pedreiros e os mineiros. É produzida na ferraria."
+"Esta picareta é usada pelos marmoreiros e os mineiros. É produzida na "
+"ferraria."
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
@@ -1340,7 +1341,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:131
 msgid "Weaponsmith"
-msgstr "Armeiro"
+msgstr "Ferraria de Armas"
 
 #: ../../tribes/empire/conf:132
 msgid "Weaver"
