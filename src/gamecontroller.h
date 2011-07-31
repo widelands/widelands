@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,7 +89,7 @@ struct GameController {
 	 */
 	static GameController * createSinglePlayer
 		(Widelands::Game &, bool cpls, Widelands::Player_Number local);
-	
+
 	virtual void report_result(int player, int points, bool win, std::string extra) {}
 };
 

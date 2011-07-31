@@ -125,7 +125,7 @@ struct NetGGZ : public ChatProvider {
 	/// data is processed. Else this function wait for incomming data timeout
 	/// milliseconds
 	int process(int timeout = 0);
-	
+
 	/// returns the ip address of the server we joined
 	char const * ip();
 
@@ -169,7 +169,7 @@ struct NetGGZ : public ChatProvider {
 
 	/// Set information about the players from @ref GameSettings structure. This
 	/// is transmitted later by @ref send_game_info()
-	void set_players(GameSettings&);
+	void set_players(GameSettings &);
 
 	/// Set map name and size. This is transmitted later by @ref send_game_info()
 	void set_map(std::string, int, int);
@@ -194,7 +194,7 @@ struct NetGGZ : public ChatProvider {
 
 	/// join a open table (a open game)
 	void join(char const * tablename);
-	
+
 	/// launch a new table (open a game)
 	void launch();
 
@@ -240,8 +240,9 @@ struct NetGGZ : public ChatProvider {
 
 	bool ggz_mode();
 
-	bool is_host() { return false; }
-	
+	// what the f**k ? this makes no sense!
+	bool is_host() {return false;}
+
 	std::string playername();
 
 	ggz_ggzcore & core() {
@@ -259,15 +260,15 @@ struct NetGGZ : public ChatProvider {
 			return *m_wlmodule;
 		throw wexception ("Accessed ggz wlmodule object but it does not exist");
 	}
-	
+
 	void leave_table();
-	
+
 private:
 	NetGGZ();
 	NetGGZ(const NetGGZ &)
-		{ throw wexception("Tried to copy NetGGZ class. This is not allowd"); }
-	NetGGZ & operator= (const NetGGZ & old)
-		{ throw wexception("Tried to copy NetGGZ class. This is not allowd"); }
+		{throw wexception("Tried to copy NetGGZ class. This is not allowed");}
+	NetGGZ & operator = (const NetGGZ & old)
+		{throw wexception("Tried to copy NetGGZ class. This is not allowed");}
 
 	/// Transmit game statistics to metaserver. This is called from \ref
 	/// report_result() when all player have a result.
@@ -284,7 +285,7 @@ private:
 	std::string username;
 	std::string servername;
 	uint32_t tableseats;
-	/// If true widelands was started 
+	/// If true widelands was started
 	bool m_started_from_ggzclient;
 
 	std::vector<Net_Player_Info> playerinfo;

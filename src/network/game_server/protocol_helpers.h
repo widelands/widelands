@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 The Widelands Development Team
+ * Copyright (C) 2010-2011 The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ class WLGGZParameter
 		WLGGZParameter(bool d):
 			m_type(ggzdatatype_boolean), m_i(d), m_str(std::string("")) {}
 		//WLGGZParameter(char d)
-		
+
 		WLGGZDataType get_type() { return m_type; }
 
 		bool get_bool()          {return m_i; }
@@ -69,7 +69,7 @@ class WLGGZParameter
 		std::string get_string() {return m_str; }
 		int get_list_type()      { return m_list_type; }
 		std::list<WLGGZParameter> get_list() { return m_list; }
-		
+
 		void set(bool d)
 			{ m_type=ggzdatatype_boolean; m_i=d; }
 		void set_bool(bool d)
@@ -90,8 +90,8 @@ class WLGGZParameter
 		bool is_char()    { return m_type==ggzdatatype_char; }
 		bool is_bool()    { return m_type==ggzdatatype_boolean; }
 		bool is_list()    { return m_type==ggzdatatype_list; }
-		
-		bool is_valid() 
+
+		bool is_valid()
 			{ return m_type == ggzdatatype_string or
 				m_type == ggzdatatype_integer or
 				m_type == ggzdatatype_char or
@@ -131,7 +131,7 @@ class WLGGZ_writer {
 		{
 			type(list_type);
 		}
-		
+
 		/*
 		WLGGZ_writer(int fd, int list_type):
 			m_sub(0),
@@ -169,7 +169,7 @@ class WLGGZ_writer {
 		 * This sets the type of the parameter list to write. This must be called
 		 * before writing parameters.
 		 *
-		 * @param t The type of the parameterlist. For example a 
+		 * @param t The type of the parameterlist. For example a
 		 *          @ref WLGGZNetworkOpcodes on top level. Other types
 		 *          (@ref WLGGZGameInfo, @ref WLGGZPlayerType, @ref WLGGZGameType)
 		 *          are only allowed as subtypes.
@@ -298,7 +298,7 @@ class WLGGZ_writer {
 			ggz_write_int(m_fd, d);
 			return *this;
 		}
-		
+
 		void write_raw_data(int size, void * data) {
 			if (not m_in_cmd) {
 				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
@@ -321,7 +321,7 @@ class WLGGZ_writer {
 		void open_list(int list_type){
 			if (not m_sub) {
 
-				DBG(std::cout << "parameter_list_writer: " << level << 
+				DBG(std::cout << "parameter_list_writer: " << level <<
 					"- open a list - write datatype list\n";)
 				DBG(level += "    ";)
 

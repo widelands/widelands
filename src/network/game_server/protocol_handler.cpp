@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 The Widelands Development Team
+* Copyright (C) 2010-2011 The Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ void ProtocolHandler::process_data(Client * const client)
 
 	if (wlclient.connection_failed)
 		return;
-	
+
 	if (wlclient.desync) {
 		if (not SUPPORT_B16_PROTOCOL((&wlclient))) {
 			wlclient.connection_failed = true;
@@ -104,7 +104,7 @@ void ProtocolHandler::process_data(Client * const client)
 			return;
 		}
 		if (c != SYNCCODE1) {
-			
+
 			wlclient.hard_error_count++;
 			if (wlclient.hard_error_count > 100) {
 				close(client->fd);

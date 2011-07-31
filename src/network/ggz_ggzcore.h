@@ -132,11 +132,11 @@ public:
 		ggzcoretablestate_joined
 	};
 
-	enum ggzcore_tablestate get_tablestate(){
+	enum ggzcore_tablestate get_tablestate() {
 		return m_tablestate;
 	}
 
-	enum ggzcore_state get_state(){
+	enum ggzcore_state get_state() {
 		return m_state;
 	}
 
@@ -155,7 +155,7 @@ public:
 
 private:
 	ggz_ggzcore(const ggz_ggzcore &) {}
-	ggz_ggzcore & operator=(const ggz_ggzcore &) {}
+	ggz_ggzcore & operator = (const ggz_ggzcore &) {}
 
 	static GGZHookReturn
 		callback_server(uint32_t id, void const * cbdata, void const * user);
@@ -164,9 +164,9 @@ private:
 	static GGZHookReturn
 		callback_game(uint32_t id, void const * cbdata, void const * user);
 
-	void event_server(uint32_t const id, void const * const cbdata);
-	void event_game(uint32_t const id, void const * const cbdata);
-	void event_room(uint32_t const id, void const * const cbdata);
+	void event_server(uint32_t id, void const * const cbdata);
+	void event_game(uint32_t id, void const * const cbdata);
+	void event_room(uint32_t id, void const * const cbdata);
 
 	void write_userlist();
 	void write_tablelist();

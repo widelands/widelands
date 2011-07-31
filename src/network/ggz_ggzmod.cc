@@ -116,7 +116,7 @@ bool ggz_ggzmod::connect()
 	return true;
 }
 
-void ggz_ggzmod::eventServer(GGZMod* cbmod, GGZModEvent e, const void* cbdata)
+void ggz_ggzmod::eventServer(GGZMod * cbmod, GGZModEvent e, const void * cbdata)
 {
 	ggzmodobj->ggzmod_server(cbmod, e, cbdata);
 }
@@ -172,7 +172,8 @@ void ggz_ggzmod::ggzmod_server
 			int is_spectator, seatnum;
 			ggzmod_get_player(m_mod, &is_spectator, &seatnum);
 			log
-				("GGZMOD ## EVENT_PLAYER: old data: is_spectator: %i, seat_num: %i new: is_spectator: %i, seat_num: %i\n",
+				("GGZMOD ## EVENT_PLAYER: old data: is_spectator: %i, seat_num: %i new: is_spectator: %i,"
+				 "seat_num: %i\n",
 				 data[0], data[1], is_spectator, seatnum);
 			m_pending_seat_change = false;
 			m_seat = not is_spectator;
@@ -196,9 +197,9 @@ void ggz_ggzmod::ggzmod_server
 		case GGZMOD_EVENT_STATE:
 		{
 			/* This event occurs when the game's status changes.  The old
-			*  state (a GGZModState*) is passed as the event's data.
-			*  @see GGZModState */
-			const GGZModState oldstate = *static_cast<const GGZModState*>(cbdata);
+			 *  state (a GGZModState*) is passed as the event's data.
+			 *  @see GGZModState */
+			const GGZModState oldstate = * static_cast<const GGZModState * >(cbdata);
 			log
 				("GGZMOD ## state change from %i to %i\n",
 				 oldstate, ggzmod_get_state(m_mod));
@@ -216,8 +217,8 @@ void ggz_ggzmod::ggzmod_server
 
 int32_t ggz_ggzmod::datafd()
 {
-//	if (m_data_fd < 0)
-//		wexception("GGZMOD ## Tried to get datafd but it is not valid\n");
+	//if (m_data_fd < 0)
+		//wexception("GGZMOD ## Tried to get datafd but it is not valid\n");
 	return m_data_fd;
 }
 
@@ -313,7 +314,7 @@ void ggz_ggzmod::changeSeat()
 	if (m_seat != m_seat_desired and not m_pending_seat_change) {
 		log("do a change\n");
 		if (m_seat_desired) {
-			for (int i=0; i < ggzmod_get_num_seats(m_mod); i++)
+			for (int i = 0; i < ggzmod_get_num_seats(m_mod); ++i)
 			{
 				GGZSeat seat = ggzmod_get_seat(m_mod, i);
 				if (seat.type == GGZ_SEAT_OPEN) {

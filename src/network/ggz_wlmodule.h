@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 by the Widelands Development Team
+* Copyright (C) 2010-2011 by the Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -41,10 +41,10 @@ public:
 	void process();
 	bool data_pending() {return false;}
 
-	void set_datafd(int fd) { m_data_fd = fd; }
+	void set_datafd(int fd) {m_data_fd = fd;}
 
-	char * get_server_ip() { return server_ip_addr; }
-	uint32_t get_ext_proto_ver() { return m_server_ver; }
+	char * get_server_ip() {return server_ip_addr;}
+	uint32_t get_ext_proto_ver() {return m_server_ver;}
 
 	bool send_game_info
 		(std::string mapname, int map_w, int map_h, int win_condition,
@@ -57,7 +57,7 @@ public:
 
 private:
 	ggz_wlmodule(const ggz_wlmodule &) {}
-	ggz_wlmodule & operator= (const ggz_wlmodule &) { return *this; }
+	ggz_wlmodule & operator = (const ggz_wlmodule &) {return *this;}
 
 	void send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat);
 

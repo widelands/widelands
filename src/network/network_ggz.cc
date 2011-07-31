@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2010 by the Widelands Development Team
+ * Copyright (C) 2004-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -165,18 +165,18 @@ int NetGGZ::process(int timeout)
 		ggzmod().process();
 		wlmodule().process();
 		//log
-		//	("GGZ ## process loop: %i, %i, %i\n",
-		//	 core().data_pending(),
-		//	 ggzmod().data_pending(),
-		//	 wlmodule().data_pending());
+		//("GGZ ## process loop: %i, %i, %i\n",
+		//core().data_pending(),
+		//ggzmod().data_pending(),
+		//wlmodule().data_pending());
 		i--;
 	}
 
 	if (i <= 0)
 		log("GGZ ## ERROR process loop exited by limit\n");
 
-	if (
-		 (core().get_tablestate() == ggz_ggzcore::ggzcoretablestate_launched
+	if
+		((core().get_tablestate() == ggz_ggzcore::ggzcoretablestate_launched
 		  or core().get_tablestate() == ggz_ggzcore::ggzcoretablestate_joined)
 		 and not ggzmod().connected())
 	{
@@ -243,13 +243,13 @@ void NetGGZ::send_game_statistics
 	(int32_t gametime,
 	 const Widelands::Game::General_Stats_vector & resultvec)
 {
- 	wlmodule().send_statistics(gametime, resultvec, playerinfo);
+	wlmodule().send_statistics(gametime, resultvec, playerinfo);
 }
 
 void NetGGZ::report_result
 	(int32_t player, Widelands::TeamNumber team, int32_t points,
 	 bool win, int32_t gametime,
-	 const Widelands::Game::General_Stats_vector& resultvec,
+	 const Widelands::Game::General_Stats_vector & resultvec,
 	 std::string extra)
 {
 	log
@@ -257,17 +257,16 @@ void NetGGZ::report_result
 		 win?"won":"lost");
 	//log("NetGGZ::report_result: player %i/%i\n", player, playerinfo.size());
 
-	if(player < 1 or player > static_cast<int32_t>(playerinfo.size()))
+	if (player < 1 or player > static_cast<int32_t>(playerinfo.size()))
 	{
 		throw wexception
 			("NetGGZ::report_result: ERROR: player number out of range\n");
 	}
 
-	playerinfo.at(player-1).points = points;
-	playerinfo.at(player-1).result =
-		(win?gamestatresult_winner:gamestatresult_looser);
-	playerinfo.at(player-1).report_time = gametime;
-	playerinfo.at(player-1).wincondstring = extra;
+	playerinfo.at(player - 1).points = points;
+	playerinfo.at(player - 1).result = (win ? gamestatresult_winner : gamestatresult_looser);
+	playerinfo.at(player - 1).report_time = gametime;
+	playerinfo.at(player - 1).wincondstring = extra;
 
 	int finished = 0;
 
@@ -293,7 +292,7 @@ void NetGGZ::report_result
 	}
 	*/
 
-	if(finished == 0)
+	if (finished == 0)
 		send_game_statistics(gametime, resultvec);
 	else
 		log("%i players missing\n", finished);
@@ -385,7 +384,7 @@ void NetGGZ::send(std::string const & msg)
 		throw wexception
 			("NetGGZ::send tried to send chat message but we are in ggz mode");
 
-	if (not core().logged_in()){
+	if (not core().logged_in()) {
 		log("GGZ ## send chat message: not logged in!\n");
 		return;
 	}
@@ -484,7 +483,7 @@ void NetGGZ::statechange()
 
 bool NetGGZ::set_spectator(bool spec)
 {
-	if(spec)
+	if (spec)
 		ggzmod().set_spectator();
 	else
 		ggzmod().set_player();

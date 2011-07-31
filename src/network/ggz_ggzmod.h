@@ -45,7 +45,7 @@ public:
 	bool connect();
 
 	/*thread safe? */
-	bool connected() { return m_connected; }
+	bool connected() {return m_connected;}
 	void disconnect(bool err = false);
 
 	void process();

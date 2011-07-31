@@ -364,7 +364,7 @@ void WLApplication::run()
 		/* Widelands was started from a ggz core program. Connect to this ggzcore
 		* instance and go directly to the game setup screen */
 		NetGGZ::ref().join("");
-		if( NetGGZ::ref().is_host())
+		if (NetGGZ::ref().is_host())
 		{
 			NetHost netgame(NetGGZ::ref().playername(), true);
 			netgame.run();

@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 The Widelands Development Team
+* Copyright (C) 2010-2011 The Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -118,8 +118,8 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 						 l.front().get_string().c_str());
 					if (g_wls->is_host(client))
 						player->set_tribe(l.front().get_string());
-				}		
-				break; 
+				}
+				break;
 			case gameinfo_gametype:
 				wllog(DL_DUMPDATA, "gameinfo_gametype");
 				CHECKTYPE(l, integer)
@@ -167,7 +167,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 					m_host_version = version;
 					m_host_build = build;
 				}
-				
+
 				wlclient.set_version(version, build);
 				wllog
 					(DL_DUMP, "GAMEINFO: Player \"%s\": %s(%s)",
@@ -414,7 +414,7 @@ uint32_t StatisticsHandler::read_stat_vector
 	try {
 		if (count > 1024)
 			wllog(DL_WARN, "statistic vector longer than 1024 samples");
-		
+
 		int i = 0, lastsample = 0;
 		while(p.size() and i++ < 1024) {
 			CHECKTYPE(p, list)
@@ -489,7 +489,7 @@ void StatisticsHandler::evaluate()
 	while(it != m_players.end())
 	{
 		WidelandsPlayer & player = *it->second;
-		
+
 		player.max_buildings = -1;
 		player.max_workers = -1;
 		player.max_military = -1;
@@ -543,7 +543,7 @@ void StatisticsHandler::evaluate()
 			if (player.result == gamestatresult_looser)
 				defeated_players++;
 
-		} else if 
+		} else if
 			(player.type() == playertype_ai_aggressive or
 			 player.type() == playertype_ai_defensive or
 			 player.type() == playertype_ai_normal)
@@ -607,7 +607,7 @@ void StatisticsHandler::dump_player(int num)
 		wllog(DL_DUMP, "    lost, points: %i (time: %i)", p.points, p.end_time());
 	else if (p.result == gamestatresult_leave)
 		wllog(DL_DUMP, "    left the game, points: %i (time: %i)", p.points, p.end_time());
-	else 
+	else
 		wllog(DL_DUMP, "    unknown result, points: %i (time: %i)", p.points, p.end_time());
 
 	wllog

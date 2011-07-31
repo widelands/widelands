@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 The Widelands Development Team
+ * Copyright (C) 2010-2011 The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ std::list<WLGGZParameter> wlggz_read_parameter_list(int fd, bool re = false)
 	}
 
 	while(datatype)
-	{	
+	{
 		WLGGZParameter data;
 		int d_i;
 		char * d_str;

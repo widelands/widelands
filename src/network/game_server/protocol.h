@@ -1,6 +1,6 @@
 // Widelands server for GGZ
 // Copyright (C) 2004 Josef Spillner <josef@ggzgamingzone.org>
-// Copyright (C) 2009 The Widelands Development Team
+// Copyright (C) 2009, 2011 The Widelands Development Team
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -101,9 +101,9 @@ enum WLGGZNetworkOpcodes
 	 * one raw field - up to 10KB file dataype
 	 */
 	op_file_packet = 13,
-	
-	/** 
-	 * 
+
+	/**
+	 *
 	 * one integer - file id
 	 * one integer - status recieved and accepted, resend, denied
 	 */
@@ -180,12 +180,12 @@ enum WLGGZGameInfo
 	// one integer
 	gameinfo_gametype = 4,
 	// one string, the name of the map
-	gameinfo_mapname = 5, 
+	gameinfo_mapname = 5,
 	// two integers, the width then the height of the map
 	gameinfo_mapsize = 6,
 	// one integer
 	gameinfo_playertype = 7,
-	// two strings: version string, than buildtype 
+	// two strings: version string, than buildtype
 	gameinfo_version = 8,
 	// one int: the number of the players team
 	gameinfo_teamnumber = 9,
@@ -225,7 +225,7 @@ enum WLGGZGameStatsResult
 enum WLGGZGameStats
 {
 	/* This codes can occur multiple times. The values are
-	 * for the playerid which was send last. 
+	 * for the playerid which was send last.
 	 */
 	gamestat_playernumber = 1, // integer
 	gamestat_result = 2, // intger

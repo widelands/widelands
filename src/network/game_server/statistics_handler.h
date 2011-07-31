@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 The Widelands Development Team
+* Copyright (C) 2010-2011 The Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ class StatisticsHandler {
 		WidelandsPlayer * get_player(int wlnum) {
 			return m_players[wlnum];
 		}
-		
+
 		int highest_playernum() {
 			return m_players.rbegin()->first;
 		}
