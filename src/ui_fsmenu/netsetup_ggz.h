@@ -22,8 +22,6 @@
 
 #include "network/network_ggz.h"
 
-#if HAVE_GGZ
-
 #include "network/network_lan_promotion.h"
 
 #include "base.h"
@@ -79,6 +77,7 @@ private:
 	const char * nickname;
 	const char * password;
 	bool         reg;
+	bool         tried_login;
 
 	void fillServersList(std::vector<Net_Game_Info> const &);
 	void fillUserList   (std::vector<Net_Player> const &);
@@ -96,7 +95,5 @@ private:
 
 	bool compare_usertype(unsigned int rowa, unsigned int rowb);
 };
-
-#endif // if HAVE_GGZ
 
 #endif

@@ -22,8 +22,6 @@
 
 #include "network/network_ggz.h"
 
-#if HAVE_GGZ
-
 #include "base.h"
 
 #include "ui_basic/button.h"
@@ -62,7 +60,5 @@ private:
 	bool        m_register;
 	bool        m_auto_log;
 };
-
-#endif // if HAVE_GGZ
 
 #endif

@@ -360,7 +360,56 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
-#if HAVE_GGZ
+	} else if (NetGGZ::ref().ggz_mode()) {
+		/* Widelands was started from a ggz core program. Connect to this ggzcore
+		* instance and go directly to the game setup screen */
+		NetGGZ::ref().join("");
+		if (NetGGZ::ref().is_host())
+		{
+			NetHost netgame(NetGGZ::ref().playername(), true);
+			netgame.run();
+			NetGGZ::ref().deinit();
+		} else {
+			//NetGGZ::ref().
+			uint32_t const secs = time(0);
+			while (!NetGGZ::ref().ip()) {
+				NetGGZ::ref().process(1000);
+				if (10 < time(0) - secs)
+					throw warning
+						(_("Connection timeouted"), "%s",
+						 _
+						 ("Widelands has not been able to get the IP "
+						  "address of the server in time.\n"
+						  "There seems to be a network problem, either on "
+						  "your side or on side\n"
+						  "of the server.\n"));
+			}
+			std::string ip = NetGGZ::ref().ip();
+
+			//  convert IPv6 addresses returned by ggzd to IPv4 addresses.
+			//  At the moment SDL_net does not support IPv6 anyways.
+			if (not ip.compare(0, 7, "::ffff:")) {
+				ip = ip.substr(7);
+				log("GGZClient ## cut IPv6 address: %s\n", ip.c_str());
+			}
+
+			IPaddress peer;
+			if (hostent * const he = gethostbyname(ip.c_str())) {
+			peer.host =
+				(reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
+				 peer.port = htons(WIDELANDS_PORT);
+			} else
+				throw warning
+					(_("Connection problem"), "%s",
+					 _
+					 ("Widelands has not been able to connect to the "
+					  "host."));
+			SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);
+
+			NetClient netgame(&peer, NetGGZ::ref().playername(), true);
+			netgame.run();
+			NetGGZ::ref().deinit();
+		}
 	} else if (m_game_type == GGZ) {
 		Widelands::Game game;
 		try {
@@ -421,13 +470,12 @@ void WLApplication::run()
 				// -> autostarts when a player sends "/start" as pm to the server.
 				netgame.run(true);
 
-				NetGGZ::ref().deinitcore();
+			NetGGZ::ref().deinit();
 			}
 		} catch (...) {
 			emergency_save(game);
 			throw;
 		}
-#endif
 	} else {
 
 		g_sound_handler.start_music("intro");
@@ -1216,7 +1264,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = SCENARIO;
 		m_commandline.erase("scenario");
 	}
-#if HAVE_GGZ
 	if (m_commandline.count("dedicated")) {
 		if (m_game_type != NONE)
 			throw wexception("dedicated can not be combined with other actions");
@@ -1228,7 +1275,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = GGZ;
 		m_commandline.erase("dedicated");
 	}
-#endif
+
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
 	if (m_commandline.count("record")) {
@@ -1332,9 +1379,7 @@ void WLApplication::show_usage()
 			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			 "                      map.\n"
 			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
-#if HAVE_GGZ
 		<< _(" --dedicated=FILENAME Starts ggz host with FILENAME as map\n")
-#endif
 		<<
 		_
 			(" --speed_of_new_game  The speed that the new game will run at\n"
@@ -1627,9 +1672,8 @@ void WLApplication::mainmenu_multiplayer()
 	for (;;) { // stay in menu until player clicks "back" button
 		std::string playername;
 
-#if HAVE_GGZ
 		bool ggz = false;
-		NetGGZ::ref().deinitcore(); // cleanup for reconnect to the metaserver
+		NetGGZ::ref().deinit(); // cleanup for reconnect to the metaserver
 		Fullscreen_Menu_MultiPlayer mp;
 		switch (mp.run()) {
 			case Fullscreen_Menu_MultiPlayer::Back:
@@ -1664,13 +1708,13 @@ void WLApplication::mainmenu_multiplayer()
 					NetGGZ::ref().set_local_maxplayers(max);
 					NetHost netgame(playername, true);
 					netgame.run();
-					NetGGZ::ref().deinitcore();
+					NetGGZ::ref().deinit();
 					break;
 				}
 				case Fullscreen_Menu_NetSetupGGZ::JOINGAME: {
 					uint32_t const secs = time(0);
 					while (!NetGGZ::ref().ip()) {
-						NetGGZ::ref().data();
+						NetGGZ::ref().process(1000);
 						if (10 < time(0) - secs)
 							throw warning
 								(_("Connection timeouted"), "%s",
@@ -1705,21 +1749,13 @@ void WLApplication::mainmenu_multiplayer()
 
 					NetClient netgame(&peer, playername, true);
 					netgame.run();
-					NetGGZ::ref().deinitcore();
+					NetGGZ::ref().deinit();
 					break;
 				}
 				default:
 					break;
 			}
 		}
-
-#else
-		// If compiled without ggz support, only lan-netsetup will be visible
-		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL || menu_result < 0) {
-			break;
-		}
-#endif // HAVE_GGZ
-
 		else {
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_NetSetupLAN ns;

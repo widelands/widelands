@@ -554,9 +554,7 @@ NetHost::NetHost (std::string const & playername, bool ggz)
 	log("[Host] starting up.\n");
 
 	if (ggz) {
-#if HAVE_GGZ
 		NetGGZ::ref().launch();
-#endif
 	}
 
 	d->localplayername = playername;
@@ -673,11 +671,11 @@ void NetHost::run(bool const autorun)
 			return;
 	}
 
-#if HAVE_GGZ
 	// if this is a ggz game, tell the metaserver that the game started
 	if (use_ggz)
+	{
 		NetGGZ::ref().send_game_playing();
-#endif
+	}
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients.at(i).playernum == UserSettings::notConnected())
@@ -768,15 +766,29 @@ void NetHost::run(bool const autorun)
 		// wait mode when there are no clients
 		checkHungClients();
 		initComputerPlayers();
+
+		// if this is a ggz game, tell the metaserver about the game
+		if (use_ggz)
+		{
+			assert(&game.map());
+			NetGGZ::ref().set_map
+				(d->settings.mapname, game.map().get_width(),
+				 game.map().get_height());
+			NetGGZ::ref().set_players(d->settings);
+			NetGGZ::ref().send_game_info();
+		}
+
 		game.run
 			(loaderUI,
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
-#if HAVE_GGZ
+
 		// if this is a ggz game, tell the metaserver that the game is done.
 		if (use_ggz)
+		{
 			NetGGZ::ref().send_game_done();
-#endif
+		}
+
 		clearComputerPlayers();
 	} catch (...) {
 		WLApplication::emergency_save(game);
@@ -1651,6 +1663,10 @@ void NetHost::setPlayer(uint8_t const number, PlayerSettings const ps)
 void NetHost::setPlayerNumber(uint8_t const number)
 {
 	switchToPlayer(0, number);
+	if (number >= d->settings.players.size())
+		NetGGZ::ref().set_spectator(true);
+	else
+		NetGGZ::ref().set_spectator(false);
 }
 
 void NetHost::setWinCondition(std::string wc)
@@ -2300,11 +2316,9 @@ void NetHost::handle_network ()
 		}
 	}
 
-#if HAVE_GGZ
 	// if this is a ggz game, handle the ggz network
 	if (use_ggz)
-		NetGGZ::ref().data();
-#endif
+		NetGGZ::ref().process();
 
 	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
@@ -2637,3 +2651,22 @@ void NetHost::reaper()
 		else
 			d->clients.erase(d->clients.begin() + index);
 }
+
+void NetHost::report_result(int player, int points, bool win, std::string extra)
+{
+	log
+		("NetHost::report_result(%d, %d, %s, %s)\n", player, points,
+		 win?"won":"lost", extra.c_str());
+
+	// if this is a ggz game, tell the metaserver that the game is done.
+	if (use_ggz)
+	{
+
+		NetGGZ::ref().report_result
+			(player, d->game->player(player).team_number(),
+			 points, win, d->game->get_gametime(),
+			 d->game->get_general_statistics(),
+			 extra);
+	}
+}
+

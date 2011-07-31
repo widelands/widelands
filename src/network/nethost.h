@@ -90,6 +90,8 @@ struct NetHost : public GameController, private SyncCallback {
 		(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2);
 	void handle_dserver_command(std::string, std::string);
 
+	void report_result(int player, int points, bool win, std::string extra);
+
 	void forcePause() {
 		m_forced_pause = true;
 		updateNetworkSpeed();

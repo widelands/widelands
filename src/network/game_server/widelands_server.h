@@ -1,6 +1,6 @@
 // Widelands server for GGZ
 // Copyright (C) 2004 Josef Spillner <josef@ggzgamingzone.org>
-// Copyright (C) 2009 The Widelands Development Team
+// Copyright (C) 2009-2011 The Widelands Development Team
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,33 +19,83 @@
 #ifndef WIDELANDS_SERVER_H
 #define WIDELANDS_SERVER_H
 
-// GGZ includes
-#include "ggzgameserver.h"
+#include "protocol.h"
+//#include "widelands_client.h"
+#include "widelands_map.h"
 
-// Definitions
-#define ARRAY_WIDTH 20
-#define ARRAY_HEIGHT 10
+// GGZ includes. class GGZGameServer
+#include <ggzgameserver.h>
 
-// WidelandsServer server object
-struct WidelandsServer : public GGZGameServer {
-	WidelandsServer();
-	~WidelandsServer();
-	void stateEvent();
-	void joinEvent(Client *);
-	void leaveEvent(Client *);
-	void spectatorJoinEvent(Client *);
-	void spectatorLeaveEvent(Client *);
-	void spectatorDataEvent(Client *);
-	void dataEvent(Client *);
-	void errorEvent();
+#include <string>
+#include <vector>
+#include <map>
 
-private:
-	void game_start();
-	void game_stop();
-	void game_end();
+class StatisticsHandler;
+class ProtocolHandler;
+class WidelandsClient;
 
-	char * m_ip;
+/// WidelandsServer server object. This class does the interaction with ggzd
+class WidelandsServer : public GGZGameServer
+{
+	public:
+		WidelandsServer();
+		~WidelandsServer();
+		const char * get_host_ip() {return m_wlserver_ip;}
+
+		/// @{
+		/// change the game state
+		void set_state_playing() {changeState(GGZGameServer::playing);}
+		void set_state_done();
+		/// @}
+
+		/// Game ended. report the results if possible
+		void game_done();
+
+		/// get player structure by name. If id is given create if not existing
+		WidelandsClient * get_client_by_name(std::string name, bool create = false);
+		//WidelandsPlayer * get_player_by_wlid(int);
+		//WidelandsClient * get_client_by_ggzid(int);
+
+		GGZGameServer::State game_state() {return state();}
+
+		int numberofplayers()
+			{return playercount(Seat::player) + playercount(Seat::bot);}
+
+		bool is_host(const WidelandsClient * client);
+		bool is_host(const Client * client);
+
+		StatisticsHandler & stat_handler();
+		ProtocolHandler & proto_handler();
+
+		void check_reports();
+		bool is_playing() {return state() == GGZGameServer::waiting;}
+
+		void dump_clients();
+
+	private:
+		// @{
+		/// These event functions are invoked by ggzd
+		void stateEvent();
+		void joinEvent          (Client * client);
+		void leaveEvent         (Client * client);
+		void spectatorJoinEvent (Client * client);
+		void spectatorLeaveEvent(Client * client);
+		void spectatorDataEvent (Client * client);
+		void dataEvent          (Client * client);
+		void seatEvent          (Seat * seat);
+		void spectatorEvent     (Spectator * spectator);
+		void errorEvent();
+		// @}
+
+		/// The ip address of the widelands client hosting the game
+		char * m_wlserver_ip;
+		/// Results of the game have been reported to ggzd
+		bool m_reported;
+		std::string m_host_username;
+
+		std::map<std::string, WidelandsClient *> m_clients;
 };
 
-#endif
+extern WidelandsServer * g_wls;
 
+#endif //WIDELANDS_SERVER_H

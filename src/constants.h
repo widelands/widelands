@@ -100,6 +100,12 @@
 #define WIDELANDS_PORT               7396
 //@}
 
+/// Metaserver
+//@{
+#define WL_METASERVER "widelands.org"
+#define WL_METASERVER_PORT 5688
+//@}
+
 /// Constants for user-defined SDL events that get handled by SDL's mainloop
 //@{
 enum {

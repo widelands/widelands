@@ -18,8 +18,7 @@
  */
 
 #include "netsetup_ggz.h"
-
-#if HAVE_GGZ
+#include "network/network_ggz.h"
 
 #include <boost/bind.hpp>
 
@@ -27,7 +26,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "network/network.h"
-#include "network/network_ggz.h"
+
 #include "profile/profile.h"
 
 Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
@@ -122,7 +121,8 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 // Login information
 	nickname(nick),
 	password(pwd),
-	reg(registered)
+	reg(registered),
+	tried_login(false)
 {
 	back.set_font(font_small());
 	joingame.set_font(font_small());
@@ -162,7 +162,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(this, &Fullscreen_Menu_NetSetupGGZ::server_doubleclicked);
 
 	// try to connect to the metaserver
-	if (!NetGGZ::ref().usedcore())
+	if (!NetGGZ::ref().logged_in())
 		connectToMetaserver();
 }
 
@@ -173,12 +173,12 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 	Fullscreen_Menu_Base::think ();
 
 	// If we have no connection try to connect
-	if (!NetGGZ::ref().usedcore()) {
+	if (not NetGGZ::ref().logged_in() and not NetGGZ::ref().is_connecting() and not tried_login) {
 		connectToMetaserver();
 	}
 
 	// Check ggz peers for new data
-	NetGGZ::ref().datacore();
+	NetGGZ::ref().process();
 
 	if (NetGGZ::ref().updateForUsers())
 		fillUserList(NetGGZ::ref().users());
@@ -201,6 +201,7 @@ void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 
 		// Only one time registration
 	}
+	tried_login = true;
 }
 
 
@@ -390,5 +391,3 @@ void Fullscreen_Menu_NetSetupGGZ::clicked_hostgame()
 	NetGGZ::ref().set_local_servername(servername.text());
 	end_modal(HOSTGAME);
 }
-
-#endif // if HAVE_GGZ

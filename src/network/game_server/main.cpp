@@ -1,6 +1,6 @@
 // Widelands server for GGZ
 // Copyright (C) 2004 Josef Spillner <josef@ggzgamingzone.org>
-// Copyright (C) 2009 The Widelands Development Team
+// Copyright (C) 2009, 2011 The Widelands Development Team
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,9 @@
 #include <ctime>
 
 // Version information
-#define WIDELANDS_SERVER_VERSION "0.4"
+#define WIDELANDS_SERVER_VERSION "0.5"
+
+WidelandsServer * g_wls;
 
 // Main function: parse arguments and start server
 int main(int argc, char ** argv)
@@ -62,6 +64,7 @@ int main(int argc, char ** argv)
 
 	{
 		WidelandsServer wls;
+		g_wls = &wls;
 		wls.connect(false);
 	}
 

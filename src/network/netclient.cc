@@ -29,12 +29,14 @@
 #include "map_io/widelands_map_loader.h"
 #include "network_protocol.h"
 #include "network_system.h"
+#include "network_ggz.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
+#include "logic/player.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -201,12 +203,31 @@ void NetClient::run ()
 		d->lasttimestamp_realtime = WLApplication::get()->get_time();
 
 		d->modal = game.get_ibase();
+
+		// if this is a ggz game, tell the metaserver about the game
+		if (use_ggz)
+		{
+			assert(&game.map());
+			NetGGZ::ref().set_map
+				(d->settings.mapname, game.map().get_width(),
+				 game.map().get_height());
+			NetGGZ::ref().set_players(d->settings);
+			NetGGZ::ref().send_game_info();
+		}
+
 		game.run
 			(loaderUI,
 			 d->settings.savegame ?
 			 Widelands::Game::Loaded
 			 : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+
+		// if this is a ggz game, tell the metaserver the result of the game
+		if (use_ggz)
+		{
+			NetGGZ::ref().send_game_done();
+		}
+
 		d->modal = 0;
 		d->game = 0;
 	} catch (...) {
@@ -413,6 +434,8 @@ void NetClient::setPlayerNumber(uint8_t const number)
 		  d->settings.players.at(number).state == PlayerSettings::stateComputer))
 		return;
 
+
+
 	// Send request
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGEPOSITION);
@@ -504,6 +527,23 @@ void NetClient::send(std::string const & msg)
 std::vector<ChatMessage> const & NetClient::getMessages() const
 {
 	return d->chatmessages;
+}
+
+void NetClient::report_result(int player, int points, bool win, std::string extra)
+{
+	log
+		("NetClient::report_result(%d, %d, %s, %s)\n", player, points,
+		 win?"won":"lost", extra.c_str());
+
+	// if this is a ggz game, tell the metaserver that the game is done.
+	if (use_ggz)
+	{
+		NetGGZ::ref().report_result
+			(player, d->game->player(player).team_number(),
+			 points, win, d->game->get_gametime(),
+			 d->game->get_general_statistics(),
+			 extra);
+	}
 }
 
 void NetClient::sendTime()
@@ -799,6 +839,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		int32_t number = packet.Signed32();
 		d->settings.playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
+		if (number >= d->settings.players.size())
+			NetGGZ::ref().set_spectator(true);
+		else
+			NetGGZ::ref().set_spectator(false);
 		break;
 	}
 	case NETCMD_WIN_CONDITION: {
@@ -879,11 +923,10 @@ void NetClient::handle_packet(RecvPacket & packet)
  */
 void NetClient::handle_network ()
 {
-#if HAVE_GGZ
 	// if this is a ggz game, handle the ggz network
 	if (use_ggz)
-		NetGGZ::ref().data();
-#endif
+		NetGGZ::ref().process();
+
 	try {
 		while (d->sock != 0 && SDLNet_CheckSockets(d->sockset, 0) > 0) {
 			// Perform only one read operation, then process all packets
