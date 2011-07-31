@@ -33,11 +33,11 @@ class WidelandsMap
 		unsigned int w() {return m_w; }
 		unsigned int h() {return m_w; }
 		std::string name() {return m_name; }
-		WLGGZGameType gametype() { return m_gametype; }
+		WLGGZGameType gametype() {return m_gametype;}
 
-		void set_name(std::string name) { m_name = name; }
-		void set_size(int w, int h) { m_w = w; m_h = h; }
-		void set_gametype(WLGGZGameType type) { m_gametype=type; }
+		void set_name(std::string name) {m_name = name;}
+		void set_size(int w, int h) {m_w = w; m_h = h;}
+		void set_gametype(WLGGZGameType type) {m_gametype = type;}
 
 	private:
 		std::string m_name;

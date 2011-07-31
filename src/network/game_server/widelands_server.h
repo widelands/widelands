@@ -40,11 +40,11 @@ class WidelandsServer : public GGZGameServer
 	public:
 		WidelandsServer();
 		~WidelandsServer();
-		const char * get_host_ip() { return m_wlserver_ip; }
+		const char * get_host_ip() {return m_wlserver_ip;}
 
 		/// @{
 		/// change the game state
-		void set_state_playing() { changeState(GGZGameServer::playing); }
+		void set_state_playing() {changeState(GGZGameServer::playing);}
 		void set_state_done();
 		/// @}
 
@@ -56,10 +56,10 @@ class WidelandsServer : public GGZGameServer
 		//WidelandsPlayer * get_player_by_wlid(int);
 		//WidelandsClient * get_client_by_ggzid(int);
 
-		GGZGameServer::State game_state() { return state(); }
+		GGZGameServer::State game_state() {return state();}
 
 		int numberofplayers()
-			{ return playercount(Seat::player) + playercount(Seat::bot); }
+			{return playercount(Seat::player) + playercount(Seat::bot);}
 
 		bool is_host(const WidelandsClient * client);
 		bool is_host(const Client * client);
@@ -68,7 +68,7 @@ class WidelandsServer : public GGZGameServer
 		ProtocolHandler & proto_handler();
 
 		void check_reports();
-		bool is_playing() { return state() == GGZGameServer::waiting; }
+		bool is_playing() {return state() == GGZGameServer::waiting;}
 
 		void dump_clients();
 
@@ -76,14 +76,14 @@ class WidelandsServer : public GGZGameServer
 		// @{
 		/// These event functions are invoked by ggzd
 		void stateEvent();
-		void joinEvent(Client *client);
-		void leaveEvent(Client *client);
-		void spectatorJoinEvent(Client *client);
-		void spectatorLeaveEvent(Client *client);
-		void spectatorDataEvent(Client *client);
-		void dataEvent(Client *client);
-		void seatEvent(Seat * seat);
-		void spectatorEvent(Spectator * spectator);
+		void joinEvent          (Client * client);
+		void leaveEvent         (Client * client);
+		void spectatorJoinEvent (Client * client);
+		void spectatorLeaveEvent(Client * client);
+		void spectatorDataEvent (Client * client);
+		void dataEvent          (Client * client);
+		void seatEvent          (Seat * seat);
+		void spectatorEvent     (Spectator * spectator);
 		void errorEvent();
 		// @}
 
@@ -93,7 +93,7 @@ class WidelandsServer : public GGZGameServer
 		bool m_reported;
 		std::string m_host_username;
 
-		std::map<std::string,WidelandsClient *> m_clients;
+		std::map<std::string, WidelandsClient *> m_clients;
 };
 
 extern WidelandsServer * g_wls;

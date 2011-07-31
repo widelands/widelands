@@ -48,7 +48,7 @@ class WLGGZParameter
 	public:
 		~WLGGZParameter()
 		{
-			if(pdata)
+			if (pdata)
 				delete static_cast<char *>(pdata);
 		}
 		WLGGZParameter():
@@ -61,42 +61,42 @@ class WLGGZParameter
 			m_type(ggzdatatype_boolean), m_i(d), m_str(std::string("")) {}
 		//WLGGZParameter(char d)
 
-		WLGGZDataType get_type() { return m_type; }
+		WLGGZDataType get_type() {return m_type;}
 
-		bool get_bool()          {return m_i; }
-		int get_integer()        {return m_i; }
+		bool get_bool()          {return m_i;}
+		int get_integer()        {return m_i;}
 		//char get_char();
-		std::string get_string() {return m_str; }
-		int get_list_type()      { return m_list_type; }
-		std::list<WLGGZParameter> get_list() { return m_list; }
+		std::string get_string() {return m_str;}
+		int get_list_type()      {return m_list_type;}
+		std::list<WLGGZParameter> get_list() {return m_list;}
 
 		void set(bool d)
-			{ m_type=ggzdatatype_boolean; m_i=d; }
+			{m_type = ggzdatatype_boolean; m_i = d;}
 		void set_bool(bool d)
-			{ m_type=ggzdatatype_boolean; m_i=d; }
+			{m_type = ggzdatatype_boolean; m_i = d;}
 		void set(int d)
-			{ m_type=ggzdatatype_integer; m_i=d; }
+			{m_type = ggzdatatype_integer; m_i = d;}
 		void set_int(int d)
-			{ m_type=ggzdatatype_integer; m_i=d; }
+			{m_type = ggzdatatype_integer; m_i = d;}
 		void set(std::string d)
-			{ m_type=ggzdatatype_string; m_str=d; }
+			{m_type = ggzdatatype_string; m_str = d;}
 		void set(int i, std::list<WLGGZParameter> list)
-			{ m_list = list; m_list_type = i; m_type = ggzdatatype_list; }
-		void set_raw(int size, void * p) { m_type=ggzdatatype_raw; pdata = p; }
+			{m_list = list; m_list_type = i; m_type = ggzdatatype_list;}
+		void set_raw(int size, void * p) {m_type = ggzdatatype_raw; pdata = p;}
 		//void set(char d);
 
-		bool is_string()  { return m_type==ggzdatatype_string; }
-		bool is_integer() { return m_type==ggzdatatype_integer; }
-		bool is_char()    { return m_type==ggzdatatype_char; }
-		bool is_bool()    { return m_type==ggzdatatype_boolean; }
-		bool is_list()    { return m_type==ggzdatatype_list; }
+		bool is_string()  {return m_type == ggzdatatype_string;}
+		bool is_integer() {return m_type == ggzdatatype_integer;}
+		bool is_char()    {return m_type == ggzdatatype_char;}
+		bool is_bool()    {return m_type == ggzdatatype_boolean;}
+		bool is_list()    {return m_type == ggzdatatype_list;}
 
 		bool is_valid()
-			{ return m_type == ggzdatatype_string or
-				m_type == ggzdatatype_integer or
-				m_type == ggzdatatype_char or
-				m_type == ggzdatatype_boolean; }
-		bool is_null() { return m_type==0; }
+			{return m_type == ggzdatatype_string or
+			 m_type == ggzdatatype_integer or
+			 m_type == ggzdatatype_char or
+			 m_type == ggzdatatype_boolean;}
+		bool is_null() {return m_type == 0;}
 	private:
 		WLGGZDataType m_type;
 		int m_i;
@@ -152,13 +152,11 @@ class WLGGZ_writer {
 		void flush()
 		{
 			// call close_list() until it returns false
-			while(close_list());
+			while (close_list());
 			if (m_in_cmd) {
 
 				DBG(level = level.substr(0, level.length() - 2);)
-				DBG(
-					std::cout <<
-						"parameter_list_writer: " << level << "- flush write zero\n";)
+				DBG(std::cout << "parameter_list_writer: " << level << "- flush write zero\n";)
 
 				ggz_write_int(m_fd, 0);
 			}
@@ -185,8 +183,9 @@ class WLGGZ_writer {
 				ggz_write_int(m_fd, 0);
 			m_in_cmd = true;
 
-			DBG(std::cout << "parameter_list_writer: " << level <<
-				"- write parameterlist type code: " << t << std::endl;)
+			DBG
+				(std::cout << "parameter_list_writer: " << level <<
+				 "- write parameterlist type code: " << t << std::endl;)
 			DBG(level += "  ";)
 
 			ggz_write_int(m_fd, t);
@@ -201,50 +200,53 @@ class WLGGZ_writer {
 		 * @param d The data to write to the parameter list
 		 * @see type()
 		 */
-		WLGGZ_writer& operator<< (int d)
-		{
-			if (not m_in_cmd) {
-				DBG(std::cout << "parameter_list_writer: " << level <<
-					"- warning: not in cmd\n";)
-				return *this;
-			}
-			if (m_sub) {
-				*m_sub << d;
-				return *this;
-			}
-
-			DBG(std::cout << "parameter_list_writer: " << level << "- write datatype integer\n";)
-			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(int): " << d << std::endl;)
-
-			ggz_write_int(m_fd, ggzdatatype_integer);
-			ggz_write_int(m_fd, d);
-			return *this;
-		}
-
-		/**
-		* Write a std::string to the parameter list.
-		* type() must be calle before this.
-		*
-		* @param d The data to write to the parameter list
-		* @see type()
-		*/
-		WLGGZ_writer& operator<< (const std::string &d)
+		WLGGZ_writer & operator<< (int d)
 		{
 			if (not m_in_cmd) {
 				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
 				return *this;
 			}
 			if (m_sub) {
-				*m_sub << d;
+				* m_sub << d;
+				return *this;
+			}
+
+			DBG(std::cout << "parameter_list_writer: " << level << "- write datatype integer\n";)
+			DBG
+				(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(int): "
+				 << d << std::endl;)
+
+			ggz_write_int(m_fd, ggzdatatype_integer);
+			ggz_write_int(m_fd, d);
+			return * this;
+		}
+
+		/**
+		 * Write a std::string to the parameter list.
+		 * type() must be calle before this.
+		 *
+		 * @param d The data to write to the parameter list
+		 * @see type()
+		 */
+		WLGGZ_writer & operator<< (const std::string & d)
+		{
+			if (not m_in_cmd) {
+				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
+				return *this;
+			}
+			if (m_sub) {
+				* m_sub << d;
 				return *this;
 			}
 
 			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist datatype string\n";)
-			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(string): " << d << std::endl;;)
+			DBG
+				(std::cout << "parameter_list_writer: " << level << "- write parameterlist value(string): "
+				 << d << std::endl;;)
 
 			ggz_write_int(m_fd, ggzdatatype_string);
 			ggz_write_string(m_fd, d.c_str());
-			return *this;
+			return * this;
 		}
 
 		/**
@@ -254,14 +256,14 @@ class WLGGZ_writer {
 		* @param d The data to write to the parameter list
 		* @see type()
 		*/
-		WLGGZ_writer& operator<< (char d)
+		WLGGZ_writer & operator<< (char d)
 		{
 			if (not m_in_cmd) {
 				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
 				return *this;
 			}
 			if (m_sub) {
-				*m_sub << d;
+				* m_sub << d;
 				return *this;
 			}
 
@@ -270,7 +272,7 @@ class WLGGZ_writer {
 
 			ggz_write_int(m_fd, ggzdatatype_char);
 			ggz_write_char(m_fd, d);
-			return *this;
+			return * this;
 		}
 
 		/**
@@ -280,15 +282,15 @@ class WLGGZ_writer {
 		* @param d The data to write to the parameter list
 		* @see type()
 		*/
-		WLGGZ_writer& operator<< (bool d)
+		WLGGZ_writer & operator<< (bool d)
 		{
 			if (not m_in_cmd) {
 				DBG(std::cout << "parameter_list_writer: " << level << "- warning: not in cmd\n";)
 				return *this;
 			}
 			if (m_sub) {
-				*m_sub << d;
-				return *this;
+				* m_sub << d;
+				return * this;
 			}
 
 			DBG(std::cout << "parameter_list_writer: " << level << "- write parameterlist datatype boolean\n";)
@@ -296,7 +298,7 @@ class WLGGZ_writer {
 
 			ggz_write_int(m_fd, ggzdatatype_boolean);
 			ggz_write_int(m_fd, d);
-			return *this;
+			return * this;
 		}
 
 		void write_raw_data(int size, void * data) {
@@ -318,11 +320,10 @@ class WLGGZ_writer {
 			ggz_writen(m_fd, data, size);
 		}
 
-		void open_list(int list_type){
+		void open_list(int list_type) {
 			if (not m_sub) {
 
-				DBG(std::cout << "parameter_list_writer: " << level <<
-					"- open a list - write datatype list\n";)
+				DBG(std::cout << "parameter_list_writer: " << level << "- open a list - write datatype list\n";)
 				DBG(level += "    ";)
 
 				ggz_write_int(m_fd, ggzdatatype_list);

@@ -81,26 +81,24 @@ class WidelandsPlayer
 			m_team(0)
 			{}
 
-		std::string tribe() { return m_tribe; }
+		std::string tribe() {return m_tribe;}
 
-		unsigned int team() { return m_team; }
+		unsigned int team() {return m_team;}
 
-		void set_tribe(std::string tribe) { m_tribe=tribe; }
+		void set_tribe(std::string tribe) {m_tribe = tribe;}
 
-		void set_team(unsigned int t)
-			{ m_team = t; }
+		void set_team(unsigned int t)     {m_team = t;}
 
-		void set_name(std::string name)
-			{ m_name = name; }
+		void set_name(std::string name)   {m_name = name;}
 
-		std::string name() { return m_name; }
-		int wlid() { return m_wlid; }
+		std::string name() {return m_name;}
+		int wlid()         {return m_wlid;}
 
 		WidelandsPlayerStats last_stats;
 		WidelandsPlayerStatVecs stats;
 
-		void set_end_time(int d) { m_end_time = d; }
-		int end_time() { return m_end_time; }
+		void set_end_time(int d) {m_end_time = d;}
+		int end_time() {return m_end_time;}
 
 		uint32_t result;
 		uint32_t points;

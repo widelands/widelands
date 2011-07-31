@@ -74,9 +74,9 @@ void ProtocolHandler::process_data(Client * const client)
 		while (zc < 100 and it > 0)
 		{
 			char c;
-			if ( read(client->fd, &c, 1) < 1) {
+			if (read(client->fd, &c, 1) < 1) {
 				wlclient.connection_failed = true;
-				if (client->fd >=0)
+				if (client->fd >= 0)
 					close(client->fd);
 			}
 			if (c == 0)
@@ -97,9 +97,9 @@ void ProtocolHandler::process_data(Client * const client)
 			return;
 		}
 		char c;
-		if ( read(client->fd, &c, 1) < 1) {
+		if (read(client->fd, &c, 1) < 1) {
 			wlclient.connection_failed = true;
-			if (client->fd >=0)
+			if (client->fd >= 0)
 			close(client->fd);
 			return;
 		}
@@ -127,7 +127,7 @@ void ProtocolHandler::process_data(Client * const client)
 			 client->name.c_str());
 		if (&wlclient)
 			wlclient.connection_failed = true;
-		if (client->fd >=0)
+		if (client->fd >= 0)
 			close(client->fd);
 		return;
 	}
@@ -185,7 +185,7 @@ void ProtocolHandler::process_data(Client * const client)
 			 client->name.c_str(), client->number);
 		wlclient.connection_failed = true;
 		// TODO: kick player from table?
-		if (client->fd >=0)
+		if (client->fd >= 0)
 			close(client->fd);
 		return;
 	}
@@ -216,7 +216,7 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 		wllog(DL_ERROR, "error whil reading parameters: %s", e.what());
 	}
 
-	switch(opcode) {
+	switch (opcode) {
 		case op_game_statistics:
 			wllog(DL_DEBUG, "GAME: read stats!");
 			if (wlclient.reported_game()) {
@@ -239,8 +239,8 @@ void ProtocolHandler::process_post_b16_data(int opcode, Client * const client)
 			// game is set to playing before sending game info. This is necessary
 			// as game is open as long as state is waiting.
 			//if (not g_wls->is_playing()) {
-			//	wllog(DL_ERROR, "got game info but not in waiting state");
-			//	return;
+				//wllog(DL_ERROR, "got game info but not in waiting state");
+				//return;
 			//}
 			try {
 				g_wls->stat_handler().report_gameinfo(client, parlist);

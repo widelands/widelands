@@ -46,18 +46,18 @@ public:
 		m_playertype(playertype_null)
 	{}
 
-	int ggz_number() const { return m_ggz_number; }
-	int wl_player_number() const { return m_wl_number; }
-	std::string name() const { return m_name; }
-	bool reported_game() const {return m_reported; }
+	int ggz_number() const {return m_ggz_number;}
+	int wl_player_number() const {return m_wl_number;}
+	std::string name() const {return m_name;}
+	bool reported_game() const {return m_reported;}
 	bool support_build16_proto() const {
 		/*wllog
-                        (DL_DUMP, "get support post build 16 for \"%s\": %b (%i)",
-                         name().c_str(), m_proto_maj > 0, m_proto_maj);*/
-			 return m_proto_maj > 0;
-		}
-	std::string version() const { return m_version; }
-	std::string build() const { return m_build; }
+			(DL_DUMP, "get support post build 16 for \"%s\": %b (%i)",
+			 name().c_str(), m_proto_maj > 0, m_proto_maj);*/
+		return m_proto_maj > 0;
+	}
+	std::string version() const {return m_version;}
+	std::string build() const {return m_build;}
 
 	void set_ggz_number(int num) {
 		wllog
@@ -73,7 +73,7 @@ public:
 		m_wl_number = num;
 	}
 
-	void set_reported() {m_reported = true; }
+	void set_reported() {m_reported = true;}
 	void set_proto(int maj, int min) {
 		wllog
 			(DL_DUMP, "Set proto version for \"%s\": %i, %i",

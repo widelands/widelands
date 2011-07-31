@@ -50,12 +50,12 @@ std::list<WLGGZParameter> wlggz_read_parameter_list(int fd, bool re = false)
 	std::list<WLGGZParameter> list;
 	int datatype;
 
-	if( ggz_read_int(fd, &datatype) < 0 ){
+	if (ggz_read_int(fd, & datatype) < 0) {
 		call_level--;
 		throw WLGGZEXCEPTION;
 	}
 
-	while(datatype)
+	while (datatype)
 	{
 		WLGGZParameter data;
 		int d_i;
@@ -67,7 +67,7 @@ std::list<WLGGZParameter> wlggz_read_parameter_list(int fd, bool re = false)
 			throw WLGGZEXCEPTION;
 		}
 
-		switch(datatype)
+		switch (datatype)
 		{
 			case ggzdatatype_integer:
 				if (ggz_read_int(fd, &d_i) < 0) {

@@ -1,6 +1,6 @@
 // Widelands server for GGZ
 // Copyright (C) 2004 Josef Spillner <josef@ggzgamingzone.org>
-// Copyright (C) 2009 The Widelands Development Team
+// Copyright (C) 2009, 2011 The Widelands Development Team
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 WidelandsServer * g_wls;
 
 // Main function: parse arguments and start server
-int main(int argc, char** argv)
+int main(int argc, char ** argv)
 {
 	int option;
 	struct option opt [] =
@@ -43,8 +43,8 @@ int main(int argc, char** argv)
 	};
 	int optindex;
 
-	while((option = getopt_long(argc, argv, "hvg", opt, &optindex)) != EOF)
-		switch(option)
+	while ((option = getopt_long(argc, argv, "hvg", opt, &optindex)) != EOF)
+		switch (option)
 		{
 			case 'h':
 				std::cout << "The GGZ Gaming Zone Widelands Server" << std::endl
