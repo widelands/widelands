@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2004-2010 by the Widelands Development Team
+* Copyright (C) 2004-2011 by the Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ bool ggz_ggzcore::init
 	log("GGZCORE ## init()\n");
 
 	// do not init if already done
-	if (m_state != ggzcorestate_disconnected or ggzserver){
+	if (m_state != ggzcorestate_disconnected or ggzserver) {
 		log("GGZCORE ## WARNING: already connected\n");
 		return false;
 	}
@@ -138,7 +138,7 @@ bool ggz_ggzcore::init
 
 	ggzcore_server_add_event_hook
 		(ggzserver, GGZ_MOTD_LOADED, &ggz_ggzcore::callback_server);
-	
+
 	ggzcore_server_add_event_hook
 		(ggzserver, GGZ_LOGOUT, &ggz_ggzcore::callback_server);
 
@@ -203,9 +203,8 @@ void ggz_ggzcore::process()
 
 	if (m_gamefd != -1)
 		ggzcore_game_read_data(ggzcore_server_get_cur_game(ggzserver));
-	
-	if(m_tablestate == ggzcoretablestate_launching)
-	{
+
+	if (m_tablestate == ggzcoretablestate_launching) {
 		if (!m_room)
 			m_room = ggzcore_server_get_cur_room(ggzserver);
 		if (m_tableid == -1) {
@@ -261,7 +260,7 @@ void ggz_ggzcore::process()
 /// join the table but launches a new game (ggzmod object). After the game
 /// event GGZ_GAME_PLAYING the next run of process() will join the table
 /// m_tableid
-void ggz_ggzcore::join(const char* tablename)
+void ggz_ggzcore::join(const char * tablename)
 {
 	log("GGZCORE ## join()\n");
 
@@ -269,11 +268,11 @@ void ggz_ggzcore::join(const char* tablename)
 		log("GGZCORE ## not ready!\n");
 		return;
 	}
-	
+
 	if (!m_room)
 		m_room = ggzcore_server_get_cur_room(ggzserver);
 	ggzcore_room_get_gametype(m_room);
-	
+
 	m_tableid = -1;
 	int32_t const num = ggzcore_room_get_num_tables(m_room);
 	for (int32_t i = 0; i < num; ++i) {
@@ -288,7 +287,7 @@ void ggz_ggzcore::join(const char* tablename)
 				if (!strcmp(desc, tablename))
 					m_tableid = ggzcore_table_get_id(table);
 	}
-	
+
 	if (m_tableid == -1) {
 		deinit();
 		throw wexception
@@ -450,8 +449,8 @@ void ggz_ggzcore::event_server(uint32_t const id, void const * const cbdata)
 #endif
 		ggzcore_room_list_players(m_room);
 
-		
-		
+
+
 		// now send some text about the room to the chat menu
 		if (!relogin) {
 			NetGGZ::ref().formatedGGZChat(_("Connected to the metaserver of:"), "", true);
@@ -567,8 +566,7 @@ void ggz_ggzcore::event_server(uint32_t const id, void const * const cbdata)
 	case GGZ_STATE_CHANGE:
 		// The state of ggzcore changed
 		// cbdata is NULL
-		log("GGZCORE/event_server ## -- state changed to: %d\n",
-			 ggzcore_server_get_state(ggzserver));
+		log("GGZCORE/event_server ## -- state changed to: %d\n", ggzcore_server_get_state(ggzserver));
 		break;
 	case GGZ_LOGOUT:
 		// cbdata is NULL
@@ -710,20 +708,20 @@ void ggz_ggzcore::deinit()
 		ggzcore_server_free(ggzserver);
 		ggzcore_destroy();
 	}
-	ggzserver    = 0;
-	m_logged_in  = false;
-	ggzcore_login= false;
-	ggzcore_ready= false;
-	m_logged_in  = false;
-	relogin      = false;
-	m_tableid    = 0;
-	m_channelfd  = -1;
-	m_gamefd     = -1;
-	m_server_fd  = -1;
-	m_room       = NULL;
-	m_tablestate = ggzcoretablestate_notinroom;
-	m_state      = ggzcorestate_disconnected;
-	m_tableseats = 1;
+	ggzserver     = 0;
+	m_logged_in   = false;
+	ggzcore_login = false;
+	ggzcore_ready = false;
+	m_logged_in   = false;
+	relogin       = false;
+	m_tableid     = 0;
+	m_channelfd   = -1;
+	m_gamefd      = -1;
+	m_server_fd   = -1;
+	m_room        = NULL;
+	m_tablestate  = ggzcoretablestate_notinroom;
+	m_state       = ggzcorestate_disconnected;
+	m_tableseats  = 1;
 }
 
 /// writes the list of tables after an table update arrived
@@ -823,7 +821,7 @@ void ggz_ggzcore::write_userlist()
 	userupdate = true;
 }
 
-void ggz_ggzcore::send_message(const char* to, const char* msg)
+void ggz_ggzcore::send_message(const char * to, const char * msg)
 {
 	int sent;
 	assert(m_room);

@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2004-2010 by the Widelands Development Team
+* Copyright (C) 2004-2011 by the Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -71,7 +71,7 @@ bool ggz_ggzmod::connect()
 	if (m_connected)
 		return false;
 	m_error_exit = false;
-	
+
 	log("GGZMOD ## connect to GGZCORE\n");
 	if (m_mod) {
 		ggzmod_free(m_mod);

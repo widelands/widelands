@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2010 by the Widelands Development Team
+* Copyright (C) 2010-2011 by the Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -69,7 +69,7 @@ void ggz_wlmodule::process()
 			#warning TODO Handle read error from ggzmod datafd
 			log("GGZWLMODULE/process ## read error. Exit ggz\n");
 			NetGGZ::ref().deinit();
-			//	use_ggz = false;
+			//use_ggz = false;
 			return;
 		}
 		log("GGZWLMODULE/process ## received opcode: %i (%i)\n", op, ret);
@@ -137,18 +137,16 @@ void ggz_wlmodule::process()
 		break;
 	default:
 		if (m_server_ver > 0)
-			switch(op) {
-			case op_debug_string:
-			{
-				std::list<WLGGZParameter> parlist =
+			switch (op) {
+				case op_debug_string: {
+					std::list<WLGGZParameter> parlist = wlggz_read_parameter_list(m_data_fd);
+					if (parlist.size())
+						log("GGZ server ## %s\n", parlist.front().get_string().c_str());
+				}
+					break;
+				default:
+					log("GGZWLMODULE ## opcode unknown - extended protocol\n");
 					wlggz_read_parameter_list(m_data_fd);
-				if(parlist.size())
-					log("GGZ server ## %s\n", parlist.front().get_string().c_str());
-			}
-				break;
-			default:
-				log("GGZWLMODULE ## opcode unknown - extended protocol\n");
-				wlggz_read_parameter_list(m_data_fd);
 			}
 		else
 			log("GGZWLMODULE ## opcode unknown! - old protocol path\n");
@@ -249,7 +247,7 @@ void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 
 	for (; c < stat.size(); c++)
 	{
-		if(cur == 0) {
+		if (cur == 0) {
 			min = max = stat.at(c);
 			avg = 0; //static_cast<double>(stat.at(c));
 		}
@@ -259,10 +257,9 @@ void ggz_wlmodule::send_stat(WLGGZ_writer & wr, std::vector<uint32_t> stat)
 		if (stat.at(c) < min)
 			min = stat.at(c);
 
-		avg +=
-			static_cast<double>(stat.at(c)) / static_cast<double>(sample_count);
+		avg += static_cast<double>(stat.at(c)) / static_cast<double>(sample_count);
 
-		if (++cur >= sample_count or c == (stat.size() -1 ))
+		if (++cur >= sample_count or c == (stat.size() - 1))
 		{
 			assert(cur > 0);
 			if (cur < sample_count)

@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2004-2010 by the Widelands Development Team
+* Copyright (C) 2004-2011 by the Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -66,7 +66,7 @@ public:
 	 */
 	bool connect();
 
-	/** 
+	/**
 	 * Deinitialize the ggzcore object. This disconnects from the metaserver.
 	 */
 	void deinit();
@@ -76,7 +76,7 @@ public:
 	 * Join an existing table (game)
 	 */
 	void join(char const * tablename);
-	
+
 	/**
 	 * Create a new table (game)
 	 */
@@ -117,7 +117,7 @@ public:
 		ggzcoreerror_unreachable,
 		ggzcoreerror_unknown
 	};
-	
+
 	enum ggzcore_state {
 		ggzcorestate_disconnected,
 		ggzcorestate_connecting,
@@ -184,7 +184,7 @@ private:
 	int32_t m_server_fd;
 
 	GGZRoom * m_room;
-	
+
 	std::string m_servername;
 	uint32_t m_tableseats;
 

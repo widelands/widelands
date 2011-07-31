@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2004-2010 by the Widelands Development Team
+* Copyright (C) 2004-2011 by the Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
  * Does the ggzmod part of ggz. Ggzmod is the part of ggz client which
  * implements the actual game part of ggz.
  * @note ggzmod comunicates with the ggzcore object through a socket. This
- *   may cause deadlocks. For example 
+ *   may cause deadlocks. For example
  */
 class ggz_ggzmod
 {
@@ -56,7 +56,7 @@ public:
 	void set_player();
 
 	/**
-	 * Returns the ggz nick name of the player. 
+	 * Returns the ggz nick name of the player.
 	 */
 	std::string playername();
 
