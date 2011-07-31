@@ -198,6 +198,7 @@ void WidelandsServer::joinEvent(Client * const client)
 			wllog(DL_ERROR, "GAME: unreachable -> done!");
 			ggz_write_int(client->fd, op_unreachable);
 			set_state_done();
+			return;
 		}
 
 		m_wlserver_ip = ggz_strdup(ip);
@@ -205,14 +206,17 @@ void WidelandsServer::joinEvent(Client * const client)
 
 		{
 			// test for connectablity ???
+			/*
 			// This code only tests if the string m_wlserver_ip is usable.
 			addrinfo * ai = 0;
 			if (getaddrinfo(m_wlserver_ip, "7396", 0, &ai)) {
 				wllog(DL_ERROR, "GAME: unreachable -> done!");
 				ggz_write_int(client->fd, op_unreachable);
 				changeState(GGZGameServer::done);
+				return;
 			}
 			freeaddrinfo(ai);
+			*/
 		}
 
 		wllog(DL_INFO, "GAME: reachable -> waiting!");

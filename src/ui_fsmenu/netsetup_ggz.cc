@@ -174,7 +174,7 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 	Fullscreen_Menu_Base::think ();
 
 	// If we have no connection try to connect
-	if 
+	if
 		(not NetGGZ::ref().logged_in() and not NetGGZ::ref().is_connecting()
 		 and not tried_login) {
 		// Wait two seconds after the user changed the name to avoid reconnecting
