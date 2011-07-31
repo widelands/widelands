@@ -41,22 +41,22 @@ StatisticsHandler::~StatisticsHandler()
 
 bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterList & p)
 {
-	int gameinfo, playernum=-1;
-	std::string playername="";
+	int gameinfo, playernum = -1;
+	std::string playername = "";
 	WidelandsPlayer * player = NULL;
 	WidelandsClient & wlclient = *g_wls->get_client_by_name(client->name);
 	assert(&wlclient);
 
 	wllog(DL_DEBUG, "StatisticsHandler::report_gameinfo");
 
-	while(not p.empty())
+	while (not p.empty())
 	{
 		CHECKTYPE(p, list)
 
 		int type = p.front().get_list_type();
 		WLGGZParameterList l = p.front().get_list();
 		p.pop_front();
-		switch(type)
+		switch (type)
 		{
 			case gameinfo_playerid:
 				wllog(DL_DUMPDATA, "gameinfo_playerid");
@@ -130,7 +130,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 				wllog(DL_DUMPDATA, "gameinfo_mapname");
 				wllog(DL_DUMPDATA, "list.size(): %i", l.size());
 				CHECKTYPE(l, string)
-				if(m_map.name().empty())
+				if (m_map.name().empty())
 				{
 					std::string mapname = l.front().get_string();
 					m_map.set_name(mapname);
@@ -150,7 +150,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 			}
 			case gameinfo_playertype:
 				CHECKTYPE(l, integer)
-				if(&wlclient)
+				if (&wlclient)
 					wlclient.set_type
 						(static_cast<WLGGZPlayerType>(l.front().get_integer()));
 				break;
@@ -176,7 +176,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 			}
 			case gameinfo_teamnumber:
 				CHECKTYPE(l, integer)
-				if(player)
+				if (player)
 					player->set_team(l.front().get_integer());
 				break;
 			default:
@@ -186,7 +186,7 @@ bool StatisticsHandler::report_gameinfo(Client const * client, WLGGZParameterLis
 
 	wllog(DL_INFO, "GAMEINFO: number of players %i", m_players.size());
 
-	for (int i=0; i < highest_playernum(); i++)
+	for (int i = 0; i < highest_playernum(); i++)
 	{
 		WidelandsPlayer * plr = get_player(i);
 		if (plr)
@@ -204,22 +204,22 @@ bool StatisticsHandler::report_game_result
 	(Client const * client, WLGGZParameterList & p)
 {
 	WLGGZGameStats gameinfo;
-	int playernum=-1;
-	std::string playername="";
+	int playernum = -1;
+	std::string playername = "";
 	WidelandsPlayer * player = NULL;
 	WidelandsClient & wlclient = *g_wls->get_client_by_name(client->name);
 	std::vector<WidelandsStatSample> *statvec = NULL;
 
 	wllog(DL_DEBUG, "StatisticsHandler::report_game_result");
 
-	while(p.size())
+	while (p.size())
 	{
 		CHECKTYPE(p, list);
 		gameinfo = static_cast<WLGGZGameStats>(p.front().get_list_type());
 		WLGGZParameterList l = p.front().get_list();
 		p.pop_front();
 		//wllog(DL_DEBUG, "gameinfo: %i, l.size: %i", gameinfo, l.size());
-		switch(gameinfo)
+		switch (gameinfo)
 		{
 			case gamestat_playernumber:
 			{
@@ -227,7 +227,7 @@ bool StatisticsHandler::report_game_result
 				playernum = l.front().get_integer();
 				wllog(DL_DUMP, "got playernumber %i", playernum);
 				player = get_player(playernum);
-					if(not player)
+					if (not player)
 						wllog
 							(DL_ERROR, "GAMESTATISTICS: ERROR: "
 							 "got playernumber but could no find the player %i",
@@ -239,8 +239,8 @@ bool StatisticsHandler::report_game_result
 				wllog
 					(DL_DUMP, "got player result for %i: %i", playernum,
 					 l.front().get_integer());
-				if(player)
-					player->result=l.front().get_integer();
+				if (player)
+					player->result = l.front().get_integer();
 				else
 					wllog
 						(DL_ERROR, "GAMESTATISTICS: got result but have no player");
@@ -250,8 +250,8 @@ bool StatisticsHandler::report_game_result
 				wllog
 					(DL_DUMP, "got player points for %i: %i", playernum,
 					 l.front().get_integer());
-				if(player)
-					player->points=l.front().get_integer();
+				if (player)
+					player->points = l.front().get_integer();
 				else
 					wllog
 						(DL_ERROR, "GAMESTATISTICS: got points but have no player");
@@ -359,7 +359,7 @@ bool StatisticsHandler::report_game_result
 					wllog
 						(DL_DEBUG, "gametime for player %s(%i)",
 						 player->name().c_str(), player->wlid());
-						if(player->end_time() == 0)
+						if (player->end_time() == 0)
 							player->set_end_time(l.front().get_integer());
 						else
 							if (l.front().get_integer() != player->end_time())
@@ -399,8 +399,8 @@ bool StatisticsHandler::report_game_result
 }
 
 uint32_t StatisticsHandler::read_stat_vector
-	(WidelandsPlayer& plr, WLGGZGameStats type, WLGGZParameterList& p,
-	 std::vector<WidelandsStatSample> *statvec)
+	(WidelandsPlayer & plr, WLGGZGameStats type, WLGGZParameterList & p,
+	 std::vector<WidelandsStatSample> * statvec)
 {
 	CHECKTYPE(p, integer)
 	int last = p.front().get_integer();
@@ -416,7 +416,7 @@ uint32_t StatisticsHandler::read_stat_vector
 			wllog(DL_WARN, "statistic vector longer than 1024 samples");
 
 		int i = 0, lastsample = 0;
-		while(p.size() and i++ < 1024) {
+		while (p.size() and i++ < 1024) {
 			CHECKTYPE(p, list)
 			WLGGZParameterList l = p.front().get_list();
 			int sample = p.front().get_list_type();
@@ -445,7 +445,7 @@ uint32_t StatisticsHandler::read_stat_vector
 
 			if (statvec) {
 				if (count > statvec->size()) {
-					statvec->resize((count>1024)?1024:count);
+					statvec->resize((count > 1024) ? 1024 : count);
 				}
 				statvec->at(sample).min = min;
 				statvec->at(sample).max = max;
@@ -454,7 +454,7 @@ uint32_t StatisticsHandler::read_stat_vector
 		}
 		wllog(DL_DUMP, "read %i/%i statistic samples for %i", i, count, type);
 		return last;
-	} catch(_parameterError e) {
+	} catch (_parameterError e) {
 		wllog
 			(DL_ERROR,
 			 "Catched parameter error while "
@@ -485,8 +485,8 @@ void StatisticsHandler::evaluate()
 	if (not have_stats())
 		return;
 
-	std::map<int,WidelandsPlayer*>::iterator it = m_players.begin();
-	while(it != m_players.end())
+	std::map<int, WidelandsPlayer *>::iterator it = m_players.begin();
+	while (it != m_players.end())
 	{
 		WidelandsPlayer & player = *it->second;
 
@@ -573,8 +573,8 @@ void StatisticsHandler::evaluate()
 		for (int i = 23; i <= (m_result_gametime / (1000 * 60 * 5)); i++) {
 			bool change = false;
 			int pc = 0;
-			std::map<int, WidelandsPlayer*>::iterator it = m_players.begin();
-			while(it != m_players.end()) {
+			std::map<int, WidelandsPlayer *>::iterator it = m_players.begin();
+			while (it != m_players.end()) {
 				WidelandsPlayer & player = *it->second;
 				if (i < player.stats.casualties.size()) {
 					if (player.stats.casualties.at(i).max != last_val[pc]) {

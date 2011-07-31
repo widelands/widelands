@@ -50,12 +50,12 @@
 ProtocolHandler wlproto;
 StatisticsHandler wlstat;
 
-ProtocolHandler& WidelandsServer::proto_handler()
+ProtocolHandler & WidelandsServer::proto_handler()
 {
 	return wlproto;
 }
 
-StatisticsHandler& WidelandsServer::stat_handler()
+StatisticsHandler & WidelandsServer::stat_handler()
 {
 	return wlstat;
 }
@@ -81,7 +81,7 @@ WidelandsServer::~WidelandsServer()
 	wllog(DL_DUMP, "GameTime: %i", wlstat.game_end_time());
 
 	std::string wincond = "unknown (ERROR)";
-	switch(wlstat.map().gametype())
+	switch (wlstat.map().gametype())
 	{
 		case gametype_endless:
 			wincond = "endless";
@@ -103,8 +103,8 @@ WidelandsServer::~WidelandsServer()
 			break;
 	}
 	wllog(DL_DUMP, "Win Condition: %s", wincond.c_str());
-	std::map<std::string,WidelandsClient*>::iterator it = m_clients.begin();
-	while(it != m_clients.end())
+	std::map<std::string, WidelandsClient *>::iterator it = m_clients.begin();
+	while (it != m_clients.end())
 	{
 		wllog
 			(DL_DUMP, "Client (ggz: %i, wl: %i) %s",
@@ -118,7 +118,7 @@ WidelandsServer::~WidelandsServer()
 
 	wllog(DL_DUMP, "");
 
-	if(m_wlserver_ip)
+	if (m_wlserver_ip)
 		ggz_free(m_wlserver_ip);
 }
 
@@ -127,7 +127,7 @@ WidelandsServer::~WidelandsServer()
 void WidelandsServer::stateEvent()
 {
 	std::string statestr = "unkown state";
-	switch(state())
+	switch (state())
 	{
 		case created:
 			statestr = "created";
@@ -185,7 +185,7 @@ void WidelandsServer::joinEvent(Client * const client)
 					(&(reinterpret_cast<struct sockaddr_in6 *>(&addr))->sin6_addr),
 					 ip,
 					 INET6_ADDRSTRLEN);
-		} else if(addr.sa_family == AF_INET) {
+		} else if (addr.sa_family == AF_INET) {
 			ip = static_cast<char *>(ggz_malloc(INET_ADDRSTRLEN));
 			inet_ntop
 				(AF_INET,
@@ -230,7 +230,7 @@ void WidelandsServer::joinEvent(Client * const client)
 
 void WidelandsServer::dump_clients()
 {
-	std::map<std::string,WidelandsClient *>::iterator it =
+	std::map<std::string, WidelandsClient *>::iterator it =
 		m_clients.begin();
 	while (it != m_clients.end()) {
 		WidelandsClient & c = *it->second;
@@ -248,7 +248,7 @@ void WidelandsServer::dump_clients()
 }
 
 
-void WidelandsServer::dataEvent(Client* client)
+void WidelandsServer::dataEvent(Client * client)
 {
 	if (not client) {
 		wllog(DL_INFO, "dataEvent without client ?!?\n");
@@ -344,7 +344,7 @@ void WidelandsServer::set_state_done()
 	changeState(GGZGameServer::done);
 }
 
-void WidelandsServer::seatEvent(Seat* seat)
+void WidelandsServer::seatEvent(Seat * seat)
 {
 	if (not seat) {
 		wllog(DL_FATAL, "seatEvent but seat is NULL");
@@ -357,7 +357,7 @@ void WidelandsServer::seatEvent(Seat* seat)
 
 	wllog(DL_DEBUG, "seatEvent for %s(%d) fd=%i ", seat->client->name.c_str(), seat->number, seat->client->fd);
 
-/*	if (seat->client->name.length()) {
+	/*if (seat->client->name.length()) {
 		if (m_clients[seat->client->name])
 			delete m_clients[seat->client->name];
 		m_clients[seat->client->name] = new WidelandsClient(seat->client->name, seat->client->number);
@@ -374,7 +374,7 @@ void WidelandsServer::seatEvent(Seat* seat)
 	dump_clients();
 }
 
-void WidelandsServer::spectatorEvent(Spectator* spectator)
+void WidelandsServer::spectatorEvent(Spectator * spectator)
 {
 	if (not spectator) {
 		wllog(DL_FATAL, "spectatorEvent but spectator is NULL");
@@ -385,12 +385,16 @@ void WidelandsServer::spectatorEvent(Spectator* spectator)
 		return;
 	}
 
-	wllog(DL_DEBUG, "spectatorEvent for %s(%i) fd=%i ", spectator->client->name.c_str(), spectator->number, spectator->client->fd);
+	wllog
+		(DL_DEBUG, "spectatorEvent for %s(%i) fd=%i ", spectator->client->name.c_str(),
+		 spectator->number, spectator->client->fd);
 /*
 	if (spectator->client->name.length()) {
 		wllog(DL_DEBUG, "Player \"%s\" stand up", spectator->client->name.c_str());
-		if(m_clients[spectator->client->name])
-			wllog(DL_FATAL, "spectator SeatEvent dor \"%s\" by client still in client list", spectator->client->name.c_str());
+		if (m_clients[spectator->client->name])
+			wllog
+				(DL_FATAL, "spectator SeatEvent dor \"%s\" by client still in client list",
+				 spectator->client->name.c_str());
 	}
 	else
 		wllog(DL_DEBUG, "Unknown player stand up");
@@ -452,7 +456,7 @@ void WidelandsServer::game_done()
 		mfile << "Duration: " << (wlstat.game_end_time() / 1000) << std::endl;
 
 		std::string wincond = "unknown (ERROR)";
-		switch(wlstat.map().gametype())
+		switch (wlstat.map().gametype())
 		{
 			case gametype_endless:
 				wincond = "endless";
@@ -505,7 +509,7 @@ void WidelandsServer::game_done()
 			mfile << "Team: " << player.team() << std::endl;
 
 			mfile << "Result: ";
-			switch(player.result) {
+			switch (player.result) {
 				case gamestatresult_looser:
 					mfile << "lost";
 					break;
@@ -608,10 +612,9 @@ void WidelandsServer::game_done()
 	{
 		wllog(DL_INFO, "gametype defeat all");
 /*
-		std::map<std::string, WidelandsPlayer*>::iterator it =
-			g_wls->m_players.begin();
+		std::map<std::string, WidelandsPlayer*>::iterator it = g_wls->m_players.begin();
 		int number = 0;
-		while(it != g_wls->m_players.end())
+		while (it != g_wls->m_players.end())
 		{
 			wllog
 				(DL_DUMP, "Player (ggz: %i, wl: %i, \"%s\", %s) ",
@@ -659,7 +662,7 @@ void WidelandsServer::game_done()
 		std::map<std::string,WidelandsPlayer*>::iterator it =
 			g_wls->m_players.begin();
 		int number = 0;
-		while(it != g_wls->m_players.end())
+		while (it != g_wls->m_players.end())
 		{
 			wllog(DL_DUMP, "Player (ggz: %i, wl: %i, \"%s\", %s) ",
 				it->second->ggz_player_number(), it->second->wl_player_number(),
@@ -687,9 +690,9 @@ void WidelandsServer::game_done()
 			}
 			it++;
 		}
-		if(number < 2)
+		if (number < 2)
 			wllog(DL_WARN, "Less than two player in game. Do not report");
-		if(number > 1)
+		if (number > 1)
 			reportGame(NULL, results, score);
 		*/
 	}
@@ -709,8 +712,8 @@ void WidelandsServer::game_done()
 void WidelandsServer::check_reports()
 {
 	bool all_reported = true;
-	std::map<std::string,WidelandsClient*>::iterator it = m_clients.begin();
-	while(it != m_clients.end())
+	std::map<std::string, WidelandsClient *>::iterator it = m_clients.begin();
+	while (it != m_clients.end())
 		if (SUPPORT_B16_PROTOCOL(it->second) and not it->second->reported_game())
 			all_reported = false;
 	if (all_reported)
@@ -718,7 +721,7 @@ void WidelandsServer::check_reports()
 }
 
 
-WidelandsClient* WidelandsServer::get_client_by_name
+WidelandsClient * WidelandsServer::get_client_by_name
 	(std::string name, bool create)
 {
 	WidelandsClient * p = m_clients[name];
@@ -728,7 +731,7 @@ WidelandsClient* WidelandsServer::get_client_by_name
 		//p = new WidelandsClient(name);
 		//m_clients[name] = p;
 /*
-		for(int i=0; i < players(); i++)
+		for (int i=0; i < players(); i++)
 		{
 			Seat * s;
 			if ((s = seat(i)) and s->client and s->client->name == name)
@@ -744,7 +747,7 @@ WidelandsClient* WidelandsServer::get_client_by_name
 }
 
 /*
-WidelandsClient* WidelandsServer::get_client_by_wlid(int id)
+WidelandsClient * WidelandsServer::get_client_by_wlid(int id)
 {
 	if (id < 0)
 		return NULL;
@@ -753,7 +756,7 @@ WidelandsClient* WidelandsServer::get_client_by_wlid(int id)
 
 	std::map<std::string,WidelandsPlayer*>::iterator it = m_players.begin();
 
-	while(it != m_players.end())
+	while (it != m_players.end())
 	{
 	if (it->second->wl_player_number() == id)
 		player = it->second;
@@ -764,7 +767,7 @@ WidelandsClient* WidelandsServer::get_client_by_wlid(int id)
 
 }
 
-WidelandsPlayer* WidelandsServer::get_player_by_ggzid(int id)
+WidelandsPlayer * WidelandsServer::get_player_by_ggzid(int id)
 {
 	Seat * s = seat(id);
 	if (not s or not s->client)
@@ -777,18 +780,18 @@ WidelandsPlayer* WidelandsServer::get_player_by_ggzid(int id)
 */
 
 
-bool WidelandsServer::is_host(const WidelandsClient* client)
+bool WidelandsServer::is_host(const WidelandsClient * client)
 {
 	if (not client)
 		return false;
 	return client->name() == m_host_username;
 }
 
-bool WidelandsServer::is_host(const Client* client)
+bool WidelandsServer::is_host(const Client * client)
 {
-	 if (not client)
+	if (not client)
 		return false;
-	 return client->name == m_host_username;
+	return client->name == m_host_username;
 }
 
 #include <cstdarg>
