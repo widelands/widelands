@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4685\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-07-30 17:08+0000\n"
+"PO-Revision-Date: 2011-07-31 19:44+0000\n"
 "Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-31 04:30+0000\n"
+"X-Launchpad-Export-Date: 2011-08-01 04:35+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
@@ -509,15 +509,15 @@ msgstr "Jundlina svarar"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:467
 msgid "Jundlina summons Sidolus"
-msgstr ""
+msgstr "Jundlina kallar på Sidolus"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:285
 msgid "Jundlina writes down her memories"
-msgstr ""
+msgstr "Jundlina skriver ner sina ihågkomster"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:340
 msgid "Jundlina's Memoirs"
-msgstr ""
+msgstr "Jundlinas memoarer"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:261
 msgid ""
@@ -527,20 +527,29 @@ msgid ""
 "personal value was needed. So she offered him her most beloved:\n"
 "her husband, father of her only child."
 msgstr ""
+"Jundlina, den hädangångne konungens dotter och gudens högsta prästinna\n"
+"var den mest ihärdiga i prästerskapet. Eftersom alla offergåvor inte "
+"ändrade\n"
+"situationen, bestämde hon sig att för att blidka guden krävdes ett offer\n"
+"av stort personligt värde. Alltså offrade hon åt honom sin allra käraste:\n"
+"hennes make, fader till hennes enda barn."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:275
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started a quest to\n"
 "find a place sheltered by the fire and protected from the sea."
 msgstr ""
+"De lämnade ett döende Atlantis och sitt förflutna bakom sig, och gav\n"
+"sig av för att söka en plats som värmdes av elden och skyddades av\n"
+"havet."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Loftomor and Sidolus arrive"
-msgstr ""
+msgstr "Loftomor och Sidolus anländer"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor speaks"
-msgstr ""
+msgstr "Loftomor talar"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:591
 msgid ""
@@ -551,6 +560,13 @@ msgid ""
 "we\n"
 "escape?"
 msgstr ""
+"Satul hjälpe oss! Lutas försöker fortfarande få fatt i oss. En spejare "
+"upplyste\n"
+"mig om att havsytan stiger snabbt. Vi måste ta oss till högre mark, "
+"evakuera\n"
+"alla, och ta med oss allt vi kan av varorna i högkvarteret upp i bergen. Hur "
+"kan\n"
+"vi undkomma?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:307
 msgid ""
@@ -561,6 +577,10 @@ msgid ""
 "new\n"
 "home?"
 msgstr ""
+"Må Satul värme er båda. Loftomor, du har varit öns mest prisade arkitekt.\n"
+"Sidolus, du är en erfaren krigare och strateg. Jag har kallat dig förut för "
+"att\n"
+"ta del av dina råd: Vad måste göras för att göra det här till vårt nya hem?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:357
 msgid ""
