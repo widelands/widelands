@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4685\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-08-02 19:35+0000\n"
+"PO-Revision-Date: 2011-08-03 19:22+0000\n"
 "Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-03 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-08-04 04:30+0000\n"
 "X-Generator: Launchpad (build 13573)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:46
@@ -701,6 +701,21 @@ msgid ""
 "for young soldiers and the golden tabards for officers for you in exchange.\n"
 "You will need them for sure as soon as you want to recruit new soldiers."
 msgstr ""
+"Må Satul värma dig, Jundlina. Jag heter Opol och är högste vävare i gillet "
+"som\n"
+"övergav Atlantis och Lutas tillsammans med dig. Jag kommer med riktigt "
+"dåliga \n"
+"nyheter: Vi har inget mer spindeltyg. Inte en enda centimeter står att finna "
+"i våra\n"
+"lager. Skulle du kanske kunna hjälpa vävarnas gille geom att se om att bygga "
+"ett\n"
+"väveri och en spindelfarm? Spindlarna spinner det finaste silke, och vi "
+"kommer\n"
+"tillverka det finaste av spindeltyg med det. Vi kan också tillverka tabarder "
+"för\n"
+"unga soldater och gyllene tabarder för officerare åt dig i utbyte. Du "
+"kommer\n"
+"säkert behöva dem så snart du vill rekrytera nya soldater."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:600
 msgid ""
@@ -711,10 +726,15 @@ msgid ""
 "them\n"
 "a much longer distance and maybe escape from Lutas' influence."
 msgstr ""
+"Må Satul värma dig, Jundlina. Jag heter Ostur, och jag bygger skepp. Jag "
+"har\n"
+"uppfunnit en ny sorts skepp: mindre än de vi är vana vid, men mycket\n"
+"stadigare. Om vi bygger dem ordentligt, kan vi säkert ta oss mycket längre\n"
+"än förut, och kanske komma undan Lutas inflytande."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "New Objectives"
-msgstr ""
+msgstr "Nya direktiv"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:219
 msgid ""
@@ -726,18 +746,23 @@ msgid ""
 "wise clerics, who provided the link to Lutas - they prospered and became\n"
 "civilized."
 msgstr ""
+"På den dolda och bortglömda ön Atlantis bosatte sig en stolt stam redan\n"
+"då världen var ung. Under Kung Ajanthuls ätts styre - den första människa\n"
+"som havsguden Lutas förlänade med andningsförmåga ovan havsytan - och\n"
+"det visa prästerskapet, som gav dem band till Lutas - de frodades och blev\n"
+"civiliserade."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:570
 msgid "One more building"
-msgstr ""
+msgstr "En till byggnad"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Opol seeks out Jundlina"
-msgstr ""
+msgstr "Opol letar efter Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:616
 msgid "Ostur seems confident"
-msgstr ""
+msgstr "Ostur verkar förtroendefull"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:609
 msgid ""
