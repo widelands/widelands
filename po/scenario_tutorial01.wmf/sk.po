@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-07-10 00:41+0000\n"
+"PO-Revision-Date: 2011-08-05 00:21+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-11 04:30+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:30+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -316,7 +316,7 @@ msgstr "Obrana:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Diving in"
-msgstr ""
+msgstr "Úvod"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
@@ -644,7 +644,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:68
 msgid "Let's dive right in!"
-msgstr ""
+msgstr "Začnime hneď teraz!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:520
 msgid ""
@@ -681,7 +681,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:104
 msgid "Lumberjack's spot"
-msgstr ""
+msgstr "Miesto pre chatrč"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:460
 msgid "Message arrived!"
@@ -1019,6 +1019,9 @@ msgid ""
 "weaknesses,\n"
 "but the general gameplay is the same for all. We play the barbarians for now."
 msgstr ""
+"Vo Widelands existujú tri rôzne kmene: barbari, impérium a Atlantíďania.\n"
+"Každý kmeň má inú ekonomiku, silné a slabé stránky, ale základy hrania sú\n"
+"rovnaké pre každého. Teraz hráme za barbarov."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:207
 msgid ""
@@ -1116,14 +1119,18 @@ msgid ""
 "clicking on the build help button at the bottom of the screen which is the\n"
 "fourth one from the left. Or you can use the SPACE key to toggle it."
 msgstr ""
+"Pre jeho chatrč musíme nájsť vhodné miesto. Aby to bolo jednoduchšie,\n"
+"môžeme aktivovať pomoc pri stavaní. Možno to urobiť dvoma spôsobmi. Buď\n"
+"kliknutím na tlačidlo pomoci pri stavaní naspodku obrazovky, čo je\n"
+"štvrté zľava, alebo stlačením klávesu MEDZERNÍK."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:54
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Vitajte vo Widelands!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:52
 msgid "Welcome to the Widelands tutorial!"
-msgstr ""
+msgstr "Vitajte v tutoriáli hry Widelands!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:450
 msgid ""
@@ -1160,6 +1167,8 @@ msgid ""
 "construction,\n"
 "not destruction. This tutorial will get you through the basics of the game."
 msgstr ""
+"Widelands je pomaly plynúca stratégia s dôrazom na stavanie,\n"
+"nie ničenie. V tomto tutoriáli sa dozviete o základoch hry."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:256
 msgid ""
@@ -1190,7 +1199,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:59
 msgid "You can dismiss this box by left-clicking on the button below."
-msgstr ""
+msgstr "Toto okno môžete zavrieť kliknutím na tlačidlo nižšie."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:74
 msgid ""
@@ -1209,6 +1218,14 @@ msgid ""
 "for\n"
 "him to stay in."
 msgstr ""
+"Zvyčajne začínate hru s jednou základňou. To je tá budova s modrou\n"
+"vlajkou vpredu. Základňa je sklad, kde sa skladujú výrobky, žijú robotníci\n"
+"a vojaci. Niektoré výrobky sú potrebné na stavbu domov, iné na výrobu iných\n"
+"výrobkov. Samozrejme, výrobky v základni nevydržia na večnosť, takže musíte\n"
+"dbať na to, aby sa opäť vyrobili. Najdôležitejšie výrobky na začiatku hry "
+"sú\n"
+"základné stavebné výrobky: kmene stromov a kamene. Dbajme na to, aby nám\n"
+"nedošlo drevo. Na to potrebujeme drevorubača a chatrč, v ktorej bude bývať."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:535
 msgid "a bit of coal"
