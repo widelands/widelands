@@ -73,6 +73,7 @@ prefilled_buildings(p1,
 p2:forbid_buildings("all")
 p2:allow_buildings{
    "bakery",
+   "barrier",
    "farm",
    "fernery",
    "fishers_hut",
