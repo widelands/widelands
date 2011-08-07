@@ -458,7 +458,7 @@ uint32_t StatisticsHandler::read_stat_vector
 		wllog
 			(DL_ERROR,
 			 "Catched parameter error while "
-			 "reading statisitcs vector: %s", e.what());
+			 "reading statistics vector: %s", e.what());
 		return 0;
 	} catch (std::exception e) {
 		wllog

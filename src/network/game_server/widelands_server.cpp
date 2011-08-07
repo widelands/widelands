@@ -168,31 +168,28 @@ void WidelandsServer::joinEvent(Client * const client)
 		// This is the host
 		// Take peer ip as host ip
 		char * ip;
-		int ret;
+
 		//  Do not use IP provided by client. Instead, determine peer IP address.
-		struct sockaddr addr;
-		socklen_t addrsize = static_cast<socklen_t>(sizeof(struct sockaddr));
-		//addrsize = 256;
-		//addr = static_cast<struct sockaddr *>(malloc(addrsize));
-		ret = getpeername(client->fd, &addr, &addrsize);
+		socklen_t addrsize = 256;
+		struct sockaddr * const addr = static_cast<struct sockaddr *>(malloc(addrsize));
+		int const ret = getpeername(client->fd, addr, &addrsize);
 
 		//  FIXME: IPv4 compatibility?
-		if (addr.sa_family == AF_INET6) {
+		if (addr->sa_family == AF_INET6) {
 			ip = static_cast<char *>(ggz_malloc(INET6_ADDRSTRLEN));
 			inet_ntop
 				(AF_INET6,
 				 static_cast<void *>
-					(&(reinterpret_cast<struct sockaddr_in6 *>(&addr))->sin6_addr),
-					 ip,
-					 INET6_ADDRSTRLEN);
-		} else if (addr.sa_family == AF_INET) {
+				 	(&(reinterpret_cast<struct sockaddr_in6 *>(addr))->sin6_addr),
+				 ip,
+				 INET6_ADDRSTRLEN);
+		} else if (addr->sa_family == AF_INET) {
 			ip = static_cast<char *>(ggz_malloc(INET_ADDRSTRLEN));
 			inet_ntop
 				(AF_INET,
-				 static_cast<void *>
-					(&(reinterpret_cast<struct sockaddr_in *>(&addr))->sin_addr),
-					 ip,
-					 INET_ADDRSTRLEN);
+				 static_cast<void *>(&(reinterpret_cast<struct sockaddr_in *>(addr))->sin_addr),
+				 ip,
+				 INET_ADDRSTRLEN);
 		} else {
 			ip = NULL;
 			wllog(DL_ERROR, "GAME: unreachable -> done!");
@@ -206,7 +203,6 @@ void WidelandsServer::joinEvent(Client * const client)
 
 		{
 			// test for connectablity ???
-			/*
 			// This code only tests if the string m_wlserver_ip is usable.
 			addrinfo * ai = 0;
 			if (getaddrinfo(m_wlserver_ip, "7396", 0, &ai)) {
@@ -216,7 +212,6 @@ void WidelandsServer::joinEvent(Client * const client)
 				return;
 			}
 			freeaddrinfo(ai);
-			*/
 		}
 
 		wllog(DL_INFO, "GAME: reachable -> waiting!");
