@@ -1,6 +1,6 @@
-size=small
+size=big
 picture=idle_0.png
 
 [idle]
 pics=idle_?.png
-hotspot=7 60
+hotspot=24 65
