@@ -21,7 +21,7 @@ is=dry
 [wasser]
 def_resources=fish 4
 is=water
-fps=10
+fps=14
 
 [wiese1]
 def_resources=water 10
