@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-08-08 23:57+0000\n"
+"PO-Revision-Date: 2011-08-10 17:57+0000\n"
 "Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-10 04:30+0000\n"
-"X-Generator: Launchpad (build 13636)\n"
+"X-Launchpad-Export-Date: 2011-08-11 04:30+0000\n"
+"X-Generator: Launchpad (build 13644)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid ""
@@ -387,10 +387,14 @@ msgid ""
 "I\n"
 "sure would enjoy a freshly baken pitta bread for a change...\""
 msgstr ""
+"\"Vishet är att söka variation.<br> Norr om det stora berget ligger en stor "
+"slätt\n"
+"- låt oss använda det utrymme Moder Natur gav oss och bygg en bondgård!\n"
+"Jag skulle minsann njuta av ett nybakt pittabröd som omvöxling...\""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Hemma bäst"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
@@ -398,7 +402,7 @@ msgstr "En vacker morgon"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:438
 msgid "A friendly village joined us!"
-msgstr ""
+msgstr "En vänligt sinnad by gick med oss!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:143
 msgid ""
@@ -423,10 +427,32 @@ msgid ""
 "you\n"
 "prefer."
 msgstr ""
+"En normal gruva kan bara utvinna runt en tredjedel av alla resurser under "
+"den;\n"
+"sedan måste den uppgraderas till en djup gruva för att kunna fortsätta sitt\n"
+"arbete ordentligt. För att uppgradera en byggnad, välj den och klicka sedan "
+"på\n"
+"motsvarande knapp i fönstret som visas-<br> Arbetare får erfarenhet genom\n"
+"lyckat arbete. Med tillräcklig erfarenhet blir de mer avancerade arbetare, "
+"vilket\n"
+"krävs för att driva de uppgraderade byggnaderna. Uppgradera inte en byggnad\n"
+"innan du har nog med avancerade arbetare till att arbeta i den avancerade\n"
+"byggnaden! Sådana byggnader har ofta större krav än den vanliga varianten\n"
+"av byggnaden - exempelvis kräver djupa gruvor munsbitar i stället för "
+"ransoner.\n"
+"Du kommer behöva uppgradera din taverna till ett värdshus för att kunna\n"
+"tillverka munsbitar av pitta-bröd OCH en annan sorts matvara (kött eller "
+"fisk)\n"
+"OCH öl. Du kan förstås uppgradera alla gruvor till djupa gruvor direkt,\n"
+"förutsatt att du har nog med arbetare - större gruvor arbetar något "
+"snabbare,\n"
+"medan mindre klarar sig med billigare mat. Det är upp till dig vilken "
+"strategi\n"
+"du föredrar."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:431
 msgid "Another cold day"
-msgstr ""
+msgstr "Ännu en kall dag"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:119
 msgid "Bake bread"
@@ -444,6 +470,14 @@ msgid ""
 "a\n"
 "mountain. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr ""
+"Bättre byggnade kan också kräva andra förbättrade material, utöver "
+"svartved.\n"
+"Ett av dessa är murbruk, vilket tillverkas av vanlig sten, vatten och kol av "
+"en\n"
+"kalkbrännare. Du kan få vatten genom att bygga en brunn på en vattenkälla,\n"
+"vilka dina geologer kan upptäcka när du skickar dem till en flagga som inte "
+"är\n"
+"på ett berg. Kol kan fås genom att bygga en kolbrännare eller kolgruva."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:164
 msgid ""
@@ -454,6 +488,12 @@ msgid ""
 "wood\n"
 "hardener before you run out of blackwood, as without it you cannot expand."
 msgstr ""
+"Större och bättre byggnader - inklusive militärens - kräver bättre\n"
+"byggnadsmaterial. De kan inte byggas av enkla trädstammar - trät måste\n"
+"först förädlas till svartved av en vedbrännare. Kom alltid ihåg att bygga "
+"en\n"
+"vedhärdare innan du får slut på svartved, eftersom du inte kan expandera\n"
+"utan det."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:318
 msgid "Boldreth cheers up..."
@@ -461,11 +501,11 @@ msgstr "Boldreth tröstar..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:275
 msgid "Boldreth exclaims..."
-msgstr ""
+msgstr "Boldreth ropar..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:250
 msgid "Boldreth jumps up..."
-msgstr ""
+msgstr "Boldreth hoppar högt..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:285
 msgid "Boldreth laughs..."
@@ -494,7 +534,7 @@ msgstr "Den modige Bodreth stiger fram bredvid dig..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr ""
+msgstr "Bygg en boskapsfarm"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
