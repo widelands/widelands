@@ -66,13 +66,15 @@ sleep=20000
 return=skipped
 
 [idle]
-pics=i_??.png  # ???
-hotspot=64 54
+pics=armory_i_??.png  # ???
+hotspot=73 63
 
 [build]
-pics=b_??.png  # ???
-hotspot=64 54
+pics=armory_b_??.png  # ???
+hotspot=73 63
 
 [working]
-pics=w_??.png  # ???
-hotspot=64 54
+pics=armory_work_??.png  # ???
+hotspot=73 63
+playercolor=true
+fps=2
