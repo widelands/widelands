@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-06-04 16:37+0000\n"
+"PO-Revision-Date: 2011-08-16 19:43+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-06-05 04:31+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-08-17 04:30+0000\n"
+"X-Generator: Launchpad (build 13697)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1061,7 +1061,7 @@ msgstr "økonomier: %s"
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "spillernummer (%i) er utenfor utvalg (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:145
 #, c-format
@@ -1118,7 +1118,7 @@ msgstr "forventet %s men fant \"%s\""
 
 #: ../../src/graphic/animation.cc:139
 msgid "frame number"
-msgstr ""
+msgstr "ramme nummer"
 
 #: ../../src/graphic/graphic.cc:1019
 #, c-format
@@ -1306,7 +1306,7 @@ msgstr "prioritet"
 #: ../../src/logic/immovable.cc:901 ../../src/logic/immovable.cc:1082
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr ""
+msgstr "forventet sannsynlighet i utvalg [1, 254] men fant «%s»"
 
 #: ../../src/logic/immovable.cc:920
 #, c-format
@@ -1330,7 +1330,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:1028
 msgid "probability in range [1, 254]"
-msgstr ""
+msgstr "sannsynlighet i utvalg [1, 254]"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
@@ -1535,7 +1535,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1297
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
-msgstr ""
+msgstr "retrett: verdi utenfor rekkevidde. Fikk %u forventet %u-%u"
 
 #: ../../src/logic/playercommand.cc:1308
 #, c-format
@@ -1592,7 +1592,7 @@ msgstr "økonomi trenger "
 
 #: ../../src/logic/production_program.cc:221
 msgid "site has "
-msgstr ""
+msgstr "sted har "
 
 #: ../../src/logic/production_program.cc:247
 msgid "workers need experience"
@@ -1961,7 +1961,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr ""
+msgstr "ukjent oppgavetype «%s»"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:231
 #, c-format
@@ -2263,7 +2263,7 @@ msgstr "gjenstand %u: %s"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "varedata: %s"
 
 #: ../../src/network/netclient.cc:100
 msgid "Could not establish connection to host"
@@ -2514,11 +2514,11 @@ msgstr "Klient rapporterer tid til verten som går baklengs."
 
 #: ../../src/network/nethost.cc:2012
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr ""
+msgstr "Klient simulerer utover tiden verten har tillatt."
 
 #: ../../src/network/nethost.cc:2016
 msgid "Client did not submit sync report in time."
-msgstr ""
+msgstr "Klient leverte ikke synkroniseringsrapport i tide."
 
 #: ../../src/network/nethost.cc:2223
 msgid "Client and host have become desynchronized."
@@ -3004,7 +3004,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:623
 msgid "Client settings"
-msgstr ""
+msgstr "Klient innstillinger"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:626
 msgid ""
@@ -3029,7 +3029,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:636
 msgid "Player settings"
-msgstr ""
+msgstr "Spiller innstillinger"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid ""
@@ -3185,7 +3185,7 @@ msgstr "Innstillinger"
 #: ../../src/ui_fsmenu/main.cc:90
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "View Readme"
-msgstr ""
+msgstr "Vis Lesmeg"
 
 #: ../../src/ui_fsmenu/main.cc:98 ../../src/wui/game_options_menu.cc:65
 msgid "License"
@@ -4098,7 +4098,7 @@ msgstr "Kapasitet"
 #: ../../src/wui/soldierlist.cc:381 ../../src/wui/soldierlist.cc:394
 #: ../../src/wui/soldierlist.cc:407
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "Klikk for å sende vekk soldat"
 
 #: ../../src/wui/stock_menu.cc:53
 msgid "Wares (total)"
@@ -4680,108 +4680,3 @@ msgstr "Vis innboks"
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
 msgstr ""
-
-#~ msgid "Minimum<br/>needed<br/>experience"
-#~ msgstr "Minimal<br/>krevd<br/>erfaring"
-
-#~ msgid "Maximum<br/>needed<br/>experience"
-#~ msgstr "Maksimal<br/>krevd<br/>erfaring"
-
-#, c-format
-#~ msgid ""
-#~ "Hitpoints is between %u and %u, plus %u for each level above 0 (maximum "
-#~ "level is %u)."
-#~ msgstr ""
-#~ "Treffpoeng er mellom %u og %u, pluss %u for hvert nivå over 0 (maksimalt "
-#~ "nivå er %u)."
-
-#, c-format
-#~ msgid "Needs experience from working between %u and %u times to become"
-#~ msgstr "Trenger erfaring fra arbeid mellom %u og %u ganger for å bli"
-
-#, c-format
-#~ msgid "%sYour %s is under attack.</p>"
-#~ msgstr "%sDin %s blir angrepet.</p>"
-
-#~ msgid "Produced "
-#~ msgstr "Produsert "
-
-#, c-format
-#~ msgid "Wasteland: %i %%"
-#~ msgstr "Ødemark: %i %%"
-
-#, c-format
-#~ msgid "Land: %i %%"
-#~ msgstr "Land: %i %%"
-
-#, c-format
-#~ msgid "Water: %i %%"
-#~ msgstr "Vann: %i %%"
-
-#, c-format
-#~ msgid "Mountains: %i %%"
-#~ msgstr "Fjell: %i %%"
-
-#~ msgid ""
-#~ " --opengl=[0|1]\n"
-#~ "                      Enables opengl rendering\n"
-#~ "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"
-#~ msgstr ""
-#~ " --opengl=[0|1]\n"
-#~ "                      Aktiverer opengl-rendering\n"
-#~ "                      *FARLIG OG ØDELAGT, IKKE BRUK*\n"
-
-#~ msgid "nothing"
-#~ msgstr "ingenting"
-
-#~ msgid "Select Savegame"
-#~ msgstr "Velg lagret spill"
-
-#, c-format
-#~ msgid ""
-#~ "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
-#~ msgstr ""
-#~ "<p font-size=14 font-face=FreeSerif>En ny %s ble lagt til økonomien din.</p>"
-
-#~ msgid "New User"
-#~ msgstr "Ny bruker"
-
-#~ msgid "Lobby:"
-#~ msgstr "Lobby:"
-
-#~ msgid "Ready"
-#~ msgstr "Klar"
-
-#, c-format
-#~ msgid ""
-#~ "(%i, %i)\n"
-#~ "   height: %u\n"
-#~ "   owner: %u\n"
-#~ msgstr ""
-#~ "(%i, %i)\n"
-#~ "   høyde: %u\n"
-#~ "   eier: %u\n"
-
-#~ msgid "HP"
-#~ msgstr "Liv"
-
-#~ msgid "Be vigilant"
-#~ msgstr "Vær på vakt"
-
-#~ msgid "Hard struggle"
-#~ msgstr "Hard kamp"
-
-#~ msgid "(Save): "
-#~ msgstr "(Lagret): "
-
-#~ msgid "Original:"
-#~ msgstr "Original:"
-
-#~ msgid "Level"
-#~ msgstr "Brett"
-
-#~ msgid "Help "
-#~ msgstr "Hjelp "
-
-#~ msgid "Reset"
-#~ msgstr "Tilbakestill"
