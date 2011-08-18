@@ -37,3 +37,4 @@ hotspot=73 73
 [working]
 pics=bakery_w_??.png  # ???
 hotspot=73 73
+fps=3
