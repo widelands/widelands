@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-08-18 19:43+0000\n"
+"PO-Revision-Date: 2011-08-19 19:05+0000\n"
 "Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-19 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-08-20 04:32+0000\n"
 "X-Generator: Launchpad (build 13697)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -356,15 +356,17 @@ msgid ""
 "* Build a donjon at the northeast of your territory to get a farther visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"* Bygg ett torn i den nordöstra delen av ditt territorium för att se längre "
+"bort och för att skydda ditt folk från oväntade fiendeanfall."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:266
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Bygg ett torn i den nordöstra delen av ditt territorium."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "* Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "* Bygg en fästning öster om bergen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:119
 #: ../../campaigns/t03.wmf/scripting/texts.lua:338
@@ -372,11 +374,13 @@ msgid ""
 "* Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"* Bygg en hjälmsmedja till väster om bergen för att förse dina trupper med "
+"bättre utrustning."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:91
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
 msgid "* Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "* Bygg ett lager till väster om bergen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:67
 #: ../../campaigns/t03.wmf/scripting/texts.lua:278
@@ -384,6 +388,8 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"* Bygg fler militära byggnader för att utforska området runt huvudkvarteret "
+"och för att säkra folkets trygghet."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -391,14 +397,16 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
+"* Bygg upp en grundläggande matekonomi - en fiskarstuga, en jägarstuga, en "
+"brunn, en bondgård och ett bageri för att förse ditt folk med mat."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
-msgstr ""
+msgstr "* Förgör Kalitaths armé, och expandera ditt territorium österut."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr ""
+msgstr "* Förgör Kalitaths armé, och expandera ditt territorium österut."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 #: ../../campaigns/t03.wmf/scripting/texts.lua:364
@@ -406,6 +414,7 @@ msgid ""
 "* Destroy all enforcements of Thron’s two brothers to liberate the throne-"
 "circle."
 msgstr ""
+"* Förgör Throns två bröders förstärkningar för att frita troncirkeln."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
@@ -413,6 +422,9 @@ msgid ""
 "reaches his next level (master blacksmith) - even to a war mill and build up "
 "another metalworks to ensure the production of tools."
 msgstr ""
+"* Uppgradera ditt metallverk till en yxfabrik eller - så snart som smeden "
+"når sin nästa nivå (mästarsmed) - till en krigskvarn, och bygg ett nytt "
+"metallverk för att säkra tillverkningen av verktyg."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
@@ -421,6 +433,9 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"* Expandera ditt territorium till bergen, skicka geologer för att leta efter "
+"malm och kol, och bygg en gruvekonomi med gruvor, tavernor, smältverk, och "
+"metallverk."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -435,11 +450,11 @@ msgstr "-- NYTT UPPDRAG --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:330
 msgid "-- NEW OBJECTIVES --"
-msgstr ""
+msgstr "-- NYA DIREKTIV --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:350
 msgid "--------------------- VICTORY! ----------------------"
-msgstr ""
+msgstr "--------------------- SEGER! ----------------------"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:129
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
@@ -449,6 +464,9 @@ msgid ""
 "that should attack. When you are ready with setting the number, click on the "
 "cross ('start attack')"
 msgstr ""
+"-> För att anfalla en fiende måste du klicka på dörren till en motståndares "
+"militärbyggnad. En meny kommer visas där du kan välja hur många soldater som "
+"ska delta i anfallet. När du är färdig, klicka på korset ('inled anfall')"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 msgid ""
@@ -457,6 +475,10 @@ msgid ""
 "important in fights and the better a soldier is, the higher is the chance to "
 "win a fight.<br>Attributes are: health points, attack, defense and evade."
 msgstr ""
+"-> Träningsanläggningar som träningsläger eller stridsarenor används för att "
+"träna soldater i deras olika attribut. Dessa attribut är viktiga i strider, "
+"och ju bättre en soldat är, ju högre är sannolikheten att han vinner "
+"striden.<br>Attributen är: HP, attack, försvar, och undvik."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid ""
@@ -468,13 +490,13 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Detta land är vårt land"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
 #: ../../campaigns/t03.wmf/scripting/texts.lua:344
 msgid "Another cold day"
-msgstr ""
+msgstr "Ännu en kall dag"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:50
 msgid ""
