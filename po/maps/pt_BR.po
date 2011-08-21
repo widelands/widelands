@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-12-11 17:57+0000\n"
-"Last-Translator: Júlio Cezar Santos Pires <Unknown>\n"
+"PO-Revision-Date: 2011-07-30 23:33+0000\n"
+"Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:32+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-08-01 04:35+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Olhos no Escuro"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - De Nemesis para Genesis"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Os Tentáculos de Malac' Mor"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
@@ -35,11 +35,11 @@ msgstr "02 - Um lugar para chamar de lar"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
-msgstr ""
+msgstr "02 - Um posto avançado no Exílio."
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Esta Terra é a Nossa Terra"
 
 #: ../../maps/Enemy in sight.wmf/elemental:9
 msgid "A Multiplayer-battle-map on a X-Shaped island."
@@ -118,7 +118,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlântes - A Corrida para o Fogo"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -130,7 +130,7 @@ msgstr "Bárbaros - O Segundo Império"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Desafiador. Introduz os Atlântes"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -146,7 +146,7 @@ msgstr "Cratera"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Torneio no Deserto"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -167,11 +167,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Fácil. Introduz os Bárbaros"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Fácil. Introduz o Império"
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -179,7 +179,7 @@ msgstr "Florestas élfica"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "Império - Os meses no Exílio."
 
 #: ../../maps/Enemy in sight.wmf/elemental:7
 msgid "Enemy in sight"
@@ -229,6 +229,9 @@ msgid ""
 "the mountain of gold that primises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Quatro tribos batalham com seus vizinhos mais próximos para ser o primeiro a "
+"chegar à montanha de ouro que promete riqueza além da imaginação. Podem os "
+"outros dois repartir os recursos sabiamente?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -282,6 +285,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Diz a lenda que os velhos monges guerreiros, que vivem nos ainda mais velhos "
+"pântanos, são a chave para controlar a ilha inteira."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -355,7 +360,7 @@ msgstr "Labirinto Místico"
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Não Implementado Ainda"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -393,16 +398,15 @@ msgid ""
 "soldiers survived."
 msgstr ""
 "Seis meses atrás, Lutius - um jovem general do Império - foi enviado com 150 "
-"soldados para a fronteira para além das florestas setentrionais, onde as "
-"tribos bárbaras foram de passagem para a terra na posse do Império. Sua "
-"tarefa era defender as terras do Império. No início, tudo estava calmo. Ele "
-"até conversou com algumas crianças bárbaras e pensou sobre uma vida "
-"tranquila - lado a lado com essa gente arcaica. Ele começou a se sentir mais "
-"segura e seu exército começou a cair a sua atenção com o inimigo em "
-"potencial. Essa foi a sua ruína.Uma noite, em Março, o seu exército "
-"despreparado foi atacado por 100 homens de infantaria dos bárbaros, e foram "
-"completamente dispersas. Somente ele e um punhado de seus soldados "
-"sobreviveram..."
+"soldados para a fronteira além das florestas setentrionais, onde as tribos "
+"bárbaras foram de passagem para a terra na posse do Império. Sua tarefa era "
+"defender as terras do Império. No início, tudo estava calmo. Ele até "
+"conversou com algumas crianças bárbaras e pensou sobre uma vida tranquila - "
+"lado a lado com essa gente arcaica. Ele começou a se sentir mais seguro e "
+"seu exército começou a diminuir a sua atenção com o inimigo em potencial. "
+"Essa foi a sua ruína. Uma noite, em Março, o seu exército despreparado foi "
+"atacado por 100 homens de infantaria dos bárbaros, e foram completamente "
+"destroçados. Somente ele e um punhado de seus soldados sobreviveram..."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -438,7 +442,7 @@ msgstr "Ilha do Pântano"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
-msgstr ""
+msgstr "Monges do Pântano"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -598,6 +602,11 @@ msgid ""
 "a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
+"Quando Deus perdeu fé nos Atlântes e afundou sua ilha, a batalha de uma "
+"mulher por justiça e uma segunda chance para seu povo virou artigo lendário. "
+"Liderando o que restou de seu povo para o futuro em uma nova região do "
+"Mundo, Jundlina se tornou o ser humano mais poderoso de seu tempo, mas por "
+"um preço: sua humanidade e alma!"
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""

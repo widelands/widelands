@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-06-06 22:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-08-19 19:05+0000\n"
+"Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-08-20 04:32+0000\n"
+"X-Generator: Launchpad (build 13697)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -25,6 +25,12 @@ msgid ""
 "chance to secure the mountains from enemy hands: We must build a fortress to "
 "the east of the mountains!\" "
 msgstr ""
+" \"Jag och Boldreth var precis på upptäcktsfärd runt de tre bergen. Ett "
+"stort strategiskt problem med området verkar vara att det finns två större "
+"passager - en till norr och en till söder om berget i mitten. Passagerna är "
+"väldigt svåra att hålla kontroll över, och därför tycks det mig att vi bara "
+"har en chans att säkra bergen från fienden: Vi måste bygga en fästning öster "
+"om bergen!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:242
 msgid ""
@@ -34,6 +40,11 @@ msgid ""
 "of our farmers seems to be very clever he already got some crops to grow in "
 "this cold soil.\" "
 msgstr ""
+" \"Boldreth har rätt! Vi har inte tillräckligt mycket mat för att överleva "
+"en lång, kall vinter. Vi borde börja bygga en brunn, samt en fiskarstuga och "
+"en jägarstuga. Och om vi har plats för det, borde vi även bygga en bondgård "
+"och ett bageri! En av våra bönder verkar vara riktigt smart - han har redan "
+"fått några grödor att växa i den här kalla jorden.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:372
 msgid ""
@@ -43,6 +54,11 @@ msgid ""
 "to\n"
 " make their work lighter and our transportation more efficient.\" "
 msgstr ""
+" \"Hövding, tänk på de stackars bärarna: Våra vägar blir längre och längre, "
+"och\n"
+" bördan på deras axlar blir inte lättare. Vi  borde avla fler oxar för att "
+"underlätta\n"
+" för dem och för att effektivisera våra transporter.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:318
 msgid ""
@@ -51,6 +67,10 @@ msgid ""
 "some more fortifications like barriers and donjons at the passages, but for "
 "now we can take a deep breath.\" "
 msgstr ""
+" \"Äntligen!<br>Fästningen blev just färdig, så infarten till vår bosättning "
+"borde vara tryggad nu. Inför framtiden bör vi fundera på att bygga mer "
+"befästningar, som murar och turn vid passagerna, men just nu kan vi slappna "
+"av.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:179
 msgid ""
@@ -58,6 +78,9 @@ msgid ""
 "our fortifications to the borders of Kalitath’s territory and reunite with "
 "his forces. I have to keep an eye on everything that happens here.\" "
 msgstr ""
+" \"Thron lyssnar däremot inte på mina betänkligheter. Han vill expandera "
+"våra befästningar till gränserna mot Kalitaths territorium och återförenas "
+"med hans styrkor. Jag måste hålla ett vakande öga över vad som pågår här.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:197
 msgid ""
@@ -68,6 +91,12 @@ msgid ""
 "time I wait won't be lost. I will further upgrade my soldiers and prepare "
 "for battle.\" "
 msgstr ""
+" \"Jag har skickat män till att möta Kalitath i hans fästning. Han har "
+"barrikaderat huvudstadens tidigare huvudingång och försöker ställa upp en "
+"belägringsmur runt Al'thunran. Han kommer inte låta någon komma vare sig in "
+"eller ut ur staden medan ringen står fast. Tills nu har han inte svarat på "
+"mina meddelanden. Men tiden då jag väntar kommer inte gå till spillo. Jag "
+"kommer fortsätta uppgradera mina soldater och förbereda för strid.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:298
 msgid ""
@@ -75,6 +104,9 @@ msgid ""
 "brought a smile to my face - even if the hardest part is still waiting to be "
 "done, now our smiths will give their best to further ease our lives.\" "
 msgstr ""
+" \"Jag fick precis höra att vår gruvdrift har kommit igång. Nyheten gladde "
+"mig mycket - även om den svåraste tiden står för dörren kommer i alla fall "
+"våra smeder kunna göra sitt allra bästa för att göra våra liv lättare.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:286
 msgid ""
@@ -84,12 +116,18 @@ msgid ""
 "remember, most of the mountains west to Al'thunran hold coal and some metal "
 "ores.\" "
 msgstr ""
+" \"Jag talade just med patrulledaren. Han berättade för mig att de hittade "
+"några berg till nordost och till öster om vårt territorium. Med lite tur ger "
+"det här oss en ny chans att rusta våra män, eftersom, så vitt jag minns, de "
+"flesta berg väster om Al'thunran är rika på kol och malmer.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid ""
 " \"Khantrukh just informed me, that our basic food economy was built up "
 "successfully. Finally none of us has to fear starvation anymore."
 msgstr ""
+" \"Khantrukh berättade precis att vår grundläggande matekonomi är uppbyggd. "
+"Äntligen behöver ingen av oss frukta svält längre.\""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:348
 msgid ""
@@ -104,6 +142,16 @@ msgid ""
 "not hesitate to rebuild it with all the strength my people have. I can't "
 "wait to see it again in it's old beauty.\" "
 msgstr ""
+" \"Mina bröder och deras soldater ligger döda och lämnade eld och förödelse "
+"efter sig. Ingenstans bland ruinerna kunde jag hitta män eller kvinnor av "
+"borgarstånd, och då hoppas jag att de flydde från detta grymma slagfält och "
+"inledde ett bättre liv någon annanstans. Inget är kvar av skönheten jag "
+"minns; bara ruiner återstår av den gamla huvudstaden. Jag sörjer, men är "
+"också lättad. Jag hade aldrig vågat hoppas på att återse sköna Al'thunran - "
+"så sent som för ett par månader sedan undrade om jag någonsin skulle komma "
+"tillbaka dit. Nu är den gamla staden tillbaka i mina händer, och jag kommer "
+"inte tveka till att bygga upp den igen med all den styrka mitt folk kan "
+"uppbringa. Jag kan knappt bärga mig att se staden i sin gamla prakt.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:326
 msgid ""
@@ -111,6 +159,10 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
+" \"Vår gruvekonomi verkar gå lysande, goda nyheter, bara det! Hur som helst "
+"finns det fortfarande många män och kvinnor som väntar i vår sal för att "
+"tilldelas en uppgift, så att de kan hjälpa våra soldater förbereda för de "
+"framtida striderna.\""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:360
 msgid ""
@@ -122,6 +174,13 @@ msgid ""
 "newborn lamb in the honour of my father whose eyes are set upon me "
 "today.<br>So be it!\" "
 msgstr ""
+" \"Så får det bli, generalerna har gått ut för att ställa upp trupperna, och "
+"Bolreth kommer själv leda det första anfallet. Jag ska rida vid hans sida, "
+"för att göra Al'thunran kvitt detta krig och bringa fred till vår huvudstad. "
+"När den späda solen stiger över träden imorgon ska jag blåsa till anfall. "
+"Till skymningen kommer jag fira segern i krigsherrens trähallar, och offra "
+"ett nyfött lamm för att hedra min far, vars ögon är fästa på mig idag.<br>Så "
+"får det bli!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid ""
@@ -136,6 +195,17 @@ msgid ""
 "an eye on the raging wars on our doorsteps. THEN we will be prepared once "
 "trouble seeks to capture our woods.\" "
 msgstr ""
+" \"Den första av de befästningar som Thron beordrade har just färdigställts. "
+"Just nu försöker han frammana tillit och förtroende hos dem som bor innanför "
+"murarna i vårt nya områda, som vi givit namnet 'Ondun', vilket betyder 'de "
+"som väntar' på det gamla språket. Men Thron är ännu inte nöjd - och jag "
+"förstår helt hans farhågor: Skogarna är täta, och gränsen till Al'thunran "
+"nära inpå. Jag kan lätt tänka mig att det finns tusentals faror därute som "
+"är större än de okända spåren.<br>För att ha uppsikt över mer av området "
+"runt våra hallar borde vi utforska längre bort, och sätta fler vakter och "
+"spanare på att övervaka gränsområdet och hålla ett öga på de krig som rasar "
+"runt knuten. SEDAN kommer vi vara förberedda när väl bekymmer söker inta vår "
+"skog.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:189
 msgid ""
@@ -146,6 +216,12 @@ msgid ""
 "linked by a good and defendable infrastructure. Still I hope I will not walk "
 "alone on this mission, I hope Kalitath son of Kun will follow my call.\" "
 msgstr ""
+" \"Mina gränser har expanderat till skogskanten. Vi har en lång och hård "
+"vinter och så många mil bakom oss. Befästningen som vi reste runt Ondun ska "
+"garantera oss snabb tillgång på män och varor, och när Al'thunran väl är i "
+"mina händer kommer de två städerna länkas samman med en god infrastruktur "
+"som lätt kan försvaras. Ändå hoppas jag att jag inte vandrar ensam i detta "
+"uppdrag; jag hoppas att Kalitath, Kuns son, hörsammar min åkallan.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:161
 msgid ""
@@ -156,6 +232,13 @@ msgid ""
 "vulnerable. As my scouts report, he has set foot on the lower grounds around "
 "the capitol, securing the outer fortification rings.\" "
 msgstr ""
+" \"Nyheterna som en patrull förde med sig var inte roliga att höra. Våra "
+"spioner säger oss att krigarstammarna fortfarande strider för fullt, men "
+"några av de äldre soldaterna och stamledarna verkar tröttna på det "
+"meningslösa kriget. Kalitath, Kuns son, är den första krigarledaren att "
+"lämna Al'thunran, vilket gör hans sida svag och sårbar. Enligt mina spejare "
+"har han tagit sig till de lägre markerna runt huvudstaden, och säkrat de "
+"yttre ringmurarna.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:222
 msgid ""
@@ -172,6 +255,19 @@ msgid ""
 "about to strike them. However they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe.\" "
 msgstr ""
+" \"Förrädaren har lämnat sina arméer att dö där de låg, när han såg att han "
+"inte skulle kunna hålla mina styrkor tillbaka. Kalitath försvann i "
+"kalabaliken, men jag bryr mig inte. Låt honom fly och minnas för all framtid "
+"som en stamledare som vägrade buga för trätronen, som är min nu. Vidare gav "
+"striden oss en stor förtjänst: Hela året var Kalitath så upptagen av att "
+"kriga att ha inte brydde sig om att lagra nog med mat åt alla sina män. Nu "
+"när han har flytt har hungern lett några av hans yngre anhängare till att "
+"desertera. Den här gruppen besitter starka befästningar på den centrala "
+"ringmuren. Men det finns fler nyheter: Mina spejare berättade att mina "
+"bröders två stridande stammar är i kaos och har knappt uppmärksammat den nya "
+"faran som snart kommer slå ner på dem. De skulle väl knappast bry sig ändå, "
+"förblindade av raseri och hat; det finns ingen sans kvar i dem alls, vad jag "
+"kan se.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:151
 msgid ""
@@ -180,6 +276,10 @@ msgid ""
 "are not strong enough to take up the battle with my brothers.<br>For now we "
 "rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
+" \"De senaste dagarna kom vi allt närmare vår huvudstad. Många har redan "
+"anslutit till vår marsch och sätter sitt hopp till mig. Tyvärr fruktar jag "
+"att vi inte är starka nog att ta upp striden med mina bröder.<br>Nu får vi "
+"vila vid kanten av den gamla skogen och förbreda för vad som komma skall.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:206
 msgid ""
@@ -188,6 +288,10 @@ msgid ""
 "our troops with their own blood! We cannot accept this behaviour. From now "
 "on there is war between Kalitath and us!\" "
 msgstr ""
+" \"Den SKITHÖGEN! Bara en man ur vår gränspatrull kom tillbaka vid liv. Han "
+"bar ett meddelande från Kalitath där han säger att han kommer straffa alla "
+"våra trupprörelser med deras egna blod! Vi kan inte godta det här. Tills "
+"vidare råder krig mellan oss och Kalitath!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:232
 msgid ""
@@ -197,6 +301,11 @@ msgid ""
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!\" "
 msgstr ""
+" \"I morse träffade jag på Thron i djupa funderingar. Han återvände från sin "
+"patrull sent igår kväll, och lutade sig tillbaka mot ett träd med utsikt "
+"över lägret. Antalet bråk och dispyter ökar allt mer, och vinter har oss i "
+"ett järngrepp. Vi borde lagra mat för att kunna överleva den långa, kalla "
+"vintern!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -207,6 +316,12 @@ msgid ""
 "before the banner of Chat’Karuth. Why should he march with his son to "
 "reclaim his heritage and the throne?\" "
 msgstr ""
+" \"Thron vill gärna tro att Kalitath har tröttnat på striderna och kommer "
+"vilja ansluta till oss, när vi väl marscherar för att återställa lag och "
+"ordning till Al'thunran. Men det tror jag knappast. Kalitath är son till en "
+"av de mäktigaste generalerna i våra trupper, och hans familj gillade aldrig "
+"riktigt tanken på att buga inför Chat'Karuths baner. Varför skulle han "
+"marschera tillsammans med sin son för att återta hans arvsrätt och tronen?\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:262
 msgid ""
@@ -215,6 +330,10 @@ msgid ""
 "range on the area around our hall to protect our people from sudden "
 "attacks.\" "
 msgstr ""
+" \"Thron berättade för mig att han upptäckte spår i snön till nordöst om vår "
+"boplats. Han gav instruktioner om att bygga ett torn, för att få bättre "
+"uppsikt över området runt vår hall för att skydda vårt folk från oväntade "
+"anfall.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:336
 msgid ""
@@ -222,27 +341,32 @@ msgid ""
 "enhance your metalworks to an axefactory or even a war mill and build up "
 "another metalworks to ensure the production of tools."
 msgstr ""
+"* Så fort smeden når nästa nivå (mästarsmed), uppgradera ditt metallverk "
+"till yxfabrik eller till och med en krigskvarn och bygg ännu ett metallverk "
+"för att se till att verktyg tillverkas."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:101
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
 msgid ""
 "* Build a battle arena and a trainings camp to the west of the mountains."
-msgstr ""
+msgstr "* Bygg en stridsarena och ett träningsläger till väster om bergen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
 msgid ""
 "* Build a donjon at the northeast of your territory to get a farther visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"* Bygg ett torn i den nordöstra delen av ditt territorium för att se längre "
+"bort och för att skydda ditt folk från oväntade fiendeanfall."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:266
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Bygg ett torn i den nordöstra delen av ditt territorium."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "* Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "* Bygg en fästning öster om bergen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:119
 #: ../../campaigns/t03.wmf/scripting/texts.lua:338
@@ -250,11 +374,13 @@ msgid ""
 "* Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"* Bygg en hjälmsmedja till väster om bergen för att förse dina trupper med "
+"bättre utrustning."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:91
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
 msgid "* Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "* Bygg ett lager till väster om bergen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:67
 #: ../../campaigns/t03.wmf/scripting/texts.lua:278
@@ -262,6 +388,8 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"* Bygg fler militära byggnader för att utforska området runt huvudkvarteret "
+"och för att säkra folkets trygghet."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -269,14 +397,16 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
+"* Bygg upp en grundläggande matekonomi - en fiskarstuga, en jägarstuga, en "
+"brunn, en bondgård och ett bageri för att förse ditt folk med mat."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
-msgstr ""
+msgstr "* Förgör Kalitaths armé, och expandera ditt territorium österut."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr ""
+msgstr "* Förgör Kalitaths armé, och expandera ditt territorium österut."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 #: ../../campaigns/t03.wmf/scripting/texts.lua:364
@@ -284,6 +414,7 @@ msgid ""
 "* Destroy all enforcements of Thron’s two brothers to liberate the throne-"
 "circle."
 msgstr ""
+"* Förgör Throns två bröders förstärkningar för att frita troncirkeln."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
@@ -291,6 +422,9 @@ msgid ""
 "reaches his next level (master blacksmith) - even to a war mill and build up "
 "another metalworks to ensure the production of tools."
 msgstr ""
+"* Uppgradera ditt metallverk till en yxfabrik eller - så snart som smeden "
+"når sin nästa nivå (mästarsmed) - till en krigskvarn, och bygg ett nytt "
+"metallverk för att säkra tillverkningen av verktyg."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
@@ -299,6 +433,9 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"* Expandera ditt territorium till bergen, skicka geologer för att leta efter "
+"malm och kol, och bygg en gruvekonomi med gruvor, tavernor, smältverk, och "
+"metallverk."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -313,11 +450,11 @@ msgstr "-- NYTT UPPDRAG --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:330
 msgid "-- NEW OBJECTIVES --"
-msgstr ""
+msgstr "-- NYA DIREKTIV --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:350
 msgid "--------------------- VICTORY! ----------------------"
-msgstr ""
+msgstr "--------------------- SEGER! ----------------------"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:129
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
@@ -327,6 +464,9 @@ msgid ""
 "that should attack. When you are ready with setting the number, click on the "
 "cross ('start attack')"
 msgstr ""
+"-> För att anfalla en fiende måste du klicka på dörren till en motståndares "
+"militärbyggnad. En meny kommer visas där du kan välja hur många soldater som "
+"ska delta i anfallet. När du är färdig, klicka på korset ('inled anfall')"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 msgid ""
@@ -335,6 +475,10 @@ msgid ""
 "important in fights and the better a soldier is, the higher is the chance to "
 "win a fight.<br>Attributes are: health points, attack, defense and evade."
 msgstr ""
+"-> Träningsanläggningar som träningsläger eller stridsarenor används för att "
+"träna soldater i deras olika attribut. Dessa attribut är viktiga i strider, "
+"och ju bättre en soldat är, ju högre är sannolikheten att han vinner "
+"striden.<br>Attributen är: HP, attack, försvar, och undvik."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid ""
@@ -346,13 +490,13 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Detta land är vårt land"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
 #: ../../campaigns/t03.wmf/scripting/texts.lua:344
 msgid "Another cold day"
-msgstr ""
+msgstr "Ännu en kall dag"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:50
 msgid ""

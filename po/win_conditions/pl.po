@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-11-11 02:11+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-06-08 12:55+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-09 04:31+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
@@ -111,11 +111,11 @@ msgstr "Władca Terytorialny"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:79
 msgid "The game will end in %i minutes."
-msgstr "Gra skończy za %i minut(y/ę)"
+msgstr "Gra skończy się za %i minut(y/ę)."
 
 #: ../../scripting/win_conditions/02_collectors.lua:118
 msgid "The game will end in %s."
-msgstr "Gra zakończy się za %s"
+msgstr "Gra skończy się za %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
 msgid "The tribe or team that can defeat all others wins the game!"

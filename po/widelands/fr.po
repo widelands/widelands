@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-16 11:17+0000\n"
-"Last-Translator: Guillaume Melquiond <Unknown>\n"
+"PO-Revision-Date: 2011-05-17 08:12+0000\n"
+"Last-Translator: Val-libre <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-04-17 04:32+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"X-Launchpad-Export-Date: 2011-05-18 04:32+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1725,7 +1725,7 @@ msgstr " ou "
 
 #: ../../src/logic/production_program.cc:431
 msgid " because not: "
-msgstr " pour la raison inverse que : "
+msgstr " à défaut de : "
 
 #: ../../src/logic/production_program.cc:480
 #, c-format

@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-03-26 23:57+0000\n"
-"Last-Translator: Matevž Jekovec <matevz.jekovec@gmail.com>\n"
+"PO-Revision-Date: 2011-07-29 09:39+0000\n"
+"Last-Translator: Andrej Znidarsic <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2011-03-28 04:32+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-30 04:30+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2440,7 +2440,7 @@ msgstr "Začasna zaustavitev že v teku - igra bo zaustavljena."
 
 #: ../../src/network/nethost.cc:440
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Igra ni začasno zaustavljena - ni mogoče končati."
 
 #: ../../src/network/nethost.cc:450
 msgid "Invalid command! Type /help for a list of commands."
@@ -2544,7 +2544,7 @@ msgstr "Gostitelj je poslal igralca %s v ložo!"
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Računalnik%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format

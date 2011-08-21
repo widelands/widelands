@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2010-03-25 19:14+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"PO-Revision-Date: 2011-06-21 15:12+0000\n"
+"Last-Translator: Dios <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:38+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-22 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 #: ../../src/s2map.cc:223
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -201,11 +201,11 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1547
 msgid "Warning: "
-msgstr ""
+msgstr "警告: "
 
 #: ../../src/wlapplication.cc:1551
 msgid "Game data error"
-msgstr ""
+msgstr "ゲームデータエラー"
 
 #: ../../src/wlapplication.cc:1556
 msgid "Unexpected error during the game"
@@ -241,7 +241,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1699 ../../src/network/network_ggz.cc:370
 msgid "Connection problem"
-msgstr ""
+msgstr "接続エラー"
 
 #: ../../src/wlapplication.cc:1701
 msgid "Widelands has not been able to connect to the host."
@@ -253,7 +253,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1849 ../../src/network/nethost.cc:1885
 msgid "Player"
-msgstr ""
+msgstr "プレイヤー"
 
 #: ../../src/wlapplication.cc:2015 ../../src/network/netclient.cc:178
 #: ../../src/network/nethost.cc:720
@@ -262,7 +262,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:2123
 msgid "End of replay"
-msgstr ""
+msgstr "リプレイの終了"
 
 #: ../../src/wlapplication.cc:2125
 msgid ""
@@ -273,7 +273,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2208 ../../src/logic/game.cc:383
 #: ../../src/logic/game.cc:423
 msgid "Loading..."
-msgstr ""
+msgstr "ロード中..."
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
@@ -302,17 +302,17 @@ msgstr ""
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:515
 #: ../../src/writeHTML.cc:1437
 msgid "Icon"
-msgstr ""
+msgstr "アイコン"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:517
 #: ../../src/writeHTML.cc:1439 ../../src/ui_fsmenu/netsetup_ggz.cc:150
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: ../../src/writeHTML.cc:282 ../../src/wui/building_statistics_menu.cc:113
 msgid "Size"
-msgstr ""
+msgstr "サイズ"
 
 #: ../../src/writeHTML.cc:284 ../../src/writeHTML.cc:519
 msgid "Buildable"
@@ -320,11 +320,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
-msgstr ""
+msgstr "拡張"
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:170
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
@@ -342,32 +342,32 @@ msgstr ""
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:510
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
 #: ../../src/logic/building.cc:511
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:381
 #: ../../src/logic/building.cc:511
 msgid "Big"
-msgstr ""
+msgstr "大"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr ""
+msgstr "はい"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:105
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr ""
+msgstr "いいえ"
 
 #: ../../src/writeHTML.cc:355
 msgid "building_types.xhtml"
@@ -418,7 +418,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
-msgstr ""
+msgstr "拡張機能"
 
 #: ../../src/writeHTML.cc:463
 #, c-format
@@ -489,7 +489,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:717 ../../src/writeHTML.cc:862
 msgid "Programs"
-msgstr ""
+msgstr "プログラム"
 
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
@@ -526,7 +526,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:762
 msgid "animation"
-msgstr ""
+msgstr "アニメーション"
 
 #: ../../src/writeHTML.cc:763 ../../src/writeHTML.cc:902
 msgid "return"
@@ -534,11 +534,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
-msgstr ""
+msgstr "オブジェクト"
 
 #: ../../src/writeHTML.cc:765
 msgid "plant"
-msgstr ""
+msgstr "計画"
 
 #: ../../src/writeHTML.cc:766
 msgid "create_bob"
@@ -550,7 +550,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr ""
+msgstr "地質学者"
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
@@ -562,17 +562,17 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:771
 msgid "UNKNOWN"
-msgstr ""
+msgstr "不明"
 
 #: ../../src/writeHTML.cc:778
 msgid "Production"
-msgstr ""
+msgstr "生産"
 
 #: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:166
 #: ../../src/wui/productionsitewindow.cc:84 ../../src/wui/transport_ui.cc:65
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Workers"
-msgstr ""
+msgstr "労働者"
 
 #: ../../src/writeHTML.cc:793
 #, c-format
@@ -590,7 +590,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:826
 msgid "Output"
-msgstr ""
+msgstr "出力"
 
 #: ../../src/writeHTML.cc:837 ../../src/writeHTML.cc:851
 #, c-format
@@ -614,19 +614,19 @@ msgstr ""
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:793
 msgid "failed"
-msgstr ""
+msgstr "失敗"
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
-msgstr ""
+msgstr "完了"
 
 #: ../../src/writeHTML.cc:908 ../../src/logic/production_program.cc:412
 msgid "skipped"
-msgstr ""
+msgstr "スキップしました"
 
 #: ../../src/writeHTML.cc:913
 msgid "and"
-msgstr ""
+msgstr "と"
 
 #: ../../src/writeHTML.cc:914
 msgid "when"
@@ -634,7 +634,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:916
 msgid "or"
-msgstr ""
+msgstr "または"
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
@@ -646,7 +646,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:950 ../../src/writeHTML.cc:972
 msgid "needs"
-msgstr ""
+msgstr "必要"
 
 #: ../../src/writeHTML.cc:990
 msgid "site"
@@ -670,11 +670,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1027
 msgid "need"
-msgstr ""
+msgstr "必要"
 
 #: ../../src/writeHTML.cc:1029
 msgid "experience"
-msgstr ""
+msgstr "経験"
 
 #: ../../src/writeHTML.cc:1043
 msgid "Documentation for program command call"
@@ -708,7 +708,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
-msgstr ""
+msgstr "休止"
 
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
@@ -721,7 +721,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1155
 msgid "animate"
-msgstr ""
+msgstr "アニメイト"
 
 #: ../../src/writeHTML.cc:1174
 msgid "Documentation for program command consume"
@@ -729,7 +729,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
-msgstr ""
+msgstr "消費"
 
 #: ../../src/writeHTML.cc:1217 ../../src/writeHTML.cc:1254
 msgid "Documentation for program command produce"
@@ -737,7 +737,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1219
 msgid "produce"
-msgstr ""
+msgstr "生産"
 
 #: ../../src/writeHTML.cc:1256
 msgid "recruit"
@@ -761,15 +761,15 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
 msgid "attack"
-msgstr ""
+msgstr "攻撃力"
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "defense"
-msgstr ""
+msgstr "防御力"
 
 #: ../../src/writeHTML.cc:1333 ../../src/writeHTML.cc:1357
 msgid "evade"
-msgstr ""
+msgstr "回避力"
 
 #: ../../src/writeHTML.cc:1346
 msgid "Documentation for program command train"
@@ -879,7 +879,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:101
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "経済: %s"
 
 #: ../../src/economy/wares_queue.cc:259
 #, c-format
@@ -902,7 +902,7 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:134
 #: ../../src/wui/interactive_spectator.cc:68
 msgid "Minimap"
-msgstr ""
+msgstr "ミニマップ"
 
 #: ../../src/editor/editorinteractive.cc:75
 #: ../../src/wui/interactive_player.cc:137
@@ -912,7 +912,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
-msgstr ""
+msgstr "プレイヤー"
 
 #: ../../src/editor/editorinteractive.cc:150
 msgid "Unsupported format"
@@ -968,7 +968,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:474
 #: ../../src/logic/map.h:185
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
@@ -1002,7 +1002,7 @@ msgstr ""
 #: ../../src/game_io/game_player_economies_data_packet.cc:75
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "経済: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
@@ -1089,7 +1089,7 @@ msgstr ""
 #: ../../src/logic/building.cc:505
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
-msgstr ""
+msgstr "小"
 
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:62
@@ -1099,7 +1099,7 @@ msgstr ""
 #: ../../src/logic/building.cc:506
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
-msgstr ""
+msgstr "大"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -1247,7 +1247,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1394
 msgid "priority"
-msgstr ""
+msgstr "優先順位"
 
 #: ../../src/logic/immovable.cc:901 ../../src/logic/immovable.cc:1082
 #, c-format
@@ -1295,7 +1295,7 @@ msgstr ""
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
-msgstr ""
+msgstr "プレイヤー 1"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:67
 msgid "\"min-max\""
@@ -1317,7 +1317,7 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:62 ../../src/logic/warehouse.cc:255
 msgid " conquer"
-msgstr ""
+msgstr " 征服する"
 
 #: ../../src/logic/militarysite.cc:113
 #, c-format
@@ -1571,17 +1571,17 @@ msgstr ""
 #: ../../src/logic/production_program.cc:418
 #: ../../src/logic/production_program.cc:817
 msgid " and "
-msgstr ""
+msgstr " と "
 
 #: ../../src/logic/production_program.cc:419
 #: ../../src/logic/production_program.cc:796
 msgid " because: "
-msgstr ""
+msgstr " ため、 "
 
 #: ../../src/logic/production_program.cc:430
 #: ../../src/wui/encyclopedia_window.cc:192
 msgid " or "
-msgstr ""
+msgstr " または "
 
 #: ../../src/logic/production_program.cc:431
 msgid " because not: "
@@ -1603,11 +1603,11 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:502
 msgid "failure"
-msgstr ""
+msgstr "障害"
 
 #: ../../src/logic/production_program.cc:507
 msgid "completion"
-msgstr ""
+msgstr "完了"
 
 #: ../../src/logic/production_program.cc:512
 msgid "skip"
@@ -1652,12 +1652,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1000
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:914
 #: ../../src/logic/production_program.cc:1007
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:917
 #, c-format
@@ -1675,7 +1675,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1050
 #: ../../src/logic/production_program.cc:1061
 msgid "percentage"
-msgstr ""
+msgstr "割合"
 
 #: ../../src/logic/production_program.cc:1175
 #, c-format
@@ -1704,7 +1704,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1234
 #: ../../src/logic/production_program.cc:1306
 msgid "level"
-msgstr ""
+msgstr "レベル"
 
 #: ../../src/logic/production_program.cc:1253
 #: ../../src/logic/production_program.cc:1340
@@ -1782,7 +1782,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:1440 ../../src/logic/soldier.cc:1445
 msgid "no"
-msgstr ""
+msgstr "なし"
 
 #: ../../src/logic/soldier.cc:1452 ../../src/logic/soldier.cc:1460
 msgid "Logic error"
@@ -1934,7 +1934,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:486
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "兵士: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:502
 #, c-format
@@ -2052,7 +2052,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
@@ -2062,7 +2062,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "高さ: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:84
 msgid "Invalid World"
@@ -2091,7 +2091,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
@@ -2157,7 +2157,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "道路: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
@@ -2417,7 +2417,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "コンピュータ%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
@@ -2627,7 +2627,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:54
 msgid "Campaign:"
-msgstr ""
+msgstr "キャンペーン："
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Difficulty:"
@@ -2679,7 +2679,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:94
 msgid "Author:"
-msgstr ""
+msgstr "著者:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
@@ -2706,7 +2706,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
 msgid "Size:"
-msgstr ""
+msgstr "サイズ:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:70
 #: ../../src/ui_fsmenu/mapselect.cc:76
@@ -2745,7 +2745,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:66 ../../src/ui_fsmenu/launchMPG.cc:165
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
 msgid "Map"
-msgstr ""
+msgstr "地図"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
