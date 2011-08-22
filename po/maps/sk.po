@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-07-04 15:13+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
+"PO-Revision-Date: 2011-08-21 14:17+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-05 04:30+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-08-22 04:31+0000\n"
+"X-Generator: Launchpad (build 13697)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -638,30 +638,3 @@ msgstr ""
 "Stojíte na ostrove korunovanom mohutnými horami, ktoré vo svojom vnútri "
 "ukrývajú zázračný poklad - Zelenú planinu, ktorú je ťažko získať, ale ľahko "
 "stratiť, takže ak ju chcete, majte na vedomí aj iné kmene."
-
-#~ msgid "Tutorial1 - Eyes in the Dark"
-#~ msgstr "Tutoriál1 - Oči v tme"
-
-#~ msgid "(Tutorial) Barbarians - The second Empire"
-#~ msgstr "(Tutoriál) Barbari - Druhé impérium"
-
-#~ msgid "Tutorial2 - A Place to call Home"
-#~ msgstr "Tutorál2 - Miesto, ktoré možno nazvať domovom"
-
-#~ msgid "Tutorial3 - This land is our land"
-#~ msgstr "Tutoriál3 - Táto krajina je náša krajina"
-
-#~ msgid "01 - From nemesis to genesis"
-#~ msgstr "Zo záhuby k zrodu"
-
-#~ msgid "Empire - The months of exile"
-#~ msgstr "Impérium - Mesiace vo vyhnanstve"
-
-#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
-#~ msgstr "Impérium - Tréning 1 - Brehy Malac' Mor-u"
-
-#~ msgid "Atlanteans - the new rise"
-#~ msgstr "Atlanťania - nový vzostup"
-
-#~ msgid "Some descriptive texts..."
-#~ msgstr "Nejaké popisné texty..."

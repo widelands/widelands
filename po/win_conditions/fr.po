@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-08-01 09:36+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"PO-Revision-Date: 2011-08-21 14:27+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-02 04:31+0000\n"
-"X-Generator: Launchpad (build 13552)\n"
+"X-Launchpad-Export-Date: 2011-08-22 04:34+0000\n"
+"X-Generator: Launchpad (build 13697)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
@@ -220,68 +220,3 @@ msgstr "Vous avez perdu cette partie !"
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "with %i trees."
 msgstr "avec %i arbres."
-
-#~ msgid "Sorry, you have lost this game!"
-#~ msgstr "Désolé, vous avez perdu cette partie !"
-
-#~ msgid "Game over"
-#~ msgstr "Parti terminée"
-
-#~ msgid "An endless game without rules"
-#~ msgstr "Jeu sans fin ni règles."
-
-#~ msgid "The player %i has currently %i points"
-#~ msgstr "Le joueur %i a % points actuellement."
-
-#~ msgid "The tribe that can defeat all others wins!"
-#~ msgstr "La tribu qui peut vaincre toutes les autres gagne !"
-
-#~ msgid "Tribe defeated!"
-#~ msgstr "Tribue vaincue !"
-
-#~ msgid ""
-#~ "The three tribes play together vs each other. Vision is granted to all the "
-#~ "players playing together"
-#~ msgstr ""
-#~ "Les trois tribus jouent les unes contre les autres. Le champ de vision est "
-#~ "commun à tous les joueurs jouant ensembles."
-
-#~ msgid "The tribe %s is no more."
-#~ msgstr "La tribu %s n'est plus."
-
-#~ msgid "Tribes together"
-#~ msgstr "Tribues ensembles"
-
-#~ msgid "Your tribe is no more. You have lost this game"
-#~ msgstr "Votre tribu n'est plus. Vous avez perdu cette partie."
-
-#~ msgid "You've lost!"
-#~ msgstr "Vous avez perdu !"
-
-#~ msgid ""
-#~ "You get points for wares in your HQ, the one with the highest number of "
-#~ "wares at the end of 4 hours wins the game"
-#~ msgstr ""
-#~ "Vous avez des points pour les marchandises de votre QG, celui qui a le plus "
-#~ "grand nombre de marchandises à la fin des 4 heures gagne la partie."
-
-#~ msgid ""
-#~ "As wood gnome you like big forests, so your task is, to have more trees on "
-#~ "your territory than any other player. The game will end after 4 hours of "
-#~ "playing. The one with the most trees at that point will win the game."
-#~ msgstr ""
-#~ "En temps que gnome sylvestre, votre tâhce est la suivante : Avoir le plus "
-#~ "d'arbre sur votre territoire que tout autre joueur. La partie durera 4 "
-#~ "heures. Celui qui possèdera le plus grand nombre d'arbre à ce moment gagnera "
-#~ "la partie."
-
-#~ msgid "%i trees at the moment ."
-#~ msgstr "%i arbres en ce moment."
-
-#~ msgid ""
-#~ "You get points for all wares stored in your headquarters or warehouses. The "
-#~ "player with the highest number of wares at the end of 4 hours wins the game."
-#~ msgstr ""
-#~ "Vous gagnez des points pour toutes les marchandises de votre quartier "
-#~ "général ou vos entrepôts. Le joueur avec le plus grand nombre de biens à la "
-#~ "fin des 4 heures remporte la partie."
