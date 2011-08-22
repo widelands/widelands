@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-03-11 20:32+0000\n"
-"Last-Translator: Georgiy <Unknown>\n"
+"PO-Revision-Date: 2011-05-20 09:46+0000\n"
+"Last-Translator: Denis Deryabin <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-21 04:42+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -164,7 +164,7 @@ msgstr "Разводит рыбу."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr "Разводит пауков для получения паутины."
+msgstr "Разводит пауков для получения пряжи."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -297,7 +297,7 @@ msgstr "Двойной трезубец"
 
 #: ../../tribes/atlanteans/conf:205
 msgid "Dungeon"
-msgstr "Главная башня"
+msgstr "Подземелье"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Farm"
@@ -320,6 +320,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Щипцы - инструмент плавильщика, который работает в плавильне. Они "
+"производятся в мастерской."
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -395,8 +397,7 @@ msgid ""
 "and the goldweaver."
 msgstr ""
 "Золото - один из самых ценных материалов. Оно производится из золотой руды в "
-"плавильнях. Золото используется кузницами брони и оружия, ткацкими "
-"мастерскими."
+"плавильнях. Золото используется кузницами брони и оружия, и златошвейками."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -564,6 +565,8 @@ msgid ""
 "Mills blackroot and corn to produce blackroot flour and corn flour, "
 "respectively."
 msgstr ""
+"Перемалывайте черные корни и зерна, чтобы произвести муку черного корня и "
+"муку, соответственно."
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -671,7 +674,7 @@ msgstr "сделать двойной трезубец"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
-msgstr "сделать щипцы"
+msgstr "Сделать щипцы"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
@@ -723,7 +726,7 @@ msgstr "сделать лопату"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:19
 msgid "Produce spidercloth"
-msgstr "сделать паучью ткань"
+msgstr "Сделать паучью ткань"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -976,7 +979,7 @@ msgstr "Паучья ферма"
 
 #: ../../tribes/atlanteans/conf:95
 msgid "Spideryarn"
-msgstr "Паутина"
+msgstr "Паучья пряжа"
 
 #: ../../tribes/atlanteans/conf:96
 msgid "Steel Shield"
@@ -1016,8 +1019,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
-"В плавильнях, кузницах брони и оружия Атлантов огонь поддерживается при "
-"помощи угля. Уголь добывается в шахтах или производится из бревен в углярках."
+"Огонь Атлантов в плавильнях, кузницах брони и оружия поддерживается при "
+"помощи угля. Уголь добывается в угольных шахтах или производится из бревен в "
+"домах углежога."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1116,6 +1120,9 @@ msgid ""
 "baker needs for a good bread. Also horse farms and spiderfarms need to be "
 "provided with corn."
 msgstr ""
+"Зерно перерабатывается на мельнице в высококачественную муку которая нужна "
+"каждому пекарю для выпечки хорошего хлеба Атлантов. Также зерно требуется "
+"конюшням и паучьим фермам."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1171,6 +1178,9 @@ msgid ""
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
 msgstr ""
+"Этот вкусный хлеб выпекается в пекарне из муки, муки черного корня и воды. "
+"Хлеб расценивается как основной продукт питания для шахтеров, скаутов и "
+"солдат на тренировочных площадках (лабиринт и подземелье)."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1183,14 +1193,16 @@ msgid ""
 "This yarn is produced by spiders, which are bred on spiderfarms. It is "
 "processed to spidercloth in a weaving-mill."
 msgstr ""
+"Пряжа производится пауками, которые выращиваются на паучьих фермах. Она "
+"используется для изготовления паучьей ткани на ткацкой фабрике."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
 "golden tabard in the weaving-mill."
 msgstr ""
-"Пряжа, изготовленная из золота ткачом, используется для вязания уникальных "
-"золотых накидок в ткацких мастерских."
+"Пряжа, изготовленная из золота златошвейкой, используется для плетения "
+"уникальных золотых накидок в ткацкой фабрике."
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
@@ -1223,6 +1235,9 @@ msgid ""
 "the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
 "the smokery also need trunks for their work."
 msgstr ""
+"Стволы - основа для досок, которые используются в почти каждой постройке "
+"Атлантов. Кроме того, лесопилка, домик углежога, мастерская инструментов и "
+"коптильня также нуждаются в бревнах."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"

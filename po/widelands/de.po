@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-26 14:25+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2011-06-11 07:52+0000\n"
+"Last-Translator: Astuur <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-27 04:32+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-06-12 04:48+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../src/network/nethost.cc:2398
 #, c-format
@@ -4161,7 +4161,7 @@ msgstr[1] "%u neue Nachrichten"
 
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Exit Replay"
-msgstr "Aufnahme beenden"
+msgstr "Wiedergabe beenden"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
