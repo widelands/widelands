@@ -15,3 +15,7 @@ fps=10
 [build]
 pics=sentry_b_??.png
 hotspot=39 40
+
+[unoccupied]
+pics=sentry_u_??.png
+hotspot=39 40

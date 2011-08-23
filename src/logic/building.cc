@@ -144,9 +144,10 @@ Building_Descr::Building_Descr
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
-			add_animation
-				("idle",
-				 g_anim.get(directory.c_str(), idle_s, 0));
+			add_animation("idle", g_anim.get(directory.c_str(), idle_s, 0));
+		if (Section * unoccupied = prof.get_section("unoccupied"))
+			if (!is_animation_known("unoccupied"))
+				add_animation("unoccupied", g_anim.get(directory.c_str(), *unoccupied, 0));
 	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
@@ -374,7 +375,10 @@ void Building::init(Editor_Game_Base & egbase)
 	}
 
 	// Start the animation
-	start_animation(egbase, descr().get_animation("idle"));
+	if (descr().is_animation_known("unoccupied"))
+		start_animation(egbase, descr().get_animation("unoccupied"));
+	else
+		start_animation(egbase, descr().get_animation("idle"));
 
 	m_leave_time = egbase.get_gametime();
 }

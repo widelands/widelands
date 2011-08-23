@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -545,7 +545,11 @@ void ConstructionSite::draw
 	try {
 		anim = building().get_animation("build");
 	} catch (Map_Object_Descr::Animation_Nonexistent) {
-		anim = building().get_animation("idle");
+		try {
+			anim = building().get_animation("unoccupied");
+		} catch (Map_Object_Descr::Animation_Nonexistent) {
+			anim = building().get_animation("idle");
+		}
 	}
 	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
 	uint32_t const anim_pic =
