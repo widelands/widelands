@@ -65,7 +65,7 @@ call=produce_plate_armour
 sleep=20000
 return=skipped
 
-[unocupied]
+[unoccupied]
 pics=armory_u_??.png  # ???
 hotspot=54 62
 
