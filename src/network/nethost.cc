@@ -371,13 +371,22 @@ struct HostChatProvider : public ChatProvider {
 
 			// Warn user
 			else if (cmd == "warn") {
-				if (arg1.empty() && arg2.empty()) {
+				if (arg1.empty() || arg2.empty()) {
 					c.msg = _("Wrong use, should be: /warn <name> <reason>");
 					if (!h->isDedicated())
 						c.recipient = h->getLocalPlayername();
 				} else {
-					c.msg  = (format("HOST WARNING FOR %s: ") % arg1).str();
-					c.msg += arg2;
+					int32_t num = h->checkClient(kickUser);
+					if (num == -2) {
+						c.recipient = h->getLocalPlayername();
+						c.msg = _("Why would you warn yourself?");
+					} else if (num == -1) {
+						c.recipient = h->getLocalPlayername();
+						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
+					} else {
+						c.msg  = (format("HOST WARNING FOR %s: ") % arg1).str();
+						c.msg += arg2;
+					}
 				}
 			}
 
@@ -391,14 +400,18 @@ struct HostChatProvider : public ChatProvider {
 						kickReason = arg2;
 					else
 						kickReason = "No reason given!";
-					c.msg =
-						(format(_("Are you sure you want to kick %s?<br>")) % arg1)
-						.str();
-					c.msg +=
-						(format(_("The stated reason was: %s<br>")) % kickReason)
-						.str();
-					c.msg +=
-						(format(_("If yes, type: /ack_kick %s")) % arg1).str();
+					// Check if client exists
+					int32_t num = h->checkClient(kickUser);
+					if (num == -2)
+						c.msg = _("You can not kick yourself!");
+					else if (num == -1)
+						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
+					else {
+						kickClient = num;
+						c.msg  = (format(_("Are you sure you want to kick %s?<br>")) % arg1).str();
+						c.msg += (format(_("The stated reason was: %s<br>")) % kickReason).str();
+						c.msg += (format(_("If yes, type: /ack_kick %s")) % arg1).str();
+					}
 				}
 				if (!h->isDedicated())
 					c.recipient = h->getLocalPlayername();
@@ -413,7 +426,7 @@ struct HostChatProvider : public ChatProvider {
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				else {
 					if (arg1 == kickUser) {
-						h->kickUser(kickUser, kickReason);
+						h->kickUser(kickClient, kickReason);
 						return;
 					} else
 						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
@@ -471,6 +484,7 @@ private:
 	NetHost                * h;
 	std::vector<ChatMessage> messages;
 	std::string              kickUser;
+	uint32_t                 kickClient;
 	std::string              kickReason;
 };
 
@@ -976,20 +990,19 @@ void NetHost::send(ChatMessage msg)
 }
 
 /**
-* If the host sends a chat message with formation /kick <name> <reason>
-* This function will handle this command and try to kick the user.
-*/
-void NetHost::kickUser(std::string name, std::string reason)
+ * Checks if client \ref name exists and \returns int32_t :
+ *   -   the client number if found
+ *   -   -1 if no client was found
+ *   -   -2 if the host is the client (has no client number)
+ */
+int32_t NetHost::checkClient(std::string name)
 {
-	ChatMessage kickmsg;
-	kickmsg.playern = -2; // System message
+	// Check if the client is the host him-/herself
 	if (d->localplayername == name) {
-		kickmsg.msg = _("You can not kick yourself!");
-		d->chat.receive(kickmsg);
-		return;
+		return -2;
 	}
 
-	// Search for the user
+	// Search for the client
 	uint16_t i = 0;
 	uint32_t client = 0;
 	for (; i < d->settings.users.size(); ++i) {
@@ -1002,13 +1015,19 @@ void NetHost::kickUser(std::string name, std::string reason)
 			if (d->clients.at(client).usernum == static_cast<int16_t>(i))
 				break;
 		if (client >= d->clients.size())
-			throw wexception
-				("WARNING: user was found but no client is connected to it!\n");
+			throw wexception("WARNING: user was found but no client is connected to it!\n");
+		return client; // client found
 	} else {
-		kickmsg.msg = _("There is no connected user with that nickname!");
-		d->chat.receive(kickmsg);
-		return;
+		return -1; // no client found
 	}
+}
+
+/**
+* If the host sends a chat message with formation /kick <name> <reason>
+* This function will handle this command and try to kick the user.
+*/
+void NetHost::kickUser(uint32_t client, std::string reason)
+{
 	disconnectClient(client, "Kicked by the host: " + reason);
 }
 

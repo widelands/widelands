@@ -17,3 +17,8 @@ fps=10
 [build]
 pics=barrier_b_??.png
 hotspot=45 66
+
+[unoccupied]
+pics=barrier_u_??.png
+hotspot=45 66
+
