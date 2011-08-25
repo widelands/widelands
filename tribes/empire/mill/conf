@@ -28,10 +28,11 @@ animate=working 10000
 produce=flour
 
 [idle]
-pics=mill_i_??.png  # ???
-hotspot=37 87
+pics=windmill_i_??.png  # ???
+hotspot=45 91
 
 [working]
-pics=mill_w_??.png  # lets see the mill turn!
-hotspot=39 89
+pics=windmill_w_??.png  # lets see the mill turn!
+hotspot=45 91
+playercolor=true
 fps=25
