@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 18,
+	NETWORK_PROTOCOL_VERSION = 19,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -179,6 +179,11 @@ enum {
 	 * During game setup, this command updates the information associated to
 	 * one player slot.
 	 *
+	 * The client sends this command to toggle the player type. This is only available if the server is
+	 * dedicated and the client was granted access.
+	 * Payload in that case is:
+	 * \li Unsigned8: number of the player
+	 *
 	 * \see NetClient::handle_network
 	 */
 	NETCMD_SETTING_PLAYER = 8,
@@ -207,6 +212,7 @@ enum {
 
 	/**
 	 * Sent by the host during game setup to indicate that the game starts.
+	 * Alternatively sent by the client to start a dedicated server.
 	 *
 	 * The client must load the map and setup the game. As soon as the game
 	 * is fully loaded, it must behave as if a \ref NETCMD_WAIT command had
@@ -261,7 +267,8 @@ enum {
 	/**
 	 * During game setup, this is sent by the client to request a change
 	 * to a different tribe. Payload is
-	 * \li String: name of tribe
+	 * \li Unsigned8: player number
+	 * \li String:    name of tribe
 	 *
 	 * The client must not assume that the host will accept this request.
 	 * The host may or may not send a \ref NETCMD_SETTING_ALLPLAYERS or
@@ -357,17 +364,21 @@ enum {
 	NETCMD_FILE_PART = 24,
 
 	/**
-	* Sent by the host to change the win condition.
+	* Sent by the host (or by the client if access was granted to dedicated server)
+	* to change the win condition.
 	*
-	* Attached data is:
+	* If sent by the host, attached data is:
 	* \li String: name of the win condition
+	*
+	* If sent by the client, no data is attached, as it is only a request to toggle
 	*/
 	NETCMD_WIN_CONDITION = 25,
 
 	/**
 	 * During game setup, this is sent by the client to indicate that the
-	 * client wants to change its team number.
+	 * client wants to change a team number.
 	 *
+	 * \li Unsigned8: number of the player
 	 * \li Unsigned8: new desired team number
 	 *
 	 * \note The client must not assume that the host will accept this
@@ -375,7 +386,40 @@ enum {
 	 * replies with a \ref NETCMD_SETTING_PLAYER or
 	 *  \ref NETCMD_SETTING_ALLPLAYERS indicating the changed team.
 	 */
-	NETCMD_SETTING_CHANGETEAM = 26
+	NETCMD_SETTING_CHANGETEAM = 26,
+
+	/**
+	 * During game setup, this is sent by the client to indicate that the
+	 * client wants to change a shared player.
+	 *
+	 * \li Unsigned8: number of the player
+	 * \li Unsigned8: new shared player
+	 *
+	 * \note The client must not assume that the host will accept this
+	 * request. Change of team number only becomes effective when/if the host
+	 * replies with a \ref NETCMD_SETTING_PLAYER or
+	 *  \ref NETCMD_SETTING_ALLPLAYERS indicating the changed team.
+	 */
+	NETCMD_SETTING_CHANGESHARED = 27,
+
+	/**
+	 * During game setup, this is sent by the client to indicate that the
+	 * client wants to change a player's initialisation.
+	 *
+	 * \li Unsigned8: number of the player
+	 *
+	 * \note The client must not assume that the host will accept this
+	 * request. Change of team number only becomes effective when/if the host
+	 * replies with a \ref NETCMD_SETTING_PLAYER or
+	 *  \ref NETCMD_SETTING_ALLPLAYERS indicating the changed team.
+	 */
+	NETCMD_SETTING_CHANGEINIT = 28,
+
+	/**
+	 * This is send by the server to grant access to the settings (as well as to acknowledge the correct
+	 * password if the server is password protected)
+	 */
+	NETCMD_DEDICATED_ACCESS = 29
 };
 
 #endif

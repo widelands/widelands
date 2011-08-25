@@ -155,6 +155,7 @@ private:
 	NetHostImpl * d;
 	bool use_ggz;
 	bool m_is_dedicated;
+	std::string m_password;
 	bool m_forced_pause;
 };
 

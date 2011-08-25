@@ -390,13 +390,8 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
 			 	 "not own. Normally such a file should be send from the host to "
 			 	 "you, but perhaps the transfer was not yet finnished!?!"),
 			 m_settings->settings().mapfilename.c_str());
-	if (m_settings->canLaunch()) {
-		GameSettings const & s = m_settings->settings();
-		if (s.savegame)
-			end_modal(1 + s.scenario);
-		else
-			end_modal(3 + s.scenario);
-	}
+	if (m_settings->canLaunch())
+		end_modal(1);
 }
 
 

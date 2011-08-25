@@ -68,17 +68,17 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t const number) {
-		if (h->settings().savegame)
-			return h->settings().players.at(number).state != PlayerSettings::stateClosed;
-		else if (h->settings().scenario)
+		if (settings().savegame)
+			return settings().players.at(number).state != PlayerSettings::stateClosed;
+		else if (settings().scenario)
 			return
-				((h->settings().players.at(number).state == PlayerSettings::stateOpen
+				((settings().players.at(number).state == PlayerSettings::stateOpen
 				  ||
-				  h->settings().players.at(number).state == PlayerSettings::stateHuman)
+				  settings().players.at(number).state == PlayerSettings::stateHuman)
 				 &&
-				 h->settings().players.at(number).closeable)
+				 settings().players.at(number).closeable)
 				||
-				h->settings().players.at(number).state == PlayerSettings::stateClosed;
+				settings().players.at(number).state == PlayerSettings::stateClosed;
 		return true;
 	}
 	virtual bool canChangePlayerTribe(uint8_t const number) {
@@ -498,6 +498,7 @@ struct Client {
 	bool syncreport_arrived;
 	int32_t time; // last time report
 	uint32_t desiredspeed;
+	bool dedicated_access;
 };
 
 struct NetHostImpl {
@@ -563,6 +564,7 @@ NetHost::NetHost (std::string const & playername, bool ggz)
 	d(new NetHostImpl(this)),
 	use_ggz(ggz),
 	m_is_dedicated(false),
+	m_password(""),
 	m_forced_pause(false)
 {
 	log("[Host] starting up.\n");
@@ -666,6 +668,9 @@ void NetHost::run(bool const autorun)
 	if (m_is_dedicated) {
 		// Initializing
 		d->hp.nextWinCondition();
+		// May be the server is password protected?
+		Section & s = g_options.pull_section("global");
+		m_password  = s.get_string("dedicated_password", "");
 		// Setup by the users
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
 		while (not d->dedicated_start) {
@@ -891,7 +896,7 @@ void NetHost::send(ChatMessage msg)
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);
 
-		// Is this pm for the host player?
+		// Is this a pm for the host player?
 		if (d->localplayername == msg.recipient) {
 			// If this is a dedicated server, handle commands
 			if (m_is_dedicated)
@@ -905,33 +910,15 @@ void NetHost::send(ChatMessage msg)
 			s.Unsigned8(1);
 			s.String(msg.recipient);
 		} else { //find the recipient
-			uint16_t i = 0;
-			for (; i < d->settings.users.size(); ++i) {
-				UserSettings const & user = d->settings.users.at(i);
-				if (user.name == msg.recipient)
-					break;
-			}
-			if (i < d->settings.users.size()) {
-				for (wl_const_range<std::vector<Client> > j(d->clients);; ++j)
-					if (j.empty()) {
-						//  Better no wexception; it would break the whole game.
-						log
-							("WARNING: user was found but no client is connected to "
-							 "it!\n");
-						break;
-					} else if (j->usernum == static_cast<int16_t>(i)) {
-						s.Signed16(msg.playern);
-						s.String(msg.sender);
-						s.String(msg.msg);
-						s.Unsigned8(1);
-						s.String(msg.recipient);
-						s.send(j->sock);
-						break;
-					}
-
-				log
-					("[Host]: personal chat: from %s to %s\n",
-					 msg.sender.c_str(), msg.recipient.c_str());
+			int32_t clientnum = checkClient(msg.recipient);
+			if (clientnum >= 0) {
+				s.Signed16(msg.playern);
+				s.String(msg.sender);
+				s.String(msg.msg);
+				s.Unsigned8(1);
+				s.String(msg.recipient);
+				s.send(d->clients.at(clientnum).sock);
+				log("[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
 			} else {
 				std::string fail = "Failed to send message: Recipient \"";
 				fail += msg.recipient + "\" could not be found!";
@@ -1096,17 +1083,15 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 				_
 				("<br>Available host commands are:<br>"
 				 "help           - Shows this help<br>"
-				 "start          - Starts the server<br>"
 				 "ls_saved_games - Shows a list of saved games<br>"
 				 "ls_maps        - Shows a list of maps<br>"
 				 "switch_save  $ - Switch to saved game $<br>"
 				 "switch_map   $ - Switch to map $<br>"
-				 "toggle_type  # - Toggles the type of player #<br>"
-				 "toggle_init  # - Toggles the initialization of player #<br>"
-				 "toggle_tribe # - Toggles the tribe of player #<br>"
-				 "toggle_team  # - Toggles the team of player #<br>"
-				 "toggle_win_con - Toggles the win_condition<br>"
 				 "host         $ - Tries to run the host command $");
+		if (m_password.size() > 1) {
+			c.msg += "<br>";
+			c.msg += _("pwd          $ - Sends the password $ to the host");
+		}
 		send(c);
 
 		// host
@@ -1141,21 +1126,33 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			send(c);
 		}
 
+	} else if (cmd == "pwd") {
+		if (m_password.size() == 0) {
+			c.msg = _("This server is not password protected!");
+			send(c);
+		} else if (arg1 != m_password) {
+			c.msg = _("The send password was incorrect!");
+			send(c);
+		} else {
+			c.msg = _("The password was correct, access was granted!");
+			send(c);
+
+			// Find the client that send the chat message
+			int32_t num = checkClient(sender);
+			assert(num > -1);
+
+			// Send the client the access granted message
+			SendPacket s;
+			s.reset();
+			s.Unsigned8(NETCMD_DEDICATED_ACCESS);
+			s.send(d->clients.at(num).sock);
+			d->clients.at(num).dedicated_access = true;
+		}
+
 	} else if (not d->game) {
 
-		// start
-		if (cmd == "start") {
-			if (!canLaunch()) {
-				// The Server is not yet ready
-				sendSystemChat
-					(_("%s tried to start the game, but the server is not launchable."), sender.c_str());
-			} else {
-				sendSystemChat(_("%s send the signal to start the game."), sender.c_str());
-				d->dedicated_start = true;
-			}
-
 		// ls_saved_games
-		} else if (cmd == "ls_saved_games") {
+		if (cmd == "ls_saved_games") {
 			std::string temp(_("Available saved games:<br>"));
 			filenameset_t files;
 			g_fs->FindFiles("save", "*", &files, 0);
@@ -1247,45 +1244,6 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = (format(_("Can not use \"%s\" as map file!")) % arg1).str();
 			send(c);
 
-		// Player commands
-		} else if
-			(cmd == "toggle_type" || cmd == "toggle_init" || cmd == "toggle_tribe" || cmd == "toggle_team")
-		{
-			std::istringstream temp(arg1);
-			// Conversion fails with uint8_t or similiar, so we convert to int.
-			// This should not be a problem anyways, as this function runs only server sided.
-			int plr;
-			if (!(temp >> plr)) {
-				c.msg = _("Invalid value # for player - should be a player number");
-				send(c);
-				return;
-			}
-			--plr; // 0 based
-			if (plr < 0 || plr >= static_cast<int32_t>(d->settings.players.size())) {
-				c.msg = _("Invalid value # for player - should be a player number");
-				send(c);
-				return;
-			}
-
-			// toggle_type #
-			if      (cmd == "toggle_type")
-				d->npsb.toggle_type(plr);
-
-			// toggle_init #
-			else if (cmd == "toggle_init")
-				d->npsb.toggle_init(plr);
-
-			// toggle_tribe #
-			else if (cmd == "toggle_tribe")
-				d->npsb.toggle_tribe(plr);
-
-			// toggle_team #
-			else if (cmd == "toggle_team")
-				d->npsb.toggle_team(plr);
-
-		// toggle_win_con
-		} else if (cmd == "toggle_win_con") {
-			d->hp.nextWinCondition();
 		// default
 		}  else {
 			c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
@@ -1914,6 +1872,8 @@ void NetHost::welcomeClient
 
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
+	// only used at password protected dedicated server, but better initialize always
+	client.dedicated_access = m_is_dedicated ? (m_password.size() == 0) : false;
 
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 		if (d->settings.users[i].position == UserSettings::notConnected()) {
@@ -2016,7 +1976,7 @@ void NetHost::welcomeClient
 
 	sendSystemChat(_("%s has joined the game"), effective_name.c_str());
 
-	// If this is a dedicated server, tell the player about the net commands
+	// If this is a dedicated server, inform the player
 	if (m_is_dedicated) {
 		ChatMessage c;
 		c.time = time(0);
@@ -2024,10 +1984,22 @@ void NetHost::welcomeClient
 		c.sender = d->localplayername;
 		c.msg =
 			(format
-				(_("This is a dedicated server send \"@%s help\" to get a full "
-				   "list of available commands. \"@%s start\" starts the server."))
-				% d->localplayername % d->localplayername)
+				(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
+				% d->localplayername)
 			.str();
+		if (m_password.size() > 1) {
+			c.msg += "<br>";
+			c.msg +=
+				(format
+					(_("This server is password protected. You can send the password with: \"@%s pwd PASSWORD\""))
+					% d->localplayername)
+				.str();
+		} else {
+			// If not password protected, give the client access to the settings
+			s.reset();
+			s.Unsigned8(NETCMD_DEDICATED_ACCESS);
+			s.send(client.sock);
+		}
 		c.recipient = d->settings.users.at(client.usernum).name;
 		send(c);
 	}
@@ -2406,14 +2378,47 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		//  Do not be harsh about packets of this type arriving out of order -
 		//  the client might just have had bad luck with the timing.
 		if (!d->game) {
-			std::string tribe = r.String();
-			setPlayerTribe(client.playernum, tribe);
+			uint8_t num = r.Unsigned8();
+			if (num != client.playernum)
+				// Only valid if the server is dedicated and the client was granted access
+				if (!client.dedicated_access)
+					throw DisconnectException(_("Client has no access to other player's settings."));
+			setPlayerTribe(num, r.String());
+		}
+		break;
+
+	case NETCMD_SETTING_CHANGESHARED:
+		//  Do not be harsh about packets of this type arriving out of order -
+		//  the client might just have had bad luck with the timing.
+		if (!d->game) {
+			uint8_t num = r.Unsigned8();
+			if (num != client.playernum)
+				// Only valid if the server is dedicated and the client was granted access
+				if (!client.dedicated_access)
+					throw DisconnectException(_("Client has no access to other player's settings."));
+			setPlayerShared(num, r.Unsigned8());
 		}
 		break;
 
 	case NETCMD_SETTING_CHANGETEAM:
 		if (!d->game) {
-			setPlayerTeam(client.playernum, r.Unsigned8());
+			uint8_t num = r.Unsigned8();
+			if (num != client.playernum)
+				// Only valid if the server is dedicated and the client was granted access
+				if (!client.dedicated_access)
+					throw DisconnectException(_("Client has no access to other player's settings."));
+			setPlayerTeam(num, r.Unsigned8());
+		}
+		break;
+
+	case NETCMD_SETTING_CHANGEINIT:
+		if (!d->game) {
+			uint8_t num = r.Unsigned8();
+			if (num != client.playernum)
+				// Only valid if the server is dedicated and the client was granted access
+				if (!client.dedicated_access)
+					throw DisconnectException(_("Client has no access to other player's settings."));
+			d->npsb.toggle_init(num);
 		}
 		break;
 
@@ -2421,6 +2426,35 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (!d->game) {
 			uint8_t const pos = r.Unsigned8();
 			switchToPlayer(client.usernum, pos);
+		}
+		break;
+
+	case NETCMD_SETTING_PLAYER:
+		if (!d->game) {
+			// Only valid if the server is dedicated and the client was granted access
+			if (!client.dedicated_access)
+				throw DisconnectException(_("Client has no access to server settings."));
+			d->hp.nextPlayerState(r.Unsigned8());
+		}
+		break;
+
+	case NETCMD_WIN_CONDITION:
+		if (!d->game) {
+			// Only valid if the server is dedicated and the client was granted access
+			if (!client.dedicated_access)
+				throw DisconnectException(_("Client has no access to server settings."));
+			d->hp.nextWinCondition();
+		}
+		break;
+
+	case NETCMD_LAUNCH:
+		if (!d->game) {
+			// Only valid if the server is dedicated and the client was granted access
+			if (!client.dedicated_access)
+				throw DisconnectException(_("Client has no access to server settings."));
+			if (!canLaunch())
+				throw DisconnectException(_("Client send start command, although server is not yet ready."));
+			d->dedicated_start = true;
 		}
 		break;
 
@@ -2452,8 +2486,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_SYNCREPORT: {
 		if (!d->game || !d->syncreport_pending || client.syncreport_arrived)
-			throw DisconnectException
-				(_("Client sent unexpected synchronization report."));
+			throw DisconnectException(_("Client sent unexpected synchronization report."));
 		int32_t time = r.Signed32();
 		r.Data(client.syncreport.data, 16);
 		client.syncreport_arrived = true;
@@ -2488,8 +2521,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
 		if (!file) // Do we have a file for sending
-			throw DisconnectException
-				(_("Client requests file altough none is available to send."));
+			throw DisconnectException(_("Client requests file altough none is available to send."));
 		sendSystemChat
 			(_("Started to send file %s to %s!"),
 			 file->filename.c_str(),
@@ -2500,19 +2532,15 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_FILE_PART: {
 		if (!file) // Do we have a file for sending
-			throw DisconnectException
-				(_("Client requests file altough none is available to send."));
+			throw DisconnectException(_("Client requests file altough none is available to send."));
 		uint32_t part = r.Unsigned32();
 		std::string x = r.String();
 		if (x != file->md5sum) {
-			log
-				("[host] File transfer checksum missmatch %s != %s\n",
-				 x.c_str(), file->md5sum.c_str());
+			log("[host] File transfer checksum missmatch %s != %s\n", x.c_str(), file->md5sum.c_str());
 			return; // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file->parts.size())
-			throw DisconnectException
-				(_("Client requests file part that does not exist."));
+			throw DisconnectException(_("Client requests file part that does not exist."));
 		if (part == file->parts.size() - 1) {
 			sendSystemChat
 				(_("Completed transfer of file %s to %s"),
@@ -2532,8 +2560,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	}
 
 	default:
-		throw DisconnectException
-			(_("Client sent unknown command number %u"), cmd);
+		throw DisconnectException(_("Client sent unknown command number %u"), cmd);
 	}
 }
 
