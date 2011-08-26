@@ -27,6 +27,7 @@
 
 struct ChatMessage;
 struct NetHostImpl;
+struct Client;
 
 /**
  * NetHost manages the lifetime of a network game in which this computer
@@ -75,7 +76,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team);
 	void setPlayerCloseable(uint8_t number, bool closeable);
 	void setPlayerShared   (uint8_t number, uint8_t shared);
-	void switchToPlayer    (uint32_t user, uint8_t number);
+	void switchToPlayer    (uint32_t user,  uint8_t number);
 	void setWinCondition   (std::string);
 
 	// just visible stuff for the select mapmenu
@@ -90,6 +91,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void splitCommandArray
 		(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2);
 	void handle_dserver_command(std::string, std::string);
+	void dserver_send_maps_and_saves(Client &);
 
 	void forcePause() {
 		m_forced_pause = true;
@@ -155,6 +157,7 @@ private:
 	NetHostImpl * d;
 	bool use_ggz;
 	bool m_is_dedicated;
+	std::string m_password;
 	bool m_forced_pause;
 };
 

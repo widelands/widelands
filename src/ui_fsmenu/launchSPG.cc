@@ -318,7 +318,7 @@ void Fullscreen_Menu_LaunchSPG::select_map()
 	if (!m_settings->canChangeMap())
 		return;
 
-	Fullscreen_Menu_MapSelect msm(Map::SP_SCENARIO);
+	Fullscreen_Menu_MapSelect msm(m_settings, 0);
 	int code = msm.run();
 
 	if (code <= 0) {
