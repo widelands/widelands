@@ -376,12 +376,16 @@ struct HostChatProvider : public ChatProvider {
 					if (!h->isDedicated())
 						c.recipient = h->getLocalPlayername();
 				} else {
-					int32_t num = h->checkClient(kickUser);
+					int32_t num = h->checkClient(arg1);
 					if (num == -2) {
-						c.recipient = h->getLocalPlayername();
-						c.msg = _("Why would you warn yourself?");
+						if (!h->isDedicated()) {
+							c.recipient = h->getLocalPlayername();
+							c.msg = _("Why would you warn yourself?");
+						} else
+							c.msg = _("Why would you want to warn the dedicated server?");
 					} else if (num == -1) {
-						c.recipient = h->getLocalPlayername();
+						if (!h->isDedicated())
+							c.recipient = h->getLocalPlayername();
 						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
 					} else {
 						c.msg  = (format("HOST WARNING FOR %s: ") % arg1).str();
@@ -403,7 +407,10 @@ struct HostChatProvider : public ChatProvider {
 					// Check if client exists
 					int32_t num = h->checkClient(kickUser);
 					if (num == -2)
-						c.msg = _("You can not kick yourself!");
+						if (!h->isDedicated()) {
+							c.msg = _("You can not kick yourself!");
+						} else
+							c.msg = _("You can not kick the dedicated server");
 					else if (num == -1)
 						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
 					else {
@@ -1061,6 +1068,12 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	c.sender = d->localplayername;
 	c.recipient = sender;
 
+	// Find the client that send the chat message
+	int32_t num = checkClient(sender);
+	if (num < 0) // host or not found
+		return;
+	Client & client = d->clients[num];
+
 	if (cmdarray.size() < 1) {
 		return;
 	}
@@ -1083,10 +1096,6 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 				_
 				("<br>Available host commands are:<br>"
 				 "help           - Shows this help<br>"
-				 "ls_saved_games - Shows a list of saved games<br>"
-				 "ls_maps        - Shows a list of maps<br>"
-				 "switch_save  $ - Switch to saved game $<br>"
-				 "switch_map   $ - Switch to map $<br>"
 				 "host         $ - Tries to run the host command $");
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
@@ -1096,6 +1105,11 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 
 		// host
 	} else if (cmd == "host") {
+		if (!client.dedicated_access) {
+			c.msg = _("Access to host commands denied. To gain access, send the password with pwd command.");
+			send(c);
+			return;
+		}
 		std::string temp = arg1 + " " + arg2;
 		c.msg = (format(_("%s told me to run the command: \"%s\"")) % sender % temp).str();
 		c.recipient = "";
@@ -1134,119 +1148,17 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = _("The send password was incorrect!");
 			send(c);
 		} else {
-			c.msg = _("The password was correct, access was granted!");
-			send(c);
-
-			// Find the client that send the chat message
-			int32_t num = checkClient(sender);
-			assert(num > -1);
+			// Once the client gained access (s)he might need the knowledge about available maps and saved games
+			dserver_send_maps_and_saves(client);
 
 			// Send the client the access granted message
 			SendPacket s;
 			s.reset();
 			s.Unsigned8(NETCMD_DEDICATED_ACCESS);
-			s.send(d->clients.at(num).sock);
-			d->clients.at(num).dedicated_access = true;
-		}
+			s.send(client.sock);
+			client.dedicated_access = true;
 
-	} else if (not d->game) {
-
-		// ls_saved_games
-		if (cmd == "ls_saved_games") {
-			std::string temp(_("Available saved games:<br>"));
-			filenameset_t files;
-			g_fs->FindFiles("save", "*", &files, 0);
-			Widelands::Game game;
-			Widelands::Game_Preload_Data_Packet gpdp;
-			const filenameset_t & gamefiles = files;
-			container_iterate_const(filenameset_t, gamefiles, i) {
-				char const * const name = i.current->c_str();
-				try {
-					Widelands::Game_Loader gl(name, game);
-					gl.preload_game(gpdp);
-					temp += i.current->substr(5, i.current->size() - 1);
-					temp += "; ";
-				} catch (_wexception const & e) {}
-			}
-			c.msg = temp;
-			send(c);
-
-		// ls_maps
-		} else if (cmd == "ls_maps") {
-			std::string temp(_("Available maps:<br>"));
-			filenameset_t files;
-			g_fs->FindFiles("maps", "*", &files, 0);
-			Widelands::Map map;
-			const filenameset_t & gamefiles = files;
-			container_iterate_const(filenameset_t, gamefiles, i) {
-				char const * const name = i.current->c_str();
-				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
-				if (ml) {
-					temp += i.current->substr(5, i.current->size() - 1);
-					temp += "; ";
-				}
-			}
-			c.msg = temp;
-			send(c);
-
-		// switch_save
-		} else if (cmd == "switch_save") {
-			std::string path("save/");
-			path += arg1;
-			if (arg2.size() > 0) {
-				path += " ";
-				path += arg2;
-			}
-			if (g_fs->FileExists(path)) {
-				// Check if file is a saved game and if yes read out the needed data
-				try {
-					Widelands::Game game;
-					Widelands::Game_Preload_Data_Packet gpdp;
-					Widelands::Game_Loader gl(path, game);
-					gl.preload_game(gpdp);
-
-					// If we are here, it is a saved game file :)
-					// Read the needed data from file "elemental" of the used map.
-					FileSystem & sg_fs = g_fs->MakeSubFileSystem(path.c_str());
-					Profile prof;
-					prof.read("map/elemental", 0, sg_fs);
-					Section & s = prof.get_safe_section("global");
-					uint8_t nr_players = s.get_safe_int("nr_players");
-
-					d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
-					return;
-				} catch (_wexception const & e) {}
-			}
-			c.msg = (format(_("Can not use \"%s\" as saved game file!")) % arg1).str();
-			send(c);
-
-		// switch_map
-		} else if (cmd == "switch_map") {
-			std::string path("maps/");
-			path += arg1;
-			if (arg2.size() > 0) {
-				path += " ";
-				path += arg2;
-			}
-			if (g_fs->FileExists(path)) {
-				// Check if file is a map and if yes read out the needed data
-				Widelands::Map   map;
-				i18n::Textdomain td("maps");
-				Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
-				if (ml) {
-					// Yes it is a map file :)
-					map.set_filename(path.c_str());
-					ml->preload_map(true);
-					d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
-					return;
-				}
-			}
-			c.msg = (format(_("Can not use \"%s\" as map file!")) % arg1).str();
-			send(c);
-
-		// default
-		}  else {
-			c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
+			c.msg = _("The password was correct, access was granted!");
 			send(c);
 		}
 
@@ -1254,6 +1166,79 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	} else {
 		c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
 		send(c);
+	}
+}
+
+void NetHost::dserver_send_maps_and_saves(Client & client) {
+	assert (not d->game);
+
+	if (d->settings.maps.empty()) {
+		// Read in maps
+		filenameset_t files;
+		g_fs->FindFiles("maps", "*", &files, 0);
+		Widelands::Map map;
+		const filenameset_t & gamefiles = files;
+		container_iterate_const(filenameset_t, gamefiles, i) {
+			char const * const name = i.current->c_str();
+			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+			if (ml) {
+				map.set_filename(name);
+				ml->preload_map(true);
+				DedicatedMapInfos info;
+				info.path     = name;
+				info.players  = map.get_nrplayers();
+				info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
+				d->settings.maps.push_back(info);
+			}
+		}
+	}
+
+	if (d->settings.saved_games.empty()) {
+		// Read in saved games
+		filenameset_t files;
+		g_fs->FindFiles("save", "*", &files, 0);
+		Widelands::Game game;
+		Widelands::Game_Preload_Data_Packet gpdp;
+		const filenameset_t & gamefiles = files;
+		container_iterate_const(filenameset_t, gamefiles, i) {
+			char const * const name = i.current->c_str();
+			try {
+				Widelands::Game_Loader gl(name, game);
+				gl.preload_game(gpdp);
+
+				// If we are here, the saved game is valid
+				FileSystem & sg_fs = g_fs->MakeSubFileSystem(name);
+				Profile prof;
+				prof.read("map/elemental", 0, sg_fs);
+				Section & s = prof.get_safe_section("global");
+
+				DedicatedMapInfos info;
+				info.path     = name;
+				info.players  = static_cast<uint8_t>(s.get_safe_int("nr_players"));
+				d->settings.saved_games.push_back(info);
+			} catch (_wexception const & e) {}
+		}
+	}
+
+	SendPacket s;
+
+	// Send list of maps
+	for (uint8_t i = 0; i < d->settings.maps.size(); ++i) {
+		s.reset();
+		s.Unsigned8(NETCMD_DEDICATED_MAPS);
+		s.String   (d->settings.maps[i].path);
+		s.Unsigned8(d->settings.maps[i].players);
+		s.Unsigned8(d->settings.maps[i].scenario ? 1 : 0);
+		s.send(client.sock);
+	}
+
+	// Send list of saved games
+	for (uint8_t i = 0; i < d->settings.saved_games.size(); ++i) {
+		s.reset();
+		s.Unsigned8(NETCMD_DEDICATED_SAVED_GAMES);
+		s.String   (d->settings.saved_games[i].path);
+		s.Unsigned8(d->settings.saved_games[i].players);
+		s.send(client.sock);
 	}
 }
 
@@ -1995,6 +1980,9 @@ void NetHost::welcomeClient
 					% d->localplayername)
 				.str();
 		} else {
+			// Once the client gained access it might need the knowledge about available maps and saved games
+			dserver_send_maps_and_saves(client);
+
 			// If not password protected, give the client access to the settings
 			s.reset();
 			s.Unsigned8(NETCMD_DEDICATED_ACCESS);
@@ -2372,6 +2360,54 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	switch (cmd) {
 	case NETCMD_PONG:
 		log("[Host] client %u: got pong\n", i);
+		break;
+
+	case NETCMD_SETTING_MAP:
+		if (!d->game) {
+			// Only valid if the server is dedicated and the client was granted access
+			if (!client.dedicated_access)
+				throw DisconnectException(_("Client has no access to other player's settings."));
+
+			std::string name = r.String();
+			std::string path = r.String();
+			bool savegame    = r.Unsigned8() == 1;
+			bool scenario    = r.Unsigned8() == 1;
+			if (savegame) {
+				if (g_fs->FileExists(path)) {
+					// Check if file is a saved game and if yes read out the needed data
+					try {
+						Widelands::Game game;
+						Widelands::Game_Preload_Data_Packet gpdp;
+						Widelands::Game_Loader gl(path, game);
+						gl.preload_game(gpdp);
+
+						// If we are here, it is a saved game file :)
+						// Read the needed data from file "elemental" of the used map.
+						FileSystem & sg_fs = g_fs->MakeSubFileSystem(path.c_str());
+						Profile prof;
+						prof.read("map/elemental", 0, sg_fs);
+						Section & s = prof.get_safe_section("global");
+						uint8_t nr_players = s.get_safe_int("nr_players");
+
+						d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
+					} catch (_wexception const & e) {}
+				}
+			} else {
+				if (g_fs->FileExists(path)) {
+					// Check if file is a map and if yes read out the needed data
+					Widelands::Map   map;
+					i18n::Textdomain td("maps");
+					Widelands::Map_Loader * const ml = map.get_correct_loader(path.c_str());
+					if (ml) {
+						// Yes it is a map file :)
+						map.set_filename(path.c_str());
+						ml->preload_map(true);
+						d->settings.scenario = scenario;
+						d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
+					}
+				}
+			}
+		}
 		break;
 
 	case NETCMD_SETTING_CHANGETRIBE:

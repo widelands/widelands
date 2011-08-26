@@ -37,10 +37,12 @@ struct Map;
 struct Map_Loader;
 };
 struct RenderTarget;
+struct GameController;
+struct GameSettingsProvider;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadGame(Widelands::Game &);
+	Fullscreen_Menu_LoadGame(Widelands::Game &, GameSettingsProvider * gsp = 0, GameController * gc = 0);
 
 	const std::string & filename() {return m_filename;}
 
@@ -49,6 +51,7 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	void map_selected  (uint32_t);
 	void double_clicked(uint32_t);
 	void fill_list     ();
+	void think();
 
 private:
 	void no_selection();
@@ -59,9 +62,9 @@ private:
 	std::string m_fn;
 
 	Widelands::Game &                               m_game;
-	UI::Callback_Button                         m_back;
-	UI::Callback_Button                         m_ok;
-	UI::Callback_Button                         m_delete;
+	UI::Callback_Button                             m_back;
+	UI::Callback_Button                             m_ok;
+	UI::Callback_Button                             m_delete;
 	UI::Listselect<const char *>                    m_list;
 	UI::Textarea                                    m_title;
 	UI::Textarea                                    m_label_mapname;
@@ -72,6 +75,8 @@ private:
 
 	filenameset_t                                   m_gamefiles;
 
+	GameSettingsProvider                          * m_settings;
+	GameController                                * m_ctrl;
 };
 
 

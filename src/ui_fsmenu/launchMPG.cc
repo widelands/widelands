@@ -310,10 +310,7 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 	if (!m_settings->canChangeMap())
 		return;
 
-	GameSettings const & settings = m_settings->settings();
-
-	Fullscreen_Menu_MapSelect msm
-		(settings.multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO);
+	Fullscreen_Menu_MapSelect msm(m_settings, m_ctrl);
 	int code = msm.run();
 
 	if (code <= 0) {
@@ -339,7 +336,7 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 		return;
 
 	Widelands::Game game; // The place all data is saved to.
-	Fullscreen_Menu_LoadGame lsgm(game);
+	Fullscreen_Menu_LoadGame lsgm(game, m_settings, m_ctrl);
 	int code = lsgm.run();
 
 	if (code <= 0)

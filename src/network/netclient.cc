@@ -92,7 +92,7 @@ struct NetClientImpl {
 
 NetClient::NetClient
 	(IPaddress * const svaddr, std::string const & playername, bool ggz)
-: d(new NetClientImpl), use_ggz(ggz), m_dedicated_access(false)
+: d(new NetClientImpl), use_ggz(ggz), m_dedicated_access(false), m_dedicated_temp_scenario(false)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == 0)
@@ -292,10 +292,12 @@ GameSettings const & NetClient::settings()
 	return d->settings;
 }
 
-void NetClient::setScenario(bool)
+void NetClient::setScenario(bool scenario)
 {
-	// Client is not allowed to do this
-#warning implement this
+	// only accessible, if server is a dedicated server and access is granted
+	if (!m_dedicated_access)
+		return;
+	m_dedicated_temp_scenario = scenario;
 }
 
 bool NetClient::canChangeMap()
@@ -375,10 +377,18 @@ bool NetClient::canLaunch()
 	return true;
 }
 
-void NetClient::setMap(std::string const &, std::string const &, uint32_t, bool)
+void NetClient::setMap(std::string const & name, std::string const & path, uint32_t players, bool savegame)
 {
-	// client is not allowed to do this
-	#warning implement this
+	// only accessible, if server is a dedicated server and access is granted
+	if (!m_dedicated_access)
+		return;
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_MAP);
+	s.String(name);
+	s.String(path);
+	s.Unsigned8(savegame ? 1 : 0);
+	s.Unsigned8(m_dedicated_temp_scenario ? 1 : 0);
+	s.send(d->sock);
 }
 
 void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
@@ -670,6 +680,23 @@ void NetClient::handle_packet(RecvPacket & packet)
 		log
 			("[Client] SETTING_MAP '%s' '%s'\n",
 			 d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
+		break;
+	}
+
+	case NETCMD_DEDICATED_MAPS: {
+		DedicatedMapInfos info;
+		info.path     = packet.String();
+		info.players  = packet.Unsigned8();
+		info.scenario = packet.Unsigned8() == 1;
+		d->settings.maps.push_back(info);
+		break;
+	}
+
+	case NETCMD_DEDICATED_SAVED_GAMES: {
+		DedicatedMapInfos info;
+		info.path    = packet.String();
+		info.players = packet.Unsigned8();
+		d->settings.saved_games.push_back(info);
 		break;
 	}
 

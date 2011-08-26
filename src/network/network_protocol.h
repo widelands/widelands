@@ -150,8 +150,10 @@ enum {
 	NETCMD_DISCONNECT = 4,
 
 	/**
-	 * During game setup, this command is sent by the host to advise clients
-	 * of a map change. Payload is:
+	 * During game setup, this command is sent by the host to advise clients of a map change.
+	 * Or by a client on a dedicated server to advise a map change.
+	 *
+	 * Payload is:
 	 * \li String: human readable mapname
 	 * \li String: map filename
 	 * \li bool:   is_savegame
@@ -416,10 +418,29 @@ enum {
 	NETCMD_SETTING_CHANGEINIT = 28,
 
 	/**
-	 * This is send by the server to grant access to the settings (as well as to acknowledge the correct
+	 * This is sent by the server to grant access to the settings (as well as to acknowledge the correct
 	 * password if the server is password protected)
 	 */
-	NETCMD_DEDICATED_ACCESS = 29
+	NETCMD_DEDICATED_ACCESS = 29,
+
+	/**
+	 * This is sent by the dedicated server to inform the client about the available maps on the dedicated
+	 * server. Payload is:
+	 *
+	 * \li String:    Path to the map file
+	 * \li Unsigned8: Number of maximum players
+	 * \li Bool:      Whether this map can be played as multiplayer scenario
+	 */
+	NETCMD_DEDICATED_MAPS = 30,
+
+	/**
+	 * This is sent by the dedicated server to inform the client about the available saved games on the
+	 * dedicated server. Payload is:
+	 *
+	 * \li String:    Path to the map file
+	 * \li Unsigned8: Number of maximum players
+	 */
+	NETCMD_DEDICATED_SAVED_GAMES = 31
 };
 
 #endif

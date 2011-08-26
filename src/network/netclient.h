@@ -114,6 +114,7 @@ private:
 	NetClientImpl * d;
 	bool use_ggz;
 	bool m_dedicated_access;
+	bool m_dedicated_temp_scenario;
 };
 
 #endif
