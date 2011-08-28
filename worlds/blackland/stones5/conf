@@ -4,7 +4,7 @@ program=shrink
 picture=idle.png
 
 [idle]
-hotspot=43 89
+hotspot=30 75
 
 [shrink]
 transform=stones4
