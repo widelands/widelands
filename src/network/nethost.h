@@ -158,6 +158,7 @@ private:
 	bool use_ggz;
 	bool m_is_dedicated;
 	std::string m_password;
+	std::string m_dedicated_motd;
 	bool m_forced_pause;
 };
 

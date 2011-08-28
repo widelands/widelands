@@ -572,6 +572,7 @@ NetHost::NetHost (std::string const & playername, bool ggz)
 	use_ggz(ggz),
 	m_is_dedicated(false),
 	m_password(""),
+	m_dedicated_motd(""),
 	m_forced_pause(false)
 {
 	log("[Host] starting up.\n");
@@ -678,14 +679,27 @@ void NetHost::run(bool const autorun)
 		// May be the server is password protected?
 		Section & s = g_options.pull_section("global");
 		m_password  = s.get_string("dedicated_password", "");
+		// And we read the message of the day
+		m_dedicated_motd =
+			s.get_string
+				("dedicated_motd",
+				 (format
+					(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
+					% d->localplayername)
+				.str().c_str());
 		// Setup by the users
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
 		while (not d->dedicated_start) {
 			handle_network();
 			// TODO this should be improved.
 #ifndef WIN32
-			if (usleep(200) == -1)
-				return;
+			if (d->clients.empty()) {
+				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
+					return;
+			} else {
+				if (usleep(200) == -1)
+					return;
+			}
 #else
 			Sleep(1);
 #endif
@@ -1967,11 +1981,8 @@ void NetHost::welcomeClient
 		c.time = time(0);
 		c.playern = -2;
 		c.sender = d->localplayername;
-		c.msg =
-			(format
-				(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
-				% d->localplayername)
-			.str();
+		// Send the message of the day if exists
+		c.msg = "<br>" + m_dedicated_motd;
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
 			c.msg +=
