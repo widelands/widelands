@@ -23,4 +23,5 @@ produce=cloth
 
 [idle]
 pics=weaving_mill_i_??.png  # ???
-hotspot=81 72
+hotspot=67 63
+playercolor=true
