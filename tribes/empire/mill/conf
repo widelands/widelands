@@ -33,6 +33,6 @@ hotspot=45 91
 
 [working]
 pics=windmill_w_??.png  # lets see the mill turn!
-hotspot=45 91
+hotspot=48 90
 playercolor=true
 fps=25
