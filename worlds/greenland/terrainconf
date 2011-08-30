@@ -14,6 +14,7 @@ is=dead
 [sumpf]
 def_resources=water 20
 is=unpassable
+fps=14
 
 [strand]
 is=dry
