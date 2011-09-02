@@ -45,3 +45,7 @@ fps=10
 [build]
 pics=deep_oremine_i_??.png
 hotspot=49 61
+
+[empty]
+pics=deep_oremine_e_??.png
+hotspot=49 61

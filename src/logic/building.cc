@@ -127,9 +127,7 @@ Building_Descr::Building_Descr
 			if (build_s->get_int("fps", -1) != -1)
 				throw wexception("fps defined for build animation!");
 			if (!is_animation_known("build"))
-				add_animation
-					("build",
-					 g_anim.get(directory.c_str(), *build_s, 0));
+				add_animation("build", g_anim.get(directory.c_str(), *build_s, 0));
 		}
 
 		// Get costs
@@ -148,6 +146,9 @@ Building_Descr::Building_Descr
 		if (Section * unoccupied = prof.get_section("unoccupied"))
 			if (!is_animation_known("unoccupied"))
 				add_animation("unoccupied", g_anim.get(directory.c_str(), *unoccupied, 0));
+		if (Section * empty = prof.get_section("empty"))
+			if (!is_animation_known("empty"))
+				add_animation("empty", g_anim.get(directory.c_str(), *empty, 0));
 	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))

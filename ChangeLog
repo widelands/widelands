@@ -1,5 +1,28 @@
 ### Build 17 until now
-- added saving via chat command functionality to the dedicated server
+- Improved and remodelled a lot of the buildings' animations.
+- Improved and remodelled a lot of the bobs' animations.
+- Improved and remodelled a lot of terrain graphics.
+- Added new states and animations for unoccupied buildings and empty mines,
+  to better indicate the current state of a building.
+- Made road textures world dependend and improved the style of the roads
+  for each world.
+- Added a new win condition "endless game (no fog)" with completely
+  visible map from the beginning on.
+- Improved dedicated server functionality:
+    * added functionality to save the game on the server via chat command.
+    * added functionality to set up a password for the server.
+    * added functionality to set a custom message of the day (motd).
+    * improved client side handling / setting up of dedicated servers.
+
+- Fixed a bug that disallowed to connect to different servers (via
+  metaserver) without prior restart of Widelands.
+- (Re)Fixed bug #536149: miner/master miner mixed up after enhancing
+  to deep mine.
+- Fixed bug #565406: focus for save window
+- Fixed bug #734409: campaign texts about enhancing metalworks
+- Fixed bug #795457: focus in chat window
+- Fixed bug #808008: Delete outdated data when updating Widelands on Windows
+- Fixed bug #805089: Check client in chat commands, when first mentioned.
 
 ### Build 16
 - Many new graphics, new sounds.

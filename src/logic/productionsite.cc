@@ -217,7 +217,8 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
 	m_statistics_changed(true),
 	m_last_stat_percent (0),
-	m_is_stopped        (false)
+	m_is_stopped        (false),
+	m_default_anim      ("idle")
 {
 	m_statistics_buffer[0] = '\0';
 	m_result_buffer[0] = '\0';
@@ -603,9 +604,9 @@ void ProductionSite::act(Game & game, uint32_t const data)
 		if (state.program->get_size() <= state.ip)
 			return program_end(game, Completed);
 
-		if (m_anim != descr().get_animation("idle")) {
+		if (m_anim != descr().get_animation(m_default_anim)) {
 			// Restart idle animation, which is the default
-			start_animation(game, descr().get_animation("idle"));
+			start_animation(game, descr().get_animation(m_default_anim));
 		}
 
 		return program_act(game);
@@ -865,6 +866,18 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 
 	m_program_timer = true;
 	m_program_time = schedule_act(game, m_post_timer);
+}
+
+/// Changes the default anim string to \li anim
+void ProductionSite::set_default_anim(std::string anim)
+{
+	if (m_default_anim == anim)
+		return;
+
+	if (!descr().is_animation_known(anim))
+		return;
+
+	m_default_anim = anim;
 }
 
 }

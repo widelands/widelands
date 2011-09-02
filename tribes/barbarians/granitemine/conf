@@ -38,3 +38,8 @@ playercolor=true
 pics=granitemine_b_??.png
 hotspot=42 38
 playercolor=true
+
+[empty]
+pics=granitemine_e_??.png
+hotspot=42 38
+playercolor=true
