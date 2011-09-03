@@ -94,7 +94,7 @@ struct NetClientImpl {
 
 NetClient::NetClient
 	(IPaddress * const svaddr, std::string const & playername, bool ggz)
-: d(new NetClientImpl), use_ggz(ggz)
+: d(new NetClientImpl), use_ggz(ggz), m_dedicated_access(false), m_dedicated_temp_scenario(false)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == 0)
@@ -109,8 +109,8 @@ NetClient::NetClient
 	d->sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (d->sockset, d->sock);
 
-	d->settings.playernum = UserSettings::notConnected(); // ""
-	d->settings.usernum = -2; // ""
+	d->settings.playernum = UserSettings::notConnected();
+	d->settings.usernum = -2;
 	d->localplayername = playername;
 	d->modal = 0;
 	d->game = 0;
@@ -156,6 +156,16 @@ void NetClient::run ()
 		d->modal = &lgm;
 		int32_t code = lgm.run();
 		d->modal = 0;
+		if (code == 1) { // Only possible if server is dedicated - client pressed "start game" button
+			SendPacket s;
+			s.Unsigned8(NETCMD_LAUNCH);
+			s.send(d->sock);
+
+			// Reopen the menu - perhaps the start is denied or other problems occur
+			d->modal = &lgm;
+			code = lgm.run();
+			d->modal = 0;
+		}
 		if (code <= 0)
 			return;
 	}
@@ -303,44 +313,103 @@ GameSettings const & NetClient::settings()
 	return d->settings;
 }
 
-void NetClient::setScenario(bool)
+void NetClient::setScenario(bool scenario)
 {
-	// Client is not allowed to do this
+	// only accessible, if server is a dedicated server and access is granted
+	if (!m_dedicated_access)
+		return;
+	m_dedicated_temp_scenario = scenario;
 }
 
 bool NetClient::canChangeMap()
 {
-	return false;
+	// only true, if server is a dedicated server and access is granted
+	return m_dedicated_access;
 }
 
-bool NetClient::canChangePlayerState(uint8_t)
+bool NetClient::canChangePlayerState(uint8_t const number)
 {
-	return false;
+	if (!m_dedicated_access) // normal case
+		return false;
+
+	// dedicated server, access granted
+	if (d->settings.savegame)
+		return d->settings.players.at(number).state != PlayerSettings::stateClosed;
+	else if (d->settings.scenario)
+			return
+				((d->settings.players.at(number).state == PlayerSettings::stateOpen
+				  ||
+				  d->settings.players.at(number).state == PlayerSettings::stateHuman)
+				 &&
+				 d->settings .players.at(number).closeable)
+				||
+				d->settings  .players.at(number).state == PlayerSettings::stateClosed;
+	return true;
 }
 
 bool NetClient::canChangePlayerTribe(uint8_t number)
 {
-	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
+	return canChangePlayerTeam(number);
 }
 
 bool NetClient::canChangePlayerTeam(uint8_t number)
 {
-	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
+	if (!m_dedicated_access) // normal case
+		return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
+	else { // dedicated server, access granted
+		if (d->settings.scenario || d->settings.savegame)
+			return false;
+		if (number >= d->settings.players.size())
+			return false;
+		if (number == d->settings.playernum)
+			return true;
+		return
+			d->settings.players.at(number).state == PlayerSettings::stateComputer;
+	}
 }
 
-bool NetClient::canChangePlayerInit(uint8_t)
+bool NetClient::canChangePlayerInit(uint8_t number)
 {
-	return false;
+	if (!m_dedicated_access) // normal case
+		return false;
+	else { // dedicated server, access granted
+		if (d->settings.scenario || d->settings.savegame)
+			return false;
+		return number < d->settings.players.size();
+	}
 }
 
 bool NetClient::canLaunch()
 {
-	return false;
+	// only true, if server is a dedicated server and access is granted
+	if (!m_dedicated_access)
+		return false;
+	if (d->settings.mapname.empty())
+		return false;
+	if (d->settings.players.size() < 1)
+		return false;
+	if (d->game)
+		return false;
+	// all players must be connected to a controller (human/ai) or be closed.
+	for (size_t i = 0; i < d->settings.players.size(); ++i) {
+		if (d->settings.players.at(i).state == PlayerSettings::stateOpen)
+			return false;
+	}
+	return true;
 }
 
-void NetClient::setMap(std::string const &, std::string const &, uint32_t, bool)
+void NetClient::setMap(std::string const & name, std::string const & path, uint32_t players, bool savegame)
 {
-	// client is not allowed to do this
+	// only accessible, if server is a dedicated server and access is granted
+	if (!m_dedicated_access)
+		return;
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_MAP);
+	s.String(name);
+	s.String(path);
+	s.Unsigned8(savegame ? 1 : 0);
+	s.Unsigned8(m_dedicated_temp_scenario ? 1 : 0);
+	s.send(d->sock);
 }
 
 void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
@@ -353,29 +422,37 @@ void NetClient::setPlayerAI(uint8_t, std::string const &)
 	// client is not allowed to do this
 }
 
-void NetClient::nextPlayerState(uint8_t)
+void NetClient::nextPlayerState(uint8_t number)
 {
-	// client is not allowed to do this
+	// only accessible, if server is a dedicated server and access is granted
+	if (!m_dedicated_access)
+		return;
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	s.send(d->sock);
 }
 
-void NetClient::setPlayerTribe(uint8_t number, std::string const & tribe)
+void NetClient::setPlayerTribe(uint8_t number, const std::string & tribe)
 {
-	if (number != d->settings.playernum)
+	if ((number != d->settings.playernum) && !m_dedicated_access)
 		return;
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGETRIBE);
+	s.Unsigned8(number);
 	s.String(tribe);
 	s.send(d->sock);
 }
 
 void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 {
-	if (number != d->settings.playernum)
+	if ((number != d->settings.playernum) && !m_dedicated_access)
 		return;
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGETEAM);
+	s.Unsigned8(number);
 	s.Unsigned8(team);
 	s.send(d->sock);
 }
@@ -385,14 +462,28 @@ void NetClient::setPlayerCloseable(uint8_t, bool)
 	//  client is not allowed to do this
 }
 
-void NetClient::setPlayerShared(uint8_t, uint8_t)
+void NetClient::setPlayerShared(uint8_t number, uint8_t player)
 {
-	//  client is not allowed to do this
+	if ((number != d->settings.playernum) && !m_dedicated_access)
+		return;
+
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_CHANGESHARED);
+	s.Unsigned8(number);
+	s.Unsigned8(player);
+	s.send(d->sock);
 }
 
-void NetClient::setPlayerInit(uint8_t, uint8_t)
+void NetClient::setPlayerInit(uint8_t number, uint8_t)
 {
-	//  client is not allowed to do this
+	if ((number != d->settings.playernum) && !m_dedicated_access)
+		return;
+
+	// Host will decide what to change, therefore the init is not send, just the request to change
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_CHANGEINIT);
+	s.Unsigned8(number);
+	s.send(d->sock);
 }
 
 void NetClient::setPlayerName(uint8_t, std::string const &)
@@ -404,7 +495,7 @@ void NetClient::setPlayerName(uint8_t, std::string const &)
 void NetClient::setPlayer(uint8_t, PlayerSettings)
 {
 	// do nothing here - the request for a positionchange is send in
-	//  setPlayerNumber(uint8_t) to the host.
+	// setPlayerNumber(uint8_t) to the host.
 }
 
 std::string NetClient::getWinCondition() {
@@ -416,7 +507,12 @@ void NetClient::setWinCondition(std::string) {
 }
 
 void NetClient::nextWinCondition() {
-	// Clients are not allowed to change this
+	// only accessible, if server is a dedicated server and access is granted
+	if (!m_dedicated_access)
+		return;
+	SendPacket s;
+	s.Unsigned8(NETCMD_WIN_CONDITION);
+	s.send(d->sock);
 }
 
 void NetClient::setPlayerNumber(uint8_t const number)
@@ -627,6 +723,23 @@ void NetClient::handle_packet(RecvPacket & packet)
 		break;
 	}
 
+	case NETCMD_DEDICATED_MAPS: {
+		DedicatedMapInfos info;
+		info.path     = packet.String();
+		info.players  = packet.Unsigned8();
+		info.scenario = packet.Unsigned8() == 1;
+		d->settings.maps.push_back(info);
+		break;
+	}
+
+	case NETCMD_DEDICATED_SAVED_GAMES: {
+		DedicatedMapInfos info;
+		info.path    = packet.String();
+		info.players = packet.Unsigned8();
+		d->settings.saved_games.push_back(info);
+		break;
+	}
+
 	case NETCMD_NEW_FILE_AVAILABLE: {
 		std::string path = g_fs->FileSystem::fixCrossFile(packet.String());
 		uint32_t bytes   = packet.Unsigned32();
@@ -771,8 +884,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 				// Restore original file, if there was one before
 				if (g_fs->FileExists(backupFileName(file->filename)))
 					g_fs->Rename(backupFileName(file->filename), file->filename);
-
-				/* TODO Uncomment after Build16 string freeze
 				s.reset();
 				s.Unsigned8(NETCMD_CHAT);
 				s.String
@@ -780,7 +891,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 					  ("/me checked the recieved file. Although md5 check summing succeded, "
 					   "I can not handle the file."));
 				s.send(d->sock);
-				*/
 			}
 		}
 		break;
@@ -854,7 +964,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		if (!d->modal || d->game)
 			throw DisconnectException
 				(_("Unexpectedly received LAUNCH command from server."));
-		d->modal->end_modal(1);
+		d->modal->end_modal(2);
 		break;
 	}
 	case NETCMD_SETSPEED:
@@ -902,6 +1012,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 			c.recipient = packet.String();
 		d->chatmessages.push_back(c);
 		ChatProvider::send(c); // NoteSender<ChatMessage>
+		break;
+	}
+	case NETCMD_DEDICATED_ACCESS: {
+		m_dedicated_access = true;
 		break;
 	}
 	case NETCMD_INFO_DESYNC:

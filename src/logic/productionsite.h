@@ -174,6 +174,8 @@ public:
 
 	bool can_start_working() const throw ();
 
+	void set_default_anim(std::string);
+
 protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
@@ -252,6 +254,7 @@ protected:  // TrainingSite must have access to this stuff
 	char                     m_result_buffer   [213];
 	uint8_t                  m_last_stat_percent;
 	bool                     m_is_stopped;
+	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 };
 
 /**

@@ -10,11 +10,11 @@ is=mountain
 
 [ice_flows]
 is=water
-fps=8
+fps=5
 
 [ice_flows2]
 is=water
-fps=8
+fps=5
 
 [ice]
 is=dry

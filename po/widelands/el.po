@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-27 18:55+0000\n"
+"PO-Revision-Date: 2011-05-08 23:51+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-28 04:33+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-10 04:34+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -60,6 +60,8 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Χρήση: widelands <επιλογή0>=<αξία0> ... <επιλογήN>=<αξίαN>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1291
 msgid ""
@@ -241,7 +243,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1699 ../../src/network/network_ggz.cc:370
 msgid "Connection problem"
-msgstr ""
+msgstr "Πρόβλημα σύνδεσης"
 
 #: ../../src/wlapplication.cc:1701
 msgid "Widelands has not been able to connect to the host."
@@ -273,7 +275,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2208 ../../src/logic/game.cc:383
 #: ../../src/logic/game.cc:423
 msgid "Loading..."
-msgstr ""
+msgstr "Φόρτωση..."
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
@@ -360,14 +362,14 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr ""
+msgstr "Ναι"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:105
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr ""
+msgstr "Όχι"
 
 #: ../../src/writeHTML.cc:355
 msgid "building_types.xhtml"
@@ -418,7 +420,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
-msgstr ""
+msgstr "Βελτιώσεις"
 
 #: ../../src/writeHTML.cc:463
 #, c-format
@@ -489,7 +491,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:717 ../../src/writeHTML.cc:862
 msgid "Programs"
-msgstr ""
+msgstr "Προγράμματα"
 
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
 #: ../../src/logic/building.cc:504
@@ -498,7 +500,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:755
 msgid "breed"
-msgstr ""
+msgstr "Ράτσα"
 
 #: ../../src/writeHTML.cc:756
 msgid "createitem"
@@ -534,7 +536,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
-msgstr ""
+msgstr "αντικείμενο"
 
 #: ../../src/writeHTML.cc:765
 msgid "plant"
@@ -550,7 +552,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr ""
+msgstr "γεωλόγος"
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
@@ -618,7 +620,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
-msgstr ""
+msgstr "συμπληρωμένο"
 
 #: ../../src/writeHTML.cc:908 ../../src/logic/production_program.cc:412
 msgid "skipped"
@@ -626,7 +628,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:913
 msgid "and"
-msgstr ""
+msgstr "και"
 
 #: ../../src/writeHTML.cc:914
 msgid "when"
@@ -634,7 +636,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:916
 msgid "or"
-msgstr ""
+msgstr "ή"
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
@@ -642,7 +644,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:948 ../../src/writeHTML.cc:970
 msgid "economy"
-msgstr ""
+msgstr "οικονομία"
 
 #: ../../src/writeHTML.cc:950 ../../src/writeHTML.cc:972
 msgid "needs"
@@ -662,7 +664,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
-msgstr ""
+msgstr "εργαζομένων"
 
 #: ../../src/writeHTML.cc:1026
 msgid "</span></a> <span class=\"keyword\">"
@@ -721,7 +723,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1155
 msgid "animate"
-msgstr ""
+msgstr "έμψυχα"
 
 #: ../../src/writeHTML.cc:1174
 msgid "Documentation for program command consume"
@@ -765,7 +767,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
 msgid "defense"
-msgstr ""
+msgstr "άμυνα"
 
 #: ../../src/writeHTML.cc:1333 ../../src/writeHTML.cc:1357
 msgid "evade"
@@ -879,7 +881,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:101
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "οικονομία: %s"
 
 #: ../../src/economy/wares_queue.cc:259
 #, c-format
@@ -912,7 +914,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
-msgstr ""
+msgstr "Παίκτες"
 
 #: ../../src/editor/editorinteractive.cc:150
 msgid "Unsupported format"
@@ -968,7 +970,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:474
 #: ../../src/logic/map.h:185
 msgid "Unknown"
-msgstr ""
+msgstr "Άγνωστο"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
@@ -2417,7 +2419,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1826
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Υπολογιστών%u"
 
 #: ../../src/network/nethost.cc:1910
 #, c-format
@@ -2672,14 +2674,14 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 #: ../../src/ui_fsmenu/mapselect.cc:58
 msgid "Name:"
-msgstr ""
+msgstr "Όνομα:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:60
 #: ../../src/ui_fsmenu/mapselect.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:94
 msgid "Author:"
-msgstr ""
+msgstr "Συγγραφέας:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
@@ -2706,13 +2708,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
 msgid "Size:"
-msgstr ""
+msgstr "Μέγεθος:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:70
 #: ../../src/ui_fsmenu/mapselect.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:89
 msgid "World:"
-msgstr ""
+msgstr "Κόσμος:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 #: ../../src/ui_fsmenu/mapselect.cc:82
@@ -2732,7 +2734,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/fileview.cc:45 ../../src/wui/watchwindow.cc:181
 msgid "Close"
-msgstr ""
+msgstr "Κλείσιμο"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -2745,7 +2747,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:66 ../../src/ui_fsmenu/launchMPG.cc:165
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
 msgid "Map"
-msgstr ""
+msgstr "Χάρτης"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:66
 msgid "Select a map"
@@ -2803,7 +2805,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
 #: ../../src/wui/multiplayersetupgroup.cc:337
 msgid "Scenario"
-msgstr ""
+msgstr "Σενάριο"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:267 ../../src/ui_fsmenu/launchSPG.cc:226
 msgid "Win condition is set through the scenario"
@@ -2820,7 +2822,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:281 ../../src/ui_fsmenu/launchSPG.cc:236
 msgid "Type: "
-msgstr ""
+msgstr "Τύπος: "
 
 #: ../../src/ui_fsmenu/launchMPG.cc:365
 msgid "Saved game is directory"
@@ -2837,7 +2839,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:384 ../../src/ui_fsmenu/launchSPG.cc:252
 msgid "File not found"
-msgstr ""
+msgstr "Το αρχείο δε βρέθηκε"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:386
 #, c-format
@@ -2867,7 +2869,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:117
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Θεατής"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:443
 #, c-format
@@ -2973,7 +2975,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
-msgstr ""
+msgstr "Κλειστό."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid ""
@@ -3020,7 +3022,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 #: ../../src/wui/multiplayersetupgroup.cc:446
 msgid "Team"
-msgstr ""
+msgstr "Ομάδα"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Player's tribe"
@@ -3048,7 +3050,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:64
 #: ../../src/wui/game_main_menu_save_game.h:107
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: ../../src/ui_fsmenu/loadgame.cc:75
 msgid "Choose saved game!"
@@ -3069,7 +3071,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:115
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Θέλετε πραγματικά να διαγράψετε "
 
 #: ../../src/ui_fsmenu/loadreplay.cc:60
 msgid "Choose a replay!"
@@ -3081,7 +3083,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Single Player"
-msgstr ""
+msgstr "Ένας παίκτης"
 
 #: ../../src/ui_fsmenu/main.cc:58
 msgid "Multi Player"
@@ -3093,7 +3095,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:74
 msgid "Editor"
-msgstr ""
+msgstr "Συντάκτης"
 
 #: ../../src/ui_fsmenu/main.cc:82 ../../src/wui/game_options_menu.cc:47
 #: ../../src/wui/interactive_player.cc:125
@@ -3108,7 +3110,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:98 ../../src/wui/game_options_menu.cc:65
 msgid "License"
-msgstr ""
+msgstr "Άδεια"
 
 #: ../../src/ui_fsmenu/main.cc:106 ../../src/wui/game_options_menu.cc:100
 msgid "Exit Game"
@@ -3116,7 +3118,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:112
 msgid "Version "
-msgstr ""
+msgstr "Έκδοση "
 
 #: ../../src/ui_fsmenu/main.cc:117
 msgid "by the Widelands Development Team"
@@ -3128,7 +3130,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:138
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
@@ -3136,7 +3138,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:235
 msgid "(directory)"
-msgstr ""
+msgstr "(Κατάλογος)"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
@@ -3157,7 +3159,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayer.cc:114
 #: ../../src/ui_fsmenu/netsetup_lan.cc:113 ../../src/wui/login_box.cc:73
 msgid "nobody"
-msgstr ""
+msgstr "κανείς"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:51
 msgid "Metaserver Lobby"
@@ -3169,7 +3171,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:59
 msgid "List of games:"
-msgstr ""
+msgstr "Λίστα παιχνιδιών:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:63
 msgid "Name of your server:"
@@ -3182,7 +3184,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:83
 #: ../../src/ui_fsmenu/netsetup_lan.cc:61
 msgid "Join this game"
-msgstr ""
+msgstr "Συμμετοχή σε αυτό το παιχνίδι"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:91
 msgid "Open a new game"
@@ -3190,11 +3192,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:151
 msgid "Points"
-msgstr ""
+msgstr "Στιγμές"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:152
 msgid "Server"
-msgstr ""
+msgstr "Διεύθυνση Διακομιστή"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:40
 msgid "Begin Network Game"
@@ -3206,7 +3208,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:48
 msgid "Your nickname:"
-msgstr ""
+msgstr "Το ψευδώνυμό σας:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:52
 msgid "Host to connect:"
@@ -3222,7 +3224,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "Host"
-msgstr ""
+msgstr "Κεντρικός υπολογιστής"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120
 msgid "State"
@@ -3232,36 +3234,36 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:261
 #: ../../src/wui/playerdescrgroup.cc:157
 msgid "Open"
-msgstr ""
+msgstr "Άνοιξε"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:188
 #: ../../src/wui/multiplayersetupgroup.cc:250
 msgid "Closed"
-msgstr ""
+msgstr "Κλειστό"
 
 #: ../../src/ui_fsmenu/options.cc:52 ../../src/ui_fsmenu/options.cc:423
 msgid "Advanced Options"
-msgstr ""
+msgstr "Επιλογές για προχωρημένους"
 
 #: ../../src/ui_fsmenu/options.cc:64 ../../src/ui_fsmenu/options.cc:399
 msgid "Apply"
-msgstr ""
+msgstr "Εφαρμογή"
 
 #: ../../src/ui_fsmenu/options.cc:75
 msgid "min."
-msgstr ""
+msgstr "ορυκτ."
 
 #: ../../src/ui_fsmenu/options.cc:81
 msgid "days"
-msgstr ""
+msgstr "ημέρες"
 
 #: ../../src/ui_fsmenu/options.cc:88
 msgid "General Options"
-msgstr ""
+msgstr "Γενικές επιλογές"
 
 #: ../../src/ui_fsmenu/options.cc:95
 msgid "Fullscreen"
-msgstr ""
+msgstr "Πλήρης οθόνη"
 
 #: ../../src/ui_fsmenu/options.cc:101
 msgid "Grab Input"
@@ -3273,7 +3275,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:113
 msgid "Enable Sound"
-msgstr ""
+msgstr "Ενεργοποίηση ήχου"
 
 #: ../../src/ui_fsmenu/options.cc:118
 msgid "Maximum FPS:"
@@ -3321,7 +3323,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:194
 msgid "Off"
-msgstr ""
+msgstr "Ανενεργό"
 
 #: ../../src/ui_fsmenu/options.cc:269
 #, c-format
@@ -3334,7 +3336,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:410 ../../src/ui_fsmenu/options.cc:415
 msgid "px."
@@ -3378,7 +3380,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:506
 msgid "Pause"
-msgstr ""
+msgstr "Παύση"
 
 #: ../../src/ui_fsmenu/options.cc:517
 msgid "FreeSerif (Default)"
@@ -3390,19 +3392,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:50
 msgid "New Game"
-msgstr ""
+msgstr "Νέο παιχνίδι"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:59
 msgid "Campaigns"
-msgstr ""
+msgstr "Εκστρατείες"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:68
 msgid "Load Game"
-msgstr ""
+msgstr "Φόρτωση παιχνιδιού"
 
 #: ../../src/wui/attack_box.cc:174
 msgid "Soldiers:"
-msgstr ""
+msgstr "Στρατιώτες:"
 
 #: ../../src/wui/attack_box.cc:182
 msgid "Send less soldiers"
@@ -3418,7 +3420,7 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:129
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Υποχώρηση: Ποτέ μη!"
 
 #: ../../src/wui/attack_box.cc:239 ../../src/wui/military_box.cc:148
 msgid "Supported damage before retreat"
@@ -3465,17 +3467,17 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:153
 #: ../../src/wui/building_statistics_menu.cc:173
 msgid "Show previous"
-msgstr ""
+msgstr "Εμφάνιση προηγούμενων"
 
 #: ../../src/wui/building_statistics_menu.cc:143
 #: ../../src/wui/building_statistics_menu.cc:163
 #: ../../src/wui/building_statistics_menu.cc:183
 msgid "Show next"
-msgstr ""
+msgstr "Εμφάνιση επόμενου"
 
 #: ../../src/wui/buildingwindow.cc:170
 msgid "Continue"
-msgstr ""
+msgstr "Συνέχεια"
 
 #: ../../src/wui/buildingwindow.cc:185
 #, c-format
@@ -3484,7 +3486,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:209
 msgid "Destroy"
-msgstr ""
+msgstr "Καταστροφή"
 
 #: ../../src/wui/buildingwindow.cc:222 ../../src/wui/buildingwindow.cc:335
 msgid "Hide workarea"
@@ -3517,7 +3519,7 @@ msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:88
 msgid "Quantity"
-msgstr ""
+msgstr "Ποσότητα"
 
 #: ../../src/wui/fieldaction.cc:246
 msgid "Build small buildings"
@@ -3533,7 +3535,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:280
 msgid "Action"
-msgstr ""
+msgstr "Δράση"
 
 #: ../../src/wui/fieldaction.cc:371
 msgid "Build road"
@@ -3593,7 +3595,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
-msgstr ""
+msgstr "Επίθεση"
 
 #: ../../src/wui/fieldaction.cc:584
 msgid "Build mines"
@@ -3618,12 +3620,12 @@ msgstr ""
 #: ../../src/wui/game_main_menu.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
 msgid "Main Menu"
-msgstr ""
+msgstr "Κεντρικό Μενού"
 
 #: ../../src/wui/game_main_menu.cc:52
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
-msgstr ""
+msgstr "Γενικά στατιστικά"
 
 #: ../../src/wui/game_main_menu.cc:59
 #: ../../src/wui/ware_statistics_menu.cc:349
@@ -3703,11 +3705,11 @@ msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:57
 msgid "README"
-msgstr ""
+msgstr "README"
 
 #: ../../src/wui/game_options_menu.cc:73
 msgid "Authors"
-msgstr ""
+msgstr "Συγγραφείς"
 
 #: ../../src/wui/game_options_menu.cc:81
 #: ../../src/wui/game_options_sound_menu.cc:28
@@ -3770,7 +3772,7 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:220
 msgid "Military"
-msgstr ""
+msgstr "Στρατιωτικό"
 
 #: ../../src/wui/general_statistics_menu.cc:246
 #: ../../src/wui/ware_statistics_menu.cc:423
@@ -3795,7 +3797,7 @@ msgstr ""
 #: ../../src/wui/general_statistics_menu.cc:284
 #: ../../src/wui/ware_statistics_menu.cc:461
 msgid "Help"
-msgstr ""
+msgstr "Βοήθεια"
 
 #: ../../src/wui/general_statistics_menu.cc:293
 #: ../../src/wui/ware_statistics_menu.cc:470
@@ -3838,16 +3840,16 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:128
 #: ../../src/wui/interactive_spectator.cc:65
 msgid "Statistics"
-msgstr ""
+msgstr "Στατιστικά"
 
 #: ../../src/wui/interactive_player.cc:131
 msgid "Objectives"
-msgstr ""
+msgstr "Στόχοι"
 
 #: ../../src/wui/interactive_player.cc:140
 #: ../../src/wui/interactive_player.cc:284
 msgid "Messages"
-msgstr ""
+msgstr "Μηνύματα"
 
 #: ../../src/wui/interactive_player.cc:143
 msgid "Ware help"
@@ -3874,7 +3876,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
-msgstr ""
+msgstr "Κωδικός:"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
@@ -3890,7 +3892,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr ""
+msgstr "Είσοδος"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
@@ -3918,12 +3920,12 @@ msgstr ""
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr ""
+msgstr "Στρατιώτες"
 
 #: ../../src/wui/minimap.cc:147
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Terrain"
-msgstr ""
+msgstr "Έδαφος"
 
 #: ../../src/wui/minimap.cc:154
 msgid "Owner"
@@ -3935,15 +3937,15 @@ msgstr ""
 
 #: ../../src/wui/minimap.cc:168
 msgid "Roads"
-msgstr ""
+msgstr "Δρόμοι"
 
 #: ../../src/wui/minimap.cc:182
 msgid "Zoom"
-msgstr ""
+msgstr "Ζουμ"
 
 #: ../../src/wui/multiplayersetupgroup.cc:101
 msgid "<free>"
-msgstr ""
+msgstr "<ελεύθερο>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:272
 msgid "Shared in"
@@ -3952,7 +3954,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:292
 #: ../../src/wui/playerdescrgroup.cc:170
 msgid "Computer"
-msgstr ""
+msgstr "Υπολογιστές"
 
 #: ../../src/wui/multiplayersetupgroup.cc:295
 #: ../../src/wui/playerdescrgroup.cc:172
@@ -3982,12 +3984,12 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:434
 msgid "Tribe"
-msgstr ""
+msgstr "Φυλή"
 
 #: ../../src/wui/multiplayersetupgroup.cc:442
 #: ../../src/wui/playerdescrgroup.cc:103
 msgid "Initialization"
-msgstr ""
+msgstr "Αρχικοποίηση"
 
 #: ../../src/wui/productionsitewindow.cc:71
 #: ../../src/wui/productionsitewindow.cc:84
@@ -4021,11 +4023,11 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:53
 msgid "Wares (total)"
-msgstr ""
+msgstr "Είδη (σύνολο)"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Workers (total)"
-msgstr ""
+msgstr "Εργαζόμενοι (σύνολο)"
 
 #: ../../src/wui/stock_menu.cc:64
 msgid "Wares in warehouses"
@@ -4159,6 +4161,9 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
+"\n"
+" Μέγεθος: %ix%i\n"
+"Συντάκτης: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:109
@@ -4185,6 +4190,8 @@ msgid ""
 "\n"
 " Author: "
 msgstr ""
+"\n"
+" Συγγραφέας: "
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:62
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
@@ -4208,32 +4215,32 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
 msgid "Name: "
-msgstr ""
+msgstr "Όνομα: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:75
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
 msgid "Author: "
-msgstr ""
+msgstr "Συγγραφέας: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:97
 msgid "Size: "
-msgstr ""
+msgstr "Μέγεθος: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:89
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
 msgid "World: "
-msgstr ""
+msgstr "Κόσμος: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:96
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:111
 msgid "Players: "
-msgstr ""
+msgstr "Παίκτες: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:104
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:118
 msgid "Descr: "
-msgstr ""
+msgstr "Περιγραφή: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
 msgid "Set origin"
@@ -4255,7 +4262,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:418
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "Πλάτος: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:161
@@ -4263,7 +4270,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:422
 #, c-format
 msgid "Height: %u"
-msgstr ""
+msgstr "Ύψος: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:125
 msgid "Create Map"
@@ -4277,13 +4284,13 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #, c-format
 msgid "Water: %u %%"
-msgstr ""
+msgstr "Νερό: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:186
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Land: %u %%"
-msgstr ""
+msgstr "Γης: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:210
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
@@ -4303,15 +4310,15 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:244
 msgid "Resources:"
-msgstr ""
+msgstr "Πόροι:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Low"
-msgstr ""
+msgstr "Χαμηλή"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:249
 msgid "High"
-msgstr ""
+msgstr "Υψηλή"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:285
 msgid "Map ID:"
@@ -4342,7 +4349,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
 msgid "<Directory>"
-msgstr ""
+msgstr "<Κατάλογος>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"
@@ -4387,11 +4394,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:200
 msgid "Player "
-msgstr ""
+msgstr "παίχτης "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:319
 msgid "Error!"
-msgstr ""
+msgstr "Σφάλμα!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:321
 msgid ""
@@ -4413,15 +4420,15 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
 msgid "Forbid"
-msgstr ""
+msgstr "Αποτροπή"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:95
 msgid "Allow"
-msgstr ""
+msgstr "Επέτρεψε"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
@@ -4459,7 +4466,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 msgid "Immovable"
-msgstr ""
+msgstr "Ακίνητη"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Bob"
@@ -4544,7 +4551,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:69
 msgid "Title"
-msgstr ""
+msgstr "Τίτλος"
 
 #: ../../src/wui/game_message_menu.h:70
 msgid "Time sent"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,15 +18,18 @@
 
 #include <cstdio>
 
-#include "logic/editor_game_base.h"
+#include "gamecontroller.h"
+#include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "logic/editor_game_base.h"
+#include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "s2map.h"
 #include "wexception.h"
-#include "map_io/widelands_map_loader.h"
-#include "log.h"
+
 
 #include "mapselect.h"
 
@@ -34,7 +37,7 @@
 using Widelands::WL_Map_Loader;
 
 Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
-		(Map::ScenarioTypes allowed_scenario_types) :
+		(GameSettingsProvider * const settings, GameController * const ctrl) :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
@@ -113,7 +116,11 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		(this,
 		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
 		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
-	m_curdir("maps"), m_basedir("maps")
+	m_curdir("maps"),
+	m_basedir("maps"),
+
+	m_settings(settings),
+	m_ctrl(ctrl)
 {
 	m_title.set_textstyle(ts_big());
 	m_label_load_map_as_scenario.set_textstyle(ts_small());
@@ -150,7 +157,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_table.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
 	m_table.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
 
-	m_scenario_types = allowed_scenario_types;
+	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 	if (m_scenario_types) {
 		m_load_map_as_scenario.set_visible(true);
 		m_label_load_map_as_scenario.set_visible(true);
@@ -160,6 +167,12 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	}
 
 	fill_list();
+}
+
+void Fullscreen_Menu_MapSelect::think()
+{
+	if (m_ctrl)
+		m_ctrl->think();
 }
 
 bool Fullscreen_Menu_MapSelect::compare_maprows
@@ -216,10 +229,13 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		char buf[256];
 
 		// get translated worldsname
-		std::string worldpath("worlds/" + map.world);
-		Profile prof((worldpath + "/conf").c_str(), 0, "world_" + map.world);
-		Section & global = prof.get_safe_section("world");
-		std::string world(global.get_safe_string("name"));
+		std::string world(map.world);
+		if (map.height) { // if height == 0 : dedicated server map info without local map
+			std::string worldpath("worlds/" + map.world);
+			Profile prof((worldpath + "/conf").c_str(), 0, "world_" + map.world);
+			Section & global = prof.get_safe_section("world");
+			world = global.get_safe_string("name");
+		}
 
 		m_name      .set_text(map.name);
 		m_author    .set_text(map.author);
@@ -266,88 +282,149 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
  * The search starts in \ref m_curdir ("..../maps") and there is no possibility
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
+ *
+ * \note special case is, if this is a multiplayer game on a dedicated server and
+ * the client wants to change the map - in that case the maps available on the server are shown.
  */
 void Fullscreen_Menu_MapSelect::fill_list()
 {
 	m_maps_data.clear();
 	m_table.clear();
 
-	//  Fill it with all files we find in all directories.
-	filenameset_t files;
-	g_fs->FindFiles(m_curdir, "*", &files);
+	if (m_settings->settings().maps.empty()) {
+		// This is the normal case
 
-	int32_t ndirs = 0;
+		//  Fill it with all files we find in all directories.
+		filenameset_t files;
+		g_fs->FindFiles(m_curdir, "*", &files);
 
-	//If we are not at the top of the map directory hierarchy (we're not talking
-	//about the absolute filesystem top!) we manually add ".."
-	if (m_curdir != m_basedir) {
-		MapData map;
-#ifndef WIN32
-		map.filename = m_curdir.substr(0, m_curdir.rfind('/'));
-#else
-		map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
-#endif
-		m_maps_data.push_back(map);
-		UI::Table<uintptr_t const>::Entry_Record & te =
-			m_table.add(m_maps_data.size() - 1);
+		int32_t ndirs = 0;
 
-		te.set_string(0, "");
-		te.set_picture
-			(1,  g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"),
-			 _("<parent>"));
+		//If we are not at the top of the map directory hierarchy (we're not talking
+		//about the absolute filesystem top!) we manually add ".."
+		if (m_curdir != m_basedir) {
+			MapData map;
+	#ifndef WIN32
+			map.filename = m_curdir.substr(0, m_curdir.rfind('/'));
+	#else
+			map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
+	#endif
+			m_maps_data.push_back(map);
+			UI::Table<uintptr_t const>::Entry_Record & te =
+				m_table.add(m_maps_data.size() - 1);
 
-		++ndirs;
-	}
+			te.set_string(0, "");
+			te.set_picture
+				(1,  g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"),
+				_("<parent>"));
 
-	//Add subdirectories to the list (except for uncompressed maps)
-	for
-		(filenameset_t::iterator pname = files.begin();
-		 pname != files.end();
-		 ++pname)
-	{
-		char const * const name = pname->c_str();
-		if (!strcmp(FileSystem::FS_Filename(name), "."))
-			continue;
-		// Upsy, appeared again. ignore
-		if (!strcmp(FileSystem::FS_Filename(name), ".."))
-			continue;
-		if (!g_fs->IsDirectory(name))
-			continue;
-		if (WL_Map_Loader::is_widelands_map(name))
-			continue;
+			++ndirs;
+		}
 
-		MapData dir;
-		dir.filename = name;
-
-		m_maps_data.push_back(dir);
-		UI::Table<uintptr_t const>::Entry_Record & te =
-			m_table.add(m_maps_data.size() - 1);
-
-		te.set_string(0, "");
-		te.set_picture
-			(1,  g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"),
-			 FileSystem::FS_Filename(name));
-
-		++ndirs;
-	}
-
-	//Add map files(compressed maps) and directories(uncompressed)
-	{
-		Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-		i18n::Textdomain td("maps");
-
+		//Add subdirectories to the list (except for uncompressed maps)
 		for
 			(filenameset_t::iterator pname = files.begin();
-			 pname != files.end();
-			 ++pname)
+			pname != files.end();
+			++pname)
 		{
 			char const * const name = pname->c_str();
-
-			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
-			if (!ml)
+			if (!strcmp(FileSystem::FS_Filename(name), "."))
+				continue;
+			// Upsy, appeared again. ignore
+			if (!strcmp(FileSystem::FS_Filename(name), ".."))
+				continue;
+			if (!g_fs->IsDirectory(name))
+				continue;
+			if (WL_Map_Loader::is_widelands_map(name))
 				continue;
 
+			MapData dir;
+			dir.filename = name;
+
+			m_maps_data.push_back(dir);
+			UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+
+			te.set_string(0, "");
+			te.set_picture
+				(1,  g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"),
+				FileSystem::FS_Filename(name));
+
+			++ndirs;
+		}
+
+		//Add map files(compressed maps) and directories(uncompressed)
+		{
+			Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+			i18n::Textdomain td("maps");
+
+			for
+				(filenameset_t::iterator pname = files.begin();
+				pname != files.end();
+				++pname)
+			{
+				char const * const name = pname->c_str();
+
+				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				if (!ml)
+					continue;
+
+				try {
+					map.set_filename(name);
+					ml->preload_map(true);
+
+					MapData mapdata;
+					mapdata.filename = name;
+					mapdata.name = map.get_name();
+					mapdata.author = map.get_author();
+					mapdata.description = map.get_description();
+					mapdata.world = map.get_world_name();
+					mapdata.nrplayers = map.get_nrplayers();
+					mapdata.width = map.get_width();
+					mapdata.height = map.get_height();
+					mapdata.scenario = map.scenario_types() & m_scenario_types;
+
+					if (!mapdata.width || !mapdata.height)
+						continue;
+
+					m_maps_data.push_back(mapdata);
+					UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+
+					char buf[256];
+					sprintf(buf, "(%i)", mapdata.nrplayers);
+					te.set_string(0, buf);
+					te.set_picture
+						(1,  g_gr->get_picture
+						(PicMod_Game,
+						dynamic_cast<WL_Map_Loader const *>(ml) ?
+						(mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
+						:
+						"pics/ls_s2map.png"),
+						mapdata.name.c_str());
+				} catch (const std::exception & e) {
+					log
+						("Mapselect: Skip %s due to preload error: %s\n",
+						name, e.what());
+				} catch (...) {
+					log("Mapselect: Skip %s due to unknown exception\n", name);
+				}
+
+				delete ml;
+			}
+		}
+	} else {
+		//client changing maps on dedicated server
+		for (uint16_t i = 0; i < m_settings->settings().maps.size(); ++i) {
+			Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+			i18n::Textdomain td("maps");
+			MapData mapdata;
+
+			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
+			char const * const name = dmap.path.c_str();
+			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
 			try {
+				if (!ml)
+					throw wexception("Not useable!");
+
 				map.set_filename(name);
 				ml->preload_map(true);
 
@@ -362,31 +439,50 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.height = map.get_height();
 				mapdata.scenario = map.scenario_types() & m_scenario_types;
 
-				if (!mapdata.width || !mapdata.height)
-					continue;
+				if (mapdata.nrplayers != dmap.players || mapdata.scenario != dmap.scenario)
+					throw wexception("Not useable!");
 
+				if (!mapdata.width || !mapdata.height)
+					throw wexception("Not useable!");
+
+				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::Entry_Record & te =
-					m_table.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
 
 				char buf[256];
 				sprintf(buf, "(%i)", mapdata.nrplayers);
 				te.set_string(0, buf);
 				te.set_picture
-					(1,  g_gr->get_picture
-					 (PicMod_Game,
-					  dynamic_cast<WL_Map_Loader const *>(ml) ?
-					  (mapdata.scenario ?
-						"pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
-					  :
-					  "pics/ls_s2map.png"),
+					(1, g_gr->get_picture
+						(PicMod_Game, (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
 					 mapdata.name.c_str());
-			} catch (const std::exception & e) {
-				log
-					("Mapselect: Skip %s due to preload error: %s\n",
-					 name, e.what());
+
 			} catch (...) {
-				log("Mapselect: Skip %s due to unknown exception\n", name);
+				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", name);
+
+				// Fill in the data we got from the dedicated server
+				mapdata.filename = name;
+				mapdata.name = dmap.path.substr(5, dmap.path.size() - 1);
+				mapdata.author = _("unknown");
+				mapdata.description =
+					_("This map file is not present on your filesystem. Data shown here was sent by the server.");
+				mapdata.world = _("unknown");
+				mapdata.nrplayers = dmap.players;
+				mapdata.width = 1;
+				mapdata.height = 0;
+				mapdata.scenario = dmap.scenario;
+
+				// Finally write the entry to the list
+				m_maps_data.push_back(mapdata);
+				UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+
+				char buf[256];
+				sprintf(buf, "(%i)", mapdata.nrplayers);
+				te.set_string(0, buf);
+				te.set_picture
+					(1, g_gr->get_picture
+						(PicMod_Game, (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
+					 mapdata.name.c_str());
 			}
 
 			delete ml;

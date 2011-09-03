@@ -31,12 +31,6 @@
 #include <map>
 #include <boost/shared_ptr.hpp>
 
-/**
- * Names of road terrains
- */
-#define ROAD_NORMAL_PIC "pics/roadt_normal.png"
-#define ROAD_BUSY_PIC   "pics/roadt_busy.png"
-
 #define MAX_RECTS 20
 
 namespace UI {struct ProgressWindow;}
@@ -191,6 +185,7 @@ struct Graphic {
 	Texture * get_maptexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t) const;
 
+	void set_world(std::string);
 	PictureID get_road_texture(int32_t roadtex);
 
 	GraphicCaps const & caps() const throw () {return m_caps;}

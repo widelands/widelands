@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-06-06 22:05+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"PO-Revision-Date: 2011-06-23 14:44+0000\n"
+"Last-Translator: Dios <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-24 04:31+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -23,40 +23,41 @@ msgid ""
 "is used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 0 to level 1."
 msgstr ""
+"金のタバードはアトラスの織物工場で金糸から作られます。兵士のHPをレベル0からレベル1に訓練するために、食料とともに訓練所で使用されます。"
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
-msgstr ""
+msgstr "のこぎりは木こりと大工が必要とします。これは工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "航海に適した船"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
-msgstr ""
+msgstr "タバードとトライデント（軽）は若い兵士の標準的な装備です。タバードは織物工場で作られます。"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
-msgstr "先進的な匿"
+msgstr "強化された盾"
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Armoursmith"
-msgstr ""
+msgstr "鎧鍛冶屋"
 
 #: ../../tribes/atlanteans/conf:183
 msgid "Armoursmithy"
-msgstr ""
+msgstr "鎧鍛冶"
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
 msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
-msgstr ""
+msgstr "アトラスは生魚を嫌います。燻製工房で燻製にするのが、もっとも一般的な食べ方です。"
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -64,11 +65,11 @@ msgstr "灰"
 
 #: ../../tribes/atlanteans/conf:5
 msgid "Atlanteans"
-msgstr "アトランティス"
+msgstr "アトラス"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
-msgstr "ベーカー"
+msgstr "パン屋"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
@@ -80,7 +81,7 @@ msgstr "労働者のパンを焼く。"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bakingtray"
-msgstr ""
+msgstr "ベーキングトレイ"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
@@ -89,7 +90,7 @@ msgstr "兵舎。"
 #: ../../tribes/atlanteans/conf:146
 #: ../../tribes/atlanteans/conf:154
 msgid "Barrier"
-msgstr ""
+msgstr "関所"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
@@ -111,7 +112,7 @@ msgstr ""
 msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
-msgstr ""
+msgstr "甘草粉は粉挽き風車で甘草から作られます。パン屋でおいしいパンを作るのに使われます。"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -142,7 +143,7 @@ msgid ""
 "Blackroots are a special kind of root produced in blackroot farms and "
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
-msgstr ""
+msgstr "甘草は甘草農場で作られる特殊な根で、粉挽き風車で粉に挽かれます。アトラスはこの強い風味を好み、パンを作る粉として使います。"
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -150,15 +151,15 @@ msgstr "パン"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr "魚を作成する"
+msgstr "魚を育てる"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "糸を作るために蜘蛛を育てる"
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "強くたくましい馬を育てます。"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
@@ -174,7 +175,7 @@ msgstr "バーナー"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr "石炭を燃える。"
+msgstr "石炭を燃やす"
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
@@ -182,7 +183,7 @@ msgstr "キャリア"
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "道路に沿って物を運びます。"
 
 #: ../../tribes/atlanteans/conf:155
 #: ../../tribes/atlanteans/conf:201
@@ -195,11 +196,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "炭焼き小屋"
 
 #: ../../tribes/atlanteans/conf:147
 msgid "Citadel"
-msgstr "根城"
+msgstr "城塞"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Coal"
@@ -211,69 +212,69 @@ msgstr "炭鉱"
 
 #: ../../tribes/atlanteans/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "船を建造中"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
-msgstr ""
+msgstr "建設現場"
 
 #: ../../tribes/atlanteans/conf:66
 msgid "Corn"
-msgstr ""
+msgstr "トウモロコシ"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
-msgstr "麦畑"
+msgstr "トウモロコシ畑"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield harvested"
-msgstr ""
+msgstr "トウモロコシ畑（作付）"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
-msgstr ""
+msgstr "トウモロコシ畑（中）"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
-msgstr "麦畑小"
+msgstr "トウモロコシ畑（小）"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield tiny"
-msgstr ""
+msgstr "トウモロコシ畑（極小）"
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Cornflour"
-msgstr ""
+msgstr "トウモロコシ粉"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
-msgstr ""
+msgstr "トウモロコシ粉は粉挽き風車で作られます。これはパン屋でパンを作る３つの材料のうちの１つです。"
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
-msgstr "鉱山結晶"
+msgstr "クリスタル鉱山"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr ""
+msgstr "岩山から花崗岩を切り出します。"
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "守れと勝つ！"
+msgstr "守って攻めろ！"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed building"
-msgstr ""
+msgstr "破壊された建物"
 
 #: ../../tribes/atlanteans/conf:67
 msgid "Diamond"
-msgstr "金剛石"
+msgstr "ダイアモンド"
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "採掘する資源を発見します。"
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Donjon"
@@ -281,11 +282,11 @@ msgstr "天守閣"
 
 #: ../../tribes/atlanteans/conf:68
 msgid "Double Trident"
-msgstr ""
+msgstr "ダブルトライデント"
 
 #: ../../tribes/atlanteans/conf:205
 msgid "Dungeon"
-msgstr ""
+msgstr "ダンジョン"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Farm"
@@ -293,11 +294,11 @@ msgstr "農場"
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Farmer"
-msgstr "農家"
+msgstr "農夫"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "木を伐採します。"
 
 #: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
@@ -307,7 +308,7 @@ msgstr ""
 msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
-msgstr ""
+msgstr "火ばさみは製錬所で働く製錬工の道具です。工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -319,14 +320,14 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Fish Breeder's House"
-msgstr ""
+msgstr "養魚場"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid ""
 "Fish is one of the biggest food-resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr ""
+msgstr "魚はアトラス最大の食料の一つです。鉱山や訓練所、偵察所に運ぶ前に、燻製工房で燻製にする必要があります。"
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -334,7 +335,7 @@ msgstr "漁師"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Fisher's House"
-msgstr ""
+msgstr "漁師の家"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Fishing Net"
@@ -351,7 +352,7 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:149
 #: ../../tribes/atlanteans/conf:156
 msgid "Fortress"
-msgstr "フォートレス"
+msgstr "要塞"
 
 #: ../../tribes/atlanteans/conf:121
 msgid "Geologist"
@@ -363,39 +364,39 @@ msgstr "金"
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Gold Mine"
-msgstr "金鉱"
+msgstr "金鉱山"
 
 #: ../../tribes/atlanteans/conf:73
 msgid "Gold Ore"
-msgstr "金鉱"
+msgstr "金鉱石"
 
 #: ../../tribes/atlanteans/conf:75
 msgid "Gold Yarn"
-msgstr ""
+msgstr "金糸"
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
 "Gold is one of the most valuable materials. It is produced out of gold ore "
 "in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
 "and the goldweaver."
-msgstr ""
+msgstr "金は貴重な材料の一つで、製錬所で金鉱石から作られます。金は防具屋、武器屋、金細工工房で使われます。"
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
-msgstr ""
+msgstr "金鉱石は金鉱山で産出し、製錬所で加工されます。"
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
-msgstr ""
+msgstr "黄金のタバード"
 
 #: ../../tribes/atlanteans/conf:168
 msgid "Goldweaver"
-msgstr ""
+msgstr "金細工工房"
 
 #: ../../tribes/atlanteans/conf:197
 msgid "Guardhall"
-msgstr ""
+msgstr "警備所"
 
 #: ../../tribes/atlanteans/conf:196
 msgid "Guardhouse"
@@ -407,11 +408,11 @@ msgstr "ハンマー"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:19
 msgid "Harvest blackroot"
-msgstr ""
+msgstr "甘草を収穫する"
 
 #: ../../tribes/atlanteans/farm/conf:22
 msgid "Harvest corn"
-msgstr "玉蜀黍を刈り入れる"
+msgstr "トウモロコシを収穫する"
 
 #: ../../tribes/atlanteans/conf:161
 msgid "Headquarters"
@@ -423,7 +424,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:77
 msgid "Heavy Double Trident"
-msgstr ""
+msgstr "ダブルトライデント（重）"
 
 #: ../../tribes/atlanteans/conf:198
 msgid "High Tower"
@@ -431,7 +432,7 @@ msgstr "高い塔"
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Hook pole"
-msgstr ""
+msgstr "かぎ棒"
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Horse"
@@ -443,25 +444,25 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
-msgstr ""
+msgstr "馬牧場"
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
-msgstr ""
+msgstr "馬は使い込まれた道路で物を運ぶのに役立ちます。馬は馬牧場で育てられます。"
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
-msgstr "猟人"
+msgstr "狩人"
 
 #: ../../tribes/atlanteans/conf:171
 msgid "Hunter's House"
-msgstr ""
+msgstr "狩人小屋"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
-msgstr ""
+msgstr "弓矢"
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Iron"
@@ -469,7 +470,7 @@ msgstr "鉄"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Iron Mine"
-msgstr ""
+msgstr "鉄鉱山"
 
 #: ../../tribes/atlanteans/conf:80
 msgid "Iron Ore"
@@ -479,13 +480,13 @@ msgstr "鉄鉱石"
 msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
-msgstr ""
+msgstr "鉄は製錬所で鉄鉱石から作られます。工具鍛冶屋、鎧鍛冶屋および武器鍛冶屋で使われます。"
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
-msgstr ""
+msgstr "鉄鉱石は鉄鉱山から産出します。これらは製錬所で鉄に加工されます。"
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -493,11 +494,11 @@ msgstr "迷宮"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Light trident"
-msgstr ""
+msgstr "トライデント（軽）"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Long Trident"
-msgstr ""
+msgstr "トライデント（長）"
 
 #: ../../tribes/atlanteans/conf:84
 msgid "Meat"
@@ -508,7 +509,7 @@ msgid ""
 "Meat is one food resource of the Atlanteans. It is gained out of wild game "
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
-msgstr ""
+msgstr "肉はアトラスの食料の一つです。狩人によって捕獲され、鉱山や訓練所（ダンジョンや迷宮）に運ばれる前に、燻製工房で燻製にされます。"
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -522,29 +523,29 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Mill"
-msgstr ""
+msgstr "粉挽き風車"
 
 #: ../../tribes/atlanteans/conf:123
 msgid "Miller"
-msgstr "ミラー"
+msgstr "粉引き屋"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid ""
 "Mills blackroot and corn to produce blackroot flour and corn flour, "
 "respectively."
-msgstr ""
+msgstr "それぞれ甘草粉とトウモロコシ粉を作るために。甘草とトウモロコシを製粉します。"
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
-msgstr ""
+msgstr "ダイヤモンドの採掘"
 
 #: ../../tribes/atlanteans/crystalmine/conf:24
 msgid "Mine quartz"
-msgstr ""
+msgstr "水晶の採掘"
 
 #: ../../tribes/atlanteans/crystalmine/conf:23
 msgid "Mine stone"
-msgstr ""
+msgstr "石材の採掘"
 
 #: ../../tribes/atlanteans/conf:124
 msgid "Miner"
@@ -552,25 +553,25 @@ msgstr "鉱夫"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
 msgid "Not enough space"
-msgstr ""
+msgstr "空きがありません"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
-msgstr ""
+msgstr "前哨"
 
 #: ../../tribes/atlanteans/conf:87
 msgid "Pick"
-msgstr ""
+msgstr "つるはし"
 
 #: ../../tribes/atlanteans/pick/conf:1
 msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
-msgstr ""
+msgstr "つるはしは石工や鉱夫が使用します。これは工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/conf:88
 msgid "Planks"
-msgstr ""
+msgstr "木材"
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid ""
@@ -578,6 +579,8 @@ msgid ""
 "produced out of trunks by the sawmill. The weapon smithy and the shipyard "
 "also use planks to produce the different tridents and mighty ships."
 msgstr ""
+"木材はアトラスにとって重要な建築資材です。これは製材所で丸太から作られます。また、武器鍛冶屋と造船所は、様々なトライデントと強力な船を作るために木材を使い"
+"ます。"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -585,84 +588,84 @@ msgstr ""
 
 #: ../../tribes/atlanteans/farm/conf:20
 msgid "Plant corn"
-msgstr ""
+msgstr "トウモロコシの作付け"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "トウモロコシの作付けと収穫"
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "畑の開墾"
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "植樹"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
-msgstr ""
+msgstr "強化された盾の生産"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "強化された盾の生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "ベーキングトレイの生産"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
-msgstr ""
+msgstr "甘草粉の生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bow"
-msgstr ""
+msgstr "弓の生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce bucket"
-msgstr ""
+msgstr "バケツの生産"
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
-msgstr ""
+msgstr "トウモロコシ粉の生産"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce double trident"
-msgstr ""
+msgstr "ダブルトライデントの生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "火ばさみの生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
-msgstr ""
+msgstr "魚網の生産"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:21
 msgid "Produce golden tabard"
-msgstr ""
+msgstr "黄金のタバードの生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:37
 msgid "Produce hammer"
-msgstr ""
+msgstr "ハンマーの生産"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "Produce heavy double trident"
-msgstr ""
+msgstr "ダブルトライデント（重）の生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce hook pole"
-msgstr ""
+msgstr "かぎ棒の生産"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
-msgstr ""
+msgstr "トライデント（軽）の生産"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:31
 msgid "Produce long trident"
-msgstr ""
+msgstr "トライデント（長）の生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce milking tongs"
@@ -670,56 +673,56 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce pick"
-msgstr ""
+msgstr "つるはしの生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce saw"
-msgstr ""
+msgstr "のこぎりの生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce scythe"
-msgstr ""
+msgstr "大鎌の生産"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:44
 msgid "Produce shovel"
-msgstr ""
+msgstr "ショベルの生産"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:19
 msgid "Produce spidercloth"
-msgstr ""
+msgstr "蜘蛛布の生産"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
-msgstr ""
+msgstr "鉄の盾の生産"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:24
 msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "鉄の盾の生産"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:32
 msgid "Produce steel trident"
-msgstr ""
+msgstr "鉄のトライデントの生産"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:20
 msgid "Produce tabard"
-msgstr ""
+msgstr "タバードの生産"
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "兵士の鎧を生産します"
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "建築、造船、兵士のための布を生産します"
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "労働者の道具を生産します"
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "兵士の武器を生産します。"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Quarry"
@@ -731,43 +734,43 @@ msgstr "石英"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "資源指標：石炭…少"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "資源指標：石炭…多"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "資源指標：金…少"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "資源指標：金…多"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "資源指標：花崗岩…少"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "資源指標：花崗岩…多"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "資源指標：鉄…少"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "資源指標：鉄…多"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "資源指標：資源なし"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator water"
-msgstr ""
+msgstr "資源指標：水"
 
 #: ../../tribes/atlanteans/conf:89
 msgid "Saw"
@@ -775,15 +778,15 @@ msgstr "鋸"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Sawmill"
-msgstr ""
+msgstr "製材所"
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
-msgstr ""
+msgstr "木材を作るために木を製材します"
 
 #: ../../tribes/atlanteans/conf:125
 msgid "Sawyer"
-msgstr ""
+msgstr "製材員"
 
 #: ../../tribes/atlanteans/conf:135
 msgid "Scout"
@@ -791,12 +794,12 @@ msgstr "偵察隊"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Scout's House"
-msgstr ""
+msgstr "斥候の家"
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
-msgstr ""
+msgstr "斥候は未知の地域を偵察します。"
 
 #: ../../tribes/atlanteans/conf:90
 msgid "Scythe"
@@ -813,15 +816,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship construction site"
-msgstr ""
+msgstr "船の建設現場"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Shipwright"
-msgstr ""
+msgstr "船大工"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Shipyard"
-msgstr ""
+msgstr "造船所"
 
 #: ../../tribes/atlanteans/conf:91
 msgid "Shovel"
@@ -831,71 +834,71 @@ msgstr "ショベル"
 msgid ""
 "Shovels are needed for proper handling of plants. Therefore the forester and "
 "the blackroot farmer are using them. They are produced by the toolsmith."
-msgstr ""
+msgstr "シャベルは植物を扱うのに欠かせません。したがって森林官や甘草農家はこれを使います。工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/dungeon/conf:30
 #: ../../tribes/atlanteans/labyrinth/conf:36
 msgid "Sleep"
-msgstr ""
+msgstr "休止"
 
 #: ../../tribes/atlanteans/conf:199
 msgid "Small Tower"
-msgstr ""
+msgstr "小さい塔"
 
 #: ../../tribes/atlanteans/smelting_works/conf:24
 msgid "Smelt gold"
-msgstr ""
+msgstr "金の製錬"
 
 #: ../../tribes/atlanteans/smelting_works/conf:23
 msgid "Smelt iron"
-msgstr ""
+msgstr "鉄の製錬"
 
 #: ../../tribes/atlanteans/conf:126
 msgid "Smelter"
-msgstr ""
+msgstr "製錬工"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Smelting Works"
-msgstr ""
+msgstr "製錬所"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "鉄を精錬します"
 
 #: ../../tribes/atlanteans/smokery/conf:26
 msgid "Smoke fish"
-msgstr ""
+msgstr "魚を燻製にする"
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
-msgstr ""
+msgstr "肉を燻製にする"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Smoked fish"
-msgstr ""
+msgstr "魚の燻製"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Smoked meat"
-msgstr ""
+msgstr "肉の燻製"
 
 #: ../../tribes/atlanteans/smoked_meat/conf:1
 msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutricious lunch for themselves."
-msgstr ""
+msgstr "肉の燻製は燻製工房で作られます。これは鉱山や訓練所（迷宮とダンジョン）に運ばれ、鉱夫や兵士達の食事になります。"
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
-msgstr ""
+msgstr "燻製職人"
 
 #: ../../tribes/atlanteans/conf:175
 msgid "Smokery"
-msgstr ""
+msgstr "燻製工房"
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "肉と魚を燻製にします。"
 
 #: ../../tribes/atlanteans/conf:108
 msgid "Soldier"
@@ -925,11 +928,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
-msgstr ""
+msgstr "クモ牧場"
 
 #: ../../tribes/atlanteans/conf:95
 msgid "Spideryarn"
-msgstr ""
+msgstr "クモの糸"
 
 #: ../../tribes/atlanteans/conf:96
 msgid "Steel Shield"
@@ -937,7 +940,7 @@ msgstr "鋼の盾"
 
 #: ../../tribes/atlanteans/conf:97
 msgid "Steel Trident"
-msgstr ""
+msgstr "鋼鉄のトライデント"
 
 #: ../../tribes/atlanteans/conf:98
 msgid "Stone"
@@ -947,11 +950,11 @@ msgstr "石"
 msgid ""
 "Stone is one basic building ware of the Atlanteans. It is produced in a "
 "quarry or a crystal mine."
-msgstr ""
+msgstr "石材はアトラスの標準的な建築資材です。これは採石場か石英鉱山で採掘されます。"
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
-msgstr ""
+msgstr "石工"
 
 #: ../../tribes/atlanteans/conf:151
 msgid "Stronghold"
@@ -959,27 +962,27 @@ msgstr "牙城"
 
 #: ../../tribes/atlanteans/conf:99
 msgid "Tabard"
-msgstr ""
+msgstr "タバード"
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
 "The Atlantean fires in smelting works, armoursmithies and weaponsmithies are "
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
-msgstr ""
+msgstr "製錬所、鎧鍛冶屋、武器鍛冶屋などの火は石炭から起こされます。石炭は炭鉱から採掘されたり、炭焼き小屋で丸太から作られます。"
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr ""
+msgstr "狩人は新鮮な生肉をもたらします。"
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
+msgstr "大鎌は農夫の道具です。工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "Widelands開発チーム"
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
@@ -987,14 +990,16 @@ msgid ""
 "weapon smithy. It is used in a dungeon - together with food - to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
+"ダブルトライデントはアトラスの武器鍛冶屋で作られる最高のトライデントです。これはダンジョンで食料とともに用いられ、兵士の攻撃力をレベル2からレベル3へ鍛え"
+"上げます。"
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
-msgstr ""
+msgstr "漁師はおいしい魚を釣り上げます。"
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr ""
+msgstr "魚網は漁師が使用します。工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -1002,6 +1007,8 @@ msgid ""
 "and all smiths. Make sure you always got some in reserve! It is produced by "
 "the toolsmith."
 msgstr ""
+"ハンマーは重要な道具です。これは地質学者や大工および全ての鍛冶屋が必要とします。常に予備がいくつかあることを確認してください。\r\n"
+"これは工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1009,12 +1016,14 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"トライデント（長）は、兵士が最初に訓練するトライデントです。これは武器鍛冶屋で作られ、食料とともにダンジョンで使われます。\r\n"
+"兵士の攻撃力をレベル0からレベル1に鍛え上げます。"
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
-msgstr ""
+msgstr "木べらはパン屋の道具で、どのパン屋も持っているものです。これは工具鍛冶屋でつくられます。"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""

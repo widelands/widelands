@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-27 08:39+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2011-08-14 10:44+0000\n"
+"Last-Translator: trewe <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-28 04:33+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-08-15 04:31+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: ../../src/wui/building_statistics_menu.cc:116
 msgid "Build"
@@ -2567,11 +2567,11 @@ msgstr "%s envia o sinal para iniciar o jogo."
 
 #: ../../src/network/nethost.cc:1111
 msgid "Available saved games:<br>"
-msgstr ""
+msgstr "Jogos gravados disponíveis:<br>"
 
 #: ../../src/network/nethost.cc:1131
 msgid "Available maps:<br>"
-msgstr ""
+msgstr "Mapas disponíveis:<br>"
 
 #: ../../src/network/nethost.cc:1175
 #, c-format
@@ -4843,218 +4843,3 @@ msgstr "Correio"
 #: ../../src/wui/game_message_menu.h:166
 msgid "center main mapview on location"
 msgstr "centrar vista no mapa no local"
-
-#, c-format
-#~ msgid "Water: %i %%"
-#~ msgstr "Água: %i %%"
-
-#~ msgid "Level"
-#~ msgstr "Nível"
-
-#~ msgid "AT"
-#~ msgstr "AT"
-
-#~ msgid "DE"
-#~ msgstr "DE"
-
-#~ msgid "EV"
-#~ msgstr "EV"
-
-#, c-format
-#~ msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
-#~ msgstr "%sO inimigo derrotou os seus guerreiros a %s.</p></rt>"
-
-#~ msgid "Produced "
-#~ msgstr "Produzido "
-
-#~ msgid "nothing"
-#~ msgstr "nada"
-
-#, c-format
-#~ msgid "Computer %u"
-#~ msgstr "Computador %u"
-
-#~ msgid "New User"
-#~ msgstr "Novo utilizador"
-
-#~ msgid "Easy living"
-#~ msgstr "Vida fácil"
-
-#~ msgid "Select Savegame"
-#~ msgstr "Selecciona Jogo Gravado"
-
-#~ msgid "Ready"
-#~ msgstr "Pronto"
-
-#~ msgid "Original:"
-#~ msgstr "Original:"
-
-#~ msgid "(Save): "
-#~ msgstr "(Guardar): "
-
-#~ msgid "Reset"
-#~ msgstr "Repor"
-
-#, c-format
-#~ msgid "Mountains: %i %%"
-#~ msgstr "Montanhas: %i %%"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u "
-#~ "(carrying %s) could not find a way home from (%i, %i) (with %s immovable) to "
-#~ "the base flag at (%i, %i) of its %s at (%i, %i). The %s will be made "
-#~ "homeless and probably die, unless some object is removed very soon and the "
-#~ "%s finds a way to a flag connected to a warehouse. The %s will immediately "
-#~ "request a new worker. Unfortunately this may happen repeatedly and drain the "
-#~ "supply of workers (tools). No solution for this problem has been implemented "
-#~ "yet. It would be safest to destroy the %s and not rebuild it at that "
-#~ "location, nor any other building that sends out a worker on the map. This "
-#~ "problem usually occurs near unpassable terrain, such as water, when an "
-#~ "object, such as a farm field, is placed on the map while the worker is out "
-#~ "working. (bug #1796611) (The game has been paused.)"
-#~ msgstr ""
-#~ "O motor do jogo encontrou um erro lógico. O %s #%u do jogador %u (carregando "
-#~ "%s) não consegui encontrar o caminho para casa a partir de (%i, %i) (com %s "
-#~ "imóvel) para a bandeira-base (%i, %i) do seu %s em (%i, %i). O %s ficará sem-"
-#~ "abrigo e provavelmente morrerá a menos que o objecto seja retirado depressa "
-#~ "e o %s encontre o caminho para a bandeira ligada ao armazém. O %s irá de "
-#~ "imediato requerer um novo trabalhador. Infelizmente isto continuará a "
-#~ "acontecer até que se esgotem os trabalhadores (ferramentas). Nenhuma solução "
-#~ "para este problema foi ainda implementada. Será melhor destruir %s  e não "
-#~ "voltar a construir ai nenhum edifício que envie trabalhadores. Isto acontece "
-#~ "habitualmente ao pé de terreno impassável, tipo água, ou quando um objecto "
-#~ "como um campo de cereais é colocado no mapa quando o trabalhador está fora a "
-#~ "trabalhar.  (bug #1796611) (O jogo entrou em pausa.)"
-
-#~ msgid ""
-#~ "Available host commands are:<br>/help  -  Shows this help<br>/announce <msg> "
-#~ " -  Send a chatmessage as announcement (system chat)<br>/warn <name> "
-#~ "<reason>  -  Warn the user <name> because of <reason><br>/kick <name> "
-#~ "<reason>  -  Kick the user <name> because of <reason><br>/forcePause         "
-#~ "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
-#~ "to normal speed."
-#~ msgstr ""
-#~ "Os comando de anfitrião são:<br>/help                -  Mostra esta "
-#~ "ajuda<br>/announce <msg>      -  Envia uma mensagem como um anúncio (chat de "
-#~ "sistema)<br>/warn <nome> <causa> -  Avisar o utilizador <nome> por causa de "
-#~ "<causa><br>/kick <nome> <causa> -  Expulsar o utilizador <nome> por causa de "
-#~ "<causa><br>/forcePause          -  Forçar a pausa do "
-#~ "jogo.<br>/endForcedPause      -  Coloca de novos o jogo à velocidade normal."
-
-#~ msgid "Reset target quantity to default value"
-#~ msgstr "Colocar as quantidades-alvo nos valores predefinidos"
-
-#~ msgid "Ware type target quantities"
-#~ msgstr "Quantidade-alvo de cada tipo de mercadoria"
-
-#~ msgid "Worker type target quantities"
-#~ msgstr "Quantidade-alvo de cada tipo de trabalhador"
-
-#~ msgid "Help "
-#~ msgstr "Ajuda "
-
-#~ msgid "WARNING!!! Host selected the file \""
-#~ msgstr "AVISO !!! O Anfitrião selecionou o ficheiro \""
-
-#~ msgid ""
-#~ "\" for this game, which you do not own. If the transfer of that file does "
-#~ "not start automatically, please add it manually to your filesystem."
-#~ msgstr ""
-#~ "\" para este jogo, que tu não possuis. Se a transferência do ficheiro não se "
-#~ "iniciar automaticamente, por favor adiciona-o manualmente ao teu sistema de "
-#~ "ficheiros."
-
-#~ msgid "Lobby:"
-#~ msgstr "Lóbi:"
-
-#~ msgid "Increase permanent target quantity"
-#~ msgstr "Aumenta quantidade alvo permanente"
-
-#~ msgid "Decrease permanent target quantity"
-#~ msgstr "Diminui quantidade alvo permanente"
-
-#~ msgid "Increase temporary target quantity"
-#~ msgstr "Aumenta quantidade-alvo temporária"
-
-#~ msgid "Decrease temporary target quantity"
-#~ msgstr "Diminui quantidade-alvo temporária"
-
-#~ msgid "Be vigilant"
-#~ msgstr "Sê vigilante"
-
-#~ msgid "Hard struggle"
-#~ msgstr "Luta difícil"
-
-#~ msgid ""
-#~ "<br>Available host commands are:<br>/help  - Shows this help<br>/start - "
-#~ "Starts the server."
-#~ msgstr ""
-#~ "<br>Comando de Anfitrião:<br>/help  - Mostra esta ajuda<br>/start - Inicia o "
-#~ "Servidor."
-
-#~ msgid "Mode"
-#~ msgstr "Modo"
-
-#~ msgid ""
-#~ "If you are the hosting player, you can further set the initializations of "
-#~ "each player (the set of buildings, wares and workers the player starts "
-#~ "with), connect a computer player to a player or close a player."
-#~ msgstr ""
-#~ "Se fores o jogador Anfitrião, podes ainda definir os valores iniciais para "
-#~ "cada jogador (a definição de edifícios,  mercadorias e trabalhadores com que "
-#~ "o jogador começa), ligar um jogador-computador a um jogador ou fechar um "
-#~ "jogador."
-
-#~ msgid ""
-#~ "If you are a client (not the hosting player), you can set the tribe and the "
-#~ "team for the player you set as your mode."
-#~ msgstr ""
-#~ "Se fores um cliente (não o jogador Anfitrião), podes definir a tribo e a "
-#~ "Equipa para o jogador que definires como o teu modo."
-
-#~ msgid ""
-#~ "In the middle are the settings for the players. To start a game, each player "
-#~ "must either be connected to a client or a computer player or be set to "
-#~ "closed."
-#~ msgstr ""
-#~ "No meio estão as definições para os jogadores. Para começar um jogo, cada "
-#~ "jogador tem de estar ligado a um cliente ou a um computador-jogador ou ser "
-#~ "definido para fechar."
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. With the button in "
-#~ "the rear of your nickname, you can set your player mode. Available modes are "
-#~ "open players, players that are already played by other clients (sharing the "
-#~ "kingdom) and spectator mode."
-#~ msgstr ""
-#~ "No lado esquerdo está uma lista de todos os clientes incluindo tu. Com o "
-#~ "botão por detrás da tua Alcunha, podes definir o te modo de jogador. O modos "
-#~ "disponíveis são o Jogadores abertos, Jogadores que já foram jogados por "
-#~ "outros clientes (que partilhem o reino) e modo Espectador."
-
-#, c-format
-#~ msgid ""
-#~ "This is a dedicated server send \"@%s /help\" to get a full list of "
-#~ "available commands. \"@%s /start\" starts the server."
-#~ msgstr ""
-#~ "Este é um servidor dedicado. Envie \"@%s /help\" para obter a lista total "
-#~ "dos comandos disponíveis.O comando \"@%s /start\" inicia o servidor ."
-
-#~ msgid ""
-#~ "On the left side is a list of all clients including you. With the button in "
-#~ "the rear of your nickname, you can set your role. Available roles are open "
-#~ "players, players that are already played by other clients (sharing the "
-#~ "kingdom) and spectator mode."
-#~ msgstr ""
-#~ "No lado esquerdo está a lista de todos os clientes incluindo tu. Com o botão "
-#~ "atrás da tua alcunha, podes definir o tipo de jogador que vais ser. Os tipos "
-#~ "de jogador disponíveis são:  jogadores abertos, tipo de jogador que já está "
-#~ "a ser usado por outros clientes (partilhar o reino) e modo espectador."
-
-#~ msgid ""
-#~ "If you are a client (not the hosting player), you can set the tribe and the "
-#~ "team for the player you set as your role."
-#~ msgstr ""
-#~ "Se fores um cliente (e não o anfitrião do jogo), podes definir a tribo e a "
-#~ "equipa para os jogadores que tem o mesmo tipo de jogador que tu."

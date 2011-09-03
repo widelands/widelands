@@ -63,6 +63,10 @@ hotspot=65 75
 pics=helmsmith_b_??.png  # ???
 hotspot=65 75
 
+[unoccupied]
+pics=helmsmithy_u_??.png  # ???
+hotspot=65 75
+
 [working]
 pics=helmsmith_w_??.png  # ???
 hotspot=65 75

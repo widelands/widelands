@@ -46,3 +46,8 @@ playercolor=true
 pics=deep_oremine_w_??.png
 hotspot=21 37
 playercolor=true
+
+[empty]
+pics=deep_oremine_e_??.png
+hotspot=21 37
+playercolor=true

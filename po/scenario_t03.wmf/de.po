@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-03-21 14:10+0000\n"
+"PO-Revision-Date: 2011-06-26 06:37+0000\n"
 "Last-Translator: LAZA <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-22 04:32+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-27 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -42,10 +42,10 @@ msgid ""
 msgstr ""
 " „Boldreth hat recht! Wir haben nicht genug Nahrung, um einen langen, kalten "
 "Winter zu überstehen. Wir sollten mit dem Bau sowohl eines Brunnens, als "
-"auch von Fischer- und Jägerhütten beginnen. Und falls wir genug Platz "
-"finden, sollten wir ebenfalls einen Bauernhof und eine Bäckerei bauen! Einer "
-"unserer Bauern scheint sehr klug zu sein - es ist ihm bereits gelungen, "
-"Getreide auf diesem kalten Boden wachsen zu lassen.“ "
+"auch von Fischer- und Jagdhütten beginnen. Und falls wir genug Platz finden, "
+"sollten wir ebenfalls einen Bauernhof und eine Bäckerei bauen! Einer unserer "
+"Bauern scheint sehr klug zu sein - es ist ihm bereits gelungen, Getreide auf "
+"diesem kalten Boden wachsen zu lassen.“ "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:372
 msgid ""
@@ -130,7 +130,7 @@ msgid ""
 "successfully. Finally none of us has to fear starvation anymore."
 msgstr ""
 " „Khantrukh hat mir gerade gesagt, dass die grundlegende Nahrungsversorgung "
-"gesichert ist. Endlich müssen wir nicht mehr fürchten zu verhungern.“"
+"gesichert ist. Endlich müssen wir nicht mehr fürchten, zu verhungern.“"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:348
 msgid ""
@@ -355,7 +355,7 @@ msgid ""
 "enhance your metalworks to an axefactory or even a war mill and build up "
 "another metalworks to ensure the production of tools."
 msgstr ""
-"* Baue Deine Schmiede zu einer Axtmanufaktur oder sogar zu einer "
+"* Baue deine Schmiede zu einer Axtmanufaktur oder sogar zu einer "
 "Waffenschmiede aus, sobald der Schmied die nächste Stufe (Meisterschmied) "
 "erreicht hat, und errichte eine neue Schmiede, um die Produktion von "
 "Werkzeugen sicherzustellen."
@@ -372,13 +372,13 @@ msgid ""
 "* Build a donjon at the northeast of your territory to get a farther visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
-"* Baue einen Wachturm im Nordosten Deines Reiches um eine höhere "
-"Sichtreichweite zu bekommen und Deine Leute vor plötzlichen Angriffen von "
+"* Baue einen Wachturm im Nordosten deines Reiches, um eine höhere "
+"Sichtreichweite zu bekommen und deine Leute vor plötzlichen Angriffen von "
 "Feinden zu schützen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:266
 msgid "* Build a donjon at the northeast of your territory."
-msgstr "* Baue einen Wachturm im Nordosten Deines Territoriums."
+msgstr "* Baue einen Wachturm im Nordosten deines Territoriums."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
@@ -391,7 +391,7 @@ msgid ""
 "* Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
-"* Baue eine Helmschmiede westlich der Berge, um Deine Soldaten mit besserer "
+"* Baue eine Helmschmiede westlich der Berge, um deine Soldaten mit besserer "
 "Rüstung zu versorgen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:91
@@ -406,7 +406,7 @@ msgid ""
 "and to ensure the safety of your people."
 msgstr ""
 "* Baue mehr militärische Gebäude, um das Gebiet um das Hauptquartier zu "
-"erforschen und die Sicherheit Deiner Leute zu garantieren."
+"erforschen und die Sicherheit deiner Leute zu garantieren."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -415,16 +415,16 @@ msgid ""
 "farm and a bakery, to provide your people with food."
 msgstr ""
 "* Errichte eine grundlegende Nahrungsmittelwirtschaft - eine Fischerhütte, "
-"eine Jägerhütte, einen Brunnen, einen Bauernhof und eine Bäckerei - um Deine "
+"eine Jagdhütte, einen Brunnen, einen Bauernhof und eine Bäckerei - um deine "
 "Leute mit Nahrung zu versorgen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
-msgstr "* Vernichte Kalitaths Armee und erweitere Dein Gebiet nach Osten."
+msgstr "* Vernichte Kalitaths Armee und erweitere dein Gebiet nach Osten."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr "* Vernichte Kalitaths Armee und erweitere Dein Gebiet nach Osten."
+msgstr "* Vernichte Kalitaths Armee und erweitere dein Gebiet nach Osten."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 #: ../../campaigns/t03.wmf/scripting/texts.lua:364
@@ -441,7 +441,7 @@ msgid ""
 "reaches his next level (master blacksmith) - even to a war mill and build up "
 "another metalworks to ensure the production of tools."
 msgstr ""
-"* Erweitere Deine Schmiede zu einer Axtmanufaktur oder - sobald der Schmied "
+"* Erweitere deine Schmiede zu einer Axtmanufaktur oder - sobald der Schmied "
 "seine nächste Stufe erreicht (Meisterschmied) - sogar zu einer "
 "Waffenschmiede und errichte eine weitere Schmiede, um die Versorgung mit "
 "Werkzeugen sicherzustellen."
@@ -453,7 +453,7 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
-"* Erweitere Dein Gebiet bis hin zu den Bergen, sende Geologen aus, um Erze "
+"* Erweitere dein Gebiet bis hin zu den Bergen, sende Geologen aus, um Erze "
 "und Kohle zu suchen und errichte eine Bergwerkswirtschaft aus Minen, "
 "Tavernen, Schmelzen und Schmieden."
 
@@ -511,7 +511,7 @@ msgid ""
 msgstr ""
 "-> Warenlager funktionieren ähnlich wie das Hauptquartier, mit dem "
 "Unterschied, dass keine Soldaten darin stationiert sind. Es ist von Vorteil, "
-"ein Warenhaus zu errichten, wenn Dein Gebiet wächst und die Wege zum "
+"ein Warenhaus zu errichten, wenn dein Gebiet wächst und die Wege zum "
 "Hauptquartier immer länger und länger werden."
 
 #: ../../campaigns/t03.wmf/elemental:7
@@ -530,9 +530,9 @@ msgid ""
 " of your oxen to help transport wares quicker. Remember to build a cattle\n"
 " farm!"
 msgstr ""
-"Sowie Deine Straßen immer länger werden und Deine Wirtschaft wächst, "
-"solltest Du\n"
-"Deine Ochsen tüchtig einsetzen, um Deine Waren schneller zu transportieren.\n"
+"Sowie deine Straßen immer länger werden und deine Wirtschaft wächst, "
+"solltest du\n"
+"deine Ochsen tüchtig einsetzen, um deine Waren schneller zu transportieren.\n"
 "Denke daran eine Rinderzucht zu bauen!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
@@ -569,7 +569,7 @@ msgstr "Baue Minen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:99
 msgid "Build trainingssites"
-msgstr "Baue Ausbildungsplätze"
+msgstr "Baue Trainingslager für deine Soldaten."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:40
 msgid "Build up a small food economy"

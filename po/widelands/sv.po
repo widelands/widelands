@@ -3,15 +3,20 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 16:11+0100\n"
-"PO-Revision-Date: 2011-04-21 10:56+0000\n"
-"Last-Translator: Michael Rydén <Unknown>\n"
+"PO-Revision-Date: 2011-06-14 13:32+0000\n"
+"Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-04-22 04:32+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-06-15 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
+
+#: ../../src/network/nethost.cc:1199
+#, c-format
+msgid "Can not use \"%s\" as map file!"
+msgstr "Kan inte använda \"%s\" som kartfil!"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -83,10 +88,19 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
+" --<config-entry-name>=value skriver över inställningar i "
+"konfigurationsfilerna\n"
+"\n"
+" --logfile=FILNAMN    Spara loggens utdata till filen FILNAMN\n"
+"                      istället för terminalutdatan\n"
+" --datadir=KATALOG    Använd den givna riktningen för widelands\n"
+"                      datafiler\n"
+" --homedir=KATALOG    Använd den givna katalogen för widelands\n"
+"                      konfigurationsfiler, sparade spel, och repriser\n"
 
 #: ../../src/wlapplication.cc:1303
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      Standardalternativet är ~/.widelands\n"
 
 #: ../../src/wlapplication.cc:1306
 msgid ""
@@ -105,6 +119,20 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --record=FIL         Spara alla händelser till given fil för senare\n"
+"                      uppspelning\n"
+" --playback=FIL       Spela upp given fil (se --record)\n"
+"\n"
+" --coredump=[yes|no]  Genererar en kärndump vid segmenterings-\n"
+"                      fel istället för att använda SDL\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                      Ställ in språk.\n"
+" --localedir=KATALOG  Använd KATALOG som plats för språk\n"
+" --remove_syncstreams=[true|false]\n"
+"                      Ta bort syncstream-filer vid programstart\n"
+" --remove_replays=[...]\n"
+"                      Ta bort repriser efter givet antal dagar. Om det\n"
+"                      anges till 0 raderas aldrig repriser.\n"
 
 #: ../../src/wlapplication.cc:1321
 msgid ""
@@ -159,6 +187,22 @@ msgid ""
 " --xres=[...]         Width of the window in pixel.\n"
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
+" --speed_of_new_game  Hastigheten som det nya spelet kommer\n"
+"                      köras i vid start, med faktorn 1000 (0 är paus,\n"
+"                      1000 är normal hastighet).\n"
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Om vägbyggnadsläget ska aktiveras automatiskt\n"
+"                      efter att ha placerat en flagga som inte är i\n"
+"                      anslutning till en väg.\n"
+" --write_HTML=[yes|no]\n"
+"                      Skriv HTML-hjälpfiler för tolkad speldata.\n"
+"\n"
+"Grafikalternativ:\n"
+" --fullscreen=[yes|no]\n"
+"                      Om hela skärmen ska användas för spelet.\n"
+" --depth=[16|32]     Färgdjup i antal bitar per pixel.\n"
+" --xres=[...]         Fönsterbredd i pixel.\n"
+" --yres=[...]         Fönsterhöjd i pixel.\n"
 
 #: ../../src/wlapplication.cc:1359
 msgid ""
@@ -843,11 +887,11 @@ msgstr "Dokumentation för programkommandot playFX"
 
 #: ../../src/writeHTML.cc:1387
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Dokumentation för programkommandot construct"
 
 #: ../../src/writeHTML.cc:1389
 msgid "construct"
-msgstr ""
+msgstr "construct"
 
 #: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
 msgid "Ware types"
@@ -1037,7 +1081,7 @@ msgstr "kommandokö: %s"
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "game_class: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -1168,12 +1212,12 @@ msgstr "beräkna statistik-funktion: %s"
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
 msgid "lua function: %s"
-msgstr ""
+msgstr "lua function: %s"
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
 msgid "lua: %s"
-msgstr ""
+msgstr "lua: %s"
 
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format
@@ -2470,6 +2514,8 @@ msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $"
 msgstr ""
+"<br>Tillgängliga värdkommandon är:<br>help - Visar denna hjälp<br>host $ - "
+"Försöker köra värdkommandot $"
 
 #: ../../src/network/nethost.cc:1073
 msgid ""
@@ -2482,6 +2528,14 @@ msgid ""
 "#<br>toggle_team  # - Toggles the team of player #<br>toggle_win_con - "
 "Toggles the win_condition<br>host         $ - Tries to run the host command $"
 msgstr ""
+"<br>Tillgängliga värdkommandon är:<br>help - Visar denna hjälp<br>start - "
+"Startar servern<br>ls_saved_games - Visar en lista över sparade "
+"spel<br>ls_maps - Visar en lista över kartor<br>switch_save $ - Byt till "
+"sparat spel $<br>switch_map $ - Byt till karta $<br>toggle_type # - Växlar "
+"spelartyp #<br>toggle_init # - Växlar initiering av spelare "
+"#<br>toggle_tribe # - Växlar stam för spelare #<br>toggle_team # - Växlar "
+"lag för spelare #<br>toggle_win_con - Växlar win_condition<br>host $ - "
+"Försöker köra värdkommandot $"
 
 #: ../../src/network/nethost.cc:1091
 #, c-format
@@ -2510,11 +2564,6 @@ msgstr "Tillgängliga kartor:<br>"
 #, c-format
 msgid "Can not use \"%s\" as saved game file!"
 msgstr "Kan inte använda \"%s\" som sparad spelfil!"
-
-#: ../../src/network/nethost.cc:1199
-#, c-format
-msgid "Can not use \"%s\" as map file!"
-msgstr "Kan inte använda \"%s\" som sprad kartfil!"
 
 #: ../../src/network/nethost.cc:1211 ../../src/network/nethost.cc:1217
 msgid "Invalid value # for player - should be a player number"
@@ -2716,7 +2765,7 @@ msgstr "OK"
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
 msgid "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
-msgstr ""
+msgstr "Sound_Handler avslutningstider %i, frekv %i, format %i, kan %i\n"
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
@@ -2959,6 +3008,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, "
 "please select another saved game or zip the directories content."
 msgstr ""
+"VARNING:\n"
+"Det markerade sparade spelet är en katalog. Det här händer om du anger "
+"väljaren \"nozip\" till sant eller manuellt packade upp det sparade spelet.\n"
+"Widelands kan inte överföra katalogstrukturer till klienterna; välj ett "
+"annat sparat spel eller zippa kataloginnehållet."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:384 ../../src/ui_fsmenu/launchSPG.cc:252
 msgid "File not found"
@@ -3113,7 +3167,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:648
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Ställ in som delat i startposition för annan spelare."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Closed."
@@ -3288,7 +3342,7 @@ msgstr "Ladda karta som scenario: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:138
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Map Name"
@@ -3486,7 +3540,7 @@ msgstr "av"
 #: ../../src/ui_fsmenu/options.cc:269
 #, c-format
 msgid "%ix%i %i bit"
-msgstr ""
+msgstr "%ix%i %i bit"
 
 #: ../../src/ui_fsmenu/options.cc:291
 msgid "Try system language"
@@ -4512,7 +4566,7 @@ msgstr "Kart-ID"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Spelare: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:331
 msgid "Generate Map"
@@ -4537,7 +4591,7 @@ msgstr "<Katalog>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:258
 msgid "<Not a map file>"
-msgstr ""
+msgstr "<Inte en kartfil>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 msgid " exists already. Overwrite?"
@@ -4593,6 +4647,8 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Kan inte ta bort spelare. Det hänvisas till någonstans. Ta bort alla "
+"byggnader och grunkor som är kopplade till spelaren och försök igen."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
