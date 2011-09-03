@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-08-30 23:33+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-09-02 16:33+0000\n"
+"Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-09-03 04:30+0000\n"
+"X-Generator: Launchpad (build 13830)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -22,7 +22,7 @@ msgstr ", / . Gå till tidigare / nästa plats"
 
 #: ../../txts/tips/general_game.tip:38
 msgid ",' (comma) and '."
-msgstr ""
+msgstr ",' (komma) och '."
 
 #: ../../txts/README:123
 msgid "- how to reproduce the bug"
@@ -307,7 +307,7 @@ msgstr ""
 
 #: ../../txts/developers:150
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlantean"
 
 #: ../../txts/developers:140
 msgid "Barbarian"
@@ -511,7 +511,7 @@ msgstr "Hemsida"
 
 #: ../../txts/developers:298
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Hemsidans kodare"
 
 #: ../../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
@@ -523,7 +523,7 @@ msgstr "Ungerska"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr ""
+msgstr "Informationsverktyget I Activates"
 
 #: ../../txts/COPYING:51
 msgid ""
@@ -560,6 +560,10 @@ msgid ""
 "use to the public, the best way to achieve this is to make it free software "
 "which everyone can redistribute and change under these terms."
 msgstr ""
+"Om du utvecklar ett nytt program och vill att det skall vara av största "
+"möjliga nytta för allmänheten är det bästa du kan göra att göra programmet "
+"till fri programvara som var och en kan mångfaldiga och ändra enligt dessa "
+"villkor."
 
 #: ../../txts/README:101
 msgid ""
@@ -582,7 +586,7 @@ msgstr ""
 #: ../../txts/README:88
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
+msgstr "I meddelandefönstret är följande nya genvägar tillgängliga:"
 
 #: ../../txts/README:9
 #: ../../txts/editor_readme:7
@@ -612,6 +616,8 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
+"Håll ett öga på dina fiskare. Efter att fiskresurserna har uttömts i deras "
+"arbetsområde kommer de sluta fiska."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -623,13 +629,15 @@ msgstr "Tangentbordsgenvägar (i spelet)"
 
 #: ../../txts/COPYING:1
 msgid "License"
-msgstr ""
+msgstr "Licens"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Like with natural objects (bobs), you can also select multiple animals or "
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
+"Som med naturliga objekt (bobs), kan du också markera flera djur eller "
+"marktexturer met Ctrl + musklick."
 
 #: ../../txts/developers:264
 msgid "Linux Distributions"
@@ -657,11 +665,11 @@ msgstr "Musikskapare"
 
 #: ../../txts/README:55
 msgid "N               Toggle messages ('news')"
-msgstr ""
+msgstr "N Växla meddelanden ('nyheter')"
 
 #: ../../txts/tips/general_game.tip:34
 msgid "N' for News to access the messages window, then use 'G"
-msgstr ""
+msgstr "N' för Nyheter för att komma åt meddelandfönstret, använd sedan 'G"
 
 #: ../../txts/developers:160
 msgid ""
@@ -746,7 +754,7 @@ msgstr "PAGEUP         Ökar hastigheten i spelet"
 
 #: ../../txts/README:76
 msgid "PAUSE         Pauses the game (only for local games)"
-msgstr ""
+msgstr "PAUSE Pausar spelet (bara för lokala spel)"
 
 #: ../../txts/developers:260
 msgid "Packagers"
@@ -772,6 +780,8 @@ msgstr "Inledning"
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them"
 msgstr ""
+"Tryck Ctrl+(0-9) för att lagra särskilda platser, tryck sedan 0-9 för att gå "
+"dit"
 
 #: ../../txts/README:1
 msgid "README"
@@ -1235,36 +1245,3 @@ msgstr ""
 #: ../../txts/README:5
 msgid "an open source strategy game"
 msgstr "ett strategispel med öppen källkod"
-
-#~ msgid ""
-#~ "Widelands is a strategy game aiming for gameplay similar to Settlers II by "
-#~ "BlueByte.<br>In this game, you start out on a small piece of land with "
-#~ "nothing more than a few of useful resources. Using those, you can build "
-#~ "yourself an empire with many thousands of inhabitants. On your way towards "
-#~ "this goal, you will have to build up an economic infrastructure, explore the "
-#~ "lands around you and face enemies who are trying to rule the world just like "
-#~ "you do."
-#~ msgstr ""
-#~ "Widelands är ett strategispel vars mål är att ha ett liknande spelsätt som "
-#~ "Settlers II från Bluebyte.<br>I det här spelet börjar du med en liten yta "
-#~ "land som inte har mer än några få användbara resurser. Med dessa kan du "
-#~ "bygga ett imperium med flera tusen invånare. På din resa mot ditt mål så "
-#~ "måste du bygga upp en ekonomisk infrastruktur, utforska markerna runt "
-#~ "omkring dig och möta fiender som försöker att härska över världen precis som "
-#~ "du."
-
-#~ msgid ""
-#~ "F5           Toggle hiding of game state not known to the player (only in "
-#~ "debug-builds)"
-#~ msgstr ""
-#~ "F5           Visar/döljer speldata okända för spelaren (endast i "
-#~ "avlusningsversioner)"
-
-#~ msgid "F10         Quit the game immediately"
-#~ msgstr "F10         Stänger spelet direkt"
-
-#~ msgid "vacant"
-#~ msgstr "ledig"
-
-#~ msgid "Wiki and Enduser-Documentation"
-#~ msgstr "Wiki och användardokumentation"
