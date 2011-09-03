@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,6 +55,12 @@ struct UserSettings {
 	std::string name;
 };
 
+struct DedicatedMapInfos {
+	std::string path;
+	uint8_t     players;
+	bool        scenario;
+};
+
 /**
  * Holds all settings about a game that can be configured before the
  * game actually starts.
@@ -93,6 +99,11 @@ struct GameSettings {
 
 	/// Users connected to the game (0-based indices) - only used in multiplayer
 	std::vector<UserSettings> users;
+
+	/// Only used for dedicated servers so the clients can look through the maps available on the server
+	/// like in their "own" map / saved games selection menu
+	std::vector<DedicatedMapInfos> maps;
+	std::vector<DedicatedMapInfos> saved_games;
 };
 
 

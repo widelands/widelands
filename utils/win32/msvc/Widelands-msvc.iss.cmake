@@ -17,8 +17,6 @@
 ;
 ; Only change the "Placeholder"-variables in the two "#define"-sections.
 ; Nothing more must be changed. All visible stuff is defined there.
-; You don't even need to clean up your widelands-svn-checkout-directory.
-; ".svn"-directorys will be excluded in the compilation-processe.
 
 
 ;Version String
@@ -128,9 +126,15 @@ Name: {userdesktop}\{#Name} - Mapeditor;     Filename: {app}\{#ExeName}; Paramet
 Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent
 
 [InstallDelete]
+Type: filesandordirs; Name: {app}\campaigns\*
 Type: filesandordirs; Name: {app}\global\*
+Type: filesandordirs; Name: {app}\locale\*
 Type: filesandordirs; Name: {app}\maps\*
+Type: filesandordirs; Name: {app}\pics\*
+Type: filesandordirs; Name: {app}\scripting\*
+Type: filesandordirs; Name: {app}\sound\*
 Type: filesandordirs; Name: {app}\tribes\*
+Type: filesandordirs; Name: {app}\txts\*
 Type: filesandordirs; Name: {app}\worlds\*
 
 [UninstallDelete]

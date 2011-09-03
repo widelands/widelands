@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-08-30 23:42+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-05-27 21:35+0000\n"
+"Last-Translator: Zilvador <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:33+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-28 04:32+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
@@ -144,12 +144,33 @@ msgid ""
 "perl-gulf with my family, some of my friends and a few of my best "
 "warriors.\" "
 msgstr ""
+" »Hvad er der sket med vores imperium? Jeg spørger faktisk om dette - "
+"hvorfor forbød min konge mig at kæmpe mod den dyriske barbarstamme, som "
+"først gav sig ud for at være en fredelig ven og derefter angrib min hær midt "
+"i nattens mulm og mørke?<br> Med en hær på 150 krigere blev jeg tildelt "
+"opgaven at stå vagt ved vores nordlige grænse, der ligger nær Galdinbjergene "
+"i en mægtig, smuk og ældgammel skov. Vi stødte snart efter på barbarstammen, "
+"som først var venlig. Nogle få af mine krigere handlede endda med dem og "
+"deres børn kom hen til os for at beundre vores rene og nydelige udstyr og "
+"våben.<br> Men den fjerde nat i dette område angreb de os uden grund. Jeg "
+"tabte snesevis af gode krigere og blev selv sat i fængsel og bragt til deres "
+"høvding. Han spyttede på mig, holdt mig for nar og beordrede mig til at "
+"forlade hans område for altid. Han ønskede ikke et større område og ville "
+"ikke have vores område men fortalte mig, at DENNE skov var deres område - og "
+"ville forblive deres, indtil spøgelserne ville drage bort med den sidste af "
+"hans folk!<br> Tre uger senere kom jeg tilbage til Fremil for at tale med "
+"vores konge. Han var rasende på barbarerne, men tillod dog ikke et angreb "
+"imod disse stammer. Så jeg forlod Fremil med båd for at opsøge en ny verden "
+"og et nyt liv, et sted sydpå. Nu sejler jeg i Perlegolfen med min familie, "
+"nogle af mine venner og enkelte af mine bedste krigere.« "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:135
 msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
 msgstr ""
+" »Du har gjort denne halvø til et meget sikkert sted. Det er tid til at "
+"drage videre!« "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:146
@@ -186,6 +207,8 @@ msgid ""
 "* Build a quarry in the south to cut some stones and marble out of the "
 "rocks.<br> These might be used for future buildings."
 msgstr ""
+"* Opfør et stenbrud sydpå for at hugge sten og marmor ud fra klipperne.<br> "
+"Dette kan bruges til fremtidige bygninger."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:85
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:164
@@ -209,7 +232,7 @@ msgstr "Et varsel"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "A step forward"
-msgstr ""
+msgstr "Et skridt fremad"
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -300,7 +323,7 @@ msgstr "Det barske hav"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid "Thinking about the future"
-msgstr "Tink på fremtiden"
+msgstr "Overvejelser om fremtiden"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80

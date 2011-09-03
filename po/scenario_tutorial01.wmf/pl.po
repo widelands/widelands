@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-04-23 09:14+0000\n"
-"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
+"PO-Revision-Date: 2011-07-14 17:38+0000\n"
+"Last-Translator: Mateusz Micał <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-24 04:33+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-07-15 04:30+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -129,7 +129,7 @@ msgstr "Zaatakuj i zajmij wszystkie budynki wojskowe oraz bazę wroga."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
-msgstr "Atak:"
+msgstr "Atakuj:"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
@@ -274,10 +274,10 @@ msgid ""
 "so\n"
 "that they get a tick-symbol in front of them. Then, you can click the"
 msgstr ""
-"Obecnie masz dwie wiadomości. Ta, którą czytasz, i ta, która poinformowała "
-"cię, że zyskałeś\n"
-"nową kwaterę główną. Nauczmy Cię teraz archiwizować wiadomości: możesz je "
-"zaznaczyć\n"
+"Obecnie masz dwie wiadomości: tę, którą czytasz, i drugą, która "
+"poinformowała cię, że zyskałeś\n"
+"nową kwaterę główną. Nauczymy się terazjak  archiwizować wiadomości: możesz "
+"je zaznaczyć\n"
 "klikając na nie. Następnie możesz kliknąć"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
@@ -320,9 +320,9 @@ msgstr ""
 "trenować\n"
 "tej umiejętności, więc posiadają zawsze obronę równą 0, więc zawsze 3 punkty "
 "zostają\n"
-"odjęcie od obrażeń, które otrzymują. Jeśli atakujący z Atakiem równym 15 "
+"odjęte od obrażeń, które otrzymują. Jeśli atakujący z Atakiem równym 15 "
 "uderzy barbarzyńcę, \n"
-"barbarzyńca straci 15 - 3 = 12 punktów zdrowia. 3 punkty zdrowia są "
+"barbarzyńca straci 15 - 3 = 12 punktów zdrowia. Tylko 3 punkty zdrowia są "
 "odejmowane z powodu\n"
 "ich braku umiejętności obrony."
 
@@ -341,7 +341,7 @@ msgstr "Aktywuj asystenta budowy."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhance this fortress"
-msgstr "Wzmocnij tą fortecę."
+msgstr "Ulepsz tę fortecę."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid "Enhance your fortress"

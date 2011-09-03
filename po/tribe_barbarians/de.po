@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-04-27 19:51+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2011-06-18 16:57+0000\n"
+"Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-28 04:32+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-06-19 04:31+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -230,7 +230,7 @@ msgstr "Stoff"
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
 msgstr ""
-"Stoff wird für die Schiffe der Barbaren benötigt. Es wird aus aus Flachs "
+"Stoff wird für die Schiffe der Barbaren benötigt. Es wird aus Flachs "
 "hergestellt."
 
 #: ../../tribes/barbarians/conf:76
@@ -239,7 +239,7 @@ msgstr "Kohle"
 
 #: ../../tribes/barbarians/conf:198
 msgid "Coal mine"
-msgstr "Kohlenmine"
+msgstr "Kohlemine"
 
 #: ../../tribes/barbarians/conf:146
 msgid "Construction Site"
@@ -283,7 +283,7 @@ msgstr "Verteidigt und Erobert!"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Destroyed building"
-msgstr "Zerstörtes Gebäude"
+msgstr "zerstörtes Gebäude"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -307,7 +307,7 @@ msgstr "Holzfälleraxt"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
-msgstr "Fällt Bäume."
+msgstr "fällt Bäume"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Ferner"
@@ -374,7 +374,7 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Zum Fangen von Fischen benötigen die Fischer der Barbaren eine Angel. Dieses "
+"Zum Fangen von Fischen benötigen der Fischer der Barbaren eine Angel. Dieses "
 "einfache Werkzeug wird in einer Werkzeugschmiede produziert. Hinweis: Wird "
 "die Werkzeugschmiede zu einer Axtmanufaktur bzw. Waffenschmiede ausgebaut, "
 "können dort keine Werkzeuge mehr hergestellt werden!"
@@ -444,7 +444,7 @@ msgstr "Mörtel"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
-msgstr "Baut Reet an."
+msgstr "baut Reet an."
 
 #: ../../tribes/barbarians/conf:150
 msgid "Guardhall"
@@ -460,11 +460,11 @@ msgstr "Hammer"
 
 #: ../../tribes/barbarians/fernery/conf:17
 msgid "Harvest reed"
-msgstr "Erntet Reet"
+msgstr "erntet Reet"
 
 #: ../../tribes/barbarians/farm/conf:19
 msgid "Harvest wheat"
-msgstr "Erntet Weizen"
+msgstr "erntet Weizen"
 
 #: ../../tribes/barbarians/conf:164
 #: ../../tribes/barbarians/conf:165
@@ -505,7 +505,7 @@ msgstr ""
 "Wie soll man ohne Küchengeräte eine Mahlzeit, einen Snack oder eine Ration "
 "herstellen? Achte darauf, eine Metallwerkstatt zu haben, die solches "
 "einfaches Gerät herstellt (was sie aber nicht mehr tut, wenn sie zur "
-"Axtfabrik oder Waffenschmiede ausgebaut wird)."
+"Axtfabrik bzw. Waffenschmiede ausgebaut wird!)."
 
 #: ../../tribes/barbarians/conf:132
 msgid "Hunter"
@@ -637,9 +637,8 @@ msgid ""
 msgstr ""
 "Nur dieses Bier ist gut genug für die Krieger in der Arena. Man sagt, die "
 "ganze Kraft der Barbaren liege darin. Starkbier hilft den Kriegern, ihre "
-"Ausweichfertigkeiten von Stufe 0 über Stufe 1 bis zur Stufe 2 zu trainieren. "
-"Starkbier wird außerdem in Gaststätten für das Zubereiten von Mahlzeiten "
-"benötigt."
+"Ausweichfertigkeiten von Stufe 0 bis zur Stufe 2 zu trainieren. Starkbier "
+"wird außerdem in Gaststätten für das Zubereiten von Mahlzeiten benötigt."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -663,19 +662,19 @@ msgstr "Fladenbrot"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr "Pflanzt Reet"
+msgstr "pflanzt Reet"
 
 #: ../../tribes/barbarians/farm/conf:17
 msgid "Plant wheat"
-msgstr "Pflanzt Weizen"
+msgstr "pflanzt Weizen"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr "Bestellt Felder."
+msgstr "bestellt Felder."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr "Pflanzt Bäume."
+msgstr "pflanzt Bäume."
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
@@ -697,11 +696,11 @@ msgstr "Herstellung von Breitaxt"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr "Herstellung von Bronzeaxt"
+msgstr "schmiedet Bronzeaxt"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
-msgstr "Herstellung von Holzfälleraxt"
+msgstr "schmiedet Holzfälleraxt"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
@@ -713,7 +712,7 @@ msgstr "Herstellung von Angel"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr "Herstellung von Hammer"
+msgstr "fertigt Hammer"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
@@ -830,19 +829,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
-msgstr "ausgewachsener Reet"
+msgstr "ausgewachsenes Reet"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Reed ripe"
-msgstr "reifer Reet"
+msgstr "reifes Reet"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Reed small"
-msgstr "junger Reet"
+msgstr "junges Reet"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed tiny"
-msgstr "frisch gesäter Reet"
+msgstr "frisch gesätes Reet"
 
 #: ../../tribes/barbarians/conf:52
 msgid "Resource indicator coal little"
@@ -878,7 +877,7 @@ msgstr "Ressourcenanzeige für viel Eisen"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator no resource"
-msgstr "Ressourcenanzeige für fehlende Ressource"
+msgstr "Ressourcenanzeige für keine Ressource"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Resource indicator water"
@@ -927,11 +926,11 @@ msgstr "Spähturm"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
-msgstr "Verhüttet Golderz"
+msgstr "verhüttet Golderz"
 
 #: ../../tribes/barbarians/smelting_works/conf:24
 msgid "Smelt iron"
-msgstr "Verhüttet Eisenerz"
+msgstr "verhüttet Eisenerz"
 
 #: ../../tribes/barbarians/conf:138
 msgid "Smelter"
@@ -943,11 +942,11 @@ msgstr "Hochofen"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr "Schmiedet Helme für die Soldaten."
+msgstr "schmiedet Helme für die Soldaten."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Verhüttet Eisenerz."
+msgstr "verhüttet Eisenerz."
 
 #: ../../tribes/barbarians/conf:100
 msgid "Snack"
@@ -963,9 +962,10 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
-"Für einige Deiner Startgebäude war nicht genügend Platz und sie wurden daher "
-"nicht gebaut. Dadurch bist Du im Nachteil; überlege, ob Du diese Karte nicht "
-"unter gerechten Startbedingungen nochmals starten möchtest."
+"Für einige Deiner Startgebäude war nicht genügend Platz und\n"
+"sie wurden daher nicht gebaut. Dadurch bist Du im Nachteil; überlege,\n"
+"ob Du diese Karte nicht unter gerechten Startbedingungen nochmals starten "
+"möchtest."
 
 #: ../../tribes/barbarians/conf:139
 msgid "Stonemason"
@@ -1201,7 +1201,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/conf:161
 msgid "Tower"
-msgstr "Wachtturm"
+msgstr "Wachturm"
 
 #: ../../tribes/barbarians/conf:140
 msgid "Trainer"
@@ -1228,14 +1228,14 @@ msgid ""
 "by hardening them in the fire which gives blackwood."
 msgstr ""
 "Baumstämme sind grundlegendes Baumaterial der Barbaren. Die Bäume werden "
-"durch den Holzfäller zu Fall gebracht. Förster sichern ihnen den Nachschub. "
+"durch den Holzfäller gefällt; Förster sichern ihnen den Nachschub. "
 "Baumstämme werden in der Werkzeugschmiede benötigt, sie können aber auch "
 "durch die Köhlerei in Kohle oder durch den Holzhärter in Hartholz verwandelt "
 "werden."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr "Verbessert Angriff des Soldaten von 0 auf 1"
+msgstr "Verbessert Angriff des Soldaten von 0 auf 1."
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid ""
@@ -1247,7 +1247,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr "Verbessert Angriff des Soldaten von 1 auf 2"
+msgstr "Verbessert Angriff des Soldaten von 1 auf 2."
 
 #: ../../tribes/barbarians/trainingscamp/conf:40
 msgid ""
@@ -1259,7 +1259,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr "Verbessert Angriff des Soldaten von 2 auf 3"
+msgstr "Verbessert Angriff des Soldaten von 2 auf 3."
 
 #: ../../tribes/barbarians/trainingscamp/conf:42
 msgid ""
@@ -1271,7 +1271,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr "Verbessert Angriff des Soldaten von 3 auf 4"
+msgstr "Verbessert Angriff des Soldaten von 3 auf 4."
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid ""
@@ -1283,7 +1283,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr "Verbessert Angriff des Soldaten von 4 auf 5"
+msgstr "Verbessert Angriff des Soldaten von 4 auf 5."
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid ""
@@ -1295,7 +1295,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
-msgstr "Verbessert Ausweichen des Soldaten von 0 auf 1"
+msgstr "Verbessert Ausweichen des Soldaten von 0 auf 1."
 
 #: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
@@ -1306,7 +1306,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
-msgstr "Verbessert Ausweichen des Soldaten von 1 auf 2"
+msgstr "Verbessert Ausweichen des Soldaten von 1 auf 2."
 
 #: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
@@ -1317,7 +1317,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 0 auf 1"
+msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 0 auf 1."
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid ""
@@ -1329,7 +1329,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 1 auf 2"
+msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 1 auf 2."
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
@@ -1341,7 +1341,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 2 auf 3"
+msgstr "Verbessert Lebenspunkte des Soldaten von Stufe 2 auf 3."
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid ""
@@ -1378,8 +1378,8 @@ msgid ""
 "with water."
 msgstr ""
 "Wasser ist lebenswichtig! Die Barbaren benötigen es in der Bäckerei, der "
-"Kleinbrauerei und der Brauerei. Darüber hinaus sollten auch die "
-"Kalkbrennerei und die Rinderzucht mit Wasser versorgt werden."
+"Kleinbrauerei und der Brauerei. Auch die Kalkbrennerei und die Rinderzucht "
+"müssen mit Wasser versorgt werden."
 
 #: ../../tribes/barbarians/conf:141
 msgid "Weaver"
@@ -1405,7 +1405,7 @@ msgid ""
 msgstr ""
 "Weizen ist Grundzutat für Fladenbrot und Bier. Er wird durch den Bauernhof "
 "produziert und von Bäckerei, Kleinbrauerei und Brauerei benötigt. Auch die "
-"Rinderzucht sollte mit Weizen versorgt werden."
+"Rinderzucht muss mit Weizen versorgt werden."
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"

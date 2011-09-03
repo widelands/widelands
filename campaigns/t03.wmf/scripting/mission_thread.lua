@@ -87,7 +87,7 @@ function foottracks()
    send_msg(order_msg_3_explore_further)
    o = add_obj(obj_explore_further)
    
-   p1:allow_buildings{"sentry", "stronghold", "barrier"}
+   p1:allow_buildings{"sentry", "barrier"}
 
    -- Wait till we see the mountain and at least one frontier
    while true do
@@ -265,8 +265,8 @@ function renegade_fortresses()
    do sleep(6834) end
 
    prefilled_buildings(p1, 
-      {"stronghold", 118, 100, soldiers = 
-         {[{0,0,0,0}]=1, [{1,1,0,1}] = 1, [{0,1,0,0}] = 1}
+      {"barrier", 118, 100, soldiers = 
+         {[{0,0,0,0}]= 1, [{1,1,0,1}] = 1, [{0,1,0,0}] = 1}
       }, 
       {"citadel", 117, 97, soldiers = {
          [{0,0,0,0}]=3, [{1,1,0,0}]=1, [{0,0,0,1}]=2,

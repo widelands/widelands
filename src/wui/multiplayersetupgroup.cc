@@ -438,7 +438,7 @@ m_fname(fname)
 		(new UI::Textarea
 			(this,
 			 w * 6 / 15 + buth * 3, buth / 3,
-			 w * 9 / 15 - 4 * buth, buth));
+			 w * 9 / 15 - 4 * buth, buth, UI::Align_HCenter));
 	labels.back()->set_text(_("Initialization"));
 	labels.back()->set_textstyle(tsmaller);
 

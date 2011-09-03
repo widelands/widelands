@@ -1163,8 +1163,11 @@ void ProductionProgram::ActMine::execute
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
-		if (m_chance <= 20)
+		if (m_chance <= 20) {
 			informPlayer(game, ps);
+			// and change the default animation
+			ps.set_default_anim("empty");
+		}
 
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources

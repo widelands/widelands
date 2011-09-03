@@ -108,7 +108,7 @@ obj_build_weapon_productions = {
    name = "build_weapon_productions",
    title=_"Build weapon productions",
    body= "<rt><p line-spacing=3 font-size=12>" ..
-_"* Enhance your metalworks to an axefactory or - as soon as the blacksmith reaches his next level (master blacksmith) - even to a war mill and build up another metalworks to ensure the production of tools." ..
+_"* Enhance your metalworks to an axefactory to start producing weapons, and build up another metalworks to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance your axefactory to a war mill." ..
 "</p></rt>",
 }
 
@@ -333,7 +333,7 @@ _"* Build a warehouse to the west of the mountains." ..
 "<br>" ..
 _"* Build a battle arena and a trainings camp to the west of the mountains." ..
 "<br>" ..
-_"* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools." ..
+_"* Enhance your metalworks to an axefactory in order to produce weapons and build up another metalworks to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance it to a war mill which produces additional weapons." ..
 "<br>" ..
 _"* Build a helmsmithy to the west of the mountains to provide your soldiers with better armor." ..
 "</p></rt>",

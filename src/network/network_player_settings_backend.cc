@@ -32,8 +32,6 @@ void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
 	if (id >= s->settings().players.size())
 		return;
 
-	assert(s->settings().usernum == 0);
-
 	s->nextPlayerState(id);
 }
 

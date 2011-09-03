@@ -40,3 +40,7 @@ hotspot=49 49
 pics=coalmine_w_??.png
 hotspot=49 49
 fps=10
+
+[empty]
+pics=coalmine_e_??.png
+hotspot=49 49

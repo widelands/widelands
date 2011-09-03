@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -208,6 +208,8 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
 
 	if (not m_didconquer) {
 		conquer_area(egbase);
+		// Building is now occupied - idle animation should be played
+		start_animation(egbase, descr().get_animation("idle"));
 
 		if (upcast(Game, game, &egbase)) {
 			char message[256];

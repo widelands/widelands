@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-04-19 13:32+0000\n"
-"Last-Translator: Juan José Navarro García <Unknown>\n"
+"PO-Revision-Date: 2011-05-07 18:28+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-20 04:32+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-08 04:31+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -68,11 +68,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
-msgstr ""
+msgstr "Baker"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Bakery"
-msgstr ""
+msgstr "Forn"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
@@ -84,12 +84,12 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Barracks"
-msgstr ""
+msgstr "Caserna"
 
 #: ../../tribes/atlanteans/conf:146
 #: ../../tribes/atlanteans/conf:154
 msgid "Barrier"
-msgstr ""
+msgstr "Barrera"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
@@ -146,7 +146,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
-msgstr ""
+msgstr "Pa"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -187,7 +187,7 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:155
 #: ../../tribes/atlanteans/conf:201
 msgid "Castle"
-msgstr ""
+msgstr "Castell"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Coal"
-msgstr ""
+msgstr "Carbó"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Coal Mine"
@@ -269,7 +269,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:67
 msgid "Diamond"
-msgstr ""
+msgstr "Diamant"
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -311,7 +311,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
-msgstr ""
+msgstr "Peix"
 
 #: ../../tribes/atlanteans/conf:118
 msgid "Fish Breeder"
@@ -330,7 +330,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
-msgstr ""
+msgstr "Fisher"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Fisher's House"
@@ -359,7 +359,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:74
 msgid "Gold"
-msgstr ""
+msgstr "Or"
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Gold Mine"
@@ -435,7 +435,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Horse"
-msgstr ""
+msgstr "Cavall"
 
 #: ../../tribes/atlanteans/conf:136
 msgid "Horse Breeder"
@@ -465,7 +465,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Iron"
-msgstr ""
+msgstr "Ferro"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Iron Mine"
@@ -501,7 +501,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:84
 msgid "Meat"
-msgstr ""
+msgstr "Carn"
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""

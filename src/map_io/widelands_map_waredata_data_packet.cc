@@ -205,7 +205,7 @@ throw (_wexception)
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw game_data_error(_("waredata: %s"), e.what());
+		throw game_data_error(_("ware data: %s"), e.what());
 	}
 }
 

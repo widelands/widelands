@@ -26,10 +26,15 @@ sleep=15000
 animate=working 15000
 produce=bread
 
+[build]
+pics=bakery_b_??.png  # ???
+hotspot=72 66
+
 [idle]
 pics=bakery_i_??.png  # ???
-hotspot=54 52
+hotspot=72 66
 
 [working]
-pics=bakery_i_??.png  # ???
-hotspot=54 52
+pics=bakery_w_??.png  # ???
+hotspot=72 66
+fps=2

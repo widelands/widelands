@@ -8,20 +8,22 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-11-11 01:12+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-07-30 21:30+0000\n"
+"Last-Translator: Marcelo do Pagode <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:36+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-31 04:30+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Uma comida de verdade é feita nas hospedarias a partir de pão e peixe/carne. "
+"Ela satisfaz as necessidades de mineiros nas minas profundas."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -29,6 +31,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"Um pequeno pedaço para manter os mineiros fortes e trabalhando. Rações "
+"também são consumidas pelos escoteiros em suas viagens de reconhecimento. "
+"São produzidos em uma taverna a partir de peixe, carne ou pão."
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
@@ -44,7 +49,7 @@ msgstr "Armadura"
 
 #: ../../tribes/empire/conf:180
 msgid "Armour Smithy"
-msgstr "Ferreiro"
+msgstr "Ferreiro de armaduras"
 
 #: ../../tribes/empire/conf:109
 msgid "Armoursmith"
@@ -85,6 +90,9 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
+"Armadura básica para os soldados do Império. É produzida no ferreira de "
+"armaduras e usada no campo de treino - junto com alimentos - para aumentar "
+"os potos de vida dos soldados do nível 1 para o nível 2."
 
 #: ../../tribes/empire/conf:60
 msgid "Basket"
@@ -99,6 +107,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Além de pão e carne, peixe também é um alimento no Império. Peixes são "
+"utilizados nas tavernas, hospedarias e locais de treino (arena, coliseu e "
+"campo de treino)."
 
 #: ../../tribes/empire/conf:62
 msgid "Bread"
@@ -175,6 +186,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"Pano é necessário para construir vários edifícios. Também é consumido na "
+"forja de armaduras."
 
 #: ../../tribes/empire/conf:65
 msgid "Coal"
@@ -285,6 +298,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Tenazes são ferramentas usada pelo funileiro na funilaria. Elas são "
+"produzidas pelo ferreiro."
 
 #: ../../tribes/empire/conf:67
 msgid "Fish"
@@ -318,14 +333,16 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Farinha é produzida no moinho usando trigo. É necessária na padaria para "
+"produzir o delicioso pão Imperial."
 
 #: ../../tribes/empire/conf:117
 msgid "Forester"
-msgstr "Silvicultor"
+msgstr "Reflorestador"
 
 #: ../../tribes/empire/conf:163
 msgid "Forester's House"
-msgstr "Casa do Silvicultor"
+msgstr "Casa do reflorestador"
 
 #: ../../tribes/empire/conf:151
 #: ../../tribes/empire/conf:204
@@ -354,14 +371,17 @@ msgid ""
 "with it. It is produced in the smelting works out of goldstone and processed "
 "in the armour smithy and the weapon smithy."
 msgstr ""
+"Ouro é o mais valioso de todos os metais; armaduras e armas são feitas com "
+"ele. É produzido na fundição através do ouro bruto e processado no ferreiro "
+"de armadura e ferreiro de armas."
 
 #: ../../tribes/empire/conf:71
 msgid "Goldstone"
-msgstr "Aventurina"
+msgstr "Ouro bruto"
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "Goldstones are mined in goldmines and processed in smelting works."
-msgstr ""
+msgstr "Ouro bruto é retirado nas minas de ouro e processado na fundição."
 
 #: ../../tribes/empire/conf:72
 msgid "Grape"
@@ -418,13 +438,16 @@ msgstr "Ajuda a carregar itens pelas movimentas estradas."
 
 #: ../../tribes/empire/conf:145
 msgid "High Tower"
-msgstr "Torreão"
+msgstr "Torre Alta"
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
+"Como alguém pode fazer uma ração ou refeição se não há ferramentas de "
+"cozinha? Elas são produzidas pelo ferreiro e usadas nas tavernas e "
+"hospedarias."
 
 #: ../../tribes/empire/conf:119
 msgid "Hunter"
@@ -463,6 +486,8 @@ msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"Ferro bruto é retirado nas minas de ferro e precisa ser derretido na "
+"fundição para poder ser utilizado."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -502,6 +527,9 @@ msgid ""
 "for nearly every bigger building. They are produced out of marble in a "
 "stonemason's house."
 msgstr ""
+"Coluna de mármore representam a cultura elevada do Império, de modo que elas "
+"são necessárias em praticamente todas as grandes construções. Elas são "
+"feitas de mármore na marmoraria."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -509,6 +537,9 @@ msgid ""
 "in a quarry. Marble is used as building material and gets formed into marble "
 "columns in the stonemason's house."
 msgstr ""
+"Mármore é uma linda pedra, obtidas nas montanhas ou produzidas nas "
+"pedreiras. Mármore é utilizado como material de construção e é transformado "
+"em colunas de mármore na marmoraria."
 
 #: ../../tribes/empire/conf:122
 msgid "Master Miner"
@@ -529,6 +560,10 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"Carne contem muita energia. É utilizada em hospedarias e tavernas para "
+"preparar comida para os mineiros e é consumida nos locais de treinamento "
+"(arena, coliseu e campo de treino). Existem duas fontes de carne: porco dos "
+"chiqueiros e carne de caça pelos caçadores."
 
 #: ../../tribes/empire/conf:170
 msgid "Mill"
@@ -688,7 +723,7 @@ msgstr "Produz pá"
 
 #: ../../tribes/empire/weaponsmithy/conf:33
 msgid "Produce war lance"
-msgstr ""
+msgstr "Produz lança de guerra"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -850,14 +885,18 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
+"Algumas das suas construções iniciais não possuíam espaço suficiente e \n"
+"não foram finalizadas. Vocês está em desvantagem em função disto; procure "
+"reiniciar \n"
+"este mapa com uma condição inicial justa."
 
 #: ../../tribes/empire/conf:128
 msgid "Stonemason"
-msgstr "Pedreiro"
+msgstr "Marmoreiro"
 
 #: ../../tribes/empire/conf:168
 msgid "Stonemason's House"
-msgstr "Casa do pedreiro"
+msgstr "Maramoraria"
 
 #: ../../tribes/empire/conf:91
 msgid "Stones"
@@ -868,6 +907,8 @@ msgid ""
 "Stones are a basic building material of the Empire. It is produced in "
 "quarries and marble mines."
 msgstr ""
+"Pedras são materiais de construção básicos no Império. É produzido em "
+"pedreiras e minas de mármore."
 
 #: ../../tribes/empire/conf:153
 msgid "Stronghold"
@@ -901,6 +942,10 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Os padeiros do Império produzem deliciosos pães com farinha e água. Os pães "
+"são utilizados em tavernas e hospedarias para preparar rações e refeições. "
+"Eles também são consumidos em locais de treinamento (arena, coliseu e campo "
+"de treino)."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -908,6 +953,10 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"A armadura de corrente é uma armadura média dos soldados do Império. É "
+"produzido em um ferreiro de armas e usada no campo de treino - junto com "
+"alimentos - para aumentar os pontos de vida dos soldados do nível 2 para o "
+"nível 3."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -915,6 +964,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"As fogueiras das fundições Imperiais, ferreiros de armaduras e de armas são "
+"usualmente alimentadas com carvão, que é retirado em minas de carvão ou "
+"produzido em queimando troncos de árvores em carvoarias."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -922,6 +974,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"O martelo é uma ferramenta essencial. É necessária para o geólogo, "
+"construtor e para os ferreiros de armas e armaduras. Garanta que sempre haja "
+"algum de reserva! É produzido pelo ferreiro"
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -930,6 +985,10 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"O elmo é a defesa básica de um guerreiro. Ela é produzida no ferreiro de "
+"armaduras. Junto com a lança de madeira é um equipamento para os jovens "
+"soldados. Elmos são usados em campos de treinos - junto com alimentos - para "
+"aumentar os pontos de vida dos soldados do nível 0 para o nível 1."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -945,6 +1004,10 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"A armadura de placas é a mais forte entre as armaduras existentes no "
+"Império. Ela é produzida no ferreiro de armaduras e usada no campo de "
+"treinos - junto com alimentos - para aumentar os pontos de vida dos soldados "
+"do nível 3 para o nível 4."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -952,25 +1015,31 @@ msgid ""
 "uses it. It is produced by the toolsmith."
 msgstr ""
 "A pá é necessária para o trato correto das plantas. Além do que, o "
-"florestador a usa. É produzida na Ferraria."
+"reflorestador a usa. É produzida na Ferraria."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
+"Estas uvas são a base para um bom vinho. Elas são colhidas nos vinhedos e "
+"processadas na vinícola."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Esta cesta é necessária para o viticultor colher suas uvas. É produzida pelo "
+"ferreiro."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"Esta cerveja é produzida na cervejaria com trigo e água. É consumida por "
+"mineiros nas minas de carvão e de ferro."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -978,6 +1047,9 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"Esta é uma lança forte com ponta de aço e uma pequena lâmina. É produzida "
+"pelo ferreiro de armas e usada no campo de treino - junto com alimentos - "
+"para melhorar o ataque dos soldados do nível 2 para o nível 3."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -985,6 +1057,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"Esta é uma lança avançada, com ponta de aço. É produzida pelo ferreiro de "
+"armas e usada no campo de treino - junto com alimentos - para melhorar o "
+"ataque dos soldados do nível 1 para o nível 2."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -992,6 +1067,9 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"Esta é a melhor e mais afiada arma que o ferreiro de armas do Império cria "
+"para seus soldados. É usada no campo de treino - junto com alimentos - para "
+"melhorar o ataque dos soldados do nível 3 para o nível 4."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -1003,17 +1081,21 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Esta lança possui uma ponta de ferro. É produzida pelo ferreiro de armas e "
+"usada no campo de treino - junto com alimentos - para melhorar o ataque dos "
+"soldados do nível 0 para o nível 1."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
 "This pick is used by the stonemasons and the miners. It is produced by the "
 "toolsmith."
 msgstr ""
-"Esta picareta é usada pelos pedreiros e os mineiros. É produzida na ferraria."
+"Esta picareta é usada pelos marmoreiros e os mineiros. É produzida na "
+"ferraria."
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
+msgstr "Esta serra é usada pelo serrador. É produzida pelo ferreiro."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1028,6 +1110,8 @@ msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"Este delicioso vinho é consumido nas minas de mármore e ouro. Ele é "
+"produzido na vinícola."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1035,6 +1119,9 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"Esta lança de madeira é a arma básica do sistema militar do Império. É "
+"produzida pelo ferreiro de armas. Junto com o elmo é o equipamento dos "
+"jovens soldados."
 
 #: ../../tribes/empire/conf:129
 msgid "Toolsmith"
@@ -1071,6 +1158,9 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"Troncos de árvore são um material de construção importante no Império. Os "
+"lenhadores cortam as árvores e os reflorestadores fazem a reposição. Os "
+"troncos são utilizadas na carvoaria, ferraria e serraria."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1234,6 +1324,8 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"Água é a essência da vida! É utilizada na padaria e na cervejaria. O haras "
+"de burros, a fazenda de ovelhas e o chiqueiro também precisam de água."
 
 #: ../../tribes/empire/conf:186
 msgid "Weapon Smithy"
@@ -1244,10 +1336,12 @@ msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Armas, armaduras e ferramentas são fabricadas com ferro, que é obtido "
+"através do ferro bruto nas fundições."
 
 #: ../../tribes/empire/conf:131
 msgid "Weaponsmith"
-msgstr "Armeiro"
+msgstr "Ferraria de Armas"
 
 #: ../../tribes/empire/conf:132
 msgid "Weaver"
@@ -1271,6 +1365,9 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Trigo é essencial para sobrevivência. É produzido nas fazendas e utilizadas "
+"nos moinhos e cervejarias. Haras de burros, fazendas do ovelhas e chiqueiros "
+"também necessitam de trigo."
 
 #: ../../tribes/empire/conf:96
 msgid "Wine"
@@ -1293,6 +1390,8 @@ msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"Madeira é um material de construção básico do Império. Também é utilizado "
+"pelo ferreiro de armas."
 
 #: ../../tribes/empire/conf:99
 msgid "Wool"

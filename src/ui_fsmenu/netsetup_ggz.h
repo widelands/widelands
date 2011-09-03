@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,14 +63,13 @@ private:
 	uint32_t                                    m_butw;
 	uint32_t                                    m_buth;
 	uint32_t                                    m_lisw;
-	int32_t                                     m_namechange;
 	uint32_t                                    m_fs;
 	std::string                                 m_fn;
 	UI::Textarea                                title, m_users, m_opengames;
 	UI::Textarea                                m_servername;
 	UI::Textarea                                m_maxplayers;
 	UI::SpinBox                                 maxplayers;
-	UI::Callback_Button                     joingame, hostgame, back;
+	UI::Callback_Button                         joingame, hostgame, back;
 	UI::EditBox                                 servername;
 	UI::Table<const Net_Player * const>         usersonline;
 	UI::Listselect<Net_Open_Game>               opengames;

@@ -44,3 +44,8 @@ playercolor=true
 pics=deeper_coalmine_b_??.png
 hotspot=60 37
 playercolor=true
+
+[empty]
+pics=deeper_coalmine_e_??.png
+hotspot=60 37
+playercolor=true

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-06-06 22:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-06-29 08:37+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-30 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -59,6 +59,11 @@ msgid ""
 "to\n"
 " make their work lighter and our transportation more efficient.\" "
 msgstr ""
+" \"Capo, ricordi i poveri trasportatori: le nostre strade diventano sempre "
+"più lunghe e\n"
+" il peso sulle loro spalle non diventa mai più leggero. Dovremmo allevare "
+"più buoi per\n"
+" rendere il loro lavoro più leggero e i nostri trasporti più efficienti.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:318
 msgid ""
@@ -100,6 +105,10 @@ msgid ""
 "brought a smile to my face - even if the hardest part is still waiting to be "
 "done, now our smiths will give their best to further ease our lives.\" "
 msgstr ""
+" \"Sono appena stato informato che la nostra economia mineraria ha "
+"cominciato il suo lavoro. Questa notizia mi ha portato un sorriso sul volto -"
+" anche se la parte più dura è ancora da essere svolta, ora i nostri fabbri "
+"daranno il loro meglio per agevolare ulteriormente la nostra vita.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:286
 msgid ""
@@ -232,6 +241,11 @@ msgid ""
 "our troops with their own blood! We cannot accept this behaviour. From now "
 "on there is war between Kalitath and us!\" "
 msgstr ""
+" \"Questo BASTARDO! Solo un uomo della nostra pattuglia della frontiera è "
+"tornato indietro vivo. Ha portato un messaggio da Kalitath dicendoci che "
+"punirà ogni mossa delle nostre truppe con il loro stesso sangue! Non "
+"possiamo accettare questo comportamento. Da ora in poi sarà guerra tra "
+"Kalitath e noi!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:232
 msgid ""
@@ -339,6 +353,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
 msgstr ""
+"* Distruggi l'esercito di Kalitath ed espandi il tuo territorio verso est."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
@@ -427,7 +442,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Questa terra è la nostra terra"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -524,7 +539,7 @@ msgstr "Esplora più lontano"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:371
 msgid "Khantrukh approaches"
-msgstr ""
+msgstr "Khantrukh si avvicina"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods"
@@ -532,7 +547,7 @@ msgstr "Khantrukh annuisce"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:369
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Khantrukh parla"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:358
 msgid "Military assault"
@@ -571,7 +586,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Ricorda di costruire una fattoria per il bestiame"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:218
 msgid "Renegade fortification"
@@ -591,6 +606,8 @@ msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
 msgstr ""
+"Questo tutorial spiega la gestione degli edifici militari e di allenamento e "
+"introdurrà il combattimento."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346

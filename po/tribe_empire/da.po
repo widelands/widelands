@@ -7,20 +7,22 @@ msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-08-30 23:46+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-05-27 21:53+0000\n"
+"Last-Translator: Joe Hansen <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:36+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-28 04:32+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Et måltid forberedes i kroerne fra brød og fisk/kød. Det tilfredsstiller "
+"behovet hos minearbejderne i de dybtliggende miner."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -28,6 +30,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"En lille bid til at holde minearbejderne stærke og i gang. Rationer bruges "
+"også af spejderen på sine undersøgelsesrejser. De produceres i en kro fra "
+"fisk, kød eller brød."
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
@@ -317,6 +322,8 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Mel produceres af møllen fra hvede og skal bruges i bageriet for at "
+"producere det velsmagende Imperiumbrød."
 
 #: ../../tribes/empire/conf:117
 msgid "Forester"
@@ -353,6 +360,9 @@ msgid ""
 "with it. It is produced in the smelting works out of goldstone and processed "
 "in the armour smithy and the weapon smithy."
 msgstr ""
+"Guld er det mest værdifulde af alle metallerne; rustninger og våben "
+"udsmykkes med det. Det produceres ved udsmeltning fra guldsten og behandles "
+"i rustningsværkstederne og i våbensmedjen."
 
 #: ../../tribes/empire/conf:71
 msgid "Goldstone"
@@ -360,7 +370,7 @@ msgstr "Guldmalm"
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "Goldstones are mined in goldmines and processed in smelting works."
-msgstr ""
+msgstr "Guldsten hentes fra guldminer og behandles i smeltefabrikker."
 
 #: ../../tribes/empire/conf:72
 msgid "Grape"

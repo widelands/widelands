@@ -564,6 +564,8 @@ bool Game::run
 	SyncReset();
 
 	if (loader_ui) {
+		// (re)load the look of the street
+		g_gr->set_world(map().get_world_name());
 		load_graphics(*loader_ui);
 
 		g_sound_handler.change_music("ingame", 1000, 0);

@@ -34,6 +34,10 @@ produce=pittabread
 pics=bakery_i_??.png  # ???
 hotspot=61 66
 
+[unoccupied]
+pics=bakery_u_??.png  # ???
+hotspot=61 66
+
 [working]
 pics=bakery_i_??.png  # ???
 hotspot=61 66

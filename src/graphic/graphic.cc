@@ -1104,7 +1104,7 @@ void Graphic::m_png_flush_function
  *
  * @param anim the number of the animation
  * @return the AnimationGfs object of the given number
-*/
+ */
 AnimationGfx * Graphic::get_animation(uint32_t const anim) const
 {
 	if (!anim || anim > m_animations.size())
@@ -1116,7 +1116,7 @@ AnimationGfx * Graphic::get_animation(uint32_t const anim) const
 /**
  * Retrieve the map texture with the given number
  * \return the actual texture data associated with the given ID.
-*/
+ */
 Texture * Graphic::get_maptexture_data(uint32_t id)
 {
 	--id; // ID 1 is at m_maptextures[0]
@@ -1127,23 +1127,29 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 }
 
 /**
+ * Sets the name of the current world and loads the fitting road textures
+ */
+void Graphic::set_world(std::string worldname) {
+	char buf[255];
+
+	if (m_roadtextures)
+		delete m_roadtextures;
+
+	// Load the road textures
+	m_roadtextures = new Road_Textures();
+	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
+	m_roadtextures->pic_road_normal = get_picture(PicMod_Game, buf, false);
+	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
+	m_roadtextures->pic_road_busy = get_picture(PicMod_Game, buf, false);
+}
+
+/**
  * Retrives the texture of the road type. This loads the road texture
  * if not done yet.
  * \return The road texture
-*/
+ */
 PictureID Graphic::get_road_texture(int32_t const roadtex)
 {
-	if (not m_roadtextures) {
-		// Load the road textures
-		m_roadtextures = new Road_Textures();
-		m_roadtextures->pic_road_normal =
-			get_picture(PicMod_Game, ROAD_NORMAL_PIC, false);
-
-		m_roadtextures->pic_road_busy =
-			get_picture(PicMod_Game, ROAD_BUSY_PIC, false);
-	}
-
 	return
-		(roadtex == Widelands::Road_Normal ?
-		 m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
+		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
 }
