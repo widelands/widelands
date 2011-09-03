@@ -41,3 +41,8 @@ playercolor=true
 pics=goldmine_w_??.png
 hotspot=21 36
 playercolor=true
+
+[empty]
+pics=goldmine_e_??.png
+hotspot=21 36
+playercolor=true

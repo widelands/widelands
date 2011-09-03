@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,6 +44,8 @@ m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 
 	m_chat.sent.set(this, &GameChatMenu::acknowledge);
 	m_chat.aborted.set(this, &GameChatMenu::acknowledge);
+
+	enter_chat_message(m_close_on_send);
 }
 
 

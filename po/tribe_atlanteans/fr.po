@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-02-23 23:45+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"PO-Revision-Date: 2011-05-07 12:38+0000\n"
+"Last-Translator: NonoSan <fougey.a@orange.fr>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-08 04:31+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -157,7 +157,7 @@ msgid ""
 msgstr ""
 "Les racines noires sont une sorte spéciale de racine produites dans les "
 "fermes à racines noires et pilées dans les moulins. Les Atlantes aiment sont "
-"gout prononcé et utilisent sa farine pour faire du pain."
+"goût prononcé et utilisent sa farine pour faire du pain."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -165,15 +165,15 @@ msgstr "Pain"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr "Elève des poissons."
+msgstr "Élève des poissons."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr "Elève des araignées pour leur soie."
+msgstr "Élève des araignées pour leur soie."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr "Elève les puissants chevaux atlantes"
+msgstr "Élève les puissants chevaux atlantes"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
@@ -265,8 +265,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
-"La farine de maïs est produite dans un moulin à partir de maïs et est une de "
-"trois parties du pain Atlante produit dans les boulangeries."
+"La farine de maïs est produite dans un moulin à partir de maïs et est un des "
+"trois ingrédients du pain Atlante produit dans les boulangeries."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -274,7 +274,7 @@ msgstr "Mine de quartz"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr "Taillez des tranches de granite à partir des pierres disponibles."
+msgstr "Coupe des blocs de granit à partir des pierres disponibles."
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -290,7 +290,7 @@ msgstr "Diamant"
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "A découvert des ressources pour extraction"
+msgstr "Découvre des ressources pour extraction"
 
 #: ../../tribes/atlanteans/conf:148
 msgid "Donjon"
@@ -314,18 +314,18 @@ msgstr "Fermier"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
-msgstr "Arbres tombés"
+msgstr "Abat des arbres"
 
 #: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
-msgstr "Pinces"
+msgstr "Pinces à charbon"
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
-"Les pincettes de feu sont un outil du fondeur, qui travaille à la fonderie. "
+"Les pinces à charbon sont l'outil du fondeur, qui travaille à la fonderie. "
 "Elles sont produites par le forgeron."
 
 #: ../../tribes/atlanteans/conf:71
@@ -466,7 +466,7 @@ msgstr "Cheval"
 
 #: ../../tribes/atlanteans/conf:136
 msgid "Horse Breeder"
-msgstr "Eleveur de chevaux"
+msgstr "Éleveur de chevaux"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Horse Farm"
@@ -478,7 +478,7 @@ msgid ""
 "farm."
 msgstr ""
 "Les chevaux aident à porter les marchandises sur les routes surchargées par "
-"le trafic. Ils sont élevés dans une ferme équestre."
+"le trafic. Ils sont élevés dans un haras."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -518,7 +518,7 @@ msgid ""
 "retrieve the iron."
 msgstr ""
 "Les minerais de fer sont minés dans les mines de fer. Ils sont fondus dans "
-"des fonderies pour redevenir du fer."
+"des fonderies pour en extraire le fer."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -543,9 +543,8 @@ msgid ""
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
 "La viande est une ressource de nourriture pour les Atlantes. Elle est "
-"obtenue à partir du jeu sauvage des chasseurs et doit être fumée avant "
-"d'être livrée dans les mines et aux sites d'entrainement (donjon et "
-"labyrinthe)."
+"obtenue à partir du gibier par les chasseurs et doit être fumée avant d'être "
+"livrée dans les mines et aux sites d'entrainement (donjon et labyrinthe)."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -572,12 +571,12 @@ msgid ""
 "Mills blackroot and corn to produce blackroot flour and corn flour, "
 "respectively."
 msgstr ""
-"Broyez le radis et le maïs pour produire respectivement de la farine de "
-"radis et de la farine de maïs"
+"Moud les racines noires et le maïs pour produire respectivement de la farine "
+"de racines noires et de la farine de maïs"
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
-msgstr "Mine de diamand"
+msgstr "Mine de diamant"
 
 #: ../../tribes/atlanteans/crystalmine/conf:24
 msgid "Mine quartz"
@@ -640,7 +639,7 @@ msgstr "Plante et récolte les racines noires."
 
 #: ../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
-msgstr "Plante des champs"
+msgstr "Ensemence des champs"
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."

@@ -17,10 +17,25 @@ work=_Work
 
 [work]
 return=skipped unless economy needs cloth
-sleep=40000
+sleep=25000 # orig 40000
 consume=wool
+animate=working 15000 # unsure of balancing CW
 produce=cloth
+
+[build]
+pics=weaving_mill_b_??.png  # ???
+hotspot=67 63
+
+[unoccupied]
+pics=weaving_mill_u_??.png  # ???
+hotspot=67 63
 
 [idle]
 pics=weaving_mill_i_??.png  # ???
-hotspot=81 72
+hotspot=67 63
+
+[working]
+pics=weaving_mill_w_??.png  # ???
+hotspot=67 63
+playercolor=true
+fps=5

@@ -7,20 +7,22 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-12-03 12:45+0000\n"
-"Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
+"PO-Revision-Date: 2011-06-24 08:39+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:36+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-06-25 04:31+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Un vero pasto è creato in locande a partire da pane e pesce/carne. Soddisfa "
+"i bisogni dei minatori delle miniere profonde."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -31,7 +33,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
-msgstr "Lancia Avanzata"
+msgstr "Lancia avanzata"
 
 #: ../../tribes/empire/conf:209
 msgid "Arena"
@@ -43,7 +45,7 @@ msgstr "Armatura"
 
 #: ../../tribes/empire/conf:180
 msgid "Armour Smithy"
-msgstr "Fabbro d'Armature"
+msgstr "Fucina di armature"
 
 #: ../../tribes/empire/conf:109
 msgid "Armoursmith"
@@ -63,7 +65,7 @@ msgstr "Fornaio"
 
 #: ../../tribes/empire/conf:171
 msgid "Bakery"
-msgstr "Forno"
+msgstr "Panificio"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
@@ -109,7 +111,7 @@ msgstr "Alleva carini ed utilissimi asini"
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
-msgstr "Riproduzione maiali."
+msgstr "Alleva maiali."
 
 #: ../../tribes/empire/conf:111
 msgid "Brewer"
@@ -155,7 +157,7 @@ msgstr "Castello del villaggio"
 
 #: ../../tribes/empire/conf:63
 msgid "Chain-Armour"
-msgstr "Corazza di Maglia"
+msgstr "Corazza di maglia"
 
 #: ../../tribes/empire/conf:177
 msgid "Charcoal Burner"
@@ -174,6 +176,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"La stoffa serve a costruire diversi edifici. È anche consumata nella fucina "
+"per le armature."
 
 #: ../../tribes/empire/conf:65
 msgid "Coal"
@@ -189,15 +193,16 @@ msgstr "Colosseo"
 
 #: ../../tribes/empire/conf:138
 msgid "Construction Site"
-msgstr "Luogo della costruzione"
+msgstr "Cantiere"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
-msgstr "Taglia pezzi grezzi di granito e marmo dalle pietre arenarie."
+msgstr ""
+"Taglia pezzi grezzi di granito e marmo a partire da strati di pietre."
 
 #: ../../tribes/empire/conf:189
 msgid "Deep Coal Mine"
-msgstr "Miniera di Carbone profonda"
+msgstr "Miniera di carbone profonda"
 
 #: ../../tribes/empire/conf:193
 msgid "Deep Gold Mine"
@@ -217,11 +222,11 @@ msgstr "Difendi e conquista!"
 
 #: ../../tribes/empire/conf:39
 msgid "Destroyed building"
-msgstr "Costruzione distrutta"
+msgstr "Edificio distrutto"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Scopre le risorse del sottosuolo."
+msgstr "Scopre le risorse per le miniere."
 
 #: ../../tribes/empire/conf:150
 msgid "Donjon"
@@ -942,7 +947,7 @@ msgid ""
 "by the toolsmith."
 msgstr ""
 "La pala è lo strumento del fornaio, ogni fornaio deve avere la sua. È "
-"prodotta dal fabbro."
+"prodotta dal fabbro per strumenti."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -1299,6 +1304,8 @@ msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"Il legno è uno strumento di costruzione di base dell'Impero. È consumato "
+"anche nella fucina per le armi."
 
 #: ../../tribes/empire/conf:99
 msgid "Wool"

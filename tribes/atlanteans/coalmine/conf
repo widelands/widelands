@@ -42,3 +42,8 @@ playercolor=true
 pics=coalmine_i_??.png
 hotspot=51 55
 playercolor=true
+
+[empty]
+pics=coalmine_e_??.png
+hotspot=51 55
+playercolor=true

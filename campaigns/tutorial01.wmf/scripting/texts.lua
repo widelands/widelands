@@ -476,7 +476,7 @@ need to mine minerals and coal. So we have to expand our territory.]]
       ) .. p(_
 [[Expanding is as simple as building a military building at the corner of
 your territory. The barbarians have a few different military buildings:
-sentries, barriers, donjons, strongholds, fortresses and citadels. The bigger
+sentries, barriers, donjons, fortresses and citadels. The bigger
 the building, the more expensive it is to build, the more land it conquers
 around itself and the more soldiers can be stationed there. The buildings also
 vary in their vision range: buildings with a tower see farther than others.]]
@@ -499,7 +499,7 @@ close to mountains because you can't build houses in mountains.]]
 in mountains. Conquer some area on the mountains to the south-west of your
 headquarters by building some military buildings close to your border.]]
    ) .. p(_
-[[You can choose from the following military buildings: sentry, stronghold,
+[[You can choose from the following military buildings: sentry, 
 donjon, barrier and fortress. The bigger the building, the more expensive it is
 to be built. But it will also conquer a bigger region. Sometimes, it is useful
 to build a big military building next to a mountain so that you can reach

@@ -85,6 +85,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 
 	center_to_parent();
 	move_to_top();
+
+	m_editbox.focus();
 }
 
 

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-11-26 15:45+0000\n"
+"PO-Revision-Date: 2011-07-03 18:44+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-04 04:30+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -22,12 +22,15 @@ msgid ""
 "is used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 0 to level 1."
 msgstr ""
+"Zlatý kabátec sa vyrába v atlantídskom tkacom závode zo zlatého vlákna. "
+"Používa sa vo výcvikovom tábore - spolu s jedlom - na trénovanie bodov "
+"zdravia vojakov z úrovne 0 na úroveň 1."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
-msgstr ""
+msgstr "Pílku potrebuje drevorubač a tesár. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -38,6 +41,8 @@ msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
+"Kabátec a ľahký trojzubec sú základným vybavením mladých vojakov. Kabátce sa "
+"vyrábajú v tkacom závode."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -56,6 +61,8 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
+"Keďže žiadny Atlantíďan nemá rád surové ryby, najbežnejším spôsobom, ako mu "
+"ich sprístupniť, je vyúdiť ich v udiarni."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -111,6 +118,8 @@ msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
 msgstr ""
+"V mlyne sa z čiernych koreňov vyrába múka. Používa sa v pekárňach na výrobu "
+"chutného chleba."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -142,6 +151,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
+"Čierne korene sú špeciálnym druhom koreňov pestovaným na farmách a "
+"spracovaným v mlynoch. Atlantíďania obľubujú ich štipľavú chuť a múku z nich "
+"používajú na výrobu chleba."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -249,6 +261,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Kukuričná múka sa vyrába v mlyne z kukurice a je jednou z troch častí "
+"atlantídskeho chleba, ktorý sa vyrába v pekárni."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -307,6 +321,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Kliešte na uhlie sú nástrojom zlievača, ktorý pracuje v zlievárni. Vyrábajú "
+"sa vo vyhni pre nástroje."
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -326,6 +342,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Ryby sú jedným z najväčších zdrojov potravy Atlantíďanov. Musia sa vyúdiť v "
+"udiarni predtým, ako sa dostanú do baní, výcvikových stavieb a k "
+"prieskumníkom."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -378,11 +397,15 @@ msgid ""
 "in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"Zlato je jedným z najhodnotnejších materiálov. Vyrába sa zo zlatej rudy v "
+"taviarni. Používa sa vo vyhniach na zbroje a zbrane a v tkacom závode na "
+"zlato."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Zlatá ruda sa ťaží v zlatých baniach a spracováva sa na zlato v taviarni."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -449,6 +472,7 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
 msgstr ""
+"Kone pomáhajú nosiť veci na značne využívaných cestách. Chovajú sa v stajni."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -479,12 +503,16 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
+"Železo sa vyrába zo železnej rudy v taviarni. Používa sa vo vyhniach na "
+"nástroje, zbroje a zbrane."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Železná ruda sa ťaží v železnorudných baniach. Taví sa v taviarni, následkom "
+"čoho vznikne železo."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -508,6 +536,9 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Mäso je jedným zo zdrojov potravy Atlantíďanov. Získava sa z divej zveri, čo "
+"zabezpečí lovec, a musí sa vyúdiť v udiarni predtým, ako sa dostane do baní "
+"a výcvikových stavieb (kobka, labyrint)."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -534,6 +565,8 @@ msgid ""
 "Mills blackroot and corn to produce blackroot flour and corn flour, "
 "respectively."
 msgstr ""
+"Melie čierne korene a kukuricu na výrobu múky z čierneho koreňa a kukuričnej "
+"múky jednotlivo."
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -579,6 +612,9 @@ msgid ""
 "produced out of trunks by the sawmill. The weapon smithy and the shipyard "
 "also use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Dosky sú dôležitým stavebným materiálom Atlantíďanov. Vyrábajú sa z kmeňov "
+"stromov v píle. Vyhňa na výrobu zbraní a lodenica tiež požívajú dosky na "
+"výrobu iných trojzubcov a mohutných lodí."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -862,11 +898,11 @@ msgstr "Taviť železo"
 
 #: ../../tribes/atlanteans/conf:126
 msgid "Smelter"
-msgstr "Zlievač"
+msgstr "Tavič"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Smelting Works"
-msgstr "Zlievareň"
+msgstr "Taviareň"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -894,6 +930,9 @@ msgid ""
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutricious lunch for themselves."
 msgstr ""
+"Údené mäso sa vyrába z mäsa v udiarni. Dodáva sa do baní a výcvikových "
+"stavieb (labyrint a kobka), kde si baníci a vojaci pre seba pripravia "
+"výživný obed."
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
@@ -980,6 +1019,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"Atlantíďania do ohňov v taviarňach, vyhniach na zbroje a zbrane pridávajú "
+"uhlie. Toto uhlie sa ťaží v uhoľných baniach alebo ho vyrába uhliar z kmeňov "
+"stromov."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1024,12 +1066,17 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"Dlhý trojzubec je prvý trojzubec vo výcviku vojakov. Vyrába sa vo vyhni na "
+"zbrane a používa sa v kobke - spolu s jedlom - na trénovanie útoku vojakov z "
+"úrovne 0 na úroveň 1."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
+"Pekárska lopata je nástroj pekára, každý pekár potrebuje svoju vlastnú. "
+"Vyrába ju kováč nástrojov."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -1037,6 +1084,9 @@ msgid ""
 "are produced in the armoursmithy and used in the labyrinth - together with "
 "food - to train soldiers from Defense level 1 to level 2."
 msgstr ""
+"Tieto pokročilé štíty používajú najlepší vojaci Atlantíďanov. Vyrábajú sa vo "
+"vyhni na zbroje a používajú sa v labyrinte - spolu s jedlom - na trénovanie "
+"obrany vojakov z úrovne 1 na úroveň 2."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
@@ -1053,7 +1103,7 @@ msgstr ""
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-msgstr ""
+msgstr "Tento luk používajú atlantídski lovci. Vyrába ho kováč nástrojov."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-06-06 20:54+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-07-30 12:17+0000\n"
+"Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:36+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-31 04:30+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
@@ -23,6 +23,8 @@ msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"En riktig måltid tillreds i värdshus från bröd och fisk/kött. Det "
+"tillgodoser gruvarbetarnas behov."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -30,6 +32,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"En liten munsvit för att hålla gruvarbetarna i god vigör och i arbete. "
+"Ransoner används också av spejaren vid hans spaningsturer. De tillverkas i "
+"en taverna från fisk eller kött eller bröd."
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
@@ -86,6 +91,9 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
+"Basal rustning för Imperiets soldater. Den tillverkas i rustningssmedjan och "
+"används i träningslägret - tillsammans med mat - för att träna soldater från "
+"HP nivå 1 till nivå 2."
 
 #: ../../tribes/empire/conf:60
 msgid "Basket"
@@ -100,6 +108,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Förutom bröd och kött är också fisk en basföda för Imperiet. Fisk används i "
+"tavernor, värdshus och träningsanläggningar (arena, kolosseum, "
+"träningsläger)."
 
 #: ../../tribes/empire/conf:62
 msgid "Bread"
@@ -135,7 +146,7 @@ msgstr "Bränner kol."
 
 #: ../../tribes/empire/conf:114
 msgid "Carpenter"
-msgstr ""
+msgstr "Snickare"
 
 #: ../../tribes/empire/conf:102
 msgid "Carrier"
@@ -176,6 +187,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"Textilier behövs för att bygga många byggnader. Det används också i "
+"rustningssmedjan."
 
 #: ../../tribes/empire/conf:65
 msgid "Coal"
@@ -286,6 +299,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Smidestång är smältarens verktyg som arbetar i smältverken. Smidestång "
+"produceras i verktygssmedjan."
 
 #: ../../tribes/empire/conf:67
 msgid "Fish"
@@ -319,6 +334,8 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Mjöl tillverkas i kvarnen från vete och behövs i bageriet för att tillverka "
+"det välsmakande Imperiebrödet."
 
 #: ../../tribes/empire/conf:117
 msgid "Forester"
@@ -355,6 +372,9 @@ msgid ""
 "with it. It is produced in the smelting works out of goldstone and processed "
 "in the armour smithy and the weapon smithy."
 msgstr ""
+"Guld är den mest värdefulla metallen; rustningar och vapen dekoreras med "
+"den. Den tillverkas i smältverken från guldsten och behandlas i "
+"rustningssmedjan och vapensmedjan."
 
 #: ../../tribes/empire/conf:71
 msgid "Goldstone"
@@ -362,7 +382,7 @@ msgstr "Guldmalm"
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "Goldstones are mined in goldmines and processed in smelting works."
-msgstr ""
+msgstr "Guldstenar utvinns i guldgruvor och behandlas i smältverk."
 
 #: ../../tribes/empire/conf:72
 msgid "Grape"
@@ -426,6 +446,8 @@ msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
+"Hur kan man skapa en ranson eller måltid utan köksredskap? De tillverkas i "
+"en verktygssmedja och används i tavernor och värdshus."
 
 #: ../../tribes/empire/conf:119
 msgid "Hunter"
@@ -464,6 +486,8 @@ msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"Järnmalmer måste smältas i smältverken för att ge järn. Järnmalmer utvinns i "
+"järngruvor."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -503,6 +527,8 @@ msgid ""
 "for nearly every bigger building. They are produced out of marble in a "
 "stonemason's house."
 msgstr ""
+"Marmorpelare representerar Imperiets finkultur, så de krävs för nästan alla "
+"större byggnader. De tillverkas från marmor i en stenmurares hus."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -510,6 +536,9 @@ msgid ""
 "in a quarry. Marble is used as building material and gets formed into marble "
 "columns in the stonemason's house."
 msgstr ""
+"Marmor är den vackra sten som skärs ut ur bergen eller tillverkas i ett "
+"stenbrott. Marmor används som byggnadsmaterial och formas till marmorpelare "
+"i stenmurarens hus."
 
 #: ../../tribes/empire/conf:122
 msgid "Master Miner"
@@ -530,6 +559,10 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"Kött innehåller mängder av energi. Det används i värdshus och tavernor för "
+"att tillreda lunch för gruvarbetarna och används i träningsanläggningarna "
+"(arena, kolosseum, träningsläger). Det finns två sätt att få kött: fläsk "
+"från grisfarmer och kött från vilt som jägarna fäller."
 
 #: ../../tribes/empire/conf:170
 msgid "Mill"
@@ -571,7 +604,7 @@ msgstr "Gruvarbetare"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
-msgstr ""
+msgstr "Inte tillräckligt med plats"
 
 #: ../../tribes/empire/conf:201
 msgid "Outpost"
@@ -691,7 +724,7 @@ msgstr "Tillverka spade"
 
 #: ../../tribes/empire/weaponsmithy/conf:33
 msgid "Produce war lance"
-msgstr ""
+msgstr "Tillverka stridslans"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -852,6 +885,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
+"Några av dina startbyggnader hade inte tillräckligt med plats och \n"
+"byggdes inte. Du har en nackdel p.g.a detta; fundera över att starta om \n"
+"kartan med rättvisa startförhållanden."
 
 #: ../../tribes/empire/conf:128
 msgid "Stonemason"
@@ -870,6 +906,8 @@ msgid ""
 "Stones are a basic building material of the Empire. It is produced in "
 "quarries and marble mines."
 msgstr ""
+"Stenar är ett grundläggande byggnadsmaterial för Imperiet. Det utvinns i "
+"stenbrott och marmorgruvor."
 
 #: ../../tribes/empire/conf:153
 msgid "Stronghold"
@@ -903,6 +941,9 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Imperiets bagare bakar riktig välsmakande bröd med mjöl och vatten. Det "
+"används i tavernor och värdshus för att tillreda ransoner och måltider. Bröd "
+"används också i träningsanläggningarna (arena, kolosseum, träningsläger)."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -910,6 +951,9 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"Ringbrynan är en rustning på mellannivå för Imperiesoldater. Den tillverkas "
+"i rustningssmedjan och används i ett träningsläger - tillsammans med mat - "
+"för att träna soldater från HP nivå 2 till 3."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -917,6 +961,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"Eldarna i Imperiets smälterier, rustningssmedjor och vapensmedjor matas i "
+"regel med kol. Det utvinns i kolgruvor eller tillverkas av en kolbrännare "
+"från trädstammar."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -924,6 +971,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"Hammaren är ett oumbärligt verktyg. Det behövs av geologen, byggaren, och "
+"rustning- och vapensmeden. Se till att du alltid har några i reserv! Den "
+"tillverkas av verktygssmeden."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -932,6 +982,10 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"Hjälmen är en krigares grundläggande försvar. Den tillverkas i en "
+"rustningssmedja. Tillsammans med en trälans är det vad man utrustar unga "
+"soldater med. Hjälmar används också i träningsläger - tillsammans med mat - "
+"för att träna soldater från HP nivå 0 till 1."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -947,6 +1001,9 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"Plattrustningen är den starkaste rustning som finns för Imperiesoldaterna. "
+"Den tillverkas i rustningssmedjan och används i träningslägret - tillsammans "
+"med mat - för att träna soldater från HP nivå 3 till 4."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -961,18 +1018,24 @@ msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
+"Dessa druvor är grunden för ett välsmakande vin. De skördas i en vingård och "
+"behandlas av en vintillverkare."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Den här korgen behövs av vinfarmaren för att skörda druvorna. Den tillverkas "
+"av verktygssmeden."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"Det här ölet tillverkas i ett bryggeri från vete och vatten. Det förbrukas "
+"av gruvarbetarna i kol- och järnmalmsgruvor."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -980,6 +1043,9 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"Det här är en stark lans med stålspets och ett litet blad. Den tillverkas i "
+"vapensmedjan och används i träningslägret - tillsammans med mat - för att "
+"träna soldater från attack nivå 2 till 3."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -987,6 +1053,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"Det här är en avancerad lans, med stålspets. Den tillverkas i en vapensmedja "
+"och används i ett träningsläger - tillsammans med mat - för att träna "
+"soldater från attack nivå 1 till 2."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -994,6 +1063,9 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"Det här är det bästa och skarpaste vapnet Imperiets vapensmeder skapar för "
+"krigarna. Det används i träningslägret - tillsammans med mat - för att träna "
+"soldater från attack nivå 3 till 4."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -1005,6 +1077,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Den här lansen har en järnpik. Den tillverkas i en vapensmedja och används i "
+"ett träningsläger - tillsammans med mat - för att träna soldater från attack "
+"nivå 0 till 1."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1016,7 +1091,7 @@ msgstr ""
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
+msgstr "Denna såg behövs av sågaren. Den tillverkas av verktygssmeden."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1031,6 +1106,8 @@ msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"Det här välsmakande vinet förbrukas i marmor- och guldgruvor. Det produceras "
+"i en vingård."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1038,6 +1115,9 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"Den här trälansen är grundvapnet i Imperiets militär. Den tillverkas i "
+"vapensmedjan. Tillsammans med en hjälm utgör den grundutrustningen för unga "
+"soldater."
 
 #: ../../tribes/empire/conf:129
 msgid "Toolsmith"
@@ -1074,6 +1154,9 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"Trädstammar är ett viktigt byggnadsmaterial för Imperiet. Skogshuggarna "
+"fäller träden; skogsvaktarna ser om tillgången på träd. Trädstammar används "
+"också av kolbrännaren, verktygssmedjan, och sågverket."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1237,6 +1320,8 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"Vatten är grunden för allt liv! Det används i bageriet och bryggeriet. Även "
+"åsnefarmen, fårfarmen, och svinstian behöver förses med vatten."
 
 #: ../../tribes/empire/conf:186
 msgid "Weapon Smithy"
@@ -1247,6 +1332,8 @@ msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Vapen, rustning och verktyg tillverkas av järn. Det får man från järnmalm i "
+"smältverken."
 
 #: ../../tribes/empire/conf:131
 msgid "Weaponsmith"
@@ -1274,6 +1361,9 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Vete är centralt för överlevnad. Det odlas på farmar och används i kvarnar "
+"och bryggerier. Även åsnefarmar, fårfarmar och svinstior behöver förses med "
+"vete."
 
 #: ../../tribes/empire/conf:96
 msgid "Wine"
@@ -1296,6 +1386,8 @@ msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"Trä är ett grundläggande byggnadsmaterial hos Imperiet. Den används också i "
+"vapensmedjan."
 
 #: ../../tribes/empire/conf:99
 msgid "Wool"
@@ -1353,7 +1445,7 @@ msgstr "Arbetar djupt ner i gruvorna för att få fram kol, järn eller guld."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Arbetar i sågverket."
 
 #~ msgid "Resource indicator gold litte"
 #~ msgstr "Resursindikator guld lite"

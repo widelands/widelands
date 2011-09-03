@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-01-15 22:40+0000\n"
-"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"PO-Revision-Date: 2011-07-28 14:49+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:33+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-07-29 04:44+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid ""
@@ -348,6 +348,16 @@ msgid ""
 "he\n"
 "was.<br> The news he brought changed everything...\""
 msgstr ""
+"\"L'altro giorno Boldreth mi ha chiesto di accompagnarlo alla nuova locanda. "
+"Ti dovrebbe\n"
+"tirare su di morale, ha detto.<br> Quando mi sono guardato intorno, ho visto "
+"facce fedeli, fidandomi\n"
+"del fatto che sarei riuscito a guidarli attraverso questi giorni oscuri. "
+"Ancora prima di poter esprimere qualsiasi\n"
+"parola di gratitudine o incoraggiamento, uno dei miei guerrieri è corso "
+"dentro la locanda. È stato\n"
+"lontano nella foresta negli scorsi giorni e riuscivo a vedere la sua "
+"stanchezza.<br> La notizia che ha portato ha cambiato tutto...\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:370
 msgid ""
@@ -358,6 +368,14 @@ msgid ""
 "could,\n"
 "in times of need, build a fortress as the world has not seen before!\""
 msgstr ""
+"\"Bene, vecchio amico, questo dovrebbe assicurare che le nostre "
+"fortificazioni non vengano\n"
+"abbattute dal primo urlo di battaglia dei nostri nemici! Ora possiamo "
+"espanderci in sicurezza!<br>Nonostante ciò.\n"
+"non farebbe male mettere assieme un po' di malta per la nostra ulteriore "
+"campagna; inoltre potremmo,\n"
+"in tempi di bisogno, costruire una fortezza che il mondo non ha mai visto "
+"prima!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:251
 msgid ""
@@ -380,7 +398,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Un Luogo da chiamare casa"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
@@ -484,7 +502,7 @@ msgstr "Il coraggioso Boldreth si mette al tuo fianco..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr ""
+msgstr "Costruisci una fattoria da bestiame"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -509,7 +527,7 @@ msgstr "Costruisci una serra per le felci"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Costruisci un cacciatore, un guardiacaccia e una taverna"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
@@ -518,14 +536,16 @@ msgstr "Costruisci una fornace della calce e l'economia del carbone"
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:174
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
 msgstr ""
+"Costruisci un forno per il limo, un pozzo e un carbonaio o una miniera di "
+"carbone"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Costruisci un centro di fusione"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Costruisci un pozzo, una fattoria e un panificio"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
@@ -534,7 +554,7 @@ msgstr "Costruisci un trattamento del legno"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Costruisci miniere di ferro e di carbone"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
@@ -544,7 +564,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:139
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Migliora gli edifici e costruisci una micro-fabbrica di birra"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
@@ -558,7 +578,7 @@ msgstr "Espandi a nord est e costruisci una cava"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Expand north-east to the stones"
-msgstr ""
+msgstr "Espanditi a nord-est fino alle rocce"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -590,7 +610,7 @@ msgstr "Khantrukh interrompe..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:242
 msgid "Khantrukh joins in ..."
-msgstr ""
+msgstr "Khantrukh si unisce..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
@@ -602,7 +622,7 @@ msgstr "Khantrukh sembra di essere sollevato..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Khantrukh parla"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
@@ -701,7 +721,7 @@ msgstr "Thron parla..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
-msgstr ""
+msgstr "Vittoria"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:412
 msgid "We need oxen!"
@@ -723,6 +743,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish,\n"
 "otherwise move on to the next mission."
 msgstr ""
+"Hai completato questa missione. Puoi continuare a giocare se vuoi,\n"
+"altrimenti continua con la prossima missione."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:248

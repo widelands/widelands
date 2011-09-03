@@ -2357,7 +2357,7 @@ int L_Field::get_viewpoint_y(lua_State * L) {
 /* RST
 	.. attribute:: resource
 
-		(RO) The name of the resource that is available in this field or
+		(RW) The name of the resource that is available in this field or
 		:const:`nil`
 
 		:see also: :attr:`resource_amount`
@@ -2385,7 +2385,7 @@ int L_Field::set_resource(lua_State * L) {
 /* RST
 	.. attribute:: resource_amount
 
-		(RO) How many items of the resource is available in this field.
+		(RW) How many items of the resource is available in this field.
 
 		:see also: :attr:`resource`
 */

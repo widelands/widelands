@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2009 by the Widelands Development Team
+ * Copyright (C) 2004-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -289,6 +289,7 @@ void NetGGZ::deinitcore()
 	ggzcore_ready = false;
 	channelfd = -1;
 	gamefd = -1;
+	server_ip_addr = 0;
 }
 
 

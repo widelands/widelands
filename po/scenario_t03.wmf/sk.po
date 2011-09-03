@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-12-30 21:14+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-08-04 23:17+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-08-06 04:33+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -25,11 +25,11 @@ msgid ""
 "chance to secure the mountains from enemy hands: We must build a fortress to "
 "the east of the mountains!\" "
 msgstr ""
-" \"Boldreth a ja sme práve preskúmali územie okolo troch hôr. Jedným hlavným "
-"strategickým problémom tohto územia sa zdá byť to, že existujú dve väčšie "
+" \"Boldreth a ja sme práve preskúmali územie okolo troch hôr. Hlavným "
+"strategickým problémom tohto územia sa zdá byť to, že existujú dva väčšie "
 "prechody - jeden severne a druhý na juh od prostrednej hory. Mať dozor nad "
-"týmito prechodmi je ťažké, a tak, myslím si, máme len jednu šancu zaistiť "
-"hory od rúk nepriateľa. Východne od hôr musíme postaviť pevnosť.\" "
+"týmito prechodmi je ťažké, a tak, myslím si, máme len jednu šancu ubrániť "
+"hory od rúk nepriateľa. Na východ od hôr musíme postaviť pevnosť.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:242
 msgid ""
@@ -65,6 +65,10 @@ msgid ""
 "some more fortifications like barriers and donjons at the passages, but for "
 "now we can take a deep breath.\" "
 msgstr ""
+" \"Konečne!<br>Pevnosť sa práve dokončila, takže vstup do našej osady by mal "
+"byť nateraz chránený. Pre budúcnosť by sme mohli myslieť na postavenie iných "
+"opevnení ako hradieb a donžonov na prechodoch, ale zatiaľ sa môžeme zhlboka "
+"nadýchnuť.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:179
 msgid ""
@@ -85,6 +89,11 @@ msgid ""
 "time I wait won't be lost. I will further upgrade my soldiers and prepare "
 "for battle.\" "
 msgstr ""
+" \"Poslal som svojich mužov, aby sa stretli s Kalitath-om v jeho pevnosti. "
+"Zatarasil bývalý hlavný vchod do hlavného mesta a snaží sa dokola obliehať "
+"Al’thunran. Nepustí nikoho dnu ani von, kým je kruh celý. Zatiaľ mi "
+"neodpovedal na žiadne správy. Ale čas, ktorý strávim čakaním, nebude "
+"stratený. Vylepším si vojakov a pripravím sa na boj.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:298
 msgid ""
@@ -92,6 +101,9 @@ msgid ""
 "brought a smile to my face - even if the hardest part is still waiting to be "
 "done, now our smiths will give their best to further ease our lives.\" "
 msgstr ""
+" \"Práve som sa dozvedel, že sa rozbehla naša banícka ekonomika. Táto správa "
+"ma potešila. Aj keď najťažšia časť ešte stále nie je hotová, teraz urobia "
+"kováči všetko pre to, aby nám uľahčili život.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:286
 msgid ""
@@ -185,8 +197,9 @@ msgstr ""
 " \"Nie je príjemné počuť novinky, ktoré priniesla hliadka. Naši špióni "
 "vravia, že v bitke stále zúria bojovné kmene, ale niektorí zo starších "
 "vojakov a vodcov kmeňov sa zdajú byť unavení z tejto nezmyselnej vojny. "
-"Kalitath, syn Kun-a, vkročil do nížin okolo kapitolu, chrániac vonkajšie "
-"prstence opevnenia.\" "
+"Kalitath, syn Kun-a, je prvým vojenským vodcom, ktorý opustil Al’thunran, a "
+"tak nechal svoju stranu napospas osudu. Ako hlásia moji prieskumníci, "
+"vkročil do nížin okolo kapitolu, chrániac vonkajšie prstence opevnenia.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:222
 msgid ""
@@ -290,8 +303,8 @@ msgid ""
 "* Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
-"* Postavte vyhňu na výrobu heliem západne od hôr, aby ste svojim vojakom "
-"poskytli lepšiu zbroj."
+"* Postavte vyhňu na helmy západne od hôr, aby ste svojim vojakom poskytli "
+"lepšiu zbroj."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:91
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
@@ -349,7 +362,7 @@ msgid ""
 "metalworks."
 msgstr ""
 "* Rozšírte svoje územie k horám, pošlite tam geológov, aby hľadali rudu a "
-"uhlie, a postavte banícku ekonomiku - bane, krčmy, zlievarne a kovodielne."
+"uhlie, a vybudujte banskú ekonomiku - bane, krčmy, taviarne a kovodielne."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -394,10 +407,13 @@ msgid ""
 "when your territory is growing and the paths to your headquarters get longer "
 "and longer."
 msgstr ""
+"-> Sklady sú podobné základni, len s tým rozdielom, že ich neobraňujú "
+"vojaci. Často je múdre postaviť sklad, keď sa vaše teritórium rozrastá a "
+"cesty k vašej základni stále predlžujú."
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Táto zem je našou zemou"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -434,7 +450,7 @@ msgstr "Postavte pevnosť"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117
 msgid "Build a helmsmithy"
-msgstr "Postavte vyhňu na výrobu heliem"
+msgstr "Postavte vyhňu na helmy"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:89
 msgid "Build a warehouse"
@@ -446,7 +462,7 @@ msgstr "Postavte bane"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:99
 msgid "Build trainingssites"
-msgstr ""
+msgstr "Postavte výcvikové stavby"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:40
 msgid "Build up a small food economy"
@@ -454,7 +470,7 @@ msgstr "Vybudujte malú potravinársku ekonomiku"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "Build weapon productions"
-msgstr ""
+msgstr "Zostavte výrobu zbraní"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:146
 msgid "Close to home"
@@ -470,7 +486,7 @@ msgstr "Pochybnosti"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
-msgstr ""
+msgstr "Zlepšená ekonomika a výcvik"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
@@ -546,7 +562,7 @@ msgstr "Radca"
 #: ../../campaigns/t03.wmf/scripting/texts.lua:177
 #: ../../campaigns/t03.wmf/scripting/texts.lua:195
 msgid "The story continues"
-msgstr ""
+msgstr "Príbeh pokračuje"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""

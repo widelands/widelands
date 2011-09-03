@@ -66,7 +66,13 @@ _ "Coders"
 "<rt image=pics/genstats_nrwares.png image-align=left text-align=left><p font-size=12> Carl-Philip Hänsch (carli)</p></rt>"
 "<rt image=pics/genstats_nrwares.png image-align=left text-align=left><p font-size=12> Martin Prussak (martin)</p></rt>"
 "<rt image=pics/genstats_nrwares.png image-align=left text-align=left><p font-size=12> David Allwicher (aber)</p></rt>"
+<<<<<<< TREE
+"<rt image=pics/genstats_nrwares.png image-align=left text-align=left><p font-size=12> Nathan Peters (nathanpeters)</p></rt>"
+"<rt image=pics/genstats_nrwares.png image-align=left text-align=left><p font-size=12> Leif Sandstede (lcsand)</p></rt>"
 "<rt text-align=left><p font-size=24 font-decoration=bold font-face=FreeSerif font-color=f4a131><br>"
+=======
+"<rt text-align=left><p font-size=24 font-decoration=bold font-face=FreeSerif font-color=f4a131><br>"
+>>>>>>> MERGE-SOURCE
 ""
 ""
 _ "Graphicians"

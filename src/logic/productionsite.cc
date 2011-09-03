@@ -217,7 +217,8 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
 	m_statistics_changed(true),
 	m_last_stat_percent (0),
-	m_is_stopped        (false)
+	m_is_stopped        (false),
+	m_default_anim      ("idle")
 {
 	m_statistics_buffer[0] = '\0';
 	m_result_buffer[0] = '\0';
@@ -521,7 +522,7 @@ void ProductionSite::request_worker_callback
 	// needs a worker like the one just arrived. That way it is of course still possible, that the worker is
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
-	Ware_Index     idx = widx;
+	Ware_Index     idx = w->worker_index();
 	for (Working_Position * wp = psite.m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
@@ -532,36 +533,45 @@ void ProductionSite::request_worker_callback
 			} else {
 				// Set new request for this slot
 				Ware_Index workerid = wp->worker_request->get_index();
-				delete &rq;
+				delete wp->worker_request;
 				wp->worker_request = &psite.request_worker(workerid);
 			}
 			break;
 		}
 	}
 	while (!worker_placed) {
+		uint8_t nwp = psite.descr().nr_working_positions();
 		uint8_t pos = 0;
-		for (Working_Position * wp = psite.m_working_positions;; ++wp) {
+		for (Working_Position * wp = psite.m_working_positions; pos < nwp; ++wp) {
 			// Find a fitting slot
-			if ((wp->worker_request) && !worker_placed)
+			if (!wp->worker && !worker_placed)
 				if (wp->worker_request->get_index() == idx) {
 					delete wp->worker_request;
 					*wp = Working_Position(0, w);
 					worker_placed = true;
+					break;
 				}
-			pos++;
+			++pos;
 		}
-		// Find the next smaller version of this worker
-		Ware_Index nuwo    = psite.tribe().get_nrworkers();
-		Ware_Index current = Ware_Index(static_cast<size_t>(0));
-		for (; current < nuwo; ++nuwo) {
-			Worker_Descr const * worker = psite.tribe().get_worker_descr(current);
-			if (worker->becomes() == idx) {
-				idx = current;
-				break;
+		if (!worker_placed) {
+			// Find the next smaller version of this worker
+			Ware_Index nuwo    = psite.tribe().get_nrworkers();
+			Ware_Index current = Ware_Index(static_cast<size_t>(0));
+			for (; current < nuwo; ++current) {
+				Worker_Descr const * worker = psite.tribe().get_worker_descr(current);
+				if (worker->becomes() == idx) {
+					idx = current;
+					break;
+				}
 			}
+			if (current == nuwo)
+				throw
+					wexception
+						("Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",
+						 w->descr().descname().c_str(), psite.descr().descname().c_str(),
+						 psite.get_position().x, psite.get_position().y);
+			pos = 0;
 		}
-		if (current == nuwo)
-			throw wexception("Something went wrong! No fitting place for worker found!");
 	}
 
 	// It's always the first worker doing building work,
@@ -594,9 +604,9 @@ void ProductionSite::act(Game & game, uint32_t const data)
 		if (state.program->get_size() <= state.ip)
 			return program_end(game, Completed);
 
-		if (m_anim != descr().get_animation("idle")) {
+		if (m_anim != descr().get_animation(m_default_anim)) {
 			// Restart idle animation, which is the default
-			start_animation(game, descr().get_animation("idle"));
+			start_animation(game, descr().get_animation(m_default_anim));
 		}
 
 		return program_act(game);
@@ -856,6 +866,18 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 
 	m_program_timer = true;
 	m_program_time = schedule_act(game, m_post_timer);
+}
+
+/// Changes the default anim string to \li anim
+void ProductionSite::set_default_anim(std::string anim)
+{
+	if (m_default_anim == anim)
+		return;
+
+	if (!descr().is_animation_known(anim))
+		return;
+
+	m_default_anim = anim;
 }
 
 }

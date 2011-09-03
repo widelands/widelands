@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,8 @@
 
 
 using Widelands::Map;
+struct GameController;
+struct GameSettingsProvider;
 
 /**
  * Data about a map that we're interested in.
@@ -57,10 +59,11 @@ struct MapData {
  */
 
 struct Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_MapSelect(Map::ScenarioTypes allowed_scenarios);
+	Fullscreen_Menu_MapSelect(GameSettingsProvider *, GameController *);
 
 	bool is_scenario();
 	MapData const * get_map() const;
+	void think();
 
 private:
 	void ok();
@@ -88,6 +91,9 @@ private:
 	Map::ScenarioTypes  m_scenario_types;
 
 	std::vector<MapData> m_maps_data;
+
+	GameSettingsProvider * m_settings;
+	GameController       * m_ctrl;
 };
 
 #endif
