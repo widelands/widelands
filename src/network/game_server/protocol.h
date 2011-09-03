@@ -42,17 +42,17 @@ enum WLGGZNetworkOpcodes
 
 	/// Server sends greeting after client connects.
 	/// One ggz string "widelands server" and one integer (1) follows this opcode
-	/// @notice This opcode does bot hava a null terminated parameter list
+	/// @notice This opcode does not have a null terminated parameter list
 	op_greeting = 1,
-	/// @notice This opcode does bot hava a null terminated parameter list
+	/// @notice This opcode does not have a null terminated parameter list
 	op_request_ip = 2,
-	/// @notice This opcode does bot hava a null terminated parameter list
+	/// @notice This opcode does not have a null terminated parameter list
 	op_reply_ip = 3,
-	/// @notice This opcode does bot hava a null terminated parameter list
+	/// @notice This opcode does not have a null terminated parameter list
 	op_broadcast_ip = 4,
-	/// @notice This opcode does bot hava a null terminated parameter list
+	/// @notice This opcode does not have a null terminated parameter list
 	op_state_playing = 5,
-	/// @notice This opcode does bot hava a null terminated parameter list
+	/// @notice This opcode does not have a null terminated parameter list
 	op_state_done = 6,
 
 	/** This opcode is part of the new protocol. It has no parameter and
@@ -60,7 +60,7 @@ enum WLGGZNetworkOpcodes
 	 *  @ref op_reply_protocol_ext to this opcode. The server must not use
 	 *  new opcodes before getting this opcode. The client must not get new
 	 *  opcodes before getting a op_reply_protocol_ext.
-	 *  @notice This opcode does bot hava a null terminated parameter list
+	 *  @notice This opcode does not have a null terminated parameter list
 	 */
 	op_request_protocol_ext = 7,
 
@@ -77,8 +77,8 @@ enum WLGGZNetworkOpcodes
 	op_reply_protocol_ext = 8,
 
 	/**
-	 * Opcode to transmit statistics and game results tu the server
-	 * For each argument ther comes first integer to indicate which data
+	 * Opcode to transmit statistics and game results to the server
+	 * For each argument there comes first integer to indicate which data
 	 * it is (GameInfo) then a second integer to indicate the dataype
 	 * and then the argument. A argument type of 0 indicates the end of
 	 * the argument list.

@@ -236,8 +236,7 @@ void WidelandsServer::dump_clients()
 				 c.support_build16_proto()?">b16proto":"b15proto",
 				 is_host(&c)?"host":"client");
 		else
-			wllog
-				(DL_DUMP, "Client \"%s\": no client structure", it->first.c_str());
+			wllog(DL_DUMP, "Client \"%s\": no client structure", it->first.c_str());
 		it++;
 	}
 }
