@@ -263,7 +263,8 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 	delete m_map;
 
 	m_map = new_map;
-	g_gr->set_world(m_map->get_world_name());
+	if (g_gr)
+		g_gr->set_world(m_map->get_world_name());
 
 	NoteReceiver<NoteFieldTransformed>::connect(*m_map);
 }
