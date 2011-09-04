@@ -549,7 +549,7 @@ void Editor_Interactive::run_editor(std::string const & filename)
 {
 	Widelands::Editor_Game_Base editor(0);
 	Editor_Interactive eia(editor);
-	editor.set_ibase(&eia); //  TODO get rid of this
+	editor.set_ibase(&eia); // TODO get rid of this
 	{
 		UI::ProgressWindow loader_ui("pics/editor.jpg");
 		std::vector<std::string> tipstext;
@@ -565,7 +565,7 @@ void Editor_Interactive::run_editor(std::string const & filename)
 				map.create_empty_map
 					(64, 64, "greenland", _("No Name"),
 					 g_options.pull_section("global").get_string
-					 	("realname", _("Unknown")));
+						("realname", _("Unknown")));
 
 				{ //  Load all tribes into memory
 					std::vector<std::string> tribenames;

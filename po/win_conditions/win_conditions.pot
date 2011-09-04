@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-09-04 19:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -69,6 +69,11 @@ msgstr ""
 #: ../../scripting/win_conditions/00_endless_game.lua:10
 msgid ""
 "Endless Game"
+msgstr ""
+
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:10
+msgid ""
+"Endless Game (no fog)"
 msgstr ""
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:151
@@ -138,6 +143,11 @@ msgid ""
 "This is an endless game without rules."
 msgstr ""
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:11
+msgid ""
+"This is an endless game without rules. Fog of war is disabled."
+msgstr ""
+
 #: ../../scripting/win_conditions/02_collectors.lua:103
 msgid ""
 "Total: %i points"
@@ -158,6 +168,7 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:179
 #: ../../scripting/win_conditions/03_territorial_lord.lua:166
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid ""
 "You are defeated!"
 msgstr ""
@@ -188,6 +199,7 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:180
 #: ../../scripting/win_conditions/03_territorial_lord.lua:167
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:40
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
