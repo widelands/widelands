@@ -1,26 +1,26 @@
 -- ========================
--- Does the actual hopping 
+-- Does the actual hopping
 -- ========================
-function add_wares(hq, wares) 
+function add_wares(hq, wares)
    for name, count in pairs(wares) do
       hq:set_wares(name, hq:get_wares(name) + count)
    end
 end
 
-function add_workers(hq, workers) 
+function add_workers(hq, workers)
    for name, count in pairs(workers) do
       hq:set_workers(name, hq:get_workers(name) + count)
    end
 end
 
-function add_soldiers(hq, soldiers) 
+function add_soldiers(hq, soldiers)
    local setpoints = {}
    for sdescr, count in pairs(soldiers) do
       setpoints[ {sdescr:match("(%d):(%d):(%d):(%d)")} ] = count
    end
    hq:set_soldiers(setpoints)
 end
-   
+
 function _transfer_content(old, new)
    local soldiers, workers, wares = {}, {}, {}
 

@@ -343,11 +343,13 @@ void Game::init_newgame
 	maploader->load_map_complete(*this, settings.scenario);
 
 	// Check for win_conditions
-	m_win_condition_string = settings.win_condition;
-	LuaCoroutine * cr = lua().run_script
-		(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
-		->get_coroutine("func");
-	enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+	if (!settings.scenario) {
+		m_win_condition_string = settings.win_condition;
+		LuaCoroutine * cr = lua().run_script
+			(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
+			->get_coroutine("func");
+		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+	}
 }
 
 

@@ -1,9 +1,9 @@
 -- =======================================================================
---                          Texts for this scenario                         
+--                          Texts for this scenario
 -- =======================================================================
 welcome_msg = rt(
-   h1(_"Welcome to Island Hopping") .. 
-   h2(_"Rules") .. 
+   h1(_"Welcome to Island Hopping") ..
+   h2(_"Rules") ..
    p(_
 [[Island Hopping is a traditional tournament in the Atlantean culture. The
 rules of the game are simple: You start with a headquarters one one island.
@@ -19,17 +19,17 @@ get. See below for the details.]]) .. p(_
 [[The clue is that the first island only offers stones and wood, the second
 only meadows and resources. The economies you leave behind will continue to
 work for you, but you only reap the benefits when you reach a new island.]]
-) .. 
+) ..
 h2(_"Finish rewards") ..
-h3(_"First Island") .. 
-h4(_"1st to finish") .. p(format_rewards(_finish_rewards[1][1])) .. 
-h4(_"2nd to finish") .. p(format_rewards(_finish_rewards[1][2])) .. 
-h4(_"3rd to finish") .. p(format_rewards(_finish_rewards[1][3])) .. 
-h4(_"4th to finish") .. p(format_rewards(_finish_rewards[1][4])) .. 
-h3(_"Second Island") .. 
-h4(_"1st to finish") .. p(format_rewards(_finish_rewards[2][1])) .. 
-h4(_"2nd to finish") .. p(format_rewards(_finish_rewards[2][2])) .. 
-h4(_"3rd to finish") .. p(format_rewards(_finish_rewards[2][3])) .. 
+h3(_"First Island") ..
+h4(_"1st to finish") .. p(format_rewards(_finish_rewards[1][1])) ..
+h4(_"2nd to finish") .. p(format_rewards(_finish_rewards[1][2])) ..
+h4(_"3rd to finish") .. p(format_rewards(_finish_rewards[1][3])) ..
+h4(_"4th to finish") .. p(format_rewards(_finish_rewards[1][4])) ..
+h3(_"Second Island") ..
+h4(_"1st to finish") .. p(format_rewards(_finish_rewards[2][1])) ..
+h4(_"2nd to finish") .. p(format_rewards(_finish_rewards[2][2])) ..
+h4(_"3rd to finish") .. p(format_rewards(_finish_rewards[2][3])) ..
 h4(_"4th to finish") .. p(format_rewards(_finish_rewards[2][4]))
 )
 

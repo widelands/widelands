@@ -1,5 +1,5 @@
 -- =================================
--- Island Hopping Fun Map Scripting 
+-- Island Hopping Fun Map Scripting
 -- =================================
 use("aux", "coroutine")
 use("aux", "infrastructure")
@@ -8,7 +8,7 @@ use("aux", "objective_utils")
 use("aux", "set")
 
 -- ==========
--- Constants 
+-- Constants
 -- ==========
 set_textdomain("mp_scenario_island_hopping.wmf")
 
@@ -72,7 +72,7 @@ _finish_rewards = {
 hill = map:get_field(0,0):region(3)
 
 -- ==================
--- Utility functions 
+-- Utility functions
 -- ==================
 function send_to_all(text)
    for idx,plr in ipairs(game.players) do
@@ -94,7 +94,7 @@ use("map", "hop_island")
 use("map", "first_island")
 
 -- ===============
--- Initialization 
+-- Initialization
 -- ===============
 -- Reveal the whole map for all players
 function reveal_everything_for_everybody()
@@ -117,7 +117,7 @@ function place_headquarters()
    for idx, plr in ipairs(game.players) do
       local sf = map.player_slots[plr.number].starting_field
 
-      prefilled_buildings(plr, {"headquarters", sf.x, sf.y, 
+      prefilled_buildings(plr, {"headquarters", sf.x, sf.y,
          wares = {
             diamond = 7,
             ironore = 5,

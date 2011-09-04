@@ -35,7 +35,7 @@ end
 function watch_hill()
    sleep(200)
 
-   while true do 
+   while true do
       local castle_field = nil
       local started_claiming = nil
       local claiming_player = nil
