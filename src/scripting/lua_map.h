@@ -30,8 +30,10 @@
 #include "logic/game.h"
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
+#include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
+#include "logic/worker.h"
 
 #include "luna.h"
 
@@ -280,7 +282,7 @@ struct L_HasSoldiers {
 	virtual int set_soldiers(lua_State * L) = 0;
 	virtual int get_soldiers(lua_State * L) = 0;
 
-	typedef std::vector<const Widelands::Soldier *> SoldiersList;
+	typedef std::vector<Widelands::Soldier *> SoldiersList;
 	typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
 	typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
 
@@ -411,7 +413,7 @@ public:
 
 
 class L_Warehouse : public L_Building,
-	public L_HasWares, public L_HasWorkers, public L_HasSoldiers
+	public L_HasWares, public L_HasWorkers, public _SoldierEmployer
 {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
@@ -433,13 +435,16 @@ public:
 	int get_wares(lua_State *);
 	int set_workers(lua_State *);
 	int get_workers(lua_State *);
-	int set_soldiers(lua_State *);
-	int get_soldiers(lua_State *);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse);
+	Widelands::SoldierControl * get_sc
+		(lua_State * L, Widelands::Editor_Game_Base & g)
+	{
+		return get(L, g);
+	}
 };
 
 
@@ -558,6 +563,57 @@ public:
 	CASTED_GET(Bob);
 };
 
+class L_Worker : public L_Bob {
+public:
+	LUNA_CLASS_HEAD(L_Worker);
+
+	L_Worker() {}
+	L_Worker(Widelands::Worker & w) : L_Bob(w) {}
+	L_Worker(lua_State * L) : L_Bob(L) {}
+	virtual ~L_Worker() {}
+
+	/*
+	 * Properties
+	 */
+	int get_owner(lua_State * L);
+	int get_location(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(Worker);
+};
+
+class L_Soldier : public L_Worker {
+public:
+	LUNA_CLASS_HEAD(L_Soldier);
+
+	L_Soldier() {}
+	L_Soldier(Widelands::Soldier & w) : L_Worker(w) {}
+	L_Soldier(lua_State * L) : L_Worker(L) {}
+	virtual ~L_Soldier() {}
+
+	/*
+	 * Properties
+	 */
+	int get_attack_level(lua_State *);
+	int get_defense_level(lua_State *);
+	int get_hp_level(lua_State *);
+	int get_evade_level(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(Soldier);
+};
 #undef CASTED_GET
 
 class L_Field : public L_MapModuleClass {

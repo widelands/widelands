@@ -67,15 +67,29 @@ namespace LuaMap {
  * object available.
  */
 #define CAST_TO_LUA(k) to_lua<L_ ##k> \
-   (L, new L_ ##k(*static_cast<k *>(bi)))
-int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
-	if (!bi)
+   (L, new L_ ##k(*static_cast<k *>(mo)))
+int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
+	if (!mo)
 		return 0;
 
-	switch  (bi->get_type()) {
+	const char * type_name = mo->type_name();
+	if (!strcmp(type_name, "worker")) {
+		if (mo->name() == "soldier")
+			return CAST_TO_LUA(Soldier);
+
+		return CAST_TO_LUA(Worker);
+	}
+
+	return to_lua<L_Bob>(L, new L_Bob(*mo));
+}
+int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
+	if (!mo)
+		return 0;
+
+	switch  (mo->get_type()) {
 		case Map_Object::BUILDING:
 		{
-			const char * type_name = bi->type_name();
+			const char * type_name = mo->type_name();
 			if (!strcmp(type_name, "constructionsite"))
 				return CAST_TO_LUA(ConstructionSite);
 			else if (!strcmp(type_name, "productionsite"))
@@ -95,7 +109,7 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 		case Map_Object::ROAD:
 			return CAST_TO_LUA(Road);
 	}
-	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
+	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
 #undef CAST_TO_LUA
 
@@ -301,6 +315,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 						 (*s.current)->get_evade_level());
 
 					if (is == sp->first) {
+						sc->outcorporateSoldier(egbase, **s);
 						(*s.current)->remove(egbase);
 						++d;
 						break;
@@ -1495,9 +1510,15 @@ int L_Road::get_road_type(lua_State * L) {
 L_HasWorkers::WorkersMap L_Road::_valid_workers
 		(PlayerImmovable & pi)
 {
+	Road & r = static_cast<Road &>(pi);
+
 	WorkersMap valid_workers;
 	valid_workers.insert
-		(WorkerAmount(pi.owner().tribe().worker_index("carrier"), 1));
+		(WorkerAmount(r.owner().tribe().worker_index("carrier"), 1));
+
+	if (r.get_roadtype() == Road_Busy)
+		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
+
 	return valid_workers;
 }
 int L_Road::_new_worker
@@ -1718,47 +1739,6 @@ WH_GET(ware, Ware);
 // documented in parent class
 WH_GET(worker, Worker);
 #undef GET
-
-// documented in parent class
-int L_Warehouse::set_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	Warehouse * wh = get(L, egbase);
-	Tribe_Descr const & tribe = wh->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-		ref_cast<Soldier_Descr const, Worker_Descr const>
-			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
-
-	container_iterate_const(SoldiersMap, setpoints, s) {
-		for (uint32_t i = 0; i < s.current->second; i++) {
-			Soldier & soldier =
-				ref_cast<Soldier, Worker>
-				(soldier_descr.create(egbase, wh->owner(), wh, wh->get_position()));
-			soldier.set_level
-				(s.current->first.hp, s.current->first.at,
-				 s.current->first.de, s.current->first.ev);
-			wh->incorporate_worker(egbase, soldier);
-		}
-	}
-	return 0;
-}
-
-// documented in parent class
-int L_Warehouse::get_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	Warehouse * wh = get(L, egbase);
-	Tribe_Descr const & tribe = wh->owner().tribe();
-
-	Soldier_Descr const & soldier_descr =  //  soldiers
-			 ref_cast<Soldier_Descr const, Worker_Descr const>
-						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	SoldiersList in_warehouse = wh->get_soldiers(egbase);
-
-	return m_handle_get_soldiers(L, soldier_descr, in_warehouse);
-}
 
 /*
  ==========================================================
@@ -2062,6 +2042,166 @@ int L_Bob::has_caps(lua_State * L) {
  ==========================================================
  */
 
+/* RST
+Worker
+------
+
+.. class:: Worker
+
+	Child of: :class:`Bob`
+
+	All workers that are visible on the map are of this kind.
+*/
+
+const char L_Worker::className[] = "Worker";
+const MethodType<L_Worker> L_Worker::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Worker> L_Worker::Properties[] = {
+	PROP_RO(L_Worker, owner),
+	PROP_RO(L_Worker, location),
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: owner
+
+		(RO) The :class:`wl.game.Player` who owns this worker.
+*/
+// UNTESTED
+int L_Worker::get_owner(lua_State * L) {
+	get_factory(L).push_player
+		(L, get(L, get_egbase(L))->get_owner()->player_number());
+	return 1;
+}
+
+/* RST
+	.. attribute:: location
+
+		(RO) The location where this worker is situated. This will be either a
+		:class:`Building`, :class:`Road`, :class:`Flag` or :const:`nil`. Note
+		that a worker that is stored in a warehouse has a location :const:`nil`.
+		A worker that is out working (e.g. hunter) has as a location his
+		building. A stationed soldier has his military building as location.
+		Workers on transit usually have the Road they are currently on as
+		location.
+*/
+// UNTESTED
+int L_Worker::get_location(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+	return
+		upcasted_immovable_to_lua
+			(L, static_cast<BaseImmovable *>
+			 	(get(L, egbase)->get_location(egbase)));
+}
+
+
+
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
+Soldier
+-------
+
+.. class:: Soldier
+
+	Child of: :class:`Worker`
+
+	All soldiers that are on the map are represented by this class.
+*/
+
+const char L_Soldier::className[] = "Soldier";
+const MethodType<L_Soldier> L_Soldier::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Soldier> L_Soldier::Properties[] = {
+	PROP_RO(L_Soldier, attack_level),
+	PROP_RO(L_Soldier, defense_level),
+	PROP_RO(L_Soldier, hp_level),
+	PROP_RO(L_Soldier, evade_level),
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: attack_level
+
+		(RO) The current attack level of this soldier
+*/
+// UNTESTED
+int L_Soldier::get_attack_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_attack_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: defense_level
+
+		(RO) The current defense level of this soldier
+*/
+// UNTESTED
+int L_Soldier::get_defense_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_defense_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: hp_level
+
+		(RO) The current hp level of this soldier
+*/
+// UNTESTED
+int L_Soldier::get_hp_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_hp_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: evade_level
+
+		(RO) The current evade level of this soldier
+*/
+// UNTESTED
+int L_Soldier::get_evade_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_evade_level());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
 
 /* RST
 Field
@@ -2300,7 +2440,7 @@ int L_Field::get_bobs(lua_State * L) {
 	uint32_t cidx = 1;
 	while (b) {
 		lua_pushuint32(L, cidx++);
-		to_lua<L_Bob>(L, new L_Bob(*b));
+		upcasted_bob_to_lua(L, b);
 		lua_rawset(L, -3);
 		b = b->get_next_bob();
 	}
@@ -2700,6 +2840,17 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_Bob>(L, "map", true);
 	add_parent<L_Bob, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Worker>(L, "map", true);
+	add_parent<L_Worker, L_Bob>(L);
+	add_parent<L_Worker, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Soldier>(L, "map", true);
+	add_parent<L_Soldier, L_Worker>(L);
+	add_parent<L_Soldier, L_Bob>(L);
+	add_parent<L_Soldier, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_BaseImmovable>(L, "map", true);
