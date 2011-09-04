@@ -205,9 +205,7 @@ Player * Editor_Game_Base::add_player
 	return p;
 }
 
-/*
- * Load the given tribe into structure
- */
+/// Load the given tribe into structure
 const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 	(std::string const & tribe)
 {
@@ -223,9 +221,7 @@ const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 	return result;
 }
 
-/*
- * Returns a tribe description from the internally loaded list
- */
+/// Returns a tribe description from the internally loaded list
 const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 {
 	container_iterate_const(Tribe_Vector, m_tribes, i)
@@ -256,12 +252,10 @@ void Editor_Game_Base::inform_players_about_immovable
 			}
 }
 
-/*
-===============
-Replaces the current map with the given one. Ownership of the map is transferred
-to the Editor_Game_Base object.
-===============
-*/
+/**
+ * Replaces the current map with the given one. Ownership of the map is transferred
+ * to the Editor_Game_Base object.
+ */
 void Editor_Game_Base::set_map(Map * const new_map) {
 	assert(new_map != m_map);
 	assert(new_map);
@@ -269,6 +263,7 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 	delete m_map;
 
 	m_map = new_map;
+	g_gr->set_world(m_map->get_world_name());
 
 	NoteReceiver<NoteFieldTransformed>::connect(*m_map);
 }
@@ -281,13 +276,11 @@ void Editor_Game_Base::allocate_player_maps() {
 }
 
 
-/*
-===============
-Load and prepare detailled game data.
-This happens once just after the host has started the game and before the
-graphics are loaded.
-===============
-*/
+/**
+ * Load and prepare detailled game data.
+ * This happens once just after the host has started the game and before the
+ * graphics are loaded.
+ */
 void Editor_Game_Base::postload()
 {
 	uint32_t id;
@@ -319,20 +312,17 @@ void Editor_Game_Base::postload()
 }
 
 
-/*
-===============
-Load all graphics.
-This function needs to be called once at startup when the graphics system
-is ready.
-If the graphics system is to be replaced at runtime, the function must be
-called after that has happened.
-===============
-*/
+/**
+ * Load all graphics.
+ * This function needs to be called once at startup when the graphics system is ready.
+ * If the graphics system is to be replaced at runtime, the function must be called after that has happened.
+ */
 void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 {
 	loader_ui.step(_("Loading world data"));
 	g_gr->flush_animations();
 
+	g_gr->set_world(m_map->get_world_name());
 	m_map->load_graphics(); // especially loads world data
 
 	container_iterate_const(Tribe_Vector, m_tribes, i) {
@@ -345,32 +335,25 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 	g_gr->load_animations(loader_ui);
 }
 
-/*
-===============
-Instantly create a building at the given x/y location. There is no build time.
-
-owner is the player number of the building's owner.
-idx is the building type index.
-===============
-*/
+/**
+ * Instantly create a building at the given x/y location. There is no build time.
+ * \li owner  is the player number of the building's owner.
+ * \li idx is the building type index.
+ */
 Building & Editor_Game_Base::warp_building
 	(Coords const c, Player_Number const owner, Building_Index const idx)
 {
 	Player & plr = player(owner);
 	Tribe_Descr const & tribe = plr.tribe();
-	return
-		tribe.get_building_descr(idx)->create
-			(*this, plr, c, false, 0, true);
+	return tribe.get_building_descr(idx)->create(*this, plr, c, false, 0, true);
 }
 
 
-/*
-===============
-Create a building site at the given x/y location for the given building type.
-
-if oldi != -1 this is a constructionsite coming from an enhancing action
-===============
-*/
+/**
+ * Create a building site at the given x/y location for the given building type.
+ *
+ * if oldi != -1 this is a constructionsite coming from an enhancing action
+ */
 Building & Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
 	 Building_Index idx, Building_Index old_id, bool loading)
@@ -379,18 +362,15 @@ Building & Editor_Game_Base::warp_constructionsite
 	Tribe_Descr const & tribe = plr.tribe();
 	return
 		tribe.get_building_descr(idx)->create
-			(*this, plr, c, true,
-			 old_id ? tribe.get_building_descr(old_id) : 0, loading);
+			(*this, plr, c, true, old_id ? tribe.get_building_descr(old_id) : 0, loading);
 }
 
 
-/*
-===============
-Instantly create a bob at the given x/y location.
-
-idx is the bob type.
-===============
-*/
+/**
+ * Instantly create a bob at the given x/y location.
+ *
+ * idx is the bob type.
+ */
 Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr)
 {
 	return descr.create(*this, 0, c);
