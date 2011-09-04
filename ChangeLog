@@ -8,6 +8,7 @@
   for each world.
 - Added a new win condition "endless game (no fog)" with completely
   visible map from the beginning on.
+- Added a multiplayer scenario
 - Improved dedicated server functionality:
     * added functionality to save the game on the server via chat command.
     * added functionality to set up a password for the server.
