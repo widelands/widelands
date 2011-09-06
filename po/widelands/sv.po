@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-09-04 21:59+0200\n"
-"PO-Revision-Date: 2011-08-21 14:27+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-09-05 18:04+0000\n"
+"Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:38+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-06 04:33+0000\n"
+"X-Generator: Launchpad (build 13861)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -3714,13 +3714,15 @@ msgstr "(katalog)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:466 ../../src/ui_fsmenu/mapselect.cc:469
 msgid "unknown"
-msgstr ""
+msgstr "okänd"
 
 #: ../../src/ui_fsmenu/mapselect.cc:468
 msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Den här kartfilen finns inte i ditt filsystem. Data som visas här skickades "
+"från servern."
 
 #: ../../src/ui_fsmenu/singleplayer.cc:39
 msgid "Single Player Menu"
@@ -3766,11 +3768,11 @@ msgstr "Är du säker på att du vill ta bort "
 
 #: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "Sparat spel från dedikerad server"
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Unknown gametime"
-msgstr ""
+msgstr "Okänd speltid"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
@@ -3963,6 +3965,8 @@ msgid ""
 "/me checked the recieved file. Although md5 check summing succeded, I can "
 "not handle the file."
 msgstr ""
+"/me kontrollerade den mottagna filen. Trots att md5-kontrollsummeringen "
+"lyckades kan jag inte hantera filen."
 
 #: ../../src/network/netclient.cc:922
 msgid "Unexpectedly received LAUNCH command from server."
@@ -4059,16 +4063,16 @@ msgstr "Fel användning, bör vara: /warn <namn> <anledning>"
 
 #: ../../src/network/nethost.cc:383
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "Varför skulle du varna dig själv?"
 
 #: ../../src/network/nethost.cc:385
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Varför skulle du varna den dedikerade servern?"
 
 #: ../../src/network/nethost.cc:389 ../../src/network/nethost.cc:415
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Klienten %s hittades inte."
 
 #: ../../src/network/nethost.cc:400
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -4080,7 +4084,7 @@ msgstr "Du kan inte sparka ut dig själv!"
 
 #: ../../src/network/nethost.cc:413
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "Du kan inte sparka ut den dedikerade servern"
 
 #: ../../src/network/nethost.cc:418
 #, c-format
@@ -4131,6 +4135,8 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
+"Det här är en dedikerad server skicka \"@%s help\" för att få en komplett "
+"lista över tillgängliga kommandon."
 
 #: ../../src/network/nethost.cc:724
 msgid "The game has started just after you tried to connect."
@@ -4146,22 +4152,29 @@ msgid ""
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
+"<br>Tillgängliga värdkommandon är:<br>help - Visar detta "
+"hjälpmeddelande<br>host $ - Försöker köra värdkommandot $<br>save $ - Spara "
+"aktuellt speltillstånd som $.wgf"
 
 #: ../../src/network/nethost.cc:1111
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
+"<br>Tillgängliga värdkommandon är:<br>help - Visar detta "
+"hjälpmeddelande<br>host $ - Försöker köra värdkommandot $"
 
 #: ../../src/network/nethost.cc:1116
 msgid "pwd          $ - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd $ - Skickar lösenordet $ till värden"
 
 #: ../../src/network/nethost.cc:1123
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
+"Åtkomst till värdkommandon förnekat. För att komma åt dem, skicka lösenordet "
+"med kommandot pwd."
 
 #: ../../src/network/nethost.cc:1128
 #, c-format
@@ -4170,32 +4183,32 @@ msgstr "%s sa till mig att köra kommando: \"%s\""
 
 #: ../../src/network/nethost.cc:1137
 msgid "Sorry! Saving was deactivated on this dedicated server!"
-msgstr ""
+msgstr "Tyvärr! Sparning har avaktiverats på den här dedikerade servern!"
 
 #: ../../src/network/nethost.cc:1140
 msgid "Can not save, as long as no game is running!"
-msgstr ""
+msgstr "Kan inte spara så länge som inget spel är igång!"
 
 #: ../../src/network/nethost.cc:1151
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Spelet sparades med lyckat resultat!"
 
 #: ../../src/network/nethost.cc:1153
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Kunde inte spara spelet till filen \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1159
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Denna server är inte lösenordsskyddad!"
 
 #: ../../src/network/nethost.cc:1162
 msgid "The send password was incorrect!"
-msgstr ""
+msgstr "Skickalösenordet felaktigt!"
 
 #: ../../src/network/nethost.cc:1175
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "Lösenordet stämmer, åtkomst beviljas!"
 
 #: ../../src/network/nethost.cc:1181
 #, c-format
@@ -4228,6 +4241,8 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
+"Denna server är lösenordsskyddad. Du kan skicka lösenordet med: \"@%s pwd "
+"LÖSENORD\""
 
 #: ../../src/network/nethost.cc:2028
 msgid "Client reports time to host that is running backwards."
@@ -4278,16 +4293,16 @@ msgstr "Servern använder en annan protokollversion."
 #: ../../src/network/nethost.cc:2445 ../../src/network/nethost.cc:2456
 #: ../../src/network/nethost.cc:2467
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Klienten har inte åtkomst till andra spelares inställningar."
 
 #: ../../src/network/nethost.cc:2483 ../../src/network/nethost.cc:2492
 #: ../../src/network/nethost.cc:2501
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Klienten har inte åtkomst till serverinställningarna."
 
 #: ../../src/network/nethost.cc:2503
 msgid "Client send start command, although server is not yet ready."
-msgstr ""
+msgstr "Klienten skickade startkommandot, men servern är ännu inte redo."
 
 #: ../../src/network/nethost.cc:2510
 msgid "Client sent TIME command even though game is not running."
