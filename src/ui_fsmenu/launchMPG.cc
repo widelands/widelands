@@ -342,6 +342,9 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 	if (code <= 0)
 		return; // back was pressed
 
+	// Saved game was selected - therefore not a scenario
+	m_settings->setScenario(false);
+
 	std::string filename = lsgm.filename();
 
 	if (g_fs->FileExists(filename.c_str())) {
@@ -430,11 +433,12 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			// interface can only notice the change after the host broadcasted it.
 			if (settings.savegame)
 				load_previous_playerdata();
-			else
+			else {
 				load_map_info();
+				if (settings.scenario)
+					set_scenario_values();
+			}
 			m_mapname.set_text(settings.mapname);
-			if (settings.scenario)
-				set_scenario_values();
 		}
 	} else {
 		// Write client infos
