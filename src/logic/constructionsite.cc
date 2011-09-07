@@ -584,11 +584,11 @@ void ConstructionSite::draw
 		} catch (Map_Object_Descr::Animation_Nonexistent) {
 			a = m_prev_building->get_animation("idle");
 		}
-		dst.drawanim
+		dst.drawanimrect
 			(pos,
 			 a,
-			 (g_gr->nr_frames(a) - 1) * FRAME_LENGTH,
-			 get_owner());
+			 tanim - FRAME_LENGTH, get_owner(),
+			 Rect(Point(0, 0), w, h - lines));
 	}
 
 	assert(lines <= h);
