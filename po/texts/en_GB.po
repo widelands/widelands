@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-09-04 19:59+0000\n"
-"PO-Revision-Date: 2011-02-03 13:10+0000\n"
-"Last-Translator: UbuntuFanatic <Unknown>\n"
+"PO-Revision-Date: 2011-09-08 23:10+0000\n"
+"Last-Translator: Anthony Harrington <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:33+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-09 04:31+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -27,7 +27,7 @@ msgstr ", / .       Go to previous / next location"
 
 #: ../../txts/tips/general_game.tip:38
 msgid ",' (comma) and '."
-msgstr ""
+msgstr ",' (comma) and '."
 
 #: ../../txts/README:123
 msgid "- how to reproduce the bug"
@@ -451,7 +451,7 @@ msgstr ""
 
 #: ../../txts/developers:152
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlantean"
 
 #: ../../txts/developers:142
 msgid "Barbarian"
@@ -831,7 +831,7 @@ msgstr "N               Toggle messages ('news')"
 
 #: ../../txts/tips/general_game.tip:34
 msgid "N' for News to access the messages window, then use 'G"
-msgstr ""
+msgstr "N' for News to access the messages window, then use 'G"
 
 #: ../../txts/developers:162
 msgid ""
@@ -941,6 +941,7 @@ msgstr "Preamble"
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them"
 msgstr ""
+"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
 
 #: ../../txts/README:1
 msgid "README"
