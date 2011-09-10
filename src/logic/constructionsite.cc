@@ -580,7 +580,7 @@ void ConstructionSite::draw
 		//  get its last build picture and draw it instead.
 		uint32_t a;
 		try {
-			a = m_prev_building->get_animation("build");
+			a = m_prev_building->get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent) {
 			a = m_prev_building->get_animation("idle");
 		}
