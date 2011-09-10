@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-09-04 19:59+0000\n"
-"PO-Revision-Date: 2011-08-21 14:16+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-09-09 16:32+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:32+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-10 04:39+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
@@ -28,9 +28,9 @@ msgstr ""
 " \"Konečne boli bohovia s nami!<br> Vylodili sme na neznámom ostrove a našli "
 "pokojný odpočinok pod palmami rastúcimi na jeho brehu. Lepšie to asi byť "
 "nemôže. Pravdou je:<br> keď som sa dnes ráno zobudil, okolo nás som nevidel "
-"nič viac ako piesok.<br> Skutočne to vyzerá tak, že sme sa ocitli pod "
+"nič viac než piesok.<br> Skutočne to vyzerá tak, že sme sa ocitli pod "
 "jedinými palmami, ktoré existujú v tejto ďalekej púšti. Bojím sa, že "
-"nenájdeme pomoc k opraveniu našej lode načas.\" "
+"nenájdeme pomoc, ktorú potrebujeme na opravenie našej lode, načas.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
@@ -85,6 +85,11 @@ msgid ""
 "anyway, and the resources we harvest now might be the base of strong and big "
 "buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Ahoj, môj starý dobrý priateľ. Len som myslel na skaly stojace na južnom "
+"brehu tejto zeme. Možno by sme mohli vysekať nejaké tvrdé užitočné kamene a "
+"prekrásny mramor.<br> Oprava našej lode potrvá zopár týždňov a zdroje, ktoré "
+"ťažíme, by teraz mohli byť základom silných a veľkých budov v ďalšej "
+"zemi.\"<br><br>-- NOVÁ ÚLOHA --<br> "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:95
 msgid ""
@@ -99,6 +104,16 @@ msgid ""
 "this island a complete desert.<br> Lutius, I beg you: find someone who takes "
 "care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Zdravím, Lucius. Chcel by som sa porozprávať o dvoch dôležitých "
+"veciach... Najprv dobrá správa:<br> Všimol som si, že píla už je hotová, "
+"takže môžeme začať upravovať drevo, ktoré ťažia drevorubači.<br> Ale to je "
+"asi jediná pozitívna vec, o ktorej viem hovoriť. Zlou správou je, že naši "
+"drevorubači ťažia neuveriteľnou rýchlosťou. Na ostrove nezostávajú takmer "
+"žiadne stromy!<br> Lutius, tieto stromy poskytujú kryt od piesočných búrok "
+"na púšti, tienia horúce dni a sú domovom mnohých nežných zvierat. Nemali by "
+"sme z tohto ostrova urobiť úplnú púšť.<br> Lutius, prosím vás: nájdite "
+"niekoho, kto sa postará o sadenie nových stromov.\"<br><br>-- NOVÁ ÚLOHA --"
+"<br> "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:25
 msgid ""
@@ -208,6 +223,8 @@ msgid ""
 "* Build a quarry in the south to cut some stones and marble out of the "
 "rocks.<br> These might be used for future buildings."
 msgstr ""
+"* Postavte kameňolom južne na ťažbu kameňa a mramoru zo skaly.<br> Mohli by "
+"sa využiť neskôr pre naše budovy."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:85
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:164
@@ -215,10 +232,12 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
+"* Postavte dve ďalšie sídla drevorubačov a pílu, akonáhle je pre ne dostatok "
+"miesta."
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Brehy Malac' Mor-u"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid "A dark night"
@@ -259,19 +278,19 @@ msgstr "Postav kasárne"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Build a forester's house"
-msgstr ""
+msgstr "Postavte sídlo horára"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Build a lumberjack's house"
-msgstr ""
+msgstr "Postavte sídlo drevorubača"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Build a quarry"
-msgstr ""
+msgstr "Postavte kameňolom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Postavte dve sídla drevorubačov a pílu"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:23
