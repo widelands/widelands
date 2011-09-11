@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-09-04 19:59+0000\n"
 "PO-Revision-Date: 2010-06-06 22:37+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-09-05 04:40+0000\n"
+"X-Generator: Launchpad (build 13830)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
@@ -66,6 +66,10 @@ msgstr ""
 #: ../../scripting/win_conditions/00_endless_game.lua:10
 msgid "Endless Game"
 msgstr "Nekonečná hra"
+
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:10
+msgid "Endless Game (no fog)"
+msgstr ""
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:151
 msgid "Keep it for %i more minutes to win the game."
@@ -122,6 +126,10 @@ msgstr ""
 msgid "This is an endless game without rules."
 msgstr ""
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:11
+msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr ""
+
 #: ../../scripting/win_conditions/02_collectors.lua:103
 msgid "Total: %i points"
 msgstr ""
@@ -139,6 +147,7 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:179
 #: ../../scripting/win_conditions/03_territorial_lord.lua:166
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid "You are defeated!"
 msgstr ""
 
@@ -166,6 +175,7 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:180
 #: ../../scripting/win_conditions/03_territorial_lord.lua:167
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:40
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
@@ -205,46 +215,3 @@ msgstr "Prohrál jsi tuto hru!"
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "with %i trees."
 msgstr ""
-
-#~ msgid "Sorry, you have lost this game!"
-#~ msgstr "Omlouváme se, ale neporařilo se vám zvítězit."
-
-#~ msgid "Game over"
-#~ msgstr "Konec hry"
-
-#~ msgid "An endless game without rules"
-#~ msgstr "Nekonečná hra bez pravidel"
-
-#~ msgid "The player %i has currently %i points"
-#~ msgstr "Hráč %i má právě %i bodů"
-
-#~ msgid ""
-#~ "You get points for wares in your HQ, the one with the highest number of "
-#~ "wares at the end of 4 hours wins the game"
-#~ msgstr ""
-#~ "Dostanete body za zboží v HQ, ten s nejvyšším počtem zboží po 4 hodinách "
-#~ "vyhrává hru"
-
-#~ msgid "The tribe that can defeat all others wins!"
-#~ msgstr "Kmen, který může porazit všechny ostatní!"
-
-#~ msgid "Tribe defeated!"
-#~ msgstr "Kmen poražen!"
-
-#~ msgid ""
-#~ "The three tribes play together vs each other. Vision is granted to all the "
-#~ "players playing together"
-#~ msgstr ""
-#~ "Tři kmeny hrají dohromady proti ostatním. Odkrytá mapa je sdílena spoluhráči."
-
-#~ msgid "The tribe %s is no more."
-#~ msgstr "Kmen %s přestal existovat."
-
-#~ msgid "Tribes together"
-#~ msgstr "Kmeny společně"
-
-#~ msgid "Your tribe is no more. You have lost this game"
-#~ msgstr "Tvůj kmen už neexistuje. Prohrál jsi tuto hru"
-
-#~ msgid "You've lost!"
-#~ msgstr "Prohrál jsi!"

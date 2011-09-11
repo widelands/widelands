@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-09-04 19:59+0000\n"
 "PO-Revision-Date: 2011-02-07 06:42+0000\n"
 "Last-Translator: Siz <siz-asuka@hotmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-09-05 04:40+0000\n"
+"X-Generator: Launchpad (build 13830)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
@@ -75,6 +75,10 @@ msgstr ""
 msgid "Endless Game"
 msgstr "Juego sin fin"
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:10
+msgid "Endless Game (no fog)"
+msgstr ""
+
 #: ../../scripting/win_conditions/03_territorial_lord.lua:151
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Mantenlo por %i minutos para ganar el juego."
@@ -130,6 +134,10 @@ msgstr "El ganador es %s "
 msgid "This is an endless game without rules."
 msgstr "Éste es un juego sin fin sin reglas."
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:11
+msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr ""
+
 #: ../../scripting/win_conditions/02_collectors.lua:103
 msgid "Total: %i points"
 msgstr "Total: %i puntos"
@@ -147,6 +155,7 @@ msgstr "Gnomo de madera"
 #: ../../scripting/win_conditions/02_collectors.lua:179
 #: ../../scripting/win_conditions/03_territorial_lord.lua:166
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid "You are defeated!"
 msgstr "Fuiste derrotado!"
 
@@ -176,6 +185,7 @@ msgstr "Has perdido el juego!"
 #: ../../scripting/win_conditions/02_collectors.lua:180
 #: ../../scripting/win_conditions/03_territorial_lord.lua:167
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:40
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
@@ -216,71 +226,3 @@ msgstr "¡Has perdido esta partida!"
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "with %i trees."
 msgstr "con %i árboles."
-
-#~ msgid "Game over"
-#~ msgstr "Fin del juego"
-
-#~ msgid "An endless game without rules"
-#~ msgstr "Juego sin fin, sin reglas"
-
-#~ msgid "The player %i has currently %i points"
-#~ msgstr "El jugador %i tiene %i puntos"
-
-#~ msgid "The tribe that can defeat all others wins!"
-#~ msgstr "¡La tribu que derrote a las otras gana!"
-
-#~ msgid "Your tribe is no more. You have lost this game"
-#~ msgstr "Tu tribu no sobrevivió. Has perdido la partida"
-
-#~ msgid "You've lost!"
-#~ msgstr "¡Perdiste!"
-
-#~ msgid "Tribe defeated!"
-#~ msgstr "¡Tribu derrotada!"
-
-#~ msgid ""
-#~ "The three tribes play together vs each other. Vision is granted to all the "
-#~ "players playing together"
-#~ msgstr ""
-#~ "Las tres tribus juegan juntas unas contra otras. La visión está garantizada "
-#~ "a todos los jugadores que juegan juntos"
-
-#~ msgid "The tribe %s is no more."
-#~ msgstr "La tribu %s ha desaparecido."
-
-#~ msgid "Tribes together"
-#~ msgstr "Las tribus juntas"
-
-#~ msgid ""
-#~ "You get points for wares in your HQ, the one with the highest number of "
-#~ "wares at the end of 4 hours wins the game"
-#~ msgstr ""
-#~ "Obtén puntos por los bienes en tu cuartel general. Quien tenga el mayor "
-#~ "numero de bienes al final de 4 horas, gana el juego"
-
-#~ msgid "%i trees at the moment ."
-#~ msgstr "%i árboles al momento."
-
-#~ msgid "Sorry, you have lost this game!"
-#~ msgstr "Lo siento, has perdido!"
-
-#~ msgid ""
-#~ "You get points for all wares stored in your headquarters or warehouses. The "
-#~ "player with the highest number of wares at the end of 4 hours wins the game."
-#~ msgstr ""
-#~ "Obtienes puntos por todas las mercaderías en tus cuarteles principales o "
-#~ "depósitos. El jugador con el mayor numero de mercaderías al final de 4 horas "
-#~ "ganará el juego."
-
-#~ msgid ""
-#~ "As wood gnome you like big forests, so your task is, to have more trees on "
-#~ "your territory than any other player. The game will end after 4 hours of "
-#~ "playing. The one with the most trees at that point will win the game."
-#~ msgstr ""
-#~ "Te gustan los bosques como a los gnomos de madera, entonces tu tarea es, "
-#~ "tener mas árboles en tu territorio que cualquier otro jugador. El juego "
-#~ "terminará después de 4 horas de juego. El que tenga mas árboles al final "
-#~ "ganará el juego.\n"
-#~ "As wood gnome you like big forests, so your task is, to have more trees on "
-#~ "your territory than any other player. The game will end after 4 hours of "
-#~ "playing. The one with the most trees at that point will win the game."
