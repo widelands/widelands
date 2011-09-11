@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-09-04 19:59+0000\n"
-"PO-Revision-Date: 2011-04-30 22:56+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2011-09-11 00:29+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:32+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-11 04:30+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid ""
@@ -27,6 +27,14 @@ msgid ""
 "These forests should last forever, so we really should build a forester's "
 "house too.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Keď sme so Saledom prešli skrz zázračné stromy na severe, cítili sme, že "
+"sa naša budúcnosť práve začala. Táto krajina je taká pokojná, dobrá a "
+"nádherná, že by som tu mohol zostať do konca svojho života.<br> Ale do tohto "
+"dňa nech prejde veľa rokov! Teraz sa musíme sústrediť na prítomnosť a "
+"postaviť zopár drevorubačských sídel a pílu na produkciu základných "
+"stavebných materiálov.<br> Ale nemali by sme zabudnúť ochraňovať tento dar "
+"prírody. Tieto lesy by mali zostať na večnosť, takže by sme skutočne mali "
+"postaviť aj sídlo horára.\"<br><br>-- NOVÁ ÚLOHA --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid ""
@@ -54,6 +62,14 @@ msgid ""
 "stonemason, who cuts columns from marble.<br> After all, now we can begin "
 "living as we did in Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"U bohov, toto je neuveriteľné šťastie osudu! Sú tam dve ďalšie hory a zdá "
+"sa, že jedna má veľké množstvo uhlia a druhá železnú rudu. Hneď by sme mali "
+"začať stavať železnorudné a uhoľné bane (alebo aspoň uhliarne), taviarne, "
+"dielne nástrojov, vyhne na zbroje a zbrane.<br> Avšak: pre všetky väčšie "
+"budovy potrebujeme lepšie a elegantnejšie stavebné materiály. Takže "
+"postavme<br> sídlo kamenára, ktorý vysekáva stĺpy z mramoru.<br> Koniec-"
+"koncov, teraz môžemee začať žiť ako vo Fremile.\"<br><br>-- NOVÁ ÚLOHA --"
+"<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:83
 msgid ""
@@ -71,12 +87,16 @@ msgid ""
 " \"Good news! Today our wood economy was completed. Now we can be sure to "
 "have enough wood for our future building projects.\" "
 msgstr ""
+" \"Dobrá správa! Dnes sa dokončilo naše lesné hospodárstvo. Teraz máme isto "
+"dostatok dreva pre naše budúce stavebné projekty.\" "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:125
 msgid ""
 " \"Great! Today the building of the quarry was completed. Now we get enough "
 "stone to construct larger buildings.\" "
 msgstr ""
+" \"Výborne! Dnes sa dokončila stavba kameňolomu. Teraz dostávame dostatok "
+"kameňa na stavbu väčších budov.\" "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:135
 msgid ""
@@ -90,6 +110,14 @@ msgid ""
 "build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE "
 "--<br> "
 msgstr ""
+" \"Zdravím, Lutius. Nechem začať paniku, ale našiel som niečo, z čoho "
+"dostávam žalúdočnú nervozitu a čo mi do srdca rozprúdi vlny strachu. Keď som "
+"zišiel na južný breh, našiel som zbytky inej lode. Neviem, či tie časti sú "
+"všetko, čo z nej zostalo. V každom prípade, nevyzerajú staro.<br> Možno "
+"ľudia na palube tej lode boli zastihnutí rovnakou búrkou, ktorá nás dostala "
+"do Malac' Mor-u, a priniesla ich na tento ostrov.<br> Žiadam vás, aby ste "
+"boli opatrný a aby ste postavili kasárne alebo strážnice okolo našej "
+"osady.\"<br><br>-- NOVÁ ÚLOHA --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:225
 msgid ""
@@ -119,6 +147,12 @@ msgid ""
 "to build strong, luxurious buildings, like those we were accustomed to in "
 "Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Neskôr som šiel dolu ku skalám na juhu a hľadal miesto, kde môžeme "
+"postaviť kameňolom, aby sme získali tvrdý kameň pre väčšie budovy.<br> Znovu "
+"som sa cítil ako v raji, keď som si všimol nejaké kamene podobné mramoru "
+"medzi skalami. Zdá sa, že čoskoro budeme môcť stavať silné, prepychové "
+"budovy ako tie, na ktoré sme boli zvyknutí vo Fremile.\"<br><br>-- NOVÁ "
+"ÚLOHA --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid ""
@@ -131,6 +165,13 @@ msgid ""
 "expand to that mountain and start mining marble.\"<br><br>-- NEW OBJECTIVE --"
 "<br> "
 msgstr ""
+" \"Lutius, mám pre vás dobrú správu:<br> Keď som šiel na východ, našiel som "
+"väčšiu horu.<br> Nie som si úplne istý - geológ by mal zistiť, či sa nemýlim "
+"- ale verím, že by sme mohli z niektorých miest na tej hore vyťažiť "
+"mramor.<br> Bol by to dobrý zdroj na posilnenie prívodu kvalitného mramoru "
+"okrem chudobných množstiev z kameňolomov. Možno ste mali pravdu v tom, že "
+"tento ostrov je ako raj.<br> Rozšírme územie k tej hore a začnime ťažiť "
+"mramor.\"<br><br>-- NOVÁ ÚLOHA --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:187
 msgid ""
@@ -169,7 +210,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:20
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:105
 msgid "* Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "* Postavte kameňolom južne od základne."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:44
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:156
@@ -178,16 +219,19 @@ msgid ""
 "infrastructure (coal mine and / or charcoal burner, iron ore mine, "
 "toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr ""
+"* Postavte sídlo kamenára a dokončite infraštruktúru ťažby a produkcie "
+"(uhoľná baňa a/alebo uhliareň, železnorudná baňa, dielňa nástrojov, vyhňa "
+"zbraní, vyhňa zbrojí a taviareň)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:136
 msgid "* Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "* Postavte kasárne a strážnice okolo osady."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:94
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
-msgstr ""
+msgstr "* Postavte tri drevorubačské sídla, sídlo horára a pílu."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:60
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
@@ -200,7 +244,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:36
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:146
 msgid "* Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "* Rozšírte svoje územie na východ, začnite ťažiť mramor z hory."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:69
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:189

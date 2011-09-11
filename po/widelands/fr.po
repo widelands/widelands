@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-09-04 21:59+0200\n"
-"PO-Revision-Date: 2011-08-21 14:23+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-09-10 12:03+0000\n"
+"Last-Translator: Ubuntu1988 <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:36+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-11 04:30+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -3772,6 +3772,8 @@ msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Ce fichier de carte n'est pas présent sur votre système de fichiers. Les "
+"données présentées ici a été envoyée par le serveur."
 
 #: ../../src/ui_fsmenu/singleplayer.cc:39
 msgid "Single Player Menu"
@@ -3817,7 +3819,7 @@ msgstr "Vouslez-vous vraiment supprimer "
 
 #: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "Sauvegarde depuis le serveur dédié"
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Unknown gametime"
@@ -4112,16 +4114,16 @@ msgstr "Mauvaise utilisation. Devrait être : /warn <name> <reason>"
 
 #: ../../src/network/nethost.cc:383
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "Pourquoi voudriez-vous vous avertir vous-même?"
 
 #: ../../src/network/nethost.cc:385
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Pourquoi voudriez-vous avertir le serveur dédié?"
 
 #: ../../src/network/nethost.cc:389 ../../src/network/nethost.cc:415
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Le client %s n'a pas pu être trouvé"
 
 #: ../../src/network/nethost.cc:400
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -4133,7 +4135,7 @@ msgstr "Vous ne pouvez pas vous chasser vous-même !"
 
 #: ../../src/network/nethost.cc:413
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "Vous ne pouvez pas kicker le serveur dédié"
 
 #: ../../src/network/nethost.cc:418
 #, c-format
@@ -4184,6 +4186,8 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
+"Ceci est un serveur dédié envoyez \"@% s help\" pour obtenir une liste "
+"complète des commandes disponibles."
 
 #: ../../src/network/nethost.cc:724
 msgid "The game has started just after you tried to connect."
@@ -4199,22 +4203,29 @@ msgid ""
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
+"<br>Les commandes hôte disponibles sont:<br>help - Montre cette aide<br>host "
+"$ - Essaye de lancer la commande hôte $<br>save $ - Sauvegarde l'état "
+"courant du jeu comme $.wgf"
 
 #: ../../src/network/nethost.cc:1111
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
+"<br>Les commandes hôte disponibles sont:<br>help - Montre cette aide<br>host "
+"$ - Essaye de lancer la commande hôte $"
 
 #: ../../src/network/nethost.cc:1116
 msgid "pwd          $ - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd $ - Envoie le mot de passe $ à l'hôte"
 
 #: ../../src/network/nethost.cc:1123
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
+"Accès aux commandes hôte refusé. Pour obtenir l'accès, envoyez le mot de "
+"passe avec la commande pwd"
 
 #: ../../src/network/nethost.cc:1128
 #, c-format
@@ -4223,32 +4234,32 @@ msgstr "%s m'a dit d'exécuter la commande: \"%s\""
 
 #: ../../src/network/nethost.cc:1137
 msgid "Sorry! Saving was deactivated on this dedicated server!"
-msgstr ""
+msgstr "Désolé! La sauvegarde a été désactivée sur ce serveur dédié"
 
 #: ../../src/network/nethost.cc:1140
 msgid "Can not save, as long as no game is running!"
-msgstr ""
+msgstr "Ne peut pas sauvegarder, tant qu'aucun jeu n'est lancé"
 
 #: ../../src/network/nethost.cc:1151
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Jeu sauvegardé avec succès"
 
 #: ../../src/network/nethost.cc:1153
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Ne peut pas sauvegarder le jeu dans le fichier \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1159
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Ce serveur n'est pas protégé par un mot de passe"
 
 #: ../../src/network/nethost.cc:1162
 msgid "The send password was incorrect!"
-msgstr ""
+msgstr "Le mot de passe envoyé était incorrect"
 
 #: ../../src/network/nethost.cc:1175
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "Le mot de passe est correct, l'accès a été accordé"
 
 #: ../../src/network/nethost.cc:1181
 #, c-format
@@ -4282,6 +4293,8 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
+"Ce serveur est protégé par un mot de passe. Vous pouvez envoyez le mot de "
+"passe avec : \"@%s pwd PASSWORD\""
 
 #: ../../src/network/nethost.cc:2028
 msgid "Client reports time to host that is running backwards."
@@ -4334,16 +4347,18 @@ msgstr "Le serveur utilise une version différente du protocole."
 #: ../../src/network/nethost.cc:2445 ../../src/network/nethost.cc:2456
 #: ../../src/network/nethost.cc:2467
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Le client n'a pas accès aux paramètres des autres joueurs"
 
 #: ../../src/network/nethost.cc:2483 ../../src/network/nethost.cc:2492
 #: ../../src/network/nethost.cc:2501
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Le client n'a pas accès aux paramètres du serveur"
 
 #: ../../src/network/nethost.cc:2503
 msgid "Client send start command, although server is not yet ready."
 msgstr ""
+"Le client envoie la commande de démarrage, bien que le serveur n'est pas "
+"encore prêt"
 
 #: ../../src/network/nethost.cc:2510
 msgid "Client sent TIME command even though game is not running."
