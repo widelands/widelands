@@ -70,6 +70,7 @@ public:
 	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
 	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
 	std::string helptext() const {return m_helptext;}
+        Point get_ware_hotspot() const {return m_ware_hotspot;}
 
 	/// How much of the worker type that an economy should store in warehouses.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
@@ -121,6 +122,7 @@ protected:
 #endif
 
 	std::string       m_helptext;   ///< Short (tooltip-like) help text
+        Point             m_ware_hotspot; 
 	uint32_t          m_default_target_quantity;
 	std::string const m_icon_fname; ///< Filename of worker's icon
 	PictureID         m_icon;       ///< Pointer to icon into picture stack
