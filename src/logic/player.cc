@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -871,19 +871,37 @@ throw ()
 		{ //  map_object_descr[TCoords::None]
 
 			const Map_Object_Descr * map_object_descr;
-			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
+			uint32_t building_animation = std::numeric_limits<uint32_t>::max();
+			uint32_t cs_animation_frame = std::numeric_limits<uint32_t>::max();
+			if (BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
+
 				if (Road::IsRoadDescr(map_object_descr))
 					map_object_descr = 0;
-				else if (upcast(Building const, building, base_immovable))
+				else if (upcast(Building, building, base_immovable)) {
 					if (building->get_position() != f)
-						//  TODO This is not the buildidng's main position so we can
+						//  TODO This is not the building's main position so we can
 						//  TODO not see it. But it should be possible to see it from
 						//  TODO a distance somehow.
 						map_object_descr = 0;
+					else {
+						if (upcast(ConstructionSite, cs, building)) {
+							building_animation = cs->get_animation();
+							cs_animation_frame = cs->get_animation_frame();
+						} else {
+							try {
+								building_animation = building->descr().get_animation("unoccupied");
+							} catch (Map_Object_Descr::Animation_Nonexistent) {
+								building_animation = building->descr().get_animation("idle");
+							}
+						}
+					}
+				}
 			} else
 				map_object_descr = 0;
 			field.map_object_descr[TCoords<>::None] = map_object_descr;
+			field.building_animation = building_animation;
+			field.cs_animation_frame = cs_animation_frame;
 		}
 	}
 	{ //  discover the D triangle and the SW edge of the top right neighbour

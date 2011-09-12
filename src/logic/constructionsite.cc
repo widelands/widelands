@@ -541,40 +541,34 @@ void ConstructionSite::draw
 		completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 	}
 
-	uint32_t anim;
 	try {
-		anim = building().get_animation("build");
+		m_cur_anim = building().get_animation("build");
 	} catch (Map_Object_Descr::Animation_Nonexistent) {
 		try {
-			anim = building().get_animation("unoccupied");
+			m_cur_anim = building().get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent) {
-			anim = building().get_animation("idle");
+			m_cur_anim = building().get_animation("idle");
 		}
 	}
-	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
-	uint32_t const anim_pic =
-		totaltime ? completedtime * nr_frames / totaltime : 0;
+	const AnimationGfx::Index nr_frames = g_gr->nr_frames(m_cur_anim);
+	m_cur_frame = totaltime ? completedtime * nr_frames / totaltime : 0;
 	// Redefine tanim
-	tanim = anim_pic * FRAME_LENGTH;
+	tanim = m_cur_frame * FRAME_LENGTH;
 
 	uint32_t w, h;
-	g_gr->get_animation_size(anim, tanim, w, h);
+	g_gr->get_animation_size(m_cur_anim, tanim, w, h);
 
 	uint32_t lines = h * completedtime * nr_frames;
 	if (totaltime)
 		lines /= totaltime;
-	assert(h * anim_pic <= lines);
-	lines -= h * anim_pic; //  This won't work if pictures have various sizes.
+	assert(h * m_cur_frame <= lines);
+	lines -= h * m_cur_frame; //  This won't work if pictures have various sizes.
 
-	// NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic,
+	// NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, m_cur_frame,
 	// nr_pics);
-	if (anim_pic) //  not the first pic
+	if (m_cur_frame) //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
-		dst.drawanimrect
-			(pos,
-			 anim,
-			 tanim - FRAME_LENGTH, get_owner(),
-			 Rect(Point(0, 0), w, h - lines));
+		dst.drawanimrect(pos, m_cur_anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (m_prev_building) {
 		//  Is the first building, but there was another building here before,
 		//  get its last build picture and draw it instead.
@@ -584,16 +578,11 @@ void ConstructionSite::draw
 		} catch (Map_Object_Descr::Animation_Nonexistent) {
 			a = m_prev_building->get_animation("idle");
 		}
-		dst.drawanimrect
-			(pos,
-			 a,
-			 tanim - FRAME_LENGTH, get_owner(),
-			 Rect(Point(0, 0), w, h - lines));
+		dst.drawanimrect(pos, a, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	}
 
 	assert(lines <= h);
-	dst.drawanimrect
-		(pos, anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
+	dst.drawanimrect(pos, m_cur_anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);
