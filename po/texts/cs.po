@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-09-04 19:59+0000\n"
-"PO-Revision-Date: 2010-08-30 23:24+0000\n"
-"Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
+"PO-Revision-Date: 2011-09-11 08:43+0000\n"
+"Last-Translator: MaSo <mzettik@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:33+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-12 04:33+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -444,7 +444,7 @@ msgstr ""
 
 #: ../../txts/developers:152
 msgid "Atlantean"
-msgstr ""
+msgstr "Atleanťan"
 
 #: ../../txts/developers:142
 msgid "Barbarian"
@@ -905,7 +905,7 @@ msgstr "Page Up        Zvýší rychlost hry"
 
 #: ../../txts/README:76
 msgid "PAUSE         Pauses the game (only for local games)"
-msgstr ""
+msgstr "PAUSE Pozastavení hry (jen pro lokální hry)"
 
 #: ../../txts/developers:262
 msgid "Packagers"
@@ -931,6 +931,7 @@ msgstr "Preambule"
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them"
 msgstr ""
+"Stisk Ctrl+(0-9) slouží k uložení zajímavé lokace a poté stisk 0-9 ji zobrazí"
 
 #: ../../txts/README:1
 msgid "README"
@@ -1367,6 +1368,12 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you."
 msgstr ""
+"Widelands je strategická hra zaměřená na hru podobné Settlers II od "
+"BlueByte. <br> V této hře začínáte na malém území o nic víc než několik "
+"užitečných zdrojů. Pomocí těch si sami můžete vytvořit impérium s mnoha "
+"tisíci obyvatel. Na cestě k tomuto cíli, budete muset vybudovat ekonomickou "
+"infrastrukturu, prozkoumat území kolem sebe a tváří nepřátel, kteří se snaží "
+"ovládnout svět, stejně jako vy."
 
 #: ../../txts/README:22
 msgid ""

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-09-04 19:59+0000\n"
-"PO-Revision-Date: 2011-09-04 15:02+0000\n"
+"PO-Revision-Date: 2011-09-11 18:08+0000\n"
 "Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:40+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-12 04:40+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -242,14 +242,20 @@ msgid ""
 "front\n"
 "of your headquarters. Wait for the completion of the stonemason's hut."
 msgstr ""
+"Bygg en väg mellan byggarbetsplatsen för stenbrottet och ditt högkvarter.\n"
+"Du hamnar direkt i vägbyggnadsläge när du beställde en ny plats. Men nu\n"
+"är du inte det. För att bygga en helt ny väg, klicka bara på flaggan "
+"framför\n"
+"din byggarbetsplats, klicka sedan på Bygg väg-ikonen, och sedan på flaggan\n"
+"framför ditt högkvarter. Vänta tills stenmurarens stuga står färdig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
-msgstr ""
+msgstr "Erövra ett område där vi kan bygga gruvor"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Conquer the mountain to the south west"
-msgstr ""
+msgstr "Erövra berget i sydväst"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -261,6 +267,11 @@ msgid ""
 "so\n"
 "that they get a tick-symbol in front of them. Then, you can click the"
 msgstr ""
+"För närvarande har du två meddelanden. Det som du läser nu och det som\n"
+"informerade dig om att ett nytt högkvarter lades till din ekonomi. Låt oss "
+"gå\n"
+"igenom hur meddelanden arkiveras: Du kan markera dem i din inkorg så att de\n"
+"får en bock framför sig. Sedan kan du klicka på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid "Defeat the enemy"
@@ -276,6 +287,9 @@ msgid ""
 "the\n"
 "number of attacking soldiers, then send them via the attack button."
 msgstr ""
+"Besegra den närbelägna fienden. För att anfalla en byggnad, klicka på dess\n"
+"dörrar, välj antal anfallande soldater, och skicka sedan iväg dem med\n"
+"anfallsknappen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
@@ -295,6 +309,13 @@ msgid ""
 "subtracted\n"
 "are because of the defense ability."
 msgstr ""
+"Försvar är det värdet som subtraheras från attackvärdet. Barbarerna kan\n"
+"inte träna i det här attributet och har därför alltid försvar nivå 0, "
+"vilket\n"
+"innebär att de alltid får 3 HP avdragna från förvållad skada. Om en "
+"anfallare\n"
+"med attackvärde 15 träffar en barbarsoldat skulle barbaren förlora 15-3=12\n"
+"HP. De tre HP som dras av beror på försvarsattributet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid "Defense:"
@@ -302,30 +323,33 @@ msgstr "Försvar:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Diving in"
-msgstr ""
+msgstr "Kastar mig in"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid "Enable the build help"
-msgstr ""
+msgstr "Aktivera bygghjälpen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhance this fortress"
-msgstr ""
+msgstr "Förbättra den här fästningen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid "Enhance your fortress"
-msgstr ""
+msgstr "Förbättra din fästning"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "Förbättra din fästning till ett citadell"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
 msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
 msgstr ""
+"Förbättra din fästning till ett citadell nu. Kom ihåg att du kan få tiden "
+"att gå\n"
+"snabbare genom att använda PAGE_UP; det tar ett tag att bygga ett citadell."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:664
 msgid ""
@@ -337,10 +361,16 @@ msgid ""
 "strategically\n"
 "important points like constricted points or mountains."
 msgstr ""
+"Förbättra din fästning till ett mäktigt citadell. I citadellet kan 12 "
+"soldater\n"
+"husera, och det är den största militärbyggnad barbarerna kan bygga. Det\n"
+"kostar också en hel del, och tar lång tid att bygga. Det lämpar sig bäst "
+"för\n"
+"att vakta strategiskt viktiga punkter, som flaskhalsar eller berg."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "Förbättrar byggnader"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
 msgid ""
@@ -348,19 +378,21 @@ msgid ""
 "for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
+"Undvik är den chansen soldaterna har att undvika en attack. Den är 25%\n"
+"för en barbar med undvik nivå 0 och ökar om 15% för varje nivå."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
-msgstr ""
+msgstr "Undvik:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
-msgstr ""
+msgstr "Allt kan byggas på den gröna hussymbolen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:262
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr ""
+msgstr "Allt förutom stora byggnader kan byggas på en gul hussymbol."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:294
 msgid ""
@@ -369,6 +401,11 @@ msgid ""
 "construction site. You can enter road building mode for any flag by\n"
 "left-clicking on a flag and selecting"
 msgstr ""
+"Utmärkt! Omedelbart efter att du placerade en byggnad är du i\n"
+"vägbyggnadsläge. Den nya vägen kommer börja vid flaggan framför\n"
+"ditt nyligen placerade byggnadsområde. Du kan gå in i\n"
+"vägbyggnadsläge för vilken flagga som helst genom att vänster-\n"
+"klicka på en flagga och sedan välja"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:429
 msgid ""
@@ -392,6 +429,10 @@ msgid ""
 "right-click-and-hold anywhere on the map, then drag the mouse and instead\n"
 "of the cursor, the view will be moved. Try it."
 msgstr ""
+"Utmärkt. Det finns ett snabbare sätt att flytta, genom att använda musen "
+"istället:\n"
+"Bara högerklicka och håll ned någonstans på kartan, sedan dra musen och\n"
+"istället för pekaren, flyttas vyn. Prova nu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
 msgid ""

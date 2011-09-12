@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-09-04 19:59+0000\n"
-"PO-Revision-Date: 2010-06-06 22:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-09-11 09:02+0000\n"
+"Last-Translator: MaSo <mzettik@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:40+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-12 04:40+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
@@ -93,14 +93,14 @@ msgstr "Stav"
 
 #: ../../scripting/win_conditions/02_collectors.lua:90
 msgid "Status for Player %i<br>"
-msgstr ""
+msgstr "Stav hráče %i<br>"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:129
 #: ../../scripting/win_conditions/03_territorial_lord.lua:132
 #: ../../scripting/win_conditions/03_territorial_lord.lua:154
 #: ../../scripting/win_conditions/03_territorial_lord.lua:183
 msgid "Team %i"
-msgstr ""
+msgstr "Tým %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:11
 msgid "Territorial Lord"
@@ -120,7 +120,7 @@ msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:141
 msgid "The winner is %s "
-msgstr ""
+msgstr "Vítěz je %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:11
 msgid "This is an endless game without rules."
@@ -132,7 +132,7 @@ msgstr ""
 
 #: ../../scripting/win_conditions/02_collectors.lua:103
 msgid "Total: %i points"
-msgstr ""
+msgstr "Celkem: %i bodů"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:102
 msgid "Trees owned"
@@ -149,11 +149,11 @@ msgstr ""
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid "You are defeated!"
-msgstr ""
+msgstr "Jsi poražen!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:149
 msgid "You are the winner of this game!"
-msgstr ""
+msgstr "Jsi vítěz této hry!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
 #: ../../scripting/win_conditions/03_territorial_lord.lua:185
@@ -168,7 +168,7 @@ msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:145
 msgid "You have lost this game!"
-msgstr ""
+msgstr "Prohrál jsi tuto hru!"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:25
 #: ../../scripting/win_conditions/01_defeat_all.lua:25
@@ -195,7 +195,7 @@ msgstr "Prohráli jste!"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:149
 msgid "You own more than half of the maps area."
-msgstr ""
+msgstr "Vlastníš více než polovinu rozlohy mapy."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:147
 msgid "You still got %i minutes to prevent a victory."
