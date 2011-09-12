@@ -66,8 +66,8 @@ return=skipped
 
 [idle]
 pics=axefactory_i_??.png  # ???
-hotspot=42 55
+hotspot=41 66
 
 [working]
 pics=axefactory_i_??.png  # ???
-hotspot=42 55
+hotspot=41 66

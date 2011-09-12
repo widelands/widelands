@@ -20,7 +20,7 @@ worker=chop
 
 [idle]
 pics=lumberjacks_hut_i_??.png
-hotspot=40 39
+hotspot=40 38
 
 [build]
 pics=lumberjacks_hut_b_??.png

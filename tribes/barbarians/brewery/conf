@@ -29,7 +29,7 @@ produce=strongbeer
 
 [idle]
 pics=brewery_i_??.png  # ???
-hotspot=57 48
+hotspot=60 59
 [working]
 pics=brewery_i_??.png  # ???
-hotspot=57 48
+hotspot=60 59
