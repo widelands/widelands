@@ -64,10 +64,10 @@ train=soldier evade 1 2
 
 [idle]
 pics=battlearena_i_??.png  # ???
-hotspot=102 72
+hotspot=103 78
 playercolor=true
 fps=10
 
 [build]
 pics=battlearena_b_??.png
-hotspot=102 72
+hotspot=103 78

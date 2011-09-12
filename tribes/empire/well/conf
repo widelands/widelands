@@ -23,8 +23,8 @@ produce=water
 
 [idle]
 pics=well_i_??.png  # ???
-hotspot=53 59
+hotspot=43 58
 
 [working]
 pics=well_i_??.png  # ???
-hotspot=53 59
+hotspot=43 58
