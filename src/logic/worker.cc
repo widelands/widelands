@@ -2786,7 +2786,7 @@ void Worker::draw_inner
 
 	if (WareInstance const * const carried_item = get_carried_item(game))
 		dst.drawanim
-			(drawpos - Point(0, 15),
+			(drawpos - descr().get_ware_hotspot(),
 			 carried_item->descr().get_animation("idle"),
 			 0,
 			 get_owner());
