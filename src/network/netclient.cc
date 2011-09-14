@@ -424,6 +424,20 @@ void NetClient::setPlayerTribe(uint8_t number, const std::string & tribe)
 	s.send(d->sock);
 }
 
+void NetClient::setPlayerRandomTribe(uint8_t const number, bool const random_tribe) {
+        if ((number != d->settings.playernum) && !m_dedicated_access)
+                return;
+        
+        // ToDO: Make it work !!!
+        if(random_tribe) {
+            SendPacket s;
+            s.Unsigned8(NETCMD_SETTING_CHANGETRIBE);
+            s.Unsigned8(number);
+            s.String("Random");
+            s.send(d->sock);
+        }
+}
+
 void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 {
 	if ((number != d->settings.playernum) && !m_dedicated_access)

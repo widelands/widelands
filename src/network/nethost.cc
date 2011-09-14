@@ -209,6 +209,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			)
 			h->setPlayerTribe(number, tribe);
 	}
+        virtual void setPlayerRandomTribe(uint8_t const number, bool const random_tribe) {
+                if (number >= settings().players.size())
+			return;
+                
+                // ToDo: Make it work !!!
+                //h->setPlayerRandomTribe(number, random_tribe);
+        }
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	{
 		if (number >= h->settings().players.size())
