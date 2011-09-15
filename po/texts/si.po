@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-09-04 19:59+0000\n"
+"POT-Creation-Date: 2011-09-14 14:49+0000\n"
 "PO-Revision-Date: 2010-06-06 22:34+0000\n"
 "Last-Translator: Samith Sandanayake <sam.the.devel@gmail.com>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-12 04:33+0000\n"
-"X-Generator: Launchpad (build 13900)\n"
+"X-Launchpad-Export-Date: 2011-09-15 04:36+0000\n"
+"X-Generator: Launchpad (build 13921)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -23,10 +23,6 @@ msgstr ""
 
 #: ../../txts/README:67
 msgid ", / .       Go to previous / next location"
-msgstr ""
-
-#: ../../txts/tips/general_game.tip:38
-msgid ",' (comma) and '."
 msgstr ""
 
 #: ../../txts/README:123
@@ -291,11 +287,11 @@ msgid ""
 "can be found at www.widelands.org."
 msgstr ""
 
-#: ../../txts/developers:152
+#: ../../txts/developers:153
 msgid "Atlantean"
 msgstr ""
 
-#: ../../txts/developers:142
+#: ../../txts/developers:143
 msgid "Barbarian"
 msgstr ""
 
@@ -320,7 +316,7 @@ msgstr ""
 msgid "CTRL+S   Save Map"
 msgstr ""
 
-#: ../../txts/developers:139
+#: ../../txts/developers:140
 msgid "Campaign Story"
 msgstr ""
 
@@ -352,7 +348,7 @@ msgstr ""
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr ""
 
-#: ../../txts/developers:167
+#: ../../txts/developers:168
 msgid "Czech"
 msgstr ""
 
@@ -360,7 +356,7 @@ msgstr ""
 msgid "DELETE      Archive the current message"
 msgstr ""
 
-#: ../../txts/developers:174
+#: ../../txts/developers:175
 msgid "Dansk"
 msgstr ""
 
@@ -368,11 +364,11 @@ msgstr ""
 msgid "Development"
 msgstr ""
 
-#: ../../txts/developers:309
+#: ../../txts/developers:310
 msgid "Documentation, Help and Wiki"
 msgstr ""
 
-#: ../../txts/developers:180
+#: ../../txts/developers:181
 msgid "Dutch"
 msgstr ""
 
@@ -384,7 +380,7 @@ msgstr ""
 msgid "Elders"
 msgstr ""
 
-#: ../../txts/developers:148
+#: ../../txts/developers:149
 msgid "Empire"
 msgstr ""
 
@@ -408,15 +404,15 @@ msgstr ""
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../txts/developers:187
+#: ../../txts/developers:188
 msgid "Finnish"
 msgstr ""
 
-#: ../../txts/developers:324
+#: ../../txts/developers:325
 msgid "Former elders"
 msgstr ""
 
-#: ../../txts/developers:193
+#: ../../txts/developers:194
 msgid "French"
 msgstr ""
 
@@ -434,7 +430,7 @@ msgid ""
 "and modification"
 msgstr ""
 
-#: ../../txts/developers:200
+#: ../../txts/developers:201
 msgid "Galician"
 msgstr ""
 
@@ -442,16 +438,16 @@ msgstr ""
 msgid "General game control"
 msgstr ""
 
-#: ../../txts/developers:205
+#: ../../txts/developers:206
 msgid "German"
 msgstr ""
 
-#: ../../txts/developers:74
+#: ../../txts/developers:75
 msgid "Graphicians"
 msgstr ""
 
 #: ../../txts/developers:18
-#: ../../txts/developers:335
+#: ../../txts/developers:336
 msgid "Graphics"
 msgstr ""
 
@@ -459,7 +455,7 @@ msgstr ""
 msgid "H        Toggles main menu"
 msgstr ""
 
-#: ../../txts/developers:217
+#: ../../txts/developers:218
 msgid "Hebrew"
 msgstr ""
 
@@ -479,11 +475,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr ""
 
 #: ../../txts/developers:23
-#: ../../txts/developers:328
+#: ../../txts/developers:329
 msgid "Homepage"
 msgstr ""
 
-#: ../../txts/developers:300
+#: ../../txts/developers:301
 msgid "Homepage Coders"
 msgstr ""
 
@@ -491,7 +487,7 @@ msgstr ""
 msgid "How to Apply These Terms to Your New Programs"
 msgstr ""
 
-#: ../../txts/developers:222
+#: ../../txts/developers:223
 msgid "Hungarian"
 msgstr ""
 
@@ -568,7 +564,7 @@ msgid ""
 "licensee cannot impose that choice."
 msgstr ""
 
-#: ../../txts/developers:227
+#: ../../txts/developers:228
 msgid "Italian"
 msgstr ""
 
@@ -597,7 +593,7 @@ msgid ""
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
 
-#: ../../txts/developers:266
+#: ../../txts/developers:267
 msgid "Linux Distributions"
 msgstr ""
 
@@ -609,7 +605,14 @@ msgstr ""
 msgid "M        Toggles minimap"
 msgstr ""
 
-#: ../../txts/developers:125
+#: ../../txts/tips/general_game.tip:34
+msgid ""
+"Manage your messages more efficiently: press 'N' for News to access the "
+"messages window, then use 'G' for Go To and the Delete key to archive "
+"messages."
+msgstr ""
+
+#: ../../txts/developers:126
 msgid "Maps and Missions"
 msgstr ""
 
@@ -617,7 +620,7 @@ msgstr ""
 msgid "Miners will only work if supplied with food."
 msgstr ""
 
-#: ../../txts/developers:104
+#: ../../txts/developers:105
 msgid "Musicians"
 msgstr ""
 
@@ -625,11 +628,7 @@ msgstr ""
 msgid "N               Toggle messages ('news')"
 msgstr ""
 
-#: ../../txts/tips/general_game.tip:34
-msgid "N' for News to access the messages window, then use 'G"
-msgstr ""
-
-#: ../../txts/developers:162
+#: ../../txts/developers:163
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -639,7 +638,7 @@ msgstr ""
 msgid "No warranty"
 msgstr "වගකීම් රහිතයි"
 
-#: ../../txts/developers:288
+#: ../../txts/developers:289
 msgid "Non Unix Distributions"
 msgstr ""
 
@@ -669,11 +668,11 @@ msgstr ""
 msgid "Online Help"
 msgstr ""
 
-#: ../../txts/developers:353
+#: ../../txts/developers:354
 msgid "Other"
 msgstr ""
 
-#: ../../txts/developers:277
+#: ../../txts/developers:278
 msgid "Other Unix Distributions"
 msgstr ""
 
@@ -699,7 +698,7 @@ msgstr ""
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr ""
 
-#: ../../txts/developers:262
+#: ../../txts/developers:263
 msgid "Packagers"
 msgstr ""
 
@@ -711,7 +710,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/developers:232
+#: ../../txts/developers:233
 msgid "Polish"
 msgstr ""
 
@@ -721,7 +720,7 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them"
+"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
 msgstr ""
 
 #: ../../txts/README:1
@@ -753,7 +752,7 @@ msgstr ""
 msgid "Reporting Bugs"
 msgstr ""
 
-#: ../../txts/developers:240
+#: ../../txts/developers:241
 msgid "Russian"
 msgstr ""
 
@@ -778,13 +777,13 @@ msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
 
-#: ../../txts/developers:163
+#: ../../txts/developers:164
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 
-#: ../../txts/developers:245
+#: ../../txts/developers:246
 msgid "Slovak"
 msgstr ""
 
@@ -797,15 +796,15 @@ msgid ""
 msgstr ""
 
 #: ../../txts/developers:28
-#: ../../txts/developers:341
+#: ../../txts/developers:342
 msgid "Sound"
 msgstr ""
 
-#: ../../txts/developers:115
+#: ../../txts/developers:116
 msgid "Sound Effects"
 msgstr ""
 
-#: ../../txts/developers:250
+#: ../../txts/developers:251
 msgid "Spanish"
 msgstr ""
 
@@ -819,7 +818,7 @@ msgstr ""
 msgid "Status"
 msgstr "තත්වය"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:256
 msgid "Swedish"
 msgstr ""
 
@@ -974,11 +973,11 @@ msgid ""
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
 
-#: ../../txts/developers:346
+#: ../../txts/developers:347
 msgid "Translation"
 msgstr ""
 
-#: ../../txts/developers:159
+#: ../../txts/developers:160
 msgid "Translators"
 msgstr ""
 
@@ -991,6 +990,12 @@ msgstr ""
 msgid ""
 "Use priority buttons in building window to adjust delivery of a specific "
 "ware."
+msgstr ""
+
+#: ../../txts/tips/general_game.tip:38
+msgid ""
+"Use the ',' (comma) and '.' (period) keys to go back and forth between "
+"recently visited places in the world."
 msgstr ""
 
 #: ../../txts/tips/general_game.tip:30
