@@ -224,10 +224,13 @@ struct Tribe_Descr {
 	WaresOrderCoords const & wares_order_coords() const {
 		return m_wares_order_coords;
 	}
+
 	WaresOrder const & workers_order() const {return m_workers_order;}
 	WaresOrderCoords const & workers_order_coords() const {
 		return m_workers_order_coords;
 	}
+
+	void resize_ware_orders(size_t maxLength);
 
 	const std::vector<std::string> & compatibility_immovable(const std::string & name) const;
 

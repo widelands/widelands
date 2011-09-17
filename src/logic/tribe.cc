@@ -591,5 +591,37 @@ const std::vector<std::string> & Tribe_Descr::compatibility_immovable(const std:
 	return empty;
 }
 
+void Tribe_Descr::resize_ware_orders(size_t maxLength) {
+	bool need_resize = false;
+
+	//check if we actually need to resize
+	for (WaresOrder::iterator it = m_wares_order.begin(); it != m_wares_order.end(); ++it) {
+		if (it->size() > maxLength) {
+			need_resize = true;
+		  }
+	 }
+
+	//resize
+	if (need_resize) {
+
+		//build new smaller wares_order
+		WaresOrder new_wares_order;
+		for (WaresOrder::iterator it = m_wares_order.begin(); it != m_wares_order.end(); ++it) {
+			new_wares_order.push_back(std::vector<Widelands::Ware_Index>());
+			for (std::vector<Widelands::Ware_Index>::iterator it2 = it->begin(); it2 != it->end(); ++it2) {
+				if (new_wares_order.rbegin()->size() >= maxLength) {
+					new_wares_order.push_back(std::vector<Widelands::Ware_Index>());
+				}
+				new_wares_order.rbegin()->push_back(*it2);
+				m_wares_order_coords[*it2].first = new_wares_order.size() - 1;
+				m_wares_order_coords[*it2].second = new_wares_order.rbegin()->size() - 1;
+			}
+		}
+
+		//remove old array
+		m_wares_order.clear();
+		m_wares_order = new_wares_order;
+	}
+}
 
 }
