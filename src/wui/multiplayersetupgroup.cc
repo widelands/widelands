@@ -302,20 +302,30 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			type->set_tooltip(title.c_str());
 			type->set_pic(g_gr->get_picture(PicMod_UI, pic));
-			std::string tribepath("tribes/" + player.tribe);
-			if (!m_tribenames[player.tribe].size()) {
-				// get tribes name and picture
-				Profile prof
-					((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
-				Section & global = prof.get_safe_section("tribe");
-				m_tribenames[player.tribe] = global.get_safe_string("name");
-				m_tribepics[player.tribe] =
-					g_gr->get_picture
-						(PicMod_UI,
-						 (tribepath + "/") + global.get_safe_string("icon"));
+			if(player.random_tribe) {
+				std::string random = _("Random");
+				if(!m_tribenames["Random"].size()) {
+					m_tribepics[random] =
+						g_gr->get_picture(PicMod_UI, "pics/random.png");
+				}
+				tribe->set_tooltip(random.c_str());
+				tribe->set_pic(m_tribepics[random]);
+			} else {
+				std::string tribepath("tribes/" + player.tribe);
+				if (!m_tribenames[player.tribe].size()) {
+					// get tribes name and picture
+					Profile prof
+						((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
+					Section & global = prof.get_safe_section("tribe");
+					m_tribenames[player.tribe] = global.get_safe_string("name");
+					m_tribepics[player.tribe] =
+						g_gr->get_picture
+							(PicMod_UI,
+							 (tribepath + "/") + global.get_safe_string("icon"));
+				}
+				tribe->set_tooltip(m_tribenames[player.tribe].c_str());
+				tribe->set_pic(m_tribepics[player.tribe]);
 			}
-			tribe->set_tooltip(m_tribenames[player.tribe].c_str());
-			tribe->set_pic(m_tribepics[player.tribe]);
 			tribe->set_flat(false);
 
 			if (player.team) {

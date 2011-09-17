@@ -193,7 +193,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerState(number, newstate, true);
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe)
+	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -207,15 +207,9 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			 ||
 			 settings().players.at(number).state == PlayerSettings::stateOpen // For savegame loading
 			)
-			h->setPlayerTribe(number, tribe);
+			h->setPlayerTribe(number, tribe, random_tribe);
 	}
-        virtual void setPlayerRandomTribe(uint8_t const number, bool const random_tribe) {
-                if (number >= settings().players.size())
-			return;
-                
-                // ToDo: Make it work !!!
-                //h->setPlayerRandomTribe(number, random_tribe);
-        }
+
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	{
 		if (number >= h->settings().players.size())
@@ -1363,6 +1357,7 @@ void NetHost::setMap
 		player.state                = PlayerSettings::stateOpen;
 		player.name                 = "";
 		player.tribe                = d->settings.tribes.at(0).name;
+		player.random_tribe         = false;
 		player.initialization_index = 0;
 		player.team                 = 0;
 		player.ai                   = "";
@@ -1476,19 +1471,28 @@ void NetHost::setPlayerState
 }
 
 
-void NetHost::setPlayerTribe(uint8_t const number, std::string const & tribe)
+void NetHost::setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
 {
 	if (number >= d->settings.players.size())
 		return;
 
 	PlayerSettings & player = d->settings.players.at(number);
 
-	if (player.tribe == tribe)
+	if (player.tribe == tribe && player.random_tribe == random_tribe)
 		return;
+
+	std::string actual_tribe = tribe;
+	player.random_tribe = random_tribe;
+
+	if(random_tribe) {
+		uint8_t num_tribes = d->settings.tribes.size();
+		uint8_t rand = (std::rand() % num_tribes);
+		actual_tribe = d->settings.tribes.at(rand).name;
+	}
 
 	container_iterate_const(std::vector<TribeBasicInfo>, d->settings.tribes, i)
 		if (i.current->name == player.tribe) {
-			player.tribe = tribe;
+			player.tribe = actual_tribe;
 			if (i.current->initializations.size() <= player.initialization_index)
 				player.initialization_index = 0;
 
@@ -1776,6 +1780,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.Unsigned8(static_cast<uint8_t>(player.state));
 	packet.String(player.name);
 	packet.String(player.tribe);
+	packet.Unsigned8(player.random_tribe);
 	packet.Unsigned8(player.initialization_index);
 	packet.String(player.ai);
 	packet.Unsigned8(player.team);
@@ -2437,7 +2442,9 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 				// Only valid if the server is dedicated and the client was granted access
 				if (!client.dedicated_access)
 					throw DisconnectException(_("Client has no access to other player's settings."));
-			setPlayerTribe(num, r.String());
+			std::string tribe = r.String();
+			bool random_tribe = r.Unsigned8() == 1;
+			setPlayerTribe(num, tribe, random_tribe);
 		}
 		break;
 

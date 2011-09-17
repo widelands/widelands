@@ -78,8 +78,7 @@ struct NetClient :
 	virtual void setPlayerState    (uint8_t number, PlayerSettings::State state);
 	virtual void setPlayerAI       (uint8_t number, std::string const & ai);
 	virtual void nextPlayerState   (uint8_t number);
-	virtual void setPlayerTribe    (uint8_t number, std::string const & tribe);
-        virtual void setPlayerRandomTribe (uint8_t number, bool const random_tribe);
+	virtual void setPlayerTribe    (uint8_t number, std::string const & tribe, bool const random_tribe);
 	virtual void setPlayerInit     (uint8_t number, uint8_t index);
 	virtual void setPlayerName     (uint8_t number, std::string const & name);
 	virtual void setPlayer         (uint8_t number, PlayerSettings ps);

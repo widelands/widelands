@@ -412,7 +412,7 @@ void NetClient::nextPlayerState(uint8_t number)
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerTribe(uint8_t number, const std::string & tribe)
+void NetClient::setPlayerTribe(uint8_t number, const std::string & tribe, bool const random_tribe)
 {
 	if ((number != d->settings.playernum) && !m_dedicated_access)
 		return;
@@ -421,21 +421,8 @@ void NetClient::setPlayerTribe(uint8_t number, const std::string & tribe)
 	s.Unsigned8(NETCMD_SETTING_CHANGETRIBE);
 	s.Unsigned8(number);
 	s.String(tribe);
+	s.Unsigned8(random_tribe ? 1 : 0);
 	s.send(d->sock);
-}
-
-void NetClient::setPlayerRandomTribe(uint8_t const number, bool const random_tribe) {
-        if ((number != d->settings.playernum) && !m_dedicated_access)
-                return;
-        
-        // ToDO: Make it work !!!
-        if(random_tribe) {
-            SendPacket s;
-            s.Unsigned8(NETCMD_SETTING_CHANGETRIBE);
-            s.Unsigned8(number);
-            s.String("Random");
-            s.send(d->sock);
-        }
 }
 
 void NetClient::setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
@@ -576,6 +563,7 @@ void NetClient::recvOnePlayer
 	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
 	player.name = packet.String();
 	player.tribe = packet.String();
+	player.random_tribe = packet.Unsigned8() == 1;
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
 	player.team = packet.Unsigned8();

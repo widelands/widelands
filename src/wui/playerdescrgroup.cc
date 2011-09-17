@@ -260,27 +260,27 @@ void PlayerDescriptionGroup::toggle_playertribe()
 	if (d->plnum >= settings.players.size())
 		return;
 
-        PlayerSettings const & player = settings.players.at(d->plnum);
+	PlayerSettings const & player = settings.players.at(d->plnum);
 	std::string const & currenttribe = player.tribe;
-        std::string nexttribe = settings.tribes.at(0).name;
-        uint32_t num_tribes = settings.tribes.size();
-        
-        if (player.random_tribe) {
-                nexttribe = settings.tribes.at(0).name;
-                d->settings->setPlayerRandomTribe(d->plnum, false);
-        } else if (player.tribe == settings.tribes.at(num_tribes - 1).name) {
-                nexttribe = "Random";
-                d->settings->setPlayerRandomTribe(d->plnum, true);
-        } else {
-                for (uint32_t i = 0; i < num_tribes - 1; ++i) {
-                        if (settings.tribes[i].name == currenttribe) {
-                                nexttribe = settings.tribes.at(i + 1).name;
-                                break;
-                        }
-                }
-        }
+	std::string nexttribe = settings.tribes.at(0).name;
+	bool random_tribe = false;
+	uint32_t num_tribes = settings.tribes.size();
+
+	if (player.random_tribe) {
+		nexttribe = settings.tribes.at(0).name;
+	} else if (player.tribe == settings.tribes.at(num_tribes - 1).name) {
+		nexttribe = "Random";
+		random_tribe = true;
+	} else {
+		for (uint32_t i = 0; i < num_tribes - 1; ++i) {
+			if (settings.tribes[i].name == currenttribe) {
+				nexttribe = settings.tribes.at(i + 1).name;
+				break;
+			}
+		}
+	}
 	
-        d->settings->setPlayerTribe(d->plnum, nexttribe);
+	d->settings->setPlayerTribe(d->plnum, nexttribe, random_tribe);
 }
 
 /**
