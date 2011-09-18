@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-09-14 16:49+0200\n"
-"PO-Revision-Date: 2011-08-21 14:24+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-09-17 16:52+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-09-15 04:40+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"X-Launchpad-Export-Date: 2011-09-18 04:31+0000\n"
+"X-Generator: Launchpad (build 13955)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2419,6 +2419,8 @@ msgid ""
 "/me checked the recieved file. Although md5 check summing succeded, I can "
 "not handle the file."
 msgstr ""
+"/me sprawdził otrzymany plik. Choć suma md5 się zgadza, nie jestem w stanie "
+"przetworzyć pliku."
 
 #: ../../src/network/netclient.cc:922
 msgid "Unexpectedly received LAUNCH command from server."
@@ -2472,16 +2474,16 @@ msgstr "Błędne użycie, powinno być: /warn <imię> <powód>"
 
 #: ../../src/network/nethost.cc:383
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "Dlaczego miałbyś ostrzegać samego siebie?"
 
 #: ../../src/network/nethost.cc:385
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Dlaczego miałbyś ostrzegać server dedykowany?"
 
 #: ../../src/network/nethost.cc:389 ../../src/network/nethost.cc:415
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Nie mogę znaleźć klienta %s."
 
 #: ../../src/network/nethost.cc:400
 msgid "Wrong use, should be: /kick <name> <reason>"
