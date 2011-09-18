@@ -295,7 +295,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					title = _("AI: ");
 					if(player.random_ai) {
 						title += _("random");
-						pic += "ai_random.png";
+						pic += "ai_Random.png";
 					} else {
 						title += _(player.ai);
 						pic += "ai_" + player.ai + ".png";
