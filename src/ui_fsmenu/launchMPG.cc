@@ -485,7 +485,7 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 	ml->preload_map(true);
 	Widelands::Player_Number const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		m_settings->setPlayerTribe    (i, map.get_scenario_player_tribe    (i + 1), false);
+		m_settings->setPlayerTribe    (i, map.get_scenario_player_tribe    (i + 1));
 		m_settings->setPlayerCloseable(i, map.get_scenario_player_closeable(i + 1));
 		std::string ai(map.get_scenario_player_ai(i + 1));
 		if (ai.size() > 0) {
@@ -550,7 +550,7 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		}
 
 		// Set player's tribe
-		m_settings->setPlayerTribe(i - 1, player_save_tribe[i - 1], false);
+		m_settings->setPlayerTribe(i - 1, player_save_tribe[i - 1]);
 
 		// get translated tribename
 		strbuf = "tribes/" + player_save_tribe[i - 1];

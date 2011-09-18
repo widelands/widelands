@@ -1876,9 +1876,11 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = state;
 	}
 
-	virtual void setPlayerAI(uint8_t const number, std::string const & ai) {
-		if (number < s.players.size())
+	virtual void setPlayerAI(uint8_t const number, std::string const & ai, bool const random_ai) {
+		if (number < s.players.size()) {
 			s.players[number].ai = ai;
+			s.players[number].random_ai = random_ai;
+		}
 	}
 
 	virtual void nextPlayerState(uint8_t const number) {
@@ -1900,8 +1902,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 				it = impls.begin();
 			} else if (it == impls.end()) {
 				s.players[number].random_ai = true;
-				uint8_t rand = (std::rand() % impls.size()); // Choose a random AI
-				it = impls.begin() + rand;
+				uint8_t random = (std::rand() % impls.size()); // Choose a random AI
+				it = impls.begin() + random;
 			}
 			s.players[number].ai = (*it)->name;
 		}
@@ -1920,8 +1922,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
                                 
 		if(random_tribe) {
 			uint8_t num_tribes = s.tribes.size();
-			uint8_t rand = (std::rand() % num_tribes);
-			actual_tribe = s.tribes.at(rand).name;
+			uint8_t random = (std::rand() % num_tribes);
+			actual_tribe = s.tribes.at(random).name;
 		}
 		
 		container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)

@@ -396,7 +396,7 @@ void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
 	// client is not allowed to do this
 }
 
-void NetClient::setPlayerAI(uint8_t, std::string const &)
+void NetClient::setPlayerAI(uint8_t, std::string const &, bool const random_ai)
 {
 	// client is not allowed to do this
 }
@@ -566,6 +566,7 @@ void NetClient::recvOnePlayer
 	player.random_tribe = packet.Unsigned8() == 1;
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
+	player.random_ai = packet.Unsigned8() == 1;
 	player.team = packet.Unsigned8();
 	player.shared_in = packet.Unsigned8();
 }
