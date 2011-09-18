@@ -170,7 +170,11 @@ void PlayerDescriptionGroup::refresh()
 					title = _("Computer");
 				else {
 					title = _("AI: ");
-					title += _(player.ai);
+					if(player.random_ai) {
+						title += _("random");
+					} else {
+						title += _(player.ai);
+					}
 				}
 			} else { // PlayerSettings::stateHuman
 				title = _("Human");
@@ -184,11 +188,12 @@ void PlayerDescriptionGroup::refresh()
 				Section & global = prof.get_safe_section("tribe");
 				m_tribenames[player.tribe] = global.get_safe_string("name");
 			}
-                        if (player.random_tribe) {
-                            d->btnPlayerTribe->set_title(_("Random"));
-                        } else {
-                            d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
-                        }			
+			if (player.random_tribe) {
+				d->btnPlayerTribe->set_title(_("random"));
+			} else {
+				d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
+			}
+
 			{
 				i18n::Textdomain td(tribepath); // for translated initialisation
 				container_iterate_const

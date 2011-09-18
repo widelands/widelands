@@ -42,6 +42,7 @@ struct PlayerSettings {
 	std::string tribe;
 	bool random_tribe;
 	std::string ai; /**< Preferred AI provider for this player */
+	bool random_ai;
 	Widelands::TeamNumber team;
 	bool closeable; // only used in multiplayer scenario maps
 	uint8_t shared_in; // the number of the player that uses this player's starting position

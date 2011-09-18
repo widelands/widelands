@@ -1361,6 +1361,7 @@ void NetHost::setMap
 		player.initialization_index = 0;
 		player.team                 = 0;
 		player.ai                   = "";
+		player.random_ai            = false;
 		player.closeable            = false;
 		player.shared_in            = 0;
 

@@ -1855,8 +1855,10 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
 					Computer_Player::getImplementations();
-				if (impls.size() > 1)
+				if (impls.size() > 1) {
 					player.ai = impls.at(0)->name;
+					player.random_ai = false;
+				}
 			}
 			++oldplayers;
 		}
@@ -1878,6 +1880,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		if (number < s.players.size())
 			s.players[number].ai = ai;
 	}
+
 	virtual void nextPlayerState(uint8_t const number) {
 		if (number == s.playernum || number >= s.players.size())
 			return;
@@ -1892,8 +1895,14 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 				if ((*(it - 1))->name == s.players[number].ai)
 					break;
 			} while (it != impls.end());
-			if (it == impls.end())
+			if(s.players[number].random_ai) {
+				s.players[number].random_ai = false;
 				it = impls.begin();
+			} else if (it == impls.end()) {
+				s.players[number].random_ai = true;
+				uint8_t rand = (std::rand() % impls.size()); // Choose a random AI
+				it = impls.begin() + rand;
+			}
 			s.players[number].ai = (*it)->name;
 		}
 
