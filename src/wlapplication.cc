@@ -1897,7 +1897,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 				if ((*(it - 1))->name == s.players[number].ai)
 					break;
 			} while (it != impls.end());
-			if(s.players[number].random_ai) {
+			if (s.players[number].random_ai) {
 				s.players[number].random_ai = false;
 				it = impls.begin();
 			} else if (it == impls.end()) {
@@ -1920,7 +1920,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		PlayerSettings & player = s.players[number];
 		player.random_tribe = random_tribe;
                                 
-		if(random_tribe) {
+		if (random_tribe) {
 			uint8_t num_tribes = s.tribes.size();
 			uint8_t random = (std::rand() % num_tribes);
 			actual_tribe = s.tribes.at(random).name;

@@ -170,7 +170,7 @@ void PlayerDescriptionGroup::refresh()
 					title = _("Computer");
 				else {
 					title = _("AI: ");
-					if(player.random_ai) {
+					if (player.random_ai) {
 						title += _("random");
 					} else {
 						title += _(player.ai);

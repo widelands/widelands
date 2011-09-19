@@ -293,7 +293,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					pic += "novalue.png";
 				} else {
 					title = _("AI: ");
-					if(player.random_ai) {
+					if (player.random_ai) {
 						title += _("random");
 						pic += "ai_Random.png";
 					} else {
@@ -307,9 +307,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			type->set_tooltip(title.c_str());
 			type->set_pic(g_gr->get_picture(PicMod_UI, pic));
-			if(player.random_tribe) {
+			if (player.random_tribe) {
 				std::string random = _("random");
-				if(!m_tribenames["random"].size()) {
+				if (!m_tribenames["random"].size()) {
 					m_tribepics[random] =
 						g_gr->get_picture(PicMod_UI, "pics/random.png");
 				}

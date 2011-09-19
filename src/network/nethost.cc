@@ -1496,7 +1496,7 @@ void NetHost::setPlayerTribe(uint8_t const number, std::string const & tribe, bo
 	std::string actual_tribe = tribe;
 	player.random_tribe = random_tribe;
 
-	if(random_tribe) {
+	if (random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
 		uint8_t random = (std::rand() % num_tribes);
 		actual_tribe = d->settings.tribes.at(random).name;
