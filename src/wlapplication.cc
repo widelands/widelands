@@ -1845,6 +1845,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			player.state = (oldplayers == 0) ? PlayerSettings::stateHuman :
 				PlayerSettings::stateComputer;
 			player.tribe                = s.tribes.at(0).name;
+			player.random_tribe         = false;
 			player.initialization_index = 0;
 			char buf[200];
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
@@ -1854,8 +1855,10 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
 					Computer_Player::getImplementations();
-				if (impls.size() > 1)
+				if (impls.size() > 1) {
 					player.ai = impls.at(0)->name;
+					player.random_ai = false;
+				}
 			}
 			++oldplayers;
 		}
@@ -1873,10 +1876,13 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = state;
 	}
 
-	virtual void setPlayerAI(uint8_t const number, std::string const & ai) {
-		if (number < s.players.size())
+	virtual void setPlayerAI(uint8_t const number, std::string const & ai, bool const random_ai) {
+		if (number < s.players.size()) {
 			s.players[number].ai = ai;
+			s.players[number].random_ai = random_ai;
+		}
 	}
+
 	virtual void nextPlayerState(uint8_t const number) {
 		if (number == s.playernum || number >= s.players.size())
 			return;
@@ -1891,23 +1897,38 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 				if ((*(it - 1))->name == s.players[number].ai)
 					break;
 			} while (it != impls.end());
-			if (it == impls.end())
+			if (s.players[number].random_ai) {
+				s.players[number].random_ai = false;
 				it = impls.begin();
+			} else if (it == impls.end()) {
+				s.players[number].random_ai = true;
+				uint8_t random = (std::rand() % impls.size()); // Choose a random AI
+				it = impls.begin() + random;
+			}
 			s.players[number].ai = (*it)->name;
 		}
 
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe)
+	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
 	{
 		if (number >= s.players.size())
 			return;
 
+		std::string actual_tribe = tribe;
 		PlayerSettings & player = s.players[number];
+		player.random_tribe = random_tribe;
+
+		if (random_tribe) {
+			uint8_t num_tribes = s.tribes.size();
+			uint8_t random = (std::rand() % num_tribes);
+			actual_tribe = s.tribes.at(random).name;
+		}
+
 		container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)
 			if (i.current->name == player.tribe) {
-				s.players[number].tribe = tribe;
+				s.players[number].tribe = actual_tribe;
 				if
 					(i.current->initializations.size()
 					 <=
@@ -1915,6 +1936,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 					player.initialization_index = 0;
 			}
 	}
+
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
 		if (number >= s.players.size())
 			return;

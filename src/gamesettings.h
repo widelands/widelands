@@ -40,7 +40,9 @@ struct PlayerSettings {
 	uint8_t     initialization_index;
 	std::string name;
 	std::string tribe;
+	bool random_tribe;
 	std::string ai; /**< Preferred AI provider for this player */
+	bool random_ai;
 	Widelands::TeamNumber team;
 	bool closeable; // only used in multiplayer scenario maps
 	uint8_t shared_in; // the number of the player that uses this player's starting position
@@ -136,9 +138,9 @@ struct GameSettingsProvider {
 		 bool                savegame = false)
 		= 0;
 	virtual void setPlayerState    (uint8_t number, PlayerSettings::State) = 0;
-	virtual void setPlayerAI       (uint8_t number, std::string const &) = 0;
+	virtual void setPlayerAI       (uint8_t number, std::string const &, bool const random_ai = false) = 0;
 	virtual void nextPlayerState   (uint8_t number) = 0;
-	virtual void setPlayerTribe    (uint8_t number, std::string const &) = 0;
+	virtual void setPlayerTribe    (uint8_t number, std::string const &, bool const random_tribe = false) = 0;
 	virtual void setPlayerInit     (uint8_t number, uint8_t index) = 0;
 	virtual void setPlayerName     (uint8_t number, std::string const &) = 0;
 	virtual void setPlayer         (uint8_t number, PlayerSettings) = 0;

@@ -947,7 +947,7 @@ throw ()
 		fvision = 1;
 	if (fvision == 1)
 		rediscover_node(map, first_map_field, f);
-	fvision ++;
+	++fvision;
 	field.vision = fvision;
 }
 
