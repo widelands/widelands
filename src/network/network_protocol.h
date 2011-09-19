@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 19,
+	NETWORK_PROTOCOL_VERSION = 20,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -271,6 +271,7 @@ enum {
 	 * to a different tribe. Payload is
 	 * \li Unsigned8: player number
 	 * \li String:    name of tribe
+	 * \li bool:      random_tribe
 	 *
 	 * The client must not assume that the host will accept this request.
 	 * The host may or may not send a \ref NETCMD_SETTING_ALLPLAYERS or
