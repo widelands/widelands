@@ -167,5 +167,6 @@ consume=warhelmet fish,meat:2 pittabread
 train=soldier hp 2 3
 
 [idle]
-pics=trainingscamp_i_??.png  # ???
-hotspot=86 82
+pics=idle_??.png  # ???
+hotspot=112 77
+playercolor=true
