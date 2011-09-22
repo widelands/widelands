@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,6 +72,9 @@ public:
 	virtual std::string get_statistics_string();
 	uint32_t get_built_per64k() const;
 
+	std::string get_animation()       {return m_cur_anim;}
+	uint32_t    get_animation_frame() {return m_cur_frame;}
+
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	void set_building         (const Building_Descr &);
@@ -122,6 +125,8 @@ private:
 	uint32_t m_work_completed; // how many steps have we done so far?
 	uint32_t m_work_steps;     // how many steps (= items) until we're done?
 	bool m_builder_idle;       // used to determine whether the builder is idle
+	std::string m_cur_anim;    // asked for by player point of view for the gameview
+	uint32_t    m_cur_frame;   // asked for by player point of view for the gameview
 };
 
 }

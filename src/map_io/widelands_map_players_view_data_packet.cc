@@ -46,12 +46,10 @@ namespace Widelands {
 #define UNSEEN_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/unseen_times_%u"
 
 #define NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION     1
-#define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE \
-   DIRNAME_TEMPLATE "/node_immovable_kinds_%u"
+#define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/node_immovable_kinds_%u"
 
-#define NODE_IMMOVABLES_CURRENT_PACKET_VERSION          1
-#define NODE_IMMOVABLES_FILENAME_TEMPLATE \
-   DIRNAME_TEMPLATE "/node_immovables_%u"
+#define NODE_IMMOVABLES_CURRENT_PACKET_VERSION          2
+#define NODE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/node_immovables_%u"
 
 #define ROADS_CURRENT_PACKET_VERSION                    1
 #define ROADS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/roads_%u"
@@ -60,12 +58,10 @@ namespace Widelands {
 #define TERRAINS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/terrains_%u"
 
 #define TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION 1
-#define TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE \
-   DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
+#define TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
 
-#define TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION      1
-#define TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE \
-   DIRNAME_TEMPLATE "/triangle_immovables_%u"
+#define TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION      2
+#define TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovables_%u"
 
 #define OWNERS_CURRENT_PACKET_VERSION                   0
 #define OWNERS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/owners_%u"
@@ -102,22 +98,32 @@ namespace Widelands {
 //                /     \ /
 //              bl------br
 
-inline static const Map_Object_Descr * read_unseen_immovable
+struct Map_Object_Data {
+	Map_Object_Descr * map_object_descr;
+	std::string        building_animation;
+	uint32_t           cs_animation_frame;
+}
+
+inline static const Map_Object_Data * read_unseen_immovable
 	(Editor_Game_Base const & egbase,
 	 BitInBuffer<2>         & immovable_kinds_file,
-	 FileRead               & immovables_file)
+	 FileRead               & immovables_file,
+	 uint8_t                & version
+	)
 {
-	const Map_Object_Descr * map_object_descr;
+	const Map_Object_Data * m;
 	try {
 		switch (immovable_kinds_file.get()) {
 		case 0:  //  The player sees no immovable.
-			map_object_descr = 0;                                       break;
+			m->map_object_descr = 0;                                       break;
 		case 1: //  The player sees a tribe or world immovable.
-			map_object_descr = &immovables_file.Immovable_Type(egbase); break;
+			m->map_object_descr = &immovables_file.Immovable_Type(egbase); break;
 		case 2:  //  The player sees a flag.
-			map_object_descr = &g_flag_descr;                           break;
+			m->map_object_descr = &g_flag_descr;                           break;
 		case 3: //  The player sees a building.
-			map_object_descr = &immovables_file.Building_Type (egbase); break;
+			m->map_object_descr = &immovables_file.Building_Type (egbase);
+			m->
+			break;
 		}
 	} catch (_wexception const & e) {
 		throw game_data_error(_("unseen immovable: %s"), e.what());
@@ -135,7 +141,24 @@ inline static const Map_Object_Descr * read_unseen_immovable
          ("Map_Players_View_Data_Packet::Read: player %u:Could not open "     \
           "\"%s\" for reading. This file should exist when \"%s\" exists",    \
           plnum, filename, unseen_times_filename);                            \
-   }                                                                          \
+   }
+
+	// Try to find the file with newest fitting version number
+#define OPEN_INPUT_FILE_NEW_VERSION(filetype, file, filename, fileversion, filename_template, version) \
+	uint8_t fileversion = version;                                                                      \
+	filetype file;                                                                                      \
+	char (filename)[FILENAME_SIZE];                                                                     \
+	for (; fileversion > 0; --fileversion) {                                                            \
+		snprintf(filename, sizeof(filename), filename_template, plnum, version);                         \
+		try {(file).Open(fs, filename); break;}                                                          \
+		catch (File_error const &) {                                                                     \
+			if (fileversion == 1)                                                                         \
+				throw game_data_error                                                                      \
+					("Map_Players_View_Data_Packet::Read: player %u:Could not open "                        \
+					 "\"%s\" for reading. This file should exist when \"%s\" exists",                       \
+					 plnum, filename, unseen_times_filename);                                               \
+		}                                                                                                \
+	}                                                                                                   \
 
 #define CHECK_TRAILING_BYTES(file, filename)                                  \
    if (not (file).EndOfFile())                                                \
@@ -213,10 +236,7 @@ void Map_Players_View_Data_Packet::Read
 
 						//  map_object_descr
 						const Map_Object_Descr * map_object_descr;
-						if
-							(const BaseImmovable * base_immovable =
-							 f.field->get_immovable())
-						{
+						if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 							map_object_descr = &base_immovable->descr();
 							if (Road::IsRoadDescr(map_object_descr))
 								map_object_descr = 0;
@@ -227,8 +247,7 @@ void Map_Players_View_Data_Packet::Read
 									//  TODO possible to see it from a distance somehow.
 									map_object_descr = 0;
 						} else map_object_descr = 0;
-						f_player_field.map_object_descr[TCoords<>::None] =
-							map_object_descr;
+						f_player_field.map_object_descr[TCoords<>::None] = map_object_descr;
 					}
 
 					{ //  triangles
@@ -317,9 +336,9 @@ void Map_Players_View_Data_Packet::Read
 			 NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
 			 NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
 
-		OPEN_INPUT_FILE
+		OPEN_INPUT_FILE_NEW_VERSION
 			(FileRead,       node_immovables_file,
-			 node_immovables_filename,
+			 node_immovables_filename, node_immovables_file_version,
 			 NODE_IMMOVABLES_FILENAME_TEMPLATE,
 			 NODE_IMMOVABLES_CURRENT_PACKET_VERSION);
 
@@ -337,9 +356,9 @@ void Map_Players_View_Data_Packet::Read
 			 TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
 			 TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
 
-		OPEN_INPUT_FILE
+		OPEN_INPUT_FILE_NEW_VERSION
 			(FileRead,       triangle_immovables_file,
-			 triangle_immovables_filename,
+			 triangle_immovables_filename, triangle_immovables_file_version,
 			 TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE,
 			 TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION);
 
@@ -403,8 +422,7 @@ void Map_Players_View_Data_Packet::Read
 					//  The player has seen the node but does not see it now. Load
 					//  his information about the node from file.
 					try {
-						f_player_field.time_node_last_unseen =
-							unseen_times_file.Unsigned32();
+						f_player_field.time_node_last_unseen = unseen_times_file.Unsigned32();
 					} catch (const FileRead::File_Boundary_Exceeded) {
 						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
@@ -412,8 +430,7 @@ void Map_Players_View_Data_Packet::Read
 							 "while reading time_node_last_unseen",
 							 plnum,
 							 unseen_times_filename,
-							 static_cast<long unsigned int>
-							 	(unseen_times_file.GetPos() - 4),
+							 static_cast<long unsigned int>(unseen_times_file.GetPos() - 4),
 							 f.x, f.y);
 					}
 
@@ -441,7 +458,7 @@ void Map_Players_View_Data_Packet::Read
 
 					f_player_field.map_object_descr[TCoords<>::None] =
 						read_unseen_immovable
-							(egbase, node_immovable_kinds_file, node_immovables_file);
+							(egbase, node_immovable_kinds_file, node_immovables_file, node_immovables_file_version);
 					break;
 				}
 				default:
@@ -455,9 +472,7 @@ void Map_Players_View_Data_Packet::Read
 
 					//  map_object_descr
 					const Map_Object_Descr * map_object_descr;
-					if
-						(const BaseImmovable * base_immovable =
-						 f.field->get_immovable())
+					if (const BaseImmovable * base_immovable = f.field->get_immovable())
 					{
 						map_object_descr = &base_immovable->descr();
 						if (Road::IsRoadDescr(map_object_descr))
@@ -469,8 +484,7 @@ void Map_Players_View_Data_Packet::Read
 								//  TODO to see it from a distance somehow.
 								map_object_descr = 0;
 					} else map_object_descr = 0;
-					f_player_field.map_object_descr[TCoords<>::None] =
-						map_object_descr;
+					f_player_field.map_object_descr[TCoords<>::None] = map_object_descr;
 				}
 
 				//  triangles
@@ -493,8 +507,8 @@ void Map_Players_View_Data_Packet::Read
 					}
 					f_player_field.map_object_descr[TCoords<>::D] =
 						read_unseen_immovable
-							(egbase,
-							 triangle_immovable_kinds_file, triangle_immovables_file);
+							(egbase, triangle_immovable_kinds_file, triangle_immovables_file,
+							 triangle_immovables_file_version);
 				}
 				if  (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
@@ -515,8 +529,8 @@ void Map_Players_View_Data_Packet::Read
 					}
 					f_player_field.map_object_descr[TCoords<>::R] =
 						read_unseen_immovable
-							(egbase,
-							 triangle_immovable_kinds_file, triangle_immovables_file);
+							(egbase, triangle_immovable_kinds_file, triangle_immovables_file,
+							 triangle_immovables_file_version);
 				}
 
 				{ //  edges

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -302,6 +302,9 @@ struct Player :
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
 		const Map_Object_Descr * map_object_descr[3];
+		/// Animation and frame of constructionsite's animation
+		std::string              building_animation;
+		uint32_t                 cs_animation_frame;
 
 		//  Summary of intended layout (not yet fully implemented)
 		//

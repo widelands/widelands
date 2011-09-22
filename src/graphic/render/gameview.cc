@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,6 +118,7 @@ void GameView::rendermap
 	RENDERMAP_INITIALIZANTONS;
 
 	const Player::Field * const first_player_field = player.fields();
+	const Player_Number pn = player.player_number();
 	Widelands::Time const gametime = egbase.get_gametime();
 
 	rendermap_init();
@@ -263,10 +264,8 @@ void GameView::rendermap
 				r_is_border = r.field->is_border(); //  FIXME PPoV
 				r_owner_number = r.field->get_owned_by(); //  FIXME PPoV
 				uint8_t br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
-				Player::Field const * r_player_field =
-					first_player_field + r_index;
-				const Player::Field * br_player_field =
-					first_player_field + br_index;
+				Player::Field const * r_player_field = first_player_field + r_index;
+				const Player::Field * br_player_field = first_player_field + br_index;
 				Widelands::Vision  r_vision =  r_player_field->vision;
 				Widelands::Vision br_vision = br_player_field->vision;
 				Point r_pos
@@ -387,15 +386,25 @@ void GameView::rendermap
 							(const Map_Object_Descr * const map_object_descr =
 							 f_player_field.map_object_descr[TCoords<>::None])
 						{
-							Player const * const owner =
-								f_owner_number ? egbase.get_player(f_owner_number) : 0;
-							if
-								(const uint32_t picid =
-								 	map_object_descr->main_animation())
-									drawanim(f_pos, picid, 0, owner);
-							else if (map_object_descr == &Widelands::g_flag_descr) {
-								drawanim
-									(f_pos, owner->flag_anim(), 0, owner);
+							Player const * const owner = f_owner_number ? egbase.get_player(f_owner_number) : 0;
+							if (f_player_field.cs_animation_frame != std::numeric_limits<uint32_t>::max()) {
+								// this is a constructionsite with more than 1 build animation frames.
+								// show last seen constructionsite state
+								const uint32_t picid =
+									map_object_descr->get_animation(f_player_field.building_animation);
+								uint32_t tanim = f_player_field.cs_animation_frame * FRAME_LENGTH;
+								uint32_t w, h;
+								g_gr->get_animation_size(picid, tanim, w, h);
+								drawanimrect(f_pos, picid, tanim, owner, Rect(Point(0, 0), w, h));
+							} else if (!f_player_field.building_animation.empty()) {
+								// this is a building therefore we either draw unoccupied or idle animation
+								const uint32_t picid =
+									map_object_descr->get_animation(f_player_field.building_animation);
+								drawanim(f_pos, picid, 0, owner);
+							} else if (const uint32_t picid = map_object_descr->main_animation()) {
+								drawanim(f_pos, picid, 0, owner);
+							} else if (map_object_descr == &Widelands::g_flag_descr) {
+								drawanim(f_pos, owner->flag_anim(), 0, owner);
 							}
 						}
 				}
