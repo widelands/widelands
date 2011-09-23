@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -263,10 +263,8 @@ void GameView::rendermap
 				r_is_border = r.field->is_border(); //  FIXME PPoV
 				r_owner_number = r.field->get_owned_by(); //  FIXME PPoV
 				uint8_t br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
-				Player::Field const * r_player_field =
-					first_player_field + r_index;
-				const Player::Field * br_player_field =
-					first_player_field + br_index;
+				Player::Field const * r_player_field = first_player_field + r_index;
+				const Player::Field * br_player_field = first_player_field + br_index;
 				Widelands::Vision  r_vision =  r_player_field->vision;
 				Widelands::Vision br_vision = br_player_field->vision;
 				Point r_pos
@@ -387,15 +385,65 @@ void GameView::rendermap
 							(const Map_Object_Descr * const map_object_descr =
 							 f_player_field.map_object_descr[TCoords<>::None])
 						{
-							Player const * const owner =
-								f_owner_number ? egbase.get_player(f_owner_number) : 0;
+							Player const * const owner = f_owner_number ? egbase.get_player(f_owner_number) : 0;
 							if
-								(const uint32_t picid =
-								 	map_object_descr->main_animation())
-									drawanim(f_pos, picid, 0, owner);
-							else if (map_object_descr == &Widelands::g_flag_descr) {
-								drawanim
-									(f_pos, owner->flag_anim(), 0, owner);
+								(const Player::Constructionsite_Information * const csinf =
+								 f_player_field.constructionsite[TCoords<>::None])
+							{
+								// draw the partly finished constructionsite
+								uint32_t anim;
+								try {
+									anim = csinf->becomes->get_animation("build");
+								} catch (Map_Object_Descr::Animation_Nonexistent) {
+									try {
+										anim = csinf->becomes->get_animation("unoccupied");
+									} catch (Map_Object_Descr::Animation_Nonexistent) {
+										anim = csinf->becomes->get_animation("idle");
+									}
+								}
+								const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
+								uint32_t cur_frame =
+									csinf->totaltime ? csinf->completedtime * nr_frames / csinf->totaltime : 0;
+								uint32_t tanim = cur_frame * FRAME_LENGTH;
+								uint32_t w, h;
+								g_gr->get_animation_size(anim, tanim, w, h);
+								uint32_t lines = h * csinf->completedtime * nr_frames;
+								if (csinf->totaltime)
+									lines /= csinf->totaltime;
+								assert(h * cur_frame <= lines);
+								lines -= h * cur_frame; //  This won't work if pictures have various sizes.
+
+								if (cur_frame) // not the first frame
+									// draw the prev frame from top to where next image will be drawing
+									drawanimrect
+										(f_pos, anim, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
+								else if (csinf->was) {
+									// Is the first frame, but there was another building here before,
+									// get its last build picture and draw it instead.
+									uint32_t a;
+									try {
+										a = csinf->was->get_animation("unoccupied");
+									} catch (Map_Object_Descr::Animation_Nonexistent) {
+										a = csinf->was->get_animation("idle");
+									}
+									drawanimrect
+										(f_pos, a, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
+								}
+								assert(lines <= h);
+								drawanimrect(f_pos, anim, tanim, owner, Rect(Point(0, h - lines), w, lines));
+							} else if (upcast(const Building_Descr, building, map_object_descr)) {
+								// this is a building therefore we either draw unoccupied or idle animation
+								uint32_t picid;
+								try {
+									picid = building->get_animation("unoccupied");
+								} catch (Map_Object_Descr::Animation_Nonexistent) {
+									picid = building->get_animation("idle");
+								}
+								drawanim(f_pos, picid, 0, owner);
+							} else if (const uint32_t picid = map_object_descr->main_animation()) {
+								drawanim(f_pos, picid, 0, owner);
+							} else if (map_object_descr == &Widelands::g_flag_descr) {
+								drawanim(f_pos, owner->flag_anim(), 0, owner);
 							}
 						}
 				}
