@@ -1,6 +1,6 @@
 -- RST
 -- formatting.lua
--- -------------
+-- --------------
 --
 -- Function to simplify and unique text formatting in scenarios.  Most of these
 -- functions are simple wrapper functions that make working with widelands rich
@@ -12,11 +12,10 @@
 --    Wraps a block of text into Lua rich text: <rt>%s</rt>.
 --
 --    :arg text_or_options: either the text of this rich text
---    or any options you care to give it (e.g. image=pic.png).
+--       or any options you care to give it (e.g. image=pic.png).
 --    :type text_or_options: :class:`string`
 --    :arg text: if text_or_options is given, this will be the text of the
---    rich text.
--- 
+--       rich text.
 --    :returns: the wrapped rich text.
 -- 
 function rt(text_or_opts, text)
@@ -37,7 +36,6 @@ end
 --    The mnemonic comes from HTML.
 -- 
 --    :returns: A paragraph with s formatted as heading.
--- 
 function h1(s)
    return "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=8> <br></p>"
@@ -49,7 +47,6 @@ end
 --    Like :func:`h1` but smaller.
 -- 
 --    :returns: A paragraph with s formatted as heading.
--- 
 function h2(s)
    return "<p font=FreeSerif font-size=14 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=4> <br></p>"
@@ -104,7 +101,7 @@ end
 -- 
 --    Formats a text as spoken by one person in a scenario. Use it as follows:
 --
---    code-block:: lua
+--    .. code-block:: lua
 --
 --        function jundlina(title, text)
 --           return speech("map:princess.png", "2F9131", title, text)
@@ -114,8 +111,7 @@ end
 --    :arg clr: a valid 6 char hex color to use for the name of this speaker
 --    :arg title: Title of this text. 
 --    :arg text: The text itself. If this is nil, :const:`title` is used as text
---    instead and there will not be any title.
---
+--       instead and there will not be any title.
 --    :returns: the formatted text.
 -- 
 function speech(img, clr, g_title, g_text)
@@ -146,7 +142,7 @@ end
 --    Provides nice formatting for objective texts.
 -- 
 --    :returns: a rich text object that contains the formatted
---    objective text.
+--       objective text.
 -- 
 function objective_text(heading, body)
    return rt(h2(heading) .. p(body))
