@@ -51,13 +51,24 @@ namespace Widelands {
 
 extern const Map_Object_Descr g_road_descr;
 
+const RGBColor Player::Colors[MAX_PLAYERS] = {
+	RGBColor(2,     2, 198),  // blue
+	RGBColor(255,  41,   0),  // red
+	RGBColor(255, 232,   0),  // yellow
+	RGBColor(59,  223,   3),  // green
+	RGBColor(57,   57,  57),  // black/dark gray
+	RGBColor(255, 172,   0),  // orange
+	RGBColor(215,   0, 218),  // purple
+	RGBColor(255, 255, 255),  // white
+};
+
+
 Player::Player
 	(Editor_Game_Base  & the_egbase,
 	 Player_Number         const plnum,
 	 uint8_t               const initialization_index,
 	 Tribe_Descr   const &       tribe_descr,
-	 std::string   const &       name,
-	 uint8_t       const * const playercolor)
+	 std::string   const &       name)
 	:
 	m_egbase              (the_egbase),
 	m_initialization_index(initialization_index),
@@ -83,13 +94,6 @@ Player::Player
 	m_current_statistics(tribe_descr.get_nrwares    ()),
 	m_ware_productions  (tribe_descr.get_nrwares    ())
 {
-	for (int32_t i = 0; i < 4; ++i)
-		m_playercolor[i] =
-			RGBColor
-				(playercolor[i * 3 + 0],
-				 playercolor[i * 3 + 1],
-				 playercolor[i * 3 + 2]);
-
 	set_name(name);
 }
 

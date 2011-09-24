@@ -17,87 +17,38 @@
  *
  */
 
-#include "editor_game_base.h"
-
-#include "areawatcher.h"
-#include "battle.h"
-#include "building.h"
-#include "economy/flag.h"
-#include "findimmovable.h"
-#include "game.h"
-#include "graphic/font_handler.h"
-#include "i18n.h"
-#include "instances.h"
-#include "mapregion.h"
-#include "player.h"
-#include "roadtype.h"
-#include "scripting/scripting.h"
-#include "sound/sound_handler.h"
-#include "tribe.h"
-#include "ui_basic/progresswindow.h"
-#include "upcast.h"
-#include "wexception.h"
-#include "worker.h"
-#include "world.h"
-
-#include "economy/road.h"
 
 #include <algorithm>
 #include <set>
 
-namespace Widelands {
+#include "i18n.h"
+#include "rgbcolor.h"
+#include "upcast.h"
+#include "wexception.h"
 
-// hard-coded playercolors
-const uint8_t g_playercolors[MAX_PLAYERS][12] = {
-	{ // blue
-		2,     2,  74,
-		2,     2, 112,
-		2,     2, 149,
-		2,     2, 198
-	},
-	{ // red
-		119,  19,   0,
-		166,  27,   0,
-		209,  34,   0,
-		255,  41,   0
-	},
-	{ // yellow
-		112, 103,   0,
-		164, 150,   0,
-		209, 191,   0,
-		255, 232,   0
-	},
-	{ // green
-		26,   99,   1,
-		37,  143,   2,
-		48,  183,   3,
-		59,  223,   3
-	},
-	{ // black/dark gray
-		0,     0,   0,
-		19,   19,  19,
-		35,   35,  35,
-		57,   57,  57
-	},
-	{ // orange
-		119,  80,   0,
-		162, 109,   0,
-		209, 141,   0,
-		255, 172,   0,
-	},
-	{ // purple
-		91,    0,  93,
-		139,   0, 141,
-		176,   0, 179,
-		215,   0, 218,
-	},
-	{ // white
-		119, 119, 119,
-		166, 166, 166,
-		210, 210, 210,
-		255, 255, 255
-	}
-};
+#include "economy/flag.h"
+#include "economy/road.h"
+#include "graphic/font_handler.h"
+#include "scripting/scripting.h"
+#include "sound/sound_handler.h"
+#include "ui_basic/progresswindow.h"
+
+#include "areawatcher.h"
+#include "battle.h"
+#include "building.h"
+#include "findimmovable.h"
+#include "game.h"
+#include "instances.h"
+#include "mapregion.h"
+#include "player.h"
+#include "roadtype.h"
+#include "tribe.h"
+#include "worker.h"
+#include "world.h"
+
+#include "editor_game_base.h"
+
+namespace Widelands {
 
 /*
 ============
@@ -199,8 +150,7 @@ Player * Editor_Game_Base::add_player
 		 player_number,
 		 initialization_index,
 		 manually_load_tribe(tribe),
-		 name,
-		 g_playercolors[player_number - 1]);
+		 name);
 	p->set_team_number(team);
 	return p;
 }

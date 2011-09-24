@@ -40,12 +40,11 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	const PictureID & get_frame
 		(Index                    const i,
 		 Widelands::Player_Number const player_number,
-		 RGBColor         const * const playercolor)
+		 const RGBColor & playercolor)
 	{
 		assert(i < nr_frames());
 		assert(1 <= player_number);
 		assert     (player_number <= MAX_PLAYERS);
-		assert(playercolor);
 		if (!m_hasplrclrs)
 			return get_frame(i);
 
@@ -61,7 +60,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	}
 
 private:
-	void encode(uint8_t plyr, RGBColor const *);
+	void encode(uint8_t plyr, const RGBColor &);
 
 	Frames m_plrframes[MAX_PLAYERS + 1];
 	Frames m_pcmasks;
