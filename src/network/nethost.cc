@@ -174,8 +174,10 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 							newstate = PlayerSettings::stateClosed;
 					}
 				} else if (it == impls.end()) {
-					uint8_t random = (std::rand() % impls.size()); // Choose a random AI
-					it = impls.begin() + random;
+					do {
+						uint8_t random = (std::rand() % impls.size()); // Choose a random AI
+						it = impls.begin() + random;
+					} while ((*it)->name == "None");
 					setPlayerAI(number, (*it)->name, true);
 					newstate = PlayerSettings::stateComputer;
 					break;
