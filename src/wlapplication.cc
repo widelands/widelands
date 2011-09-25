@@ -1902,8 +1902,10 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 				it = impls.begin();
 			} else if (it == impls.end()) {
 				s.players[number].random_ai = true;
-				uint8_t random = (std::rand() % impls.size()); // Choose a random AI
-				it = impls.begin() + random;
+				do {
+					uint8_t random = (std::rand() % impls.size()); // Choose a random AI
+					it = impls.begin() + random;
+				} while ((*it)->name == "None");
 			}
 			s.players[number].ai = (*it)->name;
 		}
