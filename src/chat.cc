@@ -17,8 +17,9 @@
  *
  */
 
+#include "logic/player.h"
+
 #include "chat.h"
-#include "logic/editor_game_base.h"
 
 using namespace Widelands;
 
@@ -130,9 +131,9 @@ std::string ChatMessage::toPlainString() const
 std::string ChatMessage::color() const
 {
 	if ((playern >= 0) && playern < MAX_PLAYERS) {
-		const uint8_t * cols = g_playercolors[playern];
+		const RGBColor & clr = Player::Colors[playern];
 		char buf[sizeof("ffffff")];
-		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", cols[9], cols[10], cols[11]);
+		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r(), clr.g(), clr.b());
 		return buf;
 	}
 	return "999999";
