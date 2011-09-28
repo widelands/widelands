@@ -170,6 +170,7 @@ struct WareQueuePriorityButton : UI::Button {
 private:
 	void clicked();
 	void think();
+	void set_pic(PictureID picid);
 
 	void update_enabled();
 
@@ -229,6 +230,19 @@ void WareQueuePriorityButton::clicked()
 void WareQueuePriorityButton::think()
 {
 	update_enabled();
+}
+
+void WareQueuePriorityButton::set_pic(PictureID const picid)
+{
+	m_title.clear();
+
+	if (m_pic_custom_disabled == picid)
+		return;
+
+	m_pic_custom_disabled = picid;
+	m_pic_custom = g_gr->create_grayed_out_pic(picid);
+
+	update();
 }
 
 void WareQueuePriorityButton::update_enabled()
