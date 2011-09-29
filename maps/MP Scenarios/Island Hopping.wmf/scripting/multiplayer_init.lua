@@ -196,10 +196,18 @@ function place_headquarters()
    end
 end
 
+-- Disable some Buildings for all players
+function disable_unused_buildings()
+   for idx, plr in ipairs(game.players) do
+      plr:forbid_buildings{"shipyard"}
+   end
+end
+
 -- Game initializations
 function initialize()
    reveal_everything_for_everybody()
    place_headquarters()
+   disable_unused_buildings()
 
    send_to_all(welcome_msg)
 
