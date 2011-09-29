@@ -52,19 +52,38 @@ _finish_areas = {
    }
 }
 
--- TODO: come up with proper ones
 _finish_rewards = {
    { -- Island 1
-      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish
-      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish
-      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish
-      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish
+      { -- 1st to finish
+         trunk = 25, planks = 15, stone = 10,
+         spidercloth = 5, corn = 20,
+      },
+      { -- 2st to finish
+         trunk = 45, planks = 30, stone = 20,
+         spidercloth = 7, corn = 25,
+      },
+      { -- 3rd to finish
+         trunk = 65, planks = 45, stone = 30,
+         spidercloth = 9, corn = 30,
+      },
+      { -- 4th to finish
+         trunk = 85, planks = 50, stone = 40,
+         spidercloth = 11, corn = 35,
+      }
    },
    { -- Island 2
-      { trunk = 10, planks = 20, stone = 20 },  -- 1st to finish
-      { trunk = 15, planks = 25, stone = 25 },  -- 2nd to finish
-      { trunk = 20, planks = 30, stone = 30 },  -- 3rd to finish
-      { trunk = 25, planks = 35, stone = 35 }   -- 4th to finish
+      { -- 1st to finish
+         coal = 20, ironore = 10, goldore = 10,
+      },
+      { -- 2st to finish
+         coal = 30, ironore = 15, goldore = 15,
+      },
+      { -- 3rd to finish
+         coal = 40, ironore = 20, goldore = 20,
+      },
+      { -- 4th to finish
+         coal = 50, ironore = 25, goldore = 25,
+      }
    }
 }
 hill = map:get_field(0,0):region(3)
