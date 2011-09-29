@@ -12,7 +12,6 @@ use("aux", "set")
 -- ==========
 set_textdomain("mp_scenario_island_hopping.wmf")
 
--- TODO: bug report: position of players in multiplayer scenarios is fixed to blue or red
 game = wl.Game()
 map = game.map
 
