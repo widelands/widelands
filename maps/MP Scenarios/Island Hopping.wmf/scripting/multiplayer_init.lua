@@ -51,7 +51,6 @@ _finish_areas = {
       map:get_field( 26,161):region(3)  -- player 4
    }
 }
-
 _finish_rewards = {
    { -- Island 1
       { -- 1st to finish
