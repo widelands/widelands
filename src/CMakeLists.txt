@@ -65,6 +65,7 @@ set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/CppCheckSuppressions.cmake ${CMAKE_CURRENT_BINARY_DIR}/CppCheckSuppressions)
 
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
+  find_package (PythonInterp REQUIRED)
   set (commands "")
   foreach(sourcefile ${WL_CODECHECK_SRCS})
     string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
