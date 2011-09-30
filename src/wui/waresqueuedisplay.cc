@@ -37,6 +37,10 @@ static char const * pic_priority_low_on    = "pics/low_priority_on.png";
 static char const * pic_priority_normal_on = "pics/normal_priority_on.png";
 static char const * pic_priority_high_on   = "pics/high_priority_on.png";
 
+static char const * pic_priority_low_flat       = "pics/low_priority_button_flat.png";
+static char const * pic_priority_normal_flat    = "pics/normal_priority_button_flat.png";
+static char const * pic_priority_high_flat      = "pics/high_priority_button_flat.png";
+
 /**
  * This passive class displays the status of a WaresQueue.
  * It updates itself automatically through think().
@@ -200,7 +204,7 @@ UI::Button
 	 x, y, w, h,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_no_picture(),
-	 tooltip),
+	 tooltip, true, true),
 m_igb(igb),
 m_building(building),
 m_ware_type(ware_type),
@@ -240,7 +244,8 @@ void WareQueuePriorityButton::set_pic(PictureID const picid)
 		return;
 
 	m_pic_custom_disabled = picid;
-	m_pic_custom = g_gr->create_grayed_out_pic(picid);
+	//m_pic_custom = g_gr->create_grayed_out_pic(picid);
+	m_pic_custom = g_gr->create_changed_luminosity_pic(picid);
 
 	update();
 }
@@ -283,8 +288,8 @@ UI::Panel * create_wares_queue_display
 			 	(vbox, 0, 0,
 			 	 priority_buttons_width,
 			 	 priority_buttons_width,
-			 	 pic_priority_high,
-			 	 pic_priority_high_on,
+			 	 pic_priority_high_flat,
+			 	 pic_priority_high_flat,
 			 	 _("Highest priority"),
 			 	 igb, b, ware_type, ware_index,
 			 	 HIGH_PRIORITY),
@@ -294,8 +299,8 @@ UI::Panel * create_wares_queue_display
 			 	(vbox, 0, 0,
 			 	 priority_buttons_width,
 			 	 priority_buttons_width,
-			 	 pic_priority_normal,
-			 	 pic_priority_normal_on,
+			 	 pic_priority_normal_flat,
+			 	 pic_priority_normal_flat,
 			 	 _("Normal priority"),
 			 	 igb, b, ware_type, ware_index,
 			 	 DEFAULT_PRIORITY),
@@ -305,8 +310,8 @@ UI::Panel * create_wares_queue_display
 			 	(vbox, 0, 0,
 			 	 priority_buttons_width,
 			 	 priority_buttons_width,
-			 	 pic_priority_low,
-			 	 pic_priority_low_on,
+			 	 pic_priority_low_flat,
+			 	 pic_priority_low_flat,
 			 	 _("Lowest priority"),
 			 	 igb, b, ware_type, ware_index,
 			 	 LOW_PRIORITY),

@@ -964,6 +964,55 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid)
 	return destpicture;
 }
 
+PictureID Graphic::create_changed_luminosity_pic(const PictureID & picid)
+{
+	if (!picid || !picid->valid())
+		return get_no_picture();
+
+	IPixelAccess & origpix = picid->pixelaccess();
+	uint32_t w = picid->get_w();
+	uint32_t h = picid->get_h();
+	const SDL_PixelFormat & origfmt = origpix.format();
+
+	PictureID destpicture = create_picture(w, h, origfmt.Amask);
+	IPixelAccess & destpix = destpicture->pixelaccess();
+	const SDL_PixelFormat & destfmt = destpix.format();
+
+	origpix.lock(IPixelAccess::Lock_Normal);
+	destpix.lock(IPixelAccess::Lock_Discard);
+	for (uint32_t y = 0; y < h; ++y) {
+		for (uint32_t x = 0; x < w; ++x) {
+			RGBAColor color;
+
+			color.set(origfmt, origpix.get_pixel(x, y));
+
+			//  Halve the opacity to give some difference for pictures that are
+			//  grayscale to begin with.
+			color.a >>= 1;
+
+			/*uint8_t const gray =
+				(luminance_table_r[color.r] +
+				 luminance_table_g[color.g] +
+				 luminance_table_b[color.b] +
+				 8388608U) //  compensate for truncation:  .5 * 2^24
+				>> 24;
+
+			color.r = color.g = color.b = gray;*/
+
+			// Halve all color values = halve luminosity
+			color.r >>= 1;
+			color.g >>= 1;
+			color.b >>= 1;
+
+			destpix.set_pixel(x, y, color.map(destfmt));
+		}
+	}
+	origpix.unlock(IPixelAccess::Unlock_NoChange);
+	destpix.unlock(IPixelAccess::Unlock_Update);
+
+	return destpicture;
+}
+
 
 /**
  * Creates a terrain texture.
