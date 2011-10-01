@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-09-14 14:49+0000\n"
+"POT-Creation-Date: 2011-10-01 09:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -67,6 +67,11 @@ msgstr ""
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island Hopping\", where two or more groups try to reach the center island as fast as possible, to be the first building up a castle on the top of the center mountain."
 msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:9
@@ -217,6 +222,11 @@ msgstr ""
 #: ../../maps/Firegames.wmf/elemental:9
 msgid ""
 "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but no-one knows, what might happen if you meet an opponent tribe?"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid ""
+"Island Hopping"
 msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9

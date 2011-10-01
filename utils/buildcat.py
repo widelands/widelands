@@ -22,7 +22,11 @@ import confgettext
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
 # to let .po[t] comments point to somewhere useful
-MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"] ),
+MAINPOTS = [( "maps/maps", [
+                "../../maps/*/elemental",
+                "../../maps/*/*/elemental",
+                "../../campaigns/cconfig"
+            ] ),
             ( "texts/texts", ["../../txts/COPYING",
                           "../../txts/README",
                           "../../txts/developers",

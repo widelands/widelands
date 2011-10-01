@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-09-14 14:49+0000\n"
+"POT-Creation-Date: 2011-10-01 09:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:85
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:102
 msgid ""
 "%i %s<br>"
 msgstr ""
@@ -114,7 +114,7 @@ msgid ""
 "First Island"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:78
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:95
 msgid ""
 "Game Status"
 msgstr ""
