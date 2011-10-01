@@ -152,7 +152,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 					if ((*(it - 1))->name == h->settings().players.at(number).ai)
 						break;
 				} while (it != impls.end());
-				if (it == impls.end()) {
+				if (settings().players.at(number).random_ai) {
 					setPlayerAI(number, std::string());
 					setPlayerName(number, std::string());
 					// Do not share a player in savegames or scenarios
@@ -173,6 +173,14 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 						} else
 							newstate = PlayerSettings::stateClosed;
 					}
+				} else if (it == impls.end()) {
+					do {
+						uint8_t random = (std::rand() % impls.size()); // Choose a random AI
+						it = impls.begin() + random;
+					} while ((*it)->name == "None");
+					setPlayerAI(number, (*it)->name, true);
+					newstate = PlayerSettings::stateComputer;
+					break;
 				} else {
 					setPlayerAI(number, (*it)->name);
 					newstate = PlayerSettings::stateComputer;
@@ -193,7 +201,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerState(number, newstate, true);
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe)
+	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -207,8 +215,9 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			 ||
 			 settings().players.at(number).state == PlayerSettings::stateOpen // For savegame loading
 			)
-			h->setPlayerTribe(number, tribe);
+			h->setPlayerTribe(number, tribe, random_tribe);
 	}
+
 	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
 	{
 		if (number >= h->settings().players.size())
@@ -239,8 +248,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerInit(number, index);
 	}
 
-	virtual void setPlayerAI(uint8_t number, std::string const & name) {
-		h->setPlayerAI(number, name);
+	virtual void setPlayerAI(uint8_t number, std::string const & name, bool const random_ai = false) {
+		h->setPlayerAI(number, name, random_ai);
 	}
 
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {
@@ -1301,11 +1310,15 @@ bool NetHost::canLaunch()
 	if (d->game)
 		return false;
 	// all players must be connected to a controller (human/ai) or be closed.
+	// but not all should be closed!
+	bool one_not_closed = false;
 	for (size_t i = 0; i < d->settings.players.size(); ++i) {
+		if (d->settings.players.at(i).state != PlayerSettings::stateClosed)
+			one_not_closed = true;
 		if (d->settings.players.at(i).state == PlayerSettings::stateOpen)
 			return false;
 	}
-	return true;
+	return one_not_closed;
 }
 
 void NetHost::setMap
@@ -1356,9 +1369,11 @@ void NetHost::setMap
 		player.state                = PlayerSettings::stateOpen;
 		player.name                 = "";
 		player.tribe                = d->settings.tribes.at(0).name;
+		player.random_tribe         = false;
 		player.initialization_index = 0;
 		player.team                 = 0;
 		player.ai                   = "";
+		player.random_ai            = false;
 		player.closeable            = false;
 		player.shared_in            = 0;
 
@@ -1469,19 +1484,28 @@ void NetHost::setPlayerState
 }
 
 
-void NetHost::setPlayerTribe(uint8_t const number, std::string const & tribe)
+void NetHost::setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
 {
 	if (number >= d->settings.players.size())
 		return;
 
 	PlayerSettings & player = d->settings.players.at(number);
 
-	if (player.tribe == tribe)
+	if (player.tribe == tribe && player.random_tribe == random_tribe)
 		return;
+
+	std::string actual_tribe = tribe;
+	player.random_tribe = random_tribe;
+
+	if (random_tribe) {
+		uint8_t num_tribes = d->settings.tribes.size();
+		uint8_t random = (std::rand() % num_tribes);
+		actual_tribe = d->settings.tribes.at(random).name;
+	}
 
 	container_iterate_const(std::vector<TribeBasicInfo>, d->settings.tribes, i)
 		if (i.current->name == player.tribe) {
-			player.tribe = tribe;
+			player.tribe = actual_tribe;
 			if (i.current->initializations.size() <= player.initialization_index)
 				player.initialization_index = 0;
 
@@ -1530,13 +1554,14 @@ void NetHost::setPlayerInit(uint8_t const number, uint8_t const index)
 }
 
 
-void NetHost::setPlayerAI(uint8_t number, std::string const & name)
+void NetHost::setPlayerAI(uint8_t number, std::string const & name, bool const random_ai)
 {
 	if (number >= d->settings.players.size())
 		return;
 
 	PlayerSettings & player = d->settings.players.at(number);
 	player.ai = name;
+	player.random_ai = random_ai;
 
 	// Broadcast changes
 	SendPacket s;
@@ -1769,8 +1794,10 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.Unsigned8(static_cast<uint8_t>(player.state));
 	packet.String(player.name);
 	packet.String(player.tribe);
+	packet.Unsigned8(player.random_tribe ? 1 : 0);
 	packet.Unsigned8(player.initialization_index);
 	packet.String(player.ai);
+	packet.Unsigned8(player.random_ai ? 1 : 0);
 	packet.Unsigned8(player.team);
 	packet.Unsigned8(player.shared_in);
 }
@@ -2430,7 +2457,9 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 				// Only valid if the server is dedicated and the client was granted access
 				if (!client.dedicated_access)
 					throw DisconnectException(_("Client has no access to other player's settings."));
-			setPlayerTribe(num, r.String());
+			std::string tribe = r.String();
+			bool random_tribe = r.Unsigned8() == 1;
+			setPlayerTribe(num, tribe, random_tribe);
 		}
 		break;
 

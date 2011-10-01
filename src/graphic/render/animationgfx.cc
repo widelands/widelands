@@ -251,7 +251,7 @@ AnimationGfx::~AnimationGfx()
 Encodes the given surface into a frame
 ===============
 */
-void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
+void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 {
 	assert(m_plrframes[0].size() == m_pcmasks.size());
 	std::vector<PictureID> & frames = m_plrframes[plr];
@@ -297,9 +297,9 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 						>> 24;
 					RGBAColor plrclr;
 
-					plrclr.r = (plrclrs[3].r() * intensity) >> 8;
-					plrclr.g = (plrclrs[3].g() * intensity) >> 8;
-					plrclr.b = (plrclrs[3].b() * intensity) >> 8;
+					plrclr.r = (player_color.r() * intensity) >> 8;
+					plrclr.g = (player_color.g() * intensity) >> 8;
+					plrclr.b = (player_color.b() * intensity) >> 8;
 
 					product.r =
 						(plrclr.r * influence + source.r * (65536 - influence)) >> 16;

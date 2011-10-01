@@ -1055,14 +1055,13 @@ inline static uint32_t calc_minimap_color
 
 	if (flags & MiniMap::Owner) {
 		if (0 < owner) { //  If owned, get the player's color...
-			const RGBColor * const playercolors =
-				egbase.player(owner).get_playercolor();
+			const RGBColor & player_color = egbase.player(owner).get_playercolor();
 
 			//  ...and add the player's color to the old color.
 			pixelcolor = blend_color
 				(format,
 				 pixelcolor,
-				 playercolors[3].r(),  playercolors[3].g(), playercolors[3].b());
+				 player_color.r(),  player_color.g(), player_color.b());
 		}
 	}
 

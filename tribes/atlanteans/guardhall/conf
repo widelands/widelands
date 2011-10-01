@@ -11,5 +11,5 @@ diamond=1
 
 [idle]
 pics=guardhall_i_??.png
-hotspot=48 60
+hotspot=58 72
 playercolor=true

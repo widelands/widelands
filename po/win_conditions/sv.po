@@ -7,35 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-06-06 22:33+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-09-04 19:59+0000\n"
+"PO-Revision-Date: 2011-09-06 17:00+0000\n"
+"Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-09-07 04:31+0000\n"
+"X-Generator: Launchpad (build 13861)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
-msgstr ""
+msgstr "%i trän för stunden."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:138
 msgid "%i trees."
-msgstr ""
+msgstr "%i trän."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:137
 msgid "%s had "
-msgstr ""
+msgstr "%s hade "
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:84
 msgid "%s has "
-msgstr ""
+msgstr "%s har "
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:145
 msgid "%s owns more than half of the maps area."
-msgstr ""
+msgstr "%s äger mer än hälften av kartan."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid ""
@@ -43,6 +43,9 @@ msgid ""
 "your territory than any other player. The game will end after 4 hours of\n"
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
+"Som en skogsgnom tycker du om stora skogar, så din uppgift är att ha\n"
+"fler trän i ditt territorium än någon annan spelare. Spelet tar slut efter\n"
+"4 timmar. Den som har flest trän vid den tidpunkten vinner spelet."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:10
 msgid "Autocrat"
@@ -62,23 +65,30 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr ""
+"Varje spelare eller lag försöker ta besittning av mer än hälften av kartan. "
+"Vinnaren är den spelare eller det lag som lyckas hålla den ytan i minst 20 "
+"minuter."
 
 #: ../../scripting/win_conditions/00_endless_game.lua:10
 msgid "Endless Game"
 msgstr "Spel utan slut"
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:10
+msgid "Endless Game (no fog)"
+msgstr "Evigt spel (ingen dimma)"
+
 #: ../../scripting/win_conditions/03_territorial_lord.lua:151
 msgid "Keep it for %i more minutes to win the game."
-msgstr ""
+msgstr "Håll ställningarna i %i minuter till för att vinna spelet."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:81
 #: ../../scripting/win_conditions/04_wood_gnome.lua:134
 msgid "Player overview:"
-msgstr ""
+msgstr "Spelaröverblick:"
 
 #: ../../scripting/win_conditions/02_collectors.lua:147
 msgid "Points"
-msgstr ""
+msgstr "Poäng"
 
 #: ../../scripting/win_conditions/02_collectors.lua:128
 #: ../../scripting/win_conditions/03_territorial_lord.lua:156
@@ -89,18 +99,18 @@ msgstr "Status"
 
 #: ../../scripting/win_conditions/02_collectors.lua:90
 msgid "Status for Player %i<br>"
-msgstr ""
+msgstr "Tillstånd för spelare %i<br>"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:129
 #: ../../scripting/win_conditions/03_territorial_lord.lua:132
 #: ../../scripting/win_conditions/03_territorial_lord.lua:154
 #: ../../scripting/win_conditions/03_territorial_lord.lua:183
 msgid "Team %i"
-msgstr ""
+msgstr "Lag %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:11
 msgid "Territorial Lord"
-msgstr ""
+msgstr "Landets härskare"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:79
 msgid "The game will end in %i minutes."
@@ -108,43 +118,48 @@ msgstr "Det här spelet kommer att sluta om %i minuter."
 
 #: ../../scripting/win_conditions/02_collectors.lua:118
 msgid "The game will end in %s."
-msgstr ""
+msgstr "Spelet tar slut om %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:11
 msgid "The tribe or team that can defeat all others wins the game!"
-msgstr ""
+msgstr "Stammen eller laget som kan besegra alla andra vinner spelet!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:141
 msgid "The winner is %s "
-msgstr ""
+msgstr "Vinnaren är %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:11
 msgid "This is an endless game without rules."
-msgstr ""
+msgstr "Det här är ett evigt spel utan regler."
+
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:11
+msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr "Det här är ett evigt spel utan regler. Krigsdimman är avaktiverad."
 
 #: ../../scripting/win_conditions/02_collectors.lua:103
 msgid "Total: %i points"
-msgstr ""
+msgstr "Totalt: %i poäng"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:102
 msgid "Trees owned"
-msgstr ""
+msgstr "Trän under kontroll"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:11
 msgid "Wood Gnome"
-msgstr ""
+msgstr "Skogsgnom"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:24
 #: ../../scripting/win_conditions/01_defeat_all.lua:24
 #: ../../scripting/win_conditions/02_collectors.lua:179
 #: ../../scripting/win_conditions/03_territorial_lord.lua:166
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid "You are defeated!"
-msgstr ""
+msgstr "Du är besegrad!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:149
 msgid "You are the winner of this game!"
-msgstr ""
+msgstr "Du vann spelet!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
 #: ../../scripting/win_conditions/03_territorial_lord.lua:185
@@ -156,19 +171,23 @@ msgid ""
 "You get points for precious wares in your warehouses, the player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
+"Du får poäng för dyrbara varor i dina lager; spelaren med flest varor efter "
+"att 4 timmar har gått vinner spelet."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:145
 msgid "You have lost this game!"
-msgstr ""
+msgstr "Du förlorade!"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:25
 #: ../../scripting/win_conditions/01_defeat_all.lua:25
 #: ../../scripting/win_conditions/02_collectors.lua:180
 #: ../../scripting/win_conditions/03_territorial_lord.lua:167
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:40
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
+"Du har inget kvar att befalla. Om du vill kan du fortsätta som åskådare."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:32
 msgid "You have won this game!"
@@ -185,11 +204,11 @@ msgstr "Du förlorade!"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:149
 msgid "You own more than half of the maps area."
-msgstr ""
+msgstr "Du besitter mer än hälften av kartan."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:147
 msgid "You still got %i minutes to prevent a victory."
-msgstr ""
+msgstr "Du har fortfarande %i minuter på dig för att förhindra en seger."
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
 #: ../../scripting/win_conditions/03_territorial_lord.lua:185
@@ -204,48 +223,4 @@ msgstr "Du har förlorat detta spel!"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "with %i trees."
-msgstr ""
-
-#~ msgid "Game over"
-#~ msgstr "Spelet är slut"
-
-#~ msgid "The tribe that can defeat all others wins!"
-#~ msgstr "Den stamm som kan besegra alla andra vinner!"
-
-#~ msgid "Tribe defeated!"
-#~ msgstr "Stamm besegrad!"
-
-#~ msgid "Your tribe is no more. You have lost this game"
-#~ msgstr "Din stamm finns ej mer. Du har förlorat detta spel"
-
-#~ msgid "You've lost!"
-#~ msgstr "Du har förlorat!"
-
-#~ msgid "An endless game without rules"
-#~ msgstr "Ett regellöst spel utan slut"
-
-#~ msgid ""
-#~ "The three tribes play together vs each other. Vision is granted to all the "
-#~ "players playing together"
-#~ msgstr ""
-#~ "De tre stammarna spelar tillsammans mot varandra. De som spelar ihop delar "
-#~ "sikt."
-
-#~ msgid "The tribe %s is no more."
-#~ msgstr "Stammen %s har finns inte längre."
-
-#~ msgid "The player %i has currently %i points"
-#~ msgstr "Spelare %i har just nu %i poäng"
-
-#~ msgid "Sorry, you have lost this game!"
-#~ msgstr "Beklagar, du har förlorat det här spelet!"
-
-#~ msgid "Tribes together"
-#~ msgstr "Stammar tilsammans"
-
-#~ msgid ""
-#~ "You get points for wares in your HQ, the one with the highest number of "
-#~ "wares at the end of 4 hours wins the game"
-#~ msgstr ""
-#~ "Du får poäng för godset i ditt högkvarter, den som har mest gods då 4 timmar "
-#~ "har gått vinner spelet."
+msgstr "med %i trän."

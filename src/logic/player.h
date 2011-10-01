@@ -61,6 +61,9 @@ struct Player :
 	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
 	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
+	// hard-coded playercolors
+	static const RGBColor Colors[MAX_PLAYERS];
+
 	struct Building_Stats {
 		bool is_constructionsite;
 		Coords pos;
@@ -80,8 +83,7 @@ struct Player :
 		 Player_Number,
 		 uint8_t initialization_index,
 		 const Tribe_Descr & tribe,
-		 const std::string & name,
-		 const uint8_t * playercolor);
+		 const std::string & name);
 	~Player();
 
 	void allocate_map();
@@ -109,7 +111,7 @@ struct Player :
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	Player_Number     player_number() const throw () {return m_plnum;}
 	TeamNumber team_number() const {return m_team_number;}
-	RGBColor const * get_playercolor() const {return m_playercolor;}
+	RGBColor const & get_playercolor() const {return Colors[m_plnum - 1];}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
 	const std::string & get_name() const throw () {return m_name;}
@@ -553,7 +555,6 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
-	RGBColor               m_playercolor[4];
 
 	/**
 	 * Is player allowed to modify m_retreat_percentage?

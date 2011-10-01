@@ -9,6 +9,8 @@
 - Added a new win condition "endless game (no fog)" with completely
   visible map from the beginning on.
 - Added a multiplayer scenario
+- Added feature to play as a random tribe or against a random tribe or 
+  random AI.
 - Improved dedicated server functionality:
     * added functionality to save the game on the server via chat command.
     * added functionality to set up a password for the server.
@@ -24,6 +26,7 @@
 - Fixed bug #795457: focus in chat window
 - Fixed bug #808008: Delete outdated data when updating Widelands on Windows
 - Fixed bug #805089: Check client in chat commands, when first mentioned.
+- Fixed bug #853217: start multiplayer game with all slots closed
 
 ### Build 16
 - Many new graphics, new sounds.
