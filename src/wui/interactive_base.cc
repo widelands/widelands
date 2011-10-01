@@ -320,13 +320,13 @@ void Interactive_Base::think()
 	const uint32_t scrollval = 10;
 
 	if (keyboard_free() && Panel::allow_user_input()) {
-		if (get_key_state(SDLK_UP))
+		if (get_key_state(SDLK_UP) || get_key_state(SDLK_KP8))
 			set_rel_viewpoint(Point(0, -scrollval), false);
-		if (get_key_state(SDLK_DOWN))
+		if (get_key_state(SDLK_DOWN) || get_key_state(SDLK_KP2))
 			set_rel_viewpoint(Point(0,  scrollval), false);
-		if (get_key_state(SDLK_LEFT))
+		if (get_key_state(SDLK_LEFT) || get_key_state(SDLK_KP4))
 			set_rel_viewpoint(Point(-scrollval, 0), false);
-		if (get_key_state(SDLK_RIGHT))
+		if (get_key_state(SDLK_RIGHT) || get_key_state(SDLK_KP6))
 			set_rel_viewpoint(Point (scrollval, 0), false);
 	}
 
@@ -858,6 +858,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 		return true;
 
 	switch (code.sym) {
+	case SDLK_KP9:
 	case SDLK_PAGEUP:
 		if (!get_display_flag(dfSpeed))
 			break;
@@ -875,6 +876,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 					ctrl->togglePaused();
 		return true;
 
+	case SDLK_KP3:
 	case SDLK_PAGEDOWN:
 		if (!get_display_flag(dfSpeed))
 			break;
