@@ -34,6 +34,6 @@ playercolor=true
 
 [working]
 pics=bakery_b_??.png  # ???
-hotspot=52 63
+hotspot=52 75
 playercolor=true
 fps=20
