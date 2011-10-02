@@ -249,6 +249,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			okid.call(m->id);
 			return true;
 
+		case SDLK_KP_PERIOD:
 		case SDLK_DELETE:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
@@ -268,6 +269,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP4:
 		case SDLK_LEFT:
 			if (m->caret > 0) {
 				while ((m->text[--m->caret] & 0xc0) == 0x80) {};
@@ -282,6 +284,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP6:
 		case SDLK_RIGHT:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
@@ -301,6 +304,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP7:
 		case SDLK_HOME:
 			if (m->caret != 0) {
 				m->caret = 0;
@@ -310,6 +314,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP1:
 		case SDLK_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
@@ -318,6 +323,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP8:
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
 			if (m_history_active) {
@@ -332,6 +338,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP2:
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
 			if (m_history_active) {

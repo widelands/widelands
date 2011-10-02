@@ -427,6 +427,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			g_gr->toggle_fullscreen();
 			return true;
 
+		case SDLK_KP7:
 		case SDLK_HOME:
 			move_view_to(game().map().get_starting_pos(m_player_number));
 			return true;
