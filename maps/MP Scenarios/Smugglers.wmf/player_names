@@ -4,25 +4,25 @@
 packet_version="2"
 
 [player_1]
-name="Marius"
-tribe="empire"
+name="Player Blue"
+tribe="barbarians"
 ai=
 closeable="false"
 
 [player_2]
-name="Avitus"
-tribe="empire"
+name="Player Red"
+tribe="barbarians"
 ai=
 closeable="false"
 
 [player_3]
-name="Silvanus"
-tribe="empire"
+name="Player Yellow"
+tribe="barbarians"
 ai=
 closeable="false"
 
 [player_4]
-name="Caius"
-tribe="empire"
+name="Player Green"
+tribe="barbarians"
 ai=
 closeable="false"
