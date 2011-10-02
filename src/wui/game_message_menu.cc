@@ -200,6 +200,7 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 				center_main_mapview_on_location.clicked();
 			return true;
 
+		case SDLK_KP_PERIOD:
 		case SDLK_DELETE:
 			do_delete();
 			return true;
