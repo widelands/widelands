@@ -5,7 +5,6 @@ use("aux", "coroutine")
 use("aux", "infrastructure")
 use("aux", "formatting")
 use("aux", "objective_utils")
-use("aux", "set")
 
 -- ==========
 -- Constants
