@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-09-14 14:49+0000\n"
+"POT-Creation-Date: 2011-10-01 09:13+0000\n"
 "PO-Revision-Date: 2011-01-19 17:36+0000\n"
 "Last-Translator: Massol <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-15 04:34+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"X-Launchpad-Export-Date: 2011-10-02 04:34+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -84,6 +84,14 @@ msgid ""
 msgstr ""
 "Загадочная страна с разнообразными ландшафтами, рассеченными несколькими "
 "большими реками."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island "
+"Hopping\", where two or more groups try to reach the center island as fast "
+"as possible, to be the first building up a castle on the top of the center "
+"mountain."
+msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -260,6 +268,10 @@ msgstr ""
 "Было ли это испытанием, посланным Богами, или просто чей-то коварный план, "
 "но однажды ты и твое племя проснулись на этом острове среди огня и лавы. "
 "Похоже, ты здесь один, но что будет, если встретится другое племя?"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
+msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"

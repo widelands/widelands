@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-09-14 16:49+0200\n"
-"PO-Revision-Date: 2011-09-30 17:43+0000\n"
+"POT-Creation-Date: 2011-10-01 11:13+0200\n"
+"PO-Revision-Date: 2011-10-01 13:38+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-10-01 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-10-02 04:41+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
 #: ../../src/computer_player.cc:38
@@ -354,20 +354,20 @@ msgstr "Widelands nie było w stanie się połączyć z serwerem."
 msgid "The address of the game server is invalid"
 msgstr "Adres serwera jest niepoprawny"
 
-#: ../../src/wlapplication.cc:1850 ../../src/network/nethost.cc:1892
+#: ../../src/wlapplication.cc:1851 ../../src/network/nethost.cc:1919
 msgid "Player"
 msgstr "Gracz"
 
-#: ../../src/wlapplication.cc:2016 ../../src/network/netclient.cc:188
-#: ../../src/network/nethost.cc:764
+#: ../../src/wlapplication.cc:2040 ../../src/network/netclient.cc:188
+#: ../../src/network/nethost.cc:773
 msgid "Preparing game"
 msgstr "Przygotowywanie gry"
 
-#: ../../src/wlapplication.cc:2124
+#: ../../src/wlapplication.cc:2148
 msgid "End of replay"
 msgstr "Koniec powtórki"
 
-#: ../../src/wlapplication.cc:2126
+#: ../../src/wlapplication.cc:2150
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -375,7 +375,7 @@ msgstr ""
 "Koniec powtórki, gra została wstrzymana. Możesz wznowić grę i kontynuować "
 "oglądanie."
 
-#: ../../src/wlapplication.cc:2209 ../../src/logic/game.cc:385
+#: ../../src/wlapplication.cc:2233 ../../src/logic/game.cc:385
 #: ../../src/logic/game.cc:425
 msgid "Loading..."
 msgstr "Wczytywanie..."
@@ -681,7 +681,7 @@ msgstr "NIEZNANE"
 msgid "Production"
 msgstr "Produkcja"
 
-#: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:166
+#: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:165
 #: ../../src/wui/productionsitewindow.cc:84 ../../src/wui/transport_ui.cc:65
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Workers"
@@ -919,7 +919,7 @@ msgstr "ware_types.pl_PL.xhtml"
 #: ../../src/game_io/game_game_class_data_packet.cc:44
 #: ../../src/game_io/game_interactive_player_data_packet.cc:78
 #: ../../src/game_io/game_player_economies_data_packet.cc:73
-#: ../../src/game_io/game_player_info_data_packet.cc:143
+#: ../../src/game_io/game_player_info_data_packet.cc:139
 #: ../../src/logic/battle.cc:412
 #: ../../src/logic/cmd_calculate_statistics.cc:45
 #: ../../src/logic/cmd_incorporate.cc:46
@@ -1043,7 +1043,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:170
 #: ../../src/editor/editorinteractive.cc:575
-#: ../../src/logic/editor_game_base.cc:330
+#: ../../src/logic/editor_game_base.cc:280
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Wczytywanie plemienia: %s"
@@ -1053,7 +1053,7 @@ msgid "Creating players"
 msgstr "Tworzenie graczy"
 
 #: ../../src/editor/editorinteractive.cc:183
-#: ../../src/logic/editor_game_base.cc:323
+#: ../../src/logic/editor_game_base.cc:273
 msgid "Loading world data"
 msgstr "Wczytywanie danych świata"
 
@@ -1125,7 +1125,7 @@ msgstr "ekonomie: %s"
 msgid "player number (%i) is out of range (1 .. %u)"
 msgstr "numer gracza (%i) jest poza zakresem (1 .. %u)"
 
-#: ../../src/game_io/game_player_info_data_packet.cc:145
+#: ../../src/game_io/game_player_info_data_packet.cc:141
 #, c-format
 msgid "player info: %s"
 msgstr "informacje gracza: %s"
@@ -1286,11 +1286,11 @@ msgstr "Wczytywanie mapy"
 msgid "Creating player infrastructure"
 msgstr "Tworzenie infrastruktury graczy"
 
-#: ../../src/logic/game.cc:502 ../../src/logic/player.cc:142
+#: ../../src/logic/game.cc:502 ../../src/logic/player.cc:146
 msgid "Missing starting position"
 msgstr "Brak pozycji startowej"
 
-#: ../../src/logic/game.cc:504 ../../src/logic/player.cc:144
+#: ../../src/logic/game.cc:504 ../../src/logic/player.cc:148
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -2389,15 +2389,15 @@ msgstr "Klient opuścił grę"
 msgid "Client crashed and performed an emergency save."
 msgstr "Klient zawiesił się i awaryjnie zapisał grę."
 
-#: ../../src/network/netclient.cc:559
+#: ../../src/network/netclient.cc:560
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Serwer wysłał polecenie aktualizacji dla nieistniejącego gracza."
 
-#: ../../src/network/netclient.cc:576
+#: ../../src/network/netclient.cc:579
 msgid "Server sent an user update for a user that does not exist."
 msgstr "Serwer wysłał polecenie aktualizacji dla nieistniejącego gracza."
 
-#: ../../src/network/netclient.cc:651
+#: ../../src/network/netclient.cc:654
 #, c-format
 msgid ""
 "Expected a HELLO packet from server, but received command number %u. Maybe "
@@ -2406,15 +2406,15 @@ msgstr ""
 "Oczekiwano od serwera pakietu HELLO, lecz otrzymano polecenie numer %u. Być "
 "może serwer działa na innej wersji Widelands?"
 
-#: ../../src/network/netclient.cc:658
+#: ../../src/network/netclient.cc:661
 msgid "Server uses a different protocol version"
 msgstr "Serwer używa innej wersji protokołu"
 
-#: ../../src/network/netclient.cc:821
+#: ../../src/network/netclient.cc:824
 msgid "/me 's file failed md5 checksumming."
 msgstr "/me po sprawdzeniu sumy md5 pliku nie przeszedł testu md5."
 
-#: ../../src/network/netclient.cc:851
+#: ../../src/network/netclient.cc:854
 msgid ""
 "/me checked the recieved file. Although md5 check summing succeded, I can "
 "not handle the file."
@@ -2422,34 +2422,34 @@ msgstr ""
 "/me sprawdził otrzymany plik. Choć suma md5 się zgadza, nie jestem w stanie "
 "przetworzyć pliku."
 
-#: ../../src/network/netclient.cc:922
+#: ../../src/network/netclient.cc:925
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Nieoczekiwanie otrzymano od serwera polecenie LAUNCH."
 
-#: ../../src/network/netclient.cc:942
+#: ../../src/network/netclient.cc:945
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr ""
 "Serwer wysłał polecenie PLAYERCOMMAND, mimo iż rozgrywka nie jest w toku."
 
-#: ../../src/network/netclient.cc:955
+#: ../../src/network/netclient.cc:958
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr ""
 "Serwer wysłał polecenie SYNCREQUEST, mimo iż rozgrywka nie jest w toku."
 
-#: ../../src/network/netclient.cc:986
+#: ../../src/network/netclient.cc:989
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr "Serwer wysłał nieznane polecenie (polecenie numer %u)"
 
-#: ../../src/network/netclient.cc:1020
+#: ../../src/network/netclient.cc:1023
 msgid "Something went wrong: "
 msgstr "Coś poszło nie tak: "
 
-#: ../../src/network/netclient.cc:1051
+#: ../../src/network/netclient.cc:1054
 msgid " An automatic savegame will be created."
 msgstr " Gra zostanie zapisana automatycznie."
 
-#: ../../src/network/nethost.cc:348
+#: ../../src/network/nethost.cc:357
 msgid ""
 "<br>Available host commands are:<br>/help  -  Shows this help<br>/announce "
 "<msg>  -  Send a chatmessage as announcement (system chat)<br>/warn <name> "
@@ -2464,83 +2464,83 @@ msgstr ""
 "Wyrzuca użytkownika <name> z powodu <reason><br>/forcePause - wymusza "
 "przerwę<br>/endForcedPause - wznawia grę"
 
-#: ../../src/network/nethost.cc:362
+#: ../../src/network/nethost.cc:371
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Błędne użycie. Powinno być: /announce <wiadomość>"
 
-#: ../../src/network/nethost.cc:375
+#: ../../src/network/nethost.cc:384
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "Błędne użycie, powinno być: /warn <imię> <powód>"
 
-#: ../../src/network/nethost.cc:383
+#: ../../src/network/nethost.cc:392
 msgid "Why would you warn yourself?"
 msgstr "Dlaczego miałbyś ostrzegać samego siebie?"
 
-#: ../../src/network/nethost.cc:385
+#: ../../src/network/nethost.cc:394
 msgid "Why would you want to warn the dedicated server?"
 msgstr "Dlaczego miałbyś ostrzegać server dedykowany?"
 
-#: ../../src/network/nethost.cc:389 ../../src/network/nethost.cc:415
+#: ../../src/network/nethost.cc:398 ../../src/network/nethost.cc:424
 #, c-format
 msgid "The client %s could not be found."
 msgstr "Nie mogę znaleźć klienta %s."
 
-#: ../../src/network/nethost.cc:400
+#: ../../src/network/nethost.cc:409
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Błędne użycie, powinno być: /kick <imię> <powód>"
 
-#: ../../src/network/nethost.cc:411
+#: ../../src/network/nethost.cc:420
 msgid "You can not kick yourself!"
 msgstr "Nie możesz wyrzucić siebie!"
 
-#: ../../src/network/nethost.cc:413
+#: ../../src/network/nethost.cc:422
 msgid "You can not kick the dedicated server"
 msgstr "Serwer dedykowany nie może być wyrzucony"
 
-#: ../../src/network/nethost.cc:418
+#: ../../src/network/nethost.cc:427
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
 msgstr "Czy na pewno wyrzucić %s?<br>"
 
-#: ../../src/network/nethost.cc:419
+#: ../../src/network/nethost.cc:428
 #, c-format
 msgid "The stated reason was: %s<br>"
 msgstr "Podano powód: %s<br>"
 
-#: ../../src/network/nethost.cc:420
+#: ../../src/network/nethost.cc:429
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Jeśli tak, wpisz /ack_kick %s"
 
-#: ../../src/network/nethost.cc:431
+#: ../../src/network/nethost.cc:440
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr "Potwierdzenie wyrzucenia anulowane: Brak podanej nazwy!"
 
-#: ../../src/network/nethost.cc:433
+#: ../../src/network/nethost.cc:442
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Błędne użycie, powinno być: /ack_kick <imię>"
 
-#: ../../src/network/nethost.cc:439
+#: ../../src/network/nethost.cc:448
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr "Potwierdzenie wyrzucenia anulowane: Podano złą nazwę!"
 
-#: ../../src/network/nethost.cc:450
+#: ../../src/network/nethost.cc:459
 msgid "Pause was already forced - game should be paused."
 msgstr "Pauza została wymuszona wcześniej - gra powinna być już wstrzymana."
 
-#: ../../src/network/nethost.cc:462
+#: ../../src/network/nethost.cc:471
 msgid "There is no forced pause - nothing to end."
 msgstr "Brak wymuszonej pauzy - nie ma nic do zakończenia."
 
-#: ../../src/network/nethost.cc:473
+#: ../../src/network/nethost.cc:482
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Błędna komenda. Wpisz /help aby wyświetlić listę komend."
 
-#: ../../src/network/nethost.cc:619
+#: ../../src/network/nethost.cc:628
 msgid "Server has left the game."
 msgstr "Serwer opuścił grę"
 
-#: ../../src/network/nethost.cc:687
+#: ../../src/network/nethost.cc:696
 #, c-format
 msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
@@ -2549,15 +2549,15 @@ msgstr ""
 "To jest serwer dedykowany. Wpisz \"@%s help\", by otrzymać pełną listę "
 "dostępnych komend."
 
-#: ../../src/network/nethost.cc:724
+#: ../../src/network/nethost.cc:733
 msgid "The game has started just after you tried to connect."
 msgstr "Gra rozpoczęła się po twojej próbie podłączenia."
 
-#: ../../src/network/nethost.cc:828
+#: ../../src/network/nethost.cc:837
 msgid "Server has crashed and performed an emergency save."
 msgstr "Serwer zawiesił się i awaryjnie zapisał grę."
 
-#: ../../src/network/nethost.cc:1104
+#: ../../src/network/nethost.cc:1113
 msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $<br>save $ - Saves the current game state as "
@@ -2566,7 +2566,7 @@ msgstr ""
 "<br> Możliwe komendy hosta:<br>help - Wyświetla niniejszą listę<br>host $ - "
 "Wykonuje komendę hosta $<br> save $ - Zapisuje obecny stan gry w pliku $.wgf"
 
-#: ../../src/network/nethost.cc:1111
+#: ../../src/network/nethost.cc:1120
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
@@ -2574,11 +2574,11 @@ msgstr ""
 "<br> Możliwe komendy hosta:<br>help - Wyświetla niniejszą listę<br>host $ - "
 "Wykonuje komendę hosta $"
 
-#: ../../src/network/nethost.cc:1116
+#: ../../src/network/nethost.cc:1125
 msgid "pwd          $ - Sends the password $ to the host"
 msgstr "pwd $ - wysyła hasło $ do hosta"
 
-#: ../../src/network/nethost.cc:1123
+#: ../../src/network/nethost.cc:1132
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
@@ -2586,67 +2586,67 @@ msgstr ""
 "Dostęp do komend hosta zabroniony. By zyskać dostęp, wyślij hasło za pomocą "
 "komendy pwd."
 
-#: ../../src/network/nethost.cc:1128
+#: ../../src/network/nethost.cc:1137
 #, c-format
 msgid "%s told me to run the command: \"%s\""
 msgstr "%s kazał mi wykonać komendę: \"%s\""
 
-#: ../../src/network/nethost.cc:1137
+#: ../../src/network/nethost.cc:1146
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr ""
 "Mozliwość zapisu na tym dedykowanym serwerze została wyłączona, przykro mi!"
 
-#: ../../src/network/nethost.cc:1140
+#: ../../src/network/nethost.cc:1149
 msgid "Can not save, as long as no game is running!"
 msgstr "Nie można zapisać, jeśli nie prowadzi się gry!"
 
-#: ../../src/network/nethost.cc:1151
+#: ../../src/network/nethost.cc:1160
 msgid "Game successfully saved!"
 msgstr "Gra zapisana!"
 
-#: ../../src/network/nethost.cc:1153
+#: ../../src/network/nethost.cc:1162
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
 msgstr "Zapis do pliku \"%s\" nieudany! (%s)"
 
-#: ../../src/network/nethost.cc:1159
+#: ../../src/network/nethost.cc:1168
 msgid "This server is not password protected!"
 msgstr "Ten serwer nie jest chroniony hasłem!"
 
-#: ../../src/network/nethost.cc:1162
+#: ../../src/network/nethost.cc:1171
 msgid "The send password was incorrect!"
 msgstr "Otrzymane hasło jest błędne!"
 
-#: ../../src/network/nethost.cc:1175
+#: ../../src/network/nethost.cc:1184
 msgid "The password was correct, access was granted!"
 msgstr "Hasło poprawne, dostęp przyznany!"
 
-#: ../../src/network/nethost.cc:1181
+#: ../../src/network/nethost.cc:1190
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr "Nieznana komenda serwera \"%s\"!"
 
-#: ../../src/network/nethost.cc:1437
+#: ../../src/network/nethost.cc:1452
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Gospodarz wysłał gracza %s do lobby!"
 
-#: ../../src/network/nethost.cc:1831
+#: ../../src/network/nethost.cc:1858
 #, c-format
 msgid "Computer%u"
 msgstr "Komputer%u"
 
-#: ../../src/network/nethost.cc:1917
+#: ../../src/network/nethost.cc:1944
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr "UWAGA: %s używa wersję: %s, kiedy serwer używa wersję: %s"
 
-#: ../../src/network/nethost.cc:1976
+#: ../../src/network/nethost.cc:2003
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s dołączył do gry"
 
-#: ../../src/network/nethost.cc:1990
+#: ../../src/network/nethost.cc:2017
 #, c-format
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
@@ -2655,39 +2655,39 @@ msgstr ""
 "Ten serwer jest chroniony hasłem. Hasło można wysłać, korzystając z komendy: "
 "\"@%s pwd HASŁO\""
 
-#: ../../src/network/nethost.cc:2028
+#: ../../src/network/nethost.cc:2055
 msgid "Client reports time to host that is running backwards."
 msgstr "Klient zgłasza czas gospodarzowi który leci do tyłu."
 
-#: ../../src/network/nethost.cc:2031
+#: ../../src/network/nethost.cc:2058
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Klient symuluje poza czas gry dozwolony przez gospodarza."
 
-#: ../../src/network/nethost.cc:2035
+#: ../../src/network/nethost.cc:2062
 msgid "Client did not submit sync report in time."
 msgstr "Klient nie przesłał raportu synchronizacji na czas."
 
-#: ../../src/network/nethost.cc:2242
+#: ../../src/network/nethost.cc:2269
 msgid "Client and host have become desynchronized."
 msgstr "Klient i serwer przestali być zsynchronizowanii"
 
-#: ../../src/network/nethost.cc:2289
+#: ../../src/network/nethost.cc:2316
 msgid "The game has already started."
 msgstr "Gra już się rozpoczęła."
 
-#: ../../src/network/nethost.cc:2307
+#: ../../src/network/nethost.cc:2334
 msgid "Connection to client lost."
 msgstr "Utracono połączenie z klientem."
 
-#: ../../src/network/nethost.cc:2321
+#: ../../src/network/nethost.cc:2348
 msgid "Client sent malformed commands: "
 msgstr "Klient wysłał nieprawidłowe polecenie: "
 
-#: ../../src/network/nethost.cc:2353
+#: ../../src/network/nethost.cc:2380
 msgid "Game is running already, but client has not connected fully"
 msgstr "Gra już trwa, ale klient nie jest w pełni podłączony."
 
-#: ../../src/network/nethost.cc:2357
+#: ../../src/network/nethost.cc:2384
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
@@ -2696,77 +2696,77 @@ msgstr ""
 "Pierwsze polecenie wysłane przez klienta to %u zamiast HELLO. Klient "
 "prawdopodobnie używa nikompatybilnej wersji."
 
-#: ../../src/network/nethost.cc:2362
+#: ../../src/network/nethost.cc:2389
 msgid "Server uses a different protocol version."
 msgstr "Serwer używa innej wersji protokołu."
 
-#: ../../src/network/nethost.cc:2380 ../../src/network/nethost.cc:2432
-#: ../../src/network/nethost.cc:2445 ../../src/network/nethost.cc:2456
-#: ../../src/network/nethost.cc:2467
+#: ../../src/network/nethost.cc:2407 ../../src/network/nethost.cc:2459
+#: ../../src/network/nethost.cc:2474 ../../src/network/nethost.cc:2485
+#: ../../src/network/nethost.cc:2496
 msgid "Client has no access to other player's settings."
 msgstr "Klient nie ma dostępu do ustawień innych graczy."
 
-#: ../../src/network/nethost.cc:2483 ../../src/network/nethost.cc:2492
-#: ../../src/network/nethost.cc:2501
+#: ../../src/network/nethost.cc:2512 ../../src/network/nethost.cc:2521
+#: ../../src/network/nethost.cc:2530
 msgid "Client has no access to server settings."
 msgstr "Klient nie ma dostępu do ustawień serwera."
 
-#: ../../src/network/nethost.cc:2503
+#: ../../src/network/nethost.cc:2532
 msgid "Client send start command, although server is not yet ready."
 msgstr "Klient wysłał komendę startu, mimo, że serwer nie jest gotowy."
 
-#: ../../src/network/nethost.cc:2510
+#: ../../src/network/nethost.cc:2539
 msgid "Client sent TIME command even though game is not running."
 msgstr "Klient wysłał komendę TIME i gdyż gra się jeszcze nie zaczeła."
 
-#: ../../src/network/nethost.cc:2516
+#: ../../src/network/nethost.cc:2545
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 "Klient wysłał komendę PLAYERCOMMAND i gdyż gra się jeszcze nie zaczeła."
 
-#: ../../src/network/nethost.cc:2527
+#: ../../src/network/nethost.cc:2556
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr "Klient %u (%u) wysłał polecenie gracza (%i) za innego gracza (%i)."
 
-#: ../../src/network/nethost.cc:2536
+#: ../../src/network/nethost.cc:2565
 msgid "Client sent unexpected synchronization report."
 msgstr "Klient wysłał nieoczekiwany raport synchronizacji."
 
-#: ../../src/network/nethost.cc:2571 ../../src/network/nethost.cc:2582
+#: ../../src/network/nethost.cc:2600 ../../src/network/nethost.cc:2611
 msgid "Client requests file altough none is available to send."
 msgstr "Klient prosi o plik mimo, że nie ma żadnego do wysłania."
 
-#: ../../src/network/nethost.cc:2573
+#: ../../src/network/nethost.cc:2602
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Rozpoczęto wysyłanie pliku %s do %s!"
 
-#: ../../src/network/nethost.cc:2590
+#: ../../src/network/nethost.cc:2619
 msgid "Client requests file part that does not exist."
 msgstr "Klient prosi o nieistniejącą część pliku."
 
-#: ../../src/network/nethost.cc:2593
+#: ../../src/network/nethost.cc:2622
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "Zakończono przesyłanie pliku %s do %s"
 
-#: ../../src/network/nethost.cc:2601
+#: ../../src/network/nethost.cc:2630
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
 msgstr "Wysyłanie części %u/%u pliku %s do %s"
 
-#: ../../src/network/nethost.cc:2610
+#: ../../src/network/nethost.cc:2639
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Klient wysłał nieznane polecenie numer %u"
 
-#: ../../src/network/nethost.cc:2667
+#: ../../src/network/nethost.cc:2696
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s opuścił grę (%s)"
 
-#: ../../src/network/nethost.cc:2686
+#: ../../src/network/nethost.cc:2715
 #, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "Nieznany użytkownik opuścił grę (%s)"
@@ -3045,7 +3045,7 @@ msgid "The host has not yet selected a map or saved game."
 msgstr "Host nie wybrał mapy lub zapisanej gry"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:265 ../../src/ui_fsmenu/launchSPG.cc:224
-#: ../../src/wui/multiplayersetupgroup.cc:337
+#: ../../src/wui/multiplayersetupgroup.cc:347
 msgid "Scenario"
 msgstr "Scenariusz"
 
@@ -3054,7 +3054,7 @@ msgid "Win condition is set through the scenario"
 msgstr "Warunki zwycięstwa określa scenariusz"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:269
-#: ../../src/wui/multiplayersetupgroup.cc:339
+#: ../../src/wui/multiplayersetupgroup.cc:349
 msgid "Savegame"
 msgstr "Zapis gry"
 
@@ -3301,7 +3301,7 @@ msgid "Player's type"
 msgstr "Typ gracza"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:99
-#: ../../src/wui/multiplayersetupgroup.cc:446
+#: ../../src/wui/multiplayersetupgroup.cc:452
 msgid "Team"
 msgstr "Drużyna"
 
@@ -4043,84 +4043,84 @@ msgstr "Głośność muzyki"
 msgid "Sound FX Volume"
 msgstr "Głośność efektów"
 
-#: ../../src/wui/general_statistics_menu.cc:160
+#: ../../src/wui/general_statistics_menu.cc:159
 msgid "Land"
 msgstr "Ziemia"
 
-#: ../../src/wui/general_statistics_menu.cc:172 ../../src/wui/minimap.cc:175
+#: ../../src/wui/general_statistics_menu.cc:171 ../../src/wui/minimap.cc:175
 msgid "Buildings"
 msgstr "Budynki"
 
-#: ../../src/wui/general_statistics_menu.cc:178
+#: ../../src/wui/general_statistics_menu.cc:177
 #: ../../src/wui/productionsitewindow.cc:62 ../../src/wui/transport_ui.cc:60
 #: ../../src/wui/warehousewindow.cc:191
 msgid "Wares"
 msgstr "Towary"
 
-#: ../../src/wui/general_statistics_menu.cc:184
+#: ../../src/wui/general_statistics_menu.cc:183
 msgid "Productivity"
 msgstr "Produktywność"
 
-#: ../../src/wui/general_statistics_menu.cc:190
+#: ../../src/wui/general_statistics_menu.cc:189
 msgid "Casualties"
 msgstr "Straty"
 
-#: ../../src/wui/general_statistics_menu.cc:196
+#: ../../src/wui/general_statistics_menu.cc:195
 msgid "Kills"
 msgstr "Zabici"
 
-#: ../../src/wui/general_statistics_menu.cc:202
+#: ../../src/wui/general_statistics_menu.cc:201
 msgid "Military buildings lost"
 msgstr "Stracone wojskowe budynki"
 
-#: ../../src/wui/general_statistics_menu.cc:208
+#: ../../src/wui/general_statistics_menu.cc:207
 msgid "Military buildings defeated"
 msgstr "Zniszczone budynki wojskowe"
 
-#: ../../src/wui/general_statistics_menu.cc:214
+#: ../../src/wui/general_statistics_menu.cc:213
 msgid "Civilian buildings lost"
 msgstr "Stracone budynki cywilistów"
 
-#: ../../src/wui/general_statistics_menu.cc:220
+#: ../../src/wui/general_statistics_menu.cc:219
 msgid "Military"
 msgstr "Wojskowych"
 
-#: ../../src/wui/general_statistics_menu.cc:246
+#: ../../src/wui/general_statistics_menu.cc:245
 #: ../../src/wui/ware_statistics_menu.cc:423
 msgid "15 m"
 msgstr "15 m"
 
-#: ../../src/wui/general_statistics_menu.cc:255
+#: ../../src/wui/general_statistics_menu.cc:254
 #: ../../src/wui/ware_statistics_menu.cc:432
 msgid "30 m"
 msgstr "30 m"
 
-#: ../../src/wui/general_statistics_menu.cc:264
+#: ../../src/wui/general_statistics_menu.cc:263
 #: ../../src/wui/ware_statistics_menu.cc:441
 msgid "1 h"
 msgstr "1 h"
 
-#: ../../src/wui/general_statistics_menu.cc:273
+#: ../../src/wui/general_statistics_menu.cc:272
 #: ../../src/wui/ware_statistics_menu.cc:450
 msgid "2 h"
 msgstr "2 h"
 
-#: ../../src/wui/general_statistics_menu.cc:284
+#: ../../src/wui/general_statistics_menu.cc:283
 #: ../../src/wui/ware_statistics_menu.cc:461
 msgid "Help"
 msgstr "Pomoc"
 
-#: ../../src/wui/general_statistics_menu.cc:293
+#: ../../src/wui/general_statistics_menu.cc:292
 #: ../../src/wui/ware_statistics_menu.cc:470
 msgid "4 h"
 msgstr "4 h"
 
-#: ../../src/wui/general_statistics_menu.cc:301
+#: ../../src/wui/general_statistics_menu.cc:300
 #: ../../src/wui/ware_statistics_menu.cc:479
 msgid "8 h"
 msgstr "8 h"
 
-#: ../../src/wui/general_statistics_menu.cc:310
+#: ../../src/wui/general_statistics_menu.cc:309
 #: ../../src/wui/ware_statistics_menu.cc:488
 msgid "16 h"
 msgstr "16 h"
@@ -4273,32 +4273,38 @@ msgstr "Komputer"
 msgid "AI: "
 msgstr "AI: "
 
-#: ../../src/wui/multiplayersetupgroup.cc:300
-#: ../../src/wui/playerdescrgroup.cc:176
+#: ../../src/wui/multiplayersetupgroup.cc:297
+#: ../../src/wui/multiplayersetupgroup.cc:311
+#: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
+msgid "random"
+msgstr "losowo"
+
+#: ../../src/wui/multiplayersetupgroup.cc:305
+#: ../../src/wui/playerdescrgroup.cc:180
 msgid "Human"
 msgstr "Człowiek"
 
-#: ../../src/wui/multiplayersetupgroup.cc:394
+#: ../../src/wui/multiplayersetupgroup.cc:400
 msgid "Client name"
 msgstr "Nazwa klienta"
 
-#: ../../src/wui/multiplayersetupgroup.cc:402
+#: ../../src/wui/multiplayersetupgroup.cc:408
 msgid "Role"
 msgstr "Rola"
 
-#: ../../src/wui/multiplayersetupgroup.cc:418
+#: ../../src/wui/multiplayersetupgroup.cc:424
 msgid "Start"
 msgstr "Start"
 
-#: ../../src/wui/multiplayersetupgroup.cc:426
+#: ../../src/wui/multiplayersetupgroup.cc:432
 msgid "Type"
 msgstr "Typ"
 
-#: ../../src/wui/multiplayersetupgroup.cc:434
+#: ../../src/wui/multiplayersetupgroup.cc:440
 msgid "Tribe"
 msgstr "Nacja"
 
-#: ../../src/wui/multiplayersetupgroup.cc:442
+#: ../../src/wui/multiplayersetupgroup.cc:448
 #: ../../src/wui/playerdescrgroup.cc:103
 msgid "Initialization"
 msgstr "Inicializacja"
@@ -4385,15 +4391,15 @@ msgstr "Nie gromadź zaznaczonych towarów tutaj"
 msgid "Remove selected wares from here"
 msgstr "Usuń stądzaznaczone towary"
 
-#: ../../src/wui/waresqueuedisplay.cc:274
+#: ../../src/wui/waresqueuedisplay.cc:288
 msgid "Highest priority"
 msgstr "Najwyższy priorytet"
 
-#: ../../src/wui/waresqueuedisplay.cc:285
+#: ../../src/wui/waresqueuedisplay.cc:299
 msgid "Normal priority"
 msgstr "Normalny priorytet"
 
-#: ../../src/wui/waresqueuedisplay.cc:296
+#: ../../src/wui/waresqueuedisplay.cc:310
 msgid "Lowest priority"
 msgstr "Najniższy priorytet"
 
