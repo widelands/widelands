@@ -152,6 +152,7 @@ struct Graphic {
 	PictureID create_picture(int32_t w, int32_t h, bool alpha = false);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);
+	PictureID create_changed_luminosity_pic(const PictureID & picid);
 
 	enum  ResizeMode {
 		// do not worry about proportions, just sketch to requested size

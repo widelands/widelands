@@ -23,10 +23,15 @@
 #include <cstdlib>
 #include <stdint.h>
 
+#include "logic/item_ware_descr.h"
+#include "ui_basic/panel.h"
+#include "ui_basic/radiobutton.h"
+
 struct Interactive_GameBase;
 
 namespace UI {
 struct Panel;
+struct Radiogroup;
 }
 
 namespace Widelands {
@@ -34,11 +39,51 @@ struct Building;
 struct WaresQueue;
 }
 
-UI::Panel * create_wares_queue_display
-	(UI::Panel * parent,
-	 Interactive_GameBase & igb,
-	 Widelands::Building & b,
-	 Widelands::WaresQueue * const wq,
-	 int32_t width);
+/**
+ * This passive class displays the status of a WaresQueue
+ * and shows priority buttons that can be manipulated.
+ * It updates itself automatically through think().
+ */
+struct WaresQueueDisplay : public UI::Panel {
+	enum {
+		CellWidth = WARE_MENU_PIC_WIDTH,
+		Border = 4,
+		Height = WARE_MENU_PIC_HEIGHT + 2 * Border,
+		PriorityButtonSize = 10
+	};
+
+public:
+	WaresQueueDisplay
+		(UI::Panel             * parent,
+		 int32_t x, int32_t y,
+		 uint32_t                maxw,
+		 Interactive_GameBase  & igb,
+		 Widelands::Building   & building,
+		 Widelands::WaresQueue * queue);
+	~WaresQueueDisplay();
+
+	virtual void think();
+	virtual void draw(RenderTarget &);
+
+protected:
+	virtual void update_desired_size();
+
+private:
+	Interactive_GameBase  & m_igb;
+	Widelands::Building   & m_building;
+	Widelands::WaresQueue * m_queue;
+	Widelands::Ware_Index   m_ware_index;
+	int32_t          m_ware_type;
+	uint32_t         m_max_width;
+	PictureID        m_icon;            //< Index to ware's picture
+	PictureID        m_pic_background;
+	UI::Radiogroup   m_radiogroup;
+
+	uint32_t         m_cache_size;
+	uint32_t         m_cache_filled;
+	uint32_t         m_display_size;
+
+	void radiogroup_changed(int32_t);
+};
 
 #endif // _WARESQUEUEDISPLAY_H_
