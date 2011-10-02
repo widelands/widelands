@@ -25,13 +25,11 @@
 #include "interactive_gamebase.h"
 #include "logic/player.h"
 
-#include "upcast.h"
-
 static char const * pic_queue_background = "pics/queue_background.png";
 
-static char const * pic_priority_low_flat       = "pics/low_priority_button_flat.png";
-static char const * pic_priority_normal_flat    = "pics/normal_priority_button_flat.png";
-static char const * pic_priority_high_flat      = "pics/high_priority_button_flat.png";
+static char const * pic_priority_low     = "pics/low_priority_button.png";
+static char const * pic_priority_normal  = "pics/normal_priority_button.png";
+static char const * pic_priority_high    = "pics/high_priority_button.png";
 
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
@@ -46,7 +44,7 @@ m_building(building),
 m_queue(queue),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::Request::WARE),
-m_max_width(maxw - Height / 3),
+m_max_width(maxw - PriorityButtonSize),
 m_pic_background(g_gr->get_picture(PicMod_Game, pic_queue_background)),
 m_cache_size(queue->get_size()),
 m_cache_filled(queue->get_filled()),
@@ -59,30 +57,32 @@ m_display_size(0)
 	m_icon = ware.icon();
 	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
 
-	update_desired_size();
-
-	set_think(true);
 
 	Point pos = Point(m_cache_size * CellWidth + Border, 0);
 
 	m_radiogroup.add_button
 			(this,
 			pos,
-			g_gr->get_picture(PicMod_Game,  pic_priority_high_flat),
+			g_gr->get_resized_picture
+				(g_gr->get_picture(PicMod_Game,  pic_priority_high),
+				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
 			_("Highest priority"));
-	pos.y += Height / 3;
+	pos.y += PriorityButtonSize;
 	m_radiogroup.add_button
 			(this,
 			pos,
-			g_gr->get_picture(PicMod_Game,  pic_priority_normal_flat),
+			g_gr->get_resized_picture
+				(g_gr->get_picture(PicMod_Game,  pic_priority_normal),
+				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
 			_("Normal priority"));
-	pos.y += Height / 3;
+	pos.y += PriorityButtonSize;
 	m_radiogroup.add_button
 			(this,
 			pos,
-			g_gr->get_picture(PicMod_Game,  pic_priority_low_flat),
+			g_gr->get_resized_picture
+				(g_gr->get_picture(PicMod_Game,  pic_priority_low),
+				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
 			_("Lowest priority"));
-
 
 	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
 	switch (priority) {
@@ -101,6 +101,10 @@ m_display_size(0)
 
 	m_radiogroup.changedto.set
 			(this, &WaresQueueDisplay::radiogroup_changed);
+
+	update_desired_size();
+
+	set_think(true);
 }
 
 WaresQueueDisplay::~WaresQueueDisplay()
@@ -121,7 +125,7 @@ void WaresQueueDisplay::update_desired_size()
 	if (m_cache_size < m_display_size)
 		m_display_size = m_cache_size;
 
-	set_desired_size(m_display_size * CellWidth + Height / 3 + 2 * Border, Height);
+	set_desired_size(m_display_size * CellWidth + PriorityButtonSize + 2 * Border, Height);
 }
 
 /**
@@ -155,7 +159,7 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 		dst.blit(point, m_pic_background);
 }
 
-/*
+/**
  * Update priority when radiogroup has changed
  */
 void WaresQueueDisplay::radiogroup_changed(int32_t state) {
@@ -175,20 +179,3 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state) {
 	m_igb.game().send_player_set_ware_priority
 			(m_building, m_ware_type, m_ware_index, priority);
 };
-
-
-/**
- * Allocate a new panel that displays the given wares queue and shows
- * priority buttons that can be manipulated if appropriate.
- */
-UI::Panel * create_wares_queue_display
-	(UI::Panel * parent,
-	 Interactive_GameBase & igb,
-	 Widelands::Building & b,
-	 Widelands::WaresQueue * const wq,
-	 int32_t width)
-{
-	WaresQueueDisplay & wqd = *new WaresQueueDisplay(parent, 0, 0, width, igb, b, wq);
-	upcast(UI::Panel, panel, &wqd);
-	return panel;
-}

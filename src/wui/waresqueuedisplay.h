@@ -40,7 +40,8 @@ struct WaresQueue;
 }
 
 /**
- * This passive class displays the status of a WaresQueue.
+ * This passive class displays the status of a WaresQueue
+ * and shows priority buttons that can be manipulated.
  * It updates itself automatically through think().
  */
 struct WaresQueueDisplay : public UI::Panel {
@@ -48,6 +49,7 @@ struct WaresQueueDisplay : public UI::Panel {
 		CellWidth = WARE_MENU_PIC_WIDTH,
 		Border = 4,
 		Height = WARE_MENU_PIC_HEIGHT + 2 * Border,
+		PriorityButtonSize = 10
 	};
 
 public:
@@ -83,13 +85,5 @@ private:
 
 	void radiogroup_changed(int32_t);
 };
-
-
-UI::Panel * create_wares_queue_display
-	(UI::Panel * parent,
-	 Interactive_GameBase & igb,
-	 Widelands::Building & b,
-	 Widelands::WaresQueue * const wq,
-	 int32_t width);
 
 #endif // _WARESQUEUEDISPLAY_H_
