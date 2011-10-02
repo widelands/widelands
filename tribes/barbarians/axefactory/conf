@@ -66,8 +66,10 @@ return=skipped
 
 [idle]
 pics=axefactory_i_??.png  # ???
-hotspot=41 66
+hotspot=62 66
+playercolor=true
 
 [working]
-pics=axefactory_i_??.png  # ???
-hotspot=41 66
+pics=axefactory_w_??.png  # ???
+hotspot=62 66
+playercolor=true
