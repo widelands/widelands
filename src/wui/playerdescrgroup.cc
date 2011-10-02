@@ -171,7 +171,7 @@ void PlayerDescriptionGroup::refresh()
 				else {
 					title = _("AI: ");
 					if (player.random_ai) {
-						title += _("random");
+						title += _("Random");
 					} else {
 						title += _(player.ai);
 					}
@@ -189,7 +189,7 @@ void PlayerDescriptionGroup::refresh()
 				m_tribenames[player.tribe] = global.get_safe_string("name");
 			}
 			if (player.random_tribe) {
-				d->btnPlayerTribe->set_title(_("random"));
+				d->btnPlayerTribe->set_title(_("Random"));
 			} else {
 				d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
 			}
