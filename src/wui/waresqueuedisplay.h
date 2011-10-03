@@ -72,17 +72,19 @@ private:
 	Interactive_GameBase  & m_igb;
 	Widelands::Building   & m_building;
 	Widelands::WaresQueue * m_queue;
+	UI::Radiogroup        * m_radiogroup;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
 	uint32_t         m_max_width;
 	PictureID        m_icon;            //< Index to ware's picture
 	PictureID        m_pic_background;
-	UI::Radiogroup   m_radiogroup;
+
 
 	uint32_t         m_cache_size;
 	uint32_t         m_cache_filled;
 	uint32_t         m_display_size;
 
+	void update_priority_buttons();
 	void radiogroup_changed(int32_t);
 };
 

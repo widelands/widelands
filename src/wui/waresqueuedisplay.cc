@@ -42,6 +42,7 @@ UI::Panel(parent, x, y, 0, Height),
 m_igb(igb),
 m_building(building),
 m_queue(queue),
+m_radiogroup(NULL),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::Request::WARE),
 m_max_width(maxw - PriorityButtonSize),
@@ -56,51 +57,6 @@ m_display_size(0)
 
 	m_icon = ware.icon();
 	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
-
-
-	Point pos = Point(m_cache_size * CellWidth + Border, 0);
-
-	m_radiogroup.add_button
-			(this,
-			pos,
-			g_gr->get_resized_picture
-				(g_gr->get_picture(PicMod_Game,  pic_priority_high),
-				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
-			_("Highest priority"));
-	pos.y += PriorityButtonSize;
-	m_radiogroup.add_button
-			(this,
-			pos,
-			g_gr->get_resized_picture
-				(g_gr->get_picture(PicMod_Game,  pic_priority_normal),
-				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
-			_("Normal priority"));
-	pos.y += PriorityButtonSize;
-	m_radiogroup.add_button
-			(this,
-			pos,
-			g_gr->get_resized_picture
-				(g_gr->get_picture(PicMod_Game,  pic_priority_low),
-				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
-			_("Lowest priority"));
-
-	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
-	switch (priority) {
-	case HIGH_PRIORITY:
-		m_radiogroup.set_state(0);
-		break;
-	case DEFAULT_PRIORITY:
-		m_radiogroup.set_state(1);
-		break;
-	case LOW_PRIORITY:
-		m_radiogroup.set_state(2);
-		break;
-	default:
-		break;
-	}
-
-	m_radiogroup.changedto.set
-			(this, &WaresQueueDisplay::radiogroup_changed);
 
 	update_desired_size();
 
@@ -125,7 +81,13 @@ void WaresQueueDisplay::update_desired_size()
 	if (m_cache_size < m_display_size)
 		m_display_size = m_cache_size;
 
-	set_desired_size(m_display_size * CellWidth + PriorityButtonSize + 2 * Border, Height);
+	update_priority_buttons();
+
+	if (m_display_size <= 0) {
+		set_desired_size(0, 0);
+	} else {
+		set_desired_size(m_display_size * CellWidth + PriorityButtonSize + 2 * Border, Height);
+	}
 }
 
 /**
@@ -160,9 +122,66 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 }
 
 /**
+ * Updates priority buttons of the WaresQueue
+ */
+void WaresQueueDisplay::update_priority_buttons()
+{
+	delete m_radiogroup;
+	if (m_display_size <= 0)
+		return;
+
+	m_radiogroup = new UI::Radiogroup();
+
+	Point pos = Point(m_display_size * CellWidth + Border, 0);
+
+	m_radiogroup->add_button
+			(this,
+			pos,
+			g_gr->get_resized_picture
+				(g_gr->get_picture(PicMod_Game,  pic_priority_high),
+				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
+			_("Highest priority"));
+	pos.y += PriorityButtonSize;
+	m_radiogroup->add_button
+			(this,
+			pos,
+			g_gr->get_resized_picture
+				(g_gr->get_picture(PicMod_Game,  pic_priority_normal),
+				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
+			_("Normal priority"));
+	pos.y += PriorityButtonSize;
+	m_radiogroup->add_button
+			(this,
+			pos,
+			g_gr->get_resized_picture
+				(g_gr->get_picture(PicMod_Game,  pic_priority_low),
+				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
+			_("Lowest priority"));
+
+	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
+	switch (priority) {
+	case HIGH_PRIORITY:
+		m_radiogroup->set_state(0);
+		break;
+	case DEFAULT_PRIORITY:
+		m_radiogroup->set_state(1);
+		break;
+	case LOW_PRIORITY:
+		m_radiogroup->set_state(2);
+		break;
+	default:
+		break;
+	}
+
+	m_radiogroup->changedto.set
+		(this, &WaresQueueDisplay::radiogroup_changed);
+}
+
+/**
  * Update priority when radiogroup has changed
  */
-void WaresQueueDisplay::radiogroup_changed(int32_t state) {
+void WaresQueueDisplay::radiogroup_changed(int32_t state)
+{
 	int32_t priority = 0;
 
 	switch (state) {
