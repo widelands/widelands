@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-01 09:13+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -42,11 +42,6 @@ msgstr ""
 #: ../../campaigns/cconfig:74
 msgid ""
 "03 - This Land is our Land"
-msgstr ""
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid ""
-"A Multiplayer-battle-map on a X-Shaped island."
 msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:9
@@ -157,11 +152,6 @@ msgstr ""
 #: ../../campaigns/cconfig:34
 msgid ""
 "Empire - The Months of Exile"
-msgstr ""
-
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid ""
-"Enemy in sight"
 msgstr ""
 
 #: ../../maps/Finlakes.wmf/elemental:9
@@ -315,6 +305,11 @@ msgid ""
 "Six months ago, Lutius - a young general of the Empire - was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire's land. At first, everything was calm. He even talked to a few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
 msgstr ""
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid ""
+"Smugglers"
+msgstr ""
+
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
 "Some say that impenetrable lands to the far north scared away even the most courageous settlers and the bravest of the brave warriors. Big and old forests, full of big and predatory game, cut across by wetlands and hills were shrouded in mystery. The ones who had managed to come back mentioned tremendous buildings, decorated with carvings and gold from majestic mountain ranges somewhere amongst the wilderness. Dozens of years after only some crumbly ruins remain of these good old times, covered with moss and trees. Their shapes give only an idea about the craftsmanship of ancient constructors. Nobody knows why they (have) disappeared. Nobody knows why. People say that now nothing is blocking the road to wealth. But many will die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
@@ -463,5 +458,10 @@ msgstr ""
 #: ../../maps/Plateau.wmf/elemental:9
 msgid ""
 "You are standing on an island, crowned by mighty mountains, which keep a wonderful and mighty treasure in their middle - The Green Plateau, which is hard to get, but easy to lose, so if you want it, be aware of the other clans."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes appeared and now a rivalry under smugglers has been started: Which team will be the first to smuggle a certain number of wares?"
 msgstr ""
 
