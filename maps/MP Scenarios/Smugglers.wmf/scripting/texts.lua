@@ -10,17 +10,20 @@ to each other on a X-shaped island. Each player has a point in the
 center of the map where he should place a warehouse. If both players in a
 team succeed to build their warehouse in the right spot a smuggling route
 is established: all wares from the top player that are delivered to his
-warehouse are warped to the bottom player. The aim of the game is to
-smuggle 100 items from top to bottom.]]) .. p(_
-[[The other team has the same goal and will try to interrupt your trading
-routes by burning down your warehouse. You will pay them back in their own
+warehouse are warped to the bottom player's warehouse. The aim of the game is to
+smuggle %i items from top to bottom.]]) .. p(_
+[[The other team has the same goal and will try to interrupt your smuggling
+routes by burning down your warehouses. You will pay them back in their own
 coin of course!]]) .. p(_
 [[You can see the number of wares traded at any time in the general
 statistics menu. Good luck!]]
 ))
 
-trading_route_established = rt(p(_
+smuggling_route_established = rt(p(_
 [[%s and %s have established a smuggling route!]]
+))
+smuggling_route_broken = rt(p(_
+[[The smuggling route of %s and %s has been broken!]]
 ))
 
 game_over = rt(

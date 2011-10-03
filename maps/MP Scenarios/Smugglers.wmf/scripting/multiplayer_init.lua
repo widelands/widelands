@@ -1,13 +1,11 @@
 -- =================================
 -- Smugglers Fun Map
 -- =================================
--- TODO: description in elemental is still wrong
 use("aux", "coroutine")
 use("aux", "infrastructure")
 use("aux", "formatting")
 use("aux", "objective_utils")
 use("aux", "set")
-
 
 -- ==========
 -- Constants 
@@ -17,12 +15,19 @@ set_textdomain("mp_scenario_smugglers.wmf")
 game = wl.Game()
 map = game.map
 
+wares_to_smuggle = 300 -- How many are needed to win?
+
 warehouse_regions = {
    map:get_field(52, 50):region(2), -- Blue player,
    map:get_field(59, 50):region(2), -- Red player,
    map:get_field(59, 60):region(2), -- Yellow player,
    map:get_field(52, 60):region(2), -- Green player,
 }
+
+-- =================
+-- Global Variables 
+-- =================
+wares_smuggled = { 0, 0 }
 
 -- =================
 -- Utility functions
@@ -34,6 +39,7 @@ function send_to_all(text)
 end
 
 use("map", "texts")
+use("map", "smuggling")
 
 -- ================
 -- Initializations 
@@ -114,10 +120,9 @@ function setup_statistics_hook()
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
       name = _ "Wares smuggled",
-      pic = "map:genstats_wares_smuggled.png", -- TODO: this picture needs some love
+      pic = "map:genstats_wares_smuggled.png",
       calculator = function(p) 
-         local pts = math.floor(math.random() + .5)
-         return pts
+         return wares_smuggled[p.team]
       end,
    }
 end
@@ -127,8 +132,12 @@ function initialize()
    place_headquarters()
    show_middle_to_everybody()
 
-   send_to_all(welcome_msg)
+   send_to_all(welcome_msg:format(wares_to_smuggle))
+
+   run(wait_for_established_route, game.players[1], game.players[3])
+   run(wait_for_established_route, game.players[2], game.players[4])
 end
+
 setup_statistics_hook()
 
 run(initialize)
