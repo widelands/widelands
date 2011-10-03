@@ -45,13 +45,13 @@ return=skipped
 
 [build]
 pics=smelting_works_b_??.png  # ???
-hotspot=40 53
+hotspot=39 53
 
 [idle]
 pics=smelting_works_i_??.png  # ???
-hotspot=40 53
+hotspot=39 53
 
 [working]
 pics=smelting_works_w_??.png  # ???
-hotspot=40 53
+hotspot=39 53
 fps=5

@@ -88,13 +88,13 @@ return=skipped
 
 [idle]
 pics=weaponsmith_i_??.png  # ???
-hotspot=45 66
+hotspot=44 61
 
 [build]
 pics=weaponsmith_b_??.png  # ???
-hotspot=45 66
+hotspot=44 61
 
 [working]
 pics=weaponsmith_w_??.png  # ???
-hotspot=45 66
+hotspot=44 61
 fps=2

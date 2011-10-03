@@ -168,14 +168,14 @@ train=soldier hp 2 3
 
 [build]
 pics=trainingscamp_b_??.png  # ???
-hotspot=112 77
+hotspot=110 77
 
 [unoccupied]
 pics=trainingscamp_u_??.png  # ???
-hotspot=112 77
+hotspot=110 75
 
 [idle]
 pics=trainingscamp_i_??.png  # ???
-hotspot=112 77
+hotspot=110 75
 playercolor=true
 fps=10

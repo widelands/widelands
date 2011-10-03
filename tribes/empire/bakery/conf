@@ -28,11 +28,11 @@ produce=bread
 
 [build]
 pics=bakery_b_??.png  # ???
-hotspot=43 65
+hotspot=42 65
 
 [idle]
 pics=bakery_i_??.png  # ???
-hotspot=43 65
+hotspot=42 65
 
 [working]
 pics=bakery_w_??.png  # ???

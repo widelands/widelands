@@ -57,21 +57,21 @@ return=skipped
 
 [idle]
 pics=helmsmithy_i_??.png  # ???
-hotspot=65 86
+hotspot=65 83
 playercolor=true
 
 [build]
 pics=helmsmithy_b_??.png  # ???
-hotspot=65 86
+hotspot=65 83
 playercolor=true
 
 [unoccupied]
 pics=helmsmithy_u_??.png  # ???
-hotspot=65 86
+hotspot=65 83
 playercolor=true
 
 [working]
 pics=helmsmithy_w_??.png  # ???
-hotspot=65 86
+hotspot=65 83
 playercolor=true
 fps=20
