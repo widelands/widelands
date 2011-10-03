@@ -64,12 +64,23 @@ call=produce_sharpaxe
 call=produce_broadaxe
 return=skipped
 
+[build]
+pics=axefactory_b_??.png  # ???
+hotspot=55 62
+playercolor=true
+
+[unoccupied]
+pics=axefactory_i_??.png  # ???
+hotspot=55 62
+playercolor=true
+
 [idle]
 pics=axefactory_i_??.png  # ???
-hotspot=62 66
+hotspot=55 62
 playercolor=true
 
 [working]
-pics=axefactory_w_??.png  # ???
-hotspot=62 66
+pics=axefactory_i_??.png  # ???
+hotspot=55 62
 playercolor=true
+fps=10

@@ -140,21 +140,21 @@ return=skipped
 
 [build]
 pics=metalworks_b_??.png
-hotspot=62 66
+hotspot=55 62
 playercolor=true
 
 [unoccupied]
 pics=metalworks_u_??.png
-hotspot=62 66
+hotspot=55 62
 playercolor=true
 
 [idle]
 pics=metalworks_i_??.png
-hotspot=62 66
+hotspot=55 62
 playercolor=true
 
 [working]
 pics=metalworks_w_??.png
-hotspot=62 66
+hotspot=55 62
 playercolor=true
-fps=20
+fps=10
