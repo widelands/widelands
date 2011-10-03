@@ -213,7 +213,10 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 	delete m_map;
 
 	m_map = new_map;
-	if (g_gr)
+
+	// if this map is already completely loaded, we better inform g_gr about the change of the world
+	// to (re)load the correct road textures.
+	if (g_gr && strcmp(m_map->get_world_name(), ""))
 		g_gr->set_world(m_map->get_world_name());
 
 	NoteReceiver<NoteFieldTransformed>::connect(*m_map);
