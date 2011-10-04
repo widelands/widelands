@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-01 09:13+0000\n"
-"PO-Revision-Date: 2011-10-01 17:23+0000\n"
-"Last-Translator: Shevonar <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-10-03 16:11+0000\n"
+"Last-Translator: kraileth <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -28,7 +28,7 @@ msgstr "Herausfordernd. Stellt die Atlanter vor."
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr "01 - Die Augen im Dunkel"
+msgstr "01 - Augen im Dunkel"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
@@ -45,10 +45,6 @@ msgstr "02 - Ein Außenposten fürs Exil"
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "03 - Dies Land ist unser Land"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Eine Mehrspielerkarte auf einer X-förmigen Insel"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -195,10 +191,6 @@ msgstr "Elfenwälder"
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
 msgstr "Imperium - Monate des Exils"
-
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Feind in Sicht"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -428,6 +420,10 @@ msgstr ""
 "im März wurde seine unvorbereitete Armee von 100 Fußsoldaten der Barbaren "
 "angegriffen und zerschlagen. Nur er selbst und eine Hand voll seiner "
 "Soldaten blieben am Leben."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr "Schmuggler"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -689,3 +685,15 @@ msgstr ""
 "behüten den wundervollen Schatz in ihrer Mitte - Das Grüne Plateau. Es ist "
 "schwer zu bekommen und schnell wieder verloren. Wenn Du es halten willst, "
 "beobachte jeden Schritt deiner Gegner."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""
+"Eure seit jeher benutzte Schmugglerroute ist plötzlich von anderen Füßen "
+"zertreten: Zwei andere Stämme sind in der Nähe aufgetaucht und machen euch "
+"euer traditionelles Recht auf Schmuggel streitig.\r\n"
+"Welches Team wird das erste sein, dass es schafft eine bestimmte Anzahl "
+"Waren zu schmuggeln?"

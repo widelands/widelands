@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-01 11:13+0200\n"
+"POT-Creation-Date: 2011-10-03 13:44+0200\n"
 "PO-Revision-Date: 2011-04-25 08:54+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:45+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -1193,7 +1193,7 @@ msgstr "Agardábase %s, pero atopouse «%s»"
 msgid "frame number"
 msgstr "número de fotogramas"
 
-#: ../../src/graphic/graphic.cc:1020
+#: ../../src/graphic/graphic.cc:1069
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Cargando animacións: %d%% completo"
@@ -4243,7 +4243,7 @@ msgstr "IA: "
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
-msgid "random"
+msgid "Random"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
@@ -4358,15 +4358,15 @@ msgstr ""
 msgid "Remove selected wares from here"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:288
+#: ../../src/wui/waresqueuedisplay.cc:69
 msgid "Highest priority"
 msgstr "Máxima prioridade"
 
-#: ../../src/wui/waresqueuedisplay.cc:299
+#: ../../src/wui/waresqueuedisplay.cc:77
 msgid "Normal priority"
 msgstr "Prioridade normal"
 
-#: ../../src/wui/waresqueuedisplay.cc:310
+#: ../../src/wui/waresqueuedisplay.cc:85
 msgid "Lowest priority"
 msgstr "Mínima prioridade"
 

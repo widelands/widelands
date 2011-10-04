@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-01 11:13+0200\n"
+"POT-Creation-Date: 2011-10-03 13:44+0200\n"
 "PO-Revision-Date: 2011-08-21 14:21+0000\n"
 "Last-Translator: Andrej Znidarsic <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:41+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:47+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1131,7 +1131,7 @@ msgstr "pričakovano %s, najdeno pa \"%s\""
 msgid "frame number"
 msgstr "število sličic"
 
-#: ../../src/graphic/graphic.cc:1020
+#: ../../src/graphic/graphic.cc:1069
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Nalagam animacije: %d%% končano"
@@ -4173,7 +4173,7 @@ msgstr "AI: "
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
-msgid "random"
+msgid "Random"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
@@ -4288,15 +4288,15 @@ msgstr ""
 msgid "Remove selected wares from here"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:288
+#: ../../src/wui/waresqueuedisplay.cc:69
 msgid "Highest priority"
 msgstr "Najvišja prioriteta"
 
-#: ../../src/wui/waresqueuedisplay.cc:299
+#: ../../src/wui/waresqueuedisplay.cc:77
 msgid "Normal priority"
 msgstr "Običajna prioriteta"
 
-#: ../../src/wui/waresqueuedisplay.cc:310
+#: ../../src/wui/waresqueuedisplay.cc:85
 msgid "Lowest priority"
 msgstr "Najnižja prioriteta"
 

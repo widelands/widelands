@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-01 09:13+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2011-08-21 14:14+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/cconfig:64
@@ -40,10 +40,6 @@ msgstr ""
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "03 - Dette landet er vårt land"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Kart for krig mellom flere spillere på en X-formet øy."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -177,10 +173,6 @@ msgstr "Alviske skoger"
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
 msgstr "Imperiet - Månedene i eksil"
-
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Fiende i sikte"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -387,6 +379,10 @@ msgid ""
 "soldiers survived."
 msgstr ""
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
+
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
 "Some say that impenetrable lands to the far north scared away even the most "
@@ -581,3 +577,10 @@ msgstr ""
 "Du står på en øy, omkranset av mektige fjell, som skjuler en vidunderlig og "
 "mektig skatt mellom dem - det grønne platået. Det er vanskelig å erobre, men "
 "lett å tape, så hvis du vil ha det bør du passe deg for de andre klanene."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""

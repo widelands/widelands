@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-01 09:13+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2011-09-09 13:10+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/cconfig:64
@@ -39,10 +39,6 @@ msgstr ""
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "03 - Táto zem je našou zemou"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Mapa bitky pre viacerých hráčov na ostrove v tvare X."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -182,10 +178,6 @@ msgstr "Lesy Elfov"
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
 msgstr "Impérium - Mesiace vo vyhnanstve"
-
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Nepriateľ nadohľad"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -405,6 +397,10 @@ msgstr ""
 "nepriateľa. To bola ich skaza. V jednu noc v marci zaútočilo na jeho "
 "nepripravenú armádu 100 barbarských pešiakov a úplne ju rozprášilo. Prežil "
 "len on a hŕstka jeho vojakov."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -655,3 +651,10 @@ msgstr ""
 "Stojíte na ostrove korunovanom mohutnými horami, ktoré vo svojom vnútri "
 "ukrývajú zázračný poklad - Zelenú planinu, ktorú je ťažko získať, ale ľahko "
 "stratiť, takže ak ju chcete, majte na vedomí aj iné kmene."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""

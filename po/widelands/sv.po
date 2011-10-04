@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-01 11:13+0200\n"
+"POT-Creation-Date: 2011-10-03 13:44+0200\n"
 "PO-Revision-Date: 2011-09-05 18:04+0000\n"
 "Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:42+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:47+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1164,7 +1164,7 @@ msgstr "förväntade %s men fann \"%s\""
 msgid "frame number"
 msgstr "bildrutenummer"
 
-#: ../../src/graphic/graphic.cc:1020
+#: ../../src/graphic/graphic.cc:1069
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Laddar animationer: %d%% klart"
@@ -4240,7 +4240,7 @@ msgstr "Datorstyrd: "
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
-msgid "random"
+msgid "Random"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
@@ -4355,15 +4355,15 @@ msgstr "Lagra inte valda varor här"
 msgid "Remove selected wares from here"
 msgstr "För ut valda varor härifrån"
 
-#: ../../src/wui/waresqueuedisplay.cc:288
+#: ../../src/wui/waresqueuedisplay.cc:69
 msgid "Highest priority"
 msgstr "Högsta prioritet"
 
-#: ../../src/wui/waresqueuedisplay.cc:299
+#: ../../src/wui/waresqueuedisplay.cc:77
 msgid "Normal priority"
 msgstr "Normal prioritet"
 
-#: ../../src/wui/waresqueuedisplay.cc:310
+#: ../../src/wui/waresqueuedisplay.cc:85
 msgid "Lowest priority"
 msgstr "Lägsta prioritet"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-01 11:13+0200\n"
+"POT-Creation-Date: 2011-10-03 13:44+0200\n"
 "PO-Revision-Date: 2011-08-21 14:28+0000\n"
 "Last-Translator: James Thorrold <jameslin@inbox.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:42+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:47+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1175,7 +1175,7 @@ msgstr "expected %s but found \"%s\""
 msgid "frame number"
 msgstr "frame number"
 
-#: ../../src/graphic/graphic.cc:1020
+#: ../../src/graphic/graphic.cc:1069
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Loading animations: %d%% complete"
@@ -4207,7 +4207,7 @@ msgstr "AI: "
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
-msgid "random"
+msgid "Random"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
@@ -4322,15 +4322,15 @@ msgstr "Do not store selected wares here"
 msgid "Remove selected wares from here"
 msgstr "Remove selected wares from here"
 
-#: ../../src/wui/waresqueuedisplay.cc:288
+#: ../../src/wui/waresqueuedisplay.cc:69
 msgid "Highest priority"
 msgstr "Highest priority"
 
-#: ../../src/wui/waresqueuedisplay.cc:299
+#: ../../src/wui/waresqueuedisplay.cc:77
 msgid "Normal priority"
 msgstr "Normal priority"
 
-#: ../../src/wui/waresqueuedisplay.cc:310
+#: ../../src/wui/waresqueuedisplay.cc:85
 msgid "Lowest priority"
 msgstr "Lowest priority"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-01 11:13+0200\n"
+"POT-Creation-Date: 2011-10-03 13:44+0200\n"
 "PO-Revision-Date: 2011-10-01 13:38+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:41+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:46+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1182,7 +1182,7 @@ msgstr "oczekiwano %s ale znaleziono \"%s\""
 msgid "frame number"
 msgstr "numer klatki"
 
-#: ../../src/graphic/graphic.cc:1020
+#: ../../src/graphic/graphic.cc:1069
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Wczytywanie animacji: %d%% ukończono"
@@ -4276,8 +4276,8 @@ msgstr "AI: "
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
-msgid "random"
-msgstr "losowo"
+msgid "Random"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -4391,15 +4391,15 @@ msgstr "Nie gromadź zaznaczonych towarów tutaj"
 msgid "Remove selected wares from here"
 msgstr "Usuń stądzaznaczone towary"
 
-#: ../../src/wui/waresqueuedisplay.cc:288
+#: ../../src/wui/waresqueuedisplay.cc:69
 msgid "Highest priority"
 msgstr "Najwyższy priorytet"
 
-#: ../../src/wui/waresqueuedisplay.cc:299
+#: ../../src/wui/waresqueuedisplay.cc:77
 msgid "Normal priority"
 msgstr "Normalny priorytet"
 
-#: ../../src/wui/waresqueuedisplay.cc:310
+#: ../../src/wui/waresqueuedisplay.cc:85
 msgid "Lowest priority"
 msgstr "Najniższy priorytet"
 
