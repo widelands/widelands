@@ -41,12 +41,13 @@ namespace Widelands {
 WaresQueue::WaresQueue
 	(PlayerImmovable &       _owner,
 	 Ware_Index        const _ware,
-	 uint8_t           const _size,
+	 uint8_t           const _max_size,
 	 uint8_t           const _filled)
 	:
 	m_owner           (_owner),
 	m_ware            (_ware),
-	m_size            (_size),
+	m_max_size        (_max_size),
+	m_desired_size    (_max_size),
 	m_filled          (_filled),
 	m_consume_interval(0),
 	m_request         (0),
@@ -65,7 +66,8 @@ void WaresQueue::cleanup() {
 		m_owner.get_economy()->remove_wares(m_ware, count);
 
 	m_filled = 0;
-	m_size = 0;
+	m_max_size = 0;
+	m_desired_size = 0;
 
 	update();
 
@@ -79,13 +81,13 @@ void WaresQueue::cleanup() {
 void WaresQueue::update() {
 	assert(m_ware);
 
-	if (m_filled > m_size) {
+	if (m_filled > m_max_size) {
 		if (m_owner.get_economy())
-			m_owner.get_economy()->remove_wares(m_ware, m_filled - m_size);
-		m_filled = m_size;
+			m_owner.get_economy()->remove_wares(m_ware, m_filled - m_max_size);
+		m_filled = m_max_size;
 	}
 
-	if (m_filled < m_size)
+	if (m_filled < m_desired_size)
 	{
 		if (!m_request)
 			m_request =
@@ -95,7 +97,7 @@ void WaresQueue::update() {
 					 WaresQueue::request_callback,
 					 Request::WARE);
 
-		m_request->set_count(m_size - m_filled);
+		m_request->set_count(m_desired_size - m_filled);
 		m_request->set_required_interval(m_consume_interval);
 	}
 	else
@@ -132,7 +134,7 @@ void WaresQueue::request_callback
 		ref_cast<Building, PlayerImmovable>(target).waresqueue(ware);
 
 	assert(!w); // WaresQueue can't hold workers
-	assert(wq.m_filled < wq.m_size);
+	assert(wq.m_filled < wq.m_max_size);
 	assert(wq.m_ware == ware);
 
 	// Update
@@ -173,9 +175,26 @@ void WaresQueue::add_to_economy(Economy & e)
  * \warning You must call \ref update() after this!
  * \todo Why not call update from here?
 */
-void WaresQueue::set_size(const uint32_t size) throw ()
+void WaresQueue::set_max_size(const uint32_t size) throw ()
 {
-	m_size = size;
+	m_max_size = size;
+}
+
+/**
+ * Change the number of wares that should be available in this queue
+ *
+ * This is basically the same as setting the maximum size,
+ * but if there are more wares than that in the queue, they will not get
+ * lost (the building should drop them).
+ *
+ * \warning You must call update after this as well!
+ */
+void WaresQueue::set_desired_size(uint32_t size) throw ()
+{
+	if (size < 0) size = 0;
+	if (size > m_max_size) size = m_max_size;
+
+	m_desired_size = size;
 }
 
 /**
@@ -209,7 +228,7 @@ void WaresQueue::set_consume_interval(const uint32_t time) throw ()
 /**
  * Read and write
  */
-#define WARES_QUEUE_DATA_PACKET_VERSION 1
+#define WARES_QUEUE_DATA_PACKET_VERSION 2
 void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
@@ -217,7 +236,8 @@ void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos)
 	//  Owner and callback is not saved, but this should be obvious on load.
 	fw.CString
 		(owner().tribe().get_ware_descr(m_ware)->name().c_str());
-	fw.Signed32(m_size);
+	fw.Signed32(m_max_size);
+	fw.Signed32(m_desired_size);
 	fw.Signed32(m_filled);
 	fw.Signed32(m_consume_interval);
 	if (m_request) {
@@ -232,10 +252,14 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {
-		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
+		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION or packet_version == 1) {
 			delete m_request;
 			m_ware             = owner().tribe().ware_index(fr.CString  ());
-			m_size             =                            fr.Unsigned32();
+			m_max_size         =                            fr.Unsigned32();
+			if (packet_version == 1)
+				m_desired_size = m_max_size;
+			else
+				m_desired_size = fr.Signed32();
 			m_filled           =                            fr.Unsigned32();
 			m_consume_interval =                            fr.Unsigned32();
 			if                                             (fr.Unsigned8 ()) {

@@ -131,9 +131,8 @@ void ConstructionSite::log_general_info(Editor_Game_Base const & egbase) {
 			("* Owner: %i (player nr)\n",
 			 m_wares[i]->owner().player_number());
 		molog("* Ware: %u (index)\n", m_wares[i]->get_ware().value());
-		molog("* Size: %i\n", m_wares[i]->get_size());
+		molog("* Size: %i\n", m_wares[i]->get_max_size());
 		molog("* Filled: %i\n", m_wares[i]->get_filled());
-		molog("* Consume Interval: %i\n", m_wares[i]->get_consume_interval());
 	}
 }
 
@@ -468,7 +467,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 				continue;
 
 			wq.set_filled(wq.get_filled() - 1);
-			wq.set_size(wq.get_size() - 1);
+			wq.set_max_size(wq.get_max_size() - 1);
 			wq.update();
 
 			m_working = true;

@@ -47,7 +47,7 @@ m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::Request::WARE),
 m_max_width(maxw - PriorityButtonSize),
 m_pic_background(g_gr->get_picture(PicMod_Game, pic_queue_background)),
-m_cache_size(queue->get_size()),
+m_cache_size(queue->get_max_size()),
 m_cache_filled(queue->get_filled()),
 m_display_size(0)
 {
@@ -76,7 +76,7 @@ void WaresQueueDisplay::update_desired_size()
 {
 	m_display_size = (m_max_width - 2 * Border) / CellWidth;
 
-	m_cache_size = m_queue->get_size();
+	m_cache_size = m_queue->get_max_size();
 
 	if (m_cache_size < m_display_size)
 		m_display_size = m_cache_size;
@@ -95,7 +95,7 @@ void WaresQueueDisplay::update_desired_size()
  */
 void WaresQueueDisplay::think()
 {
-	if (static_cast<uint32_t>(m_queue->get_size()) != m_cache_size)
+	if (static_cast<uint32_t>(m_queue->get_max_size()) != m_cache_size)
 		update_desired_size();
 
 	if (static_cast<uint32_t>(m_queue->get_filled()) != m_cache_filled)
