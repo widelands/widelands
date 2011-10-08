@@ -633,6 +633,43 @@ void Player::enhance_building
 	}
 }
 
+/*
+ * rip this building down, but slowly: a builder will take it gradually
+ * apart.
+ */
+void Player::dismantle_building(Building * building) {
+	// if
+		// (&building->owner() == this
+		 // and
+		 // building->descr().enhancements().count(index_of_new_building))
+	// {
+		// Building_Index const index_of_old_building =
+			// tribe().building_index(building->name().c_str());
+		// const Coords position = building->get_position();
+
+		// //  Get workers and soldiers
+		// //  Make copies of the vectors, because the originals are destroyed with
+		// //  the building.
+		// const std::vector<Worker  *> workers  = building->get_workers();
+
+		// building->remove(egbase()); //  no fire or stuff
+		// //  Hereafter the old building does not exist and building is a dangling
+		// //  pointer.
+		// building =
+			// &egbase().warp_constructionsite
+				// (position, m_plnum, index_of_new_building, index_of_old_building);
+		// //  Hereafter building points to the new building.
+
+		// // Reassign the workers and soldiers.
+		// // Note that this will make sure they stay within the economy;
+		// // However, they are no longer associated with the building as
+		// // workers of that buiding, which is why they will leave for a
+		// // warehouse.
+		// container_iterate_const(std::vector<Worker *>, workers, i)
+			// (*i.current)->set_location(building);
+	// }
+	// SirVer, TODO: fill this in
+}
 
 /*
 ===============

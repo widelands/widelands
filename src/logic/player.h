@@ -451,6 +451,7 @@ struct Player :
 	void start_stop_building(PlayerImmovable &);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
+	void dismantle_building (Building *);
 
 	// Economy stuff
 	void    add_economy(Economy &);

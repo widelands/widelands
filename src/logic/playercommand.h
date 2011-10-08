@@ -218,6 +218,30 @@ private:
 	Building_Index bi;
 };
 
+struct Cmd_DismantleBuilding:public PlayerCommand {
+	Cmd_DismantleBuilding() : PlayerCommand() {} // For savegame loading
+	Cmd_DismantleBuilding
+		(int32_t        const _duetime,
+		 int32_t        const p,
+		 Building     &       b)
+		: PlayerCommand(_duetime, p), serial(b.serial())
+	{}
+
+	// Write these commands to a file (for savegames)
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_DISMANTLEBUILDING;}
+
+	Cmd_DismantleBuilding (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+};
+
 struct Cmd_SetWarePriority : public PlayerCommand {
 	Cmd_SetWarePriority() : PlayerCommand() {} // For savegame loading
 	Cmd_SetWarePriority
