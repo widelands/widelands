@@ -456,6 +456,19 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
+	// Drop all the wares that are too much out to the flag.
+	container_iterate(Wares, m_wares, iqueue) {
+		WaresQueue * queue = *iqueue;
+		if (queue->get_filled() > queue->get_max_fill()) {
+			queue->set_filled(queue->get_filled() - 1);
+			Item_Ware_Descr const & wd = *tribe().get_ware_descr(queue->get_ware());
+			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
+			item.init(game);
+			worker.start_task_dropoff(game, item);
+			return true;
+		}
+	}
+
 	// Check if we've got wares to consume
 	if (m_work_completed < m_work_steps)
 	{

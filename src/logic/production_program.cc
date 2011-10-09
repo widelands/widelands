@@ -744,13 +744,6 @@ void ProductionProgram::ActConsume::execute
 		uint8_t nr_available = warequeues[i]->get_filled();
 		consumption_quantities[i] = 0;
 		Groups::const_iterator const groups_end = l_groups.end();
-#if 0
-		size_t const nr_groups = l_groups.size(); //  for debug messages
-		log
-			("\tconsidering input queue for %s (%u/%u)\n",
-			 ps.descr().tribe().get_ware_descr(ware_type)->descname().c_str(),
-			 nr_available, warequeues[i]->get_size());
-#endif
 
 		//  Iterate over all consume groups and see if they want us to consume
 		//  any thing from the currently considered input queue.
@@ -765,21 +758,7 @@ void ProductionProgram::ActConsume::execute
 					it = l_groups.erase(it);
 					//  No increment here, erase moved next element to the position
 					//  pointed to by it.
-#if 0
-					log
-						("\t\tgroup %u/%u needs %u: enough wares to fill this "
-						 "group\n",
-						 it - l_groups.begin() + 1, nr_groups, it->second);
-#endif
 				} else {
-#if 0
-					log
-						("\t\tgroup %u/%u needs %u: unsufficient remaining "
-						 "available wares (%u) to fill this group, will use all "
-						 "remaining wares, input queue will be depleted\n",
-						 it - l_groups.begin() + 1, nr_groups, it->second,
-						 nr_available);
-#endif
 					consumption_quantities[i] += nr_available;
 					it->second                -= nr_available;
 					++it; //  Now check if the next group includes this ware type.
