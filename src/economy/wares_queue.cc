@@ -178,6 +178,9 @@ void WaresQueue::add_to_economy(Economy & e)
 void WaresQueue::set_max_size(const uint32_t size) throw ()
 {
 	m_max_size = size;
+
+	 // make sure that desired_size is clipped
+	set_desired_size(m_desired_size);
 }
 
 /**

@@ -17,6 +17,8 @@
  *
  */
 
+#include <algorithm>
+
 #include "waresqueuedisplay.h"
 
 #include "economy/request.h"
@@ -30,6 +32,7 @@ static char const * pic_queue_background = "pics/queue_background.png";
 static char const * pic_priority_low     = "pics/low_priority_button.png";
 static char const * pic_priority_normal  = "pics/normal_priority_button.png";
 static char const * pic_priority_high    = "pics/high_priority_button.png";
+static char const * pic_desired_size_indicator = "pics/desired_size_indicator.png";
 
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
@@ -38,11 +41,11 @@ WaresQueueDisplay::WaresQueueDisplay
 	 Widelands::Building   & building,
 	 Widelands::WaresQueue * const queue)
 :
-UI::Panel(parent, x, y, 0, Height),
+UI::Panel(parent, x, y, 0, 28),
 m_igb(igb),
 m_building(building),
 m_queue(queue),
-m_radiogroup(NULL),
+m_priority_radiogroup(NULL),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::Request::WARE),
 m_max_width(maxw - PriorityButtonSize),
@@ -58,7 +61,13 @@ m_display_size(0)
 	m_icon = ware.icon();
 	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
 
-	update_desired_size();
+	m_desired_size_indicator = g_gr->load_image(pic_desired_size_indicator, true);
+	uint32_t pw, ph;
+	g_gr->get_picture_size(m_desired_size_indicator, pw, ph);
+
+	m_total_height = std::max(static_cast<uint32_t>(WARE_MENU_PIC_HEIGHT), ph) + 2 * Border;
+
+	max_size_changed();
 
 	set_think(true);
 }
@@ -72,7 +81,7 @@ WaresQueueDisplay::~WaresQueueDisplay()
  *
  * This is useful for construction sites, whose queues shrink over time.
  */
-void WaresQueueDisplay::update_desired_size()
+void WaresQueueDisplay::max_size_changed()
 {
 	m_display_size = (m_max_width - 2 * Border) / CellWidth;
 
@@ -86,7 +95,9 @@ void WaresQueueDisplay::update_desired_size()
 	if (m_display_size <= 0) {
 		set_desired_size(0, 0);
 	} else {
-		set_desired_size(m_display_size * CellWidth + PriorityButtonSize + 2 * Border, Height);
+		set_desired_size
+			(m_display_size * (CellWidth + CellSpacing) + PriorityButtonSize + 2 * Border,
+			 m_total_height);
 	}
 }
 
@@ -96,7 +107,7 @@ void WaresQueueDisplay::update_desired_size()
 void WaresQueueDisplay::think()
 {
 	if (static_cast<uint32_t>(m_queue->get_max_size()) != m_cache_size)
-		update_desired_size();
+		max_size_changed();
 
 	if (static_cast<uint32_t>(m_queue->get_filled()) != m_cache_filled)
 		update();
@@ -114,11 +125,21 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 
 	uint32_t nr_wares_to_draw = std::min(m_cache_filled, m_display_size);
 	uint32_t nr_empty_to_draw = m_display_size - nr_wares_to_draw;
-	Point point(Border, Border);
-	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth)
+
+	uint32_t pw, ph;
+	g_gr->get_picture_size(m_desired_size_indicator, pw, ph);
+
+	Point point
+		(Border, Border + (std::max(static_cast<uint32_t>(WARE_MENU_PIC_HEIGHT), ph) - WARE_MENU_PIC_HEIGHT) / 2);
+
+	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing)
 		dst.blit(point, m_icon);
-	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth)
+	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing)
 		dst.blit(point, m_pic_background);
+
+	point.y = Border;
+	point.x = Border + (m_queue->get_desired_size() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
+	dst.blit(point, m_desired_size_indicator);
 }
 
 /**
@@ -126,15 +147,15 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
  */
 void WaresQueueDisplay::update_priority_buttons()
 {
-	delete m_radiogroup;
+	delete m_priority_radiogroup;
 	if (m_display_size <= 0)
 		return;
 
-	m_radiogroup = new UI::Radiogroup();
+	m_priority_radiogroup = new UI::Radiogroup();
 
 	Point pos = Point(m_display_size * CellWidth + Border, 0);
 
-	m_radiogroup->add_button
+	m_priority_radiogroup->add_button
 			(this,
 			pos,
 			g_gr->get_resized_picture
@@ -142,7 +163,7 @@ void WaresQueueDisplay::update_priority_buttons()
 				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
 			_("Highest priority"));
 	pos.y += PriorityButtonSize;
-	m_radiogroup->add_button
+	m_priority_radiogroup->add_button
 			(this,
 			pos,
 			g_gr->get_resized_picture
@@ -150,7 +171,7 @@ void WaresQueueDisplay::update_priority_buttons()
 				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
 			_("Normal priority"));
 	pos.y += PriorityButtonSize;
-	m_radiogroup->add_button
+	m_priority_radiogroup->add_button
 			(this,
 			pos,
 			g_gr->get_resized_picture
@@ -161,19 +182,19 @@ void WaresQueueDisplay::update_priority_buttons()
 	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
 	switch (priority) {
 	case HIGH_PRIORITY:
-		m_radiogroup->set_state(0);
+		m_priority_radiogroup->set_state(0);
 		break;
 	case DEFAULT_PRIORITY:
-		m_radiogroup->set_state(1);
+		m_priority_radiogroup->set_state(1);
 		break;
 	case LOW_PRIORITY:
-		m_radiogroup->set_state(2);
+		m_priority_radiogroup->set_state(2);
 		break;
 	default:
 		break;
 	}
 
-	m_radiogroup->changedto.set
+	m_priority_radiogroup->changedto.set
 		(this, &WaresQueueDisplay::radiogroup_changed);
 }
 
