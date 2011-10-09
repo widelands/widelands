@@ -17,24 +17,25 @@
  *
  */
 
-#include "playercommand.h"
+#include "log.h"
+#include "upcast.h"
+#include "wexception.h"
 
 #include "economy/economy.h"
+#include "economy/wares_queue.h"
+#include "io/streamwrite.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 
-#include "log.h"
 #include "game.h"
 #include "instances.h"
 #include "player.h"
 #include "soldier.h"
-#include "io/streamwrite.h"
 #include "tribe.h"
-#include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "map_io/widelands_map_map_object_saver.h"
-#include "map_io/widelands_map_map_object_loader.h"
 
-#include "upcast.h"
+#include "playercommand.h"
 
 namespace Widelands {
 
@@ -673,7 +674,7 @@ void Cmd_SetWareMaxFill::execute(Game & game)
 	if (b->owner().player_number() != sender())
 		return;
 
-	b->set_max_fill(m_index, m_max_fill);
+	b->waresqueue(m_index).set_max_fill(m_max_fill);
 }
 
 #define PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION 1

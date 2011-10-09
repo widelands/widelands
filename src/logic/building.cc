@@ -25,7 +25,6 @@
 
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "economy/wares_queue.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -570,19 +569,6 @@ WaresQueue & Building::waresqueue(Ware_Index const wi) {
 		("%s (%u) has no WaresQueue for %u",
 		 name().c_str(), serial(), wi.value());
 }
-
-/*
- * Set the number of wares that should be stored for this ware.
- * This basically directly translates into calls to the corresponding
- * WaresQueue.
- */
-void Building::set_max_fill
-	(Ware_Index widx, uint32_t max_fill)
-{
-	WaresQueue & wq = waresqueue(widx);
-	wq.set_max_fill(max_fill);
-}
-
 
 /*
 ===============

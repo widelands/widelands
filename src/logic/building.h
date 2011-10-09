@@ -173,7 +173,6 @@ public:
 
 	/// \Returns the queue for a ware type or \throws _wexception.
 	virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));
-	void set_max_fill(Ware_Index, uint32_t);
 
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base &);
