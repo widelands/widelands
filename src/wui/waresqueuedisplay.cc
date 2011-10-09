@@ -45,14 +45,18 @@ UI::Panel(parent, x, y, 0, 28),
 m_igb(igb),
 m_building(building),
 m_queue(queue),
-m_priority_radiogroup(NULL),
+m_priority_radiogroup(0),
+m_increase_desired_size(0),
+m_decrease_desired_size(0),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::Request::WARE),
 m_max_width(maxw - PriorityButtonSize),
 m_pic_background(g_gr->get_picture(PicMod_Game, pic_queue_background)),
+m_desired_size_indicator(g_gr->get_picture(PicMod_Game, pic_desired_size_indicator)),
 m_cache_size(queue->get_max_size()),
 m_cache_filled(queue->get_filled()),
-m_display_size(0)
+m_display_size(0),
+m_total_height(0)
 {
 	const Widelands::Item_Ware_Descr & ware =
 		*queue->owner().tribe().get_ware_descr(m_queue->get_ware());
@@ -61,7 +65,6 @@ m_display_size(0)
 	m_icon = ware.icon();
 	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
 
-	m_desired_size_indicator = g_gr->load_image(pic_desired_size_indicator, true);
 	uint32_t pw, ph;
 	g_gr->get_picture_size(m_desired_size_indicator, pw, ph);
 
@@ -83,7 +86,9 @@ WaresQueueDisplay::~WaresQueueDisplay()
  */
 void WaresQueueDisplay::max_size_changed()
 {
-	m_display_size = (m_max_width - 2 * Border) / CellWidth;
+	m_display_size =
+		(m_max_width - 2 * Border - PriorityButtonSize - 2 * WARE_MENU_PIC_WIDTH - 2 * CellSpacing)
+								/ (CellWidth + CellSpacing);
 
 	m_cache_size = m_queue->get_max_size();
 
@@ -91,12 +96,13 @@ void WaresQueueDisplay::max_size_changed()
 		m_display_size = m_cache_size;
 
 	update_priority_buttons();
+	update_desired_size_buttons();
 
 	if (m_display_size <= 0) {
 		set_desired_size(0, 0);
 	} else {
 		set_desired_size
-			(m_display_size * (CellWidth + CellSpacing) + PriorityButtonSize + 2 * Border,
+			((m_display_size + 2) * (CellWidth + CellSpacing) + PriorityButtonSize + 2 * Border,
 			 m_total_height);
 	}
 }
@@ -129,8 +135,9 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 	uint32_t pw, ph;
 	g_gr->get_picture_size(m_desired_size_indicator, pw, ph);
 
-	Point point
-		(Border, Border + (std::max(static_cast<uint32_t>(WARE_MENU_PIC_HEIGHT), ph) - WARE_MENU_PIC_HEIGHT) / 2);
+	Point point;
+	point.x = Border + CellWidth + CellSpacing;
+	point.y = Border + (m_total_height - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 
 	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing)
 		dst.blit(point, m_icon);
@@ -138,7 +145,8 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 		dst.blit(point, m_pic_background);
 
 	point.y = Border;
-	point.x = Border + (m_queue->get_desired_size() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
+	point.x = Border + CellWidth + CellSpacing +
+		(m_queue->get_desired_size() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
 	dst.blit(point, m_desired_size_indicator);
 }
 
@@ -154,6 +162,8 @@ void WaresQueueDisplay::update_priority_buttons()
 	m_priority_radiogroup = new UI::Radiogroup();
 
 	Point pos = Point(m_display_size * CellWidth + Border, 0);
+	pos.x = (m_display_size + 2) * (CellWidth + CellSpacing) + Border;
+	pos.y = Border + (m_total_height - 2 * Border - 3 * PriorityButtonSize) / 2;
 
 	m_priority_radiogroup->add_button
 			(this,
@@ -199,6 +209,37 @@ void WaresQueueDisplay::update_priority_buttons()
 }
 
 /**
+ * Updates the desired size buttons
+ */
+void WaresQueueDisplay::update_desired_size_buttons() {
+	delete m_increase_desired_size;
+	delete m_decrease_desired_size;
+	if (m_display_size <= 0)
+		return;
+
+	uint32_t x = Border;
+	uint32_t y = Border + (m_total_height - 2 * Border - WARE_MENU_PIC_WIDTH) / 2;
+
+	m_decrease_desired_size = new UI::Callback_Button
+		(this, "decrease_desired_size",
+		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
+		 boost::bind(&WaresQueueDisplay::decrease_desired_size_clicked, boost::ref(*this)),
+		 _("Decrease the number of wares you want to be stored here."));
+
+	x = Border + (m_display_size + 1) * (CellWidth + CellSpacing);
+	m_increase_desired_size = new UI::Callback_Button
+		(this, "increase_desired_size",
+		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
+		 boost::bind(&WaresQueueDisplay::increase_desired_size_clicked, boost::ref(*this)),
+		 _("Increase the number of wares you want to be stored here."));
+
+}
+
+/**
  * Update priority when radiogroup has changed
  */
 void WaresQueueDisplay::radiogroup_changed(int32_t state)
@@ -219,3 +260,15 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
 	m_igb.game().send_player_set_ware_priority
 			(m_building, m_ware_type, m_ware_index, priority);
 };
+
+/**
+ * One of the buttons to increase or decrease the amount of wares
+ * stored here has been clicked
+ */
+void WaresQueueDisplay::decrease_desired_size_clicked() {
+	// TODO: Sirver
+}
+void WaresQueueDisplay::increase_desired_size_clicked() {
+	// TODO: Sirver
+}
+

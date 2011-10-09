@@ -26,6 +26,7 @@
 #include "logic/item_ware_descr.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
+#include "ui_basic/button.h"
 
 struct Interactive_GameBase;
 
@@ -66,13 +67,12 @@ public:
 	virtual void draw(RenderTarget &);
 
 private:
-	virtual void max_size_changed();
-
-private:
 	Interactive_GameBase  & m_igb;
 	Widelands::Building   & m_building;
 	Widelands::WaresQueue * m_queue;
 	UI::Radiogroup        * m_priority_radiogroup;
+	UI::Callback_Button   * m_increase_desired_size;
+	UI::Callback_Button   * m_decrease_desired_size;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
 	uint32_t         m_max_width;
@@ -86,7 +86,11 @@ private:
 	uint32_t         m_display_size;
 	uint32_t         m_total_height;
 
+	virtual void max_size_changed();
 	void update_priority_buttons();
+	void update_desired_size_buttons();
+	void decrease_desired_size_clicked();
+	void increase_desired_size_clicked();
 	void radiogroup_changed(int32_t);
 };
 
