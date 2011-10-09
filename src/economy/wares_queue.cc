@@ -47,7 +47,7 @@ WaresQueue::WaresQueue
 	m_owner           (_owner),
 	m_ware            (_ware),
 	m_max_size        (_max_size),
-	m_desired_size    (_max_size),
+	m_max_fill        (_max_size),
 	m_filled          (_filled),
 	m_consume_interval(0),
 	m_request         (0),
@@ -67,7 +67,7 @@ void WaresQueue::cleanup() {
 
 	m_filled = 0;
 	m_max_size = 0;
-	m_desired_size = 0;
+	m_max_fill = 0;
 
 	update();
 
@@ -87,7 +87,7 @@ void WaresQueue::update() {
 		m_filled = m_max_size;
 	}
 
-	if (m_filled < m_desired_size)
+	if (m_filled < m_max_fill)
 	{
 		if (!m_request)
 			m_request =
@@ -97,7 +97,7 @@ void WaresQueue::update() {
 					 WaresQueue::request_callback,
 					 Request::WARE);
 
-		m_request->set_count(m_desired_size - m_filled);
+		m_request->set_count(m_max_fill - m_filled);
 		m_request->set_required_interval(m_consume_interval);
 	}
 	else
@@ -177,10 +177,14 @@ void WaresQueue::add_to_economy(Economy & e)
 */
 void WaresQueue::set_max_size(const uint32_t size) throw ()
 {
+	uint32_t old_size = m_max_size;
 	m_max_size = size;
 
-	 // make sure that desired_size is clipped
-	set_desired_size(m_desired_size);
+	// make sure that max fill is reduced as well if the max size is decreased
+	// because this is very likely what the user wanted to only consume so
+	// and so many wares in the first place. If it is increased, keep the
+	// max fill fill as it was
+	set_max_fill(std::min(m_max_fill, m_max_fill - (old_size - m_max_size)));
 }
 
 /**
@@ -191,13 +195,14 @@ void WaresQueue::set_max_size(const uint32_t size) throw ()
  * lost (the building should drop them).
  *
  * \warning You must call update after this as well!
+ * \todo Why not call update from here?
  */
-void WaresQueue::set_desired_size(uint32_t size) throw ()
+void WaresQueue::set_max_fill(uint32_t size) throw ()
 {
-	if (size < 0) size = 0;
-	if (size > m_max_size) size = m_max_size;
+	if (size > m_max_size)
+		size = m_max_size;
 
-	m_desired_size = size;
+	m_max_fill = size;
 }
 
 /**
@@ -240,7 +245,7 @@ void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos)
 	fw.CString
 		(owner().tribe().get_ware_descr(m_ware)->name().c_str());
 	fw.Signed32(m_max_size);
-	fw.Signed32(m_desired_size);
+	fw.Signed32(m_max_fill);
 	fw.Signed32(m_filled);
 	fw.Signed32(m_consume_interval);
 	if (m_request) {
@@ -260,9 +265,9 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 			m_ware             = owner().tribe().ware_index(fr.CString  ());
 			m_max_size         =                            fr.Unsigned32();
 			if (packet_version == 1)
-				m_desired_size = m_max_size;
+				m_max_fill = m_max_size;
 			else
-				m_desired_size = fr.Signed32();
+				m_max_fill = fr.Signed32();
 			m_filled           =                            fr.Unsigned32();
 			m_consume_interval =                            fr.Unsigned32();
 			if                                             (fr.Unsigned8 ()) {

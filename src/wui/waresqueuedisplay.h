@@ -71,14 +71,14 @@ private:
 	Widelands::Building   & m_building;
 	Widelands::WaresQueue * m_queue;
 	UI::Radiogroup        * m_priority_radiogroup;
-	UI::Callback_Button   * m_increase_desired_size;
-	UI::Callback_Button   * m_decrease_desired_size;
+	UI::Callback_Button   * m_increase_max_fill;
+	UI::Callback_Button   * m_decrease_max_fill;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
 	uint32_t         m_max_width;
 	PictureID        m_icon;            //< Index to ware's picture
 	PictureID        m_pic_background;
-	PictureID        m_desired_size_indicator;
+	PictureID        m_max_fill_indicator;
 
 
 	uint32_t         m_cache_size;
@@ -88,9 +88,9 @@ private:
 
 	virtual void max_size_changed();
 	void update_priority_buttons();
-	void update_desired_size_buttons();
-	void decrease_desired_size_clicked();
-	void increase_desired_size_clicked();
+	void update_max_fill_buttons();
+	void decrease_max_fill_clicked();
+	void increase_max_fill_clicked();
 	void radiogroup_changed(int32_t);
 };
 

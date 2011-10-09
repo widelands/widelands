@@ -53,7 +53,7 @@ struct WaresQueue {
 #endif
 
 	Ware_Index get_ware() const {return m_ware;}
-	uint32_t get_desired_size    () const throw () {return m_desired_size;}
+	uint32_t get_max_fill    () const throw () {return m_max_fill;}
 	uint32_t get_max_size        () const throw () {return m_max_size;}
 	uint32_t get_filled          () const throw () {return m_filled;}
 
@@ -66,7 +66,7 @@ struct WaresQueue {
 	void add_to_economy(Economy &);
 
 	void set_max_size        (uint32_t) throw ();
-	void set_desired_size    (uint32_t) throw ();
+	void set_max_fill        (uint32_t) throw ();
 	void set_filled          (uint32_t) throw ();
 	void set_consume_interval(uint32_t) throw ();
 
@@ -82,7 +82,7 @@ private:
 	PlayerImmovable & m_owner;
 	Ware_Index        m_ware;    ///< ware ID
 	uint32_t m_max_size;         ///< nr of items that fit into the queue maximum
-	uint32_t m_desired_size;     ///< nr of wares that should be ideally in this queue
+	uint32_t m_max_fill;         ///< nr of wares that should be ideally in this queue
 	uint32_t m_filled;           ///< nr of items that are currently in the queue
 
 	///< time in ms between consumption at full speed
