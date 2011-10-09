@@ -139,6 +139,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 		cb.set_size(button_size, 25);
 		cb.set_id(p);
 		cb.set_state(1);
+		cb.set_tooltip(player->get_name().c_str());
 		cb.changedtoid.set(this, &General_Statistics_Menu::cb_changed_to);
 		m_cbs[p - 1] = &cb;
 		pos.x += button_size + spacing;
