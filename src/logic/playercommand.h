@@ -248,7 +248,7 @@ struct Cmd_SetWareMaxFill : public PlayerCommand {
 	Cmd_SetWareMaxFill
 		(int32_t, Player_Number,
 		 PlayerImmovable &,
-		 Ware_Index, uint32_t);
+		 Ware_Index, int32_t);
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);

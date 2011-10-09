@@ -62,7 +62,7 @@ struct WaresQueue {
 	void add_to_economy(Economy &);
 
 	void set_max_size        (uint32_t) throw ();
-	void set_max_fill        (uint32_t) throw ();
+	void set_max_fill        (int32_t) throw ();
 	void set_filled          (uint32_t) throw ();
 	void set_consume_interval(uint32_t) throw ();
 

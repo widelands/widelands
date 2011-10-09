@@ -764,7 +764,7 @@ bool ProductionSite::get_building_work
 			m_recruited_workers.pop_back();
 		return true;
 	}
-	
+
 	// Drop all the wares that are too much out to the flag.
 	container_iterate(Input_Queues, m_input_queues, iqueue) {
 		WaresQueue * queue = *iqueue;

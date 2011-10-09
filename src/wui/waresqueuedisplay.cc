@@ -267,11 +267,13 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
  * stored here has been clicked
  */
 void WaresQueueDisplay::decrease_max_fill_clicked() {
+	int32_t cur = m_queue->get_max_fill();
 	m_igb.game().send_player_set_ware_max_fill
-			(m_building, m_ware_index, m_queue->get_max_fill() - 1);
+			(m_building, m_ware_index, cur - 1);
 }
 void WaresQueueDisplay::increase_max_fill_clicked() {
+	int32_t cur = m_queue->get_max_fill();
 	m_igb.game().send_player_set_ware_max_fill
-			(m_building, m_ware_index, m_queue->get_max_fill() + 1);
+			(m_building, m_ware_index, cur + 1);
 }
 

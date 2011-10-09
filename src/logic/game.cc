@@ -799,7 +799,7 @@ void Game::send_player_set_ware_priority
 void Game::send_player_set_ware_max_fill
 	(PlayerImmovable &       imm,
 	 Ware_Index        const index,
-	 uint32_t          const max_fill)
+	  int32_t          const max_fill)
 {
 	send_player_command
 		(*new Cmd_SetWareMaxFill
