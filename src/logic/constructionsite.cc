@@ -131,9 +131,8 @@ void ConstructionSite::log_general_info(Editor_Game_Base const & egbase) {
 			("* Owner: %i (player nr)\n",
 			 m_wares[i]->owner().player_number());
 		molog("* Ware: %u (index)\n", m_wares[i]->get_ware().value());
-		molog("* Size: %i\n", m_wares[i]->get_size());
+		molog("* Size: %i\n", m_wares[i]->get_max_size());
 		molog("* Filled: %i\n", m_wares[i]->get_filled());
-		molog("* Consume Interval: %i\n", m_wares[i]->get_consume_interval());
 	}
 }
 
@@ -289,7 +288,6 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 
 		wq.set_callback(ConstructionSite::wares_queue_callback, this);
 		wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-		wq.update();
 
 		m_work_steps += it->second;
 	}
@@ -458,6 +456,19 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
+	// Drop all the wares that are too much out to the flag.
+	container_iterate(Wares, m_wares, iqueue) {
+		WaresQueue * queue = *iqueue;
+		if (queue->get_filled() > queue->get_max_fill()) {
+			queue->set_filled(queue->get_filled() - 1);
+			Item_Ware_Descr const & wd = *tribe().get_ware_descr(queue->get_ware());
+			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
+			item.init(game);
+			worker.start_task_dropoff(game, item);
+			return true;
+		}
+	}
+
 	// Check if we've got wares to consume
 	if (m_work_completed < m_work_steps)
 	{
@@ -468,8 +479,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 				continue;
 
 			wq.set_filled(wq.get_filled() - 1);
-			wq.set_size(wq.get_size() - 1);
-			wq.update();
+			wq.set_max_size(wq.get_max_size() - 1);
 
 			m_working = true;
 			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;

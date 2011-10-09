@@ -796,6 +796,21 @@ void Game::send_player_set_ware_priority
 		 	 prio));
 }
 
+void Game::send_player_set_ware_max_fill
+	(PlayerImmovable &       imm,
+	 Ware_Index        const index,
+	  int32_t          const max_fill)
+{
+	send_player_command
+		(*new Cmd_SetWareMaxFill
+		 	(get_gametime(),
+		 	 imm.owner().player_number(),
+		 	 imm,
+		 	 index,
+		 	 max_fill));
+}
+
+
 void Game::send_player_change_training_options
 	(TrainingSite & ts, int32_t const atr, int32_t const val)
 {

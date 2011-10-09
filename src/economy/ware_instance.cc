@@ -331,6 +331,7 @@ void WareInstance::update(Game & game)
 			Transfer * const t = m_transfer;
 
 			m_transfer = 0;
+			m_transfer_nextstep = 0;
 
 			if (success) {
 				t->has_finished();
@@ -391,6 +392,8 @@ void WareInstance::update(Game & game)
  */
 void WareInstance::set_transfer(Game & game, Transfer & t)
 {
+	m_transfer_nextstep = 0;
+
 	// Reset current transfer
 	if (m_transfer) {
 		m_transfer->has_failed();
@@ -417,6 +420,7 @@ void WareInstance::set_transfer(Game & game, Transfer & t)
 void WareInstance::cancel_transfer(Game & game)
 {
 	m_transfer = 0;
+	m_transfer_nextstep = 0;
 
 	update(game);
 }
@@ -440,6 +444,7 @@ void WareInstance::cancel_moving()
 	if (m_transfer) {
 		m_transfer->has_failed();
 		m_transfer = 0;
+		m_transfer_nextstep = 0;
 	}
 }
 

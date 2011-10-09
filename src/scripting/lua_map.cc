@@ -1833,14 +1833,13 @@ int L_ProductionSite::set_wares(lua_State * L) {
 				  tribe.get_ware_descr(i->first)->name().c_str());
 
 		WaresQueue & wq = ps->waresqueue(i->first);
-		if (i->second > wq.get_size())
+		if (i->second > wq.get_max_size())
 			return
 				report_error
 					(L, "Not enough space for %u items, only for %i",
-					 i->second, wq.get_size());
+					 i->second, wq.get_max_size());
 
 		wq.set_filled(i->second);
-		wq.update();
 	}
 
 	return 0;

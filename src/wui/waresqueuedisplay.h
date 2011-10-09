@@ -26,6 +26,7 @@
 #include "logic/item_ware_descr.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
+#include "ui_basic/button.h"
 
 struct Interactive_GameBase;
 
@@ -47,8 +48,8 @@ struct WaresQueue;
 struct WaresQueueDisplay : public UI::Panel {
 	enum {
 		CellWidth = WARE_MENU_PIC_WIDTH,
+		CellSpacing = 2,
 		Border = 4,
-		Height = WARE_MENU_PIC_HEIGHT + 2 * Border,
 		PriorityButtonSize = 10
 	};
 
@@ -65,26 +66,31 @@ public:
 	virtual void think();
 	virtual void draw(RenderTarget &);
 
-protected:
-	virtual void update_desired_size();
-
 private:
 	Interactive_GameBase  & m_igb;
 	Widelands::Building   & m_building;
 	Widelands::WaresQueue * m_queue;
-	UI::Radiogroup        * m_radiogroup;
+	UI::Radiogroup        * m_priority_radiogroup;
+	UI::Callback_Button   * m_increase_max_fill;
+	UI::Callback_Button   * m_decrease_max_fill;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
 	uint32_t         m_max_width;
 	PictureID        m_icon;            //< Index to ware's picture
 	PictureID        m_pic_background;
+	PictureID        m_max_fill_indicator;
 
 
 	uint32_t         m_cache_size;
 	uint32_t         m_cache_filled;
 	uint32_t         m_display_size;
+	uint32_t         m_total_height;
 
+	virtual void max_size_changed();
 	void update_priority_buttons();
+	void update_max_fill_buttons();
+	void decrease_max_fill_clicked();
+	void increase_max_fill_clicked();
 	void radiogroup_changed(int32_t);
 };
 

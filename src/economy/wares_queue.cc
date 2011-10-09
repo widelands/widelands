@@ -41,18 +41,21 @@ namespace Widelands {
 WaresQueue::WaresQueue
 	(PlayerImmovable &       _owner,
 	 Ware_Index        const _ware,
-	 uint8_t           const _size,
-	 uint8_t           const _filled)
+	 uint8_t           const _max_size)
 	:
 	m_owner           (_owner),
 	m_ware            (_ware),
-	m_size            (_size),
-	m_filled          (_filled),
+	m_max_size        (_max_size),
+	m_max_fill        (_max_size),
+	m_filled          (0),
 	m_consume_interval(0),
 	m_request         (0),
 	m_callback_fn     (0),
 	m_callback_data   (0)
-{}
+{
+	if (m_ware)
+		update();
+}
 
 
 /**
@@ -65,7 +68,8 @@ void WaresQueue::cleanup() {
 		m_owner.get_economy()->remove_wares(m_ware, count);
 
 	m_filled = 0;
-	m_size = 0;
+	m_max_size = 0;
+	m_max_fill = 0;
 
 	update();
 
@@ -79,13 +83,13 @@ void WaresQueue::cleanup() {
 void WaresQueue::update() {
 	assert(m_ware);
 
-	if (m_filled > m_size) {
+	if (m_filled > m_max_size) {
 		if (m_owner.get_economy())
-			m_owner.get_economy()->remove_wares(m_ware, m_filled - m_size);
-		m_filled = m_size;
+			m_owner.get_economy()->remove_wares(m_ware, m_filled - m_max_size);
+		m_filled = m_max_size;
 	}
 
-	if (m_filled < m_size)
+	if (m_filled < m_max_fill)
 	{
 		if (!m_request)
 			m_request =
@@ -95,7 +99,7 @@ void WaresQueue::update() {
 					 WaresQueue::request_callback,
 					 Request::WARE);
 
-		m_request->set_count(m_size - m_filled);
+		m_request->set_count(m_max_fill - m_filled);
 		m_request->set_required_interval(m_consume_interval);
 	}
 	else
@@ -132,12 +136,11 @@ void WaresQueue::request_callback
 		ref_cast<Building, PlayerImmovable>(target).waresqueue(ware);
 
 	assert(!w); // WaresQueue can't hold workers
-	assert(wq.m_filled < wq.m_size);
+	assert(wq.m_filled < wq.m_max_size);
 	assert(wq.m_ware == ware);
 
 	// Update
 	wq.set_filled(wq.m_filled + 1);
-	wq.update();
 
 	if (wq.m_callback_fn)
 		(*wq.m_callback_fn)(game, &wq, ware, wq.m_callback_data);
@@ -169,20 +172,40 @@ void WaresQueue::add_to_economy(Economy & e)
 
 /**
  * Change size of the queue.
- *
- * \warning You must call \ref update() after this!
- * \todo Why not call update from here?
-*/
-void WaresQueue::set_size(const uint32_t size) throw ()
+ */
+void WaresQueue::set_max_size(const uint32_t size) throw ()
 {
-	m_size = size;
+	uint32_t old_size = m_max_size;
+	m_max_size = size;
+
+	// make sure that max fill is reduced as well if the max size is decreased
+	// because this is very likely what the user wanted to only consume so
+	// and so many wares in the first place. If it is increased, keep the
+	// max fill fill as it was
+	set_max_fill(std::min(m_max_fill, m_max_fill - (old_size - m_max_size)));
+
+	update();
+}
+
+/**
+ * Change the number of wares that should be available in this queue
+ *
+ * This is basically the same as setting the maximum size,
+ * but if there are more wares than that in the queue, they will not get
+ * lost (the building should drop them).
+ */
+void WaresQueue::set_max_fill(int32_t size) throw ()
+{
+	if (size < 0) size = 0;
+	if (size > m_max_size) size = m_max_size;
+
+	m_max_fill = size;
+
+	update();
 }
 
 /**
  * Change fill status of the queue.
- *
- * \warning You must call \ref update() after this!
- * \todo Why not call update from here?
  */
 void WaresQueue::set_filled(const uint32_t filled) throw () {
 	if (m_owner.get_economy()) {
@@ -193,6 +216,8 @@ void WaresQueue::set_filled(const uint32_t filled) throw () {
 	}
 
 	m_filled = filled;
+
+	update();
 }
 
 /**
@@ -204,12 +229,14 @@ void WaresQueue::set_filled(const uint32_t filled) throw () {
 void WaresQueue::set_consume_interval(const uint32_t time) throw ()
 {
 	m_consume_interval = time;
+
+	update();
 }
 
 /**
  * Read and write
  */
-#define WARES_QUEUE_DATA_PACKET_VERSION 1
+#define WARES_QUEUE_DATA_PACKET_VERSION 2
 void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
@@ -217,7 +244,8 @@ void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos)
 	//  Owner and callback is not saved, but this should be obvious on load.
 	fw.CString
 		(owner().tribe().get_ware_descr(m_ware)->name().c_str());
-	fw.Signed32(m_size);
+	fw.Signed32(m_max_size);
+	fw.Signed32(m_max_fill);
 	fw.Signed32(m_filled);
 	fw.Signed32(m_consume_interval);
 	if (m_request) {
@@ -232,10 +260,14 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {
-		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
+		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION or packet_version == 1) {
 			delete m_request;
 			m_ware             = owner().tribe().ware_index(fr.CString  ());
-			m_size             =                            fr.Unsigned32();
+			m_max_size         =                            fr.Unsigned32();
+			if (packet_version == 1)
+				m_max_fill = m_max_size;
+			else
+				m_max_fill = fr.Signed32();
 			m_filled           =                            fr.Unsigned32();
 			m_consume_interval =                            fr.Unsigned32();
 			if                                             (fr.Unsigned8 ()) {
