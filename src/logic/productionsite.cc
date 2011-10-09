@@ -347,12 +347,7 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 			new WaresQueue
 			(*this,
 			 i.current->first,
-			 i.current->second, 0);
-	// TODO SirVer: likely WaresQueue no longer needs last param
-
-	//  Request missing wares.
-	container_iterate_const(std::vector<WaresQueue *>, m_input_queues, i)
-		(*i.current)->update();
+			 i.current->second);
 
 	//  Request missing workers.
 	Working_Position * wp = m_working_positions;

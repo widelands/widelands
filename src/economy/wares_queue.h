@@ -38,15 +38,12 @@ class Worker;
 
 /**
  * This micro storage room can hold any number of items of a fixed ware.
- *
- * You must call update() after changing the queue's size or filled state using
- * one of the set_*() functions.
  */
 struct WaresQueue {
 	typedef void (callback_t)
 		(Game &, WaresQueue *, Ware_Index ware, void * data);
 
-	WaresQueue(PlayerImmovable &, Ware_Index, uint8_t size, uint8_t filled = 0);
+	WaresQueue(PlayerImmovable &, Ware_Index, uint8_t size);
 
 #ifndef NDEBUG
 	~WaresQueue() {assert(not m_ware);}
@@ -58,7 +55,6 @@ struct WaresQueue {
 	uint32_t get_filled          () const throw () {return m_filled;}
 
 	void cleanup();
-	void update();
 
 	void set_callback(callback_t *, void * data);
 
@@ -78,6 +74,7 @@ struct WaresQueue {
 private:
 	static void request_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	void update();
 
 	PlayerImmovable & m_owner;
 	Ware_Index        m_ware;    ///< ware ID

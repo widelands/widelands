@@ -581,7 +581,6 @@ void Building::set_max_fill
 {
 	WaresQueue & wq = waresqueue(widx);
 	wq.set_max_fill(max_fill);
-	wq.update();
 }
 
 

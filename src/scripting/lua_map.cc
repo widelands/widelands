@@ -1840,7 +1840,6 @@ int L_ProductionSite::set_wares(lua_State * L) {
 					 i->second, wq.get_max_size());
 
 		wq.set_filled(i->second);
-		wq.update();
 	}
 
 	return 0;

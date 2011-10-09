@@ -288,7 +288,6 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 
 		wq.set_callback(ConstructionSite::wares_queue_callback, this);
 		wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-		wq.update();
 
 		m_work_steps += it->second;
 	}
@@ -468,7 +467,6 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
-			wq.update();
 
 			m_working = true;
 			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;

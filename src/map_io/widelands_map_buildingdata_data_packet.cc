@@ -265,7 +265,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 				{
 					constructionsite.m_wares[i] =
 						new WaresQueue
-							(constructionsite, Ware_Index::Null(), 0, 0);
+							(constructionsite, Ware_Index::Null(), 0);
 					constructionsite.m_wares[i]->set_callback
 						(ConstructionSite::wares_queue_callback, &constructionsite);
 					constructionsite.m_wares[i]->Read(fr, game, mol);
@@ -826,7 +826,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			uint16_t nr_queues = fr.Unsigned16();
 			assert(!productionsite.m_input_queues.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
-				WaresQueue * wq = new WaresQueue(productionsite, Ware_Index::Null(), 0, 0);
+				WaresQueue * wq = new WaresQueue(productionsite, Ware_Index::Null(), 0);
 				wq->Read(fr, game, mol);
 
 				if (!wq->get_ware()) {

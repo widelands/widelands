@@ -827,7 +827,6 @@ void ProductionProgram::ActConsume::execute
 			if (uint8_t const q = consumption_quantities[i]) {
 				assert(q <= warequeues[i]->get_filled());
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
-				warequeues[i]->update();
 			}
 		return ps.program_step(game);
 	}
@@ -1541,7 +1540,6 @@ bool ProductionProgram::ActConstruct::get_building_work
 	item->init(game);
 	worker.set_carried_item(game, item);
 	wq->set_filled(wq->get_filled() - 1);
-	wq->update();
 
 	// Third step: send worker on his merry way, giving the target object or coords
 	worker.start_task_program(game, workerprogram);

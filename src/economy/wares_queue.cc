@@ -41,19 +41,21 @@ namespace Widelands {
 WaresQueue::WaresQueue
 	(PlayerImmovable &       _owner,
 	 Ware_Index        const _ware,
-	 uint8_t           const _max_size,
-	 uint8_t           const _filled)
+	 uint8_t           const _max_size)
 	:
 	m_owner           (_owner),
 	m_ware            (_ware),
 	m_max_size        (_max_size),
 	m_max_fill        (_max_size),
-	m_filled          (_filled),
+	m_filled          (0),
 	m_consume_interval(0),
 	m_request         (0),
 	m_callback_fn     (0),
 	m_callback_data   (0)
-{}
+{
+	if (m_ware)
+		update();
+}
 
 
 /**
@@ -139,7 +141,6 @@ void WaresQueue::request_callback
 
 	// Update
 	wq.set_filled(wq.m_filled + 1);
-	wq.update();
 
 	if (wq.m_callback_fn)
 		(*wq.m_callback_fn)(game, &wq, ware, wq.m_callback_data);
@@ -171,10 +172,7 @@ void WaresQueue::add_to_economy(Economy & e)
 
 /**
  * Change size of the queue.
- *
- * \warning You must call \ref update() after this!
- * \todo Why not call update from here?
-*/
+ */
 void WaresQueue::set_max_size(const uint32_t size) throw ()
 {
 	uint32_t old_size = m_max_size;
@@ -185,6 +183,8 @@ void WaresQueue::set_max_size(const uint32_t size) throw ()
 	// and so many wares in the first place. If it is increased, keep the
 	// max fill fill as it was
 	set_max_fill(std::min(m_max_fill, m_max_fill - (old_size - m_max_size)));
+
+	update();
 }
 
 /**
@@ -193,9 +193,6 @@ void WaresQueue::set_max_size(const uint32_t size) throw ()
  * This is basically the same as setting the maximum size,
  * but if there are more wares than that in the queue, they will not get
  * lost (the building should drop them).
- *
- * \warning You must call update after this as well!
- * \todo Why not call update from here?
  */
 void WaresQueue::set_max_fill(uint32_t size) throw ()
 {
@@ -203,13 +200,12 @@ void WaresQueue::set_max_fill(uint32_t size) throw ()
 		size = m_max_size;
 
 	m_max_fill = size;
+
+	update();
 }
 
 /**
  * Change fill status of the queue.
- *
- * \warning You must call \ref update() after this!
- * \todo Why not call update from here?
  */
 void WaresQueue::set_filled(const uint32_t filled) throw () {
 	if (m_owner.get_economy()) {
@@ -220,6 +216,8 @@ void WaresQueue::set_filled(const uint32_t filled) throw () {
 	}
 
 	m_filled = filled;
+
+	update();
 }
 
 /**
@@ -231,6 +229,8 @@ void WaresQueue::set_filled(const uint32_t filled) throw () {
 void WaresQueue::set_consume_interval(const uint32_t time) throw ()
 {
 	m_consume_interval = time;
+
+	update();
 }
 
 /**
