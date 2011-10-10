@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-01 11:13+0200\n"
-"PO-Revision-Date: 2011-08-16 19:43+0000\n"
+"POT-Creation-Date: 2011-10-03 13:44+0200\n"
+"PO-Revision-Date: 2011-10-06 19:26+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:41+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2011-10-07 04:31+0000\n"
+"X-Generator: Launchpad (build 14085)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1120,7 +1120,7 @@ msgstr "forventet %s men fant \"%s\""
 msgid "frame number"
 msgstr "ramme nummer"
 
-#: ../../src/graphic/graphic.cc:1020
+#: ../../src/graphic/graphic.cc:1069
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Laster animasjoner: %d%% ferdig"
@@ -4100,8 +4100,8 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
-msgid "random"
-msgstr ""
+msgid "Random"
+msgstr "Tilfeldig"
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -4215,15 +4215,15 @@ msgstr "Ikke lagre valgte varer her"
 msgid "Remove selected wares from here"
 msgstr "Fjern valgte varer herfra"
 
-#: ../../src/wui/waresqueuedisplay.cc:288
+#: ../../src/wui/waresqueuedisplay.cc:69
 msgid "Highest priority"
 msgstr "Høyest prioritet"
 
-#: ../../src/wui/waresqueuedisplay.cc:299
+#: ../../src/wui/waresqueuedisplay.cc:77
 msgid "Normal priority"
 msgstr "Normal prioritet"
 
-#: ../../src/wui/waresqueuedisplay.cc:310
+#: ../../src/wui/waresqueuedisplay.cc:85
 msgid "Lowest priority"
 msgstr "Laveste prioritet"
 

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-01 09:13+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2010-02-15 19:23+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -43,11 +43,6 @@ msgstr ""
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr ""
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr ""
-"Moninpelitarkoituksiin sopiva taistelukartta ristinmuotoisella saarella."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -183,10 +178,6 @@ msgstr "Haltiametsät"
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
 msgstr ""
-
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Vihollinen näkyvissä"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -374,6 +365,10 @@ msgid ""
 "March his unprepared army was attacked by 100 barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
@@ -603,3 +598,10 @@ msgstr ""
 "Seisot saarella, jota kruunaavat mahtavat vuoret sulkevat keskelleen "
 "mahtavan aarteen - Vihreän tasangon. Se on vaikea vallata, mutta helppo "
 "menettää, joten jos haluat sen, varo muita klaaneja."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""

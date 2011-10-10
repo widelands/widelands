@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-01 09:13+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2011-09-22 12:02+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-02 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:49+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:102
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "%i %s<br>"
 msgstr "%i %s<br>"
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "First Island"
 msgstr "Het eerste eiland"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:95
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:94
 msgid "Game Status"
 msgstr "Spelstatus"
 
