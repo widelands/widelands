@@ -112,7 +112,6 @@ inline static Map_Object_Data * read_unseen_immovable
 	)
 {
 	Map_Object_Data * m = new Map_Object_Data;
-	Player::Constructionsite_Information * csi = new Player::Constructionsite_Information;
 	try {
 		switch (immovable_kinds_file.get()) {
 		case 0:  //  The player sees no immovable.
@@ -126,11 +125,13 @@ inline static Map_Object_Data * read_unseen_immovable
 			if (version > 1) {
 				// Read data from immovables file
 				if (immovables_file.Unsigned8() == 1) { // the building is a constructionsite
-					csi->becomes     = &immovables_file.Building_Type(egbase);
+					Player::Constructionsite_Information * csi = new Player::Constructionsite_Information;
+					csi->becomes       = &immovables_file.Building_Type(egbase);
 					if (immovables_file.Unsigned8() == 1)
-						csi->was      = &immovables_file.Building_Type(egbase);
-					csi->totaltime     = immovables_file.Unsigned32();
-					csi->completedtime = immovables_file.Unsigned32();
+						csi->was        = &immovables_file.Building_Type(egbase);
+					csi->totaltime     =  immovables_file.Unsigned32();
+					csi->completedtime =  immovables_file.Unsigned32();
+					m->csi = csi;
 				}
 			}
 			break;
