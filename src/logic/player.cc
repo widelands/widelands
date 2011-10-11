@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -875,19 +875,27 @@ throw ()
 		{ //  map_object_descr[TCoords::None]
 
 			const Map_Object_Descr * map_object_descr;
+			const Constructionsite_Information * csi(0);
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
+
 				if (Road::IsRoadDescr(map_object_descr))
 					map_object_descr = 0;
-				else if (upcast(Building const, building, base_immovable))
+				else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f)
-						//  TODO This is not the buildidng's main position so we can
-						//  TODO not see it. But it should be possible to see it from
-						//  TODO a distance somehow.
+						// This is not the building's main position so we can not see it.
 						map_object_descr = 0;
+					else {
+						if (upcast(ConstructionSite const, cs, building)) {
+							csi = const_cast<ConstructionSite *>(cs)->get_info();
+
+						}
+					}
+				}
 			} else
 				map_object_descr = 0;
 			field.map_object_descr[TCoords<>::None] = map_object_descr;
+			field.constructionsite[TCoords<>::None] = csi;
 		}
 	}
 	{ //  discover the D triangle and the SW edge of the top right neighbour

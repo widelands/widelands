@@ -26,7 +26,6 @@
 #include "game.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "player.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
@@ -85,7 +84,8 @@ m_working        (false),
 m_work_steptime  (0),
 m_work_completed (0),
 m_work_steps     (0),
-m_builder_idle   (false)
+m_builder_idle   (false),
+m_info           (new Player::Constructionsite_Information)
 {}
 
 
@@ -228,6 +228,7 @@ void ConstructionSite::set_building(const Building_Descr & building_descr) {
 	assert(!m_building);
 
 	m_building = &building_descr;
+	m_info->becomes = &building_descr;
 }
 
 /*
@@ -241,6 +242,7 @@ void ConstructionSite::set_previous_building
 	assert(!m_prev_building);
 
 	m_prev_building = previous_building_descr;
+	m_info->was = previous_building_descr;
 }
 
 /*
@@ -540,18 +542,19 @@ void ConstructionSite::draw
 	// Draw the partially finished building
 
 	compile_assert(0 <= CONSTRUCTIONSITE_STEP_TIME);
-	const uint32_t totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
-	uint32_t completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+	m_info->totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
+	m_info->completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
 
 	if (m_working) {
 		assert
 			(m_work_steptime
 			 <=
-			 completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
-		completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
+			 m_info->completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
+		m_info->completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 	}
 
 	uint32_t anim;
+	uint32_t cur_frame;
 	try {
 		anim = building().get_animation("build");
 	} catch (Map_Object_Descr::Animation_Nonexistent) {
@@ -562,48 +565,36 @@ void ConstructionSite::draw
 		}
 	}
 	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
-	uint32_t const anim_pic =
-		totaltime ? completedtime * nr_frames / totaltime : 0;
+	cur_frame = m_info->totaltime ? m_info->completedtime * nr_frames / m_info->totaltime : 0;
 	// Redefine tanim
-	tanim = anim_pic * FRAME_LENGTH;
+	tanim = cur_frame * FRAME_LENGTH;
 
 	uint32_t w, h;
 	g_gr->get_animation_size(anim, tanim, w, h);
 
-	uint32_t lines = h * completedtime * nr_frames;
-	if (totaltime)
-		lines /= totaltime;
-	assert(h * anim_pic <= lines);
-	lines -= h * anim_pic; //  This won't work if pictures have various sizes.
+	uint32_t lines = h * m_info->completedtime * nr_frames;
+	if (m_info->totaltime)
+		lines /= m_info->totaltime;
+	assert(h * cur_frame <= lines);
+	lines -= h * cur_frame; //  This won't work if pictures have various sizes.
 
-	// NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic,
-	// nr_pics);
-	if (anim_pic) //  not the first pic
+	if (cur_frame) //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
-		dst.drawanimrect
-			(pos,
-			 anim,
-			 tanim - FRAME_LENGTH, get_owner(),
-			 Rect(Point(0, 0), w, h - lines));
+		dst.drawanimrect(pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (m_prev_building) {
-		//  Is the first building, but there was another building here before,
-		//  get its last build picture and draw it instead.
+		//  Is the first picture but there was another building here before,
+		//  get its most fitting picture and draw it instead.
 		uint32_t a;
 		try {
 			a = m_prev_building->get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent) {
 			a = m_prev_building->get_animation("idle");
 		}
-		dst.drawanimrect
-			(pos,
-			 a,
-			 tanim - FRAME_LENGTH, get_owner(),
-			 Rect(Point(0, 0), w, h - lines));
+		dst.drawanimrect(pos, a, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	}
 
 	assert(lines <= h);
-	dst.drawanimrect
-		(pos, anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
+	dst.drawanimrect(pos, anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);
