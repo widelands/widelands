@@ -2216,6 +2216,8 @@ void DefaultAI::lose_building (Building const & b)
 
 /// Checks that supply line exists for given building.
 /// Recurcsively verify that all inputs have a producer.
+// TODO: this function leads to periodic freezes of ~1 second on big games on my system.
+// TODO: It needs profiling and optimization.
 bool DefaultAI::check_supply(BuildingObserver const & bo)
 {
 	size_t supplied = 0;
