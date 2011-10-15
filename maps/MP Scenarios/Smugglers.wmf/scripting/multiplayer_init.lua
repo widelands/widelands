@@ -15,7 +15,7 @@ set_textdomain("mp_scenario_smugglers.wmf")
 game = wl.Game()
 map = game.map
 
-wares_to_smuggle = 300 -- How many are needed to win?
+wares_to_smuggle = 150 -- How many are needed to win?
 
 warehouse_regions = {
    map:get_field(52, 50):region(2), -- Blue player,
