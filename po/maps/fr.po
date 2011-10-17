@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-08-15 11:31+0000\n"
-"Last-Translator: Emmanuel Andry <Unknown>\n"
+"PO-Revision-Date: 2011-10-16 09:53+0000\n"
+"Last-Translator: Gilles Aubert <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:08+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-10-17 04:38+0000\n"
+"X-Generator: Launchpad (build 14155)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -86,6 +86,10 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"Un tournoi spécial dans la culture Atlantéenne nommé «Sautillement d'île », "
+"où deux ou plusieurs groupes tentent de rejoindre l'île du centre le plus "
+"vite possible, pour être le premier à construire un château sur le sommet de "
+"la montagne centrale."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -268,7 +272,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Sautillement d'île"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -416,7 +420,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Contrebande"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -682,3 +686,7 @@ msgid ""
 "appeared and now a rivalry under smugglers has been started: Which team will "
 "be the first to smuggle a certain number of wares?"
 msgstr ""
+"Vos trajets de contrebande bien établis sont subitement devenu occupé : Deux "
+"autres tribus ont apparu et maintenant une rivalité sous les contrebandiers "
+"a commencée : laquelle des équipes sera la première à faire passer "
+"clandestinement un certain nombre de marchandises ?"
