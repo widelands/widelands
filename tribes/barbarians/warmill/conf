@@ -101,10 +101,23 @@ call=produce_battleaxe
 call=produce_warriorsaxe
 return=skipped
 
+[build]
+pics=warmill_b_??.png  # ???
+hotspot=57 76
+playercolor=true
+
+[unoccupied]
+pics=warmill_u_??.png  # ???
+hotspot=57 76
+playercolor=true
+
 [idle]
-pics=i_??.png  # ???
-hotspot=43 67
+pics=warmill_i_??.png  # ???
+hotspot=57 76
+playercolor=true
 
 [working]
-pics=i_??.png  # ???
-hotspot=43 67
+pics=warmill_w_??.png  # ???
+hotspot=57 76
+playercolor=true
+fps=10
