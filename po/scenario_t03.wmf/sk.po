@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-07 22:00+0000\n"
+"PO-Revision-Date: 2011-10-21 23:07+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:10+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-10-22 04:34+0000\n"
+"X-Generator: Launchpad (build 14170)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -354,6 +354,10 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "it to a war mill which produces additional weapons."
 msgstr ""
+"* Vylepšite kovodielňu na továreň na sekery, aby sa začali vyrábať zbrane, a "
+"postavte druhú kovodielňu na zaistenie produkcie nástrojov. Keď kováč "
+"dosiahne ďalšiu úroveň (majster kováč), továreň na sekery budete môcť "
+"vylepšiť až na vojenský závod, v ktorom sa vyrábajú dodatočné zbrane."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
@@ -362,6 +366,10 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "your axefactory to a war mill."
 msgstr ""
+"* Vylepšite kovodielňu na továreň na sekery, aby sa začali vyrábať zbrane, a "
+"postavte druhú kovodielňu na zaistenie produkcie nástrojov. Keď kováč "
+"dosiahne ďalšiu úroveň (majster kováč), továreň na sekery budete môcť "
+"vylepšiť až na vojenský závod."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
@@ -515,7 +523,7 @@ msgstr "Je potrebná pevnosť"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:272
 msgid "Further explorations"
-msgstr ""
+msgstr "Ďalší prieskum"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:371
 msgid "Khantrukh approaches"
@@ -598,7 +606,7 @@ msgstr "Thron hovorí:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:260
 msgid "Tracks"
-msgstr ""
+msgstr "Stopy"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
