@@ -520,7 +520,7 @@ struct Player :
 	{
 		return m_building_stats[i];
 	}
-	
+
 	std::vector<uint32_t> const * get_ware_production_statistics
 		(Ware_Index const) const;
 
@@ -610,7 +610,7 @@ private:
 	 * m_ware_consumptions[ware_id][time_index]
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_consumptions;
-	
+
 	BuildingStats m_building_stats;
 };
 

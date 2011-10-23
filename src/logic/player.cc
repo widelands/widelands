@@ -1054,7 +1054,7 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
 std::vector<uint32_t> const * get_ware_consumption_statistics
 		(Ware_Index const ware) const {
 
-	assert(ware.value() < m_ware_consumption.size());
+	assert(ware.value() < m_ware_consumptions.size());
 
 	return &m_ware_consumptions[ware];
 }
@@ -1200,6 +1200,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
  * Write statistics data to the give file
  */
 void Player::WriteStatistics(FileWrite & fw) const {
+	//write produce statistics
 	fw.Unsigned16(m_current_produced_statistics.size());
 	fw.Unsigned16(m_ware_productions[0].size());
 
@@ -1210,6 +1211,19 @@ void Player::WriteStatistics(FileWrite & fw) const {
 		fw.Unsigned32(m_current_produced_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
 			fw.Unsigned32(m_ware_productions[i][j]);
+	}
+
+	//write consume statistics
+	fw.Unsigned16(m_current_consumed_statistics.size());
+	fw.Unsigned16(m_ware_consumptions[0].size());
+
+	for (uint8_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
+		fw.CString
+			(tribe().get_ware_descr
+			 (Ware_Index(static_cast<Ware_Index::value_t>(i)))->name());
+		fw.Unsigned32(m_current_consumed_statistics[i]);
+		for (uint32_t j = 0; j < m_ware_consumptions[i].size(); ++j)
+			fw.Unsigned32(m_ware_consumptions[i][j]);
 	}
 }
 
