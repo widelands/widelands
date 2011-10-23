@@ -1004,7 +1004,7 @@ void Player::sample_statistics()
 		m_ware_productions[i].push_back(m_current_produced_statistics[i]);
 		m_current_produced_statistics[i] = 0;
 
-		m_ware_consumptions[i].push_bacl(m_current_consumed_statistics[i]);
+		m_ware_consumptions[i].push_back(m_current_consumed_statistics[i]);
 		m_current_consumed_statistics[i] = 0;
 	}
 }
@@ -1051,7 +1051,7 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
 /**
  * Get current ware consumption statistics
  */
-std::vector<uint32_t> const * get_ware_consumption_statistics
+const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 		(Ware_Index const ware) const {
 
 	assert(ware.value() < m_ware_consumptions.size());
