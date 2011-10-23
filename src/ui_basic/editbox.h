@@ -72,6 +72,7 @@ private:
 	boost::scoped_ptr<EditBoxImpl> m;
 
 	void check_caret();
+	void insert(SDL_keysym code);
 
 	bool        m_history_active;
 	int16_t     m_history_position;

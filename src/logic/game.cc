@@ -568,6 +568,13 @@ bool Game::run
 	if (loader_ui) {
 		load_graphics(*loader_ui);
 
+#ifdef WIN32
+		//  Clear the event queue before starting game because we don't want
+		//  to handle events at game start that happened during loading procedure.
+		SDL_Event event;
+		while (SDL_PollEvent(&event));
+#endif
+
 		g_sound_handler.change_music("ingame", 1000, 0);
 
 		m_state = gs_running;
