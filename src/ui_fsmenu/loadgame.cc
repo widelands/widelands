@@ -66,7 +66,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 			 (&Fullscreen_Menu_LoadGame::clicked_delete, boost::ref(*this)),
 		 _("Delete"), std::string(), false, false),
 
-// Replay list
+// Savegame list
 	m_list
 		(this, get_w() * 47 / 2500, get_h() * 3417 / 10000,
 		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
@@ -132,8 +132,7 @@ void Fullscreen_Menu_LoadGame::clicked_delete()
 		fill_list();
 		if (m_list.empty()) {
 			//  else fill_list() already selected the first entry
-			m_ok.set_enabled(false);
-			m_delete.set_enabled(false);
+			no_selection();
 		}
 	}
 }
@@ -235,4 +234,41 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 
 	if (m_list.size())
 		m_list.select(0);
+}
+
+bool Fullscreen_Menu_LoadGame::handle_key(bool down, SDL_keysym code)
+{
+	if (!down)
+		return false;
+
+	switch (code.sym)
+	{
+	case SDLK_KP2:
+		if (code.mod & KMOD_NUM)
+			break;
+	case SDLK_DOWN:
+	case SDLK_KP8:
+		if (code.mod & KMOD_NUM)
+			break;
+	case SDLK_UP:
+		m_list.handle_key(down, code);
+		return true;
+	case SDLK_KP_ENTER:
+	case SDLK_RETURN:
+		clicked_ok();
+		return true;
+	case SDLK_KP_PERIOD:
+		if (code.mod & KMOD_NUM)
+			break;
+	case SDLK_DELETE:
+		clicked_delete();
+		return true;
+	case SDLK_ESCAPE:
+		end_modal(0);
+		return true;
+	default:
+		break;
+	}
+
+	return Fullscreen_Menu_Base::handle_key(down, code);
 }
