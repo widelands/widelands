@@ -53,6 +53,8 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	void fill_list     ();
 	void think();
 
+	bool handle_key(bool down, SDL_keysym code);
+
 private:
 	void no_selection();
 

@@ -36,18 +36,29 @@ struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
 	std::string const & filename() {return m_filename;}
 
 	void clicked_ok();
+	void clicked_delete();
 	void replay_selected(uint32_t);
 	void double_clicked(uint32_t);
 	void fill_list();
 
+	bool handle_key(bool down, SDL_keysym code);
+
 private:
+	void no_selection();
+
 	uint32_t m_butw;
 	uint32_t m_buth;
 
-	UI::Callback_Button m_back, m_ok;
-	UI::Listselect<std::string> m_list;
-	UI::Textarea m_title;
-	std::string m_filename;
+	UI::Callback_Button                             m_back;
+	UI::Callback_Button                             m_ok;
+	UI::Callback_Button                             m_delete;
+	UI::Listselect<std::string>                     m_list;
+	UI::Textarea                                    m_title;
+	UI::Textarea                                    m_label_mapname;
+	UI::Textarea                                    m_tamapname;
+	UI::Textarea                                    m_label_gametime;
+	UI::Textarea                                    m_tagametime;
+	std::string                                     m_filename;
 };
 
 
