@@ -1214,7 +1214,7 @@ void Player::WriteStatistics(FileWrite & fw) const {
 	}
 
 	//write consume statistics
-	fw.Unsigned16(m_current_consumed_statistics.size());
+	/*fw.Unsigned16(m_current_consumed_statistics.size());
 	fw.Unsigned16(m_ware_consumptions[0].size());
 
 	for (uint8_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
@@ -1224,7 +1224,7 @@ void Player::WriteStatistics(FileWrite & fw) const {
 		fw.Unsigned32(m_current_consumed_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_consumptions[i].size(); ++j)
 			fw.Unsigned32(m_ware_consumptions[i][j]);
-	}
+	}*/
 }
 
 }

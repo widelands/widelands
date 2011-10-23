@@ -806,6 +806,9 @@ void ProductionProgram::ActConsume::execute
 			if (uint8_t const q = consumption_quantities[i]) {
 				assert(q <= warequeues[i]->get_filled());
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
+
+				//update consumption statistic
+				ps.owner().ware_consumed(warequeues[i]->get_ware(), q);
 			}
 		return ps.program_step(game);
 	}
