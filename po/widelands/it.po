@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-09-22 07:05+0000\n"
-"Last-Translator: Loris Turchetti <Unknown>\n"
+"PO-Revision-Date: 2011-10-24 14:07+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:14+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-10-25 04:35+0000\n"
+"X-Generator: Launchpad (build 14185)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1195,7 +1195,7 @@ msgstr "lua: %s"
 #: ../../src/logic/cmd_queue.cc:173
 #, c-format
 msgid "duetime (%i) < gametime (%i)"
-msgstr ""
+msgstr "tempo trascorso (%i) < tempo di gioco (%i)"
 
 #: ../../src/logic/cmd_queue.cc:178
 #, c-format
@@ -1681,7 +1681,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:512
 #, c-format
 msgid "%s handling method already defined"
-msgstr ""
+msgstr "metodo di gestione %s già definito"
 
 #: ../../src/logic/production_program.cc:502
 msgid "failure"
@@ -2391,12 +2391,12 @@ msgstr "Perché vuoi avvertire te stesso?"
 
 #: ../../src/network/nethost.cc:394
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Perché vuoi avvertire il server dedicato?"
 
 #: ../../src/network/nethost.cc:398 ../../src/network/nethost.cc:424
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Non è stato possibile trovare il client %s"
 
 #: ../../src/network/nethost.cc:409
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -2484,7 +2484,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1125
 msgid "pwd          $ - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd $ - Invia la password $ all'host"
 
 #: ../../src/network/nethost.cc:1132
 msgid ""
@@ -2500,6 +2500,7 @@ msgstr "%s mi ha detto di eseguire il comando: \"%s\""
 #: ../../src/network/nethost.cc:1146
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr ""
+"Spiacente! Il salvataggio è stato disattivato in questo server dedicato!"
 
 #: ../../src/network/nethost.cc:1149
 msgid "Can not save, as long as no game is running!"
@@ -2507,7 +2508,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1160
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Partita salvata con successo!"
 
 #: ../../src/network/nethost.cc:1162
 #, c-format
@@ -2516,7 +2517,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1168
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Questo server non è protetto da password!"
 
 #: ../../src/network/nethost.cc:1171
 msgid "The send password was incorrect!"
@@ -2524,7 +2525,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1184
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "La password era corretta, l'accesso è stato garantito!"
 
 #: ../../src/network/nethost.cc:1190
 #, c-format
@@ -2558,6 +2559,8 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
+"Questo server è protetto da password. Puoi inviare la password con: \"@%s "
+"pwd PASSWORD\""
 
 #: ../../src/network/nethost.cc:2055
 msgid "Client reports time to host that is running backwards."
@@ -2614,7 +2617,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:2512 ../../src/network/nethost.cc:2521
 #: ../../src/network/nethost.cc:2530
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Il client non ha accesso alle impostazioni del server."
 
 #: ../../src/network/nethost.cc:2532
 msgid "Client send start command, although server is not yet ready."
@@ -3239,7 +3242,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Unknown gametime"
-msgstr ""
+msgstr "Tempo di gioco sconosciuto"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:60
 msgid "Choose a replay!"
@@ -3310,7 +3313,7 @@ msgstr "(cartella)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:466 ../../src/ui_fsmenu/mapselect.cc:469
 msgid "unknown"
-msgstr ""
+msgstr "sconosciuto"
 
 #: ../../src/ui_fsmenu/mapselect.cc:468
 msgid ""
@@ -4149,7 +4152,7 @@ msgstr "AI: "
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Casuale"
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -4277,11 +4280,11 @@ msgstr "Priorità bassa"
 
 #: ../../src/wui/waresqueuedisplay.cc:230
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "Diminuisci il numero di merci che vuoi immagazzinare qui."
 
 #: ../../src/wui/waresqueuedisplay.cc:239
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "Aumenta il numero di merci che vuoi immagazzinare qui."
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
