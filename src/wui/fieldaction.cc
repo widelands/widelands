@@ -466,9 +466,10 @@ void FieldActionWindow::add_buttons_auto()
 
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
-	if (militarybox) {
-		if (militarybox->allowed_change())
+	if (militarybox)
 	{
+		if (militarybox->allowed_change())
+		{
 			add_tab
 				("military", pic_tab_military,
 				 militarybox, _("Military settings"));
