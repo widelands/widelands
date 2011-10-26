@@ -1134,10 +1134,13 @@ const std::string & Player::getAI() const
  * \param version indicates the kind of statistics file, which may be
  *   0 - old style statistics (before WiHack 2010)
  *   1 - statistics with ware names
+ *   2 - with consumption statistics
  */
 void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 {
-	if (version == 1) {
+	 //version 1 and 2 only differs in an additional statistic.
+	 //Use version 1 code for both
+	if ((version == 2) || (version == 1)) {
 		uint16_t nr_wares = fr.Unsigned16();
 		uint16_t nr_entries = fr.Unsigned16();
 
@@ -1158,6 +1161,31 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 
 			for (uint32_t j = 0; j < nr_entries; ++j)
 				m_ware_productions[idx][j] = fr.Unsigned32();
+		}
+
+		//read consumption statistics if it exists
+		if (version == 2) {
+			nr_wares = fr.Unsigned16();
+			nr_entries = fr.Unsigned16();
+
+			for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i)
+				m_ware_consumptions[i].resize(nr_entries);
+
+			for (uint16_t i = 0; i < nr_wares; ++i) {
+				std::string name = fr.CString();
+				Ware_Index idx = tribe().ware_index(name);
+				if (!idx) {
+					log
+						("Player %u statistics: unknown ware name %s",
+						player_number(), name.c_str());
+					continue;
+				}
+
+				m_current_consumed_statistics[idx] = fr.Unsigned32();
+
+				for (uint32_t j = 0; j < nr_entries; ++j)
+					m_ware_consumptions[idx][j] = fr.Unsigned32();
+			}
 		}
 	} else if (version == 0) {
 		uint16_t nr_wares = fr.Unsigned16();
@@ -1214,7 +1242,7 @@ void Player::WriteStatistics(FileWrite & fw) const {
 	}
 
 	//write consume statistics
-	/*fw.Unsigned16(m_current_consumed_statistics.size());
+	fw.Unsigned16(m_current_consumed_statistics.size());
 	fw.Unsigned16(m_ware_consumptions[0].size());
 
 	for (uint8_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
@@ -1224,7 +1252,7 @@ void Player::WriteStatistics(FileWrite & fw) const {
 		fw.Unsigned32(m_current_consumed_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_consumptions[i].size(); ++j)
 			fw.Unsigned32(m_ware_consumptions[i][j]);
-	}*/
+	}
 }
 
 }

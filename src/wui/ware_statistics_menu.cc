@@ -31,17 +31,14 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/wsm_checkbox.h"
 
-
-#define WARES_DISPLAY_BG "pics/ware_list_bg.png"
 
 #define MIN_WARES_PER_LINE 7
 #define MAX_WARES_PER_LINE 11
 
-
 #define PLOT_HEIGHT 100
 
-#define COLOR_BOX_HEIGHT 7
 
 static const RGBColor colors[] = {
 	RGBColor  (0, 210, 254),
@@ -287,60 +284,6 @@ static const RGBColor colors[] = {
 	RGBColor(204, 204, 204),
 	RGBColor(255, 255, 255),
 };
-
-/*
- * This class is only needed here, that's
- * why it is defined here.
- *
- * This class is the same as an ordinary
- * checkbox, the only difference is, it has
- * a small rectangle on it with the color
- * of the graph and it needs a picture
- */
-struct WSM_Checkbox : public UI::Checkbox {
-	WSM_Checkbox(UI::Panel *, Point, int32_t id, PictureID picid, RGBColor);
-
-	virtual void draw(RenderTarget &);
-
-private:
-	PictureID  m_pic;
-	RGBColor   m_color;
-};
-
-
-WSM_Checkbox::WSM_Checkbox
-	(UI::Panel * const parent,
-	 Point       const p,
-	 int32_t     const id,
-	 PictureID   const picid,
-	 RGBColor    const color)
-:
-UI::Checkbox(parent, p, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG)),
-m_pic       (picid),
-m_color     (color)
-{
-	set_id(id);
-}
-
-/*
- * draw
- */
-void WSM_Checkbox::draw(RenderTarget & dst) {
-	//  First, draw normal.
-	UI::Checkbox::draw(dst);
-
-	//  Now, draw a small box with the color.
-	assert(1 <= get_inner_w());
-	compile_assert(2 <= COLOR_BOX_HEIGHT);
-	dst.fill_rect
-		(Rect(Point(1, 1), get_inner_w() - 1, COLOR_BOX_HEIGHT - 2), m_color);
-
-	//  and the item
-	dst.blit
-		(Point((get_inner_w() - WARE_MENU_PIC_WIDTH) / 2, COLOR_BOX_HEIGHT),
-		 m_pic);
-}
-
 
 Ware_Statistics_Menu::Ware_Statistics_Menu
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
