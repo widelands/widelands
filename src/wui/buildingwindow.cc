@@ -368,7 +368,7 @@ void Building_Window::create_ware_queue_panel
 	 Widelands::WaresQueue * const wq)
 {
 	// The *max* width should be larger than the default width
-	box->add(create_wares_queue_display(box, igbase(), b, wq, 3 * Width), UI::Box::AlignLeft);
+	box->add(new WaresQueueDisplay(box, 0, 0, 3 * Width, igbase(), b, wq), UI::Box::AlignLeft);
 }
 
 /**

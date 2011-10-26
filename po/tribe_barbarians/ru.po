@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-11-22 15:30+0000\n"
-"Last-Translator: Massol <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-21 14:27+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:38+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:43+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -23,6 +23,8 @@ msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
+"Огромная закуска, питание для шахтеров в глубоких шахтах. Производится в "
+"трактире или большом трактире из рыбы/мяса, хлеба и пива."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -30,12 +32,17 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
+"Шлем основной элемент защиты воинов. Производится кузнецом и используется на "
+"тренировочных площадках - совместно с пищей - для переподготовки солдат с "
+"уровня здоровья 0 до уровня 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Закуска готовится из хлеба, крепкого пива и рыбы/мяса в большом трактире. "
+"Это основная пища для работников в шахтах."
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -43,6 +50,9 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
+"Закуска нужна для поддержки шахтеров сильными и работоспособными. Скаутам "
+"также необходима закуска в своих разведывательных походах. Закуска готовится "
+"в таверне, трактире или большом трактире из рыбы или мяса или хлеба."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -50,6 +60,9 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"Боевой шлем это улучшенная броня для воинов-варваров. Производится в кузнице "
+"брони и и пользуется на тренировочных площадках - совместно с пищей - для "
+"переподготовки солдат с уровня здоровья 1 до уровня 2."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -105,6 +118,8 @@ msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce "
 "snacks."
 msgstr ""
+"Пиво варится на малых пивоварнях и используется в трактирах и больших "
+"трактирах для приготовления закуски."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -112,6 +127,9 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
+"Помимо хлеба и мяса, рыба - тоже съедобная пища для варваров. Она "
+"используется в тавернах, трактирах, больших трактирах и на тренировочных "
+"площадках (учебный плац и арена для сражений)."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Big Inn"
@@ -322,6 +340,9 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
+"Щипцы - это инструмент плавильщика, работающего в плавильне. Производится в "
+"мастерской по металлу (но не производиться, если здание было переоборудовано "
+"в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
@@ -345,6 +366,9 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Удочки необходимы рыбакам варваров для рыбной ловли. Это - один из основных "
+"инструментов, изготавливаемых в мастерских по металлу (но не производиться, "
+"если здание было переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
@@ -386,6 +410,10 @@ msgid ""
 "used as a precious building material and to produce different axes (in the "
 "war mill) and different armours (in the helmsmithy)."
 msgstr ""
+"Золото - самый ценный из всех металлов; им отделываются только очень важные "
+"вещи. Его получают из золотой руды в плавильне. Оно используется как дорогой "
+"строительный материал и при производстве разных топоров (на военном заводе) "
+"и броней (в кузнице брони)."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -393,6 +421,8 @@ msgid ""
 "gold, which is used as a precious building material and to produce weapons "
 "and armours."
 msgstr ""
+"Золотая руда добывается на золотых рудниках. В плавильне ее переплавляют в "
+"золото, которое используется в строительстве или ковке оружия и брони."
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -450,7 +480,7 @@ msgstr "Шлемная мастерская"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Помогает переносить ресурсы на загруженных дорогах."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
@@ -462,6 +492,10 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Как можно приготовить закуску, большую закуску или огромную закуску, если "
+"нет никакой кухонной утвари? Проверьте есть ли у вас мастерская по металлу, "
+"которая производит этот вид инструмента (он не производится если мастерская "
+"была переоборудована в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/conf:132
 msgid "Hunter"
@@ -501,12 +535,17 @@ msgid ""
 "produce weapons and tools in the metalwork shop, axefactory, war mill and in "
 "the helmsmithy."
 msgstr ""
+"Железо получают из железной руды в плавильне. Оно используется для "
+"производства инструмента и оружия в мастерских по металлу, на фабрике "
+"топоров, на военном заводе и в кузнице брони."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
+"Железная руда добывается на железных рудниках. Она перерабатывается в чистое "
+"железо в плавильне."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -559,6 +598,10 @@ msgid ""
 "miners. It is also consumed in the training sites (trainingscamp and battle "
 "arena)."
 msgstr ""
+"Мясо - источник энергии. Добывается охотниками и используется тавернами, "
+"трактирами и большими трактирами для приготовления закуски, большой закуски "
+"и огромной закуски для шахтеров. Кроме того необходимо тренировочным "
+"площадкам (учебный плац и арена для сражений)."
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
@@ -583,6 +626,10 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
+"Только это пиво является приемлемым для воинов на арене для сражений. "
+"Некоторые говорят, что вся сила варваров находится в этом пиве. Оно помогает "
+"переподготавливать солдат с уровня уклонения 0 до уровня 1 и 2. Крепкое пиво "
+"также используется в крупных гостиницах, для приготовления еды."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -594,7 +641,7 @@ msgstr "Бык"
 
 #: ../../tribes/barbarians/conf:69
 msgid "Peel"
-msgstr "Лопатка пекаря"
+msgstr "Лопатка"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Pick"
@@ -759,12 +806,16 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Грубые камни основной строительный материал варваров. Они добываются на "
+"каменоломнях и гранитных рудниках."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
+"Грубый камень может быть переработан в бетон, прочный негорючий материал. "
+"Бетон приготавливается на растворном узле."
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
@@ -853,7 +904,7 @@ msgstr "Острый Топор"
 msgid "Shovel"
 msgstr "Лопата"
 
-#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
 msgstr "Сон"
@@ -929,6 +980,8 @@ msgid ""
 "Thatch reed is produced in a fernery and used to make the roofs of buildings "
 "waterproof."
 msgstr ""
+"Тростник выращивается в оранжерее и используется в строительстве, чтобы "
+"сделать крыши зданий водонепроницаемыми."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -960,6 +1013,11 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
+"Пекари варваров непревзойденно готовят плоские и вкусные лепешки. Их делают "
+"из воды и зерна, следуя секретному рецепту. Лепешки используются в тавернах, "
+"гостиницах и больших гостиницах для приготовления рационов, закусок и сытных "
+"обедов. Также их используют в тренировочных зданиях (тренировочных лагерях и "
+"на арене поединков)"
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -967,6 +1025,9 @@ msgid ""
 "the trainingscamp - together with food- to train warriors with a fundamental "
 "fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"Секиры производятся на фабрике топоров или на военном заводе. Они "
+"используются в тренировочных лагерях (вместе с едой) чтобы обучить солдат "
+"основам военного дела (увеличить атаку с 1 до 2)"
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -974,6 +1035,10 @@ msgid ""
 "can use this. It is produced in the war mill and used in the trainingscamp "
 "(trains -together with food - from attack level 2 to level 3)."
 msgstr ""
+"Бронзовый топор считают тяжелым в обращении оружием. Только опытные бойцы "
+"могут использовать его .  Эти топоры производятся на фабрике топоров и "
+"используются в тренировочных лагерях (вместе с едой для увеличения атаки "
+"солдат с 2 до 3)"
 
 #: ../../tribes/barbarians/felling_axe/conf:1
 msgid ""
@@ -981,6 +1046,9 @@ msgid ""
 "produced in the metalwork shop (but ceases to be produced by the building if "
 "it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Топор лесоруба - это инструмент которым лесоруб валит деревья. Он "
+"изготавливается в мастерских по металлу (но не производиться, если здание "
+"было переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -1008,6 +1076,9 @@ msgid ""
 "in the metal works like all other tools (but it ceases to be produced by the "
 "building if the metal works is enhanced to an axefactory and war mill)."
 msgstr ""
+"Лопатка - инструмент пекаря и каждому пекарю нужна своя. Производится в "
+"мастерской по металлу, как все остальные инструменты (но не производиться, "
+"если здание было переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1015,6 +1086,9 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Коса - инструмент фермера. Это - один из основных инструментов, "
+"изготавливаемых в мастерских по металлу (но не производиться, если здание "
+"было переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -1022,6 +1096,9 @@ msgid ""
 "the ranger use it. Produced at the metalwork shop (but ceases to be produced "
 "by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Лопата нужна для ухода за растениями. Поэтому садовник и лесник используют "
+"ее. Производится в мастерской по металлу (но не производиться, если здание "
+"было переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -1030,6 +1107,10 @@ msgid ""
 "produced in a war mill and used -together with food - in a trainingscamp to "
 "train soldiers from attack level 4 to level 5."
 msgstr ""
+"Боевой топор - самое опасное оружие Варваров. Только наилучшие воины могут "
+"удержать в руках эти огромные и могучие топоры. Они производятся на военном "
+"заводе  и используются (вместе с едой) в тренировочном лагере чтобы "
+"увеличить у солдат уровень атаки с 4 до 5."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -1058,6 +1139,9 @@ msgid ""
 "metalwork shop (but ceases to be produced by the building if it is enhanced "
 "to an axefactory and war mill)."
 msgstr ""
+"Кирка используется камнеломами и шахтерами. Она изготавливается в мастерских "
+"по металлу (но не производиться, если здание было переоборудовано в фабрику "
+"топоров или военный завод)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -1066,6 +1150,10 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Это копье достаточно легкое для метания и достаточно тяжелое, чтобы убить "
+"любое животное с одного удара. Оно используется только охотниками. "
+"Производится в мастерской по металлу (но не производиться, если здание было "
+"переоборудовано в фабрику топоров или военный завод)."
 
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/conf:161
@@ -1157,22 +1245,22 @@ msgstr ""
 "улучшить навык атаки 4 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:26
+#: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "улучшить навык уклонения 0"
 
-#: ../../tribes/barbarians/battlearena/conf:27
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "улучшить навык уклонения 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:28
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "улучшить навык уклонения 1"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
@@ -1241,6 +1329,8 @@ msgid ""
 "and the brewery. Also the lime kiln and the cattle farm need to be supplied "
 "with water."
 msgstr ""
+"Вода - основа жизни! Она используется в пекарне, микро-пивоварне и "
+"пивоварне. Цементная печь и ранчо также нуждаются в воде."
 
 #: ../../tribes/barbarians/conf:141
 msgid "Weaver"
@@ -1264,6 +1354,8 @@ msgid ""
 "bakeries, micro breweries and breweries. Also Cattle farms need to be "
 "supplied with wheat."
 msgstr ""
+"Пшеница важна для выживания. Она выращивается на ферме и используется в "
+"пекарнях, пивоварнях и микро-пивоварнях. Для ранчо также нужна пшеница."
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"
@@ -1330,336 +1422,7 @@ msgid ""
 "and war mills. In trainingscamps, it is used - together with food- to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
-
-#~ msgid ""
-#~ "Young warriors need some encouragement. This drink makes a man fearless and "
-#~ "strong."
-#~ msgstr ""
-#~ "Молодые воины нуждаются в укреплении духа. Этот напиток делает людей "
-#~ "бесстрашными и сильными."
-
-#~ msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-#~ msgstr "Сукно требуется кораблям варваров. Производится из льна."
-
-#~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-#~ msgstr "Удочка необходима рыбаку варваров для ловли рыбы."
-
-#~ msgid "Flax is a beautiful flower, which are used to make cloth."
-#~ msgstr ""
-#~ "Лен это прекрасное растение, которое используется для производства сукна."
-
-#~ msgid ""
-#~ "Gold is the most valuable of all metals; only very important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Золото наиболее ценный из всех металлов; только очень важные вещи украшаются "
-#~ "золотом."
-
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "Небольшой набор для поддержки сил шахтёров."
-
-#~ msgid "Forester"
-#~ msgstr "Лесник"
-
-#~ msgid "Stonegrinder"
-#~ msgstr "Обработка камня"
-
-#~ msgid "Coalearth"
-#~ msgstr "Углезём"
-
-#~ msgid ""
-#~ "This earth is found in the deep coal mines. It needs to be enhanced to get "
-#~ "proper coal"
-#~ msgstr ""
-#~ "Это грунт, который добывается в глубокой угольной шахте. Его необходимо "
-#~ "переработать, чтобы получить нормальный уголь."
-
-#~ msgid "Grindstone"
-#~ msgstr "Бетонный блок"
-
-#~ msgid "Carries items along your roads."
-#~ msgstr "Переносит грузы по вашим дорогам."
-
-#~ msgid "Works at construction sites to create a new building."
-#~ msgstr "Работает на строительных площадках."
-
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "Настоящая еда, удовлетворяющая всем потребностям шахтёров."
-
-#~ msgid "Flax ripe"
-#~ msgstr "Созревший лён"
-
-#~ msgid "Grows flax and thatch reed."
-#~ msgstr "Выращивает лён и тростник."
-
-#~ msgid "Basic defence of a warrior."
-#~ msgstr "Основная защита воина."
-
-#~ msgid "An enhanced version of the helmet."
-#~ msgstr "Улучшенная версия шлема."
-
-#~ msgid ""
-#~ "The peel is the tool of the baker, each baker needs its own. It is produced "
-#~ "in the metal works like all tools."
-#~ msgstr ""
-#~ "Деревянная лопата является инструментом пекаря, каждому пекарю нужна своя "
-#~ "собственная. Выпускается в мастерской, как и все инструменты."
-
-#~ msgid ""
-#~ "This is the second most dangerous weapon, the barbarians are able to "
-#~ "produce. Only trained warriors are able to yield such a weapon. It is "
-#~ "produce in the axe factory."
-#~ msgstr ""
-#~ "Это второе самое опасное оружие, которое варвары в состоянии производить. "
-#~ "Только обученные воины могут использовать такое оружие. Выпускается  "
-#~ "фабрикой топоров."
-
-#~ msgid ""
-#~ "Fire-hardened wood, hard as iron and can not burn, used for military "
-#~ "buildings."
-#~ msgstr ""
-#~ "Обожжённое в огне дерево, твёрдое и огнеупорное, как железо, используется "
-#~ "для военных строений."
-
-#~ msgid "Resource indicator granit little"
-#~ msgstr "Залежи ресурсов: мало гранита"
-
-#~ msgid "Resource indicator granit much"
-#~ msgstr "Залежи ресурсов: много гранита"
-
-#~ msgid "Goldstone"
-#~ msgstr "Золотой самородок"
-
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Оружие и инструменты делаются из железа."
-
-#~ msgid "Raw Stones are the secondary build material of the barbarians."
-#~ msgstr "Камни  - дополнительный строительный материал варваров."
-
-#~ msgid ""
-#~ "The barbarian bakers are best in making this flat and tasty pitta bread."
-#~ msgstr "Пекари варваров лучшие в готовке вкусных тонких лепёшек."
-
-#~ msgid "Cuts raw pieces of granit out of laying stones."
-#~ msgstr "Извлекает гранитные глыбы из каменных залежей."
-
-#~ msgid "Trunks are the primary build material of the barbarians."
-#~ msgstr "Брёвна - основной строительный материал варваров."
-
-#~ msgid ""
-#~ "The Axe is the basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with this basic weapon, but also the lumberjack is using the "
-#~ "same model."
-#~ msgstr ""
-#~ "Топор является основным оружием и инструментом для варваров. Все молодые "
-#~ "солдаты получают это оружие. Топорами пользуются и дровосеки. Выпускается "
-#~ "фабрикой топоров и мастерской."
-
-#~ msgid ""
-#~ "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
-#~ "produced in the axe factory."
-#~ msgstr ""
-#~ "Хорошо тренированные бойцы получают в качестве оружия секиру, выпускаемую "
-#~ "фабрикой топоров."
-
-#~ msgid ""
-#~ "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-#~ msgstr "Кроме лепёшек и мяса, варвары охотно едят и рыбу."
-
-#~ msgid ""
-#~ "Some of your starting buildings didn't have enough room and \n"
-#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
-#~ "this map with a fair starting condition."
-#~ msgstr ""
-#~ "Некоторые из Ваших начальных строений не были установлены, так как для них\n"
-#~ "недостаточно места. Это ставит Вас в невыгодное положение. Рассмотрите\n"
-#~ "возможность перезапуска карты, чтобы обеспечить равные начальные условия."
-
-#~ msgid "Fishing rods are needed by barbarian fishers for fishing."
-#~ msgstr "Удочки необходимы рыболовам варваров для ловли рыбы."
-
-#~ msgid ""
-#~ "Fire-hardened wood, as hard as iron and cannot burn, used for military "
-#~ "buildings."
-#~ msgstr ""
-#~ "Твёрдая как железо и огнеупорная древесина, используется для военных "
-#~ "строений."
-
-#~ msgid "Flax"
-#~ msgstr "Лён"
-
-#~ msgid ""
-#~ "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with it, but also the lumberjack is using the same model."
-#~ msgstr ""
-#~ "Топор основное оружие и рабочий инструмент варваров. Все солдаты новобранцы "
-#~ "вооружаются им, но и лесорубы используют эту же модель."
-
-#~ msgid ""
-#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
-#~ "Produced in the metal works."
-#~ msgstr "Щипцы основной инструмент плавильщика. Изготавливаются в кузнице."
-
-#~ msgid "Helps to carry items at heavy used roads."
-#~ msgstr "Помогает перевозить грузы на сильно загруженных дорогах."
-
-#~ msgid "A bit bigger, for the advanced miners. They will need a big morsel."
-#~ msgstr "Немного больший рацион для опытных шахтёров."
-
-#~ msgid "An enhanced mask for barbarian warriors."
-#~ msgstr "Улучшенная боевая маска для воинов варваров."
-
-#~ msgid "Flax is a beautiful flower, which is used for making cloth."
-#~ msgstr "Лён - прекрасное растение, используемое для производства сукна."
-
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr "Как готовить обеды или пайки, без кухонной утвари?"
-
-#~ msgid ""
-#~ "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-#~ "lunch for the miners and in the soldier trainingcamps to keep warriors "
-#~ "strong."
-#~ msgstr ""
-#~ "Мясо содержит большое количество энергии. Оно используется на постоялых "
-#~ "дворах и в тавернах, для приготовления обеда шахтёров, а также в "
-#~ "тренировочных лагерях, для поддержания сил воинов."
-
-#~ msgid ""
-#~ "Only this beer is acceptable for the old warriors. Some say, the whole power "
-#~ "of the barbarians is in this ale."
-#~ msgstr ""
-#~ "Только это пиво уважают опытные воины. Некоторые говорят, что сила варваров "
-#~ "в их эле."
-
-#~ msgid ""
-#~ "Raw stone can be enhanced to grout which delivers solid, non burning build "
-#~ "material."
-#~ msgstr ""
-#~ "Из камня можно сделать цемент - прочный и негорючий строительный материал."
-
-#~ msgid ""
-#~ "Real warriors consider the sharp axe the first real weapon, after being able "
-#~ "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
-#~ "than the ordinary axe. Build in the axe factory."
-#~ msgstr ""
-#~ "Опытные воины считают острый топор первым настоящим оружием после обычного "
-#~ "топора. Острый топор тяжелее и острее обычного. Изготавливается на фабрике "
-#~ "топоров."
-
-#~ msgid ""
-#~ "The bronze axe is considered a hard to handle weapon: it makes a lot of "
-#~ "damage, but it's durability is not the best. Only skilled warriors can use "
-#~ "this. Produced in the axe factory."
-#~ msgstr ""
-#~ "Бронзовый топор считается трудным в обращении оружием - он наносит большие "
-#~ "повреждения, но его прочность не велика. Только искусные воины могут "
-#~ "использовать его. Изготавливается на фабрике топоров."
-
-#~ msgid ""
-#~ "The fires of the barbarians are usually fed with wood, but sometimes, wood "
-#~ "just does not burn hot enough. Then, coal is used."
-#~ msgstr ""
-#~ "Обычно варвары поддерживают огонь при помощи дров, но иногда дерево не даёт "
-#~ "достаточного жара. Тогда используется уголь."
-
-#~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
-#~ msgstr "Тростник используется чтобы сделать крыши построек непромокаемыми."
-
-#~ msgid ""
-#~ "The peel is a tool of the baker and each baker needs his own. It is produced "
-#~ "in the metal works like all other tools."
-#~ msgstr ""
-#~ "Пекарская лопатка основной инструмент пекаря и каждому пекарю нужна своя "
-#~ "собственная. Изготавливается как и все инструменты, в кузнице."
-
-#~ msgid ""
-#~ "This is the second most dangerous weapon the barbarians are able to produce. "
-#~ "Only trained warriors are able to yield such a weapon. It is produced in the "
-#~ "axe factory."
-#~ msgstr ""
-#~ "Это второе наиболее грозное оружие производимое варварами. Только обученные "
-#~ "воины способны совладать с таким оружием. Изготавливается на фабрике топоров."
-
-#~ msgid ""
-#~ "The shovel is needed for proper handling of plants. Therefore the ferner and "
-#~ "the ranger use it. Build at the metal works."
-#~ msgstr ""
-#~ "Лопата нужна для ухода за растениями, поэтому её используют садовники и "
-#~ "лесники. Изготавливается в кузнице."
-
-#~ msgid ""
-#~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
-#~ "the blacksmiths and the helmsmiths. Make sure you always got some in "
-#~ "reserve! Build at the metal works."
-#~ msgstr ""
-#~ "Молоток - важнейший инструмент. Он необходим геологам, строителям, кузнецам "
-#~ "и мастерам по изготовлению шлемов. Всегда имейте несколько в запасе. "
-#~ "Изготавливается в кузнице."
-
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Это самородок чистого золота."
-
-#~ msgid ""
-#~ "The scythe is the tool of the farmers. It is produced in the metal works."
-#~ msgstr "Коса - инструмент фермеров. Изготавливается в кузнице."
-
-#~ msgid ""
-#~ "This pick is used by the stonemasons and the miners. It is produced in the "
-#~ "metal works."
-#~ msgstr ""
-#~ "Кирка используется каменотёсами и шахтёрами. Изготавливается в кузнице."
-
-#~ msgid "This is the red iron ore."
-#~ msgstr "Это красный железняк."
-
-#~ msgid ""
-#~ "The warriors axe is the most dangerous of all weapons. Only a few warriors "
-#~ "ever were able to handle those huge and powerful axes. Build at the axe "
-#~ "factory."
-#~ msgstr ""
-#~ "Топор воина - самое грозное из всех оружие. Очень немногие воины способны "
-#~ "совладать с этим огромным и мощным топором. Изготавливается на фабрике "
-#~ "топоров."
-
-#~ msgid ""
-#~ "This spear is light enough to be thrown, but heavy enough to kill any animal "
-#~ "in one blow. It is only used by the hunters. Produced in the metal works."
-#~ msgstr ""
-#~ "Это копьё достаточно лёгкое для броска, и в тоже время достаточно тяжёлое, "
-#~ "чтобы убить любое животное одним ударом. Используется только охотниками. "
-#~ "Изготавливается в кузнице."
-
-#~ msgid ""
-#~ "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
-#~ "be made of this wheat."
-#~ msgstr ""
-#~ "Пшеница необходима для выживания. И вкуснейшие лепёшки и крепкий эль "
-#~ "делаются из пшеницы."
-
-#~ msgid ""
-#~ "Water is the most essential essence for life! This water is used in many "
-#~ "places, be it to make bread or beer or to produce grout."
-#~ msgstr ""
-#~ "Вода это самая важная жидкость для жизни! Вода используется везде, будь это "
-#~ "производство хлеба, пива или цемента."
-
-#~ msgid "Flax tiny"
-#~ msgstr "Засеянный лён"
-
-#~ msgid "Flax medium"
-#~ msgstr "Молодой лён"
-
-#~ msgid "Flax small"
-#~ msgstr "Всходы льна"
-
-#~ msgid "Harvest flax"
-#~ msgstr "собрать урожай льна"
-
-#~ msgid "Plant flax"
-#~ msgstr "посадить лён"
-
-#~ msgid "The felling axe is the tool of the lumberjack to take down trees."
-#~ msgstr "Инструмент лесоруба для рубки деревьев."
-
-#~ msgid "This is gold ore mined from deep within the mountains."
-#~ msgstr "Это золотая руда, добытая из глубин гор."
+"Молодые войны горды, что они учатся сражаться этим могучим оружием. Оно "
+"тяжелее и острее обычного топора. Производится на фабрике топоров и военном "
+"заводе. Используется на тренировочных площадках - совместно с пищей - для "
+"увеличения уровня атаки солдат с 0 до 1."

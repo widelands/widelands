@@ -246,12 +246,28 @@ uint32_t Multiline_Editbox::Data::snap_to_char(uint32_t cursor)
 }
 
 /**
+ * Insert the utf8 character according to the specified key code
+ */
+void Multiline_Editbox::insert(SDL_keysym const code)
+{
+	std::string utf8 = Utf8::unicode_to_utf8(code.unicode);
+
+	if (d->text.size() + utf8.size() <= d->maxbytes) {
+		d->insert(d->cursor_pos, utf8);
+		changed.call();
+	}
+}
+
+/**
  * This is called by the UI code whenever a key press or release arrives
  */
 bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_KP_PERIOD:
+			if (code.mod & KMOD_NUM)
+				break;
 		case SDLK_DELETE:
 			if (d->cursor_pos < d->text.size()) {
 				d->erase_bytes(d->cursor_pos, d->next_char(d->cursor_pos));
@@ -266,6 +282,11 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
+		case SDLK_KP4:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_LEFT: {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d->prev_char(d->cursor_pos);
@@ -284,6 +305,11 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			break;
 		}
 
+		case SDLK_KP6:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_RIGHT:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d->next_char(d->cursor_pos);
@@ -297,6 +323,11 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
+		case SDLK_KP2:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_DOWN:
 			if (d->cursor_pos < d->text.size()) {
 				d->refresh_ww();
@@ -321,6 +352,11 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
+		case SDLK_KP8:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_UP:
 			if (d->cursor_pos > 0) {
 				d->refresh_ww();
@@ -343,6 +379,11 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
+		case SDLK_KP7:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(0);
@@ -356,6 +397,11 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
+		case SDLK_KP1:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(d->text.size());
@@ -372,8 +418,8 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
-		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
 			d->insert(d->cursor_pos, "\n");
 			changed.call();
 			break;
@@ -384,19 +430,14 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 			// as a 0 on keystroke, the o then as the unicode character. We simply
 			// ignore the 0.
 			if (is_printable(code) and code.unicode) {
-				std::string utf8 = Utf8::unicode_to_utf8(code.unicode);
-
-				if (d->text.size() + utf8.size() <= d->maxbytes) {
-					d->insert(d->cursor_pos, utf8);
-					changed.call();
-				}
+				insert(code);
 			}
 			break;
 		}
 		return true;
 	}
 
-	return false;
+	return Panel::handle_key(down, code);
 }
 
 /**

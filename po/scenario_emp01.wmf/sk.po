@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-11-11 02:11+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-09-10 19:43+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:34+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:41+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:38
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
 " \"Finally, the Gods were with us!<br> We landed on an unknown coast and "
 "found peaceful rest under the palm trees growing at the shore. But that is "
@@ -28,11 +28,11 @@ msgstr ""
 " \"Konečne boli bohovia s nami!<br> Vylodili sme na neznámom ostrove a našli "
 "pokojný odpočinok pod palmami rastúcimi na jeho brehu. Lepšie to asi byť "
 "nemôže. Pravdou je:<br> keď som sa dnes ráno zobudil, okolo nás som nevidel "
-"nič viac ako piesok.<br> Skutočne to vyzerá tak, že sme sa ocitli pod "
+"nič viac než piesok.<br> Skutočne to vyzerá tak, že sme sa ocitli pod "
 "jedinými palmami, ktoré existujú v tejto ďalekej púšti. Bojím sa, že "
-"nenájdeme pomoc k opraveniu našej lode načas.\" "
+"nenájdeme pomoc, ktorú potrebujeme na opravenie našej lode, načas.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:90
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
 " \"Hey Lutius, I got the message that our first lumberjack started his work "
 "today. Perhaps it would be a good idea to wait until he cleans enough space "
@@ -42,8 +42,15 @@ msgid ""
 "needs, too. So we should build up a sawmill - as soon as we have enough "
 "space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Ahoj, Lutius, dostala som správu, že náš prvý drevorubač dnes začal "
+"pracovať. Možno by bolo dobré počkať, kým nevyprázdni miesto na postavenie "
+"dvoch drevorubačských sídel, aby sme mohli rýchlejšie ťažiť drevo. <br> Ale, "
+"nanešťastie, kmene stromov sú k ničomu pri oprave našej lode - potrebujeme "
+"vylepšené drevo, aké tiež potrebuje každá loď a každá väčšia budova. Takže "
+"by sme mali postaviť pílu - hneď ako získame dostatok miesta.\"<br><br>-- "
+"NOVÁ ÚLOHA --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:73
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid ""
 " \"Hey Lutius, I just met Saledus outside.<br> He told me about the "
 "barracks. Well, I am not one of those girls who think we need more barracks -"
@@ -52,16 +59,25 @@ msgid ""
 "yesterday and found a nice place for a lumberjack's house, south of our "
 "provisional headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Ahoj, Lutius, práve som vonku stretla Saleda.<br> Povedal mi o kasárňach. "
+"Nuž, nie som jednou z dievčat, ktoré si myslia, že potrebujeme viac kasární. "
+"Namiesto toho by sme sa mohli sústrediť na iné veci.<br> Je úplne jasné, že "
+"na opravu našej lode potrebujeme drevo. A tak som sa včera prešla lesom a "
+"našla skvelé miesto pre sídlo drevorubača, južne od našej dočasnej "
+"základne.\"<br><br>-- NOVÁ ÚLOHA --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:126
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:117
 msgid ""
 " \"Hey Lutius, today we got a lot closer to our first castle. The quarry to "
 "the south began its work today and will soon provide us with stones and "
 "beautiful marble.<br> Now we truly can look forward to settling down on "
 "another island.\" "
 msgstr ""
+" \"Ahoj, Lutius, dnes sme sa dostali oveľa bližšie k nášmu prvému hradu. "
+"Kameňolom na juhu dnes začal fungovať a čoskoro nám dodá kamene a prekrásny "
+"mramor.<br> Teraz sa skutočne môžeme tešiť, že sa usadíme na inom ostrove.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:114
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:106
 msgid ""
 " \"Hey, my good old friend. I just thought about the rocks standing on the "
 "south shore of this land. Perhaps we could cut out some useful hard stones "
@@ -69,8 +85,13 @@ msgid ""
 "anyway, and the resources we harvest now might be the base of strong and big "
 "buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Ahoj, môj starý dobrý priateľ. Len som myslel na skaly stojace na južnom "
+"brehu tejto zeme. Možno by sme mohli vysekať nejaké tvrdé užitočné kamene a "
+"prekrásny mramor.<br> Oprava našej lode potrvá zopár týždňov a zdroje, ktoré "
+"ťažíme, by teraz mohli byť základom silných a veľkých budov v ďalšej "
+"zemi.\"<br><br>-- NOVÁ ÚLOHA --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:102
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:95
 msgid ""
 " \"Hi Lutius, I've got two important things to talk about... First the good "
 "news:<br> I saw that the construction of the sawmill is complete, so we can "
@@ -83,8 +104,18 @@ msgid ""
 "this island a complete desert.<br> Lutius, I beg you: find someone who takes "
 "care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Zdravím, Lucius. Chcel by som sa porozprávať o dvoch dôležitých "
+"veciach... Najprv dobrá správa:<br> Všimol som si, že píla už je hotová, "
+"takže môžeme začať upravovať drevo, ktoré ťažia drevorubači.<br> Ale to je "
+"asi jediná pozitívna vec, o ktorej viem hovoriť. Zlou správou je, že naši "
+"drevorubači ťažia neuveriteľnou rýchlosťou. Na ostrove nezostávajú takmer "
+"žiadne stromy!<br> Lutius, tieto stromy poskytujú kryt od piesočných búrok "
+"na púšti, tienia horúce dni a sú domovom mnohých nežných zvierat. Nemali by "
+"sme z tohto ostrova urobiť úplnú púšť.<br> Lutius, prosím vás: nájdite "
+"niekoho, kto sa postará o sadenie nových stromov.\"<br><br>-- NOVÁ ÚLOHA --"
+"<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:26
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:25
 msgid ""
 " \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. "
 "Nature was against us and drove us into a dark, wild storm. I really don't "
@@ -93,8 +124,14 @@ msgid ""
 "and is taking in more and more water. We can thank the Gods if we survive "
 "this black night with our lives.\" "
 msgstr ""
+" \"Zdá sa, že plavba po Perlovom zálive bola jednou z našich najväčších "
+"chýb. Príroda bola proti nám a zaviedla nás do temnej, divokej búrky. "
+"Skutočne neviem, koľko hodín prešlo odvtedy, čo sa vlny dostali ponad našu "
+"loď, ale stále by to bola samovražda vyjsť von.<br> Naša loď je vážne "
+"poškodená a dostáva sa do nej stále viac vody. Môžeme ďakovať bohom, ak "
+"prežijeme túto temnú noc.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:50
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:47
 msgid ""
 " \"Sire, I fear we are not safe in this foreign land. Who knows what "
 "terrible creatures live beyond this forest, in that mighty desert? What if "
@@ -105,16 +142,28 @@ msgid ""
 "the forest. Then one of us can keep watch in the darkness and keep us safe "
 "from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Pane, bojím sa, že nie sme v bezpečí v tejto cudzej krajine. Kto vie, aké "
+"hrozné tvory žijú za týmto lesom na tej mohutnej púšti? Čo ak tie tvory "
+"vniknú do lesov a vyčkajú na chvíľu, kedy na nás môžu zaútočiť?<br> Nuž, "
+"možno je môj strach zavádzajúci, ale nemôže byť zlé hliadkovať v lesoch - "
+"aby sme mohli spozorovať možných nepriateľov skôr než oni nás.<br> Ale "
+"naozaj by sme mali postaviť kasárne vo východnej časti lesa. Potom jeden z "
+"nás môže hliadkovať v tme a ochrániť nás pred tými tvormi.\"<br><br>-- NOVÁ "
+"ÚLOHA --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:63
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:59
 msgid ""
 " \"Sire, I saw that the construction of the barracks was complete, so I "
 "assigned one of my best soldiers to it to keep watch on the desert.<br> This "
 "is a good step forward. Now we can feel a bit safer and can look forward to "
 "repair our ship.\" "
 msgstr ""
+" \"Pane, videl som, že kasárne sú postavené, a tak som priradil jedného z "
+"mojich najlepších vojakov, aby hliadkoval na púšti.<br> Je to dobrý krok "
+"vpred. Teraz sa môžeme cítiť o niečo bezpečnejšie a sústrediť sa na opravu "
+"našej lode.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:135
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:125
 msgid ""
 " \"Today I got the message that our ship is completely repaired. At the "
 "moment my people are loading everything onto our newly repaired ship, hoping "
@@ -125,6 +174,14 @@ msgid ""
 "completed this mission. You may continue playing if you wish, otherwise move "
 "on to the next mission.\" "
 msgstr ""
+" \"Dnes som dostal správu, že naša loď je kompletne opravená. V tomto "
+"momente moji ľudia nakladajú všetko do našej novo opravenej lode, dúfajúc, "
+"že nám poslúži lepšie ako naposledy.<br> Táto noc bude našou poslednou na "
+"tomto ostrove. Zajtra ráno ho opustíme, hľadajúc nové miesto pre našu "
+"osadu.<br> Stále som zvedavý, či ešte niekdy uvidíme Fremil.<br><br>---------"
+"------------ VÍŤAZSTVO! ----------------------<br><br> Dokončili ste túto "
+"misiu. Ak si prajete, môžete pokračovať v hraní, inak prejdite na ďalšiu "
+"misiu.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:14
 msgid ""
@@ -150,69 +207,104 @@ msgid ""
 "perl-gulf with my family, some of my friends and a few of my best "
 "warriors.\" "
 msgstr ""
+" \"Čo sa stalo z nášho impéria? Skutočne si kladiem túto otázku - prečo mi "
+"kráľ zakázal bojovať proti tomu odpornému barbarskému kmeňu, ktorý sa najprv "
+"tváril ako mierumilovný spojenec a potom zaútočil na moju armádu počas "
+"najtmavšej noci?<br> S armádou 150 mužov som bol priradený hliadkovať na "
+"našej južnej hranici, ktorá leží pri pohorí Galdin vo veľkom, prekrásnom a "
+"prastarom lese. Čoskoro sme stretli barbarský kmeň, ktorý bol najprv "
+"priateľský. Zopár mojich mužov s nimi dokonca obchodovalo a ich deti prišli "
+"k nám obdivovať naše čisté a slušné uniformy a zbrane.<br> Ale počas piatej "
+"noci v tej oblasti, zaútočili na nás bez príčiny. Stratil som tucty dobrých "
+"mužov a ocitol som sa uväznený a prinesený k náčelníkovi. Pľuvol na mňa, "
+"vysmial ma a povedal mi, aby som túto krajinu navždy opustil. Nechcel novú "
+"zem a nechcel ani našu zem, ale povedal mi, že TENTO les je ich zemou - a "
+"ostatne, kým si duchovia neodvedú posledného človeka z jeho ľudu.<br> O tri "
+"týždne neskôr som sa vrátil do Fremilu a hovoril s naším kráľom. Zúril na "
+"barbarov, no aj tak zakázal útok na tieto kmene. Veril, že naša armáda bola "
+"príliš slabá na prežitie vo vojne proti barbarom.<br> Aj tak, nenašiel som "
+"spôsob ako zmazať tú potupu - bez útoku na barbarov. Tak som loďou opustil "
+"Fremil, aby som si našiel nový svet, nový život niekde na juhu. Teraz sa "
+"plavím na Perlovom zálive s rodinou, niektorými mojimi priateľmi a "
+"najlepšími bojovníkmi.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:145
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:135
 msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
 msgstr ""
+" \"Spravili ste z tohto polostrova veľmi bezpečného miesto. Je načase pohnúť "
+"sa vpred!\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:51
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:156
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:48
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:146
 msgid ""
 "* Build a barracks at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
 msgstr ""
+"* Postavte kasárne na symbole červeného domu na východnej strane lesa, "
+"napravo od vašej dočasnej základne."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:103
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:181
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:96
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:171
 msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
 msgstr ""
+"* Postavte sídlo horára, aby ste udržiavali zdroje dreva na tomto ostrove."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:74
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:69
 msgid ""
 "* Build a lumberjack's house at the red house symbol, south of your "
 "provisional headquarters. Cutting down enough trees for more buildings will "
 "take a while. You can speed the game up using PAGE UP and slow it down again "
 "with PAGE DOWN."
 msgstr ""
+"* Postavte sídlo drevorubača na symbole červeného domu, južne od vašej "
+"dočasnej základne. Vyrúbanie dostatku stromov pre viac budov chvíľu potrvá. "
+"Hru môžete zrýchliť stlačením PAGE UP a opäť znížiť s PAGE DOWN."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:163
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:153
 msgid ""
 "* Build a lumberjack's house at the red point, south of your provisional "
 "headquarters. Cutting down enough trees for more buildings will take a "
 "while. You can speed the game up using PAGE UP and slow it down again with "
 "PAGE DOWN."
 msgstr ""
+"* Postavte sídlo drevorubača na červenom bode, južne od vašej dočasnej "
+"základne. Vyrúbanie dostatku stromov pre viac budov chvíľu potrvá. Hru "
+"môžete zrýchliť stlačením PAGE UP a opäť znížiť s PAGE DOWN."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:115
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:188
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:107
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:178
 msgid ""
 "* Build a quarry in the south to cut some stones and marble out of the "
 "rocks.<br> These might be used for future buildings."
 msgstr ""
+"* Postavte kameňolom južne na ťažbu kameňa a mramoru zo skaly.<br> Mohli by "
+"sa využiť neskôr pre naše budovy."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:91
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:174
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:85
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:164
 msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
+"* Postavte dve ďalšie sídla drevorubačov a pílu, akonáhle je pre ne dostatok "
+"miesta."
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Brehy Malac' Mor-u"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid "A dark night"
 msgstr "Temná noc"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:46
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "A foreboding"
 msgstr "Predtucha"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:122
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "A step forward"
 msgstr "Krok dopredu"
 
@@ -224,104 +316,96 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on "
 "an unknown desert strand and save his people. For now."
 msgstr ""
+"Po prehratí dôležitej bitky proti barbarom, ktorá viedla k strate veľkej "
+"časti územia impéria, Lutius opúšťa Fremil, aby začal nový život. Ale osud "
+"zavedie jeho loď do silnej búrky, ktorá ju takmer zničí. Len s poriadnym "
+"šťastím sa mu s poškodenou loďou podarí nabehnúť na neznámy pustý breh a "
+"zachrániť svojich ľudí."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:100
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:93
 msgid "Amalea comes in..."
 msgstr "Amalea prichádza..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:88
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:82
 msgid "Amalea recommends..."
 msgstr "Amalea doporučuje..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:71
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Amalea smiles..."
 msgstr "Amalea sa usmieva..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:154
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid "Build a barracks"
 msgstr "Postav kasárne"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:179
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Build a forester's house"
-msgstr ""
+msgstr "Postavte sídlo horára"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:161
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Build a lumberjack's house"
-msgstr ""
+msgstr "Postavte sídlo drevorubača"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:186
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Build a quarry"
-msgstr ""
+msgstr "Postavte kameňolom"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:172
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Postavte dve sídla drevorubačov a pílu"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:24
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:36
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:23
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Diary of Lutius"
 msgstr "Denník Lucia"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:133
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "Mission Complete"
 msgstr "Misia splnená."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:141
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:131
 msgid "Safe Peninsula"
 msgstr "Bezpečný polostrov"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:59
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Safe for now"
 msgstr "V bezpečí"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:48
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Saledus looks around nervously..."
 msgstr "Saledus sa nervózne rozhliadol..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:124
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 msgid "Saledus looks promising..."
 msgstr "Saledus sa usmieva..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:112
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:104
 msgid "Saledus notes..."
 msgstr "Saledus poznamenáva..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:61
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Saledus speaks with a sigh of relief..."
-msgstr ""
+msgstr "Saledus vraví s úľavou..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:143
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid "Saledus speaks:"
 msgstr "Saledus prehovorí:"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:34
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:32
 msgid "Survivor"
 msgstr "preživší"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:22
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:21
 msgid "The rough sea"
 msgstr "Rozbúrené more"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:110
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid "Thinking about the future"
 msgstr "Plánovanie do budúcnosti"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:69
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:86
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:98
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:64
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:80
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:91
 msgid "Young Amalea"
 msgstr "Mladá Amalea"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid ""
-#~ "* Build a barracks at the red point on the east side of the forests, to the "
-#~ "right of your headquarters."
-#~ msgstr ""
-#~ "* Postav kasárne na červenom bode vo východnej časti lesa, napravo od "
-#~ "základne."
-
-#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
-#~ msgstr "Impérium - Tréning 1 - Brehy Malac' Mor-u"

@@ -6,4 +6,6 @@ buildable=no
 
 [idle]
 pics=../../../tribes/barbarians/fortress/fortress_i_??.png
-hotspot=81 66
+hotspot=103 80
+playercolor=true
+fps=10

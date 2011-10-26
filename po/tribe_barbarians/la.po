@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2011-02-20 19:41+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-03-25 07:48+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-21 04:46+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:43+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -35,6 +35,8 @@ msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Cena in caupone fit e pita, e cervisia bona, e pane vel pisce. Ea ab "
+"operarii altissimorum metallorum amatur!"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -450,7 +452,7 @@ msgstr "Galearum fabrica"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Res per magnas vias portari adiuvat."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
@@ -514,7 +516,7 @@ msgstr "Instrumenta culinaria"
 
 #: ../../tribes/barbarians/conf:178
 msgid "Lime Kiln"
-msgstr ""
+msgstr "fornix calcaria"
 
 #: ../../tribes/barbarians/conf:134
 msgid "Lime-Burner"
@@ -562,7 +564,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
-msgstr "Fabrica ferrarius"
+msgstr "Fabrica ferraria"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Micro Brewery"
@@ -586,7 +588,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
-msgstr ""
+msgstr "specula"
 
 #: ../../tribes/barbarians/conf:111
 msgid "Ox"
@@ -602,7 +604,7 @@ msgstr "Dolabra"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Pitta Bread"
-msgstr ""
+msgstr "pita"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
@@ -726,7 +728,7 @@ msgstr "Cibum pro fossoribus metallicis coquit."
 #: ../../tribes/barbarians/master-brewer/conf:1
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
-msgstr ""
+msgstr "Facit bonam cervisiam, ut milites fortius et leatius exerceant."
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
@@ -751,13 +753,15 @@ msgstr "Cibus"
 
 #: ../../tribes/barbarians/conf:96
 msgid "Raw Stone"
-msgstr ""
+msgstr "saxum"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Saxa sunt Barbaris prima materia aedificandi. Quae sunt exhauruntur in "
+"lapidicinis metallisque."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
@@ -853,7 +857,7 @@ msgstr ""
 msgid "Shovel"
 msgstr "Rutila"
 
-#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
 msgstr "Dormit"
@@ -932,6 +936,7 @@ msgid ""
 "The Axe is a basic weapon for the barbarians. All young soldiers are "
 "equipped with it."
 msgstr ""
+"Asciae arma simplicia Barbara sunt. Omnes iuvenes milites eas accipiunt."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -1072,7 +1077,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:216
 msgid "Trainingscamp"
-msgstr ""
+msgstr "Castra exercendi"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1141,20 +1146,20 @@ msgid ""
 "(build13))"
 msgstr ""
 
-#: ../../tribes/barbarians/battlearena/conf:26
+#: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr ""
 
-#: ../../tribes/barbarians/battlearena/conf:27
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/barbarians/battlearena/conf:28
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr ""
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
@@ -1241,7 +1246,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"
-msgstr ""
+msgstr "Aper"
 
 #: ../../tribes/barbarians/conf:177
 msgid "Wood Hardener"
@@ -1303,105 +1308,3 @@ msgid ""
 "and war mills. In trainingscamps, it is used - together with food- to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
-
-#~ msgid "Resource indicator granit little"
-#~ msgstr "Est indicatum hic granatum paucum situm"
-
-#~ msgid "Resource indicator granit much"
-#~ msgstr "Est indicatum hic granatum multum situm"
-
-#~ msgid "Works at construction sites to create a new building."
-#~ msgstr "In areis ad novum aedificium construendum laborat."
-
-#~ msgid ""
-#~ "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-#~ msgstr "Praeter panem carnemque Barbari libenter paucum piscis edunt."
-
-#~ msgid "An enhanced mask for barbarian warriors."
-#~ msgstr "Larva melior pro militibus Barbaris."
-
-#~ msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-#~ msgstr "Textum ex linum factum ad naves aedificandas utuntur."
-
-#~ msgid "Fishing rods are needed by barbarian fishers for fishing."
-#~ msgstr "Harundines a piscatores Babaris ad pisces capiendas utuntur."
-
-#~ msgid "Flax is a beautiful flower, which is used for making cloth."
-#~ msgstr "Linum est flos beatissimum quae ad vestimenta textenda utuntur."
-
-#~ msgid "Flax"
-#~ msgstr "Linum"
-
-#~ msgid "Harvest flax"
-#~ msgstr "Linum metit."
-
-#~ msgid "Grows flax and thatch reed."
-#~ msgstr "Linum cannasque colit."
-
-#~ msgid "Goldstone"
-#~ msgstr "Aes aureum"
-
-#~ msgid "Helps to carry items at heavy used roads."
-#~ msgstr "Res per vias magnas portare adiuvat."
-
-#~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
-#~ msgstr "Cannae untuntur, ut tecta barbararum domuum tegantur."
-
-#~ msgid "The mighty tribes of the eastern lands!"
-#~ msgstr "Nationes fortissimae ex oriente!"
-
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "Morsa parva, ut fossores melius laborent."
-
-#~ msgid "This is the red iron ore."
-#~ msgstr "Hoc est aes ferri rubrum."
-
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Arma instrumentaque e ferro fabricantur."
-
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "Cena propria quae omnes fossores satisfacit."
-
-#~ msgid ""
-#~ "Gold is the most valuable of all metals; only very important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Aurum est aes pretiosissimum. Solum res gravissimae maximaeque eo ornatur."
-
-#~ msgid ""
-#~ "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with it, but also the lumberjack is using the same model."
-#~ msgstr ""
-#~ "Ascia est arma simplex ac instrumentum Barbari. Omnes milites iuvenes eam "
-#~ "habent, sed etiam lignatores eadem utuntur."
-
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Hoc est fulvum aes aureum."
-
-#~ msgid ""
-#~ "The scythe is the tool of the farmers. It is produced in the metal works."
-#~ msgstr "Falx est instrumentum agricolae. Quae est fabricata in fabrica."
-
-#~ msgid "Trunks are the primary build material of the barbarians."
-#~ msgstr "Ligna trabalia sunt materies principes Barbarorum."
-
-#~ msgid ""
-#~ "Fire-hardened wood, as hard as iron and cannot burn, used for military "
-#~ "buildings."
-#~ msgstr ""
-#~ "Igne duratum lignum, quod est ferro durum et ignem concipere non potest, pro "
-#~ "militaribus aedificiis construendis necesse est."
-
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr ""
-#~ "Quo modo cibus, gustatio, cena coquuntur, nisi culinaria instrumenta?"
-
-#~ msgid ""
-#~ "The peel is a tool of the baker and each baker needs his own. It is produced "
-#~ "in the metal works like all other tools."
-#~ msgstr ""
-#~ "Pala est instrumentum pistoris, quisque pistor una utitur. Sicut omnia "
-#~ "instrumenta in fabrica fit."
-
-#~ msgid "An enhanced version of the helmet."
-#~ msgstr "Melius genus galeae"

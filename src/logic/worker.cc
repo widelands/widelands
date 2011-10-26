@@ -1572,7 +1572,7 @@ void Worker::cancel_task_transfer(Game & game)
 
 /**
  * Endless loop, in which the worker calls the owning building's
- * get_building_work() function to intiate subtasks.
+ * get_building_work() function to initiate subtasks.
  * The signal "update" is used to wake the worker up after a sleeping time
  * (initiated by a false return value from get_building_work()).
  *
@@ -2786,7 +2786,7 @@ void Worker::draw_inner
 
 	if (WareInstance const * const carried_item = get_carried_item(game))
 		dst.drawanim
-			(drawpos - Point(0, 15),
+			(drawpos - descr().get_ware_hotspot(),
 			 carried_item->descr().get_animation("idle"),
 			 0,
 			 get_owner());

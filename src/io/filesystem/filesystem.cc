@@ -120,6 +120,19 @@ std::string FileSystem::fixCrossFile(std::string const & path) const {
 		if (temp == "\\")
 #endif
 			fixedPath.at(i) = m_filesep;
+		// As a security measure, eat all:
+		// * tildes
+		// * double dots
+		// * dots with following slash/backslash (but not a single dot - we need it in e.g. "xyz.wmf")
+		// away to avoid misuse of the file transfer function.
+		if (temp == "~")
+			fixedPath.at(i) = '_';
+		if (temp == "." && (i + 1 < path_size)) {
+			std::string temp2;
+			temp2 = path.at(i + 1);
+			if (temp2 == "." || temp2 == "\\" || temp2 == "/")
+				fixedPath.at(i) = '_';
+		}
 	}
 	return fixedPath;
 }

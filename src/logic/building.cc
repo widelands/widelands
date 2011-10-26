@@ -17,29 +17,31 @@
  *
  */
 
-#include "constructionsite.h"
+#include <cstdio>
+#include <sstream>
+
+#include "upcast.h"
+#include "wexception.h"
+
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "wui/interactive_player.h"
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "wui/interactive_player.h"
+
+#include "constructionsite.h"
+#include "game.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "player.h"
 #include "productionsite.h"
-#include "profile/profile.h"
-#include "graphic/rendertarget.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-#include "sound/sound_handler.h"
 #include "tribe.h"
-#include "upcast.h"
-#include "wexception.h"
 #include "worker.h"
-
-#include <cstdio>
-#include <sstream>
 
 namespace Widelands {
 
@@ -127,9 +129,7 @@ Building_Descr::Building_Descr
 			if (build_s->get_int("fps", -1) != -1)
 				throw wexception("fps defined for build animation!");
 			if (!is_animation_known("build"))
-				add_animation
-					("build",
-					 g_anim.get(directory.c_str(), *build_s, 0));
+				add_animation("build", g_anim.get(directory.c_str(), *build_s, 0));
 		}
 
 		// Get costs
@@ -144,9 +144,13 @@ Building_Descr::Building_Descr
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
-			add_animation
-				("idle",
-				 g_anim.get(directory.c_str(), idle_s, 0));
+			add_animation("idle", g_anim.get(directory.c_str(), idle_s, 0));
+		if (Section * unoccupied = prof.get_section("unoccupied"))
+			if (!is_animation_known("unoccupied"))
+				add_animation("unoccupied", g_anim.get(directory.c_str(), *unoccupied, 0));
+		if (Section * empty = prof.get_section("empty"))
+			if (!is_animation_known("empty"))
+				add_animation("empty", g_anim.get(directory.c_str(), *empty, 0));
 	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
@@ -374,7 +378,10 @@ void Building::init(Editor_Game_Base & egbase)
 	}
 
 	// Start the animation
-	start_animation(egbase, descr().get_animation("idle"));
+	if (descr().is_animation_known("unoccupied"))
+		start_animation(egbase, descr().get_animation("unoccupied"));
+	else
+		start_animation(egbase, descr().get_animation("idle"));
 
 	m_leave_time = egbase.get_gametime();
 }

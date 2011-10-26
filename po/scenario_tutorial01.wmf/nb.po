@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2011-02-12 16:18+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-04-06 21:39+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:45+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:49+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -124,11 +124,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
-msgstr ""
+msgstr "Plant et flagg på veien"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:167
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "Plant et flagg for å dele opp veien til tømmerhuggeren"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Build a quarry"
@@ -329,6 +329,8 @@ msgid ""
 "for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
+"Unnvik er sjansen en soldat har for å dukke unna et angrep. Det er 25% på\n"
+"nivå 0 for barbarer, og øker med 15% for hvert nivå."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
@@ -369,6 +371,11 @@ msgid ""
 "right-click-and-hold anywhere on the map, then drag the mouse and instead\n"
 "of the cursor, the view will be moved. Try it."
 msgstr ""
+"Flott. Det er en raskere måte å flytte seg på, ved å bruke musen i stedet "
+"for: Simpelten\n"
+"høyreklikk og hold nede hvor som helst på kartet, deretter dra musen slik at "
+"i stedet for\n"
+"pekeren, flytter synsfeltet seg. Prøv det."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
 msgid ""
@@ -382,8 +389,7 @@ msgstr ""
 msgid ""
 "Expanding is as simple as building a military building at the corner of\n"
 "your territory. The barbarians have a few different military buildings:\n"
-"sentries, barriers, donjons, strongholds, fortresses and citadels. The "
-"bigger\n"
+"sentries, barriers, donjons, fortresses and citadels. The bigger\n"
 "the building, the more expensive it is to build, the more land it conquers\n"
 "around itself and the more soldiers can be stationed there. The buildings "
 "also\n"
@@ -607,11 +613,11 @@ msgstr "Gruvedrift konklusjon"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Flytte synsfeltet med piltastene"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Flytte synsfeltet med musen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
@@ -643,6 +649,12 @@ msgid ""
 "symbol\n"
 "in between the two blue flags we just placed and then click on the"
 msgstr ""
+"Fint å se hvordan de jobber, er det ikke? Men den stakkars bæreren har en "
+"veldig lang vei å gå.\n"
+"Vi kan gjøre det lettere for ham (og mer effektivt for oss) hvis vi "
+"plasserer nok et \n"
+"blått flagg på veien. Nå kan du prøve: klikk på det gule flaggsymbolet\n"
+"mellom de to blå flaggene vi plasserte nå nettopp og klikk deretter på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:563
 msgid ""
@@ -729,7 +741,7 @@ msgstr "Fremad til steinbruddet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:225
 msgid "Other ways to move the view"
-msgstr ""
+msgstr "Andre måter for å flytte synsfeltet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "Placing another flag"
@@ -1053,7 +1065,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:502
 msgid ""
-"You can choose from the following military buildings: sentry, stronghold,\n"
+"You can choose from the following military buildings: sentry, \n"
 "donjon, barrier and fortress. The bigger the building, the more expensive it "
 "is\n"
 "to be built. But it will also conquer a bigger region. Sometimes, it is "
@@ -1173,38 +1185,3 @@ msgstr "dette."
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
 msgstr "vann"
-
-#~ msgid ""
-#~ "Everything except for big buildings can be build on a yellow house symbol."
-#~ msgstr ""
-#~ "Alt unntatt de største bygningene kan bygges på de gule hus-symbolene."
-
-#~ msgid "Everything can be build on the green house symbol."
-#~ msgstr "Alt kan bygges der det grønne hus-symbolet vises."
-
-#~ msgid ""
-#~ "If you decide you do not want to build a road at this time, you can cancel\n"
-#~ " road building by clicking on the starting flag of the road and selecting"
-#~ msgstr ""
-#~ "Hvis du bestemmer deg for at du ikke vil bygge en vei akkurat nå, kan du "
-#~ "avbryte\n"
-#~ " veibyggingen ved å klikke på flagget der veien starter og velge"
-
-#~ msgid ""
-#~ "There is a small slope to climb to reach this field. This means you're\n"
-#~ " workers are faster walking downwards than they are walking upwards."
-#~ msgstr ""
-#~ "Det er en liten kneik å forsere for å nå dette feltet. Dette betyr at\n"
-#~ " arbeiderne dine vil bevege seg raskere når de går nedover enn når de går "
-#~ "oppover."
-
-#~ msgid ""
-#~ "Keep the slopes in mind while placing roads and use them to your advantage.\n"
-#~ " Also try to keep roads as short as possible and always remember to place "
-#~ "as\n"
-#~ " many flags as you can on road segments to share the load better."
-#~ msgstr ""
-#~ "Tenk på høydeforskjellene når du plasserer veiene dine og bruk dem til din "
-#~ "fordel. \n"
-#~ " Prøv også å holde veiene så korte som mulige og alltid husk å plassere så\n"
-#~ " mange flagg som du kan langs veistykkene for å fordele byrden bedre."

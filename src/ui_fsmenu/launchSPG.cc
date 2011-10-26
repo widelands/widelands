@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -318,7 +318,7 @@ void Fullscreen_Menu_LaunchSPG::select_map()
 	if (!m_settings->canChangeMap())
 		return;
 
-	Fullscreen_Menu_MapSelect msm(Map::SP_SCENARIO);
+	Fullscreen_Menu_MapSelect msm(m_settings, 0);
 	int code = msm.run();
 
 	if (code <= 0) {

@@ -45,3 +45,8 @@ playercolor=true
 pics=deeper_goldmine_b_??.png
 hotspot=60 37
 playercolor=true
+
+[empty]
+pics=deeper_goldmine_e_??.png
+hotspot=60 37
+playercolor=true

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2010-08-30 23:46+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:39+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:44+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -1348,171 +1348,3 @@ msgstr "Працює в шахтах, добуває вугілля, заліз�
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
 msgstr ""
-
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "Невеликий набір, для підтримки сил шахтарям."
-
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "Справжня їжа, яка задовільняє всі потреби шахтарів."
-
-#~ msgid "Basic defence of a warrior"
-#~ msgstr "Простий захист для воїнів"
-
-#~ msgid "Basic armour for Empire soldiers."
-#~ msgstr "Проста збруя для солдат Імперії"
-
-#~ msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-#~ msgstr ""
-#~ "Не лише хліб та м'ясо, але й риба - поважний продукт на столах жителів "
-#~ "Імперії."
-
-#~ msgid ""
-#~ "Cloth is needed for Empire ships and a few bigger buildings. It is produced "
-#~ "out of wool."
-#~ msgstr ""
-#~ "Тканина потрібна кораблям Імперії та для деяких великих будівель. "
-#~ "Виготовляється з шерсті."
-
-#~ msgid ""
-#~ "Flour is produced out of wheat and is needed for the tasty Empire bread."
-#~ msgstr ""
-#~ "Мука виготовляється з пшениці та потрібна для випікання смачного хліба "
-#~ "Імперії."
-
-#~ msgid ""
-#~ "Gold is the most valuable of all metals; only very important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Золото - це найбільш цінний метал, тільки дуже важливі речі прикрашають "
-#~ "золотом."
-
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr ""
-#~ "Як накажете готувати їжу (пайки, обіди чи ситі обіди) без кухонного приладдя?"
-
-#~ msgid ""
-#~ "Marble columns present the high culture of the Empire, so they are needed "
-#~ "for nearly every bigger building."
-#~ msgstr ""
-#~ "Колони з мармуру, вважаються в Імперії, ознакою високої культури, тому і "
-#~ "застосовуються практично у всіх будівлях."
-
-#~ msgid ""
-#~ "Marble is the beautiful stone, which is cutted out of the mountains and "
-#~ "which is used for beautiful buildings and columns."
-#~ msgstr ""
-#~ "Мармур - це чудовий камінь, який добувається в горах і використовується для "
-#~ "будівництва красивих будівель."
-
-#~ msgid ""
-#~ "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-#~ "lunch for the miners and in the soldier trainingcamps to keep warriors "
-#~ "strong."
-#~ msgstr ""
-#~ "М'ясо містить велику кількість енергії. Воно використовується в трактирах, "
-#~ "тавернах, щоб приготувати обід шахтарям, а також в тренувальних лагерях для "
-#~ "відновлення енергії воїнів."
-
-#~ msgid "Stones and wood are the basic build material of the Empire."
-#~ msgstr "Каміння та дерево - основні будматеріали Імперії."
-
-#~ msgid "The bakers of the Empire make really tasty bread."
-#~ msgstr "Пекарі Імперії печуть дуже смачний хліб."
-
-#~ msgid ""
-#~ "This basket is needed by the winegrower, for harvesting the grapes. It is "
-#~ "produced by the toolsmith."
-#~ msgstr ""
-#~ "Кошик потрібен виноробу для збору врожаю. Виготовляється в майстерні."
-
-#~ msgid "This is a good warrior lance, with a steel-top and a little blade."
-#~ msgstr ""
-#~ "Це хороший бойовий спис, з залізним наконечником та невеличким лезом."
-
-#~ msgid ""
-#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
-#~ "They are produced by the toolsmith."
-#~ msgstr "Кліщі коваля - інструмент ливарника. Виготовляється в майстерні."
-
-#~ msgid "The strongest armour existing for the Empire soldiers."
-#~ msgstr "Найміцніша броня з усіх, для солдат Імперії."
-
-#~ msgid ""
-#~ "The fires of the Empire are usually fed with wood, but sometimes, wood just "
-#~ "does not burn hot enough. Then, coal is used."
-#~ msgstr ""
-#~ "Вогонь в Імперії за звичай підтримується дровами, та інколи його тепла "
-#~ "замало, тоді використовують вугілля."
-
-#~ msgid "These grapes are the basic for tasty wine."
-#~ msgstr "Виноград - це основа для смачного вина."
-
-#~ msgid ""
-#~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
-#~ "the armour- and weaponsmith. Make sure you always got some in reserve! It is "
-#~ "produced by the toolsmith."
-#~ msgstr ""
-#~ "Молот - важливий інструмент. Його використовують геологи, працівники, "
-#~ "ковалі. Завжди майте невеликий їх запас. Виготовляється в майстерні."
-
-#~ msgid "This is a medium armour for Empire soldiers."
-#~ msgstr "Середня броня солдат Імперії."
-
-#~ msgid "This is the red iron ore."
-#~ msgstr "Це залізна руда"
-
-#~ msgid ""
-#~ "This is the best and sharpest weapon, the Empire weaponsmith creates for "
-#~ "their warriors."
-#~ msgstr ""
-#~ "Це найкраща та найгостріша зброя, яку зброярі Імперії виготовляють для своїх "
-#~ "солдат."
-
-#~ msgid ""
-#~ "This saw is needed by the sawyer to create all the useful tools. It is "
-#~ "produced by the toolsmith."
-#~ msgstr "Пилка потрібна столяру. Виготовляється в майстерні."
-
-#~ msgid ""
-#~ "This is a wooden lance, which is the basic of the Empires military system."
-#~ msgstr "Дерев'яний спис, базова зброя солдат Імперії."
-
-#~ msgid "This is an advanced lance, with steel top."
-#~ msgstr "Це довгий спис із залізним наконечником."
-
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Це жовтий золотий злиток"
-
-#~ msgid ""
-#~ "This wine gives enough power, to mine marble or gold. And furthermore, our "
-#~ "soldiers like it, too."
-#~ msgstr "Вино надає сили шахтарям, крім того наші солдати його теж люблять."
-
-#~ msgid "This wooden lance has an iron spike."
-#~ msgstr "Цей дерев'яний спис має металевий накінечник."
-
-#~ msgid "Trunks are one important build material of the Empire."
-#~ msgstr "Колоди - дуже важливий будматеріал Імперії."
-
-#~ msgid ""
-#~ "Water is the most essential essence for life! This water is used in many "
-#~ "places, be it to make bread or beer."
-#~ msgstr ""
-#~ "Вода це найважливіша рідина для життя! Вона використовується всюди, будь то "
-#~ "виробництво хліба чи вина."
-
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Зброя та інструмент виготовляється з металу."
-
-#~ msgid ""
-#~ "Wheat is essential for surviving. Delicious bread and ales can be made of "
-#~ "this wheat."
-#~ msgstr ""
-#~ "Пшениця важлива для виживання, без неї не спекти хліба, не зварити пива."
-
-#~ msgid ""
-#~ "Young soldiers and miners need some encouragement. This drink makes a man "
-#~ "fearless and strong."
-#~ msgstr ""
-#~ "Ваші шахтарі та солдати потребують підтримки. Цей напій робить їх "
-#~ "безстрашними та сильними."

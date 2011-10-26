@@ -41,3 +41,7 @@ hotspot=49 61
 pics=deep_goldmine_w_??.png
 hotspot=49 61
 fps=10
+
+[empty]
+pics=deep_goldmine_e_??.png
+hotspot=49 61

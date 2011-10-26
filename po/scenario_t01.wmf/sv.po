@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-06-06 22:37+0000\n"
-"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-06 07:44+0000\n"
+"Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:35+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:41+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
 msgid ""
@@ -59,6 +59,10 @@ msgid ""
 "legacy.<br> They are a constant reminder why we have to hide here... and why "
 "we must return in the end!\" "
 msgstr ""
+" \"Under ännu en sömnlös natt gick jag uppför kullen och blickade norrut. "
+"Eldarna brinner fortfarande, tillfredsställer deras hunger för min faders "
+"arv.<br> De är en ständig erinran om varför vi måste gömma oss här... och "
+"varför vi till sist måste återvända!\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:11
 msgid ""
@@ -66,6 +70,10 @@ msgid ""
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
 "sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr ""
+" \"Månader har gått och vi håller oss fortfarande gömda där skogen är gammal "
+"och mörk.<br> Mina krigare jagar om dagen och vakar om natten - de lyssnar "
+"efter ljudet av den grymma slakt som ekar från fjärran bland de urgamla "
+"träden.\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:22
 msgid ""
@@ -76,6 +84,12 @@ msgid ""
 "my spirits high and those of my warriors awake, not to let greed or despair "
 "destroy the bonds between us as well.\" "
 msgstr ""
+" \"Min faders ben vilar i markerna där han en gång ändade den sanslösa "
+"blodspillan som hade rått bland oss. Det tynger mig att hans fred bara "
+"varade en generation.<br> Boldreth, min lojala kompanjon och vän, är en "
+"fridens källa och tröstar mig i dessa mörka tider. Han lyfter mina tankar "
+"och håler mina krigare pigga och alerta, så att inte girighet eller "
+"förtvivlan klipper banden mellan oss också.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:51
 msgid ""
@@ -86,6 +100,13 @@ msgid ""
 "harsh lands. I believe to the east of our campsite are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" \"Bara gudarna vet hur länge vi måste gömma oss här. Krigarna hoppas att vi "
+"kan marschera tillbaka i triumf när som helst, men jag tvivlar starkt på att "
+"det kommer hända inom en snar framtid. Och dagarna börjar redan bli kortare "
+"och svalare...<br> Vi bör förbereda oss, utifall att vi behöver bemöta "
+"vintern i detta karga land. Jag tror att det finns ett par platser öster om "
+"vårt läger där vi kan bygga en skogshuggarstuga.\"<br><br>-- NYA DIREKTIV --"
+"<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:60
 msgid ""
@@ -95,6 +116,11 @@ msgid ""
 "men would appreciate a way as short and plain as possible - the wood will "
 "surely be heavy enough, nevertheless.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Självklart skulle det bli för mycket för vårt folk att gå hela vägen till "
+"skogshuggarstugan genom vildmarken. Vi kommer behöva bygga en väg mellan vår "
+"sal och skogshuggarstugan. Jag kan tänka mig att mannarna skulle uppskatta "
+"en så krt och rät sträcka som möjligt - trät kommer säkert vara bra tungt, "
+"ändå.\"<br><br>-- NYTT DIREKTIV --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:81
 msgid ""
@@ -106,6 +132,13 @@ msgid ""
 "should build a ranger's hut, preferably close to the lumberjack's "
 "hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Det säger sig självt att om vi har för avsikt att bygga en större "
+"bosättning kommer vi behöva fler skogshuggarstugor, men det här bör räcka "
+"för stunden.<br> Men glöm aldrig - de här skogarna är vårt arv, anförtrodda "
+"åt oss av våra anfäder. Vi måste alltid ha respekt för och vårda dem. Det vi "
+"tar måste vi ge tillbaka.<br> Så, för att ersätta träden vi hugger ner borde "
+"vi bygga en skogvaktarstuga, helst nära skogshuggarstugan.\"<br><br>-- NYTT "
+"DIREKTIV --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid ""
@@ -115,6 +148,11 @@ msgid ""
 "it felt like a farewell. For the first time, I wondered what the future "
 "might hold for me...\" "
 msgstr ""
+" \"Återigen gick jag upp till min faders grav, i en helig lund vid foten av "
+"Kal'mavraths stora spira. Jag bara stod där och kände varken tidens gång "
+"eller det kalla regnet som föll från en grå himmel...<br> På något sätt "
+"kändes det som att ta farväl. För första gången undrade jag vad framtiden "
+"har i sitt sköte...\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:125
 msgid ""
@@ -125,6 +163,13 @@ msgid ""
 "not happen any time soon. He might still be right, but I fear the bloodshed "
 "that returning too fast would cause both on our and the other side...\" "
 msgstr ""
+" \"För ett tag sedan pratade Boldreth med mig. Hans råd var att flytta till "
+"en plats närmare hemmet - att slå mot det första tecknet av min broders "
+"styrkors tvekan.<br> Men jag ser ut över skogen och jag kan fortfarande se "
+"svart rök som stiger mot himlen. Jag vet - det är än för tidigt, och det han "
+"hoppas på kommer inte hända inom kort. Han kan fortfarande ha rätt, men jag "
+"är rädd att blodsspillan som skulle drabba båda sidor av att återvända för "
+"tidigt...\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:74
 msgid ""
@@ -133,6 +178,10 @@ msgid ""
 "people. More trees wait for our axes just south of our new crossroads - let "
 "us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"De norra vindarna säger oss att den kommande vintern kommer bli lång och "
+"hård. En skogshuggarstuga kommer inte räcka till vårt folks behov. Fler trän "
+"väntar på våra yxor strax söder om vår nya korsning - låt oss resa en andra "
+"skogshuggarstuga där ute!\"<br><br>-- NYTT DIREKTIV --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:67
 msgid ""
@@ -140,6 +189,9 @@ msgid ""
 "crossroads on the way between our headquarters and the lumberjack's hut "
 "would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Det finns ett gammalt talesätt:<br> 'En delad börda bärs lättare.'<br> En "
+"korsning på vägen mellan vårt högkvarter och skogshuggarstugan skulle "
+"underlätta för våra bärare.\"<br><br>-- NYTT DIREKTIV --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
@@ -148,6 +200,10 @@ msgid ""
 "atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will "
 "stop this madness at any cost!\" "
 msgstr ""
+" \"Idag tog mina krigare in en gammal man, som sjuk och sårad vandrade genom "
+"den mörka skogen. Vi lyssnade med förfäran när han berättade om hemskheterna "
+"som pågår i Al'thunran.<br> Härmed förnyar jag min ed - jag ska stoppa denna "
+"galenskap, kosta vad det kosta vill!\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:94
 msgid ""
@@ -156,6 +212,10 @@ msgid ""
 "VICTORY! ----------------------<br><br> You may continue to play this map if "
 "you wish. Otherwise, move on to the next mission.\" "
 msgstr ""
+" \"Bra jobbat, hövding. Vi har nu allt vi behöver för att se vintern an och "
+"kan förbereda oss på striderna som kommer.<br><br>--------------------- "
+"SEGER!----------------------<br><br> Du kan fortsätta spela på den här "
+"kartan om du vill. Gå annars vidare till nästa uppdrag.\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
 msgid ""
@@ -163,6 +223,9 @@ msgid ""
 "away.<br> The red lights flash in the darkness and dance to the rhythm of "
 "the wardrums that haunt me even in my nightmares.\" "
 msgstr ""
+" \"Vi kan se de rasande lågorna som slukade A'thunran härifrån, flera "
+"kilometer bort.<br> Det röda ljuset glimmar i mörkret och dansar till "
+"krigstrummornas rytm som hemsöker mig även i mina mardrömmar.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:10
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
@@ -170,11 +233,13 @@ msgid ""
 "* Build a lumberjack's hut at the red house symbol just right of your "
 "headquarters by clicking on it and selecting a lumberjack's hut.<br>"
 msgstr ""
+"* Bygg en skogshuggarstuga vid den röda hussymbolen precis till höger om "
+"ditt högkvarter genom att klicka på den och välja en skogshuggarstuga.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:27
 #: ../../campaigns/t01.wmf/scripting/texts.lua:82
 msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
-msgstr ""
+msgstr "* Bygg en skogvaktarstuga öster om den första skogshuggarstugan."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:61
 msgid ""
@@ -192,6 +257,17 @@ msgid ""
 "However, you can also click farer away from the flag to build several steps "
 "at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
+"* Bygg en väg mellan ditt högkvarter och byggplatsen för "
+"skogshuggarstugan.<br> När du placerar din skogshuggarstuga kommer en flagga "
+"skapas för den. Du måste koppla den till en annan flagga genom att bygga en "
+"väg mellan dem.<br> Färgen på dessa symboler visar hur brant den här delen "
+"av vägen kommer bli. Grönt betyder plan, gult brant, och rött betyder mycket "
+"brant. Ju brantare vägen är, ju svårare för ditt folk att använda den (och "
+"dina varor kommer transporteras långsammare).<br> Du kan klicka på någon av "
+"symbolerna för att bygga den första delen av vägen där. Nya symboler kommer "
+"visa var nästa del av vägen kan läggas, och så vidare. Fast du kan också "
+"klicka längre bort från flaggan för att bygga flera steg på en gång. När du "
+"klickar på flaggan vid högkvarteret avslutas vägen."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:11
 msgid ""
@@ -209,11 +285,22 @@ msgid ""
 "However, you can also click farther away from the flag to build several "
 "steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
+"* Bygg en väg mellan ditt högkvarter och byggplatsen för "
+"skogshuggarstugan.<br> När du placerar din skogshuggarstuga kommer en flagga "
+"skapas för den. Du måste koppla den till en annan flagga genom att bygga en "
+"väg mellan dem.<br> Färgen på dessa symboler visar hur brant den här delen "
+"av vägen kommer bli. Grönt betyder plan, gult brant, och rött betyder mycket "
+"brant. Ju brantare vägen är, ju svårare för ditt folk att använda den (och "
+"dina varor kommer transporteras långsammare).<br> Du kan klicka på någon av "
+"symbolerna för att bygga den första delen av vägen där. Nya symboler kommer "
+"visa var nästa del av vägen kan läggas, och så vidare. Fast du kan också "
+"klicka längre bort från flaggan för att bygga flera steg på en gång. När du "
+"klickar på flaggan vid högkvarteret avslutas vägen."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:34
 #: ../../campaigns/t01.wmf/scripting/texts.lua:90
 msgid "* Build two quarries southwest of your headquarters."
-msgstr ""
+msgstr "* Bygg två stenbrott sydväst om ditt högkvarter."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:19
 #: ../../campaigns/t01.wmf/scripting/texts.lua:68
@@ -226,6 +313,12 @@ msgid ""
 "additional flags in between make them arrive at their destination faster, "
 "thus improving your infrastructure.<br>"
 msgstr ""
+"* Placera en flagga mitt i vägen.<br> Det finns en flaggsymbol i mitten av "
+"vägen du nyss byggde. Du skapar en flagga där genom att klicka på symbolen "
+"och att sedan välja flaggknappen i menyn som visas. Detta delar upp vägen "
+"som trät transporteras i två sträckor, med en bärare vardera.<br> När många "
+"varor transporteras mellan två punkter gör ytterligare flaggor mellan dem "
+"att de når sin destination snabbare, vilket förbättrar din infrastruktur.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:20
 #: ../../campaigns/t01.wmf/scripting/texts.lua:75
@@ -236,6 +329,11 @@ msgid ""
 "step by step, you may also click directly at its destination to build the "
 "entire road at once."
 msgstr ""
+"* Placera en skogshuggarstuga strax söder om flaggen du precis placerade på "
+"vägen. Anslut flaggen du precis reste till flaggan vid den nya "
+"skogshuggarstugans byggplats sedan.<br> Observera att istället för at bygga "
+"en väg steg för steg kan du också klicka direkt på dess destination för att "
+"bygga hela vägen på en gång."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:9
 #: ../../campaigns/t01.wmf/scripting/texts.lua:52
@@ -243,18 +341,21 @@ msgid ""
 "* Press SPACE to see where you can build.<br> The red house symbols show you "
 "where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
+"* Tryck BLANKSTEG för att se var du kan bygga någonstans.<br> De röda "
+"hussymbolerna visar var du kan bygga en liten byggnad - som en "
+"skogshuggarstuga.<br>"
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Ögon i mörkret"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
-msgstr ""
+msgstr "En gammal man säger..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:111
 msgid "At the tomb"
-msgstr ""
+msgstr "Vid graven"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:7
 msgid "Build a lumberjack's hut"
@@ -266,7 +367,7 @@ msgstr "Bygg en skogvaktarkoja"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:17
 msgid "Build another lumberjack's hut"
-msgstr ""
+msgstr "Bygg ännu en skogshuggarstuga"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:32
 msgid "Build two quarries"
@@ -274,13 +375,15 @@ msgstr "Bygg två stenbrott"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:101
 msgid "In the night"
-msgstr ""
+msgstr "I natten"
 
 #: ../../campaigns/t01.wmf/elemental:9
 msgid ""
 "In this tutorial the basic gameplay and control as well as basic production "
 "buildings of the Barbarians are introduced."
 msgstr ""
+"I den här vägledningen presenteras grundläggande spelmetod och kontroll, "
+"såväl som grundläggande tillverkningsbyggnader hos Barbarerna."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -292,7 +395,7 @@ msgstr "Khantrukh nickar..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:65
 msgid "Khantrukh remembers..."
-msgstr ""
+msgstr "Khantrukh minns..."
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
 msgid "Mission Complete"
@@ -300,7 +403,7 @@ msgstr "Uppdrag Slutfört"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
-msgstr ""
+msgstr "Någon närmar sig"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
@@ -309,7 +412,7 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
 msgid "The advisor"
-msgstr ""
+msgstr "Rådgivaren"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:58
 msgid "The elder remarks..."
@@ -329,15 +432,15 @@ msgstr "Den gamle mannen ser upp i skyn..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:121
 msgid "The other day"
-msgstr ""
+msgstr "Den andra dagen"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:7
 msgid "The story begins"
-msgstr ""
+msgstr "Berättelsen börjar"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:132
 msgid "Thron looks furious..."
-msgstr ""
+msgstr "Thron ser rasande ut..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:123
 msgid "Thron says thoughtfully..."
@@ -345,15 +448,9 @@ msgstr "Thron säger tankfullt..."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:9
 msgid "Thron sighs..."
-msgstr ""
+msgstr "Thron suckar..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:103
 #: ../../campaigns/t01.wmf/scripting/texts.lua:113
 msgid "Thron speaks..."
 msgstr "Thron talar..."
-
-#~ msgid "OK"
-#~ msgstr "Nästa"
-
-#~ msgid "At the grave"
-#~ msgstr "Vid graven"

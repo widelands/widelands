@@ -487,14 +487,14 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 
 	//  all cached workers are unbound and freed
 	while (m_incorporated_workers.size()) {
-		//  If the game ends and this worker has been created before this
-		//  warehouse, it might already be deleted. So do not try and free him
-		if (upcast(Worker, worker, m_incorporated_workers.begin()->get(egbase))) {
-			if (upcast(Game, game, &egbase))
-				worker->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
-		}
-		m_incorporated_workers.erase(m_incorporated_workers.begin());
+		Worker * w = m_incorporated_workers.back();
+		m_incorporated_workers.pop_back();
+
+		if (upcast(Game, game, &egbase))
+			if (egbase.objects().object_still_available(w))
+				w->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 	}
+
 	Map & map = egbase.map();
 	if (const uint32_t conquer_radius = get_conquers())
 		egbase.unconquer_area
@@ -556,12 +556,12 @@ void Warehouse::act(Game & game, uint32_t const data)
 		const std::string & workername = workerdescr.name();
 		//  Look if we got one in stock of those.
 		for
-			(std::vector<OPtr<Worker> >::iterator it =
+			(std::vector<Worker *>::iterator it =
 			 	m_incorporated_workers.begin();
 			 it != m_incorporated_workers.end();
 			 ++it)
 		{
-			Worker const & worker = *it->get(game);
+			Worker const & worker = **it;
 			if (worker.name() == workername) {
 				upcast(Soldier const, soldier, &worker);
 
@@ -631,20 +631,6 @@ WareList const & Warehouse::get_workers() const
 	return m_supply->get_workers();
 }
 
-std::vector<const Soldier *> Warehouse::get_soldiers
-	(Editor_Game_Base & egbase) const
-{
-	std::vector<const Soldier *> rv;
-
-	container_iterate_const
-		(std::vector<OPtr<Worker> >, m_incorporated_workers, i)
-		if (upcast(const Soldier, soldier, i.current->get(egbase)))
-			rv.push_back(soldier);
-
-	return rv;
-}
-
-
 /// Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 {
@@ -707,12 +693,11 @@ uint32_t Warehouse::count_workers
 
 	// NOTE: This code lies about the tAttributes of non-instantiated workers.
 
-	container_iterate_const
-		(std::vector<OPtr<Worker> >, m_incorporated_workers, i)
-		if (Worker const * const w = i.current->get(game))
-			if (std::find(subs.begin(), subs.end(), &w->descr()) != subs.end())
+	container_iterate
+		(std::vector<Worker *>, m_incorporated_workers, i)
+			if (std::find(subs.begin(), subs.end(), &(*i)->descr()) != subs.end())
 				//  This is one of the workers in our sum.
-				if (!req.check(*w))
+				if (!req.check(*(*i)))
 					--sum;
 
 	return sum;
@@ -732,8 +717,8 @@ Worker & Warehouse::launch_worker
 			//  look if we got one of those in stock
 			const std::string & workername = workerdescr.name();
 			container_iterate
-				(std::vector<OPtr<Worker> >, m_incorporated_workers, i)
-				if (upcast(Worker, worker, i.current->get(game)))
+				(std::vector<Worker *>, m_incorporated_workers, i) {
+					Worker * worker = *i.current;
 					if (worker->name() == workername) {
 						--unincorporated;
 
@@ -746,6 +731,7 @@ Worker & Warehouse::launch_worker
 							return *worker;
 						}
 					}
+				}
 
 			assert(unincorporated <= m_supply->stock_workers(ware));
 
@@ -811,12 +797,12 @@ void Warehouse::sort_worker_in(Editor_Game_Base & egbase, Worker & w)
 	//  him where to insert.
 	std::string const & workername = w.name();
 
-	std::vector<OPtr<Worker> >::iterator i = m_incorporated_workers.begin();
+	std::vector<Worker *>::iterator i = m_incorporated_workers.begin();
 
 	while
 		(i != m_incorporated_workers.end()
 		 &&
-		 workername <= i->get(egbase)->name())
+		 workername <= (*i)->name())
 		++i;
 	if (i == m_incorporated_workers.end()) {
 		m_incorporated_workers.insert(i, &w);
@@ -826,7 +812,7 @@ void Warehouse::sort_worker_in(Editor_Game_Base & egbase, Worker & w)
 	while
 		(i != m_incorporated_workers.end()
 		 &&
-		 w.serial() <= i->get(egbase)->serial())
+		 w.serial() <= (*i)->serial())
 		++i;
 
 	m_incorporated_workers.insert(i, &w);
@@ -1286,5 +1272,38 @@ void Warehouse::check_remove_stock(Game & game)
 	}
 }
 
+/*
+ * SoldierControl implementations
+ */
+std::vector<Soldier *> Warehouse::presentSoldiers() const
+{
+	std::vector<Soldier *> rv;
+
+	container_iterate_const(std::vector<Worker *>, m_incorporated_workers, i) {
+		if (upcast(Soldier, soldier, *i))
+			rv.push_back(soldier);
+	}
+
+	return rv;
+}
+int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
+	incorporate_worker(egbase, soldier);
+	return 0;
+}
+
+int Warehouse::outcorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
+	std::vector<Worker *>::iterator i = std::find
+		(m_incorporated_workers.begin(), m_incorporated_workers.end(), &soldier);
+
+#ifdef DEBUG
+	if (i == m_incorporated_workers.end())
+		throw wexception("outcorporateSoldier: soldier not in this warehouse!");
+#endif
+	m_incorporated_workers.erase(i);
+
+	m_supply->remove_workers(tribe().safe_worker_index("soldier"), 1);
+
+	return 0;
+}
 
 }

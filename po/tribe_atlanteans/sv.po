@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-06-06 22:38+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-21 14:22+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:37+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:43+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -22,22 +22,29 @@ msgid ""
 "is used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 0 to level 1."
 msgstr ""
+"En gyllene tabard produceras i ett Atlanteanskt väveri ur guldgarn. Det "
+"används i träningslägret - tillsammans med mat - för att träna soldater från "
+"HP nivå 0 til 1."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
 msgstr ""
+"En såg behövs av skogshuggaren och snickaren. Den produceras hos "
+"verktygssmeden."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Ett sjödugligt skepp"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
+"En tabard och en lätt treudd är grundutrustningen för unga soldater. "
+"Tabarder produceras i väveriet."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -56,6 +63,8 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
+"Eftersom Atlanterna tycker inte om rå fisk behöver den bli rökt i rökeriet "
+"för att bli ätlig."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -111,6 +120,8 @@ msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
 msgstr ""
+"Svartrotmjöl produceras i kvarnar från svartrötter. Den används i bagerier "
+"för att framställa gott bröd."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -142,6 +153,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
+"Svartrötter är en speciell rot som tas fram i svartrotgårdar och förädlas i "
+"kvarnar. Atlanterna tycker om rötternas starka sak och använder dess mjöl i "
+"sitt bröd."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -210,7 +224,7 @@ msgstr "Kolgruva"
 
 #: ../../tribes/atlanteans/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Bygger skepp"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
@@ -249,6 +263,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Majsmjöl produceras i en kvarn från majs. Det är en av tre ingredienser i "
+"Atlanternas bröd som bakas i bagerier."
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Crystal Mine"
@@ -307,6 +323,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Smidestång är smältarens verktyg som arbetar i smältverken. Smidestång "
+"produceras i verktygssmedjan."
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -326,6 +344,8 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Fisk är Atlanternas största matkälla. Den måste bli rökt i rökeriet innan "
+"den levereras till gruvor, träningsläger och spanare."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -378,11 +398,14 @@ msgid ""
 "in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"Guld är ett av de mest värdefulla materialerna. Det produceras från guldmalm "
+"i smälterier. Guld används av rustningssmedjan, vapensmedjan och guldvävaren."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Guldmalm tas fram ur guldgruvor och vandlas om till guld i smälterier."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
@@ -449,6 +472,8 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
 msgstr ""
+"Hästar hjälper till att transportera gods på mycket frekventerade vägar. De "
+"föds upp i hästgårdar."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -479,12 +504,14 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
+"Järn produceras från järnmalm i smälterier. Det används i verktygssmedjan, "
+"rustnungssmedjan och vapensmedjan."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
-msgstr ""
+msgstr "Järnmalm tas fram ur järninor. Det smälts till järn i smälterier."
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Labyrinth"
@@ -508,6 +535,9 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Kött är en av Atlanternas matkällor. Det hämtas från vilda djur av jägaren "
+"och behöver blir rökt i en rökeri innan det levereras till gruvor och "
+"träningsläger."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -533,7 +563,7 @@ msgstr "Mjölnare"
 msgid ""
 "Mills blackroot and corn to produce blackroot flour and corn flour, "
 "respectively."
-msgstr ""
+msgstr "Malar svartrötter och majs till respektive mjöl."
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
@@ -553,7 +583,7 @@ msgstr "Gruvarbetare"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
 msgid "Not enough space"
-msgstr ""
+msgstr "Inte tillräckligt med plats"
 
 #: ../../tribes/atlanteans/conf:157
 msgid "Outpost"
@@ -581,6 +611,9 @@ msgid ""
 "produced out of trunks by the sawmill. The weapon smithy and the shipyard "
 "also use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Brädor är ett viktigt byggmaterial för Atlanterna. De produceras i sågverk "
+"från trästammar. Vapensmedjan och varvet använder också brädor för att "
+"producera de olika treuddar och mäktiga skepp."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:17
 msgid "Plant blackroot"
@@ -818,19 +851,19 @@ msgstr "Vaktpost"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Ship"
-msgstr ""
+msgstr "Skepp"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship construction site"
-msgstr ""
+msgstr "Byggplats för skepp"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Shipwright"
-msgstr ""
+msgstr "Skeppsbyggare"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Shipyard"
-msgstr ""
+msgstr "Skeppsvarv"
 
 #: ../../tribes/atlanteans/conf:91
 msgid "Shovel"
@@ -895,6 +928,9 @@ msgid ""
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutricious lunch for themselves."
 msgstr ""
+"Rökt kött görs av kött i rökeriet. Det levereras till gruvor och "
+"träningsläger (labyrint och fängelsehålan) där gruvarbetare och soldater tar "
+"fram en matig lunch för sig själv."
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
@@ -918,6 +954,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
+"Några av dina startbyggnader hade inte tillräckligt med plats och \n"
+"byggdes inte. Du har en nackdel p.g.a detta; fundera över att starta om \n"
+"kartan med rättvisa startförhållanden."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
@@ -933,6 +972,9 @@ msgid ""
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
+"Spindeltyg görs av spindeltråd i en väveri. Det används av verktygssmedjan "
+"och skeppsvarvet. Några avancerade byggnader behöver det också som "
+"byggmaterial."
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Spiderfarm"
@@ -959,6 +1001,8 @@ msgid ""
 "Stone is one basic building ware of the Atlanteans. It is produced in a "
 "quarry or a crystal mine."
 msgstr ""
+"Sten är ett grundläggande byggmaterial för atlanterna. Det produceras i "
+"stenbrott eller kristallgruvan."
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -978,6 +1022,8 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"Atlanternas eld i smälterier, rustningssmedjor och vapensmedjor hålls igång "
+"med kol. Denna tas fram i kolgruvor och från trä av kolaren."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -998,6 +1044,9 @@ msgid ""
 "weapon smithy. It is used in a dungeon - together with food - to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
+"Dubbla treudden är bland de bästa treuddar som produceras av Atlanternas "
+"vapensmedja. Den används i fängelsehålan - tillsammans med mat - för att "
+"träna soldater från attacknivå 2 till 3."
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
@@ -1023,12 +1072,17 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"Den långa treudden är den första treudden i soldaternas träning. Den "
+"produceras i vapensmedjan och används i fånghålan - tillsammans med mat - "
+"till att träna soldater från attacknivå 0 till 1."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
 "The peel is the tool of the baker, each baker needs its own. It is produced "
 "by the toolsmith."
 msgstr ""
+"Skrapan är en av bagarens verktyg, varje bagare behöver en egen. Den "
+"tillverkas av verktygssmeden."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -1036,23 +1090,32 @@ msgid ""
 "are produced in the armoursmithy and used in the labyrinth - together with "
 "food - to train soldiers from Defense level 1 to level 2."
 msgstr ""
+"Dessa avancerade sköldar används av Atlanteanernas bästa soldater. De "
+"produceras i rustningssmedjan och används i labyrinten - tillsammans med mat "
+"- för att träna soldater från försvarsnivå 1 till 2."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz' are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
+"Dessa genomskinliga kvartskristaller används för att bygga några exklusiva "
+"byggnader. De produceras i en kristallgruva."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
 "These wonderful diamonds are used to build some exclusive buildings. They "
 "are mined in a crystal mine."
 msgstr ""
+"Dessa underbara diamanter används för att bygga några exklusiva byggnader. "
+"De utvinns i en kristallgruva."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
 msgstr ""
+"Den här pilbågen används av den Atlanteanska jägaren. Den produceras av "
+"verktygssmeden."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -1060,12 +1123,17 @@ msgid ""
 "baker needs for a good bread. Also horse farms and spiderfarms need to be "
 "provided with corn."
 msgstr ""
+"Majsen mals i kvarnen till fint majsmjöl som varje atlanteansk bagare "
+"behöver för att baka ett gott bröd. Även häst- och spindelgårdar behöver "
+"majs."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
 "top of the smokery. It is created by the toolsmith."
 msgstr ""
+"Den här krokstören används av rökaren för att hänga upp allt kött och all "
+"fisk längst upp i rökeriet. Den tillverkas av verktygssmeden."
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1073,6 +1141,9 @@ msgid ""
 "makes the equipment for young soldiers. Light tridents are produced in the "
 "weapon smithy as are all other tridents."
 msgstr ""
+"Det här är grundvapnet för atlanteanska soldater. Tillsammans med en tabard "
+"utgör det utrustningen för unga soldater. Lätta treuddar produceras i "
+"vapensmedjan precis som alla andra treuddar."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1080,6 +1151,9 @@ msgid ""
 "advanced soldiers in the dungeon to train from attack level 1 to level 2 "
 "(together with food)."
 msgstr ""
+"Det här är mellan-treudden. Den produceras i vapensmedjan och används av "
+"avancerade soldater - tillsammans med mat - i fånghålan för att träna från "
+"attacknivå 1 till 2."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1088,12 +1162,18 @@ msgid ""
 "used in the dungeon - together with food - to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
+"Det här är det farligaste vapnet i den atlanteanska militären. Bara de "
+"absolut främsta soldaterna för använda den. Den produceras i vapensmedjan "
+"och används i fånghålan - tillsammans med mat - för att träna soldater från "
+"attacknivå 3 till 4."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
 "This steel shield is produced in the armoursmithy and used in the labyrinth -"
 "together with food - to train soldiers from Defense level 0 to level 1."
 msgstr ""
+"Denna stålsköld produceras i rustningssmedjan och används i labyrinten - "
+"tillsammans med mat - för att träna soldater från försvarsnivå 0 till 1."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -1101,6 +1181,9 @@ msgid ""
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
 msgstr ""
+"Detta välsmakande bröd bakas i bagerier med majsmjöl, svartrotsmjöl, och "
+"vatten. Det uppskattas som basföda för gruvarbetare, spejare, och soldater i "
+"träningsanläggningar (labyrint och fånghåla)."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1114,12 +1197,16 @@ msgid ""
 "This yarn is produced by spiders, which are bred on spiderfarms. It is "
 "processed to spidercloth in a weaving-mill."
 msgstr ""
+"Detta garn produceras av spindlar, vilka avlas på spindelgårdar. Det "
+"behandlas till spindeltextil i ett väveri."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
 "golden tabard in the weaving-mill."
 msgstr ""
+"Detta garn, tillverkat med guld från guldspinnaren, används för att väva den "
+"exklusiva gyllene tabarden i väveriet."
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
@@ -1152,6 +1239,9 @@ msgid ""
 "the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
 "the smokery also need trunks for their work."
 msgstr ""
+"Stammar är basen för plankor, vilka används i så gott som alla av "
+"atlanteanernas byggnades. Förutom sågverket, behöver också kolbrännaren, "
+"verktygssmedjan och rökeriet stammar för att kunna arbeta."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
@@ -1272,6 +1362,7 @@ msgid ""
 "Water is the essence for life! It is used in the bakery, the horse farm and "
 "the spiderfarm."
 msgstr ""
+"Vatten är livsviktigt! Det används i bageriet, häst-, och spindelgården."
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Weapon Smithy"
@@ -1338,212 +1429,9 @@ msgstr "Arbetar vid byggarbetsplatser för att uppföra en ny byggnad."
 
 #: ../../tribes/atlanteans/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Arbetar i varvet och bygger nya skepp."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr ""
 "Arbetar djupt nere i gruvorna för att framställa kol, järn eller guld."
-
-#~ msgid "Resource indicator gold litte"
-#~ msgstr "Resursindikator guld lite"
-
-#~ msgid "Resource indicator granit little"
-#~ msgstr "Resursindikator granit lite"
-
-#~ msgid "Resource indicator granit much"
-#~ msgstr "Resursindikator granit mycket"
-
-#~ msgid ""
-#~ "The bakingtray is the tool of the baker, each baker needs its own. It is "
-#~ "produced by the toolsmith."
-#~ msgstr ""
-#~ "Bakplåten är en av bagarens verktyg, varje bagare behöver sin egen. Den "
-#~ "produceras av verktygssmeden."
-
-#~ msgid ""
-#~ "This tasty bread is made out of corn- and blackrootflour and is one part of "
-#~ "miners meal."
-#~ msgstr ""
-#~ "Detta välsmakande bröd är gjort på majs- och svartrotsmjöl och är en "
-#~ "komponent i gruvarbetarnas kost."
-
-#~ msgid ""
-#~ "Blackroot Flour is produced out of blackroots and is one of three parts of "
-#~ "the atlantian bread."
-#~ msgstr ""
-#~ "Svartrotsmjöl framställs av svartrötter och är en av tre beståndsdelar i det "
-#~ "atlantiska brödet."
-
-#~ msgid ""
-#~ "To make the fine atlantian steel a hot fire is needed. But a fire of wood "
-#~ "isn't hot enough -this coal brings the needed heat."
-#~ msgstr ""
-#~ "För att göra det fina atlantinska stålet behövs en het eld. Men en eld på "
-#~ "ved är inte tillräckligt varm, detta kol ger den erforderliga hettan."
-
-#~ msgid ""
-#~ "This corn is the base of the fine cornflour, that every atlantian baker "
-#~ "needs for a good bread."
-#~ msgstr ""
-#~ "Detta mjas är basen till den fina majsmjölet, som varje atlantinsk bagare "
-#~ "behöver till ett gott bröd."
-
-#~ msgid ""
-#~ "Cornflour is produced out of corn and is one of three parts of the atlantian "
-#~ "bread."
-#~ msgstr ""
-#~ "Majsmjöl framställs av majs och är en av tre beståndsdelar i det atlantinska "
-#~ "brödet."
-
-#~ msgid ""
-#~ "This wonderful diamonds are used for some exclusive buildings and tools."
-#~ msgstr ""
-#~ "Dessa utsökta diamanter används till vissa exklusiva byggnader och verktyg."
-
-#~ msgid ""
-#~ "Already one of the best tridents of the Atlanteans. Only used by very good "
-#~ "fighters."
-#~ msgstr ""
-#~ "En av atlantinernas bästa treuddar. Används endast av väldigt skickliga "
-#~ "krigare."
-
-#~ msgid ""
-#~ "The fire tongs are the tools of the smelter, working in the smelting works. "
-#~ "They are produced by the toolsmith."
-#~ msgstr ""
-#~ "Eldtängerna är smältmästarens verktyg, i dennes arbete i smältverket. Dom "
-#~ "tillverkas av verktygssmeden."
-
-#~ msgid "Fish is one of the biggest food-resources of the Atlanteans."
-#~ msgstr "Fisk är en av atlantinernas största födokälla."
-
-#~ msgid ""
-#~ "This hook pole is used by the smoker to hang up all the meat and fish to the "
-#~ "top of the smoke-house. It is created by the toolsmith."
-#~ msgstr ""
-#~ "Hängkroken används av rökaren för att hänga upp all kött och fisk i "
-#~ "rökhusets topp. Den tillverkas av verktygssmeden."
-
-#~ msgid "Helps to carry items at heavy used roads."
-#~ msgstr "Hjälper till att bära föremål på hårt trafikerade vägar."
-
-#~ msgid ""
-#~ "This is the most dangerous weapon of the atlantian military. Only the best "
-#~ "of the best soldiers may use it."
-#~ msgstr ""
-#~ "Det här är det farligaste vapnet i den atlantinska militären. Bara dom bästa "
-#~ "av soldater får använde det."
-
-#~ msgid "This yarn, made of gold, is used for weaving exclusive cloth."
-#~ msgstr "Detta garn, gjort av guld, används för att väva exklusiva kläder."
-
-#~ msgid "This is the yellow gold ore."
-#~ msgstr "Det här är den gula malmen."
-
-#~ msgid "A special tabard for atlantian soldiers."
-#~ msgstr "En särskild tabard för atlantinska soldater."
-
-#~ msgid ""
-#~ "Gold is one of the most valuable materials. Only important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Guld är ett av de vardefullaste materialen, som endast viktiga saker "
-#~ "utsmyckas med."
-
-#~ msgid "This bow is used by the atlantian hunter."
-#~ msgstr "Denna båge används av det atlantinska jägaren."
-
-#~ msgid "Weapons and Tools are made of iron."
-#~ msgstr "Vapen och verktyg tillverkas av järn."
-
-#~ msgid "This is red iron ore."
-#~ msgstr "Detta är röd järnmalm."
-
-#~ msgid "Mills wheat to produce flour."
-#~ msgstr "Mal vete för att framställa mjöl."
-
-#~ msgid "This is an advanced trident for more experienced soldiers."
-#~ msgstr "Detta är en avancerad treudd för mer erfarna soldater."
-
-#~ msgid "Meat is one food-resource of the Atlanteans."
-#~ msgstr "Mat är en födoresurs för atlantinerna."
-
-#~ msgid "This is the basic weapon for atlantian soldiers."
-#~ msgstr "Detta är atlantinska soldaters grundbeväpning"
-
-#~ msgid "Planks are an important build material of the Atlanteans."
-#~ msgstr "Brädor är ett viktigt byggnadsmaterial för atlantinerna."
-
-#~ msgid ""
-#~ "These transparent quartz' are used for some exclusive buildings and tools."
-#~ msgstr ""
-#~ "Dessa genomskinliga kvartskristaller används till några exklusiva byggnader "
-#~ "och verktyg."
-
-#~ msgid ""
-#~ "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
-#~ "produced by the toolsmith."
-#~ msgstr ""
-#~ "Sågar behövs av sägaren, skogshuggaren och verktygssmeden. Dom framställs av "
-#~ "verktygssmeden."
-
-#~ msgid "Cloth made out of spideryarn."
-#~ msgstr "Kläder gjorda av spindeltråd."
-
-#~ msgid ""
-#~ "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is "
-#~ "a common way to make it eatable."
-#~ msgstr ""
-#~ "Detta är rökt kött. Eftersom ingen atlantin gillar rått kött, är rökning det "
-#~ "vanligaste sättet att göra det ätligt."
-
-#~ msgid ""
-#~ "This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
-#~ "common way to make it eatable."
-#~ msgstr ""
-#~ "Detta är rökt fisk. Eftersom ingen atlantin gillar rå fisk, är rökning det "
-#~ "vanligaste sättet att göra den ätlig."
-
-#~ msgid "This is the medium trident - used by advanced soldiers."
-#~ msgstr "Detta är mellantreudden - används av avancerade soldater."
-
-#~ msgid "Stone is one basic build ware type of the Atlanteans."
-#~ msgstr "Sten är ett grundläggande byggnadsmaterial för atlantinerna."
-
-#~ msgid "This yarn is produced by spiders, which are bred on spiderfarms."
-#~ msgstr "Denna tråd tillverkas av spindlar, som odlas på spindelfarmer."
-
-#~ msgid "This steel shield is used by experienced soldiers."
-#~ msgstr "Denna stålsköld används av erfarna soldater."
-
-#~ msgid ""
-#~ "All atlantean soldiers have to wear the sign of their country on their "
-#~ "chests."
-#~ msgstr "Alla atlantinska soldater måste bära deras lands symbol på bröstet."
-
-#~ msgid "Cuts raw pieces of granit out of laying stones."
-#~ msgstr "Hugger råa stycken granit från liggande stenblock."
-
-#~ msgid ""
-#~ "Trunks are the base for planks, which are used in nearly every building of "
-#~ "the Atlanteans."
-#~ msgstr ""
-#~ "Stockar är basen till brädor, som används i nästan varje atlantinsk byggnad."
-
-#~ msgid ""
-#~ "Water is the most essential essence for life! This water is used in many "
-#~ "places, for example to make bread."
-#~ msgstr ""
-#~ "Vatten är oundgängligt för livet! Vatten används på många ställen, till "
-#~ "exempel för att baka bröd."
-
-#~ msgid "These shields are used by the best soldiers of the Atlanteans."
-#~ msgstr "Dom här sköldarna används av atlantinernas bästa soldater."
-
-#~ msgid ""
-#~ "Blackroots are a special kind of roots. The Atlanteans like their strong "
-#~ "taste and use its flour for making bread."
-#~ msgstr ""
-#~ "Svartrötter är en särskild sorts rötter. Atlantinerna gillar dess starka "
-#~ "smak och använder dess mjöl för att baka bröd."

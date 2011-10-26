@@ -1,0 +1,76 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2011 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:23
+msgid ""
+"%s and %s have established a smuggling route!"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:37
+msgid ""
+"Game Status"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:32
+msgid ""
+"Game over! %s and %s have won the game! %s and %s only managed to\n"
+"smuggle %i wares."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
+msgid ""
+"Rules"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
+msgid ""
+"Smugglers"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+msgid ""
+"Smugglers is a Fun map for 4 players. You and your partner start diagonally\n"
+"to each other on a X-shaped island. Each player has a point in the\n"
+"center of the map where he should place a warehouse. If both players in a\n"
+"team succeed to build their warehouse in the right spot a smuggling route\n"
+"is established: all wares from the top player that are delivered to his\n"
+"warehouse are warped to the bottom player's warehouse. The aim of the game is to\n"
+"smuggle %i items from top to bottom."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
+msgid ""
+"The other team has the same goal and will try to interrupt your smuggling\n"
+"routes by burning down your warehouses. You will pay them back in their own\n"
+"coin of course!"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:26
+msgid ""
+"The smuggling route of %s and %s has been broken!"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
+msgid ""
+"Wares smuggled"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
+msgid ""
+"You can see the number of wares traded at any time in the general\n"
+"statistics menu. Good luck!"
+msgstr ""
+

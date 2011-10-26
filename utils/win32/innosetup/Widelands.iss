@@ -17,16 +17,15 @@
 ;
 ; Only change the "Placeholder"-variables in the two "#define"-sections.
 ; Nothing more must be changed. All visible stuff is defined there.
-; You don't even need to clean up your widelands-svn-checkout-directory.
-; ".svn"-directorys will be excluded in the compilation-processe.
+
 
 
 ;Version String
 #define Name "Widelands"
-#define VerName "Widelands Build14"
-#define VerNumber "0.14.1.2"
-#define Copyright "Widelands Development Team 2001-2009"
-#define SetupFileName "Widelands-Build14-win32"
+#define VerName "Widelands Build16"
+#define VerNumber "0.16.0.1"
+#define Copyright "Widelands Development Team 2001-2011"
+#define SetupFileName "Widelands-Build16-win32"
 
 ;General String
 #define Publisher "Widelands Development Team"
@@ -128,7 +127,15 @@ Name: {userdesktop}\{#Name} - Mapeditor;     Filename: {app}\{#ExeName}; Paramet
 Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent
 
 [InstallDelete]
+Type: filesandordirs; Name: {app}\campaigns\*
+Type: filesandordirs; Name: {app}\global\*
+Type: filesandordirs; Name: {app}\locale\*
+Type: filesandordirs; Name: {app}\maps\*
+Type: filesandordirs; Name: {app}\pics\*
+Type: filesandordirs; Name: {app}\scripting\*
+Type: filesandordirs; Name: {app}\sound\*
 Type: filesandordirs; Name: {app}\tribes\*
+Type: filesandordirs; Name: {app}\txts\*
 Type: filesandordirs; Name: {app}\worlds\*
 
 [UninstallDelete]

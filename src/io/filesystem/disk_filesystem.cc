@@ -139,12 +139,18 @@ int32_t RealFSImpl::FindFiles
 	int32_t i, count;
 	int32_t ofs;
 
-	if (path.size())
-		buf = m_directory + '/' + path + '/' + pattern;
-	else
+	if (path.size()) {
+		if (pathIsAbsolute(path)) {
+			buf = path + '/' + pattern;
+			ofs = 0;
+		} else {
+			buf = m_directory + '/' + path + '/' + pattern;
+			ofs = m_directory.length() + 1;
+		}
+	} else {
 		buf = m_directory + '/' + pattern;
-	ofs = m_directory.length() + 1;
-
+		ofs = m_directory.length() + 1;
+	}
 	if (glob(buf.c_str(), 0, 0, &gl))
 		return 0;
 
@@ -421,6 +427,8 @@ void * RealFSImpl::fastLoad
 	void * data = 0;
 
 #ifdef __APPLE__
+	file = open(fullname.c_str(), O_RDONLY);
+#elif defined (__FreeBSD__)
 	file = open(fullname.c_str(), O_RDONLY);
 #else
 	file = open(fullname.c_str(), O_RDONLY|O_NOATIME);

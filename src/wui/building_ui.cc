@@ -29,6 +29,8 @@ using Widelands::Building;
 void Building::show_options(Interactive_GameBase & igbase)
 {
 	if (m_optionswindow) {
+		if (m_optionswindow->is_minimal())
+			m_optionswindow->restore();
 		m_optionswindow->move_to_top();
 	} else {
 		create_options_window(igbase, m_optionswindow);

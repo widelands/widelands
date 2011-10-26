@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -594,7 +594,7 @@ void Soldier::draw_info_icon
 	Rect energy_inner(Point(pt.x - w + 1, pt.y + 1), health_width, 3);
 	Rect energy_complement
 		(energy_inner + Point(health_width, 0), 2 * (w - 1) - health_width, 3);
-	RGBColor color(owner().get_playercolor()[2]);
+	const RGBColor & color = owner().get_playercolor();
 	RGBColor complement_color;
 
 	if (static_cast<uint32_t>(color.r()) + color.g() + color.b() > 128 * 3)
@@ -861,28 +861,30 @@ void Soldier::attack_update(Game & game, State & state)
 	{
 		// Injured soldiers will try to return to safe site at home.
 		if (state.ui32var3 > get_current_hitpoints() and defenders) {
-			state.coords = Coords(0, 0);
+			state.coords = Coords::Null();
 			state.objvar1 = 0;
 		}
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
 		// destroyed.
-		BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
-		upcast(MilitarySite, newsite, newimm);
-		if (newsite and (&newsite->owner() == &owner())) {
-			if (upcast(SoldierControl, ctrl, newsite)) {
-				state.objvar1 = 0;
-				if
-					(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
-					 location->base_flag().get_position()
-					 !=
-					 newsite ->base_flag().get_position())
-				{
-					molog("[attack] enemy belongs to us now, move in\n");
-					pop_task(game);
-					set_location(newsite);
-					newsite->update_soldier_request();
-					return schedule_act(game, 10);
+		if (state.coords) {
+			BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
+			upcast(MilitarySite, newsite, newimm);
+			if (newsite and (&newsite->owner() == &owner())) {
+				if (upcast(SoldierControl, ctrl, newsite)) {
+					state.objvar1 = 0;
+					if
+						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
+						location->base_flag().get_position()
+						!=
+						newsite ->base_flag().get_position())
+					{
+						molog("[attack] enemy belongs to us now, move in\n");
+						pop_task(game);
+						set_location(newsite);
+						newsite->update_soldier_request();
+						return schedule_act(game, 10);
+					}
 				}
 			}
 		}
@@ -922,7 +924,7 @@ void Soldier::attack_update(Game & game, State & state)
 			molog
 				("[attack] failed to move towards building flag, cancel attack "
 				 "and return home!\n");
-			state.coords = Coords(0, 0);
+			state.coords = Coords::Null();
 			state.objvar1 = 0;
 			return schedule_act(game, 10);
 		}
@@ -1357,6 +1359,24 @@ void Soldier::battle_update(Game & game, State &)
 		return pop_task(game);
 	}
 
+	Map & map = game.map();
+	Soldier & opponent = *m_battle->opponent(*this);
+	if (opponent.get_position() != get_position()) {
+		if (upcast(Building, building, map[get_position()].get_immovable())) {
+			// Note that this does not use the "leavebuilding" task,
+			// because that task is geared towards orderly workers leaving
+			// their location, whereas this case can also happen when
+			// a player starts a construction site over a waiting soldier.
+			molog("[battle] we are in a building, leave it\n");
+			return
+				start_task_move
+					(game,
+					 WALK_SE,
+					 &descr().get_right_walk_anims(does_carry_ware()),
+					 true);
+		}
+	}
+
 	if (stayHome()) {
 		if (this == m_battle->first()) {
 			molog("[battle] stayHome, so reverse roles\n");
@@ -1368,8 +1388,6 @@ void Soldier::battle_update(Game & game, State &)
 			}
 		}
 	} else {
-		Soldier & opponent = *m_battle->opponent(*this);
-
 		if (opponent.stayHome() and (this == m_battle->second())) {
 			// Wait until correct roles are assigned
 			new Battle(game, *m_battle->second(), *m_battle->first());
@@ -1377,16 +1395,16 @@ void Soldier::battle_update(Game & game, State &)
 		}
 
 		if (opponent.get_position() != get_position()) {
-			Map & map = game.map();
-			uint32_t const dist =
-				map.calc_distance(get_position(), opponent.get_position());
+			Coords dest = opponent.get_position();
+
+			if (upcast(Building, building, map[dest].get_immovable()))
+				dest = building->base_flag().get_position();
+
+			uint32_t const dist = map.calc_distance(get_position(), dest);
 
 			if (dist >= 2 || this == m_battle->first()) {
-				//  Only make small steps at a time, so we can adjust to the
-				//  opponent's change of position.
-				Coords dest = opponent.get_position();
-				if (upcast(Building, building, map[dest].get_immovable()))
-					dest = building->base_flag().get_position();
+				// Only make small steps at a time, so we can adjust to the
+				// opponent's change of position.
 				if
 					(start_task_movepath
 					 	(game,
@@ -1396,8 +1414,8 @@ void Soldier::battle_update(Game & game, State &)
 					 	 false, (dist + 3) / 4))
 				{
 					molog
-						("[battle] player %u's soldier started task_movepath\n",
-						 owner().player_number());
+						("[battle] player %u's soldier started task_movepath to (%i,%i)\n",
+						 owner().player_number(), dest.x, dest.y);
 					return;
 				} else {
 					BaseImmovable const * const immovable_position =
@@ -1683,8 +1701,10 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 	molog ("CombatWalkingStart: %i\n", m_combat_walkstart);
 	molog ("CombatWalkEnd:      %i\n", m_combat_walkend);
 	molog ("HasBattle:   %s\n", m_battle ? "yes" : "no");
-	if (m_battle)
+	if (m_battle) {
 		molog("BattleSerial: %u\n", m_battle->serial());
+		molog("Opponent: %u\n", m_battle->has_opponent(*this) ? m_battle->opponent(*this)->serial() : 0);
+	}
 }
 
 /*

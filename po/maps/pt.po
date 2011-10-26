@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2011-01-05 21:35+0000\n"
-"Last-Translator: David Rodrigues <david.rodrigues@gmail.com>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-04-10 10:30+0000\n"
+"Last-Translator: trewe <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:33+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -40,10 +40,6 @@ msgstr "02 - Um Posto Avançado para o Exílio"
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "03 - Esta é a nossa terra"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Um mapa multi-jogador numa ilha em forma de X."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -83,6 +79,14 @@ msgid ""
 msgstr ""
 "Uma terra mística, cheia de diferentes paisagens, cortada por uma série de "
 "grandes rios."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island "
+"Hopping\", where two or more groups try to reach the center island as fast "
+"as possible, to be the first building up a castle on the top of the center "
+"mountain."
+msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -130,7 +134,7 @@ msgstr "Barbarians - O segundo Império"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Desafiante. Apresenta os Atlanditas"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -180,10 +184,6 @@ msgstr "A Floresta dos Duendes"
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
 msgstr "Império - Os Meses de Exílio"
-
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Inimigos à vista"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -264,6 +264,10 @@ msgstr ""
 "e a tua tribo acordam esta manhã na ilha entre fogo e lava? Até agora "
 "parecia que estavas sozinho, mas agora quem poderá dizer o que irá acontecer "
 "se encontrares uma tribo rival?"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
+msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -411,6 +415,10 @@ msgstr ""
 "desprevenido por 100 guerreiros bárbaros que os atacaram e os obrigaram a "
 "dispersar. Só ele e uma mão cheia dos seus soldados sobreviveram e por pouco "
 "!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -670,82 +678,9 @@ msgstr ""
 "e muito fácil de o perder, por isso, se o quiseres para ti, tens de prestar "
 "muita atenção às outras tribos."
 
-#~ msgid "(Tutorial) Barbarians - The second Empire"
-#~ msgstr "(Tutorial) Bárbaros - O segundo império"
-
-#~ msgid "Atlanteans - the new rise"
-#~ msgstr "Atlântida - a nova ascensão"
-
-#~ msgid ""
-#~ "Six months ago, Lutius - a young general of the Empire - was send with 150 "
-#~ "soldiers to the frontier beyond the northern forests where Barbarian-tribes "
-#~ "and official Empire-land are crossing. His task was to defend the Empire-"
-#~ "land. At first, everything was calm. He even talked to a few barbarian "
-#~ "children and thought about a peaceful life - side by side with this archaic "
-#~ "folk. He began to feel safer and his army began to drop their attention off "
-#~ "the potential enemy. That was their fault. At one night in march his "
-#~ "unprepared army was attacked by 100 barbarian footmen and was completely "
-#~ "scattered. Only with his bare life he and a handful of his soldiers survived."
-#~ msgstr ""
-#~ "Seis meses atrás, Lúcio - um jovem general do império - foi enviado com 150 "
-#~ "soltados à fronteira para além das florestas do norte onde tribos bárbaras e "
-#~ "as terras do Império se cruzam. O sua tarefa é a de defender o território do "
-#~ "Império. Primeiro, tudo era calmo. Ele até falou com algumas crianças "
-#~ "bárbaras e manteve uma vida tranquila - lado a lado com esta gente arcaica. "
-#~ "Começou a sentir-se mais seguro e o seu exército começou a deixar a sua "
-#~ "atenção virada ao potencial inimigo. Isto foi a sua culpa. Numa noite em "
-#~ "Março o seu exército desprevenido foi atacado por 100 guerreiros bárbaros e "
-#~ "foi completamente dispersado. Só sobreviveu a custa e com uma mão cheia dos "
-#~ "seus soltados."
-
-#~ msgid "Some descriptive texts..."
-#~ msgstr "Alguns textos descritivos..."
-
-#~ msgid ""
-#~ "When Chat’Karuth died, he was an old man, father to three strong and "
-#~ "ambitious sons and warlord to an army that could match any enemy willing to "
-#~ "rise against the ancient forests. Though his glorious reign, Chat’Karuth "
-#~ "left his eldest son Thron in the due to succeed him as the tribes warlord – "
-#~ "a decision that left his two brothers unsatisfied. The old warlord knew "
-#~ "that. As his father told him, Thron left the capital of Al’thunran, the home "
-#~ "of the throne among the trees and redrew his forces to the high hills where "
-#~ "he buried the corpse of his father and swore to the gods and his spirit, "
-#~ "that he’d return to re-established order. While his brothers raged in blind "
-#~ "war against Thron and the few forces he left to secure the borders of "
-#~ "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
-#~ "force the tribes to march once again under a common banner."
-#~ msgstr ""
-#~ "Quando Chat'Karuth morreu, era já um homem velho, pai de três fortes e "
-#~ "ambiciosos filhos e senhor de um exercito que podia confrontar qualquer "
-#~ "inimigo disposto a marchar contra as florestas antigas. Apesar do seu "
-#~ "glorioso reino, Chat'Karuth deixou o seu filho mais velho Thron na obrigação "
-#~ "de suceder-lhe como soberano das tribos - uma decisão que deixou os irmãos "
-#~ "insatisfeitos. O antigo soberano soube disso. Como o seu pai lhe tinha "
-#~ "recomendado, Thron deixou a capital Al'thuran, a pátria do trono entre a "
-#~ "floresta, e recuou com as suas forças para as montanhas onde enterro o "
-#~ "cadáver do seu pai e jurou pelos deuses e o seu espírito, que voltaria para "
-#~ "restabelecer a ordem. Enquanto os seus irmãos continuaram a guerra cega "
-#~ "contra Thron e as pequenas forças que deixara segurar as fronteiras de "
-#~ "Al'thuran, o jovem guerreiro procura reunir os seus ambiciosos irmãos e "
-#~ "forçar as tribos de marchar outra vez sob uma bandeira comum."
-
-#~ msgid "01 - From nemesis to genesis"
-#~ msgstr "01 -Da némesis à gênese"
-
-#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
-#~ msgstr "Império tutorial1 - As praias de Malac' Mor"
-
-#~ msgid "Empire - The months of exile"
-#~ msgstr "Império - Os meses de exílio"
-
-#~ msgid "Empire Tutorial2 - An outpost for exile"
-#~ msgstr "Império tutorial2 - Um posto avançado para o exílio"
-
-#~ msgid "Tutorial1 - Eyes in the Dark"
-#~ msgstr "Tutorial1 - Os olhos na escuridão"
-
-#~ msgid "Tutorial2 - A Place to call Home"
-#~ msgstr "Tutorial2 - Um lugar ao qual chamar A nossa Casa"
-
-#~ msgid "Tutorial3 - This land is our land"
-#~ msgstr "Tutorial3 - Esta é a nossa terra"
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""

@@ -744,13 +744,6 @@ void ProductionProgram::ActConsume::execute
 		uint8_t nr_available = warequeues[i]->get_filled();
 		consumption_quantities[i] = 0;
 		Groups::const_iterator const groups_end = l_groups.end();
-#if 0
-		size_t const nr_groups = l_groups.size(); //  for debug messages
-		log
-			("\tconsidering input queue for %s (%u/%u)\n",
-			 ps.descr().tribe().get_ware_descr(ware_type)->descname().c_str(),
-			 nr_available, warequeues[i]->get_size());
-#endif
 
 		//  Iterate over all consume groups and see if they want us to consume
 		//  any thing from the currently considered input queue.
@@ -765,21 +758,7 @@ void ProductionProgram::ActConsume::execute
 					it = l_groups.erase(it);
 					//  No increment here, erase moved next element to the position
 					//  pointed to by it.
-#if 0
-					log
-						("\t\tgroup %u/%u needs %u: enough wares to fill this "
-						 "group\n",
-						 it - l_groups.begin() + 1, nr_groups, it->second);
-#endif
 				} else {
-#if 0
-					log
-						("\t\tgroup %u/%u needs %u: unsufficient remaining "
-						 "available wares (%u) to fill this group, will use all "
-						 "remaining wares, input queue will be depleted\n",
-						 it - l_groups.begin() + 1, nr_groups, it->second,
-						 nr_available);
-#endif
 					consumption_quantities[i] += nr_available;
 					it->second                -= nr_available;
 					++it; //  Now check if the next group includes this ware type.
@@ -827,7 +806,6 @@ void ProductionProgram::ActConsume::execute
 			if (uint8_t const q = consumption_quantities[i]) {
 				assert(q <= warequeues[i]->get_filled());
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
-				warequeues[i]->update();
 			}
 		return ps.program_step(game);
 	}
@@ -1163,8 +1141,11 @@ void ProductionProgram::ActMine::execute
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
-		if (m_chance <= 20)
+		if (m_chance <= 20) {
 			informPlayer(game, ps);
+			// and change the default animation
+			ps.set_default_anim("empty");
+		}
 
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
@@ -1538,7 +1519,6 @@ bool ProductionProgram::ActConstruct::get_building_work
 	item->init(game);
 	worker.set_carried_item(game, item);
 	wq->set_filled(wq->get_filled() - 1);
-	wq->update();
 
 	// Third step: send worker on his merry way, giving the target object or coords
 	worker.start_task_program(game, workerprogram);

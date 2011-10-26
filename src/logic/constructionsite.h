@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define CONSTRUCTIONSITE_H
 
 #include "building.h"
+#include "player.h"
 
 #include <vector>
 
@@ -72,6 +73,8 @@ public:
 	virtual std::string get_statistics_string();
 	uint32_t get_built_per64k() const;
 
+	const Player::Constructionsite_Information * get_info() {return m_info;}
+
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	void set_building         (const Building_Descr &);
@@ -115,13 +118,14 @@ private:
 	typedef std::vector<WaresQueue *> Wares;
 	Wares m_wares;
 
-	int32_t m_fetchfromflag; // # of items to fetch from flag
+	int32_t  m_fetchfromflag;  // # of items to fetch from flag
 
-	bool m_working;        // true if the builder is currently working
+	bool     m_working;        // true if the builder is currently working
 	uint32_t m_work_steptime;  // time when next step is completed
 	uint32_t m_work_completed; // how many steps have we done so far?
 	uint32_t m_work_steps;     // how many steps (= items) until we're done?
-	bool m_builder_idle;       // used to determine whether the builder is idle
+	bool     m_builder_idle;   // used to determine whether the builder is idle
+	Player::Constructionsite_Information * m_info; // asked for by player point of view for the gameview
 };
 
 }

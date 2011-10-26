@@ -832,6 +832,7 @@ bool WLApplication::init_settings() {
 	s.get_bool("remove_syncstreams");
 	s.get_bool("sound_at_message");
 	s.get_bool("transparent_chat");
+	s.get_bool("dedicated_saving"); // saving via chatcommand on dedicated servers -> nethost.cc
 	s.get_string("registered");
 	s.get_string("nickname");
 	s.get_string("password");
@@ -963,7 +964,7 @@ bool WLApplication::init_hardware() {
 	int result = -1;
 
 	//add default video mode
-#ifdef linux
+#if defined(linux) || defined(__FreeBSD__)
 	videomode.push_back("x11");
 #elif WIN32
 	videomode.push_back("windib");
@@ -1506,8 +1507,6 @@ void WLApplication::mainmenu()
 					Widelands::Game game;
 					try {
 						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
-					} catch (Widelands::game_data_error const & e) {
-						log("Scenario not started: Game data error: %s\n", e.what());
 					} catch (...) {
 						emergency_save(game);
 						throw;
@@ -1846,6 +1845,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			player.state = (oldplayers == 0) ? PlayerSettings::stateHuman :
 				PlayerSettings::stateComputer;
 			player.tribe                = s.tribes.at(0).name;
+			player.random_tribe         = false;
 			player.initialization_index = 0;
 			char buf[200];
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
@@ -1855,8 +1855,10 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			if (player.state == PlayerSettings::stateComputer) {
 				Computer_Player::ImplementationVector const & impls =
 					Computer_Player::getImplementations();
-				if (impls.size() > 1)
+				if (impls.size() > 1) {
 					player.ai = impls.at(0)->name;
+					player.random_ai = false;
+				}
 			}
 			++oldplayers;
 		}
@@ -1874,10 +1876,13 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = state;
 	}
 
-	virtual void setPlayerAI(uint8_t const number, std::string const & ai) {
-		if (number < s.players.size())
+	virtual void setPlayerAI(uint8_t const number, std::string const & ai, bool const random_ai) {
+		if (number < s.players.size()) {
 			s.players[number].ai = ai;
+			s.players[number].random_ai = random_ai;
+		}
 	}
+
 	virtual void nextPlayerState(uint8_t const number) {
 		if (number == s.playernum || number >= s.players.size())
 			return;
@@ -1892,23 +1897,40 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 				if ((*(it - 1))->name == s.players[number].ai)
 					break;
 			} while (it != impls.end());
-			if (it == impls.end())
+			if (s.players[number].random_ai) {
+				s.players[number].random_ai = false;
 				it = impls.begin();
+			} else if (it == impls.end()) {
+				s.players[number].random_ai = true;
+				do {
+					uint8_t random = (std::rand() % impls.size()); // Choose a random AI
+					it = impls.begin() + random;
+				} while ((*it)->name == "None");
+			}
 			s.players[number].ai = (*it)->name;
 		}
 
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe)
+	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
 	{
 		if (number >= s.players.size())
 			return;
 
+		std::string actual_tribe = tribe;
 		PlayerSettings & player = s.players[number];
+		player.random_tribe = random_tribe;
+
+		if (random_tribe) {
+			uint8_t num_tribes = s.tribes.size();
+			uint8_t random = (std::rand() % num_tribes);
+			actual_tribe = s.tribes.at(random).name;
+		}
+
 		container_iterate_const(std::vector<TribeBasicInfo>, s.tribes, i)
 			if (i.current->name == player.tribe) {
-				s.players[number].tribe = tribe;
+				s.players[number].tribe = actual_tribe;
 				if
 					(i.current->initializations.size()
 					 <=
@@ -1916,6 +1938,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 					player.initialization_index = 0;
 			}
 	}
+
 	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
 		if (number >= s.players.size())
 			return;

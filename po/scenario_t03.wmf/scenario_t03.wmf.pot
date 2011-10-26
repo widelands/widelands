@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-21 12:15+0000\n"
+"POT-Creation-Date: 2011-10-10 07:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -121,11 +121,6 @@ msgid ""
 " \"Thron told me that he discovered tracks in the snow to the northeast of our settlement. He instructed us to build a Donjon, to have a greater visual range on the area around our hall to protect our people from sudden attacks.\" "
 msgstr ""
 
-#: ../../campaigns/t03.wmf/scripting/texts.lua:336
-msgid ""
-"* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools."
-msgstr ""
-
 #: ../../campaigns/t03.wmf/scripting/texts.lua:101
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
 msgid ""
@@ -188,9 +183,14 @@ msgid ""
 "* Destroy all enforcements of Thron’s two brothers to liberate the throne-circle."
 msgstr ""
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:336
+msgid ""
+"* Enhance your metalworks to an axefactory in order to produce weapons and build up another metalworks to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance it to a war mill which produces additional weapons."
+msgstr ""
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
-"* Enhance your metalworks to an axefactory or - as soon as the blacksmith reaches his next level (master blacksmith) - even to a war mill and build up another metalworks to ensure the production of tools."
+"* Enhance your metalworks to an axefactory to start producing weapons, and build up another metalworks to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance your axefactory to a war mill."
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75

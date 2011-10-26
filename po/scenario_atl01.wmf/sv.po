@@ -6,29 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4685\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-03-25 19:00+0000\n"
-"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-05 18:57+0000\n"
+"Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:34+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
-
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:46
-msgid "\"%s\""
-msgstr ""
+"X-Launchpad-Export-Date: 2011-10-04 04:41+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - Från Nemesis till Genesis"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:531
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:472
 msgid "A dangerous finding"
-msgstr ""
+msgstr "Ett farligt fynd"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:624
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:565
 msgid ""
 "A friend of mine explored the island on his own and he told me of a big "
 "lake\n"
@@ -38,22 +34,29 @@ msgid ""
 "plan,\n"
 "but I think, it could work."
 msgstr ""
+"En av mina vänner utforskade ön på egen hand, och berättade om en stor\n"
+"sjö på bergets topp. Jag föreslår att vi bygger våra båtar i den sjön och \n"
+"väntar tills ön drunknar under oss. Sedan kan vi segla bort. Det är en "
+"djärv\n"
+"plan, men jag tror att den kan fungera."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:402
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:343
 msgid "A man comes to Jundlina"
-msgstr ""
+msgstr "En man kommer till Jundlina"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:598
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:539
 msgid "A young man approaches"
-msgstr ""
+msgstr "En ung man kommer fram"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
+"Efter att ha landat på en märklig ö nära Atlantis försöker de resterande "
+"atlanterna att bygga ett nytt hem."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:367
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:308
 msgid ""
 "Ahh, but I think this is impossible to change. The preparing and eating of\n"
 "food is something deeply ingrained in us Atlanteans - it is just a ceremony\n"
@@ -77,8 +80,29 @@ msgid ""
 "times\n"
 "without taking away the ritual."
 msgstr ""
+"Åh, fast jag tror att det inte går att ändra på. Tillagningen och ätandet\n"
+"av mat är någonting djupt inpräntat hos oss Atlanteaner - det är helt\n"
+"enkelt en ceremoni som vi behöver för vårt välbefinnande. Så vi kan nog "
+"inte\n"
+"ta det här från individerna helt och fullt. Men vi kanske kan kompromissa:\n"
+"För min del är brödbakande besvärlitg: att mala svartroten och majs till "
+"mjöl\n"
+"och att sedan baka brödet är långdraget och tråkigt. Jag anser att ett mer\n"
+"industriellt tillvägagångssätt skulle underlätta här. Jag själv skulle älska "
+"att få\n"
+"färskt bröd levererat till mitt hus varje dag. Just det, än mer viktigt: "
+"rökning av\n"
+"fisk och kött för att rengöra dem och förbättra deras smak är förfärligt. "
+"Mitt hus\n"
+"är fullt av rök, och stinker i flera veckor efteråt. Tror du inte att det "
+"kan tas om\n"
+"hand i en särskild byggnad där bieffekterna inte spelar någon roll? Jag tror "
+"att\n"
+"dessa två saker skulle accepteras av folket, och skulle minska "
+"matlagningstiderna\n"
+"utan att ritualen försvinner."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:572
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:513
 msgid ""
 "And yet another of these buildings. We know now that the tribe that built\n"
 "them once had complete control over the island. But I am no longer so scared "
@@ -89,12 +113,20 @@ msgid ""
 "our guard down as we continue to explore this beautiful island. But without\n"
 "obvious dangers I am feeling very much at home here already."
 msgstr ""
+"Ännu en av dessa byggnader. Vi vet nu att stammen som byggde dem en gång\n"
+"hade full kontroll över ön. Men jag är inte längre så värst rädd för "
+"potentiella\n"
+"fiender. Vi vet redan så mycket om ön, och det finns inget spår av den gamla "
+"\n"
+"ekonomin någonstans. Jag börjar slappna av, men jag kommer inte släppa av\n"
+"på vaksamheten när vi fortsätter utforska denna vackra ö. Men utan tydliga\n"
+"faror känner jag mig redan så gott som hemma."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:555
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:496
 msgid "Another building."
-msgstr ""
+msgstr "En byggnad till."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:180
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:121
 msgid ""
 "As all other tribes, the Atlanteans are also able to train soldiers: the\n"
 "dungeon trains attack - the major attribute of the Atlanteans - and the\n"
@@ -104,8 +136,13 @@ msgid ""
 "buildings.<br><br>\n"
 "- Build a dungeon and a labyrinth.<br>"
 msgstr ""
+"Som alla andra stammar kan även Atlanteanerna träna soldater:\n"
+"fånghålan tränar attacken - huvudattributet för Atlanteanerna - och\n"
+"labyrinten tränar parering, HP och försvar. Det som tillverkas av industrin\n"
+"används för att träns bättre soldater i de två träningsbyggnaderna.<br><br>\n"
+"- Bygg en fånghåla och en labyrint.<br>"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:191
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:132
 msgid ""
 "As your road network gets longer and more complicated, you should employ\n"
 "horses to help out your carriers. Horses are bred in horsefarms using water "
@@ -114,44 +151,50 @@ msgid ""
 "not\n"
 "collapse."
 msgstr ""
+"Allt eftersom ditt vägnät blir längre och mer komplicerat bör du använva\n"
+"hästar för att hjälpa dina bärare. Hästar avlas i hästfarmar med hjälp av "
+"vatten\n"
+"och majs. Ett varuhus kommer också säkerställa att transportsystemet inte\n"
+"faller samman."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:199
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:140
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "Bygg tre skepp för att fly från ön."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:104
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
 "Build a quarry, two woodcutter's houses, two forester's houses and a\n"
 "sawmill."
 msgstr ""
+"Bygg ett stenbrott, två skogshuggarhus, två skogsvaktarhus och ett sågverk."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:146
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:87
 msgid "Build a spiderfarm and a weaving mill"
-msgstr ""
+msgstr "Bygg en spindelgård och en väveri"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:189
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:190
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:130
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a warehouse and a horsefarm"
-msgstr ""
+msgstr "Bygg ett varuhus och en hästgård"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:161
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:162
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:102
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build industry and mines"
-msgstr ""
+msgstr "Bygg industri och gruvor"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:178
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:119
 msgid "Build training buildings"
-msgstr ""
+msgstr "Bygg träningsbyggnader"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:179
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build training buildings to improve your soldiers"
-msgstr ""
+msgstr "Bygg träningsbyggnader för att förbättra dina soldater"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:75
 msgid "Building lost!"
-msgstr ""
+msgstr "Byggnad förlorad!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:238
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:179
 msgid ""
 "But all seemed well. Only the horses seemed to feel something was wrong.\n"
 "In the nights, they went crazy and were full of fear. It was not long before "
@@ -160,8 +203,14 @@ msgid ""
 "front\n"
 "of their stable was rising in an ever accelerating speed."
 msgstr ""
+"Men allt verkade lovande. Bara hästarna verkade ana att något inte stod rätt "
+"till.\n"
+"På nätterna fick de fnatt och var vettskrämda. Det dröjde inte länge innan\n"
+"hästavlaren Xydra listade ut vad som var fel: Havsnivån framför deras stall "
+"steg i\n"
+"allt snabbare takt."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:267
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:208
 msgid ""
 "But not even this changed the mind of the god. The water kept on rising.\n"
 "Nearly driven crazy by guilt, pain and anger, Jundlina became a heretic:\n"
@@ -174,56 +223,62 @@ msgid ""
 "worst\n"
 "enemy of Lutas."
 msgstr ""
+"Men inte ens det ändrade gudens planer. Vattnet fortsatte stiga. Nära på\n"
+"galen av samvetskval, smärta, och vrede blev Jundlina en hedning: I\n"
+"hemlighet samlade hon allmogen som inte drog jämnt med prästerskapets\n"
+"beslut att acceptera gudens vilja. Tillsammans med dem stack hon templet\n"
+"i brand och stal ett skepp för att fly från gudens inflytande på Atlantis.\n"
+"Denna lilla grupp började tillbe Satul, eldguden, och Lutas ärkefiende."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:254
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:195
 msgid "Chaos emerges..."
-msgstr ""
+msgstr "Kaos bryter ut..."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:348
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:289
 msgid "Colionder arrives"
-msgstr ""
+msgstr "Colionder kommer fram"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:365
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:306
 msgid "Colionder is in thought"
-msgstr ""
+msgstr "Colionder tänker efter"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:654
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:595
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulerar"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:102
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:43
 msgid "Ensure the supply of build wares"
-msgstr ""
+msgstr "Säkerställ tillgång till byggvaror"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:200
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:141
 msgid "Escape from the island"
-msgstr ""
+msgstr "Fly från ön"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:122
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Establish a food production"
-msgstr ""
+msgstr "Säkerställ matproduktionen"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:121
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Säkerställ en stabil matproduktion"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:147
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Establish a spidercloth production"
-msgstr ""
+msgstr "Etablera en spindeltygsproduktion"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:112
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:53
 msgid "Expand and Explore"
-msgstr ""
+msgstr "Expandera och utforska"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:111
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Expand your territory and explore the island"
-msgstr ""
+msgstr "Expandera ditt territorium och utforska ön"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:217
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:158
 msgid "Favored by the god"
-msgstr ""
+msgstr "Favoriserad av guden"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:123
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid ""
 "Food is very important for mines and military training areas. Establish\n"
 "a well working food environment by building at least one farm, one "
@@ -249,16 +304,46 @@ msgid ""
 "not die out<br>\n"
 "- Build two smokeries to smoke raw meat and fish."
 msgstr ""
+"Mat är mycket viktigt för gruvor och militära träningsområden. Etablera\n"
+"en väl fungerande matmiljö genom att bygga minst en bondgård, en\n"
+"svartrotsfarm, och en kvarn. De båda sorterna av mjöl tillsammans med\n"
+"vatte från en brunn bakas till bröd i ett bageri, så bygg även ett bageri "
+"och\n"
+"en brunn.<br><br>\n"
+"De andra två viktiga matvarorna är rökt fisk och rökt kött. Rått kött "
+"levereras\n"
+"av en jägare. En fiskare får fisken ur havet medan en fiskodlare ser till "
+"att\n"
+"fiskstimmen inte utrotas genom att odla fler. Se till att alltid ha fisk "
+"över, annars\n"
+"kommer inte fiskodlaren kunna odla nya. Rökningen sker i ett rökeri; du "
+"behöver\n"
+"minst två av dem.<br><br>\n"
+"- Bygg en Bondgård och en Svartrotsfarm<br>\n"
+"- Bygg en kvarn för att mala vete- och svartrotsmjöl<br>\n"
+"- Bygg en brunn<br>\n"
+"- Bygg ett bageri för att baka bröd med vetemjöl, svartrotsmjöl och "
+"vatten<br>\n"
+"- Bygg en jägarstuga för att få rått kött<br>\n"
+"- Bygg en fiskarstuga nära vattnet för att få rå fisk<br>\n"
+"- Bygg ett fiskodlarhus nära fiskaren för att se till att fisken inte "
+"utrotas<br>\n"
+"- Bygg två rökerier för att röka kött och fisk"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:256
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:197
 msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people\n"
 "turned to the clerics, but those had no substantial help to offer. Most\n"
 "accepted their fate while others tried to change the god's mind by offering\n"
 "animals in his temple. But to no avail..."
 msgstr ""
+"Tyngd av skuldkänslor begick kungen självmord. Utan en monark vände\n"
+"sig folket till prästerna, men de hade ingen betydande hjälp att erbjuda. "
+"De\n"
+"flesta accepterade sitt öde medan anvdra försökte få guden att ändra sig\n"
+"genom att offra djur i hans tempel. Men till ingen nytta..."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:478
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:419
 msgid ""
 "I agree with you and I have punished the trouble makers severely. But it is\n"
 "very difficult to keep my men quiet: they are bored and have nothing to do. "
@@ -269,8 +354,18 @@ msgid ""
 "labyrinth for them.  I have the plans ready, but I guess they won't come\n"
 "cheap."
 msgstr ""
+"Jag håller med dig, och jag har straffat bråkmakarna hårt. Men det är "
+"väldigt\n"
+"svårt att få mina män att hålla tyst: de är uttråkade och har inget att "
+"göra.\n"
+"Jag skulle vilja träna dem oftare. Jag tror att mer rutin i deras vardag "
+"skulle\n"
+"hålla dem upptagna och fokuserade på sina plikter. Jag skulle behöva en\n"
+"fånghåla och en labyrint. Jag har färdiga ritningar, men jag antar att det "
+"inte\n"
+"blir billigt."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:489
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:430
 msgid ""
 "I do not fear the cost and labor as long as it keeps your people at bay. "
 "You\n"
@@ -279,15 +374,22 @@ msgid ""
 "if similar things happen again, I will make you responsible for them.\n"
 "Dismissed."
 msgstr ""
+"Jag fruktar inte kostnaden och arbetsinsatsen, så länge det håller ditt "
+"folk\n"
+"på behörigt avstånd. Du ska få dina byggnader. Men märk väl att jag inte\n"
+"kommer tolerera någon lösspringande soldat; om något liknande händer\n"
+"igen håller jag dig personligen ansvarig för dem. Lediga."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:459
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:400
 msgid ""
 "I have considered this, Sidolus. I think, it is about time. We will make "
 "this\n"
 "a priority for now. You shall get your industry and soon!"
 msgstr ""
+"Jag har funderat på det här, Sidolus. Jag tror att det är hög tid. Vi ska\n"
+"prioritera det här nu. Du ska få din industri, snart!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:501
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:442
 msgid ""
 "I received an invitation from Sidolus. The first day of training in the "
 "newly\n"
@@ -299,8 +401,14 @@ msgid ""
 "from\n"
 "bullying the civil population."
 msgstr ""
+"Jag fick en inbjudan från Sidolus. Den första dagen av träning i den nyss\n"
+"färdigbyggda labyrinten hålls imorgon. Fånghålan är också färdig och kommer\n"
+"tas i bruk snart. Jag ser fram emot morgondagen; jag är väldigt nyfiken på "
+"hur\n"
+"våra soldater tränas, och jag undrar om den utökade arbetsbördan kommer\n"
+"hindra dem från att trakassera den civila befolkningen."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:163
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:104
 msgid ""
 "Iron ore, gold ore and coal are mined in the respective mines. The crystal "
 "mine\n"
@@ -318,82 +426,96 @@ msgid ""
 "- Build an armor smithy and a weapon smithy.<br>\n"
 "- Build a tool smithy.<br>"
 msgstr ""
+"Järnmalm, guldmalm, och kol utvinns i respektive gruvor. Kristallgruvan är "
+"till\n"
+"för att utvinna kristaller, kvarts, och diamant - de är alla sällsynta "
+"material och\n"
+"hittas sällan. Medan letandet pågår lämnar den ifrån sig stora mängder "
+"sten.<br>\n"
+"Malmerna måste smältas i smältverk innan de kan användas. De förädlade\n"
+"materialen används sedan i vapensmedjan, rustningssmedjan, och\n"
+"verktygssmedjan.<br><br>\n"
+"- Bygg en av varje gruva. Se till att skicka geologer till berget "
+"först.<br>\n"
+"- Bygg ett smältverk.<br>\n"
+"- Bygg en rustningssmedja och en vapensmedja.<br>\n"
+"- Bygg en verktygssmedja.<br>"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:306
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:356
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:500
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:513
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:590
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:608
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:646
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:247
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:297
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:441
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:454
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:531
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:549
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:587
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:383
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:324
 msgid "Jundlina agrees"
-msgstr ""
+msgstr "Jundlina instämmer"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:512
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:453
 msgid "Jundlina considers the economy"
-msgstr ""
+msgstr "Jundlina funderar över ekonomin"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:468
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:409
 msgid "Jundlina is angry"
-msgstr ""
+msgstr "Jundlina är arg"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:532
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina is in thought"
-msgstr ""
+msgstr "Jundlina går i tankar"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:645
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:586
 msgid "Jundlina is relieved"
-msgstr ""
+msgstr "Jundlina är lättad"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:393
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is reviewing the reports"
-msgstr ""
+msgstr "Jundlina går igenom rapporterna"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:339
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:392
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:280
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina is satisfied"
-msgstr ""
+msgstr "Jundlina är nöjd"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:556
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:497
 msgid "Jundlina is worried"
-msgstr ""
+msgstr "Jundlina är orolig"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:458
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Jundlina nods"
-msgstr ""
+msgstr "Jundlina nickar"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:499
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:440
 msgid "Jundlina received a letter"
-msgstr ""
+msgstr "Jundlina fick ett brev"
 
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:296
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:355
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:414
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:415
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:435
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:457
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:487
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:607
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:631
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:356
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:376
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:398
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:428
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:548
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:572
 msgid "Jundlina replies"
-msgstr ""
+msgstr "Jundlina svarar"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:467
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:408
 msgid "Jundlina summons Sidolus"
-msgstr ""
+msgstr "Jundlina kallar på Sidolus"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:285
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:226
 msgid "Jundlina writes down her memories"
-msgstr ""
+msgstr "Jundlina skriver ner sina ihågkomster"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:340
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:281
 msgid "Jundlina's Memoirs"
-msgstr ""
+msgstr "Jundlinas memoarer"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:261
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:202
 msgid ""
 "Jundlina, the late king's daughter and the highest priestess of the god\n"
 "was the most determined cleric. As countless offerings didn't change the\n"
@@ -401,22 +523,31 @@ msgid ""
 "personal value was needed. So she offered him her most beloved:\n"
 "her husband, father of her only child."
 msgstr ""
+"Jundlina, den hädangångne konungens dotter och gudens högsta prästinna\n"
+"var den mest ihärdiga i prästerskapet. Eftersom alla offergåvor inte "
+"ändrade\n"
+"situationen, bestämde hon sig att för att blidka guden krävdes ett offer\n"
+"av stort personligt värde. Alltså offrade hon åt honom sin allra käraste:\n"
+"hennes make, fader till hennes enda barn."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:275
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:216
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started a quest to\n"
 "find a place sheltered by the fire and protected from the sea."
 msgstr ""
+"De lämnade ett döende Atlantis och sitt förflutna bakom sig, och gav\n"
+"sig av för att söka en plats som värmdes av elden och skyddades av\n"
+"havet."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:305
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:246
 msgid "Loftomor and Sidolus arrive"
-msgstr ""
+msgstr "Loftomor och Sidolus anländer"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:314
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Loftomor speaks"
-msgstr ""
+msgstr "Loftomor talar"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:591
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:532
 msgid ""
 "May Satul save us! Lutas is still trying to get to us. A scout informed me\n"
 "that the ocean is rising quickly. We have to reach higher ground and "
@@ -425,8 +556,15 @@ msgid ""
 "we\n"
 "escape?"
 msgstr ""
+"Satul hjälpe oss! Lutas försöker fortfarande få fatt i oss. En spejare "
+"upplyste\n"
+"mig om att havsytan stiger snabbt. Vi måste ta oss till högre mark, "
+"evakuera\n"
+"alla, och ta med oss allt vi kan av varorna i högkvarteret upp i bergen. Hur "
+"kan\n"
+"vi undkomma?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:307
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:248
 msgid ""
 "May Satul warm you both. Loftomor, you have been the island's most renowned\n"
 "architect. Sidolus, you are a seasoned warrior and strategist. I have "
@@ -435,8 +573,12 @@ msgid ""
 "new\n"
 "home?"
 msgstr ""
+"Må Satul värme er båda. Loftomor, du har varit öns mest prisade arkitekt.\n"
+"Sidolus, du är en erfaren krigare och strateg. Jag har kallat dig förut för "
+"att\n"
+"ta del av dina råd: Vad måste göras för att göra det här till vårt nya hem?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:357
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:298
 msgid ""
 "May Satul warm you too, Colionder. Yes, I wondered if there is not a way\n"
 "that we can centralize our food production. We lose a lot of productivity\n"
@@ -444,8 +586,13 @@ msgid ""
 "could split responsibilities, it would be better for us all. I want your\n"
 "thoughts on this."
 msgstr ""
+"Må Satul värma dig också, Colionder. Jo, jag undrade om det inte finns\n"
+"något sätt vi kan centralisera vår matproduktion på. Vi förlorar mycket\n"
+"produktivitet på grund av att vårt folk är vana vid att laga sin egen mat.\n"
+"Jag tycker att om vi kunde dela upp ansvaret vore det bättre för oss alla.\n"
+"Jag vill nu höra din åsikt."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:416
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:357
 msgid ""
 "May Satul warm you too, Opol. I wanted to delay production of spider cloth,\n"
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
@@ -454,8 +601,13 @@ msgid ""
 "the\n"
 "golden tabards you make will not be golden by name alone."
 msgstr ""
+"Må Satul värma dig också, Opol. Jag ville fördröja tillverkningen av\n"
+"spindeltyg, men jag förstår din iver. Ditt förslag låter vettigt; jag ska\n"
+"bygga ditt väveri och spindelfarm. Jag ska också bygga ett guldväveri så\n"
+"att de gyllene tabarderna du tillverkar inte bara kommer vara gyllene\n"
+"till namnet."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:328
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:269
 msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need\n"
 "a good supply of building materials for we have to expand our territory "
@@ -464,8 +616,13 @@ msgid ""
 "on it. I brought plenty of good men from Atlantis. The military might is\n"
 "available. We only need some housings to live in."
 msgstr ""
+"Må Satul värma dig, Jundlina! Jag instämmer ,ed Loftomors förslag. Vi\n"
+"behöver god tillgång till byggnadsmaterial, för vi måste expandera vårt\n"
+"territorium snabbt. Jag kommer inte känna mig trygg på ön förrän vi har\n"
+"sett alla dess stränder. Jag tog med många goda män från Atlantis. Vi har\n"
+"den militära makten. Vi behöver bara tak över huvudet."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:316
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
 "May Satul warm you, Jundlina! The most important things for building a\n"
 "settlement are the building materials. There are some trees here, so we "
@@ -477,8 +634,16 @@ msgid ""
 "a\n"
 "quarry and my stonemasons will go to work promptly."
 msgstr ""
+"Må Satul värma dig, Jundlina! Det viktigaste för att bygga bosättningar är\n"
+"byggnadsmaterialen. Det finns några träd här, så vi borde bygga boningar\n"
+"åt några skogshuggare, och självklart skogsvaktarna, så att träden inte\n"
+"tar slut. Jo, så ska vi förstås inte glömma sågverket, för de flesta "
+"byggnader\n"
+"kan inte bara byggas av trädstammar. Stadigare byggnader behöver också\n"
+"sten, men det finns i mångder åt nordost; vi behöver bara bygga ett\n"
+"stenbrott, så tar mina stenmurare tag i saken med en gång."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:428
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:369
 msgid ""
 "May Satul warm you, Jundlina!. The weaving-mill, goldweaver and spiderfarm\n"
 "buildings are complete and are starting their work at this very moment. The\n"
@@ -486,14 +651,19 @@ msgid ""
 "word\n"
 "and deliver the first tabard very soon."
 msgstr ""
+"Må Satul värma dig, Jundlina! Väveriet, guldvävaren, och spindelfarmens\n"
+"byggnader står färdiga, och inleder sin verksamhet redan nu. Vävarnas gille\n"
+"är mycket tacksamma för ditt stöd, och vi kommer att hålla vårt löfte att\n"
+"leverera den första tabarden mycket snart."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:350
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:291
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the\n"
 "god?"
 msgstr ""
+"Må Satul värma dig, Jundlina. Kan jag vara till hjälp för dig eller guden?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:448
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:389
 msgid ""
 "May Satul warm you, Jundlina. Have you considered mining for goods in the\n"
 "mountains around us? We are running short of quartz, crystal and diamonds "
@@ -503,8 +673,15 @@ msgid ""
 "and tools; this would help enormously. Of course, we would need smelters,\n"
 "a weapon smithy, an armor smithy and a tool smithy. And maybe even more."
 msgstr ""
+"Må Satul värma dig, Jundlina. Har du funderat på att utvinna saker i bergen\n"
+"häromkring? Vi börjar få ont om kvarts, kristall, och diamanter för våra\n"
+"byggnader. Vi kan också ha nytta av mer järn, guld, och i synnerhet kol. Om\n"
+"vi hittar rika fyndigheter kan vi börja tillverka vapen och verktyg; det "
+"skulle\n"
+"vara en enorm hjälp. Vi skulle förstås behöva smältverk, vapensmedja,\n"
+"rustningssmedja, och en verktygssmedja. Och kanske ännu mer."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:404
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:345
 msgid ""
 "May Satul warm you, Jundlina. My Name is Opol and I am the highest weaver "
 "of\n"
@@ -520,8 +697,23 @@ msgid ""
 "for young soldiers and the golden tabards for officers for you in exchange.\n"
 "You will need them for sure as soon as you want to recruit new soldiers."
 msgstr ""
+"Må Satul värma dig, Jundlina. Jag heter Opol och är högste vävare i gillet "
+"som\n"
+"övergav Atlantis och Lutas tillsammans med dig. Jag kommer med riktigt "
+"dåliga \n"
+"nyheter: Vi har inget mer spindeltyg. Inte en enda centimeter står att finna "
+"i våra\n"
+"lager. Skulle du kanske kunna hjälpa vävarnas gille geom att se om att bygga "
+"ett\n"
+"väveri och en spindelfarm? Spindlarna spinner det finaste silke, och vi "
+"kommer\n"
+"tillverka det finaste av spindeltyg med det. Vi kan också tillverka tabarder "
+"för\n"
+"unga soldater och gyllene tabarder för officerare åt dig i utbyte. Du "
+"kommer\n"
+"säkert behöva dem så snart du vill rekrytera nya soldater."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:600
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:541
 msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I "
 "have\n"
@@ -530,12 +722,17 @@ msgid ""
 "them\n"
 "a much longer distance and maybe escape from Lutas' influence."
 msgstr ""
+"Må Satul värma dig, Jundlina. Jag heter Ostur, och jag bygger skepp. Jag "
+"har\n"
+"uppfunnit en ny sorts skepp: mindre än de vi är vana vid, men mycket\n"
+"stadigare. Om vi bygger dem ordentligt, kan vi säkert ta oss mycket längre\n"
+"än förut, och kanske komma undan Lutas inflytande."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:89
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:30
 msgid "New Objectives"
-msgstr ""
+msgstr "Nya direktiv"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:219
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:160
 msgid ""
 "On the hidden and lost island of Atlantis, a proud tribe settled since the\n"
 "world was very young. Ruled by the bloodline of King Ajanthul - the first "
@@ -545,28 +742,37 @@ msgid ""
 "wise clerics, who provided the link to Lutas - they prospered and became\n"
 "civilized."
 msgstr ""
+"På den dolda och bortglömda ön Atlantis bosatte sig en stolt stam redan\n"
+"då världen var ung. Under Kung Ajanthuls ätts styre - den första människa\n"
+"som havsguden Lutas förlänade med andningsförmåga ovan havsytan - och\n"
+"det visa prästerskapet, som gav dem band till Lutas - de frodades och blev\n"
+"civiliserade."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:570
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:511
 msgid "One more building"
-msgstr ""
+msgstr "En till byggnad"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:426
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid "Opol seeks out Jundlina"
-msgstr ""
+msgstr "Opol letar efter Jundlina"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:616
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:557
 msgid "Ostur seems confident"
-msgstr ""
+msgstr "Ostur verkar förtroendefull"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:609
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:550
 msgid ""
 "Ostur, we have no time. The water rises too fast and if we build the ships "
 "on\n"
 "shore they will vanish in the sea before they can float. I fear we are "
 "doomed!"
 msgstr ""
+"Ostur, vi hinner inte. Vattnet stiger för snabbt, och om vi bygger skepp "
+"vid\n"
+"kusten kommer de försvinna i djupet innan de är sjödugliga. Jag befarar\n"
+"att det är ute med oss!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:341
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:282
 msgid ""
 "Our building infrastructure is done and I spent some days making sure that\n"
 "they work well together. Now, there are other pressing matters. I called\n"
@@ -574,8 +780,15 @@ msgid ""
 "things\n"
 "out."
 msgstr ""
+"Vår byggnadsinfrastruktur är färdig, och jag tillbringade några dagar med "
+"att se\n"
+"till att de fungerar väl tillsammans. Så finns det annat som måste tas itu "
+"med.\n"
+"Jag kallade på Colionder, min privata kock, för att få hans hjälp med att "
+"få\n"
+"rätsida på ett och annat."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:514
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:455
 msgid ""
 "People are complaining about crowded streets and slow transportation. We\n"
 "need to help out our carriers on the roads. I decided to build a horsefarm\n"
@@ -586,8 +799,16 @@ msgid ""
 "to\n"
 "avoid having to transport everything up and down the slopes."
 msgstr ""
+"Folk klagar på sprängfyllda gator och långsamma transporter. Vi måste "
+"hjälpa\n"
+"våra kurirer. Jag bestämde mig för att bygga en hästfarm, så att hästarna\n"
+"kan hjälpa till med de tunga lassen.<br>\n"
+"Ett annat sätt att lätta på vägarnas belastning är att bygga lager. Vi har\n"
+"införlivat berget nu; det verkar som en bra idé att bygga ett lager på "
+"platån\n"
+"för att slippa behöva transportera allt upp och nerför sluttningarna."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:647
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:588
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships -\n"
 "never have I seen sturdier ones - with enough room to carry all of us and "
@@ -602,31 +823,41 @@ msgid ""
 "people.\n"
 "And myself."
 msgstr ""
+"Lov ske Satul! Ostur, den unge skeppsbyggaren, lyckades! Vi har tre skepp -\n"
+"aldrig har jag sett stabilare sådana - med nog med utrymme för att vi\n"
+"alla ska få plats och några varor därtill. Och denna räddning kom precis i\n"
+"tid: Lutas är på väg att svälja resten av ön - vattnet stiger snabbare för\n"
+"varje timme. Men vi kan fly nu, och börja om på nytt i ett land långt\n"
+"härifrån... Det lär bli en lång resa, men vi kommer till sist träffa på "
+"Satuls\n"
+"land. Det är vad som utlovades till mitt folk. Och mig själv."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:215
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:156
 msgid "Proudest to the death"
-msgstr ""
+msgstr "Stoltast till döden"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:394
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:335
 msgid ""
 "Seems like our food production is finished and everybody is working "
 "together\n"
 "nicely. It is really starting to feel like home here."
 msgstr ""
+"Det verkar som om vår matproduktion är slutförd och att alla jobbar väl\n"
+"tillsammans. Det börjar verkligen kännas som hemma här."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:446
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:387
 msgid "Sidolus seeks out Jundlina"
-msgstr ""
+msgstr "Sidolus söker Jundlina"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:476
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:417
 msgid "Sidolus seems contrite"
-msgstr ""
+msgstr "Sidolus verkar ångerfull"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:326
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:267
 msgid "Sidolus speaks"
-msgstr ""
+msgstr "Sidolus talar"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:243
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid ""
 "The clerics went into their meditation and the reason for the rising water\n"
 "was soon to be found: The god Lutas had lost faith in the Atlanteans because "
@@ -637,35 +868,44 @@ msgid ""
 "sea\n"
 "again."
 msgstr ""
+"Prästerskapet började meditera, och skälet för det stigande vattnet fanns "
+"snart:\n"
+"Guden Lutas hade förlorat tron för Atlanteanerna på grund av deras kungs\n"
+"djärvhet. Han beslutade att återkalla rättigheterna som förlänades till "
+"Kung\n"
+"Ajanthul och hans avkomma. Så kallade han dem tillbaka till havsbottnen igen."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:234
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:175
 msgid "The god's disgrace"
-msgstr ""
+msgstr "Gudens vanära"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:236
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:177
 msgid "The god's punishment"
-msgstr ""
+msgstr "Gudens straff"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:113
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:54
 msgid ""
 "The island is huge and as long as we are not sure that we are alone\n"
 "here, we cannot relax. Explore and conquer it, this is the\n"
 "only way to protect us from threats on the island and from Atlantis."
 msgstr ""
+"Ön är enorm, och så länge som vi inte är säkra på att vi är ensamma\n"
+"här kan vi inte slappna av. Utforska och erövra den, det är det enda\n"
+"sättet att skydda oss från hot från ön och från Atlantis."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:284
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "The princess' memoir"
-msgstr ""
+msgstr "Prinsessans memoarer"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:103
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "The supply of build wares"
-msgstr ""
+msgstr "Tillgången på byggvaror"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:589
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:530
 msgid "The water is rising!"
-msgstr ""
+msgstr "Vattenytan stiger!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:148
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
 "The weavers produce spidercloth and tabards in the weaving-mill. "
 "Spidercloth\n"
@@ -678,23 +918,39 @@ msgid ""
 "- Build a Spiderfarm<br>\n"
 "- Build a Goldweaver<br>"
 msgstr ""
+"Vävarna tillverkar spindeltyg och tabarder i väveriet. Spindeltyg behövs "
+"för\n"
+"att bygga vissa byggnader och till vissa klädnader, medan tabarder är \n"
+"soldaternas uniformer. Väveriet behöver gyllene garn och spindelgarn att\n"
+"jobba med. Spindelgarn tillverkas av spindelfarmen, medan gyllene garn\n"
+"tillverkas av guldvävaren, av guld.<br><br>\n"
+"- Bygg ett Väveri<br>\n"
+"- Bygg en Spindelfarm<br>\n"
+"- Bygg en Guldvävare<br>"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:201
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:142
 msgid ""
 "There is a lake at the top of the island. Build 3 ships in these waters\n"
 "and you might be able to rescue your people when the island is swallowed\n"
 "completely by the ocean. Build a shipyard close to the lake to start\n"
 "building ships."
 msgstr ""
+"Det finns en sjö på öns topp. Bygg 3 skepp i detta hav, så kan du kanske\n"
+"rädda ditt folk när ön slukas helt av havet. Bygg ett varv nära inpå sjön "
+"för\n"
+"att börja bygga skepp."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:437
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:378
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go "
 "back\n"
 "to your work now, Opol, and may Satul warm you and all your guild members!"
 msgstr ""
+"Det här är verkligen goda nyheter. Vår ekonomi går starkt framåt. Tillbaka "
+"till\n"
+"arbetet nu, Opol, och må Satul värma dig, och alla dina gillesmedlemmar!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:225
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:166
 msgid ""
 "This story happens during the regency of King Askandor, the 43rd successor "
 "of\n"
@@ -705,12 +961,21 @@ msgid ""
 "life\n"
 "was only for the gods and to seek for it was forbidden."
 msgstr ""
+"Den här berättelsen tar plats under Kung Askandors styre, den 43:e\n"
+"tronföljaren till Kung Ajanthul. Han har varit en god kung, och har styrt "
+"Atlantis\n"
+"med vishet och försyn. MMen med åldern blev han rädd för döden, och så "
+"började\n"
+"han leta efter ett botemedel, även om de flesta präster varnade honom. "
+"Vissa\n"
+"sade att evigt liv bara var för gudarna, och sökandet efter det var "
+"förbjudet."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:252
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:193
 msgid "Uproar and confusion"
-msgstr ""
+msgstr "Ramaskri och förvirring"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:533
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
 "We found an old building, destroyed and burned by flames. I am very worried\n"
 "about this finding. The building is not of any kind I've ever seen. It is\n"
@@ -731,8 +996,22 @@ msgid ""
 "fortification\n"
 "of our borders."
 msgstr ""
+"Vi fann en gammal byggnad, förstörd och utbränd. Det här fundet oroar mig.\n"
+"Byggnaden liknar inget annat jag sett förut. Den är helt säkert inte ritad "
+"av\n"
+"någon Atlanteansk arkitekt jag känner till. Den är primitiv, slarvigt "
+"hantverk.\n"
+"Men materialen är väldigt härdiga: trät som användes verkar ha bränts på\n"
+"ett särskilt sätt innan det användes som byggnadsmaterial - det är hårt som\n"
+"sten.<br><br>\n"
+"Dess betydelse är skrämmande. Finns det andra här på ön? Var är de, då?\n"
+"De arbetar med eld, tillber de också Satul? Vän eller fiende? Och varför är\n"
+"byggnaden nerbränd? Har man fört krig här? Pågår ett krig just nu?<br><br>\n"
+"Vi måste öka vår militära makt. Om det finns fiender på ön måste vi vara\n"
+"beredda när vi träffar dem. Vi borde också förstärka befästningen av våra\n"
+"gränser."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:557
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:498
 msgid ""
 "We found one more building of this strange making. We have yet to see any "
 "of\n"
@@ -743,16 +1022,26 @@ msgid ""
 "with my generals. I will not allow that a potential enemy will find us\n"
 "unprepared."
 msgstr ""
+"Vi fann ännu en byggnad av samma konstiga slag. Vi har fortfarande inte\n"
+"sett röken av dess byggare. Men det har uppenbart funnits en kultur på\n"
+"ön förut, och den har uppenbarligen varit militariserad. Jag måste se till\n"
+"vårt militära tillstånd tillsammans med mina generaler. Jag kommer inte "
+"låta\n"
+"en potentiell fiende komma över oss utan förberedelser."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:299
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:240
 msgid ""
 "We have established ourselves on this island. The next step is now to make "
 "it\n"
 "a home. I reckon we need to establish a sustainable economy and explore our\n"
 "surroundings. I called for specialists and will follow their advice."
 msgstr ""
+"Vi har etablerat oss på ön. Nästa steg är att göra den till vårt hem. Jag "
+"ser det\n"
+"som så att vi måste etablera en hållbar ekonomi och utforska omgivningen.\n"
+"Jag har tillkallat specialister och kommer följa deras råd."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:286
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:227
 msgid ""
 "We left Atlantis and sailed east. We entered the forbidden sea on the sixth\n"
 "day without noticing any pursuers from Atlantis and without Lutas having "
@@ -762,12 +1051,20 @@ msgid ""
 "this\n"
 "a sign from the fire god and we landed on its shore."
 msgstr ""
+"Vi lämnade Atlantis och seglade österut. Vi nådde det förbjudna havet den\n"
+"sjätte dagen utan att lägga märke till några förföljare från Atlantis, och "
+"utan att\n"
+"Lutas tagit vårt skepp. Nu är vi utom hans räckhåll. En dag senare siktade "
+"vi en\n"
+"ö som verkar ha en av dessa eldsprutande berg på sig. Jag bedömde det som "
+"ett\n"
+"tecken från eldguden, och vi gick i land på dess stränder."
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "Vi förlorade en/ett %s till havet!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:292
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:233
 msgid ""
 "We spent the last week building two watchtowers on the mountains close to\n"
 "our landing area; and, of course, a hall for us all. We have very talented\n"
@@ -778,8 +1075,15 @@ msgid ""
 "inhabited,\n"
 "we will see attackers a long time before they arrive."
 msgstr ""
+"Vi tillbringade förra veckan med att bygga två vakttorn på bergen nära där\n"
+"vi steg i land; och, förstås, en sal för oss alla. Vi har mycket "
+"talangfulla\n"
+"byggare i vår grupp - ändå går inte byggnaderna upp mot de konstverk\n"
+"vi hade på Atlantis. jag hoppas de håller för nästa regn. Tornen kommer i\n"
+"alla fall varna oss om ett skepp från Atlantis kommer efter oss, och om ön\n"
+"är bebodd, vi kommer se anfallarna långt innan de kommer."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:469
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:410
 msgid ""
 "What is this I hear, Sidolus? I received words about your soldiers\n"
 "misbehaving and bullying the common folk. What is this nonsense all about? "
@@ -787,14 +1091,21 @@ msgid ""
 "are servants for the common good and must not misuse their powers. This is\n"
 "inexcusable! Explain this, if you will!"
 msgstr ""
+"Vad är det jag hör, Sidolus? Jag hörde att dina soldater uppför sig illa, "
+"och\n"
+"trakasserar allmogen. Vad är det här för trams? De tjänar allmännyttan och\n"
+"får inte missbruka sin makt. Det här är oförlåtligt! Jag kräver en "
+"förklaring!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:655
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:596
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
 msgstr ""
+"Du har vunnit uppdraget. Gå vidare med nästa, eller fortsätt spela så\n"
+"länge du vill."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:633
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:574
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your\n"
@@ -804,10 +1115,12 @@ msgid ""
 "everything else, we need those wares on top of the mountain before our\n"
 "warehouses are all swallowed by the sea."
 msgstr ""
+"Ditt röda hår är ett tecken från eldguden. Jag ska lita på dig och utföra\n"
+"dina planer. Vår överlevnad ligger i dina händer nu, Ostur.\n"
+"<br><br>Snabba ryck, vi behöver ett hus åt Ostur vid sjön, och vi behöver\n"
+"brädor, trädstammar, och spindeltyg för byggandet. Glöm allt annat, vi\n"
+"behöver föra allt upp till bergets topp innan våra lager slukas av havet."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:385
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
-
-#~ msgid "01 - From nemesis to genesis"
-#~ msgstr "01 - Från nemesis till genesis"
+msgstr "Dina ord klingar av vishet, Colionder. Så gör vi, då."

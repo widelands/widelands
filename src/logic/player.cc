@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,13 +51,24 @@ namespace Widelands {
 
 extern const Map_Object_Descr g_road_descr;
 
+const RGBColor Player::Colors[MAX_PLAYERS] = {
+	RGBColor(2,     2, 198),  // blue
+	RGBColor(255,  41,   0),  // red
+	RGBColor(255, 232,   0),  // yellow
+	RGBColor(59,  223,   3),  // green
+	RGBColor(57,   57,  57),  // black/dark gray
+	RGBColor(255, 172,   0),  // orange
+	RGBColor(215,   0, 218),  // purple
+	RGBColor(255, 255, 255),  // white
+};
+
+
 Player::Player
 	(Editor_Game_Base  & the_egbase,
 	 Player_Number         const plnum,
 	 uint8_t               const initialization_index,
 	 Tribe_Descr   const &       tribe_descr,
-	 std::string   const &       name,
-	 uint8_t       const * const playercolor)
+	 std::string   const &       name)
 	:
 	m_egbase              (the_egbase),
 	m_initialization_index(initialization_index),
@@ -83,13 +94,6 @@ Player::Player
 	m_current_statistics(tribe_descr.get_nrwares    ()),
 	m_ware_productions  (tribe_descr.get_nrwares    ())
 {
-	for (int32_t i = 0; i < 4; ++i)
-		m_playercolor[i] =
-			RGBColor
-				(playercolor[i * 3 + 0],
-				 playercolor[i * 3 + 1],
-				 playercolor[i * 3 + 2]);
-
 	set_name(name);
 }
 
@@ -871,19 +875,27 @@ throw ()
 		{ //  map_object_descr[TCoords::None]
 
 			const Map_Object_Descr * map_object_descr;
+			const Constructionsite_Information * csi(0);
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
+
 				if (Road::IsRoadDescr(map_object_descr))
 					map_object_descr = 0;
-				else if (upcast(Building const, building, base_immovable))
+				else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f)
-						//  TODO This is not the buildidng's main position so we can
-						//  TODO not see it. But it should be possible to see it from
-						//  TODO a distance somehow.
+						// This is not the building's main position so we can not see it.
 						map_object_descr = 0;
+					else {
+						if (upcast(ConstructionSite const, cs, building)) {
+							csi = const_cast<ConstructionSite *>(cs)->get_info();
+
+						}
+					}
+				}
 			} else
 				map_object_descr = 0;
 			field.map_object_descr[TCoords<>::None] = map_object_descr;
+			field.constructionsite[TCoords<>::None] = csi;
 		}
 	}
 	{ //  discover the D triangle and the SW edge of the top right neighbour
@@ -947,7 +959,7 @@ throw ()
 		fvision = 1;
 	if (fvision == 1)
 		rediscover_node(map, first_map_field, f);
-	fvision ++;
+	++fvision;
 	field.vision = fvision;
 }
 

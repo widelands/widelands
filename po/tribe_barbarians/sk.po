@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-11-19 22:12+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-21 14:23+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:38+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:43+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -30,6 +30,9 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
+"Helma je základnou pomôckou na ochranu bojovníkov.  Vyrába sa vo vyhni na "
+"helmy a používa vo výcvikovom tábore - spolu s jedlom - na trénovanie bodov "
+"zdravia vojakov z úrovne 0 na úroveň 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
@@ -50,6 +53,9 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"Vojenská helma je vylepšená zbroj pre barbarských vojakov. Vyrába sa vo "
+"vyhni na helmy a používa sa vo výcvikovom tábore - spolu s jedlom - na "
+"trénovanie bodov zdravia vojakov z úrovne 1 na úroveň 2."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -112,6 +118,9 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
+"Okrem pita chleba a mäsa, potraviny barbarov tvoria tiež ryby. Využívajú sa "
+"v krčmách, hostincoch a veľkých hostincoch a vo výcvikových stavbách "
+"(výcvikový tábor a zápasnícka aréna)."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Big Inn"
@@ -345,6 +354,9 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Udice potrebujú barbarskí rybári na rybárčenie. Sú jedným zo základných "
+"nástrojov, ktoré sa vyrábajú v kovodielni (prestanú sa v nej vyrábať, ak sa "
+"vylepší na továreň na sekery alebo vojenský závod)."
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
@@ -386,6 +398,10 @@ msgid ""
 "used as a precious building material and to produce different axes (in the "
 "war mill) and different armours (in the helmsmithy)."
 msgstr ""
+"Zlato je najhodnotnejším zo všetkých kovov; zdobia sa ním len veľmi dôležité "
+"veci. Získava sa zo zlatej rudy v taviarni. Používa sa ako cenný stavebný "
+"materiál a na výrobu rôznych sekier (vo vojenskom závode) a zbrojí (vo vyhni "
+"na zbroje)."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -393,6 +409,9 @@ msgid ""
 "gold, which is used as a precious building material and to produce weapons "
 "and armours."
 msgstr ""
+"Zlatá ruda sa ťaží v zlatých baniach. Po tavení v taviarni z nej vznikne "
+"zlato, ktoré sa používa ako vzácny stavebný materiál na výrobu zbraní a "
+"zbrojí."
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -450,7 +469,7 @@ msgstr "Vyhňa na výrobu heliem"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Pomáha nosiť veci na zaťažených cestách."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
@@ -501,12 +520,17 @@ msgid ""
 "produce weapons and tools in the metalwork shop, axefactory, war mill and in "
 "the helmsmithy."
 msgstr ""
+"Železo sa získava zo železnej rudy v taviarni. Vyrábajú sa z neho zbrane a "
+"nástroje v kovodielni, továrni na sekery, vojenskom závode a vo vyhni na "
+"helmy."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
+"Železné rudy sa ťažia v železnorudných baniach. Po tavení v taviarni z nich "
+"vznikne železo."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -518,7 +542,7 @@ msgstr "Vápenka"
 
 #: ../../tribes/barbarians/conf:134
 msgid "Lime-Burner"
-msgstr "Pracovník vo vápenke"
+msgstr "Vápenník"
 
 #: ../../tribes/barbarians/conf:135
 msgid "Lumberjack"
@@ -583,6 +607,10 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
+"Len toto pivo je prípustné pre vojakov v zápasníckej aréne. Niektorí "
+"hovoria, že celá sila barbarov sa ukrýva v tomto pive. Pomáha pri trénovaní "
+"uhýbania vojakov z úrovne 0 na 1 a na 2. Zo silného piva sa vo veľkých "
+"hostincoch pripravujú obedy."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -759,12 +787,16 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Nespracované kamene sú základným stavebným materiálom barbarov. Produkujú sa "
+"v kameňolomoch a žulových lomoch."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
+"Nespracovaný kameň možno spracovať na maltu - pevný a nehoriaci stavebný "
+"materiál. Malta sa vyrába vo vápenke."
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
@@ -854,7 +886,7 @@ msgstr "Ostrá sekera"
 msgid "Shovel"
 msgstr "Lopata"
 
-#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
 msgstr "Spať"
@@ -873,11 +905,11 @@ msgstr "Taviť železo"
 
 #: ../../tribes/barbarians/conf:138
 msgid "Smelter"
-msgstr "Zlievač"
+msgstr "Tavič"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Smelting Works"
-msgstr "Zlievareň"
+msgstr "Taviareň"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -968,6 +1000,9 @@ msgid ""
 "the trainingscamp - together with food- to train warriors with a fundamental "
 "fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"Široká sekera sa vyrába v továrni na sekery a vo vojenskom závode. Používa "
+"sa vo výcvikovom tábore - spolu s jedlom - na trénovanie vojakov so "
+"základnými bojovnými znalosťami (z úrovne útoku 1 na úroveň útoku 2)."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -975,6 +1010,10 @@ msgid ""
 "can use this. It is produced in the war mill and used in the trainingscamp "
 "(trains -together with food - from attack level 2 to level 3)."
 msgstr ""
+"Bronzová sekera sa považuje za zbraň, s ktorou sa ťažko zaobchádza. Len "
+"skúsení bojovníci ju vedia použiť. Vyrába sa vo vojenskom závode a používa "
+"vo výcvikovom tábore (spolu s jedlom na trénovanie útoku z úrovne 2 na "
+"úroveň 3)."
 
 #: ../../tribes/barbarians/felling_axe/conf:1
 msgid ""
@@ -982,6 +1021,9 @@ msgid ""
 "produced in the metalwork shop (but ceases to be produced by the building if "
 "it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Drevorubačská sekera je nástrojom drevorubača a slúži na rúbanie stromov. "
+"Vyrába sa v kovodielni (ale prestáva sa v nej vyrábať, ak je vylepšená na "
+"továreň na sekery alebo vojenský závod)."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -990,6 +1032,9 @@ msgid ""
 "several buildings: lime kiln, smelting works, axefactory, war mill, "
 "helmsmithy."
 msgstr ""
+"Barbari zvyčajne pridávajú do ohňa uhlie. Ťaží sa v uhoľných baniach alebo "
+"sa vyrába z kmeňov stromov v sídle uhliara. Míňa ho viacero budov: vápenka, "
+"taviareň, továreň na sekery, vojenský závod, vyhňa na helmy."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -998,6 +1043,10 @@ msgid ""
 "It is one of the basic tools produced at the metalwork shop, (but ceases to "
 "be produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Kladivo je potrebný nástroj. Potrebuje ho geológ, stavbár, kováč a kováč "
+"heliem. Uistite sa, že máte vždy nejaké v rezerve! Je jedným zo základných "
+"nástrojov a vyrába sa v kovodielni (ale prestáva sa v nej vyrábať, ak je "
+"vylepšená na továreň na sekery alebo vojenský závod)."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
@@ -1009,6 +1058,9 @@ msgid ""
 "in the metal works like all other tools (but it ceases to be produced by the "
 "building if the metal works is enhanced to an axefactory and war mill)."
 msgstr ""
+"Pekárska lopata je nástrojom pekára a každý pekár potrebuje svoju vlastnú. "
+"Vyrába sa v kovodielni ako všetky ostatné nástroje (ale prestáva sa v nej "
+"vyrábať, ak je vylepšená na továreň na sekery alebo vojenský závod)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1016,6 +1068,8 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Kosa je nástrojom farmárov. Vyrába sa v kovodielni (ale prestáva sa v nej "
+"vyrábať, ak je vylepšená na továreň na sekery alebo vojenský závod)."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -1031,12 +1085,18 @@ msgid ""
 "produced in a war mill and used -together with food - in a trainingscamp to "
 "train soldiers from attack level 4 to level 5."
 msgstr ""
+"Bojovnícka sekera je najnebezpečnejšou zbraňou barbarov. Len pár vojakov "
+"kedy dokázalo zaobchádzať s týmito obrovskými a silnými sekerami. Vyrába sa "
+"vo vojenskom závode a používa vo výcvikovom tábore - spolu s jedlom - na "
+"trénovanie útoku vojakov z úrovne 4 na úroveň 5."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of trunks in the wood hardener."
 msgstr ""
+"Toto ohňom spevnené drevo je tvrdé ako železo a potrebujú ho viaceré budovy. "
+"Vyrába sa z kmeňov stromov v lakovni dreva."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1045,6 +1105,10 @@ msgid ""
 "weapon. It is used (together with food) in the trainingscamp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"Toto je nebezpečná zbraň, ktorú dokážu barbari vyrobiť. Vyrába sa v továrni "
+"na sekery. Len trénovaní vojaci dokážu narábať s takouto zbraňou. Používa sa "
+"(spolu s jedlom) vo výcvikovom tábore na trénovanie útoku vojakov z úrovne 3 "
+"na úroveň 4."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -1052,6 +1116,9 @@ msgid ""
 "and used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 2 to healthpoints level 3."
 msgstr ""
+"Toto je najviac vylepšená barbarská zbroj. Vyrába sa vo vyhni na helmy a "
+"používa vo výcvikovom tábore - spolu s jedlom - na trénovanie bodov zdravia "
+"vojakov z úrovne 2 na úroveň 3."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1059,6 +1126,9 @@ msgid ""
 "metalwork shop (but ceases to be produced by the building if it is enhanced "
 "to an axefactory and war mill)."
 msgstr ""
+"Tento krompáč používajú kamenári a baníci. Vyrába sa v kovodielni (ale "
+"prestáva sa v nej vyrábať, ak je vylepšená na továreň na sekery alebo "
+"vojenský závod)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -1097,6 +1167,10 @@ msgid ""
 "burner's house in the production of coal. The wood hardener refines trunks "
 "by hardening them in the fire which gives blackwood."
 msgstr ""
+"Kmene stromov sú hlavným stavebným materiálom barbarov. Stromy rúbu "
+"drevorubači; lesníci sa starajú o zásobu lesov. Kmene sa tiež používajú v "
+"kovodielni na výrobu základných nástrojov a v uhliarni na výrobu uhlia. V "
+"lakovni dreva sa kmene spevňujú na ohni a vznikne z nich upravené drevo."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1158,22 +1232,22 @@ msgstr ""
 "Vylepšiť útok vojakov 4 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:26
+#: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Vylepšiť uhýbanie vojakov 0"
 
-#: ../../tribes/barbarians/battlearena/conf:27
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vylepšiť uhýbanie vojakov 0 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:28
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Vylepšiť uhýbanie vojakov 1"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
@@ -1242,6 +1316,8 @@ msgid ""
 "and the brewery. Also the lime kiln and the cattle farm need to be supplied "
 "with water."
 msgstr ""
+"Voda je základ života! Využíva sa v pekárni, mikropivovaroch a v pivovaroch. "
+"Zásobované vodou musia byť aj vápenky a kravíny."
 
 #: ../../tribes/barbarians/conf:141
 msgid "Weaver"
@@ -1272,7 +1348,7 @@ msgstr "Divá sviňa"
 
 #: ../../tribes/barbarians/conf:177
 msgid "Wood Hardener"
-msgstr "Stolárska dielňa"
+msgstr "Lakovňa dreva"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
@@ -1330,302 +1406,3 @@ msgid ""
 "and war mills. In trainingscamps, it is used - together with food- to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
-
-#~ msgid "Forester"
-#~ msgstr "Horár"
-
-#~ msgid "Stonegrinder"
-#~ msgstr "Kamennár"
-
-#~ msgid "Coalearth"
-#~ msgstr "Kamenné uhlie"
-
-#~ msgid "Grindstone"
-#~ msgstr "Cement"
-
-#~ msgid "Pressworks"
-#~ msgstr "Lisovňa"
-
-#~ msgid "Presser"
-#~ msgstr "Tlačiar"
-
-#~ msgid "Works at construction sites to create a new building."
-#~ msgstr "Pracuje na stavenisku, aby postavil novú budovu."
-
-#~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-#~ msgstr "Rybárske udice sú potrebné pre barbarských rybárov na chytanie rýb."
-
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Zbrane a nástroje sú vyrobené zo železa."
-
-#~ msgid ""
-#~ "The Axe is the basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with this basic weapon, but also the lumberjack is using the "
-#~ "same model."
-#~ msgstr ""
-#~ "Sekera je základnou zbraňou a nástrojom barbarov. Všetci mladí bojovníci sú "
-#~ "ozbrojení touto sekerou, ale rovnaký typ používajú aj drevorubači."
-
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "Skutočné jedlo, ktoré uspokojí všetky potreby baníkov."
-
-#~ msgid "An enhanced mask for barbarian warriors."
-#~ msgstr "Vylepšená maska pre barbarských bojovníkov."
-
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "Malé sústo, aby boli baníci silní a mohli pracovať."
-
-#~ msgid "An enhanced version of the helmet."
-#~ msgstr "Vylepšená verzia helmy."
-
-#~ msgid "Basic defence of a warrior."
-#~ msgstr "Základná obrana bojovníka."
-
-#~ msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-#~ msgstr "Látka je potrebná pre barbarské lode. Vyrába sa z ľanu."
-
-#~ msgid ""
-#~ "Fire-hardened wood, as hard as iron and cannot burn, used for military "
-#~ "buildings."
-#~ msgstr ""
-#~ "Drevo spevnené na ohni, tvrdé ako železo a nehoriace, používa sa na výrobu "
-#~ "vojenských budov."
-
-#~ msgid "Flax tiny"
-#~ msgstr "Maličká ľan"
-
-#~ msgid "Fishing rods are needed by barbarian fishers for fishing."
-#~ msgstr "Udice sú potrebné pre barbarských rybárov na lovenie rýb."
-
-#~ msgid "Flax is a beautiful flower, which is used for making cloth."
-#~ msgstr "Ľan je prekrásny kvet, ktorý sa používa na výrobu látky."
-
-#~ msgid "Flax ripe"
-#~ msgstr "Zrelá ľan"
-
-#~ msgid "Flax medium"
-#~ msgstr "Stredná ľan"
-
-#~ msgid "Flax small"
-#~ msgstr "Malá ľan"
-
-#~ msgid "Flax"
-#~ msgstr "Ľan"
-
-#~ msgid ""
-#~ "Gold is the most valuable of all metals; only very important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Zlato je najhodnotnejšie zo všetkých kovov; ozdobujú sa ním len veľmi "
-#~ "dôležité veci."
-
-#~ msgid "Goldstone"
-#~ msgstr "Zlatý nuget"
-
-#~ msgid "Harvest flax"
-#~ msgstr "Zberať ľan"
-
-#~ msgid "Helps to carry items at heavy used roads."
-#~ msgstr "Pomáha nosiť predmety na veľmi využívaných cestách."
-
-#~ msgid ""
-#~ "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-#~ "lunch for the miners and in the soldier trainingcamps to keep warriors "
-#~ "strong."
-#~ msgstr ""
-#~ "Mäso obsahuje veľa energie. Používa sa v hostincoch a v krčmách na prípravu "
-#~ "obeda pre baníkov a vo výcvikovom tábore vojakov, aby boli bojovníci silní."
-
-#~ msgid "Plant flax"
-#~ msgstr "Sadiť ľan"
-
-#~ msgid "A bit bigger, for the advanced miners. They will need a big morsel."
-#~ msgstr ""
-#~ "Trochu väčší pokrm, pre pokročilých baníkov. Potrebujú veľké množstvo."
-
-#~ msgid ""
-#~ "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-#~ msgstr "Okrem pita chleba a mäsa, ryby sú tiež potravinami barbarov."
-
-#~ msgid ""
-#~ "Only this beer is acceptable for the old warriors. Some say, the whole power "
-#~ "of the barbarians is in this ale."
-#~ msgstr ""
-#~ "Starí bojovníci uznávajú len toto pivo. Niektorí hovoria, že v tomto pive je "
-#~ "celá sila barbarov."
-
-#~ msgid "Raw Stones are the secondary build material of the barbarians."
-#~ msgstr "Nespracované kamene sú sekundárne stavebné materiály barbarov."
-
-#~ msgid ""
-#~ "Raw stone can be enhanced to grout which delivers solid, non burning build "
-#~ "material."
-#~ msgstr ""
-#~ "Nespracovaný kameň možno vylepšiť na maltu, ktorá dodáva pevný nehorľavý "
-#~ "stavebný materiál."
-
-#~ msgid "Trunks are the primary build material of the barbarians."
-#~ msgstr "Kmene stromov sú primárnym stavebným materiálom barbarov."
-
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Toto je žltý zlatý nuget."
-
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr ""
-#~ "Ako vytvoriť stravu, desiatu alebo prídel, keď nemáte žiadne kuchynské "
-#~ "nástroje?"
-
-#~ msgid ""
-#~ "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with it, but also the lumberjack is using the same model."
-#~ msgstr ""
-#~ "Sekera je základnou zbraňou a nástrojom barbarov. Vyzbrojení sú ňou všetci "
-#~ "mladí vojaci, ale ten istý model používajú aj drevorubači."
-
-#~ msgid ""
-#~ "The barbarian bakers are best in making this flat and tasty pitta bread."
-#~ msgstr ""
-#~ "Barbarskí pekári sú najlepší v pečení tohto plochého a chutného pita chleba."
-
-#~ msgid ""
-#~ "Some of your starting buildings didn't have enough room and \n"
-#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
-#~ "this map with a fair starting condition."
-#~ msgstr ""
-#~ "Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
-#~ "a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
-#~ "tejto mapy s férovými počiatočnými podmienkami."
-
-#~ msgid ""
-#~ "The fires of the barbarians are usually fed with wood, but sometimes, wood "
-#~ "just does not burn hot enough. Then, coal is used."
-#~ msgstr ""
-#~ "Do ohňov barbarov sa zvyčajne pridáva drevo, ale niekedy jednoducho drevo "
-#~ "nehorí dosť horúco. V takom prípade sa použije uhlie."
-
-#~ msgid ""
-#~ "The shovel is needed for proper handling of plants. Therefore the ferner and "
-#~ "the ranger use it. Build at the metal works."
-#~ msgstr ""
-#~ "Lopata je potrebná na správne zaobchádzanie s rastlinami. A tak ju používajú "
-#~ "papradinári a lesníci. Vyrába sa v kovodielni."
-
-#~ msgid ""
-#~ "The scythe is the tool of the farmers. It is produced in the metal works."
-#~ msgstr "Kosa je nástrojom farmárov. Vyrába sa v kovodielni."
-
-#~ msgid ""
-#~ "The peel is a tool of the baker and each baker needs his own. It is produced "
-#~ "in the metal works like all other tools."
-#~ msgstr ""
-#~ "Pekárska lopata je nástrojom pekára a každý pekár potrebuje svoju vlastnú. "
-#~ "Vyrába sa v kovodielni ako všetky iné nástroje."
-
-#~ msgid ""
-#~ "This pick is used by the stonemasons and the miners. It is produced in the "
-#~ "metal works."
-#~ msgstr "Krompáč používajú kamenári a baníci. Vyrába sa v kovodielni."
-
-#~ msgid "This is the red iron ore."
-#~ msgstr "Toto je krveľ."
-
-#~ msgid ""
-#~ "The warriors axe is the most dangerous of all weapons. Only a few warriors "
-#~ "ever were able to handle those huge and powerful axes. Build at the axe "
-#~ "factory."
-#~ msgstr ""
-#~ "Bojovnícka sekera je najnebezpečnejšia zo všetkých zbraní. Len pár "
-#~ "bojovníkov v histórii vedelo narábať s týmito obrovskými a silnými sekerami. "
-#~ "Vyrábajú sa v továrni na sekery."
-
-#~ msgid "Grows flax and thatch reed."
-#~ msgstr "Pestuje ľan a tŕstie."
-
-#~ msgid ""
-#~ "The bronze axe is considered a hard to handle weapon: it makes a lot of "
-#~ "damage, but it's durability is not the best. Only skilled warriors can use "
-#~ "this. Produced in the axe factory."
-#~ msgstr ""
-#~ "Bronzová sekera sa považuje za zbraň ťažkú na zvládnutie: spôsobí veľa "
-#~ "škody, ale jej životnosť nie je najlepšia. Používajú ju len skúsení "
-#~ "bojovníci. Vyrába sa v továrni na sekery."
-
-#~ msgid ""
-#~ "This is the second most dangerous weapon the barbarians are able to produce. "
-#~ "Only trained warriors are able to yield such a weapon. It is produced in the "
-#~ "axe factory."
-#~ msgstr ""
-#~ "Toto je druhá najnebezpečnejšia zbraň, ktorú sú barbari schopní vyrobiť. Len "
-#~ "vycvičení bojovníci dokážu narábať s takou zbraňou. Vyrába sa v továrni na "
-#~ "sekery."
-
-#~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
-#~ msgstr "Trstená krytina sa používa na tesnenie striech proti vode."
-
-#~ msgid ""
-#~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
-#~ "the blacksmiths and the helmsmiths. Make sure you always got some in "
-#~ "reserve! Build at the metal works."
-#~ msgstr ""
-#~ "Kladivo je nevyhnutný nástroj. Potrebujú ho geológovia, pracovníci, kováči a "
-#~ "kováči heliem. Uistite sa, že máte vždy nejaké v rezerve! Vyrába sa v "
-#~ "kovodielni."
-
-#~ msgid ""
-#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
-#~ "Produced in the metal works."
-#~ msgstr ""
-#~ "Kliešte na uhlie sú nástrojom zlievača, ktorý pracuje v zlievarni. Vyrába sa "
-#~ "v kovodielni."
-
-#~ msgid ""
-#~ "This spear is light enough to be thrown, but heavy enough to kill any animal "
-#~ "in one blow. It is only used by the hunters. Produced in the metal works."
-#~ msgstr ""
-#~ "Tento oštep je dosť ľahký, aby sa dal vrhnúť, ale aj dosť ťažký, aby zabil "
-#~ "zviera na jeden úder. Používajú ho len lovci. Vyrába sa v kovodielni."
-
-#~ msgid ""
-#~ "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
-#~ "produced in the axe factory."
-#~ msgstr ""
-#~ "Bojovníci so základnými znalosťami o boji dostávajú širokú sekeru. Vyrába sa "
-#~ "v továrni na sekery."
-
-#~ msgid ""
-#~ "Water is the most essential essence for life! This water is used in many "
-#~ "places, be it to make bread or beer or to produce grout."
-#~ msgstr ""
-#~ "Voda je najpodstatnejším základom na život! Voda má mnohé využitia, napr. na "
-#~ "výrobu chleba, piva alebo malty."
-
-#~ msgid ""
-#~ "Young warriors need some encouragement. This drink makes a man fearless and "
-#~ "strong."
-#~ msgstr ""
-#~ "Mladí bojovníci potrebujú nejaké povzbudenie. Tento nápoj spôsobí, že je muž "
-#~ "nebojácny a silný."
-
-#~ msgid ""
-#~ "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
-#~ "be made of this wheat."
-#~ msgstr ""
-#~ "Pšenica je nevyhnutná na prežitie. Možno z nej vyrobiť chutný pita chlieb "
-#~ "alebo silné pivá."
-
-#~ msgid ""
-#~ "Real warriors consider the sharp axe the first real weapon, after being able "
-#~ "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
-#~ "than the ordinary axe. Build in the axe factory."
-#~ msgstr ""
-#~ "Naozajstní bojovníci považujú ostrú sekeru za prvú skutočnú zbraň. Keď už "
-#~ "zvládli obyčajnú sekeru, chopili sa tejto zbrane. Je ťažšia a ostrejšia ako "
-#~ "obyčajná sekera. Vyrába sa v továrni na sekery."
-
-#~ msgid "The felling axe is the tool of the lumberjack to take down trees."
-#~ msgstr ""
-#~ "Drevorubačská sekera je nástroj, ktorý používa drevorubač na stínanie "
-#~ "stromov."
-
-#~ msgid "This is gold ore mined from deep within the mountains."
-#~ msgstr "Toto je zlatá ruda vyťažená hlboko v horách."

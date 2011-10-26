@@ -41,3 +41,7 @@ hotspot=49 49
 pics=oremine_w_??.png
 hotspot=49 49
 fps=10
+
+[empty]
+pics=oremine_e_??.png
+hotspot=49 49

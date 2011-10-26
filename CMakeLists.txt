@@ -224,7 +224,7 @@ if (DEFINED MSVC)
   add_definitions( -Dmkdir=_mkdir )
   add_definitions( -DREDIRECT_OUTPUT )
 
-  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBARIES
+  # Automatic linking for boost requires setting lib dir and clearing Boost_LIBRARIES
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
   set(Boost_LIBRARIES "")
   include_directories(${Boost_INCLUDE_DIR})
@@ -259,6 +259,12 @@ endif (DEFINED WL_3RDPARTY_DIR)
 find_package(GGZ_Core REQUIRED)
 include_directories(${GGZ_CORE_INCLUDE_DIR})
 add_definitions("-DUSE_GGZ")
+
+#on freeBSD this must be explicitely linked
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+  find_library(EXECINFO_LIBRARY NAMES execinfo)
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
 
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path

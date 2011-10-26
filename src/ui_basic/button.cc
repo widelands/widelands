@@ -315,9 +315,9 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
-	set_think(false);
 	if (m_pressed) {
 		m_pressed = false;
+		set_think(false);
 		grab_mouse(false);
 		update();
 		if (m_highlighted && m_enabled) {

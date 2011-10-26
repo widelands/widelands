@@ -12,6 +12,7 @@ build_materials_done = false
 cattle_farm_done = false
 
 function send_msg(t)
+   t.h = 400
    plr:message_box(t.title, t.body, t)
 end
 
@@ -182,10 +183,10 @@ end
 function build_materials_thread()
    local plr = wl.Game().players[1]
 
-   -- Wait for a barrier or a sentry to be build
+   -- Wait for a barrier or sentry to be build
    while true do
-      local rv = plr:get_buildings{"sentry", "stronghold"}
-      if #rv.sentry + #rv.stronghold > 0 then
+      local rv = plr:get_buildings{"sentry", "barrier"}
+      if #rv.sentry + #rv.barrier > 0 then
          break
       end
       sleep(5421)

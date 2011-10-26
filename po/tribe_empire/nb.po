@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2011-01-11 21:22+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:38+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:44+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -1353,132 +1353,3 @@ msgstr "Arbeider dypt i gruvene for å hente ut kull, jern eller gull."
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
 msgstr "Jobber på sagbruket."
-
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Våpen og redskaper er laget av jern."
-
-#~ msgid ""
-#~ "Gold is the most valuable of all metals; only very important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Gull er det mest verdifulle av alle metaller, og brukes kun til meget "
-#~ "viktige ting."
-
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "En liten matbit for å holde gruvearbeiderne sterke og i arbeid."
-
-#~ msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-#~ msgstr "Ved siden av brød og kjøtt, er fisk en viktig matkilde for Imperiet."
-
-#~ msgid "Stones and wood are the basic build material of the Empire."
-#~ msgstr "Stein og tre er Imperiets grunnleggende byggematerialer."
-
-#~ msgid "The backers of the Empire make really tasty bread."
-#~ msgstr "Imperiets bakere lager virkelig godt brød."
-
-#~ msgid ""
-#~ "Marble columns present the high culture of the Empire, so they are needed "
-#~ "for nearly every bigger building."
-#~ msgstr ""
-#~ "Marmorsøyler symboliserer Imperiets høykultur, så de brukes til nesten hver "
-#~ "større bygning."
-
-#~ msgid "Trunks are one important build material of the Empire."
-#~ msgstr "Trestammer er et av Imperiets viktigste byggematerialer."
-
-#~ msgid "These grapes are the basic for tasty wine."
-#~ msgstr "Druer er grunnlaget for vinproduksjon."
-
-#~ msgid "This is the red iron ore."
-#~ msgstr "Dette er den røde jernmalmen."
-
-#~ msgid "This is an advanced lance, with steel top."
-#~ msgstr "En avansert lanse, med stålspiss."
-
-#~ msgid "Basic defence of a warrior"
-#~ msgstr "Grunnleggende forsvar for krigere."
-
-#~ msgid "Basic armour for Empire soldiers."
-#~ msgstr "Basisrustning for Imperiets soldater."
-
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "Et skikkelig måltid som gir gruvearbeiderne alt de trenger."
-
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr ""
-#~ "Hvordan kan man lage et måltid, matbit eller rasjon, hvis man ikke har "
-#~ "kjøkkenredskaper?"
-
-#~ msgid ""
-#~ "Marble is the beautiful stone, which is cutted out of the mountains and "
-#~ "which is used for beautiful buildings and columns."
-#~ msgstr ""
-#~ "Marmor er vakker stein, som blir hugget ut av fjellene og brukt til å "
-#~ "konstruere vakre bygninger og søyler."
-
-#~ msgid ""
-#~ "This is a wooden lance, which is the basic of the Empires military system."
-#~ msgstr "Dette er en trelanse, som danner grunnlaget for Imperiets militær."
-
-#~ msgid ""
-#~ "This basket is needed by the winegrower, for harvesting the grapes. It is "
-#~ "produced by the toolsmith."
-#~ msgstr ""
-#~ "Kurven blir brukt av vindyrkeren, for å høste inn druene. De blir laget av "
-#~ "verktøysmeden."
-
-#~ msgid "This is a good warrior lance, with a steel-top and a little blade."
-#~ msgstr "En god lanse i strid, med ståltupp og et lite blad."
-
-#~ msgid "The strongest armour existing for the Empire soldiers."
-#~ msgstr "Den mest solide rustningen Imperiets soldater har."
-
-#~ msgid ""
-#~ "This is the best and sharpest weapon, the Empire weaponsmith creates for "
-#~ "their warriors."
-#~ msgstr ""
-#~ "Det beste og skarpeste våpnet de Imperiske våpensmedene smir til soldatene."
-
-#~ msgid ""
-#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
-#~ "They are produced by the toolsmith."
-#~ msgstr ""
-#~ "Ildtangen blir brukt av smelteren, som jobber i smelteverket. De blir "
-#~ "produsert av verktøysmeden."
-
-#~ msgid ""
-#~ "The fires of the Empire are usually fed with wood, but sometimes, wood just "
-#~ "does not burn hot enough. Then, coal is used."
-#~ msgstr ""
-#~ "Imperiet bruker som oftest tre som brensel, men noen ganger gir ikke tre nok "
-#~ "varme. Da bruker man kull."
-
-#~ msgid "This is a medium armour for Empire soldiers."
-#~ msgstr "Dette er en middels solid rustning for Imperiets soldater."
-
-#~ msgid "The bakers of the Empire make really tasty bread."
-#~ msgstr "Imperiets bakere lager virkelig godt brød."
-
-#~ msgid "This wooden lance has an iron spike."
-#~ msgstr "Denne trelansen har en jernspiss."
-
-#~ msgid ""
-#~ "This wine gives enough power, to mine marble or gold. And furthermore, our "
-#~ "soldiers like it, too."
-#~ msgstr ""
-#~ "Denne vinen gir nok styrke til gruvearbeiderne til å hugge ut marmor eller "
-#~ "gull. Soldatene liker den også."
-
-#~ msgid ""
-#~ "Water is the most essential essence for life! This water is used in many "
-#~ "places, be it to make bread or beer."
-#~ msgstr ""
-#~ "Vann er den viktigste forutsetningen for liv! Vann blir brukt mange steder, "
-#~ "som til å lage brød eller øl."
-
-#~ msgid ""
-#~ "Wheat is essential for surviving. Delicious bread and ales can be made of "
-#~ "this wheat."
-#~ msgstr ""
-#~ "Hvete er essensielt for å kunne overleve. Etter innhøstningen kan hveten "
-#~ "brukes til å lage deilig brød eller brygge øl."

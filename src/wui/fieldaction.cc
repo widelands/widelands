@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -356,13 +356,13 @@ void FieldActionWindow::add_buttons_auto()
 
 	if (not igbase or igbase->can_see(owner)) {
 		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_node);
+		bool const can_act = igbase ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
 		buildbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
-			bool const can_act = igbase ? igbase->can_act(owner) : true;
 			if (can_act) {
 				add_button
 					(buildbox, "build_road",
@@ -414,7 +414,7 @@ void FieldActionWindow::add_buttons_auto()
 					 &FieldActionWindow::act_buildflag,
 					 _("Put a flag"));
 
-			if (dynamic_cast<Widelands::Road const *>(imm))
+			if (can_act && dynamic_cast<Widelands::Road const *>(imm))
 				add_button
 					(buildbox, "destroy_road",
 					 pic_remroad,
@@ -466,9 +466,10 @@ void FieldActionWindow::add_buttons_auto()
 
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
-	if (militarybox) {
-		if (militarybox->allowed_change())
+	if (militarybox)
 	{
+		if (militarybox->allowed_change())
+		{
 			add_tab
 				("military", pic_tab_military,
 				 militarybox, _("Military settings"));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,60 @@
  *
  */
 
+#include "logic/player.h"
+
 #include "chat.h"
-#include "logic/editor_game_base.h"
 
 using namespace Widelands;
 
 std::string ChatMessage::toPrintable() const
 {
 	std::string message = "<p font-color=#33ff33 font-size=9>";
+
+	// Escape richtext characters
+	// The goal of this code is two-fold:
+	//  1. Assuming an honest game host, we want to prevent the ability of
+	//     clients to use richtext.
+	//  2. Assuming a malicious host or meta server, we want to reduce the
+	//     likelihood that a bug in the richtext renderer can be exploited,
+	//     by restricting the set of allowed richtext commands.
+	//     Most notably, images are not allowed in richtext at all.
+	//
+	// Note that we do want host and meta server to send some richtext code,
+	// as the ability to send formatted commands is nice for the usability
+	// of meta server and dedicated servers, so we're treading a bit of a
+	// fine line here.
+	//
+	//TODO support &lt; in the richtext renderer, so that < can be rendered
+	// correctly
+	std::string sanitized;
+	for (std::string::size_type pos = 0; pos < msg.size(); ++pos) {
+		if (msg[pos] == '<') {
+			if (playern < 0) {
+				static const std::string good1 = "</p><p";
+				static const std::string good2 = "<br>";
+				if (!msg.compare(pos, good1.size(), good1)) {
+					std::string::size_type nextclose = msg.find('>', pos + good1.size());
+					if
+						(nextclose != std::string::npos &&
+						(nextclose == pos + good1.size() || msg[pos + good1.size()] == ' '))
+					{
+						sanitized += good1;
+						pos += good1.size() - 1;
+						continue;
+					}
+				} else if (!msg.compare(pos, good2.size(), good2)) {
+					sanitized += good2;
+					pos += good2.size() - 1;
+					continue;
+				}
+			}
+
+			sanitized += '{';
+		} else {
+			sanitized += msg[pos];
+		}
+	}
 
 	// time calculation
 	char ts[13];
@@ -35,14 +81,14 @@ std::string ChatMessage::toPrintable() const
 	message += color();
 
 	if (recipient.size() && sender.size()) {
-	// Personal message handling
-		if (msg.compare(0, 3, "/me")) {
+		// Personal message handling
+		if (sanitized.compare(0, 3, "/me")) {
 			message += " font-decoration=underline>";
 			message += sender;
 			message += " @ ";
 			message += recipient;
 			message += ":</p><p font-size=14 font-face=FreeSerif> ";
-			message += msg;
+			message += sanitized;
 		} else {
 			message += ">@";
 			message += recipient;
@@ -51,25 +97,25 @@ std::string ChatMessage::toPrintable() const
 			message += color();
 			message += " font-style=italic> ";
 			message += sender;
-			message += msg.substr(3);
+			message += sanitized.substr(3);
 		}
 	} else {
-	// Normal messages handling
-		if (not msg.compare(0, 3, "/me")) {
+		// Normal messages handling
+		if (not sanitized.compare(0, 3, "/me")) {
 			message += " font-style=italic>-> ";
 			if (sender.size())
 				message += sender;
 			else
 				message += "***";
-			message += msg.substr(3);
+			message += sanitized.substr(3);
 		} else if (sender.size()) {
 			message += " font-decoration=underline>";
 			message += sender;
 			message += ":</p><p font-size=14 font-face=FreeSerif> ";
-			message += msg;
+			message += sanitized;
 		} else {
 			message += " font-weight=bold>*** ";
-			message += msg;
+			message += sanitized;
 		}
 	}
 
@@ -85,9 +131,9 @@ std::string ChatMessage::toPlainString() const
 std::string ChatMessage::color() const
 {
 	if ((playern >= 0) && playern < MAX_PLAYERS) {
-		const uint8_t * cols = g_playercolors[playern];
+		const RGBColor & clr = Player::Colors[playern];
 		char buf[sizeof("ffffff")];
-		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", cols[9], cols[10], cols[11]);
+		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r(), clr.g(), clr.b());
 		return buf;
 	}
 	return "999999";

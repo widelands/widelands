@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,6 +105,9 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 		}
 	}
 	log(" done\n");
+
+	// For compatibility hacks only
+	mol->load_finish_game(m_game);
 
 	// Only read and use interactive player data, if we load a singleplayer game.
 	// In multiplayer games every client needs to create a new interactive

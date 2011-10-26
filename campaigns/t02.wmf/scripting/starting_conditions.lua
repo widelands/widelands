@@ -9,7 +9,7 @@ plr:allow_buildings{
    "quarry", 
    "rangers_hut", 
    "sentry",
-   "stronghold"
+   "barrier"
 }
 
 -- Place hq and fill it with wares

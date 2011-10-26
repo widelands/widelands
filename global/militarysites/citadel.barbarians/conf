@@ -6,4 +6,6 @@ buildable=no
 
 [idle]
 pics=../../../tribes/barbarians/citadel/citadel_i_??.png
-hotspot=81 90
+hotspot=102 102
+playercolor=true
+fps=10

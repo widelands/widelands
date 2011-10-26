@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-03-12 22:57+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-06-19 16:31+0000\n"
+"Last-Translator: Dios <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:38+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:44+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -36,19 +36,19 @@ msgstr ""
 
 #: ../../tribes/empire/conf:209
 msgid "Arena"
-msgstr ""
+msgstr "闘技場"
 
 #: ../../tribes/empire/conf:57
 msgid "Armour"
-msgstr ""
+msgstr "鎧"
 
 #: ../../tribes/empire/conf:180
 msgid "Armour Smithy"
-msgstr ""
+msgstr "鎧鍛冶"
 
 #: ../../tribes/empire/conf:109
 msgid "Armoursmith"
-msgstr ""
+msgstr "鎧鍛冶屋"
 
 #: ../../tribes/empire/conf:33
 msgid "Ashes"
@@ -64,20 +64,20 @@ msgstr "パン職人"
 
 #: ../../tribes/empire/conf:171
 msgid "Bakery"
-msgstr ""
+msgstr "パン屋"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "労働者のパンを焼く。"
 
 #: ../../tribes/empire/conf:199
 msgid "Barracks"
-msgstr ""
+msgstr "兵舎。"
 
 #: ../../tribes/empire/conf:148
 #: ../../tribes/empire/conf:200
 msgid "Barrier"
-msgstr ""
+msgstr "関所"
 
 #: ../../tribes/empire/armour/conf:1
 msgid ""
@@ -114,11 +114,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:111
 msgid "Brewer"
-msgstr ""
+msgstr "醸造職人"
 
 #: ../../tribes/empire/conf:172
 msgid "Brewery"
-msgstr ""
+msgstr "醸造所"
 
 #: ../../tribes/empire/conf:112
 msgid "Builder"
@@ -134,11 +134,11 @@ msgstr "石炭を燃やす"
 
 #: ../../tribes/empire/conf:114
 msgid "Carpenter"
-msgstr ""
+msgstr "大工"
 
 #: ../../tribes/empire/conf:102
 msgid "Carrier"
-msgstr ""
+msgstr "キャリア"
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
@@ -152,7 +152,7 @@ msgstr "城"
 #: ../../tribes/empire/conf:214
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr ""
+msgstr "城下町"
 
 #: ../../tribes/empire/conf:63
 msgid "Chain-Armour"
@@ -160,15 +160,15 @@ msgstr ""
 
 #: ../../tribes/empire/conf:177
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "炭焼き小屋"
 
 #: ../../tribes/empire/conf:149
 msgid "Citadel"
-msgstr "根城"
+msgstr "城塞"
 
 #: ../../tribes/empire/conf:64
 msgid "Cloth"
-msgstr ""
+msgstr "生地"
 
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
@@ -214,11 +214,11 @@ msgstr ""
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "守って攻めろ！"
 
 #: ../../tribes/empire/conf:39
 msgid "Destroyed building"
-msgstr ""
+msgstr "破壊された建物"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -250,7 +250,7 @@ msgstr "農場"
 
 #: ../../tribes/empire/conf:115
 msgid "Farmer"
-msgstr ""
+msgstr "農夫"
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
@@ -296,7 +296,7 @@ msgstr "漁師"
 
 #: ../../tribes/empire/conf:164
 msgid "Fisher's House"
-msgstr ""
+msgstr "漁師の家"
 
 #: ../../tribes/empire/conf:68
 msgid "Fishing Rod"
@@ -319,20 +319,20 @@ msgstr ""
 
 #: ../../tribes/empire/conf:117
 msgid "Forester"
-msgstr ""
+msgstr "森林官"
 
 #: ../../tribes/empire/conf:163
 msgid "Forester's House"
-msgstr ""
+msgstr "森林管理所"
 
 #: ../../tribes/empire/conf:151
 #: ../../tribes/empire/conf:204
 msgid "Fortress"
-msgstr ""
+msgstr "要塞"
 
 #: ../../tribes/empire/conf:118
 msgid "Geologist"
-msgstr ""
+msgstr "地質学者"
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Gets fish out of the sea."
@@ -344,7 +344,7 @@ msgstr "金"
 
 #: ../../tribes/empire/conf:194
 msgid "Gold Mine"
-msgstr "金鉱"
+msgstr "金鉱山"
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""

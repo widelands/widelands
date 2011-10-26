@@ -79,8 +79,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 		 i < general_statistics_size;
 		 ++i)
 	{
-		const uint8_t * colors = g_playercolors[i];
-		const RGBColor color(colors[9], colors[10], colors[11]);
+		const RGBColor & color = Player::Colors[i];
 		m_plot.register_plot_data
 			(i * m_ndatasets +  0, &genstats[i].land_size,
 			 color);
@@ -140,6 +139,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 		cb.set_size(button_size, 25);
 		cb.set_id(p);
 		cb.set_state(1);
+		cb.set_tooltip(player->get_name().c_str());
 		cb.changedtoid.set(this, &General_Statistics_Menu::cb_changed_to);
 		m_cbs[p - 1] = &cb;
 		pos.x += button_size + spacing;

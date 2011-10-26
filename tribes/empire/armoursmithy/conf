@@ -65,14 +65,21 @@ call=produce_plate_armour
 sleep=20000
 return=skipped
 
+[unoccupied]
+pics=armory_u_??.png  # ???
+hotspot=50 62
+
 [idle]
-pics=i_??.png  # ???
-hotspot=64 54
+pics=armory_i_??.png  # ???
+hotspot=50 62
+playercolor=true
 
 [build]
-pics=b_??.png  # ???
-hotspot=64 54
+pics=armory_b_??.png  # ???
+hotspot=50 62
 
 [working]
-pics=w_??.png  # ???
-hotspot=64 54
+pics=armory_w_??.png  # ???
+hotspot=50 62
+playercolor=true
+fps=5

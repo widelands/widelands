@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-06-06 20:58+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-21 14:17+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:38+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:44+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
@@ -23,6 +23,9 @@ msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
+"En större tugga än ransonen att ge gruvarbetarna i de djupa gruvorna. Den "
+"produceras i ett värdshus eller ett stort värdshus från fisk/kött, pitta-"
+"bröd, och öl."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -30,12 +33,18 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
+"En hjälm är ett basalt verktyg för att skydda krigare. Den produceras i "
+"hjälmsmedjan och används i träningslägret - tillsammans med mat - till att "
+"träna soldater från HP nivå 0 till 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Ett mål framställs av pitta-bröd, starköl, och fisk/kött i ett stort "
+"värdshus. Den här rika måltiden är precis vad gruvarna i en djupare gruva "
+"behöver."
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -43,6 +52,10 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
+"En liten tugga för att hålla gruvarbetare starka och arbetsföra. Även "
+"spejaren äter ransoner på sina spaningsturer. Ransoner framställs i en "
+"taverna, ett värdshus, eller ett stort värdshus från fisk eller kött och "
+"pitta-bröd."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -50,6 +63,9 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"En krigshjälm är förbättrad utrustning för barbarkrigare. Den produceras i "
+"en hjälmsmedja och används i ett träningsläger - tillsammans med mat - till "
+"att träna soldater från HP nivå 1 till 2."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -105,6 +121,8 @@ msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce "
 "snacks."
 msgstr ""
+"Öl framställs i mikrobryggerier som används i värdshus och stora värdshus "
+"för att framställa munsbitar."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -112,6 +130,9 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
+"Förutom pitta-bröd och kött är också fisk näring för barbarerna. De används "
+"i tavernorna, värdshusen, och de stora värdshusen och i "
+"träningsanläggningarna (träningsläger och kamparena)."
 
 #: ../../tribes/barbarians/conf:183
 msgid "Big Inn"
@@ -206,7 +227,7 @@ msgstr "Tyg"
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
-msgstr ""
+msgstr "Textil behövs till barbarernas skepp. Det produceras från halmstrån."
 
 #: ../../tribes/barbarians/conf:76
 msgid "Coal"
@@ -278,7 +299,7 @@ msgstr "Bonde"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Felling Axe"
-msgstr ""
+msgstr "Avverkningsyxa"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
@@ -322,6 +343,9 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
+"Eldtänger är verktyg för smältaren, som arbetar i smälteriet. Produceras i "
+"metallverken (men slutar produceras i byggnaden om den uppgraderas till en "
+"yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fish"
@@ -345,6 +369,9 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Metspön behövs av barbarfiskarna för deras fiske. Det är en av basverktygen "
+"som produceras i en metallverksverkstad (men slutar produceras i byggnaden "
+"om den uppgraderas till en yxfabrik eller krigskvarn)."
 
 #: ../../tribes/barbarians/conf:159
 #: ../../tribes/barbarians/conf:211
@@ -377,7 +404,7 @@ msgstr "Guldgruva"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Gold Ore"
-msgstr ""
+msgstr "Guldmalm"
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
@@ -386,6 +413,10 @@ msgid ""
 "used as a precious building material and to produce different axes (in the "
 "war mill) and different armours (in the helmsmithy)."
 msgstr ""
+"Guld är den mest värdefulla metallen; bara väldigt viktiga saker pyntas med "
+"den. Den framställs ur guldmalm i ett smälteri. Den används som ett dyrbart "
+"byggnadsmaterial och för att producera olika yxor (i krigskvarnen) och olika "
+"rustningar (i hjälmsmedjan)."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -393,6 +424,9 @@ msgid ""
 "gold, which is used as a precious building material and to produce weapons "
 "and armours."
 msgstr ""
+"Guldmalm utvinns i en guldgruva. Smält i ett smälteri blir det guld, som "
+"används som ett dyrbart byggnadsmaterial och för att framställa vapen och "
+"rustningar."
 
 #: ../../tribes/barbarians/conf:195
 msgid "Granite Mine"
@@ -404,7 +438,7 @@ msgstr "Murbruk"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Odlar halmstrå."
 
 #: ../../tribes/barbarians/conf:150
 msgid "Guardhall"
@@ -450,7 +484,7 @@ msgstr "Hjälmsmedja"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Hjälper till att bära saker på tungt trafikerade vägar."
 
 #: ../../tribes/barbarians/conf:152
 msgid "High Tower"
@@ -462,6 +496,10 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Hur kan man skapa en måltid, en munsbit eller ranson, om det inte finns "
+"några köksredskap? Se till att ha ett metallverk för att producera detta "
+"basverktyg (tillverkningen upphör i byggnaden om den uppgraderas till en "
+"yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/conf:132
 msgid "Hunter"
@@ -501,12 +539,17 @@ msgid ""
 "produce weapons and tools in the metalwork shop, axefactory, war mill and in "
 "the helmsmithy."
 msgstr ""
+"Järn framställs ur järnmalmer i smälteriet. Det används för att producera "
+"vapen och verktyg i metallverkverkstaden, yxfabriken, krigskvarnen, och i "
+"hjämsmedjan."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
+"Hjärnmalm utvinns i järngruvor. De levererar hjärn när de smälts i ett "
+"smälteri."
 
 #: ../../tribes/barbarians/conf:89
 msgid "Kitchen Tools"
@@ -559,6 +602,10 @@ msgid ""
 "miners. It is also consumed in the training sites (trainingscamp and battle "
 "arena)."
 msgstr ""
+"Kött innehåller mycket energi. Det framställs av jägarna och används i "
+"tavernorna, värdshusen och de stora värdshusen för att tillreda ransoner, "
+"munsbitar och mål för gruvarbetarna. Det används också i "
+"träningsanläggningarna (träningsläger och kamparena)."
 
 #: ../../tribes/barbarians/conf:190
 msgid "Metalwork Shop"
@@ -574,7 +621,7 @@ msgstr "Gruvarbetare"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
-msgstr ""
+msgstr "Inte tillräckligt med plats"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -583,6 +630,9 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
+"Bara detta öl godkänns av krigarna i kamparenan. Vissa menar att barbarernas "
+"hela kraft stammar ur ölet. Det hjälper till med att träna soldaternas "
+"undviksnivå från 0 till 1 och 2."
 
 #: ../../tribes/barbarians/conf:160
 msgid "Outpost"
@@ -644,7 +694,7 @@ msgstr "Producera bronsyxa"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
-msgstr ""
+msgstr "Producera avverkningsyxa"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
@@ -759,12 +809,16 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"Råa stenar är ett grundläggande byggnadsmaterial hos barbarerna. Det "
+"produceras i stenbrott och granitgruvor."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
+"Rå sten kan behandlas till murbruk som ger ett solitt, obrännbart "
+"byggnadsmaterial. Murbruk produceras i en kalkbränningsugn."
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
@@ -853,7 +907,7 @@ msgstr "Skarpyxa"
 msgid "Shovel"
 msgstr "Spade"
 
-#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
 msgstr "Sov"
@@ -900,6 +954,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
+"Några av dina startbyggnader hade inte tillräckligt med plats och \n"
+"byggdes inte. Du har en nackdel p.g.a detta; fundera över att starta om \n"
+"kartan med rättvisa startförhållanden."
 
 #: ../../tribes/barbarians/conf:139
 msgid "Stonemason"
@@ -926,12 +983,14 @@ msgid ""
 "Thatch reed is produced in a fernery and used to make the roofs of buildings "
 "waterproof."
 msgstr ""
+"Halmstrå produceras i ett bräkneri och används för att göra tak vattentäta."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
 "The Axe is a basic weapon for the barbarians. All young soldiers are "
 "equipped with it."
 msgstr ""
+"Yxan är ett basvapen för barbarerna. Alla unga soldater utrustas med den."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -954,6 +1013,11 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
+"Barbarbagarna är bäst på att framställa detta platta och välsmakande pitta-"
+"bröd. Det framställs ur vete och vatten efter ett hemligt recept. Pitta-bröd "
+"används i tavernor, värdshus och stora värdshus för att tillreda ransoner, "
+"munsbitar och mål. Det används också i träningsanläggningar (trängsläger och "
+"kamparena)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -961,6 +1025,9 @@ msgid ""
 "the trainingscamp - together with food- to train warriors with a fundamental "
 "fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"Bredyxan produceras i yxfabriken och krigskvarnen. Den används i "
+"träningslägret - tillsammans med mat - till att träna krigare till att uppnå "
+"en grundläggande stridskunskap (från attacknivå 1 till 2)."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -968,6 +1035,9 @@ msgid ""
 "can use this. It is produced in the war mill and used in the trainingscamp "
 "(trains -together with food - from attack level 2 to level 3)."
 msgstr ""
+"Bronsyxan anses vara ett svårhanterligt vapen. Bara skickliga krigare kan "
+"använda den. Den produceras i krigskvarnen och används i träningslägret "
+"(tränar - tillsammans med mat - från attacknivå 2 till 3)."
 
 #: ../../tribes/barbarians/felling_axe/conf:1
 msgid ""
@@ -975,6 +1045,9 @@ msgid ""
 "produced in the metalwork shop (but ceases to be produced by the building if "
 "it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Avverkningsyxan är skogshuggarens verktyg för att fälla trän. Den tillverkas "
+"i metallverkverkstaden (tillverkningen upphör i byggnaden om den uppgraderas "
+"till en yxfabrik eller krigskvarn)."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -983,6 +1056,9 @@ msgid ""
 "several buildings: lime kiln, smelting works, axefactory, war mill, "
 "helmsmithy."
 msgstr ""
+"Barbarernas eldar matas oftast med kol. Det framställs i kolgruvor eller "
+"från stammar i en kolares hus. Används av flera byggnader: kalkbrännugn, "
+"smälteri, yxfabrik, krigskvarn, hjälmsmedja."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -991,6 +1067,10 @@ msgid ""
 "It is one of the basic tools produced at the metalwork shop, (but ceases to "
 "be produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Hammaren är ett livsviktigt verktyg. Det behövs av geologen, byggaren, "
+"svartsmeden och hjälmsmeden. Se till att alltid ha några i reserv! Det är "
+"ett av basverktygen som tillverkas i metallverkverkstaden (tillverkningen "
+"upphör i byggnaden om den uppgraderas till yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
@@ -1002,6 +1082,9 @@ msgid ""
 "in the metal works like all other tools (but it ceases to be produced by the "
 "building if the metal works is enhanced to an axefactory and war mill)."
 msgstr ""
+"Skrapan är ett bageriverktyg och varje bagare behöver sin egna. Den "
+"tillverkas i metallverk som alla andra verktyg (tillverkningen upphör i "
+"byggnaden om metallverket uppgraderas till en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1009,6 +1092,8 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Lien är bondens verktyg. Den produceras i metallverkverkstaden (men slutar "
+"produceras i byggnaden om den uppgraderas till en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -1016,6 +1101,9 @@ msgid ""
 "the ranger use it. Produced at the metalwork shop (but ceases to be produced "
 "by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Spaden behövs för korrekt plantvård. Därför använder bräknaren och "
+"skogsvaktaren den. Tillverkas i metallverkverkstaden (tillverkningen upphör "
+"i byggnaden om den uppgraderas till en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -1024,12 +1112,18 @@ msgid ""
 "produced in a war mill and used -together with food - in a trainingscamp to "
 "train soldiers from attack level 4 to level 5."
 msgstr ""
+"Krigarens yxa är det farligaste av alla barbarers vapen. Bara några få "
+"krigare lyckas någonsin hantera dessa enorma och kraftfulla yxor. Den "
+"produceras i en krigskvarn och används - tillsammans med mat - i ett "
+"träningsläger för att träna soldater från attacknivå 4 till 5."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of trunks in the wood hardener."
 msgstr ""
+"Detta eldhärdade trä är hårt som järn och används till flertalet byggnader. "
+"Det produceras från stammar hos trähärdaren."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1038,6 +1132,10 @@ msgid ""
 "weapon. It is used (together with food) in the trainingscamp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"Det här är ett farligt vapen som barbarerna kan tillverka. Det tillverkas i "
+"yxfabriken. Bara tränade krigare kan hantera ett sådant vapen. Det används "
+"(tillsammans med mat) i träningslägret för att träna soldater från "
+"attacknivå 3 till 4."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -1045,6 +1143,9 @@ msgid ""
 "and used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 2 to healthpoints level 3."
 msgstr ""
+"Det här är den mest förbättrade av Barbarernas rustningar. Den tillverkas i "
+"hjälmsmedjan och används i träningslägret - tillsammans med mat - för att "
+"träna soldaterna från HP nivå 2 till nivå 3."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1052,6 +1153,9 @@ msgid ""
 "metalwork shop (but ceases to be produced by the building if it is enhanced "
 "to an axefactory and war mill)."
 msgstr ""
+"Den här piken används av stenmurarna och gruvarbetarna. Den tillverkas i "
+"metallverkstaden (tillverkningen upphör i byggnaden om den uppgraderas till "
+"en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -1060,6 +1164,10 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Det här spjutet är tillräckligt lätt för att kastas, men tungt nog för att "
+"döda ett djur i ett slag. Det används bara av jägarna. Tillverkas i "
+"metallverkstaden (tillverkningen upphör i byggnaden om den uppgraderas till "
+"en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/conf:161
@@ -1090,6 +1198,11 @@ msgid ""
 "burner's house in the production of coal. The wood hardener refines trunks "
 "by hardening them in the fire which gives blackwood."
 msgstr ""
+"Trädstammar är ett grundläggande byggnadsmaterial för Barbarerna. Träden "
+"fälls av skogshuggare; skogsvaktare övervakar trädtillgången. Trädstammar "
+"används också i metallverkstaden för att bygga enklare verktyg, och i "
+"kolbrännarnas hus för att tillverka kol. Trädhärdaren raffinerar stammar "
+"genom att härda dem i elden, vilket ger svartved."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1151,22 +1264,22 @@ msgstr ""
 "Uppgradera soldat anfall 4 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:26
+#: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Uppgradera soldat undvik 0"
 
-#: ../../tribes/barbarians/battlearena/conf:27
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Uppgradera soldat undvik 0 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:28
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Uppgradera soldat undvik 1"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
@@ -1235,6 +1348,9 @@ msgid ""
 "and the brewery. Also the lime kiln and the cattle farm need to be supplied "
 "with water."
 msgstr ""
+"Vatten är livsviktigt! Det används i bageriet, mikrobryggeriet och "
+"bryggeriet. Även kalkbrännaren och boskapsfarmen behöver tillgång till "
+"vatten."
 
 #: ../../tribes/barbarians/conf:141
 msgid "Weaver"
@@ -1258,6 +1374,9 @@ msgid ""
 "bakeries, micro breweries and breweries. Also Cattle farms need to be "
 "supplied with wheat."
 msgstr ""
+"Vete krävs för överlevnad. Det tillverkas i farmer och används i bageriet, "
+"mikrobryggerier och bryggerier. Även boskapsfarmer behöver tillgång till "
+"vete."
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"
@@ -1323,311 +1442,7 @@ msgid ""
 "and war mills. In trainingscamps, it is used - together with food- to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
-
-#~ msgid "Flax medium"
-#~ msgstr "Linfält, mellan"
-
-#~ msgid "Flax small"
-#~ msgstr "Linfält, litet"
-
-#~ msgid "Flax tiny"
-#~ msgstr "Linfält, nysått"
-
-#~ msgid "Flax ripe"
-#~ msgstr "Linfält, moget"
-
-#~ msgid "Resource indicator gold litte"
-#~ msgstr "Resursindikator guld lite"
-
-#~ msgid "Resource indicator granit little"
-#~ msgstr "Resursindikator granit lite"
-
-#~ msgid "Resource indicator granit much"
-#~ msgstr "Resursindikator granit mycket"
-
-#~ msgid "Flax"
-#~ msgstr "Lin"
-
-#~ msgid "Goldstone"
-#~ msgstr "Guldmalm"
-
-#~ msgid ""
-#~ "The Axe is the basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with this basic weapon, but also the lumberjack is using the "
-#~ "same model."
-#~ msgstr ""
-#~ "Yxan är ett grundläggande vapen och verktyg för barbarerna. Alla unga "
-#~ "soldater utrustas med detta enkla vapen, men även skogshuggaren använder "
-#~ "samma modell."
-
-#~ msgid ""
-#~ "This is the second most dangerous weapon, the barbarians are able to "
-#~ "produce. Only trained warriors are able to yield such a weapon. It is "
-#~ "produce in the axe factory."
-#~ msgstr ""
-#~ "Detta är det näst farligaste vapen som barbarerna kan producera. Endast "
-#~ "tränade krigare kan svinga det. Det tillverkas i yxfabriken."
-
-#~ msgid ""
-#~ "Young warriors need some encouragement. This drink makes a man fearless and "
-#~ "strong."
-#~ msgstr ""
-#~ "Unga krigare behöver lite uppmuntring. Denna dryck gör dig modig och stark."
-
-#~ msgid ""
-#~ "Fire-hardened wood, hard as iron and can not burn, used for military "
-#~ "buildings."
-#~ msgstr ""
-#~ "Eldhärdat trä som är hårt som järn och inte brinner. Det används till "
-#~ "militära byggnader."
-
-#~ msgid ""
-#~ "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
-#~ "produced in the axe factory."
-#~ msgstr ""
-#~ "Krigare med grundläggande stridskunskaper får en bredyxa. De tillverkas i "
-#~ "yxfabriken."
-
-#~ msgid ""
-#~ "The bronze axe is considered a hard to handle weapon: it makes a lot of "
-#~ "damage, but it's durability is not the best. Only skilled warriors can use "
-#~ "this. Produced in the axe factory."
-#~ msgstr ""
-#~ "Bronsyxan anses vara ett vapen som är svårt att hantera. Den tillfogar stor "
-#~ "skada, men hållbarheten är inte den bästa. Endast skickliga krigare kan "
-#~ "använda den. Tillverkas i yxfabriken."
-
-#~ msgid "Works at construction sites to create a new building."
-#~ msgstr "Arbetar på byggplatser för att skapa en ny byggnad."
-
-#~ msgid "Carries items along your roads."
-#~ msgstr "Bär föremål längs med dina vägar."
-
-#~ msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-#~ msgstr "Tyg behövs till seglen på barbarernas skepp. Det tillverkas av lin."
-
-#~ msgid ""
-#~ "The fires of the barbarians are usually fed with wood, but sometimes, wood "
-#~ "just does not burn hot enough. Then, coal is used."
-#~ msgstr ""
-#~ "Barbarerna använder oftast trä till sina eldar, men ibland brinner inte trä "
-#~ "varmt nog. Då används kol istället."
-
-#~ msgid "Grows flax and thatch reed."
-#~ msgstr "Odlar lin och vassrör."
-
-#~ msgid "Plant flax"
-#~ msgstr "Så lin"
-
-#~ msgid "Harvest flax"
-#~ msgstr "Skörda lin"
-
-#~ msgid ""
-#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
-#~ "Produced in the metal works."
-#~ msgstr ""
-#~ "Eldtången används av smältaren, som arbetar i smältsmedjan. Tillverkas i "
-#~ "verktygssmedjan."
-
-#~ msgid ""
-#~ "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-#~ msgstr "Förutom pitabröd och kött äter barbarerna även fisk."
-
-#~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-#~ msgstr "Fiskespön används av barbarerna för att fånga fisk."
-
-#~ msgid "Flax is a beautiful flower, which are used to make cloth."
-#~ msgstr "Lin har vackra blå blommor och används till att göra tyg."
-
-#~ msgid ""
-#~ "Gold is the most valuable of all metals; only very important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Guld är den mest värdefulla av metaller. Endast mycket viktiga föremål "
-#~ "utsmyckas med det."
-
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Detta är den gula guldmalmen."
-
-#~ msgid ""
-#~ "Raw stone can be enhanced to grout which delivers solid, non burning build "
-#~ "material."
-#~ msgstr ""
-#~ "Sten kan arbetas till murbruk som kan användas som starkt och brandfast "
-#~ "byggnadsmaterial."
-
-#~ msgid ""
-#~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
-#~ "the blacksmiths and the helmsmiths. Make sure you always got some in "
-#~ "reserve! Build at the metal works."
-#~ msgstr ""
-#~ "Hammaren är ett viktigt verktyg. Den används av geologen, arbetaren, smeden "
-#~ "och hjälmsmeden. Se till att du alltid har några på lager! Tillverkas i "
-#~ "verktygssmedjan."
-
-#~ msgid "Basic defence of a warrior."
-#~ msgstr "En krigares grundförsvar."
-
-#~ msgid ""
-#~ "This spear is light enough to be thrown, but heavy enough to kill any animal "
-#~ "in one blow. It is only used by the hunters. Produced in the metal works."
-#~ msgstr ""
-#~ "Detta spjut är lätt nog att kastas, men tungt nog att döda ett djur i ett "
-#~ "slag. Det används endast av jägarna. Tillverkas i verktygssmedjan."
-
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Vapen och verktyg tillverkas av järn."
-
-#~ msgid "This is the red iron ore."
-#~ msgstr "Detta är den röda järnmalmen."
-
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr ""
-#~ "Hur framställer du en måltid, ett mellanmål eller en ranson om det inte "
-#~ "finns några köksverktyg tillgängliga?"
-
-#~ msgid "An enhanced version of the helmet."
-#~ msgstr "En förbättrad version av hjälmen."
-
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr ""
-#~ "En fullständig måltid som tillfredsställer varje gruvarbetares behov."
-
-#~ msgid ""
-#~ "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-#~ "lunch for the miners and in the soldier trainingcamps to keep warriors "
-#~ "strong."
-#~ msgstr ""
-#~ "Kött innehåller mycket energi. Det används i värdshusen och krogarna för att "
-#~ "framställa mat till gruvarbetarna och de soldater som ligger i träning."
-
-#~ msgid "Helps to carry items at heavy used roads."
-#~ msgstr "Hjälper till att bära föremål på hårt trafikerade vägar."
-
-#~ msgid ""
-#~ "This pick is used by the stonemasons and the miners. It is produced in the "
-#~ "metal works."
-#~ msgstr ""
-#~ "Denna hacka används av stenhuggarna och gruvarbetarna. Den tillverkas i "
-#~ "verktygssmedjan."
-
-#~ msgid ""
-#~ "The barbarian bakers are best in making this flat and tasty pitta bread."
-#~ msgstr ""
-#~ "Barbarernas bagare är bäst på att laga detta platta och välsmakande pitabröd."
-
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr ""
-#~ "En liten måltid som hjälper gruvarbetarna att orka med det hårda arbetet."
-
-#~ msgid "Raw Stones are the secondary build material of the barbarians."
-#~ msgstr "Sten är barbarernas näst mest använda byggnadsmaterial."
-
-#~ msgid ""
-#~ "The scythe is the tool of the farmers. It is produced in the metal works."
-#~ msgstr "Lien är bondens verktyg. Den tillverkas i verktygssmedjan."
-
-#~ msgid ""
-#~ "Real warriors consider the sharp axe the first real weapon, after being able "
-#~ "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
-#~ "than the ordinary axe. Build in the axe factory."
-#~ msgstr ""
-#~ "Riktiga krigare anser skarpyxan vara det första riktiga vapnet som en "
-#~ "krigare kan hantera. Först efter att en krigare visat sin skicklighet med en "
-#~ "vanlig yxa får krafterna provas med denna yxa som är tyngre och skarpare än "
-#~ "den vanliga yxan. Tillverkas i yxfabriken."
-
-#~ msgid ""
-#~ "The shovel is needed for proper handling of plants. Therefore the ferner and "
-#~ "the ranger use it. Build at the metal works."
-#~ msgstr ""
-#~ "Denna spade används för hantering av plantor. Den används av vass- och "
-#~ "linodlaren samt skogsvaktaren. Tillverkas i verktygssmedjan."
-
-#~ msgid "A bit bigger, for the advanced miners. They will need a big morsel."
-#~ msgstr ""
-#~ "En smula större, för de avancerade gruvarbetarna. De behöver en stor bit."
-
-#~ msgid "Cuts raw pieces of granit out of laying stones."
-#~ msgstr "Hugger råa stycken granit från liggande stenblock."
-
-#~ msgid ""
-#~ "Only this beer is acceptable for the old warriors. Some say, the whole power "
-#~ "of the barbarians is in this ale."
-#~ msgstr ""
-#~ "Endast detta öl är gott nog för de äldre krigarna. Det sägs att barbarernas "
-#~ "kraft finns i detta öl."
-
-#~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
-#~ msgstr "Vassrör används för att göra vattentäta tak på byggnader."
-
-#~ msgid "Trunks are the primary build material of the barbarians."
-#~ msgstr "Stockar är barbarernas främsta byggnadsmaterial."
-
-#~ msgid "An enhanced mask for barbarian warriors."
-#~ msgstr "En förbättrad mask för barbarkrigare."
-
-#~ msgid ""
-#~ "The warriors axe is the most dangerous of all weapons. Only a few warriors "
-#~ "ever were able to handle those huge and powerful axes. Build at the axe "
-#~ "factory."
-#~ msgstr ""
-#~ "Krigaryxan är det farligaste av alla barbarernas vapen. Endast få krigare "
-#~ "blir skickliga nog att hantera denna stora och slagkraftiga yxa. Tillverkas "
-#~ "i yxfabriken."
-
-#~ msgid ""
-#~ "Water is the most essential essence for life! This water is used in many "
-#~ "places, be it to make bread or beer or to produce grout."
-#~ msgstr ""
-#~ "Vatten är livsnödvändigt! Denna vätska används till mycket, bland annat till "
-#~ "bröd och öl samt till murbruk."
-
-#~ msgid ""
-#~ "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
-#~ "be made of this wheat."
-#~ msgstr ""
-#~ "Vete är nödvändigt för barbarernas överlevnad. Gott pitabröd och starkt öl "
-#~ "kan göras med vete."
-
-#~ msgid ""
-#~ "The peel is the tool of the baker, each baker needs its own. It is produced "
-#~ "in the metal works like all tools."
-#~ msgstr ""
-#~ "Bakspaden är bagarens redskap. Varje bagare behöver en egen. Den produceras "
-#~ "i metallsmedjan liksom alla andra verktyg."
-
-#~ msgid ""
-#~ "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with it, but also the lumberjack is using the same model."
-#~ msgstr ""
-#~ "Yxan är ett standard vapen och verktyg för barbarerna. Alla unga soldater är "
-#~ "utrustade med det, men även skogshuggare använder samma modell."
-
-#~ msgid "Flax is a beautiful flower, which is used for making cloth."
-#~ msgstr "Lin är en vacker blomma som används för att göra kläder."
-
-#~ msgid ""
-#~ "Fire-hardened wood, as hard as iron and cannot burn, used for military "
-#~ "buildings."
-#~ msgstr ""
-#~ "Eld-härdat trä, hårt som järn och kan inte brinna, används för militära "
-#~ "byggnader."
-
-#~ msgid ""
-#~ "This is the second most dangerous weapon the barbarians are able to produce. "
-#~ "Only trained warriors are able to yield such a weapon. It is produced in the "
-#~ "axe factory."
-#~ msgstr ""
-#~ "Detta är det näst farligaste vapnet som barbarerna kan producera. Endast "
-#~ "tränade soldater kan bära ett sådant vapen. Det är producerat i yx-fabrikerna"
-
-#~ msgid "Fishing rods are needed by barbarian fishers for fishing."
-#~ msgstr "FIskespön behöver barbarenas fiskare för sitt fiskarfänge."
-
-#~ msgid ""
-#~ "The peel is a tool of the baker and each baker needs his own. It is produced "
-#~ "in the metal works like all other tools."
-#~ msgstr ""
-#~ "Bakspaden är bagarens verktyg och varje bagare behöver en egen. Den "
-#~ "tillverkas i metallverkstaden likt alla andra verktyg."
+"Unga krigare är stolta över att få lära sig kämpa med detta kraftfulla "
+"vapen. Den är tyngre och vassare än den vanliga yxan. Den tillverkas i "
+"yxfabriker och krigskvarnar. I träningsläger används den - tillsammans med "
+"mat - för att träna soldater från attack nivå 0 till nivå 1."

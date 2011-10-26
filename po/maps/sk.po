@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-11-21 01:03+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-09-09 13:10+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:33+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -39,10 +39,6 @@ msgstr ""
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "03 - Táto zem je našou zemou"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Mapa bitky pre viacerých hráčov na ostrove v tvare X."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -80,6 +76,14 @@ msgid ""
 msgstr ""
 "Mystické územie s rôznymi krajinami, ktoré sú všetky skrížené niekoľkými "
 "veľkými riekami."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island "
+"Hopping\", where two or more groups try to reach the center island as fast "
+"as possible, to be the first building up a castle on the top of the center "
+"mountain."
+msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -141,7 +145,7 @@ msgstr "Kráter"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Púštny turnaj"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -173,11 +177,7 @@ msgstr "Lesy Elfov"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
-
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Nepriateľ nadohľad"
+msgstr "Impérium - Mesiace vo vyhnanstve"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -253,6 +253,10 @@ msgstr ""
 "kmeň prebrali na tomto ostrove uprostred ohňa a lávy? Zatiaľ to vyzerá tak, "
 "že ste sám(a), no nikto nevie... Čo sa môže stať, keď stretnete nepriateľský "
 "kmeň?"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
+msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -386,13 +390,17 @@ msgid ""
 msgstr ""
 "Pred šiestimi mesiacmi bol Lutius, mladý generál impéria, vyslaný so 150 "
 "vojakmi k hranici za severnými lesmi, kadiaľ prechádzali barbarské kmene na "
-"územie patriace impériu. Jeho úloha bola brániť územie impéria. Spočiatku "
+"územie patriace impériu. Jeho úlohou bolo brániť územie impéria. Spočiatku "
 "bolo všetko pokojné. Dokonca sa rozprával s niekoľkými barbarskými deťmi a "
 "myslel na pokojný život - bok po boku s týmto prastarým ľudom. Začal sa "
 "cítiť bezpečnejšie a jeho armáda znižovala pozornosť na prípadného "
 "nepriateľa. To bola ich skaza. V jednu noc v marci zaútočilo na jeho "
 "nepripravenú armádu 100 barbarských pešiakov a úplne ju rozprášilo. Prežil "
 "len on a hŕstka jeho vojakov."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -585,6 +593,11 @@ msgid ""
 "a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
+"Keď Boh stratil vieru v Atlantíďanoch a potopil ich ostrov, boj jednej ženy "
+"za spravodlivosť a druhú šancu pre jej ľud by uspel len v legendách.  Vedúc "
+"ostávajúcich Atlantíďanov do novej budúcnosti v novej časti sveta, Jundlína "
+"sa stala najsilnejším človekom svojej doby, ale za vysokú cenu: jej ľudskosť "
+"a dušu."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -639,29 +652,9 @@ msgstr ""
 "ukrývajú zázračný poklad - Zelenú planinu, ktorú je ťažko získať, ale ľahko "
 "stratiť, takže ak ju chcete, majte na vedomí aj iné kmene."
 
-#~ msgid "Tutorial1 - Eyes in the Dark"
-#~ msgstr "Tutoriál1 - Oči v tme"
-
-#~ msgid "(Tutorial) Barbarians - The second Empire"
-#~ msgstr "(Tutoriál) Barbari - Druhé impérium"
-
-#~ msgid "Tutorial2 - A Place to call Home"
-#~ msgstr "Tutorál2 - Miesto, ktoré možno nazvať domovom"
-
-#~ msgid "Tutorial3 - This land is our land"
-#~ msgstr "Tutoriál3 - Táto krajina je náša krajina"
-
-#~ msgid "01 - From nemesis to genesis"
-#~ msgstr "Zo záhuby k zrodu"
-
-#~ msgid "Empire - The months of exile"
-#~ msgstr "Impérium - Mesiace vo vyhnanstve"
-
-#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
-#~ msgstr "Impérium - Tréning 1 - Brehy Malac' Mor-u"
-
-#~ msgid "Atlanteans - the new rise"
-#~ msgstr "Atlanťania - nový vzostup"
-
-#~ msgid "Some descriptive texts..."
-#~ msgstr "Nejaké popisné texty..."
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""

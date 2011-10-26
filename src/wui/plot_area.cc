@@ -140,7 +140,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			(dst, xtickstyle,
 			 Point
 			 	(static_cast<int32_t>(posx),
-			 	 get_inner_h() - space_at_bottom + 4),
+			 	 get_inner_h() - space_at_bottom + 10),
 			 buffer,
 			 UI::Align_Center);
 		posx -= sub;
@@ -198,11 +198,11 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	//  print the maximal value
 	sprintf(buffer, "%u", max);
 	UI::TextStyle ymarkstyle(UI::TextStyle::ui_small());
-	ymarkstyle.fg = RGBColor(120, 255, 0);
+	ymarkstyle.fg = RGBColor(60, 125, 0);
 
 	UI::g_fh->draw_text
 		(dst, ymarkstyle,
-		 Point(get_inner_w() - space_at_right - 2, spacing),
+		 Point(get_inner_w() - space_at_right - 2, spacing + 2),
 		 buffer, UI::Align_CenterRight);
 
 	//  plot the pixels

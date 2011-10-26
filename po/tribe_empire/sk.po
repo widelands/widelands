@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-11-19 22:14+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-21 14:17+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:39+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:44+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -23,6 +23,8 @@ msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Skutočné jedlo sa vyrába v hostincoch z chleba a rýb/mäsa. Uspokojí potreby "
+"baníkov v hlbinných baniach."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -30,6 +32,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"Malé sústo, aby boli baníci silní a naďalej pracovali. Prídely tiež "
+"konzumuje prieskumník na svojich cestách. Vyrábajú sa v krčme z rýb, mäsa "
+"alebo chleba."
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
@@ -69,7 +74,7 @@ msgstr "Pekáreň"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Pečie chleba pre robotníkov"
+msgstr "Pečie chlieb pre robotníkov."
 
 #: ../../tribes/empire/conf:199
 msgid "Barracks"
@@ -86,6 +91,9 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
+"Základná zbroj pre vojakov impéria. Vyrába sa vo vyhni na zbroje a používa "
+"sa vo výcvikovom tábore - spolu s jedlom - na trénovanie bodov zdravia "
+"vojakov z úrovne 1 na úroveň 2."
 
 #: ../../tribes/empire/conf:60
 msgid "Basket"
@@ -100,6 +108,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Okrem chleba a mäsa, ryby sú tiež potravinami impéria. Používajú sa v "
+"krčmách, hostincoch a vo výcvikových stavbách (aréna, koloseum, výcvikový "
+"tábor)."
 
 #: ../../tribes/empire/conf:62
 msgid "Bread"
@@ -176,6 +187,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"Látka je potrebná na stavbu niektorých budov. Používa sa aj vo vyhni na "
+"zbroje."
 
 #: ../../tribes/empire/conf:65
 msgid "Coal"
@@ -318,6 +331,8 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Múka sa vyrába v mlyne z pšenice a používa sa v pekárni na výrobu chutného "
+"imperiálneho chleba."
 
 #: ../../tribes/empire/conf:117
 msgid "Forester"
@@ -354,6 +369,9 @@ msgid ""
 "with it. It is produced in the smelting works out of goldstone and processed "
 "in the armour smithy and the weapon smithy."
 msgstr ""
+"Zlato je najhodnotnejšie zo všetkých kovov; ozdobujú sa ním zbroje a zbrane. "
+"Vyrába sa v taviarni zo zlatých nugetov a spracováva sa vo vyhni na zbroje a "
+"vyhni na zbrane."
 
 #: ../../tribes/empire/conf:71
 msgid "Goldstone"
@@ -362,6 +380,7 @@ msgstr "Zlatý nuget"
 #: ../../tribes/empire/goldstone/conf:1
 msgid "Goldstones are mined in goldmines and processed in smelting works."
 msgstr ""
+"Zlaté nugety sa ťažia v zlatých baniach a spracovávajú sa v taviarni."
 
 #: ../../tribes/empire/conf:72
 msgid "Grape"
@@ -463,6 +482,7 @@ msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"Železná ruda sa taví v taviarni na železo. Ťažia sa v železnorudných baniach."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -502,6 +522,8 @@ msgid ""
 "for nearly every bigger building. They are produced out of marble in a "
 "stonemason's house."
 msgstr ""
+"Mramorové stĺpy zobrazujú vyspelú kultúru impéria, a tak ich potrebuje "
+"takmer každá väčšia budova. Vyrábajú sa z mramoru v sídle kamenára."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -509,6 +531,9 @@ msgid ""
 "in a quarry. Marble is used as building material and gets formed into marble "
 "columns in the stonemason's house."
 msgstr ""
+"Mramor je prekrásny kameň, ktorý sa vyrezáva z hôr alebo vyrába v "
+"kameňolome. Používa sa ako stavebný materiál a v sídle kamenára sa z neho "
+"formujú mramorové stĺpy."
 
 #: ../../tribes/empire/conf:122
 msgid "Master Miner"
@@ -832,11 +857,11 @@ msgstr "Taviť železo"
 
 #: ../../tribes/empire/conf:127
 msgid "Smelter"
-msgstr "Zlievač"
+msgstr "Tavič"
 
 #: ../../tribes/empire/conf:178
 msgid "Smelting Works"
-msgstr "Zlievareň"
+msgstr "Taviareň"
 
 #: ../../tribes/empire/smelter/conf:1
 msgid "Smelts iron."
@@ -873,6 +898,8 @@ msgid ""
 "Stones are a basic building material of the Empire. It is produced in "
 "quarries and marble mines."
 msgstr ""
+"Kamene sú základným stavebným materiálom impéria. Získavajú sa v "
+"kameňolomoch a mramorových lomoch."
 
 #: ../../tribes/empire/conf:153
 msgid "Stronghold"
@@ -913,6 +940,9 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"Krúžkové brnenie je stredným brnením vojakov impéria. Vyrába sa vo vyhni na "
+"zbroje a používa vo výcvikovom tábore - spolu s jednom - na trénovanie bodov "
+"zdravia vojakov z úrovne 2 na úroveň 3."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -920,6 +950,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"Do ohňov v imperiálnych taviarňach, vyhniach na zbroje a vyhniach na zbrane "
+"sa zvyčajne prikladá uhlie. Ťaží sa v uhoľných baniach alebo ho vyrába "
+"uhliar z kmeňov stromov."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -927,6 +960,8 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"Kladivo je nevyhnutný nástroj. Potrebuje ho geológ, stavbár a kováč zbrojí i "
+"zbraní. Uistite sa, že máte nejaké v rezerve! Vyrába ho kováč nástrojov."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -935,6 +970,10 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"Helma je základnou ochranou vojaka. Vyrába sa vo vyhni na zbroje. Spolu s "
+"drevenou kopijou tvorí výbavu pre mladých vojakov. Helmy sa tiež používajú "
+"vo výcvikovom tábore - spolu s jedlom - na trénovanie bodov zdravia vojakov "
+"z úrovne 0 na úroveň 1."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -950,6 +989,9 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"Plechová zbroj je najsilnejším brnením vojakov impéria. Vyrába sa vo vyhni "
+"na zbroje a používa vo výcvikovom tábore - spolu s jedom - na trénovanie "
+"bodov zdravia vojakov z úrovne 3 na úroveň 4."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -964,18 +1006,24 @@ msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
+"Toto hrozno je tvorí základ chutného vína. Zberá sa vo vinohrade a "
+"spracováva vo vinárskom závode."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Tento košík potrebuje pestovateľ révy na zber hrozna. Vyrába ho kováč "
+"nástrojov."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"Toto pivo sa vyrába v pivovare z pšenice a vody. Spotrebúvajú ho baníci v "
+"uhoľných a železnorudných baniach."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -983,6 +1031,9 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"Toto je silná kopija s oceľovým hrotom a malou čepeľou. Vyrába sa vo vyhni "
+"na zbrane a používa vo výcvikovom tábore - spolu s jedlom - na trénovanie "
+"útoku vojakov z úrovne 2 na úroveň 3."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -990,6 +1041,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"Toto je vylepšená kopija s oceľovým hrotom. Vyrába sa vo vyhni na zbrane a "
+"používa vo výcvikovom tábore - spolu s jedlom - na trénovanie útoku vojakov "
+"z úrovne 1 na úroveň 2."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -997,6 +1051,9 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"Toto je najlepšia a najostrejšia zbraň, akú pre vojakov dokáže kováč zbraní "
+"vyrobiť. Používa sa vo výcvikovom tábore - spolu s jedlom - na trénovanie "
+"útoku vojakov z úrovne 3 na úroveň 4."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -1008,6 +1065,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Táto kopija má železný hrot. Vyrába sa vo vyhni na zbrane a používa vo "
+"výcvikovom tábore - spolu s jedlom - na trénovanie útoku vojakov z úrovne 0 "
+"na úroveň 1."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1017,7 +1077,7 @@ msgstr "Krompáč používajú kamenári a baníci. Vyrába ho kováč nástrojo
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
+msgstr "Túto pílku potrebuje pilčík. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1032,6 +1092,8 @@ msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"Toto chutné víno sa spotrebúva v zlatých baniach a mramorových lomoch. "
+"Vyrába sa vo vinárenskom závode."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1039,6 +1101,8 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"Táto drevená kopija je základnou zbraňou imperiálnej armády. Vyrába sa vo "
+"vyhni na zbrane. Spolu s helmou tvorí výbavu pre mladých vojakov."
 
 #: ../../tribes/empire/conf:129
 msgid "Toolsmith"
@@ -1248,6 +1312,8 @@ msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Zbrane, zbroje a nástroje sa vyrábajú zo železa. Získava sa zo železnej rudy "
+"v taviarni."
 
 #: ../../tribes/empire/conf:131
 msgid "Weaponsmith"
@@ -1355,187 +1421,3 @@ msgstr "Pracuje hlboko v bani, aby získal uhlie, železnú rudu alebo zlato."
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
 msgstr "Pracuje v píle."
-
-#~ msgid "Coalearth"
-#~ msgstr "Kamenné uhlie"
-
-#~ msgid "Basic armour for Empire soldiers."
-#~ msgstr "Základná zbroj cisárskych vojakov."
-
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Zbrane a nástroje sú vyrobené zo železa."
-
-#~ msgid "Basic defence of a warrior"
-#~ msgstr "Základná obrana vojaka."
-
-#~ msgid "Stones and wood are the basic build material of the Empire."
-#~ msgstr "Kamene a drevo sú základné stavebné materiály impéria."
-
-#~ msgid "The strongest armour existing for the Empire soldiers."
-#~ msgstr "Najlepšia zbroj, aká existuje pre vojakov impéria."
-
-#~ msgid "The bakers of the Empire make really tasty bread."
-#~ msgstr "Pekári impéria pečú naozaj chutný chlieb."
-
-#~ msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-#~ msgstr "Okrem chleba a mäsa sú aj ryby potravinami impéria."
-
-#~ msgid ""
-#~ "Flour is produced out of wheat and is needed for the tasty Empire bread."
-#~ msgstr ""
-#~ "Múka sa vyrába z pšenice a je potrebná pri výrobe chutného chleba v impériu."
-
-#~ msgid ""
-#~ "Cloth is needed for Empire ships and a few bigger buildings. It is produced "
-#~ "out of wool."
-#~ msgstr ""
-#~ "Látka je potrebná pre lode a niektoré väčšie budovy impéria. Vyrába sa z "
-#~ "vlny."
-
-#~ msgid ""
-#~ "Gold is the most valuable of all metals; only very important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Zlato je najhodnotnejšie zo všetkých kovov; ozdobujú sa ním len veľmi "
-#~ "dôležité veci."
-
-#~ msgid ""
-#~ "Marble columns present the high culture of the Empire, so they are needed "
-#~ "for nearly every bigger building."
-#~ msgstr ""
-#~ "Mramorové stĺpy vyjadrujú vysokú kultúru impéria, preto musia byť takmer pri "
-#~ "každej väčšej budove."
-
-#~ msgid ""
-#~ "Marble is the beautiful stone, which is cutted out of the mountains and "
-#~ "which is used for beautiful buildings and columns."
-#~ msgstr ""
-#~ "Mramor je nádherný kameň, ktorý sa vyrezáva z hôr a používa sa na stavbu "
-#~ "nádherných budov a stĺpov."
-
-#~ msgid ""
-#~ "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-#~ "lunch for the miners and in the soldier trainingcamps to keep warriors "
-#~ "strong."
-#~ msgstr ""
-#~ "Mäso obsahuje veľa energie. Používa sa v hostincoch a v krčmách na prípravu "
-#~ "obeda pre baníkov a vo výcvikovom tábore vojakov, aby boli bojovníci silní."
-
-#~ msgid ""
-#~ "Some of your starting buildings didn't have enough room and \n"
-#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
-#~ "this map with a fair starting condition."
-#~ msgstr ""
-#~ "Niektoré z vašich počiatočných budov nemali dostatok miesta \n"
-#~ "a neboli postavené. Ste teda v nevýhode; zvážte reštartovanie\n"
-#~ "tejto mapy s férovými počiatočnými podmienkami."
-
-#~ msgid ""
-#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
-#~ "They are produced by the toolsmith."
-#~ msgstr ""
-#~ "Kliešte na uhlie sú nástroj zlievača, ktorý pracuje v zlievárni. Vyrába ich "
-#~ "kováč nástrojov."
-
-#~ msgid ""
-#~ "The fires of the Empire are usually fed with wood, but sometimes, wood just "
-#~ "does not burn hot enough. Then, coal is used."
-#~ msgstr ""
-#~ "Do ohňov v impériu sa zvyčajne pridáva drevo, ale niekedy drevo nehorí "
-#~ "dostatočne teplo. V takom prípade sa použije uhlie."
-
-#~ msgid "These grapes are the basic for tasty wine."
-#~ msgstr "Toto hrozno je základom pre chutné víno."
-
-#~ msgid ""
-#~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
-#~ "the armour- and weaponsmith. Make sure you always got some in reserve! It is "
-#~ "produced by the toolsmith."
-#~ msgstr ""
-#~ "Kladivo je nevyhnutný nástroj. Potrebujú ho geológovia, robotníci, kováči "
-#~ "zbrojí a zbraní. Uistite sa, že vždy máte nejaké v rezerve! Vyrába ho kováč "
-#~ "nástrojov."
-
-#~ msgid "This is the red iron ore."
-#~ msgstr "Toto je krveľ."
-
-#~ msgid "This is a good warrior lance, with a steel-top and a little blade."
-#~ msgstr "Toto je dobrá bojovnícka kopija s oceľovým hrotom a malou čepeľou."
-
-#~ msgid ""
-#~ "This is the best and sharpest weapon, the Empire weaponsmith creates for "
-#~ "their warriors."
-#~ msgstr ""
-#~ "Toto je najlepšia a najostrejšia zbraň, ktorú kováč zbraní impéria vyrába "
-#~ "pre bojovníkov."
-
-#~ msgid "This is a medium armour for Empire soldiers."
-#~ msgstr "Toto je stredná zbroj pre vojakov impéria."
-
-#~ msgid ""
-#~ "This is a wooden lance, which is the basic of the Empires military system."
-#~ msgstr ""
-#~ "Toto je drevená kopija, ktorá je základom pre armádny systém impéria."
-
-#~ msgid "This is an advanced lance, with steel top."
-#~ msgstr "Toto je vylepšená kopija s oceľovým hrotom."
-
-#~ msgid "This wooden lance has an iron spike."
-#~ msgstr "Táto drevená kopija má železný hrot."
-
-#~ msgid ""
-#~ "This wine gives enough power, to mine marble or gold. And furthermore, our "
-#~ "soldiers like it, too."
-#~ msgstr ""
-#~ "Toto víno dáva dostatok sily na ťažbu mramoru a zlata. Okrem toho ho majú "
-#~ "tiež radi aj naši vojaci."
-
-#~ msgid ""
-#~ "Young soldiers and miners need some encouragement. This drink makes a man "
-#~ "fearless and strong."
-#~ msgstr ""
-#~ "Mladí vojaci a baníci potrebujú nejaké povzbudenie. Tento nápoj ich spraví "
-#~ "nebojácnymi a silnými."
-
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "Malé sústo, aby boli baníci silní a mohli pracovať."
-
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "Skutočné jedlo, ktoré uspokojí všetky potreby baníkov."
-
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr ""
-#~ "Ako vytvoriť stravu, desiatu alebo prídel, keď nemáte žiadne kuchynské "
-#~ "nástroje?"
-
-#~ msgid ""
-#~ "This basket is needed by the winegrower, for harvesting the grapes. It is "
-#~ "produced by the toolsmith."
-#~ msgstr ""
-#~ "Tento košík potrebuje vincúr na zber hrozna. Vyrába ho kováč nástrojov."
-
-#~ msgid "Trunks are one important build material of the Empire."
-#~ msgstr "Kmene stromov sú jedným z dôležitých stavebných materiálov impéria."
-
-#~ msgid ""
-#~ "This saw is needed by the sawyer to create all the useful tools. It is "
-#~ "produced by the toolsmith."
-#~ msgstr ""
-#~ "Pílku potrebuje pilčík, aby vytvoril všetky užitočné nástroje. Vyrába ju "
-#~ "kováč nástrojov."
-
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Toto je žltý zlatý nuget."
-
-#~ msgid ""
-#~ "Water is the most essential essence for life! This water is used in many "
-#~ "places, be it to make bread or beer."
-#~ msgstr ""
-#~ "Voda je najpodstatnejším základom pre život! Má veľa využití, napr. na "
-#~ "výrobu chleba alebo piva."
-
-#~ msgid ""
-#~ "Wheat is essential for surviving. Delicious bread and ales can be made of "
-#~ "this wheat."
-#~ msgstr ""
-#~ "Pšenica je nevyhnutné na prežitie. Možno z nej vyrobiť chutný chlieb a pivá."

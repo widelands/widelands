@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-11-11 01:37+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-21 14:23+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:34+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:41+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:38
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
 " \"Finally, the Gods were with us!<br> We landed on an unknown coast and "
 "found peaceful rest under the palm trees growing at the shore. But that is "
@@ -26,15 +26,15 @@ msgid ""
 "under the only palm trees existing in this far-away sandy desert. I fear we "
 "won't find the help we need to get our ship repaired in good time.\" "
 msgstr ""
-" \"Finalmente os deuses estão conosco!<br> Nos embarcamos numa costa "
-"desconhecida e achamos um canto para descando pacífico embaixo das palmeiras "
-"crescendo na baía. Mas isso é sobre como é bom quando se ganha. A verdade "
-"é:<br> quando eu acordei essa manhã, eu não via nada além de areia nos "
-"cercando.<br> Parecia que nós embarcamos sobre as unicas palmeiras "
-"existentes nesse deserto longínquo. Eu tive medo de que nós não iriamos "
-"achar ajuda para reparar o nosso barco num bom tempo\" "
+" \"Finalmente os deuses estão conosco!<br> Nós atracamos numa costa "
+"desconhecida e achamos um canto para descanso pacífico embaixo das palmeiras "
+"que crescem na baía. Mas isso é a única coisa boa. A verdade é:<br> quando "
+"eu acordei essa manhã, eu não vi nada além de areia nos cercando.<br> Parece "
+"que nós atracamos sobre as únicas palmeiras existentes nesse deserto "
+"longínquo. Eu temo que nós não iremos achar ajuda para reparar o nosso barco "
+"num bom tempo\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:90
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
 " \"Hey Lutius, I got the message that our first lumberjack started his work "
 "today. Perhaps it would be a good idea to wait until he cleans enough space "
@@ -44,16 +44,16 @@ msgid ""
 "needs, too. So we should build up a sawmill - as soon as we have enough "
 "space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Ó Lutius, recebi uma mensagem dizendo que nosso lenhador vai começar "
-"trabalhando hoje. Talvez fosse uma boa ideia esperar que ele abrisse uma "
-"clareira onde possamos construir mais 2 casas de lenhador, para que possamos "
-"produzir rapidamente mais troncos.<br> Infelizmente, para reparar o nosso "
-"navio não nos basta troncos, precisamos também de madeira cortada, as mesmas "
-"que precisam tanto os navios como os edifícios maiores. Por isso temos de "
-"construir uma serração assim que tenhamos espaço para isso.\"<br><br>-- NOVO "
-"OBJECTIVO --<br> "
+" \"Ei Lutius, recebi uma mensagem dizendo que nosso lenhador vai começar seu "
+"trabalho hoje. Talvez seja uma boa ideia esperar que ele abra uma clareira "
+"onde possamos construir mais 2 casas de lenhador, para que possamos produzir "
+"rapidamente mais troncos.<br> Infelizmente, para reparar o nosso navio não "
+"nos basta troncos, precisamos também de madeira cortada, as mesmas que "
+"precisam tanto os navios como os edifícios maiores. Por isso temos de "
+"construir uma serraria assim que tenhamos espaço para isto.\"<br><br>-- NOVO "
+"OBJETIVO --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:73
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid ""
 " \"Hey Lutius, I just met Saledus outside.<br> He told me about the "
 "barracks. Well, I am not one of those girls who think we need more barracks -"
@@ -62,20 +62,27 @@ msgid ""
 "yesterday and found a nice place for a lumberjack's house, south of our "
 "provisional headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Ei Lutius, acabo de encontrar Saledus lá fora.<br> Ele me contou sobre os "
+"quartéis. Bem, não sou uma destas garotas que acha que precisamos de mais "
+"quartéis - na verdade, precisamos nos concentrar em outras coisas no "
+"momento.<br> Está absolutamente claro que necessitamos de mais madeira para "
+"o nosso barco. Então, eu caminhei pela floresta ontem e achei um ótimo local "
+"para uma casa de lenhador, ao sul do nosso quartel-general "
+"provisório.\"<br><br>-- NOVO OBJETIVO --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:126
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:117
 msgid ""
 " \"Hey Lutius, today we got a lot closer to our first castle. The quarry to "
 "the south began its work today and will soon provide us with stones and "
 "beautiful marble.<br> Now we truly can look forward to settling down on "
 "another island.\" "
 msgstr ""
-" \"Ó Lutius, hoje estamos mais perto de podermos construir o nosso primeiro "
-"castelo. A pedreira que fica no Sul começou a trabalhar hoje e vai estar "
-"pronta a fornecer pedra e mármore.<br> Agora já podemos esperar colonizar "
-"outra ilha.\" "
+" \"Ei Lutius, hoje estamos mais perto de podermos construir o nosso primeiro "
+"castelo. A pedreira que fica no Sul começou a trabalhar hoje e logo estará "
+"fornecendo pedra e mármore.<br> Agora já podemos esperar colonizar uma nova "
+"ilha.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:114
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:106
 msgid ""
 " \"Hey, my good old friend. I just thought about the rocks standing on the "
 "south shore of this land. Perhaps we could cut out some useful hard stones "
@@ -83,13 +90,13 @@ msgid ""
 "anyway, and the resources we harvest now might be the base of strong and big "
 "buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Oi velho e bom amigo. Estive a pensar nos rochedos na costa sul desta "
+" \"Oi velho e bom amigo. Estive pensando nos rochedos na costa sul deste "
 "território.  Podíamos tirar deles pedra muito útil e mármore bonito.<br> A "
 "reparação do nosso navio vai levar umas semanas e os recursos que "
 "recolhermos agora poderão vir a ser a base para construirmos mais edifícios "
-"noutras terras.\"<br><br>-- NOVO OBJECTIVO --<br> "
+"noutras terras.\"<br><br>-- NOVO OBJETIVO --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:102
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:95
 msgid ""
 " \"Hi Lutius, I've got two important things to talk about... First the good "
 "news:<br> I saw that the construction of the sawmill is complete, so we can "
@@ -103,17 +110,17 @@ msgid ""
 "care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 " \"Viva ! Lutius, tenho duas coisas importantes para te falar... primeiro a "
-"boa:<br>  Já vi que a construção da Serração terminou, daí já podermos "
-"serrar os troncos, que os lenhadores estão a cortar, para fazermos "
+"boa:<br>  Já vi que a construção da Serraria terminou, daí já poderemos "
+"serrar os troncos, que os lenhadores estão cortando, para fazermos "
 "madeira.<br> Mas isso é a única boa nova que tenho para ti. As más notícias "
 "é que os lenhadores cortaram as árvores com uma rapidez que já quase não há "
 "árvores na ilha.<br> Lutius, tu sabes que essas árvores nos protegem das "
 "tempestades de areia do deserto, nos dão sombra e são a casa de muitos e "
-"gentis animais. Não devemos deixar esta ilha um deserto completo: encontra "
-"alguém que se preocupe em plantar novas árvores.\"<br><br>-- NOVO OBJECTIVO -"
-"-<br> "
+"gentis animais. Não devemos deixar esta ilha um deserto completo: encontre "
+"alguém que se preocupe em plantar novas árvores.\"<br><br>-- NOVO OBJETIVO --"
+"<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:26
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:25
 msgid ""
 " \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. "
 "Nature was against us and drove us into a dark, wild storm. I really don't "
@@ -124,12 +131,12 @@ msgid ""
 msgstr ""
 " \"Parece que termos navegado até este Golfo das pérolas foi um dos nossos "
 "maiores erros. A natureza virou-se contra nós e meteu-nos esta escura e "
-"violenta tempestade. Já não sei há quanto tempo começaram as estas ondas "
+"violenta tempestade. Já não sei há quanto tempo começaram estas ondas "
 "maiores que o nosso navio, mas ainda é perigoso ir lá fora.<br> O nosso "
-"navio está tão danificado que está a meter cada vez mais água. Podemos "
+"navio está tão danificado que está entrando cada vez mais água. Podemos "
 "agradecer aos Deuses se sobrevivermos à noite mais negra das nossas vidas.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:50
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:47
 msgid ""
 " \"Sire, I fear we are not safe in this foreign land. Who knows what "
 "terrible creatures live beyond this forest, in that mighty desert? What if "
@@ -142,26 +149,26 @@ msgid ""
 msgstr ""
 " \"Senhor, temo que não estejamos seguros nesta terra estranha. Quem sabe "
 "que criaturas vivem para lá desta floresta naquele imponente deserto ? E se "
-"essas criaturas entrarem na floresta à espera de hora de nos atacarem?<br> "
+"essas criaturas entrarem na floresta à espera da hora de nos atacarem?<br> "
 "Talvez o meu medo seja inusitado, mas acho que é melhor ficar de olho na "
 "floresta, para termos a certeza que vemos os inimigos antes que eles nos "
-"vejam.<br> Devíamos construir uma caserna no lado Este da floresta. Depois "
+"vejam.<br> Devíamos construir um quartel no lado Oeste da floresta. Depois "
 "um de nós pode ficar de vigia na escuridão e manter-nos a salvo das "
-"criaturas.\"<br><br>-- NOVO OBJECTIVO --<br> "
+"criaturas.\"<br><br>-- NOVO OBJETIVO --<br> "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:63
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:59
 msgid ""
 " \"Sire, I saw that the construction of the barracks was complete, so I "
 "assigned one of my best soldiers to it to keep watch on the desert.<br> This "
 "is a good step forward. Now we can feel a bit safer and can look forward to "
 "repair our ship.\" "
 msgstr ""
-" \"Senhor, informo que a construção da caserna terminou, e enviei para lá um "
+" \"Senhor, informo que a construção do quartel terminou, e enviei para lá um "
 "dos nossos melhores soldados  para vigiar o deserto.<br> As coisas já estão "
-"a andar em frente. Agora já nos podemos sentir mais seguros e ter melhores "
+"andando em frente. Agora já podemos nos sentir mais seguros e ter melhores "
 "esperanças de reparar o nosso navio.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:135
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:125
 msgid ""
 " \"Today I got the message that our ship is completely repaired. At the "
 "moment my people are loading everything onto our newly repaired ship, hoping "
@@ -173,13 +180,13 @@ msgid ""
 "on to the next mission.\" "
 msgstr ""
 " \"Hoje recebi uma mensagem que dizia que o nosso navio está finalmente "
-"reparado. De momento, o meu pessoal já está a carregar mercadorias para o "
+"reparado. No momento, o meu pessoal já está carregando mercadorias para o "
 "navio, com a esperança que ele se porte melhor do que da última vez.<br> "
 "Esta vai ser a nossa ultima noite na ilha. Amanhã de manhã vamos zarpar, à "
-"procura de um novo local para o nosso exílio.<br> Ainda penso se vamor rever "
-"Freemil outra vez.<br><br>--------------------- VICTÓRIA! -------------------"
-"---<br><br> Completaste esta missão ! Se desejares podes continuar a jogar "
-"ou partir já para uma nova missão.\" "
+"procura de um novo local para o nosso exílio.<br> Ainda penso se vamos rever "
+"Freemil outra vez.<br><br>--------------------- VITÓRIA! --------------------"
+"--<br><br> Completaste esta missão ! Se desejares podes continuar jogando ou "
+"partir já para uma nova missão.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:14
 msgid ""
@@ -207,67 +214,77 @@ msgid ""
 msgstr ""
 " \"Em que é que o nosso Império se tornou ? Interrogo-me sobre o porquê do "
 "nosso Rei ter-me proibido de lutar contra a monstruosa tribo dos bárbaros, "
-"que primeiro se agiram como amigos para depois nos atacarem pela calada da "
-"noite ?<br>   Com um exército de 150 homens, fui destacado para patrulhar a "
+"que primeiro agiram como amigos para depois nos atacarem na calada da noite "
+"?<br>   Com um exército de 150 homens, fui destacado para patrulhar a "
 "fronteira Norte, perto das Montanhas Galdim, numa grande e bela floresta. "
-"Depressa fizemos contactos amistosos com a tribo bárbara. Alguns dos meus "
+"Rapidamente fizemos contatos amistosos com a tribo bárbara. Alguns dos meus "
 "homens até fizeram comércio com eles e os filhos deles vieram ver os nossos  "
 "aprumados uniformes e armas reluzentes.<br> Mas na 5a noite na região, eles "
 "atacaram-nos sem razão. Perdi dúzias de bons soldados, eu fui aprisionado e "
 "levado perante o Grande Chefe. Ele humilhou-me e gozou comigo e ordenou-me "
 "que deixasse aquela terra para sempre. Ele não queria nem novas nem as "
 "nossas terras, apenas queria que deixássemos a floresta, dizendo  \"- Será "
-"nossa até que os espíritos que lá habitam me levem a mim e ao última pessoa "
+"nossa até que os espíritos que lá habitam me levem a mim e a última pessoa "
 "da minha tribo !\".<br> 3 semanas depois fui libertado e regressei a Fremil "
 "para falar com o meu Rei. Ele estava furioso com os Bárbaros, mas mesmo "
 "assim proibiu um ataque aos Bárbaros. O Rei acreditava que os nossos "
 "exércitos eram fracos demais para sobreviver a uma guerra contra eles.<br> "
 "Eu não via outra maneira para restaurar a minha honra que não fosse lutar "
 "contra os Bárbaros. Por isso deixei Fremil e parti em busca de um novo "
-"mundo, uma nova vida algures mais a Sul. Agora estou a navegar no Golfo das "
-"Pérolas com a minha familia, alguns dos meus amigos e um punhado dos meus "
-"melhores soldados.\" "
+"mundo, uma nova vida em algum lugar mais a Sul. Agora estou navegando no "
+"Golfo das Pérolas com a minha familia, alguns dos meus amigos e um punhado "
+"dos meus melhores soldados.\" "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:145
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:135
 msgid ""
 " \"You have made this peninsula a very secure place. It is time to move "
 "on!\" "
 msgstr ""
-" Você fez dessa peninsula um lugar muito seguro. É hora de se mexer! "
+" Você fez dessa peninsula um lugar muito seguro. É hora de seguir adiante! "
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:51
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:156
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:48
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:146
 msgid ""
 "* Build a barracks at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
 msgstr ""
+"* Construa um quartel no símbolo de construção vermelho no lado oeste da "
+"floresta, à direita do nosso quartel-general provisório."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:103
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:181
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:96
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:171
 msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
 msgstr ""
 "* Construa uma casa de reflorestador para preservar as reservas de lenha na "
 "ilha."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:74
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:69
 msgid ""
 "* Build a lumberjack's house at the red house symbol, south of your "
 "provisional headquarters. Cutting down enough trees for more buildings will "
 "take a while. You can speed the game up using PAGE UP and slow it down again "
 "with PAGE DOWN."
 msgstr ""
+"* Construa uma casa de lenhador no símbolo de construção vermelho, ao sul do "
+"nosso quartel-general provisório. Derrubar árvores suficientes para podermos "
+"construir mais casas irá demorar um pouco. Você pode aumentar a velocidade "
+"do jogo usando o botão PAGE UP e diminuí-la novamente com o PAGE DOWN."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:163
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:153
 msgid ""
 "* Build a lumberjack's house at the red point, south of your provisional "
 "headquarters. Cutting down enough trees for more buildings will take a "
 "while. You can speed the game up using PAGE UP and slow it down again with "
 "PAGE DOWN."
 msgstr ""
+"* Construa uma casa de lenhador no símbolo de construção vermelho, ao sul do "
+"nosso quartel-general provisório. Derrubar árvores suficientes para podermos "
+"construir mais casas irá demorar um pouco. Você pode aumentar a velocidade "
+"do jogo usando o botão PAGE UP e diminuí-la novamente com o PAGE DOWN."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:115
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:188
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:107
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:178
 msgid ""
 "* Build a quarry in the south to cut some stones and marble out of the "
 "rocks.<br> These might be used for future buildings."
@@ -275,8 +292,8 @@ msgstr ""
 "* Crie uma pedreira ao sul para cortar algumas pedras de mármore e de "
 "rochas.<br> Estas podem ser utilizadas para construções futuras."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:91
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:174
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:85
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:164
 msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
@@ -286,17 +303,17 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Os Tentáculos de Malac' Mor"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid "A dark night"
 msgstr "Uma noite sombria"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:46
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "A foreboding"
 msgstr "Um presságio"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:122
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "A step forward"
 msgstr "Um passo à frente"
 
@@ -308,162 +325,97 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on "
 "an unknown desert strand and save his people. For now."
 msgstr ""
+"Após perder uma batalha importante contra os bárbaros, o que fez com boa "
+"parte do território do Império tenha sido perdido, Lutius deixa Fremil para "
+"começar uma nova vida. Mas seu destino leva seu barco a uma forte "
+"tempestade, que quase o destrói. Somente com muita sorte consegue atracar "
+"seu destroçado navio em um deserto desconhecido e salvar seu povo. Por "
+"enquanto."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:100
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:93
 msgid "Amalea comes in..."
 msgstr "Amalea entra..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:88
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:82
 msgid "Amalea recommends..."
 msgstr "Amalea recomenda..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:71
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Amalea smiles..."
 msgstr "Amalea sorri..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:154
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid "Build a barracks"
 msgstr "Construa um quartel"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:179
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Build a forester's house"
 msgstr "Construa uma casa de reflorestador"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:161
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Build a lumberjack's house"
 msgstr "Construa uma casa de lenhador"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:186
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Build a quarry"
 msgstr "Construa uma pedreira"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:172
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr "Construa duas casas de lenhador e uma serraria"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:24
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:36
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:23
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Diary of Lutius"
 msgstr "Diário de Lutius"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:133
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "Mission Complete"
 msgstr "Missão Completada"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:141
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:131
 msgid "Safe Peninsula"
 msgstr "Península Segura"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:59
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Safe for now"
 msgstr "Seguro por enquanto"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:48
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Saledus looks around nervously..."
 msgstr "Saledus ollha em volta, nervoso..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:124
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 msgid "Saledus looks promising..."
 msgstr "Saledus aparenta promissor..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:112
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:104
 msgid "Saledus notes..."
-msgstr "Saludes observa"
+msgstr "Saledus observa"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:61
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Saledus speaks with a sigh of relief..."
 msgstr "Saledus fala com um suspiro de alívio..."
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:143
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid "Saledus speaks:"
 msgstr "Saludes fala:"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:34
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:32
 msgid "Survivor"
 msgstr "Sobrevivente"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:22
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:21
 msgid "The rough sea"
 msgstr "O mar bravio"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:110
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid "Thinking about the future"
 msgstr "Pensando no futuro"
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:69
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:86
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:98
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:64
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:80
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:91
 msgid "Young Amalea"
 msgstr "Jovem Amalea"
-
-#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
-#~ msgstr "Tutorial Império1 - Os litorais de Malac'Mor"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid ""
-#~ " \"Hey Lutius, I just met Saledus outside.<br> He told me about the "
-#~ "barracks. Well, I am not one of those girls who think we need more barracks -"
-#~ " instead, we might concentrate on other things now.<br> It is absolutely "
-#~ "clear that we need wood to repair our ship. So, I walked through the forest "
-#~ "yesterday and found a nice place for a lumberjack's house, south of our "
-#~ "headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
-#~ msgstr ""
-#~ " \"Ei, Lutius, eu encontrei Saledus lá fora. <br> Ele me contou sobre o "
-#~ "quartel. Bem, eu não sou uma daquelas garotas que pensam que precisamos de "
-#~ "mais quartéis - em vez disso, podemos concentrar em outras coisas agora. "
-#~ "<br> É absolutamente claro que precisamos de madeira para reparar o nosso "
-#~ "navio. Então, eu caminhava pela floresta à noite e encontrei um lugar "
-#~ "agradável para a casa de um lenhador, a sul da nossa sede.\" <br> <br>-- "
-#~ "NOVO OBJETIVO --<br> "
-
-#~ msgid ""
-#~ "* Build a lumberjack's house at the red point, south of your headquarters."
-#~ msgstr ""
-#~ "* Construa uma casa de lenhador no ponto vermelho, ao sul do quartel general."
-
-#~ msgid ""
-#~ "* Build a barracks at the red point on the east side of the forests, to the "
-#~ "right of your headquarters."
-#~ msgstr ""
-#~ "*Construa um quartel no ponto vermelho no lado leste das florestas, à "
-#~ "direita de seu quartel general."
-
-#~ msgid ""
-#~ " \"Hey, my good old friend. I just thought about the rocks standing on the "
-#~ "south strand of this land. Perhaps we could cut out some useful hard stones "
-#~ "and beautiful marble.<br> The repair of our ship will take a few weeks, "
-#~ "anyway, and the resources we harvest now might be the base of strong and big "
-#~ "buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
-#~ msgstr ""
-#~ " \"Ei, meu bom e velho amigo. Estive observando as rochas que existem na "
-#~ "costa sul desta terra. Talvez pudéssemos cortar algumas pedras úteis e belos "
-#~ "mármores.<br> Os reparos de nosso navio levará algumas semanas, de qualquer "
-#~ "forma, e os recursos que colhermos agora poderão ser a base dos grandiosos e "
-#~ "poderosos edifícios em outras terras.\"<br><br>-- NOVO OBJETIVO --<br> "
-
-#~ msgid ""
-#~ "After losing an important battle against the barbarians which lead to the "
-#~ "lost of a big part of the Empire's territory, Lutius leaves Fremil to start "
-#~ "a new life. But his destiny takes his ship into a heavy storm, which nearly "
-#~ "destroys it. Only with a lot of luck he manages to beach his damaged ship on "
-#~ "an unknown desert strand and save his people. For now."
-#~ msgstr ""
-#~ "Depois de perder uma importante batalha contra os bárbaros que levaram à "
-#~ "perda de uma grande parte do território do Império, Lutius deixa Fremil para "
-#~ "iniciar uma nova vida. Mas seu destino leva o seu navio em uma tempestade, "
-#~ "que quase o destrói. Só com muita sorte, ele consegue levar à praia seu "
-#~ "navio danificado em uma vertente do deserto desconhecido e salvar o seu "
-#~ "povo. Por enquanto."
-
-#~ msgid ""
-#~ "* Build a lumberjack's house at the red point, south of your headquarters. "
-#~ "Cutting down enough trees for more buildings will take a while. You can "
-#~ "speed the game up using PAGE UP and slow it down again with PAGE DOWN."
-#~ msgstr ""
-#~ "* Construa uma casa de lenhador no ponto vermelho, ao sul de seu quartel "
-#~ "general. Derrubar árvores suficientes para mais edifícios irá levar algum "
-#~ "tempo. Poderá acelerar o jogo usando PAGE UP e deixá-lo mais lento com PAGE "
-#~ "DOWN."

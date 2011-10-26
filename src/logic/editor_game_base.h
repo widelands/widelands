@@ -228,8 +228,6 @@ private:
    iterate_player_numbers(p, nr_players)                                      \
       if (Widelands::Player const * const player = (egbase).get_player(p))    \
 
-extern const uint8_t g_playercolors[MAX_PLAYERS][12];
-
 }
 
 #endif

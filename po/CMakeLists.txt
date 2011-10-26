@@ -5,7 +5,7 @@ if (${CMAKE_BUILD_TYPE} STREQUAL Release)
 else (${CMAKE_BUILD_TYPE} STREQUAL Release)
   add_custom_target (
     lang_dummy ALL
-    COMMAND cmake -E make_directory ${CMAKE_BINARY_DIR}/locale
+    COMMAND ${CMAKE_COMMAND}  -E make_directory ${CMAKE_BINARY_DIR}/locale
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   )
   add_custom_target (

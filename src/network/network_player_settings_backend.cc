@@ -32,8 +32,6 @@ void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
 	if (id >= s->settings().players.size())
 		return;
 
-	assert(s->settings().usernum == 0);
-
 	s->nextPlayerState(id);
 }
 
@@ -45,15 +43,27 @@ void NetworkPlayerSettingsBackend::toggle_tribe(uint8_t id) {
 		return;
 
 	if (settings.players.at(id).state != PlayerSettings::stateShared) {
-		std::string const & currenttribe = settings.players.at(id).tribe;
+		PlayerSettings const & player = settings.players.at(id);
+		std::string const & currenttribe = player.tribe;
 		std::string nexttribe = settings.tribes.at(0).name;
+		uint32_t num_tribes = settings.tribes.size();
+		bool random_tribe = false;
 
-		for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
-			if (settings.tribes[i].name == currenttribe) {
-				nexttribe = settings.tribes.at(i + 1).name;
-				break;
+		if (player.random_tribe) {
+			nexttribe = settings.tribes.at(0).name;
+		} else if (player.tribe == settings.tribes.at(num_tribes - 1).name) {
+			nexttribe = "Random";
+			random_tribe = true;
+		} else {
+			for (uint32_t i = 0; i < num_tribes - 1; ++i) {
+				if (settings.tribes[i].name == currenttribe) {
+					nexttribe = settings.tribes.at(i + 1).name;
+					break;
+				}
 			}
-		s->setPlayerTribe(id, nexttribe);
+		}
+
+		s->setPlayerTribe(id, nexttribe, random_tribe);
 	} else {
 		// This button is temporarily used to select the player that uses this starting position
 		uint8_t sharedplr = settings.players.at(id).shared_in;
@@ -146,7 +156,9 @@ void NetworkPlayerSettingsBackend::refresh(uint8_t id) {
 			toggle_tribe(id);
 
 		if (shared_in_tribe[id] != settings.players.at(player.shared_in - 1).tribe) {
-			s->setPlayerTribe(id, settings.players.at(player.shared_in - 1).tribe);
+			s->setPlayerTribe
+				(id, settings.players.at(player.shared_in - 1).tribe,
+				 settings.players.at(player.shared_in - 1).random_tribe);
 			shared_in_tribe[id] = settings.players.at(id).tribe;
 		}
 	}

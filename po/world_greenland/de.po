@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
-"PO-Revision-Date: 2010-06-06 22:42+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-22 10:30+0000\n"
+"Last-Translator: Xaver Bastiani <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:44+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:48+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -34,19 +34,19 @@ msgstr "junge Erle"
 
 #: ../../worlds/greenland/conf:46
 msgid "Aspen"
-msgstr "Espe"
+msgstr "Zitterpappel"
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen medium"
-msgstr "mittelhohe Espe"
+msgstr "mittelhohe Zitterpappel"
 
 #: ../../worlds/greenland/conf:48
 msgid "Aspen small"
-msgstr "kleine Espe"
+msgstr "kleine Zitterpappel"
 
 #: ../../worlds/greenland/conf:49
 msgid "Aspen tiny"
-msgstr "junge Espe"
+msgstr "junge Zitterpappel"
 
 #: ../../worlds/greenland/conf:80
 msgid "Badger"
@@ -107,7 +107,7 @@ msgstr "Kaktus"
 
 #: ../../worlds/greenland/conf:83
 msgid "Chamois"
-msgstr "Gams"
+msgstr "Gemse"
 
 #: ../../worlds/greenland/resconf:4
 msgid "Coal"
@@ -134,7 +134,7 @@ msgstr "Elch"
 
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
-msgstr "Gefällter Baum"
+msgstr "gefällter Baum"
 
 #: ../../worlds/greenland/resconf:41
 msgid "Fish"
@@ -274,7 +274,7 @@ msgstr "junge Fichte"
 #: ../../worlds/greenland/conf:38
 #: ../../worlds/greenland/conf:39
 msgid "Standing Stones"
-msgstr "Obelisk"
+msgstr "Menhir"
 
 #: ../../worlds/greenland/conf:40
 #: ../../worlds/greenland/conf:41
@@ -291,7 +291,7 @@ msgstr "Das Widelands-Entwicklerteam"
 
 #: ../../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr "Dies sind die wilden Ländereien der Barbaren."
+msgstr "Dies sind die schönen, reichen Ländern der Barbaren"
 
 #: ../../worlds/greenland/resconf:36
 msgid "Water"
@@ -304,24 +304,3 @@ msgstr "Wisent"
 #: ../../worlds/greenland/conf:93
 msgid "Wolf"
 msgstr "Wolf"
-
-#~ msgid "Granit"
-#~ msgstr "Granit"
-
-#~ msgid "Dead tree"
-#~ msgstr "Toter Baum"
-
-#~ msgid "Maple"
-#~ msgstr "Ahorn"
-
-#~ msgid "Maple medium"
-#~ msgstr "mittelhoher Ahorn"
-
-#~ msgid "Maple small"
-#~ msgstr "kleiner Ahorn"
-
-#~ msgid "Maple tiny"
-#~ msgstr "junger Ahorn"
-
-#~ msgid "Tree"
-#~ msgstr "Baum"

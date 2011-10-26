@@ -427,20 +427,21 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			g_gr->toggle_fullscreen();
 			return true;
 
+		case SDLK_KP7:
+			if (code.mod & KMOD_NUM)
+				break;
 		case SDLK_HOME:
 			move_view_to(game().map().get_starting_pos(m_player_number));
 			return true;
 
-		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
 			if (!m_chatProvider | !m_chatenabled)
 				break;
 
 			if (!m_chat.window)
 				new GameChatMenu(this, m_chat, *m_chatProvider);
 
-			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
-				.enter_chat_message();
 			return true;
 		default:
 			break;

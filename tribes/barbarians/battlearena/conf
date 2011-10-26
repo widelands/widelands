@@ -11,6 +11,9 @@ thatchreed=3
 [working positions]
 trainer=1
 
+[compatibility working positions]
+carrier=replace trainer
+
 [inputs]
 pittabread=10
 fish=6
@@ -33,38 +36,54 @@ sleep=5000
 
 [upgrade_soldier_evade_0]
 check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
-sleep=30000
+sleep=15000
+animate=working 15000
 check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
 consume=pittabread fish,meat strongbeer
 train=soldier evade 0 1
 
 [upgrade_evade_0]
 check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
-sleep=30000
+sleep=15000
+animate=working 15000
 check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
 consume=pittabread fish,meat strongbeer
 train=soldier evade 0 1
 
 [upgrade_soldier_evade_1]
 check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
-sleep=30000
+sleep=15000
+animate=working 15000
 check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
 consume=pittabread:2 fish,meat strongbeer
 train=soldier evade 1 2
 
 [upgrade_evade_1]
 check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
-sleep=30000
+sleep=15000
+animate=working 15000
 check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
 consume=pittabread:2 fish,meat strongbeer
 train=soldier evade 1 2
 
+[build]
+pics=battlearena_b_??.png
+hotspot=110 72
+playercolor=true
+
+[unoccupied]
+pics=battlearena_u_??.png
+hotspot=110 72
+playercolor=true
+
 [idle]
 pics=battlearena_i_??.png  # ???
-hotspot=102 72
+hotspot=110 72
 playercolor=true
 fps=10
 
-[build]
-pics=battlearena_b_??.png
-hotspot=102 72
+[working]
+pics=battlearena_w_??.png  # ???
+hotspot=110 72
+playercolor=true
+fps=10

@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 12
+#define CURRENT_PACKET_VERSION 13
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -67,13 +67,12 @@ void Game_Player_Info_Data_Packet::Read
 					char const * const flag_style_name     =
 						packet_version < 7 ? 0 : fr.CString();
 
-					RGBColor rgb[4];
-
-					for (uint32_t j = 0; j < 4; ++j) {
-						uint8_t const r = fr.Unsigned8();
-						uint8_t const g = fr.Unsigned8();
-						uint8_t const b = fr.Unsigned8();
-						rgb[j] = RGBColor(r, g, b);
+					if (packet_version <= 12) { // Player colors used to be saved in this packet
+						for (uint32_t j = 0; j < 4; ++j) {
+							fr.Unsigned8();
+							fr.Unsigned8();
+							fr.Unsigned8();
+						}
 					}
 
 					std::string const name = fr.CString();
@@ -111,9 +110,6 @@ void Game_Player_Info_Data_Packet::Read
 
 					if (packet_version >= 6)
 						player.setAI(fr.CString());
-
-					for (uint32_t j = 0; j < 4; ++j)
-						player.m_playercolor[j] = rgb[j];
 
 					if (packet_version >= 12)
 						player.ReadStatistics(fr, 1);
@@ -171,12 +167,6 @@ void Game_Player_Info_Data_Packet::Write
 			fw.CString(tribe.name().c_str());
 			fw.CString(tribe.frontier_style_name(plr->m_frontier_style_index));
 			fw.CString(tribe.flag_style_name    (plr->m_flag_style_index));
-		}
-
-		for (uint32_t j = 0; j < 4; ++j) {
-			fw.Unsigned8(plr->m_playercolor[j].r());
-			fw.Unsigned8(plr->m_playercolor[j].g());
-			fw.Unsigned8(plr->m_playercolor[j].b());
 		}
 
 		// Seen fields is in a map packet

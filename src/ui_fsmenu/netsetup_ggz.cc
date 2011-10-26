@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,6 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	m_butw (get_w() * 36 / 125),
 	m_buth (get_h() * 19 / 400),
 	m_lisw (get_w() * 623 / 1000),
-	m_namechange(0),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
 
@@ -175,10 +174,6 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 
 	// If we have no connection try to connect
 	if (!NetGGZ::ref().usedcore()) {
-		// Wait two seconds after the user changed the name to avoid reconnecting
-		// after each changed character.
-		if (m_namechange >= time(0) - 1)
-			return;
 		connectToMetaserver();
 	}
 

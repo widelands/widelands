@@ -48,7 +48,7 @@ CXX:=g++
 endif
 
 TARGET:=native
-VERSION:=build14
+VERSION:=build16
 
 WINDRES = windres.exe
 icon.o: Widelands_win.rc

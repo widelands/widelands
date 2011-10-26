@@ -6,7 +6,7 @@ carrier=1
 
 [idle]
 pics=idle_??.png
-hotspot=14 27
+hotspot=5 26
 playercolor=true
 
 [walk]

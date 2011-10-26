@@ -1,0 +1,28 @@
+# Automatically created by Widelands bzr6002[trunk] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Player Blue"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Player Red"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_3]
+name="Player Yellow"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_4]
+name="Player Green"
+tribe="barbarians"
+ai=
+closeable="false"

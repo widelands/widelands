@@ -310,10 +310,7 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 	if (!m_settings->canChangeMap())
 		return;
 
-	GameSettings const & settings = m_settings->settings();
-
-	Fullscreen_Menu_MapSelect msm
-		(settings.multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO);
+	Fullscreen_Menu_MapSelect msm(m_settings, m_ctrl);
 	int code = msm.run();
 
 	if (code <= 0) {
@@ -339,38 +336,53 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 		return;
 
 	Widelands::Game game; // The place all data is saved to.
-	Fullscreen_Menu_LoadGame lsgm(game);
+	Fullscreen_Menu_LoadGame lsgm(game, m_settings, m_ctrl);
 	int code = lsgm.run();
 
 	if (code <= 0)
 		return; // back was pressed
 
+	// Saved game was selected - therefore not a scenario
+	m_settings->setScenario(false);
+
 	std::string filename = lsgm.filename();
 
-	// Read the needed data from file "elemental" of the used map.
-	FileSystem & l_fs = g_fs->MakeSubFileSystem(filename.c_str());
-	Profile prof;
-	prof.read("map/elemental", 0, l_fs);
-	Section & s = prof.get_safe_section("global");
+	if (g_fs->FileExists(filename.c_str())) {
+		// Read the needed data from file "elemental" of the used map.
+		FileSystem & l_fs = g_fs->MakeSubFileSystem(filename.c_str());
+		Profile prof;
+		prof.read("map/elemental", 0, l_fs);
+		Section & s = prof.get_safe_section("global");
 
-	std::string mapname = s.get_safe_string("name");
-	m_nr_players = s.get_safe_int("nr_players");
+		std::string mapname = s.get_safe_string("name");
+		m_nr_players = s.get_safe_int("nr_players");
 
-	m_settings->setMap(mapname, filename, m_nr_players, true);
+		m_settings->setMap(mapname, filename, m_nr_players, true);
 
-	// Check for sendability
-	if (g_fs->IsDirectory(filename)) {
-		// Send a warning
-		UI::WLMessageBox warning
-			(this, _("Saved game is directory"),
-			 _
-			  ("WARNING:\n"
-			   "The saved game you selected is a directory. This happens, if you set the option \"nozip\" to "
-			   "true or did manually unzip the saved game.\n"
-			   "Widelands is not able to transfer directory structures to the clients, please select another "
-			   "saved game or zip the directories content."),
-			 UI::WLMessageBox::OK);
-		warning.run();
+		// Check for sendability
+		if (g_fs->IsDirectory(filename)) {
+			// Send a warning
+			UI::WLMessageBox warning
+				(this, _("Saved game is directory"),
+				_
+				("WARNING:\n"
+					"The saved game you selected is a directory. This happens, if you set the option \"nozip\" to "
+					"true or did manually unzip the saved game.\n"
+					"Widelands is not able to transfer directory structures to the clients, please select another "
+					"saved game or zip the directories content."),
+				UI::WLMessageBox::OK);
+			warning.run();
+		}
+	} else {
+		if (!m_settings || m_settings->settings().saved_games.empty())
+			throw wexception("A file was selected, that is not available to the client");
+		// this file is obviously a file from the dedicated server's saved games pool not available locally.
+		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i)
+			if (m_settings->settings().saved_games.at(i).path == filename) {
+				m_settings->setMap(filename, filename, m_settings->settings().saved_games.at(i).players, true);
+				return;
+			}
+		throw wexception("The selected file could not be found in the pool of dedicated saved games.");
 	}
 }
 
@@ -390,13 +402,8 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
 			 	 "not own. Normally such a file should be send from the host to "
 			 	 "you, but perhaps the transfer was not yet finnished!?!"),
 			 m_settings->settings().mapfilename.c_str());
-	if (m_settings->canLaunch()) {
-		GameSettings const & s = m_settings->settings();
-		if (s.savegame)
-			end_modal(1 + s.scenario);
-		else
-			end_modal(3 + s.scenario);
-	}
+	if (m_settings->canLaunch())
+		end_modal(1);
 }
 
 
@@ -426,11 +433,12 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			// interface can only notice the change after the host broadcasted it.
 			if (settings.savegame)
 				load_previous_playerdata();
-			else
+			else {
 				load_map_info();
+				if (settings.scenario)
+					set_scenario_values();
+			}
 			m_mapname.set_text(settings.mapname);
-			if (settings.scenario)
-				set_scenario_values();
 		}
 	} else {
 		// Write client infos

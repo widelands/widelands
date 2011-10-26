@@ -78,3 +78,7 @@ hotspot=49 49
 pics=marblemine_w_??.png
 hotspot=49 49
 fps=10
+
+[empty]
+pics=marblemine_e_??.png
+hotspot=49 49

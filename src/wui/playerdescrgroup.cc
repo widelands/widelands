@@ -170,7 +170,11 @@ void PlayerDescriptionGroup::refresh()
 					title = _("Computer");
 				else {
 					title = _("AI: ");
-					title += _(player.ai);
+					if (player.random_ai) {
+						title += _("Random");
+					} else {
+						title += _(player.ai);
+					}
 				}
 			} else { // PlayerSettings::stateHuman
 				title = _("Human");
@@ -184,7 +188,12 @@ void PlayerDescriptionGroup::refresh()
 				Section & global = prof.get_safe_section("tribe");
 				m_tribenames[player.tribe] = global.get_safe_string("name");
 			}
-			d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
+			if (player.random_tribe) {
+				d->btnPlayerTribe->set_title(_("Random"));
+			} else {
+				d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
+			}
+
 			{
 				i18n::Textdomain td(tribepath); // for translated initialisation
 				container_iterate_const
@@ -256,17 +265,27 @@ void PlayerDescriptionGroup::toggle_playertribe()
 	if (d->plnum >= settings.players.size())
 		return;
 
-	std::vector<PlayerSettings> pl = settings.players;
-	std::string const & currenttribe = pl.at(d->plnum).tribe;
+	PlayerSettings const & player = settings.players.at(d->plnum);
+	std::string const & currenttribe = player.tribe;
 	std::string nexttribe = settings.tribes.at(0).name;
+	bool random_tribe = false;
+	uint32_t num_tribes = settings.tribes.size();
 
-	for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
-		if (settings.tribes[i].name == currenttribe) {
-			nexttribe = settings.tribes.at(i + 1).name;
-			break;
+	if (player.random_tribe) {
+		nexttribe = settings.tribes.at(0).name;
+	} else if (player.tribe == settings.tribes.at(num_tribes - 1).name) {
+		nexttribe = "Random";
+		random_tribe = true;
+	} else {
+		for (uint32_t i = 0; i < num_tribes - 1; ++i) {
+			if (settings.tribes[i].name == currenttribe) {
+				nexttribe = settings.tribes.at(i + 1).name;
+				break;
+			}
 		}
+	}
 
-	d->settings->setPlayerTribe(d->plnum, nexttribe);
+	d->settings->setPlayerTribe(d->plnum, nexttribe, random_tribe);
 }
 
 /**

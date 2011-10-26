@@ -6,18 +6,18 @@ kitchen_tools=1
 
 [idle]
 pics=idle_??.png
-hotspot=11 26
+hotspot=4 26
 playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
-hotspot=11 26
+hotspot=6 26
 playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
-hotspot=11 26
+hotspot=6 26
 playercolor=true
 fps=10

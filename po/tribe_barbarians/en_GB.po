@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-18 14:37+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2011-02-14 15:46+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 04:38+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:44+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -897,7 +897,7 @@ msgstr "Sharp Axe"
 msgid "Shovel"
 msgstr "Shovel"
 
-#: ../../tribes/barbarians/battlearena/conf:25
+#: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
 msgid "Sleep"
 msgstr "Sleep"
@@ -1202,21 +1202,21 @@ msgstr ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:26
+#: ../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Upgrade soldier evade 0"
 
-#: ../../tribes/barbarians/battlearena/conf:27
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:28
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Upgrade soldier evade 1"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
@@ -1375,322 +1375,3 @@ msgid ""
 "and war mills. In trainingscamps, it is used - together with food- to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
-
-#~ msgid ""
-#~ "The Axe is the basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with this basic weapon, but also the lumberjack is using the "
-#~ "same model."
-#~ msgstr ""
-#~ "The Axe is the basic weapon and tool for the Barbarians. All young soldiers "
-#~ "are equipped with this basic weapon, but also the lumberjack is using the "
-#~ "same model."
-
-#~ msgid ""
-#~ "The peel is the tool of the baker, each baker needs its own. It is produced "
-#~ "in the metal works like all tools."
-#~ msgstr ""
-#~ "The peel is the tool of the baker, each baker needs its own. It is produced "
-#~ "in the metal works like all tools."
-
-#~ msgid ""
-#~ "This is the second most dangerous weapon, the barbarians are able to "
-#~ "produce. Only trained warriors are able to yield such a weapon. It is "
-#~ "produce in the axe factory."
-#~ msgstr ""
-#~ "This is the second most dangerous weapon, the Barbarians are able to "
-#~ "produce. Only trained warriors are able to yield such a weapon. It is "
-#~ "produce in the axe factory."
-
-#~ msgid ""
-#~ "Young warriors need some encouragement. This drink makes a man fearless and "
-#~ "strong."
-#~ msgstr ""
-#~ "Young warriors need some encouragement. This drink makes a man fearless and "
-#~ "strong."
-
-#~ msgid ""
-#~ "Fire-hardened wood, hard as iron and can not burn, used for military "
-#~ "buildings."
-#~ msgstr ""
-#~ "Fire-hardened wood, hard as iron and can not burn, used for military "
-#~ "buildings."
-
-#~ msgid "Carries items along your roads."
-#~ msgstr "Carries items along your roads."
-
-#~ msgid "Works at construction sites to create a new building."
-#~ msgstr "Works at construction sites to create a new building."
-
-#~ msgid "Flax medium"
-#~ msgstr "Flax medium"
-
-#~ msgid "Flax tiny"
-#~ msgstr "Flax tiny"
-
-#~ msgid "Flax ripe"
-#~ msgstr "Flax ripe"
-
-#~ msgid "Flax small"
-#~ msgstr "Flax small"
-
-#~ msgid "Resource indicator granit little"
-#~ msgstr "Resource indicator granite little"
-
-#~ msgid "Resource indicator granit much"
-#~ msgstr "Resource indicator granite much"
-
-#~ msgid "Flax"
-#~ msgstr "Flax"
-
-#~ msgid "Goldstone"
-#~ msgstr "Goldstone"
-
-#~ msgid "Grows flax and thatch reed."
-#~ msgstr "Grows flax and thatch reed."
-
-#~ msgid "Flax is a beautiful flower, which are used to make cloth."
-#~ msgstr "Flax is a beautiful flower, which are used to make cloth."
-
-#~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-#~ msgstr "Fishing rods are needed by Barbarian fishers, to catch fish."
-
-#~ msgid "Harvest flax"
-#~ msgstr "Harvest flax"
-
-#~ msgid "Plant flax"
-#~ msgstr "Plant flax"
-
-#~ msgid ""
-#~ "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-#~ msgstr ""
-#~ "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians."
-
-#~ msgid ""
-#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
-#~ "Produced in the metal works."
-#~ msgstr ""
-#~ "The fire tongs are the tool of the smelter, working in the smelting works. "
-#~ "Produced in the metal works."
-
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "This is the yellow goldstone."
-
-#~ msgid "This is the red iron ore."
-#~ msgstr "This is the red iron ore."
-
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Weapons and tools are made of iron."
-
-#~ msgid "An enhanced version of the helmet."
-#~ msgstr "An enhanced version of the helmet."
-
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "A small bite to keep miners strong and working."
-
-#~ msgid ""
-#~ "This pick is used by the stonemasons and the miners. It is produced in the "
-#~ "metal works."
-#~ msgstr ""
-#~ "This pick is used by the stonemasons and the miners. It is produced in the "
-#~ "metal works."
-
-#~ msgid "Cuts raw pieces of granit out of laying stones."
-#~ msgstr "Cuts raw pieces of granit out of laying stones."
-
-#~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
-#~ msgstr "Thatch reed is used to make the roofs of buildings waterproof."
-
-#~ msgid "The mighty tribes of the eastern lands!"
-#~ msgstr "The mighty tribes of the eastern lands!"
-
-#~ msgid "Flax is a beautiful flower, which is used for making cloth."
-#~ msgstr "Flax is a beautiful flower, which is used for making cloth."
-
-#~ msgid "A bit bigger, for the advanced miners. They will need a big morsel."
-#~ msgstr "A bit bigger, for the deep miners. They will need a hefty portion."
-
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "A real meal which satisfies all miners' needs."
-
-#~ msgid "Basic defence of a warrior."
-#~ msgstr "A warrior's basic defensive headgear."
-
-#~ msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-#~ msgstr ""
-#~ "Cloth is needed for the sails of Barbarian ships. It is spun from flax."
-
-#~ msgid ""
-#~ "Fire-hardened wood, as hard as iron and cannot burn, used for military "
-#~ "buildings."
-#~ msgstr ""
-#~ "Fire-hardened wood, iron-hard and resists burning, used for military "
-#~ "buildings."
-
-#~ msgid ""
-#~ "Gold is the most valuable of all metals; only very important things are "
-#~ "garnished with it."
-#~ msgstr ""
-#~ "Gold is the most valuable of all metals; only the most important items are "
-#~ "adorned with it."
-
-#~ msgid "Helps to carry items at heavy used roads."
-#~ msgstr "Helps carry items on busy roads."
-
-#~ msgid ""
-#~ "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-#~ "lunch for the miners and in the soldier trainingcamps to keep warriors "
-#~ "strong."
-#~ msgstr ""
-#~ "Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-#~ "lunch for miners and in the soldiers' training camps to keep warriors strong."
-
-#~ msgid ""
-#~ "Raw stone can be enhanced to grout which delivers solid, non burning build "
-#~ "material."
-#~ msgstr ""
-#~ "Raw stone can be enhanced to grout, a solid, non burning building material."
-
-#~ msgid ""
-#~ "Real warriors consider the sharp axe the first real weapon, after being able "
-#~ "to handle an ordinary axe, this weapon is tackled. It is heavier and sharper "
-#~ "than the ordinary axe. Build in the axe factory."
-#~ msgstr ""
-#~ "Warriors consider the sharp axe their first real weapon, they take it up it "
-#~ "after learning to handle an ordinary axe. It is heavier and sharper than the "
-#~ "ordinary axe. Made in the axe factory."
-
-#~ msgid "Raw Stones are the secondary build material of the barbarians."
-#~ msgstr "Raw Stones are the Barbarians' secondary building material."
-
-#~ msgid ""
-#~ "Some of your starting buildings didn't have enough room and \n"
-#~ "weren't build. You are at an disadvantage with this; consider restarting\n"
-#~ "this map with a fair starting condition."
-#~ msgstr ""
-#~ "Some of your starting buildings didn't have enough room and weren't\n"
-#~ "built. You are at a disadvantage with this; consider restarting this\n"
-#~ "map with a fair starting condition."
-
-#~ msgid ""
-#~ "The bronze axe is considered a hard to handle weapon: it makes a lot of "
-#~ "damage, but it's durability is not the best. Only skilled warriors can use "
-#~ "this. Produced in the axe factory."
-#~ msgstr ""
-#~ "The bronze axe is considered a difficult weapon: it deals a lot of damage, "
-#~ "but has little durability. Only skilled warriors can use it effectively. "
-#~ "Produced in the axe factory."
-
-#~ msgid ""
-#~ "The fires of the barbarians are usually fed with wood, but sometimes, wood "
-#~ "just does not burn hot enough. Then, coal is used."
-#~ msgstr ""
-#~ "The Barbarians' fires are usually fed with wood, but when wood just does not "
-#~ "burn hot enough, coal is used."
-
-#~ msgid ""
-#~ "The peel is a tool of the baker and each baker needs his own. It is produced "
-#~ "in the metal works like all other tools."
-#~ msgstr ""
-#~ "The peel is the tool of the baker and each baker needs his own. It is "
-#~ "produced in the metal works like all other tools."
-
-#~ msgid ""
-#~ "This is the second most dangerous weapon the barbarians are able to produce. "
-#~ "Only trained warriors are able to yield such a weapon. It is produced in the "
-#~ "axe factory."
-#~ msgstr ""
-#~ "This is the second most dangerous axe the barbarians are able to produce. "
-#~ "Only trained warriors can wield such a weapon. It is produced in the axe "
-#~ "factory."
-
-#~ msgid ""
-#~ "The shovel is needed for proper handling of plants. Therefore the ferner and "
-#~ "the ranger use it. Build at the metal works."
-#~ msgstr ""
-#~ "The shovel is used by the ferner and ranger for the proper handling of "
-#~ "plants. Made at the metal works."
-
-#~ msgid ""
-#~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
-#~ "the blacksmiths and the helmsmiths. Make sure you always got some in "
-#~ "reserve! Build at the metal works."
-#~ msgstr ""
-#~ "The hammer is an essential tool. It is needed by the geologist, the worker, "
-#~ "the blacksmith and the helmsmith. Make sure you always have some in reserve! "
-#~ "Made at the metal works."
-
-#~ msgid ""
-#~ "The scythe is the tool of the farmers. It is produced in the metal works."
-#~ msgstr ""
-#~ "The scythe is the tool of the farmer. It is produced in the metal works."
-
-#~ msgid ""
-#~ "The warriors axe is the most dangerous of all weapons. Only a few warriors "
-#~ "ever were able to handle those huge and powerful axes. Build at the axe "
-#~ "factory."
-#~ msgstr ""
-#~ "The warrior's axe is the most dangerous of all weapons. Few warriors are "
-#~ "able to handle those huge and powerful axes. Made at the axe factory."
-
-#~ msgid ""
-#~ "This spear is light enough to be thrown, but heavy enough to kill any animal "
-#~ "in one blow. It is only used by the hunters. Produced in the metal works."
-#~ msgstr ""
-#~ "This spear is light enough to be thrown, but heavy enough to kill an animal "
-#~ "with one blow. It is only used by the hunters. Produced in the metal works."
-
-#~ msgid "Trunks are the primary build material of the barbarians."
-#~ msgstr "Trunks are the primary building material of the barbarians."
-
-#~ msgid ""
-#~ "Warriors with a fundamental fighting knowledge gain a broad axe. It is "
-#~ "produced in the axe factory."
-#~ msgstr ""
-#~ "Warriors who have mastered the basics of combat gain a broad axe. It is "
-#~ "produced in the axe factory."
-
-#~ msgid ""
-#~ "Water is the most essential essence for life! This water is used in many "
-#~ "places, be it to make bread or beer or to produce grout."
-#~ msgstr ""
-#~ "Water is essential for life! It has many uses, including making bread and "
-#~ "beer or producing grout."
-
-#~ msgid ""
-#~ "Wheat is essential for surviving. Delicious pitta bread and strong ales can "
-#~ "be made of this wheat."
-#~ msgstr ""
-#~ "Wheat is essential for survival. Delicious pitta bread and strong ales can "
-#~ "be made from this wheat."
-
-#~ msgid "An enhanced mask for barbarian warriors."
-#~ msgstr "An enhanced mask for Barbarian warriors."
-
-#~ msgid "Fishing rods are needed by barbarian fishers for fishing."
-#~ msgstr "Fishing rods are needed by Barbarian fishermen for fishing."
-
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr ""
-#~ "How do you make a meal, snack or ration, if there are no kitchen tools?"
-
-#~ msgid ""
-#~ "Only this beer is acceptable for the old warriors. Some say, the whole power "
-#~ "of the barbarians is in this ale."
-#~ msgstr ""
-#~ "Only good strong beer is acceptable for the older warriors. Some say this is "
-#~ "the source of all the Barbarians' great strength in battle."
-
-#~ msgid ""
-#~ "The Axe is a basic weapon and tool for the barbarians. All young soldiers "
-#~ "are equipped with it, but also the lumberjack is using the same model."
-#~ msgstr ""
-#~ "The Axe is the basic weapon and tool of the Barbarians. Lumberjacks and "
-#~ "young soldiers are equipped with it."
-
-#~ msgid ""
-#~ "The barbarian bakers are best in making this flat and tasty pitta bread."
-#~ msgstr ""
-#~ "The Barbarian bakers are the best at making this flat and tasty pitta bread."
-
-#~ msgid "The felling axe is the tool of the lumberjack to take down trees."
-#~ msgstr "The felling axe is used by the lumberjack to fell trees."

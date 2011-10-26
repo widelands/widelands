@@ -343,11 +343,13 @@ void Game::init_newgame
 	maploader->load_map_complete(*this, settings.scenario);
 
 	// Check for win_conditions
-	m_win_condition_string = settings.win_condition;
-	LuaCoroutine * cr = lua().run_script
-		(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
-		->get_coroutine("func");
-	enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+	if (!settings.scenario) {
+		m_win_condition_string = settings.win_condition;
+		LuaCoroutine * cr = lua().run_script
+			(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
+			->get_coroutine("func");
+		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+	}
 }
 
 
@@ -566,6 +568,13 @@ bool Game::run
 	if (loader_ui) {
 		load_graphics(*loader_ui);
 
+#ifdef WIN32
+		//  Clear the event queue before starting game because we don't want
+		//  to handle events at game start that happened during loading procedure.
+		SDL_Event event;
+		while (SDL_PollEvent(&event));
+#endif
+
 		g_sound_handler.change_music("ingame", 1000, 0);
 
 		m_state = gs_running;
@@ -580,6 +589,7 @@ bool Game::run
 
 		g_gr->flush(PicMod_Game);
 		g_anim.flush();
+		g_gr->flush_animations();
 
 		m_state = gs_notrunning;
 	} else {
@@ -587,11 +597,12 @@ bool Game::run
 		m_state = gs_running;
 		//handle network
 		while (m_state == gs_running) {
+			// TODO this should be improved.
 #ifndef WIN32
 			if (usleep(100) == -1)
 				break;
 #else
-			Sleep(10);
+			Sleep(1);
 #endif
 			think();
 		}
@@ -791,6 +802,21 @@ void Game::send_player_set_ware_priority
 		 	 index,
 		 	 prio));
 }
+
+void Game::send_player_set_ware_max_fill
+	(PlayerImmovable &       imm,
+	 Ware_Index        const index,
+	  int32_t          const max_fill)
+{
+	send_player_command
+		(*new Cmd_SetWareMaxFill
+		 	(get_gametime(),
+		 	 imm.owner().player_number(),
+		 	 imm,
+		 	 index,
+		 	 max_fill));
+}
+
 
 void Game::send_player_change_training_options
 	(TrainingSite & ts, int32_t const atr, int32_t const val)

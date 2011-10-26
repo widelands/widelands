@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,9 @@ struct PlayerSettings {
 	uint8_t     initialization_index;
 	std::string name;
 	std::string tribe;
+	bool random_tribe;
 	std::string ai; /**< Preferred AI provider for this player */
+	bool random_ai;
 	Widelands::TeamNumber team;
 	bool closeable; // only used in multiplayer scenario maps
 	uint8_t shared_in; // the number of the player that uses this player's starting position
@@ -53,6 +55,12 @@ struct UserSettings {
 
 	uint8_t     position;
 	std::string name;
+};
+
+struct DedicatedMapInfos {
+	std::string path;
+	uint8_t     players;
+	bool        scenario;
 };
 
 /**
@@ -93,6 +101,11 @@ struct GameSettings {
 
 	/// Users connected to the game (0-based indices) - only used in multiplayer
 	std::vector<UserSettings> users;
+
+	/// Only used for dedicated servers so the clients can look through the maps available on the server
+	/// like in their "own" map / saved games selection menu
+	std::vector<DedicatedMapInfos> maps;
+	std::vector<DedicatedMapInfos> saved_games;
 };
 
 
@@ -125,9 +138,9 @@ struct GameSettingsProvider {
 		 bool                savegame = false)
 		= 0;
 	virtual void setPlayerState    (uint8_t number, PlayerSettings::State) = 0;
-	virtual void setPlayerAI       (uint8_t number, std::string const &) = 0;
+	virtual void setPlayerAI       (uint8_t number, std::string const &, bool const random_ai = false) = 0;
 	virtual void nextPlayerState   (uint8_t number) = 0;
-	virtual void setPlayerTribe    (uint8_t number, std::string const &) = 0;
+	virtual void setPlayerTribe    (uint8_t number, std::string const &, bool const random_tribe = false) = 0;
 	virtual void setPlayerInit     (uint8_t number, uint8_t index) = 0;
 	virtual void setPlayerName     (uint8_t number, std::string const &) = 0;
 	virtual void setPlayer         (uint8_t number, PlayerSettings) = 0;
