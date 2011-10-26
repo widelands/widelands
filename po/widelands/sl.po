@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-08-21 14:21+0000\n"
-"Last-Translator: Andrej Znidarsic <andrej.znidarsic@gmail.com>\n"
+"PO-Revision-Date: 2011-10-25 20:24+0000\n"
+"Last-Translator: Boštjan Miklavčič <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:15+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-10-26 05:09+0000\n"
+"X-Generator: Launchpad (build 14189)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1169,7 +1169,7 @@ msgstr "velik"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "Izračunaj statistično funkcijo: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
@@ -2526,24 +2526,24 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1160
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Igra je uspešno shranjena!"
 
 #: ../../src/network/nethost.cc:1162
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Ni moč shraniti igre v datoteko \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1168
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Strežnik ni zaščiten z geslom!"
 
 #: ../../src/network/nethost.cc:1171
 msgid "The send password was incorrect!"
-msgstr ""
+msgstr "Poslano geslo je bilo nepravilno!"
 
 #: ../../src/network/nethost.cc:1184
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "Geslo je pravilno, dostop je podeljen!"
 
 #: ../../src/network/nethost.cc:1190
 #, c-format
@@ -2628,16 +2628,16 @@ msgstr "Strežnik uporablja drugo različico protokola."
 #: ../../src/network/nethost.cc:2474 ../../src/network/nethost.cc:2485
 #: ../../src/network/nethost.cc:2496
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Stranka nima dostopa do igralčevih nastavitev."
 
 #: ../../src/network/nethost.cc:2512 ../../src/network/nethost.cc:2521
 #: ../../src/network/nethost.cc:2530
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Stranka nima dostopa do strežniških nastavitev."
 
 #: ../../src/network/nethost.cc:2532
 msgid "Client send start command, although server is not yet ready."
-msgstr ""
+msgstr "Stranka je začela ukaz, čeprav strežnik še ni pripravljen."
 
 #: ../../src/network/nethost.cc:2539
 msgid "Client sent TIME command even though game is not running."
@@ -2759,7 +2759,7 @@ msgstr ""
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
-msgstr ""
+msgstr "PROBLEM: zvočna naprava odprta mnogokrat, poskušam zapreti"
 
 #: ../../src/ui_basic/helpwindow.cc:41
 msgid "Help: "
@@ -3111,6 +3111,8 @@ msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
 msgstr ""
+"Na levi strani je lista vseh strank vključno s tabo. Z gumbom pri zadku "
+"tvojega vzdevka lahko nastaviš svojo vlogo. Na voljo so sledeče vloge:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:638
 msgid ""
@@ -3118,12 +3120,14 @@ msgid ""
 "same color, these share the control over the player (\"shared kingdom "
 "mode\")."
 msgstr ""
+"Igralec z barvo zastave. Če sta dva ali več igralca izbrala isto barvo si "
+"delita nadzor (\"shared kingdom mode\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:642
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
-msgstr ""
+msgstr "Opazovalčev način pomeni da vidiš vse ampak nikogar ne upravljaš."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:644
 msgid "Player settings"
@@ -3134,6 +3138,8 @@ msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
+"Na sredini so nastavitve za igralce. Za začetek igre mora vsak igralec biti "
+"eno od sledečih:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 msgid "Connected to one or more clients (see \"Client settings\")."
@@ -3145,10 +3151,12 @@ msgid ""
 "hover texts indicates the strength of the currently selected computer "
 "player)."
 msgstr ""
+"Povezan z računalnikom igralca (obraz v sliki in lebdenje besedila nad miško "
+"nakazuje moč trenutno izbranega računalniškega igralca)."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:656
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Izberi kot deljeno v startni poziciji za drugega igralca."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:657
 msgid "Closed."
@@ -3161,12 +3169,18 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
+"Kasnejše tri lahko izbere samo gostujoči igralec/strežnik z levim klikom "
+"\"type\" gumbom igralca. Gostitev igralcev lahko nadaljno določi pripravo "
+"vsakega igralca (določene zgradbe, robo in delavce s kateremi začne igralec) "
+"in rodbino ter ekipo za računalniške igralce."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
 msgstr ""
+"Vsaka stranka povezana do igralca (izbor \"vloge\" igralca) lahko določi "
+"rodbino in ekipo za tega igralca"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:667
 msgid "Map informations"
@@ -3179,6 +3193,10 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
+"Na desni strani so informacije o izbrani mapi ali shranjeni igri. Gumb desno "
+"od mape omogoča gostitelju spremembo le te(mape). Dodatno ima gostitelj moč "
+"izbrati točno določeno zmagovalno zahtevo in končno zagnati igro ko so vsi "
+"igralci pripravljeni."
 
 #: ../../src/ui_fsmenu/launchSPG.cc:56
 msgid "Select map"
@@ -3258,11 +3276,11 @@ msgstr "Ali želite zbrisati "
 
 #: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "Shranjena igra iz namenskega strežnika"
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Unknown gametime"
-msgstr ""
+msgstr "Neznan čas igre"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:60
 msgid "Choose a replay!"
@@ -3575,11 +3593,11 @@ msgstr "Odstrani izpise Syncstreama ob zagonu"
 
 #: ../../src/ui_fsmenu/options.cc:473
 msgid "OpenGL rendering *Highly experimental!*"
-msgstr ""
+msgstr "OpenGL izvedba *Zgolj poskusna!*"
 
 #: ../../src/ui_fsmenu/options.cc:478
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Pokaži pogovor igre z prozornim ozadjem"
 
 #: ../../src/ui_fsmenu/options.cc:506
 msgid "Pause"
@@ -3887,12 +3905,12 @@ msgstr " že obstaja. Prepišem?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:272
 msgid "File deletion"
-msgstr ""
+msgstr "Zbris datoteke"
 
 #: ../../src/wui/game_main_menu_save_game.cc:274
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "Res želiš zbrisati datoteko %s?"
 
 #: ../../src/wui/game_message_menu.cc:44 ../../src/wui/game_message_menu.h:148
 msgid "Message Menu: Inbox"
@@ -4191,7 +4209,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:424
 msgid "Start"
-msgstr ""
+msgstr "Začetek"
 
 #: ../../src/wui/multiplayersetupgroup.cc:432
 msgid "Type"
@@ -4199,7 +4217,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:440
 msgid "Tribe"
-msgstr ""
+msgstr "Rodbina"
 
 #: ../../src/wui/multiplayersetupgroup.cc:448
 #: ../../src/wui/playerdescrgroup.cc:103
@@ -4234,7 +4252,7 @@ msgstr "Zmogljivost"
 #: ../../src/wui/soldierlist.cc:381 ../../src/wui/soldierlist.cc:395
 #: ../../src/wui/soldierlist.cc:408
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "Klikni vojaka da bi ga poslal stran"
 
 #: ../../src/wui/stock_menu.cc:53
 msgid "Wares (total)"
@@ -4270,23 +4288,23 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:153 ../../src/wui/transport_ui.cc:248
 msgid "Reset to default"
-msgstr ""
+msgstr "Ponastavi na začetne vrednosti"
 
 #: ../../src/wui/warehousewindow.cc:128
 msgid "Normal policy"
-msgstr ""
+msgstr "Normalna politika"
 
 #: ../../src/wui/warehousewindow.cc:129
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "Rajši hrani izbrano robo tukaj"
 
 #: ../../src/wui/warehousewindow.cc:130
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Ne hrani izbrane robe tukaj"
 
 #: ../../src/wui/warehousewindow.cc:131
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Odstrani izbrano robo tu"
 
 #: ../../src/wui/waresqueuedisplay.cc:175
 msgid "Highest priority"
@@ -4302,11 +4320,11 @@ msgstr "Najnižja prioriteta"
 
 #: ../../src/wui/waresqueuedisplay.cc:230
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "Zmanjšaj količino robe, ki naj bo shranjena tu."
 
 #: ../../src/wui/waresqueuedisplay.cc:239
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "Povečaj količino robe, ki naj bo shranjena tu."
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
@@ -4654,6 +4672,8 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Ni moč odstraniti igralca. Nanj se nanaša sklic na nekem mestu. Odstrani vse "
+"zgradbe in paže, ki so povezani s tem igralcem in poskusi znova."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
