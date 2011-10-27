@@ -40,7 +40,9 @@
 
 #define PLOT_HEIGHT 100
 
-
+//TODO place holder, need to be changed
+static const char pic_tab_production[] = "pics/menu_tab_wares.png";
+static const char pic_tab_economy[] = "pics/menu_tab_wares.png";
 
 Ware_Statistics_Menu::Ware_Statistics_Menu
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
@@ -69,12 +71,12 @@ m_parent(&parent)
 		  nr_rows * (WARE_MENU_PIC_HEIGHT + spacing) + 100));
 
 
-	m_plot =
+	m_plot_production =
 		new WUIPlot_Area
 			(this,
 			 spacing, offs.y + spacing, get_inner_w() - 2 * spacing, PLOT_HEIGHT);
-	m_plot->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot_production->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot_production->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	//  all wares
 	Widelands::Ware_Index::value_t cur_ware = 0;
@@ -99,7 +101,7 @@ m_parent(&parent)
 			dposy = cb.get_h() + spacing;
 			set_inner_size
 				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
-			m_plot->register_plot_data
+			m_plot_production->register_plot_data
 				(cur_ware,
 				 parent.get_player()->get_ware_production_statistics
 				 	(Widelands::Ware_Index(cur_ware)),
@@ -108,7 +110,7 @@ m_parent(&parent)
 		pos.y += dposy;
 	}
 
-	m_plot->set_size(get_inner_w() - 2 * spacing, PLOT_HEIGHT);
+	m_plot_production->set_size(get_inner_w() - 2 * spacing, PLOT_HEIGHT);
 
 
 	int32_t button_size = (get_inner_w() - spacing * 5) / 4;
@@ -119,7 +121,9 @@ m_parent(&parent)
 		(this, "15m",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_15_MINS),
+		 boost::bind
+			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			 WUIPlot_Area::TIME_15_MINS),
 		 _("15 m"));
 
 	pos.x += button_size + spacing;
@@ -128,7 +132,9 @@ m_parent(&parent)
 		(this, "30m",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_30_MINS),
+		 boost::bind
+			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			 WUIPlot_Area::TIME_30_MINS),
 		 _("30 m"));
 
 	pos.x += button_size + spacing;
@@ -137,7 +143,9 @@ m_parent(&parent)
 		(this, "1h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_ONE_HOUR),
+		 boost::bind
+			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			 WUIPlot_Area::TIME_ONE_HOUR),
 		 _("1 h"));
 
 	pos.x += button_size + spacing;
@@ -146,7 +154,9 @@ m_parent(&parent)
 		(this, "2h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_TWO_HOURS),
+		 boost::bind
+			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			 WUIPlot_Area::TIME_TWO_HOURS),
 		 _("2 h"));
 
 	pos.y += 25 + spacing;
@@ -166,7 +176,9 @@ m_parent(&parent)
 		(this, "4h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_FOUR_HOURS),
+		 boost::bind
+		 (&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+		  WUIPlot_Area::TIME_FOUR_HOURS),
 		 _("4 h"));
 
 	pos.x += button_size + spacing;
@@ -175,7 +187,9 @@ m_parent(&parent)
 		(this, "8h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_EIGHT_HOURS),
+		 boost::bind
+			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			 WUIPlot_Area::TIME_EIGHT_HOURS),
 		 _("8 h"));
 
 	pos.x += button_size + spacing;
@@ -184,7 +198,9 @@ m_parent(&parent)
 		(this, "16h",
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_16_HOURS),
+		 boost::bind
+			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			 WUIPlot_Area::TIME_16_HOURS),
 		 _("16 h"));
 
 	pos += Point(button_size + spacing, 32 + spacing);
@@ -203,5 +219,5 @@ void Ware_Statistics_Menu::clicked_help() {}
  * Cb has been changed to this state
  */
 void Ware_Statistics_Menu::cb_changed_to(int32_t const id, bool const what) {
-	m_plot->show_plot(id, what);
+	m_plot_production->show_plot(id, what);
 }
