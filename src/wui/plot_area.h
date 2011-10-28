@@ -63,6 +63,15 @@ struct WUIPlot_Area : public UI::Panel {
 
 	void set_plotmode(int32_t id) {m_plotmode = id;}
 
+protected:
+	void draw_diagram
+		(RenderTarget & dst, float const xline_length, float const yline_length);
+	void draw_maximum_value(RenderTarget &, uint32_t);
+
+	int32_t const spacing;
+	int32_t const space_at_bottom;
+	int32_t const space_at_right;
+
 private:
 	struct __plotdata {
 		const std::vector<uint32_t> * dataset;

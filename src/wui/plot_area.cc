@@ -74,6 +74,9 @@ WUIPlot_Area::WUIPlot_Area
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 :
 UI::Panel (parent, x, y, w, h),
+spacing(5),
+space_at_bottom(15),
+space_at_right(5),
 m_time    (TIME_ONE_HOUR),
 m_plotmode(PLOTMODE_ABSOLUTE)
 {}
@@ -83,80 +86,10 @@ m_plotmode(PLOTMODE_ABSOLUTE)
  * Draw this. This is the main function
  */
 void WUIPlot_Area::draw(RenderTarget & dst) {
-
-	// first, tile the background
-	dst.tile
-		(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
-		 g_gr->get_picture(PicMod_Game, BG_PIC), Point(0, 0));
-
-	int32_t const spacing         =  5;
-	int32_t const space_at_bottom = 15;
-	int32_t const space_at_right  =  5;
-
 	float const xline_length = get_inner_w() - space_at_right  - spacing;
 	float const yline_length = get_inner_h() - space_at_bottom - spacing;
 
-	// Draw coordinate system
-	// X Axis
-	dst.draw_line
-		(spacing,                        get_inner_h() - space_at_bottom,
-		 get_inner_w() - space_at_right, get_inner_h() - space_at_bottom,
-		 LINE_COLOR);
-	// Arrow
-	dst.draw_line
-		(spacing,     get_inner_h() - space_at_bottom,
-		 spacing + 5, get_inner_h() - space_at_bottom - 3,
-		 LINE_COLOR);
-	dst.draw_line
-		(spacing,     get_inner_h() - space_at_bottom,
-		 spacing + 5, get_inner_h() - space_at_bottom + 3,
-		 LINE_COLOR);
-	//  Y Axis
-	dst.draw_line
-		(get_inner_w() - space_at_right, spacing,
-		 get_inner_w() - space_at_right,
-		 get_inner_h() - space_at_bottom,
-		 LINE_COLOR);
-	//  No Arrow here, since this doesn't continue.
-
-	//  draw xticks
-	UI::TextStyle xtickstyle(UI::TextStyle::ui_small());
-	xtickstyle.fg = RGBColor(255, 0, 0);
-
-	float sub = xline_length / how_many_ticks[m_time];
-	float posx = get_inner_w() - space_at_right;
-	char buffer[200];
-	for (int32_t i = 0; i <= how_many_ticks[m_time]; ++i) {
-		dst.draw_line
-			(static_cast<int32_t>(posx), get_inner_h() - space_at_bottom,
-			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
-			 LINE_COLOR);
-
-		snprintf
-			(buffer, sizeof(buffer),
-			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
-
-		UI::g_fh->draw_text
-			(dst, xtickstyle,
-			 Point
-			 	(static_cast<int32_t>(posx),
-			 	 get_inner_h() - space_at_bottom + 10),
-			 buffer,
-			 UI::Align_Center);
-		posx -= sub;
-	}
-
-	//  draw yticks, one at full, one at half
-	dst.draw_line
-		(get_inner_w() - space_at_right,    spacing,
-		 get_inner_w() - space_at_right -3, spacing,
-		 LINE_COLOR);
-	dst.draw_line
-		(get_inner_w() - space_at_right,
-		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
-		 get_inner_w() - space_at_right - 3,
-		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
-		 LINE_COLOR);
+	draw_diagram(dst, xline_length, yline_length);
 
 	uint32_t max = 0;
 	//  Find the maximum value.
@@ -196,17 +129,10 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	}
 
 	//  print the maximal value
-	sprintf(buffer, "%u", max);
-	UI::TextStyle ymarkstyle(UI::TextStyle::ui_small());
-	ymarkstyle.fg = RGBColor(60, 125, 0);
-
-	UI::g_fh->draw_text
-		(dst, ymarkstyle,
-		 Point(get_inner_w() - space_at_right - 2, spacing + 2),
-		 buffer, UI::Align_CenterRight);
+	draw_maximum_value(dst, max);
 
 	//  plot the pixels
-	sub =
+	float sub =
 		xline_length
 		/
 		(static_cast<float>(time_in_ms[m_time])
@@ -243,7 +169,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				sub = xline_length / static_cast<float>(NR_SAMPLES);
 			}
 
-			posx = get_inner_w() - space_at_right;
+			float posx = get_inner_w() - space_at_right;
 
 			int32_t lx = get_inner_w() - space_at_right;
 			int32_t ly = get_inner_h() - space_at_bottom;
@@ -265,6 +191,99 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				ly = cury;
 			}
 		}
+}
+
+/**
+ * draw the background and the axis of the diagram
+ */
+void WUIPlot_Area::draw_diagram
+	(RenderTarget & dst, float const xline_length, float const yline_length) {
+
+	char buffer[200];
+
+	// first, tile the background
+	dst.tile
+		(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
+		 g_gr->get_picture(PicMod_Game, BG_PIC), Point(0, 0));
+
+	// Draw coordinate system
+	// X Axis
+	dst.draw_line
+		(spacing,                        get_inner_h() - space_at_bottom,
+		 get_inner_w() - space_at_right, get_inner_h() - space_at_bottom,
+		 LINE_COLOR);
+	// Arrow
+	dst.draw_line
+		(spacing,     get_inner_h() - space_at_bottom,
+		 spacing + 5, get_inner_h() - space_at_bottom - 3,
+		 LINE_COLOR);
+	dst.draw_line
+		(spacing,     get_inner_h() - space_at_bottom,
+		 spacing + 5, get_inner_h() - space_at_bottom + 3,
+		 LINE_COLOR);
+	//  Y Axis
+	dst.draw_line
+		(get_inner_w() - space_at_right, spacing,
+		 get_inner_w() - space_at_right,
+		 get_inner_h() - space_at_bottom,
+		 LINE_COLOR);
+	//  No Arrow here, since this doesn't continue.
+
+	//  draw xticks
+	UI::TextStyle xtickstyle(UI::TextStyle::ui_small());
+	xtickstyle.fg = RGBColor(255, 0, 0);
+
+	float const sub = xline_length / how_many_ticks[m_time];
+	float posx = get_inner_w() - space_at_right;
+
+	for (int32_t i = 0; i <= how_many_ticks[m_time]; ++i) {
+		dst.draw_line
+			(static_cast<int32_t>(posx), get_inner_h() - space_at_bottom,
+			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
+			 LINE_COLOR);
+
+		snprintf
+			(buffer, sizeof(buffer),
+			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
+
+		UI::g_fh->draw_text
+			(dst, xtickstyle,
+			 Point
+			 	(static_cast<int32_t>(posx),
+			 	 get_inner_h() - space_at_bottom + 10),
+			 buffer,
+			 UI::Align_Center);
+		posx -= sub;
+	}
+
+	//  draw yticks, one at full, one at half
+	dst.draw_line
+		(get_inner_w() - space_at_right,    spacing,
+		 get_inner_w() - space_at_right -3, spacing,
+		 LINE_COLOR);
+	dst.draw_line
+		(get_inner_w() - space_at_right,
+		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
+		 get_inner_w() - space_at_right - 3,
+		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
+		 LINE_COLOR);
+
+}
+
+/**
+ * draw the max value into the top right edge of the RenderTarget.
+ */
+void WUIPlot_Area::draw_maximum_value(RenderTarget & dst, uint32_t max) {
+	char buffer[200];
+
+	sprintf(buffer, "%u", max);
+	UI::TextStyle ymarkstyle(UI::TextStyle::ui_small());
+	ymarkstyle.fg = RGBColor(60, 125, 0);
+
+	UI::g_fh->draw_text
+		(dst, ymarkstyle,
+		 Point(get_inner_w() - space_at_right - 2, spacing + 2),
+		 buffer, UI::Align_CenterRight);
 }
 
 /*
