@@ -1012,6 +1012,9 @@ bool Worker::run_construct(Game & game, State & state, Action const & action)
 		return true;
 	}
 
+	//update consumption statistic
+	owner().ware_consumed(wareindex, 1);
+
 	item = fetch_carried_item(game);
 	item->remove(game);
 
