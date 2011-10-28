@@ -41,6 +41,7 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_EIGHT_HOURS,
 		TIME_16_HOURS,
 	};
+
 	enum PLOTMODE {
 		//  Always take the samples of some times together, so that the graph is
 		//  not completely zigg-zagged.
@@ -48,6 +49,8 @@ struct WUIPlot_Area : public UI::Panel {
 
 		PLOTMODE_ABSOLUTE
 	};
+
+	#define NR_SAMPLES 30   // How many samples per diagramm when relative plotting
 
 	WUIPlot_Area
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
@@ -68,17 +71,19 @@ protected:
 		(RenderTarget & dst, float const xline_length, float const yline_length);
 	void draw_maximum_value(RenderTarget &, uint32_t);
 
+	static const uint32_t time_in_ms[];
+
 	int32_t const spacing;
 	int32_t const space_at_bottom;
 	int32_t const space_at_right;
 
-private:
 	struct __plotdata {
 		const std::vector<uint32_t> * dataset;
 		bool                          showplot;
 		RGBColor                      plotcolor;
 	};
 	std::vector<__plotdata> m_plotdata;
+
 	int32_t                 m_time;  // How much do you want to list
 	int32_t                 m_sample_rate;
 	int32_t                 m_plotmode;

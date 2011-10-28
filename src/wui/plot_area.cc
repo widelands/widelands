@@ -63,8 +63,6 @@ static const uint32_t time_in_ms[] = {
 	16 * 60 * 60 * 1000,
 };
 
-#define NR_SAMPLES 30   // How many samples per diagramm when relative plotting
-
 #define BG_PIC "pics/plot_area_bg.png"
 #define LINE_COLOR RGBColor(0, 0, 0)
 

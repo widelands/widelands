@@ -1,0 +1,91 @@
+/*
+ * Copyright (C) 2011 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
+#include "differential_plot_area.h"
+
+DifferentialPlot_Area::DifferentialPlot_Area
+		(UI::Panel * const parent,
+		 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
+:
+WUIPlot_Area (parent, x, y, w, h)
+{}
+
+void DifferentialPlot_Area::draw(RenderTarget & dst) {
+	float const xline_length = get_inner_w() - space_at_right  - spacing;
+	float const yline_length = get_inner_h() - space_at_bottom - spacing;
+
+	draw_diagram(dst, xline_length, yline_length);
+
+	//find max and min value
+	int32_t max = 0;
+	int32_t min = 0;
+
+	if (m_plotmode == PLOTMODE_ABSOLUTE)  {
+		for (uint32_t i = 0; i < m_plotdata.size(); ++i)
+			if (m_plotdata[i].showplot) {
+				for (uint32_t l = 0; l < m_plotdata[i].dataset->size(); ++l) {
+					int32_t temp = (*m_plotdata[i].dataset)[l] -
+								   (*m_negative_plotdata[i].dataset)[l];
+					if (max < temp) max = temp;
+					if (min > temp) min = temp;
+				}
+			}
+	} else {
+		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
+			if (m_plotdata[plot].showplot) {
+
+				std::vector<uint32_t> const & dataset = *m_plotdata[plot].dataset;
+				std::vector<uint32_t> const & ndataset = *m_negative_plotdata[plot].dataset;
+
+				// How many do we take together
+				int32_t const how_many =
+					static_cast<int32_t>
+					((static_cast<float>(time_in_ms[m_time])
+					  /
+					  static_cast<float>(NR_SAMPLES))
+					 /
+					 static_cast<float>(m_sample_rate));
+
+				int32_t add = 0;
+				//  Relative data, first entry is always zero.
+				for (uint32_t i = 0; i < dataset.size(); ++i) {
+					add += dataset[i] - ndataset[i];
+					if (0 == ((i + 1) % how_many)) {
+						if (max < add) max = add;
+						if (min > add) min = add;
+
+						add = 0;
+					}
+				}
+			}
+	}
+}
+
+/**
+ * Register a new negative plot data stream. This stream is
+ * used as subtrahend for calculating the plot data.
+ */
+void DifferentialPlot_Area::register_negative_plot_data
+	(uint32_t const id, std::vector<uint32_t> const * const data) {
+
+	if (id >= m_negative_plotdata.size())
+		m_negative_plotdata.resize(id + 1);
+
+	m_negative_plotdata[id].dataset   = data;
+}
