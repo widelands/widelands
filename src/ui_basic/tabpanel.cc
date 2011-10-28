@@ -262,12 +262,12 @@ void Tab_Panel::draw(RenderTarget & dst)
 
 			dst.brighten_rect
 				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 2), 2, 2),
-				 BUTTON_EDGE_BRIGHT_FACTOR);
+				 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 			dst.fill_rect
-				(Rect(Point(x + TP_BUTTON_WIDTH - 1, TP_BUTTON_HEIGHT - 2), 1, 1),
+				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 1), 1, 1),
 				 black);
 			dst.fill_rect
-				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 1), 2, 1),
+				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 2), 2, 1),
 				 black);
 		}
 	}
