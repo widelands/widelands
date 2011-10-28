@@ -21,6 +21,7 @@
 #define WARE_STATISTICS_MENU_H
 
 #include "ui_basic/unique_window.h"
+#include "plot_area.h"
 
 struct Interactive_Player;
 struct WUIPlot_Area;
@@ -35,6 +36,7 @@ private:
 
 	void clicked_help();
 	void cb_changed_to(int32_t, bool);
+	void set_time(WUIPlot_Area::TIME);
 };
 
 #endif

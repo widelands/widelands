@@ -151,7 +151,7 @@ m_parent(&parent)
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 boost::bind
-			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			(&Ware_Statistics_Menu::set_time, boost::ref(*this),
 			 WUIPlot_Area::TIME_15_MINS),
 		 _("15 m"));
 
@@ -162,7 +162,7 @@ m_parent(&parent)
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 boost::bind
-			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			(&Ware_Statistics_Menu::set_time, boost::ref(*this),
 			 WUIPlot_Area::TIME_30_MINS),
 		 _("30 m"));
 
@@ -173,7 +173,7 @@ m_parent(&parent)
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 boost::bind
-			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			(&Ware_Statistics_Menu::set_time, boost::ref(*this),
 			 WUIPlot_Area::TIME_ONE_HOUR),
 		 _("1 h"));
 
@@ -184,7 +184,7 @@ m_parent(&parent)
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 boost::bind
-			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			(&Ware_Statistics_Menu::set_time, boost::ref(*this),
 			 WUIPlot_Area::TIME_TWO_HOURS),
 		 _("2 h"));
 
@@ -206,7 +206,7 @@ m_parent(&parent)
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 boost::bind
-		 (&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+		 (&Ware_Statistics_Menu::set_time, boost::ref(*this),
 		  WUIPlot_Area::TIME_FOUR_HOURS),
 		 _("4 h"));
 
@@ -217,7 +217,7 @@ m_parent(&parent)
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 boost::bind
-			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			(&Ware_Statistics_Menu::set_time, boost::ref(*this),
 			 WUIPlot_Area::TIME_EIGHT_HOURS),
 		 _("8 h"));
 
@@ -228,7 +228,7 @@ m_parent(&parent)
 		 pos.x, pos.y, button_size, 25,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 boost::bind
-			(&WUIPlot_Area::set_time, boost::ref(*m_plot_production),
+			(&Ware_Statistics_Menu::set_time, boost::ref(*this),
 			 WUIPlot_Area::TIME_16_HOURS),
 		 _("16 h"));
 
@@ -239,15 +239,25 @@ m_parent(&parent)
 
 
 /**
- * Called when the ok button has been clicked
+ * Called when the help button has been clicked
  * \todo Implement help
 */
 void Ware_Statistics_Menu::clicked_help() {}
 
-/*
- * Cb has been changed to this state
+/**
+ * Callback for the ware buttons. Change the state of all ware statistics
+ * simultaneously.
  */
 void Ware_Statistics_Menu::cb_changed_to(int32_t const id, bool const what) {
 	m_plot_production->show_plot(id, what);
 	m_plot_consumption->show_plot(id, what);
+}
+
+/**
+ * Callback for the time buttons. Change the time axis of all ware
+ * statistics simultaneously.
+ */
+void Ware_Statistics_Menu::set_time(WUIPlot_Area::TIME timescale) {
+	m_plot_production->set_time(timescale);
+	m_plot_consumption->set_time(timescale);
 }
