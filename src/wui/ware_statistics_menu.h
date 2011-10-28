@@ -22,6 +22,7 @@
 
 #include "ui_basic/unique_window.h"
 #include "plot_area.h"
+#include "differential_plot_area.h"
 
 struct Interactive_Player;
 struct WUIPlot_Area;
@@ -32,7 +33,7 @@ struct Ware_Statistics_Menu : public UI::UniqueWindow {
 private:
 	Interactive_Player * m_parent;
 	WUIPlot_Area       * m_plot_production;
-	WUIPlot_Area       * m_plot_consumption;
+	DifferentialPlot_Area       * m_plot_consumption;
 
 	void clicked_help();
 	void cb_changed_to(int32_t, bool);

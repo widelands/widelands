@@ -26,6 +26,16 @@
 
 #include <vector>
 
+static const uint32_t time_in_ms[] = {
+	15      * 60 * 1000,
+	30      * 60 * 1000,
+	1  * 60 * 60 * 1000,
+	2  * 60 * 60 * 1000,
+	4  * 60 * 60 * 1000,
+	8  * 60 * 60 * 1000,
+	16 * 60 * 60 * 1000,
+};
+
 /*
  * A Plot Area is a simple 2D Plot, with the
  * X Axis as time (actually Minus Time)
@@ -69,9 +79,8 @@ struct WUIPlot_Area : public UI::Panel {
 protected:
 	void draw_diagram
 		(RenderTarget & dst, float const xline_length, float const yline_length);
-	void draw_maximum_value(RenderTarget &, uint32_t);
-
-	static const uint32_t time_in_ms[];
+	void draw_value
+		(RenderTarget & dst, const char * value, RGBColor color, Point pos);
 
 	int32_t const spacing;
 	int32_t const space_at_bottom;

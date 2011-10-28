@@ -53,16 +53,6 @@ static const int32_t max_x[] = {
 	16
 };
 
-static const uint32_t time_in_ms[] = {
-	15      * 60 * 1000,
-	30      * 60 * 1000,
-	1  * 60 * 60 * 1000,
-	2  * 60 * 60 * 1000,
-	4  * 60 * 60 * 1000,
-	8  * 60 * 60 * 1000,
-	16 * 60 * 60 * 1000,
-};
-
 #define BG_PIC "pics/plot_area_bg.png"
 #define LINE_COLOR RGBColor(0, 0, 0)
 
@@ -126,8 +116,13 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			}
 	}
 
-	//  print the maximal value
-	draw_maximum_value(dst, max);
+	//  print the maximal value into the top right corner
+	char buffer[200];
+	sprintf(buffer, "%u", max);
+
+	draw_value
+		(dst, buffer, RGBColor(60, 125, 0),
+		 Point(get_inner_w() - space_at_right - 2, spacing + 2));
 
 	//  plot the pixels
 	float sub =
@@ -269,19 +264,19 @@ void WUIPlot_Area::draw_diagram
 }
 
 /**
- * draw the max value into the top right edge of the RenderTarget.
+ * print the value into the RenderTarget.
  */
-void WUIPlot_Area::draw_maximum_value(RenderTarget & dst, uint32_t max) {
-	char buffer[200];
+void WUIPlot_Area::draw_value
+	(RenderTarget & dst, const char * value, RGBColor color, Point pos)
+{
 
-	sprintf(buffer, "%u", max);
 	UI::TextStyle ymarkstyle(UI::TextStyle::ui_small());
-	ymarkstyle.fg = RGBColor(60, 125, 0);
+	ymarkstyle.fg = color;
 
 	UI::g_fh->draw_text
 		(dst, ymarkstyle,
-		 Point(get_inner_w() - space_at_right - 2, spacing + 2),
-		 buffer, UI::Align_CenterRight);
+		 pos,
+		 value, UI::Align_CenterRight);
 }
 
 /*

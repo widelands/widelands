@@ -75,6 +75,29 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 				}
 			}
 	}
+
+	//use equal positive and negative range
+	min = abs(min);
+	uint32_t highest_scale = 0;
+	if (min > max) {
+		highest_scale = min;
+	} else {
+		highest_scale = max;
+	}
+	//print the min and max values
+	char buffer[200];
+
+	sprintf(buffer, "%u", highest_scale);
+	draw_value
+		(dst, buffer, RGBColor(60, 125, 0),
+		 Point(get_inner_w() - space_at_right - 2, spacing + 2));
+
+	sprintf(buffer, "-%u", highest_scale);
+	draw_value
+		(dst, buffer, RGBColor(60, 125, 0),
+		 Point(get_inner_w() - space_at_right - 2, spacing + 2));
+
+	//print plot
 }
 
 /**

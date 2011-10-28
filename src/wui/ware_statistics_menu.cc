@@ -28,6 +28,7 @@
 #include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "plot_area.h"
+#include "differential_plot_area.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -90,7 +91,7 @@ m_parent(&parent)
 			m_plot_production, _("Production"));
 
 	m_plot_consumption =
-		new WUIPlot_Area(tabs, 0, 0, 0, 0);
+		new DifferentialPlot_Area(tabs, 0, 0, 0, 0);
 	m_plot_consumption->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
@@ -123,6 +124,7 @@ m_parent(&parent)
 			set_inner_size
 				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
 
+			//register data
 			m_plot_production->register_plot_data
 				(cur_ware,
 				 parent.get_player()->get_ware_production_statistics
@@ -131,9 +133,14 @@ m_parent(&parent)
 
 			m_plot_consumption->register_plot_data
 				(cur_ware,
-				 parent.get_player()->get_ware_consumption_statistics
+				 parent.get_player()->get_ware_production_statistics
 				 	(Widelands::Ware_Index(cur_ware)),
 				 colors[cur_ware]);
+
+			m_plot_consumption->register_negative_plot_data
+				(cur_ware,
+				 parent.get_player()->get_ware_consumption_statistics
+				 	(Widelands::Ware_Index(cur_ware)));
 		}
 		pos.y += dposy;
 	}
