@@ -1221,6 +1221,22 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 		}
 	} else
 		throw wexception("Unsupported version %i", version);
+
+	//create empty consumption statistic if it is missing
+	if (version < 2) {
+		uint16_t nr_entries = m_ware_productions[0].size();
+
+		for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
+			m_ware_consumptions[i].resize(nr_entries);
+			m_current_consumed_statistics[i] = 0;
+
+			for (uint32_t j = 0; j < nr_entries; ++j)
+				m_ware_consumptions[i][j] = 0;
+		}
+	}
+
+	assert(m_ware_productions.size() == m_ware_consumptions.size());
+	assert(m_ware_productions[0].size() == m_ware_consumptions[0].size());
 }
 
 

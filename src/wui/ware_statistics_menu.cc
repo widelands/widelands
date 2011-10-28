@@ -96,7 +96,7 @@ m_parent(&parent)
 
 	tabs->add
 		("consumption", g_gr->get_picture(PicMod_UI, pic_tab_production),
-			m_plot_production, _("Consumption"));
+			m_plot_consumption, _("Consumption"));
 
 	//add buttons for all wares below the tabbed environment
 	//and register the statistic data
@@ -131,7 +131,7 @@ m_parent(&parent)
 
 			m_plot_consumption->register_plot_data
 				(cur_ware,
-				 parent.get_player()->get_ware_production_statistics
+				 parent.get_player()->get_ware_consumption_statistics
 				 	(Widelands::Ware_Index(cur_ware)),
 				 colors[cur_ware]);
 		}
