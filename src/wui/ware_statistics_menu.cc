@@ -33,6 +33,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/wsm_checkbox.h"
+#include "ui_basic/tabpanel.h"
 
 
 #define MIN_WARES_PER_LINE 7
@@ -71,14 +72,34 @@ m_parent(&parent)
 		  nr_rows * (WARE_MENU_PIC_HEIGHT + spacing) + 100));
 
 
+	//create a tabbed environment for the different plots
+	UI::Tab_Panel * tabs =
+		 new UI::Tab_Panel
+			 (this, spacing, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+
+
 	m_plot_production =
 		new WUIPlot_Area
-			(this,
-			 spacing, offs.y + spacing, get_inner_w() - 2 * spacing, PLOT_HEIGHT);
+			(tabs,
+			 0, 0, 0, 0);
 	m_plot_production->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot_production->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
-	//  all wares
+	tabs->add
+		("production", g_gr->get_picture(PicMod_UI, pic_tab_production),
+			m_plot_production, _("Production"));
+
+	m_plot_consumption =
+		new WUIPlot_Area(tabs, 0, 0, 0, 0);
+	m_plot_consumption->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+
+	tabs->add
+		("consumption", g_gr->get_picture(PicMod_UI, pic_tab_production),
+			m_plot_production, _("Consumption"));
+
+	//add buttons for all wares below the tabbed environment
+	//and register the statistic data
 	Widelands::Ware_Index::value_t cur_ware = 0;
 	int32_t dposy    = 0;
 	pos.y += PLOT_HEIGHT + 2 * spacing;
@@ -101,7 +122,14 @@ m_parent(&parent)
 			dposy = cb.get_h() + spacing;
 			set_inner_size
 				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
+
 			m_plot_production->register_plot_data
+				(cur_ware,
+				 parent.get_player()->get_ware_production_statistics
+				 	(Widelands::Ware_Index(cur_ware)),
+				 colors[cur_ware]);
+
+			m_plot_consumption->register_plot_data
 				(cur_ware,
 				 parent.get_player()->get_ware_production_statistics
 				 	(Widelands::Ware_Index(cur_ware)),
@@ -110,8 +138,9 @@ m_parent(&parent)
 		pos.y += dposy;
 	}
 
-	m_plot_production->set_size(get_inner_w() - 2 * spacing, PLOT_HEIGHT);
-
+	//set height of Tab_Panel to height of the plot + height of the tabs
+	tabs->set_size(get_inner_w() - 2 * spacing, PLOT_HEIGHT + offs.y + spacing);
+	tabs->activate(0);
 
 	int32_t button_size = (get_inner_w() - spacing * 5) / 4;
 	pos.x  = spacing;
@@ -220,4 +249,5 @@ void Ware_Statistics_Menu::clicked_help() {}
  */
 void Ware_Statistics_Menu::cb_changed_to(int32_t const id, bool const what) {
 	m_plot_production->show_plot(id, what);
+	m_plot_consumption->show_plot(id, what);
 }
