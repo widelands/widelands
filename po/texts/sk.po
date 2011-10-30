@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-23 01:16+0000\n"
+"PO-Revision-Date: 2011-10-30 02:48+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-24 05:10+0000\n"
-"X-Generator: Launchpad (build 14185)\n"
+"X-Launchpad-Export-Date: 2011-10-30 05:11+0000\n"
+"X-Generator: Launchpad (build 14197)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -338,7 +338,7 @@ msgstr "Kampane"
 
 #: ../../txts/README:16
 msgid "Check out the Widelands project homepage:"
-msgstr "Navštív domovskú stránku projektu Widelands:"
+msgstr "Navštívte domovskú stránku projektu Widelands:"
 
 #: ../../txts/developers:8
 msgid "Chieftain"
@@ -696,6 +696,11 @@ msgid ""
 "should read something like c:\\games\\widelands\\widelands.exe. Change this "
 "to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
+"Pod Windowsom vytvorte odkaz na súbor  widelands.exe (kliknite pravým na "
+"widelands.exe a vyberte Vytvoriť odkaz). Potom upravte odkaz (kliknite "
+"pravým na novo vytvorený odkaz a vyberte Vlastnosti). V políčku Cieľ by malo "
+"byť niečo ako c:\\games\\widelands\\widelands.exe. Zmeňte to na c:\\games\\"
+"widelands\\widelands.exe --record=filename.rec."
 
 #: ../../txts/README:97
 msgid "Online Help"
@@ -1106,6 +1111,9 @@ msgid ""
 "can then replay an entire session from starting the game to exiting it. This "
 "is really helpful for debugging problems."
 msgstr ""
+"Widelands dokáže nahrať každé stlačenie klávesov a pohyb myši do súboru. "
+"Potom vie prehrať celú reláciu od začiatku hry po jej koniec. Je to veľmi "
+"užitočné pri ladení problémov."
 
 #: ../../txts/README:13
 msgid ""
@@ -1201,4 +1209,4 @@ msgstr ""
 
 #: ../../txts/README:5
 msgid "an open source strategy game"
-msgstr ""
+msgstr "open source strategická hra"

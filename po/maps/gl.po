@@ -2,47 +2,48 @@
 # Copyright (C) 2007 Widelands Development Team
 #
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
-# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010.
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2010-08-30 23:30+0000\n"
+"PO-Revision-Date: 2011-10-29 23:01+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:08+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-10-30 05:11+0000\n"
+"X-Generator: Launchpad (build 14197)\n"
 "X-Poedit-Country: SPAIN\n"
+"Language: gl\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 — Ollos na escuridade"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 — Do castigo á creación"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 — As areas de Malac Mor"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 — Un novo fogar"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
-msgstr ""
+msgstr "02 — Un posto de avanzada no que exiliarse"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 — Esta é a nosa terra"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -90,6 +91,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"A “Transillada” é un torneo especial da cultura atlántica no que varios "
+"grupos intentan chegar á illa central canto antes, para ser os primeiros en "
+"erguer un castelo no alto da montaña central."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -125,7 +129,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlánticos — A carreira polo lume"
 
 # Véxase o artigo «Atol» na Galipedia para máis información.
 #: ../../maps/Atoll.wmf/elemental:7
@@ -134,11 +138,11 @@ msgstr "Atol"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "Bárbaros — O segundo imperio"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Esixente. Introduce aos atlánticos."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -154,7 +158,7 @@ msgstr "Cráter"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Torneo do deserto"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -174,19 +178,19 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Doada. Introduce aos bárbaros."
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Doada. Introduce ao imperio."
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
-msgstr "As fragas élficas"
+msgstr "As fragas dos elfos"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "Imperio — Os meses de exilio"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -232,6 +236,9 @@ msgid ""
 "the mountain of gold that primises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Catro tribos enfróntanse entre elas, dous contra dous, por acadar a montaña "
+"das riquezas sen fin. ¿Poderán as dúas tribos superviventes compartir "
+"sabiamente os recursos?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -267,7 +274,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Transillada"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -288,6 +295,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Disque os vellos monxes guerreiros que habitan os lameiros son a clave para "
+"controlar a illa."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -361,7 +370,7 @@ msgstr "O labirinto místico"
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Aínda non se fixo."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -410,7 +419,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Contrabandistas"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -443,7 +452,7 @@ msgstr "A illa da lama"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
-msgstr ""
+msgstr "Monxes dos lameiros"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -603,6 +612,12 @@ msgid ""
 "a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
+"Canto o deus dos atlánticos perdeu a fe neles e afundiu a súa illa, a loita "
+"dunha muller pola xustiza e por unha segunda oportunidade para o seu pobo "
+"deixaría a súa pegada na historia. Liderando aos atlánticos superviventes "
+"cara un novo futuro nunha nova parte do mundo, Iunlina converteuse na persoa "
+"máis poderosa do seu tempo, se ben pagou un alto prezo: a súa alma e "
+"humanidade."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -663,3 +678,7 @@ msgid ""
 "appeared and now a rivalry under smugglers has been started: Which team will "
 "be the first to smuggle a certain number of wares?"
 msgstr ""
+"De súpeto, as túas rutas de contrabando que tan ben estaban a funcionar "
+"empezaron a ter problemas. Apareceron outras dúas tribos, e as tres "
+"rivalizades entre vós. Cal será a primeira en contrabandear un certo número "
+"de mercadorías?"

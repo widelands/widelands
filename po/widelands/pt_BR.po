@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-10-20 00:10+0000\n"
-"Last-Translator: Tomas Abril <Unknown>\n"
+"PO-Revision-Date: 2011-10-29 20:14+0000\n"
+"Last-Translator: Nicolas Abril <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-10-21 04:34+0000\n"
-"X-Generator: Launchpad (build 14165)\n"
+"X-Launchpad-Export-Date: 2011-10-30 05:11+0000\n"
+"X-Generator: Launchpad (build 14197)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2588,20 +2588,20 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1160
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Jogo salvo com sucesso!"
 
 #: ../../src/network/nethost.cc:1162
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Não foi possível salvar o jogo no arquivo \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1168
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Este servidor não é protegido por senha!"
 
 #: ../../src/network/nethost.cc:1171
 msgid "The send password was incorrect!"
-msgstr ""
+msgstr "A senha enviada estava incorreta!"
 
 #: ../../src/network/nethost.cc:1184
 msgid "The password was correct, access was granted!"
@@ -2639,6 +2639,8 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
+"Este servidor é protegido com senha. Você pode enviar a senha com: \"@%s pwd "
+"PASSWORD\""
 
 #: ../../src/network/nethost.cc:2055
 msgid "Client reports time to host that is running backwards."
@@ -2691,7 +2693,7 @@ msgstr "O Servidor usa uma versão do protocolo diferente."
 #: ../../src/network/nethost.cc:2474 ../../src/network/nethost.cc:2485
 #: ../../src/network/nethost.cc:2496
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Cliente não tem acesso às configurações dos outros jogadores."
 
 #: ../../src/network/nethost.cc:2512 ../../src/network/nethost.cc:2521
 #: ../../src/network/nethost.cc:2530
@@ -3357,7 +3359,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Unknown gametime"
-msgstr ""
+msgstr "Tempo de jogo desconhecido"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:60
 msgid "Choose a replay!"
@@ -3428,13 +3430,15 @@ msgstr "(directório)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:466 ../../src/ui_fsmenu/mapselect.cc:469
 msgid "unknown"
-msgstr ""
+msgstr "desconhecido(a)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:468
 msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"O arquivo do mapa não está presente em seu sistema de arquivos. Dados "
+"mostrados aqui foram enviados pelo servidor."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
@@ -4266,7 +4270,7 @@ msgstr "IA: "
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Aleatório(a)"
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
 #: ../../src/wui/playerdescrgroup.cc:180
