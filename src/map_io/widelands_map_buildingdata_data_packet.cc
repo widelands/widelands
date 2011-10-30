@@ -367,6 +367,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				uint16_t const nr_workers = fr.Unsigned16();
 				for (uint16_t i = 0; i < nr_workers; ++i) {
 					uint32_t const worker_serial = fr.Unsigned32();
+
 					try {
 						Worker & worker = mol.get<Worker>(worker_serial);
 						if (1 == packet_version) {
@@ -376,7 +377,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 									(_("expected %s but found \"%s\""),
 									 worker.name().c_str(), name);
 						}
-						warehouse.sort_worker_in(game, worker);
+						Ware_Index worker_index = tribe.worker_index(worker.name().c_str());
+						if (!warehouse.m_incorporated_workers.count(worker_index))
+							warehouse.m_incorporated_workers[worker_index] = std::vector<Worker *>();
+						warehouse.m_incorporated_workers[worker_index].push_back(&worker);
 					} catch (_wexception const & e) {
 						throw game_data_error
 							("incorporated worker #%u (%u): %s",
@@ -858,8 +862,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 statistics_string_length)
 						log
 							("WARNING: productionsite statistics string can be at "
-							 "most %u characters but a loaded building has the "
-							 "string \"%s\" of length %u\n",
+							 "most %lu characters but a loaded building has the "
+							 "string \"%s\" of length %lu\n",
 							 sizeof(productionsite.m_statistics_buffer) - 1,
 							 statistics_string, statistics_string_length);
 				}
@@ -876,8 +880,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 result_string_length)
 						log
 							("WARNING: productionsite result string can be at "
-							 "most %u characters but a loaded building has the "
-							 "string \"%s\" of length %u\n",
+							 "most %lu characters but a loaded building has the "
+							 "string \"%s\" of length %lu\n",
 							 sizeof(productionsite.m_result_buffer) - 1,
 							 result_string, result_string_length);
 				}
@@ -1151,18 +1155,23 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	fw.Unsigned8(0);
 
 	//  Incorporated workers, write sorted after file-serial.
-	fw.Unsigned16(warehouse.m_incorporated_workers.size());
+	uint32_t nworkers = 0;
+	container_iterate_const(Warehouse::IncorporatedWorkers, warehouse.m_incorporated_workers, cwt)
+		nworkers += cwt->second.size();
+
+	fw.Unsigned16(nworkers);
 	typedef std::map<uint32_t, const Worker *> TWorkerMap;
 	TWorkerMap workermap;
-	container_iterate_const
-		(std::vector<Worker *>, warehouse.m_incorporated_workers, i)
-	{
-		Worker const & w = *(*i);
-		assert(mos.is_object_known(w));
-		workermap.insert
-			(std::pair<uint32_t, const Worker *>
-			 	(mos.get_object_file_index(w), &w));
+	container_iterate_const(Warehouse::IncorporatedWorkers, warehouse.m_incorporated_workers, cwt) {
+		container_iterate_const(Warehouse::WorkerList, cwt->second, i) {
+			Worker const & w = *(*i);
+			assert(mos.is_object_known(w));
+			workermap.insert
+				(std::pair<uint32_t, const Worker *>
+				 (mos.get_object_file_index(w), &w));
+		}
 	}
+
 	container_iterate_const(TWorkerMap, workermap, i)
 	{
 		Worker const & obj = *i.current->second;
