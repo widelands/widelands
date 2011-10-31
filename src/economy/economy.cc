@@ -520,29 +520,25 @@ void Economy::remove_supply(Supply & supply)
 
 
 bool Economy::needs_ware(Ware_Index const ware_type) const {
-	size_t const nr_supplies = m_supplies.get_nrsupplies();
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
 	uint32_t quantity = 0;
-	for (size_t i = 0; i < nr_supplies; ++i)
-		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i])) {
-			quantity += warehouse_supply->stock_wares(ware_type);
-			if (t <= quantity)
-				return false;
-		}
+	container_iterate_const(std::vector<Warehouse *>, m_warehouses, wh) {
+		quantity += (*wh)->get_wares().stock(ware_type);
+		if (t <= quantity)
+			return false;
+	}
 	return true;
 }
 
 
 bool Economy::needs_worker(Ware_Index const worker_type) const {
-	size_t const nr_supplies = m_supplies.get_nrsupplies();
 	uint32_t const t = worker_target_quantity(worker_type).permanent;
 	uint32_t quantity = 0;
-	for (size_t i = 0; i < nr_supplies; ++i)
-		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i])) {
-			quantity += warehouse_supply->stock_workers(worker_type);
-			if (t <= quantity)
-				return false;
-		}
+	container_iterate_const(std::vector<Warehouse *>, m_warehouses, wh) {
+		quantity += (*wh)->get_workers().stock(worker_type);
+		if (t <= quantity)
+			return false;
+	}
 	return true;
 }
 
