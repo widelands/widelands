@@ -91,6 +91,9 @@ bool Router::find_route
 
 	Open.push(&start);
 
+	RoutingNodeNeighbours neighbours;
+	neighbours.reserve(6);
+
 	for (;;) {
 		if (Open.empty()) // path not found
 			return false;
@@ -103,7 +106,11 @@ bool Router::find_route
 			return false;
 
 		// Loop through all neighbouring nodes
-		RoutingNodeNeighbours neighbours;
+		// Note that we do not create a new neighbours here, but we clear the old
+		// one. This is to avoid a lot of useless mallocs and frees that happen
+		// otherwise. Note that the C++ standard does not state if clear will
+		// reset .reserve(), but most do not.
+		neighbours.clear();
 
 		current->get_neighbours(neighbours);
 
