@@ -77,7 +77,8 @@ void Game_Cmd_Queue_Data_Packet::Read
 
 				item.cmd = &cmd;
 
-				cmdq.m_cmds.push(item);
+				cmdq.m_cmds[cmd.duetime() % CMD_QUEUE_BUCKET_SIZE].push(item);
+				++ cmdq.m_ncmds;
 			}
 		} else
 			throw game_data_error
@@ -105,27 +106,37 @@ void Game_Cmd_Queue_Data_Packet::Write
 
 	// Write all commands
 
-	// Make a copy, so we can pop stuff
-	std::priority_queue<Cmd_Queue::cmditem> p = cmdq.m_cmds;
+	// Find all the items in the current cmdqueue
+	int32_t time = game.get_gametime();
+	size_t nhandled = 0;
 
-	while (p.size()) {
-		Cmd_Queue::cmditem const & it = p.top();
+	while (nhandled < cmdq.m_ncmds) {
+		// Make a copy, so we can pop stuff
+		std::priority_queue<Cmd_Queue::cmditem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
 
-		if (upcast(GameLogicCommand, cmd, it.cmd)) {
-			// The id (aka command type)
-			fw.Unsigned16(cmd->id());
+		while (p.size()) {
+			Cmd_Queue::cmditem const & it = p.top();
+			if (it.cmd->duetime() == time) {
+				if (upcast(GameLogicCommand, cmd, it.cmd)) {
+					// The id (aka command type)
+					fw.Unsigned16(cmd->id());
 
-			// Serial number
-			fw.Signed32(it.category);
-			fw.Unsigned32(it.serial);
+					// Serial number
+					fw.Signed32(it.category);
+					fw.Unsigned32(it.serial);
 
-			// Now the command itself
-			cmd->Write(fw, game, *os);
+					// Now the command itself
+					cmd->Write(fw, game, *os);
+				}
+				++ nhandled;
+			}
+
+			// DONE: next command
+			p.pop();
 		}
-
-		// DONE: next command
-		p.pop();
+		++time;
 	}
+
 
 	fw.Unsigned16(0); // end of command queue
 
