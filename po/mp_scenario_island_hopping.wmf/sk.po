@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-16 14:50+0000\n"
+"PO-Revision-Date: 2011-10-31 17:25+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-17 04:38+0000\n"
-"X-Generator: Launchpad (build 14155)\n"
+"X-Launchpad-Export-Date: 2011-11-01 04:41+0000\n"
+"X-Generator: Launchpad (build 14197)\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "%i %s<br>"
@@ -23,7 +23,7 @@ msgstr "%i %s<br>"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
 msgid "%s has been King of the Hill since %s!"
-msgstr ""
+msgstr "%s je kráľom hory od %s!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
 msgid "%s has won the game. Congratulations!"
@@ -34,26 +34,28 @@ msgid ""
 "%s is now King of the Hill! He needs to keep his castle there for 20\n"
 "minutes to win the game."
 msgstr ""
+"%s je teraz kráľom hory! Hru vyhrá, ak tam dokáže udržať svoj hrad na 20 "
+"minút."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
 msgid "%s lost control of the hill."
-msgstr ""
+msgstr "%s stratil kontrolu nad horou."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
 msgid "%s was the first to reach the Island number %i."
-msgstr ""
+msgstr "%s ako prvý dosiahol ostrov číslo %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:41
 msgid "%s was the fourth to reach the Island number %i."
-msgstr ""
+msgstr "%s ako štvrtý dosiahol ostrov číslo %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:39
 msgid "%s was the second to reach the Island number %i."
-msgstr ""
+msgstr "%s ako druhý dosiahol ostrov číslo %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:40
 msgid "%s was the third to reach the Island number %i."
-msgstr ""
+msgstr "%s ako tretí dosiahol ostrov číslo %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
@@ -66,22 +68,22 @@ msgstr "15 minút"
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:25
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "1st to finish"
-msgstr ""
+msgstr "1. miesto"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "2nd to finish"
-msgstr ""
+msgstr "2. miesto"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:27
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
 msgid "3rd to finish"
-msgstr ""
+msgstr "3. miesto"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
 msgid "4th to finish"
-msgstr ""
+msgstr "4. miesto"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -93,11 +95,11 @@ msgstr "Ako odmenu získava:<br><br>%s"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid "Finish rewards"
-msgstr ""
+msgstr "Odmeny za skončenie"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:24
 msgid "First Island"
-msgstr ""
+msgstr "Prvý ostrov"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:94
 msgid "Game Status"
@@ -111,6 +113,9 @@ msgid ""
 "at\n"
 "the center of the third island for 20 minutes to win the game"
 msgstr ""
+"Ak dokončíte hrad v cieľovej oblasti na druhom ostrove, získate tretiu\n"
+"základňu na treťom ostrove. Musíte postaviť a obsadiť hrad v centre\n"
+"tretieho ostrova na 20 minút, aby ste zvíťazili."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
@@ -121,6 +126,11 @@ msgid ""
 "your\n"
 "first headquarters."
 msgstr ""
+"Skákanie po ostrovoch je tradičný turnaj v atlantickej kultúre. Pravidlá\n"
+"hry sú jednoduché: začínate so základňou na jednom ostrove. Keď\n"
+"dokončíte hrad na konci prvého ostrova, dostanete druhú základňu\n"
+"na druhom ostrove, ktorá bude bude obsahovať všetok tovar z vašej prvej\n"
+"základne."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
@@ -128,7 +138,7 @@ msgstr "Pravidlá"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:29
 msgid "Second Island"
-msgstr ""
+msgstr "Druhý ostrov"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:19
 msgid ""
@@ -136,10 +146,14 @@ msgid ""
 "only meadows and resources. The economies you leave behind will continue to\n"
 "work for you, but you only reap the benefits when you reach a new island."
 msgstr ""
+"Radou je, že prvý ostrov ponúka len kamene a drevo, druhý len lúky a "
+"nerastné\n"
+"bohatstvo. Ekonomiky, ktoré zanecháte, ostanú fungovať, ale výnosy získate,\n"
+"len ak dosiahnete nový ostrov."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr ""
+msgstr "Vitajte v Skákaní po ostrovoch"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -149,3 +163,7 @@ msgid ""
 "you\n"
 "get. See below for the details."
 msgstr ""
+"Keď dokončíte ostrov, dostanete bonusové tovary, ktorých počet závisí od "
+"počtu\n"
+"hráčov, ktorí dokončili ostrov pred vami. Čím skôr skončíte, tým menej\n"
+"tovarov získate. Pre detaily pozrite nižšie."
