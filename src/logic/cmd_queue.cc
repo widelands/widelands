@@ -37,7 +37,7 @@ namespace Widelands {
 //
 // class Cmd_Queue
 //
-Cmd_Queue::Cmd_Queue(Game & game) : 
+Cmd_Queue::Cmd_Queue(Game & game) :
 	m_game(game),
 	nextserial(0),
 	m_ncmds(0),
@@ -113,7 +113,7 @@ int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
 	while (game_time_var < final) {
 		std::priority_queue<cmditem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
 
-		while(current_cmds.size()) {
+		while (current_cmds.size()) {
 			Command & c = *current_cmds.top().cmd;
 			if (game_time_var < c.duetime())
 				break;

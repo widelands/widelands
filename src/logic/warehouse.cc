@@ -562,9 +562,10 @@ void Warehouse::act(Game & game, uint32_t const data)
 
 			// Do not use container_iterate, as we plan to erase some
 			// of those guys
-			for (WorkerList::iterator it = soldiers.begin();
-					it != soldiers.end();
-					++it)
+			for
+				(WorkerList::iterator it = soldiers.begin();
+				 it != soldiers.end();
+				 ++it)
 			{
 				// This is a safe cast: we know only soldiers can land in this
 				// slot in the incorporated array
@@ -1290,9 +1291,9 @@ int Warehouse::outcorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier)
 
 		soldiers.erase(i);
 		m_supply->remove_workers(ware, 1);
-	} 
+	}
 #ifdef DEBUG
-	else 
+	else
 		throw wexception("outcorporateSoldier: soldier not in this warehouse!");
 #endif
 
