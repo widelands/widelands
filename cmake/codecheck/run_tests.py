@@ -3,7 +3,6 @@
 #
 
 import unittest
-import new
 
 from CodeCheck import CodeChecker, Preprocessor
 
@@ -14,7 +13,7 @@ class RuleTest(unittest.TestCase):
         self.preprocessor = Preprocessor()
         self.c = checker
         self.tv = val
-        
+
     def runTest(self):
         self.rv = self.c.check_text(self.preprocessor, "testdir/test.h", self.tv)
         self._do_test()
@@ -35,7 +34,7 @@ class ForbiddenTest(RuleTest):
     def _do_test(self):
         self.assertTrue( len(self.rv)!=0,
             "Rule '%s' failed. Example '%s' should fail, but passed" % (self.c.name,self.tv) )
-        
+
 def _make_tests_from_checker( c ):
     """
     Takes a checker class and turns it's allowed and forbidden variables into
@@ -48,11 +47,11 @@ def _make_tests_from_checker( c ):
 
 if __name__ == '__main__':
     import sys
-    
+
     d = CodeChecker()
-    
+
     suite = unittest.TestSuite()
-    
+
     if len(sys.argv) > 1:
         for checker in (d._checkers):
             if checker.name in sys.argv:
