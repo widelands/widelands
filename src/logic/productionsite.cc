@@ -17,28 +17,32 @@
  *
  */
 
-#include "productionsite.h"
+#include <libintl.h>
 
-#include "carrier.h"
-#include "economy/economy.h"
-#include "economy/request.h"
-#include "economy/ware_instance.h"
-#include "economy/wares_queue.h"
-#include "editor_game_base.h"
-#include "game.h"
 #include "helper.h"
 #include "i18n.h"
+#include "upcast.h"
+#include "wexception.h"
+
+#include "economy/economy.h"
+#include "economy/request.h"
+#include "economy/wares_queue.h"
+#include "economy/ware_instance.h"
+#include "economy/wares_queue.h"
+#include "profile/profile.h"
+
+#include "carrier.h"
+#include "editor_game_base.h"
+#include "game.h"
 #include "map.h"
 #include "player.h"
-#include "profile/profile.h"
 #include "soldier.h"
 #include "tribe.h"
-#include "upcast.h"
 #include "warelist.h"
-#include "wexception.h"
 #include "world.h"
 
-#include <libintl.h>
+#include "productionsite.h"
+
 
 namespace Widelands {
 
@@ -347,12 +351,7 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 			new WaresQueue
 			(*this,
 			 i.current->first,
-			 i.current->second, 0);
-	// TODO SirVer: likely WaresQueue no longer needs last param
-
-	//  Request missing wares.
-	container_iterate_const(std::vector<WaresQueue *>, m_input_queues, i)
-		(*i.current)->update();
+			 i.current->second);
 
 	//  Request missing workers.
 	Working_Position * wp = m_working_positions;
@@ -597,8 +596,11 @@ void ProductionSite::act(Game & game, uint32_t const data)
 	{
 		m_program_timer = false;
 
-		if (m_stack.empty())
-			return find_and_start_next_program(game);
+		if (m_stack.empty()) {
+			find_and_start_next_program(game);
+			m_working_positions[0].worker->update_task_buildingwork(game);
+			return;
+		}
 
 		State & state = top_state();
 		if (state.program->get_size() <= state.ip)
@@ -629,10 +631,7 @@ void ProductionSite::find_and_start_next_program(Game & game)
 void ProductionSite::program_act(Game & game)
 {
 	State & state = top_state();
-#if 0
-	molog
-		("PSITE: program %s#%i\n", state.program->get_name().c_str(), state.ip);
-#endif
+
 	if (m_is_stopped) {
 		program_end(game, Failed);
 		m_program_timer = true;
@@ -767,6 +766,19 @@ bool ProductionSite::get_building_work
 		if (--worker_type_with_count.second == 0)
 			m_recruited_workers.pop_back();
 		return true;
+	}
+
+	// Drop all the wares that are too much out to the flag.
+	container_iterate(Input_Queues, m_input_queues, iqueue) {
+		WaresQueue * queue = *iqueue;
+		if (queue->get_filled() > queue->get_max_fill()) {
+			queue->set_filled(queue->get_filled() - 1);
+			Item_Ware_Descr const & wd = *tribe().get_ware_descr(queue->get_ware());
+			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
+			item.init(game);
+			worker.start_task_dropoff(game, item);
+			return true;
+		}
 	}
 
 	// Check if all workers are there

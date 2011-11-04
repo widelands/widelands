@@ -115,11 +115,10 @@ def parse_conf( files ):
                     continue
                 # Is not multiline
                 # If there are ' or " its easy
-                l = firstl( restline, '"\'')
-                r = firstr( restline[l+1:], '"\'')
+                l = firstl( restline, '\"')
+                r = firstr( restline[l+1:], '\"')
                 if( l != -1 and r != -1 ):
                     restline = restline[l+1:]
-                    r = firstr( restline, '"\'')
                     restline = restline[:r]
                 else:
                     # Remove comments

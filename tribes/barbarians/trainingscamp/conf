@@ -166,6 +166,16 @@ check_soldier=soldier hp 2
 consume=warhelmet fish,meat:2 pittabread
 train=soldier hp 2 3
 
+[build]
+pics=trainingscamp_b_??.png  # ???
+hotspot=110 77
+
+[unoccupied]
+pics=trainingscamp_u_??.png  # ???
+hotspot=110 75
+
 [idle]
 pics=trainingscamp_i_??.png  # ???
-hotspot=89 85
+hotspot=110 75
+playercolor=true
+fps=10

@@ -56,17 +56,22 @@ sleep=20000
 return=skipped
 
 [idle]
-pics=helmsmith_i_??.png  # ???
-hotspot=65 75
+pics=helmsmithy_i_??.png  # ???
+hotspot=65 83
+playercolor=true
 
 [build]
-pics=helmsmith_b_??.png  # ???
-hotspot=65 75
+pics=helmsmithy_b_??.png  # ???
+hotspot=65 83
+playercolor=true
 
 [unoccupied]
 pics=helmsmithy_u_??.png  # ???
-hotspot=65 75
+hotspot=65 83
+playercolor=true
 
 [working]
-pics=helmsmith_w_??.png  # ???
-hotspot=65 75
+pics=helmsmithy_w_??.png  # ???
+hotspot=65 83
+playercolor=true
+fps=20

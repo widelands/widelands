@@ -15,7 +15,8 @@
 --    the same item more than once.
 --
 --    It works with all types that are either unique (strings) or provide a
---    __hash property. :class:`wl.map.Field` implements such a property
+--    __hash property. :class:`wl.map.Field` and :class:`wl.map.MapObject`
+--    implement such a property
 
 -- RST
 --    .. attribute:: size

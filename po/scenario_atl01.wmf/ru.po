@@ -7,33 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2010-12-17 17:50+0000\n"
 "Last-Translator: lu <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:32+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:199
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:140
 msgid "Build 3 ships to escape from the island"
 msgstr "Постройте 3 корабля, чтобы покинуть остров"
-
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:46
-msgid "\"%s\""
-msgstr "\"%s\""
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
 msgstr "01 - От Кары небесной до Возрождения"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:531
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:472
 msgid "A dangerous finding"
 msgstr "Опасная находка"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:624
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:565
 msgid ""
 "A friend of mine explored the island on his own and he told me of a big "
 "lake\n"
@@ -48,11 +44,11 @@ msgstr ""
 "не утонет под нами. Тогда мы сможем уплыть отсюда. Это - смелый план, но я "
 "думаю, это должно сработать."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:402
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:343
 msgid "A man comes to Jundlina"
 msgstr "Человек приходит к Джундлине"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:598
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:539
 msgid "A young man approaches"
 msgstr "Молодой человек приближается"
 
@@ -64,7 +60,7 @@ msgstr ""
 "После высадки на таинственный остров близ Атлантиды, оставшиеся Атланты "
 "начали обустраивать себе новые жилища."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:367
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:308
 msgid ""
 "Ahh, but I think this is impossible to change. The preparing and eating of\n"
 "food is something deeply ingrained in us Atlanteans - it is just a ceremony\n"
@@ -102,7 +98,7 @@ msgstr ""
 "имели бы значения? Я думаю, что эти две вещи будут приняты народом и это "
 "позволит сократить время приготовления, не нарушая традиций."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:572
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:513
 msgid ""
 "And yet another of these buildings. We know now that the tribe that built\n"
 "them once had complete control over the island. But I am no longer so scared "
@@ -120,11 +116,11 @@ msgstr ""
 "бдительности снижаться, поскольку мы продолжаем исследовать этот прекрасный "
 "остров. Но без очевидной опасности, я уже чувствую себя здесь как дома."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:555
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:496
 msgid "Another building."
 msgstr "Другое здание"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:180
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:121
 msgid ""
 "As all other tribes, the Atlanteans are also able to train soldiers: the\n"
 "dungeon trains attack - the major attribute of the Atlanteans - and the\n"
@@ -142,7 +138,7 @@ msgstr ""
 "тренировочных зданиях. <br><br>\n"
 " - Постройте Главную башню и Лабиринт. <br>"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:191
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:132
 msgid ""
 "As your road network gets longer and more complicated, you should employ\n"
 "horses to help out your carriers. Horses are bred in horsefarms using water "
@@ -157,32 +153,32 @@ msgstr ""
 "воду и кукурузу. Склад также поможет вашей транспортной системе правильно "
 "работать."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:104
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
 "Build a quarry, two woodcutter's houses, two forester's houses and a\n"
 "sawmill."
 msgstr ""
 "Постройте каменоломню, два домика дровосека, два домика лесника и лесопилку."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:146
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:87
 msgid "Build a spiderfarm and a weaving mill"
 msgstr "Постройте паучью ферму и ткацкую фабрику"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:189
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:190
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:130
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a warehouse and a horsefarm"
 msgstr "Постройте склад и конезавод"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:161
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:162
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:102
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build industry and mines"
 msgstr "Постройте промздания и шахты"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:178
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:119
 msgid "Build training buildings"
 msgstr "Постройте тренировочные здания"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:179
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build training buildings to improve your soldiers"
 msgstr "Постройте тренировочные здания для тренировки ваших солдат"
 
@@ -190,7 +186,7 @@ msgstr "Постройте тренировочные здания для тре
 msgid "Building lost!"
 msgstr "Строение потеряно!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:238
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:179
 msgid ""
 "But all seemed well. Only the horses seemed to feel something was wrong.\n"
 "In the nights, they went crazy and were full of fear. It was not long before "
@@ -205,7 +201,7 @@ msgstr ""
 "как коневод Ксидра понял, что случилось с ними: уровень моря перед\n"
 "их конюшней поднимался с все увеличивающейся скоростью."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:267
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:208
 msgid ""
 "But not even this changed the mind of the god. The water kept on rising.\n"
 "Nearly driven crazy by guilt, pain and anger, Jundlina became a heretic:\n"
@@ -227,55 +223,55 @@ msgstr ""
 "огня и худшим\n"
 "врагам Лутаса."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:254
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:195
 msgid "Chaos emerges..."
 msgstr "Взникает Хаос"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:348
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:289
 msgid "Colionder arrives"
 msgstr "Прибытие Колиондера"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:365
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:306
 msgid "Colionder is in thought"
 msgstr "Колиондер в раздумьях"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:654
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:595
 msgid "Congratulations"
 msgstr "Поздравления"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:102
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:43
 msgid "Ensure the supply of build wares"
 msgstr "Обеспечте поставку стройматериалов"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:200
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:141
 msgid "Escape from the island"
 msgstr "Выберитесь с острова"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:122
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Establish a food production"
 msgstr "Наладьте производство продуктов питания"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:121
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Establish a solid food production"
 msgstr "Установите производство основной пищи"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:147
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Establish a spidercloth production"
 msgstr "Создайте производство хитиновой одежды"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:112
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:53
 msgid "Expand and Explore"
 msgstr "Расширяйтесь и изучайте"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:111
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Expand your territory and explore the island"
 msgstr "Расширьте свою территорию и исследуйте остров."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:217
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:158
 msgid "Favored by the god"
 msgstr "Любимчик бога"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:123
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid ""
 "Food is very important for mines and military training areas. Establish\n"
 "a well working food environment by building at least one farm, one "
@@ -319,7 +315,7 @@ msgstr ""
 "чтобы убедиться, что он не выловит всю рыбу <br> - Постройте две коптильни, "
 "чтобы коптить сырое мясо и рыбу."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:256
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:197
 msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people\n"
 "turned to the clerics, but those had no substantial help to offer. Most\n"
@@ -331,7 +327,7 @@ msgstr ""
 "смирилось с их судьбой, в то время, как другие пытались переубедить бога,\n"
 "принося в жертву животных в храме. Но тщетно..."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:478
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:419
 msgid ""
 "I agree with you and I have punished the trouble makers severely. But it is\n"
 "very difficult to keep my men quiet: they are bored and have nothing to do. "
@@ -348,7 +344,7 @@ msgstr ""
 "сосредоточенными на своих обязанностях. Мне нужны Главная башня и Лабиринт "
 "для них. У меня все запланировано, но я полагаю, что это будет не дешево."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:489
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:430
 msgid ""
 "I do not fear the cost and labor as long as it keeps your people at bay. "
 "You\n"
@@ -363,7 +359,7 @@ msgstr ""
 "ответственным за них. \n"
 "Не обсуждается."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:459
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:400
 msgid ""
 "I have considered this, Sidolus. I think, it is about time. We will make "
 "this\n"
@@ -372,7 +368,7 @@ msgstr ""
 "Я обдумал это, Сидолус. Я думаю, это дело  времени. Это будет нашим \n"
 "приоритетом. Вы получите ваше производство и скоро."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:501
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:442
 msgid ""
 "I received an invitation from Sidolus. The first day of training in the "
 "newly\n"
@@ -391,7 +387,7 @@ msgstr ""
 "солдаты обучены и я удивлюсь, если дополнительная нагрузка оградит их от\n"
 "издевательства над населением."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:163
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:104
 msgid ""
 "Iron ore, gold ore and coal are mined in the respective mines. The crystal "
 "mine\n"
@@ -423,81 +419,81 @@ msgstr ""
 "- Постройте оружейную мастерскую и мастерскую доспехов.<br>\n"
 "- Постройте мастерскую для производства инструментов.<br>"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:306
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:356
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:500
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:513
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:590
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:608
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:646
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:247
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:297
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:441
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:454
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:531
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:549
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:587
 msgid "Jundlina"
 msgstr "Джундлина"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:383
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:324
 msgid "Jundlina agrees"
 msgstr "Согласие Джундлины"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:512
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:453
 msgid "Jundlina considers the economy"
 msgstr "Экономический расчет Джундлины"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:468
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:409
 msgid "Jundlina is angry"
 msgstr "Джундлина в ярости"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:532
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina is in thought"
 msgstr "Джундлина в раздумьях"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:645
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:586
 msgid "Jundlina is relieved"
 msgstr "Освобождение Джундлины"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:393
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is reviewing the reports"
 msgstr "Джундлина за рассмотрением отчетов"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:339
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:392
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:280
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina is satisfied"
 msgstr "Джундлина довольна"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:556
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:497
 msgid "Jundlina is worried"
 msgstr "Джундлина встревожена"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:458
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Jundlina nods"
 msgstr "Джундлина кивает"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:499
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:440
 msgid "Jundlina received a letter"
 msgstr "Джундлина получает письмо"
 
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:296
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:355
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:414
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:415
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:435
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:457
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:487
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:607
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:631
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:356
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:376
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:398
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:428
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:548
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:572
 msgid "Jundlina replies"
 msgstr "Джундлина отвечает на письмо"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:467
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:408
 msgid "Jundlina summons Sidolus"
 msgstr "Джундлина вызывает Сидолуса"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:285
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:226
 msgid "Jundlina writes down her memories"
 msgstr "Джундлина записывает свои воспоминания"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:340
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:281
 msgid "Jundlina's Memoirs"
 msgstr "Мемуары Джундлины"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:261
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:202
 msgid ""
 "Jundlina, the late king's daughter and the highest priestess of the god\n"
 "was the most determined cleric. As countless offerings didn't change the\n"
@@ -511,7 +507,7 @@ msgstr ""
 "предложить что-то очень ценное. Поэтому она предложила ему самое дорогое: "
 "мужа, отца ее единственного ребенка."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:275
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:216
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started a quest to\n"
 "find a place sheltered by the fire and protected from the sea."
@@ -519,15 +515,15 @@ msgstr ""
 "Оставив умирающую Атлантиду и их прошлое, они начали поиски, чтобы найти "
 "место, укрытое огнем и защищенное от моря."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:305
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:246
 msgid "Loftomor and Sidolus arrive"
 msgstr "Лофтомор и Сидолус прибывают"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:314
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Loftomor speaks"
 msgstr "Разговор Лофтомора"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:591
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:532
 msgid ""
 "May Satul save us! Lutas is still trying to get to us. A scout informed me\n"
 "that the ocean is rising quickly. We have to reach higher ground and "
@@ -541,7 +537,7 @@ msgstr ""
 "высокого места и эвакуировать всех и как можно больше товаров из штаба в "
 "горы. Как мы можем спастись?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:307
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:248
 msgid ""
 "May Satul warm you both. Loftomor, you have been the island's most renowned\n"
 "architect. Sidolus, you are a seasoned warrior and strategist. I have "
@@ -555,7 +551,7 @@ msgstr ""
 "мне. чтобы спросить у вас совета: Что нужно сделать, чтобы здесь был наш "
 "новый дом?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:357
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:298
 msgid ""
 "May Satul warm you too, Colionder. Yes, I wondered if there is not a way\n"
 "that we can centralize our food production. We lose a lot of productivity\n"
@@ -569,7 +565,7 @@ msgstr ""
 "самостоятельно. Мне кажется, что если бы мы могли разделить ответственность, "
 "было бы лучше для всех нас. Я хочу, чтобы ты подумал об этом."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:416
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:357
 msgid ""
 "May Satul warm you too, Opol. I wanted to delay production of spider cloth,\n"
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
@@ -584,7 +580,7 @@ msgstr ""
 "златошвейку, так что золотые гербовые накидки, которые вы делаете, не будут "
 "золотыми только по названию."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:328
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:269
 msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need\n"
 "a good supply of building materials for we have to expand our territory "
@@ -600,7 +596,7 @@ msgstr ""
 "людей из Атлантиды. Нам доступна вся наша военная мощь. Нам нужно только "
 "несколько помещений для жилья."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:316
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
 "May Satul warm you, Jundlina! The most important things for building a\n"
 "settlement are the building materials. There are some trees here, so we "
@@ -621,7 +617,7 @@ msgstr ""
 "камень, его достаточно к северо-востоку отсюда, нам просто необходимо "
 "построить каменоломню и мои каменщики сразу приступят к работе."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:428
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:369
 msgid ""
 "May Satul warm you, Jundlina!. The weaving-mill, goldweaver and spiderfarm\n"
 "buildings are complete and are starting their work at this very moment. The\n"
@@ -634,7 +630,7 @@ msgstr ""
 "благодарна за вашу поддержку. Мы выполним свои обещания и поставим первую "
 "накидку уже очень скоро."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:350
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:291
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the\n"
 "god?"
@@ -642,7 +638,7 @@ msgstr ""
 "Да согреет тебя Сатул, Джундлина! Могу я быть чем-то полезен для Вас или "
 "Бога?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:448
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:389
 msgid ""
 "May Satul warm you, Jundlina. Have you considered mining for goods in the\n"
 "mountains around us? We are running short of quartz, crystal and diamonds "
@@ -661,7 +657,7 @@ msgstr ""
 "доспехов и мастерская для изготовления инструментов. А может быть, даже "
 "больше."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:404
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:345
 msgid ""
 "May Satul warm you, Jundlina. My Name is Opol and I am the highest weaver "
 "of\n"
@@ -687,7 +683,7 @@ msgstr ""
 "для офицеров в обмен на это. Они вам обязательно понадобятся, как только вы "
 "захотите набрать новых солдат."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:600
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:541
 msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I "
 "have\n"
@@ -701,11 +697,11 @@ msgstr ""
 "крепкий. Если мы будем строить их правильно, я уверен, что мы можем пройти "
 "на них гораздо большее расстояние и, возможно, уйти от влияния Лютаса."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:89
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:30
 msgid "New Objectives"
 msgstr "Новые цели"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:219
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:160
 msgid ""
 "On the hidden and lost island of Atlantis, a proud tribe settled since the\n"
 "world was very young. Ruled by the bloodline of King Ajanthul - the first "
@@ -721,19 +717,19 @@ msgstr ""
 "мудрые жрецы, которые имели связь с Лютасом - они процветали и стали "
 "цивилизацией."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:570
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:511
 msgid "One more building"
 msgstr "Еще одно здание"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:426
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid "Opol seeks out Jundlina"
 msgstr "Опол ищет Джундлину"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:616
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:557
 msgid "Ostur seems confident"
 msgstr "Остур выглядит уверенным"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:609
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:550
 msgid ""
 "Ostur, we have no time. The water rises too fast and if we build the ships "
 "on\n"
@@ -744,7 +740,7 @@ msgstr ""
 "построим суда на берегу они исчезнут в море, прежде чем они смогут плыть. Я "
 "боюсь, что мы обречены!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:341
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:282
 msgid ""
 "Our building infrastructure is done and I spent some days making sure that\n"
 "they work well together. Now, there are other pressing matters. I called\n"
@@ -757,7 +753,7 @@ msgstr ""
 "вопросы. Я говорил с Колиондером, моим личным поваром, чтобы с его помощью "
 "расставить все на свои места."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:514
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:455
 msgid ""
 "People are complaining about crowded streets and slow transportation. We\n"
 "need to help out our carriers on the roads. I decided to build a horsefarm\n"
@@ -775,7 +771,7 @@ msgstr ""
 "когда мы утвердились в горах, было бы хорошей идеей иметь склад на плато, "
 "чтобы избежать необходимости перевозить все вверх и вниз по склонам."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:647
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:588
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships -\n"
 "never have I seen sturdier ones - with enough room to carry all of us and "
@@ -799,11 +795,11 @@ msgstr ""
 "концов мы найдем землю Сатула. Это то, что я обещал своему народу. \n"
 "И себе."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:215
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:156
 msgid "Proudest to the death"
 msgstr "Гордые перед смертью"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:394
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:335
 msgid ""
 "Seems like our food production is finished and everybody is working "
 "together\n"
@@ -812,19 +808,19 @@ msgstr ""
 "Похоже, наше производство продовольствия налажено, и все работает вместе "
 "прекрасно. Здесь действительно все начинает становиться почти как дома."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:446
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:387
 msgid "Sidolus seeks out Jundlina"
 msgstr "Сидолус ищет Джундлину"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:476
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:417
 msgid "Sidolus seems contrite"
 msgstr "Сидолус сокрушен"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:326
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:267
 msgid "Sidolus speaks"
 msgstr "Разговор Сидолуса"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:243
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid ""
 "The clerics went into their meditation and the reason for the rising water\n"
 "was soon to be found: The god Lutas had lost faith in the Atlanteans because "
@@ -840,15 +836,15 @@ msgstr ""
 "короля. Он решил забрать привилегии, которые были предоставлены королю "
 "Ахантулу и его детям. И так, он снова позвал их обратно под воду."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:234
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:175
 msgid "The god's disgrace"
 msgstr "Позор богов."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:236
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:177
 msgid "The god's punishment"
 msgstr "Божья кара"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:113
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:54
 msgid ""
 "The island is huge and as long as we are not sure that we are alone\n"
 "here, we cannot relax. Explore and conquer it, this is the\n"
@@ -858,19 +854,19 @@ msgstr ""
 "расслабиться. Изучить и захватить его, это единственный способ защитить нас "
 "от угрозы с острова и с Атлантиды."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:284
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "The princess' memoir"
 msgstr "Мемуары принцессы"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:103
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "The supply of build wares"
 msgstr "Обеспечте поставку стройматериалов"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:589
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:530
 msgid "The water is rising!"
 msgstr "Вода поднимается!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:148
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
 "The weavers produce spidercloth and tabards in the weaving-mill. "
 "Spidercloth\n"
@@ -892,7 +888,7 @@ msgstr ""
 "- Постройте паучью ферму<br><br>\n"
 "- Постройте златошвейку<br>"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:201
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:142
 msgid ""
 "There is a lake at the top of the island. Build 3 ships in these waters\n"
 "and you might be able to rescue your people when the island is swallowed\n"
@@ -904,7 +900,7 @@ msgstr ""
 "остров. Постройте верфь недалеко от озера, чтобы начать\n"
 "строить суда."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:437
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:378
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go "
 "back\n"
@@ -914,7 +910,7 @@ msgstr ""
 "Возвращайтесь\n"
 "к своей работе, Опол, и может Сатул согреет Вас и ваших работников."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:225
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:166
 msgid ""
 "This story happens during the regency of King Askandor, the 43rd successor "
 "of\n"
@@ -931,11 +927,11 @@ msgstr ""
 "лекарство от нее, хотя большинство жрецов предостерегали его. Они говорили, "
 "что бесконечная жизнь была только для богов и искать ее - запрещено."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:252
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:193
 msgid "Uproar and confusion"
 msgstr "Волнения и беспорядки"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:533
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
 "We found an old building, destroyed and burned by flames. I am very worried\n"
 "about this finding. The building is not of any kind I've ever seen. It is\n"
@@ -971,7 +967,7 @@ msgstr ""
 "мы должны быть готовы, когда встретимся с ними. Мы должны также обеспечивать "
 "укрепление наших границ."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:557
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:498
 msgid ""
 "We found one more building of this strange making. We have yet to see any "
 "of\n"
@@ -988,7 +984,7 @@ msgstr ""
 "должен справиться о нашем военном статусе у моих генералов. Я не позволю, "
 "чтобы потенциальный противник мог застать нас врасплох."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:299
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:240
 msgid ""
 "We have established ourselves on this island. The next step is now to make "
 "it\n"
@@ -999,7 +995,7 @@ msgstr ""
 "домом. Я думаю, мы должны создать устойчивую экономику и исследовать "
 "окружающие нас земли. Я позвал специалистов и буду следовать их советам."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:286
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:227
 msgid ""
 "We left Atlantis and sailed east. We entered the forbidden sea on the sixth\n"
 "day without noticing any pursuers from Atlantis and without Lutas having "
@@ -1019,7 +1015,7 @@ msgstr ""
 msgid "We lost a %s to the ocean!"
 msgstr "Мы потеряли %s в океане!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:292
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:233
 msgid ""
 "We spent the last week building two watchtowers on the mountains close to\n"
 "our landing area; and, of course, a hall for us all. We have very talented\n"
@@ -1038,7 +1034,7 @@ msgstr ""
 "корабль из Атлантиды следует за нами, и если остров обитаем, \n"
 "мы увидим нападающих задолго до их прибытия."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:469
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:410
 msgid ""
 "What is this I hear, Sidolus? I received words about your soldiers\n"
 "misbehaving and bullying the common folk. What is this nonsense all about? "
@@ -1051,7 +1047,7 @@ msgstr ""
 "общего блага и не должны злоупотреблять своими полномочиями. Это "
 "непростительно! Объясните это, если можете!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:655
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:596
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
@@ -1059,7 +1055,7 @@ msgstr ""
 "Вы выйграли это миссию. Можете начать следующую или играть\n"
 "до тех пор, пока Вам не надоест:)."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:633
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:574
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your\n"
@@ -1076,63 +1072,6 @@ msgstr ""
 "остальном, мы должны доставить эти товары на вершину горы до того как наши "
 "склады будут все поглощены морем."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:385
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Your words sound wise to me, Colionder. So be it then."
 msgstr "Ваши слова звучат разумно, Колиондер. Пусть будет так!"
-
-#~ msgid "01 - From nemesis to genesis"
-#~ msgstr "01 - Из возмездья в бытие"
-
-#~ msgid ""
-#~ "\n"
-#~ "Praise Satul! Ostur, the young ship builder did it. We have three ships -\n"
-#~ "never have I seen sturdier ones - with enough room to carry all of us and "
-#~ "some\n"
-#~ "wares too. And this rescue came just in time: Lutas is about to swallow the "
-#~ "rest\n"
-#~ "of this island, the water rises faster by the hour. But we can make our "
-#~ "escape\n"
-#~ "now and start over in some country farther away... I expect a long journey, "
-#~ "but\n"
-#~ "we will find the land of Satul in the end. This is what I promised my "
-#~ "people.\n"
-#~ "And myself."
-#~ msgstr ""
-#~ "\n"
-#~ "Слава Сатулу! Остур, молодой кораблестроитель сделал это. У нас есть три "
-#~ "судна -\n"
-#~ "никогда я не видел более крепких - с достаточным количеством комнат, чтобы "
-#~ "вместить всех нас и некоторые\n"
-#~ "товары. И это спасение прибыло как раз вовремя: Лутас собирается проглотить "
-#~ "остаток\n"
-#~ "этого острова. Вода с каждым часом все выше. Но мы можем спастись, сбежать "
-#~ "сейчас и начать все с начала в какой-нибудь другой стране, подальше "
-#~ "отсюда... Я думаю, нам предстоит долгое путешествие, но в конце концов мы "
-#~ "найдем землю Сатула. Это - то, что я обещал моим людям. И себе."
-
-#~ msgid ""
-#~ "You have won this mission. Continue with the next one or keep playing for \n"
-#~ "as long as you like."
-#~ msgstr ""
-#~ "Вы выиграли эту миссию. Продолжайте со следующей или играйте дальше столько, "
-#~ "сколько хотите."
-
-#~ msgid ""
-#~ "\n"
-#~ "Your red hair is a signal from the fire god. I will trust you and support "
-#~ "your\n"
-#~ "plan. Our survival lays in your hands now, Ostur.\n"
-#~ "<br><br>Swift now, we need a house for Ostur next to the lake and we need\n"
-#~ "planks, trunks and spidercloth for the construction there. Forget about\n"
-#~ "everything else, we need those wares on top of the mountain before our\n"
-#~ "warehouses are all swallowed by the sea."
-#~ msgstr ""
-#~ "\n"
-#~ "Ваши рыжие волосы - это знак бога огня. Я буду доверять Вам и поступать в "
-#~ "соответствии с Вашим планом.\n"
-#~ "Теперь наши жизни в Ваших руках, Остур.\n"
-#~ "<br> <br> Быстрее, мы нуждаемся в доме для Остура рядом с озером, и нам "
-#~ "нужны\n"
-#~ "доски, бревна и хитин для того, чтобы наладить строительство. Забудьте о\n"
-#~ "всем остальном, нам нужны эти товары на вершине горы до того момента, когда "
-#~ "наши склады будут все проглочены морем."

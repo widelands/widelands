@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2011-03-25 07:23+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-26 04:42+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -40,10 +40,6 @@ msgstr ""
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "III - Hic nostrum territorium"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "In hac tabula pro nonnullis ludoribus insula X formae creata est."
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -81,6 +77,14 @@ msgid ""
 msgstr ""
 "Terra mystica variorum locorum, omnes quorum a nonnullis fluviis magnis "
 "perfluuntur."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island "
+"Hopping\", where two or more groups try to reach the center island as fast "
+"as possible, to be the first building up a castle on the top of the center "
+"mountain."
+msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -175,10 +179,6 @@ msgstr "Alforum saltus"
 msgid "Empire - The Months of Exile"
 msgstr "Imperium - Menses exilii"
 
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Hostem visum!"
-
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
 msgstr "Lacus Finnici"
@@ -251,6 +251,10 @@ msgstr ""
 "Probarisne a dis vel aliusne haec invenit? Tu et tui in hac insula inter "
 "igne lavaque capti prima luce somno excitati estis. Omnia quieta desertaque "
 "esse videntur. Sed incertus, quod fiat, si hostilem gentem videbis."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
+msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -372,6 +376,10 @@ msgid ""
 "March his unprepared army was attacked by 100 barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
@@ -567,72 +575,9 @@ msgstr ""
 "thesaurum - viridem planitiem altam. Ea capienda difficilissima, facilissima "
 "perdenda. Si habere vis, hostes perspicias."
 
-#~ msgid "(Tutorial) Barbarians - The second Empire"
-#~ msgstr "(Tutorialis) Barbari - Imperium secundum"
-
-#~ msgid "Some descriptive texts..."
-#~ msgstr "Texta describentia quaedam..."
-
-#~ msgid ""
-#~ "When Chat’Karuth died, he was an old man, father to three strong and "
-#~ "ambitious sons and warlord to an army that could match any enemy willing to "
-#~ "rise against the ancient forests. Though his glorious reign, Chat’Karuth "
-#~ "left his eldest son Thron in the due to succeed him as the tribes warlord – "
-#~ "a decision that left his two brothers unsatisfied. The old warlord knew "
-#~ "that. As his father told him, Thron left the capital of Al’thunran, the home "
-#~ "of the throne among the trees and redrew his forces to the high hills where "
-#~ "he buried the corpse of his father and swore to the gods and his spirit, "
-#~ "that he’d return to re-established order. While his brothers raged in blind "
-#~ "war against Thron and the few forces he left to secure the borders of "
-#~ "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
-#~ "force the tribes to march once again under a common banner."
-#~ msgstr ""
-#~ "Chat'Karuth senecto mortem obienti erant tres fortissimi gloriaeque avidi "
-#~ "filii et erat exercitus, qui omnes hostes silvas antiquas aggredientes "
-#~ "superabat. Glorioso regno prope expleto filius maximus natu, qui Thron "
-#~ "nominatus erat, ab patre imperator electus est, quo alii fratri minime "
-#~ "satiati erant. Senectus imperator hoc non nesciens filio consilium dedit, ut "
-#~ "Thron e capite regni, quae urbs Al'thunran appellata erat, eveniret et "
-#~ "copias in montes altas cogeret. Haec facta Thron corpus patris in sepulcro "
-#~ "deponens per deos animamque patris iuravit, ut olim reverteret et ordinem "
-#~ "restitueret. Dum fratres caece irati contra Thron atque paucos milites, qui "
-#~ "limites Al'thuran urbis defendebant, bellum gerunt, iuvenis imperator "
-#~ "fratres coniungendos et omnes gentes sub uno signo congregandas petivit."
-
-#~ msgid ""
-#~ "Six month ago, Lutius - a young general of the Empire - was send with 150 "
-#~ "soldiers at the frontier among the northern forests, where Barbarian-tribes "
-#~ "and official Empire-land are crossing. His task was to defend the Empire-"
-#~ "land. First everything was calm, he even talked to few barbarian children "
-#~ "and thought about a peaceful life - side by side with this archaic folk. He "
-#~ "began to feel saver and his army begun to draw off the attention on they "
-#~ "potential enemy - that was their fault. At one night in March his unprepared "
-#~ "army was attacked by 100 barbarian footmen and was completely scattered. "
-#~ "Only with pure life he and a handful of soldiers survived."
-#~ msgstr ""
-#~ "Sex menses Lutius, iuvenis dux imperii, ad patriam defendendam cum CL "
-#~ "militibus apud septentrionalem confinium ultimum erat, qua regione silvestri "
-#~ "gentes barbariorum tangunt imperium. Omnibus primo quiescentibus Lutius cum "
-#~ "quibusdem liberis locutus de tranquilla vita cum hac antiqua gente "
-#~ "cogitabat. Se securios esse aestimantes huius milites hostem neglegebant. "
-#~ "Quod error maximus. Subito martialis nocte praeter expectatione exercitus a "
-#~ "C barbaris agressus omninoque pervictus est. Lutius et pauci milites solam "
-#~ "vitam servaverunt."
-
-#~ msgid "Atlanteans - the new rise"
-#~ msgstr "Atlantidenses - Ascensio nova"
-
-#~ msgid "01 - From nemesis to genesis"
-#~ msgstr "I - De nemese ad genesem"
-
-#~ msgid "Empire - The months of exile"
-#~ msgstr "Imperium - Exilii menses"
-
-#~ msgid "Tutorial1 - Eyes in the Dark"
-#~ msgstr "Tutorialis I - Oculi in obscuro"
-
-#~ msgid "Tutorial2 - A Place to call Home"
-#~ msgstr "Tutorialis II - Locus qui domum appellemus"
-
-#~ msgid "Tutorial3 - This land is our land"
-#~ msgstr "Tutorialis III - Hoc nostrum solum"
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""

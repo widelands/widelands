@@ -55,6 +55,7 @@ protected:
 
 private:
 	void scrollpos_changed(int32_t);
+	void insert(SDL_keysym code);
 
 	struct Data;
 	boost::scoped_ptr<Data> d;

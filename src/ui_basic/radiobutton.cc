@@ -139,4 +139,12 @@ void Radiogroup::set_state(int32_t const state) {
 	changedto.call(state);
 }
 
+/**
+ * Disable this radiogroup
+ */
+void Radiogroup::set_enabled(bool st) {
+	for (Radiobutton * btn = m_buttons; btn; btn = btn->m_nextbtn)
+		btn->set_enabled(st);
+}
+
 }

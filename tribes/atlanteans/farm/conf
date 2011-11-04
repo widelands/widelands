@@ -46,5 +46,5 @@ playFX=../../../sound/farm/farm_animal 192
 
 [idle]
 pics=farm_i_??.png  # ???
-hotspot=87 75
+hotspot=74 60
 playercolor=true

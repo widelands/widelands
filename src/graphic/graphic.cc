@@ -964,7 +964,6 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid)
 	return destpicture;
 }
 
-
 /**
  * Creates a terrain texture.
  *

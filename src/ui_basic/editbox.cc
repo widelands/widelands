@@ -234,8 +234,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			cancelid.call(m->id);
 			return true;
 
-		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
 			// Save history if active and text is not empty
 			if (m_history_active) {
 				if (m->text.size() > 0) {
@@ -249,6 +249,11 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			okid.call(m->id);
 			return true;
 
+		case SDLK_KP_PERIOD:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_DELETE:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
@@ -268,6 +273,11 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP4:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_LEFT:
 			if (m->caret > 0) {
 				while ((m->text[--m->caret] & 0xc0) == 0x80) {};
@@ -282,6 +292,11 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP6:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_RIGHT:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
@@ -301,6 +316,11 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP7:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_HOME:
 			if (m->caret != 0) {
 				m->caret = 0;
@@ -310,6 +330,11 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP1:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
@@ -318,6 +343,11 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP8:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
 			if (m_history_active) {
@@ -332,6 +362,11 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
+		case SDLK_KP2:
+			if (code.mod & KMOD_NUM) {
+				insert(code);
+				break;
+			}
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
 			if (m_history_active) {
@@ -353,33 +388,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			// as a 0 on keystroke, the o then as the unicode character. We simply
 			// ignore the 0.
 			if (is_printable(code) and code.unicode) {
-				if (m->text.size() < m->maxLength) {
-					if (code.unicode < 0x80)         // 1 byte char
-						m->text.insert
-							(m->text.begin() + m->caret++, 1, code.unicode);
-					else if (code.unicode < 0x800) { // 2 byte char
-						m->text.insert
-							(m->text.begin() + m->caret++,
-							 (((code.unicode & 0x7c0) >> 6) | 0xc0));
-						m->text.insert
-							(m->text.begin() + m->caret++,
-							 ((code.unicode & 0x3f) | 0x80));
-					} else {                         // 3 byte char
-						m->text.insert
-							(m->text.begin() + m->caret++,
-							 (((code.unicode & 0xf000) >> 12) | 0xe0));
-						m->text.insert
-							(m->text.begin() + m->caret++,
-							 (((code.unicode & 0xfc0) >> 6) | 0x80));
-						m->text.insert
-							(m->text.begin() + m->caret++,
-							 ((code.unicode & 0x3f) | 0x80));
-					}
-					check_caret();
-					changed.call();
-					changedid.call(m->id);
-					update();
-				}
+				insert(code);
 				return true;
 			}
 		}
@@ -388,6 +397,33 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 	return Panel::handle_key(down, code);
 }
 
+/**
+ * Insert the utf8 character according to the specified key code
+ */
+void EditBox::insert(SDL_keysym const code)
+{
+	if (m->text.size() < m->maxLength) {
+		if (code.unicode < 0x80) // 1 byte char
+			m->text.insert(m->text.begin() + m->caret++, 1, code.unicode);
+		else if (code.unicode < 0x800) { // 2 byte char
+			m->text.insert
+				(m->text.begin() + m->caret++, (((code.unicode & 0x7c0) >> 6) | 0xc0));
+			m->text.insert
+				(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
+		} else { // 3 byte char
+			m->text.insert
+				(m->text.begin() + m->caret++, (((code.unicode & 0xf000) >> 12) | 0xe0));
+			m->text.insert
+				(m->text.begin() + m->caret++, (((code.unicode & 0xfc0) >> 6) | 0x80));
+			m->text.insert
+				(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
+		}
+		check_caret();
+		changed.call();
+		changedid.call(m->id);
+		update();
+	}
+}
 
 void EditBox::draw(RenderTarget & odst)
 {

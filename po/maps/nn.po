@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2011-04-16 18:51+0000\n"
 "Last-Translator: Odin Hørthe Omdal <odin.omdal@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-17 04:32+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -40,10 +40,6 @@ msgstr "02 - Ein eksil-utpost"
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "03 - Dette landet er vårt"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr "Eit fleirspelar kampkart på ei X-forma øy"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -82,6 +78,14 @@ msgid ""
 msgstr ""
 "Eit mystisk land, fullt av forskjellege landskap som alle kryssast av eit "
 "par store elver."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island "
+"Hopping\", where two or more groups try to reach the center island as fast "
+"as possible, to be the first building up a castle on the top of the center "
+"mountain."
+msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -173,10 +177,6 @@ msgstr "Alviske skogar"
 msgid "Empire - The Months of Exile"
 msgstr "Imperiet - Månedane i eksil"
 
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr "Fiende i sikte"
-
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
 msgstr "Dei finske sjøar"
@@ -239,6 +239,10 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as "
 "if you are alone, but no-one knows, what might happen if you meet an "
 "opponent tribe?"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
 msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
@@ -345,6 +349,10 @@ msgid ""
 "March his unprepared army was attacked by 100 barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
@@ -535,11 +543,9 @@ msgid ""
 "clans."
 msgstr ""
 
-#~ msgid "Tutorial1 - Eyes in the Dark"
-#~ msgstr "Opplæring 1 - Auger i mørket"
-
-#~ msgid "Tutorial3 - This land is our land"
-#~ msgstr "Opplæring 3 - Dette landet er vårt land"
-
-#~ msgid "(Tutorial) Barbarians - The second Empire"
-#~ msgstr "(Tutorial) Barbarians - The second Empire"
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""

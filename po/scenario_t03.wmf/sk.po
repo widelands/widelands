@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-08-04 23:17+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-10-07 22:00+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-06 04:33+0000\n"
-"X-Generator: Launchpad (build 13613)\n"
+"X-Launchpad-Export-Date: 2011-10-08 05:11+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -139,6 +139,15 @@ msgid ""
 "not hesitate to rebuild it with all the strength my people have. I can't "
 "wait to see it again in it's old beauty.\" "
 msgstr ""
+" \"Moji bratia a ich vojaci sú mŕtvi a zanechali za sebou oheň a skazu. Ani "
+"v jednej zrúcanine som nenašiel muža alebo ženu z ľudu, tak len dúfam, že "
+"unikli z tohto krutého bojiska a začali lepší život niekde inde. Nič "
+"nezostalo z tej nádhery, na ktorú si spomínam - z hlavného mesta zostali len "
+"trosky. Som nešťastný, ale zároveň odľahčený. Nikdy som nedúfal viac vidieť "
+"starú krásu Al'thunran-u - len pred pár mesiacmi som bol zvedavý, či doň "
+"budem ešte niekedy môcť vkročiť. Teraz je staré mesto opäť v mojich rukách a "
+"nebudem váhať prestavať ho s pomocou mojich ľudí. Nemôžem sa dočkať, kedy ho "
+"znovu uvidím v jeho starej kráse.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:326
 msgid ""
@@ -224,6 +233,10 @@ msgid ""
 "are not strong enough to take up the battle with my brothers.<br>For now we "
 "rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
+" \"Počas posledných dní sme sa presunuli bližšie k nášmu hlavnému mestu. "
+"Mnoho ľudí sa k nám na pochode pripojilo a upriamilo vo mne nádej. Ale bojím "
+"sa, že nie sme dosť silní na vojnu s mojimi bratmi.<br>Zatiaľ odpočívame na "
+"hraniciach starého lesa a pripravujeme sa na nasledujúce dni.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:206
 msgid ""
@@ -263,16 +276,6 @@ msgid ""
 "range on the area around our hall to protect our people from sudden "
 "attacks.\" "
 msgstr ""
-
-#: ../../campaigns/t03.wmf/scripting/texts.lua:336
-msgid ""
-"* As soon as the blacksmith reaches his next level (master blacksmith) "
-"enhance your metalworks to an axefactory or even a war mill and build up "
-"another metalworks to ensure the production of tools."
-msgstr ""
-"* Akonáhle dosiahne kováč ďalšiu úroveň (majster kováč), vylepšite svoju "
-"kovodielňu na továreň na sekery alebo dokonca na vojenský závod a postavte "
-"ďalšiu kovodielňu, aby ste zaistili produkciu nástrojov."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:101
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
@@ -344,15 +347,21 @@ msgid ""
 "circle."
 msgstr ""
 
+#: ../../campaigns/t03.wmf/scripting/texts.lua:336
+msgid ""
+"* Enhance your metalworks to an axefactory in order to produce weapons and "
+"build up another metalworks to ensure the production of tools. When the "
+"blacksmith reaches his next level (master blacksmith), you can even enhance "
+"it to a war mill which produces additional weapons."
+msgstr ""
+
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
-"* Enhance your metalworks to an axefactory or - as soon as the blacksmith "
-"reaches his next level (master blacksmith) - even to a war mill and build up "
-"another metalworks to ensure the production of tools."
+"* Enhance your metalworks to an axefactory to start producing weapons, and "
+"build up another metalworks to ensure the production of tools. When the "
+"blacksmith reaches his next level (master blacksmith), you can even enhance "
+"your axefactory to a war mill."
 msgstr ""
-"* Vylepšite svoju kovodielňu na továreň na sekery alebo - pokiaľ kováč "
-"dosiahne ďalšiu úroveň (majster kováč) - aj na vojenský závod a postavte inú "
-"kovodielňu, aby ste zaistili produkciu nástrojov."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290

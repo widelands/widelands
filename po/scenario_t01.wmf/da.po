@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2010-08-30 23:39+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:33+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:41+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
 msgid ""
@@ -339,18 +339,3 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/texts.lua:113
 msgid "Thron speaks..."
 msgstr "Thron taler..."
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "At the grave"
-#~ msgstr "Ved graven"
-
-#~ msgid "Another evening..."
-#~ msgstr "En aften..."
-
-#~ msgid "Victory!"
-#~ msgstr "Sejr!"
-
-#~ msgid "Tutorial1 - Eyes in the Dark"
-#~ msgstr "Prøvespil 1 - Øjne i mørket"

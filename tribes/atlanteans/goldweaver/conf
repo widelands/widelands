@@ -27,10 +27,10 @@ produce=goldyarn
 
 [idle]
 pics=goldweaver_i_??.png  # ???
-hotspot=34 68
+hotspot=33 64
 playercolor=true
 
 [working]
 pics=goldweaver_i_??.png  # ???
-hotspot=34 68
+hotspot=33 64
 playercolor=true

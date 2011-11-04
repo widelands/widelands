@@ -594,7 +594,7 @@ void Soldier::draw_info_icon
 	Rect energy_inner(Point(pt.x - w + 1, pt.y + 1), health_width, 3);
 	Rect energy_complement
 		(energy_inner + Point(health_width, 0), 2 * (w - 1) - health_width, 3);
-	RGBColor color(owner().get_playercolor()[2]);
+	const RGBColor & color = owner().get_playercolor();
 	RGBColor complement_color;
 
 	if (static_cast<uint32_t>(color.r()) + color.g() + color.b() > 128 * 3)

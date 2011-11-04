@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-05-29 10:00+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-09-30 17:44+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-30 04:35+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:42+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -23,10 +23,6 @@ msgstr "(CTRL+) 0-9  Zapamiętuje i pokazuje poprzednio zapamiętane lokacje"
 #: ../../txts/README:67
 msgid ", / .       Go to previous / next location"
 msgstr ", / .       Pokazuje poprzednią / następną lokację"
-
-#: ../../txts/tips/general_game.tip:38
-msgid ",' (comma) and '."
-msgstr ",' (przecinek) oraz '."
 
 #: ../../txts/README:123
 msgid "- how to reproduce the bug"
@@ -467,11 +463,11 @@ msgstr ""
 "Jeszcze jakieś pytania? Na stronie www.widelands.org znajdziesz listę "
 "najczęstszych pytań, wiki oraz fora dyskusyjne naszej społeczności."
 
-#: ../../txts/developers:150
+#: ../../txts/developers:154
 msgid "Atlantean"
 msgstr "Atlantydzki"
 
-#: ../../txts/developers:140
+#: ../../txts/developers:144
 msgid "Barbarian"
 msgstr "Barbarzyńcy"
 
@@ -497,7 +493,7 @@ msgstr "CTRL+L   ładuje mapę"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   zapisuje mapę"
 
-#: ../../txts/developers:137
+#: ../../txts/developers:141
 msgid "Campaign Story"
 msgstr "Scenariusz kampanii"
 
@@ -533,7 +529,7 @@ msgstr "Zapisywanie sesji</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10    Natychmiastowe wyłączenie gry"
 
-#: ../../txts/developers:165
+#: ../../txts/developers:169
 msgid "Czech"
 msgstr "Czeski"
 
@@ -541,7 +537,7 @@ msgstr "Czeski"
 msgid "DELETE      Archive the current message"
 msgstr "DELETE      Archiwizacja danej wiadomości"
 
-#: ../../txts/developers:172
+#: ../../txts/developers:176
 msgid "Dansk"
 msgstr "Duński"
 
@@ -549,11 +545,11 @@ msgstr "Duński"
 msgid "Development"
 msgstr "Osoby związane z Widelands"
 
-#: ../../txts/developers:307
+#: ../../txts/developers:311
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentacja, pomoc i wiki"
 
-#: ../../txts/developers:178
+#: ../../txts/developers:182
 msgid "Dutch"
 msgstr "Holenderski"
 
@@ -565,7 +561,7 @@ msgstr "E        otwiera okno wydarzeń"
 msgid "Elders"
 msgstr "Starszyzna"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:150
 msgid "Empire"
 msgstr "Imperium"
 
@@ -590,15 +586,15 @@ msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr ""
 "F6               Pokazuj konsole debugującą (tylko w przypadku debug-build)"
 
-#: ../../txts/developers:185
+#: ../../txts/developers:189
 msgid "Finnish"
 msgstr "Fiński"
 
-#: ../../txts/developers:322
+#: ../../txts/developers:326
 msgid "Former elders"
 msgstr "Była starszyzna"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:195
 msgid "French"
 msgstr "Francuski"
 
@@ -616,7 +612,7 @@ msgid ""
 "and modification"
 msgstr "Zasady i warunki kopiowania, rozpowszechniania i modyfikowania"
 
-#: ../../txts/developers:198
+#: ../../txts/developers:202
 msgid "Galician"
 msgstr "Galicyjski"
 
@@ -624,16 +620,16 @@ msgstr "Galicyjski"
 msgid "General game control"
 msgstr "Ogólna kontrola gry"
 
-#: ../../txts/developers:203
+#: ../../txts/developers:207
 msgid "German"
 msgstr "Niemiecki"
 
-#: ../../txts/developers:72
+#: ../../txts/developers:76
 msgid "Graphicians"
 msgstr "Graficy"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:333
+#: ../../txts/developers:337
 msgid "Graphics"
 msgstr "Grafika"
 
@@ -641,7 +637,7 @@ msgstr "Grafika"
 msgid "H        Toggles main menu"
 msgstr "H        pokazuje główne menu"
 
-#: ../../txts/developers:215
+#: ../../txts/developers:219
 msgid "Hebrew"
 msgstr "Hebrajski"
 
@@ -665,11 +661,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home         Centruje mapę na pozycji startowej"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:326
+#: ../../txts/developers:330
 msgid "Homepage"
 msgstr "Strona domowa"
 
-#: ../../txts/developers:298
+#: ../../txts/developers:302
 msgid "Homepage Coders"
 msgstr "Programiści strony internetowej"
 
@@ -677,7 +673,7 @@ msgstr "Programiści strony internetowej"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Jak stosować niniejsze Warunki do Twoich nowych programów"
 
-#: ../../txts/developers:220
+#: ../../txts/developers:224
 msgid "Hungarian"
 msgstr "Węgierski"
 
@@ -789,7 +785,7 @@ msgstr ""
 "decyzja, czy życzy on sobie rozprowadzania oprogramowania za pośrednictwem "
 "innego systemu i licencjobiorca nie może tego prawa wyboru ograniczać."
 
-#: ../../txts/developers:225
+#: ../../txts/developers:229
 msgid "Italian"
 msgstr "Włoski"
 
@@ -822,7 +818,7 @@ msgstr ""
 "Podobnie, aby zaznaczyć kilka zwierzą lub tekstur terenu, należy przytrzymać "
 "przycisk CTRL i zaznaczać je po kolei."
 
-#: ../../txts/developers:264
+#: ../../txts/developers:268
 msgid "Linux Distributions"
 msgstr "Dystrubucje linuksowe"
 
@@ -834,7 +830,16 @@ msgstr "M                Otwiera okno minimapy"
 msgid "M        Toggles minimap"
 msgstr "M        otwiera okno minimapy"
 
-#: ../../txts/developers:123
+#: ../../txts/tips/general_game.tip:34
+msgid ""
+"Manage your messages more efficiently: press 'N' for News to access the "
+"messages window, then use 'G' for Go To and the Delete key to archive "
+"messages."
+msgstr ""
+"Organizuj wiadomości efektywnie: klawisz \"N\" otwiera okno wiadomości, "
+"następnie klawisze \"G\" oraz Delete archiwizują wiadomości."
+
+#: ../../txts/developers:127
 msgid "Maps and Missions"
 msgstr "Mapy i misje"
 
@@ -842,7 +847,7 @@ msgstr "Mapy i misje"
 msgid "Miners will only work if supplied with food."
 msgstr "Górnicy pracują tylko gdy mają co jeść."
 
-#: ../../txts/developers:102
+#: ../../txts/developers:106
 msgid "Musicians"
 msgstr "Muzycy"
 
@@ -850,11 +855,7 @@ msgstr "Muzycy"
 msgid "N               Toggle messages ('news')"
 msgstr "N               Zmieniaj wiadomości ('nowości')"
 
-#: ../../txts/tips/general_game.tip:34
-msgid "N' for News to access the messages window, then use 'G"
-msgstr "N', by uzyskać dostęp do okna wiadomości, a następniie 'G"
-
-#: ../../txts/developers:160
+#: ../../txts/developers:164
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -866,7 +867,7 @@ msgstr ""
 msgid "No warranty"
 msgstr "WYRÓB BEZ GWARANCJI"
 
-#: ../../txts/developers:286
+#: ../../txts/developers:290
 msgid "Non Unix Distributions"
 msgstr "Dystrybucje nieuniksowe"
 
@@ -905,11 +906,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Pomoc on-line"
 
-#: ../../txts/developers:351
+#: ../../txts/developers:355
 msgid "Other"
 msgstr "Inne"
 
-#: ../../txts/developers:275
+#: ../../txts/developers:279
 msgid "Other Unix Distributions"
 msgstr "Inne dystrybucje uniksowe"
 
@@ -938,7 +939,7 @@ msgstr "PAGEUP          Zwiększa szybkość gry"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr "PAUZA wstrzymuje grę (tylko dla lokalnych gier)"
 
-#: ../../txts/developers:260
+#: ../../txts/developers:264
 msgid "Packagers"
 msgstr "Opiekuni pakietów"
 
@@ -952,7 +953,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr "Podaj nam jak najwięcej szczegółów. Napisz:"
 
-#: ../../txts/developers:230
+#: ../../txts/developers:234
 msgid "Polish"
 msgstr "Polski"
 
@@ -962,10 +963,10 @@ msgstr "Preambuła"
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them"
+"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
 msgstr ""
-"Za pomocą Ctrl+(0-9) możesz zapisywać ważne miejsca, po czym przełączać się "
-"między nimi za pomocą klawiszy 0-9"
+"Kombinacja Ctrl+(0-9) zapisuje miejsca na mapie, do których można się szybko "
+"przenieść używając klawiszy 0-9."
 
 #: ../../txts/README:1
 msgid "README"
@@ -1000,7 +1001,7 @@ msgstr "Powtórki</p>"
 msgid "Reporting Bugs"
 msgstr "Zgłaszanie błędów"
 
-#: ../../txts/developers:238
+#: ../../txts/developers:242
 msgid "Russian"
 msgstr "Rosyjski"
 
@@ -1029,7 +1030,7 @@ msgstr ""
 "Klawisz SPACJA zachowuje się tak samo jak w normalnie grze. Włącza/wyłącza "
 "pomoc budowy."
 
-#: ../../txts/developers:161
+#: ../../txts/developers:165
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -1037,7 +1038,7 @@ msgstr ""
 "Na https://translations.launchpad.net/widelands jest lista ludzi, którzy "
 "pomagali tłumaczyć poprzez launchpad.net"
 
-#: ../../txts/developers:243
+#: ../../txts/developers:247
 msgid "Slovak"
 msgstr "Słowacki"
 
@@ -1052,15 +1053,15 @@ msgstr ""
 "budynek jest otoczony drzewami albo drogami, produkacje się zatrzyma."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:339
+#: ../../txts/developers:343
 msgid "Sound"
 msgstr "Dźwięk"
 
-#: ../../txts/developers:113
+#: ../../txts/developers:117
 msgid "Sound Effects"
 msgstr "Efekty dźwiękowe"
 
-#: ../../txts/developers:248
+#: ../../txts/developers:252
 msgid "Spanish"
 msgstr "Hiszpański"
 
@@ -1076,7 +1077,7 @@ msgstr ""
 msgid "Status"
 msgstr "Status"
 
-#: ../../txts/developers:253
+#: ../../txts/developers:257
 msgid "Swedish"
 msgstr "Szwedzki"
 
@@ -1337,11 +1338,11 @@ msgstr ""
 "Aby zminimalizować/zmaksymalizować okno, naciśnij na pasku tytułu środkowym "
 "lub prawym przyciskiem myszy, trzymając jednocześnie Ctrl."
 
-#: ../../txts/developers:344
+#: ../../txts/developers:348
 msgid "Translation"
 msgstr "Tłumaczenie"
 
-#: ../../txts/developers:157
+#: ../../txts/developers:161
 msgid "Translators"
 msgstr "Tłumacze"
 
@@ -1359,6 +1360,14 @@ msgid ""
 msgstr ""
 "Używaj przycisków priorytetu w oknie budynku, aby regulować dostawę "
 "określonego towaru."
+
+#: ../../txts/tips/general_game.tip:38
+msgid ""
+"Use the ',' (comma) and '.' (period) keys to go back and forth between "
+"recently visited places in the world."
+msgstr ""
+"\",\" (przecinek) i \".\" (kropka) pozwalają przełączać się między ostatnio "
+"odwiedzanymi miejscami na mapie."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
@@ -1525,67 +1534,3 @@ msgstr ""
 #: ../../txts/README:5
 msgid "an open source strategy game"
 msgstr "strategiczna gra open-source"
-
-#~ msgid ""
-#~ "Widelands is a strategy game aiming for gameplay similar to Settlers II by "
-#~ "BlueByte.<br>In this game, you start out on a small piece of land with "
-#~ "nothing more than a few of useful resources. Using those, you can build "
-#~ "yourself an empire with many thousands of inhabitants. On your way towards "
-#~ "this goal, you will have to build up an economic infrastructure, explore the "
-#~ "lands around you and face enemies who are trying to rule the world just like "
-#~ "you do."
-#~ msgstr ""
-#~ "Widelands to gra strategiczna podobna do gry Settlers II wydanej przez firmę "
-#~ "BlueByte<br>W tej grze, zaczynasz na małym kawałku ziemi z niczym więcej jak "
-#~ "paroma przydatnymi surowcami. Używając ich możesz zbudować wielkie imperium "
-#~ "z wieloma tysiącami mieszkańców. Aby to osiągnąć będziesz musiał rozwijać "
-#~ "infrastrukturę, odkrywać okoliczne ziemię i pokonywać wrogów którzy chcą "
-#~ "władać światem - tak jak Ty."
-
-#~ msgid "F10         Quit the game immediately"
-#~ msgstr "F10             Natychmiastowe zakończenie gry"
-
-#~ msgid "vacant"
-#~ msgstr "niedostępny"
-
-#~ msgid "Wiki and Enduser-Documentation"
-#~ msgstr "Wiki i dokumentacja użytkownika"
-
-#~ msgid ""
-#~ "Holding down SHIFT switches first alternative tool on. This tool is in most "
-#~ "cases the complete difference of the normal tool (for example deletion of an "
-#~ "object instead of placing one)."
-#~ msgstr ""
-#~ "Trzymanie klawisza Shift zmienia narzędzie do pierwszego alternatywnego. W "
-#~ "większości przypadków jest to dokładne przeciwieństwo aktualnego narzędzie "
-#~ "(naprzykład usuwanie objektu zamiast umieszczania)."
-
-#~ msgid ""
-#~ "The tools for events, triggers, event chains and objectives are still under "
-#~ "heavy development. If you've got a question or found a problem, meet us in "
-#~ "the editor forums at www.widelands.org"
-#~ msgstr ""
-#~ "Narzędzia dla zdarzeń, wyzwalaczy, ciągów zdarzeń i celów są cały czas "
-#~ "rozwijane. Jeżeli masz jakieś pytanie albo znalazłeś problem, zapytaj się na "
-#~ "forum edytora na www.widelands.org (po angielsku)."
-
-#~ msgid ""
-#~ "You can find a reference for all triggers and events in our wiki at "
-#~ "widelands.org."
-#~ msgstr ""
-#~ "Możesz znaleźć informacje dla wszystkich wyzwalaczy i zdarzeń w naszej wiki "
-#~ "na widelands.org (po angielsku)."
-
-#~ msgid ""
-#~ "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
-#~ "real speed is than democratically set."
-#~ msgstr ""
-#~ "Możesz używać 'Page up' i 'Page down' żeby dostosować prędkość - prawdziwa "
-#~ "prędkość będzie potem demokratycznie ustanowiona."
-
-#~ msgid ""
-#~ "F5           Toggle hiding of game state not known to the player (only in "
-#~ "debug-builds)"
-#~ msgstr ""
-#~ "F5               Pokazuje/ukrywa stan gry nieznany dla gracza (Tylko w "
-#~ "przypadku wydań \"debug\")"

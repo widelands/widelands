@@ -54,10 +54,10 @@ Computer_Player::getImplementations()
 	static std::vector<Computer_Player::Implementation const *> impls;
 
 	if (impls.empty()) {
+		impls.push_back(&EmptyAI::implementation);
 		impls.push_back(&DefaultAI::aggressiveImpl);
 		impls.push_back(&DefaultAI::normalImpl);
 		impls.push_back(&DefaultAI::defensiveImpl);
-		impls.push_back(&EmptyAI::implementation);
 	}
 
 	return impls;

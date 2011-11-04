@@ -133,6 +133,9 @@ void GameMessageMenu::think()
 	if (list.size()) {
 		if (not list.has_selection())
 			list.select(0);
+			// FIXME Workaround for bug #691928: There should
+			// FIXME be a solution without this extra update().
+			list.update();
 	} else {
 		center_main_mapview_on_location.set_enabled(false);
 		message_body.set_text(std::string());
@@ -200,6 +203,9 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 				center_main_mapview_on_location.clicked();
 			return true;
 
+		case SDLK_KP_PERIOD:
+			if (code.mod & KMOD_NUM)
+				break;
 		case SDLK_DELETE:
 			do_delete();
 			return true;

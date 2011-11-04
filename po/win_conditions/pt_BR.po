@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2011-05-26 14:48+0000\n"
-"Last-Translator: Aluísio Augusto Silva Gonçalves <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-08-21 14:15+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-27 04:42+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:49+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
@@ -74,6 +74,10 @@ msgstr ""
 msgid "Endless Game"
 msgstr "Jogo Infinito"
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:10
+msgid "Endless Game (no fog)"
+msgstr ""
+
 #: ../../scripting/win_conditions/03_territorial_lord.lua:151
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Mantém-o por mais %i minutos para vencer o jogo."
@@ -130,6 +134,10 @@ msgstr "O vencedor é %s "
 msgid "This is an endless game without rules."
 msgstr "Este é um jogo infinito sem regras."
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:11
+msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr ""
+
 #: ../../scripting/win_conditions/02_collectors.lua:103
 msgid "Total: %i points"
 msgstr "Total: %i pontos"
@@ -147,6 +155,7 @@ msgstr "Gnomo de Madeira"
 #: ../../scripting/win_conditions/02_collectors.lua:179
 #: ../../scripting/win_conditions/03_territorial_lord.lua:166
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid "You are defeated!"
 msgstr "Você foi derrotado!"
 
@@ -177,6 +186,7 @@ msgstr "Você perdeu !"
 #: ../../scripting/win_conditions/02_collectors.lua:180
 #: ../../scripting/win_conditions/03_territorial_lord.lua:167
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:40
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
@@ -218,50 +228,3 @@ msgstr "Você perdeu este jogo!"
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "with %i trees."
 msgstr "com %i árvores."
-
-#~ msgid "Sorry, you have lost this game!"
-#~ msgstr "Desculpe, mas você perdeu este jogo!"
-
-#~ msgid "Game over"
-#~ msgstr "Fim de Jogo"
-
-#~ msgid "An endless game without rules"
-#~ msgstr "Um infinito jogo sem regras"
-
-#~ msgid "The player %i has currently %i points"
-#~ msgstr "O jogador %i tem atualmente %i pontos."
-
-#~ msgid "The tribe that can defeat all others wins!"
-#~ msgstr "A tribo que derrotar as outras será a vencedora."
-
-#~ msgid "Tribe defeated!"
-#~ msgstr "Tribo derrotada!"
-
-#~ msgid "Tribes together"
-#~ msgstr "Tribos juntas"
-
-#~ msgid "You've lost!"
-#~ msgstr "Você perdeu!"
-
-#~ msgid "Your tribe is no more. You have lost this game"
-#~ msgstr "Sua tribo não existe mais. Você perdeu este jogo"
-
-#~ msgid "The tribe %s is no more."
-#~ msgstr "A tribo %s não exite mais."
-
-#~ msgid ""
-#~ "You get points for wares in your HQ, the one with the highest number of "
-#~ "wares at the end of 4 hours wins the game"
-#~ msgstr ""
-#~ "Você recebe pontos por mercadorias em seu HQ, aquele com o maior número de "
-#~ "mercadorias no final de 4 horas ganha o jogo"
-
-#~ msgid ""
-#~ "The three tribes play together vs each other. Vision is granted to all the "
-#~ "players playing together"
-#~ msgstr ""
-#~ "As três tribos jogam juntos contra o outro. A visão é concedido a todos os "
-#~ "jogadores que jogam juntos"
-
-#~ msgid "%i trees at the moment ."
-#~ msgstr "%i árvores de momento."

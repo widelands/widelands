@@ -115,6 +115,7 @@ struct BaseListselect : public Panel {
 	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_key(bool down, SDL_keysym);
 
 private:
 	static const int32_t DOUBLE_CLICK_INTERVAL = 500; // half a second

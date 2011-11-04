@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-08-30 22:52+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-10-03 20:04+0000\n"
+"Last-Translator: David Allwicher <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:49+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -24,6 +24,11 @@ msgid ""
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
+"Ett meddelande har skickats till dig. Se hur knappen i skärmens underkant\n"
+"har bytt utseende. Du kan nu bränna ner det här stenbrottet, eftersom\n"
+"det inte längre är till någon nytta och bara tar upp plats. För att göra "
+"det,\n"
+"klicka på stenbrottet och klicka sedan på förstör-knappen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
 msgid ""
@@ -44,6 +49,18 @@ msgid ""
 "level 2 evade. This is one fearsome warrior then! The individual statistics\n"
 "have the following meaning:"
 msgstr ""
+"En soldat skapas som vilken vanlig arbetare som helst: en bärare hämtar\n"
+"ett verktyg ur lagret så snart som en begäran för ett visst yrke inte är\n"
+"tillgodosedd. Verktyget för att skapa en barbarsoldat är en yxa. Den nya\n"
+"soldaten är på nivå 0. För att göra soldaten starkare i någon av de fyra\n"
+"kategorierna krävs träning. Träning sker i träningsanläggningar som\n"
+"träningsläger eller stridsarenan: soldater går dit (som våra små krabater\n"
+"redan gör), konsumerar några varor, och går upp en nivå i en kategori. Om\n"
+"en barbarsoldat är fullärd har han HP nivå 3, attack nivå 5, försvar nivå "
+"0,\n"
+"och undvik nivå 2. Det är alltså en respektingivande krigare! De "
+"individuella\n"
+"talen har följande innebörd:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:438
 msgid ""
@@ -52,16 +69,21 @@ msgid ""
 "screen.\n"
 "Close the messages window now by right clicking into it."
 msgstr ""
+"Alla fönster i Widelands kan stängas genom att högerklicka i dem. Vissa\n"
+"fönster kan också växlas med knapparna längst ner i skärmen. Stäng\n"
+"meddelandefönstret nu genom att högerklicka i det."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid ""
 "Alternatively, you can directly click the flag where\n"
 "the road should end like so."
 msgstr ""
+"Alternativt kan du direkt klicka flaggan där vägen\n"
+"ska sluta, så här."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
 msgid "And finally the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "Och till sist den tillåter den gula flaggsymbolen bara flaggor."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
 msgid "Archive all messages in your inbox"
@@ -87,12 +109,19 @@ msgid ""
 "vulnerable: any military site from another player can conquer the land. You\n"
 "therefore need military sites to keep military influence over your land."
 msgstr ""
+"Så snart en militär byggnad är bemannad, utökar den din mark. Du kan\n"
+"sedan bränna ner den igen om du behöver utrymmet. Men kom ihåg att\n"
+"ditt territorium sedan är sårbart: vilken militärbyggnad som helst från en\n"
+"annan spelare kan ta över. Du behöver därför militära byggnader för att\n"
+"behålla militär kontroll över din mark."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:683
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
 msgstr ""
+"Anfall och erövra din fiendes alla militära byggnader och förstör deras\n"
+"högkvarter."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
@@ -101,14 +130,15 @@ msgstr "Attack:"
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
 msgstr ""
+"Grundläggande guide - kartan baserad på Winterwinds guide 1 för Barbarerna"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
-msgstr ""
+msgstr "Bygg en flagga på vägen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:167
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "Bygg en flagga för att dela vägen till skugshuggaren"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Build a quarry"
@@ -129,14 +159,19 @@ msgid ""
 "activated\n"
 "earlier."
 msgstr ""
+"Bygg ett stenbrott bredvid de där stenarna. Kommer du ihåg hur jag gjorde\n"
+"nyss? Se till att byggnadshjälpen är på, och klicka sedan där du vill "
+"placera\n"
+"byggnaden, välj den i fönstret som visas, och voilá. Det kanske är läge att\n"
+"förklara alla dessa byggnadshjälpsymboler vi aktiverade tidigare."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
-msgstr ""
+msgstr "Bygger en anslutande väg"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
 msgid "Building the lumberjack"
-msgstr ""
+msgstr "Bygger skogshuggaren"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:593
 msgid ""
@@ -144,11 +179,14 @@ msgid ""
 "to\n"
 "build a small training scenario for you. Let's do that now."
 msgstr ""
+"Men jag har tappat tråden. Tillbaka till soldater. Vad höll jag på med? Ah, "
+"just\n"
+"det, jag ville bygga ett litet träningsscenario åt dig. Till verket."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
 msgid "Census and statistics"
-msgstr ""
+msgstr "Folkräkning och statistik"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:650
 msgid ""
@@ -161,6 +199,14 @@ msgid ""
 "military influence any more. If an enemy builds a military building nearby,\n"
 "your construction site could burn down. No sweat, that won't happen here."
 msgstr ""
+"Citadell kan inte byggas direkt. Först måste du bygga en fästning och sedan\n"
+"förbättra den till ett citadell. För att göra detta, klicka på fästningen "
+"och\n"
+"välj sedan knappen förbättra till citadell. Dina soldater kommer lämna\n"
+"citadellet medan den byggs om. Det innebär att din fästning inte har\n"
+"något militärt inflytande. Om en fiende bygger en militär byggnad i\n"
+"närheten kan din byggarbetsplats brännas ner. Men simma lugnt, det\n"
+"kommer inte hända här."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
@@ -170,20 +216,20 @@ msgstr "Stäng meddelandefönstret"
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:427
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:448
 msgid "Closing windows"
-msgstr ""
+msgstr "Stänger fönster"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:698
 msgid "Conclusion"
-msgstr ""
+msgstr "Sammanfattning"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "Anslut stenbrottet till högkvarteret"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:347
 msgid "Connect your construction site"
-msgstr ""
+msgstr "Anslut din byggarbetsplats"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:348
 msgid ""
@@ -196,14 +242,20 @@ msgid ""
 "front\n"
 "of your headquarters. Wait for the completion of the stonemason's hut."
 msgstr ""
+"Bygg en väg mellan byggarbetsplatsen för stenbrottet och ditt högkvarter.\n"
+"Du hamnar direkt i vägbyggnadsläge när du beställde en ny plats. Men nu\n"
+"är du inte det. För att bygga en helt ny väg, klicka bara på flaggan "
+"framför\n"
+"din byggarbetsplats, klicka sedan på Bygg väg-ikonen, och sedan på flaggan\n"
+"framför ditt högkvarter. Vänta tills stenmurarens stuga står färdig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
-msgstr ""
+msgstr "Erövra ett område där vi kan bygga gruvor"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Conquer the mountain to the south west"
-msgstr ""
+msgstr "Erövra berget i sydväst"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -215,6 +267,11 @@ msgid ""
 "so\n"
 "that they get a tick-symbol in front of them. Then, you can click the"
 msgstr ""
+"För närvarande har du två meddelanden. Det som du läser nu och det som\n"
+"informerade dig om att ett nytt högkvarter lades till din ekonomi. Låt oss "
+"gå\n"
+"igenom hur meddelanden arkiveras: Du kan markera dem i din inkorg så att de\n"
+"får en bock framför sig. Sedan kan du klicka på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid "Defeat the enemy"
@@ -230,6 +287,9 @@ msgid ""
 "the\n"
 "number of attacking soldiers, then send them via the attack button."
 msgstr ""
+"Besegra den närbelägna fienden. För att anfalla en byggnad, klicka på dess\n"
+"dörrar, välj antal anfallande soldater, och skicka sedan iväg dem med\n"
+"anfallsknappen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
@@ -249,6 +309,13 @@ msgid ""
 "subtracted\n"
 "are because of the defense ability."
 msgstr ""
+"Försvar är det värdet som subtraheras från attackvärdet. Barbarerna kan\n"
+"inte träna i det här attributet och har därför alltid försvar nivå 0, "
+"vilket\n"
+"innebär att de alltid får 3 HP avdragna från förvållad skada. Om en "
+"anfallare\n"
+"med attackvärde 15 träffar en barbarsoldat skulle barbaren förlora 15-3=12\n"
+"HP. De tre HP som dras av beror på försvarsattributet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid "Defense:"
@@ -256,30 +323,33 @@ msgstr "Försvar:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Diving in"
-msgstr ""
+msgstr "Kastar mig in"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid "Enable the build help"
-msgstr ""
+msgstr "Aktivera bygghjälpen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhance this fortress"
-msgstr ""
+msgstr "Förbättra den här fästningen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid "Enhance your fortress"
-msgstr ""
+msgstr "Förbättra din fästning"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "Förbättra din fästning till ett citadell"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
 msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
 msgstr ""
+"Förbättra din fästning till ett citadell nu. Kom ihåg att du kan få tiden "
+"att gå\n"
+"snabbare genom att använda PAGE_UP; det tar ett tag att bygga ett citadell."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:664
 msgid ""
@@ -291,10 +361,16 @@ msgid ""
 "strategically\n"
 "important points like constricted points or mountains."
 msgstr ""
+"Förbättra din fästning till ett mäktigt citadell. I citadellet kan 12 "
+"soldater\n"
+"husera, och det är den största militärbyggnad barbarerna kan bygga. Det\n"
+"kostar också en hel del, och tar lång tid att bygga. Det lämpar sig bäst "
+"för\n"
+"att vakta strategiskt viktiga punkter, som flaskhalsar eller berg."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "Förbättrar byggnader"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
 msgid ""
@@ -302,19 +378,21 @@ msgid ""
 "for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
+"Undvik är den chansen soldaterna har att undvika en attack. Den är 25%\n"
+"för en barbar med undvik nivå 0 och ökar om 15% för varje nivå."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
-msgstr ""
+msgstr "Undvik:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
-msgstr ""
+msgstr "Allt kan byggas på den gröna hussymbolen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:262
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr ""
+msgstr "Allt förutom stora byggnader kan byggas på en gul hussymbol."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:294
 msgid ""
@@ -323,6 +401,11 @@ msgid ""
 "construction site. You can enter road building mode for any flag by\n"
 "left-clicking on a flag and selecting"
 msgstr ""
+"Utmärkt! Omedelbart efter att du placerade en byggnad är du i\n"
+"vägbyggnadsläge. Den nya vägen kommer börja vid flaggan framför\n"
+"ditt nyligen placerade byggnadsområde. Du kan gå in i\n"
+"vägbyggnadsläge för vilken flagga som helst genom att vänster-\n"
+"klicka på en flagga och sedan välja"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:429
 msgid ""
@@ -346,6 +429,10 @@ msgid ""
 "right-click-and-hold anywhere on the map, then drag the mouse and instead\n"
 "of the cursor, the view will be moved. Try it."
 msgstr ""
+"Utmärkt. Det finns ett snabbare sätt att flytta, genom att använda musen "
+"istället:\n"
+"Bara högerklicka och håll ned någonstans på kartan, sedan dra musen och\n"
+"istället för pekaren, flyttas vyn. Prova nu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:191
 msgid ""
@@ -354,22 +441,31 @@ msgid ""
 "to\n"
 "the raw stone."
 msgstr ""
+"Utmärkt. Skogshuggarstugan är färdig. En skogshuggare kommer nu flytta\n"
+"in och börja hugga ner trän, så vårt förråd av trädstammar är säkrat för\n"
+"stunden. Nu till obehandlad sten."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:477
 msgid ""
 "Expanding is as simple as building a military building at the corner of\n"
 "your territory. The barbarians have a few different military buildings:\n"
-"sentries, barriers, donjons, strongholds, fortresses and citadels. The "
-"bigger\n"
+"sentries, barriers, donjons, fortresses and citadels. The bigger\n"
 "the building, the more expensive it is to build, the more land it conquers\n"
 "around itself and the more soldiers can be stationed there. The buildings "
 "also\n"
 "vary in their vision range: buildings with a tower see farther than others."
 msgstr ""
+"Expandera gör du så enkelt som genom att bygga en militärbyggnad längst\n"
+"ut i ditt territorium. Barbarerna har ett par olika militärbyggnader: torn,\n"
+"murar, spaningstorn, fästningar, och citadell. Ju större byggnaden är, ju\n"
+"dyrare är den att bygga, och ju mer land erövrar den omkring sig, och ju "
+"fler\n"
+"soldater kan stationeras där. Byggnaderna varierar också i hur långt de kan\n"
+"se: byggnader med ett torn ser längre än andra."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:470
 msgid "Expanding your territory!"
-msgstr ""
+msgstr "Expandera ditt territorium!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:121
 msgid ""
@@ -388,6 +484,19 @@ msgid ""
 "then select\n"
 "the tab - and finally I'll choose the building."
 msgstr ""
+"Först kommer jag vänsterklicka på symbolen där jag vill ha "
+"skogshuggarstugan.\n"
+"Ett fönster kommer visas där jag kan välja bland olika byggnader. Eftersom "
+"jag\n"
+"kommer klicka på en gul hussymbol - vilket betyder att dess fält kan ta små\n"
+"och mellanstora byggnader - kommer jag visas alla mellanstora byggnader som\n"
+"finns tillgängliga. Skogshuggarens stuga är en liten byggnad, så jag kommer "
+"gå\n"
+"vidare till att välja fliken med små byggnader. Sedan kommer jag välja\n"
+"skogshuggarstugan.\n"
+"Klicka på \"OK\" för att titta på. Jag kommer ta det lugnt och försiktigt: "
+"Jag\n"
+"kommer klicka - sedan välja fliken - och till sist välja byggnaden."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:498
 msgid ""
@@ -395,14 +504,18 @@ msgid ""
 "in mountains. Conquer some area on the mountains to the south-west of your\n"
 "headquarters by building some military buildings close to your border."
 msgstr ""
+"För en fullständig ekonomi behöver vi kol, järn, och guld. Malmerna hittas "
+"i\n"
+"bergen. Erövra lite mark i bergen i sydväst från ditt högkvarter genom att\n"
+"bygga några militärbyggnader nära dina gränser."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
 msgid "Getting a quarry up."
-msgstr ""
+msgstr "Få upp ett stenbrott."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:240
 msgid "Great. Now about that quarry..."
-msgstr ""
+msgstr "Lysande. Så det där stenbrottet..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:391
 msgid ""
@@ -412,14 +525,18 @@ msgid ""
 "your\n"
 "tribe, won or lost military buildings, resources found..."
 msgstr ""
+"Hej, det är jag igen! Den här gången skickade jag ett meddelande.\n"
+"Meddelanden skickas till dig av Widelands för att informera dig om viktiga\n"
+"händelser: tomma gruvor, anfall mot din stam, vunna eller förlorade\n"
+"militärbyggnader, funna naturresurser..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:620
 msgid "Hitpoints:"
-msgstr ""
+msgstr "HP:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid "How to build a quarry"
-msgstr ""
+msgstr "Hur man bygger ett stenbrott"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:43
 msgid ""
@@ -430,6 +547,11 @@ msgid ""
 "everything out for yourself. Otherwise, please bear with me, I am not the\n"
 "youngest and quickest anymore."
 msgstr ""
+"Tyvärr, men jag måste riva upp det här igen. Vi kan behöva utrymmet här\n"
+"senare. Om jag är för långsam i dina ögon kanske du vill spela ett riktigt "
+"spel\n"
+"och själv lista ut hur allt funkar. Ha annars tålamod med mig, jag är inte\n"
+"längre så ung och rask av mig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
 msgid ""
@@ -442,6 +564,13 @@ msgid ""
 "the defenders will come from all nearby military buildings of the enemy and\n"
 "intercept your forces."
 msgstr ""
+"Jag har skapat en sparringpartner åt dig: Det är en imperiestam nära ditt\n"
+"citadell. För att anfalla deras byggnader, klicka på dörren för den byggnad\n"
+"du vill angalla, välj antalet soldater du vill skicka dit och klicka på "
+"analls-\n"
+"knappen. Dina soldater kommer strömma till från alla närbelägna militär-\n"
+"byggnader. Av samma anledning kommer försvararna strömma till från\n"
+"fiendens alla närbelägna militärbyggnader för att genskjuta dina trupper."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:646
 msgid ""
@@ -450,18 +579,26 @@ msgid ""
 "is\n"
 "an even bigger building: the citadel."
 msgstr ""
+"Jag ska skapa en fiende åt dig snart, men nu tar vi och kontrollerar, för\n"
+"säkerhets skull, att du är redo. Den här fästningen är redan ganska stark,\n"
+"och erövrar mycket land. Men det finns en ännu större byggnad: citadellet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel\n"
 "road building by clicking on the starting flag of the road and selecting"
 msgstr ""
+"Om du tycker att du inte behöver bygga någon väg just nu kan du\n"
+"avbryta vägbyggandet genom att klicka på vägens startflagga och\n"
+"sedan välja"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
 msgid ""
 "If you place something on a field, the surrounding fields might have less\n"
 " space for holding buildings, so choose your fields wisely."
 msgstr ""
+"Om du placerar något i ett fält kommer de omkringliggande fälten ha\n"
+" mindre utrymme för andra byggnader, så välj noga var du vill bygga."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:583
 msgid ""
@@ -469,6 +606,9 @@ msgid ""
 "scroll here\n"
 "via right-button scrolling or open the minimap by clicking on the"
 msgstr ""
+"Om du vill återvända till denna sydvästra del av ditt rike, rulla bara hit "
+"med\n"
+"högerknappsrullning, eller öppna minikartan genom att klicka på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid "Introducing messages"
@@ -482,6 +622,10 @@ msgid ""
 "clicking the fourth button from the left at the very bottom of the screen.\n"
 "Click the \"OK\" button and then give it a try."
 msgstr ""
+"Det är lättare att förstå vad som får byggas eller inte på vilka fält när\n"
+"byggnadssymbolerna är aktiverade. Gör det nu genom att trycka på\n"
+"BLANKSTEG eller genom att klicka på den fjärde knappen från vänster längst\n"
+"ner i skärmen. Klicka på \"OK\" och prova."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
 msgid ""
@@ -489,6 +633,8 @@ msgid ""
 "buildings\n"
 "tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
+"Klicka bara på någon hussymbol bredvid stenarna, välj fliken med små\n"
+"byggnader i fönstret som visas, och klicka sedan på stenbrottsymbolen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid ""
@@ -496,10 +642,15 @@ msgid ""
 "Also try to keep roads as short as possible and always remember to place as\n"
 "many flags as you can on road segments to share the load better."
 msgstr ""
+"Håll sluttningarna nära i tankarna när du lägger dina vägar, och använd dem\n"
+"till din fördel.  Försök också hålla vägarna så korta som möjligt, och kom\n"
+"altid ihåg att placera så många flaggor som möjligt på vägsegment för att "
+"dela\n"
+"belastningen bättre."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
-msgstr ""
+msgstr "Vänsterklicka på \"OK\" för att stänga rutan och testa."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
@@ -509,10 +660,13 @@ msgid ""
 "the\n"
 "watch tab and then click on the corresponding buttons."
 msgstr ""
+"Låt mig bara snabbt aktivera dessa två åt dig. Kom ihåg: 'c' och 's' är\n"
+"tangenterna. Annars kan du klicka på ett fält utan att bygga på det, välj\n"
+"sedan Bevaka-fliken och klicka sedan på en motsvarande knapp."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:68
 msgid "Let's dive right in!"
-msgstr ""
+msgstr "Till verket!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:520
 msgid ""
@@ -522,6 +676,10 @@ msgid ""
 "geologist\n"
 "to it. I'll show you how it's done."
 msgstr ""
+"Nu letar vi efter naturresurser i det här berget. Först kommer vi bygga en\n"
+"väg till bergen och placera en flagga. Sedan klickar vi på flaggan och "
+"kallar\n"
+"ut en geolog. Jag kommer visa hur det går till."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -531,42 +689,47 @@ msgid ""
 "beneficial\n"
 "close to mountains because you can't build houses in mountains."
 msgstr ""
+"Vi testar med en gång: Bygg ett par militärbyggnader vid din sydvästra\n"
+"gräns. Vi vill erövra lite av bergen, så att vi kan leta efter naturresurser "
+"där.\n"
+"Större byggnader kommer erövra mer mark, vilket kan vara bra nära bergen,\n"
+"eftersom du inte kan bygga hus på ojämn mark."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
-msgstr ""
+msgstr "Då väntar vi och ser vad geologen hittar i berget."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid "Lumberjack is done"
-msgstr ""
+msgstr "Skogshuggaren är klar"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:104
 msgid "Lumberjack's spot"
-msgstr ""
+msgstr "Skogshuggarens plats"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:460
 msgid "Message arrived!"
-msgstr ""
+msgstr "Meddelande mottaget!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid "Messages"
-msgstr ""
+msgstr "Meddelanden"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
-msgstr ""
+msgstr "Sammanfattning av gruvdrift"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Flytta din vy med piltangenterna"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Flytta din vy med musen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Att flytta din vy"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -579,10 +742,19 @@ msgid ""
 "move\n"
 "your mouse around and you'll see the view scroll."
 msgstr ""
+"Det är av avgörande vikt att kunna flytta runt vyn för att få en "
+"fullständig\n"
+"överblick av hela din ekonomi. Det finns två sätt att flytta din vy i "
+"Widelands. Den\n"
+"första är att använda piltangenterna på ditt tangentbord. Den andra är den "
+"mer\n"
+"vanliga och snabba metoden att hålla ner höger musknapp var som helst och "
+"att\n"
+"sedan flytta runt musen, så kommer vyn att flyttas därefter."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Nice and easy does it all the time"
-msgstr ""
+msgstr "Lugn och fin, lugn och fin"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
 msgid ""
@@ -594,6 +766,13 @@ msgid ""
 "symbol\n"
 "in between the two blue flags we just placed and then click on the"
 msgstr ""
+"Trevligt att de fungerar som de gör, eller hur? Men den stackars bäraren har "
+"en\n"
+"mycket lång färd framför sig. Vi kan göra det enklare för honom (och mer\n"
+"effektivt för oss) genom att placera en till blå flagga på vägen. Prova du, "
+"den\n"
+"här gången: klicka på den gula flaggsymbolen mellan de två blå flaggorna vi\n"
+"just placerade och klicka sedan på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:563
 msgid ""
@@ -603,6 +782,12 @@ msgid ""
 "well. This infrastructure also varies from tribe to tribe. You'll get them\n"
 "explained in the introduction campaigns for the three tribes."
 msgstr ""
+"Observera att en gruva måste ha matransoner för att fungera. Ransonerna\n"
+"tillreds i tavernor, och tavernor behöver kött, pittabröd, och fisk för att\n"
+"göra det. Du kommer behöva mycker mer infrastruktur för att få dina\n"
+"gruvor att fungera väl. Denna infrastruktur varierar också mellan "
+"stammarna.\n"
+"De kommer förklaras i de inledande kampanjerna för de tre stammarna."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:271
 msgid ""
@@ -610,12 +795,18 @@ msgid ""
 "medium or big building symbol, you will have to select the small buildings\n"
 "tab first to find it. Go on, check it out!"
 msgstr ""
+"Varsågod, bara - prova. Stenbrottet är en liten byggnad, så om du\n"
+"klickar på en symbol för mellan eller stora byggnader kommer du\n"
+"behöva välja fliken för små byggnader först för att hitta den. Nå,\n"
+"till verket!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:342
 msgid ""
 "Now please rebuild the road between your quarry and your headquarters.\n"
 "We'll wait until the quarry is completed."
 msgstr ""
+"Bygg nu om vägen mellan ditt stenbrott och ditt högkvarter. Vi väntar tills\n"
+"stenbrottet är färdigt."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:149
 msgid ""
@@ -624,10 +815,14 @@ msgid ""
 "blue\n"
 "flags and carry wares from one blue flag to the other."
 msgstr ""
+"Se nu på när en byggnadsarbetare lämnar högkvarteret och går till\n"
+"byggarbetsplatsen. En bärare kommer också fatta posto mellan de två\n"
+"blå flaggorna och bära varor från en blå flagga till den andra."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
+"Nu vet vi vad som är på gång. Då väntar vi tills stenbrottet är färdigt."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
@@ -639,6 +834,12 @@ msgid ""
 "over\n"
 "the route the road takes like so:"
 msgstr ""
+"Jo, den där vägen. Kom ihåg: vi är redan i vägbyggnadsläge eftersom du just\n"
+"befallde fram ett stenbrott. Du kan antingen förlänga den ett fält i taget "
+"genom\n"
+"att upprepat vänsterklicka på intilliggande fält för absolut kontroll över "
+"hur\n"
+"vägen sträcker sig, så här:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
@@ -648,6 +849,10 @@ msgid ""
 "get\n"
 "the resources out of the ground."
 msgstr ""
+"Okej, nu besitter vi lite större område på berget. Berg är väldigt viktiga,\n"
+"eftersom de innehåller naturresurser: kol, järnmalm, guldmalm, och granit.\n"
+"Varje stam använder resurserna på olika sätt, men alla behöver gruvor för\n"
+"att få malmerna ur marken."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:575
 msgid ""
@@ -665,38 +870,51 @@ msgid ""
 "and a\n"
 "warehouse to the north east of here."
 msgstr ""
+"Till sista punkten på dagordningen. Vi ska prata lite om soldater, deras "
+"träning,\n"
+"och deras profession: krigföring. Som sagt handlar Widelands om att bygga "
+"upp\n"
+"istället för att bränna ner: därför handlar krigföring också mer om ekonomi "
+"än\n"
+"om militära strategier. Icke desto mindre erbjuder krig ett sätt att utmana\n"
+"andra spelare, och har några egenheter som kräver förklaring. Stammarnas\n"
+"ekonomier förklaras i deras undervisningskampanjer. Okej, jag ska skapa en\n"
+"liten träningszon åt oss med ett träningsläger och ett lager åt nordost."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:327
 msgid ""
 "One more thing: around the field where your road would end you can see\n"
 "different markers. They have the following meaning:"
 msgstr ""
+"En sak till: runt fältet där din väg skulle sluta kan du se olika märken. "
+"De\n"
+"har följande innebörd:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Onward to the quarry"
-msgstr ""
+msgstr "Vidare till stenbrottet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:225
 msgid "Other ways to move the view"
-msgstr ""
+msgstr "Andra sätt att flytta vyn"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "Placing another flag"
-msgstr ""
+msgstr "Placera en till flagga"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:264
 msgid "Red building symbols can only hold small buildings and flags."
-msgstr ""
+msgstr "Röda byggnadssymbolwe kan bara ta små byggnader och flaggor."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:292
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:316
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:325
 msgid "Road building"
-msgstr ""
+msgstr "Vägbygge"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
-msgstr ""
+msgstr "Sök efter naturresurser"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:366
 msgid ""
@@ -705,6 +923,10 @@ msgid ""
 "display an information string about the productivity of buildings or the\n"
 "progress of construction sites."
 msgstr ""
+"Byggnadsstatistik fungerar på liknande sätt, och växlas med en\n"
+"knapp på bevakningsfliken för fälten. Tangentgenvägen för det är 's'.\n"
+"Det kommer visa en informationssträng om byggnadens produktivitet\n"
+"eller förloppet av byggandet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:558
 msgid ""
@@ -713,14 +935,17 @@ msgid ""
 "help\n"
 "symbol for where a mine can be built is"
 msgstr ""
+"Så vår geolog hittade en massa kol i berget. Du borde då bygga en kolgruva\n"
+"här. Att bygga en gruva är precis som att bygga ett hus. Bygghjälpsymbolen\n"
+"för var en gruva kan byggas är"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
-msgstr ""
+msgstr "Soldater och krigföring"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:199
 msgid "Some stones were found"
-msgstr ""
+msgstr "Några stenar hittades"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
 msgid ""
@@ -731,12 +956,19 @@ msgid ""
 "how to\n"
 "move your view over there."
 msgstr ""
+"Stenar kan utvinnas i granitgruvor, men ett lättare sätt är att bygga ett\n"
+"stenbrott bredvid några lösa stenar. Det råkar finnas en hög sådana precis\n"
+"till väster (vänster) om ditt högkvarter. Jag ska nu lära dig hur du flyttar "
+"din\n"
+"vy ditåt."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:716
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
 msgstr ""
+"Tack för att du spelade denna guide. Njuta av Widelands och kom\n"
+"ihåg att besöka oss på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:137
 msgid ""
@@ -746,6 +978,11 @@ msgid ""
 "the\n"
 "blue flag in front of my headquarters."
 msgstr ""
+"Du räcker ändå inte. Jag måste fortfarande ansluta skogshuggarens\n"
+"stuga til resten av vägnätet. Efter att jag beordrade en\n"
+"byggarbetsplats försattes jag automatiskt i vägbyggnadsläge, så allt\n"
+"jag behöver göra är att klicka på den blåa flaggan framför mitt\n"
+"högkvarter."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:624
 msgid ""
@@ -754,12 +991,17 @@ msgid ""
 "damage\n"
 "when he succeeds to hit an enemy. For each attack level, he gains 7 damage."
 msgstr ""
+"Mängden skada som en soldat gör vid en lyckad attack på fienden. En\n"
+"barbarsoldat med attacknivå 0 gör ~14 HP skada när han träffar sin\n"
+"fiende. För varje ytterligare attacknivå ökar skadan med 7."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:335
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in\n"
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"Anslutningen mellan fälten är extremt brant. Fartökningen i ena\n"
+"riktningen är enorm, medan fartminskningen i andra sidan också är stor."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:531
 msgid ""
@@ -768,6 +1010,9 @@ msgid ""
 "various\n"
 "resources:"
 msgstr ""
+"Geologen kommer snart anlända till flaggan och börjar undersöka\n"
+"området omkring sig. Han kommer placera följande märken för de olika\n"
+"naturresurserna:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:395
 msgid ""
@@ -777,6 +1022,9 @@ msgid ""
 "available, but there is also a bell sound played whenever you receive a new\n"
 "message."
 msgstr ""
+"Meddelandefönstret kan växlas med knappen längst till höger i skärmens \n"
+"underkant. Den här knappen ändrar också utseende om nya meddelanden har\n"
+"kommit, men det hörs också ett pling när de kommer."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:414
 msgid ""
@@ -792,6 +1040,17 @@ msgid ""
 "check\n"
 "box in front of them. Then, click the archive all button"
 msgstr ""
+"Meddelandefönstret är centralt för att ha full kontroll över din stams "
+"rikedom.\n"
+"Men du får många meddelanden i en riktig spelomgång. För att hålla tungan i "
+"\n"
+"rätt mun bör du försöka hålla inkorgen tom. Arkivera alla dina meddelanden "
+"i\n"
+"inkorgen nu. För att göra det, öppna meddelandefönstret genom att trycka på\n"
+"'n' eller klicka på knappen längst till höger i skärmens underkant. Markera "
+"sedan\n"
+"alla meddelanden genom att kryssa för dem, och klicka sedan på knappen\n"
+"Arkivera alla."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:589
 msgid ""
@@ -801,6 +1060,10 @@ msgid ""
 "flags\n"
 "and player indicators on and off inside the minimap."
 msgstr ""
+"Minikartan visar dig den fullständiga kartan i miniatyr. Du kan hoppa direkt "
+"till\n"
+"vilket fält som helst genom att vänsterklicka på det. Du kan också växla om\n"
+"byggnads-, väg-, flagg-, och spelarindikatorer ska visas i minikartan."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:169
 msgid ""
@@ -812,11 +1075,17 @@ msgid ""
 "headquarters\n"
 "to your lumberjack's hut."
 msgstr ""
+"Desto kortare dina vägsegment är, desto snabbare kommer dina varor\n"
+"transporteras. Du bör därför se till att dina vägar har så många flaggor som "
+"\n"
+"möjligt. Bygg en blå flagga nu mitt i vägen som ansluter ditt högkvarter "
+"till\n"
+"skogshuggarstugan."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:330
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
+msgstr "Marken är plan här. Dina bärare kommer vara väldigt raska."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:621
 msgid ""
@@ -824,6 +1093,8 @@ msgid ""
 "hitpoints,\n"
 "with each hitpoint level he gains 28 hitpoints."
 msgstr ""
+"En soldats fullödiga liv. En barbarsoldat börjar med ~130 HP, och för\n"
+"varje HP-nivå får han ytterligare 28 HP."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:279
 msgid ""
@@ -833,6 +1104,12 @@ msgid ""
 "can therefore build it on any field that shows a red, yellow or green house\n"
 "when the build help is enabled (Press SPACE for that)."
 msgstr ""
+"Det finns några stenar till väster om ditt högkvarter. Bygg ett stenbrott \n"
+"alldeles intill dem. Stenbrottet är en liten byggnad, som "
+"skogshuggarstugan.\n"
+"Du kan därför bygga den på fält som visar ett rött, gult, eller grönt hus "
+"när\n"
+"bygghjälpen är aktiverad (tryck BLANKSTEG)."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:70
 msgid ""
@@ -842,6 +1119,10 @@ msgid ""
 "weaknesses,\n"
 "but the general gameplay is the same for all. We play the barbarians for now."
 msgstr ""
+"Det finns tre olika stammar i Widelands: Barbarerna, imperiet, och\n"
+"atlanteanerna. Var stam har sin egen ekonomi, styrka, och svaghet, men \n"
+"samma grundläggande spelidéer gäller för alla. Just nu spelar vi med\n"
+"barbarerna."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:207
 msgid ""
@@ -851,12 +1132,18 @@ msgid ""
 "then move\n"
 "the view using the cursor keys"
 msgstr ""
+"Det finns två sätt att flytta din vy. Det ena är att använda piltangenterna "
+"på\n"
+"tangentbordet. Prova! Klicka på OK-knappen och flytta sedan vyn med\n"
+"piltangenterna."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:332
 msgid ""
 "There is a small slope to climb to reach this field. This means your\n"
 "workers are faster walking downwards than they are walking upwards."
 msgstr ""
+"Det finns en liten backa att bestiga för att nå det här fältet. Det\n"
+"betyder att dina arbetare tar sig snabbare utför än uppför."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:472
 msgid ""
@@ -866,6 +1153,12 @@ msgid ""
 "basic build infrastructure and we do not have access to mountains which we\n"
 "need to mine minerals and coal. So we have to expand our territory."
 msgstr ""
+"Det är en sak till jag skulle vilja lära dig: Att expandera ditt "
+"territorium.\n"
+"Området runt vårt högkvarter där vi börjar är knappt stort nog för en basal\n"
+"byggnadsinfrastruktur, och vi har inte tillgång till bergen där vi måste "
+"gräva\n"
+"efter mineraler och kol. Alltså måste vi expandera territoriet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:604
 msgid ""
@@ -876,6 +1169,11 @@ msgid ""
 "symbols which symbolize the individual soldier's current levels in the four\n"
 "different categories hitpoints, attack, defense and evade."
 msgstr ""
+"Så där! Se på soldaterna som är på väg till vårt träningsläger. De ser\n"
+"annorlunda ut än vanliga arbetare: de har en hälsomätare ovanför sina\n"
+"huvuden som visar hur mycket HP de har kvar, och de har fyra symboler som\n"
+"symboliserar den individuella soldatens nuvarande nivåer i de fyra olika\n"
+"kategorierna HP, attack, försvar, och undvik."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:108
 msgid ""
@@ -889,6 +1187,13 @@ msgid ""
 "to\n"
 "demonstrate."
 msgstr ""
+"Så där. Jag ska förklara alla symboler strax. Först vill jag bara visa dig "
+"hur du\n"
+"bygger en skogshuggarstuga och hur du ansluter den till en väg. Det finns\n"
+"en finfin plats för en skogshuggare alldeles intill de där träden. Jag ska "
+"beskriva\n"
+"de steg jag kommer ta, och sedan be dig att klicka på OK för att låta mig\n"
+"demonstrera."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:700
 msgid ""
@@ -906,30 +1211,39 @@ msgid ""
 "fun\n"
 "playing!"
 msgstr ""
+"Nu är undervisningen över. Det finns ett och annat som vi inte gått igenom "
+"här\n"
+"- vi har inte ens byggt en enda tillverkningsbyggnad, fastän tillverkning av "
+"varor\n"
+"är a och o i Widelands - men du har lärt dig grunderna. Du kan lära dig "
+"resten\n"
+"medan du går igenom stammarnas presentationskampanjer. Var och en består\n"
+"av ett par scenarion som beskriver stammarna och deras ekonomi, medan\n"
+"bakgrundsberättelsen i Widelands introduceras. Ha det så kul med spelandet!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
 msgid "Trainings camp and soldier stats"
-msgstr ""
+msgstr "Träningsläger och soldatstatistik"
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial01"
-msgstr ""
+msgstr "Tutorial01"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:529
 msgid "Waiting for the geologist"
-msgstr ""
+msgstr "Väntar på geologen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:177
 msgid "Waiting for the hut to be finished"
-msgstr ""
+msgstr "Väntar på att stugan ska färdigställas"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:146
 msgid "Waiting for the lumberjack to go up"
-msgstr ""
+msgstr "Väntar på att skogshuggaren ska gå upp"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:573
 msgid "Warfare and Training"
-msgstr ""
+msgstr "Krigföring och träning"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:83
 msgid ""
@@ -939,14 +1253,19 @@ msgid ""
 "clicking on the build help button at the bottom of the screen which is the\n"
 "fourth one from the left. Or you can use the SPACE key to toggle it."
 msgstr ""
+"Vi måste hitta en bra plats för skogshuggarstugan. För att göra det lätt\n"
+"för oss kan vi aktivera bygghjälpen. Det finns två tillvägagångssätt;\n"
+"antingen genom att klicka på bygghjälpknappen i skärmens\n"
+"underkant (den fjärde från vänster), eller genom att växla den med\n"
+"BLANKSTEG."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:54
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Välkommen till Widelands!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:52
 msgid "Welcome to the Widelands tutorial!"
-msgstr ""
+msgstr "Välkommen till Widelands undervisningsuppdrag!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:450
 msgid ""
@@ -957,6 +1276,10 @@ msgid ""
 "send a message that he can't find any in his working area the next time he\n"
 "tries to do some work."
 msgstr ""
+"Starkt jobbat! Nu tar vi en titt på hur meddelanden fungerar i en riktig\n"
+"spelomgång. Då tar jag alla stenar från den stackars stenmuraren i\n"
+"stenbrottet. Han kommer sedan skicka ett meddelande om att han inte\n"
+"kan hitta någon sten i sitt arbetsområde nästa gång han försöker jobba."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:180
 msgid ""
@@ -964,6 +1287,10 @@ msgid ""
 "go faster, simply use the PAGE UP key on your keyboard to increase the game\n"
 "speed. You can use PAGE DOWN to make the game slower again."
 msgstr ""
+"Bra! Nu väntar vi tills stugan står färdig. Om du vill att det ska gå "
+"fortare,\n"
+"tryck på PAGE UP på tangentbordet för att öka spelets hastighet. Du kan\n"
+"använda PAGE DOWN för att sakta ner spelet igen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:360
 msgid ""
@@ -976,6 +1303,13 @@ msgid ""
 "They are called the census and you can toggle them via the 'c' key or via\n"
 "the button on the watch tab of any field."
 msgstr ""
+"Medan vi väntar ska jag bara lite snabbt visa dig en annan händig funktion.\n"
+"Alla byggarbetsplatser ser likadana ut, och vissa byggnader är bra lika "
+"varann.\n"
+"Ibland är det svårt att veta vilken som är vilken. Widelands har en "
+"funktion\n"
+"för att visa objekttext ovanför byggnaderna. De kallas census, och du kan\n"
+"växla dem med 'c' eller via knappen på fältens bevakningsflik."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
 msgid ""
@@ -983,6 +1317,9 @@ msgid ""
 "construction,\n"
 "not destruction. This tutorial will get you through the basics of the game."
 msgstr ""
+"Widelands är ett långsamt uppbyggnadsstrategispel, med betoning på\n"
+"uppbyggnad, inte förstörelse. Den här guiden kommer lära dig om spelets\n"
+"grundprinciper."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:256
 msgid ""
@@ -992,10 +1329,15 @@ msgid ""
 "help\n"
 "eases recognition:"
 msgstr ""
+"Du kan bygga fyra saker på fälten i Widelands: Flaggor, små hus, "
+"mellanstora\n"
+"hus, och stora hus. Men alla fält kan inte innehålla allt. Bygghjälpen "
+"kommer\n"
+"till undsättning:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:502
 msgid ""
-"You can choose from the following military buildings: sentry, stronghold,\n"
+"You can choose from the following military buildings: sentry, \n"
 "donjon, barrier and fortress. The bigger the building, the more expensive it "
 "is\n"
 "to be built. But it will also conquer a bigger region. Sometimes, it is "
@@ -1003,6 +1345,11 @@ msgid ""
 "to build a big military building next to a mountain so that you can reach\n"
 "fields farther up."
 msgstr ""
+"Du kan välja bland följande militära byggnader: spaningstorn, torn, mur,\n"
+"och fästning. Ju större byggnaden är, ju dyrare är den att bygga. Men den\n"
+"kommer också ta besittning över en större region. Ibland är det bra att\n"
+"bygga en stor millitärbyggnad bredvid ett berg så att du kan nå fält\n"
+"längre upp."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:708
 msgid ""
@@ -1010,10 +1357,15 @@ msgid ""
 "like.\n"
 "To leave this game and return to the main menu click on the"
 msgstr ""
+"Du kan fortsätta spela på den här kartan, eller så kan du avsluta spelet "
+"när\n"
+"du än vill. För att lämna spelet och återvända till huvudmenyn, klicka på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:59
 msgid "You can dismiss this box by left-clicking on the button below."
 msgstr ""
+"Du kan avfärda den här rutan genom att vänsterklicka på knappen\n"
+"nedanför."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:74
 msgid ""
@@ -1032,50 +1384,63 @@ msgid ""
 "for\n"
 "him to stay in."
 msgstr ""
+"Du startar i regel spelet med ett högkvarter. Det är den stora byggnaden med "
+"\n"
+"den blåa flaggan framför. Högkvarteret är ett lager som lagrar varor, "
+"arbetare\n"
+"och soldater. Vissa varor behövs för att bygga hus, andra för att tillverka\n"
+"andra varor. Det säger sig självt att varorna i högkvarteret inte kommer "
+"finnas\n"
+"kvar för alltid, så du måste se till att tillverka nya. De viktigaste "
+"varorna i ett\n"
+"tidigt skede är de grundläggande byggnadsvarorna: trästammar och rå sten.\n"
+"Nu ska vi se till att inte få slut på trästammar. Då behöver vi en "
+"skogshuggare\n"
+"och en stuga för honom att bo i."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:535
 msgid "a bit of coal"
-msgstr ""
+msgstr "lite kol"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:539
 msgid "a bit of gold"
-msgstr ""
+msgstr "lite guld"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:542
 msgid "a bit of granite"
-msgstr ""
+msgstr "lite granit"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:537
 msgid "a bit of iron"
-msgstr ""
+msgstr "lite järn"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:536
 msgid "a lot of coal"
-msgstr ""
+msgstr "mycket kol"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
 msgid "a lot of gold"
-msgstr ""
+msgstr "mycket guld"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:544
 msgid "a lot of granite"
-msgstr ""
+msgstr "mycket granit"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:538
 msgid "a lot of iron"
-msgstr ""
+msgstr "mycket järn"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
-msgstr ""
+msgstr "arkivera meddelande-knapp för att flytta dem till ditt arkiv."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid "build flag symbol."
-msgstr ""
+msgstr "byggnadsflaggsymbol."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:714
 msgid "exit game button."
-msgstr ""
+msgstr "knapp för att avsluta spelet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:586
 msgid ""
@@ -1083,6 +1448,7 @@ msgid ""
 "press\n"
 "'m' on your keyboard"
 msgstr ""
+"minikartaknapp längst ner i skärmen. Annars kan du också trycka på 'm'."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:547
 msgid "nothing was found here"
@@ -1093,30 +1459,21 @@ msgid ""
 "options menu button on the very left at the bottom of the screen.\n"
 "Then click the"
 msgstr ""
+"alternativmenyknapp längst till vänster i skärmens underkant.\n"
+"Klicka sedan på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."
-msgstr ""
+msgstr "avbrytsymbolen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:299
 msgid "the road building symbol."
-msgstr ""
+msgstr "vägbyggnadssymbolen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:561
 msgid "this one."
-msgstr ""
+msgstr "den här."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
 msgstr "vatten"
-
-#~ msgid ""
-#~ "A message has been sent to you. See how the button at the bottom of the\n"
-#~ " screen has changed appearance? You should now burn this quarry down as it "
-#~ "is\n"
-#~ " no longer of any use and is just blocking space."
-#~ msgstr ""
-#~ "Ett meddelande har skickats till dig. Kan du se hur ikonen vid nederkanten "
-#~ "av\n"
-#~ " skärmen har bytt utseende? Du borde nu bränna ned då den\n"
-#~ " inte längre är till någon användning och bara tar upp utrymme."

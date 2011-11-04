@@ -26,20 +26,20 @@ produce=raw_stone:2
 
 [idle]
 pics=granitemine_i_??.png
-hotspot=42 38
+hotspot=42 35
 playercolor=true
 
 [working]
 pics=granitemine_w_??.png
-hotspot=42 38
+hotspot=42 35
 playercolor=true
 
 [build]
 pics=granitemine_b_??.png
-hotspot=42 38
+hotspot=42 35
 playercolor=true
 
 [empty]
 pics=granitemine_e_??.png
-hotspot=42 38
+hotspot=42 35
 playercolor=true

@@ -57,6 +57,10 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	                          : m_tribe.get_nrwares(), false),
 	m_selectable(selectable)
 {
+	//resize the configuration of our wares if they won't fit in the current window
+	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + 8 + 3);
+	const_cast<Widelands::Tribe_Descr &>(m_tribe).resize_ware_orders(number);
+
 	// Find out geometry from icons_order
 	unsigned int columns = icons_order().size();
 	unsigned int rows = 0;

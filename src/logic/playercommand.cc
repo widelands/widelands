@@ -17,24 +17,25 @@
  *
  */
 
-#include "playercommand.h"
+#include "log.h"
+#include "upcast.h"
+#include "wexception.h"
 
 #include "economy/economy.h"
+#include "economy/wares_queue.h"
+#include "io/streamwrite.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 
-#include "log.h"
 #include "game.h"
 #include "instances.h"
 #include "player.h"
 #include "soldier.h"
-#include "io/streamwrite.h"
 #include "tribe.h"
-#include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "map_io/widelands_map_map_object_saver.h"
-#include "map_io/widelands_map_map_object_loader.h"
 
-#include "upcast.h"
+#include "playercommand.h"
 
 namespace Widelands {
 
@@ -59,7 +60,8 @@ enum {
 	PLCMD_CHANGEMILITARYCONFIG,
 	PLCMD_MESSAGESETSTATUSREAD,
 	PLCMD_MESSAGESETSTATUSARCHIVED,
-	PLCMD_SETSTOCKPOLICY
+	PLCMD_SETSTOCKPOLICY,
+	PLCMD_SETWAREMAXFILL,
 };
 
 /*** class PlayerCommand ***/
@@ -96,6 +98,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_MESSAGESETSTATUSARCHIVED:
 		return new Cmd_MessageSetStatusArchived (des);
 	case PLCMD_SETSTOCKPOLICY: return new Cmd_SetStockPolicy(des);
+	case PLCMD_SETWAREMAXFILL: return new Cmd_SetWareMaxFill(des);
 	default:
 		throw wexception
 			("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -648,6 +651,85 @@ void Cmd_SetWarePriority::serialize(StreamWrite & ser)
 	ser.Unsigned8(m_type);
 	ser.Signed32(m_index.value());
 	ser.Signed32(m_priority);
+}
+
+/*** class Cmd_SetWareMaxFill ***/
+Cmd_SetWareMaxFill::Cmd_SetWareMaxFill
+	(int32_t const _duetime, Player_Number const _sender,
+	 PlayerImmovable & imm,
+	 Ware_Index const index, int32_t const max_fill)
+	:
+	PlayerCommand(_duetime, _sender),
+	m_serial     (imm.serial()),
+	m_index      (index),
+	m_max_fill   (max_fill)
+{}
+
+void Cmd_SetWareMaxFill::execute(Game & game)
+{
+	upcast(Building, b, game.objects().get_object(m_serial));
+
+	if (!b)
+		return;
+	if (b->owner().player_number() != sender())
+		return;
+
+	b->waresqueue(m_index).set_max_fill(m_max_fill);
+}
+
+#define PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION 1
+
+void Cmd_SetWareMaxFill::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	fw.Unsigned16(PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION);
+
+	PlayerCommand::Write(fw, egbase, mos);
+
+	Map_Object const & obj = *egbase.objects().get_object(m_serial);
+	fw.Unsigned32(mos.get_object_file_index(obj));
+	fw.Signed32(m_index.value());
+	fw.Signed32(m_max_fill);
+}
+
+void Cmd_SetWareMaxFill::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			uint32_t const serial = fr.Unsigned32();
+			try {
+				m_serial = mol.get<Map_Object>(serial).serial();
+			} catch (_wexception const & e) {
+				throw game_data_error("site %u: %s", serial, e.what());
+			}
+
+			m_index = Ware_Index(static_cast<Ware_Index::value_t>(fr.Signed32()));
+			m_max_fill = fr.Signed32();
+		} else
+			throw game_data_error
+				("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error("set ware max fill: %s", e.what());
+	}
+}
+
+Cmd_SetWareMaxFill::Cmd_SetWareMaxFill(StreamRead & des) :
+	PlayerCommand(0, des.Unsigned8()),
+	m_serial     (des.Unsigned32()),
+	m_index      (Ware_Index(static_cast<Ware_Index::value_t>(des.Signed32()))),
+	m_max_fill(des.Signed32())
+{}
+
+void Cmd_SetWareMaxFill::serialize(StreamWrite & ser)
+{
+	ser.Unsigned8(PLCMD_SETWAREMAXFILL);
+	ser.Unsigned8(sender());
+	ser.Unsigned32(m_serial);
+	ser.Signed32(m_index.value());
+	ser.Signed32(m_max_fill);
 }
 
 

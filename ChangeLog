@@ -8,11 +8,15 @@
   for each world.
 - Added a new win condition "endless game (no fog)" with completely
   visible map from the beginning on.
+- Added two multiplayer scenarios.
+- Added feature to play as a random tribe or against a random tribe or
+  random AI.
 - Improved dedicated server functionality:
     * added functionality to save the game on the server via chat command.
     * added functionality to set up a password for the server.
     * added functionality to set a custom message of the day (motd).
     * improved client side handling / setting up of dedicated servers.
+- Improved priority button appearence.
 
 - Fixed a bug that disallowed to connect to different servers (via
   metaserver) without prior restart of Widelands.
@@ -23,6 +27,15 @@
 - Fixed bug #795457: focus in chat window
 - Fixed bug #808008: Delete outdated data when updating Widelands on Windows
 - Fixed bug #805089: Check client in chat commands, when first mentioned.
+- Fixed bug #853217: start multiplayer game with all slots closed
+- Fixed bug #786243: Add extra column to stock windows, if size would be to
+                     big for the current screen resolution
+- Fixed bug #695035: Adjusted hotspots of buildings to fit into their space
+- Fixed bug #817078: "Watch window" should centre more suitably
+- Fixed bug #842960: Original building site graphic is visible during
+                     construction sequence
+- Fixed bug #855975: Atlantean bakery jumping up, when start working
+
 
 ### Build 16
 - Many new graphics, new sounds.

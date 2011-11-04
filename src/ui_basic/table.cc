@@ -349,6 +349,7 @@ bool Table<void *>::handle_mousepress
 					if (column.is_checkbox_column) {
 						play_click();
 						m_entry_records.at(row)->toggle(col);
+						update(0, 0, get_eff_w(), get_h());
 					}
 					break;
 				}

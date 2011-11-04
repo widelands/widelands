@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,9 +36,9 @@ class Texture;
  * can be rendered to the full screen or to a subwindow. This depends on
  * the RenderTarget from which it was initialized.
  *
- * @todo GameView mixes opengl and software rendering. This shoul be split
+ * @todo GameView mixes opengl and software rendering. This should be split
  * properly to have different classes for OpenGL and Software rendering.
- * Perhaps creating a GameRenderManager where different rendering clases can
+ * Perhaps creating a GameRenderManager where different rendering classes can
  * be registered so it is easiely possible to create different game rendering?
  */
 class GameView : public RenderTarget

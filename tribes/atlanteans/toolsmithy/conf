@@ -145,10 +145,10 @@ return=skipped
 
 [idle]
 pics=toolsmith_i_??.png
-hotspot=52 58
+hotspot=50 53
 playercolor=true
 
 [working]
 pics=toolsmith_i_??.png
-hotspot=52 58
+hotspot=50 53
 playercolor=true

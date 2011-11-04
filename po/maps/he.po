@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2011-04-05 11:46+0000\n"
 "Last-Translator: Michael DOUBEZ <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-06 04:36+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -39,10 +39,6 @@ msgstr ""
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "03 - הארץ הזאת ארץ שלנו"
-
-#: ../../maps/Enemy in sight.wmf/elemental:9
-msgid "A Multiplayer-battle-map on a X-Shaped island."
-msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -69,6 +65,14 @@ msgstr ""
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island "
+"Hopping\", where two or more groups try to reach the center island as fast "
+"as possible, to be the first building up a castle on the top of the center "
+"mountain."
 msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:9
@@ -153,10 +157,6 @@ msgstr "יערות עלפית"
 msgid "Empire - The Months of Exile"
 msgstr ""
 
-#: ../../maps/Enemy in sight.wmf/elemental:7
-msgid "Enemy in sight"
-msgstr ""
-
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
 msgstr "אגמים פינית"
@@ -219,6 +219,10 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as "
 "if you are alone, but no-one knows, what might happen if you meet an "
 "opponent tribe?"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
 msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
@@ -325,6 +329,10 @@ msgid ""
 "March his unprepared army was attacked by 100 barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
@@ -515,23 +523,9 @@ msgid ""
 "clans."
 msgstr ""
 
-#~ msgid "01 - From nemesis to genesis"
-#~ msgstr "01 - מן התחלה עד החורבן"
-
-#~ msgid "Atlanteans - the new rise"
-#~ msgstr "אטלנטיס - העליה החדשה"
-
-#~ msgid "Empire - The months of exile"
-#~ msgstr "אימפריה - החודשים של גלות"
-
-#~ msgid "Tutorial1 - Eyes in the Dark"
-#~ msgstr "מדריך 1 - עיניים בחושך"
-
-#~ msgid "Tutorial2 - A Place to call Home"
-#~ msgstr "מדריך 2 - מקום נקרא ביתי"
-
-#~ msgid "Tutorial3 - This land is our land"
-#~ msgstr "מדריך 3 - הארץ הזאת היא הארץ שלנו"
-
-#~ msgid "(Tutorial) Barbarians - The second Empire"
-#~ msgstr "(מדריך) ברברים - האימפריה השנייה"
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares?"
+msgstr ""

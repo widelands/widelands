@@ -44,6 +44,7 @@ struct Map_Map_Object_Loader;
 #define SENDER_PLAYER8 8
 #define SENDER_CMDQUEUE 100   // The Cmdqueue sends itself some action request
 
+#define CMD_QUEUE_BUCKET_SIZE 65536 // Make this a power of two, so that % is fast
 
 // ---------------------- END    OF CMDS ----------------------------------
 
@@ -51,6 +52,20 @@ struct Map_Map_Object_Loader;
 // This is finally the command queue. It is fully widelands specific,
 // it needs to know nearly all modules.
 //
+// It used to be implemented as a priority_queue sorted by execution_time,
+// serial and type of commands. This proved to be a performance bottleneck on
+// big games. I then changed this to use a constant size hash_map[gametime] of
+// priority_queues. This allows for ~O(1) access by time and in my analyses,
+// practically all buckets were used, so there is not much memory overhead.
+// This removed the bottleneck for big games.
+//
+// I first tried with boost::unordered_map, but as expected, it grew beyond all
+// limits when accessed with gametime. Therefore I reverted back to a simple
+// vector.
+//
+// The price we pay is that when saving, we also have to traverse till we no
+// longer find any new command to write. This could theoretically take forever
+// but in my tests it was not noticeable.
 struct Game;
 
 /**
@@ -144,8 +159,10 @@ public:
 
 private:
 	Game                       & m_game;
-	std::priority_queue<cmditem> m_cmds;
 	uint32_t                     nextserial;
+	uint32_t m_ncmds;
+	typedef std::vector<std::priority_queue<cmditem> > CommandsContainer;
+	CommandsContainer m_cmds;
 };
 
 }

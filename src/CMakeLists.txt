@@ -65,6 +65,7 @@ set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/CppCheckSuppressions.cmake ${CMAKE_CURRENT_BINARY_DIR}/CppCheckSuppressions)
 
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
+  find_package (PythonInterp REQUIRED)
   set (commands "")
   foreach(sourcefile ${WL_CODECHECK_SRCS})
     string(REPLACE "${CMAKE_SOURCE_DIR}/src/" "" sourcewithoutpath ${sourcefile})
@@ -76,7 +77,7 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
     set(stamp ${sourcename}_)
     add_custom_command(
       OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash}"
-      COMMAND ${CMAKE_COMMAND} -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
+      COMMAND ${CMAKE_COMMAND} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=codecheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CodeCheck.cmake
       DEPENDS ${sourcefile}
       COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
     )

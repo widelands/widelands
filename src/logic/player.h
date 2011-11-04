@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,6 +61,9 @@ struct Player :
 	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
 	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
+	// hard-coded playercolors
+	static const RGBColor Colors[MAX_PLAYERS];
+
 	struct Building_Stats {
 		bool is_constructionsite;
 		Coords pos;
@@ -80,8 +83,7 @@ struct Player :
 		 Player_Number,
 		 uint8_t initialization_index,
 		 const Tribe_Descr & tribe,
-		 const std::string & name,
-		 const uint8_t * playercolor);
+		 const std::string & name);
 	~Player();
 
 	void allocate_map();
@@ -109,7 +111,7 @@ struct Player :
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	Player_Number     player_number() const throw () {return m_plnum;}
 	TeamNumber team_number() const {return m_team_number;}
-	RGBColor const * get_playercolor() const {return m_playercolor;}
+	RGBColor const & get_playercolor() const {return Colors[m_plnum - 1];}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
 	const std::string & get_name() const throw () {return m_name;}
@@ -127,6 +129,15 @@ struct Player :
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
 	bool see_all() const throw () {return m_see_all;}
+
+	/// Per-player and per-field constructionsite information
+	struct Constructionsite_Information {
+		Constructionsite_Information() : becomes(0), was(0), totaltime(0), completedtime(0) {}
+		const Building_Descr * becomes;
+		const Building_Descr * was; // only valid if "becomes" is an enhanced building.
+		uint32_t               totaltime;
+		uint32_t               completedtime;
+	};
 
 	/// Per-player field information.
 	struct Field {
@@ -301,7 +312,10 @@ struct Player :
 		 * Only valid when the player has seen this node (or maybe a nearby node
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
-		const Map_Object_Descr * map_object_descr[3];
+		const Map_Object_Descr             * map_object_descr[3];
+		/// Information for constructionsite's animation.
+		/// only valid, if there is a constructionsite on this node
+		const Constructionsite_Information * constructionsite[3];
 
 		//  Summary of intended layout (not yet fully implemented)
 		//
@@ -553,7 +567,6 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
-	RGBColor               m_playercolor[4];
 
 	/**
 	 * Is player allowed to modify m_retreat_percentage?

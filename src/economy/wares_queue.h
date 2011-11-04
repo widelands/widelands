@@ -38,34 +38,31 @@ class Worker;
 
 /**
  * This micro storage room can hold any number of items of a fixed ware.
- *
- * You must call update() after changing the queue's size or filled state using
- * one of the set_*() functions.
  */
 struct WaresQueue {
 	typedef void (callback_t)
 		(Game &, WaresQueue *, Ware_Index ware, void * data);
 
-	WaresQueue(PlayerImmovable &, Ware_Index, uint8_t size, uint8_t filled = 0);
+	WaresQueue(PlayerImmovable &, Ware_Index, uint8_t size);
 
 #ifndef NDEBUG
 	~WaresQueue() {assert(not m_ware);}
 #endif
 
 	Ware_Index get_ware() const {return m_ware;}
-	uint32_t get_size            () const throw () {return m_size;}
+	uint32_t get_max_fill    () const throw () {return m_max_fill;}
+	uint32_t get_max_size        () const throw () {return m_max_size;}
 	uint32_t get_filled          () const throw () {return m_filled;}
-	uint32_t get_consume_interval() const throw () {return m_consume_interval;}
 
 	void cleanup();
-	void update();
 
 	void set_callback(callback_t *, void * data);
 
 	void remove_from_economy(Economy &);
 	void add_to_economy(Economy &);
 
-	void set_size            (uint32_t) throw ();
+	void set_max_size        (uint32_t) throw ();
+	void set_max_fill        (int32_t) throw ();
 	void set_filled          (uint32_t) throw ();
 	void set_consume_interval(uint32_t) throw ();
 
@@ -77,10 +74,12 @@ struct WaresQueue {
 private:
 	static void request_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	void update();
 
 	PlayerImmovable & m_owner;
 	Ware_Index        m_ware;    ///< ware ID
-	uint32_t m_size;             ///< nr of items that fit into the queue
+	uint32_t m_max_size;         ///< nr of items that fit into the queue maximum
+	uint32_t m_max_fill;         ///< nr of wares that should be ideally in this queue
 	uint32_t m_filled;           ///< nr of items that are currently in the queue
 
 	///< time in ms between consumption at full speed

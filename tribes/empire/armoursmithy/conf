@@ -67,19 +67,19 @@ return=skipped
 
 [unoccupied]
 pics=armory_u_??.png  # ???
-hotspot=54 62
+hotspot=50 62
 
 [idle]
 pics=armory_i_??.png  # ???
-hotspot=54 62
+hotspot=50 62
 playercolor=true
 
 [build]
 pics=armory_b_??.png  # ???
-hotspot=54 62
+hotspot=50 62
 
 [working]
 pics=armory_w_??.png  # ???
-hotspot=54 62
+hotspot=50 62
 playercolor=true
 fps=5

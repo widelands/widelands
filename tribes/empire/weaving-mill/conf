@@ -24,18 +24,18 @@ produce=cloth
 
 [build]
 pics=weaving_mill_b_??.png  # ???
-hotspot=67 63
+hotspot=65 62
 
 [unoccupied]
 pics=weaving_mill_u_??.png  # ???
-hotspot=67 63
+hotspot=65 62
 
 [idle]
 pics=weaving_mill_i_??.png  # ???
-hotspot=67 63
+hotspot=65 62
 
 [working]
 pics=weaving_mill_w_??.png  # ???
-hotspot=67 63
+hotspot=65 62
 playercolor=true
 fps=5

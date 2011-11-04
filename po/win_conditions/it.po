@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
-"PO-Revision-Date: 2010-12-10 10:27+0000\n"
-"Last-Translator: Fabio Pedretti <pedretti@eco.unibs.it>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-09-19 09:48+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:41+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:49+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:85
 msgid "%i trees at the moment."
-msgstr "%i alberi attualmente."
+msgstr "%i alberi al momento."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:138
 msgid "%i trees."
@@ -76,6 +76,10 @@ msgstr ""
 msgid "Endless Game"
 msgstr "Partita senza fine"
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:10
+msgid "Endless Game (no fog)"
+msgstr "Partita senza fine (niente nebbia)"
+
 #: ../../scripting/win_conditions/03_territorial_lord.lua:151
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Mantienila ancora per %i minuti per vincere il gioco."
@@ -131,6 +135,12 @@ msgstr "Il vincitore è %s "
 msgid "This is an endless game without rules."
 msgstr "Questo è un gioco senza fine e senza regole."
 
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:11
+msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr ""
+"Questa è una partita senza fine e senza regole. La nebbia di guerra è "
+"disattivata."
+
 #: ../../scripting/win_conditions/02_collectors.lua:103
 msgid "Total: %i points"
 msgstr "Totale: %i punti"
@@ -148,6 +158,7 @@ msgstr "Gnomo del Bosco"
 #: ../../scripting/win_conditions/02_collectors.lua:179
 #: ../../scripting/win_conditions/03_territorial_lord.lua:166
 #: ../../scripting/win_conditions/04_wood_gnome.lua:94
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid "You are defeated!"
 msgstr "Sei stato sconfitto!"
 
@@ -177,6 +188,7 @@ msgstr "Hai perso la partita!"
 #: ../../scripting/win_conditions/02_collectors.lua:180
 #: ../../scripting/win_conditions/03_territorial_lord.lua:167
 #: ../../scripting/win_conditions/04_wood_gnome.lua:95
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:40
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
@@ -217,47 +229,3 @@ msgstr "Hai perso questa partita!"
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "with %i trees."
 msgstr "con %i alberi."
-
-#~ msgid "Game over"
-#~ msgstr "Game over"
-
-#~ msgid "An endless game without rules"
-#~ msgstr "Una partita senza fine e senza regole"
-
-#~ msgid "Sorry, you have lost this game!"
-#~ msgstr "Spiacente, hai perso questa partita!"
-
-#~ msgid "The player %i has currently %i points"
-#~ msgstr "Il giocatore %i ha al momento %i punti"
-
-#~ msgid ""
-#~ "You get points for wares in your HQ, the one with the highest number of "
-#~ "wares at the end of 4 hours wins the game"
-#~ msgstr ""
-#~ "Ottieni punti per i beni nel tuo quartier generale. Chi ha il più alto "
-#~ "numero di beni al termine delle 4 ore vince la partita"
-
-#~ msgid "The tribe that can defeat all others wins!"
-#~ msgstr "La tribù che riesce a sconfiggere tutte le altre vince!"
-
-#~ msgid "Tribe defeated!"
-#~ msgstr "Tribù sconfitta!"
-
-#~ msgid ""
-#~ "The three tribes play together vs each other. Vision is granted to all the "
-#~ "players playing together"
-#~ msgstr ""
-#~ "Le tre tribù giocano insieme una contro l'altra. La visuale è garantita a "
-#~ "tutti i giocatori"
-
-#~ msgid "The tribe %s is no more."
-#~ msgstr "La tribù %s non esiste più."
-
-#~ msgid "Your tribe is no more. You have lost this game"
-#~ msgstr "La tua tribù non esiste più. Hai perso questa partita"
-
-#~ msgid "You've lost!"
-#~ msgstr "Hai perso!"
-
-#~ msgid "Tribes together"
-#~ msgstr "Le tribù insieme"

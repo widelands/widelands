@@ -1,0 +1,86 @@
+# Polish translation for widelands
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"PO-Revision-Date: 2011-10-04 18:46+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2011-10-05 04:31+0000\n"
+"X-Generator: Launchpad (build 14085)\n"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:23
+msgid "%s and %s have established a smuggling route!"
+msgstr "%s i %s utworzyli szlak przemytniczy!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:37
+msgid "Game Status"
+msgstr "Stan Gry"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:32
+msgid ""
+"Game over! %s and %s have won the game! %s and %s only managed to\n"
+"smuggle %i wares."
+msgstr ""
+"Koniec gry! Wygrali %s i %s! %s i %s zdołali przeszmuglować jedynie\n"
+" %i towarów."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
+msgid "Rules"
+msgstr "Zasady"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
+msgid "Smugglers"
+msgstr "Przemytnicy"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+msgid ""
+"Smugglers is a Fun map for 4 players. You and your partner start diagonally\n"
+"to each other on a X-shaped island. Each player has a point in the\n"
+"center of the map where he should place a warehouse. If both players in a\n"
+"team succeed to build their warehouse in the right spot a smuggling route\n"
+"is established: all wares from the top player that are delivered to his\n"
+"warehouse are warped to the bottom player's warehouse. The aim of the game "
+"is to\n"
+"smuggle %i items from top to bottom."
+msgstr ""
+"Przemytnicy to mapa dla 4 graczy. Ty i twój sojusznik rozpoczynacie grę\n"
+"po dwóch stronach przekątnej wyspy w kształcie \"X\". Każdy gracz\n"
+"ma wyznaczony punkt w środku wyspy, w którym ma zbudować\n"
+"magazyn. Jeśli obaj gracze w drużynie zdołają zbudować swoje magazyny,\n"
+"utworzony zostaje szlak przemytniczy: wszystkie towary górnego gracza\n"
+"przenoszone są do magazynu dolnego gracza. Celem gry jest\n"
+"przeszmuglowanie %i sztuk towarów na południe wyspy."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
+msgid ""
+"The other team has the same goal and will try to interrupt your smuggling\n"
+"routes by burning down your warehouses. You will pay them back in their own\n"
+"coin of course!"
+msgstr ""
+"Przeciwnicy mają ten sam cel i będą próbowali ci przeszkodzić i zerwać\n"
+"twój szlak niszcząc twoje magazyny. Oczywiście nie pozostaniesz im dłużny!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:26
+msgid "The smuggling route of %s and %s has been broken!"
+msgstr "Szlak przemytniczy %s i %s został zerwany!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
+msgid "Wares smuggled"
+msgstr "Przeszmuglowane towary"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
+msgid ""
+"You can see the number of wares traded at any time in the general\n"
+"statistics menu. Good luck!"
+msgstr ""
+"Możesz w każdej chwili poznać liczbę przeszmuglowanych towarów\n"
+"w menu statystyk ogólnych. Powodzenia!"

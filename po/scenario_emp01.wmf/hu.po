@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-03-19 15:11+0000\n"
+"POT-Creation-Date: 2011-10-03 11:44+0000\n"
 "PO-Revision-Date: 2010-02-10 23:19+0000\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-20 04:33+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-10-04 04:41+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
@@ -306,21 +306,3 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:91
 msgid "Young Amalea"
 msgstr "Fiatal Amalea"
-
-#~ msgid "Empire Tutorial1 - The strands of Malac' Mor"
-#~ msgstr "Birodalom oktató kampánya - Malac' Mor partjai"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "First mission of the Empire campaign"
-#~ msgstr "A Birodalom kampány első küldetése"
-
-#~ msgid "A visitor"
-#~ msgstr "Egy látogató"
-
-#~ msgid "A Visitor"
-#~ msgstr "Egy látogató"
-
-#~ msgid "Continue"
-#~ msgstr "Folytatás"

@@ -20,4 +20,4 @@ worker=fish
 
 [idle]
 pics=fisher_i_??.png  # ???
-hotspot=38 37
+hotspot=39 40
