@@ -45,6 +45,7 @@
 #include "tribe.h"
 #include "worker.h"
 #include "world.h"
+#include "dismantlesite.h"
 
 #include "editor_game_base.h"
 
@@ -317,6 +318,26 @@ Building & Editor_Game_Base::warp_constructionsite
 	return
 		tribe.get_building_descr(idx)->create
 			(*this, plr, c, true, old_id ? tribe.get_building_descr(old_id) : 0, loading);
+}
+
+/**
+ * Create a dismantle site
+ */
+Building & Editor_Game_Base::warp_dismantlesite
+	(Coords const c, Player_Number const owner,
+	 Building_Index idx, bool loading)
+{
+	Player            & plr   = player(owner);
+	Tribe_Descr const & tribe = plr.tribe();
+
+	Building_Descr const * const descr =
+		tribe.get_building_descr
+			(tribe.safe_building_index("dismantlesite"));
+	DismantleSite & dms =
+		ref_cast<DismantleSite, Map_Object>(descr->create_object());
+	dms.set_building(*descr);
+
+	return dms;
 }
 
 

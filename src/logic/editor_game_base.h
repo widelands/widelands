@@ -108,6 +108,9 @@ struct Editor_Game_Base :
 		(Coords, Player_Number, Building_Index,
 		 Building_Index oldid = Building_Index::Null(),
 		 bool loading = false);
+	Building & warp_dismantlesite
+		(Coords, Player_Number, Building_Index,
+		 bool loading = false); // TODO: SirVer is loading here needed?
 	Bob & create_bob(Coords, const Bob::Descr &);
 	Bob & create_bob(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0);
 	Bob & create_bob(Coords, const std::string & name, Tribe_Descr const * const = 0);

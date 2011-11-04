@@ -58,6 +58,8 @@ class Building;
  * Common to all buildings!
  */
 struct Building_Descr : public Map_Object_Descr {
+	friend struct Editor_Game_Base; // TODO SirVer ugly and wrong!
+
 	Building_Descr
 		(char const * _name, char const * _descname,
 		 std::string const & directory, Profile &, Section & global_s,

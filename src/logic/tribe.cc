@@ -22,6 +22,7 @@
 #include "carrier.h"
 #include "constructionsite.h"
 #include "critter_bob.h"
+#include "dismantlesite.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "game_data_error.h"
@@ -37,8 +38,8 @@
 #include "soldier.h"
 #include "trainingsite.h"
 #include "warehouse.h"
-#include "worker.h"
 #include "widelands_fileread.h"
+#include "worker.h"
 #include "world.h"
 
 #include "io/filesystem/disk_filesystem.h"
@@ -123,6 +124,15 @@ Tribe_Descr::Tribe_Descr
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
 					(_("constructionsite type \"constructionsite\" is missing"));
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
+				m_buildings.add
+					(new DismantleSite_Descr
+					 	(_name, _descname, path, prof, global_s, *this));
+			PARSE_MAP_OBJECT_TYPES_END;
+			if (not safe_building_index("dismantlesite"))
+				throw game_data_error
+					(_("dismantlesite type \"distmantlesite\" is missing"));
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add

@@ -637,12 +637,9 @@ void Player::enhance_building
  * rip this building down, but slowly: a builder will take it gradually
  * apart.
  */
+// SirVer TODO a lot of code duplication
 void Player::dismantle_building(Building * building) {
-	if
-		(&building->owner() == this
-		 and
-		 building->descr().enhancements().count(index_of_new_building))
-	{
+	if (&building->owner() == this) {
 		Building_Index const index_of_old_building =
 			tribe().building_index(building->name().c_str());
 		const Coords position = building->get_position();
@@ -656,8 +653,8 @@ void Player::dismantle_building(Building * building) {
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
 		building =
-			&egbase().warp_constructionsite
-				(position, m_plnum, index_of_new_building, index_of_old_building);
+			&egbase().warp_dismantlesite
+				(position, m_plnum, index_of_old_building);
 		//  Hereafter building points to the new building.
 
 		// Reassign the workers and soldiers.
@@ -665,8 +662,8 @@ void Player::dismantle_building(Building * building) {
 		// However, they are no longer associated with the building as
 		// workers of that buiding, which is why they will leave for a
 		// warehouse.
-		container_iterate_const(std::vector<Worker *>, workers, i)
-			(*i.current)->set_location(building);
+		// container_iterate_const(std::vector<Worker *>, workers, i)
+			// (*i.current)->set_location(building);
 	}
 }
 
@@ -885,6 +882,7 @@ void Player::enemyflagaction
 }
 
 
+// TODO: SirVer. This must be somewhat enhanced for dismantlesites
 void Player::rediscover_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,
