@@ -207,6 +207,10 @@ void WaresQueueDisplay::update_priority_buttons()
 
 	m_priority_radiogroup->changedto.set
 		(this, &WaresQueueDisplay::radiogroup_changed);
+
+	bool const can_act = m_igb.can_act(m_building.owner().player_number());
+	if (not can_act)
+		m_priority_radiogroup->set_enabled(false);
 }
 
 /**
@@ -238,6 +242,12 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 		 boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)),
 		 _("Increase the number of wares you want to be stored here."));
 
+	// Disable those buttons for replay watchers
+	bool const can_act = m_igb.can_act(m_building.owner().player_number());
+	if (not can_act) {
+		m_increase_max_fill->set_enabled(false);
+		m_decrease_max_fill->set_enabled(false);
+	}
 }
 
 /**
