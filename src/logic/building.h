@@ -135,6 +135,7 @@ private:
 
 
 class Building : public PlayerImmovable {
+	friend struct Editor_Game_Base; // TODO SirVer ugly and wrong!
 	friend struct Building_Descr;
 	friend struct Map_Buildingdata_Data_Packet;
 

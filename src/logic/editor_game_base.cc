@@ -335,7 +335,16 @@ Building & Editor_Game_Base::warp_dismantlesite
 			(tribe.safe_building_index("dismantlesite"));
 	DismantleSite & dms =
 		ref_cast<DismantleSite, Map_Object>(descr->create_object());
+
 	dms.set_building(*descr);
+
+	dms.m_position = c;
+	dms.set_owner(get_player(owner));
+	if (loading) {
+		dms.Building::init(*this);
+	} else {
+		dms.init(*this);
+	}
 
 	return dms;
 }
