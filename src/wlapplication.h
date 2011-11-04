@@ -167,6 +167,9 @@ struct WLApplication {
 
 	/// The mouse's current coordinates
 	Point get_mouse_position() const throw () {return m_mouse_position;}
+	//
+	/// Find out whether the mouse is currently pressed
+	bool is_mouse_pressed() const {return SDL_GetMouseState(NULL, NULL); }
 
 	/// Swap left and right mouse key?
 	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}
