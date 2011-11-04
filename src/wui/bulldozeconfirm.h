@@ -32,4 +32,10 @@ void show_bulldoze_confirm
 	 Widelands::Building & building,
 	 Widelands::PlayerImmovable * const todestroy = 0);
 
+void show_dismantle_confirm
+	(Interactive_Player & player,
+	 Widelands::Building & building,
+	 Widelands::PlayerImmovable * const todestroy = 0);
+
+
 #endif // _BULLDOZECONFIRM_H_

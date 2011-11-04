@@ -33,6 +33,7 @@
 #include "waresqueuedisplay.h"
 
 static char const * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
+static char const * pic_dismantle          = "pics/menu_bld_dismantle.png";
 static char const * pic_debug              = "pics/menu_debug.png";
 
 
@@ -208,6 +209,16 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					 boost::bind(&Building_Window::act_bulldoze, boost::ref(*this)),
 					 _("Destroy")),
 				 UI::Box::AlignCenter);
+
+			capsbuttons->add
+				(new UI::Callback_Button
+					(capsbuttons, "dismantle",
+					 0, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture(PicMod_Game, pic_dismantle),
+					 boost::bind(&Building_Window::act_dismantle, boost::ref(*this)),
+					 _("Dismantle")),
+				 UI::Box::AlignCenter);
 		}
 	}
 
@@ -256,6 +267,16 @@ Callback for bulldozing request
 void Building_Window::act_bulldoze()
 {
 	show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+}
+
+/*
+===============
+Callback for dismantling request
+===============
+*/
+void Building_Window::act_dismantle()
+{
+	show_dismantle_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
 }
 
 void Building_Window::act_start_stop() {

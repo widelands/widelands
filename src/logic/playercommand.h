@@ -221,10 +221,9 @@ private:
 struct Cmd_DismantleBuilding:public PlayerCommand {
 	Cmd_DismantleBuilding() : PlayerCommand() {} // For savegame loading
 	Cmd_DismantleBuilding
-		(int32_t        const _duetime,
-		 int32_t        const p,
-		 Building     &       b)
-		: PlayerCommand(_duetime, p), serial(b.serial())
+		(int32_t const t, int32_t const p,
+		 PlayerImmovable & pi)
+		: PlayerCommand(t, p), serial(pi.serial())
 	{}
 
 	// Write these commands to a file (for savegames)

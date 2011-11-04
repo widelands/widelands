@@ -56,6 +56,7 @@ protected:
 	UI::Tab_Panel * get_tabs() {return m_tabs;}
 
 	void act_bulldoze();
+	void act_dismantle();
 	void act_debug();
 	void show_workarea();
 	void hide_workarea();
