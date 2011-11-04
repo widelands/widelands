@@ -110,7 +110,7 @@ protected:
 };
 
 
-/// A verion of Button that uses a function object to the the callback.
+/// A verion of Button that uses a function object for the callback.
 struct Callback_Button : public Button {
 	Callback_Button /// for textual buttons
 		(Panel * const parent,
