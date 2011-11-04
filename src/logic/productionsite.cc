@@ -596,8 +596,11 @@ void ProductionSite::act(Game & game, uint32_t const data)
 	{
 		m_program_timer = false;
 
-		if (m_stack.empty())
-			return find_and_start_next_program(game);
+		if (m_stack.empty()) {
+			find_and_start_next_program(game);
+			m_working_positions[0].worker->update_task_buildingwork(game);
+			return;
+		}
 
 		State & state = top_state();
 		if (state.program->get_size() <= state.ip)
@@ -777,7 +780,6 @@ bool ProductionSite::get_building_work
 			return true;
 		}
 	}
-
 
 	// Check if all workers are there
 	if (!can_start_working())
