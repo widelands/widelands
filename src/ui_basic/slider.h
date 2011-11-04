@@ -21,6 +21,7 @@
 
 #include "panel.h"
 #include "m_signal.h"
+#include "graphic/font.h"
 
 namespace UI {
 
@@ -166,6 +167,49 @@ protected:
 	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 };
+
+/**
+ * \brief This class defines an discrete slide bar. We do not derive from
+ * Slider, but rather embed it, as we need to re-size it and add the lables.
+ */
+struct DiscreteSlider : public Panel {
+	DiscreteSlider
+		(Panel * const parent,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const std::vector<std::string> labels_in,
+		 uint32_t m_value,
+		 const PictureID background_picture_id,
+		 const std::string & tooltip_text = std::string(),
+		 const uint32_t cursor_size = 20,
+		 const bool enabled = true)
+		:
+		Panel (parent, x, y, w, h, tooltip_text),
+		slider
+			(this,
+			 // here, we take into account the h_gap introduced by HorizontalSlider
+			 w / (2 * labels_in.size()) - cursor_size / 2, 0,
+			 w - (w / labels_in.size()) + cursor_size,
+			 h - UI::Font::ui_small()->lineskip() - 2,
+			 0, labels_in.size() - 1, m_value,
+			 background_picture_id,
+			 tooltip_text,
+			 cursor_size,
+			 enabled),
+		 changed(&slider.changed),
+		 changedto(&slider.changedto),
+		 labels(labels_in)
+	{}
+protected:
+	HorizontalSlider slider;
+public:
+	Signal *       changed;
+	Signal1<int32_t> *  changedto;
+protected:
+	const std::vector<std::string> labels;
+
+	void draw(RenderTarget & dst);
+};
+
 
 }
 

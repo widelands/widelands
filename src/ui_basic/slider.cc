@@ -22,6 +22,9 @@
 #include "mouse_constants.h"
 #include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+
 
 #include <cmath>
 
@@ -516,6 +519,33 @@ bool VerticalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 		bar_pressed(y, get_y_gap());
 		return true;
 	} else return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//                               DISCRETE                                     //
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * \brief Redraw the slide bar. The discrete horizontal bar is painted.
+ *
+ * \param dst The graphic destination.
+ */
+void DiscreteSlider::draw(RenderTarget & dst)
+{
+	Panel::draw(dst);
+
+	UI::TextStyle ts = UI::TextStyle::ui_small();
+
+	uint32_t gap_1 = get_w() / (2 * labels.size());
+	uint32_t gap_n = get_w() / labels.size();
+
+	for (uint32_t i = 0; i < labels.size(); i++) {
+		UI::g_fh->draw_text
+			(dst, ts,
+			 Point(gap_1 + i * gap_n, get_h() + 2),
+			 labels[i], UI::Align_BottomCenter);
+	}
+
 }
 
 
