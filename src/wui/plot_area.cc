@@ -302,3 +302,7 @@ void WUIPlot_Area::set_time(TIME const id) {m_time = id;}
 void WUIPlot_Area::set_sample_rate(uint32_t const id) {
 	m_sample_rate = id;
 }
+
+std::string WUIPlot_Area::time_labels[WUIPlot_Area::TIME_LAST] =
+	{"15m", "30m", "1h", "2h", "4h", "8h", "16h"};
+

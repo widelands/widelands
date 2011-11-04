@@ -410,27 +410,13 @@ m_parent(&parent)
 
 	m_plot->set_size(get_inner_w() - 2 * spacing, PLOT_HEIGHT);
 
-
-	int32_t button_size = (get_inner_w() - spacing * 5) / 4;
 	pos.x  = spacing;
 	pos.y += spacing + spacing;
 
-	// The labels have to match the enumeration WUIPlot_Area::TIME
-	std::vector<std::string> labels;
-	labels.push_back("15m");
-	labels.push_back("30m");
-	labels.push_back(" 1h");
-	labels.push_back(" 2h");
-	labels.push_back(" 4h");
-	labels.push_back(" 8h");
-	labels.push_back("16h");
-
-	UI::DiscreteSlider * slider = new UI::DiscreteSlider
-		(this, pos.x, pos.y, get_inner_w() - 2 * spacing, 45,
-	        labels, m_plot->get_time(),
-		g_gr->get_picture(PicMod_UI, "pics/but1.png"));
-
-	slider->changedto->set(m_plot, &WUIPlot_Area::set_time_int);
+	new WUIPlot_Area_Slider
+		(this, *m_plot,
+		 pos.x, pos.y, get_inner_w() - 2 * spacing, 45,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 
 	pos.y += 45 + spacing;
 
