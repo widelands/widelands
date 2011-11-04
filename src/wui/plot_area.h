@@ -55,6 +55,8 @@ struct WUIPlot_Area : public UI::Panel {
 	virtual void draw(RenderTarget &);
 
 	void set_time(TIME);
+	void set_time_int(int32_t time) {set_time(static_cast<TIME>(time)); };
+	TIME get_time() {return static_cast<TIME>(m_time); };
 	void set_sample_rate(uint32_t id); // in milliseconds
 
 	void register_plot_data
