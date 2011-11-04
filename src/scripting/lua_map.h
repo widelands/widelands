@@ -117,6 +117,7 @@ public:
 	/*
 	 * attributes
 	 */
+	int get___hash(lua_State *);
 	int get_serial(lua_State * L);
 	int get_type(lua_State * L);
 
