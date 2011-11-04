@@ -302,6 +302,7 @@ private:
 	static Panel * _g_mousein;
 	static bool _g_allow_user_input;
 	static PictureID s_default_cursor;
+	static PictureID s_default_cursor_click;
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {

@@ -41,7 +41,7 @@ Panel * Panel::_g_mousein   = 0;
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::_g_allow_user_input = true;
 PictureID Panel::s_default_cursor = g_gr->get_no_picture();
-
+PictureID Panel::s_default_cursor_click = g_gr->get_no_picture();
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -138,6 +138,7 @@ int32_t Panel::run()
 		forefather = p;
 
 	s_default_cursor = g_gr->get_picture(PicMod_UI,  "pics/cursor.png");
+	s_default_cursor_click = g_gr->get_picture(PicMod_UI,  "pics/cursor_click.png");
 
 	// Loop
 	_running = true;
@@ -177,7 +178,11 @@ int32_t Panel::run()
 
 			forefather->do_draw(rt);
 
-			rt.blit(app->get_mouse_position() - Point(3, 7), s_default_cursor);
+			rt.blit
+				(app->get_mouse_position() - Point(3, 7),
+				 WLApplication::get()->is_mouse_pressed() ?
+				 	s_default_cursor_click :
+					s_default_cursor);
 
 			if (Panel * lowest = _mousein) {
 				while (Panel * const mousein = lowest->_mousein)
