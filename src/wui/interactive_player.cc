@@ -365,9 +365,7 @@ Widelands::Player_Number Interactive_Player::player_number() const
 void Interactive_Player::node_action()
 {
 	Map const & map = egbase().map();
-#ifndef DEBUG
 	if (player().vision(Map::get_index(get_sel_pos().node, map.get_width())))
-#endif
 	{
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
