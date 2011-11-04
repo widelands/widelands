@@ -221,6 +221,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)),
 				 _("Hide workarea"));
 			capsbuttons->add(m_toggle_workarea, UI::Box::AlignCenter);
+			configure_workarea_button();
 			set_fastclick_panel(m_toggle_workarea);
 		}
 
@@ -331,8 +332,7 @@ void Building_Window::show_workarea()
 		hollow_area.hole_radius = hollow_area.radius;
 	}
 
-	if (m_toggle_workarea)
-		m_toggle_workarea->set_tooltip(_("Hide workarea"));
+	configure_workarea_button();
 }
 
 /**
@@ -348,10 +348,26 @@ void Building_Window::hide_workarea()
 		overlay_manager.remove_overlay(m_workarea_job_id);
 		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
 
-		if (m_toggle_workarea)
-			m_toggle_workarea->set_tooltip(_("Show workarea"));
+		configure_workarea_button();
 	}
 }
+
+/**
+ * Sets the perm_pressed state and the tooltip.
+ */
+void Building_Window::configure_workarea_button()
+{
+	if (m_toggle_workarea) {
+		if (m_workarea_job_id) {
+			m_toggle_workarea->set_tooltip(_("Hide workarea"));
+			m_toggle_workarea->set_perm_pressed(true);
+		} else {
+			m_toggle_workarea->set_tooltip(_("Show workarea"));
+			m_toggle_workarea->set_perm_pressed(false);
+		}
+	}
+}
+
 
 
 void Building_Window::toggle_workarea() {
