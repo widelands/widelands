@@ -31,7 +31,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
-
+#include "ui_basic/slider.h"
 
 #define WARES_DISPLAY_BG "pics/ware_list_bg.png"
 
@@ -415,79 +415,24 @@ m_parent(&parent)
 	pos.x  = spacing;
 	pos.y += spacing + spacing;
 
-	new UI::Callback_Button
-		(this, "15m",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_15_MINS),
-		 _("15 m"));
+	// The labels have to match the enumeration WUIPlot_Area::TIME
+	std::vector<std::string> labels;
+	labels.push_back("15m");
+	labels.push_back("30m");
+	labels.push_back(" 1h");
+	labels.push_back(" 2h");
+	labels.push_back(" 4h");
+	labels.push_back(" 8h");
+	labels.push_back("16h");
 
-	pos.x += button_size + spacing;
+	UI::DiscreteSlider * slider = new UI::DiscreteSlider
+		(this, pos.x, pos.y, get_inner_w() - 2 * spacing, 45,
+	        labels, m_plot->get_time(),
+		g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 
-	new UI::Callback_Button
-		(this, "30m",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_30_MINS),
-		 _("30 m"));
+	slider->changedto->set(m_plot, &WUIPlot_Area::set_time_int);
 
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "1h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_ONE_HOUR),
-		 _("1 h"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "2h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_TWO_HOURS),
-		 _("2 h"));
-
-	pos.y += 25 + spacing;
-	pos.x  =      spacing;
-
-	new UI::Callback_Button
-		(this, "help",
-		 pos.x, pos.y, 32, 32,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-		 boost::bind(&Ware_Statistics_Menu::clicked_help, boost::ref(*this)),
-		 _("Help"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "4h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_FOUR_HOURS),
-		 _("4 h"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "8h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_EIGHT_HOURS),
-		 _("8 h"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "16h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(*m_plot), WUIPlot_Area::TIME_16_HOURS),
-		 _("16 h"));
-
-	pos += Point(button_size + spacing, 32 + spacing);
+	pos.y += 45 + spacing;
 
 	set_inner_size(get_inner_w(), pos.y);
 }
