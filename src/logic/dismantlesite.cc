@@ -24,7 +24,6 @@
 #include "upcast.h"
 #include "wexception.h"
 
-#include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "editor_game_base.h"
 #include "game.h"
@@ -68,13 +67,7 @@ IMPLEMENTATION
 
 
 DismantleSite::DismantleSite(const DismantleSite_Descr & descr) :
-Building         (descr),
-m_building       (0),
-m_builder_request(0),
-m_work_completed (0),
-m_work_steps     (0),
-m_work_steptime  (0),
-m_working(false)
+Partially_Finished_Building(descr)
 {}
 
 
@@ -160,20 +153,6 @@ uint32_t DismantleSite::get_built_per64k() const
 	return total;
 }
 
-
-
-
-/*
-===============
-Set the type of building we're going to build
-===============
-*/
-void DismantleSite::set_building(const Building_Descr & building_descr) {
-	assert(!m_building);
-
-	m_building = &building_descr;
-}
-
 /*
 ===============
 Initialize the construction site by starting orders
@@ -181,7 +160,7 @@ Initialize the construction site by starting orders
 */
 void DismantleSite::init(Editor_Game_Base & egbase)
 {
-	Building::init(egbase);
+	Partially_Finished_Building::init(egbase);
 
 	// SirVer TODO: if this is enhanced, also get basic wares back
 
@@ -198,30 +177,8 @@ void DismantleSite::init(Editor_Game_Base & egbase)
 		wq.set_filled(nwares);
 		m_work_steps += nwares;
 	}
-
-	if (upcast(Game, game, &egbase))
-		request_builder(*game);
-
-	g_sound_handler.play_fx("create_construction_site", m_position, 255);
 }
 
-
-/*
-===============
-Release worker and material (if any is left).
-If construction was finished successfully, place the building at our position.
-===============
-*/
-void DismantleSite::cleanup(Editor_Game_Base & egbase)
-{
-	// Release worker
-	if (m_builder_request) {
-		delete m_builder_request;
-		m_builder_request = 0;
-	}
-
-	Building::cleanup(egbase);
-}
 
 /*
 ===============
@@ -234,51 +191,6 @@ bool DismantleSite::burn_on_destroy()
 		return false; // completed, so don't burn
 
 	return true;
-}
-
-
-/*
-===============
-Issue a request for the builder.
-===============
-*/
-void DismantleSite::request_builder(Game &) {
-	assert(!m_builder.is_set() && !m_builder_request);
-
-	m_builder_request =
-		new Request
-			(*this,
-			 tribe().safe_worker_index("builder"),
-			 DismantleSite::request_builder_callback,
-			 Request::WORKER);
-}
-
-
-/*
-===============
-Called by transfer code when the builder has arrived on site.
-===============
-*/
-void DismantleSite::request_builder_callback
-	(Game            &       game,
-	 Request         &       rq,
-	 Ware_Index,
-	 Worker          * const w,
-	 PlayerImmovable &       target)
-{
-	assert(w);
-
-	DismantleSite & ds = ref_cast<DismantleSite, PlayerImmovable>(target);
-
-	ds.m_builder = w;
-
-	delete &rq;
-	ds.m_builder_request = 0;
-
-	ds.m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
-
-	w->start_task_buildingwork(game);
-	ds.set_seeing(true);
 }
 
 /*
@@ -326,16 +238,14 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 
 		worker.pop_task(game);
 		worker.start_task_leavebuilding(game, true);
-		return true;
 	} else if (not m_working) {
 		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle
 			(game, worker.get_animation("work"), DISMANTLESITE_STEP_TIME);
 
 		m_working = true;
-		return true;
 	}
-
+	return true;
 }
 
 /*

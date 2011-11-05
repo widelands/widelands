@@ -23,6 +23,8 @@
 #include "building.h"
 #include "player.h"
 
+#include "partially_finished_building.h"
+
 namespace Widelands {
 
 class Building;
@@ -47,7 +49,7 @@ struct DismantleSite_Descr : public Building_Descr {
 	virtual Building & create_object() const;
 };
 
-class DismantleSite : public Building {
+class DismantleSite : public Partially_Finished_Building {
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(DismantleSite_Descr);
@@ -64,12 +66,7 @@ public:
 
 	virtual bool burn_on_destroy();
 	virtual void init   (Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
 
-	uint32_t get_nrwaresqueues() {return m_wares.size();}
-	WaresQueue * get_waresqueue(uint32_t const idx) {return m_wares[idx];}
-
-	void set_building         (const Building_Descr &);
 
 	virtual bool get_building_work(Game &, Worker &, bool success);
 
@@ -77,26 +74,9 @@ protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
 
-	void request_builder(Game &);
-	static void request_builder_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
-
 	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 
 private:
-	const Building_Descr * m_building; // type of building that is dismantled
-
-	Request * m_builder_request;
-	OPtr<Worker> m_builder;
-
-	typedef std::vector<WaresQueue *> Wares;
-	Wares m_wares;
-
-	bool m_working;
-
-	uint32_t m_work_completed; // how many steps have we done so far?
-	uint32_t m_work_steps;     // how many steps (= items) until we're done?
-	uint32_t m_work_steptime;  // time when next step is completed
 	// SirVer TODO: this is in some form needed
 	//SirVer Player::Constructionsite_Information * m_info; // player point of view for the gameview
 };
