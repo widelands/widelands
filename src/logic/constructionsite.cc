@@ -590,7 +590,11 @@ void ConstructionSite::draw
 		} catch (Map_Object_Descr::Animation_Nonexistent) {
 			a = m_prev_building->get_animation("idle");
 		}
-		dst.drawanimrect(pos, a, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
+		uint32_t wa, ha;
+		g_gr->get_animation_size(a, tanim, wa, ha);
+		dst.drawanimrect
+			(pos, a, tanim - FRAME_LENGTH, get_owner(),
+			 Rect(Point(0, 0), w, std::min(ha, h - lines)));
 	}
 
 	assert(lines <= h);
