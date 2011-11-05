@@ -29,38 +29,18 @@
 
 #include <cstdio>
 
-
-/*
- * Where to draw tics
- */
-static const int32_t how_many_ticks[] = {
-	5,  // 15 Mins
-	3,  // 30 Mins
-	6,  // 1  H
-	4,  // 2  H
-	4,  // 4  H
-	4,  // 8  H
-	4,  // 16 H
-};
-
-static const int32_t max_x[] = {
-	15,
-	30,
-	60,
-	120,
-	4,
-	8,
-	16
-};
+static const uint32_t minutes = 60 * 1000;
+static const uint32_t hours = 60 * 60 * 1000;
+static const uint32_t days = 24 * 60 * 60 * 1000;
 
 static const uint32_t time_in_ms[] = {
-	15      * 60 * 1000,
-	30      * 60 * 1000,
-	1  * 60 * 60 * 1000,
-	2  * 60 * 60 * 1000,
-	4  * 60 * 60 * 1000,
-	8  * 60 * 60 * 1000,
-	16 * 60 * 60 * 1000,
+	15 * minutes,
+	30 * minutes,
+	1  * hours,
+	2  * hours,
+	5  * hours,
+	10 * hours,
+	30 * hours
 };
 
 #define NR_SAMPLES 30   // How many samples per diagramm when relative plotting
@@ -83,6 +63,70 @@ m_plotmode(PLOTMODE_ABSOLUTE)
  * Draw this. This is the main function
  */
 void WUIPlot_Area::draw(RenderTarget & dst) {
+
+	uint32_t time_in_ms_, how_many_ticks, max_x;
+	const char *unit_name;
+
+	if (m_time == TIME_GAME) {
+		time_in_ms_ = 0;
+		// Find running time of the game, based on the plot data
+		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
+			if (time_in_ms_ < m_plotdata[plot].dataset->size() * m_sample_rate)
+				time_in_ms_ = m_plotdata[plot].dataset->size() * m_sample_rate;
+		// Round up to a nice nearest multiple.
+		// Either a multiple of 4 min
+		// Either a multiple of 20 min
+		// or a multiple of 2h
+		// or a multiple of 20h
+		// or a multiple of 4 days
+		if (time_in_ms_ > 8 * days) {
+			time_in_ms_ += - (time_in_ms_ % (4 * days)) + 4 * days;
+		} else if (time_in_ms_ > 40 * hours) {
+			time_in_ms_ += - (time_in_ms_ % (20 * hours)) + 20 * hours;
+		} else if (time_in_ms_ > 4 * hours) {
+			time_in_ms_ += - (time_in_ms_ % (2 * hours)) + 2 * hours;
+		} else if (time_in_ms_ > 40 * minutes) {
+			time_in_ms_ += - (time_in_ms_ % (20 * minutes)) + 20 * minutes;
+		} else {
+			time_in_ms_ += - (time_in_ms_ % (4 * minutes)) + 5 * minutes;
+		}
+	} else {
+		time_in_ms_ = time_in_ms[m_time];
+	}
+
+	// Find a nice unit for max_x
+	if (time_in_ms_ > 4 * days) {
+		max_x = time_in_ms_ / days;
+		unit_name = "days";
+	} else if (time_in_ms_ > 4 * hours) {
+		max_x = time_in_ms_ / hours;
+		unit_name = "h";
+	} else {
+		max_x = time_in_ms_ / minutes;
+		unit_name = "min";
+	}
+	// Find a nice division of max_x
+	if (max_x % 5 == 0) {
+		if (max_x <= 10) {
+			how_many_ticks = 5;
+		} else {
+			how_many_ticks = max_x / 5;
+			while (how_many_ticks > 7 && how_many_ticks % 2 == 0) {
+				how_many_ticks /= 2;
+			}
+			while (how_many_ticks > 7 && how_many_ticks % 3 == 0) {
+				how_many_ticks /= 3;
+			}
+			while (how_many_ticks > 7 && how_many_ticks % 5 == 0) {
+				how_many_ticks /= 5;
+			}
+			while (how_many_ticks > 7 && how_many_ticks % 7 == 0) {
+				how_many_ticks /= 7;
+			}
+		}
+	} else {
+		how_many_ticks = 4;
+	}
 
 	// first, tile the background
 	dst.tile
@@ -123,10 +167,10 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	UI::TextStyle xtickstyle(UI::TextStyle::ui_small());
 	xtickstyle.fg = RGBColor(255, 0, 0);
 
-	float sub = xline_length / how_many_ticks[m_time];
+	float sub = xline_length / how_many_ticks;
 	float posx = get_inner_w() - space_at_right;
 	char buffer[200];
-	for (int32_t i = 0; i <= how_many_ticks[m_time]; ++i) {
+	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
 		dst.draw_line
 			(static_cast<int32_t>(posx), get_inner_h() - space_at_bottom,
 			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
@@ -134,7 +178,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
+			 "%u", max_x / how_many_ticks * i);
 
 		UI::g_fh->draw_text
 			(dst, xtickstyle,
@@ -176,7 +220,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				// How many do we take together
 				int32_t const how_many =
 					static_cast<int32_t>
-					((static_cast<float>(time_in_ms[m_time])
+					((static_cast<float>(time_in_ms_)
 					  /
 					  static_cast<float>(NR_SAMPLES))
 					 /
@@ -205,11 +249,17 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 		 Point(get_inner_w() - space_at_right - 2, spacing + 2),
 		 buffer, UI::Align_CenterRight);
 
+	//  print the used unit
+	UI::g_fh->draw_text
+		(dst, xtickstyle,
+		 Point(2, spacing + 2),
+		 unit_name, UI::Align_CenterLeft);
+
 	//  plot the pixels
 	sub =
 		xline_length
 		/
-		(static_cast<float>(time_in_ms[m_time])
+		(static_cast<float>(time_in_ms_)
 		 /
 		 static_cast<float>(m_sample_rate));
 	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
@@ -222,7 +272,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			if (m_plotmode == PLOTMODE_RELATIVE) {
 				//  How many do we take together.
 				const int32_t how_many = static_cast<int32_t>
-				((static_cast<float>(time_in_ms[m_time])
+				((static_cast<float>(time_in_ms_)
 				  /
 				  static_cast<float>(NR_SAMPLES))
 				 /
@@ -303,6 +353,6 @@ void WUIPlot_Area::set_sample_rate(uint32_t const id) {
 	m_sample_rate = id;
 }
 
-std::string WUIPlot_Area::time_labels[WUIPlot_Area::TIME_LAST] =
-	{"15m", "30m", "1h", "2h", "4h", "8h", "16h"};
+std::string WUIPlot_Area::time_labels[] =
+	{"15m", "30m", "1h", "2h", "5h", "10h", "30h", "game"};
 

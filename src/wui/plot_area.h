@@ -41,9 +41,10 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_FOUR_HOURS,
 		TIME_EIGHT_HOURS,
 		TIME_16_HOURS,
+		TIME_GAME,
 		TIME_LAST,
 	};
-	static std::string time_labels[TIME_LAST];
+	static std::string time_labels[];
 	enum PLOTMODE {
 		//  Always take the samples of some times together, so that the graph is
 		//  not completely zigg-zagged.
