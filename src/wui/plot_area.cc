@@ -19,15 +19,18 @@
 
 #include "plot_area.h"
 
+#include "i18n.h"
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 
+
 #include "ui_basic/panel.h"
 
 #include <cstdio>
+#include <boost/lexical_cast.hpp>
 
 static const uint32_t minutes = 60 * 1000;
 static const uint32_t hours = 60 * 60 * 1000;
@@ -42,9 +45,6 @@ static const uint32_t time_in_ms[] = {
 	10 * hours,
 	30 * hours
 };
-
-static const std::string time_labels[] =
-	{"15m", "30m", "1h", "2h", "5h", "10h", "30h"};
 
 #define NR_SAMPLES 30   // How many samples per diagramm when relative plotting
 
@@ -72,33 +72,10 @@ uint32_t WUIPlot_Area::get_game_time() {
 	return game_time;
 }
 
-std::vector<std::string> WUIPlot_Area::get_labels() {
-	std::vector<std::string> labels;
-	uint32_t game_time = get_game_time();
-	uint32_t i = 0;
-
-	for (i = 0; i < 7; i++) {
-		if (time_in_ms[i] < game_time) {
-			labels.push_back(time_labels[i]);
-		}
-	}
-	labels.push_back("game");
-	m_game_label = i;
-	return labels;
-}
-
-
-/*
- * Draw this. This is the main function
- */
-void WUIPlot_Area::draw(RenderTarget & dst) {
-
-	uint32_t time_in_ms_, how_many_ticks, max_x;
-	const char *unit_name;
-
+uint32_t WUIPlot_Area::get_plot_time() {
 	if (m_time == TIME_GAME) {
 		// Start with the game time
-		time_in_ms_ = get_game_time();
+		uint32_t time_in_ms_ = get_game_time();
 
 		// Round up to a nice nearest multiple.
 		// Either a multiple of 4 min
@@ -117,21 +94,68 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 		} else {
 			time_in_ms_ += - (time_in_ms_ % (4 * minutes)) + 5 * minutes;
 		}
+		return time_in_ms_;
 	} else {
-		time_in_ms_ = time_in_ms[m_time];
+		return time_in_ms[m_time];
 	}
+}
 
+WUIPlot_Area::UNIT WUIPlot_Area::get_suggested_unit(uint32_t game_time) {
 	// Find a nice unit for max_x
-	if (time_in_ms_ > 4 * days) {
-		max_x = time_in_ms_ / days;
-		unit_name = "days";
-	} else if (time_in_ms_ > 4 * hours) {
-		max_x = time_in_ms_ / hours;
-		unit_name = "h";
+	if (game_time > 4 * days) {
+		return UNIT_DAY;
+	} else if (game_time > 4 * hours) {
+		return UNIT_HOUR;
 	} else {
-		max_x = time_in_ms_ / minutes;
-		unit_name = "min";
+		return UNIT_MIN;
 	}
+}
+
+std::string WUIPlot_Area::get_unit_name(UNIT unit) {
+	switch (unit) {
+		case UNIT_DAY:  return _("d");
+		case UNIT_HOUR: return _("h");
+		case UNIT_MIN:  return _("min");
+	}
+}
+
+uint32_t WUIPlot_Area::ms_to_unit(UNIT unit, uint32_t ms) {
+	switch (unit) {
+		case UNIT_DAY: return ms / days;
+		case UNIT_HOUR: return ms / hours;
+		case UNIT_MIN: return ms / minutes;
+	}
+}
+
+std::vector<std::string> WUIPlot_Area::get_labels() {
+	std::vector<std::string> labels;
+	uint32_t game_time = get_game_time();
+	uint32_t i = 0;
+
+	for (i = 0; i < 7; i++) {
+		if (time_in_ms[i] < game_time) {
+			UNIT unit = get_suggested_unit(time_in_ms[i]);
+			uint32_t val = ms_to_unit(unit, time_in_ms[i]);
+			labels.push_back(boost::lexical_cast<std::string>(val) + get_unit_name(unit));
+		}
+	}
+	labels.push_back(_("game"));
+	m_game_label = i;
+	return labels;
+}
+
+
+/*
+ * Draw this. This is the main function
+ */
+void WUIPlot_Area::draw(RenderTarget & dst) {
+
+	uint32_t time_in_ms_, how_many_ticks, max_x;
+
+	time_in_ms_ = get_plot_time();
+	UNIT unit = get_suggested_unit(time_in_ms_);
+	max_x = ms_to_unit(unit, time_in_ms_);
+
 	// Find a nice division of max_x
 	if (max_x % 5 == 0) {
 		if (max_x <= 10) {
@@ -280,7 +304,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	UI::g_fh->draw_text
 		(dst, xtickstyle,
 		 Point(2, spacing + 2),
-		 unit_name, UI::Align_CenterLeft);
+		 get_unit_name(unit), UI::Align_CenterLeft);
 
 	//  plot the pixels
 	sub =

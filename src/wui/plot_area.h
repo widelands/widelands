@@ -44,6 +44,11 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_GAME,
 		TIME_LAST,
 	};
+	enum UNIT {
+		UNIT_MIN,
+		UNIT_HOUR,
+		UNIT_DAY,
+	};
 	enum PLOTMODE {
 		//  Always take the samples of some times together, so that the graph is
 		//  not completely zigg-zagged.
@@ -77,6 +82,10 @@ struct WUIPlot_Area : public UI::Panel {
 
 private:
 	uint32_t get_game_time();
+	uint32_t get_plot_time();
+	UNIT get_suggested_unit(uint32_t game_time);
+	std::string get_unit_name(UNIT unit);
+	uint32_t ms_to_unit(UNIT unit, uint32_t ms);
 
 	struct __plotdata {
 		const std::vector<uint32_t> * dataset;
