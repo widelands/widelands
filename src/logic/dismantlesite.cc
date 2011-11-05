@@ -105,14 +105,35 @@ void DismantleSite::init(Editor_Game_Base & egbase)
 {
 	Partially_Finished_Building::init(egbase);
 
-	// SirVer TODO: if this is enhanced, also get basic wares back
+	Tribe_Descr const & t = tribe();
+	Building_Descr const * bd = m_building;
+	Building_Index bd_idx = t.building_index(bd->name());
 
-	std::map<Ware_Index, uint8_t> const & buildcost = m_building->buildcost();
-	size_t const buildcost_size = buildcost.size();
-	m_wares.resize(buildcost_size);
-	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+	std::map<Ware_Index, uint8_t> all_costs;
+	bool done = false;
+	while (not done) {
+		std::map<Ware_Index, uint8_t> const & buildcost = bd->buildcost();
+		for (std::map<Ware_Index, uint8_t>::const_iterator i = buildcost.begin(); i != buildcost.end(); ++i)
+			all_costs[i->first] += i->second;
 
-	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
+		// Find the (first) predecessor of this building
+		for (Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i) {
+			Building_Descr const * ob = t.get_building_descr(i);
+			if (ob->enhancements().count(bd_idx)) {
+				done = false;
+				bd = ob;
+				bd_idx = i;
+				break;
+			} else
+				done = true;
+		}
+	}
+
+	std::map<Ware_Index, uint8_t>::const_iterator it = all_costs.begin();
+
+	m_wares.resize(all_costs.size());
+
+	for (size_t i = 0; i < all_costs.size(); ++i, ++it) {
 		uint8_t nwares = (it->second + RATIO_RETURNED_WARES - 1) / RATIO_RETURNED_WARES;
 		WaresQueue & wq =
 			*(m_wares[i] = new WaresQueue(*this, it->first, nwares));

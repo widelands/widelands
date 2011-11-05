@@ -86,7 +86,7 @@ throw (_wexception)
 							if (special_type == 1) // Constructionsite
 								  building = &egbase.warp_constructionsite
 									  	(c, p, index, Building_Index::Null(), true);
-							else if(special_type == 2) // DismantleSite
+							else if (special_type == 2) // DismantleSite
 								  building = &egbase.warp_dismantlesite (c, p, index, true);
 							else
 								  building = &egbase.warp_building(c, p, index);
@@ -143,7 +143,7 @@ throw (_wexception)
 				((pfb ? *pfb->m_building : building->descr())
 				 .name().c_str());
 
-			if(!pfb) 
+			if (!pfb)
 				fw.Unsigned8(0);
 			else {
 				if (upcast(const ConstructionSite, cs, pfb))
