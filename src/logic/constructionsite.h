@@ -62,17 +62,15 @@ struct ConstructionSite_Descr : public Building_Descr {
 class ConstructionSite : public Partially_Finished_Building {
 	friend struct Map_Buildingdata_Data_Packet;
 
+	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
+
 	MO_DESCR(ConstructionSite_Descr);
 
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
 
 	char const * type_name() const throw () {return "constructionsite";}
-	virtual int32_t get_size() const throw ();
-	virtual uint32_t get_playercaps() const throw ();
-	virtual uint32_t get_ui_anim() const;
 	virtual std::string get_statistics_string();
-	uint32_t get_built_per64k() const;
 
 	const Player::Constructionsite_Information * get_info() {return m_info;}
 
@@ -91,6 +89,7 @@ public:
 	virtual bool get_building_work(Game &, Worker &, bool success);
 
 protected:
+	virtual uint32_t build_step_time() const {return CONSTRUCTIONSITE_STEP_TIME;}
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
 

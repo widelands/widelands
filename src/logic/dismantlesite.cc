@@ -40,9 +40,6 @@
 
 namespace Widelands {
 
-#define DISMANTLESITE_STEP_TIME 45000
-#define RATIO_RETURNED_WARES 2  // you get half the wares back
-
 DismantleSite_Descr::DismantleSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
@@ -70,42 +67,6 @@ DismantleSite::DismantleSite(const DismantleSite_Descr & descr) :
 Partially_Finished_Building(descr)
 {}
 
-
-/*
-===============
-Override: always the same size as the building
-===============
-*/
-int32_t DismantleSite::get_size() const throw () {
-	return m_building->get_size();
-}
-
-/*
-===============
-Override: Even though construction sites cannot be built themselves, you can
-bulldoze them.
-===============
-*/
-uint32_t DismantleSite::get_playercaps() const throw () {
-	uint32_t caps = Building::get_playercaps();
-
-	caps |= 1 << PCap_Bulldoze;
-
-	return caps;
-}
-
-/*
-===============
-Return the animation for the building that is in construction, as this
-should be more useful to the player.
-===============
-*/
-uint32_t DismantleSite::get_ui_anim() const
-{
-	return m_building->get_animation("idle");
-}
-
-
 /*
 ===============
 Print completion percentage.
@@ -117,40 +78,7 @@ std::string DismantleSite::get_statistics_string()
 	snprintf
 		(buffer, sizeof(buffer),
 		 _("%u%% dismantled"), (get_built_per64k() * 100) >> 16);
-	snprintf(buffer, sizeof(buffer), "Working");
 	return buffer;
-}
-/*
-===============
-Return the completion "percentage", where 2^16 = completely built,
-0 = nothing built.
-===============
-*/
-// SirVer TODO: should take the gametime
-uint32_t DismantleSite::get_built_per64k() const
-{
-	const uint32_t time = owner().egbase().get_gametime();
-	uint32_t thisstep = 0;
-
-	if (m_working) {
-		thisstep = DISMANTLESITE_STEP_TIME - (m_work_steptime - time);
-		// The check below is necessary because we drive construction via
-		// the construction worker in get_building_work(), and there can be
-		// a small delay between the worker completing his job and requesting
-		// new work.
-		if (thisstep > DISMANTLESITE_STEP_TIME)
-			thisstep = DISMANTLESITE_STEP_TIME;
-	}
-
-	thisstep = (thisstep << 16) / DISMANTLESITE_STEP_TIME;
-	uint32_t total = (thisstep + (m_work_completed << 16));
-	if (m_work_steps)
-		total /= m_work_steps;
-
-	log("total: %u\n", total);
-	// assert(total <= (1 << 16));
-
-	return total;
 }
 
 /*
@@ -259,7 +187,6 @@ void DismantleSite::draw
 	 FCoords          const   coords,
 	 Point            const   pos)
 {
-#if 0
 	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
 	uint32_t tanim = gametime - m_animstart;
@@ -270,57 +197,29 @@ void DismantleSite::draw
 	// Draw the construction site marker
 	dst.drawanim(pos, m_anim, tanim, get_owner());
 
-	// Draw the partially finished building
+	// Draw the partially dismantled building
 	compile_assert(0 <= DISMANTLESITE_STEP_TIME);
-	m_info->totaltime = DISMANTLESITE_STEP_TIME * m_work_steps;
-	m_info->completedtime = DISMANTLESITE_STEP_TIME * m_work_completed;
+	uint32_t total_time = DISMANTLESITE_STEP_TIME * m_work_steps;
+	uint32_t completed_time = DISMANTLESITE_STEP_TIME * m_work_completed;
 
-	if (m_working) {
-		assert
-			(m_work_steptime
-			 <=
-			 m_info->completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
-		m_info->completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
+	if (m_working)
+		completed_time += DISMANTLESITE_STEP_TIME + gametime - m_work_steptime;
+
+	uint32_t anim;
+	try {
+		anim = m_building->get_animation("unoccupied");
+	} catch (Map_Object_Descr::Animation_Nonexistent) {
+		anim = m_building->get_animation("idle");
 	}
-
-	uint32_t cur_frame;
-	uint32_t anim = building().get_animation("idle");
-
-	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
-	cur_frame = m_info->totaltime ? m_info->completedtime * nr_frames / m_info->totaltime : 0;
-	// Redefine tanim
-	tanim = cur_frame * FRAME_LENGTH;
-
 	uint32_t w, h;
 	g_gr->get_animation_size(anim, tanim, w, h);
 
-	uint32_t lines = h * m_info->completedtime * nr_frames;
-	if (m_info->totaltime)
-		lines /= m_info->totaltime;
-	assert(h * cur_frame <= lines);
-	lines -= h * cur_frame; //  This won't work if pictures have various sizes.
+	uint32_t lines = h * completed_time / total_time;
 
-	if (cur_frame) //  not the first pic
-		//  draw the prev pic from top to where next image will be drawing
-		dst.drawanimrect(pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
-	else if (m_prev_building) {
-		//  Is the first picture but there was another building here before,
-		//  get its most fitting picture and draw it instead.
-		uint32_t a;
-		try {
-			a = m_prev_building->get_animation("unoccupied");
-		} catch (Map_Object_Descr::Animation_Nonexistent) {
-			a = m_prev_building->get_animation("idle");
-		}
-		dst.drawanimrect(pos, a, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
-	}
-
-	assert(lines <= h);
-	dst.drawanimrect(pos, anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
+	dst.drawanimrect(pos, anim, tanim, get_owner(), Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);
-#endif
 }
 
 }

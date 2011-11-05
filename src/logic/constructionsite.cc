@@ -38,9 +38,6 @@
 
 namespace Widelands {
 
-#define CONSTRUCTIONSITE_STEP_TIME 30000
-
-
 ConstructionSite_Descr::ConstructionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
@@ -84,42 +81,6 @@ m_info           (new Player::Constructionsite_Information)
 
 /*
 ===============
-Override: construction size is always the same size as the building
-===============
-*/
-int32_t ConstructionSite::get_size() const throw () {
-	return m_building->get_size();
-}
-
-/*
-===============
-Override: Even though construction sites cannot be built themselves, you can
-bulldoze them.
-===============
-*/
-uint32_t ConstructionSite::get_playercaps() const throw () {
-	uint32_t caps = Building::get_playercaps();
-
-	caps |= 1 << PCap_Bulldoze;
-
-	return caps;
-}
-
-
-/*
-===============
-Return the animation for the building that is in construction, as this
-should be more useful to the player.
-===============
-*/
-uint32_t ConstructionSite::get_ui_anim() const
-{
-	return building().get_animation("idle");
-}
-
-
-/*
-===============
 Print completion percentage.
 ===============
 */
@@ -130,37 +91,6 @@ std::string ConstructionSite::get_statistics_string()
 		(buffer, sizeof(buffer),
 		 _("%u%% built"), (get_built_per64k() * 100) >> 16);
 	return buffer;
-}
-
-
-/*
-===============
-Return the completion "percentage", where 2^16 = completely built,
-0 = nothing built.
-===============
-*/
-uint32_t ConstructionSite::get_built_per64k() const
-{
-	const uint32_t time = owner().egbase().get_gametime();
-	uint32_t thisstep = 0;
-
-	if (m_working) {
-		thisstep = CONSTRUCTIONSITE_STEP_TIME - (m_work_steptime - time);
-		// The check below is necessary because we drive construction via
-		// the construction worker in get_building_work(), and there can be
-		// a small delay between the worker completing his job and requesting
-		// new work.
-		if (thisstep > CONSTRUCTIONSITE_STEP_TIME)
-			thisstep = CONSTRUCTIONSITE_STEP_TIME;
-	}
-	thisstep = (thisstep << 16) / CONSTRUCTIONSITE_STEP_TIME;
-	uint32_t total = (thisstep + (m_work_completed << 16));
-	if (m_work_steps)
-		total /= m_work_steps;
-
-	assert(total <= (1 << 16));
-
-	return total;
 }
 
 

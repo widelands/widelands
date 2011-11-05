@@ -24,6 +24,7 @@
 #include "sound/sound_handler.h"
 
 #include "game.h"
+#include "player.h"
 #include "tribe.h"
 #include "worker.h"
 
@@ -115,6 +116,77 @@ void Partially_Finished_Building::request_builder(Game &) {
 			 Partially_Finished_Building::request_builder_callback,
 			 Request::WORKER);
 }
+
+/*
+===============
+Override: construction size is always the same size as the building
+===============
+*/
+int32_t Partially_Finished_Building::get_size() const throw () {
+	return m_building->get_size();
+}
+
+/*
+===============
+Override: Even though construction sites cannot be built themselves, you can
+bulldoze them.
+===============
+*/
+uint32_t Partially_Finished_Building::get_playercaps() const throw () {
+	uint32_t caps = Building::get_playercaps();
+
+	caps |= 1 << PCap_Bulldoze;
+
+	return caps;
+}
+
+
+/*
+===============
+Return the animation for the building that is in construction, as this
+should be more useful to the player.
+===============
+*/
+uint32_t Partially_Finished_Building::get_ui_anim() const
+{
+	return m_building->get_animation("idle");
+}
+
+
+
+/*
+===============
+Return the completion "percentage", where 2^16 = completely built,
+0 = nothing built.
+===============
+*/
+// TODO: should take gametime or so
+uint32_t Partially_Finished_Building::get_built_per64k() const
+{
+	const uint32_t time = owner().egbase().get_gametime();
+	uint32_t thisstep = 0;
+
+	uint32_t ts = build_step_time();
+	if (m_working) {
+		thisstep = ts - (m_work_steptime - time);
+		// The check below is necessary because we drive construction via
+		// the construction worker in get_building_work(), and there can be
+		// a small delay between the worker completing his job and requesting
+		// new work.
+		if (thisstep > ts)
+			thisstep = ts;
+	}
+	thisstep = (thisstep << 16) / ts;
+	uint32_t total = (thisstep + (m_work_completed << 16));
+	if (m_work_steps)
+		total /= m_work_steps;
+
+	assert(total <= (1 << 16));
+
+	return total;
+}
+
+
 
 /*
 ===============

@@ -333,8 +333,9 @@ Building & Editor_Game_Base::warp_dismantlesite
 	Building_Descr const * const descr =
 		tribe.get_building_descr
 			(tribe.safe_building_index("dismantlesite"));
+
 	DismantleSite & dms =
-		ref_cast<DismantleSite, Map_Object>(descr->create_object());
+		ref_cast<DismantleSite, Map_Object>(descr->create());
 
 	dms.set_building(*tribe.get_building_descr(idx));
 

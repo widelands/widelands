@@ -52,25 +52,25 @@ struct DismantleSite_Descr : public Building_Descr {
 class DismantleSite : public Partially_Finished_Building {
 	friend struct Map_Buildingdata_Data_Packet;
 
+	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
+	static const uint8_t RATIO_RETURNED_WARES = 2;  // you get half the wares back
+
 	MO_DESCR(DismantleSite_Descr);
 
 public:
 	DismantleSite(const DismantleSite_Descr & descr);
 
 	char const * type_name() const throw () {return "dismantlesite";}
-	virtual int32_t get_size() const throw ();
-	virtual uint32_t get_playercaps() const throw ();
-	virtual uint32_t get_ui_anim() const;
 	virtual std::string get_statistics_string();
-	uint32_t get_built_per64k() const;
 
 	virtual bool burn_on_destroy();
 	virtual void init   (Editor_Game_Base &);
 
-
 	virtual bool get_building_work(Game &, Worker &, bool success);
 
 protected:
+	virtual uint32_t build_step_time() const {return DISMANTLESITE_STEP_TIME;}
+
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
 
