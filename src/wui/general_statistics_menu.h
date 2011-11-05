@@ -25,11 +25,11 @@
 #include "plot_area.h"
 
 #include "ui_basic/radiobutton.h"
+#include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
 struct Interactive_GameBase;
 namespace UI {
-struct Checkbox;
 struct Radiogroup;
 }
 
@@ -41,11 +41,11 @@ private:
 	WUIPlot_Area         m_plot;
 	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
-	UI::Checkbox       * m_cbs[MAX_PLAYERS];
+	UI::Callback_Button * m_cbs[MAX_PLAYERS];
 	uint32_t             m_ndatasets;
 
 	void clicked_help();
-	void cb_changed_to(int32_t, bool);
+	void cb_changed_to(int32_t);
 	void radiogroup_changed(int32_t);
 };
 
