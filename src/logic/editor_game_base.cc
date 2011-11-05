@@ -336,7 +336,7 @@ Building & Editor_Game_Base::warp_dismantlesite
 	DismantleSite & dms =
 		ref_cast<DismantleSite, Map_Object>(descr->create_object());
 
-	dms.set_building(*descr);
+	dms.set_building(*tribe.get_building_descr(idx));
 
 	dms.m_position = c;
 	dms.set_owner(get_player(owner));

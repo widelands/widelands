@@ -41,8 +41,8 @@
 
 namespace Widelands {
 
-#define DISMANTLESITE_STEP_TIME 30000
-
+#define DISMANTLESITE_STEP_TIME 45000
+#define RATIO_RETURNED_WARES 2  // you get half the wares back
 
 DismantleSite_Descr::DismantleSite_Descr
 	(char const * const _name, char const * const _descname,
@@ -71,9 +71,9 @@ DismantleSite::DismantleSite(const DismantleSite_Descr & descr) :
 Building         (descr),
 m_building       (0),
 m_builder_request(0),
-m_working        (false),
-m_work_steptime  (0),
-m_work_completed (0)
+m_work_completed (0),
+m_work_steps     (0),
+m_work_steptime  (0)
 {}
 
 
@@ -92,8 +92,6 @@ Override: Even though construction sites cannot be built themselves, you can
 bulldoze them.
 ===============
 */
-// SirVer TODO
-#if 0 
 uint32_t DismantleSite::get_playercaps() const throw () {
 	uint32_t caps = Building::get_playercaps();
 
@@ -101,7 +99,6 @@ uint32_t DismantleSite::get_playercaps() const throw () {
 
 	return caps;
 }
-#endif
 
 /*
 ===============
@@ -122,14 +119,46 @@ Print completion percentage.
 */
 std::string DismantleSite::get_statistics_string()
 {
-	// SirVer TODO
 	char buffer[40];
-	// snprintf
-		// (buffer, sizeof(buffer),
-		 // _("%u%% built"), (get_built_per64k() * 100) >> 16);
+	snprintf
+		(buffer, sizeof(buffer),
+		 _("%u%% dismantled"), (get_built_per64k() * 100) >> 16);
 	snprintf(buffer, sizeof(buffer), "Working");
 	return buffer;
 }
+/*
+===============
+Return the completion "percentage", where 2^16 = completely built,
+0 = nothing built.
+===============
+*/
+// SirVer TODO: should take the gametime
+uint32_t DismantleSite::get_built_per64k() const
+{
+	const uint32_t time = owner().egbase().get_gametime();
+	uint32_t thisstep = 0;
+
+	if (is_working()) {
+		thisstep = DISMANTLESITE_STEP_TIME - (m_work_steptime - time);
+		// The check below is necessary because we drive construction via
+		// the construction worker in get_building_work(), and there can be
+		// a small delay between the worker completing his job and requesting
+		// new work.
+		if (thisstep > DISMANTLESITE_STEP_TIME)
+			thisstep = DISMANTLESITE_STEP_TIME;
+	}
+
+	thisstep = (thisstep << 16) / DISMANTLESITE_STEP_TIME;
+	uint32_t total = (thisstep + (m_work_completed << 16));
+	if (m_work_steps)
+		total /= m_work_steps;
+
+	assert(total <= (1 << 16));
+
+	return total;
+}
+
+
 
 
 /*
@@ -152,12 +181,19 @@ void DismantleSite::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
 
-	//  initialize the wares queues
-	//  SirVer TODO: figure out what needs to be returned
-	// std::map<Ware_Index, uint8_t> const & buildcost = m_building->buildcost();
-	// size_t const buildcost_size = buildcost.size();
-	// m_wares.resize(buildcost_size);
-	// std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+	std::map<Ware_Index, uint8_t> const & buildcost = m_building->buildcost();
+	size_t const buildcost_size = buildcost.size();
+	m_wares.resize(buildcost_size);
+	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+
+	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
+		uint8_t nwares = (it->second + RATIO_RETURNED_WARES - 1) / RATIO_RETURNED_WARES;
+		WaresQueue & wq =
+			*(m_wares[i] = new WaresQueue(*this, it->first, nwares));
+
+		wq.set_filled(nwares);
+		m_work_steps += nwares;
+	}
 
 	if (upcast(Game, game, &egbase))
 		request_builder(*game);
@@ -182,24 +218,6 @@ void DismantleSite::cleanup(Editor_Game_Base & egbase)
 
 	Building::cleanup(egbase);
 }
-
-
-/*
-===============
-Construction sites only burn if some of the work has been completed.
-===============
-*/
-#if 0
-bool DismantleSite::burn_on_destroy()
-{
-	return false; // TODO SirVer
-	// if (m_work_completed >= m_work_steps)
-		// return false; // completed, so don't burn
-
-	// return m_work_completed or m_prev_building;
-}
-#endif
-
 
 /*
 ===============
@@ -232,16 +250,21 @@ void DismantleSite::request_builder_callback
 {
 	assert(w);
 
-	DismantleSite & cs = ref_cast<DismantleSite, PlayerImmovable>(target);
+	DismantleSite & ds = ref_cast<DismantleSite, PlayerImmovable>(target);
 
-	cs.m_builder = w;
+	ds.m_builder = w;
 
 	delete &rq;
-	cs.m_builder_request = 0;
+	ds.m_builder_request = 0;
 
-	// TODO: worker build code
-	// w->start_task_buildingwork(game);
-	cs.set_seeing(true);
+	w->start_task_buildingwork(game);
+	ds.set_seeing(true);
+}
+
+bool DismantleSite::is_working() const {
+	if (!m_builder_request)
+		return true;
+	return false;
 }
 
 /*
@@ -250,7 +273,7 @@ Called by our builder to get instructions.
 ===============
 */
 bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
-	return false; // TODO: SirVer. whatever?
+	return false;
 #if 0
 	if (&worker != m_builder.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine

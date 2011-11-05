@@ -57,18 +57,22 @@ public:
 
 	char const * type_name() const throw () {return "dismantlesite";}
 	virtual int32_t get_size() const throw ();
-	// virtual uint32_t get_playercaps() const throw ();
+	virtual uint32_t get_playercaps() const throw ();
 	virtual uint32_t get_ui_anim() const;
 	virtual std::string get_statistics_string();
+	uint32_t get_built_per64k() const;
 
 	virtual void init   (Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
-	// virtual bool burn_on_destroy(); SirVer TODO
+	uint32_t get_nrwaresqueues() {return m_wares.size();}
+	WaresQueue * get_waresqueue(uint32_t const idx) {return m_wares[idx];}
 
 	void set_building         (const Building_Descr &);
 
 	virtual bool get_building_work(Game &, Worker &, bool success);
+	virtual bool is_working() const;
+
 
 protected:
 	virtual void create_options_window
@@ -86,9 +90,12 @@ private:
 	Request * m_builder_request;
 	OPtr<Worker> m_builder;
 
-	bool     m_working;        // true if the builder is currently working
-	uint32_t m_work_steptime;  // time when next step is completed
+	typedef std::vector<WaresQueue *> Wares;
+	Wares m_wares;
+
 	uint32_t m_work_completed; // how many steps have we done so far?
+	uint32_t m_work_steps;     // how many steps (= items) until we're done?
+	uint32_t m_work_steptime;  // time when next step is completed
 	// SirVer TODO: this is in some form needed
 	//SirVer Player::Constructionsite_Information * m_info; // player point of view for the gameview
 };

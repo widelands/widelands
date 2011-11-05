@@ -386,10 +386,11 @@ void Building_Window::toggle_workarea() {
 void Building_Window::create_ware_queue_panel
 	(UI::Box               * const box,
 	 Widelands::Building   &       b,
-	 Widelands::WaresQueue * const wq)
+	 Widelands::WaresQueue * const wq,
+	 bool show_only)
 {
 	// The *max* width should be larger than the default width
-	box->add(new WaresQueueDisplay(box, 0, 0, 3 * Width, igbase(), b, wq), UI::Box::AlignLeft);
+	box->add(new WaresQueueDisplay(box, 0, 0, 3 * Width, igbase(), b, wq, show_only), UI::Box::AlignLeft);
 }
 
 /**

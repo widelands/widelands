@@ -62,10 +62,9 @@ DismantleSite_Window::DismantleSite_Window
 	box.add_space(8);
 
 	// Add the wares queue
-#if 0 // TODO: SirVer
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i));
-#endif
+		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
+
 	get_tabs()->add("wares", g_gr->get_picture(PicMod_UI, pic_tab_wares), &box);
 }
 
@@ -79,10 +78,10 @@ void DismantleSite_Window::think()
 {
 	Building_Window::think();
 
-	Widelands::DismantleSite const & cs =
+	Widelands::DismantleSite const & ds =
 		ref_cast<Widelands::DismantleSite, Widelands::Building>(building());
 
-	// m_progress->set_state(cs.get_built_per64k());
+	m_progress->set_state(ds.get_built_per64k());
 }
 
 
