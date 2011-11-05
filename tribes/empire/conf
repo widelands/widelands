@@ -137,6 +137,8 @@ donkeybreeder=_Donkey Breeder
 [constructionsite types]
 constructionsite=_Construction Site
 
+[dismantlesite types]
+dismantlesite=_Dismantle Site
 
 [global militarysite types]
 castle.atlanteans=_Castle

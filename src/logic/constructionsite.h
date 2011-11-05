@@ -78,6 +78,7 @@ public:
 
 	virtual void set_building(const Building_Descr &);
 	void set_previous_building(const Building_Descr * const);
+	// SirVer , TODO
 	const Building_Descr & building() const throw () {return *m_building;}
 
 	virtual void init   (Editor_Game_Base &);

@@ -17,8 +17,6 @@
  *
  */
 
-// TODO SirVer: other tribes have no dismantlesite
-
 #include <cstdio>
 
 #include "upcast.h"

@@ -27,6 +27,8 @@
 namespace Widelands {
 
 class ConstructionSite;
+class Partially_Finished_Building;
+class DismantleSite;
 struct Game;
 class MilitarySite;
 class TrainingSite;
@@ -46,6 +48,12 @@ struct Map_Buildingdata_Data_Packet : public Map_Data_Packet {
 private:
 	virtual void read_constructionsite
 		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
+	virtual void read_dismantlesite
+		(DismantleSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
+	virtual void read_partially_finished_building
+		(Partially_Finished_Building   &, FileRead  &, Game &, Map_Map_Object_Loader &);
+	virtual void read_constructionsite_v1
+		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_warehouse
 		(Warehouse              &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_militarysite
@@ -54,8 +62,13 @@ private:
 		(TrainingSite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_productionsite
 		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader &);
+
 	virtual void write_constructionsite
 		(ConstructionSite const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+	virtual void write_dismantlesite
+		(DismantleSite const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+	virtual void write_partially_finished_building
+		(Partially_Finished_Building const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_warehouse
 		(Warehouse        const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_militarysite
