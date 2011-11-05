@@ -1,7 +1,7 @@
 soundfx=../../../sound/smiths/toolsmith
 size=medium
 output=axe
-output=bakingtray
+output=breadpaddle
 output=fire_tongs
 output=fishing_rod
 output=hammer
@@ -30,7 +30,7 @@ iron=8
 trunk=8
 
 [programs]
-produce_bakingtray=_Produce bakingtray
+produce_breadpaddle=_Produce bread paddle
 produce_fire_tongs=_Produce fire tongs
 produce_fishing_rod=_Produce fishing rod
 produce_hammer=_Produce hammer
@@ -44,13 +44,13 @@ produce_saw=_Produce saw
 produce_axe=_Produce axe
 work=_Work
 
-[produce_bakingtray]
-return=skipped unless economy needs bakingtray
+[produce_breadpaddle]
+return=skipped unless economy needs breadpaddle
 consume=iron trunk
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
-produce=bakingtray
+produce=breadpaddle
 
 [produce_fire_tongs]
 return=skipped unless economy needs fire_tongs
@@ -141,7 +141,7 @@ animate=working 35000
 produce=axe
 
 [work]
-call=produce_bakingtray
+call=produce_breadpaddle
 call=produce_fire_tongs
 call=produce_fishing_rod
 call=produce_hammer
