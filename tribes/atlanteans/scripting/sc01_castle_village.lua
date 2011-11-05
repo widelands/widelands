@@ -41,7 +41,7 @@ return {
             fish = 3,
             meat = 3,
             water = 12,
-            breadpaddle = 2,
+            bakingtray = 2,
             bucket = 2,
             fire_tongs = 2,
             fishing_net = 4,

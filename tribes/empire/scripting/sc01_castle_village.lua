@@ -27,7 +27,7 @@ return {
             helm = 2,
             wood_lance = 5,
             axe = 6,
-            breadpaddle = 2,
+            bakingtray = 2,
             basket = 2,
             fire_tongs = 2,
             fishing_rod = 2,
