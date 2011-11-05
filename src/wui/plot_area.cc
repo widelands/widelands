@@ -43,6 +43,9 @@ static const uint32_t time_in_ms[] = {
 	30 * hours
 };
 
+static const std::string time_labels[] =
+	{"15m", "30m", "1h", "2h", "5h", "10h", "30h"};
+
 #define NR_SAMPLES 30   // How many samples per diagramm when relative plotting
 
 #define BG_PIC "pics/plot_area_bg.png"
@@ -59,6 +62,32 @@ m_plotmode(PLOTMODE_ABSOLUTE)
 {}
 
 
+uint32_t WUIPlot_Area::get_game_time() {
+	uint32_t game_time = 0;
+
+	// Find running time of the game, based on the plot data
+	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
+		if (game_time < m_plotdata[plot].dataset->size() * m_sample_rate)
+			game_time = m_plotdata[plot].dataset->size() * m_sample_rate;
+	return game_time;
+}
+
+std::vector<std::string> WUIPlot_Area::get_labels() {
+	std::vector<std::string> labels;
+	uint32_t game_time = get_game_time();
+	uint32_t i = 0;
+
+	for (i = 0; i < 7; i++) {
+		if (time_in_ms[i] < game_time) {
+			labels.push_back(time_labels[i]);
+		}
+	}
+	labels.push_back("game");
+	m_game_label = i;
+	return labels;
+}
+
+
 /*
  * Draw this. This is the main function
  */
@@ -68,11 +97,9 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	const char *unit_name;
 
 	if (m_time == TIME_GAME) {
-		time_in_ms_ = 0;
-		// Find running time of the game, based on the plot data
-		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
-			if (time_in_ms_ < m_plotdata[plot].dataset->size() * m_sample_rate)
-				time_in_ms_ = m_plotdata[plot].dataset->size() * m_sample_rate;
+		// Start with the game time
+		time_in_ms_ = get_game_time();
+
 		// Round up to a nice nearest multiple.
 		// Either a multiple of 4 min
 		// Either a multiple of 20 min
@@ -352,7 +379,4 @@ void WUIPlot_Area::set_time(TIME const id) {m_time = id;}
 void WUIPlot_Area::set_sample_rate(uint32_t const id) {
 	m_sample_rate = id;
 }
-
-std::string WUIPlot_Area::time_labels[] =
-	{"15m", "30m", "1h", "2h", "5h", "10h", "30h", "game"};
 
