@@ -216,7 +216,7 @@ void SurfaceSDL::draw_line
 	uint32_t y = dxabs / 2;
 	Point p(x1, y1);
 
-        set_pixel(p.x, p.y, color.map(format()));
+	set_pixel(p.x, p.y, color.map(format()));
 
 	if (dxabs >= dyabs) //  the line is more horizontal than vertical
 		for (uint32_t i = 0; i < dxabs; ++i) {

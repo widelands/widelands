@@ -89,10 +89,8 @@ uint32_t WUIPlot_Area::get_plot_time() {
 			time_in_ms_ += - (time_in_ms_ % (20 * hours)) + 20 * hours;
 		} else if (time_in_ms_ > 4 * hours) {
 			time_in_ms_ += - (time_in_ms_ % (2 * hours)) + 2 * hours;
-		} else if (time_in_ms_ > 40 * minutes) {
-			time_in_ms_ += - (time_in_ms_ % (20 * minutes)) + 20 * minutes;
 		} else {
-			time_in_ms_ += - (time_in_ms_ % (4 * minutes)) + 5 * minutes;
+			time_in_ms_ += - (time_in_ms_ % (15 * minutes)) + 15 * minutes;
 		}
 		return time_in_ms_;
 	} else {
@@ -149,7 +147,6 @@ std::vector<std::string> WUIPlot_Area::get_labels() {
  * Draw this. This is the main function
  */
 void WUIPlot_Area::draw(RenderTarget & dst) {
-
 	uint32_t time_in_ms_, how_many_ticks, max_x;
 
 	time_in_ms_ = get_plot_time();

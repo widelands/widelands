@@ -23,6 +23,8 @@
 #include "logic/warelist.h"
 #include "logic/tribe.h"
 
+#include "graphic/graphic.h"
+
 #include "ui_basic/textarea.h"
 
 #include <vector>
@@ -50,7 +52,9 @@ struct AbstractWaresDisplay : public UI::Panel {
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const &,
 		 wdType type,
-		 bool selectable);
+		 bool selectable,
+		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = NULL,
+		 bool horizontal = true);
 
 	bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
@@ -67,6 +71,8 @@ struct AbstractWaresDisplay : public UI::Panel {
 			unselect_ware(ware);
 		else
 			select_ware(ware);
+		if (m_callback_function)
+			m_callback_function(ware, ware_selected(ware));
 	}
 
 	// Wares may be hidden
@@ -81,6 +87,8 @@ protected:
 	virtual void layout();
 
 	virtual std::string info_for_ware(Widelands::Ware_Index const) = 0;
+
+	virtual RGBColor info_color_for_ware(Widelands::Ware_Index);
 
 	Widelands::Tribe_Descr::WaresOrder const & icons_order() const;
 	Widelands::Tribe_Descr::WaresOrderCoords const & icons_order_coords() const;
@@ -100,6 +108,8 @@ private:
 	selection_type      m_selected;
 	selection_type      m_hidden;
 	bool                m_selectable;
+	bool                m_horizontal;
+	boost::function<void(Widelands::Ware_Index, bool)> m_callback_function;
 };
 
 /*
