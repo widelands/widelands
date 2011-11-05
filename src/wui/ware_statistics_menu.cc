@@ -27,6 +27,7 @@
 #include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "plot_area.h"
+#include "waresdisplay.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -288,58 +289,32 @@ static const RGBColor colors[] = {
 	RGBColor(255, 255, 255),
 };
 
-/*
- * This class is only needed here, that's
- * why it is defined here.
- *
- * This class is the same as an ordinary
- * checkbox, the only difference is, it has
- * a small rectangle on it with the color
- * of the graph and it needs a picture
- */
-struct WSM_Checkbox : public UI::Checkbox {
-	WSM_Checkbox(UI::Panel *, Point, int32_t id, PictureID picid, RGBColor);
 
-	virtual void draw(RenderTarget &);
+struct StatisticWaresDisplay : public AbstractWaresDisplay {
+	typedef AbstractWaresDisplay::wdType wdType;
 
-private:
-	PictureID  m_pic;
-	RGBColor   m_color;
+	StatisticWaresDisplay
+		(UI::Panel * const parent,
+		 int32_t const x, int32_t const y,
+		 Widelands::Tribe_Descr const & tribe,
+		 boost::function<void(Widelands::Ware_Index, bool)> callback_function)
+	:
+		 AbstractWaresDisplay(parent, x, y, tribe, WaresDisplay::WARE, true, callback_function)
+	{
+		uint32_t w, h;
+		get_desired_size(w, h);
+		set_size(w, h);
+	}
+protected:
+	std::string info_for_ware(Widelands::Ware_Index const ware) {
+		return "";
+	}
+
+	RGBColor info_color_for_ware(Widelands::Ware_Index const ware)
+	{
+		return colors[static_cast<size_t>(ware)];
+	}
 };
-
-
-WSM_Checkbox::WSM_Checkbox
-	(UI::Panel * const parent,
-	 Point       const p,
-	 int32_t     const id,
-	 PictureID   const picid,
-	 RGBColor    const color)
-:
-UI::Checkbox(parent, p, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG)),
-m_pic       (picid),
-m_color     (color)
-{
-	set_id(id);
-}
-
-/*
- * draw
- */
-void WSM_Checkbox::draw(RenderTarget & dst) {
-	//  First, draw normal.
-	UI::Checkbox::draw(dst);
-
-	//  Now, draw a small box with the color.
-	assert(1 <= get_inner_w());
-	compile_assert(2 <= COLOR_BOX_HEIGHT);
-	dst.fill_rect
-		(Rect(Point(1, 1), get_inner_w() - 1, COLOR_BOX_HEIGHT - 2), m_color);
-
-	//  and the item
-	dst.blit
-		(Point((get_inner_w() - WARE_MENU_PIC_WIDTH) / 2, COLOR_BOX_HEIGHT),
-		 m_pic);
-}
 
 
 Ware_Statistics_Menu::Ware_Statistics_Menu
@@ -353,74 +328,49 @@ m_parent(&parent)
 
 	//  First, we must decide about the size.
 	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
-	uint32_t wares_per_row = MIN_WARES_PER_LINE;
-	while (nr_wares % wares_per_row && wares_per_row <= MAX_WARES_PER_LINE)
-		++wares_per_row;
-	const uint32_t nr_rows =
-		nr_wares / wares_per_row + (nr_wares % wares_per_row ? 1 : 0);
 
 #define spacing 5
 	Point const offs(spacing, 30);
 	Point       pos (offs);
 
-	set_inner_size
-		(10,
-		 (offs.y + spacing + PLOT_HEIGHT + spacing +
-		  nr_rows * (WARE_MENU_PIC_HEIGHT + spacing) + 100));
 
+	// Setup Wares selectoin widget first, because the window size depends on it.
+	pos.y += PLOT_HEIGHT + 2 * spacing;
+	pos.x  = spacing;
 
+	StatisticWaresDisplay * swd =
+		new StatisticWaresDisplay
+			(this, spacing, pos.y, parent.get_player()->tribe(),
+			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2));
+
+	pos.y += swd->get_h();
+	pos.y += spacing;
+
+	// Setup plot widget
 	m_plot =
 		new WUIPlot_Area
 			(this,
-			 spacing, offs.y + spacing, get_inner_w() - 2 * spacing, PLOT_HEIGHT);
+			 spacing, offs.y + spacing, swd->get_w(), PLOT_HEIGHT);
 	m_plot->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
-	//  all wares
-	Widelands::Ware_Index::value_t cur_ware = 0;
-	int32_t dposy    = 0;
-	pos.y += PLOT_HEIGHT + 2 * spacing;
-	Widelands::Tribe_Descr const & tribe = parent.get_player()->tribe();
-	for (uint32_t y = 0; y < nr_rows; ++y) {
-		pos.x = spacing;
-		for
-			(uint32_t x = 0;
-			 x < wares_per_row and cur_ware < nr_wares;
-			 ++x, ++cur_ware)
-		{
-			Widelands::Item_Ware_Descr const & ware =
-				*tribe.get_ware_descr(Widelands::Ware_Index(cur_ware));
-			WSM_Checkbox & cb =
-				*new WSM_Checkbox
-					(this, pos, cur_ware, ware.icon(), colors[cur_ware]);
-			cb.set_tooltip(ware.descname().c_str());
-			cb.changedtoid.set(this, &Ware_Statistics_Menu::cb_changed_to);
-			pos.x += cb.get_w() + spacing;
-			dposy = cb.get_h() + spacing;
-			set_inner_size
-				(spacing + (cb.get_w() + spacing) * wares_per_row, get_inner_h());
-			m_plot->register_plot_data
-				(cur_ware,
-				 parent.get_player()->get_ware_production_statistics
-				 	(Widelands::Ware_Index(cur_ware)),
-				 colors[cur_ware]);
-		}
-		pos.y += dposy;
+	for (Widelands::Ware_Index::value_t cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
+		m_plot->register_plot_data
+			(cur_ware,
+			 parent.get_player()->get_ware_production_statistics
+				(Widelands::Ware_Index(cur_ware)),
+			 colors[cur_ware]);
 	}
 
-	m_plot->set_size(get_inner_w() - 2 * spacing, PLOT_HEIGHT);
-
-	pos.x  = spacing;
-	pos.y += spacing + spacing;
 
 	new WUIPlot_Area_Slider
 		(this, *m_plot,
-		 pos.x, pos.y, get_inner_w() - 2 * spacing, 45,
+		 pos.x, pos.y, swd->get_w(), 45,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 
 	pos.y += 45 + spacing;
 
-	set_inner_size(get_inner_w(), pos.y);
+	set_inner_size(swd->get_w() + 2 * spacing, pos.y);
 }
 
 
@@ -433,6 +383,7 @@ void Ware_Statistics_Menu::clicked_help() {}
 /*
  * Cb has been changed to this state
  */
-void Ware_Statistics_Menu::cb_changed_to(int32_t const id, bool const what) {
-	m_plot->show_plot(id, what);
+void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
+	m_plot->show_plot(static_cast<size_t>(id), what);
 }
+

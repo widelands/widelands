@@ -37,7 +37,8 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
 	 wdType type,
-	 bool selectable)
+	 bool selectable,
+	 boost::function<void(Widelands::Ware_Index, bool)> callback_function)
 	:
 	// Size is set when add_warelist is called, as it depends on the m_type.
 	UI::Panel(parent, x, y, 0, 0),
@@ -55,7 +56,8 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_hidden
 		(m_type == WORKER ? m_tribe.get_nrworkers()
 	                          : m_tribe.get_nrwares(), false),
-	m_selectable(selectable)
+	m_selectable(selectable),
+	m_callback_function(callback_function)
 {
 	//resize the configuration of our wares if they won't fit in the current window
 	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + 8 + 3);
@@ -229,7 +231,7 @@ void AbstractWaresDisplay::draw_ware
 		 m_tribe.get_ware_descr  (id)->icon());
 	dst.fill_rect
 		(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
-		 RGBColor(0, 0, 0));
+		 info_color_for_ware(id));
 
 	UI::g_fh->draw_text
 		(dst, UI::TextStyle::ui_ultrasmall(),
@@ -292,6 +294,10 @@ WaresDisplay::WaresDisplay
 	 bool selectable)
 : AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}
+
+RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::Ware_Index const ware) {
+	return RGBColor(0, 0, 0);
+}
 
 WaresDisplay::~WaresDisplay()
 {
