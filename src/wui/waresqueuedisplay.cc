@@ -37,7 +37,8 @@ WaresQueueDisplay::WaresQueueDisplay
 	 int32_t const x, int32_t const y,
 	 Interactive_GameBase  & igb,
 	 Widelands::Building   & building,
-	 Widelands::WaresQueue * const queue)
+	 Widelands::WaresQueue * const queue,
+	 bool show_only)
 :
 UI::Panel(parent, x, y, 0, 28),
 m_igb(igb),
@@ -51,7 +52,8 @@ m_ware_type(Widelands::Request::WARE),
 m_max_fill_indicator(g_gr->get_picture(PicMod_Game, pic_max_fill_indicator)),
 m_cache_size(queue->get_max_size()),
 m_cache_filled(queue->get_filled()),
-m_total_height(0)
+m_total_height(0),
+m_show_only(show_only)
 {
 	const Widelands::Item_Ware_Descr & ware =
 		*queue->owner().tribe().get_ware_descr(m_queue->get_ware());
@@ -63,8 +65,11 @@ m_total_height(0)
 	uint32_t pw, ph;
 	g_gr->get_picture_size(m_max_fill_indicator, pw, ph);
 
-	m_total_height = std::max
-		(3 * PriorityButtonSize, std::max(WARE_MENU_PIC_HEIGHT, static_cast<int32_t>(ph))) + 2 * Border;
+	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
+	uint32_t picture_height = show_only ? WARE_MENU_PIC_HEIGHT :
+		std::max(WARE_MENU_PIC_HEIGHT, static_cast<int32_t>(ph));
+
+	m_total_height = std::max(priority_button_height, picture_height) + 2 * Border;
 
 	max_size_changed();
 
@@ -82,6 +87,9 @@ WaresQueueDisplay::~WaresQueueDisplay()
  */
 void WaresQueueDisplay::max_size_changed()
 {
+	uint32_t pbs = m_show_only ? 0 : PriorityButtonSize;
+	uint32_t ctrl_b_size = m_show_only ? 0 : 2 * WARE_MENU_PIC_WIDTH;
+
 	m_cache_size = m_queue->get_max_size();
 
 	update_priority_buttons();
@@ -91,7 +99,7 @@ void WaresQueueDisplay::max_size_changed()
 		set_desired_size(0, 0);
 	} else {
 		set_desired_size
-			((m_cache_size + 2) * (CellWidth + CellSpacing) + PriorityButtonSize + 2 * Border,
+			(m_cache_size * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border,
 			 m_total_height);
 	}
 }
@@ -121,11 +129,8 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 	uint32_t nr_wares_to_draw = std::min(m_cache_filled, m_cache_size);
 	uint32_t nr_empty_to_draw = m_cache_size - nr_wares_to_draw;
 
-	uint32_t pw, ph;
-	g_gr->get_picture_size(m_max_fill_indicator, pw, ph);
-
 	Point point;
-	point.x = Border + CellWidth + CellSpacing;
+	point.x = Border + (m_show_only ? 0 : CellWidth + CellSpacing);
 	point.y = Border + (m_total_height - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 
 	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing)
@@ -133,10 +138,14 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing)
 		dst.blit(point, m_icon_grey);
 
-	point.y = Border;
-	point.x = Border + CellWidth + CellSpacing +
-		(m_queue->get_max_fill() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
-	dst.blit(point, m_max_fill_indicator);
+	if (not m_show_only) {
+		uint32_t pw, ph;
+		g_gr->get_picture_size(m_max_fill_indicator, pw, ph);
+		point.y = Border;
+		point.x = Border + CellWidth + CellSpacing +
+			(m_queue->get_max_fill() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
+		dst.blit(point, m_max_fill_indicator);
+	}
 }
 
 /**
@@ -145,7 +154,7 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 void WaresQueueDisplay::update_priority_buttons()
 {
 	delete m_priority_radiogroup;
-	if (m_cache_size <= 0)
+	if (m_cache_size <= 0 or m_show_only)
 		return;
 
 	m_priority_radiogroup = new UI::Radiogroup();
@@ -207,7 +216,7 @@ void WaresQueueDisplay::update_priority_buttons()
 void WaresQueueDisplay::update_max_fill_buttons() {
 	delete m_increase_max_fill;
 	delete m_decrease_max_fill;
-	if (m_cache_size <= 0)
+	if (m_cache_size <= 0 or m_show_only)
 		return;
 
 	uint32_t x = Border;

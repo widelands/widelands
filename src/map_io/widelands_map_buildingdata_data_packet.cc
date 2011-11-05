@@ -20,6 +20,7 @@
 #include "widelands_map_buildingdata_data_packet.h"
 
 #include "logic/constructionsite.h"
+#include "logic/dismantlesite.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
@@ -51,7 +52,9 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 // Subversions
-#define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
+#define CURRENT_DISMANTLESITE_PACKET_VERSION    1
+#define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 2
+#define CURRENT_PARTIALLYFB_PACKET_VERSION      1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        5
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
@@ -172,6 +175,12 @@ throw (_wexception)
 							 fr,
 							 ref_cast<Game, Editor_Game_Base>(egbase),
 							 mol);
+					else if (upcast(DismantleSite, dms, &building))
+						read_dismantlesite
+							(*dms,
+							 fr,
+							 ref_cast<Game, Editor_Game_Base>(egbase),
+							 mol);
 					else if (upcast(Warehouse, warehouse, &building))
 						read_warehouse
 							(*warehouse,
@@ -216,6 +225,66 @@ throw (_wexception)
 	}
 }
 
+void Map_Buildingdata_Data_Packet::read_partially_finished_building
+	(Partially_Finished_Building  & pfb,
+	 FileRead              & fr,
+	 Game                  & game,
+	 Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_PARTIALLYFB_PACKET_VERSION) {
+			Tribe_Descr const & tribe = pfb.tribe();
+			pfb.m_building =
+				tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
+
+			delete pfb.m_builder_request;
+			if (fr.Unsigned8()) {
+				pfb.m_builder_request =
+					new Request
+					(pfb,
+					 Ware_Index::First(),
+					 Partially_Finished_Building::request_builder_callback,
+					 Request::WORKER);
+				pfb.m_builder_request->Read(fr, game, mol);
+			} else
+				pfb.m_builder_request = 0;
+
+			if (uint32_t const builder_serial = fr.Unsigned32()) {
+				try {
+					pfb.m_builder = &mol.get<Worker>(builder_serial);
+				} catch (_wexception const & e) {
+					throw game_data_error
+						("builder (%u): %s", builder_serial, e.what());
+				}
+			} else
+				pfb.m_builder = 0;
+
+			try {
+				uint16_t const size = fr.Unsigned16();
+				pfb.m_wares.resize(size);
+				for (uint16_t i = 0; i < pfb.m_wares.size(); ++i)
+				{
+					pfb.m_wares[i] =
+						new WaresQueue
+						(pfb, Ware_Index::Null(), 0);
+					pfb.m_wares[i]->Read(fr, game, mol);
+				}
+			} catch (_wexception const & e) {
+				throw game_data_error(_("wares: %s"), e.what());
+			}
+
+			pfb.m_working        = fr.Unsigned8 ();
+			pfb.m_work_steptime  = fr.Unsigned32();
+			pfb.m_work_completed = fr.Unsigned32();
+			pfb.m_work_steps     = fr.Unsigned32();
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("partially_constructed_buildings: %s"), e.what());
+	}
+}
 
 void Map_Buildingdata_Data_Packet::read_constructionsite
 	(ConstructionSite      & constructionsite,
@@ -225,66 +294,114 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == 1)
+			return read_constructionsite_v1(constructionsite, fr, game, mol);
+
 		if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
+			read_partially_finished_building(constructionsite, fr, game, mol);
+
 			Tribe_Descr const & tribe = constructionsite.tribe();
-			constructionsite.m_building =
-				tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
+
+			container_iterate
+				(ConstructionSite::Wares, constructionsite.m_wares, cur)
+					(*cur)->set_callback
+						(ConstructionSite::wares_queue_callback, &constructionsite);
+
 			if (fr.Unsigned8()) {
 				constructionsite.m_prev_building =
 					tribe.get_building_descr
-						(tribe.safe_building_index(fr.CString()));
+					(tribe.safe_building_index(fr.CString()));
 			} else
 				constructionsite.m_prev_building = 0;
 
-			delete constructionsite.m_builder_request;
-			if (fr.Unsigned8()) {
-				constructionsite.m_builder_request =
-					new Request
-						(constructionsite,
-						 Ware_Index::First(),
-						 ConstructionSite::request_builder_callback,
-						 Request::WORKER);
-				constructionsite.m_builder_request->Read(fr, game, mol);
-			} else
-				constructionsite.m_builder_request = 0;
-
-			if (uint32_t const builder_serial = fr.Unsigned32()) {
-				try {
-					constructionsite.m_builder = &mol.get<Worker>(builder_serial);
-				} catch (_wexception const & e) {
-					throw game_data_error
-						("builder (%u): %s", builder_serial, e.what());
-				}
-			} else
-				constructionsite.m_builder = 0;
-
-			try {
-				uint16_t const size = fr.Unsigned16();
-				constructionsite.m_wares.resize(size);
-				for (uint16_t i = 0; i < constructionsite.m_wares.size(); ++i)
-				{
-					constructionsite.m_wares[i] =
-						new WaresQueue
-							(constructionsite, Ware_Index::Null(), 0);
-					constructionsite.m_wares[i]->set_callback
-						(ConstructionSite::wares_queue_callback, &constructionsite);
-					constructionsite.m_wares[i]->Read(fr, game, mol);
-				}
-			} catch (_wexception const & e) {
-				throw game_data_error(_("wares: %s"), e.what());
-			}
-
 			constructionsite.m_fetchfromflag  = fr.  Signed32();
-
-			constructionsite.m_working        = fr.Unsigned8 ();
-			constructionsite.m_work_steptime  = fr.Unsigned32();
-			constructionsite.m_work_completed = fr.Unsigned32();
-			constructionsite.m_work_steps     = fr.Unsigned32();
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
 		throw game_data_error(_("constructionsite: %s"), e.what());
+	}
+}
+
+void Map_Buildingdata_Data_Packet::read_constructionsite_v1
+	(ConstructionSite      & constructionsite,
+	 FileRead              & fr,
+	 Game                  & game,
+	 Map_Map_Object_Loader & mol)
+{
+	Tribe_Descr const & tribe = constructionsite.tribe();
+	constructionsite.m_building =
+		tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
+	if (fr.Unsigned8()) {
+		constructionsite.m_prev_building =
+			tribe.get_building_descr
+			(tribe.safe_building_index(fr.CString()));
+	} else
+		constructionsite.m_prev_building = 0;
+
+	delete constructionsite.m_builder_request;
+	if (fr.Unsigned8()) {
+		constructionsite.m_builder_request =
+			new Request
+			(constructionsite,
+			 Ware_Index::First(),
+			 ConstructionSite::request_builder_callback,
+			 Request::WORKER);
+		constructionsite.m_builder_request->Read(fr, game, mol);
+	} else
+		constructionsite.m_builder_request = 0;
+
+	if (uint32_t const builder_serial = fr.Unsigned32()) {
+		try {
+			constructionsite.m_builder = &mol.get<Worker>(builder_serial);
+		} catch (_wexception const & e) {
+			throw game_data_error
+				("builder (%u): %s", builder_serial, e.what());
+		}
+	} else
+		constructionsite.m_builder = 0;
+
+	try {
+		uint16_t const size = fr.Unsigned16();
+		constructionsite.m_wares.resize(size);
+		for (uint16_t i = 0; i < constructionsite.m_wares.size(); ++i)
+		{
+			constructionsite.m_wares[i] =
+				new WaresQueue
+				(constructionsite, Ware_Index::Null(), 0);
+			constructionsite.m_wares[i]->set_callback
+				(ConstructionSite::wares_queue_callback, &constructionsite);
+			constructionsite.m_wares[i]->Read(fr, game, mol);
+		}
+	} catch (_wexception const & e) {
+		throw game_data_error(_("wares: %s"), e.what());
+	}
+
+	constructionsite.m_fetchfromflag  = fr.  Signed32();
+
+	constructionsite.m_working        = fr.Unsigned8 ();
+	constructionsite.m_work_steptime  = fr.Unsigned32();
+	constructionsite.m_work_completed = fr.Unsigned32();
+	constructionsite.m_work_steps     = fr.Unsigned32();
+}
+
+void Map_Buildingdata_Data_Packet::read_dismantlesite
+	(DismantleSite         & dms,
+	 FileRead              & fr,
+	 Game                  & game,
+	 Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == CURRENT_DISMANTLESITE_PACKET_VERSION) {
+			read_partially_finished_building(dms, fr, game, mol);
+
+			// Nothing to do
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("dismantlesite: %s"), e.what());
 	}
 }
 
@@ -1040,6 +1157,12 @@ throw (_wexception)
 					 fw,
 					 ref_cast<Game, Editor_Game_Base>(egbase),
 					 mos);
+			else if (upcast(DismantleSite const, dms, building))
+				write_dismantlesite
+					(*dms,
+					 fw,
+					 ref_cast<Game, Editor_Game_Base>(egbase),
+					 mos);
 			else if (upcast(Warehouse const, warehouse, building))
 				write_warehouse
 					(*warehouse,
@@ -1077,6 +1200,41 @@ throw (_wexception)
 	fw.Write(fs, "binary/building_data");
 }
 
+void Map_Buildingdata_Data_Packet::write_partially_finished_building
+	(Partially_Finished_Building const & pfb,
+	 FileWrite              & fw,
+	 Game                   & game,
+	 Map_Map_Object_Saver   & mos)
+{
+	fw.Unsigned16(CURRENT_PARTIALLYFB_PACKET_VERSION);
+
+	//  descriptions
+	fw.String(pfb.m_building->name());
+
+	// builder request
+	if (pfb.m_builder_request) {
+		fw.Unsigned8(1);
+		pfb.m_builder_request->Write(fw, game, mos);
+	} else
+		fw.Unsigned8(0);
+
+	// builder
+	if (Worker const * builder = pfb.m_builder.get(game)) {
+		assert(mos.is_object_known(*builder));
+		fw.Unsigned32(mos.get_object_file_index(*builder));
+	} else
+		fw.Unsigned32(0);
+
+	const uint16_t wares_size = pfb.m_wares.size();
+	fw.Unsigned16(wares_size);
+	for (uint16_t i = 0; i < wares_size; ++i)
+		pfb.m_wares[i]->Write(fw, game, mos);
+
+	fw.Unsigned8 (pfb.m_working);
+	fw.Unsigned32(pfb.m_work_steptime);
+	fw.Unsigned32(pfb.m_work_completed);
+	fw.Unsigned32(pfb.m_work_steps);
+}
 
 void Map_Buildingdata_Data_Packet::write_constructionsite
 	(ConstructionSite const & constructionsite,
@@ -1087,43 +1245,29 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 
 	fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
 
-	//  descriptions
-	fw.String(constructionsite.m_building->name());
-	//  FIXME Just write the string without the 1 first:
-	//  FIXME   fw.CString(constructionsite.m_prev_building ?
-	//  constructionsite.m_prev_building->name().c_str() : "");
-	//  FIXME When reading, the empty string should mean no prev_building.
+	write_partially_finished_building(constructionsite, fw, game, mos);
+
 	if (constructionsite.m_prev_building) {
 		fw.Unsigned8(1);
 		fw.String(constructionsite.m_prev_building->name());
 	} else
 		fw.Unsigned8(0);
 
-	// builder request
-	if (constructionsite.m_builder_request) {
-		fw.Unsigned8(1);
-		constructionsite.m_builder_request->Write(fw, game, mos);
-	} else
-		fw.Unsigned8(0);
+	fw.Signed32(constructionsite.m_fetchfromflag);
+}
 
-	// builder
-	if (Worker const * builder = constructionsite.m_builder.get(game)) {
-		assert(mos.is_object_known(*builder));
-		fw.Unsigned32(mos.get_object_file_index(*builder));
-	} else
-		fw.Unsigned32(0);
+void Map_Buildingdata_Data_Packet::write_dismantlesite
+	(DismantleSite const & dms,
+	 FileWrite              & fw,
+	 Game                   & game,
+	 Map_Map_Object_Saver   & mos)
+{
 
-	const uint16_t wares_size = constructionsite.m_wares.size();
-	fw.Unsigned16(wares_size);
-	for (uint16_t i = 0; i < wares_size; ++i)
-		constructionsite.m_wares[i]->Write(fw, game, mos);
+	fw.Unsigned16(CURRENT_DISMANTLESITE_PACKET_VERSION);
 
-	fw.  Signed32(constructionsite.m_fetchfromflag);
+	write_partially_finished_building(dms, fw, game, mos);
 
-	fw.Unsigned8 (constructionsite.m_working);
-	fw.Unsigned32(constructionsite.m_work_steptime);
-	fw.Unsigned32(constructionsite.m_work_completed);
-	fw.Unsigned32(constructionsite.m_work_steps);
+	// Nothing to Do
 }
 
 

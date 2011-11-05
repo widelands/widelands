@@ -17,8 +17,6 @@
  *
  */
 
-#include "buildingwindow.h"
-
 #include "bulldozeconfirm.h"
 #include "game_debug_ui.h"
 #include "graphic/rendertarget.h"
@@ -30,8 +28,12 @@
 #include "logic/tribe.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
+#include "waresqueuedisplay.h"
+
+#include "buildingwindow.h"
 
 static char const * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
+static char const * pic_dismantle          = "pics/menu_bld_dismantle.png";
 static char const * pic_debug              = "pics/menu_debug.png";
 
 
@@ -208,6 +210,18 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					 _("Destroy")),
 				 UI::Box::AlignCenter);
 		}
+
+		if (m_capscache & (1 << Widelands::Building::PCap_Dismantle)) {
+			capsbuttons->add
+				(new UI::Callback_Button
+					(capsbuttons, "dismantle",
+					 0, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture(PicMod_Game, pic_dismantle),
+					 boost::bind(&Building_Window::act_dismantle, boost::ref(*this)),
+					 _("Dismantle")),
+				 UI::Box::AlignCenter);
+		}
 	}
 
 	if (can_see) {
@@ -256,6 +270,17 @@ Callback for bulldozing request
 void Building_Window::act_bulldoze()
 {
 	show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+}
+
+/*
+===============
+Callback for dismantling request
+===============
+*/
+void Building_Window::act_dismantle()
+{
+	if (m_building.get_playercaps() & (1 << Widelands::Building::PCap_Dismantle))
+		igbase().game().send_player_dismantle(m_building);
 }
 
 void Building_Window::act_start_stop() {
@@ -376,6 +401,15 @@ void Building_Window::toggle_workarea() {
 	}
 }
 
+void Building_Window::create_ware_queue_panel
+	(UI::Box               * const box,
+	 Widelands::Building   &       b,
+	 Widelands::WaresQueue * const wq,
+	 bool show_only)
+{
+	// The *max* width should be larger than the default width
+	box->add(new WaresQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Box::AlignLeft);
+}
 
 /**
  * Center the player's view on the building. Callback function

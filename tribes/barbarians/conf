@@ -145,6 +145,9 @@ cattlebreeder=_Cattle Breeder
 [constructionsite types]
 constructionsite=_Construction Site
 
+[dismantlesite types]
+dismantlesite=_Dismantle Site
+
 [global militarysite types]
 castle.atlanteans=_Castle
 guardhall.atlanteans=_Guardhall

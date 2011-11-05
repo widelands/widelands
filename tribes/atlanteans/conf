@@ -141,6 +141,8 @@ ship=_Ship
 [constructionsite types]
 constructionsite=_Construction Site
 
+[dismantlesite types]
+dismantlesite=_Dismantle Site
 
 [global militarysite types]
 barrier.barbarians=_Barrier
