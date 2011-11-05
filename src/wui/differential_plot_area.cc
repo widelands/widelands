@@ -18,6 +18,9 @@
  */
 
 #include "differential_plot_area.h"
+#include "graphic/rendertarget.h"
+
+#define ZERO_LINE_COLOR RGBColor(255, 255, 255)
 
 DifferentialPlot_Area::DifferentialPlot_Area
 		(UI::Panel * const parent,
@@ -29,8 +32,17 @@ WUIPlot_Area (parent, x, y, w, h)
 void DifferentialPlot_Area::draw(RenderTarget & dst) {
 	float const xline_length = get_inner_w() - space_at_right  - spacing;
 	float const yline_length = get_inner_h() - space_at_bottom - spacing;
+	//yoffset of the zero line
+	float const yoffset = spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2;
 
 	draw_diagram(dst, xline_length, yline_length);
+	//draw zero line
+	dst.draw_line
+		(get_inner_w() - space_at_right,
+		 yoffset,
+		 get_inner_w() - space_at_right - xline_length,
+		 yoffset,
+		 ZERO_LINE_COLOR);
 
 	//find max and min value
 	int32_t max = 0;
