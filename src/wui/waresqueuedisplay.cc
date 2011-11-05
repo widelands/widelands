@@ -27,8 +27,6 @@
 #include "interactive_gamebase.h"
 #include "logic/player.h"
 
-static char const * pic_queue_background = "pics/queue_background.png";
-
 static char const * pic_priority_low     = "pics/low_priority_button.png";
 static char const * pic_priority_normal  = "pics/normal_priority_button.png";
 static char const * pic_priority_high    = "pics/high_priority_button.png";
@@ -36,7 +34,7 @@ static char const * pic_max_fill_indicator = "pics/max_fill_indicator.png";
 
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
-	 int32_t const x, int32_t const y, uint32_t const maxw,
+	 int32_t const x, int32_t const y,
 	 Interactive_GameBase  & igb,
 	 Widelands::Building   & building,
 	 Widelands::WaresQueue * const queue)
@@ -50,12 +48,9 @@ m_increase_max_fill(0),
 m_decrease_max_fill(0),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::Request::WARE),
-m_max_width(maxw - PriorityButtonSize),
-m_pic_background(g_gr->get_picture(PicMod_Game, pic_queue_background)),
 m_max_fill_indicator(g_gr->get_picture(PicMod_Game, pic_max_fill_indicator)),
 m_cache_size(queue->get_max_size()),
 m_cache_filled(queue->get_filled()),
-m_display_size(0),
 m_total_height(0)
 {
 	const Widelands::Item_Ware_Descr & ware =
@@ -63,7 +58,7 @@ m_total_height(0)
 	set_tooltip(ware.descname().c_str());
 
 	m_icon = ware.icon();
-	m_pic_background = g_gr->create_grayed_out_pic(m_icon);
+	m_icon_grey = g_gr->create_grayed_out_pic(m_icon);
 
 	uint32_t pw, ph;
 	g_gr->get_picture_size(m_max_fill_indicator, pw, ph);
@@ -87,23 +82,16 @@ WaresQueueDisplay::~WaresQueueDisplay()
  */
 void WaresQueueDisplay::max_size_changed()
 {
-	m_display_size =
-		(m_max_width - 2 * Border - PriorityButtonSize - 2 * WARE_MENU_PIC_WIDTH - 2 * CellSpacing)
-								/ (CellWidth + CellSpacing);
-
 	m_cache_size = m_queue->get_max_size();
-
-	if (m_cache_size < m_display_size)
-		m_display_size = m_cache_size;
 
 	update_priority_buttons();
 	update_max_fill_buttons();
 
-	if (m_display_size <= 0) {
+	if (m_cache_size <= 0) {
 		set_desired_size(0, 0);
 	} else {
 		set_desired_size
-			((m_display_size + 2) * (CellWidth + CellSpacing) + PriorityButtonSize + 2 * Border,
+			((m_cache_size + 2) * (CellWidth + CellSpacing) + PriorityButtonSize + 2 * Border,
 			 m_total_height);
 	}
 }
@@ -125,13 +113,13 @@ void WaresQueueDisplay::think()
  */
 void WaresQueueDisplay::draw(RenderTarget & dst)
 {
-	if (!m_display_size)
+	if (!m_cache_size)
 		return;
 
 	m_cache_filled = m_queue->get_filled();
 
-	uint32_t nr_wares_to_draw = std::min(m_cache_filled, m_display_size);
-	uint32_t nr_empty_to_draw = m_display_size - nr_wares_to_draw;
+	uint32_t nr_wares_to_draw = std::min(m_cache_filled, m_cache_size);
+	uint32_t nr_empty_to_draw = m_cache_size - nr_wares_to_draw;
 
 	uint32_t pw, ph;
 	g_gr->get_picture_size(m_max_fill_indicator, pw, ph);
@@ -143,7 +131,7 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing)
 		dst.blit(point, m_icon);
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing)
-		dst.blit(point, m_pic_background);
+		dst.blit(point, m_icon_grey);
 
 	point.y = Border;
 	point.x = Border + CellWidth + CellSpacing +
@@ -157,13 +145,13 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 void WaresQueueDisplay::update_priority_buttons()
 {
 	delete m_priority_radiogroup;
-	if (m_display_size <= 0)
+	if (m_cache_size <= 0)
 		return;
 
 	m_priority_radiogroup = new UI::Radiogroup();
 
-	Point pos = Point(m_display_size * CellWidth + Border, 0);
-	pos.x = (m_display_size + 2) * (CellWidth + CellSpacing) + Border;
+	Point pos = Point(m_cache_size * CellWidth + Border, 0);
+	pos.x = (m_cache_size + 2) * (CellWidth + CellSpacing) + Border;
 	pos.y = Border + (m_total_height - 2 * Border - 3 * PriorityButtonSize) / 2;
 
 	m_priority_radiogroup->add_button
@@ -219,7 +207,7 @@ void WaresQueueDisplay::update_priority_buttons()
 void WaresQueueDisplay::update_max_fill_buttons() {
 	delete m_increase_max_fill;
 	delete m_decrease_max_fill;
-	if (m_display_size <= 0)
+	if (m_cache_size <= 0)
 		return;
 
 	uint32_t x = Border;
@@ -233,7 +221,7 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 		 boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)),
 		 _("Decrease the number of wares you want to be stored here."));
 
-	x = Border + (m_display_size + 1) * (CellWidth + CellSpacing);
+	x = Border + (m_cache_size + 1) * (CellWidth + CellSpacing);
 	m_increase_max_fill = new UI::Callback_Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,

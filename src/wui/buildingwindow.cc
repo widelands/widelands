@@ -30,7 +30,6 @@
 #include "logic/tribe.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
-#include "waresqueuedisplay.h"
 
 static char const * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static char const * pic_debug              = "pics/menu_debug.png";
@@ -369,7 +368,6 @@ void Building_Window::configure_workarea_button()
 }
 
 
-
 void Building_Window::toggle_workarea() {
 	if (m_workarea_job_id) {
 		hide_workarea();
@@ -378,14 +376,6 @@ void Building_Window::toggle_workarea() {
 	}
 }
 
-void Building_Window::create_ware_queue_panel
-	(UI::Box               * const box,
-	 Widelands::Building   &       b,
-	 Widelands::WaresQueue * const wq)
-{
-	// The *max* width should be larger than the default width
-	box->add(new WaresQueueDisplay(box, 0, 0, 3 * Width, igbase(), b, wq), UI::Box::AlignLeft);
-}
 
 /**
  * Center the player's view on the building. Callback function

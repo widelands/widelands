@@ -19,6 +19,8 @@
 
 #include "productionsitewindow.h"
 
+#include "waresqueuedisplay.h"
+
 #include "economy/request.h"
 #include "logic/constructionsite.h"
 #include "logic/militarysite.h"
@@ -55,7 +57,9 @@ ProductionSite_Window::ProductionSite_Window
 			g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
 		for (uint32_t i = 0; i < warequeues.size(); ++i)
-			create_ware_queue_panel(prod_box, ps, warequeues[i]);
+			prod_box->add
+				(new WaresQueueDisplay(prod_box, 0, 0, igbase(), ps, warequeues[i]),
+				 UI::Box::AlignLeft);
 
 		get_tabs()->add
 			("wares", g_gr->get_picture(PicMod_Game, pic_tab_wares),
@@ -66,7 +70,7 @@ ProductionSite_Window::ProductionSite_Window
 	if (!productionsite().descr().nr_working_positions()) {
 		m_worker_table = 0;
 	} else {
-		m_worker_table = new UI::Table<uintptr_t>(get_tabs(), 0, 0, 340, 100);
+		m_worker_table = new UI::Table<uintptr_t>(get_tabs(), 0, 0, 0, 100);
 
 		m_worker_table->add_column(150, _("Worker"));
 		m_worker_table->add_column(40, _("Exp"));
