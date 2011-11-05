@@ -209,7 +209,9 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					 boost::bind(&Building_Window::act_bulldoze, boost::ref(*this)),
 					 _("Destroy")),
 				 UI::Box::AlignCenter);
+		}
 
+		if (m_capscache & (1 << Widelands::Building::PCap_Dismantle)) {
 			capsbuttons->add
 				(new UI::Callback_Button
 					(capsbuttons, "dismantle",
@@ -276,7 +278,7 @@ Callback for dismantling request
 */
 void Building_Window::act_dismantle()
 {
-	if (m_building.get_playercaps() & (1 << Widelands::Building::PCap_Bulldoze))
+	if (m_building.get_playercaps() & (1 << Widelands::Building::PCap_Dismantle))
 		igbase().game().send_player_dismantle(m_building);
 }
 
