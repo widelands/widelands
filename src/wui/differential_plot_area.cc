@@ -94,10 +94,8 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 
 	sprintf(buffer, "-%u", highest_scale);
 	draw_value
-		(dst, buffer, RGBColor(60, 125, 0),
-		 Point(get_inner_w() - space_at_right - 2, spacing + 2));
-
-	//print plot
+		(dst, buffer, RGBColor(125, 0, 0),
+		 Point(get_inner_w() - space_at_right - 2, get_inner_h() - spacing - 15));
 }
 
 /**

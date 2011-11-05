@@ -274,7 +274,7 @@ void WUIPlot_Area::draw_diagram
 }
 
 /**
- * print the value into the RenderTarget.
+ * print the string into the RenderTarget.
  */
 void WUIPlot_Area::draw_value
 	(RenderTarget & dst, const char * value, RGBColor color, Point pos)
