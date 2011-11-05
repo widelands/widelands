@@ -67,9 +67,9 @@ struct WUIPlot_Area : public UI::Panel {
 	}
 
 	void set_time_int(int32_t time) {
-		if (time == m_game_label) 
+		if (time == m_game_label)
 			set_time(TIME_GAME);
-		else 
+		else
 			set_time(static_cast<TIME>(time));
 	};
 	TIME get_time() {return static_cast<TIME>(m_time); };
@@ -99,7 +99,7 @@ private:
 	int32_t                 m_time;  // How much do you want to list
 	int32_t                 m_sample_rate;
 	int32_t                 m_plotmode;
-	int32_t			m_game_label; // what label is used for TIME_GAME
+	int32_t                 m_game_label; // what label is used for TIME_GAME
 };
 
 /**
