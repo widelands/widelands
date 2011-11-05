@@ -88,6 +88,9 @@ void Table<void *>::add_column
 	container_iterate_const(Columns, m_columns, i)
 		complete_width += i.current->width;
 
+	m_total_width += width;
+	set_desired_size(m_total_width, get_h());
+
 	{
 		Column c;
 		c.btn = 0;

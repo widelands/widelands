@@ -57,7 +57,6 @@ public:
 	WaresQueueDisplay
 		(UI::Panel             * parent,
 		 int32_t x, int32_t y,
-		 uint32_t                maxw,
 		 Interactive_GameBase  & igb,
 		 Widelands::Building   & building,
 		 Widelands::WaresQueue * queue);
@@ -75,15 +74,13 @@ private:
 	UI::Callback_Button   * m_decrease_max_fill;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
-	uint32_t         m_max_width;
 	PictureID        m_icon;            //< Index to ware's picture
-	PictureID        m_pic_background;
+	PictureID        m_icon_grey;
 	PictureID        m_max_fill_indicator;
 
 
 	uint32_t         m_cache_size;
 	uint32_t         m_cache_filled;
-	uint32_t         m_display_size;
 	uint32_t         m_total_height;
 
 	virtual void max_size_changed();

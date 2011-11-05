@@ -65,9 +65,6 @@ protected:
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();
 
-	void create_ware_queue_panel
-		(UI::Box *, Widelands::Building &, Widelands::WaresQueue *);
-
 	virtual void create_capsbuttons(UI::Box * buttons);
 
 	UI::Window * & m_registry;
