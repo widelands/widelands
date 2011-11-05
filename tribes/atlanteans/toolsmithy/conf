@@ -1,5 +1,5 @@
 size=medium
-output=bakingtray
+output=breadpaddle
 output=bucket
 output=fire_tongs
 output=fishing_net
@@ -30,7 +30,7 @@ trunk=6
 spidercloth=4
 
 [programs]
-produce_bakingtray=_Produce bakingtray
+produce_breadpaddle=_Produce bread paddle
 produce_bucket=_Produce bucket
 produce_fire_tongs=_Produce fire tongs
 produce_fishing_net=_Produce fishing net
@@ -44,12 +44,12 @@ produce_scythe=_Produce scythe
 produce_shovel=_Produce shovel
 work=_Work
 
-[produce_bakingtray]
-return=skipped unless economy needs bakingtray
+[produce_breadpaddle]
+return=skipped unless economy needs breadpaddle
 consume=iron trunk
 sleep=32000
 animate=working 35000
-produce=bakingtray
+produce=breadpaddle
 
 [produce_bucket]
 return=skipped unless economy needs bucket
@@ -129,7 +129,7 @@ animate=working 35000
 produce=shovel
 
 [work]
-call=produce_bakingtray
+call=produce_breadpaddle
 call=produce_bucket
 call=produce_fire_tongs
 call=produce_fishing_net
