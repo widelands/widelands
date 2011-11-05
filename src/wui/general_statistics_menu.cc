@@ -129,28 +129,30 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	iterate_players_existing_const(p, nr_players, game, player) ++plr_in_game;
 
 	pos.x = spacing;
-	int32_t button_size =
-		(get_inner_w() - (spacing * (plr_in_game + 1))) / plr_in_game;
 	iterate_players_existing_const(p, nr_players, game, player) {
 		char buffer[36];
 		snprintf(buffer, sizeof(buffer), "pics/genstats_enable_plr_%02u.png", p);
-		UI::Checkbox & cb =
-			*new UI::Checkbox
-				(this, pos, g_gr->get_picture(PicMod_Game, buffer));
-		cb.set_size(button_size, 25);
-		cb.set_id(p);
-		cb.set_state(1);
-		cb.set_tooltip(player->get_name().c_str());
-		cb.changedtoid.set(this, &General_Statistics_Menu::cb_changed_to);
+		UI::Callback_Button & cb =
+			*new UI::Callback_Button
+				(this, "playerbutton",
+				 pos.x, pos.y, 25, 25,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 g_gr->get_picture(PicMod_Game, buffer),
+				 boost::bind
+				 	(&General_Statistics_Menu::cb_changed_to,
+					 boost::ref(*this),
+					p),
+				 player->get_name().c_str());
+		cb.set_perm_pressed(true);
 		m_cbs[p - 1] = &cb;
-		pos.x += button_size + spacing;
+		pos.x += 25 + spacing;
 	} else //  player nr p does not exist
 		m_cbs[p - 1] = 0;
 
 	pos.x  = spacing;
 	pos.y += 25 + spacing + spacing;
 
-	button_size =
+	int32_t button_size =
 		(get_inner_w() - spacing * (m_ndatasets + 1))
 		/
 		m_ndatasets;
@@ -257,11 +259,14 @@ void General_Statistics_Menu::clicked_help() {}
 /*
  * Cb has been changed to this state
  */
-void General_Statistics_Menu::cb_changed_to(int32_t const id, bool const what)
+void General_Statistics_Menu::cb_changed_to(int32_t const id)
 {
 	// This represents our player number
+	m_cbs[id - 1]->set_perm_pressed(not m_cbs[id - 1]->get_perm_pressed());	
+	
 	m_plot.show_plot
-		((id - 1) * m_ndatasets + m_selected_information, what);
+		((id - 1) * m_ndatasets + m_selected_information,
+		 m_cbs[id - 1]->get_perm_pressed());
 }
 
 /*
@@ -274,7 +279,7 @@ void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {
 			m_plot.show_plot
-				(i * m_ndatasets + id, m_cbs[i]->get_state());
+				(i * m_ndatasets + id, m_cbs[i]->get_perm_pressed());
 			m_plot.show_plot
 				(i * m_ndatasets + m_selected_information, false);
 		}
