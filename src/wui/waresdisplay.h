@@ -53,7 +53,8 @@ struct AbstractWaresDisplay : public UI::Panel {
 		 Widelands::Tribe_Descr const &,
 		 wdType type,
 		 bool selectable,
-		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = NULL);
+		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = NULL,
+		 bool horizontal = true);
 
 	bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
@@ -107,6 +108,7 @@ private:
 	selection_type      m_selected;
 	selection_type      m_hidden;
 	bool                m_selectable;
+	bool                m_horizontal;
 	boost::function<void(Widelands::Ware_Index, bool)> m_callback_function;
 };
 
