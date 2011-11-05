@@ -65,7 +65,6 @@ private:
 
 	//virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 
-// SirVer: TODO: are those needed
 protected:
 	const Building_Descr * m_building; // type of building that was or will become
 

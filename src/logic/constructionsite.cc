@@ -93,8 +93,11 @@ std::string ConstructionSite::get_statistics_string()
 	return buffer;
 }
 
-
-// SirVer TODO: who uses this function
+/*
+=======
+Access to the wares queues by id
+=======
+*/
 WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
 	container_iterate_const(Wares, m_wares, i)
 		if ((*i.current)->get_ware() == wi)
@@ -140,7 +143,6 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	Partially_Finished_Building::init(egbase);
 
 	//  TODO figure out whether planing is necessary
-	// SirVer TODO: the next paragraph could go into a own function
 
 	//  initialize the wares queues
 	std::map<Ware_Index, uint8_t> const & buildcost = m_building->buildcost();

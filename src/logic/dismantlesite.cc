@@ -53,7 +53,6 @@ Building & DismantleSite_Descr::create_object() const {
 	return *new DismantleSite(*this);
 }
 
-
 /*
 ==============================
 
@@ -66,6 +65,24 @@ IMPLEMENTATION
 DismantleSite::DismantleSite(const DismantleSite_Descr & descr) :
 Partially_Finished_Building(descr)
 {}
+
+DismantleSite::DismantleSite
+	(const DismantleSite_Descr & descr, Editor_Game_Base & egbase, Coords const c,
+	 Player & plr, const Building_Descr & bdscr, bool loading)
+:
+Partially_Finished_Building(descr)
+{
+	set_building(bdscr);
+
+	m_position = c;
+	set_owner(&plr);
+
+	if (loading) {
+		Building::init(egbase);
+	} else {
+		init(egbase);
+	}
+}
 
 /*
 ===============

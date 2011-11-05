@@ -593,7 +593,6 @@ void Player::start_stop_building(PlayerImmovable & imm) {
 			productionsite->set_stopped(!productionsite->is_stopped());
 }
 
-
 /*
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing
@@ -601,10 +600,23 @@ void Player::start_stop_building(PlayerImmovable & imm) {
 void Player::enhance_building
 	(Building * building, Building_Index const index_of_new_building)
 {
+	_enhance_or_dismantle(building, index_of_new_building);
+}
+
+/*
+ * rip this building down, but slowly: a builder will take it gradually
+ * apart.
+ */
+void Player::dismantle_building(Building * building) {
+	_enhance_or_dismantle(building);
+}
+void Player::_enhance_or_dismantle
+	(Building * building, Building_Index const index_of_new_building)
+{
 	if
 		(&building->owner() == this
 		 and
-		 building->descr().enhancements().count(index_of_new_building))
+		 (!index_of_new_building or building->descr().enhancements().count(index_of_new_building)))
 	{
 		Building_Index const index_of_old_building =
 			tribe().building_index(building->name().c_str());
@@ -618,9 +630,14 @@ void Player::enhance_building
 		building->remove(egbase()); //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
-		building =
-			&egbase().warp_constructionsite
-				(position, m_plnum, index_of_new_building, index_of_old_building);
+		if (index_of_new_building)
+			building =
+				&egbase().warp_constructionsite
+					(position, m_plnum, index_of_new_building, index_of_old_building);
+		else
+			building =
+				&egbase().warp_dismantlesite
+					(position, m_plnum, index_of_old_building);
 		//  Hereafter building points to the new building.
 
 		// Reassign the workers and soldiers.
@@ -633,39 +650,6 @@ void Player::enhance_building
 	}
 }
 
-/*
- * rip this building down, but slowly: a builder will take it gradually
- * apart.
- */
-// SirVer TODO a lot of code duplication
-void Player::dismantle_building(Building * building) {
-	if (&building->owner() == this) {
-		Building_Index const index_of_old_building =
-			tribe().building_index(building->name().c_str());
-		const Coords position = building->get_position();
-
-		//  Get workers and soldiers
-		//  Make copies of the vectors, because the originals are destroyed with
-		//  the building.
-		const std::vector<Worker  *> workers  = building->get_workers();
-
-		building->remove(egbase()); //  no fire or stuff
-		//  Hereafter the old building does not exist and building is a dangling
-		//  pointer.
-		building =
-			&egbase().warp_dismantlesite
-				(position, m_plnum, index_of_old_building);
-		//  Hereafter building points to the new building.
-
-		// Reassign the workers and soldiers.
-		// Note that this will make sure they stay within the economy;
-		// However, they are no longer associated with the building as
-		// workers of that buiding, which is why they will leave for a
-		// warehouse.
-		// container_iterate_const(std::vector<Worker *>, workers, i)
-			// (*i.current)->set_location(building);
-	}
-}
 
 /*
 ===============
@@ -882,7 +866,6 @@ void Player::enemyflagaction
 }
 
 
-// TODO: SirVer. This must be somewhat enhanced for dismantlesites
 void Player::rediscover_node
 	(Map              const &       map,
 	 Widelands::Field const &       first_map_field,

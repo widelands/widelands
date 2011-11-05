@@ -276,7 +276,8 @@ Callback for dismantling request
 */
 void Building_Window::act_dismantle()
 {
-	show_dismantle_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+	if (m_building.get_playercaps() & (1 << Widelands::Building::PCap_Bulldoze))
+		igbase().game().send_player_dismantle(m_building);
 }
 
 void Building_Window::act_start_stop() {

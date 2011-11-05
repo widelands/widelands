@@ -547,6 +547,8 @@ private:
 	void update_building_statistics(Building &, losegain_t);
 	void update_team_players();
 	void play_message_sound(const std::string & sender);
+	void _enhance_or_dismantle
+		(Building *, Building_Index const index_of_new_building = Building_Index::Null());
 
 private:
 	MessageQueue           m_messages;

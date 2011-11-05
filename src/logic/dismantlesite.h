@@ -40,6 +40,8 @@ Every tribe has exactly one DismantleSite_Descr.
 The DismantleSite_Descr's idling animation is remaining graphic that is shown under
 the destructed building.
 */
+class DismantleSite;
+
 struct DismantleSite_Descr : public Building_Descr {
 	DismantleSite_Descr
 		(char const * name, char const * descname,
@@ -59,6 +61,9 @@ class DismantleSite : public Partially_Finished_Building {
 
 public:
 	DismantleSite(const DismantleSite_Descr & descr);
+	DismantleSite
+		(const DismantleSite_Descr & descr, Editor_Game_Base &,
+		 Coords const, Player &, const Building_Descr &, bool);
 
 	char const * type_name() const throw () {return "dismantlesite";}
 	virtual std::string get_statistics_string();
@@ -75,10 +80,6 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry);
 
 	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
-
-private:
-	// SirVer TODO: this is in some form needed
-	//SirVer Player::Constructionsite_Information * m_info; // player point of view for the gameview
 };
 
 }
