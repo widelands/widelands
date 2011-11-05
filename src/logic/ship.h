@@ -23,9 +23,11 @@
 #include "bob.h"
 #include "graphic/diranimations.h"
 
+class Editor;
 namespace Widelands {
 
 struct Economy;
+struct Fleet;
 
 struct Ship_Descr : Bob::Descr {
 	Ship_Descr
@@ -50,13 +52,22 @@ struct Ship : Bob {
 
 	Ship(const Ship_Descr & descr);
 
+	Fleet * get_fleet() const {return m_fleet;}
+
 	virtual Type get_bob_type() const throw ();
 
 	void init_auto_task(Game &);
 
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
+
 	void start_task_shipidle(Game &);
 
+	virtual void log_general_info(Editor_Game_Base const &);
+
 private:
+	friend struct Fleet;
+
 	void wakeup_neighbours(Game &);
 
 	static const Task taskShipIdle;
@@ -64,12 +75,19 @@ private:
 	void shipidle_update(Game &, State &);
 	void shipidle_wakeup(Game &);
 
+	void init_fleet(Editor_Game_Base &);
+	void set_fleet(Fleet * fleet);
+
+	Fleet * m_fleet;
+
 	// saving and loading
 protected:
 	struct Loader : Bob::Loader {
 		Loader();
 
 		virtual const Task * get_task(const std::string & name);
+
+		virtual void load_finish();
 	};
 
 public:

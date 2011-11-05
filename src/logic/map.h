@@ -150,6 +150,7 @@ struct Map :
 	friend class Editor;
 	friend class Main_Menu_New_Map;
 	friend struct MapGenerator;
+	friend struct MapAStarBase;
 
 	enum { // flags for findpath()
 

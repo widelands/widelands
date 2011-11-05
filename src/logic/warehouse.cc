@@ -26,10 +26,12 @@
 
 #include "economy/economy.h"
 #include "economy/flag.h"
+#include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/warehousesupply.h"
 #include "editor_game_base.h"
+#include "findnode.h"
 #include "game.h"
 #include "log.h"
 #include "player.h"
@@ -275,7 +277,8 @@ IMPLEMENTATION
 
 Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
 	Building(warehouse_descr),
-	m_supply(new WarehouseSupply(this))
+	m_supply(new WarehouseSupply(this)),
+	m_portdock(0)
 {
 	uint8_t nr_worker_types_without_cost =
 		warehouse_descr.tribe().worker_types_without_cost().size();
@@ -473,13 +476,87 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
+	if (descr().get_isport())
+		init_portdock(egbase);
 }
 
+/**
+ * Find a contiguous set of water fields close to the port for docking
+ * and initialize the @ref PortDock instance.
+ */
+void Warehouse::init_portdock(Editor_Game_Base & egbase)
+{
+	molog("Setting up port dock fields\n");
 
+	Map & map = egbase.map();
+	std::vector<Coords> shore;
+	map.find_fields
+		(Area<FCoords>(map.get_fcoords(get_position()), 2),
+		 &shore, FindNodeShore());
+
+	if (shore.empty()) {
+		molog("Port is not next to shore\n");
+		return;
+	}
+
+	std::vector<Coords> water;
+	container_iterate_const(std::vector<Coords>, shore, shoreit) {
+		FCoords cur = map.get_fcoords(*shoreit.current);
+		for (int dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			FCoords neighb = map.get_neighbour(cur, dir);
+			if ((neighb.field->nodecaps() & (MOVECAPS_WALK|MOVECAPS_SWIM)) != MOVECAPS_SWIM)
+				continue;
+
+			if (std::find(water.begin(), water.end(), neighb) == water.end())
+				water.push_back(neighb);
+		}
+	}
+	if (water.empty()) {
+		log("Logic inconsistency: Found shore node without neighboring water.\n");
+		return;
+	}
+
+	std::vector<FCoords> dock;
+	std::vector<Coords>::size_type nrscanned = 0;
+	dock.push_back(map.get_fcoords(water[0]));
+
+	while (nrscanned < dock.size()) {
+		for (int dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			FCoords neighb = map.get_neighbour(dock[nrscanned], dir);
+
+			if (std::find(dock.begin(), dock.end(), neighb) != dock.end())
+				continue;
+			if (std::find(water.begin(), water.end(), neighb) == water.end())
+				continue;
+
+			dock.push_back(neighb);
+		}
+		nrscanned++;
+	}
+
+	molog("Found %zu fields for the dock\n", dock.size());
+
+	m_portdock = new PortDock;
+	m_portdock->set_owner(get_owner());
+	m_portdock->set_warehouse(this);
+	m_portdock->set_economy(get_economy());
+	container_iterate_const(std::vector<FCoords>, dock, it) {
+		m_portdock->add_position(*it.current);
+	}
+	m_portdock->init(egbase);
+
+	if (get_economy() != 0)
+		m_portdock->set_economy(get_economy());
+}
 
 /// Destroy the warehouse.
 void Warehouse::cleanup(Editor_Game_Base & egbase)
 {
+	if (m_portdock) {
+		m_portdock->remove(egbase);
+		m_portdock = 0;
+	}
+
 	while (m_planned_workers.size()) {
 		m_planned_workers.back().cleanup();
 		m_planned_workers.pop_back();
@@ -610,6 +687,8 @@ void Warehouse::set_economy(Economy * const e)
 	if (old)
 		old->remove_warehouse(*this);
 
+	if (m_portdock)
+		m_portdock->set_economy(e);
 	m_supply->set_economy(e);
 	Building::set_economy(e);
 
@@ -1299,5 +1378,14 @@ int Warehouse::outcorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier)
 
 	return 0;
 }
+
+void Warehouse::log_general_info(const Editor_Game_Base & egbase)
+{
+	Building::log_general_info(egbase);
+
+	if (descr().get_isport())
+		molog("Port dock: %u\n", m_portdock ? m_portdock->serial() : 0);
+}
+
 
 }

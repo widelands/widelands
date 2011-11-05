@@ -158,6 +158,7 @@ public:
 
 		WARE, //  class WareInstance
 		BATTLE,
+		FLEET,
 
 		// everything below is at least a BaseImmovable
 		IMMOVABLE,
@@ -165,7 +166,8 @@ public:
 		// everything below is at least a PlayerImmovable
 		BUILDING,
 		FLAG,
-		ROAD
+		ROAD,
+		PORTDOCK
 	};
 	/// Some default, globally valid, attributes.
 	/// Other attributes (such as "harvestable corn") could be
@@ -248,7 +250,9 @@ public:
 		header_Critter = 6,
 		header_Worker = 7,
 		header_WareInstance = 8,
-		header_Ship = 9
+		header_Ship = 9,
+		header_PortDock = 10,
+		header_Fleet = 11,
 	};
 
 	/**

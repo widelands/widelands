@@ -19,6 +19,7 @@
 
 #include "ship.h"
 
+#include "economy/fleet.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "map.h"
@@ -51,9 +52,9 @@ Bob & Ship_Descr::create_object() const
 }
 
 
-Ship::Ship(const Ship_Descr & descr)
-:
-Bob(descr)
+Ship::Ship(const Ship_Descr & descr) :
+	Bob(descr),
+	m_fleet(0)
 {
 }
 
@@ -66,6 +67,44 @@ void Ship::init_auto_task(Game & game)
 {
 	start_task_shipidle(game);
 }
+
+void Ship::init(Editor_Game_Base & egbase)
+{
+	Bob::init(egbase);
+
+	init_fleet(egbase);
+}
+
+/**
+ * Create the initial singleton @ref Fleet to which we belong.
+ * The fleet code will take automatically merge us into a larger
+ * fleet, if one is reachable.
+ */
+void Ship::init_fleet(Editor_Game_Base & egbase)
+{
+	assert(get_owner() != 0);
+	Fleet * fleet = new Fleet(*get_owner());
+	fleet->add_ship(this);
+	fleet->init(egbase);
+	// fleet calls the set_fleet function appropriately
+}
+
+void Ship::cleanup(Editor_Game_Base & egbase)
+{
+	if (m_fleet)
+		m_fleet->remove_ship(egbase, this);
+
+	Bob::cleanup(egbase);
+}
+
+/**
+ * This function is to be called only by @ref Fleet.
+ */
+void Ship::set_fleet(Fleet * fleet)
+{
+	m_fleet = fleet;
+}
+
 
 struct FindBobShip : FindBob {
 	virtual bool accept(Bob * bob) const
@@ -209,6 +248,13 @@ void Ship::shipidle_update(Game & game, Bob::State & state)
 	start_task_idle(game, descr().main_animation(), -1);
 }
 
+void Ship::log_general_info(const Editor_Game_Base & egbase)
+{
+	Bob::log_general_info(egbase);
+
+	molog("Fleet: %u\n", m_fleet? m_fleet->serial() : 0);
+}
+
 
 /*
 ==============================
@@ -228,6 +274,17 @@ const Bob::Task * Ship::Loader::get_task(const std::string & name)
 {
 	if (name == "shipidle") return &taskShipIdle;
 	return Bob::Loader::get_task(name);
+}
+
+void Ship::Loader::load_finish()
+{
+	Bob::Loader::load_finish();
+
+	Ship & ship = get<Ship>();
+	// For robustness, in case our fleet did not get restored from the savegame
+	// for whatever reason
+	if (!ship.m_fleet)
+		ship.init_fleet(egbase());
 }
 
 

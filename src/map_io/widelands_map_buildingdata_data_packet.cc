@@ -21,6 +21,7 @@
 
 #include "logic/constructionsite.h"
 #include "economy/flag.h"
+#include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "logic/editor_game_base.h"
@@ -52,7 +53,7 @@ namespace Widelands {
 
 // Subversions
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
-#define CURRENT_WAREHOUSE_PACKET_VERSION        5
+#define CURRENT_WAREHOUSE_PACKET_VERSION        6
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
@@ -511,6 +512,15 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 
 			if (packet_version >= 5)
 				warehouse.m_next_stock_remove_act = fr.Unsigned32();
+
+			if (packet_version >= 6) {
+				if (warehouse.descr().get_isport()) {
+					if (Serial portdock = fr.Unsigned32()) {
+						warehouse.m_portdock = &mol.get<PortDock>(portdock);
+						warehouse.m_portdock->set_economy(warehouse.get_economy());
+					}
+				}
+			}
 
 			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
 				//  Add to map of military influence.
@@ -1210,6 +1220,10 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	}
 
 	fw.Unsigned32(warehouse.m_next_stock_remove_act);
+
+	if (warehouse.descr().get_isport()) {
+		fw.Unsigned32(mos.get_object_file_index_or_zero(warehouse.m_portdock));
+	}
 }
 
 
