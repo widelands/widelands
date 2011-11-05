@@ -60,6 +60,7 @@ protected:
 	void show_workarea();
 	void hide_workarea();
 	void toggle_workarea();
+	void configure_workarea_button();
 	void act_start_stop();
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();

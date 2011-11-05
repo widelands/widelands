@@ -34,6 +34,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/slider.h"
 
 using namespace Widelands;
 
@@ -232,85 +233,15 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 		(this, &General_Statistics_Menu::radiogroup_changed);
 	pos.y += 25;
 
-
-	//  time buttons
-	button_size = (get_inner_w() - spacing * 5) / 4;
 	pos.x = spacing;
 	pos.y += spacing + spacing;
 
-	new UI::Callback_Button
-		(this, "15m",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_15_MINS),
-		 _("15 m"));
+	new WUIPlot_Area_Slider
+		(this, m_plot,
+		 pos.x, pos.y, get_inner_w() - 2 * spacing, 45,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "30m",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_30_MINS),
-		 _("30 m"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "1h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_ONE_HOUR),
-		 _("1 h"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "2h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_TWO_HOURS),
-		 _("2 h"));
-
-	pos.y += 25 + spacing;
-	pos.x = spacing;
-
-	new UI::Callback_Button
-		(this, "help",
-		 pos.x, pos.y, 32, 32,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-		 boost::bind(&General_Statistics_Menu::clicked_help, boost::ref(*this)),
-		 _("Help"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "4h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_FOUR_HOURS),
-		 _("4 h"));
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "8h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_EIGHT_HOURS),
-		 _("8 h"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "16h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_16_HOURS),
-		 _("16 h"));
-
-	pos.x += button_size + spacing;
-	pos.y += 32 + spacing;
+	pos.y += 45 + spacing;
 
 	set_inner_size(get_inner_w(), pos.y);
 }

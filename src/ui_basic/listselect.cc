@@ -466,6 +466,43 @@ bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 	return btn == SDL_BUTTON_LEFT;
 }
 
+bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
+	if (down) {
+		uint32_t selected;
+		switch (code.sym) {
+		case SDLK_KP2:
+			if (code.mod & KMOD_NUM)
+				break;
+		case SDLK_DOWN:
+			selected = selection_index() + 1;
+			if (selected < size())
+				select(selected);
+			if ((selection_index() + 1) * get_lineheight() - get_inner_h() > m_scrollpos) {
+				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
+				m_scrollpos = (scrollpos < 0) ? 0 : scrollpos;
+				m_scrollbar.set_scrollpos(m_scrollpos);
+			}
+			return true;
+		case SDLK_KP8:
+			if (code.mod & KMOD_NUM)
+				break;
+		case SDLK_UP:
+			selected = selection_index();
+			if (selected > 0)
+				select(selected - 1);
+			if (selection_index() * get_lineheight() < m_scrollpos) {
+				m_scrollpos = selection_index() * get_lineheight();
+				m_scrollbar.set_scrollpos(m_scrollpos);
+			}
+			return true;
+		default:
+			break; // not handled
+		}
+	}
+
+	return UI::Panel::handle_key(down, code);
+}
+
 /**
  * Remove entry
  */

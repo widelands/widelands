@@ -51,6 +51,7 @@ struct Radiogroup {
 
 	int32_t get_state() const throw () {return m_state;}
 	void set_state(int32_t state);
+	void set_enabled(bool);
 
 private:
 	Radiobutton * m_buttons; //  linked list of buttons (not sorted)

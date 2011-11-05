@@ -37,7 +37,11 @@ namespace Widelands {
 //
 // class Cmd_Queue
 //
-Cmd_Queue::Cmd_Queue(Game & game) : m_game(game), nextserial(0) {}
+Cmd_Queue::Cmd_Queue(Game & game) :
+	m_game(game),
+	nextserial(0),
+	m_ncmds(0),
+	m_cmds(CMD_QUEUE_BUCKET_SIZE, std::priority_queue<cmditem>()) {}
 
 Cmd_Queue::~Cmd_Queue()
 {
@@ -48,15 +52,22 @@ Cmd_Queue::~Cmd_Queue()
  * flushs all commands from the queue. Needed for
  * game loading (while in game)
  * FIXME ...but game loading while in game is not possible!
+ * Note: Order of destruction of Items is not guaranteed
  */
 void Cmd_Queue::flush() {
-	while (!m_cmds.empty()) {
-		Command * cmd = m_cmds.top().cmd;
-		m_cmds.pop();
-		// delete after pop, msvc2008 std::priority_queue::pop needs
-		// it for comparison.
-		delete cmd;
+	uint32_t cbucket = 0;
+	while (m_ncmds and cbucket < CMD_QUEUE_BUCKET_SIZE) {
+		std::priority_queue<cmditem> & current_cmds = m_cmds[cbucket];
+
+		while (!current_cmds.empty()) {
+			Command * cmd = current_cmds.top().cmd;
+			current_cmds.pop();
+			delete cmd;
+			--m_ncmds;
+		}
+		++ cbucket;
 	}
+	assert(m_ncmds == 0);
 }
 
 /*
@@ -84,7 +95,8 @@ void Cmd_Queue::enqueue (Command * const cmd)
 		ci.serial = 0;
 	}
 
-	m_cmds.push(ci);
+	m_cmds[cmd->duetime() % CMD_QUEUE_BUCKET_SIZE].push(ci);
+	++ m_ncmds;
 }
 
 /**
@@ -98,30 +110,34 @@ int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
 	int32_t const final = game_time_var + interval;
 	int32_t cnt = 0;
 
-	while (!m_cmds.empty()) {
-		Command & c = *m_cmds.top().cmd;
-		if (final <= c.duetime())
-			break;
+	while (game_time_var < final) {
+		std::priority_queue<cmditem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
 
-		m_cmds.pop();
+		while (current_cmds.size()) {
+			Command & c = *current_cmds.top().cmd;
+			if (game_time_var < c.duetime())
+				break;
 
-		assert(game_time_var <= c.duetime());
-		game_time_var = c.duetime();
+			current_cmds.pop();
+			-- m_ncmds;
+			assert(game_time_var == c.duetime());
 
-		if (dynamic_cast<GameLogicCommand *>(&c)) {
-			StreamWrite & ss = m_game.syncstream();
-			static uint8_t const tag[] = {0xde, 0xad, 0x00};
-			ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
-			ss.Unsigned32(c.duetime());
-			ss.Unsigned32(c.id());
+			if (dynamic_cast<GameLogicCommand *>(&c)) {
+				StreamWrite & ss = m_game.syncstream();
+				static uint8_t const tag[] = {0xde, 0xad, 0x00};
+				ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
+				ss.Unsigned32(c.duetime());
+				ss.Unsigned32(c.id());
+			}
+
+			c.execute (m_game);
+
+			delete &c;
 		}
-
-		c.execute (m_game);
-
-		delete &c;
+		++game_time_var;
 	}
 
-	assert(final - game_time_var >= 0);
+	assert(final - game_time_var == 0);
 	game_time_var = final;
 
 	return cnt;

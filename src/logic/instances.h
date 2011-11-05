@@ -20,16 +20,18 @@
 #ifndef INSTANCES_H
 #define INSTANCES_H
 
-#include "cmd_queue.h"
-
-#include "ref_cast.h"
-
 #include <map>
 #include <string>
 #include <cstring>
 #include <vector>
 
 #include <boost/function.hpp>
+#include <boost/unordered_map.hpp>
+
+#include "ref_cast.h"
+
+#include "cmd_queue.h"
+
 
 struct DirAnimations;
 struct RenderTarget;
@@ -337,7 +339,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  * Keeps the list of all objects currently in the game.
  */
 struct Object_Manager {
-	typedef std::map<uint32_t, Map_Object *> objmap_t;
+	typedef boost::unordered_map<uint32_t, Map_Object *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();

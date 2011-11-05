@@ -486,14 +486,18 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	}
 
 	//  all cached workers are unbound and freed
-	while (m_incorporated_workers.size()) {
-		Worker * w = m_incorporated_workers.back();
-		m_incorporated_workers.pop_back();
+	container_iterate(IncorporatedWorkers, m_incorporated_workers, cpair) {
+		WorkerList & clist = cpair->second;
+		while (clist.size()) {
+			Worker * w = clist.back();
+			clist.pop_back();
 
-		if (upcast(Game, game, &egbase))
-			if (egbase.objects().object_still_available(w))
-				w->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+			if (upcast(Game, game, &egbase))
+				if (egbase.objects().object_still_available(w))
+					w->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+		}
 	}
+	m_incorporated_workers.clear();
 
 	Map & map = egbase.map();
 	if (const uint32_t conquer_radius = get_conquers())
@@ -552,22 +556,24 @@ void Warehouse::act(Game & game, uint32_t const data)
 	//  Military stuff: Kill the soldiers that are dead.
 	if (m_next_military_act <= gametime) {
 		Ware_Index const ware = tribe().safe_worker_index("soldier");
-		Worker_Descr const & workerdescr = *tribe().get_worker_descr(ware);
-		const std::string & workername = workerdescr.name();
-		//  Look if we got one in stock of those.
-		for
-			(std::vector<Worker *>::iterator it =
-			 	m_incorporated_workers.begin();
-			 it != m_incorporated_workers.end();
-			 ++it)
-		{
-			Worker const & worker = **it;
-			if (worker.name() == workername) {
-				upcast(Soldier const, soldier, &worker);
+
+		if (m_incorporated_workers.count(ware)) {
+			WorkerList & soldiers = m_incorporated_workers[ware];
+
+			// Do not use container_iterate, as we plan to erase some
+			// of those guys
+			for
+				(WorkerList::iterator it = soldiers.begin();
+				 it != soldiers.end();
+				 ++it)
+			{
+				// This is a safe cast: we know only soldiers can land in this
+				// slot in the incorporated array
+				Soldier * soldier = static_cast<Soldier *>(*it);
 
 				//  Soldier dead ...
 				if (not soldier or soldier->get_current_hitpoints() == 0) {
-					it = m_incorporated_workers.erase(it);
+					it = soldiers.erase(it);
 					m_supply->remove_workers(ware, 1);
 					continue;
 				}
@@ -682,23 +688,25 @@ bool Warehouse::fetch_from_flag(Game & game)
 uint32_t Warehouse::count_workers
 	(Game const & game, Ware_Index ware, Requirements const & req)
 {
-	std::vector<Worker_Descr const *> subs;
 	uint32_t sum = 0;
 
 	do {
-		subs.push_back(tribe().get_worker_descr(ware));
 		sum += m_supply->stock_workers(ware);
+
+		// NOTE: This code lies about the tAttributes of non-instantiated workers.
+		if (m_incorporated_workers.count(ware)) {
+			WorkerList & incorporated_workers = m_incorporated_workers[ware];
+
+			container_iterate_const(WorkerList, incorporated_workers, cworker)
+				if (!req.check(**cworker)) {
+					//  This is one of the workers in our sum.
+					//  But he is too stupid for this job
+					--sum;
+				}
+		}
+
 		ware = tribe().get_worker_descr(ware)->becomes();
 	} while (ware != Ware_Index::Null());
-
-	// NOTE: This code lies about the tAttributes of non-instantiated workers.
-
-	container_iterate
-		(std::vector<Worker *>, m_incorporated_workers, i)
-			if (std::find(subs.begin(), subs.end(), &(*i)->descr()) != subs.end())
-				//  This is one of the workers in our sum.
-				if (!req.check(*(*i)))
-					--sum;
 
 	return sum;
 }
@@ -712,26 +720,26 @@ Worker & Warehouse::launch_worker
 	do {
 		if (m_supply->stock_workers(ware)) {
 			uint32_t unincorporated = m_supply->stock_workers(ware);
-			Worker_Descr const & workerdescr = *tribe().get_worker_descr(ware);
 
 			//  look if we got one of those in stock
-			const std::string & workername = workerdescr.name();
-			container_iterate
-				(std::vector<Worker *>, m_incorporated_workers, i) {
+			if (m_incorporated_workers.count(ware)) {
+				WorkerList & incorporated_workers = m_incorporated_workers[ware];
+
+				container_iterate (WorkerList, incorporated_workers, i) {
 					Worker * worker = *i.current;
-					if (worker->name() == workername) {
-						--unincorporated;
 
-						if (req.check(*worker)) {
-							worker->reset_tasks(game);  //  forget everything you did
-							worker->set_location(this); //  back in a economy
-							m_incorporated_workers.erase(i.current);
+					--unincorporated;
 
-							m_supply->remove_workers(ware, 1);
-							return *worker;
-						}
+					if (req.check(*worker)) {
+						worker->reset_tasks(game);  //  forget everything you did
+						worker->set_location(this); //  back in a economy
+						incorporated_workers.erase(i.current);
+
+						m_supply->remove_workers(ware, 1);
+						return *worker;
 					}
 				}
+			}
 
 			assert(unincorporated <= m_supply->stock_workers(ware));
 
@@ -739,6 +747,7 @@ Worker & Warehouse::launch_worker
 				// Create a new one
 				// NOTE: This code lies about the tAttributes of the new worker
 				m_supply->remove_workers(ware, 1);
+				Worker_Descr const & workerdescr = *tribe().get_worker_descr(ware);
 				return workerdescr.create(game, owner(), this, m_position);
 			}
 		}
@@ -767,7 +776,8 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 	if (WareInstance * const item = w.fetch_carried_item(egbase))
 		incorporate_item(egbase, *item); //  rescue an item
 
-	m_supply->add_workers(tribe().worker_index(w.name().c_str()), 1);
+	Ware_Index worker_index = tribe().worker_index(w.name().c_str());
+	m_supply->add_workers(worker_index, 1);
 
 	//  We remove carriers, but we keep other workers around.
 	//  FIXME Remove all workers that do not have properties such as experience.
@@ -779,7 +789,10 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 		return;
 	}
 
-	sort_worker_in(egbase, w);
+	// Incorporate the worker
+	if (!m_incorporated_workers.count(worker_index))
+		m_incorporated_workers[worker_index] = std::vector<Worker *>();
+	m_incorporated_workers[worker_index].push_back(&w);
 	w.set_location(0); //  no longer in an economy
 
 	if (upcast(Game, game, &egbase)) {
@@ -787,35 +800,6 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 		w.reset_tasks(*game);
 		w.start_task_idle(*game, 0, -1);
 	}
-}
-
-
-/// Sort the worker into the right position in m_incorporated_workers
-void Warehouse::sort_worker_in(Editor_Game_Base & egbase, Worker & w)
-{
-	//  We insert this worker, but to keep some consistency in ordering, we tell
-	//  him where to insert.
-	std::string const & workername = w.name();
-
-	std::vector<Worker *>::iterator i = m_incorporated_workers.begin();
-
-	while
-		(i != m_incorporated_workers.end()
-		 &&
-		 workername <= (*i)->name())
-		++i;
-	if (i == m_incorporated_workers.end()) {
-		m_incorporated_workers.insert(i, &w);
-		return;
-	}
-
-	while
-		(i != m_incorporated_workers.end()
-		 &&
-		 w.serial() <= (*i)->serial())
-		++i;
-
-	m_incorporated_workers.insert(i, &w);
 }
 
 /// Create an instance of a ware and make sure it gets
@@ -1279,9 +1263,14 @@ std::vector<Soldier *> Warehouse::presentSoldiers() const
 {
 	std::vector<Soldier *> rv;
 
-	container_iterate_const(std::vector<Worker *>, m_incorporated_workers, i) {
-		if (upcast(Soldier, soldier, *i))
-			rv.push_back(soldier);
+	Ware_Index const ware = tribe().safe_worker_index("soldier");
+	IncorporatedWorkers::const_iterator sidx = m_incorporated_workers.find(ware);
+
+	if (sidx != m_incorporated_workers.end()) {
+		const WorkerList & soldiers = sidx->second;
+
+		container_iterate_const(WorkerList, soldiers, i)
+			rv.push_back(static_cast<Soldier *>(*i));
 	}
 
 	return rv;
@@ -1292,16 +1281,21 @@ int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) 
 }
 
 int Warehouse::outcorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
-	std::vector<Worker *>::iterator i = std::find
-		(m_incorporated_workers.begin(), m_incorporated_workers.end(), &soldier);
 
+	Ware_Index const ware = tribe().safe_worker_index("soldier");
+	if (m_incorporated_workers.count(ware)) {
+		WorkerList & soldiers = m_incorporated_workers[ware];
+
+		WorkerList::iterator i = std::find
+			(soldiers.begin(), soldiers.end(), &soldier);
+
+		soldiers.erase(i);
+		m_supply->remove_workers(ware, 1);
+	}
 #ifdef DEBUG
-	if (i == m_incorporated_workers.end())
+	else
 		throw wexception("outcorporateSoldier: soldier not in this warehouse!");
 #endif
-	m_incorporated_workers.erase(i);
-
-	m_supply->remove_workers(tribe().safe_worker_index("soldier"), 1);
 
 	return 0;
 }

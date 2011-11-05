@@ -21,6 +21,7 @@
 #define WUI_PLOT_AREA_H
 
 #include "ui_basic/panel.h"
+#include "ui_basic/slider.h"
 
 #include "rgbcolor.h"
 
@@ -50,8 +51,9 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_FOUR_HOURS,
 		TIME_EIGHT_HOURS,
 		TIME_16_HOURS,
+		TIME_LAST,
 	};
-
+	static std::string time_labels[TIME_LAST];
 	enum PLOTMODE {
 		//  Always take the samples of some times together, so that the graph is
 		//  not completely zigg-zagged.
@@ -68,6 +70,8 @@ struct WUIPlot_Area : public UI::Panel {
 	virtual void draw(RenderTarget &);
 
 	void set_time(TIME);
+	void set_time_int(int32_t time) {set_time(static_cast<TIME>(time)); };
+	TIME get_time() {return static_cast<TIME>(m_time); };
 	void set_sample_rate(uint32_t id); // in milliseconds
 
 	void register_plot_data
@@ -96,6 +100,35 @@ protected:
 	int32_t                 m_time;  // How much do you want to list
 	int32_t                 m_sample_rate;
 	int32_t                 m_plotmode;
+};
+
+/**
+ * A discrete slider with plot time steps preconfigured and automatic signal
+ * setup.
+ */
+struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
+	WUIPlot_Area_Slider
+		(Panel * const parent,
+		 WUIPlot_Area & plot_area,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const PictureID background_picture_id,
+		 const std::string & tooltip_text = std::string(),
+		 const uint32_t cursor_size = 20,
+		 const bool enabled = true)
+	: DiscreteSlider
+		(parent,
+		 x, y, w, h,
+		 std::vector<std::string>
+		 	(WUIPlot_Area::time_labels,
+		 	 WUIPlot_Area::time_labels + WUIPlot_Area::TIME_LAST),
+		 plot_area.get_time(),
+		 background_picture_id,
+		 tooltip_text,
+		 cursor_size,
+		 enabled)
+	{
+		changedto->set(&plot_area, &WUIPlot_Area::set_time_int);
+	}
 };
 
 #endif
