@@ -80,7 +80,7 @@ struct SurfaceSDL : IOffscreenSurface {
 	void draw_line
 		(int32_t x1, int32_t y1,
 		 int32_t x2, int32_t y2,
-		 RGBColor, Rect const * clip = 0);
+		 RGBColor);
 
 	void blit(Point, PictureID, Rect srcrc, Composite cm);
 	void fast_blit(PictureID);

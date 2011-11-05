@@ -141,14 +141,9 @@ void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
 	 RGBColor const color)
 {
-	Rect clipr = Rect
-		(Point(m_rect.x + m_offset.x, m_rect.y + m_offset.y),
-		 m_rect.w, m_rect.h);
-
 	m_surface->draw_line
 		(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,
-		 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color,
-		 &clipr);
+		 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color);
 }
 
 /**
