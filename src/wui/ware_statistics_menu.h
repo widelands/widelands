@@ -28,7 +28,9 @@ struct Interactive_Player;
 struct WUIPlot_Area;
 
 struct Ware_Statistics_Menu : public UI::UniqueWindow {
+public:
 	Ware_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
+	void set_time(int32_t);
 
 private:
 	Interactive_Player * m_parent;
@@ -37,7 +39,39 @@ private:
 
 	void clicked_help();
 	void cb_changed_to(int32_t, bool);
-	void set_time(WUIPlot_Area::TIME);
+};
+
+
+
+/**
+ * A discrete slider with plot time steps preconfigured, automatic signal
+ * setup and the set_time callback function from Ware_Statistics_Menu.
+ *
+ */
+struct WUIPlot_Generic_Area_Slider : public UI::DiscreteSlider {
+	WUIPlot_Generic_Area_Slider
+		(Panel * const parent,
+		 WUIPlot_Area & plot_area,
+		 Ware_Statistics_Menu * signal_listener,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const PictureID background_picture_id,
+		 const std::string & tooltip_text = std::string(),
+		 const uint32_t cursor_size = 20,
+		 const bool enabled = true)
+	: DiscreteSlider
+		(parent,
+		 x, y, w, h,
+		 std::vector<std::string>
+		 	(WUIPlot_Area::time_labels,
+		 	 WUIPlot_Area::time_labels + WUIPlot_Area::TIME_LAST),
+		 plot_area.get_time(),
+		 background_picture_id,
+		 tooltip_text,
+		 cursor_size,
+		 enabled)
+	{
+		changedto->set(signal_listener, &Ware_Statistics_Menu::set_time);
+	}
 };
 
 #endif

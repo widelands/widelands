@@ -153,8 +153,8 @@ m_parent(&parent)
 	pos.x  = spacing;
 	pos.y += spacing + spacing;
 
-	new WUIPlot_Area_Slider
-		(this, *m_plot_production,
+	new WUIPlot_Generic_Area_Slider
+		(this, *m_plot_production, this,
 		 pos.x, pos.y, get_inner_w() - 2 * spacing, 45,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 
@@ -176,7 +176,7 @@ void Ware_Statistics_Menu::cb_changed_to(int32_t const id, bool const what) {
  * Callback for the time buttons. Change the time axis of all ware
  * statistics simultaneously.
  */
-void Ware_Statistics_Menu::set_time(WUIPlot_Area::TIME timescale) {
-	m_plot_production->set_time(timescale);
-	m_plot_consumption->set_time(timescale);
+void Ware_Statistics_Menu::set_time(int32_t timescale) {
+	m_plot_production->set_time_int(timescale);
+	m_plot_consumption->set_time_int(timescale);
 }
