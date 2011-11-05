@@ -73,7 +73,8 @@ m_building       (0),
 m_builder_request(0),
 m_work_completed (0),
 m_work_steps     (0),
-m_work_steptime  (0)
+m_work_steptime  (0),
+m_working(false)
 {}
 
 
@@ -138,7 +139,7 @@ uint32_t DismantleSite::get_built_per64k() const
 	const uint32_t time = owner().egbase().get_gametime();
 	uint32_t thisstep = 0;
 
-	if (is_working()) {
+	if (m_working) {
 		thisstep = DISMANTLESITE_STEP_TIME - (m_work_steptime - time);
 		// The check below is necessary because we drive construction via
 		// the construction worker in get_building_work(), and there can be
@@ -153,7 +154,8 @@ uint32_t DismantleSite::get_built_per64k() const
 	if (m_work_steps)
 		total /= m_work_steps;
 
-	assert(total <= (1 << 16));
+	log("total: %u\n", total);
+	// assert(total <= (1 << 16));
 
 	return total;
 }
@@ -180,6 +182,8 @@ Initialize the construction site by starting orders
 void DismantleSite::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
+
+	// SirVer TODO: if this is enhanced, also get basic wares back
 
 	std::map<Ware_Index, uint8_t> const & buildcost = m_building->buildcost();
 	size_t const buildcost_size = buildcost.size();
@@ -221,6 +225,20 @@ void DismantleSite::cleanup(Editor_Game_Base & egbase)
 
 /*
 ===============
+Construction sites only burn if some of the work has been completed.
+===============
+*/
+bool DismantleSite::burn_on_destroy()
+{
+	if (m_work_completed >= m_work_steps)
+		return false; // completed, so don't burn
+
+	return true;
+}
+
+
+/*
+===============
 Issue a request for the builder.
 ===============
 */
@@ -257,14 +275,10 @@ void DismantleSite::request_builder_callback
 	delete &rq;
 	ds.m_builder_request = 0;
 
+	ds.m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
+
 	w->start_task_buildingwork(game);
 	ds.set_seeing(true);
-}
-
-bool DismantleSite::is_working() const {
-	if (!m_builder_request)
-		return true;
-	return false;
 }
 
 /*
@@ -273,8 +287,6 @@ Called by our builder to get instructions.
 ===============
 */
 bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
-	return false;
-#if 0
 	if (&worker != m_builder.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
@@ -287,50 +299,9 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed
-	if (m_working) {
-		if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) < 0) {
-			worker.start_task_idle
-				(game,
-				 worker.get_animation("work"),
-				 m_work_steptime - game.get_gametime());
-			m_builder_idle = false;
-			return true;
-		} else {
-			//TODO(fweber): cause "construction sounds" to be played -
-			//perhaps dependent on kind of construction?
+	if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) >= 0 and m_working) {
+		++m_work_completed;
 
-			++m_work_completed;
-			if (m_work_completed >= m_work_steps)
-				schedule_destroy(game);
-
-			m_working = false;
-		}
-	}
-
-	// Fetch items from flag
-	if (m_fetchfromflag) {
-		--m_fetchfromflag;
-		m_builder_idle = false;
-		worker.start_task_fetchfromflag(game);
-		return true;
-	}
-
-	// Drop all the wares that are too much out to the flag.
-	container_iterate(Wares, m_wares, iqueue) {
-		WaresQueue * queue = *iqueue;
-		if (queue->get_filled() > queue->get_max_fill()) {
-			queue->set_filled(queue->get_filled() - 1);
-			Item_Ware_Descr const & wd = *tribe().get_ware_descr(queue->get_ware());
-			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
-			item.init(game);
-			worker.start_task_dropoff(game, item);
-			return true;
-		}
-	}
-
-	// Check if we've got wares to consume
-	if (m_work_completed < m_work_steps)
-	{
 		for (uint32_t i = 0; i < m_wares.size(); ++i) {
 			WaresQueue & wq = *m_wares[i];
 
@@ -340,23 +311,31 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
 
-			m_working = true;
-			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
+			Item_Ware_Descr const & wd = *tribe().get_ware_descr(wq.get_ware());
+			WareInstance & item = *new WareInstance(wq.get_ware(), &wd);
+			item.init(game);
+			worker.start_task_dropoff(game, item);
 
-			worker.start_task_idle
-				(game, worker.get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
-			m_builder_idle = false;
+			m_working = false;
 			return true;
 		}
 	}
-	// The only work we have got for you, is to run around to look cute ;)
-	if (!m_builder_idle) {
-		worker.set_animation(game, worker.get_animation("idle"));
-		m_builder_idle = true;
+
+	if (m_work_completed >= m_work_steps) {
+		schedule_destroy(game);
+
+		worker.pop_task(game);
+		worker.start_task_leavebuilding(game, true);
+		return true;
+	} else if (not m_working) {
+		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
+		worker.start_task_idle
+			(game, worker.get_animation("work"), DISMANTLESITE_STEP_TIME);
+
+		m_working = true;
+		return true;
 	}
-	worker.schedule_act(game, 2000);
-	return true;
-#endif
+
 }
 
 /*
@@ -370,7 +349,6 @@ void DismantleSite::draw
 	 FCoords          const   coords,
 	 Point            const   pos)
 {
-	// TODO: SirVer, draws nothing currently
 #if 0
 	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
@@ -383,10 +361,9 @@ void DismantleSite::draw
 	dst.drawanim(pos, m_anim, tanim, get_owner());
 
 	// Draw the partially finished building
-
-	compile_assert(0 <= CONSTRUCTIONSITE_STEP_TIME);
-	m_info->totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
-	m_info->completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+	compile_assert(0 <= DISMANTLESITE_STEP_TIME);
+	m_info->totaltime = DISMANTLESITE_STEP_TIME * m_work_steps;
+	m_info->completedtime = DISMANTLESITE_STEP_TIME * m_work_completed;
 
 	if (m_working) {
 		assert
@@ -396,17 +373,9 @@ void DismantleSite::draw
 		m_info->completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 	}
 
-	uint32_t anim;
 	uint32_t cur_frame;
-	try {
-		anim = building().get_animation("build");
-	} catch (Map_Object_Descr::Animation_Nonexistent) {
-		try {
-			anim = building().get_animation("unoccupied");
-		} catch (Map_Object_Descr::Animation_Nonexistent) {
-			anim = building().get_animation("idle");
-		}
-	}
+	uint32_t anim = building().get_animation("idle");
+
 	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
 	cur_frame = m_info->totaltime ? m_info->completedtime * nr_frames / m_info->totaltime : 0;
 	// Redefine tanim

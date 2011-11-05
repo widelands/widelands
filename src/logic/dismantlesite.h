@@ -62,6 +62,7 @@ public:
 	virtual std::string get_statistics_string();
 	uint32_t get_built_per64k() const;
 
+	virtual bool burn_on_destroy();
 	virtual void init   (Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
@@ -71,8 +72,6 @@ public:
 	void set_building         (const Building_Descr &);
 
 	virtual bool get_building_work(Game &, Worker &, bool success);
-	virtual bool is_working() const;
-
 
 protected:
 	virtual void create_options_window
@@ -92,6 +91,8 @@ private:
 
 	typedef std::vector<WaresQueue *> Wares;
 	Wares m_wares;
+
+	bool m_working;
 
 	uint32_t m_work_completed; // how many steps have we done so far?
 	uint32_t m_work_steps;     // how many steps (= items) until we're done?
