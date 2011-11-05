@@ -58,8 +58,8 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		(m_type == WORKER ? m_tribe.get_nrworkers()
 	                          : m_tribe.get_nrwares(), false),
 	m_selectable(selectable),
-	m_horizontal(horizontal)
-	m_callback_function(callback_function),
+	m_horizontal(horizontal),
+	m_callback_function(callback_function)
 {
 	//resize the configuration of our wares if they won't fit in the current window
 	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + 8 + 3);
