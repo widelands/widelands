@@ -163,13 +163,6 @@ m_parent(&parent)
 	set_inner_size(get_inner_w(), pos.y);
 }
 
-
-/**
- * Called when the help button has been clicked
- * \todo Implement help
-*/
-void Ware_Statistics_Menu::clicked_help() {}
-
 /**
  * Callback for the ware buttons. Change the state of all ware statistics
  * simultaneously.

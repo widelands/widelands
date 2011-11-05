@@ -53,6 +53,16 @@ static const int32_t max_x[] = {
 	16
 };
 
+const uint32_t WUIPlot_Area::time_in_ms[] = {
+	15      * 60 * 1000,
+	30      * 60 * 1000,
+	1  * 60 * 60 * 1000,
+	2  * 60 * 60 * 1000,
+	4  * 60 * 60 * 1000,
+	8  * 60 * 60 * 1000,
+	16 * 60 * 60 * 1000,
+};
+
 #define BG_PIC "pics/plot_area_bg.png"
 #define LINE_COLOR RGBColor(0, 0, 0)
 
@@ -99,7 +109,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 					static_cast<int32_t>
 					((static_cast<float>(time_in_ms[m_time])
 					  /
-					  static_cast<float>(NR_SAMPLES))
+					  static_cast<float>(nr_samples))
 					 /
 					 static_cast<float>(m_sample_rate));
 
@@ -143,7 +153,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				const int32_t how_many = static_cast<int32_t>
 				((static_cast<float>(time_in_ms[m_time])
 				  /
-				  static_cast<float>(NR_SAMPLES))
+				  static_cast<float>(nr_samples))
 				 /
 				 static_cast<float>(m_sample_rate));
 
@@ -159,7 +169,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				}
 
 				dataset = &m_data;
-				sub = xline_length / static_cast<float>(NR_SAMPLES);
+				sub = xline_length / static_cast<float>(nr_samples);
 			}
 
 			float posx = get_inner_w() - space_at_right;

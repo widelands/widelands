@@ -27,16 +27,6 @@
 
 #include <vector>
 
-static const uint32_t time_in_ms[] = {
-	15      * 60 * 1000,
-	30      * 60 * 1000,
-	1  * 60 * 60 * 1000,
-	2  * 60 * 60 * 1000,
-	4  * 60 * 60 * 1000,
-	8  * 60 * 60 * 1000,
-	16 * 60 * 60 * 1000,
-};
-
 /*
  * A Plot Area is a simple 2D Plot, with the
  * X Axis as time (actually Minus Time)
@@ -61,8 +51,6 @@ struct WUIPlot_Area : public UI::Panel {
 
 		PLOTMODE_ABSOLUTE
 	};
-
-	#define NR_SAMPLES 30   // How many samples per diagramm when relative plotting
 
 	WUIPlot_Area
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
@@ -89,6 +77,9 @@ protected:
 	int32_t const spacing;
 	int32_t const space_at_bottom;
 	int32_t const space_at_right;
+
+	static const uint32_t time_in_ms[];
+	static const uint32_t nr_samples = 30;   // How many samples per diagramm when relative plotting
 
 	struct __plotdata {
 		const std::vector<uint32_t> * dataset;

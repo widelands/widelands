@@ -58,7 +58,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 					static_cast<int32_t>
 					((static_cast<float>(time_in_ms[m_time])
 					  /
-					  static_cast<float>(NR_SAMPLES))
+					  static_cast<float>(nr_samples))
 					 /
 					 static_cast<float>(m_sample_rate));
 
