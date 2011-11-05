@@ -62,7 +62,10 @@ struct WUIPlot_Area : public UI::Panel {
 
 	virtual void draw(RenderTarget &);
 
-	void set_time(TIME);
+	void set_time(TIME id) {
+		m_time = id;
+	}
+
 	void set_time_int(int32_t time) {
 		if (time == m_game_label) 
 			set_time(TIME_GAME);

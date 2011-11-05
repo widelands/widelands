@@ -57,7 +57,7 @@ WUIPlot_Area::WUIPlot_Area
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 :
 UI::Panel (parent, x, y, w, h),
-m_time    (TIME_ONE_HOUR),
+m_time    (TIME_GAME),
 m_plotmode(PLOTMODE_ABSOLUTE)
 {}
 
@@ -391,11 +391,6 @@ void WUIPlot_Area::show_plot(uint32_t const id, bool const t) {
 	assert(id < m_plotdata.size());
 	m_plotdata[id].showplot = t;
 };
-
-/*
- * set time
- */
-void WUIPlot_Area::set_time(TIME const id) {m_time = id;}
 
 /*
  * Set sample rate the data uses
