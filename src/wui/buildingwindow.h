@@ -75,6 +75,7 @@ protected:
 	UI::Window * & m_registry;
 
 private:
+	UI::UniqueWindow::Registry m_helpwindow_registry;
 	Widelands::Building & m_building;
 
 	UI::Tab_Panel * m_tabs;

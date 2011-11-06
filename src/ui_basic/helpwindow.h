@@ -22,6 +22,7 @@
 
 #include "align.h"
 #include "multilinetextarea.h"
+#include "unique_window.h"
 #include "window.h"
 
 namespace UI {
@@ -77,9 +78,9 @@ private:
  * a Lua script, runs it and displays it's formatted content
  * as a static text
  */
-struct LuaTextHelpWindow : public Window {
+struct LuaTextHelpWindow : public UI::UniqueWindow {
 	LuaTextHelpWindow
-		(Panel * parent,
+		(Panel * parent, UI::UniqueWindow::Registry &,
 		 const std::string & caption,
 		 std::string path_to_script,
 		 uint32_t width = 300, uint32_t height = 400);

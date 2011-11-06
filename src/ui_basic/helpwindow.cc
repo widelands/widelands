@@ -183,11 +183,12 @@ LuaTextHelpWindow
 
 LuaTextHelpWindow::LuaTextHelpWindow
 	(Panel * const parent,
+	 UI::UniqueWindow::Registry & reg,
 	 const std::string & caption,
 	 std::string path_to_script,
 	 uint32_t width, uint32_t height)
 	:
-	Window(parent, "help_window", 0, 0, width, height, (_("Help: ") + caption).c_str()),
+	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + caption).c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
 	LuaInterface * li = create_LuaInterface();
@@ -196,6 +197,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 		boost::shared_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
 		textarea->set_text(t->get_string("text"));
 	}
+
 	delete li;
 }
 

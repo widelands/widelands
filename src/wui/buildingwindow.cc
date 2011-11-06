@@ -92,6 +92,8 @@ Building_Window::~Building_Window()
 	if (m_workarea_job_id)
 		igbase().egbase().map().overlay_manager().remove_overlay
 			(m_workarea_job_id);
+	if (m_helpwindow_registry.window)
+		delete m_helpwindow_registry.window;
 	m_registry = 0;
 }
 
@@ -282,9 +284,12 @@ The help button has been pressed
 */
 void Building_Window::help_clicked()
 {
-	new UI::LuaTextHelpWindow(&igbase(),
-			m_building.descname(),
-			m_building.descr().helptext_script());
+	if (m_helpwindow_registry.window)
+		delete m_helpwindow_registry.window;
+	else
+		new UI::LuaTextHelpWindow(&igbase(), m_helpwindow_registry,
+				m_building.descname(),
+				m_building.descr().helptext_script());
 }
 
 /*
