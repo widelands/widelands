@@ -205,7 +205,8 @@ void Ship::ship_update(Game & game, Bob::State & state)
 
 		molog("ship_update: Go to dock %u\n", dst->serial());
 
-		if (PortDock * lastdock = m_lastdock.get(game)) {
+		PortDock * lastdock = m_lastdock.get(game);
+		if (lastdock && lastdock != dst) {
 			molog("ship_update: Have lastdock %u\n", dst->serial());
 
 			Path path;

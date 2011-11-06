@@ -185,10 +185,10 @@ PlayerImmovable * Transfer::get_next_step
 				m_route.truncate(m_route.get_nrsteps() - 1);
 
 #if 0
-	if (m_worker && (m_worker->serial() == 1511 || m_worker->serial() == 1247)) {
+	if (m_item && (m_item->serial() == 1511)) {
 		log
 			("Item %u ready at location %u (flag %u) for destination %u\n",
-			 m_worker->serial(), location->serial(), locflag.serial(), destination->serial());
+			 m_item->serial(), location->serial(), locflag.serial(), destination->serial());
 		for (int i = 0; i <= m_route.get_nrsteps() && i < 5; ++i) {
 			log("  %i: flag %u\n", i, m_route.get_flag(m_game, i).serial());
 		}

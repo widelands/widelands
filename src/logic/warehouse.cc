@@ -891,7 +891,11 @@ WareInstance & Warehouse::launch_item(Game & game, Ware_Index const ware) {
 
 	m_supply->remove_wares(ware, 1);
 
-	do_launch_item(game, item);
+	// Schedule a call of WareInstance::update, which will either carry the
+	// item out of the warehouse via do_launch_item, or move it into the attached
+	// dock.
+	item.set_location(game, this);
+	item.schedule_act(game, 1);
 
 	return item;
 }
