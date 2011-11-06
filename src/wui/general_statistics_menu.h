@@ -35,10 +35,20 @@ struct Radiogroup;
 }
 
 struct General_Statistics_Menu : public UI::UniqueWindow {
+
+	// Custom registry, to store the selected_information as well.
+	struct Registry : public UI::UniqueWindow::Registry {
+		Registry() : UI::UniqueWindow::Registry(), selected_information(0) {}
+
+		int32_t selected_information;
+	};
+
 	General_Statistics_Menu
-		(Interactive_GameBase &, UI::UniqueWindow::Registry &);
+		(Interactive_GameBase &, Registry &);
+	virtual ~General_Statistics_Menu();
 
 private:
+	Registry           * m_my_registry;
 	UI::Box              m_box;
 	WUIPlot_Area         m_plot;
 	UI::Radiogroup       m_radiogroup;
