@@ -264,18 +264,19 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 boost::bind(&Building_Window::clicked_goto, boost::ref(*this))),
 			 UI::Box::AlignCenter);
 
-	if (m_building.descr().has_help_text())
-		capsbuttons->add_inf_space();
-		capsbuttons->add
-			(new UI::Callback_Button
-				(capsbuttons, "help",
-				 0, 0, 34, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-				 boost::bind(&Building_Window::help_clicked, boost::ref(*this)),
-				 _("Help")),
-			 UI::Box::AlignCenter);
+		if (m_building.descr().has_help_text()) {
+			capsbuttons->add_inf_space();
+			capsbuttons->add
+				(new UI::Callback_Button
+				 (capsbuttons, "help",
+				  0, 0, 34, 34,
+				  g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				  g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+				  boost::bind(&Building_Window::help_clicked, boost::ref(*this)),
+				  _("Help")),
+				 UI::Box::AlignCenter);
 
+		}
 	}
 }
 

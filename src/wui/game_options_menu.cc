@@ -100,9 +100,18 @@ GameOptionsMenu::GameOptionsMenu
 		 _("Exit Game"))
 {
 
-	m_windows.readme.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/README");
-	m_windows.license.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/COPYING");
-	m_windows.authors.constr = boost::bind(&fileview_window, boost::ref(m_gb), _1, "txts/developers");
+	m_windows.readme.constr = boost::bind
+		(&fileview_window, boost::ref(m_gb),
+		 boost::ref(m_windows.readme),
+		 "txts/README");
+	m_windows.license.constr = boost::bind
+		(&fileview_window, boost::ref(m_gb),
+		 boost::ref(m_windows.license),
+		 "txts/COPYING");
+	m_windows.authors.constr = boost::bind
+		(&fileview_window, boost::ref(m_gb),
+		 boost::ref(m_windows.authors),
+		 "txts/developers");
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.onCreate = boost::bind(&UI::Button::set_perm_pressed, &btn, true);  \
