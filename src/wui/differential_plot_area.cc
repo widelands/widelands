@@ -108,6 +108,68 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 	draw_value
 		(dst, buffer, RGBColor(125, 0, 0),
 		 Point(get_inner_w() - space_at_right - 2, get_inner_h() - spacing - 15));
+
+	//  plot the pixels
+	float sub =
+		xline_length
+		/
+		(static_cast<float>(time_in_ms[m_time])
+		 /
+		 static_cast<float>(m_sample_rate));
+	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
+		if (m_plotdata[plot].showplot) {
+
+			RGBColor color = m_plotdata[plot].plotcolor;
+			std::vector<uint32_t> const * dataset = m_plotdata[plot].dataset;
+
+			std::vector<uint32_t> m_data;
+			if (m_plotmode == PLOTMODE_RELATIVE) {
+				//  How many do we take together.
+				const int32_t how_many = static_cast<int32_t>
+				((static_cast<float>(time_in_ms[m_time])
+				  /
+				  static_cast<float>(nr_samples))
+				 /
+				 static_cast<float>(m_sample_rate));
+
+				uint32_t add = 0;
+				// Relative data, first entry is always zero
+				m_data.push_back(0);
+				for (uint32_t i = 0; i < dataset->size(); ++i) {
+					add += (*dataset)[i];
+					if (0 == ((i + 1) % how_many)) {
+						m_data.push_back(add);
+						add = 0;
+					}
+				}
+
+				dataset = &m_data;
+				sub = xline_length / static_cast<float>(nr_samples);
+			}
+
+			float posx = get_inner_w() - space_at_right;
+
+			int32_t lx = get_inner_w() - space_at_right;
+			//raise y zero point to middle of plot
+			int32_t ly = yoffset;
+			for (int32_t i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
+				int32_t const curx = static_cast<int32_t>(posx);
+				int32_t       cury = get_inner_h() - space_at_bottom;
+				if (int32_t value = (*dataset)[i]) {
+					const float length_y =
+						yline_length
+						/
+						(static_cast<float>(highest_scale) / static_cast<float>(value));
+					cury -= static_cast<int32_t>(length_y);
+				}
+				dst.draw_line(lx, ly, curx, cury, color);
+
+				posx -= sub;
+
+				lx = curx;
+				ly = cury;
+			}
+		}
 }
 
 /**
