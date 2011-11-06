@@ -1,5 +1,6 @@
 size=small
 output=trunk
+helptext_script="help.lua"
 
 [buildcost]
 trunk=3

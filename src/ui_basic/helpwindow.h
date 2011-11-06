@@ -72,6 +72,23 @@ private:
 	std::string m_text;
 };
 
+/*
+ * This is a totally different beast than HelpWindow. It takes
+ * a Lua script, runs it and displays it's formatted content
+ * as a static text
+ */
+struct LuaTextHelpWindow : public Window {
+	LuaTextHelpWindow
+		(Panel * parent,
+		 const std::string & caption,
+		 std::string path_to_script,
+		 uint32_t width = 300, uint32_t height = 400);
+	~LuaTextHelpWindow();
+
+private:
+	Multiline_Textarea * textarea;
+};
+
 }
 
 #endif

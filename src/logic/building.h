@@ -102,6 +102,8 @@ struct Building_Descr : public Map_Object_Descr {
 
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const throw ();
+	bool has_help_text() const {return m_helptext_script != "";}
+	std::string helptext_script() const {return m_helptext_script;}
 
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 	Workarea_Info m_workarea_info;
@@ -126,6 +128,7 @@ private:
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 	bool          m_global;            // whether this is a "global" building
+	std::string   m_helptext_script;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;

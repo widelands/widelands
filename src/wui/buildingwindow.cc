@@ -30,6 +30,7 @@
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
+#include "ui_basic/helpwindow.h"
 
 #include "buildingwindow.h"
 
@@ -157,6 +158,17 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	bool const can_see = igbase().can_see(owner_number);
 	bool const can_act = igbase().can_act(owner_number);
 
+	if (m_building.descr().has_help_text())
+		capsbuttons->add
+			(new UI::Callback_Button
+				(capsbuttons, "help",
+				 0, 0, 34, 34,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+				 boost::bind(&Building_Window::help_clicked, boost::ref(*this)),
+				 _("Help")),
+			 UI::Box::AlignCenter);
+
 	if (can_act) {
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
@@ -263,6 +275,17 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	}
 }
 
+/*
+===============
+The help button has been pressed
+===============
+*/
+void Building_Window::help_clicked()
+{
+	new UI::LuaTextHelpWindow(&igbase(),
+			m_building.descname(),
+			m_building.descr().helptext_script());
+}
 
 /*
 ===============

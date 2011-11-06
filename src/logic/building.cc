@@ -82,6 +82,10 @@ Building_Descr::Building_Descr
 		throw game_data_error("size: %s", e.what());
 	}
 
+	m_helptext_script = global_s.get_string("helptext_script", "");
+	if (m_helptext_script != "")
+		m_helptext_script = directory + "/" + m_helptext_script;
+
 	// Parse build options
 	m_buildable = global_s.get_bool("buildable", true);
 	m_destructible = global_s.get_bool("destructible", true);
