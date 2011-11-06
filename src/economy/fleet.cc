@@ -197,13 +197,27 @@ void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
 		m_ports[idx]->set_fleet(this);
 	}
 
-	if (old_nrports && !other->m_ports.empty()) {
-		m_ports.front()->get_economy()->check_merge(m_ports.front()->base_flag(), m_ports.back()->base_flag());
-	}
+	if (!m_ships.empty() && !m_ports.empty())
+		check_merge_economy();
 
 	other->m_ports.clear();
 	other->m_portpaths.clear();
 	other->remove(egbase);
+}
+
+/**
+ * If we have ports and ships, ensure that all ports belong to the same economy.
+ */
+void Fleet::check_merge_economy()
+{
+	if (m_ports.empty() || m_ships.empty())
+		return;
+
+	Flag & base = m_ports[0]->base_flag();
+	for (uint i = 1; i < m_ports.size(); ++i) {
+		// Note: economy of base flag may of course be changed by the merge!
+		base.get_economy()->check_merge(base, m_ports[i]->base_flag());
+	}
 }
 
 void Fleet::cleanup(Editor_Game_Base & egbase)
@@ -320,6 +334,10 @@ void Fleet::add_ship(Ship * ship)
 			ship->set_economy(*game, m_ports[0]->get_economy());
 	}
 
+	if (m_ships.size() == 1) {
+		check_merge_economy();
+	}
+
 	update(owner().egbase());
 }
 
@@ -337,8 +355,16 @@ void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 	if (ship->get_destination(egbase))
 		update(egbase);
 
-	if (m_ships.empty() && m_ports.empty())
-		remove(egbase);
+	if (m_ships.empty()) {
+		if (m_ports.empty()) {
+			remove(egbase);
+		} else {
+			Flag & base = m_ports[0]->base_flag();
+			for (uint i = 1; i < m_ports.size(); ++i) {
+				base.get_economy()->check_split(base, m_ports[i]->base_flag());
+			}
+		}
+	}
 }
 
 struct StepEvalFindPorts {
@@ -455,7 +481,8 @@ void Fleet::add_port(Editor_Game_Base & egbase, PortDock * port)
 	if (m_ports.size() == 1) {
 		set_economy(m_ports[0]->get_economy());
 	} else {
-		m_ports[0]->get_economy()->check_merge(m_ports[0]->base_flag(), port->base_flag());
+		if (!m_ships.empty())
+			m_ports[0]->get_economy()->check_merge(m_ports[0]->base_flag(), port->base_flag());
 	}
 
 	m_portpaths.resize((m_ports.size() * (m_ports.size() - 1)) / 2);
@@ -658,12 +685,8 @@ void Fleet::Loader::load_finish()
 	Fleet & fleet = get<Fleet>();
 
 	if (!fleet.m_ports.empty()) {
-		Flag & firstport = fleet.m_ports.front()->base_flag();
-
-		for (uint i = 1; i < fleet.m_ports.size(); ++i) {
-			// Note that the first port's economy may be changed in the merge!
-			fleet.m_ports.front()->get_economy()->check_merge(firstport, fleet.m_ports[i]->base_flag());
-		}
+		if (!fleet.m_ships.empty())
+			fleet.check_merge_economy();
 
 		fleet.set_economy(fleet.m_ports[0]->get_economy());
 	}

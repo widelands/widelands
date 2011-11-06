@@ -303,8 +303,13 @@ void WareInstance::update(Game & game)
 		return;
 
 	// Reset our state if we're not on location or outside an economy
-	if (!loc || !get_economy()) {
+	if (!get_economy()) {
 		cancel_moving();
+		return;
+	}
+
+	if (!loc) {
+		remove(game);
 		return;
 	}
 
@@ -504,7 +509,12 @@ void WareInstance::Loader::load_pointers()
 	Map_Object::Loader::load_pointers();
 
 	WareInstance & ware = get<WareInstance>();
-	ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
+
+	// There is a race condition where a ware may lose its location and be scheduled
+	// for removal via the update callback, but the game is saved just before the
+	// removal. This is why we allow a null location on load.
+	if (m_location)
+		ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
 	if (m_transfer_nextstep)
 		ware.m_transfer_nextstep = &mol().get<Map_Object>(m_transfer_nextstep);
 	if (ware.m_transfer)

@@ -91,6 +91,7 @@ protected:
 private:
 	void find_other_fleet(Editor_Game_Base & egbase);
 	void merge(Editor_Game_Base & egbase, Fleet * other);
+	void check_merge_economy();
 	void connect_port(Editor_Game_Base & egbase, uint idx);
 
 	PortPath & portpath(uint i, uint j);
