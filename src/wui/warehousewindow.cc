@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/warehouse.h"
+#include "portdockwaresdisplay.h"
 #include "ui_basic/tabpanel.h"
 #include "waresdisplay.h"
 
@@ -29,6 +30,8 @@ using Widelands::Warehouse;
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
+static const char pic_tab_dock_wares[] = "pics/menu_tab_wares_dock.png";
+static const char pic_tab_dock_workers[] = "pics/menu_tab_workers_dock.png";
 
 static const char pic_policy_prefer[] = "pics/stock_policy_prefer.png";
 static const char pic_policy_dontstock[] = "pics/stock_policy_dontstock.png";
@@ -199,6 +202,19 @@ Warehouse_Window::Warehouse_Window
 			 warehouse(),
 			 WaresDisplay::WORKER),
 		 _("Workers"));
+
+	if (Widelands::PortDock * pd = wh.get_portdock()) {
+		get_tabs()->add
+			("wares",
+			 g_gr->get_picture(PicMod_UI, pic_tab_dock_wares),
+			 create_portdock_wares_display(get_tabs(), Width, *pd, WaresDisplay::WARE),
+			 _("Wares in dock"));
+		get_tabs()->add
+			("workers",
+			 g_gr->get_picture(PicMod_UI, pic_tab_dock_workers),
+			 create_portdock_wares_display(get_tabs(), Width, *pd, WaresDisplay::WORKER),
+			 _("Workers in dock"));
+	}
 }
 
 /**

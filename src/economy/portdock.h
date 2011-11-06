@@ -96,6 +96,8 @@ struct PortDock : PlayerImmovable {
 
 	virtual void log_general_info(Editor_Game_Base const &);
 
+	uint count_waiting(bool worker, Ware_Index index);
+
 private:
 	friend struct Fleet;
 

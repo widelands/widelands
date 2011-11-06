@@ -42,6 +42,7 @@ struct Worker;
  */
 struct ShippingItem {
 	friend struct PortDock;
+	friend struct Ship;
 
 	ShippingItem() {}
 	ShippingItem(WareInstance & ware);

@@ -321,16 +321,50 @@ void PortDock::set_need_ship(Game & game, bool need)
 	}
 }
 
+/**
+ * If @p typeworker is true, return the number of workers with the given @p index
+ * that are waiting at the dock. Otherwise, return the number of wares of the given
+ * index.
+ */
+uint PortDock::count_waiting(bool typeworker, Ware_Index index)
+{
+	uint count = 0;
+
+	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+		WareInstance * ware;
+		Worker * worker;
+		it.current->get(owner().egbase(), ware, worker);
+
+		if (typeworker) {
+			if (worker && worker->worker_index() == index)
+				count++;
+		} else {
+			if (ware && ware->descr_index() == index)
+				count++;
+		}
+	}
+
+	return count;
+}
+
 void PortDock::log_general_info(Editor_Game_Base const & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);
 
 	Coords pos(m_warehouse->get_position());
 	molog
-		("PortDock for warehouse %u (at %i,%i)\n",
-		 m_warehouse ? m_warehouse->serial() : 0, pos.x, pos.y);
-	molog("Fleet: %u\n", m_fleet ? m_fleet->serial() : 0);
-	molog("%zu dock points\n", m_dockpoints.size());
+		("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %zu\n",
+		 m_warehouse ? m_warehouse->serial() : 0, pos.x, pos.y,
+		 m_fleet ? m_fleet->serial() : 0,
+		 m_need_ship ? "true" : "false",
+		 m_waiting.size());
+
+	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+		molog
+			("  IT %u, destination %u\n",
+			 it.current->m_object.serial(),
+			 it.current->m_destination_dock.serial());
+	}
 }
 
 #define PORTDOCK_SAVEGAME_VERSION 2
