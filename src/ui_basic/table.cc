@@ -58,6 +58,7 @@ Table<void *>::Table
 	m_last_click_time (-10000),
 	m_last_selection  (no_selection_index()),
 	m_sort_column     (0),
+	m_total_width     (0),
 	m_sort_descending (descending)
 {
 	set_think(false);

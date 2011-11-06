@@ -67,7 +67,7 @@ Building_Window::Building_Window
 	vbox->add(m_tabs, UI::Box::AlignLeft, true);
 
 	m_capsbuttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(m_capsbuttons, UI::Box::AlignLeft);
+	vbox->add(m_capsbuttons, UI::Box::AlignLeft, true);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
@@ -159,17 +159,6 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	Widelands::Player_Number const owner_number = owner.player_number();
 	bool const can_see = igbase().can_see(owner_number);
 	bool const can_act = igbase().can_act(owner_number);
-
-	if (m_building.descr().has_help_text())
-		capsbuttons->add
-			(new UI::Callback_Button
-				(capsbuttons, "help",
-				 0, 0, 34, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-				 boost::bind(&Building_Window::help_clicked, boost::ref(*this)),
-				 _("Help")),
-			 UI::Box::AlignCenter);
 
 	if (can_act) {
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
@@ -274,6 +263,19 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
 				 boost::bind(&Building_Window::clicked_goto, boost::ref(*this))),
 			 UI::Box::AlignCenter);
+
+	if (m_building.descr().has_help_text())
+		capsbuttons->add_inf_space();
+		capsbuttons->add
+			(new UI::Callback_Button
+				(capsbuttons, "help",
+				 0, 0, 34, 34,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+				 boost::bind(&Building_Window::help_clicked, boost::ref(*this)),
+				 _("Help")),
+			 UI::Box::AlignCenter);
+
 	}
 }
 
