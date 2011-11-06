@@ -376,6 +376,12 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 	update();
 }
 
+void VerticalSlider::layout() {
+	m_x_gap = get_w() / 2 - 2;
+	m_bar_size = get_h() - m_cursor_size;
+	Slider::layout();
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //                               HORIZONTAL                                   //
@@ -457,6 +463,11 @@ bool HorizontalSlider::handle_mousepress
 	} else return false;
 }
 
+void HorizontalSlider::layout() {
+	Slider::layout();
+	m_y_gap = get_h() / 2 - 2;
+	m_bar_size = get_w() - m_cursor_size;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 //                               VERTICAL                                     //
@@ -560,5 +571,14 @@ void DiscreteSlider::draw(RenderTarget & dst)
 
 }
 
+void DiscreteSlider::layout() {
+	uint32_t w = get_w();
+	uint32_t h = get_h();
+	slider.set_pos(Point(w / (2 * labels.size()) - slider.m_cursor_size / 2, 0));
+	slider.set_size
+		(w - (w / labels.size()) + slider.m_cursor_size,
+		 h - UI::Font::ui_small()->lineskip() - 2);
+	Panel::layout();
+}
 
 }
