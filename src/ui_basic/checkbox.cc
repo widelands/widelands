@@ -42,6 +42,7 @@ Statebox::Statebox
 	if (picid != g_gr->get_no_picture()) {
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
+		set_desired_size(w, h);
 		set_size(w, h);
 
 		set_flags(Has_Custom_Picture, true);
