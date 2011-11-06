@@ -19,6 +19,7 @@
 
 #include "bulldozeconfirm.h"
 #include "game_debug_ui.h"
+#include "graphic/picture.h"
 #include "graphic/rendertarget.h"
 #include "interactive_player.h"
 #include "logic/maphollowregion.h"
@@ -93,6 +94,8 @@ Building_Window::~Building_Window()
 	m_registry = 0;
 }
 
+namespace Widelands {struct Building_Descr;}
+using Widelands::Building;
 
 /*
 ===============
@@ -103,11 +106,10 @@ void Building_Window::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
-	dst.drawanim
-		(Point(get_inner_w() / 2, get_inner_h() / 2),
-		 building().get_ui_anim(),
-		 0,
-		 &building().owner());
+	dst.drawstatic
+			(Point(get_inner_w() / 2, get_inner_h() / 2),
+			 building().get_ui_anim(),
+			 &building().owner());
 }
 
 /*

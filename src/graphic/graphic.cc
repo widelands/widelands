@@ -965,6 +965,54 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid)
 }
 
 /**
+ * Creates an picture with changed luminosity from the given picture.
+ *
+ * @param picid the PictureID of the picture to modify
+ * @param factor the factor the luminosity should be changed by
+ * @param half_alpha whether the opacity should be halved or not
+ * @return a new picture with 50% luminosity
+ */
+PictureID Graphic::create_changed_luminosity_pic
+	(const PictureID & picid, const float factor, const bool halve_alpha)
+{
+	if (!picid || !picid->valid())
+		return get_no_picture();
+
+	IPixelAccess & origpix = picid->pixelaccess();
+	uint32_t w = picid->get_w();
+	uint32_t h = picid->get_h();
+	const SDL_PixelFormat & origfmt = origpix.format();
+
+	PictureID destpicture = create_picture(w, h, origfmt.Amask);
+	IPixelAccess & destpix = destpicture->pixelaccess();
+	const SDL_PixelFormat & destfmt = destpix.format();
+
+	origpix.lock(IPixelAccess::Lock_Normal);
+	destpix.lock(IPixelAccess::Lock_Discard);
+	for (uint32_t y = 0; y < h; ++y) {
+		for (uint32_t x = 0; x < w; ++x) {
+			RGBAColor color;
+
+			color.set(origfmt, origpix.get_pixel(x, y));
+
+			if (halve_alpha)
+				color.a >>= 1;
+
+			color.r = color.r * factor > 255 ? 255 : color.r * factor;
+			color.g = color.g * factor > 255 ? 255 : color.g * factor;
+			color.b = color.b * factor > 255 ? 255 : color.b * factor;
+
+			destpix.set_pixel(x, y, color.map(destfmt));
+		}
+	}
+	origpix.unlock(IPixelAccess::Unlock_NoChange);
+	destpix.unlock(IPixelAccess::Unlock_Update);
+
+	return destpicture;
+}
+
+
+/**
  * Creates a terrain texture.
  *
  * fnametempl is a filename with possible wildcard characters '?'. The function

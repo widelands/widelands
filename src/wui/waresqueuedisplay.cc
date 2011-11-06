@@ -61,6 +61,7 @@ m_show_only(show_only)
 
 	m_icon = ware.icon();
 	m_icon_grey = g_gr->create_grayed_out_pic(m_icon);
+	m_icon_grey = g_gr->create_changed_luminosity_pic(m_icon_grey, 0.65);
 
 	uint32_t pw, ph;
 	g_gr->get_picture_size(m_max_fill_indicator, pw, ph);

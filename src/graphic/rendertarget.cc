@@ -317,6 +317,36 @@ void RenderTarget::drawanim
 	data->trigger_soundfx(framenumber, 128);
 }
 
+void RenderTarget::drawstatic
+	(Point                dst,
+	 uint32_t       const animation,
+	 Player const * const player)
+{
+	AnimationData const * const data = g_anim.get_animation(animation);
+	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
+	if (!data || !g_gr) {
+		log("WARNING: Animation %u does not exist\n", animation);
+		return;
+	}
+
+	// Get the frame and its data
+	const PictureID & frame =
+		player ?
+		gfx->get_frame
+			(0, player->player_number(), player->get_playercolor())
+		:
+		gfx->get_frame
+			(0);
+
+	PictureID dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
+
+	dst -= Point(frame->get_w() / 2, frame->get_h() / 2);
+
+	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
+
+	doblit(Rect(dst, 0, 0), dark_frame, srcrc);
+}
+
 /**
  * Draws a part of a frame of an animation at the given location
  */
