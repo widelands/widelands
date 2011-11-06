@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "transfer.h"
 
 #include "logic/game.h"
+#include "logic/ship.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
@@ -257,6 +258,8 @@ void WareInstance::set_location
 			eco = playerimmovable->get_economy();
 		else if (upcast(Worker const, worker, location))
 			eco = worker->get_economy();
+		else if (upcast(Ship const, ship, location))
+			eco = ship->get_economy();
 
 		if (oldlocation && get_economy()) {
 			if (get_economy() != eco)

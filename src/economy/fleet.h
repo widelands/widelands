@@ -99,6 +99,7 @@ private:
 	const PortPath & portpath_bidir(uint i, uint j, bool & reverse) const;
 
 	Player & m_owner;
+	Economy * m_economy;
 	std::vector<Ship *> m_ships;
 	std::vector<PortDock *> m_ports;
 

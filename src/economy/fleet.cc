@@ -47,6 +47,7 @@ Map_Object_Descr fleet_descr("fleet", "Fleet");
 Fleet::Fleet(Player & player) :
 	Map_Object(&fleet_descr),
 	m_owner(player),
+	m_economy(0),
 	m_act_pending(false),
 	m_port_roundrobin(0)
 {
@@ -76,6 +77,10 @@ bool Fleet::active() const
  */
 void Fleet::set_economy(Economy * e)
 {
+	if (m_economy == e)
+		return;
+
+	m_economy = e;
 	if (upcast(Game, game, &owner().egbase())) {
 		container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
 			(*shipit.current)->set_economy(*game, e);
@@ -305,6 +310,9 @@ void Fleet::add_ship(Ship * ship)
 {
 	m_ships.push_back(ship);
 	ship->set_fleet(this);
+	if (upcast(Game, game, &owner().egbase())) {
+		ship->set_economy(*game, m_economy);
+	}
 
 	update(owner().egbase());
 }
@@ -433,6 +441,7 @@ void Fleet::add_port(Editor_Game_Base & egbase, PortDock * port)
 {
 	m_ports.push_back(port);
 	port->set_fleet(this);
+	set_economy(port->get_economy());
 
 	m_portpaths.resize((m_ports.size() * (m_ports.size() - 1)) / 2);
 
@@ -458,6 +467,12 @@ void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
 		m_ports.pop_back();
 	}
 	port->set_fleet(0);
+
+	if (m_ports.empty()) {
+		set_economy(0);
+	} else {
+		set_economy(m_ports[0]->get_economy());
+	}
 
 	if (m_ships.empty() && m_ports.empty())
 		remove(egbase);

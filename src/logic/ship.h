@@ -61,6 +61,7 @@ struct Ship : Bob {
 
 	virtual Type get_bob_type() const throw ();
 
+	Economy * get_economy() const {return m_economy;}
 	void set_economy(Game &, Economy * e);
 	void set_destination(Game &, PortDock &);
 
@@ -96,6 +97,7 @@ private:
 	void set_fleet(Fleet * fleet);
 
 	Fleet * m_fleet;
+	Economy * m_economy;
 	OPtr<PortDock> m_lastdock;
 	OPtr<PortDock> m_destination;
 	std::vector<ShippingItem> m_items;

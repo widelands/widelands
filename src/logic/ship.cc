@@ -62,7 +62,8 @@ Bob & Ship_Descr::create_object() const
 
 Ship::Ship(const Ship_Descr & descr) :
 	Bob(descr),
-	m_fleet(0)
+	m_fleet(0),
+	m_economy(0)
 {
 }
 
@@ -252,9 +253,10 @@ void Ship::ship_update(Game & game, Bob::State & state)
 			}
 
 			m_lastdock = 0;
-			start_task_movetodock(game, *dst);
-			return;
 		}
+
+		start_task_movetodock(game, *dst);
+		return;
 	}
 
 	ship_update_idle(game, state);
@@ -341,6 +343,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 
 void Ship::set_economy(Game & game, Economy * e)
 {
+	m_economy = e;
 	container_iterate(std::vector<ShippingItem>, m_items, it) {
 		it->set_economy(game, e);
 	}
