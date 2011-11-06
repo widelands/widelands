@@ -100,6 +100,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 		return new Cmd_MessageSetStatusArchived (des);
 	case PLCMD_SETSTOCKPOLICY: return new Cmd_SetStockPolicy(des);
 	case PLCMD_SETWAREMAXFILL: return new Cmd_SetWareMaxFill(des);
+	case PLCMD_DISMANTLEBUILDING: return new Cmd_DismantleBuilding(des);
 	default:
 		throw wexception
 			("PlayerCommand::deserialize(): Invalid command id encountered");
