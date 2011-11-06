@@ -51,7 +51,9 @@ struct ShippingItem {
 
 	void set_economy(Game &, Economy * e);
 	void set_location(Game &, Map_Object * obj);
+	void end_shipping(Game &);
 	PortDock * get_destination(Game &);
+	void fetch_destination(Game &, PortDock &);
 	void schedule_update(Game &, int32_t delay);
 
 	void remove(Editor_Game_Base &);
@@ -68,6 +70,7 @@ struct ShippingItem {
 
 private:
 	Object_Ptr m_object;
+	OPtr<PortDock> m_destination_dock;
 };
 
 } // namespace Widelands

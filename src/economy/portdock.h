@@ -89,6 +89,9 @@ struct PortDock : PlayerImmovable {
 	void add_shippingitem(Game &, WareInstance &);
 	void update_shippingitem(Game &, WareInstance &);
 
+	void add_shippingitem(Game &, Worker &);
+	void update_shippingitem(Game &, Worker &);
+
 	void ship_arrived(Game &, Ship &);
 
 	virtual void log_general_info(Editor_Game_Base const &);

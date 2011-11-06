@@ -186,6 +186,7 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 	if (upcast(Game, game, &egbase)) {
 		container_iterate(std::vector<ShippingItem>, m_waiting, it) {
 			it.current->set_location(*game, m_warehouse);
+			it.current->end_shipping(*game);
 		}
 	}
 
@@ -232,8 +233,34 @@ void PortDock::update_shippingitem(Game & game, WareInstance & ware)
 	}
 }
 
+/**
+ * The given @p worker enters the dock, waiting to be transported away.
+ */
+void PortDock::add_shippingitem(Game & game, Worker & worker)
+{
+	m_waiting.push_back(ShippingItem(worker));
+	worker.set_location(this);
+	update_shippingitem(game, worker);
+}
+
+/**
+ * The given @p worker, which is assumed to be inside the dock, has
+ * updated its route.
+ */
+void PortDock::update_shippingitem(Game & game, Worker & worker)
+{
+	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+		if (it.current->m_object.serial() == worker.serial()) {
+			_update_shippingitem(game, it.current);
+			return;
+		}
+	}
+}
+
 void PortDock::_update_shippingitem(Game & game, std::vector<ShippingItem>::iterator it)
 {
+	it->fetch_destination(game, *this);
+
 	PortDock * dst = it->get_destination(game);
 	assert(dst != this);
 
@@ -241,7 +268,7 @@ void PortDock::_update_shippingitem(Game & game, std::vector<ShippingItem>::iter
 		set_need_ship(game, true);
 	} else {
 		it->set_location(game, m_warehouse);
-		it->schedule_update(game, 10);
+		it->end_shipping(game);
 		*it = m_waiting.back();
 		m_waiting.pop_back();
 
@@ -261,7 +288,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 
 	container_iterate(std::vector<ShippingItem>, items, it) {
 		it->set_location(game, m_warehouse);
-		it->schedule_update(game, 10);
+		it->end_shipping(game);
 	}
 
 	if (ship.get_nritems() < ship.get_capacity() && !m_waiting.empty()) {

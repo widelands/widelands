@@ -49,6 +49,9 @@ void ShippingItem::get(Editor_Game_Base & game, WareInstance * & ware, Worker * 
 			worker = dynamic_cast<Worker *>(obj);
 			ware = 0;
 		}
+	} else {
+		ware = 0;
+		worker = 0;
 	}
 }
 
@@ -72,11 +75,32 @@ void ShippingItem::set_location(Game & game, Map_Object * obj)
 
 	if (ware)
 		ware->set_location(game, obj);
-	if (worker)
+	if (worker) {
 		worker->set_location(dynamic_cast<PlayerImmovable *>(obj));
+		if (upcast(Building, building, obj)) {
+			worker->set_position(game, building->get_position());
+		}
+	}
+}
+
+void ShippingItem::end_shipping(Game & game)
+{
+	WareInstance * ware;
+	Worker * worker;
+	get(game, ware, worker);
+
+	if (ware)
+		ware->schedule_act(game, 10);
+	if (worker)
+		worker->end_shipping(game);
 }
 
 PortDock * ShippingItem::get_destination(Game & game)
+{
+	return m_destination_dock.get(game);
+}
+
+void ShippingItem::fetch_destination(Game & game, PortDock & pd)
 {
 	WareInstance * ware;
 	Worker * worker;
@@ -87,10 +111,14 @@ PortDock * ShippingItem::get_destination(Game & game)
 	if (ware)
 		next = ware->get_next_move_step(game);
 	if (worker) {
-		log("ShippingItem::get_destination() not implemented\n");
+		Transfer * transfer = worker->get_transfer();
+		if (transfer) {
+			bool success;
+			next = transfer->get_next_step(&pd, success);
+		}
 	}
 
-	return dynamic_cast<PortDock *>(next);
+	m_destination_dock = dynamic_cast<PortDock *>(next);
 }
 
 void ShippingItem::schedule_update(Game & game, int32_t delay)
