@@ -93,13 +93,22 @@ EncyclopediaWindow::EncyclopediaWindow
 		center_to_parent();
 }
 
-
 void EncyclopediaWindow::fillWares() {
 	Tribe_Descr const & tribe = iaplayer().player().tribe();
 	Ware_Index const nr_wares = tribe.get_nrwares();
+	std::vector<Ware> ware_vec;
+
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i);
-		wares.add(ware.descname().c_str(), i, ware.icon());
+		Item_Ware_Descr const * ware = tribe.get_ware_descr(i);
+		Ware w(i, ware);
+		ware_vec.push_back(w);
+	}
+
+	std::sort(ware_vec.begin(), ware_vec.end());
+
+	for (uint32_t i = 0; i < ware_vec.size(); i++) {
+		Ware cur = ware_vec[i];
+		wares.add(cur.m_descr->descname().c_str(), cur.m_i, cur.m_descr->icon());
 	}
 }
 
