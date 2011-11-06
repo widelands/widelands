@@ -27,6 +27,7 @@
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
+#include "ui_basic/box.h"
 
 struct Interactive_GameBase;
 namespace UI {
@@ -38,6 +39,7 @@ struct General_Statistics_Menu : public UI::UniqueWindow {
 		(Interactive_GameBase &, UI::UniqueWindow::Registry &);
 
 private:
+	UI::Box              m_box;
 	WUIPlot_Area         m_plot;
 	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
