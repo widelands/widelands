@@ -42,7 +42,6 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_EIGHT_HOURS,
 		TIME_16_HOURS,
 		TIME_GAME,
-		TIME_LAST,
 	};
 	enum UNIT {
 		UNIT_MIN,
