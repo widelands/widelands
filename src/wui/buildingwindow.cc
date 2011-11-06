@@ -30,6 +30,7 @@
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
+#include "ui_basic/helpwindow.h"
 
 #include "buildingwindow.h"
 
@@ -66,7 +67,7 @@ Building_Window::Building_Window
 	vbox->add(m_tabs, UI::Box::AlignLeft, true);
 
 	m_capsbuttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(m_capsbuttons, UI::Box::AlignLeft);
+	vbox->add(m_capsbuttons, UI::Box::AlignLeft, true);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
@@ -91,6 +92,8 @@ Building_Window::~Building_Window()
 	if (m_workarea_job_id)
 		igbase().egbase().map().overlay_manager().remove_overlay
 			(m_workarea_job_id);
+	if (m_helpwindow_registry.window)
+		delete m_helpwindow_registry.window;
 	m_registry = 0;
 }
 
@@ -260,9 +263,36 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
 				 boost::bind(&Building_Window::clicked_goto, boost::ref(*this))),
 			 UI::Box::AlignCenter);
+
+	if (m_building.descr().has_help_text())
+		capsbuttons->add_inf_space();
+		capsbuttons->add
+			(new UI::Callback_Button
+				(capsbuttons, "help",
+				 0, 0, 34, 34,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+				 boost::bind(&Building_Window::help_clicked, boost::ref(*this)),
+				 _("Help")),
+			 UI::Box::AlignCenter);
+
 	}
 }
 
+/*
+===============
+The help button has been pressed
+===============
+*/
+void Building_Window::help_clicked()
+{
+	if (m_helpwindow_registry.window)
+		delete m_helpwindow_registry.window;
+	else
+		new UI::LuaTextHelpWindow(&igbase(), m_helpwindow_registry,
+				m_building.descname(),
+				m_building.descr().helptext_script());
+}
 
 /*
 ===============

@@ -59,7 +59,8 @@ spacing(5),
 space_at_bottom(15),
 space_at_right(5),
 m_time    (TIME_GAME),
-m_plotmode(PLOTMODE_ABSOLUTE)
+m_plotmode(PLOTMODE_ABSOLUTE),
+m_game_time_id(0)
 {}
 
 
@@ -116,6 +117,7 @@ std::string WUIPlot_Area::get_unit_name(UNIT unit) {
 		case UNIT_HOUR: return _("h");
 		case UNIT_MIN:  return _("min");
 	}
+	return "invalid";
 }
 
 uint32_t WUIPlot_Area::ms_to_unit(UNIT unit, uint32_t ms) {
@@ -124,25 +126,30 @@ uint32_t WUIPlot_Area::ms_to_unit(UNIT unit, uint32_t ms) {
 		case UNIT_HOUR: return ms / hours;
 		case UNIT_MIN: return ms / minutes;
 	}
+	return -1;
 }
 
 std::vector<std::string> WUIPlot_Area::get_labels() {
 	std::vector<std::string> labels;
-	uint32_t game_time = get_game_time();
-	uint32_t i = 0;
-
-	for (i = 0; i < 7; i++) {
-		if (time_in_ms[i] < game_time) {
-			UNIT unit = get_suggested_unit(time_in_ms[i]);
-			uint32_t val = ms_to_unit(unit, time_in_ms[i]);
-			labels.push_back(boost::lexical_cast<std::string>(val) + get_unit_name(unit));
-		}
+	for (int32_t i = 0; i < m_game_time_id; i++) {
+		UNIT unit = get_suggested_unit(time_in_ms[i]);
+		uint32_t val = ms_to_unit(unit, time_in_ms[i]);
+		labels.push_back(boost::lexical_cast<std::string>(val) + get_unit_name(unit));
 	}
 	labels.push_back(_("game"));
-	m_game_label = i;
 	return labels;
 }
 
+/**
+ * Find the last predefined time span that is less than the game time
+ */
+void WUIPlot_Area::calc_game_time_id() {
+	uint32_t game_time = get_game_time();
+	uint32_t i = 0;
+	for (i = 0; i < 7 && time_in_ms[i] <= game_time; i++) {
+	}
+	m_game_time_id = i;
+}
 
 /*
  * Draw this. This is the main function
@@ -405,6 +412,8 @@ void WUIPlot_Area::register_plot_data
 	m_plotdata[id].dataset   = data;
 	m_plotdata[id].showplot  = false;
 	m_plotdata[id].plotcolor = color;
+
+	calc_game_time_id();
 }
 
 /*

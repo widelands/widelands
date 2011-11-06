@@ -330,35 +330,28 @@ m_parent(&parent)
 	set_cache(false);
 
 	//  First, we must decide about the size.
+	UI::Box * box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
+	box->set_border(5, 5, 5, 5);
+	set_center_panel(box);
+
 	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
-
-#define spacing 5
-	Point const offs(spacing, 30);
-	Point       pos (offs);
-
-	// Setup Wares selectoin widget first, because the window size depends on it.
-	pos.y += PLOT_HEIGHT + 2 * spacing;
-	pos.x  = spacing;
-
-	StatisticWaresDisplay * swd =
-		new StatisticWaresDisplay
-			(this, spacing, pos.y, parent.get_player()->tribe(),
-			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2));
-
-	pos.y += swd->get_h();
-	pos.y += spacing;
 
 	//setup plot widgets
 	//create a tabbed environment for the different plots
+	uint8_t const tab_offset = 30;
+	uint8_t const spacing = 5;
+	uint8_t const plot_width = get_inner_w() - 2 * spacing;
+	uint8_t const plot_height = PLOT_HEIGHT + tab_offset + spacing;
+
 	UI::Tab_Panel * tabs =
 		 new UI::Tab_Panel
-			 (this, spacing, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+			 (box, spacing, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 
 
 	m_plot_production =
 		new WUIPlot_Area
 			(tabs,
-			 0, 0, 0, 0);
+			 0, 0, plot_width, plot_height);
 	m_plot_production->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot_production->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
@@ -369,7 +362,7 @@ m_parent(&parent)
 	m_plot_consumption =
 		new WUIPlot_Area
 			(tabs,
-			 0, 0, 0, 0);
+			 0, 0, plot_width, plot_height);
 	m_plot_consumption->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
@@ -378,13 +371,20 @@ m_parent(&parent)
 			m_plot_consumption, _("Consumption"));
 
 	m_plot_economy =
-		new DifferentialPlot_Area(tabs, 0, 0, 0, 0);
+		new DifferentialPlot_Area
+			(tabs,
+			 0, 0, plot_width, plot_height);
 	m_plot_economy->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot_economy->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
 		("economy_health", g_gr->get_picture(PicMod_UI, pic_tab_production),
 			m_plot_economy, _("Economy Health"));
+
+	tabs->activate(0);
+
+	//add tabbed environment to box
+	box->add(tabs, UI::Box::AlignLeft, true);
 
 	//register statistics data
 	for (Widelands::Ware_Index::value_t cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
@@ -412,18 +412,19 @@ m_parent(&parent)
 				(Widelands::Ware_Index(cur_ware)));
 	}
 
-	new WUIPlot_Generic_Area_Slider
-		(this, *m_plot_production, this,
-		 pos.x, pos.y, swd->get_w(), 45,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+	box->add
+		(new StatisticWaresDisplay
+			(box, 0, 0, parent.get_player()->tribe(),
+			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2)),
+		 UI::Box::AlignLeft, true);
 
-	pos.y += 45 + spacing;
+	box->add
+		(new WUIPlot_Generic_Area_Slider
+			(this, *m_plot_production, this,
+			0, 0, 100, 45,
+			g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 UI::Box::AlignLeft, true);
 
-	set_inner_size(swd->get_w() + 2 * spacing, pos.y);
-
-	//set height of Tab_Panel to height of the plot + height of the tabs
-	tabs->set_size(get_inner_w() - 2 * spacing, PLOT_HEIGHT + offs.y + spacing);
-	tabs->activate(0);
 }
 
 /**
@@ -441,8 +442,8 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
  * statistics simultaneously.
  */
 void Ware_Statistics_Menu::set_time(int32_t timescale) {
-	m_plot_production->set_time_int(timescale);
-	m_plot_consumption->set_time_int(timescale);
-	m_plot_economy->set_time_int(timescale);
+	m_plot_production->set_time_id(timescale);
+	m_plot_consumption->set_time_id(timescale);
+	m_plot_economy->set_time_id(timescale);
 }
 

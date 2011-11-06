@@ -82,6 +82,10 @@ Building_Descr::Building_Descr
 		throw game_data_error("size: %s", e.what());
 	}
 
+	m_helptext_script = directory + "/help.lua";
+	if (not g_fs->FileExists(m_helptext_script))
+		m_helptext_script = "";
+
 	// Parse build options
 	m_buildable = global_s.get_bool("buildable", true);
 	m_destructible = global_s.get_bool("destructible", true);
@@ -320,11 +324,13 @@ Flag & Building::base_flag()
  */
 uint32_t Building::get_playercaps() const throw () {
 	uint32_t caps = 0;
-	if (descr().is_destructible()) {
+	const Building_Descr & d = descr();
+	if (d.is_destructible()) {
 		caps |= 1 << PCap_Bulldoze;
-		caps |= 1 << PCap_Dismantle;
+		if (d.is_buildable() or d.is_enhanced())
+			caps |= 1 << PCap_Dismantle;
 	}
-	if (descr().enhancements().size())
+	if (d.enhancements().size())
 		caps |= 1 << PCap_Enhancable;
 	return caps;
 }

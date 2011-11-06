@@ -42,7 +42,6 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_EIGHT_HOURS,
 		TIME_16_HOURS,
 		TIME_GAME,
-		TIME_LAST,
 	};
 	enum UNIT {
 		UNIT_MIN,
@@ -66,13 +65,14 @@ struct WUIPlot_Area : public UI::Panel {
 		m_time = id;
 	}
 
-	void set_time_int(int32_t time) {
-		if (time == m_game_label)
+	void set_time_id(int32_t time) {
+		if (time == m_game_time_id)
 			set_time(TIME_GAME);
 		else
 			set_time(static_cast<TIME>(time));
 	};
 	TIME get_time() {return static_cast<TIME>(m_time); };
+	int32_t get_game_time_id() {return m_game_time_id; };
 	void set_sample_rate(uint32_t id); // in milliseconds
 
 	void register_plot_data
@@ -103,17 +103,18 @@ protected:
 	};
 	std::vector<__plotdata> m_plotdata;
 
-	int32_t                 m_time;  // How much do you want to list
+	TIME                    m_time;  // How much do you want to list
 	int32_t                 m_sample_rate;
 	int32_t                 m_plotmode;
-	int32_t                 m_game_label; // what label is used for TIME_GAME
 
 private:
 	uint32_t get_game_time();
 	uint32_t get_plot_time();
+	void calc_game_time_id();
 	UNIT get_suggested_unit(uint32_t game_time);
 	std::string get_unit_name(UNIT unit);
 	uint32_t ms_to_unit(UNIT unit, uint32_t ms);
+	int32_t                 m_game_time_id; // what label is used for TIME_GAME
 };
 
 /**
@@ -133,13 +134,13 @@ struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
 		(parent,
 		 x, y, w, h,
 		 plot_area.get_labels(),
-		 plot_area.get_time(),
+		 plot_area.get_game_time_id(),
 		 background_picture_id,
 		 tooltip_text,
 		 cursor_size,
 		 enabled)
 	{
-		changedto->set(&plot_area, &WUIPlot_Area::set_time_int);
+		changedto->set(&plot_area, &WUIPlot_Area::set_time_id);
 	}
 };
 

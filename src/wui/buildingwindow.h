@@ -55,6 +55,7 @@ struct Building_Window : public UI::Window {
 protected:
 	UI::Tab_Panel * get_tabs() {return m_tabs;}
 
+	void help_clicked();
 	void act_bulldoze();
 	void act_dismantle();
 	void act_debug();
@@ -74,6 +75,7 @@ protected:
 	UI::Window * & m_registry;
 
 private:
+	UI::UniqueWindow::Registry m_helpwindow_registry;
 	Widelands::Building & m_building;
 
 	UI::Tab_Panel * m_tabs;

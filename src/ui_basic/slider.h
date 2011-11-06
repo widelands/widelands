@@ -25,12 +25,16 @@
 
 namespace UI {
 
+struct DiscreteSlider;
+
 /**
  * \brief This class defines a generic slide bar.
  *
  * The callbacks for the slider value are done by two signal instances.
  */
 class Slider : public Panel {
+
+friend struct DiscreteSlider;
 
 protected:
 	Slider
@@ -92,11 +96,11 @@ private:
 
 	PictureID m_pic_background;    //  background texture (picture ID)
 
+protected:
 	int32_t m_x_gap;              //  draw positions
 	int32_t m_y_gap;
 	int32_t m_bar_size;
 
-protected:
 	int32_t m_cursor_pos;         //  cursor position
 	int32_t m_cursor_size;        //  cursor width
 };
@@ -132,6 +136,7 @@ protected:
 	void draw(RenderTarget & dst);
 	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+	void layout();
 };
 
 
@@ -166,6 +171,7 @@ protected:
 	void draw(RenderTarget & dst);
 	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+	void layout();
 };
 
 /**
@@ -208,6 +214,7 @@ protected:
 	const std::vector<std::string> labels;
 
 	void draw(RenderTarget & dst);
+	void layout();
 };
 
 
