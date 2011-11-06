@@ -52,9 +52,9 @@ m_box           (this, 0, 0, UI::Box::Vertical, 0, 0, 5),
 m_plot          (&m_box, 0, 0, 430, PLOT_HEIGHT),
 m_selected_information(0)
 {
-	if (m_my_registry) {
-		m_selected_information = m_my_registry->selected_information;
-	}
+	assert (m_my_registry);
+
+	m_selected_information = m_my_registry->selected_information;
 
 	set_center_panel(&m_box);
 	m_box.set_border(5, 5, 5, 5);
@@ -64,7 +64,6 @@ m_selected_information(0)
 	// Setup plot data
 	m_plot.set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot.set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
-
 	Game & game = *parent.get_game();
 	const Game::General_Stats_vector & genstats =
 		game.get_general_statistics();
@@ -126,8 +125,12 @@ m_selected_information(0)
 				 color);
 		}
 		if (game.get_player(i + 1)) // Show area plot
-			m_plot.show_plot(i * m_ndatasets, 1);
+			m_plot.show_plot
+				(i * m_ndatasets + m_selected_information,
+				 m_my_registry->selected_players[i]);
 	}
+
+	m_plot.set_time(m_my_registry->time);
 
 	// Setup Widgets
 	m_box.add(&m_plot, UI::Box::AlignTop);
@@ -152,7 +155,9 @@ m_selected_information(0)
 					 boost::ref(*this),
 					p),
 				 player->get_name().c_str());
-		cb.set_perm_pressed(true);
+
+		cb.set_perm_pressed(m_my_registry->selected_players[p - 1]);
+
 		m_cbs[p - 1] = &cb;
 
 		hbox1->add(&cb, UI::Box::AlignLeft);
@@ -279,8 +284,13 @@ m_selected_information(0)
 }
 
 General_Statistics_Menu::~General_Statistics_Menu() {
-	if (m_my_registry) {
-		m_my_registry->selected_information = m_selected_information;
+	m_my_registry->selected_information = m_selected_information;
+	m_my_registry->time = m_plot.get_time();
+	Game & game = ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
+	Player_Number const nr_players = game.map().get_nrplayers();
+	iterate_players_existing_const(p, nr_players, game, player) {
+		m_my_registry->selected_players[p - 1] =
+			m_cbs[p - 1]->get_perm_pressed();
 	}
 }
 
