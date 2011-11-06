@@ -38,9 +38,16 @@ struct General_Statistics_Menu : public UI::UniqueWindow {
 
 	// Custom registry, to store the selected_information as well.
 	struct Registry : public UI::UniqueWindow::Registry {
-		Registry() : UI::UniqueWindow::Registry(), selected_information(0) {}
+		Registry() :
+			UI::UniqueWindow::Registry(),
+			selected_information(0),
+			selected_players(true, MAX_PLAYERS),
+			time(WUIPlot_Area::TIME_GAME)
+		{}
 
 		int32_t selected_information;
+		std::vector<bool> selected_players;
+		WUIPlot_Area::TIME time;
 	};
 
 	General_Statistics_Menu
