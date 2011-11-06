@@ -35,7 +35,8 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 	//yoffset of the zero line
 	float const yoffset = spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2;
 
-	draw_diagram(dst, xline_length, yline_length);
+	uint32_t time_in_ms_ = draw_diagram(dst, xline_length, yline_length);
+
 	//draw zero line
 	dst.draw_line
 		(get_inner_w() - space_at_right,
@@ -68,7 +69,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 				// How many do we take together
 				int32_t const how_many =
 					static_cast<int32_t>
-					((static_cast<float>(time_in_ms[m_time])
+					((static_cast<float>(time_in_ms_)
 					  /
 					  static_cast<float>(nr_samples))
 					 /
@@ -113,7 +114,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 	float sub =
 		xline_length
 		/
-		(static_cast<float>(time_in_ms[m_time])
+		(static_cast<float>(time_in_ms_)
 		 /
 		 static_cast<float>(m_sample_rate));
 	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
@@ -127,7 +128,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 			if (m_plotmode == PLOTMODE_RELATIVE) {
 				//  How many do we take together.
 				const int32_t how_many = static_cast<int32_t>
-				((static_cast<float>(time_in_ms[m_time])
+				((static_cast<float>(time_in_ms_)
 				  /
 				  static_cast<float>(nr_samples))
 				 /
