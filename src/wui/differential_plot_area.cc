@@ -144,7 +144,6 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 					}
 				}
 
-				//dataset = &m_data;
 				sub = xline_length / static_cast<float>(nr_samples);
 			}
 
