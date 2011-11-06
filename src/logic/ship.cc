@@ -427,7 +427,9 @@ Load / Save implementation
 
 #define SHIP_SAVEGAME_VERSION 2
 
-Ship::Loader::Loader()
+Ship::Loader::Loader() :
+	m_lastdock(0),
+	m_destination(0)
 {
 }
 
