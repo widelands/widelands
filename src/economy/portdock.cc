@@ -120,8 +120,17 @@ PortDock * PortDock::get_dock(Flag & flag) const
 	return 0;
 }
 
+/**
+ * Signal to the dock that it now belongs to the given economy.
+ *
+ * Called by @ref Warehouse::set_economy, and responsible for forwarding the
+ * change to @ref Fleet.
+ */
 void PortDock::set_economy(Economy * e)
 {
+	if (e == get_economy())
+		return;
+
 	PlayerImmovable::set_economy(e);
 	if (m_fleet)
 		m_fleet->set_economy(e);

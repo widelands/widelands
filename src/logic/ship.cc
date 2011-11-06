@@ -356,7 +356,7 @@ void Ship::set_economy(Game & game, Economy * e)
  */
 void Ship::set_destination(Game & game, PortDock & pd)
 {
-	molog("set_destination to %u\n", pd.serial());
+	molog("set_destination to %u (currently %zu items)\n", pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }

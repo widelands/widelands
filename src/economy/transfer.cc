@@ -185,10 +185,10 @@ PlayerImmovable * Transfer::get_next_step
 				m_route.truncate(m_route.get_nrsteps() - 1);
 
 	// Reroute into PortDocks or the associated warehouse when appropriate
-	if (m_item && m_item->serial() == 1532) {
+	if (m_worker && m_worker->serial() == 1846) {
 		log
 			("Item %u ready at location %u (flag %u) for destination %u\n",
-			 m_item->serial(), location->serial(), locflag.serial(), destination->serial());
+			 m_worker->serial(), location->serial(), locflag.serial(), destination->serial());
 		for (int i = 0; i <= m_route.get_nrsteps() && i < 5; ++i) {
 			log("  %i: flag %u\n", i, m_route.get_flag(m_game, i).serial());
 		}

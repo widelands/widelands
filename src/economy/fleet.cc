@@ -20,6 +20,7 @@
 #include "fleet.h"
 
 #include "container_iterate.h"
+#include "economy.h"
 #include "flag.h"
 #include "portdock.h"
 #include "logic/game.h"
@@ -47,7 +48,6 @@ Map_Object_Descr fleet_descr("fleet", "Fleet");
 Fleet::Fleet(Player & player) :
 	Map_Object(&fleet_descr),
 	m_owner(player),
-	m_economy(0),
 	m_act_pending(false),
 	m_port_roundrobin(0)
 {
@@ -72,18 +72,17 @@ bool Fleet::active() const
 }
 
 /**
- * Propagate economy changes to the ships in the fleet. (Note that docks
- * are updated via the associated warehouses.)
+ * Inform the Fleet about the change of @ref Economy of one of the docks.
+ *
+ * Note that we always associate ourselves with the economy of the first dock.
  */
 void Fleet::set_economy(Economy * e)
 {
-	if (m_economy == e)
-		return;
-
-	m_economy = e;
-	if (upcast(Game, game, &owner().egbase())) {
-		container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
-			(*shipit.current)->set_economy(*game, e);
+	if (m_ports.empty() || e == m_ports[0]->get_economy()) {
+		if (upcast(Game, game, &owner().egbase())) {
+			container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
+				(*shipit.current)->set_economy(*game, e);
+			}
 		}
 	}
 }
@@ -196,6 +195,10 @@ void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
 
 	for (uint idx = old_nrports; idx < m_ports.size(); ++idx) {
 		m_ports[idx]->set_fleet(this);
+	}
+
+	if (old_nrports && !other->m_ports.empty()) {
+		m_ports.front()->get_economy()->check_merge(m_ports.front()->base_flag(), m_ports.back()->base_flag());
 	}
 
 	other->m_ports.clear();
@@ -311,7 +314,10 @@ void Fleet::add_ship(Ship * ship)
 	m_ships.push_back(ship);
 	ship->set_fleet(this);
 	if (upcast(Game, game, &owner().egbase())) {
-		ship->set_economy(*game, m_economy);
+		if (m_ports.empty())
+			ship->set_economy(*game, 0);
+		else
+			ship->set_economy(*game, m_ports[0]->get_economy());
 	}
 
 	update(owner().egbase());
@@ -325,6 +331,8 @@ void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 		m_ships.pop_back();
 	}
 	ship->set_fleet(0);
+	if (upcast(Game, game, &egbase))
+		ship->set_economy(*game, 0);
 
 	if (ship->get_destination(egbase))
 		update(egbase);
@@ -360,6 +368,9 @@ struct StepEvalFindPorts {
 
 /**
  * Fill in all unknown paths to connect the port m_ports[idx] to the rest of the ports.
+ *
+ * Note that this is done lazily, i.e. the first time a path is actually requested,
+ * because path finding is flaky during map loading.
  */
 void Fleet::connect_port(Editor_Game_Base & egbase, uint idx)
 {
@@ -441,7 +452,11 @@ void Fleet::add_port(Editor_Game_Base & egbase, PortDock * port)
 {
 	m_ports.push_back(port);
 	port->set_fleet(this);
-	set_economy(port->get_economy());
+	if (m_ports.size() == 1) {
+		set_economy(m_ports[0]->get_economy());
+	} else {
+		m_ports[0]->get_economy()->check_merge(m_ports[0]->base_flag(), port->base_flag());
+	}
 
 	m_portpaths.resize((m_ports.size() * (m_ports.size() - 1)) / 2);
 
@@ -472,6 +487,7 @@ void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
 		set_economy(0);
 	} else {
 		set_economy(m_ports[0]->get_economy());
+		m_ports[0]->get_economy()->check_split(m_ports[0]->base_flag(), port->base_flag());
 	}
 
 	if (m_ships.empty() && m_ports.empty())
@@ -622,11 +638,15 @@ void Fleet::Loader::load_pointers()
 	bool save_act_pending = fleet.m_act_pending;
 
 	container_iterate_const(std::vector<uint32_t>, m_ships, it) {
-		fleet.add_ship(&mol().get<Ship>(*it));
+		fleet.m_ships.push_back(&mol().get<Ship>(*it));
+		fleet.m_ships.back()->set_fleet(&fleet);
 	}
 	container_iterate_const(std::vector<uint32_t>, m_ports, it) {
-		fleet.add_port(egbase(), &mol().get<PortDock>(*it));
+		fleet.m_ports.push_back(&mol().get<PortDock>(*it));
+		fleet.m_ports.back()->set_fleet(&fleet);
 	}
+
+	fleet.m_portpaths.resize((fleet.m_ports.size() * (fleet.m_ports.size() - 1)) / 2);
 
 	fleet.m_act_pending = save_act_pending;
 }
@@ -634,6 +654,19 @@ void Fleet::Loader::load_pointers()
 void Fleet::Loader::load_finish()
 {
 	Map_Object::Loader::load_finish();
+
+	Fleet & fleet = get<Fleet>();
+
+	if (!fleet.m_ports.empty()) {
+		Flag & firstport = fleet.m_ports.front()->base_flag();
+
+		for (uint i = 1; i < fleet.m_ports.size(); ++i) {
+			// Note that the first port's economy may be changed in the merge!
+			fleet.m_ports.front()->get_economy()->check_merge(firstport, fleet.m_ports[i]->base_flag());
+		}
+
+		fleet.set_economy(fleet.m_ports[0]->get_economy());
+	}
 }
 
 Map_Object::Loader * Fleet::load
