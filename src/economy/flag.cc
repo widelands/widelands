@@ -20,6 +20,7 @@
 #include "flag.h"
 
 // Package includes
+#include "portdock.h"
 #include "road.h"
 #include "economy.h"
 #include "ware_instance.h"
@@ -33,6 +34,7 @@
 #include "logic/tribe.h"
 #include "upcast.h"
 #include "wexception.h"
+#include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "container_iterate.h"
 
@@ -284,10 +286,12 @@ void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)
 		neighbours.push_back(n);
 	}
 
-	// I guess this would be the place to add other ports if a port building
-	// is attached to this flag
-	// Or maybe other hosts of a carrier pigeon service, or a wormhole connection
-	// point or whatever ;)
+	if (m_building && m_building->descr().get_isport()) {
+		Warehouse * wh = static_cast<Warehouse *>(m_building);
+		if (PortDock * pd = wh->get_portdock()) {
+			pd->add_neighbours(neighbours);
+		}
+	}
 }
 
 /**

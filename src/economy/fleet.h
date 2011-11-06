@@ -20,11 +20,16 @@
 #ifndef ECONOMY_FLEET_H
 #define ECONOMY_FLEET_H
 
+#include <boost/shared_ptr.hpp>
+
 #include "logic/instances.h"
 
 namespace Widelands {
 
+struct Economy;
+struct Flag;
 struct PortDock;
+struct RoutingNodeNeighbour;
 struct Ship;
 
 /**
@@ -46,38 +51,74 @@ struct Ship;
  * properly at the moment.
  */
 struct Fleet : Map_Object {
+	struct PortPath {
+		int32_t cost;
+		boost::shared_ptr<Path> path;
+
+		PortPath() : cost(-1) {}
+	};
+
 	Fleet(Player & player);
 
 	Player * get_owner() const {return &m_owner;}
 	Player & owner() const {return m_owner;}
+
+	PortDock * get_dock(Flag & flag) const;
+	void set_economy(Economy * e);
+
+	bool active() const;
 
 	virtual int32_t get_type() const throw ();
 	virtual char const * type_name() const throw ();
 
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
+	void update(Editor_Game_Base &);
 
 	void add_ship(Ship * ship);
 	void remove_ship(Editor_Game_Base & egbase, Ship * ship);
-	void add_port(PortDock * port);
+	void add_port(Editor_Game_Base & egbase, PortDock * port);
 	void remove_port(Editor_Game_Base & egbase, PortDock * port);
 
 	virtual void log_general_info(Editor_Game_Base const &);
 
+	bool get_path(PortDock & start, PortDock & end, Path & path);
+	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
+
+protected:
+	virtual void act(Game &, uint32_t data);
+
 private:
 	void find_other_fleet(Editor_Game_Base & egbase);
 	void merge(Editor_Game_Base & egbase, Fleet * other);
+	void connect_port(Editor_Game_Base & egbase, uint idx);
+
+	PortPath & portpath(uint i, uint j);
+	const PortPath & portpath(uint i, uint j) const;
+	PortPath & portpath_bidir(uint i, uint j, bool & reverse);
+	const PortPath & portpath_bidir(uint i, uint j, bool & reverse) const;
 
 	Player & m_owner;
 	std::vector<Ship *> m_ships;
 	std::vector<PortDock *> m_ports;
+
+	bool m_act_pending;
+	uint m_port_roundrobin;
+
+	/**
+	 * Store all pairs shortest paths between port docks
+	 *
+	 * Let i < j, then the path from m_ports[i] to m_ports[j] is stored in
+	 * m_portpaths[binom(j,2) + i]
+	 */
+	std::vector<PortPath> m_portpaths;
 
 	// saving and loading
 protected:
 	struct Loader : Map_Object::Loader {
 		Loader();
 
-		void load(FileRead &);
+		void load(FileRead &, uint8_t version);
 		virtual void load_pointers();
 		virtual void load_finish();
 

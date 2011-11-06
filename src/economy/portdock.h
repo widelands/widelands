@@ -21,10 +21,13 @@
 #define ECONOMY_PORTDOCK_H
 
 #include "logic/immovable.h"
+#include "shippingitem.h"
 
 namespace Widelands {
 
 struct Fleet;
+struct RoutingNodeNeighbour;
+struct Ship;
 struct Warehouse;
 
 /**
@@ -58,8 +61,13 @@ struct PortDock : PlayerImmovable {
 
 	void add_position(Widelands::Coords where);
 	void set_warehouse(Warehouse * wh);
+	Warehouse * get_warehouse() const {return m_warehouse;}
 
 	Fleet * get_fleet() const {return m_fleet;}
+	PortDock * get_dock(Flag & flag) const;
+	bool get_need_ship() const {return m_need_ship;}
+
+	virtual void set_economy(Economy *);
 
 	virtual int32_t get_size() const throw ();
 	virtual bool get_passable() const throw ();
@@ -76,6 +84,13 @@ struct PortDock : PlayerImmovable {
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
+	void add_neighbours(std::vector<RoutingNodeNeighbour> & neighbours);
+
+	void add_shippingitem(Game &, WareInstance &);
+	void update_shippingitem(Game &, WareInstance &);
+
+	void ship_arrived(Game &, Ship &);
+
 	virtual void log_general_info(Editor_Game_Base const &);
 
 private:
@@ -83,22 +98,27 @@ private:
 
 	void init_fleet(Editor_Game_Base & egbase);
 	void set_fleet(Fleet * fleet);
+	void _update_shippingitem(Game &, std::vector<ShippingItem>::iterator);
+	void set_need_ship(Game &, bool need);
 
 	Fleet * m_fleet;
 	Warehouse * m_warehouse;
 	PositionList m_dockpoints;
+	std::vector<ShippingItem> m_waiting;
+	bool m_need_ship;
 
 	// saving and loading
 protected:
 	struct Loader : PlayerImmovable::Loader {
 		Loader();
 
-		void load(FileRead &);
+		void load(FileRead &, uint8_t version);
 		virtual void load_pointers();
 		virtual void load_finish();
 
 	private:
 		uint32_t m_warehouse;
+		std::vector<ShippingItem::Loader> m_waiting;
 	};
 
 public:

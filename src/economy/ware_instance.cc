@@ -33,6 +33,7 @@
 #include "request.h"
 #include "wexception.h"
 #include "upcast.h"
+#include "portdock.h"
 
 namespace Widelands {
 
@@ -346,9 +347,15 @@ void WareInstance::update(Game & game)
 		}
 
 		if (upcast(Building, building, location)) {
-			if (nextstep != &location->base_flag())
+			if (nextstep != &location->base_flag()) {
+				if (upcast(PortDock, pd, nextstep)) {
+					pd->add_shippingitem(game, *this);
+					return;
+				}
+
 				throw wexception
 					("MO(%u): ware: move from building to non-baseflag", serial());
+			}
 
 			// There are some situations where we might end up in a warehouse
 			// as part of a requested route, and we need to move out of it
@@ -370,7 +377,6 @@ void WareInstance::update(Game & game)
 				 building->name().c_str(), building->get_position().x,
 				 building->get_position().y, nextstep->serial(),
 				 nextstep->name().c_str());
-
 		} else if (upcast(Flag, flag, location)) {
 			flag->call_carrier
 				(game,
@@ -380,6 +386,8 @@ void WareInstance::update(Game & game)
 				 &nextstep->base_flag() != location
 				 ?
 				 &nextstep->base_flag() : nextstep);
+		} else if (upcast(PortDock, pd, location)) {
+			pd->update_shippingitem(game, *this);
 		}
 	}
 }

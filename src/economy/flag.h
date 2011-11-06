@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,8 +46,8 @@ class WareInstance;
  * worker is to execute. Once execution of the program has finished, the worker
  * will return to a warehouse.
  *
-/// Important: Do not access m_roads directly. get_road() and others use
-/// WALK_xx in all "direction" parameters.
+ * Important: Do not access m_roads directly. get_road() and others use
+ * WALK_xx in all "direction" parameters.
  */
 struct Flag : public PlayerImmovable, public RoutingNode {
 	typedef std::vector<const WareInstance *> Wares;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,14 @@
 #define SHIP_H
 
 #include "bob.h"
+#include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
 
-class Editor;
 namespace Widelands {
 
 struct Economy;
 struct Fleet;
+struct PortDock;
 
 struct Ship_Descr : Bob::Descr {
 	Ship_Descr
@@ -38,10 +39,13 @@ struct Ship_Descr : Bob::Descr {
 	virtual uint32_t movecaps() const throw ();
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
+	uint get_capacity() const throw () {return m_capacity;}
+
 	virtual Bob & create_object() const;
 
 private:
 	DirAnimations m_sail_anims;
+	uint m_capacity;
 };
 
 /**
@@ -53,32 +57,48 @@ struct Ship : Bob {
 	Ship(const Ship_Descr & descr);
 
 	Fleet * get_fleet() const {return m_fleet;}
+	PortDock * get_destination(Editor_Game_Base & egbase);
 
 	virtual Type get_bob_type() const throw ();
+
+	void set_economy(Game &, Economy * e);
+	void set_destination(Game &, PortDock &);
 
 	void init_auto_task(Game &);
 
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
-	void start_task_shipidle(Game &);
+	void start_task_ship(Game &);
+	void start_task_movetodock(Game &, PortDock &);
 
 	virtual void log_general_info(Editor_Game_Base const &);
+
+	uint get_capacity() const {return descr().get_capacity();}
+	uint get_nritems() const {return m_items.size();}
+
+	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
+	void add_item(Game &, const ShippingItem & item);
 
 private:
 	friend struct Fleet;
 
 	void wakeup_neighbours(Game &);
 
-	static const Task taskShipIdle;
+	static const Task taskShip;
 
-	void shipidle_update(Game &, State &);
-	void shipidle_wakeup(Game &);
+	void ship_update(Game &, State &);
+	void ship_wakeup(Game &);
+
+	void ship_update_idle(Game &, State &);
 
 	void init_fleet(Editor_Game_Base &);
 	void set_fleet(Fleet * fleet);
 
 	Fleet * m_fleet;
+	OPtr<PortDock> m_lastdock;
+	OPtr<PortDock> m_destination;
+	std::vector<ShippingItem> m_items;
 
 	// saving and loading
 protected:
@@ -87,7 +107,14 @@ protected:
 
 		virtual const Task * get_task(const std::string & name);
 
+		void load(FileRead & fr, uint8_t version);
+		virtual void load_pointers();
 		virtual void load_finish();
+
+	private:
+		uint32_t m_lastdock;
+		uint32_t m_destination;
+		std::vector<ShippingItem::Loader> m_items;
 	};
 
 public:

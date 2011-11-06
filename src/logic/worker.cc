@@ -1412,7 +1412,7 @@ void Worker::transfer_update(Game & game, State & state) {
 		// The caller requested a route update, or the previously calculated route
 		// failed.
 		// We will recalculate the route on the next update().
-		if (signal == "road" || signal == "fail" || signal == "transfer") {
+		if (signal == "road" || signal == "fail" || signal == "transfer" || signal == "wakeup") {
 			molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 			signal_handled();

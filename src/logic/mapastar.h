@@ -20,6 +20,7 @@
 #ifndef LOGIC_MAPASTAR_H
 #define LOGIC_MAPASTAR_H
 
+#include "log.h"
 #include "map.h"
 #include "pathfield.h"
 
@@ -33,6 +34,7 @@ struct MapAStarBase {
 	}
 
 	bool empty() const {return queue.empty();}
+	void pathto(Coords dest, Path & path) const;
 
 protected:
 	Pathfield & pathfield(Coords where)
@@ -49,14 +51,50 @@ protected:
 	Pathfield::Queue queue;
 };
 
+struct StepEvalAStar {
+	StepEvalAStar(Coords target) :
+		m_target(target),
+		m_estimator_bias(0),
+		m_conservative(true),
+		m_swim(false)
+	{
+	}
+
+	int32_t estimate(Map & map, FCoords pos) const
+	{
+		int32_t est = m_estimator_bias;
+		if (m_conservative)
+			est += map.calc_cost_lowerbound(pos, m_target);
+		else
+			est += map.calc_cost_estimate(pos, m_target);
+		return est;
+	}
+
+	int32_t stepcost(Map & map, FCoords from, int32_t fromcost, WalkingDir dir, FCoords to) const
+	{
+		if
+			((m_swim && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||
+			 (!m_swim && !(to.field->nodecaps() & MOVECAPS_WALK)))
+			return -1;
+
+		return map.calc_cost(from, dir);
+	}
+
+	Coords m_target;
+	int32_t m_estimator_bias;
+	bool m_conservative;
+	bool m_swim;
+};
+
+
 /**
  * Allow customized A-star type searches through a map.
  *
  * The template parameter must be a struct type that matches the following "interface":
  * @code
  * struct StepEval {
- *   int32_t estimate(FCoords pos) const;
- *   int32_t stepcost(FCoords from, int32_t fromcost, FCoords to) const;
+ *   int32_t estimate(Map & map, FCoords pos) const;
+ *   int32_t stepcost(Map & map, FCoords from, int32_t fromcost, WalkingDir dir, FCoords to) const;
  * };
  * @endcode
  * The estimate function is called once for every newly discovered field,
@@ -78,9 +116,6 @@ protected:
  *     break;
  * }
  * @endcode
- *
- * @note Recovering a @ref Path is not implemented; that functionality should
- * go into @ref MapAStarBase.
  */
 template<typename StepEval>
 struct MapAStar : MapAStarBase {
@@ -106,7 +141,7 @@ void MapAStar<StepEval>::push(Coords pos, int32_t cost)
 		pf.cycle = pathfields->cycle;
 		pf.backlink = IDLE;
 		pf.real_cost = cost;
-		pf.estim_cost = eval.estimate(map.get_fcoords(pos));
+		pf.estim_cost = eval.estimate(map, map.get_fcoords(pos));
 		queue.push(&pf);
 	} else if (pf.cookie().is_active() && cost <= pf.real_cost) {
 		pf.backlink = IDLE;
@@ -143,17 +178,15 @@ bool MapAStar<StepEval>::step(FCoords & cur, int32_t & cost)
 
 	// Check all the 6 neighbours
 	for (uint32_t i = 6; i; i--, direction++) {
-		FCoords neighb;
-		int32_t stepcost;
-
-		map.get_neighbour(cur, *direction, &neighb);
+		FCoords neighb(map.get_neighbour(cur, *direction));
 		Pathfield & neighbpf = pathfield(neighb);
 
 		// Field is closed already
 		if (neighbpf.cycle == pathfields->cycle && !neighbpf.heap_cookie.is_active())
 			continue;
 
-		stepcost = eval.stepcost(cur, cost, neighb);
+		int32_t stepcost = eval.stepcost(map, cur, cost, WalkingDir(*direction), neighb);
+
 		if (stepcost < 0)
 			continue;
 
@@ -162,7 +195,7 @@ bool MapAStar<StepEval>::step(FCoords & cur, int32_t & cost)
 		if (neighbpf.cycle != pathfields->cycle) {
 			neighbpf.cycle = pathfields->cycle;
 			neighbpf.real_cost = newcost;
-			neighbpf.estim_cost = eval.estimate(neighb);
+			neighbpf.estim_cost = eval.estimate(map, neighb);
 			neighbpf.backlink = *direction;
 			queue.push(&neighbpf);
 		} else if (neighbpf.real_cost > newcost) {

@@ -24,9 +24,12 @@
 #include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/player.h"
+#include "logic/ship.h"
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
+#include "ware_instance.h"
 
 namespace Widelands {
 
@@ -35,7 +38,8 @@ Map_Object_Descr portdock_descr("portdock", "Port Dock");
 PortDock::PortDock() :
 	PlayerImmovable(portdock_descr),
 	m_fleet(0),
-	m_warehouse(0)
+	m_warehouse(0),
+	m_need_ship(false)
 {
 }
 
@@ -105,6 +109,31 @@ Flag & PortDock::base_flag()
 	return m_warehouse->base_flag();
 }
 
+/**
+ * Return the dock that has the given flag as its base, or 0 if no dock of our fleet
+ * has the given flag.
+ */
+PortDock * PortDock::get_dock(Flag & flag) const
+{
+	if (m_fleet)
+		return m_fleet->get_dock(flag);
+	return 0;
+}
+
+void PortDock::set_economy(Economy * e)
+{
+	PlayerImmovable::set_economy(e);
+	if (m_fleet)
+		m_fleet->set_economy(e);
+
+	if (upcast(Game, game, &owner().egbase())) {
+		container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+			it->set_economy(*game, e);
+		}
+	}
+}
+
+
 void PortDock::draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
 {
@@ -135,13 +164,22 @@ void PortDock::init(Editor_Game_Base & egbase)
 void PortDock::init_fleet(Editor_Game_Base & egbase)
 {
 	Fleet * fleet = new Fleet(owner());
-	fleet->add_port(this);
+	fleet->add_port(egbase, this);
 	fleet->init(egbase);
 	// Note: the Fleet calls our set_fleet automatically
 }
 
 void PortDock::cleanup(Editor_Game_Base & egbase)
 {
+	if (m_warehouse)
+		m_warehouse->m_portdock = 0;
+
+	if (upcast(Game, game, &egbase)) {
+		container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+			it.current->set_location(*game, m_warehouse);
+		}
+	}
+
 	if (m_fleet)
 		m_fleet->remove_port(egbase, this);
 
@@ -149,10 +187,97 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 		unset_position(egbase, *it.current);
 	}
 
-	if (m_warehouse)
-		m_warehouse->m_portdock = 0;
-
 	PlayerImmovable::cleanup(egbase);
+}
+
+/**
+ * Add the flags of all ports that can be reached via this dock.
+ */
+void PortDock::add_neighbours(std::vector<RoutingNodeNeighbour> & neighbours)
+{
+	if (m_fleet && m_fleet->active())
+		m_fleet->add_neighbours(*this, neighbours);
+}
+
+/**
+ * The given @p ware enters the dock, waiting to be transported away.
+ */
+void PortDock::add_shippingitem(Game & game, WareInstance & ware)
+{
+	m_waiting.push_back(ShippingItem(ware));
+	ware.set_location(game, this);
+	update_shippingitem(game, ware);
+}
+
+/**
+ * The given @p ware, which is assumed to be inside the dock, has updated
+ * its route.
+ */
+void PortDock::update_shippingitem(Game & game, WareInstance & ware)
+{
+	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+		if (it.current->m_object.serial() == ware.serial()) {
+			_update_shippingitem(game, it.current);
+			return;
+		}
+	}
+}
+
+void PortDock::_update_shippingitem(Game & game, std::vector<ShippingItem>::iterator it)
+{
+	PortDock * dst = it->get_destination(game);
+	assert(dst != this);
+
+	if (dst) {
+		if (m_fleet)
+			set_need_ship(game, true);
+	} else {
+		it->set_location(game, m_warehouse);
+		it->schedule_update(game, 10);
+		*it = m_waiting.back();
+		m_waiting.pop_back();
+
+		if (m_waiting.empty())
+			set_need_ship(game, false);
+	}
+}
+
+/**
+ * A ship has arrived at the dock. Clear all items designated for this dock,
+ * and load the ship.
+ */
+void PortDock::ship_arrived(Game & game, Ship & ship)
+{
+	std::vector<ShippingItem> items;
+	ship.withdraw_items(game, *this, items);
+
+	container_iterate(std::vector<ShippingItem>, items, it) {
+		it->set_location(game, m_warehouse);
+		it->schedule_update(game, 10);
+	}
+
+	if (ship.get_nritems() < ship.get_capacity() && !m_waiting.empty()) {
+		uint nrload = std::min<uint>(m_waiting.size(), ship.get_capacity() - ship.get_nritems());
+
+		while (nrload--) {
+			ship.add_item(game, m_waiting.back());
+			m_waiting.pop_back();
+		}
+
+		if (m_waiting.empty())
+			set_need_ship(game, false);
+	}
+
+	m_fleet->update(game);
+}
+
+void PortDock::set_need_ship(Game & game, bool need)
+{
+	if (need == m_need_ship)
+		return;
+
+	if (m_fleet)
+		m_fleet->update(game);
 }
 
 void PortDock::log_general_info(Editor_Game_Base const & egbase)
@@ -167,13 +292,13 @@ void PortDock::log_general_info(Editor_Game_Base const & egbase)
 	molog("%zu dock points\n", m_dockpoints.size());
 }
 
-#define PORTDOCK_SAVEGAME_VERSION 1
+#define PORTDOCK_SAVEGAME_VERSION 2
 
 PortDock::Loader::Loader()
 {
 }
 
-void PortDock::Loader::load(FileRead & fr)
+void PortDock::Loader::load(FileRead & fr, uint8_t version)
 {
 	PlayerImmovable::Loader::load(fr);
 
@@ -187,6 +312,15 @@ void PortDock::Loader::load(FileRead & fr)
 		pd.m_dockpoints[i] = fr.Coords32(egbase().map().extent());
 		pd.set_position(egbase(), pd.m_dockpoints[i]);
 	}
+
+	if (version >= 2) {
+		pd.m_need_ship = fr.Unsigned8();
+
+		m_waiting.resize(fr.Unsigned32());
+		container_iterate(std::vector<ShippingItem::Loader>, m_waiting, it) {
+			it->load(fr);
+		}
+	}
 }
 
 void PortDock::Loader::load_pointers()
@@ -195,6 +329,11 @@ void PortDock::Loader::load_pointers()
 
 	PortDock & pd = get<PortDock>();
 	pd.m_warehouse = &mol().get<Warehouse>(m_warehouse);
+
+	pd.m_waiting.resize(m_waiting.size());
+	for (uint i = 0; i < m_waiting.size(); ++i) {
+		pd.m_waiting[i] = m_waiting[i].get(mol());
+	}
 }
 
 void PortDock::Loader::load_finish()
@@ -225,7 +364,7 @@ Map_Object::Loader * PortDock::load
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version && version <= PORTDOCK_SAVEGAME_VERSION) {
 			loader->init(egbase, mol, *new PortDock);
-			loader->load(fr);
+			loader->load(fr, version);
 		} else
 			throw game_data_error(_("unknown/unhandled version %u"), version);
 	} catch (const std::exception & e) {
@@ -246,6 +385,13 @@ void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileW
 	fw.Unsigned16(m_dockpoints.size());
 	container_iterate_const(PositionList, m_dockpoints, it) {
 		fw.Coords32(*it);
+	}
+
+	fw.Unsigned8(m_need_ship);
+
+	fw.Unsigned32(m_waiting.size());
+	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
+		it->save(egbase, mos, fw);
 	}
 }
 

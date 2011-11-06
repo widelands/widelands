@@ -38,6 +38,7 @@ struct Map;
 
 struct Path {
 	friend struct Map;
+	friend struct MapAStarBase;
 
 	Path() {}
 	Path(const Coords & c) : m_start(c), m_end(c) {}
