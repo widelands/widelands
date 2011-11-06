@@ -62,6 +62,9 @@ public:
 
 
 protected:
+	void layout();
+	void calc_cursor_pos();
+
 	//  drawing
 	int32_t get_x_gap()    const {return m_x_gap;}
 	int32_t get_y_gap()    const {return m_y_gap;}

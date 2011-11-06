@@ -71,13 +71,10 @@ Slider::Slider
 	m_x_gap          (x_gap),
 	m_y_gap          (y_gap),
 	m_bar_size       (bar_size),
-	m_cursor_pos
-		(m_value <= m_min_value ? 0              :
-		 m_value >= m_max_value ? get_bar_size() :
-		 (m_value - m_min_value) * get_bar_size() / (m_max_value - m_min_value)),
 	m_cursor_size (cursor_size)
 {
 	set_think(false);
+	calc_cursor_pos();
 }
 
 void Slider::set_value(int32_t new_value)
@@ -86,15 +83,30 @@ void Slider::set_value(int32_t new_value)
 
 	if (new_value != m_value) {
 		m_value = new_value;
-		m_cursor_pos =
-			m_value <= m_min_value ? 0              :
-			m_value >= m_max_value ? get_bar_size() :
-			(m_value - m_min_value) * get_bar_size()
-			/
-			(m_max_value - m_min_value);
+		calc_cursor_pos();
 		send_value_changed();
 		update();
 	}
+}
+
+void Slider::calc_cursor_pos() {
+	if (m_max_value == m_min_value) {
+		m_cursor_pos = m_min_value;
+	} else if (m_value == m_min_value) {
+		m_cursor_pos = 0;
+	} else if (m_value == m_max_value) {
+		m_cursor_pos = get_bar_size();
+	} else {
+		m_cursor_pos =
+			(m_value - m_min_value) * get_bar_size()
+			/
+			(m_max_value - m_min_value);
+	}
+}
+
+void Slider::layout() {
+	Panel::layout();
+	calc_cursor_pos();
 }
 
 /**
@@ -245,18 +257,7 @@ bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 		m_pressed = false;
 
 		//  cursor position: align to integer value
-		if (m_max_value == m_min_value) {
-			m_cursor_pos = m_min_value;
-		} else if (m_value == m_min_value) {
-			m_cursor_pos = 0;
-		} else if (m_value == m_max_value) {
-			m_cursor_pos = get_bar_size();
-		} else {
-			m_cursor_pos =
-				(m_value - m_min_value) * get_bar_size()
-				/
-				(m_max_value - m_min_value);
-		}
+		calc_cursor_pos();
 
 		update();
 	}
@@ -464,9 +465,9 @@ bool HorizontalSlider::handle_mousepress
 }
 
 void HorizontalSlider::layout() {
-	Slider::layout();
 	m_y_gap = get_h() / 2 - 2;
 	m_bar_size = get_w() - m_cursor_size;
+	Slider::layout();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
