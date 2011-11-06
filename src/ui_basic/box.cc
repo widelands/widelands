@@ -81,7 +81,9 @@ void Box::set_min_desired_breadth(uint32_t min)
 }
 
 /**
- * Compute the desired size based on our children.
+ * Compute the desired size based on our children. This assumes that the
+ * infinite space is zero, and is later on also re-used to calculate the
+ * space assigned to an infinite space.
  */
 void Box::update_desired_size()
 {
@@ -105,7 +107,8 @@ void Box::update_desired_size()
 			maxbreadth += Scrollbar::Size;
 		}
 		set_desired_size
-			(std::min(totaldepth, m_max_x), std::min(maxbreadth, m_max_y));
+			(std::min(totaldepth, m_max_x), // + get_lborder() + get_rborder(),
+			 std::min(maxbreadth, m_max_y)); // + get_tborder() + get_bborder());
 	} else {
 		if (totaldepth > m_max_y && m_scrolling) {
 			maxbreadth += Scrollbar::Size;
@@ -188,7 +191,27 @@ void Box::layout()
 		m_scrollbar = 0;
 	}
 
-	// Second pass: Update positions and sizes of all items
+	// Second pass: Count number of infinite spaces
+	uint32_t infspace_count = 0;
+	for (uint32_t idx = 0; idx < m_items.size(); ++idx)
+		if (m_items[idx].type == Item::ItemInfSpace)
+			infspace_count++;
+
+	// Third pass: Distribute left over space to all infinite spaces. To
+	// avoid having some pixels left at the end due to rounding errors, we
+	// divide the remaining space by the number of remaining infinite
+	// spaces every time, and not just one.
+	uint32_t max_depths =
+		m_orientation == Horizontal ? get_inner_w() : get_inner_h();
+	for (uint32_t idx = 0; idx < m_items.size(); ++idx)
+		if (m_items[idx].type == Item::ItemInfSpace) {
+			m_items[idx].u.assigned_space =
+				(max_depths - totaldepth) / infspace_count;
+			totaldepth += m_items[idx].u.assigned_space;
+			infspace_count--;
+	}
+
+	// Forth pass: Update positions of all other items
 	update_positions();
 }
 
@@ -203,7 +226,7 @@ void Box::update_positions()
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		uint32_t depth, breadth;
-		get_item_desired_size(idx, depth, breadth);
+		get_item_size(idx, depth, breadth);
 
 		if (m_items[idx].type == Item::ItemPanel) {
 			set_item_size
@@ -261,6 +284,22 @@ void Box::add_space(uint32_t space)
 
 
 /**
+ * Add some infinite space (to align some buttons to the right)
+*/
+void Box::add_inf_space()
+{
+	Item it;
+
+	it.type = Item::ItemInfSpace;
+	it.u.assigned_space = 0;
+
+	m_items.push_back(it);
+
+	update_desired_size();
+}
+
+
+/**
  * Retrieve the given item's desired size. depth is the size of the
  * item along the orientation axis, breadth is the size perpendicular
  * to the orientation axis.
@@ -286,9 +325,37 @@ void Box::get_item_desired_size
 		breadth = 0;
 		break;
 
+	case Item::ItemInfSpace:
+		depth   = 0;
+		breadth = 0;
+		break;
+
 	default:
 		throw wexception("Box::get_item_size: bad type %u", it.type);
 	}
+}
+
+/**
+ * Retrieve the given item's size. This differs from get_item_desired_size only
+ * for InfSpace items, at least for now.
+ */
+void Box::get_item_size
+	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)
+{
+	assert(idx < m_items.size());
+
+	Item const & it = m_items[idx];
+
+	switch (it.type) {
+	case Item::ItemInfSpace:
+		depth   = it.u.assigned_space;
+		breadth = 0;
+		break;
+
+	default:
+		get_item_desired_size(idx, depth, breadth);
+	}
+
 }
 
 /**
@@ -352,6 +419,8 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 	}
 
 	case Item::ItemSpace:; //  no need to do anything
+
+	case Item::ItemInfSpace:; //  no need to do anything
 	};
 }
 
