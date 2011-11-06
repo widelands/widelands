@@ -48,7 +48,8 @@ public:
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 uint32_t orientation,
-		 int32_t max_x = 0, int32_t max_y = 0);
+		 int32_t max_x = 0, int32_t max_y = 0,
+		 uint32_t inner_spacing = 0);
 
 	void set_scrolling(bool scroll);
 
@@ -97,6 +98,7 @@ private:
 	Scrollbar * m_scrollbar;
 	uint32_t m_orientation;
 	uint32_t m_mindesiredbreadth;
+	uint32_t m_inner_spacing;
 
 	std::vector<Item> m_items;
 };

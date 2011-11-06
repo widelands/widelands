@@ -326,34 +326,18 @@ m_parent(&parent)
 {
 	set_cache(false);
 
-	//  First, we must decide about the size.
-	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
+	UI::Box * box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
+	box->set_border(5, 5, 5, 5);
+	set_center_panel(box);
 
-#define spacing 5
-	Point const offs(spacing, 30);
-	Point       pos (offs);
-
-
-	// Setup Wares selectoin widget first, because the window size depends on it.
-	pos.y += PLOT_HEIGHT + 2 * spacing;
-	pos.x  = spacing;
-
-	StatisticWaresDisplay * swd =
-		new StatisticWaresDisplay
-			(this, spacing, pos.y, parent.get_player()->tribe(),
-			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2));
-
-	pos.y += swd->get_h();
-	pos.y += spacing;
-
-	// Setup plot widget
-	m_plot =
-		new WUIPlot_Area
-			(this,
-			 spacing, offs.y + spacing, swd->get_w(), PLOT_HEIGHT);
+	m_plot = new WUIPlot_Area
+			(box, 0, 0, 100, PLOT_HEIGHT);
 	m_plot->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
+	box->add(m_plot, UI::Box::AlignLeft, true);
+
+	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
 	for (Widelands::Ware_Index::value_t cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
 		m_plot->register_plot_data
 			(cur_ware,
@@ -362,15 +346,18 @@ m_parent(&parent)
 			 colors[cur_ware]);
 	}
 
+	box->add
+		(new StatisticWaresDisplay
+			(box, 0, 0, parent.get_player()->tribe(),
+			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2)),
+		 UI::Box::AlignLeft, true);
 
-	new WUIPlot_Area_Slider
-		(this, *m_plot,
-		 pos.x, pos.y, swd->get_w(), 45,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 
-	pos.y += 45 + spacing;
-
-	set_inner_size(swd->get_w() + 2 * spacing, pos.y);
+	box->add
+		(new WUIPlot_Area_Slider
+			(box, *m_plot, 0, 0, 100, 45,
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		UI::Box::AlignLeft, true);
 }
 
 
