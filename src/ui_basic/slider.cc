@@ -245,12 +245,18 @@ bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 		m_pressed = false;
 
 		//  cursor position: align to integer value
-		m_cursor_pos =
-			m_value == m_min_value ? 0              :
-			m_value == m_max_value ? get_bar_size() :
-			(m_value - m_min_value) * get_bar_size()
-			/
-			(m_max_value - m_min_value);
+		if (m_max_value == m_min_value) {
+			m_cursor_pos = m_min_value;
+		} else if (m_value == m_min_value) {
+			m_cursor_pos = 0;
+		} else if (m_value == m_max_value) {
+			m_cursor_pos = get_bar_size();
+		} else {
+			m_cursor_pos =
+				(m_value - m_min_value) * get_bar_size()
+				/
+				(m_max_value - m_min_value);
+		}
 
 		update();
 	}
@@ -346,12 +352,16 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 	m_cursor_pos = pointer - ofs;
 
 	//  absolute value
-	m_value =
-		static_cast<int32_t>
-			(rint
-			 	(static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
-			 	 /
-			 	 get_bar_size()));
+	if (get_bar_size() == 0) {
+		m_value = 0;
+	} else {
+		m_value =
+			static_cast<int32_t>
+				(rint
+					(static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
+					 /
+					 get_bar_size()));
+	}
 
 	//  relative value in bounds
 	if (m_value < m_min_value)
@@ -380,18 +390,20 @@ void HorizontalSlider::draw(RenderTarget & dst)
 {
 	RGBAColor black(0, 0, 0, 255);
 
-	dst.brighten_rect //  bottom edge
-		(Rect(Point(get_x_gap(), get_h() / 2), get_bar_size(), 2),
-		 BUTTON_EDGE_BRIGHT_FACTOR);
-	dst.brighten_rect //  right edge
-		(Rect(Point(get_x_gap() + get_bar_size() - 2, get_y_gap()), 2, 2),
-		 BUTTON_EDGE_BRIGHT_FACTOR);
+	if (get_bar_size() > 0) {
+		dst.brighten_rect //  bottom edge
+			(Rect(Point(get_x_gap(), get_h() / 2), get_bar_size(), 2),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect //  right edge
+			(Rect(Point(get_x_gap() + get_bar_size() - 2, get_y_gap()), 2, 2),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
 
-	//  top edge
-	dst.fill_rect
-		(Rect(Point(get_x_gap(), get_y_gap()),     get_bar_size() - 1, 1), black);
-	dst.fill_rect
-		(Rect(Point(get_x_gap(), get_y_gap() + 1), get_bar_size() - 2, 1), black);
+		//  top edge
+		dst.fill_rect
+			(Rect(Point(get_x_gap(), get_y_gap()),     get_bar_size() - 1, 1), black);
+		dst.fill_rect
+			(Rect(Point(get_x_gap(), get_y_gap() + 1), get_bar_size() - 2, 1), black);
+	}
 
 	//  left edge
 	dst.fill_rect(Rect(Point(get_x_gap(),     get_y_gap()), 1, 4), black);

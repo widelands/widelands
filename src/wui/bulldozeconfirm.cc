@@ -87,7 +87,6 @@ private:
 	} m_cancel;
 };
 
-
 /*
 ===============
 Create the panels.

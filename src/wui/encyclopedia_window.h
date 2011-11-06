@@ -28,6 +28,8 @@
 #include "ui_basic/table.h"
 #include "ui_basic/multilinetextarea.h"
 
+#include "logic/item_ware_descr.h"
+
 namespace Widelands {
 struct Item_Ware_Descr;
 struct Tribe_Descr;
@@ -38,6 +40,20 @@ struct Interactive_Player;
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
 private:
+	struct Ware {
+		Ware(Widelands::Ware_Index i, const Widelands::Item_Ware_Descr * descr)
+			:
+			m_i(i),
+			m_descr(descr)
+			{}
+		Widelands::Ware_Index m_i;
+		const Widelands::Item_Ware_Descr * m_descr;
+
+		bool operator<(const Ware o) const {
+			return m_descr->descname() < o.m_descr->descname();
+		}
+	};
+
 	Interactive_Player & iaplayer() const;
 	UI::Listselect<Widelands::Ware_Index> wares;
 	UI::Listselect<Widelands::Building_Index> prodSites;

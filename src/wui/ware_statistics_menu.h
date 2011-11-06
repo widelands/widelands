@@ -39,7 +39,7 @@ private:
 	DifferentialPlot_Area       * m_plot_economy;
 
 	void clicked_help();
-	void cb_changed_to(int32_t, bool);
+	void cb_changed_to(Widelands::Ware_Index, bool);
 };
 
 
@@ -62,9 +62,7 @@ struct WUIPlot_Generic_Area_Slider : public UI::DiscreteSlider {
 	: DiscreteSlider
 		(parent,
 		 x, y, w, h,
-		 std::vector<std::string>
-		 	(WUIPlot_Area::time_labels,
-		 	 WUIPlot_Area::time_labels + WUIPlot_Area::TIME_LAST),
+		 plot_area.get_labels(),
 		 plot_area.get_time(),
 		 background_picture_id,
 		 tooltip_text,

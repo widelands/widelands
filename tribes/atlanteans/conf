@@ -56,7 +56,7 @@ shipconstruction=_Ship construction site
 
 [ware types]
 advanced_shield=_Advanced Shield
-bakingtray=_Bakingtray
+bakingtray=_Bread Paddel
 blackrootflour=_Blackroot Flour
 blackroot=_Blackroot
 bread=_Bread
@@ -141,6 +141,8 @@ ship=_Ship
 [constructionsite types]
 constructionsite=_Construction Site
 
+[dismantlesite types]
+dismantlesite=_Dismantle Site
 
 [global militarysite types]
 barrier.barbarians=_Barrier

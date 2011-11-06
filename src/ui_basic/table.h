@@ -256,6 +256,7 @@ private:
 	static const int32_t ms_darken_value = -20;
 
 	Columns            m_columns;
+	uint32_t           m_total_width;
 	uint32_t           m_max_pic_width;
 	std::string        m_fontname;
 	uint32_t           m_fontsize;

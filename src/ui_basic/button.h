@@ -79,6 +79,7 @@ struct Button : public NamedPanel {
 
 	// Set the permanently pressed state of the button
 	void set_perm_pressed(bool state);
+	bool get_perm_pressed() const {return m_permpressed;}
 
 	// Set button to flat / not flat
 	void set_flat(bool flat);

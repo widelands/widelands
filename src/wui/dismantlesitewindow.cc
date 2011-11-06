@@ -19,22 +19,19 @@
 
 
 #include "buildingwindow.h"
-
-#include "waresqueuedisplay.h"
-
-#include "logic/constructionsite.h"
+#include "logic/dismantlesite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 
 /**
- * Status window for construction sites.
+ * Status window for dismantle sites.
  */
-struct ConstructionSite_Window : public Building_Window {
-	ConstructionSite_Window
+struct DismantleSite_Window : public Building_Window {
+	DismantleSite_Window
 		(Interactive_GameBase        & parent,
-		 Widelands::ConstructionSite &,
+		 Widelands::DismantleSite &,
 		 UI::Window *                & registry);
 
 	virtual void think();
@@ -44,9 +41,9 @@ private:
 };
 
 
-ConstructionSite_Window::ConstructionSite_Window
+DismantleSite_Window::DismantleSite_Window
 	(Interactive_GameBase        & parent,
-	 Widelands::ConstructionSite & cs,
+	 Widelands::DismantleSite & cs,
 	 UI::Window *                & registry)
 	: Building_Window(parent, cs, registry)
 {
@@ -66,10 +63,7 @@ ConstructionSite_Window::ConstructionSite_Window
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		box.add
-			(new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)),
-			 UI::Box::AlignLeft);
-
+		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->get_picture(PicMod_UI, pic_tab_wares), &box);
 }
@@ -80,24 +74,24 @@ ConstructionSite_Window::ConstructionSite_Window
 Make sure the window is redrawn when necessary.
 ===============
 */
-void ConstructionSite_Window::think()
+void DismantleSite_Window::think()
 {
 	Building_Window::think();
 
-	Widelands::ConstructionSite const & cs =
-		ref_cast<Widelands::ConstructionSite, Widelands::Building>(building());
+	Widelands::DismantleSite const & ds =
+		ref_cast<Widelands::DismantleSite, Widelands::Building>(building());
 
-	m_progress->set_state(cs.get_built_per64k());
+	m_progress->set_state(ds.get_built_per64k());
 }
 
 
 /*
 ===============
-Create the status window describing the construction site.
+Create the status window describing the site.
 ===============
 */
-void Widelands::ConstructionSite::create_options_window
+void Widelands::DismantleSite::create_options_window
 	(Interactive_GameBase & parent, UI::Window * & registry)
 {
-	new ConstructionSite_Window(parent, *this, registry);
+	new DismantleSite_Window(parent, *this, registry);
 }

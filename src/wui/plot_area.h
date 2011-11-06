@@ -41,9 +41,14 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_FOUR_HOURS,
 		TIME_EIGHT_HOURS,
 		TIME_16_HOURS,
+		TIME_GAME,
 		TIME_LAST,
 	};
-	static std::string time_labels[TIME_LAST];
+	enum UNIT {
+		UNIT_MIN,
+		UNIT_HOUR,
+		UNIT_DAY,
+	};
 	enum PLOTMODE {
 		//  Always take the samples of some times together, so that the graph is
 		//  not completely zigg-zagged.
@@ -57,8 +62,16 @@ struct WUIPlot_Area : public UI::Panel {
 
 	virtual void draw(RenderTarget &);
 
-	void set_time(TIME);
-	void set_time_int(int32_t time) {set_time(static_cast<TIME>(time)); };
+	void set_time(TIME id) {
+		m_time = id;
+	}
+
+	void set_time_int(int32_t time) {
+		if (time == m_game_label)
+			set_time(TIME_GAME);
+		else
+			set_time(static_cast<TIME>(time));
+	};
 	TIME get_time() {return static_cast<TIME>(m_time); };
 	void set_sample_rate(uint32_t id); // in milliseconds
 
@@ -68,8 +81,10 @@ struct WUIPlot_Area : public UI::Panel {
 
 	void set_plotmode(int32_t id) {m_plotmode = id;}
 
+	std::vector<std::string> get_labels();
+
 protected:
-	void draw_diagram
+	uint32_t draw_diagram
 		(RenderTarget & dst, float const xline_length, float const yline_length);
 	void draw_value
 		(RenderTarget & dst, const char * value, RGBColor color, Point pos);
@@ -91,6 +106,14 @@ protected:
 	int32_t                 m_time;  // How much do you want to list
 	int32_t                 m_sample_rate;
 	int32_t                 m_plotmode;
+	int32_t                 m_game_label; // what label is used for TIME_GAME
+
+private:
+	uint32_t get_game_time();
+	uint32_t get_plot_time();
+	UNIT get_suggested_unit(uint32_t game_time);
+	std::string get_unit_name(UNIT unit);
+	uint32_t ms_to_unit(UNIT unit, uint32_t ms);
 };
 
 /**
@@ -109,9 +132,7 @@ struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
 	: DiscreteSlider
 		(parent,
 		 x, y, w, h,
-		 std::vector<std::string>
-		 	(WUIPlot_Area::time_labels,
-		 	 WUIPlot_Area::time_labels + WUIPlot_Area::TIME_LAST),
+		 plot_area.get_labels(),
 		 plot_area.get_time(),
 		 background_picture_id,
 		 tooltip_text,

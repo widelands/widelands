@@ -106,8 +106,9 @@ struct Editor_Game_Base :
 	Building & warp_building(Coords, Player_Number, Building_Index);
 	Building & warp_constructionsite
 		(Coords, Player_Number, Building_Index,
-		 Building_Index oldid = Building_Index::Null(),
-		 bool loading = false);
+		 Building_Index oldid = Building_Index::Null(), bool loading = false);
+	Building & warp_dismantlesite
+		(Coords, Player_Number, Building_Index, bool loading = false);
 	Bob & create_bob(Coords, const Bob::Descr &);
 	Bob & create_bob(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0);
 	Bob & create_bob(Coords, const std::string & name, Tribe_Descr const * const = 0);

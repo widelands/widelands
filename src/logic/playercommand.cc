@@ -62,6 +62,7 @@ enum {
 	PLCMD_MESSAGESETSTATUSARCHIVED,
 	PLCMD_SETSTOCKPOLICY,
 	PLCMD_SETWAREMAXFILL,
+	PLCMD_DISMANTLEBUILDING,
 };
 
 /*** class PlayerCommand ***/
@@ -99,6 +100,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 		return new Cmd_MessageSetStatusArchived (des);
 	case PLCMD_SETSTOCKPOLICY: return new Cmd_SetStockPolicy(des);
 	case PLCMD_SETWAREMAXFILL: return new Cmd_SetWareMaxFill(des);
+	case PLCMD_DISMANTLEBUILDING: return new Cmd_DismantleBuilding(des);
 	default:
 		throw wexception
 			("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -568,6 +570,60 @@ void Cmd_EnhanceBuilding::Write
 	fw.Unsigned16(bi.value());
 }
 
+
+/*** Cmd_DismantleBuilding ***/
+Cmd_DismantleBuilding::Cmd_DismantleBuilding (StreamRead & des) :
+	PlayerCommand (0, des.Unsigned8())
+{
+	serial = des.Unsigned32();
+}
+
+void Cmd_DismantleBuilding::execute (Game & game)
+{
+	if (upcast(Building, building, game.objects().get_object(serial)))
+		game.player(sender()).dismantle_building(building);
+}
+
+void Cmd_DismantleBuilding::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_DISMANTLEBUILDING);
+	ser.Unsigned8 (sender());
+	ser.Unsigned32(serial);
+}
+#define PLAYER_CMD_DISMANTLEBUILDING_VERSION 1
+void Cmd_DismantleBuilding::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_DISMANTLEBUILDING_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			uint32_t const building_serial = fr.Unsigned32();
+			try {
+				serial = mol.get<Map_Object>(building_serial).serial();
+			} catch (_wexception const & e) {
+				throw game_data_error
+					("building %u: %s", building_serial, e.what());
+			}
+		} else
+			throw game_data_error
+				("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error("dismantle building: %s", e.what());
+	}
+}
+void Cmd_DismantleBuilding::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	// First, write version
+	fw.Unsigned16(PLAYER_CMD_DISMANTLEBUILDING_VERSION);
+	// Write base classes
+	PlayerCommand::Write(fw, egbase, mos);
+
+	// Now serial
+	Map_Object const & obj = *egbase.objects().get_object(serial);
+	fw.Unsigned32(mos.get_object_file_index(obj));
+}
 
 /*** class Cmd_SetWarePriority ***/
 Cmd_SetWarePriority::Cmd_SetWarePriority

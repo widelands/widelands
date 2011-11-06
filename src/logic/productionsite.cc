@@ -597,7 +597,6 @@ void ProductionSite::act(Game & game, uint32_t const data)
 		m_program_timer = false;
 
 		if (m_stack.empty()) {
-			find_and_start_next_program(game);
 			m_working_positions[0].worker->update_task_buildingwork(game);
 			return;
 		}
@@ -788,8 +787,9 @@ bool ProductionSite::get_building_work
 	// Start program if we haven't already done so
 	State * state = get_state();
 	if (!state) {
-		m_program_timer = true;
-		m_program_time = schedule_act(game, 10);
+		//m_program_timer = true;
+		find_and_start_next_program(game);
+		// m_program_time = schedule_act(game, 10);
 	} else if (state->ip < state->program->get_size()) {
 		ProductionProgram::Action const & action = (*state->program)[state->ip];
 		return action.get_building_work(game, *this, worker);
@@ -852,9 +852,13 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 
 	std::string const & program_name = top_state().program->name();
 
+	uint32_t dt = m_post_timer;
+
 	m_stack.pop_back();
 	if (m_stack.size())
 		top_state().phase = result;
+	else // This was the last program. Relax for a bit before trying to work again
+		dt = std::max(dt, 10000U);
 
 	switch (result) {
 	case Failed:

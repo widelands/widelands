@@ -56,6 +56,7 @@ protected:
 	UI::Tab_Panel * get_tabs() {return m_tabs;}
 
 	void act_bulldoze();
+	void act_dismantle();
 	void act_debug();
 	void show_workarea();
 	void hide_workarea();
@@ -66,7 +67,7 @@ protected:
 	void clicked_goto();
 
 	void create_ware_queue_panel
-		(UI::Box *, Widelands::Building &, Widelands::WaresQueue *);
+		(UI::Box *, Widelands::Building &, Widelands::WaresQueue *, bool = false);
 
 	virtual void create_capsbuttons(UI::Box * buttons);
 
