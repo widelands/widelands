@@ -34,7 +34,7 @@ Box::Box
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 uint32_t const orientation,
-	 int32_t const max_x, int32_t const max_y)
+	 int32_t const max_x, int32_t const max_y, uint32_t const inner_spacing)
 	:
 	Panel        (parent, x, y, 0, 0),
 
@@ -44,7 +44,8 @@ Box::Box
 	m_scrolling(false),
 	m_scrollbar(0),
 	m_orientation(orientation),
-	m_mindesiredbreadth(0)
+	m_mindesiredbreadth(0),
+	m_inner_spacing(inner_spacing)
 {}
 
 /**
@@ -96,6 +97,9 @@ void Box::update_desired_size()
 			maxbreadth = breadth;
 	}
 
+	if (m_items.size())
+		totaldepth += (m_items.size() - 1) * m_inner_spacing;
+
 	if (m_orientation == Horizontal) {
 		if (totaldepth > m_max_x && m_scrolling) {
 			maxbreadth += Scrollbar::Size;
@@ -107,7 +111,8 @@ void Box::update_desired_size()
 			maxbreadth += Scrollbar::Size;
 		}
 		set_desired_size
-			(std::min(maxbreadth, m_max_x), std::min(totaldepth, m_max_y));
+			(std::min(maxbreadth, m_max_x) + get_lborder() + get_rborder(),
+			 std::min(totaldepth, m_max_y) + get_tborder() + get_bborder());
 	}
 
 	//  This is not redundant, because even if all this does not change our
@@ -121,7 +126,7 @@ void Box::update_desired_size()
  */
 void Box::layout()
 {
-	uint32_t totalbreadth = m_orientation == Horizontal ? get_w() : get_h();
+	uint32_t totalbreadth = m_orientation == Horizontal ? get_inner_w() : get_inner_h();
 
 	// First pass: compute the depth and adjust whether we have a scrollbar
 	uint32_t totaldepth = 0;
@@ -132,6 +137,9 @@ void Box::layout()
 
 		totaldepth += depth;
 	}
+
+	if (m_items.size())
+		totaldepth += (m_items.size() - 1) * m_inner_spacing;
 
 	bool needscrollbar = false;
 	if (m_orientation == Horizontal) {
@@ -151,16 +159,16 @@ void Box::layout()
 		int32_t pagesize;
 		if (m_orientation == Horizontal) {
 			sb_x = 0;
-			sb_y = get_h() - Scrollbar::Size;
-			sb_w = get_w();
+			sb_y = get_inner_h() - Scrollbar::Size;
+			sb_w = get_inner_w();
 			sb_h = Scrollbar::Size;
-			pagesize = get_w() - Scrollbar::Size;
+			pagesize = get_inner_w() - Scrollbar::Size;
 		} else {
-			sb_x = get_w() - Scrollbar::Size;
+			sb_x = get_inner_w() - Scrollbar::Size;
 			sb_y = 0;
 			sb_w = Scrollbar::Size;
-			sb_h = get_h();
-			pagesize = get_h() - Scrollbar::Size;
+			sb_h = get_inner_h();
+			pagesize = get_inner_h() - Scrollbar::Size;
 		}
 		if (!m_scrollbar) {
 			m_scrollbar = new Scrollbar
@@ -189,7 +197,7 @@ void Box::update_positions()
 	int32_t scrollpos = m_scrollbar ? m_scrollbar->get_scrollpos() : 0;
 
 	uint32_t totaldepth = 0;
-	uint32_t totalbreadth = m_orientation == Horizontal ? get_h() : get_w();
+	uint32_t totalbreadth = m_orientation == Horizontal ? get_inner_h() : get_inner_w();
 	if (m_scrollbar)
 		totalbreadth -= Scrollbar::Size;
 
@@ -205,6 +213,7 @@ void Box::update_positions()
 		}
 
 		totaldepth += depth;
+		totaldepth += m_inner_spacing;
 	}
 }
 
@@ -315,11 +324,11 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 		int32_t breadth, maxbreadth;
 
 		if (m_orientation == Horizontal) {
-			breadth = it.u.panel.panel->get_h();
-			maxbreadth = get_h();
+			breadth = it.u.panel.panel->get_inner_h();
+			maxbreadth = get_inner_h();
 		} else {
-			breadth = it.u.panel.panel->get_w();
-			maxbreadth = get_w();
+			breadth = it.u.panel.panel->get_inner_w();
+			maxbreadth = get_inner_w();
 		}
 		switch (it.u.panel.align) {
 		case AlignLeft:
