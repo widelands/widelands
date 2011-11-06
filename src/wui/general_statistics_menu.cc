@@ -42,14 +42,20 @@ using namespace Widelands;
 #define NR_BASE_DATASETS 11
 
 General_Statistics_Menu::General_Statistics_Menu
-	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
+	(Interactive_GameBase & parent, General_Statistics_Menu::Registry & registry)
 :
 UI::UniqueWindow
 	(&parent, "statistics_menu", &registry,
 	 440, 400, _("General Statistics")),
+m_my_registry      (&registry),
 m_box           (this, 0, 0, UI::Box::Vertical, 0, 0, 5),
-m_plot          (&m_box, 0, 0, 430, PLOT_HEIGHT)
+m_plot          (&m_box, 0, 0, 430, PLOT_HEIGHT),
+m_selected_information(0)
 {
+	if (m_my_registry) {
+		m_selected_information = m_my_registry->selected_information;
+	}
+
 	set_center_panel(&m_box);
 	m_box.set_border(5, 5, 5, 5);
 
@@ -257,8 +263,7 @@ m_plot          (&m_box, 0, 0, 430, PLOT_HEIGHT)
 		hbox2->add(btn, UI::Box::AlignLeft);
 	}
 
-	m_radiogroup.set_state(0);
-	m_selected_information = 0;
+	m_radiogroup.set_state(m_selected_information);
 	m_radiogroup.changedto.set
 		(this, &General_Statistics_Menu::radiogroup_changed);
 
@@ -273,6 +278,11 @@ m_plot          (&m_box, 0, 0, 430, PLOT_HEIGHT)
 
 }
 
+General_Statistics_Menu::~General_Statistics_Menu() {
+	if (m_my_registry) {
+		m_my_registry->selected_information = m_selected_information;
+	}
+}
 
 /**
  * called when the help button was clicked
