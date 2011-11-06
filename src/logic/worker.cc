@@ -1537,8 +1537,8 @@ void Worker::transfer_update(Game & game, State & state) {
 					 	 descr().get_right_walk_anims(does_carry_ware())))
 				{
 					molog
-						("[transfer]: from road %u to flag %u nextstep %u\n",
-						 serial(), road->serial(), nextstep->serial());
+						("[transfer]: from road %u to flag %u\n",
+						 road->serial(), nextstep->serial());
 					return;
 				}
 			} else if (nextstep != map[get_position()].get_immovable())

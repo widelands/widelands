@@ -185,7 +185,17 @@ PlayerImmovable * Transfer::get_next_step
 				m_route.truncate(m_route.get_nrsteps() - 1);
 
 	// Reroute into PortDocks or the associated warehouse when appropriate
-	if (m_route.get_nrsteps() >= 1) {
+	if (m_item && m_item->serial() == 1532) {
+		log
+			("Item %u ready at location %u (flag %u) for destination %u\n",
+			 m_item->serial(), location->serial(), locflag.serial(), destination->serial());
+		for (int i = 0; i <= m_route.get_nrsteps() && i < 5; ++i) {
+			log("  %i: flag %u\n", i, m_route.get_flag(m_game, i).serial());
+		}
+		log("---\n");
+	}
+
+	if (m_route.get_nrsteps() >= 1 && (m_item || location == &locflag)) {
 		Flag & nextflag(m_route.get_flag(m_game, 1));
 		if (!locflag.get_road(nextflag)) {
 			upcast(Warehouse, wh, locflag.get_building());
@@ -195,8 +205,12 @@ PlayerImmovable * Transfer::get_next_step
 			assert(pd);
 
 			if (location != pd) {
-				if (location != wh)
-					return wh;
+				if (location != wh) {
+					if (m_item || location == &locflag)
+						return wh;
+					else
+						return &locflag;
+				}
 				return pd;
 			}
 
@@ -207,7 +221,7 @@ PlayerImmovable * Transfer::get_next_step
 		if (dynamic_cast<Flag const *>(location) && m_item && m_route.get_nrsteps() >= 2) {
 			Flag & nextnextflag(m_route.get_flag(m_game, 2));
 			if (!nextflag.get_road(nextnextflag)) {
-				upcast(Warehouse, wh, locflag.get_building());
+				upcast(Warehouse, wh, nextflag.get_building());
 				assert(wh);
 
 				return wh;

@@ -206,7 +206,7 @@ void PortDock::add_shippingitem(Game & game, WareInstance & ware)
 {
 	m_waiting.push_back(ShippingItem(ware));
 	ware.set_location(game, this);
-	update_shippingitem(game, ware);
+	ware.update(game);
 }
 
 /**
@@ -229,8 +229,7 @@ void PortDock::_update_shippingitem(Game & game, std::vector<ShippingItem>::iter
 	assert(dst != this);
 
 	if (dst) {
-		if (m_fleet)
-			set_need_ship(game, true);
+		set_need_ship(game, true);
 	} else {
 		it->set_location(game, m_warehouse);
 		it->schedule_update(game, 10);
@@ -273,11 +272,17 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 
 void PortDock::set_need_ship(Game & game, bool need)
 {
+	molog("set_need_ship(%s)\n", need ? "true" : "false");
+
 	if (need == m_need_ship)
 		return;
 
-	if (m_fleet)
+	m_need_ship = need;
+
+	if (m_fleet) {
+		molog("... trigger fleet update\n");
 		m_fleet->update(game);
+	}
 }
 
 void PortDock::log_general_info(Editor_Game_Base const & egbase)

@@ -41,12 +41,14 @@ ShippingItem::ShippingItem(Worker & worker) :
 void ShippingItem::get(Editor_Game_Base & game, WareInstance * & ware, Worker * & worker)
 {
 	Map_Object * obj = m_object.get(game);
-	if (obj->get_type() == Map_Object::WARE) {
-		ware = dynamic_cast<WareInstance *>(ware);
-		worker = 0;
-	} else {
-		worker = dynamic_cast<Worker *>(worker);
-		ware = 0;
+	if (obj) {
+		if (obj->get_type() == Map_Object::WARE) {
+			ware = dynamic_cast<WareInstance *>(obj);
+			worker = 0;
+		} else {
+			worker = dynamic_cast<Worker *>(obj);
+			ware = 0;
+		}
 	}
 }
 

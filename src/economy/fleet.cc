@@ -293,7 +293,7 @@ void Fleet::add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & ne
 			connect_port(owner().egbase(), idx);
 		}
 
-		if (pp.cost < 0) {
+		if (pp.cost >= 0) {
 			// TODO: keep statistics on average transport time instead of using the arbitrary 2x factor
 			RoutingNodeNeighbour neighb(&m_ports[otheridx]->base_flag(), 2 * pp.cost);
 			neighbours.push_back(neighb);
@@ -510,9 +510,11 @@ void Fleet::act(Game & game, uint32_t data)
 	container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
 		Ship & ship = **shipit.current;
 		if (ship.get_nritems() > 0 && !ship.get_destination(game)) {
+			molog("Ship %u has items\n", ship.serial());
 			container_iterate(std::vector<ShippingItem>, ship.m_items, it) {
 				PortDock * dst = it->get_destination(game);
 				if (dst) {
+					molog("... sending to portdock %u\n", dst->serial());
 					ship.set_destination(game, *dst);
 					break;
 				}
@@ -528,6 +530,8 @@ void Fleet::act(Game & game, uint32_t data)
 		PortDock & pd = *m_ports[rr];
 
 		if (pd.get_need_ship()) {
+			molog("Port %u needs ship\n", pd.serial());
+
 			bool success = false;
 			container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
 				Ship & ship = **shipit.current;
@@ -536,6 +540,8 @@ void Fleet::act(Game & game, uint32_t data)
 					continue;
 				if (ship.get_nritems() >= ship.get_capacity())
 					continue;
+
+				molog("... ship %u takes care of it\n", ship.serial());
 
 				if (!dst)
 					ship.set_destination(game, pd);
@@ -560,7 +566,7 @@ void Fleet::log_general_info(Editor_Game_Base const & egbase)
 	molog("%zu ships and %zu ports\n", m_ships.size(), m_ports.size());
 }
 
-#define FLEET_SAVEGAME_VERSION 2
+#define FLEET_SAVEGAME_VERSION 3
 
 Fleet::Loader::Loader()
 {
@@ -584,6 +590,8 @@ void Fleet::Loader::load(FileRead & fr, uint8_t version)
 
 	if (version >= 2) {
 		fleet.m_act_pending = fr.Unsigned8();
+		if (version < 3)
+			fleet.m_act_pending = false;
 		fleet.m_port_roundrobin = fr.Unsigned32();
 	}
 }
@@ -594,12 +602,18 @@ void Fleet::Loader::load_pointers()
 
 	Fleet & fleet = get<Fleet>();
 
+	// Act commands created during loading are not persistent, so we need to undo any
+	// changes to the pending state.
+	bool save_act_pending = fleet.m_act_pending;
+
 	container_iterate_const(std::vector<uint32_t>, m_ships, it) {
 		fleet.add_ship(&mol().get<Ship>(*it));
 	}
 	container_iterate_const(std::vector<uint32_t>, m_ports, it) {
 		fleet.add_port(egbase(), &mol().get<PortDock>(*it));
 	}
+
+	fleet.m_act_pending = save_act_pending;
 }
 
 void Fleet::Loader::load_finish()
