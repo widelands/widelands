@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-09-06 21:21+0000\n"
-"Last-Translator: Alejandro Pérez <alexperezalonso@gmail.com>\n"
+"PO-Revision-Date: 2011-11-05 20:44+0000\n"
+"Last-Translator: MadkaT <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:09+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-11-06 05:18+0000\n"
+"X-Generator: Launchpad (build 14231)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
@@ -198,6 +198,13 @@ msgid ""
 "front\n"
 "of their stable was rising in an ever accelerating speed."
 msgstr ""
+"Pero todo parecía estar bien. Sólo los caballos parecían sentir que algo "
+"estaba mal.\n"
+"En las noches, se volvieron locos y estaban llenos de miedo. No pasó mucho "
+"tiempo hasta que  la\n"
+"criadora Xydra descubrió lo que estaba mal con ellos: El nivel del mar "
+"frente a\n"
+"de su establo estaba aumentando a una velocidad cada vez más acelerada."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:208
 msgid ""
@@ -212,6 +219,18 @@ msgid ""
 "worst\n"
 "enemy of Lutas."
 msgstr ""
+"Pero ni siquiera esto cambió la mente del dios. El agua seguía subiendo.\n"
+"Casi enloquecida por la culpa, el dolor y la ira, Jundlina se convirtió en "
+"una hereje:\n"
+"En secreto, se reunieron personas de la gente común que no estaban de "
+"acuerdo con la\n"
+"decisión de los clérigos aceptar la voluntad del dios. Junto a ellos, ella "
+"dispuso\n"
+"el templo de fuego y robaron un barco para huir de la influencia del dios "
+"de\n"
+"Atlantis. Este pequeño grupo comenzó a rezar a Satul, el dios del fuego y el "
+"peor\n"
+"enemigo de Lutas."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:195
 msgid "Chaos emerges..."
@@ -219,7 +238,7 @@ msgstr "El Caos emerge..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:289
 msgid "Colionder arrives"
-msgstr ""
+msgstr "Llega Colionder"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:306
 msgid "Colionder is in thought"
@@ -247,7 +266,7 @@ msgstr "Establece una solida producción de comida"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Establish a spidercloth production"
-msgstr ""
+msgstr "Establish a spidercloth production"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:53
 msgid "Expand and Explore"
@@ -295,6 +314,12 @@ msgid ""
 "accepted their fate while others tried to change the god's mind by offering\n"
 "animals in his temple. But to no avail..."
 msgstr ""
+"Invadido de culpa, el rey se suicidó. Sin un monarca, el pueblo\n"
+"se dirigió a los clérigos, pero estos no tenían ninguna ayuda sustancial que "
+"ofrecer. Muchos\n"
+"aceptaron su destino, mientras que otros trataron de cambiar la mente del "
+"dios ofreciendo\n"
+"animales en su templo. Pero fue en vano ..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:419
 msgid ""
@@ -307,6 +332,15 @@ msgid ""
 "labyrinth for them.  I have the plans ready, but I guess they won't come\n"
 "cheap."
 msgstr ""
+"Estoy de acuerdo contigo y he castigado severamente a los responsables de "
+"los problemas. Pero es\n"
+"muy difícil de mantener a mis hombres tranquilos: están aburridos y no "
+"tienen nada que hacer. Yo\n"
+"quisiera aumentar su ejercicio. Creo que más de rutina en su vida esto los\n"
+"mantendría ocupados y concentrados en sus tareas. Voy a necesitar un "
+"calabozo y un\n"
+"laberinto para ellos. Tengo los planos listos, pero supongo que no será\n"
+"barato."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:430
 msgid ""
@@ -373,11 +407,11 @@ msgstr "Jundlina está de acuerdo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:453
 msgid "Jundlina considers the economy"
-msgstr ""
+msgstr "Jundlina considera la economía"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:409
 msgid "Jundlina is angry"
-msgstr ""
+msgstr "Jundlina está enfadada"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina is in thought"
@@ -389,16 +423,16 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is reviewing the reports"
-msgstr ""
+msgstr "Jundlina está revisando los informes"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:280
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina is satisfied"
-msgstr ""
+msgstr "Jundlina está satisfecha"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:497
 msgid "Jundlina is worried"
-msgstr ""
+msgstr "Jundlina está preocupada"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Jundlina nods"
@@ -406,7 +440,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:440
 msgid "Jundlina received a letter"
-msgstr ""
+msgstr "Jundlina recibió una carta"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:296
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:355
@@ -417,19 +451,19 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:548
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:572
 msgid "Jundlina replies"
-msgstr ""
+msgstr "Jundlina responde"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:408
 msgid "Jundlina summons Sidolus"
-msgstr ""
+msgstr "Jundlina invoca a Sidolus"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:226
 msgid "Jundlina writes down her memories"
-msgstr ""
+msgstr "Jundlina escribe sus memorias"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:281
 msgid "Jundlina's Memoirs"
-msgstr ""
+msgstr "Memorias de Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:202
 msgid ""
@@ -454,7 +488,7 @@ msgstr "Llevan Loftomor y Sidolus"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Loftomor speaks"
-msgstr ""
+msgstr "Loftomor habla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:532
 msgid ""
@@ -592,11 +626,11 @@ msgstr "Una construcción más"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid "Opol seeks out Jundlina"
-msgstr ""
+msgstr "Opol busca a Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:557
 msgid "Ostur seems confident"
-msgstr ""
+msgstr "Ostur parece confiar"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:550
 msgid ""
@@ -645,7 +679,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:156
 msgid "Proudest to the death"
-msgstr ""
+msgstr "Orgulloso de la muerte"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:335
 msgid ""
@@ -656,15 +690,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:387
 msgid "Sidolus seeks out Jundlina"
-msgstr ""
+msgstr "Sidolus busca a Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:417
 msgid "Sidolus seems contrite"
-msgstr ""
+msgstr "Sidolus parece arrepentido"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:267
 msgid "Sidolus speaks"
-msgstr ""
+msgstr "Sidolus habla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid ""
@@ -680,11 +714,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:175
 msgid "The god's disgrace"
-msgstr ""
+msgstr "La desgracia de los dioses"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:177
 msgid "The god's punishment"
-msgstr ""
+msgstr "El castigo de los dioses"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:54
 msgid ""
@@ -695,7 +729,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "The princess' memoir"
-msgstr ""
+msgstr "Memorias de la princesa"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "The supply of build wares"
@@ -703,7 +737,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:530
 msgid "The water is rising!"
-msgstr ""
+msgstr "El agua está subiendo!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -748,7 +782,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:193
 msgid "Uproar and confusion"
-msgstr ""
+msgstr "Alboroto y confusión"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
@@ -805,7 +839,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "Hemos perdido un %s en el oceano!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:233
 msgid ""
@@ -833,6 +867,8 @@ msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
 msgstr ""
+"Has ganado esta misión. Continua con la siguiente o sigue jugando\n"
+"el tiempo que quieras."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:574
 msgid ""
@@ -847,4 +883,4 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "Tus palabras son sabias para mí, Colionder. Que así sea entonces."

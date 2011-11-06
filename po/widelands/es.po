@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-08-21 14:18+0000\n"
-"Last-Translator: Alberto Domene Vasallo <albertodv@gmail.com>\n"
+"PO-Revision-Date: 2011-11-05 06:01+0000\n"
+"Last-Translator: MadkaT <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:15+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-11-06 05:18+0000\n"
+"X-Generator: Launchpad (build 14231)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2494,7 +2494,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:398 ../../src/network/nethost.cc:424
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "El cliente %s no pudo ser encontrado."
 
 #: ../../src/network/nethost.cc:409
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -2604,24 +2604,24 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1160
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Juego guardado exitosamente!"
 
 #: ../../src/network/nethost.cc:1162
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "No se pudo guardar el juego al archivo \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1168
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Este servidor no está protegido con contraseña!"
 
 #: ../../src/network/nethost.cc:1171
 msgid "The send password was incorrect!"
-msgstr ""
+msgstr "La contraseña enviada era incorrecta!"
 
 #: ../../src/network/nethost.cc:1184
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "Contraseña correcta, acceso garantizado!"
 
 #: ../../src/network/nethost.cc:1190
 #, c-format
@@ -3453,7 +3453,7 @@ msgstr "(directorio)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:466 ../../src/ui_fsmenu/mapselect.cc:469
 msgid "unknown"
-msgstr ""
+msgstr "desconocido"
 
 #: ../../src/ui_fsmenu/mapselect.cc:468
 msgid ""
@@ -4293,7 +4293,7 @@ msgstr "AI: "
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Aleatorio"
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
 #: ../../src/wui/playerdescrgroup.cc:180
