@@ -23,21 +23,6 @@
 
 namespace UI {
 
-struct Radiobutton : public Statebox {
-	friend struct Radiogroup;
-
-	Radiobutton
-		(Panel * parent, Point, PictureID picid, Radiogroup &, int32_t id);
-	~Radiobutton();
-
-private:
-	void clicked();
-
-	Radiobutton * m_nextbtn;
-	Radiogroup  & m_group;
-	int32_t           m_id;
-};
-
 /**
  * Initialize the radiobutton and link it into the group's linked list
 */
@@ -112,11 +97,13 @@ int32_t Radiogroup::add_button
 	(Panel      * const parent,
 	 Point        const p,
 	 PictureID    const picid,
-	 char const * const tooltip)
+	 char const * const tooltip,
+	 Radiobutton **     ret_btn)
 {
 	++m_highestid;
-	(new Radiobutton(parent, p, picid, *this, m_highestid))->set_tooltip
-		(tooltip);
+	Radiobutton * btn = new Radiobutton(parent, p, picid, *this, m_highestid);
+	btn->set_tooltip(tooltip);
+	if (ret_btn) (*ret_btn) = btn;
 	return m_highestid;
 }
 
