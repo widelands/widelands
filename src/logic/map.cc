@@ -2135,29 +2135,4 @@ Military_Influence Map::calc_influence
 	return influence;
 }
 
-
-/*
-==============================================================================
-
-Bob search functors
-
-==============================================================================
-*/
-bool FindBobAttribute::accept(Bob * const bob) const
-{
-	return bob->has_attribute(m_attrib);
-}
-
-bool FindBobEnemySoldier::accept(Bob * const imm) const
-{
-	if (upcast(Soldier, soldier, imm))
-		if
-			(soldier->isOnBattlefield() &&
-			 (!player || soldier->owner().is_hostile(*player)) &&
-			 soldier->get_current_hitpoints())
-			return true;
-
-	return false;
-}
-
 } // namespace Widelands

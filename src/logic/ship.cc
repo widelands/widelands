@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include "economy/fleet.h"
 #include "economy/portdock.h"
+#include "findbob.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "map.h"
@@ -62,9 +63,15 @@ Bob & Ship_Descr::create_object() const
 
 Ship::Ship(const Ship_Descr & descr) :
 	Bob(descr),
+	m_window(0),
 	m_fleet(0),
 	m_economy(0)
 {
+}
+
+Ship::~Ship()
+{
+	close_window();
 }
 
 Bob::Type Ship::get_bob_type() const throw ()
@@ -123,14 +130,6 @@ void Ship::set_fleet(Fleet * fleet)
 {
 	m_fleet = fleet;
 }
-
-
-struct FindBobShip : FindBob {
-	virtual bool accept(Bob * bob) const
-	{
-		return bob->get_bob_type() == Bob::SHIP;
-	}
-};
 
 void Ship::wakeup_neighbours(Game & game)
 {

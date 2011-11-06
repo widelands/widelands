@@ -25,6 +25,7 @@
 #include "checkstep.h"
 #include "economy/flag.h"
 #include "editor_game_base.h"
+#include "findbob.h"
 #include "findimmovable.h"
 #include "game.h"
 #include "game_data_error.h"

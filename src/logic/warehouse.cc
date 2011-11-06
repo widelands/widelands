@@ -31,6 +31,7 @@
 #include "economy/ware_instance.h"
 #include "economy/warehousesupply.h"
 #include "editor_game_base.h"
+#include "findbob.h"
 #include "findnode.h"
 #include "game.h"
 #include "log.h"

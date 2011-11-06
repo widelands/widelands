@@ -28,6 +28,7 @@
 #include "economy/road.h"
 #include "economy/transfer.h"
 #include "economy/portdock.h"
+#include "findbob.h"
 #include "findimmovable.h"
 #include "findnode.h"
 #include "game.h"

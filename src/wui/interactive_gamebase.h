@@ -78,6 +78,8 @@ struct Interactive_GameBase : public Interactive_Base {
 	const PlayerType & get_playertype()const {return m_playertype;}
 	void set_playertype(const PlayerType & pt) {m_playertype = pt;}
 
+	bool try_show_ship_window();
+
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;

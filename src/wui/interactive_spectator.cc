@@ -233,6 +233,9 @@ void Interactive_Spectator::node_action() {
 		 	 egbase().map().get_immovable(get_sel_pos().node)))
 		return building->show_options(*this);
 
+	if (try_show_ship_window())
+		return;
+
 	//  everything else can bring up the temporary dialog
 	show_field_action(this, 0, &m_fieldaction);
 }

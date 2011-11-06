@@ -374,6 +374,11 @@ void Interactive_Player::node_action()
 			if (can_see(building->owner().player_number()))
 				return building->show_options(*this);
 
+		if (!is_building_road()) {
+			if (try_show_ship_window())
+				return;
+		}
+
 		// everything else can bring up the temporary dialog
 		show_field_action(this, get_player(), &m_fieldaction);
 	}

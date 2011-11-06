@@ -24,6 +24,9 @@
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
 
+namespace UI {struct Window;}
+struct Interactive_GameBase;
+
 namespace Widelands {
 
 struct Economy;
@@ -55,6 +58,7 @@ struct Ship : Bob {
 	MO_DESCR(Ship_Descr);
 
 	Ship(const Ship_Descr & descr);
+	virtual ~Ship();
 
 	Fleet * get_fleet() const {return m_fleet;}
 	PortDock * get_destination(Editor_Game_Base & egbase);
@@ -81,8 +85,12 @@ struct Ship : Bob {
 	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
 	void add_item(Game &, const ShippingItem & item);
 
+	void show_window(Interactive_GameBase & igb);
+	void close_window();
+
 private:
 	friend struct Fleet;
+	friend struct ShipWindow;
 
 	void wakeup_neighbours(Game &);
 
@@ -95,6 +103,8 @@ private:
 
 	void init_fleet(Editor_Game_Base &);
 	void set_fleet(Fleet * fleet);
+
+	UI::Window * m_window;
 
 	Fleet * m_fleet;
 	Economy * m_economy;

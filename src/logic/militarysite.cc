@@ -23,6 +23,7 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "editor_game_base.h"
+#include "findbob.h"
 #include "game.h"
 #include "i18n.h"
 #include "message_queue.h"
