@@ -45,6 +45,7 @@
 
 //TODO place holder, need to be changed
 static const char pic_tab_production[] = "pics/menu_tab_wares.png";
+static const char pic_tab_consumption[] = "pics/menu_tab_wares.png";
 static const char pic_tab_economy[] = "pics/menu_tab_wares.png";
 
 Ware_Statistics_Menu::Ware_Statistics_Menu
@@ -92,13 +93,24 @@ m_parent(&parent)
 			m_plot_production, _("Production"));
 
 	m_plot_consumption =
-		new DifferentialPlot_Area(tabs, 0, 0, 0, 0);
+		new WUIPlot_Area
+			(tabs,
+			 0, 0, 0, 0);
 	m_plot_consumption->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("consumption", g_gr->get_picture(PicMod_UI, pic_tab_production),
+		("consumption", g_gr->get_picture(PicMod_UI, pic_tab_consumption),
 			m_plot_consumption, _("Consumption"));
+
+	m_plot_economy =
+		new DifferentialPlot_Area(tabs, 0, 0, 0, 0);
+	m_plot_economy->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot_economy->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+
+	tabs->add
+		("economy_health", g_gr->get_picture(PicMod_UI, pic_tab_production),
+			m_plot_economy, _("Economy Health"));
 
 	//add buttons for all wares below the tabbed environment
 	//and register the statistic data
@@ -134,11 +146,17 @@ m_parent(&parent)
 
 			m_plot_consumption->register_plot_data
 				(cur_ware,
+				 parent.get_player()->get_ware_consumption_statistics
+				 	(Widelands::Ware_Index(cur_ware)),
+				 colors[cur_ware]);
+
+			m_plot_economy->register_plot_data
+				(cur_ware,
 				 parent.get_player()->get_ware_production_statistics
 				 	(Widelands::Ware_Index(cur_ware)),
 				 colors[cur_ware]);
 
-			m_plot_consumption->register_negative_plot_data
+			m_plot_economy->register_negative_plot_data
 				(cur_ware,
 				 parent.get_player()->get_ware_consumption_statistics
 				 	(Widelands::Ware_Index(cur_ware)));
@@ -170,6 +188,7 @@ m_parent(&parent)
 void Ware_Statistics_Menu::cb_changed_to(int32_t const id, bool const what) {
 	m_plot_production->show_plot(id, what);
 	m_plot_consumption->show_plot(id, what);
+	m_plot_economy->show_plot(id, what);
 }
 
 /**
@@ -179,4 +198,5 @@ void Ware_Statistics_Menu::cb_changed_to(int32_t const id, bool const what) {
 void Ware_Statistics_Menu::set_time(int32_t timescale) {
 	m_plot_production->set_time_int(timescale);
 	m_plot_consumption->set_time_int(timescale);
+	m_plot_economy->set_time_int(timescale);
 }

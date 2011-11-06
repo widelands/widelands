@@ -121,8 +121,9 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 
 			RGBColor color = m_plotdata[plot].plotcolor;
 			std::vector<uint32_t> const * dataset = m_plotdata[plot].dataset;
+			std::vector<uint32_t> const * ndataset = m_negative_plotdata[plot].dataset;
 
-			std::vector<uint32_t> m_data;
+			std::vector<int32_t> m_data;
 			if (m_plotmode == PLOTMODE_RELATIVE) {
 				//  How many do we take together.
 				const int32_t how_many = static_cast<int32_t>
@@ -132,18 +133,18 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 				 /
 				 static_cast<float>(m_sample_rate));
 
-				uint32_t add = 0;
+				int32_t add = 0;
 				// Relative data, first entry is always zero
 				m_data.push_back(0);
 				for (uint32_t i = 0; i < dataset->size(); ++i) {
-					add += (*dataset)[i];
+					add += (*dataset)[i] - (*ndataset)[i];
 					if (0 == ((i + 1) % how_many)) {
 						m_data.push_back(add);
 						add = 0;
 					}
 				}
 
-				dataset = &m_data;
+				//dataset = &m_data;
 				sub = xline_length / static_cast<float>(nr_samples);
 			}
 
@@ -152,14 +153,17 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 			int32_t lx = get_inner_w() - space_at_right;
 			//raise y zero point to middle of plot
 			int32_t ly = yoffset;
-			for (int32_t i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
+			for (int32_t i = m_data.size() - 1; i > 0 and posx > spacing; --i) {
 				int32_t const curx = static_cast<int32_t>(posx);
-				int32_t       cury = get_inner_h() - space_at_bottom;
-				if (int32_t value = (*dataset)[i]) {
+				int32_t       cury = yoffset;
+				if (int32_t value = m_data[i]) {
 					const float length_y =
 						yline_length
 						/
-						(static_cast<float>(highest_scale) / static_cast<float>(value));
+						(static_cast<float>(highest_scale) / static_cast<float>(value))
+						//highest_scale represent the space between zero line and top.
+						//-> half of the whole differential plot area
+						/ static_cast<float>(2);
 					cury -= static_cast<int32_t>(length_y);
 				}
 				dst.draw_line(lx, ly, curx, cury, color);

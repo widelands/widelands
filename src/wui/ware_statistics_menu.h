@@ -35,7 +35,8 @@ public:
 private:
 	Interactive_Player * m_parent;
 	WUIPlot_Area       * m_plot_production;
-	DifferentialPlot_Area       * m_plot_consumption;
+	WUIPlot_Area       * m_plot_consumption;
+	DifferentialPlot_Area       * m_plot_economy;
 
 	void clicked_help();
 	void cb_changed_to(int32_t, bool);

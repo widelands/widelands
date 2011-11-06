@@ -45,8 +45,6 @@ private:
 	 */
 	struct __reduced_plotdata {
 		const std::vector<uint32_t> * dataset;
-		bool                          showplot;
-		RGBColor                      plotcolor;
 	};
 	std::vector<__reduced_plotdata>  m_negative_plotdata;
 };
