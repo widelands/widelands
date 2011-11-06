@@ -33,7 +33,7 @@ UniqueWindow IMPLEMENTATION
 */
 void UniqueWindow::Registry::create() {
 	if (not window) {
-		constr(*this);
+		constr();
 	}
 }
 
@@ -53,7 +53,7 @@ void UniqueWindow::Registry::toggle() {
 	if (window) {
 		delete window;
 	} else {
-		constr(*this);
+		constr();
 	}
 }
 

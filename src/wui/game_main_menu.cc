@@ -85,14 +85,13 @@ stock
 	INIT_BTN_HOOKS(m_windows.stock, stock)
 
 	m_windows.general_stats.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<General_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+		(boost::lambda::new_ptr<General_Statistics_Menu>(), boost::ref(m_player), boost::ref(m_windows.general_stats));
 	m_windows.ware_stats.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<Ware_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+		(boost::lambda::new_ptr<Ware_Statistics_Menu>(), boost::ref(m_player), boost::ref(m_windows.ware_stats));
 	m_windows.building_stats.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<Building_Statistics_Menu>(), boost::ref(m_player), boost::lambda::_1);
+		(boost::lambda::new_ptr<Building_Statistics_Menu>(), boost::ref(m_player), boost::ref(m_windows.building_stats));
 	m_windows.stock.constr = boost::lambda::bind
-		(boost::lambda::new_ptr<Stock_Menu>(), boost::ref(m_player), boost::lambda::_1);
-
+		(boost::lambda::new_ptr<Stock_Menu>(), boost::ref(m_player), boost::ref(m_windows.stock));
 	if (get_usedefaultpos())
 		center_to_parent();
 }
