@@ -246,28 +246,44 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				sub = xline_length / static_cast<float>(nr_samples);
 			}
 
-			float posx = get_inner_w() - space_at_right;
-
-			int32_t lx = get_inner_w() - space_at_right;
-			int32_t ly = get_inner_h() - space_at_bottom;
-			for (int32_t i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
-				int32_t const curx = static_cast<int32_t>(posx);
-				int32_t       cury = get_inner_h() - space_at_bottom;
-				if (int32_t value = (*dataset)[i]) {
-					const float length_y =
-						yline_length
-						/
-						(static_cast<float>(max) / static_cast<float>(value));
-					cury -= static_cast<int32_t>(length_y);
-				}
-				dst.draw_line(lx, ly, curx, cury, color);
-
-				posx -= sub;
-
-				lx = curx;
-				ly = cury;
-			}
+			draw_plot_line(dst, dataset, yline_length, max, sub, color);
 		}
+}
+
+/**
+ * draw a single plot line
+ * \param m_data the y coordinates of the line
+ * \param sub horizontal difference between 2 y values
+ */
+void WUIPlot_Area::draw_plot_line
+		(RenderTarget & dst, std::vector<uint32_t> const * m_data, float const yline_length,
+		 uint32_t const highest_scale, float const sub, RGBColor const color)
+{
+
+	float posx = get_inner_w() - space_at_right;
+
+	int32_t lx = get_inner_w() - space_at_right;
+	int32_t ly = get_inner_h() - space_at_bottom;
+	for (int32_t i = m_data->size() - 1; i > 0 and posx > spacing; --i) {
+		int32_t const curx = static_cast<int32_t>(posx);
+		int32_t       cury = get_inner_h() - space_at_bottom;
+
+		//scale the line to the available space
+		if (int32_t value = (*m_data)[i]) {
+			const float length_y =
+				yline_length
+				/
+				(static_cast<float>(highest_scale) / static_cast<float>(value));
+			cury -= static_cast<int32_t>(length_y);
+		}
+
+		dst.draw_line(lx, ly, curx, cury, color);
+
+		posx -= sub;
+
+		lx = curx;
+		ly = cury;
+	}
 }
 
 /**

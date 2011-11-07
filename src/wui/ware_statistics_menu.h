@@ -63,7 +63,7 @@ struct WUIPlot_Generic_Area_Slider : public UI::DiscreteSlider {
 		(parent,
 		 x, y, w, h,
 		 plot_area.get_labels(),
-		 plot_area.get_time(),
+		 plot_area.get_time_id(),
 		 background_picture_id,
 		 tooltip_text,
 		 cursor_size,

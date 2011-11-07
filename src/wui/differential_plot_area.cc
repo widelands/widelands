@@ -124,7 +124,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 			std::vector<uint32_t> const * dataset = m_plotdata[plot].dataset;
 			std::vector<uint32_t> const * ndataset = m_negative_plotdata[plot].dataset;
 
-			std::vector<int32_t> m_data;
+			std::vector<uint32_t> m_data;
 			if (m_plotmode == PLOTMODE_RELATIVE) {
 				//  How many do we take together.
 				const int32_t how_many = static_cast<int32_t>
@@ -145,8 +145,12 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 					}
 				}
 
+				dataset = &m_data;
 				sub = xline_length / static_cast<float>(nr_samples);
 			}
+
+			//TODO
+			//draw_plot_line(dst, dataset, yline_length, highest_scale * 2, sub, color);
 
 			float posx = get_inner_w() - space_at_right;
 
