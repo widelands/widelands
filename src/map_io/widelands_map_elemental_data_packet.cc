@@ -17,18 +17,21 @@
  *
  */
 
-#include "widelands_map_elemental_data_packet.h"
+#include <boost/algorithm/string.hpp>
+
+#include "container_iterate.h"
 
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "profile/profile.h"
 #include "logic/world.h"
+#include "profile/profile.h"
+
+#include "widelands_map_elemental_data_packet.h"
 
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
-
 
 void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 throw (_wexception)
@@ -48,6 +51,18 @@ throw (_wexception)
 			map->set_author     (s.get_string("author"));
 			map->set_description(s.get_string("descr"));
 			map->set_background (s.get_string("background"));
+
+			std::string t = s.get_string("tags", "");
+			if (t != "") {
+				std::vector<std::string> tags;
+				boost::split(tags, t, boost::is_any_of(","));
+
+				for (std::vector<std::string>::const_iterator ci = tags.begin(); ci != tags.end(); ++ci) {
+					std::string tn = *ci;
+					boost::trim(tn);
+					map->add_tag(tn);
+				}
+			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
@@ -82,6 +97,7 @@ throw (_wexception)
 	s.set_string("name",           map.get_name       ());
 	s.set_string("author",         map.get_author     ());
 	s.set_string("descr",          map.get_description());
+	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
 	prof.write("elemental", false, fs);
 }
