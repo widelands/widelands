@@ -29,6 +29,8 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 
+#include "wexception.h"
+
 #include <cstdio>
 #include <boost/lexical_cast.hpp>
 
@@ -186,6 +188,7 @@ Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() c
 			return m_tribe.workers_order();
 			break;
 	}
+	throw wexception("Invalid m_type %d", m_type);
 }
 
 Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_order_coords() const
@@ -198,6 +201,7 @@ Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_ord
 			return m_tribe.workers_order_coords();
 			break;
 	}
+	throw wexception("Invalid m_type %d", m_type);
 }
 
 
