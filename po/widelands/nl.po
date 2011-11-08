@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-09-22 12:01+0000\n"
+"PO-Revision-Date: 2011-11-07 16:10+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:13+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-11-08 05:19+0000\n"
+"X-Generator: Launchpad (build 14231)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -2486,7 +2486,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:398 ../../src/network/nethost.cc:424
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "De client %s werd niet gevonden."
 
 #: ../../src/network/nethost.cc:409
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -2606,7 +2606,7 @@ msgstr "Spel succesvol opgeslagen!"
 #: ../../src/network/nethost.cc:1162
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Kan het spel niet opslaan naar bestand \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1168
 msgid "This server is not password protected!"
@@ -2618,7 +2618,7 @@ msgstr "Het verstuurde wachtwoord is incorrect!"
 
 #: ../../src/network/nethost.cc:1184
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "Het wachtwoord was correct, toegang toegewezen!"
 
 #: ../../src/network/nethost.cc:1190
 #, c-format
@@ -2652,6 +2652,8 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
+"Deze server is met een wachtwoord beveiligd. Je kunt het wachtwoord "
+"versturen met: \"@%s pwd WACHTWOORD\""
 
 #: ../../src/network/nethost.cc:2055
 msgid "Client reports time to host that is running backwards."
@@ -2703,7 +2705,7 @@ msgstr "Server gebruikt een andere versie van het protocol."
 #: ../../src/network/nethost.cc:2474 ../../src/network/nethost.cc:2485
 #: ../../src/network/nethost.cc:2496
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Client heeft geen toegang tot instellingen van andere spelers."
 
 #: ../../src/network/nethost.cc:2512 ../../src/network/nethost.cc:2521
 #: ../../src/network/nethost.cc:2530
@@ -3440,7 +3442,7 @@ msgstr "(map)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:466 ../../src/ui_fsmenu/mapselect.cc:469
 msgid "unknown"
-msgstr ""
+msgstr "onbekend"
 
 #: ../../src/ui_fsmenu/mapselect.cc:468
 msgid ""
@@ -4281,7 +4283,7 @@ msgstr "AI: "
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Willekeurig"
 
 #: ../../src/wui/multiplayersetupgroup.cc:305
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -4409,11 +4411,11 @@ msgstr "Laagste prioriteit"
 
 #: ../../src/wui/waresqueuedisplay.cc:230
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "Verlaag het aantal waren dat je hier opgeslagen wilt hebben."
 
 #: ../../src/wui/waresqueuedisplay.cc:239
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "Verhoog het aantal waren dat je hier opgeslagen wilt hebben."
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
