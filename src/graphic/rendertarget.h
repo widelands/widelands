@@ -77,6 +77,11 @@ struct RenderTarget {
 		 uint32_t                  time,
 		 Widelands::Player const * = 0);
 
+	void drawstatic
+			(Point                     dst,
+			 uint32_t                  animation,
+			 Widelands::Player const * = 0);
+
 	void drawanimrect
 		(Point                     dst,
 		 uint32_t                  animation,

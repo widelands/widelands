@@ -21,6 +21,7 @@
 #define FULLSCREEN_MENU_MAPSELECT_H
 
 #include <string>
+#include <set>
 
 #include "base.h"
 #include "ui_basic/button.h"
@@ -36,15 +37,23 @@ using Widelands::Map;
 struct GameController;
 struct GameSettingsProvider;
 
+namespace UI {
+	struct Box;
+}
+
 /**
  * Data about a map that we're interested in.
  */
 struct MapData {
+	typedef std::set<std::string> Tags;
+
 	std::string filename;
 	std::string name;
 	std::string author;
 	std::string description;
 	std::string world;
+	Tags tags;
+
 	uint32_t width;
 	uint32_t height;
 	uint32_t nrplayers;
@@ -73,6 +82,9 @@ private:
 	void fill_list();
 	bool compare_maprows(uint32_t, uint32_t);
 
+	void _add_tag_checkbox(UI::Box *, std::string, std::string);
+	void _tagbox_changed(int32_t, bool);
+
 	uint32_t     m_butw;
 	uint32_t     m_buth;
 	UI::Textarea m_title;
@@ -89,6 +101,9 @@ private:
 	UI::Table<uintptr_t const>        m_table;
 	std::string                       m_curdir, m_basedir;
 	Map::ScenarioTypes  m_scenario_types;
+
+	std::vector<std::string> m_tags_ordered;
+	std::set<uint32_t> m_req_tags;
 
 	std::vector<MapData> m_maps_data;
 

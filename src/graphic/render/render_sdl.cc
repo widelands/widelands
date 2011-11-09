@@ -204,8 +204,7 @@ void SurfaceSDL::draw_line
 		 int32_t y1,
 		 int32_t x2,
 		 int32_t y2,
-		 RGBColor color,
-		 const Rect * clip)
+		 RGBColor color)
 {
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
 	int32_t dy = y2 - y1;      /* the vertical distance of the line */
@@ -217,7 +216,7 @@ void SurfaceSDL::draw_line
 	uint32_t y = dxabs / 2;
 	Point p(x1, y1);
 
-	draw_pixel(p, *clip, color);
+	set_pixel(p.x, p.y, color.map(format()));
 
 	if (dxabs >= dyabs) //  the line is more horizontal than vertical
 		for (uint32_t i = 0; i < dxabs; ++i) {
@@ -229,7 +228,7 @@ void SurfaceSDL::draw_line
 			}
 
 			p.x += sdx;
-			draw_pixel(p, *clip, color);
+			set_pixel(p.x, p.y, color.map(format()));
 		}
 	else                //  the line is more vertical than horizontal
 		for (uint32_t i = 0; i < dyabs; ++i) {
@@ -241,7 +240,7 @@ void SurfaceSDL::draw_line
 			}
 
 			p.y += sdy;
-			draw_pixel(p, *clip, color);
+			set_pixel(p.x, p.y, color.map(format()));
 		}
 }
 

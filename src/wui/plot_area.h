@@ -21,6 +21,7 @@
 #define WUI_PLOT_AREA_H
 
 #include "ui_basic/panel.h"
+#include "ui_basic/slider.h"
 
 #include "rgbcolor.h"
 
@@ -40,6 +41,12 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_FOUR_HOURS,
 		TIME_EIGHT_HOURS,
 		TIME_16_HOURS,
+		TIME_GAME,
+	};
+	enum UNIT {
+		UNIT_MIN,
+		UNIT_HOUR,
+		UNIT_DAY,
 	};
 	enum PLOTMODE {
 		//  Always take the samples of some times together, so that the graph is
@@ -54,7 +61,23 @@ struct WUIPlot_Area : public UI::Panel {
 
 	virtual void draw(RenderTarget &);
 
-	void set_time(TIME);
+	void set_time(TIME id) {
+		m_time = id;
+	}
+
+	void set_time_id(int32_t time) {
+		if (time == m_game_time_id)
+			set_time(TIME_GAME);
+		else
+			set_time(static_cast<TIME>(time));
+	};
+	TIME get_time() {return static_cast<TIME>(m_time); };
+	int32_t get_time_id() {
+		if (m_time == TIME_GAME)
+			return m_game_time_id;
+		else
+			return m_time;
+	};
 	void set_sample_rate(uint32_t id); // in milliseconds
 
 	void register_plot_data
@@ -63,16 +86,53 @@ struct WUIPlot_Area : public UI::Panel {
 
 	void set_plotmode(int32_t id) {m_plotmode = id;}
 
+	std::vector<std::string> get_labels();
+
 private:
+	uint32_t get_game_time();
+	uint32_t get_plot_time();
+	void calc_game_time_id();
+	UNIT get_suggested_unit(uint32_t game_time);
+	std::string get_unit_name(UNIT unit);
+	uint32_t ms_to_unit(UNIT unit, uint32_t ms);
+
 	struct __plotdata {
 		const std::vector<uint32_t> * dataset;
 		bool                          showplot;
 		RGBColor                      plotcolor;
 	};
 	std::vector<__plotdata> m_plotdata;
-	int32_t                 m_time;  // How much do you want to list
+	TIME                    m_time;  // How much do you want to list
 	int32_t                 m_sample_rate;
 	int32_t                 m_plotmode;
+	int32_t                 m_game_time_id; // what label is used for TIME_GAME
+};
+
+/**
+ * A discrete slider with plot time steps preconfigured and automatic signal
+ * setup.
+ */
+struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
+	WUIPlot_Area_Slider
+		(Panel * const parent,
+		 WUIPlot_Area & plot_area,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const PictureID background_picture_id,
+		 const std::string & tooltip_text = std::string(),
+		 const uint32_t cursor_size = 20,
+		 const bool enabled = true)
+	: DiscreteSlider
+		(parent,
+		 x, y, w, h,
+		 plot_area.get_labels(),
+		 plot_area.get_time_id(),
+		 background_picture_id,
+		 tooltip_text,
+		 cursor_size,
+		 enabled)
+	{
+		changedto->set(&plot_area, &WUIPlot_Area::set_time_id);
+	}
 };
 
 #endif

@@ -48,7 +48,8 @@ public:
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 uint32_t orientation,
-		 int32_t max_x = 0, int32_t max_y = 0);
+		 int32_t max_x = 0, int32_t max_y = 0,
+		 uint32_t inner_spacing = 0);
 
 	void set_scrolling(bool scroll);
 
@@ -56,6 +57,7 @@ public:
 
 	void add(Panel * panel, uint32_t align, bool fullsize = false);
 	void add_space(uint32_t space);
+	void add_inf_space();
 	bool is_snap_target() const {return true;}
 
 	void set_min_desired_breadth(uint32_t min);
@@ -66,6 +68,7 @@ protected:
 
 private:
 	void get_item_desired_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);
+	void get_item_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);
 	void set_item_size(uint32_t idx, uint32_t depth, uint32_t breadth);
 	void set_item_pos(uint32_t idx, int32_t pos);
 	void scrollbar_moved(int32_t);
@@ -78,7 +81,8 @@ private:
 	struct Item {
 		enum Type {
 			ItemPanel,
-			ItemSpace
+			ItemSpace,
+			ItemInfSpace
 		};
 
 		Type type;
@@ -90,6 +94,7 @@ private:
 				bool fullsize;
 			} panel;
 			uint32_t space;
+			uint32_t assigned_space;
 		} u;
 	};
 
@@ -97,6 +102,7 @@ private:
 	Scrollbar * m_scrollbar;
 	uint32_t m_orientation;
 	uint32_t m_mindesiredbreadth;
+	uint32_t m_inner_spacing;
 
 	std::vector<Item> m_items;
 };

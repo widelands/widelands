@@ -17,8 +17,13 @@
  *
  */
 
-#include "helpwindow.h"
 
+#include <boost/format.hpp>
+
+#include "scripting/scripting.h"
+#include "io/filesystem/layered_filesystem.h"
+
+#include "log.h"
 #include "constants.h"
 #include "i18n.h"
 #include "window.h"
@@ -27,7 +32,8 @@
 #include "graphic/font_handler.h"
 #include "wlapplication.h"
 
-#include <boost/format.hpp>
+#include "helpwindow.h"
+
 using boost::format;
 
 namespace UI {
@@ -167,6 +173,37 @@ void HelpWindow::pressedOk()
 		// the window should get deleted with the parent anyways.
 		set_visible(false);
 	}
+}
+
+/*
+===================
+LuaTextHelpWindow
+===================
+*/
+
+LuaTextHelpWindow::LuaTextHelpWindow
+	(Panel * const parent,
+	 UI::UniqueWindow::Registry & reg,
+	 const std::string & caption,
+	 std::string path_to_script,
+	 uint32_t width, uint32_t height)
+	:
+	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + caption).c_str()),
+	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
+{
+	LuaInterface * li = create_LuaInterface();
+
+	{
+		boost::shared_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
+		textarea->set_text(t->get_string("text"));
+	}
+
+	delete li;
+}
+
+LuaTextHelpWindow::~LuaTextHelpWindow()
+{
+	delete textarea;
 }
 
 }

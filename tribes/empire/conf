@@ -56,7 +56,7 @@ wine1=_Vine ripe
 advanced_lance=_Advanced Lance
 armour=_Armour
 axe=_Axe
-bakingtray=_Peel
+bakingtray=_Bread Paddle
 basket=_Basket
 beer=_Beer
 bread=_Bread
@@ -137,6 +137,8 @@ donkeybreeder=_Donkey Breeder
 [constructionsite types]
 constructionsite=_Construction Site
 
+[dismantlesite types]
+dismantlesite=_Dismantle Site
 
 [global militarysite types]
 castle.atlanteans=_Castle

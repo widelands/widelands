@@ -60,8 +60,7 @@ struct Surface {
 		 int32_t y1,
 		 int32_t x2,
 		 int32_t y2,
-		 RGBColor color,
-		 Rect const * clip = 0)
+		 RGBColor color)
 	{
 		throw wexception("draw_line() not implemented");
 	}

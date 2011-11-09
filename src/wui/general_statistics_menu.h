@@ -25,27 +25,46 @@
 #include "plot_area.h"
 
 #include "ui_basic/radiobutton.h"
+#include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
+#include "ui_basic/box.h"
 
 struct Interactive_GameBase;
 namespace UI {
-struct Checkbox;
 struct Radiogroup;
 }
 
 struct General_Statistics_Menu : public UI::UniqueWindow {
+
+	// Custom registry, to store the selected_information as well.
+	struct Registry : public UI::UniqueWindow::Registry {
+		Registry() :
+			UI::UniqueWindow::Registry(),
+			selected_information(0),
+			selected_players(true, MAX_PLAYERS),
+			time(WUIPlot_Area::TIME_GAME)
+		{}
+
+		int32_t selected_information;
+		std::vector<bool> selected_players;
+		WUIPlot_Area::TIME time;
+	};
+
 	General_Statistics_Menu
-		(Interactive_GameBase &, UI::UniqueWindow::Registry &);
+		(Interactive_GameBase &, Registry &);
+	virtual ~General_Statistics_Menu();
 
 private:
+	Registry           * m_my_registry;
+	UI::Box              m_box;
 	WUIPlot_Area         m_plot;
 	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
-	UI::Checkbox       * m_cbs[MAX_PLAYERS];
+	UI::Callback_Button * m_cbs[MAX_PLAYERS];
 	uint32_t             m_ndatasets;
 
 	void clicked_help();
-	void cb_changed_to(int32_t, bool);
+	void cb_changed_to(int32_t);
 	void radiogroup_changed(int32_t);
 };
 

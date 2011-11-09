@@ -34,6 +34,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/slider.h"
 
 using namespace Widelands;
 
@@ -41,23 +42,28 @@ using namespace Widelands;
 #define NR_BASE_DATASETS 11
 
 General_Statistics_Menu::General_Statistics_Menu
-	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
+	(Interactive_GameBase & parent, General_Statistics_Menu::Registry & registry)
 :
 UI::UniqueWindow
 	(&parent, "statistics_menu", &registry,
 	 440, 400, _("General Statistics")),
-m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
+m_my_registry      (&registry),
+m_box           (this, 0, 0, UI::Box::Vertical, 0, 0, 5),
+m_plot          (&m_box, 0, 0, 430, PLOT_HEIGHT),
+m_selected_information(0)
 {
+	assert (m_my_registry);
+
+	m_selected_information = m_my_registry->selected_information;
+
+	set_center_panel(&m_box);
+	m_box.set_border(5, 5, 5, 5);
+
 	set_cache(false);
 
-	uint32_t const spacing =  5;
-	Point          pos       (spacing, spacing);
-
-	//  plotter
+	// Setup plot data
 	m_plot.set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot.set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
-	pos.y += PLOT_HEIGHT + spacing + spacing;
-
 	Game & game = *parent.get_game();
 	const Game::General_Stats_vector & genstats =
 		game.get_general_statistics();
@@ -119,202 +125,174 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 				 color);
 		}
 		if (game.get_player(i + 1)) // Show area plot
-			m_plot.show_plot(i * m_ndatasets, 1);
+			m_plot.show_plot
+				(i * m_ndatasets + m_selected_information,
+				 m_my_registry->selected_players[i]);
 	}
 
+	m_plot.set_time(m_my_registry->time);
+
+	// Setup Widgets
+	m_box.add(&m_plot, UI::Box::AlignTop);
+
+	UI::Box * hbox1 = new UI::Box(&m_box, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	uint32_t plr_in_game = 0;
 	Player_Number const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) ++plr_in_game;
 
-	pos.x = spacing;
-	int32_t button_size =
-		(get_inner_w() - (spacing * (plr_in_game + 1))) / plr_in_game;
 	iterate_players_existing_const(p, nr_players, game, player) {
 		char buffer[36];
 		snprintf(buffer, sizeof(buffer), "pics/genstats_enable_plr_%02u.png", p);
-		UI::Checkbox & cb =
-			*new UI::Checkbox
-				(this, pos, g_gr->get_picture(PicMod_Game, buffer));
-		cb.set_size(button_size, 25);
-		cb.set_id(p);
-		cb.set_state(1);
-		cb.set_tooltip(player->get_name().c_str());
-		cb.changedtoid.set(this, &General_Statistics_Menu::cb_changed_to);
+		UI::Callback_Button & cb =
+			*new UI::Callback_Button
+				(hbox1, "playerbutton",
+				 0, 0, 25, 25,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 g_gr->get_picture(PicMod_Game, buffer),
+				 boost::bind
+				 	(&General_Statistics_Menu::cb_changed_to,
+					 boost::ref(*this),
+					p),
+				 player->get_name().c_str());
+
+		cb.set_perm_pressed(m_my_registry->selected_players[p - 1]);
+
 		m_cbs[p - 1] = &cb;
-		pos.x += button_size + spacing;
+
+		hbox1->add(&cb, UI::Box::AlignLeft);
 	} else //  player nr p does not exist
 		m_cbs[p - 1] = 0;
 
-	pos.x  = spacing;
-	pos.y += 25 + spacing + spacing;
+	m_box.add(hbox1, UI::Box::AlignTop);
 
-	button_size =
-		(get_inner_w() - spacing * (m_ndatasets + 1))
-		/
-		m_ndatasets;
+	UI::Box * hbox2 = new UI::Box(&m_box, 0, 0, UI::Box::Horizontal, 0, 0, 1);
+
+	UI::Radiobutton * btn;
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_landsize.png"),
-		 _("Land"));
-	pos.x += button_size + spacing;
+		 _("Land"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrworkers.png"),
-		 _("Workers"));
-	pos.x += button_size + spacing;
+		 _("Workers"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrbuildings.png"),
-		 _("Buildings"));
-	pos.x += button_size + spacing;
+		 _("Buildings"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrwares.png"),
-		 _("Wares"));
-	pos.x += button_size + spacing;
+		 _("Wares"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_productivity.png"),
-		 _("Productivity"));
-	pos.x += button_size + spacing;
+		 _("Productivity"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_casualties.png"),
-		 _("Casualties"));
-	pos.x += button_size + spacing;
+		 _("Casualties"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_kills.png"),
-		 _("Kills"));
-	pos.x += button_size + spacing;
+		 _("Kills"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_msites_lost.png"),
-		 _("Military buildings lost"));
-	pos.x += button_size + spacing;
+		 _("Military buildings lost"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_msites_defeated.png"),
-		 _("Military buildings defeated"));
-	pos.x += button_size + spacing;
+		 _("Military buildings defeated"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_civil_blds_lost.png"),
-		 _("Civilian buildings lost"));
-	pos.x += button_size + spacing;
+		 _("Civilian buildings lost"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	m_radiogroup.add_button
-		(this,
-		 pos,
+		(hbox2,
+		 Point(0, 0),
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_militarystrength.png"),
-		 _("Military"));
+		 _("Military"),
+		 &btn);
+	hbox2->add(btn, UI::Box::AlignLeft);
+
 	if (hook) {
-		pos.x += button_size + spacing;
 		m_radiogroup.add_button
-			(this,
-			 pos,
+			(hbox2,
+			 Point(0, 0),
 			 g_gr->get_picture(PicMod_Game, cs_pic),
-			 cs_name.c_str());
+			 cs_name.c_str(),
+			 &btn);
+		hbox2->add(btn, UI::Box::AlignLeft);
 	}
-	m_radiogroup.set_state(0);
-	m_selected_information = 0;
+
+	m_radiogroup.set_state(m_selected_information);
 	m_radiogroup.changedto.set
 		(this, &General_Statistics_Menu::radiogroup_changed);
-	pos.y += 25;
 
+	m_box.add(hbox2, UI::Box::AlignTop);
 
-	//  time buttons
-	button_size = (get_inner_w() - spacing * 5) / 4;
-	pos.x = spacing;
-	pos.y += spacing + spacing;
+	m_box.add
+		(new WUIPlot_Area_Slider
+			(&m_box, m_plot, 0, 0, 100, 45,
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"))
+		, UI::Box::AlignTop
+		, true);
 
-	new UI::Callback_Button
-		(this, "15m",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_15_MINS),
-		 _("15 m"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "30m",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_30_MINS),
-		 _("30 m"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "1h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_ONE_HOUR),
-		 _("1 h"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "2h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_TWO_HOURS),
-		 _("2 h"));
-
-	pos.y += 25 + spacing;
-	pos.x = spacing;
-
-	new UI::Callback_Button
-		(this, "help",
-		 pos.x, pos.y, 32, 32,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-		 boost::bind(&General_Statistics_Menu::clicked_help, boost::ref(*this)),
-		 _("Help"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "4h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_FOUR_HOURS),
-		 _("4 h"));
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "8h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_EIGHT_HOURS),
-		 _("8 h"));
-
-	pos.x += button_size + spacing;
-
-	new UI::Callback_Button
-		(this, "16h",
-		 pos.x, pos.y, button_size, 25,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&WUIPlot_Area::set_time, boost::ref(m_plot), WUIPlot_Area::TIME_16_HOURS),
-		 _("16 h"));
-
-	pos.x += button_size + spacing;
-	pos.y += 32 + spacing;
-
-	set_inner_size(get_inner_w(), pos.y);
 }
 
+General_Statistics_Menu::~General_Statistics_Menu() {
+	m_my_registry->selected_information = m_selected_information;
+	m_my_registry->time = m_plot.get_time();
+	Game & game = ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
+	Player_Number const nr_players = game.map().get_nrplayers();
+	iterate_players_existing_const(p, nr_players, game, player) {
+		m_my_registry->selected_players[p - 1] =
+			m_cbs[p - 1]->get_perm_pressed();
+	}
+}
 
 /**
  * called when the help button was clicked
@@ -326,11 +304,14 @@ void General_Statistics_Menu::clicked_help() {}
 /*
  * Cb has been changed to this state
  */
-void General_Statistics_Menu::cb_changed_to(int32_t const id, bool const what)
+void General_Statistics_Menu::cb_changed_to(int32_t const id)
 {
 	// This represents our player number
+	m_cbs[id - 1]->set_perm_pressed(not m_cbs[id - 1]->get_perm_pressed());
+
 	m_plot.show_plot
-		((id - 1) * m_ndatasets + m_selected_information, what);
+		((id - 1) * m_ndatasets + m_selected_information,
+		 m_cbs[id - 1]->get_perm_pressed());
 }
 
 /*
@@ -343,7 +324,7 @@ void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {
 			m_plot.show_plot
-				(i * m_ndatasets + id, m_cbs[i]->get_state());
+				(i * m_ndatasets + id, m_cbs[i]->get_perm_pressed());
 			m_plot.show_plot
 				(i * m_ndatasets + m_selected_information, false);
 		}

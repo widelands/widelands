@@ -23,6 +23,7 @@
 #include "interactive_base.h"
 #include "logic/game.h"
 #include "graphic/graphic.h"
+#include "general_statistics_menu.h"
 
 struct ChatOverlay;
 struct ChatProvider;
@@ -40,7 +41,7 @@ struct Interactive_GameBase : public Interactive_Base {
 		UI::UniqueWindow::Registry sound_options;
 
 		UI::UniqueWindow::Registry building_stats;
-		UI::UniqueWindow::Registry general_stats;
+		General_Statistics_Menu::Registry general_stats;
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
 	};

@@ -18,17 +18,20 @@
 
 #include <cstdio>
 
+#include "i18n.h"
+#include "wexception.h"
+
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "s2map.h"
-#include "wexception.h"
+#include "ui_basic/box.h"
+#include "ui_basic/checkbox.h"
 
 
 #include "mapselect.h"
@@ -47,7 +50,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 // Text labels
 	m_title
 		(this,
-		 get_w() / 2, get_h() * 9 / 50,
+		 get_w() / 2, get_h() * 7 / 50,
 		 _("Choose your map!"),
 		 UI::Align_HCenter),
 	m_label_load_map_as_scenario
@@ -156,6 +159,20 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 
 	m_table.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
 	m_table.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
+
+	UI::Box * vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 90, UI::Box::Horizontal, m_table.get_w());
+	_add_tag_checkbox(vbox, "official", _("Official Map"));
+	vbox->set_size(get_w(), 25);
+	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
+	_add_tag_checkbox(vbox, "1v1", _("1v1"));
+	_add_tag_checkbox(vbox, "2teams", _("2 Player Teams"));
+	_add_tag_checkbox(vbox, "3teams", _("3 Player Teams"));
+	vbox->set_size(get_w(), 25);
+	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
+	_add_tag_checkbox(vbox, "4teams", _("4 Player Teams"));
+	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
+	_add_tag_checkbox(vbox, "vscpu", _("vs CPU"));
+	vbox->set_size(get_w(), 25);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 	if (m_scenario_types) {
@@ -382,9 +399,17 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					mapdata.width = map.get_width();
 					mapdata.height = map.get_height();
 					mapdata.scenario = map.scenario_types() & m_scenario_types;
+					mapdata.tags = map.get_tags();
 
 					if (!mapdata.width || !mapdata.height)
 						continue;
+
+					bool has_all_tags = true;
+					for (std::set<uint32_t>::const_iterator it = m_req_tags.begin(); it != m_req_tags.end(); ++it)
+						has_all_tags &= mapdata.tags.count(m_tags_ordered[*it]);
+					if (not has_all_tags)
+						continue;
+
 
 					m_maps_data.push_back(mapdata);
 					UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
@@ -494,3 +519,36 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	if (m_table.size())
 		m_table.select(0);
 }
+
+/*
+ * Add a tag to the checkboxes
+ */
+void Fullscreen_Menu_MapSelect::_add_tag_checkbox
+	(UI::Box * box, std::string tag, std::string displ_name)
+{
+	int32_t id = m_tags_ordered.size();
+	m_tags_ordered.push_back(tag);
+
+	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0));
+	cb->set_id(id);
+	cb->changedtoid.set
+		(this, &Fullscreen_Menu_MapSelect::_tagbox_changed);
+
+	box->add(cb, UI::Box::AlignLeft, true);
+	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft, 100);
+	box->add(ta, UI::Box::AlignLeft);
+	box->add_space(25);
+}
+
+/*
+ * One of the tagboxes has changed
+ */
+void Fullscreen_Menu_MapSelect::_tagbox_changed(int32_t id, bool to) {
+	if (to)
+		m_req_tags.insert(id);
+	else
+		m_req_tags.erase(id);
+
+	fill_list();
+}
+
