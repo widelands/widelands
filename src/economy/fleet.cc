@@ -361,7 +361,10 @@ void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 		} else {
 			Flag & base = m_ports[0]->base_flag();
 			for (uint i = 1; i < m_ports.size(); ++i) {
-				base.get_economy()->check_split(base, m_ports[i]->base_flag());
+				// since two ports can be connected by land, it is possible that
+				// disconnecting a previous port also disconnects later ports
+				if (base.get_economy() == m_ports[i]->base_flag().get_economy())
+					base.get_economy()->check_split(base, m_ports[i]->base_flag());
 			}
 		}
 	}
@@ -514,7 +517,8 @@ void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
 		set_economy(0);
 	} else {
 		set_economy(m_ports[0]->get_economy());
-		m_ports[0]->get_economy()->check_split(m_ports[0]->base_flag(), port->base_flag());
+		if (!m_ships.empty())
+			m_ports[0]->get_economy()->check_split(m_ports[0]->base_flag(), port->base_flag());
 	}
 
 	if (m_ships.empty() && m_ports.empty())
