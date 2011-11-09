@@ -102,6 +102,9 @@ void Fleet::init(Editor_Game_Base & egbase)
 	}
 
 	find_other_fleet(egbase);
+
+	if (active())
+		update(egbase);
 }
 
 struct StepEvalFindFleet {
@@ -203,6 +206,8 @@ void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
 	other->m_ports.clear();
 	other->m_portpaths.clear();
 	other->remove(egbase);
+
+	update(egbase);
 }
 
 /**
@@ -337,8 +342,6 @@ void Fleet::add_ship(Ship * ship)
 	if (m_ships.size() == 1) {
 		check_merge_economy();
 	}
-
-	update(owner().egbase());
 }
 
 void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
@@ -489,8 +492,6 @@ void Fleet::add_port(Editor_Game_Base & egbase, PortDock * port)
 	}
 
 	m_portpaths.resize((m_ports.size() * (m_ports.size() - 1)) / 2);
-
-	update(egbase);
 }
 
 void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
