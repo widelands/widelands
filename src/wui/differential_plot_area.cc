@@ -149,34 +149,9 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 				sub = xline_length / static_cast<float>(nr_samples);
 			}
 
-			//TODO
-			//draw_plot_line(dst, dataset, yline_length, highest_scale * 2, sub, color);
-
-			float posx = get_inner_w() - space_at_right;
-
-			int32_t lx = get_inner_w() - space_at_right;
-			//raise y zero point to middle of plot
-			int32_t ly = yoffset;
-			for (int32_t i = m_data.size() - 1; i > 0 and posx > spacing; --i) {
-				int32_t const curx = static_cast<int32_t>(posx);
-				int32_t       cury = yoffset;
-				if (int32_t value = m_data[i]) {
-					const float length_y =
-						yline_length
-						/
-						(static_cast<float>(highest_scale) / static_cast<float>(value))
-						//highest_scale represent the space between zero line and top.
-						//-> half of the whole differential plot area
-						/ static_cast<float>(2);
-					cury -= static_cast<int32_t>(length_y);
-				}
-				dst.draw_line(lx, ly, curx, cury, color);
-
-				posx -= sub;
-
-				lx = curx;
-				ly = cury;
-			}
+			//highest_scale represent the space between zero line and top.
+			//-> half of the whole differential plot area
+			draw_plot_line(dst, dataset, yline_length, highest_scale * 2, sub, color, yoffset);
 		}
 }
 

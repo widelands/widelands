@@ -94,8 +94,8 @@ protected:
 	void draw_value
 		(RenderTarget & dst, const char * value, RGBColor color, Point pos);
 	void draw_plot_line
-		(RenderTarget & dst, std::vector<uint32_t> const * m_data, float const yline_length,
-		 uint32_t const highest_scale, float const sub, RGBColor const color);
+		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
+		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
 
 	int32_t const spacing;
 	int32_t const space_at_bottom;
