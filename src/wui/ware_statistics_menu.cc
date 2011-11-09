@@ -27,22 +27,26 @@
 #include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "plot_area.h"
+#include "differential_plot_area.h"
 #include "waresdisplay.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/wsm_checkbox.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/slider.h"
 
-#define WARES_DISPLAY_BG "pics/ware_list_bg.png"
 
 #define MIN_WARES_PER_LINE 7
 #define MAX_WARES_PER_LINE 11
 
-
 #define PLOT_HEIGHT 100
 
-#define COLOR_BOX_HEIGHT 7
+//TODO place holder, need to be changed
+static const char pic_tab_production[] = "pics/menu_tab_wares.png";
+static const char pic_tab_consumption[] = "pics/menu_tab_wares.png";
+static const char pic_tab_economy[] = "pics/menu_tab_wares.png";
 
 static const RGBColor colors[] = {
 	RGBColor  (0, 210, 254),
@@ -316,7 +320,6 @@ protected:
 	}
 };
 
-
 Ware_Statistics_Menu::Ware_Statistics_Menu
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
@@ -326,24 +329,87 @@ m_parent(&parent)
 {
 	set_cache(false);
 
+	//  First, we must decide about the size.
 	UI::Box * box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
 	box->set_border(5, 5, 5, 5);
 	set_center_panel(box);
 
-	m_plot = new WUIPlot_Area
-			(box, 0, 0, 100, PLOT_HEIGHT);
-	m_plot->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
-
-	box->add(m_plot, UI::Box::AlignLeft, true);
-
 	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
+
+	//setup plot widgets
+	//create a tabbed environment for the different plots
+	uint8_t const tab_offset = 30;
+	uint8_t const spacing = 5;
+	uint8_t const plot_width = get_inner_w() - 2 * spacing;
+	uint8_t const plot_height = PLOT_HEIGHT + tab_offset + spacing;
+
+	UI::Tab_Panel * tabs =
+		 new UI::Tab_Panel
+			 (box, spacing, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+
+
+	m_plot_production =
+		new WUIPlot_Area
+			(tabs,
+			 0, 0, plot_width, plot_height);
+	m_plot_production->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot_production->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+
+	tabs->add
+		("production", g_gr->get_picture(PicMod_UI, pic_tab_production),
+			m_plot_production, _("Production"));
+
+	m_plot_consumption =
+		new WUIPlot_Area
+			(tabs,
+			 0, 0, plot_width, plot_height);
+	m_plot_consumption->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+
+	tabs->add
+		("consumption", g_gr->get_picture(PicMod_UI, pic_tab_consumption),
+			m_plot_consumption, _("Consumption"));
+
+	m_plot_economy =
+		new DifferentialPlot_Area
+			(tabs,
+			 0, 0, plot_width, plot_height);
+	m_plot_economy->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot_economy->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+
+	tabs->add
+		("economy_health", g_gr->get_picture(PicMod_UI, pic_tab_production),
+			m_plot_economy, _("Economy Health"));
+
+	tabs->activate(0);
+
+	//add tabbed environment to box
+	box->add(tabs, UI::Box::AlignLeft, true);
+
+	//register statistics data
 	for (Widelands::Ware_Index::value_t cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
-		m_plot->register_plot_data
+		m_plot_production->register_plot_data
 			(cur_ware,
-			 parent.get_player()->get_ware_production_statistics
+				parent.get_player()->get_ware_production_statistics
 				(Widelands::Ware_Index(cur_ware)),
-			 colors[cur_ware]);
+				colors[cur_ware]);
+
+		m_plot_consumption->register_plot_data
+			(cur_ware,
+				parent.get_player()->get_ware_consumption_statistics
+				(Widelands::Ware_Index(cur_ware)),
+				colors[cur_ware]);
+
+		m_plot_economy->register_plot_data
+			(cur_ware,
+				parent.get_player()->get_ware_production_statistics
+				(Widelands::Ware_Index(cur_ware)),
+				colors[cur_ware]);
+
+		m_plot_economy->register_negative_plot_data
+			(cur_ware,
+				parent.get_player()->get_ware_consumption_statistics
+				(Widelands::Ware_Index(cur_ware)));
 	}
 
 	box->add
@@ -352,25 +418,32 @@ m_parent(&parent)
 			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2)),
 		 UI::Box::AlignLeft, true);
 
-
 	box->add
-		(new WUIPlot_Area_Slider
-			(box, *m_plot, 0, 0, 100, 45,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
-		UI::Box::AlignLeft, true);
+		(new WUIPlot_Generic_Area_Slider
+			(this, *m_plot_production, this,
+			0, 0, 100, 45,
+			g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 UI::Box::AlignLeft, true);
+
 }
 
-
 /**
- * Called when the ok button has been clicked
- * \todo Implement help
-*/
-void Ware_Statistics_Menu::clicked_help() {}
-
-/*
- * Cb has been changed to this state
+ * Callback for the ware buttons. Change the state of all ware statistics
+ * simultaneously.
  */
 void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
-	m_plot->show_plot(static_cast<size_t>(id), what);
+	m_plot_production->show_plot(static_cast<size_t>(id), what);
+	m_plot_consumption->show_plot(static_cast<size_t>(id), what);
+	m_plot_economy->show_plot(static_cast<size_t>(id), what);
+}
+
+/**
+ * Callback for the time buttons. Change the time axis of all ware
+ * statistics simultaneously.
+ */
+void Ware_Statistics_Menu::set_time(int32_t timescale) {
+	m_plot_production->set_time_id(timescale);
+	m_plot_consumption->set_time_id(timescale);
+	m_plot_economy->set_time_id(timescale);
 }
 

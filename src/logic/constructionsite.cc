@@ -284,6 +284,9 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
 
+			//update consumption statistic
+			owner().ware_consumed(wq.get_ware(), 1);
+
 			m_working = true;
 			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 

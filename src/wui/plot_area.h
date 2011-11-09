@@ -90,12 +90,23 @@ struct WUIPlot_Area : public UI::Panel {
 
 	std::vector<std::string> get_labels();
 
-private:
-	uint32_t get_game_time();
-	uint32_t get_plot_time();
-	UNIT get_suggested_unit(uint32_t game_time);
-	std::string get_unit_name(UNIT unit);
-	uint32_t ms_to_unit(UNIT unit, uint32_t ms);
+protected:
+	uint32_t draw_diagram
+		(RenderTarget & dst, float const xline_length, float const yline_length);
+	void draw_value
+		(RenderTarget & dst, const char * value, RGBColor color, Point pos);
+	void draw_plot_line
+		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
+		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
+
+	int32_t calc_how_many(uint32_t time_in_ms_);
+
+	int32_t const spacing;
+	int32_t const space_at_bottom;
+	int32_t const space_at_right;
+
+	static const uint32_t time_in_ms[];
+	static const uint32_t nr_samples = 30;   // How many samples per diagramm when relative plotting
 
 	struct __plotdata {
 		const std::vector<uint32_t> * dataset;
@@ -103,9 +114,18 @@ private:
 		RGBColor                      plotcolor;
 	};
 	std::vector<__plotdata> m_plotdata;
+
 	TIME                    m_time;  // How much do you want to list
 	int32_t                 m_sample_rate;
 	int32_t                 m_plotmode;
+
+private:
+	uint32_t get_game_time();
+	uint32_t get_plot_time();
+	void calc_game_time_id();
+	UNIT get_suggested_unit(uint32_t game_time);
+	std::string get_unit_name(UNIT unit);
+	uint32_t ms_to_unit(UNIT unit, uint32_t ms);
 	int32_t                 m_game_time_id; // what label is used for TIME_GAME
 };
 

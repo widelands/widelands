@@ -91,8 +91,10 @@ Player::Player
 	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), false),
 	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
 	m_ai(""),
-	m_current_statistics(tribe_descr.get_nrwares    ()),
-	m_ware_productions  (tribe_descr.get_nrwares    ())
+	m_current_produced_statistics(tribe_descr.get_nrwares    ()),
+	m_current_consumed_statistics(tribe_descr.get_nrwares    ()),
+	m_ware_productions  (tribe_descr.get_nrwares    ()),
+	m_ware_consumptions  (tribe_descr.get_nrwares    ())
 {
 	set_name(name);
 }
@@ -1013,10 +1015,14 @@ throw ()
 void Player::sample_statistics()
 {
 	assert (m_ware_productions.size() == tribe().get_nrwares().value());
+	assert (m_ware_consumptions.size() == tribe().get_nrwares().value());
 
 	for (uint32_t i = 0; i < m_ware_productions.size(); ++i) {
-		m_ware_productions[i].push_back(m_current_statistics[i]);
-		m_current_statistics[i] = 0;
+		m_ware_productions[i].push_back(m_current_produced_statistics[i]);
+		m_current_produced_statistics[i] = 0;
+
+		m_ware_consumptions[i].push_back(m_current_consumed_statistics[i]);
+		m_current_consumed_statistics[i] = 0;
 	}
 }
 
@@ -1028,7 +1034,22 @@ void Player::ware_produced(Ware_Index const wareid) {
 	assert (m_ware_productions.size() == tribe().get_nrwares().value());
 	assert(wareid.value() < tribe().get_nrwares().value());
 
-	++m_current_statistics[wareid];
+	++m_current_produced_statistics[wareid];
+}
+
+
+/**
+ * Some units from one kind of ware were consumed.
+ * Update the corresponding statistics
+ *
+ * \param wareid the ID of the consumed wares
+ * \param count the number of consumed wares
+ */
+void Player::ware_consumed(Ware_Index const wareid, uint8_t const count) {
+	assert (m_ware_consumptions.size() == tribe().get_nrwares().value());
+	assert(wareid.value() < tribe().get_nrwares().value());
+
+	m_current_consumed_statistics[wareid] += count;
 }
 
 
@@ -1041,6 +1062,18 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
 	assert(ware.value() < m_ware_productions.size());
 
 	return &m_ware_productions[ware];
+}
+
+
+/**
+ * Get current ware consumption statistics
+ */
+const std::vector<uint32_t> * Player::get_ware_consumption_statistics
+		(Ware_Index const ware) const {
+
+	assert(ware.value() < m_ware_consumptions.size());
+
+	return &m_ware_consumptions[ware];
 }
 
 
@@ -1118,14 +1151,17 @@ const std::string & Player::getAI() const
  * \param version indicates the kind of statistics file, which may be
  *   0 - old style statistics (before WiHack 2010)
  *   1 - statistics with ware names
+ *   2 - with consumption statistics
  */
 void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 {
-	if (version == 1) {
+	 //version 1 and 2 only differs in an additional statistic.
+	 //Use version 1 code for both
+	if ((version == 2) || (version == 1)) {
 		uint16_t nr_wares = fr.Unsigned16();
 		uint16_t nr_entries = fr.Unsigned16();
 
-		for (uint32_t i = 0; i < m_current_statistics.size(); ++i)
+		for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i)
 			m_ware_productions[i].resize(nr_entries);
 
 		for (uint16_t i = 0; i < nr_wares; ++i) {
@@ -1138,10 +1174,35 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 				continue;
 			}
 
-			m_current_statistics[idx] = fr.Unsigned32();
+			m_current_produced_statistics[idx] = fr.Unsigned32();
 
 			for (uint32_t j = 0; j < nr_entries; ++j)
 				m_ware_productions[idx][j] = fr.Unsigned32();
+		}
+
+		//read consumption statistics if it exists
+		if (version == 2) {
+			nr_wares = fr.Unsigned16();
+			nr_entries = fr.Unsigned16();
+
+			for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i)
+				m_ware_consumptions[i].resize(nr_entries);
+
+			for (uint16_t i = 0; i < nr_wares; ++i) {
+				std::string name = fr.CString();
+				Ware_Index idx = tribe().ware_index(name);
+				if (!idx) {
+					log
+						("Player %u statistics: unknown ware name %s",
+						player_number(), name.c_str());
+					continue;
+				}
+
+				m_current_consumed_statistics[idx] = fr.Unsigned32();
+
+				for (uint32_t j = 0; j < nr_entries; ++j)
+					m_ware_consumptions[idx][j] = fr.Unsigned32();
+			}
 		}
 	} else if (version == 0) {
 		uint16_t nr_wares = fr.Unsigned16();
@@ -1150,10 +1211,10 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 		if (nr_wares > 0) {
 			if (nr_wares == tribe().get_nrwares().value()) {
 				assert(m_ware_productions.size() == nr_wares);
-				assert(m_current_statistics.size() == nr_wares);
+				assert(m_current_produced_statistics.size() == nr_wares);
 
-				for (uint32_t i = 0; i < m_current_statistics.size(); ++i) {
-					m_current_statistics[i] = fr.Unsigned32();
+				for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i) {
+					m_current_produced_statistics[i] = fr.Unsigned32();
 					m_ware_productions[i].resize(nr_entries);
 
 					for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
@@ -1177,6 +1238,22 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 		}
 	} else
 		throw wexception("Unsupported version %i", version);
+
+	//create empty consumption statistic if it is missing
+	if (version < 2) {
+		uint16_t nr_entries = m_ware_productions[0].size();
+
+		for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
+			m_ware_consumptions[i].resize(nr_entries);
+			m_current_consumed_statistics[i] = 0;
+
+			for (uint32_t j = 0; j < nr_entries; ++j)
+				m_ware_consumptions[i][j] = 0;
+		}
+	}
+
+	assert(m_ware_productions.size() == m_ware_consumptions.size());
+	assert(m_ware_productions[0].size() == m_ware_consumptions[0].size());
 }
 
 
@@ -1184,16 +1261,30 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
  * Write statistics data to the give file
  */
 void Player::WriteStatistics(FileWrite & fw) const {
-	fw.Unsigned16(m_current_statistics.size());
+	//write produce statistics
+	fw.Unsigned16(m_current_produced_statistics.size());
 	fw.Unsigned16(m_ware_productions[0].size());
 
-	for (uint8_t i = 0; i < m_current_statistics.size(); ++i) {
+	for (uint8_t i = 0; i < m_current_produced_statistics.size(); ++i) {
 		fw.CString
 			(tribe().get_ware_descr
 			 (Ware_Index(static_cast<Ware_Index::value_t>(i)))->name());
-		fw.Unsigned32(m_current_statistics[i]);
+		fw.Unsigned32(m_current_produced_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
 			fw.Unsigned32(m_ware_productions[i][j]);
+	}
+
+	//write consume statistics
+	fw.Unsigned16(m_current_consumed_statistics.size());
+	fw.Unsigned16(m_ware_consumptions[0].size());
+
+	for (uint8_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
+		fw.CString
+			(tribe().get_ware_descr
+			 (Ware_Index(static_cast<Ware_Index::value_t>(i)))->name());
+		fw.Unsigned32(m_current_consumed_statistics[i]);
+		for (uint32_t j = 0; j < m_ware_consumptions[i].size(); ++j)
+			fw.Unsigned32(m_ware_consumptions[i][j]);
 	}
 }
 

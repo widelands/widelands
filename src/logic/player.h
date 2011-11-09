@@ -521,13 +521,19 @@ struct Player :
 	{
 		return m_building_stats[i];
 	}
+
 	std::vector<uint32_t> const * get_ware_production_statistics
+		(Ware_Index const) const;
+
+	std::vector<uint32_t> const * get_ware_consumption_statistics
 		(Ware_Index const) const;
 
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(Ware_Index);
+
+	void ware_consumed(Ware_Index, uint8_t);
 	void next_ware_production_period();
 
 	void receive(NoteImmovable const &);
@@ -589,13 +595,25 @@ private:
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics
 	 */
-	std::vector<uint32_t> m_current_statistics;
+	std::vector<uint32_t> m_current_produced_statistics;
+
+	/**
+	 * Wares consumed (by ware id) since the last call to @ref sample_statistics
+	 */
+	std::vector<uint32_t> m_current_consumed_statistics;
 
 	/**
 	 * Statistics of wares produced over the life of the game, indexed as
 	 * m_ware_productions[ware id][time index]
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_productions;
+
+	/**
+	 * Statistics of wares consumed over the life of the game, indexed as
+	 * m_ware_consumptions[ware_id][time_index]
+	 */
+	std::vector< std::vector<uint32_t> > m_ware_consumptions;
+
 	BuildingStats m_building_stats;
 };
 
