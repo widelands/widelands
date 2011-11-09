@@ -491,14 +491,15 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 
 	Map & map = egbase.map();
 	std::vector<Coords> shore;
+
+	shore.resize(3);
+	map.get_neighbour(get_position(), WALK_W, &shore[0]);
+	map.get_neighbour(get_position(), WALK_NW, &shore[1]);
+	map.get_neighbour(get_position(), WALK_NE, &shore[2]);
+
 	map.find_fields
 		(Area<FCoords>(map.get_fcoords(get_position()), 2),
 		 &shore, FindNodeShore());
-
-	if (shore.empty()) {
-		molog("Port is not next to shore\n");
-		return;
-	}
 
 	std::vector<Coords> water;
 	container_iterate_const(std::vector<Coords>, shore, shoreit) {
@@ -513,7 +514,7 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 		}
 	}
 	if (water.empty()) {
-		log("Logic inconsistency: Found shore node without neighboring water.\n");
+		log("Attempting to setup port without neighboring water.\n");
 		return;
 	}
 
