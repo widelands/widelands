@@ -553,13 +553,12 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 
 			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
 				continue;
+			if (descr.get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
+				continue;
 
-			// Is this a port and if yes, is a port buildable here?
-			if (descr.get_isport()) {
-				if (buildcaps & Widelands::BUILDCAPS_PORT)
-					ppgrid = &bbg_house[3];
-			// It is not a port, but a normal buildings
-			} else
+			if (descr.get_isport())
+				ppgrid = &bbg_house[3];
+			else
 				ppgrid = &bbg_house[size];
 		}
 
