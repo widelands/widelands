@@ -145,11 +145,13 @@ std::vector<std::string> WUIPlot_Area::get_labels() {
  * is called from the outside, e.g. from a slider, then from that moment on
  * this class assumes that values passed to set_time_id adhere to the new
  * choice of time spans.
+ * We start to search with i=1 to ensure that at least one option besides
+ * "game" will be offered to the user.
  */
 int32_t WUIPlot_Area::get_game_time_id() {
 	uint32_t game_time = get_game_time();
-	uint32_t i = 0;
-	for (i = 0; i < 7 && time_in_ms[i] <= game_time; i++) {
+	uint32_t i;
+	for (i = 1; i < 7 && time_in_ms[i] <= game_time; i++) {
 	}
 	m_game_time_id = i;
 	return m_game_time_id;
