@@ -97,6 +97,8 @@ protected:
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
 
+	int32_t calc_how_many(uint32_t time_in_ms_);
+
 	int32_t const spacing;
 	int32_t const space_at_bottom;
 	int32_t const space_at_right;

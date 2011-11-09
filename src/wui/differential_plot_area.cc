@@ -45,6 +45,9 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 		 yoffset,
 		 ZERO_LINE_COLOR);
 
+	// How many do we take together when relative ploting
+	const int32_t how_many = calc_how_many(time_in_ms_);
+
 	//find max and min value
 	int32_t max = 0;
 	int32_t min = 0;
@@ -65,15 +68,6 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 
 				std::vector<uint32_t> const & dataset = *m_plotdata[plot].dataset;
 				std::vector<uint32_t> const & ndataset = *m_negative_plotdata[plot].dataset;
-
-				// How many do we take together
-				int32_t const how_many =
-					static_cast<int32_t>
-					((static_cast<float>(time_in_ms_)
-					  /
-					  static_cast<float>(nr_samples))
-					 /
-					 static_cast<float>(m_sample_rate));
 
 				int32_t add = 0;
 				//  Relative data, first entry is always zero.
@@ -126,14 +120,6 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 
 			std::vector<uint32_t> m_data;
 			if (m_plotmode == PLOTMODE_RELATIVE) {
-				//  How many do we take together.
-				const int32_t how_many = static_cast<int32_t>
-				((static_cast<float>(time_in_ms_)
-				  /
-				  static_cast<float>(nr_samples))
-				 /
-				 static_cast<float>(m_sample_rate));
-
 				int32_t add = 0;
 				// Relative data, first entry is always zero
 				m_data.push_back(0);

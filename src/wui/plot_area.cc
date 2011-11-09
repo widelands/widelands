@@ -161,7 +161,11 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	float const xline_length = get_inner_w() - space_at_right  - spacing;
 	float const yline_length = get_inner_h() - space_at_bottom - spacing;
 
+
 	time_in_ms_ = draw_diagram(dst, xline_length, yline_length);
+
+	// How many do we take together when relative ploting
+	const int32_t how_many = calc_how_many(time_in_ms_);
 
 	uint32_t max = 0;
 	//  Find the maximum value.
@@ -177,15 +181,6 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			if (m_plotdata[plot].showplot) {
 
 				std::vector<uint32_t> const & dataset = *m_plotdata[plot].dataset;
-
-				// How many do we take together
-				int32_t const how_many =
-					static_cast<int32_t>
-					((static_cast<float>(time_in_ms_)
-					  /
-					  static_cast<float>(nr_samples))
-					 /
-					 static_cast<float>(m_sample_rate));
 
 				uint32_t add = 0;
 				//  Relative data, first entry is always zero.
@@ -223,14 +218,6 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 
 			std::vector<uint32_t> m_data;
 			if (m_plotmode == PLOTMODE_RELATIVE) {
-				//  How many do we take together.
-				const int32_t how_many = static_cast<int32_t>
-				((static_cast<float>(time_in_ms_)
-				  /
-				  static_cast<float>(nr_samples))
-				 /
-				 static_cast<float>(m_sample_rate));
-
 				uint32_t add = 0;
 				// Relative data, first entry is always zero
 				m_data.push_back(0);
@@ -251,6 +238,19 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 		}
 }
 
+/**
+ * calculate how many values are taken together when plot mode is relative
+ */
+int32_t WUIPlot_Area::calc_how_many(uint32_t time_in_ms_) {
+	int32_t how_many = static_cast<int32_t>
+			((static_cast<float>(time_in_ms_)
+				/
+				static_cast<float>(nr_samples))
+				/
+				static_cast<float>(m_sample_rate));
+
+	return how_many;
+}
 
 /**
  * scale the values from dataset down to the available space and draw a single plot line
