@@ -141,14 +141,20 @@ std::vector<std::string> WUIPlot_Area::get_labels() {
 }
 
 /**
- * Find the last predefined time span that is less than the game time
+ * Find the last predefined time span that is less than the game time. If this
+ * is called from the outside, e.g. from a slider, then from that moment on
+ * this class assumes that values passed to set_time_id adhere to the new
+ * choice of time spans.
+ * We start to search with i=1 to ensure that at least one option besides
+ * "game" will be offered to the user.
  */
-void WUIPlot_Area::calc_game_time_id() {
+int32_t WUIPlot_Area::get_game_time_id() {
 	uint32_t game_time = get_game_time();
-	uint32_t i = 0;
-	for (i = 0; i < 7 && time_in_ms[i] <= game_time; i++) {
+	uint32_t i;
+	for (i = 1; i < 7 && time_in_ms[i] <= game_time; i++) {
 	}
 	m_game_time_id = i;
+	return m_game_time_id;
 }
 
 /*
@@ -431,7 +437,7 @@ void WUIPlot_Area::register_plot_data
 	m_plotdata[id].showplot  = false;
 	m_plotdata[id].plotcolor = color;
 
-	calc_game_time_id();
+	get_game_time_id();
 }
 
 /*
@@ -449,3 +455,13 @@ void WUIPlot_Area::set_sample_rate(uint32_t const id) {
 	m_sample_rate = id;
 }
 
+
+void WUIPlot_Area_Slider::draw(RenderTarget & dst) {
+	int32_t new_game_time_id = m_plot_area.get_game_time_id();
+	if (new_game_time_id != m_last_game_time_id) {
+		m_last_game_time_id = new_game_time_id;
+		set_labels(m_plot_area.get_labels());
+		slider.set_value(m_plot_area.get_time_id());
+	}
+	UI::DiscreteSlider::draw(dst);
+}

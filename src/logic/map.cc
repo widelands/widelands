@@ -17,17 +17,21 @@
  *
  */
 
-#include "map.h"
+#include <algorithm>
+#include <cstdio>
+
+#include "log.h"
 
 #include "checkstep.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "editor/tools/editor_increase_resources_tool.h"
 #include "findimmovable.h"
 #include "findnode.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "map_generator.h"
 #include "map_io/widelands_map_loader.h"
 #include "mapfringeregion.h"
-#include "wui/overlay_manager.h"
 #include "pathfield.h"
 #include "player.h"
 #include "s2map.h"
@@ -36,13 +40,10 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "worlddata.h"
-#include "editor/tools/editor_increase_resources_tool.h"
-#include "map_generator.h"
+#include "wui/overlay_manager.h"
 
-#include "log.h"
+#include "map.h"
 
-#include <algorithm>
-#include <cstdio>
 
 
 #define AVG_ELEVATION   (0x80000000)
@@ -318,6 +319,8 @@ void Map::cleanup() {
 	m_scenario_names.clear();
 	m_scenario_ais.clear();
 	m_scenario_closeables.clear();
+
+	m_tags.clear();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
@@ -682,6 +685,10 @@ void Map::set_background(char const * const string)
 		m_background = string;
 	else
 		m_background.clear();
+}
+
+void Map::add_tag(std::string tag) {
+	m_tags.insert(tag);
 }
 
 /*

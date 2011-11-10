@@ -290,9 +290,10 @@ void Building_Window::help_clicked()
 	if (m_helpwindow_registry.window)
 		delete m_helpwindow_registry.window;
 	else
-		new UI::LuaTextHelpWindow(&igbase(), m_helpwindow_registry,
-				m_building.descname(),
-				m_building.descr().helptext_script());
+		new UI::LuaTextHelpWindow
+			(&igbase(), m_helpwindow_registry,
+			 m_building.descname(),
+			 m_building.descr().helptext_script());
 }
 
 /*

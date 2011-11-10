@@ -211,13 +211,18 @@ struct DiscreteSlider : public Panel {
 protected:
 	HorizontalSlider slider;
 public:
+	void set_labels(std::vector<std::string>);
+
 	Signal *       changed;
 	Signal1<int32_t> *  changedto;
-protected:
-	const std::vector<std::string> labels;
 
-	void draw(RenderTarget & dst);
-	void layout();
+private:
+	std::vector<std::string> labels;
+
+protected:
+
+	virtual void draw(RenderTarget & dst);
+	virtual void layout();
 };
 
 

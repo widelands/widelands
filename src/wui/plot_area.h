@@ -79,6 +79,8 @@ struct WUIPlot_Area : public UI::Panel {
 			return m_time;
 	};
 	void set_sample_rate(uint32_t id); // in milliseconds
+	
+	int32_t get_game_time_id();
 
 	void register_plot_data
 		(uint32_t id, const std::vector<uint32_t> * data, RGBColor);
@@ -148,10 +150,19 @@ struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
 		 background_picture_id,
 		 tooltip_text,
 		 cursor_size,
-		 enabled)
+		 enabled),
+	  m_plot_area(plot_area),
+	  m_last_game_time_id(plot_area.get_game_time_id())
 	{
 		changedto->set(&plot_area, &WUIPlot_Area::set_time_id);
 	}
+
+protected:
+	void draw(RenderTarget & dst);
+
+private:
+	WUIPlot_Area & m_plot_area;
+	int32_t m_last_game_time_id;
 };
 
 #endif
