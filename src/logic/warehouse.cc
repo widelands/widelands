@@ -926,9 +926,11 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	Worker_Descr::Buildcost const & buildcost = w_desc.buildcost();
 	container_iterate_const(Worker_Descr::Buildcost, buildcost, i) {
 		std::string const & input = i.current->first;
-		if (Ware_Index const id_ware = tribe().ware_index(input))
+		if (Ware_Index const id_ware = tribe().ware_index(input)) {
 			remove_wares  (id_ware,                        i.current->second);
-		else
+			//update statistic accordingly
+			owner().ware_consumed(id_ware, i.current->second);
+		} else
 			remove_workers(tribe().safe_worker_index(input), i.current->second);
 	}
 
