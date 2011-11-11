@@ -81,6 +81,7 @@ struct Ship : Bob {
 
 	uint get_capacity() const {return descr().get_capacity();}
 	uint get_nritems() const {return m_items.size();}
+	const ShippingItem & get_item(uint idx) const {return m_items[idx];}
 
 	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
 	void add_item(Game &, const ShippingItem & item);

@@ -17,7 +17,7 @@ init = {
       plr:allow_workers("all")
    end
 
-   plr:forbid_buildings{"shipyard"}
+   plr:forbid_buildings{"shipyard", "port"}
 
 
 

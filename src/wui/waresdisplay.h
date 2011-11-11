@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,11 +36,12 @@ struct Tribe_Descr;
 struct WareList;
 }
 
-/*
-class AbstractWaresDisplay
-------------------
-Panel that displays wares or workers with some string
-*/
+/**
+ * Display wares or workers together with some string (typically a number)
+ * in the style of the @ref Warehouse_Window.
+ *
+ * For practical purposes, use one of the derived classes, e.g. @ref WaresDisplay.
+ */
 struct AbstractWaresDisplay : public UI::Panel {
 	enum wdType {
 		WORKER,

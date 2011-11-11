@@ -24,6 +24,9 @@
 #include "economy/portdock.h"
 #include "logic/warehouse.h"
 #include "interactive_gamebase.h"
+#include "itemwaresdisplay.h"
+#include <economy/ware_instance.h>
+#include <logic/worker.h>
 
 static const char pic_goto[] = "pics/menu_ship_goto.png";
 static const char pic_destination[] = "pics/menu_ship_destination.png";
@@ -52,10 +55,10 @@ struct ShipWindow : UI::Window {
 private:
 	Interactive_GameBase & m_igbase;
 	Ship & m_ship;
-	bool m_firstthink;
 
 	UI::Button * m_btn_goto;
 	UI::Button * m_btn_destination;
+	ItemWaresDisplay * m_display;
 };
 
 ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
@@ -64,9 +67,14 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 	m_ship(ship)
 {
 	assert(!m_ship.m_window);
+	assert(m_ship.get_owner());
 	m_ship.m_window = this;
 
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
+
+	m_display = new ItemWaresDisplay(vbox, *ship.get_owner());
+	m_display->set_capacity(ship.get_capacity());
+	vbox->add(m_display, UI::Box::AlignCenter, false);
 
 	UI::Box * buttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 	vbox->add(buttons, UI::Box::AlignLeft, false);
@@ -102,6 +110,21 @@ void ShipWindow::think()
 	UI::Window::think();
 
 	m_btn_destination->set_enabled(m_ship.get_destination(m_igbase.egbase()));
+
+	m_display->clear();
+	for (uint idx = 0; idx < m_ship.get_nritems(); ++idx) {
+		Widelands::ShippingItem item = m_ship.get_item(idx);
+		Widelands::WareInstance * ware;
+		Widelands::Worker * worker;
+		item.get(m_igbase.egbase(), ware, worker);
+
+		if (ware) {
+			m_display->add(false, ware->descr_index());
+		}
+		if (worker) {
+			m_display->add(true, worker->descr().worker_index());
+		}
+	}
 }
 
 UI::Button * ShipWindow::make_button
