@@ -82,7 +82,7 @@ private:
 	void fill_list();
 	bool compare_maprows(uint32_t, uint32_t);
 
-	void _add_tag_checkbox(UI::Box *, std::string, std::string);
+	UI::Checkbox * _add_tag_checkbox(UI::Box *, std::string, std::string);
 	void _tagbox_changed(int32_t, bool);
 
 	uint32_t     m_butw;
@@ -98,6 +98,8 @@ private:
 	UI::Multiline_Textarea m_descr;
 	UI::Callback_Button m_back, m_ok;
 	UI::Checkbox                      m_load_map_as_scenario;
+	UI::Checkbox*                     m_show_all_maps;
+	std::vector<UI::Checkbox*>        m_tags_checkboxes;
 	UI::Table<uintptr_t const>        m_table;
 	std::string                       m_curdir, m_basedir;
 	Map::ScenarioTypes  m_scenario_types;
