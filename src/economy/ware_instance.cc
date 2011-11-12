@@ -475,6 +475,14 @@ PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : 0;
 }
 
+void WareInstance::log_general_info(const Editor_Game_Base & egbase)
+{
+	Map_Object::log_general_info(egbase);
+
+	molog("Ware: %s\n", descr().name().c_str());
+	molog("Location: %u\n", m_location.serial());
+}
+
 
 /*
 ==============================

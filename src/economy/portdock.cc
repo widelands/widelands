@@ -185,8 +185,7 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 
 	if (upcast(Game, game, &egbase)) {
 		container_iterate(std::vector<ShippingItem>, m_waiting, it) {
-			it.current->set_location(*game, m_warehouse);
-			it.current->end_shipping(*game);
+			it.current->remove(*game);
 		}
 	}
 

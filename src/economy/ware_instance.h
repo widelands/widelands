@@ -83,6 +83,8 @@ public:
 	void cancel_transfer(Game &);
 	Transfer * get_transfer() const {return m_transfer;}
 
+	virtual void log_general_info(const Editor_Game_Base & egbase);
+
 private:
 	Object_Ptr        m_location;
 	Economy         * m_economy;

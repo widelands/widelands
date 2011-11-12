@@ -78,7 +78,13 @@ bool Fleet::active() const
  */
 void Fleet::set_economy(Economy * e)
 {
-	if (m_ports.empty() || e == m_ports[0]->get_economy()) {
+	if (!m_ships.empty()) {
+		if (!m_ports.empty()) {
+			e = m_ports[0]->get_economy();
+		} else {
+			assert(e == 0);
+		}
+
 		if (upcast(Game, game, &owner().egbase())) {
 			container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
 				(*shipit.current)->set_economy(*game, e);
