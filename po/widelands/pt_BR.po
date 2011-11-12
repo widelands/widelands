@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-11-05 18:40+0000\n"
-"Last-Translator: Nicolas Abril <Unknown>\n"
+"PO-Revision-Date: 2011-11-11 18:14+0000\n"
+"Last-Translator: Alexandre <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-11-06 05:18+0000\n"
-"X-Generator: Launchpad (build 14231)\n"
+"X-Launchpad-Export-Date: 2011-11-12 04:38+0000\n"
+"X-Generator: Launchpad (build 14277)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -88,15 +88,15 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
-" --<config-entry-name>=valor  sobreescreve qualquer definição \n"
-"                                do arquivo de config.\n"
+" --<config-entry-name>=valor sobreescreve qualquer definição do arquivo de "
+"config.\n"
 "\n"
-" --logfile=ARQUIVO     Registar saida para o ARQUIVO nomeado em vez\n"
-"                        de enviar para o terminal de saida.\n"
-" --datadir=DIRECTORIO  Usar o directorio para indicar onde estão os\n"
-"                        arquivos de dados do Widelands.\n"
-" --homedir=DIRECTORIO  Usar este directorio para guardar os arquivos\n"
-"                        de configuração, jogos guardados e replays.\n"
+" --logfile=ARQUIVO Registrar saida para o ARQUIVO nomeado em vez \n"
+"                      de enviar para o terminal de saida.\n"
+" --datadir=DIRETÓRIO Usar o diretório para indicar onde estão os\n"
+"                      arquivos de dados do Widelands.\n"
+" --homedir=DIRETÓRIO Usar este diretório para guardar os arquivos\n"
+"                      de configuração, jogos salvos e replays.\n"
 
 #: ../../src/wlapplication.cc:1304
 msgid "                      Default is ~/.widelands\n"
@@ -216,7 +216,7 @@ msgid ""
 "                      *EXPERIMENTAL*\n"
 msgstr ""
 " --opengl=[0|1]\n"
-"                      Activa renderização opengl \n"
+"                      Ativa renderização opengl\n"
 "                      *EXPERIMENTAL*\n"
 
 #: ../../src/wlapplication.cc:1366
@@ -272,7 +272,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1394
 msgid " --verbose            Enable verbose debug messages\n"
-msgstr " --verbose            Activa mensagens de depuração verbosas\n"
+msgstr " --verbose Ativa mensagens de depuração verbose\n"
 
 #: ../../src/wlapplication.cc:1395
 msgid " --help               Show this help\n"
@@ -294,11 +294,11 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1548
 msgid "Warning: "
-msgstr "Aviso: "
+msgstr "Alerta: "
 
 #: ../../src/wlapplication.cc:1552
 msgid "Game data error"
-msgstr "Erro de dados de jogo"
+msgstr "Erro nos dados do jogo"
 
 #: ../../src/wlapplication.cc:1557
 msgid "Unexpected error during the game"
@@ -327,9 +327,8 @@ msgid ""
 msgstr ""
 ". Por favor adicione essa informação no seu relatório.\n"
 "\n"
-"Widelands tenta salvar o jogo quando um erro ocorre durante a partida. "
-"Algumas vezes - não sempre - é possível carregar o jogo novamente e "
-"continuar jogando.\n"
+"Widelands tentava salvar o jogo quando um erro ocorreu. Algumas vezes - nem "
+"sempre - é possível carregar o jogo novamente e continuar jogando.\n"
 
 #: ../../src/wlapplication.cc:1676
 msgid "Connection timeouted"
@@ -491,7 +490,7 @@ msgstr "É grande."
 
 #: ../../src/writeHTML.cc:388
 msgid "Is medium."
-msgstr "É médiano."
+msgstr "É médio"
 
 #: ../../src/writeHTML.cc:394
 msgid "Is small."
@@ -666,7 +665,7 @@ msgstr "geologista"
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
-msgstr "geologista_busca"
+msgstr "geólogo_busca"
 
 #: ../../src/writeHTML.cc:770 ../../src/writeHTML.cc:1372
 msgid "playFX"
@@ -3364,7 +3363,7 @@ msgstr "Você quer mesmo apagar "
 
 #: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "Jogo salvo do servidor dedicado"
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Unknown gametime"
