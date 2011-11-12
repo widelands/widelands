@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
-"PO-Revision-Date: 2011-10-09 18:45+0000\n"
+"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"PO-Revision-Date: 2011-10-14 17:51+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-10 05:07+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-10-15 04:32+0000\n"
+"X-Generator: Launchpad (build 14124)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid ""
@@ -284,10 +284,10 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone's\n"
 "tongue to unravel the mountain's secrets!\""
 msgstr ""
-"\"Spójrz! Na wschodzie znajduje się wieka góra Kal'mavrath!\n"
-"Pomyśleć tylko jakie skarby skrywa pod powierzchnią...\n"
+"\"Spójrz! Na wschodzie znajduje się wielka góra Kal'mavrath!\n"
+"Pomyśleć tylko, jakie skarby skrywa pod powierzchnią...\n"
 "Zdobądźmy tereny na wschodzie. W końcu starszyzna do czegoś się przyda!\n"
-"Wyślijmy zwiadowców, obeznanych w sztuce kamieniarskiej aby odkryć \n"
+"Wyślijmy zwiadowców obeznanych w sztuce kamieniarskiej, aby odkryć \n"
 "sekrety wzgórza!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:350
@@ -301,11 +301,11 @@ msgid ""
 "pint\n"
 "of beer or two will keep their spirits high.\""
 msgstr ""
-"\"Nasi górnicy wykopują mniej z dnia na dzień! Musimy pójść głebiej, bliżej "
-"do serca góry, jeśli chcemy więcej jej skarbów!<br> Oczywiście, na takich "
-"głebokościach jest zimno i ciemno, i tylko kilku najodważniejszych zgłosi "
-"się do pracy w takim miejscu. Powinniśmy tę odwagę wynagradzić większymi "
-"posiłkami.\""
+"\"Nasi górnicy wykopują mniej z dnia na dzień! Musimy pójść głębiej, bliżej "
+"serca góry, jeśli chcemy więcej jej skarbów!<br> Oczywiście, na takich "
+"głębokościach jest zimno i ciemno i tylko kilku najodważniejszych zgłosi się "
+"do pracy w takim miejscu. Powinniśmy tę odwagę wynagrodzić większymi "
+"posiłkami. Pinta czy dwie piwa podtrzymają ich ducha.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:340
 msgid ""
@@ -321,7 +321,7 @@ msgstr ""
 "przetworzyć to, co wydobywają nasi odważni górnicy, aby czerpać z ich pracy "
 "jakąś wymierną korzyść. Ruda żelaza musi być przetopiona na żelazo, które "
 "może być użyte do wykucia czegokolwiek zechcemy. A poza tym potrzebujemy "
-"węgiel, aby utrzymać piece hutnika rozgrzane.\""
+"węgla, aby utrzymać piece hutnika rozgrzane.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""
@@ -341,8 +341,8 @@ msgstr ""
 "widziałem wierne twarze, wierzące, że mogę je poprowadzić przez te złe "
 "czasy. I nagle, zanim mogłem powiedzieć jakieś słowa wdzięczności czy "
 "zachęty, jeden z moich żołnierzy wbiegł do środka. Spędził ostatnie kilka "
-"dni głęboko w lesie, mogłem zobaczyć, jak go to zmęczyło.<br> Nowiny które "
-"przyniósł zmieniły wszystko...\""
+"dni głęboko w lesie, mogłem zobaczyć, jak go to zmęczyło.<br> Nowiny, które "
+"przyniósł, zmieniły wszystko...\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:370
 msgid ""
@@ -353,12 +353,12 @@ msgid ""
 "could,\n"
 "in times of need, build a fortress as the world has not seen before!\""
 msgstr ""
-"Tak, przyjacielu, to powinno zapewnić odpowiednią wytrzymałość naszych "
-"fortyfikacji!\n"
-"Teraz możemy bezpiecznie poszerzać terytorium. Nie zaszkodzi jednak "
-"zgromadzić\n"
-"trochę cementu na przyszłość, abyśmy mogli, gdy potrzeba, budować fortece\n"
-"jakich świat nie widział!"
+"Tak, przyjacielu, to zagwarantuje, że nasze fortyfikacje nie runą na okrzyk "
+"bojowy\n"
+"naszych wrogów! Teraz możemy bezpiecznie poszerzać terytorium. Nie "
+"zaszkodzi\n"
+"jednak zgromadzić trochę fugi na przyszłość, abyśmy mogli, gdy potrzeba,\n"
+"budować fortece, jakich świat nie widział!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:251
 msgid ""
@@ -384,7 +384,7 @@ msgid ""
 "sure would enjoy a freshly baken pitta bread for a change...\""
 msgstr ""
 "\"Mądrość nakazuje szukać zmian.<br > Na północ od wielkiej góry jest duże\n"
-"pole - czemu nie skorzystać z możliwości jakie dała nam Matka Natura i\n"
+"pole - czemu nie skorzystać z możliwości, jakie dała nam Matka Natura i\n"
 "nie zbudować farmy? Chciałbym zjeść dla odmiany świeży chleb...\""
 
 #: ../../campaigns/t02.wmf/elemental:7
@@ -397,7 +397,7 @@ msgstr "Piękny poranek"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:438
 msgid "A friendly village joined us!"
-msgstr "Przyjacielska wioska dołączyła do nas!"
+msgstr "Przyjazna wioska dołączyła do nas!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:143
 msgid ""
@@ -423,20 +423,24 @@ msgid ""
 "prefer."
 msgstr ""
 "Zwykła kopalnia może wykopać tylko jedną trzecią zapasów leżących pod nią;\n"
-"potem musi zostać ulepszona do głębokiej miny, aby pracować prawidłowo.\n"
+"potem musi zostać ulepszona do głębokiej kopalni, aby pracować prawidłowo.\n"
 "Aby ulepszyć budynek, zaznacz go i naciśnij odpowiedni przycisk w oknie,\n"
-"które się pojawi. <br> Robotnicy zdobywają doświadczenie przez pomyślnie\n"
-"ukończoną pracę. Wraz ze wzrostem posiadane doświadczenia stają się\n"
+"które się pojawi. <br> Robotnicy zdobywają doświadczenie poprzez "
+"produktywną\n"
+"pracę. Wraz ze wzrostem posiadanego doświadczenia stają się\n"
 "zaawansowanymi pracownikami, którzy potrafią obsługiwać rozwinięte budynki.\n"
-"Maja one zwykle wyższe potrzeby, niż podstawowy rodzaj - na przykład,\n"
-"głębokie kopalnie potrzebują przekąsek zamiast racji. Należy rozwinąć "
-"tawernę do\n"
-"karczmy, aby je produkować z chleba pita, mięsa lub ryby i piwa. Oczywiście "
-"można\n"
-"pogłębić kopalnie wcześniej, jeśli ma się odpowiednich pracowników. Większe\n"
-"kopalnie pracują szybciej, mniejsze potrzebują tańszej żywności. Od ciebie "
-"zależy,\n"
-"którą strategię obierzesz."
+"Nie ulepszaj budynku, dopóki nie będziesz miał doświadczonych pracowników\n"
+"mogących w nim pracować! Mają one zwykle wyższe potrzeby, niż ich "
+"podstawowe\n"
+"wersje - na przykład, głębokie kopalnie potrzebują przekąsek zamiast racji. "
+"Należy\n"
+"rozwinąć tawernę do karczmy, aby je produkować z chleba pita, mięsa lub ryby "
+"i piwa.\n"
+"Oczywiście można pogłębić kopalnie od razu, jeśli ma się odpowiednich "
+"pracowników.\n"
+"Większe kopalnie pracują nieco szybciej, mniejsze potrzebują tańszej "
+"żywności.\n"
+"Od ciebie zależy, którą strategię obierzesz."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:431
 msgid "Another cold day"
@@ -464,7 +468,7 @@ msgstr ""
 "odpowiednim miejscu. Wodę można otrzymywać ze studni nad źródłem wody\n"
 "odnalezionym przez geologa, kiedy poszukuje w okolicy flagi nie znajdującej "
 "się\n"
-"na górze. Węgiel jest otrzymywany w spalarni drewna lub kopalni węgla."
+"na górze. Węgiel jest otrzymywany w smolarni lub kopalni węgla."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:164
 msgid ""
@@ -559,34 +563,32 @@ msgstr "Zbuduj paprociarnię"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Zbuduj chatę łowcy, leśnika i tawernę."
+msgstr "Zbuduj chatę myśliwego, gajowego i tawernę"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
-msgstr "Zbuduj piec do fugi i gospodarkę węgla"
+msgstr "Zbuduj wapiennik i gospodarkę węglową"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:174
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
-msgstr ""
-"Zbuduj piec do wyplania kamienia, studnię, wypalarnie węgla drzewnego lub "
-"kopalnię węgla."
+msgstr "Zbuduj wapiennik, studnię oraz smolarnię lub kopalnię węgla"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr "Zbuduj hutę."
+msgstr "Zbuduj hutę"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr "Zbuduj studnię, farmę i pierkarnię."
+msgstr "Zbuduj studnię, farmę i piekarnię"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
 msgid "Build a wood hardener"
-msgstr "Zbuduj lakiernię drzewa"
+msgstr "Zbuduj lakiernię drewna"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr "Zbuduj kopalnie węgla i żelaza."
+msgstr "Zbuduj kopalnie węgla i żelaza"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
@@ -609,7 +611,7 @@ msgstr "Ulepsz kopalnię węgla i tawernę. Zbuduj także mały browar."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Expand north-east and build a quarry"
-msgstr "Rozszerz się na północny-wschód i zbuduj kamieniołom"
+msgstr "Zajmij teren na północnym wschodzie i zbuduj kamieniołom"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Expand north-east to the stones"
@@ -624,11 +626,11 @@ msgid ""
 "first example of a ware which has to be refined before being used in a\n"
 "secondary building - others will follow."
 msgstr ""
-"Twoje kopalnie do pracy potrzebują jedzenie.\n"
-"Myśliwy może polować na zwierzęta, podczas gdy leśnik dopilnuje,\n"
-"by nie wyginęły. Mięso zostanie przetworzone w tawernie na posiłki\n"
-"dla górników. To tylko jeden z przykładów przetwarzania produktów w\n"
-"kilku budynkach. Następne przykłady poznasz wkrótce."
+"Twoje kopalnie do pracy potrzebują jedzenia. <br> Myśliwy może\n"
+"polować na zwierzęta, podczas gdy leśnik dopilnuje, by nie wyginęły.\n"
+"Mięso zostanie przetworzone w tawernie na posiłki dla górników.\n"
+"<br> To tylko jeden z przykładów przetwarzania produktów w\n"
+"kilku budynkach - następne poznasz wkrótce."
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -680,11 +682,11 @@ msgstr "Misja wykonana!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:69
 msgid "New Objectives"
-msgstr "Nowe cele."
+msgstr "Nowe cele"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:424
 msgid "One fullmoon night"
-msgstr "Noc z pełnią"
+msgstr "Pewnej nocy podczas pełni"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:121
 msgid ""
@@ -693,10 +695,9 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well at a spot\n"
 "where your geologists find a water source."
 msgstr ""
-"Inne sposoby na otrzymywanie jedzenie - różnego rodzaju, to połowy rybaków i "
-"\n"
+"Inne sposoby produkcji jedzenia - różnych rodzajów - to połowy rybaków i \n"
 "polowania myśliwego. Ziarno z gospodarstwa musi być przetworzone w piekarni\n"
-"z dodatkiem wody, zanim będzie zdatne do jedzenia. Wodę możesz otrzymywać\n"
+"z dodatkiem wody, zanim będzie zdatne do jedzenia. Wodę możesz czerpać\n"
 "ze studni zbudowanej w miejscu, gdzie twój geolog znajdzie jej źródło."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
@@ -705,7 +706,7 @@ msgstr "Zapewnij swoim górnikom jedzenie"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Refine your mined resources"
-msgstr "Rozszerz wydobycie zasobów w kopalniach"
+msgstr "Przetwórz wydobyte surowce"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
@@ -740,7 +741,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:225
 msgid "The story continues"
-msgstr "Opowieść ciągnie dalej"
+msgstr "Opowieść ciągnie się dalej"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:187
 msgid ""
@@ -748,9 +749,9 @@ msgid ""
 "cover roofs. Thatch reed is planted by a ferner around his building, the\n"
 "fernery."
 msgstr ""
-"Trzecim elementem do ulepszania budynków jest strzecha, używana do "
-"pokrywania dachu.\n"
-"Strzecha jest wysiewana przez farmera wokół jego gospodarstwa."
+"Trzecim elementem niezbędnym do ulepszania budynków jest strzecha\n"
+"używana do pokrywania dachu. Trzcina wykorzystywana jako strzecha\n"
+"jest wysiewana przez farmera wokół jego gospodarstwa."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
@@ -787,19 +788,20 @@ msgid ""
 "doubles the transport capacity.<br>Oxen are bred in cattle farms\n"
 "out of wheat and water."
 msgstr ""
-"Gdy drogi są przeciążone przez dłuższy czas, jeden tragarz nie jest w stanie "
-"szybko \n"
-"przenosić towarów. W konsekwencji tworzą się korki. Na takich drogach "
-"przydaje się drugi\n"
-"tragarz: wół, który pomaga w transporcie. To podwaja pojemność tragarza.\n"
-"Woły są hodowane w szopach, na których potrzebne jest ziarno i woda."
+"Gdy drogi są przeciążone przez dłuższy czas, jeden tragarz zwykle nie "
+"wystarcza do\n"
+"przenoszenia towarów. W konsekwencji tworzą się korki. Na takich drogach "
+"przydaje się\n"
+"drugi tragarz: wół, który pomaga w transporcie. To podwaja wydajność "
+"transportu.\n"
+"Woły są hodowane na farmach bydła na  ziarnie i wodzie."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
 msgid ""
 "You have completed this mission. You may continue playing if you wish,\n"
 "otherwise move on to the next mission."
 msgstr ""
-"Ukończyłeś misję. Możesz kontynuować grę na obecnej mapie, lub przejść\n"
+"Ukończyłeś misję. Możesz kontynuować grę na obecnej mapie lub przejść\n"
 "do następnej misji."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
