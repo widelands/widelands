@@ -206,7 +206,7 @@ void Ship::ship_update(Game & game, Bob::State & state)
 
 		PortDock * lastdock = m_lastdock.get(game);
 		if (lastdock && lastdock != dst) {
-			molog("ship_update: Have lastdock %u\n", dst->serial());
+			molog("ship_update: Have lastdock %u\n", lastdock->serial());
 
 			Path path;
 			if (m_fleet->get_path(*lastdock, *dst, path)) {
@@ -245,7 +245,7 @@ void Ship::ship_update(Game & game, Bob::State & state)
 
 				if (closest_target) {
 					molog("Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
-					if (start_task_movepath(game, closest_target, -1, descr().get_sail_anims()))
+					if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims()))
 						return;
 
 					molog("  Failed to find path!!! Retry full search\n");
