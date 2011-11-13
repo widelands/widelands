@@ -176,7 +176,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "4teams", _("4 Player Teams"));
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
-	_add_tag_checkbox(vbox, "vscpu", _("vs CPU"));
+	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	vbox->set_size(get_w(), 25);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
