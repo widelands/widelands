@@ -494,7 +494,7 @@ Request & ProductionSite::request_worker(Ware_Index const wareid) {
 			(*this,
 			 wareid,
 			 ProductionSite::request_worker_callback,
-			 Request::WORKER);
+			 wwWORKER);
 }
 
 

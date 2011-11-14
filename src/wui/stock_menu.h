@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,8 +41,8 @@ private:
 	WaresDisplay * m_warehouse_wares;
 	WaresDisplay * m_warehouse_workers;
 
-	void fill_total_waresdisplay(WaresDisplay * waresdisplay, WaresDisplay::wdType type);
-	void fill_warehouse_waresdisplay(WaresDisplay * waresdisplay, WaresDisplay::wdType type);
+	void fill_total_waresdisplay(WaresDisplay * waresdisplay, Widelands::WareWorker type);
+	void fill_warehouse_waresdisplay(WaresDisplay * waresdisplay, Widelands::WareWorker type);
 };
 
 #endif

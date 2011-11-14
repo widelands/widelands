@@ -361,14 +361,14 @@ void Road::_request_carrier(CarrierSlot & slot)
 				(*this,
 				 owner().tribe().safe_worker_index("carrier"),
 				 Road::_request_carrier_callback,
-				 Request::WORKER);
+				 wwWORKER);
 	else
 		slot.carrier_request =
 			new Request
 				(*this,
 				 owner().tribe().carrier2(),
 				 Road::_request_carrier_callback,
-				 Request::WORKER);
+				 wwWORKER);
 }
 
 /**

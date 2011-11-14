@@ -306,9 +306,9 @@ struct PlayerImmovable : public BaseImmovable {
 	virtual void receive_worker(Game &, Worker & worker);
 	/*@}*/
 
-protected:
 	void set_owner(Player *);
 
+protected:
 	virtual void init   (Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
@@ -317,6 +317,17 @@ private:
 	Economy             * m_economy;
 
 	Workers   m_workers;
+
+	// load/save support
+protected:
+	struct Loader : BaseImmovable::Loader {
+		Loader();
+
+		void load(FileRead &);
+	};
+
+public:
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };
 
 }

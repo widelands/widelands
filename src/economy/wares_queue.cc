@@ -97,7 +97,7 @@ void WaresQueue::update() {
 					(m_owner,
 					 m_ware,
 					 WaresQueue::request_callback,
-					 Request::WARE);
+					 wwWARE);
 
 		m_request->set_count(m_max_fill - m_filled);
 		m_request->set_required_interval(m_consume_interval);
@@ -276,7 +276,7 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 						(m_owner,                      //  FIXME
 						 Ware_Index::First(),          //  FIXME
 						 WaresQueue::request_callback, //  FIXME
-						 Request::WORKER);             //  FIXME
+						 wwWORKER);             //  FIXME
 				m_request->Read(fr, game, mol);      //  FIXME
 			} else
 				m_request = 0;

@@ -19,6 +19,8 @@
 
 #include "widelands_map_object_packet.h"
 
+#include "economy/fleet.h"
+#include "economy/portdock.h"
 #include "logic/battle.h"
 #include "logic/critter_bob.h"
 #include "logic/editor_game_base.h"
@@ -95,6 +97,14 @@ void Map_Object_Packet::Read
 				loaders.insert(Ship::load(egbase, mol, fr));
 				break;
 
+			case Map_Object::header_PortDock:
+				loaders.insert(PortDock::load(egbase, mol, fr));
+				break;
+
+			case Map_Object::header_Fleet:
+				loaders.insert(Fleet::load(egbase, mol, fr));
+				break;
+
 			default:
 				throw game_data_error(_("unknown object header %u"), header);
 			}
@@ -107,12 +117,20 @@ void Map_Object_Packet::Read
 void Map_Object_Packet::LoadFinish() {
 	// load_pointer stage
 	container_iterate_const(LoaderSet, loaders, i) {
-		(*i.current)->load_pointers();
+		try {
+			(*i.current)->load_pointers();
+		} catch (const std::exception & e) {
+			throw wexception("load_pointers for %s: %s", (*i.current)->get_object()->type_name(), e.what());
+		}
 	}
 
 	// load_finish stage
 	container_iterate_const(LoaderSet, loaders, i) {
-		(*i.current)->load_finish();
+		try {
+			(*i.current)->load_finish();
+		} catch (const std::exception & e) {
+			throw wexception("load_finish for %s: %s", (*i.current)->get_object()->type_name(), e.what());
+		}
 		(*i.current)->mol().mark_object_as_loaded(*(*i.current)->get_object());
 	}
 }

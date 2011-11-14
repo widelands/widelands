@@ -30,6 +30,7 @@ struct Profile;
 namespace Widelands {
 
 struct Editor_Game_Base;
+struct PortDock;
 struct Request;
 struct Requirements;
 class Soldier;
@@ -59,6 +60,7 @@ private:
 
 
 class Warehouse : public Building, public Attackable, public SoldierControl {
+	friend struct PortDock;
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
@@ -118,6 +120,7 @@ public:
 	/// * Sees the area (since a warehouse is considered to be always occupied).
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
+	/// * Sets up @ref PortDock for ports
 	virtual void init(Editor_Game_Base &);
 
 	virtual void cleanup(Editor_Game_Base &);
@@ -188,6 +191,10 @@ public:
 	void set_ware_policy(Ware_Index ware, StockPolicy policy);
 	void set_worker_policy(Ware_Index ware, StockPolicy policy);
 
+	PortDock * get_portdock() const {return m_portdock;}
+
+	virtual void log_general_info(Editor_Game_Base const &);
+
 protected:
 
 	/// Create the warehouse information window.
@@ -195,6 +202,8 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry);
 
 private:
+	void init_portdock(Editor_Game_Base & egbase);
+
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means
 	 * requesting all the necessary wares, if multiple different wares types are
@@ -235,6 +244,7 @@ private:
 	uint32_t m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
+	PortDock * m_portdock;
 };
 
 }

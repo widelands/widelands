@@ -114,7 +114,7 @@ void Partially_Finished_Building::request_builder(Game &) {
 			(*this,
 			 tribe().safe_worker_index("builder"),
 			 Partially_Finished_Building::request_builder_callback,
-			 Request::WORKER);
+			 wwWORKER);
 }
 
 /*

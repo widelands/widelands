@@ -347,15 +347,15 @@ Building & Editor_Game_Base::warp_dismantlesite
  *
  * idx is the bob type.
  */
-Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr)
+Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr, Player * owner)
 {
-	return descr.create(*this, 0, c);
+	return descr.create(*this, owner, c);
 }
 
 
 Bob & Editor_Game_Base::create_bob
 	(Coords const c,
-	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe)
+	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe, Player * owner)
 {
 	Bob::Descr const & descr =
 		*
@@ -364,11 +364,12 @@ Bob & Editor_Game_Base::create_bob
 		 :
 		 m_map->get_world()->get_bob_descr(idx));
 
-	return create_bob(c, descr);
+	return create_bob(c, descr, owner);
 }
 
 Bob & Editor_Game_Base::create_bob
-	(Coords c, const std::string & name, const Widelands::Tribe_Descr * const tribe)
+	(Coords c, const std::string & name, const Widelands::Tribe_Descr * const tribe,
+	 Player * owner)
 {
 	const Bob::Descr * descr =
 		tribe ?
@@ -380,7 +381,7 @@ Bob & Editor_Game_Base::create_bob
 			("create_bob(%i,%i,%s,%s): bob not found",
 			 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
 
-	return create_bob(c, *descr);
+	return create_bob(c, *descr, owner);
 }
 
 

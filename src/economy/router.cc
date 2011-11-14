@@ -62,8 +62,8 @@ uint32_t Router::assign_cycle()
  *
  * \param start, end start and endpoint of the route
  * \param route the calculated route, can be 0 to only check connectivity
- * \param wait If true, the cost for waiting on a flag is considered (if this
- *        route is for a ware)
+ * \param type whether the route is being calculated for a ware or a worker;
+ *        this affects the cost calculations
  * \param cost_cutoff maximum cost for desirable routes. If no route cheaper
  *        than this can be found, return false
  *
@@ -72,7 +72,7 @@ uint32_t Router::assign_cycle()
 bool Router::find_route
 	(RoutingNode & start, RoutingNode & end,
 	 IRoute * const route,
-	 bool    const wait,
+	 WareWorker const type,
 	 int32_t const cost_cutoff,
 	 ITransportCostCalculator   & cost_calculator)
 {
@@ -99,6 +99,7 @@ bool Router::find_route
 			return false;
 		current = Open.top();
 		Open.pop(current);
+
 		if (current == &end)
 			break; // found our goal
 
@@ -112,12 +113,11 @@ bool Router::find_route
 		// reset .reserve(), but most do not.
 		neighbours.clear();
 
-		current->get_neighbours(neighbours);
+		current->get_neighbours(type, neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
 			RoutingNode & neighbour = *neighbours[i].get_neighbour();
 			int32_t cost;
-			int32_t wait_cost = 0;
 
 			//  No need to find the optimal path when only checking connectivity.
 			if (&neighbour == &end && !route)
@@ -130,17 +130,7 @@ bool Router::find_route
 				 !neighbour.cookie().is_active())
 				continue;
 
-			/*
-			 * If this is a ware transport (so we have to wait on full flags)
-			 * add a weighting factor depending on the fullness of the two
-			 * flags onto the general cost
-			 */
-			if (wait) {
-				wait_cost =
-					(current->get_waitcost() + neighbour.get_waitcost())
-					* neighbours[i].get_cost() / 2;
-			}
-			cost = current->mpf_realcost + neighbours[i].get_cost() + wait_cost;
+			cost = current->mpf_realcost + neighbours[i].get_cost();
 
 			if (neighbour.mpf_cycle != mpf_cycle) {
 				// add to open list

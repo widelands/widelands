@@ -23,6 +23,7 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "editor_game_base.h"
+#include "findbob.h"
 #include "game.h"
 #include "i18n.h"
 #include "message_queue.h"
@@ -272,7 +273,7 @@ void MilitarySite::update_soldier_request()
 					(*this,
 					 tribe().safe_worker_index("soldier"),
 					 MilitarySite::request_soldier_callback,
-					 Request::WORKER);
+					 wwWORKER);
 			m_soldier_request->set_requirements (m_soldier_requirements);
 		}
 

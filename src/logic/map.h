@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,27 +101,6 @@ struct FindBobAlwaysTrue : public FindBob {
 	virtual bool accept(Bob *) const {return true;}
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
-struct FindBobAttribute : public FindBob {
-	FindBobAttribute(uint32_t const attrib) : m_attrib(attrib) {}
-
-	virtual bool accept(Bob *) const;
-
-	uint32_t m_attrib;
-	virtual ~FindBobAttribute() {}  // make gcc shut up
-};
-
-/**
- * Find soldiers which are hostile to the given player (or all soldiers
- * if player is 0).
- */
-struct FindBobEnemySoldier : public FindBob {
-	FindBobEnemySoldier(Player * _player) : player(_player) {}
-
-	virtual bool accept(Bob *) const;
-
-	Player * player;
-};
-
 
 /** class Map
  *
@@ -150,6 +129,7 @@ struct Map :
 	friend class Editor;
 	friend class Main_Menu_New_Map;
 	friend struct MapGenerator;
+	friend struct MapAStarBase;
 
 	enum { // flags for findpath()
 

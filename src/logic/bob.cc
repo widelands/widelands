@@ -24,6 +24,7 @@
 #include "checkstep.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
+#include "findbob.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "map_io/widelands_map_map_object_loader.h"

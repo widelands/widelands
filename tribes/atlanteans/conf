@@ -162,6 +162,7 @@ tower.empire=_Tower
 [warehouse types]
 headquarters=_Headquarters
 warehouse=_Warehouse
+port=_Port
 
 [productionsite types]
 quarry=_Quarry

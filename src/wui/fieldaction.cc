@@ -240,14 +240,16 @@ static char const * const pic_tab_military   = "pics/menu_tab_military.png";
 static char const * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
-	"pics/menu_tab_buildbig.png"
+	"pics/menu_tab_buildbig.png",
+	"pics/port.png"
 };
 static const std::string tooltip_tab_build[] = {
 	_("Build small buildings"),
 	_("Build medium buildings"),
-	_("Build large buildings")
+	_("Build large buildings"),
+	_("Build port buildings")
 };
-static const std::string name_tab_build[] = {"small", "medium", "big"};
+static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
 
 static char const * const pic_tab_buildmine  = "pics/menu_tab_buildmine.png";
@@ -516,7 +518,7 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 {
 	if (not m_plr)
 		return;
-	BuildGrid * bbg_house[3] = {0, 0, 0};
+	BuildGrid * bbg_house[4] = {0, 0, 0, 0};
 	BuildGrid * bbg_mine = 0;
 
 	Widelands::Tribe_Descr const & tribe = m_plr->tribe();
@@ -551,8 +553,13 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 
 			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
 				continue;
+			if (descr.get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
+				continue;
 
-			ppgrid = &bbg_house[size];
+			if (descr.get_isport())
+				ppgrid = &bbg_house[3];
+			else
+				ppgrid = &bbg_house[size];
 		}
 
 		// Allocate the tab's grid if necessary
@@ -571,7 +578,7 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 	}
 
 	// Add all necessary tabs
-	for (int32_t i = 0; i < 3; ++i)
+	for (int32_t i = 0; i < 4; ++i)
 		if (bbg_house[i])
 			m_tabpanel.activate
 				(m_best_tab = add_tab

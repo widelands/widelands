@@ -87,6 +87,8 @@ private:
 	uint32_t m_nr_wares;
 	uint32_t m_nr_immovables;
 	uint32_t m_nr_battles;
+	uint32_t m_nr_fleets;
+	uint32_t m_nr_portdocks;
 	uint32_t m_lastserial;
 };
 

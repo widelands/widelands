@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define WARESDISPLAY_H
 
 #include "logic/warelist.h"
+#include "logic/wareworker.h"
 #include "logic/tribe.h"
 
 #include "graphic/graphic.h"
@@ -36,22 +37,18 @@ struct Tribe_Descr;
 struct WareList;
 }
 
-/*
-class AbstractWaresDisplay
-------------------
-Panel that displays wares or workers with some string
-*/
+/**
+ * Display wares or workers together with some string (typically a number)
+ * in the style of the @ref Warehouse_Window.
+ *
+ * For practical purposes, use one of the derived classes, e.g. @ref WaresDisplay.
+ */
 struct AbstractWaresDisplay : public UI::Panel {
-	enum wdType {
-		WORKER,
-		WARE
-	};
-
 	AbstractWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const &,
-		 wdType type,
+		 Widelands::WareWorker type,
 		 bool selectable,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = NULL,
 		 bool horizontal = true);
@@ -81,7 +78,7 @@ struct AbstractWaresDisplay : public UI::Panel {
 	bool ware_hidden(Widelands::Ware_Index);
 
 	Widelands::Ware_Index ware_at_point(int32_t x, int32_t y) const;
-	wdType get_type() const {return m_type;}
+	Widelands::WareWorker get_type() const {return m_type;}
 
 protected:
 	virtual void layout();
@@ -103,7 +100,7 @@ private:
 	typedef std::vector<bool> selection_type;
 
 	Widelands::Tribe_Descr const & m_tribe;
-	wdType              m_type;
+	Widelands::WareWorker m_type;
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
 	selection_type      m_hidden;
@@ -118,13 +115,11 @@ class WaresDisplay
 Panel that displays the contents of a WareList.
 */
 struct WaresDisplay : public AbstractWaresDisplay {
-	typedef AbstractWaresDisplay::wdType wdType;
-
 	WaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const &,
-		 wdType type,
+		 Widelands::WareWorker type,
 		 bool selectable);
 
 	virtual ~WaresDisplay();

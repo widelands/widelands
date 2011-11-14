@@ -95,10 +95,10 @@ PlayerImmovable * IdleWorkerSupply::get_position(Game & game)
 uint32_t IdleWorkerSupply::nr_supplies(Game const &, Request const & req) const
 {
 	assert
-		(req.get_type() != Request::WORKER or
+		(req.get_type() != wwWORKER or
 		 req.get_index() < m_worker.descr().tribe().get_nrworkers());
 	if
-		(req.get_type() == Request::WORKER &&
+		(req.get_type() == wwWORKER &&
 		 m_worker.descr().can_act_as(req.get_index()) &&
 		 req.get_requirements().check(m_worker))
 		return 1;
@@ -117,7 +117,7 @@ WareInstance & IdleWorkerSupply::launch_item(Game &, Request const &)
  */
 Worker & IdleWorkerSupply::launch_worker(Game &, Request const & req)
 {
-	if (req.get_type() != Request::WORKER)
+	if (req.get_type() != wwWORKER)
 		throw wexception("IdleWorkerSupply: not a worker request");
 	if
 		(!m_worker.descr().can_act_as(req.get_index()) ||

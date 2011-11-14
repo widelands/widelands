@@ -470,11 +470,12 @@ Building * Player::build
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE))
 			return 0;
-	} else if
-		((buildcaps & BUILDCAPS_SIZEMASK)
-		 <
-		 descr.get_size() - BaseImmovable::SMALL + 1)
-		return 0;
+	} else {
+		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr.get_size() - BaseImmovable::SMALL + 1)
+			return 0;
+		if (descr.get_isport() && !(buildcaps & BUILDCAPS_PORT))
+			return 0;
+	}
 
 	if (constructionsite)
 		return &egbase().warp_constructionsite(c, m_plnum, idx);

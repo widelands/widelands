@@ -26,6 +26,7 @@
 #include "supply_list.h"
 #include "ui_basic/unique_window.h"
 #include "logic/warelist.h"
+#include "logic/wareworker.h"
 
 
 /**
@@ -72,12 +73,12 @@ struct Economy {
 	bool find_route
 		(Flag & start, Flag & end,
 		 Route * route,
-		 bool    wait,
+		 WareWorker type,
 		 int32_t cost_cutoff = -1);
 
 	typedef boost::function<bool (Warehouse &)> WarehouseAcceptFn;
 	Warehouse * find_closest_warehouse
-		(Flag & start, bool is_ware = false, Route * route = 0,
+		(Flag & start, WareWorker type = wwWORKER, Route * route = 0,
 		 uint32_t cost_cutoff = 0,
 		 const WarehouseAcceptFn & acceptfn = WarehouseAcceptFn());
 

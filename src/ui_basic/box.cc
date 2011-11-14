@@ -251,7 +251,11 @@ void Box::scrollbar_moved(int32_t)
 
 /**
  * Add a new panel to be controlled by this box
-*/
+ *
+ * @param fullsize when true, @p panel will be extended to cover the entire width (or height)
+ * of the box for horizontal (vertical) panels. If false, then @p panel may end up smaller;
+ * in that case, it will be aligned according to @p align
+ */
 void Box::add(Panel * const panel, uint32_t const align, bool fullsize)
 {
 	Item it;

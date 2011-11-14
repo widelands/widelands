@@ -200,7 +200,7 @@ throw (_wexception)
 										(flag,
 										 Ware_Index::First(),
 										 Flag::flag_job_request_callback,
-										 Request::WORKER);
+										 wwWORKER);
 								f.request->Read
 									(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 							} else {

@@ -21,6 +21,7 @@
 //  FIXME accepted by distributions)
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 
+#include "logic/wareworker.h"
 #include "logic/widelands_geometry.h"
 
 #include "../iroute.h"
@@ -75,7 +76,7 @@ void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours & n) {
 	container_iterate_const(Neigbours, _neighbours, i)
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n.push_back(RoutingNodeNeighbour(*i.current, 1000));
+		n.push_back(RoutingNodeNeighbour(*i.current, 1000 + _waitcost * 1000));
 }
 bool TestingRoutingNode::all_members_zeroed() {
 	bool integers_zero =
@@ -354,7 +355,7 @@ BOOST_FIXTURE_TEST_CASE
 	bool rval = r.find_route
 		(*d0, *d1,
 		 &route,
-		 false,
+		 wwWORKER,
 		 -1,
 		 cc,
 		 vec);
@@ -370,7 +371,7 @@ BOOST_FIXTURE_TEST_CASE
 	bool rval = r.find_route
 		(*d0, *d1,
 		 &route,
-		 false,
+		 wwWORKER,
 		 -1,
 		 cc,
 		 vec);
@@ -499,7 +500,7 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 	bool rval = r.find_route
 		(*d0, *d5,
 		 &route,
-		 false,
+		 wwWORKER,
 		 -1,
 		 cc,
 		 nodes);
@@ -518,7 +519,7 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 	rval = r.find_route
 		(*d0, *d5,
 		 &route,
-		 false,
+		 wwWORKER,
 		 -1,
 		 cc,
 		 nodes);
@@ -566,7 +567,7 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	bool rval = r.find_route
 		(*start, *end,
 		 &route,
-		 false,
+		 wwWORKER,
 		 -1,
 		 cc,
 		 nodes);
@@ -581,18 +582,18 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	rval = r.find_route
 		(*start, *end,
 		 &route,
-		 false,
+		 wwWORKER,
 		 -1,
 		 cc,
 		 nodes);
 	BOOST_CHECK(rval);
 	BOOST_CHECK(route.has_chain(chain));
 
-	// With wait, we take the long route
+	// For wares, we now take the long route
 	rval = r.find_route
 		(*start, *end,
 		 &route,
-		 true,
+		 wwWARE,
 		 -1,
 		 cc,
 		 nodes);
@@ -617,7 +618,7 @@ BOOST_FIXTURE_TEST_CASE(cutoff, DistanceRoutingFixture) {
 	bool rval = r.find_route
 		(*d0, *end_node,
 		 &route,
-		 false,
+		 wwWORKER,
 		 1000,
 		 cc,
 		 nodes);

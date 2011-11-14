@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "transfer.h"
 
 #include "logic/game.h"
+#include "logic/ship.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
@@ -33,6 +34,7 @@
 #include "request.h"
 #include "wexception.h"
 #include "upcast.h"
+#include "portdock.h"
 
 namespace Widelands {
 
@@ -130,7 +132,7 @@ void IdleWareSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
 uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
 {
 	if
-		(req.get_type() == Request::WARE &&
+		(req.get_type() == wwWARE &&
 		 req.get_index() == m_ware.descr_index())
 		return 1;
 
@@ -141,7 +143,7 @@ uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
  * The item is already "launched", so we only need to return it.
 */
 WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
-	if (req.get_type() != Request::WARE)
+	if (req.get_type() != wwWARE)
 		throw wexception
 			("IdleWareSupply::launch_item : called for non-item request");
 	if (req.get_index() != m_ware.descr_index())
@@ -256,6 +258,8 @@ void WareInstance::set_location
 			eco = playerimmovable->get_economy();
 		else if (upcast(Worker const, worker, location))
 			eco = worker->get_economy();
+		else if (upcast(Ship const, ship, location))
+			eco = ship->get_economy();
 
 		if (oldlocation && get_economy()) {
 			if (get_economy() != eco)
@@ -299,8 +303,13 @@ void WareInstance::update(Game & game)
 		return;
 
 	// Reset our state if we're not on location or outside an economy
-	if (!loc || !get_economy()) {
+	if (!get_economy()) {
 		cancel_moving();
+		return;
+	}
+
+	if (!loc) {
+		remove(game);
 		return;
 	}
 
@@ -346,9 +355,15 @@ void WareInstance::update(Game & game)
 		}
 
 		if (upcast(Building, building, location)) {
-			if (nextstep != &location->base_flag())
+			if (nextstep != &location->base_flag()) {
+				if (upcast(PortDock, pd, nextstep)) {
+					pd->add_shippingitem(game, *this);
+					return;
+				}
+
 				throw wexception
 					("MO(%u): ware: move from building to non-baseflag", serial());
+			}
 
 			// There are some situations where we might end up in a warehouse
 			// as part of a requested route, and we need to move out of it
@@ -370,7 +385,6 @@ void WareInstance::update(Game & game)
 				 building->name().c_str(), building->get_position().x,
 				 building->get_position().y, nextstep->serial(),
 				 nextstep->name().c_str());
-
 		} else if (upcast(Flag, flag, location)) {
 			flag->call_carrier
 				(game,
@@ -380,6 +394,8 @@ void WareInstance::update(Game & game)
 				 &nextstep->base_flag() != location
 				 ?
 				 &nextstep->base_flag() : nextstep);
+		} else if (upcast(PortDock, pd, location)) {
+			pd->update_shippingitem(game, *this);
 		}
 	}
 }
@@ -459,6 +475,14 @@ PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : 0;
 }
 
+void WareInstance::log_general_info(const Editor_Game_Base & egbase)
+{
+	Map_Object::log_general_info(egbase);
+
+	molog("Ware: %s\n", descr().name().c_str());
+	molog("Location: %u\n", m_location.serial());
+}
+
 
 /*
 ==============================
@@ -493,7 +517,12 @@ void WareInstance::Loader::load_pointers()
 	Map_Object::Loader::load_pointers();
 
 	WareInstance & ware = get<WareInstance>();
-	ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
+
+	// There is a race condition where a ware may lose its location and be scheduled
+	// for removal via the update callback, but the game is saved just before the
+	// removal. This is why we allow a null location on load.
+	if (m_location)
+		ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
 	if (m_transfer_nextstep)
 		ware.m_transfer_nextstep = &mol().get<Map_Object>(m_transfer_nextstep);
 	if (ware.m_transfer)

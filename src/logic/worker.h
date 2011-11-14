@@ -21,6 +21,7 @@
 #define WORKER_H
 
 #include "economy/idleworkersupply.h"
+#include "economy/portdock.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
 #include "worker_descr.h"
@@ -164,6 +165,10 @@ public:
 	void cancel_task_transfer(Game &);
 	Transfer * get_transfer() const {return m_transfer;}
 
+	void start_task_shipping(Game &, PortDock &);
+	void end_shipping(Game &);
+	bool is_shipping();
+
 	void start_task_buildingwork(Game &);
 	void update_task_buildingwork(Game &);
 
@@ -197,6 +202,7 @@ protected:
 
 public:
 	static const Task taskTransfer;
+	static const Task taskShipping;
 	static const Task taskBuildingwork;
 	static const Task taskReturn;
 	static const Task taskProgram;
@@ -214,6 +220,8 @@ private:
 	// task details
 	void transfer_update(Game &, State &);
 	void transfer_pop(Game &, State &);
+	void shipping_update(Game &, State &);
+	void shipping_pop(Game &, State &);
 	void buildingwork_update(Game &, State &);
 	void return_update(Game &, State &);
 	void program_update(Game &, State &);

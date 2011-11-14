@@ -24,6 +24,8 @@
 #include <vector>
 #include <boost/function.hpp>
 
+#include "logic/wareworker.h"
+
 namespace Widelands {
 class IRoute;
 class ITransportCostCalculator;
@@ -41,7 +43,7 @@ struct Router {
 	bool find_route
 		(RoutingNode & start, RoutingNode & end,
 		 IRoute * route,
-		 bool    wait,
+		 WareWorker type,
 		 int32_t cost_cutoff,
 		 ITransportCostCalculator   & cost_calculator);
 	uint32_t assign_cycle();

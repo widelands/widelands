@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,8 @@ struct Field {
 		Buildhelp_Medium = 2,
 		Buildhelp_Big    = 3,
 		Buildhelp_Mine   = 4,
-		Buildhelp_None   = 5
+		Buildhelp_Port   = 5,
+		Buildhelp_None   = 6
 	};
 
 	typedef uint8_t Height;
