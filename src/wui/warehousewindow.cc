@@ -43,7 +43,7 @@ static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
 struct WarehouseWaresDisplay : WaresDisplay {
 	WarehouseWaresDisplay
 		(UI::Panel * parent, uint32_t width,
-		 Interactive_GameBase &, Warehouse &, wdType type, bool selectable);
+		 Interactive_GameBase &, Warehouse &, Widelands::WareWorker type, bool selectable);
 
 protected:
 	virtual void draw_ware(RenderTarget & dst, Widelands::Ware_Index ware);
@@ -55,21 +55,21 @@ private:
 
 WarehouseWaresDisplay::WarehouseWaresDisplay
 	(UI::Panel * parent, uint32_t width, Interactive_GameBase & igbase,
-	 Warehouse & wh, wdType type, bool selectable)
+	 Warehouse & wh, Widelands::WareWorker type, bool selectable)
 :
 WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable),
 m_igbase(igbase),
 m_warehouse(wh)
 {
 	set_inner_size(width, 0);
-	add_warelist(type == WORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
+	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
 }
 
 void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index ware)
 {
 	WaresDisplay::draw_ware(dst, ware);
 
-	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type() == WORKER, ware);
+	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type() == Widelands::wwWORKER, ware);
 	PictureID picid;
 
 	switch (policy) {
@@ -90,20 +90,20 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
 struct WarehouseWaresPanel : UI::Box {
 	WarehouseWaresPanel
 		(UI::Panel * parent, uint32_t width,
-		 Interactive_GameBase &, Warehouse &, WaresDisplay::wdType type);
+		 Interactive_GameBase &, Warehouse &, Widelands::WareWorker type);
 
 	void set_policy(Warehouse::StockPolicy);
 private:
 	Interactive_GameBase & m_gb;
 	Warehouse & m_wh;
 	bool m_can_act;
-	WaresDisplay::wdType m_type;
+	Widelands::WareWorker m_type;
 	WarehouseWaresDisplay m_display;
 };
 
 WarehouseWaresPanel::WarehouseWaresPanel
 	(UI::Panel * parent, uint32_t width,
-	 Interactive_GameBase & gb, Warehouse & wh, WaresDisplay::wdType type)
+	 Interactive_GameBase & gb, Warehouse & wh, Widelands::WareWorker type)
 :
 	UI::Box(parent, 0, 0, UI::Box::Vertical),
 	m_gb(gb),
@@ -139,7 +139,7 @@ WarehouseWaresPanel::WarehouseWaresPanel
  * Add Buttons policy buttons
  */
 void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
-	bool is_workers = m_type == WaresDisplay::WORKER;
+	bool is_workers = m_type == Widelands::wwWORKER;
 	Widelands::Ware_Index nritems =
 	                   is_workers ? m_wh.owner().tribe().get_nrworkers() :
 				        m_wh.owner().tribe().get_nrwares();
@@ -190,7 +190,7 @@ Warehouse_Window::Warehouse_Window
 			 Width,
 			 igbase(),
 			 warehouse(),
-			 WaresDisplay::WARE),
+			 Widelands::wwWARE),
 		 _("Wares"));
 	get_tabs()->add
 		("workers",
@@ -200,19 +200,19 @@ Warehouse_Window::Warehouse_Window
 			 Width,
 			 igbase(),
 			 warehouse(),
-			 WaresDisplay::WORKER),
+			 Widelands::wwWORKER),
 		 _("Workers"));
 
 	if (Widelands::PortDock * pd = wh.get_portdock()) {
 		get_tabs()->add
 			("wares",
 			 g_gr->get_picture(PicMod_UI, pic_tab_dock_wares),
-			 create_portdock_wares_display(get_tabs(), Width, *pd, WaresDisplay::WARE),
+			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 			 _("Wares in dock"));
 		get_tabs()->add
 			("workers",
 			 g_gr->get_picture(PicMod_UI, pic_tab_dock_workers),
-			 create_portdock_wares_display(get_tabs(), Width, *pd, WaresDisplay::WORKER),
+			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
 			 _("Workers in dock"));
 	}
 }

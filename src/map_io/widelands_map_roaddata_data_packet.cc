@@ -163,7 +163,7 @@ throw (_wexception)
 							 		(road,
 							 		 Ware_Index::First(),
 							 		 Road::_request_carrier_callback,
-							 		 Request::WORKER))
+							 		 wwWORKER))
 							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 						} else {
 							carrier_request = 0;

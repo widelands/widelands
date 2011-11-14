@@ -246,7 +246,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 					(pfb,
 					 Ware_Index::First(),
 					 Partially_Finished_Building::request_builder_callback,
-					 Request::WORKER);
+					 wwWORKER);
 				pfb.m_builder_request->Read(fr, game, mol);
 			} else
 				pfb.m_builder_request = 0;
@@ -347,7 +347,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 			(constructionsite,
 			 Ware_Index::First(),
 			 ConstructionSite::request_builder_callback,
-			 Request::WORKER);
+			 wwWORKER);
 		constructionsite.m_builder_request->Read(fr, game, mol);
 	} else
 		constructionsite.m_builder_request = 0;
@@ -475,7 +475,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						 	(warehouse,
 						 	 Ware_Index::First(),
 						 	 &Warehouse::request_cb,
-						 	 Request::WORKER));
+						 	 wwWORKER));
 					req->Read(fr, game, mol);
 				}
 			}
@@ -621,7 +621,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							 	(warehouse,
 							 	 Ware_Index::First(),
 							 	 &Warehouse::request_cb,
-							 	 Request::WORKER));
+							 	 wwWORKER));
 						pw.requests.back()->Read(fr, game, mol);
 					}
 				}
@@ -690,7 +690,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 						(militarysite,
 						 Ware_Index::First(),
 						 MilitarySite::request_soldier_callback,
-						 Request::WORKER);
+						 wwWORKER);
 				militarysite.m_soldier_request->Read(fr, game, mol);
 			}
 
@@ -773,7 +773,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						(productionsite,
 						 Ware_Index::First(),
 						 ProductionSite::request_worker_callback,
-						 Request::WORKER);
+						 wwWORKER);
 				req.Read(fr, game, mol);
 				Ware_Index const worker_index = req.get_index();
 
@@ -1044,7 +1044,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 						(trainingsite,
 						 Ware_Index::First(),
 						 TrainingSite::request_soldier_callback,
-						 Request::WORKER);
+						 wwWORKER);
 				trainingsite.m_soldier_request->Read(fr, game, mol);
 			}
 

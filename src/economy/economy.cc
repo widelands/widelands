@@ -161,7 +161,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 	if (not e)
 		return;
 
-	if (not e->find_route(f1, f2, 0, false))
+	if (not e->find_route(f1, f2, 0, wwWORKER))
 		e->_split(f2);
 }
 
@@ -175,7 +175,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 bool Economy::find_route
 	(Flag & start, Flag & end,
 	 Route * const route,
-	 bool    const wait,
+	 WareWorker const type,
 	 int32_t const cost_cutoff)
 {
 	assert(start.get_economy() == this);
@@ -184,7 +184,7 @@ bool Economy::find_route
 	Map & map = owner().egbase().map();
 
 	return
-		m_router->find_route(start, end, route, wait, cost_cutoff, map);
+		m_router->find_route(start, end, route, type, cost_cutoff, map);
 }
 
 /**
@@ -194,13 +194,13 @@ bool Economy::find_route
  * a route is also computed.
  *
  * \param start starting flag
- * \param is_ware whether to path-find as if the path were for a ware
+ * \param type whether to path-find as if the path were for a ware
  * \param route if non-null, fill in a route to the warehouse
  * \param cost_cutoff if positive, find paths of at most
  * that length (in milliseconds)
  */
 Warehouse * Economy::find_closest_warehouse
-	(Flag & start, bool is_ware, Route * route, uint32_t cost_cutoff,
+	(Flag & start, WareWorker type, Route * route, uint32_t cost_cutoff,
 	 const Economy::WarehouseAcceptFn & acceptfn)
 {
 	if (!warehouses().size())
@@ -245,7 +245,7 @@ Warehouse * Economy::find_closest_warehouse
 		// Loop through all neighbouring nodes
 		RoutingNodeNeighbours neighbours;
 
-		current->get_neighbours(neighbours);
+		current->get_neighbours(type, neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
 			RoutingNode & neighbour = *neighbours[i].get_neighbour();
@@ -259,11 +259,6 @@ Warehouse * Economy::find_closest_warehouse
 				continue;
 
 			cost = current->mpf_realcost + neighbours[i].get_cost();
-			if (is_ware) {
-				cost +=
-					(current->get_waitcost() + neighbour.get_waitcost())
-					* neighbours[i].get_cost() / 2;
-			}
 
 			if (neighbour.mpf_cycle != mpf_cycle) {
 				// add to open list
@@ -637,7 +632,7 @@ void Economy::_split(Flag & initial_flag)
 		//  them to the list (note: roads and buildings are reassigned via
 		//  Flag::set_economy)
 		RoutingNodeNeighbours neighbours;
-		flag.get_neighbours(neighbours);
+		flag.get_neighbours(wwWORKER, neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
 			/// \todo the next line shouldn't need any casts at all
@@ -702,7 +697,7 @@ Supply * Economy::_find_best_supply
 			 	(supp.get_position(game)->base_flag(),
 			 	 target_flag,
 			 	 route,
-			 	 false,
+			 	 req.get_type(),
 			 	 best_cost))
 		{
 			if (!best_route)
@@ -813,8 +808,8 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		rsp.is_worker = false;
 
 		switch (req.get_type()) {
-		case Request::WARE:    rsp.is_item    = true; break;
-		case Request::WORKER:  rsp.is_worker  = true; break;
+		case wwWARE:    rsp.is_item    = true; break;
+		case wwWORKER:  rsp.is_worker  = true; break;
 		default:
 			assert(false);
 		}
@@ -879,7 +874,7 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	container_iterate_const(RequestList, m_requests, j) {
 		const Request & req = **j.current;
 
-		if (req.get_type() != Request::WORKER || req.get_index() != index)
+		if (req.get_type() != wwWORKER || req.get_index() != index)
 			continue;
 
 		// need to check for each request separately, because esp. soldier
@@ -1038,7 +1033,7 @@ void Economy::_handle_active_supplies(Game & game)
 			continue;
 
 		Warehouse * wh = find_closest_warehouse
-			(supply.get_position(game)->base_flag(), !isworker, 0, 0,
+			(supply.get_position(game)->base_flag(), isworker ? wwWORKER : wwWARE, 0, 0,
 			 (!haveprefer && !havenormal)
 			 ?
 			 WarehouseAcceptFn()

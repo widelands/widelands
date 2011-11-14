@@ -273,7 +273,7 @@ void MilitarySite::update_soldier_request()
 					(*this,
 					 tribe().safe_worker_index("soldier"),
 					 MilitarySite::request_soldier_callback,
-					 Request::WORKER);
+					 wwWORKER);
 			m_soldier_request->set_requirements (m_soldier_requirements);
 		}
 

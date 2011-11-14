@@ -291,15 +291,13 @@ static const RGBColor colors[] = {
 
 
 struct StatisticWaresDisplay : public AbstractWaresDisplay {
-	typedef AbstractWaresDisplay::wdType wdType;
-
 	StatisticWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const & tribe,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function)
 	:
-		 AbstractWaresDisplay(parent, x, y, tribe, WaresDisplay::WARE, true, callback_function)
+		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function)
 	{
 		uint32_t w, h;
 		get_desired_size(w, h);

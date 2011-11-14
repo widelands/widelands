@@ -74,20 +74,18 @@ private:
 	UI::Tab_Panel m_tabpanel;
 
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
-		typedef AbstractWaresDisplay::wdType wdType;
-
 		TargetWaresDisplay
 			(UI::Panel * const parent,
 			 int32_t const x, int32_t const y,
 			 Widelands::Tribe_Descr const & tribe,
-			 wdType type,
+			 Widelands::WareWorker type,
 			 bool selectable,
 			 Economy & economy)
 		:
 			 AbstractWaresDisplay(parent, x, y, tribe, type, selectable),
 			 m_economy(economy)
 		{
-			if (type == WaresDisplay::WORKER) {
+			if (type == Widelands::wwWORKER) {
 				Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
 				for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 					if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
@@ -107,7 +105,7 @@ private:
 		std::string info_for_ware(Widelands::Ware_Index const ware) {
 			return
 				boost::lexical_cast<std::string>
-				(get_type() == WaresDisplay::WORKER ?
+				(get_type() == Widelands::wwWORKER ?
 				 m_economy.worker_target_quantity(ware).permanent :
 				 m_economy.ware_target_quantity(ware).permanent);
 		}
@@ -127,7 +125,7 @@ private:
 		Economy_Options_Ware_Panel(UI::Panel * parent, Interactive_GameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
-			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WARE, m_can_act, economy),
+			m_display(this, 0, 0, economy.owner().tribe(), Widelands::wwWARE, m_can_act, economy),
 			m_economy(economy)
 		{
 			add(&m_display, UI::Box::AlignLeft, true);
@@ -223,7 +221,7 @@ private:
 		Economy_Options_Worker_Panel(UI::Panel * parent, Interactive_GameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
-			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WORKER, m_can_act, economy),
+			m_display(this, 0, 0, economy.owner().tribe(), Widelands::wwWORKER, m_can_act, economy),
 			m_economy(economy)
 		{
 			add(&m_display, UI::Box::AlignLeft, true);

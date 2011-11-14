@@ -782,7 +782,7 @@ int32_t Building::get_priority
 {
 	int32_t priority = m_priority;
 
-	if (type == Request::WARE) {
+	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<Ware_Index, int32_t>::const_iterator it =
@@ -805,7 +805,7 @@ void Building::collect_priorities
 {
 	if (m_ware_priorities.empty())
 		return;
-	std::map<Ware_Index, int32_t> & ware_priorities = p[Request::WARE];
+	std::map<Ware_Index, int32_t> & ware_priorities = p[wwWARE];
 	std::map<Ware_Index, int32_t>::const_iterator it;
 	for (it = m_ware_priorities.begin(); it != m_ware_priorities.end(); ++it) {
 		if (it->second == DEFAULT_PRIORITY)
@@ -826,7 +826,7 @@ void Building::set_priority
 	 Ware_Index const ware_index,
 	 int32_t    const new_priority)
 {
-	if (type == Request::WARE) {
+	if (type == wwWARE) {
 		m_ware_priorities[ware_index] = new_priority;
 	}
 }

@@ -269,7 +269,7 @@ void TrainingSite::update_soldier_request() {
 					(*this,
 					 tribe().safe_worker_index("soldier"),
 					 TrainingSite::request_soldier_callback,
-					 Request::WORKER);
+					 wwWORKER);
 
 			RequireOr r;
 

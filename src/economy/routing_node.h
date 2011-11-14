@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "cookie_priority_queue.h"
+#include "logic/wareworker.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
@@ -31,14 +32,14 @@ struct Flag;
 class RoutingNode;
 struct Road;
 
-/***
- * /todo The get functions should be declared const
+/**
+ * @see RoutingNode::get_neighbours
  */
 struct RoutingNodeNeighbour {
 	RoutingNodeNeighbour(RoutingNode * const f, int32_t const cost) :
 		m_nb(f), m_cost(cost)
 	{}
-	RoutingNode * get_neighbour() {
+	RoutingNode * get_neighbour() const {
 		return m_nb;
 	}
 	int32_t get_cost() const {
@@ -89,8 +90,7 @@ public:
 	Queue::cookie & cookie() {return mpf_cookie;}
 
 	virtual Flag & base_flag() = 0;
-	virtual int32_t get_waitcost() const = 0;
-	virtual void get_neighbours(RoutingNodeNeighbours &) = 0;
+	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours &) = 0;
 	virtual Coords get_position() const = 0;
 };
 

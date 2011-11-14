@@ -17,17 +17,22 @@
  *
  */
 
-#ifndef WUI_PORTDOCKWARES_DISPLAY_H
-#define WUI_PORTDOCKWARES_DISPLAY_H
-
-#include "waresdisplay.h"
+#ifndef LOGIC_WAREWORKER_H
+#define LOGIC_WAREWORKER_H
 
 namespace Widelands {
-struct PortDock;
-}
 
-AbstractWaresDisplay * create_portdock_wares_display
-	(UI::Panel * parent, uint32_t width, Widelands::PortDock & pd,
-	 Widelands::WareWorker type);
+/**
+ * For @ref Request, @ref WaresDisplay et al., indicate whether the object
+ * or object type in question is a ware or a worker.
+ *
+ * @note These values are written into savegames
+ */
+enum WareWorker {
+	wwWARE = 0,
+	wwWORKER = 1
+};
 
-#endif // WUI_PORTDOCKWARES_DISPLAY_H
+} // namespace Widelands
+
+#endif // LOGIC_WAREWORKER_H

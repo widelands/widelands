@@ -33,7 +33,7 @@ namespace {
  * Display wares or workers that are waiting to be shipped from a port.
  */
 struct PortDockWaresDisplay : AbstractWaresDisplay {
-	PortDockWaresDisplay(Panel * parent, uint32_t width, PortDock & pd, wdType type);
+	PortDockWaresDisplay(Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type);
 
 	virtual std::string info_for_ware(Widelands::Ware_Index ware);
 
@@ -42,7 +42,7 @@ private:
 };
 
 PortDockWaresDisplay::PortDockWaresDisplay
-	(Panel * parent, uint32_t width, PortDock & pd, wdType type) :
+	(Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type) :
 	AbstractWaresDisplay(parent, 0, 0, pd.owner().tribe(), type, false),
 	m_portdock(pd)
 {
@@ -51,7 +51,7 @@ PortDockWaresDisplay::PortDockWaresDisplay
 
 std::string PortDockWaresDisplay::info_for_ware(Widelands::Ware_Index ware)
 {
-	uint count = m_portdock.count_waiting(get_type() == WORKER, ware);
+	uint count = m_portdock.count_waiting(get_type() == Widelands::wwWORKER, ware);
 	return boost::lexical_cast<std::string>(count);
 }
 
@@ -61,7 +61,7 @@ std::string PortDockWaresDisplay::info_for_ware(Widelands::Ware_Index ware)
  * Create a panel that displays the wares or workers that are waiting to be shipped from a port.
  */
 AbstractWaresDisplay * create_portdock_wares_display
-	(UI::Panel * parent, uint32_t width, PortDock & pd, AbstractWaresDisplay::wdType type)
+	(UI::Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type)
 {
 	return new PortDockWaresDisplay(parent, width, pd, type);
 }

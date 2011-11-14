@@ -168,7 +168,7 @@ PlayerImmovable * Transfer::get_next_step
 		return &locflag == location ? destination : &locflag;
 
 	// Brute force: recalculate the best route every time
-	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item))
+	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item ? wwWARE : wwWORKER))
 		throw wexception("Transfer::get_next_step: inconsistent economy");
 
 	if (m_route.get_nrsteps() >= 1)
@@ -184,8 +184,8 @@ PlayerImmovable * Transfer::get_next_step
 				 &m_route.get_flag(m_game, m_route.get_nrsteps() - 1))
 				m_route.truncate(m_route.get_nrsteps() - 1);
 
-#if 0
-	if (m_item && (m_item->serial() == 5858)) {
+#if 1
+	if (m_item && (m_item->serial() == 1265)) {
 		log
 			("Item %u ready at location %u (flag %u) for destination %u\n",
 			 m_item->serial(), location->serial(), locflag.serial(), destination->serial());

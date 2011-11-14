@@ -265,7 +265,7 @@ BaseImmovable::PositionList Flag::get_positions
 /**
  * Return neighbouring flags.
 */
-void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)
+void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours & neighbours)
 {
 	for (int8_t i = 0; i < 6; ++i) {
 		Road * const road = m_roads[i];
@@ -274,11 +274,14 @@ void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)
 
 		Flag * f = &road->get_flag(Road::FlagEnd);
 		int32_t nb_cost;
-		if (f != this)
+		if (f != this) {
 			nb_cost = road->get_cost(Road::FlagStart);
-		else {
+		} else {
 			f = &road->get_flag(Road::FlagStart);
 			nb_cost = road->get_cost(Road::FlagEnd);
+		}
+		if (type == wwWARE) {
+			nb_cost += nb_cost * (get_waitcost() + f->get_waitcost()) / 2;
 		}
 		RoutingNodeNeighbour n(f, nb_cost);
 
@@ -744,7 +747,7 @@ void Flag::add_flag_job
 
 	j.request =
 		new Request
-			(*this, workerware, Flag::flag_job_request_callback, Request::WORKER);
+			(*this, workerware, Flag::flag_job_request_callback, wwWORKER);
 	j.program = programname;
 
 	m_flag_jobs.push_back(j);

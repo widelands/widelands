@@ -192,7 +192,7 @@ void WarehouseSupply::send_to_storage(Game &, Warehouse * wh)
 uint32_t WarehouseSupply::nr_supplies
 	(Game const & game, Request const & req) const
 {
-	if (req.get_type() == Request::WORKER)
+	if (req.get_type() == wwWORKER)
 		return
 			m_warehouse->count_workers
 				(game, req.get_index(), req.get_requirements());
@@ -207,7 +207,7 @@ uint32_t WarehouseSupply::nr_supplies
 	// highered and would have the same value as the original request)
 	int32_t const y =
 		x + (req.get_priority(0) / 100)
-		- (m_warehouse->get_priority(Request::WARE, req.get_index()) / 100) - 1;
+		- (m_warehouse->get_priority(wwWARE, req.get_index()) / 100) - 1;
 	// But the number should never be higher than the number of wares available
 	if (y > x)
 		return x;
@@ -217,7 +217,7 @@ uint32_t WarehouseSupply::nr_supplies
 
 /// Launch a ware as item.
 WareInstance & WarehouseSupply::launch_item(Game & game, Request const & req) {
-	if (req.get_type() != Request::WARE)
+	if (req.get_type() != wwWARE)
 		throw wexception
 			("WarehouseSupply::launch_item: called for non-ware request");
 	if (!m_wares.stock(req.get_index()))
@@ -317,13 +317,13 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 		(Worker_Descr::Buildcost::const_iterator cost_it = cost.begin();
 		 cost_it != cost.end(); ++cost_it, ++idx)
 	{
-		Request::Type type;
+		WareWorker type;
 		Ware_Index ware;
 
 		if ((ware = tribe().ware_index(cost_it->first)))
-			type = Request::WARE;
+			type = wwWARE;
 		else if ((ware = tribe().worker_index(cost_it->first)))
-			type = Request::WORKER;
+			type = wwWORKER;
 		else
 			return false;
 
@@ -1113,11 +1113,11 @@ void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 			if (Ware_Index id_w = tribe().ware_index(input_name)) {
 				pw->requests.push_back
 					(new Request
-					 (*this, id_w, &Warehouse::request_cb, Request::WARE));
+					 (*this, id_w, &Warehouse::request_cb, wwWARE));
 			} else if ((id_w = tribe().worker_index(input_name))) {
 				pw->requests.push_back
 					(new Request
-					 (*this, id_w, &Warehouse::request_cb, Request::WORKER));
+					 (*this, id_w, &Warehouse::request_cb, wwWORKER));
 			} else
 				throw wexception
 					("plan_workers: bad buildcost '%s'", input_name.c_str());

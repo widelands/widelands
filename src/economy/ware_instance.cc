@@ -132,7 +132,7 @@ void IdleWareSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
 uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
 {
 	if
-		(req.get_type() == Request::WARE &&
+		(req.get_type() == wwWARE &&
 		 req.get_index() == m_ware.descr_index())
 		return 1;
 
@@ -143,7 +143,7 @@ uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
  * The item is already "launched", so we only need to return it.
 */
 WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
-	if (req.get_type() != Request::WARE)
+	if (req.get_type() != wwWARE)
 		throw wexception
 			("IdleWareSupply::launch_item : called for non-item request");
 	if (req.get_index() != m_ware.descr_index())
