@@ -89,6 +89,7 @@ struct Terrain_Descr {
 	void load_graphics();
 
 	uint32_t         get_texture() const throw () {return m_texture;}
+	uint32_t         get_edge_texture() const throw () {return m_edge_texture;}
 	uint8_t        get_is     () const throw () {return m_is;}
 	const std::string & name() const throw () {return m_name;}
 	int32_t resource_value(const Resource_Index resource) const throw () {
@@ -119,6 +120,7 @@ struct Terrain_Descr {
 private:
 	const std::string m_name;
 	char  * m_picnametempl;
+	char  * m_edgepicnametempl;
 	uint32_t    m_frametime;
 	uint8_t   m_is;
 
@@ -127,6 +129,7 @@ private:
 	int8_t            m_default_resources;
 	int32_t           m_default_amount;
 	uint32_t          m_texture; //  renderer's texture
+	uint32_t          m_edge_texture; //  renderer's texture for edges
 
 	Terrain_Descr & operator= (Terrain_Descr const &);
 	explicit Terrain_Descr    (Terrain_Descr const &);

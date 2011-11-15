@@ -3,62 +3,78 @@
 [tundra]
 def_resources=water 5
 is=green
+edge_texture=tundra_edge
 
 [mountain1]
 resources=coal, iron, gold, granit
 is=mountain
+edge_texture=mountain1_edge
 
 [ice_flows]
 is=water
 fps=5
+edge_texture=ice_flows_edge
 
 [ice_flows2]
 is=water
 fps=5
+edge_texture=ice_flows2_edge
 
 [ice]
 is=dry
 #### of course ice is not dry, but this disallows the users, to build on snow. only flags are allowed. ;-)
+edge_texture=ice_edge
 
 [water]
 def_resources=fish 4
 is=water
 fps=8
+edge_texture=water_edge
 
 [tundra_taiga]
 def_resources=water 10
 is=green
+edge_texture=tundra_taiga_edge
 
 [tundra2]
 def_resources=water 10
 is=green
+edge_texture=tundra2_edge
 
 [tundra3]
 def_resources=water 10
 is=green
+edge_texture=tundra3_edge
 
 [mountain2]
 resources=coal, iron, gold, granit
 is=mountain
+edge_texture=mountain2_edge
 
 [mountain3]
 resources=coal, iron, gold, granit
 is=mountain
+edge_texture=mountain3_edge
 
 [mountain4]
 resources=coal, iron, gold, granit
 is=mountain
+edge_texture=mountain4_edge
 
 [strand]
 is=dry
+edge_texture=strand_edge
 
 [taiga]
 def_resources=water 10
 is=green
+edge_texture=taiga_edge
 
 [lava]
 is=acid
+edge_texture=lava_edge
 
 [snow]
 def_resources=water 30
 is=green
+edge_texture=snow_edge

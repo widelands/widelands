@@ -63,7 +63,11 @@ void GameViewOpenGL::draw_field
 	 Texture const & tr_d_texture,
 	 Texture const &  l_r_texture,
 	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture)
+	 Texture const &  f_r_texture,
+	 Texture const & tr_d_edge_texture,
+	 Texture const &  l_r_edge_texture,
+	 Texture const &  f_d_edge_texture,
+	 Texture const &  f_r_edge_texture)
 {
 	// Draw triangle right (bottom) of the field
 	draw_field_opengl
@@ -71,6 +75,11 @@ void GameViewOpenGL::draw_field
 	// Draw triangle bottom of the field
 	draw_field_opengl
 		(subwin, f_vert, bl_vert, br_vert, f_d_texture);
+	// Draw the edges
+	draw_edges_opengl
+		(subwin, f_vert, r_vert, bl_vert, br_vert,
+		 tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
+		 tr_d_edge_texture, f_d_edge_texture, l_r_edge_texture);
 	// Draw the roads
 	draw_roads_opengl(subwin, roads, f_vert, r_vert, bl_vert, br_vert);
 }

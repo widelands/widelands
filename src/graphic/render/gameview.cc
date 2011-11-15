@@ -154,6 +154,12 @@ void GameView::rendermap
 				 .terrain_descr(first_player_field[f.field - &map[0]].terrains.r)
 				 .get_texture());
 
+		const Texture * f_r_edge_texture =
+			g_gr->get_mapedgetexture_data
+				(world
+				 .terrain_descr(first_player_field[f.field - &map[0]].terrains.r)
+				 .get_texture());
+
 		uint32_t count = dx;
 
 		while (count--) {
@@ -163,6 +169,7 @@ void GameView::rendermap
 			f = r;
 			const int32_t f_posx = r_posx, bl_posx = br_posx;
 			const Texture & l_r_texture = *f_r_texture;
+			const Texture & l_r_edge_texture = *f_r_edge_texture;
 			move_r(mapwidth, tr, tr_index);
 			move_r(mapwidth,  r,  r_index);
 			move_r(mapwidth, br, br_index);
@@ -180,6 +187,18 @@ void GameView::rendermap
 			f_r_texture =
 				g_gr->get_maptexture_data
 					(world.terrain_descr(f_player_field.terrains.r).get_texture());
+
+			const Texture & tr_d_edge_texture =
+				*g_gr->get_mapedgetexture_data
+					(world.terrain_descr(first_player_field[tr_index].terrains.d)
+					 .get_texture());
+			const Texture & f_d_edge_texture =
+				*g_gr->get_mapedgetexture_data
+					(world.terrain_descr(f_player_field.terrains.d).get_texture());
+			f_r_edge_texture =
+				g_gr->get_mapedgetexture_data
+					(world.terrain_descr(f_player_field.terrains.r).get_texture());
+
 
 			uint8_t const roads =
 				f_player_field.roads | overlay_manager.get_road_overlay(f);
@@ -221,7 +240,8 @@ void GameView::rendermap
 				(m_rect,
 				 f_vert, r_vert, bl_vert, br_vert,
 				 roads,
-				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture);
+				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
+				 tr_d_edge_texture, l_r_edge_texture, f_d_edge_texture, *f_r_edge_texture);
 		}
 
 		++linear_fy;
@@ -627,6 +647,9 @@ void GameView::rendermap
 		const Texture * f_r_texture =
 			g_gr->get_maptexture_data
 				(world.terrain_descr(f.field->terrain_r()).get_texture());
+		const Texture * f_r_edge_texture =
+			g_gr->get_mapedgetexture_data
+				(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 		uint32_t count = dx;
 
@@ -635,6 +658,7 @@ void GameView::rendermap
 			f = r;
 			const int32_t f_posx = r_posx, bl_posx = br_posx;
 			const Texture & l_r_texture = *f_r_texture;
+			const Texture & l_r_edge_texture = *f_r_edge_texture;
 			move_r(mapwidth, tr);
 			move_r(mapwidth,  r,  r_index);
 			move_r(mapwidth, br, br_index);
@@ -648,6 +672,16 @@ void GameView::rendermap
 					(world.terrain_descr(f.field->terrain_d()).get_texture());
 			f_r_texture =
 				g_gr->get_maptexture_data
+					(world.terrain_descr(f.field->terrain_r()).get_texture());
+
+			const Texture & tr_d_edge_texture =
+				*g_gr->get_mapedgetexture_data
+					(world.terrain_descr(tr.field->terrain_d()).get_texture());
+			const Texture & f_d_edge_texture =
+				*g_gr->get_mapedgetexture_data
+					(world.terrain_descr(f.field->terrain_d()).get_texture());
+			f_r_edge_texture =
+				g_gr->get_mapedgetexture_data
 					(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 			const uint8_t roads =
@@ -682,7 +716,8 @@ void GameView::rendermap
 				(m_rect,
 				 f_vert, r_vert, bl_vert, br_vert,
 				 roads,
-				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture);
+				 tr_d_texture, l_r_texture, f_d_texture, *f_r_texture,
+				 tr_d_edge_texture, l_r_edge_texture, f_d_edge_texture, *f_r_edge_texture);
 		}
 
 		++linear_fy;
@@ -1017,7 +1052,11 @@ void GameView::draw_field
 	 Texture const & tr_d_texture,
 	 Texture const &  l_r_texture,
 	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture)
+	 Texture const &  f_r_texture,
+	 Texture const & tr_d_edge_texture,
+	 Texture const &  l_r_edge_texture,
+	 Texture const &  f_d_edge_texture,
+	 Texture const &  f_r_edge_texture)
 {
 
 }

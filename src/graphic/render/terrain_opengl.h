@@ -175,5 +175,106 @@ void draw_roads_opengl
 	}
 }
 
+
+void draw_edges_opengl
+	(Rect & subwin,
+	 Vertex const & f_vert,
+	 Vertex const & r_vert,
+	 Vertex const & bl_vert,
+	 Vertex const & br_vert,
+	 Texture const & tr_d_texture,
+	 Texture const &  l_r_texture,
+	 Texture const &  f_d_texture,
+	 Texture const &  f_r_texture,
+	 Texture const & tr_d_edge_texture,
+	 Texture const &  f_d_edge_texture,
+	 Texture const &  l_r_edge_texture)
+{
+	glEnable(GL_BLEND);
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+	// east edge (horizontal)
+	if
+		(not (&tr_d_texture == &f_r_texture) // only if underground texture changes
+		 and not (f_vert.b == -128 and r_vert.b == -128)) // not at the border to undiscovered land
+	{
+		glBindTexture(GL_TEXTURE_2D, tr_d_edge_texture.getTexture());
+		glBegin(GL_QUADS); {
+			{
+				GLfloat const brightness = (150.0 + f_vert.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(0, 0);
+			glVertex2f(subwin.x + f_vert.x, subwin.y + f_vert.y);
+			{
+				GLfloat const brightness = (150.0 + r_vert.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(TEXTURE_WIDTH, 0);
+			glVertex2f(subwin.x + r_vert.x,   subwin.y + r_vert.y);
+			glTexCoord2i(TEXTURE_WIDTH, 16);
+			glVertex2f(subwin.x + r_vert.x,   subwin.y + r_vert.y + 12);
+			{
+				GLfloat const brightness = (150.0 + f_vert.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(0, 16);
+			glVertex2f(subwin.x + f_vert.x, subwin.y + f_vert.y + 12);
+	   } glEnd();
+	}
+
+	// south east edge (vertical)
+	if
+		(not (&f_d_texture == &f_r_texture)
+		 and not (f_vert.b == -128 and br_vert.b == -128))
+	{
+		glBindTexture(GL_TEXTURE_2D, f_d_edge_texture.getTexture());
+		glBegin(GL_QUADS); {
+			{
+				GLfloat const brightness = (150.0 + f_vert.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(TEXTURE_WIDTH, 0);
+			glVertex2f(subwin.x + f_vert.x, subwin.y + f_vert.y);
+			glTexCoord2i(TEXTURE_WIDTH, 16);
+			glVertex2f(subwin.x + f_vert.x + 20, subwin.y + f_vert.y);
+			{
+				GLfloat const brightness = (150.0 + br_vert.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(0, 16);
+			glVertex2f(subwin.x + br_vert.x + 20,   subwin.y + br_vert.y);
+			glTexCoord2i(0, 0);
+			glVertex2f(subwin.x + br_vert.x,   subwin.y + br_vert.y);
+		} glEnd();
+	}
+
+	// south west edge (vertical)
+	if
+		(not (&l_r_texture == &f_d_texture)
+		 and not (f_vert.b == -128 and bl_vert.b == -128))
+	{
+		glBindTexture(GL_TEXTURE_2D, l_r_edge_texture.getTexture());
+		glBegin(GL_QUADS); {
+			{
+				GLfloat const brightness = (150.0 + f_vert.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(TEXTURE_WIDTH, 0);
+			glVertex2f(subwin.x + f_vert.x, subwin.y + f_vert.y);
+			glTexCoord2i(TEXTURE_WIDTH, 16);
+			glVertex2f(subwin.x + f_vert.x + 20, subwin.y + f_vert.y);
+			{
+				GLfloat const brightness = (150.0 + bl_vert.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(0, 16);
+			glVertex2f(subwin.x + bl_vert.x + 20,   subwin.y + bl_vert.y);
+			glTexCoord2i(0, 0);
+			glVertex2f(subwin.x + bl_vert.x,   subwin.y + bl_vert.y);
+		} glEnd();
+	}
+}
+
 #endif
 #endif

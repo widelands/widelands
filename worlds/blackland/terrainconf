@@ -3,60 +3,76 @@
 [ashes]
 def_resources=water 5
 is=green
+edge_texture=ashes_edge
 
 [mountain1]
 resources=coal, iron, gold, granit 
 is=mountain
+edge_texture=mountain1_edge
 
 [lava-stone1]
 is=acid
+edge_texture=lava-stone1_edge
 
 [lava-stone2]
 is=acid
+edge_texture=lava-stone2_edge
 
 [strand]
 is=dry
+edge_texture=strand_edge
 
 [water]
 def_resources=fish 4
 is=water
 fps=14
+edge_texture=water_edge
 
 [hardground1]
 def_resources=water 10
 is=green
+edge_texture=hardground1_edge
 
 [hardground2]
 def_resources=water 10
 is=green
+edge_texture=hardground2_edge
 
 [hardground3]
 def_resources=water 10
 is=green
+edge_texture=hardground3_edge
 
 [mountain2]
 resources=coal, iron, gold, granit
 is=mountain
+edge_texture=mountain2_edge
 
 [mountain3]
 resources=coal, iron, gold, granit
 is=mountain
+edge_texture=mountain3_edge
 
 [mountain4]
 resources=coal, iron, gold, granit
 is=mountain
+edge_texture=mountain4_edge
 
 [ashes2]
 def_resources=water 4
 is=green
+edge_texture=ashes2_edge
 
 [hardground4]
 def_resources=water 10
 is=green
+edge_texture=hardground4_edge
 
 [lava]
 is=acid
+edge_texture=lava_edge
 
 [hardlava]
 is=green
+edge_texture=hardlava_edge
 

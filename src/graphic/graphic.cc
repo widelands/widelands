@@ -977,13 +977,21 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid)
  * These textures are freed when PicMod_Game is flushed.
 */
 uint32_t Graphic::get_maptexture
-	(const char & fnametempl, const uint32_t frametime)
+	(const char & fnametempl, const char & fedgenametempl, const uint32_t frametime)
 {
 	try {
 		m_maptextures.push_back
 			(new Texture(fnametempl, frametime, *m_sdl_screen->format));
 	} catch (std::exception const & e) {
 		log("Failed to load maptexture %s: %s\n", &fnametempl, e.what());
+		return 0;
+	}
+
+	try {
+		m_mapedgetextures.push_back
+			(new Texture(fedgenametempl, frametime, *m_sdl_screen->format));
+	} catch (std::exception const & e) {
+		log("Failed to load mapedgetexture %s: %s\n", &fedgenametempl, e.what());
 		return 0;
 	}
 
@@ -995,8 +1003,10 @@ uint32_t Graphic::get_maptexture
 */
 void Graphic::animate_maptextures(uint32_t time)
 {
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i)
+	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->animate(time);
+		m_mapedgetextures[i]->animate(time);
+	}
 }
 
 /**
@@ -1004,8 +1014,10 @@ void Graphic::animate_maptextures(uint32_t time)
  */
 void Graphic::reset_texture_animation_reminder()
 {
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i)
+	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->reset_was_animated();
+		m_mapedgetextures[i]->reset_was_animated();
+	}
 }
 
 /**
@@ -1124,6 +1136,20 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 	else
 		return 0;
 }
+
+/**
+ * Retrieve the map edge texture with the given number
+ * \return the actual texture data associated with the given ID.
+ */
+Texture * Graphic::get_mapedgetexture_data(uint32_t id)
+{
+	--id; // ID 1 is at m_mapedgetextures[0]
+	if (id < m_mapedgetextures.size())
+		return m_mapedgetextures[id];
+	else
+		return 0;
+}
+
 
 /**
  * Sets the name of the current world and loads the fitting road textures

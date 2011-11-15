@@ -913,6 +913,12 @@ m_texture           (0)
 			 "%s/pics/%s_??.png", directory, m_name.c_str());
 
 	m_picnametempl = strdup(fnametmpl);
+
+	char fedgenametmpl[256];
+	snprintf
+		(fedgenametmpl, sizeof(fedgenametmpl),
+		 "%s/pics/%s_??.png", directory, s->get_string("edge_texture", ""));
+	m_edgepicnametempl = strdup(fedgenametmpl);
 }
 
 Terrain_Descr::~Terrain_Descr()
@@ -932,7 +938,7 @@ Trigger load of the actual animation frames.
 void Terrain_Descr::load_graphics()
 {
 	if (m_picnametempl)
-		m_texture = g_gr->get_maptexture(*m_picnametempl, m_frametime);
+		m_texture = g_gr->get_maptexture(*m_picnametempl, *m_edgepicnametempl, m_frametime);
 }
 
 }
