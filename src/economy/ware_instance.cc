@@ -35,6 +35,7 @@
 #include "wexception.h"
 #include "upcast.h"
 #include "portdock.h"
+#include "fleet.h"
 
 namespace Widelands {
 
@@ -99,7 +100,7 @@ void IdleWareSupply::set_economy(Economy * const e)
 
 /**
  * Figure out the player immovable that this ware belongs to.
-*/
+ */
 PlayerImmovable * IdleWareSupply::get_position(Game & game)
 {
 	Map_Object * const loc = m_ware.get_location(game);
@@ -109,6 +110,13 @@ PlayerImmovable * IdleWareSupply::get_position(Game & game)
 
 	if (upcast(Worker, worker, loc))
 		return worker->get_location(game);
+
+	if (upcast(Ship, ship, loc)) {
+		if (PortDock * pd = ship->get_destination(game))
+			return pd;
+
+		return ship->get_fleet()->get_arbitrary_dock();
+	}
 
 	return 0;
 }

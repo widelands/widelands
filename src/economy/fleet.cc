@@ -548,6 +548,16 @@ PortDock * Fleet::get_dock(Flag & flag) const
 }
 
 /**
+ * @return an arbitrary dock of the fleet, or 0 if the fleet has no docks
+ */
+PortDock * Fleet::get_arbitrary_dock() const
+{
+	if (m_ports.empty())
+		return 0;
+	return m_ports[0];
+}
+
+/**
  * Trigger an update of ship scheduling
  */
 void Fleet::update(Editor_Game_Base & egbase)

@@ -64,6 +64,7 @@ struct Fleet : Map_Object {
 	Player & owner() const {return m_owner;}
 
 	PortDock * get_dock(Flag & flag) const;
+	PortDock * get_arbitrary_dock() const;
 	void set_economy(Economy * e);
 
 	bool active() const;
