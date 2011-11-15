@@ -85,6 +85,10 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_CalculateStatistics ();
 	case QUEUE_CMD_CALL_ECONOMY_BALANCE:
 		return *new Cmd_Call_Economy_Balance ();
+	case QUEUE_CMD_SETWAREMAXFILL:
+		return *new Cmd_SetWareMaxFill();
+	case QUEUE_CMD_DISMANTLEBUILDING:
+		return *new Cmd_DismantleBuilding();
 	default:
 		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}
