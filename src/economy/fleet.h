@@ -92,19 +92,19 @@ private:
 	void find_other_fleet(Editor_Game_Base & egbase);
 	void merge(Editor_Game_Base & egbase, Fleet * other);
 	void check_merge_economy();
-	void connect_port(Editor_Game_Base & egbase, uint idx);
+	void connect_port(Editor_Game_Base & egbase, uint32_t idx);
 
-	PortPath & portpath(uint i, uint j);
-	const PortPath & portpath(uint i, uint j) const;
-	PortPath & portpath_bidir(uint i, uint j, bool & reverse);
-	const PortPath & portpath_bidir(uint i, uint j, bool & reverse) const;
+	PortPath & portpath(uint32_t i, uint32_t j);
+	const PortPath & portpath(uint32_t i, uint32_t j) const;
+	PortPath & portpath_bidir(uint32_t i, uint32_t j, bool & reverse);
+	const PortPath & portpath_bidir(uint32_t i, uint32_t j, bool & reverse) const;
 
 	Player & m_owner;
 	std::vector<Ship *> m_ships;
 	std::vector<PortDock *> m_ports;
 
 	bool m_act_pending;
-	uint m_port_roundrobin;
+	uint32_t m_port_roundrobin;
 
 	/**
 	 * Store all pairs shortest paths between port docks

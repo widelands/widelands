@@ -42,13 +42,13 @@ struct Ship_Descr : Bob::Descr {
 	virtual uint32_t movecaps() const throw ();
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
-	uint get_capacity() const throw () {return m_capacity;}
+	uint32_t get_capacity() const throw () {return m_capacity;}
 
 	virtual Bob & create_object() const;
 
 private:
 	DirAnimations m_sail_anims;
-	uint m_capacity;
+	uint32_t m_capacity;
 };
 
 /**
@@ -79,9 +79,9 @@ struct Ship : Bob {
 
 	virtual void log_general_info(Editor_Game_Base const &);
 
-	uint get_capacity() const {return descr().get_capacity();}
-	uint get_nritems() const {return m_items.size();}
-	const ShippingItem & get_item(uint idx) const {return m_items[idx];}
+	uint32_t get_capacity() const {return descr().get_capacity();}
+	uint32_t get_nritems() const {return m_items.size();}
+	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
 
 	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
 	void add_item(Game &, const ShippingItem & item);

@@ -112,7 +112,7 @@ void ShipWindow::think()
 	m_btn_destination->set_enabled(m_ship.get_destination(m_igbase.egbase()));
 
 	m_display->clear();
-	for (uint idx = 0; idx < m_ship.get_nritems(); ++idx) {
+	for (uint32_t idx = 0; idx < m_ship.get_nritems(); ++idx) {
 		Widelands::ShippingItem item = m_ship.get_item(idx);
 		Widelands::WareInstance * ware;
 		Widelands::Worker * worker;

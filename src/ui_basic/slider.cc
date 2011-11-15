@@ -574,7 +574,7 @@ void DiscreteSlider::draw(RenderTarget & dst)
 
 void DiscreteSlider::set_labels(const std::vector<std::string> labels_in) {
 	labels = labels_in;
-	slider.set_max_value(labels_in.size()-1);
+	slider.set_max_value(labels_in.size() - 1);
 	layout();
 }
 

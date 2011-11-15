@@ -98,8 +98,8 @@ private:
 	UI::Multiline_Textarea m_descr;
 	UI::Callback_Button m_back, m_ok;
 	UI::Checkbox                      m_load_map_as_scenario;
-	UI::Checkbox*                     m_show_all_maps;
-	std::vector<UI::Checkbox*>        m_tags_checkboxes;
+	UI::Checkbox *                    m_show_all_maps;
+	std::vector<UI::Checkbox *>       m_tags_checkboxes;
 	UI::Table<uintptr_t const>        m_table;
 	std::string                       m_curdir, m_basedir;
 	Map::ScenarioTypes  m_scenario_types;
