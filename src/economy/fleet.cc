@@ -192,17 +192,17 @@ void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
 		add_ship(ship);
 	}
 
-	uint old_nrports = m_ports.size();
+	uint32_t old_nrports = m_ports.size();
 	m_ports.insert(m_ports.end(), other->m_ports.begin(), other->m_ports.end());
 	m_portpaths.resize((m_ports.size() * (m_ports.size() - 1)) / 2);
 
-	for (uint j = 1; j < other->m_ports.size(); ++j) {
-		for (uint i = 0; i < j; ++i) {
+	for (uint32_t j = 1; j < other->m_ports.size(); ++j) {
+		for (uint32_t i = 0; i < j; ++i) {
 			portpath(old_nrports + i, old_nrports + j) = other->portpath(i, j);
 		}
 	}
 
-	for (uint idx = old_nrports; idx < m_ports.size(); ++idx) {
+	for (uint32_t idx = old_nrports; idx < m_ports.size(); ++idx) {
 		m_ports[idx]->set_fleet(this);
 	}
 
@@ -225,7 +225,7 @@ void Fleet::check_merge_economy()
 		return;
 
 	Flag & base = m_ports[0]->base_flag();
-	for (uint i = 1; i < m_ports.size(); ++i) {
+	for (uint32_t i = 1; i < m_ports.size(); ++i) {
 		// Note: economy of base flag may of course be changed by the merge!
 		base.get_economy()->check_merge(base, m_ports[i]->base_flag());
 	}
@@ -247,21 +247,21 @@ void Fleet::cleanup(Editor_Game_Base & egbase)
 	Map_Object::cleanup(egbase);
 }
 
-Fleet::PortPath & Fleet::portpath(uint i, uint j)
+Fleet::PortPath & Fleet::portpath(uint32_t i, uint32_t j)
 {
 	assert(i < j);
 
 	return m_portpaths[((j - 1) * j) / 2 + i];
 }
 
-const Fleet::PortPath & Fleet::portpath(uint i, uint j) const
+const Fleet::PortPath & Fleet::portpath(uint32_t i, uint32_t j) const
 {
 	assert(i < j);
 
 	return m_portpaths[((j - 1) * j) / 2 + i];
 }
 
-Fleet::PortPath & Fleet::portpath_bidir(uint i, uint j, bool & reverse)
+Fleet::PortPath & Fleet::portpath_bidir(uint32_t i, uint32_t j, bool & reverse)
 {
 	reverse = false;
 	if (i > j) {
@@ -271,7 +271,7 @@ Fleet::PortPath & Fleet::portpath_bidir(uint i, uint j, bool & reverse)
 	return portpath(i, j);
 }
 
-const Fleet::PortPath & Fleet::portpath_bidir(uint i, uint j, bool & reverse) const
+const Fleet::PortPath & Fleet::portpath_bidir(uint32_t i, uint32_t j, bool & reverse) const
 {
 	reverse = false;
 	if (i > j) {
@@ -288,8 +288,8 @@ const Fleet::PortPath & Fleet::portpath_bidir(uint i, uint j, bool & reverse) co
  */
 bool Fleet::get_path(PortDock & start, PortDock & end, Path & path)
 {
-	uint startidx = std::find(m_ports.begin(), m_ports.end(), &start) - m_ports.begin();
-	uint endidx = std::find(m_ports.begin(), m_ports.end(), &end) - m_ports.begin();
+	uint32_t startidx = std::find(m_ports.begin(), m_ports.end(), &start) - m_ports.begin();
+	uint32_t endidx = std::find(m_ports.begin(), m_ports.end(), &end) - m_ports.begin();
 
 	if (startidx >= m_ports.size() || endidx >= m_ports.size())
 		return false;
@@ -312,9 +312,9 @@ bool Fleet::get_path(PortDock & start, PortDock & end, Path & path)
 
 void Fleet::add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours)
 {
-	uint idx = std::find(m_ports.begin(), m_ports.end(), &pd) - m_ports.begin();
+	uint32_t idx = std::find(m_ports.begin(), m_ports.end(), &pd) - m_ports.begin();
 
-	for (uint otheridx = 0; otheridx < m_ports.size(); ++otheridx) {
+	for (uint32_t otheridx = 0; otheridx < m_ports.size(); ++otheridx) {
 		if (idx == otheridx)
 			continue;
 
@@ -369,7 +369,7 @@ void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 			remove(egbase);
 		} else {
 			Flag & base = m_ports[0]->base_flag();
-			for (uint i = 1; i < m_ports.size(); ++i) {
+			for (uint32_t i = 1; i < m_ports.size(); ++i) {
 				// since two ports can be connected by land, it is possible that
 				// disconnecting a previous port also disconnects later ports
 				if (base.get_economy() == m_ports[i]->base_flag().get_economy())
@@ -381,7 +381,7 @@ void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 
 struct StepEvalFindPorts {
 	struct Target {
-		uint idx;
+		uint32_t idx;
 		Coords pos;
 	};
 	std::vector<Target> targets;
@@ -410,12 +410,12 @@ struct StepEvalFindPorts {
  * Note that this is done lazily, i.e. the first time a path is actually requested,
  * because path finding is flaky during map loading.
  */
-void Fleet::connect_port(Editor_Game_Base & egbase, uint idx)
+void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 {
 	Map & map = egbase.map();
 	StepEvalFindPorts se;
 
-	for (uint i = 0; i < m_ports.size(); ++i) {
+	for (uint32_t i = 0; i < m_ports.size(); ++i) {
 		if (i == idx)
 			continue;
 
@@ -455,7 +455,7 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint idx)
 				continue;
 			}
 
-			uint otheridx = std::find(m_ports.begin(), m_ports.end(), pd) - m_ports.begin();
+			uint32_t otheridx = std::find(m_ports.begin(), m_ports.end(), pd) - m_ports.begin();
 			if (idx == otheridx)
 				continue;
 
@@ -504,11 +504,11 @@ void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
 {
 	std::vector<PortDock *>::iterator it = std::find(m_ports.begin(), m_ports.end(), port);
 	if (it != m_ports.end()) {
-		uint gap = it - m_ports.begin();
-		for (uint i = 0; i < gap; ++i) {
+		uint32_t gap = it - m_ports.begin();
+		for (uint32_t i = 0; i < gap; ++i) {
 			portpath(i, gap) = portpath(i, m_ports.size() - 1);
 		}
-		for (uint i = gap + 1; i < m_ports.size() - 1; ++i) {
+		for (uint32_t i = gap + 1; i < m_ports.size() - 1; ++i) {
 			portpath(gap, i) = portpath(i, m_ports.size() - 1);
 			if (portpath(gap, i).path)
 				portpath(gap, i).path->reverse();
@@ -594,7 +594,7 @@ void Fleet::act(Game & game, uint32_t data)
 	if (m_port_roundrobin >= m_ports.size())
 		m_port_roundrobin = 0;
 
-	uint rr = m_port_roundrobin;
+	uint32_t rr = m_port_roundrobin;
 	do {
 		PortDock & pd = *m_ports[rr];
 

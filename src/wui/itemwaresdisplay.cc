@@ -25,13 +25,13 @@
 
 namespace {
 
-static const uint IWD_HBorder = 10;
-static const uint IWD_VBorder = 10;
-static const uint IWD_DefaultItemsPerRow = 10;
-static const uint IWD_ItemWidth = 12;
-static const uint IWD_ItemHeight = 24;
-static const uint IWD_WorkerBaseline = -2; ///< Offset of anim center from bottom border of item rect
-static const uint IWD_WareBaseLine = -6;
+static const uint32_t IWD_HBorder = 10;
+static const uint32_t IWD_VBorder = 10;
+static const uint32_t IWD_DefaultItemsPerRow = 10;
+static const uint32_t IWD_ItemWidth = 12;
+static const uint32_t IWD_ItemHeight = 24;
+static const uint32_t IWD_WorkerBaseline = -2; ///< Offset of anim center from bottom border of item rect
+static const uint32_t IWD_WareBaseLine = -6;
 
 } // anonymous namespace
 
@@ -64,7 +64,7 @@ void ItemWaresDisplay::clear()
  * This does not actually affect the number of items that can be added to the internal list,
  * but it does affect the desired size for this panel.
  */
-void ItemWaresDisplay::set_capacity(uint cap)
+void ItemWaresDisplay::set_capacity(uint32_t cap)
 {
 	if (cap != m_capacity) {
 		m_capacity = cap;
@@ -75,7 +75,7 @@ void ItemWaresDisplay::set_capacity(uint cap)
 /**
  * Set the items shown per row of the panel.
  */
-void ItemWaresDisplay::set_itemsperrow(uint nr)
+void ItemWaresDisplay::set_itemsperrow(uint32_t nr)
 {
 	if (nr != m_itemsperrow) {
 		m_itemsperrow = nr;
@@ -85,8 +85,8 @@ void ItemWaresDisplay::set_itemsperrow(uint nr)
 
 void ItemWaresDisplay::recalc_desired_size()
 {
-	uint nrrows = (m_capacity + m_itemsperrow - 1) / m_itemsperrow;
-	uint rowitems = m_capacity >= m_itemsperrow ? m_itemsperrow : m_capacity;
+	uint32_t nrrows = (m_capacity + m_itemsperrow - 1) / m_itemsperrow;
+	uint32_t rowitems = m_capacity >= m_itemsperrow ? m_itemsperrow : m_capacity;
 
 	set_desired_size
 		(2 * IWD_HBorder + rowitems * IWD_ItemWidth,
@@ -111,13 +111,13 @@ void ItemWaresDisplay::draw(RenderTarget & dst)
 
 	dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
-	for (uint idx = 0; idx < m_items.size(); ++idx) {
+	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
 		const Item & it = m_items[idx];
-		uint row = idx / m_itemsperrow;
-		uint col = idx % m_itemsperrow;
+		uint32_t row = idx / m_itemsperrow;
+		uint32_t col = idx % m_itemsperrow;
 
-		uint x = IWD_HBorder + (2 * col + 1) * IWD_ItemWidth / 2;
-		uint y = IWD_VBorder + (row + 1) * IWD_ItemHeight;
+		uint32_t x = IWD_HBorder + (2 * col + 1) * IWD_ItemWidth / 2;
+		uint32_t y = IWD_VBorder + (row + 1) * IWD_ItemHeight;
 
 		uint32_t animation = 0;
 		if (it.worker) {

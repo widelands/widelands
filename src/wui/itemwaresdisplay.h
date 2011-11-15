@@ -35,11 +35,11 @@ struct ItemWaresDisplay : UI::Panel {
 
 	const Widelands::Player & player() const {return m_player;}
 
-	uint capacity() const {return m_capacity;}
-	void set_capacity(uint cap);
+	uint32_t capacity() const {return m_capacity;}
+	void set_capacity(uint32_t cap);
 
-	uint itemsperrow() const {return m_itemsperrow;}
-	void set_itemsperrow(uint nr);
+	uint32_t itemsperrow() const {return m_itemsperrow;}
+	void set_itemsperrow(uint32_t nr);
 
 	void clear();
 	void add(bool worker, Widelands::Ware_Index index);
@@ -55,8 +55,8 @@ private:
 	void recalc_desired_size();
 
 	const Widelands::Player & m_player;
-	uint m_capacity;
-	uint m_itemsperrow;
+	uint32_t m_capacity;
+	uint32_t m_itemsperrow;
 	std::vector<Item> m_items;
 };
 

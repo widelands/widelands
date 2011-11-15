@@ -215,7 +215,7 @@ void Ship::ship_update(Game & game, Bob::State & state)
 				Coords closest_target(Coords::Null());
 
 				Coords cur(path.get_start());
-				for (uint idx = 0; idx <= path.get_nsteps(); ++idx) {
+				for (uint32_t idx = 0; idx <= path.get_nsteps(); ++idx) {
 					uint32_t dist = map.calc_distance(get_position(), cur);
 
 					if (dist == 0) {
@@ -371,8 +371,8 @@ void Ship::add_item(Game & game, const ShippingItem & item)
 
 void Ship::withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items)
 {
-	uint dst = 0;
-	for (uint src = 0; src < m_items.size(); ++src) {
+	uint32_t dst = 0;
+	for (uint32_t src = 0; src < m_items.size(); ++src) {
 		PortDock * destination = m_items[src].get_destination(game);
 		if (!destination || destination == &pd) {
 			items.push_back(m_items[src]);
@@ -481,7 +481,7 @@ void Ship::Loader::load_pointers()
 		ship.m_destination = &mol().get<PortDock>(m_destination);
 
 	ship.m_items.resize(m_items.size());
-	for (uint i = 0; i < m_items.size(); ++i) {
+	for (uint32_t i = 0; i < m_items.size(); ++i) {
 		ship.m_items[i] = m_items[i].get(mol());
 	}
 }

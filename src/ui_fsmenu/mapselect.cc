@@ -160,7 +160,8 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_table.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
 	m_table.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
 
-	UI::Box * vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
+	UI::Box * vbox = new UI::Box
+		(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
 	m_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
 	m_show_all_maps->set_state(true);
@@ -543,7 +544,7 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft, 100);
 	box->add(ta, UI::Box::AlignLeft);
 	box->add_space(25);
-	
+
 	m_tags_checkboxes.push_back(cb);
 
 	return cb;
@@ -555,7 +556,7 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 void Fullscreen_Menu_MapSelect::_tagbox_changed(int32_t id, bool to) {
 	if (id == 0) { // Show all maps checbox
 		if (to) {
-			container_iterate(std::vector<UI::Checkbox*>, m_tags_checkboxes, it)
+			container_iterate(std::vector<UI::Checkbox *>, m_tags_checkboxes, it)
 				(*it)->set_state(false);
 		}
 	} else { // Any tag

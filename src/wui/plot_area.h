@@ -79,7 +79,7 @@ struct WUIPlot_Area : public UI::Panel {
 			return m_time;
 	};
 	void set_sample_rate(uint32_t id); // in milliseconds
-	
+
 	int32_t get_game_time_id();
 
 	void register_plot_data

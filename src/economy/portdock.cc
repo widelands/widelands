@@ -291,7 +291,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 	}
 
 	if (ship.get_nritems() < ship.get_capacity() && !m_waiting.empty()) {
-		uint nrload = std::min<uint>(m_waiting.size(), ship.get_capacity() - ship.get_nritems());
+		uint32_t nrload = std::min<uint32_t>(m_waiting.size(), ship.get_capacity() - ship.get_nritems());
 
 		while (nrload--) {
 			ship.add_item(game, m_waiting.back());
@@ -325,9 +325,9 @@ void PortDock::set_need_ship(Game & game, bool need)
  * that are waiting at the dock. Otherwise, return the number of wares of the given
  * index.
  */
-uint PortDock::count_waiting(bool typeworker, Ware_Index index)
+uint32_t PortDock::count_waiting(bool typeworker, Ware_Index index)
 {
-	uint count = 0;
+	uint32_t count = 0;
 
 	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
 		WareInstance * ware;
@@ -405,7 +405,7 @@ void PortDock::Loader::load_pointers()
 	pd.m_warehouse = &mol().get<Warehouse>(m_warehouse);
 
 	pd.m_waiting.resize(m_waiting.size());
-	for (uint i = 0; i < m_waiting.size(); ++i) {
+	for (uint32_t i = 0; i < m_waiting.size(); ++i) {
 		pd.m_waiting[i] = m_waiting[i].get(mol());
 	}
 }
