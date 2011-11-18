@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -993,7 +993,7 @@ static bool accept_warehouse_if_policy
 	(Warehouse & wh, WareWorker type,
 	 Ware_Index ware, Warehouse::StockPolicy policy)
 {
-	return wh.get_stock_policy(type == wwWORKER, ware) == policy;
+	return wh.get_stock_policy(type, ware) == policy;
 }
 
 /**
@@ -1021,7 +1021,7 @@ void Economy::_handle_active_supplies(Game & game)
 		bool havenormal = false;
 		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
 			Warehouse * wh = m_warehouses[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(type == wwWORKER, ware);
+			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
 			if (policy == Warehouse::SP_Prefer) {
 				haveprefer = true;
 				break;
