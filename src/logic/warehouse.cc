@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1289,12 +1289,12 @@ Warehouse::StockPolicy Warehouse::get_worker_policy(Ware_Index ware) const
 }
 
 Warehouse::StockPolicy Warehouse::get_stock_policy
-	(bool isworker, Ware_Index ware) const
+	(WareWorker waretype, Ware_Index wareindex) const
 {
-	if (isworker)
-		return get_worker_policy(ware);
+	if (waretype == wwWORKER)
+		return get_worker_policy(wareindex);
 	else
-		return get_ware_policy(ware);
+		return get_ware_policy(wareindex);
 }
 
 
