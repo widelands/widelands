@@ -719,9 +719,6 @@ Supply * Economy::_find_best_supply
 }
 
 struct RequestSupplyPair {
-	bool is_item;
-	bool is_worker;
-	Ware_Index ware;
 	TrackPtr<Request> request;
 	TrackPtr<Supply>  supply;
 	int32_t priority;
@@ -803,18 +800,6 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 
 		// Otherwise, consider this request/supply pair for queueing
 		RequestSupplyPair rsp;
-
-		rsp.is_item = false;
-		rsp.is_worker = false;
-
-		switch (req.get_type()) {
-		case wwWARE:    rsp.is_item    = true; break;
-		case wwWORKER:  rsp.is_worker  = true; break;
-		default:
-			assert(false);
-		}
-
-		rsp.ware = req.get_index();
 		rsp.request  = &req;
 		rsp.supply = supp;
 		rsp.priority = priority;
