@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-04 18:32+0000\n"
+"PO-Revision-Date: 2011-11-17 18:08+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:08+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-11-18 04:44+0000\n"
+"X-Generator: Launchpad (build 14299)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -38,7 +38,7 @@ msgstr "02 - Obóz dla wygnańców"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr "03 - To jest nasz kraj"
+msgstr "03 - Ten kraj jest nasz"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -48,10 +48,10 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
-"Parę mil od Brzegu Gerion leży mała, bezimienna wyspa. Aż do teraz, nie "
-"miałeś powodów aby tam wypłynąć, ale wczroaj, wielka kula ognia spadła z "
-"nieba na środek tej wyspy. Jest to znak od Bogów? Wieżysz, że tak i liczysz, "
-"że twoje plemię znajdzie na tej wyspie skarby, przed innymi rodami."
+"Parę mil od Brzegu Gerion leży mała, bezimienna wyspa. Aż do teraz nie "
+"miałeś powodów aby tam wypłynąć, lecz wczoraj wielka kula ognia spadła z "
+"nieba na środek tej wyspy. Czy to znak od Bogów? Wierzysz, że tak i liczysz, "
+"że twoje plemię znajdzie na tej wyspie skarby, nim inne ruszą w twoje ślady."
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
