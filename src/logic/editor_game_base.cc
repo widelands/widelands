@@ -750,7 +750,6 @@ void Editor_Game_Base::do_conquer_area
 							highest_military_influence = value;
 							best_player = p;
 						} else if (value == highest_military_influence) {
-							Coords const c = map().get_fcoords(map()[index]);
 							best_player = neutral_when_competing_influence ?
 								0 : player_area.player_number;
 						}

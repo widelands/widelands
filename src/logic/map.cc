@@ -1142,9 +1142,7 @@ void Map::recalc_nodecaps_pass1(FCoords const f)
 {
 	uint8_t caps = CAPS_NONE;
 
-
 	// 1a) Get all the neighbours to make life easier
-	const FCoords  r =  r_n(f);
 	const FCoords tr = tr_n(f);
 	const FCoords tl = tl_n(f);
 	const FCoords  l =  l_n(f);
