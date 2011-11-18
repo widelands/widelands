@@ -321,11 +321,9 @@ void PortDock::set_need_ship(Game & game, bool need)
 }
 
 /**
- * If @p typeworker is true, return the number of workers with the given @p index
- * that are waiting at the dock. Otherwise, return the number of wares of the given
- * index.
+ * Return the number of wares or workers of the given type that are waiting at the dock.
  */
-uint32_t PortDock::count_waiting(bool typeworker, Ware_Index index)
+uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 {
 	uint32_t count = 0;
 
@@ -334,11 +332,11 @@ uint32_t PortDock::count_waiting(bool typeworker, Ware_Index index)
 		Worker * worker;
 		it.current->get(owner().egbase(), ware, worker);
 
-		if (typeworker) {
-			if (worker && worker->worker_index() == index)
+		if (waretype == wwWORKER) {
+			if (worker && worker->worker_index() == wareindex)
 				count++;
 		} else {
-			if (ware && ware->descr_index() == index)
+			if (ware && ware->descr_index() == wareindex)
 				count++;
 		}
 	}

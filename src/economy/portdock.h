@@ -21,6 +21,7 @@
 #define ECONOMY_PORTDOCK_H
 
 #include "logic/immovable.h"
+#include "logic/wareworker.h"
 #include "shippingitem.h"
 
 namespace Widelands {
@@ -96,7 +97,7 @@ struct PortDock : PlayerImmovable {
 
 	virtual void log_general_info(Editor_Game_Base const &);
 
-	uint32_t count_waiting(bool worker, Ware_Index index);
+	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
 
 private:
 	friend struct Fleet;
