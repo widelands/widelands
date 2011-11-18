@@ -178,7 +178,7 @@ bool WarehouseSupply::has_storage() const throw ()
 	return true;
 }
 
-void WarehouseSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
+void WarehouseSupply::get_ware_type(WareWorker & type, Ware_Index & ware) const
 {
 	throw wexception
 		("WarehouseSupply::get_ware_type: calling this is nonsensical");
