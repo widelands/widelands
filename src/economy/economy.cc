@@ -990,10 +990,10 @@ void Economy::_create_requested_workers(Game & game)
  * Helper function for \ref _handle_active_supplies
  */
 static bool accept_warehouse_if_policy
-	(Warehouse & wh, bool isworker,
+	(Warehouse & wh, WareWorker type,
 	 Ware_Index ware, Warehouse::StockPolicy policy)
 {
-	return wh.get_stock_policy(isworker, ware) == policy;
+	return wh.get_stock_policy(type == wwWORKER, ware) == policy;
 }
 
 /**
@@ -1013,15 +1013,15 @@ void Economy::_handle_active_supplies(Game & game)
 		if (supply.has_storage())
 			continue;
 
-		bool isworker;
+		WareWorker type;
 		Ware_Index ware;
-		supply.get_ware_type(isworker, ware);
+		supply.get_ware_type(type, ware);
 
 		bool haveprefer = false;
 		bool havenormal = false;
 		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
 			Warehouse * wh = m_warehouses[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(isworker, ware);
+			Warehouse::StockPolicy policy = wh->get_stock_policy(type == wwWORKER, ware);
 			if (policy == Warehouse::SP_Prefer) {
 				haveprefer = true;
 				break;
@@ -1029,18 +1029,18 @@ void Economy::_handle_active_supplies(Game & game)
 			if (policy == Warehouse::SP_Normal)
 				havenormal = true;
 		}
-		if (!havenormal && !haveprefer && !isworker)
+		if (!havenormal && !haveprefer && type == wwWARE)
 			continue;
 
 		Warehouse * wh = find_closest_warehouse
-			(supply.get_position(game)->base_flag(), isworker ? wwWORKER : wwWARE, 0, 0,
+			(supply.get_position(game)->base_flag(), type, 0, 0,
 			 (!haveprefer && !havenormal)
 			 ?
 			 WarehouseAcceptFn()
 			 :
 			 boost::bind
 				(&accept_warehouse_if_policy,
-				 _1, isworker, ware,
+				 _1, type, ware,
 				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
 
 		if (!wh) {
