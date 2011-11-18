@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -274,13 +274,24 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
  * One of the buttons to increase or decrease the amount of wares
  * stored here has been clicked
  */
-void WaresQueueDisplay::decrease_max_fill_clicked() {
-	int32_t cur = m_queue->get_max_fill();
+void WaresQueueDisplay::decrease_max_fill_clicked()
+{
+	uint32_t cur = m_queue->get_max_fill();
+
+	if (cur <= 0)
+		return;
+
 	m_igb.game().send_player_set_ware_max_fill
 			(m_building, m_ware_index, cur - 1);
 }
-void WaresQueueDisplay::increase_max_fill_clicked() {
-	int32_t cur = m_queue->get_max_fill();
+
+void WaresQueueDisplay::increase_max_fill_clicked()
+{
+	uint32_t cur = m_queue->get_max_fill();
+
+	if (cur >= m_queue->get_max_size())
+		return;
+
 	m_igb.game().send_player_set_ware_max_fill
 			(m_building, m_ware_index, cur + 1);
 }
