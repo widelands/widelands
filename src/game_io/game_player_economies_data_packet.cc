@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,6 @@ void Game_Player_Economies_Data_Packet::Read
 	try {
 		Map   const &       map        = game.map();
 		Map_Index     const max_index  = map.max_index();
-		Extent        const extent     = map.extent();
 		Player_Number const nr_players = map.get_nrplayers();
 
 		FileRead fr;

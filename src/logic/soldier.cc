@@ -478,7 +478,6 @@ Point Soldier::calc_drawpos
 		return Bob::calc_drawpos(game, pos);
 	}
 
-	const FCoords end = get_position();
 	bool moving = false;
 	Point spos = pos, epos = pos;
 
