@@ -105,14 +105,8 @@ private:
 	 * The low bits are the player number of the owner.
 	 */
 	typedef Player_Number Owner_Info_and_Selections_Type;
-	static const uint8_t Selection_B_Bit =
+	static const uint8_t Border_Bit =
 		std::numeric_limits<Owner_Info_and_Selections_Type>::digits - 1;
-	static const uint8_t Selection_A_Bit = Selection_B_Bit - 1;
-	static const uint8_t Border_Bit      = Selection_A_Bit - 1;
-	static const Owner_Info_and_Selections_Type Selection_B_Bitmask =
-		1 << Selection_B_Bit;
-	static const Owner_Info_and_Selections_Type Selection_A_Bitmask =
-		1 << Selection_A_Bit;
 	static const Owner_Info_and_Selections_Type Border_Bitmask = 1 << Border_Bit;
 	static const Owner_Info_and_Selections_Type Player_Number_Bitmask =
 		Border_Bitmask - 1;
