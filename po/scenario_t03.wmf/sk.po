@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-21 23:07+0000\n"
+"PO-Revision-Date: 2011-11-18 21:17+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-23 05:09+0000\n"
-"X-Generator: Launchpad (build 14170)\n"
+"X-Launchpad-Export-Date: 2011-11-19 04:43+0000\n"
+"X-Generator: Launchpad (build 14299)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -169,6 +169,12 @@ msgid ""
 "newborn lamb in the honour of my father whose eyes are set upon me "
 "today.<br>So be it!\" "
 msgstr ""
+" \"Nech je tak, generáli zostavujú moje jednotky a sám Boldreth povedie prvý "
+"útok. Budem jazdiť po jeho boku a oslobodíme Al'thunran od vojny a do "
+"hlavného mesta opäť prinesieme mier. Keď mladé slnko vyjde ponad stromy v "
+"zajtrajšie ráno, nariadim útok. Pri súmraku oslávim svoje víťazstvo v "
+"drevených halách vojvodcu a obetujem novorodené jahňa na počesť svojho otca, "
+"ktorého oči na mňa dnes hľadia.<br>Nech je tak!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid ""
@@ -444,6 +450,9 @@ msgid ""
 " of your oxen to help transport wares quicker. Remember to build a cattle\n"
 " farm!"
 msgstr ""
+"Keďže sa predlžujú vaše cesty a narastá ekonomika, mali by ste využiť "
+"svojich\n"
+" volov na rýchlejšiu prepravu tovarov. Nezabudnite postaviť kravín!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
@@ -563,6 +572,13 @@ msgid ""
 "neither have a good weapon nor are they well trained. We should build up "
 "trainingssites to prepare them for their future tasks.\" "
 msgstr ""
+"Naši geológovia našli oveľa viac ložísk železnej rudy, uhlia a dokonca aj "
+"zlata. Keď naberú baníci skúsenosti, mali by sme doterajšie bane vylepšiť. "
+"Mali by sme postaviť viac baní, väčšiu potravinovú infraštruktúru, ktorá by "
+"zásobovala našich ľudí s jedlom, a ďalšiu výrobnú ekonomiku. Ale to stále "
+"nie je všetko - väčšina našich vojakov je dosť mladá a nemá ani vhodnú "
+"zbraň, ani dobrý výcvik. Mali by sme postaviť výcvikové stavby, aby sme ich "
+"pripravili na budúce úlohy.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
@@ -610,7 +626,7 @@ msgstr "Stopy"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
-msgstr ""
+msgstr "Zima sa blíži"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:352
 msgid ""
