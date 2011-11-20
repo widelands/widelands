@@ -570,7 +570,7 @@ void Economy::_merge(Economy & e)
 		 not m_optionswindow_registry.window)
 	{
 		m_optionswindow_registry.x = e.m_optionswindow_registry.x;
-		m_optionswindow_registry.x = e.m_optionswindow_registry.x;
+		m_optionswindow_registry.y = e.m_optionswindow_registry.y;
 		show_options_window();
 	}
 
