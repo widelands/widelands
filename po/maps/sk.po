@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-30 15:24+0000\n"
+"PO-Revision-Date: 2011-11-20 03:01+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-31 05:17+0000\n"
-"X-Generator: Launchpad (build 14197)\n"
+"X-Launchpad-Export-Date: 2011-11-20 05:14+0000\n"
+"X-Generator: Launchpad (build 14299)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -84,6 +84,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"Špeciálnym turnajom v atlantickej kultúre je tzv. \"Skákanie po ostrovoch\", "
+"kde sa dve alebo viac skupín pokúša čo najrýchlejšie dostať na centrálny "
+"ostrov a ako prvé postaviť hrad na vrchole centrálnej hory."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -256,7 +259,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Skákanie po ostrovoch"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
