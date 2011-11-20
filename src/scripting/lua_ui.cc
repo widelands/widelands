@@ -134,7 +134,7 @@ int L_Panel::get_buttons(lua_State * L) {
 /* RST
 	.. attribute:: tabs
 
-		(RO) An :class:`array` of all visible buttons inside this Panel.
+		(RO) An :class:`array` of all visible tabs inside this Panel.
 */
 static void _put_all_tabs_into_table
 	(lua_State * L, UI::Panel * g)
