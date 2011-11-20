@@ -58,6 +58,7 @@ struct AttackController;
  *                      -- Nicolai
  */
 struct Player :
+	boost::noncopyable,
 	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
 	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
@@ -140,7 +141,7 @@ struct Player :
 	};
 
 	/// Per-player field information.
-	struct Field {
+	struct Field : boost::noncopyable {
 		Field() :
 			military_influence(0),
 			vision            (0)
@@ -337,10 +338,6 @@ struct Player :
 		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
 		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
 		//  <end>                           0x100         0x160
-
-	private:
-		Field & operator= (Field const &);
-		explicit Field    (Field const &);
 	};
 
 	const Field * fields() const throw () {return m_fields;}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,8 @@
 #ifndef IMMOVABLE_PROGRAM_H
 #define IMMOVABLE_PROGRAM_H
 
+#include <boost/noncopyable.hpp>
+
 /*
  * Implementation is in immovable.cc
  */
@@ -38,11 +40,9 @@ namespace Widelands {
 struct ImmovableProgram {
 
 	/// Can be executed on an Immovable.
-	struct Action {
+	struct Action : boost::noncopyable {
 		virtual ~Action();
 		virtual void execute(Game &, Immovable &) const = 0;
-	private:
-		Action & operator= (Action const &);
 	};
 
 	/// Runs an animation.

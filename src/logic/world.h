@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ struct World_Descr_Header {
 	char descr [WORLD_DESCR_LEN];
 };
 
-struct Resource_Descr {
+struct Resource_Descr : boost::noncopyable {
 	typedef Resource_Index Index;
 	Resource_Descr() {}
 	~Resource_Descr() {}
@@ -73,12 +73,9 @@ private:
 	std::string             m_name;
 	std::string             m_descname;
 	std::vector<Editor_Pic> m_editor_pics;
-
-	Resource_Descr & operator= (Resource_Descr const &);
-	explicit Resource_Descr    (Resource_Descr const &);
 };
 
-struct Terrain_Descr {
+struct Terrain_Descr : boost::noncopyable {
 	friend struct World;
 
 	typedef Terrain_Index Index;
@@ -127,9 +124,6 @@ private:
 	int8_t            m_default_resources;
 	int32_t           m_default_amount;
 	uint32_t          m_texture; //  renderer's texture
-
-	Terrain_Descr & operator= (Terrain_Descr const &);
-	explicit Terrain_Descr    (Terrain_Descr const &);
 };
 
 struct MapGenInfo;
@@ -293,7 +287,7 @@ private:
   * This class provides information on a worldtype usable to create a map;
   * it can read a world file.
   */
-struct World {
+struct World : boost::noncopyable {
 	friend struct Game;
 
 	enum {
@@ -373,9 +367,6 @@ private:
 	void parse_terrains ();
 	void parse_bobs     (std::string & directory, Profile & root_conf);
 	void parse_mapgen   ();
-
-	World & operator= (World const &);
-	explicit World    (World const &);
 };
 
 }

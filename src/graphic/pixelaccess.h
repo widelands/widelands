@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+#include <boost/noncopyable.hpp>
+
 struct SDL_PixelFormat;
 
 /**
@@ -30,7 +32,7 @@ struct SDL_PixelFormat;
  * \note Direct pixel access should be used only carefully, since it can be
  * extremely slow.
  */
-struct IPixelAccess {
+struct IPixelAccess : boost::noncopyable {
 	enum LockMode {
 		/**
 		 * Normal mode preserves pre-existing pixel data so that it can
@@ -102,9 +104,6 @@ struct IPixelAccess {
 	 * \warning May only be called inside lock/unlock pairs.
 	 */
 	virtual uint8_t * get_pixels() const = 0;
-
-private:
-	IPixelAccess & operator= (const IPixelAccess &);
 };
 
 #endif // PIXELSURFACE_H

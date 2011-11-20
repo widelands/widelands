@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 
 #include "machdep.h"
 
+#include <boost/noncopyable.hpp>
+
 #include <cassert>
 #include <limits>
 #include <string>
@@ -41,7 +43,7 @@
  *
  * Convenience functions are provided for many data types.
  */
-struct StreamWrite {
+struct StreamWrite : boost::noncopyable {
 	explicit StreamWrite() {}
 	virtual ~StreamWrite();
 
@@ -90,10 +92,6 @@ struct StreamWrite {
 	//  Write strings without null terminator.
 	void Text   (char        const * const x) {Data(x,         strlen(x));}
 	void Text   (std::string const &       x) {Data(x.c_str(), x.size());}
-
-private:
-	StreamWrite & operator= (StreamWrite const &);
-	explicit StreamWrite    (StreamWrite const &);
 };
 
 #endif

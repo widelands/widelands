@@ -117,7 +117,8 @@ struct FindBobAlwaysTrue : public FindBob {
  * Warning: width and height must be even
  */
 struct Map :
-	public ITransportCostCalculator,
+	boost::noncopyable,
+	ITransportCostCalculator,
 	NoteSender<NoteFieldTransformed>
 {
 	friend struct Editor_Game_Base;
@@ -412,10 +413,6 @@ private:
 		void find_reachable(Area<FCoords>, CheckStep const &, functorT &);
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
-
-	Map & operator= (Map const &);
-	explicit Map    (Map const &);
-
 };
 
 /*

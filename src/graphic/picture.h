@@ -23,6 +23,8 @@
 #include <stdint.h>
 #include <string>
 
+#include <boost/noncopyable.hpp>
+
 #include "picture_id.h"
 
 struct IPixelAccess;
@@ -32,7 +34,7 @@ struct Surface;
  * Interface to a bitmap that can act as the source of a rendering
  * operation.
  */
-struct IPicture {
+struct IPicture : boost::noncopyable {
 	IPicture() {}
 	virtual ~IPicture() {}
 
@@ -42,11 +44,6 @@ struct IPicture {
 	virtual uint32_t get_h() = 0;
 
 	virtual IPixelAccess & pixelaccess() = 0;
-
-private:
-	// forbid copying
-	IPicture(const IPicture &);
-	IPicture & operator= (const IPicture &);
 
 public:
 	static const PictureID & null();

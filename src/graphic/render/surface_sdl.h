@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,9 +95,6 @@ struct SurfaceSDL : IOffscreenSurface {
 	virtual IPixelAccess & pixelaccess() {return *this;}
 
 private:
-	SurfaceSDL & operator= (SurfaceSDL const &);
-	explicit SurfaceSDL    (SurfaceSDL const &);
-
 	SDL_Surface * m_surface;
 	int32_t m_offsx;
 	int32_t m_offsy;
