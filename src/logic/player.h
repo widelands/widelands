@@ -43,19 +43,14 @@ struct Tribe_Descr;
 struct Road;
 struct AttackController;
 
-/** class Player
+/**
+ * Manage in-game aspects of players, such as tribe, team, fog-of-war, statistics,
+ * messages (notification when a resource has been found etc.) and so on.
  *
- * What we really need is a Player class that stores e.g. score
- * and diplomacy of a player.
- *
- * These Player classes should be controlled via the cmd queue.
- * Commands are inserted by:
- *  - local player
- *  - network packets
- *  - AI code
- * Player commands should be controlled by the \ref GameController
- * in the long run.
- *                      -- Nicolai
+ * Also provides functions for directly building player immovables; however,
+ * from the UI and AI codes, those should only ever be issued indirectly via
+ * \ref GameController and friends, so that replays and network games function
+ * properly.
  */
 struct Player :
 	boost::noncopyable,
