@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,10 +67,6 @@ struct RoutingNode {
 	};
 	typedef cookie_priority_queue<RoutingNode, LessCost> Queue;
 
-// The variables are only protected so that Test classes can use them
-protected:
-	friend struct Economy;
-	friend struct Router;
 	uint32_t      mpf_cycle;
 	Queue::cookie mpf_cookie;
 	int32_t       mpf_realcost; ///< real cost of getting to this flag
