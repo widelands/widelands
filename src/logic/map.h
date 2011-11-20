@@ -117,7 +117,6 @@ struct FindBobAlwaysTrue : public FindBob {
  * Warning: width and height must be even
  */
 struct Map :
-	boost::noncopyable,
 	ITransportCostCalculator,
 	NoteSender<NoteFieldTransformed>
 {

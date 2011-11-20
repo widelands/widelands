@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,28 +17,32 @@
  *
  */
 
-#ifndef ITRANSPORT_COST_CALCULATOR_H
-#define ITRANSPORT_COST_CALCULATOR_H
+#include "routeastar.h"
 
-#include <boost/noncopyable.hpp>
-
-#include "logic/widelands_geometry.h"
+#include "router.h"
+#include "iroute.h"
 
 namespace Widelands {
 
-/**
- * This class provides the interface to get cost and cost estimations
- * for certain transport properties (node->node).
- *
- * At the time of this writing, Map implements all of this functionality
- * but most economy code doesn't need all of maps functionality
- */
-struct ITransportCostCalculator : boost::noncopyable {
-	virtual ~ITransportCostCalculator() {}
-
-	virtual int32_t calc_cost_estimate(Coords, Coords) const = 0;
-};
-
+BaseRouteAStar::BaseRouteAStar(Router & router, WareWorker type) :
+	m_type(type),
+	mpf_cycle(router.assign_cycle())
+{
 }
 
-#endif
+/**
+ * Recover a shortest route from one of the initial nodes
+ * set up by @ref RouteAStar::push to the destination node @p to.
+ * The route is stored in @p route.
+ */
+void BaseRouteAStar::routeto(RoutingNode & to, IRoute & route)
+{
+	assert(!to.cookie().is_active());
+	assert(to.mpf_cycle == mpf_cycle);
+
+	route.init(to.mpf_realcost);
+	for (RoutingNode * node = &to; node; node = node->mpf_backlink)
+		route.insert_as_first(node);
+}
+
+} // namespace Widelands

@@ -389,7 +389,7 @@ struct Object_Ptr {
 	// dammit... without a Editor_Game_Base object, we can't implement a
 	// Map_Object* operator (would be _really_ nice)
 	Map_Object * get(Editor_Game_Base const &);
-	Map_Object const * get(Editor_Game_Base const & egbase) const;
+	Map_Object * get(Editor_Game_Base const & egbase) const;
 
 	bool operator<  (const Object_Ptr & other) const throw () {
 		return m_serial < other.m_serial;
@@ -418,17 +418,11 @@ struct OPtr {
 
 	bool is_set() const {return m.is_set();}
 
-	T       * get(Editor_Game_Base const &       egbase)       {
+	T * get(Editor_Game_Base const &       egbase) {
 		return static_cast<T *>(m.get(egbase));
 	}
-	T       * get(Editor_Game_Base const * const egbase)       {
-		return get(egbase);
-	}
-	T const * get(Editor_Game_Base const &       egbase) const {
-		return static_cast<T const *>(m.get(egbase));
-	}
-	T const * get(Editor_Game_Base const * const egbase) const {
-		return get(egbase);
+	T * get(Editor_Game_Base const &       egbase) const {
+		return static_cast<T *>(m.get(egbase));
 	}
 
 	bool operator<  (OPtr<T> const & other) const {return m <  other.m;}
