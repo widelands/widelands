@@ -25,6 +25,8 @@
 #include <limits>
 #include <vector>
 
+#include <boost/noncopyable.hpp>
+
 template<typename _Type>
 struct default_cookie_accessor;
 
@@ -34,7 +36,7 @@ struct cookie_priority_queue_base {
 	typedef std::vector<type *> container;
 	typedef typename container::size_type size_type;
 
-	struct cookie {
+	struct cookie : boost::noncopyable {
 		cookie() : pos(bad_pos()) {}
 		~cookie() {}
 
@@ -45,10 +47,6 @@ struct cookie_priority_queue_base {
 		friend struct cookie_priority_queue_base<_Type>;
 
 		size_type pos;
-
-		// No copying!
-		cookie(const cookie & other);
-		cookie & operator= (const cookie & other);
 	};
 
 protected:

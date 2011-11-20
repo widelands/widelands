@@ -20,6 +20,8 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include <boost/noncopyable.hpp>
+
 //TODO: as soon as g_fs is not needed anymore, next include can be changed
 //to ..../filesystem.h
 #include "io/filesystem/layered_filesystem.h"
@@ -223,7 +225,7 @@ private:
  * Returns the next unused section of the given name, or 0 if all sections
  * have been used. name can be 0 to retrieve any remaining sections.
  */
-struct Profile {
+struct Profile : boost::noncopyable {
 	enum {
 		err_ignore = 0,
 		err_log,
@@ -271,8 +273,6 @@ private:
 	typedef std::vector<Section> Section_list;
 	Section_list m_sections;
 	int32_t m_error_level;
-	Profile & operator= (Profile const &);
-	explicit Profile    (Profile const &);
 };
 
 #endif

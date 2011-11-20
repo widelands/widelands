@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,12 +23,14 @@
 #include <cassert>
 #include <map>
 
+#include <boost/noncopyable.hpp>
+
 #include "message.h"
 #include "message_id.h"
 
 namespace Widelands {
 
-struct MessageQueue : private std::map<Message_Id, Message *> {
+struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *> {
 	friend struct Map_Players_Messages_Data_Packet;
 	// Make typedefs public so that this looks like proper
 	// STL container to templated algorithms.
@@ -144,9 +146,6 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	}
 
 private:
-	MessageQueue & operator= (MessageQueue const &);
-	explicit MessageQueue    (MessageQueue const &);
-
 	/// Only for working around bugs in map loading code. If something has
 	/// accidentally been added to the queue during load, it can be worked
 	/// around by clearing the queue before the saved messages are loaded into

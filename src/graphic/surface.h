@@ -26,10 +26,12 @@
 #include "surfaceptr.h"
 #include "wexception.h"
 
+#include <boost/noncopyable.hpp>
+
 /**
  * Interface to a basic surfaces that can be used as destination for drawing.
  */
-struct Surface {
+struct Surface : boost::noncopyable {
 	Surface() {}
 	virtual ~Surface() {}
 
@@ -76,11 +78,6 @@ struct Surface {
 	virtual void fast_blit(PictureID surface) = 0;
 
 	virtual IPixelAccess & pixelaccess() = 0;
-
-private:
-	// surfaces cannot be copied
-	Surface(const Surface &);
-	Surface & operator= (Surface const &);
 };
 
 #endif

@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
@@ -62,7 +61,7 @@ struct PlayerCommand;
 struct ReplayReader;
 struct ReplayWriter;
 
-struct Game : public Editor_Game_Base {
+struct Game : Editor_Game_Base {
 	struct General_Stats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;
@@ -245,11 +244,6 @@ private:
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_string;
-
-private:
-	// no copying
-	Game(const Game &);
-	Game & operator= (const Game &);
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {
