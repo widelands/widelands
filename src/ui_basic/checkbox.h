@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
 
 #ifndef UI_CHECKBOX_H
 #define UI_CHECKBOX_H
+
+#include <boost/signals.hpp>
 
 #include "panel.h"
 #include "m_signal.h"
@@ -42,7 +44,7 @@ struct Statebox : public Panel {
 		 std::string const & tooltip_text = std::string());
 	~Statebox();
 
-	Signal changed;
+	boost::signal<void ()> changed;
 	Signal1<bool> changedto;
 	Signal1<bool> clickedto; // same as changedto but only called when clicked
 	Signal2<int32_t, bool> changedtoid;

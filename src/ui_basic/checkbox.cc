@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,7 +93,7 @@ void Statebox::set_enabled(bool const enabled)
 void Statebox::set_state(bool const on) {
 	if (on xor ((m_flags & Is_Checked) > 1)) {
 		set_flags(Is_Checked, on);
-		changed    .call        ();
+		changed();
 		changedto  .call      (on);
 		changedtoid.call(m_id, on);
 		update();

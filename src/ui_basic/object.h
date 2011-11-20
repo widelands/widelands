@@ -21,6 +21,7 @@
 #define UI_OBJECT_H
 
 #include <boost/noncopyable.hpp>
+#include <boost/signals.hpp>
 
 namespace UI {
 
@@ -28,7 +29,7 @@ namespace UI {
  * Serves as a base class for UI related objects. The only purpose is
  * to provide the base class for signal function pointers.
  */
-struct Object : boost::noncopyable {
+struct Object : boost::noncopyable, boost::signals::trackable {
 	Object() {}
 
 	// Yeah right... force a VMT so that MSVC++ gets the pointers-to-members

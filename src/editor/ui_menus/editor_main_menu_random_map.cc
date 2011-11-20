@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -231,8 +231,8 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	m_island_mode = new UI::Checkbox(this, pos);
 	m_island_mode->set_state(true);
 	m_island_mode->set_id(SWITCH_ISLAND_MODE);
-	m_island_mode->changed.set
-		(this, & Main_Menu_New_Random_Map::nr_edit_box_changed);
+	m_island_mode->changed.connect
+		(boost::bind(&Main_Menu_New_Random_Map::nr_edit_box_changed, this));
 
 	new UI::Textarea(this, posx, posy, _("Island mode:"));
 	posy += height + spacing;
