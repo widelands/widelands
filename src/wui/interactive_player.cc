@@ -167,7 +167,7 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
 
 	set_player_number(plyn);
-	fieldclicked.set(this, &Interactive_Player::node_action);
+	fieldclicked.connect(boost::bind(&Interactive_Player::node_action, this));
 
 	adjust_toolbar_position();
 

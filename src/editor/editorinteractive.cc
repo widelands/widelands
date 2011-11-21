@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,7 +92,7 @@ m_toggle_player_menu
 	set_display_flag(Interactive_Base::dfDebug, true);
 #endif
 
-	fieldclicked.set(this, &Editor_Interactive::map_clicked);
+	fieldclicked.connect(boost::bind(&Editor_Interactive::map_clicked, this));
 }
 
 

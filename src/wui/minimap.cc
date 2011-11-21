@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,8 +93,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	m_ibase.egbase().map().normalize_coords(c);
 
-	ref_cast<MiniMap, UI::Panel>(*get_parent()).warpview.call
-		(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
+	ref_cast<MiniMap, UI::Panel>(*get_parent()).warpview(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
 
 	return true;
 }

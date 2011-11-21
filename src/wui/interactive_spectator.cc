@@ -96,7 +96,7 @@ Interactive_Spectator::Interactive_Spectator
 	adjust_toolbar_position();
 
 	// Setup all screen elements
-	fieldclicked.set(this, &Interactive_Spectator::node_action);
+	fieldclicked.connect(boost::bind(&Interactive_Spectator::node_action, this));
 
 	set_display_flag(dfSpeed, true);
 

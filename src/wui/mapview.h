@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,9 +53,9 @@ struct Map_View : public UI::Panel {
 	 *
 	 * Parameters are x/y position in screen coordinates.
 	 */
-	UI::Signal2<int32_t, int32_t> changeview;
+	boost::signal<void (int32_t, int32_t)> changeview;
 
-	UI::Signal fieldclicked;
+	boost::signal<void ()> fieldclicked;
 
 	void warp_mouse_to_node(Widelands::Coords);
 

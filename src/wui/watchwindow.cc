@@ -245,8 +245,8 @@ WatchWindow::WatchWindow
 	if (_single_window)
 		for (uint8_t i = 0; i < NUM_VIEWS; ++i)
 			view_btns[i] = new View_Button(*this, i);
-	mapview.fieldclicked.set(&parent, &Interactive_GameBase::node_action);
-	mapview.changeview.set(this, &WatchWindow::stop_tracking_by_drag);
+	mapview.fieldclicked.connect(boost::bind(&Interactive_GameBase::node_action, &parent));
+	mapview.changeview.connect(boost::bind(&WatchWindow::stop_tracking_by_drag, this, _1, _2));
 	warp_mainview.connect(boost::bind(&Interactive_Base::move_view_to_point, &parent, _1));
 
 	add_view(coords);
