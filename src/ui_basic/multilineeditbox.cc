@@ -146,7 +146,7 @@ void Multiline_Editbox::set_text(const std::string & text)
 	d->update();
 	d->scroll_cursor_into_view();
 
-	changed.call();
+	changed();
 }
 
 /**
@@ -256,7 +256,7 @@ void Multiline_Editbox::insert(SDL_keysym const code)
 
 	if (d->text.size() + utf8.size() <= d->maxbytes) {
 		d->insert(d->cursor_pos, utf8);
-		changed.call();
+		changed();
 	}
 }
 
@@ -273,14 +273,14 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_DELETE:
 			if (d->cursor_pos < d->text.size()) {
 				d->erase_bytes(d->cursor_pos, d->next_char(d->cursor_pos));
-				changed.call();
+				changed();
 			}
 			break;
 
 		case SDLK_BACKSPACE:
 			if (d->cursor_pos > 0) {
 				d->erase_bytes(d->prev_char(d->cursor_pos), d->cursor_pos);
-				changed.call();
+				changed();
 			}
 			break;
 
@@ -423,7 +423,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			d->insert(d->cursor_pos, "\n");
-			changed.call();
+			changed();
 			break;
 
 		default:

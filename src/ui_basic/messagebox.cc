@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -165,21 +165,21 @@ bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 
 void WLMessageBox::pressedOk()
 {
-	ok.call();
+	ok();
 	if (is_modal())
 		end_modal(0);
 }
 
 void WLMessageBox::pressedYes()
 {
-	yes.call();
+	yes();
 	if (is_modal())
 		end_modal(1);
 }
 
 void WLMessageBox::pressedNo()
 {
-	no.call();
+	no();
 	if (is_modal())
 		end_modal(0);
 }

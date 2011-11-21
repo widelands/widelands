@@ -106,7 +106,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			 posx, posy,
 			 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,
 			 parent.egbase().map().get_description());
-	m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
+	m_descr->changed.connect(boost::bind(&Main_Menu_Map_Options::editbox_changed, this));
 	update();
 }
 
