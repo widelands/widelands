@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -193,8 +193,8 @@ void Slider::draw_cursor
  */
 void Slider::send_value_changed()
 {
-	changed.call();
-	changedto.call(m_value);
+	changed();
+	changedto(m_value);
 }
 
 
@@ -548,6 +548,34 @@ bool VerticalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 ////////////////////////////////////////////////////////////////////////////////
 //                               DISCRETE                                     //
 ////////////////////////////////////////////////////////////////////////////////
+
+DiscreteSlider::DiscreteSlider
+	(Panel * const parent,
+	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 const std::vector<std::string> labels_in,
+	 uint32_t m_value,
+	 const PictureID background_picture_id,
+	 const std::string & tooltip_text,
+	 const uint32_t cursor_size,
+	 const bool enabled)
+	:
+	Panel (parent, x, y, w, h, tooltip_text),
+	slider
+		(this,
+		 // here, we take into account the h_gap introduced by HorizontalSlider
+		 w / (2 * labels_in.size()) - cursor_size / 2, 0,
+		 w - (w / labels_in.size()) + cursor_size,
+		 h - UI::Font::ui_small()->lineskip() - 2,
+		 0, labels_in.size() - 1, m_value,
+		 background_picture_id,
+		 tooltip_text,
+		 cursor_size,
+		 enabled),
+	labels(labels_in)
+{
+	slider.changed.connect(changed);
+	slider.changedto.connect(changedto);
+}
 
 /**
  * \brief Redraw the slide bar. The discrete horizontal bar is painted.

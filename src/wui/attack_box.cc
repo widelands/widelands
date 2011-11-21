@@ -198,7 +198,7 @@ void AttackBox::init() {
 				 "pics/but2.png",
 				 _("Number of soldiers"));
 
-		m_slider_soldiers->changed.set(this, &AttackBox::update_attack);
+		m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));
 
 		sprintf(buf, "%u", max_attackers);
 		m_add_soldiers =
@@ -237,7 +237,7 @@ void AttackBox::init() {
 				 m_pl->get_retreat_percentage(),
 				 "pics/but2.png",
 				 _("Supported damage before retreat"));
-		m_slider_retreat->changed.set(this, &AttackBox::update_attack);
+		m_slider_retreat->changed.connect(boost::bind(&AttackBox::update_attack, this));
 		add_text(linebox, _("Once injured"));
 		m_slider_retreat->set_enabled(m_pl->is_retreat_change_allowed());
 		linebox.set_visible(m_pl->is_retreat_change_allowed());

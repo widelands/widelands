@@ -85,10 +85,10 @@ ingame_sound_volume
 		(boost::bind(&GameOptionsSoundMenu::changed_ingame_music, this, _1));
 	ingame_sound.changedto.connect
 		(boost::bind(&GameOptionsSoundMenu::changed_ingame_sound, this, _1));
-	ingame_music_volume.changedto.set
-		(this, &GameOptionsSoundMenu::music_volume_changed);
-	ingame_sound_volume.changedto.set
-		(this, &GameOptionsSoundMenu::sound_volume_changed);
+	ingame_music_volume.changedto.connect
+		(boost::bind(&GameOptionsSoundMenu::music_volume_changed, this, _1));
+	ingame_sound_volume.changedto.connect
+		(boost::bind(&GameOptionsSoundMenu::sound_volume_changed, this, _1));
 
 	uint32_t boxes_width =
 		STATEBOX_WIDTH + hspacing() +
