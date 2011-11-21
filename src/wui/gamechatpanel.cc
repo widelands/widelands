@@ -81,11 +81,11 @@ void GameChatPanel::keyEnter()
 		m_chat.send(str);
 
 	editbox.setText("");
-	sent.call();
+	sent();
 }
 
 void GameChatPanel::keyEscape()
 {
 	editbox.setText("");
-	aborted.call();
+	aborted();
 }

@@ -42,8 +42,8 @@ m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 
 	m_close_on_send = false;
 
-	m_chat.sent.set(this, &GameChatMenu::acknowledge);
-	m_chat.aborted.set(this, &GameChatMenu::acknowledge);
+	m_chat.sent.connect(boost::bind(&GameChatMenu::acknowledge, this));
+	m_chat.aborted.connect(boost::bind(&GameChatMenu::acknowledge, this));
 
 	enter_chat_message(m_close_on_send);
 }
