@@ -66,14 +66,14 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 		return std::map<Message_Id, Message *>::count(Message_Id(i));
 	}
 
-	/// \Returns a pointer to the message if it exists, otherwise 0.
+	/// \returns a pointer to the message if it exists, otherwise 0.
 	Message const * operator[](Message_Id const id) const {
 		assert_counts();
 		const_iterator const it = find(Message_Id(id));
 		return it != end() ? it->second : 0;
 	}
 
-	/// \Returns the number of messages with the given status.
+	/// \returns the number of messages with the given status.
 	uint32_t nr_messages(Message::Status const status) const {
 		assert_counts();
 		assert(status < 3);
@@ -85,7 +85,7 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 	/// array or struct) with operator new, so that it can be deallocated with
 	/// operator delete.
 	///
-	/// \Returns the id of the added message.
+	/// \returns the id of the added message.
 	///
 	/// \Note The caller must make sure that a command is scheduled to expire
 	/// the message. Player::add_message does this and should be used for adding
@@ -137,7 +137,7 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 
 	Message_Id current_message_id() const {return m_current_message_id;}
 
-	/// \Returns whether all messages with id 1, 2, 3, ..., current_message_id
+	/// \returns whether all messages with id 1, 2, 3, ..., current_message_id
 	/// exist. This should be the case when messages have been loaded from a map
 	/// file/savegame but the simulation has not started to run yet.
 	bool is_continuous() const {

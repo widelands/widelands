@@ -177,7 +177,7 @@ public:
 	std::string info_string(std::string const & format);
 	virtual std::string get_statistics_string();
 
-	/// \Returns the queue for a ware type or \throws _wexception.
+	/// \returns the queue for a ware type or \throws _wexception.
 	virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));
 
 	virtual bool burn_on_destroy();

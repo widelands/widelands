@@ -45,8 +45,8 @@ struct Map_Map_Object_Loader {
 
 	/// Registers the object as a new one.
 	///
-	/// \Returns a reference to the object.
-	/// \Throws _wexception if there is already an object registered with the
+	/// \returns a reference to the object.
+	/// \throws _wexception if there is already an object registered with the
 	/// same serial. (not implemented: In that case, the object is deleted.)
 	///
 	/// \todo Currently the object must be passed as a parameter to this
