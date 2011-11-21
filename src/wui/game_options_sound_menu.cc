@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,10 +81,10 @@ ingame_sound_volume
 	}
 
 	//  ready signals
-	ingame_music.changedto.set
-		(this, &GameOptionsSoundMenu::changed_ingame_music);
-	ingame_sound.changedto.set
-		(this, &GameOptionsSoundMenu::changed_ingame_sound);
+	ingame_music.changedto.connect
+		(boost::bind(&GameOptionsSoundMenu::changed_ingame_music, this, _1));
+	ingame_sound.changedto.connect
+		(boost::bind(&GameOptionsSoundMenu::changed_ingame_sound, this, _1));
 	ingame_music_volume.changedto.set
 		(this, &GameOptionsSoundMenu::music_volume_changed);
 	ingame_sound_volume.changedto.set

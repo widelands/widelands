@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,20 +107,20 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 	m_opengames .set_textstyle(ts_small());
 	m_playername.set_textstyle(ts_small());
 	m_hostname  .set_textstyle(ts_small());
-	hostname    .changed.set
-		(this, &Fullscreen_Menu_NetSetupLAN::change_hostname);
+	hostname    .changed.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupLAN::change_hostname, this));
 	hostname    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	playername  .setText  (s.get_string("nickname", (_("nobody"))));
-	playername  .changed.set
-		(this, &Fullscreen_Menu_NetSetupLAN::change_playername);
+	playername  .changed.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupLAN::change_playername, this));
 	playername  .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	opengames   .set_font(ui_fn(), fs_small());
 	opengames   .add_column(m_lisw * 2 / 5, _("Host"));
 	opengames   .add_column(m_lisw * 2 / 5, _("Map"));
 	opengames   .add_column(m_lisw     / 5, _("State"));
-	opengames   .selected.set(this, &Fullscreen_Menu_NetSetupLAN::game_selected);
-	opengames   .double_clicked.set
-		(this, &Fullscreen_Menu_NetSetupLAN::game_doubleclicked);
+	opengames   .selected.connect(boost::bind(&Fullscreen_Menu_NetSetupLAN::game_selected, this, _1));
+	opengames   .double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupLAN::game_doubleclicked, this, _1));
 	discovery   .set_callback (discovery_callback, this);
 
 	joingame.set_enabled(false);

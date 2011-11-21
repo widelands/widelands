@@ -94,8 +94,8 @@ void Statebox::set_state(bool const on) {
 	if (on xor ((m_flags & Is_Checked) > 1)) {
 		set_flags(Is_Checked, on);
 		changed();
-		changedto  .call      (on);
-		changedtoid.call(m_id, on);
+		changedto(on);
+		changedtoid(m_id, on);
 		update();
 	}
 }
@@ -168,7 +168,7 @@ bool Statebox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
  */
 void Checkbox::clicked()
 {
-	clickedto.call(!get_state());
+	clickedto(!get_state());
 	set_state(!get_state());
 	play_click();
 }

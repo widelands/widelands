@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,16 +95,14 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 _("Allow"),
 		 false)
 {
-	m_allowed.selected.set
-		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
-	m_allowed.double_clicked.set
-		(this,
-		 &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
-	m_forbidden.selected.set
-		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
-	m_forbidden.double_clicked.set
-		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::
-		 forbidden_double_clicked);
+	m_allowed.selected.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected, this, _1));
+	m_allowed.double_clicked.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked, this, _1));
+	m_forbidden.selected.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected, this, _1));
+	m_forbidden.double_clicked.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked, this, _1));
 
 	Widelands::Tribe_Descr const & tribe = player.tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();

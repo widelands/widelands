@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -115,15 +115,15 @@ int32_t Radiogroup::add_button
  */
 void Radiogroup::set_state(int32_t const state) {
 	if (state == m_state) {
-		clicked.call();
+		clicked();
 		return;
 	}
 
 	for (Radiobutton * btn = m_buttons; btn; btn = btn->m_nextbtn)
 		btn->set_state(btn->m_id == state);
 	m_state = state;
-	changed.call();
-	changedto.call(state);
+	changed();
+	changedto(state);
 }
 
 /**

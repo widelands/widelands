@@ -157,8 +157,8 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_load_map_as_scenario.set_state(false);
 	m_load_map_as_scenario.set_enabled(false);
 
-	m_table.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
-	m_table.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
+	m_table.selected.connect(boost::bind(&Fullscreen_Menu_MapSelect::map_selected, this, _1));
+	m_table.double_clicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::double_clicked, this, _1));
 
 	UI::Box * vbox = new UI::Box
 		(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
@@ -537,8 +537,8 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 
 	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0));
 	cb->set_id(id);
-	cb->changedtoid.set
-		(this, &Fullscreen_Menu_MapSelect::_tagbox_changed);
+	cb->changedtoid.connect
+		(boost::bind(&Fullscreen_Menu_MapSelect::_tagbox_changed, this, _1, _2));
 
 	box->add(cb, UI::Box::AlignLeft, true);
 	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft, 100);

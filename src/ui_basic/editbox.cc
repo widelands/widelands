@@ -230,8 +230,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 	if (down) {
 		switch (code.sym) {
 		case SDLK_ESCAPE:
-			cancel.call();
-			cancelid.call(m->id);
+			cancel();
+			cancelid(m->id);
 			return true;
 
 		case SDLK_KP_ENTER:
@@ -245,8 +245,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					m_history_position = -1;
 				}
 			}
-			ok.call();
-			okid.call(m->id);
+			ok();
+			okid(m->id);
 			return true;
 
 		case SDLK_KP_PERIOD:
@@ -267,8 +267,8 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					m->text.erase(m->text.begin() + m->caret);
 				m->text.erase(m->text.begin() + m->caret);
 				check_caret();
-				changed.call();
-				changedid.call(m->id);
+				changed();
+				changedid(m->id);
 				update();
 			}
 			return true;
@@ -419,8 +419,8 @@ void EditBox::insert(SDL_keysym const code)
 				(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
 		}
 		check_caret();
-		changed.call();
-		changedid.call(m->id);
+		changed();
+		changedid(m->id);
 		update();
 	}
 }

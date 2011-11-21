@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ private:
 		List(GameMessageMenu & parent) :
 			UI::Table<uintptr_t>(&parent, 5, 35, 360, 110)
 		{
-			selected.set(&parent, &GameMessageMenu::selected);
+			selected.connect(boost::bind(&GameMessageMenu::selected, &parent, _1));
 			add_column (50, _("Select"), UI::Align_HCenter, true);
 			add_column (50, _("Status"), UI::Align_HCenter);
 			add_column(136, _("Title"));

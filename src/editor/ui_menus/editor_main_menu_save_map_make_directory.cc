@@ -45,7 +45,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
 	m_edit->setText(dirname);
 	m_dirname = dirname;
-	m_edit->changed.set(this, &Main_Menu_Save_Map_Make_Directory::edit_changed);
+	m_edit->changed.connect(boost::bind(&Main_Menu_Save_Map_Make_Directory::edit_changed, this));
 
 	posy = get_inner_h() - 30;
 

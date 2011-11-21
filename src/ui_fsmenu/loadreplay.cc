@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,10 +79,10 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8)
 {
 	m_title.set_textstyle(ts_big());
-	m_list .set_font(ui_fn(), fs_small());
-	m_list .selected.set(this, &Fullscreen_Menu_LoadReplay::replay_selected);
-	m_list .double_clicked.set
-		(this, &Fullscreen_Menu_LoadReplay::double_clicked);
+	m_list.set_font(ui_fn(), fs_small());
+	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadReplay::replay_selected, this, _1));
+	m_list.double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_LoadReplay::double_clicked, this, _1));
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
 	fill_list();

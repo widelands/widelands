@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,10 +136,10 @@ Editor_Tool_Change_Resources_Options_Menu
 		/
 		(resource_pic_max_width + spacing());
 
-	m_radiogroup.changed.set
-		(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
-	m_radiogroup.clicked.set
-		(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
+	m_radiogroup.changed.connect
+		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
+	m_radiogroup.clicked.connect
+		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
 
 	uint32_t cur_x = 0;
 	Point pos

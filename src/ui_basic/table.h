@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,8 +53,8 @@ template<typename Entry> struct Table {
 		 bool descending = false);
 	~Table();
 
-	Signal1<uint32_t> selected;
-	Signal1<uint32_t> double_clicked;
+	boost::signal<void (uint32_t)> selected;
+	boost::signal<void (uint32_t)> double_clicked;
 
 	/// A column that has a title is sortable (by clicking on the title).
 	void add_column
@@ -157,8 +157,8 @@ template <> struct Table<void *> : public Panel {
 		 bool descending = false);
 	~Table();
 
-	Signal1<uint32_t> selected;
-	Signal1<uint32_t> double_clicked;
+	boost::signal<void (uint32_t)> selected;
+	boost::signal<void (uint32_t)> double_clicked;
 
 	void add_column
 		(uint32_t width,

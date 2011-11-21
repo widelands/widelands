@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,8 +65,8 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			(this,
 			 posx, posy,
 			 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
-	m_ls->clicked       .set(this, &Main_Menu_Save_Map::       clicked_item);
-	m_ls->double_clicked.set(this, &Main_Menu_Save_Map::double_clicked_item);
+	m_ls->clicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_item, this, _1));
+	m_ls->double_clicked.connect(boost::bind(&Main_Menu_Save_Map::double_clicked_item, this, _1));
 	m_editbox =
 		new UI::EditBox
 			(this,
@@ -75,7 +75,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 0);
 	m_editbox->setText(parent.egbase().map().get_name());
-	m_editbox->changed.set(this, &Main_Menu_Save_Map::edit_box_changed);
+	m_editbox->changed.connect(boost::bind(&Main_Menu_Save_Map::edit_box_changed, this));
 
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,10 +98,10 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	label_campdescr .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	tacampdescr     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list.set_font(m_fn, m_fs);
-	m_list.selected      .set
-		(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
-	m_list.double_clicked.set
-		(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
+	m_list.selected.connect
+		(boost::bind(&Fullscreen_Menu_CampaignSelect::campaign_selected, this, _1));
+	m_list.double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_CampaignSelect::double_clicked, this, _1));
 	fill_list();
 }
 
@@ -304,9 +304,9 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 	label_mapdescr.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	tamapdescr    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list.set_font(m_fn, m_fs);
-	m_list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
-	m_list.double_clicked.set
-		(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
+	m_list.selected.connect(boost::bind(&Fullscreen_Menu_CampaignMapSelect::map_selected, this, _1));
+	m_list.double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_CampaignMapSelect::double_clicked, this, _1));
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,8 +59,8 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 		(this,
 		 posx, posy,
 		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 40);
-	m_ls->selected.set(this, &Main_Menu_Load_Map::selected);
-	m_ls->double_clicked.set(this, &Main_Menu_Load_Map::double_clicked);
+	m_ls->selected.connect(boost::bind(&Main_Menu_Load_Map::selected, this, _1));
+	m_ls->double_clicked.connect(boost::bind(&Main_Menu_Load_Map::double_clicked, this, _1));
 
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;

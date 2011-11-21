@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ struct WatchWindow : public UI::Window {
 		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
 	}
 
-	UI::Signal1<Point> warp_mainview;
+	boost::signal<void (Point)> warp_mainview;
 
 	void add_view(Widelands::Coords);
 	void next_view(bool first = false);
@@ -159,7 +159,7 @@ private:
 			WatchWindow & parent  =
 				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			Map_View    & mapview = parent.mapview;
-			parent.warp_mainview.call
+			parent.warp_mainview
 				(mapview.get_viewpoint()
 				 +
 				 Point(mapview.get_w() / 2, mapview.get_h() / 2));
@@ -247,7 +247,7 @@ WatchWindow::WatchWindow
 			view_btns[i] = new View_Button(*this, i);
 	mapview.fieldclicked.set(&parent, &Interactive_GameBase::node_action);
 	mapview.changeview.set(this, &WatchWindow::stop_tracking_by_drag);
-	warp_mainview.set(&parent, &Interactive_Base::move_view_to_point);
+	warp_mainview.connect(boost::bind(&Interactive_Base::move_view_to_point, &parent, _1));
 
 	add_view(coords);
 	next_view(true);

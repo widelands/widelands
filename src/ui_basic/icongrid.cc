@@ -59,10 +59,10 @@ private:
 
 	void handle_mousein(bool const inside) {
 		if (inside) {
-			m_icongrid.mousein.call(_callback_argument_id);
+			m_icongrid.mousein(_callback_argument_id);
 			m_ta.set_text(m_descr);
 		} else {
-			m_icongrid.mouseout.call(_callback_argument_id);
+			m_icongrid.mouseout(_callback_argument_id);
 			m_ta.set_text("");
 		}
 		Callback_Button::handle_mousein(inside);
@@ -127,7 +127,7 @@ int32_t Icon_Grid::add
 }
 
 void Icon_Grid::clicked_button(uint32_t idx) {
-	clicked.call(idx);
+	clicked(idx);
 	play_click();
 }
 

@@ -139,8 +139,8 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	maxplayers  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	std::string server = s.get_string("servername", "");
 	servername  .setText (server);
-	servername  .changed.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::change_servername);
+	servername  .changed.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::change_servername, this));
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
@@ -153,13 +153,13 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(0,
 		 boost::bind
 		 	(&Fullscreen_Menu_NetSetupGGZ::compare_usertype, this, _1, _2));
-	usersonline .double_clicked.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::user_doubleclicked);
+	usersonline .double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::user_doubleclicked, this, _1));
 	opengames   .set_font(m_fn, m_fs);
-	opengames   .selected.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::server_selected);
-	opengames   .double_clicked.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::server_doubleclicked);
+	opengames   .selected.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::server_selected, this, _1));
+	opengames   .double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::server_doubleclicked, this, _1));
 
 	// try to connect to the metaserver
 	if (!NetGGZ::ref().usedcore())

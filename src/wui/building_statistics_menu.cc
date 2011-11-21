@@ -114,7 +114,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_table.add_column (50, _("Prod"),     UI::Align_Right);
 	m_table.add_column (50, _("Owned"),    UI::Align_Right);
 	m_table.add_column (50, _("Build"),    UI::Align_HCenter);
-	m_table.selected.set(this, &Building_Statistics_Menu::table_changed);
+	m_table.selected.connect(boost::bind(&Building_Statistics_Menu::table_changed, this, _1));
 	m_table.set_column_compare
 		(Columns::Size,
 		 boost::bind

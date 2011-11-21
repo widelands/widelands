@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,8 +65,8 @@ d(new PlayerDescriptionGroupImpl)
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
 	d->plr_name->set_textstyle(UI::TextStyle::makebold(font, UI_FONT_CLR_FG));
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
-	d->btnEnablePlayer->changedto.set
-		(this, &PlayerDescriptionGroup::enable_player);
+	d->btnEnablePlayer->changedto.connect
+		(boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
 	d->btnPlayerType = new UI::Callback_Button
 		(this, "player_type",
 		 xplayertype, 0, xplayerteam - xplayertype - 2, h,

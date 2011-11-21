@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,8 +78,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		(*this, DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
 	m_curdir(SaveHandler::get_base_dir())
 {
-	m_ls.selected.set(this, &Game_Main_Menu_Save_Game::selected);
-	m_ls.double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
+	m_ls.selected.connect(boost::bind(&Game_Main_Menu_Save_Game::selected, this, _1));
+	m_ls.double_clicked.connect(boost::bind(&Game_Main_Menu_Save_Game::double_clicked, this, _1));
 
 	fill_list();
 

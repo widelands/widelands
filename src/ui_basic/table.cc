@@ -128,7 +128,7 @@ void Table<void *>::add_column
 				 get_x() + get_w() - 24, get_y() + m_headerheight,
 				 24,                     get_h() - m_headerheight,
 				 false);
-		m_scrollbar->moved.set(this, &Table::set_scrollpos);
+		m_scrollbar->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		m_scrollbar->set_steps(1);
 		uint32_t const lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
 		m_scrollbar->set_singlestepsize(lineheight);
@@ -365,7 +365,7 @@ bool Table<void *>::handle_mousepress
 			 and
 			 m_last_selection == m_selection
 			 and m_selection != no_selection_index())
-			double_clicked.call(m_selection);
+			double_clicked(m_selection);
 
 		return true;
 	}
@@ -390,7 +390,7 @@ void Table<void *>::select(const uint32_t i)
 
 	m_selection = i;
 
-	selected.call(m_selection);
+	selected(m_selection);
 	update(0, 0, get_eff_w(), get_h());
 }
 

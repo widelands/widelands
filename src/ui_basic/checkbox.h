@@ -45,9 +45,9 @@ struct Statebox : public Panel {
 	~Statebox();
 
 	boost::signal<void ()> changed;
-	Signal1<bool> changedto;
-	Signal1<bool> clickedto; // same as changedto but only called when clicked
-	Signal2<int32_t, bool> changedtoid;
+	boost::signal<void (bool)> changedto;
+	boost::signal<void (bool)> clickedto; // same as changedto but only called when clicked
+	boost::signal<void (int32_t, bool)> changedtoid;
 
 	void set_enabled(bool enabled);
 

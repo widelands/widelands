@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -123,9 +123,9 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_descr           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list            .set_font(m_fn, m_fs);
 
-	m_list.selected.set(this, &Fullscreen_Menu_Editor_MapSelect::map_selected);
-	m_list.double_clicked.set
-		(this, &Fullscreen_Menu_Editor_MapSelect::double_clicked);
+	m_list.selected.connect(boost::bind(&Fullscreen_Menu_Editor_MapSelect::map_selected, this, _1));
+	m_list.double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_Editor_MapSelect::double_clicked, this, _1));
 
 	fill_list();
 }

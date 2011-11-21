@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -269,8 +269,8 @@ m_selected_information(0)
 	}
 
 	m_radiogroup.set_state(m_selected_information);
-	m_radiogroup.changedto.set
-		(this, &General_Statistics_Menu::radiogroup_changed);
+	m_radiogroup.changedto.connect
+		(boost::bind(&General_Statistics_Menu::radiogroup_changed, this, _1));
 
 	m_box.add(hbox2, UI::Box::AlignTop);
 

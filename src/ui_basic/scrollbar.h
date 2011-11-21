@@ -50,7 +50,7 @@ public:
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
 
-	Signal1<int32_t> moved;
+	boost::signal<void (int32_t)> moved;
 
 	void set_steps(int32_t steps);
 	void set_singlestepsize(uint32_t singlestepsize);

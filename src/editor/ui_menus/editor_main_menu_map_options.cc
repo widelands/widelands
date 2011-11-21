@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,7 +75,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
-	m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
+	m_name->changedid.connect(boost::bind(&Main_Menu_Map_Options::changed, this, _1));
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
 	m_size =
@@ -98,7 +98,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 1);
-	m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
+	m_author->changedid.connect(boost::bind(&Main_Menu_Map_Options::changed, this, _1));
 	posy += height + spacing;
 	m_descr =
 		new UI::Multiline_Editbox

@@ -45,12 +45,12 @@ struct EditBox : public Panel {
 		 Align align = Align_Center);
 	virtual ~EditBox();
 
-	Signal changed;
-	Signal1<int32_t> changedid;
-	Signal ok;
-	Signal1<int32_t> okid;
-	Signal cancel;
-	Signal1<int32_t> cancelid;
+	boost::signal<void ()> changed;
+	boost::signal<void (int32_t)> changedid;
+	boost::signal<void ()> ok;
+	boost::signal<void (int32_t)> okid;
+	boost::signal<void ()> cancel;
+	boost::signal<void (int32_t)> cancelid;
 
 	std::string const & text() const;
 	void setText(std::string const &);

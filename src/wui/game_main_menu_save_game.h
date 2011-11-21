@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ private:
 				 x, y, w, h,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"))
 		{
-			changed.set(&parent, &Game_Main_Menu_Save_Game::edit_box_changed);
+			changed.connect(boost::bind(&Game_Main_Menu_Save_Game::edit_box_changed, &parent));
 		}
 		bool handle_key(bool down, SDL_keysym);
 	} m_editbox;

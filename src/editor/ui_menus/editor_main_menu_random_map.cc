@@ -75,8 +75,8 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 			 posx, posy,
 			 width, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
-	m_nrEditbox->changed.set
-		(this, & Main_Menu_New_Random_Map::nr_edit_box_changed);
+	m_nrEditbox->changed.connect
+		(boost::bind(&Main_Menu_New_Random_Map::nr_edit_box_changed, this));
 	RNG rng;
 	rng.seed(clock());
 	rng.rand();
@@ -292,8 +292,8 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 			 width, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
 	m_idEditbox->setText("abcd-efgh-ijkl-mnop");
-	m_idEditbox->changed.set
-		(this, & Main_Menu_New_Random_Map::id_edit_box_changed);
+	m_idEditbox->changed.connect
+		(boost::bind(&Main_Menu_New_Random_Map::id_edit_box_changed, this));
 	posy += height + spacing + spacing + spacing;
 
 

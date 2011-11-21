@@ -19,6 +19,8 @@
 
 #include "multilineeditbox.h"
 
+#include <boost/bind.hpp>
+
 #include "scrollbar.h"
 #include "constants.h"
 #include "graphic/font_handler.h"
@@ -102,7 +104,7 @@ maxbytes(0xffff),
 ww_valid(false),
 owner(o)
 {
-	scrollbar.moved.set(&o, &Multiline_Editbox::scrollpos_changed);
+	scrollbar.moved.connect(boost::bind(&Multiline_Editbox::scrollpos_changed, &o, _1));
 
 	scrollbar.set_pagesize(owner.get_h() - 2 * textstyle.font->height());
 	scrollbar.set_singlestepsize(textstyle.font->height());

@@ -203,8 +203,8 @@ void WaresQueueDisplay::update_priority_buttons()
 		break;
 	}
 
-	m_priority_radiogroup->changedto.set
-		(this, &WaresQueueDisplay::radiogroup_changed);
+	m_priority_radiogroup->changedto.connect
+		(boost::bind(&WaresQueueDisplay::radiogroup_changed, this, _1));
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
 	if (not can_act)

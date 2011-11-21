@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -139,8 +139,8 @@ void Editor_Player_Menu::update() {
 				new UI::EditBox
 					(this, posx, posy, 140, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"), p - 1);
-			m_plr_names[p - 1]->changedid.set
-				(this, &Editor_Player_Menu::name_changed);
+			m_plr_names[p - 1]->changedid.connect
+				(boost::bind(&Editor_Player_Menu::name_changed, this, _1));
 			posx += 140 + spacing;
 			m_plr_names[p - 1]->setText(map.get_scenario_player_name(p));
 		}

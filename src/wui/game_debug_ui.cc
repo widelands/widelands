@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -255,7 +255,7 @@ FieldDebugWindow::FieldDebugWindow
 	assert(m_coords.y < m_map.get_height());
 	assert(&m_map[0] <= m_coords.field);
 	assert             (m_coords.field < &m_map[0] + m_map.max_index());
-	m_ui_bobs.selected.set(this, &FieldDebugWindow::open_bob);
+	m_ui_bobs.selected.connect(boost::bind(&FieldDebugWindow::open_bob, this, _1));
 }
 
 
