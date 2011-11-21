@@ -24,7 +24,6 @@
 #include "upcast.h"
 #include "wexception.h"
 
-#include "ui_basic/object.h" //only needed for i18n function _()
 #include "graphic/animation.h"
 #include "economy/wares_queue.h"
 #include "game.h"

@@ -21,11 +21,11 @@
 #define MAPVIEW_H
 
 #include <boost/function.hpp>
+#include <boost/signal.hpp>
 
 #include "logic/widelands_geometry.h"
 
 #include "ui_basic/panel.h"
-#include "ui_basic/m_signal.h"
 
 struct Interactive_Base;
 

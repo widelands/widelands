@@ -22,7 +22,6 @@
 
 #include "graphic/picture_id.h"
 #include "point.h"
-#include "m_signal.h"
 
 #include "checkbox.h"
 

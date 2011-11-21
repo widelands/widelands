@@ -21,10 +21,10 @@
 #define UI_MESSAGEBOX_H
 
 #include "align.h"
-#include "m_signal.h"
 #include "window.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/signal.hpp>
 
 namespace UI {
 

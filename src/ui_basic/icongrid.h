@@ -22,9 +22,10 @@
 
 #include "panel.h"
 #include "textarea.h"
-#include "m_signal.h"
 
 #include <vector>
+
+#include <boost/signal.hpp>
 
 namespace UI {
 

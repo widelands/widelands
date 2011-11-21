@@ -24,6 +24,7 @@
 #include "button.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/signal.hpp>
 #include <SDL_keyboard.h>
 
 #define CHAT_HISTORY_SIZE 5

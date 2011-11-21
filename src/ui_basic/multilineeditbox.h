@@ -21,9 +21,9 @@
 #define UI_MULTILINEEDITBOX_H
 
 #include "panel.h"
-#include "m_signal.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/signal.hpp>
 
 namespace UI {
 

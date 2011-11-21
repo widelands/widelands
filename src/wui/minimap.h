@@ -20,6 +20,8 @@
 #ifndef MINIMAP_H
 #define MINIMAP_H
 
+#include <boost/signal.hpp>
+
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 

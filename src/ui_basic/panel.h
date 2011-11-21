@@ -21,7 +21,8 @@
 #ifndef UI_PANEL_H
 #define UI_PANEL_H
 
-#include "object.h"
+#include <boost/signals/trackable.hpp>
+#include <boost/noncopyable.hpp>
 
 #include "point.h"
 #include "graphic/picture_id.h"
@@ -58,7 +59,7 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : public Object {
+struct Panel : boost::signals::trackable, boost::noncopyable {
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run

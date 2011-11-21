@@ -23,13 +23,13 @@
 
 #include "align.h"
 #include "panel.h"
-#include "m_signal.h"
 
 #include "compile_assert.h"
 
 #include <limits>
 #include <vector>
 #include <boost/function.hpp>
+#include <boost/signal.hpp>
 
 namespace UI {
 struct Scrollbar;

@@ -21,10 +21,11 @@
 #ifndef UI_LISTSELECT_H
 #define UI_LISTSELECT_H
 
+#include <boost/signal.hpp>
+
 #include "align.h"
 #include "panel.h"
 #include "scrollbar.h"
-#include "m_signal.h"
 
 #include "compile_assert.h"
 

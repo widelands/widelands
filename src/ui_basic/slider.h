@@ -19,8 +19,9 @@
 #ifndef UI_SLIDER_H
 #define UI_SLIDER_H
 
+#include <boost/signal.hpp>
+
 #include "panel.h"
-#include "m_signal.h"
 #include "graphic/font.h"
 
 namespace UI {

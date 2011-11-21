@@ -23,7 +23,6 @@
 #include <boost/signals.hpp>
 
 #include "panel.h"
-#include "m_signal.h"
 
 #include "rgbcolor.h"
 
