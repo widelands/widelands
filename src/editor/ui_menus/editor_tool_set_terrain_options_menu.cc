@@ -156,10 +156,9 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 			UI::Checkbox & cb = *new UI::Checkbox(this, pos, picture);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
-			cb.set_id(i);
 			cb.set_state(m_tool.is_enabled(i));
-			cb.changedtoid.connect
-				(boost::bind(&Editor_Tool_Set_Terrain_Options_Menu::selected, this, _1, _2));
+			cb.changedto.connect
+				(boost::bind(&Editor_Tool_Set_Terrain_Options_Menu::selected, this, i, _1));
 			m_checkboxes[i] = &cb;
 
 			pos.x += TEXTURE_WIDTH + hspacing();

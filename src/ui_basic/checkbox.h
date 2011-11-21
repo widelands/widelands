@@ -46,14 +46,12 @@ struct Statebox : public Panel {
 	boost::signal<void ()> changed;
 	boost::signal<void (bool)> changedto;
 	boost::signal<void (bool)> clickedto; // same as changedto but only called when clicked
-	boost::signal<void (int32_t, bool)> changedtoid;
 
 	void set_enabled(bool enabled);
 
 	bool get_state() const throw () {return m_flags & Is_Checked;}
 	void set_state(bool on);
 
-	void set_id(int32_t n) {m_id = n;}
 	void set_owns_custom_picture() throw () {
 		assert(m_flags & Has_Custom_Picture);
 		set_flags(Owns_Custom_Picture, true);
@@ -69,7 +67,6 @@ struct Statebox : public Panel {
 private:
 	virtual void clicked() = 0;
 
-	int32_t  m_id;
 	enum Flags {
 		Is_Highlighted      = 0x01,
 		Is_Enabled          = 0x02,

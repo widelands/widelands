@@ -86,10 +86,10 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 // Edit boxes
 	playername
 		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,       m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
 	hostname
 		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
 
 // List
 	opengames

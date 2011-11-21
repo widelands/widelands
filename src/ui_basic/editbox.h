@@ -42,16 +42,12 @@ struct EditBox : public Panel {
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 PictureID const & background =
 		 	g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 int32_t id = 0,
 		 Align align = Align_Center);
 	virtual ~EditBox();
 
 	boost::signal<void ()> changed;
-	boost::signal<void (int32_t)> changedid;
 	boost::signal<void ()> ok;
-	boost::signal<void (int32_t)> okid;
 	boost::signal<void ()> cancel;
-	boost::signal<void (int32_t)> cancelid;
 
 	std::string const & text() const;
 	void setText(std::string const &);

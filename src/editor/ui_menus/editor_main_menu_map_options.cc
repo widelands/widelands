@@ -74,8 +74,8 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
-	m_name->changedid.connect(boost::bind(&Main_Menu_Map_Options::changed, this, _1));
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+	m_name->changed.connect(boost::bind(&Main_Menu_Map_Options::changed, this, 0));
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
 	m_size =
@@ -97,8 +97,8 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 1);
-	m_author->changedid.connect(boost::bind(&Main_Menu_Map_Options::changed, this, _1));
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+	m_author->changed.connect(boost::bind(&Main_Menu_Map_Options::changed, this, 1));
 	posy += height + spacing;
 	m_descr =
 		new UI::Multiline_Editbox

@@ -50,8 +50,6 @@ Statebox::Statebox
 	} else
 		m_pic_graphics =
 			g_gr->get_picture(PicMod_UI, "pics/checkbox_light_new.png");
-
-	m_id = -1;
 }
 
 
@@ -95,7 +93,6 @@ void Statebox::set_state(bool const on) {
 		set_flags(Is_Checked, on);
 		changed();
 		changedto(on);
-		changedtoid(m_id, on);
 		update();
 	}
 }

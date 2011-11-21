@@ -100,7 +100,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 // Edit boxes
 	servername
 		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
 
 // List
 	usersonline

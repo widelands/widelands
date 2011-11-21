@@ -536,9 +536,8 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 	m_tags_ordered.push_back(tag);
 
 	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0));
-	cb->set_id(id);
-	cb->changedtoid.connect
-		(boost::bind(&Fullscreen_Menu_MapSelect::_tagbox_changed, this, _1, _2));
+	cb->changedto.connect
+		(boost::bind(&Fullscreen_Menu_MapSelect::_tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Box::AlignLeft, true);
 	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft, 100);

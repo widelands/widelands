@@ -74,7 +74,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 			(this,
 			 posx, posy,
 			 width, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	m_nrEditbox->changed.connect
 		(boost::bind(&Main_Menu_New_Random_Map::nr_edit_box_changed, this));
 	RNG rng;
@@ -230,9 +230,8 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	Point pos(get_inner_w() - spacing - 20, posy);
 	m_island_mode = new UI::Checkbox(this, pos);
 	m_island_mode->set_state(true);
-	m_island_mode->set_id(SWITCH_ISLAND_MODE);
 	m_island_mode->changed.connect
-		(boost::bind(&Main_Menu_New_Random_Map::nr_edit_box_changed, this));
+		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, SWITCH_ISLAND_MODE));
 
 	new UI::Textarea(this, posx, posy, _("Island mode:"));
 	posy += height + spacing;
@@ -290,7 +289,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 			(this,
 			 posx, posy,
 			 width, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	m_idEditbox->setText("abcd-efgh-ijkl-mnop");
 	m_idEditbox->changed.connect
 		(boost::bind(&Main_Menu_New_Random_Map::id_edit_box_changed, this));

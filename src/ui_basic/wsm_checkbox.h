@@ -27,7 +27,7 @@
  * of the graph and it needs a picture
  */
 struct WSM_Checkbox : public UI::Checkbox {
-	WSM_Checkbox(UI::Panel *, Point, int32_t id, PictureID picid, RGBColor);
+	WSM_Checkbox(UI::Panel *, Point, PictureID picid, RGBColor);
 
 	virtual void draw(RenderTarget &);
 

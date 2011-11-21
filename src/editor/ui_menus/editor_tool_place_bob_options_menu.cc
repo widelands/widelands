@@ -97,9 +97,8 @@ m_click_recursion_protect(false)
 			 critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);
-		cb.set_id(i);
 		cb.set_state(m_pit.is_enabled(i));
-		cb.changedtoid.connect(boost::bind(&Editor_Tool_Place_Bob_Options_Menu::clicked, this, _1, _2));
+		cb.changedto.connect(boost::bind(&Editor_Tool_Place_Bob_Options_Menu::clicked, this, i, _1));
 		m_checkboxes.push_back(&cb);
 		box->add(&cb, UI::Align_Left);
 		box->add_space(space);

@@ -72,8 +72,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	m_editbox->setText(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&Main_Menu_Save_Map::edit_box_changed, this));
 

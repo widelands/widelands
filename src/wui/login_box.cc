@@ -33,13 +33,13 @@ Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
 	eb_nickname =
 		new UI::EditBox
 			(this, 150, 5, 330, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, UI::Align_Left);
+			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), UI::Align_Left);
 
 	ta_password = new UI::Textarea(this, 10, 40, _("Password:"));
 	eb_password =
 		new UI::EditBox
 			(this, 150, 40, 330, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, UI::Align_Left);
+			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), UI::Align_Left);
 
 	pwd_warning =
 		new UI::Textarea

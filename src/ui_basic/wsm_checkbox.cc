@@ -32,7 +32,6 @@
 WSM_Checkbox::WSM_Checkbox
 	(UI::Panel * const parent,
 	 Point       const p,
-	 int32_t     const id,
 	 PictureID   const picid,
 	 RGBColor    const color)
 :
@@ -40,7 +39,6 @@ UI::Checkbox(parent, p, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG)),
 m_pic       (picid),
 m_color     (color)
 {
-	set_id(id);
 }
 
 /**

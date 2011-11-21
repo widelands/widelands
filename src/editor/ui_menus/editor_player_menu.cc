@@ -138,9 +138,9 @@ void Editor_Player_Menu::update() {
 			m_plr_names[p - 1] =
 				new UI::EditBox
 					(this, posx, posy, 140, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"), p - 1);
-			m_plr_names[p - 1]->changedid.connect
-				(boost::bind(&Editor_Player_Menu::name_changed, this, _1));
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"));
+			m_plr_names[p - 1]->changed.connect
+				(boost::bind(&Editor_Player_Menu::name_changed, this, p - 1));
 			posx += 140 + spacing;
 			m_plr_names[p - 1]->setText(map.get_scenario_player_name(p));
 		}
