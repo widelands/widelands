@@ -74,153 +74,15 @@ protected:
 	void stop_tracking_by_drag(int32_t x, int32_t y);
 
 private:
+	void do_follow();
+	void do_goto();
+	void setview(uint8_t index);
+
 	Map_View mapview;
 	uint32_t last_visit;
 	bool     single_window;
 	uint8_t  cur_index;
-
-
-	/// If we are currently tracking, stop tracking.
-	/// Otherwise, start tracking the nearest bob from our current position.
-	struct Follow : public UI::Button {
-		Follow(WatchWindow & parent, uint32_t const h) :
-			UI::Button
-				(&parent, "follow",
-				 0, h - 34, 34, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-				 g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
-				 _("Follow"))
-		{}
-		void clicked() {
-			WatchWindow     & parent =
-				ref_cast<WatchWindow, UI::Panel>(*get_parent());
-			Widelands::Game & game   = parent.game();
-			if
-				(Widelands::Map_Object const * const obj =
-				 	parent.views[parent.cur_index].tracking.get(game))
-				parent.views[parent.cur_index].tracking = 0;
-			else {
-				//  Find the nearest bob. Other object types can not move and are
-				//  therefore not of interest.
-				Map_View & mapview = parent.mapview;
-				Point pos
-					(mapview.get_viewpoint()
-					 +
-					 Point(mapview.get_w() / 2, mapview.get_h() / 2));
-				Widelands::Map & map = game.map();
-				MapviewPixelFunctions::normalize_pix(map, pos);
-				std::vector<Widelands::Bob *> bobs;
-				//  Scan progressively larger circles around the given position for
-				//  suitable bobs.
-				for
-					(Widelands::Area<Widelands::FCoords> area
-					 	(map.get_fcoords
-					 	 	(MapviewPixelFunctions::calc_node_and_triangle
-					 	 	 	(map, pos.x, pos.y)
-					 	 	 .node),
-					 	 2);
-					 area.radius <= 32;
-					 area.radius *= 2)
-					if (map.find_bobs(area, &bobs))
-						break;
-				//  Find the bob closest to us
-				int32_t closest_dist = -1;
-				Widelands::Bob * closest = 0;
-				for (uint32_t i = 0; i < bobs.size(); ++i) {
-					Widelands::Bob * const bob = bobs[i];
-					Point p;
-					MapviewPixelFunctions::get_pix
-						(map, bob->get_position(), p.x, p.y);
-					p = bob->calc_drawpos(game, p);
-					int32_t const dist =
-						MapviewPixelFunctions::calc_pix_distance(map, p, pos);
-					if (!closest || closest_dist > dist) {
-						closest = bob;
-						closest_dist = dist;
-					}
-				}
-				parent.views[parent.cur_index].tracking = closest;
-			}
-		}
-	} follow;
-
-	/// Cause the main mapview to jump to our current position.
-	struct Go_To : public UI::Button {
-		Go_To(WatchWindow & parent, uint32_t const h) :
-			UI::Button
-				(&parent, "center_mainview_here",
-				 34, h - 34, 34, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-				 g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
-				 _("Center mainview on this"))
-		{}
-		void clicked() {
-			WatchWindow & parent  =
-				ref_cast<WatchWindow, UI::Panel>(*get_parent());
-			Map_View    & mapview = parent.mapview;
-			parent.warp_mainview
-				(mapview.get_viewpoint()
-				 +
-				 Point(mapview.get_w() / 2, mapview.get_h() / 2));
-		}
-	} go_to;
-
-	/// Closes current view. Only visible with the single_watchwin option.
-	struct Close : public UI::Button {
-		Close
-			(WatchWindow & parent,
-			 uint32_t const w, uint32_t const h,
-			 bool const visible)
-			:
-			UI::Button
-				(&parent, "close",
-				 w - 34, h - 34, 34, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-				 g_gr->get_picture(PicMod_UI, "pics/menu_abort.png"),
-				 _("Close"),
-				 visible)
-		{
-			set_visible(visible);
-		}
-		void clicked() {
-			WatchWindow & parent =
-				ref_cast<WatchWindow, UI::Panel>(*get_parent());
-			if (parent.views.size() == 1) {
-				delete &parent;
-				return;
-			}
-			uint8_t const old_index = parent.cur_index;
-			parent.next_view();
-			std::vector<WatchWindowView>::iterator view_it = parent.views.begin();
-			for (uint8_t i = 0; i < old_index; ++i)
-				++view_it;
-			parent.view_btns[parent.cur_index]->set_enabled(false);
-			parent.views.erase(view_it);
-			parent.toggle_buttons();
-		}
-	} close;
-
-	/// Sets the current view to index and resets timeout.
-	struct View_Button : public UI::Button {
-		View_Button(WatchWindow & parent, uint8_t const index) :
-			UI::Button
-				(&parent, "view",
-				 74 + (17 * index), 200 - 34, 17, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-				 "-", std::string(),
-				 false),
-			m_index   (index)
-		{}
-		void clicked() {
-			WatchWindow & parent =
-				ref_cast<WatchWindow, UI::Panel>(*get_parent());
-			parent.save_coords();
-			parent.cur_index = m_index;
-			parent.last_visit = parent.game().get_gametime();
-			parent.show_view();
-		}
-		uint8_t m_index;
-	} * view_btns[NUM_VIEWS];
+	UI::Button * view_btns[NUM_VIEWS];
 	std::vector<WatchWindowView> views;
 };
 
@@ -236,14 +98,49 @@ WatchWindow::WatchWindow
 	UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
 	mapview   (this, 0, 0, 200, 166, parent),
 	last_visit(game().get_gametime()),
-	single_window(_single_window),
-	follow    (*this,            h),
-	go_to     (*this,            h),
-	close     (*this,         w, h, _single_window)
+	single_window(_single_window)
 {
-	if (_single_window)
-		for (uint8_t i = 0; i < NUM_VIEWS; ++i)
-			view_btns[i] = new View_Button(*this, i);
+	UI::Button * followbtn =
+		new UI::Button
+			(this, "follow",
+			 0, h - 34, 34, 34,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
+			 _("Follow"));
+	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
+
+	UI::Button * gotobtn =
+		new UI::Button
+			(this, "center_mainview_here",
+			 34, h - 34, 34, 34,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
+			 _("Center mainview on this"));
+	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
+
+	if (_single_window) {
+		for (uint8_t i = 0; i < NUM_VIEWS; ++i) {
+			view_btns[i] =
+				new UI::Button
+					(this, "view",
+					 74 + (17 * i), 200 - 34, 17, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+					 "-", std::string(),
+					 false);
+			view_btns[i]->sigclicked.connect
+				(boost::bind(&WatchWindow::setview, this, i));
+		}
+
+		UI::Button * closebtn =
+			new UI::Button
+				(this, "close",
+				 w - 34, h - 34, 34, 34,
+				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+				 g_gr->get_picture(PicMod_UI, "pics/menu_abort.png"),
+				 _("Close"));
+		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
+	}
+
 	mapview.fieldclicked.connect(boost::bind(&Interactive_GameBase::node_action, &parent));
 	mapview.changeview.connect(boost::bind(&WatchWindow::stop_tracking_by_drag, this, _1, _2));
 	warp_mainview.connect(boost::bind(&Interactive_Base::move_view_to_point, &parent, _1));
@@ -253,7 +150,11 @@ WatchWindow::WatchWindow
 	set_cache(false);
 }
 
-//Add a view to a watchwindow, if there is space left
+/**
+ * Add a view to a watchwindow, if there is space left.
+ *
+ * This also resets the view cycling timer.
+ */
 void WatchWindow::add_view(Widelands::Coords const coords) {
 	if (views.size() >= NUM_VIEWS)
 		return;
@@ -261,6 +162,7 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 
 	view.tracking = 0;
 	view.view_point = calc_coords(coords);
+	last_visit = game().get_gametime();
 
 	views.push_back(view);
 	if (single_window)
@@ -375,6 +277,109 @@ void WatchWindow::stop_tracking_by_drag(int32_t, int32_t) {
 	}
 }
 
+/**
+ * Called when the user clicks the "follow" button.
+ *
+ * If we are currently tracking a bob, stop tracking.
+ * Otherwise, start tracking the nearest bob from our current position.
+ */
+void WatchWindow::do_follow()
+{
+	Widelands::Game & g = game();
+	if
+		(Widelands::Map_Object const * const obj =
+			views[cur_index].tracking.get(g))
+	{
+		views[cur_index].tracking = 0;
+	} else {
+		//  Find the nearest bob. Other object types can not move and are
+		//  therefore not of interest.
+		Point pos
+			(mapview.get_viewpoint()
+				+
+				Point(mapview.get_w() / 2, mapview.get_h() / 2));
+		Widelands::Map & map = g.map();
+		MapviewPixelFunctions::normalize_pix(map, pos);
+		std::vector<Widelands::Bob *> bobs;
+		//  Scan progressively larger circles around the given position for
+		//  suitable bobs.
+		for
+			(Widelands::Area<Widelands::FCoords> area
+				(map.get_fcoords
+					(MapviewPixelFunctions::calc_node_and_triangle
+						(map, pos.x, pos.y)
+						.node),
+					2);
+				area.radius <= 32;
+				area.radius *= 2)
+			if (map.find_bobs(area, &bobs))
+				break;
+		//  Find the bob closest to us
+		int32_t closest_dist = -1;
+		Widelands::Bob * closest = 0;
+		for (uint32_t i = 0; i < bobs.size(); ++i) {
+			Widelands::Bob * const bob = bobs[i];
+			Point p;
+			MapviewPixelFunctions::get_pix
+				(map, bob->get_position(), p.x, p.y);
+			p = bob->calc_drawpos(g, p);
+			int32_t const dist =
+				MapviewPixelFunctions::calc_pix_distance(map, p, pos);
+			if (!closest || closest_dist > dist) {
+				closest = bob;
+				closest_dist = dist;
+			}
+		}
+		views[cur_index].tracking = closest;
+	}
+}
+
+/**
+ * Called when the "go to" button is clicked.
+ *
+ * Cause the main mapview to jump to our current position.
+ */
+void WatchWindow::do_goto()
+{
+	warp_mainview
+		(mapview.get_viewpoint()
+		 +
+		 Point(mapview.get_w() / 2, mapview.get_h() / 2));
+}
+
+/**
+ * Sets the current view to @p index and resets timeout.
+ */
+void WatchWindow::setview(uint8_t index)
+{
+	save_coords();
+	cur_index = index;
+	last_visit = game().get_gametime();
+	show_view();
+}
+
+/**
+ * Closes the current view.
+ *
+ * This is called when the "close" button is clicked (only in single watchwindow mode).
+ * If there is only one view remaining, the window itself is closed.
+ */
+void WatchWindow::close_cur_view()
+{
+	if (views.size() == 1) {
+		die();
+		return;
+	}
+
+	uint8_t const old_index = cur_index;
+	next_view();
+	std::vector<WatchWindowView>::iterator view_it = views.begin();
+	for (uint8_t i = 0; i < old_index; ++i)
+		++view_it;
+	view_btns[cur_index]->set_enabled(false);
+	views.erase(view_it);
+	toggle_buttons();
+}
 
 /*
 ===============
