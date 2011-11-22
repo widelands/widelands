@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -147,12 +147,12 @@ private:
 	UI::UniqueWindow::Registry m_bobmenu;
 	UI::UniqueWindow::Registry m_resourcesmenu;
 
-	UI::Callback_Button m_toggle_main_menu;
-	UI::Callback_Button m_toggle_tool_menu;
-	UI::Callback_Button m_toggle_toolsize_menu;
-	UI::Callback_Button m_toggle_minimap;
-	UI::Callback_Button m_toggle_buildhelp;
-	UI::Callback_Button m_toggle_player_menu;
+	UI::Button m_toggle_main_menu;
+	UI::Button m_toggle_tool_menu;
+	UI::Button m_toggle_toolsize_menu;
+	UI::Button m_toggle_minimap;
+	UI::Button m_toggle_buildhelp;
+	UI::Button m_toggle_player_menu;
 };
 
 #endif

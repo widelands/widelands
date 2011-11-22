@@ -113,21 +113,21 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	posx = 5;
 	posy = get_inner_h() - 30;
 
-	m_ok_btn = new UI::Callback_Button
+	m_ok_btn = new UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Main_Menu_Load_Map::clicked_ok, boost::ref(*this)),
 		 _("OK"),
 		 std::string(),
 		 false);
+	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Load_Map::clicked_ok, this));
 
-	new UI::Callback_Button
+	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Main_Menu_Load_Map::die, boost::ref(*this)),
 		 _("Cancel"));
+	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Load_Map::die, this));
 
 	m_basedir = "maps";
 	m_curdir  = "maps";

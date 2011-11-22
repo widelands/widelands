@@ -26,10 +26,10 @@
 
 struct Editor_Interactive;
 namespace UI {
+struct Button;
 template <typename T> struct Listselect;
 struct Textarea;
 struct Multiline_Textarea;
-struct Callback_Button;
 };
 
 /**
@@ -48,7 +48,7 @@ private:
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
 	UI::Listselect<const char *> * m_ls;
-	UI::Callback_Button * m_ok_btn;
+	UI::Button * m_ok_btn;
 
 	std::string m_basedir;
 	std::string m_curdir;
