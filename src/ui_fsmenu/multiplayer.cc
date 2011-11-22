@@ -47,28 +47,30 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 		(this, "metaserver",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_MultiPlayer::ggzLogin, boost::ref(*this)),
 		 _("Internet game"), std::string(), true, false),
 	lan
 		(this, "lan",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(Lan)),
 		 _("LAN / Direct IP"), std::string(), true, false),
 	back
 		(this, "back",
 		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(Back)),
 		 _("Back"), std::string(), true, false)
 {
+	metaserver.sigclicked.connect(boost::bind(&Fullscreen_Menu_MultiPlayer::ggzLogin, boost::ref(*this)));
 	metaserver.set_font(font_small());
 	lan.set_font(font_small());
+	lan.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(Lan)));
 	back.set_font(font_small());
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(Back)));
 
 	title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 
@@ -76,14 +78,15 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 	m_auto_log = s.get_bool("auto_log", false);
 	if (m_auto_log) {
 		showloginbox =
-			new UI::Callback_Button
+			new UI::Button
 				(this, "login_dialog",
 				 m_butx + m_butw + m_buth / 4, get_h() * 6 / 25, m_buth, m_buth,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/continue.png"),
-				 boost::bind
-					 (&Fullscreen_Menu_MultiPlayer::showGGZLogin, boost::ref(*this)),
 				 _("Show login dialog"), true, false);
+		showloginbox->sigclicked.connect
+			(boost::bind
+				(&Fullscreen_Menu_MultiPlayer::showGGZLogin, boost::ref(*this)));
 		showloginbox->set_font(font_small());
 	}
 }
