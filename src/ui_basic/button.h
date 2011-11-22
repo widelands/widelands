@@ -22,6 +22,7 @@
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
+#include <boost/signal.hpp>
 
 #include "constants.h"
 #include "panel.h"
@@ -85,8 +86,10 @@ struct Button : public NamedPanel {
 	// If no background is drawn, the button is drawn over the current background
 	void set_draw_flat_background(bool set);
 
+	boost::signal<void ()> sigclicked;
+
 protected:
-	virtual void clicked() = 0; /// Override this to react on the click.
+	virtual void clicked() {} /// Override this to react on the click.
 
 	bool        m_highlighted;    //  mouse is over the button
 	bool        m_pressed;        //  mouse is clicked over the button
