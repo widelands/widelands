@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-11-16 23:26+0000\n"
+"PO-Revision-Date: 2011-11-21 20:34+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-18 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-11-22 04:34+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 
 #: ../../txts/README:69
@@ -707,7 +707,7 @@ msgstr ""
 
 #: ../../txts/README:97
 msgid "Online Help"
-msgstr "Nápoveda online"
+msgstr "Online pomoc"
 
 #: ../../txts/developers:355
 msgid "Other"
@@ -751,7 +751,7 @@ msgstr ""
 
 #: ../../txts/README:118
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Uveďte, prosím, dostatočné informácie. Povedzte nám:"
 
 #: ../../txts/developers:234
 msgid "Polish"
@@ -1143,6 +1143,9 @@ msgid ""
 "information, see the file 'COPYING' or select the License button from the "
 "main menu."
 msgstr ""
+"Widelands je licencovaný pod GNU Všeobecnou verejnou licenciou (GPL). Viac "
+"informácií nájdete v súbore 'COPYING' alebo po zvolení tlačidla Licencia v "
+"hlavnom menu."
 
 #: ../../txts/README:31
 msgid ""
