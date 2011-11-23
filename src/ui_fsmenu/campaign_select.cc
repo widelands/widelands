@@ -70,15 +70,11 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_CampaignSelect::clicked_ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_CampaignSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 
 // Campaign list
@@ -87,6 +83,13 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
 		 get_w() * 711 / 1250, get_h() * 6083 / 10000)
 {
+	b_ok.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_CampaignSelect::clicked_ok, boost::ref(*this)));
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_CampaignSelect::end_modal, boost::ref(*this), 0));
+
 	back.set_font(font_small());
 	b_ok.set_font(font_small());
 
@@ -276,15 +279,11 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_CampaignMapSelect::clicked_ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_CampaignMapSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 
 // Campaign map list
@@ -293,6 +292,13 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
 		 get_w() * 711 / 1250, get_h() * 6083 / 10000)
 {
+	b_ok.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_CampaignMapSelect::clicked_ok, boost::ref(*this)));
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_CampaignMapSelect::end_modal, boost::ref(*this), 0));
+
 	b_ok.set_font(font_small());
 	back.set_font(font_small());
 

@@ -136,7 +136,7 @@ UI::Button * ShipWindow::make_button
 			(parent, name, 0, 0, 34, 34,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_Game, picname),
-			 callback, title);
+			 title);
 	btn->sigclicked.connect(callback);
 	return btn;
 }

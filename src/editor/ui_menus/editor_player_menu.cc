@@ -45,7 +45,6 @@ Editor_Player_Menu::Editor_Player_Menu
 		 5, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Player_Menu::clicked_add_player, boost::ref(*this)),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
@@ -53,10 +52,12 @@ Editor_Player_Menu::Editor_Player_Menu
 		 get_inner_w() - 5 - 20, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Player_Menu::clicked_remove_last_player, boost::ref(*this)),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())
 {
+	m_add_player.sigclicked.connect(boost::bind(&Editor_Player_Menu::clicked_add_player, boost::ref(*this)));
+	m_remove_last_player.sigclicked.connect(boost::bind(&Editor_Player_Menu::clicked_remove_last_player, boost::ref(*this)));
+
 	int32_t const spacing = 5;
 	int32_t const width   = 20;
 	int32_t       posy    = 0;

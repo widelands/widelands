@@ -76,25 +76,16 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::clicked_joingame,
-			  boost::ref(*this)),
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::clicked_hostgame,
-			  boost::ref(*this)),
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::end_modal,
-			  boost::ref(*this), static_cast<int32_t>(CANCEL)),
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes
@@ -124,6 +115,19 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	password(pwd),
 	reg(registered)
 {
+	joingame.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::clicked_joingame,
+			  boost::ref(*this)));
+	hostgame.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::clicked_hostgame,
+			  boost::ref(*this)));
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::end_modal,
+			  boost::ref(*this), static_cast<int32_t>(CANCEL)));
+
 	back.set_font(font_small());
 	joingame.set_font(font_small());
 	hostgame.set_font(font_small());

@@ -102,13 +102,11 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_MapSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_MapSelect::ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 
 // Checkbox
@@ -125,6 +123,9 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
+	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::ok, boost::ref(*this)));
+
 	m_title.set_textstyle(ts_big());
 	m_label_load_map_as_scenario.set_textstyle(ts_small());
 	m_label_name                .set_textstyle(ts_small());

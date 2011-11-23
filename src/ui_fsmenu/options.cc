@@ -48,19 +48,16 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this, "advanced_options",
 		 get_w() * 9 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_Options::advanced_options, boost::ref(*this)),
 		 _("Advanced Options"), std::string(), true, false),
 	m_cancel
 		(this, "cancel",
 		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_cancel)),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_ok)),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -187,6 +184,13 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	os(opt)
 {
+	m_advanced_options.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Options::advanced_options, boost::ref(*this)));
+	m_cancel.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Options::end_modal, this, static_cast<int32_t>(om_cancel)));
+	m_apply.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Options::end_modal, this, static_cast<int32_t>(om_ok)));
+
 	m_advanced_options.set_font(font_small());
 	m_apply.set_font(font_small());
 	m_cancel.set_font(font_small());
@@ -383,19 +387,11 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this, "cancel",
 		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			(&Fullscreen_Menu_Advanced_Options::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_cancel)),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() / 4,   get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			(&Fullscreen_Menu_Advanced_Options::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_ok)),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -479,6 +475,17 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 
 	os(opt)
 {
+	m_cancel.sigclicked.connect
+		(boost::bind
+			(&Fullscreen_Menu_Advanced_Options::end_modal,
+			 boost::ref(*this),
+			 static_cast<int32_t>(om_cancel)));
+	m_apply.sigclicked.connect
+		(boost::bind
+			(&Fullscreen_Menu_Advanced_Options::end_modal,
+			 boost::ref(*this),
+			 static_cast<int32_t>(om_ok)));
+
 	m_cancel.set_font(font_small());
 	m_apply.set_font(font_small());
 

@@ -80,7 +80,6 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 + (list_height - middle_button_height * 2 - vspacing) / 2,
 		 middle_button_width, middle_button_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), false),
 		 ("->"),
 		 _("Forbid"),
 		 false),
@@ -90,11 +89,13 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 m_forbid_button.get_y() + middle_button_height + vspacing,
 		 middle_button_width, middle_button_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), true),
 		 _("<-"),
 		 _("Allow"),
 		 false)
 {
+	m_forbid_button.sigclicked.connect(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), false));
+	m_allow_button.sigclicked.connect(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), true));
+
 	m_allowed.selected.connect
 		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected, this, _1));
 	m_allowed.double_clicked.connect

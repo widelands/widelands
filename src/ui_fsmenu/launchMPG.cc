@@ -111,38 +111,27 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		 get_w() * 37 / 50 + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/menu_toggle_minimap.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_LaunchMPG::change_map_or_save, boost::ref(*this)),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 37 / 50, get_h() * 12 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_LaunchMPG::start_clicked, boost::ref(*this)),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 37 / 50, get_h() * 218 / 240, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_LaunchMPG::back_clicked, boost::ref(*this)),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 37 / 50, get_h() * 11 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_LaunchMPG::win_condition_clicked,
-			  boost::ref(*this)),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 get_w() * 37 / 50 + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/menu_help.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_LaunchMPG::help_clicked,
-			  boost::ref(*this)),
 		 _("Show the help window"), true, false),
 
 // Text labels
@@ -176,6 +165,22 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_ctrl         (ctrl),
 	m_chat         (0)
 {
+	m_change_map_or_save.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_LaunchMPG::change_map_or_save, boost::ref(*this)));
+	m_ok.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_LaunchMPG::start_clicked, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LaunchMPG::back_clicked, boost::ref(*this)));
+	m_wincondition.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_LaunchMPG::win_condition_clicked,
+			  boost::ref(*this)));
+	m_help_button.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_LaunchMPG::help_clicked,
+			  boost::ref(*this)));
+
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
 	m_wincondition.set_font(font_small());

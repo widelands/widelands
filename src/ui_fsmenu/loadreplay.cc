@@ -40,20 +40,16 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 	m_delete
 		(this, "delete",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-		 	 (&Fullscreen_Menu_LoadReplay::clicked_delete, boost::ref(*this)),
 		 _("Delete"), std::string(), false, false),
 
 // Replay list
@@ -78,6 +74,12 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		 _("Gametime:"), UI::Align_Right),
 	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8)
 {
+	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)));
+	m_delete.sigclicked.connect
+		(boost::bind
+		 	 (&Fullscreen_Menu_LoadReplay::clicked_delete, boost::ref(*this)));
+
 	m_title.set_textstyle(ts_big());
 	m_list.set_font(ui_fn(), fs_small());
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadReplay::replay_selected, this, _1));

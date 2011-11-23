@@ -44,7 +44,6 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 		 60, 25, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Toolsize_Menu::increase_radius, boost::ref(*this)),
 		 std::string(),
 		 parent.get_sel_radius() < MAX_TOOL_AREA),
 	m_decrease
@@ -52,10 +51,12 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 		 80, 25, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Toolsize_Menu::decrease_radius, boost::ref(*this)),
 		 std::string(),
 		 0 < parent.get_sel_radius())
 {
+	m_increase.sigclicked.connect(boost::bind(&Editor_Toolsize_Menu::increase_radius, boost::ref(*this)));
+	m_decrease.sigclicked.connect(boost::bind(&Editor_Toolsize_Menu::decrease_radius, boost::ref(*this)));
+
 	m_increase.set_repeating(true);
 	m_decrease.set_repeating(true);
 	update(parent.get_sel_radius());

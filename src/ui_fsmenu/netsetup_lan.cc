@@ -56,31 +56,22 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 		(this, "join_game",
 		 get_w() * 16 / 25, get_h() * 5333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_joingame, boost::ref(*this)),
 		 _("Join this game"), std::string(), true, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 16 / 25, get_h() * 6083 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_hostgame, boost::ref(*this)),
 		 _("Host a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 16 / 25, get_h() * 8333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(CANCEL)),
 		 _("Back"), std::string(), true, false),
 	loadlasthost
 		(this, "load_previous_host",
 		 get_w() * 171 / 200, get_h() * 19 / 40, m_buth, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_lasthost, boost::ref(*this)),
 		 _("Load previous host"), true, false),
 
 // Edit boxes
@@ -96,6 +87,20 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 		(this,
 		 get_w() * 3 / 50, get_h() * 3333 / 10000, m_lisw, get_h() * 5433 / 10000)
 {
+	joingame.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupLAN::clicked_joingame, boost::ref(*this)));
+	hostgame.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupLAN::clicked_hostgame, boost::ref(*this)));
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupLAN::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(CANCEL)));
+	loadlasthost.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupLAN::clicked_lasthost, boost::ref(*this)));
+
 	Section & s = g_options.pull_section("global"); //  for playername
 
 	joingame.set_font(font_small());
