@@ -36,10 +36,10 @@ struct GameMainMenu : public UI::UniqueWindow {
 private:
 	Interactive_Player                         & m_player;
 	Interactive_Player::Game_Main_Menu_Windows & m_windows;
-	UI::Callback_Button general_stats;
-	UI::Callback_Button ware_stats;
-	UI::Callback_Button building_stats;
-	UI::Callback_Button stock;
+	UI::Button general_stats;
+	UI::Button ware_stats;
+	UI::Button building_stats;
+	UI::Button stock;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint32_t hspacing() const {return 5;};

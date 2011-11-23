@@ -71,8 +71,8 @@ private:
 	Widelands::Building   & m_building;
 	Widelands::WaresQueue * m_queue;
 	UI::Radiogroup        * m_priority_radiogroup;
-	UI::Callback_Button   * m_increase_max_fill;
-	UI::Callback_Button   * m_decrease_max_fill;
+	UI::Button   * m_increase_max_fill;
+	UI::Button   * m_decrease_max_fill;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
 	PictureID        m_icon;            //< Index to ware's picture

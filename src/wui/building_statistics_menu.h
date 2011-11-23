@@ -28,7 +28,7 @@
 namespace Widelands {struct Building_Descr;}
 struct Interactive_Player;
 namespace UI {
-struct Callback_Button;
+struct Button;
 struct Progress_Bar;
 struct Textarea;
 }
@@ -62,7 +62,7 @@ private:
 	uint32_t                  m_anim;
 	uint32_t                  m_lastupdate;
 	uint32_t                  m_end_of_table_y;
-	UI::Callback_Button * m_btn[6];
+	UI::Button * m_btn[6];
 	int32_t                   m_last_building_index;
 	uint32_t                  m_last_table_index;
 

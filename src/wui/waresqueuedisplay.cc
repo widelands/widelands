@@ -223,22 +223,24 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	uint32_t x = Border;
 	uint32_t y = Border + (m_total_height - 2 * Border - WARE_MENU_PIC_WIDTH) / 2;
 
-	m_decrease_max_fill = new UI::Callback_Button
+	m_decrease_max_fill = new UI::Button
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
-		 boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)),
 		 _("Decrease the number of wares you want to be stored here."));
+	m_decrease_max_fill->sigclicked.connect
+		(boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
 
 	x = Border + (m_cache_size + 1) * (CellWidth + CellSpacing);
-	m_increase_max_fill = new UI::Callback_Button
+	m_increase_max_fill = new UI::Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
-		 boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)),
 		 _("Increase the number of wares you want to be stored here."));
+	m_increase_max_fill->sigclicked.connect
+		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
 
 	// Disable those buttons for replay watchers
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());

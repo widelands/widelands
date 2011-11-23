@@ -131,12 +131,14 @@ UI::Button * ShipWindow::make_button
 	(UI::Panel * parent, const std::string & name, const std::string & title,
 	 const std::string & picname, boost::function<void()> callback)
 {
-	return
-		new UI::Callback_Button
+	UI::Button * btn =
+		new UI::Button
 			(parent, name, 0, 0, 34, 34,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_Game, picname),
 			 callback, title);
+	btn->sigclicked.connect(callback);
+	return btn;
 }
 
 void ShipWindow::act_goto()

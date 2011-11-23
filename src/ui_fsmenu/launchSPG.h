@@ -75,8 +75,8 @@ private:
 	uint32_t    m_butw;
 	uint32_t    m_buth;
 
-	UI::Callback_Button       m_select_map, m_wincondition, m_back, m_ok;
-	UI::Callback_Button     * m_pos[MAX_PLAYERS];
+	UI::Button       m_select_map, m_wincondition, m_back, m_ok;
+	UI::Button     * m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname;
 	UI::Textarea              m_name, m_type, m_team, m_tribe, m_init;
 	GameSettingsProvider    * m_settings;

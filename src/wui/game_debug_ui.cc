@@ -225,7 +225,7 @@ private:
 	Widelands::FCoords const     m_coords;
 
 	UI::Multiline_Textarea       m_ui_field;
-	UI::Callback_Button m_ui_immovable;
+	UI::Button m_ui_immovable;
 	UI::Listselect<intptr_t>    m_ui_bobs;
 };
 
@@ -244,11 +244,12 @@ FieldDebugWindow::FieldDebugWindow
 		(this, "immovable",
 		 0, 280, 214, 24,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&FieldDebugWindow::open_immovable, boost::ref(*this)),
 		 ""),
 
 	m_ui_bobs(this, 0, 304, 214, 96)
 {
+	m_ui_immovable.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
+
 	assert(0 <= m_coords.x);
 	assert(m_coords.x < m_map.get_width());
 	assert(0 <= m_coords.y);

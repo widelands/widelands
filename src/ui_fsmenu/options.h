@@ -93,7 +93,7 @@ private:
 	uint32_t                          m_vbutw;
 	uint32_t                          m_butw;
 	uint32_t                          m_buth;
-	UI::Callback_Button           m_advanced_options, m_cancel, m_apply;
+	UI::Button           m_advanced_options, m_cancel, m_apply;
 	UI::SpinBox                       m_sb_maxfps, m_sb_autosave;
 	UI::SpinBox                       m_sb_remove_replays;
 	UI::Textarea                      m_title;
@@ -152,7 +152,7 @@ private:
 	uint32_t                    m_butw;
 	uint32_t                    m_buth;
 
-	UI::Callback_Button     m_cancel, m_apply;
+	UI::Button     m_cancel, m_apply;
 	UI::SpinBox                 m_sb_speed, m_sb_dis_panel, m_sb_dis_border;
 	UI::Textarea                m_title;
 	UI::Listselect<std::string> m_ui_font_list;

@@ -59,10 +59,10 @@ struct SpinBoxImpl {
 
 	/// The UI parts
 	Textarea * text;
-	Callback_Button * butPlus;
-	Callback_Button * butMinus;
-	Callback_Button * butTenPlus;
-	Callback_Button * butTenMinus;
+	Button * butPlus;
+	Button * butMinus;
+	Button * butTenPlus;
+	Button * butTenMinus;
 };
 
 /**
@@ -108,40 +108,40 @@ SpinBox::SpinBox
 	sbi->text = new UI::Textarea
 		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
 	sbi->butPlus =
-		new Callback_Button
+		new Button
 			(this, "+",
 			 butw * 21 / 10, 0, butw, butw,
 			 sbi->background,
-			 boost::bind(&SpinBox::changeValue, boost::ref(*this), 1),
 			 "+", _("Increase the value"),
 			 true, false);
+	sbi->butPlus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), 1));
 	sbi->butMinus =
-		new Callback_Button
+		new Button
 			(this, "-",
 			 w - butw * 31 / 10, 0, butw, butw,
 			 sbi->background,
-			 boost::bind(&SpinBox::changeValue, boost::ref(*this), -1),
 			 "-", _("Decrease the value"),
 			 true, false);
+	sbi->butMinus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), -1));
 	sbi->butPlus->set_repeating(true);
 	sbi->butMinus->set_repeating(true);
 	if (m_big) {
 		sbi->butTenPlus =
-			new Callback_Button
+			new Button
 				(this, "++",
 				 0, 0, butw * 2, butw,
 				 sbi->background,
-				 boost::bind(&SpinBox::changeValue, boost::ref(*this), 10),
 				 "++", _("Increase the value by 10"),
 				 true, false);
+		sbi->butTenPlus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), 10));
 		sbi->butTenMinus =
-			new Callback_Button
+			new Button
 				(this, "--",
 				 w - 2 * butw, 0, butw * 2, butw,
 				 sbi->background,
-				 boost::bind(&SpinBox::changeValue, boost::ref(*this), -10),
 				 "--", _("Decrease the value by 10"),
 				 true, false);
+		sbi->butTenMinus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), -10));
 		sbi->butTenPlus->set_repeating(true);
 		sbi->butTenMinus->set_repeating(true);
 	}

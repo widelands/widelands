@@ -147,12 +147,13 @@ void Editor_Player_Menu::update() {
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
 			m_plr_set_tribes_buts[p - 1] =
-				new UI::Callback_Button
+				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-					 boost::bind(&Editor_Player_Menu::player_tribe_clicked, boost::ref(*this), p - 1),
 					 std::string());
+			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
+				(boost::bind(&Editor_Player_Menu::player_tribe_clicked, boost::ref(*this), p - 1));
 			posx += 140 + spacing;
 		}
 		if (map.get_scenario_player_tribe(p) != "<undefined>")
@@ -170,13 +171,14 @@ void Editor_Player_Menu::update() {
 		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =
-				new UI::Callback_Button
+				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-					 g_gr->get_no_picture(), //  set below
-					 boost::bind(&Editor_Player_Menu::set_starting_pos_clicked, boost::ref(*this), p),
+					 g_gr->get_no_picture(),
 					 std::string());
+			m_plr_set_pos_buts[p - 1]->sigclicked.connect
+				(boost::bind(&Editor_Player_Menu::set_starting_pos_clicked, boost::ref(*this), p));
 			posx += size + spacing;
 		}
 		char text[] = "pics/fsel_editor_set_player_00_pos.png";

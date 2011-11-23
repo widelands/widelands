@@ -124,64 +124,70 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_progbar.set_total(100);
 
 	m_btn[Prev_Owned] =
-		new UI::Callback_Button
+		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
-			 boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Owned),
 			 _("Show previous"),
 			 false);
+	m_btn[Prev_Owned]->sigclicked.connect
+		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Owned));
 
 	m_btn[Next_Owned] =
-		new UI::Callback_Button
+		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
-			 boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Owned),
 			 _("Show next"),
 			 false);
+	m_btn[Next_Owned]->sigclicked.connect
+		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Owned));
 
 	m_btn[Prev_Construction] =
-		new UI::Callback_Button
+		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
-			 boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Construction),
 			 _("Show previous"),
 			 false);
+	m_btn[Prev_Construction]->sigclicked.connect
+		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Construction));
 
 	m_btn[Next_Construction] =
-		new UI::Callback_Button
+		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
-			 boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Construction),
 			 _("Show next"),
 			 false);
+	m_btn[Next_Construction]->sigclicked.connect
+		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Construction));
 
 	m_btn[Prev_Unproductive] =
-		new UI::Callback_Button
+		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
-			 boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Unproductive),
 			 _("Show previous"),
 			 false);
+	m_btn[Prev_Unproductive]->sigclicked.connect
+		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Unproductive));
 
 	m_btn[Next_Unproductive] =
-		new UI::Callback_Button
+		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
 			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
-			 boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Unproductive),
 			 _("Show next"),
 			 false);
+	m_btn[Next_Unproductive]->sigclicked.connect
+		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Unproductive));
 }
 
 

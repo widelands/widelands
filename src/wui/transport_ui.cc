@@ -133,7 +133,7 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			UI::Callback_Button * b = 0;
+			UI::Button * b = 0;
 
 #define ADD_WARE_BUTTON(callback, text, tooltip)                  \
 	b = new UI::Callback_Button                                    \
@@ -229,7 +229,7 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			UI::Callback_Button * b = 0;
+			UI::Button * b = 0;
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
 	b = new UI::Callback_Button                                      \
 		 (buttons, #callback,                                         \

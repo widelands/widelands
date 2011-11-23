@@ -57,31 +57,34 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t space = get_inner_w() / 40;
 		uint32_t butw  = get_inner_w() * 3 / 10;
 		uint32_t buth  = get_inner_h() * 8 / 10;
-		UI::Button * btn = new UI::Callback_Button
+		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 boost::bind
-				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 1),
 			 _("Map"), _("Select a map"), true, false);
+		btn->sigclicked.connect
+			(boost::bind
+				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 1));
 		btn->set_font(font);
 
-		btn = new UI::Callback_Button
+		btn = new UI::Button
 			(this, "saved_game",
 			 2 * space + butw, y, butw, buth,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 boost::bind
-				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 2),
 			 _("Saved game"), _("Select a saved game"), true, false);
+		btn->sigclicked.connect
+			(boost::bind
+				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 2));
 		btn->set_font(font);
 
-		btn = new UI::Callback_Button
+		btn = new UI::Button
 			(this, "cancel",
 			 3 * space + 2 * butw, y, butw, buth,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 boost::bind
-				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 0),
 			 _("Cancel"), _("Cancel selection"), true, false);
+		btn->sigclicked.connect
+			(boost::bind
+				 (&MapOrSaveSelectionWindow::pressedButton, boost::ref(*this), 0));
 		btn->set_font(font);
 	}
 

@@ -62,12 +62,12 @@ Story_Message_Box::Story_Message_Box
 	posx = spacing;
 	posy = get_inner_h() - 30;
 	posx += space;
-	new UI::Callback_Button
+	UI::Button * okbtn = new UI::Button
 		(this, "ok",
 		 posx, posy, but_width, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Story_Message_Box::clicked_ok, boost::ref(*this)),
 		 button_text);
+	okbtn->sigclicked.connect(boost::bind(&Story_Message_Box::clicked_ok, boost::ref(*this)));
 		posx += but_width;
 
 	center_to_parent();

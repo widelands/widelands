@@ -127,26 +127,27 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	posx = 5;
 	posy = get_inner_h() - 30;
 
-	m_ok_btn = new UI::Callback_Button
+	m_ok_btn = new UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)),
 		 _("OK"));
+	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)));
 
-	new UI::Callback_Button
+	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)),
 		 _("Cancel"));
+	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)));
 
-	new UI::Callback_Button
+	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
 		 spacing, posy, 120, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Main_Menu_Save_Map::clicked_make_directory, boost::ref(*this)),
 		 _("Make Directory"));
+	make_directorybtn->sigclicked.connect
+		(boost::bind(&Main_Menu_Save_Map::clicked_make_directory, boost::ref(*this)));
 
 
 	m_basedir = "maps";

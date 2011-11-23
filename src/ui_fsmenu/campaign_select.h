@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,15 +50,15 @@ private:
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::Textarea                                      title;
-	UI::Textarea                                      label_campname;
-	UI::Textarea                                      tacampname;
-	UI::Textarea                                      label_difficulty;
-	UI::Textarea                                      tadifficulty;
-	UI::Textarea                                      label_campdescr;
-	UI::Multiline_Textarea                            tacampdescr;
-	UI::Callback_Button                               b_ok, back;
-	UI::Listselect<const char *>                      m_list;
+	UI::Textarea                             title;
+	UI::Textarea                             label_campname;
+	UI::Textarea                             tacampname;
+	UI::Textarea                             label_difficulty;
+	UI::Textarea                             tadifficulty;
+	UI::Textarea                             label_campdescr;
+	UI::Multiline_Textarea                   tacampdescr;
+	UI::Button                               b_ok, back;
+	UI::Listselect<const char *>             m_list;
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign
@@ -84,17 +84,17 @@ private:
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::Textarea                                         title;
-	UI::Textarea                                         label_mapname;
-	UI::Textarea                                         tamapname;
-	UI::Textarea                                         label_author;
-	UI::Textarea                                         taauthor;
-	UI::Textarea                                         label_mapdescr;
-	UI::Multiline_Textarea                               tamapdescr;
-	UI::Callback_Button                              b_ok, back;
-	UI::Listselect<std::string>                          m_list;
-	uint32_t                                             campaign;
-	std::string                                          campmapfile;
+	UI::Textarea                            title;
+	UI::Textarea                            label_mapname;
+	UI::Textarea                            tamapname;
+	UI::Textarea                            label_author;
+	UI::Textarea                            taauthor;
+	UI::Textarea                            label_mapdescr;
+	UI::Multiline_Textarea                  tamapdescr;
+	UI::Button                              b_ok, back;
+	UI::Listselect<std::string>             m_list;
+	uint32_t                                campaign;
+	std::string                             campmapfile;
 
 };
 

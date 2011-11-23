@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,22 +105,22 @@ UI::Textarea & AttackBox::add_text
 	return result;
 }
 
-UI::Callback_Button & AttackBox::add_button
+UI::Button & AttackBox::add_button
 	(UI::Box           & parent,
 	 char        const * const text,
 	 void         (AttackBox::*fn)(),
 	 std::string const & tooltip_text)
 {
-	UI::Callback_Button & button =
-		*new UI::Callback_Button
+	UI::Button * button =
+		new UI::Button
 			(&parent, text,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-			 boost::bind(fn, boost::ref(*this)),
 			 text,
 			 tooltip_text);
-	parent.add(&button, Box::AlignCenter);
-	return button;
+	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	parent.add(button, Box::AlignCenter);
+	return *button;
 }
 
 void AttackBox::update_attack() {

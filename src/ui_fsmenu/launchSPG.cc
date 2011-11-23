@@ -144,15 +144,14 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
 		m_pos[i] =
-			new UI::Callback_Button
+			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_Game, posIco),
-				 boost::bind
-					 (&Fullscreen_Menu_LaunchSPG::switch_to_position,
-					  boost::ref(*this), i),
 				 _("Switch to position"), false);
+		m_pos[i]->sigclicked.connect
+			(boost::bind(&Fullscreen_Menu_LaunchSPG::switch_to_position, boost::ref(*this), i));
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,

@@ -88,12 +88,12 @@ private:
 	uint32_t but_h                    () const;
 
 	View     m_view;
-	UI::Callback_Button button_terrn;
-	UI::Callback_Button button_owner;
-	UI::Callback_Button button_flags;
-	UI::Callback_Button button_roads;
-	UI::Callback_Button button_bldns;
-	UI::Callback_Button button_zoom;
+	UI::Button button_terrn;
+	UI::Button button_owner;
+	UI::Button button_flags;
+	UI::Button button_roads;
+	UI::Button button_bldns;
+	UI::Button button_zoom;
 };
 
 #endif
