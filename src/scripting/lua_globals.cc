@@ -103,8 +103,11 @@ static int L__(lua_State * L) {
 
 		:arg ns:
 			The namespace were the imported script resides. Can be any of
-				:const:`maps`
+				:const:`map`
 					The script is in the ``scripting/`` directory of the current map.
+				:const:`aux`
+					The script is one of the auxiliary scripts that come bundled in
+					the ``scripting/`` directory of Widelands itself.
 
 		:type ns: :class:`string`
 		:arg script: The filename of the string without the extension ``.lua``.

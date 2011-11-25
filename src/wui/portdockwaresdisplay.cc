@@ -51,7 +51,7 @@ PortDockWaresDisplay::PortDockWaresDisplay
 
 std::string PortDockWaresDisplay::info_for_ware(Widelands::Ware_Index ware)
 {
-	uint32_t count = m_portdock.count_waiting(get_type() == Widelands::wwWORKER, ware);
+	uint32_t count = m_portdock.count_waiting(get_type(), ware);
 	return boost::lexical_cast<std::string>(count);
 }
 

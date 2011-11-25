@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,8 @@
 #include "notification.h"
 #include "player_area.h"
 
+#include <boost/noncopyable.hpp>
+
 #include <string>
 #include <cstring>
 #include <vector>
@@ -52,6 +54,7 @@ struct Flag;
 struct AttackController;
 
 struct Editor_Game_Base :
+	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
@@ -213,10 +216,6 @@ private:
 		 bool          neutral_when_competing_influence               = false,
 		 bool          conquer_guarded_location_by_superior_influence = false);
 	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
-
-
-	Editor_Game_Base & operator= (Editor_Game_Base const &);
-	explicit Editor_Game_Base    (Editor_Game_Base const &);
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \

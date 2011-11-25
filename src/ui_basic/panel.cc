@@ -533,7 +533,7 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
- * from an \ref OffscreenSurface containing the cached image, provided that
+ * from an \ref IOffscreenSurface containing the cached image, provided that
  * the graphics system supports it.
  *
  * \note Caching only works properly for solid panels that have no transparency.

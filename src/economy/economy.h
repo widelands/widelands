@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,10 +21,12 @@
 #define ECONOMY_H
 
 #include <boost/function.hpp>
+#include <set>
 #include <vector>
 
 #include "supply_list.h"
 #include "ui_basic/unique_window.h"
+#include "logic/instances.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
 
@@ -157,7 +159,7 @@ private:
 	void _reset_all_pathfinding_cycles();
 
 	void _merge(Economy &);
-	void _split(Flag &);
+	void _split(const std::set<OPtr<Flag> > &);
 
 	void _start_request_timer(int32_t delta = 200);
 

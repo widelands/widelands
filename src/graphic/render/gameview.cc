@@ -158,7 +158,7 @@ void GameView::rendermap
 		uint32_t count = dx;
 
 		while (count--) {
-			const FCoords l = f, bl = br;
+			const FCoords bl = br;
 			const Player::Field &  f_player_field =  *r_player_field;
 			const Player::Field & bl_player_field = *br_player_field;
 			f = r;
@@ -281,7 +281,6 @@ void GameView::rendermap
 				int32_t count = dx2;
 
 				while (count--) {
-					const FCoords l = f, bl = br;
 					f = r;
 					const Player::Field & f_player_field = *r_player_field;
 					move_r(mapwidth, tr);
@@ -632,7 +631,7 @@ void GameView::rendermap
 		uint32_t count = dx;
 
 		while (count--) {
-			const FCoords l = f, bl = br;
+			const FCoords bl = br;
 			f = r;
 			const int32_t f_posx = r_posx, bl_posx = br_posx;
 			const Texture & l_r_texture = *f_r_texture;
@@ -738,7 +737,6 @@ void GameView::rendermap
 				int32_t count = dx2;
 
 				while (count--) {
-					const FCoords l = f, bl = br;
 					f = r;
 					move_r(mapwidth, tr);
 					move_r(mapwidth,  r,  r_index);

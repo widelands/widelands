@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,15 @@
 #ifndef UI_OBJECT_H
 #define UI_OBJECT_H
 
+#include <boost/noncopyable.hpp>
+
 namespace UI {
 
 /**
  * Serves as a base class for UI related objects. The only purpose is
  * to provide the base class for signal function pointers.
  */
-struct Object {
+struct Object : boost::noncopyable {
 	Object() {}
 
 	// Yeah right... force a VMT so that MSVC++ gets the pointers-to-members
@@ -34,10 +36,6 @@ struct Object {
 	// OTOH, looking at the gcc assembly, gcc seems to use a less efficient
 	// pointer representation. Can anyone clear this up? -- Nicolai
 	virtual ~Object() {}
-
-private:
-	Object & operator= (Object const &);
-	explicit Object    (Object const &);
 };
 
 }

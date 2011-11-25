@@ -17,24 +17,32 @@
  *
  */
 
-#ifndef WSM_CHECKBOX_H
-#define WSM_CHECKBOX_H
+#include "routeastar.h"
+
+#include "router.h"
+#include "iroute.h"
+
+namespace Widelands {
+
+BaseRouteAStar::BaseRouteAStar(Router & router, WareWorker type) :
+	m_type(type),
+	mpf_cycle(router.assign_cycle())
+{
+}
 
 /**
- * This class is the same as an ordinary
- * checkbox, the only difference is, it has
- * a small rectangle on it with the color
- * of the graph and it needs a picture
+ * Recover a shortest route from one of the initial nodes
+ * set up by @ref RouteAStar::push to the destination node @p to.
+ * The route is stored in @p route.
  */
-struct WSM_Checkbox : public UI::Checkbox {
-	WSM_Checkbox(UI::Panel *, Point, int32_t id, PictureID picid, RGBColor);
+void BaseRouteAStar::routeto(RoutingNode & to, IRoute & route)
+{
+	assert(!to.cookie().is_active());
+	assert(to.mpf_cycle == mpf_cycle);
 
-	virtual void draw(RenderTarget &);
+	route.init(to.mpf_realcost);
+	for (RoutingNode * node = &to; node; node = node->mpf_backlink)
+		route.insert_as_first(node);
+}
 
-private:
-	PictureID  m_pic;
-	RGBColor   m_color;
-};
-
-
-#endif
+} // namespace Widelands

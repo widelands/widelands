@@ -321,7 +321,6 @@ void Map_Players_View_Data_Packet::Read
 				Map_Index r_index = r.field - &first_field;
 				Player::Field * r_player_field = player_fields + r_index;
 				do {
-					const FCoords f = r;
 					Player::Field & f_player_field = *r_player_field;
 					move_r(mapwidth, r, r_index);
 					r_player_field  = player_fields + r_index;

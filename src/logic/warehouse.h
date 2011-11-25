@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "attackable.h"
 #include "building.h"
 #include "soldiercontrol.h"
+#include "wareworker.h"
 
 struct Interactive_Player;
 struct Profile;
@@ -187,7 +188,7 @@ public:
 
 	StockPolicy get_ware_policy(Ware_Index ware) const;
 	StockPolicy get_worker_policy(Ware_Index ware) const;
-	StockPolicy get_stock_policy(bool isworker, Ware_Index ware) const;
+	StockPolicy get_stock_policy(WareWorker waretype, Ware_Index wareindex) const;
 	void set_ware_policy(Ware_Index ware, StockPolicy policy);
 	void set_worker_policy(Ware_Index ware, StockPolicy policy);
 

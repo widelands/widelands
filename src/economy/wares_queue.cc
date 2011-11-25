@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -194,10 +194,10 @@ void WaresQueue::set_max_size(const uint32_t size) throw ()
  * but if there are more wares than that in the queue, they will not get
  * lost (the building should drop them).
  */
-void WaresQueue::set_max_fill(int32_t size) throw ()
+void WaresQueue::set_max_fill(uint32_t size) throw ()
 {
-	if (size < 0) size = 0;
-	if (size > m_max_size) size = m_max_size;
+	if (size > m_max_size)
+		size = m_max_size;
 
 	m_max_fill = size;
 

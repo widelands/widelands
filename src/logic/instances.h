@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include <vector>
 
 #include <boost/function.hpp>
+#include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
 
 #include "ref_cast.h"
@@ -47,7 +48,7 @@ struct Map_Map_Object_Loader;
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
-struct Map_Object_Descr {
+struct Map_Object_Descr : boost::noncopyable {
 	friend struct ::DirAnimations;
 	typedef uint8_t Index;
 	Map_Object_Descr(char const * const _name, char const * const _descname)
@@ -80,18 +81,14 @@ struct Map_Object_Descr {
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
 
-	protected:
-		void add_attribute(uint32_t attr);
-
+protected:
+	void add_attribute(uint32_t attr);
 
 
 private:
 	typedef std::map<std::string, uint32_t> Anims;
 	typedef std::map<std::string, uint32_t> AttribMap;
 	typedef std::vector<uint32_t>           Attributes;
-
-	Map_Object_Descr & operator= (Map_Object_Descr const &);
-	explicit Map_Object_Descr    (Map_Object_Descr const &);
 
 	std::string const m_name;
 	std::string const m_descname;       ///< Descriptive name
@@ -145,7 +142,7 @@ public: const type & descr() const { \
       return ref_cast<type const, Map_Object_Descr const>(*m_descr);          \
    }                                                                          \
 
-class Map_Object {
+class Map_Object : boost::noncopyable {
 	friend struct Object_Manager;
 	friend struct Object_Ptr;
 
@@ -327,10 +324,6 @@ protected:
 	const Map_Object_Descr * m_descr;
 	Serial                   m_serial;
 	LogSink                * m_logsink;
-
-private:
-	Map_Object & operator= (Map_Object const &);
-	explicit Map_Object    (Map_Object const &);
 };
 
 inline int32_t get_reverse_dir(int32_t const dir) {
@@ -342,7 +335,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  *
  * Keeps the list of all objects currently in the game.
  */
-struct Object_Manager {
+struct Object_Manager : boost::noncopyable {
 	typedef boost::unordered_map<uint32_t, Map_Object *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
@@ -377,9 +370,6 @@ struct Object_Manager {
 private:
 	Serial   m_lastserial;
 	objmap_t m_objects;
-
-	Object_Manager & operator= (Object_Manager const &);
-	Object_Manager             (Object_Manager const &);
 };
 
 /**
@@ -399,7 +389,7 @@ struct Object_Ptr {
 	// dammit... without a Editor_Game_Base object, we can't implement a
 	// Map_Object* operator (would be _really_ nice)
 	Map_Object * get(Editor_Game_Base const &);
-	Map_Object const * get(Editor_Game_Base const & egbase) const;
+	Map_Object * get(Editor_Game_Base const & egbase) const;
 
 	bool operator<  (const Object_Ptr & other) const throw () {
 		return m_serial < other.m_serial;
@@ -428,17 +418,11 @@ struct OPtr {
 
 	bool is_set() const {return m.is_set();}
 
-	T       * get(Editor_Game_Base const &       egbase)       {
+	T * get(Editor_Game_Base const &       egbase) {
 		return static_cast<T *>(m.get(egbase));
 	}
-	T       * get(Editor_Game_Base const * const egbase)       {
-		return get(egbase);
-	}
-	T const * get(Editor_Game_Base const &       egbase) const {
-		return static_cast<T const *>(m.get(egbase));
-	}
-	T const * get(Editor_Game_Base const * const egbase) const {
-		return get(egbase);
+	T * get(Editor_Game_Base const &       egbase) const {
+		return static_cast<T *>(m.get(egbase));
 	}
 
 	bool operator<  (OPtr<T> const & other) const {return m <  other.m;}

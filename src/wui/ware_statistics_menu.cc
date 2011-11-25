@@ -33,7 +33,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/wsm_checkbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/slider.h"
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,8 @@
 #include "machdep.h"
 #include "wexception.h"
 
+#include <boost/noncopyable.hpp>
+
 #include <string>
 #include <cstring>
 
@@ -43,7 +45,7 @@
  *
  * Convenience functions are provided for many data types.
  */
-struct StreamRead {
+struct StreamRead : boost::noncopyable {
 	explicit StreamRead() {}
 	virtual ~StreamRead();
 
@@ -77,10 +79,6 @@ struct StreamRead {
 		_data_error(char const * const fmt, ...) throw () PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) _data_error(__VA_ARGS__)
-
-private:
-	StreamRead & operator= (StreamRead const &);
-	explicit StreamRead    (StreamRead const &);
 };
 
 #endif

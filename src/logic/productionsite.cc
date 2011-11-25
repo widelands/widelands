@@ -747,7 +747,6 @@ bool ProductionSite::get_building_work
 		std::pair<Ware_Index, uint8_t> & worker_type_with_count =
 			*m_recruited_workers.rbegin();
 		{
-			Ware_Index const worker_index = worker_type_with_count.first;
 			Worker_Descr const & worker_descr =
 				*tribe().get_worker_descr(worker_type_with_count.first);
 			{

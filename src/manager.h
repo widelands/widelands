@@ -34,7 +34,7 @@ template<typename T> struct Manager {
 	struct Already_Exists {};
 	struct Nonexistent    {};
 
-	/// \Throws Already_Exists if an item with the same name is already
+	/// \throws Already_Exists if an item with the same name is already
 	/// registered. The item will be deallocated before throwing.
 	void register_new(T & new_item) {
 		if (operator[](new_item.name())) {
@@ -55,7 +55,7 @@ template<typename T> struct Manager {
 	/// (by moving the last element into the former position of the removed
 	/// element)
 	///
-	/// \Throws Nonexistent if there is no such item.
+	/// \throws Nonexistent if there is no such item.
 	void remove(T & item) {
 		container_iterate(container, items, i)
 			if (*i.current == &item) {
@@ -69,7 +69,7 @@ template<typename T> struct Manager {
 
 	///  Removes the item with the given name.
 	///
-	/// \Throws Nonexistent if there is no such item.
+	/// \throws Nonexistent if there is no such item.
 	void remove(char const * const name) {
 		container_iterate(container, items, i)
 			if (not strcmp((*i.current)->name().c_str(), name)) {

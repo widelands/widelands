@@ -192,7 +192,7 @@ void MapGenerator::generate_resources
 /// \param mapInfo Information about the random map currently begin created
 /// (map specific info).
 ///
-/// \Returns A map height value corresponding to elevation.
+/// \returns A map height value corresponding to elevation.
 uint8_t MapGenerator::make_node_elevation
 	(double                      const elevation,
 	 Coords                      const c)

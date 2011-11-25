@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,9 +33,7 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory
 UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 {
 	int32_t const spacing =  5;
-	int32_t const offsx   = spacing;
 	int32_t const offsy   = 30;
-	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
 
 	new UI::Textarea(this, spacing, posy, _("Enter Directory Name: "));
@@ -49,7 +47,6 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	m_dirname = dirname;
 	m_edit->changed.set(this, &Main_Menu_Save_Map_Make_Directory::edit_changed);
 
-	posx = 5;
 	posy = get_inner_h() - 30;
 
 	m_ok_button = new
