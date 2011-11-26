@@ -136,13 +136,12 @@ private:
 			UI::Button * b = 0;
 
 #define ADD_WARE_BUTTON(callback, text, tooltip)                  \
-	b = new UI::Callback_Button                                    \
+	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
 		  g_gr->get_picture(PicMod_UI, "pics/but4.png"),            \
-		  boost::bind                                               \
-			  (&Economy_Options_Ware_Panel::callback, this),         \
 		  text, tooltip, m_can_act);                                \
+	b->sigclicked.connect(boost::bind(&Economy_Options_Ware_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
 			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))
 			b->set_repeating(true);
@@ -231,12 +230,12 @@ private:
 
 			UI::Button * b = 0;
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
-	b = new UI::Callback_Button                                      \
+	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
 		  g_gr->get_picture(PicMod_UI, "pics/but4.png"),              \
-		  boost::bind(&Economy_Options_Worker_Panel::callback, this), \
 		  text, tooltip, m_can_act);                                  \
+	b->sigclicked.connect(boost::bind(&Economy_Options_Worker_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
 
 			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))

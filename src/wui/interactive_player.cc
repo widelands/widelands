@@ -76,18 +76,6 @@ int32_t Int_Player_overlay_callback_function
 		get_buildcaps(c);
 }
 
-
-/*
- * UI::Callback_Button m_toggle_chat;
-	UI::Callback_Button m_toggle_options_menu;
-	UI::Callback_Button m_toggle_statistics_menu;
-	UI::Callback_Button m_toggle_objectives;
-	UI::Callback_Button m_toggle_minimap;
-	UI::Callback_Button m_toggle_buildhelp;
-	UI::Callback_Button m_toggle_message_menu;
-	UI::Callback_Button m_toggle_help;
-	*/
-
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
