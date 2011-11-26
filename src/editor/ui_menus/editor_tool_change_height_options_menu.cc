@@ -99,10 +99,16 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 m_change_by_value.get_w(), height,
 		 UI::Align_BottomCenter)
 {
-	m_change_by_increase.sigclicked.connect(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, boost::ref(*this)));
-	m_change_by_decrease.sigclicked.connect(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, boost::ref(*this)));
-	m_set_to_increase.sigclicked.connect(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, boost::ref(*this)));
-	m_set_to_decrease.sigclicked.connect(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, boost::ref(*this)));
+	m_change_by_increase.sigclicked.connect
+		(boost::bind
+		 (&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, boost::ref(*this)));
+	m_change_by_decrease.sigclicked.connect
+		(boost::bind
+		 (&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, boost::ref(*this)));
+	m_set_to_increase.sigclicked.connect
+		(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, boost::ref(*this)));
+	m_set_to_decrease.sigclicked.connect
+		(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, boost::ref(*this)));
 
 	m_change_by_increase.set_repeating(true);
 	m_change_by_decrease.set_repeating(true);

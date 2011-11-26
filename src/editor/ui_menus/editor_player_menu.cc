@@ -56,7 +56,8 @@ Editor_Player_Menu::Editor_Player_Menu
 		 1 < parent.egbase().map().get_nrplayers())
 {
 	m_add_player.sigclicked.connect(boost::bind(&Editor_Player_Menu::clicked_add_player, boost::ref(*this)));
-	m_remove_last_player.sigclicked.connect(boost::bind(&Editor_Player_Menu::clicked_remove_last_player, boost::ref(*this)));
+	m_remove_last_player.sigclicked.connect
+		(boost::bind(&Editor_Player_Menu::clicked_remove_last_player, boost::ref(*this)));
 
 	int32_t const spacing = 5;
 	int32_t const width   = 20;

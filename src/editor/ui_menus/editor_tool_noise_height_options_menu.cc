@@ -114,12 +114,18 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 get_inner_w() - 2 * hspacing(), height,
 		 UI::Align_BottomCenter)
 {
-	m_lower_increase.sigclicked.connect(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, boost::ref(*this)));
-	m_lower_decrease.sigclicked.connect(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, boost::ref(*this)));
-	m_upper_increase.sigclicked.connect(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, boost::ref(*this)));
-	m_upper_decrease.sigclicked.connect(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, boost::ref(*this)));
-	m_setto_increase.sigclicked.connect(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, boost::ref(*this)));
-	m_setto_decrease.sigclicked.connect(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, boost::ref(*this)));
+	m_lower_increase.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, boost::ref(*this)));
+	m_lower_decrease.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, boost::ref(*this)));
+	m_upper_increase.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, boost::ref(*this)));
+	m_upper_decrease.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, boost::ref(*this)));
+	m_setto_increase.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, boost::ref(*this)));
+	m_setto_decrease.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, boost::ref(*this)));
 
 	m_lower_increase.set_repeating(true);
 	m_lower_decrease.set_repeating(true);

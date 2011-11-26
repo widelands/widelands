@@ -93,8 +93,10 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 _("Allow"),
 		 false)
 {
-	m_forbid_button.sigclicked.connect(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), false));
-	m_allow_button.sigclicked.connect(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), true));
+	m_forbid_button.sigclicked.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), false));
+	m_allow_button.sigclicked.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), true));
 
 	m_allowed.selected.connect
 		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected, this, _1));
