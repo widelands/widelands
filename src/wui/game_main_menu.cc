@@ -48,30 +48,35 @@ general_stats
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
-	 boost::bind(&General_Statistics_Menu::Registry::toggle, boost::ref(m_windows.general_stats)),
 	 _("General Statistics")),
 ware_stats
 	(this, "ware_stats",
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
-	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.ware_stats)),
 	 _("Ware Statistics")),
 building_stats
 	(this, "building_stats",
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
-	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.building_stats)),
 	 _("Building Statistics")),
 stock
 	(this, "stock",
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
-	 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.stock)),
 	 _("Stock"))
 {
+	general_stats.sigclicked.connect
+		(boost::bind(&General_Statistics_Menu::Registry::toggle, boost::ref(m_windows.general_stats)));
+	ware_stats.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.ware_stats)));
+	building_stats.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.building_stats)));
+	stock.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.stock)));
+
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  assert (not registry.onCreate);                                             \
  assert (not registry.onDelete);                                             \

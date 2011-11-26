@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -144,18 +144,15 @@ m_selected_information(0)
 	iterate_players_existing_const(p, nr_players, game, player) {
 		char buffer[36];
 		snprintf(buffer, sizeof(buffer), "pics/genstats_enable_plr_%02u.png", p);
-		UI::Callback_Button & cb =
-			*new UI::Callback_Button
+		UI::Button & cb =
+			*new UI::Button
 				(hbox1, "playerbutton",
 				 0, 0, 25, 25,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, buffer),
-				 boost::bind
-				 	(&General_Statistics_Menu::cb_changed_to,
-					 boost::ref(*this),
-					p),
 				 player->get_name().c_str());
-
+		cb.sigclicked.connect
+			(boost::bind(&General_Statistics_Menu::cb_changed_to, this, p));
 		cb.set_perm_pressed(m_my_registry->selected_players[p - 1]);
 
 		m_cbs[p - 1] = &cb;
@@ -269,8 +266,8 @@ m_selected_information(0)
 	}
 
 	m_radiogroup.set_state(m_selected_information);
-	m_radiogroup.changedto.set
-		(this, &General_Statistics_Menu::radiogroup_changed);
+	m_radiogroup.changedto.connect
+		(boost::bind(&General_Statistics_Menu::radiogroup_changed, this, _1));
 
 	m_box.add(hbox2, UI::Box::AlignTop);
 

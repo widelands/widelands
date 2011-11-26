@@ -76,7 +76,7 @@ GameObjectivesMenu::GameObjectivesMenu
 #endif
 	m_player(plr)
 {
-	list.selected.set(this, &GameObjectivesMenu::selected);
+	list.selected.connect(boost::bind(&GameObjectivesMenu::selected, this, _1));
 	if (get_usedefaultpos())
 		center_to_parent();
 }

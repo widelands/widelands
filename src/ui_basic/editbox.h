@@ -24,6 +24,7 @@
 #include "button.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/signal.hpp>
 #include <SDL_keyboard.h>
 
 #define CHAT_HISTORY_SIZE 5
@@ -41,16 +42,12 @@ struct EditBox : public Panel {
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 PictureID const & background =
 		 	g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 int32_t id = 0,
 		 Align align = Align_Center);
 	virtual ~EditBox();
 
-	Signal changed;
-	Signal1<int32_t> changedid;
-	Signal ok;
-	Signal1<int32_t> okid;
-	Signal cancel;
-	Signal1<int32_t> cancelid;
+	boost::signal<void ()> changed;
+	boost::signal<void ()> ok;
+	boost::signal<void ()> cancel;
 
 	std::string const & text() const;
 	void setText(std::string const &);

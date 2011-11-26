@@ -116,17 +116,18 @@ WarehouseWaresPanel::WarehouseWaresPanel
 
 	if (m_can_act) {
 		UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+		UI::Button * b;
 		add(buttons, UI::Box::AlignLeft);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
-			buttons->add                                                                            \
-				(new UI::Callback_Button                                                             \
-					(buttons, #policy, 0, 0, 34, 34,                                                  \
-					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),                                   \
-					 g_gr->get_picture(PicMod_Game, "pics/stock_policy_button_" #policy ".png"),      \
-					 boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname), \
-					 tooltip),                                                                        \
-				 UI::Box::AlignCenter);                                                              \
+		b = new UI::Button                                                             \
+			(buttons, #policy, 0, 0, 34, 34,                                                  \
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),                                   \
+			 g_gr->get_picture(PicMod_Game, "pics/stock_policy_button_" #policy ".png"),      \
+			 tooltip),                                                                        \
+		b->sigclicked.connect \
+			(boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)), \
+		buttons->add(b, UI::Box::AlignCenter);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))

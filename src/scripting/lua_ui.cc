@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -632,7 +632,7 @@ int L_MapView::get_is_building_road(lua_State * L) {
 int L_MapView::click(lua_State * L) {
 	get()->warp_mouse_to_node
 		((*get_user_class<LuaMap::L_Field>(L, 2))->coords());
-	get()->fieldclicked.call();
+	get()->fieldclicked();
 	return 0;
 }
 

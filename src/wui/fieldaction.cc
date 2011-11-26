@@ -65,9 +65,9 @@ struct BuildGrid : public UI::Icon_Grid {
 		 const int32_t x, const int32_t y,
 		 int32_t cols);
 
-	UI::Signal1<Widelands::Building_Index::value_t> buildclicked;
-	UI::Signal1<Widelands::Building_Index::value_t> buildmouseout;
-	UI::Signal1<Widelands::Building_Index::value_t> buildmousein;
+	boost::signal<void (Widelands::Building_Index::value_t)> buildclicked;
+	boost::signal<void (Widelands::Building_Index::value_t)> buildmouseout;
+	boost::signal<void (Widelands::Building_Index::value_t)> buildmousein;
 
 	void add(Widelands::Building_Index::value_t);
 
@@ -91,9 +91,9 @@ BuildGrid::BuildGrid
 		(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
 	m_tribe(tribe)
 {
-	clicked.set(this, &BuildGrid::clickslot);
-	mouseout.set(this, &BuildGrid::mouseoutslot);
-	mousein.set(this, &BuildGrid::mouseinslot);
+	clicked.connect(boost::bind(&BuildGrid::clickslot, this, _1));
+	mouseout.connect(boost::bind(&BuildGrid::mouseoutslot, this, _1));
+	mousein.connect(boost::bind(&BuildGrid::mouseinslot, this, _1));
 }
 
 
@@ -122,8 +122,7 @@ belongs to and trigger signal buildclicked.
 */
 void BuildGrid::clickslot(int32_t const idx)
 {
-	buildclicked.call
-		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
+	buildclicked(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
@@ -137,8 +136,7 @@ building it belongs to and trigger signal buildmouseout.
 */
 void BuildGrid::mouseoutslot(int32_t idx)
 {
-	buildmouseout.call
-		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
+	buildmouseout(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
@@ -152,8 +150,7 @@ building it belongs to and trigger signal buildmousein.
 */
 void BuildGrid::mouseinslot(int32_t idx)
 {
-	buildmousein.call
-		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
+	buildmousein(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
@@ -565,12 +562,12 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
 			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
-			(*ppgrid)->buildclicked.set(this, &FieldActionWindow::act_build);
-			(*ppgrid)->buildmouseout.set
-				(this, &FieldActionWindow::building_icon_mouse_out);
+			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
+			(*ppgrid)->buildmouseout.connect
+				(boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));
 
-			(*ppgrid)->buildmousein.set
-				(this, &FieldActionWindow::building_icon_mouse_in);
+			(*ppgrid)->buildmousein.connect
+				(boost::bind(&FieldActionWindow::building_icon_mouse_in, this, _1));
 		}
 
 		// Add it to the grid
@@ -639,13 +636,14 @@ UI::Button & FieldActionWindow::add_button
 	 std::string const & tooltip_text,
 	 bool                const repeating)
 {
-	UI::Callback_Button & button =
-		*new UI::Callback_Button
+	UI::Button & button =
+		*new UI::Button
 			(box, name,
 			 0, 0, 34, 34,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 g_gr->get_picture(PicMod_Game, picname),
-			 boost::bind(fn, boost::ref(*this)), tooltip_text);
+			 tooltip_text);
+	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
 	box->add
 		(&button, UI::Box::AlignTop);

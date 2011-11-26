@@ -19,6 +19,8 @@
 
 #include "multilinetextarea.h"
 
+#include <boost/bind.hpp>
+
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/richtext.h"
@@ -54,7 +56,7 @@ Multiline_Textarea::Multiline_Textarea
 
 	set_align(align);
 
-	m_scrollbar.moved.set(this, &Multiline_Textarea::scrollpos_changed);
+	m_scrollbar.moved.connect(boost::bind(&Multiline_Textarea::scrollpos_changed, this, _1));
 
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_BIG));

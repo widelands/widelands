@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 
 #define MAX_TOOL_AREA 9
 
+#include <boost/noncopyable.hpp>
+
 #include "logic/widelands_geometry.h"
 
 struct Editor_Interactive;
@@ -33,7 +35,7 @@ namespace Widelands {struct Map;}
  * one function (like delete_building, place building, modify building are 3
  * tools).
  */
-struct Editor_Tool {
+struct Editor_Tool : boost::noncopyable {
 	Editor_Tool(Editor_Tool & second, Editor_Tool & third) :
 	m_second(second), m_third(third)
 	{}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,10 +65,10 @@ struct Main_Menu_New_Random_Map : public UI::Window {
 private:
 	UI::Textarea * m_width, * m_height, * m_land;
 	UI::Textarea * m_water, * m_mountains, * m_wasteland, * m_players;
-	UI::Callback_Button * m_res;
-	UI::Callback_Button * m_world;
+	UI::Button * m_res;
+	UI::Button * m_world;
 	UI::Checkbox * m_island_mode;
-	UI::Callback_Button * m_goButton;
+	UI::Button * m_goButton;
 	int32_t m_w, m_h, m_landval, m_waterval, m_wastelandval;
 	uint8_t m_pn;
 	uint32_t m_mapNumber;

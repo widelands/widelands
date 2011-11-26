@@ -96,7 +96,7 @@ private:
 	UI::Textarea m_label_nr_players, m_nr_players;
 	UI::Textarea m_label_descr;
 	UI::Multiline_Textarea m_descr;
-	UI::Callback_Button m_back, m_ok;
+	UI::Button m_back, m_ok;
 	UI::Checkbox                      m_load_map_as_scenario;
 	UI::Checkbox *                    m_show_all_maps;
 	std::vector<UI::Checkbox *>       m_tags_checkboxes;

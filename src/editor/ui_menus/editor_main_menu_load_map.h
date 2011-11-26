@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,11 +26,10 @@
 
 struct Editor_Interactive;
 namespace UI {
-struct EditBox;
+struct Button;
 template <typename T> struct Listselect;
 struct Textarea;
 struct Multiline_Textarea;
-struct Callback_Button;
 };
 
 /**
@@ -49,7 +48,7 @@ private:
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
 	UI::Listselect<const char *> * m_ls;
-	UI::Callback_Button * m_ok_btn;
+	UI::Button * m_ok_btn;
 
 	std::string m_basedir;
 	std::string m_curdir;

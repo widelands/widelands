@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,8 +84,8 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tool Menu"))
 			 0);
 	}
 
-	m_radioselect.changed.set(this, &Editor_Tool_Menu::changed_to);
-	m_radioselect.clicked.set(this, &Editor_Tool_Menu::changed_to);
+	m_radioselect.changed.connect(boost::bind(&Editor_Tool_Menu::changed_to, this));
+	m_radioselect.clicked.connect(boost::bind(&Editor_Tool_Menu::changed_to, this));
 
 	if (get_usedefaultpos())
 		center_to_parent();

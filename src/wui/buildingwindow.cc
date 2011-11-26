@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -164,16 +164,17 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
-				capsbuttons->add
-					(new UI::Callback_Button
-						(capsbuttons, is_stopped ? "continue" : "stop",
-						 0, 0, 34, 34,
+				UI::Button * stopbtn =
+					new UI::Button
+						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
 						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 						 g_gr->get_picture
 						 	(PicMod_Game,
 						 	 (is_stopped ? "pics/continue.png" : "pics/stop.png")),
-						 boost::bind(&Building_Window::act_start_stop, boost::ref(*this)),
-						 is_stopped ? _("Continue") : _("Stop")),
+						 is_stopped ? _("Continue") : _("Stop"));
+				stopbtn->sigclicked.connect(boost::bind(&Building_Window::act_start_stop, boost::ref(*this)));
+				capsbuttons->add
+					(stopbtn,
 					 UI::Box::AlignCenter);
 			}
 
@@ -189,91 +190,102 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					snprintf
 						(buffer, sizeof(buffer),
 						 _("Enhance to %s"), building_descr.descname().c_str());
-					capsbuttons->add
-						(new UI::Callback_Button
-							(capsbuttons, "enhance",
-							 0, 0, 34, 34,
+					UI::Button * enhancebtn =
+						new UI::Button
+							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-							 building_descr.get_buildicon(),
-							 boost::bind
-								(&Building_Window::act_enhance,
-								 boost::ref(*this),
-								 boost::ref(*i.current)), //  button id = building id)
-							 buffer),
+							 building_descr.get_buildicon(), //  button id = building id)
+							 buffer);
+					enhancebtn->sigclicked.connect
+						(boost::bind
+							(&Building_Window::act_enhance,
+							 boost::ref(*this),
+							 boost::ref(*i.current)));
+					capsbuttons->add
+						(enhancebtn,
 						 UI::Box::AlignCenter);
 				}
 		}
 
 		if (m_capscache & (1 << Widelands::Building::PCap_Bulldoze)) {
-			capsbuttons->add
-				(new UI::Callback_Button
-					(capsbuttons, "destroy",
-					 0, 0, 34, 34,
+			UI::Button * destroybtn =
+				new UI::Button
+					(capsbuttons, "destroy", 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 g_gr->get_picture(PicMod_Game, pic_bulldoze),
-					 boost::bind(&Building_Window::act_bulldoze, boost::ref(*this)),
-					 _("Destroy")),
+					 _("Destroy"));
+			destroybtn->sigclicked.connect
+				(boost::bind(&Building_Window::act_bulldoze, boost::ref(*this)));
+			capsbuttons->add
+				(destroybtn,
 				 UI::Box::AlignCenter);
 		}
 
 		if (m_capscache & (1 << Widelands::Building::PCap_Dismantle)) {
-			capsbuttons->add
-				(new UI::Callback_Button
-					(capsbuttons, "dismantle",
-					 0, 0, 34, 34,
+			UI::Button * dismantlebtn =
+				new UI::Button
+					(capsbuttons, "dismantle", 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 g_gr->get_picture(PicMod_Game, pic_dismantle),
-					 boost::bind(&Building_Window::act_dismantle, boost::ref(*this)),
-					 _("Dismantle")),
+					 _("Dismantle"));
+			dismantlebtn->sigclicked.connect(boost::bind(&Building_Window::act_dismantle, boost::ref(*this)));
+			capsbuttons->add
+				(dismantlebtn,
 				 UI::Box::AlignCenter);
 		}
 	}
 
 	if (can_see) {
 		if (m_building.descr().m_workarea_info.size()) {
-			m_toggle_workarea = new UI::Callback_Button
+			m_toggle_workarea = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
-				 boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)),
 				 _("Hide workarea"));
+			m_toggle_workarea->sigclicked.connect
+				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
+
 			capsbuttons->add(m_toggle_workarea, UI::Box::AlignCenter);
 			configure_workarea_button();
 			set_fastclick_panel(m_toggle_workarea);
 		}
 
 		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
-			capsbuttons->add
-				(new UI::Callback_Button
-					(capsbuttons, "debug",
-					 0, 0, 34, 34,
+			UI::Button * debugbtn =
+				new UI::Button
+					(capsbuttons, "debug", 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 g_gr->get_picture(PicMod_Game,  pic_debug),
-					 boost::bind(&Building_Window::act_debug, boost::ref(*this)),
-					 _("Debug")),
+					 _("Debug"));
+			debugbtn->sigclicked.connect(boost::bind(&Building_Window::act_debug, boost::ref(*this)));
+			capsbuttons->add
+				(debugbtn,
 				 UI::Box::AlignCenter);
 		}
 
-		capsbuttons->add
-			(new UI::Callback_Button
-				(capsbuttons, "goto",
-				 0, 0, 34, 34,
+		UI::Button * gotobtn =
+			new UI::Button
+				(capsbuttons, "goto", 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
-				 boost::bind(&Building_Window::clicked_goto, boost::ref(*this))),
+				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"));
+		gotobtn->sigclicked.connect(boost::bind(&Building_Window::clicked_goto, boost::ref(*this)));
+		capsbuttons->add
+			(gotobtn,
 			 UI::Box::AlignCenter);
 
 		if (m_building.descr().has_help_text()) {
 			capsbuttons->add_inf_space();
+			UI::Button * helpbtn =
+				new UI::Button
+					(capsbuttons, "help", 0, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+					 _("Help"));
+			helpbtn->sigclicked.connect
+				(boost::bind(&Building_Window::help_clicked, boost::ref(*this)));
 			capsbuttons->add
-				(new UI::Callback_Button
-				 (capsbuttons, "help",
-				  0, 0, 34, 34,
-				  g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				  g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-				  boost::bind(&Building_Window::help_clicked, boost::ref(*this)),
-				  _("Help")),
+				(helpbtn,
 				 UI::Box::AlignCenter);
 
 		}

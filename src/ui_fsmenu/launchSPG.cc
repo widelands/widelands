@@ -52,28 +52,21 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 		(this, "select_map",
 		 get_w() * 7 / 10, get_h() * 3 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_LaunchSPG::select_map, boost::ref(*this)),
 		 _("Select map"), std::string(), false, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 7 / 10, get_h() * 4 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_LaunchSPG::win_condition_clicked,
-			  boost::ref(*this)),
 		 "", std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 7 / 10, get_h() * 9 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_LaunchSPG::back_clicked, boost::ref(*this)),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 7 / 10, get_h() * 1 / 2, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_LaunchSPG::start_clicked, boost::ref(*this)),
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
@@ -111,6 +104,16 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_ctrl         (ctrl),
 	m_is_scenario  (false)
 {
+	m_select_map.sigclicked.connect(boost::bind(&Fullscreen_Menu_LaunchSPG::select_map, boost::ref(*this)));
+	m_wincondition.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_LaunchSPG::win_condition_clicked,
+			  boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LaunchSPG::back_clicked, boost::ref(*this)));
+	m_ok.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_LaunchSPG::start_clicked, boost::ref(*this)));
+
 
 	// Register win condition scripts
 	m_lua = create_LuaInterface();
@@ -144,15 +147,14 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
 		m_pos[i] =
-			new UI::Callback_Button
+			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_Game, posIco),
-				 boost::bind
-					 (&Fullscreen_Menu_LaunchSPG::switch_to_position,
-					  boost::ref(*this), i),
 				 _("Switch to position"), false);
+		m_pos[i]->sigclicked.connect
+			(boost::bind(&Fullscreen_Menu_LaunchSPG::switch_to_position, boost::ref(*this), i));
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,

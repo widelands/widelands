@@ -76,31 +76,22 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::clicked_joingame,
-			  boost::ref(*this)),
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::clicked_hostgame,
-			  boost::ref(*this)),
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::end_modal,
-			  boost::ref(*this), static_cast<int32_t>(CANCEL)),
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes
 	servername
 		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
 
 // List
 	usersonline
@@ -124,6 +115,19 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	password(pwd),
 	reg(registered)
 {
+	joingame.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::clicked_joingame,
+			  boost::ref(*this)));
+	hostgame.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::clicked_hostgame,
+			  boost::ref(*this)));
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupGGZ::end_modal,
+			  boost::ref(*this), static_cast<int32_t>(CANCEL)));
+
 	back.set_font(font_small());
 	joingame.set_font(font_small());
 	hostgame.set_font(font_small());
@@ -139,8 +143,8 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	maxplayers  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	std::string server = s.get_string("servername", "");
 	servername  .setText (server);
-	servername  .changed.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::change_servername);
+	servername  .changed.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::change_servername, this));
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
@@ -153,13 +157,13 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(0,
 		 boost::bind
 		 	(&Fullscreen_Menu_NetSetupGGZ::compare_usertype, this, _1, _2));
-	usersonline .double_clicked.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::user_doubleclicked);
+	usersonline .double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::user_doubleclicked, this, _1));
 	opengames   .set_font(m_fn, m_fs);
-	opengames   .selected.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::server_selected);
-	opengames   .double_clicked.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::server_doubleclicked);
+	opengames   .selected.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::server_selected, this, _1));
+	opengames   .double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::server_doubleclicked, this, _1));
 
 	// try to connect to the metaserver
 	if (!NetGGZ::ref().usedcore())

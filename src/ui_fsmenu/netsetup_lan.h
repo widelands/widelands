@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,17 +61,17 @@ struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {
 	std::string const & get_playername();
 
 private:
-	uint32_t                                    m_butx;
-	uint32_t                                    m_butw;
-	uint32_t                                    m_buth;
-	uint32_t                                    m_lisw;
-	UI::Textarea                                title, m_opengames;
-	UI::Textarea                                m_playername, m_hostname;
-	UI::Callback_Button                     joingame, hostgame, back, loadlasthost;
-	UI::EditBox                                 playername;
-	UI::EditBox                                 hostname;
-	UI::Table<const Net_Open_Game * const>      opengames;
-	LAN_Game_Finder                             discovery;
+	uint32_t m_butx;
+	uint32_t m_butw;
+	uint32_t m_buth;
+	uint32_t m_lisw;
+	UI::Textarea title, m_opengames;
+	UI::Textarea m_playername, m_hostname;
+	UI::Button joingame, hostgame, back, loadlasthost;
+	UI::EditBox playername;
+	UI::EditBox hostname;
+	UI::Table<const Net_Open_Game * const> opengames;
+	LAN_Game_Finder discovery;
 
 	void game_selected (uint32_t);
 	void game_doubleclicked (uint32_t);

@@ -31,7 +31,6 @@
 #include "i18n.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
-#include "ui_basic/object.h" //only needed for i18n function _()
 #include "worker.h"
 
 #include "dismantlesite.h"

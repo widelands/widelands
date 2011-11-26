@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +43,7 @@ private:
 	Editor_Set_Terrain_Tool   & m_tool;
 	void selected(int32_t, bool);
 	std::vector<UI::Checkbox *> m_checkboxes;
+	bool m_select_recursion_protect;
 };
 
 

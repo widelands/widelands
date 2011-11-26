@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,7 @@ private:
 	std::vector<UI::Checkbox *> m_checkboxes;
 	Editor_Place_Bob_Tool     & m_pit;
 	void clicked(int32_t, bool);
+	bool m_click_recursion_protect;
 };
 
 #endif

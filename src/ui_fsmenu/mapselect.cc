@@ -102,13 +102,11 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_MapSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_MapSelect::ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 
 // Checkbox
@@ -125,6 +123,9 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
+	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::ok, boost::ref(*this)));
+
 	m_title.set_textstyle(ts_big());
 	m_label_load_map_as_scenario.set_textstyle(ts_small());
 	m_label_name                .set_textstyle(ts_small());
@@ -157,8 +158,8 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_load_map_as_scenario.set_state(false);
 	m_load_map_as_scenario.set_enabled(false);
 
-	m_table.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
-	m_table.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
+	m_table.selected.connect(boost::bind(&Fullscreen_Menu_MapSelect::map_selected, this, _1));
+	m_table.double_clicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::double_clicked, this, _1));
 
 	UI::Box * vbox = new UI::Box
 		(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
@@ -536,9 +537,8 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 	m_tags_ordered.push_back(tag);
 
 	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0));
-	cb->set_id(id);
-	cb->changedtoid.set
-		(this, &Fullscreen_Menu_MapSelect::_tagbox_changed);
+	cb->changedto.connect
+		(boost::bind(&Fullscreen_Menu_MapSelect::_tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Box::AlignLeft, true);
 	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft, 100);

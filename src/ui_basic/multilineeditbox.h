@@ -21,9 +21,9 @@
 #define UI_MULTILINEEDITBOX_H
 
 #include "panel.h"
-#include "m_signal.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/signal.hpp>
 
 namespace UI {
 
@@ -37,7 +37,7 @@ struct Multiline_Editbox : public Panel {
 	Multiline_Editbox
 		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string & text);
 
-	Signal changed;
+	boost::signal<void ()> changed;
 
 	std::string const & get_text() const;
 	void set_text(std::string const &);

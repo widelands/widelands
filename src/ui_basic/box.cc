@@ -25,6 +25,7 @@
 #include "scrollbar.h"
 
 #include <algorithm>
+#include <boost/bind.hpp>
 
 namespace UI {
 /**
@@ -177,7 +178,7 @@ void Box::layout()
 			m_scrollbar = new Scrollbar
 					(this, sb_x, sb_y, sb_w,
 					 sb_h, m_orientation == Horizontal);
-			m_scrollbar->moved.set(this, &Box::scrollbar_moved);
+			m_scrollbar->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
 		} else {
 			m_scrollbar->set_pos(Point(sb_x, sb_y));
 			m_scrollbar->set_size(sb_w, sb_h);

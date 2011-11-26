@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,13 +87,11 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_Editor_MapSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_Editor_MapSelect::ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 
 // Map list
@@ -105,6 +103,9 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 // Runtime variables
 	m_curdir("maps"), m_basedir("maps")
 {
+	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_Editor_MapSelect::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_Editor_MapSelect::ok, boost::ref(*this)));
+
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
 
@@ -123,9 +124,9 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_descr           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list            .set_font(m_fn, m_fs);
 
-	m_list.selected.set(this, &Fullscreen_Menu_Editor_MapSelect::map_selected);
-	m_list.double_clicked.set
-		(this, &Fullscreen_Menu_Editor_MapSelect::double_clicked);
+	m_list.selected.connect(boost::bind(&Fullscreen_Menu_Editor_MapSelect::map_selected, this, _1));
+	m_list.double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_Editor_MapSelect::double_clicked, this, _1));
 
 	fill_list();
 }
