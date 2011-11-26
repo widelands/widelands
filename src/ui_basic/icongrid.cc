@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,22 +30,19 @@
 
 namespace UI {
 
-struct IconGridButton : public Callback_Button {
+struct IconGridButton : public Button {
 	IconGridButton
 		(Icon_Grid         & parent,
 		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const PictureID background_pictute_id,
 		 const PictureID foreground_picture_id,
-		 void (Icon_Grid::*callback_function)(uint32_t),
-		 Icon_Grid & callback_argument_this,
 		 const uint32_t callback_argument_id,
 		 Textarea          & ta, std::string const & descr)
 		:
-		Callback_Button
+		Button
 			(&parent, name, x, y, w, h, background_pictute_id,
 			 foreground_picture_id,
-			 boost::bind(callback_function, boost::ref(callback_argument_this), callback_argument_id),
 			 "", true, true),
 			 m_icongrid(parent), m_ta(ta), m_descr(descr),
 			 _callback_argument_id(callback_argument_id)
@@ -65,7 +62,7 @@ private:
 			m_icongrid.mouseout(_callback_argument_id);
 			m_ta.set_text("");
 		}
-		Callback_Button::handle_mousein(inside);
+		Button::handle_mousein(inside);
 	}
 };
 
@@ -117,11 +114,12 @@ int32_t Icon_Grid::add
 	uint32_t x = (idx % m_columns) * m_cell_width;
 	uint32_t y = (idx / m_columns) * m_cell_height;
 
-	new IconGridButton
+	UI::Button * btn = new IconGridButton
 		(*this, name,
 		 x, y, m_cell_width, m_cell_height,
 		 g_gr->get_no_picture(), picid,
-		 &Icon_Grid::clicked_button, *this, idx, m_ta, descr);
+		 idx, m_ta, descr);
+	btn->sigclicked.connect(boost::bind(&Icon_Grid::clicked_button, this, idx));
 
 	return idx;
 }
