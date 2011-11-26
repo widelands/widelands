@@ -237,13 +237,15 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 	if (can_see) {
 		if (m_building.descr().m_workarea_info.size()) {
-			m_toggle_workarea = new UI::Callback_Button
+			m_toggle_workarea = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
-				 boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)),
 				 _("Hide workarea"));
+			m_toggle_workarea->sigclicked.connect
+				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
+
 			capsbuttons->add(m_toggle_workarea, UI::Box::AlignCenter);
 			configure_workarea_button();
 			set_fastclick_panel(m_toggle_workarea);
