@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-21 23:07+0000\n"
+"PO-Revision-Date: 2011-11-24 21:20+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-23 05:09+0000\n"
-"X-Generator: Launchpad (build 14170)\n"
+"X-Launchpad-Export-Date: 2011-11-25 05:11+0000\n"
+"X-Generator: Launchpad (build 14376)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -169,6 +169,12 @@ msgid ""
 "newborn lamb in the honour of my father whose eyes are set upon me "
 "today.<br>So be it!\" "
 msgstr ""
+" \"Nech je tak, generáli zostavujú moje jednotky a sám Boldreth povedie prvý "
+"útok. Budem jazdiť po jeho boku a oslobodíme Al'thunran od vojny a do "
+"hlavného mesta opäť prinesieme mier. Keď mladé slnko vyjde ponad stromy v "
+"zajtrajšie ráno, nariadim útok. Pri súmraku oslávim svoje víťazstvo v "
+"drevených halách vojvodcu a obetujem novorodené jahňa na počesť svojho otca, "
+"ktorého oči na mňa dnes hľadia.<br>Nech je tak!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid ""
@@ -408,6 +414,9 @@ msgid ""
 "that should attack. When you are ready with setting the number, click on the "
 "cross ('start attack')"
 msgstr ""
+"-> Aby ste zaútočili na nepriateľa, musíte kliknúť na dvere nepriateľskej "
+"vojenskej budovy. Zjaví sa menu, ktoré vám umožní vybrať počet vojakov, "
+"ktorí zaútočia. Keď už máte vybratý počet, kliknite na kríž ('Začať útok')."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 msgid ""
@@ -416,6 +425,10 @@ msgid ""
 "important in fights and the better a soldier is, the higher is the chance to "
 "win a fight.<br>Attributes are: health points, attack, defense and evade."
 msgstr ""
+"-> Výcvikové stavby ako výcvikový tábor alebo aréna sa používajú na "
+"trénovanie vojakov v rozličných vlastnostiach. Tieto vlastnosti sú dôležité "
+"pri bojoch a čím je vojak lepší, tým väčšiu šancu má vyhrať súboj.<br>Sú to "
+"nasledovné vlastnosti: zdravie, útok, obrana a uhýbanie."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid ""
@@ -444,6 +457,9 @@ msgid ""
 " of your oxen to help transport wares quicker. Remember to build a cattle\n"
 " farm!"
 msgstr ""
+"Keďže sa predlžujú vaše cesty a narastá ekonomika, mali by ste využiť "
+"svojich\n"
+" volov na rýchlejšiu prepravu tovarov. Nezabudnite postaviť kravín!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
@@ -563,6 +579,13 @@ msgid ""
 "neither have a good weapon nor are they well trained. We should build up "
 "trainingssites to prepare them for their future tasks.\" "
 msgstr ""
+"Naši geológovia našli oveľa viac ložísk železnej rudy, uhlia a dokonca aj "
+"zlata. Keď naberú baníci skúsenosti, mali by sme doterajšie bane vylepšiť. "
+"Mali by sme postaviť viac baní, väčšiu potravinovú infraštruktúru, ktorá by "
+"zásobovala našich ľudí s jedlom, a ďalšiu výrobnú ekonomiku. Ale to stále "
+"nie je všetko - väčšina našich vojakov je dosť mladá a nemá ani vhodnú "
+"zbraň, ani dobrý výcvik. Mali by sme postaviť výcvikové stavby, aby sme ich "
+"pripravili na budúce úlohy.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
@@ -610,13 +633,15 @@ msgstr "Stopy"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
-msgstr ""
+msgstr "Zima sa blíži"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:352
 msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr ""
+"Dokončili ste poslednú misiu v úvodnej kampani barbarov. Ak si prajete, "
+"môžete pokračovať v hraní, inak prejdite na ďalšiu misu."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"

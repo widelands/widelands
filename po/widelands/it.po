@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-11-11 12:51+0000\n"
+"PO-Revision-Date: 2011-11-13 13:38+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-11-12 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-11-14 04:43+0000\n"
 "X-Generator: Launchpad (build 14277)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -1595,6 +1595,8 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"ordine errato dei tipi di merce nel gruppo: il tipo di merce %s appare dopo "
+"il tipo di merce %s (ordine fisso!)"
 
 #: ../../src/logic/production_program.cc:114
 #: ../../src/logic/production_program.cc:844
@@ -1919,6 +1921,8 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"dovrebbe estrarre dalle miniere la risorsa %s, che non esiste nel mondo; la "
+"tribù non è compatibile con il mondo"
 
 #: ../../src/logic/worker.cc:209
 #, c-format
@@ -1926,6 +1930,8 @@ msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"dovrebbe allevare il tipo di risorsa %s, che non esiste nel mondo; la tribù "
+"non è compatibile con il mondo"
 
 #: ../../src/logic/worker.cc:592
 msgid "Out of "
@@ -2077,7 +2083,7 @@ msgstr "sito d'allenamento: %s"
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
 msgid "elemental data: %s"
-msgstr ""
+msgstr "dati dell'elemento: %s"
 
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
@@ -2506,7 +2512,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1149
 msgid "Can not save, as long as no game is running!"
-msgstr ""
+msgstr "Non è possibile salvare finchè nessuna partita è in esecuzione!"
 
 #: ../../src/network/nethost.cc:1160
 msgid "Game successfully saved!"
@@ -2515,7 +2521,7 @@ msgstr "Partita salvata con successo!"
 #: ../../src/network/nethost.cc:1162
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Non è stato possibile salvare la partita nel file \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1168
 msgid "This server is not password protected!"
@@ -2523,7 +2529,7 @@ msgstr "Questo server non è protetto da password!"
 
 #: ../../src/network/nethost.cc:1171
 msgid "The send password was incorrect!"
-msgstr ""
+msgstr "La password inviata non era corretta!"
 
 #: ../../src/network/nethost.cc:1184
 msgid "The password was correct, access was granted!"
@@ -2614,7 +2620,7 @@ msgstr "Il server usa una diversa versione del protocollo."
 #: ../../src/network/nethost.cc:2474 ../../src/network/nethost.cc:2485
 #: ../../src/network/nethost.cc:2496
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Il client non ha accesso alle impostazioni dell'altro giocatore."
 
 #: ../../src/network/nethost.cc:2512 ../../src/network/nethost.cc:2521
 #: ../../src/network/nethost.cc:2530
