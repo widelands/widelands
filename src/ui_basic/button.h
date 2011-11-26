@@ -112,55 +112,6 @@ protected:
 	bool        m_draw_caret;
 };
 
-
-/// A verion of Button that uses a function object for the callback.
-struct Callback_Button : public Button {
-	Callback_Button /// for textual buttons
-		(Panel * const parent,
-		 std::string const & name,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_pictute_id,
-		 boost::function<void()> callback_function,
-		 const std::string & title_text,
-		 std::string const & tooltip_text = std::string(),
-		 bool const _enabled = true,
-		 bool const flat     = false)
-		:
-		Button
-			(parent, name,
-			 x, y, w, h,
-			 background_pictute_id,
-			 title_text,
-			 tooltip_text,
-			 _enabled, flat),
-		_callback_function     (callback_function)
-	{}
-	Callback_Button /// for pictorial buttons
-		(Panel * const parent,
-		 std::string const & name,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_pictute_id,
-		 const PictureID foreground_picture_id,
-		 boost::function<void()> callback_function,
-		 std::string const & tooltip_text = std::string(),
-		 bool const _enabled = true,
-		 bool const flat     = false)
-		:
-		Button
-			(parent, name,
-			 x, y, w, h,
-			 background_pictute_id,
-			 foreground_picture_id,
-			 tooltip_text,
-			 _enabled, flat),
-		_callback_function     (callback_function)
-	{}
-
-protected:
-	boost::function<void()> _callback_function;
-	void clicked() {_callback_function();}
-};
-
-}
+} // namespace UI
 
 #endif
