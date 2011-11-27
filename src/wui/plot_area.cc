@@ -285,7 +285,9 @@ void WUIPlot_Area::draw_plot_line
 			cury -= static_cast<int32_t>(length_y);
 		}
 
+		//draw a 2 px wide line
 		dst.draw_line(lx, ly, curx, cury, color);
+		dst.draw_line(lx, ly + 1, curx, cury + 1, color);
 
 		posx -= sub;
 
@@ -443,7 +445,7 @@ void WUIPlot_Area::register_plot_data
 /**
  * Change the plot color of a registed data stream
  */
-void WUIPlot_Area::set_plotcolor(int32_t id, RGBColor color) {
+void WUIPlot_Area::set_plotcolor(uint32_t id, RGBColor color) {
 	if (id > m_plotdata.size()) return;
 
 	m_plotdata[id].plotcolor = color;
