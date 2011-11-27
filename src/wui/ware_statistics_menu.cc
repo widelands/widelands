@@ -36,6 +36,7 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/slider.h"
 
+#include <bitset>
 
 #define MIN_WARES_PER_LINE 7
 #define MAX_WARES_PER_LINE 11
@@ -48,6 +49,7 @@ static const char pic_tab_consumption[] = "pics/menu_tab_wares.png";
 static const char pic_tab_economy[] = "pics/menu_tab_wares.png";
 
 static const RGBColor colors[] = {
+	RGBColor(115, 115, 115), //inactive
 	RGBColor(255,   0,   0),
 	RGBColor  (0, 144,  12),
 	RGBColor  (0,   0, 255),
@@ -100,6 +102,11 @@ static const RGBColor colors[] = {
 	RGBColor(105, 155, 160),//shark infested water, run!
 };
 
+//maps ware index to index of colors
+static uint8_t color_map[sizeof(colors) - 1];
+#define INACTIVE 0
+
+static std::bitset<sizeof(color_map)> active_colors;
 
 struct StatisticWaresDisplay : public AbstractWaresDisplay {
 	StatisticWaresDisplay
@@ -121,7 +128,9 @@ protected:
 
 	RGBColor info_color_for_ware(Widelands::Ware_Index const ware)
 	{
-		return colors[static_cast<size_t>(ware)];
+		size_t index = static_cast<size_t>(ware);
+
+		return colors[color_map[index]];
 	}
 };
 
@@ -133,6 +142,10 @@ UI::UniqueWindow
 m_parent(&parent)
 {
 	set_cache(false);
+
+	//init color sets
+	memset(color_map, 0, sizeof(color_map));
+	active_colors.reset();
 
 	//  First, we must decide about the size.
 	UI::Box * box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
@@ -237,6 +250,28 @@ m_parent(&parent)
  * simultaneously.
  */
 void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
+	if (what) { //activate ware
+		//search lowest free color
+		uint8_t color_index = INACTIVE;
+
+		uint i;
+		for (i = 0; i < sizeof(active_colors); ++i) {
+			if (!active_colors[i]) {
+				color_index = i + 1;
+				active_colors[i] = 1;
+				break;
+			}
+		}
+
+		color_map[static_cast<size_t>(id)] = color_index;
+	} else { //deactivate ware
+		uint8_t old_color = color_map[static_cast<size_t>(id)];
+		if (old_color != INACTIVE) {
+			active_colors[old_color - 1] = 0;
+			color_map[static_cast<size_t>(id)] = INACTIVE;
+		}
+	}
+
 	m_plot_production->show_plot(static_cast<size_t>(id), what);
 	m_plot_consumption->show_plot(static_cast<size_t>(id), what);
 	m_plot_economy->show_plot(static_cast<size_t>(id), what);
