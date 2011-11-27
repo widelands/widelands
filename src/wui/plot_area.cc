@@ -440,6 +440,15 @@ void WUIPlot_Area::register_plot_data
 	get_game_time_id();
 }
 
+/**
+ * Change the plot color of a registed data stream
+ */
+void WUIPlot_Area::set_plotcolor(int32_t id, RGBColor color) {
+	if (id > m_plotdata.size()) return;
+
+	m_plotdata[id].plotcolor = color;
+}
+
 /*
  * Show this plot data?
  */

@@ -59,7 +59,7 @@ static const RGBColor colors[] = {
 	RGBColor  (0, 143, 255),
 	RGBColor  (0,  70,  31),
 	RGBColor(106,  44,   5),
-	RGBColor(172,   0,   0),
+	RGBColor(143,   1,   1),
 	RGBColor  (0, 255,   0),
 	RGBColor (85,   0, 111),
 	RGBColor  (0, 243, 255),
@@ -95,7 +95,7 @@ static const RGBColor colors[] = {
 	RGBColor(204, 102,  51),
 	RGBColor(127,  28,  75),
 	RGBColor(111, 142, 204),
-	RGBColor(153,   0,   0),
+	RGBColor(174,  10,   0),
 	RGBColor (96, 143,  71),
 	RGBColor(163,  74, 128),
 	RGBColor(183, 142,  10),
@@ -264,6 +264,10 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
 		}
 
 		color_map[static_cast<size_t>(id)] = color_index;
+		m_plot_production->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
+		m_plot_consumption->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
+		m_plot_economy->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
+
 	} else { //deactivate ware
 		uint8_t old_color = color_map[static_cast<size_t>(id)];
 		if (old_color != INACTIVE) {
