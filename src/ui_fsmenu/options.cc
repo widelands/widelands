@@ -196,6 +196,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_cancel.set_font(font_small());
 
 	m_sb_autosave     .add_replacement(0, _("Off"));
+	m_sb_remove_replays.add_replacement(0, _("Never"));
 
 	m_sb_maxfps       .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	m_sb_autosave     .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
