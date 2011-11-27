@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-21 22:04+0000\n"
+"PO-Revision-Date: 2011-11-26 17:27+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-22 04:34+0000\n"
-"X-Generator: Launchpad (build 14170)\n"
+"X-Launchpad-Export-Date: 2011-11-27 05:14+0000\n"
+"X-Generator: Launchpad (build 14381)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
@@ -42,7 +42,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:343
 msgid "A man comes to Jundlina"
-msgstr "Muž príde k Jundlíne"
+msgstr "Muž prichádza k Jundlíne"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:539
 msgid "A young man approaches"
@@ -257,7 +257,7 @@ msgstr "Zriaďte produkciu jedla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Zriaďte stálu produkciu jedla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Establish a spidercloth production"
@@ -795,7 +795,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:156
 msgid "Proudest to the death"
-msgstr ""
+msgstr "Najpyšnejší do smrti"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:335
 msgid ""
@@ -974,6 +974,11 @@ msgid ""
 "with my generals. I will not allow that a potential enemy will find us\n"
 "unprepared."
 msgstr ""
+"Našli sme ďalšiu budovu v tomto čudnom štýle. Ešte sme nezistili, kto ju "
+"postavil.\n"
+"Ale zjavne žilo na tomto ostrove spoločenstvo a zjavne bolo podriadené\n"
+"vojenskej správe. Musím skontrolovať náš vojenský stav so svojimi\n"
+"generálmi. Nedopustím, aby nás možný nepriateľ objavil nepripravených."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:240
 msgid ""
@@ -1006,7 +1011,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "Prišli sme o %s v boji s oceánom!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:233
 msgid ""
