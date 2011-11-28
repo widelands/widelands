@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-11-25 22:28+0000\n"
+"PO-Revision-Date: 2011-11-27 16:37+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2011-11-26 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-11-28 05:11+0000\n"
 "X-Generator: Launchpad (build 14381)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -76,7 +76,7 @@ msgid ""
 "Options:\n"
 "\n"
 msgstr ""
-"Nastavenia\n"
+"Možnosti:\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1296
@@ -278,7 +278,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1394
 msgid " --verbose            Enable verbose debug messages\n"
-msgstr ""
+msgstr " --verbose            Zapnúť podrobné ladiace výpisy\n"
 
 #: ../../src/wlapplication.cc:1395
 msgid " --help               Show this help\n"
@@ -1257,7 +1257,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:230
 msgid "Preloading a map"
-msgstr ""
+msgstr "Prednačítava sa mapa"
 
 #: ../../src/logic/game.cc:242
 msgid "Loading a world"
@@ -1335,7 +1335,7 @@ msgstr "zdvojené"
 #: ../../src/logic/immovable.cc:279
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr ""
+msgstr "[afinita terénu] \"%s\" (nie v aktívnom svete): %s"
 
 #: ../../src/logic/immovable.cc:315
 #, c-format
@@ -2643,12 +2643,12 @@ msgstr "Server používa inú verziu protokolu."
 #: ../../src/network/nethost.cc:2474 ../../src/network/nethost.cc:2485
 #: ../../src/network/nethost.cc:2496
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Klient nemá prístup k nastaveniam iného hráča."
 
 #: ../../src/network/nethost.cc:2512 ../../src/network/nethost.cc:2521
 #: ../../src/network/nethost.cc:2530
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Klient nemá prístup k nastaveniam servera."
 
 #: ../../src/network/nethost.cc:2532
 msgid "Client send start command, although server is not yet ready."
@@ -3342,6 +3342,8 @@ msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Táto mapa sa nenachádza vo vašom súborovom systéme. Dáta tu ukázané poslal "
+"server."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
