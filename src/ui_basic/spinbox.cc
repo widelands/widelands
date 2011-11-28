@@ -110,7 +110,7 @@ SpinBox::SpinBox
 	sbi->butPlus =
 		new Button
 			(this, "+",
-			 butw * 21 / 10, 0, butw, butw,
+			 w - butw * 31 / 10, 0, butw, butw,			 
 			 sbi->background,
 			 "+", _("Increase the value"),
 			 true, false);
@@ -118,7 +118,7 @@ SpinBox::SpinBox
 	sbi->butMinus =
 		new Button
 			(this, "-",
-			 w - butw * 31 / 10, 0, butw, butw,
+			 butw * 21 / 10, 0, butw, butw,
 			 sbi->background,
 			 "-", _("Decrease the value"),
 			 true, false);
@@ -129,7 +129,7 @@ SpinBox::SpinBox
 		sbi->butTenPlus =
 			new Button
 				(this, "++",
-				 0, 0, butw * 2, butw,
+				 w - 2 * butw, 0, butw * 2, butw,
 				 sbi->background,
 				 "++", _("Increase the value by 10"),
 				 true, false);
@@ -137,7 +137,7 @@ SpinBox::SpinBox
 		sbi->butTenMinus =
 			new Button
 				(this, "--",
-				 w - 2 * butw, 0, butw * 2, butw,
+				 0, 0, butw * 2, butw,
 				 sbi->background,
 				 "--", _("Decrease the value by 10"),
 				 true, false);
