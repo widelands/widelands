@@ -172,8 +172,8 @@ void SpinBox::update()
 	sbi->butMinus->set_enabled(sbi->min < sbi->value);
 	sbi->butPlus ->set_enabled           (sbi->value < sbi->max);
 	if (m_big) {
-		sbi->butTenMinus->set_enabled(sbi->min + 10 < sbi->value);
-		sbi->butTenPlus->set_enabled(sbi->value < sbi->max - 10);
+		sbi->butTenMinus->set_enabled(sbi->min < sbi->value);
+		sbi->butTenPlus ->set_enabled           (sbi->value < sbi->max);
 	}
 }
 
@@ -193,6 +193,10 @@ void SpinBox::changeValue(int32_t const value)
 void SpinBox::setValue(int32_t const value)
 {
 	sbi->value = value;
+	if (sbi->value > sbi->max)
+		sbi->value = sbi->max;
+	else if (sbi->value < sbi->min)
+		sbi->value = sbi->min;
 	update();
 }
 
