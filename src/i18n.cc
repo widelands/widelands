@@ -31,7 +31,7 @@
 #if __APPLE__  && LIBINTL_VERSION >= 0x001201
 // for older libintl versions, setlocale is just fine
 #define SETLOCALE libintl_setlocale
-#elif _MSC_VER
+#elif _WIN32
 #define SETLOCALE setlocale
 #else
 #define SETLOCALE std::setlocale
