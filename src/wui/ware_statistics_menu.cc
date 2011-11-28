@@ -36,12 +36,13 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/slider.h"
 
-#include <bitset>
 
 #define MIN_WARES_PER_LINE 7
 #define MAX_WARES_PER_LINE 11
 
 #define PLOT_HEIGHT 100
+
+#define INACTIVE 0
 
 //TODO place holder, need to be changed
 static const char pic_tab_production[] = "pics/menu_tab_wares.png";
@@ -102,20 +103,20 @@ static const RGBColor colors[] = {
 	RGBColor(105, 155, 160),//shark infested water, run!
 };
 
-//maps ware index to index of colors
-static uint8_t color_map[sizeof(colors) - 1];
-#define INACTIVE 0
-
-static std::bitset<sizeof(color_map)> active_colors;
 
 struct StatisticWaresDisplay : public AbstractWaresDisplay {
+private:
+	std::vector<uint8_t> & m_color_map;
+public:
 	StatisticWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const & tribe,
-		 boost::function<void(Widelands::Ware_Index, bool)> callback_function)
+		 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
+		 std::vector<uint8_t> & color_map)
 	:
-		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function)
+		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
+		 m_color_map(color_map)
 	{
 		uint32_t w, h;
 		get_desired_size(w, h);
@@ -130,7 +131,7 @@ protected:
 	{
 		size_t index = static_cast<size_t>(ware);
 
-		return colors[color_map[index]];
+		return colors[m_color_map[index]];
 	}
 };
 
@@ -143,16 +144,18 @@ m_parent(&parent)
 {
 	set_cache(false);
 
+	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
+
 	//init color sets
-	memset(color_map, 0, sizeof(color_map));
-	active_colors.reset();
+	m_color_map.resize(nr_wares);
+	std::fill(m_color_map.begin(), m_color_map.end(), INACTIVE);
+	m_active_colors.resize(sizeof(colors));
+	std::fill(m_active_colors.begin(), m_active_colors.end(), 0);
 
 	//  First, we must decide about the size.
 	UI::Box * box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
 	box->set_border(5, 5, 5, 5);
 	set_center_panel(box);
-
-	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
 
 	//setup plot widgets
 	//create a tabbed environment for the different plots
@@ -233,7 +236,8 @@ m_parent(&parent)
 	box->add
 		(new StatisticWaresDisplay
 			(box, 0, 0, parent.get_player()->tribe(),
-			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2)),
+			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2),
+			 m_color_map),
 		 UI::Box::AlignLeft, true);
 
 	box->add
@@ -255,24 +259,26 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
 		uint8_t color_index = INACTIVE;
 
 		uint i;
-		for (i = 0; i < sizeof(active_colors); ++i) {
-			if (!active_colors[i]) {
-				color_index = i + 1;
-				active_colors[i] = 1;
+		for (i = 0; i < m_active_colors.size(); ++i) {
+			if (!m_active_colors[i]) {
+				//prevent index out of bounds
+				color_index = std::min(i + 1, sizeof(colors) - 1);
+				m_active_colors[i] = 1;
 				break;
 			}
 		}
 
-		color_map[static_cast<size_t>(id)] = color_index;
+		//assign color
+		m_color_map[static_cast<size_t>(id)] = color_index;
 		m_plot_production->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		m_plot_consumption->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		m_plot_economy->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 
 	} else { //deactivate ware
-		uint8_t old_color = color_map[static_cast<size_t>(id)];
+		uint8_t old_color = m_color_map[static_cast<size_t>(id)];
 		if (old_color != INACTIVE) {
-			active_colors[old_color - 1] = 0;
-			color_map[static_cast<size_t>(id)] = INACTIVE;
+			m_active_colors[old_color - 1] = 0;
+			m_color_map[static_cast<size_t>(id)] = INACTIVE;
 		}
 	}
 
