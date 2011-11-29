@@ -285,6 +285,8 @@ void WUIPlot_Area::draw_plot_line
 			cury -= static_cast<int32_t>(length_y);
 		}
 
+		//TODO create a draw_line function with parameter line width
+		//     and draw a 2 px wide line
 		dst.draw_line(lx, ly, curx, cury, color);
 
 		posx -= sub;
@@ -438,6 +440,15 @@ void WUIPlot_Area::register_plot_data
 	m_plotdata[id].plotcolor = color;
 
 	get_game_time_id();
+}
+
+/**
+ * Change the plot color of a registed data stream
+ */
+void WUIPlot_Area::set_plotcolor(uint32_t id, RGBColor color) {
+	if (id > m_plotdata.size()) return;
+
+	m_plotdata[id].plotcolor = color;
 }
 
 /*

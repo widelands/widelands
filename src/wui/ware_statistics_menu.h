@@ -24,6 +24,8 @@
 #include "plot_area.h"
 #include "differential_plot_area.h"
 
+#include <vector>
+
 struct Interactive_Player;
 struct WUIPlot_Area;
 
@@ -37,6 +39,8 @@ private:
 	WUIPlot_Area       * m_plot_production;
 	WUIPlot_Area       * m_plot_consumption;
 	DifferentialPlot_Area       * m_plot_economy;
+	std::vector<uint8_t> m_color_map; //maps ware index to colors
+	std::vector<bool> m_active_colors;
 
 	void clicked_help();
 	void cb_changed_to(Widelands::Ware_Index, bool);

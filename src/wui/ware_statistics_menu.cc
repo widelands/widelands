@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,265 +42,81 @@
 
 #define PLOT_HEIGHT 100
 
+#define INACTIVE 0
+
 //TODO place holder, need to be changed
 static const char pic_tab_production[] = "pics/menu_tab_wares.png";
 static const char pic_tab_consumption[] = "pics/menu_tab_wares.png";
 static const char pic_tab_economy[] = "pics/menu_tab_wares.png";
 
 static const RGBColor colors[] = {
-	RGBColor  (0, 210, 254),
-	RGBColor(255, 157,  74),
-	RGBColor(222,  97,  98),
-	RGBColor(115,  82, 157),
-	RGBColor(172, 113, 205),
-	RGBColor(156, 117, 189),
-	RGBColor(156, 165, 172),
-	RGBColor (16,  56, 164),
-	RGBColor(115,  68,  32),
-	RGBColor(172,   0,   0),
-	RGBColor  (0,  85,  16),
-	RGBColor (98,  36,  90),
-	RGBColor (90,  64, 115),
-	RGBColor (32,  36,  32),
-	RGBColor(153, 153, 153),
-	RGBColor(102, 102, 102),
-	RGBColor (51,  51,  51),
-	RGBColor(255, 204,   0),
-	RGBColor(255, 153,   0),
-	RGBColor(255, 102,   0),
-	RGBColor(255,  51,   0),
-	RGBColor (51,  51,  51),
-	RGBColor(102, 102, 102),
-	RGBColor(153, 153, 153),
-	RGBColor(204, 204, 204),
-	RGBColor(255, 255, 255),
-	RGBColor(153, 204,   0),
-	RGBColor(204, 153,   0),
-	RGBColor(255, 204,  51),
-	RGBColor(255, 204, 102),
-	RGBColor(255, 153, 102),
-	RGBColor(255, 102,  51),
-	RGBColor(204,  51,   0),
-	RGBColor(204,   0,  51),
-	RGBColor(204, 255,   0),
-	RGBColor(204, 255,  51),
-	RGBColor (51,  51,   0),
-	RGBColor(102, 102,   0),
-	RGBColor(153, 153,   0),
-	RGBColor(204, 204,   0),
-	RGBColor(255, 255,   0),
-	RGBColor(204, 153,  51),
-	RGBColor(204, 102,  51),
-	RGBColor (51,   0,   0),
-	RGBColor(102,   0,   0),
-	RGBColor(153,   0,   0),
-	RGBColor(204,   0,   0),
+	RGBColor(115, 115, 115), //inactive
 	RGBColor(255,   0,   0),
-	RGBColor(255,  51, 102),
-	RGBColor(255,   0,  51),
-	RGBColor(153, 255,   0),
-	RGBColor(204, 255, 102),
-	RGBColor(153, 204,  51),
-	RGBColor(102, 102,  51),
-	RGBColor(153, 153,  51),
-	RGBColor(204, 204,  51),
-	RGBColor(255, 255,  51),
-	RGBColor(153, 102,   0),
-	RGBColor(153,  51,   0),
-	RGBColor(102,  51,  51),
-	RGBColor(153,  51,  51),
-	RGBColor(204,  51,  51),
-	RGBColor(255,  51,  51),
-	RGBColor(204,  51, 102),
-	RGBColor(255, 102, 153),
-	RGBColor(255,   0, 102),
-	RGBColor(102, 255,   0),
-	RGBColor(153, 255, 102),
-	RGBColor(102, 204,  51),
-	RGBColor(102, 153,   0),
-	RGBColor(153, 153, 102),
-	RGBColor(204, 204, 102),
-	RGBColor(255, 255, 102),
-	RGBColor(153, 102,  51),
-	RGBColor(102,  51,   0),
-	RGBColor(153, 102, 102),
-	RGBColor(204, 102, 102),
-	RGBColor(255, 102, 102),
-	RGBColor(153,   0,  51),
-	RGBColor(204,  51, 153),
-	RGBColor(255, 102, 204),
-	RGBColor(255,   0, 153),
-	RGBColor (51, 255,   0),
-	RGBColor(102, 255,  51),
-	RGBColor (51, 153,   0),
-	RGBColor(102, 204,   0),
-	RGBColor(153, 255,  51),
-	RGBColor(204, 204, 153),
-	RGBColor(255, 255, 153),
-	RGBColor(204, 153, 102),
-	RGBColor(204, 102,   0),
-	RGBColor(204, 153, 153),
-	RGBColor(255, 153, 153),
-	RGBColor(255,  51, 153),
-	RGBColor(204,   0, 102),
-	RGBColor(153,   0, 102),
-	RGBColor(255,  51, 204),
-	RGBColor(255,   0, 204),
-	RGBColor  (0, 204,   0),
-	RGBColor (51, 204,   0),
-	RGBColor (51, 102,   0),
-	RGBColor(102, 153,  51),
-	RGBColor(153, 204, 102),
-	RGBColor(204, 255, 153),
-	RGBColor(255, 255, 204),
-	RGBColor(255, 204, 153),
-	RGBColor(255, 153,  51),
-	RGBColor(255, 204, 204),
-	RGBColor(255, 153, 204),
-	RGBColor(204, 102, 153),
-	RGBColor(153,  51, 102),
-	RGBColor(102,   0,  51),
-	RGBColor(204,   0, 153),
-	RGBColor (51,   0,  51),
-	RGBColor (51, 204,  51),
-	RGBColor(102, 204, 102),
-	RGBColor  (0, 255,   0),
-	RGBColor (51, 255,  51),
-	RGBColor(102, 255, 102),
-	RGBColor(153, 255, 153),
-	RGBColor(204, 255, 204),
-	RGBColor(204, 153, 204),
-	RGBColor(153, 102, 153),
-	RGBColor(153,  51, 153),
-	RGBColor(153,  0,  153),
-	RGBColor(102,  51, 102),
-	RGBColor(102,   0, 102),
-	RGBColor  (0, 102,   0),
-	RGBColor (51, 102,  51),
-	RGBColor  (0, 153,   0),
-	RGBColor (51, 153,  51),
-	RGBColor(102, 153, 102),
-	RGBColor(153, 204, 153),
-	RGBColor(255, 204, 255),
-	RGBColor(255, 153, 255),
-	RGBColor(255, 102, 255),
-	RGBColor(255,  51, 255),
-	RGBColor(255,   0, 255),
-	RGBColor(204, 102, 204),
-	RGBColor(204,  51, 204),
-	RGBColor  (0,  51,   0),
-	RGBColor  (0, 204,  51),
-	RGBColor  (0, 102,  51),
-	RGBColor (51, 153, 102),
-	RGBColor(102, 204, 153),
-	RGBColor(153, 255, 204),
-	RGBColor(204, 255, 255),
-	RGBColor (51, 153, 255),
-	RGBColor(153, 204, 255),
-	RGBColor(204, 204, 255),
-	RGBColor(204, 153, 255),
-	RGBColor(153, 102, 204),
-	RGBColor(102,  51, 153),
-	RGBColor (51,   0, 102),
-	RGBColor(153,   0, 204),
-	RGBColor(204,   0, 204),
-	RGBColor  (0, 255,  51),
-	RGBColor (51, 255, 102),
-	RGBColor  (0, 153,  51),
-	RGBColor  (0, 204, 102),
-	RGBColor (51, 255, 153),
-	RGBColor(153, 255, 255),
-	RGBColor(153, 204, 204),
-	RGBColor  (0, 102, 204),
-	RGBColor(102, 153, 204),
-	RGBColor(153, 153, 255),
-	RGBColor(153, 153, 204),
-	RGBColor(153,  51, 255),
-	RGBColor(102,   0, 204),
-	RGBColor(102,   0, 153),
-	RGBColor(204,  51, 255),
-	RGBColor(204,   0, 255),
-	RGBColor  (0, 255, 102),
-	RGBColor(102, 255, 153),
-	RGBColor (51, 204, 102),
-	RGBColor  (0, 153, 102),
-	RGBColor(102, 255, 255),
-	RGBColor(102, 204, 204),
-	RGBColor(102, 153, 153),
-	RGBColor  (0,  51, 102),
-	RGBColor (51, 102, 153),
-	RGBColor(102, 102, 255),
-	RGBColor(102, 102, 204),
-	RGBColor(102, 102, 153),
-	RGBColor (51,   0, 153),
-	RGBColor(153,  51, 204),
-	RGBColor(204, 102, 255),
-	RGBColor(153,   0, 255),
-	RGBColor  (0, 255, 153),
-	RGBColor(102, 255, 204),
-	RGBColor (51, 204, 153),
-	RGBColor (51, 255, 255),
-	RGBColor (51, 204, 204),
-	RGBColor (51, 153, 153),
-	RGBColor (51, 102, 102),
-	RGBColor  (0, 102, 153),
-	RGBColor  (0,  51, 153),
-	RGBColor (51,  51, 255),
-	RGBColor (51,  51, 204),
-	RGBColor (51,  51, 153),
-	RGBColor (51,  51, 102),
-	RGBColor(102,  51, 204),
-	RGBColor(153, 102, 255),
-	RGBColor(102,   0, 255),
-	RGBColor  (0, 255, 204),
-	RGBColor (51, 255, 204),
-	RGBColor  (0, 255, 255),
-	RGBColor  (0, 204, 204),
-	RGBColor  (0, 153, 153),
-	RGBColor  (0, 102, 102),
-	RGBColor  (0,  51,  51),
-	RGBColor (51, 153, 204),
-	RGBColor (51, 102, 204),
+	RGBColor  (0, 144,  12),
 	RGBColor  (0,   0, 255),
-	RGBColor  (0,   0, 204),
-	RGBColor  (0,   0, 153),
-	RGBColor  (0,   0, 102),
-	RGBColor  (0,   0,  51),
-	RGBColor(102,  51, 255),
-	RGBColor (51,   0, 255),
-	RGBColor  (0, 204, 153),
-	RGBColor  (0, 153, 202),
-	RGBColor (51, 204, 255),
-	RGBColor(102, 204, 255),
-	RGBColor(102, 153, 255),
-	RGBColor (51, 102, 255),
-	RGBColor  (0,  51, 204),
-	RGBColor (51,   0, 204),
+	RGBColor(249, 125,   6),
+	RGBColor(255, 204,   0),
+	RGBColor(101,   0,  33),
+	RGBColor  (0, 143, 255),
+	RGBColor  (0,  70,  31),
+	RGBColor(106,  44,   5),
+	RGBColor(143,   1,   1),
+	RGBColor  (0, 255,   0),
+	RGBColor (85,   0, 111),
+	RGBColor  (0, 243, 255),
+	RGBColor (32,  36,  32),
+	RGBColor(189, 118,  24),
+	RGBColor(255,   0,  51),
+	RGBColor(153, 204,   0),
+	RGBColor  (0,  60,  77),
+	RGBColor (77,  15, 224),
+	RGBColor(255,   0, 208),
+	RGBColor(255,  51,   0),
+	RGBColor (43,  72, 183),
+	RGBColor(255,  93,  93),
+	RGBColor (15, 177,  18),
+	RGBColor(252,  89, 242),
 	RGBColor(255, 255, 255),
-	RGBColor(204, 204, 204),
-	RGBColor(153, 153, 153),
-	RGBColor(102, 102, 102),
-	RGBColor (51,  51,  51),
-	RGBColor  (0, 204, 255),
-	RGBColor  (0, 153, 255),
-	RGBColor  (0, 102, 255),
-	RGBColor  (0,  51, 255),
-	RGBColor (51,  51,  51),
-	RGBColor(102, 102, 102),
-	RGBColor(153, 153, 153),
-	RGBColor(204, 204, 204),
-	RGBColor(255, 255, 255),
+	RGBColor (61, 214, 128),
+	RGBColor(102, 102,   0),
+	RGBColor(169, 118,  93),
+	RGBColor(255, 204, 102),
+	RGBColor (65,  50, 106),
+	RGBColor(220, 255,   0),
+	RGBColor(204,  51,   0),
+	RGBColor(192,   0,  67),
+	RGBColor(120, 203,  65),
+	RGBColor(204, 255,  51),
+	RGBColor (20, 104, 109),
+	RGBColor(129,  80,  21),
+	RGBColor(153, 153,   0),
+	RGBColor(221,  69,  77),
+	RGBColor (34, 136,  83),
+	RGBColor(106, 107, 207),
+	RGBColor(204, 102,  51),
+	RGBColor(127,  28,  75),
+	RGBColor(111, 142, 204),
+	RGBColor(174,  10,   0),
+	RGBColor (96, 143,  71),
+	RGBColor(163,  74, 128),
+	RGBColor(183, 142,  10),
+	RGBColor(105, 155, 160),//shark infested water, run!
 };
 
 
 struct StatisticWaresDisplay : public AbstractWaresDisplay {
+private:
+	std::vector<uint8_t> & m_color_map;
+public:
 	StatisticWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const & tribe,
-		 boost::function<void(Widelands::Ware_Index, bool)> callback_function)
+		 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
+		 std::vector<uint8_t> & color_map)
 	:
-		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function)
+		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
+		 m_color_map(color_map)
 	{
 		uint32_t w, h;
 		get_desired_size(w, h);
@@ -313,7 +129,9 @@ protected:
 
 	RGBColor info_color_for_ware(Widelands::Ware_Index const ware)
 	{
-		return colors[static_cast<size_t>(ware)];
+		size_t index = static_cast<size_t>(ware);
+
+		return colors[m_color_map[index]];
 	}
 };
 
@@ -326,12 +144,18 @@ m_parent(&parent)
 {
 	set_cache(false);
 
+	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
+
+	//init color sets
+	m_color_map.resize(nr_wares);
+	std::fill(m_color_map.begin(), m_color_map.end(), INACTIVE);
+	m_active_colors.resize(sizeof(colors));
+	std::fill(m_active_colors.begin(), m_active_colors.end(), 0);
+
 	//  First, we must decide about the size.
 	UI::Box * box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
 	box->set_border(5, 5, 5, 5);
 	set_center_panel(box);
-
-	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares().value();
 
 	//setup plot widgets
 	//create a tabbed environment for the different plots
@@ -412,7 +236,8 @@ m_parent(&parent)
 	box->add
 		(new StatisticWaresDisplay
 			(box, 0, 0, parent.get_player()->tribe(),
-			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2)),
+			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2),
+			 m_color_map),
 		 UI::Box::AlignLeft, true);
 
 	box->add
@@ -429,6 +254,34 @@ m_parent(&parent)
  * simultaneously.
  */
 void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
+	if (what) { //activate ware
+		//search lowest free color
+		uint8_t color_index = INACTIVE;
+
+		uint i;
+		for (i = 0; i < m_active_colors.size(); ++i) {
+			if (!m_active_colors[i]) {
+				//prevent index out of bounds
+				color_index = std::min(i + 1, sizeof(colors) - 1);
+				m_active_colors[i] = 1;
+				break;
+			}
+		}
+
+		//assign color
+		m_color_map[static_cast<size_t>(id)] = color_index;
+		m_plot_production->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
+		m_plot_consumption->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
+		m_plot_economy->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
+
+	} else { //deactivate ware
+		uint8_t old_color = m_color_map[static_cast<size_t>(id)];
+		if (old_color != INACTIVE) {
+			m_active_colors[old_color - 1] = 0;
+			m_color_map[static_cast<size_t>(id)] = INACTIVE;
+		}
+	}
+
 	m_plot_production->show_plot(static_cast<size_t>(id), what);
 	m_plot_consumption->show_plot(static_cast<size_t>(id), what);
 	m_plot_economy->show_plot(static_cast<size_t>(id), what);

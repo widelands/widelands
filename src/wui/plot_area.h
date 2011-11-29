@@ -89,6 +89,8 @@ struct WUIPlot_Area : public UI::Panel {
 
 	void set_plotmode(int32_t id) {m_plotmode = id;}
 
+	void set_plotcolor(uint32_t id, RGBColor color);
+
 	std::vector<std::string> get_labels();
 
 protected:
