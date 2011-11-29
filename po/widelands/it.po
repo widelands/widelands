@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-11-26 13:49+0000\n"
+"PO-Revision-Date: 2011-11-28 12:58+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-11-27 05:14+0000\n"
-"X-Generator: Launchpad (build 14381)\n"
+"X-Launchpad-Export-Date: 2011-11-29 05:12+0000\n"
+"X-Generator: Launchpad (build 14399)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1502,12 +1502,12 @@ msgstr "azione bandiera: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #, c-format
 msgid "building %u: %s"
-msgstr "costruzione %u: %s"
+msgstr "edificio %u: %s"
 
 #: ../../src/logic/playercommand.cc:491
 #, c-format
 msgid "start/stop building: %s"
-msgstr "start/stop costruzione: %s"
+msgstr "start/stop edificio: %s"
 
 #: ../../src/logic/playercommand.cc:552
 #, c-format

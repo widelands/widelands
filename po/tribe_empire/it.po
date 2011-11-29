@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-08-31 11:39+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"PO-Revision-Date: 2011-11-28 12:52+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-11-29 05:12+0000\n"
+"X-Generator: Launchpad (build 14399)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -30,9 +30,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
-"Un piccolo morso per mantenere i minatori forti e al lavoro. Le razioni sono "
-"anche consumate dall'esploratore durante i suoi viaggi di esplorazione. Sono "
-"prodotte in una taverna a partire da pesce o carne o pane."
+"Un piccolo boccone per mantenere i minatori forti e al lavoro. Le razioni "
+"sono anche consumate dall'esploratore durante i suoi viaggi di esplorazione. "
+"Sono prodotte in una taverna a partire da pesce o carne o pane."
 
 #: ../../tribes/empire/conf:56
 msgid "Advanced Lance"
@@ -683,7 +683,7 @@ msgstr "Produce piccone"
 
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid "Produce plate armour"
-msgstr "Produce una corazza di piastre"
+msgstr "Produce un'armatura di piastre"
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
@@ -1302,7 +1302,7 @@ msgstr "Vino"
 
 #: ../../tribes/empire/conf:174
 msgid "Winery"
-msgstr "Vineria"
+msgstr "Azienda vinicola"
 
 #: ../../tribes/empire/conf:97
 msgid "Wood"
