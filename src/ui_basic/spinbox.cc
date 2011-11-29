@@ -110,7 +110,7 @@ SpinBox::SpinBox
 	sbi->butPlus =
 		new Button
 			(this, "+",
-			 w - butw * 31 / 10, 0, butw, butw,			 
+			 w - butw * 31 / 10, 0, butw, butw,
 			 sbi->background,
 			 "+", _("Increase the value"),
 			 true, false);
