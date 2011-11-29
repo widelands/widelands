@@ -285,9 +285,7 @@ void WUIPlot_Area::draw_plot_line
 			cury -= static_cast<int32_t>(length_y);
 		}
 
-		//TODO create a draw_line function with parameter line width
-		//     and draw a 2 px wide line
-		dst.draw_line(lx, ly, curx, cury, color);
+		dst.draw_line(lx, ly, curx, cury, color, 2);
 
 		posx -= sub;
 
