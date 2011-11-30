@@ -122,6 +122,10 @@ protected:
 	int32_t                 m_plotmode;
 
 private:
+	float scale_value
+		(float const yline_length, uint32_t const highest_scale,
+		 int32_t const value);
+
 	uint32_t get_game_time();
 	uint32_t get_plot_time();
 	void calc_game_time_id();

@@ -258,6 +258,19 @@ int32_t WUIPlot_Area::calc_how_many(uint32_t time_in_ms_) {
 	return how_many;
 }
 
+
+/**
+ * scale value down to the available space, which is specifiey by
+ * the length of the y axis and the highest scale.
+ */
+float WUIPlot_Area::scale_value
+	(float const yline_length, uint32_t const highest_scale,
+	 int32_t const value)
+{
+	return yline_length / (static_cast<float>(highest_scale) / static_cast<float>(value));
+}
+
+
 /**
  * scale the values from dataset down to the available space and draw a single plot line
  * \param dataset the y values of the line
@@ -272,16 +285,20 @@ void WUIPlot_Area::draw_plot_line
 
 	int32_t lx = get_inner_w() - space_at_right;
 	int32_t ly = yoffset;
+	//init start point of the plot line with the first data value.
+	//this prevent that the plot start always at zero
+	if (int32_t value = (*dataset)[dataset->size() - 1]) {
+		ly -= static_cast<int32_t>(scale_value(yline_length, highest_scale, value));
+	}
+
 	for (int32_t i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
 		int32_t const curx = static_cast<int32_t>(posx);
 		int32_t       cury = yoffset;
 
 		//scale the line to the available space
 		if (int32_t value = (*dataset)[i]) {
-			const float length_y =
-				yline_length
-				/
-				(static_cast<float>(highest_scale) / static_cast<float>(value));
+			const float length_y = scale_value(yline_length, highest_scale, value);
+
 			cury -= static_cast<int32_t>(length_y);
 		}
 
