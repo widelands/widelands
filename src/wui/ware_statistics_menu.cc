@@ -149,7 +149,8 @@ m_parent(&parent)
 	//init color sets
 	m_color_map.resize(nr_wares);
 	std::fill(m_color_map.begin(), m_color_map.end(), INACTIVE);
-	m_active_colors.resize(sizeof(colors));
+	uint32_t colors_length = sizeof(colors) / sizeof(RGBColor);
+	m_active_colors.resize(colors_length);
 	std::fill(m_active_colors.begin(), m_active_colors.end(), 0);
 
 	//  First, we must decide about the size.
@@ -261,7 +262,8 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
 		for (uint32_t i = 0; i < m_active_colors.size(); ++i) {
 			if (!m_active_colors[i]) {
 				//prevent index out of bounds
-				color_index = std::min(i + 1, sizeof(colors) - 1);
+				uint32_t colors_length = sizeof(colors) / sizeof(RGBColor);
+				color_index = std::min(i + 1, colors_length - 1);
 				m_active_colors[i] = 1;
 				break;
 			}
