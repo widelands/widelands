@@ -258,8 +258,7 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
 		//search lowest free color
 		uint8_t color_index = INACTIVE;
 
-		uint i;
-		for (i = 0; i < m_active_colors.size(); ++i) {
+		for (uint32_t i = 0; i < m_active_colors.size(); ++i) {
 			if (!m_active_colors[i]) {
 				//prevent index out of bounds
 				color_index = std::min(i + 1, sizeof(colors) - 1);
