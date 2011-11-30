@@ -340,22 +340,22 @@ uint32_t WUIPlot_Area::draw_diagram
 	dst.draw_line
 		(spacing,                        get_inner_h() - space_at_bottom,
 		 get_inner_w() - space_at_right, get_inner_h() - space_at_bottom,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	// Arrow
 	dst.draw_line
 		(spacing,     get_inner_h() - space_at_bottom,
 		 spacing + 5, get_inner_h() - space_at_bottom - 3,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	dst.draw_line
 		(spacing,     get_inner_h() - space_at_bottom,
 		 spacing + 5, get_inner_h() - space_at_bottom + 3,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	//  Y Axis
 	dst.draw_line
 		(get_inner_w() - space_at_right, spacing,
 		 get_inner_w() - space_at_right,
 		 get_inner_h() - space_at_bottom,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	//  No Arrow here, since this doesn't continue.
 
 	//  draw xticks
@@ -369,7 +369,7 @@ uint32_t WUIPlot_Area::draw_diagram
 		dst.draw_line
 			(static_cast<int32_t>(posx), get_inner_h() - space_at_bottom,
 			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
-			 LINE_COLOR);
+			 LINE_COLOR, 2);
 
 		snprintf
 			(buffer, sizeof(buffer),
@@ -389,13 +389,13 @@ uint32_t WUIPlot_Area::draw_diagram
 	dst.draw_line
 		(get_inner_w() - space_at_right,    spacing,
 		 get_inner_w() - space_at_right -3, spacing,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	dst.draw_line
 		(get_inner_w() - space_at_right,
 		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
 		 get_inner_w() - space_at_right - 3,
 		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 
 	//  print the used unit
 	UI::g_fh->draw_text
