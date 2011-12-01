@@ -27,6 +27,7 @@ consume=meal
 animate=working 16000
 mine=coal 2 100 10
 produce=coal:2
+animate=working 16000
 mine=coal 2 100 10
 produce=coal:3
 
