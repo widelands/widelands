@@ -28,8 +28,10 @@ sleep=45000
 animate=working 20000
 mine=coal 4 100 5
 produce=coal:2
+animate=working 20000
 mine=coal 4 100 5
 produce=coal:2
+animate=working 20000
 mine=coal 4 100 5
 produce=coal:3
 
