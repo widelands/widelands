@@ -13,6 +13,7 @@
 from glob import glob
 from itertools import takewhile
 import os
+import string
 import subprocess
 import sys
 
@@ -218,8 +219,9 @@ def do_update_potfiles():
             potfiles += do_find_iterative(prefix, basedir, srcfiles)
 
         # Generate .pot catalogs
+        dangerous_chars = "'\" " # Those chars are replaced via '_'
         for pot, srcfiles in potfiles:
-            pot = pot.lower().replace(" ", "_")
+            pot = pot.lower().translate(string.maketrans(dangerous_chars, len(dangerous_chars)*"_"))
             path = os.path.normpath("po/" + os.path.dirname(pot))
             do_makedirs(path)
             oldcwd = os.getcwd()
