@@ -71,8 +71,8 @@ static int L_set_textdomain(lua_State * L) {
 
 		This peculiar function is used to translate texts in your scenario into
 		another language. The function takes a single string, grabs the
-		textdomain of your map (which is used the maps name) and returns the
-		translated string. Make sure that you part translatable and untranslatable
+		textdomain of your map (which is usually the maps name) and returns the
+		translated string. Make sure that you separate translatable and untranslatable
 		stuff:
 
 		.. code-block:: lua

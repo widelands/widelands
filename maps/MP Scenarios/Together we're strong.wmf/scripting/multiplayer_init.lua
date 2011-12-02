@@ -12,7 +12,6 @@ use("aux", "win_condition_functions")
 function initialize()
    sleep(10)
 
-
    -------------------
    -- player set up --
    -------------------
@@ -205,15 +204,14 @@ port22:set_workers{
 port21:set_soldiers({0,0,0,0}, 15)
 port22:set_soldiers({0,0,0,0}, 10)
 
-
    -------------------
    -- Win condition --
    -------------------
 
-	set_textdomain("win_conditions")
 	local plrs = wl.Game().players
-	broadcast(plrs, _ "Together we're strong", _ "The player who defeats the other player wins the game")
+	set_textdomain("mp_scenario_together_we_re_strong.pot")
 
+	broadcast(plrs, _ "Together we're strong", _ "The player who defeats the other player wins the game")
 	sleep(240000)
 
 	-- Iterate all players, if one is defeated, remove him
@@ -226,7 +224,6 @@ port22:set_soldiers({0,0,0,0}, 10)
 
 	-- Send congratulations to all remaining players
 	broadcast(plrs, _ "Congratulations!", _ "You have won this game!", {popup = true})
-
 end
 
 run(initialize)
