@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-10-10 09:22+0200\n"
-"PO-Revision-Date: 2011-11-13 13:38+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"PO-Revision-Date: 2011-11-30 12:27+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-11-14 04:43+0000\n"
-"X-Generator: Launchpad (build 14277)\n"
+"X-Launchpad-Export-Date: 2011-12-01 05:16+0000\n"
+"X-Generator: Launchpad (build 14414)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1502,12 +1502,12 @@ msgstr "azione bandiera: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #, c-format
 msgid "building %u: %s"
-msgstr "costruzione %u: %s"
+msgstr "edificio %u: %s"
 
 #: ../../src/logic/playercommand.cc:491
 #, c-format
 msgid "start/stop building: %s"
-msgstr "start/stop costruzione: %s"
+msgstr "start/stop edificio: %s"
 
 #: ../../src/logic/playercommand.cc:552
 #, c-format
@@ -1563,7 +1563,7 @@ msgstr "cambia la capacità del soldato: %s"
 #: ../../src/logic/playercommand.cc:1379
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
-msgstr ""
+msgstr "retreat: valore fuori scala. Ricevuto %u Atteso %u-%u"
 
 #: ../../src/logic/playercommand.cc:1390
 #, c-format
@@ -1640,11 +1640,11 @@ msgstr "condizione non valida: %s"
 #: ../../src/logic/production_program.cc:350
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
-msgstr ""
+msgstr "Atteso {\"failed\"|\"completed\"|\"skipped\"} ma trovato \"%s\""
 
 #: ../../src/logic/production_program.cc:363
 msgid "expected \"and\" or end of input"
-msgstr ""
+msgstr "atteso \"and\" o fine dell'input"
 
 #: ../../src/logic/production_program.cc:372
 msgid "expected condition at end of input"
@@ -1679,6 +1679,8 @@ msgid ""
 "the program \"%s\" has not (yet) been declared in %s (wrong declaration "
 "order?)"
 msgstr ""
+"Il programma \"%s\" non è stato (ancora) dichiarato in %s (ordine di "
+"dichiarazione errato?)"
 
 #: ../../src/logic/production_program.cc:502
 #: ../../src/logic/production_program.cc:507
@@ -1705,7 +1707,7 @@ msgstr "{\"fallimento\"|\"completamento\"|\"salta\"}"
 
 #: ../../src/logic/production_program.cc:531
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 
 #: ../../src/logic/production_program.cc:651
 #, c-format
@@ -1785,7 +1787,7 @@ msgstr "tipo di soldato"
 #: ../../src/logic/production_program.cc:1206
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
-msgstr ""
+msgstr "atteso {\"hp\"|\"attack\"|\"defense\"|\"evade\"} ma trovato \"%s\""
 
 #: ../../src/logic/production_program.cc:1215
 #: ../../src/logic/production_program.cc:1287
@@ -1801,7 +1803,7 @@ msgstr "Nessun soldato per questo livello di allenamento trovato!"
 #: ../../src/logic/production_program.cc:1297
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr ""
+msgstr "atteso level > %u ma trovato \"%s\""
 
 #: ../../src/logic/productionsite.cc:73
 msgid "this ware type has already been declared as an output"
@@ -1832,6 +1834,8 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"atteso atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
+"atrTotal (%u) ma trovato attributo sconosciuto (%u)"
 
 #: ../../src/logic/ship.cc:263
 #, c-format
@@ -3301,7 +3305,7 @@ msgstr "Versione "
 
 #: ../../src/ui_fsmenu/main.cc:117
 msgid "by the Widelands Development Team"
-msgstr "dal gruppo di sviluppo di widelands"
+msgstr "dal gruppo di sviluppo di Widelands"
 
 #: ../../src/ui_fsmenu/mapselect.cc:56
 msgid "Load Map as scenario: "
@@ -3624,7 +3628,7 @@ msgstr "Una volta ferito"
 #: ../../src/wui/building_statistics_menu.cc:79
 #: ../../src/wui/game_main_menu.cc:66
 msgid "Building Statistics"
-msgstr "Statistiche sulle costruzioni"
+msgstr "Statistiche sugli edifici"
 
 #: ../../src/wui/building_statistics_menu.cc:89
 msgid "Total Productivity: "
@@ -3758,7 +3762,7 @@ msgstr "Visualizza il gioco in una finestra separata"
 
 #: ../../src/wui/fieldaction.cc:445
 msgid "Toggle building statistics display"
-msgstr "Mostra/nascondi statistiche sulle costruzioni"
+msgstr "Mostra/nascondi statistiche sugli edifici"
 
 #: ../../src/wui/fieldaction.cc:451
 msgid "Toggle building label display"
@@ -3826,7 +3830,7 @@ msgstr "Statistiche sui beni"
 #: ../../src/wui/game_main_menu.cc:73 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/waresdisplay.cc:50
 msgid "Stock"
-msgstr "Magazzino"
+msgstr "Scorte"
 
 #: ../../src/wui/game_main_menu_save_game.cc:61
 #: ../../src/wui/game_options_menu.cc:90
@@ -3959,7 +3963,7 @@ msgstr "Costruzioni militari perse"
 
 #: ../../src/wui/general_statistics_menu.cc:208
 msgid "Military buildings defeated"
-msgstr "Costruzioni militari battute"
+msgstr "Costruzioni militari sconfitte"
 
 #: ../../src/wui/general_statistics_menu.cc:214
 msgid "Civilian buildings lost"
