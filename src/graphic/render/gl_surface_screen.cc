@@ -137,6 +137,7 @@ void GLSurfaceScreen::draw_rect(const Rect rc, const RGBColor clr)
 	assert(g_opengl);
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
+	glLineWidth(1);
 
 	glBegin(GL_LINE_LOOP); {
 		glColor3ub(clr.r(), clr.g(), clr.b());
