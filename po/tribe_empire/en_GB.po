@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2010-11-29 10:49+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:38+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Advanced Lance"
 msgstr "Advanced Lance"
 
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:211
 msgid "Arena"
 msgstr "Arena"
 
@@ -42,7 +42,7 @@ msgstr "Arena"
 msgid "Armour"
 msgstr "Armour"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:182
 msgid "Armour Smithy"
 msgstr "Armour Smithy"
 
@@ -62,7 +62,7 @@ msgstr "Axe"
 msgid "Baker"
 msgstr "Baker"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:173
 msgid "Bakery"
 msgstr "Bakery"
 
@@ -70,12 +70,12 @@ msgstr "Bakery"
 msgid "Bakes bread for workers."
 msgstr "Bakes bread for workers."
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:201
 msgid "Barracks"
 msgstr "Barracks"
 
-#: ../../tribes/empire/conf:148
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:202
 msgid "Barrier"
 msgstr "Barrier"
 
@@ -104,6 +104,10 @@ msgstr ""
 msgid "Bread"
 msgstr "Bread"
 
+#: ../../tribes/empire/conf:59
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
 msgstr "Breeds cute and helpful donkeys."
@@ -116,7 +120,7 @@ msgstr "Breeds pigs."
 msgid "Brewer"
 msgstr "Brewer"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:174
 msgid "Brewery"
 msgstr "Brewery"
 
@@ -144,12 +148,12 @@ msgstr "Carrier"
 msgid "Carries items along your roads."
 msgstr "Carries items along your roads."
 
-#: ../../tribes/empire/conf:142
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:205
 msgid "Castle"
 msgstr "Castle"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:216
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
 msgstr "Castle village"
@@ -158,11 +162,11 @@ msgstr "Castle village"
 msgid "Chain-Armour"
 msgstr "Chainmail Armour"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:179
 msgid "Charcoal Burner"
 msgstr "Charcoal Burner"
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:151
 msgid "Citadel"
 msgstr "Citadel"
 
@@ -180,11 +184,11 @@ msgstr ""
 msgid "Coal"
 msgstr "Coal"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:192
 msgid "Coal Mine"
 msgstr "Coal Mine"
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:210
 msgid "Colosseum"
 msgstr "Colosseum"
 
@@ -196,19 +200,19 @@ msgstr "Construction Site"
 msgid "Cuts raw pieces of granite and marble out of laying stones."
 msgstr "Shapes raw marble into columns."
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:191
 msgid "Deep Coal Mine"
 msgstr "Deep Coal Mine"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:195
 msgid "Deep Gold Mine"
 msgstr "Deep Gold Mine"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:193
 msgid "Deep Iron Ore Mine"
 msgstr "Deep Iron Mine"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:189
 msgid "Deep Marble Mine"
 msgstr "Deep Marble Mine"
 
@@ -224,7 +228,11 @@ msgstr "Destroyed building"
 msgid "Discovers resources for mining."
 msgstr "Discovers resources for mining."
 
-#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:141
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/empire/conf:152
 msgid "Donjon"
 msgstr "Donjon"
 
@@ -236,7 +244,7 @@ msgstr "Donkey"
 msgid "Donkey Breeder"
 msgstr "Donkey Breeder"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:183
 msgid "Donkeyfarm"
 msgstr "Donkey Farm"
 
@@ -244,7 +252,7 @@ msgstr "Donkey Farm"
 msgid "Empire"
 msgstr "Empire"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:187
 msgid "Farm"
 msgstr "Farm"
 
@@ -294,7 +302,7 @@ msgstr "Fish"
 msgid "Fisher"
 msgstr "Fisherman"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:166
 msgid "Fisher's House"
 msgstr "Fisherman's House"
 
@@ -323,12 +331,12 @@ msgstr ""
 msgid "Forester"
 msgstr "Forester"
 
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:165
 msgid "Forester's House"
 msgstr "Forester's House"
 
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:206
 msgid "Fortress"
 msgstr "Fortress"
 
@@ -344,7 +352,7 @@ msgstr "Catches fish from the sea."
 msgid "Gold"
 msgstr "Gold"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:196
 msgid "Gold Mine"
 msgstr "Gold Mine"
 
@@ -371,11 +379,11 @@ msgstr "Grapes"
 msgid "Grows vine."
 msgstr "Cultivates vines."
 
-#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:145
 msgid "Guardhall"
 msgstr "Guardhall"
 
-#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:146
 msgid "Guardhouse"
 msgstr "Guardhouse"
 
@@ -391,16 +399,16 @@ msgstr "Harvest vine"
 msgid "Harvest wheat"
 msgstr "Harvest wheat"
 
-#: ../../tribes/empire/conf:156
+#: ../../tribes/empire/conf:158
 msgid "Headquarters"
 msgstr "Headquarters"
 
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:215
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Headquarters medium"
 
-#: ../../tribes/empire/conf:157
+#: ../../tribes/empire/conf:159
 msgid "Headquarters shipwreck"
 msgstr "Headquarters shipwreck"
 
@@ -416,7 +424,7 @@ msgstr "Helmet"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Helps carry items on busy roads."
 
-#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:147
 msgid "High Tower"
 msgstr "High Tower"
 
@@ -430,7 +438,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Hunter"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:167
 msgid "Hunter's House"
 msgstr "Hunter's House"
 
@@ -438,7 +446,7 @@ msgstr "Hunter's House"
 msgid "Hunting Spear"
 msgstr "Hunting Spear"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:177
 msgid "Inn"
 msgstr "Inn"
 
@@ -454,7 +462,7 @@ msgstr "Iron"
 msgid "Iron Ore"
 msgstr "Iron Ore"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:194
 msgid "Iron Ore Mine"
 msgstr "Iron Mine"
 
@@ -480,7 +488,7 @@ msgstr "Lance"
 msgid "Lumberjack"
 msgstr "Lumberjack"
 
-#: ../../tribes/empire/conf:162
+#: ../../tribes/empire/conf:164
 msgid "Lumberjack's House"
 msgstr "Lumberjack's House"
 
@@ -492,7 +500,7 @@ msgstr "Marble"
 msgid "Marble Column"
 msgstr "Marble Column"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:190
 msgid "Marble Mine"
 msgstr "Marble Mine"
 
@@ -530,7 +538,7 @@ msgid ""
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:172
 msgid "Mill"
 msgstr "Mill"
 
@@ -570,13 +578,9 @@ msgstr "Miner"
 msgid "Not enough space"
 msgstr "Not enough space"
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:203
 msgid "Outpost"
 msgstr "Outpost"
-
-#: ../../tribes/empire/conf:59
-msgid "Peel"
-msgstr "Peel"
 
 #: ../../tribes/empire/conf:85
 msgid "Pick"
@@ -586,7 +590,7 @@ msgstr "Pick"
 msgid "Pig Breeder"
 msgstr "Pig Breeder"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:186
 msgid "Piggery"
 msgstr "Piggery"
 
@@ -718,7 +722,7 @@ msgstr "Produces tools for the workers."
 msgid "Produces weapons for the soldiers."
 msgstr "Produces weapons for the soldiers."
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:163
 msgid "Quarry"
 msgstr "Quarry"
 
@@ -770,7 +774,7 @@ msgstr "Resource indicator water"
 msgid "Saw"
 msgstr "Saw"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:171
 msgid "Sawmill"
 msgstr "Sawmill"
 
@@ -778,7 +782,7 @@ msgstr "Sawmill"
 msgid "Scout"
 msgstr "Scout"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:169
 msgid "Scout's House"
 msgstr "Scout's House"
 
@@ -792,12 +796,12 @@ msgstr ""
 msgid "Scythe"
 msgstr "Scythe"
 
-#: ../../tribes/empire/conf:152
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:200
 msgid "Sentry"
 msgstr "Sentry"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:184
 msgid "Sheepfarm"
 msgstr "Sheep Farm"
 
@@ -815,7 +819,7 @@ msgstr "Shovel"
 msgid "Sleep"
 msgstr "Sleep"
 
-#: ../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:148
 msgid "Small Tower"
 msgstr "Small Tower"
 
@@ -831,7 +835,7 @@ msgstr "Smelt iron"
 msgid "Smelter"
 msgstr "Smelter"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:180
 msgid "Smelting Works"
 msgstr "Smelting Works"
 
@@ -857,7 +861,7 @@ msgstr ""
 msgid "Stonemason"
 msgstr "Stonemason"
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:170
 msgid "Stonemason's House"
 msgstr "Stonemason's House"
 
@@ -871,11 +875,11 @@ msgid ""
 "quarries and marble mines."
 msgstr ""
 
-#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:155
 msgid "Stronghold"
 msgstr "Stronghold"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:178
 msgid "Tavern"
 msgstr "Tavern"
 
@@ -906,6 +910,12 @@ msgid ""
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
 
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
+msgstr ""
+
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
 "The chain-armour is a medium armour for Empire soldiers. It is produced in "
@@ -934,14 +944,6 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
-
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
-msgstr ""
-"The peel is the tool of the baker, each baker needs his own. It is produced "
-"by the toolsmith."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -1045,12 +1047,12 @@ msgstr ""
 msgid "Toolsmith"
 msgstr "Toolsmith"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:181
 msgid "Toolsmithy"
 msgstr "Toolsmithy"
 
-#: ../../tribes/empire/conf:147
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:204
 msgid "Tower"
 msgstr "Tower"
 
@@ -1058,7 +1060,7 @@ msgstr "Tower"
 msgid "Trainer"
 msgstr "Trainer"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:212
 msgid "Trainingscamp"
 msgstr "Training Camp"
 
@@ -1215,7 +1217,7 @@ msgstr "Vine small"
 msgid "Vine tiny"
 msgstr "Vine tiny"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:175
 msgid "Vineyard"
 msgstr "Vineyard"
 
@@ -1223,7 +1225,7 @@ msgstr "Vineyard"
 msgid "War-Lance"
 msgstr "War-Lance"
 
-#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:160
 msgid "Warehouse"
 msgstr "Warehouse"
 
@@ -1238,7 +1240,7 @@ msgid ""
 "water."
 msgstr ""
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:188
 msgid "Weapon Smithy"
 msgstr "Weapon Smithy"
 
@@ -1256,11 +1258,11 @@ msgstr "Weaponsmith"
 msgid "Weaver"
 msgstr "Weaver"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:185
 msgid "Weaving Mill"
 msgstr "Weaving Mill"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:168
 msgid "Well"
 msgstr "Well"
 
@@ -1279,7 +1281,7 @@ msgstr ""
 msgid "Wine"
 msgstr "Wine"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:176
 msgid "Winery"
 msgstr "Winery"
 

@@ -7,31 +7,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-11-16 13:58+0000\n"
 "Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-17 05:12+0000\n"
-"X-Generator: Launchpad (build 14291)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:43+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:85
-msgid "%i trees at the moment."
-msgstr "Momentan %i Bäume."
-
-#: ../../scripting/win_conditions/04_wood_gnome.lua:138
+#: ../../scripting/win_conditions/04_wood_gnome.lua:137
 msgid "%i trees."
 msgstr "%i Bäume."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:137
+#: ../../scripting/win_conditions/04_wood_gnome.lua:136
 msgid "%s had "
 msgstr "%s hatte "
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:84
-msgid "%s has "
-msgstr "%s hat "
+msgid "%s has %i trees at the moment."
+msgstr ""
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:145
 msgid "%s owns more than half of the maps area."
@@ -83,7 +79,7 @@ msgid "Keep it for %i more minutes to win the game."
 msgstr "Halte dies für weitere %i Minuten, um das Spiel zu gewinnen."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:81
-#: ../../scripting/win_conditions/04_wood_gnome.lua:134
+#: ../../scripting/win_conditions/04_wood_gnome.lua:133
 msgid "Player overview:"
 msgstr "Spieler-Überblick:"
 
@@ -94,13 +90,13 @@ msgstr "Punkte"
 #: ../../scripting/win_conditions/02_collectors.lua:128
 #: ../../scripting/win_conditions/03_territorial_lord.lua:156
 #: ../../scripting/win_conditions/03_territorial_lord.lua:158
-#: ../../scripting/win_conditions/04_wood_gnome.lua:88
+#: ../../scripting/win_conditions/04_wood_gnome.lua:87
 msgid "Status"
 msgstr "Status"
 
 #: ../../scripting/win_conditions/02_collectors.lua:90
-msgid "Status for Player %i<br>"
-msgstr "Status für Spieler %i<br>"
+msgid "Status for %s<br>"
+msgstr ""
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:129
 #: ../../scripting/win_conditions/03_territorial_lord.lua:132
@@ -126,7 +122,7 @@ msgid "The tribe or team that can defeat all others wins the game!"
 msgstr ""
 "Der Spieler oder das Team, das alle anderen besiegt, gewinnt das Spiel!"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:141
+#: ../../scripting/win_conditions/04_wood_gnome.lua:140
 msgid "The winner is %s "
 msgstr "Der Sieger ist %s "
 
@@ -143,7 +139,7 @@ msgstr ""
 msgid "Total: %i points"
 msgstr "Insgesamt: %i Punkte"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:102
+#: ../../scripting/win_conditions/04_wood_gnome.lua:101
 msgid "Trees owned"
 msgstr "Bäume im Besitz"
 
@@ -155,12 +151,12 @@ msgstr "Waldschrat"
 #: ../../scripting/win_conditions/01_defeat_all.lua:24
 #: ../../scripting/win_conditions/02_collectors.lua:179
 #: ../../scripting/win_conditions/03_territorial_lord.lua:166
-#: ../../scripting/win_conditions/04_wood_gnome.lua:94
+#: ../../scripting/win_conditions/04_wood_gnome.lua:93
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid "You are defeated!"
 msgstr "Du wurdest besiegt!"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:149
+#: ../../scripting/win_conditions/04_wood_gnome.lua:148
 msgid "You are the winner of this game!"
 msgstr "Du bist der Gewinner dieses Spiels!"
 
@@ -178,7 +174,7 @@ msgstr ""
 "eingelagert sind. Der Spieler, der nach vier Stunden die höchste Punktzahl "
 "durch Waren besitzt, gewinnt das Spiel."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:145
+#: ../../scripting/win_conditions/04_wood_gnome.lua:144
 msgid "You have lost this game!"
 msgstr "Du hast dieses Spiel verloren!"
 
@@ -186,7 +182,7 @@ msgstr "Du hast dieses Spiel verloren!"
 #: ../../scripting/win_conditions/01_defeat_all.lua:25
 #: ../../scripting/win_conditions/02_collectors.lua:180
 #: ../../scripting/win_conditions/03_territorial_lord.lua:167
-#: ../../scripting/win_conditions/04_wood_gnome.lua:95
+#: ../../scripting/win_conditions/04_wood_gnome.lua:94
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:40
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
@@ -203,7 +199,7 @@ msgstr "Du hast dieses Spiel gewonnen!"
 msgid "You lost"
 msgstr "Du hast verloren"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:147
+#: ../../scripting/win_conditions/04_wood_gnome.lua:146
 msgid "You lost!"
 msgstr "Du hast verloren!"
 
@@ -217,7 +213,7 @@ msgstr "Du hast noch %i Minuten, um einen Sieg zu verhindern."
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
 #: ../../scripting/win_conditions/03_territorial_lord.lua:185
-#: ../../scripting/win_conditions/04_wood_gnome.lua:151
+#: ../../scripting/win_conditions/04_wood_gnome.lua:150
 msgid "You won!"
 msgstr "Du hast gewonnen!"
 
@@ -226,6 +222,6 @@ msgstr "Du hast gewonnen!"
 msgid "You've lost this game!"
 msgstr "Du hast dieses Spiel verloren!"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:142
+#: ../../scripting/win_conditions/04_wood_gnome.lua:141
 msgid "with %i trees."
 msgstr "mit %i Bäumen."

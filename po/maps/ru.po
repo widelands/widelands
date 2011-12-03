@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-01-19 17:36+0000\n"
 "Last-Translator: Massol <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:08+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:33+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -156,18 +156,6 @@ msgstr "Турнир в пустыне"
 msgid "Dry Riverbed"
 msgstr "Пересохшее русло"
 
-#: ../../maps/Four Mountains.wmf/elemental:9
-msgid ""
-"Each tribe is surrounded by four mighty mountains. Who will first conquer "
-"them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
-"Each mountain contains only one resource."
-msgstr ""
-"Каждое племя окружено четырьмя могучими горами. Кто сможет первым покорить "
-"их, и добыть ресурсы для своего племени? Подсказка 1: Ищи воду у реки. "
-"Подсказка 2: Снеговики отмечают дополнительные источники воды. Подсказка 3: "
-"Каждая гора содержит только один ресурс."
-
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
 msgstr "Легко. Знакомство с Варварами"
@@ -201,17 +189,6 @@ msgstr ""
 "Веками вы мирно соседствовали с племенем на другом острове. Но теперь миру, "
 "кажется, конец - сосед решил расширить свои владения."
 
-#: ../../maps/Sun of fire.wmf/elemental:11
-msgid ""
-"For hundreds of years this island was kept as sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now, that a tribe was finally "
-"barefaced enough to settle on the coast of that island, a lot others "
-"followed afterwards."
-msgstr ""
-"Сотни лет этот остров был священной обителью Богов и никто не решался "
-"ступить на него. Но вот появилось племя, настолько бесстыдное, что решило "
-"поселиться там. За ним последовали и многие другие..."
-
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
 msgstr "Четыре замка"
@@ -219,16 +196,6 @@ msgstr "Четыре замка"
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
 msgstr "Четыре горы"
-
-#: ../../maps/Desert Tournament.wmf/elemental:9
-msgid ""
-"Four tribes struggle with their nearest neighbour to be the first to reach "
-"the mountain of gold that primises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr ""
-"Четыре племени соревнуются со своими ближайшими соседями, что бы первыми "
-"достичь золотой горы, которая сделает их невероятно богатыми. Но смогут ли "
-"двое оставшихся мудро разделить ресурсы?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -278,14 +245,6 @@ msgstr ""
 "Сказано, что даже Луна и Солнце должны найти свой путь между пиками этих "
 "гор. ПОДСКАЗКА: Монолиты показывают места залегания руды. Не посылайте "
 "геологов куда-то ещё."
-
-#: ../../maps/Swamp Monks.wmf/elemental:9
-msgid ""
-"It is said, that the old war monks, living in the even older swamps are the "
-"key to the control of the whole island."
-msgstr ""
-"Говорят, что древние монахи-воины, живущие на ещё более древних болотах, "
-"ключ к власти над всем островом."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -361,19 +320,6 @@ msgstr "Таинственный лабиринт"
 msgid "Not yet implemented"
 msgstr "Еще не внедрена"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:9
-msgid ""
-"Only a small hill in the centre of the map connects these four competing "
-"tribes. Lead your army right away to this hill and build a giant stronghold "
-"as a sign of your superiority! Hint: In the centre is only space for one "
-"stronghold. Water can be found everywhere, so there is no need to send out "
-"geologists."
-msgstr ""
-"Только маленький холм в центре карты соединяет 4 враждующих племени. Приведи "
-"свою армию на этот холм и построй гигантскую крепость в знак своего "
-"превосходства! Подсказка: в центре хватит места только для одной крепости. "
-"Вода есть везде, поэтому нет необходимости посылать геологов на ее поиски."
-
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
 msgstr "Место встречи изменить нельзя"
@@ -434,6 +380,38 @@ msgstr ""
 "теперь ничто не преграждает путь к богатству. Но многие умерли разорванные "
 "волками, другие утопли в болоте... в окружении враждебных племен."
 
+#: ../../maps/Sun of fire.wmf/elemental:13
+msgid "Start positions are clockwise"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:11
+#: ../../maps/Swamp Monks.wmf/elemental:11
+msgid "Suggested Teams: (blue, red) vs (yellow, green)"
+msgstr ""
+
+#: ../../maps/Four Castles.wmf/elemental:11
+msgid "Suggested Teams: (blue,red) vs (yellow,green)"
+msgstr ""
+
+#: ../../maps/Four Mountains.wmf/elemental:11
+msgid ""
+"Suggested Teams: (blue,red) vs (yellow,green) or (red,yellow) vs (green,blue)"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:11
+msgid "Suggested Teams: (red, green) vs (blue, yellow)"
+msgstr ""
+
+#: ../../maps/Elven Forests.wmf/elemental:11
+msgid ""
+"Suggested Teams: (red, green) vs (blue,yellow) or (yellow, green) vs "
+"(red,blue)"
+msgstr ""
+
+#: ../../maps/Rendez-Vous.wmf/elemental:11
+msgid "Suggested Teams: all ok."
+msgstr ""
+
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Болотный остров"
@@ -465,14 +443,6 @@ msgstr "Свет древнего огня"
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
 msgstr "Большое озеро"
-
-#: ../../maps/Elven Forests.wmf/elemental:9
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt of taking them for themselves."
-msgstr ""
-"Дух захватывающая красота этих изумрудных земель привлекла внимание многих "
-"племен. И каждое хочет заполучить эти земли себе."
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
@@ -554,14 +524,6 @@ msgstr ""
 msgid "War of the Valleys"
 msgstr "Война Долин"
 
-#: ../../maps/Four Castles.wmf/elemental:9
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
-"Хорошо защищённые в своих могучих крепостях, четыре жаждущих власти "
-"полководца разработали свои планы захвата этих земель..."
-
 #: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
@@ -638,10 +600,6 @@ msgstr ""
 "место, очень мало и условия там жесткие. Не забывай пополнять запасы "
 "строевого леса, они тебе ох как пригодятся."
 
-#: ../../maps/Atoll.wmf/elemental:9
-msgid "Who will be the real King of the big atoll?"
-msgstr "Кто станет реальным королём большого атолла?"
-
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
 msgstr "Долина зубров"
@@ -662,5 +620,6 @@ msgstr ""
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "appeared and now a rivalry under smugglers has been started: Which team will "
-"be the first to smuggle a certain number of wares?"
+"be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
+"vs Red + Green."
 msgstr ""

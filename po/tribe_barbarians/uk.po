@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2010-08-30 22:56+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:37+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -58,7 +58,7 @@ msgstr "Попелище"
 msgid "Axe"
 msgstr "Сокира"
 
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:192
 msgid "Axefactory"
 msgstr "Фабрика сокир"
 
@@ -66,7 +66,7 @@ msgstr "Фабрика сокир"
 msgid "Baker"
 msgstr "Пекар"
 
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:183
 msgid "Bakery"
 msgstr "Пекарня"
 
@@ -78,16 +78,16 @@ msgstr "Пече хліб для робочих"
 msgid "Barbarians"
 msgstr "Варвари"
 
-#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:159
 msgid "Barracks"
 msgstr "Казарма"
 
-#: ../../tribes/barbarians/conf:157
-#: ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:160
+#: ../../tribes/barbarians/conf:210
 msgid "Barrier"
 msgstr "Застава"
 
-#: ../../tribes/barbarians/conf:215
+#: ../../tribes/barbarians/conf:218
 msgid "Battle Arena"
 msgstr "Бойова арена"
 
@@ -112,7 +112,7 @@ msgid ""
 "(trainingscamp and battle arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:183
+#: ../../tribes/barbarians/conf:186
 msgid "Big Inn"
 msgstr "Трактир"
 
@@ -124,6 +124,10 @@ msgstr "Коваль"
 msgid "Blackwood"
 msgstr "Доски"
 
+#: ../../tribes/barbarians/conf:69
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
 msgstr "Розводить сильних биків, котрі допомагають в перевезенні товарі."
@@ -132,7 +136,7 @@ msgstr "Розводить сильних биків, котрі допомаг�
 msgid "Brewer"
 msgstr "Пивовар"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:184
 msgid "Brewery"
 msgstr "Пивоварня"
 
@@ -168,8 +172,8 @@ msgstr "Носій"
 msgid "Carries items along the roads."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:149
-#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:161
 msgid "Castle"
 msgstr "Замок"
 
@@ -177,11 +181,11 @@ msgstr "Замок"
 msgid "Cattle Breeder"
 msgstr "Скотар"
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:194
 msgid "Cattle Farm"
 msgstr "Ферма великої рогатої худоби"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:189
 msgid "Charcoal Burner's House"
 msgstr "Будиночок випалювача углю"
 
@@ -189,11 +193,11 @@ msgstr "Будиночок випалювача углю"
 msgid "Chief Miner"
 msgstr "Досвідчений шахтар"
 
-#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/conf:213
 msgid "Citadel"
 msgstr "Цитадель"
 
-#: ../../tribes/barbarians/conf:220
+#: ../../tribes/barbarians/conf:223
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
 msgstr "Цитадель з поселенням"
@@ -211,7 +215,7 @@ msgstr ""
 msgid "Coal"
 msgstr "Уголь"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:201
 msgid "Coal mine"
 msgstr "Вугільна шахта"
 
@@ -223,27 +227,27 @@ msgstr "Будівельний майданчик"
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:200
 msgid "Deep Coal Mine"
 msgstr "Глибока вугільна шахта"
 
-#: ../../tribes/barbarians/conf:203
+#: ../../tribes/barbarians/conf:206
 msgid "Deep Gold Mine"
 msgstr "Глибока шахта золота"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:203
 msgid "Deep Iron Ore Mine"
 msgstr "Глибокий рудник"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:199
 msgid "Deeper Coal Mine"
 msgstr "Дуже глибока вугільна шахта"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:205
 msgid "Deeper Gold Mine"
 msgstr "Дуже глибока шахта золота"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:202
 msgid "Deeper Iron Ore Mine"
 msgstr "Дуже глибокий рудник"
 
@@ -263,11 +267,15 @@ msgstr "Зруйнована будівля."
 msgid "Discovers resources for mining."
 msgstr "Шукає корисні копалини."
 
-#: ../../tribes/barbarians/conf:212
+#: ../../tribes/barbarians/conf:149
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:215
 msgid "Donjon"
 msgstr "Оглядова вежа"
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:196
 msgid "Farm"
 msgstr "Ферма"
 
@@ -287,7 +295,7 @@ msgstr "Рубає дерева."
 msgid "Ferner"
 msgstr "Садівник"
 
-#: ../../tribes/barbarians/conf:179
+#: ../../tribes/barbarians/conf:182
 msgid "Fernery"
 msgstr "Оранжерея"
 
@@ -330,7 +338,7 @@ msgstr "Риба"
 msgid "Fisher"
 msgstr "Рибак"
 
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:175
 msgid "Fisher's Hut"
 msgstr "Хатинка рибака"
 
@@ -345,8 +353,8 @@ msgid ""
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:159
-#: ../../tribes/barbarians/conf:211
+#: ../../tribes/barbarians/conf:162
+#: ../../tribes/barbarians/conf:214
 msgid "Fortress"
 msgstr "Фортеця"
 
@@ -354,7 +362,7 @@ msgstr "Фортеця"
 msgid "Gamekeeper"
 msgstr "Лісник"
 
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:177
 msgid "Gamekeeper's Hut"
 msgstr "Хатинка лісника"
 
@@ -370,7 +378,7 @@ msgstr "Ловить рибу"
 msgid "Gold"
 msgstr "Золото"
 
-#: ../../tribes/barbarians/conf:204
+#: ../../tribes/barbarians/conf:207
 msgid "Gold Mine"
 msgstr "Золота копальня"
 
@@ -393,7 +401,7 @@ msgid ""
 "and armours."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:198
 msgid "Granite Mine"
 msgstr "Гранітна шахта"
 
@@ -405,11 +413,11 @@ msgstr "Бетон"
 msgid "Grows thatch reed."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:150
+#: ../../tribes/barbarians/conf:153
 msgid "Guardhall"
 msgstr "Форт"
 
-#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:154
 msgid "Guardhouse"
 msgstr "Будиночок гвардії"
 
@@ -425,12 +433,12 @@ msgstr "Збирає солом'яну тростину"
 msgid "Harvest wheat"
 msgstr "Збирає пшеницю"
 
-#: ../../tribes/barbarians/conf:164
-#: ../../tribes/barbarians/conf:165
+#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:168
 msgid "Headquarters"
 msgstr "Штаб"
 
-#: ../../tribes/barbarians/conf:219
+#: ../../tribes/barbarians/conf:222
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Середній штаб"
@@ -443,7 +451,7 @@ msgstr "Шолом"
 msgid "Helmsmith"
 msgstr "Шоломний майстер"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:197
 msgid "Helmsmithy"
 msgstr "Кузня шоломів"
 
@@ -451,7 +459,7 @@ msgstr "Кузня шоломів"
 msgid "Helps to carry items at heavily used roads."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:155
 msgid "High Tower"
 msgstr "Висока вежа."
 
@@ -466,7 +474,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Мисливець"
 
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:176
 msgid "Hunter's Hut"
 msgstr "Хаинка мисливця"
 
@@ -474,7 +482,7 @@ msgstr "Хаинка мисливця"
 msgid "Hunting Spear"
 msgstr "Спис мисливця"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:187
 msgid "Inn"
 msgstr "Трактир"
 
@@ -490,7 +498,7 @@ msgstr "Залізо"
 msgid "Iron Ore"
 msgstr "Залізна руда"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:204
 msgid "Iron Ore Mine"
 msgstr "Шахта заліза"
 
@@ -511,7 +519,7 @@ msgstr ""
 msgid "Kitchen Tools"
 msgstr "Кухонне приладдя"
 
-#: ../../tribes/barbarians/conf:178
+#: ../../tribes/barbarians/conf:181
 msgid "Lime Kiln"
 msgstr ""
 
@@ -523,7 +531,7 @@ msgstr "Бетонщик"
 msgid "Lumberjack"
 msgstr "Лісоруб"
 
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:173
 msgid "Lumberjack's Hut"
 msgstr "Хатинка лісоруба"
 
@@ -559,11 +567,11 @@ msgid ""
 "arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:193
 msgid "Metalwork Shop"
 msgstr "Металообробна майстерня"
 
-#: ../../tribes/barbarians/conf:182
+#: ../../tribes/barbarians/conf:185
 msgid "Micro Brewery"
 msgstr "Мала пивоварня"
 
@@ -583,17 +591,13 @@ msgid ""
 "to prepare meals."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:160
+#: ../../tribes/barbarians/conf:163
 msgid "Outpost"
 msgstr "Форпост"
 
 #: ../../tribes/barbarians/conf:111
 msgid "Ox"
 msgstr "Віл"
-
-#: ../../tribes/barbarians/conf:69
-msgid "Peel"
-msgstr "Пекарська лопата"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Pick"
@@ -734,7 +738,7 @@ msgstr ""
 msgid "Produces weapons for soldiers and tools for workers."
 msgstr "Виготовляє зброю солдатам, та інструменти робочим."
 
-#: ../../tribes/barbarians/conf:169
+#: ../../tribes/barbarians/conf:172
 msgid "Quarry"
 msgstr "Кар’єр"
 
@@ -742,7 +746,7 @@ msgstr "Кар’єр"
 msgid "Ranger"
 msgstr "Лісник"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:174
 msgid "Ranger's Hut"
 msgstr "Хатинка лісника"
 
@@ -826,7 +830,7 @@ msgstr "Індикатор ресурсів: вода"
 msgid "Scout"
 msgstr "Розвідник"
 
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:179
 msgid "Scout's Hut"
 msgstr "Хатинка розвідника"
 
@@ -839,8 +843,8 @@ msgstr "Розвідник, розвідує невідому місцевіст
 msgid "Scythe"
 msgstr "Коса"
 
-#: ../../tribes/barbarians/conf:155
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:211
 msgid "Sentry"
 msgstr "Сторожа"
 
@@ -857,7 +861,7 @@ msgstr "Лопата"
 msgid "Sleep"
 msgstr "Сон"
 
-#: ../../tribes/barbarians/conf:153
+#: ../../tribes/barbarians/conf:156
 msgid "Small Tower"
 msgstr "Мала вежа"
 
@@ -873,7 +877,7 @@ msgstr "Плавити залізо"
 msgid "Smelter"
 msgstr "Ливарник"
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:190
 msgid "Smelting Works"
 msgstr "Ливарня"
 
@@ -908,11 +912,11 @@ msgstr "Каменяр"
 msgid "Strong Beer"
 msgstr "Міцне пиво"
 
-#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:212
 msgid "Stronghold"
 msgstr "Опорний пункт"
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:188
 msgid "Tavern"
 msgstr "Таверна"
 
@@ -952,6 +956,14 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
+msgstr ""
+
+#: ../../tribes/barbarians/bakingtray/conf:1
+msgid ""
+"The bread paddle is a tool of the baker and each baker needs his own. It is "
+"produced in the metal works like all other tools (but it ceases to be "
+"produced by the building if the metal works is enhanced to an axefactory and "
+"war mill)."
 msgstr ""
 
 #: ../../tribes/barbarians/broadaxe/conf:1
@@ -994,13 +1006,6 @@ msgstr ""
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
 msgstr "Могутні племена із східних земель"
-
-#: ../../tribes/barbarians/bakingtray/conf:1
-msgid ""
-"The peel is a tool of the baker and each baker needs his own. It is produced "
-"in the metal works like all other tools (but it ceases to be produced by the "
-"building if the metal works is enhanced to an axefactory and war mill)."
-msgstr ""
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1060,8 +1065,8 @@ msgid ""
 "axefactory and war mill)."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:154
-#: ../../tribes/barbarians/conf:161
+#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:164
 msgid "Tower"
 msgstr "Вежа"
 
@@ -1069,7 +1074,7 @@ msgstr "Вежа"
 msgid "Trainer"
 msgstr "Тренер"
 
-#: ../../tribes/barbarians/conf:216
+#: ../../tribes/barbarians/conf:219
 msgid "Trainingscamp"
 msgstr "Казарма"
 
@@ -1212,11 +1217,11 @@ msgstr ""
 msgid "War Helmet"
 msgstr "Військовий шолом"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:191
 msgid "War Mill"
 msgstr "Зброярня"
 
-#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:169
 msgid "Warehouse"
 msgstr "Склад"
 
@@ -1239,11 +1244,11 @@ msgstr ""
 msgid "Weaver"
 msgstr "Ткач"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:195
 msgid "Weaving-Mill"
 msgstr "Ткацький цех"
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:178
 msgid "Well"
 msgstr "Криниця"
 
@@ -1262,7 +1267,7 @@ msgstr ""
 msgid "Wildboar"
 msgstr "Вепр"
 
-#: ../../tribes/barbarians/conf:177
+#: ../../tribes/barbarians/conf:180
 msgid "Wood Hardener"
 msgstr "Тесляр"
 

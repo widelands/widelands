@@ -7,31 +7,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-03-21 20:11+0000\n"
 "Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:17+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:43+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:85
-msgid "%i trees at the moment."
-msgstr "%i puuta tällä hetkellä."
-
-#: ../../scripting/win_conditions/04_wood_gnome.lua:138
+#: ../../scripting/win_conditions/04_wood_gnome.lua:137
 msgid "%i trees."
 msgstr "%i puuta."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:137
+#: ../../scripting/win_conditions/04_wood_gnome.lua:136
 msgid "%s had "
 msgstr "%s omisti "
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:84
-msgid "%s has "
-msgstr "%s omistaa "
+msgid "%s has %i trees at the moment."
+msgstr ""
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:145
 msgid "%s owns more than half of the maps area."
@@ -82,7 +78,7 @@ msgid "Keep it for %i more minutes to win the game."
 msgstr "Pidä tilanne vielä %i minuttia voitaaksesi pelin."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:81
-#: ../../scripting/win_conditions/04_wood_gnome.lua:134
+#: ../../scripting/win_conditions/04_wood_gnome.lua:133
 msgid "Player overview:"
 msgstr "Pelaajatilanne:"
 
@@ -93,13 +89,13 @@ msgstr "Pisteet"
 #: ../../scripting/win_conditions/02_collectors.lua:128
 #: ../../scripting/win_conditions/03_territorial_lord.lua:156
 #: ../../scripting/win_conditions/03_territorial_lord.lua:158
-#: ../../scripting/win_conditions/04_wood_gnome.lua:88
+#: ../../scripting/win_conditions/04_wood_gnome.lua:87
 msgid "Status"
 msgstr "Tila"
 
 #: ../../scripting/win_conditions/02_collectors.lua:90
-msgid "Status for Player %i<br>"
-msgstr "Pelaajan %i tilanne<br>"
+msgid "Status for %s<br>"
+msgstr ""
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:129
 #: ../../scripting/win_conditions/03_territorial_lord.lua:132
@@ -124,7 +120,7 @@ msgstr "Pelin loppuun on %i."
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr "Heimo tai joukkue, joka kukistaa kaikki muuta, voitaa pelin!"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:141
+#: ../../scripting/win_conditions/04_wood_gnome.lua:140
 msgid "The winner is %s "
 msgstr "Voittaja on %s "
 
@@ -140,7 +136,7 @@ msgstr ""
 msgid "Total: %i points"
 msgstr "Yhteensä: %i pistettä"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:102
+#: ../../scripting/win_conditions/04_wood_gnome.lua:101
 msgid "Trees owned"
 msgstr "Omistetut puut"
 
@@ -152,12 +148,12 @@ msgstr "Metsäläinen"
 #: ../../scripting/win_conditions/01_defeat_all.lua:24
 #: ../../scripting/win_conditions/02_collectors.lua:179
 #: ../../scripting/win_conditions/03_territorial_lord.lua:166
-#: ../../scripting/win_conditions/04_wood_gnome.lua:94
+#: ../../scripting/win_conditions/04_wood_gnome.lua:93
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:39
 msgid "You are defeated!"
 msgstr "Sinut on kukistettu."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:149
+#: ../../scripting/win_conditions/04_wood_gnome.lua:148
 msgid "You are the winner of this game!"
 msgstr "Olet voittanut tämän pelin!"
 
@@ -174,7 +170,7 @@ msgstr ""
 "Saat pisteitä arvokkaista tuotteista varastoissasi. Se peljaaja, jolla on "
 "eniten tuotteita 4 tunnin jälkeen, voittaa pelin."
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:145
+#: ../../scripting/win_conditions/04_wood_gnome.lua:144
 msgid "You have lost this game!"
 msgstr "Olet hävinnyt tämän pelin!"
 
@@ -182,7 +178,7 @@ msgstr "Olet hävinnyt tämän pelin!"
 #: ../../scripting/win_conditions/01_defeat_all.lua:25
 #: ../../scripting/win_conditions/02_collectors.lua:180
 #: ../../scripting/win_conditions/03_territorial_lord.lua:167
-#: ../../scripting/win_conditions/04_wood_gnome.lua:95
+#: ../../scripting/win_conditions/04_wood_gnome.lua:94
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:40
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
@@ -198,7 +194,7 @@ msgstr "Olet voittanut tämän pelin!"
 msgid "You lost"
 msgstr "Hävisit"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:147
+#: ../../scripting/win_conditions/04_wood_gnome.lua:146
 msgid "You lost!"
 msgstr "Hävisit!"
 
@@ -212,7 +208,7 @@ msgstr "Sinulla on vielä %i minuuttia aikaa estää voitto."
 
 #: ../../scripting/win_conditions/02_collectors.lua:141
 #: ../../scripting/win_conditions/03_territorial_lord.lua:185
-#: ../../scripting/win_conditions/04_wood_gnome.lua:151
+#: ../../scripting/win_conditions/04_wood_gnome.lua:150
 msgid "You won!"
 msgstr "Voitit!"
 
@@ -221,6 +217,6 @@ msgstr "Voitit!"
 msgid "You've lost this game!"
 msgstr "Olet hävinnyt tämän pelin!"
 
-#: ../../scripting/win_conditions/04_wood_gnome.lua:142
+#: ../../scripting/win_conditions/04_wood_gnome.lua:141
 msgid "with %i trees."
 msgstr "%i puulla."

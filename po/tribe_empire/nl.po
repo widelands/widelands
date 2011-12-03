@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-02-13 22:07+0000\n"
 "Last-Translator: PliniusNeo <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:37+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Advanced Lance"
 msgstr "Verbeterde Lans"
 
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:211
 msgid "Arena"
 msgstr "Arena"
 
@@ -46,7 +46,7 @@ msgstr "Arena"
 msgid "Armour"
 msgstr "Harnas"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:182
 msgid "Armour Smithy"
 msgstr "Harnassmederij"
 
@@ -66,7 +66,7 @@ msgstr "Bijl"
 msgid "Baker"
 msgstr "Bakker"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:173
 msgid "Bakery"
 msgstr "Bakkerij"
 
@@ -74,12 +74,12 @@ msgstr "Bakkerij"
 msgid "Bakes bread for workers."
 msgstr "Bakt broden voor de werkers."
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:201
 msgid "Barracks"
 msgstr "Barakken"
 
-#: ../../tribes/empire/conf:148
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:202
 msgid "Barrier"
 msgstr "Barrière"
 
@@ -114,6 +114,10 @@ msgstr ""
 msgid "Bread"
 msgstr "Brood"
 
+#: ../../tribes/empire/conf:59
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
 msgstr "Fokt schattige en handige ezels"
@@ -126,7 +130,7 @@ msgstr "Fokt varkens."
 msgid "Brewer"
 msgstr "Brouwer"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:174
 msgid "Brewery"
 msgstr "Brouwerij"
 
@@ -154,12 +158,12 @@ msgstr "Drager"
 msgid "Carries items along your roads."
 msgstr "Draagt voorwerpen over je wegen."
 
-#: ../../tribes/empire/conf:142
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:205
 msgid "Castle"
 msgstr "Kasteel"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:216
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
 msgstr "Kasteeldorp"
@@ -168,11 +172,11 @@ msgstr "Kasteeldorp"
 msgid "Chain-Armour"
 msgstr "Maliënkolder"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:179
 msgid "Charcoal Burner"
 msgstr "Houtskoolbrander"
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:151
 msgid "Citadel"
 msgstr "Citadel"
 
@@ -192,11 +196,11 @@ msgstr ""
 msgid "Coal"
 msgstr "Kolen"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:192
 msgid "Coal Mine"
 msgstr "Kolenmijn"
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:210
 msgid "Colosseum"
 msgstr "Colosseum"
 
@@ -208,19 +212,19 @@ msgstr "Bouwplaats"
 msgid "Cuts raw pieces of granite and marble out of laying stones."
 msgstr "Hakt ruwe stukken graniet en marmer uit rondliggende stenen."
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:191
 msgid "Deep Coal Mine"
 msgstr "Diepe kolenmijn"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:195
 msgid "Deep Gold Mine"
 msgstr "Diepe goudmijn"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:193
 msgid "Deep Iron Ore Mine"
 msgstr "Diepe ijzerertsmijn"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:189
 msgid "Deep Marble Mine"
 msgstr "Diepe marmermijn"
 
@@ -236,7 +240,11 @@ msgstr "Vernietigd gebouw"
 msgid "Discovers resources for mining."
 msgstr "Ontdekt bodemschatten."
 
-#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:141
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/empire/conf:152
 msgid "Donjon"
 msgstr "Verdedigingstoren"
 
@@ -248,7 +256,7 @@ msgstr "Ezel"
 msgid "Donkey Breeder"
 msgstr "Ezelfokker"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:183
 msgid "Donkeyfarm"
 msgstr "Ezelboerderij"
 
@@ -256,7 +264,7 @@ msgstr "Ezelboerderij"
 msgid "Empire"
 msgstr "Empiren"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:187
 msgid "Farm"
 msgstr "Boerderij"
 
@@ -308,7 +316,7 @@ msgstr "Vis"
 msgid "Fisher"
 msgstr "Visser"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:166
 msgid "Fisher's House"
 msgstr "Vissershuis"
 
@@ -339,12 +347,12 @@ msgstr ""
 msgid "Forester"
 msgstr "Boswachter"
 
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:165
 msgid "Forester's House"
 msgstr "Boswachtershuis"
 
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:206
 msgid "Fortress"
 msgstr "Vesting"
 
@@ -360,7 +368,7 @@ msgstr "Haalt vis uit de zee."
 msgid "Gold"
 msgstr "Goud"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:196
 msgid "Gold Mine"
 msgstr "Goudmijn"
 
@@ -391,11 +399,11 @@ msgstr "Druif"
 msgid "Grows vine."
 msgstr "Kweekt wijnrank."
 
-#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:145
 msgid "Guardhall"
 msgstr "Wachtlokaal"
 
-#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:146
 msgid "Guardhouse"
 msgstr "Wachthuis"
 
@@ -411,16 +419,16 @@ msgstr "Oogst wijnrank"
 msgid "Harvest wheat"
 msgstr "Oogst tarwe"
 
-#: ../../tribes/empire/conf:156
+#: ../../tribes/empire/conf:158
 msgid "Headquarters"
 msgstr "Hoofdkwartier"
 
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:215
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Gemiddeld hoofdkwartier"
 
-#: ../../tribes/empire/conf:157
+#: ../../tribes/empire/conf:159
 msgid "Headquarters shipwreck"
 msgstr "Hoofdkwartier scheepswrak"
 
@@ -436,7 +444,7 @@ msgstr "Helm"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Helpt items te sjouwen op veel gebruikte wegen."
 
-#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:147
 msgid "High Tower"
 msgstr "Hoge Toren"
 
@@ -452,7 +460,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Jager"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:167
 msgid "Hunter's House"
 msgstr "Jachthuis"
 
@@ -460,7 +468,7 @@ msgstr "Jachthuis"
 msgid "Hunting Spear"
 msgstr "Jagersspeer"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:177
 msgid "Inn"
 msgstr "Herberg"
 
@@ -476,7 +484,7 @@ msgstr "IJzer"
 msgid "Iron Ore"
 msgstr "IJzererts"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:194
 msgid "Iron Ore Mine"
 msgstr "IJzerertsmijn"
 
@@ -504,7 +512,7 @@ msgstr "Lans"
 msgid "Lumberjack"
 msgstr "Houthakker"
 
-#: ../../tribes/empire/conf:162
+#: ../../tribes/empire/conf:164
 msgid "Lumberjack's House"
 msgstr "Houthakkershuis"
 
@@ -516,7 +524,7 @@ msgstr "Marmer"
 msgid "Marble Column"
 msgstr "Marmerzuil"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:190
 msgid "Marble Mine"
 msgstr "Marmermijn"
 
@@ -565,7 +573,7 @@ msgstr ""
 "voor vlees: varkens van de varkensfokkerij en het vlees van wild wat "
 "geschoten wordt door de jagers."
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:172
 msgid "Mill"
 msgstr "Molen"
 
@@ -609,13 +617,9 @@ msgstr "Mijnwerker"
 msgid "Not enough space"
 msgstr "Niet genoeg ruimte"
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:203
 msgid "Outpost"
 msgstr "Voorpost"
-
-#: ../../tribes/empire/conf:59
-msgid "Peel"
-msgstr "Schieter"
 
 #: ../../tribes/empire/conf:85
 msgid "Pick"
@@ -625,7 +629,7 @@ msgstr "Pikhouweel"
 msgid "Pig Breeder"
 msgstr "Varkenshouder"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:186
 msgid "Piggery"
 msgstr "Varkensfokkerij"
 
@@ -757,7 +761,7 @@ msgstr "Produceert gereedschap voor de werkers."
 msgid "Produces weapons for the soldiers."
 msgstr "Produceert wapens voor de soldaten."
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:163
 msgid "Quarry"
 msgstr "Steengroeve"
 
@@ -809,7 +813,7 @@ msgstr "Bronindicator water"
 msgid "Saw"
 msgstr "Zaag"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:171
 msgid "Sawmill"
 msgstr "Houtzagerij"
 
@@ -817,7 +821,7 @@ msgstr "Houtzagerij"
 msgid "Scout"
 msgstr "Verkenner"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:169
 msgid "Scout's House"
 msgstr "Verkennershuis"
 
@@ -832,12 +836,12 @@ msgstr ""
 msgid "Scythe"
 msgstr "Zeis"
 
-#: ../../tribes/empire/conf:152
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:200
 msgid "Sentry"
 msgstr "Wachtpost"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:184
 msgid "Sheepfarm"
 msgstr "Schapenboerderij"
 
@@ -855,7 +859,7 @@ msgstr "Schop"
 msgid "Sleep"
 msgstr "Rust"
 
-#: ../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:148
 msgid "Small Tower"
 msgstr "Kleine Toren"
 
@@ -871,7 +875,7 @@ msgstr "Smelt ijzer"
 msgid "Smelter"
 msgstr "Smelter"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:180
 msgid "Smelting Works"
 msgstr "Hoogoven"
 
@@ -897,7 +901,7 @@ msgstr ""
 msgid "Stonemason"
 msgstr "Steenhouwer"
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:170
 msgid "Stonemason's House"
 msgstr "Steenhouwer"
 
@@ -913,11 +917,11 @@ msgstr ""
 "Stenen zijn basis bouwmaterialen van de Empiren. Het wordt gewonnen in "
 "steengroeves en marmermijnen."
 
-#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:155
 msgid "Stronghold"
 msgstr "Burcht"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:178
 msgid "Tavern"
 msgstr "Kroeg"
 
@@ -952,6 +956,12 @@ msgstr ""
 "De bakkers van de Empiren maken smakelijk brood uit meel en water. Het wordt "
 "gebruikt in de kroegen en herbergen om porties en maaltijden te maken. Brood "
 "wordt ook gebruikt in de trainingplaatsen (arena, colosseum, trainingskamp)."
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -995,14 +1005,6 @@ msgstr ""
 "de harnassmederij Samen met een houten lans is het de uitrusting voor jonge "
 "soldaten.  Helmen worden ook gebruikt in het trainingskamp, samen met "
 "voedsel, om soldaten te trainen van levenspuntenniveau 0 naar niveau 1."
-
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
-msgstr ""
-"De schieter is het gereedschap van de bakker, elke bakker heeft er één "
-"nodig. Deze wordt gemaakt door de werktuigsmid."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -1135,12 +1137,12 @@ msgstr ""
 msgid "Toolsmith"
 msgstr "Werktuigsmid"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:181
 msgid "Toolsmithy"
 msgstr "Werktuigsmederij"
 
-#: ../../tribes/empire/conf:147
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:204
 msgid "Tower"
 msgstr "Toren"
 
@@ -1148,7 +1150,7 @@ msgstr "Toren"
 msgid "Trainer"
 msgstr "Trainer"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:212
 msgid "Trainingscamp"
 msgstr "Trainingskamp"
 
@@ -1311,7 +1313,7 @@ msgstr "Jonge wijnrank"
 msgid "Vine tiny"
 msgstr "Kleine wijnrank"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:175
 msgid "Vineyard"
 msgstr "Wijngaarde"
 
@@ -1319,7 +1321,7 @@ msgstr "Wijngaarde"
 msgid "War-Lance"
 msgstr "Oorlogslans"
 
-#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:160
 msgid "Warehouse"
 msgstr "Magazijn"
 
@@ -1337,7 +1339,7 @@ msgstr ""
 "brouwerij. Ook de ezel-, schapen- en varkensboerderij moeten voorzien worden "
 "van water."
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:188
 msgid "Weapon Smithy"
 msgstr "Wapensmederij"
 
@@ -1357,11 +1359,11 @@ msgstr "Wapensmid"
 msgid "Weaver"
 msgstr "Wever"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:185
 msgid "Weaving Mill"
 msgstr "Weverij"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:168
 msgid "Well"
 msgstr "Put"
 
@@ -1383,7 +1385,7 @@ msgstr ""
 msgid "Wine"
 msgstr "Wijn"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:176
 msgid "Winery"
 msgstr "Wijnmakerij"
 

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-08-31 11:54+0000\n"
 "Last-Translator: Vazde <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:37+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Advanced Lance"
 msgstr "Vahvistettu keihäs"
 
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:211
 msgid "Arena"
 msgstr "Areena"
 
@@ -50,7 +50,7 @@ msgstr "Areena"
 msgid "Armour"
 msgstr "Haarniska"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:182
 msgid "Armour Smithy"
 msgstr "Haarniskaseppä"
 
@@ -70,7 +70,7 @@ msgstr "Kirves"
 msgid "Baker"
 msgstr "Leipuri"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:173
 msgid "Bakery"
 msgstr "Leipomo"
 
@@ -78,12 +78,12 @@ msgstr "Leipomo"
 msgid "Bakes bread for workers."
 msgstr "Leipoo leipää työntekijöille."
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:201
 msgid "Barracks"
 msgstr "Parakki"
 
-#: ../../tribes/empire/conf:148
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:202
 msgid "Barrier"
 msgstr "Rajalinnake"
 
@@ -115,6 +115,10 @@ msgstr ""
 msgid "Bread"
 msgstr "Leipä"
 
+#: ../../tribes/empire/conf:59
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
 msgstr "Siittää nättejä ja avuliaita aaseja"
@@ -127,7 +131,7 @@ msgstr "Kasvattaa sikoja."
 msgid "Brewer"
 msgstr "Oluenpanija"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:174
 msgid "Brewery"
 msgstr "Panimo"
 
@@ -155,12 +159,12 @@ msgstr "Kantaja"
 msgid "Carries items along your roads."
 msgstr "Kantaa tavaroita teilläsi."
 
-#: ../../tribes/empire/conf:142
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:205
 msgid "Castle"
 msgstr "Linna"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:216
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
 msgstr "Linnakylä"
@@ -170,11 +174,11 @@ msgstr "Linnakylä"
 msgid "Chain-Armour"
 msgstr "Ketjupanssari"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:179
 msgid "Charcoal Burner"
 msgstr "Hiilenpolttamo"
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:151
 msgid "Citadel"
 msgstr "Kastelli"
 
@@ -194,11 +198,11 @@ msgstr ""
 msgid "Coal"
 msgstr "Hiili"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:192
 msgid "Coal Mine"
 msgstr "Hiilikaivos"
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:210
 msgid "Colosseum"
 msgstr "Colosseum"
 
@@ -210,19 +214,19 @@ msgstr "Rakennustyömaa"
 msgid "Cuts raw pieces of granite and marble out of laying stones."
 msgstr "Leikkaa raakagraniittia ja -marmoria rakennuskiviksi"
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:191
 msgid "Deep Coal Mine"
 msgstr "Syvä hiilikaivos"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:195
 msgid "Deep Gold Mine"
 msgstr "Syvä kultakaivos"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:193
 msgid "Deep Iron Ore Mine"
 msgstr "Syvä rautakaivos"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:189
 msgid "Deep Marble Mine"
 msgstr "Syvä marmorikaivos"
 
@@ -238,7 +242,11 @@ msgstr "Tuhoutunut rakennus"
 msgid "Discovers resources for mining."
 msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
 
-#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:141
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/empire/conf:152
 msgid "Donjon"
 msgstr "Keskustorni"
 
@@ -250,7 +258,7 @@ msgstr "Aasi"
 msgid "Donkey Breeder"
 msgstr "Aasinkasvattaja"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:183
 msgid "Donkeyfarm"
 msgstr "Aasifarmi"
 
@@ -258,7 +266,7 @@ msgstr "Aasifarmi"
 msgid "Empire"
 msgstr "Keisarikunta"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:187
 msgid "Farm"
 msgstr "Maatila"
 
@@ -308,7 +316,7 @@ msgstr "Kala"
 msgid "Fisher"
 msgstr "Kalastaja"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:166
 msgid "Fisher's House"
 msgstr "Kalastajan mökki"
 
@@ -338,12 +346,12 @@ msgstr ""
 msgid "Forester"
 msgstr "Puunistuttaja"
 
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:165
 msgid "Forester's House"
 msgstr "Puunistuttajan mökki"
 
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:206
 msgid "Fortress"
 msgstr "Linnoitus"
 
@@ -359,7 +367,7 @@ msgstr "Kiskoo kalaa vedestä."
 msgid "Gold"
 msgstr "Kulta"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:196
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
@@ -390,11 +398,11 @@ msgstr "Viinirypäle"
 msgid "Grows vine."
 msgstr "Kasvattaa viinirypäleitä."
 
-#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:145
 msgid "Guardhall"
 msgstr "Linnake"
 
-#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:146
 msgid "Guardhouse"
 msgstr "Vartiotupa"
 
@@ -410,16 +418,16 @@ msgstr "Korjaa viinirypäleitä"
 msgid "Harvest wheat"
 msgstr "Korjaa vehnää"
 
-#: ../../tribes/empire/conf:156
+#: ../../tribes/empire/conf:158
 msgid "Headquarters"
 msgstr "Päämaja"
 
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:215
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Keskikokoinen päämaja"
 
-#: ../../tribes/empire/conf:157
+#: ../../tribes/empire/conf:159
 msgid "Headquarters shipwreck"
 msgstr "Päämaja-haaksirikko"
 
@@ -435,7 +443,7 @@ msgstr "Kypärä"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Auttaa tavaroiden kuljettamisessa teillä."
 
-#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:147
 msgid "High Tower"
 msgstr "Suurtorni"
 
@@ -451,7 +459,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Metsästäjä"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:167
 msgid "Hunter's House"
 msgstr "Metsästysmökki"
 
@@ -459,7 +467,7 @@ msgstr "Metsästysmökki"
 msgid "Hunting Spear"
 msgstr "Metsästyskeihäs"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:177
 msgid "Inn"
 msgstr "Majatalo"
 
@@ -475,7 +483,7 @@ msgstr "Rauta"
 msgid "Iron Ore"
 msgstr "Rautamalmi"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:194
 msgid "Iron Ore Mine"
 msgstr "Rautakaivos"
 
@@ -505,7 +513,7 @@ msgstr "Keihäs"
 msgid "Lumberjack"
 msgstr "Puunhakkaaja"
 
-#: ../../tribes/empire/conf:162
+#: ../../tribes/empire/conf:164
 msgid "Lumberjack's House"
 msgstr "Puunhakkaajan mökki"
 
@@ -517,7 +525,7 @@ msgstr "Marmori"
 msgid "Marble Column"
 msgstr "Marmoripaasi"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:190
 msgid "Marble Mine"
 msgstr "Marmorikaivos"
 
@@ -555,7 +563,7 @@ msgid ""
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:172
 msgid "Mill"
 msgstr "Mylly"
 
@@ -599,13 +607,9 @@ msgstr "Kaivostyöläinen"
 msgid "Not enough space"
 msgstr "Ei ole tarpeeksi tilaa"
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:203
 msgid "Outpost"
 msgstr "Etuvartioasema"
-
-#: ../../tribes/empire/conf:59
-msgid "Peel"
-msgstr "Leipälapio"
 
 #: ../../tribes/empire/conf:85
 msgid "Pick"
@@ -615,7 +619,7 @@ msgstr "Hakku"
 msgid "Pig Breeder"
 msgstr "Siankasvattaja"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:186
 msgid "Piggery"
 msgstr "Sikala"
 
@@ -748,7 +752,7 @@ msgstr "Tuottaa työkaluja työmiehille."
 msgid "Produces weapons for the soldiers."
 msgstr "Tuottaa aseita sotilaille."
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:163
 msgid "Quarry"
 msgstr "Kivilouhos"
 
@@ -800,7 +804,7 @@ msgstr "Resurssimerkki vettä"
 msgid "Saw"
 msgstr "Saha"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:171
 msgid "Sawmill"
 msgstr "Saha"
 
@@ -808,7 +812,7 @@ msgstr "Saha"
 msgid "Scout"
 msgstr "Tiedustelija"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:169
 msgid "Scout's House"
 msgstr "Tiedustelijan talo"
 
@@ -823,12 +827,12 @@ msgstr ""
 msgid "Scythe"
 msgstr "Viikate"
 
-#: ../../tribes/empire/conf:152
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:200
 msgid "Sentry"
 msgstr "Vartiopaikka"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:184
 msgid "Sheepfarm"
 msgstr "Lammastila"
 
@@ -846,7 +850,7 @@ msgstr "Lapio"
 msgid "Sleep"
 msgstr "Lepää"
 
-#: ../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:148
 msgid "Small Tower"
 msgstr "Pieni torni"
 
@@ -862,7 +866,7 @@ msgstr "Sulata rautaa"
 msgid "Smelter"
 msgstr "Sulattaja"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:180
 msgid "Smelting Works"
 msgstr "Sulattamo"
 
@@ -888,7 +892,7 @@ msgstr ""
 msgid "Stonemason"
 msgstr "Kivenhakkaaja"
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:170
 msgid "Stonemason's House"
 msgstr "Kivenhakkaajan mökki"
 
@@ -902,11 +906,11 @@ msgid ""
 "quarries and marble mines."
 msgstr ""
 
-#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:155
 msgid "Stronghold"
 msgstr "Linnake"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:178
 msgid "Tavern"
 msgstr "Krouvi"
 
@@ -934,6 +938,12 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
+msgstr ""
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/empire/chain_armour/conf:1
@@ -964,14 +974,6 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
-
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
-msgstr ""
-"Leipälapio on leipurin työkalu, ja jokainen leipuri tarvitsee omansa. "
-"Työkaluseppä valmistaa sen."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -1077,12 +1079,12 @@ msgstr ""
 msgid "Toolsmith"
 msgstr "Työkaluseppä"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:181
 msgid "Toolsmithy"
 msgstr "Työkaluseppä"
 
-#: ../../tribes/empire/conf:147
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:204
 msgid "Tower"
 msgstr "Torni"
 
@@ -1090,7 +1092,7 @@ msgstr "Torni"
 msgid "Trainer"
 msgstr "Kouluttaja"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:212
 msgid "Trainingscamp"
 msgstr "Harjoitteluleiri"
 
@@ -1249,7 +1251,7 @@ msgstr "Viiniköynnös, pieni"
 msgid "Vine tiny"
 msgstr "Viiniköynnös, hyvin pieni"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:175
 msgid "Vineyard"
 msgstr "Viinitarha"
 
@@ -1257,7 +1259,7 @@ msgstr "Viinitarha"
 msgid "War-Lance"
 msgstr "Sotakeihäs"
 
-#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:160
 msgid "Warehouse"
 msgstr "Varasto"
 
@@ -1272,7 +1274,7 @@ msgid ""
 "water."
 msgstr ""
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:188
 msgid "Weapon Smithy"
 msgstr "Asepaja"
 
@@ -1290,11 +1292,11 @@ msgstr "Aseseppä"
 msgid "Weaver"
 msgstr "Kutoja"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:185
 msgid "Weaving Mill"
 msgstr "Kutomo"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:168
 msgid "Well"
 msgstr "Kaivo"
 
@@ -1314,7 +1316,7 @@ msgid "Wine"
 msgstr "Viini"
 
 # TODO: Winery is actually a vineyard too, too easy to misunderstand.
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:176
 msgid "Winery"
 msgstr "Viinikellari"
 

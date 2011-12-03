@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-11-26 14:38+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-27 05:14+0000\n"
-"X-Generator: Launchpad (build 14381)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:33+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -154,18 +154,6 @@ msgstr "Púštny turnaj"
 msgid "Dry Riverbed"
 msgstr "vyschnuté koryto rieky"
 
-#: ../../maps/Four Mountains.wmf/elemental:9
-msgid ""
-"Each tribe is surrounded by four mighty mountains. Who will first conquer "
-"them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
-"Each mountain contains only one resource."
-msgstr ""
-"Každý kmeň je obklopený štyrmi mohutnými horami. Kto si ich podmaní ako prvý "
-"a nárokuje zásoby pre svoj vlastný kmeň? Tip 1: Vodu môžete nájsť popri "
-"rieke. Tip 2: Snehuliaci značia ďalšie zdroje vody. Tip 3: Každá hora "
-"obsahuje len jeden zdroj."
-
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
 msgstr "Ľahká. Zoznámi vás s barbarmi."
@@ -199,17 +187,6 @@ msgstr ""
 "Po stáročia ste žili pokojne spolu s iným kmeňom na susednom ostrove. Zdá "
 "sa, že tento mier končí - váš sused sa začína rozširovať."
 
-#: ../../maps/Sun of fire.wmf/elemental:11
-msgid ""
-"For hundreds of years this island was kept as sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now, that a tribe was finally "
-"barefaced enough to settle on the coast of that island, a lot others "
-"followed afterwards."
-msgstr ""
-"Stovky rokov tento ostrov slúžil ako svätyňa bohov. Žiadny človek sa naň "
-"nikdy neodvážil stúpiť. Ale teraz, kedže nejaký kmeň bol dostatočne drzý na "
-"to, aby sa usadil na pobreží toho ostrova, veľa iných neskôr prišlo."
-
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
 msgstr "Štyri hrady"
@@ -217,16 +194,6 @@ msgstr "Štyri hrady"
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
 msgstr "Štyri hory"
-
-#: ../../maps/Desert Tournament.wmf/elemental:9
-msgid ""
-"Four tribes struggle with their nearest neighbour to be the first to reach "
-"the mountain of gold that primises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr ""
-"Štyri kmene súťažia s najbližším susedom, aby najskôr dosiahli horu zlata, "
-"ktorá sľubuje nevýslovné bohatstvo. Ale dokážu zvyšné dve zdieľať zdroje "
-"rozumne?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -277,14 +244,6 @@ msgstr ""
 "Hovorí sa, že dokonca aj Slnko a Mesiac musia nájsť svoju cestu medzi "
 "vrcholmi týchto hôr. TIP: Ložiská rudy sú označené monolitmi. Netrápte sa s "
 "posielaním geológov inam."
-
-#: ../../maps/Swamp Monks.wmf/elemental:9
-msgid ""
-"It is said, that the old war monks, living in the even older swamps are the "
-"key to the control of the whole island."
-msgstr ""
-"Hovorí sa, že starí vojnoví mnísi, žijúci v ešte starších močiaroch, sú "
-"kľúčom pre ovládnutie celého ostrova."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -360,19 +319,6 @@ msgstr "Mystický labyrint"
 msgid "Not yet implemented"
 msgstr ""
 
-#: ../../maps/Rendez-Vous.wmf/elemental:9
-msgid ""
-"Only a small hill in the centre of the map connects these four competing "
-"tribes. Lead your army right away to this hill and build a giant stronghold "
-"as a sign of your superiority! Hint: In the centre is only space for one "
-"stronghold. Water can be found everywhere, so there is no need to send out "
-"geologists."
-msgstr ""
-"Iba malý kopec v centre mapy spája tieto štyri súperivé kmene. Veďte vašu "
-"armádu priamo k tomuto kopcu a postavte obrovskú pevnosť ako znak vašej "
-"prevahy! Tip: V centre je miesto len pre jednu pevnosť. Vodu môžete nájsť "
-"všade, takže nebude potreba vyslať geológov."
-
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
 msgstr "Rendez-Vous"
@@ -434,6 +380,38 @@ msgstr ""
 "mnohí zomrú... Roztrhaní vlkmi, pohltení bažinou, obkľúčení nepriateľskými "
 "kmeňmi."
 
+#: ../../maps/Sun of fire.wmf/elemental:13
+msgid "Start positions are clockwise"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:11
+#: ../../maps/Swamp Monks.wmf/elemental:11
+msgid "Suggested Teams: (blue, red) vs (yellow, green)"
+msgstr ""
+
+#: ../../maps/Four Castles.wmf/elemental:11
+msgid "Suggested Teams: (blue,red) vs (yellow,green)"
+msgstr ""
+
+#: ../../maps/Four Mountains.wmf/elemental:11
+msgid ""
+"Suggested Teams: (blue,red) vs (yellow,green) or (red,yellow) vs (green,blue)"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:11
+msgid "Suggested Teams: (red, green) vs (blue, yellow)"
+msgstr ""
+
+#: ../../maps/Elven Forests.wmf/elemental:11
+msgid ""
+"Suggested Teams: (red, green) vs (blue,yellow) or (yellow, green) vs "
+"(red,blue)"
+msgstr ""
+
+#: ../../maps/Rendez-Vous.wmf/elemental:11
+msgid "Suggested Teams: all ok."
+msgstr ""
+
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Močaristý ostrov"
@@ -465,14 +443,6 @@ msgstr "Starobylé ohnivé slnko"
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
 msgstr "Veľké jazero"
-
-#: ../../maps/Elven Forests.wmf/elemental:9
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt of taking them for themselves."
-msgstr ""
-"Úchvatná krása týchto smaragdových zemí zlákala mnoho kmeňov na snahu zobrať "
-"si ich pre seba."
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
@@ -554,14 +524,6 @@ msgstr "Dve impéria súperia o poklady legendárneho polostrova..."
 msgid "War of the Valleys"
 msgstr "Vojna o údolia"
 
-#: ../../maps/Four Castles.wmf/elemental:9
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
-"Štyria vojvodcovia bažiaci po moci a dobre chránení v ich mohutných "
-"pevnostiach dokončujú svoje plány na ovládnutie týchto zemí..."
-
 #: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
@@ -639,10 +601,6 @@ msgstr ""
 "sa v ňom ťažko. Nezabudnite sa postarať o zásoby dreva, budete ich "
 "potrebovať."
 
-#: ../../maps/Atoll.wmf/elemental:9
-msgid "Who will be the real King of the big atoll?"
-msgstr "Kto sa stane skutočným kráľom Veľkého atolu?"
-
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
 msgstr "Údolie zubrov"
@@ -662,8 +620,6 @@ msgstr ""
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "appeared and now a rivalry under smugglers has been started: Which team will "
-"be the first to smuggle a certain number of wares?"
+"be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
+"vs Red + Green."
 msgstr ""
-"Na vašich dobre zriadených pašeráckych cestách je zrazu rušno: objavili sa "
-"ďalšie dve kmene a začalo sa súperenie medzi pašerákmi. Ktorý tím ako prvý "
-"prepašuje istý počet výrobkov?"

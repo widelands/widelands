@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-08-21 14:27+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:37+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Advanced Lance"
 msgstr "Avanceret lanse"
 
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:211
 msgid "Arena"
 msgstr "Arena"
 
@@ -46,7 +46,7 @@ msgstr "Arena"
 msgid "Armour"
 msgstr "Rustning"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:182
 msgid "Armour Smithy"
 msgstr "Rustningssmedje"
 
@@ -66,7 +66,7 @@ msgstr "Økse"
 msgid "Baker"
 msgstr "Bager"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:173
 msgid "Bakery"
 msgstr "Bageri"
 
@@ -74,12 +74,12 @@ msgstr "Bageri"
 msgid "Bakes bread for workers."
 msgstr "Bager brød til arbejderne."
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:201
 msgid "Barracks"
 msgstr "Barakker"
 
-#: ../../tribes/empire/conf:148
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:202
 msgid "Barrier"
 msgstr "Fæstning"
 
@@ -108,6 +108,10 @@ msgstr ""
 msgid "Bread"
 msgstr "Brød"
 
+#: ../../tribes/empire/conf:59
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
 msgstr "Opdrætter søde og brugbare æsler"
@@ -120,7 +124,7 @@ msgstr "Avler grise."
 msgid "Brewer"
 msgstr "Brygger"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:174
 msgid "Brewery"
 msgstr "Bryggeri"
 
@@ -148,12 +152,12 @@ msgstr "Bærer"
 msgid "Carries items along your roads."
 msgstr "Transporterer ting langs med dine veje."
 
-#: ../../tribes/empire/conf:142
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:205
 msgid "Castle"
 msgstr "Borg"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:216
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
 msgstr "Borglandsby"
@@ -162,11 +166,11 @@ msgstr "Borglandsby"
 msgid "Chain-Armour"
 msgstr "Kæderustning"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:179
 msgid "Charcoal Burner"
 msgstr "Trækulsvier"
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:151
 msgid "Citadel"
 msgstr "Citadel"
 
@@ -184,11 +188,11 @@ msgstr ""
 msgid "Coal"
 msgstr "Kul"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:192
 msgid "Coal Mine"
 msgstr "Kulmine"
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:210
 msgid "Colosseum"
 msgstr "Amfiteater"
 
@@ -200,19 +204,19 @@ msgstr "Byggeplads"
 msgid "Cuts raw pieces of granite and marble out of laying stones."
 msgstr ""
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:191
 msgid "Deep Coal Mine"
 msgstr "Dyb kulmine"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:195
 msgid "Deep Gold Mine"
 msgstr "Dyb guldmine"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:193
 msgid "Deep Iron Ore Mine"
 msgstr "Dyb jernmine"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:189
 msgid "Deep Marble Mine"
 msgstr "Dyb marmormine"
 
@@ -228,7 +232,11 @@ msgstr "Ødelagt bygning"
 msgid "Discovers resources for mining."
 msgstr "Opdager ressourcer der kan graves op."
 
-#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:141
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/empire/conf:152
 msgid "Donjon"
 msgstr "Borgtårn"
 
@@ -240,7 +248,7 @@ msgstr "Æsel"
 msgid "Donkey Breeder"
 msgstr "Æselavler"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:183
 msgid "Donkeyfarm"
 msgstr "Æselavl"
 
@@ -248,7 +256,7 @@ msgstr "Æselavl"
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:187
 msgid "Farm"
 msgstr "Landbrug"
 
@@ -298,7 +306,7 @@ msgstr "Fisk"
 msgid "Fisher"
 msgstr "Fisker"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:166
 msgid "Fisher's House"
 msgstr "Fiskers hus"
 
@@ -329,12 +337,12 @@ msgstr ""
 msgid "Forester"
 msgstr "Skovfoged"
 
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:165
 msgid "Forester's House"
 msgstr "Skovhuggers hus"
 
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:206
 msgid "Fortress"
 msgstr "Fort"
 
@@ -350,7 +358,7 @@ msgstr "Får fisk op af havet."
 msgid "Gold"
 msgstr "Guld"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:196
 msgid "Gold Mine"
 msgstr "Guldmine"
 
@@ -380,11 +388,11 @@ msgstr "Vindrue"
 msgid "Grows vine."
 msgstr "Dyrker vin."
 
-#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:145
 msgid "Guardhall"
 msgstr "Vagthal"
 
-#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:146
 msgid "Guardhouse"
 msgstr "Vagthus"
 
@@ -400,16 +408,16 @@ msgstr "Høst vin"
 msgid "Harvest wheat"
 msgstr "Høst hvede"
 
-#: ../../tribes/empire/conf:156
+#: ../../tribes/empire/conf:158
 msgid "Headquarters"
 msgstr "Hovedkvarter"
 
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:215
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Mellemstort hovedkvarter"
 
-#: ../../tribes/empire/conf:157
+#: ../../tribes/empire/conf:159
 msgid "Headquarters shipwreck"
 msgstr "Hovedkvartersskibsvraget"
 
@@ -425,7 +433,7 @@ msgstr "Hjelm"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Hjælper med at bære genstande ved ofte brugte veje."
 
-#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:147
 msgid "High Tower"
 msgstr "Højt tårn"
 
@@ -439,7 +447,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Jæger"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:167
 msgid "Hunter's House"
 msgstr "Jægers hytte"
 
@@ -447,7 +455,7 @@ msgstr "Jægers hytte"
 msgid "Hunting Spear"
 msgstr "Jagtspyd"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:177
 msgid "Inn"
 msgstr "Gæstgiverhus"
 
@@ -463,7 +471,7 @@ msgstr "Jern"
 msgid "Iron Ore"
 msgstr "Jernmalm"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:194
 msgid "Iron Ore Mine"
 msgstr "Jernmine"
 
@@ -489,7 +497,7 @@ msgstr "Lanse"
 msgid "Lumberjack"
 msgstr "Skovhugger"
 
-#: ../../tribes/empire/conf:162
+#: ../../tribes/empire/conf:164
 msgid "Lumberjack's House"
 msgstr "Skovhuggers hus"
 
@@ -501,7 +509,7 @@ msgstr "Marmor"
 msgid "Marble Column"
 msgstr "Marmorsøjle"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:190
 msgid "Marble Mine"
 msgstr "Marmormine"
 
@@ -539,7 +547,7 @@ msgid ""
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:172
 msgid "Mill"
 msgstr "Mølle"
 
@@ -579,13 +587,9 @@ msgstr "Minearbejder"
 msgid "Not enough space"
 msgstr ""
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:203
 msgid "Outpost"
 msgstr "Forpost"
-
-#: ../../tribes/empire/conf:59
-msgid "Peel"
-msgstr "Brødspaden"
 
 #: ../../tribes/empire/conf:85
 msgid "Pick"
@@ -595,7 +599,7 @@ msgstr "Hakke"
 msgid "Pig Breeder"
 msgstr "Svineavler"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:186
 msgid "Piggery"
 msgstr "Svinesti"
 
@@ -727,7 +731,7 @@ msgstr "Laver værktøj til arbejderne."
 msgid "Produces weapons for the soldiers."
 msgstr "Laver våben til soldaterne."
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:163
 msgid "Quarry"
 msgstr "Stenbrud"
 
@@ -779,7 +783,7 @@ msgstr "Ressourceindikator vand"
 msgid "Saw"
 msgstr "Sav"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:171
 msgid "Sawmill"
 msgstr "Savværk"
 
@@ -787,7 +791,7 @@ msgstr "Savværk"
 msgid "Scout"
 msgstr "Spejder"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:169
 msgid "Scout's House"
 msgstr "Spejders hus"
 
@@ -801,12 +805,12 @@ msgstr ""
 msgid "Scythe"
 msgstr "Le"
 
-#: ../../tribes/empire/conf:152
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:200
 msgid "Sentry"
 msgstr "Forpost"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:184
 msgid "Sheepfarm"
 msgstr "Fårefold"
 
@@ -824,7 +828,7 @@ msgstr "Skovl"
 msgid "Sleep"
 msgstr "Sov"
 
-#: ../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:148
 msgid "Small Tower"
 msgstr "Lille tårn"
 
@@ -840,7 +844,7 @@ msgstr "Smelte jern"
 msgid "Smelter"
 msgstr "Udsmelter"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:180
 msgid "Smelting Works"
 msgstr "Smeltesmedje"
 
@@ -863,7 +867,7 @@ msgstr ""
 msgid "Stonemason"
 msgstr "Stenhugger"
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:170
 msgid "Stonemason's House"
 msgstr "Stenhuggers hus"
 
@@ -877,11 +881,11 @@ msgid ""
 "quarries and marble mines."
 msgstr ""
 
-#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:155
 msgid "Stronghold"
 msgstr "Højborg"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:178
 msgid "Tavern"
 msgstr "Kro"
 
@@ -908,6 +912,12 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
+msgstr ""
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/empire/chain_armour/conf:1
@@ -938,14 +948,6 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
-
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
-msgstr ""
-"Brødspaden er bagerens redskab. Hver bager har brug for en. Den produceres "
-"af værktøjsmageren."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -1049,12 +1051,12 @@ msgstr ""
 msgid "Toolsmith"
 msgstr "Værktøjssmed"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:181
 msgid "Toolsmithy"
 msgstr "Værktøjssmedje"
 
-#: ../../tribes/empire/conf:147
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:204
 msgid "Tower"
 msgstr "Tårn"
 
@@ -1062,7 +1064,7 @@ msgstr "Tårn"
 msgid "Trainer"
 msgstr "Træner"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:212
 msgid "Trainingscamp"
 msgstr "Træningslejr"
 
@@ -1217,7 +1219,7 @@ msgstr "Lille vinmark"
 msgid "Vine tiny"
 msgstr "Meget lille vinmark"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:175
 msgid "Vineyard"
 msgstr "Vingård"
 
@@ -1225,7 +1227,7 @@ msgstr "Vingård"
 msgid "War-Lance"
 msgstr "Krigslanse"
 
-#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:160
 msgid "Warehouse"
 msgstr "Varehus"
 
@@ -1240,7 +1242,7 @@ msgid ""
 "water."
 msgstr ""
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:188
 msgid "Weapon Smithy"
 msgstr "Våbensmedje"
 
@@ -1258,11 +1260,11 @@ msgstr "Våbensmed"
 msgid "Weaver"
 msgstr "Væver"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:185
 msgid "Weaving Mill"
 msgstr "Væveri"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:168
 msgid "Well"
 msgstr "Brønd"
 
@@ -1281,7 +1283,7 @@ msgstr ""
 msgid "Wine"
 msgstr "Vin"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:176
 msgid "Winery"
 msgstr "Vingård"
 

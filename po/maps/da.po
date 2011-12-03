@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2010-08-30 23:39+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:08+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:33+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -149,18 +149,6 @@ msgstr ""
 msgid "Dry Riverbed"
 msgstr "Tør flodseng"
 
-#: ../../maps/Four Mountains.wmf/elemental:9
-msgid ""
-"Each tribe is surrounded by four mighty mountains. Who will first conquer "
-"them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
-"Each mountain contains only one resource."
-msgstr ""
-"Hver landsby er omringet af fire store bjerge. Hvem er den første til at "
-"overtage dem og udvinde deres ressourcer til sin egen stamme? Hint 1: Vand "
-"kan blive fundet langs en flod: Hint 2: Snemænd angiver yderligere "
-"vandkilder. Hint 3: Hvert bjerg har kun en ressourceforekomst."
-
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
 msgstr ""
@@ -192,14 +180,6 @@ msgid ""
 "expand."
 msgstr ""
 
-#: ../../maps/Sun of fire.wmf/elemental:11
-msgid ""
-"For hundreds of years this island was kept as sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now, that a tribe was finally "
-"barefaced enough to settle on the coast of that island, a lot others "
-"followed afterwards."
-msgstr ""
-
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
 msgstr "Fire borge"
@@ -207,13 +187,6 @@ msgstr "Fire borge"
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
 msgstr "Fire bjerge"
-
-#: ../../maps/Desert Tournament.wmf/elemental:9
-msgid ""
-"Four tribes struggle with their nearest neighbour to be the first to reach "
-"the mountain of gold that primises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -264,12 +237,6 @@ msgstr ""
 "Det siges, at selv sol og måne må finde deres vej mellem tinderne på disse "
 "bjerge. Fif: Monolitter viser malmsteder. Spil ikke tid på at sende geologer "
 "til andre steder."
-
-#: ../../maps/Swamp Monks.wmf/elemental:9
-msgid ""
-"It is said, that the old war monks, living in the even older swamps are the "
-"key to the control of the whole island."
-msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -340,19 +307,6 @@ msgstr "Mystisk labyrint"
 msgid "Not yet implemented"
 msgstr ""
 
-#: ../../maps/Rendez-Vous.wmf/elemental:9
-msgid ""
-"Only a small hill in the centre of the map connects these four competing "
-"tribes. Lead your army right away to this hill and build a giant stronghold "
-"as a sign of your superiority! Hint: In the centre is only space for one "
-"stronghold. Water can be found everywhere, so there is no need to send out "
-"geologists."
-msgstr ""
-"Kun en lille bakke i centrum af kortet forbinder disse fire konkurrerende "
-"stammer. Før din hær direkte til bakken og byg en stor fæstning som tegn på "
-"din overmagt! Fif: I centrum er der kun plads til en fæstning. Vand kan "
-"findes overalt, så der er ikke behov for at udsende geologer."
-
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
 msgstr "Det aftalte møde"
@@ -404,6 +358,38 @@ msgstr ""
 "at vejen til rigdom ingen hindringer har. Men mange vil dø og blive spist af "
 "ulvene, opslugt af sumpe... omringet af fjendtlige stammer."
 
+#: ../../maps/Sun of fire.wmf/elemental:13
+msgid "Start positions are clockwise"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:11
+#: ../../maps/Swamp Monks.wmf/elemental:11
+msgid "Suggested Teams: (blue, red) vs (yellow, green)"
+msgstr ""
+
+#: ../../maps/Four Castles.wmf/elemental:11
+msgid "Suggested Teams: (blue,red) vs (yellow,green)"
+msgstr ""
+
+#: ../../maps/Four Mountains.wmf/elemental:11
+msgid ""
+"Suggested Teams: (blue,red) vs (yellow,green) or (red,yellow) vs (green,blue)"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:11
+msgid "Suggested Teams: (red, green) vs (blue, yellow)"
+msgstr ""
+
+#: ../../maps/Elven Forests.wmf/elemental:11
+msgid ""
+"Suggested Teams: (red, green) vs (blue,yellow) or (yellow, green) vs "
+"(red,blue)"
+msgstr ""
+
+#: ../../maps/Rendez-Vous.wmf/elemental:11
+msgid "Suggested Teams: all ok."
+msgstr ""
+
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Sumpøen"
@@ -435,14 +421,6 @@ msgstr "Den gamle ildsol"
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
 msgstr "Den store sø"
-
-#: ../../maps/Elven Forests.wmf/elemental:9
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt of taking them for themselves."
-msgstr ""
-"Den åndetagende skønhed i disse smaragdgrønne lande lokker mange stammer til "
-"at forsøge at få dem for sig selv."
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
@@ -523,14 +501,6 @@ msgstr "To imperier jager skattene på en legendarisk halvø..."
 msgid "War of the Valleys"
 msgstr "Dalenes krig"
 
-#: ../../maps/Four Castles.wmf/elemental:9
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
-"Godt beskyttet i deres mægtige fæstninger forsøger fire magthungrende "
-"krigsherrer at dominere dette land..."
-
 #: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
@@ -590,10 +560,6 @@ msgstr ""
 "det sidste levested er også et hårdt og lille sted at leve. Husk at passe på "
 "dine forsyninger af tømmer. Du får brug for dem."
 
-#: ../../maps/Atoll.wmf/elemental:9
-msgid "Who will be the real King of the big atoll?"
-msgstr "Hvem vil være den virkelige konge af den store  koralø"
-
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
 msgstr "Vildoksedal"
@@ -613,5 +579,6 @@ msgstr ""
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "appeared and now a rivalry under smugglers has been started: Which team will "
-"be the first to smuggle a certain number of wares?"
+"be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
+"vs Red + Green."
 msgstr ""

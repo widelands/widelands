@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-10-19 23:18+0000\n"
 "Last-Translator: Tomas Abril <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-21 04:34+0000\n"
-"X-Generator: Launchpad (build 14165)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:33+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -160,19 +160,6 @@ msgstr "Torneio no Deserto"
 msgid "Dry Riverbed"
 msgstr "Leito de rio seco"
 
-#: ../../maps/Four Mountains.wmf/elemental:9
-msgid ""
-"Each tribe is surrounded by four mighty mountains. Who will first conquer "
-"them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
-"Each mountain contains only one resource."
-msgstr ""
-"Cada tribo está rodeada por quatro poderosas montanhas. Quem vai primeiro "
-"conquistá-los e reivindicar os recursos para sua própria tribo? Dica I: A "
-"água pode ser encontrada ao longo do rio. Sugestão II: homens das neves "
-"marcam fontes de água adicional. Dica 3: Cada montanha contém apenas um "
-"recurso."
-
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
 msgstr "Fácil. Introduz os Bárbaros"
@@ -207,18 +194,6 @@ msgstr ""
 "ilha vizinha. Esta paz parece terminar agora - o seu vizinho começa a se "
 "expandir."
 
-#: ../../maps/Sun of fire.wmf/elemental:11
-msgid ""
-"For hundreds of years this island was kept as sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now, that a tribe was finally "
-"barefaced enough to settle on the coast of that island, a lot others "
-"followed afterwards."
-msgstr ""
-"Por centenas de anos, esta ilha foi mantido como santuário dos Deuses. "
-"Nenhum ser humano jamais se aventuraram a colocar um pé sobre ele. Mas "
-"agora, que uma tribo foi finalmente descarado o suficiente para resolver na "
-"costa da ilha, muito outros seguiram depois."
-
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
 msgstr "Quatro Castelos"
@@ -226,16 +201,6 @@ msgstr "Quatro Castelos"
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
 msgstr "Quatro Montanhas"
-
-#: ../../maps/Desert Tournament.wmf/elemental:9
-msgid ""
-"Four tribes struggle with their nearest neighbour to be the first to reach "
-"the mountain of gold that primises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr ""
-"Quatro tribos batalham com seus vizinhos mais próximos para ser o primeiro a "
-"chegar à montanha de ouro que promete riqueza além da imaginação. Podem os "
-"outros dois repartir os recursos sabiamente?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -287,14 +252,6 @@ msgstr ""
 "Diz-se que até mesmo o sol e a lua devem encontrar seu caminho entre as "
 "torres destas montanhas. DICA: Monolitos marcam pontos de minério. Não perca "
 "tempo enviando Geólogos em outro lugar."
-
-#: ../../maps/Swamp Monks.wmf/elemental:9
-msgid ""
-"It is said, that the old war monks, living in the even older swamps are the "
-"key to the control of the whole island."
-msgstr ""
-"Diz a lenda que os velhos monges guerreiros, que vivem nos ainda mais velhos "
-"pântanos, são a chave para controlar a ilha inteira."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -370,20 +327,6 @@ msgstr "Labirinto Místico"
 msgid "Not yet implemented"
 msgstr "Não Implementado Ainda"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:9
-msgid ""
-"Only a small hill in the centre of the map connects these four competing "
-"tribes. Lead your army right away to this hill and build a giant stronghold "
-"as a sign of your superiority! Hint: In the centre is only space for one "
-"stronghold. Water can be found everywhere, so there is no need to send out "
-"geologists."
-msgstr ""
-"Apenas um pequeno monte no centro do mapa conecta essas quatro tribos "
-"competidoras. Lidere seu exército agora mesmo para esse monte e crie uma "
-"fortaleza gigante, como sinal de sua superioridade! Dica: No centro só "
-"existe espaço para uma fortaleza. Água pode ser encontrada lá, então não há "
-"necessidade de enviar geólogos."
-
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
 msgstr "Encontro"
@@ -448,6 +391,38 @@ msgstr ""
 "Mas muitos morrerão dilacerados por lobos, engolidos pelo pântano... rodeado "
 "por tribos hostis."
 
+#: ../../maps/Sun of fire.wmf/elemental:13
+msgid "Start positions are clockwise"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:11
+#: ../../maps/Swamp Monks.wmf/elemental:11
+msgid "Suggested Teams: (blue, red) vs (yellow, green)"
+msgstr ""
+
+#: ../../maps/Four Castles.wmf/elemental:11
+msgid "Suggested Teams: (blue,red) vs (yellow,green)"
+msgstr ""
+
+#: ../../maps/Four Mountains.wmf/elemental:11
+msgid ""
+"Suggested Teams: (blue,red) vs (yellow,green) or (red,yellow) vs (green,blue)"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:11
+msgid "Suggested Teams: (red, green) vs (blue, yellow)"
+msgstr ""
+
+#: ../../maps/Elven Forests.wmf/elemental:11
+msgid ""
+"Suggested Teams: (red, green) vs (blue,yellow) or (yellow, green) vs "
+"(red,blue)"
+msgstr ""
+
+#: ../../maps/Rendez-Vous.wmf/elemental:11
+msgid "Suggested Teams: all ok."
+msgstr ""
+
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Ilha do Pântano"
@@ -479,14 +454,6 @@ msgstr "O antigo sol de fogo"
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
 msgstr "O grande lago"
-
-#: ../../maps/Elven Forests.wmf/elemental:9
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt of taking them for themselves."
-msgstr ""
-"A beleza de tirar o fôlego destas terras esmeraldinas tem atraído muitas "
-"tribos em uma tentativa de tomá-los para si."
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
@@ -568,14 +535,6 @@ msgstr "Dois impérios disputam os tesouros de uma península lendária..."
 msgid "War of the Valleys"
 msgstr "Guerra dos Vales"
 
-#: ../../maps/Four Castles.wmf/elemental:9
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
-msgstr ""
-"Bem protegidos em suas fortalezas poderosas, quatro senhores da guerra com "
-"fome de poder estão concluindo seus esquemas para dominar essas terras ..."
-
 #: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
@@ -655,10 +614,6 @@ msgstr ""
 "também um lugar difícil e pequeno para viver. Não esqueça de cuidar do seu "
 "suprimento de madeira, você vai precisar dele."
 
-#: ../../maps/Atoll.wmf/elemental:9
-msgid "Who will be the real King of the big atoll?"
-msgstr "Quem será o verdadeiro Rei do grande atol?"
-
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
 msgstr "Vale dos Bisontes"
@@ -679,9 +634,6 @@ msgstr ""
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "appeared and now a rivalry under smugglers has been started: Which team will "
-"be the first to smuggle a certain number of wares?"
+"be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
+"vs Red + Green."
 msgstr ""
-"Suas rotas de contrabando bem estabelecidas de repente ficaram cheias: Duas "
-"outras tribos apareceram e agora uma rivalidade entre contrabandistas "
-"começou:  Qual time será o primeiro a contrabandear um certo numero de "
-"mercadorias?"

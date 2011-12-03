@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-08-21 14:14+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:37+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -74,7 +74,7 @@ msgstr "Cinzas"
 msgid "Axe"
 msgstr "Machado"
 
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:192
 msgid "Axefactory"
 msgstr "Fábrica de Machados"
 
@@ -82,7 +82,7 @@ msgstr "Fábrica de Machados"
 msgid "Baker"
 msgstr "Padeiro"
 
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:183
 msgid "Bakery"
 msgstr "Padaria"
 
@@ -94,16 +94,16 @@ msgstr "Assa pães para os trabalhadores."
 msgid "Barbarians"
 msgstr "Bárbaros"
 
-#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:159
 msgid "Barracks"
 msgstr "Quartel"
 
-#: ../../tribes/barbarians/conf:157
-#: ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:160
+#: ../../tribes/barbarians/conf:210
 msgid "Barrier"
 msgstr "Barreira"
 
-#: ../../tribes/barbarians/conf:215
+#: ../../tribes/barbarians/conf:218
 msgid "Battle Arena"
 msgstr "Arena de Batalha"
 
@@ -133,7 +133,7 @@ msgstr ""
 "em tavernas, hospedaria e grandes hospedarias em locais de treinamento "
 "(campo de treino e arena de batalha)."
 
-#: ../../tribes/barbarians/conf:183
+#: ../../tribes/barbarians/conf:186
 msgid "Big Inn"
 msgstr "Grande Hospedaria"
 
@@ -145,6 +145,10 @@ msgstr "Ferreiro"
 msgid "Blackwood"
 msgstr "Madeira Escura"
 
+#: ../../tribes/barbarians/conf:69
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
 msgstr "Cria os fortes bois que irão ajudar no transporte de produtos."
@@ -153,7 +157,7 @@ msgstr "Cria os fortes bois que irão ajudar no transporte de produtos."
 msgid "Brewer"
 msgstr "Cervejeiro"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:184
 msgid "Brewery"
 msgstr "Cervejaria"
 
@@ -189,8 +193,8 @@ msgstr "Transportador"
 msgid "Carries items along the roads."
 msgstr "Transporta itens pelas estradas."
 
-#: ../../tribes/barbarians/conf:149
-#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:161
 msgid "Castle"
 msgstr "Castelo"
 
@@ -198,11 +202,11 @@ msgstr "Castelo"
 msgid "Cattle Breeder"
 msgstr "Criador de Gado"
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:194
 msgid "Cattle Farm"
 msgstr "Fazenda de Gado"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:189
 msgid "Charcoal Burner's House"
 msgstr "Casa do Carvoeiro"
 
@@ -210,11 +214,11 @@ msgstr "Casa do Carvoeiro"
 msgid "Chief Miner"
 msgstr "Minerador Chefe"
 
-#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/conf:213
 msgid "Citadel"
 msgstr "Cidadela"
 
-#: ../../tribes/barbarians/conf:220
+#: ../../tribes/barbarians/conf:223
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
 msgstr "Aldeia fortificada"
@@ -234,7 +238,7 @@ msgstr ""
 msgid "Coal"
 msgstr "Carvão"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:201
 msgid "Coal mine"
 msgstr "Mina de Carvão"
 
@@ -246,27 +250,27 @@ msgstr "Área de Construção"
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr "Corta pedaços brutos de granito de pedras"
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:200
 msgid "Deep Coal Mine"
 msgstr "Mina de Carvão Profunda"
 
-#: ../../tribes/barbarians/conf:203
+#: ../../tribes/barbarians/conf:206
 msgid "Deep Gold Mine"
 msgstr "Mina de Ouro Profunda"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:203
 msgid "Deep Iron Ore Mine"
 msgstr "Mina de Minério de Ferro Profunda"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:199
 msgid "Deeper Coal Mine"
 msgstr "Mina de carvão muito profunda"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:205
 msgid "Deeper Gold Mine"
 msgstr "Mina de ouro muito profunda"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:202
 msgid "Deeper Iron Ore Mine"
 msgstr "Mina de ferro muito profunda"
 
@@ -286,11 +290,15 @@ msgstr "Edifício destruído"
 msgid "Discovers resources for mining."
 msgstr "Descobre recursos para mineração."
 
-#: ../../tribes/barbarians/conf:212
+#: ../../tribes/barbarians/conf:149
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:215
 msgid "Donjon"
 msgstr "Torre de menagem"
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:196
 msgid "Farm"
 msgstr "Fazenda"
 
@@ -310,7 +318,7 @@ msgstr "Derruba árvores."
 msgid "Ferner"
 msgstr "Fazendeiro de palha de junco"
 
-#: ../../tribes/barbarians/conf:179
+#: ../../tribes/barbarians/conf:182
 msgid "Fernery"
 msgstr "Fazenda de junco"
 
@@ -356,7 +364,7 @@ msgstr "Peixe"
 msgid "Fisher"
 msgstr "Pescador"
 
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:175
 msgid "Fisher's Hut"
 msgstr "Cabana do Pescador"
 
@@ -375,8 +383,8 @@ msgstr ""
 "quando esta construção for aprimorada para uma fábrica de machados e usina "
 "de guerra)."
 
-#: ../../tribes/barbarians/conf:159
-#: ../../tribes/barbarians/conf:211
+#: ../../tribes/barbarians/conf:162
+#: ../../tribes/barbarians/conf:214
 msgid "Fortress"
 msgstr "Fortaleza"
 
@@ -384,7 +392,7 @@ msgstr "Fortaleza"
 msgid "Gamekeeper"
 msgstr "Guarda de caça"
 
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:177
 msgid "Gamekeeper's Hut"
 msgstr "Guarda de caça"
 
@@ -400,7 +408,7 @@ msgstr "Retira peixes do mar."
 msgid "Gold"
 msgstr "Ouro"
 
-#: ../../tribes/barbarians/conf:204
+#: ../../tribes/barbarians/conf:207
 msgid "Gold Mine"
 msgstr "Mina de Ouro"
 
@@ -430,7 +438,7 @@ msgstr ""
 "usado como material precioso para construções e para produzir armas e "
 "armaduras."
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:198
 msgid "Granite Mine"
 msgstr "Mina de Granito"
 
@@ -442,11 +450,11 @@ msgstr "Argamassa"
 msgid "Grows thatch reed."
 msgstr "Cultiva a palha de Junco"
 
-#: ../../tribes/barbarians/conf:150
+#: ../../tribes/barbarians/conf:153
 msgid "Guardhall"
 msgstr "Sala da Guarda"
 
-#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:154
 msgid "Guardhouse"
 msgstr "Casa-da-Guarda"
 
@@ -462,12 +470,12 @@ msgstr "Colhe junco"
 msgid "Harvest wheat"
 msgstr "Colher Trigo"
 
-#: ../../tribes/barbarians/conf:164
-#: ../../tribes/barbarians/conf:165
+#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:168
 msgid "Headquarters"
 msgstr "Quartel General"
 
-#: ../../tribes/barbarians/conf:219
+#: ../../tribes/barbarians/conf:222
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Quartel General Médio"
@@ -480,7 +488,7 @@ msgstr "Elmo"
 msgid "Helmsmith"
 msgstr "Ferraria de Elmos"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:197
 msgid "Helmsmithy"
 msgstr "Ferreiro de Elmos"
 
@@ -488,7 +496,7 @@ msgstr "Ferreiro de Elmos"
 msgid "Helps to carry items at heavily used roads."
 msgstr "Ajuda a carregar itens em estradas muito utilizadas."
 
-#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:155
 msgid "High Tower"
 msgstr "Torre Alta"
 
@@ -507,7 +515,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Caçador"
 
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:176
 msgid "Hunter's Hut"
 msgstr "Cabana do Caçador"
 
@@ -515,7 +523,7 @@ msgstr "Cabana do Caçador"
 msgid "Hunting Spear"
 msgstr "Lança de Caça"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:187
 msgid "Inn"
 msgstr "Hospedaria"
 
@@ -531,7 +539,7 @@ msgstr "Ferro"
 msgid "Iron Ore"
 msgstr "Minério de Ferro"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:204
 msgid "Iron Ore Mine"
 msgstr "Mina de Minério de Ferro"
 
@@ -557,7 +565,7 @@ msgstr ""
 msgid "Kitchen Tools"
 msgstr "Ferramentas de Cozinha"
 
-#: ../../tribes/barbarians/conf:178
+#: ../../tribes/barbarians/conf:181
 msgid "Lime Kiln"
 msgstr "Forno de Cal"
 
@@ -569,7 +577,7 @@ msgstr "Caieiro"
 msgid "Lumberjack"
 msgstr "Lenhador"
 
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:173
 msgid "Lumberjack's Hut"
 msgstr "Cabana de Lenhador"
 
@@ -609,11 +617,11 @@ msgstr ""
 "para os mineiros. Também são consumidas nos locais de treinamento (campos de "
 "treino e arena de batalha)."
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:193
 msgid "Metalwork Shop"
 msgstr "Serralheria"
 
-#: ../../tribes/barbarians/conf:182
+#: ../../tribes/barbarians/conf:185
 msgid "Micro Brewery"
 msgstr "Pequena Cervejaria"
 
@@ -636,17 +644,13 @@ msgstr ""
 "quem diga que o poder dos bárbaros está nesta bebida. Ajuda a treinar os "
 "soldados na técnica de evasão do nível 0 para o nível 1 e nível 2."
 
-#: ../../tribes/barbarians/conf:160
+#: ../../tribes/barbarians/conf:163
 msgid "Outpost"
 msgstr "Posto Avançado"
 
 #: ../../tribes/barbarians/conf:111
 msgid "Ox"
 msgstr "Boi"
-
-#: ../../tribes/barbarians/conf:69
-msgid "Peel"
-msgstr "Pá de Forno"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Pick"
@@ -787,7 +791,7 @@ msgstr ""
 msgid "Produces weapons for soldiers and tools for workers."
 msgstr "Produz armas para os soldados e ferramentas para os trabalhadores."
 
-#: ../../tribes/barbarians/conf:169
+#: ../../tribes/barbarians/conf:172
 msgid "Quarry"
 msgstr "Pedreira"
 
@@ -795,7 +799,7 @@ msgstr "Pedreira"
 msgid "Ranger"
 msgstr "Reflorestador"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:174
 msgid "Ranger's Hut"
 msgstr "Cabana do Reflorestador"
 
@@ -883,7 +887,7 @@ msgstr "Indicador de recursos água"
 msgid "Scout"
 msgstr "Explorador"
 
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:179
 msgid "Scout's Hut"
 msgstr "Cabana do Explorador"
 
@@ -896,8 +900,8 @@ msgstr "O explorador explora áreas inexploradas a sua volta."
 msgid "Scythe"
 msgstr "Foice"
 
-#: ../../tribes/barbarians/conf:155
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:211
 msgid "Sentry"
 msgstr "Sentinela"
 
@@ -914,7 +918,7 @@ msgstr "Pá"
 msgid "Sleep"
 msgstr "Dormir"
 
-#: ../../tribes/barbarians/conf:153
+#: ../../tribes/barbarians/conf:156
 msgid "Small Tower"
 msgstr "Torre Pequena"
 
@@ -930,7 +934,7 @@ msgstr "Ferro fundido"
 msgid "Smelter"
 msgstr "Fundidor"
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:190
 msgid "Smelting Works"
 msgstr "Fundição"
 
@@ -969,11 +973,11 @@ msgstr "Pedreiro"
 msgid "Strong Beer"
 msgstr "Cerveja Forte"
 
-#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:212
 msgid "Stronghold"
 msgstr "Forte"
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:188
 msgid "Tavern"
 msgstr "Taverna"
 
@@ -1025,6 +1029,14 @@ msgstr ""
 "é usado nas tavernas, hospedarias e grandes hospedarias para preparar "
 "rações, lanches e refeições. Também são consumidos nos locais de treinamento "
 "(campo de treino e arena de batalha)."
+
+#: ../../tribes/barbarians/bakingtray/conf:1
+msgid ""
+"The bread paddle is a tool of the baker and each baker needs his own. It is "
+"produced in the metal works like all other tools (but it ceases to be "
+"produced by the building if the metal works is enhanced to an axefactory and "
+"war mill)."
+msgstr ""
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -1085,17 +1097,6 @@ msgstr ""
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
 msgstr "As poderosas tribos das terras do leste!"
-
-#: ../../tribes/barbarians/bakingtray/conf:1
-msgid ""
-"The peel is a tool of the baker and each baker needs his own. It is produced "
-"in the metal works like all other tools (but it ceases to be produced by the "
-"building if the metal works is enhanced to an axefactory and war mill)."
-msgstr ""
-"A casca é a ferramenta do padeiro e cada padeiro precisa da sua própria. É "
-"produzida na serralheria como todas as outras ferramentas (mas deixa de ser "
-"produzida quando esta for aprimorada para uma fábrica de machados ou usina "
-"de guerra)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1181,8 +1182,8 @@ msgstr ""
 "caçadores. É produzida na serralheria (mas deixa de ser produzida quando "
 "esta for aprimorada para uma fábrica de machados ou usina de guerra)."
 
-#: ../../tribes/barbarians/conf:154
-#: ../../tribes/barbarians/conf:161
+#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:164
 msgid "Tower"
 msgstr "Torre"
 
@@ -1190,7 +1191,7 @@ msgstr "Torre"
 msgid "Trainer"
 msgstr "Treinador"
 
-#: ../../tribes/barbarians/conf:216
+#: ../../tribes/barbarians/conf:219
 msgid "Trainingscamp"
 msgstr "Campo de Treino"
 
@@ -1338,11 +1339,11 @@ msgstr ""
 msgid "War Helmet"
 msgstr "Elmo de Guerra"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:191
 msgid "War Mill"
 msgstr "Fábrica de Guerra"
 
-#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:169
 msgid "Warehouse"
 msgstr "Armazém"
 
@@ -1367,11 +1368,11 @@ msgstr ""
 msgid "Weaver"
 msgstr "Tecelão"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:195
 msgid "Weaving-Mill"
 msgstr "Tecelagem"
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:178
 msgid "Well"
 msgstr "Poço"
 
@@ -1393,7 +1394,7 @@ msgstr ""
 msgid "Wildboar"
 msgstr "Javali Selvagem"
 
-#: ../../tribes/barbarians/conf:177
+#: ../../tribes/barbarians/conf:180
 msgid "Wood Hardener"
 msgstr "Endurecedor de Madeira"
 

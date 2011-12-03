@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2011-12-02 12:41+0000\n"
 "PO-Revision-Date: 2011-03-25 07:48+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:11+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:37+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -60,7 +60,7 @@ msgstr "Cinis"
 msgid "Axe"
 msgstr "Axia"
 
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:192
 msgid "Axefactory"
 msgstr "Fabrica axiarum"
 
@@ -68,7 +68,7 @@ msgstr "Fabrica axiarum"
 msgid "Baker"
 msgstr "Pistor"
 
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:183
 msgid "Bakery"
 msgstr "Pistrina"
 
@@ -80,16 +80,16 @@ msgstr "Panem laboranti fingit."
 msgid "Barbarians"
 msgstr "Barbari"
 
-#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:159
 msgid "Barracks"
 msgstr "Casa militaris"
 
-#: ../../tribes/barbarians/conf:157
-#: ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:160
+#: ../../tribes/barbarians/conf:210
 msgid "Barrier"
 msgstr "Obex"
 
-#: ../../tribes/barbarians/conf:215
+#: ../../tribes/barbarians/conf:218
 msgid "Battle Arena"
 msgstr "Arena bellandi"
 
@@ -114,7 +114,7 @@ msgid ""
 "(trainingscamp and battle arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:183
+#: ../../tribes/barbarians/conf:186
 msgid "Big Inn"
 msgstr "Deversorium"
 
@@ -126,6 +126,10 @@ msgstr "Faber ferrarius"
 msgid "Blackwood"
 msgstr "lignum durum"
 
+#: ../../tribes/barbarians/conf:69
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
 msgstr "Boves alit, qui ad res portandas adiuvant."
@@ -134,7 +138,7 @@ msgstr "Boves alit, qui ad res portandas adiuvant."
 msgid "Brewer"
 msgstr "Cervisiae coquus"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:184
 msgid "Brewery"
 msgstr "Fabrica cervisiae"
 
@@ -170,8 +174,8 @@ msgstr "Portator"
 msgid "Carries items along the roads."
 msgstr "Res per vias portat."
 
-#: ../../tribes/barbarians/conf:149
-#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:161
 msgid "Castle"
 msgstr "Castellum"
 
@@ -179,11 +183,11 @@ msgstr "Castellum"
 msgid "Cattle Breeder"
 msgstr "Bubulcus"
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:194
 msgid "Cattle Farm"
 msgstr "Bubile"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:189
 msgid "Charcoal Burner's House"
 msgstr "Casa carbonarii"
 
@@ -191,11 +195,11 @@ msgstr "Casa carbonarii"
 msgid "Chief Miner"
 msgstr "Fossor metallicus expertus"
 
-#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/conf:213
 msgid "Citadel"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:220
+#: ../../tribes/barbarians/conf:223
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
 msgstr ""
@@ -214,7 +218,7 @@ msgstr ""
 msgid "Coal"
 msgstr "Carbo"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:201
 msgid "Coal mine"
 msgstr "Metallum carbonis"
 
@@ -226,27 +230,27 @@ msgstr "Area"
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:200
 msgid "Deep Coal Mine"
 msgstr "Metallum altius carbonis"
 
-#: ../../tribes/barbarians/conf:203
+#: ../../tribes/barbarians/conf:206
 msgid "Deep Gold Mine"
 msgstr "Metallum altius aurei aeris"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:203
 msgid "Deep Iron Ore Mine"
 msgstr "Metallum altius ferrei aeris"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:199
 msgid "Deeper Coal Mine"
 msgstr "Metallum altissimum carbonis"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:205
 msgid "Deeper Gold Mine"
 msgstr "Metallum altissimum auri"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:202
 msgid "Deeper Iron Ore Mine"
 msgstr "Metallum altissimum aeris ferrei"
 
@@ -266,11 +270,15 @@ msgstr "Aedificium destructum"
 msgid "Discovers resources for mining."
 msgstr "Aquam vel aes ad metalla rimanda invenit."
 
-#: ../../tribes/barbarians/conf:212
+#: ../../tribes/barbarians/conf:149
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:215
 msgid "Donjon"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:196
 msgid "Farm"
 msgstr "Fundus"
 
@@ -290,7 +298,7 @@ msgstr "Arbores caedit."
 msgid "Ferner"
 msgstr "Agricola lini cannaeque"
 
-#: ../../tribes/barbarians/conf:179
+#: ../../tribes/barbarians/conf:182
 msgid "Fernery"
 msgstr ""
 
@@ -333,7 +341,7 @@ msgstr "Piscis"
 msgid "Fisher"
 msgstr "Piscator"
 
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:175
 msgid "Fisher's Hut"
 msgstr "Casa piscaria"
 
@@ -348,8 +356,8 @@ msgid ""
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:159
-#: ../../tribes/barbarians/conf:211
+#: ../../tribes/barbarians/conf:162
+#: ../../tribes/barbarians/conf:214
 msgid "Fortress"
 msgstr "Arx"
 
@@ -357,7 +365,7 @@ msgstr "Arx"
 msgid "Gamekeeper"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:177
 msgid "Gamekeeper's Hut"
 msgstr ""
 
@@ -373,7 +381,7 @@ msgstr "Pisces capit."
 msgid "Gold"
 msgstr "Aurum"
 
-#: ../../tribes/barbarians/conf:204
+#: ../../tribes/barbarians/conf:207
 msgid "Gold Mine"
 msgstr "Metallum auri"
 
@@ -396,7 +404,7 @@ msgid ""
 "and armours."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:198
 msgid "Granite Mine"
 msgstr "Metallum graniti"
 
@@ -408,11 +416,11 @@ msgstr "Arenatum"
 msgid "Grows thatch reed."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:150
+#: ../../tribes/barbarians/conf:153
 msgid "Guardhall"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:154
 msgid "Guardhouse"
 msgstr ""
 
@@ -428,12 +436,12 @@ msgstr "Cannas metit."
 msgid "Harvest wheat"
 msgstr "Triticum metit."
 
-#: ../../tribes/barbarians/conf:164
-#: ../../tribes/barbarians/conf:165
+#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:168
 msgid "Headquarters"
 msgstr "Principia"
 
-#: ../../tribes/barbarians/conf:219
+#: ../../tribes/barbarians/conf:222
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Principia mediocria"
@@ -446,7 +454,7 @@ msgstr "Galea"
 msgid "Helmsmith"
 msgstr "Galearum faber"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:197
 msgid "Helmsmithy"
 msgstr "Galearum fabrica"
 
@@ -454,7 +462,7 @@ msgstr "Galearum fabrica"
 msgid "Helps to carry items at heavily used roads."
 msgstr "Res per magnas vias portari adiuvat."
 
-#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:155
 msgid "High Tower"
 msgstr ""
 
@@ -469,7 +477,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Venator"
 
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:176
 msgid "Hunter's Hut"
 msgstr "Casa venatoris"
 
@@ -477,7 +485,7 @@ msgstr "Casa venatoris"
 msgid "Hunting Spear"
 msgstr "Hasta venatoris"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:187
 msgid "Inn"
 msgstr "Taberna"
 
@@ -493,7 +501,7 @@ msgstr "Ferrum"
 msgid "Iron Ore"
 msgstr "Aes ferreum"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:204
 msgid "Iron Ore Mine"
 msgstr "Aeris ferrei metallum"
 
@@ -514,7 +522,7 @@ msgstr ""
 msgid "Kitchen Tools"
 msgstr "Instrumenta culinaria"
 
-#: ../../tribes/barbarians/conf:178
+#: ../../tribes/barbarians/conf:181
 msgid "Lime Kiln"
 msgstr "fornix calcaria"
 
@@ -526,7 +534,7 @@ msgstr ""
 msgid "Lumberjack"
 msgstr "Lignator"
 
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:173
 msgid "Lumberjack's Hut"
 msgstr "Casa lignatoris"
 
@@ -562,11 +570,11 @@ msgid ""
 "arena)."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:193
 msgid "Metalwork Shop"
 msgstr "Fabrica ferraria"
 
-#: ../../tribes/barbarians/conf:182
+#: ../../tribes/barbarians/conf:185
 msgid "Micro Brewery"
 msgstr "Fabrica cervisiae parva"
 
@@ -586,17 +594,13 @@ msgid ""
 "to prepare meals."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:160
+#: ../../tribes/barbarians/conf:163
 msgid "Outpost"
 msgstr "specula"
 
 #: ../../tribes/barbarians/conf:111
 msgid "Ox"
 msgstr "Bos"
-
-#: ../../tribes/barbarians/conf:69
-msgid "Peel"
-msgstr "Pala pistoria"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Pick"
@@ -735,7 +739,7 @@ msgstr "Facit bonam cervisiam, ut milites fortius et leatius exerceant."
 msgid "Produces weapons for soldiers and tools for workers."
 msgstr "Arma militibus et instrumenta operis fabricat."
 
-#: ../../tribes/barbarians/conf:169
+#: ../../tribes/barbarians/conf:172
 msgid "Quarry"
 msgstr "Lapidicina"
 
@@ -743,7 +747,7 @@ msgstr "Lapidicina"
 msgid "Ranger"
 msgstr "Saltuarius"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:174
 msgid "Ranger's Hut"
 msgstr "Casa saltuarius"
 
@@ -829,7 +833,7 @@ msgstr "Est indicatum hic aqua sita"
 msgid "Scout"
 msgstr "Explorator"
 
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:179
 msgid "Scout's Hut"
 msgstr "Casa exploratoris"
 
@@ -844,8 +848,8 @@ msgstr ""
 msgid "Scythe"
 msgstr "Falx"
 
-#: ../../tribes/barbarians/conf:155
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:211
 msgid "Sentry"
 msgstr ""
 
@@ -862,7 +866,7 @@ msgstr "Rutila"
 msgid "Sleep"
 msgstr "Dormit"
 
-#: ../../tribes/barbarians/conf:153
+#: ../../tribes/barbarians/conf:156
 msgid "Small Tower"
 msgstr "Turris parva"
 
@@ -878,7 +882,7 @@ msgstr ""
 msgid "Smelter"
 msgstr "Aerarius"
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:190
 msgid "Smelting Works"
 msgstr "Officina aeraria"
 
@@ -913,11 +917,11 @@ msgstr "Camentarius"
 msgid "Strong Beer"
 msgstr "Cervisia fortis"
 
-#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:212
 msgid "Stronghold"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:188
 msgid "Tavern"
 msgstr "Taberna"
 
@@ -960,6 +964,14 @@ msgid ""
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
 
+#: ../../tribes/barbarians/bakingtray/conf:1
+msgid ""
+"The bread paddle is a tool of the baker and each baker needs his own. It is "
+"produced in the metal works like all other tools (but it ceases to be "
+"produced by the building if the metal works is enhanced to an axefactory and "
+"war mill)."
+msgstr ""
+
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
 "The broad axe is produced in the axefactory and the war mill. It is used in "
@@ -999,13 +1011,6 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
-msgstr ""
-
-#: ../../tribes/barbarians/bakingtray/conf:1
-msgid ""
-"The peel is a tool of the baker and each baker needs his own. It is produced "
-"in the metal works like all other tools (but it ceases to be produced by the "
-"building if the metal works is enhanced to an axefactory and war mill)."
 msgstr ""
 
 #: ../../tribes/barbarians/scythe/conf:1
@@ -1066,8 +1071,8 @@ msgid ""
 "axefactory and war mill)."
 msgstr ""
 
-#: ../../tribes/barbarians/conf:154
-#: ../../tribes/barbarians/conf:161
+#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:164
 msgid "Tower"
 msgstr "Turris"
 
@@ -1075,7 +1080,7 @@ msgstr "Turris"
 msgid "Trainer"
 msgstr ""
 
-#: ../../tribes/barbarians/conf:216
+#: ../../tribes/barbarians/conf:219
 msgid "Trainingscamp"
 msgstr "Castra exercendi"
 
@@ -1198,11 +1203,11 @@ msgstr ""
 msgid "War Helmet"
 msgstr "Galea bellica"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:191
 msgid "War Mill"
 msgstr "Fabrica armorum"
 
-#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:169
 msgid "Warehouse"
 msgstr "Horreum"
 
@@ -1225,11 +1230,11 @@ msgstr ""
 msgid "Weaver"
 msgstr "Textor"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:195
 msgid "Weaving-Mill"
 msgstr "Textrinum"
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:178
 msgid "Well"
 msgstr "Fons"
 
@@ -1248,7 +1253,7 @@ msgstr ""
 msgid "Wildboar"
 msgstr "Aper"
 
-#: ../../tribes/barbarians/conf:177
+#: ../../tribes/barbarians/conf:180
 msgid "Wood Hardener"
 msgstr ""
 
