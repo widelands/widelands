@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-08-21 14:13+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-12-04 16:35+0000\n"
+"Last-Translator: Borim <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:36+0000\n"
+"X-Launchpad-Export-Date: 2011-12-05 05:13+0000\n"
 "X-Generator: Launchpad (build 14418)\n"
 "X-Poedit-Language: German\n"
 
@@ -161,7 +161,7 @@ msgstr "Brot"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bread Paddel"
-msgstr ""
+msgstr "Brotschaufel"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -1063,6 +1063,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Die Brotschaufel ist das Werkzeug der Bäcker, jeder Bäcker benötigt eine "
+"eigene. Sie wird vom Werkzeugschmied hergestellt."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
