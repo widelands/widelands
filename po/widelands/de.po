@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 13:41+0100\n"
-"PO-Revision-Date: 2011-12-03 10:46+0000\n"
-"Last-Translator: Borim <Unknown>\n"
+"PO-Revision-Date: 2011-12-05 12:53+0000\n"
+"Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-04 04:33+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-06 05:11+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 
 #: ../../src/network/nethost.cc:2556
 #, c-format
@@ -1270,7 +1270,7 @@ msgstr "Lade Tier: %s"
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% abgerissen"
 
 #: ../../src/logic/game.cc:230
 msgid "Preloading a map"
@@ -1426,7 +1426,7 @@ msgstr "Wahrscheinlichkeit in Reichweite [1,254]"
 #: ../../src/logic/immovable.cc:1480
 #, c-format
 msgid "loading player immovable: %s"
-msgstr ""
+msgstr "lade unbeweglichen Spieler: %s"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
@@ -1978,7 +1978,7 @@ msgstr "Baustellentyp \"Baustelle\" fehlt"
 
 #: ../../src/logic/tribe.cc:135
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr ""
+msgstr "Typ \"Gebäude abreissen\" ist nicht vorhanden"
 
 #: ../../src/logic/tribe.cc:252 ../../src/logic/tribe.cc:273
 #, c-format
@@ -2146,7 +2146,7 @@ msgstr "Waren: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
 msgid "partially_constructed_buildings: %s"
-msgstr ""
+msgstr "teilweise_fertiggestellte_Gebäude: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:323
 #, c-format
@@ -2156,7 +2156,7 @@ msgstr "Baustelle: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:405
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "Abbruch: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:589
 #, c-format
@@ -3502,7 +3502,7 @@ msgstr "Kartenname"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Alle Karten anzeigen"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
@@ -3530,7 +3530,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "unausgewogen"
 
 #: ../../src/ui_fsmenu/mapselect.cc:275
 msgid "(directory)"
@@ -3904,7 +3904,7 @@ msgstr "Zerstören"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "abreißen"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -3957,7 +3957,7 @@ msgstr "Baue große Gebäude"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr ""
+msgstr "baue Hafengebäude"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
@@ -4489,11 +4489,11 @@ msgstr "Schiff"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
-msgstr ""
+msgstr "gehe zum Schiff"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
-msgstr ""
+msgstr "gehe zum Ziel"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -4542,7 +4542,7 @@ msgstr "Auf Standard zurücksetzen"
 
 #: ../../src/wui/ware_statistics_menu.cc:194
 msgid "Consumption"
-msgstr ""
+msgstr "Konsum"
 
 #: ../../src/wui/ware_statistics_menu.cc:205
 msgid "Economy Health"
@@ -4566,11 +4566,11 @@ msgstr "Ausgewählte Waren von hier auslagern"
 
 #: ../../src/wui/warehousewindow.cc:212
 msgid "Wares in dock"
-msgstr ""
+msgstr "Waren im Dock"
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
-msgstr ""
+msgstr "Arbeiter im Dock"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"

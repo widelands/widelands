@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-12-03 10:41+0000\n"
-"Last-Translator: Borim <Unknown>\n"
+"PO-Revision-Date: 2011-12-05 13:29+0000\n"
+"Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-04 04:33+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-06 05:11+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -295,7 +295,7 @@ msgstr "Sucht nach Ressourcen für den Bergbau."
 
 #: ../../tribes/barbarians/conf:149
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Abbruch des Gebäudes"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Donjon"
@@ -1043,6 +1043,10 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axefactory and "
 "war mill)."
 msgstr ""
+"Der Brotschieber ist das Werkzeug der Bäcker und jeder Bäcker benötigt seine "
+"eigene. Sie wird genauso wie die anderen Werkzeuge in der Werkzeugschmiede "
+"hergestellt (aber die ProduKtion wird eingestellt, wenn die Werkzeugschmiede "
+"zu einer Axtmanufaktur oder Waffenschmiede ausgebaut wird)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
