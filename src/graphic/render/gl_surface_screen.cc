@@ -137,6 +137,7 @@ void GLSurfaceScreen::draw_rect(const Rect rc, const RGBColor clr)
 	assert(g_opengl);
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
+	glLineWidth(1);
 
 	glBegin(GL_LINE_LOOP); {
 		glColor3ub(clr.r(), clr.g(), clr.b());
@@ -230,10 +231,12 @@ void GLSurfaceScreen::draw_line
 		 int32_t y1,
 		 int32_t x2,
 		 int32_t y2,
-		 RGBColor color)
+		 RGBColor color,
+		 uint8_t width)
 {
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
+	glLineWidth(width);
 	glBegin(GL_LINES); {
 		glColor3ub(color.r(), color.g(), color.b());
 		glVertex2f(x1 + 0.5f, y1 + 0.5f);

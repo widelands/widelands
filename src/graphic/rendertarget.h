@@ -61,7 +61,7 @@ struct RenderTarget {
 		 int32_t y1,
 		 int32_t x2,
 		 int32_t y2,
-		 RGBColor color);
+		 RGBColor color, uint8_t width = 1);
 	void draw_rect(Rect, RGBColor);
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);

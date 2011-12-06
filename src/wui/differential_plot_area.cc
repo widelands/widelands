@@ -43,7 +43,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 		 yoffset,
 		 get_inner_w() - space_at_right - xline_length,
 		 yoffset,
-		 ZERO_LINE_COLOR);
+		 ZERO_LINE_COLOR, 2);
 
 	// How many do we take together when relative ploting
 	const int32_t how_many = calc_how_many(time_in_ms_);
