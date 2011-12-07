@@ -26,7 +26,7 @@
 #include "logic/field.h"
 #include "editor/editorinteractive.h"
 
-/// Sets the heights to random values. Chages surrounding nodes if necessary.
+/// Sets the heights to random values. Changes surrounding nodes if necessary.
 int32_t Editor_Noise_Height_Tool::handle_click_impl
 	(Widelands::Map               &       map,
 	 Widelands::Node_and_Triangle<> const center,

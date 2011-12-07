@@ -1463,7 +1463,7 @@ void Map::recalc_nodecaps_pass2(FCoords const f)
 			//    if one of the second order neighbours is swimmable.
 			{
 				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
-				bool near_water = false;
+				bool port = false;
 
 				do {
 					if (abs(mr.location().field->get_height() - f_height) >= 3) {
@@ -1471,12 +1471,12 @@ void Map::recalc_nodecaps_pass2(FCoords const f)
 						break;
 					}
 					// If there is still place for a big building, take care about ports
-					if ((building == BUILDCAPS_BIG) && !near_water)
+					if ((building == BUILDCAPS_BIG) && !port && is_port_space(f))
 						if (mr.location().field->caps & MOVECAPS_SWIM)
-							near_water = true;
+							port = true;
 				} while (mr.advance(*this));
 
-				if ((building == BUILDCAPS_BIG) && near_water)
+				if ((building == BUILDCAPS_BIG) && port)
 					caps |= BUILDCAPS_PORT;
 			}
 			caps |= building;
@@ -1484,6 +1484,36 @@ void Map::recalc_nodecaps_pass2(FCoords const f)
 	}
 end: //  9) That's it, store the collected information.
 	f.field->caps = static_cast<NodeCaps>(caps);
+}
+
+/// \returns true, if Coordinates are in port space list
+bool Map::is_port_space(Coords c) {
+	for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
+		if (*i == c) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/// Set or unset a space as port space
+void Map::set_port_space(Coords c, bool allowed) {
+	if (allowed) {
+		// First check, if the coordinates are already in the list
+		for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
+			if (*i == c)
+				return;
+		}
+		m_port_spaces.push_back(c);
+	} else {
+		// Try to find the coordinates, if they are found, remove them
+		for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
+			if (*i == c) {
+				m_port_spaces.erase(i);
+				return;
+			}
+		}
+	}
 }
 
 

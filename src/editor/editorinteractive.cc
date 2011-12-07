@@ -254,8 +254,7 @@ void Editor_Interactive::toggle_mainmenu() {
 }
 
 void Editor_Interactive::map_clicked() {
-	tools.current()
-		.handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
+	tools.current().handle_click(tools.use_tool, egbase().map(), get_sel_pos(), *this);
 	need_complete_redraw();
 	set_need_save(true);
 }

@@ -355,6 +355,11 @@ struct Map :
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(Coords);
 
+	/// Port space specific functions
+	bool is_port_space(Coords c);
+	void set_port_space(Coords c, bool allowed);
+	std::vector<Coords> get_port_spaces() {return m_port_spaces;}
+
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);
 
@@ -364,7 +369,7 @@ private:
 
 	/// # of players this map supports (!= Game's number of players!)
 	Player_Number m_nrplayers;
-	ScenarioTypes  m_scenario_types; // whether the map is playable as scenario
+	ScenarioTypes m_scenario_types; // whether the map is playable as scenario
 
 	X_Coordinate m_width;
 	Y_Coordinate m_height;
@@ -387,6 +392,8 @@ private:
 	std::vector<std::string> m_scenario_names;
 	std::vector<std::string> m_scenario_ais;
 	std::vector<bool>        m_scenario_closeables;
+
+	std::vector<Coords>        m_port_spaces;
 
 	Manager<Objective>  m_mom;
 
@@ -413,6 +420,7 @@ private:
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 };
+
 
 /*
 ==============================================================================

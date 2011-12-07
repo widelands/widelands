@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,7 @@
 #include "tools/editor_place_bob_tool.h"
 #include "tools/editor_place_immovable_tool.h"
 #include "tools/editor_set_origin_tool.h"
+#include "tools/editor_set_port_space_tool.h"
 #include "tools/editor_set_starting_pos_tool.h"
 #include "tools/editor_set_terrain_tool.h"
 
@@ -75,7 +76,9 @@ public:
 			noise_height      (set_height),
 			place_immovable   (delete_immovable),
 			place_bob         (delete_bob),
-			increase_resources(decrease_resources, set_resources)
+			increase_resources(decrease_resources, set_resources),
+			set_port_space    (unset_port_space)
+
 		{}
 		Editor_Tool & current() const throw () {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
@@ -97,6 +100,8 @@ public:
 		Editor_Decrease_Resources_Tool  decrease_resources;
 		Editor_Set_Resources_Tool       set_resources;
 		Editor_Increase_Resources_Tool  increase_resources;
+		Editor_Set_Port_Space_Tool      set_port_space;
+		Editor_Unset_Port_Space_Tool    unset_port_space;
 		Editor_Set_Origin_Tool          set_origin;
 		Editor_Make_Infrastructure_Tool make_infrastructure;
 	} tools;
