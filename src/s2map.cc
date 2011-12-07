@@ -295,6 +295,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				uint8_t c = *pc;
+				// Harbour buildspace & textures - Information taken from:
+				// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+				if (c & 0x40)
+					m_map.set_port_space(Widelands::Coords(x, y), true);
 				c &= 0x1f;
 				switch (c) {
 				case 0x00: c =  0; break;
@@ -318,6 +322,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 				case 0x07: c =  4; break; //  unknown texture
 				case 0x13: c =  4; break; //  unknown texture
+
 				default:
 					c = 7;
 					cerr
@@ -340,6 +345,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				uint8_t c = *pc;
+				// Harbour buildspace & textures - Information taken from:
+				// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+				if (c & 0x40)
+					m_map.set_port_space(Widelands::Coords(x, y), true);
 				c &= 0x1f;
 				switch (c) {
 				case 0x00: c =  0; break;
@@ -361,8 +370,9 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				case 0x10: c = 14; break;
 				case 0x12: c = 15; break;
 
-				case 0x07: c = 4; break; // Unknown texture
-				case 0x13: c = 4; break; // unknown texture!
+				case 0x07: c =  4; break; // Unknown texture
+				case 0x13: c =  4; break; // unknown texture!
+
 				default:
 					c = 7;
 					cerr
@@ -448,7 +458,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				case 0x06: bobname = "sheep";    break;
 				case 0x07: bobname = "deer";     break;
 				case 0x08: bobname = "duck";     break;
-				//  case 0x09: bobname = "donkey"; break; -> Not implemented yet.
+				case 0x09: bobname = "elk";      break; // original "donkey"
 				default:
 					cerr
 						<< "Unsupported animal: " << static_cast<int32_t>(section[i])
@@ -516,13 +526,13 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 		//  SWD-SECTION 12: Resources
 		//  0x00 == Water
-		//  0x87 == ?? (but nothing)
-		//  0x21 == things laying around (nothing)
+		//  0x87 == fish
+		//  0x21 == ground water
 		//  0x40 == nothing
 		//  0x51-57 == gold 1-7
 		//  0x49-4f == iron 1-7
-		//  0x41-47 == cowl 1-7
-		//  0x59-5f == stones 1-7
+		//  0x41-47 == coal 1-7
+		//  0x59-5f == granite 1-7
 		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 12 (Resources) not found");
