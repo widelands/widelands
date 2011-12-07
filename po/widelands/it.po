@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 13:41+0100\n"
-"PO-Revision-Date: 2011-12-05 12:53+0000\n"
+"PO-Revision-Date: 2011-12-06 12:47+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-06 05:11+0000\n"
+"X-Launchpad-Export-Date: 2011-12-07 04:34+0000\n"
 "X-Generator: Launchpad (build 14435)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -2338,6 +2338,8 @@ msgid ""
 "message should have expired at %u; sent at %u with duration %u but gametime "
 "is already %u"
 msgstr ""
+"Il messaggio sarebbe dovuto scadere a %u; inviato a %u con durata %u ma il "
+"tempo di gioco è già %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
@@ -2369,6 +2371,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"Atteso 1 ma trovati %u slot di portatori su una strada salvata con la "
+"versione 2 (vecchia) del pacchetto"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:202
 #, c-format
@@ -2490,6 +2494,12 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"<br>I comandi disponibili per l'host sono:<br>/help  -  visualizza questa "
+"guida<br>/announce <msg>  -  Invia un messaggio come annuncio (chat di "
+"sistema)<br>/warn <nome> <ragione>  -  Avvisa l'utente <nome> a causa di "
+"<ragione><br>/kick <nome> <ragione>  -  Allontana l'utente <nome> a causa di "
+"<ragione><br>/forcePause            -  Forza il gioco in "
+"pausa.<br>/endForcedPause        -  Riprende il gioco a velocità normale."
 
 #: ../../src/network/nethost.cc:371
 msgid "Wrong use, should be: /announce <message>"
@@ -2522,7 +2532,7 @@ msgstr "Non puoi auto caciarti!"
 
 #: ../../src/network/nethost.cc:422
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "Non puoi allontanare il server dedicato"
 
 #: ../../src/network/nethost.cc:427
 #, c-format
@@ -2573,6 +2583,8 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
+"Questo è un server dedicato: invia \"@%s help\" per avere la lista completa "
+"dei comandi disponibili"
 
 #: ../../src/network/nethost.cc:733
 msgid "The game has started just after you tried to connect."
@@ -2589,12 +2601,17 @@ msgid ""
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
+"<br>I comandi disponibili per l'host sono:<br>help   - Mostra questa "
+"guida<br>host $ - Prova ad eseguire il comando host $<br>save $ - Salva lo "
+"stato corrente del gioco come $.wgf"
 
 #: ../../src/network/nethost.cc:1120
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
+"<br>I comandi disponibili per l'host sono:<br>help           - Mostra questa "
+"guida<br>host         $ - Prova ad eseguire il comando host $"
 
 #: ../../src/network/nethost.cc:1125
 msgid "pwd          $ - Sends the password $ to the host"
@@ -2605,6 +2622,8 @@ msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
+"Accesso negato ai comandi host. Per ottenere l'accesso, invia la password "
+"con il comando pwd."
 
 #: ../../src/network/nethost.cc:1137
 #, c-format
@@ -2736,6 +2755,8 @@ msgstr "Il client non ha accesso alle impostazioni del server."
 #: ../../src/network/nethost.cc:2532
 msgid "Client send start command, although server is not yet ready."
 msgstr ""
+"Il client ha inviato il comando di partenza, nonostante il server non fosse "
+"ancora pronto."
 
 #: ../../src/network/nethost.cc:2539
 msgid "Client sent TIME command even though game is not running."

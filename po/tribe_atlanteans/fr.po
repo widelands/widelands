@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-08-21 14:19+0000\n"
-"Last-Translator: NonoSan <fougey.a@orange.fr>\n"
+"PO-Revision-Date: 2011-12-06 08:10+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:36+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-07 04:33+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -161,7 +161,7 @@ msgstr "Pain"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bread Paddel"
-msgstr ""
+msgstr "Planche à Pain"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -294,7 +294,7 @@ msgstr "Découvre des ressources pour extraction"
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Démanteler le site"
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
@@ -651,7 +651,7 @@ msgstr "Plante des arbres."
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -1066,6 +1066,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"La planche à pain est l'outil du boulanger, chaque boulanger en a besoin. "
+"Elle est produite par le forgeron d'outils."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""

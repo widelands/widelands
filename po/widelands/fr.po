@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 13:41+0100\n"
-"PO-Revision-Date: 2011-10-16 09:26+0000\n"
-"Last-Translator: Gilles Aubert <Unknown>\n"
+"PO-Revision-Date: 2011-12-06 08:46+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:39+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-07 04:34+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1011,7 +1011,7 @@ msgstr "économie: %s"
 #: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
-msgstr ""
+msgstr "Chargement du quai: %s"
 
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
@@ -1273,7 +1273,7 @@ msgstr "loading critter: %s"
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% démantelé"
 
 #: ../../src/logic/game.cc:230
 msgid "Preloading a map"
@@ -1428,7 +1428,7 @@ msgstr "probabilité entre [1,254"
 #: ../../src/logic/immovable.cc:1480
 #, c-format
 msgid "loading player immovable: %s"
-msgstr ""
+msgstr "Chargement de l'immobilier du joueur: %s"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
@@ -1975,7 +1975,7 @@ msgstr "Type de chantier \"chantier\" est manquant"
 
 #: ../../src/logic/tribe.cc:135
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr ""
+msgstr "le type démantèlementdusite \"démantèlementdusite\" est manquant"
 
 #: ../../src/logic/tribe.cc:252 ../../src/logic/tribe.cc:273
 #, c-format
@@ -2144,7 +2144,7 @@ msgstr "Marchandises: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
 msgid "partially_constructed_buildings: %s"
-msgstr ""
+msgstr "bâtiments_partiellement_construits: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:323
 #, c-format
@@ -2154,7 +2154,7 @@ msgstr "constructionsite: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:405
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "démantèlementdusite: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:589
 #, c-format
@@ -2809,7 +2809,7 @@ msgstr "Transfert du fichier %s à %s terminé"
 #: ../../src/network/nethost.cc:2630
 #, c-format
 msgid "Sending part %u/%zu of file %s to %s"
-msgstr ""
+msgstr "Envoi des partis %u/%zu du fichier %s à %s"
 
 #: ../../src/network/nethost.cc:2639
 #, c-format
@@ -3491,35 +3491,35 @@ msgstr "Nom de la carte"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Montrer toutes les cartes"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Carte Officielle"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1contre1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
-msgstr ""
+msgstr "Equipes de 2 joueurs"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "3 Player Teams"
-msgstr ""
+msgstr "Equipes de 3 joueurs"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "4 Player Teams"
-msgstr ""
+msgstr "Equipes de 4 joueurs"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "Chacun pour soi"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "Déséquilibré"
 
 #: ../../src/ui_fsmenu/mapselect.cc:275
 msgid "(directory)"
@@ -3724,7 +3724,7 @@ msgstr "Arrêt"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #: ../../src/ui_fsmenu/options.cc:274
 #, c-format
@@ -3893,7 +3893,7 @@ msgstr "Détruire"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "Démanteler"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -3946,7 +3946,7 @@ msgstr "Construire des grands bâtiments"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr ""
+msgstr "Contruire des bâtiments portuaires"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
@@ -4440,19 +4440,19 @@ msgstr "Initialisation"
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
-msgstr ""
+msgstr "jeux"
 
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
@@ -4477,15 +4477,15 @@ msgstr "(bientôt)"
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Navire"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
-msgstr ""
+msgstr "Aller au navire"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
-msgstr ""
+msgstr "Aller à la destination"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -4534,11 +4534,11 @@ msgstr "Réinitialiser aux valeurs par défaut"
 
 #: ../../src/wui/ware_statistics_menu.cc:194
 msgid "Consumption"
-msgstr ""
+msgstr "Consommation"
 
 #: ../../src/wui/ware_statistics_menu.cc:205
 msgid "Economy Health"
-msgstr ""
+msgstr "Santé économique"
 
 #: ../../src/wui/warehousewindow.cc:132
 msgid "Normal policy"
@@ -4558,11 +4558,11 @@ msgstr "Retirer les marchandises sélectionnées ici"
 
 #: ../../src/wui/warehousewindow.cc:212
 msgid "Wares in dock"
-msgstr ""
+msgstr "Marchandises sur le quai"
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
-msgstr ""
+msgstr "Travailleurs sur le quai"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"

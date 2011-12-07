@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-02-23 22:54+0000\n"
+"PO-Revision-Date: 2011-12-06 08:06+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:36+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-07 04:33+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -149,7 +149,7 @@ msgstr "Bois dur"
 
 #: ../../tribes/barbarians/conf:69
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Planche à Pain"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -294,7 +294,7 @@ msgstr "Découvre des ressources pour l'exploitation minière"
 
 #: ../../tribes/barbarians/conf:149
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Démanteler le site"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Donjon"
@@ -1046,6 +1046,10 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axefactory and "
 "war mill)."
 msgstr ""
+"La planche à pain est un outil du boulanger et chaque boulanger en a besoin. "
+"Elle est produite à la ferronnerie comme les autres outils (mais cesse "
+"d'être produite par le bâtiment si la ferronnerie est améliorée en usine de "
+"hache ou en moulin de guerre)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""

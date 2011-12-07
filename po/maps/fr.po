@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-10-16 09:53+0000\n"
-"Last-Translator: Gilles Aubert <Unknown>\n"
+"PO-Revision-Date: 2011-12-06 08:29+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:33+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-07 04:33+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -393,34 +393,40 @@ msgstr ""
 #: ../../maps/Sun of fire.wmf/elemental:13
 msgid "Start positions are clockwise"
 msgstr ""
+"Les positions de départs sont attribuées dans le sens des aiguilles d'une "
+"montre"
 
 #: ../../maps/Desert Tournament.wmf/elemental:11
 #: ../../maps/Swamp Monks.wmf/elemental:11
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
-msgstr ""
+msgstr "Equipes Suggérées: (Bleu, rouge) contre (jaune, vert)"
 
 #: ../../maps/Four Castles.wmf/elemental:11
 msgid "Suggested Teams: (blue,red) vs (yellow,green)"
-msgstr ""
+msgstr "Equipes Suggérées: (Bleu,rouge) contre (jaune,vert)"
 
 #: ../../maps/Four Mountains.wmf/elemental:11
 msgid ""
 "Suggested Teams: (blue,red) vs (yellow,green) or (red,yellow) vs (green,blue)"
 msgstr ""
+"Equipes Suggérées: (Bleu,rouge) contre (jaune,vert) ou (rouge,jaune) contre "
+"(vert,bleu)"
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Suggested Teams: (red, green) vs (blue, yellow)"
-msgstr ""
+msgstr "Equipes Suggérées: (rouge, vert) contre (bleu, jaune)"
 
 #: ../../maps/Elven Forests.wmf/elemental:11
 msgid ""
 "Suggested Teams: (red, green) vs (blue,yellow) or (yellow, green) vs "
 "(red,blue)"
 msgstr ""
+"Equipes Suggérées: (rouge, vert) contre (bleu,jaune) ou (jaune, vert) contre "
+"(rouge,bleu)"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:11
 msgid "Suggested Teams: all ok."
-msgstr ""
+msgstr "Equipes Suggérées: tout est ok."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -640,3 +646,7 @@ msgid ""
 "be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
 "vs Red + Green."
 msgstr ""
+"Vos chemins de contrebande bien établis se sont soudainement animées: Deux "
+"autres tribus sont apparues et des rivalités entre contrebandiers ont "
+"débuté: Quelle équipe sera la première à passer en contrebande un certain "
+"nombre de marchandises? Les équipes sont: Bleu + Jaune contre Rouge + Vert."
