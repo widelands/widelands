@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-02-13 22:05+0000\n"
-"Last-Translator: PliniusNeo <Unknown>\n"
+"PO-Revision-Date: 2011-12-07 10:36+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:36+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-08 05:13+0000\n"
+"X-Generator: Launchpad (build 14443)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -159,7 +159,7 @@ msgstr "Brood"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bread Paddel"
-msgstr ""
+msgstr "Broodschep"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -292,7 +292,7 @@ msgstr "Ontdekt bodemschatten voor mijnen."
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Plaats ontmantelen"
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
@@ -648,7 +648,7 @@ msgstr "Plant bomen."
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Port"
-msgstr ""
+msgstr "Poort"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -1062,6 +1062,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"De broodschep is het gereedschap van de bakker, elke bakker heeft er een "
+"nodig. Het wordt geproduceerd door de werktuigsmid."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""

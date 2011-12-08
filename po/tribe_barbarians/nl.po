@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-02-13 22:07+0000\n"
-"Last-Translator: PliniusNeo <Unknown>\n"
+"PO-Revision-Date: 2011-12-07 10:35+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:36+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-08 05:13+0000\n"
+"X-Generator: Launchpad (build 14443)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -147,7 +147,7 @@ msgstr "Rozenhout"
 
 #: ../../tribes/barbarians/conf:69
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Broodschep"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -291,7 +291,7 @@ msgstr "Ontdekt bodemschatten."
 
 #: ../../tribes/barbarians/conf:149
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Plaats ontmantelen"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Donjon"
@@ -1039,6 +1039,10 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axefactory and "
 "war mill)."
 msgstr ""
+"De broodschep is het gereedschap van de bakker en elke bakker heeft er een "
+"nodig. Het wordt geproduceerd in de metaalbewerkerij, zoals alle andere "
+"werktuigen (maar het wordt er niet meer geproduceerd als de metaalbewerkerij "
+"uitgebouwd wordt naar een bijlen- of oorlogsfabriek)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""

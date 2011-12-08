@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 13:41+0100\n"
-"PO-Revision-Date: 2011-12-05 12:53+0000\n"
-"Last-Translator: LAZA <Unknown>\n"
+"PO-Revision-Date: 2011-12-07 18:07+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-06 05:11+0000\n"
-"X-Generator: Launchpad (build 14435)\n"
+"X-Launchpad-Export-Date: 2011-12-08 05:13+0000\n"
+"X-Generator: Launchpad (build 14443)\n"
 
 #: ../../src/network/nethost.cc:2556
 #, c-format
@@ -1007,7 +1007,7 @@ msgstr "Wirtschaft: %s"
 #: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
-msgstr ""
+msgstr "belade Dock: %s"
 
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
@@ -2814,7 +2814,7 @@ msgstr "Der Transfer der Datei %s zum Empfänger %s ist abgeschlossen."
 #: ../../src/network/nethost.cc:2630
 #, c-format
 msgid "Sending part %u/%zu of file %s to %s"
-msgstr ""
+msgstr "Sende Teil %u/%zu der Datei %s zu %s"
 
 #: ../../src/network/nethost.cc:2639
 #, c-format
@@ -3510,23 +3510,23 @@ msgstr "Offizielle Karte"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1vs1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
-msgstr ""
+msgstr "2 Spieler Teams"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "3 Player Teams"
-msgstr ""
+msgstr "3 Spieler Teams"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "4 Player Teams"
-msgstr ""
+msgstr "Vier Spieler Teams"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "Frei für alle"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
@@ -4546,7 +4546,7 @@ msgstr "Konsum"
 
 #: ../../src/wui/ware_statistics_menu.cc:205
 msgid "Economy Health"
-msgstr ""
+msgstr "Wirtschaftszustand"
 
 #: ../../src/wui/warehousewindow.cc:132
 msgid "Normal policy"
