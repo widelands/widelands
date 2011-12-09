@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-08-21 14:14+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2011-12-08 12:51+0000\n"
+"Last-Translator: Tomas Abril <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:37+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-09 04:38+0000\n"
+"X-Generator: Launchpad (build 14450)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -292,7 +292,7 @@ msgstr "Descobre recursos para mineração."
 
 #: ../../tribes/barbarians/conf:149
 msgid "Dismantle Site"
-msgstr ""
+msgstr "desmontar sítio"
 
 #: ../../tribes/barbarians/conf:215
 msgid "Donjon"
@@ -1037,6 +1037,10 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axefactory and "
 "war mill)."
 msgstr ""
+"A pá do pão é uma ferramenta do padeiro e cada padeiro precisa de sua "
+"própria. É produzido na obras de metal como todas as outras ferramentas (mas "
+"ela deixa de ser produzida pelo edifício se obras de metal é aprimorado para "
+"uma fábrica de machado e moinho de guerra)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
