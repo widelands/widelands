@@ -103,7 +103,7 @@ SpinBox::SpinBox
 	}
 
 	char buf[64];
-	snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
+	snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
 
 	sbi->text = new UI::Textarea
 		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
@@ -161,7 +161,7 @@ void SpinBox::update()
 		 ++i)
 		if (i.empty()) {
 			char buf[64];
-			snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
+			snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
 			sbi->text->set_text(buf);
 			break;
 		} else if (i.current->value == sbi->value) {
@@ -328,7 +328,7 @@ void SpinBox::remove_replacement(int32_t value)
 {
 	if (int32_t i = findReplacement(value) >= 0) {
 		char buf[64];
-		snprintf(buf, sizeof(buf), "%i%s", value, sbi->unit.c_str());
+		snprintf(buf, sizeof(buf), "%i %s", value, sbi->unit.c_str());
 		sbi->valrep[i].text = buf;
 	}
 }
