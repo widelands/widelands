@@ -143,9 +143,9 @@ private:
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&Economy_Options_Ware_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
-			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))
+			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))			
 			b->set_repeating(true);
-			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))
+			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))			
 			b->set_repeating(true);
 			ADD_WARE_BUTTON(reset_target, "R", _("Reset to default"))
 		}
@@ -238,9 +238,9 @@ private:
 	b->sigclicked.connect(boost::bind(&Economy_Options_Worker_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
 
-			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))
-			b->set_repeating(true);
 			ADD_WORKER_BUTTON(decrease_target, "-", _("Decrease target"))
+			b->set_repeating(true);
+			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))
 			b->set_repeating(true);
 			ADD_WORKER_BUTTON(reset_target, "R", _("Reset to default"))
 		}
