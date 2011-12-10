@@ -39,6 +39,7 @@ produce=stone:2
 animate=working 20000
 mine=granit 4 100 5
 produce=stone
+animate=working 20000
 mine=granit 4 100 5
 produce=quartz
 
