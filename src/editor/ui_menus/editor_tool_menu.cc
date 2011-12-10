@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -35,6 +35,7 @@
 #include "editor/tools/editor_decrease_height_tool.h"
 #include "editor/tools/editor_noise_height_tool.h"
 #include "editor/tools/editor_place_immovable_tool.h"
+#include "editor/tools/editor_set_port_space_tool.h"
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "editor/tools/editor_place_bob_tool.h"
 #include "editor/tools/editor_increase_resources_tool.h"
@@ -48,12 +49,12 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tool Menu"))
 
 #define spacing 5
 	Point   const offs     (spacing, spacing);
-	Point         pos    = offs;
+	Point         pos     = offs;
 	int32_t const width   = 34;
 	int32_t const height  = 34;
 
 
-	int32_t const num_tools = 6;
+	int32_t const num_tools = 7;
 #define ADD_BUTTON(pic, tooltip)                                              \
    m_radioselect.add_button                                                   \
       (this,                                                                  \
@@ -69,6 +70,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tool Menu"))
 	ADD_BUTTON("place_immovable",  _("Immovable"));
 	ADD_BUTTON("place_bob",        _("Bob"));
 	ADD_BUTTON("change_resources", _("Resource"));
+	ADD_BUTTON("set_port_space",   _("Set port space"));
 
 	set_inner_size
 		(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));
@@ -81,11 +83,12 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tool Menu"))
 			 &current == &parent.tools.place_immovable    ? 3 :
 			 &current == &parent.tools.place_bob          ? 4 :
 			 &current == &parent.tools.increase_resources ? 5 :
+			 &current == &parent.tools.set_port_space     ? 6 :
 			 0);
 	}
 
-	m_radioselect.changed.set(this, &Editor_Tool_Menu::changed_to);
-	m_radioselect.clicked.set(this, &Editor_Tool_Menu::changed_to);
+	m_radioselect.changed.connect(boost::bind(&Editor_Tool_Menu::changed_to, this));
+	m_radioselect.clicked.connect(boost::bind(&Editor_Tool_Menu::changed_to, this));
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -127,54 +130,67 @@ void Editor_Tool_Menu::changed_to() {
 		current_tool_pointer     = &parent.tools.increase_resources;
 		current_registry_pointer = &parent.m_resourcesmenu;
 		break;
+	case 6:
+		current_tool_pointer     = &parent.tools.set_port_space;
+		current_registry_pointer = 0; // no need for a window
+		break;
 	default:
 		assert(false);
 	}
 
 	parent.select_tool(*current_tool_pointer, Editor_Tool::First);
+	if (current_tool_pointer == &parent.tools.set_port_space) {
+		// Set correct overlay
+		Widelands::Map & map = parent.egbase().map();
+		map.overlay_manager().register_overlay_callback_function(&Editor_Tool_Set_Port_Space_Callback, &map);
+		map.recalc_whole_map();
+		update();
+	}
 
-	if (UI::Window * const window = current_registry_pointer->window) {
-		// There is already a window. If it is minimal, restore it.
-		if (window->is_minimal())
-			window->restore();
-		else
-			delete window;
-	} else
-		switch (n) { //  create window
-		case 0:
-			new Editor_Tool_Change_Height_Options_Menu
-				(parent,
-				 parent.tools.increase_height,
-				 *current_registry_pointer);
-			break;
-		case 1:
-			new Editor_Tool_Noise_Height_Options_Menu
-				(parent,
-				 parent.tools.noise_height,
-				 *current_registry_pointer);
-			break;
-		case 2:
-			new Editor_Tool_Set_Terrain_Options_Menu
-				(parent,
-				 parent.tools.set_terrain,
-				 *current_registry_pointer);
-			break;
-		case 3:
-			new Editor_Tool_Place_Immovable_Options_Menu
-				(parent,
-				 parent.tools.place_immovable,
-				 *current_registry_pointer);
-			break;
-		case 4:
-			new Editor_Tool_Place_Bob_Options_Menu
-				(parent,
-				 parent.tools.place_bob,
-				 *current_registry_pointer);
-			break;
-		case 5:
-			new Editor_Tool_Change_Resources_Options_Menu
-				(parent,
-				 parent.tools.increase_resources,
-				 *current_registry_pointer);
-		}
+	if (current_registry_pointer) {
+		if (UI::Window * const window = current_registry_pointer->window) {
+			// There is already a window. If it is minimal, restore it.
+			if (window->is_minimal())
+				window->restore();
+			else
+				delete window;
+		} else
+			switch (n) { //  create window
+			case 0:
+				new Editor_Tool_Change_Height_Options_Menu
+					(parent,
+					parent.tools.increase_height,
+					*current_registry_pointer);
+				break;
+			case 1:
+				new Editor_Tool_Noise_Height_Options_Menu
+					(parent,
+					parent.tools.noise_height,
+					*current_registry_pointer);
+				break;
+			case 2:
+				new Editor_Tool_Set_Terrain_Options_Menu
+					(parent,
+					parent.tools.set_terrain,
+					*current_registry_pointer);
+				break;
+			case 3:
+				new Editor_Tool_Place_Immovable_Options_Menu
+					(parent,
+					parent.tools.place_immovable,
+					*current_registry_pointer);
+				break;
+			case 4:
+				new Editor_Tool_Place_Bob_Options_Menu
+					(parent,
+					parent.tools.place_bob,
+					*current_registry_pointer);
+				break;
+			case 5:
+				new Editor_Tool_Change_Resources_Options_Menu
+					(parent,
+					parent.tools.increase_resources,
+					*current_registry_pointer);
+			}
+	}
 }

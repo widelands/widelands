@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -43,7 +43,7 @@ private:
 	Widelands::Player & m_player;
 	UI::Textarea              m_allowed_label, m_forbidden_label;
 	UI::Listselect<Widelands::Building_Index> m_allowed, m_forbidden;
-	UI::Callback_Button   m_forbid_button, m_allow_button;
+	UI::Button   m_forbid_button, m_allow_button;
 	void allowed_selected        (uint32_t);
 	void forbidden_selected      (uint32_t);
 	void allowed_double_clicked  (uint32_t);

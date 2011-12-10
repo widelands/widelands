@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -24,6 +24,7 @@
 #include "button.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/signal.hpp>
 #include <SDL_keyboard.h>
 
 #define CHAT_HISTORY_SIZE 5
@@ -41,16 +42,12 @@ struct EditBox : public Panel {
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 PictureID const & background =
 		 	g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 int32_t id = 0,
 		 Align align = Align_Center);
 	virtual ~EditBox();
 
-	Signal changed;
-	Signal1<int32_t> changedid;
-	Signal ok;
-	Signal1<int32_t> okid;
-	Signal cancel;
-	Signal1<int32_t> cancelid;
+	boost::signal<void ()> changed;
+	boost::signal<void ()> ok;
+	boost::signal<void ()> cancel;
 
 	std::string const & text() const;
 	void setText(std::string const &);

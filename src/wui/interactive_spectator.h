@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -58,12 +58,12 @@ private:
 	virtual void node_action();
 
 private:
-	UI::Callback_Button m_toggle_chat;
-	UI::Callback_Button m_exit;
-	UI::Callback_Button m_save;
-	UI::Callback_Button m_toggle_options_menu;
-	UI::Callback_Button m_toggle_statistics;
-	UI::Callback_Button m_toggle_minimap;
+	UI::Button m_toggle_chat;
+	UI::Button m_exit;
+	UI::Button m_save;
+	UI::Button m_toggle_options_menu;
+	UI::Button m_toggle_statistics;
+	UI::Button m_toggle_minimap;
 
 
 	UI::UniqueWindow::Registry m_chat;

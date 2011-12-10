@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -945,9 +945,7 @@ void ImmovableProgram::ActTransform::execute
 		immovable.remove(game); //  Now immovable is a dangling reference!
 
 		if (bob) {
-			Bob & bob = game.create_bob(c, type_name, owner_tribe);
-			if (player)
-				bob.set_owner(player);
+			game.create_bob(c, type_name, owner_tribe, player);
 		} else {
 			Immovable & imm = game.create_immovable(c, type_name, owner_tribe);
 			if (player)
@@ -1446,6 +1444,49 @@ void PlayerImmovable::log_general_info(Editor_Game_Base const & egbase)
 	molog("m_owner: %p\n", m_owner);
 	molog("* player nr: %i\n", m_owner->player_number());
 	molog("m_economy: %p\n", m_economy);
+}
+
+#define PLAYERIMMOVABLE_SAVEGAME_VERSION 1
+
+PlayerImmovable::Loader::Loader()
+{
+}
+
+void PlayerImmovable::Loader::load(FileRead & fr)
+{
+	BaseImmovable::Loader::load(fr);
+
+	PlayerImmovable & imm = get<PlayerImmovable>();
+
+	try {
+		uint8_t version = fr.Unsigned8();
+
+		if (1 <= version && version <= PLAYERIMMOVABLE_SAVEGAME_VERSION) {
+			Player_Number owner_number = fr.Unsigned8();
+
+			if (!owner_number || owner_number > egbase().map().get_nrplayers())
+				throw game_data_error
+					("owner number is %u but there are only %u players",
+					 owner_number, egbase().map().get_nrplayers());
+
+			Player * owner = egbase().get_player(owner_number);
+			if (!owner)
+				throw game_data_error("owning player %u does not exist", owner_number);
+
+			imm.m_owner = owner;
+		} else
+			throw game_data_error(_("unknown/unhandled version %u"), version);
+	} catch (const std::exception & e) {
+		throw wexception(_("loading player immovable: %s"), e.what());
+	}
+}
+
+void PlayerImmovable::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+{
+	BaseImmovable::save(egbase, mos, fw);
+
+	fw.Unsigned8(PLAYERIMMOVABLE_SAVEGAME_VERSION);
+	fw.Unsigned8(owner().player_number());
 }
 
 }

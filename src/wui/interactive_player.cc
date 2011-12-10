@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -76,18 +76,6 @@ int32_t Int_Player_overlay_callback_function
 		get_buildcaps(c);
 }
 
-
-/*
- * UI::Callback_Button m_toggle_chat;
-	UI::Callback_Button m_toggle_options_menu;
-	UI::Callback_Button m_toggle_statistics_menu;
-	UI::Callback_Button m_toggle_objectives;
-	UI::Callback_Button m_toggle_minimap;
-	UI::Callback_Button m_toggle_buildhelp;
-	UI::Callback_Button m_toggle_message_menu;
-	UI::Callback_Button m_toggle_help;
-	*/
-
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
@@ -103,46 +91,61 @@ m_flag_to_connect(Widelands::Coords::Null()),
 // Buildhelp is different as it does not toggle a UniqueWindow
 // Minimap is different as it warps and stuff
 
-#define INIT_BTN_this(picture, name, callback, tooltip)                       \
+#define INIT_BTN_this(picture, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- boost::bind(&Interactive_Player::callback, boost::ref(*this)),               \
  tooltip                                                                      \
 
 
-#define INIT_BTN(picture, name, registry, tooltip)                            \
+#define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)),      \
  tooltip                                                                      \
 
 
 m_toggle_chat
 	(INIT_BTN_this
-	 ("menu_chat", "chat", toggle_chat, _("Chat"))),
+	 ("menu_chat", "chat", _("Chat"))),
 m_toggle_options_menu
 	(INIT_BTN
-	 ("menu_options_menu", "options_menu", m_options, _("Options"))),
+	 ("menu_options_menu", "options_menu", _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 ("menu_toggle_menu", "statistics_menu", m_statisticsmenu, _("Statistics"))),
+	 ("menu_toggle_menu", "statistics_menu", _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
-	 ("menu_objectives", "objectives", m_objectives, _("Objectives"))),
+	 ("menu_objectives", "objectives", _("Objectives"))),
 m_toggle_minimap
 	(INIT_BTN_this
-	 ("menu_toggle_minimap", "minimap", toggle_minimap, _("Minimap"))),
+	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
 m_toggle_buildhelp
 	(INIT_BTN_this
-	 ("menu_toggle_buildhelp", "buildhelp", toggle_buildhelp, _("Buildhelp"))),
+	 ("menu_toggle_buildhelp", "buildhelp", _("Buildhelp"))),
 m_toggle_message_menu
 	(INIT_BTN
-	 ("menu_toggle_oldmessage_menu", "messages", m_message_menu, _("Messages"))),
+	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 ("menu_help", "help", m_encyclopedia, _("Ware help")))
+	 ("menu_help", "help", _("Ware help")))
 
 {
+	m_toggle_chat.sigclicked.connect
+		(boost::bind(&Interactive_Player::toggle_chat, this));
+	m_toggle_options_menu.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_options)));
+	m_toggle_statistics_menu.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_statisticsmenu)));
+	m_toggle_objectives.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_objectives)));
+	m_toggle_minimap.sigclicked.connect
+		(boost::bind(&Interactive_Player::toggle_minimap, this));
+	m_toggle_buildhelp.sigclicked.connect
+		(boost::bind(&Interactive_Player::toggle_buildhelp, this));
+	m_toggle_message_menu.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_message_menu)));
+	m_toggle_help.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_encyclopedia)));
+
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
@@ -167,7 +170,7 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
 
 	set_player_number(plyn);
-	fieldclicked.set(this, &Interactive_Player::node_action);
+	fieldclicked.connect(boost::bind(&Interactive_Player::node_action, this));
 
 	adjust_toolbar_position();
 
@@ -371,6 +374,11 @@ void Interactive_Player::node_action()
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
 			if (can_see(building->owner().player_number()))
 				return building->show_options(*this);
+
+		if (!is_building_road()) {
+			if (try_show_ship_window())
+				return;
+		}
 
 		// everything else can bring up the temporary dialog
 		show_field_action(this, get_player(), &m_fieldaction);

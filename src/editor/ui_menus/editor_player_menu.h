@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -35,7 +35,7 @@ struct Editor_Interactive;
 namespace UI {
 struct Textarea;
 struct EditBox;
-struct Callback_Button;
+struct Button;
 }
 
 struct Editor_Player_Menu : public UI::UniqueWindow {
@@ -47,9 +47,9 @@ private:
 	UI::UniqueWindow::Registry m_allow_buildings_menu;
 	UI::Textarea * m_nr_of_players_ta;
 	UI::EditBox * m_plr_names[MAX_PLAYERS];
-	UI::Callback_Button
+	UI::Button
 		m_add_player, m_remove_last_player;
-	UI::Callback_Button
+	UI::Button
 		* m_plr_make_infrastructure_buts[MAX_PLAYERS],
 		* m_plr_set_pos_buts            [MAX_PLAYERS],
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];

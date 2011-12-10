@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -26,7 +26,7 @@
 #include "logic/field.h"
 #include "editor/editorinteractive.h"
 
-/// Sets the heights to random values. Chages surrounding nodes if necessary.
+/// Sets the heights to random values. Changes surrounding nodes if necessary.
 int32_t Editor_Noise_Height_Tool::handle_click_impl
 	(Widelands::Map               &       map,
 	 Widelands::Node_and_Triangle<> const center,

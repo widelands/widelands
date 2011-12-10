@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -59,6 +59,7 @@ Building_Descr::Building_Descr
 	m_buildicon     (g_gr->get_no_picture()),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
+	m_port          (false),
 	m_hints         (prof.get_section("aihints")),
 	m_global        (false),
 	m_vision_range  (0)
@@ -74,10 +75,13 @@ Building_Descr::Building_Descr
 		else if (!strcasecmp(string, "mine")) {
 			m_size = BaseImmovable::SMALL;
 			m_mine = true;
+		} else if (!strcasecmp(string, "port")) {
+			m_size = BaseImmovable::BIG;
+			m_port = true;
 		} else
 			throw game_data_error
 				(_("expected %s but found \"%s\""),
-				 "{\"small\"|\"medium\"|\"big\"}", string);
+				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
 	} catch (_wexception const & e) {
 		throw game_data_error("size: %s", e.what());
 	}
@@ -778,7 +782,7 @@ int32_t Building::get_priority
 {
 	int32_t priority = m_priority;
 
-	if (type == Request::WARE) {
+	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<Ware_Index, int32_t>::const_iterator it =
@@ -801,7 +805,7 @@ void Building::collect_priorities
 {
 	if (m_ware_priorities.empty())
 		return;
-	std::map<Ware_Index, int32_t> & ware_priorities = p[Request::WARE];
+	std::map<Ware_Index, int32_t> & ware_priorities = p[wwWARE];
 	std::map<Ware_Index, int32_t>::const_iterator it;
 	for (it = m_ware_priorities.begin(); it != m_ware_priorities.end(); ++it) {
 		if (it->second == DEFAULT_PRIORITY)
@@ -822,7 +826,7 @@ void Building::set_priority
 	 Ware_Index const ware_index,
 	 int32_t    const new_priority)
 {
-	if (type == Request::WARE) {
+	if (type == wwWARE) {
 		m_ware_priorities[ware_index] = new_priority;
 	}
 }

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -2627,7 +2627,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		++part;
 		if (part % 100 == 0)
 			sendSystemChat
-				(_("Sending part %u/%lu of file %s to %s"),
+				(_("Sending part %u/%zu of file %s to %s"),
 				 part, file->parts.size() + 1,
 				 file->filename.c_str(),
 				 d->settings.users.at(client.usernum).name.c_str());

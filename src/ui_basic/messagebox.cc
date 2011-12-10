@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -83,26 +83,26 @@ WLMessageBox::WLMessageBox
 	d->textarea->set_size(width - 10, height - 50);
 
 	if (type == OK) {
-		new Callback_Button
+		UI::Button * okbtn = new Button
 			(this, "ok",
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 boost::bind(&WLMessageBox::pressedOk, boost::ref(*this)),
 			 _("OK"));
+		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedOk, boost::ref(*this)));
 	} else if (type == YESNO) {
-		new Callback_Button
+		UI::Button * yesbtn = new Button
 			(this, "yes",
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 boost::bind(&WLMessageBox::pressedYes, boost::ref(*this)),
 			 _("Yes"));
-		new Callback_Button
+		yesbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedYes, boost::ref(*this)));
+		UI::Button * nobtn = new Button
 			(this, "no",
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 boost::bind(&WLMessageBox::pressedNo, boost::ref(*this)),
 			 _("No"));
+		nobtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedNo, boost::ref(*this)));
 	}
 }
 
@@ -165,21 +165,21 @@ bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 
 void WLMessageBox::pressedOk()
 {
-	ok.call();
+	ok();
 	if (is_modal())
 		end_modal(0);
 }
 
 void WLMessageBox::pressedYes()
 {
-	yes.call();
+	yes();
 	if (is_modal())
 		end_modal(1);
 }
 
 void WLMessageBox::pressedNo()
 {
-	no.call();
+	no();
 	if (is_modal())
 		end_modal(0);
 }

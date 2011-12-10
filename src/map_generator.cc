@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -192,7 +192,7 @@ void MapGenerator::generate_resources
 /// \param mapInfo Information about the random map currently begin created
 /// (map specific info).
 ///
-/// \Returns A map height value corresponding to elevation.
+/// \returns A map height value corresponding to elevation.
 uint8_t MapGenerator::make_node_elevation
 	(double                      const elevation,
 	 Coords                      const c)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -56,46 +56,51 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 		(this, "join_game",
 		 get_w() * 16 / 25, get_h() * 5333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_joingame, boost::ref(*this)),
 		 _("Join this game"), std::string(), true, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 16 / 25, get_h() * 6083 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_hostgame, boost::ref(*this)),
 		 _("Host a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 16 / 25, get_h() * 8333 / 10000, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(CANCEL)),
 		 _("Back"), std::string(), true, false),
 	loadlasthost
 		(this, "load_previous_host",
 		 get_w() * 171 / 200, get_h() * 19 / 40, m_buth, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_lasthost, boost::ref(*this)),
 		 _("Load previous host"), true, false),
 
 // Edit boxes
 	playername
 		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,       m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
 	hostname
 		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
 
 // List
 	opengames
 		(this,
 		 get_w() * 3 / 50, get_h() * 3333 / 10000, m_lisw, get_h() * 5433 / 10000)
 {
+	joingame.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupLAN::clicked_joingame, boost::ref(*this)));
+	hostgame.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupLAN::clicked_hostgame, boost::ref(*this)));
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupLAN::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(CANCEL)));
+	loadlasthost.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_NetSetupLAN::clicked_lasthost, boost::ref(*this)));
+
 	Section & s = g_options.pull_section("global"); //  for playername
 
 	joingame.set_font(font_small());
@@ -107,20 +112,20 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 	m_opengames .set_textstyle(ts_small());
 	m_playername.set_textstyle(ts_small());
 	m_hostname  .set_textstyle(ts_small());
-	hostname    .changed.set
-		(this, &Fullscreen_Menu_NetSetupLAN::change_hostname);
+	hostname    .changed.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupLAN::change_hostname, this));
 	hostname    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	playername  .setText  (s.get_string("nickname", (_("nobody"))));
-	playername  .changed.set
-		(this, &Fullscreen_Menu_NetSetupLAN::change_playername);
+	playername  .changed.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupLAN::change_playername, this));
 	playername  .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	opengames   .set_font(ui_fn(), fs_small());
 	opengames   .add_column(m_lisw * 2 / 5, _("Host"));
 	opengames   .add_column(m_lisw * 2 / 5, _("Map"));
 	opengames   .add_column(m_lisw     / 5, _("State"));
-	opengames   .selected.set(this, &Fullscreen_Menu_NetSetupLAN::game_selected);
-	opengames   .double_clicked.set
-		(this, &Fullscreen_Menu_NetSetupLAN::game_doubleclicked);
+	opengames   .selected.connect(boost::bind(&Fullscreen_Menu_NetSetupLAN::game_selected, this, _1));
+	opengames   .double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_NetSetupLAN::game_doubleclicked, this, _1));
 	discovery   .set_callback (discovery_callback, this);
 
 	joingame.set_enabled(false);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -55,7 +55,7 @@ Every player chooses a tribe. A tribe has distinct properties such as the
 buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
-struct Tribe_Descr {
+struct Tribe_Descr : boost::noncopyable {
 	enum {
 		OK = 0,
 		ERR_WRONGVERSION
@@ -290,9 +290,6 @@ private:
 	HTMLReferences * m_worker_references;
 	HTMLReferences * m_building_references;
 #endif
-
-	Tribe_Descr & operator= (Tribe_Descr const &);
-	explicit Tribe_Descr    (Tribe_Descr const &);
 };
 
 }

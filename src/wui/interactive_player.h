@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -95,14 +95,14 @@ private:
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;
 
-	UI::Callback_Button m_toggle_chat;
-	UI::Callback_Button m_toggle_options_menu;
-	UI::Callback_Button m_toggle_statistics_menu;
-	UI::Callback_Button m_toggle_objectives;
-	UI::Callback_Button m_toggle_minimap;
-	UI::Callback_Button m_toggle_buildhelp;
-	UI::Callback_Button m_toggle_message_menu;
-	UI::Callback_Button m_toggle_help;
+	UI::Button m_toggle_chat;
+	UI::Button m_toggle_options_menu;
+	UI::Button m_toggle_statistics_menu;
+	UI::Button m_toggle_objectives;
+	UI::Button m_toggle_minimap;
+	UI::Button m_toggle_buildhelp;
+	UI::Button m_toggle_message_menu;
+	UI::Button m_toggle_help;
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;

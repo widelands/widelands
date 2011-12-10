@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -37,7 +37,7 @@ struct Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
 private:
 	Editor_Noise_Height_Tool & m_noise_tool;
 	UI::Textarea m_lower_label, m_upper_label;
-	UI::Callback_Button
+	UI::Button
 		m_lower_increase, m_lower_decrease, m_upper_increase, m_upper_decrease,
 		m_setto_increase, m_setto_decrease;
 	UI::Textarea m_set_label;

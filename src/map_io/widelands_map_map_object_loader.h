@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -45,8 +45,8 @@ struct Map_Map_Object_Loader {
 
 	/// Registers the object as a new one.
 	///
-	/// \Returns a reference to the object.
-	/// \Throws _wexception if there is already an object registered with the
+	/// \returns a reference to the object.
+	/// \throws _wexception if there is already an object registered with the
 	/// same serial. (not implemented: In that case, the object is deleted.)
 	///
 	/// \todo Currently the object must be passed as a parameter to this

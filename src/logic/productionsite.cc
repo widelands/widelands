@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -494,7 +494,7 @@ Request & ProductionSite::request_worker(Ware_Index const wareid) {
 			(*this,
 			 wareid,
 			 ProductionSite::request_worker_callback,
-			 Request::WORKER);
+			 wwWORKER);
 }
 
 
@@ -747,7 +747,6 @@ bool ProductionSite::get_building_work
 		std::pair<Ware_Index, uint8_t> & worker_type_with_count =
 			*m_recruited_workers.rbegin();
 		{
-			Ware_Index const worker_index = worker_type_with_count.first;
 			Worker_Descr const & worker_descr =
 				*tribe().get_worker_descr(worker_type_with_count.first);
 			{

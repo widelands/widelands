@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -39,21 +39,25 @@ Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 		(this, "new_map",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(New_Map)),
 		 _("New Map"), std::string(), true, false),
 	load_map
 		(this, "load_map",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(Load_Map)),
 		 _("Load Map"), std::string(), true, false),
 	back
 		(this, "back",
 		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(Back)),
 		 _("Back"), std::string(), true, false)
 {
+	new_map.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(New_Map)));
+	load_map.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(Load_Map)));
+	back.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(Back)));
+
 	new_map.set_font(font_small());
 	load_map.set_font(font_small());
 	back.set_font(font_small());

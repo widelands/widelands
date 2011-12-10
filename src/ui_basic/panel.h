@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -21,7 +21,8 @@
 #ifndef UI_PANEL_H
 #define UI_PANEL_H
 
-#include "object.h"
+#include <boost/signals/trackable.hpp>
+#include <boost/noncopyable.hpp>
 
 #include "point.h"
 #include "graphic/picture_id.h"
@@ -58,7 +59,7 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : public Object {
+struct Panel : boost::signals::trackable, boost::noncopyable {
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run
@@ -189,7 +190,7 @@ struct Panel : public Object {
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
 
-	/// \Returns whether a certain key is currently down.
+	/// \returns whether a certain given is currently down.
 	///
 	/// \note Never call this function from a keyboard event handler (a function
 	/// that overrides bool handle_key(bool, SDL_keysym code)) to get the state

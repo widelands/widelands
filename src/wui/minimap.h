@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,12 +13,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #ifndef MINIMAP_H
 #define MINIMAP_H
+
+#include <boost/signal.hpp>
 
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
@@ -34,7 +36,7 @@ struct MiniMap : public UI::UniqueWindow {
 
 	MiniMap(Interactive_Base & parent, Registry *);
 
-	UI::Signal2<int32_t, int32_t> warpview;
+	boost::signal<void (int32_t, int32_t)> warpview;
 
 	void set_view_pos(int32_t const x, int32_t const y) {
 		m_view.set_view_pos(x, y);
@@ -86,12 +88,12 @@ private:
 	uint32_t but_h                    () const;
 
 	View     m_view;
-	UI::Callback_Button button_terrn;
-	UI::Callback_Button button_owner;
-	UI::Callback_Button button_flags;
-	UI::Callback_Button button_roads;
-	UI::Callback_Button button_bldns;
-	UI::Callback_Button button_zoom;
+	UI::Button button_terrn;
+	UI::Button button_owner;
+	UI::Button button_flags;
+	UI::Button button_roads;
+	UI::Button button_bldns;
+	UI::Button button_zoom;
 };
 
 #endif

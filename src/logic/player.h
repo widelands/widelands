@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -43,21 +43,17 @@ struct Tribe_Descr;
 struct Road;
 struct AttackController;
 
-/** class Player
+/**
+ * Manage in-game aspects of players, such as tribe, team, fog-of-war, statistics,
+ * messages (notification when a resource has been found etc.) and so on.
  *
- * What we really need is a Player class that stores e.g. score
- * and diplomacy of a player.
- *
- * These Player classes should be controlled via the cmd queue.
- * Commands are inserted by:
- *  - local player
- *  - network packets
- *  - AI code
- * Player commands should be controlled by the \ref GameController
- * in the long run.
- *                      -- Nicolai
+ * Also provides functions for directly building player immovables; however,
+ * from the UI and AI codes, those should only ever be issued indirectly via
+ * \ref GameController and friends, so that replays and network games function
+ * properly.
  */
 struct Player :
+	boost::noncopyable,
 	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
 	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
@@ -140,7 +136,7 @@ struct Player :
 	};
 
 	/// Per-player field information.
-	struct Field {
+	struct Field : boost::noncopyable {
 		Field() :
 			military_influence(0),
 			vision            (0)
@@ -337,10 +333,6 @@ struct Player :
 		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
 		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
 		//  <end>                           0x100         0x160
-
-	private:
-		Field & operator= (Field const &);
-		explicit Field    (Field const &);
 	};
 
 	const Field * fields() const throw () {return m_fields;}

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -27,6 +27,8 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
+#include "economy/portdock.h"
+#include "findbob.h"
 #include "findimmovable.h"
 #include "findnode.h"
 #include "game.h"
@@ -1086,12 +1088,15 @@ void Worker::set_location(PlayerImmovable * const location)
 	if (oldlocation == location)
 		return;
 
-	if (oldlocation)
+	if (oldlocation) {
 		// Note: even though we have an oldlocation, m_economy may be zero
 		// (oldlocation got deleted)
 		oldlocation->remove_worker(*this);
-	else
-		assert(!m_economy);
+	} else {
+		if (!is_shipping()) {
+			assert(!m_economy);
+		}
+	}
 
 	m_location = location;
 
@@ -1108,13 +1113,15 @@ void Worker::set_location(PlayerImmovable * const location)
 
 		location->add_worker(*this);
 	} else {
-		// Our location has been destroyed, we are now fugitives.
-		// Interrupt whatever we've been doing.
-		set_economy(0);
+		if (!is_shipping()) {
+			// Our location has been destroyed, we are now fugitives.
+			// Interrupt whatever we've been doing.
+			set_economy(0);
 
-		Editor_Game_Base & egbase = owner().egbase();
-		if (upcast(Game, game, &egbase))
-			send_signal (*game, "location");
+			Editor_Game_Base & egbase = owner().egbase();
+			if (upcast(Game, game, &egbase))
+				send_signal (*game, "location");
+		}
 	}
 }
 
@@ -1192,7 +1199,6 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 
 	Bob::cleanup(egbase);
 }
-
 
 /**
  * Set the item we carry.
@@ -1415,7 +1421,7 @@ void Worker::transfer_update(Game & game, State & state) {
 		// The caller requested a route update, or the previously calculated route
 		// failed.
 		// We will recalculate the route on the next update().
-		if (signal == "road" || signal == "fail" || signal == "transfer") {
+		if (signal == "road" || signal == "fail" || signal == "transfer" || signal == "wakeup") {
 			molog("[transfer]: Got signal '%s' -> recalculate\n", signal.c_str());
 
 			signal_handled();
@@ -1484,8 +1490,14 @@ void Worker::transfer_update(Game & game, State & state) {
 
 	// Initiate the next step
 	if        (upcast(Building, building, location)) {
-		if (&building->base_flag() != nextstep)
+		if (&building->base_flag() != nextstep) {
+			if (upcast(Warehouse, warehouse, building)) {
+				if (warehouse->get_portdock() == nextstep)
+					return start_task_shipping(game, *warehouse->get_portdock());
+			}
+
 			throw wexception("MO(%u): [transfer]: in building, nextstep is not building's flag", serial());
+		}
 
 		return start_task_leavebuilding(game, true);
 	} else if (upcast(Flag,     flag,     location)) {
@@ -1540,8 +1552,8 @@ void Worker::transfer_update(Game & game, State & state) {
 					 	 descr().get_right_walk_anims(does_carry_ware())))
 				{
 					molog
-						("[transfer]: from road %u to flag %u nextstep %u\n",
-						 serial(), road->serial(), nextstep->serial());
+						("[transfer]: from road %u to flag %u\n",
+						 road->serial(), nextstep->serial());
 					return;
 				}
 			} else if (nextstep != map[get_position()].get_immovable())
@@ -1570,6 +1582,89 @@ void Worker::cancel_task_transfer(Game & game)
 {
 	m_transfer = 0;
 	send_signal(game, "cancel");
+}
+
+
+/**
+ * Sleep while the shipping code in @ref PortDock and @ref Ship handles us.
+ */
+const Bob::Task Worker::taskShipping = {
+	"shipping",
+	static_cast<Bob::Ptr>(&Worker::shipping_update),
+	0,
+	static_cast<Bob::Ptr>(&Worker::shipping_pop),
+	true
+};
+
+/**
+ * Add us as a shipping item to the given dock and start the shipping task.
+ *
+ * ivar1 = end shipping?
+ */
+void Worker::start_task_shipping(Game & game, PortDock & pd)
+{
+	push_task(game, taskShipping);
+	top_state().ivar1 = 0;
+	pd.add_shippingitem(game, *this);
+}
+
+/**
+ * Trigger the end of the shipping task.
+ *
+ * @note the worker must be in a @ref Warehouse location
+ */
+void Worker::end_shipping(Game & game)
+{
+	if (State * state = get_state(taskShipping)) {
+		state->ivar1 = 1;
+		send_signal(game, "endshipping");
+	}
+}
+
+/**
+ * Whether we are currently being handled by the shipping code.
+ */
+bool Worker::is_shipping()
+{
+	return get_state(taskShipping);
+}
+
+void Worker::shipping_pop(Game & game, State & state)
+{
+	// Defense against unorderly cleanup via reset_tasks
+	if (!get_location(game)) {
+		set_economy(0);
+		schedule_destroy(game);
+	}
+}
+
+
+void Worker::shipping_update(Game & game, State & state)
+{
+	PlayerImmovable * location = get_location(game);
+
+	// Signal handling
+	std::string const signal = get_signal();
+
+	if (signal.size()) {
+		if (signal == "endshipping") {
+			if (!dynamic_cast<Warehouse *>(location))
+				molog("shipping_update: received signal 'endshipping' while not in warehouse!\n");
+			signal_handled();
+		}
+		if (signal == "transfer" || signal == "wakeup")
+			signal_handled();
+	}
+
+	if (location || state.ivar1) {
+		if (upcast(PortDock, pd, location)) {
+			pd->update_shippingitem(game, *this);
+		} else {
+			return pop_task(game);
+		}
+	}
+
+	start_task_idle(game, 0, -1);
 }
 
 
@@ -2876,6 +2971,7 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 {
 	if (name == "program") return &taskProgram;
 	if (name == "transfer") return &taskTransfer;
+	if (name == "shipping") return &taskShipping;
 	if (name == "buildingwork") return &taskBuildingwork;
 	if (name == "return") return &taskReturn;
 	if (name == "gowarehouse") return &taskGowarehouse;

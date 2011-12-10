@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -59,7 +59,6 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, boost::ref(*this)),
 		 std::string(),
 		 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
 	m_lower_decrease
@@ -69,7 +68,6 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, boost::ref(*this)),
 		 std::string(),
 		 0 < noise_tool.get_interval().min),
 	m_upper_increase
@@ -82,7 +80,6 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, boost::ref(*this)),
 		 std::string(),
 		 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
 	m_upper_decrease
@@ -92,7 +89,6 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, boost::ref(*this)),
 		 std::string(),
 		 0 < noise_tool.get_interval().max),
 	m_setto_increase
@@ -102,7 +98,6 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, boost::ref(*this)),
 		 std::string(),
 		 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT),
 	m_setto_decrease
@@ -110,7 +105,6 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 get_inner_w() / 2, m_setto_increase.get_y(), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, boost::ref(*this)),
 		 std::string(),
 		 0 < noise_tool.set_tool().get_interval().min),
 	m_set_label
@@ -120,6 +114,19 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 get_inner_w() - 2 * hspacing(), height,
 		 UI::Align_BottomCenter)
 {
+	m_lower_increase.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, boost::ref(*this)));
+	m_lower_decrease.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, boost::ref(*this)));
+	m_upper_increase.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, boost::ref(*this)));
+	m_upper_decrease.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, boost::ref(*this)));
+	m_setto_increase.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, boost::ref(*this)));
+	m_setto_decrease.sigclicked.connect
+		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, boost::ref(*this)));
+
 	m_lower_increase.set_repeating(true);
 	m_lower_decrease.set_repeating(true);
 	m_upper_increase.set_repeating(true);

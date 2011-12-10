@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -52,45 +52,46 @@ Editor_Main_Menu::Editor_Main_Menu
 		(this, "new_map",
 		 hmargin, vmargin + 0 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Main_Menu::new_map_btn, boost::ref(*this)),
 		 _("New Map")),
 	m_button_new_random_map
 		(this, "new_random_map",
 		 hmargin, vmargin + 1 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Main_Menu::new_random_map_btn, boost::ref(*this)),
 		 _("New Random Map")),
 	m_button_load_map
 		(this, "load_map",
 		 hmargin, vmargin + 2 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Main_Menu::load_btn, boost::ref(*this)),
 		 _("Load Map")),
 	m_button_save_map
 		(this, "save_map",
 		 hmargin, vmargin + 3 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Main_Menu::save_btn, boost::ref(*this)),
 		 _("Save Map")),
 	m_button_map_options
 		(this, "map_options",
 		 hmargin, vmargin + 4 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Main_Menu::map_options_btn, boost::ref(*this)),
 		 _("Map Options")),
 	m_button_view_readme
 		(this, "readme",
 		 hmargin, vmargin + 5 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Main_Menu::readme_btn, boost::ref(*this)),
 		 _("View Readme")),
 	m_button_exit_editor
 		(this, "exit",
 		 hmargin, vmargin + 6 * (height + vspacing), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Editor_Main_Menu::exit_btn, boost::ref(*this)),
 		 _("Exit Editor"))
 {
+	m_button_new_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::new_map_btn, this));
+	m_button_new_random_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::new_random_map_btn, this));
+	m_button_load_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::load_btn, this));
+	m_button_save_map.sigclicked.connect(boost::bind(&Editor_Main_Menu::save_btn, this));
+	m_button_map_options.sigclicked.connect(boost::bind(&Editor_Main_Menu::map_options_btn, this));
+	m_button_view_readme.sigclicked.connect(boost::bind(&Editor_Main_Menu::readme_btn, this));
+	m_button_exit_editor.sigclicked.connect(boost::bind(&Editor_Main_Menu::exit_btn, this));
+
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
 		center_to_parent();

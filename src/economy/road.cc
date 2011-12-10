@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -361,14 +361,14 @@ void Road::_request_carrier(CarrierSlot & slot)
 				(*this,
 				 owner().tribe().safe_worker_index("carrier"),
 				 Road::_request_carrier_callback,
-				 Request::WORKER);
+				 wwWORKER);
 	else
 		slot.carrier_request =
 			new Request
 				(*this,
 				 owner().tribe().carrier2(),
 				 Road::_request_carrier_callback,
-				 Request::WORKER);
+				 wwWORKER);
 }
 
 /**

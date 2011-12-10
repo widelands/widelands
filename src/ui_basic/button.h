@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,10 +22,10 @@
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
+#include <boost/signal.hpp>
 
 #include "constants.h"
 #include "panel.h"
-#include "m_signal.h"
 
 #include "rgbcolor.h"
 
@@ -86,8 +86,10 @@ struct Button : public NamedPanel {
 	// If no background is drawn, the button is drawn over the current background
 	void set_draw_flat_background(bool set);
 
+	boost::signal<void ()> sigclicked;
+
 protected:
-	virtual void clicked() = 0; /// Override this to react on the click.
+	virtual void clicked() {} /// Override this to react on the click.
 
 	bool        m_highlighted;    //  mouse is over the button
 	bool        m_pressed;        //  mouse is clicked over the button
@@ -110,55 +112,6 @@ protected:
 	bool        m_draw_caret;
 };
 
-
-/// A verion of Button that uses a function object for the callback.
-struct Callback_Button : public Button {
-	Callback_Button /// for textual buttons
-		(Panel * const parent,
-		 std::string const & name,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_pictute_id,
-		 boost::function<void()> callback_function,
-		 const std::string & title_text,
-		 std::string const & tooltip_text = std::string(),
-		 bool const _enabled = true,
-		 bool const flat     = false)
-		:
-		Button
-			(parent, name,
-			 x, y, w, h,
-			 background_pictute_id,
-			 title_text,
-			 tooltip_text,
-			 _enabled, flat),
-		_callback_function     (callback_function)
-	{}
-	Callback_Button /// for pictorial buttons
-		(Panel * const parent,
-		 std::string const & name,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_pictute_id,
-		 const PictureID foreground_picture_id,
-		 boost::function<void()> callback_function,
-		 std::string const & tooltip_text = std::string(),
-		 bool const _enabled = true,
-		 bool const flat     = false)
-		:
-		Button
-			(parent, name,
-			 x, y, w, h,
-			 background_pictute_id,
-			 foreground_picture_id,
-			 tooltip_text,
-			 _enabled, flat),
-		_callback_function     (callback_function)
-	{}
-
-protected:
-	boost::function<void()> _callback_function;
-	void clicked() {_callback_function();}
-};
-
-}
+} // namespace UI
 
 #endif

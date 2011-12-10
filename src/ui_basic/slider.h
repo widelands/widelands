@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,14 +13,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 #ifndef UI_SLIDER_H
 #define UI_SLIDER_H
 
+#include <boost/signal.hpp>
+
 #include "panel.h"
-#include "m_signal.h"
 #include "graphic/font.h"
 
 namespace UI {
@@ -84,8 +85,8 @@ private :
 	void set_highlighted(bool highlighted);
 
 public:
-	Signal        changed;
-	Signal1<int32_t>  changedto;
+	boost::signal<void ()> changed;
+	boost::signal<void (int32_t)> changedto;
 
 private:
 	int32_t m_min_value;          //  cursor values
@@ -179,7 +180,7 @@ protected:
 
 /**
  * \brief This class defines an discrete slide bar. We do not derive from
- * Slider, but rather embed it, as we need to re-size it and add the lables.
+ * Slider, but rather embed it, as we need to re-size it and add the labels.
  */
 struct DiscreteSlider : public Panel {
 	DiscreteSlider
@@ -190,39 +191,21 @@ struct DiscreteSlider : public Panel {
 		 const PictureID background_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,
-		 const bool enabled = true)
-		:
-		Panel (parent, x, y, w, h, tooltip_text),
-		slider
-			(this,
-			 // here, we take into account the h_gap introduced by HorizontalSlider
-			 w / (2 * labels_in.size()) - cursor_size / 2, 0,
-			 w - (w / labels_in.size()) + cursor_size,
-			 h - UI::Font::ui_small()->lineskip() - 2,
-			 0, labels_in.size() - 1, m_value,
-			 background_picture_id,
-			 tooltip_text,
-			 cursor_size,
-			 enabled),
-		 changed(&slider.changed),
-		 changedto(&slider.changedto),
-		 labels(labels_in)
-	{}
-protected:
-	HorizontalSlider slider;
-public:
+		 const bool enabled = true);
+
 	void set_labels(std::vector<std::string>);
 
-	Signal *       changed;
-	Signal1<int32_t> *  changedto;
+	boost::signal<void ()> changed;
+	boost::signal<void (int32_t)> changedto;
+
+protected:
+	virtual void draw(RenderTarget & dst);
+	virtual void layout();
+
+	HorizontalSlider slider;
 
 private:
 	std::vector<std::string> labels;
-
-protected:
-
-	virtual void draw(RenderTarget & dst);
-	virtual void layout();
 };
 
 

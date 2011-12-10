@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -470,11 +470,12 @@ Building * Player::build
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE))
 			return 0;
-	} else if
-		((buildcaps & BUILDCAPS_SIZEMASK)
-		 <
-		 descr.get_size() - BaseImmovable::SMALL + 1)
-		return 0;
+	} else {
+		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr.get_size() - BaseImmovable::SMALL + 1)
+			return 0;
+		if (descr.get_isport() && !(buildcaps & BUILDCAPS_PORT))
+			return 0;
+	}
 
 	if (constructionsite)
 		return &egbase().warp_constructionsite(c, m_plnum, idx);

@@ -13,13 +13,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #include "flag.h"
 
 // Package includes
+#include "portdock.h"
 #include "road.h"
 #include "economy.h"
 #include "ware_instance.h"
@@ -33,6 +34,7 @@
 #include "logic/tribe.h"
 #include "upcast.h"
 #include "wexception.h"
+#include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "container_iterate.h"
 
@@ -263,7 +265,7 @@ BaseImmovable::PositionList Flag::get_positions
 /**
  * Return neighbouring flags.
 */
-void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)
+void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours & neighbours)
 {
 	for (int8_t i = 0; i < 6; ++i) {
 		Road * const road = m_roads[i];
@@ -272,11 +274,14 @@ void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)
 
 		Flag * f = &road->get_flag(Road::FlagEnd);
 		int32_t nb_cost;
-		if (f != this)
+		if (f != this) {
 			nb_cost = road->get_cost(Road::FlagStart);
-		else {
+		} else {
 			f = &road->get_flag(Road::FlagStart);
 			nb_cost = road->get_cost(Road::FlagEnd);
+		}
+		if (type == wwWARE) {
+			nb_cost += nb_cost * (get_waitcost() + f->get_waitcost()) / 2;
 		}
 		RoutingNodeNeighbour n(f, nb_cost);
 
@@ -284,10 +289,12 @@ void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)
 		neighbours.push_back(n);
 	}
 
-	// I guess this would be the place to add other ports if a port building
-	// is attached to this flag
-	// Or maybe other hosts of a carrier pigeon service, or a wormhole connection
-	// point or whatever ;)
+	if (m_building && m_building->descr().get_isport()) {
+		Warehouse * wh = static_cast<Warehouse *>(m_building);
+		if (PortDock * pd = wh->get_portdock()) {
+			pd->add_neighbours(neighbours);
+		}
+	}
 }
 
 /**
@@ -740,7 +747,7 @@ void Flag::add_flag_job
 
 	j.request =
 		new Request
-			(*this, workerware, Flag::flag_job_request_callback, Request::WORKER);
+			(*this, workerware, Flag::flag_job_request_callback, wwWORKER);
 	j.program = programname;
 
 	m_flag_jobs.push_back(j);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -21,10 +21,10 @@
 #define UI_MESSAGEBOX_H
 
 #include "align.h"
-#include "m_signal.h"
 #include "window.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/signal.hpp>
 
 namespace UI {
 
@@ -61,9 +61,9 @@ struct WLMessageBox : public Window {
 		 MB_Type);
 	~WLMessageBox();
 
-	Signal ok;
-	Signal yes;
-	Signal no;
+	boost::signal<void ()> ok;
+	boost::signal<void ()> yes;
+	boost::signal<void ()> no;
 
 	void set_align(Align);
 

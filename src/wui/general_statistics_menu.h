@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -60,7 +60,7 @@ private:
 	WUIPlot_Area         m_plot;
 	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
-	UI::Callback_Button * m_cbs[MAX_PLAYERS];
+	UI::Button * m_cbs[MAX_PLAYERS];
 	uint32_t             m_ndatasets;
 
 	void clicked_help();

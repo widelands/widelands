@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -26,10 +26,12 @@
 #include "surfaceptr.h"
 #include "wexception.h"
 
+#include <boost/noncopyable.hpp>
+
 /**
  * Interface to a basic surfaces that can be used as destination for drawing.
  */
-struct Surface {
+struct Surface : boost::noncopyable {
 	Surface() {}
 	virtual ~Surface() {}
 
@@ -60,7 +62,7 @@ struct Surface {
 		 int32_t y1,
 		 int32_t x2,
 		 int32_t y2,
-		 RGBColor color)
+		 RGBColor color, uint8_t width = 1)
 	{
 		throw wexception("draw_line() not implemented");
 	}
@@ -76,11 +78,6 @@ struct Surface {
 	virtual void fast_blit(PictureID surface) = 0;
 
 	virtual IPixelAccess & pixelaccess() = 0;
-
-private:
-	// surfaces cannot be copied
-	Surface(const Surface &);
-	Surface & operator= (Surface const &);
 };
 
 #endif

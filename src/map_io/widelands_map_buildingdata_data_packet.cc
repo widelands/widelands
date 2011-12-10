@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,6 +22,7 @@
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "economy/flag.h"
+#include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "logic/editor_game_base.h"
@@ -55,7 +56,7 @@ namespace Widelands {
 #define CURRENT_DISMANTLESITE_PACKET_VERSION    1
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 2
 #define CURRENT_PARTIALLYFB_PACKET_VERSION      1
-#define CURRENT_WAREHOUSE_PACKET_VERSION        5
+#define CURRENT_WAREHOUSE_PACKET_VERSION        6
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
@@ -245,7 +246,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 					(pfb,
 					 Ware_Index::First(),
 					 Partially_Finished_Building::request_builder_callback,
-					 Request::WORKER);
+					 wwWORKER);
 				pfb.m_builder_request->Read(fr, game, mol);
 			} else
 				pfb.m_builder_request = 0;
@@ -346,7 +347,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 			(constructionsite,
 			 Ware_Index::First(),
 			 ConstructionSite::request_builder_callback,
-			 Request::WORKER);
+			 wwWORKER);
 		constructionsite.m_builder_request->Read(fr, game, mol);
 	} else
 		constructionsite.m_builder_request = 0;
@@ -474,7 +475,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						 	(warehouse,
 						 	 Ware_Index::First(),
 						 	 &Warehouse::request_cb,
-						 	 Request::WORKER));
+						 	 wwWORKER));
 					req->Read(fr, game, mol);
 				}
 			}
@@ -620,7 +621,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							 	(warehouse,
 							 	 Ware_Index::First(),
 							 	 &Warehouse::request_cb,
-							 	 Request::WORKER));
+							 	 wwWORKER));
 						pw.requests.back()->Read(fr, game, mol);
 					}
 				}
@@ -628,6 +629,15 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 
 			if (packet_version >= 5)
 				warehouse.m_next_stock_remove_act = fr.Unsigned32();
+
+			if (packet_version >= 6) {
+				if (warehouse.descr().get_isport()) {
+					if (Serial portdock = fr.Unsigned32()) {
+						warehouse.m_portdock = &mol.get<PortDock>(portdock);
+						warehouse.m_portdock->set_economy(warehouse.get_economy());
+					}
+				}
+			}
 
 			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
 				//  Add to map of military influence.
@@ -680,7 +690,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 						(militarysite,
 						 Ware_Index::First(),
 						 MilitarySite::request_soldier_callback,
-						 Request::WORKER);
+						 wwWORKER);
 				militarysite.m_soldier_request->Read(fr, game, mol);
 			}
 
@@ -763,7 +773,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						(productionsite,
 						 Ware_Index::First(),
 						 ProductionSite::request_worker_callback,
-						 Request::WORKER);
+						 wwWORKER);
 				req.Read(fr, game, mol);
 				Ware_Index const worker_index = req.get_index();
 
@@ -979,8 +989,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 statistics_string_length)
 						log
 							("WARNING: productionsite statistics string can be at "
-							 "most %lu characters but a loaded building has the "
-							 "string \"%s\" of length %lu\n",
+							 "most %zu characters but a loaded building has the "
+							 "string \"%s\" of length %zu\n",
 							 sizeof(productionsite.m_statistics_buffer) - 1,
 							 statistics_string, statistics_string_length);
 				}
@@ -997,8 +1007,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 result_string_length)
 						log
 							("WARNING: productionsite result string can be at "
-							 "most %lu characters but a loaded building has the "
-							 "string \"%s\" of length %lu\n",
+							 "most %zu characters but a loaded building has the "
+							 "string \"%s\" of length %zu\n",
 							 sizeof(productionsite.m_result_buffer) - 1,
 							 result_string, result_string_length);
 				}
@@ -1034,7 +1044,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 						(trainingsite,
 						 Ware_Index::First(),
 						 TrainingSite::request_soldier_callback,
-						 Request::WORKER);
+						 wwWORKER);
 				trainingsite.m_soldier_request->Read(fr, game, mol);
 			}
 
@@ -1354,6 +1364,10 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	}
 
 	fw.Unsigned32(warehouse.m_next_stock_remove_act);
+
+	if (warehouse.descr().get_isport()) {
+		fw.Unsigned32(mos.get_object_file_index_or_zero(warehouse.m_portdock));
+	}
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -33,9 +33,7 @@ Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory
 UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 {
 	int32_t const spacing =  5;
-	int32_t const offsx   = spacing;
 	int32_t const offsy   = 30;
-	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
 
 	new UI::Textarea(this, spacing, posy, _("Enter Directory Name: "));
@@ -44,30 +42,31 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	m_edit =
 		new UI::EditBox
 			(this, spacing, posy, get_inner_w() - 2 * spacing, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	m_edit->setText(dirname);
 	m_dirname = dirname;
-	m_edit->changed.set(this, &Main_Menu_Save_Map_Make_Directory::edit_changed);
+	m_edit->changed.connect(boost::bind(&Main_Menu_Save_Map_Make_Directory::edit_changed, this));
 
-	posx = 5;
 	posy = get_inner_h() - 30;
 
 	m_ok_button = new
-		UI::Callback_Button
+		UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 1),
 		 _("OK"),
 		 std::string(),
 		 m_dirname.size());
+	m_ok_button->sigclicked.connect
+		(boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 1));
 
-	new UI::Callback_Button
+	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 0),
 		 _("Cancel"));
+	cancelbtn->sigclicked.connect
+		(boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 0));
 
 	center_to_parent();
 }

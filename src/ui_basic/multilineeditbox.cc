@@ -13,11 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #include "multilineeditbox.h"
+
+#include <boost/bind.hpp>
 
 #include "scrollbar.h"
 #include "constants.h"
@@ -102,7 +104,7 @@ maxbytes(0xffff),
 ww_valid(false),
 owner(o)
 {
-	scrollbar.moved.set(&o, &Multiline_Editbox::scrollpos_changed);
+	scrollbar.moved.connect(boost::bind(&Multiline_Editbox::scrollpos_changed, &o, _1));
 
 	scrollbar.set_pagesize(owner.get_h() - 2 * textstyle.font->height());
 	scrollbar.set_singlestepsize(textstyle.font->height());
@@ -144,7 +146,7 @@ void Multiline_Editbox::set_text(const std::string & text)
 	d->update();
 	d->scroll_cursor_into_view();
 
-	changed.call();
+	changed();
 }
 
 /**
@@ -254,7 +256,7 @@ void Multiline_Editbox::insert(SDL_keysym const code)
 
 	if (d->text.size() + utf8.size() <= d->maxbytes) {
 		d->insert(d->cursor_pos, utf8);
-		changed.call();
+		changed();
 	}
 }
 
@@ -271,14 +273,14 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_DELETE:
 			if (d->cursor_pos < d->text.size()) {
 				d->erase_bytes(d->cursor_pos, d->next_char(d->cursor_pos));
-				changed.call();
+				changed();
 			}
 			break;
 
 		case SDLK_BACKSPACE:
 			if (d->cursor_pos > 0) {
 				d->erase_bytes(d->prev_char(d->cursor_pos), d->cursor_pos);
-				changed.call();
+				changed();
 			}
 			break;
 
@@ -421,7 +423,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			d->insert(d->cursor_pos, "\n");
-			changed.call();
+			changed();
 			break;
 
 		default:

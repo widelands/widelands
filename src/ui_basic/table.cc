@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -47,6 +47,7 @@ Table<void *>::Table
 	 const bool descending)
 :
 	Panel             (parent, x, y, w, h),
+	m_total_width     (0),
 	m_max_pic_width   (0),
 	m_fontname        (UI_FONT_NAME),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
@@ -58,7 +59,6 @@ Table<void *>::Table
 	m_last_click_time (-10000),
 	m_last_selection  (no_selection_index()),
 	m_sort_column     (0),
-	m_total_width     (0),
 	m_sort_descending (descending)
 {
 	set_think(false);
@@ -97,12 +97,13 @@ void Table<void *>::add_column
 		c.btn = 0;
 		if (title.size()) {
 			c.btn =
-				new Callback_Button
+				new Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
 					 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-					 boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()),
 					 title, "", true, false);
+			c.btn->sigclicked.connect
+				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
 			c.btn->set_font(Font::get(m_fontname, m_fontsize));
 		}
 		c.width = width;
@@ -128,7 +129,7 @@ void Table<void *>::add_column
 				 get_x() + get_w() - 24, get_y() + m_headerheight,
 				 24,                     get_h() - m_headerheight,
 				 false);
-		m_scrollbar->moved.set(this, &Table::set_scrollpos);
+		m_scrollbar->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		m_scrollbar->set_steps(1);
 		uint32_t const lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
 		m_scrollbar->set_singlestepsize(lineheight);
@@ -146,12 +147,13 @@ void Table<void *>::set_column_title
 		for (uint8_t i = 0; i < col; ++i)
 			complete_width += m_columns.at(i).width;
 		column.btn =
-			new Callback_Button
+			new Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
 				 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-				 boost::bind(&Table::header_button_clicked, boost::ref(*this), col),
 				 title, "", true, false);
+		column.btn->sigclicked.connect
+			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
 		column.btn->set_font(Font::get(m_fontname, m_fontsize));
 	} else if (column.btn and title.empty()) { //  had title before, not now
 		delete column.btn;
@@ -365,7 +367,7 @@ bool Table<void *>::handle_mousepress
 			 and
 			 m_last_selection == m_selection
 			 and m_selection != no_selection_index())
-			double_clicked.call(m_selection);
+			double_clicked(m_selection);
 
 		return true;
 	}
@@ -390,7 +392,7 @@ void Table<void *>::select(const uint32_t i)
 
 	m_selection = i;
 
-	selected.call(m_selection);
+	selected(m_selection);
 	update(0, 0, get_eff_w(), get_h());
 }
 

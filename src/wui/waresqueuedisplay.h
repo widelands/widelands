@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -71,8 +71,8 @@ private:
 	Widelands::Building   & m_building;
 	Widelands::WaresQueue * m_queue;
 	UI::Radiogroup        * m_priority_radiogroup;
-	UI::Callback_Button   * m_increase_max_fill;
-	UI::Callback_Button   * m_decrease_max_fill;
+	UI::Button   * m_increase_max_fill;
+	UI::Button   * m_decrease_max_fill;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
 	PictureID        m_icon;            //< Index to ware's picture

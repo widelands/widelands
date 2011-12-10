@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,6 +22,7 @@
 
 #include "supply.h"
 #include "logic/warelist.h"
+#include "logic/wareworker.h"
 
 namespace Widelands {
 
@@ -55,7 +56,7 @@ struct WarehouseSupply : public Supply {
 	virtual PlayerImmovable * get_position(Game &);
 	virtual bool is_active() const throw ();
 	virtual bool has_storage() const throw ();
-	virtual void get_ware_type(bool & isworker, Ware_Index & ware) const;
+	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
 
 	virtual void send_to_storage(Game &, Warehouse * wh);
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;

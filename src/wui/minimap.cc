@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -93,8 +93,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	m_ibase.egbase().map().normalize_coords(c);
 
-	ref_cast<MiniMap, UI::Panel>(*get_parent()).warpview.call
-		(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
+	ref_cast<MiniMap, UI::Panel>(*get_parent()).warpview(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
 
 	return true;
 }
@@ -143,44 +142,45 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 		 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"),
-		 boost::bind(&MiniMap::toggle, boost::ref(*this), Terrn),
 		 _("Terrain")),
 	button_owner
 		(this, "owner",
 		 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_owner.png"),
-		 boost::bind(&MiniMap::toggle, boost::ref(*this), Owner),
 		 _("Owner")),
 	button_flags
 		(this, "flags",
 		 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_flags.png"),
-		 boost::bind(&MiniMap::toggle, boost::ref(*this), Flags),
 		 _("Flags")),
 	button_roads
 		(this, "roads",
 		 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_roads.png"),
-		 boost::bind(&MiniMap::toggle, boost::ref(*this), Roads),
 		 _("Roads")),
 	button_bldns
 		(this, "buildings",
 		 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
-		 boost::bind(&MiniMap::toggle, boost::ref(*this), Bldns),
 		 _("Buildings")),
 	button_zoom
 		(this, "zoom",
 		 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/button_zoom.png"),
-		 boost::bind(&MiniMap::toggle, boost::ref(*this), Zoom2),
 		 _("Zoom"))
 {
+	button_terrn.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Terrn));
+	button_owner.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Owner));
+	button_flags.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Flags));
+	button_roads.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Roads));
+	button_bldns.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Bldns));
+	button_zoom.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Zoom2));
+
 	set_cache(false);
 
 	resize();

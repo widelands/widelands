@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -97,7 +97,7 @@ void WaresQueue::update() {
 					(m_owner,
 					 m_ware,
 					 WaresQueue::request_callback,
-					 Request::WARE);
+					 wwWARE);
 
 		m_request->set_count(m_max_fill - m_filled);
 		m_request->set_required_interval(m_consume_interval);
@@ -194,10 +194,10 @@ void WaresQueue::set_max_size(const uint32_t size) throw ()
  * but if there are more wares than that in the queue, they will not get
  * lost (the building should drop them).
  */
-void WaresQueue::set_max_fill(int32_t size) throw ()
+void WaresQueue::set_max_fill(uint32_t size) throw ()
 {
-	if (size < 0) size = 0;
-	if (size > m_max_size) size = m_max_size;
+	if (size > m_max_size)
+		size = m_max_size;
 
 	m_max_fill = size;
 
@@ -276,7 +276,7 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 						(m_owner,                      //  FIXME
 						 Ware_Index::First(),          //  FIXME
 						 WaresQueue::request_callback, //  FIXME
-						 Request::WORKER);             //  FIXME
+						 wwWORKER);             //  FIXME
 				m_request->Read(fr, game, mol);      //  FIXME
 			} else
 				m_request = 0;

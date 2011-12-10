@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -41,10 +41,10 @@ private:
 	uint32_t                                            m_fs;
 	std::string                                         m_fn;
 	UI::Textarea                                        title;
-	UI::Callback_Button                             new_game;
-	UI::Callback_Button                             campaign;
-	UI::Callback_Button                             load_game;
-	UI::Callback_Button                             back;
+	UI::Button                             new_game;
+	UI::Button                             campaign;
+	UI::Button                             load_game;
+	UI::Button                             back;
 };
 
 #endif

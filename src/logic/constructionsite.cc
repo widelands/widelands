@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -24,7 +24,6 @@
 #include "upcast.h"
 #include "wexception.h"
 
-#include "ui_basic/object.h" //only needed for i18n function _()
 #include "graphic/animation.h"
 #include "economy/wares_queue.h"
 #include "game.h"

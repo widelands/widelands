@@ -17,7 +17,7 @@ return {
       plr:allow_workers("all")
    end
 
-   plr:forbid_buildings{"shipyard"}
+   plr:forbid_buildings{"shipyard", "port"}
 
    local h = plr:place_building("castle", sf, false, true)
    h:set_soldiers{[{0,0,0,0}] = 12}

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -43,7 +43,7 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 		 yoffset,
 		 get_inner_w() - space_at_right - xline_length,
 		 yoffset,
-		 ZERO_LINE_COLOR);
+		 ZERO_LINE_COLOR, 2);
 
 	// How many do we take together when relative ploting
 	const int32_t how_many = calc_how_many(time_in_ms_);

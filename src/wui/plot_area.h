@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -25,6 +25,7 @@
 
 #include "rgbcolor.h"
 
+#include <boost/bind.hpp>
 #include <vector>
 
 /*
@@ -79,7 +80,7 @@ struct WUIPlot_Area : public UI::Panel {
 			return m_time;
 	};
 	void set_sample_rate(uint32_t id); // in milliseconds
-	
+
 	int32_t get_game_time_id();
 
 	void register_plot_data
@@ -87,6 +88,8 @@ struct WUIPlot_Area : public UI::Panel {
 	void show_plot(uint32_t id, bool t);
 
 	void set_plotmode(int32_t id) {m_plotmode = id;}
+
+	void set_plotcolor(uint32_t id, RGBColor color);
 
 	std::vector<std::string> get_labels();
 
@@ -120,6 +123,10 @@ protected:
 	int32_t                 m_plotmode;
 
 private:
+	float scale_value
+		(float const yline_length, uint32_t const highest_scale,
+		 int32_t const value);
+
 	uint32_t get_game_time();
 	uint32_t get_plot_time();
 	void calc_game_time_id();
@@ -154,7 +161,7 @@ struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
 	  m_plot_area(plot_area),
 	  m_last_game_time_id(plot_area.get_game_time_id())
 	{
-		changedto->set(&plot_area, &WUIPlot_Area::set_time_id);
+		changedto.connect(boost::bind(&WUIPlot_Area::set_time_id, &plot_area, _1));
 	}
 
 protected:

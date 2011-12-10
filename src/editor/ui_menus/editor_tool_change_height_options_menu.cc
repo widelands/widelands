@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -50,7 +50,6 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, boost::ref(*this)),
 		 std::string(),
 		 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
 	m_change_by_decrease
@@ -59,7 +58,6 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, boost::ref(*this)),
 		 std::string(),
 		 1 < increase_tool.get_change_by()),
 	m_change_by_value
@@ -86,7 +84,6 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, boost::ref(*this)),
 		 std::string(),
 		 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
 	m_set_to_decrease
@@ -94,7 +91,6 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, boost::ref(*this)),
 		 std::string(),
 		 0 < increase_tool.set_tool().get_interval().min),
 	m_set_to_value
@@ -103,6 +99,17 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 		 m_change_by_value.get_w(), height,
 		 UI::Align_BottomCenter)
 {
+	m_change_by_increase.sigclicked.connect
+		(boost::bind
+		 (&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, boost::ref(*this)));
+	m_change_by_decrease.sigclicked.connect
+		(boost::bind
+		 (&Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, boost::ref(*this)));
+	m_set_to_increase.sigclicked.connect
+		(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, boost::ref(*this)));
+	m_set_to_decrease.sigclicked.connect
+		(boost::bind(&Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, boost::ref(*this)));
+
 	m_change_by_increase.set_repeating(true);
 	m_change_by_decrease.set_repeating(true);
 	m_set_to_increase   .set_repeating(true);

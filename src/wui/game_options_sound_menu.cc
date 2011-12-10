@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 #include "game_options_sound_menu.h"
@@ -81,14 +81,14 @@ ingame_sound_volume
 	}
 
 	//  ready signals
-	ingame_music.changedto.set
-		(this, &GameOptionsSoundMenu::changed_ingame_music);
-	ingame_sound.changedto.set
-		(this, &GameOptionsSoundMenu::changed_ingame_sound);
-	ingame_music_volume.changedto.set
-		(this, &GameOptionsSoundMenu::music_volume_changed);
-	ingame_sound_volume.changedto.set
-		(this, &GameOptionsSoundMenu::sound_volume_changed);
+	ingame_music.changedto.connect
+		(boost::bind(&GameOptionsSoundMenu::changed_ingame_music, this, _1));
+	ingame_sound.changedto.connect
+		(boost::bind(&GameOptionsSoundMenu::changed_ingame_sound, this, _1));
+	ingame_music_volume.changedto.connect
+		(boost::bind(&GameOptionsSoundMenu::music_volume_changed, this, _1));
+	ingame_sound_volume.changedto.connect
+		(boost::bind(&GameOptionsSoundMenu::sound_volume_changed, this, _1));
 
 	uint32_t boxes_width =
 		STATEBOX_WIDTH + hspacing() +

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -23,6 +23,7 @@
 #include "attackable.h"
 #include "building.h"
 #include "soldiercontrol.h"
+#include "wareworker.h"
 
 struct Interactive_Player;
 struct Profile;
@@ -30,6 +31,7 @@ struct Profile;
 namespace Widelands {
 
 struct Editor_Game_Base;
+struct PortDock;
 struct Request;
 struct Requirements;
 class Soldier;
@@ -59,6 +61,7 @@ private:
 
 
 class Warehouse : public Building, public Attackable, public SoldierControl {
+	friend struct PortDock;
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
@@ -118,6 +121,7 @@ public:
 	/// * Sees the area (since a warehouse is considered to be always occupied).
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
+	/// * Sets up @ref PortDock for ports
 	virtual void init(Editor_Game_Base &);
 
 	virtual void cleanup(Editor_Game_Base &);
@@ -184,9 +188,13 @@ public:
 
 	StockPolicy get_ware_policy(Ware_Index ware) const;
 	StockPolicy get_worker_policy(Ware_Index ware) const;
-	StockPolicy get_stock_policy(bool isworker, Ware_Index ware) const;
+	StockPolicy get_stock_policy(WareWorker waretype, Ware_Index wareindex) const;
 	void set_ware_policy(Ware_Index ware, StockPolicy policy);
 	void set_worker_policy(Ware_Index ware, StockPolicy policy);
+
+	PortDock * get_portdock() const {return m_portdock;}
+
+	virtual void log_general_info(Editor_Game_Base const &);
 
 protected:
 
@@ -195,6 +203,8 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry);
 
 private:
+	void init_portdock(Editor_Game_Base & egbase);
+
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means
 	 * requesting all the necessary wares, if multiple different wares types are
@@ -235,6 +245,7 @@ private:
 	uint32_t m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
+	PortDock * m_portdock;
 };
 
 }

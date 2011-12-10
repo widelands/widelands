@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -25,6 +25,7 @@
 #include "scrollbar.h"
 
 #include <algorithm>
+#include <boost/bind.hpp>
 
 namespace UI {
 /**
@@ -177,7 +178,7 @@ void Box::layout()
 			m_scrollbar = new Scrollbar
 					(this, sb_x, sb_y, sb_w,
 					 sb_h, m_orientation == Horizontal);
-			m_scrollbar->moved.set(this, &Box::scrollbar_moved);
+			m_scrollbar->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
 		} else {
 			m_scrollbar->set_pos(Point(sb_x, sb_y));
 			m_scrollbar->set_size(sb_w, sb_h);
@@ -251,7 +252,11 @@ void Box::scrollbar_moved(int32_t)
 
 /**
  * Add a new panel to be controlled by this box
-*/
+ *
+ * @param fullsize when true, @p panel will be extended to cover the entire width (or height)
+ * of the box for horizontal (vertical) panels. If false, then @p panel may end up smaller;
+ * in that case, it will be aligned according to @p align
+ */
 void Box::add(Panel * const panel, uint32_t const align, bool fullsize)
 {
 	Item it;

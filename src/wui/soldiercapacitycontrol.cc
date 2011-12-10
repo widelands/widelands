@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -49,8 +49,8 @@ private:
 	Interactive_GameBase & m_igb;
 	Widelands::Building & m_building;
 
-	UI::Callback_Button m_decrease;
-	UI::Callback_Button m_increase;
+	UI::Button m_decrease;
+	UI::Button m_increase;
 	UI::Textarea m_value;
 };
 
@@ -64,15 +64,16 @@ m_building(building),
 m_decrease
 	(this, "increase", 0, 0, 24, 24,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_down_train),
-	 boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this))),
+	 g_gr->get_picture(PicMod_Game, pic_down_train)),
 m_increase
 	(this, "decrease", 0, 0, 24, 24,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_up_train),
-	 boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this))),
+	 g_gr->get_picture(PicMod_Game, pic_up_train)),
 m_value(this, "", UI::Align_Center)
 {
+	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
+	m_increase.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
+
 	add(new UI::Textarea(this, _("Capacity")), AlignCenter);
 	add(&m_decrease, AlignCenter);
 	add(&m_value, AlignCenter);

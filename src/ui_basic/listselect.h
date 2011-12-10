@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -21,10 +21,11 @@
 #ifndef UI_LISTSELECT_H
 #define UI_LISTSELECT_H
 
+#include <boost/signal.hpp>
+
 #include "align.h"
 #include "panel.h"
 #include "scrollbar.h"
-#include "m_signal.h"
 
 #include "compile_assert.h"
 
@@ -51,9 +52,9 @@ struct BaseListselect : public Panel {
 		 bool show_check = false);
 	~BaseListselect();
 
-	Signal1<uint32_t> selected;
-	Signal1<uint32_t> clicked;
-	Signal1<uint32_t> double_clicked;
+	boost::signal<void (uint32_t)> selected;
+	boost::signal<void (uint32_t)> clicked;
+	boost::signal<void (uint32_t)> double_clicked;
 
 	void clear();
 	void sort

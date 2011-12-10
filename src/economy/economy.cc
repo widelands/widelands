@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -25,6 +25,7 @@
 #include "flag.h"
 #include "route.h"
 #include "cmd_call_economy_balance.h"
+#include "routeastar.h"
 #include "router.h"
 
 #include "logic/game.h"
@@ -118,39 +119,10 @@ void Economy::check_merge(Flag & f1, Flag & f2)
 	}
 }
 
-/// If the two flags can no longer reach each other (pathfinding!), the economy
-/// gets split.
-///
-/// Should we create the new economy starting at f1 or f2? Ideally, we'd split
-/// off in a way that the new economy will be relatively small.
-///
-/// Unfortunately, there's no easy way to tell in advance which of the two
-/// resulting economies will be smaller (the problem is even NP-complete), so
-/// we use a heuristic.
-/// NOTE There is a way; parallel counting. If for example one has size 100 and
-/// NOTE the other has size 1, we start counting (to 1) in the first. Then we
-/// NOTE switch to the second and count (to 1) there. Then we switch to the
-/// NOTE first and count (to 2) there. Then we switch to the second and have
-/// NOTE nothing more to count. We are done and know that the second is not
-/// NOTE larger than the first.
-/// NOTE
-/// NOTE We have not done more than n * (s + 1) counting operations, where n is
-/// NOTE the number of parallel entities (2 in this example) and s is the size
-/// NOTE of the smallest entity (1 in this example). So instead of risking to
-/// NOTE make a bad guess and change 100 entities, we count 4 and change 1.
-/// NOTE                                                                --sigra
-///
-/// Using f2 is just a guess, but if anything f2 is probably best: it will be
-/// the end point of a road. Since roads are typically built from the center of
-/// a country outwards, and since splits are more likely to happen outwards,
-/// the economy at the end point is probably smaller in average. It's all just
-/// guesswork though ;)
-/// NOTE Many roads are built when a new building has just been placed. For
-/// NOTE those cases, the guess is bad because the user typically builds from
-/// NOTE the new building's flag to some existing flag (at the headquarter or
-/// NOTE somewhere in his larger road network). This is also what the user
-/// NOTE interface makes the player do when it enters roadbuilding mode after
-/// NOTE placing a flag that is not connected with roads.               --sigra
+/**
+ * Check whether the given flags can still reach each other (pathfinding!).
+ * If not, the economy is split in two.
+ */
 void Economy::check_split(Flag & f1, Flag & f2)
 {
 	assert(&f1 != &f2);
@@ -161,13 +133,41 @@ void Economy::check_split(Flag & f1, Flag & f2)
 	if (not e)
 		return;
 
-	if (not e->find_route(f1, f2, 0, false))
-		e->_split(f2);
+	// Start an A-star search from f1 towards f2.
+	// Keep track of which flags are reachable from f1,
+	// so that we do not have to re-scan everything in case
+	// the economy really does split
+	Map & map = e->owner().egbase().map();
+	RouteAStar<AStarEstimator> astar(*e->m_router, wwWORKER, AStarEstimator(map, f2));
+	astar.push(f1);
+
+	std::set<OPtr<Flag> > reachable;
+	while (RoutingNode * current = astar.step()) {
+		Flag * curflag = static_cast<Flag *>(current);
+		if (curflag == &f2)
+			return;
+
+		reachable.insert(curflag);
+	}
+
+	// When we get to this point, a split really did occur
+	// Attempt to split off only a reasonably small part of the economy
+	// for performance reasons
+	if (reachable.size() <= e->m_flags.size() * 3 / 5) {
+		e->_split(reachable);
+	} else {
+		std::set<OPtr<Flag> > others;
+		container_iterate_const(Flags, e->m_flags, it) {
+			if (reachable.count(*it.current) == 0)
+				others.insert(*it.current);
+		}
+		e->_split(others);
+	}
 }
 
 
 /**
- * Calcaluate a route between two flags.
+ * Calculate a route between two flags.
  *
  * This functionality has been moved to Router(). This is currently
  * merely a delegator.
@@ -175,7 +175,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 bool Economy::find_route
 	(Flag & start, Flag & end,
 	 Route * const route,
-	 bool    const wait,
+	 WareWorker const type,
 	 int32_t const cost_cutoff)
 {
 	assert(start.get_economy() == this);
@@ -184,8 +184,12 @@ bool Economy::find_route
 	Map & map = owner().egbase().map();
 
 	return
-		m_router->find_route(start, end, route, wait, cost_cutoff, map);
+		m_router->find_route(start, end, route, type, cost_cutoff, map);
 }
+
+struct ZeroEstimator {
+	int32_t operator()(RoutingNode & node) const {return 0;}
+};
 
 /**
  * Find the warehouse closest to the given starting flag.
@@ -194,33 +198,23 @@ bool Economy::find_route
  * a route is also computed.
  *
  * \param start starting flag
- * \param is_ware whether to path-find as if the path were for a ware
+ * \param type whether to path-find as if the path were for a ware
  * \param route if non-null, fill in a route to the warehouse
  * \param cost_cutoff if positive, find paths of at most
  * that length (in milliseconds)
  */
 Warehouse * Economy::find_closest_warehouse
-	(Flag & start, bool is_ware, Route * route, uint32_t cost_cutoff,
+	(Flag & start, WareWorker type, Route * route, uint32_t cost_cutoff,
 	 const Economy::WarehouseAcceptFn & acceptfn)
 {
 	if (!warehouses().size())
 		return 0;
 
-	// Perform a simple Dijkstra
-	// FIXME Find a good way to share code with Router::find_route
-	uint32_t mpf_cycle = m_router->assign_cycle();
-	RoutingNode::Queue open;
+	// A-star with zero estimator = Dijkstra
+	RouteAStar<ZeroEstimator> astar(*m_router, type);
+	astar.push(start);
 
-	start.mpf_cycle = mpf_cycle;
-	start.mpf_realcost = 0;
-	start.mpf_backlink = 0;
-	start.mpf_estimate = 0;
-	open.push(&start);
-
-	while (!open.empty()) {
-		RoutingNode * current = open.top();
-		open.pop(current);
-
+	while (RoutingNode * current = astar.step()) {
 		if
 			(cost_cutoff && current->mpf_realcost >
 			 static_cast<int32_t>(cost_cutoff))
@@ -229,54 +223,9 @@ Warehouse * Economy::find_closest_warehouse
 		Flag & flag = current->base_flag();
 		if (upcast(Warehouse, warehouse, flag.get_building())) {
 			if (!acceptfn || acceptfn(*warehouse)) {
-				if (route) {
-					route->init(current->mpf_realcost);
-
-					while (current) {
-						route->insert_as_first(current);
-						current = current->mpf_backlink;
-					}
-				}
-
+				if (route)
+					astar.routeto(flag, *route);
 				return warehouse;
-			}
-		}
-
-		// Loop through all neighbouring nodes
-		RoutingNodeNeighbours neighbours;
-
-		current->get_neighbours(neighbours);
-
-		for (uint32_t i = 0; i < neighbours.size(); ++i) {
-			RoutingNode & neighbour = *neighbours[i].get_neighbour();
-			int32_t cost;
-
-			// We have already found the best path to this neighbour,
-			// no need to visit it again.
-			if
-				(neighbour.mpf_cycle == mpf_cycle &&
-				 !neighbour.cookie().is_active())
-				continue;
-
-			cost = current->mpf_realcost + neighbours[i].get_cost();
-			if (is_ware) {
-				cost +=
-					(current->get_waitcost() + neighbour.get_waitcost())
-					* neighbours[i].get_cost() / 2;
-			}
-
-			if (neighbour.mpf_cycle != mpf_cycle) {
-				// add to open list
-				neighbour.mpf_cycle = mpf_cycle;
-				neighbour.mpf_realcost = cost;
-				neighbour.mpf_estimate = 0;
-				neighbour.mpf_backlink = current;
-				open.push(&neighbour);
-			} else if (cost < neighbour.mpf_realcost) {
-				// found a better path to a field that's already Open
-				neighbour.mpf_realcost = cost;
-				neighbour.mpf_backlink = current;
-				open.decrease_key(&neighbour);
 			}
 		}
 	}
@@ -575,7 +524,7 @@ void Economy::_merge(Economy & e)
 		 not m_optionswindow_registry.window)
 	{
 		m_optionswindow_registry.x = e.m_optionswindow_registry.x;
-		m_optionswindow_registry.x = e.m_optionswindow_registry.x;
+		m_optionswindow_registry.y = e.m_optionswindow_registry.y;
 		show_options_window();
 	}
 
@@ -600,10 +549,13 @@ void Economy::_merge(Economy & e)
 	delete &e;
 }
 
-/// Flag initial_flag and all its direct and indirect neighbours are put into a
-/// new economy.
-void Economy::_split(Flag & initial_flag)
+/**
+ * Split the given set of flags off into a new economy.
+ */
+void Economy::_split(const std::set<OPtr<Flag> > & flags)
 {
+	assert(!flags.empty());
+
 	Economy & e = *new Economy(m_owner);
 
 	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares  ().value(); i;) {
@@ -618,34 +570,10 @@ void Economy::_split(Flag & initial_flag)
 	m_rebuilding = true;
 	e.m_rebuilding = true;
 
-	// Use a vector instead of a set to ensure parallel simulation
-	std::vector<Flag *> open;
-
-	open.push_back(&initial_flag);
-	while (open.size()) {
-		Flag & flag = **open.rbegin();
-		open.pop_back();
-
-		if (flag.get_economy() != this)
-			continue;
-
-		// move this flag to the new economy
+	container_iterate_const(std::set<OPtr<Flag> >, flags, it) {
+		Flag & flag = *it.current->get(owner().egbase());
 		remove_flag(flag);
 		e.add_flag(flag);
-
-		//  check all neighbours; if they aren't in the new economy yet, add
-		//  them to the list (note: roads and buildings are reassigned via
-		//  Flag::set_economy)
-		RoutingNodeNeighbours neighbours;
-		flag.get_neighbours(neighbours);
-
-		for (uint32_t i = 0; i < neighbours.size(); ++i) {
-			/// \todo the next line shouldn't need any casts at all
-			Flag & n = *dynamic_cast<Flag *>(neighbours[i].get_neighbour());
-
-			if (n.get_economy() == this)
-				open.push_back(&n);
-		}
 	}
 
 	// Fix Supply/Request after rebuilding
@@ -702,7 +630,7 @@ Supply * Economy::_find_best_supply
 			 	(supp.get_position(game)->base_flag(),
 			 	 target_flag,
 			 	 route,
-			 	 false,
+			 	 req.get_type(),
 			 	 best_cost))
 		{
 			if (!best_route)
@@ -724,9 +652,6 @@ Supply * Economy::_find_best_supply
 }
 
 struct RequestSupplyPair {
-	bool is_item;
-	bool is_worker;
-	Ware_Index ware;
 	TrackPtr<Request> request;
 	TrackPtr<Supply>  supply;
 	int32_t priority;
@@ -808,18 +733,6 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 
 		// Otherwise, consider this request/supply pair for queueing
 		RequestSupplyPair rsp;
-
-		rsp.is_item = false;
-		rsp.is_worker = false;
-
-		switch (req.get_type()) {
-		case Request::WARE:    rsp.is_item    = true; break;
-		case Request::WORKER:  rsp.is_worker  = true; break;
-		default:
-			assert(false);
-		}
-
-		rsp.ware = req.get_index();
 		rsp.request  = &req;
 		rsp.supply = supp;
 		rsp.priority = priority;
@@ -879,7 +792,7 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	container_iterate_const(RequestList, m_requests, j) {
 		const Request & req = **j.current;
 
-		if (req.get_type() != Request::WORKER || req.get_index() != index)
+		if (req.get_type() != wwWORKER || req.get_index() != index)
 			continue;
 
 		// need to check for each request separately, because esp. soldier
@@ -995,10 +908,10 @@ void Economy::_create_requested_workers(Game & game)
  * Helper function for \ref _handle_active_supplies
  */
 static bool accept_warehouse_if_policy
-	(Warehouse & wh, bool isworker,
+	(Warehouse & wh, WareWorker type,
 	 Ware_Index ware, Warehouse::StockPolicy policy)
 {
-	return wh.get_stock_policy(isworker, ware) == policy;
+	return wh.get_stock_policy(type, ware) == policy;
 }
 
 /**
@@ -1018,15 +931,15 @@ void Economy::_handle_active_supplies(Game & game)
 		if (supply.has_storage())
 			continue;
 
-		bool isworker;
+		WareWorker type;
 		Ware_Index ware;
-		supply.get_ware_type(isworker, ware);
+		supply.get_ware_type(type, ware);
 
 		bool haveprefer = false;
 		bool havenormal = false;
 		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
 			Warehouse * wh = m_warehouses[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(isworker, ware);
+			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
 			if (policy == Warehouse::SP_Prefer) {
 				haveprefer = true;
 				break;
@@ -1034,18 +947,18 @@ void Economy::_handle_active_supplies(Game & game)
 			if (policy == Warehouse::SP_Normal)
 				havenormal = true;
 		}
-		if (!havenormal && !haveprefer && !isworker)
+		if (!havenormal && !haveprefer && type == wwWARE)
 			continue;
 
 		Warehouse * wh = find_closest_warehouse
-			(supply.get_position(game)->base_flag(), !isworker, 0, 0,
+			(supply.get_position(game)->base_flag(), type, 0, 0,
 			 (!haveprefer && !havenormal)
 			 ?
 			 WarehouseAcceptFn()
 			 :
 			 boost::bind
 				(&accept_warehouse_if_policy,
-				 _1, isworker, ware,
+				 _1, type, ware,
 				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
 
 		if (!wh) {

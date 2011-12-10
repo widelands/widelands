@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -50,8 +50,6 @@ Statebox::Statebox
 	} else
 		m_pic_graphics =
 			g_gr->get_picture(PicMod_UI, "pics/checkbox_light_new.png");
-
-	m_id = -1;
 }
 
 
@@ -93,9 +91,8 @@ void Statebox::set_enabled(bool const enabled)
 void Statebox::set_state(bool const on) {
 	if (on xor ((m_flags & Is_Checked) > 1)) {
 		set_flags(Is_Checked, on);
-		changed    .call        ();
-		changedto  .call      (on);
-		changedtoid.call(m_id, on);
+		changed();
+		changedto(on);
 		update();
 	}
 }
@@ -168,7 +165,7 @@ bool Statebox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
  */
 void Checkbox::clicked()
 {
-	clickedto.call(!get_state());
+	clickedto(!get_state());
 	set_state(!get_state());
 	play_click();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,7 +22,6 @@
 
 #include "graphic/picture_id.h"
 #include "point.h"
-#include "m_signal.h"
 
 #include "checkbox.h"
 
@@ -59,9 +58,9 @@ struct Radiogroup {
 	Radiogroup();
 	~Radiogroup();
 
-	Signal changed;
-	Signal1<int32_t> changedto;
-	Signal clicked; //  clicked without things changed
+	boost::signal<void ()> changed;
+	boost::signal<void (int32_t)> changedto;
+	boost::signal<void ()> clicked; //  clicked without things changed
 
 	int32_t add_button
 		(Panel * parent, Point, PictureID picid, char const * tooltip = 0, Radiobutton ** = NULL);

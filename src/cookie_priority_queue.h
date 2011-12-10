@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -25,6 +25,8 @@
 #include <limits>
 #include <vector>
 
+#include <boost/noncopyable.hpp>
+
 template<typename _Type>
 struct default_cookie_accessor;
 
@@ -34,7 +36,7 @@ struct cookie_priority_queue_base {
 	typedef std::vector<type *> container;
 	typedef typename container::size_type size_type;
 
-	struct cookie {
+	struct cookie : boost::noncopyable {
 		cookie() : pos(bad_pos()) {}
 		~cookie() {}
 
@@ -45,10 +47,6 @@ struct cookie_priority_queue_base {
 		friend struct cookie_priority_queue_base<_Type>;
 
 		size_type pos;
-
-		// No copying!
-		cookie(const cookie & other);
-		cookie & operator= (const cookie & other);
 	};
 
 protected:

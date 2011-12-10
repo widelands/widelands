@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -56,13 +56,14 @@ struct MultiPlayerClientGroup : public UI::Box {
 		add(name, UI::Box::AlignCenter);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) { // Our Client
-			type = new UI::Callback_Button
+			type = new UI::Button
 				(this, "client_type",
 				 0, 0, h, h,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-				 boost::bind
-					 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)),
 				 std::string(), std::string(), true, false);
+			type->sigclicked.connect
+				(boost::bind
+					 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)));
 			type->set_font(font);
 			add(type, UI::Box::AlignCenter);
 		} else { // just a shown client
@@ -167,41 +168,45 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		player =
 			new UI::Icon(this, 0, 0, h, h, g_gr->get_picture(PicMod_UI, buf));
 		add(player, UI::Box::AlignCenter);
-		type = new UI::Callback_Button
+		type = new UI::Button
 			(this, "player_type",
 			 0, 0, h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 boost::bind
-				 (&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)),
 			 std::string(), std::string(), true, false);
+		type->sigclicked.connect
+			(boost::bind
+				 (&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
 		type->set_font(font);
 		add(type, UI::Box::AlignCenter);
-		tribe = new UI::Callback_Button
+		tribe = new UI::Button
 			(this, "player_tribe",
 			 0, 0, h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 boost::bind
-				 (&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)),
 			 std::string(), std::string(), true, false);
+		tribe->sigclicked.connect
+			(boost::bind
+				 (&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
 		tribe->set_font(font);
 		add(tribe, UI::Box::AlignCenter);
 		tribe->set_draw_flat_background(true);
-		init = new UI::Callback_Button
+		init = new UI::Button
 			(this, "player_init",
 			 0, 0, w - 4 * h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 boost::bind
-				 (&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)),
 			 std::string(), std::string(), true, false);
+		init->sigclicked.connect
+			(boost::bind
+				 (&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
 		init->set_font(font);
 		add(init, UI::Box::AlignCenter);
-		team = new UI::Callback_Button
+		team = new UI::Button
 			(this, "player_team",
 			 0, 0, h, h,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 boost::bind
-				 (&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)),
 			 std::string(), std::string(), true, false);
+		team->sigclicked.connect
+			(boost::bind
+				 (&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
 		team->set_font(font);
 		add(team, UI::Box::AlignCenter);
 	}

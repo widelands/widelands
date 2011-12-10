@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 #ifndef GL_SURFACE_SCREEN_H
@@ -57,7 +57,7 @@ struct GLSurfaceScreen : Surface, IPixelAccess {
 	virtual void draw_line
 		(int32_t x1, int32_t y1,
 		 int32_t x2, int32_t y2,
-		 RGBColor);
+		 RGBColor, uint8_t width);
 
 	virtual void blit(Point, PictureID, Rect srcrc, Composite cm);
 	virtual void fast_blit(PictureID);

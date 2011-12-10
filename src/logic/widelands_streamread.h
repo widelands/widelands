@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -157,14 +157,14 @@ struct StreamRead : public ::StreamRead {
 	/// Read a Direction from the file. Use this when the result can only be a
 	/// direction.
 	///
-	/// \Throws direction_is_null if the direction is 0.
-	/// \Throws direction_invalid if direction is > 6.
+	/// \throws direction_is_null if the direction is 0.
+	/// \throws direction_invalid if direction is > 6.
 	Direction Direction8();
 
 	/// Read a Direction from the file. Use this when the result can only be a
 	/// direction or 0 (none).
 	///
-	/// \Throws direction_invalid if direction is > 6.
+	/// \throws direction_invalid if direction is > 6.
 	Direction Direction8_allow_null();
 
 	Map_Index Map_Index32(Map_Index max);
@@ -172,8 +172,8 @@ struct StreamRead : public ::StreamRead {
 	/// Read a Coords from the file. Use this when the result can only be a
 	/// coordinate pair referring to a node.
 	///
-	/// \Throws width_exceeded  if extent.w is <= the x coordinate.
-	/// \Throws height_exceeded if extent.h is <= the y coordinate.
+	/// \throws width_exceeded  if extent.w is <= the x coordinate.
+	/// \throws height_exceeded if extent.h is <= the y coordinate.
 	/// Both coordinates are read from the file before checking and possibly
 	/// throwing, so in case such an exception is thrown, it is guaranteed that
 	/// the whole coordinate pair has been read.
@@ -192,60 +192,60 @@ struct StreamRead : public ::StreamRead {
 	/// Read a Player_Number from the file. Use this when the result can only be
 	/// the number of an existing player.
 	///
-	/// \Throws player_nonexistent when the player number is 0 or
+	/// \throws player_nonexistent when the player number is 0 or
 	/// nr_players < the player number.
 	Player_Number Player_Number8              (Player_Number nr_players);
 
 	/// Read a Player_Number from the file. Use this when the result can only be
 	/// the number of an existing player or 0 (neutral).
 	///
-	/// \Throws player_nonexistent when nr_players < the player number.
+	/// \throws player_nonexistent when nr_players < the player number.
 	Player_Number Player_Number8_allow_null(Player_Number nr_players);
 
 	/// Reads a CString and interprets it as the name of a tribe.
 	///
-	/// \Returns a pointer to the tribe description.
+	/// \returns a pointer to the tribe description.
 	///
-	/// \Throws Tribe_Nonexistent if the there is no tribe with that name.
+	/// \throws Tribe_Nonexistent if the there is no tribe with that name.
 	Tribe_Descr     const & Tribe           (Editor_Game_Base const &);
 
 	/// Reads a CString and interprets it as the name of a tribe.
 	///
-	/// \Returns 0 if the name is empty, otherwise a pointer to the tribe
+	/// \returns 0 if the name is empty, otherwise a pointer to the tribe
 	/// description.
 	///
-	/// \Throws Tribe_Nonexistent if the name is not empty and there is no tribe
+	/// \throws Tribe_Nonexistent if the name is not empty and there is no tribe
 	/// with that name.
 	Tribe_Descr     const * Tribe_allow_null(Editor_Game_Base const &);
 
 	/// Reads a CString and interprets t as the name of an immovable type.
 	///
-	/// \Returns a reference to the immovable type description.
+	/// \returns a reference to the immovable type description.
 	///
-	/// \Throws Immovable_Nonexistent if there is no imovable type with that
+	/// \throws Immovable_Nonexistent if there is no imovable type with that
 	/// name in the World.
 	Immovable_Descr const & Immovable_Type  (World            const &);
 
 	/// Reads a CString and interprets t as the name of an immovable type.
 	///
-	/// \Returns a reference to the immovable type description.
+	/// \returns a reference to the immovable type description.
 	///
-	/// \Throws Immovable_Nonexistent if there is no imovable type with that
+	/// \throws Immovable_Nonexistent if there is no imovable type with that
 	/// name in the tribe.
 	Immovable_Descr const & Immovable_Type  (Tribe_Descr      const &);
 
 	/// Reads a CString and interprets t as the name of an immovable type.
 	///
-	/// \Returns a reference to the building type description.
+	/// \returns a reference to the building type description.
 	///
-	/// \Throws Building_Nonexistent if there is no building type with that
+	/// \throws Building_Nonexistent if there is no building type with that
 	/// name in the tribe.
 	Building_Descr  const & Building_Type   (Tribe_Descr      const &);
 
 	/// Calls Tribe(Editor_Game_Base const &) to read a tribe and then reads a
 	/// CString and interprets it as the name of a building type in that tribe.
 	///
-	/// \Returns a reference to the building type description.
+	/// \returns a reference to the building type description.
 	Building_Descr  const & Building_Type   (Editor_Game_Base const &);
 
 	/// Calls Tribe_allow_null(Editor_Game_Base const &). If it returns a tribe,

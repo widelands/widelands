@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -54,7 +54,7 @@
  *     with the jobid can be called and all overlays created in the
  *     job are removed. This is useful for interactive road building.
  */
-#define MAX_OVERLAYS_PER_NODE 5
+#define MAX_OVERLAYS_PER_NODE 6
 #define MAX_OVERLAYS_PER_TRIANGLE 3
 typedef int32_t (*Overlay_Callback_Function)
 	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);

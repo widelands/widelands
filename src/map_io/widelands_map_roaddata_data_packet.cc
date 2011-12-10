@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -57,7 +57,6 @@ throw (_wexception)
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			Map   const &       map        = egbase.map();
-			Extent        const extent     = map.extent       ();
 			Player_Number const nr_players = map.get_nrplayers();
 			for (;;) {
 				if (2 <= packet_version and fr.EndOfFile())
@@ -163,7 +162,7 @@ throw (_wexception)
 							 		(road,
 							 		 Ware_Index::First(),
 							 		 Road::_request_carrier_callback,
-							 		 Request::WORKER))
+							 		 wwWORKER))
 							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 						} else {
 							carrier_request = 0;

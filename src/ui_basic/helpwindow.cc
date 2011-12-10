@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -75,13 +75,13 @@ HelpWindow::HelpWindow
 	set_inner_size(in_width, in_height);
 	set_pos(Point((g_gr->get_xres() - out_width) / 2, (g_gr->get_yres() - out_height) / 2));
 
-	Button * btn = new Callback_Button
+	Button * btn = new Button
 		(this, "ok",
 		 in_width / 3, in_height - but_height * 3 / 2,
 		 in_width / 3, but_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&HelpWindow::pressedOk, boost::ref(*this)),
 		 _("OK"), std::string(), true, false);
+	btn->sigclicked.connect(boost::bind(&HelpWindow::pressedOk, boost::ref(*this)));
 	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
@@ -193,9 +193,11 @@ LuaTextHelpWindow::LuaTextHelpWindow
 {
 	LuaInterface * li = create_LuaInterface();
 
-	{
+	try {
 		boost::shared_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
 		textarea->set_text(t->get_string("text"));
+	} catch (LuaError & err) {
+		textarea->set_text(err.what());
 	}
 
 	delete li;

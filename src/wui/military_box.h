@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -60,7 +60,7 @@ struct MilitaryBox : public UI::Box {
 			 uint32_t            alignment = UI::Box::AlignTop,
 			 std::string const & fontname = UI_FONT_NAME,
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
-		UI::Callback_Button & add_button
+		UI::Button & add_button
 			(UI::Box           & parent,
 			 char const *,
 			 char const *,

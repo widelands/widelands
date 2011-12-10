@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -101,27 +101,6 @@ struct FindBobAlwaysTrue : public FindBob {
 	virtual bool accept(Bob *) const {return true;}
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
-struct FindBobAttribute : public FindBob {
-	FindBobAttribute(uint32_t const attrib) : m_attrib(attrib) {}
-
-	virtual bool accept(Bob *) const;
-
-	uint32_t m_attrib;
-	virtual ~FindBobAttribute() {}  // make gcc shut up
-};
-
-/**
- * Find soldiers which are hostile to the given player (or all soldiers
- * if player is 0).
- */
-struct FindBobEnemySoldier : public FindBob {
-	FindBobEnemySoldier(Player * _player) : player(_player) {}
-
-	virtual bool accept(Bob *) const;
-
-	Player * player;
-};
-
 
 /** class Map
  *
@@ -138,7 +117,7 @@ struct FindBobEnemySoldier : public FindBob {
  * Warning: width and height must be even
  */
 struct Map :
-	public ITransportCostCalculator,
+	ITransportCostCalculator,
 	NoteSender<NoteFieldTransformed>
 {
 	friend struct Editor_Game_Base;
@@ -150,6 +129,7 @@ struct Map :
 	friend class Editor;
 	friend class Main_Menu_New_Map;
 	friend struct MapGenerator;
+	friend struct MapAStarBase;
 
 	enum { // flags for findpath()
 
@@ -375,6 +355,11 @@ struct Map :
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(Coords);
 
+	/// Port space specific functions
+	bool is_port_space(Coords c);
+	void set_port_space(Coords c, bool allowed);
+	std::vector<Coords> get_port_spaces() {return m_port_spaces;}
+
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);
 
@@ -384,7 +369,7 @@ private:
 
 	/// # of players this map supports (!= Game's number of players!)
 	Player_Number m_nrplayers;
-	ScenarioTypes  m_scenario_types; // whether the map is playable as scenario
+	ScenarioTypes m_scenario_types; // whether the map is playable as scenario
 
 	X_Coordinate m_width;
 	Y_Coordinate m_height;
@@ -407,6 +392,8 @@ private:
 	std::vector<std::string> m_scenario_names;
 	std::vector<std::string> m_scenario_ais;
 	std::vector<bool>        m_scenario_closeables;
+
+	std::vector<Coords>        m_port_spaces;
 
 	Manager<Objective>  m_mom;
 
@@ -432,11 +419,8 @@ private:
 		void find_reachable(Area<FCoords>, CheckStep const &, functorT &);
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
-
-	Map & operator= (Map const &);
-	explicit Map    (Map const &);
-
 };
+
 
 /*
 ==============================================================================

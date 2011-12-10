@@ -1,6 +1,5 @@
 /*
- *
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -62,7 +61,7 @@ struct PlayerCommand;
 struct ReplayReader;
 struct ReplayWriter;
 
-struct Game : public Editor_Game_Base {
+struct Game : Editor_Game_Base {
 	struct General_Stats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;
@@ -157,7 +156,7 @@ struct Game : public Editor_Game_Base {
 	void send_player_set_ware_priority
 		(PlayerImmovable &, int32_t type, Ware_Index index, int32_t prio);
 	void send_player_set_ware_max_fill
-		(PlayerImmovable &, Ware_Index index, int32_t);
+		(PlayerImmovable &, Ware_Index index, uint32_t);
 	void send_player_change_training_options(TrainingSite &, int32_t, int32_t);
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
@@ -245,11 +244,6 @@ private:
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_string;
-
-private:
-	// no copying
-	Game(const Game &);
-	Game & operator= (const Game &);
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -23,6 +23,8 @@
 #include "ui_basic/unique_window.h"
 #include "plot_area.h"
 #include "differential_plot_area.h"
+
+#include <vector>
 
 struct Interactive_Player;
 struct WUIPlot_Area;
@@ -37,6 +39,8 @@ private:
 	WUIPlot_Area       * m_plot_production;
 	WUIPlot_Area       * m_plot_consumption;
 	DifferentialPlot_Area       * m_plot_economy;
+	std::vector<uint8_t> m_color_map; //maps ware index to colors
+	std::vector<bool> m_active_colors;
 
 	void clicked_help();
 	void cb_changed_to(Widelands::Ware_Index, bool);
@@ -69,7 +73,7 @@ struct WUIPlot_Generic_Area_Slider : public UI::DiscreteSlider {
 		 cursor_size,
 		 enabled)
 	{
-		changedto->set(signal_listener, &Ware_Statistics_Menu::set_time);
+		changedto.connect(boost::bind(&Ware_Statistics_Menu::set_time, signal_listener, _1));
 	}
 };
 

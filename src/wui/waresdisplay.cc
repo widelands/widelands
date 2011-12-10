@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -38,7 +38,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
-	 wdType type,
+	 Widelands::WareWorker type,
 	 bool selectable,
 	 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
 	 bool horizontal)
@@ -54,10 +54,10 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		 _("Stock"), UI::Align_Center),
 
 	m_selected
-		(m_type == WORKER ? m_tribe.get_nrworkers()
+		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
 	                          : m_tribe.get_nrwares(), false),
 	m_hidden
-		(m_type == WORKER ? m_tribe.get_nrworkers()
+		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
 	                          : m_tribe.get_nrwares(), false),
 	m_selectable(selectable),
 	m_horizontal(horizontal),
@@ -93,7 +93,7 @@ bool AbstractWaresDisplay::handle_mousemove
 
 	m_curware.set_text
 		(index ?
-		 (m_type == WORKER ?
+		 (m_type == Widelands::wwWORKER ?
 		  m_tribe.get_worker_descr(index)->descname()
 		  :
 		  m_tribe.get_ware_descr  (index)->descname())
@@ -162,7 +162,7 @@ void WaresDisplay::remove_all_warelists() {
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
 	Widelands::Ware_Index number =
-		m_type == WORKER ?
+		m_type == Widelands::wwWORKER ?
 		m_tribe.get_nrworkers() :
 		m_tribe.get_nrwares();
 
@@ -181,10 +181,10 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() const
 {
 	switch (m_type) {
-		case WARE:
+		case Widelands::wwWARE:
 			return m_tribe.wares_order();
 			break;
-		case WORKER:
+		case Widelands::wwWORKER:
 			return m_tribe.workers_order();
 			break;
 	}
@@ -194,10 +194,10 @@ Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() c
 Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_order_coords() const
 {
 	switch (m_type) {
-		case WARE:
+		case Widelands::wwWARE:
 			return m_tribe.wares_order_coords();
 			break;
-		case WORKER:
+		case Widelands::wwWORKER:
 			return m_tribe.workers_order_coords();
 			break;
 	}
@@ -246,7 +246,7 @@ void AbstractWaresDisplay::draw_ware
 	// Draw it
 	dst.blit
 		(pos,
-		 m_type == WORKER ?
+		 m_type == Widelands::wwWORKER ?
 		 m_tribe.get_worker_descr(id)->icon()
 		 :
 		 m_tribe.get_ware_descr  (id)->icon());
@@ -311,7 +311,7 @@ WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
-	 wdType type,
+	 Widelands::WareWorker type,
 	 bool selectable)
 : AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}

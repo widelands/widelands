@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -71,8 +71,8 @@ static int L_set_textdomain(lua_State * L) {
 
 		This peculiar function is used to translate texts in your scenario into
 		another language. The function takes a single string, grabs the
-		textdomain of your map (which is used the maps name) and returns the
-		translated string. Make sure that you part translatable and untranslatable
+		textdomain of your map (which is usually the maps name) and returns the
+		translated string. Make sure that you separate translatable and untranslatable
 		stuff:
 
 		.. code-block:: lua
@@ -103,8 +103,11 @@ static int L__(lua_State * L) {
 
 		:arg ns:
 			The namespace were the imported script resides. Can be any of
-				:const:`maps`
+				:const:`map`
 					The script is in the ``scripting/`` directory of the current map.
+				:const:`aux`
+					The script is one of the auxiliary scripts that come bundled in
+					the ``scripting/`` directory of Widelands itself.
 
 		:type ns: :class:`string`
 		:arg script: The filename of the string without the extension ``.lua``.

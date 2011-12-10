@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -48,7 +48,7 @@ m_priority_radiogroup(0),
 m_increase_max_fill(0),
 m_decrease_max_fill(0),
 m_ware_index(queue->get_ware()),
-m_ware_type(Widelands::Request::WARE),
+m_ware_type(Widelands::wwWARE),
 m_max_fill_indicator(g_gr->get_picture(PicMod_Game, pic_max_fill_indicator)),
 m_cache_size(queue->get_max_size()),
 m_cache_filled(queue->get_filled()),
@@ -203,8 +203,8 @@ void WaresQueueDisplay::update_priority_buttons()
 		break;
 	}
 
-	m_priority_radiogroup->changedto.set
-		(this, &WaresQueueDisplay::radiogroup_changed);
+	m_priority_radiogroup->changedto.connect
+		(boost::bind(&WaresQueueDisplay::radiogroup_changed, this, _1));
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
 	if (not can_act)
@@ -223,22 +223,24 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	uint32_t x = Border;
 	uint32_t y = Border + (m_total_height - 2 * Border - WARE_MENU_PIC_WIDTH) / 2;
 
-	m_decrease_max_fill = new UI::Callback_Button
+	m_decrease_max_fill = new UI::Button
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
-		 boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)),
 		 _("Decrease the number of wares you want to be stored here."));
+	m_decrease_max_fill->sigclicked.connect
+		(boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
 
 	x = Border + (m_cache_size + 1) * (CellWidth + CellSpacing);
-	m_increase_max_fill = new UI::Callback_Button
+	m_increase_max_fill = new UI::Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
-		 boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)),
 		 _("Increase the number of wares you want to be stored here."));
+	m_increase_max_fill->sigclicked.connect
+		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
 
 	// Disable those buttons for replay watchers
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
@@ -274,13 +276,24 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
  * One of the buttons to increase or decrease the amount of wares
  * stored here has been clicked
  */
-void WaresQueueDisplay::decrease_max_fill_clicked() {
-	int32_t cur = m_queue->get_max_fill();
+void WaresQueueDisplay::decrease_max_fill_clicked()
+{
+	uint32_t cur = m_queue->get_max_fill();
+
+	if (cur <= 0)
+		return;
+
 	m_igb.game().send_player_set_ware_max_fill
 			(m_building, m_ware_index, cur - 1);
 }
-void WaresQueueDisplay::increase_max_fill_clicked() {
-	int32_t cur = m_queue->get_max_fill();
+
+void WaresQueueDisplay::increase_max_fill_clicked()
+{
+	uint32_t cur = m_queue->get_max_fill();
+
+	if (cur >= m_queue->get_max_size())
+		return;
+
 	m_igb.game().send_player_set_ware_max_fill
 			(m_building, m_ware_index, cur + 1);
 }

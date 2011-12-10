@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -61,7 +61,7 @@ struct RenderTarget {
 		 int32_t y1,
 		 int32_t x2,
 		 int32_t y2,
-		 RGBColor color);
+		 RGBColor color, uint8_t width = 1);
 	void draw_rect(Rect, RGBColor);
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);

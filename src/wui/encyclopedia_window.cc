@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -75,9 +75,9 @@ EncyclopediaWindow::EncyclopediaWindow
 		 WINDOW_WIDTH / 3, WINDOW_HEIGHT - 150, WARE_GROUPS_TABLE_WIDTH, 140),
 	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
 {
-	wares.selected.set(this, &EncyclopediaWindow::wareSelected);
+	wares.selected.connect(boost::bind(&EncyclopediaWindow::wareSelected, this, _1));
 
-	prodSites.selected.set(this, &EncyclopediaWindow::prodSiteSelected);
+	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prodSiteSelected, this, _1));
 
 	condTable.add_column (WARE_PICTURE_COLUMN_WIDTH);
 	condTable.add_column

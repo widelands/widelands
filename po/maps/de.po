@@ -6,25 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
-"PO-Revision-Date: 2011-10-03 16:11+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"PO-Revision-Date: 2011-12-01 11:01+0000\n"
+"Last-Translator: Borim <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2011-12-02 04:33+0000\n"
+"X-Generator: Launchpad (build 14414)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
-
-#: ../../campaigns/cconfig:81
-msgid "01 - The Strands of Malac' Mor"
-msgstr "01 - Die Strände von Malac' Mor"
-
-#: ../../campaigns/cconfig:44
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Herausfordernd. Stellt die Atlanter vor."
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -33,6 +25,10 @@ msgstr "01 - Augen im Dunkel"
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
 msgstr "01 - Vom Untergang zum Neuanfang"
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr "01 - Die Strände von Malac' Mor"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
@@ -83,8 +79,8 @@ msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
 msgstr ""
-"Ein geheimnisvolles Land, voll unterschiedlicher Landschaften, welche von "
-"einer handvoll grosser Flüsse durchzogen werden."
+"Ein geheimnisvolles Land, reich an unterschiedlichen Landschaften, "
+"durchzogen von einer Handvoll großer Flüsse."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
@@ -93,9 +89,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
-"Ein besonderer Wettkamp in der atlantischen Kultur ist das sogenannte "
+"Ein besonderer Wettkampf in der atlantischen Kultur ist das sogenannte "
 "\"Insel Springen\". Dabei versuchen zwei oder mehr Gruppen die zentrale "
-"Insel so schnell wie möglich zu erreichen, um als erster eine Burg auf der "
+"Insel so schnell wie möglich zu erreichen, um als erstes eine Burg auf der "
 "Spitze des zentralen Berges zu errichten."
 
 #: ../../maps/Impact.wmf/elemental:9
@@ -125,7 +121,7 @@ msgid ""
 "ancient altar, build there a splendid castle and gain goodwill and the "
 "respect of the Gods."
 msgstr ""
-"Eine weitere Schneeschmelze setzt sein. Drei Völker hatten am Fuße der "
+"Eine weitere Schneeschmelze setzt ein. Drei Völker hatten am Fuße der "
 "mächtigen Berge Schutz vor dem harten Winter gesucht. Während der "
 "Sonnenwende haben sie die Orakel befragt und ziehen nun in den Krieg. Nur "
 "einer wird die Schätze seiner Feinde auf dem uralten Altar den Göttern "
@@ -143,6 +139,10 @@ msgstr "Atoll"
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
 msgstr "Barbaren - Das zweite Reich"
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr "Herausfordernd. Führt die Atlanter ein."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -372,7 +372,7 @@ msgstr "Mystisches Labyrinth"
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr "Noch nicht fertiggestellt!"
+msgstr "Noch nicht fertiggestellt"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -694,6 +694,6 @@ msgid ""
 msgstr ""
 "Eure seit jeher benutzte Schmugglerroute ist plötzlich von anderen Füßen "
 "zertreten: Zwei andere Stämme sind in der Nähe aufgetaucht und machen euch "
-"euer traditionelles Recht auf Schmuggel streitig.\r\n"
+"euer traditionelles Recht auf Schmuggel streitig.\n"
 "Welches Team wird das erste sein, dass es schafft eine bestimmte Anzahl "
 "Waren zu schmuggeln?"

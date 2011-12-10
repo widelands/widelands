@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -85,6 +85,10 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_CalculateStatistics ();
 	case QUEUE_CMD_CALL_ECONOMY_BALANCE:
 		return *new Cmd_Call_Economy_Balance ();
+	case QUEUE_CMD_SETWAREMAXFILL:
+		return *new Cmd_SetWareMaxFill();
+	case QUEUE_CMD_DISMANTLEBUILDING:
+		return *new Cmd_DismantleBuilding();
 	default:
 		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}

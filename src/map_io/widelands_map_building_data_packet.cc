@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -187,9 +187,9 @@ void Map_Building_Data_Packet::write_priorities
 		{
 			std::string name;
 			Ware_Index const ware_index = it2->first;
-			if (Request::WARE == ware_type)
+			if (wwWARE == ware_type)
 				name = tribe.get_ware_descr(ware_index)->name();
-			else if (Request::WORKER == ware_type)
+			else if (wwWORKER == ware_type)
 				name = tribe.get_worker_descr(ware_index)->name();
 			else
 				throw game_data_error
@@ -218,9 +218,9 @@ void Map_Building_Data_Packet::read_priorities
 		const uint8_t count = fr.Unsigned8();
 		for (uint8_t i = 0; i < count; ++i) {
 			Ware_Index idx;
-			if (Request::WARE == ware_type)
+			if (wwWARE == ware_type)
 				idx = tribe.safe_ware_index(fr.CString());
-			else if (Request::WORKER == ware_type)
+			else if (wwWORKER == ware_type)
 				idx = tribe.safe_worker_index(fr.CString());
 			else
 				throw game_data_error

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -53,7 +53,6 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.readme)),
 		 _("README")),
 	license
 		(this, "license",
@@ -61,7 +60,6 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.license)),
 		 _("License")),
 	authors
 		(this, "authors",
@@ -69,7 +67,6 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.authors)),
 		 _("Authors")),
 	sound
 		(this, "sound_options",
@@ -77,7 +74,6 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)),
 		 _("Sound Options")),
 	save_game
 		(this, "save_game",
@@ -86,7 +82,6 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
-		 boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)),
 		 _("Save Game")),
 	exit_game
 		(this, "exit_game",
@@ -96,9 +91,18 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
-		 boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)),
 		 _("Exit Game"))
 {
+	readme.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.readme)));
+	license.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.license)));
+	authors.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.authors)));
+	sound.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)));
+	save_game.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)));
+	exit_game.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
+
 
 	m_windows.readme.constr = boost::bind
 		(&fileview_window, boost::ref(m_gb),

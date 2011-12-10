@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -81,7 +81,7 @@ private:
 	UI::Tab_Panel * m_tabs;
 
 	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
-	UI::Callback_Button * m_toggle_workarea;
+	UI::Button * m_toggle_workarea;
 
 	//  capabilities that were last used in setting up the caps panel
 	uint32_t m_capscache;

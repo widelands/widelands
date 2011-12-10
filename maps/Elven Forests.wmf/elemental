@@ -6,5 +6,7 @@ nr_players=4
 world=greenland
 name=_Elven Forests
 author=Winterwind
-descr=_"The breath-taking beauty of these emerald lands has lured many tribes into an attempt of taking them for themselves."
+descr=_""The breath-taking beauty of these emerald lands has lured many tribes into an attempt of taking them for themselves."
+" "
+_"Suggested Teams: (red, green) vs (blue,yellow) or (yellow, green) vs (red,blue)""
 tags=official,2teams,ffa

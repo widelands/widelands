@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,12 +13,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #ifndef ITRANSPORT_COST_CALCULATOR_H
 #define ITRANSPORT_COST_CALCULATOR_H
+
+#include <boost/noncopyable.hpp>
 
 #include "logic/widelands_geometry.h"
 
@@ -31,7 +33,7 @@ namespace Widelands {
  * At the time of this writing, Map implements all of this functionality
  * but most economy code doesn't need all of maps functionality
  */
-struct ITransportCostCalculator {
+struct ITransportCostCalculator : boost::noncopyable {
 	virtual ~ITransportCostCalculator() {}
 
 	virtual int32_t calc_cost_estimate(Coords, Coords) const = 0;

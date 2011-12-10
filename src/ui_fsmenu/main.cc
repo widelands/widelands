@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -36,73 +36,46 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 		(this, "play_tutorial",
 		 m_butx, get_h() * 42 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_playtutorial)),
 		 _("Play Tutorial"), std::string(), true, false),
 	singleplayer
 		(this, "single_player",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_singleplayer)),
 		 _("Single Player"), std::string(), true, false),
 	multiplayer
 		(this, "multi_player",
 		 m_butx, get_h() * 37 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_multiplayer)),
 		 _("Multi Player"), std::string(), true, false),
 	replay
 		(this, "replay",
 		 m_butx, get_h() * 87 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_replay)),
 		 _("Watch Replay"), std::string(), true, false),
 	editor
 		(this, "editor",
 		 m_butx, get_h() * 100 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_editor)),
 		 _("Editor"), std::string(), true, false),
 	options
 		(this, "options",
 		 m_butx, get_h() * 119 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_options)),
 		 _("Options"), std::string(), true, false),
 	readme
 		(this, "readme",
 		 m_butx, get_h() * 138 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_readme)),
 		 _("View Readme"), std::string(), true, false),
 	license
 		(this, "license",
 		 m_butx, get_h() * 151 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_license)),
 		 _("License"), std::string(), true, false),
 	exit
 		(this, "exit",
 		 m_butx, get_h() * 178 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_exit)),
 		 _("Exit Game"), std::string(), true, false),
 
 // Textlabels
@@ -117,6 +90,43 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 		 (wlcr + _("by the Widelands Development Team")).c_str(),
 		 UI::Align_BottomLeft)
 {
+	playtutorial.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_playtutorial)));
+	singleplayer.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_singleplayer)));
+	multiplayer.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_multiplayer)));
+	replay.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_replay)));
+	editor.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_editor)));
+	options.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_options)));
+	readme.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_readme)));
+	license.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_license)));
+	exit.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(mm_exit)));
+
 	playtutorial.set_font(font_small());
 	singleplayer.set_font(font_small());
 	multiplayer.set_font(font_small());

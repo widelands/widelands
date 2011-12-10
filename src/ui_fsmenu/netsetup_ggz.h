@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -59,21 +59,21 @@ struct Fullscreen_Menu_NetSetupGGZ : public Fullscreen_Menu_Base {
 	}
 
 private:
-	uint32_t                                    m_butx;
-	uint32_t                                    m_butw;
-	uint32_t                                    m_buth;
-	uint32_t                                    m_lisw;
-	uint32_t                                    m_fs;
-	std::string                                 m_fn;
-	UI::Textarea                                title, m_users, m_opengames;
-	UI::Textarea                                m_servername;
-	UI::Textarea                                m_maxplayers;
-	UI::SpinBox                                 maxplayers;
-	UI::Callback_Button                         joingame, hostgame, back;
-	UI::EditBox                                 servername;
-	UI::Table<const Net_Player * const>         usersonline;
-	UI::Listselect<Net_Open_Game>               opengames;
-	GameChatPanel                               chat;
+	uint32_t m_butx;
+	uint32_t m_butw;
+	uint32_t m_buth;
+	uint32_t m_lisw;
+	uint32_t m_fs;
+	std::string m_fn;
+	UI::Textarea title, m_users, m_opengames;
+	UI::Textarea m_servername;
+	UI::Textarea m_maxplayers;
+	UI::SpinBox maxplayers;
+	UI::Button joingame, hostgame, back;
+	UI::EditBox servername;
+	UI::Table<const Net_Player * const> usersonline;
+	UI::Listselect<Net_Open_Game> opengames;
+	GameChatPanel chat;
 
 	// Login information
 	const char * nickname;

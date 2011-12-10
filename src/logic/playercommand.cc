@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -713,7 +713,7 @@ void Cmd_SetWarePriority::serialize(StreamWrite & ser)
 Cmd_SetWareMaxFill::Cmd_SetWareMaxFill
 	(int32_t const _duetime, Player_Number const _sender,
 	 PlayerImmovable & imm,
-	 Ware_Index const index, int32_t const max_fill)
+	 Ware_Index const index, uint32_t const max_fill)
 	:
 	PlayerCommand(_duetime, _sender),
 	m_serial     (imm.serial()),
@@ -745,7 +745,7 @@ void Cmd_SetWareMaxFill::Write
 	Map_Object const & obj = *egbase.objects().get_object(m_serial);
 	fw.Unsigned32(mos.get_object_file_index(obj));
 	fw.Signed32(m_index.value());
-	fw.Signed32(m_max_fill);
+	fw.Unsigned32(m_max_fill);
 }
 
 void Cmd_SetWareMaxFill::Read
@@ -763,7 +763,7 @@ void Cmd_SetWareMaxFill::Read
 			}
 
 			m_index = Ware_Index(static_cast<Ware_Index::value_t>(fr.Signed32()));
-			m_max_fill = fr.Signed32();
+			m_max_fill = fr.Unsigned32();
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);
@@ -776,7 +776,7 @@ Cmd_SetWareMaxFill::Cmd_SetWareMaxFill(StreamRead & des) :
 	PlayerCommand(0, des.Unsigned8()),
 	m_serial     (des.Unsigned32()),
 	m_index      (Ware_Index(static_cast<Ware_Index::value_t>(des.Signed32()))),
-	m_max_fill(des.Signed32())
+	m_max_fill(des.Unsigned32())
 {}
 
 void Cmd_SetWareMaxFill::serialize(StreamWrite & ser)
@@ -785,7 +785,7 @@ void Cmd_SetWareMaxFill::serialize(StreamWrite & ser)
 	ser.Unsigned8(sender());
 	ser.Unsigned32(m_serial);
 	ser.Signed32(m_index.value());
-	ser.Signed32(m_max_fill);
+	ser.Unsigned32(m_max_fill);
 }
 
 

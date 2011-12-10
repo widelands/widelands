@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -47,15 +47,15 @@ private:
 	uint32_t                                    m_butw;
 	uint32_t                                    m_buth;
 	std::string                                 wlcr;
-	UI::Callback_Button                     playtutorial;
-	UI::Callback_Button                     singleplayer;
-	UI::Callback_Button                     multiplayer;
-	UI::Callback_Button                     replay;
-	UI::Callback_Button                     editor;
-	UI::Callback_Button                     options;
-	UI::Callback_Button                     readme;
-	UI::Callback_Button                     license;
-	UI::Callback_Button                     exit;
+	UI::Button                     playtutorial;
+	UI::Button                     singleplayer;
+	UI::Button                     multiplayer;
+	UI::Button                     replay;
+	UI::Button                     editor;
+	UI::Button                     options;
+	UI::Button                     readme;
+	UI::Button                     license;
+	UI::Button                     exit;
 	UI::Textarea                                version;
 	UI::Textarea                                copyright;
 };

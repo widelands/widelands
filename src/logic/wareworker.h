@@ -13,28 +13,26 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
-#ifndef WSM_CHECKBOX_H
-#define WSM_CHECKBOX_H
+#ifndef LOGIC_WAREWORKER_H
+#define LOGIC_WAREWORKER_H
+
+namespace Widelands {
 
 /**
- * This class is the same as an ordinary
- * checkbox, the only difference is, it has
- * a small rectangle on it with the color
- * of the graph and it needs a picture
+ * For @ref Request, @ref WaresDisplay et al., indicate whether the object
+ * or object type in question is a ware or a worker.
+ *
+ * @note These values are written into savegames
  */
-struct WSM_Checkbox : public UI::Checkbox {
-	WSM_Checkbox(UI::Panel *, Point, int32_t id, PictureID picid, RGBColor);
-
-	virtual void draw(RenderTarget &);
-
-private:
-	PictureID  m_pic;
-	RGBColor   m_color;
+enum WareWorker {
+	wwWARE = 0,
+	wwWORKER = 1
 };
 
+} // namespace Widelands
 
-#endif
+#endif // LOGIC_WAREWORKER_H

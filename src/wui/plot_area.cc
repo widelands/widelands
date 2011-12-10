@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -258,6 +258,19 @@ int32_t WUIPlot_Area::calc_how_many(uint32_t time_in_ms_) {
 	return how_many;
 }
 
+
+/**
+ * scale value down to the available space, which is specifiey by
+ * the length of the y axis and the highest scale.
+ */
+float WUIPlot_Area::scale_value
+	(float const yline_length, uint32_t const highest_scale,
+	 int32_t const value)
+{
+	return yline_length / (static_cast<float>(highest_scale) / static_cast<float>(value));
+}
+
+
 /**
  * scale the values from dataset down to the available space and draw a single plot line
  * \param dataset the y values of the line
@@ -272,20 +285,24 @@ void WUIPlot_Area::draw_plot_line
 
 	int32_t lx = get_inner_w() - space_at_right;
 	int32_t ly = yoffset;
+	//init start point of the plot line with the first data value.
+	//this prevent that the plot start always at zero
+	if (int32_t value = (*dataset)[dataset->size() - 1]) {
+		ly -= static_cast<int32_t>(scale_value(yline_length, highest_scale, value));
+	}
+
 	for (int32_t i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
 		int32_t const curx = static_cast<int32_t>(posx);
 		int32_t       cury = yoffset;
 
 		//scale the line to the available space
 		if (int32_t value = (*dataset)[i]) {
-			const float length_y =
-				yline_length
-				/
-				(static_cast<float>(highest_scale) / static_cast<float>(value));
+			const float length_y = scale_value(yline_length, highest_scale, value);
+
 			cury -= static_cast<int32_t>(length_y);
 		}
 
-		dst.draw_line(lx, ly, curx, cury, color);
+		dst.draw_line(lx, ly, curx, cury, color, 2);
 
 		posx -= sub;
 
@@ -340,22 +357,22 @@ uint32_t WUIPlot_Area::draw_diagram
 	dst.draw_line
 		(spacing,                        get_inner_h() - space_at_bottom,
 		 get_inner_w() - space_at_right, get_inner_h() - space_at_bottom,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	// Arrow
 	dst.draw_line
 		(spacing,     get_inner_h() - space_at_bottom,
 		 spacing + 5, get_inner_h() - space_at_bottom - 3,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	dst.draw_line
 		(spacing,     get_inner_h() - space_at_bottom,
 		 spacing + 5, get_inner_h() - space_at_bottom + 3,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	//  Y Axis
 	dst.draw_line
 		(get_inner_w() - space_at_right, spacing,
 		 get_inner_w() - space_at_right,
 		 get_inner_h() - space_at_bottom,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	//  No Arrow here, since this doesn't continue.
 
 	//  draw xticks
@@ -369,7 +386,7 @@ uint32_t WUIPlot_Area::draw_diagram
 		dst.draw_line
 			(static_cast<int32_t>(posx), get_inner_h() - space_at_bottom,
 			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
-			 LINE_COLOR);
+			 LINE_COLOR, 2);
 
 		snprintf
 			(buffer, sizeof(buffer),
@@ -389,13 +406,13 @@ uint32_t WUIPlot_Area::draw_diagram
 	dst.draw_line
 		(get_inner_w() - space_at_right,    spacing,
 		 get_inner_w() - space_at_right -3, spacing,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 	dst.draw_line
 		(get_inner_w() - space_at_right,
 		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
 		 get_inner_w() - space_at_right - 3,
 		 spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2,
-		 LINE_COLOR);
+		 LINE_COLOR, 2);
 
 	//  print the used unit
 	UI::g_fh->draw_text
@@ -438,6 +455,15 @@ void WUIPlot_Area::register_plot_data
 	m_plotdata[id].plotcolor = color;
 
 	get_game_time_id();
+}
+
+/**
+ * Change the plot color of a registed data stream
+ */
+void WUIPlot_Area::set_plotcolor(uint32_t id, RGBColor color) {
+	if (id > m_plotdata.size()) return;
+
+	m_plotdata[id].plotcolor = color;
 }
 
 /*

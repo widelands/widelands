@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -38,8 +38,8 @@ enum NodeCaps {
 	 * size!)*/
 	BUILDCAPS_MINE = 8,
 
-	/** (only if BUILDCAPS_BIG): can we build a harbour on this field?  this
-	 * should be automatically set for BUILDCAPS_BIG fields that have a
+	/** (only if BUILDCAPS_BIG): can we build a port on this field? This
+	 * gets automatically set for BUILDCAPS_BIG fields that have a
 	 * swimmable second-order neighbour
 	 */
 	BUILDCAPS_PORT = 16,
@@ -55,7 +55,7 @@ enum NodeCaps {
 	/// If MOVECAPS_SWIM, any swimming being (including ships) can go there.
 	/// Additionally, swimming beings can temporarily visit nodes that are
 	/// walkable but not swimmable if those nodes are at the start or end of
-	/// their path. Without this clause, harbours would be kind of impossible ;)
+	/// their path. Without this clause, ports would be kind of impossible ;)
 	/// This clause stops ducks from "swimwalking" along the coast.
 	MOVECAPS_SWIM = 64,
 };
