@@ -43,10 +43,9 @@
 
 #define PLOT_HEIGHT 100
 
-//TODO place holder, need to be changed
-static const char pic_tab_production[] = "pics/menu_tab_wares.png";
-static const char pic_tab_consumption[] = "pics/menu_tab_wares.png";
-static const char pic_tab_economy[] = "pics/menu_tab_wares.png";
+static const char pic_tab_production[] = "pics/menu_tab_wares_production.png";
+static const char pic_tab_consumption[] = "pics/menu_tab_wares_consumption.png";
+static const char pic_tab_economy[] = "pics/menu_tab_wares_econ_health.png";
 
 static const RGBColor colors[] = {
 	RGBColor  (0, 210, 254),
@@ -378,7 +377,7 @@ m_parent(&parent)
 	m_plot_economy->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("economy_health", g_gr->get_picture(PicMod_UI, pic_tab_production),
+		("economy_health", g_gr->get_picture(PicMod_UI, pic_tab_economy),
 			m_plot_economy, _("Economy Health"));
 
 	tabs->activate(0);
