@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-11-17 03:50+0000\n"
+"PO-Revision-Date: 2011-12-10 16:04+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:38+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-11 05:12+0000\n"
+"X-Generator: Launchpad (build 14450)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -118,7 +118,7 @@ msgstr "Chlieb"
 
 #: ../../tribes/empire/conf:59
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Pekárska lopata"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -244,7 +244,7 @@ msgstr "Objavuje zdroje pre ťažbu."
 
 #: ../../tribes/empire/conf:141
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Rozobrať stavbu"
 
 #: ../../tribes/empire/conf:152
 msgid "Donjon"
@@ -454,6 +454,8 @@ msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
+"Ako možno vyrobiť prídely alebo obedy bez kuchynských nástrojov? Vyrábajú sa "
+"vo vyhni na nástroje a používajú v krčmách a hostincoch."
 
 #: ../../tribes/empire/conf:119
 msgid "Hunter"
@@ -564,6 +566,10 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"Mäso obsahuje veľké množstvo energie. V hostincoch a krčmách sa z neho "
+"pripravujú obedy pre baníkov, spotrebúva sa aj vo výcvikových stavbách "
+"(aréna, koloseum, výcvikový tábor). Existujú dva zdroje mäsa: bravčovina z "
+"chlievov a mäso divej zveri, na ktorú poľujú lovci."
 
 #: ../../tribes/empire/conf:172
 msgid "Mill"
@@ -939,12 +945,17 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Pekári impéria dokážu z múky a vody vyrobiť veľmi chutný chlieb. V krčmách a "
+"hostincoch sa z neho pripravujú prídely a obedy. Chlieb sa spotrebúva aj vo "
+"výcvikových stavbách (aréna, koloseum, výcvikový tábor)."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Pekárska lopata je nástrojom pekára, každý potrebuje svoju vlastnú. Vyrába "
+"ju kováč nástrojov."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -1143,6 +1154,9 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"Kmene (stromov) sú dôležitým stavebným materiálom impéria. Drevorubači rúbu "
+"stromy; lesníci sa starajú o dodávku stromov. Kmene sa používajú v uhliarni, "
+"vyhni na nástroje a píle."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1306,6 +1320,8 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"Voda je základom života! Využíva sa v pekárňach a pivovaroch. Vodou "
+"zásobované tiež musia byť oslie a ovčie farmy, ako aj chlievy."
 
 #: ../../tribes/empire/conf:188
 msgid "Weapon Smithy"
@@ -1345,6 +1361,9 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Pšenica je dôležitá na prežitie. Pestuje sa na farmách a spotrebúva v "
+"mlynoch a pivovaroch. Pšenicou zásobované tiež musia byť oslie a ovčie "
+"farmy, ako aj chlievy."
 
 #: ../../tribes/empire/conf:96
 msgid "Wine"
@@ -1367,6 +1386,8 @@ msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"Drevo je základným stavebným materiálom impéria. Spotrebúva sa tiež vo vyhni "
+"na zbrane."
 
 #: ../../tribes/empire/conf:99
 msgid "Wool"
