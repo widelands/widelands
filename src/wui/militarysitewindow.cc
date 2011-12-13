@@ -61,11 +61,6 @@ Building_Window(parent, ms, registry)
 void MilitarySite_Window::create_capsbuttons(UI::Box * buttons)
 {
 	Building_Window::create_capsbuttons(buttons);
-
-	buttons->add_space(8);
-	buttons->add
-		(create_soldier_capacity_control(*buttons, igbase(), militarysite()),
-		 UI::Box::AlignCenter);
 }
 
 /**

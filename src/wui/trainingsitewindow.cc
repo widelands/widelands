@@ -60,11 +60,6 @@ ProductionSite_Window  (parent, ts, registry)
 void TrainingSite_Window::create_capsbuttons(UI::Box * buttons)
 {
 	ProductionSite_Window::create_capsbuttons(buttons);
-
-	buttons->add_space(8);
-	buttons->add
-		(create_soldier_capacity_control(*buttons, igbase(), trainingsite()),
-		 UI::Box::AlignCenter);
 }
 
 /*
