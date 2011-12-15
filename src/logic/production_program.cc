@@ -633,8 +633,7 @@ void ProductionProgram::ActWorker::building_work_failed
 }
 
 
-ProductionProgram::ActSleep::ActSleep
-	(char * parameters, ProductionSite_Descr const &)
+ProductionProgram::ActSleep::ActSleep(char * parameters, ProductionSite_Descr const &)
 {
 	try {
 		if (*parameters) {
@@ -652,11 +651,42 @@ ProductionProgram::ActSleep::ActSleep
 	}
 }
 
-void ProductionProgram::ActSleep::execute
-	(Game & game, ProductionSite & ps) const
+void ProductionProgram::ActSleep::execute(Game & game, ProductionSite & ps) const
 {
 	return
 		ps.program_step(game, m_duration ? m_duration : ps.top_state().phase);
+}
+
+
+ProductionProgram::ActCheck_Map::ActCheck_Map(char * parameters, ProductionSite_Descr const &)
+{
+	try {
+		if (*parameters) {
+			if (!strcmp(parameters, "seafaring"))
+				m_feature = SEAFARING;
+			else
+				throw game_data_error(_("Unknown parameter \"%s\""), parameters);
+		} else
+			throw game_data_error(_("No parameter given!"));
+	} catch (_wexception const & e) {
+		throw game_data_error(_("sleep: %s"), e.what());
+	}
+}
+
+void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) const
+{
+	switch (m_feature) {
+		case SEAFARING: {
+			if (game.map().get_port_spaces().size() > 1) // we need at least two port build spaces
+				return ps.program_step(game, 0);
+			else {
+				snprintf(ps.m_result_buffer, sizeof(ps.m_result_buffer), "No use for ships on this map!");
+				return ps.program_end(game, None);
+			}
+		}
+		default:
+			assert(false);;
+	}
 }
 
 
@@ -1577,6 +1607,8 @@ ProductionProgram::ProductionProgram
 			action = new ActPlayFX (v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "construct"))
 			action = new ActConstruct (v->get_string(), *building, _name);
+		else if (not strcmp(v->get_name(), "check_map"))
+			action = new ActCheck_Map(v->get_string(), *building);
 		else
 			throw game_data_error
 				(_("unknown command type \"%s\""), v->get_name());

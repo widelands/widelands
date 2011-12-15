@@ -16,7 +16,6 @@ function initialize()
    -- player set up --
    -------------------
 
-   p1:allow_buildings{"shipyard", "port"}
    port11 = p1:place_building("port", map:get_field(139, 105), false, true)
    port12 = p1:place_building("port", map:get_field(37, 75), false, true)
    prefilled_buildings(p1,
@@ -25,7 +24,6 @@ function initialize()
       { "shipyard", 137, 103 }
    )
 
-   p2:allow_buildings{"shipyard", "port"}
    port21 = p2:place_building("port", map:get_field(38, 103), false, true)
    port22 = p2:place_building("port", map:get_field(150, 79), false, true)
    prefilled_buildings(p2,

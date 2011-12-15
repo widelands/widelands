@@ -320,6 +320,31 @@ struct ProductionProgram {
 		Duration m_duration;
 	};
 
+	/// Checks whether the map has a certain feature enabled.
+	///
+	/// Parameter syntax:
+	///    parameters ::= feature
+	/// Parameter semantics:
+	///    feature:
+	///       The name of the feature that should be checked. Possible values are:
+	///       * Seafaring : to check whether the map has at least two port build spaces
+	///
+	/// Ends the program if the feature is not enabled.
+	struct ActCheck_Map : public Action {
+		ActCheck_Map(char * parameters, ProductionSite_Descr const &);
+		virtual void execute(Game &, ProductionSite &) const;
+#ifdef WRITE_GAME_DATA_AS_HTML
+		virtual void writeHTML
+			(::FileWrite &, ProductionSite_Descr const &) const;
+
+#endif
+	private:
+		 enum {
+			 SEAFARING = 1
+		 };
+		 uint8_t m_feature;
+	};
+
 	/// Runs an animation.
 	///
 	/// Parameter syntax:
