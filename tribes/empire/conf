@@ -12,7 +12,7 @@ icon=pics/icon.png
 # Entries in the columns separated by ,
 wares_order=stone, trunk, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldstone, gold;    pick, axe, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bakingtray, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armour, chain_armour, plate_armour
 
-workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver;   fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
+workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
@@ -51,6 +51,7 @@ wine0=_Vine medium
 wine0s=_Vine small
 wine0t=_Vine tiny
 wine1=_Vine ripe
+shipconstruction=_Ship construction site
 
 [ware types]
 advanced_lance=_Advanced Lance
@@ -124,6 +125,7 @@ miller=_Miller
 miner=_Miner
 pig-breeder=_Pig Breeder
 shepherd=_Shepherd
+shipwright=_Shipwright
 smelter=_Smelter
 stonemason=_Stonemason
 toolsmith=_Toolsmith
@@ -133,6 +135,9 @@ weaver=_Weaver
 vinefarmer=_Vine Farmer
 scout=_Scout
 donkeybreeder=_Donkey Breeder
+
+[ship types]
+ship=_Ship
 
 [constructionsite types]
 constructionsite=_Construction Site
@@ -158,6 +163,7 @@ stronghold.barbarians=_Stronghold
 headquarters=_Headquarters
 headquarters_shipwreck=_Headquarters shipwreck
 warehouse=_Warehouse
+port=_Port
 
 [productionsite types]
 quarry=_Quarry
@@ -178,6 +184,7 @@ inn=_Inn
 tavern=_Tavern
 burners_house=_Charcoal Burner
 smelting_works=_Smelting Works
+shipyard=_Shipyard
 toolsmithy=_Toolsmithy
 armoursmithy=_Armour Smithy
 donkeyfarm=_Donkeyfarm
