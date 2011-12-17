@@ -309,7 +309,7 @@ order_msg_10_bread = {
    body=khantrukh(_"The elder jumps into the air...", _
 [["Wisdom commands to seek variety.<br> North of the great mountain is a large
 plain - why don't we use the space Mother Nature gave us and build a farm? I
-sure would enjoy a freshly baken pitta bread for a change..."]]) ..
+sure would enjoy a freshly baked pitta bread for a change..."]]) ..
    new_objectives(obj_begin_farming)
 }
 
