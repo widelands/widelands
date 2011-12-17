@@ -2597,7 +2597,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
 		if (!file) // Do we have a file for sending
-			throw DisconnectException(_("Client requests file altough none is available to send."));
+			throw DisconnectException(_("Client requests file although none is available to send."));
 		sendSystemChat
 			(_("Started to send file %s to %s!"),
 			 file->filename.c_str(),
@@ -2608,7 +2608,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_FILE_PART: {
 		if (!file) // Do we have a file for sending
-			throw DisconnectException(_("Client requests file altough none is available to send."));
+			throw DisconnectException(_("Client requests file although none is available to send."));
 		uint32_t part = r.Unsigned32();
 		std::string x = r.String();
 		if (x != file->md5sum) {
