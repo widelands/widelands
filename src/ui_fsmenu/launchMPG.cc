@@ -665,7 +665,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	m_help->add_picture_li(_("Closed."), "pics/stop.png");
 	m_help->add_block
 		(_
-		 ("The later three are only setable by the hosting client by left clicking the \"type\" button of a "
+		 ("The later three are only settable by the hosting client by left clicking the \"type\" button of a "
 		  "player. Hosting players can further set the initializations of each player (the set of buildings, "
 		  "wares and workers the player starts with) and the tribe an team for computer players"));
 	m_help->add_block
