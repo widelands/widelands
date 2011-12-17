@@ -635,7 +635,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	if (m_help)
 		delete m_help;
 	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), m_fs);
-	m_help->add_paragraph(_("You are in the multi player launch game menu."));
+	m_help->add_paragraph(_("You are in the multiplayer launch game menu."));
 	m_help->add_heading(_("Client settings"));
 	m_help->add_paragraph
 		(_
