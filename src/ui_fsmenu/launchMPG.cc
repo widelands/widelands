@@ -428,7 +428,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_WARNING);
 			m_client_info.set_text
 				(_("The selected file can not be found. If it is not automatically "
-				   "transfered to you, please write the host about this problem."));
+				   "transferred to you, please write the host about this problem."));
 		} else {
 			// Reset font color
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
