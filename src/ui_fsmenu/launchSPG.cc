@@ -259,7 +259,7 @@ void Fullscreen_Menu_LaunchSPG::start_clicked()
 			 	 "If this happens in a network game, the host might have selected "
 			 	 "a file that you do not own. Normally such a file should be send "
 			 	 "from the host to you, but perhaps the transfer was not yet "
-			 	 "finnished!?!"),
+			 	 "finished!?!"),
 			 m_filename.c_str());
 	if (m_settings->canLaunch()) {
 		end_modal(1 + m_is_scenario);

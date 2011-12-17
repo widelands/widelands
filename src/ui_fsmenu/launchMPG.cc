@@ -408,7 +408,7 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
 			 	 "The file was: %s\n"
 			 	 "If this happens, the host might have selected a file that you do "
 			 	 "not own. Normally such a file should be send from the host to "
-			 	 "you, but perhaps the transfer was not yet finnished!?!"),
+			 	 "you, but perhaps the transfer was not yet finished!?!"),
 			 m_settings->settings().mapfilename.c_str());
 	if (m_settings->canLaunch())
 		end_modal(1);
