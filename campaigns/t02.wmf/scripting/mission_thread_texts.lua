@@ -316,7 +316,7 @@ sure would enjoy a freshly baken pitta bread for a change..."]]) ..
 order_msg_11_basic_food_began = {
    title=_"Your loyal companion",
    body=boldreth(_"Boldreth cheers up...", _
-[[ "Our hunters are out in the forests, Thron.<br> I promise you, before the sun sets today you will have a magnificient meal fit for the chieftain of all clans!" ]]
+[[ "Our hunters are out in the forests, Thron.<br> I promise you, before the sun sets today you will have a magnificent meal fit for the chieftain of all clans!" ]]
    )
 }
 
