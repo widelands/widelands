@@ -101,7 +101,7 @@ void Map_Players_Messages_Data_Packet::Read
 							throw game_data_error
 								(_
 								 	("the value %u is not allowed as duration; it is "
-								 	 "a specal value meaning forever, which is the "
+								 	 "a special value meaning forever, which is the "
 								 	 "default; omit the duration key to make the "
 								 	 "message exist forever"),
 								 Forever());
