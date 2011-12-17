@@ -746,6 +746,7 @@ void NetHost::run(bool const autorun)
 		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
 		// NOTE  to check whether the pointer is valid.
 		UI::ProgressWindow * loaderUI = 0;
+		GameTips * tips = 0;
 		if (m_is_dedicated) {
 			log ("[Dedicated] Starting the game...\n");
 			d->game = &game;
@@ -766,9 +767,8 @@ void NetHost::run(bool const autorun)
 			tipstext.push_back("multiplayer");
 			try {
 				tipstext.push_back(d->hp.getPlayersTribe());
-			} catch (GameSettingsProvider::No_Tribe) {
-			}
-			GameTips tips (*loaderUI, tipstext);
+			} catch (GameSettingsProvider::No_Tribe) {}
+			tips = new GameTips(*loaderUI, tipstext);
 
 			loaderUI->step(_("Preparing game"));
 
