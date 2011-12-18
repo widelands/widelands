@@ -5,7 +5,7 @@ def_resources=water 5
 is=green
 
 [berg1]
-resources=coal, iron, gold, granit 
+resources=coal, iron, gold, granit
 is=mountain
 
 [schnee]

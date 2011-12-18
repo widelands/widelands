@@ -25,6 +25,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map.h"
+#include "logic/mapfringeregion.h"
 #include "logic/world.h"
 #include "map_io/map_loader.h"
 #include "wexception.h"
@@ -296,32 +297,32 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
 				uint8_t c = *pc;
 				// Harbour buildspace & textures - Information taken from:
-				// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
 				if (c & 0x40)
 					m_map.set_port_space(Widelands::Coords(x, y), true);
 				c &= 0x1f;
 				switch (c) {
-				case 0x00: c =  0; break;
-				case 0x01: c =  1; break;
-				case 0x02: c =  2; break;
-				case 0x03: c =  3; break;
-				case 0x04: c =  4; break;
-				case 0x05: c =  5; break;
-
-				case 0x08: c =  6; break;
-				case 0x09: c =  7; break;
-				case 0x0a: c =  8; break;
-				case 0x0b: c =  9; break;
-				case 0x0c: c = 10; break;
-				case 0x0d: c = 11; break;
-				case 0x0e: c = 12; break;
-				case 0x0f: c = 13; break;
-
-				case 0x10: c = 14; break;
-				case 0x12: c = 15; break;
-
-				case 0x07: c =  4; break; //  unknown texture
-				case 0x13: c =  4; break; //  unknown texture
+				// the following comments are valid for greenland - blackland and winterland have equivalents
+				// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+				case 0x00: c =  0; break; // steppe meadow1
+				case 0x01: c =  1; break; // mountain 1
+				case 0x02: c =  2; break; // snow
+				case 0x03: c =  3; break; // swamp
+				case 0x04: c =  4; break; // steppe = strand
+				case 0x05: c =  5; break; // water
+				case 0x06: c =  4; break; // strand
+				case 0x07: c = 12; break; // steppe 2 = dry land
+				case 0x08: c =  6; break; // meadow 1
+				case 0x09: c =  7; break; // meadow 2
+				case 0x0a: c =  8; break; // meadow 3
+				case 0x0b: c =  9; break; // mountain 2
+				case 0x0c: c = 10; break; // mountain 3
+				case 0x0d: c = 11; break; // mountain 4
+				case 0x0e: c = 12; break; // steppe meadow 2
+				case 0x0f: c = 13; break; // flower meadow
+				case 0x10: c = 14; break; // lava
+				// case 0x11: // color
+				case 0x12: c = 15; break; // mountain meadow
+				case 0x13: c =  4; break; // unknown texture
 
 				default:
 					c = 7;
@@ -351,27 +352,28 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 					m_map.set_port_space(Widelands::Coords(x, y), true);
 				c &= 0x1f;
 				switch (c) {
-				case 0x00: c =  0; break;
-				case 0x01: c =  1; break;
-				case 0x02: c =  2; break;
-				case 0x03: c =  3; break;
-				case 0x04: c =  4; break;
-				case 0x05: c =  5; break;
-
-				case 0x08: c =  6; break;
-				case 0x09: c =  7; break;
-				case 0x0a: c =  8; break;
-				case 0x0b: c =  9; break;
-				case 0x0c: c = 10; break;
-				case 0x0d: c = 11; break;
-				case 0x0e: c = 12; break;
-				case 0x0f: c = 13; break;
-
-				case 0x10: c = 14; break;
-				case 0x12: c = 15; break;
-
-				case 0x07: c =  4; break; // Unknown texture
-				case 0x13: c =  4; break; // unknown texture!
+				// the following comments are valid for greenland - blackland and winterland have equivalents
+				// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+				case 0x00: c =  0; break; // steppe meadow1
+				case 0x01: c =  1; break; // mountain 1
+				case 0x02: c =  2; break; // snow
+				case 0x03: c =  3; break; // swamp
+				case 0x04: c =  4; break; // steppe = strand
+				case 0x05: c =  5; break; // water
+				case 0x06: c =  4; break; // strand
+				case 0x07: c = 12; break; // steppe 2 = dry land
+				case 0x08: c =  6; break; // meadow 1
+				case 0x09: c =  7; break; // meadow 2
+				case 0x0a: c =  8; break; // meadow 3
+				case 0x0b: c =  9; break; // mountain 2
+				case 0x0c: c = 10; break; // mountain 3
+				case 0x0d: c = 11; break; // mountain 4
+				case 0x0e: c = 12; break; // steppe meadow 2
+				case 0x0f: c = 13; break; // flower meadow
+				case 0x10: c = 14; break; // lava
+				// case 0x11: // color
+				case 0x12: c = 15; break; // mountain meadow
+				case 0x13: c =  4; break; // unknown texture
 
 				default:
 					c = 7;
@@ -762,117 +764,31 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			}
 			Widelands::FCoords fpos = m_map.get_fcoords(starting_pos);
 
-			//  WTF? can anyone tell me why nodecaps() returns 39 for
-			// BUILDCAPS_BIG and 36 for BUILDCAPS_SMALL ?
-			// Below is a hack to make it work - but I didn't found the reason yet.
-#define BIG 39
-			if (fpos.field->nodecaps() != BIG) { //  Widelands::BUILDCAPS_BIG) {
+			if (!(fpos.field->nodecaps() & Widelands::BUILDCAPS_BIG)) {
 				log("wrong size - trying to fix it:\n");
-				// Try to find a BUILDCAPS_BIG place near original start point
-				Widelands::FCoords tl = m_map.tl_n(fpos);
-				Widelands::FCoords  l = m_map .l_n(fpos);
-				Widelands::FCoords bl = m_map.bl_n(fpos);
-				Widelands::FCoords br = m_map.br_n(fpos);
-				Widelands::FCoords  r = m_map .r_n(fpos);
-				Widelands::FCoords tr = m_map.tr_n(fpos);
 				bool fixed = false;
 
-				// Begin with a circle of radius = 1 :
-				if (!fixed & (tl.field->nodecaps() == BIG)) {
-					m_map.set_starting_pos(p, tl);
-					fixed = true;
-				}
-				if (!fixed & (l.field->nodecaps() == BIG)) {
-					m_map.set_starting_pos(p,  l);
-					fixed = true;
-				}
-				if (!fixed & (bl.field->nodecaps() == BIG)) {
-					m_map.set_starting_pos(p, bl);
-					fixed = true;
-				}
-				if (!fixed & (br.field->nodecaps() == BIG)) {
-					m_map.set_starting_pos(p, br);
-					fixed = true;
-				}
-				if (!fixed &  (r.field->nodecaps() == BIG)) {
-					m_map.set_starting_pos(p,  r);
-					fixed = true;
-				}
-				if (!fixed & (tr.field->nodecaps() == BIG)) {
-					m_map.set_starting_pos(p, tr);
-					fixed = true;
-				}
+
+				Widelands::MapFringeRegion<Widelands::Area<Widelands::FCoords> >
+					mr(m_map, Widelands::Area<Widelands::FCoords>(fpos, 3));
+				do {
+					if (mr.location().field->get_caps() & Widelands::BUILDCAPS_BIG) {
+						m_map.set_starting_pos(p, mr.location());
+						fixed = true;
+						break;
+					}
+				} while (mr.advance(m_map));
+
+
 				// check whether starting position was fixed.
-				if (fixed) {
-					log
-						("   Starting position was successfully fixed during 1st "
-						 "try!\n");
-				} else {
-					// Second try - with a circle of radius = 2 :
-						// the three points at the top of the circle
-					if (!fixed & (m_map.tl_n(tl).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map.tl_n(tl));
-						fixed = true;
-					}
-					if (!fixed & (m_map.tr_n(tl).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map.tr_n(tl));
-						fixed = true;
-					}
-					if (!fixed & (m_map.tr_n(tr).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map.tr_n(tr));
-						fixed = true;
-					}
-					//  the three points at the bottom of the circle
-					if (!fixed & (m_map.bl_n(bl).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map.bl_n(bl));
-						fixed = true;
-					}
-					if (!fixed & (m_map.br_n(bl).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map.br_n(bl));
-						fixed = true;
-					}
-					if (!fixed & (m_map.br_n(br).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map.br_n(br));
-						fixed = true;
-					}
-					//  the three points at the left side of the circle
-					if (!fixed & (m_map. l_n(tl).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map. l_n(tl));
-						fixed = true;
-					}
-					if (!fixed & (m_map. l_n (l).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map. l_n (l));
-						fixed = true;
-					}
-					if (!fixed & (m_map. l_n(bl).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map. l_n(bl));
-						fixed = true;
-					}
-					//  the three points at the right side of the circle
-					if (!fixed & (m_map. r_n(tr).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map. r_n(tr));
-						fixed = true;
-					}
-					if (!fixed & (m_map. r_n (r).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map. r_n (r));
-						fixed = true;
-					}
-					if (!fixed & (m_map. r_n(br).field->nodecaps() == BIG)) {
-						m_map.set_starting_pos(p, m_map. r_n(br));
-						fixed = true;
-					}
-					// check whether starting position was fixed.
-					if (fixed) {
-						log
-							("   Starting position was successfully fixed during 2nd "
-							 "try!\n");
-					} else {
-						//  Do not throw exception, else map will not be loadable in
-						//  the editor. Player initialization will keep track of
-						//  wrong starting positions.
-						log("invalid starting position, that could not be fixed.\n");
-						log("   Please try to fix it manually in the editor.\n");
-					}
+				if (fixed)
+					log("   Fixed!\n");
+				else {
+					//  Do not throw exception, else map will not be loadable in
+					//  the editor. Player initialization will keep track of
+					//  wrong starting positions.
+					log("   Invalid starting position, that could not be fixed.\n");
+					log("   Please try to fix it manually in the editor.\n");
 				}
 			} else
 				log("OK\n");
