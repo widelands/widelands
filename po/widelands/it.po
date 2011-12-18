@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 13:41+0100\n"
-"PO-Revision-Date: 2011-12-06 12:47+0000\n"
+"PO-Revision-Date: 2011-12-17 13:19+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-07 04:34+0000\n"
-"X-Generator: Launchpad (build 14435)\n"
+"X-Launchpad-Export-Date: 2011-12-18 04:31+0000\n"
+"X-Generator: Launchpad (build 14525)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2551,7 +2551,7 @@ msgstr "Se sì, digitare /ack_kick %s"
 
 #: ../../src/network/nethost.cc:440
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "annullata approvazione del kick: Nessun nome indicato!"
 
 #: ../../src/network/nethost.cc:442
 msgid "Wrong use, should be: /ack_kick <name>"
@@ -2559,7 +2559,7 @@ msgstr "Uso sbagliato, dovrebbe essere: /ack_kick <nome>"
 
 #: ../../src/network/nethost.cc:448
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "annullata approvazione del kick: Indicato nome errato!"
 
 #: ../../src/network/nethost.cc:459
 msgid "Pause was already forced - game should be paused."
@@ -2802,7 +2802,7 @@ msgstr "Trasferimento del file %s a %s completato"
 #: ../../src/network/nethost.cc:2630
 #, c-format
 msgid "Sending part %u/%zu of file %s to %s"
-msgstr ""
+msgstr "Invio in corso della parte %u/%zu del file %s a %s"
 
 #: ../../src/network/nethost.cc:2639
 #, c-format
@@ -2886,7 +2886,7 @@ msgstr ""
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
-msgstr ""
+msgstr "PROBLEMA: dispositivo audio aperto più volte, cerco di chiuderlo"
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 msgid "Help: "
@@ -3127,6 +3127,12 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, "
 "please select another saved game or zip the directories content."
 msgstr ""
+"AVVERTIMENTO:\n"
+"Il salvataggio che hai selezionato è una cartella. Questo succedde se attivi "
+"l'opzione \"nozip\" o se scompatti manualmente un salvataggio.\n"
+"Widelands non è in grado di trasferire la struttura della caartella ai "
+"client, seleziona un altro salvataggio o comprimi il contenutto della "
+"cartella"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:404 ../../src/ui_fsmenu/launchSPG.cc:254
 msgid "File not found"
