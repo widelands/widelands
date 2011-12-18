@@ -676,8 +676,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_SETTING_MAP: {
 		d->settings.mapname = packet.String();
-		d->settings.mapfilename =
-			g_fs->FileSystem::fixCrossFile(packet.String());
+		d->settings.mapfilename = g_fs->FileSystem::fixCrossFile(packet.String());
 		d->settings.savegame = packet.Unsigned8() == 1;
 		d->settings.scenario = packet.Unsigned8() == 1;
 		log
@@ -688,7 +687,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_DEDICATED_MAPS: {
 		DedicatedMapInfos info;
-		info.path     = packet.String();
+		info.path     = g_fs->FileSystem::fixCrossFile(packet.String());
 		info.players  = packet.Unsigned8();
 		info.scenario = packet.Unsigned8() == 1;
 		d->settings.maps.push_back(info);
@@ -697,7 +696,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_DEDICATED_SAVED_GAMES: {
 		DedicatedMapInfos info;
-		info.path    = packet.String();
+		info.path    = g_fs->FileSystem::fixCrossFile(packet.String());
 		info.players = packet.Unsigned8();
 		d->settings.saved_games.push_back(info);
 		break;

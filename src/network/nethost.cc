@@ -1197,21 +1197,37 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 
 	if (d->settings.maps.empty()) {
 		// Read in maps
-		filenameset_t files;
-		g_fs->FindFiles("maps", "*", &files, 0);
-		Widelands::Map map;
-		const filenameset_t & gamefiles = files;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
-			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
-			if (ml) {
-				map.set_filename(name);
-				ml->preload_map(true);
-				DedicatedMapInfos info;
-				info.path     = name;
-				info.players  = map.get_nrplayers();
-				info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
-				d->settings.maps.push_back(info);
+		std::vector<std::string> directories;
+		directories.push_back("maps");
+		while (directories.size()) {
+			filenameset_t files;
+			g_fs->FindFiles(directories.at(directories.size() - 1).c_str(), "*", &files, 0);
+			directories.resize(directories.size() - 1);
+			Widelands::Map map;
+			const filenameset_t & gamefiles = files;
+			container_iterate_const(filenameset_t, gamefiles, i) {
+				char const * const name = i.current->c_str();
+				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				if (ml) {
+					map.set_filename(name);
+					ml->preload_map(true);
+					DedicatedMapInfos info;
+					info.path     = name;
+					info.players  = map.get_nrplayers();
+					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
+					d->settings.maps.push_back(info);
+				} else {
+					if
+						(g_fs->IsDirectory(name)
+						&&
+						strcmp(FileSystem::FS_Filename(name), ".")
+						&&
+						strcmp(FileSystem::FS_Filename(name), ".."))
+					{
+						directories.push_back(name);
+						log("Name added: %s\n", name);
+					}
+				}
 			}
 		}
 	}
