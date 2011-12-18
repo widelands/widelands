@@ -27,7 +27,7 @@
 
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
-#include <boost/unordered_map.hpp>
+//#include <boost/unordered_map.hpp>
 
 #include "ref_cast.h"
 
@@ -336,7 +336,9 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  * Keeps the list of all objects currently in the game.
  */
 struct Object_Manager : boost::noncopyable {
-	typedef boost::unordered_map<uint32_t, Map_Object *> objmap_t;
+	// NOTE boost::unordered_map lead to desyncs - do not use it!
+	//typedef boost::unordered_map<uint32_t, Map_Object *> objmap_t;
+	typedef std::map<uint32_t, Map_Object *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();
