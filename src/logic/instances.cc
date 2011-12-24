@@ -195,6 +195,20 @@ void Object_Manager::remove(Map_Object & obj)
 	m_objects.erase(obj.m_serial);
 }
 
+/*
+ * Return the list of all serials currently in use
+ */
+std::vector<Serial> Object_Manager::all_object_serials_ordered () const throw () {
+	std::vector<Serial> rv;
+
+	container_iterate_const(objmap_t, m_objects, o)
+		rv.push_back(o->first);
+
+	std::sort(rv.begin(), rv.end());
+
+	return rv;
+}
+
 Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
 {
 	if (!m_serial)
