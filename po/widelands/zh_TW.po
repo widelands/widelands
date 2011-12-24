@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-12-02 13:41+0100\n"
-"PO-Revision-Date: 2011-05-12 23:42+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2011-12-23 22:31+0000\n"
+"Last-Translator: sonny <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:41+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-24 05:13+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -28,17 +28,17 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:377
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr ""
+msgstr "錯誤:不能連結至伺服器(原因如上)!\n"
 
 #: ../../src/wlapplication.cc:900 ../../src/wlapplication.cc:908
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "無法執行主要程式"
 
 #: ../../src/wlapplication.cc:1026
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
-msgstr ""
+msgstr "等 五秒 關閉語音。請調整你的語音設備或卡\n"
 
 #: ../../src/wlapplication.cc:1163
 msgid ""
@@ -46,27 +46,32 @@ msgid ""
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"抱歉，不可在window 環境下同時修正。\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1166
 msgid "--double is disabled. This is not a debug build!"
-msgstr ""
+msgstr "重複修正 。將無法儲存"
 
 #: ../../src/wlapplication.cc:1289
 msgid "This is Widelands-"
-msgstr ""
+msgstr "這是戰場"
 
 #: ../../src/wlapplication.cc:1291
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"戰場設定 <設定鍵值0>=<設定存值0> ... <設定鍵值N>=<設定存值N>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1292
 msgid ""
 "Options:\n"
 "\n"
 msgstr ""
-"選項:\n"
+"建議:\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1296
@@ -188,7 +193,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1395
 msgid " --help               Show this help\n"
-msgstr ""
+msgstr " --help Show this help\n"
 
 #: ../../src/wlapplication.cc:1399
 msgid ""
@@ -205,11 +210,11 @@ msgstr "警告： "
 
 #: ../../src/wlapplication.cc:1552
 msgid "Game data error"
-msgstr ""
+msgstr "遊戲日期錯誤"
 
 #: ../../src/wlapplication.cc:1557
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "發生不可預期之錯誤"
 
 #: ../../src/wlapplication.cc:1561
 msgid ""
@@ -230,7 +235,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1676
 msgid "Connection timeouted"
-msgstr ""
+msgstr "連結時間過長"
 
 #: ../../src/wlapplication.cc:1678
 msgid ""
@@ -245,39 +250,39 @@ msgstr "連線錯誤"
 
 #: ../../src/wlapplication.cc:1702
 msgid "Widelands has not been able to connect to the host."
-msgstr ""
+msgstr "遊戲無法連到伺服器"
 
 #: ../../src/wlapplication.cc:1744
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "遊戲伺服器網址錯誤"
 
 #: ../../src/wlapplication.cc:1851 ../../src/network/nethost.cc:1919
 msgid "Player"
-msgstr ""
+msgstr "玩家"
 
 #: ../../src/wlapplication.cc:2040 ../../src/network/netclient.cc:188
 #: ../../src/network/nethost.cc:773
 msgid "Preparing game"
-msgstr ""
+msgstr "準備遊戲中"
 
 #: ../../src/wlapplication.cc:2148
 msgid "End of replay"
-msgstr ""
+msgstr "結束整理"
 
 #: ../../src/wlapplication.cc:2150
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
-msgstr ""
+msgstr "重新整理時間已經暫停。你可以結束暫停或取消繼續執行。"
 
 #: ../../src/wlapplication.cc:2233 ../../src/logic/game.cc:385
 #: ../../src/logic/game.cc:425
 msgid "Loading..."
-msgstr "載入中…"
+msgstr "正在載入..."
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
-msgstr ""
+msgstr "請求"
 
 #: ../../src/writeHTML.cc:59
 msgid "Providers"
@@ -285,7 +290,7 @@ msgstr "提供者"
 
 #: ../../src/writeHTML.cc:74
 msgid "Successors"
-msgstr ""
+msgstr "成功者"
 
 #: ../../src/writeHTML.cc:89
 msgid "Predecessors"
@@ -293,16 +298,16 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:104
 msgid "Employers"
-msgstr "雇主"
+msgstr "老闆"
 
 #: ../../src/writeHTML.cc:267 ../../src/writeHTML.cc:273
 msgid "Building types"
-msgstr ""
+msgstr "建築類別"
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:515
 #: ../../src/writeHTML.cc:1437
 msgid "Icon"
-msgstr "圖標"
+msgstr "圖示"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:517
 #: ../../src/writeHTML.cc:1439 ../../src/ui_fsmenu/netsetup_ggz.cc:153
@@ -312,19 +317,19 @@ msgstr "名稱"
 
 #: ../../src/writeHTML.cc:282 ../../src/wui/building_statistics_menu.cc:113
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: ../../src/writeHTML.cc:284 ../../src/writeHTML.cc:519
 msgid "Buildable"
-msgstr ""
+msgstr "可建置"
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
-msgstr ""
+msgstr "修正"
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:174
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
@@ -337,7 +342,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:376
 #: ../../src/logic/building.cc:528
 msgid "Mine"
-msgstr ""
+msgstr "公里"
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:529
@@ -360,14 +365,14 @@ msgstr "大"
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr ""
+msgstr "確定"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:104
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: ../../src/writeHTML.cc:355
 msgid "building_types.xhtml"
@@ -375,11 +380,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:378
 msgid "Is mine."
-msgstr ""
+msgstr "是我"
 
 #: ../../src/writeHTML.cc:383
 msgid "Is big."
-msgstr ""
+msgstr "是大的"
 
 #: ../../src/writeHTML.cc:388
 msgid "Is medium."

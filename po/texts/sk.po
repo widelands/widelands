@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 12:41+0000\n"
-"PO-Revision-Date: 2011-11-21 20:34+0000\n"
+"PO-Revision-Date: 2011-12-23 13:42+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:35+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-24 05:13+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -34,7 +34,7 @@ msgid ""
 "game. For more explanation, see the section on Replays below."
 msgstr ""
 "- pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku, ak sa chyba "
-"objavila počas hry. Pre viac vysvetlenia viz. sekciu Nahrávky nižšie."
+"objavila počas hry. Pre viac informácií pozrite sekciu Nahrávky nižšie."
 
 #: ../../txts/README:129
 msgid ""
@@ -44,9 +44,9 @@ msgid ""
 "below."
 msgstr ""
 "- pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku relácie, ak je to "
-"možné, pokiaľ<br>chybu nie je triviálne napodobniť. V skutočnosti to môže "
-"byť dobrý nápad vždy nahrávať<br>relácie v prípade, že sa objaví chyba. Viz. "
-"dole pre viac vysvetlenia."
+"možné, pokiaľ<br>chybu nie je triviálne napodobniť. V skutočnosti môže byť "
+"dobrý nápad vždy nahrávať<br>relácie v prípade, že sa objaví chyba. Pre viac "
+"informácií pozrite nižšie."
 
 #: ../../txts/README:121
 msgid ""
@@ -406,11 +406,11 @@ msgstr "KONIEC USTANOVENÍ A PODMIENEK"
 
 #: ../../txts/README:63
 msgid "F               Toggle Fullscreen"
-msgstr "F               Prepne celú obrazovku"
+msgstr "F               Prepne režim celej obrazovky"
 
 #: ../../txts/editor_readme:27
 msgid "F        Toggles fullscreen"
-msgstr "F        Prepne celú obrazovku"
+msgstr "F        Prepne režim celej obrazovky"
 
 #: ../../txts/README:83
 msgid "F11         Take a screenshot"
@@ -418,7 +418,8 @@ msgstr "F11         Urobí snímku obrazovky"
 
 #: ../../txts/README:79
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr "F6           Zobrazí debugovaciu konzolu (len v debug-buildoch)"
+msgstr ""
+"F6           Zobrazí ladiacu konzolu (len v zostaveniach s podporou ladenia)"
 
 #: ../../txts/developers:189
 msgid "Finnish"
@@ -1015,7 +1016,7 @@ msgstr ""
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
-msgstr "K zatvoreniu otvoreného okna naň kliknite pravým tlačidlom myši."
+msgstr "Otvorené okno zatvoríte kliknutím pravým tlačidlom myši na neho."
 
 #: ../../txts/README:151
 msgid ""
@@ -1039,8 +1040,8 @@ msgid ""
 "To minimize/maximize a window, click on the titlebar of that window either "
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
-"K minimalizovaniu/maximalizovaniu okna kliknite na jeho titulnú lištu s buď "
-"pravým tlačidlom myši, alebo s ľavým tlačidlom myši, držiac CTRL."
+"Okno minimalizujete/maximalizujete kliknutím na jeho titulnú lištu buď "
+"prostredným, alebo ľavým tlačidlom myši, držiac CTRL."
 
 #: ../../txts/developers:348
 msgid "Translation"

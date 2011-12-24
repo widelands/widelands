@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-02 13:41+0100\n"
-"PO-Revision-Date: 2011-11-29 18:56+0000\n"
+"PO-Revision-Date: 2011-12-23 15:50+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:41+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-24 05:13+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -355,7 +355,7 @@ msgstr "Problém s pripojením"
 
 #: ../../src/wlapplication.cc:1702
 msgid "Widelands has not been able to connect to the host."
-msgstr "Widelands sa nepodarilo pripojiť k  hostiteľovi."
+msgstr "Nepodarilo sa pripojiť k hostiteľovi."
 
 #: ../../src/wlapplication.cc:1744
 msgid "The address of the game server is invalid"
@@ -368,7 +368,7 @@ msgstr "Hráč"
 #: ../../src/wlapplication.cc:2040 ../../src/network/netclient.cc:188
 #: ../../src/network/nethost.cc:773
 msgid "Preparing game"
-msgstr "Pripravujem hru"
+msgstr "Pripravuje sa hra"
 
 #: ../../src/wlapplication.cc:2148
 msgid "End of replay"
@@ -420,7 +420,7 @@ msgstr "Ikona"
 #: ../../src/writeHTML.cc:1439 ../../src/ui_fsmenu/netsetup_ggz.cc:153
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Name"
-msgstr "Meno"
+msgstr "Názov"
 
 #: ../../src/writeHTML.cc:282 ../../src/wui/building_statistics_menu.cc:113
 msgid "Size"
@@ -562,7 +562,7 @@ msgstr "Bojové vlastnosti"
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Body zdravia sú %u plus %u pre každú úroveň nad 0 (maximálna úroveň je %u)."
+"Body zdravia sú %u plus %u za každú úroveň nad 0 (maximálna úroveň je %u)."
 
 #: ../../src/writeHTML.cc:601
 #, c-format
@@ -726,7 +726,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:900
 msgid "Documentation for program command return"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu return (vrátiť)"
 
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:771
@@ -795,7 +795,7 @@ msgstr "zkúsenosť"
 
 #: ../../src/writeHTML.cc:1043
 msgid "Documentation for program command call"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu call (volať)"
 
 #: ../../src/writeHTML.cc:1045
 msgid "call"
@@ -808,7 +808,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1105
 msgid "Documentation for program command worker"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu worker (pracovník)"
 
 #: ../../src/writeHTML.cc:1107
 msgid "worker"
@@ -821,7 +821,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1133
 msgid "Documentation for program command sleep"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu sleep (spať)"
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
@@ -834,7 +834,7 @@ msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command animate"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu animate (animovať)"
 
 #: ../../src/writeHTML.cc:1155
 msgid "animate"
@@ -842,7 +842,7 @@ msgstr "animovať"
 
 #: ../../src/writeHTML.cc:1174
 msgid "Documentation for program command consume"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu consume (spotrebovať)"
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
@@ -850,7 +850,7 @@ msgstr "spotrebovat"
 
 #: ../../src/writeHTML.cc:1217 ../../src/writeHTML.cc:1254
 msgid "Documentation for program command produce"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu produce (vyrobiť)"
 
 #: ../../src/writeHTML.cc:1219
 msgid "produce"
@@ -862,11 +862,11 @@ msgstr "verbovať"
 
 #: ../../src/writeHTML.cc:1295
 msgid "Documentation for program command mine"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu mine (ťažiť)"
 
 #: ../../src/writeHTML.cc:1322
 msgid "Documentation for program command check_soldier"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu check_soldier (preveriť vojaka)"
 
 #: ../../src/writeHTML.cc:1324
 msgid "check soldier"
@@ -890,7 +890,7 @@ msgstr "vyhnúť sa"
 
 #: ../../src/writeHTML.cc:1346
 msgid "Documentation for program command train"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu train (vycvičiť)"
 
 #: ../../src/writeHTML.cc:1348
 msgid "train"
@@ -898,7 +898,7 @@ msgstr "trénovat"
 
 #: ../../src/writeHTML.cc:1370
 msgid "Documentation for program command playFX"
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu playFX (prehrať zvuk)"
 
 #: ../../src/writeHTML.cc:1387
 msgid "Documentation for program command construct"
