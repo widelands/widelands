@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2011-12-24 08:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -296,29 +296,25 @@ msgid ""
 msgstr ""
 
 #: ../../maps/Desert Tournament.wmf/elemental:11
+#: ../../maps/Four Castles.wmf/elemental:11
 #: ../../maps/Swamp Monks.wmf/elemental:11
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green)"
 msgstr ""
 
-#: ../../maps/Four Castles.wmf/elemental:11
-msgid ""
-"Suggested Teams: (blue,red) vs (yellow,green)"
-msgstr ""
-
 #: ../../maps/Four Mountains.wmf/elemental:11
 msgid ""
-"Suggested Teams: (blue,red) vs (yellow,green) or (red,yellow) vs (green,blue)"
-msgstr ""
-
-#: ../../maps/Atoll.wmf/elemental:11
-msgid ""
-"Suggested Teams: (red, green) vs (blue, yellow)"
+"Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, yellow)"
 msgstr ""
 
 #: ../../maps/Elven Forests.wmf/elemental:11
 msgid ""
-"Suggested Teams: (red, green) vs (blue,yellow) or (yellow, green) vs (red,blue)"
+"Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, green)"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:11
+msgid ""
+"Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:11
