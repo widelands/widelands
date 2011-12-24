@@ -147,6 +147,7 @@ private:
 			b->set_repeating(true);
 			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))
 			b->set_repeating(true);
+			buttons->add_space(8);
 			ADD_WARE_BUTTON(reset_target, "R", _("Reset to default"))
 		}
 
@@ -242,6 +243,7 @@ private:
 			b->set_repeating(true);
 			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))
 			b->set_repeating(true);
+			buttons->add_space(8);
 			ADD_WORKER_BUTTON(reset_target, "R", _("Reset to default"))
 		}
 
