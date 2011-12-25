@@ -7,37 +7,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2011-12-24 08:21+0000\n"
 "PO-Revision-Date: 2011-12-21 22:29+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-22 05:22+0000\n"
+"X-Launchpad-Export-Date: 2011-12-25 04:45+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
-#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:226
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:224
 msgid "Congratulations!"
 msgstr "Blahoželáme!"
 
-#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:214
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:212
 msgid "The player who defeats the other player wins the game"
 msgstr "Hráč, ktorý porazí druhého hráča, vyhráva hru."
 
-#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:214
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:212
 msgid "Together we're strong"
 msgstr "V jednote je sila"
 
-#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:221
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:219
 msgid "You are defeated!"
 msgstr "Boli ste porazený(á)!"
 
-#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:222
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:220
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr "Už nemáte čomu veliť. Ak chcete, môžete pokračovať ako divák."
 
-#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:226
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:224
 msgid "You have won this game!"
 msgstr "Vyhrali ste túto hru!"

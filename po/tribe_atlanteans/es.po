@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2011-12-24 08:21+0000\n"
 "PO-Revision-Date: 2011-08-21 14:24+0000\n"
 "Last-Translator: Alberto Domene Vasallo <albertodv@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:36+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-25 04:37+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -593,7 +593,7 @@ msgstr "Extraer piedra"
 msgid "Miner"
 msgstr "Minero"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
 msgid "Not enough space"
 msgstr "No hay espacio suficiente"
 
@@ -963,16 +963,12 @@ msgstr "Ahuma carne y pescado."
 msgid "Soldier"
 msgstr "Soldado"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:104
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
-"Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting \n"
+"Some of your starting buildings didn't have enough room and\n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
-"Algunos de los edificios de partida no tenían suficiente espacio y \n"
-"no fueron construidos. Debido a esto te encuentras en desventaja, considera "
-"reiniciar \n"
-"el mapa con una condición justa al comienzo."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 13:41+0100\n"
+"POT-Creation-Date: 2011-12-24 09:21+0100\n"
 "PO-Revision-Date: 2011-08-21 14:16+0000\n"
 "Last-Translator: HUNStree <hunstree@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -14,14 +14,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:39+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-25 04:40+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
 msgstr "Nincs"
 
-#: ../../src/s2map.cc:223
+#: ../../src/s2map.cc:224
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers II térkép, nem tartozik hozzá leírás!"
 
@@ -320,7 +320,7 @@ msgstr "Widelands nem tudott kapcsolódni a hoszthoz."
 msgid "The address of the game server is invalid"
 msgstr "A játékkiszolgáló címe érvénytelen"
 
-#: ../../src/wlapplication.cc:1851 ../../src/network/nethost.cc:1919
+#: ../../src/wlapplication.cc:1851 ../../src/network/nethost.cc:1935
 msgid "Player"
 msgstr "Játékos"
 
@@ -371,12 +371,12 @@ msgid "Building types"
 msgstr "Épülettípusok"
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:515
-#: ../../src/writeHTML.cc:1437
+#: ../../src/writeHTML.cc:1456
 msgid "Icon"
 msgstr "Ikon"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:517
-#: ../../src/writeHTML.cc:1439 ../../src/ui_fsmenu/netsetup_ggz.cc:153
+#: ../../src/writeHTML.cc:1458 ../../src/ui_fsmenu/netsetup_ggz.cc:153
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Name"
 msgstr "Név"
@@ -567,7 +567,7 @@ msgstr "%s kitüntetése"
 msgid "Programs"
 msgstr "Programok"
 
-#: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
+#: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1316
 #: ../../src/logic/building.cc:523
 msgid "mine"
 msgstr "bánya"
@@ -632,7 +632,7 @@ msgstr "geológus"
 msgid "geologist_find"
 msgstr ""
 
-#: ../../src/writeHTML.cc:770 ../../src/writeHTML.cc:1372
+#: ../../src/writeHTML.cc:770 ../../src/writeHTML.cc:1391
 msgid "playFX"
 msgstr ""
 
@@ -640,7 +640,7 @@ msgstr ""
 msgid "UNKNOWN"
 msgstr "ISMERETLEN"
 
-#: ../../src/writeHTML.cc:778 ../../src/wui/ware_statistics_menu.cc:183
+#: ../../src/writeHTML.cc:778 ../../src/wui/ware_statistics_menu.cc:182
 msgid "Production"
 msgstr "Előállítás"
 
@@ -675,11 +675,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:898 ../../src/writeHTML.cc:1041
 #: ../../src/writeHTML.cc:1103 ../../src/writeHTML.cc:1131
-#: ../../src/writeHTML.cc:1151 ../../src/writeHTML.cc:1172
-#: ../../src/writeHTML.cc:1215 ../../src/writeHTML.cc:1252
-#: ../../src/writeHTML.cc:1293 ../../src/writeHTML.cc:1320
-#: ../../src/writeHTML.cc:1344 ../../src/writeHTML.cc:1368
-#: ../../src/writeHTML.cc:1385
+#: ../../src/writeHTML.cc:1151 ../../src/writeHTML.cc:1170
+#: ../../src/writeHTML.cc:1191 ../../src/writeHTML.cc:1234
+#: ../../src/writeHTML.cc:1271 ../../src/writeHTML.cc:1312
+#: ../../src/writeHTML.cc:1339 ../../src/writeHTML.cc:1363
+#: ../../src/writeHTML.cc:1387 ../../src/writeHTML.cc:1404
 msgid "productionsite_program_reference.xhtml"
 msgstr ""
 
@@ -688,7 +688,7 @@ msgid "Documentation for program command return"
 msgstr ""
 
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
-#: ../../src/logic/production_program.cc:771
+#: ../../src/logic/production_program.cc:801
 msgid "failed"
 msgstr "sikertelen"
 
@@ -786,92 +786,105 @@ msgstr ""
 msgid "sleep"
 msgstr "alvás"
 
-#: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
+#: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1180
 #, c-format
 msgid " %u.%03u s"
 msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
-msgid "Documentation for program command animate"
+msgid "Documentation for program command check_map"
 msgstr ""
 
 #: ../../src/writeHTML.cc:1155
+msgid "check_map"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1160
+#, c-format
+msgid "Seafaring"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1172
+msgid "Documentation for program command animate"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1174
 msgid "animate"
 msgstr "animálás"
 
-#: ../../src/writeHTML.cc:1174
+#: ../../src/writeHTML.cc:1193
 msgid "Documentation for program command consume"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1176
+#: ../../src/writeHTML.cc:1195
 msgid "consume"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1217 ../../src/writeHTML.cc:1254
+#: ../../src/writeHTML.cc:1236 ../../src/writeHTML.cc:1273
 msgid "Documentation for program command produce"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1219
+#: ../../src/writeHTML.cc:1238
 msgid "produce"
 msgstr "gyártás"
 
-#: ../../src/writeHTML.cc:1256
+#: ../../src/writeHTML.cc:1275
 msgid "recruit"
 msgstr "toboroz"
 
-#: ../../src/writeHTML.cc:1295
+#: ../../src/writeHTML.cc:1314
 msgid "Documentation for program command mine"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1322
+#: ../../src/writeHTML.cc:1341
 msgid "Documentation for program command check_soldier"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1324
+#: ../../src/writeHTML.cc:1343
 msgid "check soldier"
 msgstr "katona ellenőrzés"
 
-#: ../../src/writeHTML.cc:1330 ../../src/writeHTML.cc:1354
+#: ../../src/writeHTML.cc:1349 ../../src/writeHTML.cc:1373
 msgid "hp"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1331 ../../src/writeHTML.cc:1355
+#: ../../src/writeHTML.cc:1350 ../../src/writeHTML.cc:1374
 msgid "attack"
 msgstr "támadás"
 
-#: ../../src/writeHTML.cc:1332 ../../src/writeHTML.cc:1356
+#: ../../src/writeHTML.cc:1351 ../../src/writeHTML.cc:1375
 msgid "defense"
 msgstr "védekezés"
 
-#: ../../src/writeHTML.cc:1333 ../../src/writeHTML.cc:1357
+#: ../../src/writeHTML.cc:1352 ../../src/writeHTML.cc:1376
 msgid "evade"
 msgstr "elkerüljék"
 
-#: ../../src/writeHTML.cc:1346
+#: ../../src/writeHTML.cc:1365
 msgid "Documentation for program command train"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1348
+#: ../../src/writeHTML.cc:1367
 msgid "train"
 msgstr "vonat"
 
-#: ../../src/writeHTML.cc:1370
+#: ../../src/writeHTML.cc:1389
 msgid "Documentation for program command playFX"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1387
+#: ../../src/writeHTML.cc:1406
 msgid "Documentation for program command construct"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1389
+#: ../../src/writeHTML.cc:1408
 msgid "construct"
 msgstr "konstrukció"
 
-#: ../../src/writeHTML.cc:1426 ../../src/writeHTML.cc:1432
+#: ../../src/writeHTML.cc:1445 ../../src/writeHTML.cc:1451
 msgid "Ware types"
 msgstr ""
 
-#: ../../src/writeHTML.cc:1466
+#: ../../src/writeHTML.cc:1485
 msgid "ware_types.xhtml"
 msgstr "ware_types_hu_HU.xhtml"
 
@@ -1013,7 +1026,7 @@ msgstr ""
 "kompatibilis ezzel a verzióval."
 
 #: ../../src/editor/editorinteractive.cc:176
-#: ../../src/editor/editorinteractive.cc:581
+#: ../../src/editor/editorinteractive.cc:580
 #: ../../src/logic/editor_game_base.cc:284
 #, c-format
 msgid "Loading tribe: %s"
@@ -1029,7 +1042,7 @@ msgid "Loading world data"
 msgstr "Világ adatainak betöltése"
 
 #: ../../src/editor/editorinteractive.cc:192
-#: ../../src/editor/editorinteractive.cc:585
+#: ../../src/editor/editorinteractive.cc:584
 msgid "Loading graphics..."
 msgstr "Képek betöltése..."
 
@@ -1041,7 +1054,7 @@ msgstr "Térkép nincs mentve"
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "A térképet nincs elmentve, biztosan ki akarsz lépni?"
 
-#: ../../src/editor/editorinteractive.cc:572
+#: ../../src/editor/editorinteractive.cc:571
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:485
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:184
@@ -1049,7 +1062,7 @@ msgstr "A térképet nincs elmentve, biztosan ki akarsz lépni?"
 msgid "No Name"
 msgstr "Névtelen"
 
-#: ../../src/editor/editorinteractive.cc:574
+#: ../../src/editor/editorinteractive.cc:573
 #: ../../src/ui_fsmenu/netsetup_lan.cc:194
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
@@ -1107,6 +1120,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:68
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:71
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:79
+#: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:62
 #, c-format
 msgid "unknown/unhandled version %i"
 msgstr ""
@@ -1129,19 +1143,19 @@ msgstr ""
 #: ../../src/logic/production_program.cc:388
 #: ../../src/logic/production_program.cc:516
 #: ../../src/logic/production_program.cc:530
-#: ../../src/logic/production_program.cc:646
-#: ../../src/logic/production_program.cc:688
-#: ../../src/logic/production_program.cc:845
-#: ../../src/logic/production_program.cc:940
-#: ../../src/logic/production_program.cc:1019
-#: ../../src/logic/production_program.cc:1029
-#: ../../src/logic/production_program.cc:1040
-#: ../../src/logic/production_program.cc:1195
-#: ../../src/logic/production_program.cc:1217
-#: ../../src/logic/production_program.cc:1268
-#: ../../src/logic/production_program.cc:1280
-#: ../../src/logic/production_program.cc:1289
-#: ../../src/logic/production_program.cc:1377 ../../src/logic/soldier.cc:68
+#: ../../src/logic/production_program.cc:645
+#: ../../src/logic/production_program.cc:718
+#: ../../src/logic/production_program.cc:875
+#: ../../src/logic/production_program.cc:970
+#: ../../src/logic/production_program.cc:1049
+#: ../../src/logic/production_program.cc:1059
+#: ../../src/logic/production_program.cc:1070
+#: ../../src/logic/production_program.cc:1225
+#: ../../src/logic/production_program.cc:1247
+#: ../../src/logic/production_program.cc:1298
+#: ../../src/logic/production_program.cc:1310
+#: ../../src/logic/production_program.cc:1319
+#: ../../src/logic/production_program.cc:1407 ../../src/logic/soldier.cc:68
 #: ../../src/logic/soldier.cc:75 ../../src/logic/soldier.cc:182
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:495
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
@@ -1279,7 +1293,7 @@ msgstr ""
 "A hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a "
 "játékosnak a szerkesztőben."
 
-#: ../../src/logic/immovable.cc:144 ../../src/logic/production_program.cc:1582
+#: ../../src/logic/immovable.cc:144 ../../src/logic/production_program.cc:1614
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr ""
@@ -1336,12 +1350,12 @@ msgstr ""
 msgid "immovable type %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:825 ../../src/logic/production_program.cc:647
-#: ../../src/logic/production_program.cc:689
+#: ../../src/logic/immovable.cc:825 ../../src/logic/production_program.cc:646
+#: ../../src/logic/production_program.cc:719
 msgid "duration in ms"
 msgstr "hossz ezredmásodpercben"
 
-#: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1377
+#: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1407
 msgid "priority"
 msgstr "prioritás"
 
@@ -1614,8 +1628,8 @@ msgid ""
 msgstr ""
 
 #: ../../src/logic/production_program.cc:114
-#: ../../src/logic/production_program.cc:846
-#: ../../src/logic/production_program.cc:941
+#: ../../src/logic/production_program.cc:876
+#: ../../src/logic/production_program.cc:971
 msgid "count"
 msgstr "száma"
 
@@ -1670,12 +1684,12 @@ msgid "expected \"or\" or end of input"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:418
-#: ../../src/logic/production_program.cc:795
+#: ../../src/logic/production_program.cc:825
 msgid " and "
 msgstr " és "
 
 #: ../../src/logic/production_program.cc:419
-#: ../../src/logic/production_program.cc:774
+#: ../../src/logic/production_program.cc:804
 msgid " because: "
 msgstr " mert "
 
@@ -1722,98 +1736,108 @@ msgstr "{\"hiba\"|\"befejezését\"|\"skip\"}"
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 msgstr "{\"nem\"|\"teljes\"|\"skip\"|\"ismétlés\"}"
 
-#: ../../src/logic/production_program.cc:651
+#: ../../src/logic/production_program.cc:650
+#: ../../src/logic/production_program.cc:672
 #, c-format
 msgid "sleep: %s"
 msgstr "alvás: %s"
 
-#: ../../src/logic/production_program.cc:672
+#: ../../src/logic/production_program.cc:668
+#, c-format
+msgid "Unknown parameter \"%s\""
+msgstr ""
+
+#: ../../src/logic/production_program.cc:670
+msgid "No parameter given!"
+msgstr ""
+
+#: ../../src/logic/production_program.cc:702
 msgid "idle animation is default; calling is not allowed"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:721
+#: ../../src/logic/production_program.cc:751
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
 msgstr ""
 
-#: ../../src/logic/production_program.cc:798
+#: ../../src/logic/production_program.cc:828
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " hiányzik"
 msgstr[1] " hiányzanak"
 
-#: ../../src/logic/production_program.cc:860
-#: ../../src/logic/production_program.cc:955
+#: ../../src/logic/production_program.cc:890
+#: ../../src/logic/production_program.cc:985
 #, c-format
 msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:887
-#: ../../src/logic/production_program.cc:980
+#: ../../src/logic/production_program.cc:917
+#: ../../src/logic/production_program.cc:1010
 #, c-format
 msgid "%u "
 msgstr "%u "
 
-#: ../../src/logic/production_program.cc:894
-#: ../../src/logic/production_program.cc:987
+#: ../../src/logic/production_program.cc:924
+#: ../../src/logic/production_program.cc:1017
 msgid ", "
 msgstr ", "
 
-#: ../../src/logic/production_program.cc:897
+#: ../../src/logic/production_program.cc:927
 #, c-format
 msgid "Produced %s"
 msgstr "Termelt: %s"
 
-#: ../../src/logic/production_program.cc:972
+#: ../../src/logic/production_program.cc:1002
 msgid "Recruited "
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1019
+#: ../../src/logic/production_program.cc:1049
 msgid "distance"
 msgstr "távolság"
 
-#: ../../src/logic/production_program.cc:1030
-#: ../../src/logic/production_program.cc:1041
+#: ../../src/logic/production_program.cc:1060
+#: ../../src/logic/production_program.cc:1071
 msgid "percentage"
 msgstr "százalék"
 
-#: ../../src/logic/production_program.cc:1158
+#: ../../src/logic/production_program.cc:1188
 #, c-format
 msgid "No left resources found!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1179
+#: ../../src/logic/production_program.cc:1209
 msgid "Mine empty"
 msgstr "A bánya üres."
 
-#: ../../src/logic/production_program.cc:1181
+#: ../../src/logic/production_program.cc:1211
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
 msgstr "A bánya kiürült. Fontold meg a kibővítését, esetleg a lerombolását."
 
-#: ../../src/logic/production_program.cc:1195
-#: ../../src/logic/production_program.cc:1268
+#: ../../src/logic/production_program.cc:1225
+#: ../../src/logic/production_program.cc:1298
 msgid "soldier type"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1208
+#: ../../src/logic/production_program.cc:1238
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1217
-#: ../../src/logic/production_program.cc:1289
+#: ../../src/logic/production_program.cc:1247
+#: ../../src/logic/production_program.cc:1319
 msgid "level"
 msgstr "szint"
 
-#: ../../src/logic/production_program.cc:1236
-#: ../../src/logic/production_program.cc:1323
+#: ../../src/logic/production_program.cc:1266
+#: ../../src/logic/production_program.cc:1353
 #, c-format
 msgid "No soldier for this training level found!"
 msgstr "Nem található katona ehhez az edzettségi szinthez!"
 
-#: ../../src/logic/production_program.cc:1299
+#: ../../src/logic/production_program.cc:1329
 #, c-format
 msgid "expected level > %u but found \"%s\""
 msgstr ""
@@ -2180,11 +2204,11 @@ msgstr ""
 msgid "heights: %s"
 msgstr "magasságok: %s"
 
-#: ../../src/map_io/widelands_map_loader.cc:84
+#: ../../src/map_io/widelands_map_loader.cc:85
 msgid "Invalid World"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:86
+#: ../../src/map_io/widelands_map_loader.cc:87
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
 msgstr ""
@@ -2268,6 +2292,11 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:140
 #, c-format
 msgid "unseen immovable: %s"
+msgstr ""
+
+#: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:64
+#, c-format
+msgid "port_spaces data: %s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
@@ -2356,40 +2385,40 @@ msgstr ""
 msgid "Server uses a different protocol version"
 msgstr "A szerver más verziójú protokollt használ"
 
-#: ../../src/network/netclient.cc:824
+#: ../../src/network/netclient.cc:823
 msgid "/me 's file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/netclient.cc:854
+#: ../../src/network/netclient.cc:853
 msgid ""
 "/me checked the recieved file. Although md5 check summing succeded, I can "
 "not handle the file."
 msgstr ""
 
-#: ../../src/network/netclient.cc:925
+#: ../../src/network/netclient.cc:924
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Váratlanul LAUNCH parancs érkezett a szervertől."
 
-#: ../../src/network/netclient.cc:945
+#: ../../src/network/netclient.cc:944
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr ""
 
-#: ../../src/network/netclient.cc:958
+#: ../../src/network/netclient.cc:957
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr ""
 "A szerver SYNCREQUEST csomagot küldött annak ellenére, hogy a játék nem is "
 "indult még el."
 
-#: ../../src/network/netclient.cc:989
+#: ../../src/network/netclient.cc:988
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr "A szerver ismeretlen parancsot küldött (parancs sorszáma: %u)"
 
-#: ../../src/network/netclient.cc:1023
+#: ../../src/network/netclient.cc:1022
 msgid "Something went wrong: "
 msgstr "Valami hiba történt: "
 
-#: ../../src/network/netclient.cc:1054
+#: ../../src/network/netclient.cc:1053
 msgid " An automatic savegame will be created."
 msgstr ""
 
@@ -2556,144 +2585,144 @@ msgstr ""
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1452
+#: ../../src/network/nethost.cc:1468
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1858
+#: ../../src/network/nethost.cc:1874
 #, c-format
 msgid "Computer%u"
 msgstr "Számítógépes%u"
 
-#: ../../src/network/nethost.cc:1944
+#: ../../src/network/nethost.cc:1960
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2003
+#: ../../src/network/nethost.cc:2019
 #, c-format
 msgid "%s has joined the game"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2017
+#: ../../src/network/nethost.cc:2033
 #, c-format
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
 
-#: ../../src/network/nethost.cc:2055
+#: ../../src/network/nethost.cc:2071
 msgid "Client reports time to host that is running backwards."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2058
+#: ../../src/network/nethost.cc:2074
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2062
+#: ../../src/network/nethost.cc:2078
 msgid "Client did not submit sync report in time."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2269
+#: ../../src/network/nethost.cc:2285
 msgid "Client and host have become desynchronized."
 msgstr "A kliens és a hoszt nincs többé szinkronban."
 
-#: ../../src/network/nethost.cc:2316
+#: ../../src/network/nethost.cc:2332
 msgid "The game has already started."
 msgstr "A játék már elkezdődött."
 
-#: ../../src/network/nethost.cc:2334
+#: ../../src/network/nethost.cc:2350
 msgid "Connection to client lost."
 msgstr "A kapcsolat megszakadt a klienssel."
 
-#: ../../src/network/nethost.cc:2348
+#: ../../src/network/nethost.cc:2364
 msgid "Client sent malformed commands: "
 msgstr "A kliens hibás parancsot küldött: "
 
-#: ../../src/network/nethost.cc:2380
+#: ../../src/network/nethost.cc:2396
 msgid "Game is running already, but client has not connected fully"
 msgstr "A játék már elindult, de a kliens nem csatlakozott teljesen"
 
-#: ../../src/network/nethost.cc:2384
+#: ../../src/network/nethost.cc:2400
 #, c-format
 msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2389
+#: ../../src/network/nethost.cc:2405
 msgid "Server uses a different protocol version."
 msgstr "A szerver más protokollt használ."
 
-#: ../../src/network/nethost.cc:2407 ../../src/network/nethost.cc:2459
-#: ../../src/network/nethost.cc:2474 ../../src/network/nethost.cc:2485
-#: ../../src/network/nethost.cc:2496
+#: ../../src/network/nethost.cc:2423 ../../src/network/nethost.cc:2475
+#: ../../src/network/nethost.cc:2490 ../../src/network/nethost.cc:2501
+#: ../../src/network/nethost.cc:2512
 msgid "Client has no access to other player's settings."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2512 ../../src/network/nethost.cc:2521
-#: ../../src/network/nethost.cc:2530
+#: ../../src/network/nethost.cc:2528 ../../src/network/nethost.cc:2537
+#: ../../src/network/nethost.cc:2546
 msgid "Client has no access to server settings."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2532
+#: ../../src/network/nethost.cc:2548
 msgid "Client send start command, although server is not yet ready."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2539
+#: ../../src/network/nethost.cc:2555
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 "A klienst TIME parancsot küldött annak ellenére, hogy a játék még nem indult "
 "el."
 
-#: ../../src/network/nethost.cc:2545
+#: ../../src/network/nethost.cc:2561
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2556
+#: ../../src/network/nethost.cc:2572
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2565
+#: ../../src/network/nethost.cc:2581
 msgid "Client sent unexpected synchronization report."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2600 ../../src/network/nethost.cc:2611
+#: ../../src/network/nethost.cc:2616 ../../src/network/nethost.cc:2627
 msgid "Client requests file altough none is available to send."
 msgstr ""
 
-#: ../../src/network/nethost.cc:2602
+#: ../../src/network/nethost.cc:2618
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2619
+#: ../../src/network/nethost.cc:2635
 msgid "Client requests file part that does not exist."
 msgstr "A kliens olyan fájl darabját kéri amely nem létezik."
 
-#: ../../src/network/nethost.cc:2622
+#: ../../src/network/nethost.cc:2638
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "A %s fájl átvitele befejeződött a %s játékoshoz"
 
-#: ../../src/network/nethost.cc:2630
+#: ../../src/network/nethost.cc:2646
 #, c-format
 msgid "Sending part %u/%zu of file %s to %s"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2639
+#: ../../src/network/nethost.cc:2655
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "A kliens ismeretlen parancsot küldött, amely sorszáma: %u"
 
-#: ../../src/network/nethost.cc:2696
+#: ../../src/network/nethost.cc:2712
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s elhagyta a (%s) játékot"
 
-#: ../../src/network/nethost.cc:2715
+#: ../../src/network/nethost.cc:2731
 #, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr ""
@@ -2924,7 +2953,7 @@ msgid "Select a saved game"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84 ../../src/ui_fsmenu/options.cc:56
-#: ../../src/ui_fsmenu/options.cc:391
+#: ../../src/ui_fsmenu/options.cc:392
 #: ../../src/wui/game_main_menu_save_game.cc:95 ../../src/wui/login_box.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:129
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
@@ -3453,11 +3482,11 @@ msgstr "Szabad"
 msgid "Closed"
 msgstr "Lezárt"
 
-#: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:420
+#: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:421
 msgid "Advanced Options"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:396
+#: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:397
 msgid "Apply"
 msgstr "Alkalmaz"
 
@@ -3541,66 +3570,70 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:274
+#: ../../src/ui_fsmenu/options.cc:200
+msgid "1 day"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:275
 #, c-format
 msgid "%ix%i %i bit"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:296
+#: ../../src/ui_fsmenu/options.cc:297
 msgid "Try system language"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:402
+#: ../../src/ui_fsmenu/options.cc:403
 msgid "x"
 msgstr "x"
 
-#: ../../src/ui_fsmenu/options.cc:407 ../../src/ui_fsmenu/options.cc:412
+#: ../../src/ui_fsmenu/options.cc:408 ../../src/ui_fsmenu/options.cc:413
 msgid "px."
 msgstr "px."
 
-#: ../../src/ui_fsmenu/options.cc:431
+#: ../../src/ui_fsmenu/options.cc:432
 msgid "Main menu font:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:437
+#: ../../src/ui_fsmenu/options.cc:438
 msgid "Play a sound at message arrival."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:445
+#: ../../src/ui_fsmenu/options.cc:446
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 "Ne tömörítse a Widelands adat fájlokat (térképek, visszajátszások, mentett "
 "játékok)"
 
-#: ../../src/ui_fsmenu/options.cc:450
+#: ../../src/ui_fsmenu/options.cc:451
 msgid "Speed of a new game:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:454
+#: ../../src/ui_fsmenu/options.cc:455
 msgid "Distance for windows to snap to other panels:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:458
+#: ../../src/ui_fsmenu/options.cc:459
 msgid "Distance for windows to snap to borders:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:464
+#: ../../src/ui_fsmenu/options.cc:465
 msgid "Remove Syncstream dumps on startup"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:470
+#: ../../src/ui_fsmenu/options.cc:471
 msgid "OpenGL rendering *Highly experimental!*"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:475
+#: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:514
+#: ../../src/ui_fsmenu/options.cc:515
 msgid "Pause"
 msgstr "Szünet"
 
-#: ../../src/ui_fsmenu/options.cc:525
+#: ../../src/ui_fsmenu/options.cc:526
 msgid "FreeSerif (Default)"
 msgstr ""
 
@@ -3858,7 +3891,7 @@ msgid "General Statistics"
 msgstr "Általános statisztika"
 
 #: ../../src/wui/game_main_menu.cc:57
-#: ../../src/wui/ware_statistics_menu.cc:144
+#: ../../src/wui/ware_statistics_menu.cc:143
 msgid "Ware Statistics"
 msgstr "Termék statisztika"
 
@@ -4178,7 +4211,7 @@ msgid "Soldiers"
 msgstr "Katonák"
 
 #: ../../src/wui/minimap.cc:145
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:68
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 msgid "Terrain"
 msgstr "Terep"
 
@@ -4305,8 +4338,8 @@ msgstr ""
 msgid "Capacity"
 msgstr "Kapacitás"
 
-#: ../../src/wui/soldierlist.cc:381 ../../src/wui/soldierlist.cc:395
-#: ../../src/wui/soldierlist.cc:408
+#: ../../src/wui/soldierlist.cc:382 ../../src/wui/soldierlist.cc:396
+#: ../../src/wui/soldierlist.cc:418
 msgid "Click soldier to send away"
 msgstr ""
 
@@ -4334,23 +4367,23 @@ msgstr ""
 msgid "Economy options"
 msgstr "Gazdaság beállításai"
 
-#: ../../src/wui/transport_ui.cc:146 ../../src/wui/transport_ui.cc:241
-msgid "Increase target"
-msgstr ""
-
-#: ../../src/wui/transport_ui.cc:148 ../../src/wui/transport_ui.cc:243
+#: ../../src/wui/transport_ui.cc:146 ../../src/wui/transport_ui.cc:242
 msgid "Decrease target"
 msgstr ""
 
-#: ../../src/wui/transport_ui.cc:150 ../../src/wui/transport_ui.cc:245
+#: ../../src/wui/transport_ui.cc:148 ../../src/wui/transport_ui.cc:244
+msgid "Increase target"
+msgstr ""
+
+#: ../../src/wui/transport_ui.cc:151 ../../src/wui/transport_ui.cc:247
 msgid "Reset to default"
 msgstr ""
 
-#: ../../src/wui/ware_statistics_menu.cc:194
+#: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
 msgstr ""
 
-#: ../../src/wui/ware_statistics_menu.cc:205
+#: ../../src/wui/ware_statistics_menu.cc:204
 msgid "Economy Health"
 msgstr ""
 
@@ -4786,45 +4819,49 @@ msgstr "Erőforrás eszközök beállításai"
 msgid "Current Selection"
 msgstr "Jelenleg kiválasztott"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:46
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:47
 msgid "Tool Menu"
 msgstr "Eszközök menü"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:66
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 msgid "Change height"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Noise height"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Immovable"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:70
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Bob"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:72
 msgid "Resource"
 msgstr "Forrás"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:73
+msgid "Set port space"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
 msgstr "Hepehupás terület beállításai"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:145
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:144
 #, c-format
 msgid "Minimum: %u"
 msgstr "Legalább: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:147
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Maximum: %u"
 msgstr "Legfeljebb: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:152
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
 #, c-format
 msgid "Set value: %u"
 msgstr "Érték beállítása: %u"

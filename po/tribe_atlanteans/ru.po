@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2011-12-24 08:21+0000\n"
 "PO-Revision-Date: 2011-08-31 10:27+0000\n"
 "Last-Translator: Denis Deryabin <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-03 04:36+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-25 04:37+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -588,7 +588,7 @@ msgstr "добыть камень"
 msgid "Miner"
 msgstr "Шахтёр"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
 msgid "Not enough space"
 msgstr "Недостаточно места"
 
@@ -956,15 +956,12 @@ msgstr "Коптит мясо и рыбу."
 msgid "Soldier"
 msgstr "Солдат"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:104
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
-"Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting \n"
+"Some of your starting buildings didn't have enough room and\n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
-"Для некторых Ваших стартовых зданий не хватило места и \n"
-"они не были построены. Вы в невыгодном положении; начните \n"
-"эту карту заново."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
