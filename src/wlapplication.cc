@@ -1,4 +1,4 @@
-t/*
+/*
  * Copyright (C) 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
