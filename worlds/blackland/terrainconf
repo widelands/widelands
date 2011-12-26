@@ -1,62 +1,78 @@
 ##### Order does matter here, since this file should stay compatible with S2
 
 [ashes]
+name=_"Ashes"
 def_resources=water 5
 is=green
 
 [mountain1]
+name=_"Mountain1"
 resources=coal, iron, gold, granit 
 is=mountain
 
 [lava-stone1]
+name=_"Lava stone1"
 is=acid
 
 [lava-stone2]
+name=_"Lava stone2"
 is=acid
 
 [strand]
+name=_"Beach"
 is=dry
 
 [water]
+name=_"Water"
 def_resources=fish 4
 is=water
 fps=14
 
 [hardground1]
+name=_"Hardground1"
 def_resources=water 10
 is=green
 
 [hardground2]
+name=_"Hardground2"
 def_resources=water 10
 is=green
 
 [hardground3]
+name=_"Hardground3"
 def_resources=water 10
 is=green
 
 [mountain2]
+name=_"Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 
 [mountain3]
+name=_"Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 
 [mountain4]
+name=_"Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 
 [ashes2]
+name=_"Ashes2"
 def_resources=water 4
 is=green
 
 [hardground4]
+name=_"Hardground4"
 def_resources=water 10
 is=green
 
 [lava]
+name=_"Lava"
 is=acid
 
 [hardlava]
+name=_"Hard lava"
 is=green
 

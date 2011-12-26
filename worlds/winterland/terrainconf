@@ -1,64 +1,80 @@
 ##### Order does matter here, since this file should stay compatible with S2
 
 [tundra]
+name=_"Tundra"
 def_resources=water 5
 is=green
 
 [mountain1]
+name=_"Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
 
 [ice_flows]
+name=_"Ice flows"
 is=water
 fps=5
 
 [ice_flows2]
+name=_"Ice flows2"
 is=water
 fps=5
 
 [ice]
+name=_"Ice"
 is=dry
 #### of course ice is not dry, but this disallows the users, to build on snow. only flags are allowed. ;-)
 
 [water]
+name=_"Water"
 def_resources=fish 4
 is=water
 fps=8
 
 [tundra_taiga]
+name=_"Tundra taiga"
 def_resources=water 10
 is=green
 
 [tundra2]
+name=_"Tundra2"
 def_resources=water 10
 is=green
 
 [tundra3]
+name=_"Tundra3"
 def_resources=water 10
 is=green
 
 [mountain2]
+name=_"Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 
 [mountain3]
+name=_"Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 
 [mountain4]
+name=_"Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 
 [strand]
+name=_"Beach"
 is=dry
 
 [taiga]
+name=_"Taiga"
 def_resources=water 10
 is=green
 
 [lava]
+name=_"Lava"
 is=acid
 
 [snow]
+name=_"Snow"
 def_resources=water 30
 is=green
