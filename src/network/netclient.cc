@@ -850,7 +850,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 				s.Unsigned8(NETCMD_CHAT);
 				s.String
 					(_
-					  ("/me checked the recieved file. Although md5 check summing succeded, "
+					  ("/me checked the received file. Although md5 check summing succeeded, "
 					   "I can not handle the file."));
 				s.send(d->sock);
 			}

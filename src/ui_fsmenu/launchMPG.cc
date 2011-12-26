@@ -408,7 +408,7 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
 			 	 "The file was: %s\n"
 			 	 "If this happens, the host might have selected a file that you do "
 			 	 "not own. Normally such a file should be send from the host to "
-			 	 "you, but perhaps the transfer was not yet finnished!?!"),
+			 	 "you, but perhaps the transfer was not yet finished!?!"),
 			 m_settings->settings().mapfilename.c_str());
 	if (m_settings->canLaunch())
 		end_modal(1);
@@ -428,7 +428,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_WARNING);
 			m_client_info.set_text
 				(_("The selected file can not be found. If it is not automatically "
-				   "transfered to you, please write the host about this problem."));
+				   "transferred to you, please write the host about this problem."));
 		} else {
 			// Reset font color
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -635,7 +635,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	if (m_help)
 		delete m_help;
 	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), m_fs);
-	m_help->add_paragraph(_("You are in the multi player launch game menu."));
+	m_help->add_paragraph(_("You are in the multiplayer launch game menu."));
 	m_help->add_heading(_("Client settings"));
 	m_help->add_paragraph
 		(_
@@ -665,7 +665,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	m_help->add_picture_li(_("Closed."), "pics/stop.png");
 	m_help->add_block
 		(_
-		 ("The later three are only setable by the hosting client by left clicking the \"type\" button of a "
+		 ("The later three are only settable by the hosting client by left clicking the \"type\" button of a "
 		  "player. Hosting players can further set the initializations of each player (the set of buildings, "
 		  "wares and workers the player starts with) and the tribe an team for computer players"));
 	m_help->add_block

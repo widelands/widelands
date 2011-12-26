@@ -1,4 +1,4 @@
-/*
+t/*
  * Copyright (C) 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
@@ -1673,7 +1673,7 @@ void WLApplication::mainmenu_multiplayer()
 						NetGGZ::ref().data();
 						if (10 < time(0) - secs)
 							throw warning
-								(_("Connection timeouted"), "%s",
+								(_("Connection timed out"), "%s",
 								 _
 								 	("Widelands has not been able to get the IP "
 								 	 "address of the server in time.\n"
