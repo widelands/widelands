@@ -178,7 +178,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	for (Widelands::Terrain_Index i = 0; j; ++i)
 		if (m_tool.is_enabled(i)) {
 			buf += " ";
-			buf += world.get_ter(i).name();
+			buf += world.get_ter(i).descname();
 			--j;
 		}
 	m_cur_selection.set_text(buf);
@@ -228,7 +228,7 @@ void Editor_Tool_Set_Terrain_Options_Menu::selected
 		for (Widelands::Terrain_Index i = 0; j; ++i)
 			if (m_tool.is_enabled(i)) {
 				buf += " ";
-				buf += world.get_ter(i).name();
+				buf += world.get_ter(i).descname();
 				--j;
 			}
 
