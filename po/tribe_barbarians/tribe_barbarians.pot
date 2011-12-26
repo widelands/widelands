@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-24 08:21+0000\n"
+"POT-Creation-Date: 2011-12-26 07:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -177,7 +177,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid ""
-"Burns lime in the lime kilm."
+"Burns lime in the lime kiln."
 msgstr ""
 
 #: ../../tribes/barbarians/conf:111

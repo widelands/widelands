@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-24 08:21+0000\n"
+"POT-Creation-Date: 2011-12-26 07:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -350,7 +350,7 @@ msgstr ""
 
 #: ../../worlds/greenland/conf:4
 msgid ""
-"These are the beauty and bountifull countries of the barbarians"
+"These are the beauty and bountiful countries of the barbarians"
 msgstr ""
 
 #: ../../worlds/greenland/resconf:36

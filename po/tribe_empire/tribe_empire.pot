@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-24 08:21+0000\n"
+"POT-Creation-Date: 2011-12-26 07:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -561,7 +561,7 @@ msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid ""
-"Keeping sheeps."
+"Keeping sheep."
 msgstr ""
 
 #: ../../tribes/empire/conf:80
@@ -1463,7 +1463,7 @@ msgstr ""
 
 #: ../../tribes/empire/wool/conf:1
 msgid ""
-"Wool is the hair of sheeps. Weaving mills use it to make cloth."
+"Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:30
