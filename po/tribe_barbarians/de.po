@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-24 08:21+0000\n"
-"PO-Revision-Date: 2011-12-05 13:29+0000\n"
-"Last-Translator: LAZA <Unknown>\n"
+"PO-Revision-Date: 2011-12-25 09:26+0000\n"
+"Last-Translator: Flames_in_Paradise <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-25 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-12-26 04:40+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -53,7 +53,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Ein seetaugliches Schiff"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -251,7 +251,7 @@ msgstr "Kohlemine"
 
 #: ../../tribes/barbarians/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Ein Schiff erbauen"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Construction Site"
@@ -303,7 +303,7 @@ msgstr "Sucht nach Ressourcen für den Bergbau."
 
 #: ../../tribes/barbarians/conf:154
 msgid "Dismantle Site"
-msgstr "Abbruch des Gebäudes"
+msgstr "Abriss des Gebäudes"
 
 #: ../../tribes/barbarians/conf:222
 msgid "Donjon"
@@ -690,7 +690,7 @@ msgstr "pflanzt Bäume."
 
 #: ../../tribes/barbarians/conf:175
 msgid "Port"
-msgstr ""
+msgstr "Hafen"
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
@@ -929,19 +929,19 @@ msgstr "Scharfe Axt"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Ship"
-msgstr ""
+msgstr "Schiff"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Ship construction site"
-msgstr ""
+msgstr "Schiffsbaustelle"
 
 #: ../../tribes/barbarians/conf:139
 msgid "Shipwright"
-msgstr ""
+msgstr "Schiffszimmermann"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Shipyard"
-msgstr ""
+msgstr "Werft"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Shovel"
@@ -1493,7 +1493,7 @@ msgstr "Arbeitet auf Baustellen, um ein neues Gebäude zu bauen."
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Arbeitet in der Werft und erstellt neue Schiffe."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
