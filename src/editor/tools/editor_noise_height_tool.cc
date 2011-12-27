@@ -47,7 +47,7 @@ int32_t Editor_Noise_Height_Tool::handle_click_impl
 				 	 +
 				 	 static_cast<int32_t>
 				 	 	(static_cast<double>
-				 	 	 	(m_interval.min - m_interval.max) * rand()
+				 	 	 	(m_interval.max - m_interval.min + 1) * rand()
 				 	 	 /
 				 	 	 (RAND_MAX + 1.0))));
 	while (mr.advance(map));
