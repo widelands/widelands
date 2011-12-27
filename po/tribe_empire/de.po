@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-24 08:21+0000\n"
-"PO-Revision-Date: 2011-12-25 09:37+0000\n"
-"Last-Translator: Flames_in_Paradise <Unknown>\n"
+"POT-Creation-Date: 2011-12-26 07:53+0000\n"
+"PO-Revision-Date: 2011-12-26 17:53+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-26 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-12-27 04:45+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -510,8 +510,8 @@ msgstr ""
 "wird in Eisenminen abgebaut."
 
 #: ../../tribes/empire/shepherd/conf:1
-msgid "Keeping sheeps."
-msgstr "Züchtet Schafe."
+msgid "Keeping sheep."
+msgstr "Behalte Schafe."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -1444,10 +1444,10 @@ msgid "Wool"
 msgstr "Wolle"
 
 #: ../../tribes/empire/wool/conf:1
-msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
+msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
-"Wolle ist das Haar von Schafen. Imperiale Webereien benutzen sie, um Stoffe "
-"zu erstellen."
+"Wolle ist das Haar von Schafen. Webereien verwenden es, um Stoff "
+"herzustellen."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20

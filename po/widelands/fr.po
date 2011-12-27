@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-24 09:21+0100\n"
+"POT-Creation-Date: 2011-12-26 08:53+0100\n"
 "PO-Revision-Date: 2011-12-06 08:46+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2011-12-25 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-12-27 04:47+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: ../../src/computer_player.cc:38
@@ -338,8 +338,8 @@ msgstr ""
 "reprendre la partie.\n"
 
 #: ../../src/wlapplication.cc:1676
-msgid "Connection timeouted"
-msgstr "Délai de connexion dépassé"
+msgid "Connection timed out"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1678
 msgid ""
@@ -950,7 +950,7 @@ msgstr "ware_types_fr_FR.xhtml"
 #: ../../src/logic/cmd_queue.cc:192 ../../src/logic/critter_bob.cc:386
 #: ../../src/logic/immovable.cc:789 ../../src/logic/immovable.cc:1478
 #: ../../src/logic/instances.cc:73 ../../src/logic/instances.cc:131
-#: ../../src/logic/instances.cc:482 ../../src/logic/legacy.cc:428
+#: ../../src/logic/instances.cc:496 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/playercommand.cc:139
 #: ../../src/logic/playercommand.cc:187 ../../src/logic/playercommand.cc:239
 #: ../../src/logic/playercommand.cc:287 ../../src/logic/playercommand.cc:374
@@ -2349,13 +2349,10 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
 msgid ""
-"the value %u is not allowed as duration; it is a specal value meaning "
+"the value %u is not allowed as duration; it is a special value meaning "
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
-"la valeur %u n'est pas une durée autorisée; elle est une valeur spéciale "
-"signifiant \"pour toujours\", ce qui est le comportement par défaut; omettez "
-"la touche de durée pour que le message existes pour toujours"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
@@ -2488,11 +2485,9 @@ msgstr "/me : la somme de contrôle md5 du fichier a échoué"
 
 #: ../../src/network/netclient.cc:853
 msgid ""
-"/me checked the recieved file. Although md5 check summing succeded, I can "
+"/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
-"/me vérifié le fichier reçu. Bien que la vérification md5 a été un succès, "
-"je ne peux pas traiter le fichier."
 
 #: ../../src/network/netclient.cc:924
 msgid "Unexpectedly received LAUNCH command from server."
@@ -2817,9 +2812,8 @@ msgid "Client sent unexpected synchronization report."
 msgstr "Le client a envoyé un rapport de synchronisation inattendu."
 
 #: ../../src/network/nethost.cc:2616 ../../src/network/nethost.cc:2627
-msgid "Client requests file altough none is available to send."
+msgid "Client requests file although none is available to send."
 msgstr ""
-"Le client demande des fichiers, mais aucun n'est disponible à l'envoi."
 
 #: ../../src/network/nethost.cc:2618
 #, c-format
@@ -3181,22 +3175,14 @@ msgid ""
 "The file was: %s\n"
 "If this happens, the host might have selected a file that you do not own. "
 "Normally such a file should be send from the host to you, but perhaps the "
-"transfer was not yet finnished!?!"
+"transfer was not yet finished!?!"
 msgstr ""
-"Widelands a essayé de démarrer un jeu avec un fichier qui n'a pu être trouvé "
-"à l'endroit donné.\n"
-"Le fichier était:%s\n"
-"Si cela arrivait, l'hôte pourrait avoir sélectionné un fichier que vous ne "
-"possédez pas. Normalement ce fichier devrait vous être envoyé par l'hôte, "
-"mais peut être que le transfert n'était pas encore fini!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:430
 msgid ""
-"The selected file can not be found. If it is not automatically transfered to "
-"you, please write the host about this problem."
+"The selected file can not be found. If it is not automatically transferred "
+"to you, please write the host about this problem."
 msgstr ""
-"Le fichier sélectionné n'a pu être trouvé. Si il ne vous est pas "
-"automatiquement transféré, contactez l'hôte pour ce problème."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:456
 #: ../../src/wui/multiplayersetupgroup.cc:116
@@ -3264,8 +3250,8 @@ msgid "* Scenario mode selected\n"
 msgstr "* Mode de scénario sélectionné\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:638
-msgid "You are in the multi player launch game menu."
-msgstr "Vous êtes dans le menu de lancement de jeu multi-joueur"
+msgid "You are in the multiplayer launch game menu."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid "Client settings"
@@ -3334,16 +3320,11 @@ msgstr "Fermé."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:668
 msgid ""
-"The later three are only setable by the hosting client by left clicking the "
+"The later three are only settable by the hosting client by left clicking the "
 "\"type\" button of a player. Hosting players can further set the "
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
-"Les trois derniers sont seulement réglables par l'hôte en cliquant le bouton "
-"\"type\" d'un joueur. Les joueurs hôtes peuvent définir plus en profondeur "
-"les paramètres d'initialisation de chaque joueur (ensemble de constructions, "
-"marchandises et travailleurs avec lesquels le joueur démarre) et la tribu et "
-"l'équipe des joueurs informatiques"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
@@ -3411,15 +3392,8 @@ msgid ""
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that "
 "you do not own. Normally such a file should be send from the host to you, "
-"but perhaps the transfer was not yet finnished!?!"
+"but perhaps the transfer was not yet finished!?!"
 msgstr ""
-"Widelands a essayé de démarrer une partie avec un fichier qui n'a pas été "
-"trouvé à l'endroit prévu.\n"
-"Le fichier était : %s\n"
-"Si cela se produit pour une partie en réseau, l'hôte peuta voir sélectionné "
-"un fichier que vous ne possédez pas. En temps normal, le fichier concerné "
-"devrait vous être envoyé par l'hôte, mais peut-être que le transfert n'est "
-"pas encore fini."
 
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:53
 #: ../../src/wui/game_main_menu_save_game.cc:103

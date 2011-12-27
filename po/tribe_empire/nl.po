@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-24 08:21+0000\n"
+"POT-Creation-Date: 2011-12-26 07:53+0000\n"
 "PO-Revision-Date: 2011-12-07 10:31+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-25 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-12-27 04:45+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -505,8 +505,8 @@ msgstr ""
 "gedolven in de ijzerertsmijnen."
 
 #: ../../tribes/empire/shepherd/conf:1
-msgid "Keeping sheeps."
-msgstr "Hoedt schapen."
+msgid "Keeping sheep."
+msgstr ""
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -1440,9 +1440,8 @@ msgid "Wool"
 msgstr "Wol"
 
 #: ../../tribes/empire/wool/conf:1
-msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
+msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
-"Wol is het haar van schapen. Weverijen gebruiken het om doek van te maken."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20

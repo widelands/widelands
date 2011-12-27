@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-24 09:21+0100\n"
+"POT-Creation-Date: 2011-12-26 08:53+0100\n"
 "PO-Revision-Date: 2011-03-20 19:04+0000\n"
 "Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-25 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-12-27 04:46+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -331,8 +331,8 @@ msgstr ""
 "Usein - ei aina - peliä voi täten jatkaa tallennuksesta.\n"
 
 #: ../../src/wlapplication.cc:1676
-msgid "Connection timeouted"
-msgstr "Yhteys aikakatkaistiin"
+msgid "Connection timed out"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1678
 msgid ""
@@ -949,7 +949,7 @@ msgstr "ware_types_fi.xhtml"
 #: ../../src/logic/cmd_queue.cc:192 ../../src/logic/critter_bob.cc:386
 #: ../../src/logic/immovable.cc:789 ../../src/logic/immovable.cc:1478
 #: ../../src/logic/instances.cc:73 ../../src/logic/instances.cc:131
-#: ../../src/logic/instances.cc:482 ../../src/logic/legacy.cc:428
+#: ../../src/logic/instances.cc:496 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/playercommand.cc:139
 #: ../../src/logic/playercommand.cc:187 ../../src/logic/playercommand.cc:239
 #: ../../src/logic/playercommand.cc:287 ../../src/logic/playercommand.cc:374
@@ -2338,12 +2338,10 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
 msgid ""
-"the value %u is not allowed as duration; it is a specal value meaning "
+"the value %u is not allowed as duration; it is a special value meaning "
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
-"arvo %u ei ole sallittu kesto; se on erikoisarvo tarkoittean ikuisuutta, "
-"joka on oletus; poista kestoavain saadaksesi viestin pysymään ikuisesti"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
@@ -2476,7 +2474,7 @@ msgstr "/me :n tiedosto ei läpäissyt md5 tarkistusta"
 
 #: ../../src/network/netclient.cc:853
 msgid ""
-"/me checked the recieved file. Although md5 check summing succeded, I can "
+"/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
@@ -2787,9 +2785,8 @@ msgid "Client sent unexpected synchronization report."
 msgstr "Asiakasohjelma lähetti odottamattoman synkronisointiraportin."
 
 #: ../../src/network/nethost.cc:2616 ../../src/network/nethost.cc:2627
-msgid "Client requests file altough none is available to send."
+msgid "Client requests file although none is available to send."
 msgstr ""
-"Asiakasohjelma pyytää tiedostoa vaikka ei löydy valmiina lähetettäväksi"
 
 #: ../../src/network/nethost.cc:2618
 #, c-format
@@ -3152,22 +3149,14 @@ msgid ""
 "The file was: %s\n"
 "If this happens, the host might have selected a file that you do not own. "
 "Normally such a file should be send from the host to you, but perhaps the "
-"transfer was not yet finnished!?!"
+"transfer was not yet finished!?!"
 msgstr ""
-"Widelands yritti käynnistää pelin käyttäen tiedostoa, jota ei löytynyt "
-"annetusta polusta.\n"
-"Tiedosto oli: %s\n"
-"Pelin isäntä on ehkä valinnut sellaisen tiedoston, jota sinulla ei ole. "
-"Tavallisesti tiedosto siirtyy automaattisesti isäntäkoneelta sinulle, mutta "
-"ehkä siirto ei ole vielä valmis!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:430
 msgid ""
-"The selected file can not be found. If it is not automatically transfered to "
-"you, please write the host about this problem."
+"The selected file can not be found. If it is not automatically transferred "
+"to you, please write the host about this problem."
 msgstr ""
-"Valittua tiedostoa ei löytynyt. Jos tiedosto ei automaattisesti siirry "
-"sinulle, niin ole hyvä ilmoita pelin isännälle tästä ongelmasta."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:456
 #: ../../src/wui/multiplayersetupgroup.cc:116
@@ -3235,8 +3224,8 @@ msgid "* Scenario mode selected\n"
 msgstr "* Skenaario tila valittu\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:638
-msgid "You are in the multi player launch game menu."
-msgstr "Olet moninpelin aloitusvalikossa"
+msgid "You are in the multiplayer launch game menu."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid "Client settings"
@@ -3304,15 +3293,11 @@ msgstr "Suljettu."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:668
 msgid ""
-"The later three are only setable by the hosting client by left clicking the "
+"The later three are only settable by the hosting client by left clicking the "
 "\"type\" button of a player. Hosting players can further set the "
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
-"Seuraavat asetukset voi asettaa vain isännöivä asiakas. Isännöivä pelaaja "
-"voi valita kunkin pelaajan aloitusasetelman (rakennukset, tuotteet ja "
-"työntekijät, joilla pelaaja aloittaa) sekä tietokoneen hallitsemien "
-"pelaajien heimon."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
@@ -3380,14 +3365,8 @@ msgid ""
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that "
 "you do not own. Normally such a file should be send from the host to you, "
-"but perhaps the transfer was not yet finnished!?!"
+"but perhaps the transfer was not yet finished!?!"
 msgstr ""
-"Widelands yritti aloittaa peliä mutta tiedostoa ei löydetty annetusta "
-"polusta.\n"
-"tiedosto oli: %s\n"
-"Jos tämä tapahtuu verkkopelin aikana, palvelin on saattanut valita tiedoston "
-"jota et omista. Normaalisti sellainen tiedosto tulee lähettää palvelimelta "
-"sinulle mutta ehkä tiedonsiirto ei ole vielä valmis!?!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:53
 #: ../../src/wui/game_main_menu_save_game.cc:103

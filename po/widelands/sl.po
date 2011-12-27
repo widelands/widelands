@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-12-24 09:21+0100\n"
+"POT-Creation-Date: 2011-12-26 08:53+0100\n"
 "PO-Revision-Date: 2011-10-25 20:24+0000\n"
 "Last-Translator: Boštjan Miklavčič <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2011-12-25 04:42+0000\n"
+"X-Launchpad-Export-Date: 2011-12-27 04:48+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: ../../src/computer_player.cc:38
@@ -287,8 +287,8 @@ msgstr ""
 "- je mogoče igro naložiti in z njo nadaljevati.\n"
 
 #: ../../src/wlapplication.cc:1676
-msgid "Connection timeouted"
-msgstr "Povezava je presegla časovno omejitev"
+msgid "Connection timed out"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1678
 msgid ""
@@ -891,7 +891,7 @@ msgstr "tipi_dobrin.xhtml"
 #: ../../src/logic/cmd_queue.cc:192 ../../src/logic/critter_bob.cc:386
 #: ../../src/logic/immovable.cc:789 ../../src/logic/immovable.cc:1478
 #: ../../src/logic/instances.cc:73 ../../src/logic/instances.cc:131
-#: ../../src/logic/instances.cc:482 ../../src/logic/legacy.cc:428
+#: ../../src/logic/instances.cc:496 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/playercommand.cc:139
 #: ../../src/logic/playercommand.cc:187 ../../src/logic/playercommand.cc:239
 #: ../../src/logic/playercommand.cc:287 ../../src/logic/playercommand.cc:374
@@ -2276,13 +2276,10 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
 msgid ""
-"the value %u is not allowed as duration; it is a specal value meaning "
+"the value %u is not allowed as duration; it is a special value meaning "
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
-"vrednost %u ni dovoljena kot čas trajanja; to je posebna vrednost za "
-"neskončno, ki je prednastavljena; izpustite čas trajanja, da bo sporočilo "
-"obstajalo za vedno"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
@@ -2415,7 +2412,7 @@ msgstr "/me datoteka ni prestala md5 kontroliranja vsote."
 
 #: ../../src/network/netclient.cc:853
 msgid ""
-"/me checked the recieved file. Although md5 check summing succeded, I can "
+"/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
@@ -2721,8 +2718,8 @@ msgid "Client sent unexpected synchronization report."
 msgstr "Odjemalec je poslal nepričakovano sinhronizacijsko poročilo."
 
 #: ../../src/network/nethost.cc:2616 ../../src/network/nethost.cc:2627
-msgid "Client requests file altough none is available to send."
-msgstr "Odjemalec zahteva datoteka, čeprav jo nihče ne more poslati."
+msgid "Client requests file although none is available to send."
+msgstr ""
 
 #: ../../src/network/nethost.cc:2618
 #, c-format
@@ -3080,21 +3077,14 @@ msgid ""
 "The file was: %s\n"
 "If this happens, the host might have selected a file that you do not own. "
 "Normally such a file should be send from the host to you, but perhaps the "
-"transfer was not yet finnished!?!"
+"transfer was not yet finished!?!"
 msgstr ""
-"Widelands je poskusil začeti igro z datoteko, ki je ni bilo mogoče najti.\n"
-"Pot je bila: %s\n"
-"Pogosto se to zgodi, ko gostitelj izbere datoteko, ki je vi nimate. Običajno "
-"bi morala biti ta datoteka samodejno poslana tudi vam. Mogoče prenos še ni "
-"zaključen?"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:430
 msgid ""
-"The selected file can not be found. If it is not automatically transfered to "
-"you, please write the host about this problem."
+"The selected file can not be found. If it is not automatically transferred "
+"to you, please write the host about this problem."
 msgstr ""
-"Izbrane datoteke ni mogoče najti. Če ni samodejno prenešena k vam, o tem "
-"obvestite gostitelja."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:456
 #: ../../src/wui/multiplayersetupgroup.cc:116
@@ -3162,8 +3152,8 @@ msgid "* Scenario mode selected\n"
 msgstr "* Izbran način scenarija\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:638
-msgid "You are in the multi player launch game menu."
-msgstr "Ste v večigralskem meniju za zagon igre."
+msgid "You are in the multiplayer launch game menu."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid "Client settings"
@@ -3227,15 +3217,11 @@ msgstr "Zaprto."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:668
 msgid ""
-"The later three are only setable by the hosting client by left clicking the "
+"The later three are only settable by the hosting client by left clicking the "
 "\"type\" button of a player. Hosting players can further set the "
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
-"Kasnejše tri lahko izbere samo gostujoči igralec/strežnik z levim klikom "
-"\"type\" gumbom igralca. Gostitev igralcev lahko nadaljno določi pripravo "
-"vsakega igralca (določene zgradbe, robo in delavce s kateremi začne igralec) "
-"in rodbino ter ekipo za računalniške igralce."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
@@ -3302,14 +3288,8 @@ msgid ""
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that "
 "you do not own. Normally such a file should be send from the host to you, "
-"but perhaps the transfer was not yet finnished!?!"
+"but perhaps the transfer was not yet finished!?!"
 msgstr ""
-"Widelands se je poskušal zagnati z datoteko, ki ni bila najdena na podanem "
-"mestu.\n"
-"Ta datoteka je: %s\n"
-"Če se to primeri pri mrežni igri, je gostitelj morda izbral datoteko, ko je "
-"vi nimate. Običajno bi vam moral takšno datoteko poslati gostitelj, toda "
-"morda prenos še poteka!?!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:53
 #: ../../src/wui/game_main_menu_save_game.cc:103
