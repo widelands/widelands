@@ -42,14 +42,14 @@ Editor_Player_Menu::Editor_Player_Menu
 		(&parent, "players_menu", &registry, 340, 400, _("Player Options")),
 	m_add_player
 		(this, "add_player",
-		 5, 5, 20, 20,
+		 get_inner_w() - 5 - 20, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
-		 get_inner_w() - 5 - 20, 5, 20, 20,
+		 5, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 _("Remove last player"),

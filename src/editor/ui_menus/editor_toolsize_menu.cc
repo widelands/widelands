@@ -41,14 +41,14 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 	m_textarea(this, 5, 5, 150, 10, std::string(), UI::Align_HCenter),
 	m_increase
 		(this, "incr",
-		 60, 25, 20, 20,
+		 80, 25, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 std::string(),
 		 parent.get_sel_radius() < MAX_TOOL_AREA),
 	m_decrease
 		(this, "decr",
-		 80, 25, 20, 20,
+		 60, 25, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 std::string(),
