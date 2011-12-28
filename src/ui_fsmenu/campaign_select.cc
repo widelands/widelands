@@ -157,9 +157,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 		sprintf(cdescription, "campdesc%u", i);
 		sprintf(cdif_descr, "campdiffdescr%u", i);
 
-		uint32_t dif = s.get_natural(cdifficulty);
-		if (dif > 3)
-			dif = 0;
+		s.get_natural(cdifficulty);
 
 		std::string dif_description = s.get_string
 			(cdif_descr, _("[No value found]"));
