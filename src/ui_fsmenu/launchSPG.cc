@@ -98,6 +98,10 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 		(this,
 		 get_w() * 51 / 100, get_h() * 53 / 200,
 		 _("Start type"), UI::Align_Left),
+	m_wincondition_type
+		(this,
+		 get_w() * 7 / 10 + (m_butw / 2), get_h() * 7 / 20,
+		 _("Type"), UI::Align_HCenter),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
@@ -127,6 +131,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 
 	m_title  .set_textstyle(ts_big());
 	m_mapname.set_textstyle(ts_small());
+	m_wincondition_type.set_textstyle(ts_small());
 
 	UI::TextStyle tsmaller
 		(UI::TextStyle::makebold
@@ -235,7 +240,7 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 			std::string n = t->get_string("name");
 			std::string d = t->get_string("description");
 
-			m_wincondition.set_title(_("Type: ") + n);
+			m_wincondition.set_title(n);
 			m_wincondition.set_tooltip(d.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.

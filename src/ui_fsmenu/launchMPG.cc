@@ -155,8 +155,12 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		(this,
 		 get_w() * 8 / 10, get_h() / 10,
 		 _("Map")),
+	m_wincondition_type
+		(this,
+		 get_w() * 37 / 50 + (m_butw / 2), get_h() * 10 / 20,
+		 _("Type"), UI::Align_HCenter),
 
-	m_map_info(this, get_w() * 37 / 50, get_h() * 2 / 10, m_butw, get_h() * 27 / 80),
+	m_map_info(this, get_w() * 37 / 50, get_h() * 2 / 10, m_butw, get_h() * 23 / 80),
 	m_client_info(this, get_w() * 37 / 50, get_h() * 13 / 20, m_butw, get_h() * 5 / 20),
 	m_help(0),
 
@@ -186,6 +190,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_wincondition.set_font(font_small());
 	m_help_button.set_font(font_small());
 	m_change_map_or_save.set_font(font_small());
+	m_wincondition_type.set_textstyle(ts_small());
 
 	m_lua = create_LuaInterface();
 	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
@@ -286,7 +291,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 			std::string n = t->get_string("name");
 			std::string d = t->get_string("description");
 
-			m_wincondition.set_title(_("Type: ") + n);
+			m_wincondition.set_title(n);
 			m_wincondition.set_tooltip(d.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.

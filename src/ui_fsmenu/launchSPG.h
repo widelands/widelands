@@ -78,7 +78,7 @@ private:
 	UI::Button       m_select_map, m_wincondition, m_back, m_ok;
 	UI::Button     * m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname;
-	UI::Textarea              m_name, m_type, m_team, m_tribe, m_init;
+	UI::Textarea              m_name, m_type, m_team, m_tribe, m_init, m_wincondition_type;
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl; // optional
 	PlayerDescriptionGroup  * m_players[MAX_PLAYERS];
