@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-12-26 07:53+0000\n"
-"PO-Revision-Date: 2011-09-30 15:34+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"PO-Revision-Date: 2011-12-27 12:42+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-27 04:51+0000\n"
+"X-Launchpad-Export-Date: 2011-12-28 05:15+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
@@ -43,19 +43,19 @@ msgstr "%s ha perso il controllo della collina."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
 msgid "%s was the first to reach the Island number %i."
-msgstr "%s è stato il primo a raggiungere il numero di isole %i."
+msgstr "%s è stato il primo a raggiungere l'isola numero %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:41
 msgid "%s was the fourth to reach the Island number %i."
-msgstr "%s è stato il quarto a raggiungere il numero di isole %i."
+msgstr "%s è stato il quarto a raggiungere l'isola numero %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:39
 msgid "%s was the second to reach the Island number %i."
-msgstr "%s è stato il secondo a raggiungere il numero di isole %i."
+msgstr "%s è stato il secondo a raggiungere l'isola numero %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:40
 msgid "%s was the third to reach the Island number %i."
-msgstr "%s è stato il terzo a raggiungere il numero di isole %i."
+msgstr "%s è stato il terzo a raggiungere l'isola numero %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
@@ -113,8 +113,8 @@ msgid ""
 "at\n"
 "the center of the third island for 20 minutes to win the game"
 msgstr ""
-"Se completi un castello nell'area bersaglio, otterrai\n"
-"un terzo quartier genrae sulla terza isola. Devi costruire e mantenere un "
+"Se completi un castello nell'area segnalata sulla seconda isola, otterrai\n"
+"un terzo quartier generale sulla terza isola. Devi costruire e mantenere un "
 "castello al\n"
 "centro della terza isola per 20 minuti per vincere la partita"
 
@@ -149,6 +149,11 @@ msgid ""
 "only meadows and resources. The economies you leave behind will continue to\n"
 "work for you, but you only reap the benefits when you reach a new island."
 msgstr ""
+"La chiava è il fatto che la prima isola offre solamente pietre e legno, la "
+"seconda\n"
+"prati e risorse. Le economie che lasci dietro di te continuano a\n"
+"lavorare per te, ma puoi raccoglierne i frutti solamente quando raggiungi "
+"una nuova isola."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
@@ -162,3 +167,7 @@ msgid ""
 "you\n"
 "get. See below for the details."
 msgstr ""
+"Ogni volta che termini un'isola ottieni delle risorse bonus che dipendono da "
+"quanti giocatori\n"
+"hanno completato l'isola prima di te. Prima finisci, meno risorse\n"
+"ottieni. Leggi sotto per ulteriori dettagli."

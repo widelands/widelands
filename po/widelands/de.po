@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-26 08:53+0100\n"
-"PO-Revision-Date: 2011-12-26 17:43+0000\n"
+"PO-Revision-Date: 2011-12-27 19:33+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-27 04:47+0000\n"
+"X-Launchpad-Export-Date: 2011-12-28 05:15+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: ../../src/network/nethost.cc:2572
@@ -2354,6 +2354,9 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
+"den Wert %u ist nicht zulässig als Dauer, es ist ein spezieller Wert welcher "
+"immer bedeutet, welches die Standardeinstellung ist; weglassen die Dauer-"
+"Taste, um die Nachricht für immer erscheinen zu lassen"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
@@ -2494,6 +2497,8 @@ msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
+"/me überprüft die empfangene Datei. Obwohl md5 Prüfsummenverfahren gelungen, "
+"kann ich die Datei nicht verarbeiten."
 
 #: ../../src/network/netclient.cc:924
 msgid "Unexpectedly received LAUNCH command from server."
@@ -2817,7 +2822,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:2616 ../../src/network/nethost.cc:2627
 msgid "Client requests file although none is available to send."
-msgstr ""
+msgstr "Client fraget eine Datei an, obwohl keine zum Senden vorhanden ist."
 
 #: ../../src/network/nethost.cc:2618
 #, c-format
@@ -3186,6 +3191,12 @@ msgid ""
 "Normally such a file should be send from the host to you, but perhaps the "
 "transfer was not yet finished!?!"
 msgstr ""
+"Widelands versucht, ein Spiel mit einer Datei, die nicht am angegebenen Pfad "
+"gefunden werden konnte, zu beginnen.\n"
+"Die Datei war: %s\n"
+"Wenn dies geschieht, kann der Host eine Datei, die Sie nicht besitzen, "
+"ausgewählt werden. Normalerweise wird eine solche Datei von dem Host zu "
+"Ihnen verschickt, aber vielleicht war die Übertragung noch nicht fertig!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:430
 msgid ""
@@ -3408,6 +3419,13 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finished!?!"
 msgstr ""
+"Widelands versucht, ein Spiel mit einer Datei, die nicht am angegebenen Pfad "
+"gefunden werden konnte, zu beginnen.\n"
+"Die Datei war: %s\n"
+"Wenn dies in einem Netzwerk-Spiel geschieht, hat möglicherweise der Host "
+"eine Datei nicht, die ausgewählt worde. Normalerweise wird eine solche Datei "
+"von dem Host zu Ihnen verschickt, aber vielleicht war die Übertragung noch "
+"nicht fertig!?!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:53
 #: ../../src/wui/game_main_menu_save_game.cc:103
