@@ -74,9 +74,6 @@ void Journal::write(uint32_t v) {
 /// \sa read(SDLMod &v)
 void Journal::write(SDLKey v)
 {
-	Uint32 vv;
-
-	vv = Little32(static_cast<Uint32>(v));
 	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
 }
 
@@ -86,9 +83,6 @@ void Journal::write(SDLKey v)
  */
 void Journal::write(SDLMod v)
 {
-	Uint32 vv;
-
-	vv = Little32(static_cast<Uint32>(v));
 	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
 }
 
