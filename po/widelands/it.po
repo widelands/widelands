@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-26 08:53+0100\n"
-"PO-Revision-Date: 2011-12-28 12:50+0000\n"
+"PO-Revision-Date: 2011-12-29 13:03+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-29 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-12-30 05:22+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -2477,14 +2477,14 @@ msgstr "Il server usa una diversa versione del protocollo"
 
 #: ../../src/network/netclient.cc:823
 msgid "/me 's file failed md5 checksumming."
-msgstr "il file di /me non ha superato il controllo md5"
+msgstr "/me dice che il suo file non ha superato il controllo md5"
 
 #: ../../src/network/netclient.cc:853
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
-"/me ha controllato il file ricevuto. Sebbene in controllo md5 ha avuto "
+"/me ha controllato il file ricevuto. Sebbene in controllo md5 abbia avuto "
 "successo, non posso gestire il file."
 
 #: ../../src/network/netclient.cc:924
@@ -2913,7 +2913,7 @@ msgstr "OK"
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
 msgid "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
-msgstr ""
+msgstr "Sound_Handler chiuso %i volte, freq %i, format %i, chan %i\n"
 
 #: ../../src/sound/sound_handler.cc:163
 msgid "PROBLEM: sound device opened multiple times, trying to close"
@@ -3335,6 +3335,11 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
+"Le ultime tre sono impostabili solamente dal client ospitante cliccando con "
+"il tasto sinistro il bottone \"Tipo\" per ogni giocatore. Il giocatore "
+"ospitante può inoltre decidere il tipo di avvio di ogni giocatore (il set di "
+"edifici, merci e lavoratori con il quale un giocatore comincia) e la tribù e "
+"le squadre per i giocatori computer"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
@@ -3355,6 +3360,11 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
+"Sulla destra vi sono informazioni circa la mappa o il salvataggio "
+"selezionato. Un bottone immediatamente a destra del nome della mappa "
+"consente all'host di modificarla in una differente. Inoltre l'host può "
+"impostare una condizione di vittoria specifica ed infine può avviare il "
+"gioco appena tutti i giocatori sono pronti."
 
 #: ../../src/ui_fsmenu/launchSPG.cc:55
 msgid "Select map"
@@ -3399,6 +3409,12 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finished!?!"
 msgstr ""
+"Widelands ha cercato di iniziare una partita con un file che non è stato "
+"trovato nel percorso indicato.\n"
+"Il file era: %s\n"
+"Se succede ciò in un gioco in rete, l'host potrebbe aver selezionato un file "
+"che tu non possiedi. Normalmente questo file dovrebbe esserti inviato "
+"dall'host; forse il trasferimento non è ancora terminato!?!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:53
 #: ../../src/wui/game_main_menu_save_game.cc:103
@@ -3503,31 +3519,31 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Mappa ufficiale"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1 contro 1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
-msgstr ""
+msgstr "Squadre a 2 giocatori"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "3 Player Teams"
-msgstr ""
+msgstr "Squadre a 3 giocatori"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "4 Player Teams"
-msgstr ""
+msgstr "Squadre a 4 giocatori"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "Senza regole"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "Sbilanciata"
 
 #: ../../src/ui_fsmenu/mapselect.cc:275
 msgid "(directory)"
@@ -3542,6 +3558,8 @@ msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Questa mappa non è presente sul tuo filesystem. I dati qui mostrati sono "
+"stati inviati dal server."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
@@ -3730,11 +3748,11 @@ msgstr "Spento"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "Mai"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 giorno"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
@@ -4397,7 +4415,7 @@ msgstr "<libero>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:277
 msgid "Shared in"
-msgstr "Condiviso in"
+msgstr "Condiviso"
 
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/playerdescrgroup.cc:170
@@ -4447,19 +4465,19 @@ msgstr "Inizializzazione"
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "g"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
-msgstr ""
+msgstr "gioco"
 
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
@@ -4484,15 +4502,15 @@ msgstr "(venendo)"
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Nave"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
-msgstr ""
+msgstr "Vai alla nave"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
-msgstr ""
+msgstr "Vai alla destinazione"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
