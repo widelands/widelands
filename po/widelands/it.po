@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2011-12-26 08:53+0100\n"
-"PO-Revision-Date: 2011-12-29 13:03+0000\n"
+"PO-Revision-Date: 2011-12-30 12:35+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-30 05:22+0000\n"
+"X-Launchpad-Export-Date: 2011-12-31 05:20+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -337,7 +337,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1676
 msgid "Connection timed out"
-msgstr ""
+msgstr "Timeout della connessione"
 
 #: ../../src/wlapplication.cc:1678
 msgid ""
@@ -584,7 +584,7 @@ msgstr ""
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Schivare è %u, più %u per ogni livello sopra 0 (il livello massimo è %u)."
+"Evasione è %u, più %u per ogni livello sopra 0 (il livello massimo è %u)."
 
 #: ../../src/writeHTML.cc:667 ../../src/writeHTML.cc:678
 #, c-format
@@ -900,7 +900,7 @@ msgstr "difesa"
 
 #: ../../src/writeHTML.cc:1352 ../../src/writeHTML.cc:1376
 msgid "evade"
-msgstr "eludere"
+msgstr "evasione"
 
 #: ../../src/writeHTML.cc:1365
 msgid "Documentation for program command train"
@@ -916,7 +916,7 @@ msgstr "Documentazione del programma per il comando suona effetti"
 
 #: ../../src/writeHTML.cc:1406
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Documentazione per i comandi del programma"
 
 #: ../../src/writeHTML.cc:1408
 msgid "construct"
@@ -1019,7 +1019,7 @@ msgstr "economia: %s"
 #: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
-msgstr "banchina di caricamento: %s"
+msgstr "Caricamento del molo: %s"
 
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
@@ -3444,7 +3444,7 @@ msgstr "Davvero vuoi eliminare "
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "Salvataggio di gioco da parte del server dedicato"
 
 #: ../../src/ui_fsmenu/loadgame.cc:177
 msgid "Unknown gametime"
@@ -3515,7 +3515,7 @@ msgstr "Nome della mappa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Mostra tutte le mappe"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
@@ -3799,7 +3799,7 @@ msgstr "Distanza per l'aggancio delle finestre dai bordi:"
 
 #: ../../src/ui_fsmenu/options.cc:465
 msgid "Remove Syncstream dumps on startup"
-msgstr ""
+msgstr "Rimuove i dati Syncstream all'avvio"
 
 #: ../../src/ui_fsmenu/options.cc:471
 msgid "OpenGL rendering *Highly experimental!*"
@@ -3921,7 +3921,7 @@ msgstr "Distruggi"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "Smantella"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -3974,7 +3974,7 @@ msgstr "Edifica costruzioni grandi"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr ""
+msgstr "Costruisci edifici del porto"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
@@ -4559,11 +4559,11 @@ msgstr "Imposta predefiniti"
 
 #: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
-msgstr ""
+msgstr "Consumo"
 
 #: ../../src/wui/ware_statistics_menu.cc:204
 msgid "Economy Health"
-msgstr ""
+msgstr "Salute dell'economia"
 
 #: ../../src/wui/warehousewindow.cc:132
 msgid "Normal policy"
@@ -4583,11 +4583,11 @@ msgstr "Rimuovi la merce selezionata da qui"
 
 #: ../../src/wui/warehousewindow.cc:212
 msgid "Wares in dock"
-msgstr ""
+msgstr "Merce sul molo"
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
-msgstr ""
+msgstr "Lavoratori sul molo"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"
@@ -4955,6 +4955,9 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Non è possibile rimuovere il giocatore. È richiamato da qualche parte. "
+"Rimuovi tutti gli edifici ed i bobs che dipendono da questo giocatore e "
+"riprova."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
@@ -4987,7 +4990,7 @@ msgstr "Opzioni strumenti altezza"
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
 msgid "In-/Decrease Value"
-msgstr "Aumenta/diminuisci valore"
+msgstr "Aum./dim. valore"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:78
@@ -5028,7 +5031,7 @@ msgstr "Risorse"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:73
 msgid "Set port space"
-msgstr ""
+msgstr "Assegna spazio per il porto"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
