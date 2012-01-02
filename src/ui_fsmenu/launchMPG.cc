@@ -158,7 +158,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_wincondition_type
 		(this,
 		 get_w() * 37 / 50 + (m_butw / 2), get_h() * 10 / 20,
-		 _("Type"), UI::Align_HCenter),
+		 _("Type of game"), UI::Align_HCenter),
 
 	m_map_info(this, get_w() * 37 / 50, get_h() * 2 / 10, m_butw, get_h() * 23 / 80),
 	m_client_info(this, get_w() * 37 / 50, get_h() * 13 / 20, m_butw, get_h() * 5 / 20),

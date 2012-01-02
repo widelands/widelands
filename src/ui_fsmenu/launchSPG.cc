@@ -101,7 +101,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_wincondition_type
 		(this,
 		 get_w() * 7 / 10 + (m_butw / 2), get_h() * 7 / 20,
-		 _("Type"), UI::Align_HCenter),
+		 _("Type of game"), UI::Align_HCenter),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
