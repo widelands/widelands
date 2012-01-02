@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-26 08:53+0100\n"
+"POT-Creation-Date: 2012-01-01 14:40+0100\n"
 "PO-Revision-Date: 2011-04-27 08:45+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2011-12-27 04:46+0000\n"
+"X-Launchpad-Export-Date: 2012-01-02 04:46+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -4860,8 +4860,8 @@ msgstr "Volby výškových nástrojů"
 msgid "In-/Decrease Value"
 msgstr "Zvýšit/snížit hodnotu"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:78
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:79
 msgid "Set Value"
 msgstr "Nastavit hodnotu"
 
@@ -4869,7 +4869,7 @@ msgstr "Nastavit hodnotu"
 msgid "Resources Tools Options"
 msgstr "Volby nástrojů zdrojů"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:95
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:98
 msgid "Current Selection"
 msgstr "Současná volba"
 
@@ -4905,17 +4905,17 @@ msgstr ""
 msgid "Noise Height Options"
 msgstr "Volby výšky zvuků"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:144
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
 msgstr "Minimum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
 msgstr "Maximum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
 msgstr "Nastavit hodnotu: %u"

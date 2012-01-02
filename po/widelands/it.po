@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-26 08:53+0100\n"
+"POT-Creation-Date: 2012-01-01 14:40+0100\n"
 "PO-Revision-Date: 2011-12-30 12:35+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-31 05:20+0000\n"
+"X-Launchpad-Export-Date: 2012-01-02 04:47+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -4992,8 +4992,8 @@ msgstr "Opzioni strumenti altezza"
 msgid "In-/Decrease Value"
 msgstr "Aum./dim. valore"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:78
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:79
 msgid "Set Value"
 msgstr "Imposta valore"
 
@@ -5001,7 +5001,7 @@ msgstr "Imposta valore"
 msgid "Resources Tools Options"
 msgstr "Opzioni strumenti risorse"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:95
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:98
 msgid "Current Selection"
 msgstr "Selezione corrente"
 
@@ -5037,17 +5037,17 @@ msgstr "Assegna spazio per il porto"
 msgid "Noise Height Options"
 msgstr "Opzioni di perturbamento dell'altezza"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:144
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
 msgstr "Minimo: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
 msgstr "Massimo: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
 msgstr "Impostare il valore: %u"

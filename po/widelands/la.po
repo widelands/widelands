@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-12-26 08:53+0100\n"
+"POT-Creation-Date: 2012-01-01 14:40+0100\n"
 "PO-Revision-Date: 2011-12-11 15:58+0000\n"
 "Last-Translator: Stephan Lenk <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-27 04:47+0000\n"
+"X-Launchpad-Export-Date: 2012-01-02 04:47+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4722,8 +4722,8 @@ msgstr ""
 msgid "In-/Decrease Value"
 msgstr "Pretium augere/minuere"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:78
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:79
 msgid "Set Value"
 msgstr "Pretium constituere"
 
@@ -4731,7 +4731,7 @@ msgstr "Pretium constituere"
 msgid "Resources Tools Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:95
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:98
 msgid "Current Selection"
 msgstr "Selectio praesens"
 
@@ -4767,17 +4767,17 @@ msgstr ""
 msgid "Noise Height Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:144
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
 msgstr "Minimum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
 msgstr "Maximum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
 msgstr "Pretium statuere: %u"

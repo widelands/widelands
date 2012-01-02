@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-12-26 08:53+0100\n"
-"PO-Revision-Date: 2011-12-11 13:38+0000\n"
+"POT-Creation-Date: 2012-01-01 14:40+0100\n"
+"PO-Revision-Date: 2012-01-01 19:52+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-27 04:48+0000\n"
+"X-Launchpad-Export-Date: 2012-01-02 04:47+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: ../../src/computer_player.cc:38
@@ -778,7 +778,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:1160
 #, c-format
 msgid "Seafaring"
-msgstr ""
+msgstr "Sjøfart"
 
 #: ../../src/writeHTML.cc:1172
 msgid "Documentation for program command animate"
@@ -1719,7 +1719,7 @@ msgstr "sov: %s"
 #: ../../src/logic/production_program.cc:668
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Ukjent parameter «%s»"
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
@@ -2433,7 +2433,7 @@ msgstr "Hvorfor vil du gi den dedikerte tjeneren en advarsel?"
 #: ../../src/network/nethost.cc:398 ../../src/network/nethost.cc:424
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Kunne ikke finne klienten %s."
 
 #: ../../src/network/nethost.cc:409
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -2441,11 +2441,11 @@ msgstr "Feilaktig bruk. Prøv: /kick <navn> <grunn>"
 
 #: ../../src/network/nethost.cc:420
 msgid "You can not kick yourself!"
-msgstr "Du kan ikke sparke deg selv!"
+msgstr "Du kan ikke kaste ut deg selv!"
 
 #: ../../src/network/nethost.cc:422
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "Du kan ikke kaste ut den dedikerte tjeneren"
 
 #: ../../src/network/nethost.cc:427
 #, c-format
@@ -2544,16 +2544,16 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1160
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Spill lagret!"
 
 #: ../../src/network/nethost.cc:1162
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Kunne ikke lagre spillet til filen «%s»! (%s)"
 
 #: ../../src/network/nethost.cc:1168
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Denne tjeneren er ikke passsordbeskyttet!"
 
 #: ../../src/network/nethost.cc:1171
 msgid "The send password was incorrect!"
@@ -3126,6 +3126,7 @@ msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
+"Og tilskuermodus, hvor du kan se alt, men ikke kontrollere noen spillere"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid "Player settings"
@@ -3136,6 +3137,8 @@ msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
+"I midten er innstillinger for spillerne. For å kunne starte et spill, må "
+"hver av spillerne være en av følgende:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:658
 msgid "Connected to one or more clients (see \"Client settings\")."
@@ -3329,11 +3332,11 @@ msgstr "Vis alle kart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Offisielt kart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1 mot 1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
@@ -3349,7 +3352,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "Fritt for alle"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
@@ -3560,7 +3563,7 @@ msgstr "Aldri"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
@@ -4361,7 +4364,7 @@ msgstr ""
 
 #: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
-msgstr ""
+msgstr "Forbruk"
 
 #: ../../src/wui/ware_statistics_menu.cc:204
 msgid "Economy Health"
@@ -4385,11 +4388,11 @@ msgstr "Fjern valgte varer herfra"
 
 #: ../../src/wui/warehousewindow.cc:212
 msgid "Wares in dock"
-msgstr ""
+msgstr "Varer i havn"
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
-msgstr ""
+msgstr "Arbeidere i havn"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"
@@ -4693,7 +4696,7 @@ msgstr " finnes allerede. Overskrive?"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:405
 msgid "Save Map Error!!"
-msgstr ""
+msgstr "Feil ved lagring av kart!!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:401
 msgid ""
@@ -4770,8 +4773,8 @@ msgstr ""
 msgid "In-/Decrease Value"
 msgstr "Øk/senk verdi"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:78
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:79
 msgid "Set Value"
 msgstr "Sett verdi"
 
@@ -4779,7 +4782,7 @@ msgstr "Sett verdi"
 msgid "Resources Tools Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:95
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:98
 msgid "Current Selection"
 msgstr ""
 
@@ -4815,17 +4818,17 @@ msgstr ""
 msgid "Noise Height Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:144
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
 msgstr "Minimum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
 msgstr "Maksimum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
 msgstr "Sett verdi: %u"

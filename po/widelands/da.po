@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4410\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-26 08:53+0100\n"
+"POT-Creation-Date: 2012-01-01 14:40+0100\n"
 "PO-Revision-Date: 2011-08-21 14:18+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-12-27 04:46+0000\n"
+"X-Launchpad-Export-Date: 2012-01-02 04:46+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4895,8 +4895,8 @@ msgstr "Indstillinger for højdeværktøjer"
 msgid "In-/Decrease Value"
 msgstr "Juster Værdi"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:78
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:79
 msgid "Set Value"
 msgstr "Set Værdi"
 
@@ -4904,7 +4904,7 @@ msgstr "Set Værdi"
 msgid "Resources Tools Options"
 msgstr "Ressourceværktøjsindstillinger"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:95
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:98
 msgid "Current Selection"
 msgstr "Aktuelt valg"
 
@@ -4941,17 +4941,17 @@ msgstr ""
 msgid "Noise Height Options"
 msgstr "Indstillinger for støjhøjde"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:144
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
 msgstr "Minimum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
 msgstr "Maksimum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
 msgstr "Sæt værdi: %u"
