@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2011-12-30 12:50+0000\n"
-"Last-Translator: Angelo Locritani <Unknown>\n"
+"PO-Revision-Date: 2012-01-02 14:42+0000\n"
+"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:44+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-03 04:43+0000\n"
+"X-Generator: Launchpad (build 14616)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -34,10 +34,10 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
-"Un elmetto è uno strumento di base per proteggere i guerrieri. È prodotto "
-"nella fucina per gli elmi ed è utilizzato nel campo di allenamento - assieme "
-"al cibo - per allenare i soldati dal livello 0 di punti salute al livello 1 "
-"di punti salute."
+"Un elmo è uno strumento di base per proteggere i guerrieri. È prodotto nella "
+"fucina per gli elmi ed è utilizzato nel campo di allenamento - assieme al "
+"cibo - per allenare i soldati dal livello 0 di punti salute al livello 1 di "
+"punti salute."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
@@ -50,7 +50,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Una valida nave"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -84,7 +84,7 @@ msgstr "Fornaio"
 
 #: ../../tribes/barbarians/conf:189
 msgid "Bakery"
-msgstr "Forno"
+msgstr "Panificio"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
@@ -144,7 +144,7 @@ msgstr "Legno trattato"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Pala per il pane"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -293,7 +293,7 @@ msgstr "Scopre le risorse del sottosuolo."
 
 #: ../../tribes/barbarians/conf:154
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Smantella il sito"
 
 #: ../../tribes/barbarians/conf:222
 msgid "Donjon"
@@ -469,7 +469,7 @@ msgstr "Quartier generale medio"
 
 #: ../../tribes/barbarians/conf:86
 msgid "Helmet"
-msgstr "Elmetto"
+msgstr "Elmo"
 
 #: ../../tribes/barbarians/conf:132
 msgid "Helmsmith"
@@ -1271,7 +1271,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:105
 msgid "War Helmet"
-msgstr "Elmetto da guerra"
+msgstr "Elmo da guerra"
 
 #: ../../tribes/barbarians/conf:198
 msgid "War Mill"
