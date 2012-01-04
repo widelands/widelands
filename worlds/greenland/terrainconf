@@ -1,80 +1,83 @@
 ##### Order does matter here, since this file should stay compatible with S2
 
+##### Name strings are not translatable by purpose: this way mapmakers can share
+##### suggestions without having to worry about the localized name of terrain
+
 [steppe]
-name=_"Steppe"
+name="Steppe"
 def_resources=water 5
 is=green
 
 [berg1]
-name=_"Mountain1"
+name="Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
 
 [schnee]
-name=_"Snow"
+name="Snow"
 is=dead
 
 [sumpf]
-name=_"Swamp"
+name="Swamp"
 def_resources=water 20
 is=unpassable
 fps=14
 
 [strand]
-name=_"Beach"
+name="Beach"
 is=dry
 
 [wasser]
-name=_"Water"
+name="Water"
 def_resources=fish 4
 is=water
 fps=14
 
 [wiese1]
-name=_"Meadow1"
+name="Meadow1"
 def_resources=water 10
 is=green
 
 [wiese2]
-name=_"Meadow2"
+name="Meadow2"
 def_resources=water 10
 is=green
 
 [wiese3]
-name=_"Meadow3"
+name="Meadow3"
 def_resources=water 10
 is=green
 
 [berg2]
-name=_"Mountain2"
+name="Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 
 [berg3]
-name=_"Mountain3"
+name="Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 
 [berg4]
-name=_"Mountain4"
+name="Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 
 [steppe_kahl]
-name=_"Barren steppe"
+name="Barren steppe"
 def_resources=water 4
 is=green
 
 [wiese4]
-name=_"Meadow4"
+name="Meadow4"
 def_resources=water 10
 is=green
 
 [lava]
-name=_"Lava"
+name="Lava"
 is=acid
 
 [bergwiese]
-name=_"Mountain meadow"
+name="Mountain meadow"
 is=green
 
