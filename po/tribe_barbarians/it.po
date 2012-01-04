@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-01-02 14:42+0000\n"
+"PO-Revision-Date: 2012-01-03 17:25+0000\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-03 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-01-04 04:42+0000\n"
 "X-Generator: Launchpad (build 14616)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Un boccone più grande della razione da fornire ai minatori nelle miniere "
 "profonde. È prodotto in una locanda o in una grande locanda a partire da "
-"pesce/carne, pane da pitta e birra."
+"pesce/carne, pita e birra."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -44,9 +44,9 @@ msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
-"Un pasto è costituito da pane per pitta, birra forte e pesce/carne in una "
-"grande locanda. Questo cibo sostanzioso è esattamente ciò che i minatori di "
-"una miniera profonda hanno bisogno."
+"Un pasto è costituito da pita, birra forte e pesce/carne in una grande "
+"locanda. Questo cibo sostanzioso è esattamente ciò che i minatori di una "
+"miniera profonda hanno bisogno."
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
@@ -58,6 +58,10 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
+"Un piccolo boccone per mantenere i minatori forti ed al lavoro. Anche gli "
+"esploratori consumano razioni nei viaggi di esplorazione. Le razioni sono "
+"prodotte in una taverna, una locanda o una grande locanda usando pesce, "
+"carne o pita."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -65,6 +69,10 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"Un elmo da guerra è un potenziamento dell'armatura per i guerrieri barbari. "
+"È prodotto nella fucina di elmi ed utilizzata nel campo di addestramento - "
+"assieme al cibo - per allenare i soldati aumentando i punti vita dal livello "
+"1 al livello 2."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -84,7 +92,7 @@ msgstr "Fornaio"
 
 #: ../../tribes/barbarians/conf:189
 msgid "Bakery"
-msgstr "Panificio"
+msgstr "Forno"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
@@ -129,6 +137,9 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
+"Oltre alla pita e alla carne, anche il pesce è un alimento per i barbari. È "
+"usato nelle taverne, nelle locande e nelle grandi locande e nei luoghi di "
+"addestramento (campi di addestramento ed arena di battaglia)."
 
 #: ../../tribes/barbarians/conf:192
 msgid "Big Inn"
@@ -180,7 +191,7 @@ msgstr "Brucia il carbone."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Brucia la calce nella calchera."
 
 #: ../../tribes/barbarians/conf:111
 msgid "Carrier"
@@ -241,7 +252,7 @@ msgstr "Miniera di carbone"
 
 #: ../../tribes/barbarians/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Nave in costruzione"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Construction Site"
@@ -353,6 +364,9 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
+"Pinze per il fuoco sono lo strumento del fonditore, che lavora nella "
+"fonderia. Producendo attrezzi in metallo (ma smette di produrli quando la "
+"costruzione viene avanzata fabbrica di asce e fucina da guerra)."
 
 #: ../../tribes/barbarians/conf:80
 msgid "Fish"
@@ -545,11 +559,11 @@ msgstr "Strumenti da cucina"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Lime Kiln"
-msgstr "Fornace della calce"
+msgstr "Calchera"
 
 #: ../../tribes/barbarians/conf:135
 msgid "Lime-Burner"
-msgstr "Operaio alla fornace della calce"
+msgstr "Operaio della calchera"
 
 #: ../../tribes/barbarians/conf:136
 msgid "Lumberjack"
@@ -590,6 +604,10 @@ msgid ""
 "miners. It is also consumed in the training sites (trainingscamp and battle "
 "arena)."
 msgstr ""
+"La carne contiene molta energia. È prodotta dal cacciatore e usata nelle "
+"taverne, locande e grandi locante per preparare razioni, spuntini e parti "
+"per i minatori. È anche consumata nei luoghi di addestramento (campi di "
+"addestramento ed arena di battaglia)."
 
 #: ../../tribes/barbarians/conf:200
 msgid "Metalwork Shop"
@@ -629,7 +647,7 @@ msgstr "Piccone"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Pitta Bread"
-msgstr "Pane azzimo"
+msgstr "Pita"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
@@ -886,19 +904,19 @@ msgstr "Ascia affilata"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Ship"
-msgstr ""
+msgstr "Nave"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Ship construction site"
-msgstr ""
+msgstr "Sito di costruzione navi"
 
 #: ../../tribes/barbarians/conf:139
 msgid "Shipwright"
-msgstr ""
+msgstr "Maestro d'ascia"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Shipyard"
-msgstr ""
+msgstr "Cantiere navale"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Shovel"
@@ -1013,6 +1031,11 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
+"I fornai barbari sono i migliori nella produzione di questa pita piatta e "
+"gustosa. È fatto con farina ed acqua seguendo una ricetta segreta. La pita "
+"viene utilizzata nelle taverne, nelle locande e nelle grandi locande per "
+"preparare razioni, spuntini e pasti. È anche consumata nei luoghi di "
+"addestramento (campi di addestramento ed arena di battaglia)."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -1058,6 +1081,11 @@ msgid ""
 "It is one of the basic tools produced at the metalwork shop, (but ceases to "
 "be produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Il martello è uno strumento essenziale. È necessario al geologo, il "
+"costruttore, il fabbro ferraio e il fabbro d'elmi. Assicurati sempre di "
+"averne alcuni di riserva! È uno degli strumenti di base prodotti nel negozio "
+"di carpenteria metallica, (ma smette di essere prodotto se la costruzione "
+"viene avanzata a fabbrica di asce e fucina da guerra)."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"

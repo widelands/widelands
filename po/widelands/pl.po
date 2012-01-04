@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 14:40+0100\n"
-"PO-Revision-Date: 2012-01-01 14:30+0000\n"
-"Last-Translator: Łukasz Chełmicki <Unknown>\n"
+"PO-Revision-Date: 2012-01-03 21:28+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:48+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-04 04:43+0000\n"
+"X-Generator: Launchpad (build 14616)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1991,11 +1991,11 @@ msgstr "Nie pracuje"
 
 #: ../../src/logic/tribe.cc:126
 msgid "constructionsite type \"constructionsite\" is missing"
-msgstr "typ terenu budowy \"terenbudowy\" nie istnieje"
+msgstr "typ placu budowy \"placbudowy\" nie istnieje"
 
 #: ../../src/logic/tribe.cc:135
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr ""
+msgstr "typ placu rozbiórki typu \"placrozbiórki\" nie istnieje"
 
 #: ../../src/logic/tribe.cc:252 ../../src/logic/tribe.cc:273
 #, c-format
@@ -2166,7 +2166,7 @@ msgstr "częściowo_zbudowane_budynki: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:323
 #, c-format
 msgid "constructionsite: %s"
-msgstr "terenbudowy: %s"
+msgstr "plac budowy: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:405
 #, c-format
@@ -3315,6 +3315,10 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
+"Kolejne trzy może ustawić tylko host poprzez kliknięcie na przycisk \"typ\" "
+"gracza. Host może ustalić również różne warunki początkowe dla graczy "
+"(startowe budynki, towary i pracowników) oraz drużyny i plemiona graczy "
+"komputerowych."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""

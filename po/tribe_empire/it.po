@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2011-11-30 11:58+0000\n"
+"PO-Revision-Date: 2012-01-03 13:07+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:45+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-04 04:42+0000\n"
+"X-Generator: Launchpad (build 14616)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -72,7 +72,7 @@ msgstr "Fornaio"
 
 #: ../../tribes/empire/conf:179
 msgid "Bakery"
-msgstr "Panificio"
+msgstr "Forno"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
@@ -1266,7 +1266,7 @@ msgstr "Vite minuscola"
 
 #: ../../tribes/empire/conf:181
 msgid "Vineyard"
-msgstr "Piantagione di viti"
+msgstr "Vigna"
 
 #: ../../tribes/empire/conf:94
 msgid "War-Lance"
