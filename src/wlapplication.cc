@@ -631,12 +631,6 @@ void WLApplication::handle_input(InputCallback const * cb)
 				break;
 			}
 			if (cb && cb->key) {
-				int16_t c = ev.key.keysym.unicode;
-
-				//TODO: this kills international characters
-				if (c < 32 || c >= 128)
-					c = 0;
-
 				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			break;
@@ -972,13 +966,14 @@ bool WLApplication::init_hardware() {
 	videomode.push_back("Quartz");
 #endif
 	//if a video mode is given on the command line, add that one first
-	const char * videodrv;
-	videodrv = getenv("SDL_VIDEODRIVER");
-	if (videodrv) {
-		log("Also adding video driver %s\n", videodrv);
-		videomode.push_back(videodrv);
+	{
+		const char * videodrv;
+		videodrv = getenv("SDL_VIDEODRIVER");
+		if (videodrv) {
+			log("Also adding video driver %s\n", videodrv);
+			videomode.push_back(videodrv);
+		}
 	}
-
 	char videodrvused[26];
 	strcpy(videodrvused, "SDL_VIDEODRIVER=\0");
 	wout << videodrvused << "&" << std::endl;
@@ -986,8 +981,6 @@ bool WLApplication::init_hardware() {
 		strcpy(videodrvused + 16, videomode[i].c_str());
 		videodrvused[16 + videomode[i].size()] = '\0';
 		putenv(videodrvused);
-		//SDL_VideoDriverName(videodrvused, 16);
-		videodrv = getenv("SDL_VIDEODRIVER");
 		log
 			("Graphics: Trying Video driver: %i %s %s\n",
 			 i, videomode[i].c_str(), videodrvused);
@@ -2350,7 +2343,7 @@ bool WLApplication::redirect_output(std::string path)
 	if (!newfp) return false;
 	/* Redirect standard error */
 	std::string stderrfile = path + "/stderr.txt";
-	newfp = freopen(stderrfile.c_str(), "w", stderr);
+	freopen(stderrfile.c_str(), "w", stderr);
 
 	/* Line buffered */
 	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);

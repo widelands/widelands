@@ -74,10 +74,7 @@ void Journal::write(uint32_t v) {
 /// \sa read(SDLMod &v)
 void Journal::write(SDLKey v)
 {
-	Uint32 vv;
-
-	vv = Little32(static_cast<Uint32>(v));
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+	write(static_cast<uint32_t>(v));
 }
 
 /**
@@ -86,10 +83,7 @@ void Journal::write(SDLKey v)
  */
 void Journal::write(SDLMod v)
 {
-	Uint32 vv;
-
-	vv = Little32(static_cast<Uint32>(v));
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+	write(static_cast<uint32_t>(v));
 }
 
 /**
@@ -147,13 +141,9 @@ void Journal::read(uint32_t & v) {
  */
 void Journal::read(SDLKey & v)
 {
-	//Look at read(SDLKey v) before changing code here!
-	//Additional reminder: SDLKey is an enum which are signed int32_t !
-
-	Uint32 vv;
-
-	m_playbackstream.read(reinterpret_cast<char *>(&vv), sizeof(Uint32));
-	v = static_cast<SDLKey>(Little32(vv));
+	uint32_t x;
+	read(x);
+	v = static_cast<SDLKey>(x);
 }
 
 /**
@@ -162,13 +152,9 @@ void Journal::read(SDLKey & v)
  */
 void Journal::read(SDLMod & v)
 {
-	//Look at read(SDLMod v) before changing code here!
-	//Additional reminder: SDLKey is an enum which are signed int32_t !
-
-	Uint32 vv;
-
-	m_playbackstream.read(reinterpret_cast<char *>(&vv), sizeof(Uint32));
-	v = static_cast<SDLMod>(Little32(vv));
+	uint32_t x;
+	read(x);
+	v = static_cast<SDLMod>(x);
 }
 
 /**

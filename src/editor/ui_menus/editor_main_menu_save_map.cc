@@ -124,7 +124,6 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			 "---", UI::Align_CenterLeft);
 
 
-	posx = 5;
 	posy = get_inner_h() - 30;
 
 	m_ok_btn = new UI::Button
@@ -136,7 +135,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 posx, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)));
