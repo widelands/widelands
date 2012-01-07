@@ -960,7 +960,8 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
 		if (upcast(Soldier, soldier, bob)) {
 			return
 				soldier->get_current_hitpoints() and
-				soldier->is_attacking_player(game, player);
+				soldier->is_attacking_player(game, player) and
+				soldier->owner().is_hostile(player);
 		}
 		return false;
 	}
@@ -1629,7 +1630,7 @@ bool Soldier::checkNodeBlocked
 	if (!foundopponent && (foundbattle || foundsoldier)) {
 		if (commit && !foundbattle && !multiplesoldiers) {
 			if
-				(foundsoldier->get_owner() != get_owner() &&
+				(foundsoldier->owner().is_hostile(*get_owner()) &&
 				 foundsoldier->canBeChallenged())
 			{
 				molog
