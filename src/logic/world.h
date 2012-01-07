@@ -88,6 +88,7 @@ struct Terrain_Descr : boost::noncopyable {
 	uint32_t         get_texture() const throw () {return m_texture;}
 	uint8_t        get_is     () const throw () {return m_is;}
 	const std::string & name() const throw () {return m_name;}
+	const std::string & descname() const throw () {return m_descname;}
 	int32_t resource_value(const Resource_Index resource) const throw () {
 		return
 			resource == get_default_resources() or is_resource_valid(resource) ?
@@ -115,6 +116,7 @@ struct Terrain_Descr : boost::noncopyable {
 
 private:
 	const std::string m_name;
+	const std::string m_descname;
 	char  * m_picnametempl;
 	uint32_t    m_frametime;
 	uint8_t   m_is;
@@ -124,6 +126,7 @@ private:
 	int8_t            m_default_resources;
 	int32_t           m_default_amount;
 	uint32_t          m_texture; //  renderer's texture
+
 };
 
 struct MapGenInfo;

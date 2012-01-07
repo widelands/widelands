@@ -1,62 +1,81 @@
 ##### Order does matter here, since this file should stay compatible with S2
 
+##### Name strings are not translatable by purpose: this way mapmakers can share
+##### suggestions without having to worry about the localized name of terrain
+
 [ashes]
+name="Ashes"
 def_resources=water 5
 is=green
 
 [mountain1]
+name="Mountain1"
 resources=coal, iron, gold, granit 
 is=mountain
 
 [lava-stone1]
+name="Lava stone1"
 is=acid
 
 [lava-stone2]
+name="Lava stone2"
 is=acid
 
 [strand]
+name="Beach"
 is=dry
 
 [water]
+name="Water"
 def_resources=fish 4
 is=water
 fps=14
 
 [hardground1]
+name="Hardground1"
 def_resources=water 10
 is=green
 
 [hardground2]
+name="Hardground2"
 def_resources=water 10
 is=green
 
 [hardground3]
+name="Hardground3"
 def_resources=water 10
 is=green
 
 [mountain2]
+name="Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 
 [mountain3]
+name="Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 
 [mountain4]
+name="Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 
 [ashes2]
+name="Ashes2"
 def_resources=water 4
 is=green
 
 [hardground4]
+name="Hardground4"
 def_resources=water 10
 is=green
 
 [lava]
+name="Lava"
 is=acid
 
 [hardlava]
+name="Hard lava"
 is=green
 
