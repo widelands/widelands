@@ -1225,7 +1225,6 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 						strcmp(FileSystem::FS_Filename(name), ".."))
 					{
 						directories.push_back(name);
-						log("Name added: %s\n", name);
 					}
 				}
 			}
