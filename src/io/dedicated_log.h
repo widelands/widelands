@@ -35,7 +35,8 @@ struct DedicatedLog {
 
 	// info logging functions
 	bool   write_info_active() {return !m_info_file_path.empty();}
-	void   set_server_data(std::string name, std::string ip, std::string motd);
+	void   set_server_data(std::string name, std::string motd);
+	void   set_server_ip  (std::string ip);
 	void   client_login()  {++d_logins;  info_update();}  // simple counter
 	void   client_logout() {++d_logouts; info_update();} // simple counter
 //void   game_start(std::vector<std::string> players, std::string mapname);
@@ -55,7 +56,7 @@ struct DedicatedLog {
 protected:
 	/// Constructor is protected by purpose - only one instance of DedicatedLog is allowed
 	/// call DedicatedLog::get() instead.
-	DedicatedLog() {root = new RealFSImpl("/");}
+	DedicatedLog();
 
 private:
 	bool   check_file_writeable(std::string & path);
@@ -75,8 +76,7 @@ private:
 		std::vector<bool>        results;
 		time_t                   start, end;
 	};
-	std::string d_name, d_ip, d_motd;
-	time_t      d_start;
+	std::string d_name, d_ip, d_motd, d_start;
 	uint32_t    d_logins, d_logouts, d_chatmessages;
 	std::vector<GameStatistic> d_games;
 

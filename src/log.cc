@@ -19,6 +19,8 @@
 
 #include "log.h"
 
+#include "io/dedicated_log.h"
+
 #include <cstdarg>
 #include <cstdio>
 #include <iostream>
@@ -34,6 +36,22 @@ void log(const char * const fmt, ...) {
 	va_start(va, fmt);
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
+
+	wout << buffer;
+	wout.flush();
+}
+
+
+void dedicatedlog(const char * const fmt, ...) {
+	char buffer[2048];
+	va_list va;
+
+	va_start(va, fmt);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
+	va_end(va);
+
+	// Here comes the difference to widelands standard log() ;)
+	DedicatedLog::get()->dlog(buffer);
 
 	wout << buffer;
 	wout.flush();

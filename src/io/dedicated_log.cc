@@ -26,6 +26,28 @@
 /// The dedicated server logger
 static DedicatedLog * logger;
 
+/// protected constructor
+DedicatedLog::DedicatedLog()
+:
+m_chat_file_path(""),
+m_info_file_path(""),
+m_log_file_path(""),
+d_name(""),
+d_ip("<unkown>"),
+d_motd(""),
+d_start(""),
+d_logins(0),
+d_logouts(0),
+d_chatmessages(0),
+root(new RealFSImpl("/"))
+{
+	char ts[42];
+	time_t currenttime = time(0);
+	strftime(ts, sizeof(ts), "%a %Y/%m/%d, %H:%M:%S", localtime(&currenttime));
+	d_start = ts;
+}
+
+
 /// \returns the dedicated server logger, if it is not yet initialized, this is done before.
 DedicatedLog * DedicatedLog::get() {
 	if (logger == 0)
@@ -72,18 +94,21 @@ void DedicatedLog::chatAddSpacer() {
 
 
 /// Sets the basic server informations
-void DedicatedLog::set_server_data(std::string name, std::string ip, std::string motd) {
-	if (m_info_file_path.empty() || !d_name.empty())
+void DedicatedLog::set_server_data(std::string name, std::string motd) {
+	if (!d_name.empty())
 		return;
 	d_name = name;
-	d_ip   = ip;
 	d_motd = motd;
-	d_logins       = 0;
-	d_logouts      = 0;
-	d_chatmessages = 0;
-#warning TODO save time
-
 	info_update();
+}
+
+
+/// Sets the servers ip informations
+void DedicatedLog::set_server_ip(std::string ip) {
+	if (d_ip != ip) {
+		d_ip = ip;
+		info_update();
+	}
 }
 
 
@@ -93,10 +118,10 @@ void DedicatedLog::info_update() {
 		return;
 
 	std::string temp("<table class=\"infohead\">\n");
-	temp += "<tr><td class=\"infoname\">Servername</td><td class=\"info\">"  + d_name + "</td></tr>\n";
-	temp += "<tr><td class=\"infoname\">Server IP</td><td class=\"info\">"   + d_ip   + "</td></tr>\n";
-	temp += "<tr><td class=\"infoname\">Server MOTD</td><td class=\"info\">" + d_motd + "</td></tr>\n";
-	//temp += "<tr><td class=\"infoname\">Started on</td><td class=\"info\">" + d_start + "</td></tr>\n";
+	temp += "<tr><td class=\"infoname\">Servername</td><td class=\"info\">"  + d_name  + "</td></tr>\n";
+	temp += "<tr><td class=\"infoname\">Server IP</td><td class=\"info\">"   + d_ip    + "</td></tr>\n";
+	temp += "<tr><td class=\"infoname\">Server MOTD</td><td class=\"info\">" + d_motd  + "</td></tr>\n";
+	temp += "<tr><td class=\"infoname\">Started on</td><td class=\"info\">"  + d_start + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Logins</td><td class=\"info\">";
 	temp += (boost::format("%u") % d_logins).str() + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Logouts</td><td class=\"info\">";
