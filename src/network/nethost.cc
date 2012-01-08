@@ -26,6 +26,7 @@
 #include "game_io/game_preload_data_packet.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "i18n.h"
+#include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -696,8 +697,29 @@ void NetHost::run(bool const autorun)
 					(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
 					% d->localplayername)
 				.str().c_str());
+
+		// Maybe this is the first run, so we try to setup the DedicatedLog
+		// empty strings are treated as "do not write this type of log"
+		DedicatedLog * dl = DedicatedLog::get();
+		if (!dl->set_chat_file_path(s.get_string("dedicated_chat_file_path", "")))
+			log("Warning: Could not set dedicated chat file path");
+		if (!dl->write_info_active()) {
+			if (dl->set_info_file_path(s.get_string("dedicated_info_file_path", "")))
+				log("Warning: Could not set dedicated info file path");
+			else
+				dl->set_server_data("Test", "Testip", m_dedicated_motd);
+		}
+		if (dl->set_log_file_path (s.get_string("dedicated_log_file_path",  "")))
+			log("Warning: Could not set dedicated log file path");
+
+		dl->chatAddSpacer();
 		// Setup by the users
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
+
+		// NOTE  Workaround ... sometimes ggzd seems to disconnect players that idle too long
+		// NOTE  Therefore dedicated servers reconnect every 15 minutes if idle
+		uint16_t timeout = 0;
+
 		while (not d->dedicated_start) {
 			handle_network();
 			// TODO this should be improved.
@@ -705,13 +727,22 @@ void NetHost::run(bool const autorun)
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
 					return;
+				++timeout;
 			} else {
 				if (usleep(200) == -1)
 					return;
+				timeout = 0;
 			}
 #else
-			Sleep(1);
+			if (d->clients.empty()) {
+				Sleep(100);
+				++timeout;
+			} else {
+				Sleep(1);
+				timeout = 0;
 #endif
+			if (timeout == 9000)
+				return;
 		}
 		d->dedicated_start = false;
 	} else {
@@ -909,6 +940,9 @@ void NetHost::send(ChatMessage msg)
 {
 	if (msg.msg.empty())
 		return;
+
+	if (isDedicated())
+		DedicatedLog::get()->chat(msg);
 
 	if (msg.recipient.empty()) {
 		SendPacket s;
