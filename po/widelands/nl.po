@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 14:40+0100\n"
-"PO-Revision-Date: 2011-11-07 16:10+0000\n"
-"Last-Translator: Foppe Benedictus <Unknown>\n"
+"PO-Revision-Date: 2012-01-07 21:27+0000\n"
+"Last-Translator: Teun <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:46+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-08 04:42+0000\n"
+"X-Generator: Launchpad (build 14640)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -368,7 +368,7 @@ msgstr "Speler"
 #: ../../src/wlapplication.cc:2040 ../../src/network/netclient.cc:188
 #: ../../src/network/nethost.cc:773
 msgid "Preparing game"
-msgstr "Spel voorbereiden"
+msgstr "Voorbereiden spel"
 
 #: ../../src/wlapplication.cc:2148
 msgid "End of replay"
@@ -385,7 +385,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2233 ../../src/logic/game.cc:385
 #: ../../src/logic/game.cc:425
 msgid "Loading..."
-msgstr "Laden..."
+msgstr "Aan het laden..."
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
@@ -424,7 +424,7 @@ msgstr "Naam"
 
 #: ../../src/writeHTML.cc:282 ../../src/wui/building_statistics_menu.cc:113
 msgid "Size"
-msgstr "Grootte"
+msgstr "Afmeting"
 
 #: ../../src/writeHTML.cc:284 ../../src/writeHTML.cc:519
 msgid "Buildable"
@@ -835,7 +835,7 @@ msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command check_map"
-msgstr ""
+msgstr "Documentatie voor programma opdracht controleer kaart"
 
 #: ../../src/writeHTML.cc:1155
 msgid "check_map"
@@ -844,7 +844,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:1160
 #, c-format
 msgid "Seafaring"
-msgstr ""
+msgstr "Zeevaart"
 
 #: ../../src/writeHTML.cc:1172
 msgid "Documentation for program command animate"
@@ -1004,7 +1004,7 @@ msgstr "gedupliceerde invoer voor %s"
 #: ../../src/economy/economy_data_packet.cc:94
 #, c-format
 msgid "target quantities: %s"
-msgstr "doel hoeveelheden: %s"
+msgstr "doel aantallen: %s"
 
 #: ../../src/economy/economy_data_packet.cc:98
 #, c-format
@@ -1019,7 +1019,7 @@ msgstr "economie: %s"
 #: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
-msgstr ""
+msgstr "laden havendok: %s"
 
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
@@ -1094,7 +1094,7 @@ msgstr "Kaart niet opgeslagen"
 
 #: ../../src/editor/editorinteractive.cc:241
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wil afsluiten?"
+msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wilt afsluiten?"
 
 #: ../../src/editor/editorinteractive.cc:571
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -1304,7 +1304,7 @@ msgstr "Een kaart laden"
 #: ../../src/logic/game.cc:294 ../../src/logic/game.cc:370
 #: ../../src/logic/game.cc:407
 msgid "Preloading map"
-msgstr "Kaart voorladen"
+msgstr "Voorbereiden laden kaart"
 
 #: ../../src/logic/game.cc:309
 msgid "Configuring players"
@@ -1320,7 +1320,7 @@ msgstr "Creëren speler's infrastructuur"
 
 #: ../../src/logic/game.cc:502 ../../src/logic/player.cc:148
 msgid "Missing starting position"
-msgstr "Ontbrekende start positie"
+msgstr "Ontbrekend startpunt"
 
 #: ../../src/logic/game.cc:504 ../../src/logic/player.cc:150
 #, c-format
@@ -1472,7 +1472,7 @@ msgstr "verwachtte positieve integer >= %u <= 100 maar vond \"%s\""
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr "verwachtte positieve integer >= %u <= %u maar vond \"%u\""
+msgstr "verwachtte positief geheel getal >= %u <= %u maar vond \"%u\""
 
 #: ../../src/logic/militarysite.cc:63 ../../src/logic/warehouse.cc:258
 msgid " conquer"
@@ -1798,7 +1798,7 @@ msgstr "slapen: %s"
 #: ../../src/logic/production_program.cc:668
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Onbekende parameter \"%s\""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
@@ -1939,7 +1939,7 @@ msgstr "Laden van schip: %s"
 
 #: ../../src/logic/soldier.cc:76
 msgid "positive integer"
-msgstr "positieve integer"
+msgstr "positief geheel getal"
 
 #: ../../src/logic/soldier.cc:80
 #, c-format
@@ -2110,7 +2110,7 @@ msgstr "onbekend taaktype \"%s\""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:231
 #, c-format
 msgid "task %s is duplicated in stack"
-msgstr "taak %s is vermenigvuldigd tot een stapel"
+msgstr "taak %s komt meerdere keren in de stack voor"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:306
 #, c-format
@@ -2161,7 +2161,7 @@ msgstr "goederen: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
 msgid "partially_constructed_buildings: %s"
-msgstr ""
+msgstr "gedeeltelijk gebouwde gebouwen: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:323
 #, c-format
@@ -2539,7 +2539,7 @@ msgstr "Waarom wil je jezelf waarschuwen?"
 
 #: ../../src/network/nethost.cc:394
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Waarom wil je de server waarschuwen?"
 
 #: ../../src/network/nethost.cc:398 ../../src/network/nethost.cc:424
 #, c-format
@@ -2607,6 +2607,8 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
+"Dit is de speciale/toegwezen server, stuur \"@%s help\" voor een volledige "
+"lijst van beschikbare opdrachten"
 
 #: ../../src/network/nethost.cc:733
 msgid "The game has started just after you tried to connect."
@@ -2651,7 +2653,7 @@ msgstr "%s vertelt me om het commando \"%s\" te draaien"
 
 #: ../../src/network/nethost.cc:1146
 msgid "Sorry! Saving was deactivated on this dedicated server!"
-msgstr ""
+msgstr "Sorry! Saving is op deze server niet geactiveerd!."
 
 #: ../../src/network/nethost.cc:1149
 msgid "Can not save, as long as no game is running!"
@@ -2813,7 +2815,7 @@ msgstr "Overdracht is voltooid van het bestand %s naar %s"
 #: ../../src/network/nethost.cc:2646
 #, c-format
 msgid "Sending part %u/%zu of file %s to %s"
-msgstr ""
+msgstr "Stuur deel %u/%zo van bestand %s naar %s"
 
 #: ../../src/network/nethost.cc:2655
 #, c-format
@@ -3163,6 +3165,9 @@ msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write the host about this problem."
 msgstr ""
+"Het geselecteerde bestand kan niet gevonden worden. Wanneer het niet "
+"automatisch naar je overgezonden wordt, neem dan svp contact op met de host "
+"over dit probleem."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:456
 #: ../../src/wui/multiplayersetupgroup.cc:116
@@ -3231,7 +3236,7 @@ msgstr "* Scenario modus geselecteerd\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:638
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Je bent in het startmenu voor spellen met meerdere spelers."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:639
 msgid "Client settings"
@@ -3405,7 +3410,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:177
 msgid "Unknown gametime"
-msgstr ""
+msgstr "Onbekende speeltijd"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:65
 msgid "Choose a replay!"
@@ -3472,11 +3477,11 @@ msgstr "Kaartnaam"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Toon alle kaarten"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Officiele kaart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
@@ -3484,15 +3489,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
-msgstr ""
+msgstr "2-speler teams"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "3 Player Teams"
-msgstr ""
+msgstr "3-speler teams"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "4 Player Teams"
-msgstr ""
+msgstr "4-speler teams"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
@@ -3500,7 +3505,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "Ongebalanceerd"
 
 #: ../../src/ui_fsmenu/mapselect.cc:275
 msgid "(directory)"
@@ -3515,6 +3520,8 @@ msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Deze kaart is niet in uw bestandssysteem aanwezig. De getoonde gegevens zijn "
+"afkomstig van de server"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
@@ -3703,11 +3710,11 @@ msgstr "Uit"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "nooit"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
@@ -4430,11 +4437,11 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
-msgstr ""
+msgstr "spel"
 
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
@@ -4459,11 +4466,11 @@ msgstr "(komend)"
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Schip"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
-msgstr ""
+msgstr "Ga naar schip"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
@@ -4544,7 +4551,7 @@ msgstr ""
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
-msgstr ""
+msgstr "Goederen ik dok"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"
