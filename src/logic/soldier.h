@@ -313,7 +313,7 @@ private:
 
 	// saving and loading
 protected:
-	class Loader : public Worker::Loader {
+	struct Loader : public Worker::Loader {
 	public:
 		Loader();
 

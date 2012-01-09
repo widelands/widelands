@@ -277,7 +277,7 @@ private:
 
 	// saving and loading
 protected:
-	class Loader : public Bob::Loader {
+	struct Loader : public Bob::Loader {
 	public:
 		Loader();
 

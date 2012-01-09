@@ -261,7 +261,7 @@ public:
 	 * Those are the three phases of loading. After the last phase,
 	 * all Loader objects should be deleted.
 	 */
-	class Loader {
+	struct Loader {
 		Editor_Game_Base      * m_egbase;
 		Map_Map_Object_Loader * m_mol;
 		Map_Object            * m_object;

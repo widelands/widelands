@@ -383,7 +383,7 @@ private:
 
 	// saving and loading
 protected:
-	class Loader : public Map_Object::Loader {
+	struct Loader : public Map_Object::Loader {
 	public:
 		Loader();
 
