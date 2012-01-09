@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-/** class Path
+/** struct Path
  *
  * Represents a cross-country path found by Path::findpath, for example
  */

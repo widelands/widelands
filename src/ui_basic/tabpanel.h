@@ -66,7 +66,7 @@ private:
  *
  */
 struct Tab_Panel : public Panel {
-	friend class Tab;
+	friend struct Tab;
 
 	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
 	// For Fullscreen menus

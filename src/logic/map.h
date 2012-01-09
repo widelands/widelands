@@ -102,7 +102,7 @@ struct FindBobAlwaysTrue : public FindBob {
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 
-/** class Map
+/** struct Map
  *
  * This really identifies a map like it is in the game
  *
@@ -127,7 +127,7 @@ struct Map :
 	friend struct Map_Elemental_Data_Packet;
 	friend struct Map_Extradata_Data_Packet;
 	friend class Editor;
-	friend class Main_Menu_New_Map;
+	friend struct Main_Menu_New_Map;
 	friend struct MapGenerator;
 	friend struct MapAStarBase;
 

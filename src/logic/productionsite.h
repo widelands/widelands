@@ -38,7 +38,7 @@ struct ProductionProgram;
 class Soldier;
 struct Request;
 struct WaresQueue;
-struct Worker_Descr;
+class Worker_Descr;
 
 
 /**

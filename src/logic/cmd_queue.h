@@ -111,7 +111,7 @@ struct GameLogicCommand : public Command {
 };
 
 class Cmd_Queue {
-	friend class Game_Cmd_Queue_Data_Packet;
+	friend struct Game_Cmd_Queue_Data_Packet;
 
 	enum {
 		cat_nongamelogic = 0,

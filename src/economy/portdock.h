@@ -29,7 +29,7 @@ namespace Widelands {
 struct Fleet;
 struct RoutingNodeNeighbour;
 struct Ship;
-struct Warehouse;
+class Warehouse;
 
 /**
  * The PortDock occupies the fields in the water at which ships

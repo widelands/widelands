@@ -110,7 +110,7 @@ private:
 };
 
 /*
-class WaresDisplay
+struct WaresDisplay
 ------------------
 Panel that displays the contents of a WareList.
 */

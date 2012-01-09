@@ -27,7 +27,7 @@ struct Panel;
 }
 
 namespace Widelands {
-struct Building;
+class Building;
 }
 
 UI::Panel * create_soldier_capacity_control

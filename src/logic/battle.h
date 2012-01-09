@@ -22,7 +22,7 @@
 #include "instances.h"
 
 namespace Widelands {
-struct Soldier;
+class Soldier;
 
 /**
  * Manages the battle between two opposing soldiers.

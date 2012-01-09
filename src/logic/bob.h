@@ -125,7 +125,7 @@ struct Bob : public Map_Object {
 	typedef void (Bob::*PtrSignal)(Game &, State &, std::string const &);
 	enum Type {CRITTER, WORKER, SHIP};
 
-	/// \see class Bob for in-depth explanation
+	/// \see struct Bob for in-depth explanation
 	struct Task {
 		char const * name;
 
@@ -159,7 +159,7 @@ struct Bob : public Map_Object {
 	 * of a function, while \ref State represents the stackframe of an
 	 * actual execution of the function.
 	 *
-	 * \see class Bob for in-depth explanation
+	 * \see struct Bob for in-depth explanation
 	 */
 	struct State {
 		State(const Task * const the_task = 0) :

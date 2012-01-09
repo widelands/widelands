@@ -1,6 +1,6 @@
 
 namespace Widelands {
-class Map;}
+struct Map;}
 /*
  * Copyright (C) 2010 by the Widelands Development Team
  *

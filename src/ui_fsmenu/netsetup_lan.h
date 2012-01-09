@@ -33,7 +33,7 @@
 
 #include "base.h"
 
-class Net_Open_Game;
+struct Net_Open_Game;
 struct Net_Game_Info;
 
 struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {

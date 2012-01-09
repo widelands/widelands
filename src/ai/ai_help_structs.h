@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-struct ProductionSite;
+class ProductionSite;
 class MilitarySite;
 
 struct CheckStepRoadAI {

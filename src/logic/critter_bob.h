@@ -25,8 +25,8 @@
 
 namespace Widelands {
 
-class Critter_BobAction;
-class Critter_BobProgram;
+struct Critter_BobAction;
+struct Critter_BobProgram;
 
 //
 // Description
@@ -55,7 +55,7 @@ private:
 
 class Critter_Bob : public Bob {
 	friend struct Map_Bobdata_Data_Packet;
-	friend class Critter_BobProgram;
+	friend struct Critter_BobProgram;
 
 	MO_DESCR(Critter_Bob_Descr);
 

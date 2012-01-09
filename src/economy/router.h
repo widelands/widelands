@@ -26,9 +26,9 @@
 #include "logic/wareworker.h"
 
 namespace Widelands {
-class IRoute;
-class ITransportCostCalculator;
-class RoutingNode;
+struct IRoute;
+struct ITransportCostCalculator;
+struct RoutingNode;
 
 /**
  * This class finds the best route between Nodes (Flags) in an economy.

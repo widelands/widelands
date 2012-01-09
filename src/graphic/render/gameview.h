@@ -22,11 +22,11 @@
 
 namespace Widelands {
 	struct Player;
-	class Editor_Game_Base;
+	struct Editor_Game_Base;
 };
 
 class Vertex;
-class Texture;
+struct Texture;
 
 #include "graphic/rendertarget.h"
 

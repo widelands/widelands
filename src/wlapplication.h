@@ -32,7 +32,7 @@
 #include <cstring>
 
 namespace Widelands {struct Game;}
-class Journal;
+struct Journal;
 
 ///Thrown if a commandline parameter is faulty
 struct Parameter_error : public std::runtime_error {

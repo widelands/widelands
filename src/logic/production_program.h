@@ -47,7 +47,7 @@ struct Immovable_Descr;
 struct ProductionSite_Descr;
 class ProductionSite;
 struct Tribe_Descr;
-struct Worker;
+class Worker;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {

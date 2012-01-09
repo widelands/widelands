@@ -23,7 +23,7 @@
 struct Interactive_Player;
 
 namespace Widelands {
-struct Building;
+class Building;
 struct PlayerImmovable;
 }
 

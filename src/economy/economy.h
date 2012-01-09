@@ -46,7 +46,7 @@ struct Supply;
 struct Router;
 
 struct Economy {
-	friend struct EconomyDataPacket;
+	friend class EconomyDataPacket;
 
 	/// Configurable target quantity for the supply of a ware type in the
 	/// economy.

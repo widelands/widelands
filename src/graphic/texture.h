@@ -37,7 +37,7 @@ struct Road_Textures {
 	PictureID pic_road_busy;
 };
 
-/** class Texture
+/** struct Texture
 *
 * Texture represents are terrain texture, which is strictly
 * TEXTURE_WIDTH by TEXTURE_HEIGHT pixels in size. It uses 8 bit color, and

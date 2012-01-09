@@ -224,7 +224,7 @@ private:
 	const MapGenBobKind * m_WastelandOuterBobKind;
 };
 
-/** class MapGenInfo
+/** struct MapGenInfo
   *
   * This class holds world specific information for the map generator.
   * This info is usually read from the file "mapgeninfo" of a world.
@@ -285,7 +285,7 @@ private:
 
 };
 
-/** class World
+/** struct World
   *
   * This class provides information on a worldtype usable to create a map;
   * it can read a world file.

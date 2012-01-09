@@ -32,7 +32,7 @@ struct Font;
 struct GameSettingsProvider;
 struct PlayerDescriptionGroupImpl;
 
-/** class PlayerDescriptionGroup
+/** struct PlayerDescriptionGroup
  *
  * - checkbox to enable/disable player
  * - button to switch between: Human, Remote, AI

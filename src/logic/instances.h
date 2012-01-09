@@ -126,7 +126,7 @@ extern Map_Object_Descr g_flag_descr;
  * \warning DO NOT allocate/free Map_Objects directly. Use the appropriate
  * type-dependent create() function for creation, and call die() for removal.
  *
- * \note Convenient creation functions are defined in class Game.
+ * \note Convenient creation functions are defined in struct Game.
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
@@ -151,7 +151,7 @@ class Map_Object : boost::noncopyable {
 public:
 	enum {
 		AREAWATCHER,
-		BOB,  //  class Bob
+		BOB,  //  struct Bob
 
 		WARE, //  class WareInstance
 		BATTLE,

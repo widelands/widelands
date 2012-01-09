@@ -36,7 +36,7 @@ struct Radiogroup;
 }
 
 namespace Widelands {
-struct Building;
+class Building;
 struct WaresQueue;
 }
 

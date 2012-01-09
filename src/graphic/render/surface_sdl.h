@@ -27,7 +27,7 @@
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right
-* way is to use the base class Surface wherever possible. Everything which
+* way is to use the base struct Surface wherever possible. Everything which
 * needs to know about the underlying renderer should go to the graphics
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.

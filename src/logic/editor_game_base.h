@@ -36,7 +36,7 @@
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
 struct Interactive_Base;
-class LuaInterface;
+struct LuaInterface;
 
 namespace Widelands {
 
@@ -61,7 +61,7 @@ struct Editor_Game_Base :
 {
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
-	friend class Game_Game_Class_Data_Packet;
+	friend struct Game_Game_Class_Data_Packet;
 
 	Editor_Game_Base(LuaInterface * lua);
 	virtual ~Editor_Game_Base();

@@ -44,7 +44,7 @@ class TrainingSite;
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
 
-/** class Game
+/** struct Game
  *
  * This class manages the entire lifetime of a game session, from creating the
  * game and setting options, selecting maps to the actual playing phase and the
@@ -81,15 +81,15 @@ struct Game : Editor_Game_Base {
 	typedef std::vector<General_Stats> General_Stats_vector;
 
 	friend class Cmd_Queue; // this class handles the commands
-	friend class Game_Game_Class_Data_Packet;
-	friend class Game_Player_Info_Data_Packet;
+	friend struct Game_Game_Class_Data_Packet;
+	friend struct Game_Player_Info_Data_Packet;
 	friend struct Game_Loader;
 	friend struct ::Game_Main_Menu_Load_Game;
 	friend struct ::WLApplication;
 
 	// This friend is for legacy reasons and should probably be removed
 	// at least after summer 2008, maybe even earlier.
-	friend class Game_Interactive_Player_Data_Packet;
+	friend struct Game_Interactive_Player_Data_Packet;
 
 	Game();
 	~Game();
