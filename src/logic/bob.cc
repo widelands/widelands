@@ -38,6 +38,7 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
+#include <cstdlib>
 
 #include "backtrace.h"
 
@@ -132,7 +133,7 @@ Bob::~Bob()
 		molog
 			("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not "
 			 "called!\n");
-		*static_cast<int32_t *>(0) = 0;
+		abort();
 	}
 }
 
