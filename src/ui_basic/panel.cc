@@ -903,7 +903,7 @@ void Panel::do_mousein(bool const inside)
 
 	if (!inside && _mousein) {
 		_mousein->do_mousein(false);
-		_mousein = false;
+		_mousein = NULL;
 	}
 	handle_mousein(inside);
 }
