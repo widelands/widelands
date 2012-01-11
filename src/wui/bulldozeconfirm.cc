@@ -114,8 +114,7 @@ void BulldozeConfirm::think()
 		 not building  ||
 		 not iaplayer().can_act(building->owner().player_number())
 		 or not
-		 (building->get_playercaps()
-		  and (1 << Widelands::Building::PCap_Bulldoze)))
+		 (building->get_playercaps() & (1 << Widelands::Building::PCap_Bulldoze)))
 		die();
 }
 
