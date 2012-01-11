@@ -518,10 +518,7 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 				bulldozelist.push_back(&flag);
 		} else if (upcast(Flag, flag, imm)) {
 			if (Building * const flagbuilding = flag->get_building())
-				if
-					(!
-					 (flagbuilding->get_playercaps() & Building::PCap_Bulldoze))
-				{
+				if (!(flagbuilding->get_playercaps() & Building::PCap_Bulldoze)) {
 					log
 						("Player trying to rip flag (%u) with undestroyable "
 						 "building (%u)\n",
