@@ -135,8 +135,8 @@ bulldoze them.
 uint32_t Partially_Finished_Building::get_playercaps() const throw () {
 	uint32_t caps = Building::get_playercaps();
 
-	caps |= 1 << PCap_Bulldoze;
-	caps &= ~(1 << PCap_Dismantle);
+	caps |= PCap_Bulldoze;
+	caps &= ~PCap_Dismantle;
 
 	return caps;
 }
