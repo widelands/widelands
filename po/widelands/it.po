@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 14:40+0100\n"
-"PO-Revision-Date: 2011-12-30 12:35+0000\n"
+"PO-Revision-Date: 2012-01-10 12:52+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:47+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-11 04:34+0000\n"
+"X-Generator: Launchpad (build 14640)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3876,7 +3876,7 @@ msgstr "Posseduti: "
 
 #: ../../src/wui/building_statistics_menu.cc:99
 msgid "In Build: "
-msgstr "In costruzione: "
+msgstr "In costr. "
 
 #: ../../src/wui/building_statistics_menu.cc:105
 msgid "Jump to unproductive: "
@@ -3884,7 +3884,7 @@ msgstr "Vai agli improduttivi: "
 
 #: ../../src/wui/building_statistics_menu.cc:114
 msgid "Prod"
-msgstr "prod"
+msgstr "Prod"
 
 #: ../../src/wui/building_statistics_menu.cc:115
 msgid "Owned"
@@ -4498,7 +4498,7 @@ msgstr "(vacante)"
 
 #: ../../src/wui/productionsitewindow.cc:144
 msgid "(coming)"
-msgstr "(venendo)"
+msgstr "(in arrivo)"
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"

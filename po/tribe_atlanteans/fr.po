@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2011-12-06 08:10+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"PO-Revision-Date: 2012-01-10 22:31+0000\n"
+"Last-Translator: Tubuntu <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:43+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-11 04:34+0000\n"
+"X-Generator: Launchpad (build 14640)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -161,7 +161,7 @@ msgstr "Pain"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Palette à fournée"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -947,6 +947,9 @@ msgid ""
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
 msgstr ""
+"La viande fumée est faite à base de viande dans une fumerie. Elle est "
+"délivrée dans les mines et sites d'entraînement (labyrinthe et  dongeon) où "
+"les mineurs et soldats se préparent des déjeuners nutritifs."
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
@@ -970,6 +973,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Certains de vos bâtiments de départ n'avaient pas assez d'espace et\n"
+"n'ont pas été construits. Ceci est un sérieux inconvénient. Veuillez\n"
+"considérer de recommencer cette carte dans de meilleures conditions."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
