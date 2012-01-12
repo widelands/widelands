@@ -65,7 +65,7 @@ NetGGZ & NetGGZ::ref() {
 void NetGGZ::init()
 {
 	use_ggz = true;
-	log(">> GGZ: initialized\n");
+	dedicatedlog(">> GGZ: initialized\n");
 }
 
 
@@ -82,7 +82,7 @@ bool NetGGZ::connect()
 	if (!used())
 		return false;
 
-	log("GGZ ## connect\n");
+	dedicatedlog("GGZ ## connect\n");
 	mod = ggzmod_new(GGZMOD_GAME);
 
 	// Set handler for ggzmod events:
@@ -99,17 +99,17 @@ bool NetGGZ::connect()
 	// * GGZMOD_EVENT_RANKINGS
 
 	if (ggzmod_connect(mod)) {
-		log("GGZ ## connection failed\n");
+		dedicatedlog("GGZ ## connection failed\n");
 		return false;
 	}
 
 	int32_t const fd = ggzmod_get_fd(mod);
-	log("GGZ ## connection fd %i\n", fd);
+	dedicatedlog("GGZ ## connection fd %i\n", fd);
 	while (ggzmod_get_state(mod) != GGZMOD_STATE_PLAYING) {
 		// Prevent busy looping by waiting for data, abort connect if select fails
 		if (wait_for_ggzmod_data(ggzmod_get_fd(mod), 1, 0) < 0)
 		{
-			log("GGZ ## select failed during connect.\n");
+			dedicatedlog("GGZ ## select failed during connect.\n");
 			return false;
 		}
 
@@ -133,17 +133,17 @@ bool NetGGZ::connect()
 void NetGGZ::ggzmod_server
 	(GGZMod * const cbmod, GGZModEvent const e, void const * const cbdata)
 {
-	log("GGZ ## ggzmod_server\n");
+	dedicatedlog("GGZ ## ggzmod_server\n");
 	if (e == GGZMOD_EVENT_SERVER) {
 		int32_t const fd = *static_cast<int32_t const *>(cbdata);
 		ggzobj->m_fd = fd;
-		log("GGZ ## got fd: %i\n", fd);
+		dedicatedlog("GGZ ## got fd: %i\n", fd);
 		ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
 	} else if (e == GGZMOD_EVENT_ERROR) {
 		const char * msg = static_cast<const char * >(cbdata);
-		log("GGZ ## ERROR: %s\n", msg);
+		dedicatedlog("GGZ ## ERROR: %s\n", msg);
 	} else
-		log("GGZ ## HANDLE ERROR: %i\n", e);
+		dedicatedlog("GGZ ## HANDLE ERROR: %i\n", e);
 }
 
 
@@ -162,7 +162,7 @@ bool NetGGZ::host()
 		ggzmod_get_player(mod, &spectator, &seat);
 	} while (seat == -1);
 
-	log("GGZ ## host? seat=%i\n", seat);
+	dedicatedlog("GGZ ## host? seat=%i\n", seat);
 	return !seat;
 }
 
@@ -184,7 +184,7 @@ bool NetGGZ::initcore
 	if (usedcore())
 		return false;
 
-	log("GGZCORE ## initialization\n");
+	dedicatedlog("GGZCORE ## initialization\n");
 	ggzcore_login = true;
 	ggzcore_ready = false;
 
@@ -258,10 +258,10 @@ bool NetGGZ::initcore
 
 	ggzcore_server_connect(ggzserver);
 
-	log("GGZCORE ## start loop\n");
+	dedicatedlog("GGZCORE ## start loop\n");
 	while (ggzcore_login)
 		datacore();
-	log("GGZCORE ## end loop\n");
+	dedicatedlog("GGZCORE ## end loop\n");
 
 	username = nick;
 	return logged_in;
@@ -331,12 +331,12 @@ void NetGGZ::data()
 		int32_t const ret = select(fd + 1, &fdset, 0, 0, &timeout);
 		if (ret <= 0)
 			return;
-		log("GGZ ## select() returns: %i for fd %i\n", ret, fd);
+		dedicatedlog("GGZ ## select() returns: %i for fd %i\n", ret, fd);
 	}
 
 	{
 		int32_t const ret = ggz_read_int(fd, &op);
-		log("GGZ ## received opcode: %i (%i)\n", op, ret);
+		dedicatedlog("GGZ ## received opcode: %i (%i)\n", op, ret);
 		if (ret < 0) {
 			close(fd);
 			ggzmod_disconnect(mod);
@@ -350,18 +350,18 @@ void NetGGZ::data()
 	case op_greeting:
 		ggz_read_string_alloc(fd, &greeter);
 		ggz_read_int(fd, &greeterversion);
-		log("GGZ ## server is: '%s' '%i'\n", greeter, greeterversion);
+		dedicatedlog("GGZ ## server is: '%s' '%i'\n", greeter, greeterversion);
 		ggz_free(greeter);
 		break;
 	case op_request_ip:
-		log("GGZ ## ip request!\n");
+		dedicatedlog("GGZ ## ip request!\n");
 		snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
 		ggz_write_int(fd, op_reply_ip);
 		ggz_write_string(fd, ipaddress);
 		break;
 	case op_broadcast_ip:
 		ggz_read_string_alloc(fd, &ipstring);
-		log("GGZ ## ip broadcast: '%s'\n", ipstring);
+		dedicatedlog("GGZ ## ip broadcast: '%s'\n", ipstring);
 		server_ip_addr = ggz_strdup(ipstring);
 		ggz_free(ipstring);
 		break;
@@ -374,7 +374,7 @@ void NetGGZ::data()
 			 	 "Please try to solve the problem - Reading the notes\n"
 			 	 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 			 	 "be advantageous."));
-	default: log("GGZ ## opcode unknown!\n");
+	default: dedicatedlog("GGZ ## opcode unknown!\n");
 	}
 }
 #pragma GCC diagnostic error "-Wold-style-cast"
@@ -486,7 +486,7 @@ void NetGGZ::datacore()
 GGZHookReturn NetGGZ::callback_server
 	(uint32_t const id, void const * const cbdata, void const *)
 {
-	log("GGZCORE ## callback: %i\n", id);
+	dedicatedlog("GGZCORE ## callback: %i\n", id);
 	ggzobj->event_server(id, cbdata);
 
 	return GGZ_HOOK_OK;
@@ -498,7 +498,7 @@ GGZHookReturn NetGGZ::callback_server
 GGZHookReturn NetGGZ::callback_room
 	(uint32_t const id, void const * const cbdata, void const *)
 {
-	log("GGZCORE/room ## callback: %i\n", id);
+	dedicatedlog("GGZCORE/room ## callback: %i\n", id);
 	ggzobj->event_room(id, cbdata);
 
 	return GGZ_HOOK_OK;
@@ -510,7 +510,7 @@ GGZHookReturn NetGGZ::callback_room
 GGZHookReturn NetGGZ::callback_game
 	(uint32_t const id, void const * const cbdata, void const *)
 {
-	log("GGZCORE/game ## callback: %i\n", id);
+	dedicatedlog("GGZCORE/game ## callback: %i\n", id);
 	ggzobj->event_game(id, cbdata);
 
 	return GGZ_HOOK_OK;
@@ -522,14 +522,14 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 {
 	switch (id) {
 	case GGZ_CONNECTED:
-		log("GGZCORE ## -- connected\n");
+		dedicatedlog("GGZCORE ## -- connected\n");
 		break;
 	case GGZ_NEGOTIATED:
-		log("GGZCORE ## -- negotiated\n");
+		dedicatedlog("GGZCORE ## -- negotiated\n");
 		ggzcore_server_login(ggzserver);
 		break;
 	case GGZ_LOGGED_IN:
-		log("GGZCORE ## -- logged in\n");
+		dedicatedlog("GGZCORE ## -- logged in\n");
 		logged_in = true;
 		ggzcore_server_list_gametypes(ggzserver, 0);
 #if GGZCORE_VERSION_MINOR == 0
@@ -539,7 +539,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 #endif
 		break;
 	case GGZ_ENTERED:
-		log("GGZCORE ## -- entered room\n");
+		dedicatedlog("GGZCORE ## -- entered room\n");
 
 		//  Register callback functions for room events.
 		//
@@ -604,7 +604,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		formatedGGZChat("http://wl.widelands.org/wiki/InternetGaming", "", true);
 		break;
 	case GGZ_ROOM_LIST: {
-		log("GGZCORE ## -- (room list)\n");
+		dedicatedlog("GGZCORE ## -- (room list)\n");
 		int32_t const num = ggzcore_server_get_num_rooms(ggzserver);
 		bool joined = false;
 		for (int32_t i = 0; i < num; ++i) {
@@ -619,19 +619,19 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 			}
 		}
 		if (!joined) {
-			log("GGZCORE ## could not find room! :(\n");
+			dedicatedlog("GGZCORE ## could not find room! :(\n");
 		}
 		break;
 	}
 	case GGZ_TYPE_LIST:
-		log("GGZCORE ## -- (type list)\n");
+		dedicatedlog("GGZCORE ## -- (type list)\n");
 		break;
 	case GGZ_CHANNEL_CONNECTED:
-		log("GGZCORE ## -- channel connected\n");
+		dedicatedlog("GGZCORE ## -- channel connected\n");
 		channelfd = ggzcore_server_get_channel(ggzserver);
 		break;
 	case GGZ_CHANNEL_READY:
-		log("GGZCORE ## -- channel ready\n");
+		dedicatedlog("GGZCORE ## -- channel ready\n");
 		ggzcore_game_set_server_fd
 			(ggzcore_server_get_cur_game(ggzserver), channelfd);
 		channelfd = -1;
@@ -641,7 +641,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		{
 			GGZErrorEventData const * ce =
 				static_cast<GGZErrorEventData const *>(cbdata);
-			log("GGZCORE ## -- chat error! (%s)\n", ce->message);
+			dedicatedlog("GGZCORE ## -- chat error! (%s)\n", ce->message);
 			std::string formated = ERRMSG;
 			formated += ce->message;
 			formatedGGZChat(formated, "", true);
@@ -656,7 +656,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		{
 			GGZErrorEventData const * eed =
 				static_cast<GGZErrorEventData const *>(cbdata);
-			log("GGZCORE ## -- error! (%s)\n", eed->message);
+			dedicatedlog("GGZCORE ## -- error! (%s)\n", eed->message);
 			std::string formated = ERRMSG;
 			formated += eed->message;
 			formatedGGZChat(formated, "", true);
@@ -673,7 +673,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 	case GGZ_NET_ERROR:
 		{
 			char const * msg =  static_cast<char const *>(cbdata);
-			log("GGZCORE ## -- error! (%s)\n", msg);
+			dedicatedlog("GGZCORE ## -- error! (%s)\n", msg);
 			std::string formated = ERRMSG;
 			formated += msg;
 			formatedGGZChat(formated, "", true);
@@ -683,7 +683,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		break;
 	case GGZ_MOTD_LOADED:
 		{
-			log("GGZCORE ## -- motd loaded!\n");
+			dedicatedlog("GGZCORE ## -- motd loaded!\n");
 			motd = MOTD(static_cast<GGZMotdEventData const * >(cbdata)->motd);
 		}
 		break;
@@ -701,7 +701,7 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 		//  FIXME read updates while we are inside a table.
 	case GGZ_TABLE_UPDATE:
 	case GGZ_TABLE_LIST:
-		log("GGZCORE/room ## -- table list\n");
+		dedicatedlog("GGZCORE/room ## -- table list\n");
 		if (!room)
 			room = ggzcore_server_get_cur_room(ggzserver);
 		if (!room) {
@@ -713,7 +713,7 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 		ggzcore_ready = true;
 		break;
 	case GGZ_TABLE_LAUNCHED:
-		log("GGZCORE/room ## -- table launched\n");
+		dedicatedlog("GGZCORE/room ## -- table launched\n");
 		// nothing to be done here - just for debugging
 		// cbdata is NULL
 		break;
@@ -721,22 +721,22 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 		// nothing useful done yet - just debug output
 		GGZErrorEventData const & eed =
 			*static_cast<GGZErrorEventData const *>(cbdata);
-		log("GGZCORE/room ## -- table launch failed! (%s)\n", eed.message);
+		dedicatedlog("GGZCORE/room ## -- table launch failed! (%s)\n", eed.message);
 		break;
 	}
 	case GGZ_TABLE_JOINED:
-		log("GGZCORE/room ## -- table joined\n");
+		dedicatedlog("GGZCORE/room ## -- table joined\n");
 		// nothing to be done here - just for debugging
 		// cbdata is the table index (int*) of the table we joined
 		break;
 	case GGZ_TABLE_JOIN_FAIL: {
 		// nothing useful done yet - just debug output
 		char const * const msg =  static_cast<char const *>(cbdata);
-		log("GGZCORE ## -- error! (%s)\n", msg);
+		dedicatedlog("GGZCORE ## -- error! (%s)\n", msg);
 		break;
 	}
 	case GGZ_ROOM_ENTER: {
-		log("GGZCORE/room ## -- user joined\n");
+		dedicatedlog("GGZCORE/room ## -- user joined\n");
 		std::string msg =
 			static_cast<GGZRoomChangeEventData const *>(cbdata)->player_name;
 		msg += _(" joined the metaserver.");
@@ -745,7 +745,7 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 		break;
 	}
 	case GGZ_ROOM_LEAVE: {
-		log("GGZCORE/room ## -- user left\n");
+		dedicatedlog("GGZCORE/room ## -- user left\n");
 		std::string msg =
 			static_cast<GGZRoomChangeEventData const *>(cbdata)->player_name;
 		msg += _(" left the metaserver.");
@@ -755,11 +755,11 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 	}
 	case GGZ_PLAYER_LIST:
 	case GGZ_PLAYER_COUNT: // cbdata is the GGZRoom* where players were counted
-		log("GGZCORE/room ## -- user list\n");
+		dedicatedlog("GGZCORE/room ## -- user list\n");
 		write_userlist();
 		break;
 	case GGZ_CHAT_EVENT:
-		log("GGZCORE/room ## -- chat message\n");
+		dedicatedlog("GGZCORE/room ## -- chat message\n");
 		recievedGGZChat(cbdata);
 		break;
 	}
@@ -771,7 +771,7 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 {
 	switch (id) {
 	case GGZ_GAME_PLAYING:
-		log("GGZCORE/game ## -- playing\n");
+		dedicatedlog("GGZCORE/game ## -- playing\n");
 		if (!room)
 			room = ggzcore_server_get_cur_room(ggzserver);
 		if (tableid == -1) {
@@ -809,14 +809,14 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 		}
 		break;
 	case GGZ_GAME_LAUNCHED:
-		log("GGZCORE/game ## --  launched\n");
+		dedicatedlog("GGZCORE/game ## --  launched\n");
 		gamefd =
 			ggzcore_game_get_control_fd(ggzcore_server_get_cur_game(ggzserver));
 		init();
 		connect();
 		break;
 	case GGZ_GAME_NEGOTIATED:
-		log("GGZCORE/game ## -- negotiated\n");
+		dedicatedlog("GGZCORE/game ## -- negotiated\n");
 		ggzcore_server_create_channel(ggzserver);
 		break;
 	case GGZ_GAME_LAUNCH_FAIL:
@@ -917,13 +917,13 @@ void NetGGZ::write_userlist()
 		int forfeits[1];
 		if (ggzcore_player_get_rating(player, buf)) {
 			snprintf(user.stats, sizeof(user.stats), "r %i", buf[0]);
-			log(user.stats);
+			dedicatedlog(user.stats);
 		} else if (ggzcore_player_get_highscore(player, buf)) {
 			snprintf(user.stats, sizeof(user.stats), "hs %i", buf[1]);
-			log(user.stats);
+			dedicatedlog(user.stats);
 		} else if (ggzcore_player_get_ranking(player, buf)) {
 			snprintf(user.stats, sizeof(user.stats), "ra %i", buf[1]);
-			log(user.stats);
+			dedicatedlog(user.stats);
 		} else if
 			(ggzcore_player_get_record
 			 (player, wins, losses, ties, forfeits))
@@ -931,7 +931,7 @@ void NetGGZ::write_userlist()
 			snprintf
 				(user.stats, sizeof(user.stats), "%i %i %i %i",
 				 wins[1], losses[1], ties[1], forfeits[1]);
-			log(user.stats);
+			dedicatedlog(user.stats);
 		} else*/
 		snprintf(user.stats, sizeof(user.stats), "%i", 0);
 		user.type = ggzcore_player_get_type(player);
@@ -973,7 +973,7 @@ void NetGGZ::join(char const * const tablename)
 			("Selected table \"%s\" could not be found\n", tablename);
 	}
 
-	log("GGZCORE ## Joining Server \"%s\"\n", tablename);
+	dedicatedlog("GGZCORE ## Joining Server \"%s\"\n", tablename);
 
 	GGZGame * const game = ggzcore_game_new();
 	ggzcore_game_init(game, ggzserver, 0);
@@ -998,7 +998,7 @@ void NetGGZ::launch()
 	if (!ggzcore_ready)
 		return;
 
-	log("GGZCORE ## launch table\n");
+	dedicatedlog("GGZCORE ## launch table\n");
 
 	tableid = -1;
 
@@ -1043,9 +1043,9 @@ void NetGGZ::send_game_playing()
 {
 	if (used()) {
 		if (ggz_write_int(m_fd, op_state_playing) < 0)
-			log("ERROR: Game state could not be send!\n");
+			dedicatedlog("ERROR: Game state could not be send!\n");
 	} else
-		log("ERROR: GGZ not used!\n");
+		dedicatedlog("ERROR: GGZ not used!\n");
 }
 
 
@@ -1054,9 +1054,9 @@ void NetGGZ::send_game_done()
 {
 	if (used()) {
 		if (ggz_write_int(m_fd, op_state_done) < 0)
-			log("ERROR: Game state could not be send!\n");
+			dedicatedlog("ERROR: Game state could not be send!\n");
 	} else
-		log("ERROR: GGZ not used!\n");
+		dedicatedlog("ERROR: GGZ not used!\n");
 }
 
 
@@ -1079,7 +1079,7 @@ void NetGGZ::send(std::string const & msg)
 	} else
 		sent = ggzcore_room_chat(room, GGZ_CHAT_NORMAL, "", msg.c_str());
 	if (sent < 0)
-		log("GGZCORE/room/chat ## error sending message!\n");
+		dedicatedlog("GGZCORE/room/chat ## error sending message!\n");
 }
 
 

@@ -147,6 +147,8 @@ struct NetGGZ : public ChatProvider {
 		servername += ')';
 	}
 
+	std::string & get_local_servername() {return servername;}
+
 	// ChatProvider: sends a message via GGZnetwork.
 	void send(std::string const &);
 

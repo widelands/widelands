@@ -33,6 +33,9 @@
 // wout is either std::cout or specified logfile.
 void log(const char *, ...) PRINTF_FORMAT(1, 2);
 
+void dedicatedlog(const char *, ...) PRINTF_FORMAT(1, 2);
+
+
 extern bool g_verbose;
 
 #endif

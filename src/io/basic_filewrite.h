@@ -20,7 +20,8 @@
 #ifndef BASIC_FILEWRITE_H
 #define BASIC_FILEWRITE_H
 
-#include "io/filesystem/filesystem.h"
+#include "filesystem/disk_filesystem.h"
+#include "filesystem/filesystem.h"
 #include "machdep.h"
 
 #include <cassert>
@@ -61,6 +62,12 @@ template <typename Base> struct basic_FileWrite : public Base {
 	/// worry, it will be cleared by the destructor).
 	void Write(FileSystem & fs, char const * const filename) {
 		fs.Write(filename, data, filelength); Clear();
+	}
+
+	/// Same as above, just that the data is appended to the file
+	/// NOTE RealFSImpl is used by purpose - zip filesystems do not support appending
+	void WriteAppend(RealFSImpl & fs, char const * const filename) {
+		fs.Write(filename, data, filelength, true); Clear();
 	}
 
 	/// Get the position that will be written to in the next write operation that
