@@ -855,6 +855,13 @@ void NetHost::run(bool const autorun)
 		// wait mode when there are no clients
 		checkHungClients();
 		initComputerPlayers();
+		if (m_is_dedicated) {
+			// Statistics: new game started
+			std::vector<std::string> clients;
+			for (uint8_t i = 0; i < d->settings.users.size(); ++i)
+				clients.push_back(d->settings.users.at(i).name);
+			DedicatedLog::get()->game_start(clients, game.map().get_name());
+		}
 		game.run
 			(loaderUI,
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
@@ -864,6 +871,15 @@ void NetHost::run(bool const autorun)
 		if (use_ggz)
 			NetGGZ::ref().send_game_done();
 #endif
+/* TODO Uncomment and fix, once game results are returned
+		if (m_is_dedicated) {
+			// Statistics: game ended
+			std::vector<bool> results;
+			for (uint8_t i = 0; i < d->settings.users.size(); ++i)
+				results.push_back(d->settings.users.at(i).winner);
+			DedicatedLog::get()->game_end(results);
+		}
+*/
 		clearComputerPlayers();
 	} catch (...) {
 		WLApplication::emergency_save(game);

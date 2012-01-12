@@ -112,12 +112,31 @@ void DedicatedLog::set_server_ip(std::string ip) {
 }
 
 
+/// Saves the data of a newly started game
+void DedicatedLog::game_start(std::vector<std::string> clients, std::string mapname) {
+	GameStatistic * new_game = new GameStatistic;
+	new_game->mapname = mapname;
+	new_game->times.push_back(time(0));
+	new_game->clients = clients;
+	d_games.push_back(*new_game);
+}
+
+
+/// Saves the results of the last started game
+void DedicatedLog::game_end(std::vector<bool> results) {
+	assert(!d_games.empty());
+	d_games.back().results = results;
+	d_games.back().times.push_back(time(0));
+}
+
+
 /// Updates the server information file with current data
 void DedicatedLog::info_update() {
 	if (m_info_file_path.empty())
 		return;
 
 	std::string temp("<table class=\"infohead\">\n");
+	// Basic information
 	temp += "<tr><td class=\"infoname\">Servername</td><td class=\"info\">"  + d_name  + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Server IP</td><td class=\"info\">"   + d_ip    + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Server MOTD</td><td class=\"info\">" + d_motd  + "</td></tr>\n";
@@ -128,7 +147,45 @@ void DedicatedLog::info_update() {
 	temp += (boost::format("%u") % d_logouts).str() + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Chat messages</td><td class=\"info\">";
 	temp += (boost::format("%u") % d_chatmessages).str() + "</td></tr>\n";
-	//temp += "</table><table class=\"infogames\">\n";
+	temp += "<tr><td class=\"infoname\">Games started</td><td class=\"info\">";
+	temp += (boost::format("%u") % d_games.size()).str() + "</td></tr>\n";
+	if (!d_games.empty()) {
+		// Games information
+		temp += "</table><table class=\"infogames\">\n";
+		temp += "<tr><th>start/end of game</th><th>map name</th><th>clients</th><th>winner(s)</th></tr>\n";
+
+		for (uint16_t i = 0; i < d_games.size(); ++i) {
+			assert(!d_games.at(i).clients.empty() && !d_games.at(i).times.empty());
+			// Start and (if already ended) end time
+			char ts[42];
+			strftime(ts, sizeof(ts), "S: %Y/%m/%d, %H:%M:%S", localtime(&d_games.at(i).times.at(0)));
+			temp += (boost::format("<tr><td>%s") % ts).str();
+			if (!d_games.at(i).times.size() > 1) {
+				strftime(ts, sizeof(ts), "E: %Y/%m/%d, %H:%M:%S", localtime(&d_games.at(i).times.at(0)));
+				temp += (boost::format("%s") % ts).str();
+			}
+			// Map name
+			temp += (boost::format("</td><td>%s</td><td>") % d_games.at(i).mapname).str();
+			// Players
+			for (uint8_t j = 0; j < d_games.at(i).clients.size(); ++j) {
+				if (j > 0)
+					temp += ", ";
+				temp += d_games.at(i).clients.at(j);
+			}
+			temp += "</td><td>";
+			// Winners
+			bool first = true;
+			for (uint8_t j = 0; j < d_games.at(i).clients.size(); ++j) {
+				if (d_games.at(i).results.at(j)) {
+					if (!first)
+						temp += ", ";
+					temp += d_games.at(i).clients.at(j);
+					first = false;
+				}
+			}
+			temp += "</td></tr>\n";
+		}
+	}
 	temp += "</table>\n";
 	m_chat.Printf(temp.c_str());
 	m_chat.Write(*root, m_info_file_path.c_str());
