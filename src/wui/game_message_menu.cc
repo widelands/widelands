@@ -50,6 +50,7 @@ GameMessageMenu::GameMessageMenu
 {
 	list = new UI::Table<uintptr_t>(this, 5, 35, 360, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
+	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column (50, _("Select"), UI::Align_HCenter, true);
 	list->add_column (50, _("Status"), UI::Align_HCenter);
 	list->add_column(136, _("Title"));
@@ -236,6 +237,13 @@ void GameMessageMenu::selected(uint32_t const t) {
 	}
 	m_centerviewbtn->set_enabled(false);
 	message_body.set_text(std::string());
+}
+
+/**
+ * a message was double clicked
+ */
+void GameMessageMenu::double_clicked(uint32_t const t) {
+	if (m_centerviewbtn->enabled()) center_view();
 }
 
 /**

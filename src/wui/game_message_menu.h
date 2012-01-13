@@ -55,7 +55,8 @@ private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
 
 	Interactive_Player & iplayer() const;
-	void                 selected(uint32_t);
+	void selected(uint32_t);
+	void double_clicked(uint32_t);
 
 	bool status_compare(uint32_t a, uint32_t b);
 	void do_delete();
