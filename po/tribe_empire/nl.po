@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-01-08 08:02+0000\n"
-"Last-Translator: Teun <Unknown>\n"
+"PO-Revision-Date: 2012-01-13 19:18+0000\n"
+"Last-Translator: Teun Spaans <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-09 04:40+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-14 04:35+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Een zeewaardig schip"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -35,8 +35,8 @@ msgid ""
 "or meat or bread."
 msgstr ""
 "Een tussendoortje om de mijnwerkers sterk en aan het werk te houden. Porties "
-"worden ook genuttigd door de verkenner op zijn verkentochten. Ze worden "
-"gemaakt in een kroeg uit vis, vlees of brood."
+"worden ook genuttigd door de verkenner . Ze worden gemaakt in een kroeg uit "
+"vis, vlees of brood."
 
 #: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
@@ -867,7 +867,7 @@ msgstr "Schip"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
-msgstr ""
+msgstr "Scheepswerf"
 
 #: ../../tribes/empire/conf:128
 msgid "Shipwright"

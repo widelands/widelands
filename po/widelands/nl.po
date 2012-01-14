@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 14:40+0100\n"
-"PO-Revision-Date: 2012-01-07 21:27+0000\n"
-"Last-Translator: Teun <Unknown>\n"
+"PO-Revision-Date: 2012-01-13 14:16+0000\n"
+"Last-Translator: Teun Spaans <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-01-08 04:42+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-14 04:35+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -337,7 +337,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1676
 msgid "Connection timed out"
-msgstr ""
+msgstr "Wachttijd voor verbinding verstreken"
 
 #: ../../src/wlapplication.cc:1678
 msgid ""
@@ -839,7 +839,7 @@ msgstr "Documentatie voor programma opdracht controleer kaart"
 
 #: ../../src/writeHTML.cc:1155
 msgid "check_map"
-msgstr ""
+msgstr "Controleer kaart"
 
 #: ../../src/writeHTML.cc:1160
 #, c-format
@@ -1282,7 +1282,7 @@ msgstr "beest aan het laden: %s"
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% ontmanteld"
 
 #: ../../src/logic/game.cc:230
 msgid "Preloading a map"
@@ -1802,7 +1802,7 @@ msgstr "Onbekende parameter \"%s\""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
-msgstr ""
+msgstr "Geen parameter opgegeven!"
 
 #: ../../src/logic/production_program.cc:702
 msgid "idle animation is default; calling is not allowed"
@@ -2171,7 +2171,7 @@ msgstr "bouwplaats: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:405
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "ontmantelen: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:589
 #, c-format
@@ -2346,6 +2346,8 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
+"De waarde %u is niet toegestaan alstijdsduur; het is de standaardwaarde "
+"voorzonder tijdslimiet. Laat de waarde leeg om de boodschap te laten bestaan."
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
@@ -3485,7 +3487,7 @@ msgstr "Officiele kaart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
@@ -3501,7 +3503,7 @@ msgstr "4-speler teams"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "ieder voor zich"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
@@ -3883,7 +3885,7 @@ msgstr "Vernietig"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "Ontmantelen"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -3936,7 +3938,7 @@ msgstr "Bouw grote gebouwen"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr ""
+msgstr "Bouw havengebouwen"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
