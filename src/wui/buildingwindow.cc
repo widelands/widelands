@@ -178,7 +178,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					 UI::Box::AlignCenter);
 			}
 
-		if (m_capscache & 1 << Widelands::Building::PCap_Enhancable) {
+		if (m_capscache & Widelands::Building::PCap_Enhancable) {
 			std::set<Widelands::Building_Index> const & enhancements =
 				m_building.enhancements();
 			Widelands::Tribe_Descr const & tribe  = owner.tribe();
@@ -207,7 +207,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				}
 		}
 
-		if (m_capscache & (1 << Widelands::Building::PCap_Bulldoze)) {
+		if (m_capscache & Widelands::Building::PCap_Bulldoze) {
 			UI::Button * destroybtn =
 				new UI::Button
 					(capsbuttons, "destroy", 0, 0, 34, 34,
@@ -221,7 +221,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 UI::Box::AlignCenter);
 		}
 
-		if (m_capscache & (1 << Widelands::Building::PCap_Dismantle)) {
+		if (m_capscache & Widelands::Building::PCap_Dismantle) {
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
@@ -325,7 +325,7 @@ Callback for dismantling request
 */
 void Building_Window::act_dismantle()
 {
-	if (m_building.get_playercaps() & (1 << Widelands::Building::PCap_Dismantle))
+	if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
 		igbase().game().send_player_dismantle(m_building);
 }
 
@@ -343,7 +343,7 @@ Callback for bulldozing request
 */
 void Building_Window::act_enhance(Widelands::Building_Index const id)
 {
-	if (m_building.get_playercaps() & (1 << Widelands::Building::PCap_Enhancable))
+	if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
 		igbase().game().send_player_enhance_building (m_building, id);
 
 	die();

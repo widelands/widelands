@@ -322,7 +322,7 @@ Flag & Building::base_flag()
 /**
  * \return a bitfield of commands the owning player can issue for this building.
  *
- * The bits are (1 << PCap_XXX).
+ * The bits are PCap_XXX.
  * By default, all buildings can be bulldozed. If a building should not be
  * destructible, "destructible=no" must be added to buildings conf.
  */
@@ -330,12 +330,12 @@ uint32_t Building::get_playercaps() const throw () {
 	uint32_t caps = 0;
 	const Building_Descr & d = descr();
 	if (d.is_destructible()) {
-		caps |= 1 << PCap_Bulldoze;
+		caps |= PCap_Bulldoze;
 		if (d.is_buildable() or d.is_enhanced())
-			caps |= 1 << PCap_Dismantle;
+			caps |= PCap_Dismantle;
 	}
 	if (d.enhancements().size())
-		caps |= 1 << PCap_Enhancable;
+		caps |= PCap_Enhancable;
 	return caps;
 }
 

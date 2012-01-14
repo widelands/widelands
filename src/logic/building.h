@@ -146,9 +146,9 @@ class Building : public PlayerImmovable {
 public:
 	// Player capabilities: which commands can a player issue for this building?
 	enum {
-		PCap_Bulldoze = 0, // can bulldoze/remove this buildings
-		PCap_Dismantle = 1, // can dismantle this buildings
-		PCap_Enhancable = 3, // can be enhanced to something
+		PCap_Bulldoze = 1, // can bulldoze/remove this buildings
+		PCap_Dismantle = 1 << 1, // can dismantle this buildings
+		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
 
 public:

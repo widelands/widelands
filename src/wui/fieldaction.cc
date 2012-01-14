@@ -374,7 +374,7 @@ void FieldActionWindow::add_buttons_auto()
 				if
 					(!building
 					 ||
-					 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+					 building->get_playercaps() & Building::PCap_Bulldoze)
 					add_button
 						(buildbox, "rip_flag",
 						 pic_ripflag,
@@ -750,7 +750,7 @@ void FieldActionWindow::act_ripflag()
 	Widelands::Editor_Game_Base & egbase = ibase().egbase();
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
-			if (building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+			if (building->get_playercaps() & Building::PCap_Bulldoze)
 				show_bulldoze_confirm
 					(ref_cast<Interactive_Player, Interactive_Base>(ibase()),
 					 *building,

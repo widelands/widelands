@@ -507,7 +507,7 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 
 		// Destroy, after extended security check
 		if (upcast(Building, building, imm)) {
-			if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
+			if (!(building->get_playercaps() & Building::PCap_Bulldoze))
 				return;
 
 			Flag & flag = building->base_flag();
@@ -518,11 +518,7 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 				bulldozelist.push_back(&flag);
 		} else if (upcast(Flag, flag, imm)) {
 			if (Building * const flagbuilding = flag->get_building())
-				if
-					(!
-					 (flagbuilding->get_playercaps() &
-					  (1 << Building::PCap_Bulldoze)))
-				{
+				if (!(flagbuilding->get_playercaps() & Building::PCap_Bulldoze)) {
 					log
 						("Player trying to rip flag (%u) with undestroyable "
 						 "building (%u)\n",
