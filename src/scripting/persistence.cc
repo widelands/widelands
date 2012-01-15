@@ -138,7 +138,7 @@ static const char * m_persistent_globals[] = {
 	"os", "package", "pairs", "pcall", "print", "rawequal",
 	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
 	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", "_", "set_textdomain", "coroutine.yield", 0
+	"string", "use", "_", "set_textdomain", "get_build_id", "coroutine.yield", 0
 };
 
 /**

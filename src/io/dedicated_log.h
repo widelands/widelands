@@ -40,7 +40,7 @@ struct DedicatedLog {
 	void   client_login()  {++d_logins;  info_update();}  // simple counter
 	void   client_logout() {++d_logouts; info_update();} // simple counter
 	void   game_start(std::vector<std::string> clients, std::string mapname);
-	void   game_end(std::vector<bool> results);
+	void   game_end  (std::vector<std::string> winners);
 	void   info_update(); // updates the info file
 
 	// normal log logging function
@@ -73,7 +73,7 @@ private:
 	struct GameStatistic {
 		std::string              mapname;
 		std::vector<std::string> clients;
-		std::vector<bool>        results;
+		std::vector<std::string> winners;
 		std::vector<time_t>      times;
 	};
 	std::string d_name, d_ip, d_motd, d_start;

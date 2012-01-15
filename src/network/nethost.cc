@@ -859,8 +859,10 @@ void NetHost::run(bool const autorun)
 		if (m_is_dedicated) {
 			// Statistics: new game started
 			std::vector<std::string> clients;
-			for (uint8_t i = 0; i < d->settings.users.size(); ++i)
-				clients.push_back(d->settings.users.at(i).name);
+			for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+				if (d->settings.users.at(i).position != UserSettings::notConnected())
+					if (d->settings.users.at(i).name != d->localplayername) // all names, but the dedicated server
+						clients.push_back(d->settings.users.at(i).name);
 			DedicatedLog::get()->game_start(clients, game.map().get_name());
 		}
 		game.run
@@ -872,15 +874,17 @@ void NetHost::run(bool const autorun)
 		if (use_ggz)
 			NetGGZ::ref().send_game_done();
 #endif
-/* TODO Uncomment and fix, once game results are returned
 		if (m_is_dedicated) {
 			// Statistics: game ended
-			std::vector<bool> results;
-			for (uint8_t i = 0; i < d->settings.users.size(); ++i)
-				results.push_back(d->settings.users.at(i).winner);
-			DedicatedLog::get()->game_end(results);
+			std::vector<std::string> winners;
+			for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+				// We do *not* only check connected users but all, as normally the players are already
+				// disconnected once the server reaches this line of code.
+				if (d->settings.users.at(i).name != d->localplayername) // all names, but the dedicated server
+					if (d->settings.users.at(i).winner)
+						winners.push_back(d->settings.users.at(i).name);
+			DedicatedLog::get()->game_end(winners);
 		}
-*/
 		clearComputerPlayers();
 	} catch (...) {
 		WLApplication::emergency_save(game);
@@ -1976,14 +1980,19 @@ void NetHost::welcomeClient (uint32_t const number, std::string const & playerna
 	// only used at password protected dedicated server, but better initialize always
 	client.dedicated_access = m_is_dedicated ? (m_password.size() == 0) : false;
 
-	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
-		if (d->settings.users[i].position == UserSettings::notConnected()) {
-			client.usernum = i;
-			break;
-		}
+	if (!d->game) // just in case we allow connection of spectators/players after game start
+		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+			if (d->settings.users[i].position == UserSettings::notConnected()) {
+				client.usernum = i;
+				d->settings.users[i].winner = false;
+				d->settings.users[i].points = 0;
+				break;
+			}
 	if (client.usernum == -1) {
 		client.usernum = d->settings.users.size();
 		UserSettings newuser;
+		newuser.winner = false;
+		newuser.points = 0;
 		d->settings.users.push_back(newuser);
 	}
 
@@ -2247,7 +2256,8 @@ void NetHost::updateNetworkSpeed()
 	else {
 		std::vector<uint32_t> speeds;
 
-		speeds.push_back(d->localdesiredspeed);
+		if (!m_is_dedicated)
+			speeds.push_back(d->localdesiredspeed);
 		for (uint32_t i = 0; i < d->clients.size(); ++i) {
 			if (d->clients.at(i).playernum <= UserSettings::highestPlayernum())
 				speeds.push_back(d->clients.at(i).desiredspeed);
@@ -2387,8 +2397,7 @@ void NetHost::handle_network ()
 		// Now we wait for the client to say Hi in the right language,
 		// unless the game has already started
 		if (d->game) {
-			disconnectClient
-				(d->clients.size() - 1, _("The game has already started."));
+			disconnectClient(d->clients.size() - 1, _("The game has already started."));
 		}
 	}
 
@@ -2768,16 +2777,16 @@ void NetHost::disconnectClient
 	// user settings and send changes to the clients
 	if (client.usernum >= 0) {
 		sendSystemChat
-			(_("%s has left the game (%s)"),
-			 d->settings.users.at(client.usernum).name.c_str(),
-			 reason.c_str());
+			(_("%s has left the game (%s)"), d->settings.users.at(client.usernum).name.c_str(), reason.c_str());
 		uint8_t position = d->settings.users.at(client.usernum).position;
 		d->settings.users.at(client.usernum).position = UserSettings::notConnected();
 		client.playernum = UserSettings::notConnected();
 		if (position <= UserSettings::highestPlayernum()) {
 			disconnectPlayerController(position, d->settings.users.at(client.usernum).name, reason);
 		}
-		d->settings.users.at(client.usernum).name = std::string();
+		// Do NOT reset the clients name in the corresponding UserSettings, that way we keep the name for the
+		// statistics.
+		// d->settings.users.at(client.usernum).name = std::string();
 
 
 		// Broadcast the user changes to everybody
@@ -2836,5 +2845,22 @@ void NetHost::reaper()
 			++index;
 		else
 			d->clients.erase(d->clients.begin() + index);
+}
+
+
+void NetHost::report_result(uint8_t player, int32_t points, bool win, std::string extra)
+{
+	// there might be more than one client that control this Widelands player
+	// and maybe even none -> computer player
+	for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
+		UserSettings & user = d->settings.users.at(i);
+		if (user.position == player - 1) {
+			user.winner               = win;
+			user.points               = points;
+			user.win_condition_string = extra;
+		}
+	}
+
+	dedicatedlog("NetHost::report_result(%d, %d, %s, %s)\n", player, points, win?"won":"lost", extra.c_str());
 }
 

@@ -123,10 +123,10 @@ void DedicatedLog::game_start(std::vector<std::string> clients, std::string mapn
 }
 
 
-/// Saves the results of the last started game
-void DedicatedLog::game_end(std::vector<bool> results) {
+/// Saves the winners of the last started game
+void DedicatedLog::game_end(std::vector<std::string> winners) {
 	assert(!d_games.empty());
-	d_games.back().results = results;
+	d_games.back().winners = winners;
 	d_games.back().times.push_back(time(0));
 	info_update();
 }
@@ -153,8 +153,8 @@ void DedicatedLog::info_update() {
 	temp += (boost::format("%u") % d_games.size()).str() + "</td></tr>\n";
 	if (!d_games.empty()) {
 		// Games information
-		temp += "</table><table class=\"infogames\">\n";
-		temp += "<tr><th>start/end of game</th><th>map name</th><th>clients</th><th>winner(s)</th></tr>\n";
+		temp += "</table><br><table class=\"infogames\">\n";
+		temp += "<tr><th>start/end of game</th><th>map name</th><th>client(s)</th><th>winner(s)</th></tr>\n";
 
 		for (uint16_t i = 0; i < d_games.size(); ++i) {
 			assert(!d_games.at(i).clients.empty() && !d_games.at(i).times.empty());
@@ -162,28 +162,24 @@ void DedicatedLog::info_update() {
 			char ts[42];
 			strftime(ts, sizeof(ts), "S: %Y/%m/%d, %H:%M:%S", localtime(&d_games.at(i).times.at(0)));
 			temp += (boost::format("<tr><td>%s") % ts).str();
-			if (!d_games.at(i).times.size() > 1) {
-				strftime(ts, sizeof(ts), "E: %Y/%m/%d, %H:%M:%S", localtime(&d_games.at(i).times.at(0)));
-				temp += (boost::format("%s") % ts).str();
+			if (d_games.at(i).times.size() > 1) {
+				strftime(ts, sizeof(ts), "E: %Y/%m/%d, %H:%M:%S", localtime(&d_games.at(i).times.at(1)));
+				temp += (boost::format("<br>%s") % ts).str();
 			}
 			// Map name
 			temp += (boost::format("</td><td>%s</td><td>") % d_games.at(i).mapname).str();
 			// Players
-			for (uint8_t j = 0; j < d_games.at(i).clients.size(); ++j) {
+			for (uint16_t j = 0; j < d_games.at(i).clients.size(); ++j) {
 				if (j > 0)
 					temp += ", ";
 				temp += d_games.at(i).clients.at(j);
 			}
 			temp += "</td><td>";
 			// Winners
-			bool first = true;
-			for (uint8_t j = 0; j < d_games.at(i).results.size(); ++j) {
-				if (d_games.at(i).results.at(j)) {
-					if (!first)
-						temp += ", ";
-					temp += d_games.at(i).clients.at(j);
-					first = false;
-				}
+			for (uint16_t j = 0; j < d_games.at(i).winners.size(); ++j) {
+				if (j > 0)
+					temp += ", ";
+				temp += d_games.at(i).winners.at(j);
 			}
 			temp += "</td></tr>\n";
 		}

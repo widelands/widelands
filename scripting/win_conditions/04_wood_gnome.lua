@@ -9,6 +9,7 @@ use("aux", "win_condition_functions")
 set_textdomain("win_conditions")
 
 local wc_name = _ "Wood Gnome"
+local wc_version = 2
 local wc_desc = _
 [[As wood gnome you like big forests, so your task is, to have more trees on
 your territory than any other player. The game will end after 4 hours of
@@ -39,7 +40,7 @@ return {
 			end
 		end
 	end
-	
+
 	-- The function to calculate the current points.
 	local _last_time_calculated = -100000
 	local _plrpoints = {}
@@ -92,7 +93,7 @@ return {
 		sleep(5000)
 		check_player_defeated(plrs, _ "You are defeated!",
 			_ ("You have nothing to command left. If you want, you may " ..
-				"continue as spectator."))
+				"continue as spectator."), wc_name, wc_version)
 	end)
 
 	-- Install statistics hook
@@ -100,7 +101,7 @@ return {
 	hooks.custom_statistic = {
 		name = _ "Trees owned",
 		pic = "pics/genstats_trees.png",
-		calculator = function(p) 
+		calculator = function(p)
 			local pts = _calc_points(p)
 			return pts[p.number]
 		end,
@@ -144,9 +145,11 @@ return {
 		privmsg = _ ("You have lost this game!")
 		privmsg = privmsg .. msg
 		points[i][1]:send_message(_"You lost!", privmsg, {popup = true})
+		wl.game.report_result(points[i][1], false, points[i][2], make_extra_data(points[i][1], wc_name, wc_version))
 	end
 	privmsg = _ ("You are the winner of this game!")
 	privmsg = privmsg .. msg
 	points[#points][1]:send_message(_"You won!", privmsg, {popup = true})
+	wl.game.report_result(points[#points][1], true, points[#points][2], make_extra_data(points[#points][1], wc_name, wc_version))
 end
 }

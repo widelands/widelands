@@ -49,23 +49,25 @@ int main(int argc, char * argv[])
 #ifndef WIN32
 	// if Widelands is called as dedicated server, Widelands should be forked and started as daemon
 	bool dedicated = false;
-	for (int i = 1; i < argc && !dedicated; ++i) {
+	bool daemon    = false;
+	for (int i = 1; i < argc && !(daemon && dedicated); ++i) {
 		std::string opt = argv[i];
 
-		// At least a size of 11 is needed for --dedicated
-		if (opt.size() < 11)
+		// At least a size of 8 is needed for --daemon, --dedicated is even longer
+		if (opt.size() < 8)
 			continue;
 
 		std::string::size_type const pos = opt.find('=');
 		if (pos == std::string::npos) { //  if no equals sign found
-			continue;
+			if (opt == "--daemon")
+				daemon    = true;
 		} else {
 			opt.erase(pos, opt.size() - pos);
 			if (opt == "--dedicated")
 				dedicated = true;
 		}
 	}
-	if (dedicated) {
+	if (daemon && dedicated) {
 		pid_t pid;
 		if ((pid = fork()) < 0) {
 			perror("fork() failed");

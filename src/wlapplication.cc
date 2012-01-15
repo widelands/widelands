@@ -369,11 +369,13 @@ void WLApplication::run()
 
 			// setup some ggz details about a dedicated server
 			Section & s = g_options.pull_section("global");
-			char const * const meta = s.get_string("metaserver", WL_METASERVER);
-			char const * const name = s.get_string("nickname", "dedicated");
+			char const * const meta   = s.get_string("metaserver", WL_METASERVER);
+			char const * const name   = s.get_string("nickname", "dedicated");
 			char const * const server = s.get_string("servername", name);
+			const bool registered     = s.get_bool("registered", false);
+			char const * const pwd    = s.get_string("password", "");
 			for (;;) { // endless loop
-				if (!NetGGZ::ref().initcore(meta, name, "", false)) {
+				if (!NetGGZ::ref().initcore(meta, name, pwd, registered)) {
 					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
 					return;
 				}

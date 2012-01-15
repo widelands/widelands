@@ -55,6 +55,9 @@ struct UserSettings {
 
 	uint8_t     position;
 	std::string name;
+	bool        winner;
+	uint32_t    points;
+	std::string win_condition_string;
 };
 
 struct DedicatedMapInfos {
