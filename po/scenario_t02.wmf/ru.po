@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2011-08-21 14:25+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-01-14 18:35+0000\n"
+"Last-Translator: Izon <Unknown>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:42+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-15 05:13+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -108,6 +108,8 @@ msgid ""
 "sun sets today you will have a magnificent meal fit for the chieftain of all "
 "clans!\" "
 msgstr ""
+" \"Наши охотники далеко в лесу, Трон.<br> Я оюещаю тебе, что до захода "
+"солнца у тебя будет отличный ужин, подходящий вождю любого клана!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:235
 msgid ""
@@ -197,6 +199,9 @@ msgid ""
 " \"Wonderful! Our roofs are not dripping anymore, and we have all the "
 "material we need for, well, whichever monumental building we see fit!\" "
 msgstr ""
+" \"Прекрасно! Наши крыши больше не протекают, и у нас есть все материалы, "
+"нужные для... Ну, любой монументальной постройки, которую мы сочтем "
+"подходящей \" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:361
 msgid ""
@@ -333,15 +338,15 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Место, завущееся домом"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
-msgstr ""
+msgstr "Чудесное утро"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:438
 msgid "A friendly village joined us!"
-msgstr ""
+msgstr "Дружественная деревня присоединилась к нам!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:143
 msgid ""
@@ -544,7 +549,7 @@ msgstr "Хантрух прервал..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:242
 msgid "Khantrukh joins in ..."
-msgstr ""
+msgstr "Хантрух присоединяется..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
@@ -552,7 +557,7 @@ msgstr "Кантрук довольно кивает...."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid "Khantrukh seems relieved..."
-msgstr ""
+msgstr "Хантрух выглядит спокойным..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
@@ -619,6 +624,8 @@ msgid ""
 "The iron ore your miners bring up is not usable yet - it has to be melted\n"
 "into iron first."
 msgstr ""
+"Железная руда, добытая вашими шахтерами, пока что бесполезна - ее \n"
+"сначала надо переплавить в железо."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
