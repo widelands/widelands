@@ -747,6 +747,7 @@ void NetHost::run(bool const autorun)
 			} else {
 				Sleep(1);
 				timeout = 0;
+			}
 #endif
 			if (timeout == 9000)
 				return;
