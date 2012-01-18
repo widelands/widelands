@@ -270,7 +270,7 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 		}
 	}
 
-	return UI::Panel::handle_key(down, code);
+	return list->handle_key(down, code);
 }
 
 void GameMessageMenu::archive_or_restore()

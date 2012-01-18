@@ -321,6 +321,31 @@ void Table<void *>::draw(RenderTarget & dst)
 }
 
 /**
+ * handle key presses
+ */
+bool Table<void *>::handle_key(bool down, SDL_keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+		case SDLK_UP:
+		case SDLK_KP8:
+			move_selection(-1);
+			return true;
+
+		case SDLK_DOWN:
+		case SDLK_KP2:
+			move_selection(1);
+			return true;
+
+		default:
+			break; // not handled
+		}
+	}
+
+	return UI::Panel::handle_key(down, code);
+}
+
+/**
  * Handle mouse presses: select the appropriate entry
  */
 bool Table<void *>::handle_mousepress
@@ -378,6 +403,43 @@ bool Table<void *>::handle_mousepress
 bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
+}
+
+/**
+ * move the currently selected entry up or down.
+ * \param offset positive value move the selection down and
+ *        negative values up.
+ */
+void Table<void *>::move_selection(const int32_t offset)
+{
+	const uint32_t num = size();
+	const uint32_t abs_offset = abs(offset);
+
+	if (!has_selection()) return;
+	if (abs_offset >= num) return;
+
+	uint32_t new_selection;
+
+	if ((offset < 0) && (m_selection < abs_offset))
+	{
+		new_selection = num - abs_offset + m_selection;
+	}
+	else
+	{
+		new_selection = m_selection + offset;
+		new_selection %= num;
+	}
+
+	select(new_selection);
+	//scroll to newly selected entry
+	if (m_scrollbar)
+	{
+		int32_t scroll_offset = 0;
+		if (new_selection > 0) scroll_offset = -1;
+
+		m_scrollbar->set_scrollpos
+			((new_selection + scroll_offset) * get_lineheight());
+	}
 }
 
 /**
