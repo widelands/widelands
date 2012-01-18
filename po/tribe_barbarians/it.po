@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-01-13 14:03+0000\n"
+"PO-Revision-Date: 2012-01-17 12:56+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-14 04:35+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-18 04:36+0000\n"
+"X-Generator: Launchpad (build 14681)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -356,7 +356,7 @@ msgstr "Campo minuscolo"
 
 #: ../../tribes/barbarians/conf:79
 msgid "Fire Tongs"
-msgstr "Molle per il fuoco"
+msgstr "Pinze per il fuoco"
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -365,8 +365,8 @@ msgid ""
 "is enhanced to an axefactory and war mill)."
 msgstr ""
 "Le pinze per il fuoco sono lo strumento del fonditore, che lavora nella "
-"fonderia. Sono prodotte nell'officina metallica (ma smette di produrli "
-"quando la costruzione viene potenziata in fabbrica di asce o fucina da "
+"fonderia. Sono prodotte nell'officina metallica (ma smettono di essere "
+"prodotti quando l'edificio viene potenziato in fabbrica di asce o fucina da "
 "guerra)."
 
 #: ../../tribes/barbarians/conf:80
@@ -392,9 +392,9 @@ msgid ""
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
 "Le canne da pesca sono necessarie ai pescatori barbari per pescare. Sono uno "
-"degli strumenti base prodotti nell'officina metallica  (ma cessano di essere "
-"prodotti se questa viene potenziata in una fabbrica di asce o in una fucina "
-"da guerra)."
+"degli strumenti base prodotti nell'officina metallica   (ma smettono di "
+"essere prodotti quando l'edificio viene potenziato in fabbrica di asce o "
+"fucina da guerra)."
 
 #: ../../tribes/barbarians/conf:167
 #: ../../tribes/barbarians/conf:221
@@ -521,8 +521,8 @@ msgid ""
 msgstr ""
 "Come si potrebbero creare pasti, spuntini o razioni, senza attrezzi da "
 "cucina? Assicurati di avere un'officina metallica per produrre questi "
-"attrezzi di base (cessano di essere prodotti se l'edificio è potenziato in "
-"una fabbrica d'asce o fucina da guerra)."
+"attrezzi di base  (ma smettono di essere prodotti quando l'edificio viene "
+"potenziato in fabbrica di asce o fucina da guerra)."
 
 #: ../../tribes/barbarians/conf:133
 msgid "Hunter"
@@ -948,7 +948,7 @@ msgstr "Cantiere navale"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Shovel"
-msgstr "Pala"
+msgstr "Vanga"
 
 #: ../../tribes/barbarians/battlearena/conf:28
 #: ../../tribes/barbarians/trainingscamp/conf:36
@@ -1109,7 +1109,8 @@ msgid ""
 msgstr ""
 "L'ascia da disboscamento è l'attrezzo usato dal taglialegna per abbattere "
 "gli alberi. È prodotta nell'officina metallica (ma smette di essere prodotta "
-"quando l'edificio è potenziato in fabbrica d'asce o in una fucina da guerra)."
+"quando l'edificio è potenziato in fabbrica di asce o in una fucina da "
+"guerra)."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -1133,8 +1134,8 @@ msgstr ""
 "Il martello è uno strumento essenziale. È necessario al geologo, al "
 "costruttore, al fabbro ferraio e al fabbro d'elmi. Assicurati sempre di "
 "averne alcuni di riserva! È uno degli strumenti di base prodotti "
-"nell'officina metallica (ma smette di essere prodotto se la costruzione "
-"viene potenziata in una fabbrica di asce o in una fucina da guerra)."
+"nell'officina metallica (ma smette di essere prodotto se l'edificio viene "
+"potenziato in una fabbrica di asce o in una fucina da guerra)."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
@@ -1156,6 +1157,10 @@ msgid ""
 "the ranger use it. Produced at the metalwork shop (but ceases to be produced "
 "by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"La vanga è necessaria per la corretta manipolazione delle piante. Pertanto "
+"la usano il coltivatore di felci e la guardia forestale. È prodotta "
+"nell'officina metallica (ma cessa di essere prodotta dall'edificio quando è "
+"potenziato in una fabbrica d'asce o in una fucina da guerra)."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -1164,12 +1169,20 @@ msgid ""
 "produced in a war mill and used -together with food - in a trainingscamp to "
 "train soldiers from attack level 4 to level 5."
 msgstr ""
+"L'ascia da guerriero è la più pericolosa arma dei Barbari. Solo pochi "
+"guerrieri sono mai riusciti a maneggeriare queste enormi e potenti asce. È "
+"prodotta in una fucina da guerra ed utilizzata - insieme al cibo - in un "
+"campo d'addestramento per allenare i soldati dal livello 4 al livello 5 di "
+"attacco."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of trunks in the wood hardener."
 msgstr ""
+"Questa legna indurita dal fuoco è dura come l'acciaio ed è usata per diversi "
+"edifici. È prodotta a partire dai tronchi in un impianto di trattamento del "
+"legno."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1178,6 +1191,10 @@ msgid ""
 "weapon. It is used (together with food) in the trainingscamp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"Questa è una pericolosa arma che i Barbari sono in grado di produrre. È "
+"prodotta nella fabbrica di asce. Solamente i guerrieri addestrati sono in "
+"grado di maneggiarla. È usata (insieme al cibo) nel campo di addestramento "
+"per allenare i soldati dal livello 3 al livello 4 di attacco."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -1185,6 +1202,9 @@ msgid ""
 "and used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 2 to healthpoints level 3."
 msgstr ""
+"Questa è la migliore armatura barbara. È prodotta nella fucina di elmi ed "
+"utilizzata nel campo di addestramento - insieme al cibo - per allenare i "
+"soldati dal livello 2 al livello 3 di punti ferita."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1192,6 +1212,9 @@ msgid ""
 "metalwork shop (but ceases to be produced by the building if it is enhanced "
 "to an axefactory and war mill)."
 msgstr ""
+"Questo piccone è utilizzato dai tagliapietre e dai minatori. È prodotto "
+"nell'officina metallica (ma smette di essere prodotto dall'edificio se è "
+"potenziato in una fabbrica di asce o in una fucina da guerra)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -1200,6 +1223,11 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Questa lancia è abbastanza leggera per essere scagliata, ma abbastanza "
+"pesante da uccidere qualsiasi animale in un colpo solo. È usata solamente "
+"dai cacciatori. È prodotta nell'officina metallica (ma smette di essere "
+"prodotta dall'edificio se è potenziato in una fabbrica di asce o in una "
+"fucina da guerra)."
 
 #: ../../tribes/barbarians/conf:162
 #: ../../tribes/barbarians/conf:169
@@ -1230,6 +1258,12 @@ msgid ""
 "burner's house in the production of coal. The wood hardener refines trunks "
 "by hardening them in the fire which gives blackwood."
 msgstr ""
+"I tronchi sono il principale materiale da costruzione dei barbari. Gli "
+"alberi sono abbattuti dai taglialegna; le guardie forestali si occupano di "
+"ripiantarlo. I tronchi sono anche utilizzati nell'officina metallica per "
+"costruire attrezzi di base e nella casa del carbonaio per la produzione del "
+"carbone. L'impianto di trattamento del legno perfeziona i tronchi nel fuoco "
+"ottenendo legno trattato."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1375,6 +1409,9 @@ msgid ""
 "and the brewery. Also the lime kiln and the cattle farm need to be supplied "
 "with water."
 msgstr ""
+"L'acqua è la sostanza per vivere! È usata nel forno, nella microbirreria e "
+"nella birreria. Anche la calchera e l'allevamento di bovini hanno bisogno di "
+"essere riforniti d'acqua."
 
 #: ../../tribes/barbarians/conf:143
 msgid "Weaver"
@@ -1398,6 +1435,9 @@ msgid ""
 "bakeries, micro breweries and breweries. Also Cattle farms need to be "
 "supplied with wheat."
 msgstr ""
+"Il grano è essenziale per sopravvivere. È prodotto nelle fattorie e "
+"consumato dai forni, microbirrerie e birrerie. Anche gli allevamenti di "
+"bovini hanno bisogno di essere riforniti di grano."
 
 #: ../../tribes/barbarians/conf:66
 msgid "Wildboar"
@@ -1453,7 +1493,7 @@ msgstr "Lavora ai siti di costruzione per edificare un nuovo edificio."
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Lavora al cantiere navale e costruisce navi."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -1469,3 +1509,8 @@ msgid ""
 "and war mills. In trainingscamps, it is used - together with food- to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
+"I giovani guerrieri sono orgoglioso di imparare a combattere con questa arma "
+"potente. È più pesante ed affilata dell'ascia normale. È prodotta nelle "
+"fabbrica di asce e nelle fucine da guerre. È utilizzata nei campi "
+"d'addestramento - insieme al cibo - per allenare i soldati dal livello 0 al "
+"livello 1 di attacco."

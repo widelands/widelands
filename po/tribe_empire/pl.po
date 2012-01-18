@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-01-03 21:31+0000\n"
-"Last-Translator: Łukasz Chełmicki <Unknown>\n"
+"PO-Revision-Date: 2012-01-17 10:48+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-04 04:42+0000\n"
-"X-Generator: Launchpad (build 14616)\n"
+"X-Launchpad-Export-Date: 2012-01-18 04:36+0000\n"
+"X-Generator: Launchpad (build 14681)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -267,7 +267,7 @@ msgstr "Hodowca osłów"
 
 #: ../../tribes/empire/conf:190
 msgid "Donkeyfarm"
-msgstr "Farma osłów"
+msgstr "Ośla farma"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
@@ -590,7 +590,7 @@ msgstr "Młynarz"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr "Miele pszenice na mąkę."
+msgstr "Miele pszenicę na mąkę."
 
 #: ../../tribes/empire/marblemine/conf:22
 #: ../../tribes/empire/quarry/conf:19
@@ -674,11 +674,11 @@ msgstr "Produce armour (Produkuj zbroję)"
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "Produce axe"
-msgstr "Produkuj topór"
+msgstr "Produce axe (Produkuj topór)"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr "Produce bakingtray (Produkuj blachę)"
+msgstr "Produce bakingtray (Produkuj blachę do pieczenia)"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
@@ -710,11 +710,11 @@ msgstr "Produce helm (Produkuj hełm)"
 
 #: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce hunting spear"
-msgstr "Produce hunting spear (Produkuj włócznię)"
+msgstr "Produce hunting spear (Produkuj dzidę)"
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
-msgstr "Produce kitchen tools (Produkuj narzędzia kuchenne)"
+msgstr "Produce kitchen tools (Produkuj przybory kuchenne)"
 
 #: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce lance"
@@ -742,7 +742,7 @@ msgstr "Produce shovel (Produkuj łopatę)"
 
 #: ../../tribes/empire/weaponsmithy/conf:33
 msgid "Produce war lance"
-msgstr "Produkuj lancę wojenną."
+msgstr "Produce war lance (Produkuj lancę wojenną)"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -782,43 +782,43 @@ msgstr "Racja"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator coal little"
-msgstr "Wskaźnik zasobów mało węgla"
+msgstr "Wskaźnik zasobów (mało węgla)"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator coal much"
-msgstr "Wskaźnik zasobów dużo węgla"
+msgstr "Wskaźnik zasobów (dużo węgla)"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator gold little"
-msgstr "Wskaźnik zasobów mało złota"
+msgstr "Wskaźnik zasobów (mało złota)"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator gold much"
-msgstr "Wskaźnik zasobów dużo złota"
+msgstr "Wskaźnik zasobów (dużo złota)"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator granite little"
-msgstr "Wskaźnik zasobów mało granitu"
+msgstr "Wskaźnik zasobów (mało granitu)"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator granite much"
-msgstr "Wskaźnik zasobów dużo granitu"
+msgstr "Wskaźnik zasobów (dużo granitu)"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator iron little"
-msgstr "Wskaźnik zasobów mało żelaza"
+msgstr "Wskaźnik zasobów (mało żelaza)"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator iron much"
-msgstr "Wskaźnik zasobów dużo żelaza"
+msgstr "Wskaźnik zasobów (dużo żelaza)"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator no resource"
-msgstr "Wskaźnik brak zasobów"
+msgstr "Wskaźnik zasobów (brak)"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator water"
-msgstr "Wskaźnik zasobów wody"
+msgstr "Wskaźnik zasobów (woda)"
 
 #: ../../tribes/empire/conf:89
 msgid "Saw"
