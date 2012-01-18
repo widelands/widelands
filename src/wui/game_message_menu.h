@@ -59,7 +59,6 @@ private:
 	void double_clicked(uint32_t);
 
 	bool status_compare(uint32_t a, uint32_t b);
-	void do_delete();
 	void do_clear_selection();
 	void do_invert_selection();
 	void archive_or_restore();
