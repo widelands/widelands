@@ -516,6 +516,7 @@ struct Client {
 	int32_t time; // last time report
 	uint32_t desiredspeed;
 	bool dedicated_access;
+	time_t hung_since;
 };
 
 struct NetHostImpl {
@@ -2170,9 +2171,12 @@ void NetHost::checkHungClients()
 
 		int32_t const delta = d->committed_networktime - d->clients.at(i).time;
 
-		if (delta == 0)
+		if (delta == 0) {
 			++nrready;
-		else {
+			// reset the hung_since time
+			if (m_is_dedicated)
+				d->clients.at(i).hung_since = 0;
+		} else {
 			++nrdelayed;
 			if
 				(delta
@@ -2187,6 +2191,24 @@ void NetHost::checkHungClients()
 					("[Host]: Client %i (%s) hung\n",
 					 i, d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
+				// If this is a dedicated server, there is no host that cares about kicking hung players
+				// This is especially problematic, if the last or all players hung and the dedicated
+				// server does not automatically restart.
+				if (m_is_dedicated) {
+					if (d->clients.at(i).hung_since == 0)
+						d->clients.at(i).hung_since = time(0);
+					else if (d->clients.at(i).hung_since < (time(0) - 600)) {
+						// 10 minutes for all other players to react before the dedicated server takes care
+						// about the situation itself
+						disconnectClient(i, _("Connection to client timeouted: no response for 10 minutes!"));
+						// Try to save the game
+						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(0)).str();;
+						std::string * error = new std::string();
+						SaveHandler & sh = d->game->save_handler();
+						if (sh.save_game(*d->game, savename, error))
+							sendSystemChat((boost::format("Game was saved as %s.") % savename).str().c_str());
+					}
+				}
 			}
 		}
 	}
@@ -2391,6 +2413,7 @@ void NetHost::handle_network ()
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
 		peer.usernum = -1; // == no user assigned for now.
+		peer.hung_since = 0;
 		d->clients.push_back(peer);
 
 
