@@ -63,7 +63,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 // Spinboxes
 	m_sb_maxfps
 		(this,
-		 get_w() / 2, get_h() * 3833 / 10000, get_w() / 5, m_vbutw,
+		 (get_w() / 2) - (m_vbutw * 2), get_h() * 3833 / 10000, get_w() / 5, m_vbutw,
 		 opt.maxfps, 0, 100, "",
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_sb_autosave
