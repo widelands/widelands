@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4410\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 14:40+0100\n"
-"PO-Revision-Date: 2011-08-21 14:18+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-01-21 02:41+0000\n"
+"Last-Translator: Zilvador <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:46+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-21 05:15+0000\n"
+"X-Generator: Launchpad (build 14700)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -319,7 +319,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1676
 msgid "Connection timed out"
-msgstr ""
+msgstr "Tidsudløb på forbindelsen"
 
 #: ../../src/wlapplication.cc:1678
 msgid ""
@@ -840,12 +840,12 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1155
 msgid "check_map"
-msgstr ""
+msgstr "check_map"
 
 #: ../../src/writeHTML.cc:1160
 #, c-format
 msgid "Seafaring"
-msgstr ""
+msgstr "Søfart"
 
 #: ../../src/writeHTML.cc:1172
 msgid "Documentation for program command animate"
@@ -920,7 +920,7 @@ msgstr "Dokumentation for programkommando playFX"
 
 #: ../../src/writeHTML.cc:1406
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Dokumentation for program-kommando construct"
 
 #: ../../src/writeHTML.cc:1408
 msgid "construct"
@@ -1797,15 +1797,15 @@ msgstr "sov: %s"
 #: ../../src/logic/production_program.cc:668
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Ukendt parameter \"%s\""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
-msgstr ""
+msgstr "Ingen parameter givet!"
 
 #: ../../src/logic/production_program.cc:702
 msgid "idle animation is default; calling is not allowed"
-msgstr ""
+msgstr "tomgangsanimering er standard; opkald er ikke tilladt"
 
 #: ../../src/logic/production_program.cc:751
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
@@ -1999,7 +1999,7 @@ msgstr "\"%s\" er duplikeret"
 
 #: ../../src/logic/tribe.cc:261 ../../src/logic/tribe.cc:282
 msgid "none found"
-msgstr ""
+msgstr "intet fundet"
 
 #: ../../src/logic/tribe.cc:263
 #, c-format
