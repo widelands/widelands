@@ -412,25 +412,14 @@ bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
  */
 void Table<void *>::move_selection(const int32_t offset)
 {
-	const uint32_t num = size();
-	const uint32_t abs_offset = abs(offset);
+	int32_t new_selection = m_selection + offset;
 
-	if (!has_selection()) return;
-	if (abs_offset >= num) return;
+	if (new_selection < 0) new_selection = 0;
+	else if (static_cast<uint32_t>(new_selection) > m_entry_records.size() - 1)
+		new_selection = m_entry_records.size() - 1;
 
-	uint32_t new_selection;
+	select(static_cast<uint32_t>(new_selection));
 
-	if ((offset < 0) && (m_selection < abs_offset))
-	{
-		new_selection = num - abs_offset + m_selection;
-	}
-	else
-	{
-		new_selection = m_selection + offset;
-		new_selection %= num;
-	}
-
-	select(new_selection);
 	//scroll to newly selected entry
 	if (m_scrollbar)
 	{
