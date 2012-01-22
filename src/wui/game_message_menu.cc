@@ -50,6 +50,7 @@ GameMessageMenu::GameMessageMenu
 {
 	list = new UI::Table<uintptr_t>(this, 5, 35, 360, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
+	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column (50, _("Select"), UI::Align_HCenter, true);
 	list->add_column (50, _("Status"), UI::Align_HCenter);
 	list->add_column(136, _("Title"));
@@ -239,6 +240,13 @@ void GameMessageMenu::selected(uint32_t const t) {
 }
 
 /**
+ * a message was double clicked
+ */
+void GameMessageMenu::double_clicked(uint32_t const t) {
+	if (m_centerviewbtn->enabled()) center_view();
+}
+
+/**
  * Handle message menu hotkeys.
  */
 bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
@@ -254,7 +262,7 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 			if (code.mod & KMOD_NUM)
 				break;
 		case SDLK_DELETE:
-			do_delete();
+			archive_or_restore();
 			return true;
 
 		default:
@@ -262,25 +270,7 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 		}
 	}
 
-	return UI::Panel::handle_key(down, code);
-}
-
-/**
- * Delete the currently selected message, if any.
- */
-void GameMessageMenu::do_delete()
-{
-	if (mode == Archive)
-		return;
-
-	if (!list->has_selection())
-		return;
-
-	Widelands::Game & game = iplayer().game();
-	game.send_player_command
-		(*new Widelands::Cmd_MessageSetStatusArchived
-			(game.get_gametime(), iplayer().player_number(),
-			 Message_Id(list->get_selected())));
+	return list->handle_key(down, code);
 }
 
 void GameMessageMenu::archive_or_restore()
@@ -289,27 +279,54 @@ void GameMessageMenu::archive_or_restore()
 	uint32_t                  const gametime = game.get_gametime();
 	Widelands::Player       &       player   = iplayer().player();
 	Widelands::Player_Number  const plnum    = player.player_number();
+	bool work_done = false;
 
 	switch (mode) {
 	case Inbox:
+		//archive selected messages
 		for
 			(wl_index_range<uint8_t> i(0, list->size());
 			 i;
 			 ++i)
 			if (list->get_record(i.current).is_checked(ColSelect))
+			{
+				work_done = true;
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusArchived
 					 	(gametime, plnum, Message_Id((*list)[i.current])));
+			}
+
+		//archive highlighted message, if nothing was selected
+		if (!work_done) {
+			if (!list->has_selection()) return;
+
+			game.send_player_command
+				(*new Widelands::Cmd_MessageSetStatusArchived
+					(gametime, plnum, Message_Id(list->get_selected())));
+		}
 		break;
 	case Archive:
+		//restore selected messages
 		for
 			(wl_index_range<uint8_t> i(0, list->size());
 			 i;
 			 ++i)
 			if (list->get_record(i.current).is_checked(ColSelect))
+			{
+				work_done = true;
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusRead
 					 	(gametime, plnum, Message_Id((*list)[i.current])));
+			}
+
+		//restore highlighted message, if nothing was selected
+		if (!work_done) {
+			if (!list->has_selection()) return;
+
+			game.send_player_command
+				(*new Widelands::Cmd_MessageSetStatusRead
+					(gametime, plnum, Message_Id(list->get_selected())));
+		}
 		break;
 	}
 }

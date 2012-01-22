@@ -87,6 +87,7 @@ template<typename Entry> struct Table {
 	Entry_Record * find(Entry) const throw ();
 
 	void select(uint32_t);
+	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
 		char const * what() const throw () {
 			return "UI::Table<Entry>: No selection";
@@ -104,6 +105,7 @@ template<typename Entry> struct Table {
 	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_key(bool down, SDL_keysym code);
 };
 
 template <> struct Table<void *> : public Panel {
@@ -212,6 +214,7 @@ template <> struct Table<void *> : public Panel {
 	Entry_Record * find(const void * entry) const throw ();
 
 	void select(uint32_t);
+	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
 		char const * what() const throw () {
 			return "UI::Table<void *>: No selection";
@@ -237,6 +240,7 @@ template <> struct Table<void *> : public Panel {
 	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_key(bool down, SDL_keysym code);
 
 private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
