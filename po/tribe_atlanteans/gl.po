@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2011-10-29 23:01+0000\n"
-"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"PO-Revision-Date: 2012-01-21 22:55+0000\n"
+"Last-Translator: Xosé <Unknown>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:43+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-22 05:16+0000\n"
+"X-Generator: Launchpad (build 14700)\n"
 "Language: gl\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -319,7 +319,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
-msgstr "Pescado"
+msgstr "Peixe"
 
 #: ../../tribes/atlanteans/conf:118
 msgid "Fish Breeder"

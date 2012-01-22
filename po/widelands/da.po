@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-01-21 05:15+0000\n"
+"X-Launchpad-Export-Date: 2012-01-22 05:17+0000\n"
 "X-Generator: Launchpad (build 14700)\n"
 
 #: ../../src/computer_player.cc:38

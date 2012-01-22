@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2011-08-21 14:24+0000\n"
-"Last-Translator: Alberto Domene Vasallo <albertodv@gmail.com>\n"
+"PO-Revision-Date: 2012-01-22 02:11+0000\n"
+"Last-Translator: MadkaT <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:44+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-22 05:17+0000\n"
+"X-Generator: Launchpad (build 14700)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -159,7 +159,7 @@ msgstr "Pan"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Rodillo para Pan"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -292,7 +292,7 @@ msgstr "Descubre recursos para la minería."
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Desmantelar Sitio"
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
@@ -649,7 +649,7 @@ msgstr "Planta árboles."
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Port"
-msgstr ""
+msgstr "Puerto"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -943,6 +943,9 @@ msgid ""
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
 msgstr ""
+"La carne ahumada se hace con carne en un ahumadero. Es llevada a las minas y "
+"centros de entrenamiento (laberinto y mazmorras), donde los mineros y los "
+"soldados preparan un almuerzo nutritivo para ellos mismos."
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
@@ -966,6 +969,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Algunos de tus edificios iniciales no tienen suficiente espacio y\n"
+"no se pueden construir. Es una desventaja para ti; considera reiniciar\n"
+"este mapa con una buena condición inicial."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
@@ -1053,6 +1059,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"El rodillo para el pan es la herramienta del panadero, cada panadero "
+"necesita la suya, Es producido por el forjador."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
