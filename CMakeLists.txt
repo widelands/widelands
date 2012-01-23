@@ -219,10 +219,10 @@ EXEC_PROGRAM (
         message("Detected gcc ${WLBUILD_COMPILERVERSION_REP}")
         message("Suffering from gcc bug, disabling -O3")
         set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+    ELSE (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
+        #This line is the default and should be preserved.
+        set (CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
     ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
-ELSE (${CMAKE_COMPILER_IS_GNUCXX})
-    #This line is the default and should be preserved.
-    set (CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 ENDIF (${CMAKE_COMPILER_IS_GNUCXX})
 
 #If building with MSVC, then check for 3rdparty libs
