@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-01-14 17:33+0000\n"
-"Last-Translator: Alexander Glukhov <Unknown>\n"
+"PO-Revision-Date: 2012-01-23 15:00+0000\n"
+"Last-Translator: Georgiy <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-15 05:13+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-24 05:15+0000\n"
+"X-Generator: Launchpad (build 14713)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -46,7 +46,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Годный для плавания корабль"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -149,7 +149,7 @@ msgstr "Доски"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Лопата для выпечки"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -185,7 +185,7 @@ msgstr "Жжёт уголь."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Отжигает известь в печах для обжига."
 
 #: ../../tribes/barbarians/conf:111
 msgid "Carrier"
@@ -244,7 +244,7 @@ msgstr "Угольная шахта"
 
 #: ../../tribes/barbarians/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Строительство корабля"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Construction Site"
@@ -296,7 +296,7 @@ msgstr "Находит месторождения полезных ископа�
 
 #: ../../tribes/barbarians/conf:154
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Снос площадки"
 
 #: ../../tribes/barbarians/conf:222
 msgid "Donjon"
@@ -681,7 +681,7 @@ msgstr "Сажает деревья."
 
 #: ../../tribes/barbarians/conf:175
 msgid "Port"
-msgstr ""
+msgstr "Порт"
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
@@ -918,19 +918,19 @@ msgstr "Острый Топор"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Ship"
-msgstr ""
+msgstr "Корабль"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Ship construction site"
-msgstr ""
+msgstr "Место строительства корабля"
 
 #: ../../tribes/barbarians/conf:139
 msgid "Shipwright"
-msgstr ""
+msgstr "Кораблестроитель"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Shipyard"
-msgstr ""
+msgstr "Верфь"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Shovel"
@@ -1058,6 +1058,10 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axefactory and "
 "war mill)."
 msgstr ""
+"Лопата для выпечки инструмент пекаря и каждый пекарь должен иметь "
+"собственную. Изготавливается в мастерской по металлу как и другие "
+"инструменты (но не может быть изготовлена, если мастерская по металлу "
+"улучшена до фабрики топоров или военного завода)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -1151,6 +1155,8 @@ msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of trunks in the wood hardener."
 msgstr ""
+"Это термообработанная древесина, она прочна как сталь и используется "
+"некоторыми строениями. Производится из бревен в лесопилке."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1159,6 +1165,10 @@ msgid ""
 "weapon. It is used (together with food) in the trainingscamp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"Это грозное оружие варваров, требующее производства. Изготавливается на "
+"фабрике топоров. Только подготовленные воины могут использовать это оружие. "
+"Кроме того используется (совместно с едой) на тренировочных площадках для "
+"повышения уровня атаки солдат с 3 до 4."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -1166,6 +1176,9 @@ msgid ""
 "and used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 2 to healthpoints level 3."
 msgstr ""
+"Это наиболее продвинутая броня варваров. Производится кузнецом и "
+"используется на тренировочных площадках - совместно с пищей - для "
+"переподготовки солдат с уровня здоровья 2 до уровня 3."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1445,7 +1458,7 @@ msgstr "Работает на строительных площадках, во�
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Работает на верфи и строит новые суда"
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
