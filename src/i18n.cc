@@ -187,7 +187,7 @@ void set_locale(std::string name) {
 	locale = lang;
 #endif
 
-#ifdef linux
+#ifdef __linux__
 	char * res = NULL;
 	char const * encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
 	std::size_t found = alt_str.find(',', 0);
