@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2010-11-22 15:33+0000\n"
-"Last-Translator: Massol <Unknown>\n"
+"PO-Revision-Date: 2012-01-24 17:35+0000\n"
+"Last-Translator: Georgiy <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:45+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-25 05:20+0000\n"
+"X-Generator: Launchpad (build 14719)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -23,6 +23,8 @@ msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Пища готовится в таверне из хлеба и рыбы/мяса. Обязательно требуется "
+"шахтерам в глубоких шахтах."
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
@@ -77,7 +79,7 @@ msgstr "Печёт хлеб для рабочих."
 
 #: ../../tribes/empire/conf:208
 msgid "Barracks"
-msgstr "Казарма"
+msgstr "Бараки"
 
 #: ../../tribes/empire/conf:155
 #: ../../tribes/empire/conf:209
@@ -111,7 +113,7 @@ msgstr "Хлеб"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Лопата для выпечки"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -135,7 +137,7 @@ msgstr "Строитель"
 
 #: ../../tribes/empire/conf:114
 msgid "Burner"
-msgstr "Угольщик"
+msgstr "Углежог"
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
@@ -151,7 +153,7 @@ msgstr "Носильщик"
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Переносит грузы по Вашим дорогам."
+msgstr "Переносит грузы по вашим дорогам."
 
 #: ../../tribes/empire/conf:149
 #: ../../tribes/empire/conf:212
@@ -169,7 +171,7 @@ msgstr "Кольчуга"
 
 #: ../../tribes/empire/conf:185
 msgid "Charcoal Burner"
-msgstr "Домик угольщика"
+msgstr "Домик углежога"
 
 #: ../../tribes/empire/conf:156
 msgid "Citadel"
@@ -199,11 +201,11 @@ msgstr "Колизей"
 
 #: ../../tribes/empire/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Строительство корабля"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
-msgstr "Стройка"
+msgstr "Строительная площадка"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
@@ -215,11 +217,11 @@ msgstr "Глубокая угольная шахта"
 
 #: ../../tribes/empire/conf:202
 msgid "Deep Gold Mine"
-msgstr "Глубокий золотой прииск"
+msgstr "Глубокая Золотоносная шахта"
 
 #: ../../tribes/empire/conf:200
 msgid "Deep Iron Ore Mine"
-msgstr "Глубокий рудник"
+msgstr "Глубокая Железорудная шахта"
 
 #: ../../tribes/empire/conf:196
 msgid "Deep Marble Mine"
@@ -227,7 +229,7 @@ msgstr "Глубокая мраморная шахта"
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Защищать и завоёвывать!"
+msgstr "Защищать и покорять!"
 
 #: ../../tribes/empire/conf:39
 msgid "Destroyed building"
@@ -235,15 +237,15 @@ msgstr "Разрушенное здание"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Находит месторождения полезных ископаемых."
+msgstr "Ищет полезные ископаемые"
 
 #: ../../tribes/empire/conf:146
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Снос площадки"
 
 #: ../../tribes/empire/conf:157
 msgid "Donjon"
-msgstr "Дозорная башня"
+msgstr "Донжон"
 
 #: ../../tribes/empire/conf:104
 msgid "Donkey"
@@ -255,7 +257,7 @@ msgstr "Ословод"
 
 #: ../../tribes/empire/conf:190
 msgid "Donkeyfarm"
-msgstr "Ослоферма"
+msgstr "Ослинная ферма"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
@@ -295,7 +297,7 @@ msgstr "Засеянное поле"
 
 #: ../../tribes/empire/conf:67
 msgid "Fire Tongs"
-msgstr "Щипцы"
+msgstr "Клещи кузнеца"
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
@@ -354,7 +356,7 @@ msgstr "Геолог"
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr "Добывает рыбу из моря."
+msgstr "Ловит рыбу."
 
 #: ../../tribes/empire/conf:71
 msgid "Gold"
@@ -362,7 +364,7 @@ msgstr "Золото"
 
 #: ../../tribes/empire/conf:203
 msgid "Gold Mine"
-msgstr "Золотой прииск"
+msgstr "Золотоносная шахта"
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""
@@ -482,7 +484,7 @@ msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Пасет овец."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -942,6 +944,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Лопата для выпечки рабочий инструмент пекаря, каждый пекарь должен иметь "
+"собственную лопату. Изготавливается кузнецом."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
