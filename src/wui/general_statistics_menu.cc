@@ -173,7 +173,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_landsize.png"),
 		 _("Land"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -181,7 +181,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrworkers.png"),
 		 _("Workers"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -189,7 +189,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrbuildings.png"),
 		 _("Buildings"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -197,7 +197,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_nrwares.png"),
 		 _("Wares"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -205,7 +205,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_productivity.png"),
 		 _("Productivity"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -213,7 +213,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_casualties.png"),
 		 _("Casualties"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -221,7 +221,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_kills.png"),
 		 _("Kills"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -229,7 +229,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_msites_lost.png"),
 		 _("Military buildings lost"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -237,7 +237,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_msites_defeated.png"),
 		 _("Military buildings defeated"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -245,7 +245,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_civil_blds_lost.png"),
 		 _("Civilian buildings lost"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -253,7 +253,7 @@ m_selected_information(0)
 		 g_gr->get_picture(PicMod_Game, "pics/genstats_militarystrength.png"),
 		 _("Military"),
 		 &btn);
-	hbox2->add(btn, UI::Box::AlignLeft);
+	hbox2->add(btn, UI::Box::AlignLeft, false, true);
 
 	if (hook) {
 		m_radiogroup.add_button
@@ -262,14 +262,14 @@ m_selected_information(0)
 			 g_gr->get_picture(PicMod_Game, cs_pic),
 			 cs_name.c_str(),
 			 &btn);
-		hbox2->add(btn, UI::Box::AlignLeft);
+		hbox2->add(btn, UI::Box::AlignLeft, false, true);
 	}
 
 	m_radiogroup.set_state(m_selected_information);
 	m_radiogroup.changedto.connect
 		(boost::bind(&General_Statistics_Menu::radiogroup_changed, this, _1));
 
-	m_box.add(hbox2, UI::Box::AlignTop);
+	m_box.add(hbox2, UI::Box::AlignTop, true);
 
 	m_box.add
 		(new WUIPlot_Area_Slider
