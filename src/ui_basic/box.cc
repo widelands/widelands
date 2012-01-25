@@ -195,7 +195,7 @@ void Box::layout()
 	// Second pass: Count number of infinite spaces
 	uint32_t infspace_count = 0;
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx)
-		if (m_items[idx].type == Item::ItemInfSpace)
+		if (m_items[idx].fillspace)
 			infspace_count++;
 
 	// Third pass: Distribute left over space to all infinite spaces. To
@@ -205,10 +205,10 @@ void Box::layout()
 	uint32_t max_depths =
 		m_orientation == Horizontal ? get_inner_w() : get_inner_h();
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx)
-		if (m_items[idx].type == Item::ItemInfSpace) {
-			m_items[idx].u.assigned_space =
+		if (m_items[idx].fillspace) {
+			m_items[idx].assigned_var_depth =
 				(max_depths - totaldepth) / infspace_count;
-			totaldepth += m_items[idx].u.assigned_space;
+			totaldepth += m_items[idx].assigned_var_depth;
 			infspace_count--;
 	}
 
@@ -256,8 +256,11 @@ void Box::scrollbar_moved(int32_t)
  * @param fullsize when true, @p panel will be extended to cover the entire width (or height)
  * of the box for horizontal (vertical) panels. If false, then @p panel may end up smaller;
  * in that case, it will be aligned according to @p align
+ *
+ * @param fillspace when true, @p panel will be expanded as an infinite space would be. This can be used to make buttons fill a box completely.
+ * 
  */
-void Box::add(Panel * const panel, uint32_t const align, bool fullsize)
+void Box::add(Panel * const panel, uint32_t const align, bool fullsize, bool fillspace)
 {
 	Item it;
 
@@ -265,6 +268,8 @@ void Box::add(Panel * const panel, uint32_t const align, bool fullsize)
 	it.u.panel.panel = panel;
 	it.u.panel.align = align;
 	it.u.panel.fullsize = fullsize;
+	it.fillspace = fillspace;
+	it.assigned_var_depth = 0;
 
 	m_items.push_back(it);
 
@@ -281,6 +286,7 @@ void Box::add_space(uint32_t space)
 
 	it.type = Item::ItemSpace;
 	it.u.space = space;
+	it.fillspace = false;
 
 	m_items.push_back(it);
 
@@ -295,8 +301,10 @@ void Box::add_inf_space()
 {
 	Item it;
 
-	it.type = Item::ItemInfSpace;
-	it.u.assigned_space = 0;
+	it.type = Item::ItemSpace;
+	it.u.space = 0;
+	it.assigned_var_depth = 0;
+	it.fillspace = true;
 
 	m_items.push_back(it);
 
@@ -330,11 +338,6 @@ void Box::get_item_desired_size
 		breadth = 0;
 		break;
 
-	case Item::ItemInfSpace:
-		depth   = 0;
-		breadth = 0;
-		break;
-
 	default:
 		throw wexception("Box::get_item_size: bad type %u", it.type);
 	}
@@ -342,7 +345,7 @@ void Box::get_item_desired_size
 
 /**
  * Retrieve the given item's size. This differs from get_item_desired_size only
- * for InfSpace items, at least for now.
+ * for expanding items, at least for now.
  */
 void Box::get_item_size
 	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)
@@ -351,16 +354,8 @@ void Box::get_item_size
 
 	Item const & it = m_items[idx];
 
-	switch (it.type) {
-	case Item::ItemInfSpace:
-		depth   = it.u.assigned_space;
-		breadth = 0;
-		break;
-
-	default:
-		get_item_desired_size(idx, depth, breadth);
-	}
-
+	get_item_desired_size(idx, depth, breadth);
+	depth += it.assigned_var_depth;
 }
 
 /**
@@ -424,8 +419,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 	}
 
 	case Item::ItemSpace:; //  no need to do anything
-
-	case Item::ItemInfSpace:; //  no need to do anything
 	};
 }
 
