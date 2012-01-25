@@ -157,11 +157,11 @@ m_selected_information(0)
 
 		m_cbs[p - 1] = &cb;
 
-		hbox1->add(&cb, UI::Box::AlignLeft);
+		hbox1->add(&cb, UI::Box::AlignLeft, false, true);
 	} else //  player nr p does not exist
 		m_cbs[p - 1] = 0;
 
-	m_box.add(hbox1, UI::Box::AlignTop);
+	m_box.add(hbox1, UI::Box::AlignTop, true);
 
 	UI::Box * hbox2 = new UI::Box(&m_box, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
