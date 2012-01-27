@@ -1,4 +1,5 @@
 size=medium
+heal_per_second=2
 
 [buildcost]
 trunk=3

@@ -250,8 +250,10 @@ Warehouse_Descr::Warehouse_Descr
 	 Tribe_Descr const & _tribe)
 :
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-m_conquers    (0)
+m_conquers    (0),
+m_heal_per_second(0)
 {
+	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
 	if
 		((m_conquers =
 		  	prof.get_safe_section("global").get_positive("conquers", 0)))
@@ -639,6 +641,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 		if (m_incorporated_workers.count(ware)) {
 			WorkerList & soldiers = m_incorporated_workers[ware];
 
+			uint32_t total_heal = descr().get_heal_per_second();
 			// Do not use container_iterate, as we plan to erase some
 			// of those guys
 			for
@@ -656,7 +659,12 @@ void Warehouse::act(Game & game, uint32_t const data)
 					m_supply->remove_workers(ware, 1);
 					continue;
 				}
-				//  If warehouse can heal, this is the place to put it.
+
+				if (soldier->get_current_hitpoints() < soldier->get_max_hitpoints()) {
+					soldier->heal(total_heal);
+					continue;
+				}
+
 			}
 		}
 		m_next_military_act = schedule_act(game, 1000);

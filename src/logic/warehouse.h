@@ -55,8 +55,12 @@ struct Warehouse_Descr : public Building_Descr {
 
 	virtual uint32_t get_conquers() const {return m_conquers;}
 
+	uint32_t get_heal_per_second        () const throw () {
+		return m_heal_per_second;
+	}
 private:
 	int32_t m_conquers;
+	uint32_t m_heal_per_second;
 };
 
 
