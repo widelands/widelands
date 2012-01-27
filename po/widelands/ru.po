@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 14:40+0100\n"
-"PO-Revision-Date: 2012-01-23 17:35+0000\n"
-"Last-Translator: Georgiy <Unknown>\n"
+"PO-Revision-Date: 2012-01-26 18:16+0000\n"
+"Last-Translator: Izon <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-01-24 05:15+0000\n"
-"X-Generator: Launchpad (build 14713)\n"
+"X-Launchpad-Export-Date: 2012-01-27 05:16+0000\n"
+"X-Generator: Launchpad (build 14727)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -329,7 +329,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1676
 msgid "Connection timed out"
-msgstr ""
+msgstr "Время ожидания для соединения истекло"
 
 #: ../../src/wlapplication.cc:1678
 msgid ""
@@ -825,16 +825,16 @@ msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command check_map"
-msgstr ""
+msgstr "Документация на команду программы check_map"
 
 #: ../../src/writeHTML.cc:1155
 msgid "check_map"
-msgstr ""
+msgstr "check_map"
 
 #: ../../src/writeHTML.cc:1160
 #, c-format
 msgid "Seafaring"
-msgstr ""
+msgstr "Мореходство"
 
 #: ../../src/writeHTML.cc:1172
 msgid "Documentation for program command animate"
@@ -1236,7 +1236,7 @@ msgstr "большой"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "функция подсчета статистики: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
@@ -1256,7 +1256,7 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:194
 #, c-format
 msgid "game logic: %s"
-msgstr ""
+msgstr "игровая логика: %s"
 
 #: ../../src/logic/constructionsite.cc:91
 #, c-format
@@ -1632,7 +1632,7 @@ msgstr "отступление: значение %u вне разрешенны�
 #: ../../src/logic/playercommand.cc:1446
 #, c-format
 msgid "change military config: %s"
-msgstr ""
+msgstr "изменить военные установки: %s"
 
 #: ../../src/logic/playercommand.cc:1485
 #, c-format
@@ -4685,7 +4685,7 @@ msgstr "Создать Карту"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:69
 msgid "Random Number:"
-msgstr ""
+msgstr "Случайное число:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:168
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
@@ -4713,7 +4713,7 @@ msgstr "Горы: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Island mode:"
-msgstr ""
+msgstr "Островной режим:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Resources:"
@@ -4721,15 +4721,15 @@ msgstr "Ресурсы:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "Low"
-msgstr ""
+msgstr "Низкий"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:258
 msgid "High"
-msgstr ""
+msgstr "Высокий"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:295
 msgid "Map ID:"
-msgstr ""
+msgstr "ID карты:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:329
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:450
