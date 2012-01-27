@@ -286,6 +286,7 @@ void Box::add_space(uint32_t space)
 
 	it.type = Item::ItemSpace;
 	it.u.space = space;
+	it.assigned_var_depth = 0;
 	it.fillspace = false;
 
 	m_items.push_back(it);
