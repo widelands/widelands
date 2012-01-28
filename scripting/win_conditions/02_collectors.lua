@@ -8,6 +8,8 @@ use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
+use("aux", "win_condition_texts")
+
 local wc_name = _ "Collectors"
 local wc_version = 2
 local wc_desc = _ (
@@ -88,7 +90,7 @@ local function _calc_points(plr)
 	)
 
 	local points = 0
-	local descr = { _("Status for %s<br>"):format(plr.name) }
+	local descr = { game_status_collectors.title:format(plr.name) }
 	for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
 		local value = point_table[plr.tribe_name][ware]
 		local count = 0
@@ -101,7 +103,7 @@ local function _calc_points(plr)
 			ware, value, count, lpoints
 		)
 	end
-	descr[#descr+1] = _("Total: %i points"):format(points)
+	descr[#descr+1] = game_status_collectors.total:format(points)
 
 	return points, p(table.concat(descr, "\n"))
 end
@@ -116,7 +118,7 @@ local function _send_state(remaining_time, plrs)
 	else
 		time = ("%i minutes"):format(m)
 	end
-	local msg = p(_"The game will end in %s."):format(time)
+	local msg = p(game_status_collectors.end_in):format(time)
 	msg = msg .. "\n\n"
 
 	for idx, plr in ipairs(plrs) do
@@ -126,7 +128,7 @@ local function _send_state(remaining_time, plrs)
 	end
 
 	for idx, plr in ipairs(plrs) do
-		plr:send_message(_ "Status", "<rt>" .. msg .. "</rt>")
+		plr:send_message(game_status.title, "<rt>" .. msg .. "</rt>")
 	end
 end
 
@@ -137,17 +139,17 @@ local function _game_over(plrs)
 	end
 	table.sort(points, function(a,b) return a[2] < b[2] end)
 	for i=1,#points-1 do
-		points[i][1]:send_message(_"You lost", _"You've lost this game!")
+		points[i][1]:send_message(lost_game_over.title, lost_game_over.body)
 		wl.game.report_result(points[i][1], false, points[i][2], make_extra_data(points[i][1], wc_name, wc_version))
 	end
-	points[#points][1]:send_message(_"You won!", _"You are the winner!")
+	points[#points][1]:send_message(won_game_over.title, won_game_over.body)
 	wl.game.report_result(points[#points][1], true, points[#points][2], make_extra_data(points[#points][1], wc_name, wc_version))
 end
 
 -- Instantiate the hook to calculate points
 if hooks == nil then hooks = {} end
 hooks.custom_statistic = {
-	name = _ "Points",
+	name = game_status_collectors.points,
 	pic = "pics/genstats_points.png",
 	calculator = function(p)
 		local pts = _calc_points(p)
@@ -179,9 +181,8 @@ while true do
 	local runs = 0
 	repeat
 		sleep(5000)
-		check_player_defeated(plrs, _ "You are defeated!",
-			_ ("You have nothing to command left. If you want, you may " ..
-			   "continue as spectator."), wc_name, wc_version)
+		check_player_defeated(plrs, lost_game.title,
+			lost_game.body, wc_name, wc_version)
 		runs = runs + 1
 	until runs >= 120 -- 120 * 5000ms = 600000 ms = 10 minutes
 	remaining_time = remaining_time - 10

@@ -7,6 +7,8 @@ use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
+use("aux", "win_condition_texts")
+
 local wc_name = _ "Autocrat"
 local wc_version = 2
 local wc_desc = _ "The tribe or team that can defeat all others wins the game!"
@@ -22,15 +24,14 @@ return {
 		-- from the list, send him a defeated message and give him full vision
 		repeat
 			sleep(5000)
-			check_player_defeated(plrs, _ "You are defeated!",
-				_ ("You have nothing to command left. If you want, you may " ..
-				   "continue as spectator."), wc_name, wc_version)
+			check_player_defeated(plrs, lost_game.title,
+				lost_game.body, wc_name, wc_version)
 		until count_factions(plrs) <= 1
 
 		-- Send congratulations to all remaining players
 		broadcast_win(plrs,
-				_ "Congratulations!",
-				_ "You have won this game!",
+				won_game.title,
+				won_game.body,
 				{popup = true},
 				wc_name, wc_version
 		)

@@ -8,6 +8,8 @@ use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
 
+use("aux", "win_condition_texts")
+
 local wc_name = _ "Wood Gnome"
 local wc_version = 2
 local wc_desc = _
@@ -77,29 +79,28 @@ return {
 
 	local function _send_state()
 		local playerpoints = _calc_points()
-		local msg = _("The game will end in %i minutes."):format(remaining_time)
+		local msg = game_status_woodgnome.end_in:format(remaining_time)
 		msg = msg .. "\n\n"
-		msg = msg .. _ ("Player overview:")
+		msg = msg .. game_status.body
 		for idx,plr in ipairs(plrs) do
 			msg = msg .. "\n"
-			msg = msg .. _ ("%s has %i trees at the moment."):format(plr.name, playerpoints[plr.number])
+			msg = msg .. game_status_woodgnome.trees:format(plr.name, playerpoints[plr.number])
 		end
 
-		broadcast(plrs, _ "Status", msg)
+		broadcast(plrs, game_status.title, msg)
 	end
 
 	-- Start a new coroutine that checks for defeated players
 	run(function()
 		sleep(5000)
-		check_player_defeated(plrs, _ "You are defeated!",
-			_ ("You have nothing to command left. If you want, you may " ..
-				"continue as spectator."), wc_name, wc_version)
+		check_player_defeated(plrs, lost_game.title,
+			lost_game.body, wc_name, wc_version)
 	end)
 
 	-- Install statistics hook
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
-		name = _ "Trees owned",
+		name = game_status_woodgnome.owned,
 		pic = "pics/genstats_trees.png",
 		calculator = function(p)
 			local pts = _calc_points(p)
@@ -131,25 +132,25 @@ return {
 	table.sort(points, function(a,b) return a[2] < b[2] end)
 
 	local msg = "\n\n"
-	msg = msg .. _ ("Player overview:")
+	msg = msg .. game_status.body
 	for idx,plr in ipairs(plrs) do
 		msg = msg .. "\n"
-		msg = msg .. _ ("%s had "):format(plr.name)
-		msg = msg .. _ ("%i trees."):format(playerpoints[plr.number])
+		msg = msg .. game_status_woodgnome.had1:format(plr.name)
+		msg = msg .. game_status_woodgnome.had2:format(playerpoints[plr.number])
 	end
 	msg = msg .. "\n\n"
-	msg = msg .. _ ("The winner is %s "):format(points[#points][1].name)
-	msg = msg .. _ ("with %i trees."):format(playerpoints[points[#points][1].number])
+	msg = msg .. game_status_woodgnome.winner1:format(points[#points][1].name)
+	msg = msg .. game_status_woodgnome.winner2:format(playerpoints[points[#points][1].number])
 	local privmsg = ""
 	for i=1,#points-1 do
-		privmsg = _ ("You have lost this game!")
+		privmsg = lost_game_over.title
 		privmsg = privmsg .. msg
-		points[i][1]:send_message(_"You lost!", privmsg, {popup = true})
+		points[i][1]:send_message(lost_game_over.body, privmsg, {popup = true})
 		wl.game.report_result(points[i][1], false, points[i][2], make_extra_data(points[i][1], wc_name, wc_version))
 	end
-	privmsg = _ ("You are the winner of this game!")
+	privmsg = won_game_over.title
 	privmsg = privmsg .. msg
-	points[#points][1]:send_message(_"You won!", privmsg, {popup = true})
+	points[#points][1]:send_message(won_game_over.body, privmsg, {popup = true})
 	wl.game.report_result(points[#points][1], true, points[#points][2], make_extra_data(points[#points][1], wc_name, wc_version))
 end
 }
