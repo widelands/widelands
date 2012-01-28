@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-01-03 13:07+0000\n"
+"PO-Revision-Date: 2012-01-27 12:58+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-04 04:42+0000\n"
-"X-Generator: Launchpad (build 14616)\n"
+"X-Launchpad-Export-Date: 2012-01-28 04:36+0000\n"
+"X-Generator: Launchpad (build 14727)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Una valida nave"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -93,6 +93,9 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
+"Armatura di base per i soldati dell'Impero. È prodotta nella fucina di "
+"armature ed utilizzata nel campo d'addestramento - insieme al cibo - per "
+"allenare i soldati dal livello 1 al livello 2 di punti salute."
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
@@ -107,6 +110,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Il pesce è un altra fonte di cibo per l'Impero, oltre al pane ed alla carne. "
+"Il pesce è utilizzato nelle taverne, locande e centri di addestramento "
+"(arena, colosseo, campo di addestramento)."
 
 #: ../../tribes/empire/conf:63
 msgid "Bread"
@@ -114,7 +120,7 @@ msgstr "Pane"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Pala per il pane"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -204,7 +210,7 @@ msgstr "Colosseo"
 
 #: ../../tribes/empire/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Nave in costruzione"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -245,7 +251,7 @@ msgstr "Scopre le risorse per le miniere."
 
 #: ../../tribes/empire/conf:146
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Smantella il sito"
 
 #: ../../tribes/empire/conf:157
 msgid "Donjon"
@@ -308,6 +314,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Le pinze per il fuoco sono attrezzi del fonditore che lavora nella fonderia. "
+"Sono prodotte dal fabbro."
 
 #: ../../tribes/empire/conf:68
 msgid "Fish"
@@ -341,6 +349,8 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"La farina è prodotta nel mulino a partire dal grano ed è necessaria nei "
+"forni per produrre il saporito pane imperiale."
 
 #: ../../tribes/empire/conf:118
 msgid "Forester"
@@ -839,15 +849,15 @@ msgstr ""
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
-msgstr ""
+msgstr "Sito di costruzione navi"
 
 #: ../../tribes/empire/conf:128
 msgid "Shipwright"
-msgstr ""
+msgstr "Maestro d'ascia"
 
 #: ../../tribes/empire/conf:187
 msgid "Shipyard"
-msgstr ""
+msgstr "Cantiere navale"
 
 #: ../../tribes/empire/conf:91
 msgid "Shovel"
