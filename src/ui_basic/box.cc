@@ -257,8 +257,9 @@ void Box::scrollbar_moved(int32_t)
  * of the box for horizontal (vertical) panels. If false, then @p panel may end up smaller;
  * in that case, it will be aligned according to @p align
  *
- * @param fillspace when true, @p panel will be expanded as an infinite space would be. This can be used to make buttons fill a box completely.
- * 
+ * @param fillspace when true, @p panel will be expanded as an infinite space would be.
+ * This can be used to make buttons fill a box completely.
+ *
  */
 void Box::add(Panel * const panel, uint32_t const align, bool fullsize, bool fillspace)
 {

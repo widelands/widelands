@@ -55,7 +55,8 @@ public:
 
 	int32_t get_nritems() const {return m_items.size();}
 
-	void add(Panel * panel,
+	void add
+		(Panel * panel,
 		uint32_t align,
 		bool fullsize = false,
 		bool fillspace = false);
