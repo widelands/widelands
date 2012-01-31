@@ -412,6 +412,7 @@ bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
  */
 void Table<void *>::move_selection(const int32_t offset)
 {
+	if (!has_selection()) return;
 	int32_t new_selection = m_selection + offset;
 
 	if (new_selection < 0) new_selection = 0;
