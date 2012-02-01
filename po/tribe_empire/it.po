@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-01-30 12:53+0000\n"
+"PO-Revision-Date: 2012-01-31 12:58+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-31 04:42+0000\n"
+"X-Launchpad-Export-Date: 2012-02-01 04:40+0000\n"
 "X-Generator: Launchpad (build 14734)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -545,6 +545,9 @@ msgid ""
 "for nearly every bigger building. They are produced out of marble in a "
 "stonemason's house."
 msgstr ""
+"Le colonne di marmo rappresentano l'alta cultura dell'Impero, pertanto sono "
+"necessaria per quasi tutti gli edifici più grandi. Sono prodotte a partire "
+"dal marmo in una casa del tagliapietre,"
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -552,6 +555,9 @@ msgid ""
 "in a quarry. Marble is used as building material and gets formed into marble "
 "columns in the stonemason's house."
 msgstr ""
+"Il marmo è la bellissima pietra estratta dalle montagne o prodotta in una "
+"cava. Il marmo è utilizzato come materiale da costruzione e sagomato in "
+"colonne nella casa del tagliapietre."
 
 #: ../../tribes/empire/conf:123
 msgid "Master Miner"
@@ -572,6 +578,11 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"La carne contiene tanta energia. È utilizzata nelle locande e nelle taverne "
+"per preparare i pasti per i minatori ed è consumata nei luoghi di "
+"addestramento (arena, colosseo, campo di addestramento). Ci sono due fonti "
+"di carne: carne di maiale ottenuta dalle porcilaie e carne della selvaggina "
+"cacciata dai cacciatori."
 
 #: ../../tribes/empire/conf:178
 msgid "Mill"
@@ -653,7 +664,7 @@ msgstr "Armatura di Piastre"
 
 #: ../../tribes/empire/conf:166
 msgid "Port"
-msgstr ""
+msgstr "Porto"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
@@ -853,7 +864,7 @@ msgstr "Pastore"
 
 #: ../../tribes/empire/conf:140
 msgid "Ship"
-msgstr ""
+msgstr "Nave"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
@@ -974,6 +985,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"La pala per il pane è l'attrezzo del fornaio, ogni fornaio ha bisogno della "
+"sua. È prodotta dal fabbro."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
