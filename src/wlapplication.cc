@@ -385,7 +385,7 @@ void WLApplication::run()
 				bool name_valid = false;
 				while (not name_valid) {
 					name_valid = true;
-					std::vector<Net_Game_Info> const & hosts = InternetGaming::ref().tables();
+					std::vector<Net_Game_Info> const & hosts = InternetGaming::ref().games();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
 						if (hosts[i].hostname == realservername)
 							name_valid = false;

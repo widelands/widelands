@@ -46,10 +46,10 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 		(this,
 		 get_w() / 2, get_h() / 20,
 		 _("Metaserver Lobby"), UI::Align_HCenter),
-	m_users
+	m_clients
 		(this,
 		 get_w() * 4 / 125, get_h() * 15 / 100,
-		 _("Users online:")),
+		 _("Clients online:")),
 	m_opengames
 		(this,
 		 get_w() * 17 / 25, get_h() * 15 / 100,
@@ -92,7 +92,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
 
 // List
-	usersonline
+	clientsonline
 		(this,
 		 get_w() * 4 / 125, get_h()     / 5,
 		 m_lisw,          get_h() * 3 / 10),
@@ -135,7 +135,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 
 	title       .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_users     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_clients     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_servername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_maxplayers.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	maxplayers  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -146,15 +146,15 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
-	usersonline .set_font(m_fn, m_fs);
-	usersonline .add_column(22, "°");
-	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
-	usersonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
-	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Server"));
-	usersonline.set_column_compare
-		(0, boost::bind(&Fullscreen_Menu_Internet_Lobby::compare_usertype, this, _1, _2));
-	usersonline .double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_Internet_Lobby::user_doubleclicked, this, _1));
+	clientsonline .set_font(m_fn, m_fs);
+	clientsonline .add_column(22, "°");
+	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
+	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
+	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Game"));
+	clientsonline.set_column_compare
+		(0, boost::bind(&Fullscreen_Menu_Internet_Lobby::compare_clienttype, this, _1, _2));
+	clientsonline .double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_Internet_Lobby::client_doubleclicked, this, _1));
 	opengames   .set_font(m_fn, m_fs);
 	opengames   .selected.connect
 		(boost::bind(&Fullscreen_Menu_Internet_Lobby::server_selected, this, _1));
@@ -180,11 +180,11 @@ void Fullscreen_Menu_Internet_Lobby::think ()
 	// Check whether metaserver send some data
 	InternetGaming::ref().datacore();
 
-	if (InternetGaming::ref().updateForUsers())
-		fillUserList(InternetGaming::ref().users());
+	if (InternetGaming::ref().updateForClients())
+		fillClientList(InternetGaming::ref().clients());
 
-	if (InternetGaming::ref().updateForTables())
-		fillServersList(InternetGaming::ref().tables());
+	if (InternetGaming::ref().updateForGames())
+		fillGamesList(InternetGaming::ref().games());
 }
 
 
@@ -205,8 +205,7 @@ void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 
 
 /// fills the server list
-void Fullscreen_Menu_Internet_Lobby::fillServersList
-	(std::vector<Net_Game_Info> const & tables)
+void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<Net_Game_Info> const & games)
 {
 	// List and button cleanup
 	opengames.clear();
@@ -214,9 +213,9 @@ void Fullscreen_Menu_Internet_Lobby::fillServersList
 	joingame.set_enabled(false);
 	std::string localservername = servername.text();
 	localservername += " (" + build_id() + ")";
-	for (uint32_t i = 0; i < tables.size(); ++i) {
+	for (uint32_t i = 0; i < games.size(); ++i) {
 		Net_Open_Game newOG;
-		newOG.info = Net_Game_Info(tables[i]);
+		newOG.info = Net_Game_Info(games[i]);
 		PictureID pic;
 		switch (newOG.info.state) {
 			case LAN_GAME_OPEN:
@@ -229,9 +228,9 @@ void Fullscreen_Menu_Internet_Lobby::fillServersList
 				continue;
 		}
 		// If one of the servers has the same name as the local name of the
-		// users server, we disable the 'hostgame' button to avoid having more
+		// clients server, we disable the 'hostgame' button to avoid having more
 		// than one server with the same name.
-		if (tables[i].hostname == localservername)
+		if (games[i].hostname == localservername)
 			hostgame.set_enabled(false);
 		opengames.add(newOG.info.hostname, newOG, pic);
 	}
@@ -239,30 +238,30 @@ void Fullscreen_Menu_Internet_Lobby::fillServersList
 
 
 /**
- * \return \c true if the user in row \p rowa should come before the user in
- * row \p rowb when sorted according to usertype
+ * \return \c true if the client in row \p rowa should come before the client in
+ * row \p rowb when sorted according to clienttype
  */
-bool Fullscreen_Menu_Internet_Lobby::compare_usertype(unsigned int rowa, unsigned int rowb)
+bool Fullscreen_Menu_Internet_Lobby::compare_clienttype(unsigned int rowa, unsigned int rowb)
 {
-	const Net_Player * playera = usersonline[rowa];
-	const Net_Player * playerb = usersonline[rowb];
+	const Net_Client * playera = clientsonline[rowa];
+	const Net_Client * playerb = clientsonline[rowb];
 
 	return playera->type < playerb->type;
 }
 
-/// fills the user list
-void Fullscreen_Menu_Internet_Lobby::fillUserList(std::vector<Net_Player> const & users)
+/// fills the client list
+void Fullscreen_Menu_Internet_Lobby::fillClientList(std::vector<Net_Client> const & clients)
 {
-	usersonline.clear();
-	for (uint32_t i = 0; i < users.size(); ++i) {
-		const Net_Player & user(users[i]);
-		UI::Table<const Net_Player * const>::Entry_Record & er = usersonline.add(&user);
-		er.set_string(1, user.name);
-		er.set_string(2, user.stats);
-		er.set_string(3, user.game);
+	clientsonline.clear();
+	for (uint32_t i = 0; i < clients.size(); ++i) {
+		const Net_Client & client(clients[i]);
+		UI::Table<const Net_Client * const>::Entry_Record & er = clientsonline.add(&client);
+		er.set_string(1, client.name);
+		er.set_string(2, client.stats);
+		er.set_string(3, client.game);
 
 		PictureID pic;
-		switch (user.type) {
+		switch (client.type) {
 			case INTERNET_CLIENT_UNREGISTERED:
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_red.png");
 				er.set_picture(0, pic);
@@ -284,12 +283,12 @@ void Fullscreen_Menu_Internet_Lobby::fillUserList(std::vector<Net_Player> const 
 }
 
 
-/// called when an entry of the user list was doubleclicked
-void Fullscreen_Menu_Internet_Lobby::user_doubleclicked (uint32_t i)
+/// called when an entry of the client list was doubleclicked
+void Fullscreen_Menu_Internet_Lobby::client_doubleclicked (uint32_t i)
 {
-	// add a @username to the current edit text.
-	if (usersonline.has_selection()) {
-		UI::Table<const Net_Player * const>::Entry_Record & er = usersonline.get_record(i);
+	// add a @clientname to the current edit text.
+	if (clientsonline.has_selection()) {
+		UI::Table<const Net_Client * const>::Entry_Record & er = clientsonline.get_record(i);
 
 		std::string temp("@");
 		temp += er.get_string(1);
@@ -337,14 +336,14 @@ void Fullscreen_Menu_Internet_Lobby::server_doubleclicked (uint32_t)
 /// called when the servername was changed
 void Fullscreen_Menu_Internet_Lobby::change_servername()
 {
-	// Allow user to enter a servername manually
+	// Allow client to enter a servername manually
 	hostgame.set_enabled(true);
 
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
-	std::vector<Net_Game_Info> const & tables = InternetGaming::ref().tables();
-	for (uint32_t i = 0; i < tables.size(); ++i) {
-		if (tables[i].hostname == servername.text())
+	std::vector<Net_Game_Info> const & games = InternetGaming::ref().games();
+	for (uint32_t i = 0; i < games.size(); ++i) {
+		if (games[i].hostname == servername.text())
 			hostgame.set_enabled(false);
 	}
 }

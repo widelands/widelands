@@ -46,18 +46,18 @@ struct NetGGZ : public InternetGaming {
 	void data();
 	char const * ip();
 
-	bool updateForTables() {
+	bool updateForGames() {
 		bool temp = tableupdate;
 		tableupdate = false;
 		return temp;
 	}
-	bool updateForUsers() {
-		bool temp = userupdate;
-		userupdate = false;
+	bool updateForClients() {
+		bool temp = clientupdate;
+		clientupdate = false;
 		return temp;
 	}
 	std::vector<Net_Game_Info> const & tables();
-	std::vector<Net_Player>    const & users();
+	std::vector<Net_Client>    const & clients();
 
 	enum Protocol
 	{
@@ -108,17 +108,17 @@ private:
 	NetGGZ();
 	static void ggzmod_server(GGZMod *, GGZModEvent, void const * cbdata);
 	static GGZHookReturn
-		callback_server(uint32_t id, void const * cbdata, void const * user);
+		callback_server(uint32_t id, void const * cbdata, void const * client);
 	static GGZHookReturn
-		callback_room(uint32_t id, void const * cbdata, void const * user);
+		callback_room(uint32_t id, void const * cbdata, void const * client);
 	static GGZHookReturn
-		callback_game(uint32_t id, void const * cbdata, void const * user);
+		callback_game(uint32_t id, void const * cbdata, void const * client);
 	void event_server(uint32_t id, void const * cbdata);
 	void event_room(uint32_t id, void const * cbdata);
 	void event_game(uint32_t id, void const * cbdata);
 
-	void write_tablelist();
-	void write_userlist();
+	void write_gamelist();
+	void write_clientlist();
 
 	int data_is_pending(int fd) const;
 	int wait_for_ggzmod_data(int modfd, long timeout_sec, long timeout_usec) const;
@@ -134,7 +134,7 @@ private:
 	bool relogin;
 	GGZRoom * room;
 
-	bool userupdate;
+	bool clientupdate;
 	bool tableupdate;
 
 };

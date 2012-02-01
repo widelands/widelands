@@ -62,13 +62,13 @@ private:
 	uint32_t m_lisw;
 	uint32_t m_fs;
 	std::string m_fn;
-	UI::Textarea title, m_users, m_opengames;
+	UI::Textarea title, m_clients, m_opengames;
 	UI::Textarea m_servername;
 	UI::Textarea m_maxplayers;
 	UI::SpinBox maxplayers;
 	UI::Button joingame, hostgame, back;
 	UI::EditBox servername;
-	UI::Table<const Net_Player * const> usersonline;
+	UI::Table<const Net_Client * const> clientsonline;
 	UI::Listselect<Net_Open_Game> opengames;
 	GameChatPanel chat;
 
@@ -77,12 +77,12 @@ private:
 	const char * password;
 	bool         reg;
 
-	void fillServersList(std::vector<Net_Game_Info> const &);
-	void fillUserList   (std::vector<Net_Player> const &);
+	void fillGamesList (std::vector<Net_Game_Info> const &);
+	void fillClientList(std::vector<Net_Client> const &);
 
 	void connectToMetaserver();
 
-	void user_doubleclicked (uint32_t);
+	void client_doubleclicked (uint32_t);
 	void server_selected (uint32_t);
 	void server_doubleclicked (uint32_t);
 
@@ -91,7 +91,7 @@ private:
 	void clicked_hostgame();
 	void clicked_lasthost();
 
-	bool compare_usertype(unsigned int rowa, unsigned int rowb);
+	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 };
 
 #endif

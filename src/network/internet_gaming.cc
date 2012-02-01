@@ -26,16 +26,16 @@ InternetGaming & InternetGaming::ref() {
 }
 
 InternetGaming::InternetGaming() :
-	tableseats    (1),
+	maxclients    (1),
 	motd          ()
 {}
 
 /// \returns the tables in the room
-std::vector<Net_Game_Info> const & InternetGaming::tables() {
-	return tablelist;
+std::vector<Net_Game_Info> const & InternetGaming::games() {
+	return gamelist;
 }
 
 /// \returns the players in the room
-std::vector<Net_Player>    const & InternetGaming::users() {
-	return userlist;
+std::vector<Net_Client>    const & InternetGaming::clients() {
+	return clientlist;
 }

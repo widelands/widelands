@@ -42,7 +42,7 @@
 
 
 /// A simply network player struct
-struct Net_Player {
+struct Net_Client {
 	std::string   game;
 	std::string   name;
 	uint32_t      type;
@@ -94,11 +94,11 @@ struct InternetGaming : public ChatProvider {
 	virtual void data() = 0;
 	virtual char const * ip() = 0;
 
-	virtual bool updateForTables() = 0;
-	virtual bool updateForUsers() = 0;
+	virtual bool updateForGames() = 0;
+	virtual bool updateForClients() = 0;
 
-	std::vector<Net_Game_Info> const & tables();
-	std::vector<Net_Player>    const & users();
+	std::vector<Net_Game_Info> const & games();
+	std::vector<Net_Client>    const & clients();
 
 	enum Protocol
 	{
@@ -119,13 +119,13 @@ struct InternetGaming : public ChatProvider {
 	virtual void launch  () = 0;
 	virtual void send_game_playing() = 0;
 	virtual void send_game_done() = 0;
-	virtual void join(char const * tablename) = 0;
+	virtual void join(char const * gamename) = 0;
 
 	// functions for clients server setup
 	virtual uint32_t max_players() = 0;
 	/// sets the maximum number of players that may be in the game
 	void set_local_maxplayers(uint32_t mp) {
-		tableseats = mp;
+		maxclients = mp;
 	}
 	/// sets the name of the local server as shown in the games list
 	void set_local_servername(std::string const & name) {
@@ -136,7 +136,7 @@ struct InternetGaming : public ChatProvider {
 	}
 	/// \returns the name of the local server
 	std::string & get_local_servername() {return servername;}
-	std::string & get_clients_username() {return username;}
+	std::string & get_local_clientname() {return clientname;}
 
 	// ChatProvider: sends a message via GGZnetwork.
 	virtual void send(std::string const &) = 0;
@@ -152,27 +152,19 @@ struct InternetGaming : public ChatProvider {
 		return messages;
 	}
 
-	/// Called when a message is received via network.
-	virtual void recievedGGZChat(void const * cbdata) = 0;
-
-	// Adds a chatmessage in selected format to the list of chatmessages.
-	virtual void formatedGGZChat
-		(std::string const &, std::string const &,
-		 bool system = false, std::string recipient = std::string()) = 0;
-
 protected:
 	InternetGaming();
 
-	// user informations
-	std::string username;
+	// client informations
+	std::string clientname;
 
-	// informations of users game
+	// informations of clients game
 	std::string servername;
-	uint32_t tableseats;
+	uint32_t maxclients;
 
 	// Server informations
-	std::vector<Net_Game_Info> tablelist;
-	std::vector<Net_Player>    userlist;
+	std::vector<Net_Game_Info> gamelist;
+	std::vector<Net_Client>    clientlist;
 	MOTD motd;
 
 	// The chat messages

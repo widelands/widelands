@@ -44,7 +44,7 @@ NetGGZ::NetGGZ() :
 	server_ip_addr(0),
 	logged_in     (false),
 	relogin       (false),
-	userupdate    (false),
+	clientupdate    (false),
 	tableupdate   (false)
 {
 }
@@ -261,7 +261,7 @@ bool NetGGZ::initcore
 		datacore();
 	dedicatedlog("GGZCORE ## end loop\n");
 
-	username = nick;
+	clientname = nick;
 	return logged_in;
 }
 
@@ -274,8 +274,8 @@ void NetGGZ::deinitcore()
 	formatedGGZChat(_("Closed the connection to the metaserver."), "", true);
 	formatedGGZChat("*** *** ***", "", true);
 	relogin = true;
-	tablelist.clear();
-	userlist.clear();
+	gamelist.clear();
+	clientlist.clear();
 	if (ggzcore_server_is_at_table(ggzserver))
 		ggzcore_room_leave_table(room, true);
 	ggzcore_server_logout(ggzserver);
@@ -454,7 +454,7 @@ int NetGGZ::wait_for_ggzmod_data
 }
 #pragma GCC diagnostic error "-Wold-style-cast"
 
-//\FIXME: mallformed updatedata, if the user is in a room and too many seats
+//\FIXME: mallformed updatedata, if the client is in a room and too many seats
 //        are open (~ > 4).
 /// checks for events on server, room and game
 /// if data is pending the ggzcore_*_read_data function will call the fitting
@@ -706,7 +706,7 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 			deinitcore();
 			throw wexception("room was not found!");
 		}
-		write_tablelist();
+		write_gamelist();
 		ggzcore_login = false;
 		ggzcore_ready = true;
 		break;
@@ -734,27 +734,27 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 		break;
 	}
 	case GGZ_ROOM_ENTER: {
-		dedicatedlog("GGZCORE/room ## -- user joined\n");
+		dedicatedlog("GGZCORE/room ## -- client joined\n");
 		std::string msg =
 			static_cast<GGZRoomChangeEventData const *>(cbdata)->player_name;
 		msg += _(" joined the metaserver.");
 		formatedGGZChat(msg, "", true);
-		write_userlist();
+		write_clientlist();
 		break;
 	}
 	case GGZ_ROOM_LEAVE: {
-		dedicatedlog("GGZCORE/room ## -- user left\n");
+		dedicatedlog("GGZCORE/room ## -- client left\n");
 		std::string msg =
 			static_cast<GGZRoomChangeEventData const *>(cbdata)->player_name;
 		msg += _(" left the metaserver.");
 		formatedGGZChat(msg, "", true);
-		write_userlist();
+		write_clientlist();
 		break;
 	}
 	case GGZ_PLAYER_LIST:
 	case GGZ_PLAYER_COUNT: // cbdata is the GGZRoom* where players were counted
-		dedicatedlog("GGZCORE/room ## -- user list\n");
-		write_userlist();
+		dedicatedlog("GGZCORE/room ## -- client list\n");
+		write_clientlist();
 		break;
 	case GGZ_CHAT_EVENT:
 		dedicatedlog("GGZCORE/room ## -- chat message\n");
@@ -775,8 +775,8 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 		if (tableid == -1) {
 			GGZTable    * const table    = ggzcore_table_new        ();
 			GGZGameType * const gametype = ggzcore_room_get_gametype(room);
-			ggzcore_table_init(table, gametype, servername.c_str(), tableseats);
-			for (uint32_t i = 0; i < tableseats; ++i)
+			ggzcore_table_init(table, gametype, servername.c_str(), maxclients);
+			for (uint32_t i = 0; i < maxclients; ++i)
 				ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, 0);
 			ggzcore_room_launch_table(room, table);
 			ggzcore_table_free(table);
@@ -828,9 +828,9 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 
 
 /// writes the list of tables after an table update arrived
-void NetGGZ::write_tablelist()
+void NetGGZ::write_gamelist()
 {
-	tablelist.clear();
+	gamelist.clear();
 	int32_t const num = ggzcore_room_get_num_tables(room);
 	for (int32_t i = 0; i < num; ++i) {
 		Net_Game_Info info;
@@ -845,7 +845,7 @@ void NetGGZ::write_tablelist()
 			 sizeof(info.hostname));
 		GGZTableState const state = ggzcore_table_get_state(table);
 		if (state == GGZ_TABLE_WAITING) {
-			// To avoid freezes for users with build15 when trying to connect to
+			// To avoid freezes for clients with build15 when trying to connect to
 			// a table with seats > 8 - could surely happen once the seats problem
 			// is fixed.
 			//  FIXME it's even > 7 due to a ggz 0.14.1 bug
@@ -861,19 +861,19 @@ void NetGGZ::write_tablelist()
 			info.state = LAN_GAME_CLOSED;
 		else
 			continue;
-		tablelist.push_back(info);
+		gamelist.push_back(info);
 	}
 	tableupdate   = true;
 
-	// If a table was changed at least one user changed to that table as well
-	write_userlist();
+	// If a table was changed at least one client changed to that table as well
+	write_clientlist();
 }
 
 
-/// writes the list of online users after an user update arrived
-void NetGGZ::write_userlist()
+/// writes the list of online clients after an client update arrived
+void NetGGZ::write_clientlist()
 {
-	userlist.clear();
+	clientlist.clear();
 	if (!ggzserver)
 		return;
 	if (!room)
@@ -888,10 +888,10 @@ void NetGGZ::write_userlist()
 			deinitcore();
 			throw wexception("player can not be found!");
 		}
-		Net_Player user;
-		user.name = ggzcore_player_get_name(player);
+		Net_Client client;
+		client.name = ggzcore_player_get_name(player);
 		GGZTable * tab = ggzcore_player_get_table(player);
-		user.game = tab ? ggzcore_table_get_desc(tab) : "--";
+		client.game = tab ? ggzcore_table_get_desc(tab) : "--";
 
 		// TODO unfinished work down here!
 		// TODO something in ggzd does not work as it should!
@@ -901,32 +901,32 @@ void NetGGZ::write_userlist()
 		int ties[1];
 		int forfeits[1];
 		if (ggzcore_player_get_rating(player, buf)) {
-			snprintf(user.stats, sizeof(user.stats), "r %i", buf[0]);
-			dedicatedlog(user.stats);
+			snprintf(client.stats, sizeof(client.stats), "r %i", buf[0]);
+			dedicatedlog(client.stats);
 		} else if (ggzcore_player_get_highscore(player, buf)) {
-			snprintf(user.stats, sizeof(user.stats), "hs %i", buf[1]);
-			dedicatedlog(user.stats);
+			snprintf(client.stats, sizeof(client.stats), "hs %i", buf[1]);
+			dedicatedlog(client.stats);
 		} else if (ggzcore_player_get_ranking(player, buf)) {
-			snprintf(user.stats, sizeof(user.stats), "ra %i", buf[1]);
-			dedicatedlog(user.stats);
+			snprintf(client.stats, sizeof(client.stats), "ra %i", buf[1]);
+			dedicatedlog(client.stats);
 		} else if
 			(ggzcore_player_get_record
 			 (player, wins, losses, ties, forfeits))
 		{
 			snprintf
-				(user.stats, sizeof(user.stats), "%i %i %i %i",
+				(client.stats, sizeof(client.stats), "%i %i %i %i",
 				 wins[1], losses[1], ties[1], forfeits[1]);
-			dedicatedlog(user.stats);
+			dedicatedlog(client.stats);
 		} else*/
-		snprintf(user.stats, sizeof(user.stats), "%i", 0);
+		snprintf(client.stats, sizeof(client.stats), "%i", 0);
 		GGZPlayerType type = ggzcore_player_get_type(player);
-		user.type =
+		client.type =
 			((type == GGZ_PLAYER_BOT) ? INTERNET_CLIENT_BOT :
 			 (type == GGZ_PLAYER_ADMIN || type == GGZ_PLAYER_HOST) ? INTERNET_CLIENT_SUPERUSER :
 			 (type == GGZ_PLAYER_NORMAL) ? INTERNET_CLIENT_REGISTERED : INTERNET_CLIENT_UNREGISTERED);
-		userlist.push_back(user);
+		clientlist.push_back(client);
 	}
-	userupdate = true;
+	clientupdate = true;
 }
 
 
@@ -1064,7 +1064,7 @@ void NetGGZ::send(std::string const & msg)
 		std::string const pm = msg.substr(space + 1);
 		sent = ggzcore_room_chat(room, GGZ_CHAT_PERSONAL, to.c_str(), pm.c_str());
 		// Add the pm to own message list
-		formatedGGZChat(pm, username, false, to);
+		formatedGGZChat(pm, clientname, false, to);
 	} else
 		sent = ggzcore_room_chat(room, GGZ_CHAT_NORMAL, "", msg.c_str());
 	if (sent < 0)
@@ -1081,7 +1081,7 @@ void NetGGZ::recievedGGZChat(void const * const cbdata)
 		(msg->message,
 		 msg->sender,
 		 msg->type == GGZ_CHAT_ANNOUNCE,
-		 msg->type == GGZ_CHAT_PERSONAL ? username : std::string());
+		 msg->type == GGZ_CHAT_PERSONAL ? clientname : std::string());
 }
 
 
