@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "game_io/game_preload_data_packet.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "i18n.h"
+#include "internet_gaming.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -35,7 +36,6 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "md5.h"
-#include "network_ggz.h"
 #include "network_lan_promotion.h"
 #include "network_player_settings_backend.h"
 #include "network_protocol.h"
@@ -577,10 +577,10 @@ struct NetHostImpl {
 	}
 };
 
-NetHost::NetHost (std::string const & playername, bool ggz)
+NetHost::NetHost (std::string const & playername, bool internet)
 	:
 	d(new NetHostImpl(this)),
-	use_ggz(ggz),
+	m_internet(internet),
 	m_is_dedicated(false),
 	m_password(""),
 	m_dedicated_motd(""),
@@ -588,10 +588,8 @@ NetHost::NetHost (std::string const & playername, bool ggz)
 {
 	dedicatedlog("[Host] starting up.\n");
 
-	if (ggz) {
-#if HAVE_GGZ
-		NetGGZ::ref().launch();
-#endif
+	if (internet) {
+		InternetGaming::ref().launch();
 	}
 
 	d->localplayername = playername;
@@ -712,7 +710,7 @@ void NetHost::run(bool const autorun)
 				dedicatedlog("Warning: Could not set dedicated info file path");
 			else {
 				needip = true;
-				dl->set_server_data(NetGGZ::ref().get_local_servername(), m_dedicated_motd);
+				dl->set_server_data(InternetGaming::ref().get_local_servername(), m_dedicated_motd);
 			}
 		}
 
@@ -722,6 +720,7 @@ void NetHost::run(bool const autorun)
 
 		// NOTE  Workaround ... sometimes ggzd seems to disconnect players that idle too long
 		// NOTE  Therefore dedicated servers reconnect every 15 minutes if idle
+		// TODO  fixme as soon as ggz is dropped
 		uint16_t timeout = 0;
 
 		while (not d->dedicated_start) {
@@ -732,8 +731,8 @@ void NetHost::run(bool const autorun)
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
 					return;
 				++timeout;
-				if (needip && NetGGZ::ref().ip()) {
-					dl->set_server_ip(NetGGZ::ref().ip());
+				if (needip && InternetGaming::ref().ip()) {
+					dl->set_server_ip(InternetGaming::ref().ip());
 					needip = false;
 				}
 			} else {
@@ -762,11 +761,9 @@ void NetHost::run(bool const autorun)
 			return;
 	}
 
-#if HAVE_GGZ
-	// if this is a ggz game, tell the metaserver that the game started
-	if (use_ggz)
-		NetGGZ::ref().send_game_playing();
-#endif
+	// if this is an internet game, tell the metaserver that the game started
+	if (m_internet)
+		InternetGaming::ref().send_game_playing();
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients.at(i).playernum == UserSettings::notConnected())
@@ -870,11 +867,11 @@ void NetHost::run(bool const autorun)
 			(loaderUI,
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
-#if HAVE_GGZ
-		// if this is a ggz game, tell the metaserver that the game is done.
-		if (use_ggz)
-			NetGGZ::ref().send_game_done();
-#endif
+
+		// if this is an internet game, tell the metaserver that the game is done.
+		if (m_internet)
+			InternetGaming::ref().send_game_done();
+
 		if (m_is_dedicated) {
 			// Statistics: game ended
 			std::vector<std::string> winners;
@@ -2424,11 +2421,9 @@ void NetHost::handle_network ()
 		}
 	}
 
-#if HAVE_GGZ
-	// if this is a ggz game, handle the ggz network
-	if (use_ggz)
-		NetGGZ::ref().data();
-#endif
+	// if this is an internet game, handle the metaserver information
+	if (m_internet)
+		InternetGaming::ref().data();
 
 	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {

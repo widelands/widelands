@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
-#include "ui_fsmenu/netsetup_ggz.h"
+#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
@@ -50,9 +50,9 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map.h"
 #include "map_io/map_loader.h"
+#include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
-#include "network/network_ggz.h"
 #include "profile/profile.h"
 #include "logic/replay.h"
 #include "sound/sound_handler.h"
@@ -363,14 +363,13 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
-#if HAVE_GGZ
-	} else if (m_game_type == GGZ) {
+	} else if (m_game_type == INTERNET) {
 		Widelands::Game game;
 		try {
 			// disable sound completely
 			g_sound_handler.m_nosound = true;
 
-			// setup some ggz details about a dedicated server
+			// setup some details of the dedicated server
 			Section & s = g_options.pull_section("global");
 			char const * const meta   = s.get_string("metaserver", WL_METASERVER);
 			char const * const name   = s.get_string("nickname", "dedicated");
@@ -378,7 +377,7 @@ void WLApplication::run()
 			const bool registered     = s.get_bool("registered", false);
 			char const * const pwd    = s.get_string("password", "");
 			for (;;) { // endless loop
-				if (!NetGGZ::ref().initcore(meta, name, pwd, registered)) {
+				if (!InternetGaming::ref().initcore(meta, name, pwd, registered)) {
 					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
 					return;
 				}
@@ -386,7 +385,7 @@ void WLApplication::run()
 				bool name_valid = false;
 				while (not name_valid) {
 					name_valid = true;
-					std::vector<Net_Game_Info> const & hosts = NetGGZ::ref().tables();
+					std::vector<Net_Game_Info> const & hosts = InternetGaming::ref().tables();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
 						if (hosts[i].hostname == realservername)
 							name_valid = false;
@@ -395,8 +394,9 @@ void WLApplication::run()
 						realservername += "*";
 				}
 
-				NetGGZ::ref().set_local_servername(realservername);
-				NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
+				InternetGaming::ref().set_local_servername(realservername);
+				// TODO implement option to set maxplayers
+				InternetGaming::ref().set_local_maxplayers(7);
 
 				NetHost netgame(name, true);
 
@@ -426,13 +426,12 @@ void WLApplication::run()
 				// -> autostarts when a player sends "/start" as pm to the server.
 				netgame.run(true);
 
-				NetGGZ::ref().deinitcore();
+				InternetGaming::ref().deinitcore();
 			}
 		} catch (...) {
 			emergency_save(game);
 			throw;
 		}
-#endif
 	} else {
 
 		g_sound_handler.start_music("intro");
@@ -1214,7 +1213,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = SCENARIO;
 		m_commandline.erase("scenario");
 	}
-#if HAVE_GGZ
 	if (m_commandline.count("dedicated")) {
 		if (m_game_type != NONE)
 			throw wexception("dedicated can not be combined with other actions");
@@ -1223,10 +1221,9 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 			throw wexception("empty value of commandline parameter --dedicated");
 		if (*m_filename.rbegin() == '/')
 			m_filename.erase(m_filename.size() - 1);
-		m_game_type = GGZ;
+		m_game_type = INTERNET;
 		m_commandline.erase("dedicated");
 	}
-#endif
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
 	if (m_commandline.count("record")) {
@@ -1330,9 +1327,7 @@ void WLApplication::show_usage()
 			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			 "                      map.\n"
 			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
-#if HAVE_GGZ
-		<< _(" --dedicated=FILENAME Starts ggz host with FILENAME as map\n")
-#endif
+		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n")
 		<<
 		_
 			(" --speed_of_new_game  The speed that the new game will run at\n"
@@ -1625,22 +1620,21 @@ void WLApplication::mainmenu_multiplayer()
 	for (;;) { // stay in menu until player clicks "back" button
 		std::string playername;
 
-#if HAVE_GGZ
-		bool ggz = false;
-		NetGGZ::ref().deinitcore(); // cleanup for reconnect to the metaserver
+		bool internet = false;
+		InternetGaming::ref().deinitcore(); // cleanup for reconnect to the metaserver
 		Fullscreen_Menu_MultiPlayer mp;
 		switch (mp.run()) {
 			case Fullscreen_Menu_MultiPlayer::Back:
 				return;
 			case Fullscreen_Menu_MultiPlayer::Metaserver:
-				ggz = true;
+				internet = true;
 				break;
 			case Fullscreen_Menu_MultiPlayer::Lan:
 				break;
 			default:
 				assert(false);
 		}
-		if (ggz) {
+		if (internet) {
 			playername = mp.get_nickname();
 			std::string password(mp.get_password());
 			bool registered = mp.registered();
@@ -1652,23 +1646,23 @@ void WLApplication::mainmenu_multiplayer()
 				s.set_string("password", password);
 
 			// reinitalise in every run, else graphics look strange
-			Fullscreen_Menu_NetSetupGGZ ns
+			Fullscreen_Menu_Internet_Lobby ns
 				(playername.c_str(), password.c_str(), registered);
 			menu_result = ns.run();
 
 			switch (menu_result) {
-				case Fullscreen_Menu_NetSetupGGZ::HOSTGAME: {
+				case Fullscreen_Menu_Internet_Lobby::HOSTGAME: {
 					uint32_t max = static_cast<uint32_t>(ns.get_maxplayers());
-					NetGGZ::ref().set_local_maxplayers(max);
+					InternetGaming::ref().set_local_maxplayers(max);
 					NetHost netgame(playername, true);
 					netgame.run();
-					NetGGZ::ref().deinitcore();
+					InternetGaming::ref().deinitcore();
 					break;
 				}
-				case Fullscreen_Menu_NetSetupGGZ::JOINGAME: {
+				case Fullscreen_Menu_Internet_Lobby::JOINGAME: {
 					uint32_t const secs = time(0);
-					while (!NetGGZ::ref().ip()) {
-						NetGGZ::ref().data();
+					while (!InternetGaming::ref().ip()) {
+						InternetGaming::ref().data();
 						if (10 < time(0) - secs)
 							throw warning
 								(_("Connection timed out"), "%s",
@@ -1679,13 +1673,13 @@ void WLApplication::mainmenu_multiplayer()
 								 	 "your side or on side\n"
 								 	 "of the server.\n"));
 					}
-					std::string ip = NetGGZ::ref().ip();
+					std::string ip = InternetGaming::ref().ip();
 
-					//  convert IPv6 addresses returned by ggzd to IPv4 addresses.
+					//  convert IPv6 addresses returned by the metaserver to IPv4 addresses.
 					//  At the moment SDL_net does not support IPv6 anyways.
 					if (not ip.compare(0, 7, "::ffff:")) {
 						ip = ip.substr(7);
-						log("GGZClient ## cut IPv6 address: %s\n", ip.c_str());
+						log("InternetGaming ## cut IPv6 address: %s\n", ip.c_str());
 					}
 
 					IPaddress peer;
@@ -1703,20 +1697,13 @@ void WLApplication::mainmenu_multiplayer()
 
 					NetClient netgame(&peer, playername, true);
 					netgame.run();
-					NetGGZ::ref().deinitcore();
+					InternetGaming::ref().deinitcore();
 					break;
 				}
 				default:
 					break;
 			}
 		}
-
-#else
-		// If compiled without ggz support, only lan-netsetup will be visible
-		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL || menu_result < 0) {
-			break;
-		}
-#endif // HAVE_GGZ
 
 		else {
 			// reinitalise in every run, else graphics look strange

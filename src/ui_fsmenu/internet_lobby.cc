@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009, 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,20 +17,18 @@
  *
  */
 
-#include "netsetup_ggz.h"
-
-#if HAVE_GGZ
+#include "internet_lobby.h"
 
 #include <boost/bind.hpp>
 
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "network/internet_gaming.h"
 #include "network/network.h"
-#include "network/network_ggz.h"
 #include "profile/profile.h"
 
-Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
+Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	(char const * const nick, char const * const pwd, bool registered)
 :
 	Fullscreen_Menu_Base("internetmenu.jpg"),
@@ -108,7 +106,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		(this,
 		 get_w() * 4 / 125,    get_h() * 51 / 100,
 		 m_lisw, get_h() * 44 / 100,
-		 NetGGZ::ref()),
+		 InternetGaming::ref()),
 
 // Login information
 	nickname(nick),
@@ -117,15 +115,15 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 {
 	joingame.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::clicked_joingame,
+			 (&Fullscreen_Menu_Internet_Lobby::clicked_joingame,
 			  boost::ref(*this)));
 	hostgame.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::clicked_hostgame,
+			 (&Fullscreen_Menu_Internet_Lobby::clicked_hostgame,
 			  boost::ref(*this)));
 	back.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_NetSetupGGZ::end_modal,
+			 (&Fullscreen_Menu_Internet_Lobby::end_modal,
 			  boost::ref(*this), static_cast<int32_t>(CANCEL)));
 
 	back.set_font(font_small());
@@ -144,7 +142,7 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	std::string server = s.get_string("servername", "");
 	servername  .setText (server);
 	servername  .changed.connect
-		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::change_servername, this));
+		(boost::bind(&Fullscreen_Menu_Internet_Lobby::change_servername, this));
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
@@ -156,52 +154,52 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	usersonline.set_column_compare
 		(0,
 		 boost::bind
-		 	(&Fullscreen_Menu_NetSetupGGZ::compare_usertype, this, _1, _2));
+		 	(&Fullscreen_Menu_Internet_Lobby::compare_usertype, this, _1, _2));
 	usersonline .double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::user_doubleclicked, this, _1));
+		(boost::bind(&Fullscreen_Menu_Internet_Lobby::user_doubleclicked, this, _1));
 	opengames   .set_font(m_fn, m_fs);
 	opengames   .selected.connect
-		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::server_selected, this, _1));
+		(boost::bind(&Fullscreen_Menu_Internet_Lobby::server_selected, this, _1));
 	opengames   .double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_NetSetupGGZ::server_doubleclicked, this, _1));
+		(boost::bind(&Fullscreen_Menu_Internet_Lobby::server_doubleclicked, this, _1));
 
 	// try to connect to the metaserver
-	if (!NetGGZ::ref().usedcore())
+	if (!InternetGaming::ref().usedcore())
 		connectToMetaserver();
 }
 
 
 /// think function of the UI (main loop)
-void Fullscreen_Menu_NetSetupGGZ::think ()
+void Fullscreen_Menu_Internet_Lobby::think ()
 {
 	Fullscreen_Menu_Base::think ();
 
 	// If we have no connection try to connect
-	if (!NetGGZ::ref().usedcore()) {
+	if (!InternetGaming::ref().usedcore()) {
 		connectToMetaserver();
 	}
 
 	// Check ggz peers for new data
-	NetGGZ::ref().datacore();
+	InternetGaming::ref().datacore();
 
-	if (NetGGZ::ref().updateForUsers())
-		fillUserList(NetGGZ::ref().users());
+	if (InternetGaming::ref().updateForUsers())
+		fillUserList(InternetGaming::ref().users());
 
-	if (NetGGZ::ref().updateForTables())
-		fillServersList(NetGGZ::ref().tables());
+	if (InternetGaming::ref().updateForTables())
+		fillServersList(InternetGaming::ref().tables());
 }
 
 
 /// connects Widelands with the metaserver
-void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
+void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 {
 	Section & s = g_options.pull_section("global");
 	char const * const metaserver = s.get_string("metaserver", WL_METASERVER);
 
-	if (NetGGZ::ref().initcore(metaserver, nickname, password, reg))
+	if (InternetGaming::ref().initcore(metaserver, nickname, password, reg))
 	{
 		// Update of server spinbox
-		maxplayers.setInterval(1, NetGGZ::ref().max_players());
+		maxplayers.setInterval(1, InternetGaming::ref().max_players());
 
 		// Only one time registration
 	}
@@ -209,7 +207,7 @@ void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 
 
 /// fills the server list
-void Fullscreen_Menu_NetSetupGGZ::fillServersList
+void Fullscreen_Menu_Internet_Lobby::fillServersList
 	(std::vector<Net_Game_Info> const & tables)
 {
 	// List and button cleanup
@@ -257,7 +255,7 @@ static int usertype_sortorder(GGZPlayerType type)
  * \return \c true if the user in row \p rowa should come before the user in
  * row \p rowb when sorted according to usertype
  */
-bool Fullscreen_Menu_NetSetupGGZ::compare_usertype
+bool Fullscreen_Menu_Internet_Lobby::compare_usertype
 	(unsigned int rowa, unsigned int rowb)
 {
 	const Net_Player * playera = usersonline[rowa];
@@ -267,7 +265,7 @@ bool Fullscreen_Menu_NetSetupGGZ::compare_usertype
 }
 
 /// fills the user list
-void Fullscreen_Menu_NetSetupGGZ::fillUserList
+void Fullscreen_Menu_Internet_Lobby::fillUserList
 	(std::vector<Net_Player> const & users)
 {
 	usersonline.clear();
@@ -309,7 +307,7 @@ void Fullscreen_Menu_NetSetupGGZ::fillUserList
 
 
 /// called when an entry of the user list was doubleclicked
-void Fullscreen_Menu_NetSetupGGZ::user_doubleclicked (uint32_t i)
+void Fullscreen_Menu_Internet_Lobby::user_doubleclicked (uint32_t i)
 {
 	// add a @username to the current edit text.
 	if (usersonline.has_selection()) {
@@ -335,7 +333,7 @@ void Fullscreen_Menu_NetSetupGGZ::user_doubleclicked (uint32_t i)
 
 
 /// called when an entry of the server list was selected
-void Fullscreen_Menu_NetSetupGGZ::server_selected (uint32_t)
+void Fullscreen_Menu_Internet_Lobby::server_selected (uint32_t)
 {
 	if (opengames.has_selection()) {
 		const Net_Open_Game * game = &opengames.get_selected();
@@ -348,7 +346,7 @@ void Fullscreen_Menu_NetSetupGGZ::server_selected (uint32_t)
 
 
 /// called when an entry of the server list was doubleclicked
-void Fullscreen_Menu_NetSetupGGZ::server_doubleclicked (uint32_t)
+void Fullscreen_Menu_Internet_Lobby::server_doubleclicked (uint32_t)
 {
 	// if the game is open try to connect it, if not do nothing.
 	if (opengames.has_selection()) {
@@ -360,14 +358,14 @@ void Fullscreen_Menu_NetSetupGGZ::server_doubleclicked (uint32_t)
 
 
 /// called when the servername was changed
-void Fullscreen_Menu_NetSetupGGZ::change_servername()
+void Fullscreen_Menu_Internet_Lobby::change_servername()
 {
 	// Allow user to enter a servername manually
 	hostgame.set_enabled(true);
 
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
-	std::vector<Net_Game_Info> const & tables = NetGGZ::ref().tables();
+	std::vector<Net_Game_Info> const & tables = InternetGaming::ref().tables();
 	for (uint32_t i = 0; i < tables.size(); ++i) {
 		if (tables[i].hostname == servername.text())
 			hostgame.set_enabled(false);
@@ -376,10 +374,10 @@ void Fullscreen_Menu_NetSetupGGZ::change_servername()
 
 
 /// called when the 'join game' button was clicked
-void Fullscreen_Menu_NetSetupGGZ::clicked_joingame()
+void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 {
 	if (opengames.has_selection()) {
-		NetGGZ::ref().join(opengames.get_selected().info.hostname);
+		InternetGaming::ref().join(opengames.get_selected().info.hostname);
 		end_modal(JOINGAME);
 	} else
 		throw wexception("No server selected! That should not happen!");
@@ -387,12 +385,10 @@ void Fullscreen_Menu_NetSetupGGZ::clicked_joingame()
 
 
 /// called when the 'host game' button was clicked
-void Fullscreen_Menu_NetSetupGGZ::clicked_hostgame()
+void Fullscreen_Menu_Internet_Lobby::clicked_hostgame()
 {
 	// Save selected servername as default for next time.
 	g_options.pull_section("global").set_string("servername", servername.text());
-	NetGGZ::ref().set_local_servername(servername.text());
+	InternetGaming::ref().set_local_servername(servername.text());
 	end_modal(HOSTGAME);
 }
-
-#endif // if HAVE_GGZ

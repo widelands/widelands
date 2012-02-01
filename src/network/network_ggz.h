@@ -23,64 +23,11 @@
 #ifdef USE_GGZ
 #define HAVE_GGZ 1
 
-#define WL_METASERVER "widelands.org"
-#define WL_METASERVER_PORT 5688
-
 #define ERRMSG "</p><p font-size=14 font-color=#ff6633 font-weight=bold>ERROR: "
 
-#include "build_info.h"
-#include "chat.h"
-#include "network_lan_promotion.h"
+#include "internet_gaming.h"
 
-#include <ggzmod.h>
-#include <ggzcore.h>
-#include <stdint.h>
-#include <string>
-#include <vector>
 
-#ifdef WIN32
-#include <winsock2.h>
-#include <io.h>
-#endif
-
-/// A simply network player struct
-struct Net_Player {
-	std::string   table;
-	std::string   name;
-	GGZPlayerType type;
-	char          stats[16];
-};
-
-/// A MOTD struct for easier output to the chat panel
-struct MOTD {
-	std::string formationstr;
-	std::vector<std::string> motd;
-
-	MOTD() {}
-	MOTD(std::string msg) {
-		// if msg is empty -> return
-		if (msg.size() < 1)
-			return;
-
-		// first char is always \n - so we remove it
-		msg = msg.substr(1);
-		std::string::size_type j = msg.find('\n');
-
-		// split the message parts to have good looking texts
-		for (int32_t i = 0; msg.size(); ++i) {
-			if (j == std::string::npos) {
-				motd.push_back(msg);
-				break;
-			}
-			if (i == 0 && msg.size() and *msg.begin() == '<')
-				formationstr = msg.substr(0, j);
-			else
-				motd.push_back(msg.substr(0, j));
-			msg = msg.substr(j + 1);
-			j = msg.find('\n');
-		}
-	}
-};
 
 /**
  * The GGZ implementation
@@ -88,7 +35,7 @@ struct MOTD {
  * It is handling all communication between the Widelands client/server and the
  * metaserver, including metaserver lobbychat.
  */
-struct NetGGZ : public ChatProvider {
+struct NetGGZ : public InternetGaming {
 	static NetGGZ & ref();
 
 	void init();
@@ -133,21 +80,7 @@ struct NetGGZ : public ChatProvider {
 	void send_game_done();
 	void join(char const * tablename);
 
-	// functions for local server setup
 	uint32_t max_players();
-	/// sets the maximum number of players that may be in the game
-	void set_local_maxplayers(uint32_t mp) {
-		tableseats = mp;
-	}
-	/// sets the servername shown in the games list
-	void set_local_servername(std::string const & name) {
-		servername  = name.empty() ? "WL-Default" : name;
-		servername += " (";
-		servername += build_id();
-		servername += ')';
-	}
-
-	std::string & get_local_servername() {return servername;}
 
 	// ChatProvider: sends a message via GGZnetwork.
 	void send(std::string const &);
@@ -201,18 +134,9 @@ private:
 	bool relogin;
 	GGZRoom * room;
 
-	std::string username;
-	std::string servername;
-	uint32_t tableseats;
-
 	bool userupdate;
 	bool tableupdate;
-	std::vector<Net_Game_Info> tablelist;
-	std::vector<Net_Player>    userlist;
-	MOTD motd;
 
-	// The chat messages
-	std::vector<ChatMessage> messages;
 };
 
 #endif

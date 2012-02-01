@@ -44,10 +44,8 @@ NetGGZ::NetGGZ() :
 	server_ip_addr(0),
 	logged_in     (false),
 	relogin       (false),
-	tableseats    (1),
 	userupdate    (false),
-	tableupdate   (false),
-	motd          ()
+	tableupdate   (false)
 {
 }
 
@@ -826,19 +824,6 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 			 static_cast<const char *>(cbdata));
 		break;
 	}
-}
-
-
-/// \returns the tables in the room
-std::vector<Net_Game_Info> const & NetGGZ::tables()
-{
-	return tablelist;
-}
-
-/// \returns the players in the room
-std::vector<Net_Player>   const & NetGGZ::users()
-{
-	return userlist;
 }
 
 

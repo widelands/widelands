@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ struct Client;
  * launch, as well as dealing with the actual network protocol.
  */
 struct NetHost : public GameController, private SyncCallback {
-	NetHost (std::string const & playername, bool ggz = false);
+	NetHost (std::string const & playername, bool internet = false);
 	virtual ~NetHost ();
 
 	void run(bool autostart = false);
@@ -157,7 +157,7 @@ private:
 	void reaper();
 
 	NetHostImpl * d;
-	bool use_ggz;
+	bool m_internet;
 	bool m_is_dedicated;
 	std::string m_password;
 	std::string m_dedicated_motd;

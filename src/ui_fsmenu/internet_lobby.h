@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009, 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,10 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_NETSETUP_GGZ_H
-#define FULLSCREEN_MENU_NETSETUP_GGZ_H
+#ifndef FULLSCREEN_MENU_INTERNET_LOBBY_H
+#define FULLSCREEN_MENU_INTERNET_LOBBY_H
 
-#include "network/network_ggz.h"
-
-#if HAVE_GGZ
-
+#include "network/internet_gaming.h"
 #include "network/network_lan_promotion.h"
 
 #include "base.h"
@@ -42,14 +39,14 @@
 struct Net_Open_Game;
 struct Net_Game_info;
 
-struct Fullscreen_Menu_NetSetupGGZ : public Fullscreen_Menu_Base {
+struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
 	enum {
 		CANCEL = 0,
 		HOSTGAME,
 		JOINGAME
 	};
 
-	Fullscreen_Menu_NetSetupGGZ (const char *, const char *, bool);
+	Fullscreen_Menu_Internet_Lobby (const char *, const char *, bool);
 
 	virtual void think();
 
@@ -96,7 +93,5 @@ private:
 
 	bool compare_usertype(unsigned int rowa, unsigned int rowb);
 };
-
-#endif // if HAVE_GGZ
 
 #endif
