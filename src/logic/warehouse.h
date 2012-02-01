@@ -126,6 +126,8 @@ public:
 
 	virtual void cleanup(Editor_Game_Base &);
 
+	virtual void destroy(Editor_Game_Base &);
+
 	virtual void act(Game & game, uint32_t data);
 
 	virtual void set_economy(Economy *);
