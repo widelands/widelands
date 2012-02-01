@@ -891,7 +891,7 @@ void NetGGZ::write_userlist()
 		Net_Player user;
 		user.name = ggzcore_player_get_name(player);
 		GGZTable * tab = ggzcore_player_get_table(player);
-		user.table = tab ? ggzcore_table_get_desc(tab) : "--";
+		user.game = tab ? ggzcore_table_get_desc(tab) : "--";
 
 		// TODO unfinished work down here!
 		// TODO something in ggzd does not work as it should!
@@ -919,7 +919,11 @@ void NetGGZ::write_userlist()
 			dedicatedlog(user.stats);
 		} else*/
 		snprintf(user.stats, sizeof(user.stats), "%i", 0);
-		user.type = ggzcore_player_get_type(player);
+		GGZPlayerType type = ggzcore_player_get_type(player);
+		user.type =
+			((type == GGZ_PLAYER_BOT) ? INTERNET_CLIENT_BOT :
+			 (type == GGZ_PLAYER_ADMIN || type == GGZ_PLAYER_HOST) ? INTERNET_CLIENT_SUPERUSER :
+			 (type == GGZ_PLAYER_NORMAL) ? INTERNET_CLIENT_REGISTERED : INTERNET_CLIENT_UNREGISTERED);
 		userlist.push_back(user);
 	}
 	userupdate = true;

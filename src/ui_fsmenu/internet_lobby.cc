@@ -152,9 +152,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	usersonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Server"));
 	usersonline.set_column_compare
-		(0,
-		 boost::bind
-		 	(&Fullscreen_Menu_Internet_Lobby::compare_usertype, this, _1, _2));
+		(0, boost::bind(&Fullscreen_Menu_Internet_Lobby::compare_usertype, this, _1, _2));
 	usersonline .double_clicked.connect
 		(boost::bind(&Fullscreen_Menu_Internet_Lobby::user_doubleclicked, this, _1));
 	opengames   .set_font(m_fn, m_fs);
@@ -179,7 +177,7 @@ void Fullscreen_Menu_Internet_Lobby::think ()
 		connectToMetaserver();
 	}
 
-	// Check ggz peers for new data
+	// Check whether metaserver send some data
 	InternetGaming::ref().datacore();
 
 	if (InternetGaming::ref().updateForUsers())
@@ -239,64 +237,44 @@ void Fullscreen_Menu_Internet_Lobby::fillServersList
 	}
 }
 
-static int usertype_sortorder(GGZPlayerType type)
-{
-	switch (type) {
-	case GGZ_PLAYER_BOT: return 0;
-	case GGZ_PLAYER_ADMIN: return 1;
-	case GGZ_PLAYER_HOST: return 2;
-	case GGZ_PLAYER_NORMAL: return 3;
-	case GGZ_PLAYER_GUEST: return 4;
-	default: return 5;
-	}
-}
 
 /**
  * \return \c true if the user in row \p rowa should come before the user in
  * row \p rowb when sorted according to usertype
  */
-bool Fullscreen_Menu_Internet_Lobby::compare_usertype
-	(unsigned int rowa, unsigned int rowb)
+bool Fullscreen_Menu_Internet_Lobby::compare_usertype(unsigned int rowa, unsigned int rowb)
 {
 	const Net_Player * playera = usersonline[rowa];
 	const Net_Player * playerb = usersonline[rowb];
 
-	return usertype_sortorder(playera->type) < usertype_sortorder(playerb->type);
+	return playera->type < playerb->type;
 }
 
 /// fills the user list
-void Fullscreen_Menu_Internet_Lobby::fillUserList
-	(std::vector<Net_Player> const & users)
+void Fullscreen_Menu_Internet_Lobby::fillUserList(std::vector<Net_Player> const & users)
 {
 	usersonline.clear();
 	for (uint32_t i = 0; i < users.size(); ++i) {
 		const Net_Player & user(users[i]);
-		UI::Table<const Net_Player * const>::Entry_Record & er =
-			usersonline.add(&user);
+		UI::Table<const Net_Player * const>::Entry_Record & er = usersonline.add(&user);
 		er.set_string(1, user.name);
 		er.set_string(2, user.stats);
-		er.set_string(3, user.table);
+		er.set_string(3, user.game);
 
 		PictureID pic;
 		switch (user.type) {
-			// NOTE the chars in set_picture() are only there to make list sortable
-			case GGZ_PLAYER_GUEST:
+			case INTERNET_CLIENT_UNREGISTERED:
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_red.png");
 				er.set_picture(0, pic);
 				break;
-			case GGZ_PLAYER_NORMAL:
+			case INTERNET_CLIENT_REGISTERED:
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_yellow.png");
 				er.set_picture(0, pic);
 				break;
-			case GGZ_PLAYER_ADMIN:
-			case GGZ_PLAYER_HOST:
-			case GGZ_PLAYER_BOT:
+			case INTERNET_CLIENT_SUPERUSER:
+			case INTERNET_CLIENT_BOT:
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
-				er.set_picture(0, pic);
-				break;
-			case GGZ_PLAYER_UNKNOWN:
-				pic = g_gr->get_picture(PicMod_UI, "pics/low_priority_button.png");
 				er.set_picture(0, pic);
 				break;
 			default:
@@ -311,8 +289,7 @@ void Fullscreen_Menu_Internet_Lobby::user_doubleclicked (uint32_t i)
 {
 	// add a @username to the current edit text.
 	if (usersonline.has_selection()) {
-		UI::Table<const Net_Player * const>::Entry_Record & er
-			= usersonline.get_record(i);
+		UI::Table<const Net_Player * const>::Entry_Record & er = usersonline.get_record(i);
 
 		std::string temp("@");
 		temp += er.get_string(1);

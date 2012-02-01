@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct NetClient :
 	private SyncCallback,
 	public  ChatProvider
 {
-	NetClient (IPaddress *, std::string const & playername, bool ggz = false);
+	NetClient (IPaddress *, std::string const & playername, bool internet = false);
 	virtual ~NetClient ();
 
 	void run();
@@ -112,7 +112,7 @@ private:
 		 bool sendreason = true, bool showmsg = true);
 
 	NetClientImpl * d;
-	bool use_ggz;
+	bool m_internet;
 	bool m_dedicated_access;
 	bool m_dedicated_temp_scenario;
 };

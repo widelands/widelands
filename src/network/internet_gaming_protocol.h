@@ -79,9 +79,10 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /// Client rights
 enum {
-	UNREGISTERED = 0,
-	REGISTERED   = 1,
-	SUPERUSER    = 2
+	INTERNET_CLIENT_UNREGISTERED = 0,
+	INTERNET_CLIENT_REGISTERED   = 1,
+	INTERNET_CLIENT_SUPERUSER    = 2,
+	INTERNET_CLIENT_BOT          = 3
 };
 
 

@@ -22,6 +22,7 @@
 
 #include "build_info.h"
 #include "chat.h"
+#include "internet_gaming_protocol.h"
 #include "network_lan_promotion.h"
 
 #include <ggzmod.h>
@@ -42,9 +43,9 @@
 
 /// A simply network player struct
 struct Net_Player {
-	std::string   table;
+	std::string   game;
 	std::string   name;
-	GGZPlayerType type;
+	uint32_t      type;
 	char          stats[16];
 };
 

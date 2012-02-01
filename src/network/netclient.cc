@@ -22,6 +22,7 @@
 #include "build_info.h"
 #include "game_io/game_loader.h"
 #include "i18n.h"
+#include "internet_gaming.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -91,8 +92,8 @@ struct NetClientImpl {
 };
 
 NetClient::NetClient
-	(IPaddress * const svaddr, std::string const & playername, bool ggz)
-: d(new NetClientImpl), use_ggz(ggz), m_dedicated_access(false), m_dedicated_temp_scenario(false)
+	(IPaddress * const svaddr, std::string const & playername, bool internet)
+: d(new NetClientImpl), m_internet(internet), m_dedicated_access(false), m_dedicated_temp_scenario(false)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == 0)
@@ -995,11 +996,9 @@ void NetClient::handle_packet(RecvPacket & packet)
  */
 void NetClient::handle_network ()
 {
-#if HAVE_GGZ
-	// if this is a ggz game, handle the ggz network
-	if (use_ggz)
-		NetGGZ::ref().data();
-#endif
+	// if this is an internet game, handle the metaserver network
+	if (m_internet)
+		InternetGaming::ref().data();
 	try {
 		while (d->sock != 0 && SDLNet_CheckSockets(d->sockset, 0) > 0) {
 			// Perform only one read operation, then process all packets

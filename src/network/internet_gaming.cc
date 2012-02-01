@@ -19,7 +19,6 @@
 
 
 #include "internet_gaming.h"
-#include "internet_gaming_protocol.h"
 #include "network_ggz.h"
 
 InternetGaming & InternetGaming::ref() {
