@@ -110,7 +110,7 @@ enum {
  * Bidirectional command: Terminate the connection with a given reason.
  *
  * Payload is:
- * \li String: reason for disconnect in plain text. (FIXME see list for discussion above)
+ * \li String: reason for disconnect in message code (see internet_gaming_messages.h)
  *
  * Both metaserver and client can send this command, followed by immediately
  * closing the connection. The receiver of this command should just close the connection.
@@ -178,7 +178,7 @@ static const std::string IGPCMD_RELOGIN = "RELOGIN";
 /**
  * If the metaserver does not accept the login for a certain reason (password wrong, user blocked?,
  * whatever...) it replies with a REJECTED command with the following payload:
- * \li String:    Reason why the client was rejected in plain text. (FIXME see list for discussion above)
+ * \li String:    Reason why the client was rejected as message code
  */
 static const std::string IGPCMD_REJECTED = "REJECTED";
 
