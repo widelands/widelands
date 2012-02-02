@@ -20,30 +20,15 @@
 #ifndef INTERNET_GAMING_MESSAGES_H
 #define INTERNET_GAMING_MESSAGES_H
 
-#include "i18n.h"
-
 #include <string>
 #include <map>
 
 struct InternetGamingMessages {
 public:
-	static const std::string & get_message(const std::string & code) {
-		if(messages.find(code) != messages.end())
-			return messages[code];
-		// if no message for code was found, just return code
-		return code;
-	}
+	// Before calling this function the first time, keep in mind to first fill_map()
+	static const std::string & get_message(const std::string & code);
 
-	static void fill_map() {
-		messages["WRONG_PASSWORD"]       = _("The send password was incorrect!");
-		messages["ALREADY_LOGGED_IN"]    = _("You are already logged in!");
-		messages["DEFICIENT_PERMISSION"] =
-			_
-			 ("You got disconnected, as you send a superuser command without superuser permission."
-			  "This incident will be logged and reported to the administrator.");
-		messages["RESTARTING"]           = _("You got disconnected, as the metaserver is currently restarting");
-	}
+	static void fill_map();
+};
 
-private:
-	static std::map <std::string, std::string> messages;
-}
+#endif

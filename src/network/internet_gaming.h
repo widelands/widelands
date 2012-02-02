@@ -53,8 +53,11 @@ struct Net_Client {
  * The InternetGaming struct.
  */
 struct InternetGaming : public ChatProvider {
+	/// The only instance of InternetGaming -> the constructor is private by purpose!
 	static InternetGaming & ref();
 
+	// Login and logout
+	//virtual void login() = 0;
 	virtual void init() = 0;
 	virtual bool connect() = 0;
 
@@ -107,7 +110,7 @@ struct InternetGaming : public ChatProvider {
 	std::string & get_local_servername() {return servername;}
 	std::string & get_local_clientname() {return clientname;}
 
-	// ChatProvider: sends a message via GGZnetwork.
+	// ChatProvider: sends a message via the metaserver.
 	virtual void send(std::string const &) = 0;
 
 	// ChatProvider: adds the message to the message list and calls parent.

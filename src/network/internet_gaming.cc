@@ -19,6 +19,7 @@
 
 
 #include "internet_gaming.h"
+#include "internet_gaming_messages.h"
 #include "network_ggz.h"
 
 InternetGaming & InternetGaming::ref() {
@@ -27,7 +28,10 @@ InternetGaming & InternetGaming::ref() {
 
 InternetGaming::InternetGaming() :
 	maxclients    (1)
-{}
+{
+	// Fill the list of possible messages from the server
+	InternetGamingMessages::fill_map();
+}
 
 /// \returns the tables in the room
 std::vector<Net_Game_Info> const & InternetGaming::games() {
