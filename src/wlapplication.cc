@@ -370,13 +370,13 @@ void WLApplication::run()
 			g_sound_handler.m_nosound = true;
 
 			// setup some details of the dedicated server
-			Section & s = g_options.pull_section("global");
-			char const * const meta   = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-			uint32_t           port   = s.get_natural("port", INTERNET_GAMING_PORT);
-			char const * const name   = s.get_string("nickname", "dedicated");
-			char const * const server = s.get_string("servername", name);
-			const bool registered     = s.get_bool("registered", false);
-			char const * const pwd    = s.get_string("password", "");
+			Section & s = g_options.pull_section      ("global");
+			std::string const & meta   = s.get_string ("metaserver", INTERNET_GAMING_METASERVER.c_str());
+			uint32_t            port   = s.get_natural("port",       INTERNET_GAMING_PORT);
+			std::string const & name   = s.get_string ("nickname",   "dedicated");
+			std::string const & server = s.get_string ("servername", name.c_str());
+			const bool registered      = s.get_bool   ("registered", false);
+			std::string const & pwd    = s.get_string ("password",   "");
 			for (;;) { // endless loop
 				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
 					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));

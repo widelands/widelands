@@ -105,14 +105,14 @@ struct NetGGZ : public InternetGaming {
 		op_unreachable = 99 // the metaserver says we are unreachable
 	};
 
-	bool login(const char *, const char *, bool, const char *, uint32_t);
+	bool login(std::string const &, std::string const &, bool, std::string const &, uint32_t);
 	void logout();
-	bool usedcore();
+	bool logged_in();
 	void datacore();
-	void launch  ();
-	void send_game_playing();
-	void send_game_done();
-	void join(char const * tablename);
+	void open_game();
+	void set_game_playing();
+	void set_game_done();
+	void join_game(std::string const & gamename);
 
 	uint32_t max_players();
 
@@ -137,6 +137,8 @@ struct NetGGZ : public InternetGaming {
 	void formatedGGZChat
 		(std::string const &, std::string const &,
 		 bool system = false, std::string recipient = std::string());
+
+	uint32_t max_clients();
 
 private:
 	NetGGZ();
@@ -164,7 +166,7 @@ private:
 	char    * server_ip_addr;
 	bool ggzcore_login;
 	bool ggzcore_ready;
-	bool logged_in;
+	bool m_logged_in;
 	bool relogin;
 	GGZRoom * room;
 

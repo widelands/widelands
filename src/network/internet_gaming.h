@@ -54,53 +54,54 @@ struct InternetGaming : public ChatProvider {
 
 	// Login and logout
 	virtual bool login
-		(char const * const nick, char const * const pwd, bool registered,
-		 char const * const metaserver, uint32_t port) = 0;
-	virtual void logout() = 0;
+		(std::string const & nick, std::string const & pwd, bool registered,
+		 std::string const & metaserver, uint32_t port)   = 0;
+	virtual void logout()                                = 0;
+	virtual bool logged_in()                             = 0;
 
 
 
 
 
 	virtual void data() = 0;
-	virtual char const * ip() = 0;
-
-
-	virtual bool usedcore() = 0;
 	virtual void datacore() = 0;
-	virtual void launch  () = 0;
-	virtual void send_game_playing() = 0;
-	virtual void send_game_done() = 0;
-	virtual void join(char const * gamename) = 0;
 
 
 
 
+	// Game specific functions
+	virtual char const * ip()                            = 0;
+	virtual void join_game(std::string const & gamename) = 0;
+	virtual void open_game()                             = 0;
+	virtual void set_game_playing()                      = 0;
+	virtual void set_game_done()                         = 0;
 
 
-	// Informative functions
-	virtual bool updateForGames() = 0;
+	// Informative functions for lobby
+	virtual bool updateForGames()                        = 0;
 	std::vector<Net_Game_Info> const & games();
-	virtual bool updateForClients() = 0;
+	virtual bool updateForClients()                      = 0;
 	std::vector<Net_Client>    const & clients();
 
 	/// \returns the maximum allowed number of clients in a game (players + spectators)
 	virtual uint32_t max_clients() {return INTERNET_GAMING_MAX_CLIENTS_PER_GAME;}
 
 	/// sets the maximum number of players that may be in the game
-	void set_local_maxplayers(uint32_t mp) {maxclients = mp;}
+	void set_local_maxplayers(uint32_t mp) {m_maxclients = mp;}
 
 	/// sets the name of the local server as shown in the games list
-	void set_local_servername(std::string const & name) {servername  = name.empty() ? "WL-Default" : name;}
+	void set_local_servername(std::string const & name) {m_gamename = name;}
+
 
 	/// \returns the name of the local server
-	std::string & get_local_servername() {return servername;}
+	std::string & get_local_servername() {return m_gamename;}
 
 	/// \returns the name of the local client
-	std::string & get_local_clientname() {return clientname;}
+	std::string & get_local_clientname() {return m_clientname;}
+
 
 	// ChatProvider: sends a message via the metaserver.
-	virtual void send(std::string const &) = 0;
+	virtual void send(std::string const &)               = 0;
 
 	/// ChatProvider: adds the message to the message list and calls parent.
 	void receive(ChatMessage const & msg) {messages.push_back(msg); ChatProvider::send(msg);}
@@ -112,11 +113,11 @@ protected:
 	InternetGaming();
 
 	// client informations
-	std::string clientname;
+	std::string m_clientname;
 
 	// informations of clients game
-	std::string servername;
-	uint32_t maxclients;
+	std::string m_gamename;
+	uint32_t    m_maxclients;
 
 	// Server informations
 	std::vector<Net_Game_Info> gamelist;

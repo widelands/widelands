@@ -589,7 +589,7 @@ NetHost::NetHost (std::string const & playername, bool internet)
 	dedicatedlog("[Host] starting up.\n");
 
 	if (internet) {
-		InternetGaming::ref().launch();
+		InternetGaming::ref().open_game();
 	}
 
 	d->localplayername = playername;
@@ -763,7 +763,7 @@ void NetHost::run(bool const autorun)
 
 	// if this is an internet game, tell the metaserver that the game started
 	if (m_internet)
-		InternetGaming::ref().send_game_playing();
+		InternetGaming::ref().set_game_playing();
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients.at(i).playernum == UserSettings::notConnected())
@@ -870,7 +870,7 @@ void NetHost::run(bool const autorun)
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (m_internet)
-			InternetGaming::ref().send_game_done();
+			InternetGaming::ref().set_game_done();
 
 		if (m_is_dedicated) {
 			// Statistics: game ended

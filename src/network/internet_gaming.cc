@@ -34,7 +34,7 @@ InternetGaming & InternetGaming::ref() {
 }
 
 InternetGaming::InternetGaming() :
-	maxclients    (1)
+	m_maxclients    (1)
 {
 	// Fill the list of possible messages from the server
 	InternetGamingMessages::fill_map();
@@ -51,6 +51,32 @@ std::vector<Net_Client>    const & InternetGaming::clients() {
 }
 
 #if 0 // to be implemented
+/// \returns whether the client is logged in
+bool InternetGaming::logged_in() {}
+
+/// \returns the ip of the game the client is on or wants to join (or the client is hosting)
+///          or 0, if no ip available.
+char const * InternetGaming::ip() {}
+
+/// called by a client to join the game \arg gamename
+void InternetGaming::join_game(std::string gamename) {}
+
+/// called by a client to open a new game with name \arg gamename
+void InternetGaming::open_game() {}
+
+/// called by a client that is host of a game to inform the metaserver, that the game started
+void InternetGaming::set_game_playing() {}
+
+/// called by a client that is host of a game to inform the metaserver, that the game was ended.
+void InternetGaming::set_game_done() {}
+
+/// \returns whether the local gamelist was updated
+bool InternetGaming::updateForGames() {return false;}
+
+/// \returns whether the local clientlist was updated
+bool InternetGaming::updateForClients() {return false;}
+
 /// ChatProvider: sends a message via the metaserver.
-void InternetGaming::send(std::string const & msg) {};
+void InternetGaming::send(std::string const & msg) {}
+
 #endif

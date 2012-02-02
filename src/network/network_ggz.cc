@@ -42,7 +42,7 @@ NetGGZ::NetGGZ() :
 	channelfd     (-1),
 	gamefd        (-1),
 	server_ip_addr(0),
-	logged_in     (false),
+	m_logged_in     (false),
 	relogin       (false),
 	clientupdate  (false),
 	tableupdate   (false),
@@ -115,13 +115,13 @@ bool NetGGZ::connect()
 		// make sure all incoming data is processed before continuing
 		while (data_is_pending(ggzmod_get_fd(mod)))
 			if (ggzmod_dispatch(mod) < 0) break;
-		if (usedcore())
+		if (logged_in())
 			datacore();
 	}
 
 	// Hosting a ggz game on windows requires more processing.
 	ggzmod_dispatch(mod);
-	if (usedcore())
+	if (logged_in())
 		datacore();
 
 	return true;
@@ -155,12 +155,12 @@ char const * NetGGZ::ip()
 
 /// initializes the local ggz core
 bool NetGGZ::login
-		(char const * const nick, char const * const pwd, bool registered,
-		 char const * const metaserver, uint32_t)
+		(std::string const & nick, std::string const & pwd, bool registered,
+		 std::string const & metaserver, uint32_t)
 {
 	GGZOptions opt;
 
-	if (usedcore())
+	if (logged_in())
 		return false;
 
 	dedicatedlog("GGZCORE ## initialization\n");
@@ -222,18 +222,18 @@ bool NetGGZ::login
 	ggzcore_server_add_event_hook
 		(ggzserver, GGZ_MOTD_LOADED, &NetGGZ::callback_server);
 #if GGZCORE_VERSION_MINOR == 0
-	ggzcore_server_set_hostinfo(ggzserver, metaserver, WL_METASERVER_PORT, 0);
+	ggzcore_server_set_hostinfo(ggzserver, metaserver.c_str(), WL_METASERVER_PORT, 0);
 #else
 	ggzcore_server_set_hostinfo
-		(ggzserver, metaserver, WL_METASERVER_PORT, GGZ_CONNECTION_CLEAR);
+		(ggzserver, metaserver.c_str(), WL_METASERVER_PORT, GGZ_CONNECTION_CLEAR);
 #endif
 
 	// Login to registered account:
 	if (registered)
-		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, nick, pwd, 0);
+		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, nick.c_str(), pwd.c_str(), 0);
 	// Login anonymously:
 	else
-		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick, 0, 0);
+		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick.c_str(), 0, 0);
 
 	ggzcore_server_connect(ggzserver);
 
@@ -242,15 +242,15 @@ bool NetGGZ::login
 		datacore();
 	dedicatedlog("GGZCORE ## end loop\n");
 
-	clientname = nick;
-	return logged_in;
+	m_clientname = nick;
+	return m_logged_in;
 }
 
 
 /// shuts down the local ggz core, if active
 void NetGGZ::logout()
 {
-	if (!usedcore())
+	if (!logged_in())
 		return;
 	formatedGGZChat(_("Closed the connection to the metaserver."), "", true);
 	formatedGGZChat("*** *** ***", "", true);
@@ -262,7 +262,7 @@ void NetGGZ::logout()
 	ggzcore_server_logout(ggzserver);
 	ggzcore_server_disconnect(ggzserver);
 	ggzcore_server_free(ggzserver);
-	logged_in = false;
+	m_logged_in = false;
 	ggzserver = 0;
 	ggzcore_destroy();
 	ggzcore_ready = false;
@@ -273,7 +273,7 @@ void NetGGZ::logout()
 
 
 /// \returns true, if the local ggzserver core is initialized
-bool NetGGZ::usedcore()
+bool NetGGZ::logged_in()
 {
 	return ggzserver;
 }
@@ -509,7 +509,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		break;
 	case GGZ_LOGGED_IN:
 		dedicatedlog("GGZCORE ## -- logged in\n");
-		logged_in = true;
+		m_logged_in = true;
 		ggzcore_server_list_gametypes(ggzserver, 0);
 #if GGZCORE_VERSION_MINOR == 0
 		ggzcore_server_list_rooms(ggzserver, -1, 1);
@@ -756,8 +756,8 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 		if (tableid == -1) {
 			GGZTable    * const table    = ggzcore_table_new        ();
 			GGZGameType * const gametype = ggzcore_room_get_gametype(room);
-			ggzcore_table_init(table, gametype, servername.c_str(), maxclients);
-			for (uint32_t i = 0; i < maxclients; ++i)
+			ggzcore_table_init(table, gametype, m_gamename.c_str(), m_maxclients);
+			for (uint32_t i = 0; i < m_maxclients; ++i)
 				ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, 0);
 			ggzcore_room_launch_table(room, table);
 			ggzcore_table_free(table);
@@ -913,7 +913,7 @@ void NetGGZ::write_clientlist()
 
 /// Called by the client, to join an existing table (game) and to add all
 /// hooks to get informed about all important events
-void NetGGZ::join(char const * const tablename)
+void NetGGZ::join_game(std::string const & gamename)
 {
 	if (!ggzcore_ready)
 		return;
@@ -933,17 +933,17 @@ void NetGGZ::join(char const * const tablename)
 		char const * desc = ggzcore_table_get_desc(table);
 		if (!desc)
 			desc = "Unnamed server";
-		if (!strcmp(desc, tablename))
+		if (!strcmp(desc, gamename.c_str()))
 			tableid = ggzcore_table_get_id(table);
 	}
 
 	if (tableid == -1) {
 		logout();
 		throw wexception
-			("Selected table \"%s\" could not be found\n", tablename);
+			("Selected table \"%s\" could not be found\n", gamename.c_str());
 	}
 
-	dedicatedlog("GGZCORE ## Joining Server \"%s\"\n", tablename);
+	dedicatedlog("GGZCORE ## Joining Server \"%s\"\n", gamename.c_str());
 
 	GGZGame * const game = ggzcore_game_new();
 	ggzcore_game_init(game, ggzserver, 0);
@@ -963,7 +963,7 @@ void NetGGZ::join(char const * const tablename)
 
 /// Called by the host, to launch a new table (game) and to add all
 /// hooks to get informed about all important events
-void NetGGZ::launch()
+void NetGGZ::open_game()
 {
 	if (!ggzcore_ready)
 		return;
@@ -989,7 +989,7 @@ void NetGGZ::launch()
 
 
 /// \returns the maximum number of seats in a widelands table (game)
-uint32_t NetGGZ::max_players()
+uint32_t NetGGZ::max_clients()
 {
 	if (!ggzserver)
 		return 1;
@@ -1009,7 +1009,7 @@ uint32_t NetGGZ::max_players()
 
 
 /// Tells the metaserver that the game started
-void NetGGZ::send_game_playing()
+void NetGGZ::set_game_playing()
 {
 	if (used()) {
 		if (ggz_write_int(m_fd, op_state_playing) < 0)
@@ -1020,7 +1020,7 @@ void NetGGZ::send_game_playing()
 
 
 /// Tells the metaserver that the game is done
-void NetGGZ::send_game_done()
+void NetGGZ::set_game_done()
 {
 	if (used()) {
 		if (ggz_write_int(m_fd, op_state_done) < 0)
@@ -1033,7 +1033,7 @@ void NetGGZ::send_game_done()
 /// Sends a chat message via ggz room chat
 void NetGGZ::send(std::string const & msg)
 {
-	if (!usedcore() or !logged_in)
+	if (!logged_in() or !m_logged_in)
 		return;
 	int16_t sent;
 	if (msg.size() && *msg.begin() == '@') {
@@ -1045,7 +1045,7 @@ void NetGGZ::send(std::string const & msg)
 		std::string const pm = msg.substr(space + 1);
 		sent = ggzcore_room_chat(room, GGZ_CHAT_PERSONAL, to.c_str(), pm.c_str());
 		// Add the pm to own message list
-		formatedGGZChat(pm, clientname, false, to);
+		formatedGGZChat(pm, m_clientname, false, to);
 	} else
 		sent = ggzcore_room_chat(room, GGZ_CHAT_NORMAL, "", msg.c_str());
 	if (sent < 0)
@@ -1062,7 +1062,7 @@ void NetGGZ::recievedGGZChat(void const * const cbdata)
 		(msg->message,
 		 msg->sender,
 		 msg->type == GGZ_CHAT_ANNOUNCE,
-		 msg->type == GGZ_CHAT_PERSONAL ? clientname : std::string());
+		 msg->type == GGZ_CHAT_PERSONAL ? m_clientname : std::string());
 }
 
 

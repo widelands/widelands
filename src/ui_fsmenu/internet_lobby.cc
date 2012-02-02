@@ -162,7 +162,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 		(boost::bind(&Fullscreen_Menu_Internet_Lobby::server_doubleclicked, this, _1));
 
 	// try to connect to the metaserver
-	if (!InternetGaming::ref().usedcore())
+	if (!InternetGaming::ref().logged_in())
 		connectToMetaserver();
 }
 
@@ -173,7 +173,7 @@ void Fullscreen_Menu_Internet_Lobby::think ()
 	Fullscreen_Menu_Base::think ();
 
 	// If we have no connection try to connect
-	if (!InternetGaming::ref().usedcore()) {
+	if (!InternetGaming::ref().logged_in()) {
 		connectToMetaserver();
 	}
 
@@ -192,7 +192,7 @@ void Fullscreen_Menu_Internet_Lobby::think ()
 void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 {
 	Section & s = g_options.pull_section("global");
-	char const * const metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	std::string const & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = s.get_natural("port", INTERNET_GAMING_PORT);
 
 
@@ -353,7 +353,7 @@ void Fullscreen_Menu_Internet_Lobby::change_servername()
 void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 {
 	if (opengames.has_selection()) {
-		InternetGaming::ref().join(opengames.get_selected().info.hostname);
+		InternetGaming::ref().join_game(opengames.get_selected().info.hostname);
 		end_modal(JOINGAME);
 	} else
 		throw wexception("No server selected! That should not happen!");
