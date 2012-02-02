@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-01-31 12:58+0000\n"
+"PO-Revision-Date: 2012-02-01 12:42+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-01 04:40+0000\n"
-"X-Generator: Launchpad (build 14734)\n"
+"X-Launchpad-Export-Date: 2012-02-02 05:23+0000\n"
+"X-Generator: Launchpad (build 14738)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -95,7 +95,7 @@ msgid ""
 msgstr ""
 "Armatura di base per i soldati dell'Impero. È prodotta nella fucina di "
 "armature ed utilizzata nel campo d'addestramento - insieme al cibo - per "
-"allenare i soldati dal livello 1 al livello 2 di punti salute."
+"addestrare i soldati dal livello 1 al livello 2 di punti salute."
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
@@ -979,6 +979,10 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"I fornai dell'Impero producono un pane davvero gustoso partendo da farina ed "
+"acqua. È usato nelle taverne e nelle locande per preparare razioni e pasti. "
+"Il pane è anche consumato nei luoghi di addestramento (arena, colosseo, "
+"campo di addestramento)."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -994,6 +998,10 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"L'armatura di maglia è un'armatura intermedia per i soldati dell'Impero. È "
+"prodotta in una fucina di armature ed utilizzata in un campo di "
+"addestramento - insieme al cibo - per addestrare i soldati dal livello 2 al "
+"livello 3 di punti salute."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -1001,6 +1009,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"I fuochi delle fonderie, delle fucine di armature e delle fucine di armi "
+"imperiali sono solitamente alimentati a carbone. È estratto nelle miniere di "
+"carbone o prodotto da una carbonaia a partire dai tronchi."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -1008,6 +1019,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"Il martello è un attrezzo indispensabile. È necessario al geologo, al "
+"costruttore, al fabbro di armature ed al fabbro di armi. Assicurati di "
+"averne sempre qualcuno di scorta! È prodotto dal fabbro."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -1016,6 +1030,11 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"L'elmetto è la difesa di base di un guerriero. È prodotto nella fucina di "
+"armature. Insieme ad una lancia di legno costituisce l'equipaggiamento per "
+"armare i giovani soldati. Gli elmetti sono anche utilizzati nei campi di "
+"addestramento - insieme al cibo - per addestrare i soldati dal livello 0 al "
+"livello 1 di punti salute."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -1023,6 +1042,10 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"L'armatura di piastre è la più resistente armatura esistente per i soldati "
+"dell'Impero. È prodotta nella fucina di armature ed utilizzata nel campo di "
+"addestramento - insieme al cibo - per addestrare i soldati dal livello 3 al "
+"livello 4 di punti salute."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -1045,6 +1068,8 @@ msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Il cesto è necessario al coltivatore di vite per raccogliere l'uva. È "
+"prodotto dal fabbro."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
@@ -1060,6 +1085,10 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"Questa è una forte lancia con una punta d'acciaio ed una piccola lama. È "
+"prodotta nella fucina di armi ed utilizzata nel campo di addestramento - "
+"insieme al cibo - per addestrare i soldati dal livello 2 al livello 3 di "
+"attacco."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -1067,6 +1096,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"Questa è una lancia evoluta, con la punta d'acciaio. È prodotta nella fucina "
+"di armi ed utilizzata in un campo d'addestramento - insieme al cibo - per "
+"addestrare i soldati dal livello 1 al livello 2 di attacco."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -1074,6 +1106,9 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"Questa è l'arma migliore e più affilata che il fabbro di armi imperiale "
+"produce per i guerrieri. È utilizzata nel campo di addestramento - insieme "
+"al cibo - per addestrare i soldati dal livello 3 al livello 4 di attacco."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -1085,6 +1120,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Questa lancia ha una punta di ferro. È prodotta in una fucina di armi ed "
+"utilizzata in un campo di addestramento - insieme al cibo - per addestrare i "
+"soldati dal livello 0 al livello 1 di attacco."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1096,7 +1134,7 @@ msgstr ""
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
+msgstr "Questa sega è utilizzata dal segatore. È prodotta dal fabbro."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1111,6 +1149,8 @@ msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"Questo gustoso vino è consumato nelle miniere di marmo e nelle miniere "
+"d'oro. È prodotto in un'azienda vinicola."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1118,6 +1158,9 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"Questa lancia di legno è l'arma di base del sistema militare imperiale. È "
+"prodotta in una fucina di armi. Insieme all'elmetto, costituisce "
+"l'equipaggiamento per armare i giovani soldati."
 
 #: ../../tribes/empire/conf:131
 msgid "Toolsmith"
@@ -1154,6 +1197,10 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"I tronchi sono un importante materiale da costruzione per l'Impero. Il "
+"taglialegna abbatte gli alberi; la guardia forestale si occupano di "
+"ripiantarli. I tronchi sono anche utilizzata dalla carbonaia, dalla fucina "
+"di attrezzi e dalla segheria."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1317,6 +1364,9 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"L'acqua è la sostanza della vita! È usata nel forno e nella birreria. Anche "
+"l'allevamento di asini, l'allevamento di pecore e la porcilaia hanno bisogno "
+"di essere riforniti di acqua."
 
 #: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"
@@ -1356,6 +1406,10 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Il grano è fondamentale per sopravvivere. È prodotto nelle fattoria e "
+"consumato nei mulini e nelle birrerie. Anche gli allevamenti di asini, gli "
+"allevamenti di pecore e le porcilaie hanno bisogno di essere riforniti di "
+"grano."
 
 #: ../../tribes/empire/conf:97
 msgid "Wine"
@@ -1388,6 +1442,8 @@ msgstr "Lana"
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
+"La lana è il pelo delle pecore. I mulini di tessitura la usano per produrre "
+"stoffe."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
@@ -1433,7 +1489,7 @@ msgstr "Lavori nei cantieri per creare un nuovo edificio."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Lavora al cantiere navale e costruisce navi."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
