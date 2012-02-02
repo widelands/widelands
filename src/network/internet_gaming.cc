@@ -26,8 +26,7 @@ InternetGaming & InternetGaming::ref() {
 }
 
 InternetGaming::InternetGaming() :
-	maxclients    (1),
-	motd          ()
+	maxclients    (1)
 {}
 
 /// \returns the tables in the room

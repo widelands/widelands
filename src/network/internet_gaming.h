@@ -25,8 +25,6 @@
 #include "internet_gaming_protocol.h"
 #include "network_lan_promotion.h"
 
-#include <ggzmod.h>
-#include <ggzcore.h>
 #include <stdint.h>
 #include <string>
 #include <vector>
@@ -45,40 +43,11 @@
 struct Net_Client {
 	std::string   game;
 	std::string   name;
+	std::string   build_id;
 	uint32_t      type;
 	char          stats[16];
 };
 
-/// A MOTD struct for easier output to the chat panel
-struct MOTD {
-	std::string formationstr;
-	std::vector<std::string> motd;
-
-	MOTD() {}
-	MOTD(std::string msg) {
-		// if msg is empty -> return
-		if (msg.size() < 1)
-			return;
-
-		// first char is always \n - so we remove it
-		msg = msg.substr(1);
-		std::string::size_type j = msg.find('\n');
-
-		// split the message parts to have good looking texts
-		for (int32_t i = 0; msg.size(); ++i) {
-			if (j == std::string::npos) {
-				motd.push_back(msg);
-				break;
-			}
-			if (i == 0 && msg.size() and *msg.begin() == '<')
-				formationstr = msg.substr(0, j);
-			else
-				motd.push_back(msg.substr(0, j));
-			msg = msg.substr(j + 1);
-			j = msg.find('\n');
-		}
-	}
-};
 
 /**
  * The InternetGaming struct.
@@ -165,7 +134,6 @@ protected:
 	// Server informations
 	std::vector<Net_Game_Info> gamelist;
 	std::vector<Net_Client>    clientlist;
-	MOTD motd;
 
 	// The chat messages
 	std::vector<ChatMessage> messages;

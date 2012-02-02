@@ -27,6 +27,40 @@
 
 #include "internet_gaming.h"
 
+#include <ggzmod.h>
+#include <ggzcore.h>
+
+
+/// A MOTD struct for easier output to the chat panel
+struct MOTD {
+	std::string formationstr;
+	std::vector<std::string> motd;
+
+	MOTD() {}
+	MOTD(std::string msg) {
+		// if msg is empty -> return
+		if (msg.size() < 1)
+			return;
+
+		// first char is always \n - so we remove it
+		msg = msg.substr(1);
+		std::string::size_type j = msg.find('\n');
+
+		// split the message parts to have good looking texts
+		for (int32_t i = 0; msg.size(); ++i) {
+			if (j == std::string::npos) {
+				motd.push_back(msg);
+				break;
+			}
+			if (i == 0 && msg.size() and *msg.begin() == '<')
+				formationstr = msg.substr(0, j);
+			else
+				motd.push_back(msg.substr(0, j));
+			msg = msg.substr(j + 1);
+			j = msg.find('\n');
+		}
+	}
+};
 
 
 /**
@@ -136,6 +170,8 @@ private:
 
 	bool clientupdate;
 	bool tableupdate;
+
+	MOTD motd;
 
 };
 

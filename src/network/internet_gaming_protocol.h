@@ -20,6 +20,8 @@
 #ifndef INTERNET_GAMING_PROTOCOL_H
 #define INTERNET_GAMING_PROTOCOL_H
 
+#include <string>
+
 
 
 
@@ -66,7 +68,8 @@
 #define INTERNET_GAMING_RETRIES 3
 
 
-#define INTERNET_GAMING_METASERVER "widelands.org"
+/// Metaserver connection details
+static const std::string INTERNET_GAMING_METASERVER = "widelands.org";
 #define INTERNET_GAMING_PORT       "7395"
 
 
@@ -119,7 +122,7 @@ enum {
  * reason is that this is the only command that can be sent by the metaserver even when the protocol
  * versions differ.
  */
-#define IGPCMD_DISCONNECT "DISCONNECT"
+static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
 
 /**
  * Initiate a connection.
@@ -135,7 +138,6 @@ enum {
  * If the metaserver accepts, it replies with a LOGIN command with the following payload:
  * \li String:    client name (might be different to the previously chosen one, if the client did
  *                NOT login to a registered account and either the chosen is registered or already used.)
- * \li String:    motd
  * \li String:    welcome message (this might hold information about why the chosen name was changed to
  *                another or e.g. informations like "you've got 1 unread message on widelands.org")
  * \li Unsigned8: clients rights  (see client rights enum above)
@@ -145,7 +147,7 @@ enum {
  *
  * For the case, that the metaserver does not accept the login, take a look at \ref IGPCMD_REJECTED
  */
-#define IGPCMD_LOGIN "LOGIN"
+static const std::string IGPCMD_LOGIN = "LOGIN";
 
 /**
  * Reinitiate a connection.
@@ -171,32 +173,42 @@ enum {
  *
  * For the case, that the metaserver does not accept the login, take a look at IGPCMD_REJECTED
  */
-#define IGPCMD_RELOGIN "RELOGIN"
+static const std::string IGPCMD_RELOGIN = "RELOGIN";
 
 /**
  * If the metaserver does not accept the login for a certain reason (password wrong, user blocked?,
  * whatever...) it replies with a REJECTED command with the following payload:
  * \li String:    Reason why the client was rejected in plain text. (FIXME see list for discussion above)
  */
-#define IGPCMD_REJECTED "REJECTED"
-
+static const std::string IGPCMD_REJECTED = "REJECTED";
 
 /**
  * This is send by the metaserver to inform the client, about the metaserver time = time(0).
  */
-#define IGPCMD_TIME "TIME"
+static const std::string IGPCMD_TIME = "TIME";
 
+/**
+ * This is send by a superuser client to change the motd. The server has to check the permissions and if those
+ * allow a motd change has to change the motd and afterwards to broadcast the new motd to all clients.
+ * If the client has no right to change the motd, the server disconnects the client with a permission denied
+ * message. It should further log that try to access superuser functionality.
+ * \li String: new motd
+ */
+static const std::string IGPCMD_MOTD = "MOTD";
+
+// in future here should the superuser commands be - but we need an interface in widelands for it anyways, so
+// that can wait...
 
 /**
  * Sent by the metaserver without payload. The client must reply with a \ref IGPCMD_PONG command.
  * If the client does not answer on a PING within INTERNET_GAMING_CLIENT_TIMEOUT it gets disconnected.
  */
-#define IGPCMD_PING "PING"
+static const std::string IGPCMD_PING = "PING";
 
 /**
  * Reply to a \ref IGPCMD_PING command, without payload.
  */
-#define IGPCMD_PONG "PONG"
+static const std::string IGPCMD_PONG = "PONG";
 
 /**
  * Sent by both metaserver and client to exchange chat messages, though with different payloads.
@@ -206,13 +218,17 @@ enum {
  * \li String: name of user, if private message, else empty string.
  * The metaserver will echo the message if the client is allowed to send chat messages.
  *
- * The metaserver either broadcasts this message or sends it to the pm recipient with the following
- * payload:
+ * The metaserver either broadcasts a chat message to all clients or sends it to the pm recipient with the
+ * following payload:
  * \li String: sender (may be empty to indicate system messages)
  * \li String: the message
- * \li Unsigned8: whether this is a personal message (0 / 1)
+ * \li Unsigned8: whether this is a personal message (0 = false, 1 = true)
+ * \li Unsigned8: whether this is a system message, which should even be shown in game (0 = false, 1 = true)
+ *
+ * \note system messages are the motd (Send by the metaserver to the client, after login (but not relogin)
+ *       and after the motd got changed) and announcements by superusers.
  */
-#define IGPCMD_CHAT "CHAT"
+static const std::string IGPCMD_CHAT = "CHAT";
 
 /**
  * Sent by the metaserver to inform the client, that the list of games was changed. No payload is sent,
@@ -221,7 +237,7 @@ enum {
  *
  * To get the new list of games, the client must send \ref IGPCMD_GAMES
  */
-#define IGPCMD_GAMES_UPDATE "GAMES_UPDATE"
+static const std::string IGPCMD_GAMES_UPDATE = "GAMES_UPDATE";
 
 /**
  * Sent by the client without payload to ask for the current list of games.
@@ -233,7 +249,7 @@ enum {
  * \li Unsigned8: State of the game (1 = connectable, 0 = not connectable)
  * }
  */
-#define IGPCMD_GAMES "GAMES"
+static const std::string IGPCMD_GAMES = "GAMES";
 
 /**
  * Sent by the metaserver to inform the client, that the list of clients was changed. No payload is sent,
@@ -242,7 +258,7 @@ enum {
  *
  * To get the new list of clients, the client must send \ref IGPCMD_CLIENT
  */
-#define IGPCMD_CLIENTS_UPDATE "CLIENTS_UPDATE"
+static const std::string IGPCMD_CLIENTS_UPDATE = "CLIENTS_UPDATE";
 
 /**
  * Sent by the client without payload to ask for the current list of clients.
@@ -255,7 +271,7 @@ enum {
  * \li Unsigned8: Clients rights (see client rights enum above)
  * }
  */
-#define IGPCMD_CLIENTS "CLIENTS"
+static const std::string IGPCMD_CLIENTS = "CLIENTS";
 
 /**
  * Sent by the client to announce the startup of a game with following payload:
@@ -269,7 +285,7 @@ enum {
  * If the game gets connectable in time, the metaserver lists the game as connectable, else it removes the
  * game from the list of games and sends a \ref IGPCMD_GAME_NOT_CONNECTABLE to the hosting client.
  */
-#define IGPCMD_GAME_OPEN "GAME_OPEN"
+static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
 
 /**
  * Sent by the client to initialize the connection to a game with following payload:
@@ -282,7 +298,7 @@ enum {
  * \li String:    ip of the game.
  * \note as soon as this message is sent, the metaserver will list the client as connected to the game.
  */
-#define IGPCMD_GAME_CONNECT "GAME_CONNECT"
+static const std::string IGPCMD_GAME_CONNECT = "GAME_CONNECT";
 
 /**
  * Sent by the client to close the connection to a game without payload, as the client can
@@ -297,7 +313,7 @@ enum {
  *       removed from list as well. However other clients connected to that game should send the
  *       \ref IGPCMD_GAME_DISCONNECT themselves.
  */
-#define IGPCMD_GAME_DISCONNECT "GAME_DISCONNECT"
+static const std::string IGPCMD_GAME_DISCONNECT = "GAME_DISCONNECT";
 
 /**
  * Sent by the game hosting client to announce the start of the game. No payload.
@@ -307,7 +323,7 @@ enum {
  *
  * Sent by the metaserver to acknowledge the start without payload.
  */
-#define IGPCMD_GAME_START "GAME_START"
+static const std::string IGPCMD_GAME_START = "GAME_START";
 
 /**
  * Sent by every participating player of a game to announce the end of the game and to send the statistics.
@@ -325,10 +341,10 @@ enum {
  *
  * Sent by the metaserver to acknowledge that it received the data.
  */
-#define IGPCMD_GAME_END "GAME_END"
+static const std::string IGPCMD_GAME_END = "GAME_END";
 
 /// Sent by the metaserver to tell a game hosting client, that the game is not connectable. No payload.
-#define IGPCMD_GAME_NOT_CONNECTABLE "GAME_NOT_CONNECTABLE"
+static const std::string IGPCMD_GAME_NOT_CONNECTABLE = "GAME_NOT_CONNECTABLE";
 
 
 #endif

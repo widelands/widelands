@@ -44,8 +44,9 @@ NetGGZ::NetGGZ() :
 	server_ip_addr(0),
 	logged_in     (false),
 	relogin       (false),
-	clientupdate    (false),
-	tableupdate   (false)
+	clientupdate  (false),
+	tableupdate   (false),
+	motd          ()
 {
 }
 
