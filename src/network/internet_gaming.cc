@@ -22,8 +22,15 @@
 #include "internet_gaming_messages.h"
 #include "network_ggz.h"
 
+//static InternetGaming * ig = 0;
+
 InternetGaming & InternetGaming::ref() {
 	return NetGGZ::ref();
+#if 0
+	if (not ig)
+		ig = new InternetGaming();
+	return * ig;
+#endif
 }
 
 InternetGaming::InternetGaming() :
@@ -42,3 +49,8 @@ std::vector<Net_Game_Info> const & InternetGaming::games() {
 std::vector<Net_Client>    const & InternetGaming::clients() {
 	return clientlist;
 }
+
+#if 0 // to be implemented
+/// ChatProvider: sends a message via the metaserver.
+void InternetGaming::send(std::string const & msg) {};
+#endif

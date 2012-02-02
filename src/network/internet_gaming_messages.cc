@@ -21,6 +21,8 @@
 
 #include "i18n.h"
 
+#include <map>
+
 static std::map <std::string, std::string> igmessages;
 
 /// Returns a translated message fitting to the message code \arg code

@@ -371,13 +371,14 @@ void WLApplication::run()
 
 			// setup some details of the dedicated server
 			Section & s = g_options.pull_section("global");
-			char const * const meta   = s.get_string("metaserver", WL_METASERVER);
+			char const * const meta   = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+			uint32_t           port   = s.get_natural("port", INTERNET_GAMING_PORT);
 			char const * const name   = s.get_string("nickname", "dedicated");
 			char const * const server = s.get_string("servername", name);
 			const bool registered     = s.get_bool("registered", false);
 			char const * const pwd    = s.get_string("password", "");
 			for (;;) { // endless loop
-				if (!InternetGaming::ref().initcore(meta, name, pwd, registered)) {
+				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
 					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
 					return;
 				}
@@ -426,7 +427,7 @@ void WLApplication::run()
 				// -> autostarts when a player sends "/start" as pm to the server.
 				netgame.run(true);
 
-				InternetGaming::ref().deinitcore();
+				InternetGaming::ref().logout();
 			}
 		} catch (...) {
 			emergency_save(game);
@@ -1621,7 +1622,7 @@ void WLApplication::mainmenu_multiplayer()
 		std::string playername;
 
 		bool internet = false;
-		InternetGaming::ref().deinitcore(); // cleanup for reconnect to the metaserver
+		InternetGaming::ref().logout(); // cleanup for reconnect to the metaserver
 		Fullscreen_Menu_MultiPlayer mp;
 		switch (mp.run()) {
 			case Fullscreen_Menu_MultiPlayer::Back:
@@ -1652,11 +1653,11 @@ void WLApplication::mainmenu_multiplayer()
 
 			switch (menu_result) {
 				case Fullscreen_Menu_Internet_Lobby::HOSTGAME: {
-					uint32_t max = static_cast<uint32_t>(ns.get_maxplayers());
+					uint32_t max = static_cast<uint32_t>(ns.get_maxclients());
 					InternetGaming::ref().set_local_maxplayers(max);
 					NetHost netgame(playername, true);
 					netgame.run();
-					InternetGaming::ref().deinitcore();
+					InternetGaming::ref().logout();
 					break;
 				}
 				case Fullscreen_Menu_Internet_Lobby::JOINGAME: {
@@ -1697,7 +1698,7 @@ void WLApplication::mainmenu_multiplayer()
 
 					NetClient netgame(&peer, playername, true);
 					netgame.run();
-					InternetGaming::ref().deinitcore();
+					InternetGaming::ref().logout();
 					break;
 				}
 				default:

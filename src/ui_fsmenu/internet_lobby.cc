@@ -58,13 +58,13 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 		(this,
 		 get_w() * 17 / 25, get_h() * 63 / 100,
 		 _("Name of your server:")),
-	m_maxplayers
+	m_maxclients
 		(this,
 		 get_w() * 17 / 25, get_h() * 73 / 100,
 		 _("Maximum of players:")),
 
 // Spinboxes
-	maxplayers
+	maxclients
 		(this,
 		 get_w() * 17 / 25, get_h() * 77 / 100, m_butw, m_buth * 7 / 10,
 		 7, 1, 7), //  start/min./max. value dummy initializations
@@ -137,8 +137,8 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_clients     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_servername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_maxplayers.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	maxplayers  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_maxclients.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	maxclients  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	std::string server = s.get_string("servername", "");
 	servername  .setText (server);
 	servername  .changed.connect
@@ -192,14 +192,14 @@ void Fullscreen_Menu_Internet_Lobby::think ()
 void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 {
 	Section & s = g_options.pull_section("global");
-	char const * const metaserver = s.get_string("metaserver", WL_METASERVER);
+	char const * const metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	uint32_t port = s.get_natural("port", INTERNET_GAMING_PORT);
 
-	if (InternetGaming::ref().initcore(metaserver, nickname, password, reg))
+
+	if (InternetGaming::ref().login(nickname, password, reg, metaserver, port))
 	{
 		// Update of server spinbox
-		maxplayers.setInterval(1, InternetGaming::ref().max_players());
-
-		// Only one time registration
+		maxclients.setInterval(1, InternetGaming::ref().max_clients());
 	}
 }
 

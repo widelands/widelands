@@ -34,10 +34,6 @@
 #include <io.h>
 #endif
 
-// TODO remove once ggz is removed
-#define WL_METASERVER "widelands.org"
-#define WL_METASERVER_PORT 5688
-
 
 /// A simply network player struct
 struct Net_Client {
@@ -57,35 +53,19 @@ struct InternetGaming : public ChatProvider {
 	static InternetGaming & ref();
 
 	// Login and logout
-	//virtual void login() = 0;
-	virtual void init() = 0;
-	virtual bool connect() = 0;
+	virtual bool login
+		(char const * const nick, char const * const pwd, bool registered,
+		 char const * const metaserver, uint32_t port) = 0;
+	virtual void logout() = 0;
 
-	virtual bool used() = 0;
-	virtual bool host() = 0;
+
+
+
+
 	virtual void data() = 0;
 	virtual char const * ip() = 0;
 
-	virtual bool updateForGames() = 0;
-	virtual bool updateForClients() = 0;
 
-	std::vector<Net_Game_Info> const & games();
-	std::vector<Net_Client>    const & clients();
-
-	enum Protocol
-	{
-		op_greeting = 1,
-		op_request_ip = 2, // request the IP of the host
-		op_reply_ip = 3, // tell the server, that following package is our IP
-		op_broadcast_ip = 4,
-		op_state_playing = 5, // tell the server that the game was started
-		op_state_done = 6, // tell the server that the game ended
-		op_game_statistics = 7, // send game statistics
-		op_unreachable = 99 // the metaserver says we are unreachable
-	};
-
-	virtual bool initcore(const char *, const char *, const char *, bool) = 0;
-	virtual void deinitcore() = 0;
 	virtual bool usedcore() = 0;
 	virtual void datacore() = 0;
 	virtual void launch  () = 0;
@@ -93,36 +73,40 @@ struct InternetGaming : public ChatProvider {
 	virtual void send_game_done() = 0;
 	virtual void join(char const * gamename) = 0;
 
-	// functions for clients server setup
-	virtual uint32_t max_players() = 0;
+
+
+
+
+
+	// Informative functions
+	virtual bool updateForGames() = 0;
+	std::vector<Net_Game_Info> const & games();
+	virtual bool updateForClients() = 0;
+	std::vector<Net_Client>    const & clients();
+
+	/// \returns the maximum allowed number of clients in a game (players + spectators)
+	virtual uint32_t max_clients() {return INTERNET_GAMING_MAX_CLIENTS_PER_GAME;}
+
 	/// sets the maximum number of players that may be in the game
-	void set_local_maxplayers(uint32_t mp) {
-		maxclients = mp;
-	}
+	void set_local_maxplayers(uint32_t mp) {maxclients = mp;}
+
 	/// sets the name of the local server as shown in the games list
-	void set_local_servername(std::string const & name) {
-		servername  = name.empty() ? "WL-Default" : name;
-		servername += " (";
-		servername += build_id();
-		servername += ')';
-	}
+	void set_local_servername(std::string const & name) {servername  = name.empty() ? "WL-Default" : name;}
+
 	/// \returns the name of the local server
 	std::string & get_local_servername() {return servername;}
+
+	/// \returns the name of the local client
 	std::string & get_local_clientname() {return clientname;}
 
 	// ChatProvider: sends a message via the metaserver.
 	virtual void send(std::string const &) = 0;
 
-	// ChatProvider: adds the message to the message list and calls parent.
-	void receive(ChatMessage const & msg) {
-		messages.push_back(msg);
-		ChatProvider::send(msg);
-	}
+	/// ChatProvider: adds the message to the message list and calls parent.
+	void receive(ChatMessage const & msg) {messages.push_back(msg); ChatProvider::send(msg);}
 
-	// ChatProvider: returns the list of chatmessages.
-	std::vector<ChatMessage> const & getMessages() const {
-		return messages;
-	}
+	/// ChatProvider: returns the list of chatmessages.
+	std::vector<ChatMessage> const & getMessages() const {return messages;}
 
 protected:
 	InternetGaming();
@@ -138,7 +122,7 @@ protected:
 	std::vector<Net_Game_Info> gamelist;
 	std::vector<Net_Client>    clientlist;
 
-	// The chat messages
+	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages;
 
 };

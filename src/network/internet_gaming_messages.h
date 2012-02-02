@@ -21,7 +21,6 @@
 #define INTERNET_GAMING_MESSAGES_H
 
 #include <string>
-#include <map>
 
 struct InternetGamingMessages {
 public:

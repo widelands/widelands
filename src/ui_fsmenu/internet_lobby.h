@@ -50,9 +50,9 @@ struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
 
 	virtual void think();
 
-	/// \returns the maximum number of players that may connect
-	int32_t get_maxplayers() {
-		return maxplayers.getValue();
+	/// \returns the maximum number of clients that may connect
+	int32_t get_maxclients() {
+		return maxclients.getValue();
 	}
 
 private:
@@ -64,8 +64,8 @@ private:
 	std::string m_fn;
 	UI::Textarea title, m_clients, m_opengames;
 	UI::Textarea m_servername;
-	UI::Textarea m_maxplayers;
-	UI::SpinBox maxplayers;
+	UI::Textarea m_maxclients;
+	UI::SpinBox maxclients;
 	UI::Button joingame, hostgame, back;
 	UI::EditBox servername;
 	UI::Table<const Net_Client * const> clientsonline;

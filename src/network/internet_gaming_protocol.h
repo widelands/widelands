@@ -70,7 +70,11 @@
 
 /// Metaserver connection details
 static const std::string INTERNET_GAMING_METASERVER = "widelands.org";
-#define INTERNET_GAMING_PORT       "7395"
+#define INTERNET_GAMING_PORT 7395
+
+
+/// The maximum number of clients (players + spectators) per game
+#define INTERNET_GAMING_MAX_CLIENTS_PER_GAME 32
 
 
 

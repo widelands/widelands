@@ -146,26 +146,6 @@ void NetGGZ::ggzmod_server
 }
 
 
-// not used?
-bool NetGGZ::host()
-{
-	int32_t spectator, seat;
-
-	if (!used())
-		return false;
-
-	do {
-		ggzmod_dispatch(mod);
-		if (usedcore())
-			datacore();
-		ggzmod_get_player(mod, &spectator, &seat);
-	} while (seat == -1);
-
-	dedicatedlog("GGZ ## host? seat=%i\n", seat);
-	return !seat;
-}
-
-
 /// \returns the ip of the server, if connected
 char const * NetGGZ::ip()
 {
@@ -174,9 +154,9 @@ char const * NetGGZ::ip()
 
 
 /// initializes the local ggz core
-bool NetGGZ::initcore
-	(char const * const metaserver, char const * const nick,
-	 char const * const pwd, bool registered)
+bool NetGGZ::login
+		(char const * const nick, char const * const pwd, bool registered,
+		 char const * const metaserver, uint32_t)
 {
 	GGZOptions opt;
 
@@ -268,7 +248,7 @@ bool NetGGZ::initcore
 
 
 /// shuts down the local ggz core, if active
-void NetGGZ::deinitcore()
+void NetGGZ::logout()
 {
 	if (!usedcore())
 		return;
@@ -365,7 +345,7 @@ void NetGGZ::data()
 		ggz_free(ipstring);
 		break;
 	case op_unreachable:
-		deinitcore();
+		logout();
 		throw warning
 			(_("Connection problem"), "%s",
 			 _
@@ -704,7 +684,7 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 		if (!room)
 			room = ggzcore_server_get_cur_room(ggzserver);
 		if (!room) {
-			deinitcore();
+			logout();
 			throw wexception("room was not found!");
 		}
 		write_gamelist();
@@ -800,7 +780,7 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 					errorcode += 100;
 				if (!ggzcore_room_get_table_by_id(room, tableid))
 					errorcode += 1000;
-				deinitcore();
+				logout();
 				throw wexception
 					("unable to join the table - error: %u", errorcode);
 			} else
@@ -837,7 +817,7 @@ void NetGGZ::write_gamelist()
 		Net_Game_Info info;
 		GGZTable * const table = ggzcore_room_get_nth_table(room, i);
 		if (!table) {
-			deinitcore();
+			logout();
 			throw wexception("table can not be found!");
 		}
 		strncpy
@@ -886,7 +866,7 @@ void NetGGZ::write_clientlist()
 	for (int32_t i = 0; i < num; ++i) {
 		GGZPlayer * const player = ggzcore_room_get_nth_player(room, i);
 		if (!player) {
-			deinitcore();
+			logout();
 			throw wexception("player can not be found!");
 		}
 		Net_Client client;
@@ -947,7 +927,7 @@ void NetGGZ::join(char const * const tablename)
 	for (int32_t i = 0; i < num; ++i) {
 		GGZTable * const table = ggzcore_room_get_nth_table(room, i);
 		if (!table) {
-			deinitcore();
+			logout();
 			throw wexception("table can not be found!");
 		}
 		char const * desc = ggzcore_table_get_desc(table);
@@ -958,7 +938,7 @@ void NetGGZ::join(char const * const tablename)
 	}
 
 	if (tableid == -1) {
-		deinitcore();
+		logout();
 		throw wexception
 			("Selected table \"%s\" could not be found\n", tablename);
 	}

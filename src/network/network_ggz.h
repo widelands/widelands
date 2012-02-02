@@ -24,6 +24,7 @@
 #define HAVE_GGZ 1
 
 #define ERRMSG "</p><p font-size=14 font-color=#ff6633 font-weight=bold>ERROR: "
+#define WL_METASERVER_PORT 5688
 
 #include "internet_gaming.h"
 
@@ -76,7 +77,6 @@ struct NetGGZ : public InternetGaming {
 	bool connect();
 
 	bool used();
-	bool host();
 	void data();
 	char const * ip();
 
@@ -105,8 +105,8 @@ struct NetGGZ : public InternetGaming {
 		op_unreachable = 99 // the metaserver says we are unreachable
 	};
 
-	bool initcore(const char *, const char *, const char *, bool);
-	void deinitcore();
+	bool login(const char *, const char *, bool, const char *, uint32_t);
+	void logout();
 	bool usedcore();
 	void datacore();
 	void launch  ();
