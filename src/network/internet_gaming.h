@@ -78,9 +78,9 @@ struct InternetGaming : public ChatProvider {
 
 
 	// Informative functions for lobby
-	virtual bool updateForGames()                        = 0;
+	bool updateForGames();
 	std::vector<Net_Game_Info> const & games();
-	virtual bool updateForClients()                      = 0;
+	bool updateForClients();
 	std::vector<Net_Client>    const & clients();
 
 	/// \returns the maximum allowed number of clients in a game (players + spectators)
@@ -120,6 +120,8 @@ protected:
 	uint32_t    m_maxclients;
 
 	// Server informations
+	bool clientupdate;
+	bool tableupdate;
 	std::vector<Net_Game_Info> gamelist;
 	std::vector<Net_Client>    clientlist;
 

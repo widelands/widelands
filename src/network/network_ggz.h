@@ -80,16 +80,6 @@ struct NetGGZ : public InternetGaming {
 	void data();
 	char const * ip();
 
-	bool updateForGames() {
-		bool temp = tableupdate;
-		tableupdate = false;
-		return temp;
-	}
-	bool updateForClients() {
-		bool temp = clientupdate;
-		clientupdate = false;
-		return temp;
-	}
 	std::vector<Net_Game_Info> const & tables();
 	std::vector<Net_Client>    const & clients();
 
@@ -114,7 +104,7 @@ struct NetGGZ : public InternetGaming {
 	void set_game_done();
 	void join_game(std::string const & gamename);
 
-	uint32_t max_players();
+	uint32_t max_clients();
 
 	// ChatProvider: sends a message via GGZnetwork.
 	void send(std::string const &);
@@ -137,8 +127,6 @@ struct NetGGZ : public InternetGaming {
 	void formatedGGZChat
 		(std::string const &, std::string const &,
 		 bool system = false, std::string recipient = std::string());
-
-	uint32_t max_clients();
 
 private:
 	NetGGZ();
@@ -169,9 +157,6 @@ private:
 	bool m_logged_in;
 	bool relogin;
 	GGZRoom * room;
-
-	bool clientupdate;
-	bool tableupdate;
 
 	MOTD motd;
 

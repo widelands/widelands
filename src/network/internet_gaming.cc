@@ -34,15 +34,31 @@ InternetGaming & InternetGaming::ref() {
 }
 
 InternetGaming::InternetGaming() :
-	m_maxclients    (1)
+	m_maxclients  (1),
+	clientupdate  (false),
+	tableupdate   (false)
 {
 	// Fill the list of possible messages from the server
 	InternetGamingMessages::fill_map();
 }
 
+/// \returns whether the local gamelist was updated
+bool InternetGaming::updateForGames() {
+	bool temp = tableupdate;
+	tableupdate = false;
+	return temp;
+}
+
 /// \returns the tables in the room
 std::vector<Net_Game_Info> const & InternetGaming::games() {
 	return gamelist;
+}
+
+/// \returns whether the local clientlist was updated
+bool InternetGaming::updateForClients() {
+	bool temp = clientupdate;
+	clientupdate = false;
+	return temp;
 }
 
 /// \returns the players in the room
@@ -69,12 +85,6 @@ void InternetGaming::set_game_playing() {}
 
 /// called by a client that is host of a game to inform the metaserver, that the game was ended.
 void InternetGaming::set_game_done() {}
-
-/// \returns whether the local gamelist was updated
-bool InternetGaming::updateForGames() {return false;}
-
-/// \returns whether the local clientlist was updated
-bool InternetGaming::updateForClients() {return false;}
 
 /// ChatProvider: sends a message via the metaserver.
 void InternetGaming::send(std::string const & msg) {}
