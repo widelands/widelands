@@ -553,6 +553,26 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 		m_portdock->set_economy(get_economy());
 }
 
+void Warehouse::destroy(Editor_Game_Base & egbase)
+{
+	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
+
+	const WareList & workers = get_workers();
+
+	for (Ware_Index id = Ware_Index::First(); id < workers.get_nrwareids(); ++id) {
+		const uint32_t stock = workers.stock(id);
+
+		if (stock > 0) {
+			for (uint32_t i = 0; i < stock; ++i) {
+				launch_worker(game, id, Requirements()).start_task_leavebuilding
+					(game, true);
+			}
+		}
+	}
+
+	Building::destroy(egbase);
+}
+
 /// Destroy the warehouse.
 void Warehouse::cleanup(Editor_Game_Base & egbase)
 {
