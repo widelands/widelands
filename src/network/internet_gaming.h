@@ -23,6 +23,7 @@
 #include "build_info.h"
 #include "chat.h"
 #include "internet_gaming_protocol.h"
+#include "network.h"
 #include "network_lan_promotion.h"
 
 #include <stdint.h>
@@ -56,7 +57,7 @@ struct InternetGaming : public ChatProvider {
 	bool login
 		(std::string const & nick, std::string const & pwd, bool registered,
 		 std::string const & metaserver, uint32_t port);
-	void logout();
+	void logout(std::string const & msgcode = "CONNECTION_CLOSED");
 
 	/// \returns whether the client is logged in
 	bool logged_in() {return m_state != OFFLINE;}
@@ -106,25 +107,39 @@ struct InternetGaming : public ChatProvider {
 private:
 	InternetGaming();
 
+	void handle_packet(RecvPacket & packet);
+
+
+
+	/// The socket that connects us to the host
+	TCPsocket        m_sock;
+
+	/// Socket set used for selection
+	SDLNet_SocketSet m_sockset;
+
+	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
+	Deserializer     m_deserializer;
+
 	/// Current state of this class
 	enum {
 		OFFLINE,
+		CONNECTING,
 		LOBBY,
 		IN_GAME
-	} m_state;
+	}                m_state;
 
 	// client informations
-	std::string m_clientname;
+	std::string      m_clientname;
 
 	// informations of clients game
-	std::string m_gamename;
-	uint32_t    m_maxclients;
+	std::string      m_gamename;
+	uint32_t         m_maxclients;
 
 	// Server informations
-	bool clientupdate;
-	bool tableupdate;
-	std::vector<Net_Game_Info> gamelist;
+	bool                       clientupdate;
+	bool                       gameupdate;
 	std::vector<Net_Client>    clientlist;
+	std::vector<Net_Game_Info> gamelist;
 
 	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages;

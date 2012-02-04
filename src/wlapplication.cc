@@ -1647,8 +1647,7 @@ void WLApplication::mainmenu_multiplayer()
 				s.set_string("password", password);
 
 			// reinitalise in every run, else graphics look strange
-			Fullscreen_Menu_Internet_Lobby ns
-				(playername.c_str(), password.c_str(), registered);
+			Fullscreen_Menu_Internet_Lobby ns(playername.c_str(), password.c_str(), registered);
 			menu_result = ns.run();
 
 			switch (menu_result) {

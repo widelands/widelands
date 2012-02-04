@@ -193,7 +193,7 @@ void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 {
 	Section & s = g_options.pull_section("global");
 	std::string const & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("port", INTERNET_GAMING_PORT);
+	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
 
 
 	if (InternetGaming::ref().login(nickname, password, reg, metaserver, port))

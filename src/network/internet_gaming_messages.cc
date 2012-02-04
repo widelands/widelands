@@ -38,11 +38,17 @@ const std::string & InternetGamingMessages::get_message(const std::string & code
 /// This function should be called *before* the first call of "get_message", but only after the locales
 /// are loaded.
 void InternetGamingMessages::fill_map() {
+	// messages from metaserver to client
 	igmessages["WRONG_PASSWORD"]       = _("The send password was incorrect!");
+	igmessages["UNSUPPORTED_PROTOCOL"] = _("The protocol version you are using is not supported!");
 	igmessages["ALREADY_LOGGED_IN"]    = _("You are already logged in!");
 	igmessages["DEFICIENT_PERMISSION"] =
 		_
 		 ("You got disconnected, as you send a superuser command without superuser permission."
 		  "This incident will be logged and reported to the administrator.");
-	igmessages["RESTARTING"]           = _("You got disconnected, as the metaserver is currently restarting");
+	igmessages["RESTARTING"]           = _("You got disconnected, as the metaserver is currently restarting.");
+	// messages from client to metaserver
+	igmessages["CONNECTION_CLOSED"]    = _("Connection was closed by the client normally.");
+	igmessages["CONNECTION_LOST"]      = _("The connection to the metaserver was lost.");
+	igmessages["NO_ANSWER"]            = _("Metaserver did not answer");
 }
