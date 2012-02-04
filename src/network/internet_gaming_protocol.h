@@ -211,7 +211,7 @@ static const std::string IGPCMD_MOTD = "MOTD";
 
 /**
  * Sent by the metaserver without payload. The client must reply with a \ref IGPCMD_PONG command.
- * If the client does not answer on a PING within INTERNET_GAMING_CLIENT_TIMEOUT it gets disconnected.
+ * If the client does not answer on a PING within \ref INTERNET_GAMING_CLIENT_TIMEOUT s it gets disconnected.
  */
 static const std::string IGPCMD_PING = "PING";
 

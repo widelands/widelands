@@ -128,18 +128,21 @@ private:
 		IN_GAME
 	}                m_state;
 
-	// client informations
+	/// local clients name and rights
 	std::string      m_clientname;
+	uint8_t          m_rights;
 
-	// informations of clients game
+	/// informations of the clients game
 	std::string      m_gamename;
 	uint32_t         m_maxclients;
+	char           * m_gameip;
 
-	// Server informations
+	/// Metaserver informations
 	bool                       clientupdate;
 	bool                       gameupdate;
 	std::vector<Net_Client>    clientlist;
 	std::vector<Net_Game_Info> gamelist;
+	int32_t                    time_offset;
 
 	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages;
