@@ -1663,7 +1663,7 @@ void WLApplication::mainmenu_multiplayer()
 				case Fullscreen_Menu_Internet_Lobby::JOINGAME: {
 					uint32_t const secs = time(0);
 					while (!InternetGaming::ref().ip()) {
-						InternetGaming::ref().data();
+						InternetGaming::ref().handle_metaserver_communication();
 						if (10 < time(0) - secs)
 							throw warning
 								(_("Connection timed out"), "%s",

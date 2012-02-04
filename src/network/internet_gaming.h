@@ -53,28 +53,22 @@ struct InternetGaming : public ChatProvider {
 	static InternetGaming & ref();
 
 	// Login and logout
-	virtual bool login
+	bool login
 		(std::string const & nick, std::string const & pwd, bool registered,
-		 std::string const & metaserver, uint32_t port)   = 0;
-	virtual void logout()                                = 0;
-	virtual bool logged_in()                             = 0;
+		 std::string const & metaserver, uint32_t port);
+	void logout();
 
+	/// \returns whether the client is logged in
+	bool logged_in() {return m_state != OFFLINE;}
 
-
-
-
-	virtual void data() = 0;
-	virtual void datacore() = 0;
-
-
-
+	void handle_metaserver_communication();
 
 	// Game specific functions
-	virtual char const * ip()                            = 0;
-	virtual void join_game(std::string const & gamename) = 0;
-	virtual void open_game()                             = 0;
-	virtual void set_game_playing()                      = 0;
-	virtual void set_game_done()                         = 0;
+	char const * ip();
+	void join_game(std::string const & gamename);
+	void open_game();
+	void set_game_playing();
+	void set_game_done();
 
 
 	// Informative functions for lobby
@@ -84,7 +78,7 @@ struct InternetGaming : public ChatProvider {
 	std::vector<Net_Client>    const & clients();
 
 	/// \returns the maximum allowed number of clients in a game (players + spectators)
-	virtual uint32_t max_clients() {return INTERNET_GAMING_MAX_CLIENTS_PER_GAME;}
+	uint32_t max_clients() {return INTERNET_GAMING_MAX_CLIENTS_PER_GAME;}
 
 	/// sets the maximum number of players that may be in the game
 	void set_local_maxplayers(uint32_t mp) {m_maxclients = mp;}
@@ -101,7 +95,7 @@ struct InternetGaming : public ChatProvider {
 
 
 	// ChatProvider: sends a message via the metaserver.
-	virtual void send(std::string const &)               = 0;
+	void send(std::string const &);
 
 	/// ChatProvider: adds the message to the message list and calls parent.
 	void receive(ChatMessage const & msg) {messages.push_back(msg); ChatProvider::send(msg);}
@@ -109,8 +103,15 @@ struct InternetGaming : public ChatProvider {
 	/// ChatProvider: returns the list of chatmessages.
 	std::vector<ChatMessage> const & getMessages() const {return messages;}
 
-protected:
+private:
 	InternetGaming();
+
+	/// Current state of this class
+	enum {
+		OFFLINE,
+		LOBBY,
+		IN_GAME
+	} m_state;
 
 	// client informations
 	std::string m_clientname;

@@ -274,10 +274,6 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
-find_package(GGZ_Core REQUIRED)
-include_directories(${GGZ_CORE_INCLUDE_DIR})
-add_definitions("-DUSE_GGZ")
-
 #on freeBSD this must be explicitely linked
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   find_library(EXECINFO_LIBRARY NAMES execinfo)

@@ -718,11 +718,6 @@ void NetHost::run(bool const autorun)
 		// Setup by the users
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
 
-		// NOTE  Workaround ... sometimes ggzd seems to disconnect players that idle too long
-		// NOTE  Therefore dedicated servers reconnect every 15 minutes if idle
-		// TODO  fixme as soon as ggz is dropped
-		uint16_t timeout = 0;
-
 		while (not d->dedicated_start) {
 			handle_network();
 			// TODO this should be improved.
@@ -730,7 +725,6 @@ void NetHost::run(bool const autorun)
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
 					return;
-				++timeout;
 				if (needip && InternetGaming::ref().ip()) {
 					dl->set_server_ip(InternetGaming::ref().ip());
 					needip = false;
@@ -738,19 +732,13 @@ void NetHost::run(bool const autorun)
 			} else {
 				if (usleep(200) == -1)
 					return;
-				timeout = 0;
 			}
 #else
-			if (d->clients.empty()) {
+			if (d->clients.empty())
 				Sleep(100);
-				++timeout;
-			} else {
+			else
 				Sleep(1);
-				timeout = 0;
-			}
 #endif
-			if (timeout == 9000)
-				return;
 		}
 		d->dedicated_start = false;
 	} else {
@@ -2423,7 +2411,7 @@ void NetHost::handle_network ()
 
 	// if this is an internet game, handle the metaserver information
 	if (m_internet)
-		InternetGaming::ref().data();
+		InternetGaming::ref().handle_metaserver_communication();
 
 	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {

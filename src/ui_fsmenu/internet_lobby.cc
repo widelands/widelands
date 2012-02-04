@@ -178,7 +178,7 @@ void Fullscreen_Menu_Internet_Lobby::think ()
 	}
 
 	// Check whether metaserver send some data
-	InternetGaming::ref().datacore();
+	InternetGaming::ref().handle_metaserver_communication();
 
 	if (InternetGaming::ref().updateForClients())
 		fillClientList(InternetGaming::ref().clients());

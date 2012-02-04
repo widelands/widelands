@@ -20,20 +20,9 @@
 
 #include "internet_gaming.h"
 #include "internet_gaming_messages.h"
-#include "network_ggz.h"
-
-//static InternetGaming * ig = 0;
-
-InternetGaming & InternetGaming::ref() {
-	return NetGGZ::ref();
-#if 0
-	if (not ig)
-		ig = new InternetGaming();
-	return * ig;
-#endif
-}
 
 InternetGaming::InternetGaming() :
+	m_state       (OFFLINE),
 	m_maxclients  (1),
 	clientupdate  (false),
 	tableupdate   (false)
@@ -41,6 +30,51 @@ InternetGaming::InternetGaming() :
 	// Fill the list of possible messages from the server
 	InternetGamingMessages::fill_map();
 }
+
+static InternetGaming * ig = 0;
+
+InternetGaming & InternetGaming::ref() {
+	if (not ig)
+		ig = new InternetGaming();
+	return * ig;
+}
+
+
+/// Login to metaserver
+bool InternetGaming::login
+	(std::string const & nick, std::string const & pwd, bool registered,
+	 std::string const & metaserver, uint32_t port)
+{return false;}
+
+
+/// logout of the metaserver
+void InternetGaming::logout() {}
+
+
+/// handles all communication between the metaserver and the client
+void InternetGaming::handle_metaserver_communication() {}
+
+
+/// \returns the ip of the game the client is on or wants to join (or the client is hosting)
+///          or 0, if no ip available.
+char const * InternetGaming::ip() {return 0;}
+
+
+/// called by a client to join the game \arg gamename
+void InternetGaming::join_game(const std::string & gamename) {}
+
+
+/// called by a client to open a new game with name \arg gamename
+void InternetGaming::open_game() {}
+
+
+/// called by a client that is host of a game to inform the metaserver, that the game started
+void InternetGaming::set_game_playing() {}
+
+
+/// called by a client that is host of a game to inform the metaserver, that the game was ended.
+void InternetGaming::set_game_done() {}
+
 
 /// \returns whether the local gamelist was updated
 bool InternetGaming::updateForGames() {
@@ -66,27 +100,7 @@ std::vector<Net_Client>    const & InternetGaming::clients() {
 	return clientlist;
 }
 
-#if 0 // to be implemented
-/// \returns whether the client is logged in
-bool InternetGaming::logged_in() {}
-
-/// \returns the ip of the game the client is on or wants to join (or the client is hosting)
-///          or 0, if no ip available.
-char const * InternetGaming::ip() {}
-
-/// called by a client to join the game \arg gamename
-void InternetGaming::join_game(std::string gamename) {}
-
-/// called by a client to open a new game with name \arg gamename
-void InternetGaming::open_game() {}
-
-/// called by a client that is host of a game to inform the metaserver, that the game started
-void InternetGaming::set_game_playing() {}
-
-/// called by a client that is host of a game to inform the metaserver, that the game was ended.
-void InternetGaming::set_game_done() {}
 
 /// ChatProvider: sends a message via the metaserver.
 void InternetGaming::send(std::string const & msg) {}
 
-#endif
