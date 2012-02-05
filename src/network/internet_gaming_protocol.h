@@ -225,12 +225,12 @@ static const std::string IGPCMD_PONG = "PONG";
  *
  * The client sends this message to the metaserver with the following payload:
  * \li String:    the message
- * \li String:    name of user, if private message, else empty string.
+ * \li String:    name of client, if private message, else empty string.
  * The metaserver will echo the message if the client is allowed to send chat messages.
  *
  * The metaserver either broadcasts a chat message to all clients or sends it to the pm recipient with the
  * following payload:
- * \li String:    sender (may be empty to indicate system messages)
+ * \li String:    sender (may be empty if it is a system message)
  * \li String:    the message
  * \li String:    whether this is a personal message ("false, "true")
  * \li String:    whether this is a system message, which should even be shown in game ("false, "true")

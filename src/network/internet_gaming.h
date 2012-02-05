@@ -60,7 +60,7 @@ struct InternetGaming : public ChatProvider {
 	void logout(std::string const & msgcode = "CONNECTION_CLOSED");
 
 	/// \returns whether the client is logged in
-	bool logged_in() {return m_state != OFFLINE;}
+	bool logged_in() {return (m_state != OFFLINE) && (m_state != CONNECTING);}
 
 	void handle_metaserver_communication();
 
@@ -109,6 +109,11 @@ private:
 
 	void handle_packet(RecvPacket & packet);
 
+	// conversion functions
+	bool str2bool(std::string);
+	std::string bool2str(bool);
+
+	void formatAndAddChat(std::string from, std::string to, bool system, std::string msg);
 
 
 	/// The socket that connects us to the host
@@ -138,6 +143,8 @@ private:
 	char           * m_gameip;
 
 	/// Metaserver informations
+	bool                       clientupdateonmetaserver;
+	bool                       gameupdateonmetaserver;
 	bool                       clientupdate;
 	bool                       gameupdate;
 	std::vector<Net_Client>    clientlist;
