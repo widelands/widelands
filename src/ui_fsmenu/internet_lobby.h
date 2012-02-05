@@ -36,9 +36,6 @@
 #include <cstring>
 #include <vector>
 
-struct Net_Open_Game;
-struct Net_Game_info;
-
 struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
 	enum {
 		CANCEL = 0,
@@ -68,8 +65,8 @@ private:
 	UI::SpinBox maxclients;
 	UI::Button joingame, hostgame, back;
 	UI::EditBox servername;
-	UI::Table<const Net_Client * const> clientsonline;
-	UI::Listselect<Net_Open_Game> opengames;
+	UI::Table<const INet_Client * const> clientsonline;
+	UI::Listselect<INet_Game> opengames;
 	GameChatPanel chat;
 
 	// Login information
@@ -77,8 +74,8 @@ private:
 	const char * password;
 	bool         reg;
 
-	void fillGamesList (std::vector<Net_Game_Info> const &);
-	void fillClientList(std::vector<Net_Client> const &);
+	void fillGamesList (std::vector<INet_Game> const &);
+	void fillClientList(std::vector<INet_Client> const &);
 
 	void connectToMetaserver();
 

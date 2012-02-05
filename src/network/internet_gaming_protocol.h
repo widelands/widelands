@@ -275,10 +275,11 @@ static const std::string IGPCMD_CLIENTS_UPDATE = "CLIENTS_UPDATE";
  *
  * Sent by the metaserver with following payload:
  * \li String:    Number of client packages and for uint8_t i = 0; i < num; ++i {:
- * \li String:    Name of the Client
+ * \li String:    Name of the client
  * \li String:    Widelands version
- * \li String:    Server the player is connected to, else empty.
+ * \li String:    Game the player is connected to, else empty.
  * \li String:    Clients rights (see client rights section above)
+ * \li String:    Points of the client
  * }
  */
 static const std::string IGPCMD_CLIENTS = "CLIENTS";

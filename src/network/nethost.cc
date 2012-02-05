@@ -2412,6 +2412,7 @@ void NetHost::handle_network ()
 	// if this is an internet game, handle the metaserver information
 	if (m_internet)
 		InternetGaming::ref().handle_metaserver_communication();
+#warning implement a way to import metaserver SYSTEM MESSAGES to the running game and show them in game
 
 	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {

@@ -36,7 +36,7 @@ InternetGaming::InternetGaming() :
 	m_sock                   (0),
 	m_sockset                (0),
 	m_state                  (OFFLINE),
-	m_rights                 (0),
+	m_clientrights           (0),
 	m_maxclients             (1),
 	m_gameip                 (0),
 	clientupdateonmetaserver (false),
@@ -210,16 +210,16 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 	if (m_state == CONNECTING) {
 		if (cmd == IGPCMD_LOGIN) {
 			// Clients request to login was granted
-			m_clientname = packet.String();
+			m_clientname   = packet.String();
 			formatAndAddChat("", "", true, packet.String()); // welcome message
-			m_rights     = boost::lexical_cast<uint8_t>(packet.String());
-			m_state      = LOBBY;
+			m_clientrights = boost::lexical_cast<uint8_t>(packet.String());
+			m_state        = LOBBY;
 			dedicatedlog("InternetGaming: Client %s logged in.\n", m_clientname.c_str());
 			return;
 
 		} else if (cmd == IGPCMD_RELOGIN) {
 			// Clients request to relogin was granted
-			m_state      = LOBBY;
+			m_state = LOBBY;
 			dedicatedlog("InternetGaming: Client %s relogged in.\n", m_clientname.c_str());
 			return;
 
@@ -276,19 +276,43 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		}
 
 		if (cmd == IGPCMD_GAMES_UPDATE) {
+			// Cliente received a note, that the list of games was changed
 			gameupdateonmetaserver = true;
 		}
 
 		if (cmd == IGPCMD_GAMES) {
-	#warning not implemented
+			// Cliente received the new list of games
+			uint8_t number = boost::lexical_cast<uint8_t>(packet.String());
+			gamelist.clear();
+			for (uint8_t i = 0; i < number; ++i) {
+				INet_Game * ing  = new INet_Game();
+				ing->name        = packet.String();
+				ing->build_id    = packet.String();
+				ing->connectable = str2bool(packet.String());
+				gamelist.push_back(*ing);
+			}
+			gameupdate = true;
 		}
 
 		if (cmd == IGPCMD_CLIENTS_UPDATE) {
+			// Cliente received a note, that the list of clients was changed
 			clientupdateonmetaserver = true;
 		}
 
 		if (cmd == IGPCMD_CLIENTS) {
-	#warning not implemented
+			// Cliente received the new list of clients
+			uint8_t number = boost::lexical_cast<uint8_t>(packet.String());
+			clientlist.clear();
+			for (uint8_t i = 0; i < number; ++i) {
+				INet_Client * inc  = new INet_Client();
+				inc->name        = packet.String();
+				inc->build_id    = packet.String();
+				inc->game        = packet.String();
+				inc->type        = boost::lexical_cast<uint8_t>(packet.String());
+				inc->points      = packet.String();
+				clientlist.push_back(*inc);
+			}
+			clientupdate = true;
 		}
 
 		if (cmd == IGPCMD_GAME_OPEN) {
@@ -316,7 +340,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 	#warning not implemented
 		}
 	} catch (warning & e) {
-#warning send warning to chat
+		formatAndAddChat("", "", true, e.what());
 	}
 
 }
@@ -332,26 +356,35 @@ char const * InternetGaming::ip() {
 
 
 /// called by a client to join the game \arg gamename
-void InternetGaming::join_game(const std::string & gamename) {}
+void InternetGaming::join_game(const std::string & gamename) {
+#warning not yet implemented
+}
 
 
 
 /// called by a client to open a new game with name \arg gamename
-void InternetGaming::open_game() {}
+void InternetGaming::open_game() {
+#warning not yet implemented
+}
 
 
 
 /// called by a client that is host of a game to inform the metaserver, that the game started
-void InternetGaming::set_game_playing() {}
+void InternetGaming::set_game_playing() {
+#warning not yet implemented
+}
 
 
 
 /// called by a client that is host of a game to inform the metaserver, that the game was ended.
-void InternetGaming::set_game_done() {}
+void InternetGaming::set_game_done() {
+#warning not yet implemented
+}
 
 
 
 /// \returns whether the local gamelist was updated
+/// \note this function resets gameupdate. So if you call it, please really handle the output.
 bool InternetGaming::updateForGames() {
 	bool temp = gameupdate;
 	gameupdate = false;
@@ -361,13 +394,14 @@ bool InternetGaming::updateForGames() {
 
 
 /// \returns the tables in the room
-std::vector<Net_Game_Info> const & InternetGaming::games() {
+std::vector<INet_Game> const & InternetGaming::games() {
 	return gamelist;
 }
 
 
 
 /// \returns whether the local clientlist was updated
+/// \note this function resets clientupdate. So if you call it, please really handle the output.
 bool InternetGaming::updateForClients() {
 	bool temp = clientupdate;
 	clientupdate = false;
@@ -377,7 +411,7 @@ bool InternetGaming::updateForClients() {
 
 
 /// \returns the players in the room
-std::vector<Net_Client>    const & InternetGaming::clients() {
+std::vector<INet_Client> const & InternetGaming::clients() {
 	return clientlist;
 }
 

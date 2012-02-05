@@ -386,9 +386,9 @@ void WLApplication::run()
 				bool name_valid = false;
 				while (not name_valid) {
 					name_valid = true;
-					std::vector<Net_Game_Info> const & hosts = InternetGaming::ref().games();
+					std::vector<INet_Game> const & hosts = InternetGaming::ref().games();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
-						if (hosts[i].hostname == realservername)
+						if (hosts.at(i).name == realservername)
 							name_valid = false;
 					}
 					if (not name_valid)
@@ -396,7 +396,7 @@ void WLApplication::run()
 				}
 
 				InternetGaming::ref().set_local_servername(realservername);
-				// TODO implement option to set maxplayers
+#warning implement option to set maxplayers
 				InternetGaming::ref().set_local_maxplayers(7);
 
 				NetHost netgame(name, true);

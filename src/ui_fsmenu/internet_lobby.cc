@@ -205,34 +205,31 @@ void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 
 
 /// fills the server list
-void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<Net_Game_Info> const & games)
+void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<INet_Game> const & games)
 {
 	// List and button cleanup
 	opengames.clear();
 	hostgame.set_enabled(true);
 	joingame.set_enabled(false);
 	std::string localservername = servername.text();
-	localservername += " (" + build_id() + ")";
 	for (uint32_t i = 0; i < games.size(); ++i) {
-		Net_Open_Game newOG;
-		newOG.info = Net_Game_Info(games[i]);
 		PictureID pic;
-		switch (newOG.info.state) {
-			case LAN_GAME_OPEN:
+		if (games.at(i).connectable) {
+			if (games.at(i).build_id == build_id())
 				pic = g_gr->get_picture(PicMod_UI, "pics/continue.png");
-				break;
-			case LAN_GAME_CLOSED:
-				pic = g_gr->get_picture(PicMod_UI, "pics/stop.png");
-				break;
-			default:
-				continue;
+			else {
+				pic = g_gr->get_picture(PicMod_UI, "pics/different.png");
+#warning show build_id of game as hover text
+			}
+		} else {
+			pic = g_gr->get_picture(PicMod_UI, "pics/stop.png");
 		}
 		// If one of the servers has the same name as the local name of the
 		// clients server, we disable the 'hostgame' button to avoid having more
 		// than one server with the same name.
-		if (games[i].hostname == localservername)
+		if (games.at(i).name == localservername)
 			hostgame.set_enabled(false);
-		opengames.add(newOG.info.hostname, newOG, pic);
+		opengames.add(games.at(i).name.c_str(), games.at(i), pic);
 	}
 }
 
@@ -243,21 +240,21 @@ void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<Net_Game_Info> co
  */
 bool Fullscreen_Menu_Internet_Lobby::compare_clienttype(unsigned int rowa, unsigned int rowb)
 {
-	const Net_Client * playera = clientsonline[rowa];
-	const Net_Client * playerb = clientsonline[rowb];
+	const INet_Client * playera = clientsonline[rowa];
+	const INet_Client * playerb = clientsonline[rowb];
 
 	return playera->type < playerb->type;
 }
 
 /// fills the client list
-void Fullscreen_Menu_Internet_Lobby::fillClientList(std::vector<Net_Client> const & clients)
+void Fullscreen_Menu_Internet_Lobby::fillClientList(std::vector<INet_Client> const & clients)
 {
 	clientsonline.clear();
 	for (uint32_t i = 0; i < clients.size(); ++i) {
-		const Net_Client & client(clients[i]);
-		UI::Table<const Net_Client * const>::Entry_Record & er = clientsonline.add(&client);
+		const INet_Client & client(clients[i]);
+		UI::Table<const INet_Client * const>::Entry_Record & er = clientsonline.add(&client);
 		er.set_string(1, client.name);
-		er.set_string(2, client.stats);
+		er.set_string(2, client.points);
 		er.set_string(3, client.game);
 
 		PictureID pic;
@@ -288,7 +285,7 @@ void Fullscreen_Menu_Internet_Lobby::client_doubleclicked (uint32_t i)
 {
 	// add a @clientname to the current edit text.
 	if (clientsonline.has_selection()) {
-		UI::Table<const Net_Client * const>::Entry_Record & er = clientsonline.get_record(i);
+		UI::Table<const INet_Client * const>::Entry_Record & er = clientsonline.get_record(i);
 
 		std::string temp("@");
 		temp += er.get_string(1);
@@ -312,8 +309,8 @@ void Fullscreen_Menu_Internet_Lobby::client_doubleclicked (uint32_t i)
 void Fullscreen_Menu_Internet_Lobby::server_selected (uint32_t)
 {
 	if (opengames.has_selection()) {
-		const Net_Open_Game * game = &opengames.get_selected();
-		if (game->info.state == LAN_GAME_OPEN)
+		const INet_Game * game = &opengames.get_selected();
+		if (game->connectable)
 			joingame.set_enabled(true);
 		else
 			joingame.set_enabled(false);
@@ -326,8 +323,8 @@ void Fullscreen_Menu_Internet_Lobby::server_doubleclicked (uint32_t)
 {
 	// if the game is open try to connect it, if not do nothing.
 	if (opengames.has_selection()) {
-		const Net_Open_Game * game = &opengames.get_selected();
-		if (game->info.state == LAN_GAME_OPEN)
+		const INet_Game * game = &opengames.get_selected();
+		if (game->connectable)
 			clicked_joingame();
 	}
 }
@@ -341,9 +338,9 @@ void Fullscreen_Menu_Internet_Lobby::change_servername()
 
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
-	std::vector<Net_Game_Info> const & games = InternetGaming::ref().games();
+	std::vector<INet_Game> const & games = InternetGaming::ref().games();
 	for (uint32_t i = 0; i < games.size(); ++i) {
-		if (games[i].hostname == servername.text())
+		if (games.at(i).name == servername.text())
 			hostgame.set_enabled(false);
 	}
 }
@@ -353,7 +350,7 @@ void Fullscreen_Menu_Internet_Lobby::change_servername()
 void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 {
 	if (opengames.has_selection()) {
-		InternetGaming::ref().join_game(opengames.get_selected().info.hostname);
+		InternetGaming::ref().join_game(opengames.get_selected().name);
 		end_modal(JOINGAME);
 	} else
 		throw wexception("No server selected! That should not happen!");

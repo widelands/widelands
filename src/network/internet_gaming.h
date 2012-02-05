@@ -36,13 +36,20 @@
 #endif
 
 
-/// A simply network player struct
-struct Net_Client {
-	std::string   game;
+/// A simple network client struct
+struct INet_Client {
 	std::string   name;
 	std::string   build_id;
-	uint32_t      type;
-	char          stats[16];
+	std::string   game;
+	uint8_t       type;
+	std::string   points;
+};
+
+/// A simple network game struct
+struct INet_Game {
+	std::string   name;
+	std::string   build_id;
+	bool          connectable;
 };
 
 
@@ -74,9 +81,9 @@ struct InternetGaming : public ChatProvider {
 
 	// Informative functions for lobby
 	bool updateForGames();
-	std::vector<Net_Game_Info> const & games();
+	std::vector<INet_Game>   const & games();
 	bool updateForClients();
-	std::vector<Net_Client>    const & clients();
+	std::vector<INet_Client> const & clients();
 
 	/// \returns the maximum allowed number of clients in a game (players + spectators)
 	uint32_t max_clients() {return INTERNET_GAMING_MAX_CLIENTS_PER_GAME;}
@@ -93,6 +100,9 @@ struct InternetGaming : public ChatProvider {
 
 	/// \returns the name of the local client
 	std::string & get_local_clientname() {return m_clientname;}
+
+	/// \returns the rights of the local client
+	uint8_t get_local_clientrights()     {return m_clientrights;}
 
 
 	// ChatProvider: sends a message via the metaserver.
@@ -135,7 +145,7 @@ private:
 
 	/// local clients name and rights
 	std::string      m_clientname;
-	uint8_t          m_rights;
+	uint8_t          m_clientrights;
 
 	/// informations of the clients game
 	std::string      m_gamename;
@@ -143,13 +153,13 @@ private:
 	char           * m_gameip;
 
 	/// Metaserver informations
-	bool                       clientupdateonmetaserver;
-	bool                       gameupdateonmetaserver;
-	bool                       clientupdate;
-	bool                       gameupdate;
-	std::vector<Net_Client>    clientlist;
-	std::vector<Net_Game_Info> gamelist;
-	int32_t                    time_offset;
+	bool                     clientupdateonmetaserver;
+	bool                     gameupdateonmetaserver;
+	bool                     clientupdate;
+	bool                     gameupdate;
+	std::vector<INet_Client> clientlist;
+	std::vector<INet_Game>   gamelist;
+	int32_t                  time_offset;
 
 	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages;
