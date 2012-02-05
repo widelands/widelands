@@ -114,6 +114,13 @@ struct InternetGaming : public ChatProvider {
 	/// ChatProvider: returns the list of chatmessages.
 	std::vector<ChatMessage> const & getMessages() const {return messages;}
 
+	/// \returns and resets the ingame_system_chat messages
+	std::vector<ChatMessage> const & getIngameSystemMessages() {
+		std::vector<ChatMessage> const & temp(ingame_system_chat);
+		ingame_system_chat.clear();
+		return temp;
+	}
+
 private:
 	InternetGaming();
 
@@ -163,6 +170,7 @@ private:
 
 	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages;
+	std::vector<ChatMessage> ingame_system_chat;
 
 	struct WaitForReply {
 		std::string cmd;

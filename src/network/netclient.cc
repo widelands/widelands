@@ -1003,7 +1003,6 @@ void NetClient::handle_network ()
 	// if this is an internet game, handle the metaserver network
 	if (m_internet)
 		InternetGaming::ref().handle_metaserver_communication();
-#warning implement a way to import metaserver SYSTEM MESSAGES to the running game and show them in game
 	try {
 		while (d->sock != 0 && SDLNet_CheckSockets(d->sockset, 0) > 0) {
 			// Perform only one read operation, then process all packets

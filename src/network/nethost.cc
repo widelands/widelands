@@ -1044,9 +1044,7 @@ void NetHost::send(ChatMessage msg)
 					s.send(d->clients.at(j).sock);
 				else
 					// Better no wexception it would break the whole game
-					log
-						("WARNING: user was found but no client is connected to "
-						 "it!\n");
+					dedicatedlog("WARNING: user was found but no client is connected to it!\n");
 			} else
 				// Better no wexception it would break the whole game
 				dedicatedlog("WARNING: sender could not be found!");
@@ -2410,9 +2408,16 @@ void NetHost::handle_network ()
 	}
 
 	// if this is an internet game, handle the metaserver information
-	if (m_internet)
+	if (m_internet) {
 		InternetGaming::ref().handle_metaserver_communication();
-#warning implement a way to import metaserver SYSTEM MESSAGES to the running game and show them in game
+		if (d->game) {
+			// If the game already started, maybe an important message was send on the metaserver,
+			// that we should show in game as well.
+			std::vector<ChatMessage> msgs = InternetGaming::ref().getIngameSystemMessages();
+			for (uint8_t i = 0; i < msgs.size(); ++i)
+				send(msgs.at(i));
+		}
+	}
 
 	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {

@@ -371,12 +371,13 @@ void WLApplication::run()
 
 			// setup some details of the dedicated server
 			Section & s = g_options.pull_section      ("global");
-			std::string const & meta   = s.get_string ("metaserver", INTERNET_GAMING_METASERVER.c_str());
-			uint32_t            port   = s.get_natural("port",       INTERNET_GAMING_PORT);
-			std::string const & name   = s.get_string ("nickname",   "dedicated");
-			std::string const & server = s.get_string ("servername", name.c_str());
-			const bool registered      = s.get_bool   ("registered", false);
-			std::string const & pwd    = s.get_string ("password",   "");
+			std::string const & meta   = s.get_string ("metaserver",     INTERNET_GAMING_METASERVER.c_str());
+			uint32_t            port   = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
+			std::string const & name   = s.get_string ("nickname",       "dedicated");
+			std::string const & server = s.get_string ("servername",     name.c_str());
+			const bool registered      = s.get_bool   ("registered",     false);
+			std::string const & pwd    = s.get_string ("password",       "");
+			uint32_t            maxpl  = s.get_natural("maxplayers",     8);
 			for (;;) { // endless loop
 				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
 					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
@@ -396,8 +397,7 @@ void WLApplication::run()
 				}
 
 				InternetGaming::ref().set_local_servername(realservername);
-#warning implement option to set maxplayers
-				InternetGaming::ref().set_local_maxplayers(7);
+				InternetGaming::ref().set_local_maxplayers(maxpl);
 
 				NetHost netgame(name, true);
 
