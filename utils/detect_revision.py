@@ -103,9 +103,6 @@ def detect_revision():
 
     return 'REVDETECT-BROKEN-PLEASE-REPORT-THIS'
 
-
-    return revstring
-
 if __name__ == "__main__":
     print(detect_revision())
 
