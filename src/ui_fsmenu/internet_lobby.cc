@@ -24,9 +24,12 @@
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "log.h"
 #include "network/internet_gaming.h"
-#include "network/network.h"
+#include "network/netclient.h"
+#include "network/nethost.h"
 #include "profile/profile.h"
+#include "ui_basic/messagebox.h"
 
 Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	(char const * const nick, char const * const pwd, bool registered)
@@ -123,8 +126,8 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 			  boost::ref(*this)));
 	back.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Internet_Lobby::end_modal,
-			  boost::ref(*this), static_cast<int32_t>(CANCEL)));
+			 (&Fullscreen_Menu_Internet_Lobby::clicked_back,
+			  boost::ref(*this)));
 
 	back.set_font(font_small());
 	joingame.set_font(font_small());
@@ -351,7 +354,52 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 {
 	if (opengames.has_selection()) {
 		InternetGaming::ref().join_game(opengames.get_selected().name);
-		end_modal(JOINGAME);
+
+		uint32_t const secs = time(0);
+		while (InternetGaming::ref().ip().size() < 1) {
+			InternetGaming::ref().handle_metaserver_communication();
+			if (INTERNET_GAMING_TIMEOUT < time(0) - secs) {
+				// Actually the game is not done, but that way we are again listed as in the lobby
+				InternetGaming::ref().set_game_done();
+				// Show a popup warning message
+				std::string warningheader(_("Connection timed out"));
+				std::string warning
+					(_
+						("Widelands has not been able to get the IP address of the server in time.\n"
+						 "There seems to be a network problem, either on your side or on the side\n"
+						 "of the server.\n"));
+				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK);
+				mmb.set_align(UI::Align_Left);
+				mmb.run();
+			}
+		}
+		std::string ip = InternetGaming::ref().ip();
+
+		//  convert IPv6 addresses returned by the metaserver to IPv4 addresses.
+		//  At the moment SDL_net does not support IPv6 anyways.
+		if (not ip.compare(0, 7, "::ffff:")) {
+			ip = ip.substr(7);
+			log("InternetGaming: cut IPv6 address: %s\n", ip.c_str());
+		}
+
+		IPaddress peer;
+		if (hostent * const he = gethostbyname(ip.c_str())) {
+			peer.host = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
+			peer.port = htons(WIDELANDS_PORT);
+		} else {
+			// Actually the game is not done, but that way we are again listed as in the lobby
+			InternetGaming::ref().set_game_done();
+			// Show a popup warning message
+			std::string warningheader(_("Connection problem"));
+			std::string warning(_("Widelands has not been able to connect to the host."));
+			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK);
+			mmb.set_align(UI::Align_Left);
+			mmb.run();
+		}
+		SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);
+
+		NetClient netgame(&peer, InternetGaming::ref().get_local_clientname(), true);
+		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");
 }
@@ -362,6 +410,22 @@ void Fullscreen_Menu_Internet_Lobby::clicked_hostgame()
 {
 	// Save selected servername as default for next time.
 	g_options.pull_section("global").set_string("servername", servername.text());
+
+	// Set up the game
 	InternetGaming::ref().set_local_servername(servername.text());
-	end_modal(HOSTGAME);
+	uint32_t max = static_cast<uint32_t>(get_maxclients());
+	InternetGaming::ref().set_local_maxplayers(max);
+
+	// Start the game
+	NetHost netgame(InternetGaming::ref().get_local_clientname(), true);
+	netgame.run();
+}
+
+
+/// called when the 'back' button was clicked
+void Fullscreen_Menu_Internet_Lobby::clicked_back()
+{
+	// logout of the metaserver and close the lobby UI
+	InternetGaming::ref().logout();
+	end_modal(0);
 }

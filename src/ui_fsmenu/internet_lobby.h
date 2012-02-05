@@ -37,11 +37,6 @@
 #include <vector>
 
 struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
-	enum {
-		CANCEL = 0,
-		HOSTGAME,
-		JOINGAME
-	};
 
 	Fullscreen_Menu_Internet_Lobby (const char *, const char *, bool);
 
@@ -86,7 +81,7 @@ private:
 	void change_servername();
 	void clicked_joingame();
 	void clicked_hostgame();
-	void clicked_lasthost();
+	void clicked_back();
 
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 };

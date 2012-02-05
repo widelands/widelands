@@ -1635,6 +1635,7 @@ void WLApplication::mainmenu_multiplayer()
 			default:
 				assert(false);
 		}
+
 		if (internet) {
 			playername = mp.get_nickname();
 			std::string password(mp.get_password());
@@ -1648,64 +1649,8 @@ void WLApplication::mainmenu_multiplayer()
 
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_Internet_Lobby ns(playername.c_str(), password.c_str(), registered);
-			menu_result = ns.run();
-
-			switch (menu_result) {
-				case Fullscreen_Menu_Internet_Lobby::HOSTGAME: {
-					uint32_t max = static_cast<uint32_t>(ns.get_maxclients());
-					InternetGaming::ref().set_local_maxplayers(max);
-					NetHost netgame(playername, true);
-					netgame.run();
-					InternetGaming::ref().logout();
-					break;
-				}
-				case Fullscreen_Menu_Internet_Lobby::JOINGAME: {
-					uint32_t const secs = time(0);
-					while (!InternetGaming::ref().ip()) {
-						InternetGaming::ref().handle_metaserver_communication();
-						if (10 < time(0) - secs)
-							throw warning
-								(_("Connection timed out"), "%s",
-								 _
-								 	("Widelands has not been able to get the IP "
-								 	 "address of the server in time.\n"
-								 	 "There seems to be a network problem, either on "
-								 	 "your side or on side\n"
-								 	 "of the server.\n"));
-					}
-					std::string ip = InternetGaming::ref().ip();
-
-					//  convert IPv6 addresses returned by the metaserver to IPv4 addresses.
-					//  At the moment SDL_net does not support IPv6 anyways.
-					if (not ip.compare(0, 7, "::ffff:")) {
-						ip = ip.substr(7);
-						log("InternetGaming ## cut IPv6 address: %s\n", ip.c_str());
-					}
-
-					IPaddress peer;
-					if (hostent * const he = gethostbyname(ip.c_str())) {
-						peer.host =
-							(reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-						peer.port = htons(WIDELANDS_PORT);
-					} else
-						throw warning
-							(_("Connection problem"), "%s",
-							 _
-							 	("Widelands has not been able to connect to the "
-							 	 "host."));
-					SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);
-
-					NetClient netgame(&peer, playername, true);
-					netgame.run();
-					InternetGaming::ref().logout();
-					break;
-				}
-				default:
-					break;
-			}
-		}
-
-		else {
+			ns.run();
+		} else {
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_NetSetupLAN ns;
 			menu_result = ns.run();

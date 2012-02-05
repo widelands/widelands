@@ -218,6 +218,10 @@ void NetClient::run ()
 			 Widelands::Game::Loaded
 			 : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+
+		// if this is an internet game, tell the metaserver that the game is done.
+		if (m_internet)
+			InternetGaming::ref().set_game_done();
 		d->modal = 0;
 		d->game = 0;
 	} catch (...) {

@@ -38,7 +38,7 @@ InternetGaming::InternetGaming() :
 	m_state                  (OFFLINE),
 	m_clientrights           (0),
 	m_maxclients             (1),
-	m_gameip                 (0),
+	m_gameip                 (""),
 	clientupdateonmetaserver (false),
 	gameupdateonmetaserver   (false),
 	clientupdate             (false),
@@ -114,13 +114,15 @@ bool InternetGaming::login
 		// paperwork, so we put our feet up and just return. ;)
 		if (m_state != CONNECTING) {
 			if (m_state == LOBBY) {
+				formatAndAddChat("", "", true, _("For hosting a game, please take a look at the notes at:"));
+				formatAndAddChat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
 				return true;
 			} else if (m_state == OFFLINE)
 				return false;
 		}
 	}
 	dedicatedlog("InternetGaming: No answer from metaserver!\n");
-	logout("NO_ANSWERS");
+	logout("NO_ANSWER");
 	return false;
 }
 
@@ -189,6 +191,18 @@ void InternetGaming::handle_metaserver_communication() {
 
 			gameupdateonmetaserver = false;
 		}
+	}
+
+	if (waitlist.size() > 0) {
+		// TODO Check if a timeout is reached
+#warning needs implementation
+/*
+		time_t now = time(0);
+		for (uint8_t i = 0; i < waitlist.size(); ++i) {
+			if (now > waitlist.at(i).timeout) {
+			}
+		}
+		*/
 	}
 }
 
@@ -295,7 +309,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		}
 
 		if (cmd == IGPCMD_CLIENTS_UPDATE) {
-			// Cliente received a note, that the list of clients was changed
+			// Client received a note, that the list of clients was changed
 			clientupdateonmetaserver = true;
 		}
 
@@ -316,28 +330,23 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		}
 
 		if (cmd == IGPCMD_GAME_OPEN) {
-	#warning not implemented
+			// Client received the acknowledgment, that the game was opened
+	#warning implement timeout
 		}
 
 		if (cmd == IGPCMD_GAME_CONNECT) {
-	#warning not implemented
-		}
-
-		if (cmd == IGPCMD_GAME_DISCONNECT) {
-	#warning not implemented
-			m_gameip  = 0;
+			// Client received the ip for the game it wants to join
+			m_gameip = packet.String();
 		}
 
 		if (cmd == IGPCMD_GAME_START) {
-	#warning not implemented
-		}
-
-		if (cmd == IGPCMD_GAME_END) {
-	#warning not implemented
+			// Client received the acknowledgment, that the game was started
+	#warning implement timeout
 		}
 
 		if (cmd == IGPCMD_GAME_NOT_CONNECTABLE) {
-	#warning not implemented
+			// Client received the message, that the game is not connectable
+	#warning add system chat to client as soon as the nethost can handle imports of system chats to the game
 		}
 	} catch (warning & e) {
 		formatAndAddChat("", "", true, e.what());
@@ -349,7 +358,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 /// \returns the ip of the game the client is on or wants to join (or the client is hosting)
 ///          or 0, if no ip available.
-char const * InternetGaming::ip() {
+const std::string & InternetGaming::ip() {
 	return m_gameip;
 }
 
@@ -357,28 +366,71 @@ char const * InternetGaming::ip() {
 
 /// called by a client to join the game \arg gamename
 void InternetGaming::join_game(const std::string & gamename) {
-#warning not yet implemented
+	SendPacket s;
+	s.String(IGPCMD_GAME_CONNECT);
+	s.String(gamename);
+	s.send(m_sock);
+	m_gamename = gamename;
+	dedicatedlog("InternetGaming: Client tries to join a game with the name %s\n", m_gamename.c_str());
+	m_state = IN_GAME;
+
+/*
+	// From now on we wait for a reply from the metaserver
+	WaitForReply * wait = new WaitForReply;
+	wait->cmd     = IGPCMD_GAME_CONNECT;
+	wait->timeout = time(0) + INTERNET_GAMING_TIMEOUT;
+	waitlist.push_back(*wait);
+	*/
 }
 
 
 
-/// called by a client to open a new game with name \arg gamename
+/// called by a client to open a new game with name m_gamename
 void InternetGaming::open_game() {
-#warning not yet implemented
+	SendPacket s;
+	s.String(IGPCMD_GAME_OPEN);
+	s.String(m_gamename);
+	s.String(boost::lexical_cast<std::string>(m_maxclients));
+	s.send(m_sock);
+	dedicatedlog("InternetGaming: Client opened a game with the name %s.\n", m_gamename.c_str());
+	m_state = IN_GAME;
+
+/*
+	// From now on we wait for a reply from the metaserver
+	WaitForReply * wait = new WaitForReply;
+	wait->cmd     = IGPCMD_GAME_OPEN;
+	wait->timeout = time(0) + INTERNET_GAMING_TIMEOUT;
+	waitlist.push_back(*wait);
+	*/
 }
 
 
 
 /// called by a client that is host of a game to inform the metaserver, that the game started
 void InternetGaming::set_game_playing() {
-#warning not yet implemented
+	SendPacket s;
+	s.String(IGPCMD_GAME_START);
+	s.send(m_sock);
+	dedicatedlog("InternetGaming: Client announced the start of the game %s.\n", m_gamename.c_str());
+
+/*
+	// From now on we wait for a reply from the metaserver
+	WaitForReply * wait = new WaitForReply;
+	wait->cmd     = IGPCMD_GAME_START;
+	wait->timeout = time(0) + INTERNET_GAMING_TIMEOUT;
+	waitlist.push_back(*wait);
+	*/
 }
 
 
 
 /// called by a client that is host of a game to inform the metaserver, that the game was ended.
 void InternetGaming::set_game_done() {
-#warning not yet implemented
+	SendPacket s;
+	s.String(IGPCMD_GAME_DISCONNECT);
+	s.send(m_sock);
+	m_gameip  = "";
+	dedicatedlog("InternetGaming: Client announced the end of the game %s.\n", m_gamename.c_str());
 }
 
 

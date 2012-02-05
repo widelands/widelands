@@ -725,7 +725,7 @@ void NetHost::run(bool const autorun)
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
 					return;
-				if (needip && InternetGaming::ref().ip()) {
+				if (needip && (InternetGaming::ref().ip().size() < 1)) {
 					dl->set_server_ip(InternetGaming::ref().ip());
 					needip = false;
 				}

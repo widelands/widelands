@@ -72,7 +72,7 @@ struct InternetGaming : public ChatProvider {
 	void handle_metaserver_communication();
 
 	// Game specific functions
-	char const * ip();
+	const std::string & ip();
 	void join_game(std::string const & gamename);
 	void open_game();
 	void set_game_playing();
@@ -150,7 +150,7 @@ private:
 	/// informations of the clients game
 	std::string      m_gamename;
 	uint32_t         m_maxclients;
-	char           * m_gameip;
+	std::string      m_gameip;
 
 	/// Metaserver informations
 	bool                     clientupdateonmetaserver;
@@ -163,6 +163,15 @@ private:
 
 	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages;
+
+	struct WaitForReply {
+		std::string cmd;
+		// time the wait timeouts
+		time_t      timeout;
+	};
+
+	/// List of important responses, the client is waiting for.
+	std::vector<WaitForReply> waitlist;
 
 };
 

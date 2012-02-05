@@ -46,7 +46,7 @@
  *
  * \todo Should this be resetable by the user?
  */
-#define INTERNET_GAMING_TIMEOUT 10 // 10 seconds
+#define INTERNET_GAMING_TIMEOUT 20 // 20 seconds
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes the
@@ -82,7 +82,7 @@ static const std::string INTERNET_GAMING_METASERVER = "widelands.org";
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * CLIENT RIGHTS                  *
+ * CLIENT RIGHTS                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /// Client rights
 enum {
@@ -317,7 +317,6 @@ static const std::string IGPCMD_GAME_CONNECT = "GAME_CONNECT";
  * This is the case in *every* way a client leaves a game. No matter if a game was played or not or whether
  * the client is the host or not.
  *
- * Sent by the metaserver to acknowledge the close of connection request
  * \note as soon as this message is sent, the metaserver will list the client as not connected to any
  *       game.
  * \note if the client that sends this message is the host of the game, the game will be
@@ -346,11 +345,7 @@ static const std::string IGPCMD_GAME_START = "GAME_START";
  *
  * \note this does not end the physical game and thus the metaserver should not remove the game from
  *       the list. The clients might want to play on, so...
- * \note the client will wait for the metaserver answer,to ensure the game is listed. If even retries
- *       are not answered, the connection to the metaserver will be closed and a message shall be send
- *       to the client in the still open game.
  *
- * Sent by the metaserver to acknowledge that it received the data.
  */
 static const std::string IGPCMD_GAME_END = "GAME_END";
 
