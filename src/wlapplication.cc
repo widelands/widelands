@@ -377,7 +377,7 @@ void WLApplication::run()
 			std::string const & server = s.get_string ("servername",     name.c_str());
 			const bool registered      = s.get_bool   ("registered",     false);
 			std::string const & pwd    = s.get_string ("password",       "");
-			uint32_t            maxpl  = s.get_natural("maxplayers",     8);
+			uint32_t            maxcl  = s.get_natural("maxclients",     8);
 			for (;;) { // endless loop
 				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
 					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
@@ -397,7 +397,7 @@ void WLApplication::run()
 				}
 
 				InternetGaming::ref().set_local_servername(realservername);
-				InternetGaming::ref().set_local_maxplayers(maxpl);
+				InternetGaming::ref().set_local_maxclients(maxcl);
 
 				NetHost netgame(name, true);
 

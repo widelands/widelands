@@ -414,7 +414,7 @@ void Fullscreen_Menu_Internet_Lobby::clicked_hostgame()
 	// Set up the game
 	InternetGaming::ref().set_local_servername(servername.text());
 	uint32_t max = static_cast<uint32_t>(get_maxclients());
-	InternetGaming::ref().set_local_maxplayers(max);
+	InternetGaming::ref().set_local_maxclients(max);
 
 	// Start the game
 	NetHost netgame(InternetGaming::ref().get_local_clientname(), true);
