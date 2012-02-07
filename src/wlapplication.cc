@@ -1619,8 +1619,6 @@ void WLApplication::mainmenu_multiplayer()
 
 	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
-		std::string playername;
-
 		bool internet = false;
 		Fullscreen_Menu_MultiPlayer mp;
 		switch (mp.run()) {
@@ -1636,7 +1634,7 @@ void WLApplication::mainmenu_multiplayer()
 		}
 
 		if (internet) {
-			playername = mp.get_nickname();
+			std::string playername = mp.get_nickname();
 			std::string password(mp.get_password());
 			bool registered = mp.registered();
 
@@ -1649,11 +1647,18 @@ void WLApplication::mainmenu_multiplayer()
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_Internet_Lobby ns(playername.c_str(), password.c_str(), registered);
 			ns.run();
+
+			if (InternetGaming::ref().logged_in())
+				// logout of the metaserver
+				InternetGaming::ref().logout();
+			else
+				// Reset InternetGaming for clean login
+				InternetGaming::ref().reset();
 		} else {
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_NetSetupLAN ns;
 			menu_result = ns.run();
-			playername = ns.get_playername();
+			std::string playername = ns.get_playername();
 			uint32_t addr;
 			uint16_t port;
 			bool const host_address = ns.get_host_address(addr, port);

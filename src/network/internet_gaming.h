@@ -60,6 +60,8 @@ struct InternetGaming : public ChatProvider {
 	/// The only instance of InternetGaming -> the constructor is private by purpose!
 	static InternetGaming & ref();
 
+	void reset();
+
 	// Login and logout
 	bool login
 		(std::string const & nick, std::string const & pwd, bool registered,
@@ -67,7 +69,8 @@ struct InternetGaming : public ChatProvider {
 	void logout(std::string const & msgcode = "CONNECTION_CLOSED");
 
 	/// \returns whether the client is logged in
-	bool logged_in() {return (m_state != OFFLINE) && (m_state != CONNECTING);}
+	bool logged_in() {return (m_state == LOBBY) || (m_state == CONNECTING) || (m_state == IN_GAME);}
+	bool error()     {return (m_state == ERROR);}
 
 	void handle_metaserver_communication();
 
@@ -147,7 +150,8 @@ private:
 		OFFLINE,
 		CONNECTING,
 		LOBBY,
-		IN_GAME
+		IN_GAME,
+		ERROR
 	}                m_state;
 
 	/// local clients name and rights

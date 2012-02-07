@@ -48,6 +48,27 @@ InternetGaming::InternetGaming() :
 	InternetGamingMessages::fill_map();
 }
 
+/// resets all stored variables without the chat messages for a clean new login (not relogin)
+void InternetGaming::reset() {
+	m_sock                   = 0;
+	m_sockset                = 0;
+	m_state                  = OFFLINE;
+	m_clientname             = "";
+	m_clientrights           = INTERNET_CLIENT_UNREGISTERED;
+	m_maxclients             = 1;
+	m_gamename               = "";
+	m_gameip                 = "";
+	clientupdateonmetaserver = false;
+	gameupdateonmetaserver   = false;
+	clientupdate             = false;
+	gameupdate               = false;
+	time_offset              = 0;
+
+	clientlist.clear();
+	gamelist.clear();
+	waitlist.clear();
+}
+
 
 /// the one and only InternetGaming instance.
 static InternetGaming * ig = 0;
@@ -116,7 +137,7 @@ bool InternetGaming::login
 				formatAndAddChat("", "", true, _("For hosting a game, please take a look at the notes at:"));
 				formatAndAddChat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
 				return true;
-			} else if (m_state == OFFLINE)
+			} else if (m_state == ERROR)
 				return false;
 		}
 	}
@@ -138,12 +159,10 @@ void InternetGaming::logout(std::string const & msgcode) {
 	s.send(m_sock);
 
 	const std::string & msg = InternetGamingMessages::get_message(msgcode);
-	dedicatedlog("InternetGaming: %s!\n", msg.c_str());
+	dedicatedlog("InternetGaming: %s\n", msg.c_str());
 	formatAndAddChat("", "", true, msg);
 
-	m_sock    = 0;
-	m_sockset = 0;
-	m_state   = OFFLINE;
+	reset();
 }
 
 
@@ -240,10 +259,12 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				throw warning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
 			// Clients login request got rejected
 			logout(packet.String());
+			m_state = ERROR;
 			return;
 
 		} else {
 			logout();
+			m_state = ERROR;
 			throw warning
 				(_
 				 	("Expected a LOGIN, RELOGIN or REJECTED packet from server, but received command "

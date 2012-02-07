@@ -165,7 +165,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 		(boost::bind(&Fullscreen_Menu_Internet_Lobby::server_doubleclicked, this, _1));
 
 	// try to connect to the metaserver
-	if (!InternetGaming::ref().logged_in())
+	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
 		connectToMetaserver();
 }
 
@@ -174,6 +174,9 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 void Fullscreen_Menu_Internet_Lobby::think ()
 {
 	Fullscreen_Menu_Base::think ();
+
+	if (InternetGaming::ref().error())
+		return;
 
 	// If we have no connection try to connect
 	if (!InternetGaming::ref().logged_in()) {
@@ -437,7 +440,6 @@ void Fullscreen_Menu_Internet_Lobby::clicked_hostgame()
 /// called when the 'back' button was clicked
 void Fullscreen_Menu_Internet_Lobby::clicked_back()
 {
-	// logout of the metaserver and close the lobby UI
-	InternetGaming::ref().logout();
+	// Close the lobby UI
 	end_modal(0);
 }
