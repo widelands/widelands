@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 14:40+0100\n"
-"PO-Revision-Date: 2012-01-20 12:24+0000\n"
+"PO-Revision-Date: 2012-02-06 12:53+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-01-21 05:15+0000\n"
-"X-Generator: Launchpad (build 14700)\n"
+"X-Launchpad-Export-Date: 2012-02-07 04:33+0000\n"
+"X-Generator: Launchpad (build 14747)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1624,7 +1624,7 @@ msgstr "imposta la quantità bersaglio del lavoratore: %s"
 #: ../../src/logic/playercommand.cc:1128
 #, c-format
 msgid "change training options: %s"
-msgstr "cambia le opzioni di allenamento: %s"
+msgstr "cambia le opzioni di addestramento: %s"
 
 #: ../../src/logic/playercommand.cc:1192
 #, c-format
@@ -1894,7 +1894,7 @@ msgstr "livello"
 #: ../../src/logic/production_program.cc:1353
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr "Nessun soldato per questo livello di allenamento trovato!"
+msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
 #: ../../src/logic/production_program.cc:1329
 #, c-format
@@ -2202,7 +2202,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1103
 #, c-format
 msgid "trainingsite: %s"
-msgstr "sito d'allenamento: %s"
+msgstr "sito d'addestramento: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:70
 #, c-format
@@ -4539,7 +4539,7 @@ msgstr "Lavoratori nei magazzini"
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
-msgstr "Soldati in allenamento"
+msgstr "Soldati in addestramento"
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"

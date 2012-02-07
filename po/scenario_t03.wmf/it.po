@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2012-02-03 12:57+0000\n"
+"PO-Revision-Date: 2012-02-06 12:52+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-04 04:54+0000\n"
-"X-Generator: Launchpad (build 14738)\n"
+"X-Launchpad-Export-Date: 2012-02-07 04:32+0000\n"
+"X-Generator: Launchpad (build 14747)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -48,7 +48,7 @@ msgstr ""
 "lungo, freddo inverno. Dovremmo cominciare a costruire un pozzo, un "
 "pescatore e la capanna di un cacciatore. E se si trova lo spazio "
 "sufficiente, dobbiamo anche costruire una fattoria e un forno! Uno dei "
-"nostri agricoltori sembra essere molto intelligente ha già fatto crescere "
+"nostri agricoltori sembra essere molto intelligente: ha già fatto crescere "
 "alcune colture in questo suolo freddo.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:372
@@ -75,8 +75,7 @@ msgstr ""
 " \"Finalmente!<br>La fortezza è stata appena completata, così l'entrata al "
 "nostro insediamento dovrebbe essere sicuro per ora. Per il futuro si "
 "potrebbe pensare alla costruzione di alcune fortificazioni come fortini e "
-"dongioni presso i passaggi, ma per ora siamo in grado di fare un respiro "
-"profondo.\" "
+"dongioni presso i passaggi, ma per ora siamo in grado di prendere fiato.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:179
 msgid ""
@@ -171,9 +170,9 @@ msgid ""
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
 " \"La nostra economia mineraria sembra funzionare bene, questa è già una "
-"buona notizia! Comunque ci sono ancora un sacco di uomini e donne nella "
-"nostra sala d'attesa per ottenere un compito, in modo che possano aiutare i "
-"nostri soldati a prepararsi per le lotte future."
+"buona notizia! Comunque ci sono ancora un sacco di uomini e donne in attesa "
+"di ottenere un compito, quindi potranno aiutare i nostri soldati a "
+"prepararsi per le lotte future."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:360
 msgid ""
@@ -232,8 +231,8 @@ msgstr ""
 "che abbiamo eretto intorno ad Ondun ci garantiranno un rapido rifornimento "
 "di uomini e merci ed una volta che Al'thunran sarà nelle mie mani, le due "
 "città saranno collegate da un'infrastruttura valida e difendibile. Spero "
-"ancora che non sarò da solo in questa missione, che Kalitat il figlio di Kun "
-"risponda alla mia chiamata.\" "
+"ancora che non sarò da solo in questa missione, che Kalitat, il figlio di "
+"Kun, risponda alla mia chiamata.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:161
 msgid ""
@@ -244,13 +243,14 @@ msgid ""
 "vulnerable. As my scouts report, he has set foot on the lower grounds around "
 "the capitol, securing the outer fortification rings.\" "
 msgstr ""
-" \"La notizia che una pattuglia ha portato non è bella da ascoltare. Le "
-"nostre spie ci dicono che le tribù in guerra sono ancora in una rabbiosa "
-"battaglia, ma alcuni soldati anziani e capitribù sembrano stanchi di questa "
-"guerra insensata. Kalitath, figlio di Kun è il primo condottiero a lasciare "
-"Al'thunran, lasciando così il suo lato debole e vulnerabile. Come riportato "
-"dal mio esploratore, egli ha messo piede nelle terre attorno alla capitale, "
-"assicurandosi gli anelli esterni della fortificazione.\" "
+" \"Le notizie che ci ha portato una pattuglia non sono bella da ascoltare. "
+"Le nostre spie ci dicono che le tribù sono ancora impegnate in una rabbiosa "
+"battaglia, ma alcuni dei soldati più anziani e dei capitribù sembrano "
+"stanchi di questa guerra insensata. Kalitath, figlio di Kun, è il primo "
+"condottiero a lasciare Al'thunran, lasciando così il suo lato debole e "
+"vulnerabile. Come riportato dal mio esploratore, egli ha messo piede nelle "
+"terre attorno alla capitale, mettendo in sicurezza gli anelli esterni della "
+"fortificazione.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:222
 msgid ""
@@ -342,8 +342,8 @@ msgstr ""
 msgid ""
 "* Build a battle arena and a trainings camp to the west of the mountains."
 msgstr ""
-"* Costruisci una arena di battaglia ed un campo allenamenti ad ovest delle "
-"montagne."
+"* Costruisci un'arena di battaglia ed un campo d'addestramento ad ovest "
+"delle montagne."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
 msgid ""
@@ -355,7 +355,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:266
 msgid "* Build a donjon at the northeast of your territory."
-msgstr "* Costruire una dongione a nord-est del territorio."
+msgstr "* Costruisci un dongione a nord-est del territorio."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
@@ -382,7 +382,7 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
-"* Costruire più edifici militari per esplorare l'area intorno alla sede "
+"* Costruisci più edifici militari per esplorare l'area intorno alla sede "
 "centrale e per garantire la sicurezza del tuo popolo."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
@@ -391,7 +391,7 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
-"* Costruire un'economia alimentare di base - una capanna del pescatore, una "
+"* Costruisci un'economia alimentare di base - una capanna del pescatore, una "
 "capanna del cacciatore, un pozzo, una fattoria e un forno, per fornire cibo "
 "al tuo popolo."
 
@@ -436,9 +436,9 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
-"* Espandere il proprio territorio sino alle montagne, inviare geologi per la "
-"ricerca di minerali e carbone e costruire un'economia mineraria con le "
-"miniere, le taverne, la fonderia e il negozio di carpenteria metallica."
+"* Espandi il tuo territorio sino alle montagne, invia geologi per la ricerca "
+"di minerali e carbone e costruisci un'economia mineraria con le miniere, le "
+"taverne, la fonderia e l'officina metallica."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -475,7 +475,7 @@ msgid ""
 "important in fights and the better a soldier is, the higher is the chance to "
 "win a fight.<br>Attributes are: health points, attack, defense and evade."
 msgstr ""
-"-> I siti di allenamento, come un campo di addestramento o un'arena di "
+"-> I siti di addestramento, come un campo di addestramento o un'arena di "
 "battaglia, vengono utilizzati per la formazione dei soldati nei loro diversi "
 "attributi. Questi attributi sono importanti negli scontri e migliore è un "
 "soldato maggiore sarà la possibilità di vincere una battaglia.<br>Gli "
@@ -565,7 +565,7 @@ msgstr "Dubbi"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
-msgstr "Economia e allenamento migliorati"
+msgstr "Economia avanzata ed addestramento"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
@@ -609,7 +609,7 @@ msgstr "Assalto militare ad Al’thunran"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:296
 msgid "Mining economy completed"
-msgstr "Economia delle miniere completata"
+msgstr "Economia mineraria completata"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:284
 msgid "Mountains found"
@@ -627,12 +627,12 @@ msgid ""
 msgstr ""
 "I nostri geologi hanno trovato molti depositi minerari di ferro, carbone e "
 "anche oro. Dovremmo migliorare le nostre attuali miniere non appena i "
-"minatori diventano più esperti. Dovremmo costruire qualche altra miniera, "
+"minatori diventeranno più esperti. Dovremmo costruire qualche altra miniera, "
 "una più grande infrastruttura alimentare per fornire ai nostri uomini cibo "
 "sufficiente ed una maggiore economia di trasformazione. Ma ancora non è "
 "tutto - la maggior parte dei nostri soldati sono piuttosto giovani e non "
 "hanno una buona arma né sono ben addestrati. Dovremmo costruire dei siti di "
-"allenamento per prepararli ai loro futuri compiti.\" "
+"addestramento per prepararli ai loro futuri compiti.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
@@ -662,11 +662,11 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
 msgid "Thron looks worried."
-msgstr "Thron con sguardo preoccupato..."
+msgstr "Thron sembra preoccupato."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:148
 msgid "Thron looks worried..."
-msgstr "Thron con sguardo preoccupato..."
+msgstr "Thron sembra preoccupato..."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:187
 msgid "Thron speaks confidently."
@@ -695,4 +695,4 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
-msgstr "Il vostro leale compagno"
+msgstr "Il tuo leale compagno"
