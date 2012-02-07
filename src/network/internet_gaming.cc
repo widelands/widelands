@@ -17,7 +17,6 @@
  *
  */
 
-
 #include "internet_gaming.h"
 
 #include "i18n.h"
@@ -226,7 +225,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			// Clients request to login was granted
 			m_clientname   = packet.String();
 			formatAndAddChat("", "", true, packet.String()); // welcome message
-			m_clientrights = boost::lexical_cast<uint8_t>(packet.String());
+			m_clientrights = boost::lexical_cast<int>(packet.String()) & 0xff;
 			m_state        = LOBBY;
 			dedicatedlog("InternetGaming: Client %s logged in.\n", m_clientname.c_str());
 			return;
@@ -296,7 +295,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 		if (cmd == IGPCMD_GAMES) {
 			// Cliente received the new list of games
-			uint8_t number = boost::lexical_cast<uint8_t>(packet.String());
+			uint8_t number = boost::lexical_cast<int>(packet.String()) & 0xff;
 			gamelist.clear();
 			for (uint8_t i = 0; i < number; ++i) {
 				INet_Game * ing  = new INet_Game();
@@ -315,14 +314,14 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 		if (cmd == IGPCMD_CLIENTS) {
 			// Cliente received the new list of clients
-			uint8_t number = boost::lexical_cast<uint8_t>(packet.String());
+			uint8_t number = boost::lexical_cast<int>(packet.String()) & 0xff;
 			clientlist.clear();
 			for (uint8_t i = 0; i < number; ++i) {
 				INet_Client * inc  = new INet_Client();
 				inc->name        = packet.String();
 				inc->build_id    = packet.String();
 				inc->game        = packet.String();
-				inc->type        = boost::lexical_cast<uint8_t>(packet.String());
+				inc->type        = boost::lexical_cast<int>(packet.String()) & 0xff;
 				inc->points      = packet.String();
 				clientlist.push_back(*inc);
 			}
@@ -507,7 +506,7 @@ void InternetGaming::send(std::string const & msg) {
  * If conversion fails, it throws a \ref warning
  */
 bool InternetGaming::str2bool(std::string str) {
-	if (str == "true" || str == "false")
+	if ((str != "true") && (str != "false"))
 		throw warning("Conversion from std::string to bool failed. String was \"%s\"", str.c_str());
 	return str == "true";
 }

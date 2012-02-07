@@ -39,6 +39,7 @@ const std::string & InternetGamingMessages::get_message(const std::string & code
 /// are loaded.
 void InternetGamingMessages::fill_map() {
 	// messages from metaserver to client
+	igmessages["NO_SUCH_USER"]         = _("No user with the name %s is logged in!");
 	igmessages["WRONG_PASSWORD"]       = _("The send password was incorrect!");
 	igmessages["UNSUPPORTED_PROTOCOL"] = _("The protocol version you are using is not supported!");
 	igmessages["ALREADY_LOGGED_IN"]    = _("You are already logged in!");
