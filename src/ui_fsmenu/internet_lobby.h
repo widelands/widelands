@@ -83,6 +83,7 @@ private:
 	void clicked_hostgame();
 	void clicked_back();
 
+	uint8_t convert_clienttype(const std::string &);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 };
 

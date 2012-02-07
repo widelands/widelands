@@ -41,7 +41,7 @@ struct INet_Client {
 	std::string   name;
 	std::string   build_id;
 	std::string   game;
-	uint8_t       type;
+	std::string   type;
 	std::string   points;
 };
 
@@ -102,7 +102,7 @@ struct InternetGaming : public ChatProvider {
 	std::string & get_local_clientname() {return m_clientname;}
 
 	/// \returns the rights of the local client
-	uint8_t get_local_clientrights()     {return m_clientrights;}
+	std::string get_local_clientrights()     {return m_clientrights;}
 
 
 	// ChatProvider: sends a message via the metaserver.
@@ -152,7 +152,7 @@ private:
 
 	/// local clients name and rights
 	std::string      m_clientname;
-	uint8_t          m_clientrights;
+	std::string      m_clientrights;
 
 	/// informations of the clients game
 	std::string      m_gamename;

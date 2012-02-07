@@ -85,12 +85,10 @@ static const std::string INTERNET_GAMING_METASERVER = "widelands.org";
  * CLIENT RIGHTS                                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /// Client rights
-enum {
-	INTERNET_CLIENT_UNREGISTERED = 0,
-	INTERNET_CLIENT_REGISTERED   = 1,
-	INTERNET_CLIENT_SUPERUSER    = 2,
-	INTERNET_CLIENT_BOT          = 3
-};
+static const std::string INTERNET_CLIENT_UNREGISTERED = "UNREGISTERED";
+static const std::string INTERNET_CLIENT_REGISTERED   = "REGISTERED";
+static const std::string INTERNET_CLIENT_SUPERUSER    = "SUPERUSER";
+static const std::string INTERNET_CLIENT_BOT          = "BOT";
 
 
 
@@ -147,8 +145,6 @@ static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
  * If the metaserver accepts, it replies with a LOGIN command with the following payload:
  * \li String:    client name (might be different to the previously chosen one, if the client did
  *                NOT login to a registered account and either the chosen is registered or already used.)
- * \li String:    welcome message (this might hold information about why the chosen name was changed to
- *                another or e.g. informations like "you've got 1 unread message on widelands.org")
  * \li String:    clients rights  (see client rights section above)
  *
  * If no answer is received in \ref INTERNET_GAMING_TIMEOUT s the client will again try to login
@@ -180,16 +176,21 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  * If no answer is received in \ref INTERNET_GAMING_TIMEOUT s the client will try to relogin
  * \ref INTERNET_GAMING_RETRIES times until it finally bails out something like "server does not answer"
  *
- * For the case, that the metaserver does not accept the login, take a look at IGPCMD_REJECTED
+ * For the case, that the metaserver does not accept the login, it sends a \ref IGPCMD_ERROR "LOGIN"
  */
 static const std::string IGPCMD_RELOGIN = "RELOGIN";
 
 /**
- * If the metaserver does not accept the login for a certain reason (password wrong, user blocked?,
- * whatever...) it replies with a REJECTED command with the following payload:
- * \li String:    Reason why the client was rejected as message code
+ * This command is sent by the metaserver if something went wrong.
+ * At least the following payload:
+ * \li String:    IGPCMD code of the message that lead to the ERROR message or ERROR GARBAGE_RECEIVED if
+ *                the received code was unknown.
+ * \li String:    explanation code or the string that was sent, if ERROR GARBAGE_RECEIVED
+ *
+ * \note all this is handled in InternetGaming::handle_packet. valid explanation codes can be found there.
+ * \note example for not connectable game: "ERROR" "GAME_OPEN" "GAME_NOT_CONNECTABLE"
  */
-static const std::string IGPCMD_REJECTED = "REJECTED";
+static const std::string IGPCMD_ERROR = "ERROR";
 
 /**
  * This is send by the metaserver to inform the client, about the metaserver time = time(0). Payload
@@ -348,9 +349,6 @@ static const std::string IGPCMD_GAME_START = "GAME_START";
  *
  */
 static const std::string IGPCMD_GAME_END = "GAME_END";
-
-/// Sent by the metaserver to tell a game hosting client, that the game is not connectable. No payload.
-static const std::string IGPCMD_GAME_NOT_CONNECTABLE = "GAME_NOT_CONNECTABLE";
 
 
 #endif

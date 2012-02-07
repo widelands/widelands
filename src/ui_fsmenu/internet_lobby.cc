@@ -237,6 +237,18 @@ void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<INet_Game> const 
 }
 
 
+uint8_t Fullscreen_Menu_Internet_Lobby::convert_clienttype(const std::string & type) {
+	if (type == INTERNET_CLIENT_REGISTERED)
+		return 1;
+	if (type == INTERNET_CLIENT_SUPERUSER)
+		return 2;
+	if (type == INTERNET_CLIENT_BOT)
+		return 3;
+	// if (type == INTERNET_CLIENT_UNREGISTERED)
+	return 0;
+}
+
+
 /**
  * \return \c true if the client in row \p rowa should come before the client in
  * row \p rowb when sorted according to clienttype
@@ -246,7 +258,7 @@ bool Fullscreen_Menu_Internet_Lobby::compare_clienttype(unsigned int rowa, unsig
 	const INet_Client * playera = clientsonline[rowa];
 	const INet_Client * playerb = clientsonline[rowb];
 
-	return playera->type < playerb->type;
+	return convert_clienttype(playera->type) < convert_clienttype(playerb->type);
 }
 
 /// fills the client list
@@ -261,17 +273,17 @@ void Fullscreen_Menu_Internet_Lobby::fillClientList(std::vector<INet_Client> con
 		er.set_string(3, client.game);
 
 		PictureID pic;
-		switch (client.type) {
-			case INTERNET_CLIENT_UNREGISTERED:
+		switch (convert_clienttype(client.type)) {
+			case 0: // UNREGISTERED
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_red.png");
 				er.set_picture(0, pic);
 				break;
-			case INTERNET_CLIENT_REGISTERED:
+			case 1: // REGISTERED
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_yellow.png");
 				er.set_picture(0, pic);
 				break;
-			case INTERNET_CLIENT_SUPERUSER:
-			case INTERNET_CLIENT_BOT:
+			case 2: // SUPERUSER
+			case 3: // BOT
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);

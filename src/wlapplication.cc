@@ -1622,7 +1622,6 @@ void WLApplication::mainmenu_multiplayer()
 		std::string playername;
 
 		bool internet = false;
-		InternetGaming::ref().logout(); // cleanup for reconnect to the metaserver
 		Fullscreen_Menu_MultiPlayer mp;
 		switch (mp.run()) {
 			case Fullscreen_Menu_MultiPlayer::Back:
