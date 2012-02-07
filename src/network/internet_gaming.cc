@@ -366,11 +366,30 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		}
 
 		if (cmd == IGPCMD_ERROR) {
-			// Client received the message, that the game is not connectable
-			/*                 self.send("ERROR", "CHAT", "NO_SUCH_USER", receipient)
-			 * example for not connectable game: "ERROR" "GAME_OPEN" "GAME_NOT_CONNECTABLE" */
-	#warning add system chat to client as soon as the nethost can handle imports of system chats to the game
+			// Client received an ERROR message - seems something went wrong
+			std::string cmd    (packet.String());
+			std::string reason (packet.String());
+			std::string message(_("ERROR: "));
+
+			if (cmd == IGPCMD_CHAT) {
+				// Something went wrong with the chat message the user sent.
+				message += _("Chat message could not be sent. ");
+				if (reason == "NO_SUCH_USER")
+					message +=
+						(boost::format
+							(InternetGamingMessages::get_message(reason)) % packet.String().c_str())
+						.str();
+			}
+
+			else if (cmd == IGPCMD_GAME_OPEN) {
+				// Something went wrong with the newly opened game
+				message += InternetGamingMessages::get_message(reason);
+			}
+
+			// Finally send the error message as system chat to the client.
+			formatAndAddChat("", "", true, message);
 		}
+
 	} catch (warning & e) {
 		formatAndAddChat("", "", true, e.what());
 	}

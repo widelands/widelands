@@ -52,4 +52,5 @@ void InternetGamingMessages::fill_map() {
 	igmessages["CONNECTION_CLOSED"]    = _("Connection was closed by the client normally.");
 	igmessages["CONNECTION_LOST"]      = _("The connection to the metaserver was lost.");
 	igmessages["NO_ANSWER"]            = _("Metaserver did not answer");
+	igmessages["GAME_NOT_CONNECTABLE"] = _("Your game is not connectable from the internet");
 }
