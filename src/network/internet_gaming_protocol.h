@@ -257,7 +257,7 @@ static const std::string IGPCMD_GAMES_UPDATE = "GAMES_UPDATE";
  * \li String:    Number of game packages and for uint8_t i = 0; i < num; ++i {:
  * \li String:    Name of the game
  * \li String:    Widelands version
- * \li String:    State of the game ("connectable", "not connectable")
+ * \li String:    Whether game is connectable ("true", "false")
  * }
  */
 static const std::string IGPCMD_GAMES = "GAMES";

@@ -441,7 +441,12 @@ enum {
 	 * \li String:    Path to the map file
 	 * \li Unsigned8: Number of maximum players
 	 */
-	NETCMD_DEDICATED_SAVED_GAMES = 31
+	NETCMD_DEDICATED_SAVED_GAMES = 31,
+
+	/**
+	 * Sent by the metaserver to a freshly opened game to check connectability
+	 */
+	NETCMD_METASERVER_PING = 64
 };
 
 #endif

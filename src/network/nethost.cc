@@ -2474,12 +2474,29 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	if (client.playernum == UserSettings::notConnected()) {
 		if (d->game)
 			throw DisconnectException(_("Game is running already, but client has not connected fully"));
-		if (cmd != NETCMD_HELLO)
+		if (cmd != NETCMD_HELLO) {
+			// Maybe it's just the metaserver pinging the host to check whether the game is connectable
+			if (cmd == NETCMD_METASERVER_PING) {
+				// Send PING back
+				SendPacket s;
+				s.Unsigned8(NETCMD_METASERVER_PING);
+				s.send(client.sock);
+
+				// Remove metaserver from list of clients
+				client.playernum = UserSettings::notConnected();
+				SDLNet_TCP_DelSocket (d->sockset, client.sock);
+				SDLNet_TCP_Close (client.sock);
+				client.sock = 0;
+			}
+
+			// Okay, it's not the metaserver, so just kick the unknown client
 			throw DisconnectException
 				(_
 				 	("First command sent by client is %u instead of HELLO. "
 				 	 "Most likely the client is running an incompatible version."),
 				 cmd);
+		}
+
 		uint8_t version = r.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
 			throw DisconnectException(_("Server uses a different protocol version."));
@@ -2778,8 +2795,7 @@ void NetHost::disconnectPlayerController
 		initComputerPlayer(number + 1);
 }
 
-void NetHost::disconnectClient
-	(uint32_t const number, std::string const & reason, bool const sendreason)
+void NetHost::disconnectClient(uint32_t const number, std::string const & reason, bool const sendreason)
 {
 	assert(number < d->clients.size());
 
