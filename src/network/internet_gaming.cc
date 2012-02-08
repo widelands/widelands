@@ -53,6 +53,10 @@ void InternetGaming::reset() {
 	m_sock                   = 0;
 	m_sockset                = 0;
 	m_state                  = OFFLINE;
+	m_pwd                    = "";
+	m_reg                    = false;
+	m_meta                   = INTERNET_GAMING_METASERVER;
+	m_port                   = INTERNET_GAMING_PORT;
 	m_clientname             = "";
 	m_clientrights           = INTERNET_CLIENT_UNREGISTERED;
 	m_maxclients             = 1;
@@ -63,10 +67,11 @@ void InternetGaming::reset() {
 	clientupdate             = false;
 	gameupdate               = false;
 	time_offset              = 0;
+	waitcmd                  = "";
+	waittimeout              = 0;
 
 	clientlist.clear();
 	gamelist.clear();
-	waitlist.clear();
 }
 
 
@@ -82,24 +87,18 @@ InternetGaming & InternetGaming::ref() {
 }
 
 
-
-/// Login to metaserver
-bool InternetGaming::login
-	(std::string const & nick, std::string const & pwd, bool reg, std::string const & meta, uint32_t port)
-{
-	assert(m_state == OFFLINE);
-
+void InternetGaming::initialiseConnection() {
 	// First of all try to connect to the metaserver
-	dedicatedlog("InternetGaming: Connecting to metaserver.\n");
+	dedicatedlog("InternetGaming: Connecting to the metaserver.\n");
 	IPaddress peer;
-	if (hostent * const he = gethostbyname(meta.c_str())) {
+	if (hostent * const he = gethostbyname(m_meta.c_str())) {
 		peer.host = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-		peer.port = htons(port);
+		peer.port = htons(m_port);
 	} else
 		throw warning
 			(_("Connection problem"), "%s", _("Widelands has not been able to connect to the metaserver."));
 
-	SDLNet_ResolveHost (&peer, meta.c_str(), port);
+	SDLNet_ResolveHost (&peer, m_meta.c_str(), m_port);
 	m_sock = SDLNet_TCP_Open(&peer);
 	if (m_sock == 0)
 		throw warning
@@ -111,10 +110,25 @@ bool InternetGaming::login
 
 	m_sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (m_sockset, m_sock);
+}
 
+
+
+/// Login to metaserver
+bool InternetGaming::login
+	(std::string const & nick, std::string const & pwd, bool reg, std::string const & meta, uint32_t port)
+{
+	assert(m_state == OFFLINE);
+
+	m_pwd  = pwd;
+	m_reg  = reg;
+	m_meta = meta;
+	m_port = port;
+
+	initialiseConnection();
 
 	// If we are here, a connection was established and we can send our login package through the socket.
-	dedicatedlog("InternetGaming: Sending log in request.\n");
+	dedicatedlog("InternetGaming: Sending login request.\n");
 	SendPacket s;
 	s.String(IGPCMD_LOGIN);
 	s.String(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
@@ -144,6 +158,62 @@ bool InternetGaming::login
 	dedicatedlog("InternetGaming: No answer from metaserver!\n");
 	logout("NO_ANSWER");
 	return false;
+}
+
+
+
+/// Relogin to metaserver after loosing connection
+bool InternetGaming::relogin()
+{
+	assert(m_state == ERROR);
+
+	initialiseConnection();
+
+	// If we are here, a connection was established and we can send our login package through the socket.
+	dedicatedlog("InternetGaming: Sending relogin request.\n");
+	SendPacket s;
+	s.String(IGPCMD_RELOGIN);
+	s.String(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
+	s.String(m_clientname);
+	s.String(build_id());
+	s.String(bool2str(m_reg));
+	if (m_reg)
+		s.String(m_pwd);
+	s.send(m_sock);
+
+	// Now let's see, whether the metaserver is answering
+	uint32_t const secs = time(0);
+	m_state = CONNECTING;
+	while (INTERNET_GAMING_TIMEOUT > time(0) - secs) {
+		handle_metaserver_communication();
+		// Check if we are a step further... if yes handle_packet has taken care about all the
+		// paperwork, so we put our feet up and just return. ;)
+		if (m_state != CONNECTING) {
+			if (m_state == LOBBY) {
+				break;
+			} else if (m_state == ERROR)
+				return false;
+		}
+	}
+
+	if (INTERNET_GAMING_TIMEOUT <= time(0) - secs) {
+		dedicatedlog("InternetGaming: No answer from metaserver!\n");
+		return false;
+	}
+
+	// Client is reconnected, so let's try resend the timeouted command.
+	if (waitcmd == IGPCMD_GAME_CONNECT)
+		join_game(m_gamename);
+	else if (waitcmd == IGPCMD_GAME_OPEN) {
+		m_state = IN_GAME;
+		open_game();
+	} else if (waitcmd == IGPCMD_GAME_START) {
+		m_state = IN_GAME;
+		set_game_playing();
+	} else
+		assert(false); // should never be here
+
+	return true;
 }
 
 
@@ -186,7 +256,6 @@ void InternetGaming::handle_metaserver_communication() {
 			}
 		}
 	} catch (std::exception const & e) {
-		// TODO  wouldn't it be better to throw warning or throw wexception ?
 		std::string reason = _("Something went wrong: ");
 		reason += e.what();
 		logout(reason);
@@ -211,16 +280,17 @@ void InternetGaming::handle_metaserver_communication() {
 		}
 	}
 
-	if (waitlist.size() > 0) {
-		// TODO Check if a timeout is reached
-#warning needs implementation
-/*
+	if (waitcmd.size() > 0) {
+		// Check if timeout is reached
 		time_t now = time(0);
-		for (uint8_t i = 0; i < waitlist.size(); ++i) {
-			if (now > waitlist.at(i).timeout) {
+		if (now > waittimeout) {
+			m_state = ERROR;
+			if (!relogin()) {
+				// Do not try to relogin again automatically.
+				reset();
+				m_state = ERROR;
 			}
 		}
-		*/
 	}
 }
 
@@ -352,17 +422,22 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 		if (cmd == IGPCMD_GAME_OPEN) {
 			// Client received the acknowledgment, that the game was opened
-	#warning implement timeout
+			assert (waitcmd == IGPCMD_GAME_OPEN);
+			waitcmd = "";
 		}
 
 		if (cmd == IGPCMD_GAME_CONNECT) {
 			// Client received the ip for the game it wants to join
+			assert (waitcmd == IGPCMD_GAME_CONNECT);
+			waitcmd = "";
+			// save the received ip, so the client cann connect to the game
 			m_gameip = packet.String();
 		}
 
 		if (cmd == IGPCMD_GAME_START) {
 			// Client received the acknowledgment, that the game was started
-	#warning implement timeout
+			assert (waitcmd == IGPCMD_GAME_START);
+			waitcmd = "";
 		}
 
 		if (cmd == IGPCMD_ERROR) {
@@ -408,6 +483,9 @@ const std::string & InternetGaming::ip() {
 
 /// called by a client to join the game \arg gamename
 void InternetGaming::join_game(const std::string & gamename) {
+	if (!logged_in())
+		return;
+
 	SendPacket s;
 	s.String(IGPCMD_GAME_CONNECT);
 	s.String(gamename);
@@ -416,19 +494,19 @@ void InternetGaming::join_game(const std::string & gamename) {
 	dedicatedlog("InternetGaming: Client tries to join a game with the name %s\n", m_gamename.c_str());
 	m_state = IN_GAME;
 
-/*
+
 	// From now on we wait for a reply from the metaserver
-	WaitForReply * wait = new WaitForReply;
-	wait->cmd     = IGPCMD_GAME_CONNECT;
-	wait->timeout = time(0) + INTERNET_GAMING_TIMEOUT;
-	waitlist.push_back(*wait);
-	*/
+	waitcmd     = IGPCMD_GAME_CONNECT;
+	waittimeout = time(0) + INTERNET_GAMING_TIMEOUT;
 }
 
 
 
 /// called by a client to open a new game with name m_gamename
 void InternetGaming::open_game() {
+	if (!logged_in())
+		return;
+
 	SendPacket s;
 	s.String(IGPCMD_GAME_OPEN);
 	s.String(m_gamename);
@@ -437,37 +515,35 @@ void InternetGaming::open_game() {
 	dedicatedlog("InternetGaming: Client opened a game with the name %s.\n", m_gamename.c_str());
 	m_state = IN_GAME;
 
-/*
 	// From now on we wait for a reply from the metaserver
-	WaitForReply * wait = new WaitForReply;
-	wait->cmd     = IGPCMD_GAME_OPEN;
-	wait->timeout = time(0) + INTERNET_GAMING_TIMEOUT;
-	waitlist.push_back(*wait);
-	*/
+	waitcmd     = IGPCMD_GAME_OPEN;
+	waittimeout = time(0) + INTERNET_GAMING_TIMEOUT;
 }
 
 
 
 /// called by a client that is host of a game to inform the metaserver, that the game started
 void InternetGaming::set_game_playing() {
+	if (!logged_in())
+		return;
+
 	SendPacket s;
 	s.String(IGPCMD_GAME_START);
 	s.send(m_sock);
 	dedicatedlog("InternetGaming: Client announced the start of the game %s.\n", m_gamename.c_str());
 
-/*
 	// From now on we wait for a reply from the metaserver
-	WaitForReply * wait = new WaitForReply;
-	wait->cmd     = IGPCMD_GAME_START;
-	wait->timeout = time(0) + INTERNET_GAMING_TIMEOUT;
-	waitlist.push_back(*wait);
-	*/
+	waitcmd     = IGPCMD_GAME_START;
+	waittimeout = time(0) + INTERNET_GAMING_TIMEOUT;
 }
 
 
 
 /// called by a client that is host of a game to inform the metaserver, that the game was ended.
 void InternetGaming::set_game_done() {
+	if (!logged_in())
+		return;
+
 	SendPacket s;
 	s.String(IGPCMD_GAME_DISCONNECT);
 	s.send(m_sock);

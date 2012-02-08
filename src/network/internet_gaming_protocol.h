@@ -46,7 +46,7 @@
  *
  * \todo Should this be resetable by the user?
  */
-#define INTERNET_GAMING_TIMEOUT 20 // 20 seconds
+#define INTERNET_GAMING_TIMEOUT 10 // 10 seconds
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes the

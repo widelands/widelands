@@ -373,7 +373,8 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 		uint32_t const secs = time(0);
 		while (InternetGaming::ref().ip().size() < 1) {
 			InternetGaming::ref().handle_metaserver_communication();
-			if (INTERNET_GAMING_TIMEOUT < time(0) - secs) {
+			 // give some time for the answer + for a relogin, if a problem occurs.
+			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(0) - secs) {
 				// Actually the game is not done, but that way we are again listed as in the lobby
 				InternetGaming::ref().set_game_done();
 				// Show a popup warning message

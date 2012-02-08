@@ -63,9 +63,11 @@ struct InternetGaming : public ChatProvider {
 	void reset();
 
 	// Login and logout
+	void initialiseConnection();
 	bool login
 		(std::string const & nick, std::string const & pwd, bool registered,
 		 std::string const & metaserver, uint32_t port);
+	bool relogin();
 	void logout(std::string const & msgcode = "CONNECTION_CLOSED");
 
 	/// \returns whether the client is logged in
@@ -105,7 +107,7 @@ struct InternetGaming : public ChatProvider {
 	std::string & get_local_clientname() {return m_clientname;}
 
 	/// \returns the rights of the local client
-	std::string get_local_clientrights()     {return m_clientrights;}
+	std::string get_local_clientrights() {return m_clientrights;}
 
 
 	// ChatProvider: sends a message via the metaserver.
@@ -154,6 +156,12 @@ private:
 		ERROR
 	}                m_state;
 
+	/// data saved for possible relogin
+	std::string      m_pwd;
+	bool             m_reg;
+	std::string      m_meta;
+	uint32_t         m_port;
+
 	/// local clients name and rights
 	std::string      m_clientname;
 	std::string      m_clientrights;
@@ -176,14 +184,9 @@ private:
 	std::vector<ChatMessage> messages;
 	std::vector<ChatMessage> ingame_system_chat;
 
-	struct WaitForReply {
-		std::string cmd;
-		// time the wait timeouts
-		time_t      timeout;
-	};
-
-	/// List of important responses, the client is waiting for.
-	std::vector<WaitForReply> waitlist;
+	/// An important response of the metaserver, the client is waiting for.
+	std::string               waitcmd;
+	int32_t                   waittimeout;
 
 };
 
