@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-01-01 13:40+0000\n"
-"PO-Revision-Date: 2011-03-14 08:12+0000\n"
+"PO-Revision-Date: 2012-02-08 23:26+0000\n"
 "Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:40+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-02-09 05:21+0000\n"
+"X-Generator: Launchpad (build 14763)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -87,6 +87,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"Speciální turnaj v atlantské kultuře je takzvaný \"Island Hopping\". Dvě a "
+"více skupin se snaží dosáhnout centra ostrovů tak rychle, jak jen je to "
+"možné, aby jako první postavili hrad na vrcholku centrální hory."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -230,7 +233,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Island Hopping"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -352,7 +355,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Pašeráci"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -383,19 +386,21 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:13
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "Startovací pozice jsou ve směru hodinových ručiček."
 
 #: ../../maps/Desert Tournament.wmf/elemental:11
 #: ../../maps/Four Castles.wmf/elemental:11
 #: ../../maps/Swamp Monks.wmf/elemental:11
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
-msgstr ""
+msgstr "Navrhované týmy : (modří, červení) vs (žlutí, zelení)"
 
 #: ../../maps/Four Mountains.wmf/elemental:11
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
 "yellow)"
 msgstr ""
+"Navrhované týmy : (modří, červení) vs (žlutí, zelení)  nebo (modří, zelení) "
+"vs (červení, žlutí)"
 
 #: ../../maps/Elven Forests.wmf/elemental:11
 msgid ""
@@ -409,7 +414,7 @@ msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:11
 msgid "Suggested Teams: all ok."
-msgstr ""
+msgstr "Navrhované týmy: vše ok."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
