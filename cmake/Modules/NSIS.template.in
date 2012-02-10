@@ -38,7 +38,7 @@
   ;Set compression
   SetCompressor @CPACK_NSIS_COMPRESSOR@
 
-@CPACK_NSIS_DEFINES@   
+@CPACK_NSIS_DEFINES@
 
   !include Sections.nsh
 
@@ -542,6 +542,17 @@ FunctionEnd
 @CPACK_NSIS_INSTALLER_ICON_CODE@
 @CPACK_NSIS_INSTALLER_MUI_COMPONENTS_DESC@
 @CPACK_NSIS_INSTALLER_MUI_FINISHPAGE_RUN_CODE@
+
+Function createShortcuts
+    CreateShortCut "$DESKTOP\Widelands.lnk" "$INSTDIR\widelands.exe"
+    CreateShortCut "$DESKTOP\Widelands - Mapeditor.lnk" "$INSTDIR\widelands.exe" "--editor" "$INSTDIR\WL-Editor.ico"
+FunctionEnd
+
+!define MUI_FINISHPAGE_SHOWREADME ""
+!define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
+!define MUI_FINISHPAGE_SHOWREADME_TEXT "Create Desktop Shortcut"
+!define MUI_FINISHPAGE_SHOWREADME_FUNCTION createShortcuts
+
 !define MUI_WELCOMEFINISHPAGE_BITMAP "@CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP@"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "@CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP@"
 
@@ -562,6 +573,18 @@ FunctionEnd
   @CPACK_NSIS_PAGE_COMPONENTS@
 
   !insertmacro MUI_PAGE_INSTFILES
+  
+  ;Changelog
+  !define CPACK_NSIS_CHANGELOG_@CPACK_NSIS_CHANGELOG@
+  !ifdef CPACK_NSIS_CHANGELOG_ON
+    !define MUI_PAGE_HEADER_TEXT "Changelog"
+    !define MUI_PAGE_HEADER_SUBTEXT ""
+    !define MUI_LICENSEPAGE_TEXT_TOP ""
+    !define MUI_LICENSEPAGE_TEXT_BOTTOM " "
+    !define MUI_LICENSEPAGE_BUTTON "$(^NextBtn)"
+    !insertmacro MUI_PAGE_LICENSE "@CPACK_RESOURCE_FILE_README@"
+  !endif
+   
   !insertmacro MUI_PAGE_FINISH
 
   !insertmacro MUI_UNPAGE_CONFIRM
@@ -744,6 +767,14 @@ FunctionEnd
 ; determine admin versus local install
 Function un.onInit
 
+  ;Load selected language from registry
+  !ifndef CPACK_NSIS_LANGUAGE_DIALOG_@CPACK_NSIS_LANGUAGE_DIALOG@
+    !define CPACK_NSIS_LANGUAGE_DIALOG_@CPACK_NSIS_LANGUAGE_DIALOG@
+  !endif
+  !ifdef CPACK_NSIS_LANGUAGE_DIALOG_ON
+    !insertmacro MUI_UNGETLANGUAGE
+  !endif
+
   ClearErrors
   UserInfo::GetName
   IfErrors noLM
@@ -902,6 +933,17 @@ SectionEnd
 ; "Program Files" for AllUsers, "My Documents" for JustMe...
 
 Function .onInit
+  ;Language Selection Dialog
+  !ifndef CPACK_NSIS_LANGUAGE_DIALOG_@CPACK_NSIS_LANGUAGE_DIALOG@
+    !define CPACK_NSIS_LANGUAGE_DIALOG_@CPACK_NSIS_LANGUAGE_DIALOG@
+  !endif
+  !ifdef CPACK_NSIS_LANGUAGE_DIALOG_ON
+    !define MUI_LANGDLL_REGISTRY_ROOT SHCTX
+    !define MUI_LANGDLL_REGISTRY_KEY "Software\@CPACK_PACKAGE_VENDOR@\@CPACK_PACKAGE_INSTALL_REGISTRY_KEY@"
+    !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
+    !insertmacro MUI_LANGDLL_DISPLAY
+  !endif
+  
   ; Reads components status for registry
   !insertmacro SectionList "InitSection"
 

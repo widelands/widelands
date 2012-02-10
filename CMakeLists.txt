@@ -492,19 +492,26 @@ set(CPACK_COMPONENT_CORELANGUAGEFILES_DISPLAY_NAME "Language Files")
 set(CPACK_COMPONENT_EXECUTABLEFILES_HIDDEN TRUE)
 set(CPACK_COMPONENT_EXECUTABLEFILES_REQUIRED TRUE)
 
+# Components to install
+set(CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles MapFiles CoreLanguageFiles CoreVersionFile CoreLicenseFiles)
+if (NOT WL_NOMUSIC)
+  set(CPACK_COMPONENTS_ALL ${CPACK_COMPONENTS_ALL} MusicFiles)
+endif (NOT WL_NOMUSIC)
+
 if (WIN32)
   # Install files only needed for Windows
   FILE(GLOB dlls "${CMAKE_CURRENT_BINARY_DIR}/../*.dll")
   install(
     FILES
-	  ${dlls}
-	  utils/win32/WL-Editor.ico
-	DESTINATION ${WL_INSTALL_DATADIR}
-	CONFIGURATIONS Debug;Release
-	COMPONENT Win32Specific
+      ${dlls}
+      utils/win32/WL-Editor.ico
+    DESTINATION ${WL_INSTALL_DATADIR}
+    CONFIGURATIONS Debug;Release
+    COMPONENT Win32Specific
   )
   set(CPACK_COMPONENT_WIN32SPECIFIC_HIDDEN TRUE)
   set(CPACK_COMPONENT_WIN32SPECIFIC_REQUIRED TRUE)
+  set(CPACK_COMPONENTS_ALL ${CPACK_COMPONENTS_ALL} Win32Specific)
 
   # Only NSIS supports install types
   set(CPACK_ALL_INSTALL_TYPES Full Minimal)
@@ -520,9 +527,6 @@ if (WIN32)
   # Set generator
   set(CPACK_GENERATOR NSIS)
 
-  # Components to install
-  set(CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles MapFiles MusicFiles CoreVersionFile CoreLicenseFiles CoreLanguageFiles Win32Specific)
-
   # Graphics for the installer (all slashes are necessary!)
   set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_BINARY_DIR}\\\\..\\\\utils\\\\win32\\\\wl-ico-128.ico")
   set(CPACK_NSIS_MUI_UNIICON "${CMAKE_CURRENT_BINARY_DIR}\\\\..\\\\utils\\\\win32\\\\wl-ico-128.ico")
@@ -533,19 +537,25 @@ if (WIN32)
   set(CPACK_NSIS_PACKAGE_NAME "Widelands")
   set(CPACK_NSIS_DISPLAY_NAME "Widelands ${WL_VERSION}")
   set(CPACK_NSIS_DISPLAY_NAME_SET "TRUE")
+  
+  # Optional dialogs
+  if (NOT DEFINED CPACK_NSIS_LANGUAGE_DIALOG)
+    set(CPACK_NSIS_LANGUAGE_DIALOG "ON")
+  endif (NOT DEFINED CPACK_NSIS_LANGUAGE_DIALOG)
+  if (NOT DEFINED CPACK_NSIS_CHANGELOG)
+    set(CPACK_NSIS_CHANGELOG "ON")
+  endif (NOT DEFINED CPACK_NSIS_CHANGELOG)
 
   # Setup (and remove) shortcuts to Widelands (all slashes are necessary!)
   set(CPACK_PACKAGE_EXECUTABLES "..\\\\widelands;Widelands")
   set(CPACK_NSIS_MENU_LINKS "http://wl.widelands.org/;Widelands Homepage")
   set(CPACK_NSIS_CREATE_ICONS_EXTRA "
-    CreateShortCut \\\"$DESKTOP\\\\Widelands.lnk\\\" \\\"$INSTDIR\\\\widelands.exe\\\"
-	CreateShortCut \\\"$DESKTOP\\\\Widelands - Mapeditor.lnk\\\" \\\"$INSTDIR\\\\widelands.exe\\\" \\\"--editor\\\" \\\"$INSTDIR\\\\WL-Editor.ico\\\"
-	CreateShortCut \\\"$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\Widelands - Mapeditor.lnk\\\" \\\"$INSTDIR\\\\widelands.exe\\\" \\\"--editor\\\" \\\"$INSTDIR\\\\WL-Editor.ico\\\"
+    CreateShortCut \\\"$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\Widelands - Mapeditor.lnk\\\" \\\"$INSTDIR\\\\widelands.exe\\\" \\\"--editor\\\" \\\"$INSTDIR\\\\WL-Editor.ico\\\"
   ")
   set(CPACK_NSIS_DELETE_ICONS_EXTRA "
     Delete \\\"$DESKTOP\\\\Widelands.lnk\\\"
-	Delete \\\"$DESKTOP\\\\Widelands - Mapeditor.lnk\\\"
-	Delete \\\"$SMPROGRAMS\\\\$MUI_TEMP\\\\Widelands - Mapeditor.lnk\\\"
+    Delete \\\"$DESKTOP\\\\Widelands - Mapeditor.lnk\\\"
+    Delete \\\"$SMPROGRAMS\\\\$MUI_TEMP\\\\Widelands - Mapeditor.lnk\\\"
   ")
 
   # Additional information (all slashes are necessary!)
@@ -553,6 +563,7 @@ if (WIN32)
   set(CPACK_NSIS_HELP_LINK "http://wl.widelands.org/")
   set(CPACK_NSIS_INSTALLED_ICON_NAME "widelands.exe")
   set(CPACK_NSIS_MUI_FINISHPAGE_RUN "..\\\\widelands.exe")
+  set(CPACK_NSIS_MUI_FINISHPAGE_README "$INSTDIR\\\\ChangeLog")
   set(CPACK_PACKAGE_VENDOR "Widelands Development Team")
   set(CPACK_PACKAGE_VERSION ${WL_VERSION})
   set(CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})
@@ -563,33 +574,32 @@ if (WIN32)
 
   # Setup (and remove) Registry entries for Widelands (all slashes are necessary!)
   set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
-	WriteRegStr HKCR \\\".wgf\\\" \\\"\\\" \\\"WidelandsSavegame\\\"
-	WriteRegStr HKCR \\\"WidelandsSavegame\\\" \\\"\\\" \\\"Widelands Savegame\\\"
-	WriteRegStr HKCR \\\"WidelandsSavegame\\\\DefaultIcon\\\" \\\"\\\" \\\"$INSTDIR\\\\widelands.exe,0\\\"
-	WriteRegStr HKCR \\\"WidelandsSavegame\\\\shell\\\\open\\\\command\\\" \\\"\\\" \\\"$INSTDIR\\\\widelands.exe --loadgame=%1\\\"
+    WriteRegStr HKCR \\\".wgf\\\" \\\"\\\" \\\"WidelandsSavegame\\\"
+    WriteRegStr HKCR \\\"WidelandsSavegame\\\" \\\"\\\" \\\"Widelands Savegame\\\"
+    WriteRegStr HKCR \\\"WidelandsSavegame\\\\DefaultIcon\\\" \\\"\\\" \\\"$INSTDIR\\\\widelands.exe,0\\\"
+    WriteRegStr HKCR \\\"WidelandsSavegame\\\\shell\\\\open\\\\command\\\" \\\"\\\" \\\"$INSTDIR\\\\widelands.exe --loadgame=%1\\\"
 
-	WriteRegStr HKCR \\\".wmf\\\" \\\"\\\" \\\"WidelandsMapFile\\\"
-	WriteRegStr HKCR \\\"WidelandsMapFile\\\" \\\"\\\" \\\"Widelands Mapfile\\\"
-	WriteRegStr HKCR \\\"WidelandsMapFile\\\\DefaultIcon\\\" \\\"\\\" \\\"$INSTDIR\\\\WL-Editor.ico\\\"
-	WriteRegStr HKCR \\\"WidelandsMapFile\\\\shell\\\\open\\\\command\\\" \\\"\\\" \\\"$INSTDIR\\\\widelands.exe --editor=%1\\\"
+    WriteRegStr HKCR \\\".wmf\\\" \\\"\\\" \\\"WidelandsMapFile\\\"
+    WriteRegStr HKCR \\\"WidelandsMapFile\\\" \\\"\\\" \\\"Widelands Mapfile\\\"
+    WriteRegStr HKCR \\\"WidelandsMapFile\\\\DefaultIcon\\\" \\\"\\\" \\\"$INSTDIR\\\\WL-Editor.ico\\\"
+    WriteRegStr HKCR \\\"WidelandsMapFile\\\\shell\\\\open\\\\command\\\" \\\"\\\" \\\"$INSTDIR\\\\widelands.exe --editor=%1\\\"
   ")
   set(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
     DeleteRegValue HKCR \\\".wgf\\\" \\\"WidelandsSavegame\\\"
-	DeleteRegKey /ifempty HKCR \\\".wgf\\\"
-	DeleteRegKey HKCR \\\"WidelandsSavegame\\\"
+    DeleteRegKey /ifempty HKCR \\\".wgf\\\"
+    DeleteRegKey HKCR \\\"WidelandsSavegame\\\"
 
-	DeleteRegValue HKCR \\\".wmf\\\" \\\"WidelandsMapFile\\\"
-	DeleteRegKey /ifempty HKCR \\\".wmf\\\"
-	DeleteRegKey HKCR \\\"WidelandsMapFile\\\"
-	
-	Delete \\\"$INSTDIR\\\\stdout.txt\\\"
-	Delete \\\"$INSTDIR\\\\stderr.txt\\\"
-	Delete \\\"$INSTDIR\\\"
+    DeleteRegValue HKCR \\\".wmf\\\" \\\"WidelandsMapFile\\\"
+    DeleteRegKey /ifempty HKCR \\\".wmf\\\"
+    DeleteRegKey HKCR \\\"WidelandsMapFile\\\"
+    
+    Delete \\\"$INSTDIR\\\\stdout.txt\\\"
+    Delete \\\"$INSTDIR\\\\stderr.txt\\\"
+    Delete \\\"$INSTDIR\\\"
   ")
 
 elseif (WIN32)
   set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
-  set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CoreVersionFile CoreLicenseFiles)
   set (CPACK_GENERATOR "TGZ")
   set (CPACK_SOURCE_GENERATOR "TGZ")
 endif (WIN32)
