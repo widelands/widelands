@@ -634,4 +634,10 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 	return false;
 }
 
+void Road::log_general_info(Editor_Game_Base const & egbase)
+{
+	PlayerImmovable::log_general_info(egbase);
+	molog("m_busyness: %i\n", m_busyness);
+}
+
 }
