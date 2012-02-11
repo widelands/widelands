@@ -608,9 +608,30 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 				//  decrement the usage busyness.
 				if (500 < tdelta) {
 					m_busyness_last_update = gametime;
-					//  TODO: If m_busyness drops below a limit, release the donkey.
-					if (m_busyness)
+					if (m_busyness) {
 						--m_busyness;
+
+						// If m_busyness drops below a limit, release the donkey.
+						// remember that every time a ware is waiting at the flag
+						// m_busyness increase by 10 but every time a ware is immediatly
+						// acked by a carrier m_busyness is decreased by 1 only.
+						// so the limit is not so easy to reach
+						if (m_busyness < 350) {
+							Carrier * const second_carrier = m_carrier_slots[1].carrier.get(game);
+							if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
+								second_carrier->send_signal(game, "cancel");
+								// this signal is not handled in any special way
+								// so it simply pop the task off the stack
+								// the string "cancel" has been used to make clear
+								// the final goal we want to achieve
+								// ie: cancelling current task
+								m_carrier_slots[1].carrier = 0;
+								m_carrier_slots[1].carrier_request = 0;
+								m_type = Road_Normal;
+								_mark_map(game);
+							}
+						}
+					}
 				}
 				return true;
 			}
