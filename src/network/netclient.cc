@@ -165,8 +165,12 @@ void NetClient::run ()
 			code = lgm.run();
 			d->modal = 0;
 		}
-		if (code <= 0)
+		if (code <= 0) {
+			// if this is an internet game, tell the metaserver that client is back in the lobby.
+			if (m_internet)
+				InternetGaming::ref().set_game_done();
 			return;
+		}
 	}
 
 	d->server_is_waiting = true;

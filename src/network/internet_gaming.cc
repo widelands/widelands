@@ -38,8 +38,8 @@ InternetGaming::InternetGaming() :
 	m_clientrights           (INTERNET_CLIENT_UNREGISTERED),
 	m_maxclients             (1),
 	m_gameip                 (""),
-	clientupdateonmetaserver (false),
-	gameupdateonmetaserver   (false),
+	clientupdateonmetaserver (true),
+	gameupdateonmetaserver   (true),
 	clientupdate             (false),
 	gameupdate               (false),
 	time_offset              (0)
@@ -62,8 +62,8 @@ void InternetGaming::reset() {
 	m_maxclients             = 1;
 	m_gamename               = "";
 	m_gameip                 = "";
-	clientupdateonmetaserver = false;
-	gameupdateonmetaserver   = false;
+	clientupdateonmetaserver = true;
+	gameupdateonmetaserver   = true;
 	clientupdate             = false;
 	gameupdate               = false;
 	time_offset              = 0;
@@ -377,8 +377,13 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			// Client received a chat message
 			std::string sender   = packet.String();
 			std::string message  = packet.String();
-			bool        personal = str2bool(packet.String());
-			bool        system   = str2bool(packet.String());
+			std::string type     = packet.String();
+
+			if (type != "public" && type != "private" && type != "system")
+				throw warning("Invalid chat message type \"%s\".", type.c_str());
+
+			bool        personal = type == "private";
+			bool        system   = type == "system";
 
 			formatAndAddChat(sender, personal ? m_clientname : "", system, message);
 		}
@@ -439,6 +444,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			waitcmd = "";
 			// save the received ip, so the client cann connect to the game
 			m_gameip = packet.String();
+			log("InternetGaming: Received ip of the game to join: %s.\n", m_gameip.c_str());
 		}
 
 		else if (cmd == IGPCMD_GAME_START) {
@@ -550,7 +556,8 @@ void InternetGaming::set_game_playing() {
 
 
 
-/// called by a client that is host of a game to inform the metaserver, that the game was ended.
+/// called by a client to inform the metaserver, that it left the game and is back in the lobby.
+/// If this is called by the hosting client, this further informs the metaserver, that the game was closed.
 void InternetGaming::set_game_done() {
 	if (!logged_in())
 		return;
@@ -558,8 +565,11 @@ void InternetGaming::set_game_done() {
 	SendPacket s;
 	s.String(IGPCMD_GAME_DISCONNECT);
 	s.send(m_sock);
+
 	m_gameip  = "";
-	dedicatedlog("InternetGaming: Client announced the end of the game %s.\n", m_gamename.c_str());
+	m_state   = LOBBY;
+
+	dedicatedlog("InternetGaming: Client announced the disconnect from the game %s.\n", m_gamename.c_str());
 }
 
 
@@ -621,7 +631,35 @@ void InternetGaming::send(std::string const & msg) {
 		s.String(msg.substr(1, space - 1)); // recipient
 
 		formatAndAddChat(m_clientname, msg.substr(1, space - 1), false, msg.substr(space + 1));
+
+	} else if (m_clientrights == INTERNET_CLIENT_SUPERUSER && msg.size() && *msg.begin() == '/') {
+		// This is either a /me command, a super user command, or well... just a chat message beginning
+		// with a "/" - let's see...
+
+		// Split up in "cmd" "arg"
+		std::string cmd, arg;;
+		std::string temp = msg.substr(1); // cut off '/'
+		std::string::size_type const space = temp.find(' ');
+		if (space > temp.size())
+			// no argument
+			goto normal;
+
+		// get the cmd and the arg
+		cmd = temp.substr(0, space);
+		arg = temp.substr(space + 1);
+
+		if (cmd == "motd") {
+			// send the request to change the motd
+			SendPacket s;
+			s.String(IGPCMD_MOTD);
+			s.String(arg);
+			s.send(m_sock);
+		} else
+			// let everything else pass
+			goto normal;
+
 	} else {
+		normal:
 		s.String(msg);
 		s.String("");
 	}

@@ -107,7 +107,7 @@ struct InternetGaming : public ChatProvider {
 	std::string & get_local_clientname() {return m_clientname;}
 
 	/// \returns the rights of the local client
-	std::string get_local_clientrights() {return m_clientrights;}
+	std::string & get_local_clientrights() {return m_clientrights;}
 
 
 	// ChatProvider: sends a message via the metaserver.

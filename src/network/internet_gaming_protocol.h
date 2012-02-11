@@ -233,8 +233,7 @@ static const std::string IGPCMD_PONG = "PONG";
  * following payload:
  * \li String:    sender (may be empty if it is a system message)
  * \li String:    the message
- * \li String:    whether this is a personal message ("false, "true")
- * \li String:    whether this is a system message, which should even be shown in game ("false, "true")
+ * \li String:    type ("public", "private", "system")
  *
  * \note system messages are the motd (Send by the metaserver to the client, after login (but not relogin)
  *       and after the motd got changed) and announcements by superusers.
@@ -318,8 +317,7 @@ static const std::string IGPCMD_GAME_CONNECT = "GAME_CONNECT";
  * This is the case in *every* way a client leaves a game. No matter if a game was played or not or whether
  * the client is the host or not.
  *
- * \note as soon as this message is sent, the metaserver will list the client as not connected to any
- *       game.
+ * \note as soon as this message is sent, the metaserver will list the client as not connected to any game.
  * \note if the client that sends this message is the host of the game, the game will be
  *       removed from list as well. However other clients connected to that game should send the
  *       \ref IGPCMD_GAME_DISCONNECT themselves.

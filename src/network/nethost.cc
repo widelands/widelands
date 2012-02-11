@@ -745,8 +745,12 @@ void NetHost::run(bool const autorun)
 		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&d->hp, this);
 		lm->setChatProvider(d->chat);
 		const int32_t code = lm->run();
-		if (code <= 0)
+		if (code <= 0) {
+			// if this is an internet game, tell the metaserver that client is back in the lobby.
+			if (m_internet)
+				InternetGaming::ref().set_game_done();
 			return;
+		}
 	}
 
 	// if this is an internet game, tell the metaserver that the game started
@@ -2473,6 +2477,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	if (client.playernum == UserSettings::notConnected()) {
 		if (cmd == NETCMD_METASERVER_PING) {
+			dedicatedlog("[Host]: Received ping from metaserver.\n");
 			// Send PING back
 			SendPacket s;
 			s.Unsigned8(NETCMD_METASERVER_PING);
