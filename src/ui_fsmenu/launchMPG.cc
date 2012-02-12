@@ -46,10 +46,11 @@ using boost::format;
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow
-		(UI::Panel * parent, uint32_t w, uint32_t h,
+		(UI::Panel * parent, GameController * gc, uint32_t w, uint32_t h,
 		 UI::Font * font)
 	:
-	Window(parent, "selection_window", 0, 0, w, h, _("Please select"))
+	Window(parent, "selection_window", 0, 0, w, h, _("Please select")),
+	m_ctrl(gc)
 	{
 		center_to_parent();
 
@@ -88,10 +89,17 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->set_font(font);
 	}
 
+
+	void think() {
+		if (m_ctrl)
+			m_ctrl->think();
+	}
+
 	void pressedButton(uint8_t i) {
 		end_modal(i);
 	}
 	private:
+		GameController * m_ctrl;
 };
 
 Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
@@ -303,7 +311,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 /// Opens a popup window to select a map or saved game
 void Fullscreen_Menu_LaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
-		(this, get_w() / 2, get_h() / 20, font_small());
+		(this, m_ctrl, get_w() / 2, get_h() / 20, font_small());
 	switch (selection_window.run()) {
 		case 1:
 			select_map();
