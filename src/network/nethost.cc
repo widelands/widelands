@@ -586,7 +586,7 @@ NetHost::NetHost (std::string const & playername, bool internet)
 	m_dedicated_motd(""),
 	m_forced_pause(false)
 {
-	dedicatedlog("[Host] starting up.\n");
+	dedicatedlog("[Host]: starting up.\n");
 
 	if (internet) {
 		InternetGaming::ref().open_game();
@@ -2002,7 +2002,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string const & playerna
 	d->settings.users.at(client.usernum).name = effective_name;
 	d->settings.users.at(client.usernum).position = UserSettings::none();
 
-	dedicatedlog("[Host]: client %u: welcome to usernum %u\n", number, client.usernum);
+	dedicatedlog("[Host]: Client %u: welcome to usernum %u\n", number, client.usernum);
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_HELLO);
@@ -2349,7 +2349,7 @@ void NetHost::checkSyncReports()
 
 		if (client.syncreport != d->syncreport) {
 			log
-				("[Host] lost synchronization with client %u!\n"
+				("[Host]: lost synchronization with client %u!\n"
 				 "I have:     %s\n"
 				 "Client has: %s\n",
 				 i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
@@ -2389,7 +2389,7 @@ void NetHost::handle_network ()
 
 	// Check for new connections.
 	while (d->svsock != 0 && (sock = SDLNet_TCP_Accept(d->svsock)) != 0) {
-		dedicatedlog("[Host] Received a connection request\n");
+		dedicatedlog("[Host]: Received a connection request\n");
 
 		SDLNet_TCP_AddSocket (d->sockset, sock);
 
@@ -2402,25 +2402,16 @@ void NetHost::handle_network ()
 		peer.usernum = -1; // == no user assigned for now.
 		peer.hung_since = 0;
 		d->clients.push_back(peer);
-
-
-		// Now we wait for the client to say Hi in the right language,
-		// unless the game has already started
-		if (d->game) {
-			disconnectClient(d->clients.size() - 1, _("The game has already started."));
-		}
 	}
 
 	// if this is an internet game, handle the metaserver information
 	if (m_internet) {
 		InternetGaming::ref().handle_metaserver_communication();
-		if (d->game) {
-			// If the game already started, maybe an important message was send on the metaserver,
-			// that we should show in game as well.
-			std::vector<ChatMessage> msgs = InternetGaming::ref().getIngameSystemMessages();
-			for (uint8_t i = 0; i < msgs.size(); ++i)
-				send(msgs.at(i));
-		}
+		// Maybe an important message was send on the metaserver,
+		// that we should show in game as well.
+		std::vector<ChatMessage> msgs = InternetGaming::ref().getIngameSystemMessages();
+		for (uint8_t i = 0; i < msgs.size(); ++i)
+			send(msgs.at(i));
 	}
 
 	// Check if we hear anything from our clients
@@ -2491,8 +2482,10 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			return;
 		}
 
+		// Now we wait for the client to say Hi in the right language,
+		// unless the game has already started
 		if (d->game)
-			throw DisconnectException(_("Game is running already, but client has not connected fully"));
+			throw DisconnectException(_("The game has already started."));
 
 		if (cmd != NETCMD_HELLO)
 			throw DisconnectException
@@ -2514,7 +2507,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	switch (cmd) {
 	case NETCMD_PONG:
-		dedicatedlog("[Host] client %u: got pong\n", i);
+		dedicatedlog("[Host]: client %u: got pong\n", i);
 		break;
 
 	case NETCMD_SETTING_MAP:
@@ -2663,7 +2656,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		int32_t time = r.Signed32();
 		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
-			("[Host] client %u (%u) sent player command %i for %i, time = %i\n",
+			("[Host]: client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
 		recvClientTime(i, time);
 		if (plcmd.sender() != client.playernum + 1)
@@ -2729,7 +2722,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		uint32_t part = r.Unsigned32();
 		std::string x = r.String();
 		if (x != file->md5sum) {
-			dedicatedlog("[Host] File transfer checksum missmatch %s != %s\n", x.c_str(), file->md5sum.c_str());
+			dedicatedlog("[Host]: File transfer checksum missmatch %s != %s\n", x.c_str(), file->md5sum.c_str());
 			return; // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file->parts.size())

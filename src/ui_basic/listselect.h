@@ -64,11 +64,13 @@ struct BaseListselect : public Panel {
 		(const char * const name,
 		 uint32_t value,
 		 const PictureID picid = g_gr->get_no_picture(),
-		 const bool select_this = false);
+		 const bool select_this = false,
+		 std::string const & tooltip_text = std::string());
 	void add_front
 		(const char * const name,
 		 const PictureID picid = g_gr->get_no_picture(),
-		 const bool select_this = false);
+		 const bool select_this = false,
+		 std::string const & tooltip_text = std::string());
 	void remove(uint32_t);
 	void remove(const char * name);
 
@@ -114,8 +116,9 @@ struct BaseListselect : public Panel {
 
 	// Drawing and event handling
 	void draw(RenderTarget &);
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn,   int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn,   int32_t x, int32_t y);
+	bool handle_mousemove   (Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool handle_key(bool down, SDL_keysym);
 
 private:
@@ -132,6 +135,7 @@ private:
 		RGBColor clr;
 		PictureID picid;
 		std::string name;
+		std::string tooltip;
 	};
 	typedef std::deque<Entry_Record *> Entry_Record_deque;
 
@@ -149,6 +153,7 @@ private:
 
 	std::string m_fontname;
 	uint32_t    m_fontsize;
+	std::string m_current_tooltip;
 };
 
 template<typename Entry>
@@ -166,20 +171,21 @@ struct Listselect : public BaseListselect {
 		(const char * const name,
 		 Entry value,
 		 const PictureID picid = g_gr->get_no_picture(),
-		 const bool select_this = false)
+		 const bool select_this = false,
+		 std::string const & tooltip_text = std::string())
 	{
 		m_entry_cache.push_back(value);
-		BaseListselect::add(name, m_entry_cache.size() - 1, picid, select_this);
+		BaseListselect::add(name, m_entry_cache.size() - 1, picid, select_this, tooltip_text);
 	}
 	void add_front
 		(const char * const name,
 		 Entry value,
 		 const PictureID picid = g_gr->get_no_picture(),
-		 const bool select_this = false)
+		 const bool select_this = false,
+		 std::string const & tooltip_text = std::string())
 	{
 		m_entry_cache.push_front(value);
-		BaseListselect::add_front
-			(name, picid, select_this);
+		BaseListselect::add_front(name, picid, select_this, tooltip_text);
 	}
 
 	Entry const & operator[](uint32_t const i) const throw ()
@@ -220,17 +226,19 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 		(const char * const name,
 		 Entry      &       value,
 		 const PictureID picid = g_gr->get_no_picture(),
-		 const bool select_this = false)
+		 const bool select_this = false,
+		 std::string const & tooltip_text = std::string())
 	{
-		Base::add(name, &value, picid, select_this);
+		Base::add(name, &value, picid, select_this, tooltip_text);
 	}
 	void add_front
 		(const char * const name,
 		 Entry      &       value,
 		 const PictureID picid = g_gr->get_no_picture(),
-		 const bool select_this = false)
+		 const bool select_this = false,
+		 std::string const & tooltip_text = std::string())
 	{
-		Base::add_front(name, &value, picid, select_this);
+		Base::add_front(name, &value, picid, select_this, tooltip_text);
 	}
 
 	Entry & operator[](uint32_t const i) const throw ()

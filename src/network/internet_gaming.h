@@ -122,9 +122,9 @@ struct InternetGaming : public ChatProvider {
 
 	/// \returns and resets the ingame_system_chat messages
 	std::vector<ChatMessage> const & getIngameSystemMessages() {
-		std::vector<ChatMessage> const & temp(ingame_system_chat);
+		std::vector<ChatMessage> const * temp = new std::vector<ChatMessage>(ingame_system_chat);
 		ingame_system_chat.clear();
-		return temp;
+		return *temp;
 	}
 
 private:

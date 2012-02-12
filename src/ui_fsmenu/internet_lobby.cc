@@ -225,7 +225,6 @@ void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<INet_Game> const 
 				pic = g_gr->get_picture(PicMod_UI, "pics/continue.png");
 			else {
 				pic = g_gr->get_picture(PicMod_UI, "pics/different.png");
-#warning show build_id of game as hover text
 			}
 		} else {
 			pic = g_gr->get_picture(PicMod_UI, "pics/stop.png");
@@ -235,7 +234,7 @@ void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<INet_Game> const 
 		// than one server with the same name.
 		if (games.at(i).name == localservername)
 			hostgame.set_enabled(false);
-		opengames.add(games.at(i).name.c_str(), games.at(i), pic);
+		opengames.add(games.at(i).name.c_str(), games.at(i), pic, false, games.at(i).build_id);
 	}
 }
 
