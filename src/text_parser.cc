@@ -131,8 +131,7 @@ bool Text_Parser::parse_textblock
 {
 	std::string block_text;
 
-	const bool extract_more =
-		extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
+	const bool extract_more = extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
 
 	//Split the the text because of " "
 	std::vector<std::string> unwrapped_words;
@@ -141,7 +140,18 @@ bool Text_Parser::parse_textblock
 	//Handle user defined line breaks, and save them
 	container_iterate_const(std::vector<std::string>, unwrapped_words, i)
 		for (std::string line = *i.current;;) {
-			std::string::size_type const next_break = line.find("<br>");
+			std::string::size_type next_break = line.find("<br>");
+
+			// Replace &lt; with <
+			std::string::size_type smaller = line.find("&lt;");
+			while (smaller != std::string::npos) {
+				line.replace(smaller, 4, "<");
+				if (next_break > smaller)
+					// Fix position of <br> tag
+					next_break -= 3;
+				smaller = line.find("&lt;");
+			}
+
 			if (next_break == std::string::npos) {
 				if (line.size())
 					words.push_back(line);

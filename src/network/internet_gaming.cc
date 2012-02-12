@@ -264,7 +264,6 @@ void InternetGaming::handle_metaserver_communication() {
 	if (m_state == LOBBY) {
 		// client is in the lobby and therefore we want realtime information updates
 		if (clientupdateonmetaserver) {
-			dedicatedlog("send client\n");
 			SendPacket s;
 			s.String(IGPCMD_CLIENTS);
 			s.send(m_sock);
@@ -273,7 +272,6 @@ void InternetGaming::handle_metaserver_communication() {
 		}
 
 		if (gameupdateonmetaserver) {
-			dedicatedlog("send game\n");
 			SendPacket s;
 			s.String(IGPCMD_GAMES);
 			s.send(m_sock);
@@ -650,10 +648,11 @@ void InternetGaming::send(std::string const & msg) {
 
 		if (cmd == "motd") {
 			// send the request to change the motd
-			SendPacket s;
-			s.String(IGPCMD_MOTD);
-			s.String(arg);
-			s.send(m_sock);
+			SendPacket m;
+			m.String(IGPCMD_MOTD);
+			m.String(arg);
+			m.send(m_sock);
+			return;
 		} else
 			// let everything else pass
 			goto normal;
