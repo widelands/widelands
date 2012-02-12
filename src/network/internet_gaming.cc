@@ -656,6 +656,13 @@ void InternetGaming::send(std::string const & msg) {
 			m.String(arg);
 			m.send(m_sock);
 			return;
+		} else if (cmd == "announcement") {
+			// send the request to change the motd
+			SendPacket m;
+			m.String(IGPCMD_ANNOUNCEMENT);
+			m.String(arg);
+			m.send(m_sock);
+			return;
 		} else
 			// let everything else pass
 			goto normal;

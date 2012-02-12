@@ -207,8 +207,16 @@ static const std::string IGPCMD_TIME = "TIME";
  */
 static const std::string IGPCMD_MOTD = "MOTD";
 
-// in future here should the superuser commands be - but we need an interface in widelands for it anyways, so
-// that can wait...
+/**
+ * This is send by a superuser client as announcement. The server has to check the permissions and if those
+ * allow an announcement, the server broadcasts the announcement as system chat to all clients.
+ * If the client has no right to change the motd, the server disconnects the client with a permission denied
+ * message. It should further log that try to access superuser functionality.
+ * \li String:    announcement message
+ */
+static const std::string IGPCMD_ANNOUNCEMENT = "ANNOUNCEMENT";
+
+// in future here should the other superuser commands be
 
 /**
  * Sent by the metaserver without payload. The client must reply with a \ref IGPCMD_PONG command.
