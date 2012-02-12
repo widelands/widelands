@@ -173,18 +173,18 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 /// think function of the UI (main loop)
 void Fullscreen_Menu_Internet_Lobby::think ()
 {
-	Fullscreen_Menu_Base::think ();
+	Fullscreen_Menu_Base::think();
 
-	if (InternetGaming::ref().error())
-		return;
+	if (!InternetGaming::ref().error()) {
 
-	// If we have no connection try to connect
-	if (!InternetGaming::ref().logged_in()) {
-		connectToMetaserver();
+		// If we have no connection try to connect
+		if (!InternetGaming::ref().logged_in()) {
+			connectToMetaserver();
+		}
+
+		// Check whether metaserver send some data
+		InternetGaming::ref().handle_metaserver_communication();
 	}
-
-	// Check whether metaserver send some data
-	InternetGaming::ref().handle_metaserver_communication();
 
 	if (InternetGaming::ref().updateForClients())
 		fillClientList(InternetGaming::ref().clients());
@@ -375,8 +375,6 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 			InternetGaming::ref().handle_metaserver_communication();
 			 // give some time for the answer + for a relogin, if a problem occurs.
 			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(0) - secs) {
-				// Actually the game is not done, but that way we are again listed as in the lobby
-				InternetGaming::ref().set_game_done();
 				// Show a popup warning message
 				std::string warningheader(_("Connection timed out"));
 				std::string warning
@@ -387,6 +385,7 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK);
 				mmb.set_align(UI::Align_Left);
 				mmb.run();
+				return InternetGaming::ref().setError();
 			}
 		}
 		std::string ip = InternetGaming::ref().ip();

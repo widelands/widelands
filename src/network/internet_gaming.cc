@@ -239,6 +239,8 @@ void InternetGaming::logout(std::string const & msgcode) {
 
 /// handles all communication between the metaserver and the client
 void InternetGaming::handle_metaserver_communication() {
+	if (error())
+		return;
 	try {
 		while (m_sock != 0 && SDLNet_CheckSockets(m_sockset, 0) > 0) {
 			// Perform only one read operation, then process all packets
@@ -284,12 +286,13 @@ void InternetGaming::handle_metaserver_communication() {
 		// Check if timeout is reached
 		time_t now = time(0);
 		if (now > waittimeout) {
-			m_state = ERROR;
+			setError();
 			waittimeout = std::numeric_limits<int32_t>::max();
+			dedicatedlog("InternetGaming: reached a timeout for an awaited answer of the metaserver!\n");
 			if (!relogin()) {
 				// Do not try to relogin again automatically.
 				reset();
-				m_state = ERROR;
+				setError();
 			}
 		}
 	}
@@ -330,12 +333,12 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				throw warning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
 			// Clients login request got rejected
 			logout(packet.String());
-			m_state = ERROR;
+			setError();
 			return;
 
 		} else {
 			logout();
-			m_state = ERROR;
+			setError();
 			throw warning
 				(_
 				 	("Expected a LOGIN, RELOGIN or REJECTED packet from server, but received command "
@@ -582,9 +585,9 @@ bool InternetGaming::updateForGames() {
 
 
 
-/// \returns the tables in the room
+/// \returns the tables in the room, if no error occured
 std::vector<INet_Game> const & InternetGaming::games() {
-	return gamelist;
+	return error() ? * (new std::vector<INet_Game>()) : gamelist;
 }
 
 
@@ -599,9 +602,9 @@ bool InternetGaming::updateForClients() {
 
 
 
-/// \returns the players in the room
+/// \returns the players in the room, if no error occured
 std::vector<INet_Client> const & InternetGaming::clients() {
-	return clientlist;
+	return error() ? * (new std::vector<INet_Client>()) : clientlist;
 }
 
 
