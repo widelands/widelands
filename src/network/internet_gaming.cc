@@ -151,7 +151,7 @@ bool InternetGaming::login
 				formatAndAddChat("", "", true, _("For hosting a game, please take a look at the notes at:"));
 				formatAndAddChat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
 				return true;
-			} else if (m_state == ERROR)
+			} else if (m_state == COMMUNICATION_ERROR)
 				return false;
 		}
 	}
@@ -165,7 +165,7 @@ bool InternetGaming::login
 /// Relogin to metaserver after loosing connection
 bool InternetGaming::relogin()
 {
-	assert(m_state == ERROR);
+	assert(m_state == COMMUNICATION_ERROR);
 
 	initialiseConnection();
 
@@ -191,7 +191,7 @@ bool InternetGaming::relogin()
 		if (m_state != CONNECTING) {
 			if (m_state == LOBBY) {
 				break;
-			} else if (m_state == ERROR)
+			} else if (m_state == COMMUNICATION_ERROR)
 				return false;
 		}
 	}

@@ -124,7 +124,7 @@ enum {
 	 * command.
 	 *
 	 * \note The client must never enqueue a \ref PlayerCommand that it issued
-	 * itself. It must not assume that the host will accept a \ref PlaerCommand
+	 * itself. It must not assume that the host will accept a \ref PlayerCommand
 	 * that it sends. Instead, it must rely on the host echoing back the command.
 	 *
 	 */
@@ -133,7 +133,9 @@ enum {
 	/**
 	 * Bidirectional command: Terminate the connection with a given reason.
 	 * Payload is:
-	 * \li String: reason for disconnect
+	 * \li Unsigned8: number of attached strings
+	 * \li String:    reason for disconnect
+	 * \li String:    ...
 	 *
 	 * Both host and client can send this command, followed by immediately
 	 * closing the connection. The receiver of this command should just close
@@ -442,6 +444,17 @@ enum {
 	 * \li Unsigned8: Number of maximum players
 	 */
 	NETCMD_DEDICATED_SAVED_GAMES = 31,
+
+	/**
+	 * This is sent by the dedicated server to generate a clientsided translated system chat message.
+	 * Payload is:
+	 *
+	 * \li String:    Message code \see NetworkGamingMessages::fill_map()
+	 * \li String:    First attached string
+	 * \li String:    Second attached string
+	 * \li String:    Third attached string
+	 */
+	NETCMD_SYSTEM_MESSAGE_CODE = 32,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

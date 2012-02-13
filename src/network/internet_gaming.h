@@ -72,8 +72,8 @@ struct InternetGaming : public ChatProvider {
 
 	/// \returns whether the client is logged in
 	bool logged_in() {return (m_state == LOBBY) || (m_state == CONNECTING) || (m_state == IN_GAME);}
-	bool error()     {return (m_state == ERROR);}
-	void setError()  {m_state = ERROR; gameupdate = true; clientupdate = true;}
+	bool error()     {return (m_state == COMMUNICATION_ERROR);}
+	void setError()  {m_state = COMMUNICATION_ERROR; gameupdate = true; clientupdate = true;}
 
 	void handle_metaserver_communication();
 
@@ -154,7 +154,7 @@ private:
 		CONNECTING,
 		LOBBY,
 		IN_GAME,
-		ERROR
+		COMMUNICATION_ERROR
 	}                m_state;
 
 	/// data saved for possible relogin

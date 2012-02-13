@@ -113,6 +113,9 @@ private:
 	NetTransferFile * file;
 
 	void sendSystemChat(char const * fmt, ...) PRINTF_FORMAT(2, 3);
+	void sendSystemMessageCode
+		(std::string const &,
+		 std::string const & a = "", std::string const & b = "", std::string const & c = "");
 	void requestSyncReports();
 	void checkSyncReports();
 	void syncreport();
@@ -147,13 +150,12 @@ private:
 
 	void disconnectPlayerController
 		(uint8_t number,
-		 std::string const & name,
-		 std::string const & reason,
-		 bool sendreason = true);
+		 std::string const & name);
 	void disconnectClient
 		(uint32_t number,
 		 std::string const & reason,
-		 bool sendreason = true);
+		 bool sendreason = true,
+		 std::string const & arg = "");
 	void reaper();
 
 	NetHostImpl * d;

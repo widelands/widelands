@@ -108,8 +108,7 @@ private:
 	void recvOnePlayer(uint8_t  number, Widelands::StreamRead &);
 	void recvOneUser  (uint32_t number, Widelands::StreamRead &);
 	void disconnect
-		(std::string const & reason,
-		 bool sendreason = true, bool showmsg = true);
+		(std::string const & reason, std::string const & arg = "", bool sendreason = true, bool showmsg = true);
 
 	NetClientImpl * d;
 	bool m_internet;
