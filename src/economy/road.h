@@ -97,6 +97,8 @@ struct Road : public PlayerImmovable {
 	virtual void remove_worker(Worker &);
 	void assign_carrier(Carrier &, uint8_t);
 
+	void log_general_info(Editor_Game_Base const &);
+
 protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
