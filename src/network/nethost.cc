@@ -2730,7 +2730,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (part % 100 == 0)
 			sendSystemMessageCode
 				("SENDING_FILE_PART",
-				 (boost::format("%u/%zu") % part % (file->parts.size() + 1)).str(),
+				 (boost::format("%i/%i") % part % (file->parts.size() + 1)).str(),
 				 file->filename, d->settings.users.at(client.usernum).name);
 		sendFilePart(client.sock, part);
 		break;
