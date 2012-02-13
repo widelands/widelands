@@ -27,7 +27,9 @@
 #include "logic/field.h"
 #include "interval.h"
 
+
 struct Editor_Interactive;
+struct Editor_Tool_Action;
 
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
@@ -44,8 +46,10 @@ struct Editor_Action_Args {
 	interval<Widelands::Field::Height> m_interval;                  // noise hight tool
 	std::list<Widelands::Terrain_Index> terrainType, origTerrainType; // set terrain tool
 
+	std::list<Editor_Tool_Action *> draw_actions;                   // draw tool
 
 	Editor_Action_Args(Editor_Interactive & base);
+	~Editor_Action_Args();
 	uint32_t refcount;
 };
 

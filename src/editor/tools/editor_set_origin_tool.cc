@@ -42,14 +42,14 @@ int32_t Editor_Set_Origin_Tool::handle_click_impl
 int32_t Editor_Set_Origin_Tool::handle_undo_impl
 (Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
  Editor_Interactive & parent, Editor_Action_Args & args) {
-	Widelands::Coords nc(map.get_width()-center.node.x,
-						map.get_height()-center.node.y);
+	Widelands::Coords nc(map.get_width() - center.node.x,
+	                     map.get_height() - center.node.y);
 	map.set_origin(nc);
 	map.overlay_manager().reset();
 	parent.register_overlays();
 	parent.set_rel_viewpoint
 	(Point
-	 (- (nc.x * 2 + (nc.y & 1)) * (TRIANGLE_WIDTH / 2),
+	 (- (nc.x * 2 + (nc.y & 1)) *(TRIANGLE_WIDTH / 2),
 	  - nc.y * TRIANGLE_HEIGHT),
 	 true);
 	return 0;

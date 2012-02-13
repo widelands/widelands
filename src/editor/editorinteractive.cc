@@ -56,7 +56,7 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
 	g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
 	tooltip                                                                      \
-	 
+
 	m_toggle_main_menu
 	(INIT_BUTTON
 	 ("menu_toggle_menu", "menu", _("Menu"))),
@@ -78,10 +78,10 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	 ("editor_menu_player_menu", "players", _("Players"))),
 	m_undo
 	(INIT_BUTTON
-	 ("editor_undo", "undo", _("undo"))),
+	 ("editor_undo", "undo", _("Undo"))),
 	m_redo
 	(INIT_BUTTON
-	 ("editor_redo", "redo", _("redo"))) {
+	 ("editor_redo", "redo", _("Redo"))) {
 	m_toggle_main_menu.sigclicked.connect(boost::bind(&Editor_Interactive::toggle_mainmenu, this));
 	m_toggle_tool_menu.sigclicked.connect(boost::bind(&Editor_Interactive::tool_menu_btn, this));
 	m_toggle_toolsize_menu.sigclicked.connect(boost::bind(&Editor_Interactive::toolsize_menu_btn, this));
@@ -113,7 +113,7 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	set_display_flag(Interactive_Base::dfDebug, true);
 #endif
 
-	fieldclicked.connect(boost::bind(&Editor_Interactive::map_clicked, this));
+	fieldclicked.connect(boost::bind(&Editor_Interactive::map_clicked, this, false));
 }
 
 
@@ -269,10 +269,10 @@ void Editor_Interactive::toggle_mainmenu() {
 		new Editor_Main_Menu(*this, m_mainmenu);
 }
 
-void Editor_Interactive::map_clicked() {
+void Editor_Interactive::map_clicked(bool draw) {
 	m_history
 	.do_action(tools.current(), tools.use_tool, egbase().map(),
-	           get_sel_pos(), *this);
+	           get_sel_pos(), *this, draw);
 	need_complete_redraw();
 	set_need_save(true);
 }
@@ -289,7 +289,7 @@ void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel) {
 	mask |= SDL_BUTTON_MMASK;
 #endif
 	if (target_changed and SDL_GetMouseState(0, 0) & mask)
-		map_clicked();
+		map_clicked(true);
 }
 
 void Editor_Interactive::toggle_buildhelp() {

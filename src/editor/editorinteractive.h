@@ -61,7 +61,7 @@ public:
 	void start();
 	void think();
 
-	void map_clicked();
+	void map_clicked(bool draw = false);
 	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
 	void set_sel_radius_and_update_menu(uint32_t);
 

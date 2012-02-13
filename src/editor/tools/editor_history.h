@@ -23,7 +23,7 @@
 #include <deque>
 
 #include "editor_tool.h"
-#include <complex>
+#include "editor_draw_tool.h"
 
 //struct Editor_Action_Args;
 struct Editor_Interactive;
@@ -39,49 +39,19 @@ struct Editor_History {
 	Editor_History(UI::Button & undo, UI::Button & redo): m_undo_button(undo), m_redo_button(redo) {};
 
 	uint32_t do_action(Editor_Tool & tool, Editor_Tool::Tool_Index ind, Widelands::Map & map,
-	                   Widelands::Node_and_Triangle<> const center, Editor_Interactive & parent);
+	                   Widelands::Node_and_Triangle<> const center, Editor_Interactive & parent, bool draw = false);
 	uint32_t undo_action();
 	uint32_t redo_action();
 
 	/// Must be called after every change of map, world, or ... to avoid undo errors
 	void reset();
 
-	/// Put an action on the undo stack. It is possible to push an action without doing it.
-	void push_action(Editor_Tool & tool, Editor_Tool::Tool_Index ind,  Widelands::Map & map,
-	                 Widelands::Node_and_Triangle<> const center, Editor_Interactive & parent);
-
 private:
 
 	UI::Button & m_undo_button;
 	UI::Button & m_redo_button;
 
-	/// Class to save an action done by an editor tool
-	struct Editor_Tool_Action {
-		Editor_Tool & tool;
-
-		Editor_Tool::Tool_Index i;
-		Widelands::Map & map;
-		Widelands::Node_and_Triangle<> center;
-		Editor_Interactive & parent;
-
-		Editor_Action_Args * args;
-
-		Editor_Tool_Action(Editor_Tool & t, Editor_Tool::Tool_Index ind,
-		                   Widelands::Map & m, Widelands::Node_and_Triangle<> c,
-		                   Editor_Interactive & p, Editor_Action_Args nargs) :
-			tool(t), i(ind), map(m), center(c), parent(p)
-		{ args = new Editor_Action_Args(parent); *args = nargs; args->refcount++; }
-
-		~Editor_Tool_Action() {
-			if (args->refcount <= 1) delete args;
-			else args->refcount--;
-		}
-
-		Editor_Tool_Action(const Editor_Tool_Action & b) :
-			tool(b.tool), i(b.i), map(b.map), center(b.center), parent(b.parent), args(b.args)
-		{ args->refcount++; }
-
-	};
+	Editor_Draw_Tool m_draw_tool;
 
 	std::deque<Editor_Tool_Action> undo_stack;
 	std::deque<Editor_Tool_Action> redo_stack;
