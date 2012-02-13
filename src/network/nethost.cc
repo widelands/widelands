@@ -1333,23 +1333,6 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 	}
 }
 
-void NetHost::sendSystemChat(char const * const fmt, ...)
-{
-	char buffer[500];
-	va_list va;
-
-	va_start(va, fmt);
-	vsnprintf(buffer, sizeof(buffer), fmt, va);
-	va_end(va);
-
-	ChatMessage c;
-	c.time = time(0);
-	c.msg = buffer;
-	c.playern = UserSettings::none(); //  == System message
-	// c.sender remains empty to indicate a system message
-	send(c);
-}
-
 void NetHost::sendSystemMessageCode
 	(std::string const & code, std::string const & a, std::string const & b, std::string const & c)
 {
@@ -1537,9 +1520,7 @@ void NetHost::setPlayerState
 			if (d->settings.users.at(i).position == number) {
 				d->settings.users.at(i).position = UserSettings::none();
 				if (host) //  Did host send the user to lobby?
-					sendSystemChat
-						(_("Host sent player %s to the lobby!"),
-						 d->settings.users.at(i).name.c_str());
+					sendSystemMessageCode("SENT_PLAYER_TO_LOBBY", d->settings.users.at(i).name);
 
 				//  for local settings
 				for (std::vector<Client>::iterator j = d->clients.begin();; ++j) {
@@ -2036,9 +2017,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string const & playerna
 
 	// even if the network protocol is the same, the data might be different.
 	if (client.build_id != build_id())
-		sendSystemChat
-			(_("WARNING: %s uses version: %s, while Host uses version: %s"),
-			 effective_name.c_str(), client.build_id.c_str(), build_id().c_str());
+		sendSystemMessageCode("DIFFERENT_WL_VERSION", effective_name, client.build_id, build_id());
 
 	// Send information about currently selected map / savegame
 	s.reset();
@@ -2096,7 +2075,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string const & playerna
 			break;
 		}
 
-	sendSystemChat(_("%s has joined the game"), effective_name.c_str());
+	sendSystemMessageCode("CLIENT_HAS_JOINED_GAME", effective_name);
 
 	// If this is a dedicated server, inform the player
 	if (m_is_dedicated) {
@@ -2214,7 +2193,7 @@ void NetHost::checkHungClients()
 						std::string * error = new std::string();
 						SaveHandler & sh = d->game->save_handler();
 						if (sh.save_game(*d->game, savename, error))
-							sendSystemChat((boost::format("Game was saved as %s.") % savename).str().c_str());
+							sendSystemMessageCode("GAME_SAVED_AS", savename);
 					}
 				}
 			}
@@ -2725,10 +2704,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	case NETCMD_NEW_FILE_AVAILABLE: {
 		if (!file) // Do we have a file for sending
 			throw DisconnectException("REQUEST_OF_N_E_FILE");
-		sendSystemChat
-			(_("Started to send file %s to %s!"),
-			 file->filename.c_str(),
-			 d->settings.users.at(client.usernum).name.c_str());
+		sendSystemMessageCode
+			("STARTED_SENDING_FILE", file->filename, d->settings.users.at(client.usernum).name);
 		sendFilePart(client.sock, 0);
 		break;
 	}
@@ -2745,19 +2722,16 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (part >= file->parts.size())
 			throw DisconnectException("REQUEST_OF_N_E_FILEPART");
 		if (part == file->parts.size() - 1) {
-			sendSystemChat
-				(_("Completed transfer of file %s to %s"),
-				 file->filename.c_str(),
-				 d->settings.users.at(client.usernum).name.c_str());
+			sendSystemMessageCode
+				("COMPLETED_FILE_TRANSFER", file->filename, d->settings.users.at(client.usernum).name);
 			return;
 		}
 		++part;
 		if (part % 100 == 0)
-			sendSystemChat
-				(_("Sending part %u/%zu of file %s to %s"),
-				 part, file->parts.size() + 1,
-				 file->filename.c_str(),
-				 d->settings.users.at(client.usernum).name.c_str());
+			sendSystemMessageCode
+				("SENDING_FILE_PART",
+				 (boost::format("%u/%zu") % part % (file->parts.size() + 1)).str(),
+				 file->filename, d->settings.users.at(client.usernum).name);
 		sendFilePart(client.sock, part);
 		break;
 	}

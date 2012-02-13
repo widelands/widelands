@@ -476,7 +476,7 @@ bool BaseListselect::handle_mousemove(Uint8, int32_t, int32_t y, int32_t, int32_
 		set_tooltip(0);
 		return false;
 	}
-	set_tooltip(m_entry_records.at(y)->tooltip.c_str());
+	set_tooltip(m_entry_records.at(y)->tooltip.empty() ? 0 : m_entry_records.at(y)->tooltip.c_str());
 	return true;
 }
 

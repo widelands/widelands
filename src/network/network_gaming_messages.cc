@@ -152,4 +152,11 @@ void NetworkGamingMessages::fill_map() {
 	igmessages["UNEXPECTED_SYNC_REP"]     = _("Client sent unexpected synchronization report.");
 	igmessages["REQUEST_OF_N_E_FILE"]     = _("Client requests file although none is available to send.");
 	igmessages["REQUEST_OF_N_E_FILEPART"] = _("Client requests file part that does not exist.");
+	igmessages["SENT_PLAYER_TO_LOBBY"]    = _("Host sent player %s to the lobby!");
+	igmessages["DIFFERENT_WL_VERSION"]    = _("WARNING: %s uses version: %s, while Host uses version: %s");
+	igmessages["CLIENT_HAS_JOINED_GAME"]  = _("%s has joined the game");
+	igmessages["GAME_SAVED_AS"]           = _("Game was saved as %s.");
+	igmessages["STARTED_SENDING_FILE"]    = _("Started to send file %s to %s!");
+	igmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %s to %s");
+	igmessages["SENDING_FILE_PART"]       = _("Sending part %s of file %s to %s");
 }

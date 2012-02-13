@@ -112,7 +112,6 @@ struct NetHost : public GameController, private SyncCallback {
 private:
 	NetTransferFile * file;
 
-	void sendSystemChat(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 	void sendSystemMessageCode
 		(std::string const &,
 		 std::string const & a = "", std::string const & b = "", std::string const & c = "");
