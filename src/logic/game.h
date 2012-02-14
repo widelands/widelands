@@ -52,7 +52,8 @@ class TrainingSite;
  */
 enum {
 	gs_notrunning = 0, // game is being prepared
-	gs_running      // game was fully prepared at some point and is now in-game
+	gs_running,        // game was fully prepared at some point and is now in-game
+	gs_ending
 };
 
 struct Player;

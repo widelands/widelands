@@ -60,7 +60,7 @@ private:
 	WUIPlot_Area         m_plot;
 	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
-	UI::Button * m_cbs[MAX_PLAYERS];
+	UI::Button         * m_cbs[MAX_PLAYERS];
 	uint32_t             m_ndatasets;
 
 	void clicked_help();

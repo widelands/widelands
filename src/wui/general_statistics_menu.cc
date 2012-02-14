@@ -281,13 +281,15 @@ m_selected_information(0)
 }
 
 General_Statistics_Menu::~General_Statistics_Menu() {
-	m_my_registry->selected_information = m_selected_information;
-	m_my_registry->time = m_plot.get_time();
 	Game & game = ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
-	Player_Number const nr_players = game.map().get_nrplayers();
-	iterate_players_existing_const(p, nr_players, game, player) {
-		m_my_registry->selected_players[p - 1] =
-			m_cbs[p - 1]->get_perm_pressed();
+	if (game.is_loaded()) {
+		// Save informations for recreation, if window is reopened
+		m_my_registry->selected_information = m_selected_information;
+		m_my_registry->time = m_plot.get_time();
+		Player_Number const nr_players = game.map().get_nrplayers();
+		iterate_players_existing_const(p, nr_players, game, player) {
+			m_my_registry->selected_players[p - 1] = m_cbs[p - 1]->get_perm_pressed();
+		}
 	}
 }
 

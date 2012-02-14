@@ -581,6 +581,8 @@ bool Game::run
 
 		get_ibase()->run();
 
+		m_state = gs_ending;
+
 		g_sound_handler.change_music("menu", 1000, 0);
 
 		cleanup_objects();
