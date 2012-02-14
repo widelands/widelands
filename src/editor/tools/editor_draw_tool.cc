@@ -23,12 +23,17 @@
 #include "editor_history.h"
 #include "editor_action_args.h"
 
+
+/**
+ * \TODO Saving every action in a list isn't very efficient.
+ * A long list can take several seconds to undo/redo every action.
+ * If someone has a better idea how to do this, implement it!
+ */
+
 void Editor_Draw_Tool::add_action
 (Editor_Tool_Action ac, Editor_Action_Args & args) {
 	args.draw_actions.push_back(new Editor_Tool_Action(ac));
 }
-
-
 
 int32_t Editor_Draw_Tool::handle_click_impl
 (Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,

@@ -450,7 +450,7 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 			break;
 
 		case SDLK_z:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL | KMOD_LSHIFT | KMOD_RSHIFT))
+			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
 				m_history
 				.redo_action();
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
@@ -458,7 +458,12 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 				.undo_action();
 			handled = true;
 			break;
-
+		case SDLK_y:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
+				m_history
+				.redo_action();
+			handled = true;
+			break;
 		default:
 			break;
 
