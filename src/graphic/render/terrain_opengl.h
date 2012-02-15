@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -201,7 +201,7 @@ void draw_field_opengl
       glVertex2f(subwin.x + end.x,   subwin.y + end.y - 2);                   \
       glTexCoord2i(TEXTURE_WIDTH, 4);                                         \
       glVertex2f(subwin.x + end.x,   subwin.y + end.y + 2);                   \
-      glTexCoord2i(TEXTURE_WIDTH, 4);                                         \
+      glTexCoord2i(0, 4);                                                     \
       glVertex2f(subwin.x + start.x, subwin.y + start.y + 2);                 \
    } glEnd();                                                                 \
 
