@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "multiplayer.h"
-
-#if HAVE_GGZ
 
 #include "constants.h"
 #include "i18n.h"
@@ -59,7 +57,7 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 _("Back"), std::string(), true, false)
 {
-	metaserver.sigclicked.connect(boost::bind(&Fullscreen_Menu_MultiPlayer::ggzLogin, boost::ref(*this)));
+	metaserver.sigclicked.connect(boost::bind(&Fullscreen_Menu_MultiPlayer::internetLogin, boost::ref(*this)));
 	metaserver.set_font(font_small());
 	lan.set_font(font_small());
 	lan.sigclicked.connect
@@ -86,16 +84,16 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 				 _("Show login dialog"), true, false);
 		showloginbox->sigclicked.connect
 			(boost::bind
-				(&Fullscreen_Menu_MultiPlayer::showGGZLogin, boost::ref(*this)));
+				(&Fullscreen_Menu_MultiPlayer::showInternetLogin, boost::ref(*this)));
 		showloginbox->set_font(font_small());
 	}
 }
 
 
 /// called if the showloginbox button was pressed
-void Fullscreen_Menu_MultiPlayer::showGGZLogin() {
+void Fullscreen_Menu_MultiPlayer::showInternetLogin() {
 	m_auto_log = false;
-	ggzLogin();
+	internetLogin();
 }
 
 
@@ -111,7 +109,7 @@ void Fullscreen_Menu_MultiPlayer::showGGZLogin() {
  *
  * In both cases this fullscreen menu ends it's modality.
  */
-void Fullscreen_Menu_MultiPlayer::ggzLogin() {
+void Fullscreen_Menu_MultiPlayer::internetLogin() {
 	Section & s = g_options.pull_section("global");
 	if (m_auto_log) {
 		m_nickname = s.get_string("nickname", _("nobody"));
@@ -133,5 +131,3 @@ void Fullscreen_Menu_MultiPlayer::ggzLogin() {
 		end_modal(Metaserver);
 	}
 }
-
-#endif // if HAVE_GGZ

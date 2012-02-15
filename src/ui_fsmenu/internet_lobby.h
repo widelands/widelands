@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009, 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,10 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_NETSETUP_GGZ_H
-#define FULLSCREEN_MENU_NETSETUP_GGZ_H
+#ifndef FULLSCREEN_MENU_INTERNET_LOBBY_H
+#define FULLSCREEN_MENU_INTERNET_LOBBY_H
 
-#include "network/network_ggz.h"
-
-#if HAVE_GGZ
-
+#include "network/internet_gaming.h"
 #include "network/network_lan_promotion.h"
 
 #include "base.h"
@@ -39,23 +36,15 @@
 #include <cstring>
 #include <vector>
 
-struct Net_Open_Game;
-struct Net_Game_info;
+struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
 
-struct Fullscreen_Menu_NetSetupGGZ : public Fullscreen_Menu_Base {
-	enum {
-		CANCEL = 0,
-		HOSTGAME,
-		JOINGAME
-	};
-
-	Fullscreen_Menu_NetSetupGGZ (const char *, const char *, bool);
+	Fullscreen_Menu_Internet_Lobby (const char *, const char *, bool);
 
 	virtual void think();
 
-	/// \returns the maximum number of players that may connect
-	int32_t get_maxplayers() {
-		return maxplayers.getValue();
+	/// \returns the maximum number of clients that may connect
+	int32_t get_maxclients() {
+		return maxclients.getValue();
 	}
 
 private:
@@ -65,14 +54,14 @@ private:
 	uint32_t m_lisw;
 	uint32_t m_fs;
 	std::string m_fn;
-	UI::Textarea title, m_users, m_opengames;
+	UI::Textarea title, m_clients, m_opengames;
 	UI::Textarea m_servername;
-	UI::Textarea m_maxplayers;
-	UI::SpinBox maxplayers;
+	UI::Textarea m_maxclients;
+	UI::SpinBox maxclients;
 	UI::Button joingame, hostgame, back;
 	UI::EditBox servername;
-	UI::Table<const Net_Player * const> usersonline;
-	UI::Listselect<Net_Open_Game> opengames;
+	UI::Table<const INet_Client * const> clientsonline;
+	UI::Listselect<INet_Game> opengames;
 	GameChatPanel chat;
 
 	// Login information
@@ -80,23 +69,22 @@ private:
 	const char * password;
 	bool         reg;
 
-	void fillServersList(std::vector<Net_Game_Info> const &);
-	void fillUserList   (std::vector<Net_Player> const &);
+	void fillGamesList (std::vector<INet_Game> const &);
+	void fillClientList(std::vector<INet_Client> const &);
 
 	void connectToMetaserver();
 
-	void user_doubleclicked (uint32_t);
+	void client_doubleclicked (uint32_t);
 	void server_selected (uint32_t);
 	void server_doubleclicked (uint32_t);
 
 	void change_servername();
 	void clicked_joingame();
 	void clicked_hostgame();
-	void clicked_lasthost();
+	void clicked_back();
 
-	bool compare_usertype(unsigned int rowa, unsigned int rowb);
+	uint8_t convert_clienttype(const std::string &);
+	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 };
-
-#endif // if HAVE_GGZ
 
 #endif

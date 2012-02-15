@@ -114,17 +114,19 @@ void BaseListselect::clear() {
  *       sel    if true, directly select the new entry
 */
 void BaseListselect::add
-	(char const * const name,
-	 uint32_t           entry,
-	 PictureID    const picid,
-	 bool         const sel)
+	(char const * const   name,
+	 uint32_t             entry,
+	 PictureID    const   picid,
+	 bool         const   sel,
+	 std::string  const & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 
 	er->m_entry = entry;
-	er->picid = picid;
+	er->picid   = picid;
 	er->use_clr = false;
-	er->name = std::string(name);
+	er->name    = std::string(name);
+	er->tooltip = tooltip_text;
 	uint32_t entry_height = 0;
 	if (picid == g_gr->get_no_picture()) {
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
@@ -151,9 +153,10 @@ void BaseListselect::add
 }
 
 void BaseListselect::add_front
-	(char const * const name,
-	 PictureID    const picid,
-	 bool         const sel)
+	(char const * const   name,
+	 PictureID    const   picid,
+	 bool         const   sel,
+	 std::string  const & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 
@@ -161,10 +164,10 @@ void BaseListselect::add_front
 	container_iterate_const(Entry_Record_deque, m_entry_records, i)
 		++(*i.current)->m_entry;
 
-	er->picid = picid;
+	er->picid   = picid;
 	er->use_clr = false;
-	//strcpy(er.name, name);
-	er->name = std::string(name);
+	er->name    = std::string(name);
+	er->tooltip = tooltip_text;
 
 	uint32_t entry_height = 0;
 	if (picid == g_gr->get_no_picture())
@@ -465,6 +468,16 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
+}
+
+bool BaseListselect::handle_mousemove(Uint8, int32_t, int32_t y, int32_t, int32_t) {
+	y = (y + m_scrollpos) / get_lineheight();
+	if (y < 0 or static_cast<int32_t>(m_entry_records.size()) <= y) {
+		set_tooltip(0);
+		return false;
+	}
+	set_tooltip(m_entry_records.at(y)->tooltip.empty() ? 0 : m_entry_records.at(y)->tooltip.c_str());
+	return true;
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {

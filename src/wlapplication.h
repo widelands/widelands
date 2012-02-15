@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,7 +148,7 @@ struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = 0);
 	~WLApplication();
 
-	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, GGZ};
+	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, INTERNET};
 
 	void run();
 
