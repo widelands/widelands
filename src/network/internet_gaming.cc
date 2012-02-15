@@ -151,7 +151,7 @@ bool InternetGaming::login
 				formatAndAddChat("", "", true, _("For hosting a game, please take a look at the notes at:"));
 				formatAndAddChat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
 				return true;
-			} else if (m_state == COMMUNICATION_ERROR)
+			} else if (error())
 				return false;
 		}
 	}
@@ -165,7 +165,7 @@ bool InternetGaming::login
 /// Relogin to metaserver after loosing connection
 bool InternetGaming::relogin()
 {
-	assert(m_state == COMMUNICATION_ERROR);
+	assert(error());
 
 	initialiseConnection();
 
@@ -191,7 +191,7 @@ bool InternetGaming::relogin()
 		if (m_state != CONNECTING) {
 			if (m_state == LOBBY) {
 				break;
-			} else if (m_state == COMMUNICATION_ERROR)
+			} else if (error())
 				return false;
 		}
 	}
@@ -210,8 +210,7 @@ bool InternetGaming::relogin()
 	} else if (waitcmd == IGPCMD_GAME_START) {
 		m_state = IN_GAME;
 		set_game_playing();
-	} else
-		assert(false); // should never be here
+	}
 
 	return true;
 }
@@ -308,7 +307,16 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 	// First check if everything is fine or whether the metaserver broke up with the client.
 	if (cmd == IGPCMD_DISCONNECT) {
 		std::string reason = packet.String();
-		logout(reason);
+		formatAndAddChat("", "", true, InternetGamingMessages::get_message(reason));
+		if (reason == "CLIENT_TIMEOUT") {
+			// Try to relogin
+			setError();
+			if (!relogin()) {
+				// Do not try to relogin again automatically.
+				reset();
+				setError();
+			}
+		}
 		return;
 	}
 
@@ -326,11 +334,15 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			// Clients request to relogin was granted
 			m_state = LOBBY;
 			dedicatedlog("InternetGaming: Client %s relogged in.\n", m_clientname.c_str());
+			formatAndAddChat("", "", true, _("Successfully reconnected to the metaserver!"));
 			return;
 
 		} else if (cmd == IGPCMD_ERROR) {
-			if (packet.String() != "LOGIN")
+			std::string errortype = packet.String();
+			if (errortype != "LOGIN" && errortype != "RELOGIN") {
+				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", packet.String().c_str());
 				throw warning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
+			}
 			// Clients login request got rejected
 			logout(packet.String());
 			setError();

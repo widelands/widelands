@@ -40,7 +40,7 @@ const std::string & InternetGamingMessages::get_message(const std::string & code
 void InternetGamingMessages::fill_map() {
 	// messages from metaserver to client
 	igmessages["NO_SUCH_USER"]         = _("No user with the name %s is logged in!");
-	igmessages["WRONG_PASSWORD"]       = _("The send password was incorrect!");
+	igmessages["WRONG_PASSWORD"]       = _("The sent password was incorrect!");
 	igmessages["UNSUPPORTED_PROTOCOL"] = _("The protocol version you are using is not supported!");
 	igmessages["ALREADY_LOGGED_IN"]    = _("You are already logged in!");
 	igmessages["DEFICIENT_PERMISSION"] =
@@ -53,9 +53,13 @@ void InternetGamingMessages::fill_map() {
 	igmessages["CONNECTION_LOST"]      = _("The connection to the metaserver was lost.");
 	igmessages["NO_ANSWER"]            = _("Metaserver did not answer");
 	igmessages["GAME_NOT_CONNECTABLE"] = _("Your game is not connectable from the internet");
-	igmessages["TIMEOUT"]              =
+	igmessages["CLIENT_TIMEOUT"]       =
+		_("You got disconnected from the metaserver, as you did not answer a PING request in time.");
+	igmessages["GAME_TIMEOUT"]         =
 		_
 		 ("The metaserver was unable to connect to your game. Most likely it is not connectable from the "
 		  "internet! Please take a look at http://wl.widelands.org/wiki/InternetGaming for setting up your "
 		  "internet connection for hosting a game online.");
+	igmessages["NOT_LOGGED_IN"]        =
+		_("You tried to relogin, but the server has no more knowledge of your previous state.");
 }
