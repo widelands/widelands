@@ -3,67 +3,53 @@
 
 [desert1]
 is=dry
-edge_texture=desert1_edge
 
 [desert2]
 is=dry
-edge_texture=desert2_edge
 
 [desert3]
 is=dry
-edge_texture=desert3_edge
 
 [desert4]
 def_resources=water 2
 is=green
-edge_texture=desert4_edge
 
 [drysoil]
 def_resources=water 4
 is=green
-edge_texture=drysoil_edge
 
 [beach]
 is=dry
-edge_texture=beach_edge
 
 [steppe]
 def_resources=water 5
 is=green
-edge_texture=steppe_edge
 
 [meadow]
 def_resources=water 10
 is=green
-edge_texture=meadow_edge
 
 [mountainmeadow]
 is=green
-edge_texture=mountainmeadow_edge
 
 [highmountainmeadow]
 is=green
-edge_texture=highmountainmeadow_edge
 
 [mountain1]
 resources=coal, iron, gold, granit
 is=mountain
-edge_texture=mountain1_edge
 
 [mountain2]
 resources=coal, iron, gold, granit
 is=mountain
-edge_texture=mountain2_edge
 
 [mountain3]
 resources=coal, iron, gold, granit
 is=mountain
-edge_texture=mountain3_edge
 
 [mountain4]
 resources=coal, iron, gold, granit
 is=mountain
-edge_texture=mountain4_edge
 
 
 ##### Here are few imported textures of greenland
@@ -72,8 +58,6 @@ edge_texture=mountain4_edge
 def_resources=fish 4
 is=water
 fps=5
-edge_texture=wasser_edge
 
 [lava]
 is=acid
-edge_texture=lava_edge

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,11 +95,7 @@ protected:
 		 Texture const & tr_d_texture,
 		 Texture const &  l_r_texture,
 		 Texture const &  f_d_texture,
-		 Texture const &  f_r_texture,
-		 Texture const & tr_d_edge_texture,
-		 Texture const &  l_r_edge_texture,
-		 Texture const &  f_d_edge_texture,
-		 Texture const &  f_r_edge_texture);
+		 Texture const &  f_r_texture);
 
 	/// A helper function to draw the minimap. This is called from
 	/// renderminimap().

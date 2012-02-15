@@ -167,7 +167,7 @@ struct Graphic {
 	PictureID get_resized_picture
 		(PictureID, uint32_t w, uint32_t h, ResizeMode);
 
-	uint32_t get_maptexture(char const & fnametempl, char const & fedgenametempl, uint32_t frametime);
+	uint32_t get_maptexture(char const & fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
@@ -183,11 +183,11 @@ struct Graphic {
 
 	void screenshot(const char & fname) const;
 	Texture * get_maptexture_data(uint32_t id);
-	Texture * get_mapedgetexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t) const;
 
 	void set_world(std::string);
 	PictureID get_road_texture(int32_t roadtex);
+	PictureID get_edge_texture();
 
 	GraphicCaps const & caps() const throw () {return m_caps;}
 
@@ -235,8 +235,8 @@ protected:
 	Picturemap m_picturemap;
 
 	Road_Textures * m_roadtextures;
+	PictureID m_edgetexture;
 	std::vector<Texture *> m_maptextures;
-	std::vector<Texture *> m_mapedgetextures;
 	std::vector<AnimationGfx *> m_animations;
 };
 

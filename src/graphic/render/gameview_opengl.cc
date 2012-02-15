@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,16 +34,16 @@ using namespace  Widelands;
  * into the bitmap.
  *
  * Vertices:
- *   - f_vert vertice of the field
- *   - r_vert vertice right of the field
- *   - bl_vert vertice bottom left of the field
- *   - br_vert vertice bottom right of the field
+ *   - f_vert vertex of the field
+ *   - r_vert vertex right of the field
+ *   - bl_vert vertex bottom left of the field
+ *   - br_vert vertex bottom right of the field
  *
  * Textures:
  *   - f_r_texture Terrain of the triangle right of the field
  *   - f_d_texture Terrain of the triangle under of the field
- *   - tr_d_texture Terrain of the triangle to of the right triangle ??
- *   - l_r_texture Terrain of the triangle left if the down triangle ??
+ *   - tr_d_texture Terrain of the triangle top of the right triangle ??
+ *   - l_r_texture Terrain of the triangle left of the down triangle ??
  *
  *             (tr_d)
  *
@@ -63,23 +63,15 @@ void GameViewOpenGL::draw_field
 	 Texture const & tr_d_texture,
 	 Texture const &  l_r_texture,
 	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture,
-	 Texture const & tr_d_edge_texture,
-	 Texture const &  l_r_edge_texture,
-	 Texture const &  f_d_edge_texture,
-	 Texture const &  f_r_edge_texture)
+	 Texture const &  f_r_texture)
 {
 	// Draw triangle right (bottom) of the field
 	draw_field_opengl
-		(subwin, f_vert, br_vert, r_vert, f_r_texture);
+		(subwin, f_vert, br_vert, r_vert, f_r_texture, f_d_texture, tr_d_texture);
 	// Draw triangle bottom of the field
 	draw_field_opengl
-		(subwin, f_vert, bl_vert, br_vert, f_d_texture);
-	// Draw the edges
-	draw_edges_opengl
-		(subwin, f_vert, r_vert, bl_vert, br_vert,
-		 tr_d_texture, l_r_texture, f_d_texture, f_r_texture,
-		 tr_d_edge_texture, f_d_edge_texture, l_r_edge_texture);
+		(subwin, f_vert, bl_vert, br_vert, f_d_texture, l_r_texture, f_d_texture);
+
 	// Draw the roads
 	draw_roads_opengl(subwin, roads, f_vert, r_vert, bl_vert, br_vert);
 }

@@ -3,77 +3,61 @@
 [steppe]
 def_resources=water 5
 is=green
-edge_texture=steppe_edge
 
 [berg1]
 resources=coal, iron, gold, granit 
 is=mountain
-edge_texture=berg1_edge
 
 [schnee]
 is=dead
-edge_texture=schnee_edge
 
 [sumpf]
 def_resources=water 20
 is=unpassable
 fps=14
-edge_texture=sumpf_edge
 
 [strand]
 is=dry
-edge_texture=strand_edge
 
 [wasser]
 def_resources=fish 4
 is=water
 fps=14
-edge_texture=wasser_edge
 
 [wiese1]
 def_resources=water 10
 is=green
-edge_texture=wiese1_edge
 
 [wiese2]
 def_resources=water 10
 is=green
-edge_texture=wiese2_edge
 
 [wiese3]
 def_resources=water 10
 is=green
-edge_texture=wiese3_edge
 
 [berg2]
 resources=coal, iron, gold, granit
 is=mountain
-edge_texture=berg2_edge
 
 [berg3]
 resources=coal, iron, gold, granit
 is=mountain
-edge_texture=berg3_edge
 
 [berg4]
 resources=coal, iron, gold, granit
 is=mountain
-edge_texture=berg4_edge
 
 [steppe_kahl]
 def_resources=water 4
 is=green
-edge_texture=steppe_kahl_edge
 
 [wiese4]
 def_resources=water 10
 is=green
-edge_texture=wiese4_edge
 
 [lava]
 is=acid
-edge_texture=lava_edge
 
 [bergwiese]
 is=green
-edge_texture=bergwiese_edge
