@@ -500,7 +500,7 @@ endif (NOT WL_NOMUSIC)
 
 if (WIN32)
   # Install files only needed for Windows
-  FILE(GLOB dlls "${CMAKE_CURRENT_BINARY_DIR}/../*.dll")
+  FILE(GLOB dlls "${CMAKE_CURRENT_BINARY_DIR}/*.dll")
   install(
     FILES
       ${dlls}
@@ -528,10 +528,10 @@ if (WIN32)
   set(CPACK_GENERATOR NSIS)
 
   # Graphics for the installer (all slashes are necessary!)
-  set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_BINARY_DIR}\\\\..\\\\utils\\\\win32\\\\wl-ico-128.ico")
-  set(CPACK_NSIS_MUI_UNIICON "${CMAKE_CURRENT_BINARY_DIR}\\\\..\\\\utils\\\\win32\\\\wl-ico-128.ico")
-  set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_BINARY_DIR}\\\\..\\\\utils\\\\win32\\\\nsis\\\\install_header.bmp")
-  set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP "${CMAKE_CURRENT_BINARY_DIR}\\\\..\\\\utils\\\\win32\\\\nsis\\\\WL.bmp")
+  set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_LIST_DIR}\\\\utils\\\\win32\\\\wl-ico-128.ico")
+  set(CPACK_NSIS_MUI_UNIICON "${CMAKE_CURRENT_LIST_DIR}\\\\utils\\\\win32\\\\wl-ico-128.ico")
+  set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_LIST_DIR}\\\\utils\\\\win32\\\\nsis\\\\install_header.bmp")
+  set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP "${CMAKE_CURRENT_LIST_DIR}\\\\utils\\\\win32\\\\nsis\\\\WL.bmp")
 
   # Name for installer and Windows Add/Remove
   set(CPACK_NSIS_PACKAGE_NAME "Widelands")
@@ -569,8 +569,8 @@ if (WIN32)
   set(CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})
   set(CPACK_PACKAGE_VERSION_MINOR ${WL_VERSION_MINOR})
   set(CPACK_PACKAGE_VERSION_PATCH ${WL_VERSION_PATCH})
-  set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_BINARY_DIR}\\\\..\\\\COPYING")
-  set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_BINARY_DIR}\\\\..\\\\ChangeLog")
+  set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_LIST_DIR}\\\\COPYING")
+  set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_LIST_DIR}\\\\ChangeLog")
 
   # Setup (and remove) Registry entries for Widelands (all slashes are necessary!)
   set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
