@@ -49,8 +49,8 @@ end
 --    :arg plrs:    List of Players to be checked
 --    :arg heading: Heading of the message the defeated player will get
 --    :arg msg:     Message the defeated player will get
---    :arg wc_name  Name of the win condition
---    :arg wc_ver   Version of the win condition
+--    :arg wc_name: Name of the win condition
+--    :arg wc_ver:  Version of the win condition
 --
 --    :returns: :const:`nil`
 function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
