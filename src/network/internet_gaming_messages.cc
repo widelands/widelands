@@ -53,4 +53,9 @@ void InternetGamingMessages::fill_map() {
 	igmessages["CONNECTION_LOST"]      = _("The connection to the metaserver was lost.");
 	igmessages["NO_ANSWER"]            = _("Metaserver did not answer");
 	igmessages["GAME_NOT_CONNECTABLE"] = _("Your game is not connectable from the internet");
+	igmessages["TIMEOUT"]              =
+		_
+		 ("The metaserver was unable to connect to your game. Most likely it is not connectable from the "
+		  "internet! Please take a look at http://wl.widelands.org/wiki/InternetGaming for setting up your "
+		  "internet connection for hosting a game online.");
 }

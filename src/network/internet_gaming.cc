@@ -473,6 +473,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			else if (cmd == IGPCMD_GAME_OPEN) {
 				// Something went wrong with the newly opened game
 				message += InternetGamingMessages::get_message(reason);
+				// we got our answer, so no need to wait anymore
+				waitcmd = "";
 			}
 
 			// Finally send the error message as system chat to the client.
