@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -93,7 +93,7 @@ private:
 	uint32_t                          m_vbutw;
 	uint32_t                          m_butw;
 	uint32_t                          m_buth;
-	UI::Callback_Button           m_advanced_options, m_cancel, m_apply;
+	UI::Button           m_advanced_options, m_cancel, m_apply;
 	UI::SpinBox                       m_sb_maxfps, m_sb_autosave;
 	UI::SpinBox                       m_sb_remove_replays;
 	UI::Textarea                      m_title;
@@ -152,7 +152,7 @@ private:
 	uint32_t                    m_butw;
 	uint32_t                    m_buth;
 
-	UI::Callback_Button     m_cancel, m_apply;
+	UI::Button     m_cancel, m_apply;
 	UI::SpinBox                 m_sb_speed, m_sb_dis_panel, m_sb_dis_border;
 	UI::Textarea                m_title;
 	UI::Listselect<std::string> m_ui_font_list;

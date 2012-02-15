@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 #include "gl_surface_screen.h"
@@ -137,6 +137,7 @@ void GLSurfaceScreen::draw_rect(const Rect rc, const RGBColor clr)
 	assert(g_opengl);
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
+	glLineWidth(1);
 
 	glBegin(GL_LINE_LOOP); {
 		glColor3ub(clr.r(), clr.g(), clr.b());
@@ -231,24 +232,16 @@ void GLSurfaceScreen::draw_line
 		 int32_t x2,
 		 int32_t y2,
 		 RGBColor color,
-		 const Rect * clip)
+		 uint8_t width)
 {
-	if (clip) {
-		glPushAttrib(GL_ENABLE_BIT | GL_SCISSOR_BIT);
-		glScissor
-			(clip->x, g_gr->get_yres() - clip->y - clip->h, clip->w, clip->h);
-		glEnable(GL_SCISSOR_TEST);
-	}
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
+	glLineWidth(width);
 	glBegin(GL_LINES); {
 		glColor3ub(color.r(), color.g(), color.b());
 		glVertex2f(x1 + 0.5f, y1 + 0.5f);
 		glVertex2f(x2 + 0.5f, y2 + 0.5f);
 	} glEnd();
-	if (clip) {
-		glPopAttrib();
-	}
 }
 
 /**

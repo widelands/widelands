@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -43,21 +43,17 @@ struct Tribe_Descr;
 struct Road;
 struct AttackController;
 
-/** class Player
+/**
+ * Manage in-game aspects of players, such as tribe, team, fog-of-war, statistics,
+ * messages (notification when a resource has been found etc.) and so on.
  *
- * What we really need is a Player class that stores e.g. score
- * and diplomacy of a player.
- *
- * These Player classes should be controlled via the cmd queue.
- * Commands are inserted by:
- *  - local player
- *  - network packets
- *  - AI code
- * Player commands should be controlled by the \ref GameController
- * in the long run.
- *                      -- Nicolai
+ * Also provides functions for directly building player immovables; however,
+ * from the UI and AI codes, those should only ever be issued indirectly via
+ * \ref GameController and friends, so that replays and network games function
+ * properly.
  */
 struct Player :
+	boost::noncopyable,
 	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
 	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
@@ -72,8 +68,8 @@ struct Player :
 	typedef std::vector<Building_Stats_vector> BuildingStats;
 
 	friend struct Editor_Game_Base;
-	friend class Game_Player_Info_Data_Packet;
-	friend class Game_Player_Economies_Data_Packet;
+	friend struct Game_Player_Info_Data_Packet;
+	friend struct Game_Player_Economies_Data_Packet;
 	friend struct Map_Buildingdata_Data_Packet;
 	friend struct Map_Players_View_Data_Packet;
 	friend struct Map_Exploration_Data_Packet;
@@ -140,7 +136,7 @@ struct Player :
 	};
 
 	/// Per-player field information.
-	struct Field {
+	struct Field : boost::noncopyable {
 		Field() :
 			military_influence(0),
 			vision            (0)
@@ -337,10 +333,6 @@ struct Player :
 		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
 		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
 		//  <end>                           0x100         0x160
-
-	private:
-		Field & operator= (Field const &);
-		explicit Field    (Field const &);
 	};
 
 	const Field * fields() const throw () {return m_fields;}
@@ -451,6 +443,7 @@ struct Player :
 	void start_stop_building(PlayerImmovable &);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
+	void dismantle_building (Building *);
 
 	// Economy stuff
 	void    add_economy(Economy &);
@@ -520,13 +513,19 @@ struct Player :
 	{
 		return m_building_stats[i];
 	}
+
 	std::vector<uint32_t> const * get_ware_production_statistics
+		(Ware_Index const) const;
+
+	std::vector<uint32_t> const * get_ware_consumption_statistics
 		(Ware_Index const) const;
 
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(Ware_Index);
+
+	void ware_consumed(Ware_Index, uint8_t);
 	void next_ware_production_period();
 
 	void receive(NoteImmovable const &);
@@ -546,6 +545,8 @@ private:
 	void update_building_statistics(Building &, losegain_t);
 	void update_team_players();
 	void play_message_sound(const std::string & sender);
+	void _enhance_or_dismantle
+		(Building *, Building_Index const index_of_new_building = Building_Index::Null());
 
 private:
 	MessageQueue           m_messages;
@@ -586,13 +587,25 @@ private:
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics
 	 */
-	std::vector<uint32_t> m_current_statistics;
+	std::vector<uint32_t> m_current_produced_statistics;
+
+	/**
+	 * Wares consumed (by ware id) since the last call to @ref sample_statistics
+	 */
+	std::vector<uint32_t> m_current_consumed_statistics;
 
 	/**
 	 * Statistics of wares produced over the life of the game, indexed as
 	 * m_ware_productions[ware id][time index]
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_productions;
+
+	/**
+	 * Statistics of wares consumed over the life of the game, indexed as
+	 * m_ware_consumptions[ware_id][time_index]
+	 */
+	std::vector< std::vector<uint32_t> > m_ware_consumptions;
+
 	BuildingStats m_building_stats;
 };
 

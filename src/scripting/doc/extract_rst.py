@@ -28,11 +28,14 @@ def extract_rst_from_cpp(inname, outname=None):
 
     res = re.findall(r"\s*/\* RST\s(.*?)\*/", data, re.M | re.DOTALL)
 
-    out = sys.stdout if not outname else open(outname, "w")
-
+    output = ""
     for r in res:
         r = r.expandtabs(4)
-        out.write(r + '\n')
+        output += r + '\n'
+
+    if output.strip():
+        out = sys.stdout if not outname else open(outname, "w")
+        out.write(output)
 
 def extract_rst_from_lua(inname):
     """
@@ -45,13 +48,15 @@ def extract_rst_from_lua(inname):
 
     outname = "source/aux_%s.rst" %os.path.basename(os.path.splitext(inname)[0])
 
-    out = sys.stdout if not outname else open(outname, "w")
-
+    output = ""
     for r in res:
         r = re.subn(re.compile(r'^-- ?', re.M | re.DOTALL), "", r)[0]
-        out.write(r + '\n')
+        output += r + '\n'
 
-    return os.path.basename(outname)
+    if output.strip():
+        out = sys.stdout if not outname else open(outname, "w")
+        out.write(output)
+        return os.path.basename(outname)
 
 def replace_auxilary_toc(aux_fns):
     aux_in = open("source/auxiliary.rst.in", "r").read()
@@ -65,7 +70,7 @@ if __name__ == '__main__':
             extract_rst_from_cpp(inf, outf)
 
         replace_auxilary_toc(
-            [extract_rst_from_lua(i) for i in glob("../../../scripting/*.lua")]
+            filter(lambda a: a, [extract_rst_from_lua(i) for i in glob("../../../scripting/*.lua")])
         )
 
     main()

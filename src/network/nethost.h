@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -37,7 +37,7 @@ struct Client;
  * launch, as well as dealing with the actual network protocol.
  */
 struct NetHost : public GameController, private SyncCallback {
-	NetHost (std::string const & playername, bool ggz = false);
+	NetHost (std::string const & playername, bool internet = false);
 	virtual ~NetHost ();
 
 	void run(bool autostart = false);
@@ -93,6 +93,8 @@ struct NetHost : public GameController, private SyncCallback {
 	void handle_dserver_command(std::string, std::string);
 	void dserver_send_maps_and_saves(Client &);
 
+	void report_result(uint8_t player, int32_t points, bool win, std::string extra);
+
 	void forcePause() {
 		m_forced_pause = true;
 		updateNetworkSpeed();
@@ -110,7 +112,9 @@ struct NetHost : public GameController, private SyncCallback {
 private:
 	NetTransferFile * file;
 
-	void sendSystemChat(char const * fmt, ...) PRINTF_FORMAT(2, 3);
+	void sendSystemMessageCode
+		(std::string const &,
+		 std::string const & a = "", std::string const & b = "", std::string const & c = "");
 	void requestSyncReports();
 	void checkSyncReports();
 	void syncreport();
@@ -145,17 +149,16 @@ private:
 
 	void disconnectPlayerController
 		(uint8_t number,
-		 std::string const & name,
-		 std::string const & reason,
-		 bool sendreason = true);
+		 std::string const & name);
 	void disconnectClient
 		(uint32_t number,
 		 std::string const & reason,
-		 bool sendreason = true);
+		 bool sendreason = true,
+		 std::string const & arg = "");
 	void reaper();
 
 	NetHostImpl * d;
-	bool use_ggz;
+	bool m_internet;
 	bool m_is_dedicated;
 	std::string m_password;
 	std::string m_dedicated_motd;

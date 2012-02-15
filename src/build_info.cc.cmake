@@ -1,11 +1,15 @@
 #include "build_info.h"
+#include <string>
 
-std::string build_id()
+static const std::string wl_bid = "@WL_VERSION@";
+static const std::string wl_bt  = "@CMAKE_BUILD_TYPE@";
+
+const std::string & build_id()
 {
-	return "@WL_VERSION@";
+	return wl_bid;
 }
 
-std::string build_type()
+const std::string & build_type()
 {
-	return "@CMAKE_BUILD_TYPE@";
+	return wl_bt;
 }

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -1139,6 +1139,25 @@ void ProductionProgram::ActSleep::writeHTML
 		snprintf
 			(buffer, sizeof(buffer),
 			 _(" %u.%03u s"), m_duration / 1000, m_duration % 1000);
+		fw.Text(buffer);
+	}
+}
+
+
+void ProductionProgram::ActCheck_Map::writeHTML
+	(::FileWrite & fw, ProductionSite_Descr const &) const
+{
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.xhtml"));
+	fw.Text("#check_map\" title=\"");
+	fw.Text(_("Documentation for program command check_map"));
+	fw.Text("\">");
+	fw.Text(_("check_map"));
+	fw.Text("</a>");
+	if (m_feature) {
+		char buffer[32];
+		if (m_feature == SEAFARING)
+			snprintf(buffer, sizeof(buffer), _("Seafaring"));
 		fw.Text(buffer);
 	}
 }

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -46,7 +46,8 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs Menu")),
 
 m_tabpanel          (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png")),
-m_pit               (pit)
+m_pit               (pit),
+m_click_recursion_protect(false)
 {
 	int32_t const space  =  5;
 	Widelands::World const & world = parent.egbase().map().world();
@@ -96,9 +97,8 @@ m_pit               (pit)
 			 critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);
-		cb.set_id(i);
 		cb.set_state(m_pit.is_enabled(i));
-		cb.changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);
+		cb.changedto.connect(boost::bind(&Editor_Tool_Place_Bob_Options_Menu::clicked, this, i, _1));
 		m_checkboxes.push_back(&cb);
 		box->add(&cb, UI::Align_Left);
 		box->add_space(space);
@@ -117,6 +117,9 @@ m_pit               (pit)
 void Editor_Tool_Place_Bob_Options_Menu::clicked
 	(int32_t const n, bool const t)
 {
+	if (m_click_recursion_protect)
+		return;
+
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
 	//  FIXME usage comment for get_key_state.
@@ -129,22 +132,14 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked
 
 	if (not multiselect) {
 		for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
+
 		//  disable all checkboxes
-		//  TODO The uint32_t cast is ugly!
-		for
-			(uint32_t i = 0;
-			 i < m_checkboxes.size();
-			 ++i, i += i == static_cast<uint32_t>(n))
-			{
-				m_checkboxes[i]->changedtoid.set
-					(this,
-					 static_cast
-					 <void (Editor_Tool_Place_Bob_Options_Menu::*)(int32_t, bool)>
-					 (0));
+		m_click_recursion_protect = true;
+		for (uint32_t i = 0; i < m_checkboxes.size(); ++i) {
+			if (i != static_cast<uint32_t>(n))
 				m_checkboxes[i]->set_state(false);
-				m_checkboxes[i]->changedtoid.set
-					(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);
-			}
+		}
+		m_click_recursion_protect = false;
 	}
 
 	m_pit.enable(n, t);

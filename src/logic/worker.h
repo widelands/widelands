@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -21,6 +21,7 @@
 #define WORKER_H
 
 #include "economy/idleworkersupply.h"
+#include "economy/portdock.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
 #include "worker_descr.h"
@@ -164,6 +165,10 @@ public:
 	void cancel_task_transfer(Game &);
 	Transfer * get_transfer() const {return m_transfer;}
 
+	void start_task_shipping(Game &, PortDock &);
+	void end_shipping(Game &);
+	bool is_shipping();
+
 	void start_task_buildingwork(Game &);
 	void update_task_buildingwork(Game &);
 
@@ -197,6 +202,7 @@ protected:
 
 public:
 	static const Task taskTransfer;
+	static const Task taskShipping;
 	static const Task taskBuildingwork;
 	static const Task taskReturn;
 	static const Task taskProgram;
@@ -214,6 +220,8 @@ private:
 	// task details
 	void transfer_update(Game &, State &);
 	void transfer_pop(Game &, State &);
+	void shipping_update(Game &, State &);
+	void shipping_pop(Game &, State &);
 	void buildingwork_update(Game &, State &);
 	void return_update(Game &, State &);
 	void program_update(Game &, State &);
@@ -269,7 +277,7 @@ private:
 
 	// saving and loading
 protected:
-	class Loader : public Bob::Loader {
+	struct Loader : public Bob::Loader {
 	public:
 		Loader();
 

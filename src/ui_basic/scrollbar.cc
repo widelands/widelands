@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -134,7 +134,7 @@ void Scrollbar::set_scrollpos(int32_t pos)
 		return;
 
 	m_pos = pos;
-	moved.call(pos);
+	moved(pos);
 
 	update();
 }

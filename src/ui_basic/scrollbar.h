@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,15 +13,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #ifndef UI_SCROLLBAR_H
 #define UI_SCROLLBAR_H
 
+#include <boost/signal.hpp>
+
 #include "panel.h"
-#include "m_signal.h"
 
 #include "rect.h"
 
@@ -50,7 +51,7 @@ public:
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
 
-	Signal1<int32_t> moved;
+	boost::signal<void (int32_t)> moved;
 
 	void set_steps(int32_t steps);
 	void set_singlestepsize(uint32_t singlestepsize);

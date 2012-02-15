@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -40,20 +40,16 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 	m_delete
 		(this, "delete",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-		 	 (&Fullscreen_Menu_LoadReplay::clicked_delete, boost::ref(*this)),
 		 _("Delete"), std::string(), false, false),
 
 // Replay list
@@ -78,11 +74,17 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		 _("Gametime:"), UI::Align_Right),
 	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8)
 {
+	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)));
+	m_delete.sigclicked.connect
+		(boost::bind
+		 	 (&Fullscreen_Menu_LoadReplay::clicked_delete, boost::ref(*this)));
+
 	m_title.set_textstyle(ts_big());
-	m_list .set_font(ui_fn(), fs_small());
-	m_list .selected.set(this, &Fullscreen_Menu_LoadReplay::replay_selected);
-	m_list .double_clicked.set
-		(this, &Fullscreen_Menu_LoadReplay::double_clicked);
+	m_list.set_font(ui_fn(), fs_small());
+	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadReplay::replay_selected, this, _1));
+	m_list.double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_LoadReplay::double_clicked, this, _1));
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
 	fill_list();

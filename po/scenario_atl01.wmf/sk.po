@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
-"PO-Revision-Date: 2011-08-21 14:18+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"PO-Revision-Date: 2011-11-26 17:27+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2011-11-27 05:14+0000\n"
+"X-Generator: Launchpad (build 14381)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
@@ -42,7 +42,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:343
 msgid "A man comes to Jundlina"
-msgstr "Muž príde k Jundlíne"
+msgstr "Muž prichádza k Jundlíne"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:539
 msgid "A young man approaches"
@@ -257,7 +257,7 @@ msgstr "Zriaďte produkciu jedla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Zriaďte stálu produkciu jedla"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Establish a spidercloth production"
@@ -710,6 +710,10 @@ msgid ""
 "wise clerics, who provided the link to Lutas - they prospered and became\n"
 "civilized."
 msgstr ""
+"Na skrytom a stratenom ostrove Atlantída, usadil sa od počiatkoch sveta hrdý "
+"kmeň, ovládaný pokrvnou líniou kráľa Ajanthula - prvého človeka oprávneného "
+"bohom mora Lutasa dýchať nad morskou hladinou - a múdrymi duchovnými, ktorí "
+"zabezpečili spojenie s Lutasom. Nastalo obdobie prosperity a civilizácie."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:511
 msgid "One more building"
@@ -780,10 +784,18 @@ msgid ""
 "people.\n"
 "And myself."
 msgstr ""
+"Chvála Satulovi! Ostur, mladý staviteľ lodí, to dokázal. Máme tri lode -\n"
+"pevnejšie som nikdy nevidela - s miestom pre nás všetkých a aj niektoré "
+"tovary.\n"
+"A táto záchrana prišla práve včas: Lutas sa chystá pohltiť zvyšok ostrova,\n"
+"voda stúpa rýchlejšie každú hodinu. Ale teraz môžeme uniknúť a začať\n"
+"odznova v nejakej ďalekej krajine... Očakávam dlhú cestu, ale na konci\n"
+"nájdeme Satulovu zem. Tak som to sľúbila môjmu ľudu.\n"
+"A sebe."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:156
 msgid "Proudest to the death"
-msgstr ""
+msgstr "Najpyšnejší do smrti"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:335
 msgid ""
@@ -875,6 +887,9 @@ msgid ""
 "completely by the ocean. Build a shipyard close to the lake to start\n"
 "building ships."
 msgstr ""
+"Na vrchole ostrova je jazero. Postavte 3 lode v týchto vodách a možno\n"
+"zachránite svojich ľudí, keď celý ostrov zhltne oceán. Postavte lodenicu\n"
+"v blízkosti jazera a začnite stavať lode."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:378
 msgid ""
@@ -959,6 +974,11 @@ msgid ""
 "with my generals. I will not allow that a potential enemy will find us\n"
 "unprepared."
 msgstr ""
+"Našli sme ďalšiu budovu v tomto čudnom štýle. Ešte sme nezistili, kto ju "
+"postavil.\n"
+"Ale zjavne žilo na tomto ostrove spoločenstvo a zjavne bolo podriadené\n"
+"vojenskej správe. Musím skontrolovať náš vojenský stav so svojimi\n"
+"generálmi. Nedopustím, aby nás možný nepriateľ objavil nepripravených."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:240
 msgid ""
@@ -991,7 +1011,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "Prišli sme o %s v boji s oceánom!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:233
 msgid ""
@@ -1043,6 +1063,12 @@ msgid ""
 "everything else, we need those wares on top of the mountain before our\n"
 "warehouses are all swallowed by the sea."
 msgstr ""
+"Vaše červené vlasy sú signálom od boha ohňa. Dôverujem vám a podporím\n"
+"váš plán. Náš osud je teraz vo vašich rukách, Ostur.\n"
+"<br><br>Teraz rýchlo, potrebujeme sídlo pre Ostura pri jazere a dosky,\n"
+"kmene stromov a pavúčiu látku na konštrukciu. Zabudnite na všetko\n"
+"ostatné, potrebujeme preniesť tovary na vrchol hory predtým, než nám\n"
+"skladiská zhltne more."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Your words sound wise to me, Colionder. So be it then."

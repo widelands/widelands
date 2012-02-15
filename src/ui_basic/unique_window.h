@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -40,7 +40,7 @@ struct UniqueWindow : public Window {
 		UniqueWindow * window;
 		boost::function<void()> onCreate;
 		boost::function<void()> onDelete;
-		boost::function<void(Registry &)> constr;
+		boost::function<void()> constr;
 
 		void create();
 		void destroy();

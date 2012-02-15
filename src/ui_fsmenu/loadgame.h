@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -64,9 +64,9 @@ private:
 	std::string m_fn;
 
 	Widelands::Game &                               m_game;
-	UI::Callback_Button                             m_back;
-	UI::Callback_Button                             m_ok;
-	UI::Callback_Button                             m_delete;
+	UI::Button                             m_back;
+	UI::Button                             m_ok;
+	UI::Button                             m_delete;
 	UI::Listselect<const char *>                    m_list;
 	UI::Textarea                                    m_title;
 	UI::Textarea                                    m_label_mapname;

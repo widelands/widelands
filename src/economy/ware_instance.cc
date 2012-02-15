@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -25,6 +25,7 @@
 #include "transfer.h"
 
 #include "logic/game.h"
+#include "logic/ship.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
@@ -33,6 +34,8 @@
 #include "request.h"
 #include "wexception.h"
 #include "upcast.h"
+#include "portdock.h"
+#include "fleet.h"
 
 namespace Widelands {
 
@@ -52,7 +55,7 @@ struct IdleWareSupply : public Supply {
 	virtual PlayerImmovable * get_position(Game &);
 	virtual bool is_active() const throw ();
 	virtual bool has_storage() const throw ();
-	virtual void get_ware_type(bool & isworker, Ware_Index & ware) const;
+	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
 	virtual void send_to_storage(Game &, Warehouse * wh);
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
@@ -97,7 +100,7 @@ void IdleWareSupply::set_economy(Economy * const e)
 
 /**
  * Figure out the player immovable that this ware belongs to.
-*/
+ */
 PlayerImmovable * IdleWareSupply::get_position(Game & game)
 {
 	Map_Object * const loc = m_ware.get_location(game);
@@ -107,6 +110,13 @@ PlayerImmovable * IdleWareSupply::get_position(Game & game)
 
 	if (upcast(Worker, worker, loc))
 		return worker->get_location(game);
+
+	if (upcast(Ship, ship, loc)) {
+		if (PortDock * pd = ship->get_destination(game))
+			return pd;
+
+		return ship->get_fleet()->get_arbitrary_dock();
+	}
 
 	return 0;
 }
@@ -121,16 +131,16 @@ bool IdleWareSupply::has_storage()  const throw ()
 	return m_ware.is_moving();
 }
 
-void IdleWareSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
+void IdleWareSupply::get_ware_type(WareWorker & type, Ware_Index & ware) const
 {
-	isworker = false;
+	type = wwWARE;
 	ware = m_ware.descr_index();
 }
 
 uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
 {
 	if
-		(req.get_type() == Request::WARE &&
+		(req.get_type() == wwWARE &&
 		 req.get_index() == m_ware.descr_index())
 		return 1;
 
@@ -141,7 +151,7 @@ uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
  * The item is already "launched", so we only need to return it.
 */
 WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
-	if (req.get_type() != Request::WARE)
+	if (req.get_type() != wwWARE)
 		throw wexception
 			("IdleWareSupply::launch_item : called for non-item request");
 	if (req.get_index() != m_ware.descr_index())
@@ -256,6 +266,8 @@ void WareInstance::set_location
 			eco = playerimmovable->get_economy();
 		else if (upcast(Worker const, worker, location))
 			eco = worker->get_economy();
+		else if (upcast(Ship const, ship, location))
+			eco = ship->get_economy();
 
 		if (oldlocation && get_economy()) {
 			if (get_economy() != eco)
@@ -299,8 +311,13 @@ void WareInstance::update(Game & game)
 		return;
 
 	// Reset our state if we're not on location or outside an economy
-	if (!loc || !get_economy()) {
+	if (!get_economy()) {
 		cancel_moving();
+		return;
+	}
+
+	if (!loc) {
+		remove(game);
 		return;
 	}
 
@@ -346,9 +363,15 @@ void WareInstance::update(Game & game)
 		}
 
 		if (upcast(Building, building, location)) {
-			if (nextstep != &location->base_flag())
+			if (nextstep != &location->base_flag()) {
+				if (upcast(PortDock, pd, nextstep)) {
+					pd->add_shippingitem(game, *this);
+					return;
+				}
+
 				throw wexception
 					("MO(%u): ware: move from building to non-baseflag", serial());
+			}
 
 			// There are some situations where we might end up in a warehouse
 			// as part of a requested route, and we need to move out of it
@@ -370,7 +393,6 @@ void WareInstance::update(Game & game)
 				 building->name().c_str(), building->get_position().x,
 				 building->get_position().y, nextstep->serial(),
 				 nextstep->name().c_str());
-
 		} else if (upcast(Flag, flag, location)) {
 			flag->call_carrier
 				(game,
@@ -380,6 +402,8 @@ void WareInstance::update(Game & game)
 				 &nextstep->base_flag() != location
 				 ?
 				 &nextstep->base_flag() : nextstep);
+		} else if (upcast(PortDock, pd, location)) {
+			pd->update_shippingitem(game, *this);
 		}
 	}
 }
@@ -459,6 +483,14 @@ PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : 0;
 }
 
+void WareInstance::log_general_info(const Editor_Game_Base & egbase)
+{
+	Map_Object::log_general_info(egbase);
+
+	molog("Ware: %s\n", descr().name().c_str());
+	molog("Location: %u\n", m_location.serial());
+}
+
 
 /*
 ==============================
@@ -493,7 +525,12 @@ void WareInstance::Loader::load_pointers()
 	Map_Object::Loader::load_pointers();
 
 	WareInstance & ware = get<WareInstance>();
-	ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
+
+	// There is a race condition where a ware may lose its location and be scheduled
+	// for removal via the update callback, but the game is saved just before the
+	// removal. This is why we allow a null location on load.
+	if (m_location)
+		ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
 	if (m_transfer_nextstep)
 		ware.m_transfer_nextstep = &mol().get<Map_Object>(m_transfer_nextstep);
 	if (ware.m_transfer)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,9 +22,10 @@
 
 #include "panel.h"
 #include "textarea.h"
-#include "m_signal.h"
 
 #include <vector>
+
+#include <boost/signal.hpp>
 
 namespace UI {
 
@@ -40,9 +41,9 @@ struct Icon_Grid : public Panel {
 		 int32_t x, int32_t y, int32_t cellw, int32_t cellh,
 		 int32_t  cols);
 
-	Signal1<int32_t> clicked;
-	Signal1<int32_t> mouseout;
-	Signal1<int32_t> mousein;
+	boost::signal<void (int32_t)> clicked;
+	boost::signal<void (int32_t)> mouseout;
+	boost::signal<void (int32_t)> mousein;
 
 	int32_t add
 		(std::string const & name,

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -65,9 +65,9 @@ struct BuildGrid : public UI::Icon_Grid {
 		 const int32_t x, const int32_t y,
 		 int32_t cols);
 
-	UI::Signal1<Widelands::Building_Index::value_t> buildclicked;
-	UI::Signal1<Widelands::Building_Index::value_t> buildmouseout;
-	UI::Signal1<Widelands::Building_Index::value_t> buildmousein;
+	boost::signal<void (Widelands::Building_Index::value_t)> buildclicked;
+	boost::signal<void (Widelands::Building_Index::value_t)> buildmouseout;
+	boost::signal<void (Widelands::Building_Index::value_t)> buildmousein;
 
 	void add(Widelands::Building_Index::value_t);
 
@@ -91,9 +91,9 @@ BuildGrid::BuildGrid
 		(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
 	m_tribe(tribe)
 {
-	clicked.set(this, &BuildGrid::clickslot);
-	mouseout.set(this, &BuildGrid::mouseoutslot);
-	mousein.set(this, &BuildGrid::mouseinslot);
+	clicked.connect(boost::bind(&BuildGrid::clickslot, this, _1));
+	mouseout.connect(boost::bind(&BuildGrid::mouseoutslot, this, _1));
+	mousein.connect(boost::bind(&BuildGrid::mouseinslot, this, _1));
 }
 
 
@@ -122,8 +122,7 @@ belongs to and trigger signal buildclicked.
 */
 void BuildGrid::clickslot(int32_t const idx)
 {
-	buildclicked.call
-		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
+	buildclicked(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
@@ -137,8 +136,7 @@ building it belongs to and trigger signal buildmouseout.
 */
 void BuildGrid::mouseoutslot(int32_t idx)
 {
-	buildmouseout.call
-		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
+	buildmouseout(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
@@ -152,8 +150,7 @@ building it belongs to and trigger signal buildmousein.
 */
 void BuildGrid::mouseinslot(int32_t idx)
 {
-	buildmousein.call
-		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
+	buildmousein(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
 
 
@@ -240,14 +237,16 @@ static char const * const pic_tab_military   = "pics/menu_tab_military.png";
 static char const * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
-	"pics/menu_tab_buildbig.png"
+	"pics/menu_tab_buildbig.png",
+	"pics/port.png"
 };
 static const std::string tooltip_tab_build[] = {
 	_("Build small buildings"),
 	_("Build medium buildings"),
-	_("Build large buildings")
+	_("Build large buildings"),
+	_("Build port buildings")
 };
-static const std::string name_tab_build[] = {"small", "medium", "big"};
+static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
 
 static char const * const pic_tab_buildmine  = "pics/menu_tab_buildmine.png";
@@ -375,7 +374,7 @@ void FieldActionWindow::add_buttons_auto()
 				if
 					(!building
 					 ||
-					 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+					 building->get_playercaps() & Building::PCap_Bulldoze)
 					add_button
 						(buildbox, "rip_flag",
 						 pic_ripflag,
@@ -516,7 +515,7 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 {
 	if (not m_plr)
 		return;
-	BuildGrid * bbg_house[3] = {0, 0, 0};
+	BuildGrid * bbg_house[4] = {0, 0, 0, 0};
 	BuildGrid * bbg_mine = 0;
 
 	Widelands::Tribe_Descr const & tribe = m_plr->tribe();
@@ -551,19 +550,24 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 
 			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
 				continue;
+			if (descr.get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
+				continue;
 
-			ppgrid = &bbg_house[size];
+			if (descr.get_isport())
+				ppgrid = &bbg_house[3];
+			else
+				ppgrid = &bbg_house[size];
 		}
 
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
 			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
-			(*ppgrid)->buildclicked.set(this, &FieldActionWindow::act_build);
-			(*ppgrid)->buildmouseout.set
-				(this, &FieldActionWindow::building_icon_mouse_out);
+			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
+			(*ppgrid)->buildmouseout.connect
+				(boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));
 
-			(*ppgrid)->buildmousein.set
-				(this, &FieldActionWindow::building_icon_mouse_in);
+			(*ppgrid)->buildmousein.connect
+				(boost::bind(&FieldActionWindow::building_icon_mouse_in, this, _1));
 		}
 
 		// Add it to the grid
@@ -571,7 +575,7 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 	}
 
 	// Add all necessary tabs
-	for (int32_t i = 0; i < 3; ++i)
+	for (int32_t i = 0; i < 4; ++i)
 		if (bbg_house[i])
 			m_tabpanel.activate
 				(m_best_tab = add_tab
@@ -632,13 +636,14 @@ UI::Button & FieldActionWindow::add_button
 	 std::string const & tooltip_text,
 	 bool                const repeating)
 {
-	UI::Callback_Button & button =
-		*new UI::Callback_Button
+	UI::Button & button =
+		*new UI::Button
 			(box, name,
 			 0, 0, 34, 34,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 g_gr->get_picture(PicMod_Game, picname),
-			 boost::bind(fn, boost::ref(*this)), tooltip_text);
+			 tooltip_text);
+	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
 	box->add
 		(&button, UI::Box::AlignTop);
@@ -745,7 +750,7 @@ void FieldActionWindow::act_ripflag()
 	Widelands::Editor_Game_Base & egbase = ibase().egbase();
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
-			if (building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+			if (building->get_playercaps() & Building::PCap_Bulldoze)
 				show_bulldoze_confirm
 					(ref_cast<Interactive_Player, Interactive_Base>(ibase()),
 					 *building,

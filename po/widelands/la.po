@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-03 13:44+0200\n"
+"POT-Creation-Date: 2011-10-10 09:22+0200\n"
 "PO-Revision-Date: 2011-08-21 14:19+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:46+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2011-10-11 05:14+0000\n"
+"X-Generator: Launchpad (build 14123)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -350,23 +350,23 @@ msgid "Vision<br/>range"
 msgstr "Regio<br/>visa"
 
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:376
-#: ../../src/logic/building.cc:514
+#: ../../src/logic/building.cc:516
 msgid "Mine"
 msgstr "Metallum"
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
-#: ../../src/logic/building.cc:515
+#: ../../src/logic/building.cc:517
 msgid "Small"
 msgstr "parvum"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
-#: ../../src/logic/building.cc:516
+#: ../../src/logic/building.cc:518
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "Medium"
 msgstr "medium"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:381
-#: ../../src/logic/building.cc:516
+#: ../../src/logic/building.cc:518
 msgid "Big"
 msgstr "magnum"
 
@@ -512,7 +512,7 @@ msgid "Programs"
 msgstr "Programmata"
 
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1297
-#: ../../src/logic/building.cc:509
+#: ../../src/logic/building.cc:511
 msgid "mine"
 msgstr "exhaurit"
 
@@ -588,7 +588,7 @@ msgstr "IGNOTUM"
 msgid "Production"
 msgstr ""
 
-#: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:165
+#: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:166
 #: ../../src/wui/productionsitewindow.cc:84 ../../src/wui/transport_ui.cc:65
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Workers"
@@ -632,7 +632,7 @@ msgid "Documentation for program command return"
 msgstr ""
 
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
-#: ../../src/logic/production_program.cc:793
+#: ../../src/logic/production_program.cc:772
 msgid "failed"
 msgstr "male evenit"
 
@@ -820,7 +820,7 @@ msgid "ware_types.xhtml"
 msgstr ""
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
-#: ../../src/economy/request.cc:243 ../../src/economy/wares_queue.cc:257
+#: ../../src/economy/request.cc:243 ../../src/economy/wares_queue.cc:289
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:84
 #: ../../src/game_io/game_game_class_data_packet.cc:44
 #: ../../src/game_io/game_interactive_player_data_packet.cc:78
@@ -834,16 +834,16 @@ msgstr ""
 #: ../../src/logic/immovable.cc:789 ../../src/logic/instances.cc:73
 #: ../../src/logic/instances.cc:131 ../../src/logic/instances.cc:478
 #: ../../src/logic/legacy.cc:428 ../../src/logic/legacy.cc:486
-#: ../../src/logic/playercommand.cc:134 ../../src/logic/playercommand.cc:182
-#: ../../src/logic/playercommand.cc:234 ../../src/logic/playercommand.cc:282
-#: ../../src/logic/playercommand.cc:369 ../../src/logic/playercommand.cc:429
-#: ../../src/logic/playercommand.cc:486 ../../src/logic/playercommand.cc:547
-#: ../../src/logic/playercommand.cc:629 ../../src/logic/playercommand.cc:741
-#: ../../src/logic/playercommand.cc:804 ../../src/logic/playercommand.cc:863
-#: ../../src/logic/playercommand.cc:926 ../../src/logic/playercommand.cc:988
-#: ../../src/logic/playercommand.cc:1058 ../../src/logic/playercommand.cc:1130
-#: ../../src/logic/playercommand.cc:1228 ../../src/logic/playercommand.cc:1306
-#: ../../src/logic/playercommand.cc:1350 ../../src/logic/replay.cc:117
+#: ../../src/logic/playercommand.cc:137 ../../src/logic/playercommand.cc:185
+#: ../../src/logic/playercommand.cc:237 ../../src/logic/playercommand.cc:285
+#: ../../src/logic/playercommand.cc:372 ../../src/logic/playercommand.cc:432
+#: ../../src/logic/playercommand.cc:489 ../../src/logic/playercommand.cc:550
+#: ../../src/logic/playercommand.cc:632 ../../src/logic/playercommand.cc:823
+#: ../../src/logic/playercommand.cc:886 ../../src/logic/playercommand.cc:945
+#: ../../src/logic/playercommand.cc:1008 ../../src/logic/playercommand.cc:1070
+#: ../../src/logic/playercommand.cc:1140 ../../src/logic/playercommand.cc:1212
+#: ../../src/logic/playercommand.cc:1310 ../../src/logic/playercommand.cc:1388
+#: ../../src/logic/playercommand.cc:1432 ../../src/logic/replay.cc:117
 #: ../../src/logic/requirements.cc:50 ../../src/logic/ship.cc:261
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:137
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:374
@@ -901,7 +901,7 @@ msgstr "ignota versio %u"
 msgid "economy: %s"
 msgstr "administratio: %s"
 
-#: ../../src/economy/wares_queue.cc:259
+#: ../../src/economy/wares_queue.cc:291
 #, c-format
 msgid "waresqueue: %s"
 msgstr ""
@@ -947,7 +947,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:170
 #: ../../src/editor/editorinteractive.cc:575
-#: ../../src/logic/editor_game_base.cc:280
+#: ../../src/logic/editor_game_base.cc:283
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Tollo gentem: %s"
@@ -957,7 +957,7 @@ msgid "Creating players"
 msgstr "Creo ludores"
 
 #: ../../src/editor/editorinteractive.cc:183
-#: ../../src/logic/editor_game_base.cc:273
+#: ../../src/logic/editor_game_base.cc:276
 msgid "Loading world data"
 msgstr "Tollo data mundi"
 
@@ -1049,7 +1049,7 @@ msgstr "ignota/praetermissa versio %i"
 msgid "preload: %s"
 msgstr ""
 
-#: ../../src/graphic/animation.cc:138 ../../src/logic/building.cc:77
+#: ../../src/graphic/animation.cc:138 ../../src/logic/building.cc:79
 #: ../../src/logic/immovable.cc:195 ../../src/logic/immovable.cc:824
 #: ../../src/logic/immovable.cc:863 ../../src/logic/immovable.cc:1027
 #: ../../src/logic/military_data.cc:51 ../../src/logic/military_data.cc:58
@@ -1064,17 +1064,17 @@ msgstr ""
 #: ../../src/logic/production_program.cc:530
 #: ../../src/logic/production_program.cc:646
 #: ../../src/logic/production_program.cc:688
-#: ../../src/logic/production_program.cc:865
-#: ../../src/logic/production_program.cc:960
-#: ../../src/logic/production_program.cc:1039
-#: ../../src/logic/production_program.cc:1049
-#: ../../src/logic/production_program.cc:1060
+#: ../../src/logic/production_program.cc:843
+#: ../../src/logic/production_program.cc:938
+#: ../../src/logic/production_program.cc:1017
+#: ../../src/logic/production_program.cc:1027
+#: ../../src/logic/production_program.cc:1038
+#: ../../src/logic/production_program.cc:1193
 #: ../../src/logic/production_program.cc:1215
-#: ../../src/logic/production_program.cc:1237
-#: ../../src/logic/production_program.cc:1288
-#: ../../src/logic/production_program.cc:1300
-#: ../../src/logic/production_program.cc:1309
-#: ../../src/logic/production_program.cc:1397 ../../src/logic/soldier.cc:67
+#: ../../src/logic/production_program.cc:1266
+#: ../../src/logic/production_program.cc:1278
+#: ../../src/logic/production_program.cc:1287
+#: ../../src/logic/production_program.cc:1375 ../../src/logic/soldier.cc:67
 #: ../../src/logic/soldier.cc:74 ../../src/logic/soldier.cc:181
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:376
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
@@ -1086,7 +1086,7 @@ msgstr "Expectavi %s sed \"%s\" inveni"
 msgid "frame number"
 msgstr ""
 
-#: ../../src/graphic/graphic.cc:1069
+#: ../../src/graphic/graphic.cc:1019
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr ""
@@ -1106,17 +1106,17 @@ msgstr "[proelium] Victorem excitans %d\n"
 msgid "bad attribute \"%s\""
 msgstr ""
 
-#: ../../src/logic/building.cc:510
+#: ../../src/logic/building.cc:512
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "small"
 msgstr "parvum"
 
-#: ../../src/logic/building.cc:511
+#: ../../src/logic/building.cc:513
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "medium"
 msgstr "mediocre"
 
-#: ../../src/logic/building.cc:511
+#: ../../src/logic/building.cc:513
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "big"
 msgstr "magnum"
@@ -1146,7 +1146,7 @@ msgstr ""
 msgid "game logic: %s"
 msgstr ""
 
-#: ../../src/logic/constructionsite.cc:177
+#: ../../src/logic/constructionsite.cc:176
 #, c-format
 msgid "%u%% built"
 msgstr "%u%% aedificatum"
@@ -1205,7 +1205,7 @@ msgstr ""
 "Ludore %u loco primo egente Widelands programma ludum incipere non potuit.\n"
 "Widelands editore tu ipse locum primum ad hoc emendum addas."
 
-#: ../../src/logic/immovable.cc:144 ../../src/logic/production_program.cc:1603
+#: ../../src/logic/immovable.cc:144 ../../src/logic/production_program.cc:1580
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr ""
@@ -1267,7 +1267,7 @@ msgstr ""
 msgid "duration in ms"
 msgstr "Spatium in ms"
 
-#: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1397
+#: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1375
 msgid "priority"
 msgstr "prius"
 
@@ -1392,130 +1392,130 @@ msgstr ""
 msgid "You are under attack"
 msgstr "Hostes te aggreduntur!"
 
-#: ../../src/logic/playercommand.cc:130
+#: ../../src/logic/playercommand.cc:133
 #: ../../src/map_io/widelands_map_building_data_packet.cc:101
 #, c-format
 msgid "player %u does not exist"
 msgstr "Ludor %u deest"
 
-#: ../../src/logic/playercommand.cc:136
+#: ../../src/logic/playercommand.cc:139
 #, c-format
 msgid "player command: %s"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:178
+#: ../../src/logic/playercommand.cc:181
 #, c-format
 msgid "player immovable %u: %s"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:184
+#: ../../src/logic/playercommand.cc:187
 #, c-format
 msgid "bulldoze: %s"
 msgstr "dele: %s"
 
-#: ../../src/logic/playercommand.cc:236
+#: ../../src/logic/playercommand.cc:239
 #, c-format
 msgid "build: %s"
 msgstr "aedifica: %s"
 
-#: ../../src/logic/playercommand.cc:284
+#: ../../src/logic/playercommand.cc:287
 #, c-format
 msgid "build flag: %s"
 msgstr "depone insigne: %s"
 
-#: ../../src/logic/playercommand.cc:371
+#: ../../src/logic/playercommand.cc:374
 #, c-format
 msgid "build road: %s"
 msgstr "fac viam: %s"
 
-#: ../../src/logic/playercommand.cc:425
+#: ../../src/logic/playercommand.cc:428
 #, c-format
 msgid "flag %u: %s"
 msgstr "insigne %u: %s"
 
-#: ../../src/logic/playercommand.cc:431
+#: ../../src/logic/playercommand.cc:434
 #, c-format
 msgid "flag action: %s"
 msgstr "actio insignis: %s"
 
-#: ../../src/logic/playercommand.cc:482 ../../src/logic/playercommand.cc:540
+#: ../../src/logic/playercommand.cc:485 ../../src/logic/playercommand.cc:543
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #, c-format
 msgid "building %u: %s"
 msgstr "aedificium %u: %s"
 
-#: ../../src/logic/playercommand.cc:488
+#: ../../src/logic/playercommand.cc:491
 #, c-format
 msgid "start/stop building: %s"
 msgstr "incipe/siste laborem aedificii: %s"
 
-#: ../../src/logic/playercommand.cc:549
+#: ../../src/logic/playercommand.cc:552
 #, c-format
 msgid "enhance building: %s"
 msgstr "auge aedificium: %s"
 
-#: ../../src/logic/playercommand.cc:621 ../../src/logic/playercommand.cc:1047
-#: ../../src/logic/playercommand.cc:1125
+#: ../../src/logic/playercommand.cc:624 ../../src/logic/playercommand.cc:1129
+#: ../../src/logic/playercommand.cc:1207
 #, c-format
 msgid "site %u: %s"
 msgstr "locus %u: %s"
 
-#: ../../src/logic/playercommand.cc:631
+#: ../../src/logic/playercommand.cc:634
 #, c-format
 msgid "set ware priority: %s"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:680
+#: ../../src/logic/playercommand.cc:762
 #, c-format
 msgid "change target quantity: %s"
 msgstr "pretium appetitum muta: %s"
 
-#: ../../src/logic/playercommand.cc:743
+#: ../../src/logic/playercommand.cc:825
 #, c-format
 msgid "set ware target quantity: %s"
 msgstr "Numerum rerum appetitum indice: %s"
 
-#: ../../src/logic/playercommand.cc:865
+#: ../../src/logic/playercommand.cc:947
 #, c-format
 msgid "set worker target quantity: %s"
 msgstr "Numerum operariorum appetitum indice: %s"
 
-#: ../../src/logic/playercommand.cc:990
+#: ../../src/logic/playercommand.cc:1072
 #, c-format
 msgid "change training options: %s"
 msgstr "optiones exercendi muta: %s"
 
-#: ../../src/logic/playercommand.cc:1054
+#: ../../src/logic/playercommand.cc:1136
 #, c-format
 msgid "soldier %u: %s"
 msgstr "miles %u: %s"
 
-#: ../../src/logic/playercommand.cc:1060
+#: ../../src/logic/playercommand.cc:1142
 #, c-format
 msgid "drop soldier: %s"
 msgstr "expelle militem: %s"
 
-#: ../../src/logic/playercommand.cc:1132
+#: ../../src/logic/playercommand.cc:1214
 #, c-format
 msgid "change soldier capacity: %s"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:1297
+#: ../../src/logic/playercommand.cc:1379
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:1308
+#: ../../src/logic/playercommand.cc:1390
 #, c-format
 msgid "change military config: %s"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:1347
+#: ../../src/logic/playercommand.cc:1429
 #, c-format
 msgid "(player %u): message id is null"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:1352
+#: ../../src/logic/playercommand.cc:1434
 #, c-format
 msgid "player message: %s"
 msgstr "ludoris nuntium: %s"
@@ -1535,8 +1535,8 @@ msgid ""
 msgstr ""
 
 #: ../../src/logic/production_program.cc:114
-#: ../../src/logic/production_program.cc:866
-#: ../../src/logic/production_program.cc:961
+#: ../../src/logic/production_program.cc:844
+#: ../../src/logic/production_program.cc:939
 msgid "count"
 msgstr "Numerus"
 
@@ -1593,12 +1593,12 @@ msgid "expected \"or\" or end of input"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:418
-#: ../../src/logic/production_program.cc:817
+#: ../../src/logic/production_program.cc:796
 msgid " and "
 msgstr " et "
 
 #: ../../src/logic/production_program.cc:419
-#: ../../src/logic/production_program.cc:796
+#: ../../src/logic/production_program.cc:775
 msgid " because: "
 msgstr " quod "
 
@@ -1658,109 +1658,109 @@ msgstr ""
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
 msgstr "expectavi ware_type1[,ware_type2[,...]][:N] ..."
 
-#: ../../src/logic/production_program.cc:820
+#: ../../src/logic/production_program.cc:799
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " deest"
 msgstr[1] " desunt"
 
-#: ../../src/logic/production_program.cc:880
-#: ../../src/logic/production_program.cc:975
+#: ../../src/logic/production_program.cc:858
+#: ../../src/logic/production_program.cc:953
 #, c-format
 msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:907
-#: ../../src/logic/production_program.cc:1000
+#: ../../src/logic/production_program.cc:885
+#: ../../src/logic/production_program.cc:978
 #, c-format
 msgid "%u "
 msgstr "%u "
 
-#: ../../src/logic/production_program.cc:914
-#: ../../src/logic/production_program.cc:1007
+#: ../../src/logic/production_program.cc:892
+#: ../../src/logic/production_program.cc:985
 msgid ", "
 msgstr ", "
 
-#: ../../src/logic/production_program.cc:917
+#: ../../src/logic/production_program.cc:895
 #, c-format
 msgid "Produced %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:992
+#: ../../src/logic/production_program.cc:970
 msgid "Recruited "
 msgstr "Conscripta "
 
-#: ../../src/logic/production_program.cc:1039
+#: ../../src/logic/production_program.cc:1017
 msgid "distance"
 msgstr "Intervallum"
 
-#: ../../src/logic/production_program.cc:1050
-#: ../../src/logic/production_program.cc:1061
+#: ../../src/logic/production_program.cc:1028
+#: ../../src/logic/production_program.cc:1039
 msgid "percentage"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1178
+#: ../../src/logic/production_program.cc:1156
 #, c-format
 msgid "No left resources found!"
 msgstr "Non inveni aliquid aeris relictum!"
 
-#: ../../src/logic/production_program.cc:1199
+#: ../../src/logic/production_program.cc:1177
 msgid "Mine empty"
 msgstr "Metallum exhaustum"
 
-#: ../../src/logic/production_program.cc:1201
+#: ../../src/logic/production_program.cc:1179
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
 msgstr "Hoc metallum exhaustum est. Quod aut augeri aut deleri consideres."
 
-#: ../../src/logic/production_program.cc:1215
-#: ../../src/logic/production_program.cc:1288
+#: ../../src/logic/production_program.cc:1193
+#: ../../src/logic/production_program.cc:1266
 msgid "soldier type"
 msgstr "genus militum"
 
-#: ../../src/logic/production_program.cc:1228
+#: ../../src/logic/production_program.cc:1206
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1237
-#: ../../src/logic/production_program.cc:1309
+#: ../../src/logic/production_program.cc:1215
+#: ../../src/logic/production_program.cc:1287
 msgid "level"
 msgstr "gradus"
 
-#: ../../src/logic/production_program.cc:1256
-#: ../../src/logic/production_program.cc:1343
+#: ../../src/logic/production_program.cc:1234
+#: ../../src/logic/production_program.cc:1321
 #, c-format
 msgid "No soldier for this training level found!"
 msgstr "Non inveni militem pro huic exercendi gradui!"
 
-#: ../../src/logic/production_program.cc:1319
+#: ../../src/logic/production_program.cc:1297
 #, c-format
 msgid "expected level > %u but found \"%s\""
 msgstr "Expectavi gradum > %u, sed \"%s\" inveni."
 
-#: ../../src/logic/productionsite.cc:69
+#: ../../src/logic/productionsite.cc:73
 msgid "this ware type has already been declared as an output"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:73
+#: ../../src/logic/productionsite.cc:77
 msgid "this worker type has already been declared as an output"
 msgstr ""
 
-#: ../../src/logic/productionsite.cc:242
+#: ../../src/logic/productionsite.cc:246
 msgid "(not occupied)"
 msgstr "(operarius deest)"
 
-#: ../../src/logic/productionsite.cc:247
+#: ../../src/logic/productionsite.cc:251
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Operarius deest."
 msgstr[1] "Operarii desunt."
 
-#: ../../src/logic/productionsite.cc:255
+#: ../../src/logic/productionsite.cc:259
 msgid "(stopped)"
 msgstr "(statum)"
 
@@ -3813,84 +3813,84 @@ msgstr ""
 msgid "Sound FX Volume"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:159
+#: ../../src/wui/general_statistics_menu.cc:160
 msgid "Land"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:171 ../../src/wui/minimap.cc:175
+#: ../../src/wui/general_statistics_menu.cc:172 ../../src/wui/minimap.cc:175
 msgid "Buildings"
 msgstr "Aedificia"
 
-#: ../../src/wui/general_statistics_menu.cc:177
+#: ../../src/wui/general_statistics_menu.cc:178
 #: ../../src/wui/productionsitewindow.cc:62 ../../src/wui/transport_ui.cc:60
 #: ../../src/wui/warehousewindow.cc:191
 msgid "Wares"
 msgstr "Res"
 
-#: ../../src/wui/general_statistics_menu.cc:183
+#: ../../src/wui/general_statistics_menu.cc:184
 msgid "Productivity"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:189
+#: ../../src/wui/general_statistics_menu.cc:190
 msgid "Casualties"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:195
+#: ../../src/wui/general_statistics_menu.cc:196
 msgid "Kills"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:201
+#: ../../src/wui/general_statistics_menu.cc:202
 msgid "Military buildings lost"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:207
+#: ../../src/wui/general_statistics_menu.cc:208
 msgid "Military buildings defeated"
 msgstr "Militaria aedificia victa"
 
-#: ../../src/wui/general_statistics_menu.cc:213
+#: ../../src/wui/general_statistics_menu.cc:214
 msgid "Civilian buildings lost"
 msgstr "Civilia aedificia perdita"
 
-#: ../../src/wui/general_statistics_menu.cc:219
+#: ../../src/wui/general_statistics_menu.cc:220
 msgid "Military"
 msgstr "Militia"
 
-#: ../../src/wui/general_statistics_menu.cc:245
+#: ../../src/wui/general_statistics_menu.cc:246
 #: ../../src/wui/ware_statistics_menu.cc:423
 msgid "15 m"
 msgstr "XV m"
 
-#: ../../src/wui/general_statistics_menu.cc:254
+#: ../../src/wui/general_statistics_menu.cc:255
 #: ../../src/wui/ware_statistics_menu.cc:432
 msgid "30 m"
 msgstr "XXX m"
 
-#: ../../src/wui/general_statistics_menu.cc:263
+#: ../../src/wui/general_statistics_menu.cc:264
 #: ../../src/wui/ware_statistics_menu.cc:441
 msgid "1 h"
 msgstr "I h"
 
-#: ../../src/wui/general_statistics_menu.cc:272
+#: ../../src/wui/general_statistics_menu.cc:273
 #: ../../src/wui/ware_statistics_menu.cc:450
 msgid "2 h"
 msgstr "II h"
 
-#: ../../src/wui/general_statistics_menu.cc:283
+#: ../../src/wui/general_statistics_menu.cc:284
 #: ../../src/wui/ware_statistics_menu.cc:461
 msgid "Help"
 msgstr "Auxilium"
 
-#: ../../src/wui/general_statistics_menu.cc:292
+#: ../../src/wui/general_statistics_menu.cc:293
 #: ../../src/wui/ware_statistics_menu.cc:470
 msgid "4 h"
 msgstr "IV h"
 
-#: ../../src/wui/general_statistics_menu.cc:300
+#: ../../src/wui/general_statistics_menu.cc:301
 #: ../../src/wui/ware_statistics_menu.cc:479
 msgid "8 h"
 msgstr "VIII h"
 
-#: ../../src/wui/general_statistics_menu.cc:309
+#: ../../src/wui/general_statistics_menu.cc:310
 #: ../../src/wui/ware_statistics_menu.cc:488
 msgid "16 h"
 msgstr "XVI h"
@@ -4160,16 +4160,24 @@ msgstr "Noli electas res hic deponere"
 msgid "Remove selected wares from here"
 msgstr "Electas res abhinc deportare"
 
-#: ../../src/wui/waresqueuedisplay.cc:69
+#: ../../src/wui/waresqueuedisplay.cc:175
 msgid "Highest priority"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:77
+#: ../../src/wui/waresqueuedisplay.cc:183
 msgid "Normal priority"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:85
+#: ../../src/wui/waresqueuedisplay.cc:191
 msgid "Lowest priority"
+msgstr ""
+
+#: ../../src/wui/waresqueuedisplay.cc:230
+msgid "Decrease the number of wares you want to be stored here."
+msgstr ""
+
+#: ../../src/wui/waresqueuedisplay.cc:239
+msgid "Increase the number of wares you want to be stored here."
 msgstr ""
 
 #: ../../src/wui/watchwindow.cc:93

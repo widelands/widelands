@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -43,6 +43,7 @@
 #include "widelands_map_players_areawatchers_data_packet.h"
 #include "widelands_map_players_messages_data_packet.h"
 #include "widelands_map_players_view_data_packet.h"
+#include "widelands_map_port_spaces_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
@@ -73,44 +74,45 @@ void Map_Saver::save() throw (_wexception) {
 	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
 	log("Writing Elemental Data ... ");
-	{Map_Elemental_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Elemental_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
-
 	log("Writing Player Names And Tribe Data ... ");
-	{
-		Map_Player_Names_And_Tribes_Data_Packet
-		p; p.Write(m_fs, m_egbase, *m_mos);
+	{Map_Player_Names_And_Tribes_Data_Packet p; p.Write(m_fs, m_egbase, *m_mos);
 	}
 	log("done!\n ");
 	//  PRELOAD DATA END
 
+	log("Writing Port Spaces Data ... ");
+	{Map_Port_Spaces_Data_Packet             p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("done!\n ");
+
 	log("Writing Heights Data ... ");
-	{Map_Heights_Data_Packet                p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Heights_Data_Packet                 p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Terrain Data ... ");
-	{Map_Terrain_Data_Packet                p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Terrain_Data_Packet                 p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Player Start Position Data ... ");
-	{Map_Player_Position_Data_Packet        p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Player_Position_Data_Packet         p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	//  This must come before anything that references messages, such as:
 	//    * command queue (PlayerMessageCommand, inherited by
 	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 	log("Writing Player Message Data ... ");
-	{Map_Players_Messages_Data_Packet       p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Players_Messages_Data_Packet        p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Resources Data ... ");
-	{Map_Resources_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Resources_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Writing Map Extra Data ... ");
-	{Map_Extradata_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	Map const & map = m_egbase.map();

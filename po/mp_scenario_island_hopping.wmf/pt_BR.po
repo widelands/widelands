@@ -1,0 +1,173 @@
+# Brazilian Portuguese translation for widelands
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"PO-Revision-Date: 2011-11-05 21:06+0000\n"
+"Last-Translator: Tomas Abril <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2011-11-06 05:18+0000\n"
+"X-Generator: Launchpad (build 14231)\n"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
+msgid "%i %s<br>"
+msgstr "%i %s<br>"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
+msgid "%s has been King of the Hill since %s!"
+msgstr "%s é Rei da Colina desde %s!"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+msgid "%s has won the game. Congratulations!"
+msgstr "%s venceu o jogo. Parabéns!"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
+msgid ""
+"%s is now King of the Hill! He needs to keep his castle there for 20\n"
+"minutes to win the game."
+msgstr ""
+"%s é agora Rei da Colina! Ele precisa manter seu castelo ali por 20\n"
+"minutos para vencer o jogo."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+msgid "%s lost control of the hill."
+msgstr "%s perdeu controle da colina."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
+msgid "%s was the first to reach the Island number %i."
+msgstr "%s foi o primeiro a chegar na ilha numero %i."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:41
+msgid "%s was the fourth to reach the Island number %i."
+msgstr "%s foi o quarto a chegar na ilha numero %i."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:39
+msgid "%s was the second to reach the Island number %i."
+msgstr "%s foi o segundo a chegar na ilha numero %i."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:40
+msgid "%s was the third to reach the Island number %i."
+msgstr "%s foi o terceiro a chegar na ilha numero %i."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:74
+msgid "10 minutes"
+msgstr "10 minutos"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:78
+msgid "15 minutes"
+msgstr "15 minutos"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:25
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
+msgid "1st to finish"
+msgstr "1º a terminar"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
+msgid "2nd to finish"
+msgstr "2º a terminar"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:27
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
+msgid "3rd to finish"
+msgstr "3º a terminar"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
+msgid "4th to finish"
+msgstr "4º a terminar"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
+msgid "5 minutes"
+msgstr "5 minutos"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+msgid "As a reward, he receives:<br><br>%s"
+msgstr "Como recompensa, ele recebe:<br><br>%s"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
+msgid "Finish rewards"
+msgstr "Recompensas por terminar"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:24
+msgid "First Island"
+msgstr "Primeira ilha"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:94
+msgid "Game Status"
+msgstr "Status do Jogo"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:13
+msgid ""
+"If you finish a castle at the target area on the second island, you will "
+"get\n"
+"a third headquarters on the third island. You must build and hold a castle "
+"at\n"
+"the center of the third island for 20 minutes to win the game"
+msgstr ""
+"Se você terminar um castelo na área alvo na segunda ilha, você ganhará um\n"
+"terceiro quartel general na terceira ilha. Você precisa construir e segurar "
+"um castelo\n"
+"no centro da terceira ilha por 20 minutos para ganhar o jogo"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
+msgid ""
+"Island Hopping is a traditional tournament in the Atlantean culture. The\n"
+"rules of the game are simple: You start with a headquarters one one island.\n"
+"When you finish a castle at the end of the first island, you are granted a\n"
+"second headquarters on a second island which will contain all wares from "
+"your\n"
+"first headquarters."
+msgstr ""
+"Saltos de ilha é um torneio tradicional na cultura atlante. As\n"
+"regras do jogo são simples: Você começa com um quartel um numa ilha.\n"
+"Quando você terminar um castelo no final da primeira ilha, lhe é concedido "
+"um\n"
+"segundo quartel general em uma segunda ilha que irá conter todas as "
+"mercadorias de sua primeira sede."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
+msgid "Rules"
+msgstr "Regras"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:29
+msgid "Second Island"
+msgstr "Segunda ilha"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:19
+msgid ""
+"The clue is that the first island only offers stones and wood, the second\n"
+"only meadows and resources. The economies you leave behind will continue to\n"
+"work for you, but you only reap the benefits when you reach a new island."
+msgstr ""
+"A pista é que a primeira ilha oferece apenas pedras e madeira, a segunda\n"
+"apenas pradarias e recursos. As economias que você deixa para trás "
+"continuarão a\n"
+"trabalhar para você, mas você só colhe os benefícios quando chegar a uma "
+"nova ilha."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
+msgid "Welcome to Island Hopping"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:16
+msgid ""
+"Whenever you finish an island, you get bonus wares depending how many "
+"players\n"
+"have finished the island before you. The earlier you finish, the less wares "
+"you\n"
+"get. See below for the details."
+msgstr ""
+"Sempre que você terminar uma ilha, você ganhará mercadorias bônus dependendo "
+"de quantos jogadores\n"
+"terminaram a ilha antes de você. Quanto mais cedo terminar,  menos você "
+"mercadorias você\n"
+"obtêm. Veja abaixo os detalhes."

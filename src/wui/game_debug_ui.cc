@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 // UI classes for real-time game debugging
@@ -225,7 +225,7 @@ private:
 	Widelands::FCoords const     m_coords;
 
 	UI::Multiline_Textarea       m_ui_field;
-	UI::Callback_Button m_ui_immovable;
+	UI::Button m_ui_immovable;
 	UI::Listselect<intptr_t>    m_ui_bobs;
 };
 
@@ -244,18 +244,19 @@ FieldDebugWindow::FieldDebugWindow
 		(this, "immovable",
 		 0, 280, 214, 24,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&FieldDebugWindow::open_immovable, boost::ref(*this)),
 		 ""),
 
 	m_ui_bobs(this, 0, 304, 214, 96)
 {
+	m_ui_immovable.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
+
 	assert(0 <= m_coords.x);
 	assert(m_coords.x < m_map.get_width());
 	assert(0 <= m_coords.y);
 	assert(m_coords.y < m_map.get_height());
 	assert(&m_map[0] <= m_coords.field);
 	assert             (m_coords.field < &m_map[0] + m_map.max_index());
-	m_ui_bobs.selected.set(this, &FieldDebugWindow::open_bob);
+	m_ui_bobs.selected.connect(boost::bind(&FieldDebugWindow::open_bob, this, _1));
 }
 
 

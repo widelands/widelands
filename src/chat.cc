@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -40,9 +40,6 @@ std::string ChatMessage::toPrintable() const
 	// as the ability to send formatted commands is nice for the usability
 	// of meta server and dedicated servers, so we're treading a bit of a
 	// fine line here.
-	//
-	//TODO support &lt; in the richtext renderer, so that < can be rendered
-	// correctly
 	std::string sanitized;
 	for (std::string::size_type pos = 0; pos < msg.size(); ++pos) {
 		if (msg[pos] == '<') {
@@ -66,7 +63,7 @@ std::string ChatMessage::toPrintable() const
 				}
 			}
 
-			sanitized += '{';
+			sanitized += "&lt;";
 		} else {
 			sanitized += msg[pos];
 		}

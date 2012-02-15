@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -43,7 +43,7 @@ struct World_Descr_Header {
 	char descr [WORLD_DESCR_LEN];
 };
 
-struct Resource_Descr {
+struct Resource_Descr : boost::noncopyable {
 	typedef Resource_Index Index;
 	Resource_Descr() {}
 	~Resource_Descr() {}
@@ -73,12 +73,9 @@ private:
 	std::string             m_name;
 	std::string             m_descname;
 	std::vector<Editor_Pic> m_editor_pics;
-
-	Resource_Descr & operator= (Resource_Descr const &);
-	explicit Resource_Descr    (Resource_Descr const &);
 };
 
-struct Terrain_Descr {
+struct Terrain_Descr : boost::noncopyable {
 	friend struct World;
 
 	typedef Terrain_Index Index;
@@ -91,6 +88,7 @@ struct Terrain_Descr {
 	uint32_t         get_texture() const throw () {return m_texture;}
 	uint8_t        get_is     () const throw () {return m_is;}
 	const std::string & name() const throw () {return m_name;}
+	const std::string & descname() const throw () {return m_descname;}
 	int32_t resource_value(const Resource_Index resource) const throw () {
 		return
 			resource == get_default_resources() or is_resource_valid(resource) ?
@@ -118,6 +116,7 @@ struct Terrain_Descr {
 
 private:
 	const std::string m_name;
+	const std::string m_descname;
 	char  * m_picnametempl;
 	uint32_t    m_frametime;
 	uint8_t   m_is;
@@ -128,8 +127,6 @@ private:
 	int32_t           m_default_amount;
 	uint32_t          m_texture; //  renderer's texture
 
-	Terrain_Descr & operator= (Terrain_Descr const &);
-	explicit Terrain_Descr    (Terrain_Descr const &);
 };
 
 struct MapGenInfo;
@@ -227,7 +224,7 @@ private:
 	const MapGenBobKind * m_WastelandOuterBobKind;
 };
 
-/** class MapGenInfo
+/** struct MapGenInfo
   *
   * This class holds world specific information for the map generator.
   * This info is usually read from the file "mapgeninfo" of a world.
@@ -288,12 +285,12 @@ private:
 
 };
 
-/** class World
+/** struct World
   *
   * This class provides information on a worldtype usable to create a map;
   * it can read a world file.
   */
-struct World {
+struct World : boost::noncopyable {
 	friend struct Game;
 
 	enum {
@@ -373,9 +370,6 @@ private:
 	void parse_terrains ();
 	void parse_bobs     (std::string & directory, Profile & root_conf);
 	void parse_mapgen   ();
-
-	World & operator= (World const &);
-	explicit World    (World const &);
 };
 
 }

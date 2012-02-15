@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -26,6 +26,8 @@
 #include "game_io/game_preload_data_packet.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "i18n.h"
+#include "internet_gaming.h"
+#include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -34,7 +36,7 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "md5.h"
-#include "network_ggz.h"
+#include "network_gaming_messages.h"
 #include "network_lan_promotion.h"
 #include "network_player_settings_backend.h"
 #include "network_protocol.h"
@@ -49,6 +51,7 @@
 #include "wui/interactive_spectator.h"
 
 #include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 #include <sstream>
 
 #ifndef WIN32
@@ -337,7 +340,7 @@ struct HostChatProvider : public ChatProvider {
 			std::string cmd, arg1, arg2;
 			std::string temp = c.msg.substr(1); // cut off '/'
 			h->splitCommandArray(temp, cmd, arg1, arg2);
-			log("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
+			dedicatedlog("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat
 			if (cmd == "me") {
@@ -515,6 +518,7 @@ struct Client {
 	int32_t time; // last time report
 	uint32_t desiredspeed;
 	bool dedicated_access;
+	time_t hung_since;
 };
 
 struct NetHostImpl {
@@ -575,21 +579,19 @@ struct NetHostImpl {
 	}
 };
 
-NetHost::NetHost (std::string const & playername, bool ggz)
+NetHost::NetHost (std::string const & playername, bool internet)
 	:
 	d(new NetHostImpl(this)),
-	use_ggz(ggz),
+	m_internet(internet),
 	m_is_dedicated(false),
 	m_password(""),
 	m_dedicated_motd(""),
 	m_forced_pause(false)
 {
-	log("[Host] starting up.\n");
+	dedicatedlog("[Host]: starting up.\n");
 
-	if (ggz) {
-#if HAVE_GGZ
-		NetGGZ::ref().launch();
-#endif
+	if (internet) {
+		InternetGaming::ref().open_game();
 	}
 
 	d->localplayername = playername;
@@ -625,7 +627,7 @@ NetHost::~NetHost ()
 	clearComputerPlayers();
 
 	while (d->clients.size() > 0) {
-		disconnectClient(0, _("Server has left the game."));
+		disconnectClient(0, "SERVER_LEFT");
 		reaper();
 	}
 
@@ -682,6 +684,8 @@ void NetHost::initComputerPlayers()
 void NetHost::run(bool const autorun)
 {
 	m_is_dedicated = autorun;
+	// Fill the list of possible system messages
+	NetworkGamingMessages::fill_map();
 	if (m_is_dedicated) {
 		// Initializing
 		d->hp.nextWinCondition();
@@ -696,8 +700,28 @@ void NetHost::run(bool const autorun)
 					(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
 					% d->localplayername)
 				.str().c_str());
+
+		// Maybe this is the first run, so we try to setup the DedicatedLog
+		// empty strings are treated as "do not write this type of log"
+		DedicatedLog * dl = DedicatedLog::get();
+		bool needip = false;
+		if (!dl->set_log_file_path (s.get_string("dedicated_log_file_path",  "")))
+			dedicatedlog("Warning: Could not set dedicated log file path");
+		if (!dl->set_chat_file_path(s.get_string("dedicated_chat_file_path", "")))
+			dedicatedlog("Warning: Could not set dedicated chat file path");
+		if (!dl->write_info_active()) {
+			if (!dl->set_info_file_path(s.get_string("dedicated_info_file_path", "")))
+				dedicatedlog("Warning: Could not set dedicated info file path");
+			else {
+				needip = true;
+				dl->set_server_data(InternetGaming::ref().get_local_servername(), m_dedicated_motd);
+			}
+		}
+
+		dl->chatAddSpacer();
 		// Setup by the users
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
+
 		while (not d->dedicated_start) {
 			handle_network();
 			// TODO this should be improved.
@@ -705,12 +729,19 @@ void NetHost::run(bool const autorun)
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
 					return;
+				if (needip && (InternetGaming::ref().ip().size() < 1)) {
+					dl->set_server_ip(InternetGaming::ref().ip());
+					needip = false;
+				}
 			} else {
 				if (usleep(200) == -1)
 					return;
 			}
 #else
-			Sleep(1);
+			if (d->clients.empty())
+				Sleep(100);
+			else
+				Sleep(1);
 #endif
 		}
 		d->dedicated_start = false;
@@ -718,19 +749,21 @@ void NetHost::run(bool const autorun)
 		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&d->hp, this);
 		lm->setChatProvider(d->chat);
 		const int32_t code = lm->run();
-		if (code <= 0)
+		if (code <= 0) {
+			// if this is an internet game, tell the metaserver that client is back in the lobby.
+			if (m_internet)
+				InternetGaming::ref().set_game_done();
 			return;
+		}
 	}
 
-#if HAVE_GGZ
-	// if this is a ggz game, tell the metaserver that the game started
-	if (use_ggz)
-		NetGGZ::ref().send_game_playing();
-#endif
+	// if this is an internet game, tell the metaserver that the game started
+	if (m_internet)
+		InternetGaming::ref().set_game_playing();
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients.at(i).playernum == UserSettings::notConnected())
-			disconnectClient(i, _("The game has started just after you tried to connect."));
+			disconnectClient(i, "GAME_STARTED_AT_CONNECT");
 	}
 
 	SendPacket s;
@@ -746,6 +779,7 @@ void NetHost::run(bool const autorun)
 		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
 		// NOTE  to check whether the pointer is valid.
 		UI::ProgressWindow * loaderUI = 0;
+		GameTips * tips = 0;
 		if (m_is_dedicated) {
 			log ("[Dedicated] Starting the game...\n");
 			d->game = &game;
@@ -766,9 +800,8 @@ void NetHost::run(bool const autorun)
 			tipstext.push_back("multiplayer");
 			try {
 				tipstext.push_back(d->hp.getPlayersTribe());
-			} catch (GameSettingsProvider::No_Tribe) {
-			}
-			GameTips tips (*loaderUI, tipstext);
+			} catch (GameSettingsProvider::No_Tribe) {}
+			tips = new GameTips(*loaderUI, tipstext);
 
 			loaderUI->step(_("Preparing game"));
 
@@ -817,15 +850,35 @@ void NetHost::run(bool const autorun)
 		// wait mode when there are no clients
 		checkHungClients();
 		initComputerPlayers();
+		if (m_is_dedicated) {
+			// Statistics: new game started
+			std::vector<std::string> clients;
+			for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+				if (d->settings.users.at(i).position != UserSettings::notConnected())
+					if (d->settings.users.at(i).name != d->localplayername) // all names, but the dedicated server
+						clients.push_back(d->settings.users.at(i).name);
+			DedicatedLog::get()->game_start(clients, game.map().get_name());
+		}
 		game.run
 			(loaderUI,
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
-#if HAVE_GGZ
-		// if this is a ggz game, tell the metaserver that the game is done.
-		if (use_ggz)
-			NetGGZ::ref().send_game_done();
-#endif
+
+		// if this is an internet game, tell the metaserver that the game is done.
+		if (m_internet)
+			InternetGaming::ref().set_game_done();
+
+		if (m_is_dedicated) {
+			// Statistics: game ended
+			std::vector<std::string> winners;
+			for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+				// We do *not* only check connected users but all, as normally the players are already
+				// disconnected once the server reaches this line of code.
+				if (d->settings.users.at(i).name != d->localplayername) // all names, but the dedicated server
+					if (d->settings.users.at(i).winner)
+						winners.push_back(d->settings.users.at(i).name);
+			DedicatedLog::get()->game_end(winners);
+		}
 		clearComputerPlayers();
 	} catch (...) {
 		WLApplication::emergency_save(game);
@@ -833,8 +886,7 @@ void NetHost::run(bool const autorun)
 		d->game = 0;
 
 		while (d->clients.size() > 0) {
-			disconnectClient
-				(0, _("Server has crashed and performed an emergency save."));
+			disconnectClient(0, "SERVER_CRASHED");
 			reaper();
 		}
 		throw;
@@ -910,6 +962,9 @@ void NetHost::send(ChatMessage msg)
 	if (msg.msg.empty())
 		return;
 
+	if (isDedicated())
+		DedicatedLog::get()->chat(msg);
+
 	if (msg.recipient.empty()) {
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);
@@ -921,7 +976,7 @@ void NetHost::send(ChatMessage msg)
 
 		d->chat.receive(msg);
 
-		log("[Host]: chat: %s\n", msg.toPlainString().c_str());
+		dedicatedlog("[Host]: chat: %s\n", msg.toPlainString().c_str());
 	} else { //  personal messages
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);
@@ -948,7 +1003,7 @@ void NetHost::send(ChatMessage msg)
 				s.Unsigned8(1);
 				s.String(msg.recipient);
 				s.send(d->clients.at(clientnum).sock);
-				log("[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
+				dedicatedlog("[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
 			} else {
 				std::string fail = "Failed to send message: Recipient \"";
 				fail += msg.recipient + "\" could not be found!";
@@ -996,12 +1051,10 @@ void NetHost::send(ChatMessage msg)
 					s.send(d->clients.at(j).sock);
 				else
 					// Better no wexception it would break the whole game
-					log
-						("WARNING: user was found but no client is connected to "
-						 "it!\n");
+					dedicatedlog("WARNING: user was found but no client is connected to it!\n");
 			} else
 				// Better no wexception it would break the whole game
-				log("WARNING: sender could not be found!");
+				dedicatedlog("WARNING: sender could not be found!");
 		}
 	}
 }
@@ -1045,7 +1098,7 @@ int32_t NetHost::checkClient(std::string name)
 */
 void NetHost::kickUser(uint32_t client, std::string reason)
 {
-	disconnectClient(client, "Kicked by the host: " + reason);
+	disconnectClient(client, "KICKED", true, reason);
 }
 
 
@@ -1197,21 +1250,36 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 
 	if (d->settings.maps.empty()) {
 		// Read in maps
-		filenameset_t files;
-		g_fs->FindFiles("maps", "*", &files, 0);
-		Widelands::Map map;
-		const filenameset_t & gamefiles = files;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
-			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
-			if (ml) {
-				map.set_filename(name);
-				ml->preload_map(true);
-				DedicatedMapInfos info;
-				info.path     = name;
-				info.players  = map.get_nrplayers();
-				info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
-				d->settings.maps.push_back(info);
+		std::vector<std::string> directories;
+		directories.push_back("maps");
+		while (directories.size()) {
+			filenameset_t files;
+			g_fs->FindFiles(directories.at(directories.size() - 1).c_str(), "*", &files, 0);
+			directories.resize(directories.size() - 1);
+			Widelands::Map map;
+			const filenameset_t & gamefiles = files;
+			container_iterate_const(filenameset_t, gamefiles, i) {
+				char const * const name = i.current->c_str();
+				Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+				if (ml) {
+					map.set_filename(name);
+					ml->preload_map(true);
+					DedicatedMapInfos info;
+					info.path     = name;
+					info.players  = map.get_nrplayers();
+					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
+					d->settings.maps.push_back(info);
+				} else {
+					if
+						(g_fs->IsDirectory(name)
+						&&
+						strcmp(FileSystem::FS_Filename(name), ".")
+						&&
+						strcmp(FileSystem::FS_Filename(name), ".."))
+					{
+						directories.push_back(name);
+					}
+				}
 			}
 		}
 	}
@@ -1265,21 +1333,25 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 	}
 }
 
-void NetHost::sendSystemChat(char const * const fmt, ...)
+void NetHost::sendSystemMessageCode
+	(std::string const & code, std::string const & a, std::string const & b, std::string const & c)
 {
-	char buffer[500];
-	va_list va;
+	// First send to all clients
+	SendPacket s;
+	s.Unsigned8(NETCMD_SYSTEM_MESSAGE_CODE);
+	s.String(code);
+	s.String(a);
+	s.String(b);
+	s.String(c);
+	broadcast(s);
 
-	va_start(va, fmt);
-	vsnprintf(buffer, sizeof(buffer), fmt, va);
-	va_end(va);
-
-	ChatMessage c;
-	c.time = time(0);
-	c.msg = buffer;
-	c.playern = UserSettings::none(); //  == System message
+	// Now add to our own chatbox
+	ChatMessage msg;
+	msg.time = time(0);
+	msg.msg = NetworkGamingMessages::get_message(code, a, b, c);
+	msg.playern = UserSettings::none(); //  == System message
 	// c.sender remains empty to indicate a system message
-	send(c);
+	d->chat.receive(msg);
 }
 
 int32_t NetHost::getFrametime()
@@ -1448,9 +1520,7 @@ void NetHost::setPlayerState
 			if (d->settings.users.at(i).position == number) {
 				d->settings.users.at(i).position = UserSettings::none();
 				if (host) //  Did host send the user to lobby?
-					sendSystemChat
-						(_("Host sent player %s to the lobby!"),
-						 d->settings.users.at(i).name.c_str());
+					sendSystemMessageCode("SENT_PLAYER_TO_LOBBY", d->settings.users.at(i).name);
 
 				//  for local settings
 				for (std::vector<Client>::iterator j = d->clients.begin();; ++j) {
@@ -1831,7 +1901,7 @@ void NetHost::writeSettingAllUsers(SendPacket & packet)
 bool NetHost::writeMapTransferInfo(SendPacket & s, std::string mapfilename) {
 	// TODO not yet able to handle directory type maps / savegames
 	if (g_fs->IsDirectory(mapfilename)) {
-		log("Map/Save is a directory! No way for making it available a.t.m.!\n");
+		dedicatedlog("Map/Save is a directory! No way for making it available a.t.m.!\n");
 		return false;
 	}
 
@@ -1886,8 +1956,7 @@ bool NetHost::haveUserName(std::string const & name, uint8_t ignoreplayer) {
 
 
 /// Respond to a client's Hello message.
-void NetHost::welcomeClient
-	(uint32_t const number, std::string const & playername)
+void NetHost::welcomeClient (uint32_t const number, std::string const & playername)
 {
 	assert(number < d->clients.size());
 
@@ -1896,19 +1965,27 @@ void NetHost::welcomeClient
 	assert(client.playernum == UserSettings::notConnected());
 	assert(client.sock);
 
+	// Just for statistics
+	DedicatedLog::get()->client_login();
+
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
 	// only used at password protected dedicated server, but better initialize always
 	client.dedicated_access = m_is_dedicated ? (m_password.size() == 0) : false;
 
-	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
-		if (d->settings.users[i].position == UserSettings::notConnected()) {
-			client.usernum = i;
-			break;
-		}
+	if (!d->game) // just in case we allow connection of spectators/players after game start
+		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+			if (d->settings.users[i].position == UserSettings::notConnected()) {
+				client.usernum = i;
+				d->settings.users[i].winner = false;
+				d->settings.users[i].points = 0;
+				break;
+			}
 	if (client.usernum == -1) {
 		client.usernum = d->settings.users.size();
 		UserSettings newuser;
+		newuser.winner = false;
+		newuser.points = 0;
 		d->settings.users.push_back(newuser);
 	}
 
@@ -1930,7 +2007,7 @@ void NetHost::welcomeClient
 	d->settings.users.at(client.usernum).name = effective_name;
 	d->settings.users.at(client.usernum).position = UserSettings::none();
 
-	log("[Host]: client %u: welcome to usernum %u\n", number, client.usernum);
+	dedicatedlog("[Host]: Client %u: welcome to usernum %u\n", number, client.usernum);
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_HELLO);
@@ -1940,9 +2017,7 @@ void NetHost::welcomeClient
 
 	// even if the network protocol is the same, the data might be different.
 	if (client.build_id != build_id())
-		sendSystemChat
-			(_("WARNING: %s uses version: %s, while Host uses version: %s"),
-			 effective_name.c_str(), client.build_id.c_str(), build_id().c_str());
+		sendSystemMessageCode("DIFFERENT_WL_VERSION", effective_name, client.build_id, build_id());
 
 	// Send information about currently selected map / savegame
 	s.reset();
@@ -2000,7 +2075,7 @@ void NetHost::welcomeClient
 			break;
 		}
 
-	sendSystemChat(_("%s has joined the game"), effective_name.c_str());
+	sendSystemMessageCode("CLIENT_HAS_JOINED_GAME", effective_name);
 
 	// If this is a dedicated server, inform the player
 	if (m_is_dedicated) {
@@ -2051,19 +2126,16 @@ void NetHost::recvClientTime(uint32_t const number, int32_t const time)
 	Client & client = d->clients.at(number);
 
 	if (time - client.time < 0)
-		throw DisconnectException
-			(_("Client reports time to host that is running backwards."));
+		throw DisconnectException("BACKWARTS_RUNNING_TIME");
 	if (d->committed_networktime - time < 0)
-		throw DisconnectException
-			(_("Client simulates beyond the game time allowed by the host."));
+		throw DisconnectException("SIMULATING_BEYOND_TIME");
 	if (d->syncreport_pending && !client.syncreport_arrived) {
 		if (time - d->syncreport_time > 0)
-			throw DisconnectException
-				(_("Client did not submit sync report in time."));
+			throw DisconnectException("CLIENT_SYNC_REP_TIMEOUT");
 	}
 
 	client.time = time;
-	log("[Host]: Client %i: Time %i\n", number, time);
+	dedicatedlog("[Host]: Client %i: Time %i\n", number, time);
 
 	if (d->waiting) {
 		log
@@ -2086,9 +2158,12 @@ void NetHost::checkHungClients()
 
 		int32_t const delta = d->committed_networktime - d->clients.at(i).time;
 
-		if (delta == 0)
+		if (delta == 0) {
 			++nrready;
-		else {
+			// reset the hung_since time
+			if (m_is_dedicated)
+				d->clients.at(i).hung_since = 0;
+		} else {
 			++nrdelayed;
 			if
 				(delta
@@ -2103,13 +2178,31 @@ void NetHost::checkHungClients()
 					("[Host]: Client %i (%s) hung\n",
 					 i, d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
+				// If this is a dedicated server, there is no host that cares about kicking hung players
+				// This is especially problematic, if the last or all players hung and the dedicated
+				// server does not automatically restart.
+				if (m_is_dedicated) {
+					if (d->clients.at(i).hung_since == 0)
+						d->clients.at(i).hung_since = time(0);
+					else if (d->clients.at(i).hung_since < (time(0) - 600)) {
+						// 10 minutes for all other players to react before the dedicated server takes care
+						// about the situation itself
+						disconnectClient(i, "CLIENT_TIMEOUTED");
+						// Try to save the game
+						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(0)).str();;
+						std::string * error = new std::string();
+						SaveHandler & sh = d->game->save_handler();
+						if (sh.save_game(*d->game, savename, error))
+							sendSystemMessageCode("GAME_SAVED_AS", savename);
+					}
+				}
 			}
 		}
 	}
 
 	if (!d->waiting) {
 		if (nrhung) {
-			log("[Host]: %i clients hung. Entering wait mode\n", nrhung);
+			dedicatedlog("[Host]: %i clients hung. Entering wait mode\n", nrhung);
 
 			// Brake and wait
 			d->waiting = true;
@@ -2172,7 +2265,8 @@ void NetHost::updateNetworkSpeed()
 	else {
 		std::vector<uint32_t> speeds;
 
-		speeds.push_back(d->localdesiredspeed);
+		if (!m_is_dedicated)
+			speeds.push_back(d->localdesiredspeed);
 		for (uint32_t i = 0; i < d->clients.size(); ++i) {
 			if (d->clients.at(i).playernum <= UserSettings::highestPlayernum())
 				speeds.push_back(d->clients.at(i).desiredspeed);
@@ -2216,7 +2310,7 @@ void NetHost::requestSyncReports()
 	for (uint32_t i = 0; i < d->clients.size(); ++i)
 		d->clients.at(i).syncreport_arrived = false;
 
-	log("[Host]: Requesting sync reports for time %i\n", d->syncreport_time);
+	dedicatedlog("[Host]: Requesting sync reports for time %i\n", d->syncreport_time);
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_SYNCREQUEST);
@@ -2246,7 +2340,7 @@ void NetHost::checkSyncReports()
 	}
 
 	d->syncreport_pending = false;
-	log("[Host]: comparing syncreports for time %i\n", d->syncreport_time);
+	dedicatedlog("[Host]: comparing syncreports for time %i\n", d->syncreport_time);
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		Client & client = d->clients.at(i);
@@ -2255,7 +2349,7 @@ void NetHost::checkSyncReports()
 
 		if (client.syncreport != d->syncreport) {
 			log
-				("[Host] lost synchronization with client %u!\n"
+				("[Host]: lost synchronization with client %u!\n"
 				 "I have:     %s\n"
 				 "Client has: %s\n",
 				 i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
@@ -2266,7 +2360,7 @@ void NetHost::checkSyncReports()
 			s.Unsigned8(NETCMD_INFO_DESYNC);
 			broadcast(s);
 
-			disconnectClient(i, _("Client and host have become desynchronized."));
+			disconnectClient(i, "CLIENT_DESYNCED");
 			// Pause the game, so that host and client have time to handle the
 			// desync.
 			d->networkspeed = 0;
@@ -2295,7 +2389,7 @@ void NetHost::handle_network ()
 
 	// Check for new connections.
 	while (d->svsock != 0 && (sock = SDLNet_TCP_Accept(d->svsock)) != 0) {
-		log("[Host] Received a connection request\n");
+		dedicatedlog("[Host]: Received a connection request\n");
 
 		SDLNet_TCP_AddSocket (d->sockset, sock);
 
@@ -2306,22 +2400,19 @@ void NetHost::handle_network ()
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
 		peer.usernum = -1; // == no user assigned for now.
+		peer.hung_since = 0;
 		d->clients.push_back(peer);
-
-
-		// Now we wait for the client to say Hi in the right language,
-		// unless the game has already started
-		if (d->game) {
-			disconnectClient
-				(d->clients.size() - 1, _("The game has already started."));
-		}
 	}
 
-#if HAVE_GGZ
-	// if this is a ggz game, handle the ggz network
-	if (use_ggz)
-		NetGGZ::ref().data();
-#endif
+	// if this is an internet game, handle the metaserver information
+	if (m_internet) {
+		InternetGaming::ref().handle_metaserver_communication();
+		// Maybe an important message was send on the metaserver,
+		// that we should show in game as well.
+		std::vector<ChatMessage> msgs = InternetGaming::ref().getIngameSystemMessages();
+		for (uint8_t i = 0; i < msgs.size(); ++i)
+			send(msgs.at(i));
+	}
 
 	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
@@ -2331,7 +2422,7 @@ void NetHost::handle_network ()
 
 				while (client.sock && SDLNet_SocketReady(client.sock)) {
 					if (!client.deserializer.read(client.sock)) {
-						disconnectClient(i, _("Connection to client lost."), false);
+						disconnectClient(i, "CONNECTION_LOST", false);
 						break;
 					}
 
@@ -2344,10 +2435,10 @@ void NetHost::handle_network ()
 				}
 			} catch (DisconnectException const & e) {
 				disconnectClient(i, e.what());
+			} catch (ProtocolException const & e) {
+				disconnectClient(i, "PROTOCOL_EXCEPTION", true, boost::lexical_cast<std::string>(e.number()));
 			} catch (std::exception const & e) {
-				std::string reason = _("Client sent malformed commands: ");
-				reason += e.what();
-				disconnectClient(i, reason);
+				disconnectClient(i, "MALFORMED_COMMANDS", true, e.what());
 			}
 		}
 	}
@@ -2370,23 +2461,44 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	uint8_t const cmd = r.Unsigned8();
 
 	if (cmd == NETCMD_DISCONNECT) {
+		uint8_t number = r.Unsigned8();
 		std::string reason = r.String();
-		disconnectClient(i, reason, false);
+		if (number == 1)
+			disconnectClient(i, reason, false);
+		else {
+			std::string arg = r.String();
+			disconnectClient(i, reason, false, arg);
+		}
 		return;
 	}
 
 	if (client.playernum == UserSettings::notConnected()) {
+		if (cmd == NETCMD_METASERVER_PING) {
+			dedicatedlog("[Host]: Received ping from metaserver.\n");
+			// Send PING back
+			SendPacket s;
+			s.Unsigned8(NETCMD_METASERVER_PING);
+			s.send(client.sock);
+
+			// Remove metaserver from list of clients
+			client.playernum = UserSettings::notConnected();
+			SDLNet_TCP_DelSocket (d->sockset, client.sock);
+			SDLNet_TCP_Close (client.sock);
+			client.sock = 0;
+			return;
+		}
+
+		// Now we wait for the client to say Hi in the right language,
+		// unless the game has already started
 		if (d->game)
-			throw DisconnectException(_("Game is running already, but client has not connected fully"));
+			throw DisconnectException("GAME_ALREADY_STARTED");
+
 		if (cmd != NETCMD_HELLO)
-			throw DisconnectException
-				(_
-				 	("First command sent by client is %u instead of HELLO. "
-				 	 "Most likely the client is running an incompatible version."),
-				 cmd);
+			throw ProtocolException(cmd);
+
 		uint8_t version = r.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
-			throw DisconnectException(_("Server uses a different protocol version."));
+			throw DisconnectException("DIFFERENT_PROTOCOL_VERS");
 
 		std::string clientname = r.String();
 		client.build_id = r.String();
@@ -2397,14 +2509,14 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	switch (cmd) {
 	case NETCMD_PONG:
-		log("[Host] client %u: got pong\n", i);
+		dedicatedlog("[Host]: client %u: got pong\n", i);
 		break;
 
 	case NETCMD_SETTING_MAP:
 		if (!d->game) {
 			// Only valid if the server is dedicated and the client was granted access
 			if (!client.dedicated_access)
-				throw DisconnectException(_("Client has no access to other player's settings."));
+				throw DisconnectException("NO_ACCESS_TO_PLAYER");
 
 			std::string name = r.String();
 			std::string path = r.String();
@@ -2456,7 +2568,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			if (num != client.playernum)
 				// Only valid if the server is dedicated and the client was granted access
 				if (!client.dedicated_access)
-					throw DisconnectException(_("Client has no access to other player's settings."));
+					throw DisconnectException("NO_ACCESS_TO_PLAYER");
 			std::string tribe = r.String();
 			bool random_tribe = r.Unsigned8() == 1;
 			setPlayerTribe(num, tribe, random_tribe);
@@ -2471,7 +2583,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			if (num != client.playernum)
 				// Only valid if the server is dedicated and the client was granted access
 				if (!client.dedicated_access)
-					throw DisconnectException(_("Client has no access to other player's settings."));
+					throw DisconnectException("NO_ACCESS_TO_PLAYER");
 			setPlayerShared(num, r.Unsigned8());
 		}
 		break;
@@ -2482,7 +2594,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			if (num != client.playernum)
 				// Only valid if the server is dedicated and the client was granted access
 				if (!client.dedicated_access)
-					throw DisconnectException(_("Client has no access to other player's settings."));
+					throw DisconnectException("NO_ACCESS_TO_PLAYER");
 			setPlayerTeam(num, r.Unsigned8());
 		}
 		break;
@@ -2493,7 +2605,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			if (num != client.playernum)
 				// Only valid if the server is dedicated and the client was granted access
 				if (!client.dedicated_access)
-					throw DisconnectException(_("Client has no access to other player's settings."));
+					throw DisconnectException("NO_ACCESS_TO_PLAYER");
 			d->npsb.toggle_init(num);
 		}
 		break;
@@ -2509,7 +2621,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (!d->game) {
 			// Only valid if the server is dedicated and the client was granted access
 			if (!client.dedicated_access)
-				throw DisconnectException(_("Client has no access to server settings."));
+				throw DisconnectException("NO_ACCESS_TO_SERVER");
 			d->hp.nextPlayerState(r.Unsigned8());
 		}
 		break;
@@ -2518,7 +2630,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (!d->game) {
 			// Only valid if the server is dedicated and the client was granted access
 			if (!client.dedicated_access)
-				throw DisconnectException(_("Client has no access to server settings."));
+				throw DisconnectException("NO_ACCESS_TO_SERVER");
 			d->hp.nextWinCondition();
 		}
 		break;
@@ -2527,42 +2639,36 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (!d->game) {
 			// Only valid if the server is dedicated and the client was granted access
 			if (!client.dedicated_access)
-				throw DisconnectException(_("Client has no access to server settings."));
+				throw DisconnectException("NO_ACCESS_TO_SERVER");
 			if (!canLaunch())
-				throw DisconnectException(_("Client send start command, although server is not yet ready."));
+				throw DisconnectException("START_SENT_NOT_READY");
 			d->dedicated_start = true;
 		}
 		break;
 
 	case NETCMD_TIME:
 		if (!d->game)
-			throw DisconnectException(_("Client sent TIME command even though game is not running."));
+			throw DisconnectException("TIME_SENT_NOT_READY");
 		recvClientTime(i, r.Signed32());
 		break;
 
 	case NETCMD_PLAYERCOMMAND: {
 		if (!d->game)
-			throw DisconnectException(_("Client sent PLAYERCOMMAND command even though game is not running."));
+			throw DisconnectException("PLAYERCMD_WO_GAME");
 		int32_t time = r.Signed32();
 		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
-			("[Host] client %u (%u) sent player command %i for %i, time = %i\n",
+			("[Host]: client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
 		recvClientTime(i, time);
 		if (plcmd.sender() != client.playernum + 1)
-		{
-			throw DisconnectException
-				(_
-				 	("Client %u (%u) sent a playercommand (%i) for a different "
-				 	 "player (%i)."),
-				 i, client.playernum, plcmd.id(), plcmd.sender());
-		}
+			throw DisconnectException("PLAYERCMD_FOR_OTHER");
 		sendPlayerCommand(plcmd);
 	} break;
 
 	case NETCMD_SYNCREPORT: {
 		if (!d->game || !d->syncreport_pending || client.syncreport_arrived)
-			throw DisconnectException(_("Client sent unexpected synchronization report."));
+			throw DisconnectException("UNEXPECTED_SYNC_REP");
 		int32_t time = r.Signed32();
 		r.Data(client.syncreport.data, 16);
 		client.syncreport_arrived = true;
@@ -2597,46 +2703,41 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
 		if (!file) // Do we have a file for sending
-			throw DisconnectException(_("Client requests file altough none is available to send."));
-		sendSystemChat
-			(_("Started to send file %s to %s!"),
-			 file->filename.c_str(),
-			 d->settings.users.at(client.usernum).name.c_str());
+			throw DisconnectException("REQUEST_OF_N_E_FILE");
+		sendSystemMessageCode
+			("STARTED_SENDING_FILE", file->filename, d->settings.users.at(client.usernum).name);
 		sendFilePart(client.sock, 0);
 		break;
 	}
 
 	case NETCMD_FILE_PART: {
 		if (!file) // Do we have a file for sending
-			throw DisconnectException(_("Client requests file altough none is available to send."));
+			throw DisconnectException("REQUEST_OF_N_E_FILE");
 		uint32_t part = r.Unsigned32();
 		std::string x = r.String();
 		if (x != file->md5sum) {
-			log("[host] File transfer checksum missmatch %s != %s\n", x.c_str(), file->md5sum.c_str());
+			dedicatedlog("[Host]: File transfer checksum missmatch %s != %s\n", x.c_str(), file->md5sum.c_str());
 			return; // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file->parts.size())
-			throw DisconnectException(_("Client requests file part that does not exist."));
+			throw DisconnectException("REQUEST_OF_N_E_FILEPART");
 		if (part == file->parts.size() - 1) {
-			sendSystemChat
-				(_("Completed transfer of file %s to %s"),
-				 file->filename.c_str(),
-				 d->settings.users.at(client.usernum).name.c_str());
+			sendSystemMessageCode
+				("COMPLETED_FILE_TRANSFER", file->filename, d->settings.users.at(client.usernum).name);
 			return;
 		}
 		++part;
 		if (part % 100 == 0)
-			sendSystemChat
-				(_("Sending part %u/%u of file %s to %s"),
-				 part, file->parts.size() + 1,
-				 file->filename.c_str(),
-				 d->settings.users.at(client.usernum).name.c_str());
+			sendSystemMessageCode
+				("SENDING_FILE_PART",
+				 (boost::format("%i/%i") % part % (file->parts.size() + 1)).str(),
+				 file->filename, d->settings.users.at(client.usernum).name);
 		sendFilePart(client.sock, part);
 		break;
 	}
 
 	default:
-		throw DisconnectException(_("Client sent unknown command number %u"), cmd);
+		throw ProtocolException(cmd);
 	}
 }
 
@@ -2656,10 +2757,9 @@ void NetHost::sendFilePart(TCPsocket csock, uint32_t part) {
 }
 
 
-void NetHost::disconnectPlayerController
-	(uint8_t const number, std::string const & name, std::string const & reason, bool const sendreason)
+void NetHost::disconnectPlayerController(uint8_t const number, std::string const & name)
 {
-	log("[Host]: disconnectPlayerController(%u, %s, %s)\n", number, name.c_str(), reason.c_str());
+	dedicatedlog("[Host]: disconnectPlayerController(%u, %s)\n", number, name.c_str());
 
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 		if (d->settings.users.at(i).position == number) {
@@ -2683,7 +2783,7 @@ void NetHost::disconnectPlayerController
 }
 
 void NetHost::disconnectClient
-	(uint32_t const number, std::string const & reason, bool const sendreason)
+	(uint32_t const number, std::string const & reason, bool const sendreason, std::string const & arg)
 {
 	assert(number < d->clients.size());
 
@@ -2692,17 +2792,16 @@ void NetHost::disconnectClient
 	// If the client was completely connected before the disconnect, free the
 	// user settings and send changes to the clients
 	if (client.usernum >= 0) {
-		sendSystemChat
-			(_("%s has left the game (%s)"),
-			 d->settings.users.at(client.usernum).name.c_str(),
-			 reason.c_str());
+		sendSystemMessageCode("CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
 		uint8_t position = d->settings.users.at(client.usernum).position;
 		d->settings.users.at(client.usernum).position = UserSettings::notConnected();
 		client.playernum = UserSettings::notConnected();
 		if (position <= UserSettings::highestPlayernum()) {
-			disconnectPlayerController(position, d->settings.users.at(client.usernum).name, reason);
+			disconnectPlayerController(position, d->settings.users.at(client.usernum).name);
 		}
-		d->settings.users.at(client.usernum).name = std::string();
+		// Do NOT reset the clients name in the corresponding UserSettings, that way we keep the name for the
+		// statistics.
+		// d->settings.users.at(client.usernum).name = std::string();
 
 
 		// Broadcast the user changes to everybody
@@ -2711,16 +2810,22 @@ void NetHost::disconnectClient
 		s.Unsigned32(client.usernum);
 		writeSettingUser(s, client.usernum);
 		broadcast(s);
-	} else
-		sendSystemChat(_("Unknown user has left the game (%s)"), reason.c_str());
 
-	log("[Host]: disconnectClient(%u, %s)\n", number, reason.c_str());
+		// Just for statistics
+		DedicatedLog::get()->client_logout();
+	} else
+		sendSystemMessageCode("UNKNOWN_LEFT_GAME", reason, arg);
+
+	dedicatedlog("[Host]: disconnectClient(%u, %s, %s)\n", number, reason.c_str(), arg.c_str());
 
 	if (client.sock) {
 		if (sendreason) {
 			SendPacket s;
 			s.Unsigned8(NETCMD_DISCONNECT);
+			s.Unsigned8(arg.empty() ? 1 : 2);
 			s.String(reason);
+			if (!arg.empty())
+				s.String(arg);
 			s.send(client.sock);
 		}
 
@@ -2737,7 +2842,7 @@ void NetHost::disconnectClient
 				if (d->clients.at(i).playernum != UserSettings::notConnected())
 					return;
 			d->game->end_dedicated_game();
-			log("[Dedicated] Stopping the running game...\n");
+			dedicatedlog("[Dedicated] Stopping the running game...\n");
 		}
 	}
 
@@ -2759,3 +2864,21 @@ void NetHost::reaper()
 		else
 			d->clients.erase(d->clients.begin() + index);
 }
+
+
+void NetHost::report_result(uint8_t player, int32_t points, bool win, std::string extra)
+{
+	// there might be more than one client that control this Widelands player
+	// and maybe even none -> computer player
+	for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
+		UserSettings & user = d->settings.users.at(i);
+		if (user.position == player - 1) {
+			user.winner               = win;
+			user.points               = points;
+			user.win_condition_string = extra;
+		}
+	}
+
+	dedicatedlog("NetHost::report_result(%d, %d, %s, %s)\n", player, points, win?"won":"lost", extra.c_str());
+}
+

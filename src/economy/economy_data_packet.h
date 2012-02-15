@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -24,10 +24,10 @@
 #include "logic/widelands_filewrite.h"
 
 namespace Widelands {
-class Economy;
+struct Economy;
 struct Game;
-class Map_Map_Object_Loader;
-class Map_Map_Object_Saver;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
 
 class EconomyDataPacket {
 	public:

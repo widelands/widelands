@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -80,7 +80,6 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 + (list_height - middle_button_height * 2 - vspacing) / 2,
 		 middle_button_width, middle_button_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), false),
 		 ("->"),
 		 _("Forbid"),
 		 false),
@@ -90,21 +89,23 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 m_forbid_button.get_y() + middle_button_height + vspacing,
 		 middle_button_width, middle_button_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), true),
 		 _("<-"),
 		 _("Allow"),
 		 false)
 {
-	m_allowed.selected.set
-		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
-	m_allowed.double_clicked.set
-		(this,
-		 &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
-	m_forbidden.selected.set
-		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
-	m_forbidden.double_clicked.set
-		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::
-		 forbidden_double_clicked);
+	m_forbid_button.sigclicked.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), false));
+	m_allow_button.sigclicked.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), true));
+
+	m_allowed.selected.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected, this, _1));
+	m_allowed.double_clicked.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked, this, _1));
+	m_forbidden.selected.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected, this, _1));
+	m_forbidden.double_clicked.connect
+		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked, this, _1));
 
 	Widelands::Tribe_Descr const & tribe = player.tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();

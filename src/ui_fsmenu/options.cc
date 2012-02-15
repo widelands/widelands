@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -48,25 +48,22 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this, "advanced_options",
 		 get_w() * 9 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_Options::advanced_options, boost::ref(*this)),
 		 _("Advanced Options"), std::string(), true, false),
 	m_cancel
 		(this, "cancel",
 		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_cancel)),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind(&Fullscreen_Menu_Options::end_modal, boost::ref(*this), static_cast<int32_t>(om_ok)),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
 	m_sb_maxfps
 		(this,
-		 get_w() / 2, get_h() * 3833 / 10000, get_w() / 5, m_vbutw,
+		 (get_w() / 2) - (m_vbutw * 2), get_h() * 3833 / 10000, get_w() / 5, m_vbutw,
 		 opt.maxfps, 0, 100, "",
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_sb_autosave
@@ -187,11 +184,20 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	os(opt)
 {
+	m_advanced_options.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Options::advanced_options, boost::ref(*this)));
+	m_cancel.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Options::end_modal, this, static_cast<int32_t>(om_cancel)));
+	m_apply.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_Options::end_modal, this, static_cast<int32_t>(om_ok)));
+
 	m_advanced_options.set_font(font_small());
 	m_apply.set_font(font_small());
 	m_cancel.set_font(font_small());
 
 	m_sb_autosave     .add_replacement(0, _("Off"));
+	m_sb_remove_replays.add_replacement(0, _("Never"));
+	m_sb_remove_replays.add_replacement(1, _("1 day"));
 
 	m_sb_maxfps       .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	m_sb_autosave     .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
@@ -383,19 +389,11 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this, "cancel",
 		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			(&Fullscreen_Menu_Advanced_Options::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_cancel)),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() / 4,   get_h() * 19 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			(&Fullscreen_Menu_Advanced_Options::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_ok)),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -479,6 +477,17 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 
 	os(opt)
 {
+	m_cancel.sigclicked.connect
+		(boost::bind
+			(&Fullscreen_Menu_Advanced_Options::end_modal,
+			 boost::ref(*this),
+			 static_cast<int32_t>(om_cancel)));
+	m_apply.sigclicked.connect
+		(boost::bind
+			(&Fullscreen_Menu_Advanced_Options::end_modal,
+			 boost::ref(*this),
+			 static_cast<int32_t>(om_ok)));
+
 	m_cancel.set_font(font_small());
 	m_apply.set_font(font_small());
 

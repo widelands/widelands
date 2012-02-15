@@ -23,6 +23,7 @@ sleep=20000
 call=ship
 
 [ship]
+check_map=seafaring
 construct=shipconstruction buildship 6
 return=completed
 
@@ -37,11 +38,11 @@ hotspot=53 66
 playercolor=true
 
 #[working]
-#pics=shipyard_i_??.png 
+#pics=shipyard_i_??.png
 #hotspot=53 66
 #playercolor=true
 #
 #[outofhouse]
-#pics=shipyard_i_??.png 
+#pics=shipyard_i_??.png
 #hotspot=53 66
 #playercolor=true

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -29,6 +29,8 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 
+#include "wexception.h"
+
 #include <cstdio>
 #include <boost/lexical_cast.hpp>
 
@@ -36,8 +38,10 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
-	 wdType type,
-	 bool selectable)
+	 Widelands::WareWorker type,
+	 bool selectable,
+	 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
+	 bool horizontal)
 	:
 	// Size is set when add_warelist is called, as it depends on the m_type.
 	UI::Panel(parent, x, y, 0, 0),
@@ -50,12 +54,14 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		 _("Stock"), UI::Align_Center),
 
 	m_selected
-		(m_type == WORKER ? m_tribe.get_nrworkers()
+		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
 	                          : m_tribe.get_nrwares(), false),
 	m_hidden
-		(m_type == WORKER ? m_tribe.get_nrworkers()
+		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
 	                          : m_tribe.get_nrwares(), false),
-	m_selectable(selectable)
+	m_selectable(selectable),
+	m_horizontal(horizontal),
+	m_callback_function(callback_function)
 {
 	//resize the configuration of our wares if they won't fit in the current window
 	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + 8 + 3);
@@ -67,6 +73,11 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	for (unsigned int i = 0; i < icons_order().size(); i++)
 		if (icons_order()[i].size() > rows)
 			rows = icons_order()[i].size();
+	if (m_horizontal) {
+		unsigned int s = columns;
+		columns = rows;
+		rows = s;
+	}
 
 	// 25 is height of m_curware text
 	set_desired_size
@@ -82,7 +93,7 @@ bool AbstractWaresDisplay::handle_mousemove
 
 	m_curware.set_text
 		(index ?
-		 (m_type == WORKER ?
+		 (m_type == Widelands::wwWORKER ?
 		  m_tribe.get_worker_descr(index)->descname()
 		  :
 		  m_tribe.get_ware_descr  (index)->descname())
@@ -121,6 +132,11 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 
 	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
 	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + 8 + 3);
+	if (m_horizontal) {
+		unsigned int s = i;
+		i = j;
+		j = s;
+	}
 	if (i < icons_order().size() && j < icons_order()[i].size()) {
 		Widelands::Ware_Index ware = icons_order()[i][j];
 		if (not m_hidden[ware]) {
@@ -146,7 +162,7 @@ void WaresDisplay::remove_all_warelists() {
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
 	Widelands::Ware_Index number =
-		m_type == WORKER ?
+		m_type == Widelands::wwWORKER ?
 		m_tribe.get_nrworkers() :
 		m_tribe.get_nrwares();
 
@@ -165,33 +181,40 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() const
 {
 	switch (m_type) {
-		case WARE:
+		case Widelands::wwWARE:
 			return m_tribe.wares_order();
 			break;
-		case WORKER:
+		case Widelands::wwWORKER:
 			return m_tribe.workers_order();
 			break;
 	}
+	throw wexception("Invalid m_type %d", m_type);
 }
 
 Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_order_coords() const
 {
 	switch (m_type) {
-		case WARE:
+		case Widelands::wwWARE:
 			return m_tribe.wares_order_coords();
 			break;
-		case WORKER:
+		case Widelands::wwWORKER:
 			return m_tribe.workers_order_coords();
 			break;
 	}
+	throw wexception("Invalid m_type %d", m_type);
 }
 
 
 Point AbstractWaresDisplay::ware_position(Widelands::Ware_Index id) const
 {
 	Point p(2, 2);
-	p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
-	p.y += icons_order_coords()[id].second * (WARE_MENU_PIC_HEIGHT + 3 + 8);
+	if (m_horizontal) {
+		p.x += icons_order_coords()[id].second  * (WARE_MENU_PIC_WIDTH + 3);
+		p.y += icons_order_coords()[id].first * (WARE_MENU_PIC_HEIGHT + 3 + 8);
+	} else {
+		p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
+		p.y += icons_order_coords()[id].second * (WARE_MENU_PIC_HEIGHT + 3 + 8);
+	}
 	return p;
 }
 
@@ -223,13 +246,13 @@ void AbstractWaresDisplay::draw_ware
 	// Draw it
 	dst.blit
 		(pos,
-		 m_type == WORKER ?
+		 m_type == Widelands::wwWORKER ?
 		 m_tribe.get_worker_descr(id)->icon()
 		 :
 		 m_tribe.get_ware_descr  (id)->icon());
 	dst.fill_rect
 		(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
-		 RGBColor(0, 0, 0));
+		 info_color_for_ware(id));
 
 	UI::g_fh->draw_text
 		(dst, UI::TextStyle::ui_ultrasmall(),
@@ -288,10 +311,14 @@ WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe,
-	 wdType type,
+	 Widelands::WareWorker type,
 	 bool selectable)
 : AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}
+
+RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::Ware_Index const ware) {
+	return RGBColor(0, 0, 0);
+}
 
 WaresDisplay::~WaresDisplay()
 {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -33,13 +33,13 @@ struct Editor_Main_Menu : public UI::UniqueWindow {
 
 private:
 	Editor_Interactive & eia();
-	UI::Callback_Button m_button_new_map;
-	UI::Callback_Button m_button_new_random_map;
-	UI::Callback_Button m_button_load_map;
-	UI::Callback_Button m_button_save_map;
-	UI::Callback_Button m_button_map_options;
-	UI::Callback_Button m_button_view_readme;
-	UI::Callback_Button m_button_exit_editor;
+	UI::Button m_button_new_map;
+	UI::Button m_button_new_random_map;
+	UI::Button m_button_load_map;
+	UI::Button m_button_save_map;
+	UI::Button m_button_map_options;
+	UI::Button m_button_view_readme;
+	UI::Button m_button_exit_editor;
 
 	UI::UniqueWindow::Registry m_window_readme;
 

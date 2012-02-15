@@ -108,12 +108,12 @@ endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 if (WL_UNIT_TESTS)
   message(STATUS "Enabled unit tests")
 
-  set (BUILD_SHARED_LIBS OFF)
-  set (Boost_FIND_COMPONENTS unit_test_framework)
-  set (Boost_USE_STATIC_LIBS   ON)
+  #set (BUILD_SHARED_LIBS OFF)
+  set (Boost_FIND_COMPONENTS unit_test_framework signals)
+  set (Boost_USE_STATIC_LIBS   OFF)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
-  find_package(Boost 1.35.0 COMPONENTS unit_test_framework REQUIRED)
+  find_package(Boost 1.35.0 COMPONENTS unit_test_framework signals REQUIRED)
 
   if (NOT DEFINED MSVC)
     string( REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
@@ -136,7 +136,11 @@ if (WL_UNIT_TESTS)
   )
 else (WL_UNIT_TESTS)
   message(STATUS "Disabled Unit Tests")
-  find_package(Boost 1.35.0 REQUIRED)
+  set (Boost_FIND_COMPONENTS signals)
+  set (Boost_USE_STATIC_LIBS   ON)
+  set (Boost_USE_MULTITHREADED ON)
+  set (Boost_DETAILED_FAILURE_MSG ON)
+  find_package(Boost 1.35.0 COMPONENTS signals REQUIRED)
 endif (WL_UNIT_TESTS)
 
 option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
@@ -203,8 +207,23 @@ ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
 set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
-# CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
-set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+#This can be removed if no one uses gcc 4.5.1 or 4.5.2 any more
+IF (${CMAKE_COMPILER_IS_GNUCXX})
+EXEC_PROGRAM (
+    ${CMAKE_CXX_COMPILER}
+    ARGS --version
+    OUTPUT_VARIABLE WLBUILD_COMPILERVERSION
+    )
+    STRING(REGEX REPLACE ".*(4)\\.(5)\\.([0-9]).*" "\\1.\\2.\\3" WLBUILD_COMPILERVERSION_REP ${WLBUILD_COMPILERVERSION})
+    IF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
+        message("Detected gcc ${WLBUILD_COMPILERVERSION_REP}")
+        message("Suffering from gcc bug, disabling -O3")
+        set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+    ELSE (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
+        #This line is the default and should be preserved.
+        set (CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+    ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
+ENDIF (${CMAKE_COMPILER_IS_GNUCXX})
 
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
@@ -236,8 +255,7 @@ if (DEFINED MSVC)
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
   set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG ${MSVC_DISABLE_WARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
-  # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
-  set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MT /GL ${MSVC_DISABLE_WARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG /MT /GL ${MSVC_DISABLE_WARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /LTCG /NODEFAULTLIB:libcmt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
@@ -255,10 +273,6 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
-
-find_package(GGZ_Core REQUIRED)
-include_directories(${GGZ_CORE_INCLUDE_DIR})
-add_definitions("-DUSE_GGZ")
 
 #on freeBSD this must be explicitely linked
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")

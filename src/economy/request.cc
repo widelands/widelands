@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -52,7 +52,7 @@ Request::Request
 	(PlayerImmovable & _target,
 	 Ware_Index const index,
 	 callback_t const cbfn,
-	 Type       const w)
+	 WareWorker const w)
 	:
 	m_type             (w),
 	m_target           (_target),
@@ -68,13 +68,13 @@ Request::Request
 	m_required_interval(0),
 	m_last_request_time(m_required_time)
 {
-	assert(m_type == WARE or m_type == WORKER);
-	if (w == WARE   and _target.owner().tribe().get_nrwares  () <= index)
+	assert(m_type == wwWARE or m_type == wwWORKER);
+	if (w == wwWARE and _target.owner().tribe().get_nrwares() <= index)
 		throw wexception
 			("creating ware request with index %u, but tribe has only %u "
 			 "ware types",
 			 index.value(), _target.owner().tribe().get_nrwares  ().value());
-	if (w == WORKER and _target.owner().tribe().get_nrworkers() <= index)
+	if (w == wwWORKER and _target.owner().tribe().get_nrworkers() <= index)
 		throw wexception
 			("creating worker request with index %u, but tribe has only %u "
 			 "worker types",
@@ -117,14 +117,14 @@ void Request::Read
 			if (version <= 3) {
 				//  Unfortunately, old versions wrote the index. The best thing
 				//  that we can do with that is to look it up in a table.
-				Type newtype = static_cast<Type>(fr.Unsigned8());
-				if (newtype != WARE and newtype != WORKER)
+				WareWorker newtype = static_cast<WareWorker>(fr.Unsigned8());
+				if (newtype != wwWARE and newtype != wwWORKER)
 					throw wexception
 						("type is %u but must be %u (ware) or %u (worker)",
-						 m_type, WARE, WORKER);
+						 m_type, wwWARE, wwWORKER);
 				uint32_t const legacy_index = fr.Unsigned32();
-				if (newtype == WORKER) {
-					m_type = WORKER;
+				if (newtype == wwWORKER) {
+					m_type = wwWORKER;
 					m_index = Legacy::worker_index
 						(tribe,
 						 m_target.descr().descname(),
@@ -137,7 +137,7 @@ void Request::Read
 						 "requests",
 						 legacy_index);
 					if (newindex) {
-						m_type = WARE;
+						m_type = wwWARE;
 						m_index = newindex;
 					} else {
 						log("Request::Read: Legacy ware no longer exists, sticking with default\n");
@@ -147,10 +147,10 @@ void Request::Read
 			} else {
 				char const * const type_name = fr.CString();
 				if (Ware_Index const wai = tribe.ware_index(type_name)) {
-					m_type = WARE;
+					m_type = wwWARE;
 					m_index = wai;
 				} else if (Ware_Index const woi = tribe.worker_index(type_name)) {
-					m_type = WORKER;
+					m_type = wwWORKER;
 					m_index = woi;
 				} else {
 					log
@@ -179,7 +179,7 @@ void Request::Read
 
 						if (upcast(Worker, worker, obj)) {
 							transfer = worker->get_transfer();
-							if (m_type != WORKER || !worker->descr().can_act_as(m_index)) {
+							if (m_type != wwWORKER || !worker->descr().can_act_as(m_index)) {
 								log("Request::Read: incompatible transfer type\n");
 								if (!fudged_type)
 									throw wexception
@@ -189,7 +189,7 @@ void Request::Read
 							}
 						} else if (upcast(WareInstance, ware, obj)) {
 							transfer = ware->get_transfer();
-							if (m_type != WARE || ware->descr_index() != m_index) {
+							if (m_type != wwWARE || ware->descr_index() != m_index) {
 								log("Request::Read: incompatible transfer type\n");
 								if (!fudged_type)
 									throw wexception
@@ -213,16 +213,16 @@ void Request::Read
 						}
 					} else {
 						uint8_t const what_is = fr.Unsigned8();
-						if (what_is != WARE and what_is != WORKER and what_is != 2)
+						if (what_is != wwWARE and what_is != wwWORKER and what_is != 2)
 							throw wexception
 								("type is %u but must be one of {%u (WARE), %u "
 								 "(WORKER), %u (SOLDIER)}",
-								 what_is, WARE, WORKER, 2);
+								 what_is, wwWARE, wwWORKER, 2);
 						uint32_t const reg = fr.Unsigned32();
 						if (not mol.is_object_known(reg))
 							throw wexception("%u is not known", reg);
 						Transfer * const trans =
-							what_is == WARE ?
+							what_is == wwWARE ?
 							new Transfer(game, *this, mol.get<WareInstance>(reg)) :
 							new Transfer(game, *this, mol.get<Worker>      (reg));
 						fr.Unsigned8(); // was: is_idle
@@ -256,12 +256,12 @@ void Request::Write
 
 	//  Target and econmy should be set. Same is true for callback stuff.
 
-	assert(m_type == WARE or m_type == WORKER);
+	assert(m_type == wwWARE or m_type == wwWORKER);
 	Tribe_Descr const & tribe = m_target.owner().tribe();
-	assert(m_type != WARE   or m_index < tribe.get_nrwares  ());
-	assert(m_type != WORKER or m_index < tribe.get_nrworkers());
+	assert(m_type != wwWARE   or m_index < tribe.get_nrwares  ());
+	assert(m_type != wwWORKER or m_index < tribe.get_nrworkers());
 	fw.CString
-		(m_type == WARE                          ?
+		(m_type == wwWARE                        ?
 		 tribe.get_ware_descr  (m_index)->name() :
 		 tribe.get_worker_descr(m_index)->name());
 
@@ -483,7 +483,7 @@ void Request::start_transfer(Game & game, Supply & supp)
 	ss.Unsigned32(supp.get_position(game)->serial());
 
 	Transfer * t;
-	if (get_type() == WORKER) {
+	if (get_type() == wwWORKER) {
 		//  Begin the transfer of a soldier or worker.
 		//  launch_worker() creates or starts the worker
 		Worker & s = supp.launch_worker(game, *this);

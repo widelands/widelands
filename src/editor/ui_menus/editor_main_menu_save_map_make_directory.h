@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -27,7 +27,7 @@
 
 namespace UI {
 struct EditBox;
-struct Callback_Button;
+struct Button;
 }
 
 /**
@@ -44,7 +44,7 @@ struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 private:
 	std::string               m_dirname;
 	UI::EditBox             * m_edit;
-	UI::Callback_Button * m_ok_button;
+	UI::Button * m_ok_button;
 	void edit_changed();
 };
 

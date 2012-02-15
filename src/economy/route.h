@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -34,7 +34,7 @@ struct Flag;
 struct Editor_Game_Base;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;
-class RoutingNode;
+struct RoutingNode;
 
 /**
  * Route stores a route from flag to flag.

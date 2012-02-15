@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -71,6 +71,7 @@ struct Building_Descr : public Map_Object_Descr {
 	PictureID get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
 	bool get_ismine() const {return m_mine;}
+	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
 	typedef std::set<Building_Index> Enhancements;
@@ -102,6 +103,8 @@ struct Building_Descr : public Map_Object_Descr {
 
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const throw ();
+	bool has_help_text() const {return m_helptext_script != "";}
+	std::string helptext_script() const {return m_helptext_script;}
 
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 	Workarea_Info m_workarea_info;
@@ -122,10 +125,12 @@ private:
 	std::string   m_buildicon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
+	bool          m_port;
 	Enhancements  m_enhancements;
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 	bool          m_global;            // whether this is a "global" building
+	std::string   m_helptext_script;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
@@ -141,8 +146,9 @@ class Building : public PlayerImmovable {
 public:
 	// Player capabilities: which commands can a player issue for this building?
 	enum {
-		PCap_Bulldoze = 0, // can bulldoze/remove this buildings
-		PCap_Enhancable = 3, // can be enhanced to something
+		PCap_Bulldoze = 1, // can bulldoze/remove this buildings
+		PCap_Dismantle = 1 << 1, // can dismantle this buildings
+		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
 
 public:
@@ -171,7 +177,7 @@ public:
 	std::string info_string(std::string const & format);
 	virtual std::string get_statistics_string();
 
-	/// \Returns the queue for a ware type or \throws _wexception.
+	/// \returns the queue for a ware type or \throws _wexception.
 	virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));
 
 	virtual bool burn_on_destroy();

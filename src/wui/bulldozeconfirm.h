@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -23,7 +23,7 @@
 struct Interactive_Player;
 
 namespace Widelands {
-struct Building;
+class Building;
 struct PlayerImmovable;
 }
 
@@ -31,5 +31,11 @@ void show_bulldoze_confirm
 	(Interactive_Player & player,
 	 Widelands::Building & building,
 	 Widelands::PlayerImmovable * const todestroy = 0);
+
+void show_dismantle_confirm
+	(Interactive_Player & player,
+	 Widelands::Building & building,
+	 Widelands::PlayerImmovable * const todestroy = 0);
+
 
 #endif // _BULLDOZECONFIRM_H_

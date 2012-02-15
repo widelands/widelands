@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -306,9 +306,9 @@ struct PlayerImmovable : public BaseImmovable {
 	virtual void receive_worker(Game &, Worker & worker);
 	/*@}*/
 
-protected:
 	void set_owner(Player *);
 
+protected:
 	virtual void init   (Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
@@ -317,6 +317,17 @@ private:
 	Economy             * m_economy;
 
 	Workers   m_workers;
+
+	// load/save support
+protected:
+	struct Loader : BaseImmovable::Loader {
+		Loader();
+
+		void load(FileRead &);
+	};
+
+public:
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };
 
 }

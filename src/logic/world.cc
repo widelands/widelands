@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -820,6 +820,7 @@ Terrain_Descr::Terrain_Descr
 	 Descr_Maintainer<Resource_Descr> * const resources)
 :
 m_name              (s->get_name()),
+m_descname          (s->get_string("name", s->get_name())),
 m_picnametempl      (0),
 m_frametime         (FRAME_LENGTH),
 m_valid_resources   (0),

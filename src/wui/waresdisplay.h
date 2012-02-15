@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -21,7 +21,10 @@
 #define WARESDISPLAY_H
 
 #include "logic/warelist.h"
+#include "logic/wareworker.h"
 #include "logic/tribe.h"
+
+#include "graphic/graphic.h"
 
 #include "ui_basic/textarea.h"
 
@@ -34,23 +37,21 @@ struct Tribe_Descr;
 struct WareList;
 }
 
-/*
-class AbstractWaresDisplay
-------------------
-Panel that displays wares or workers with some string
-*/
+/**
+ * Display wares or workers together with some string (typically a number)
+ * in the style of the @ref Warehouse_Window.
+ *
+ * For practical purposes, use one of the derived classes, e.g. @ref WaresDisplay.
+ */
 struct AbstractWaresDisplay : public UI::Panel {
-	enum wdType {
-		WORKER,
-		WARE
-	};
-
 	AbstractWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const &,
-		 wdType type,
-		 bool selectable);
+		 Widelands::WareWorker type,
+		 bool selectable,
+		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = NULL,
+		 bool horizontal = true);
 
 	bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
@@ -67,6 +68,8 @@ struct AbstractWaresDisplay : public UI::Panel {
 			unselect_ware(ware);
 		else
 			select_ware(ware);
+		if (m_callback_function)
+			m_callback_function(ware, ware_selected(ware));
 	}
 
 	// Wares may be hidden
@@ -75,12 +78,14 @@ struct AbstractWaresDisplay : public UI::Panel {
 	bool ware_hidden(Widelands::Ware_Index);
 
 	Widelands::Ware_Index ware_at_point(int32_t x, int32_t y) const;
-	wdType get_type() const {return m_type;}
+	Widelands::WareWorker get_type() const {return m_type;}
 
 protected:
 	virtual void layout();
 
 	virtual std::string info_for_ware(Widelands::Ware_Index const) = 0;
+
+	virtual RGBColor info_color_for_ware(Widelands::Ware_Index);
 
 	Widelands::Tribe_Descr::WaresOrder const & icons_order() const;
 	Widelands::Tribe_Descr::WaresOrderCoords const & icons_order_coords() const;
@@ -95,26 +100,26 @@ private:
 	typedef std::vector<bool> selection_type;
 
 	Widelands::Tribe_Descr const & m_tribe;
-	wdType              m_type;
+	Widelands::WareWorker m_type;
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
 	selection_type      m_hidden;
 	bool                m_selectable;
+	bool                m_horizontal;
+	boost::function<void(Widelands::Ware_Index, bool)> m_callback_function;
 };
 
 /*
-class WaresDisplay
+struct WaresDisplay
 ------------------
 Panel that displays the contents of a WareList.
 */
 struct WaresDisplay : public AbstractWaresDisplay {
-	typedef AbstractWaresDisplay::wdType wdType;
-
 	WaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 Widelands::Tribe_Descr const &,
-		 wdType type,
+		 Widelands::WareWorker type,
 		 bool selectable);
 
 	virtual ~WaresDisplay();

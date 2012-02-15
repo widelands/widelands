@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -52,28 +52,21 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 		(this, "select_map",
 		 get_w() * 7 / 10, get_h() * 3 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Fullscreen_Menu_LaunchSPG::select_map, boost::ref(*this)),
 		 _("Select map"), std::string(), false, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 7 / 10, get_h() * 4 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_LaunchSPG::win_condition_clicked,
-			  boost::ref(*this)),
 		 "", std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 7 / 10, get_h() * 9 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_LaunchSPG::back_clicked, boost::ref(*this)),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 7 / 10, get_h() * 1 / 2, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_LaunchSPG::start_clicked, boost::ref(*this)),
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
@@ -105,12 +98,26 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 		(this,
 		 get_w() * 51 / 100, get_h() * 53 / 200,
 		 _("Start type"), UI::Align_Left),
+	m_wincondition_type
+		(this,
+		 get_w() * 7 / 10 + (m_butw / 2), get_h() * 7 / 20,
+		 _("Type of game"), UI::Align_HCenter),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
 	m_ctrl         (ctrl),
 	m_is_scenario  (false)
 {
+	m_select_map.sigclicked.connect(boost::bind(&Fullscreen_Menu_LaunchSPG::select_map, boost::ref(*this)));
+	m_wincondition.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_LaunchSPG::win_condition_clicked,
+			  boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LaunchSPG::back_clicked, boost::ref(*this)));
+	m_ok.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_LaunchSPG::start_clicked, boost::ref(*this)));
+
 
 	// Register win condition scripts
 	m_lua = create_LuaInterface();
@@ -124,6 +131,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 
 	m_title  .set_textstyle(ts_big());
 	m_mapname.set_textstyle(ts_small());
+	m_wincondition_type.set_textstyle(ts_small());
 
 	UI::TextStyle tsmaller
 		(UI::TextStyle::makebold
@@ -144,15 +152,14 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
 		m_pos[i] =
-			new UI::Callback_Button
+			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 g_gr->get_picture(PicMod_Game, posIco),
-				 boost::bind
-					 (&Fullscreen_Menu_LaunchSPG::switch_to_position,
-					  boost::ref(*this), i),
 				 _("Switch to position"), false);
+		m_pos[i]->sigclicked.connect
+			(boost::bind(&Fullscreen_Menu_LaunchSPG::switch_to_position, boost::ref(*this), i));
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,
@@ -233,7 +240,7 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 			std::string n = t->get_string("name");
 			std::string d = t->get_string("description");
 
-			m_wincondition.set_title(_("Type: ") + n);
+			m_wincondition.set_title(n);
 			m_wincondition.set_tooltip(d.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
@@ -257,7 +264,7 @@ void Fullscreen_Menu_LaunchSPG::start_clicked()
 			 	 "If this happens in a network game, the host might have selected "
 			 	 "a file that you do not own. Normally such a file should be send "
 			 	 "from the host to you, but perhaps the transfer was not yet "
-			 	 "finnished!?!"),
+			 	 "finished!?!"),
 			 m_filename.c_str());
 	if (m_settings->canLaunch()) {
 		end_modal(1 + m_is_scenario);

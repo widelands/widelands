@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -43,36 +43,41 @@ Fullscreen_Menu_Base("singleplmenu.jpg"),
 		(this, "new_game",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			(&Fullscreen_Menu_SinglePlayer::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(New_Game)),
 		 _("New Game"), std::string(), true, false),
 	campaign
 		(this, "campaigns",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			(&Fullscreen_Menu_SinglePlayer::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(Campaign)),
 		 _("Campaigns"), std::string(), true, false),
 	load_game
 		(this, "load_game",
 		 m_butx, get_h() * 87 / 200, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			(&Fullscreen_Menu_SinglePlayer::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(Load_Game)),
 		 _("Load Game"), std::string(), true, false),
 	back
 		(this, "back",
 		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_SinglePlayer::end_modal, boost::ref(*this), static_cast<int32_t>(Back)),
 		 _("Back"), std::string(), true, false)
 {
+	new_game.sigclicked.connect
+		(boost::bind
+			(&Fullscreen_Menu_SinglePlayer::end_modal,
+			 boost::ref(*this),
+			 static_cast<int32_t>(New_Game)));
+	campaign.sigclicked.connect
+		(boost::bind
+			(&Fullscreen_Menu_SinglePlayer::end_modal,
+			 boost::ref(*this),
+			 static_cast<int32_t>(Campaign)));
+	load_game.sigclicked.connect
+		(boost::bind
+			(&Fullscreen_Menu_SinglePlayer::end_modal,
+			 boost::ref(*this),
+			 static_cast<int32_t>(Load_Game)));
+	back.sigclicked.connect
+		(boost::bind(&Fullscreen_Menu_SinglePlayer::end_modal, boost::ref(*this), static_cast<int32_t>(Back)));
+
 	back.set_font(font_small());
 	new_game.set_font(font_small());
 	campaign.set_font(font_small());

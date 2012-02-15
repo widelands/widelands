@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -82,7 +82,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 		Widelands::Terrain_Descr const & ter = world.terrain_descr
 			(center.triangle.t == Widelands::TCoords<>::D ?
 			 tf.terrain_d() : tf.terrain_r());
-		buf += ter.name();
+		buf += ter.descname();
 		snprintf
 			(buf1, sizeof(buf1), _("\n Texture Number: %i\n"), ter.get_texture());
 		buf += buf1;

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -36,6 +36,7 @@ struct RealFSImpl : public FileSystem {
 		 uint32_t            depth = 0);
 
 	virtual bool IsWritable() const;
+	bool FileIsWriteable(std::string const & path);
 	virtual bool FileExists (std::string const & path);
 	virtual bool IsDirectory(std::string const & path);
 	virtual void EnsureDirectoryExists(std::string const & dirname);
@@ -45,8 +46,10 @@ struct RealFSImpl : public FileSystem {
 	virtual void * fastLoad
 		(const std::string & fname, size_t & length, bool & fast);
 
-	virtual void Write
-		(std::string const & fname, void const * data, int32_t length);
+
+	void Write(std::string const & fname, void const * data, int32_t length, bool append);
+	virtual void Write(std::string const & fname, void const * data, int32_t length)
+		{Write(fname, data, length, false);}
 
 	virtual StreamRead  * OpenStreamRead (std::string const & fname);
 	virtual StreamWrite * OpenStreamWrite(std::string const & fname);
@@ -55,7 +58,7 @@ struct RealFSImpl : public FileSystem {
 	virtual FileSystem & CreateSubFileSystem
 		(std::string const & dirname, Type);
 	virtual void Unlink(std::string const & file);
-	virtual void Rename(std::string const &, std::string const &);
+	virtual void Rename(std::string const & old_name, std::string const & new_name);
 
 	virtual std::string getBasename() {return m_directory;};
 	virtual unsigned long long DiskSpace();

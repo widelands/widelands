@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -78,9 +78,9 @@ private:
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::Callback_Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
-	UI::Callback_Button       m_help_button;
-	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map;
+	UI::Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
+	UI::Button       m_help_button;
+	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map, m_wincondition_type;
 	UI::Multiline_Textarea    m_map_info, m_client_info;
 	UI::HelpWindow          * m_help;
 	GameSettingsProvider    * m_settings;

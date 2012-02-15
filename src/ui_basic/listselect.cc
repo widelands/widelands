@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -29,6 +29,7 @@
 
 #include "container_iterate.h"
 
+#include <boost/bind.hpp>
 #include <iostream>
 
 namespace UI {
@@ -62,7 +63,7 @@ BaseListselect::BaseListselect
 
 	set_align(align);
 
-	m_scrollbar.moved.set(this, &BaseListselect::set_scrollpos);
+	m_scrollbar.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(m_fontname, m_fontsize));
 	m_scrollbar.set_pagesize
 		(h - 2 * g_fh->get_fontheight(m_fontname, m_fontsize));
@@ -113,17 +114,19 @@ void BaseListselect::clear() {
  *       sel    if true, directly select the new entry
 */
 void BaseListselect::add
-	(char const * const name,
-	 uint32_t           entry,
-	 PictureID    const picid,
-	 bool         const sel)
+	(char const * const   name,
+	 uint32_t             entry,
+	 PictureID    const   picid,
+	 bool         const   sel,
+	 std::string  const & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 
 	er->m_entry = entry;
-	er->picid = picid;
+	er->picid   = picid;
 	er->use_clr = false;
-	er->name = std::string(name);
+	er->name    = std::string(name);
+	er->tooltip = tooltip_text;
 	uint32_t entry_height = 0;
 	if (picid == g_gr->get_no_picture()) {
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
@@ -150,9 +153,10 @@ void BaseListselect::add
 }
 
 void BaseListselect::add_front
-	(char const * const name,
-	 PictureID    const picid,
-	 bool         const sel)
+	(char const * const   name,
+	 PictureID    const   picid,
+	 bool         const   sel,
+	 std::string  const & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 
@@ -160,10 +164,10 @@ void BaseListselect::add_front
 	container_iterate_const(Entry_Record_deque, m_entry_records, i)
 		++(*i.current)->m_entry;
 
-	er->picid = picid;
+	er->picid   = picid;
 	er->use_clr = false;
-	//strcpy(er.name, name);
-	er->name = std::string(name);
+	er->name    = std::string(name);
+	er->tooltip = tooltip_text;
 
 	uint32_t entry_height = 0;
 	if (picid == g_gr->get_no_picture())
@@ -202,10 +206,10 @@ void BaseListselect::switch_entries(const uint32_t m, const uint32_t n)
 
 	if (m_selection == m) {
 		m_selection = n;
-		selected.call(n);
+		selected(n);
 	} else if (m_selection == n) {
 		m_selection = m;
-		selected.call(m);
+		selected(m);
 	}
 }
 
@@ -289,7 +293,7 @@ void BaseListselect::select(const uint32_t i)
 	}
 	m_selection = i;
 
-	selected.call(m_selection);
+	selected(m_selection);
 	update(0, 0, get_eff_w(), get_h());
 }
 
@@ -444,7 +448,7 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 			return false;
 		play_click();
 		select(y);
-		clicked.call(m_selection);
+		clicked(m_selection);
 
 		if //  check if doubleclicked
 			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
@@ -452,7 +456,7 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 			 m_last_selection == m_selection
 			 and
 			 m_selection != no_selection_index())
-			double_clicked.call(m_selection);
+			double_clicked(m_selection);
 
 		return true;
 	}
@@ -464,6 +468,16 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
+}
+
+bool BaseListselect::handle_mousemove(Uint8, int32_t, int32_t y, int32_t, int32_t) {
+	y = (y + m_scrollpos) / get_lineheight();
+	if (y < 0 or static_cast<int32_t>(m_entry_records.size()) <= y) {
+		set_tooltip(0);
+		return false;
+	}
+	set_tooltip(m_entry_records.at(y)->tooltip.empty() ? 0 : m_entry_records.at(y)->tooltip.c_str());
+	return true;
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
@@ -513,7 +527,7 @@ void BaseListselect::remove(const uint32_t i)
 	delete (m_entry_records[i]);
 	m_entry_records.erase(m_entry_records.begin() + i);
 	if (m_selection == i)
-		selected.call(m_selection = no_selection_index());
+		selected(m_selection = no_selection_index());
 	else if (i <  m_selection)
 		--m_selection;
 }

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -31,7 +31,7 @@
 #if __APPLE__  && LIBINTL_VERSION >= 0x001201
 // for older libintl versions, setlocale is just fine
 #define SETLOCALE libintl_setlocale
-#elif _MSC_VER
+#elif _WIN32
 #define SETLOCALE setlocale
 #else
 #define SETLOCALE std::setlocale
@@ -187,7 +187,7 @@ void set_locale(std::string name) {
 	locale = lang;
 #endif
 
-#ifdef linux
+#ifdef __linux__
 	char * res = NULL;
 	char const * encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
 	std::size_t found = alt_str.find(',', 0);

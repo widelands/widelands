@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,36 +22,53 @@
 
 #include "graphic/picture_id.h"
 #include "point.h"
-#include "m_signal.h"
 
+#include "checkbox.h"
 
 #include <stdint.h>
 
 namespace UI {
+
 struct Panel;
+
+struct Radiogroup;
+
+struct Radiobutton : public Statebox {
+	friend struct Radiogroup;
+
+	Radiobutton
+		(Panel * parent, Point, PictureID picid, Radiogroup &, int32_t id);
+	~Radiobutton();
+
+private:
+	void clicked();
+
+	Radiobutton * m_nextbtn;
+	Radiogroup  & m_group;
+	int32_t           m_id;
+};
 
 /**
  * A group of radiobuttons. At most one of them is checked at any time.  State
  * is -1 if none is checked, otherwise it's the index of the checked button.
  */
-struct Radiobutton;
-
 struct Radiogroup {
 	friend struct Radiobutton;
 
 	Radiogroup();
 	~Radiogroup();
 
-	Signal changed;
-	Signal1<int32_t> changedto;
-	Signal clicked; //  clicked without things changed
+	boost::signal<void ()> changed;
+	boost::signal<void (int32_t)> changedto;
+	boost::signal<void ()> clicked; //  clicked without things changed
 
 	int32_t add_button
-		(Panel * parent, Point, PictureID picid, char const * tooltip = 0);
+		(Panel * parent, Point, PictureID picid, char const * tooltip = 0, Radiobutton ** = NULL);
 
 	int32_t get_state() const throw () {return m_state;}
 	void set_state(int32_t state);
-
+	void set_enabled(bool);
+	Radiobutton * get_button(int32_t id);
 private:
 	Radiobutton * m_buttons; //  linked list of buttons (not sorted)
 	int32_t           m_highestid;

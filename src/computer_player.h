@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,12 +13,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #ifndef COMPUTER_PLAYER_H
 #define COMPUTER_PLAYER_H
+
+#include <boost/noncopyable.hpp>
 
 #include "logic/game.h"
 #include "logic/notification.h"
@@ -30,6 +32,7 @@
  * \ref Implementation interface.
  */
 struct Computer_Player :
+	boost::noncopyable,
 	Widelands::NoteReceiver<Widelands::NoteImmovable>,
 	Widelands::NoteReceiver<Widelands::NoteFieldPossession>
 {
@@ -69,9 +72,6 @@ struct Computer_Player :
 	static const Implementation * getImplementation(const std::string & name);
 
 private:
-	Computer_Player & operator= (Computer_Player const &);
-	explicit Computer_Player    (Computer_Player const &);
-
 	Widelands::Game & m_game;
 	Widelands::Player_Number const m_player_number;
 };

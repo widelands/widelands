@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 13
+#define CURRENT_PACKET_VERSION 14
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -111,7 +111,9 @@ void Game_Player_Info_Data_Packet::Read
 					if (packet_version >= 6)
 						player.setAI(fr.CString());
 
-					if (packet_version >= 12)
+					if (packet_version >= 14)
+						player.ReadStatistics(fr, 2);
+					else if (packet_version >= 12)
 						player.ReadStatistics(fr, 1);
 					else
 						player.ReadStatistics(fr, 0);

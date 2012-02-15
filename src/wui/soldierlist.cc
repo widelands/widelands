@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -29,6 +29,7 @@
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/soldiercontrol.h"
+#include "soldiercapacitycontrol.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
@@ -395,6 +396,15 @@ m_infotext(this, _("Click soldier to send away"))
 		(style.calc_bare_width(_("Click soldier to send away")),
 		 style.calc_bare_width("HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"));
 	set_min_desired_breadth(maxtextwidth + 4);
+
+	UI::Box * capacity_buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	capacity_buttons->add
+		(create_soldier_capacity_control(*capacity_buttons, igb, building),
+		 UI::Box::AlignCenter);
+
+	add(capacity_buttons, UI::Box::AlignRight);
+
+
 }
 
 SoldierControl & SoldierList::soldiers() const

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -33,13 +33,13 @@ Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
 	eb_nickname =
 		new UI::EditBox
 			(this, 150, 5, 330, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, UI::Align_Left);
+			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), UI::Align_Left);
 
 	ta_password = new UI::Textarea(this, 10, 40, _("Password:"));
 	eb_password =
 		new UI::EditBox
 			(this, 150, 40, 330, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, UI::Align_Left);
+			 g_gr->get_picture(PicMod_UI, "pics/but2.png"), UI::Align_Left);
 
 	pwd_warning =
 		new UI::Textarea
@@ -56,18 +56,18 @@ Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
 		(this, 40, 135,
 		 _("Automatically use this login information from now on."));
 
-	new UI::Callback_Button
+	UI::Button * loginbtn = new UI::Button
 		(this, "login",
 		 (get_inner_w() / 2 - 200) / 2, 175, 200, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&LoginBox::pressedLogin, boost::ref(*this)),
 		 _("Login"));
-	new UI::Callback_Button
+	loginbtn->sigclicked.connect(boost::bind(&LoginBox::pressedLogin, boost::ref(*this)));
+	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, 175, 200, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&LoginBox::pressedCancel, boost::ref(*this)),
 		 _("Cancel"));
+	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::pressedCancel, boost::ref(*this)));
 
 	Section & s = g_options.pull_section("global");
 	eb_nickname->setText(s.get_string("nickname", _("nobody")));

@@ -29,8 +29,10 @@ sleep=45000
 animate=working 20000
 mine=iron 4 100 5
 produce=ironore
+animate=working 20000
 mine=iron 4 100 5
 produce=ironore:2
+animate=working 20000
 mine=iron 4 100 5
 produce=ironore:2
 

@@ -1,6 +1,5 @@
 /*
- *
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -45,7 +44,7 @@ class TrainingSite;
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
 
-/** class Game
+/** struct Game
  *
  * This class manages the entire lifetime of a game session, from creating the
  * game and setting options, selecting maps to the actual playing phase and the
@@ -53,7 +52,8 @@ class TrainingSite;
  */
 enum {
 	gs_notrunning = 0, // game is being prepared
-	gs_running      // game was fully prepared at some point and is now in-game
+	gs_running,        // game was fully prepared at some point and is now in-game
+	gs_ending
 };
 
 struct Player;
@@ -62,7 +62,7 @@ struct PlayerCommand;
 struct ReplayReader;
 struct ReplayWriter;
 
-struct Game : public Editor_Game_Base {
+struct Game : Editor_Game_Base {
 	struct General_Stats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;
@@ -82,15 +82,15 @@ struct Game : public Editor_Game_Base {
 	typedef std::vector<General_Stats> General_Stats_vector;
 
 	friend class Cmd_Queue; // this class handles the commands
-	friend class Game_Game_Class_Data_Packet;
-	friend class Game_Player_Info_Data_Packet;
+	friend struct Game_Game_Class_Data_Packet;
+	friend struct Game_Player_Info_Data_Packet;
 	friend struct Game_Loader;
 	friend struct ::Game_Main_Menu_Load_Game;
 	friend struct ::WLApplication;
 
 	// This friend is for legacy reasons and should probably be removed
 	// at least after summer 2008, maybe even earlier.
-	friend class Game_Interactive_Player_Data_Packet;
+	friend struct Game_Interactive_Player_Data_Packet;
 
 	Game();
 	~Game();
@@ -147,6 +147,7 @@ struct Game : public Editor_Game_Base {
 	void send_player_command (Widelands::PlayerCommand &);
 
 	void send_player_bulldoze   (PlayerImmovable &, bool recurse = false);
+	void send_player_dismantle  (PlayerImmovable &);
 	void send_player_build      (int32_t, Coords, Building_Index);
 	void send_player_build_flag (int32_t, Coords);
 	void send_player_build_road (int32_t, Path &);
@@ -156,7 +157,7 @@ struct Game : public Editor_Game_Base {
 	void send_player_set_ware_priority
 		(PlayerImmovable &, int32_t type, Ware_Index index, int32_t prio);
 	void send_player_set_ware_max_fill
-		(PlayerImmovable &, Ware_Index index, int32_t);
+		(PlayerImmovable &, Ware_Index index, uint32_t);
 	void send_player_change_training_options(TrainingSite &, int32_t, int32_t);
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
@@ -244,11 +245,6 @@ private:
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_string;
-
-private:
-	// no copying
-	Game(const Game &);
-	Game & operator= (const Game &);
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -23,22 +23,23 @@
 #include <vector>
 
 #include "cookie_priority_queue.h"
+#include "logic/wareworker.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
 struct Flag;
-class RoutingNode;
+struct RoutingNode;
 struct Road;
 
-/***
- * /todo The get functions should be declared const
+/**
+ * @see RoutingNode::get_neighbours
  */
 struct RoutingNodeNeighbour {
 	RoutingNodeNeighbour(RoutingNode * const f, int32_t const cost) :
 		m_nb(f), m_cost(cost)
 	{}
-	RoutingNode * get_neighbour() {
+	RoutingNode * get_neighbour() const {
 		return m_nb;
 	}
 	int32_t get_cost() const {
@@ -66,10 +67,6 @@ struct RoutingNode {
 	};
 	typedef cookie_priority_queue<RoutingNode, LessCost> Queue;
 
-// The variables are only protected so that Test classes can use them
-protected:
-	friend struct Economy;
-	friend struct Router;
 	uint32_t      mpf_cycle;
 	Queue::cookie mpf_cookie;
 	int32_t       mpf_realcost; ///< real cost of getting to this flag
@@ -89,8 +86,7 @@ public:
 	Queue::cookie & cookie() {return mpf_cookie;}
 
 	virtual Flag & base_flag() = 0;
-	virtual int32_t get_waitcost() const = 0;
-	virtual void get_neighbours(RoutingNodeNeighbours &) = 0;
+	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours &) = 0;
 	virtual Coords get_position() const = 0;
 };
 

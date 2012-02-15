@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,6 +22,7 @@
 
 #include "logic/requirements.h"
 #include "trackptr.h"
+#include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
@@ -63,18 +64,12 @@ struct Request : public Trackable {
 	typedef void (*callback_t)
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
-	enum Type {
-		WARE    = 0,
-		WORKER  = 1,
-		INVALID = 2
-	};
-
-	Request(PlayerImmovable & target, Ware_Index, callback_t, Type);
+	Request(PlayerImmovable & target, Ware_Index, callback_t, WareWorker);
 	~Request();
 
 	PlayerImmovable & target() const throw () {return m_target;}
 	Ware_Index get_index() const {return m_index;}
-	int32_t get_type() const {return m_type;}
+	WareWorker get_type() const {return m_type;}
 	uint32_t get_count() const {return m_count;}
 	uint32_t get_open_count() const {return m_count - m_transfers.size();}
 	bool is_open() const {return m_transfers.size() < m_count;}
@@ -117,7 +112,7 @@ private:
 
 	typedef std::vector<Transfer *> TransferList;
 
-	Type              m_type;
+	WareWorker m_type;
 
 	PlayerImmovable & m_target;            //  who requested it?
 	//  Copies of m_target of various pointer types, to avoid expensive

@@ -1,14 +1,13 @@
 size=big
 output=cloth
-buildable=no
 
 [aihints]
 build_material=false
 
-# [buildcost]
-# trunk=5
-# raw_stone=2
-# thatchreed=2
+[buildcost]
+trunk=5
+raw_stone=2
+thatchreed=2
 
 [working positions]
 weaver=1
@@ -20,7 +19,7 @@ thatchreed=8
 work=_Work
 
 [work]
-# no need to check whether cloth is needed because it is only used here
+return=skipped when economy needs thatchreed and not economy needs cloth
 animate=working 45000
 consume=thatchreed
 produce=cloth
@@ -29,9 +28,9 @@ produce=cloth
 pics=i_??.png
 hotspot=36 74
 
-# [build]
-# pics=b_??.png
-# hotspot=36 74
+[build]
+pics=b_??.png
+hotspot=36 74
 
 [working]
 pics=w_??.png

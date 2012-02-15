@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -87,7 +87,7 @@ Interactive_Base::Interactive_Base
 	m_avg_usframetime             (0),
 	m_jobid                       (Overlay_Manager::Job_Id::Null()),
 	m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
-	m_buildroad                   (false),
+	m_buildroad                   (0),
 	m_road_build_player           (0),
 	m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
 	m_label_speed
@@ -100,7 +100,7 @@ Interactive_Base::Interactive_Base
 		(boost::bind(&QuickNavigation::view_changed,
 		 m->quicknavigation.get(), _1, _2));
 
-	changeview.set(this, &Interactive_Base::mainview_move);
+	changeview.connect(boost::bind(&Interactive_Base::mainview_move, this, _1, _2));
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance (global_s.get_int("panel_snap_distance", 10));
@@ -483,7 +483,7 @@ void Interactive_Base::toggle_minimap() {
 	}
 	else {
 		m->mm = new MiniMap(*this, &m->minimap);
-		m->mm->warpview.set(this, &Interactive_Base::minimap_warp);
+		m->mm->warpview.connect(boost::bind(&Interactive_Base::minimap_warp, this, _1, _2));
 
 		// make sure the viewpos marker is at the right pos to start with
 		const Point p = get_viewpoint();

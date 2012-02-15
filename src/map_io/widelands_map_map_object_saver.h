@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -87,6 +87,8 @@ private:
 	uint32_t m_nr_wares;
 	uint32_t m_nr_immovables;
 	uint32_t m_nr_battles;
+	uint32_t m_nr_fleets;
+	uint32_t m_nr_portdocks;
 	uint32_t m_lastserial;
 };
 

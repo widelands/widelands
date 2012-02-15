@@ -131,7 +131,7 @@ $)
             return self._get_stripped_macros(fn,self._get_stripped_comments_and_strings(fn,self._get_plain(fn,data)))
 
         # Error checking, we should never be here
-        raise RuntimeError, "strip_macros can't be true when strip_strings_and_comments isn't!"
+        raise RuntimeError("strip_macros can't be true when strip_strings_and_comments isn't!")
 
 
 class CheckingRule(object):
@@ -202,7 +202,9 @@ def _parse_rules():
 
     for filename in rule_files:
         variables = {}
-        execfile(filename,variables)
+        fh = open(filename, "r")
+        exec(fh.read()+"\n", variables)
+        fh.close()
 
         rule = CheckingRule(os.path.basename(filename), variables)
         checkers.append( rule )
@@ -274,13 +276,13 @@ class CodeChecker(object):
 
             output += "%s:%s: %s\n" % (fn,l,msg)
 
-        print output.rstrip()
+        print(output.rstrip())
 
         return output
 
     def check_file(self,fn, print_errors = True):
         if print_errors and fn in self._cache:
-            print self._cache[fn].rstrip()
+            print(self._cache[fn].rstrip())
             return
         errors = []
 
@@ -318,24 +320,22 @@ if __name__ == '__main__':
     import getopt
 
     def usage():
-        print "Usage: %s <options> <files>" % os.path.basename(sys.argv[0])
-        print """
+        print("Usage: %s <options> <files>" % os.path.basename(sys.argv[0]))
+        print("""
  -h,   --help            Print help and exit
  -c,   --color           Print warnings in color
  -b,   --benchmark       Benchmark each rule
  -p,   --profile         Run with cProfile. Creates "Profile.prof" file
-"""
+""")
 
     def check_files(files,color,benchmark):
         d = CodeChecker( benchmark = benchmark, color = color )
         for filename in files:
-#            print "Checking %s ..." % filename
             errors = d.check_file(filename)
 
         # Print benchmark results
         if benchmark:
-            print
-            print "Benchmark results:"
+            print("\nBenchmark results:")
 
             res = d.benchmark_results
             ctime = sum( l[0] for l in res )
@@ -344,7 +344,7 @@ if __name__ == '__main__':
                 per = time/ctime * 100.
                 percentage = ("%.2f%%"% per).rjust(8)
                 time = ("%4.2fms"% (time*1000.)).rjust(8)
-                print "%s %s    %s" % (percentage,time,n)
+                print("%s %s    %s" % (percentage,time,n))
 
     def main():
         opts, files = getopt.getopt(sys.argv[1:], "hbcp", ["help", "benchmark","color", "colour", "profile"])

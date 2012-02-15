@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -82,6 +82,8 @@ public:
 	void set_transfer(Game &, Transfer &);
 	void cancel_transfer(Game &);
 	Transfer * get_transfer() const {return m_transfer;}
+
+	virtual void log_general_info(const Editor_Game_Base & egbase);
 
 private:
 	Object_Ptr        m_location;

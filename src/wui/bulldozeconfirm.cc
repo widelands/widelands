@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -45,48 +45,13 @@ struct BulldozeConfirm : public UI::Window {
 	}
 
 	virtual void think();
-	void close_window() {die();}
+
 private:
+	void ok();
+
 	Widelands::Object_Ptr m_building;
 	Widelands::Object_Ptr m_todestroy;
-
-	struct Message : public UI::Multiline_Textarea {
-		Message(BulldozeConfirm & parent, Widelands::Building const & building) :
-			UI::Multiline_Textarea
-				(&parent,
-				 0, 0, 200, 74,
-				 (format(_("Do you really want to destroy this %s?"))
-				  % building.descname())
-				 	.str(),
-				 UI::Align_Center)
-		{}
-	} m_message;
-
-	struct OK     : public UI::Button {
-		OK(BulldozeConfirm & parent) :
-			UI::Button
-				(&parent, "ok",
-				 6, 80, 80, 34,
-				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_okay.png"))
-		{}
-		void clicked();
-	} m_ok;
-
-	struct Cancel : public UI::Button {
-		Cancel(BulldozeConfirm & parent) :
-			UI::Button
-				(&parent, "abort",
-				 114, 80, 80, 34,
-				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"))
-		{}
-		void clicked() {
-			ref_cast<BulldozeConfirm, UI::Panel>(*get_parent()).close_window();
-		}
-	} m_cancel;
 };
-
 
 /*
 ===============
@@ -104,13 +69,32 @@ BulldozeConfirm::BulldozeConfirm
 	UI::Window
 		(&parent, "bulldoze_confirm", 0, 0, 200, 120, _("Destroy building?")),
 	m_building (&building),
-	m_todestroy(todestroy ? todestroy : &building),
-	m_message  (*this, building),
-	m_ok       (*this),
-	m_cancel   (*this)
+	m_todestroy(todestroy ? todestroy : &building)
 {
+	new UI::Multiline_Textarea
+		(this,
+		 0, 0, 200, 74,
+		 (format(_("Do you really want to destroy this %s?")) % building.descname()).str(),
+		 UI::Align_Center);
+
+	UI::Button * okbtn =
+		new UI::Button
+			(this, "ok",
+			 6, 80, 80, 34,
+			 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
+			 g_gr->get_picture(PicMod_Game, "pics/menu_okay.png"));
+	okbtn->sigclicked.connect(boost::bind(&BulldozeConfirm::ok, this));
+
+	UI::Button * cancelbtn =
+		new UI::Button
+			(this, "abort",
+			 114, 80, 80, 34,
+			 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
+			 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"));
+	cancelbtn->sigclicked.connect(boost::bind(&BulldozeConfirm::die, this));
+
 	center_to_parent();
-	m_cancel.center_mouse();
+	cancelbtn->center_mouse();
 }
 
 
@@ -130,38 +114,32 @@ void BulldozeConfirm::think()
 		 not building  ||
 		 not iaplayer().can_act(building->owner().player_number())
 		 or not
-		 (building->get_playercaps()
-		  and (1 << Widelands::Building::PCap_Bulldoze)))
+		 (building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
 		die();
 }
 
 
-/*
-===============
-Issue the CMD_BULLDOZE command for this building.
-===============
-*/
-void BulldozeConfirm::OK::clicked()
+/**
+ * The "Ok" button was clicked, so issue the CMD_BULLDOZE command for this building.
+ */
+void BulldozeConfirm::ok()
 {
-	BulldozeConfirm & parent =
-		ref_cast<BulldozeConfirm, UI::Panel>(*get_parent());
-	Interactive_Player & iaplayer = parent.iaplayer();
-	Widelands::Game & game   = iaplayer.game();
-	upcast(Widelands::Building,        building,  parent.m_building.get(game));
-	upcast(Widelands::PlayerImmovable, todestroy, parent.m_todestroy.get(game));
+	Widelands::Game & game   = iaplayer().game();
+	upcast(Widelands::Building,        building,  m_building.get(game));
+	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(game));
 
 	if
 		(todestroy &&
 		 building &&
-		 iaplayer.can_act(building->owner().player_number()) and
-		 building->get_playercaps() & (1 << Widelands::Building::PCap_Bulldoze))
+		 iaplayer().can_act(building->owner().player_number()) and
+		 building->get_playercaps() & Widelands::Building::PCap_Bulldoze)
 	{
 		game.send_player_bulldoze
 			(*todestroy, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
-		iaplayer.need_complete_redraw();
+		iaplayer().need_complete_redraw();
 	}
 
-	parent.close_window();
+	die();
 }
 
 

@@ -6,7 +6,7 @@ enhanced_building=yes
 
 [buildcost]
 blackwood=5
-grout=3
+grout=2
 
 [idle]
 pics=barrier_i_??.png

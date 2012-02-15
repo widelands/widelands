@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -101,7 +101,7 @@ void Map_Players_Messages_Data_Packet::Read
 							throw game_data_error
 								(_
 								 	("the value %u is not allowed as duration; it is "
-								 	 "a specal value meaning forever, which is the "
+								 	 "a special value meaning forever, which is the "
 								 	 "default; omit the duration key to make the "
 								 	 "message exist forever"),
 								 Forever());

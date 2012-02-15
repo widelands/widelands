@@ -1,0 +1,17 @@
+size=port
+conquers=5
+heal_per_second=2
+
+[buildcost]
+trunk=3
+blackwood=3
+raw_stone=5
+grout=2
+iron=2
+thatchreed=4
+gold=2
+
+[idle]
+pics=port_i_??.png  # ???
+hotspot=52 64
+playercolor=true

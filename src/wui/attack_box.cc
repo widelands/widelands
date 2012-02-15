@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -105,22 +105,22 @@ UI::Textarea & AttackBox::add_text
 	return result;
 }
 
-UI::Callback_Button & AttackBox::add_button
+UI::Button & AttackBox::add_button
 	(UI::Box           & parent,
 	 char        const * const text,
 	 void         (AttackBox::*fn)(),
 	 std::string const & tooltip_text)
 {
-	UI::Callback_Button & button =
-		*new UI::Callback_Button
+	UI::Button * button =
+		new UI::Button
 			(&parent, text,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-			 boost::bind(fn, boost::ref(*this)),
 			 text,
 			 tooltip_text);
-	parent.add(&button, Box::AlignCenter);
-	return button;
+	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	parent.add(button, Box::AlignCenter);
+	return *button;
 }
 
 void AttackBox::update_attack() {
@@ -198,7 +198,7 @@ void AttackBox::init() {
 				 "pics/but2.png",
 				 _("Number of soldiers"));
 
-		m_slider_soldiers->changed.set(this, &AttackBox::update_attack);
+		m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));
 
 		sprintf(buf, "%u", max_attackers);
 		m_add_soldiers =
@@ -237,7 +237,7 @@ void AttackBox::init() {
 				 m_pl->get_retreat_percentage(),
 				 "pics/but2.png",
 				 _("Supported damage before retreat"));
-		m_slider_retreat->changed.set(this, &AttackBox::update_attack);
+		m_slider_retreat->changed.connect(boost::bind(&AttackBox::update_attack, this));
 		add_text(linebox, _("Once injured"));
 		m_slider_retreat->set_enabled(m_pl->is_retreat_change_allowed());
 		linebox.set_visible(m_pl->is_retreat_change_allowed());

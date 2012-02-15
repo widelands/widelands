@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,16 +13,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #ifndef FULLSCREEN_MENU_MULTIPLAYER_H
 #define FULLSCREEN_MENU_MULTIPLAYER_H
 
-#include "network/network_ggz.h"
-
-#if HAVE_GGZ
+#include "network/internet_gaming.h"
 
 #include "base.h"
 
@@ -38,8 +36,8 @@ struct Fullscreen_Menu_MultiPlayer : public Fullscreen_Menu_Base {
 
 	enum {Back = dying_code, Metaserver, Lan};
 
-	void showGGZLogin();
-	void ggzLogin();
+	void showInternetLogin();
+	void internetLogin();
 	std::string get_nickname() {return m_nickname;}
 	std::string get_password() {return m_password;}
 	bool registered()          {return m_register;}
@@ -51,18 +49,16 @@ private:
 	uint32_t                                            m_fs;
 	std::string                                         m_fn;
 	UI::Textarea                                        title;
-	UI::Callback_Button                             metaserver;
-	UI::Callback_Button                           * showloginbox;
-	UI::Callback_Button                             lan;
-	UI::Callback_Button                             back;
+	UI::Button                             metaserver;
+	UI::Button                           * showloginbox;
+	UI::Button                             lan;
+	UI::Button                             back;
 
-	// Values from ggz login window
+	// Values from internet login window
 	std::string m_nickname;
 	std::string m_password;
 	bool        m_register;
 	bool        m_auto_log;
 };
-
-#endif // if HAVE_GGZ
 
 #endif

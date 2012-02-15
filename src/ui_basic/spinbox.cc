@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -59,10 +59,10 @@ struct SpinBoxImpl {
 
 	/// The UI parts
 	Textarea * text;
-	Callback_Button * butPlus;
-	Callback_Button * butMinus;
-	Callback_Button * butTenPlus;
-	Callback_Button * butTenMinus;
+	Button * butPlus;
+	Button * butMinus;
+	Button * butTenPlus;
+	Button * butTenMinus;
 };
 
 /**
@@ -103,45 +103,45 @@ SpinBox::SpinBox
 	}
 
 	char buf[64];
-	snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
+	snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
 
 	sbi->text = new UI::Textarea
 		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
 	sbi->butPlus =
-		new Callback_Button
+		new Button
 			(this, "+",
-			 butw * 21 / 10, 0, butw, butw,
-			 sbi->background,
-			 boost::bind(&SpinBox::changeValue, boost::ref(*this), 1),
-			 "+", _("Increase the value"),
-			 true, false);
-	sbi->butMinus =
-		new Callback_Button
-			(this, "-",
 			 w - butw * 31 / 10, 0, butw, butw,
 			 sbi->background,
-			 boost::bind(&SpinBox::changeValue, boost::ref(*this), -1),
+			 "+", _("Increase the value"),
+			 true, false);
+	sbi->butPlus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), 1));
+	sbi->butMinus =
+		new Button
+			(this, "-",
+			 butw * 21 / 10, 0, butw, butw,
+			 sbi->background,
 			 "-", _("Decrease the value"),
 			 true, false);
+	sbi->butMinus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), -1));
 	sbi->butPlus->set_repeating(true);
 	sbi->butMinus->set_repeating(true);
 	if (m_big) {
 		sbi->butTenPlus =
-			new Callback_Button
+			new Button
 				(this, "++",
-				 0, 0, butw * 2, butw,
-				 sbi->background,
-				 boost::bind(&SpinBox::changeValue, boost::ref(*this), 10),
-				 "++", _("Increase the value by 10"),
-				 true, false);
-		sbi->butTenMinus =
-			new Callback_Button
-				(this, "--",
 				 w - 2 * butw, 0, butw * 2, butw,
 				 sbi->background,
-				 boost::bind(&SpinBox::changeValue, boost::ref(*this), -10),
+				 "++", _("Increase the value by 10"),
+				 true, false);
+		sbi->butTenPlus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), 10));
+		sbi->butTenMinus =
+			new Button
+				(this, "--",
+				 0, 0, butw * 2, butw,
+				 sbi->background,
 				 "--", _("Decrease the value by 10"),
 				 true, false);
+		sbi->butTenMinus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), -10));
 		sbi->butTenPlus->set_repeating(true);
 		sbi->butTenMinus->set_repeating(true);
 	}
@@ -161,7 +161,7 @@ void SpinBox::update()
 		 ++i)
 		if (i.empty()) {
 			char buf[64];
-			snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
+			snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
 			sbi->text->set_text(buf);
 			break;
 		} else if (i.current->value == sbi->value) {
@@ -172,8 +172,8 @@ void SpinBox::update()
 	sbi->butMinus->set_enabled(sbi->min < sbi->value);
 	sbi->butPlus ->set_enabled           (sbi->value < sbi->max);
 	if (m_big) {
-		sbi->butTenMinus->set_enabled(sbi->min + 10 < sbi->value);
-		sbi->butTenPlus->set_enabled(sbi->value < sbi->max - 10);
+		sbi->butTenMinus->set_enabled(sbi->min < sbi->value);
+		sbi->butTenPlus ->set_enabled           (sbi->value < sbi->max);
 	}
 }
 
@@ -193,6 +193,10 @@ void SpinBox::changeValue(int32_t const value)
 void SpinBox::setValue(int32_t const value)
 {
 	sbi->value = value;
+	if (sbi->value > sbi->max)
+		sbi->value = sbi->max;
+	else if (sbi->value < sbi->min)
+		sbi->value = sbi->min;
 	update();
 }
 
@@ -324,7 +328,7 @@ void SpinBox::remove_replacement(int32_t value)
 {
 	if (int32_t i = findReplacement(value) >= 0) {
 		char buf[64];
-		snprintf(buf, sizeof(buf), "%i%s", value, sbi->unit.c_str());
+		snprintf(buf, sizeof(buf), "%i %s", value, sbi->unit.c_str());
 		sbi->valrep[i].text = buf;
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 
@@ -22,6 +22,9 @@
 #include "mouse_constants.h"
 #include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+
 
 #include <cmath>
 
@@ -68,13 +71,10 @@ Slider::Slider
 	m_x_gap          (x_gap),
 	m_y_gap          (y_gap),
 	m_bar_size       (bar_size),
-	m_cursor_pos
-		(m_value <= m_min_value ? 0              :
-		 m_value >= m_max_value ? get_bar_size() :
-		 (m_value - m_min_value) * get_bar_size() / (m_max_value - m_min_value)),
 	m_cursor_size (cursor_size)
 {
 	set_think(false);
+	calc_cursor_pos();
 }
 
 void Slider::set_value(int32_t new_value)
@@ -83,15 +83,30 @@ void Slider::set_value(int32_t new_value)
 
 	if (new_value != m_value) {
 		m_value = new_value;
-		m_cursor_pos =
-			m_value <= m_min_value ? 0              :
-			m_value >= m_max_value ? get_bar_size() :
-			(m_value - m_min_value) * get_bar_size()
-			/
-			(m_max_value - m_min_value);
+		calc_cursor_pos();
 		send_value_changed();
 		update();
 	}
+}
+
+void Slider::calc_cursor_pos() {
+	if (m_max_value == m_min_value) {
+		m_cursor_pos = m_min_value;
+	} else if (m_value == m_min_value) {
+		m_cursor_pos = 0;
+	} else if (m_value == m_max_value) {
+		m_cursor_pos = get_bar_size();
+	} else {
+		m_cursor_pos =
+			(m_value - m_min_value) * get_bar_size()
+			/
+			(m_max_value - m_min_value);
+	}
+}
+
+void Slider::layout() {
+	Panel::layout();
+	calc_cursor_pos();
 }
 
 /**
@@ -178,8 +193,8 @@ void Slider::draw_cursor
  */
 void Slider::send_value_changed()
 {
-	changed.call();
-	changedto.call(m_value);
+	changed();
+	changedto(m_value);
 }
 
 
@@ -242,12 +257,7 @@ bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 		m_pressed = false;
 
 		//  cursor position: align to integer value
-		m_cursor_pos =
-			m_value == m_min_value ? 0              :
-			m_value == m_max_value ? get_bar_size() :
-			(m_value - m_min_value) * get_bar_size()
-			/
-			(m_max_value - m_min_value);
+		calc_cursor_pos();
 
 		update();
 	}
@@ -343,12 +353,16 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 	m_cursor_pos = pointer - ofs;
 
 	//  absolute value
-	m_value =
-		static_cast<int32_t>
-			(rint
-			 	(static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
-			 	 /
-			 	 get_bar_size()));
+	if (get_bar_size() == 0) {
+		m_value = 0;
+	} else {
+		m_value =
+			static_cast<int32_t>
+				(rint
+					(static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
+					 /
+					 get_bar_size()));
+	}
 
 	//  relative value in bounds
 	if (m_value < m_min_value)
@@ -361,6 +375,12 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 
 	m_relative_move = ofs;
 	update();
+}
+
+void VerticalSlider::layout() {
+	m_x_gap = get_w() / 2 - 2;
+	m_bar_size = get_h() - m_cursor_size;
+	Slider::layout();
 }
 
 
@@ -377,18 +397,20 @@ void HorizontalSlider::draw(RenderTarget & dst)
 {
 	RGBAColor black(0, 0, 0, 255);
 
-	dst.brighten_rect //  bottom edge
-		(Rect(Point(get_x_gap(), get_h() / 2), get_bar_size(), 2),
-		 BUTTON_EDGE_BRIGHT_FACTOR);
-	dst.brighten_rect //  right edge
-		(Rect(Point(get_x_gap() + get_bar_size() - 2, get_y_gap()), 2, 2),
-		 BUTTON_EDGE_BRIGHT_FACTOR);
+	if (get_bar_size() > 0) {
+		dst.brighten_rect //  bottom edge
+			(Rect(Point(get_x_gap(), get_h() / 2), get_bar_size(), 2),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect //  right edge
+			(Rect(Point(get_x_gap() + get_bar_size() - 2, get_y_gap()), 2, 2),
+			 BUTTON_EDGE_BRIGHT_FACTOR);
 
-	//  top edge
-	dst.fill_rect
-		(Rect(Point(get_x_gap(), get_y_gap()),     get_bar_size() - 1, 1), black);
-	dst.fill_rect
-		(Rect(Point(get_x_gap(), get_y_gap() + 1), get_bar_size() - 2, 1), black);
+		//  top edge
+		dst.fill_rect
+			(Rect(Point(get_x_gap(), get_y_gap()),     get_bar_size() - 1, 1), black);
+		dst.fill_rect
+			(Rect(Point(get_x_gap(), get_y_gap() + 1), get_bar_size() - 2, 1), black);
+	}
 
 	//  left edge
 	dst.fill_rect(Rect(Point(get_x_gap(),     get_y_gap()), 1, 4), black);
@@ -442,6 +464,11 @@ bool HorizontalSlider::handle_mousepress
 	} else return false;
 }
 
+void HorizontalSlider::layout() {
+	m_y_gap = get_h() / 2 - 2;
+	m_bar_size = get_w() - m_cursor_size;
+	Slider::layout();
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 //                               VERTICAL                                     //
@@ -518,5 +545,75 @@ bool VerticalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	} else return false;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//                               DISCRETE                                     //
+////////////////////////////////////////////////////////////////////////////////
+
+DiscreteSlider::DiscreteSlider
+	(Panel * const parent,
+	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 const std::vector<std::string> labels_in,
+	 uint32_t m_value,
+	 const PictureID background_picture_id,
+	 const std::string & tooltip_text,
+	 const uint32_t cursor_size,
+	 const bool enabled)
+	:
+	Panel (parent, x, y, w, h, tooltip_text),
+	slider
+		(this,
+		 // here, we take into account the h_gap introduced by HorizontalSlider
+		 w / (2 * labels_in.size()) - cursor_size / 2, 0,
+		 w - (w / labels_in.size()) + cursor_size,
+		 h - UI::Font::ui_small()->lineskip() - 2,
+		 0, labels_in.size() - 1, m_value,
+		 background_picture_id,
+		 tooltip_text,
+		 cursor_size,
+		 enabled),
+	labels(labels_in)
+{
+	slider.changed.connect(changed);
+	slider.changedto.connect(changedto);
+}
+
+/**
+ * \brief Redraw the slide bar. The discrete horizontal bar is painted.
+ *
+ * \param dst The graphic destination.
+ */
+void DiscreteSlider::draw(RenderTarget & dst)
+{
+	Panel::draw(dst);
+
+	UI::TextStyle ts = UI::TextStyle::ui_small();
+
+	uint32_t gap_1 = get_w() / (2 * labels.size());
+	uint32_t gap_n = get_w() / labels.size();
+
+	for (uint32_t i = 0; i < labels.size(); i++) {
+		UI::g_fh->draw_text
+			(dst, ts,
+			 Point(gap_1 + i * gap_n, get_h() + 2),
+			 labels[i], UI::Align_BottomCenter);
+	}
+
+}
+
+void DiscreteSlider::set_labels(const std::vector<std::string> labels_in) {
+	labels = labels_in;
+	slider.set_max_value(labels_in.size() - 1);
+	layout();
+}
+
+void DiscreteSlider::layout() {
+	uint32_t w = get_w();
+	uint32_t h = get_h();
+	slider.set_pos(Point(w / (2 * labels.size()) - slider.m_cursor_size / 2, 0));
+	slider.set_size
+		(w - (w / labels.size()) + slider.m_cursor_size,
+		 h - UI::Font::ui_small()->lineskip() - 2);
+	Panel::layout();
+}
 
 }

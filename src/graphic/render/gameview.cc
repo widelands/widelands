@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -157,7 +157,7 @@ void GameView::rendermap
 		uint32_t count = dx;
 
 		while (count--) {
-			const FCoords l = f, bl = br;
+			const FCoords bl = br;
 			const Player::Field &  f_player_field =  *r_player_field;
 			const Player::Field & bl_player_field = *br_player_field;
 			f = r;
@@ -282,7 +282,6 @@ void GameView::rendermap
 				int32_t count = dx2;
 
 				while (count--) {
-					const FCoords l = f, bl = br;
 					f = r;
 					const Player::Field & f_player_field = *r_player_field;
 					move_r(mapwidth, tr);
@@ -633,7 +632,7 @@ void GameView::rendermap
 		uint32_t count = dx;
 
 		while (count--) {
-			const FCoords l = f, bl = br;
+			const FCoords bl = br;
 			f = r;
 			const int32_t f_posx = r_posx, bl_posx = br_posx;
 			const Texture & l_r_texture = *f_r_texture;
@@ -739,7 +738,6 @@ void GameView::rendermap
 				int32_t count = dx2;
 
 				while (count--) {
-					const FCoords l = f, bl = br;
 					f = r;
 					move_r(mapwidth, tr);
 					move_r(mapwidth,  r,  r_index);

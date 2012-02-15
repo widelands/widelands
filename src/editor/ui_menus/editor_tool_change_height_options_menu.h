@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -39,10 +39,10 @@ struct Editor_Tool_Change_Height_Options_Menu :
 private:
 	Editor_Increase_Height_Tool & m_increase_tool;
 	UI::Textarea                  m_change_by_label;
-	UI::Callback_Button       m_change_by_increase, m_change_by_decrease;
+	UI::Button       m_change_by_increase, m_change_by_decrease;
 	UI::Textarea                  m_change_by_value;
 	UI::Textarea                  m_set_to_label;
-	UI::Callback_Button       m_set_to_increase, m_set_to_decrease;
+	UI::Button       m_set_to_increase, m_set_to_decrease;
 	UI::Textarea                  m_set_to_value;
 
 	void clicked_change_by_decrement();

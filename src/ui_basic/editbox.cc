@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -44,9 +44,6 @@ struct EditBoxImpl {
 	/// Background tile style.
 	PictureID background;
 
-	/// ID. Only used for the id-flavoured signals.
-	int32_t id;
-
 	/// Maximum number of characters in the input
 	uint32_t maxLength;
 
@@ -67,7 +64,6 @@ EditBox::EditBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const PictureID & background,
-	 const int32_t id,
 	 Align _align)
 	:
 	Panel(parent, x, y, w, h),
@@ -82,7 +78,6 @@ EditBox::EditBox
 	m->fontsize = UI_FONT_SIZE_SMALL;
 	m->fontcolor = UI_FONT_CLR_FG;
 
-	m->id = id;
 	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
 	m->caret = 0;
 	m->scrolloffset = 0;
@@ -230,8 +225,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 	if (down) {
 		switch (code.sym) {
 		case SDLK_ESCAPE:
-			cancel.call();
-			cancelid.call(m->id);
+			cancel();
 			return true;
 
 		case SDLK_KP_ENTER:
@@ -245,8 +239,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					m_history_position = -1;
 				}
 			}
-			ok.call();
-			okid.call(m->id);
+			ok();
 			return true;
 
 		case SDLK_KP_PERIOD:
@@ -267,8 +260,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					m->text.erase(m->text.begin() + m->caret);
 				m->text.erase(m->text.begin() + m->caret);
 				check_caret();
-				changed.call();
-				changedid.call(m->id);
+				changed();
 				update();
 			}
 			return true;
@@ -419,8 +411,7 @@ void EditBox::insert(SDL_keysym const code)
 				(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
 		}
 		check_caret();
-		changed.call();
-		changedid.call(m->id);
+		changed();
 		update();
 	}
 }

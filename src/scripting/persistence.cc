@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -138,7 +138,7 @@ static const char * m_persistent_globals[] = {
 	"os", "package", "pairs", "pcall", "print", "rawequal",
 	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
 	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", "_", "set_textdomain", "coroutine.yield", 0
+	"string", "use", "_", "set_textdomain", "get_build_id", "coroutine.yield", 0
 };
 
 /**

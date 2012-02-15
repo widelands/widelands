@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -195,6 +195,20 @@ void Object_Manager::remove(Map_Object & obj)
 	m_objects.erase(obj.m_serial);
 }
 
+/*
+ * Return the list of all serials currently in use
+ */
+std::vector<Serial> Object_Manager::all_object_serials_ordered () const throw () {
+	std::vector<Serial> rv;
+
+	container_iterate_const(objmap_t, m_objects, o)
+		rv.push_back(o->first);
+
+	std::sort(rv.begin(), rv.end());
+
+	return rv;
+}
+
 Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
 {
 	if (!m_serial)
@@ -205,7 +219,11 @@ Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
 	return obj;
 }
 
-Map_Object const * Object_Ptr::get(Editor_Game_Base const & egbase) const {
+// This version also returns a pointer to a non-const object,
+// because it is logically the pointer that is const, not the object
+// that is pointed to.
+// That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
+Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase) const {
 	return m_serial ? egbase.objects().get_object(m_serial) : 0;
 }
 

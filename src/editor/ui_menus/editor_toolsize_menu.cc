@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -41,21 +41,22 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 	m_textarea(this, 5, 5, 150, 10, std::string(), UI::Align_HCenter),
 	m_increase
 		(this, "incr",
-		 60, 25, 20, 20,
+		 80, 25, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Toolsize_Menu::increase_radius, boost::ref(*this)),
 		 std::string(),
 		 parent.get_sel_radius() < MAX_TOOL_AREA),
 	m_decrease
 		(this, "decr",
-		 80, 25, 20, 20,
+		 60, 25, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Toolsize_Menu::decrease_radius, boost::ref(*this)),
 		 std::string(),
 		 0 < parent.get_sel_radius())
 {
+	m_increase.sigclicked.connect(boost::bind(&Editor_Toolsize_Menu::increase_radius, boost::ref(*this)));
+	m_decrease.sigclicked.connect(boost::bind(&Editor_Toolsize_Menu::decrease_radius, boost::ref(*this)));
+
 	m_increase.set_repeating(true);
 	m_decrease.set_repeating(true);
 	update(parent.get_sel_radius());

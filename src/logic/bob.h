@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -125,7 +125,7 @@ struct Bob : public Map_Object {
 	typedef void (Bob::*PtrSignal)(Game &, State &, std::string const &);
 	enum Type {CRITTER, WORKER, SHIP};
 
-	/// \see class Bob for in-depth explanation
+	/// \see struct Bob for in-depth explanation
 	struct Task {
 		char const * name;
 
@@ -159,7 +159,7 @@ struct Bob : public Map_Object {
 	 * of a function, while \ref State represents the stackframe of an
 	 * actual execution of the function.
 	 *
-	 * \see class Bob for in-depth explanation
+	 * \see struct Bob for in-depth explanation
 	 */
 	struct State {
 		State(const Task * const the_task = 0) :
@@ -383,7 +383,7 @@ private:
 
 	// saving and loading
 protected:
-	class Loader : public Map_Object::Loader {
+	struct Loader : public Map_Object::Loader {
 	public:
 		Loader();
 

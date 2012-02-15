@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -581,6 +581,8 @@ bool Game::run
 
 		get_ibase()->run();
 
+		m_state = gs_ending;
+
 		g_sound_handler.change_music("menu", 1000, 0);
 
 		cleanup_objects();
@@ -746,6 +748,14 @@ void Game::send_player_bulldoze (PlayerImmovable & pi, bool const recurse)
 		 	(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
+void Game::send_player_dismantle (PlayerImmovable & pi)
+{
+	send_player_command
+		(*new Cmd_DismantleBuilding
+		 	(get_gametime(), pi.owner().player_number(), pi));
+}
+
+
 void Game::send_player_build
 	(int32_t const pid, Coords const coords, Building_Index const id)
 {
@@ -806,7 +816,7 @@ void Game::send_player_set_ware_priority
 void Game::send_player_set_ware_max_fill
 	(PlayerImmovable &       imm,
 	 Ware_Index        const index,
-	  int32_t          const max_fill)
+	 uint32_t          const max_fill)
 {
 	send_player_command
 		(*new Cmd_SetWareMaxFill

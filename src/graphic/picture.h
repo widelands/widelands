@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 #include <string>
+
+#include <boost/noncopyable.hpp>
 
 #include "picture_id.h"
 
@@ -32,7 +34,7 @@ struct Surface;
  * Interface to a bitmap that can act as the source of a rendering
  * operation.
  */
-struct IPicture {
+struct IPicture : boost::noncopyable {
 	IPicture() {}
 	virtual ~IPicture() {}
 
@@ -42,11 +44,6 @@ struct IPicture {
 	virtual uint32_t get_h() = 0;
 
 	virtual IPixelAccess & pixelaccess() = 0;
-
-private:
-	// forbid copying
-	IPicture(const IPicture &);
-	IPicture & operator= (const IPicture &);
 
 public:
 	static const PictureID & null();

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -25,6 +25,7 @@
 #include "checkstep.h"
 #include "economy/flag.h"
 #include "editor_game_base.h"
+#include "findbob.h"
 #include "findimmovable.h"
 #include "game.h"
 #include "game_data_error.h"
@@ -477,7 +478,6 @@ Point Soldier::calc_drawpos
 		return Bob::calc_drawpos(game, pos);
 	}
 
-	const FCoords end = get_position();
 	bool moving = false;
 	Point spos = pos, epos = pos;
 
@@ -960,7 +960,8 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
 		if (upcast(Soldier, soldier, bob)) {
 			return
 				soldier->get_current_hitpoints() and
-				soldier->is_attacking_player(game, player);
+				soldier->is_attacking_player(game, player) and
+				soldier->owner().is_hostile(player);
 		}
 		return false;
 	}
@@ -1629,7 +1630,7 @@ bool Soldier::checkNodeBlocked
 	if (!foundopponent && (foundbattle || foundsoldier)) {
 		if (commit && !foundbattle && !multiplesoldiers) {
 			if
-				(foundsoldier->get_owner() != get_owner() &&
+				(foundsoldier->owner().is_hostile(*get_owner()) &&
 				 foundsoldier->canBeChallenged())
 			{
 				molog

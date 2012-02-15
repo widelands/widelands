@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -26,7 +26,7 @@
 
 struct Editor_Interactive;
 namespace UI {
-struct Callback_Button;
+struct Button;
 struct Textarea;
 }
 
@@ -40,7 +40,7 @@ struct Main_Menu_New_Map : public UI::Window {
 
 private:
 	UI::Textarea * m_width, * m_height;
-	UI::Callback_Button * m_world;
+	UI::Button * m_world;
 	int32_t m_w, m_h;
 	std::vector<std::string>::size_type m_currentworld;
 	std::vector<std::string> m_worlds;

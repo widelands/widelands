@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,16 +13,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 #ifndef UI_SLIDER_H
 #define UI_SLIDER_H
 
+#include <boost/signal.hpp>
+
 #include "panel.h"
-#include "m_signal.h"
+#include "graphic/font.h"
 
 namespace UI {
+
+struct DiscreteSlider;
 
 /**
  * \brief This class defines a generic slide bar.
@@ -30,6 +34,8 @@ namespace UI {
  * The callbacks for the slider value are done by two signal instances.
  */
 class Slider : public Panel {
+
+friend struct DiscreteSlider;
 
 protected:
 	Slider
@@ -57,6 +63,9 @@ public:
 
 
 protected:
+	void layout();
+	void calc_cursor_pos();
+
 	//  drawing
 	int32_t get_x_gap()    const {return m_x_gap;}
 	int32_t get_y_gap()    const {return m_y_gap;}
@@ -76,8 +85,8 @@ private :
 	void set_highlighted(bool highlighted);
 
 public:
-	Signal        changed;
-	Signal1<int32_t>  changedto;
+	boost::signal<void ()> changed;
+	boost::signal<void (int32_t)> changedto;
 
 private:
 	int32_t m_min_value;          //  cursor values
@@ -91,11 +100,11 @@ private:
 
 	PictureID m_pic_background;    //  background texture (picture ID)
 
+protected:
 	int32_t m_x_gap;              //  draw positions
 	int32_t m_y_gap;
 	int32_t m_bar_size;
 
-protected:
 	int32_t m_cursor_pos;         //  cursor position
 	int32_t m_cursor_size;        //  cursor width
 };
@@ -131,6 +140,7 @@ protected:
 	void draw(RenderTarget & dst);
 	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+	void layout();
 };
 
 
@@ -165,7 +175,39 @@ protected:
 	void draw(RenderTarget & dst);
 	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+	void layout();
 };
+
+/**
+ * \brief This class defines an discrete slide bar. We do not derive from
+ * Slider, but rather embed it, as we need to re-size it and add the labels.
+ */
+struct DiscreteSlider : public Panel {
+	DiscreteSlider
+		(Panel * const parent,
+		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const std::vector<std::string> labels_in,
+		 uint32_t m_value,
+		 const PictureID background_picture_id,
+		 const std::string & tooltip_text = std::string(),
+		 const uint32_t cursor_size = 20,
+		 const bool enabled = true);
+
+	void set_labels(std::vector<std::string>);
+
+	boost::signal<void ()> changed;
+	boost::signal<void (int32_t)> changedto;
+
+protected:
+	virtual void draw(RenderTarget & dst);
+	virtual void layout();
+
+	HorizontalSlider slider;
+
+private:
+	std::vector<std::string> labels;
+};
+
 
 }
 

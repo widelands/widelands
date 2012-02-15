@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 20,
+	NETWORK_PROTOCOL_VERSION = 21,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -124,7 +124,7 @@ enum {
 	 * command.
 	 *
 	 * \note The client must never enqueue a \ref PlayerCommand that it issued
-	 * itself. It must not assume that the host will accept a \ref PlaerCommand
+	 * itself. It must not assume that the host will accept a \ref PlayerCommand
 	 * that it sends. Instead, it must rely on the host echoing back the command.
 	 *
 	 */
@@ -133,7 +133,9 @@ enum {
 	/**
 	 * Bidirectional command: Terminate the connection with a given reason.
 	 * Payload is:
-	 * \li String: reason for disconnect
+	 * \li Unsigned8: number of attached strings
+	 * \li String:    reason for disconnect
+	 * \li String:    ...
 	 *
 	 * Both host and client can send this command, followed by immediately
 	 * closing the connection. The receiver of this command should just close
@@ -441,7 +443,23 @@ enum {
 	 * \li String:    Path to the map file
 	 * \li Unsigned8: Number of maximum players
 	 */
-	NETCMD_DEDICATED_SAVED_GAMES = 31
+	NETCMD_DEDICATED_SAVED_GAMES = 31,
+
+	/**
+	 * This is sent by the dedicated server to generate a clientsided translated system chat message.
+	 * Payload is:
+	 *
+	 * \li String:    Message code \see NetworkGamingMessages::fill_map()
+	 * \li String:    First attached string
+	 * \li String:    Second attached string
+	 * \li String:    Third attached string
+	 */
+	NETCMD_SYSTEM_MESSAGE_CODE = 32,
+
+	/**
+	 * Sent by the metaserver to a freshly opened game to check connectability
+	 */
+	NETCMD_METASERVER_PING = 64
 };
 
 #endif

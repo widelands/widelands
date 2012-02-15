@@ -90,7 +90,7 @@ obj_build_a_warehouse = {
    body= "<rt><p line-spacing=3 font-size=12>" ..
 _"* Build a warehouse to the west of the mountains." ..
 "<br>" ..
-_"-> Warehouses are similiar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer." ..
+_"-> Warehouses are similar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer." ..
 "</p></rt>",
 }
 

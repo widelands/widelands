@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -21,6 +21,8 @@
 #define S__SUPPLY_H
 
 #include "trackptr.h"
+
+#include "logic/wareworker.h"
 
 namespace Widelands {
 
@@ -68,7 +70,7 @@ struct Supply : public Trackable {
 	 *
 	 * \note This is only valid if \ref has_storage returns \c false.
 	 */
-	virtual void get_ware_type(bool & isworker, Ware_Index & ware) const = 0;
+	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const = 0;
 
 	/**
 	 * Send this to the given warehouse.

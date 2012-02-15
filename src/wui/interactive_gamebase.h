@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -23,6 +23,7 @@
 #include "interactive_base.h"
 #include "logic/game.h"
 #include "graphic/graphic.h"
+#include "general_statistics_menu.h"
 
 struct ChatOverlay;
 struct ChatProvider;
@@ -40,7 +41,7 @@ struct Interactive_GameBase : public Interactive_Base {
 		UI::UniqueWindow::Registry sound_options;
 
 		UI::UniqueWindow::Registry building_stats;
-		UI::UniqueWindow::Registry general_stats;
+		General_Statistics_Menu::Registry general_stats;
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
 	};
@@ -77,6 +78,8 @@ struct Interactive_GameBase : public Interactive_Base {
 	virtual void node_action() = 0;
 	const PlayerType & get_playertype()const {return m_playertype;}
 	void set_playertype(const PlayerType & pt) {m_playertype = pt;}
+
+	bool try_show_ship_window();
 
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
