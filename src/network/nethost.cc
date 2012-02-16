@@ -1221,7 +1221,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = _("This server is not password protected!");
 			send(c);
 		} else if (arg1 != m_password) {
-			c.msg = _("The send password was incorrect!");
+			c.msg = _("The sent password was incorrect!");
 			send(c);
 		} else {
 			// Once the client gained access (s)he might need the knowledge about available maps and saved games
