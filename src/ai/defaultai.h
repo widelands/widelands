@@ -173,6 +173,7 @@ private:
 	std::list<BlockedField *>         blocked_fields;
 	std::list<MineableField *>        mineable_fields;
 	std::list<Widelands::Flag const *> new_flags;
+	std::list<Widelands::Flag const *> flags_to_be_removed;
 	std::list<Widelands::Road const *> roads;
 	std::list<EconomyObserver *>      economies;
 	std::list<ProductionSiteObserver> productionsites;
