@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -106,15 +106,37 @@ Texture::Texture
 			boost::shared_ptr<GLPictureTexture> surface(new GLPictureTexture(surf));
 			m_glFrames.push_back(surface);
 
-			surface->lock(IPixelAccess::Lock_Normal);
-			m_mmap_color = surface->get_pixel(0, 0);
-			surface->unlock(IPixelAccess::Unlock_NoChange);
+			// calculate shades on the first frame
+			if (!m_nrframes) {
+				surface->lock(IPixelAccess::Lock_Normal);
+				uint32_t mmap_color_base = surface->get_pixel(0, 0);
+				surface->unlock(IPixelAccess::Unlock_NoChange);
+
+				int32_t i, shade, r, g, b, a;
+				for (i = -128; i < 128; i++) {
+					shade = 128 + i;
+
+					a = (mmap_color_base & 0xff000000) >> 24;
+					b = (mmap_color_base & 0x00ff0000) >> 16;
+					g = (mmap_color_base & 0x0000ff00) >> 8;
+					r = (mmap_color_base & 0x000000ff);
+
+					b = (b * shade) >> 7;
+					g = (g * shade) >> 7;
+					r = (r * shade) >> 7;
+
+					if (b > 255) b = 255;
+					if (g > 255) g = 255;
+					if (r > 255) r = 255;
+
+					m_mmap_color[shade] = (a << 24) | (b << 16) | (g << 8) | r;
+				}
+			}
 
 			++m_nrframes;
 			continue;
 		}
 #endif
-
 
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
@@ -187,8 +209,11 @@ Texture::~Texture ()
  * Return the basic terrain colour to be used in the minimap.
 */
 Uint32 Texture::get_minimap_color(const char shade) {
+	assert(shade >= -128);
+	assert(shade <= 127);
+
 	if (not m_pixels)
-		return m_mmap_color;
+		return m_mmap_color[128 + shade];
 
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
 	uint32_t table = static_cast<uint8_t>(shade);
