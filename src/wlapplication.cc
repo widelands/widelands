@@ -512,6 +512,10 @@ restart:
 					g_sound_handler.change_music();
 
 				break;
+			case SDL_VIDEOEXPOSE:
+				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
+				g_gr->update_fullscreen();
+				break;
 			}
 		}
 	}
