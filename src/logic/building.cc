@@ -752,7 +752,7 @@ void Building::draw_help
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
 		//  TODO make more here
-		UI::g_fh->draw_text
+		UI::g_fh->draw_text_shadow
 			(dst, UI::TextStyle::ui_small(),
 			 pos - Point(0, 45),
 			 info_string(igbase.building_census_format()),
@@ -765,7 +765,7 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		UI::g_fh->draw_text
+		UI::g_fh->draw_text_shadow
 			(dst, UI::TextStyle::ui_small(),
 			 pos - Point(0, 35),
 			 info_string(igbase.building_statistics_format()),
