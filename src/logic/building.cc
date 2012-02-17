@@ -754,7 +754,7 @@ void Building::draw_help
 		//  TODO make more here
 		UI::g_fh->draw_text_shadow
 			(dst, UI::TextStyle::ui_small(),
-			 pos - Point(0, 45),
+			 pos - Point(0, 48),
 			 info_string(igbase.building_census_format()),
 			 UI::Align_Center);
 	}

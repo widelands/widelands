@@ -215,9 +215,9 @@ void Font_Handler::draw_text_shadow
 {
 
 	TextStyle gray_style = style;
-	gray_style.fg = RGBColor (20, 20, 20);
+	gray_style.fg = RGBColor (0, 0, 0);
 
-	draw_text (dst, gray_style, dstpoint - Point(1,1), text, align, caret);
+	draw_text (dst, gray_style, dstpoint - Point(1, 1), text, align, caret);
 	draw_text (dst, style, dstpoint, text, align, caret);
 }
 
