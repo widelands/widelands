@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-15 23:17+0100\n"
-"PO-Revision-Date: 2012-02-15 10:45+0000\n"
+"POT-Creation-Date: 2012-02-16 10:12+0100\n"
+"PO-Revision-Date: 2012-02-16 10:26+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-16 04:49+0000\n"
-"X-Generator: Launchpad (build 14781)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:48+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -4387,7 +4387,7 @@ msgstr "Es ist kein Benutzer mit dem Namen %s eingelogt!"
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1224
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Das gesendete Passwort war falsch!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
@@ -4432,6 +4432,8 @@ msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
+"Du wurdest vom Server getrennt, da du nicht rechtzeitig auf eine PING "
+"Anfrage geantwortet hast."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -4450,6 +4452,8 @@ msgid ""
 "You tried to relogin, but the server has no more knowledge of your previous "
 "state."
 msgstr ""
+"Du  hast versucht dich wieder mit dem Metaserver zu verbinden, aber "
+"mittlerweile hat dieser längst keine Ahnung mehr von deinem letzten Status."
 
 #: ../../src/network/nethost.cc:360
 msgid ""
@@ -4654,7 +4658,7 @@ msgstr "Irgendetwas ist schief gelaufen: "
 
 #: ../../src/network/internet_gaming.cc:337
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Erfolgreich wieder zum Metaserver verbunden!"
 
 #: ../../src/network/internet_gaming.cc:344
 msgid "Mixed up"
