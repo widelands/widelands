@@ -472,6 +472,17 @@ bool Window::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 	return true;
 }
 
+bool Window::handle_alt_drag(int32_t mx, int32_t my)
+{
+	_dragging = true;
+	_drag_start_win_x = get_x();
+	_drag_start_win_y = get_y();
+	_drag_start_mouse_x = get_x() + get_lborder() + mx;
+	_drag_start_mouse_y = get_y() + get_tborder() + my;
+	grab_mouse(true);
+	return true;
+}
+
 void Window::restore() {
 	assert(_is_minimal);
 	_is_minimal = false;
