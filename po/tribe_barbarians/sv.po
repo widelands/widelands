@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
 "PO-Revision-Date: 2011-08-21 14:17+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:46+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
@@ -46,6 +46,10 @@ msgstr ""
 "värdshus. Den här rika måltiden är precis vad gruvarna i en djupare gruva "
 "behöver."
 
+#: ../../tribes/barbarians/ship/conf:1
+msgid "A sea-worthy ship"
+msgstr ""
+
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
 "A small bite to keep miners strong and working. Also the scout consumes "
@@ -71,19 +75,19 @@ msgstr ""
 msgid "Ashes"
 msgstr "Aska"
 
-#: ../../tribes/barbarians/conf:68
+#: ../../tribes/barbarians/conf:69
 msgid "Axe"
 msgstr "Yxa"
 
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:199
 msgid "Axefactory"
 msgstr "Yxfabrik"
 
-#: ../../tribes/barbarians/conf:117
+#: ../../tribes/barbarians/conf:118
 msgid "Baker"
 msgstr "Bagare"
 
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:189
 msgid "Bakery"
 msgstr "Bageri"
 
@@ -95,24 +99,24 @@ msgstr "Bakar bröd till arbetarna."
 msgid "Barbarians"
 msgstr "Barbarer"
 
-#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:164
 msgid "Barracks"
 msgstr "Barracker"
 
-#: ../../tribes/barbarians/conf:157
-#: ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:165
+#: ../../tribes/barbarians/conf:217
 msgid "Barrier"
 msgstr "Fästning"
 
-#: ../../tribes/barbarians/conf:215
+#: ../../tribes/barbarians/conf:225
 msgid "Battle Arena"
 msgstr "Stridsarena"
 
-#: ../../tribes/barbarians/conf:70
+#: ../../tribes/barbarians/conf:71
 msgid "Battle Axe"
 msgstr "Stridsyxa"
 
-#: ../../tribes/barbarians/conf:71
+#: ../../tribes/barbarians/conf:72
 msgid "Beer"
 msgstr "Öl"
 
@@ -134,43 +138,47 @@ msgstr ""
 "i tavernorna, värdshusen, och de stora värdshusen och i "
 "träningsanläggningarna (träningsläger och kamparena)."
 
-#: ../../tribes/barbarians/conf:183
+#: ../../tribes/barbarians/conf:192
 msgid "Big Inn"
 msgstr "Stort Värdshus"
 
-#: ../../tribes/barbarians/conf:119
+#: ../../tribes/barbarians/conf:120
 msgid "Blacksmith"
 msgstr "Smed"
 
-#: ../../tribes/barbarians/conf:72
+#: ../../tribes/barbarians/conf:73
 msgid "Blackwood"
 msgstr "Härdat trä"
+
+#: ../../tribes/barbarians/conf:70
+msgid "Bread Paddle"
+msgstr ""
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
 msgstr "Föder upp de starka oxar som hjälper till att transportera varor."
 
-#: ../../tribes/barbarians/conf:121
+#: ../../tribes/barbarians/conf:122
 msgid "Brewer"
 msgstr "Bryggare"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:190
 msgid "Brewery"
 msgstr "Bryggeri"
 
-#: ../../tribes/barbarians/conf:73
+#: ../../tribes/barbarians/conf:74
 msgid "Broad Axe"
 msgstr "Bredyxa"
 
-#: ../../tribes/barbarians/conf:74
+#: ../../tribes/barbarians/conf:75
 msgid "Bronze Axe"
 msgstr "Bronsyxa"
 
-#: ../../tribes/barbarians/conf:122
+#: ../../tribes/barbarians/conf:123
 msgid "Builder"
 msgstr "Byggare"
 
-#: ../../tribes/barbarians/conf:123
+#: ../../tribes/barbarians/conf:124
 msgid "Burner"
 msgstr "Kolare"
 
@@ -179,10 +187,10 @@ msgid "Burns coal."
 msgstr "Bränner kol."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
-msgid "Burns lime in the lime kilm."
-msgstr "Bränner kalk i kalkbränneriet."
+msgid "Burns lime in the lime kiln."
+msgstr ""
 
-#: ../../tribes/barbarians/conf:110
+#: ../../tribes/barbarians/conf:111
 msgid "Carrier"
 msgstr "Bärare"
 
@@ -190,37 +198,37 @@ msgstr "Bärare"
 msgid "Carries items along the roads."
 msgstr "Bär saker längst vägarna."
 
-#: ../../tribes/barbarians/conf:149
-#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:166
 msgid "Castle"
 msgstr "Slott"
 
-#: ../../tribes/barbarians/conf:143
+#: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
 msgstr "Boskapsuppfödare"
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:201
 msgid "Cattle Farm"
 msgstr "Boskapsgård"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:195
 msgid "Charcoal Burner's House"
 msgstr "Kolarbostad"
 
-#: ../../tribes/barbarians/conf:125
+#: ../../tribes/barbarians/conf:126
 msgid "Chief Miner"
 msgstr "Gruvledare"
 
-#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/conf:220
 msgid "Citadel"
 msgstr "Citadell"
 
-#: ../../tribes/barbarians/conf:220
+#: ../../tribes/barbarians/conf:230
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
 msgstr "Citadellby"
 
-#: ../../tribes/barbarians/conf:75
+#: ../../tribes/barbarians/conf:76
 msgid "Cloth"
 msgstr "Tyg"
 
@@ -229,15 +237,19 @@ msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
 msgstr "Textil behövs till barbarernas skepp. Det produceras från halmstrån."
 
-#: ../../tribes/barbarians/conf:76
+#: ../../tribes/barbarians/conf:77
 msgid "Coal"
 msgstr "Kol"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:208
 msgid "Coal mine"
 msgstr "Kolgruva"
 
-#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/shipyard/conf:18
+msgid "Constructing ship"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:151
 msgid "Construction Site"
 msgstr "Byggarbetsplats"
 
@@ -245,31 +257,31 @@ msgstr "Byggarbetsplats"
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr "Skär ut bitar av granit ur liggande stenar."
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:207
 msgid "Deep Coal Mine"
 msgstr "Djup kolgruva"
 
-#: ../../tribes/barbarians/conf:203
+#: ../../tribes/barbarians/conf:213
 msgid "Deep Gold Mine"
 msgstr "Djup guldgruva"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:210
 msgid "Deep Iron Ore Mine"
 msgstr "Djup järnmalmsgruva"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:206
 msgid "Deeper Coal Mine"
 msgstr "Djupare kolgruva"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:212
 msgid "Deeper Gold Mine"
 msgstr "Djupare guldgruva"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:209
 msgid "Deeper Iron Ore Mine"
 msgstr "Djupare järnmalmsgruva"
 
-#: ../../tribes/barbarians/conf:64
+#: ../../tribes/barbarians/conf:65
 msgid "Deer"
 msgstr "Hjort"
 
@@ -285,19 +297,23 @@ msgstr "Byggnadsruin"
 msgid "Discovers resources for mining."
 msgstr "Upptäcker gruvresurser."
 
-#: ../../tribes/barbarians/conf:212
+#: ../../tribes/barbarians/conf:154
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:222
 msgid "Donjon"
 msgstr "Kärntorn"
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:203
 msgid "Farm"
 msgstr "Veteodling"
 
-#: ../../tribes/barbarians/conf:126
+#: ../../tribes/barbarians/conf:127
 msgid "Farmer"
 msgstr "Bonde"
 
-#: ../../tribes/barbarians/conf:77
+#: ../../tribes/barbarians/conf:78
 msgid "Felling Axe"
 msgstr "Avverkningsyxa"
 
@@ -305,11 +321,11 @@ msgstr "Avverkningsyxa"
 msgid "Fells trees."
 msgstr "Fäller träd."
 
-#: ../../tribes/barbarians/conf:127
+#: ../../tribes/barbarians/conf:128
 msgid "Ferner"
 msgstr "Vass- och linodlare"
 
-#: ../../tribes/barbarians/conf:179
+#: ../../tribes/barbarians/conf:188
 msgid "Fernery"
 msgstr "Vass- och linodling"
 
@@ -333,7 +349,7 @@ msgstr "Vetefält, litet"
 msgid "Field tiny"
 msgstr "Vetefält, nysått"
 
-#: ../../tribes/barbarians/conf:78
+#: ../../tribes/barbarians/conf:79
 msgid "Fire Tongs"
 msgstr "Eldtång"
 
@@ -347,19 +363,19 @@ msgstr ""
 "metallverken (men slutar produceras i byggnaden om den uppgraderas till en "
 "yxfabrik och krigskvarn)."
 
-#: ../../tribes/barbarians/conf:79
+#: ../../tribes/barbarians/conf:80
 msgid "Fish"
 msgstr "Fisk"
 
-#: ../../tribes/barbarians/conf:128
+#: ../../tribes/barbarians/conf:129
 msgid "Fisher"
 msgstr "Fiskare"
 
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:181
 msgid "Fisher's Hut"
 msgstr "Fiskarkoja"
 
-#: ../../tribes/barbarians/conf:80
+#: ../../tribes/barbarians/conf:81
 msgid "Fishing Rod"
 msgstr "Fiskespö"
 
@@ -373,20 +389,20 @@ msgstr ""
 "som produceras i en metallverksverkstad (men slutar produceras i byggnaden "
 "om den uppgraderas till en yxfabrik eller krigskvarn)."
 
-#: ../../tribes/barbarians/conf:159
-#: ../../tribes/barbarians/conf:211
+#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:221
 msgid "Fortress"
 msgstr "Borg"
 
-#: ../../tribes/barbarians/conf:129
+#: ../../tribes/barbarians/conf:130
 msgid "Gamekeeper"
 msgstr "Viltvårdare"
 
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:183
 msgid "Gamekeeper's Hut"
 msgstr "Viltvårdarkoja"
 
-#: ../../tribes/barbarians/conf:130
+#: ../../tribes/barbarians/conf:131
 msgid "Geologist"
 msgstr "Geolog"
 
@@ -394,15 +410,15 @@ msgstr "Geolog"
 msgid "Gets fish out of the sea."
 msgstr "Fiskar fisk från havet."
 
-#: ../../tribes/barbarians/conf:81
+#: ../../tribes/barbarians/conf:82
 msgid "Gold"
 msgstr "Guld"
 
-#: ../../tribes/barbarians/conf:204
+#: ../../tribes/barbarians/conf:214
 msgid "Gold Mine"
 msgstr "Guldgruva"
 
-#: ../../tribes/barbarians/conf:82
+#: ../../tribes/barbarians/conf:83
 msgid "Gold Ore"
 msgstr "Guldmalm"
 
@@ -428,11 +444,11 @@ msgstr ""
 "används som ett dyrbart byggnadsmaterial och för att framställa vapen och "
 "rustningar."
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:205
 msgid "Granite Mine"
 msgstr "Granitgruva"
 
-#: ../../tribes/barbarians/conf:83
+#: ../../tribes/barbarians/conf:84
 msgid "Grout"
 msgstr "Murbruk"
 
@@ -440,15 +456,15 @@ msgstr "Murbruk"
 msgid "Grows thatch reed."
 msgstr "Odlar halmstrå."
 
-#: ../../tribes/barbarians/conf:150
+#: ../../tribes/barbarians/conf:158
 msgid "Guardhall"
 msgstr "Vakthall"
 
-#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:159
 msgid "Guardhouse"
 msgstr "Vaktstuga"
 
-#: ../../tribes/barbarians/conf:84
+#: ../../tribes/barbarians/conf:85
 msgid "Hammer"
 msgstr "Hammare"
 
@@ -460,25 +476,25 @@ msgstr "Skörda vass"
 msgid "Harvest wheat"
 msgstr "Skörda vete"
 
-#: ../../tribes/barbarians/conf:164
-#: ../../tribes/barbarians/conf:165
+#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:173
 msgid "Headquarters"
 msgstr "Högkvarter"
 
-#: ../../tribes/barbarians/conf:219
+#: ../../tribes/barbarians/conf:229
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Högkvarter mellan"
 
-#: ../../tribes/barbarians/conf:85
+#: ../../tribes/barbarians/conf:86
 msgid "Helmet"
 msgstr "Hjälm"
 
-#: ../../tribes/barbarians/conf:131
+#: ../../tribes/barbarians/conf:132
 msgid "Helmsmith"
 msgstr "Hjälmsmed"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:204
 msgid "Helmsmithy"
 msgstr "Hjälmsmedja"
 
@@ -486,7 +502,7 @@ msgstr "Hjälmsmedja"
 msgid "Helps to carry items at heavily used roads."
 msgstr "Hjälper till att bära saker på tungt trafikerade vägar."
 
-#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:160
 msgid "High Tower"
 msgstr "Högt torn"
 
@@ -501,35 +517,35 @@ msgstr ""
 "basverktyg (tillverkningen upphör i byggnaden om den uppgraderas till en "
 "yxfabrik och krigskvarn)."
 
-#: ../../tribes/barbarians/conf:132
+#: ../../tribes/barbarians/conf:133
 msgid "Hunter"
 msgstr "Jägare"
 
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:182
 msgid "Hunter's Hut"
 msgstr "Jägarkoja"
 
-#: ../../tribes/barbarians/conf:86
+#: ../../tribes/barbarians/conf:87
 msgid "Hunting Spear"
 msgstr "Jaktspjut"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:193
 msgid "Inn"
 msgstr "Värdshus"
 
-#: ../../tribes/barbarians/conf:133
+#: ../../tribes/barbarians/conf:134
 msgid "Innkeeper"
 msgstr "Krögare"
 
-#: ../../tribes/barbarians/conf:87
+#: ../../tribes/barbarians/conf:88
 msgid "Iron"
 msgstr "Järn"
 
-#: ../../tribes/barbarians/conf:88
+#: ../../tribes/barbarians/conf:89
 msgid "Iron Ore"
 msgstr "Järnmalm"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:211
 msgid "Iron Ore Mine"
 msgstr "Järnmalmsgruva"
 
@@ -551,47 +567,47 @@ msgstr ""
 "Hjärnmalm utvinns i järngruvor. De levererar hjärn när de smälts i ett "
 "smälteri."
 
-#: ../../tribes/barbarians/conf:89
+#: ../../tribes/barbarians/conf:90
 msgid "Kitchen Tools"
 msgstr "Köksredskap"
 
-#: ../../tribes/barbarians/conf:178
+#: ../../tribes/barbarians/conf:187
 msgid "Lime Kiln"
 msgstr "Kalkbränneri"
 
-#: ../../tribes/barbarians/conf:134
+#: ../../tribes/barbarians/conf:135
 msgid "Lime-Burner"
 msgstr "Kalkbrännare"
 
-#: ../../tribes/barbarians/conf:135
+#: ../../tribes/barbarians/conf:136
 msgid "Lumberjack"
 msgstr "Skogshuggare"
 
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:179
 msgid "Lumberjack's Hut"
 msgstr "Skogshuggarkoja"
 
-#: ../../tribes/barbarians/conf:90
+#: ../../tribes/barbarians/conf:91
 msgid "Mask"
 msgstr "Mask"
 
-#: ../../tribes/barbarians/conf:118
+#: ../../tribes/barbarians/conf:119
 msgid "Master Blacksmith"
 msgstr "Mästersmed"
 
-#: ../../tribes/barbarians/conf:120
+#: ../../tribes/barbarians/conf:121
 msgid "Master Brewer"
 msgstr "Mästerbryggare"
 
-#: ../../tribes/barbarians/conf:124
+#: ../../tribes/barbarians/conf:125
 msgid "Master Miner"
 msgstr "Gruvchef"
 
-#: ../../tribes/barbarians/conf:91
+#: ../../tribes/barbarians/conf:92
 msgid "Meal"
 msgstr "Måltid"
 
-#: ../../tribes/barbarians/conf:92
+#: ../../tribes/barbarians/conf:93
 msgid "Meat"
 msgstr "Kött"
 
@@ -607,15 +623,15 @@ msgstr ""
 "munsbitar och mål för gruvarbetarna. Det används också i "
 "träningsanläggningarna (träningsläger och kamparena)."
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:200
 msgid "Metalwork Shop"
 msgstr "Verktygssmedja"
 
-#: ../../tribes/barbarians/conf:182
+#: ../../tribes/barbarians/conf:191
 msgid "Micro Brewery"
 msgstr "Bryggstuga"
 
-#: ../../tribes/barbarians/conf:136
+#: ../../tribes/barbarians/conf:137
 msgid "Miner"
 msgstr "Gruvarbetare"
 
@@ -634,23 +650,19 @@ msgstr ""
 "hela kraft stammar ur ölet. Det hjälper till med att träna soldaternas "
 "undviksnivå från 0 till 1 och 2."
 
-#: ../../tribes/barbarians/conf:160
+#: ../../tribes/barbarians/conf:168
 msgid "Outpost"
 msgstr "Utpost"
 
-#: ../../tribes/barbarians/conf:111
+#: ../../tribes/barbarians/conf:112
 msgid "Ox"
 msgstr "Oxe"
 
-#: ../../tribes/barbarians/conf:69
-msgid "Peel"
-msgstr "Bakspade"
-
-#: ../../tribes/barbarians/conf:93
+#: ../../tribes/barbarians/conf:94
 msgid "Pick"
 msgstr "Hacka"
 
-#: ../../tribes/barbarians/conf:94
+#: ../../tribes/barbarians/conf:95
 msgid "Pitta Bread"
 msgstr "Pitabröd"
 
@@ -669,6 +681,10 @@ msgstr "Sår fält."
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
 msgstr "Planterar träd."
+
+#: ../../tribes/barbarians/conf:175
+msgid "Port"
+msgstr ""
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
@@ -784,23 +800,23 @@ msgstr ""
 msgid "Produces weapons for soldiers and tools for workers."
 msgstr "Tillverkar vapen för soldater och verktyg för arbetare."
 
-#: ../../tribes/barbarians/conf:169
+#: ../../tribes/barbarians/conf:178
 msgid "Quarry"
 msgstr "Stenbrott"
 
-#: ../../tribes/barbarians/conf:137
+#: ../../tribes/barbarians/conf:138
 msgid "Ranger"
 msgstr "Skogvaktare"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:180
 msgid "Ranger's Hut"
 msgstr "Skogvaktarkoja"
 
-#: ../../tribes/barbarians/conf:95
+#: ../../tribes/barbarians/conf:96
 msgid "Ration"
 msgstr "Ranson"
 
-#: ../../tribes/barbarians/conf:96
+#: ../../tribes/barbarians/conf:97
 msgid "Raw Stone"
 msgstr "Sten"
 
@@ -876,11 +892,11 @@ msgstr "Resursindikator ingenting"
 msgid "Resource indicator water"
 msgstr "Resursindikator vatten"
 
-#: ../../tribes/barbarians/conf:142
+#: ../../tribes/barbarians/conf:144
 msgid "Scout"
 msgstr "Spejare"
 
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:185
 msgid "Scout's Hut"
 msgstr "Spejarkoja"
 
@@ -890,20 +906,36 @@ msgid ""
 msgstr ""
 "Spejare som Scotty Spejare spejar ut outforskade områden på ett spejigt sätt."
 
-#: ../../tribes/barbarians/conf:97
+#: ../../tribes/barbarians/conf:98
 msgid "Scythe"
 msgstr "Lie"
 
-#: ../../tribes/barbarians/conf:155
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:163
+#: ../../tribes/barbarians/conf:218
 msgid "Sentry"
 msgstr "Vaktpost"
 
-#: ../../tribes/barbarians/conf:98
+#: ../../tribes/barbarians/conf:99
 msgid "Sharp Axe"
 msgstr "Skarpyxa"
 
-#: ../../tribes/barbarians/conf:99
+#: ../../tribes/barbarians/conf:148
+msgid "Ship"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:62
+msgid "Ship construction site"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:139
+msgid "Shipwright"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:197
+msgid "Shipyard"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:100
 msgid "Shovel"
 msgstr "Spade"
 
@@ -912,7 +944,7 @@ msgstr "Spade"
 msgid "Sleep"
 msgstr "Sov"
 
-#: ../../tribes/barbarians/conf:153
+#: ../../tribes/barbarians/conf:161
 msgid "Small Tower"
 msgstr "Litet torn"
 
@@ -924,11 +956,11 @@ msgstr "Smält guld"
 msgid "Smelt iron"
 msgstr "Smält järn"
 
-#: ../../tribes/barbarians/conf:138
+#: ../../tribes/barbarians/conf:140
 msgid "Smelter"
 msgstr "Smältare"
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:196
 msgid "Smelting Works"
 msgstr "Smältverk"
 
@@ -940,11 +972,11 @@ msgstr "Tillverkar hjälmar för soldater."
 msgid "Smelts iron."
 msgstr "Smälter järn."
 
-#: ../../tribes/barbarians/conf:100
+#: ../../tribes/barbarians/conf:101
 msgid "Snack"
 msgstr "Mellanmål"
 
-#: ../../tribes/barbarians/conf:114
+#: ../../tribes/barbarians/conf:115
 msgid "Soldier"
 msgstr "Soldat"
 
@@ -958,23 +990,23 @@ msgstr ""
 "byggdes inte. Du har en nackdel p.g.a detta; fundera över att starta om \n"
 "kartan med rättvisa startförhållanden."
 
-#: ../../tribes/barbarians/conf:139
+#: ../../tribes/barbarians/conf:141
 msgid "Stonemason"
 msgstr "Stenhuggare"
 
-#: ../../tribes/barbarians/conf:101
+#: ../../tribes/barbarians/conf:102
 msgid "Strong Beer"
 msgstr "Starköl"
 
-#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:219
 msgid "Stronghold"
 msgstr "Litet fort"
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:194
 msgid "Tavern"
 msgstr "Krog"
 
-#: ../../tribes/barbarians/conf:102
+#: ../../tribes/barbarians/conf:103
 msgid "Thatch Reed"
 msgstr "Vassrör"
 
@@ -1018,6 +1050,14 @@ msgstr ""
 "används i tavernor, värdshus och stora värdshus för att tillreda ransoner, "
 "munsbitar och mål. Det används också i träningsanläggningar (trängsläger och "
 "kamparena)."
+
+#: ../../tribes/barbarians/bakingtray/conf:1
+msgid ""
+"The bread paddle is a tool of the baker and each baker needs his own. It is "
+"produced in the metal works like all other tools (but it ceases to be "
+"produced by the building if the metal works is enhanced to an axefactory and "
+"war mill)."
+msgstr ""
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -1075,16 +1115,6 @@ msgstr ""
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
 msgstr "De mäktiga stammarna från öst!"
-
-#: ../../tribes/barbarians/bakingtray/conf:1
-msgid ""
-"The peel is a tool of the baker and each baker needs his own. It is produced "
-"in the metal works like all other tools (but it ceases to be produced by the "
-"building if the metal works is enhanced to an axefactory and war mill)."
-msgstr ""
-"Skrapan är ett bageriverktyg och varje bagare behöver sin egna. Den "
-"tillverkas i metallverk som alla andra verktyg (tillverkningen upphör i "
-"byggnaden om metallverket uppgraderas till en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1169,16 +1199,16 @@ msgstr ""
 "metallverkstaden (tillverkningen upphör i byggnaden om den uppgraderas till "
 "en yxfabrik och krigskvarn)."
 
-#: ../../tribes/barbarians/conf:154
-#: ../../tribes/barbarians/conf:161
+#: ../../tribes/barbarians/conf:162
+#: ../../tribes/barbarians/conf:169
 msgid "Tower"
 msgstr "Torn"
 
-#: ../../tribes/barbarians/conf:140
+#: ../../tribes/barbarians/conf:142
 msgid "Trainer"
 msgstr "Tränare"
 
-#: ../../tribes/barbarians/conf:216
+#: ../../tribes/barbarians/conf:226
 msgid "Trainingscamp"
 msgstr "Träningsläger"
 
@@ -1186,7 +1216,7 @@ msgstr "Träningsläger"
 msgid "Trains the soldiers."
 msgstr "Tränar soldaterna."
 
-#: ../../tribes/barbarians/conf:103
+#: ../../tribes/barbarians/conf:104
 msgid "Trunk"
 msgstr "Stock"
 
@@ -1322,23 +1352,23 @@ msgstr ""
 "Uppgradera soldat träffpoäng 2 (endast för kompatibilitet med gamla sparade "
 "spel (build13))"
 
-#: ../../tribes/barbarians/conf:104
+#: ../../tribes/barbarians/conf:105
 msgid "War Helmet"
 msgstr "Stridshjälm"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:198
 msgid "War Mill"
 msgstr "Vapenfabrik"
 
-#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:174
 msgid "Warehouse"
 msgstr "Härbre"
 
-#: ../../tribes/barbarians/conf:105
+#: ../../tribes/barbarians/conf:106
 msgid "Warriors Axe"
 msgstr "Stridsyxa"
 
-#: ../../tribes/barbarians/conf:106
+#: ../../tribes/barbarians/conf:107
 msgid "Water"
 msgstr "Vatten"
 
@@ -1352,19 +1382,19 @@ msgstr ""
 "bryggeriet. Även kalkbrännaren och boskapsfarmen behöver tillgång till "
 "vatten."
 
-#: ../../tribes/barbarians/conf:141
+#: ../../tribes/barbarians/conf:143
 msgid "Weaver"
 msgstr "Vävare"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:202
 msgid "Weaving-Mill"
 msgstr "Väveri"
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:184
 msgid "Well"
 msgstr "Brunn"
 
-#: ../../tribes/barbarians/conf:107
+#: ../../tribes/barbarians/conf:108
 msgid "Wheat"
 msgstr "Vete"
 
@@ -1378,11 +1408,11 @@ msgstr ""
 "mikrobryggerier och bryggerier. Även boskapsfarmer behöver tillgång till "
 "vete."
 
-#: ../../tribes/barbarians/conf:65
+#: ../../tribes/barbarians/conf:66
 msgid "Wildboar"
 msgstr "Vildsvin"
 
-#: ../../tribes/barbarians/conf:177
+#: ../../tribes/barbarians/conf:186
 msgid "Wood Hardener"
 msgstr "Trähärderi"
 
@@ -1417,10 +1447,11 @@ msgstr "Trähärderi"
 #: ../../tribes/barbarians/quarry/conf:15
 #: ../../tribes/barbarians/rangers_hut/conf:14
 #: ../../tribes/barbarians/scouts_hut/conf:17
+#: ../../tribes/barbarians/shipyard/conf:19
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
 #: ../../tribes/barbarians/warmill/conf:39
-#: ../../tribes/barbarians/weaving-mill/conf:20
+#: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
 msgstr "Arbeta"
@@ -1428,6 +1459,10 @@ msgstr "Arbeta"
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
 msgstr "Arbetar på byggnadsplatser för att resa nya byggnader."
+
+#: ../../tribes/barbarians/shipwright/conf:1
+msgid "Works at the shipyard and constructs new ships."
+msgstr ""
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1

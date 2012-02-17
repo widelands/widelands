@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
 "PO-Revision-Date: 2011-03-21 20:26+0000\n"
 "Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:11+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:45+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -48,6 +48,10 @@ msgstr ""
 "suuressa majatalossa. Tämä tuhti tuoka on juuri sitä, mitä syvien kaivosten "
 "kaivostyöläiset tarvitsevat."
 
+#: ../../tribes/barbarians/ship/conf:1
+msgid "A sea-worthy ship"
+msgstr ""
+
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
 "A small bite to keep miners strong and working. Also the scout consumes "
@@ -73,20 +77,20 @@ msgstr ""
 msgid "Ashes"
 msgstr "Tuhkaa"
 
-#: ../../tribes/barbarians/conf:68
+#: ../../tribes/barbarians/conf:69
 msgid "Axe"
 msgstr "Kirves"
 
 # TODO: axe-factory at most
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:199
 msgid "Axefactory"
 msgstr "Kirvestehdas"
 
-#: ../../tribes/barbarians/conf:117
+#: ../../tribes/barbarians/conf:118
 msgid "Baker"
 msgstr "Leipuri"
 
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:189
 msgid "Bakery"
 msgstr "Leipomo"
 
@@ -98,24 +102,24 @@ msgstr "Leipoo leipää työntekijöille."
 msgid "Barbarians"
 msgstr "Barbaarit"
 
-#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:164
 msgid "Barracks"
 msgstr "Parakki"
 
-#: ../../tribes/barbarians/conf:157
-#: ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:165
+#: ../../tribes/barbarians/conf:217
 msgid "Barrier"
 msgstr "Rajalinnake"
 
-#: ../../tribes/barbarians/conf:215
+#: ../../tribes/barbarians/conf:225
 msgid "Battle Arena"
 msgstr "Taisteluareena"
 
-#: ../../tribes/barbarians/conf:70
+#: ../../tribes/barbarians/conf:71
 msgid "Battle Axe"
 msgstr "Sotakirves"
 
-#: ../../tribes/barbarians/conf:71
+#: ../../tribes/barbarians/conf:72
 msgid "Beer"
 msgstr "Olut"
 
@@ -137,43 +141,47 @@ msgstr ""
 "käytetään krouveissa, majataloissa, isoissa majataloissa ja "
 "harjoituspaikoilla (harjoitusleiri ja taisteluareena)."
 
-#: ../../tribes/barbarians/conf:183
+#: ../../tribes/barbarians/conf:192
 msgid "Big Inn"
 msgstr "Suuri majatalo"
 
-#: ../../tribes/barbarians/conf:119
+#: ../../tribes/barbarians/conf:120
 msgid "Blacksmith"
 msgstr "Seppä"
 
-#: ../../tribes/barbarians/conf:72
+#: ../../tribes/barbarians/conf:73
 msgid "Blackwood"
 msgstr "Mustapuu"
+
+#: ../../tribes/barbarians/conf:70
+msgid "Bread Paddle"
+msgstr ""
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
 msgstr "Siittää vahvan härän joka auttaa tavaroiden kuljetuksessa."
 
-#: ../../tribes/barbarians/conf:121
+#: ../../tribes/barbarians/conf:122
 msgid "Brewer"
 msgstr "Oluenpanija"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:190
 msgid "Brewery"
 msgstr "Panimo"
 
-#: ../../tribes/barbarians/conf:73
+#: ../../tribes/barbarians/conf:74
 msgid "Broad Axe"
 msgstr "Leveä kirves"
 
-#: ../../tribes/barbarians/conf:74
+#: ../../tribes/barbarians/conf:75
 msgid "Bronze Axe"
 msgstr "Pronssikirves"
 
-#: ../../tribes/barbarians/conf:122
+#: ../../tribes/barbarians/conf:123
 msgid "Builder"
 msgstr "Rakentaja"
 
-#: ../../tribes/barbarians/conf:123
+#: ../../tribes/barbarians/conf:124
 msgid "Burner"
 msgstr "Polttaja"
 
@@ -182,10 +190,10 @@ msgid "Burns coal."
 msgstr "Polttaa hiiliä."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
-msgid "Burns lime in the lime kilm."
-msgstr "Polttaa kalkkia laastiin sekoitettavaksi kalkinpolttouunissa."
+msgid "Burns lime in the lime kiln."
+msgstr ""
 
-#: ../../tribes/barbarians/conf:110
+#: ../../tribes/barbarians/conf:111
 msgid "Carrier"
 msgstr "Kantaja"
 
@@ -193,37 +201,37 @@ msgstr "Kantaja"
 msgid "Carries items along the roads."
 msgstr "Kantaa tavaroita teitä pitkin."
 
-#: ../../tribes/barbarians/conf:149
-#: ../../tribes/barbarians/conf:158
+#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:166
 msgid "Castle"
 msgstr "Linna"
 
-#: ../../tribes/barbarians/conf:143
+#: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
 msgstr "Karjasiittäjä"
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:201
 msgid "Cattle Farm"
 msgstr "Karjatila"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:195
 msgid "Charcoal Burner's House"
 msgstr "Hiilenpolttajan talo"
 
-#: ../../tribes/barbarians/conf:125
+#: ../../tribes/barbarians/conf:126
 msgid "Chief Miner"
 msgstr "Kaivospäällikkö"
 
-#: ../../tribes/barbarians/conf:210
+#: ../../tribes/barbarians/conf:220
 msgid "Citadel"
 msgstr "Kastelli"
 
-#: ../../tribes/barbarians/conf:220
+#: ../../tribes/barbarians/conf:230
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
 msgstr "Kastellikylä"
 
-#: ../../tribes/barbarians/conf:75
+#: ../../tribes/barbarians/conf:76
 msgid "Cloth"
 msgstr "Kangas"
 
@@ -233,15 +241,19 @@ msgid ""
 msgstr ""
 "Kangasta tarvitaan barbaarien laivoihin. Sitä tuotetaan kaislanoljista."
 
-#: ../../tribes/barbarians/conf:76
+#: ../../tribes/barbarians/conf:77
 msgid "Coal"
 msgstr "Hiili"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:208
 msgid "Coal mine"
 msgstr "Hiilikaivos"
 
-#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/shipyard/conf:18
+msgid "Constructing ship"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:151
 msgid "Construction Site"
 msgstr "Rakennustyömaa"
 
@@ -249,31 +261,31 @@ msgstr "Rakennustyömaa"
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr "Leikkaa raakagraniittia rakennuskiviksi."
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:207
 msgid "Deep Coal Mine"
 msgstr "Keskisyvä hiilikaivos"
 
-#: ../../tribes/barbarians/conf:203
+#: ../../tribes/barbarians/conf:213
 msgid "Deep Gold Mine"
 msgstr "Keskisyvä kultakaivos"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:210
 msgid "Deep Iron Ore Mine"
 msgstr "Keskisyvä rautakaivos"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:206
 msgid "Deeper Coal Mine"
 msgstr "Syvä hiilikaivos"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:212
 msgid "Deeper Gold Mine"
 msgstr "Syvä kultakaivos"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:209
 msgid "Deeper Iron Ore Mine"
 msgstr "Syvä rautakaivos"
 
-#: ../../tribes/barbarians/conf:64
+#: ../../tribes/barbarians/conf:65
 msgid "Deer"
 msgstr "Peura"
 
@@ -289,19 +301,23 @@ msgstr "Tuhoutunut rakennus"
 msgid "Discovers resources for mining."
 msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
 
-#: ../../tribes/barbarians/conf:212
+#: ../../tribes/barbarians/conf:154
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:222
 msgid "Donjon"
 msgstr "Keskustorni"
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:203
 msgid "Farm"
 msgstr "Maatila"
 
-#: ../../tribes/barbarians/conf:126
+#: ../../tribes/barbarians/conf:127
 msgid "Farmer"
 msgstr "Viljelijä"
 
-#: ../../tribes/barbarians/conf:77
+#: ../../tribes/barbarians/conf:78
 msgid "Felling Axe"
 msgstr "Hakkuukirves"
 
@@ -309,11 +325,11 @@ msgstr "Hakkuukirves"
 msgid "Fells trees."
 msgstr "Kaataa puita."
 
-#: ../../tribes/barbarians/conf:127
+#: ../../tribes/barbarians/conf:128
 msgid "Ferner"
 msgstr "Kaislankasvattaja"
 
-#: ../../tribes/barbarians/conf:179
+#: ../../tribes/barbarians/conf:188
 msgid "Fernery"
 msgstr "Kaislaviljelmä"
 
@@ -337,7 +353,7 @@ msgstr "Pelto pieni"
 msgid "Field tiny"
 msgstr "Pelto hyvin pieni"
 
-#: ../../tribes/barbarians/conf:78
+#: ../../tribes/barbarians/conf:79
 msgid "Fire Tongs"
 msgstr "Pihdit"
 
@@ -351,19 +367,19 @@ msgstr ""
 "metallipajoissa (mutta tuotanto loppuu, jos pajasta tehdään kirvestehdas tai "
 "sotamylly)."
 
-#: ../../tribes/barbarians/conf:79
+#: ../../tribes/barbarians/conf:80
 msgid "Fish"
 msgstr "Kala"
 
-#: ../../tribes/barbarians/conf:128
+#: ../../tribes/barbarians/conf:129
 msgid "Fisher"
 msgstr "Kalastaja"
 
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:181
 msgid "Fisher's Hut"
 msgstr "Kalastajan maja"
 
-#: ../../tribes/barbarians/conf:80
+#: ../../tribes/barbarians/conf:81
 msgid "Fishing Rod"
 msgstr "Onki"
 
@@ -377,21 +393,21 @@ msgstr ""
 "joita tuotetaan metallipajassa (mutta ei enää, jos pajaa laajennetaan "
 "kirvestehtaaksi tai sotamyllyksi)."
 
-#: ../../tribes/barbarians/conf:159
-#: ../../tribes/barbarians/conf:211
+#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:221
 msgid "Fortress"
 msgstr "Linnoitus"
 
-#: ../../tribes/barbarians/conf:129
+#: ../../tribes/barbarians/conf:130
 msgid "Gamekeeper"
 msgstr "Riistanvartija"
 
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:183
 msgid "Gamekeeper's Hut"
 msgstr "Riistanvartijan maja"
 
 # TODO: it'd be nice to be able to translate these differently in different tribes for style -> need to poke at "send geologist" -button.
-#: ../../tribes/barbarians/conf:130
+#: ../../tribes/barbarians/conf:131
 msgid "Geologist"
 msgstr "Geologi"
 
@@ -399,15 +415,15 @@ msgstr "Geologi"
 msgid "Gets fish out of the sea."
 msgstr "Kiskoo kalaa vedestä."
 
-#: ../../tribes/barbarians/conf:81
+#: ../../tribes/barbarians/conf:82
 msgid "Gold"
 msgstr "Kulta"
 
-#: ../../tribes/barbarians/conf:204
+#: ../../tribes/barbarians/conf:214
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
-#: ../../tribes/barbarians/conf:82
+#: ../../tribes/barbarians/conf:83
 msgid "Gold Ore"
 msgstr "Kultamalmi"
 
@@ -433,11 +449,11 @@ msgstr ""
 "siitä tulee kultaa, jota käytetään arvokkaana rakennusmateriaalina, ja "
 "aseiden ja haarniskojen raaka-aineena."
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:205
 msgid "Granite Mine"
 msgstr "Graniittikaivos"
 
-#: ../../tribes/barbarians/conf:83
+#: ../../tribes/barbarians/conf:84
 msgid "Grout"
 msgstr "Laasti"
 
@@ -445,15 +461,15 @@ msgstr "Laasti"
 msgid "Grows thatch reed."
 msgstr "Kasvattaa kaislanolkia."
 
-#: ../../tribes/barbarians/conf:150
+#: ../../tribes/barbarians/conf:158
 msgid "Guardhall"
 msgstr "Linnake"
 
-#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:159
 msgid "Guardhouse"
 msgstr "Vartiotupa"
 
-#: ../../tribes/barbarians/conf:84
+#: ../../tribes/barbarians/conf:85
 msgid "Hammer"
 msgstr "Vasara"
 
@@ -465,25 +481,25 @@ msgstr "Korjaa kaislaa"
 msgid "Harvest wheat"
 msgstr "Korjaa vehnää"
 
-#: ../../tribes/barbarians/conf:164
-#: ../../tribes/barbarians/conf:165
+#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:173
 msgid "Headquarters"
 msgstr "Päämaja"
 
-#: ../../tribes/barbarians/conf:219
+#: ../../tribes/barbarians/conf:229
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "Keskikokoinen päämaja"
 
-#: ../../tribes/barbarians/conf:85
+#: ../../tribes/barbarians/conf:86
 msgid "Helmet"
 msgstr "Kypärä"
 
-#: ../../tribes/barbarians/conf:131
+#: ../../tribes/barbarians/conf:132
 msgid "Helmsmith"
 msgstr "Kypäräseppä"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:204
 msgid "Helmsmithy"
 msgstr "Kypäräpaja"
 
@@ -491,7 +507,7 @@ msgstr "Kypäräpaja"
 msgid "Helps to carry items at heavily used roads."
 msgstr "Auttaa kantamaan tavaroita vilkkailla teillä."
 
-#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:160
 msgid "High Tower"
 msgstr "Suurtorni"
 
@@ -506,35 +522,35 @@ msgstr ""
 "työkaluja. (Jos pajaa laajennetaan kirvestehtaaksi tai sotamyllyksi, "
 "valmistus loppuu)"
 
-#: ../../tribes/barbarians/conf:132
+#: ../../tribes/barbarians/conf:133
 msgid "Hunter"
 msgstr "Metsästäjä"
 
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:182
 msgid "Hunter's Hut"
 msgstr "Metsästäjän maja"
 
-#: ../../tribes/barbarians/conf:86
+#: ../../tribes/barbarians/conf:87
 msgid "Hunting Spear"
 msgstr "Metsästyskeihäs"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:193
 msgid "Inn"
 msgstr "Majatalo"
 
-#: ../../tribes/barbarians/conf:133
+#: ../../tribes/barbarians/conf:134
 msgid "Innkeeper"
 msgstr "Majatalonpitäjä"
 
-#: ../../tribes/barbarians/conf:87
+#: ../../tribes/barbarians/conf:88
 msgid "Iron"
 msgstr "Rauta"
 
-#: ../../tribes/barbarians/conf:88
+#: ../../tribes/barbarians/conf:89
 msgid "Iron Ore"
 msgstr "Rautamalmi"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:211
 msgid "Iron Ore Mine"
 msgstr "Rautakaivos"
 
@@ -555,47 +571,47 @@ msgstr ""
 "Rautamalmia louhitaan rautakaivoksissa. Siitä saadaan rautaa sulattamalla "
 "sulattamossa."
 
-#: ../../tribes/barbarians/conf:89
+#: ../../tribes/barbarians/conf:90
 msgid "Kitchen Tools"
 msgstr "Keittiövälineet"
 
-#: ../../tribes/barbarians/conf:178
+#: ../../tribes/barbarians/conf:187
 msgid "Lime Kiln"
 msgstr "Kalkinpolttouuni"
 
-#: ../../tribes/barbarians/conf:134
+#: ../../tribes/barbarians/conf:135
 msgid "Lime-Burner"
 msgstr "Kalkinpolttaja"
 
-#: ../../tribes/barbarians/conf:135
+#: ../../tribes/barbarians/conf:136
 msgid "Lumberjack"
 msgstr "Puunhakkaaja"
 
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:179
 msgid "Lumberjack's Hut"
 msgstr "Puunhakkaajan maja"
 
-#: ../../tribes/barbarians/conf:90
+#: ../../tribes/barbarians/conf:91
 msgid "Mask"
 msgstr "Naamio"
 
-#: ../../tribes/barbarians/conf:118
+#: ../../tribes/barbarians/conf:119
 msgid "Master Blacksmith"
 msgstr "Seppämestari"
 
-#: ../../tribes/barbarians/conf:120
+#: ../../tribes/barbarians/conf:121
 msgid "Master Brewer"
 msgstr "Olutmestari"
 
-#: ../../tribes/barbarians/conf:124
+#: ../../tribes/barbarians/conf:125
 msgid "Master Miner"
 msgstr "Kaivosmestari"
 
-#: ../../tribes/barbarians/conf:91
+#: ../../tribes/barbarians/conf:92
 msgid "Meal"
 msgstr "Ateria"
 
-#: ../../tribes/barbarians/conf:92
+#: ../../tribes/barbarians/conf:93
 msgid "Meat"
 msgstr "Liha"
 
@@ -611,15 +627,15 @@ msgstr ""
 "välipalojen ja aterioiden tekemiseen kaivostyöläisille. Sitä kuluu myös "
 "harjoituspaikoilla (harjoitusleiri ja taisteluareena)."
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:200
 msgid "Metalwork Shop"
 msgstr "Metallipaja"
 
-#: ../../tribes/barbarians/conf:182
+#: ../../tribes/barbarians/conf:191
 msgid "Micro Brewery"
 msgstr "Pienpanimo"
 
-#: ../../tribes/barbarians/conf:136
+#: ../../tribes/barbarians/conf:137
 msgid "Miner"
 msgstr "Kaivostyöläinen"
 
@@ -639,24 +655,20 @@ msgstr ""
 "välttökykyä tasolta 0 tasoilel 1 ja 2. Vahvaa olutta tarvitaan myös isoissa "
 "majataloissa aterioiden valmistamiseen."
 
-#: ../../tribes/barbarians/conf:160
+#: ../../tribes/barbarians/conf:168
 msgid "Outpost"
 msgstr "Etuvartioasema"
 
-#: ../../tribes/barbarians/conf:111
+#: ../../tribes/barbarians/conf:112
 msgid "Ox"
 msgstr "Härkä"
 
-#: ../../tribes/barbarians/conf:69
-msgid "Peel"
-msgstr "Leipälapio"
-
-#: ../../tribes/barbarians/conf:93
+#: ../../tribes/barbarians/conf:94
 msgid "Pick"
 msgstr "Hakku"
 
 # TODO: Pitta?
-#: ../../tribes/barbarians/conf:94
+#: ../../tribes/barbarians/conf:95
 msgid "Pitta Bread"
 msgstr "Pitaleipä"
 
@@ -675,6 +687,10 @@ msgstr "Istuttaa peltoja."
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
 msgstr "Istuttaa puita."
+
+#: ../../tribes/barbarians/conf:175
+msgid "Port"
+msgstr ""
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
@@ -792,23 +808,23 @@ msgstr ""
 msgid "Produces weapons for soldiers and tools for workers."
 msgstr "Tuottaa aseita sotilaille ja työkaluja työntekijöille."
 
-#: ../../tribes/barbarians/conf:169
+#: ../../tribes/barbarians/conf:178
 msgid "Quarry"
 msgstr "Kivilouhos"
 
-#: ../../tribes/barbarians/conf:137
+#: ../../tribes/barbarians/conf:138
 msgid "Ranger"
 msgstr "Metsänvartija"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:180
 msgid "Ranger's Hut"
 msgstr "Metsänvartijan maja"
 
-#: ../../tribes/barbarians/conf:95
+#: ../../tribes/barbarians/conf:96
 msgid "Ration"
 msgstr "Ruoka-annos"
 
-#: ../../tribes/barbarians/conf:96
+#: ../../tribes/barbarians/conf:97
 msgid "Raw Stone"
 msgstr "Raakakivi"
 
@@ -884,11 +900,11 @@ msgstr "Resurssimerkki ei mitään"
 msgid "Resource indicator water"
 msgstr "Resurssimerkki vettä"
 
-#: ../../tribes/barbarians/conf:142
+#: ../../tribes/barbarians/conf:144
 msgid "Scout"
 msgstr "Tiedustelija"
 
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:185
 msgid "Scout's Hut"
 msgstr "Tiedustelijan maja"
 
@@ -899,20 +915,36 @@ msgstr ""
 "Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita "
 "tiedustelun malliin."
 
-#: ../../tribes/barbarians/conf:97
+#: ../../tribes/barbarians/conf:98
 msgid "Scythe"
 msgstr "Viikate"
 
-#: ../../tribes/barbarians/conf:155
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:163
+#: ../../tribes/barbarians/conf:218
 msgid "Sentry"
 msgstr "Vartiopaikka"
 
-#: ../../tribes/barbarians/conf:98
+#: ../../tribes/barbarians/conf:99
 msgid "Sharp Axe"
 msgstr "Terävä kirves"
 
-#: ../../tribes/barbarians/conf:99
+#: ../../tribes/barbarians/conf:148
+msgid "Ship"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:62
+msgid "Ship construction site"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:139
+msgid "Shipwright"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:197
+msgid "Shipyard"
+msgstr ""
+
+#: ../../tribes/barbarians/conf:100
 msgid "Shovel"
 msgstr "Lapio"
 
@@ -921,7 +953,7 @@ msgstr "Lapio"
 msgid "Sleep"
 msgstr "Lepää"
 
-#: ../../tribes/barbarians/conf:153
+#: ../../tribes/barbarians/conf:161
 msgid "Small Tower"
 msgstr "Pieni torni"
 
@@ -933,11 +965,11 @@ msgstr "Sulata kultaa"
 msgid "Smelt iron"
 msgstr "Sulata rautaa"
 
-#: ../../tribes/barbarians/conf:138
+#: ../../tribes/barbarians/conf:140
 msgid "Smelter"
 msgstr "Sulattaja"
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:196
 msgid "Smelting Works"
 msgstr "Sulattamo"
 
@@ -949,11 +981,11 @@ msgstr "Sulattaa kypäriä sotilaille"
 msgid "Smelts iron."
 msgstr "Sulattaa rautaa."
 
-#: ../../tribes/barbarians/conf:100
+#: ../../tribes/barbarians/conf:101
 msgid "Snack"
 msgstr "Välipala"
 
-#: ../../tribes/barbarians/conf:114
+#: ../../tribes/barbarians/conf:115
 msgid "Soldier"
 msgstr "Sotilas"
 
@@ -967,23 +999,23 @@ msgstr ""
 "ei rakennettu. Olet epäedullisessa asemassa sen vuoksi; \n"
 "Harkitse kartan aloittamista uudelleen reilummalla aloitusasemalla."
 
-#: ../../tribes/barbarians/conf:139
+#: ../../tribes/barbarians/conf:141
 msgid "Stonemason"
 msgstr "Kivenhakkaaja"
 
-#: ../../tribes/barbarians/conf:101
+#: ../../tribes/barbarians/conf:102
 msgid "Strong Beer"
 msgstr "Vahva olut"
 
-#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:219
 msgid "Stronghold"
 msgstr "Linnake"
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:194
 msgid "Tavern"
 msgstr "Krouvi"
 
-#: ../../tribes/barbarians/conf:102
+#: ../../tribes/barbarians/conf:103
 msgid "Thatch Reed"
 msgstr "Kaislanolki"
 
@@ -1029,6 +1061,14 @@ msgstr ""
 "Pitaleipää käytetään krouveissa, majataloissa ja suurissa majataloissa ruoka-"
 "annosten, välipalojen ja aterioiden valmistamiseen. Sitä kuluu myös "
 "harjoituspaikoilla (harjoitusleiri ja taisteluareena)."
+
+#: ../../tribes/barbarians/bakingtray/conf:1
+msgid ""
+"The bread paddle is a tool of the baker and each baker needs his own. It is "
+"produced in the metal works like all other tools (but it ceases to be "
+"produced by the building if the metal works is enhanced to an axefactory and "
+"war mill)."
+msgstr ""
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -1085,16 +1125,6 @@ msgstr ""
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
 msgstr "Itäisten maiden mahtavat heimot!"
-
-#: ../../tribes/barbarians/bakingtray/conf:1
-msgid ""
-"The peel is a tool of the baker and each baker needs his own. It is produced "
-"in the metal works like all other tools (but it ceases to be produced by the "
-"building if the metal works is enhanced to an axefactory and war mill)."
-msgstr ""
-"Leipälapio on leipurin työkalu ja jokainen leipuri tarvtsee omansa. Sitä "
-"tuotetaan metallipajassa kuten muitakin työkaluja (kunhan pajaa ei "
-"laajenneta kirvestehtaaksi tai sotamyllyksi)."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1177,16 +1207,16 @@ msgstr ""
 "saaliin yhdellä iskulla. Sitä käyttävät vain metsästäjät. Se tehdään "
 "metallipajassa (kunhan pajaa ei laajenneta kirvestehtaaksi tai sotamyllyksi)."
 
-#: ../../tribes/barbarians/conf:154
-#: ../../tribes/barbarians/conf:161
+#: ../../tribes/barbarians/conf:162
+#: ../../tribes/barbarians/conf:169
 msgid "Tower"
 msgstr "Torni"
 
-#: ../../tribes/barbarians/conf:140
+#: ../../tribes/barbarians/conf:142
 msgid "Trainer"
 msgstr "Kouluttaja"
 
-#: ../../tribes/barbarians/conf:216
+#: ../../tribes/barbarians/conf:226
 msgid "Trainingscamp"
 msgstr "Harjoitusleiri"
 
@@ -1194,7 +1224,7 @@ msgstr "Harjoitusleiri"
 msgid "Trains the soldiers."
 msgstr "Kouluttaa sotilaita."
 
-#: ../../tribes/barbarians/conf:103
+#: ../../tribes/barbarians/conf:104
 msgid "Trunk"
 msgstr "Tukki"
 
@@ -1330,24 +1360,24 @@ msgstr ""
 "Paranna sotilaan voimapisteitä (2) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/conf:104
+#: ../../tribes/barbarians/conf:105
 msgid "War Helmet"
 msgstr "Sotakypärä"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:198
 msgid "War Mill"
 msgstr "Sotamylly"
 
-#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:174
 msgid "Warehouse"
 msgstr "Varasto"
 
 # TODO: 's
-#: ../../tribes/barbarians/conf:105
+#: ../../tribes/barbarians/conf:106
 msgid "Warriors Axe"
 msgstr "Soturin kirves"
 
-#: ../../tribes/barbarians/conf:106
+#: ../../tribes/barbarians/conf:107
 msgid "Water"
 msgstr "Vesi"
 
@@ -1360,19 +1390,19 @@ msgstr ""
 "Vesi on elämän lähde! Sitä käytetään leipomossa, pienpanimossa ja panimossa. "
 "Myös kalkinpolttouuni ja karjatila tarvitsevat vettä."
 
-#: ../../tribes/barbarians/conf:141
+#: ../../tribes/barbarians/conf:143
 msgid "Weaver"
 msgstr "Kutoja"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:202
 msgid "Weaving-Mill"
 msgstr "Kutomo"
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:184
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../../tribes/barbarians/conf:107
+#: ../../tribes/barbarians/conf:108
 msgid "Wheat"
 msgstr "Vehnä"
 
@@ -1387,11 +1417,11 @@ msgstr ""
 "tarvitset vehnää."
 
 # TODO: wild boar
-#: ../../tribes/barbarians/conf:65
+#: ../../tribes/barbarians/conf:66
 msgid "Wildboar"
 msgstr "Villisika"
 
-#: ../../tribes/barbarians/conf:177
+#: ../../tribes/barbarians/conf:186
 msgid "Wood Hardener"
 msgstr "Puunkovettaja"
 
@@ -1426,10 +1456,11 @@ msgstr "Puunkovettaja"
 #: ../../tribes/barbarians/quarry/conf:15
 #: ../../tribes/barbarians/rangers_hut/conf:14
 #: ../../tribes/barbarians/scouts_hut/conf:17
+#: ../../tribes/barbarians/shipyard/conf:19
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
 #: ../../tribes/barbarians/warmill/conf:39
-#: ../../tribes/barbarians/weaving-mill/conf:20
+#: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
 msgstr "Työskentele (pääohjelna)"
@@ -1437,6 +1468,10 @@ msgstr "Työskentele (pääohjelna)"
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
 msgstr "Työskentelee rakennuspaikoilla pystyttääkseen uuden rakennuksen."
+
+#: ../../tribes/barbarians/shipwright/conf:1
+msgid "Works at the shipyard and constructs new ships."
+msgstr ""
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
