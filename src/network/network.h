@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008 by the Widelands Development Team
+ * Copyright (C) 2004-2008, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -168,6 +168,25 @@ struct DisconnectException : public std::exception {
 	virtual const char * what() const throw ();
 private:
 	std::string m_what;
+};
+
+/**
+ * This exception is used internally during protocol handling to indicate that the connection
+ * should be terminated because an unexpected message got received that is disallowed by the protocol.
+ */
+struct ProtocolException : public std::exception {
+	explicit ProtocolException(uint8_t code) throw () {m_what = code;}
+	virtual ~ProtocolException() throw () {}
+
+	/// do NOT use!!! This exception shall only return the command number of the received message
+	/// via \ref ProtocolException:number()
+	virtual const char * what()   const throw () {assert(false); return "dummy";}
+
+	/// \returns the command number of the received message
+	virtual int          number() const throw () {return m_what;}
+private:
+	// no uint8_t, as lexical_cast does not support that format
+	int m_what;
 };
 
 #endif

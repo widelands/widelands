@@ -13,12 +13,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 
 #include "buildingwindow.h"
+
+#include "waresqueuedisplay.h"
+
 #include "logic/constructionsite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
@@ -63,7 +66,10 @@ ConstructionSite_Window::ConstructionSite_Window
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i));
+		box.add
+			(new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)),
+			 UI::Box::AlignLeft);
+
 
 	get_tabs()->add("wares", g_gr->get_picture(PicMod_UI, pic_tab_wares), &box);
 }

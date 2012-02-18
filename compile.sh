@@ -135,7 +135,7 @@ var_updater=0 # 0 = false
     fi
 
     echo " "
-    cmake -DWL_PORTABLE=true .. -DCMAKE_EXE_CXX_FLAGS="${CFLAGS}" -DCMAKE_BUILD_TYPE="${var_build_type}"
+    cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="${var_build_type}"
     make ${MAKEOPTS}
     return 0
   }

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
 "PO-Revision-Date: 2011-03-24 08:19+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:42+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:44+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -431,11 +431,11 @@ msgstr ""
 "Plusne scire vis? Nostrae FAQ, vici, fora communitatis invenies apud "
 "www.widelands.org."
 
-#: ../../txts/developers:154
+#: ../../txts/developers:156
 msgid "Atlantean"
 msgstr ""
 
-#: ../../txts/developers:144
+#: ../../txts/developers:146
 msgid "Barbarian"
 msgstr "Barbari"
 
@@ -462,7 +462,7 @@ msgstr "CTRL+L Tabulam tollere"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S Tabulam servare"
 
-#: ../../txts/developers:141
+#: ../../txts/developers:143
 msgid "Campaign Story"
 msgstr "Fabula contentionis"
 
@@ -498,7 +498,7 @@ msgstr ""
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "CTRL+F10 Ludum statim claudere"
 
-#: ../../txts/developers:169
+#: ../../txts/developers:171
 msgid "Czech"
 msgstr "Lingua Bohemica"
 
@@ -506,7 +506,7 @@ msgstr "Lingua Bohemica"
 msgid "DELETE      Archive the current message"
 msgstr "DELETE praesentem nuntium ad archivum mittit"
 
-#: ../../txts/developers:176
+#: ../../txts/developers:178
 msgid "Dansk"
 msgstr "Danica lingua"
 
@@ -514,11 +514,11 @@ msgstr "Danica lingua"
 msgid "Development"
 msgstr "progressus"
 
-#: ../../txts/developers:311
+#: ../../txts/developers:313
 msgid "Documentation, Help and Wiki"
 msgstr "Documenta, adiutatum, vici"
 
-#: ../../txts/developers:182
+#: ../../txts/developers:184
 msgid "Dutch"
 msgstr "Nederlandica lingua"
 
@@ -530,7 +530,7 @@ msgstr ""
 msgid "Elders"
 msgstr "Patres"
 
-#: ../../txts/developers:150
+#: ../../txts/developers:152
 msgid "Empire"
 msgstr "Imperium"
 
@@ -554,15 +554,15 @@ msgstr "F11 Imaginem monitoris capit."
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../txts/developers:189
+#: ../../txts/developers:191
 msgid "Finnish"
 msgstr "Finnica lingua"
 
-#: ../../txts/developers:326
+#: ../../txts/developers:328
 msgid "Former elders"
 msgstr "Patres pristini"
 
-#: ../../txts/developers:195
+#: ../../txts/developers:197
 msgid "French"
 msgstr "Francogallica lingua"
 
@@ -582,7 +582,7 @@ msgstr ""
 "GNU general public license terms and conditions for copying, distribution "
 "and modification"
 
-#: ../../txts/developers:202
+#: ../../txts/developers:204
 msgid "Galician"
 msgstr "Gallaica lingua"
 
@@ -590,16 +590,16 @@ msgstr "Gallaica lingua"
 msgid "General game control"
 msgstr ""
 
-#: ../../txts/developers:207
+#: ../../txts/developers:209
 msgid "German"
 msgstr "Theodisca lingua"
 
-#: ../../txts/developers:76
+#: ../../txts/developers:77
 msgid "Graphicians"
 msgstr "Pictores"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:337
+#: ../../txts/developers:339
 msgid "Graphics"
 msgstr "Imagines"
 
@@ -607,7 +607,7 @@ msgstr "Imagines"
 msgid "H        Toggles main menu"
 msgstr ""
 
-#: ../../txts/developers:219
+#: ../../txts/developers:221
 msgid "Hebrew"
 msgstr "Hebraica lingua"
 
@@ -630,11 +630,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Pos1 Ad principia reloceris"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:330
+#: ../../txts/developers:332
 msgid "Homepage"
 msgstr "Pagina domestica"
 
-#: ../../txts/developers:302
+#: ../../txts/developers:304
 msgid "Homepage Coders"
 msgstr ""
 
@@ -642,7 +642,7 @@ msgstr ""
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "How to Apply These Terms to Your New Programs"
 
-#: ../../txts/developers:224
+#: ../../txts/developers:226
 msgid "Hungarian"
 msgstr "Hungarica lingua"
 
@@ -745,7 +745,7 @@ msgstr ""
 "she is willing to distribute software through any other system and a "
 "licensee cannot impose that choice."
 
-#: ../../txts/developers:229
+#: ../../txts/developers:231
 msgid "Italian"
 msgstr "Italica lingua"
 
@@ -774,7 +774,7 @@ msgid ""
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
 
-#: ../../txts/developers:268
+#: ../../txts/developers:270
 msgid "Linux Distributions"
 msgstr ""
 
@@ -793,7 +793,7 @@ msgid ""
 "messages."
 msgstr ""
 
-#: ../../txts/developers:127
+#: ../../txts/developers:129
 msgid "Maps and Missions"
 msgstr "Tabulae missusque"
 
@@ -801,7 +801,7 @@ msgstr "Tabulae missusque"
 msgid "Miners will only work if supplied with food."
 msgstr "Fossores metallici non laborant, nisi cibum habeant."
 
-#: ../../txts/developers:106
+#: ../../txts/developers:107
 msgid "Musicians"
 msgstr "Musici"
 
@@ -809,7 +809,7 @@ msgstr "Musici"
 msgid "N               Toggle messages ('news')"
 msgstr "N Nuntia monstrare"
 
-#: ../../txts/developers:164
+#: ../../txts/developers:166
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -819,7 +819,7 @@ msgstr ""
 msgid "No warranty"
 msgstr "No warranty"
 
-#: ../../txts/developers:290
+#: ../../txts/developers:292
 msgid "Non Unix Distributions"
 msgstr ""
 
@@ -849,11 +849,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Adiutorium interretialis"
 
-#: ../../txts/developers:355
+#: ../../txts/developers:357
 msgid "Other"
 msgstr "Altera"
 
-#: ../../txts/developers:279
+#: ../../txts/developers:281
 msgid "Other Unix Distributions"
 msgstr ""
 
@@ -881,7 +881,7 @@ msgstr "PAGEUP Ludum velociorem facit."
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr ""
 
-#: ../../txts/developers:264
+#: ../../txts/developers:266
 msgid "Packagers"
 msgstr ""
 
@@ -893,7 +893,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/developers:234
+#: ../../txts/developers:236
 msgid "Polish"
 msgstr "Polonica lingua"
 
@@ -935,7 +935,7 @@ msgstr ""
 msgid "Reporting Bugs"
 msgstr "Emenda nuntiandi"
 
-#: ../../txts/developers:242
+#: ../../txts/developers:244
 msgid "Russian"
 msgstr "Ruthenica lingua"
 
@@ -960,13 +960,13 @@ msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
 
-#: ../../txts/developers:165
+#: ../../txts/developers:167
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 
-#: ../../txts/developers:247
+#: ../../txts/developers:249
 msgid "Slovak"
 msgstr "Slovaca lingua"
 
@@ -979,15 +979,15 @@ msgid ""
 msgstr ""
 
 #: ../../txts/developers:28
-#: ../../txts/developers:343
+#: ../../txts/developers:345
 msgid "Sound"
 msgstr "Sonus"
 
-#: ../../txts/developers:117
+#: ../../txts/developers:119
 msgid "Sound Effects"
 msgstr "Sonitus"
 
-#: ../../txts/developers:252
+#: ../../txts/developers:254
 msgid "Spanish"
 msgstr "Hispanica lingua"
 
@@ -1001,7 +1001,7 @@ msgstr ""
 msgid "Status"
 msgstr "Status"
 
-#: ../../txts/developers:257
+#: ../../txts/developers:259
 msgid "Swedish"
 msgstr "Suecica lingua"
 
@@ -1229,11 +1229,11 @@ msgid ""
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
 
-#: ../../txts/developers:348
+#: ../../txts/developers:350
 msgid "Translation"
 msgstr ""
 
-#: ../../txts/developers:161
+#: ../../txts/developers:163
 msgid "Translators"
 msgstr ""
 

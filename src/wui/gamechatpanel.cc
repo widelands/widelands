@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -34,8 +34,8 @@ GameChatPanel::GameChatPanel
 	editbox  (this, 0, h - 20, w,  20)
 {
 	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
-	editbox.ok.set(this, &GameChatPanel::keyEnter);
-	editbox.cancel.set(this, &GameChatPanel::keyEscape);
+	editbox.ok.connect(boost::bind(&GameChatPanel::keyEnter, this));
+	editbox.cancel.connect(boost::bind(&GameChatPanel::keyEscape, this));
 	editbox.setAlign(UI::Align_Left);
 	editbox.activate_history(true);
 
@@ -81,11 +81,11 @@ void GameChatPanel::keyEnter()
 		m_chat.send(str);
 
 	editbox.setText("");
-	sent.call();
+	sent();
 }
 
 void GameChatPanel::keyEscape()
 {
 	editbox.setText("");
-	aborted.call();
+	aborted();
 }

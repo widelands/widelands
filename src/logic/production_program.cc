@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -633,8 +633,7 @@ void ProductionProgram::ActWorker::building_work_failed
 }
 
 
-ProductionProgram::ActSleep::ActSleep
-	(char * parameters, ProductionSite_Descr const &)
+ProductionProgram::ActSleep::ActSleep(char * parameters, ProductionSite_Descr const &)
 {
 	try {
 		if (*parameters) {
@@ -652,11 +651,42 @@ ProductionProgram::ActSleep::ActSleep
 	}
 }
 
-void ProductionProgram::ActSleep::execute
-	(Game & game, ProductionSite & ps) const
+void ProductionProgram::ActSleep::execute(Game & game, ProductionSite & ps) const
 {
 	return
 		ps.program_step(game, m_duration ? m_duration : ps.top_state().phase);
+}
+
+
+ProductionProgram::ActCheck_Map::ActCheck_Map(char * parameters, ProductionSite_Descr const &)
+{
+	try {
+		if (*parameters) {
+			if (!strcmp(parameters, "seafaring"))
+				m_feature = SEAFARING;
+			else
+				throw game_data_error(_("Unknown parameter \"%s\""), parameters);
+		} else
+			throw game_data_error(_("No parameter given!"));
+	} catch (_wexception const & e) {
+		throw game_data_error(_("sleep: %s"), e.what());
+	}
+}
+
+void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) const
+{
+	switch (m_feature) {
+		case SEAFARING: {
+			if (game.map().get_port_spaces().size() > 1) // we need at least two port build spaces
+				return ps.program_step(game, 0);
+			else {
+				snprintf(ps.m_result_buffer, sizeof(ps.m_result_buffer), "No use for ships on this map!");
+				return ps.program_end(game, None);
+			}
+		}
+		default:
+			assert(false);;
+	}
 }
 
 
@@ -743,7 +773,6 @@ void ProductionProgram::ActConsume::execute
 		Ware_Index const ware_type = warequeues[i]->get_ware();
 		uint8_t nr_available = warequeues[i]->get_filled();
 		consumption_quantities[i] = 0;
-		Groups::const_iterator const groups_end = l_groups.end();
 
 		//  Iterate over all consume groups and see if they want us to consume
 		//  any thing from the currently considered input queue.
@@ -806,6 +835,9 @@ void ProductionProgram::ActConsume::execute
 			if (uint8_t const q = consumption_quantities[i]) {
 				assert(q <= warequeues[i]->get_filled());
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
+
+				//update consumption statistic
+				ps.owner().ware_consumed(warequeues[i]->get_ware(), q);
 			}
 		return ps.program_step(game);
 	}
@@ -1575,6 +1607,8 @@ ProductionProgram::ProductionProgram
 			action = new ActPlayFX (v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "construct"))
 			action = new ActConstruct (v->get_string(), *building, _name);
+		else if (not strcmp(v->get_name(), "check_map"))
+			action = new ActCheck_Map(v->get_string(), *building);
 		else
 			throw game_data_error
 				(_("unknown command type \"%s\""), v->get_name());

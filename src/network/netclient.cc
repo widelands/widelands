@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,11 +22,13 @@
 #include "build_info.h"
 #include "game_io/game_loader.h"
 #include "i18n.h"
+#include "internet_gaming.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/playercommand.h"
 #include "map_io/widelands_map_loader.h"
+#include "network_gaming_messages.h"
 #include "network_protocol.h"
 #include "network_system.h"
 #include "profile/profile.h"
@@ -42,6 +44,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
+#include <boost/lexical_cast.hpp>
 #include <config.h>
 #ifndef HAVE_VARARRAY
 #include <climits>
@@ -61,7 +64,7 @@ struct NetClientImpl {
 	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
 	Deserializer deserializer;
 
-	/// Currently active modal panel. Receives an end_modal on disconncet
+	/// Currently active modal panel. Receives an end_modal on disconnect
 	UI::Panel * modal;
 
 	/// Current game. Only non-null if a game is actually running.
@@ -91,8 +94,8 @@ struct NetClientImpl {
 };
 
 NetClient::NetClient
-	(IPaddress * const svaddr, std::string const & playername, bool ggz)
-: d(new NetClientImpl), use_ggz(ggz), m_dedicated_access(false), m_dedicated_temp_scenario(false)
+	(IPaddress * const svaddr, std::string const & playername, bool internet)
+: d(new NetClientImpl), m_internet(internet), m_dedicated_access(false), m_dedicated_temp_scenario(false)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == 0)
@@ -131,7 +134,7 @@ NetClient::NetClient
 NetClient::~NetClient ()
 {
 	if (d->sock != 0)
-		disconnect(_("Client has left the game."), true, false);
+		disconnect("CLIENT_LEFT_GAME", "", true, false);
 
 	SDLNet_FreeSocketSet (d->sockset);
 
@@ -148,6 +151,9 @@ void NetClient::run ()
 	s.send(d->sock);
 
 	d->settings.multiplayer = true;
+
+	// Fill the list of possible system messages
+	NetworkGamingMessages::fill_map();
 	{
 		Fullscreen_Menu_LaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
@@ -164,8 +170,12 @@ void NetClient::run ()
 			code = lgm.run();
 			d->modal = 0;
 		}
-		if (code <= 0)
+		if (code <= 0) {
+			// if this is an internet game, tell the metaserver that client is back in the lobby.
+			if (m_internet)
+				InternetGaming::ref().set_game_done();
 			return;
+		}
 	}
 
 	d->server_is_waiting = true;
@@ -217,13 +227,17 @@ void NetClient::run ()
 			 Widelands::Game::Loaded
 			 : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+
+		// if this is an internet game, tell the metaserver that the game is done.
+		if (m_internet)
+			InternetGaming::ref().set_game_done();
 		d->modal = 0;
 		d->game = 0;
 	} catch (...) {
 		d->modal = 0;
 		WLApplication::emergency_save(game);
 		d->game = 0;
-		disconnect(_("Client crashed and performed an emergency save."));
+		disconnect("CLIENT_CRASHED");
 		throw;
 	}
 }
@@ -556,8 +570,7 @@ void NetClient::recvOnePlayer
 	(uint8_t const number, Widelands::StreamRead & packet)
 {
 	if (number >= d->settings.players.size())
-		throw DisconnectException
-			(_("Server sent a player update for a player that does not exist."));
+		throw DisconnectException("PLAYER_UPDATE_FOR_N_E_P");
 
 	PlayerSettings & player = d->settings.players.at(number);
 	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
@@ -575,8 +588,7 @@ void NetClient::recvOneUser
 	(uint32_t const number, Widelands::StreamRead & packet)
 {
 	if (number > d->settings.users.size())
-		throw DisconnectException
-			(_("Server sent an user update for a user that does not exist."));
+		throw DisconnectException("USER_UPDATE_FOR_N_E_U");
 
 	// This might happen, if a users connects after the game starts.
 	if (number == d->settings.users.size()) {
@@ -642,23 +654,23 @@ void NetClient::handle_packet(RecvPacket & packet)
 	uint8_t cmd = packet.Unsigned8();
 
 	if (cmd == NETCMD_DISCONNECT) {
+		uint8_t number = packet.Unsigned8();
 		std::string reason = packet.String();
-		disconnect(reason, false);
+		if (number == 1)
+			disconnect(reason,  "", false);
+		else {
+			std::string arg = packet.String();
+			disconnect(reason, arg, false);
+		}
 		return;
 	}
 
 	if (d->settings.usernum == -2) {
 		if (cmd != NETCMD_HELLO)
-			throw DisconnectException
-				(_
-				 	("Expected a HELLO packet from server, but received command "
-				 	 "number %u. Maybe the server is running a different version "
-				 	 "of Widelands?"),
-				 cmd);
+			throw ProtocolException(cmd);
 		uint8_t const version = packet.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
-			throw DisconnectException
-				(_("Server uses a different protocol version"));
+			throw DisconnectException("DIFFERENT_PROTOCOL_VERS");
 		d->settings.usernum = packet.Unsigned32();
 		d->settings.playernum = -1;
 		return;
@@ -676,8 +688,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_SETTING_MAP: {
 		d->settings.mapname = packet.String();
-		d->settings.mapfilename =
-			g_fs->FileSystem::fixCrossFile(packet.String());
+		d->settings.mapfilename = g_fs->FileSystem::fixCrossFile(packet.String());
 		d->settings.savegame = packet.Unsigned8() == 1;
 		d->settings.scenario = packet.Unsigned8() == 1;
 		log
@@ -688,7 +699,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_DEDICATED_MAPS: {
 		DedicatedMapInfos info;
-		info.path     = packet.String();
+		info.path     = g_fs->FileSystem::fixCrossFile(packet.String());
 		info.players  = packet.Unsigned8();
 		info.scenario = packet.Unsigned8() == 1;
 		d->settings.maps.push_back(info);
@@ -697,7 +708,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_DEDICATED_SAVED_GAMES: {
 		DedicatedMapInfos info;
-		info.path    = packet.String();
+		info.path    = g_fs->FileSystem::fixCrossFile(packet.String());
 		info.players = packet.Unsigned8();
 		d->settings.saved_games.push_back(info);
 		break;
@@ -851,7 +862,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 				s.Unsigned8(NETCMD_CHAT);
 				s.String
 					(_
-					  ("/me checked the recieved file. Although md5 check summing succeded, "
+					  ("/me checked the received file. Although md5 check summing succeeded, "
 					   "I can not handle the file."));
 				s.send(d->sock);
 			}
@@ -921,8 +932,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_LAUNCH: {
 		if (!d->modal || d->game)
-			throw DisconnectException
-				(_("Unexpectedly received LAUNCH command from server."));
+			throw DisconnectException("UNEXPECTED_LAUNCH");
 		d->modal->end_modal(2);
 		break;
 	}
@@ -941,8 +951,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		break;
 	case NETCMD_PLAYERCOMMAND: {
 		if (!d->game)
-			throw DisconnectException
-				(_("Server sent a PLAYERCOMMAND even though no game is running."));
+			throw DisconnectException("PLAYERCMD_WO_GAME");
 
 		int32_t const time = packet.Signed32();
 		Widelands::PlayerCommand & plcmd =
@@ -954,8 +963,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 	case NETCMD_SYNCREQUEST: {
 		if (!d->game)
-			throw DisconnectException
-				(_("Server sent a SYNCREQUEST even though no game is running."));
+			throw DisconnectException("SYNCREQUEST_WO_GAME");
 		int32_t const time = packet.Signed32();
 		d->time.recv(time);
 		d->game->enqueue_command(new Cmd_NetCheckSync(time, this));
@@ -973,6 +981,20 @@ void NetClient::handle_packet(RecvPacket & packet)
 		ChatProvider::send(c); // NoteSender<ChatMessage>
 		break;
 	}
+	case NETCMD_SYSTEM_MESSAGE_CODE: {
+		ChatMessage c;
+		c.time = time(0);
+		std::string code = packet.String();
+		std::string arg1 = packet.String();
+		std::string arg2 = packet.String();
+		std::string arg3 = packet.String();
+		c.msg = NetworkGamingMessages::get_message(code, arg1, arg2, arg3);
+		c.playern = UserSettings::none(); //  == System message
+		// c.sender remains empty to indicate a system message
+		d->chatmessages.push_back(c);
+		ChatProvider::send(c);
+		break;
+	}
 	case NETCMD_DEDICATED_ACCESS: {
 		m_dedicated_access = true;
 		break;
@@ -985,8 +1007,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			d->game->save_syncstream(true);
 		break;
 	default:
-		throw DisconnectException
-			(_("Server sent an unknown command (command number %u)"), cmd);
+		throw ProtocolException(cmd);
 	}
 }
 
@@ -996,18 +1017,16 @@ void NetClient::handle_packet(RecvPacket & packet)
  */
 void NetClient::handle_network ()
 {
-#if HAVE_GGZ
-	// if this is a ggz game, handle the ggz network
-	if (use_ggz)
-		NetGGZ::ref().data();
-#endif
+	// if this is an internet game, handle the metaserver network
+	if (m_internet)
+		InternetGaming::ref().handle_metaserver_communication();
 	try {
 		while (d->sock != 0 && SDLNet_CheckSockets(d->sockset, 0) > 0) {
 			// Perform only one read operation, then process all packets
 			// from this read. This ensures that we process DISCONNECT
 			// packets that are followed immediately by connection close.
 			if (!d->deserializer.read(d->sock)) {
-				disconnect("Connection was lost.", false);
+				disconnect("CONNECTION_LOST", "", false);
 				return;
 			}
 
@@ -1019,24 +1038,27 @@ void NetClient::handle_network ()
 		}
 	} catch (DisconnectException const & e) {
 		disconnect(e.what());
+	} catch (ProtocolException const & e) {
+		disconnect("PROTOCOL_EXCEPTION", boost::lexical_cast<std::string>(e.number()));
 	} catch (std::exception const & e) {
-		std::string reason = _("Something went wrong: ");
-		reason += e.what();
-		disconnect(reason);
+		disconnect("SOMETHING_WRONG", e.what());
 	}
 }
 
 
 void NetClient::disconnect
-	(std::string const & reason, bool const sendreason, bool const showmsg)
+	(std::string const & reason, std::string const & arg, bool const sendreason, bool const showmsg)
 {
-	log("[Client]: disconnect(%s)\n", reason.c_str());
+	log("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
 
 	if (d->sock) {
 		if (sendreason) {
 			SendPacket s;
 			s.Unsigned8(NETCMD_DISCONNECT);
+			s.Unsigned8(arg.size() < 1 ? 1 : 2);
 			s.String(reason);
+			if (arg.size() > 0)
+				s.String(arg);
 			s.send(d->sock);
 		}
 
@@ -1048,14 +1070,18 @@ void NetClient::disconnect
 	bool const trysave = showmsg && d->game;
 
 	if (showmsg) {
-		std::string msg = reason;
+		std::string msg;
+		if (arg.empty())
+			msg = NetworkGamingMessages::get_message(reason);
+		else
+			msg = NetworkGamingMessages::get_message(reason, arg);
 
 		if (trysave)
 			msg += _(" An automatic savegame will be created.");
 
 		UI::WLMessageBox mmb
 			(d->modal,
-			 "Disconnected from Host",
+			 _("Disconnected from Host"),
 			 msg,
 			 UI::WLMessageBox::OK);
 		mmb.run();

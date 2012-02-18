@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -45,30 +45,32 @@ Interactive_Spectator::Interactive_Spectator
 	:
 	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer),
 
-#define INIT_BTN(picture, name, callback, tooltip)                            \
+#define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- boost::bind(&Interactive_Spectator::callback, boost::ref(*this)),            \
  tooltip                                                                      \
 
 	m_toggle_chat
-		(INIT_BTN("menu_chat", "chat", toggle_chat, _("Chat"))),
+		(INIT_BTN("menu_chat", "chat", _("Chat"))),
 	m_exit
-		(INIT_BTN("menu_exit_game", "exit_replay", exit_btn, _("Exit Replay"))),
+		(INIT_BTN("menu_exit_game", "exit_replay", _("Exit Replay"))),
 	m_save
-		(INIT_BTN("menu_save_game", "save_game", save_btn, _("Save Game"))),
+		(INIT_BTN("menu_save_game", "save_game", _("Save Game"))),
 	m_toggle_options_menu
-		(INIT_BTN("menu_options_menu", "options_menu",
-					 toggle_options_menu, _("Options"))),
+		(INIT_BTN("menu_options_menu", "options_menu", _("Options"))),
 	m_toggle_statistics
-		(INIT_BTN("menu_general_stats", "general_stats",
-					 toggle_statistics, _("Statistics"))),
+		(INIT_BTN("menu_general_stats", "general_stats", _("Statistics"))),
 	m_toggle_minimap
-		(INIT_BTN("menu_toggle_minimap", "minimap",
-					 toggle_minimap, _("Minimap")))
+		(INIT_BTN("menu_toggle_minimap", "minimap", _("Minimap")))
 {
+	m_toggle_chat.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_chat, this));
+	m_exit.sigclicked.connect(boost::bind(&Interactive_Spectator::exit_btn, this));
+	m_save.sigclicked.connect(boost::bind(&Interactive_Spectator::save_btn, this));
+	m_toggle_options_menu.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_options_menu, this));
+	m_toggle_statistics.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_statistics, this));
+	m_toggle_minimap.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_minimap, this));
+
 	m_toolbar.set_layout_toplevel(true);
-	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	if (!multiplayer) {
 		m_toolbar.add(&m_exit,                UI::Box::AlignLeft);
 		m_toolbar.add(&m_save,                UI::Box::AlignLeft);
@@ -76,6 +78,7 @@ Interactive_Spectator::Interactive_Spectator
 		m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
@@ -96,7 +99,7 @@ Interactive_Spectator::Interactive_Spectator
 	adjust_toolbar_position();
 
 	// Setup all screen elements
-	fieldclicked.set(this, &Interactive_Spectator::node_action);
+	fieldclicked.connect(boost::bind(&Interactive_Spectator::node_action, this));
 
 	set_display_flag(dfSpeed, true);
 
@@ -232,6 +235,9 @@ void Interactive_Spectator::node_action() {
 		 	 building,
 		 	 egbase().map().get_immovable(get_sel_pos().node)))
 		return building->show_options(*this);
+
+	if (try_show_ship_window())
+		return;
 
 	//  everything else can bring up the temporary dialog
 	show_field_action(this, 0, &m_fieldaction);

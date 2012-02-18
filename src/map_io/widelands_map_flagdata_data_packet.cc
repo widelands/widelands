@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -200,7 +200,7 @@ throw (_wexception)
 										(flag,
 										 Ware_Index::First(),
 										 Flag::flag_job_request_callback,
-										 Request::WORKER);
+										 wwWORKER);
 								f.request->Read
 									(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 							} else {

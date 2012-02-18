@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -28,6 +28,8 @@
 #include "ui_basic/table.h"
 #include "ui_basic/multilinetextarea.h"
 
+#include "logic/item_ware_descr.h"
+
 namespace Widelands {
 struct Item_Ware_Descr;
 struct Tribe_Descr;
@@ -38,6 +40,20 @@ struct Interactive_Player;
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
 private:
+	struct Ware {
+		Ware(Widelands::Ware_Index i, const Widelands::Item_Ware_Descr * descr)
+			:
+			m_i(i),
+			m_descr(descr)
+			{}
+		Widelands::Ware_Index m_i;
+		const Widelands::Item_Ware_Descr * m_descr;
+
+		bool operator<(const Ware o) const {
+			return m_descr->descname() < o.m_descr->descname();
+		}
+	};
+
 	Interactive_Player & iaplayer() const;
 	UI::Listselect<Widelands::Ware_Index> wares;
 	UI::Listselect<Widelands::Building_Index> prodSites;

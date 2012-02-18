@@ -120,10 +120,10 @@ target_link_libraries(widelands_all ${SDLGFX_LIBRARY})
 target_link_libraries(widelands_all ${LUA_LIBRARY})
 target_link_libraries(widelands_all ${PNG_LIBRARY})
 target_link_libraries(widelands_all ${ZLIB_LIBRARY})
-target_link_libraries(widelands_all ${GGZ_CORE_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
 target_link_libraries(widelands_all ${GLEW_LIBRARY})
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD") 
+target_link_libraries(widelands_all ${Boost_LIBRARIES})
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   target_link_libraries(widelands_all ${EXECINFO_LIBRARY})
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
@@ -142,9 +142,7 @@ if (WIN32)
   if (DEFINED MSVC)
     target_link_libraries(widelands_all ws2_32)
 
-    #GGZ on MSVC using 3rdparty bundle needs expat and iconv library
-    find_package(EXPAT REQUIRED)
-    target_link_libraries(widelands_all ${EXPAT_LIBRARY})
+    #gettext on MSVC using 3rdparty bundle needs iconv library
     find_library(ICONV_LIBRARY iconv libiconv REQUIRED)
     target_link_libraries(widelands_all ${ICONV_LIBRARY})
 

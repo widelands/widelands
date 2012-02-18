@@ -1,64 +1,83 @@
 ##### Order does matter here, since this file should stay compatible with S2
 
+##### Name strings are not translatable by purpose: this way mapmakers can share
+##### suggestions without having to worry about the localized name of terrain
+
 [tundra]
+name="Tundra"
 def_resources=water 5
 is=green
 
 [mountain1]
+name="Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
 
 [ice_flows]
+name="Ice flows"
 is=water
 fps=5
 
 [ice_flows2]
+name="Ice flows2"
 is=water
 fps=5
 
 [ice]
+name="Ice"
 is=dry
 #### of course ice is not dry, but this disallows the users, to build on snow. only flags are allowed. ;-)
 
 [water]
+name="Water"
 def_resources=fish 4
 is=water
 fps=8
 
 [tundra_taiga]
+name="Tundra taiga"
 def_resources=water 10
 is=green
 
 [tundra2]
+name="Tundra2"
 def_resources=water 10
 is=green
 
 [tundra3]
+name="Tundra3"
 def_resources=water 10
 is=green
 
 [mountain2]
+name="Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 
 [mountain3]
+name="Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 
 [mountain4]
+name="Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 
 [strand]
+name="Beach"
 is=dry
 
 [taiga]
+name="Taiga"
 def_resources=water 10
 is=green
 
 [lava]
+name="Lava"
 is=acid
 
 [snow]
+name="Snow"
 def_resources=water 30
 is=green

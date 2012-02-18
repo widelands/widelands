@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  * Some Methods taken from Wesnoth.
  * http://www.wesnoth.org
@@ -200,6 +200,25 @@ void Font_Handler::draw_text
 
 	if (caret <= text.size())
 		draw_caret(dst, style, dstpoint, text, caret);
+}
+
+/**
+ * Draw unwrapped, single-line text (i.e. no line breaks) with a gray shadow.
+ */
+void Font_Handler::draw_text_shadow
+	(RenderTarget & dst,
+	 const TextStyle & style,
+	 Point dstpoint,
+	 const std::string & text,
+	 Align align,
+	 uint32_t caret)
+{
+
+	TextStyle gray_style = style;
+	gray_style.fg = RGBColor (0, 0, 0);
+
+	draw_text (dst, gray_style, dstpoint - Point(1, 1), text, align, caret);
+	draw_text (dst, style, dstpoint, text, align, caret);
 }
 
 /**

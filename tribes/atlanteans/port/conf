@@ -1,0 +1,17 @@
+size=port
+conquers=5
+heal_per_second=2
+
+[buildcost]
+trunk=3
+planks=3
+stone=4
+diamond=1
+quartz=1
+spidercloth=3
+gold=2
+
+[idle]
+pics=port_i_??.png  # ???
+hotspot=52 64
+playercolor=true

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -65,17 +65,16 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			(this,
 			 posx, posy,
 			 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
-	m_ls->clicked       .set(this, &Main_Menu_Save_Map::       clicked_item);
-	m_ls->double_clicked.set(this, &Main_Menu_Save_Map::double_clicked_item);
+	m_ls->clicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_item, this, _1));
+	m_ls->double_clicked.connect(boost::bind(&Main_Menu_Save_Map::double_clicked_item, this, _1));
 	m_editbox =
 		new UI::EditBox
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	m_editbox->setText(parent.egbase().map().get_name());
-	m_editbox->changed.set(this, &Main_Menu_Save_Map::edit_box_changed);
+	m_editbox->changed.connect(boost::bind(&Main_Menu_Save_Map::edit_box_changed, this));
 
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
@@ -125,29 +124,29 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			 "---", UI::Align_CenterLeft);
 
 
-	posx = 5;
 	posy = get_inner_h() - 30;
 
-	m_ok_btn = new UI::Callback_Button
+	m_ok_btn = new UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)),
 		 _("OK"));
+	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)));
 
-	new UI::Callback_Button
+	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 get_inner_w() / 2 + spacing, posy, 80, 20,
+		 posx, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)),
 		 _("Cancel"));
+	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)));
 
-	new UI::Callback_Button
+	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
 		 spacing, posy, 120, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind(&Main_Menu_Save_Map::clicked_make_directory, boost::ref(*this)),
 		 _("Make Directory"));
+	make_directorybtn->sigclicked.connect
+		(boost::bind(&Main_Menu_Save_Map::clicked_make_directory, boost::ref(*this)));
 
 
 	m_basedir = "maps";

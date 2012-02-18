@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,16 +13,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #ifndef INSTANCES_H
 #define INSTANCES_H
-
-#include "cmd_queue.h"
-
-#include "ref_cast.h"
 
 #include <map>
 #include <string>
@@ -30,6 +26,13 @@
 #include <vector>
 
 #include <boost/function.hpp>
+#include <boost/noncopyable.hpp>
+#include <boost/unordered_map.hpp>
+
+#include "ref_cast.h"
+
+#include "cmd_queue.h"
+
 
 struct DirAnimations;
 struct RenderTarget;
@@ -45,7 +48,7 @@ struct Map_Map_Object_Loader;
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
-struct Map_Object_Descr {
+struct Map_Object_Descr : boost::noncopyable {
 	friend struct ::DirAnimations;
 	typedef uint8_t Index;
 	Map_Object_Descr(char const * const _name, char const * const _descname)
@@ -78,18 +81,14 @@ struct Map_Object_Descr {
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
 
-	protected:
-		void add_attribute(uint32_t attr);
-
+protected:
+	void add_attribute(uint32_t attr);
 
 
 private:
 	typedef std::map<std::string, uint32_t> Anims;
 	typedef std::map<std::string, uint32_t> AttribMap;
 	typedef std::vector<uint32_t>           Attributes;
-
-	Map_Object_Descr & operator= (Map_Object_Descr const &);
-	explicit Map_Object_Descr    (Map_Object_Descr const &);
 
 	std::string const m_name;
 	std::string const m_descname;       ///< Descriptive name
@@ -127,7 +126,7 @@ extern Map_Object_Descr g_flag_descr;
  * \warning DO NOT allocate/free Map_Objects directly. Use the appropriate
  * type-dependent create() function for creation, and call die() for removal.
  *
- * \note Convenient creation functions are defined in class Game.
+ * \note Convenient creation functions are defined in struct Game.
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
@@ -143,7 +142,7 @@ public: const type & descr() const { \
       return ref_cast<type const, Map_Object_Descr const>(*m_descr);          \
    }                                                                          \
 
-class Map_Object {
+class Map_Object : boost::noncopyable {
 	friend struct Object_Manager;
 	friend struct Object_Ptr;
 
@@ -152,10 +151,11 @@ class Map_Object {
 public:
 	enum {
 		AREAWATCHER,
-		BOB,  //  class Bob
+		BOB,  //  struct Bob
 
 		WARE, //  class WareInstance
 		BATTLE,
+		FLEET,
 
 		// everything below is at least a BaseImmovable
 		IMMOVABLE,
@@ -163,7 +163,8 @@ public:
 		// everything below is at least a PlayerImmovable
 		BUILDING,
 		FLAG,
-		ROAD
+		ROAD,
+		PORTDOCK
 	};
 	/// Some default, globally valid, attributes.
 	/// Other attributes (such as "harvestable corn") could be
@@ -246,7 +247,9 @@ public:
 		header_Critter = 6,
 		header_Worker = 7,
 		header_WareInstance = 8,
-		header_Ship = 9
+		header_Ship = 9,
+		header_PortDock = 10,
+		header_Fleet = 11,
 	};
 
 	/**
@@ -258,7 +261,7 @@ public:
 	 * Those are the three phases of loading. After the last phase,
 	 * all Loader objects should be deleted.
 	 */
-	class Loader {
+	struct Loader {
 		Editor_Game_Base      * m_egbase;
 		Map_Map_Object_Loader * m_mol;
 		Map_Object            * m_object;
@@ -321,10 +324,6 @@ protected:
 	const Map_Object_Descr * m_descr;
 	Serial                   m_serial;
 	LogSink                * m_logsink;
-
-private:
-	Map_Object & operator= (Map_Object const &);
-	explicit Map_Object    (Map_Object const &);
 };
 
 inline int32_t get_reverse_dir(int32_t const dir) {
@@ -336,8 +335,8 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  *
  * Keeps the list of all objects currently in the game.
  */
-struct Object_Manager {
-	typedef std::map<uint32_t, Map_Object *> objmap_t;
+struct Object_Manager : boost::noncopyable {
+	typedef boost::unordered_map<Serial, Map_Object *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();
@@ -363,17 +362,14 @@ struct Object_Manager {
 	}
 
 	/**
-	 * Get the map of all objects for the purpose of iterating over it.
-	 * Only provide a const version of the map!
+	 * When saving the map object, ordere matters. Return a vector of all ids
+	 * that are currently available;
 	 */
-	const objmap_t & get_objects() const throw () {return m_objects;}
+	std::vector<Serial> all_object_serials_ordered () const throw ();
 
 private:
 	Serial   m_lastserial;
 	objmap_t m_objects;
-
-	Object_Manager & operator= (Object_Manager const &);
-	Object_Manager             (Object_Manager const &);
 };
 
 /**
@@ -393,7 +389,7 @@ struct Object_Ptr {
 	// dammit... without a Editor_Game_Base object, we can't implement a
 	// Map_Object* operator (would be _really_ nice)
 	Map_Object * get(Editor_Game_Base const &);
-	Map_Object const * get(Editor_Game_Base const & egbase) const;
+	Map_Object * get(Editor_Game_Base const & egbase) const;
 
 	bool operator<  (const Object_Ptr & other) const throw () {
 		return m_serial < other.m_serial;
@@ -422,17 +418,11 @@ struct OPtr {
 
 	bool is_set() const {return m.is_set();}
 
-	T       * get(Editor_Game_Base const &       egbase)       {
+	T * get(Editor_Game_Base const &       egbase) {
 		return static_cast<T *>(m.get(egbase));
 	}
-	T       * get(Editor_Game_Base const * const egbase)       {
-		return get(egbase);
-	}
-	T const * get(Editor_Game_Base const &       egbase) const {
-		return static_cast<T const *>(m.get(egbase));
-	}
-	T const * get(Editor_Game_Base const * const egbase) const {
-		return get(egbase);
+	T * get(Editor_Game_Base const &       egbase) const {
+		return static_cast<T *>(m.get(egbase));
 	}
 
 	bool operator<  (OPtr<T> const & other) const {return m <  other.m;}

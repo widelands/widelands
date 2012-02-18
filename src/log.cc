@@ -13,11 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #include "log.h"
+
+#include "io/dedicated_log.h"
 
 #include <cstdarg>
 #include <cstdio>
@@ -34,6 +36,22 @@ void log(const char * const fmt, ...) {
 	va_start(va, fmt);
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
+
+	wout << buffer;
+	wout.flush();
+}
+
+
+void dedicatedlog(const char * const fmt, ...) {
+	char buffer[2048];
+	va_list va;
+
+	va_start(va, fmt);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
+	va_end(va);
+
+	// Here comes the difference to widelands standard log() ;)
+	DedicatedLog::get()->dlog(buffer);
 
 	wout << buffer;
 	wout.flush();

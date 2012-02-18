@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -47,13 +47,13 @@ struct Immovable_Descr;
 struct ProductionSite_Descr;
 class ProductionSite;
 struct Tribe_Descr;
-struct Worker;
+class Worker;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {
 
 	/// Can be executed on a ProductionSite.
-	struct Action {
+	struct Action : boost::noncopyable {
 		virtual ~Action();
 		virtual void execute(Game &, ProductionSite &) const = 0;
 
@@ -76,8 +76,6 @@ struct ProductionProgram {
 		virtual void writeHTML(::FileWrite &, ProductionSite_Descr const &) const
 			= 0;
 #endif
-	private:
-		Action & operator= (Action const &);
 	};
 
 	/// A group of ware types with a count.
@@ -320,6 +318,31 @@ struct ProductionProgram {
 #endif
 	private:
 		Duration m_duration;
+	};
+
+	/// Checks whether the map has a certain feature enabled.
+	///
+	/// Parameter syntax:
+	///    parameters ::= feature
+	/// Parameter semantics:
+	///    feature:
+	///       The name of the feature that should be checked. Possible values are:
+	///       * Seafaring : to check whether the map has at least two port build spaces
+	///
+	/// Ends the program if the feature is not enabled.
+	struct ActCheck_Map : public Action {
+		ActCheck_Map(char * parameters, ProductionSite_Descr const &);
+		virtual void execute(Game &, ProductionSite &) const;
+#ifdef WRITE_GAME_DATA_AS_HTML
+		virtual void writeHTML
+			(::FileWrite &, ProductionSite_Descr const &) const;
+
+#endif
+	private:
+		 enum {
+			 SEAFARING = 1
+		 };
+		 uint8_t m_feature;
 	};
 
 	/// Runs an animation.

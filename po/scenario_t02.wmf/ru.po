@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
-"PO-Revision-Date: 2011-08-21 14:25+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"PO-Revision-Date: 2012-01-27 11:31+0000\n"
+"Last-Translator: Izon <Unknown>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:41+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:43+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -105,11 +105,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:319
 msgid ""
 " \"Our hunters are out in the forests, Thron.<br> I promise you, before the "
-"sun sets today you will have a magnificient meal fit for the chieftain of "
-"all clans!\" "
+"sun sets today you will have a magnificent meal fit for the chieftain of all "
+"clans!\" "
 msgstr ""
-" \"Наши охотники ушли в леса, Трон. <br> Я обещаю вам, еще до заката у "
-"вождей всех кланов будет отменный ужин!\" "
+" \"Наши охотники далеко в лесу, Трон.<br> Я оюещаю тебе, что до захода "
+"солнца у тебя будет отличный ужин, подходящий вождю любого клана!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:235
 msgid ""
@@ -193,12 +193,18 @@ msgid ""
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
+" \"Раз так, мы обсудим это позже, а пока перед нами стоят другие "
+"препятствия. Шахтерам наверняка потребуются большие пайки, чтобы работать "
+"высоко в горах на жгучем морозе, а обеспечить их припасами будет нелегко.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391
 msgid ""
 " \"Wonderful! Our roofs are not dripping anymore, and we have all the "
 "material we need for, well, whichever monumental building we see fit!\" "
 msgstr ""
+" \"Прекрасно! Наши крыши больше не протекают, и у нас есть все материалы, "
+"нужные для... Ну, любой монументальной постройки, которую мы сочтем "
+"подходящей \" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:361
 msgid ""
@@ -245,6 +251,11 @@ msgid ""
 "my\n"
 "face!<br> Now this is a problem we should do something about!\""
 msgstr ""
+"\"Вождь, это позор! Хорошо, что мы теперь можем производить раствор для\n"
+"могучих укреплений и больших зданий, только это не починит наши\n"
+"прохудившиеся крыши! Может быть молодые любят проводить ночи \n"
+"под дождем, но я никак не могу уснуть, когда эти капли падают мне на\n"
+"лицо!<br> Теперь мы должны как-то разобраться с этой проблемой!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:301
 msgid ""
@@ -256,6 +267,10 @@ msgid ""
 "it\n"
 "'Thron's Pride' or so if you want!\""
 msgstr ""
+"\"Придется показать тебе: ты здесь, старик.<br> Похоже, здесь в лесу \n"
+"довольно много животных, - мы просто должны заготовить побольше.\n"
+"И конечно, люди будут рады новой таверне - эй, мы должны назвать ее \n"
+"\"Гордость Трона\", или как тебе захочется!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:276
 msgid ""
@@ -266,6 +281,15 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone's\n"
 "tongue to unravel the mountain's secrets!\""
 msgstr ""
+"\"Только посмотрите на это!  На западе располагается великая гора "
+"Кальмаврат! Мне \n"
+"любопытно, какие сокровища могла спрятать природа под этими удивительными "
+"склонами!<br>\n"
+"Давайте расширяться на запад. Возможно, эта древность может приносить пользу "
+"\n"
+"время от времени! Давайте пошлем кого-нибудь из тех, кто понимает язык "
+"камней, \n"
+"чтобы раскрыть тайны этой горы!\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:350
 msgid ""
@@ -278,6 +302,14 @@ msgid ""
 "pint\n"
 "of beer or two will keep their spirits high.\""
 msgstr ""
+"\"Наши шахтеры с каждым днем добывают все меньше! Нам придется пробиваться "
+"глубже, \n"
+"к самому сердцу горы, если мы хотим больше ее сокровищ!<br> Конечно,\n"
+"на таких глубинах темно и холодно, и лишь единицы авантюристов согласятся "
+"туда \n"
+"лезть. Мы должны вознаградить этих храбрецов большими пайками. А пинта или "
+"две\n"
+"пива будут поддерживать их боевой дух.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:340
 msgid ""
@@ -289,6 +321,13 @@ msgid ""
 "we\n"
 "want. And we need the coal to keep the smelter's ovens burning.\""
 msgstr ""
+"\"Поскольку сейчас у нас есть и шахты, и еда, чтобы поддерживать их, мы "
+"должны\n"
+"привести то, что добывают наши храбрые шахтеры к более приемлемому "
+"состоянию. Из руды\n"
+"должно быть выплавлено железо, чтобы оно могло быть перековано в то, что мы "
+"захотим.\n"
+"И нам нужен уголь, чтобы поддерживать температуру в плавильных печах.\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""
@@ -330,20 +369,20 @@ msgid ""
 "large\n"
 "plain - why don't we use the space Mother Nature gave us and build a farm? "
 "I\n"
-"sure would enjoy a freshly baken pitta bread for a change...\""
+"sure would enjoy a freshly baked pitta bread for a change...\""
 msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Место, завущееся домом"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
-msgstr ""
+msgstr "Чудесное утро"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:438
 msgid "A friendly village joined us!"
-msgstr ""
+msgstr "Дружественная деревня присоединилась к нам!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:143
 msgid ""
@@ -546,7 +585,7 @@ msgstr "Хантрух прервал..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:242
 msgid "Khantrukh joins in ..."
-msgstr ""
+msgstr "Хантрух присоединяется..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
@@ -554,7 +593,7 @@ msgstr "Кантрук довольно кивает...."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid "Khantrukh seems relieved..."
-msgstr ""
+msgstr "Хантрух выглядит спокойным..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
@@ -621,6 +660,8 @@ msgid ""
 "The iron ore your miners bring up is not usable yet - it has to be melted\n"
 "into iron first."
 msgstr ""
+"Железная руда, добытая вашими шахтерами, пока что бесполезна - ее \n"
+"сначала надо переплавить в железо."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217

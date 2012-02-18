@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -32,7 +32,7 @@
 #include <cstring>
 
 namespace Widelands {struct Game;}
-class Journal;
+struct Journal;
 
 ///Thrown if a commandline parameter is faulty
 struct Parameter_error : public std::runtime_error {
@@ -148,7 +148,7 @@ struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = 0);
 	~WLApplication();
 
-	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, GGZ};
+	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, INTERNET};
 
 	void run();
 
@@ -167,6 +167,9 @@ struct WLApplication {
 
 	/// The mouse's current coordinates
 	Point get_mouse_position() const throw () {return m_mouse_position;}
+	//
+	/// Find out whether the mouse is currently pressed
+	bool is_mouse_pressed() const {return SDL_GetMouseState(NULL, NULL); }
 
 	/// Swap left and right mouse key?
 	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}

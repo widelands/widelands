@@ -54,7 +54,7 @@ carrier=1
 [idle]
 pics=idle_??.png
 hotspot=10 36
-fps=10
+fps=5
 playercolor=true
 
 [walk]

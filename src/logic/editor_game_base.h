@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -26,6 +26,8 @@
 #include "map.h"
 #include "notification.h"
 #include "player_area.h"
+
+#include <boost/noncopyable.hpp>
 
 #include <string>
 #include <cstring>
@@ -52,13 +54,14 @@ struct Flag;
 struct AttackController;
 
 struct Editor_Game_Base :
+	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
 {
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
-	friend class Game_Game_Class_Data_Packet;
+	friend struct Game_Game_Class_Data_Packet;
 
 	Editor_Game_Base(LuaInterface * lua);
 	virtual ~Editor_Game_Base();
@@ -106,11 +109,14 @@ struct Editor_Game_Base :
 	Building & warp_building(Coords, Player_Number, Building_Index);
 	Building & warp_constructionsite
 		(Coords, Player_Number, Building_Index,
-		 Building_Index oldid = Building_Index::Null(),
-		 bool loading = false);
-	Bob & create_bob(Coords, const Bob::Descr &);
-	Bob & create_bob(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0);
-	Bob & create_bob(Coords, const std::string & name, Tribe_Descr const * const = 0);
+		 Building_Index oldid = Building_Index::Null(), bool loading = false);
+	Building & warp_dismantlesite
+		(Coords, Player_Number, Building_Index, bool loading = false);
+	Bob & create_bob(Coords, const Bob::Descr &, Player * owner = 0);
+	Bob & create_bob
+		(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0, Player * owner = 0);
+	Bob & create_bob
+		(Coords, const std::string & name, Tribe_Descr const * const = 0, Player * owner = 0);
 	Immovable & create_immovable(Coords, uint32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
 		(Coords, std::string const & name, Tribe_Descr const *);
@@ -210,10 +216,6 @@ private:
 		 bool          neutral_when_competing_influence               = false,
 		 bool          conquer_guarded_location_by_superior_influence = false);
 	void cleanup_playerimmovables_area(Player_Area<Area<FCoords> >);
-
-
-	Editor_Game_Base & operator= (Editor_Game_Base const &);
-	explicit Editor_Game_Base    (Editor_Game_Base const &);
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \

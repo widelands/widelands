@@ -1,0 +1,91 @@
+# Italian translation for widelands
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"PO-Revision-Date: 2011-12-10 10:42+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
+"Language-Team: Italian <it@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:52+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:23
+msgid "%s and %s have established a smuggling route!"
+msgstr "%s e %s hanno creato una rotta di contrabbando!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:37
+msgid "Game Status"
+msgstr "Stato della partita"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:32
+msgid ""
+"Game over! %s and %s have won the game! %s and %s only managed to\n"
+"smuggle %i wares."
+msgstr ""
+"Partita conclusa! %s e %s hanno vinto la partita! %s e %s sono riusciti "
+"soltanto a contrabbandare %i merci."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
+msgid "Rules"
+msgstr "Regole"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
+msgid "Smugglers"
+msgstr "Contrabbandieri"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+msgid ""
+"Smugglers is a Fun map for 4 players. You and your partner start diagonally\n"
+"to each other on a X-shaped island. Each player has a point in the\n"
+"center of the map where he should place a warehouse. If both players in a\n"
+"team succeed to build their warehouse in the right spot a smuggling route\n"
+"is established: all wares from the top player that are delivered to his\n"
+"warehouse are warped to the bottom player's warehouse. The aim of the game "
+"is to\n"
+"smuggle %i items from top to bottom."
+msgstr ""
+"I Contrabbandieri è una divertente mappa per 4 giocatori.Tu ed il tuo "
+"compagno partite diagonalmente\n"
+"su un'isola a forma di X. Ogni giocatore ha un punto al\n"
+"centro della mappa dove dovrebbe piazzare un magazzino. Se entrambi i "
+"giocatori\n"
+"di una squadra riescono a piazzare il magazzino nel punto corretto, creano "
+"una rotta\n"
+"di contrabbando: tutte le merci del giocatore superiore consegnate nel "
+"magazzino\n"
+"sono trasferite al magazzino del giocatore inferiore. Lo scopo del gioco è\n"
+"contrabbandare %i oggetti da sopra a sotto."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
+msgid ""
+"The other team has the same goal and will try to interrupt your smuggling\n"
+"routes by burning down your warehouses. You will pay them back in their own\n"
+"coin of course!"
+msgstr ""
+"L'altra squadra ha lo stesso obiettivo e tenterà di interrompere le vostre\n"
+"rotte bruciando i vostri magazzini. Voi li ripagherete con la stessa\n"
+"moneta, ovviamente!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:26
+msgid "The smuggling route of %s and %s has been broken!"
+msgstr "Il percorso di contrabbando di %s e %s è stato interrotto!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
+msgid "Wares smuggled"
+msgstr "Beni contrabbandati"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
+msgid ""
+"You can see the number of wares traded at any time in the general\n"
+"statistics menu. Good luck!"
+msgstr ""
+"Puoi vedere il numero di beni commerciati in qualsiasi momento nel menù\n"
+"generale delle statistiche. Buona fortuna!"

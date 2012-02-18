@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -77,9 +77,9 @@ bool IdleWorkerSupply::has_storage() const throw ()
 	return m_worker.get_transfer();
 }
 
-void IdleWorkerSupply::get_ware_type(bool & isworker, Ware_Index & ware) const
+void IdleWorkerSupply::get_ware_type(WareWorker & type, Ware_Index & ware) const
 {
-	isworker = true;
+	type = wwWORKER;
 	ware = m_worker.worker_index();
 }
 
@@ -95,10 +95,10 @@ PlayerImmovable * IdleWorkerSupply::get_position(Game & game)
 uint32_t IdleWorkerSupply::nr_supplies(Game const &, Request const & req) const
 {
 	assert
-		(req.get_type() != Request::WORKER or
+		(req.get_type() != wwWORKER or
 		 req.get_index() < m_worker.descr().tribe().get_nrworkers());
 	if
-		(req.get_type() == Request::WORKER &&
+		(req.get_type() == wwWORKER &&
 		 m_worker.descr().can_act_as(req.get_index()) &&
 		 req.get_requirements().check(m_worker))
 		return 1;
@@ -117,7 +117,7 @@ WareInstance & IdleWorkerSupply::launch_item(Game &, Request const &)
  */
 Worker & IdleWorkerSupply::launch_worker(Game &, Request const & req)
 {
-	if (req.get_type() != Request::WORKER)
+	if (req.get_type() != wwWORKER)
 		throw wexception("IdleWorkerSupply: not a worker request");
 	if
 		(!m_worker.descr().can_act_as(req.get_index()) ||

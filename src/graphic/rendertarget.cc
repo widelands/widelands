@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -139,16 +139,12 @@ int32_t RenderTarget::get_h() const
  */
 void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
-	 RGBColor const color)
+	 RGBColor const color, uint8_t width)
 {
-	Rect clipr = Rect
-		(Point(m_rect.x + m_offset.x, m_rect.y + m_offset.y),
-		 m_rect.w, m_rect.h);
-
 	m_surface->draw_line
 		(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,
 		 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color,
-		 &clipr);
+		 width);
 }
 
 /**
@@ -320,6 +316,36 @@ void RenderTarget::drawanim
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
 	data->trigger_soundfx(framenumber, 128);
+}
+
+void RenderTarget::drawstatic
+	(Point                dst,
+	 uint32_t       const animation,
+	 Player const * const player)
+{
+	AnimationData const * const data = g_anim.get_animation(animation);
+	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
+	if (!data || !g_gr) {
+		log("WARNING: Animation %u does not exist\n", animation);
+		return;
+	}
+
+	// Get the frame and its data
+	const PictureID & frame =
+		player ?
+		gfx->get_frame
+			(0, player->player_number(), player->get_playercolor())
+		:
+		gfx->get_frame
+			(0);
+
+	PictureID dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
+
+	dst -= Point(frame->get_w() / 2, frame->get_h() / 2);
+
+	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
+
+	doblit(Rect(dst, 0, 0), dark_frame, srcrc);
 }
 
 /**

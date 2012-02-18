@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -48,25 +48,18 @@ Editor_Tool_Change_Resources_Options_Menu
 		 _("In-/Decrease Value"), UI::Align_BottomCenter),
 	m_change_by_increase
 		(this, "incr_change_by",
-		 hmargin(),
+		 get_inner_w() - hmargin() - width,
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
-			 boost::ref(*this),
-			 Change_By_Increase)),
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png")),
 	m_change_by_decrease
 		(this, "decr_change_by",
-		 get_inner_w() - hmargin() - width, m_change_by_increase.get_y(),
+		 hmargin(),
+		 m_change_by_increase.get_y(),
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
-			 boost::ref(*this),
-			 Change_By_Decrease)),
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png")),
 	m_change_by_value
 		(this,
 		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
@@ -86,23 +79,17 @@ Editor_Tool_Change_Resources_Options_Menu
 		 _("Set Value"), UI::Align_BottomCenter),
 	m_set_to_increase
 		(this, "incr_set_to",
-		 hmargin(), m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
+		 m_change_by_increase.get_x(),
+		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
 		 width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
-			 boost::ref(*this),
-			 Set_To_Increase)),
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png")),
 	m_set_to_decrease
 		(this, "decr_set_to",
-		 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
+		 hmargin(),
+		 m_set_to_increase.get_y(), width, height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
-			 boost::ref(*this),
-			 Set_To_Decrease)),
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png")),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
@@ -111,6 +98,27 @@ Editor_Tool_Change_Resources_Options_Menu
 	m_cur_selection(this, 0, 0, _("Current Selection"), UI::Align_BottomCenter),
 	m_increase_tool(increase_tool)
 {
+	m_change_by_increase.sigclicked.connect
+		(boost::bind
+			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			 boost::ref(*this),
+			 Change_By_Increase));
+	m_change_by_decrease.sigclicked.connect
+		(boost::bind
+			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			 boost::ref(*this),
+			 Change_By_Decrease));
+	m_set_to_increase.sigclicked.connect
+		(boost::bind
+			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			 boost::ref(*this),
+			 Set_To_Increase));
+	m_set_to_decrease.sigclicked.connect
+		(boost::bind
+			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			 boost::ref(*this),
+			 Set_To_Decrease));
+
 	m_change_by_increase.set_repeating(true);
 	m_change_by_decrease.set_repeating(true);
 	m_set_to_increase   .set_repeating(true);
@@ -136,10 +144,10 @@ Editor_Tool_Change_Resources_Options_Menu
 		/
 		(resource_pic_max_width + spacing());
 
-	m_radiogroup.changed.set
-		(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
-	m_radiogroup.clicked.set
-		(this, &Editor_Tool_Change_Resources_Options_Menu::selected);
+	m_radiogroup.changed.connect
+		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
+	m_radiogroup.clicked.connect
+		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
 
 	uint32_t cur_x = 0;
 	Point pos
@@ -229,11 +237,9 @@ void Editor_Tool_Change_Resources_Options_Menu::update() {
 	m_set_to_value.set_text(buf);
 
 	m_cur_selection.set_text
-		(m_increase_tool.set_tool().get_cur_res() ?
-		 ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase().map()
+		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase().map()
 		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->name()
-		 :
-		 "");
+		);
 	m_cur_selection.set_pos
 		(Point
 		 	((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -978,6 +978,7 @@ const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
+	PROP_RO(L_MapObject, __hash),
 	PROP_RO(L_MapObject, serial),
 	PROP_RO(L_MapObject, type),
 	{0, 0, 0},
@@ -1011,6 +1012,12 @@ void L_MapObject::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
+// Hash is used to identify a class in a Set
+int L_MapObject::get___hash(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->serial());
+	return 1;
+}
+
 /* RST
 	.. attribute:: serial
 

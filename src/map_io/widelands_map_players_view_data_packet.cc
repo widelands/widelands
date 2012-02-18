@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -321,7 +321,6 @@ void Map_Players_View_Data_Packet::Read
 				Map_Index r_index = r.field - &first_field;
 				Player::Field * r_player_field = player_fields + r_index;
 				do {
-					const FCoords f = r;
 					Player::Field & f_player_field = *r_player_field;
 					move_r(mapwidth, r, r_index);
 					r_player_field  = player_fields + r_index;

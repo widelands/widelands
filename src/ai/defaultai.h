@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -173,6 +173,7 @@ private:
 	std::list<BlockedField *>         blocked_fields;
 	std::list<MineableField *>        mineable_fields;
 	std::list<Widelands::Flag const *> new_flags;
+	std::list<Widelands::Flag const *> flags_to_be_removed;
 	std::list<Widelands::Road const *> roads;
 	std::list<EconomyObserver *>      economies;
 	std::list<ProductionSiteObserver> productionsites;

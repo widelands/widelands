@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
 "PO-Revision-Date: 2011-02-14 15:14+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:43+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:45+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -52,7 +52,7 @@ msgstr "Advanced Shield"
 msgid "Armoursmith"
 msgstr "Armoursmith"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:186
 msgid "Armoursmithy"
 msgstr "Armoursmithy"
 
@@ -74,7 +74,7 @@ msgstr "Atlanteans"
 msgid "Baker"
 msgstr "Baker"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:181
 msgid "Bakery"
 msgstr "Bakery"
 
@@ -82,16 +82,12 @@ msgstr "Bakery"
 msgid "Bakes bread for workers."
 msgstr "Bakes bread for workers."
 
-#: ../../tribes/atlanteans/conf:59
-msgid "Bakingtray"
-msgstr "Bakingtray"
-
-#: ../../tribes/atlanteans/conf:153
+#: ../../tribes/atlanteans/conf:155
 msgid "Barracks"
 msgstr "Barracks"
 
-#: ../../tribes/atlanteans/conf:146
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:148
+#: ../../tribes/atlanteans/conf:156
 msgid "Barrier"
 msgstr "Barrier"
 
@@ -103,7 +99,7 @@ msgstr "Big buckets for the fish breeder - produced by the toolsmith."
 msgid "Blackroot"
 msgstr "Blackroot"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:191
 msgid "Blackroot Farm"
 msgstr "Blackroot Farm"
 
@@ -157,6 +153,10 @@ msgstr ""
 msgid "Bread"
 msgstr "Bread"
 
+#: ../../tribes/atlanteans/conf:59
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
 msgstr "Breeds fish."
@@ -193,8 +193,8 @@ msgstr "Carrier"
 msgid "Carries items along your roads."
 msgstr "Carries items along your roads."
 
-#: ../../tribes/atlanteans/conf:155
-#: ../../tribes/atlanteans/conf:201
+#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:204
 msgid "Castle"
 msgstr "Castle"
 
@@ -202,11 +202,11 @@ msgstr "Castle"
 msgid "Castle village"
 msgstr "Castle village"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:182
 msgid "Charcoal Burner's House"
 msgstr "Charcoal Burner's House"
 
-#: ../../tribes/atlanteans/conf:147
+#: ../../tribes/atlanteans/conf:149
 msgid "Citadel"
 msgstr "Citadel"
 
@@ -214,7 +214,7 @@ msgstr "Citadel"
 msgid "Coal"
 msgstr "Coal"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:193
 msgid "Coal Mine"
 msgstr "Coal Mine"
 
@@ -262,7 +262,7 @@ msgstr ""
 "Cornflour is produced in a mill from corn and is one of the three "
 "ingredients of the Atlantean bread produced in bakeries."
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:192
 msgid "Crystal Mine"
 msgstr "Crystal Mine"
 
@@ -286,7 +286,11 @@ msgstr "Diamond"
 msgid "Discovers resources for mining."
 msgstr "Discovers resources for mining."
 
-#: ../../tribes/atlanteans/conf:148
+#: ../../tribes/atlanteans/conf:145
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
 msgstr "Donjon"
 
@@ -294,11 +298,11 @@ msgstr "Donjon"
 msgid "Double Trident"
 msgstr "Double Trident"
 
-#: ../../tribes/atlanteans/conf:205
+#: ../../tribes/atlanteans/conf:208
 msgid "Dungeon"
 msgstr "Dungeon"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:190
 msgid "Farm"
 msgstr "Farm"
 
@@ -330,7 +334,7 @@ msgstr "Fish"
 msgid "Fish Breeder"
 msgstr "Fish Breeder"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder's House"
 msgstr "Fish Breeder's House"
 
@@ -348,7 +352,7 @@ msgstr ""
 msgid "Fisher"
 msgstr "Fisher"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:172
 msgid "Fisher's House"
 msgstr "Fisher's House"
 
@@ -360,12 +364,12 @@ msgstr "Fishing Net"
 msgid "Forester"
 msgstr "Forester"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:170
 msgid "Forester's House"
 msgstr "Forester's House"
 
-#: ../../tribes/atlanteans/conf:149
-#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:151
+#: ../../tribes/atlanteans/conf:158
 msgid "Fortress"
 msgstr "Fortress"
 
@@ -377,7 +381,7 @@ msgstr "Geologist"
 msgid "Gold"
 msgstr "Gold"
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:195
 msgid "Gold Mine"
 msgstr "Gold Mine"
 
@@ -410,15 +414,15 @@ msgstr ""
 msgid "Golden Tabard"
 msgstr "Golden Tabard"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:171
 msgid "Goldweaver"
 msgstr "Goldweaver"
 
-#: ../../tribes/atlanteans/conf:197
+#: ../../tribes/atlanteans/conf:200
 msgid "Guardhall"
 msgstr "Guardhall"
 
-#: ../../tribes/atlanteans/conf:196
+#: ../../tribes/atlanteans/conf:199
 msgid "Guardhouse"
 msgstr "Guardhouse"
 
@@ -434,7 +438,7 @@ msgstr "Harvest blackroot"
 msgid "Harvest corn"
 msgstr "Harvest corn"
 
-#: ../../tribes/atlanteans/conf:161
+#: ../../tribes/atlanteans/conf:163
 msgid "Headquarters"
 msgstr "Headquarters"
 
@@ -446,7 +450,7 @@ msgstr "Headquarters medium"
 msgid "Heavy Double Trident"
 msgstr "Heavy Double Trident"
 
-#: ../../tribes/atlanteans/conf:198
+#: ../../tribes/atlanteans/conf:201
 msgid "High Tower"
 msgstr "High Tower"
 
@@ -462,7 +466,7 @@ msgstr "Horse"
 msgid "Horse Breeder"
 msgstr "Horse Breeder"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:187
 msgid "Horse Farm"
 msgstr "Horse Farm"
 
@@ -477,7 +481,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Hunter"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:174
 msgid "Hunter's House"
 msgstr "Hunter's House"
 
@@ -489,7 +493,7 @@ msgstr "Hunting Bow"
 msgid "Iron"
 msgstr "Iron"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:194
 msgid "Iron Mine"
 msgstr "Iron Mine"
 
@@ -513,7 +517,7 @@ msgstr ""
 "Iron ore is mined in iron mines; it is smelted in the smelting works to "
 "retrieve the iron."
 
-#: ../../tribes/atlanteans/conf:206
+#: ../../tribes/atlanteans/conf:209
 msgid "Labyrinth"
 msgstr "Labyrinth"
 
@@ -548,7 +552,7 @@ msgstr ""
 "Milking tongs are used by the spider breeder, to milk the spiders. They are "
 "produced by the toolsmith."
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:179
 msgid "Mill"
 msgstr "Mill"
 
@@ -578,11 +582,11 @@ msgstr "Mine stone"
 msgid "Miner"
 msgstr "Miner"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
 msgid "Not enough space"
 msgstr "Not enough space"
 
-#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:159
 msgid "Outpost"
 msgstr "Outpost"
 
@@ -631,6 +635,10 @@ msgstr "Plants fields."
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
 msgstr "Plants trees."
+
+#: ../../tribes/atlanteans/conf:165
+msgid "Port"
+msgstr ""
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -756,7 +764,7 @@ msgstr "Produces tools for the workers."
 msgid "Produces weapons for the soldiers."
 msgstr "Produces weapons for the soldiers."
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:168
 msgid "Quarry"
 msgstr "Quarry"
 
@@ -808,7 +816,7 @@ msgstr "Resource indicator water"
 msgid "Saw"
 msgstr "Saw"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:177
 msgid "Sawmill"
 msgstr "Sawmill"
 
@@ -824,7 +832,7 @@ msgstr "Sawyer"
 msgid "Scout"
 msgstr "Scout"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:176
 msgid "Scout's House"
 msgstr "Scout's House"
 
@@ -838,8 +846,8 @@ msgstr ""
 msgid "Scythe"
 msgstr "Scythe"
 
-#: ../../tribes/atlanteans/conf:150
 #: ../../tribes/atlanteans/conf:152
+#: ../../tribes/atlanteans/conf:154
 msgid "Sentry"
 msgstr "Sentry"
 
@@ -855,7 +863,7 @@ msgstr "Ship construction site"
 msgid "Shipwright"
 msgstr "Shipwright"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:180
 msgid "Shipyard"
 msgstr "Shipyard"
 
@@ -876,7 +884,7 @@ msgstr ""
 msgid "Sleep"
 msgstr "Sleep"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:202
 msgid "Small Tower"
 msgstr "Small Tower"
 
@@ -892,7 +900,7 @@ msgstr "Smelt iron"
 msgid "Smelter"
 msgstr "Smelter"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:183
 msgid "Smelting Works"
 msgstr "Smelting Works"
 
@@ -920,14 +928,14 @@ msgstr "Smoked meat"
 msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
-"prepare a nutricious lunch for themselves."
+"prepare a nutritious lunch for themselves."
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
 msgstr "Smoker"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:178
 msgid "Smokery"
 msgstr "Smokery"
 
@@ -939,15 +947,12 @@ msgstr "Smokes meat and fish."
 msgid "Soldier"
 msgstr "Soldier"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:104
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
-"Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting \n"
+"Some of your starting buildings didn't have enough room and\n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
-"Some of your starting buildings didn't have enough room and weren't \n"
-"built. You are at an disadvantage with this; consider restarting this \n"
-"map with a fair starting condition."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
@@ -967,7 +972,7 @@ msgstr ""
 "toolsmithy and the shipyard. Also, some of the more advanced buildings need "
 "spidercloth for their construction."
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:188
 msgid "Spiderfarm"
 msgstr "Spiderfarm"
 
@@ -999,7 +1004,7 @@ msgstr ""
 msgid "Stonecutter"
 msgstr "Stonecutter"
 
-#: ../../tribes/atlanteans/conf:151
+#: ../../tribes/atlanteans/conf:153
 msgid "Stronghold"
 msgstr "Stronghold"
 
@@ -1030,6 +1035,12 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
 msgstr "The Widelands Development Team"
+
+#: ../../tribes/atlanteans/bakingtray/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
@@ -1068,14 +1079,6 @@ msgstr ""
 "The long trident is the first trident soldiers are trained with. It is "
 "produced in the weapon smithy and used in the dungeon — together with food — "
 "to train soldiers from attack level 0 to level 1."
-
-#: ../../tribes/atlanteans/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
-msgstr ""
-"The peel is the tool of the baker, each baker needs his own. It is produced "
-"by the toolsmith."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -1179,12 +1182,12 @@ msgstr ""
 msgid "Toolsmith"
 msgstr "Toolsmith"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:184
 msgid "Toolsmithy"
 msgstr "Toolsmithy"
 
-#: ../../tribes/atlanteans/conf:158
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:160
+#: ../../tribes/atlanteans/conf:203
 msgid "Tower"
 msgstr "Tower"
 
@@ -1311,7 +1314,7 @@ msgstr ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 
-#: ../../tribes/atlanteans/conf:162
+#: ../../tribes/atlanteans/conf:164
 msgid "Warehouse"
 msgstr "Warehouse"
 
@@ -1325,7 +1328,7 @@ msgid ""
 "the spiderfarm."
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:185
 msgid "Weapon Smithy"
 msgstr "Weapon Smithy"
 
@@ -1337,11 +1340,11 @@ msgstr "Weaponsmith"
 msgid "Weaver"
 msgstr "Weaver"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:189
 msgid "Weaving-Mill"
 msgstr "Weaving-Mill"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:175
 msgid "Well"
 msgstr "Well"
 
@@ -1349,7 +1352,7 @@ msgstr "Well"
 msgid "Woodcutter"
 msgstr "Woodcutter"
 
-#: ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:169
 msgid "Woodcutter's House"
 msgstr "Woodcutter's House"
 

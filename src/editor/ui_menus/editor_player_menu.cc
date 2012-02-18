@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -42,21 +42,23 @@ Editor_Player_Menu::Editor_Player_Menu
 		(&parent, "players_menu", &registry, 340, 400, _("Player Options")),
 	m_add_player
 		(this, "add_player",
-		 5, 5, 20, 20,
+		 get_inner_w() - 5 - 20, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 boost::bind(&Editor_Player_Menu::clicked_add_player, boost::ref(*this)),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
-		 get_inner_w() - 5 - 20, 5, 20, 20,
+		 5, 5, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 boost::bind(&Editor_Player_Menu::clicked_remove_last_player, boost::ref(*this)),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())
 {
+	m_add_player.sigclicked.connect(boost::bind(&Editor_Player_Menu::clicked_add_player, boost::ref(*this)));
+	m_remove_last_player.sigclicked.connect
+		(boost::bind(&Editor_Player_Menu::clicked_remove_last_player, boost::ref(*this)));
+
 	int32_t const spacing = 5;
 	int32_t const width   = 20;
 	int32_t       posy    = 0;
@@ -138,21 +140,22 @@ void Editor_Player_Menu::update() {
 			m_plr_names[p - 1] =
 				new UI::EditBox
 					(this, posx, posy, 140, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"), p - 1);
-			m_plr_names[p - 1]->changedid.set
-				(this, &Editor_Player_Menu::name_changed);
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"));
+			m_plr_names[p - 1]->changed.connect
+				(boost::bind(&Editor_Player_Menu::name_changed, this, p - 1));
 			posx += 140 + spacing;
 			m_plr_names[p - 1]->setText(map.get_scenario_player_name(p));
 		}
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
 			m_plr_set_tribes_buts[p - 1] =
-				new UI::Callback_Button
+				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-					 boost::bind(&Editor_Player_Menu::player_tribe_clicked, boost::ref(*this), p - 1),
 					 std::string());
+			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
+				(boost::bind(&Editor_Player_Menu::player_tribe_clicked, boost::ref(*this), p - 1));
 			posx += 140 + spacing;
 		}
 		if (map.get_scenario_player_tribe(p) != "<undefined>")
@@ -170,13 +173,14 @@ void Editor_Player_Menu::update() {
 		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =
-				new UI::Callback_Button
+				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
 					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-					 g_gr->get_no_picture(), //  set below
-					 boost::bind(&Editor_Player_Menu::set_starting_pos_clicked, boost::ref(*this), p),
+					 g_gr->get_no_picture(),
 					 std::string());
+			m_plr_set_pos_buts[p - 1]->sigclicked.connect
+				(boost::bind(&Editor_Player_Menu::set_starting_pos_clicked, boost::ref(*this), p));
 			posx += size + spacing;
 		}
 		char text[] = "pics/fsel_editor_set_player_00_pos.png";

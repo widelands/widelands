@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -25,8 +25,8 @@
 
 namespace Widelands {
 
-class Critter_BobAction;
-class Critter_BobProgram;
+struct Critter_BobAction;
+struct Critter_BobProgram;
 
 //
 // Description
@@ -55,7 +55,7 @@ private:
 
 class Critter_Bob : public Bob {
 	friend struct Map_Bobdata_Data_Packet;
-	friend class Critter_BobProgram;
+	friend struct Critter_BobProgram;
 
 	MO_DESCR(Critter_Bob_Descr);
 

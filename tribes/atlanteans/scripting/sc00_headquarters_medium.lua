@@ -17,10 +17,6 @@ init = {
       plr:allow_workers("all")
    end
 
-   plr:forbid_buildings{"shipyard"}
-
-
-
    prefilled_buildings(plr, { "headquarters", sf.x, sf.y,
       wares = {
          diamond = 7,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -125,7 +125,7 @@ void Map_View::set_viewpoint(Point vp, bool jump)
 
 	if (m_changeview)
 		m_changeview(vp, jump);
-	changeview.call(m_viewpoint.x, m_viewpoint.y);
+	changeview(m_viewpoint.x, m_viewpoint.y);
 
 	m_complete_redraw_needed = true;
 }
@@ -160,7 +160,7 @@ bool Map_View::handle_mousepress
 	{
 		track_sel(Point(x, y));
 
-		fieldclicked.call();
+		fieldclicked();
 	} else if (btn == SDL_BUTTON_RIGHT) {
 		m_dragging = true;
 		grab_mouse(true);

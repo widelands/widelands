@@ -6,25 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
-"PO-Revision-Date: 2011-10-03 16:11+0000\n"
-"Last-Translator: kraileth <Unknown>\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"PO-Revision-Date: 2012-02-16 15:06+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:40+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:42+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
-
-#: ../../campaigns/cconfig:81
-msgid "01 - The Strands of Malac' Mor"
-msgstr "01 - Die Strände von Malac' Mor"
-
-#: ../../campaigns/cconfig:44
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Herausfordernd. Stellt die Atlanter vor."
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -33,6 +25,10 @@ msgstr "01 - Augen im Dunkel"
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
 msgstr "01 - Vom Untergang zum Neuanfang"
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr "01 - Die Strände von Malac' Mor"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
@@ -83,8 +79,8 @@ msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
 msgstr ""
-"Ein geheimnisvolles Land, voll unterschiedlicher Landschaften, welche von "
-"einer handvoll grosser Flüsse durchzogen werden."
+"Ein geheimnisvolles Land, reich an unterschiedlichen Landschaften, "
+"durchzogen von einer Handvoll großer Flüsse."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
@@ -93,9 +89,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
-"Ein besonderer Wettkamp in der atlantischen Kultur ist das sogenannte "
+"Ein besonderer Wettkampf in der atlantischen Kultur ist das sogenannte "
 "\"Insel Springen\". Dabei versuchen zwei oder mehr Gruppen die zentrale "
-"Insel so schnell wie möglich zu erreichen, um als erster eine Burg auf der "
+"Insel so schnell wie möglich zu erreichen, um als erstes eine Burg auf der "
 "Spitze des zentralen Berges zu errichten."
 
 #: ../../maps/Impact.wmf/elemental:9
@@ -125,7 +121,7 @@ msgid ""
 "ancient altar, build there a splendid castle and gain goodwill and the "
 "respect of the Gods."
 msgstr ""
-"Eine weitere Schneeschmelze setzt sein. Drei Völker hatten am Fuße der "
+"Eine weitere Schneeschmelze setzt ein. Drei Völker hatten am Fuße der "
 "mächtigen Berge Schutz vor dem harten Winter gesucht. Während der "
 "Sonnenwende haben sie die Orakel befragt und ziehen nun in den Krieg. Nur "
 "einer wird die Schätze seiner Feinde auf dem uralten Altar den Göttern "
@@ -134,7 +130,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr "Atlantis - Die Jagd nach dem Feuer"
+msgstr "Atlanter - Die Jagd nach dem Feuer"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -143,6 +139,10 @@ msgstr "Atoll"
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
 msgstr "Barbaren - Das zweite Reich"
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr "Herausfordernd. Führt die Atlanter ein."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -164,17 +164,18 @@ msgstr "Wüstenwettkampf"
 msgid "Dry Riverbed"
 msgstr "Trockenes Flussbett"
 
-#: ../../maps/Four Mountains.wmf/elemental:9
+#: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
-"Jeder Stamm ist umgeben von vier gewaltigen Bergen. Wer wird der Erste sein, "
-"der sie besteigt und die Ressourcen für sich beansprucht? Hinweis I: Entlang "
-"des Flusses gibt es Wasser. Hinweis II: Schneemänner markieren weitere "
-"Wasserquellen. Hinweis III: Jeder Berg verbirgt nur einen Rohstoff."
+"Jeder Stamm ist von vier mächtigen Bergen umringt. Welcher wird wohl der  "
+"erste sein, der sie einnimmt und die Ressourcen für sich beansprucht? Tipp "
+"1: Wasser kann an den Flussufern gefunden werden. Tipp 2: Schneemänner "
+"markieren weitere Wasserressourcen. Tipp 3: Jeder Berg enthält lediglich "
+"eine Ressource."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -206,21 +207,21 @@ msgid ""
 "neighboured island. This peace seems to end now - your neighbour begins to "
 "expand."
 msgstr ""
-"Seit Jahrhunderten lebten Sie mit den anderen Stamm auf der benachbarten "
-"Insel friedlich zusammen. Dieser Friede scheint nun beendet zu sein - Ihr "
-"Nachbar beginnt zu expandieren."
+"Seit Jahrhunderten lebtest Du mit dem Stamm auf der benachbarten Insel "
+"friedlich zusammen. Dieser Friede scheint nun beendet zu sein - Dein Nachbar "
+"beginnt zu expandieren."
 
-#: ../../maps/Sun of fire.wmf/elemental:11
+#: ../../maps/Sun of fire.wmf/elemental:12
 msgid ""
 "For hundreds of years this island was kept as sanctuary of the Gods. No "
 "human ever ventured to set a foot on it. But now, that a tribe was finally "
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
-"Seit Hunderten von Jahren wurde diese Insel als Heiligtum der Götter "
-"gesehen. Kein Mensch hat je gewagt, einen Fuß auf sie zu setzen. Doch als "
-"nun ein Stamm so unverschämt genug war, eine Siedlung an seinem Ufer zu "
-"errichten, folgten ihm schnell etliche andere."
+"Seit Jahrhunderten wurde diese Insel als Heiligtum der Götter verehrt und in "
+"all der Zeit auch von keiner Menschenseele betreten.  Bis jetzt - Heute war "
+"ein Stamm dreist genug mit dem Schiff an der Küste der Insel zu landen und "
+"wie es scheint, werden auch schon bald weitere folgen."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -230,15 +231,16 @@ msgstr "Vier Burgen"
 msgid "Four Mountains"
 msgstr "Vier Berge"
 
-#: ../../maps/Desert Tournament.wmf/elemental:9
+#: ../../maps/Desert Tournament.wmf/elemental:10
 msgid ""
 "Four tribes struggle with their nearest neighbour to be the first to reach "
-"the mountain of gold that primises riches beyond belief. But can the two "
+"the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
-"Vier Stämme konkurrieren mit ihrem nächsten Nachbar darum, als Erster einen "
-"Berg mit Gold zu erreichen, welcher unermessliche Reichtümer verspricht. "
-"Aber können die verbliebenen beiden die Ressourcen weise teilen?"
+"Vier Stämme  kämpfen jeweils mit ihrem nächstgelegenen Nachbarn, um als "
+"erstes den Goldberg, der unglaublichen Reichtum verspricht, zu erreichen. "
+"Aber können die zwei verbliebenen schließlich die Ressourcen klug genug "
+"aufteilen, um nicht auch noch übereinander herzufallen?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -286,17 +288,17 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
-"Man sagt, dass sogar Sonne und Mond ihren Weg durch diese Bergspitzen suchen "
-"müssen. Hinweis: Monolithen markieren Erzvorkommen. Es lohnt sich nicht, "
-"Geologen woanders hinzuschicken."
+"Man sagt, dass sogar Sonne und Mond ihren Weg zwischen den Bergspitzen "
+"dieses Gebirges suchen müssen. Hinweis: Monolithen markieren Erzvorkommen. "
+"Es lohnt sich nicht, Geologen woanders hinzuschicken."
 
-#: ../../maps/Swamp Monks.wmf/elemental:9
+#: ../../maps/Swamp Monks.wmf/elemental:10
 msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
-"Es wird erzählt, dass die alten Kriegermönche, die in den noch älteren "
-"Sümpfen leben, der Schlüssel zur Kontrolle über die gesamte Insel sind."
+"Es wird gesagt, dass die alten Mönchs-Krieger, die  in den noch viel älteren "
+"Sümpfen leben, den Schlüssel über die Kontrolle der ganzen Insel halten."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -317,8 +319,8 @@ msgid ""
 "it, defend it! "
 msgstr ""
 "Es riecht nach Sumpf, es sieht aus wie Sumpf, und es ist ein Sumpf! Aber "
-"hier bist Du geboren und hier hast Du Dein ganzes Leben verbracht. Wenn Du "
-"den Sumpf ihn nicht verlieren willst, verteidige ihn! "
+"hier wurdest du geboren und hier hast du dein ganzes Leben verbracht. Wenn "
+"du deine Heimat nicht verlieren willst, verteidige sie! "
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
@@ -372,9 +374,9 @@ msgstr "Mystisches Labyrinth"
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr "Noch nicht fertiggestellt!"
+msgstr "Noch nicht fertiggestellt"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:9
+#: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army right away to this hill and build a giant stronghold "
@@ -382,11 +384,11 @@ msgid ""
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
 msgstr ""
-"Nur ein kleiner Hügel in der Mitte der Karte verbindet diese vier "
-"konkurrierenden Völker. Führe deine Armee zu diesem Hügel und baue auf ihm "
-"eine Festung als Zeichen deiner Überlegenheit! Hinweis: In der Mitte ist nur "
-"Platz für eine Festung. Wasser ist überall vorhanden, das Suchen mit "
-"Geologen erübrigt sich."
+"Nur ein kleiner Hügel im Zentrum der Karte verbindet die vier "
+"konkurrierenden Stämme miteinander. Führe deine Armee direkt dorthin und "
+"baue eine gigantische Festung zum Zeichen deiner Überlegenheit. Tipp: Im "
+"Zentrum ist nur Platz für eine Festung. Wasser kann überall gefunden werden, "
+"daher braucht man keine Geologen aussenden."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -452,6 +454,40 @@ msgstr ""
 "steht. Aber viele werden von Wölfen zerrissen werden oder in den Sümpfen "
 "versinken... umzingelt von feindlichen Stämmen."
 
+#: ../../maps/Sun of fire.wmf/elemental:14
+msgid "Start positions are clockwise"
+msgstr "Setzte die Startpositionen im Uhrzeigersinn"
+
+#: ../../maps/Desert Tournament.wmf/elemental:12
+#: ../../maps/Four Castles.wmf/elemental:12
+#: ../../maps/Swamp Monks.wmf/elemental:12
+msgid "Suggested Teams: (blue, red) vs (yellow, green)"
+msgstr "Empfohlene Teams: (Blau u. Rot) vs. (Gelb u. Grün)"
+
+#: ../../maps/Four Mountains.wmf/elemental:12
+msgid ""
+"Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
+"yellow)"
+msgstr ""
+"Vorschlag für Teams: (blau, rot) vs (gelb, grün) oder (blau, grün) vs (rot, "
+"gelb)"
+
+#: ../../maps/Elven Forests.wmf/elemental:12
+msgid ""
+"Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
+"green)"
+msgstr ""
+"Vorschlag für Teams: (blau, rot) vs (gelb, grün) oder (blau, gelb) vs (rot, "
+"grün)"
+
+#: ../../maps/Atoll.wmf/elemental:12
+msgid "Suggested Teams: (blue, yellow) vs (red, green)"
+msgstr "Vorschlag für Teams: (blau, gelb) vs (rot, grün)"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:12
+msgid "Suggested Teams: all ok."
+msgstr "Empfohlene Teams: alle OK."
+
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Sumpfinsel"
@@ -484,13 +520,36 @@ msgstr "Die uralte Sonne des Feuers"
 msgid "The big lake"
 msgstr "Der große See"
 
-#: ../../maps/Elven Forests.wmf/elemental:9
+#: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
 msgstr ""
-"Die atemberaubende Schönheit dieses magischen Landes hat schon häufiger "
-"einen Stamm dazu getrieben, es für sich zu beanspruchen."
+"Die atemberaubende Schönheit dieser verzauberten Länder hat schon viele "
+"Stämme dazu bewogen, sie für sich beanspruchen zu wollen."
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
+msgid ""
+"The four mighty harbours of the Craw Islands were trading their goods among "
+"each others for ages. All of them needed resources, they could not produce "
+"on their own territory and provided resources that the other could not "
+"produce in exchange. Based on these trades a very friendly commerce was "
+"common between the four harbours and the people living on the Craw Islands - "
+"just until lately two of the harbours united to an exclusive trade alliance, "
+"forcing the other two to do the same. Suddenly it seems it is only a matter "
+"of time, until the first fights between the harbours will shake the peaceful "
+"life that lasted so long..."
+msgstr ""
+"Die vier mächtigen Häfen der Krallen Inseln haben seit Ewigkeiten "
+"untereinander Handel getrieben. Ein jeder von ihnen brauchte Ressourcen, die "
+"er auf seinem Gebiet nicht selbst produzieren konnte und konnte zugleich "
+"Ressourcen bieten, die den anderen fehlten. Aufgrund dieser Handel war immer "
+"eine sehr freundliche Beziehung zwischen den Häfen und den Bewohnern der "
+"Krallen Inseln üblich - bis jetzt. Zwei der Häfen haben sich vor kurzem zu "
+"einer exklusiven Handelsallianz zusammengeschlossen, was die beiden anderen "
+"dazu zwingt etwas ähnliches für sich zu tun. Plötzlich scheint es nur noch "
+"eine Sache der Zeit zu sein, bis die ersten Kämpfe zwischen den Häfen das "
+"friedliche Leben aufrüttelt, das so lange auf den Inseln vorgeherrscht hatte."
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
@@ -559,6 +618,10 @@ msgstr ""
 msgid "Three Warriors"
 msgstr "Drei Krieger"
 
+#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
+msgid "Together we're strong"
+msgstr "Zusammen sind wir stark"
+
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Glitzernde Wellen"
@@ -577,13 +640,14 @@ msgstr ""
 msgid "War of the Valleys"
 msgstr "Krieg der Täler"
 
-#: ../../maps/Four Castles.wmf/elemental:9
+#: ../../maps/Four Castles.wmf/elemental:10
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
-"Gut geschützt in ihren mächtigen Festungen schmieden vier machtgierige "
-"Kriegsherren ihre Pläne, diese Länder zu beherrschen..."
+"Gut geschützt in ihren mächtigen Festungen, vollenden vier machthungrige "
+"Kriegshäuptlinge ihren Plan, um diese Länder endlich unter ihre Herrschaft "
+"zu bringen."
 
 #: ../../campaigns/cconfig:31
 msgid ""
@@ -666,9 +730,9 @@ msgstr ""
 "klein und die Rohstoffe gering sind. Vergiss nicht, immer für genug "
 "Holznachschub zu sorgen, Du wirst ihn brauchen."
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:10
 msgid "Who will be the real King of the big atoll?"
-msgstr "Wer wird der wahre König des großen Atoll sein?"
+msgstr "Wer wird der wahre König des Atoll werden?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
@@ -690,10 +754,10 @@ msgstr ""
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "appeared and now a rivalry under smugglers has been started: Which team will "
-"be the first to smuggle a certain number of wares?"
+"be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
+"vs Red + Green."
 msgstr ""
-"Eure seit jeher benutzte Schmugglerroute ist plötzlich von anderen Füßen "
-"zertreten: Zwei andere Stämme sind in der Nähe aufgetaucht und machen euch "
-"euer traditionelles Recht auf Schmuggel streitig.\r\n"
-"Welches Team wird das erste sein, dass es schafft eine bestimmte Anzahl "
-"Waren zu schmuggeln?"
+"Deine bewährte Schmuggelroute ist plötzlich ausgelastet: Zwei andere Stämme "
+"sind erschienen und ein Konkurrenzkampf ist ausgebrochen: Welches Team "
+"schafft es als erstes, eine bestimmte Anzahl von Waren zu schmuggeln? Die "
+"Teams sind: Blau und Gelb gegen Rot und Grün."

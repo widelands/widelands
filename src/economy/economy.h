@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -21,11 +21,14 @@
 #define ECONOMY_H
 
 #include <boost/function.hpp>
+#include <set>
 #include <vector>
 
 #include "supply_list.h"
 #include "ui_basic/unique_window.h"
+#include "logic/instances.h"
 #include "logic/warelist.h"
+#include "logic/wareworker.h"
 
 
 /**
@@ -43,7 +46,7 @@ struct Supply;
 struct Router;
 
 struct Economy {
-	friend struct EconomyDataPacket;
+	friend class EconomyDataPacket;
 
 	/// Configurable target quantity for the supply of a ware type in the
 	/// economy.
@@ -72,12 +75,12 @@ struct Economy {
 	bool find_route
 		(Flag & start, Flag & end,
 		 Route * route,
-		 bool    wait,
+		 WareWorker type,
 		 int32_t cost_cutoff = -1);
 
 	typedef boost::function<bool (Warehouse &)> WarehouseAcceptFn;
 	Warehouse * find_closest_warehouse
-		(Flag & start, bool is_ware = false, Route * route = 0,
+		(Flag & start, WareWorker type = wwWORKER, Route * route = 0,
 		 uint32_t cost_cutoff = 0,
 		 const WarehouseAcceptFn & acceptfn = WarehouseAcceptFn());
 
@@ -156,7 +159,7 @@ private:
 	void _reset_all_pathfinding_cycles();
 
 	void _merge(Economy &);
-	void _split(Flag &);
+	void _split(const std::set<OPtr<Flag> > &);
 
 	void _start_request_timer(int32_t delta = 200);
 

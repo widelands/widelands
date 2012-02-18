@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -75,9 +75,9 @@ EncyclopediaWindow::EncyclopediaWindow
 		 WINDOW_WIDTH / 3, WINDOW_HEIGHT - 150, WARE_GROUPS_TABLE_WIDTH, 140),
 	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
 {
-	wares.selected.set(this, &EncyclopediaWindow::wareSelected);
+	wares.selected.connect(boost::bind(&EncyclopediaWindow::wareSelected, this, _1));
 
-	prodSites.selected.set(this, &EncyclopediaWindow::prodSiteSelected);
+	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prodSiteSelected, this, _1));
 
 	condTable.add_column (WARE_PICTURE_COLUMN_WIDTH);
 	condTable.add_column
@@ -93,13 +93,22 @@ EncyclopediaWindow::EncyclopediaWindow
 		center_to_parent();
 }
 
-
 void EncyclopediaWindow::fillWares() {
 	Tribe_Descr const & tribe = iaplayer().player().tribe();
 	Ware_Index const nr_wares = tribe.get_nrwares();
+	std::vector<Ware> ware_vec;
+
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i);
-		wares.add(ware.descname().c_str(), i, ware.icon());
+		Item_Ware_Descr const * ware = tribe.get_ware_descr(i);
+		Ware w(i, ware);
+		ware_vec.push_back(w);
+	}
+
+	std::sort(ware_vec.begin(), ware_vec.end());
+
+	for (uint32_t i = 0; i < ware_vec.size(); i++) {
+		Ware cur = ware_vec[i];
+		wares.add(cur.m_descr->descname().c_str(), cur.m_i, cur.m_descr->icon());
 	}
 }
 

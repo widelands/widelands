@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
 "PO-Revision-Date: 2011-03-24 07:33+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:43+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:45+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -50,7 +50,7 @@ msgstr "Scutum melius"
 msgid "Armoursmith"
 msgstr "Loricarum faber"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:186
 msgid "Armoursmithy"
 msgstr "Fabrica loricarum"
 
@@ -72,7 +72,7 @@ msgstr "Atlantidenses"
 msgid "Baker"
 msgstr "Pistor"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:181
 msgid "Bakery"
 msgstr "Pistrina"
 
@@ -80,16 +80,12 @@ msgstr "Pistrina"
 msgid "Bakes bread for workers."
 msgstr "Panem laboranti fingit."
 
-#: ../../tribes/atlanteans/conf:59
-msgid "Bakingtray"
-msgstr "Pala pistoria"
-
-#: ../../tribes/atlanteans/conf:153
+#: ../../tribes/atlanteans/conf:155
 msgid "Barracks"
 msgstr "Casa militaris"
 
-#: ../../tribes/atlanteans/conf:146
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:148
+#: ../../tribes/atlanteans/conf:156
 msgid "Barrier"
 msgstr "Obex"
 
@@ -101,7 +97,7 @@ msgstr "Situlae magnae ad pisces alendos a fabre fabricatur."
 msgid "Blackroot"
 msgstr "Radix nigra"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:191
 msgid "Blackroot Farm"
 msgstr "Fundus nigrarum radiciorum"
 
@@ -152,6 +148,10 @@ msgstr ""
 msgid "Bread"
 msgstr "Panis"
 
+#: ../../tribes/atlanteans/conf:59
+msgid "Bread Paddle"
+msgstr ""
+
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
 msgstr "Pisces alit."
@@ -188,8 +188,8 @@ msgstr "Portator"
 msgid "Carries items along your roads."
 msgstr "Res per vias portat."
 
-#: ../../tribes/atlanteans/conf:155
-#: ../../tribes/atlanteans/conf:201
+#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:204
 msgid "Castle"
 msgstr "Castellum"
 
@@ -197,11 +197,11 @@ msgstr "Castellum"
 msgid "Castle village"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:182
 msgid "Charcoal Burner's House"
 msgstr "Casa carbonarii"
 
-#: ../../tribes/atlanteans/conf:147
+#: ../../tribes/atlanteans/conf:149
 msgid "Citadel"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgstr ""
 msgid "Coal"
 msgstr "Carbo"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:193
 msgid "Coal Mine"
 msgstr "Metallum carbonis"
 
@@ -255,7 +255,7 @@ msgid ""
 "Atlantean bread produced in bakeries."
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:192
 msgid "Crystal Mine"
 msgstr "Metallum crystalli"
 
@@ -279,7 +279,11 @@ msgstr "Adamas"
 msgid "Discovers resources for mining."
 msgstr "Aquam vel aes ad metalla rimanda invenit."
 
-#: ../../tribes/atlanteans/conf:148
+#: ../../tribes/atlanteans/conf:145
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
 msgstr ""
 
@@ -287,11 +291,11 @@ msgstr ""
 msgid "Double Trident"
 msgstr "Tridens geminus"
 
-#: ../../tribes/atlanteans/conf:205
+#: ../../tribes/atlanteans/conf:208
 msgid "Dungeon"
 msgstr "Carcer"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:190
 msgid "Farm"
 msgstr "Fundus"
 
@@ -321,7 +325,7 @@ msgstr "Piscis"
 msgid "Fish Breeder"
 msgstr "Pisces alens"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder's House"
 msgstr "Casa operarii qui pisces alit."
 
@@ -336,7 +340,7 @@ msgstr ""
 msgid "Fisher"
 msgstr "Piscator"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:172
 msgid "Fisher's House"
 msgstr "Casa pistoria"
 
@@ -348,12 +352,12 @@ msgstr "Rete piscarium"
 msgid "Forester"
 msgstr "Saltuarius"
 
-#: ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:170
 msgid "Forester's House"
 msgstr "Casa saltuarii"
 
-#: ../../tribes/atlanteans/conf:149
-#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:151
+#: ../../tribes/atlanteans/conf:158
 msgid "Fortress"
 msgstr "Arx"
 
@@ -365,7 +369,7 @@ msgstr "Geologus"
 msgid "Gold"
 msgstr "Aurum"
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:195
 msgid "Gold Mine"
 msgstr "Metallum auri"
 
@@ -393,15 +397,15 @@ msgstr ""
 msgid "Golden Tabard"
 msgstr "Tunica aurea"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:171
 msgid "Goldweaver"
 msgstr "Aurei textor"
 
-#: ../../tribes/atlanteans/conf:197
+#: ../../tribes/atlanteans/conf:200
 msgid "Guardhall"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:196
+#: ../../tribes/atlanteans/conf:199
 msgid "Guardhouse"
 msgstr ""
 
@@ -417,7 +421,7 @@ msgstr "Radices nigras metit"
 msgid "Harvest corn"
 msgstr "Maizum metit"
 
-#: ../../tribes/atlanteans/conf:161
+#: ../../tribes/atlanteans/conf:163
 msgid "Headquarters"
 msgstr "Principia"
 
@@ -429,7 +433,7 @@ msgstr "Principia mediocria"
 msgid "Heavy Double Trident"
 msgstr "Tridens geminus gravis"
 
-#: ../../tribes/atlanteans/conf:198
+#: ../../tribes/atlanteans/conf:201
 msgid "High Tower"
 msgstr "Turris alta"
 
@@ -445,7 +449,7 @@ msgstr "Equus"
 msgid "Horse Breeder"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:187
 msgid "Horse Farm"
 msgstr "Equile"
 
@@ -459,7 +463,7 @@ msgstr ""
 msgid "Hunter"
 msgstr "Venator"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:174
 msgid "Hunter's House"
 msgstr "Casa venatoris"
 
@@ -471,7 +475,7 @@ msgstr "Arcus venatoris"
 msgid "Iron"
 msgstr "Ferrum"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:194
 msgid "Iron Mine"
 msgstr "Metallum ferri"
 
@@ -491,7 +495,7 @@ msgid ""
 "retrieve the iron."
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:206
+#: ../../tribes/atlanteans/conf:209
 msgid "Labyrinth"
 msgstr "Labyrinthus"
 
@@ -525,7 +529,7 @@ msgid ""
 msgstr ""
 "Forceps lacteus ad araneas lactandas necesse est. Qui fabricatur in fabrica."
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:179
 msgid "Mill"
 msgstr "Molae"
 
@@ -556,11 +560,11 @@ msgstr ""
 msgid "Miner"
 msgstr "Fossor metallicus"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:103
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
 msgid "Not enough space"
 msgstr "spatium non satis est"
 
-#: ../../tribes/atlanteans/conf:157
+#: ../../tribes/atlanteans/conf:159
 msgid "Outpost"
 msgstr "specula"
 
@@ -605,6 +609,10 @@ msgstr "Agros colit."
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
 msgstr "Arbores colit."
+
+#: ../../tribes/atlanteans/conf:165
+msgid "Port"
+msgstr ""
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -728,7 +736,7 @@ msgstr "Instrumenta pro operis fabricat."
 msgid "Produces weapons for the soldiers."
 msgstr "Arma militibus fabricat."
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:168
 msgid "Quarry"
 msgstr "Lapidicina"
 
@@ -780,7 +788,7 @@ msgstr "Est indicatum hic aqua sita"
 msgid "Saw"
 msgstr "Serra"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:177
 msgid "Sawmill"
 msgstr "Fabrica lignorum tabulariorum"
 
@@ -796,7 +804,7 @@ msgstr "Opera qui lignum secat"
 msgid "Scout"
 msgstr "Explorator"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:176
 msgid "Scout's House"
 msgstr "Casa exploratoris"
 
@@ -811,8 +819,8 @@ msgstr ""
 msgid "Scythe"
 msgstr "Falx"
 
-#: ../../tribes/atlanteans/conf:150
 #: ../../tribes/atlanteans/conf:152
+#: ../../tribes/atlanteans/conf:154
 msgid "Sentry"
 msgstr ""
 
@@ -828,7 +836,7 @@ msgstr "locus navium construendarum"
 msgid "Shipwright"
 msgstr "navifex"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:180
 msgid "Shipyard"
 msgstr "navale"
 
@@ -847,7 +855,7 @@ msgstr ""
 msgid "Sleep"
 msgstr "Dormio"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:202
 msgid "Small Tower"
 msgstr "Turris parva"
 
@@ -863,7 +871,7 @@ msgstr ""
 msgid "Smelter"
 msgstr "Aerarius"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:183
 msgid "Smelting Works"
 msgstr "Officina aeraria"
 
@@ -891,14 +899,14 @@ msgstr "Caro fumosus"
 msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
-"prepare a nutricious lunch for themselves."
+"prepare a nutritious lunch for themselves."
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
 msgstr "Opera qui piscem carnemque fumat"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:178
 msgid "Smokery"
 msgstr "Fumarium"
 
@@ -910,10 +918,10 @@ msgstr "Carnem piscemque fumo siccat."
 msgid "Soldier"
 msgstr "Miles"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:104
+#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
-"Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting \n"
+"Some of your starting buildings didn't have enough room and\n"
+"weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
 
@@ -932,7 +940,7 @@ msgid ""
 "spidercloth for their construction."
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:188
 msgid "Spiderfarm"
 msgstr "Fundus araneus"
 
@@ -962,7 +970,7 @@ msgstr ""
 msgid "Stonecutter"
 msgstr "Lapicida"
 
-#: ../../tribes/atlanteans/conf:151
+#: ../../tribes/atlanteans/conf:153
 msgid "Stronghold"
 msgstr ""
 
@@ -989,6 +997,12 @@ msgstr "Falx instrumentum agricolae est. Quae a fabre facitur."
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
 msgstr "Concilium Widelands ludum fingens"
+
+#: ../../tribes/atlanteans/bakingtray/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
@@ -1017,12 +1031,6 @@ msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
-msgstr ""
-
-#: ../../tribes/atlanteans/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
 msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -1121,12 +1129,12 @@ msgstr ""
 msgid "Toolsmith"
 msgstr "Faber instrumentorum"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:184
 msgid "Toolsmithy"
 msgstr "Fabrica fabri instrumentorum"
 
-#: ../../tribes/atlanteans/conf:158
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:160
+#: ../../tribes/atlanteans/conf:203
 msgid "Tower"
 msgstr "Turris"
 
@@ -1237,7 +1245,7 @@ msgid ""
 "(build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:162
+#: ../../tribes/atlanteans/conf:164
 msgid "Warehouse"
 msgstr "Horreum"
 
@@ -1251,7 +1259,7 @@ msgid ""
 "the spiderfarm."
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:185
 msgid "Weapon Smithy"
 msgstr "Fabrica armorum"
 
@@ -1263,11 +1271,11 @@ msgstr "Faber armorum"
 msgid "Weaver"
 msgstr "Textor"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:189
 msgid "Weaving-Mill"
 msgstr "Textrinum"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:175
 msgid "Well"
 msgstr "Fons"
 
@@ -1275,7 +1283,7 @@ msgstr "Fons"
 msgid "Woodcutter"
 msgstr "Lignator"
 
-#: ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:169
 msgid "Woodcutter's House"
 msgstr "Casa lignatoris"
 

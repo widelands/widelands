@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -60,8 +60,6 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
-	m_editbox
-		(*this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT),
 	m_name_label
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  UI::Align_CenterLeft),
 	m_name
@@ -70,23 +68,50 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), UI::Align_CenterLeft),
 	m_gametime
 		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
-	m_button_ok
-		(*this, DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
-	m_button_cancel
-		(*this, DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
-	m_button_delete
-		(*this, DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
 	m_curdir(SaveHandler::get_base_dir())
 {
-	m_ls.selected.set(this, &Game_Main_Menu_Save_Game::selected);
-	m_ls.double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
+	m_editbox =
+		new UI::EditBox
+			(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+	m_editbox->changed.connect(boost::bind(&Game_Main_Menu_Save_Game::edit_box_changed, this));
+	m_editbox->ok.connect(boost::bind(&Game_Main_Menu_Save_Game::ok, this));
+
+	m_button_ok =
+		new UI::Button
+			(this, "ok",
+			 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+			 _("OK"),
+			 std::string(),
+			 false);
+	m_button_ok->sigclicked.connect(boost::bind(&Game_Main_Menu_Save_Game::ok, this));
+
+	UI::Button * cancelbtn =
+		new UI::Button
+			(this, "cancel",
+			 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+			 _("Cancel"));
+	cancelbtn->sigclicked.connect(boost::bind(&Game_Main_Menu_Save_Game::die, this));
+
+	UI::Button * deletebtn =
+		new UI::Button
+			(this, "delete",
+			 DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+			 _("Delete"));
+	deletebtn->sigclicked.connect(boost::bind(&Game_Main_Menu_Save_Game::delete_clicked, this));
+
+	m_ls.selected.connect(boost::bind(&Game_Main_Menu_Save_Game::selected, this, _1));
+	m_ls.double_clicked.connect(boost::bind(&Game_Main_Menu_Save_Game::double_clicked, this, _1));
 
 	fill_list();
 
 	center_to_parent();
 	move_to_top();
 
-	m_editbox.focus();
+	m_editbox->focus();
 }
 
 
@@ -101,9 +126,9 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	gl.preload_game(gpdp); //  This has worked before, no problem
 
 	{
-		m_editbox.setText(FileSystem::FS_FilenameWoExt(name.c_str()));
+		m_editbox->setText(FileSystem::FS_FilenameWoExt(name.c_str()));
 	}
-	m_button_ok.set_enabled(true);
+	m_button_ok->set_enabled(true);
 
 	m_name.set_text(gpdp.get_mapname());
 	char buf[200];
@@ -125,7 +150,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
  * An Item has been doubleclicked
  */
 void Game_Main_Menu_Save_Game::double_clicked(uint32_t) {
-	m_button_ok.clicked();
+	ok();
 }
 
 /*
@@ -162,26 +187,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
  * The editbox was changed. Enable ok button
  */
 void Game_Main_Menu_Save_Game::edit_box_changed() {
-	m_button_ok.set_enabled(m_editbox.text().size());
-}
-
-
-bool Game_Main_Menu_Save_Game::EditBox::handle_key
-	(bool const down, SDL_keysym const code)
-{
-	switch (code.sym) {
-	case SDLK_RETURN:
-	case SDLK_KP_ENTER:
-		if (down and text().size()) {
-			play_click();
-			ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent())
-			.m_button_ok.clicked();
-		}
-		return true;
-	default:
-		break;
-	}
-	return UI::EditBox::handle_key(down, code);
+	m_button_ok->set_enabled(m_editbox->text().size());
 }
 
 static void dosave
@@ -239,26 +245,24 @@ private:
 	std::string const m_filename;
 };
 
+/**
+ * Called when the Ok button is clicked or the Return key pressed in the edit box.
+ */
+void Game_Main_Menu_Save_Game::ok()
+{
+	if (m_editbox->text().empty())
+		return;
 
-/*
-===========
-called when the ok button has been clicked
-===========
-*/
-void Game_Main_Menu_Save_Game::Ok::clicked() {
-	Game_Main_Menu_Save_Game & menu =
-		ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent());
-	Interactive_GameBase & igbase = menu.igbase();
 	std::string const complete_filename =
-		igbase.game().save_handler().create_file_name
-			(menu.m_curdir, menu.m_editbox.text());
+		igbase().game().save_handler().create_file_name
+			(m_curdir, m_editbox->text());
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->FileExists(complete_filename)) {
-		new SaveWarnMessageBox(menu, complete_filename);
+		new SaveWarnMessageBox(*this, complete_filename);
 	} else {
-		dosave(igbase, complete_filename);
-		menu.die();
+		dosave(igbase(), complete_filename);
+		die();
 	}
 }
 
@@ -294,20 +298,16 @@ private:
 };
 
 
-/*
-===========
-called when the delete button has been clicked
-===========
-*/
-void Game_Main_Menu_Save_Game::Delete::clicked() {
-	Game_Main_Menu_Save_Game & menu =
-		ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent());
-	Interactive_GameBase & igbase = menu.igbase();
+/**
+ * Called when the delete button has been clicked
+ */
+void Game_Main_Menu_Save_Game::delete_clicked()
+{
 	std::string const complete_filename =
-		igbase.game().save_handler().create_file_name
-			(menu.m_curdir, menu.m_editbox.text());
+		igbase().game().save_handler().create_file_name
+			(m_curdir, m_editbox->text());
 
 	//  Check if file exists. If it does, let the user confirm the deletion.
 	if (g_fs->FileExists(complete_filename))
-		new DeletionMessageBox(menu, complete_filename);
+		new DeletionMessageBox(*this, complete_filename);
 }

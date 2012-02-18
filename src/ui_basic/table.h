@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -23,17 +23,17 @@
 
 #include "align.h"
 #include "panel.h"
-#include "m_signal.h"
 
 #include "compile_assert.h"
 
 #include <limits>
 #include <vector>
 #include <boost/function.hpp>
+#include <boost/signal.hpp>
 
 namespace UI {
 struct Scrollbar;
-struct Callback_Button;
+struct Button;
 
 /// A table with columns and lines. The entries can be sorted by columns by
 /// clicking on the column header button.
@@ -53,8 +53,8 @@ template<typename Entry> struct Table {
 		 bool descending = false);
 	~Table();
 
-	Signal1<uint32_t> selected;
-	Signal1<uint32_t> double_clicked;
+	boost::signal<void (uint32_t)> selected;
+	boost::signal<void (uint32_t)> double_clicked;
 
 	/// A column that has a title is sortable (by clicking on the title).
 	void add_column
@@ -87,6 +87,7 @@ template<typename Entry> struct Table {
 	Entry_Record * find(Entry) const throw ();
 
 	void select(uint32_t);
+	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
 		char const * what() const throw () {
 			return "UI::Table<Entry>: No selection";
@@ -104,6 +105,7 @@ template<typename Entry> struct Table {
 	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_key(bool down, SDL_keysym code);
 };
 
 template <> struct Table<void *> : public Panel {
@@ -157,8 +159,8 @@ template <> struct Table<void *> : public Panel {
 		 bool descending = false);
 	~Table();
 
-	Signal1<uint32_t> selected;
-	Signal1<uint32_t> double_clicked;
+	boost::signal<void (uint32_t)> selected;
+	boost::signal<void (uint32_t)> double_clicked;
 
 	void add_column
 		(uint32_t width,
@@ -212,6 +214,7 @@ template <> struct Table<void *> : public Panel {
 	Entry_Record * find(const void * entry) const throw ();
 
 	void select(uint32_t);
+	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
 		char const * what() const throw () {
 			return "UI::Table<void *>: No selection";
@@ -237,6 +240,7 @@ template <> struct Table<void *> : public Panel {
 	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	virtual bool handle_key(bool down, SDL_keysym code);
 
 private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
@@ -246,7 +250,7 @@ private:
 	struct Column;
 	typedef std::vector<Column> Columns;
 	struct Column {
-		Callback_Button                 * btn;
+		Button                 * btn;
 		uint32_t                              width;
 		Align                                 alignment;
 		bool                                           is_checkbox_column;
@@ -256,6 +260,7 @@ private:
 	static const int32_t ms_darken_value = -20;
 
 	Columns            m_columns;
+	uint32_t           m_total_width;
 	uint32_t           m_max_pic_width;
 	std::string        m_fontname;
 	uint32_t           m_fontsize;

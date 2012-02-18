@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -66,7 +66,7 @@ private:
  *
  */
 struct Tab_Panel : public Panel {
-	friend class Tab;
+	friend struct Tab;
 
 	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
 	// For Fullscreen menus

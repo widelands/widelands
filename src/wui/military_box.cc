@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -83,23 +83,23 @@ UI::Textarea & MilitaryBox::add_text
 	return result;
 }
 
-UI::Callback_Button & MilitaryBox::add_button
+UI::Button & MilitaryBox::add_button
 	(UI::Box           & parent,
 	 char        const * const name,
 	 char        const * const text,
 	 void         (MilitaryBox::*fn)(),
 	 std::string const & tooltip_text)
 {
-	UI::Callback_Button & button =
-		*new UI::Callback_Button
+	UI::Button * button =
+		new UI::Button
 			(&parent, name,
 			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-			 boost::bind(fn, boost::ref(*this)),
 			 text,
 			 tooltip_text);
-	parent.add(&button, Box::AlignTop);
-	return button;
+	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	parent.add(button, Box::AlignTop);
+	return *button;
 }
 
 void MilitaryBox::update() {
@@ -146,7 +146,7 @@ void MilitaryBox::init() {
 				 m_pl->get_retreat_percentage(),
 				 "pics/caret.png",
 				 _("Supported damage before retreat"));
-		m_slider_retreat->changed.set(this, &MilitaryBox::update);
+		m_slider_retreat->changed.connect(boost::bind(&MilitaryBox::update, this));
 		add_text(linebox, _("Once injured"));
 		m_slider_retreat->set_enabled(m_pl->is_retreat_change_allowed());
 		linebox.set_visible(m_pl->is_retreat_change_allowed());

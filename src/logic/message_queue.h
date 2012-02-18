@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -23,12 +23,14 @@
 #include <cassert>
 #include <map>
 
+#include <boost/noncopyable.hpp>
+
 #include "message.h"
 #include "message_id.h"
 
 namespace Widelands {
 
-struct MessageQueue : private std::map<Message_Id, Message *> {
+struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *> {
 	friend struct Map_Players_Messages_Data_Packet;
 	// Make typedefs public so that this looks like proper
 	// STL container to templated algorithms.
@@ -64,14 +66,14 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 		return std::map<Message_Id, Message *>::count(Message_Id(i));
 	}
 
-	/// \Returns a pointer to the message if it exists, otherwise 0.
+	/// \returns a pointer to the message if it exists, otherwise 0.
 	Message const * operator[](Message_Id const id) const {
 		assert_counts();
 		const_iterator const it = find(Message_Id(id));
 		return it != end() ? it->second : 0;
 	}
 
-	/// \Returns the number of messages with the given status.
+	/// \returns the number of messages with the given status.
 	uint32_t nr_messages(Message::Status const status) const {
 		assert_counts();
 		assert(status < 3);
@@ -83,7 +85,7 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	/// array or struct) with operator new, so that it can be deallocated with
 	/// operator delete.
 	///
-	/// \Returns the id of the added message.
+	/// \returns the id of the added message.
 	///
 	/// \Note The caller must make sure that a command is scheduled to expire
 	/// the message. Player::add_message does this and should be used for adding
@@ -135,7 +137,7 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 
 	Message_Id current_message_id() const {return m_current_message_id;}
 
-	/// \Returns whether all messages with id 1, 2, 3, ..., current_message_id
+	/// \returns whether all messages with id 1, 2, 3, ..., current_message_id
 	/// exist. This should be the case when messages have been loaded from a map
 	/// file/savegame but the simulation has not started to run yet.
 	bool is_continuous() const {
@@ -144,9 +146,6 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	}
 
 private:
-	MessageQueue & operator= (MessageQueue const &);
-	explicit MessageQueue    (MessageQueue const &);
-
 	/// Only for working around bugs in map loading code. If something has
 	/// accidentally been added to the queue during load, it can be worked
 	/// around by clearing the queue before the saved messages are loaded into

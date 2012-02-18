@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -47,24 +47,24 @@ m_player(plr)
 			 (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	set_center_panel(tabs);
 
-	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WARE, false);
+	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
 	tabs->add
 		("total_wares", g_gr->get_picture(PicMod_UI, pic_tab_wares),
 		 m_all_wares, _("Wares (total)"));
 
-	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WORKER, false);
+	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add
 		("workers_total", g_gr->get_picture(PicMod_UI, pic_tab_workers),
 		 m_all_workers, _("Workers (total)"));
 
-	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WARE, false);
+	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
 	tabs->add
 		("wares_in_warehouses",
 		 g_gr->get_picture (PicMod_UI, pic_tab_wares_warehouse),
 		 m_warehouse_wares, _("Wares in warehouses")
 	);
 
-	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), WaresDisplay::WORKER, false);
+	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add
 		("workers_in_warehouses",
 		 g_gr->get_picture(PicMod_UI, pic_tab_workers_warehouse),
@@ -81,10 +81,10 @@ void Stock_Menu::think()
 {
 	UI::UniqueWindow::think();
 
-	fill_total_waresdisplay(m_all_wares, WaresDisplay::WARE);
-	fill_total_waresdisplay(m_all_workers, WaresDisplay::WORKER);
-	fill_warehouse_waresdisplay(m_warehouse_wares, WaresDisplay::WARE);
-	fill_warehouse_waresdisplay(m_warehouse_workers, WaresDisplay::WORKER);
+	fill_total_waresdisplay(m_all_wares, Widelands::wwWARE);
+	fill_total_waresdisplay(m_all_workers, Widelands::wwWORKER);
+	fill_warehouse_waresdisplay(m_warehouse_wares, Widelands::wwWARE);
+	fill_warehouse_waresdisplay(m_warehouse_workers, Widelands::wwWORKER);
 }
 
 /**
@@ -92,14 +92,14 @@ void Stock_Menu::think()
  * \ref Economy of a player may change)
  */
 void Stock_Menu::fill_total_waresdisplay
-	(WaresDisplay * waresdisplay, WaresDisplay::wdType type)
+	(WaresDisplay * waresdisplay, Widelands::WareWorker type)
 {
 	waresdisplay->remove_all_warelists();
 	Widelands::Player const & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay->add_warelist
-			(type == WaresDisplay::WARE ?
+			(type == Widelands::wwWARE ?
 			 player.get_economy_by_number(i)->get_wares() :
 			 player.get_economy_by_number(i)->get_workers());
 }
@@ -109,7 +109,7 @@ void Stock_Menu::fill_total_waresdisplay
  * \ref Warehouse may change)
  */
 void Stock_Menu::fill_warehouse_waresdisplay
-	(WaresDisplay * waresdisplay, WaresDisplay::wdType type)
+	(WaresDisplay * waresdisplay, Widelands::WareWorker type)
 {
 	waresdisplay->remove_all_warelists();
 	Widelands::Player const & player = *m_player.get_player();
@@ -125,7 +125,7 @@ void Stock_Menu::fill_warehouse_waresdisplay
 			 ++it)
 		{
 			waresdisplay->add_warelist
-				(type == WaresDisplay::WARE ?
+				(type == Widelands::wwWARE ?
 				 (*it)->get_wares() : (*it)->get_workers());
 		}
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -38,10 +38,10 @@ struct PlayerDescriptionGroupImpl {
 
 	UI::Textarea     * plr_name;
 	UI::Checkbox     * btnEnablePlayer;
-	UI::Callback_Button * btnPlayerTeam;
-	UI::Callback_Button * btnPlayerType;
-	UI::Callback_Button * btnPlayerTribe;
-	UI::Callback_Button * btnPlayerInit;
+	UI::Button * btnPlayerTeam;
+	UI::Button * btnPlayerType;
+	UI::Button * btnPlayerTribe;
+	UI::Button * btnPlayerInit;
 };
 
 PlayerDescriptionGroup::PlayerDescriptionGroup
@@ -65,43 +65,43 @@ d(new PlayerDescriptionGroupImpl)
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
 	d->plr_name->set_textstyle(UI::TextStyle::makebold(font, UI_FONT_CLR_FG));
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
-	d->btnEnablePlayer->changedto.set
-		(this, &PlayerDescriptionGroup::enable_player);
-	d->btnPlayerType = new UI::Callback_Button
+	d->btnEnablePlayer->changedto.connect
+		(boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
+	d->btnPlayerType = new UI::Button
 		(this, "player_type",
 		 xplayertype, 0, xplayerteam - xplayertype - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false);
+	d->btnPlayerType->sigclicked.connect
+		(boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)));
 	d->btnPlayerType->set_font(font);
-	d->btnPlayerTeam = new UI::Callback_Button
+	d->btnPlayerTeam = new UI::Button
 		(this, "player_team",
 		 xplayerteam, 0, xplayertribe - xplayerteam - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false);
+	d->btnPlayerTeam->sigclicked.connect
+		(boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)));
 	d->btnPlayerTeam->set_font(font);
-	d->btnPlayerTribe = new UI::Callback_Button
+	d->btnPlayerTribe = new UI::Button
 		(this, "player_tribe",
 		 xplayertribe, 0, xplayerinit - xplayertribe - 2, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)),
 		 std::string(), std::string(),
 		 true, false);
+	d->btnPlayerTribe->sigclicked.connect
+		(boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
 	d->btnPlayerTribe->set_font(font);
-	d->btnPlayerInit = new UI::Callback_Button
+	d->btnPlayerInit = new UI::Button
 		(this, "player_initialization",
 		 xplayerinit, 0, w - xplayerinit, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 boost::bind
-			 (&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)),
 		 std::string(), _("Initialization"),
 		 true, false);
+	d->btnPlayerInit->sigclicked.connect
+		(boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)));
 	d->btnPlayerInit->set_font(font);
 
 	refresh();

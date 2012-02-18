@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -42,8 +42,8 @@ m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 
 	m_close_on_send = false;
 
-	m_chat.sent.set(this, &GameChatMenu::acknowledge);
-	m_chat.aborted.set(this, &GameChatMenu::acknowledge);
+	m_chat.sent.connect(boost::bind(&GameChatMenu::acknowledge, this));
+	m_chat.aborted.connect(boost::bind(&GameChatMenu::acknowledge, this));
 
 	enter_chat_message(m_close_on_send);
 }

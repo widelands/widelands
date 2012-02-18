@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -39,7 +39,7 @@ namespace Widelands {
 
 #define LOWEST_SUPPORTED_VERSION           1
 #define PRIORITIES_INTRODUCED_IN_VERSION   2
-#define CURRENT_PACKET_VERSION             2
+#define CURRENT_PACKET_VERSION             3
 
 
 void Map_Building_Data_Packet::Read
@@ -67,7 +67,7 @@ throw (_wexception)
 						Player_Number const p                   = fr.Unsigned8 ();
 						Serial        const serial              = fr.Unsigned32();
 						char  const * const name                = fr.CString   ();
-						bool          const is_constructionsite = fr.Unsigned8 ();
+						uint8_t       const special_type        = fr.Unsigned8 ();
 
 						//  No building lives on more than one main place.
 
@@ -82,17 +82,19 @@ throw (_wexception)
 
 							//  Now, create this Building, take extra special care for
 							//  constructionsites. All data is read later.
-							Building & building =
-								mol.register_object<Building>
-									(serial,
-									 (is_constructionsite ?
-									  egbase.warp_constructionsite
-									  	(c, p, index, Building_Index::Null(), true)
-									  :
-									  egbase.warp_building(c, p, index)));
+							Building * building;
+							if (special_type == 1) // Constructionsite
+								  building = &egbase.warp_constructionsite
+									  	(c, p, index, Building_Index::Null(), true);
+							else if (special_type == 2) // DismantleSite
+								  building = &egbase.warp_dismantlesite (c, p, index, true);
+							else
+								  building = &egbase.warp_building(c, p, index);
+
+							mol.register_object<Building> (serial, *building);
 
 							if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
-								read_priorities (building, fr);
+								read_priorities (*building, fr);
 
 							//  Reference the players tribe if in editor.
 							if (g_gr) // but not on dedicated servers ;)
@@ -136,15 +138,21 @@ throw (_wexception)
 			fw.Unsigned8(building->owner().player_number());
 			fw.Unsigned32(mos.register_object(*building));
 
-			upcast(ConstructionSite const, constructionsite, building);
+			upcast(Partially_Finished_Building const, pfb, building);
 			fw.CString
-				((constructionsite ?
-				  constructionsite->building() : building->descr())
+				((pfb ? *pfb->m_building : building->descr())
 				 .name().c_str());
-			fw.Unsigned8(static_cast<bool>(constructionsite));
+
+			if (!pfb)
+				fw.Unsigned8(0);
+			else {
+				if (upcast(const ConstructionSite, cs, pfb))
+					fw.Unsigned8(1);
+				else // DismantleSite
+					fw.Unsigned8(2);
+			}
 
 			write_priorities(*building, fw);
-
 		} else
 			fw.Unsigned8(0);
 	}
@@ -179,9 +187,9 @@ void Map_Building_Data_Packet::write_priorities
 		{
 			std::string name;
 			Ware_Index const ware_index = it2->first;
-			if (Request::WARE == ware_type)
+			if (wwWARE == ware_type)
 				name = tribe.get_ware_descr(ware_index)->name();
-			else if (Request::WORKER == ware_type)
+			else if (wwWORKER == ware_type)
 				name = tribe.get_worker_descr(ware_index)->name();
 			else
 				throw game_data_error
@@ -210,9 +218,9 @@ void Map_Building_Data_Packet::read_priorities
 		const uint8_t count = fr.Unsigned8();
 		for (uint8_t i = 0; i < count; ++i) {
 			Ware_Index idx;
-			if (Request::WARE == ware_type)
+			if (wwWARE == ware_type)
 				idx = tribe.safe_ware_index(fr.CString());
-			else if (Request::WORKER == ware_type)
+			else if (wwWORKER == ware_type)
 				idx = tribe.safe_worker_index(fr.CString());
 			else
 				throw game_data_error

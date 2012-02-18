@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,21 +13,25 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
-#include "map.h"
+#include <algorithm>
+#include <cstdio>
+
+#include "log.h"
 
 #include "checkstep.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "editor/tools/editor_increase_resources_tool.h"
 #include "findimmovable.h"
 #include "findnode.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "map_generator.h"
 #include "map_io/widelands_map_loader.h"
 #include "mapfringeregion.h"
-#include "wui/overlay_manager.h"
 #include "pathfield.h"
 #include "player.h"
 #include "s2map.h"
@@ -36,13 +40,10 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "worlddata.h"
-#include "editor/tools/editor_increase_resources_tool.h"
-#include "map_generator.h"
+#include "wui/overlay_manager.h"
 
-#include "log.h"
+#include "map.h"
 
-#include <algorithm>
-#include <cstdio>
 
 
 #define AVG_ELEVATION   (0x80000000)
@@ -318,6 +319,8 @@ void Map::cleanup() {
 	m_scenario_names.clear();
 	m_scenario_ais.clear();
 	m_scenario_closeables.clear();
+
+	m_tags.clear();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
@@ -682,6 +685,10 @@ void Map::set_background(char const * const string)
 		m_background = string;
 	else
 		m_background.clear();
+}
+
+void Map::add_tag(std::string tag) {
+	m_tags.insert(tag);
 }
 
 /*
@@ -1135,9 +1142,7 @@ void Map::recalc_nodecaps_pass1(FCoords const f)
 {
 	uint8_t caps = CAPS_NONE;
 
-
 	// 1a) Get all the neighbours to make life easier
-	const FCoords  r =  r_n(f);
 	const FCoords tr = tr_n(f);
 	const FCoords tl = tl_n(f);
 	const FCoords  l =  l_n(f);
@@ -1454,21 +1459,61 @@ void Map::recalc_nodecaps_pass2(FCoords const f)
 			//  8) Reduce building size based on height diff. of second order
 			//    neighbours  If height difference between this field and second
 			//    order neighbour is >= 3, we can only build a small house here.
-			//    Additionally, we can potentially build a harbour on this field
+			//    Additionally, we can potentially build a port on this field
 			//    if one of the second order neighbours is swimmable.
 			{
 				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
-				do if (abs(mr.location().field->get_height() - f_height) >= 3) {
-					building = BUILDCAPS_SMALL;
-					break;
-				} while (mr.advance(*this));
-			}
+				bool port = false;
 
+				do {
+					if (abs(mr.location().field->get_height() - f_height) >= 3) {
+						building = BUILDCAPS_SMALL;
+						break;
+					}
+					// If there is still place for a big building, take care about ports
+					if ((building == BUILDCAPS_BIG) && !port && is_port_space(f))
+						if (mr.location().field->caps & MOVECAPS_SWIM)
+							port = true;
+				} while (mr.advance(*this));
+
+				if ((building == BUILDCAPS_BIG) && port)
+					caps |= BUILDCAPS_PORT;
+			}
 			caps |= building;
 		}
 	}
 end: //  9) That's it, store the collected information.
 	f.field->caps = static_cast<NodeCaps>(caps);
+}
+
+/// \returns true, if Coordinates are in port space list
+bool Map::is_port_space(Coords c) {
+	for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
+		if (*i == c) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/// Set or unset a space as port space
+void Map::set_port_space(Coords c, bool allowed) {
+	if (allowed) {
+		// First check, if the coordinates are already in the list
+		for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
+			if (*i == c)
+				return;
+		}
+		m_port_spaces.push_back(c);
+	} else {
+		// Try to find the coordinates, if they are found, remove them
+		for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
+			if (*i == c) {
+				m_port_spaces.erase(i);
+				return;
+			}
+		}
+	}
 }
 
 
@@ -2123,31 +2168,6 @@ Military_Influence Map::calc_influence
 	influence *= influence;
 
 	return influence;
-}
-
-
-/*
-==============================================================================
-
-Bob search functors
-
-==============================================================================
-*/
-bool FindBobAttribute::accept(Bob * const bob) const
-{
-	return bob->has_attribute(m_attrib);
-}
-
-bool FindBobEnemySoldier::accept(Bob * const imm) const
-{
-	if (upcast(Soldier, soldier, imm))
-		if
-			(soldier->isOnBattlefield() &&
-			 (!player || soldier->owner().is_hostile(*player)) &&
-			 soldier->get_current_hitpoints())
-			return true;
-
-	return false;
 }
 
 } // namespace Widelands

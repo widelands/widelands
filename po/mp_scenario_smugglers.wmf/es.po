@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
-"PO-Revision-Date: 2011-10-05 20:25+0000\n"
-"Last-Translator: Luis Miguel D.P. <Unknown>\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"PO-Revision-Date: 2011-11-05 06:18+0000\n"
+"Last-Translator: MadkaT <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-06 04:30+0000\n"
-"X-Generator: Launchpad (build 14085)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:52+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:23
 msgid "%s and %s have established a smuggling route!"
@@ -30,6 +30,8 @@ msgid ""
 "Game over! %s and %s have won the game! %s and %s only managed to\n"
 "smuggle %i wares."
 msgstr ""
+"Game over! %s and %s have won the game! %s and %s only managed to\n"
+"smuggle %i wares."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Rules"
@@ -57,14 +59,17 @@ msgid ""
 "routes by burning down your warehouses. You will pay them back in their own\n"
 "coin of course!"
 msgstr ""
+"El otro equipo tiene el mismo objetivo y es tratar de interrumpir tus rutas\n"
+"de tráfico quemando tus almacenes. Tu les pagarás con su propia\n"
+"moneda obviamente!"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:26
 msgid "The smuggling route of %s and %s has been broken!"
-msgstr ""
+msgstr "La ruta de tráfico de %s y %s ha sido destruida!"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares smuggled"
-msgstr ""
+msgstr "Mercancía de contrabando"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
 msgid ""

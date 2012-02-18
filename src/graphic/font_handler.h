@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -48,6 +48,13 @@ struct Font_Handler {
 	~Font_Handler();
 
 	void draw_text
+		(RenderTarget &,
+		 const TextStyle &,
+		 Point dstpoint,
+		 const std::string & text,
+		 Align align = Align_CenterLeft,
+		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+	void draw_text_shadow
 		(RenderTarget &,
 		 const TextStyle &,
 		 Point dstpoint,

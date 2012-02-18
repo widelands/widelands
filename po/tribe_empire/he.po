@@ -6,20 +6,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-03 11:44+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
 "PO-Revision-Date: 2010-06-06 20:59+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 04:44+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:46+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
+msgstr ""
+
+#: ../../tribes/empire/ship/conf:1
+msgid "A sea-worthy ship"
 msgstr ""
 
 #: ../../tribes/empire/ration/conf:1
@@ -29,23 +33,23 @@ msgid ""
 "or meat or bread."
 msgstr ""
 
-#: ../../tribes/empire/conf:56
+#: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
 msgstr ""
 
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:218
 msgid "Arena"
 msgstr "זירה"
 
-#: ../../tribes/empire/conf:57
+#: ../../tribes/empire/conf:58
 msgid "Armour"
 msgstr ""
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:189
 msgid "Armour Smithy"
 msgstr ""
 
-#: ../../tribes/empire/conf:109
+#: ../../tribes/empire/conf:110
 msgid "Armoursmith"
 msgstr ""
 
@@ -53,15 +57,15 @@ msgstr ""
 msgid "Ashes"
 msgstr "אפר"
 
-#: ../../tribes/empire/conf:58
+#: ../../tribes/empire/conf:59
 msgid "Axe"
 msgstr "גרזן"
 
-#: ../../tribes/empire/conf:110
+#: ../../tribes/empire/conf:111
 msgid "Baker"
 msgstr "אופה"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:179
 msgid "Bakery"
 msgstr "מאפיה"
 
@@ -69,12 +73,12 @@ msgstr "מאפיה"
 msgid "Bakes bread for workers."
 msgstr ""
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:208
 msgid "Barracks"
 msgstr "קסרקטין"
 
-#: ../../tribes/empire/conf:148
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:155
+#: ../../tribes/empire/conf:209
 msgid "Barrier"
 msgstr "מחסום"
 
@@ -85,11 +89,11 @@ msgid ""
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
 
-#: ../../tribes/empire/conf:60
+#: ../../tribes/empire/conf:61
 msgid "Basket"
 msgstr "סל"
 
-#: ../../tribes/empire/conf:61
+#: ../../tribes/empire/conf:62
 msgid "Beer"
 msgstr "בירה"
 
@@ -99,9 +103,13 @@ msgid ""
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
 
-#: ../../tribes/empire/conf:62
+#: ../../tribes/empire/conf:63
 msgid "Bread"
 msgstr "לחם"
+
+#: ../../tribes/empire/conf:60
+msgid "Bread Paddle"
+msgstr ""
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -111,19 +119,19 @@ msgstr ""
 msgid "Breeds pigs."
 msgstr ""
 
-#: ../../tribes/empire/conf:111
+#: ../../tribes/empire/conf:112
 msgid "Brewer"
 msgstr "מבשל"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:180
 msgid "Brewery"
 msgstr ""
 
-#: ../../tribes/empire/conf:112
+#: ../../tribes/empire/conf:113
 msgid "Builder"
 msgstr "בנאי"
 
-#: ../../tribes/empire/conf:113
+#: ../../tribes/empire/conf:114
 msgid "Burner"
 msgstr ""
 
@@ -131,11 +139,11 @@ msgstr ""
 msgid "Burns coal."
 msgstr ""
 
-#: ../../tribes/empire/conf:114
+#: ../../tribes/empire/conf:115
 msgid "Carpenter"
 msgstr ""
 
-#: ../../tribes/empire/conf:102
+#: ../../tribes/empire/conf:103
 msgid "Carrier"
 msgstr "סבל"
 
@@ -143,29 +151,29 @@ msgstr "סבל"
 msgid "Carries items along your roads."
 msgstr ""
 
-#: ../../tribes/empire/conf:142
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:212
 msgid "Castle"
 msgstr "טירה"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:223
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
 msgstr "כפר טירה"
 
-#: ../../tribes/empire/conf:63
+#: ../../tribes/empire/conf:64
 msgid "Chain-Armour"
 msgstr ""
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:185
 msgid "Charcoal Burner"
 msgstr ""
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:156
 msgid "Citadel"
 msgstr "מצודה"
 
-#: ../../tribes/empire/conf:64
+#: ../../tribes/empire/conf:65
 msgid "Cloth"
 msgstr "אריג"
 
@@ -175,19 +183,23 @@ msgid ""
 "armour smithy."
 msgstr ""
 
-#: ../../tribes/empire/conf:65
+#: ../../tribes/empire/conf:66
 msgid "Coal"
 msgstr "פחם"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:199
 msgid "Coal Mine"
 msgstr ""
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:217
 msgid "Colosseum"
 msgstr "קולוסאום"
 
-#: ../../tribes/empire/conf:138
+#: ../../tribes/empire/shipyard/conf:18
+msgid "Constructing ship"
+msgstr ""
+
+#: ../../tribes/empire/conf:143
 msgid "Construction Site"
 msgstr ""
 
@@ -195,19 +207,19 @@ msgstr ""
 msgid "Cuts raw pieces of granite and marble out of laying stones."
 msgstr ""
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:198
 msgid "Deep Coal Mine"
 msgstr ""
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:202
 msgid "Deep Gold Mine"
 msgstr ""
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:200
 msgid "Deep Iron Ore Mine"
 msgstr ""
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:196
 msgid "Deep Marble Mine"
 msgstr ""
 
@@ -223,19 +235,23 @@ msgstr ""
 msgid "Discovers resources for mining."
 msgstr ""
 
-#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:146
+msgid "Dismantle Site"
+msgstr ""
+
+#: ../../tribes/empire/conf:157
 msgid "Donjon"
 msgstr "העופל"
 
-#: ../../tribes/empire/conf:103
+#: ../../tribes/empire/conf:104
 msgid "Donkey"
 msgstr "חמור"
 
-#: ../../tribes/empire/conf:135
+#: ../../tribes/empire/conf:137
 msgid "Donkey Breeder"
 msgstr ""
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:190
 msgid "Donkeyfarm"
 msgstr ""
 
@@ -243,11 +259,11 @@ msgstr ""
 msgid "Empire"
 msgstr "אימפריה"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:194
 msgid "Farm"
 msgstr "חווה"
 
-#: ../../tribes/empire/conf:115
+#: ../../tribes/empire/conf:116
 msgid "Farmer"
 msgstr "חואי"
 
@@ -275,7 +291,7 @@ msgstr "שדה קטן"
 msgid "Field tiny"
 msgstr "שדה זעיר"
 
-#: ../../tribes/empire/conf:66
+#: ../../tribes/empire/conf:67
 msgid "Fire Tongs"
 msgstr ""
 
@@ -285,19 +301,19 @@ msgid ""
 "are produced by the toolsmith."
 msgstr ""
 
-#: ../../tribes/empire/conf:67
+#: ../../tribes/empire/conf:68
 msgid "Fish"
 msgstr "דג"
 
-#: ../../tribes/empire/conf:116
+#: ../../tribes/empire/conf:117
 msgid "Fisher"
 msgstr "דיג"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:172
 msgid "Fisher's House"
 msgstr ""
 
-#: ../../tribes/empire/conf:68
+#: ../../tribes/empire/conf:69
 msgid "Fishing Rod"
 msgstr "חכה"
 
@@ -306,7 +322,7 @@ msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
 
-#: ../../tribes/empire/conf:69
+#: ../../tribes/empire/conf:70
 msgid "Flour"
 msgstr "קמח"
 
@@ -316,20 +332,20 @@ msgid ""
 "produce the tasty Empire bread."
 msgstr ""
 
-#: ../../tribes/empire/conf:117
+#: ../../tribes/empire/conf:118
 msgid "Forester"
 msgstr "יערן"
 
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:171
 msgid "Forester's House"
 msgstr ""
 
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:213
 msgid "Fortress"
 msgstr "מבצר"
 
-#: ../../tribes/empire/conf:118
+#: ../../tribes/empire/conf:119
 msgid "Geologist"
 msgstr "גאולוג"
 
@@ -337,11 +353,11 @@ msgstr "גאולוג"
 msgid "Gets fish out of the sea."
 msgstr ""
 
-#: ../../tribes/empire/conf:70
+#: ../../tribes/empire/conf:71
 msgid "Gold"
 msgstr "זהב"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:203
 msgid "Gold Mine"
 msgstr ""
 
@@ -352,7 +368,7 @@ msgid ""
 "in the armour smithy and the weapon smithy."
 msgstr ""
 
-#: ../../tribes/empire/conf:71
+#: ../../tribes/empire/conf:72
 msgid "Goldstone"
 msgstr ""
 
@@ -360,7 +376,7 @@ msgstr ""
 msgid "Goldstones are mined in goldmines and processed in smelting works."
 msgstr ""
 
-#: ../../tribes/empire/conf:72
+#: ../../tribes/empire/conf:73
 msgid "Grape"
 msgstr "ענב"
 
@@ -368,15 +384,15 @@ msgstr "ענב"
 msgid "Grows vine."
 msgstr ""
 
-#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:150
 msgid "Guardhall"
 msgstr ""
 
-#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:151
 msgid "Guardhouse"
 msgstr ""
 
-#: ../../tribes/empire/conf:73
+#: ../../tribes/empire/conf:74
 msgid "Hammer"
 msgstr "פטיש"
 
@@ -388,24 +404,24 @@ msgstr ""
 msgid "Harvest wheat"
 msgstr ""
 
-#: ../../tribes/empire/conf:156
+#: ../../tribes/empire/conf:163
 msgid "Headquarters"
 msgstr "מפקדה"
 
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:222
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "מפקדה בינוניה"
 
-#: ../../tribes/empire/conf:157
+#: ../../tribes/empire/conf:164
 msgid "Headquarters shipwreck"
 msgstr ""
 
-#: ../../tribes/empire/conf:74
+#: ../../tribes/empire/conf:75
 msgid "Heavy Lance"
 msgstr ""
 
-#: ../../tribes/empire/conf:75
+#: ../../tribes/empire/conf:76
 msgid "Helmet"
 msgstr ""
 
@@ -413,7 +429,7 @@ msgstr ""
 msgid "Helps to carry items at heavy used roads."
 msgstr ""
 
-#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:152
 msgid "High Tower"
 msgstr ""
 
@@ -423,35 +439,35 @@ msgid ""
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
 
-#: ../../tribes/empire/conf:119
+#: ../../tribes/empire/conf:120
 msgid "Hunter"
 msgstr "ציד"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:173
 msgid "Hunter's House"
 msgstr ""
 
-#: ../../tribes/empire/conf:76
+#: ../../tribes/empire/conf:77
 msgid "Hunting Spear"
 msgstr ""
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:183
 msgid "Inn"
 msgstr "פנדק"
 
-#: ../../tribes/empire/conf:120
+#: ../../tribes/empire/conf:121
 msgid "Innkeeper"
 msgstr "בעל הפונדק"
 
-#: ../../tribes/empire/conf:77
+#: ../../tribes/empire/conf:78
 msgid "Iron"
 msgstr "ברזל"
 
-#: ../../tribes/empire/conf:78
+#: ../../tribes/empire/conf:79
 msgid "Iron Ore"
 msgstr ""
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:201
 msgid "Iron Ore Mine"
 msgstr ""
 
@@ -462,34 +478,34 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
-msgid "Keeping sheeps."
-msgstr ""
-
-#: ../../tribes/empire/conf:79
-msgid "Kitchen Tools"
+msgid "Keeping sheep."
 msgstr ""
 
 #: ../../tribes/empire/conf:80
+msgid "Kitchen Tools"
+msgstr ""
+
+#: ../../tribes/empire/conf:81
 msgid "Lance"
 msgstr "חנית"
 
-#: ../../tribes/empire/conf:121
+#: ../../tribes/empire/conf:122
 msgid "Lumberjack"
 msgstr "כורת עצים"
 
-#: ../../tribes/empire/conf:162
+#: ../../tribes/empire/conf:170
 msgid "Lumberjack's House"
 msgstr ""
 
-#: ../../tribes/empire/conf:82
+#: ../../tribes/empire/conf:83
 msgid "Marble"
 msgstr "שיש"
 
-#: ../../tribes/empire/conf:81
+#: ../../tribes/empire/conf:82
 msgid "Marble Column"
 msgstr ""
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:197
 msgid "Marble Mine"
 msgstr ""
 
@@ -507,15 +523,15 @@ msgid ""
 "columns in the stonemason's house."
 msgstr ""
 
-#: ../../tribes/empire/conf:122
+#: ../../tribes/empire/conf:123
 msgid "Master Miner"
 msgstr ""
 
-#: ../../tribes/empire/conf:83
+#: ../../tribes/empire/conf:84
 msgid "Meal"
 msgstr "מזון"
 
-#: ../../tribes/empire/conf:84
+#: ../../tribes/empire/conf:85
 msgid "Meat"
 msgstr "בשר"
 
@@ -527,11 +543,11 @@ msgid ""
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:178
 msgid "Mill"
 msgstr "טחנה"
 
-#: ../../tribes/empire/conf:123
+#: ../../tribes/empire/conf:124
 msgid "Miller"
 msgstr "טוחן"
 
@@ -559,7 +575,7 @@ msgstr ""
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/empire/conf:124
+#: ../../tribes/empire/conf:125
 msgid "Miner"
 msgstr "כורה"
 
@@ -567,23 +583,19 @@ msgstr "כורה"
 msgid "Not enough space"
 msgstr ""
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:210
 msgid "Outpost"
 msgstr "מאחז"
 
-#: ../../tribes/empire/conf:59
-msgid "Peel"
-msgstr "יעה"
-
-#: ../../tribes/empire/conf:85
+#: ../../tribes/empire/conf:86
 msgid "Pick"
 msgstr "מכוש"
 
-#: ../../tribes/empire/conf:125
+#: ../../tribes/empire/conf:126
 msgid "Pig Breeder"
 msgstr ""
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:193
 msgid "Piggery"
 msgstr ""
 
@@ -603,8 +615,12 @@ msgstr ""
 msgid "Plants trees."
 msgstr ""
 
-#: ../../tribes/empire/conf:86
+#: ../../tribes/empire/conf:87
 msgid "Plate-Armour"
+msgstr ""
+
+#: ../../tribes/empire/conf:166
+msgid "Port"
 msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:31
@@ -715,11 +731,11 @@ msgstr ""
 msgid "Produces weapons for the soldiers."
 msgstr ""
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:169
 msgid "Quarry"
 msgstr "מחצבה"
 
-#: ../../tribes/empire/conf:87
+#: ../../tribes/empire/conf:88
 msgid "Ration"
 msgstr "מנה"
 
@@ -763,19 +779,19 @@ msgstr ""
 msgid "Resource indicator water"
 msgstr ""
 
-#: ../../tribes/empire/conf:88
+#: ../../tribes/empire/conf:89
 msgid "Saw"
 msgstr "מסור"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:177
 msgid "Sawmill"
 msgstr "מנסרה"
 
-#: ../../tribes/empire/conf:134
+#: ../../tribes/empire/conf:136
 msgid "Scout"
 msgstr "צופה"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:175
 msgid "Scout's House"
 msgstr ""
 
@@ -784,24 +800,40 @@ msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
 
-#: ../../tribes/empire/conf:89
+#: ../../tribes/empire/conf:90
 msgid "Scythe"
 msgstr "חרמש"
 
-#: ../../tribes/empire/conf:152
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:159
+#: ../../tribes/empire/conf:207
 msgid "Sentry"
 msgstr "זקיף"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:191
 msgid "Sheepfarm"
 msgstr ""
 
-#: ../../tribes/empire/conf:126
+#: ../../tribes/empire/conf:127
 msgid "Shepherd"
 msgstr "רועה צאן"
 
-#: ../../tribes/empire/conf:90
+#: ../../tribes/empire/conf:140
+msgid "Ship"
+msgstr ""
+
+#: ../../tribes/empire/conf:54
+msgid "Ship construction site"
+msgstr ""
+
+#: ../../tribes/empire/conf:128
+msgid "Shipwright"
+msgstr ""
+
+#: ../../tribes/empire/conf:187
+msgid "Shipyard"
+msgstr ""
+
+#: ../../tribes/empire/conf:91
 msgid "Shovel"
 msgstr ""
 
@@ -811,7 +843,7 @@ msgstr ""
 msgid "Sleep"
 msgstr ""
 
-#: ../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:153
 msgid "Small Tower"
 msgstr ""
 
@@ -823,11 +855,11 @@ msgstr ""
 msgid "Smelt iron"
 msgstr ""
 
-#: ../../tribes/empire/conf:127
+#: ../../tribes/empire/conf:129
 msgid "Smelter"
 msgstr "מכונן"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:186
 msgid "Smelting Works"
 msgstr ""
 
@@ -835,7 +867,7 @@ msgstr ""
 msgid "Smelts iron."
 msgstr ""
 
-#: ../../tribes/empire/conf:106
+#: ../../tribes/empire/conf:107
 msgid "Soldier"
 msgstr ""
 
@@ -846,15 +878,15 @@ msgid ""
 "this map with a fair starting condition."
 msgstr ""
 
-#: ../../tribes/empire/conf:128
+#: ../../tribes/empire/conf:130
 msgid "Stonemason"
 msgstr ""
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:176
 msgid "Stonemason's House"
 msgstr ""
 
-#: ../../tribes/empire/conf:91
+#: ../../tribes/empire/conf:92
 msgid "Stones"
 msgstr "אבנים"
 
@@ -864,11 +896,11 @@ msgid ""
 "quarries and marble mines."
 msgstr ""
 
-#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:160
 msgid "Stronghold"
 msgstr "מאחז"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:184
 msgid "Tavern"
 msgstr "מסבאה"
 
@@ -895,6 +927,12 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
+msgstr ""
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/empire/chain_armour/conf:1
@@ -924,12 +962,6 @@ msgid ""
 "smithy. Together with a wood lance it is the equipment to fit out young "
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
-msgstr ""
-
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
 msgstr ""
 
 #: ../../tribes/empire/plate_armour/conf:1
@@ -1024,24 +1056,24 @@ msgid ""
 "fit out young soldiers."
 msgstr ""
 
-#: ../../tribes/empire/conf:129
+#: ../../tribes/empire/conf:131
 msgid "Toolsmith"
 msgstr ""
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:188
 msgid "Toolsmithy"
 msgstr ""
 
-#: ../../tribes/empire/conf:147
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:211
 msgid "Tower"
 msgstr "מגדל"
 
-#: ../../tribes/empire/conf:130
+#: ../../tribes/empire/conf:132
 msgid "Trainer"
 msgstr "מאמן"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:219
 msgid "Trainingscamp"
 msgstr ""
 
@@ -1049,7 +1081,7 @@ msgstr ""
 msgid "Trains the soldiers."
 msgstr ""
 
-#: ../../tribes/empire/conf:92
+#: ../../tribes/empire/conf:93
 msgid "Trunk"
 msgstr "גזע"
 
@@ -1160,7 +1192,7 @@ msgid ""
 "(build13))"
 msgstr ""
 
-#: ../../tribes/empire/conf:133
+#: ../../tribes/empire/conf:135
 msgid "Vine Farmer"
 msgstr ""
 
@@ -1180,19 +1212,19 @@ msgstr ""
 msgid "Vine tiny"
 msgstr ""
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:181
 msgid "Vineyard"
 msgstr "כרם"
 
-#: ../../tribes/empire/conf:93
+#: ../../tribes/empire/conf:94
 msgid "War-Lance"
 msgstr ""
 
-#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:165
 msgid "Warehouse"
 msgstr "מחסן"
 
-#: ../../tribes/empire/conf:94
+#: ../../tribes/empire/conf:95
 msgid "Water"
 msgstr "מים"
 
@@ -1203,7 +1235,7 @@ msgid ""
 "water."
 msgstr ""
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"
 msgstr ""
 
@@ -1213,23 +1245,23 @@ msgid ""
 "in the smelting works."
 msgstr ""
 
-#: ../../tribes/empire/conf:131
+#: ../../tribes/empire/conf:133
 msgid "Weaponsmith"
 msgstr ""
 
-#: ../../tribes/empire/conf:132
+#: ../../tribes/empire/conf:134
 msgid "Weaver"
 msgstr "אורג"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:192
 msgid "Weaving Mill"
 msgstr ""
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:174
 msgid "Well"
 msgstr "באר"
 
-#: ../../tribes/empire/conf:95
+#: ../../tribes/empire/conf:96
 msgid "Wheat"
 msgstr "חיטה"
 
@@ -1240,19 +1272,19 @@ msgid ""
 "supplied with wheat."
 msgstr ""
 
-#: ../../tribes/empire/conf:96
+#: ../../tribes/empire/conf:97
 msgid "Wine"
 msgstr "יין"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:182
 msgid "Winery"
 msgstr "יקב"
 
-#: ../../tribes/empire/conf:97
+#: ../../tribes/empire/conf:98
 msgid "Wood"
 msgstr "עץ"
 
-#: ../../tribes/empire/conf:98
+#: ../../tribes/empire/conf:99
 msgid "Wood Lance"
 msgstr ""
 
@@ -1262,12 +1294,12 @@ msgid ""
 "weapon smithy."
 msgstr ""
 
-#: ../../tribes/empire/conf:99
+#: ../../tribes/empire/conf:100
 msgid "Wool"
 msgstr "צמר"
 
 #: ../../tribes/empire/wool/conf:1
-msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
+msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:30
@@ -1295,6 +1327,7 @@ msgstr ""
 #: ../../tribes/empire/sawmill/conf:23
 #: ../../tribes/empire/scouts_house/conf:17
 #: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/shipyard/conf:19
 #: ../../tribes/empire/smelting_works/conf:24
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
@@ -1309,6 +1342,10 @@ msgstr "עבודה"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
+msgstr ""
+
+#: ../../tribes/empire/shipwright/conf:1
+msgid "Works at the shipyard and constructs new ships."
 msgstr ""
 
 #: ../../tribes/empire/master-miner/conf:1

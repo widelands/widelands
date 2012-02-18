@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -45,6 +45,7 @@
 #include "tribe.h"
 #include "worker.h"
 #include "world.h"
+#include "dismantlesite.h"
 
 #include "editor_game_base.h"
 
@@ -319,21 +320,42 @@ Building & Editor_Game_Base::warp_constructionsite
 			(*this, plr, c, true, old_id ? tribe.get_building_descr(old_id) : 0, loading);
 }
 
+/**
+ * Create a dismantle site
+ */
+Building & Editor_Game_Base::warp_dismantlesite
+	(Coords const c, Player_Number const owner,
+	 Building_Index idx, bool loading)
+{
+	Player            & plr   = player(owner);
+	Tribe_Descr const & tribe = plr.tribe();
+
+	Building_Descr const * const descr =
+		tribe.get_building_descr
+			(tribe.safe_building_index("dismantlesite"));
+
+	upcast(const DismantleSite_Descr, ds_descr, descr);
+
+	return
+		*new DismantleSite
+			(*ds_descr, *this, c, *get_player(owner), *tribe.get_building_descr(idx), loading);
+}
+
 
 /**
  * Instantly create a bob at the given x/y location.
  *
  * idx is the bob type.
  */
-Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr)
+Bob & Editor_Game_Base::create_bob(Coords c, const Bob::Descr & descr, Player * owner)
 {
-	return descr.create(*this, 0, c);
+	return descr.create(*this, owner, c);
 }
 
 
 Bob & Editor_Game_Base::create_bob
 	(Coords const c,
-	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe)
+	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe, Player * owner)
 {
 	Bob::Descr const & descr =
 		*
@@ -342,11 +364,12 @@ Bob & Editor_Game_Base::create_bob
 		 :
 		 m_map->get_world()->get_bob_descr(idx));
 
-	return create_bob(c, descr);
+	return create_bob(c, descr, owner);
 }
 
 Bob & Editor_Game_Base::create_bob
-	(Coords c, const std::string & name, const Widelands::Tribe_Descr * const tribe)
+	(Coords c, const std::string & name, const Widelands::Tribe_Descr * const tribe,
+	 Player * owner)
 {
 	const Bob::Descr * descr =
 		tribe ?
@@ -358,7 +381,7 @@ Bob & Editor_Game_Base::create_bob
 			("create_bob(%i,%i,%s,%s): bob not found",
 			 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
 
-	return create_bob(c, *descr);
+	return create_bob(c, *descr, owner);
 }
 
 
@@ -727,7 +750,6 @@ void Editor_Game_Base::do_conquer_area
 							highest_military_influence = value;
 							best_player = p;
 						} else if (value == highest_military_influence) {
-							Coords const c = map().get_fcoords(map()[index]);
 							best_player = neutral_when_competing_influence ?
 								0 : player_area.player_number;
 						}

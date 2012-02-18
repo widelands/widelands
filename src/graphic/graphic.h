@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -152,6 +152,8 @@ struct Graphic {
 	PictureID create_picture(int32_t w, int32_t h, bool alpha = false);
 
 	PictureID create_grayed_out_pic(const PictureID & picid);
+	PictureID create_changed_luminosity_pic
+		(const PictureID & picid, const float factor, const bool halve_alpha = false);
 
 	enum  ResizeMode {
 		// do not worry about proportions, just sketch to requested size

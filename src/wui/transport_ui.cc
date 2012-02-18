@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -74,20 +74,18 @@ private:
 	UI::Tab_Panel m_tabpanel;
 
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
-		typedef AbstractWaresDisplay::wdType wdType;
-
 		TargetWaresDisplay
 			(UI::Panel * const parent,
 			 int32_t const x, int32_t const y,
 			 Widelands::Tribe_Descr const & tribe,
-			 wdType type,
+			 Widelands::WareWorker type,
 			 bool selectable,
 			 Economy & economy)
 		:
 			 AbstractWaresDisplay(parent, x, y, tribe, type, selectable),
 			 m_economy(economy)
 		{
-			if (type == WaresDisplay::WORKER) {
+			if (type == Widelands::wwWORKER) {
 				Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
 				for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 					if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
@@ -107,7 +105,7 @@ private:
 		std::string info_for_ware(Widelands::Ware_Index const ware) {
 			return
 				boost::lexical_cast<std::string>
-				(get_type() == WaresDisplay::WORKER ?
+				(get_type() == Widelands::wwWORKER ?
 				 m_economy.worker_target_quantity(ware).permanent :
 				 m_economy.ware_target_quantity(ware).permanent);
 		}
@@ -127,7 +125,7 @@ private:
 		Economy_Options_Ware_Panel(UI::Panel * parent, Interactive_GameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
-			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WARE, m_can_act, economy),
+			m_display(this, 0, 0, economy.owner().tribe(), Widelands::wwWARE, m_can_act, economy),
 			m_economy(economy)
 		{
 			add(&m_display, UI::Box::AlignLeft, true);
@@ -135,21 +133,21 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			UI::Callback_Button * b = 0;
+			UI::Button * b = 0;
 
 #define ADD_WARE_BUTTON(callback, text, tooltip)                  \
-	b = new UI::Callback_Button                                    \
+	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
 		  g_gr->get_picture(PicMod_UI, "pics/but4.png"),            \
-		  boost::bind                                               \
-			  (&Economy_Options_Ware_Panel::callback, this),         \
 		  text, tooltip, m_can_act);                                \
+	b->sigclicked.connect(boost::bind(&Economy_Options_Ware_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
-			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))
-			b->set_repeating(true);
 			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))
 			b->set_repeating(true);
+			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))
+			b->set_repeating(true);
+			buttons->add_space(8);
 			ADD_WARE_BUTTON(reset_target, "R", _("Reset to default"))
 		}
 
@@ -223,7 +221,7 @@ private:
 		Economy_Options_Worker_Panel(UI::Panel * parent, Interactive_GameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
-			m_display(this, 0, 0, economy.owner().tribe(), WaresDisplay::WORKER, m_can_act, economy),
+			m_display(this, 0, 0, economy.owner().tribe(), Widelands::wwWORKER, m_can_act, economy),
 			m_economy(economy)
 		{
 			add(&m_display, UI::Box::AlignLeft, true);
@@ -231,20 +229,21 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			UI::Callback_Button * b = 0;
+			UI::Button * b = 0;
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
-	b = new UI::Callback_Button                                      \
+	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
 		  g_gr->get_picture(PicMod_UI, "pics/but4.png"),              \
-		  boost::bind(&Economy_Options_Worker_Panel::callback, this), \
 		  text, tooltip, m_can_act);                                  \
+	b->sigclicked.connect(boost::bind(&Economy_Options_Worker_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
 
-			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))
-			b->set_repeating(true);
 			ADD_WORKER_BUTTON(decrease_target, "-", _("Decrease target"))
 			b->set_repeating(true);
+			ADD_WORKER_BUTTON(increase_target, "+", _("Increase target"))
+			b->set_repeating(true);
+			buttons->add_space(8);
 			ADD_WORKER_BUTTON(reset_target, "R", _("Reset to default"))
 		}
 

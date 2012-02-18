@@ -13,14 +13,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #ifndef BASIC_FILEWRITE_H
 #define BASIC_FILEWRITE_H
 
-#include "io/filesystem/filesystem.h"
+#include "filesystem/disk_filesystem.h"
+#include "filesystem/filesystem.h"
 #include "machdep.h"
 
 #include <cassert>
@@ -61,6 +62,12 @@ template <typename Base> struct basic_FileWrite : public Base {
 	/// worry, it will be cleared by the destructor).
 	void Write(FileSystem & fs, char const * const filename) {
 		fs.Write(filename, data, filelength); Clear();
+	}
+
+	/// Same as above, just that the data is appended to the file
+	/// NOTE RealFSImpl is used by purpose - zip filesystems do not support appending
+	void WriteAppend(RealFSImpl & fs, char const * const filename) {
+		fs.Write(filename, data, filelength, true); Clear();
 	}
 
 	/// Get the position that will be written to in the next write operation that

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-/** class Path
+/** struct Path
  *
  * Represents a cross-country path found by Path::findpath, for example
  */
@@ -38,6 +38,7 @@ struct Map;
 
 struct Path {
 	friend struct Map;
+	friend struct MapAStarBase;
 
 	Path() {}
 	Path(const Coords & c) : m_start(c), m_end(c) {}

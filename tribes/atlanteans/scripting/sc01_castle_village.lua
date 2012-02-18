@@ -17,8 +17,6 @@ return {
       plr:allow_workers("all")
    end
 
-   plr:forbid_buildings{"shipyard"}
-
    local h = plr:place_building("castle", sf, false, true)
    h:set_soldiers{[{0,0,0,0}] = 12}
 
@@ -100,9 +98,9 @@ return {
          wares = { trunk = 1 }
       })
    end) then
-      plr:send_message(_"Not enough space", _ 
-[[Some of your starting buildings didn't have enough room and 
-weren't build. You are at an disadvantage with this; consider restarting 
+      plr:send_message(_"Not enough space", _
+[[Some of your starting buildings didn't have enough room and
+weren't build. You are at an disadvantage with this; consider restarting
 this map with a fair starting condition.]], {popup=true}
       )
    end

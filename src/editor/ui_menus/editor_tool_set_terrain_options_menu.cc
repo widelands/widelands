@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -45,7 +45,8 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	:
 	Editor_Tool_Options_Menu(parent, registry, 0, 0, _("Terrain Select")),
 	m_cur_selection         (this, 0, 0, 0, 20, UI::Align_Center),
-	m_tool                  (tool)
+	m_tool                  (tool),
+	m_select_recursion_protect(false)
 {
 	Widelands::World & world = parent.egbase().map().world();
 	Widelands::Terrain_Index const nr_terrains = world.get_nr_terrains();
@@ -155,10 +156,9 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 			UI::Checkbox & cb = *new UI::Checkbox(this, pos, picture);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
-			cb.set_id(i);
 			cb.set_state(m_tool.is_enabled(i));
-			cb.changedtoid.set
-				(this, &Editor_Tool_Set_Terrain_Options_Menu::selected);
+			cb.changedto.connect
+				(boost::bind(&Editor_Tool_Set_Terrain_Options_Menu::selected, this, i, _1));
 			m_checkboxes[i] = &cb;
 
 			pos.x += TEXTURE_WIDTH + hspacing();
@@ -178,7 +178,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	for (Widelands::Terrain_Index i = 0; j; ++i)
 		if (m_tool.is_enabled(i)) {
 			buf += " ";
-			buf += world.get_ter(i).name();
+			buf += world.get_ter(i).descname();
 			--j;
 		}
 	m_cur_selection.set_text(buf);
@@ -193,6 +193,9 @@ Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu()
 void Editor_Tool_Set_Terrain_Options_Menu::selected
 	(int32_t const n, bool const t)
 {
+	if (m_select_recursion_protect)
+		return;
+
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
 	//  FIXME usage comment for get_key_state.
@@ -205,22 +208,13 @@ void Editor_Tool_Set_Terrain_Options_Menu::selected
 			for (uint32_t i = 0; m_tool.get_nr_enabled(); ++i)
 				m_tool.enable(i, false);
 			//  disable all checkboxes
-			const uint32_t size = m_checkboxes.size();
-			//TODO: the uint32_t cast is ugly!
-			for
-				(uint32_t i = 0; i < size;
-				 ++i, i += i == static_cast<uint32_t>(n))
-			{
-				m_checkboxes[i]->changedtoid.set
-					(this,
-					 static_cast
-					 	<void (Editor_Tool_Set_Terrain_Options_Menu::*)
-					 	(int32_t, bool)>
-					 	(0));
-				m_checkboxes[i]->set_state(false);
-				m_checkboxes[i]->changedtoid.set
-					(this, &Editor_Tool_Set_Terrain_Options_Menu::selected);
+			m_select_recursion_protect = true;
+			const int32_t size = m_checkboxes.size();
+			for (int32_t i = 0; i < size; ++i) {
+				if (i != n)
+					m_checkboxes[i]->set_state(false);
 			}
+			m_select_recursion_protect = false;
 		}
 
 		m_tool.enable(n, t);
@@ -234,7 +228,7 @@ void Editor_Tool_Set_Terrain_Options_Menu::selected
 		for (Widelands::Terrain_Index i = 0; j; ++i)
 			if (m_tool.is_enabled(i)) {
 				buf += " ";
-				buf += world.get_ter(i).name();
+				buf += world.get_ter(i).descname();
 				--j;
 			}
 

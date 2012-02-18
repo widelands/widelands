@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -39,9 +39,9 @@ private:
 	uint32_t                                      m_buth;
 	uint32_t                                      m_butx;
 	UI::Textarea                                  title;
-	UI::Callback_Button                       new_map;
-	UI::Callback_Button                       load_map;
-	UI::Callback_Button                       back;
+	UI::Button                       new_map;
+	UI::Button                       load_map;
+	UI::Button                       back;
 };
 
 #endif

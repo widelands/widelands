@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -27,7 +27,7 @@
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right
-* way is to use the base class Surface wherever possible. Everything which
+* way is to use the base struct Surface wherever possible. Everything which
 * needs to know about the underlying renderer should go to the graphics
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
@@ -80,7 +80,7 @@ struct SurfaceSDL : IOffscreenSurface {
 	void draw_line
 		(int32_t x1, int32_t y1,
 		 int32_t x2, int32_t y2,
-		 RGBColor, Rect const * clip = 0);
+		 RGBColor, uint8_t width);
 
 	void blit(Point, PictureID, Rect srcrc, Composite cm);
 	void fast_blit(PictureID);
@@ -95,9 +95,6 @@ struct SurfaceSDL : IOffscreenSurface {
 	virtual IPixelAccess & pixelaccess() {return *this;}
 
 private:
-	SurfaceSDL & operator= (SurfaceSDL const &);
-	explicit SurfaceSDL    (SurfaceSDL const &);
-
 	SDL_Surface * m_surface;
 	int32_t m_offsx;
 	int32_t m_offsy;

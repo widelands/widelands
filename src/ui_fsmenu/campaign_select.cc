@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -70,15 +70,11 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_CampaignSelect::clicked_ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_CampaignSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 
 // Campaign list
@@ -87,6 +83,13 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
 		 get_w() * 711 / 1250, get_h() * 6083 / 10000)
 {
+	b_ok.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_CampaignSelect::clicked_ok, boost::ref(*this)));
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_CampaignSelect::end_modal, boost::ref(*this), 0));
+
 	back.set_font(font_small());
 	b_ok.set_font(font_small());
 
@@ -98,10 +101,10 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	label_campdescr .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	tacampdescr     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list.set_font(m_fn, m_fs);
-	m_list.selected      .set
-		(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
-	m_list.double_clicked.set
-		(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
+	m_list.selected.connect
+		(boost::bind(&Fullscreen_Menu_CampaignSelect::campaign_selected, this, _1));
+	m_list.double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_CampaignSelect::double_clicked, this, _1));
 	fill_list();
 }
 
@@ -154,9 +157,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 		sprintf(cdescription, "campdesc%u", i);
 		sprintf(cdif_descr, "campdiffdescr%u", i);
 
-		uint32_t dif = s.get_natural(cdifficulty);
-		if (dif > 3)
-			dif = 0;
+		s.get_natural(cdifficulty);
 
 		std::string dif_description = s.get_string
 			(cdif_descr, _("[No value found]"));
@@ -276,15 +277,11 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_CampaignMapSelect::clicked_ok, boost::ref(*this)),
 		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind
-			 (&Fullscreen_Menu_CampaignMapSelect::end_modal, boost::ref(*this), 0),
 		 _("Back"), std::string(), true, false),
 
 // Campaign map list
@@ -293,6 +290,13 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
 		 get_w() * 711 / 1250, get_h() * 6083 / 10000)
 {
+	b_ok.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_CampaignMapSelect::clicked_ok, boost::ref(*this)));
+	back.sigclicked.connect
+		(boost::bind
+			 (&Fullscreen_Menu_CampaignMapSelect::end_modal, boost::ref(*this), 0));
+
 	b_ok.set_font(font_small());
 	back.set_font(font_small());
 
@@ -304,9 +308,9 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 	label_mapdescr.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	tamapdescr    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list.set_font(m_fn, m_fs);
-	m_list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
-	m_list.double_clicked.set
-		(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
+	m_list.selected.connect(boost::bind(&Fullscreen_Menu_CampaignMapSelect::map_selected, this, _1));
+	m_list.double_clicked.connect
+		(boost::bind(&Fullscreen_Menu_CampaignMapSelect::double_clicked, this, _1));
 }
 
 

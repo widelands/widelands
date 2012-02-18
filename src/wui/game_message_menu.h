@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -52,123 +52,25 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	virtual bool handle_key(bool down, SDL_keysym code);
 
 private:
+	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
+
 	Interactive_Player & iplayer() const;
-	void                 selected(uint32_t);
+	void selected(uint32_t);
+	void double_clicked(uint32_t);
 
 	bool status_compare(uint32_t a, uint32_t b);
-	void do_delete();
+	void do_clear_selection();
+	void do_invert_selection();
+	void archive_or_restore();
+	void toggle_mode();
+	void center_view();
+	void update_record(UI::Table<uintptr_t>::Entry_Record & er, Widelands::Message const &);
 
-	struct List : public UI::Table<uintptr_t> {
-		enum Cols {Select, Status, Title, Time_Sent};
-		List(GameMessageMenu & parent) :
-			UI::Table<uintptr_t>(&parent, 5, 35, 360, 110)
-		{
-			selected.set(&parent, &GameMessageMenu::selected);
-			add_column (50, _("Select"), UI::Align_HCenter, true);
-			add_column (50, _("Status"), UI::Align_HCenter);
-			add_column(136, _("Title"));
-			add_column(100, _("Time sent"));
-		}
-	} list;
-
-	void update_record(List::Entry_Record & er, Widelands::Message const &);
-
+	UI::Table<uintptr_t> * list;
 	UI::Multiline_Textarea message_body;
-
-	struct Clear_Selection : public UI::Button {
-		Clear_Selection(GameMessageMenu & parent) :
-			UI::Button
-				(&parent, "clear_selection",
-				 5, 5, 70, 25,
-				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-				 _("Clear"), _("Clear selection"))
-		{}
-		void clicked() {
-			GameMessageMenu & menu =
-				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-			for (wl_index_range<uint8_t> i(0, menu.list.size()); i; ++i)
-				menu.list.get_record(i.current).set_checked
-					(List::Select, false);
-		}
-	} clear_selection;
-
-	struct Invert_Selection : public UI::Button {
-		Invert_Selection(GameMessageMenu & parent) :
-			UI::Button
-				(&parent, "invert_selection",
-				 80, 5, 70, 25,
-				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-				 _("Invert"), _("Invert selection"))
-		{}
-		void clicked() {
-			GameMessageMenu & menu =
-				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-
-			for (wl_index_range<uint8_t> i(0, menu.list.size()); i; ++i)
-				menu.list.get_record(i.current).toggle(List::Select);
-		}
-	} invert_selection;
-
-	struct Archive_Or_Restore_Selected_Messages : public UI::Button {
-		Archive_Or_Restore_Selected_Messages(GameMessageMenu & parent) :
-			UI::Button
-				(&parent, "archive_or_restore_selected_messages",
-				 155, 5, 25, 25,
-				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/message_archive.png"),
-				 _("Archive selected messages"))
-		{}
-		void clicked();
-	} archive_or_restore_selected_messages;
-
-	struct Toggle_Between_Inbox_And_Archive : public UI::Button {
-		Toggle_Between_Inbox_And_Archive(GameMessageMenu & parent) :
-			UI::Button
-				(&parent, "toggle_between_inbox_or_archive",
-				 185, 5, 100, 25,
-				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-				 _("Show Archive"))
-		{}
-		void clicked() {
-			GameMessageMenu & menu =
-				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-			menu.list.clear();
-			switch (menu.mode) {
-			case Inbox:
-				menu.mode = Archive;
-				menu.set_title(_("Message Menu: Archive"));
-				menu.archive_or_restore_selected_messages.set_pic
-					(g_gr->get_picture(PicMod_Game, "pics/message_restore.png"));
-				menu.archive_or_restore_selected_messages.set_tooltip
-					(_("Restore selected messages"));
-				set_title(_("Show Inbox"));
-				break;
-			case Archive:
-				menu.mode = Inbox;
-				menu.set_title(_("Message Menu: Inbox"));
-				menu.archive_or_restore_selected_messages.set_pic
-					(g_gr->get_picture(PicMod_Game, "pics/message_archive.png"));
-				menu.archive_or_restore_selected_messages.set_tooltip
-					(_("Archive selected messages"));
-				set_title(_("Show Archive"));
-				break;
-			}
-		}
-	} toggle_between_inbox_and_archive;
-
-	struct Center_Main_Mapview_On_Location : public UI::Button {
-		Center_Main_Mapview_On_Location(GameMessageMenu & parent) :
-			UI::Button
-				(&parent, "center_main_mapview_on_location",
-				 340, 5, 25, 25,
-				 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
-				 _("center main mapview on location"),
-				 false)
-		{}
-		void clicked();
-	} center_main_mapview_on_location;
-
+	UI::Button * m_archivebtn;
+	UI::Button * m_togglemodebtn;
+	UI::Button * m_centerviewbtn;
 	Mode mode;
 };
 

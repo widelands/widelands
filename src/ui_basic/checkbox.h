@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006, 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,15 +13,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
 #ifndef UI_CHECKBOX_H
 #define UI_CHECKBOX_H
 
+#include <boost/signals.hpp>
+
 #include "panel.h"
-#include "m_signal.h"
 
 #include "rgbcolor.h"
 
@@ -42,17 +43,15 @@ struct Statebox : public Panel {
 		 std::string const & tooltip_text = std::string());
 	~Statebox();
 
-	Signal changed;
-	Signal1<bool> changedto;
-	Signal1<bool> clickedto; // same as changedto but only called when clicked
-	Signal2<int32_t, bool> changedtoid;
+	boost::signal<void ()> changed;
+	boost::signal<void (bool)> changedto;
+	boost::signal<void (bool)> clickedto; // same as changedto but only called when clicked
 
 	void set_enabled(bool enabled);
 
 	bool get_state() const throw () {return m_flags & Is_Checked;}
 	void set_state(bool on);
 
-	void set_id(int32_t n) {m_id = n;}
 	void set_owns_custom_picture() throw () {
 		assert(m_flags & Has_Custom_Picture);
 		set_flags(Owns_Custom_Picture, true);
@@ -68,7 +67,6 @@ struct Statebox : public Panel {
 private:
 	virtual void clicked() = 0;
 
-	int32_t  m_id;
 	enum Flags {
 		Is_Highlighted      = 0x01,
 		Is_Enabled          = 0x02,

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -262,12 +262,12 @@ void Tab_Panel::draw(RenderTarget & dst)
 
 			dst.brighten_rect
 				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 2), 2, 2),
-				 BUTTON_EDGE_BRIGHT_FACTOR);
+				 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 			dst.fill_rect
-				(Rect(Point(x + TP_BUTTON_WIDTH - 1, TP_BUTTON_HEIGHT - 2), 1, 1),
+				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 1), 1, 1),
 				 black);
 			dst.fill_rect
-				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 1), 2, 1),
+				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 2), 2, 1),
 				 black);
 		}
 	}

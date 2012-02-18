@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2011 Widelands Development Team
+# Copyright (C) 2005-2012 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -19,23 +19,22 @@ msgid ""
 "%i %s<br>"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
 msgid ""
 "%s has been King of the Hill since %s!"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
 msgid ""
 "%s has won the game. Congratulations!"
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
 msgid ""
-"%s is now King of the Hill! He needs to keep his castle there for 20\n"
-"minutes to win the game."
+"%s is now King of the Hill and will win the game in 20 minutes, if nobody takes over the hill until than."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:49
 msgid ""
 "%s lost control of the hill."
 msgstr ""
@@ -99,11 +98,6 @@ msgid ""
 "5 minutes"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
-msgid ""
-"As a reward, he receives:<br><br>%s"
-msgstr ""
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
 "Finish rewards"
@@ -150,6 +144,11 @@ msgid ""
 "The clue is that the first island only offers stones and wood, the second\n"
 "only meadows and resources. The economies you leave behind will continue to\n"
 "work for you, but you only reap the benefits when you reach a new island."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+msgid ""
+"The reward for this feat amounts to<br><br>%s"
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5

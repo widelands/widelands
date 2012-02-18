@@ -40,11 +40,10 @@ msgs_finished_island = {
    _"%s was the third to reach the Island number %i.",
    _"%s was the fourth to reach the Island number %i."
 }
-finished_island_continues = _ "As a reward, he receives:<br><br>%s"
+finished_island_continues = _ "The reward for this feat amounts to<br><br>%s"
 
 player_claims_hill = rt(p(_
-[[%s is now King of the Hill! He needs to keep his castle there for 20
-minutes to win the game.]]
+[[%s is now King of the Hill and will win the game in 20 minutes, if nobody takes over the hill until than.]]
 ))
 lost_control = rt(p(_
 [[%s lost control of the hill.]]

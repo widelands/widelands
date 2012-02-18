@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -21,8 +21,12 @@
 
 #include "chatoverlay.h"
 #include "profile/profile.h"
+#include "upcast.h"
 
+#include "logic/findbob.h"
 #include "logic/game.h"
+#include "logic/player.h"
+#include "logic/ship.h"
 
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s,
@@ -64,4 +68,32 @@ void Interactive_GameBase::set_chat_provider(ChatProvider & chat)
 ChatProvider * Interactive_GameBase::get_chat_provider()
 {
 	return m_chatProvider;
+}
+
+/**
+ * See if we can reasonably open a ship window at the current selection position.
+ * If so, do it and return true; otherwise, return false.
+ */
+bool Interactive_GameBase::try_show_ship_window()
+{
+	Widelands::Map & map(game().map());
+	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
+
+	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM))
+		return false;
+
+	std::vector<Widelands::Bob *> ships;
+	if (!map.find_bobs(area, &ships, Widelands::FindBobShip()))
+		return false;
+
+	container_iterate_const(std::vector<Widelands::Bob *>, ships, it) {
+		if (upcast(Widelands::Ship, ship, *it.current)) {
+			if (can_see(ship->get_owner()->player_number())) {
+				ship->show_window(*this);
+				return true;
+			}
+		}
+	}
+
+	return false;
 }

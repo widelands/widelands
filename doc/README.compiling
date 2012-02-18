@@ -25,12 +25,6 @@ for Widelands makes direct use of them:
    - libiconv (only needed under win32)
    - libintl (only needed under win32)
 
-You will need the following libraries for Widelands' metaserver usage:
-   - ggz-base-libs >= 0.99.5
-or
-   - ggz-client-libs == 0.14.1
-   - libggz == 0.14.1
-
 Make sure you have them all. If you encounter library versions that do not work,
 please tell us.
 

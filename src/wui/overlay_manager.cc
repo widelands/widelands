@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 - 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -48,10 +48,9 @@ uint8_t Overlay_Manager::get_overlays
 
 	uint8_t num_ret = 0;
 
-	const Registered_Overlays_Map & overlay_map =
-		m_overlays[Widelands::TCoords<>::None];
+	const Registered_Overlays_Map & overlay_map = m_overlays[Widelands::TCoords<>::None];
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
-	while (it != overlay_map.end() and it->first == c and it->second.level <= 5)
+	while (it != overlay_map.end() and it->first == c and it->second.level <= MAX_OVERLAYS_PER_NODE)
 	{
 		overlays[num_ret].picid = it->second.picid;
 		overlays[num_ret].hotspot = it->second.hotspot;
@@ -135,7 +134,9 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 		fc.field->nodecaps();
 
 	fc.field->set_buildhelp_overlay_index
-		(caps & Widelands::BUILDCAPS_MINE                                      ?
+		(caps & Widelands::BUILDCAPS_PORT                                      ?
+		 Widelands::Field::Buildhelp_Port                                      :
+		 caps & Widelands::BUILDCAPS_MINE                                      ?
 		 Widelands::Field::Buildhelp_Mine                                      :
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG    ?
 		 Widelands::Field::Buildhelp_Big                                       :
@@ -302,7 +303,8 @@ void Overlay_Manager::load_graphics() {
 		"pics/small.png",
 		"pics/medium.png",
 		"pics/big.png",
-		"pics/mine.png"
+		"pics/mine.png",
+		"pics/port.png"
 	};
 	const char * const * filename = filenames;
 

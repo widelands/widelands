@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -44,10 +44,9 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 		 	(map.get_fcoords(center.node), parent.get_sel_radius()));
 	do {
 		int32_t res        = mr.location().field->get_resources();
-		int32_t amount     = mr.location().field->get_resources_amount();
+		int32_t amount     = m_set_to;
 		int32_t max_amount = world.get_resource(m_cur_res)->get_max_amount();
 
-		amount = m_set_to;
 		if (amount < 0)
 			amount = 0;
 		if (amount > max_amount)

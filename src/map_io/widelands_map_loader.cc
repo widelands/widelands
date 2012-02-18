@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -45,6 +45,7 @@
 #include "widelands_map_players_areawatchers_data_packet.h"
 #include "widelands_map_players_messages_data_packet.h"
 #include "widelands_map_players_view_data_packet.h"
+#include "widelands_map_port_spaces_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
@@ -147,6 +148,16 @@ int32_t WL_Map_Loader::load_map_complete
 	}
 	log("done!\n ");
 	// PRELOAD DATA END
+
+	if (m_fs.FileExists("port_spaces")) {
+		log("Reading Port Spaces Data ... ");
+
+		Map_Port_Spaces_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, *m_mol);
+
+		log("done!\n ");
+	}
+
 
 	log("Reading Heights Data ... ");
 	{Map_Heights_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}

@@ -2,39 +2,113 @@
 - Improved and remodelled a lot of the buildings' animations.
 - Improved and remodelled a lot of the bobs' animations.
 - Improved and remodelled a lot of terrain graphics.
-- Added new states and animations for unoccupied buildings and empty mines,
-  to better indicate the current state of a building.
-- Made road textures world dependend and improved the style of the roads
-  for each world.
-- Added a new win condition "endless game (no fog)" with completely
-  visible map from the beginning on.
-- Added two multiplayer scenarios.
-- Added feature to play as a random tribe or against a random tribe or
-  random AI.
 - Improved dedicated server functionality:
+    * now runable as daemon and thus via init.d script on servers
+    * added possibility to write server statistics to html files
     * added functionality to save the game on the server via chat command.
     * added functionality to set up a password for the server.
     * added functionality to set a custom message of the day (motd).
     * improved client side handling / setting up of dedicated servers.
-- Improved priority button appearence.
-
+- Improved a lot of icons and button appearence.
+- Improved statistics window.
+- Improved the Widelands code to use less resources.
+- Added a new piece of music to Widelands
+- Added new states and animations for unoccupied buildings and empty mines,
+  to better indicate the current state of a building.
+- Made road textures world dependend and improved the style of the roads
+  for each world.
+- Added basic seafaring functionality. ports, ships, shipyards are
+  already working as they should. Loading of settlers 2 seafaring
+  maps is supported as well. Scouting and colonization is not
+  yet implemented.
+- Added port buildspace tool to the editor.
+- Added a new feature to list maps in the map selection menu in categories
+- Added a new feature "dismantle building" allowing to recycle some of
+  the resource used to build the building.
+- Added a new win condition "endless game (no fog)" with completely
+  visible map from the beginning on.
+- Added two multiplayer scenarios.
+- Added a big seafaring map, playable as scenario.
+- Added feature to play as a random tribe or against a random tribe or
+  random AI.
+- Added click animation for the mouse pointer
 - Fixed a bug that disallowed to connect to different servers (via
   metaserver) without prior restart of Widelands.
 - (Re)Fixed bug #536149: miner/master miner mixed up after enhancing
   to deep mine.
 - Fixed bug #565406: focus for save window
+- Fixed bug #570055: Open house window on doubleclick even when minimized
+- Fixed bug #590528: add more details to a replay
+- Fixed bug #590631: All workers die, when warehouse/hq is destroyed
+- Fixed bug #601400: Request::get_base_required_time:WARNING nr = 1 but
+                     count is 1, which is not allowed according to the
+                     comment for this function
+- Fixed bug #657266: Unoccupied helmsmithy animation contains a person
+- Fixed bug #672085: New stock menu layout too high for small resolutions
+- Fixed bug #672098: The priority buttons can be deactivated
+- Fixed bug #683716: Better handling of "no ressources"
+- Fixed bug #691928: Message icon is not updated in some cases when
+                     receiving focus
+- Fixed bug #695035: Adjusted hotspots of buildings to fit into their space
+- Fixed bug #722793: Ducks on land on Three Warriors
+- Fixed bug #723112: The name is not shown for resource coal in the 
+                     resource dialog in the editor
+- Fixed bug #726699: Make the wares priority buttons in production sites
+                     more intuitive
 - Fixed bug #734409: campaign texts about enhancing metalworks
-- Fixed bug #795457: focus in chat window
-- Fixed bug #808008: Delete outdated data when updating Widelands on Windows
-- Fixed bug #805089: Check client in chat commands, when first mentioned.
-- Fixed bug #853217: start multiplayer game with all slots closed
+- Fixed bug #731474: Barbarian buildings looking strange when covered
+                     by fog of war
+- Fixed bug #738888: Two sentences in game tips are only partly translatable
+- Fixed bug #741142: Empire Tut 2 - missing event when barbarians
+                     are detected
+- Fixed bug #768828: Fixed the random height tool window in the editor
+- Fixed bug #768854: Messages for win condition "Territorial Lord" is not
+                     translated, even though translations exist
+- Fixed bug #771962: Alphabetically sorted ware help in translations
+- Fixed bug #772003: Bakingtray use the peel icon
+- Fixed bug #775132: build-16 Failed to initialize SDL, no valid video driver
+- Fixed bug #779967: Text alignment on "Host a new game"
 - Fixed bug #786243: Add extra column to stock windows, if size would be to
                      big for the current screen resolution
-- Fixed bug #695035: Adjusted hotspots of buildings to fit into their space
+- Fixed bug #787365: Constr.Site & Prod.Site: Dim House Picture In 
+                     The Background
+- Fixed bug #787508: Remove use of barbarian stronghold
+- Fixed bug #791421: Editor: Map Options Editbox Keyboard Input
+- Fixed bug #795457: focus in chat window
+- Fixed bug #805089: Check client in chat commands, when first mentioned.
+- Fixed bug #808008: Delete outdated data when updating Widelands on Windows
 - Fixed bug #817078: "Watch window" should centre more suitably
+- Fixed bug #818784: display player names in status messages when playing
+                     collectors
 - Fixed bug #842960: Original building site graphic is visible during
                      construction sequence
+- Fixed bug #852434: no game tips on loading screen as host
+- Fixed bug #853217: start multiplayer game with all slots closed
 - Fixed bug #855975: Atlantean bakery jumping up, when start working
+- Fixed bug #859079: Warning about files (pngs) not found when
+                     starting a new game
+- Fixed bug #859081: Dialog briefly shown when clicking in the fog of war
+- Fixed bug #865995: Allied soldiers fight when they meet on the battlefield
+- Fixed bug #870129: highlighted message can not be marked
+- Fixed bug #871401: WaresQueue stock level configuration is ignored
+                     when work fails in Productionsites
+- Fixed bug #877710: [windows] window title shows "not responding"
+                     when loading a map
+- Fixed bug #884966: Not able to prioritize top row (pita bread) in
+                     battle arena
+- Fixed bug #886493: Default AI is set to none
+- Fixed bug #886572: After a while, increasing game speed makes the game
+                     lag even at lower speeds
+- Fixed bug #902765: Show buttons in the bottom toolbar in the same
+                     order, also for spectators
+- Fixed bug #902823: Show "increase/decrease capacity" buttons only
+                     in "soldiers" tab
+- Fixed bug #912486: Maximum FPS button overlaps language list in options
+                     on higher resolutions
+- Fixed bug #914462: possible bug in void BulldozeConfirm::think()
+- Fixed bug #924140: assertion failed if you press "up/down" button in
+                     an empty message window
+
 
 
 ### Build 16

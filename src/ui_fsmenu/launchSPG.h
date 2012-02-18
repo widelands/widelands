@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -75,10 +75,10 @@ private:
 	uint32_t    m_butw;
 	uint32_t    m_buth;
 
-	UI::Callback_Button       m_select_map, m_wincondition, m_back, m_ok;
-	UI::Callback_Button     * m_pos[MAX_PLAYERS];
+	UI::Button       m_select_map, m_wincondition, m_back, m_ok;
+	UI::Button     * m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname;
-	UI::Textarea              m_name, m_type, m_team, m_tribe, m_init;
+	UI::Textarea              m_name, m_type, m_team, m_tribe, m_init, m_wincondition_type;
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl; // optional
 	PlayerDescriptionGroup  * m_players[MAX_PLAYERS];

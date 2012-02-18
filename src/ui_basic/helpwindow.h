@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,6 +22,7 @@
 
 #include "align.h"
 #include "multilinetextarea.h"
+#include "unique_window.h"
 #include "window.h"
 
 namespace UI {
@@ -70,6 +71,23 @@ private:
 	std::string const m_h1, m_h2, m_p; // font sizes
 	std::string const m_fn; // font name
 	std::string m_text;
+};
+
+/*
+ * This is a totally different beast than HelpWindow. It takes
+ * a Lua script, runs it and displays it's formatted content
+ * as a static text
+ */
+struct LuaTextHelpWindow : public UI::UniqueWindow {
+	LuaTextHelpWindow
+		(Panel * parent, UI::UniqueWindow::Registry &,
+		 const std::string & caption,
+		 std::string path_to_script,
+		 uint32_t width = 300, uint32_t height = 400);
+	~LuaTextHelpWindow();
+
+private:
+	Multiline_Textarea * textarea;
 };
 
 }

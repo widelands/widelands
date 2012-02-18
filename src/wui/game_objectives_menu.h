@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -45,7 +45,6 @@ private:
 	typedef UI::Listselect<Widelands::Objective &> list_type;
 	list_type              list;
 	UI::Multiline_Textarea objectivetext;
-	//UI::Callback_Button m_claim_victory, m_restart_mission;
 public:
 	bool victorious(bool const v = false) {
 		static bool m_victory = v;

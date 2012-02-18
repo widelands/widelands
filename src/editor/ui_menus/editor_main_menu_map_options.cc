@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -36,20 +36,6 @@ inline Editor_Interactive & Main_Menu_Map_Options::eia() {
 }
 
 
-Main_Menu_Map_Options::Enable_Set_Origin_Tool_Button::
-Enable_Set_Origin_Tool_Button(Main_Menu_Map_Options & parent)
-	:
-	UI::Button
-		(&parent, "set_origin",
-		 5, parent.get_inner_h() - 25, parent.get_inner_w() - 10, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 _("Set origin"),
-		 _
-		 	("Set the position that will have the coordinates (0, 0). This will "
-		 	 "be the top-left corner of a generated minimap."))
-{}
-
-
 /**
  * Create all the buttons etc...
 */
@@ -58,8 +44,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 	UI::Window
 		(&parent, "map_options",
 		 (parent.get_w() - 200) / 2, (parent.get_h() - 300) / 2, 200, 305,
-		 _("Map Options")),
-	m_enable_set_origin_tool(*this)
+		 _("Map Options"))
 {
 
 	int32_t const offsx   =  5;
@@ -74,8 +59,8 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
-	m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+	m_name->changed.connect(boost::bind(&Main_Menu_Map_Options::changed, this, 0));
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
 	m_size =
@@ -97,8 +82,8 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 1);
-	m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+	m_author->changed.connect(boost::bind(&Main_Menu_Map_Options::changed, this, 1));
 	posy += height + spacing;
 	m_descr =
 		new UI::Multiline_Editbox
@@ -106,7 +91,22 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			 posx, posy,
 			 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,
 			 parent.egbase().map().get_description());
-	m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
+	m_descr->changed.connect(boost::bind(&Main_Menu_Map_Options::editbox_changed, this));
+
+	UI::Button * btn =
+		new UI::Button
+			(this, "set_origin",
+			 5, get_inner_h() - 25, get_inner_w() - 10, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 _("Set origin"),
+			 _
+				("Set the position that will have the coordinates (0, 0). This will "
+				 "be the top-left corner of a generated minimap."));
+	btn->sigclicked.connect
+		(boost::bind
+		 (&Editor_Interactive::select_tool, &parent,
+		  boost::ref(parent.tools.set_origin), Editor_Tool::First));
+
 	update();
 }
 
@@ -148,11 +148,4 @@ void Main_Menu_Map_Options::changed(int32_t const id) {
  */
 void Main_Menu_Map_Options::editbox_changed() {
 	eia().egbase().map().set_description(m_descr->get_text().c_str());
-}
-
-
-void Main_Menu_Map_Options::Enable_Set_Origin_Tool_Button::clicked() {
-	Editor_Interactive & eia =
-		ref_cast<Main_Menu_Map_Options, UI::Panel>(*get_parent()).eia();
-	eia.select_tool(eia.tools.set_origin, Editor_Tool::First);
 }

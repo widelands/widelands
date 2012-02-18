@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -55,7 +55,7 @@ private:
 	UI::Textarea    m_size,             m_label_world,      m_world;
 	UI::Textarea    m_label_nr_players, m_nr_players,       m_label_descr;
 	UI::Multiline_Textarea              m_descr;
-	UI::Callback_Button             m_back,             m_ok;
+	UI::Button             m_back,             m_ok;
 	UI::Listselect<std::string>                             m_list;
 	std::string     m_parentdir,        m_curdir,           m_basedir;
 	filenameset_t   m_mapfiles;

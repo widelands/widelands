@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -22,6 +22,7 @@
 // Package includes
 #include "economy.h"
 #include "flag.h"
+#include "portdock.h"
 #include "road.h"
 #include "ware_instance.h"
 
@@ -29,10 +30,11 @@
 #include "logic/immovable.h"
 #include "logic/player.h"
 #include "request.h"
+#include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "upcast.h"
-#include <map_io/widelands_map_map_object_saver.h>
-#include <map_io/widelands_map_map_object_loader.h>
+#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_loader.h"
 
 namespace Widelands {
 
@@ -166,7 +168,7 @@ PlayerImmovable * Transfer::get_next_step
 		return &locflag == location ? destination : &locflag;
 
 	// Brute force: recalculate the best route every time
-	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item))
+	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item ? wwWARE : wwWORKER))
 		throw wexception("Transfer::get_next_step: inconsistent economy");
 
 	if (m_route.get_nrsteps() >= 1)
@@ -181,6 +183,49 @@ PlayerImmovable * Transfer::get_next_step
 				 ==
 				 &m_route.get_flag(m_game, m_route.get_nrsteps() - 1))
 				m_route.truncate(m_route.get_nrsteps() - 1);
+
+#if 1
+	if (m_item && (m_item->serial() == 1265)) {
+		log
+			("Item %u ready at location %u (flag %u) for destination %u\n",
+			 m_item->serial(), location->serial(), locflag.serial(), destination->serial());
+		for (int i = 0; i <= m_route.get_nrsteps() && i < 5; ++i) {
+			log("  %i: flag %u\n", i, m_route.get_flag(m_game, i).serial());
+		}
+		log("---\n");
+	}
+#endif
+
+	// Reroute into PortDocks or the associated warehouse when appropriate
+	if (m_route.get_nrsteps() >= 1) {
+		Flag & curflag(m_route.get_flag(m_game, 0));
+		Flag & nextflag(m_route.get_flag(m_game, 1));
+		if (!curflag.get_road(nextflag)) {
+			upcast(Warehouse, wh, curflag.get_building());
+			assert(wh);
+
+			PortDock * pd = wh->get_portdock();
+			assert(pd);
+
+			if (location == pd)
+				return pd->get_dock(nextflag);
+			if (location == wh)
+				return pd;
+			if (location == &curflag || m_item)
+				return wh;
+			return &curflag;
+		}
+
+		if (m_item && location == &curflag && m_route.get_nrsteps() >= 2) {
+			Flag & nextnextflag(m_route.get_flag(m_game, 2));
+			if (!nextflag.get_road(nextnextflag)) {
+				upcast(Warehouse, wh, nextflag.get_building());
+				assert(wh);
+
+				return wh;
+			}
+		}
+	}
 
 	// Now decide where we want to go
 	if (dynamic_cast<Flag const *>(location)) {

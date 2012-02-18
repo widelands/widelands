@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -36,12 +36,12 @@ struct GameOptionsMenu : public UI::UniqueWindow {
 private:
 	Interactive_GameBase                         & m_gb;
 	Interactive_GameBase::Game_Main_Menu_Windows & m_windows;
-	UI::Callback_Button readme;
-	UI::Callback_Button license;
-	UI::Callback_Button authors;
-	UI::Callback_Button sound;
-	UI::Callback_Button save_game;
-	UI::Callback_Button exit_game;
+	UI::Button readme;
+	UI::Button license;
+	UI::Button authors;
+	UI::Button sound;
+	UI::Button save_game;
+	UI::Button exit_game;
 
 	/** Returns the horizontal/vertical spacing between buttons. */
 	uint32_t hspacing() const {return 5;};

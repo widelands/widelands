@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -25,6 +25,8 @@
 #include "logic/building.h"
 #include "container_iterate.h"
 #include "economy/flag.h"
+#include "economy/fleet.h"
+#include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
 #include "logic/item_ware_descr.h"
@@ -39,6 +41,8 @@ m_nr_buildings (0),
 m_nr_bobs      (0),
 m_nr_wares     (0),
 m_nr_immovables(0),
+m_nr_fleets    (0),
+m_nr_portdocks (0),
 m_lastserial   (0)
 {}
 
@@ -107,6 +111,8 @@ Serial Map_Map_Object_Saver::register_object(Map_Object const & obj) {
 	else if (dynamic_cast<WareInstance const *>(&obj)) ++m_nr_wares;
 	else if (dynamic_cast<Bob          const *>(&obj)) ++m_nr_bobs;
 	else if (dynamic_cast<Battle       const *>(&obj)) ++m_nr_battles;
+	else if (dynamic_cast<Fleet        const *>(&obj)) ++m_nr_fleets;
+	else if (dynamic_cast<PortDock     const *>(&obj)) ++m_nr_portdocks;
 	else
 		throw wexception("Map_Map_Object_Saver: Unknown MapObject type");
 

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -38,7 +38,7 @@ struct ProductionProgram;
 class Soldier;
 struct Request;
 struct WaresQueue;
-struct Worker_Descr;
+class Worker_Descr;
 
 
 /**
@@ -116,6 +116,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActWorker;
 	friend struct ProductionProgram::ActSleep;
+	friend struct ProductionProgram::ActCheck_Map;
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;

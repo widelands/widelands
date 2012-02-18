@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,14 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
-#include "buildingwindow.h"
-
 #include "bulldozeconfirm.h"
 #include "game_debug_ui.h"
+#include "graphic/picture.h"
 #include "graphic/rendertarget.h"
 #include "interactive_player.h"
 #include "logic/maphollowregion.h"
@@ -31,8 +30,12 @@
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
+#include "ui_basic/helpwindow.h"
+
+#include "buildingwindow.h"
 
 static char const * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
+static char const * pic_dismantle          = "pics/menu_bld_dismantle.png";
 static char const * pic_debug              = "pics/menu_debug.png";
 
 
@@ -64,7 +67,7 @@ Building_Window::Building_Window
 	vbox->add(m_tabs, UI::Box::AlignLeft, true);
 
 	m_capsbuttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(m_capsbuttons, UI::Box::AlignLeft);
+	vbox->add(m_capsbuttons, UI::Box::AlignLeft, true);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
@@ -89,9 +92,13 @@ Building_Window::~Building_Window()
 	if (m_workarea_job_id)
 		igbase().egbase().map().overlay_manager().remove_overlay
 			(m_workarea_job_id);
+	if (m_helpwindow_registry.window)
+		delete m_helpwindow_registry.window;
 	m_registry = 0;
 }
 
+namespace Widelands {struct Building_Descr;}
+using Widelands::Building;
 
 /*
 ===============
@@ -102,11 +109,10 @@ void Building_Window::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
-	dst.drawanim
-		(Point(get_inner_w() / 2, get_inner_h() / 2),
-		 building().get_ui_anim(),
-		 0,
-		 &building().owner());
+	dst.drawstatic
+			(Point(get_inner_w() / 2, get_inner_h() / 2),
+			 building().get_ui_anim(),
+			 &building().owner());
 }
 
 /*
@@ -158,20 +164,21 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
-				capsbuttons->add
-					(new UI::Callback_Button
-						(capsbuttons, is_stopped ? "continue" : "stop",
-						 0, 0, 34, 34,
+				UI::Button * stopbtn =
+					new UI::Button
+						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
 						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 						 g_gr->get_picture
 						 	(PicMod_Game,
 						 	 (is_stopped ? "pics/continue.png" : "pics/stop.png")),
-						 boost::bind(&Building_Window::act_start_stop, boost::ref(*this)),
-						 is_stopped ? _("Continue") : _("Stop")),
+						 is_stopped ? _("Continue") : _("Stop"));
+				stopbtn->sigclicked.connect(boost::bind(&Building_Window::act_start_stop, boost::ref(*this)));
+				capsbuttons->add
+					(stopbtn,
 					 UI::Box::AlignCenter);
 			}
 
-		if (m_capscache & 1 << Widelands::Building::PCap_Enhancable) {
+		if (m_capscache & Widelands::Building::PCap_Enhancable) {
 			std::set<Widelands::Building_Index> const & enhancements =
 				m_building.enhancements();
 			Widelands::Tribe_Descr const & tribe  = owner.tribe();
@@ -183,70 +190,123 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					snprintf
 						(buffer, sizeof(buffer),
 						 _("Enhance to %s"), building_descr.descname().c_str());
-					capsbuttons->add
-						(new UI::Callback_Button
-							(capsbuttons, "enhance",
-							 0, 0, 34, 34,
+					UI::Button * enhancebtn =
+						new UI::Button
+							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-							 building_descr.get_buildicon(),
-							 boost::bind
-								(&Building_Window::act_enhance,
-								 boost::ref(*this),
-								 boost::ref(*i.current)), //  button id = building id)
-							 buffer),
+							 building_descr.get_buildicon(), //  button id = building id)
+							 buffer);
+					enhancebtn->sigclicked.connect
+						(boost::bind
+							(&Building_Window::act_enhance,
+							 boost::ref(*this),
+							 boost::ref(*i.current)));
+					capsbuttons->add
+						(enhancebtn,
 						 UI::Box::AlignCenter);
 				}
 		}
 
-		if (m_capscache & (1 << Widelands::Building::PCap_Bulldoze)) {
-			capsbuttons->add
-				(new UI::Callback_Button
-					(capsbuttons, "destroy",
-					 0, 0, 34, 34,
+		if (m_capscache & Widelands::Building::PCap_Bulldoze) {
+			UI::Button * destroybtn =
+				new UI::Button
+					(capsbuttons, "destroy", 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 g_gr->get_picture(PicMod_Game, pic_bulldoze),
-					 boost::bind(&Building_Window::act_bulldoze, boost::ref(*this)),
-					 _("Destroy")),
+					 _("Destroy"));
+			destroybtn->sigclicked.connect
+				(boost::bind(&Building_Window::act_bulldoze, boost::ref(*this)));
+			capsbuttons->add
+				(destroybtn,
+				 UI::Box::AlignCenter);
+		}
+
+		if (m_capscache & Widelands::Building::PCap_Dismantle) {
+			UI::Button * dismantlebtn =
+				new UI::Button
+					(capsbuttons, "dismantle", 0, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture(PicMod_Game, pic_dismantle),
+					 _("Dismantle"));
+			dismantlebtn->sigclicked.connect(boost::bind(&Building_Window::act_dismantle, boost::ref(*this)));
+			capsbuttons->add
+				(dismantlebtn,
 				 UI::Box::AlignCenter);
 		}
 	}
 
 	if (can_see) {
 		if (m_building.descr().m_workarea_info.size()) {
-			m_toggle_workarea = new UI::Callback_Button
+			m_toggle_workarea = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
-				 boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)),
 				 _("Hide workarea"));
+			m_toggle_workarea->sigclicked.connect
+				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
+
 			capsbuttons->add(m_toggle_workarea, UI::Box::AlignCenter);
+			configure_workarea_button();
 			set_fastclick_panel(m_toggle_workarea);
 		}
 
 		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
-			capsbuttons->add
-				(new UI::Callback_Button
-					(capsbuttons, "debug",
-					 0, 0, 34, 34,
+			UI::Button * debugbtn =
+				new UI::Button
+					(capsbuttons, "debug", 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 g_gr->get_picture(PicMod_Game,  pic_debug),
-					 boost::bind(&Building_Window::act_debug, boost::ref(*this)),
-					 _("Debug")),
+					 _("Debug"));
+			debugbtn->sigclicked.connect(boost::bind(&Building_Window::act_debug, boost::ref(*this)));
+			capsbuttons->add
+				(debugbtn,
 				 UI::Box::AlignCenter);
 		}
 
-		capsbuttons->add
-			(new UI::Callback_Button
-				(capsbuttons, "goto",
-				 0, 0, 34, 34,
+		UI::Button * gotobtn =
+			new UI::Button
+				(capsbuttons, "goto", 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
-				 boost::bind(&Building_Window::clicked_goto, boost::ref(*this))),
+				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"));
+		gotobtn->sigclicked.connect(boost::bind(&Building_Window::clicked_goto, boost::ref(*this)));
+		capsbuttons->add
+			(gotobtn,
 			 UI::Box::AlignCenter);
+
+		if (m_building.descr().has_help_text()) {
+			capsbuttons->add_inf_space();
+			UI::Button * helpbtn =
+				new UI::Button
+					(capsbuttons, "help", 0, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
+					 _("Help"));
+			helpbtn->sigclicked.connect
+				(boost::bind(&Building_Window::help_clicked, boost::ref(*this)));
+			capsbuttons->add
+				(helpbtn,
+				 UI::Box::AlignCenter);
+
+		}
 	}
 }
 
+/*
+===============
+The help button has been pressed
+===============
+*/
+void Building_Window::help_clicked()
+{
+	if (m_helpwindow_registry.window)
+		delete m_helpwindow_registry.window;
+	else
+		new UI::LuaTextHelpWindow
+			(&igbase(), m_helpwindow_registry,
+			 m_building.descname(),
+			 m_building.descr().helptext_script());
+}
 
 /*
 ===============
@@ -256,6 +316,17 @@ Callback for bulldozing request
 void Building_Window::act_bulldoze()
 {
 	show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+}
+
+/*
+===============
+Callback for dismantling request
+===============
+*/
+void Building_Window::act_dismantle()
+{
+	if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
+		igbase().game().send_player_dismantle(m_building);
 }
 
 void Building_Window::act_start_stop() {
@@ -272,7 +343,7 @@ Callback for bulldozing request
 */
 void Building_Window::act_enhance(Widelands::Building_Index const id)
 {
-	if (m_building.get_playercaps() & (1 << Widelands::Building::PCap_Enhancable))
+	if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
 		igbase().game().send_player_enhance_building (m_building, id);
 
 	die();
@@ -331,8 +402,7 @@ void Building_Window::show_workarea()
 		hollow_area.hole_radius = hollow_area.radius;
 	}
 
-	if (m_toggle_workarea)
-		m_toggle_workarea->set_tooltip(_("Hide workarea"));
+	configure_workarea_button();
 }
 
 /**
@@ -348,8 +418,23 @@ void Building_Window::hide_workarea()
 		overlay_manager.remove_overlay(m_workarea_job_id);
 		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
 
-		if (m_toggle_workarea)
+		configure_workarea_button();
+	}
+}
+
+/**
+ * Sets the perm_pressed state and the tooltip.
+ */
+void Building_Window::configure_workarea_button()
+{
+	if (m_toggle_workarea) {
+		if (m_workarea_job_id) {
+			m_toggle_workarea->set_tooltip(_("Hide workarea"));
+			m_toggle_workarea->set_perm_pressed(true);
+		} else {
 			m_toggle_workarea->set_tooltip(_("Show workarea"));
+			m_toggle_workarea->set_perm_pressed(false);
+		}
 	}
 }
 
@@ -365,10 +450,11 @@ void Building_Window::toggle_workarea() {
 void Building_Window::create_ware_queue_panel
 	(UI::Box               * const box,
 	 Widelands::Building   &       b,
-	 Widelands::WaresQueue * const wq)
+	 Widelands::WaresQueue * const wq,
+	 bool show_only)
 {
 	// The *max* width should be larger than the default width
-	box->add(new WaresQueueDisplay(box, 0, 0, 3 * Width, igbase(), b, wq), UI::Box::AlignLeft);
+	box->add(new WaresQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Box::AlignLeft);
 }
 
 /**

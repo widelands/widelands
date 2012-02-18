@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
@@ -41,9 +41,10 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 		(this, "close",
 		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 boost::bind(&Fullscreen_Menu_TextView::end_modal, boost::ref(*this), 0),
 		 _("Close"), std::string(), true, false)
 {
+	close_button.sigclicked.connect(boost::bind(&Fullscreen_Menu_TextView::end_modal, boost::ref(*this), 0));
+
 	close_button.set_font(font_small());
 
 	Profile prof(filename.c_str(), "global", "texts"); //  section-less file
