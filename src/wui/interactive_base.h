@@ -180,7 +180,9 @@ private:
 	void cmdLua(std::vector<std::string> const & args);
 	void update_speedlabel();
 
+	UI::Textarea m_label_speed_shadow;
 	UI::Textarea m_label_speed;
+
 	UI::UniqueWindow::Registry m_debugconsole;
 };
 
