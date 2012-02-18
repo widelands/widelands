@@ -54,6 +54,13 @@ struct Font_Handler {
 		 const std::string & text,
 		 Align align = Align_CenterLeft,
 		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+	void draw_text_shadow
+		(RenderTarget &,
+		 const TextStyle &,
+		 Point dstpoint,
+		 const std::string & text,
+		 Align align = Align_CenterLeft,
+		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 	uint32_t draw_text_raw(RenderTarget &, const TextStyle &, Point dstpoint, const std::string & text);
 	void draw_multiline
 		(RenderTarget &,
