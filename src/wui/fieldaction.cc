@@ -238,7 +238,7 @@ static char const * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
 	"pics/menu_tab_buildbig.png",
-	"pics/port.png"
+	"pics/menu_tab_buildport.png"
 };
 static const std::string tooltip_tab_build[] = {
 	_("Build small buildings"),
