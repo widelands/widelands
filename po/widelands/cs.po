@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-16 10:12+0100\n"
-"PO-Revision-Date: 2011-04-27 08:45+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2012-02-18 23:06+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:47+0000\n"
+"X-Launchpad-Export-Date: 2012-02-19 05:28+0000\n"
 "X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -469,11 +469,11 @@ msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command check_map"
-msgstr ""
+msgstr "Dokumentace pro programový příkaz check_map"
 
 #: ../../src/writeHTML.cc:1155
 msgid "check_map"
-msgstr ""
+msgstr "check_map"
 
 #: ../../src/writeHTML.cc:1160
 #, c-format
@@ -550,11 +550,11 @@ msgstr "Dokumentace pro programový příkaz přehrátZvuk"
 
 #: ../../src/writeHTML.cc:1406
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Dokumentace pro programový příkaz construct"
 
 #: ../../src/writeHTML.cc:1408
 msgid "construct"
-msgstr ""
+msgstr "construct"
 
 #: ../../src/writeHTML.cc:1445 ../../src/writeHTML.cc:1451
 msgid "Ware types"
@@ -1189,15 +1189,15 @@ msgstr "Volby ekonomiky"
 
 #: ../../src/wui/transport_ui.cc:146 ../../src/wui/transport_ui.cc:242
 msgid "Decrease target"
-msgstr ""
+msgstr "Snížit cíl"
 
 #: ../../src/wui/transport_ui.cc:148 ../../src/wui/transport_ui.cc:244
 msgid "Increase target"
-msgstr ""
+msgstr "Zvýšit cíl"
 
 #: ../../src/wui/transport_ui.cc:151 ../../src/wui/transport_ui.cc:247
 msgid "Reset to default"
-msgstr ""
+msgstr "Obnovit výchozí"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"
@@ -1213,11 +1213,11 @@ msgstr "Nejnižší priorita"
 
 #: ../../src/wui/waresqueuedisplay.cc:231
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "Snížit počet zboží, které zde chceš uskladnit"
 
 #: ../../src/wui/waresqueuedisplay.cc:241
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "Zvýšit počet zboží, které zde chceš uskladnit"
 
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
@@ -1343,7 +1343,7 @@ msgstr "UI: "
 #: ../../src/wui/multiplayersetupgroup.cc:316
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Náhodný"
 
 #: ../../src/wui/multiplayersetupgroup.cc:310
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -1378,7 +1378,7 @@ msgstr "Typ"
 
 #: ../../src/wui/multiplayersetupgroup.cc:445
 msgid "Tribe"
-msgstr ""
+msgstr "Kmen"
 
 #: ../../src/wui/multiplayersetupgroup.cc:453
 #: ../../src/wui/playerdescrgroup.cc:101
@@ -1424,15 +1424,15 @@ msgstr "Při zranění"
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
-msgstr ""
+msgstr "Jít k lodi"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
-msgstr ""
+msgstr "Jít k cíli"
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
@@ -1579,7 +1579,7 @@ msgstr "Zničit"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "Rozebrat"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -1669,11 +1669,11 @@ msgstr "Vojáci"
 
 #: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
-msgstr ""
+msgstr "Spotřeba"
 
 #: ../../src/wui/ware_statistics_menu.cc:204
 msgid "Economy Health"
-msgstr ""
+msgstr "Zdraví ekonomiky"
 
 #: ../../src/wui/warehousewindow.cc:132
 msgid "Normal policy"
@@ -1681,23 +1681,23 @@ msgstr "Normální politika"
 
 #: ../../src/wui/warehousewindow.cc:133
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "Přednostně zde uskladnit vybrané zboží"
 
 #: ../../src/wui/warehousewindow.cc:134
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Neskladovat zde vybrané zboží"
 
 #: ../../src/wui/warehousewindow.cc:135
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Vystěhovat odsud označené zboží"
 
 #: ../../src/wui/warehousewindow.cc:212
 msgid "Wares in dock"
-msgstr ""
+msgstr "Zboží v přístavu"
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
-msgstr ""
+msgstr "Pracovníci v přístavu"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
@@ -1821,15 +1821,15 @@ msgstr "ŽÁDNÝ OVLADAČ HRY"
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
@@ -1911,11 +1911,11 @@ msgstr "Geolog objevil zdroje."
 #: ../../src/logic/worker.cc:1835
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Tvoje %s nemohou najít cestu domů a pravděpodobně zemřou."
 
 #: ../../src/logic/worker.cc:1842
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Pracovník se ztratil!"
 
 #: ../../src/logic/worker.cc:3037
 #, c-format
@@ -2663,7 +2663,7 @@ msgstr "vyčkat: %s"
 #: ../../src/logic/production_program.cc:668
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Neznámý parametr \"%s\""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
@@ -2708,7 +2708,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:927
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Vyrobeno %s"
 
 #: ../../src/logic/production_program.cc:1002
 msgid "Recruited "
@@ -2783,12 +2783,12 @@ msgstr[2] "%u(+%u) vojáků"
 #: ../../src/logic/militarysite.cc:219
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "Tvoje %s bylo osídleno tvými vojáky."
 
 #: ../../src/logic/militarysite.cc:574
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Nepřítel porazil tvoje vojáky u %s."
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
@@ -2797,7 +2797,7 @@ msgstr "Vojenská budova ztracena!"
 #: ../../src/logic/militarysite.cc:625
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Tvoji vojáci porazili nepřítele u %s."
 
 #: ../../src/logic/militarysite.cc:630
 msgid "Enemy at site defeated!"
@@ -2806,7 +2806,7 @@ msgstr "Nepřátelská budova dobyta!"
 #: ../../src/logic/militarysite.cc:673
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Tvůj %s narazil na agresora.</p>"
 
 #: ../../src/logic/militarysite.cc:674
 #, c-format
@@ -3269,11 +3269,11 @@ msgstr "Body"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Game"
-msgstr ""
+msgstr "Hra"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:378
 msgid "Connection timed out"
-msgstr ""
+msgstr "Čas spojení vypršel"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:381
 msgid ""
@@ -3321,7 +3321,7 @@ msgstr "Typ startu"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:104 ../../src/ui_fsmenu/launchMPG.cc:169
 msgid "Type of game"
-msgstr ""
+msgstr "Typ hry"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
@@ -3436,11 +3436,11 @@ msgstr "Vypnuto"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 den"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
@@ -3493,7 +3493,7 @@ msgstr "Renderuji pomocí OpenGl *Pokusné!*"
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Zobrazit ve hře chat s průhledným pozadím"
 
 #: ../../src/ui_fsmenu/options.cc:515
 msgid "Pause"
@@ -3613,7 +3613,7 @@ msgstr "Vyberte mapu"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Uložená hra"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
@@ -3637,7 +3637,7 @@ msgstr "Nastavení hry více hráčů"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Klienti"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:216
 msgid "The host has not yet selected a map or saved game."
@@ -3698,7 +3698,7 @@ msgstr "<zavřeno>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:616
 msgid "There was an error!"
-msgstr ""
+msgstr "Nastala chyba!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:616
 msgid "The map file seems to be invalid!"
@@ -3815,7 +3815,7 @@ msgstr "Nahrej mapu jako scénář: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
@@ -3823,35 +3823,35 @@ msgstr "Název mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Zobrazit všechny mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Oficiální mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
-msgstr ""
+msgstr "2 týmy hráčů"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "3 Player Teams"
-msgstr ""
+msgstr "3 týmy hráčů"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "4 Player Teams"
-msgstr ""
+msgstr "4 týmy hráčů"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "Free for all"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "Nevyvážený"
 
 #: ../../src/ui_fsmenu/mapselect.cc:275
 msgid "(directory)"
@@ -3859,13 +3859,15 @@ msgstr "(adresář)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:498 ../../src/ui_fsmenu/mapselect.cc:501
 msgid "unknown"
-msgstr ""
+msgstr "neznámý"
 
 #: ../../src/ui_fsmenu/mapselect.cc:500
 msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Tato mapa není přítomna na vašem systému. Zobrazená data byla poskytnuta "
+"serverem."
 
 #: ../../src/ui_fsmenu/singleplayer.cc:39
 msgid "Single Player Menu"
@@ -3906,7 +3908,7 @@ msgstr "Opravdu chcete smazat "
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "Uložená hra z dedikovaného serveru"
 
 #: ../../src/ui_fsmenu/loadgame.cc:177
 msgid "Unknown gametime"

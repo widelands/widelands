@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2010-06-06 22:42+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-02-18 23:20+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:45+0000\n"
+"X-Launchpad-Export-Date: 2012-02-19 05:28+0000\n"
 "X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Plavbyschopná loď"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -131,7 +131,7 @@ msgstr "Tvrzené dřevo"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Sázecí lopata"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -226,7 +226,7 @@ msgstr "Uhelný důl"
 
 #: ../../tribes/barbarians/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Stavění lodě"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Construction Site"
@@ -294,7 +294,7 @@ msgstr "Sedlák"
 
 #: ../../tribes/barbarians/conf:78
 msgid "Felling Axe"
-msgstr ""
+msgstr "Dřevorubecká sekera"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
@@ -393,7 +393,7 @@ msgstr "Zlatý důl"
 
 #: ../../tribes/barbarians/conf:83
 msgid "Gold Ore"
-msgstr ""
+msgstr "Zlatá ruda"
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
@@ -466,7 +466,7 @@ msgstr "Zbrojírna"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr ""
+msgstr "Pomáhá s přepravou nákladů na vytížených cestách"
 
 #: ../../tribes/barbarians/conf:160
 msgid "High Tower"
@@ -590,7 +590,7 @@ msgstr "Horník"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
-msgstr ""
+msgstr "Není dost místa"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -634,7 +634,7 @@ msgstr "Sází stromy."
 
 #: ../../tribes/barbarians/conf:175
 msgid "Port"
-msgstr ""
+msgstr "Přístav"
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
@@ -660,7 +660,7 @@ msgstr "Vyrobit bronzovou sekeru"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
-msgstr ""
+msgstr "Vyrobit dřevorubeckou sekeru"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
@@ -866,7 +866,7 @@ msgstr "Kalená sekera"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Ship construction site"
@@ -874,11 +874,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:139
 msgid "Shipwright"
-msgstr ""
+msgstr "Loďař"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Shipyard"
-msgstr ""
+msgstr "Loděnice"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Shovel"
@@ -1347,7 +1347,7 @@ msgstr "Pracuje na staveništích, kde staví novou budovu."
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Pracuje v loděnici a staví lodě."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1

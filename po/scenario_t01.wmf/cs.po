@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2010-06-06 20:56+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-02-18 21:26+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-02-19 05:28+0000\n"
 "X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -94,6 +94,12 @@ msgid ""
 "harsh lands. I believe to the east of our campsite are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" \"Pouze bohové samotní vědí, jak dlouho zde zůstaneme skryti. Válečníci "
+"doufají, že se každým dnem vydáme na pochod zpět, ale já o tom silně "
+"pochybuji. A dny jsou zatím stále chladnější a kratší...<br>  Měli bychom se "
+"připravit na možnost, že v těchto nehostinných krajích budeme čelit zimě. "
+"Myslím, že východně od našeho tábora je pár míst, kde bychom mohli postavit "
+"chatu dřevorubce.\"<br><br>-- NOVÝ ÚKOL --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:60
 msgid ""
@@ -260,6 +266,12 @@ msgid ""
 "additional flags in between make them arrive at their destination faster, "
 "thus improving your infrastructure.<br>"
 msgstr ""
+"* Umísti vlajku do středu cesty.<br> Uprostřed cesty, kterou jsi právě "
+"postavil, je symbol vlajky. Pro umístění vlajky klikni na tento symbol a z "
+"menu, které se otevře, vyber vlajku. Cestu po které je dopravováno dřevo tím "
+"rozdělíš na dva úseky, každý s jedním nosičem.<br> Když je mezi dvěma body "
+"dopravováno hodně zboží, přidáním dalších vlajek zrychlíš jeho dopravu do "
+"cíle, a tím zlepšíš svou infrastrukturu.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:20
 #: ../../campaigns/t01.wmf/scripting/texts.lua:75
@@ -286,7 +298,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Oči v temnotě"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
@@ -321,6 +333,8 @@ msgid ""
 "In this tutorial the basic gameplay and control as well as basic production "
 "buildings of the Barbarians are introduced."
 msgstr ""
+"V tomto tutorialu jsou představeny základní principy hry a jejího ovládání, "
+"společně se základními výrobními budovami kmene barbarů."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -340,7 +354,7 @@ msgstr "Mise splněna"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
-msgstr ""
+msgstr "Kdosi k tobě přišel"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29

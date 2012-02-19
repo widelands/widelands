@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2011-09-12 14:46+0000\n"
-"Last-Translator: MaSo <mzettik@gmail.com>\n"
+"PO-Revision-Date: 2012-02-18 23:13+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:52+0000\n"
+"X-Launchpad-Export-Date: 2012-02-19 05:28+0000\n"
 "X-Generator: Launchpad (build 14814)\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
@@ -23,7 +23,7 @@ msgstr "%i %s<br>"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
 msgid "%s has been King of the Hill since %s!"
-msgstr ""
+msgstr "%s byl králem hor od %s!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
 msgid "%s has won the game. Congratulations!"
@@ -34,6 +34,8 @@ msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill until than."
 msgstr ""
+"%s je nyní Králem Hory a pokud nikdo horu do 20 minut neobsadí, stane se "
+"vítězem."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:49
 msgid "%s lost control of the hill."
@@ -41,63 +43,63 @@ msgstr "%s ztratil kontrolu nad horami."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
 msgid "%s was the first to reach the Island number %i."
-msgstr ""
+msgstr "%s jako první dosáhl ostrova číslo %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:41
 msgid "%s was the fourth to reach the Island number %i."
-msgstr ""
+msgstr "%s jako čtvrtý dosáhl ostrova číslo %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:39
 msgid "%s was the second to reach the Island number %i."
-msgstr ""
+msgstr "%s jako druhý dosáhl ostrova číslo %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:40
 msgid "%s was the third to reach the Island number %i."
-msgstr ""
+msgstr "%s jako třetí dosáhl ostrova číslo %i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minut"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:78
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minut"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:25
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "1st to finish"
-msgstr ""
+msgstr "1. místo"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "2nd to finish"
-msgstr ""
+msgstr "2. místo"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:27
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
 msgid "3rd to finish"
-msgstr ""
+msgstr "3. místo"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
 msgid "4th to finish"
-msgstr ""
+msgstr "4. místo"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minut"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid "Finish rewards"
-msgstr ""
+msgstr "Odměny za dokončení"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:24
 msgid "First Island"
-msgstr ""
+msgstr "První ostrov"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:94
 msgid "Game Status"
-msgstr ""
+msgstr "Stav hry"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:13
 msgid ""
@@ -120,11 +122,11 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
-msgstr ""
+msgstr "Pravidla"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:29
 msgid "Second Island"
-msgstr ""
+msgstr "Druhý ostrov"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:19
 msgid ""

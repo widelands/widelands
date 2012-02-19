@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2010-08-30 23:36+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-02-18 23:26+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:46+0000\n"
+"X-Launchpad-Export-Date: 2012-02-19 05:28+0000\n"
 "X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Plavbyschopná loď"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -111,7 +111,7 @@ msgstr "Chléb"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Sázecí lopata"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -199,7 +199,7 @@ msgstr "Koloseum"
 
 #: ../../tribes/empire/shipyard/conf:18
 msgid "Constructing ship"
-msgstr ""
+msgstr "Stavění lodě"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -302,6 +302,7 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Žárové kleště používá slévač, který pracuje ve slévárně. Vyrábějí se v dílně."
 
 #: ../../tribes/empire/conf:68
 msgid "Fish"
@@ -585,7 +586,7 @@ msgstr "Horník"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
-msgstr ""
+msgstr "Není dost místa"
 
 #: ../../tribes/empire/conf:210
 msgid "Outpost"
@@ -625,7 +626,7 @@ msgstr "Plátová zbroj"
 
 #: ../../tribes/empire/conf:166
 msgid "Port"
-msgstr ""
+msgstr "Přístav"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
@@ -705,7 +706,7 @@ msgstr "Vyrobit lopatu"
 
 #: ../../tribes/empire/weaponsmithy/conf:33
 msgid "Produce war lance"
-msgstr ""
+msgstr "Vyrobit válečné kopí"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -823,7 +824,7 @@ msgstr "Pastýř"
 
 #: ../../tribes/empire/conf:140
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
@@ -831,11 +832,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:128
 msgid "Shipwright"
-msgstr ""
+msgstr "Loďař"
 
 #: ../../tribes/empire/conf:187
 msgid "Shipyard"
-msgstr ""
+msgstr "Loděnice"
 
 #: ../../tribes/empire/conf:91
 msgid "Shovel"
@@ -938,6 +939,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Sázecí lopata je nářadí pekaře a každý pekař potřebuje svoji. Vyrábí se v "
+"dílně."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -1375,7 +1378,7 @@ msgstr "Pracuje na stavbách a staví nové budovy."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Pracuje v loděnici a staví lodě."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
@@ -1384,4 +1387,4 @@ msgstr "Fárá hluboko v dolech aby vytěžil uhlí, železnou rudu nebo zlato."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Pracuje na pile."
