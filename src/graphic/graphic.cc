@@ -725,6 +725,18 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
 	if (!png_ptr)
 		throw wexception("Graphic::save_png: could not create png struct");
 
+	png_infop info_ptr = png_create_info_struct(png_ptr);
+	if (!info_ptr) {
+		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(0));
+		throw wexception("Graphic::save_png: could not create png info struct");
+	}
+
+	// Set jump for error
+	if (setjmp(png_jmpbuf(png_ptr))) {
+		png_destroy_write_struct(&png_ptr, &info_ptr);
+		throw wexception("Graphic::save_png: Error writing PNG!");
+	}
+
 	//  Set another write function. This is potentially dangerouse because the
 	//  flush function is internally called by png_write_end(), this will crash
 	//  on newer libpngs. See here:
@@ -736,35 +748,14 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
 		 sw,
 		 &Graphic::m_png_write_function, &Graphic::m_png_flush_function);
 
-	png_infop info_ptr = png_create_info_struct(png_ptr);
-
-	if (!info_ptr) {
-		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(0));
-		throw wexception("Graphic::save_png: could not create png info struct");
-	}
-
-	// Set jump for error
-	if (setjmp(png_jmpbuf(png_ptr))) {
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-		throw wexception("Graphic::save_png: could not set png setjmp");
-	}
-
 	// Fill info struct
 	png_set_IHDR
 		(png_ptr, info_ptr, pix.get_w(), pix.get_h(),
 		 8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
 		 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
-	// png_set_strip_16(png_ptr) ;
-
 	// Start writing
 	png_write_info(png_ptr, info_ptr);
-
-	// Strip data down
-	png_set_filler(png_ptr, 0, PNG_FILLER_AFTER);
-
-	png_set_packing(png_ptr);
-
 	{
 		uint32_t surf_w = pix.get_w();
 		uint32_t surf_h = pix.get_h();
