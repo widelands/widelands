@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,7 @@ static int32_t m_current_player;
  * static callback function for overlay calculation
  */
 int32_t Editor_Tool_Set_Starting_Pos_Callback
-	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
-{
+(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t) {
 	assert(data);
 	Widelands::Map const & map = *static_cast<Widelands::Map const *>(data);
 
@@ -58,20 +57,17 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 	return 0;
 }
 
-
 Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
-: Editor_Tool(*this, *this), m_current_sel_pic(0)
-{
+	: Editor_Tool(*this, *this, false), m_current_sel_pic(0) {
 	m_current_player = 0;
 	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
 }
 
 
 int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
-	(Widelands::Map               &       map,
-	 Widelands::Node_and_Triangle<> const center,
-	 Editor_Interactive           &)
-{
+(Widelands::Map           &           map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive &, Editor_Action_Args &) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -96,16 +92,15 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 
 		//  check if field is valid
 		if
-			(Editor_Tool_Set_Starting_Pos_Callback
-			 	(map.get_fcoords(center.node), &map, 0))
-		{
+		(Editor_Tool_Set_Starting_Pos_Callback
+		        (map.get_fcoords(center.node), &map, 0)) {
 			Overlay_Manager & overlay_manager = map.overlay_manager();
 			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, picid);
 
 			//  add new overlay
 			overlay_manager.register_overlay
-				(center.node, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
+			(center.node, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
 			map.set_starting_pos(m_current_player, center.node);
@@ -116,9 +111,8 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 }
 
 Widelands::Player_Number Editor_Set_Starting_Pos_Tool::get_current_player
-	() const
-throw ()
-{
+() const
+throw() {
 	return m_current_player;
 }
 

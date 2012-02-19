@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,13 +25,13 @@
 #include "logic/map.h"
 #include "logic/mapfringeregion.h"
 #include "wui/overlay_manager.h"
+#include <editor/editorinteractive.h>
 
 using namespace Widelands;
 
 /// static callback function for overlay calculation
 int32_t Editor_Tool_Set_Port_Space_Callback
-	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
-{
+(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t) {
 	assert(data);
 	Map const & map = *static_cast<Map const *>(data);
 	NodeCaps const caps = c.field->nodecaps();
@@ -48,24 +48,23 @@ int32_t Editor_Tool_Set_Port_Space_Callback
 
 
 Editor_Set_Port_Space_Tool::Editor_Set_Port_Space_Tool
-	(Editor_Unset_Port_Space_Tool & the_unset_tool)
-:
+(Editor_Unset_Port_Space_Tool & the_unset_tool)
+	:
 	Editor_Tool(the_unset_tool, *this),
 	m_unset_tool(the_unset_tool)
 {}
 
 
 Editor_Unset_Port_Space_Tool::Editor_Unset_Port_Space_Tool()
-:
+	:
 	Editor_Tool(*this, *this)
 {}
 
 
 int32_t Editor_Set_Port_Space_Tool::handle_click_impl
-	(Map & map,
-	 Widelands::Node_and_Triangle<> const center,
-	 Editor_Interactive &)
-{
+(Map & map,
+ Widelands::Node_and_Triangle<> const center,
+ Editor_Interactive &,  Editor_Action_Args &) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -81,11 +80,16 @@ int32_t Editor_Set_Port_Space_Tool::handle_click_impl
 	return 0;
 }
 
+int32_t Editor_Set_Port_Space_Tool::handle_undo_impl
+(Map & map, Node_and_Triangle< Coords > center, Editor_Interactive & parent, Editor_Action_Args & args) {
+	return parent.tools.unset_port_space.handle_click_impl(map, center, parent, args);
+}
+
+
 int32_t Editor_Unset_Port_Space_Tool::handle_click_impl
-	(Map & map,
-	 Node_and_Triangle<> const center,
-	 Editor_Interactive &)
-{
+(Map & map,
+ Node_and_Triangle<> const center,
+ Editor_Interactive &, Editor_Action_Args &) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -100,4 +104,9 @@ int32_t Editor_Unset_Port_Space_Tool::handle_click_impl
 		return 1;
 	}
 	return 0;
+}
+
+int32_t Editor_Unset_Port_Space_Tool::handle_undo_impl
+(Map & map, Node_and_Triangle< Coords > center, Editor_Interactive & parent, Editor_Action_Args & args) {
+	return parent.tools.set_port_space.handle_click_impl(map, center, parent, args);
 }

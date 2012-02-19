@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2012 by the Widelands Development Team
+ * Copyright (C) 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,36 +17,32 @@
  *
  */
 
-#ifndef EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
-#define EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
+#ifndef EDITOR_DRAW_TOOL_H
+#define EDITOR_DRAW_TOOL_H
 
 #include "editor_tool.h"
+#include "editor_tool_action.h"
 
-#include "ui_basic/unique_window.h"
-
-/**
- * This places immovables on the map
- * \TODO Implement undo for this tool
-*/
-struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
-	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false) {}
-
-	void          set_player(Widelands::Player_Number const n) throw()
-	{m_player = n;}
-	Widelands::Player_Number get_player() const throw() {return m_player;}
+///  This is not a real editor tool. It serves to combine 'hold down mouse and move'
+///  tool actions in one class.
+struct Editor_Draw_Tool : public Editor_Tool {
+	Editor_Draw_Tool() : Editor_Tool(*this, *this) {}
 
 	int32_t handle_click_impl
 	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
 
-	const char * get_sel_impl() const throw()
-	{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
+	int32_t handle_undo_impl
+	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
 
-private:
-	Widelands::Player_Number m_player;
-	UI::UniqueWindow::Registry m_registry;
+	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
+
+	char const * get_sel_impl() const {
+		return "EDITOR_DRAW_TOOL";
+	}
+
+	void add_action(Editor_Tool_Action ac, Editor_Action_Args & args);
+
 };
 
-int32_t Editor_Make_Infrastructure_Tool_Callback
-(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
-
 #endif
+
