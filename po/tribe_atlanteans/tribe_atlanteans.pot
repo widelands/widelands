@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"POT-Creation-Date: 2012-02-19 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -236,7 +236,7 @@ msgid ""
 "Coal Mine"
 msgstr ""
 
-#: ../../tribes/atlanteans/shipyard/conf:18
+#: ../../tribes/atlanteans/shipyard/conf:21
 msgid ""
 "Constructing ship"
 msgstr ""
@@ -1446,7 +1446,7 @@ msgstr ""
 #: ../../tribes/atlanteans/quarry/conf:16
 #: ../../tribes/atlanteans/sawmill/conf:19
 #: ../../tribes/atlanteans/scouts_house/conf:18
-#: ../../tribes/atlanteans/shipyard/conf:19
+#: ../../tribes/atlanteans/shipyard/conf:22
 #: ../../tribes/atlanteans/smelting_works/conf:25
 #: ../../tribes/atlanteans/smokery/conf:27
 #: ../../tribes/atlanteans/spiderfarm/conf:17
