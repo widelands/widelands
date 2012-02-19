@@ -228,7 +228,7 @@ void InternetGaming::logout(std::string const & msgcode) {
 	s.send(m_sock);
 
 	const std::string & msg = InternetGamingMessages::get_message(msgcode);
-	dedicatedlog("InternetGaming: %s\n", msg.c_str());
+	dedicatedlog("InternetGaming: logout(%s)\n", msg.c_str());
 	formatAndAddChat("", "", true, msg);
 
 	reset();
@@ -247,6 +247,7 @@ void InternetGaming::handle_metaserver_communication() {
 			// packets that are followed immediately by connection close.
 			if (!m_deserializer.read(m_sock)) {
 				logout("CONNECTION_LOST");
+				setError();
 				return;
 			}
 
@@ -260,6 +261,7 @@ void InternetGaming::handle_metaserver_communication() {
 		std::string reason = _("Something went wrong: ");
 		reason += e.what();
 		logout(reason);
+		setError();
 	}
 
 	if (m_state == LOBBY) {
