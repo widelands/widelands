@@ -64,11 +64,11 @@ m_building(building),
 m_decrease
 	(this, "increase", 0, 0, 24, 24,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_down_train)),
+	 g_gr->get_picture(PicMod_Game, pic_down_train), _("Decrease capacity")),
 m_increase
 	(this, "decrease", 0, 0, 24, 24,
 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_up_train)),
+	 g_gr->get_picture(PicMod_Game, pic_up_train), _("Increase capacity")),
 m_value(this, "", UI::Align_Center)
 {
 	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
