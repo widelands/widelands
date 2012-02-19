@@ -268,7 +268,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			new UI::Button
 				(capsbuttons, "goto", 0, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"));
+				 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"), _("Center view on this"));
 		gotobtn->sigclicked.connect(boost::bind(&Building_Window::clicked_goto, boost::ref(*this)));
 		capsbuttons->add
 			(gotobtn,
