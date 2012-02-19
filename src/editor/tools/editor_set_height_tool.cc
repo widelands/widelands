@@ -28,10 +28,12 @@
 
 
 int32_t Editor_Set_Height_Tool::handle_click_impl
-(Widelands::Map           &           map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive         &         parent, Editor_Action_Args & args) {
-	if (args.origHights.empty()) {
+	(Widelands::Map           &           map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive         &         parent, Editor_Action_Args & args)
+{
+	if (args.origHights.empty())
+	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
@@ -47,12 +49,14 @@ int32_t Editor_Set_Height_Tool::handle_click_impl
 }
 
 int32_t Editor_Set_Height_Tool::handle_undo_impl
-(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent, Editor_Action_Args & args) {
+	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
-	 Widelands::Area<Widelands::FCoords>
-	 (map.get_fcoords(center.node), args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+	Widelands::Area<Widelands::FCoords>
+	(map.get_fcoords(center.node),
+	args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
 
 	std::list<Widelands::Field::Height>::iterator i = args.origHights.begin();
 
@@ -60,13 +64,16 @@ int32_t Editor_Set_Height_Tool::handle_undo_impl
 		mr.location().field->set_height(*i); i++;
 	} while (mr.advance(map));
 
-	map.recalc_for_field_area(Widelands::Area<Widelands::FCoords>
-	                          (map.get_fcoords(center.node), args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
+	map.recalc_for_field_area
+		(Widelands::Area<Widelands::FCoords>
+		(map.get_fcoords(center.node),
+		args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
 
 	return mr.radius() + 1;
 }
 
-Editor_Action_Args Editor_Set_Height_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Set_Height_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	Editor_Action_Args a(parent);
 	a.m_interval = m_interval;
 	return a;

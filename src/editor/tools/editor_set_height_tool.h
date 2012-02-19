@@ -31,10 +31,12 @@ struct Editor_Set_Height_Tool : public Editor_Tool {
 	{}
 
 	int32_t handle_click_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	int32_t handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
 
@@ -42,7 +44,7 @@ struct Editor_Set_Height_Tool : public Editor_Tool {
 		return "pics/fsel_editor_set_height.png";
 	}
 
-	interval<Widelands::Field::Height> get_interval() const throw() {
+	interval<Widelands::Field::Height> get_interval() const throw () {
 		return m_interval;
 	}
 	void set_interval(interval<Widelands::Field::Height> const i) {

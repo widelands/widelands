@@ -81,17 +81,16 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	 ("editor_undo", "undo", _("Undo"))),
 	m_redo
 	(INIT_BUTTON
-	 ("editor_redo", "redo", _("Redo"))) {
+	 ("editor_redo", "redo", _("Redo")))
+{
 	m_toggle_main_menu.sigclicked.connect(boost::bind(&Editor_Interactive::toggle_mainmenu, this));
 	m_toggle_tool_menu.sigclicked.connect(boost::bind(&Editor_Interactive::tool_menu_btn, this));
 	m_toggle_toolsize_menu.sigclicked.connect(boost::bind(&Editor_Interactive::toolsize_menu_btn, this));
 	m_toggle_minimap.sigclicked.connect(boost::bind(&Editor_Interactive::toggle_minimap, this));
 	m_toggle_buildhelp.sigclicked.connect(boost::bind(&Editor_Interactive::toggle_buildhelp, this));
 	m_toggle_player_menu.sigclicked.connect(boost::bind(&Editor_Interactive::toggle_playermenu, this));
-	m_undo.sigclicked.connect(boost::bind(&Editor_History::undo_action, &m_history
-	                                     ));
-	m_redo.sigclicked.connect(boost::bind(&Editor_History::redo_action, &m_history
-	                                     ));
+	m_undo.sigclicked.connect(boost::bind(&Editor_History::undo_action, &m_history));
+	m_redo.sigclicked.connect(boost::bind(&Editor_History::redo_action, &m_history));
 
 	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
@@ -163,8 +162,7 @@ void Editor_Interactive::load(std::string const & filename) {
 	// TODO: get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load(true, false);
-	m_history
-	.reset();
+	m_history.reset();
 
 	std::auto_ptr<Widelands::Map_Loader> const ml
 	(map.get_correct_loader(filename.c_str()));
@@ -270,9 +268,10 @@ void Editor_Interactive::toggle_mainmenu() {
 }
 
 void Editor_Interactive::map_clicked(bool draw) {
-	m_history
-	.do_action(tools.current(), tools.use_tool, egbase().map(),
-	           get_sel_pos(), *this, draw);
+	m_history.do_action
+		(tools.current(),
+		 tools.use_tool, egbase().map(),
+	     get_sel_pos(), *this, draw);
 	need_complete_redraw();
 	set_need_save(true);
 }
@@ -451,17 +450,14 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 
 		case SDLK_z:
 			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
-				m_history
-				.redo_action();
+				m_history.redo_action();
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				m_history
-				.undo_action();
+				m_history.undo_action();
 			handled = true;
 			break;
 		case SDLK_y:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				m_history
-				.redo_action();
+				m_history.redo_action();
 			handled = true;
 			break;
 		default:
@@ -564,8 +560,7 @@ bool Editor_Interactive::is_player_tribe_referenced
 
 
 void Editor_Interactive::change_world() {
-	m_history
-	.reset();
+	m_history.reset();
 	delete m_terrainmenu  .window;
 	delete m_immovablemenu.window;
 	delete m_bobmenu      .window;

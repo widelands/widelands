@@ -30,9 +30,10 @@
 using Widelands::TCoords;
 
 int32_t Editor_Change_Resource_Tool_Callback
-(TCoords<Widelands::FCoords> const c,
- void            *           const data,
- int32_t                     const curres) {
+	(TCoords<Widelands::FCoords> const c,
+	void            *           const data,
+	int32_t                     const curres)
+{
 	assert(data);
 	Widelands::Map  &  map   = *static_cast<Widelands::Map *>(data);
 	Widelands::World & world = map.world();
@@ -72,16 +73,17 @@ there is not already another resource there.
 ===========
 */
 int32_t Editor_Increase_Resources_Tool::handle_click_impl
-(Widelands::Map           &           map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive         &         parent,
- Editor_Action_Args         &         args) {
+	(Widelands::Map           &           map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive         &         parent,
+	Editor_Action_Args         &         args)
+{
 	Widelands::World const & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-	(map,
-	 Widelands::Area<Widelands::FCoords>
-	 (map.get_fcoords(center.node), args.sel_radius));
+		(map,
+			Widelands::Area<Widelands::FCoords>
+				(map.get_fcoords(center.node), args.sel_radius));
 	do {
 		int32_t res        = mr.location().field->get_resources();
 		int32_t amount     = mr.location().field->get_resources_amount();
@@ -98,7 +100,8 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 		if
 		((res == args.cur_res or not res)
 		        and
-		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res)) {
+		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
+		{
 			//  Ok, we're doing something. First remove the current overlays.
 			PictureID picid =
 			    g_gr->get_picture
@@ -127,13 +130,16 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 }
 
 int32_t Editor_Increase_Resources_Tool::handle_undo_impl
-(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent, Editor_Action_Args & args) {
+	(Widelands::Map & map,
+	Widelands::Node_and_Triangle< Widelands::Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
 	return m_set_tool.handle_undo_impl(map, center, parent, args);
 	return 0;
 }
 
-Editor_Action_Args Editor_Increase_Resources_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Increase_Resources_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	Editor_Action_Args a(parent);
 	a.change_by = m_change_by;
 	a.cur_res = m_cur_res;

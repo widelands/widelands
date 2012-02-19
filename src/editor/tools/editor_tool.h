@@ -44,18 +44,20 @@ struct Editor_Tool : boost::noncopyable {
 
 	enum Tool_Index {First, Second, Third};
 	int32_t handle_click
-	(const Tool_Index i,
-	 Widelands::Map & map, Widelands::Node_and_Triangle<> const center,
-	 Editor_Interactive & parent, Editor_Action_Args & args) {
+		(const Tool_Index i,
+		Widelands::Map & map, Widelands::Node_and_Triangle<> const center,
+		Editor_Interactive & parent, Editor_Action_Args & args)
+	{
 		return
 		    (i == First ? *this : i == Second ? m_second : m_third)
 		    .handle_click_impl(map, center, parent, args);
 	}
 
 	int32_t handle_undo
-	(const Tool_Index i,
-	 Widelands::Map & map, Widelands::Node_and_Triangle<> const center,
-	 Editor_Interactive & parent, Editor_Action_Args & args) {
+		(const Tool_Index i,
+		Widelands::Map & map, Widelands::Node_and_Triangle<> const center,
+		Editor_Interactive & parent, Editor_Action_Args & args)
+	{
 		return
 		    (i == First ? *this : i == Second ? m_second : m_third)
 		    .handle_undo_impl(map, center, parent, args);
@@ -73,7 +75,7 @@ struct Editor_Tool : boost::noncopyable {
 		    .format_args_impl(parent);
 	}
 
-	bool is_unduable() { return undoable; }
+	bool is_unduable() {return undoable;}
 	virtual Editor_Action_Args format_args_impl(Editor_Interactive & parent) {
 		return Editor_Action_Args(parent);
 	}
@@ -82,7 +84,7 @@ struct Editor_Tool : boost::noncopyable {
 	= 0;
 	virtual int32_t handle_undo_impl
 	(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &, Editor_Action_Args &)
-	{ return 0; } // non unduable tools don't need to implement this.
+	{return 0;} // non unduable tools don't need to implement this.
 	virtual const char * get_sel_impl() const = 0;
 	virtual bool operates_on_triangles() const {return false;};
 

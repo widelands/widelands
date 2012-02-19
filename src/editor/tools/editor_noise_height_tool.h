@@ -35,10 +35,12 @@ struct Editor_Noise_Height_Tool : public Editor_Tool {
 	{}
 
 	int32_t handle_click_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	int32_t handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
 
@@ -53,7 +55,7 @@ struct Editor_Noise_Height_Tool : public Editor_Tool {
 		m_interval = i;
 	}
 
-	Editor_Set_Height_Tool & set_tool() const throw() {return m_set_tool;}
+	Editor_Set_Height_Tool & set_tool() const throw () {return m_set_tool;}
 
 private:
 	Editor_Set_Height_Tool & m_set_tool;

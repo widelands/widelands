@@ -27,7 +27,7 @@
 
 //struct Editor_Action_Args;
 struct Editor_Interactive;
-namespace UI { struct Button; }
+namespace UI {struct Button;}
 
 /**
  * The all actions done with an editor tool are saved on a stack to
@@ -36,10 +36,13 @@ namespace UI { struct Button; }
  */
 struct Editor_History {
 
-	Editor_History(UI::Button & undo, UI::Button & redo): m_undo_button(undo), m_redo_button(redo) {};
+	Editor_History(UI::Button & undo, UI::Button & redo):
+		m_undo_button(undo), m_redo_button(redo) {};
 
-	uint32_t do_action(Editor_Tool & tool, Editor_Tool::Tool_Index ind, Widelands::Map & map,
-	                   Widelands::Node_and_Triangle<> const center, Editor_Interactive & parent, bool draw = false);
+	uint32_t do_action
+		(Editor_Tool & tool, Editor_Tool::Tool_Index ind, Widelands::Map & map,
+		 Widelands::Node_and_Triangle<> const center,
+		 Editor_Interactive & parent, bool draw = false);
 	uint32_t undo_action();
 	uint32_t redo_action();
 
