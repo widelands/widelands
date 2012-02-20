@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-10-14 17:51+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"PO-Revision-Date: 2012-01-03 20:26+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-15 04:32+0000\n"
-"X-Generator: Launchpad (build 14124)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:43+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid ""
@@ -107,12 +107,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:319
 msgid ""
 " \"Our hunters are out in the forests, Thron.<br> I promise you, before the "
-"sun sets today you will have a magnificient meal fit for the chieftain of "
-"all clans!\" "
+"sun sets today you will have a magnificent meal fit for the chieftain of all "
+"clans!\" "
 msgstr ""
-" \"Thronie, nasi myśliwi wybrali się dziś do lasu.<br> Przysięgam, że zanim "
-"zajdzie słońce, dostaniesz wspaniały posiłek godny wodza wszystkich "
-"klanów!\" "
+" \"Nasi myśliwi poszli na łowy, Thronie.<br> Obiecuję ci, jeszcze przed "
+"zachodem słońca otrzymasz wspaniały posiłek godny wodza wszystkich klanów!\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:235
 msgid ""
@@ -381,11 +380,13 @@ msgid ""
 "large\n"
 "plain - why don't we use the space Mother Nature gave us and build a farm? "
 "I\n"
-"sure would enjoy a freshly baken pitta bread for a change...\""
+"sure would enjoy a freshly baked pitta bread for a change...\""
 msgstr ""
-"\"Mądrość nakazuje szukać zmian.<br > Na północ od wielkiej góry jest duże\n"
-"pole - czemu nie skorzystać z możliwości, jakie dała nam Matka Natura i\n"
-"nie zbudować farmy? Chciałbym zjeść dla odmiany świeży chleb...\""
+"\"Mądrość każe szukać różnorodności.<br> Na północ od wielkiej góry znajduje "
+"się\n"
+"wielka równina - może użyjemy tej przestrzeni, jaką dała nam Matka Natura\n"
+"i zbudujemy farmę? Ja dla odmiany z przyjemnością zasmakowałbym świeżo\n"
+"upieczonego chleba...\""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 - A Place to call Home"
@@ -488,7 +489,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:318
 msgid "Boldreth cheers up..."
-msgstr "Boldreth się rozweselił..."
+msgstr "Boldreth się weseli..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:275
 msgid "Boldreth exclaims..."
@@ -726,7 +727,7 @@ msgstr "Doradca"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:309
 msgid "The elder jumps into the air..."
-msgstr "Starszy podskakuje ze śmiechem..."
+msgstr "Starzec podskakuje..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:132
 msgid ""

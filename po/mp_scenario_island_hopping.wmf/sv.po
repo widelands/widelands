@@ -7,37 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
 "PO-Revision-Date: 2011-09-05 18:29+0000\n"
 "Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:17+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:52+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "%i %s<br>"
 msgstr "%i %s<br>"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
 msgid "%s has been King of the Hill since %s!"
 msgstr "%s har varit herre på täppan sedan %s!"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
 msgid "%s has won the game. Congratulations!"
 msgstr "%s vann spelet. Grattis!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
 msgid ""
-"%s is now King of the Hill! He needs to keep his castle there for 20\n"
-"minutes to win the game."
+"%s is now King of the Hill and will win the game in 20 minutes, if nobody "
+"takes over the hill until than."
 msgstr ""
-"%s är nu herre på täppan! Han måste behålla sitt slott där i 20\n"
-"minuter för att vinna spelet."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:49
 msgid "%s lost control of the hill."
 msgstr "%s förlorade kontrollen över täppan."
 
@@ -88,10 +86,6 @@ msgstr "Fjärde i mål"
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
 msgstr "5 minuter"
-
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
-msgid "As a reward, he receives:<br><br>%s"
-msgstr "Som belöning för han:<br><br>%s"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid "Finish rewards"
@@ -150,6 +144,10 @@ msgstr ""
 "Ledtråden är att den första ön endast har sten och trä, den andra bara\n"
 "ängar och naturresurser. Ekonomierna du lämnar bakom dig kommer\n"
 "fortgå, men du har bara nytta av dem när du når en ny ö."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+msgid "The reward for this feat amounts to<br><br>%s"
+msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"

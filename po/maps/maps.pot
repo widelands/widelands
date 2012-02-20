@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-15 07:27+0000\n"
+"POT-Creation-Date: 2012-02-19 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -129,6 +129,11 @@ msgid ""
 "Dry Riverbed"
 msgstr ""
 
+#: ../../maps/Four Mountains.wmf/elemental:10
+msgid ""
+"Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint 3: Each mountain contains only one resource."
+msgstr ""
+
 #: ../../campaigns/cconfig:30
 msgid ""
 "Easy. Introduces the Barbarians"
@@ -164,6 +169,11 @@ msgid ""
 "For centuries you've lived peacefully together with the other tribe on the neighboured island. This peace seems to end now - your neighbour begins to expand."
 msgstr ""
 
+#: ../../maps/Sun of fire.wmf/elemental:12
+msgid ""
+"For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot others followed afterwards."
+msgstr ""
+
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid ""
 "Four Castles"
@@ -172,6 +182,11 @@ msgstr ""
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid ""
 "Four Mountains"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:10
+msgid ""
+"Four tribes struggle with their nearest neighbour to be the first to reach the mountain of gold that promises riches beyond belief. But can the two remaining ones share the resources wisely?"
 msgstr ""
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
@@ -214,6 +229,11 @@ msgid ""
 "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr ""
 
+#: ../../maps/Swamp Monks.wmf/elemental:10
+msgid ""
+"It is said, that the old war monks, living in the even older swamps are the key to the control of the whole island."
+msgstr ""
+
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
 "It seems as if this magical valley was inhabited by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can your tribe live in peace with your neighbours?"
@@ -230,6 +250,7 @@ msgid ""
 msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
+#: ../../maps/Lake of tranquility2.wmf/elemental:7
 msgid ""
 "Lake of Tranquility"
 msgstr ""
@@ -265,6 +286,11 @@ msgid ""
 "Not yet implemented"
 msgstr ""
 
+#: ../../maps/Rendez-Vous.wmf/elemental:10
+msgid ""
+"Only a small hill in the centre of the map connects these four competing tribes. Lead your army right away to this hill and build a giant stronghold as a sign of your superiority! Hint: In the centre is only space for one stronghold. Water can be found everywhere, so there is no need to send out geologists."
+msgstr ""
+
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid ""
 "Rendez-Vous"
@@ -290,34 +316,34 @@ msgid ""
 "Some say that impenetrable lands to the far north scared away even the most courageous settlers and the bravest of the brave warriors. Big and old forests, full of big and predatory game, cut across by wetlands and hills were shrouded in mystery. The ones who had managed to come back mentioned tremendous buildings, decorated with carvings and gold from majestic mountain ranges somewhere amongst the wilderness. Dozens of years after only some crumbly ruins remain of these good old times, covered with moss and trees. Their shapes give only an idea about the craftsmanship of ancient constructors. Nobody knows why they (have) disappeared. Nobody knows why. People say that now nothing is blocking the road to wealth. But many will die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
 msgstr ""
 
-#: ../../maps/Sun of fire.wmf/elemental:13
+#: ../../maps/Sun of fire.wmf/elemental:14
 msgid ""
 "Start positions are clockwise"
 msgstr ""
 
-#: ../../maps/Desert Tournament.wmf/elemental:11
-#: ../../maps/Four Castles.wmf/elemental:11
-#: ../../maps/Swamp Monks.wmf/elemental:11
+#: ../../maps/Desert Tournament.wmf/elemental:12
+#: ../../maps/Four Castles.wmf/elemental:12
+#: ../../maps/Swamp Monks.wmf/elemental:12
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green)"
 msgstr ""
 
-#: ../../maps/Four Mountains.wmf/elemental:11
+#: ../../maps/Four Mountains.wmf/elemental:12
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, yellow)"
 msgstr ""
 
-#: ../../maps/Elven Forests.wmf/elemental:11
+#: ../../maps/Elven Forests.wmf/elemental:12
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, green)"
 msgstr ""
 
-#: ../../maps/Atoll.wmf/elemental:11
+#: ../../maps/Atoll.wmf/elemental:12
 msgid ""
 "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr ""
 
-#: ../../maps/Rendez-Vous.wmf/elemental:11
+#: ../../maps/Rendez-Vous.wmf/elemental:12
 msgid ""
 "Suggested Teams: all ok."
 msgstr ""
@@ -362,6 +388,16 @@ msgid ""
 "The big lake"
 msgstr ""
 
+#: ../../maps/Elven Forests.wmf/elemental:10
+msgid ""
+"The breath-taking beauty of these emerald lands has lured many tribes into an attempt of taking them for themselves."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
+msgid ""
+"The four mighty harbours of the Craw Islands were trading their goods among each others for ages. All of them needed resources, they could not produce on their own territory and provided resources that the other could not produce in exchange. Based on these trades a very friendly commerce was common between the four harbours and the people living on the Craw Islands - just until lately two of the harbours united to an exclusive trade alliance, forcing the other two to do the same. Suddenly it seems it is only a matter of time, until the first fights between the harbours will shake the peaceful life that lasted so long..."
+msgstr ""
+
 #: ../../maps/The long way.wmf/elemental:7
 msgid ""
 "The long way"
@@ -393,6 +429,7 @@ msgid ""
 msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
+#: ../../maps/Lake of tranquility2.wmf/elemental:9
 msgid ""
 "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
 msgstr ""
@@ -400,6 +437,11 @@ msgstr ""
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid ""
 "Three Warriors"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
+msgid ""
+"Together we're strong"
 msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
@@ -422,6 +464,11 @@ msgid ""
 "War of the Valleys"
 msgstr ""
 
+#: ../../maps/Four Castles.wmf/elemental:10
+msgid ""
+"Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
+msgstr ""
+
 #: ../../campaigns/cconfig:31
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father's spirit that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
@@ -440,6 +487,11 @@ msgstr ""
 #: ../../maps/Last Bastion.wmf/elemental:11
 msgid ""
 "Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:10
+msgid ""
+"Who will be the real King of the big atoll?"
 msgstr ""
 
 #: ../../maps/Wisent Valley.wmf/elemental:9

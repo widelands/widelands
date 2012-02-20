@@ -36,10 +36,10 @@ struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 	Editor_Set_Starting_Pos_Tool();
 
 	int32_t handle_click_impl
-		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
+	(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &, Editor_Action_Args &);
 	char const * get_sel_impl() const {return m_current_sel_pic;}
 
-	Widelands::Player_Number get_current_player() const throw ();
+	Widelands::Player_Number get_current_player() const throw();
 	void set_current_player(int32_t);
 
 private:
@@ -48,6 +48,6 @@ private:
 };
 
 int32_t Editor_Tool_Set_Starting_Pos_Callback
-	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -726,6 +726,10 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
  */
 bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 {
+	// TODO make this smarter, easier and yet more effective
+
+	// TODO implement handling of seafaring
+
 	// Do not have too many constructionsites
 	uint32_t producers = mines.size() + productionsites.size();
 	bool onlymissing = false;
@@ -991,8 +995,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 							// if the economies don't need it: "waste" it
 							if (!(*l.current)->economy.needs_ware(wt)) {
-								prio += 1 + wares.at(bo.inputs.at(m)).preciousness;
-								if (bo.total_count() == 0)
+								if (bo.total_count() == 0 && bo.prod_build_material)
 									// big bonus, this site might be elemental
 									prio += 3 * wares.at(bo.inputs.at(m)).preciousness;
 							}
@@ -1308,8 +1311,7 @@ bool DefaultAI::construct_roads (int32_t gametime)
 		if (bld) {
 			BuildingObserver & bo = get_building_observer(bld->name().c_str());
 			if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-				game().send_player_bulldoze
-					(*const_cast<Flag *>(eo_to_connect->flags.front()));
+				game().send_player_bulldoze(*const_cast<Flag *>(eo_to_connect->flags.front()));
 				eo_to_connect->flags.pop_front();
 				// Block the field at constructionsites coords for 5 minutes
 				// against new construction tries.
@@ -1330,10 +1332,10 @@ bool DefaultAI::construct_roads (int32_t gametime)
 /// improves current road system
 bool DefaultAI::improve_roads (int32_t gametime)
 {
-	// Remove dead end roads
+	// Remove flags of dead end roads, as long as no more wares are stored on them
 	container_iterate(std::list<EconomyObserver *>, economies, i)
 		container_iterate(std::list<Flag const *>, (*i.current)->flags, j)
-			if ((*j.current)->is_dead_end()) {
+			if ((*j.current)->is_dead_end() && (*j.current)->current_items() == 0) {
 				game().send_player_bulldoze(*const_cast<Flag *>((*j.current)));
 				j.current = (*i.current)->flags.erase(j.current);
 				return true;
@@ -1368,7 +1370,7 @@ bool DefaultAI::improve_roads (int32_t gametime)
 				}
 			}
 			// Unable to set a flag - perhaps the road was build stupid
-			game().send_player_bulldoze (*const_cast<Road *>(roads.front()));
+			game().send_player_bulldoze(*const_cast<Road *>(roads.front()));
 		}
 
 		roads.push_back (roads.front());
@@ -1460,6 +1462,23 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 /// adds alternative ways to already existing ones
 bool DefaultAI::improve_transportation_ways (const Flag & flag)
 {
+	// First of all try to remove old building flags to clean up the road web if possible
+	container_iterate(std::list<Widelands::Coords>, flags_to_be_removed, i) {
+		// Maybe the flag was already removed?
+		FCoords f = game().map().get_fcoords(*(i.current));
+		if (upcast(Flag, flag, f.field->get_immovable())) {
+			// Check if building is dismantled, but don't waste precious wares
+			if (!flag->get_building() && flag->current_items() == 0) {
+				game().send_player_bulldoze(*flag);
+				flags_to_be_removed.erase(i.current);
+				break;
+			}
+		} else {
+			flags_to_be_removed.erase(i.current);
+			break;
+		}
+	}
+
 	std::priority_queue<NearFlag> queue;
 	std::vector<NearFlag> nearflags;
 
@@ -1467,36 +1486,32 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 	Map & map = game().map();
 
 	while (!queue.empty()) {
-		std::vector<NearFlag>::iterator f =
-			find(nearflags.begin(), nearflags.end(), queue.top().flag);
+		std::vector<NearFlag>::iterator f = find(nearflags.begin(), nearflags.end(), queue.top().flag);
 		if (f != nearflags.end()) {
-			queue.pop ();
+			queue.pop();
 			continue;
 		}
 
-		nearflags.push_back (queue.top());
-		queue.pop ();
+		nearflags.push_back(queue.top());
+		queue.pop();
 
 		NearFlag & nf = nearflags.back();
 
 		for (uint8_t i = 1; i <= 6; ++i) {
-		Road * const road = nf.flag->get_road(i);
+			Road * const road = nf.flag->get_road(i);
 
-		if (!road)
-			continue;
+			if (!road)
+				continue;
 
-		Flag * endflag = &road->get_flag(Road::FlagStart);
-		if (endflag == nf.flag)
-			endflag = &road->get_flag(Road::FlagEnd);
+			Flag * endflag = &road->get_flag(Road::FlagStart);
+			if (endflag == nf.flag)
+				endflag = &road->get_flag(Road::FlagEnd);
 
-			int32_t dist =
-				map.calc_distance(flag.get_position(), endflag->get_position());
-		if (dist > 12) //  out of range
-			continue;
+			int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
+			if (dist > 12) //  out of range
+				continue;
 
-			queue.push
-				(NearFlag
-				 	(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
+			queue.push(NearFlag(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
 		}
 	}
 
@@ -1613,7 +1628,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
-			game().send_player_bulldoze(site.site->base_flag());
+			flags_to_be_removed.push_back(site.site->base_flag().get_position());
+			game().send_player_dismantle(*site.site);
 			return true;
 		}
 	}
@@ -1632,7 +1648,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		// destruct the building and it's flag (via flag destruction)
 		// the destruction of the flag avoids that defaultAI will have too many
 		// unused roads - if needed the road will be rebuild directly.
-		game().send_player_bulldoze(site.site->base_flag());
+		flags_to_be_removed.push_back(site.site->base_flag().get_position());
+		game().send_player_dismantle(*site.site);
 		return true;
 	}
 
@@ -1662,7 +1679,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 				//
 				// Add a bonus if one building of this type is still unoccupied
 				if (((game().get_gametime() % 4) + site.bo->unoccupied) > 2) {
-					game().send_player_bulldoze(site.site->base_flag());
+					flags_to_be_removed.push_back(site.site->base_flag().get_position());
+					game().send_player_dismantle(*site.site);
 					return true;
 				}
 				else
@@ -1778,7 +1796,8 @@ bool DefaultAI::check_mines(int32_t const gametime)
 		// destruct the building and it's flag (via flag destruction)
 		// the destruction of the flag avoids that defaultAI will have too many
 		// unused roads - if needed the road will be rebuild directly.
-		game().send_player_bulldoze(site.site->base_flag());
+		flags_to_be_removed.push_back(site.site->base_flag().get_position());
+		game().send_player_dismantle(*site.site);
 		return true;
 	}
 
@@ -1828,7 +1847,7 @@ bool DefaultAI::check_mines(int32_t const gametime)
  *
  * \returns true if something was changed
  */
-bool DefaultAI::check_militarysites  (int32_t gametime)
+bool DefaultAI::check_militarysites(int32_t gametime)
 {
 	if (next_militarysite_check_due > gametime)
 		return false;
@@ -1876,11 +1895,10 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 						// the destruction of the flag avoids that defaultAI will have
 						// too many unused roads - if needed the road will be rebuild
 						// directly.
-						if
-							(static_cast<int32_t>(ms->maxSoldierCapacity() * 4)
-							 <
-							 bf.military_influence)
-							game().send_player_bulldoze(ms->base_flag());
+						if (static_cast<int32_t>(ms->maxSoldierCapacity() * 4) < bf.military_influence) {
+							flags_to_be_removed.push_back(ms->base_flag().get_position());
+							game().send_player_dismantle(*ms);
+						}
 
 						// Else consider enhancing the building (if possible)
 						else {
@@ -1949,8 +1967,7 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
  *
  * \returns the recalculated priority
  */
-int32_t DefaultAI::recalc_with_border_range
-	(const BuildableField & bf, int32_t prio)
+int32_t DefaultAI::recalc_with_border_range(const BuildableField & bf, int32_t prio)
 {
 	// Prefer building space in the inner land.
 	prio /= (1 + (bf.unowned_land_nearby / 4));
@@ -1973,8 +1990,7 @@ int32_t DefaultAI::recalc_with_border_range
  *
  * \returns the calculated priority
  */
-int32_t DefaultAI::calculate_need_for_ps
-	(BuildingObserver & bo, int32_t prio)
+int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 {
 	// some randomness to avoid that defaultAI is building always
 	// the same (always == another game but same map with
@@ -2037,7 +2053,7 @@ void DefaultAI::consider_productionsite_influence
 
 
 /// \returns the economy observer containing \arg economy
-EconomyObserver * DefaultAI::get_economy_observer (Economy & economy)
+EconomyObserver * DefaultAI::get_economy_observer(Economy & economy)
 {
 	for
 		(std::list<EconomyObserver *>::iterator i = economies.begin();
@@ -2052,7 +2068,7 @@ EconomyObserver * DefaultAI::get_economy_observer (Economy & economy)
 }
 
 /// \returns the building observer
-BuildingObserver & DefaultAI::get_building_observer (char const * const name)
+BuildingObserver & DefaultAI::get_building_observer(char const * const name)
 {
 	if (tribe == 0)
 		late_initialization();
@@ -2066,7 +2082,7 @@ BuildingObserver & DefaultAI::get_building_observer (char const * const name)
 
 
 /// this is called whenever we gain ownership of a PlayerImmovable
-void DefaultAI::gain_immovable (PlayerImmovable & pi)
+void DefaultAI::gain_immovable(PlayerImmovable & pi)
 {
 	if      (upcast(Building,   building, &pi))
 		gain_building (*building);
@@ -2077,7 +2093,7 @@ void DefaultAI::gain_immovable (PlayerImmovable & pi)
 }
 
 /// this is called whenever we lose ownership of a PlayerImmovable
-void DefaultAI::lose_immovable (PlayerImmovable const & pi)
+void DefaultAI::lose_immovable(PlayerImmovable const & pi)
 {
 	if        (upcast(Building const, building, &pi))
 		lose_building (*building);
@@ -2098,7 +2114,7 @@ void DefaultAI::lose_immovable (PlayerImmovable const & pi)
 }
 
 /// this is called whenever we gain a new building
-void DefaultAI::gain_building (Building & b)
+void DefaultAI::gain_building(Building & b)
 {
 	BuildingObserver & bo = get_building_observer(b.name().c_str());
 
@@ -2148,7 +2164,7 @@ void DefaultAI::gain_building (Building & b)
 }
 
 /// this is called whenever we lose a building
-void DefaultAI::lose_building (Building const & b)
+void DefaultAI::lose_building(Building const & b)
 {
 	BuildingObserver & bo = get_building_observer(b.name().c_str());
 

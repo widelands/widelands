@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-15 07:27+0000\n"
+"POT-Creation-Date: 2012-02-19 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -222,7 +222,7 @@ msgid ""
 "Colosseum"
 msgstr ""
 
-#: ../../tribes/empire/shipyard/conf:18
+#: ../../tribes/empire/shipyard/conf:21
 msgid ""
 "Constructing ship"
 msgstr ""
@@ -1491,7 +1491,7 @@ msgstr ""
 #: ../../tribes/empire/sawmill/conf:23
 #: ../../tribes/empire/scouts_house/conf:17
 #: ../../tribes/empire/sheepfarm/conf:21
-#: ../../tribes/empire/shipyard/conf:19
+#: ../../tribes/empire/shipyard/conf:22
 #: ../../tribes/empire/smelting_works/conf:24
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22

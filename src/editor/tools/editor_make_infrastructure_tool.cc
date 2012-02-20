@@ -31,13 +31,12 @@
  * Callback function to calculate correct overlays
  */
 int32_t Editor_Make_Infrastructure_Tool_Callback
-	(Widelands::TCoords<Widelands::FCoords> const c,
-	 void                                 *       data,
-	 int32_t                                const player)
-{
+(Widelands::TCoords<Widelands::FCoords> const c,
+ void                    *                    data,
+ int32_t                                const player) {
 	return
-		static_cast<Widelands::Editor_Game_Base const *>(data)->player(player)
-		.get_buildcaps(c);
+	    static_cast<Widelands::Editor_Game_Base const *>(data)->player(player)
+	    .get_buildcaps(c);
 }
 
 
@@ -48,12 +47,12 @@ int32_t Editor_Make_Infrastructure_Tool_Callback
  * Obviously, this function ignores the sel radius
 */
 int32_t Editor_Make_Infrastructure_Tool::handle_click_impl
-	(Widelands::Map               &,
-	 Widelands::Node_and_Triangle<> const,
-	 Editor_Interactive           &       parent)
-{
+(Widelands::Map &,
+ Widelands::Node_and_Triangle<> const,
+ Editor_Interactive         &         parent,
+ Editor_Action_Args         &         args) {
 	show_field_action
-		(&parent, parent.egbase().get_player(m_player), &m_registry);
+	(&parent, parent.egbase().get_player(m_player), &m_registry);
 
 	//  Not really needed, since Player Immovables are taken care of while
 	//  placing on map.

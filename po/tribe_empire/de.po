@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-08-21 14:22+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"PO-Revision-Date: 2011-12-26 17:53+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:12+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:46+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -26,6 +26,10 @@ msgstr ""
 "Ein richtiges Mahl wird in Tavernen aus Brot und Fleisch/Fisch zubereitet. "
 "Es befriedigt die Bedürfnisse der Bergleute in tiefen Minen."
 
+#: ../../tribes/empire/ship/conf:1
+msgid "A sea-worthy ship"
+msgstr "Ein seetüchtiges Schiff"
+
 #: ../../tribes/empire/ration/conf:1
 msgid ""
 "A small bite to keep miners strong and working. Rations are also consumed by "
@@ -36,23 +40,23 @@ msgstr ""
 "werden auch vom Kundschafter auf seinen Erkundungen verbraucht. Diese werden "
 "in Tavernen aus Brot, Fleisch oder Fisch zubereitet."
 
-#: ../../tribes/empire/conf:56
+#: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
 msgstr "Verbesserte Lanze"
 
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:218
 msgid "Arena"
 msgstr "Arena"
 
-#: ../../tribes/empire/conf:57
+#: ../../tribes/empire/conf:58
 msgid "Armour"
 msgstr "Harnisch"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:189
 msgid "Armour Smithy"
 msgstr "Rüstungsschmiede"
 
-#: ../../tribes/empire/conf:109
+#: ../../tribes/empire/conf:110
 msgid "Armoursmith"
 msgstr "Rüstungsschmied"
 
@@ -60,15 +64,15 @@ msgstr "Rüstungsschmied"
 msgid "Ashes"
 msgstr "Asche"
 
-#: ../../tribes/empire/conf:58
+#: ../../tribes/empire/conf:59
 msgid "Axe"
 msgstr "Axt"
 
-#: ../../tribes/empire/conf:110
+#: ../../tribes/empire/conf:111
 msgid "Baker"
 msgstr "Bäcker"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:179
 msgid "Bakery"
 msgstr "Bäckerei"
 
@@ -76,12 +80,12 @@ msgstr "Bäckerei"
 msgid "Bakes bread for workers."
 msgstr "Backt Brot für Arbeiter."
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:208
 msgid "Barracks"
 msgstr "Baracke"
 
-#: ../../tribes/empire/conf:148
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:155
+#: ../../tribes/empire/conf:209
 msgid "Barrier"
 msgstr "Barriere"
 
@@ -95,11 +99,11 @@ msgstr ""
 "hergestellt und in Ausbildungsplätzen - zusammen mit Nahrung - verwendet um "
 "die Gesundheitsstufe von Soldaten von 1 auf 2 zu trainieren."
 
-#: ../../tribes/empire/conf:60
+#: ../../tribes/empire/conf:61
 msgid "Basket"
 msgstr "Korb"
 
-#: ../../tribes/empire/conf:61
+#: ../../tribes/empire/conf:62
 msgid "Beer"
 msgstr "Bier"
 
@@ -112,9 +116,13 @@ msgstr ""
 "Fisch wird in Tavernen, Wirtshäuser und Trainingsanlagen (Arena, Kolosseum, "
 "Ausbildungslager) verbraucht."
 
-#: ../../tribes/empire/conf:62
+#: ../../tribes/empire/conf:63
 msgid "Bread"
 msgstr "Brot"
+
+#: ../../tribes/empire/conf:60
+msgid "Bread Paddle"
+msgstr "Brotschaufel"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -124,19 +132,19 @@ msgstr "Züchtet niedliche und hilfreiche Esel"
 msgid "Breeds pigs."
 msgstr "Züchtet Schweine."
 
-#: ../../tribes/empire/conf:111
+#: ../../tribes/empire/conf:112
 msgid "Brewer"
 msgstr "Brauer"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:180
 msgid "Brewery"
 msgstr "Brauerei"
 
-#: ../../tribes/empire/conf:112
+#: ../../tribes/empire/conf:113
 msgid "Builder"
 msgstr "Baumeister"
 
-#: ../../tribes/empire/conf:113
+#: ../../tribes/empire/conf:114
 msgid "Burner"
 msgstr "Köhler"
 
@@ -144,11 +152,11 @@ msgstr "Köhler"
 msgid "Burns coal."
 msgstr "Brennt Kohle"
 
-#: ../../tribes/empire/conf:114
+#: ../../tribes/empire/conf:115
 msgid "Carpenter"
 msgstr "Schreiner"
 
-#: ../../tribes/empire/conf:102
+#: ../../tribes/empire/conf:103
 msgid "Carrier"
 msgstr "Träger"
 
@@ -156,29 +164,29 @@ msgstr "Träger"
 msgid "Carries items along your roads."
 msgstr "Trägt Waren über deine Straßen."
 
-#: ../../tribes/empire/conf:142
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:212
 msgid "Castle"
 msgstr "Burg"
 
-#: ../../tribes/empire/conf:214
+#: ../../tribes/empire/conf:223
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
 msgstr "Burgdorf"
 
-#: ../../tribes/empire/conf:63
+#: ../../tribes/empire/conf:64
 msgid "Chain-Armour"
 msgstr "Kettenharnisch"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:185
 msgid "Charcoal Burner"
 msgstr "Köhlerei"
 
-#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:156
 msgid "Citadel"
 msgstr "Zitadelle"
 
-#: ../../tribes/empire/conf:64
+#: ../../tribes/empire/conf:65
 msgid "Cloth"
 msgstr "Stoff"
 
@@ -190,19 +198,23 @@ msgstr ""
 "Stoffe werden benötigt um verschiedene Gebäude zu bauen. Sie werden "
 "ebenfalls von Rüstungsschmieden benötigt."
 
-#: ../../tribes/empire/conf:65
+#: ../../tribes/empire/conf:66
 msgid "Coal"
 msgstr "Kohle"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:199
 msgid "Coal Mine"
 msgstr "Kohlenmine"
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:217
 msgid "Colosseum"
 msgstr "Kolosseum"
 
-#: ../../tribes/empire/conf:138
+#: ../../tribes/empire/shipyard/conf:18
+msgid "Constructing ship"
+msgstr "Ein Schiff erbauen"
+
+#: ../../tribes/empire/conf:143
 msgid "Construction Site"
 msgstr "Baustelle"
 
@@ -210,19 +222,19 @@ msgstr "Baustelle"
 msgid "Cuts raw pieces of granite and marble out of laying stones."
 msgstr "Bricht grobe Granitblöcke und Marmor aus Felsen."
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:198
 msgid "Deep Coal Mine"
 msgstr "Tiefe Kohlenmine"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:202
 msgid "Deep Gold Mine"
 msgstr "Tiefe Goldmine"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:200
 msgid "Deep Iron Ore Mine"
 msgstr "Tiefe Eisenmine"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:196
 msgid "Deep Marble Mine"
 msgstr "Tiefe Marmormine"
 
@@ -238,19 +250,23 @@ msgstr "Zerstörtes Gebäude"
 msgid "Discovers resources for mining."
 msgstr "Sucht Ressourcen zum schürfen."
 
-#: ../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:146
+msgid "Dismantle Site"
+msgstr "Abriss des Gebäudes"
+
+#: ../../tribes/empire/conf:157
 msgid "Donjon"
 msgstr "Wachturm"
 
-#: ../../tribes/empire/conf:103
+#: ../../tribes/empire/conf:104
 msgid "Donkey"
 msgstr "Esel"
 
-#: ../../tribes/empire/conf:135
+#: ../../tribes/empire/conf:137
 msgid "Donkey Breeder"
 msgstr "Eselzüchter"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:190
 msgid "Donkeyfarm"
 msgstr "Eselfarm"
 
@@ -258,11 +274,11 @@ msgstr "Eselfarm"
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:194
 msgid "Farm"
 msgstr "Bauernhof"
 
-#: ../../tribes/empire/conf:115
+#: ../../tribes/empire/conf:116
 msgid "Farmer"
 msgstr "Bauer"
 
@@ -290,7 +306,7 @@ msgstr "junges Feld"
 msgid "Field tiny"
 msgstr "frisch gesätes Feld"
 
-#: ../../tribes/empire/conf:66
+#: ../../tribes/empire/conf:67
 msgid "Fire Tongs"
 msgstr "Feuerzange"
 
@@ -302,19 +318,19 @@ msgstr ""
 "Die Feuerzange ist das Werkzeug des Schmelzers, der am Hochofen arbeitet. "
 "Sie wird vom Werkzeugschmied hergestellt."
 
-#: ../../tribes/empire/conf:67
+#: ../../tribes/empire/conf:68
 msgid "Fish"
 msgstr "Fisch"
 
-#: ../../tribes/empire/conf:116
+#: ../../tribes/empire/conf:117
 msgid "Fisher"
 msgstr "Fischer"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:172
 msgid "Fisher's House"
 msgstr "Fischerhaus"
 
-#: ../../tribes/empire/conf:68
+#: ../../tribes/empire/conf:69
 msgid "Fishing Rod"
 msgstr "Angel"
 
@@ -325,7 +341,7 @@ msgstr ""
 "Angeln werden vom Fischer benutzt, um Fische zu fangen. Sie werden vom "
 "Werkzeugmacher hergestellt."
 
-#: ../../tribes/empire/conf:69
+#: ../../tribes/empire/conf:70
 msgid "Flour"
 msgstr "Mehl"
 
@@ -337,20 +353,20 @@ msgstr ""
 "Mehl wird von der Mühle aus Weizen hergestellt und wird von der Bäckerei "
 "benötigt um köstliches imperiales Brot herzustellen."
 
-#: ../../tribes/empire/conf:117
+#: ../../tribes/empire/conf:118
 msgid "Forester"
 msgstr "Förster"
 
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:171
 msgid "Forester's House"
 msgstr "Forsthaus"
 
-#: ../../tribes/empire/conf:151
-#: ../../tribes/empire/conf:204
+#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:213
 msgid "Fortress"
 msgstr "Festung"
 
-#: ../../tribes/empire/conf:118
+#: ../../tribes/empire/conf:119
 msgid "Geologist"
 msgstr "Geologe"
 
@@ -358,12 +374,12 @@ msgstr "Geologe"
 msgid "Gets fish out of the sea."
 msgstr "Fängt Fische."
 
-#: ../../tribes/empire/conf:70
+#: ../../tribes/empire/conf:71
 msgid "Gold"
 msgstr "Gold"
 
 # XXX ??
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:203
 msgid "Gold Mine"
 msgstr "Goldmine"
 
@@ -377,7 +393,7 @@ msgstr ""
 "hergestellt. Es wird in Gießerein aus Golderz hergestellt und in "
 "Rüstungsschmieden und Waffenschmieden weiterverarbeitet."
 
-#: ../../tribes/empire/conf:71
+#: ../../tribes/empire/conf:72
 msgid "Goldstone"
 msgstr "Golderz"
 
@@ -386,7 +402,7 @@ msgid "Goldstones are mined in goldmines and processed in smelting works."
 msgstr ""
 "Golderz wird in Goldminen abgebaut und in Gießerein weiterverarbeitet."
 
-#: ../../tribes/empire/conf:72
+#: ../../tribes/empire/conf:73
 msgid "Grape"
 msgstr "Weintrauben"
 
@@ -395,15 +411,15 @@ msgstr "Weintrauben"
 msgid "Grows vine."
 msgstr "Pflanzt Weinreben"
 
-#: ../../tribes/empire/conf:143
+#: ../../tribes/empire/conf:150
 msgid "Guardhall"
 msgstr "Wächterhalle"
 
-#: ../../tribes/empire/conf:144
+#: ../../tribes/empire/conf:151
 msgid "Guardhouse"
 msgstr "Wachhaus"
 
-#: ../../tribes/empire/conf:73
+#: ../../tribes/empire/conf:74
 msgid "Hammer"
 msgstr "Hammer"
 
@@ -415,24 +431,24 @@ msgstr "Erntet Wein"
 msgid "Harvest wheat"
 msgstr "Erntet Weizen"
 
-#: ../../tribes/empire/conf:156
+#: ../../tribes/empire/conf:163
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:222
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
 msgstr "normales Hauptquartier"
 
-#: ../../tribes/empire/conf:157
+#: ../../tribes/empire/conf:164
 msgid "Headquarters shipwreck"
 msgstr "Schiffswrack-Hauptquartier"
 
-#: ../../tribes/empire/conf:74
+#: ../../tribes/empire/conf:75
 msgid "Heavy Lance"
 msgstr "Schwere Lanze"
 
-#: ../../tribes/empire/conf:75
+#: ../../tribes/empire/conf:76
 msgid "Helmet"
 msgstr "Helm"
 
@@ -440,7 +456,7 @@ msgstr "Helm"
 msgid "Helps to carry items at heavy used roads."
 msgstr "Hilft, Waren auf viel benutzten Straßen zu transportieren."
 
-#: ../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:152
 msgid "High Tower"
 msgstr "Bergfried"
 
@@ -453,35 +469,35 @@ msgstr ""
 "Sie werden in Werkzeugschmieden hergestellt und in Tavernen und Gasthäusern "
 "verwendet."
 
-#: ../../tribes/empire/conf:119
+#: ../../tribes/empire/conf:120
 msgid "Hunter"
 msgstr "Jäger"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:173
 msgid "Hunter's House"
 msgstr "Jagdhaus"
 
-#: ../../tribes/empire/conf:76
+#: ../../tribes/empire/conf:77
 msgid "Hunting Spear"
 msgstr "Jagdspeer"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:183
 msgid "Inn"
 msgstr "Wirtshaus"
 
-#: ../../tribes/empire/conf:120
+#: ../../tribes/empire/conf:121
 msgid "Innkeeper"
 msgstr "Wirt"
 
-#: ../../tribes/empire/conf:77
+#: ../../tribes/empire/conf:78
 msgid "Iron"
 msgstr "Eisen"
 
-#: ../../tribes/empire/conf:78
+#: ../../tribes/empire/conf:79
 msgid "Iron Ore"
 msgstr "Eisenerz"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:201
 msgid "Iron Ore Mine"
 msgstr "Eisenerzmine"
 
@@ -494,34 +510,34 @@ msgstr ""
 "wird in Eisenminen abgebaut."
 
 #: ../../tribes/empire/shepherd/conf:1
-msgid "Keeping sheeps."
-msgstr "Züchtet Schafe."
+msgid "Keeping sheep."
+msgstr "Behalte Schafe."
 
-#: ../../tribes/empire/conf:79
+#: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
 msgstr "Küchengerät"
 
-#: ../../tribes/empire/conf:80
+#: ../../tribes/empire/conf:81
 msgid "Lance"
 msgstr "Lanze"
 
-#: ../../tribes/empire/conf:121
+#: ../../tribes/empire/conf:122
 msgid "Lumberjack"
 msgstr "Holzfäller"
 
-#: ../../tribes/empire/conf:162
+#: ../../tribes/empire/conf:170
 msgid "Lumberjack's House"
 msgstr "Holzfällerhaus"
 
-#: ../../tribes/empire/conf:82
+#: ../../tribes/empire/conf:83
 msgid "Marble"
 msgstr "Marmor"
 
-#: ../../tribes/empire/conf:81
+#: ../../tribes/empire/conf:82
 msgid "Marble Column"
 msgstr "Marmorsäule"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:197
 msgid "Marble Mine"
 msgstr "Marmormine"
 
@@ -545,15 +561,15 @@ msgstr ""
 "oder in Steinbrüchen abgebaut wird. Marmor wird als Baumaterial verwendet "
 "und wird im Steinmetzhaus in Marmorsäulen geformt."
 
-#: ../../tribes/empire/conf:122
+#: ../../tribes/empire/conf:123
 msgid "Master Miner"
 msgstr "Bergwerksmeister"
 
-#: ../../tribes/empire/conf:83
+#: ../../tribes/empire/conf:84
 msgid "Meal"
 msgstr "Mahlzeit"
 
-#: ../../tribes/empire/conf:84
+#: ../../tribes/empire/conf:85
 msgid "Meat"
 msgstr "Fleisch"
 
@@ -570,11 +586,11 @@ msgstr ""
 "Fleisch: Fleisch von Wild gejagdt durch Jäger und Schweinefleisch aus "
 "Schweinezuchten."
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:178
 msgid "Mill"
 msgstr "Mühle"
 
-#: ../../tribes/empire/conf:123
+#: ../../tribes/empire/conf:124
 msgid "Miller"
 msgstr "Müller"
 
@@ -605,7 +621,7 @@ msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
 "Baut Stein ab (nur für Abwärtskompatiblität mit Speicherständen von build13)."
 
-#: ../../tribes/empire/conf:124
+#: ../../tribes/empire/conf:125
 msgid "Miner"
 msgstr "Bergmann"
 
@@ -613,23 +629,19 @@ msgstr "Bergmann"
 msgid "Not enough space"
 msgstr "Nicht ausreichend Platz"
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:210
 msgid "Outpost"
 msgstr "Außenposten"
 
-#: ../../tribes/empire/conf:59
-msgid "Peel"
-msgstr "Brotschieber"
-
-#: ../../tribes/empire/conf:85
+#: ../../tribes/empire/conf:86
 msgid "Pick"
 msgstr "Spitzhacke"
 
-#: ../../tribes/empire/conf:125
+#: ../../tribes/empire/conf:126
 msgid "Pig Breeder"
 msgstr "Schweinezüchter"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:193
 msgid "Piggery"
 msgstr "Schweinezucht"
 
@@ -649,9 +661,13 @@ msgstr "Pflanzt Felder."
 msgid "Plants trees."
 msgstr "Pflanzt Bäume."
 
-#: ../../tribes/empire/conf:86
+#: ../../tribes/empire/conf:87
 msgid "Plate-Armour"
 msgstr "Plattenharnisch"
+
+#: ../../tribes/empire/conf:166
+msgid "Port"
+msgstr "Hafen"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
@@ -761,11 +777,11 @@ msgstr "Produziert Werkzeuge für Arbeiter."
 msgid "Produces weapons for the soldiers."
 msgstr "Produziert Waffen für Soldaten."
 
-#: ../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:169
 msgid "Quarry"
 msgstr "Steinbruch"
 
-#: ../../tribes/empire/conf:87
+#: ../../tribes/empire/conf:88
 msgid "Ration"
 msgstr "Ration"
 
@@ -809,19 +825,19 @@ msgstr "Ressourcenanzeige für fehlende Ressource"
 msgid "Resource indicator water"
 msgstr "Ressourcenanzeige für Wasser"
 
-#: ../../tribes/empire/conf:88
+#: ../../tribes/empire/conf:89
 msgid "Saw"
 msgstr "Säge"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:177
 msgid "Sawmill"
 msgstr "Sägewerk"
 
-#: ../../tribes/empire/conf:134
+#: ../../tribes/empire/conf:136
 msgid "Scout"
 msgstr "Erkunder"
 
-#: ../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:175
 msgid "Scout's House"
 msgstr "Erkunderhütte"
 
@@ -832,24 +848,40 @@ msgstr ""
 "Erkunder wie Erkundigunde, der Erkunder, erkunden das unerkundete Gebiet auf "
 "erkundliche Weise."
 
-#: ../../tribes/empire/conf:89
+#: ../../tribes/empire/conf:90
 msgid "Scythe"
 msgstr "Sense"
 
-#: ../../tribes/empire/conf:152
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:159
+#: ../../tribes/empire/conf:207
 msgid "Sentry"
 msgstr "Wachposten"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:191
 msgid "Sheepfarm"
 msgstr "Schäferei"
 
-#: ../../tribes/empire/conf:126
+#: ../../tribes/empire/conf:127
 msgid "Shepherd"
 msgstr "Schäfer"
 
-#: ../../tribes/empire/conf:90
+#: ../../tribes/empire/conf:140
+msgid "Ship"
+msgstr "Schiff"
+
+#: ../../tribes/empire/conf:54
+msgid "Ship construction site"
+msgstr "Schiffsbaustelle"
+
+#: ../../tribes/empire/conf:128
+msgid "Shipwright"
+msgstr "Schiffszimmermann"
+
+#: ../../tribes/empire/conf:187
+msgid "Shipyard"
+msgstr "Werft"
+
+#: ../../tribes/empire/conf:91
 msgid "Shovel"
 msgstr "Schaufel"
 
@@ -859,7 +891,7 @@ msgstr "Schaufel"
 msgid "Sleep"
 msgstr "Schlaf"
 
-#: ../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:153
 msgid "Small Tower"
 msgstr "Spähturm"
 
@@ -871,11 +903,11 @@ msgstr "Verhüttet Golderz."
 msgid "Smelt iron"
 msgstr "Verhüttet Eisen"
 
-#: ../../tribes/empire/conf:127
+#: ../../tribes/empire/conf:129
 msgid "Smelter"
 msgstr "Hüttenarbeiter"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:186
 msgid "Smelting Works"
 msgstr "Hochofen"
 
@@ -883,7 +915,7 @@ msgstr "Hochofen"
 msgid "Smelts iron."
 msgstr "Verhüttet Eisen."
 
-#: ../../tribes/empire/conf:106
+#: ../../tribes/empire/conf:107
 msgid "Soldier"
 msgstr "Soldat"
 
@@ -897,15 +929,15 @@ msgstr ""
 "nicht gebaut. Dadurch bist du im Nachteil; überlege, ob du diese Karte nicht "
 "unter gerechten Startbedingungen nochmals starten möchtest."
 
-#: ../../tribes/empire/conf:128
+#: ../../tribes/empire/conf:130
 msgid "Stonemason"
 msgstr "Steinmetz"
 
-#: ../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:176
 msgid "Stonemason's House"
 msgstr "Steinmetz"
 
-#: ../../tribes/empire/conf:91
+#: ../../tribes/empire/conf:92
 msgid "Stones"
 msgstr "Steine"
 
@@ -917,11 +949,11 @@ msgstr ""
 "Steine sind ein Grundbaumaterial des Imperiums. Sie werden in Steinbrüchen "
 "und Mamorminen abgebaut."
 
-#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:160
 msgid "Stronghold"
 msgstr "Bastion"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:184
 msgid "Tavern"
 msgstr "Taverne"
 
@@ -956,6 +988,14 @@ msgstr ""
 "Brot. Es wird in Tavernen und Wirtshäusern verwendet um Rationen und "
 "Mahlzeiten zuzubereiten. Brot wird auch von Ausbildungsplätzen "
 "(Ausbildungsplatz, Arena, Kolloseum) benötigt."
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The bread paddle is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
+msgstr ""
+"Die Brotschaufel ist das Werkzeug der Bäcker, jeder Bäcker benötigt eine "
+"eigene. Sie wird vom Werkzeugschmied hergestellt."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -1000,14 +1040,6 @@ msgstr ""
 "die die Grundausrüstung für junge Soldaten. Helme werden auch in "
 "Ausbildungsplätzen - zusammen mit Nahrung - benötigt um die Gesundheitsstufe "
 "von Soldaten von 0 auf 1 zu trainieren."
-
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The peel is the tool of the baker, each baker needs its own. It is produced "
-"by the toolsmith."
-msgstr ""
-"Der Brotschieber ist das Werkzeug des Bäckers. Es wird vom Werkzeugmacher "
-"gefertigt."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -1136,24 +1168,24 @@ msgstr ""
 "wird in Waffenschmieden hergestellt. Zusammen mit dem Helm ist sie die "
 "Ausrüstung für junge Soldaten."
 
-#: ../../tribes/empire/conf:129
+#: ../../tribes/empire/conf:131
 msgid "Toolsmith"
 msgstr "Werkzeugmacher"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:188
 msgid "Toolsmithy"
 msgstr "Werkzeugmacher"
 
-#: ../../tribes/empire/conf:147
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:211
 msgid "Tower"
 msgstr "Turm"
 
-#: ../../tribes/empire/conf:130
+#: ../../tribes/empire/conf:132
 msgid "Trainer"
 msgstr "Ausbilder"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:219
 msgid "Trainingscamp"
 msgstr "Ausbildungslager"
 
@@ -1161,7 +1193,7 @@ msgstr "Ausbildungslager"
 msgid "Trains the soldiers."
 msgstr "Bildet die Soldaten aus."
 
-#: ../../tribes/empire/conf:92
+#: ../../tribes/empire/conf:93
 msgid "Trunk"
 msgstr "Stamm"
 
@@ -1295,7 +1327,7 @@ msgstr ""
 "Erhöht Lebenspunkte des Soldaten 3 (nur für Abwärtskompatiblität mit "
 "Speicherständen von build13)"
 
-#: ../../tribes/empire/conf:133
+#: ../../tribes/empire/conf:135
 msgid "Vine Farmer"
 msgstr "Winzer"
 
@@ -1315,19 +1347,19 @@ msgstr "junge Weinrebe"
 msgid "Vine tiny"
 msgstr "frisch gesäte Weinrebe"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:181
 msgid "Vineyard"
 msgstr "Weinberg"
 
-#: ../../tribes/empire/conf:93
+#: ../../tribes/empire/conf:94
 msgid "War-Lance"
 msgstr "Kriegslanze"
 
-#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:165
 msgid "Warehouse"
 msgstr "Warenlager"
 
-#: ../../tribes/empire/conf:94
+#: ../../tribes/empire/conf:95
 msgid "Water"
 msgstr "Wasser"
 
@@ -1341,7 +1373,7 @@ msgstr ""
 "benötigt. Auch Eselszüchter, Schäfereien und Schweinezuchten benötigen eine "
 "Wasserversorgung."
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"
 msgstr "Waffenschmied"
 
@@ -1353,23 +1385,23 @@ msgstr ""
 "Waffen, Rüstungen und Werkzeuge sind aus Eisen gemacht. Es wird in Gießerein "
 "aus Eisenerz gewonnen."
 
-#: ../../tribes/empire/conf:131
+#: ../../tribes/empire/conf:133
 msgid "Weaponsmith"
 msgstr "Waffenschmied"
 
-#: ../../tribes/empire/conf:132
+#: ../../tribes/empire/conf:134
 msgid "Weaver"
 msgstr "Weber"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:192
 msgid "Weaving Mill"
 msgstr "Weberei"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:174
 msgid "Well"
 msgstr "Brunnen"
 
-#: ../../tribes/empire/conf:95
+#: ../../tribes/empire/conf:96
 msgid "Wheat"
 msgstr "Weizen"
 
@@ -1383,19 +1415,19 @@ msgstr ""
 "Mühlen und Brauereien benötigt. Auch Eselsfarmen, Schäfereien und "
 "Schweinezuchten benötigen eine Wasserversorgung"
 
-#: ../../tribes/empire/conf:96
+#: ../../tribes/empire/conf:97
 msgid "Wine"
 msgstr "Wein"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:182
 msgid "Winery"
 msgstr "Weinkellerei"
 
-#: ../../tribes/empire/conf:97
+#: ../../tribes/empire/conf:98
 msgid "Wood"
 msgstr "Holz"
 
-#: ../../tribes/empire/conf:98
+#: ../../tribes/empire/conf:99
 msgid "Wood Lance"
 msgstr "Holzlanze"
 
@@ -1407,15 +1439,15 @@ msgstr ""
 "Holz ist ein Grundbaumaterial des Imperiums. Es wird auch von "
 "Waffenschmieden benötigt."
 
-#: ../../tribes/empire/conf:99
+#: ../../tribes/empire/conf:100
 msgid "Wool"
 msgstr "Wolle"
 
 #: ../../tribes/empire/wool/conf:1
-msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
+msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
-"Wolle ist das Haar von Schafen. Imperiale Webereien benutzen sie, um Stoffe "
-"zu erstellen."
+"Wolle ist das Haar von Schafen. Webereien verwenden es, um Stoff "
+"herzustellen."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
@@ -1442,6 +1474,7 @@ msgstr ""
 #: ../../tribes/empire/sawmill/conf:23
 #: ../../tribes/empire/scouts_house/conf:17
 #: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/shipyard/conf:19
 #: ../../tribes/empire/smelting_works/conf:24
 #: ../../tribes/empire/stonemasons_house/conf:21
 #: ../../tribes/empire/tavern/conf:22
@@ -1457,6 +1490,10 @@ msgstr "Arbeit"
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
 msgstr "Arbeitet auf Baustellen um neue Gebäude zu errichten."
+
+#: ../../tribes/empire/shipwright/conf:1
+msgid "Works at the shipyard and constructs new ships."
+msgstr "Arbeitet in der Werft und erstellt neue Schiffe."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1

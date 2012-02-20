@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-10 07:22+0000\n"
-"PO-Revision-Date: 2011-11-06 23:52+0000\n"
+"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"PO-Revision-Date: 2012-01-22 02:29+0000\n"
 "Last-Translator: MadkaT <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-08 05:19+0000\n"
-"X-Generator: Launchpad (build 14231)\n"
+"X-Launchpad-Export-Date: 2012-02-17 04:42+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
@@ -242,7 +242,7 @@ msgstr "Llega Colionder"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:306
 msgid "Colionder is in thought"
-msgstr ""
+msgstr "Colionder está pensando"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:595
 msgid "Congratulations"
@@ -250,7 +250,7 @@ msgstr "Enhorabuena"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:43
 msgid "Ensure the supply of build wares"
-msgstr ""
+msgstr "Asegura el suministro de elementos de construcción"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:141
 msgid "Escape from the island"
@@ -448,7 +448,7 @@ msgstr "Jundlina está enfadada"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina is in thought"
-msgstr ""
+msgstr "Jundlina está pensando"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:586
 msgid "Jundlina is relieved"
@@ -469,7 +469,7 @@ msgstr "Jundlina está preocupada"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Jundlina nods"
-msgstr ""
+msgstr "Jundlina asiente con la cabeza"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:440
 msgid "Jundlina received a letter"
@@ -578,6 +578,14 @@ msgid ""
 "on it. I brought plenty of good men from Atlantis. The military might is\n"
 "available. We only need some housings to live in."
 msgstr ""
+"¡Que Satul te caliente, Jundlina! Estoy de acuerdo con lo que Loftomor "
+"propone. Necesitamos\n"
+"un buen suministro de materiales de construcción, para lo que tenemos que "
+"expandir nuestro territorio rápidamente.\n"
+"No me sentiré seguro en esta isla mientras no hayamos visto todas sus "
+"costas. He traído muchos hombres buenos\n"
+"de Atlantis. El poder militar está dispuesto. Sólo necesitamos algunas casas "
+"en las que vivir."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
@@ -605,7 +613,7 @@ msgstr ""
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the\n"
 "god?"
-msgstr ""
+msgstr "Que Satul te caliente, Jundlina. ¿Puedo serviros a vos o al dios?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:389
 msgid ""
@@ -798,7 +806,7 @@ msgstr "Memorias de la princesa"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "The supply of build wares"
-msgstr ""
+msgstr "El suministro de materiales de construcción"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:530
 msgid "The water is rising!"
@@ -931,6 +939,15 @@ msgid ""
 "this\n"
 "a sign from the fire god and we landed on its shore."
 msgstr ""
+"Abandonamos Atlantis y navegamos al este. Entramos en el mar prohibido al "
+"sexto\n"
+"día sin ver ningún perseguidor de Atlantis y sin que Lutas hubiera "
+"aplastado\n"
+"nuestro barco. Ahora nos encontramos fuera de su alcance. Un día después "
+"avistamos\n"
+"una isla que parece tener una de esas montañas que escupen fuego. Esto es "
+"una\n"
+"señal del dios del fuego, y arribamos a sus costas."
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
@@ -975,6 +992,14 @@ msgid ""
 "everything else, we need those wares on top of the mountain before our\n"
 "warehouses are all swallowed by the sea."
 msgstr ""
+"Tu cabello rojo es una señal del dios del fuego. Confio en ti y apoyo tu\n"
+"plan. Nuestra supervivencia esta en tus manos ahora, Ostur.\n"
+"<br> Apresurate ahora, necesitamos una casa para Ostur al lado del lago y "
+"necesitamos\n"
+"tablas, troncos y telaraña para la construcción. Olvídate de\n"
+"todo lo demás, necesitamos la mercancía en la cima de la montaña antes que "
+"nuestros\n"
+"almacenes sean tragados por el mar."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Your words sound wise to me, Colionder. So be it then."

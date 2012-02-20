@@ -151,7 +151,7 @@ bool InternetGaming::login
 				formatAndAddChat("", "", true, _("For hosting a game, please take a look at the notes at:"));
 				formatAndAddChat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
 				return true;
-			} else if (m_state == COMMUNICATION_ERROR)
+			} else if (error())
 				return false;
 		}
 	}
@@ -165,7 +165,7 @@ bool InternetGaming::login
 /// Relogin to metaserver after loosing connection
 bool InternetGaming::relogin()
 {
-	assert(m_state == COMMUNICATION_ERROR);
+	assert(error());
 
 	initialiseConnection();
 
@@ -191,7 +191,7 @@ bool InternetGaming::relogin()
 		if (m_state != CONNECTING) {
 			if (m_state == LOBBY) {
 				break;
-			} else if (m_state == COMMUNICATION_ERROR)
+			} else if (error())
 				return false;
 		}
 	}
@@ -210,8 +210,7 @@ bool InternetGaming::relogin()
 	} else if (waitcmd == IGPCMD_GAME_START) {
 		m_state = IN_GAME;
 		set_game_playing();
-	} else
-		assert(false); // should never be here
+	}
 
 	return true;
 }
@@ -229,7 +228,7 @@ void InternetGaming::logout(std::string const & msgcode) {
 	s.send(m_sock);
 
 	const std::string & msg = InternetGamingMessages::get_message(msgcode);
-	dedicatedlog("InternetGaming: %s\n", msg.c_str());
+	dedicatedlog("InternetGaming: logout(%s)\n", msg.c_str());
 	formatAndAddChat("", "", true, msg);
 
 	reset();
@@ -248,6 +247,7 @@ void InternetGaming::handle_metaserver_communication() {
 			// packets that are followed immediately by connection close.
 			if (!m_deserializer.read(m_sock)) {
 				logout("CONNECTION_LOST");
+				setError();
 				return;
 			}
 
@@ -261,6 +261,7 @@ void InternetGaming::handle_metaserver_communication() {
 		std::string reason = _("Something went wrong: ");
 		reason += e.what();
 		logout(reason);
+		setError();
 	}
 
 	if (m_state == LOBBY) {
@@ -308,7 +309,16 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 	// First check if everything is fine or whether the metaserver broke up with the client.
 	if (cmd == IGPCMD_DISCONNECT) {
 		std::string reason = packet.String();
-		logout(reason);
+		formatAndAddChat("", "", true, InternetGamingMessages::get_message(reason));
+		if (reason == "CLIENT_TIMEOUT") {
+			// Try to relogin
+			setError();
+			if (!relogin()) {
+				// Do not try to relogin again automatically.
+				reset();
+				setError();
+			}
+		}
 		return;
 	}
 
@@ -326,11 +336,15 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			// Clients request to relogin was granted
 			m_state = LOBBY;
 			dedicatedlog("InternetGaming: Client %s relogged in.\n", m_clientname.c_str());
+			formatAndAddChat("", "", true, _("Successfully reconnected to the metaserver!"));
 			return;
 
 		} else if (cmd == IGPCMD_ERROR) {
-			if (packet.String() != "LOGIN")
+			std::string errortype = packet.String();
+			if (errortype != "LOGIN" && errortype != "RELOGIN") {
+				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", packet.String().c_str());
 				throw warning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
+			}
 			// Clients login request got rejected
 			logout(packet.String());
 			setError();

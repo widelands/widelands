@@ -35,6 +35,7 @@
 #include "tools/editor_set_port_space_tool.h"
 #include "tools/editor_set_starting_pos_tool.h"
 #include "tools/editor_set_terrain_tool.h"
+#include "tools/editor_history.h"
 
 
 class Editor;
@@ -60,7 +61,7 @@ public:
 	void start();
 	void think();
 
-	void map_clicked();
+	void map_clicked(bool draw = false);
 	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
 	void set_sel_radius_and_update_menu(uint32_t);
 
@@ -70,21 +71,21 @@ public:
 	struct Tools {
 		Tools()
 			:
-			current_pointer   (&increase_height),
-			use_tool          (Editor_Tool::First),
-			increase_height   (decrease_height, set_height),
-			noise_height      (set_height),
-			place_immovable   (delete_immovable),
-			place_bob         (delete_bob),
+			current_pointer(&increase_height),
+			use_tool(Editor_Tool::First),
+			increase_height(decrease_height, set_height),
+			noise_height(set_height),
+			place_immovable(delete_immovable),
+			place_bob(delete_bob),
 			increase_resources(decrease_resources, set_resources),
-			set_port_space    (unset_port_space)
+			set_port_space(unset_port_space)
 
 		{}
-		Editor_Tool & current() const throw () {return *current_pointer;}
+		Editor_Tool & current() const throw() {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
 		typedef Tool_Vector::size_type Index;
 		//Tool_Vector                     tools;
-		Editor_Tool *                   current_pointer;
+		Editor_Tool          *          current_pointer;
 		Editor_Tool::Tool_Index         use_tool;
 		Editor_Info_Tool                info;
 		Editor_Set_Height_Tool          set_height;
@@ -108,7 +109,7 @@ public:
 
 	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
 
-	Widelands::Player * get_player() const throw () {return 0;}
+	Widelands::Player * get_player() const throw() {return 0;}
 
 	// action functions
 	void exit();
@@ -124,11 +125,11 @@ public:
 	void change_world();
 
 private:
-	void toggle_buildhelp     ();
-	void tool_menu_btn        ();
-	void toolsize_menu_btn    ();
-	void toggle_mainmenu      ();
-	void toggle_playermenu    ();
+	void toggle_buildhelp();
+	void tool_menu_btn();
+	void toolsize_menu_btn();
+	void toggle_mainmenu();
+	void toggle_playermenu();
 
 	//  state variables
 	bool m_need_save;
@@ -139,6 +140,8 @@ private:
 	std::vector<Player_References> m_player_tribe_references;
 
 	int32_t m_realtime;
+
+	Editor_History m_history;
 
 	UI::UniqueWindow::Registry m_toolmenu;
 
@@ -158,6 +161,8 @@ private:
 	UI::Button m_toggle_minimap;
 	UI::Button m_toggle_buildhelp;
 	UI::Button m_toggle_player_menu;
+	UI::Button m_undo;
+	UI::Button m_redo;
 };
 
 #endif

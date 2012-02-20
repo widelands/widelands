@@ -203,6 +203,25 @@ void Font_Handler::draw_text
 }
 
 /**
+ * Draw unwrapped, single-line text (i.e. no line breaks) with a gray shadow.
+ */
+void Font_Handler::draw_text_shadow
+	(RenderTarget & dst,
+	 const TextStyle & style,
+	 Point dstpoint,
+	 const std::string & text,
+	 Align align,
+	 uint32_t caret)
+{
+
+	TextStyle gray_style = style;
+	gray_style.fg = RGBColor (0, 0, 0);
+
+	draw_text (dst, gray_style, dstpoint - Point(1, 1), text, align, caret);
+	draw_text (dst, style, dstpoint, text, align, caret);
+}
+
+/**
  * Draw unwrapped, un-aligned single-line text at the given point, and return the width of the text.
  */
 uint32_t Font_Handler::draw_text_raw

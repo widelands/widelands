@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -162,24 +162,25 @@ private:
 	bool m_buildable_changed;
 	bool m_mineable_changed;
 
-	Widelands::Player               * player;
-	Widelands::Tribe_Descr const    * tribe;
+	Widelands::Player                * player;
+	Widelands::Tribe_Descr const     * tribe;
 
-	std::vector<BuildingObserver>     buildings;
-	uint32_t                          total_constructionsites;
+	std::vector<BuildingObserver>      buildings;
+	uint32_t                           total_constructionsites;
 
-	std::list<Widelands::FCoords>     unusable_fields;
-	std::list<BuildableField *>       buildable_fields;
-	std::list<BlockedField *>         blocked_fields;
-	std::list<MineableField *>        mineable_fields;
+	std::list<Widelands::FCoords>      unusable_fields;
+	std::list<BuildableField *>        buildable_fields;
+	std::list<BlockedField *>          blocked_fields;
+	std::list<MineableField *>         mineable_fields;
 	std::list<Widelands::Flag const *> new_flags;
+	std::list<Widelands::Coords>       flags_to_be_removed;
 	std::list<Widelands::Road const *> roads;
-	std::list<EconomyObserver *>      economies;
-	std::list<ProductionSiteObserver> productionsites;
-	std::list<ProductionSiteObserver> mines;
-	std::list<MilitarySiteObserver>   militarysites;
+	std::list<EconomyObserver *>       economies;
+	std::list<ProductionSiteObserver>  productionsites;
+	std::list<ProductionSiteObserver>  mines;
+	std::list<MilitarySiteObserver>    militarysites;
 
-	std::vector<WareObserver>         wares;
+	std::vector<WareObserver>          wares;
 
 	int32_t next_road_due;
 	int32_t next_stats_update_due;

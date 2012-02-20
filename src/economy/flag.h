@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -115,8 +115,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void remove_item(Editor_Game_Base &, WareInstance * const);
 
-	void add_flag_job
-		(Game &, Ware_Index workerware, std::string const & programname);
+	void add_flag_job(Game &, Ware_Index workerware, std::string const & programname);
 
 	virtual void log_general_info(Editor_Game_Base const &);
 
@@ -128,8 +127,7 @@ protected:
 
 	void wake_up_capacity_queue(Game &);
 
-	static void flag_job_request_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	static void flag_job_request_callback(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	void set_flag_position(Coords coords);
 

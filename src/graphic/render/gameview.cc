@@ -1077,18 +1077,36 @@ inline static uint32_t calc_minimap_color
 	}
 
 	if (see_details)
+		// if ownership layer is displayed, it creates enoungh contrast
+		// to visualize objects using white color.
+		// Otherwise, a more contrasting color may be needed:
+		// * winterland -> orange
+
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
 			if (flags & MiniMap::Roads and dynamic_cast<Road const *>(immovable))
-				pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
+			{
+				if (!(flags & MiniMap::Owner) && !strcmp(egbase.map().get_world_name(), "winterland"))
+						pixelcolor = blend_color(format, pixelcolor, 255, 127, 0);
+				else //ownership layer displayed or greenland
+						pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
+			}
+
 			if
 				((flags & MiniMap::Flags and dynamic_cast<Flag const *>(immovable))
 				 or
 				 (flags & MiniMap::Bldns
 				  and
 				  dynamic_cast<Widelands::Building const *>(immovable)))
-				pixelcolor =
-					SDL_MapRGB
-						(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
+			{
+				if (!(flags & MiniMap::Owner) && !strcmp(egbase.map().get_world_name(), "winterland"))
+					pixelcolor =
+						SDL_MapRGB
+							(&const_cast<SDL_PixelFormat &>(format), 255, 127, 0);
+				else //ownership layer displayed or greenland
+					pixelcolor =
+						SDL_MapRGB
+							(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
+			}
 		}
 
 	return pixelcolor;
