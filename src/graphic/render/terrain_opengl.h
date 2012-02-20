@@ -111,6 +111,8 @@ void draw_field_opengl
 		glActiveTexture(GL_TEXTURE4);
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, edge);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
 		glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_INTERPOLATE);
 		glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB, GL_PREVIOUS);
@@ -140,7 +142,7 @@ void draw_field_opengl
 		}
 		glMultiTexCoord2i(GL_TEXTURE0, t1.tx, t1.ty);
 		glMultiTexCoord2f(GL_TEXTURE1, t1.tx / TEXTURE_WIDTH, t1.ty / TEXTURE_WIDTH);
-		glMultiTexCoord2f(GL_TEXTURE2, t1.tx / TEXTURE_WIDTH, t1.ty / TEXTURE_WIDTH);
+		glMultiTexCoord2f(GL_TEXTURE2, 0, 0);
 		glMultiTexCoord2f(GL_TEXTURE3, t1.tx / TEXTURE_WIDTH, t1.ty / TEXTURE_WIDTH);
 		glMultiTexCoord2f(GL_TEXTURE4, 1, 0);
 		glMultiTexCoord2f(GL_TEXTURE5, t1.tx / TEXTURE_WIDTH, t1.ty / TEXTURE_WIDTH);
@@ -152,7 +154,7 @@ void draw_field_opengl
 		}
 		glMultiTexCoord2i(GL_TEXTURE0, t2.tx, t2.ty);
 		glMultiTexCoord2f(GL_TEXTURE1, t2.tx / TEXTURE_WIDTH, t2.ty / TEXTURE_WIDTH);
-		glMultiTexCoord2f(GL_TEXTURE2, t2.tx / TEXTURE_WIDTH, t2.ty / TEXTURE_WIDTH);
+		glMultiTexCoord2f(GL_TEXTURE2, 0.5, 1);
 		glMultiTexCoord2f(GL_TEXTURE3, t2.tx / TEXTURE_WIDTH, t2.ty / TEXTURE_WIDTH);
 		glMultiTexCoord2f(GL_TEXTURE4, 0, 0);
 		glMultiTexCoord2f(GL_TEXTURE5, t2.tx / TEXTURE_WIDTH, t2.ty / TEXTURE_WIDTH);
@@ -164,7 +166,7 @@ void draw_field_opengl
 		}
 		glMultiTexCoord2i(GL_TEXTURE0, t3.tx, t3.ty);
 		glMultiTexCoord2f(GL_TEXTURE1, t3.tx / TEXTURE_WIDTH, t3.ty / TEXTURE_WIDTH);
-		glMultiTexCoord2f(GL_TEXTURE2, t3.tx / TEXTURE_WIDTH, t3.ty / TEXTURE_WIDTH);
+		glMultiTexCoord2f(GL_TEXTURE2, 1, 0);
 		glMultiTexCoord2f(GL_TEXTURE3, t3.tx / TEXTURE_WIDTH, t3.ty / TEXTURE_WIDTH);
 		glMultiTexCoord2f(GL_TEXTURE4, 0.5, 1);
 		glMultiTexCoord2f(GL_TEXTURE5, t3.tx / TEXTURE_WIDTH, t3.ty / TEXTURE_WIDTH);
