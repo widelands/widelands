@@ -27,15 +27,17 @@ struct Editor_Set_Terrain_Tool : public Editor_Tool, public MultiSelect {
 	Editor_Set_Terrain_Tool() : Editor_Tool(*this, *this) {}
 
 	int32_t handle_click_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	int32_t handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
 
 	char const * get_sel_impl() const {return "pics/fsel.png";}
-	bool operates_on_triangles() const throw() {return true;};
+	bool operates_on_triangles() const throw () {return true;};
 };
 
 #endif

@@ -31,7 +31,8 @@ using namespace Widelands;
 
 /// static callback function for overlay calculation
 int32_t Editor_Tool_Set_Port_Space_Callback
-(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t) {
+	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
+{
 	assert(data);
 	Map const & map = *static_cast<Map const *>(data);
 	NodeCaps const caps = c.field->nodecaps();
@@ -62,9 +63,10 @@ Editor_Unset_Port_Space_Tool::Editor_Unset_Port_Space_Tool()
 
 
 int32_t Editor_Set_Port_Space_Tool::handle_click_impl
-(Map & map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive &,  Editor_Action_Args &) {
+	(Map & map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive &,  Editor_Action_Args &)
+{
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -81,15 +83,18 @@ int32_t Editor_Set_Port_Space_Tool::handle_click_impl
 }
 
 int32_t Editor_Set_Port_Space_Tool::handle_undo_impl
-(Map & map, Node_and_Triangle< Coords > center, Editor_Interactive & parent, Editor_Action_Args & args) {
+	(Map & map, Node_and_Triangle< Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
 	return parent.tools.unset_port_space.handle_click_impl(map, center, parent, args);
 }
 
 
 int32_t Editor_Unset_Port_Space_Tool::handle_click_impl
-(Map & map,
- Node_and_Triangle<> const center,
- Editor_Interactive &, Editor_Action_Args &) {
+	(Map & map,
+	Node_and_Triangle<> const center,
+	Editor_Interactive &, Editor_Action_Args &)
+{
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -97,7 +102,8 @@ int32_t Editor_Unset_Port_Space_Tool::handle_click_impl
 
 	//  check if field is valid
 	//  check if field is valid
-	if (Editor_Tool_Set_Port_Space_Callback(map.get_fcoords(center.node), &map, 0)) {
+	if (Editor_Tool_Set_Port_Space_Callback(map.get_fcoords(center.node), &map, 0))
+	{
 		map.set_port_space(map.get_fcoords(center.node), false);
 		Area<FCoords> a(map.get_fcoords(center.node), 0);
 		map.recalc_for_field_area(a);
@@ -107,6 +113,8 @@ int32_t Editor_Unset_Port_Space_Tool::handle_click_impl
 }
 
 int32_t Editor_Unset_Port_Space_Tool::handle_undo_impl
-(Map & map, Node_and_Triangle< Coords > center, Editor_Interactive & parent, Editor_Action_Args & args) {
+	(Map & map, Node_and_Triangle< Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
 	return parent.tools.set_port_space.handle_click_impl(map, center, parent, args);
 }

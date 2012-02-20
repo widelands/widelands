@@ -31,13 +31,13 @@ using Widelands::Bob;
  * and places this on the current field
 */
 int32_t Editor_Place_Bob_Tool::handle_click_impl
-(Widelands::Map           &           map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive         &         parent,
- Editor_Action_Args & args) {
+	(Widelands::Map           &           map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive       &           parent,
+	 Editor_Action_Args       &           args)
+{
 
 	if (get_nr_enabled() && args.obob_type.empty()) {
-		Widelands::Editor_Game_Base & egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
@@ -71,15 +71,16 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 }
 
 int32_t Editor_Place_Bob_Tool::handle_undo_impl
-(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent, Editor_Action_Args & args) {
+	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
 	if (not args.nbob_type.empty()) {
 		Widelands::Editor_Game_Base & egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map.get_fcoords(center.node), args.sel_radius));
-		std::list< const Bob::Descr * >::iterator i = args.obob_type.begin();
+		std::list<const Bob::Descr *>::iterator i = args.obob_type.begin();
 		do {
 			if (*i) {
 				Bob::Descr const & descr = *(*i);
@@ -98,7 +99,8 @@ int32_t Editor_Place_Bob_Tool::handle_undo_impl
 		return 0;
 }
 
-Editor_Action_Args Editor_Place_Bob_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Place_Bob_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	return Editor_Tool::format_args_impl(parent);
 }
 

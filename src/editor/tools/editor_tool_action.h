@@ -24,7 +24,7 @@
 #include "editor_action_args.h"
 
 struct Editor_Tool;
-namespace Widelands {  class map; }
+namespace Widelands {class map;}
 struct Editor_Interactive;
 
 
@@ -41,23 +41,26 @@ struct Editor_Tool_Action {
 	Editor_Action_Args * args;
 
 	Editor_Tool_Action
-	(Editor_Tool & t, uint32_t ind,
-	 Widelands::Map & m, Widelands::Node_and_Triangle<> c,
-	 Editor_Interactive & p, Editor_Action_Args nargs):
-		tool(t), i(ind), map(m), center(c), parent(p) {
+		(Editor_Tool & t, uint32_t ind,
+		Widelands::Map & m, Widelands::Node_and_Triangle<> c,
+		Editor_Interactive & p, Editor_Action_Args nargs)
+			: tool(t), i(ind), map(m), center(c), parent(p)
+	{
 		args = new Editor_Action_Args(parent);
 		*args = nargs;
 		args->refcount++;
 	}
 
 	~Editor_Tool_Action() {
-		if (args->refcount <= 1) delete args;
+		if (args->refcount <= 1)
+			delete args;
 		else args->refcount--;
 	}
 
 	Editor_Tool_Action(const Editor_Tool_Action & b):
-		tool(b.tool), i(b.i), map(b.map), center(b.center), parent(b.parent), args(b.args)
-	{ args->refcount++; }
+		tool(b.tool), i(b.i), map(b.map),
+		center(b.center), parent(b.parent), args(b.args)
+	{args->refcount++;}
 };
 
 #endif
