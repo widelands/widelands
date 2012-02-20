@@ -12,6 +12,7 @@
 - Improved a lot of icons and button appearence.
 - Improved statistics window.
 - Improved the Widelands code to use less resources.
+- Improved OpenGL rendering which is now active by default.
 - Added a new piece of music to Widelands
 - Added new states and animations for unoccupied buildings and empty mines,
   to better indicate the current state of a building.
@@ -35,14 +36,16 @@
 - Fixed a bug that disallowed to connect to different servers (via
   metaserver) without prior restart of Widelands.
 - (Re)Fixed bug #536149: miner/master miner mixed up after enhancing
-  to deep mine.
+  to deep mine.  
 - Fixed bug #565406: focus for save window
 - Fixed bug #570055: Open house window on doubleclick even when minimized
 - Fixed bug #590528: add more details to a replay
 - Fixed bug #590631: All workers die, when warehouse/hq is destroyed
+- Fixed bug #594686: Roads not rendered correctly in opengl mode on some systems
 - Fixed bug #601400: Request::get_base_required_time:WARNING nr = 1 but
                      count is 1, which is not allowed according to the
                      comment for this function
+- Fixed bug #649037: Many menus are not repainted in OpenGL mode
 - Fixed bug #657266: Unoccupied helmsmithy animation contains a person
 - Fixed bug #672085: New stock menu layout too high for small resolutions
 - Fixed bug #672098: The priority buttons can be deactivated
@@ -50,7 +53,9 @@
 - Fixed bug #691928: Message icon is not updated in some cases when
                      receiving focus
 - Fixed bug #695035: Adjusted hotspots of buildings to fit into their space
+- Fixed bug #722196: OpenGL terrain renderer does not dither between adjacent fields
 - Fixed bug #722793: Ducks on land on Three Warriors
+- Fixed bug #722796: Minimap not shaded by terrain height in OpenGL
 - Fixed bug #723112: The name is not shown for resource coal in the 
                      resource dialog in the editor
 - Fixed bug #726699: Make the wares priority buttons in production sites
@@ -99,6 +104,7 @@
 - Fixed bug #886493: Default AI is set to none
 - Fixed bug #886572: After a while, increasing game speed makes the game
                      lag even at lower speeds
+- Fixed bug #887093: Make OpenGL the standard renderer
 - Fixed bug #902765: Show buttons in the bottom toolbar in the same
                      order, also for spectators
 - Fixed bug #902823: Show "increase/decrease capacity" buttons only
