@@ -13,14 +13,33 @@
 - Improved statistics window.
 - Improved the Widelands code to use less resources.
 - Improved OpenGL rendering which is now active by default.
+- Improved (slightly) the computer player through use of the new
+  dismantle feature.
+- Replaced the old libggz based metaserver support with our own ggz
+  independed solution, which brings some new features as well:
+    * The metaserver is now checking whether a game is connectable
+      if it is not, it sends an error message to the client to
+      inform it.
+    * System messages on the metaserver like global announcements
+      motd changes or Error-Messages are now imported to running
+      games and shown there as well.
+    * The metaserver does now check whether a client is still online
+      regulary and disconnects it, if it isn't.
+    * If the client gets disconnected from the metaserver during a
+      running game, the client is able to reconnect silently.
+    * Games can now have more than 7 connected clients
+    * The Version of Widelands used in a game is now shown as hover text
+      in the game list. If a game is connectable, but uses a different
+      version, a "?" icon is shown to visualise that difference.
 - Added a new piece of music to Widelands
 - Added new states and animations for unoccupied buildings and empty mines,
   to better indicate the current state of a building.
 - Made road textures world dependend and improved the style of the roads
   for each world.
-- Added basic seafaring functionality. ports, ships, shipyards are
-  already working as they should. Loading of settlers 2 seafaring
-  maps is supported as well. Scouting and colonization is not
+- Added basic seafaring functionality:
+    * Ports, ships and shipyards are already working as they should.
+    * Loading of settlers 2 seafaring maps is supported
+    * (Scouting and colonization *NOT* yet implemented)
   yet implemented.
 - Added port buildspace tool to the editor.
 - Added a new feature to list maps in the map selection menu in categories
@@ -33,30 +52,42 @@
 - Added feature to play as a random tribe or against a random tribe or
   random AI.
 - Added click animation for the mouse pointer
+- Added automatic release of second carrier (oxen, donkey, horse), if
+  the road traffic is not that strong anymore, that a second carrier
+  would be needed.
+- Added a new undo/redo feature to the Editor.
+
 - Fixed a bug that disallowed to connect to different servers (via
   metaserver) without prior restart of Widelands.
 - (Re)Fixed bug #536149: miner/master miner mixed up after enhancing
-  to deep mine.  
+  to deep mine.
 - Fixed bug #565406: focus for save window
 - Fixed bug #570055: Open house window on doubleclick even when minimized
 - Fixed bug #590528: add more details to a replay
 - Fixed bug #590631: All workers die, when warehouse/hq is destroyed
-- Fixed bug #594686: Roads not rendered correctly in opengl mode on some systems
+- Fixed bug #594686: Roads not rendered correctly in opengl mode on
+                     some systems
 - Fixed bug #601400: Request::get_base_required_time:WARNING nr = 1 but
                      count is 1, which is not allowed according to the
                      comment for this function
 - Fixed bug #649037: Many menus are not repainted in OpenGL mode
 - Fixed bug #657266: Unoccupied helmsmithy animation contains a person
+- Fixed bug #671485: Aged barbarian ware icons
 - Fixed bug #672085: New stock menu layout too high for small resolutions
 - Fixed bug #672098: The priority buttons can be deactivated
+- Fixed bug #674848: The fight against red player in barbarian tutorial 3
+                     can be won in just one fight
 - Fixed bug #683716: Better handling of "no ressources"
 - Fixed bug #691928: Message icon is not updated in some cases when
                      receiving focus
 - Fixed bug #695035: Adjusted hotspots of buildings to fit into their space
-- Fixed bug #722196: OpenGL terrain renderer does not dither between adjacent fields
+- Fixed bug #702011: Messages in multiplayer are translated by host
+                     before they are sent to client
+- Fixed bug #722196: OpenGL terrain renderer does not dither between
+                     adjacent fields
 - Fixed bug #722793: Ducks on land on Three Warriors
 - Fixed bug #722796: Minimap not shaded by terrain height in OpenGL
-- Fixed bug #723112: The name is not shown for resource coal in the 
+- Fixed bug #723112: The name is not shown for resource coal in the
                      resource dialog in the editor
 - Fixed bug #726699: Make the wares priority buttons in production sites
                      more intuitive
@@ -75,11 +106,12 @@
 - Fixed bug #779967: Text alignment on "Host a new game"
 - Fixed bug #786243: Add extra column to stock windows, if size would be to
                      big for the current screen resolution
-- Fixed bug #787365: Constr.Site & Prod.Site: Dim House Picture In 
+- Fixed bug #787365: Constr.Site & Prod.Site: Dim House Picture In
                      The Background
 - Fixed bug #787508: Remove use of barbarian stronghold
 - Fixed bug #791421: Editor: Map Options Editbox Keyboard Input
 - Fixed bug #795457: focus in chat window
+- Fixed bug #799201: New tab icon for workers list
 - Fixed bug #805089: Check client in chat commands, when first mentioned.
 - Fixed bug #808008: Delete outdated data when updating Widelands on Windows
 - Fixed bug #817078: "Watch window" should centre more suitably
@@ -114,6 +146,8 @@
 - Fixed bug #914462: possible bug in void BulldozeConfirm::think()
 - Fixed bug #924140: assertion failed if you press "up/down" button in
                      an empty message window
+- Fixed bug #924768: Rework barbarian barrier's statistics
+- Fixed bug #927110: font color not adapted to map color
 
 
 
