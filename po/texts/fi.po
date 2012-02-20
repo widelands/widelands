@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"POT-Creation-Date: 2012-02-19 18:23+0000\n"
 "PO-Revision-Date: 2011-03-21 20:18+0000\n"
 "Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:44+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-20 05:29+0000\n"
+"X-Generator: Launchpad (build 14833)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -309,11 +309,11 @@ msgstr ""
 "tietenkin käyttäjäyhteisömme keskustelufoorumit odottavat sinua osoitteessa "
 "www.widelands.org."
 
-#: ../../txts/developers:156
+#: ../../txts/developers:157
 msgid "Atlantean"
 msgstr ""
 
-#: ../../txts/developers:146
+#: ../../txts/developers:147
 msgid "Barbarian"
 msgstr "Barbaarit"
 
@@ -341,7 +341,7 @@ msgstr "Ctrl+L   Lataa kartta"
 msgid "CTRL+S   Save Map"
 msgstr "Ctrl+S   Tallenna kartta"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:144
 msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
@@ -373,7 +373,7 @@ msgstr "Sessiotallenteen luonti</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr ""
 
-#: ../../txts/developers:171
+#: ../../txts/developers:172
 msgid "Czech"
 msgstr "Tsekki"
 
@@ -381,7 +381,7 @@ msgstr "Tsekki"
 msgid "DELETE      Archive the current message"
 msgstr ""
 
-#: ../../txts/developers:178
+#: ../../txts/developers:179
 msgid "Dansk"
 msgstr "Tanska"
 
@@ -389,11 +389,11 @@ msgstr "Tanska"
 msgid "Development"
 msgstr "Kehitys"
 
-#: ../../txts/developers:313
+#: ../../txts/developers:314
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentaatio, Ohje ja Wiki"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:185
 msgid "Dutch"
 msgstr "Hollanti"
 
@@ -405,7 +405,7 @@ msgstr "E        Näytä/piilota tapahtumavalikko"
 msgid "Elders"
 msgstr "Vanhimmat"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:153
 msgid "Empire"
 msgstr "Keisarikunta"
 
@@ -429,15 +429,15 @@ msgstr "F11        Ota ruudunkaappaus"
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6          Näytä debug-konsoli (vain debug-versioissa)"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:192
 msgid "Finnish"
 msgstr "Suomi"
 
-#: ../../txts/developers:328
+#: ../../txts/developers:329
 msgid "Former elders"
 msgstr "Entiset vanhimmat"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:198
 msgid "French"
 msgstr "Ranska"
 
@@ -455,7 +455,7 @@ msgid ""
 "and modification"
 msgstr ""
 
-#: ../../txts/developers:204
+#: ../../txts/developers:205
 msgid "Galician"
 msgstr "Galego"
 
@@ -463,16 +463,16 @@ msgstr "Galego"
 msgid "General game control"
 msgstr "Yleinen pelin hallinta"
 
-#: ../../txts/developers:209
+#: ../../txts/developers:210
 msgid "German"
 msgstr "Saksa"
 
-#: ../../txts/developers:77
+#: ../../txts/developers:78
 msgid "Graphicians"
 msgstr "Graafikot"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:339
+#: ../../txts/developers:340
 msgid "Graphics"
 msgstr "Grafiikka"
 
@@ -480,7 +480,7 @@ msgstr "Grafiikka"
 msgid "H        Toggles main menu"
 msgstr "H        Näytä/piilota päävalikko"
 
-#: ../../txts/developers:221
+#: ../../txts/developers:222
 msgid "Hebrew"
 msgstr "Heprea"
 
@@ -502,11 +502,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home       Keskitä päänäkymä aloituspisteeseen"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid "Homepage"
 msgstr "Kotisivu"
 
-#: ../../txts/developers:304
+#: ../../txts/developers:305
 msgid "Homepage Coders"
 msgstr "Kotisivun koodarit"
 
@@ -514,7 +514,7 @@ msgstr "Kotisivun koodarit"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Miten näitä ehtoja voi soveltaa uusiin ohjelmiin?"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:227
 msgid "Hungarian"
 msgstr "Unkari"
 
@@ -601,7 +601,7 @@ msgid ""
 "licensee cannot impose that choice."
 msgstr ""
 
-#: ../../txts/developers:231
+#: ../../txts/developers:232
 msgid "Italian"
 msgstr "italialainen"
 
@@ -635,7 +635,7 @@ msgstr ""
 "liikkuvia objekteja (eläimiä) tai maastotyyppejä eli tekstuureja Ctrl-"
 "napsautuksella."
 
-#: ../../txts/developers:270
+#: ../../txts/developers:271
 msgid "Linux Distributions"
 msgstr "Linux-jakelut"
 
@@ -654,7 +654,7 @@ msgid ""
 "messages."
 msgstr ""
 
-#: ../../txts/developers:129
+#: ../../txts/developers:130
 msgid "Maps and Missions"
 msgstr "Kartat ja missiot"
 
@@ -662,7 +662,7 @@ msgstr "Kartat ja missiot"
 msgid "Miners will only work if supplied with food."
 msgstr "Kaivostyöläiset tekevät töitä vain, kun saavat ruokaa."
 
-#: ../../txts/developers:107
+#: ../../txts/developers:108
 msgid "Musicians"
 msgstr "Muusikot"
 
@@ -670,7 +670,7 @@ msgstr "Muusikot"
 msgid "N               Toggle messages ('news')"
 msgstr ""
 
-#: ../../txts/developers:166
+#: ../../txts/developers:167
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -680,7 +680,7 @@ msgstr ""
 msgid "No warranty"
 msgstr ""
 
-#: ../../txts/developers:292
+#: ../../txts/developers:293
 msgid "Non Unix Distributions"
 msgstr "Muut kuin Unix-jakelut"
 
@@ -722,11 +722,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Verkko-ohje"
 
-#: ../../txts/developers:357
+#: ../../txts/developers:358
 msgid "Other"
 msgstr "Muut"
 
-#: ../../txts/developers:281
+#: ../../txts/developers:282
 msgid "Other Unix Distributions"
 msgstr "Muut Unix-jakelut"
 
@@ -756,7 +756,7 @@ msgstr "PageUp         Lisää pelinopeutta"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr ""
 
-#: ../../txts/developers:266
+#: ../../txts/developers:267
 msgid "Packagers"
 msgstr "Paketoijat"
 
@@ -770,7 +770,7 @@ msgstr ""
 "Toivomme sinun littävän raporttiin riittävät taustatiedot virheen "
 "paikantamiseksi. Kerro meille:"
 
-#: ../../txts/developers:236
+#: ../../txts/developers:237
 msgid "Polish"
 msgstr "Puola"
 
@@ -819,7 +819,7 @@ msgstr "Pelien toisto</p>"
 msgid "Reporting Bugs"
 msgstr "Vikaraportit"
 
-#: ../../txts/developers:244
+#: ../../txts/developers:245
 msgid "Russian"
 msgstr "Venäjä"
 
@@ -847,13 +847,13 @@ msgstr ""
 "Välilyönti toimii kuten pelissäkin, näyttäen tai piilottaen "
 "rakennusapusymbolit."
 
-#: ../../txts/developers:167
+#: ../../txts/developers:168
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 
-#: ../../txts/developers:249
+#: ../../txts/developers:250
 msgid "Slovak"
 msgstr "Slovakki"
 
@@ -868,15 +868,15 @@ msgstr ""
 "rakennus on puiden tai teiden ympäröimä, sen tuotanto lakkaa."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:345
+#: ../../txts/developers:346
 msgid "Sound"
 msgstr "Ääni"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:120
 msgid "Sound Effects"
 msgstr "Äänitehosteet"
 
-#: ../../txts/developers:254
+#: ../../txts/developers:255
 msgid "Spanish"
 msgstr "Espanja"
 
@@ -892,7 +892,7 @@ msgstr ""
 msgid "Status"
 msgstr "Tila"
 
-#: ../../txts/developers:259
+#: ../../txts/developers:260
 msgid "Swedish"
 msgstr "Ruotsi"
 
@@ -1063,11 +1063,11 @@ msgstr ""
 "Ikkuna minimoituu/maksimoituu kun otsikkokenttää klikataan hiiren "
 "keskinapilla tai hiiren vasemmalla napilla samalla pitäen CTRL alhaalla."
 
-#: ../../txts/developers:350
+#: ../../txts/developers:351
 msgid "Translation"
 msgstr "Käännökset"
 
-#: ../../txts/developers:163
+#: ../../txts/developers:164
 msgid "Translators"
 msgstr "Kääntäjät"
 

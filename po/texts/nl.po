@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"POT-Creation-Date: 2012-02-19 18:23+0000\n"
 "PO-Revision-Date: 2011-09-19 08:21+0000\n"
 "Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:44+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-20 05:29+0000\n"
+"X-Generator: Launchpad (build 14833)\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -464,11 +464,11 @@ msgstr ""
 "Nog meer vragen? Onze veelgestelde vragen (FAQ's), de wiki en uiteraard onze "
 "gemeenschapsfora zijn te vinden op www.widelands.org."
 
-#: ../../txts/developers:156
+#: ../../txts/developers:157
 msgid "Atlantean"
 msgstr "Atlantiërs"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:147
 msgid "Barbarian"
 msgstr "Barbaren"
 
@@ -495,7 +495,7 @@ msgstr "CTRL+L   Kaart laden"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S    Kaart opslaan"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:144
 msgid "Campaign Story"
 msgstr "Campagneverhaal"
 
@@ -538,7 +538,7 @@ msgstr "Een sessieverslag opnemen</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10   Sluit het spel direct"
 
-#: ../../txts/developers:171
+#: ../../txts/developers:172
 msgid "Czech"
 msgstr "Tsjechisch"
 
@@ -546,7 +546,7 @@ msgstr "Tsjechisch"
 msgid "DELETE      Archive the current message"
 msgstr "DELETE      Archiveer het huidige bericht"
 
-#: ../../txts/developers:178
+#: ../../txts/developers:179
 msgid "Dansk"
 msgstr "Deens"
 
@@ -554,11 +554,11 @@ msgstr "Deens"
 msgid "Development"
 msgstr "Ontwikkeling"
 
-#: ../../txts/developers:313
+#: ../../txts/developers:314
 msgid "Documentation, Help and Wiki"
 msgstr "Documentatie, help en wiki"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:185
 msgid "Dutch"
 msgstr "Nederlands"
 
@@ -570,7 +570,7 @@ msgstr "E        Schakel gebeurtenissenmenu aan/uit"
 msgid "Elders"
 msgstr "Ouderlingen"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:153
 msgid "Empire"
 msgstr "Empiren"
 
@@ -594,15 +594,15 @@ msgstr "F11         Maak een schermafdruk"
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6           Toont de debugconsole (alleen in debug-builds)"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:192
 msgid "Finnish"
 msgstr "Fins"
 
-#: ../../txts/developers:328
+#: ../../txts/developers:329
 msgid "Former elders"
 msgstr "Voormalige ouderlingen"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:198
 msgid "French"
 msgstr "Frans"
 
@@ -623,7 +623,7 @@ msgstr ""
 "GNU algemene publieke licentiebepalingen en -voorwaarden om te kopiëren, "
 "verspreiden en wijzigen"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:205
 msgid "Galician"
 msgstr "Galicisch"
 
@@ -631,16 +631,16 @@ msgstr "Galicisch"
 msgid "General game control"
 msgstr "Algemene spelbesturing"
 
-#: ../../txts/developers:209
+#: ../../txts/developers:210
 msgid "German"
 msgstr "Duits"
 
-#: ../../txts/developers:77
+#: ../../txts/developers:78
 msgid "Graphicians"
 msgstr "Grafici"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:339
+#: ../../txts/developers:340
 msgid "Graphics"
 msgstr "Afbeeldingen"
 
@@ -648,7 +648,7 @@ msgstr "Afbeeldingen"
 msgid "H        Toggles main menu"
 msgstr "H        Schakel hoofdmenu aan/uit"
 
-#: ../../txts/developers:221
+#: ../../txts/developers:222
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
@@ -674,11 +674,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home        Centreer hoofdkaartvenster op startlocatie"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:304
+#: ../../txts/developers:305
 msgid "Homepage Coders"
 msgstr "Website developers"
 
@@ -686,7 +686,7 @@ msgstr "Website developers"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Hoe deze bepalingen op uw nieuwe Programma's toe te passen."
 
-#: ../../txts/developers:226
+#: ../../txts/developers:227
 msgid "Hungarian"
 msgstr "Hongaars"
 
@@ -799,7 +799,7 @@ msgstr ""
 "verspreiden door middel van een ander systeem en een gelicenseerde kan die "
 "keuze niet afdwingen."
 
-#: ../../txts/developers:231
+#: ../../txts/developers:232
 msgid "Italian"
 msgstr "Italiaans"
 
@@ -832,7 +832,7 @@ msgstr ""
 "Net als met natuurlijke objecten (blobs), kun je ook meerdere dieren of "
 "bodemtypes selecteren met CTRL + muisklik."
 
-#: ../../txts/developers:270
+#: ../../txts/developers:271
 msgid "Linux Distributions"
 msgstr "Linux Distributies"
 
@@ -854,7 +854,7 @@ msgstr ""
 "te bekijken, daarna 'G' van Ga Naar en de Deletetoets om berichten te "
 "archiveren."
 
-#: ../../txts/developers:129
+#: ../../txts/developers:130
 msgid "Maps and Missions"
 msgstr "Kaarten en missies"
 
@@ -862,7 +862,7 @@ msgstr "Kaarten en missies"
 msgid "Miners will only work if supplied with food."
 msgstr "Mijnwerkers werken niet zonder voedsel."
 
-#: ../../txts/developers:107
+#: ../../txts/developers:108
 msgid "Musicians"
 msgstr "Musici"
 
@@ -870,7 +870,7 @@ msgstr "Musici"
 msgid "N               Toggle messages ('news')"
 msgstr "N               Zet berichten aan ('nieuws')"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:167
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -882,7 +882,7 @@ msgstr ""
 msgid "No warranty"
 msgstr "Geen garantie"
 
-#: ../../txts/developers:292
+#: ../../txts/developers:293
 msgid "Non Unix Distributions"
 msgstr "Niet-Unix Distributies"
 
@@ -923,11 +923,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Online Hulp"
 
-#: ../../txts/developers:357
+#: ../../txts/developers:358
 msgid "Other"
 msgstr "Overige"
 
-#: ../../txts/developers:281
+#: ../../txts/developers:282
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributies"
 
@@ -955,7 +955,7 @@ msgstr "PAGEUP         Verhoog spelsnelheid"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr "PAUZE Pauzeert het spel (enkel voor locale spellen)"
 
-#: ../../txts/developers:266
+#: ../../txts/developers:267
 msgid "Packagers"
 msgstr "Pakketmakers"
 
@@ -968,7 +968,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr "Voorzie ons van voldoende achtergrondinformatie. vertel ons:"
 
-#: ../../txts/developers:236
+#: ../../txts/developers:237
 msgid "Polish"
 msgstr "Pools"
 
@@ -1017,7 +1017,7 @@ msgstr "Herhalingen</p>"
 msgid "Reporting Bugs"
 msgstr "Bugs doorgeven"
 
-#: ../../txts/developers:244
+#: ../../txts/developers:245
 msgid "Russian"
 msgstr "Russisch"
 
@@ -1046,7 +1046,7 @@ msgstr ""
 "SPATIEBALK werkt net als tijdens het normale spel. Het zet de bouwhulp aan "
 "of uit."
 
-#: ../../txts/developers:167
+#: ../../txts/developers:168
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -1054,7 +1054,7 @@ msgstr ""
 "Zie https://translations.launchpad.net/widelands voor de lijst van mensen "
 "die hebben geholpen Widelands te vertalen via launchpad.net."
 
-#: ../../txts/developers:249
+#: ../../txts/developers:250
 msgid "Slovak"
 msgstr "Slowaaks"
 
@@ -1069,15 +1069,15 @@ msgstr ""
 "het gebouw volledig omringd is door bomen of wegen, zal de productie stoppen."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:345
+#: ../../txts/developers:346
 msgid "Sound"
 msgstr "Geluid"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:120
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
-#: ../../txts/developers:254
+#: ../../txts/developers:255
 msgid "Spanish"
 msgstr "Spaans"
 
@@ -1093,7 +1093,7 @@ msgstr ""
 msgid "Status"
 msgstr "Status"
 
-#: ../../txts/developers:259
+#: ../../txts/developers:260
 msgid "Swedish"
 msgstr "Zweeds"
 
@@ -1350,11 +1350,11 @@ msgstr ""
 "Om een venster te minimaliseren/maximaliseren, klik op de titelbalk van dat "
 "venster met de middelste of linker muisknop, terwijl je CTRL ingedrukt houdt."
 
-#: ../../txts/developers:350
+#: ../../txts/developers:351
 msgid "Translation"
 msgstr "Vertaling"
 
-#: ../../txts/developers:163
+#: ../../txts/developers:164
 msgid "Translators"
 msgstr "Vertalers"
 

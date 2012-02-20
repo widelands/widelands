@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-16 10:12+0100\n"
-"PO-Revision-Date: 2012-02-16 10:26+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-02-19 21:29+0000\n"
+"Last-Translator: Tino <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:48+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-20 05:32+0000\n"
+"X-Generator: Launchpad (build 14833)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1052,7 +1052,7 @@ msgstr "Baue große Gebäude"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr "baue Hafengebäude"
+msgstr "Baue Hafengebäude"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
@@ -1603,7 +1603,7 @@ msgstr "Zerstören"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr "abreißen"
+msgstr "Abreißen"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
