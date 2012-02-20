@@ -104,6 +104,7 @@ private:
 		 Widelands::Player           const *,
 		 Rect                                rc,
 		 Point                               viewpt,
+		 Point                               framept,
 		 uint32_t                            flags);
 
 	/**

@@ -976,7 +976,10 @@ void GameView::renderminimap
 	 Point                               const viewpoint,
 	 uint32_t                            const flags)
 {
-	draw_minimap(egbase, player, m_rect, viewpoint - m_offset, flags);
+	draw_minimap
+		(egbase, player, m_rect, viewpoint -
+			((flags & MiniMap::Zoom2) ? Point(m_offset.x / 2, m_offset.y / 2) : m_offset),
+				viewpoint, flags);
 }
 
 
@@ -1201,26 +1204,27 @@ static void draw_minimap_int
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
 	 Point                               const viewpoint,
+	 Point                               const framepoint,
 	 uint32_t                            const flags)
 {
 	Widelands::Map const & map = egbase.map();
 
-	int32_t mapheight = (flags & MiniMap::Zoom2 ? rc.h / 2 : rc.h);
+	int32_t mapheight = map.get_height();
 
 	// size of the display frame
 	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
 	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
 
 	Point ptopleft; // top left point of the current display frame
-	ptopleft.x = viewpoint.x + mapwidth / 2 - xsize;
+	ptopleft.x = framepoint.x + mapwidth / 2 - xsize;
 	if (ptopleft.x < 0) ptopleft.x += mapwidth;
-	ptopleft.y = viewpoint.y + mapheight / 2 - ysize;
+	ptopleft.y = framepoint.y + mapheight / 2 - ysize;
 	if (ptopleft.y < 0) ptopleft.y += mapheight;
 
 	Point pbottomright; // bottom right point of the current display frame
-	pbottomright.x = viewpoint.x + mapwidth / 2 + xsize;
+	pbottomright.x = framepoint.x + mapwidth / 2 + xsize;
 	if (pbottomright.x >= mapwidth) pbottomright.x -= mapwidth;
-	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
+	pbottomright.y = framepoint.y + mapheight / 2 + ysize;
 	if (pbottomright.y >= mapheight) pbottomright.y -= mapheight;
 
 	uint32_t modx = pbottomright.x % 2;
@@ -1306,6 +1310,7 @@ void GameView::draw_minimap
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
 	 Point                               const viewpt,
+	 Point                               const framept,
 	 uint32_t                            const flags)
 {
 	// First create a temporary SDL Surface to draw the minimap. This Surface is
@@ -1341,12 +1346,12 @@ void GameView::draw_minimap
 	case sizeof(Uint16):
 		draw_minimap_int<Uint16>
 			(pixels, surface->pitch, *surface->format,
-			 w, egbase, player, rc2, viewpt, flags);
+			 w, egbase, player, rc2, viewpt, framept, flags);
 		break;
 	case sizeof(Uint32):
 		draw_minimap_int<Uint32>
 			(pixels, surface->pitch, *surface->format,
-			 w, egbase, player, rc2, viewpt, flags);
+			 w, egbase, player, rc2, viewpt, framept, flags);
 		break;
 	default:
 		assert (false);
