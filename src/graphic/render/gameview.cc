@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,6 @@
 #include "wui/overlay_manager.h"
 
 #include "terrain_sdl.h"
-#include "terrain_opengl.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;
@@ -214,8 +213,10 @@ void GameView::rendermap
 				f_vert.tx += TRIANGLE_WIDTH / 2;
 				r_vert.tx += TRIANGLE_WIDTH / 2;
 			} else {
-				bl_vert.tx -= TRIANGLE_WIDTH / 2;
-				br_vert.tx -= TRIANGLE_WIDTH / 2;
+				f_vert.tx += TRIANGLE_WIDTH;
+				r_vert.tx += TRIANGLE_WIDTH;
+				bl_vert.tx += TRIANGLE_WIDTH / 2;
+				br_vert.tx += TRIANGLE_WIDTH / 2;
 			}
 
 			draw_field //  Render ground
@@ -986,16 +987,16 @@ void GameView::renderminimap
  * into the bitmap.
  *
  * Vertices:
- *   - f_vert vertice of the field
- *   - r_vert vertice right of the field
- *   - bl_vert vertice bottom left of the field
- *   - br_vert vertice bottom right of the field
+ *   - f_vert vertex of the field
+ *   - r_vert vertex right of the field
+ *   - bl_vert vertex bottom left of the field
+ *   - br_vert vertex bottom right of the field
  *
  * Textures:
  *   - f_r_texture Terrain of the triangle right of the field
  *   - f_d_texture Terrain of the triangle under of the field
- *   - tr_d_texture Terrain of the triangle to of the right triangle ??
- *   - l_r_texture Terrain of the triangle left if the down triangle ??
+ *   - tr_d_texture Terrain of the triangle top of the right triangle ??
+ *   - l_r_texture Terrain of the triangle left of the down triangle ??
  *
  *             (tr_d)
  *
@@ -1018,43 +1019,7 @@ void GameView::draw_field
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	upcast(SurfaceSDL, sdlsurf, m_surface.get());
-	if (sdlsurf)
-	{
-		sdlsurf->set_subwin(subwin);
-		switch (sdlsurf->format().BytesPerPixel) {
-		case 2:
-			draw_field_int<Uint16>
-				(*sdlsurf,
-				 f_vert, r_vert, bl_vert, br_vert,
-				 roads,
-				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
-			break;
-		case 4:
-			draw_field_int<Uint32>
-				(*sdlsurf,
-				 f_vert, r_vert, bl_vert, br_vert,
-				 roads,
-				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
-			break;
-		default:
-			assert(false);
-		}
-		sdlsurf->unset_subwin();
-	}
-#ifdef USE_OPENGL
-	else
-	{
-		// Draw triangle right (bottom) of the field
-		draw_field_opengl
-			(subwin, f_vert, br_vert, r_vert, f_r_texture);
-		// Draw triangle bottom of the field
-		draw_field_opengl
-			(subwin, f_vert, bl_vert, br_vert, f_d_texture);
-		// Draw the roads
-		draw_roads_opengl(subwin, roads, f_vert, r_vert, bl_vert, br_vert);
-	}
-#endif
+
 }
 
 /*
@@ -1375,36 +1340,4 @@ void GameView::draw_minimap
 	PictureID picture = g_gr->convert_sdl_surface_to_picture(surface);
 
 	m_surface->blit(Point(rc.x, rc.y), picture, rc2);
-}
-
-void GameView::rendermap_init()
-{
-#ifdef USE_OPENGL
-	if (g_opengl) {
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-		glScalef
-			(1.0f / static_cast<GLfloat>(TEXTURE_WIDTH),
-			 1.0f / static_cast<GLfloat>(TEXTURE_HEIGHT), 1);
-		glDisable(GL_BLEND);
-
-		// Use scissor test to clip the window. This takes coordinates in screen
-		// coordinates (y goes from bottom to top)
-		glScissor
-			(m_rect.x, g_gr->get_yres() - m_rect.y - m_rect.h,
-			 m_rect.w, m_rect.h);
-		glEnable(GL_SCISSOR_TEST);
-	}
-#endif
-}
-
-void GameView::rendermap_deint()
-{
-#ifdef USE_OPENGL
-	if (g_opengl) {
-		glDisable(GL_SCISSOR_TEST);
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-	}
-#endif
 }

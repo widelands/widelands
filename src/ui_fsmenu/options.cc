@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2012 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -468,7 +468,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_label_opengl
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,
-		 _("OpenGL rendering *Highly experimental!*"), UI::Align_VCenter),
+		 _("OpenGL rendering"), UI::Align_VCenter),
 	m_transparent_chat (this, Point(get_w() * 19 / 200, get_h() * 8645 / 10000)),
 	m_label_transparent_chat
 		(this,
@@ -658,7 +658,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	opt.remove_syncstreams    = m_opt_section.get_bool
 		("remove_syncstreams", true);
 	opt.opengl                = m_opt_section.get_bool
-		("opengl", false);
+		("opengl", true);
 	opt.transparent_chat      = m_opt_section.get_bool
 		("transparent_chat", true);
 	return opt;

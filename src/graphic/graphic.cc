@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1034,8 +1034,9 @@ uint32_t Graphic::get_maptexture
 */
 void Graphic::animate_maptextures(uint32_t time)
 {
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i)
+	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->animate(time);
+	}
 }
 
 /**
@@ -1043,8 +1044,9 @@ void Graphic::animate_maptextures(uint32_t time)
  */
 void Graphic::reset_texture_animation_reminder()
 {
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i)
+	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->reset_was_animated();
+	}
 }
 
 /**
@@ -1164,8 +1166,9 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 		return 0;
 }
 
+
 /**
- * Sets the name of the current world and loads the fitting road textures
+ * Sets the name of the current world and loads the fitting road and edge textures
  */
 void Graphic::set_world(std::string worldname) {
 	char buf[255];
@@ -1179,6 +1182,10 @@ void Graphic::set_world(std::string worldname) {
 	m_roadtextures->pic_road_normal = get_picture(PicMod_Game, buf, false);
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
 	m_roadtextures->pic_road_busy = get_picture(PicMod_Game, buf, false);
+
+	// load edge texture
+	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
+	m_edgetexture = get_picture(PicMod_Game, buf, false);
 }
 
 /**
@@ -1190,4 +1197,13 @@ PictureID Graphic::get_road_texture(int32_t const roadtex)
 {
 	return
 		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
+}
+
+/**
+ * Returns the alpha mask texture for edges.
+ * \return The edge texture (alpha mask)
+ */
+PictureID Graphic::get_edge_texture()
+{
+	return m_edgetexture;
 }

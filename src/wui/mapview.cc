@@ -31,6 +31,8 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/render/gameview.h"
+#include "graphic/render/gameview_opengl.h"
+#include "graphic/render/gameview_sdl.h"
 
 #include "upcast.h"
 
@@ -93,12 +95,17 @@ void Map_View::draw(RenderTarget & dst)
 
 	egbase.map().overlay_manager().load_graphics();
 
-	GameView gameview(dst);
+	GameView * gameview;
+	if (g_opengl) {
+		gameview = new GameViewOpenGL(dst);
+	} else {
+		gameview = new GameViewSDL(dst);
+	}
 
 	if (upcast(Interactive_Player const, interactive_player, &intbase()))
-		gameview.rendermap(egbase, interactive_player->player(), m_viewpoint);
+		gameview->rendermap(egbase, interactive_player->player(), m_viewpoint);
 	else
-		gameview.rendermap(egbase, m_viewpoint);
+		gameview->rendermap(egbase, m_viewpoint);
 
 	m_complete_redraw_needed = false;
 	if (char const * const text = tooltip())

@@ -264,7 +264,7 @@ m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
 m_gfx_w(0), m_gfx_h(0),
 m_gfx_fullscreen       (false),
-m_gfx_opengl           (false),
+m_gfx_opengl           (true),
 m_default_datadirs     (true),
 m_homedir(FileSystem::GetHomedir() + "/.widelands"),
 m_redirected_stdio(false)
@@ -511,6 +511,10 @@ restart:
 				if (ev.user.code == CHANGE_MUSIC)
 					g_sound_handler.change_music();
 
+				break;
+			case SDL_VIDEOEXPOSE:
+				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
+				g_gr->update_fullscreen();
 				break;
 			}
 		}
@@ -807,7 +811,7 @@ bool WLApplication::init_settings() {
 	m_gfx_fullscreen = s.get_bool("fullscreen", false);
 
 #if USE_OPENGL
-	m_gfx_opengl = s.get_bool("opengl", false);
+	m_gfx_opengl = s.get_bool("opengl", true);
 #endif
 
 	// KLUDGE!
@@ -1352,8 +1356,7 @@ void WLApplication::show_usage()
 		<<
 		_
 			 (" --opengl=[0|1]\n"
-			 "                      Enables opengl rendering\n"
-			 "                      *EXPERIMENTAL*\n")
+			 "                      Enables OpenGL rendering\n")
 #endif
 		<<
 		_
