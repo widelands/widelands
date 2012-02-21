@@ -69,7 +69,7 @@ void draw_field_opengl
 		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
 		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
-		// initialize all texture layers to prevent bug when some layers are overleaped
+		// initialize all texture layers to prevent bug if some layers are skipped
 		for (int i = 1; i < 5; i++) {
 			glActiveTextureARB(GL_TEXTURE0_ARB + i);
 			glEnable(GL_TEXTURE_2D);
