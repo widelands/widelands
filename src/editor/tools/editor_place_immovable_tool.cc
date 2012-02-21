@@ -34,14 +34,17 @@
  * and places this on the current field
 */
 int32_t Editor_Place_Immovable_Tool::handle_click_impl
-(Widelands::Map           &           map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive         &         parent, Editor_Action_Args & args) {
+	(Widelands::Map            &         map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive         &         parent,
+	Editor_Action_Args         &         args)
+{
 	const int32_t radius = args.sel_radius;
 	if (not get_nr_enabled())
 		return radius;
 	Widelands::Editor_Game_Base & egbase = parent.egbase();
-	if (args.oimmov_types.empty()) {
+	if (args.oimmov_types.empty())
+	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
@@ -53,7 +56,8 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 		} while (mr.advance(map));
 	}
 
-	if (not args.nimmov_types.empty()) {
+	if (not args.nimmov_types.empty())
+	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
@@ -72,8 +76,9 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 }
 
 int32_t Editor_Place_Immovable_Tool::handle_undo_impl
-(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent, Editor_Action_Args & args) {
+	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
 	const int32_t radius = args.sel_radius;
 	if (args.oimmov_types.empty())
 		return radius;
@@ -85,8 +90,10 @@ int32_t Editor_Place_Immovable_Tool::handle_undo_impl
 	 (map.get_fcoords(center.node), radius));
 	std::list<std::string>::iterator i = args.oimmov_types.begin();
 	do {
-		if (upcast(Widelands::Immovable, immovable,
-		           mr.location().field->get_immovable())) {
+		if
+			(upcast(Widelands::Immovable, immovable,
+		           mr.location().field->get_immovable()))
+		{
 			immovable->remove(egbase);
 		}
 		if (!i->empty())
@@ -97,7 +104,8 @@ int32_t Editor_Place_Immovable_Tool::handle_undo_impl
 	return radius + 2;
 }
 
-Editor_Action_Args Editor_Place_Immovable_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Place_Immovable_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	return Editor_Tool::format_args_impl(parent);
 }
 

@@ -26,10 +26,11 @@
 
 /// Increases the heights by a value. Chages surrounding nodes if necessary.
 int32_t Editor_Increase_Height_Tool::handle_click_impl
-(Widelands::Map & map,
- Widelands::Node_and_Triangle<> center,
- Editor_Interactive & parent,
- Editor_Action_Args & args) {
+	(Widelands::Map & map,
+	Widelands::Node_and_Triangle<> center,
+	Editor_Interactive & parent,
+	Editor_Action_Args & args)
+{
 	if (args.origHights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
@@ -48,14 +49,16 @@ int32_t Editor_Increase_Height_Tool::handle_click_impl
 }
 
 int32_t Editor_Increase_Height_Tool::handle_undo_impl
-(Widelands::Map & map,
- Widelands::Node_and_Triangle<> center,
- Editor_Interactive & parent,
- Editor_Action_Args & args) {
+	(Widelands::Map & map,
+	Widelands::Node_and_Triangle<> center,
+	Editor_Interactive & parent,
+	Editor_Action_Args & args)
+{
 	return m_decrease_tool.handle_undo_impl(map, center, parent, args);
 }
 
-Editor_Action_Args Editor_Increase_Height_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Increase_Height_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	Editor_Action_Args a(parent);
 	a.change_by = m_change_by;
 	return a;

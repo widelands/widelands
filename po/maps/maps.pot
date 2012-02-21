@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-19 18:23+0000\n"
+"POT-Creation-Date: 2012-02-20 18:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -250,7 +250,6 @@ msgid ""
 msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
-#: ../../maps/Lake of tranquility2.wmf/elemental:7
 msgid ""
 "Lake of Tranquility"
 msgstr ""
@@ -429,7 +428,6 @@ msgid ""
 msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
-#: ../../maps/Lake of tranquility2.wmf/elemental:9
 msgid ""
 "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
 msgstr ""

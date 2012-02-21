@@ -32,10 +32,12 @@ struct Editor_Unset_Port_Space_Tool : public Editor_Tool {
 	Editor_Unset_Port_Space_Tool();
 
 	int32_t handle_click_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	int32_t handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	char const * get_sel_impl() const {return FSEL_EUPS_FILENAME;}
 };
@@ -46,10 +48,12 @@ struct Editor_Set_Port_Space_Tool : public Editor_Tool {
 	Editor_Set_Port_Space_Tool(Editor_Unset_Port_Space_Tool &);
 
 	int32_t handle_click_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	int32_t handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	char const * get_sel_impl() const {return FSEL_ESPS_FILENAME;}
 
@@ -58,6 +62,6 @@ private:
 };
 
 int32_t Editor_Tool_Set_Port_Space_Callback
-(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 
 #endif

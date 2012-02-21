@@ -31,35 +31,45 @@
  */
 
 void Editor_Draw_Tool::add_action
-(Editor_Tool_Action ac, Editor_Action_Args & args) {
+(Editor_Tool_Action ac, Editor_Action_Args & args)
+{
 	args.draw_actions.push_back(new Editor_Tool_Action(ac));
 }
 
 int32_t Editor_Draw_Tool::handle_click_impl
-(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent, Editor_Action_Args & args) {
+	(Widelands::Map & map, Widelands::Node_and_Triangle<Widelands::Coords> center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
 
-	for (std::list<Editor_Tool_Action *>::iterator i = args.draw_actions.begin();
+	for
+		(std::list<Editor_Tool_Action *>::iterator i = args.draw_actions.begin();
 	        i != args.draw_actions.end();
-	        i++) {
-		(*i)->tool.handle_click(
-		    static_cast<Editor_Tool::Tool_Index>((*i)->i), (*i)->map, (*i)->center, (*i)->parent, *((*i)->args));
+	        i++)
+	{
+		(*i)->tool.handle_click
+			(static_cast<Editor_Tool::Tool_Index>((*i)->i),
+				(*i)->map, (*i)->center, (*i)->parent, *((*i)->args));
 	}
 	return args.draw_actions.size();
 }
 
 int32_t Editor_Draw_Tool::handle_undo_impl
-(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent, Editor_Action_Args & args) {
-	for (std::list<Editor_Tool_Action *>::reverse_iterator i = args.draw_actions.rbegin();
+	(Widelands::Map & map, Widelands::Node_and_Triangle<Widelands::Coords> center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
+	for
+		(std::list<Editor_Tool_Action *>::reverse_iterator i = args.draw_actions.rbegin();
 	        i != args.draw_actions.rend();
-	        i++) {
-		(*i)->tool.handle_undo(
-		    static_cast<Editor_Tool::Tool_Index>((*i)->i), (*i)->map, (*i)->center, (*i)->parent, *((*i)->args));
+	        i++)
+	{
+		(*i)->tool.handle_undo
+		(static_cast<Editor_Tool::Tool_Index>((*i)->i),
+			(*i)->map, (*i)->center, (*i)->parent, *((*i)->args));
 	}
 	return args.draw_actions.size();
 }
 
-Editor_Action_Args Editor_Draw_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Draw_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	return Editor_Tool::format_args_impl(parent);
 }

@@ -33,7 +33,8 @@ static int32_t m_current_player;
  * static callback function for overlay calculation
  */
 int32_t Editor_Tool_Set_Starting_Pos_Callback
-(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t) {
+	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
+{
 	assert(data);
 	Widelands::Map const & map = *static_cast<Widelands::Map const *>(data);
 
@@ -58,16 +59,18 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 }
 
 Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
-	: Editor_Tool(*this, *this, false), m_current_sel_pic(0) {
+	: Editor_Tool(*this, *this, false), m_current_sel_pic(0)
+{
 	m_current_player = 0;
 	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
 }
 
 
 int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
-(Widelands::Map           &           map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive &, Editor_Action_Args &) {
+	(Widelands::Map           &          map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive &, Editor_Action_Args &)
+{
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -93,7 +96,8 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 		//  check if field is valid
 		if
 		(Editor_Tool_Set_Starting_Pos_Callback
-		        (map.get_fcoords(center.node), &map, 0)) {
+		        (map.get_fcoords(center.node), &map, 0))
+		{
 			Overlay_Manager & overlay_manager = map.overlay_manager();
 			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, picid);
@@ -112,7 +116,8 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 
 Widelands::Player_Number Editor_Set_Starting_Pos_Tool::get_current_player
 () const
-throw() {
+throw()
+{
 	return m_current_player;
 }
 

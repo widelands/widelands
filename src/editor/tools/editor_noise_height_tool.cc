@@ -28,15 +28,17 @@
 
 /// Sets the heights to random values. Changes surrounding nodes if necessary.
 int32_t Editor_Noise_Height_Tool::handle_click_impl
-(Widelands::Map           &           map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive         &         parent,
- Editor_Action_Args & args) {
+	(Widelands::Map           &           map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive         &         parent,
+	Editor_Action_Args & args)
+{
 	if (args.origHights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+		 (map.get_fcoords(center.node),
+		  args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
 		do args.origHights.push_back(mr.location().field->get_height());
 		while (mr.advance(map));
 	}
@@ -59,19 +61,20 @@ int32_t Editor_Noise_Height_Tool::handle_click_impl
 		      (static_cast<double>
 		       (args.m_interval.max - args.m_interval.min + 1) * rand()
 		       /
-		       (RAND_MAX + 1.0)))
-		    );
+		       (RAND_MAX + 1.0))));
 	} while (mr.advance(map));
 	return mr.radius() + max;
 }
 
 int32_t Editor_Noise_Height_Tool::handle_undo_impl
-(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent, Editor_Action_Args & args) {
+	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
 	return m_set_tool.handle_undo_impl(map, center, parent, args);
 }
 
-Editor_Action_Args Editor_Noise_Height_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Noise_Height_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	Editor_Action_Args a(parent);
 	a.m_interval = m_interval;
 	return a;

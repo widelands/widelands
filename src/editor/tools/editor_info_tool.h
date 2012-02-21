@@ -27,7 +27,8 @@ struct Editor_Info_Tool : public Editor_Tool {
 	Editor_Info_Tool() : Editor_Tool(*this, *this, false) {}
 
 	int32_t handle_click_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	char const * get_sel_impl() const {return "pics/fsel_editor_info.png";}
 };

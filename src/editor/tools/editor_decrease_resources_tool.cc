@@ -35,15 +35,15 @@
  * there is not already another resource there.
 */
 int32_t Editor_Decrease_Resources_Tool::handle_click_impl
-(Widelands::Map           &           map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive         &         parent,
- Editor_Action_Args         &         args
-) {
+	(Widelands::Map           &           map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive         &         parent,
+	Editor_Action_Args         &         args)
+{
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
-	 Widelands::Area<Widelands::FCoords>
-	 (map.get_fcoords(center.node), args.sel_radius));
+	Widelands::Area<Widelands::FCoords>
+	(map.get_fcoords(center.node), args.sel_radius));
 	do {
 		int32_t res    = mr.location().field->get_resources();
 		int32_t amount = mr.location().field->get_resources_amount();
@@ -58,7 +58,8 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 		if
 		(res == args.cur_res
 		        and
-		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res)) {
+		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
+		{
 			PictureID picid;
 			//  Ok, we're doing something. First remove the current overlays.
 			std::string str =
@@ -85,15 +86,17 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 }
 
 int32_t Editor_Decrease_Resources_Tool::handle_undo_impl
-(Widelands::Map & map,
- Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent,
- Editor_Action_Args & args) {
+	(Widelands::Map & map,
+	Widelands::Node_and_Triangle< Widelands::Coords > center,
+	Editor_Interactive & parent,
+	Editor_Action_Args & args)
+{
 	return parent.tools.set_resources.handle_undo_impl(map, center, parent, args);
 	return 0;
 }
 
-Editor_Action_Args Editor_Decrease_Resources_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Decrease_Resources_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	Editor_Action_Args a(parent);
 	a.change_by = m_change_by;
 	a.cur_res = m_cur_res;

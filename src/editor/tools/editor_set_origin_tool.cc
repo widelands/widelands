@@ -25,25 +25,29 @@
 #include "wui/overlay_manager.h"
 
 int32_t Editor_Set_Origin_Tool::handle_click_impl
-(Widelands::Map           &           map,
- Widelands::Node_and_Triangle<> const center,
- Editor_Interactive         &         eia, Editor_Action_Args & args) {
+	(Widelands::Map           &          map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive        &          eia,
+	Editor_Action_Args        &          args)
+{
 	map.set_origin(center.node);
 	map.overlay_manager().reset();
 	eia.register_overlays();
 	eia.set_rel_viewpoint
 	(Point
-	 (-(center.node.x * 2 + (center.node.y & 1)) *(TRIANGLE_WIDTH / 2),
+	 (-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
 	  - center.node.y *                             TRIANGLE_HEIGHT),
 	 true);
 	return 0;
 }
 
 int32_t Editor_Set_Origin_Tool::handle_undo_impl
-(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
- Editor_Interactive & parent, Editor_Action_Args & args) {
-	Widelands::Coords nc(map.get_width() - center.node.x,
-	                     map.get_height() - center.node.y);
+	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & args)
+{
+	Widelands::Coords nc
+		(map.get_width()  - center.node.x,
+		 map.get_height() - center.node.y);
 	map.set_origin(nc);
 	map.overlay_manager().reset();
 	parent.register_overlays();
@@ -55,7 +59,8 @@ int32_t Editor_Set_Origin_Tool::handle_undo_impl
 	return 0;
 }
 
-Editor_Action_Args Editor_Set_Origin_Tool::format_args_impl(Editor_Interactive & parent) {
+Editor_Action_Args Editor_Set_Origin_Tool::format_args_impl(Editor_Interactive & parent)
+{
 	return Editor_Tool::format_args_impl(parent);
 }
 

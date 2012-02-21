@@ -35,10 +35,12 @@ struct Editor_Increase_Height_Tool : public Editor_Tool {
 	{}
 
 	int32_t handle_click_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	int32_t handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<> center, Editor_Interactive & parent, Editor_Action_Args & args);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
 
@@ -46,8 +48,8 @@ struct Editor_Increase_Height_Tool : public Editor_Tool {
 		return "pics/fsel_editor_increase_height.png";
 	}
 
-	int32_t get_change_by() const throw() {return m_change_by;}
-	void set_change_by(const int32_t n) throw() {m_change_by = n;}
+	int32_t get_change_by() const throw () {return m_change_by;}
+	void set_change_by(const int32_t n) throw () {m_change_by = n;}
 
 	Editor_Decrease_Height_Tool & decrease_tool() const {
 		return m_decrease_tool;
@@ -56,8 +58,8 @@ struct Editor_Increase_Height_Tool : public Editor_Tool {
 
 private:
 	Editor_Decrease_Height_Tool & m_decrease_tool;
-	Editor_Set_Height_Tool    &   m_set_tool;
-	int32_t                           m_change_by;
+	Editor_Set_Height_Tool      & m_set_tool;
+	int32_t                       m_change_by;
 };
 
 #endif
