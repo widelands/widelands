@@ -209,7 +209,6 @@ Graphic::Graphic
 			 "may have any size\n");
 
 		m_caps.gl.multitexture =
-			(((m_caps.gl.major_version >= 1) and (m_caps.gl.minor_version >= 3)) or
 			 ((strstr(extensions, "GL_ARB_multitexture") != 0) and
 			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0))
 			and (m_caps.gl.max_tex_combined >= 6);
