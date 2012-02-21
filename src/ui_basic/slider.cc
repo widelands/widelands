@@ -213,6 +213,7 @@ void Slider::set_enabled(const bool enabled)
 	if (not enabled) {
 		m_pressed = false;
 		m_highlighted = false;
+		grab_mouse(false);
 	}
 	update();
 }
