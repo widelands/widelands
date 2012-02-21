@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-19 18:23+0000\n"
+"POT-Creation-Date: 2012-02-20 18:13+0000\n"
 "PO-Revision-Date: 2011-03-22 09:48+0000\n"
 "Last-Translator: ThomasMarquart <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-20 05:27+0000\n"
-"X-Generator: Launchpad (build 14833)\n"
+"X-Launchpad-Export-Date: 2012-02-21 05:19+0000\n"
+"X-Generator: Launchpad (build 14838)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -303,7 +303,6 @@ msgstr ""
 "Alla vet att kriget snart bryter ut. Kriget om det sista kvarvarande vattnet."
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
-#: ../../maps/Lake of tranquility2.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr "Stillhetens sjö"
 
@@ -547,7 +546,6 @@ msgstr ""
 "eldberget. Tror du att den är stor nog för mer än en stam?"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
-#: ../../maps/Lake of tranquility2.wmf/elemental:9
 msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 10:12+0100\n"
+"POT-Creation-Date: 2012-02-20 19:13+0100\n"
 "PO-Revision-Date: 2011-03-20 19:04+0000\n"
 "Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:47+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-21 05:24+0000\n"
+"X-Generator: Launchpad (build 14838)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -108,15 +108,15 @@ msgstr "Suuri"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:97
-#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "Yes"
 msgstr "Kyllä"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:104
-#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "No"
 msgstr "Ei"
 
@@ -589,11 +589,11 @@ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
 "VIRHE: Metapalvelimeen yhdistäminen epäonnistui yllä näkyvästä syystä.\n"
 
-#: ../../src/wlapplication.cc:899 ../../src/wlapplication.cc:907
+#: ../../src/wlapplication.cc:903 ../../src/wlapplication.cc:911
 msgid "could not find the path of the main executable"
 msgstr "pääohjelman tiedostopolkua ei löytynyt"
 
-#: ../../src/wlapplication.cc:1024
+#: ../../src/wlapplication.cc:1028
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
@@ -602,7 +602,7 @@ msgstr ""
 "johdosta widelands prosessi lopetetaan. Päivitä ääniajuri ja/tai SDL-"
 "kirjastot ongelman korjaamiseksi.\n"
 
-#: ../../src/wlapplication.cc:1161
+#: ../../src/wlapplication.cc:1165
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -612,15 +612,15 @@ msgstr ""
 "Pahoittelen, kaksoisinstanssi-debuggaus ei ole saatavilla WIN32:ssa.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1164
+#: ../../src/wlapplication.cc:1168
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double ei ole käytettävissä. Tämä ei ole debug-käännös!"
 
-#: ../../src/wlapplication.cc:1285
+#: ../../src/wlapplication.cc:1289
 msgid "This is Widelands-"
 msgstr "Tämä on Widelands-"
 
-#: ../../src/wlapplication.cc:1287
+#: ../../src/wlapplication.cc:1291
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -628,7 +628,7 @@ msgstr ""
 "Käyttö: widelands <asetus0>=<arvo0> ... <asetusN>=<arvoN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1288
+#: ../../src/wlapplication.cc:1292
 msgid ""
 "Options:\n"
 "\n"
@@ -636,7 +636,7 @@ msgstr ""
 "Asetukset:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1292
+#: ../../src/wlapplication.cc:1296
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -656,11 +656,11 @@ msgstr ""
 " --homedir=HAKEMISTO Käytä HAKEMISTO:a widelands asetustiedstoille,\n"
 "                      pelitallenteilla ja toistotiedostoille.\n"
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1304
 msgid "                      Default is ~/.widelands\n"
 msgstr "                      Oletus on ~/.widelands\n"
 
-#: ../../src/wlapplication.cc:1303
+#: ../../src/wlapplication.cc:1307
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback\n"
@@ -693,7 +693,7 @@ msgstr ""
 "                      Poista nauhoitukset näin monelta päivältä.\n"
 "                      Jos 0, nauhoituksia ei tuhota.\n"
 
-#: ../../src/wlapplication.cc:1318
+#: ../../src/wlapplication.cc:1322
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -722,12 +722,12 @@ msgstr ""
 " --scenario=TIEDOSTO  Käynnistää annetun kartan suoraan kenaariona.\n"
 " --loadgame=TIEDOSTO  Avaa suoraan annetun pelitallennuksen\n"
 
-#: ../../src/wlapplication.cc:1331
+#: ../../src/wlapplication.cc:1335
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1334
+#: ../../src/wlapplication.cc:1338
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -765,16 +765,13 @@ msgstr ""
 " --xres=[...]         Ikkunan leveys kuvapisteinä.\n"
 " --yres=[...]         Ikkunan korkeus kuvapisteinä.\n"
 
-#: ../../src/wlapplication.cc:1354
+#: ../../src/wlapplication.cc:1358
 msgid ""
 " --opengl=[0|1]\n"
-"                      Enables opengl rendering\n"
-"                      *EXPERIMENTAL*\n"
+"                      Enables OpenGL rendering\n"
 msgstr ""
-" --opengl=[0|1]       Ottaa käyttöön OpenGL-piirtämisen\n"
-"                      *KOEKÄYTÖSSÄ*\n"
 
-#: ../../src/wlapplication.cc:1360
+#: ../../src/wlapplication.cc:1363
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -813,7 +810,7 @@ msgstr ""
 "                      paneelin päällä.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1384
+#: ../../src/wlapplication.cc:1387
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -823,15 +820,15 @@ msgstr ""
 "                      varten)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1388
+#: ../../src/wlapplication.cc:1391
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr " --verbose Käytä laajaa debug-tulostusta.\n"
 
-#: ../../src/wlapplication.cc:1389
+#: ../../src/wlapplication.cc:1392
 msgid " --help               Show this help\n"
 msgstr " --help               Näytä tämä ohje\n"
 
-#: ../../src/wlapplication.cc:1393
+#: ../../src/wlapplication.cc:1396
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -845,19 +842,19 @@ msgstr ""
 "Toivottavasti nautit pelistä!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1542
+#: ../../src/wlapplication.cc:1545
 msgid "Warning: "
 msgstr "Varoitus: "
 
-#: ../../src/wlapplication.cc:1546
+#: ../../src/wlapplication.cc:1549
 msgid "Game data error"
 msgstr "Pelitietovirhe"
 
-#: ../../src/wlapplication.cc:1551
+#: ../../src/wlapplication.cc:1554
 msgid "Unexpected error during the game"
 msgstr "Odottamaton virhe pelin aikana"
 
-#: ../../src/wlapplication.cc:1555
+#: ../../src/wlapplication.cc:1558
 msgid ""
 "\n"
 "\n"
@@ -871,7 +868,7 @@ msgstr ""
 "Löydät asiaankuuluvat viestit ohjelman perustulosteesta (stdout, Windowsissa "
 "tiedosto stdout.txt). Käytät versiota "
 
-#: ../../src/wlapplication.cc:1561
+#: ../../src/wlapplication.cc:1564
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -883,24 +880,24 @@ msgstr ""
 "Widelands pyrkii tallentamaan pelin automaattisesti virheiden sattuessa. "
 "Usein - ei aina - peliä voi täten jatkaa tallennuksesta.\n"
 
-#: ../../src/wlapplication.cc:1678
+#: ../../src/wlapplication.cc:1681
 msgid "The address of the game server is invalid"
 msgstr "Pelipalvelimen osoite ei kelpaa"
 
-#: ../../src/wlapplication.cc:1785 ../../src/network/nethost.cc:1996
+#: ../../src/wlapplication.cc:1788 ../../src/network/nethost.cc:1996
 msgid "Player"
 msgstr "Pelaaja"
 
-#: ../../src/wlapplication.cc:1974 ../../src/network/netclient.cc:198
+#: ../../src/wlapplication.cc:1977 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:806
 msgid "Preparing game"
 msgstr "Valmistelen peliä"
 
-#: ../../src/wlapplication.cc:2082
+#: ../../src/wlapplication.cc:2085
 msgid "End of replay"
 msgstr "Toiston loppu"
 
-#: ../../src/wlapplication.cc:2084
+#: ../../src/wlapplication.cc:2087
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -908,44 +905,52 @@ msgstr ""
 "Pelin toisto on loppunut ja peli on keskeytetty. Voit jatkaa peliä ja "
 "tarkkailua halutessasi."
 
-#: ../../src/wlapplication.cc:2167 ../../src/logic/game.cc:385
+#: ../../src/wlapplication.cc:2170 ../../src/logic/game.cc:385
 #: ../../src/logic/game.cc:425
 msgid "Loading..."
 msgstr "Lataan..."
 
-#: ../../src/editor/editorinteractive.cc:61
+#: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
 msgstr "Päävalikko"
 
-#: ../../src/editor/editorinteractive.cc:64
+#: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
 msgstr "Työkalut"
 
-#: ../../src/editor/editorinteractive.cc:68
+#: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
 msgstr "Työkalun koko"
 
-#: ../../src/editor/editorinteractive.cc:71
+#: ../../src/editor/editorinteractive.cc:72
 #: ../../src/wui/interactive_player.cc:120
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Minimap"
 msgstr "Minikartta"
 
-#: ../../src/editor/editorinteractive.cc:74
+#: ../../src/editor/editorinteractive.cc:75
 #: ../../src/wui/interactive_player.cc:123
 msgid "Buildhelp"
 msgstr "Rakennusapu"
 
-#: ../../src/editor/editorinteractive.cc:77
+#: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
 msgstr "Pelaajat"
 
-#: ../../src/editor/editorinteractive.cc:156
+#: ../../src/editor/editorinteractive.cc:81
+msgid "Undo"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:84
+msgid "Redo"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
 msgstr "Epäyhteensopiva tiedostomuoto"
 
-#: ../../src/editor/editorinteractive.cc:158
+#: ../../src/editor/editorinteractive.cc:173
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -954,36 +959,36 @@ msgstr ""
 "Widelands ei voinut ladata tiedostoa \"%s\": Tiedostomuoto vaikuttaa "
 "epäyhteensopivalta."
 
-#: ../../src/editor/editorinteractive.cc:176
-#: ../../src/editor/editorinteractive.cc:580
+#: ../../src/editor/editorinteractive.cc:192
+#: ../../src/editor/editorinteractive.cc:601
 #: ../../src/logic/editor_game_base.cc:284
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Lataan heimoa: %s"
 
-#: ../../src/editor/editorinteractive.cc:182
+#: ../../src/editor/editorinteractive.cc:198
 msgid "Creating players"
 msgstr "Luon pelaajia"
 
-#: ../../src/editor/editorinteractive.cc:189
+#: ../../src/editor/editorinteractive.cc:205
 #: ../../src/logic/editor_game_base.cc:277
 msgid "Loading world data"
 msgstr "Lataan maailma-asetuksia"
 
-#: ../../src/editor/editorinteractive.cc:192
-#: ../../src/editor/editorinteractive.cc:584
+#: ../../src/editor/editorinteractive.cc:208
+#: ../../src/editor/editorinteractive.cc:605
 msgid "Loading graphics..."
 msgstr "Ladataan grafiikkaa..."
 
-#: ../../src/editor/editorinteractive.cc:240
+#: ../../src/editor/editorinteractive.cc:254
 msgid "Map unsaved"
 msgstr "Karttaa ei tallennettu"
 
-#: ../../src/editor/editorinteractive.cc:241
+#: ../../src/editor/editorinteractive.cc:255
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Karttaa ei ole tallennettu. Haluatko varmasti lopettaa?"
 
-#: ../../src/editor/editorinteractive.cc:571
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:485
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:183
@@ -991,7 +996,7 @@ msgstr "Karttaa ei ole tallennettu. Haluatko varmasti lopettaa?"
 msgid "No Name"
 msgstr "Ei nimeä"
 
-#: ../../src/editor/editorinteractive.cc:573
+#: ../../src/editor/editorinteractive.cc:594
 #: ../../src/ui_fsmenu/netsetup_lan.cc:194
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
@@ -1218,6 +1223,11 @@ msgstr "Voitto!"
 msgid "Restart Mission"
 msgstr "Aloita alusta"
 
+#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/constructionsitewindow.cc:74
+msgid "Building materials"
+msgstr ""
+
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
 msgstr "Talousvalinnat"
@@ -1326,6 +1336,14 @@ msgstr "Tuotteet varastoissa"
 #: ../../src/wui/stock_menu.cc:71
 msgid "Workers in warehouses"
 msgstr "Työläiset varastoissa"
+
+#: ../../src/wui/soldiercapacitycontrol.cc:67
+msgid "Decrease capacity"
+msgstr ""
+
+#: ../../src/wui/soldiercapacitycontrol.cc:71
+msgid "Increase capacity"
+msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -1623,6 +1641,10 @@ msgstr "Piilota työalue"
 msgid "Debug"
 msgstr "Debug"
 
+#: ../../src/wui/buildingwindow.cc:271
+msgid "Center view on this"
+msgstr ""
+
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
 msgstr "Ohje"
@@ -1837,23 +1859,23 @@ msgid "Do you really want to delete the file %s?"
 msgstr "Oletko varma, että haluat poistaa tiedoston %s?"
 
 # Ei näin: trans
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:277
 #, c-format
 msgid "%u.%ux"
 msgstr "%u %ux"
 
-#: ../../src/wui/interactive_base.cc:273
+#: ../../src/wui/interactive_base.cc:280
 msgid "PAUSE"
 msgstr "PYSÄYTETTY"
 
 # Ei näin: trans-comment!
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:300
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
 # TODO: trans-comment! controller?
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:305
 msgid "NO GAME CONTROLLER"
 msgstr "EI PELIKONTROLLERIA"
 
@@ -2030,17 +2052,17 @@ msgid "expected %s but found \"%s\""
 msgstr "odotettiin %s mutta löytyi \"%s\""
 
 #: ../../src/logic/building.cc:524
-#: ../../src/editor/tools/editor_info_tool.cc:61
+#: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "small"
 msgstr "pieni"
 
 #: ../../src/logic/building.cc:525
-#: ../../src/editor/tools/editor_info_tool.cc:62
+#: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "medium"
 msgstr "keskik."
 
 #: ../../src/logic/building.cc:525
-#: ../../src/editor/tools/editor_info_tool.cc:63
+#: ../../src/editor/tools/editor_info_tool.cc:64
 msgid "big"
 msgstr "iso"
 
@@ -3532,7 +3554,7 @@ msgid "Remove Syncstream dumps on startup"
 msgstr "Poista Syncstream tulosteet käynnistyksessä"
 
 #: ../../src/ui_fsmenu/options.cc:471
-msgid "OpenGL rendering *Highly experimental!*"
+msgid "OpenGL rendering"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:476
@@ -4116,7 +4138,7 @@ msgstr ""
 msgid "frame number"
 msgstr "frame numero"
 
-#: ../../src/graphic/graphic.cc:1067
+#: ../../src/graphic/graphic.cc:1060
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Lataan animaatioita:  %d%% valmis"
@@ -4568,61 +4590,61 @@ msgstr ""
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:260
+#: ../../src/network/internet_gaming.cc:261
 msgid "Something went wrong: "
 msgstr "Joku meni pieleen: "
 
-#: ../../src/network/internet_gaming.cc:337
+#: ../../src/network/internet_gaming.cc:339
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:344
+#: ../../src/network/internet_gaming.cc:346
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:344
+#: ../../src/network/internet_gaming.cc:346
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:356
+#: ../../src/network/internet_gaming.cc:358
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:369
+#: ../../src/network/internet_gaming.cc:371
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:378
+#: ../../src/network/internet_gaming.cc:380
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:473
+#: ../../src/network/internet_gaming.cc:475
 msgid "ERROR: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:477
+#: ../../src/network/internet_gaming.cc:479
 msgid "Chat message could not be sent. "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:498
+#: ../../src/network/internet_gaming.cc:500
 msgid "Received an unknown command from the metaserver: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:630
+#: ../../src/network/internet_gaming.cc:632
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:642
+#: ../../src/network/internet_gaming.cc:644
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:717
 msgid "<unknown>"
 msgstr ""
 
@@ -4977,12 +4999,12 @@ msgstr ""
 msgid "Height Tools Options"
 msgstr "Korkeustyökalun asetukset"
 
-#: ../../src/editor/tools/editor_info_tool.cc:43
+#: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
 msgstr "Tietoa kentästä"
 
 # TODO: needs trans comment for caps.
-#: ../../src/editor/tools/editor_info_tool.cc:55
+#: ../../src/editor/tools/editor_info_tool.cc:56
 #, c-format
 msgid ""
 "1) Node info\n"
@@ -4995,27 +5017,27 @@ msgstr ""
 " Korkeus: %u\n"
 " Sallii: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:65
+#: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " flag"
 msgstr " lippu"
 
-#: ../../src/editor/tools/editor_info_tool.cc:66
+#: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " mine"
 msgstr " kaivos"
 
-#: ../../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " port"
 msgstr " satama"
 
-#: ../../src/editor/tools/editor_info_tool.cc:68
+#: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " walk"
 msgstr " kävely"
 
-#: ../../src/editor/tools/editor_info_tool.cc:69
+#: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " swim"
 msgstr " uinti"
 
-#: ../../src/editor/tools/editor_info_tool.cc:73
+#: ../../src/editor/tools/editor_info_tool.cc:74
 #, c-format
 msgid ""
 "\n"
@@ -5028,7 +5050,7 @@ msgstr ""
 " Sis. perusliikkumattoman objektin: %s\n"
 " Sis. liikkuvat objektit: %s\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:79
+#: ../../src/editor/tools/editor_info_tool.cc:80
 msgid ""
 "2) Terrain Info\n"
 " Name: "
@@ -5036,7 +5058,7 @@ msgstr ""
 "2) Maaston tiedot\n"
 " Nimi: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:87
+#: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
 msgid ""
 "\n"
@@ -5045,7 +5067,7 @@ msgstr ""
 "\n"
 " Tekstuurinumero %i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:91
+#: ../../src/editor/tools/editor_info_tool.cc:92
 msgid ""
 "4) Map Info\n"
 " Name: "
@@ -5053,7 +5075,7 @@ msgstr ""
 "4) Kartan tiedot\n"
 " Nimi: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:95
+#: ../../src/editor/tools/editor_info_tool.cc:96
 #, c-format
 msgid ""
 "\n"
@@ -5064,8 +5086,8 @@ msgstr ""
 " Koko: %ix%i\n"
 " Tekijä: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:98
-#: ../../src/editor/tools/editor_info_tool.cc:109
+#: ../../src/editor/tools/editor_info_tool.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:110
 msgid ""
 "\n"
 " Descr: "
@@ -5073,7 +5095,7 @@ msgstr ""
 "\n"
 " Kuvaus: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:102
+#: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
 msgid ""
 "\n"
@@ -5082,7 +5104,7 @@ msgstr ""
 "\n"
 " Pelaajien määrä: %i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:105
+#: ../../src/editor/tools/editor_info_tool.cc:106
 msgid ""
 "5) World Info\n"
 " Name: "
@@ -5090,7 +5112,7 @@ msgstr ""
 "5) Maailman tiedot\n"
 " Nimi: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:107
+#: ../../src/editor/tools/editor_info_tool.cc:108
 msgid ""
 "\n"
 " Author: "
