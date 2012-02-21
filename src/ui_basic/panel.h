@@ -189,6 +189,7 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 	virtual bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
+	virtual bool handle_alt_drag(int32_t x, int32_t y);
 
 	/// \returns whether a certain given is currently down.
 	///
