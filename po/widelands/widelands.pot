@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-20 19:13+0100\n"
+"POT-Creation-Date: 2012-02-21 20:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3932,7 +3932,7 @@ msgstr ""
 msgid "frame number"
 msgstr ""
 
-#: ../../src/graphic/graphic.cc:1060
+#: ../../src/graphic/graphic.cc:1071
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr ""

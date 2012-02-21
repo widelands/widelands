@@ -41,3 +41,7 @@ sec=4
 [Tip 11]
 text=_Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them.
 sec=4
+
+[Tip 12]
+text=_Pressing and holding ALT GR key lets you drag the window below the mouse pointer.
+sec=4

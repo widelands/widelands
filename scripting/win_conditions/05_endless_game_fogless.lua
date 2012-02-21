@@ -10,7 +10,7 @@ set_textdomain("win_conditions")
 use("aux", "win_condition_texts")
 
 local wc_name = _ "Endless Game (no fog)"
-local wc_desc = _"This is an endless game without rules. Fog of war is disabled."
+local wc_desc = _ "This is an endless game without rules. Fog of war is disabled."
 return {
 	name = wc_name,
 	description = wc_desc,

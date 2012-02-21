@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-20 18:13+0000\n"
+"POT-Creation-Date: 2012-02-21 19:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -616,6 +616,11 @@ msgstr ""
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
+msgstr ""
+
+#: ../../txts/tips/general_game.tip:46
+msgid ""
+"Pressing and holding ALT GR key lets you drag the window below the mouse pointer."
 msgstr ""
 
 #: ../../txts/README:1
