@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
+#include "logic/warehouse.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
@@ -160,6 +161,21 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	bool const can_see = igbase().can_see(owner_number);
 	bool const can_act = igbase().can_act(owner_number);
 
+	// Check if this is a port building and if yes show expedition button
+	if (upcast(Widelands::Warehouse const, warehouse, &m_building)) {
+		if (warehouse->get_portdock()) {
+			UI::Button * expeditionbtn =
+				new UI::Button
+					(capsbuttons, "expedition", 0, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture(PicMod_Game, "pics/start_expedition.png"),
+					 _("Start an expedition"));
+				expeditionbtn->sigclicked.connect
+					(boost::bind(&Building_Window::act_start_expedition, boost::ref(*this)));
+				capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+		}
+	}
+
 	if (can_act) {
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
@@ -292,7 +308,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	}
 }
 
-/*
+/**
 ===============
 The help button has been pressed
 ===============
@@ -308,7 +324,7 @@ void Building_Window::help_clicked()
 			 m_building.descr().helptext_script());
 }
 
-/*
+/**
 ===============
 Callback for bulldozing request
 ===============
@@ -318,7 +334,7 @@ void Building_Window::act_bulldoze()
 	show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
 }
 
-/*
+/**
 ===============
 Callback for dismantling request
 ===============
@@ -336,7 +352,17 @@ void Building_Window::act_start_stop() {
 	die();
 }
 
-/*
+void Building_Window::act_start_expedition() {
+	/*
+	if (upcast(Widelands::Warehouse const, warehouse, &m_building))
+		if (Widelands::PortDock * pd = warehouse->get_portdock())
+			igbase().game().send_player_start_expedition(m_building);
+	*/
+
+	die();
+}
+
+/**
 ===============
 Callback for bulldozing request
 ===============
