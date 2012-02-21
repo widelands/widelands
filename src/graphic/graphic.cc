@@ -187,6 +187,10 @@ Graphic::Graphic
 		log("Graphics: OpenGL: Number of stencil buffer bits: %u\n", glInt);
 		m_caps.gl.stencil_buffer_bits = glInt;
 
+		glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &glInt);
+		log("Graphics: OpenGL: Maximum number of textures for multitextures: %u\n", glInt);
+		m_caps.gl.max_tex_combined = glInt;
+
 		str = reinterpret_cast<const char *>(glGetString(GL_VERSION));
 		m_caps.gl.major_version = atoi(str);
 		m_caps.gl.minor_version = strstr(str, ".")?atoi(strstr(str, ".") + 1):0;
@@ -195,14 +199,21 @@ Graphic::Graphic
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
 
 		const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
+
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
 			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);
-
 		log("Graphics: OpenGL: Textures ");
 		log
 			(m_caps.gl.tex_power_of_two?"must have a size power of two\n":
 			 "may have any size\n");
+
+		m_caps.gl.multitexture =
+			 ((strstr(extensions, "GL_ARB_multitexture") != 0) and
+			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0))
+			and (m_caps.gl.max_tex_combined >= 6);
+		log("Graphics: OpenGL: Multitextures are ");
+		log(m_caps.gl.multitexture ? "supported\n" : "not supported\n");
 
 		m_caps.offscreen_rendering = false;
 
