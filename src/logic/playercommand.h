@@ -192,6 +192,26 @@ private:
 	Serial serial;
 };
 
+struct Cmd_Start_or_Cancel_Expedition : public PlayerCommand {
+	Cmd_Start_or_Cancel_Expedition() : PlayerCommand() {} // For savegame loading
+	Cmd_Start_or_Cancel_Expedition (int32_t const t, Player_Number const p, Building & b)
+		: PlayerCommand(t, p), serial(b.serial())
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_EXPEDITION;}
+
+	Cmd_Start_or_Cancel_Expedition (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+};
+
 struct Cmd_EnhanceBuilding:public PlayerCommand {
 	Cmd_EnhanceBuilding() : PlayerCommand() {} // For savegame loading
 	Cmd_EnhanceBuilding

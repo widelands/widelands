@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -784,6 +784,13 @@ void Game::send_player_start_stop_building (Building & building)
 {
 	send_player_command
 		(*new Cmd_StartStopBuilding
+		 	(get_gametime(), building.owner().player_number(), building));
+}
+
+void Game::send_player_start_or_cancel_expedition (Building & building)
+{
+	send_player_command
+		(*new Cmd_Start_or_Cancel_Expedition
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 

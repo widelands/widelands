@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,6 +153,7 @@ struct Game : Editor_Game_Base {
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);
+	void send_player_start_or_cancel_expedition    (Building &);
 	void send_player_enhance_building (Building &, Building_Index);
 	void send_player_set_ware_priority
 		(PlayerImmovable &, int32_t type, Ware_Index index, int32_t prio);

@@ -61,6 +61,8 @@
 #define QUEUE_CMD_SETSTOCKPOLICY        23
 #define QUEUE_CMD_DISMANTLEBUILDING     24
 
+#define QUEUE_CMD_EXPEDITION            25
+
 #define QUEUE_CMD_DESTROY_MAPOBJECT    127
 #define QUEUE_CMD_ACT                  128
 // 129 was a command related to old events. removed

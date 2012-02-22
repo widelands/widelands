@@ -344,6 +344,15 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 	return count;
 }
 
+
+bool PortDock::expedition_started() {
+	return false;
+#warning fix me!
+}
+void PortDock::start_expedition() {};
+void PortDock::cancel_expedition() {};
+
+
 void PortDock::log_general_info(Editor_Game_Base const & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);

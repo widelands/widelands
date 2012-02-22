@@ -63,6 +63,7 @@ enum {
 	PLCMD_SETSTOCKPOLICY,
 	PLCMD_SETWAREMAXFILL,
 	PLCMD_DISMANTLEBUILDING,
+	PLCMD_EXPEDITION
 };
 
 /*** class PlayerCommand ***/
@@ -74,18 +75,19 @@ PlayerCommand::PlayerCommand (int32_t const time, Player_Number const s)
 PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 {
 	switch (des.Unsigned8()) {
-	case PLCMD_BULLDOZE:              return new Cmd_Bulldoze             (des);
-	case PLCMD_BUILD:                 return new Cmd_Build                (des);
-	case PLCMD_BUILDFLAG:             return new Cmd_BuildFlag            (des);
-	case PLCMD_BUILDROAD:             return new Cmd_BuildRoad            (des);
-	case PLCMD_FLAGACTION:            return new Cmd_FlagAction           (des);
-	case PLCMD_STARTSTOPBUILDING:     return new Cmd_StartStopBuilding    (des);
-	case PLCMD_ENHANCEBUILDING:       return new Cmd_EnhanceBuilding      (des);
-	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
-	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
-	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
-	case PLCMD_ENEMYFLAGACTION:       return new Cmd_EnemyFlagAction      (des);
-	case PLCMD_SETWAREPRIORITY:       return new Cmd_SetWarePriority      (des);
+	case PLCMD_BULLDOZE:              return new Cmd_Bulldoze                  (des);
+	case PLCMD_BUILD:                 return new Cmd_Build                     (des);
+	case PLCMD_BUILDFLAG:             return new Cmd_BuildFlag                 (des);
+	case PLCMD_BUILDROAD:             return new Cmd_BuildRoad                 (des);
+	case PLCMD_FLAGACTION:            return new Cmd_FlagAction                (des);
+	case PLCMD_STARTSTOPBUILDING:     return new Cmd_StartStopBuilding         (des);
+	case PLCMD_EXPEDITION:            return new Cmd_Start_or_Cancel_Expedition(des);
+	case PLCMD_ENHANCEBUILDING:       return new Cmd_EnhanceBuilding           (des);
+	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions     (des);
+	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier               (des);
+	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity     (des);
+	case PLCMD_ENEMYFLAGACTION:       return new Cmd_EnemyFlagAction           (des);
+	case PLCMD_SETWAREPRIORITY:       return new Cmd_SetWarePriority           (des);
 	case PLCMD_SETWARETARGETQUANTITY:
 		return new Cmd_SetWareTargetQuantity    (des);
 	case PLCMD_RESETWARETARGETQUANTITY:
@@ -498,6 +500,61 @@ void Cmd_StartStopBuilding::Write
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_STOPBUILDING_VERSION);
+	// Write base classes
+	PlayerCommand::Write(fw, egbase, mos);
+
+	// Now serial
+	Map_Object const & obj = *egbase.objects().get_object(serial);
+	fw.Unsigned32(mos.get_object_file_index(obj));
+}
+
+/*** Cmd_Start_or_Cancel_Expedition ***/
+
+Cmd_Start_or_Cancel_Expedition::Cmd_Start_or_Cancel_Expedition (StreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
+{
+	serial = des.Unsigned32();
+}
+
+void Cmd_Start_or_Cancel_Expedition::execute (Game & game)
+{
+	if (upcast(Warehouse, warehouse, game.objects().get_object(serial)))
+		game.player(sender()).start_or_cancel_expedition(*warehouse);
+}
+
+void Cmd_Start_or_Cancel_Expedition::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_EXPEDITION);
+	ser.Unsigned8 (sender());
+	ser.Unsigned32(serial);
+}
+#define PLAYER_CMD_EXPEDITION_VERSION 1
+void Cmd_Start_or_Cancel_Expedition::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_EXPEDITION_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			uint32_t const building_serial = fr.Unsigned32();
+			try {
+				serial = mol.get<Map_Object>(building_serial).serial();
+			} catch (_wexception const & e) {
+				throw game_data_error
+					(_("building %u: %s"), building_serial, e.what());
+			}
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("start/stop building: %s"), e.what());
+	}
+}
+void Cmd_Start_or_Cancel_Expedition::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	// First, write version
+	fw.Unsigned16(PLAYER_CMD_EXPEDITION_VERSION);
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 

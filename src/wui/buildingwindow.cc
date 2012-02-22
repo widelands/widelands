@@ -163,16 +163,28 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 	// Check if this is a port building and if yes show expedition button
 	if (upcast(Widelands::Warehouse const, warehouse, &m_building)) {
-		if (warehouse->get_portdock()) {
-			UI::Button * expeditionbtn =
-				new UI::Button
-					(capsbuttons, "expedition", 0, 0, 34, 34,
-					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-					 g_gr->get_picture(PicMod_Game, "pics/start_expedition.png"),
-					 _("Start an expedition"));
+		if (Widelands::PortDock * pd = warehouse->get_portdock()) {
+			if (pd->expedition_started()) {
+				UI::Button * expeditionbtn =
+					new UI::Button
+						(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
+						g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+						g_gr->get_picture(PicMod_Game, "pics/cancel_expedition.png"),
+						_("Cancel the expedition"));
 				expeditionbtn->sigclicked.connect
-					(boost::bind(&Building_Window::act_start_expedition, boost::ref(*this)));
+					(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
 				capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+			} else {
+				UI::Button * expeditionbtn =
+					new UI::Button
+						(capsbuttons, "start_expedition", 0, 0, 34, 34,
+						g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+						g_gr->get_picture(PicMod_Game, "pics/start_expedition.png"),
+						_("Start an expedition"));
+				expeditionbtn->sigclicked.connect
+					(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+				capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+			}
 		}
 	}
 
@@ -345,6 +357,11 @@ void Building_Window::act_dismantle()
 		igbase().game().send_player_dismantle(m_building);
 }
 
+/**
+===============
+Callback for starting / stoping the production site request
+===============
+*/
 void Building_Window::act_start_stop() {
 	if (dynamic_cast<Widelands::ProductionSite const *>(&m_building))
 		igbase().game().send_player_start_stop_building (m_building);
@@ -352,12 +369,15 @@ void Building_Window::act_start_stop() {
 	die();
 }
 
-void Building_Window::act_start_expedition() {
-	/*
+/**
+===============
+Callback for starting an expedition request
+===============
+*/
+void Building_Window::act_start_or_cancel_expedition() {
 	if (upcast(Widelands::Warehouse const, warehouse, &m_building))
-		if (Widelands::PortDock * pd = warehouse->get_portdock())
-			igbase().game().send_player_start_expedition(m_building);
-	*/
+		if (warehouse->get_portdock())
+			igbase().game().send_player_start_or_cancel_expedition(m_building);
 
 	die();
 }

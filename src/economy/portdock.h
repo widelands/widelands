@@ -99,6 +99,10 @@ struct PortDock : PlayerImmovable {
 
 	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
 
+	bool expedition_started();
+	void start_expedition();
+	void cancel_expedition();
+
 private:
 	friend struct Fleet;
 
