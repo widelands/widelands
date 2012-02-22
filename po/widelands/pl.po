@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-20 19:13+0100\n"
+"POT-Creation-Date: 2012-02-21 20:48+0100\n"
 "PO-Revision-Date: 2012-01-03 21:28+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-02-21 05:26+0000\n"
+"X-Launchpad-Export-Date: 2012-02-22 04:47+0000\n"
 "X-Generator: Launchpad (build 14838)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4148,7 +4148,7 @@ msgstr "typ_gry: %s"
 msgid "frame number"
 msgstr "numer klatki"
 
-#: ../../src/graphic/graphic.cc:1060
+#: ../../src/graphic/graphic.cc:1071
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Wczytywanie animacji: %d%% ukończono"

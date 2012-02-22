@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-20 19:13+0100\n"
+"POT-Creation-Date: 2012-02-21 20:48+0100\n"
 "PO-Revision-Date: 2012-02-16 18:54+0000\n"
 "Last-Translator: Thomas Jungers <mpjungers@hotmail.com>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-02-21 05:24+0000\n"
+"X-Launchpad-Export-Date: 2012-02-22 04:46+0000\n"
 "X-Generator: Launchpad (build 14838)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4172,7 +4172,7 @@ msgstr "Classe_de_jeux:%s"
 msgid "frame number"
 msgstr "nombre d'images"
 
-#: ../../src/graphic/graphic.cc:1060
+#: ../../src/graphic/graphic.cc:1071
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Chargement des animations : %d%% terminé"

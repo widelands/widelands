@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-20 19:13+0100\n"
+"POT-Creation-Date: 2012-02-21 20:48+0100\n"
 "PO-Revision-Date: 2011-12-03 01:10+0000\n"
 "Last-Translator: Alexandre <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-02-21 05:27+0000\n"
+"X-Launchpad-Export-Date: 2012-02-22 04:49+0000\n"
 "X-Generator: Launchpad (build 14838)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4129,7 +4129,7 @@ msgstr "game_class: %s"
 msgid "frame number"
 msgstr "frame number"
 
-#: ../../src/graphic/graphic.cc:1060
+#: ../../src/graphic/graphic.cc:1071
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Carregando animações: %d%% completo"
