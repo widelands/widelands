@@ -51,7 +51,7 @@ public:
 	void add_neighbour(TestingRoutingNode * nb) {
 		_neighbours.push_back(nb);
 	}
-	TestingRoutingNode * get_neighbour(uint8_t idx) {
+	TestingRoutingNode * get_neighbour(uint8_t idx) const {
 		if (idx >= _neighbours.size())
 			throw BadAccess();
 		return _neighbours[idx];
@@ -62,7 +62,7 @@ public:
 	int32_t get_waitcost() const {return _waitcost;}
 	Coords get_position() const {return _position;}
 
-	void get_neighbours(RoutingNodeNeighbours &);
+	void get_neighbours(WareWorker type, RoutingNodeNeighbours &);
 
 	// test functionality
 	bool all_members_zeroed();
@@ -75,11 +75,11 @@ private:
 	Coords _position;
 	Flag _flag;
 };
-void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours & n) {
+void TestingRoutingNode::get_neighbours(WareWorker type,RoutingNodeNeighbours & n) {
 	container_iterate_const(Neigbours, _neighbours, i)
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n.push_back(RoutingNodeNeighbour(*i.current, 1000 + _waitcost * 1000));
+		n.push_back(RoutingNodeNeighbour(*i.current, 1000 *((type==wwWARE)?1+_waitcost:1)));
 }
 bool TestingRoutingNode::all_members_zeroed() {
 	bool integers_zero =
