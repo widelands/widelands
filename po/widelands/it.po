@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-21 20:48+0100\n"
-"PO-Revision-Date: 2012-02-20 12:28+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"PO-Revision-Date: 2012-02-22 12:48+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-22 04:47+0000\n"
-"X-Generator: Launchpad (build 14838)\n"
+"X-Launchpad-Export-Date: 2012-02-23 04:32+0000\n"
+"X-Generator: Launchpad (build 14855)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -763,6 +763,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Abilita il rendering OpenGL\n"
 
 #: ../../src/wlapplication.cc:1363
 msgid ""
@@ -936,11 +938,11 @@ msgstr "Giocatori"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Annulla"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Ripeti"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -1220,7 +1222,7 @@ msgstr "Ricomincia missione"
 #: ../../src/wui/dismantlesitewindow.cc:68
 #: ../../src/wui/constructionsitewindow.cc:74
 msgid "Building materials"
-msgstr ""
+msgstr "Materiali da costruzione"
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
@@ -1333,11 +1335,11 @@ msgstr "Lavoratori nei magazzini"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:67
 msgid "Decrease capacity"
-msgstr ""
+msgstr "Diminuisci capacità"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid "Increase capacity"
-msgstr ""
+msgstr "Aumenta capacità"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -1637,7 +1639,7 @@ msgstr "Debug"
 
 #: ../../src/wui/buildingwindow.cc:271
 msgid "Center view on this"
-msgstr ""
+msgstr "Centra la vista su questo"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -3562,7 +3564,7 @@ msgstr "Rimuove i dati Syncstream all'avvio"
 
 #: ../../src/ui_fsmenu/options.cc:471
 msgid "OpenGL rendering"
-msgstr ""
+msgstr "Rendering OpenGL"
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
@@ -4165,7 +4167,7 @@ msgstr "numero del frame"
 #: ../../src/graphic/graphic.cc:1071
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr "Caricamento animazioni completata al: %d%%"
+msgstr "Caricamento animazioni completata al %d%%"
 
 #: ../../src/network/netclient.cc:103 ../../src/network/internet_gaming.cc:105
 msgid "Could not establish connection to host"
