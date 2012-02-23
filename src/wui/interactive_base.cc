@@ -460,7 +460,9 @@ void Interactive_Base::move_view_to(const Coords c)
 	assert(0 <= c.y);
 	assert     (c.y < egbase().map().get_height());
 
-	uint32_t const x = c.x * TRIANGLE_WIDTH, y = c.y * TRIANGLE_HEIGHT;
+	const Map & map = egbase().map();
+	uint32_t const x = (c.x + (c.y & 1) * 0.5) * TRIANGLE_WIDTH;
+	uint32_t const y = c.y * TRIANGLE_HEIGHT - map[c].get_height() * HEIGHT_FACTOR;
 	if (m->minimap.window)
 		m->mm->set_view_pos(x, y);
 	minimap_warp(x, y);
