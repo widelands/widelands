@@ -187,7 +187,7 @@ Graphic::Graphic
 		log("Graphics: OpenGL: Number of stencil buffer bits: %u\n", glInt);
 		m_caps.gl.stencil_buffer_bits = glInt;
 
-		glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &glInt);
+		glGetIntegerv(GL_MAX_TEXTURE_UNITS, &glInt);
 		log("Graphics: OpenGL: Maximum number of textures for multitextures: %u\n", glInt);
 		m_caps.gl.max_tex_combined = glInt;
 
