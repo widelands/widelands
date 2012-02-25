@@ -45,6 +45,8 @@
 #include "log.h"
 #include <windows.h>
 #include <io.h>
+#include <direct.h>
+#define PATH_MAX MAX_PATH
 #else
 #include <glob.h>
 #include <sys/types.h>
@@ -141,20 +143,12 @@ std::string FileSystem::fixCrossFile(std::string const & path) const {
  * \return The process' current working directory
  */
 std::string FileSystem::getWorkingDirectory() const {
-#ifndef WIN32
 	char cwd[PATH_MAX + 1];
 	char * const result = getcwd(cwd, PATH_MAX);
 	if (! result)
 		throw File_error("FileSystem::getWorkingDirectory()", "widelands", "can not run getcwd");
 
 	return std::string(cwd);
-#else
-	char filename[_MAX_PATH + 1];
-	GetModuleFileName(0, filename, _MAX_PATH);
-	std::string exedir(filename);
-	exedir = exedir.substr(0, exedir.rfind('\\'));
-	return exedir;
-#endif
 }
 
 
