@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-21 20:48+0100\n"
-"PO-Revision-Date: 2012-01-29 16:08+0000\n"
-"Last-Translator: Luis Miguel D.P. <Unknown>\n"
+"PO-Revision-Date: 2012-02-25 02:10+0000\n"
+"Last-Translator: Ivan <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-22 04:48+0000\n"
-"X-Generator: Launchpad (build 14838)\n"
+"X-Launchpad-Export-Date: 2012-02-25 04:41+0000\n"
+"X-Generator: Launchpad (build 14860)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -766,6 +766,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Permite renderizado con OpenGL\n"
 
 #: ../../src/wlapplication.cc:1363
 msgid ""
@@ -940,11 +942,11 @@ msgstr "Jugadores"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Deshacer"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Rehacer"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -1065,7 +1067,7 @@ msgstr "Construcciones grandes"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr ""
+msgstr "Construir edificios portuarios"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
@@ -1224,7 +1226,7 @@ msgstr "Recomenzar misión"
 #: ../../src/wui/dismantlesitewindow.cc:68
 #: ../../src/wui/constructionsitewindow.cc:74
 msgid "Building materials"
-msgstr ""
+msgstr "Construir materiales"
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
@@ -1337,11 +1339,11 @@ msgstr "Trabajadores en almacenes"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:67
 msgid "Decrease capacity"
-msgstr ""
+msgstr "Disminuir capacidad"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid "Increase capacity"
-msgstr ""
+msgstr "Aumentar capacidad"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -1641,7 +1643,7 @@ msgstr "Depurar"
 
 #: ../../src/wui/buildingwindow.cc:271
 msgid "Center view on this"
-msgstr ""
+msgstr "Centrar vista en esto"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -1877,15 +1879,15 @@ msgstr "FALTA CONTROLADOR DE JUEGOS"
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
@@ -3293,7 +3295,7 @@ msgstr "Entrada del Metaserver"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
 msgid "Clients online:"
-msgstr ""
+msgstr "Clientes en línea:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:59
 msgid "List of games:"
@@ -3334,7 +3336,7 @@ msgstr "Puntos"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Game"
-msgstr ""
+msgstr "Partida"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:378
 msgid "Connection timed out"
@@ -3346,6 +3348,9 @@ msgid ""
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
+"Widelands no ha podido obtener la dirección IP del servidor a tiempo.\n"
+"Parece que hay un problema de red, ya sea en su lado o en el lado\n"
+"del servidor.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:407
 #: ../../src/network/internet_gaming.cc:99
@@ -3386,7 +3391,7 @@ msgstr "Tipo de inicio"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:104 ../../src/ui_fsmenu/launchMPG.cc:169
 msgid "Type of game"
-msgstr ""
+msgstr "Tipo de partida"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
@@ -3410,6 +3415,12 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finished!?!"
 msgstr ""
+"Widelands trató de iniciar un juego con un archivo que no se pudo encontrar "
+"en la ruta dada.\n"
+"El archivo fué: %s\n"
+"Si esto sucede en un juego de red, el host podría haber seleccionado un "
+"archivo que no tienes. Normalmente este tipo de archivo debe ser enviado "
+"desde el host a usted, pero tal vez la transferencia aún no había terminado?"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:284 ../../src/ui_fsmenu/launchMPG.cc:215
 msgid "(no map)"
@@ -3555,7 +3566,7 @@ msgstr "Elimina volcados de sincronización al inicio"
 
 #: ../../src/ui_fsmenu/options.cc:471
 msgid "OpenGL rendering"
-msgstr ""
+msgstr "Renderizado OpenGL"
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
@@ -3744,6 +3755,12 @@ msgid ""
 "Normally such a file should be send from the host to you, but perhaps the "
 "transfer was not yet finished!?!"
 msgstr ""
+"Widelands trató de iniciar un juego con un archivo que no se pudo encontrar "
+"en la ruta dada.\n"
+"El archivo fué: %s\n"
+"Si esto sucede, el host podría haber seleccionado un archivo que no tienes. "
+"Normalmente este tipo de archivo debe ser enviado desde el host a usted, "
+"pero tal vez la transferencia aún no había terminado?"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:443
 msgid ""
@@ -4180,7 +4197,7 @@ msgstr " Se ha guardado el juego atomáticamente."
 
 #: ../../src/network/netclient.cc:1084
 msgid "Disconnected from Host"
-msgstr ""
+msgstr "Desconectado del anfitrión"
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client has left the game."
@@ -4192,7 +4209,7 @@ msgstr "El cliente ha fallado y ha realizado un guardado de emergencia."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Connection was lost."
-msgstr ""
+msgstr "Conexión perdida"
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "Server has left the game."
@@ -4217,17 +4234,17 @@ msgstr "El cliente y el anfitrión se han desincronizado."
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Expulsado por el anfitrión: %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "El cliente envía comandos malformados: %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Algo ha salido mal: %s"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
@@ -4271,6 +4288,7 @@ msgstr "El servidor utiliza una versión diferente del protocolo."
 #, c-format
 msgid "Received command number %s, that is disallowed in this state."
 msgstr ""
+"Recibido el número de comando %s, que no está permitido en este estado."
 
 #: ../../src/network/network_gaming_messages.cc:143
 msgid "Client reports time to host that is running backwards."
