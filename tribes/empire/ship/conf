@@ -4,12 +4,12 @@ capacity=20
 
 [idle]
 pics=ship_i_??.png
-hotspot=118 94
+hotspot=115 78
 playercolor=true
 fps=10
 
 [sail]
 dirpics=sail_!!_??.png
-hotspot=118 94
+hotspot=115 78
 fps=10
 playercolor=true
