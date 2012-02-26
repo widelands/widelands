@@ -3,7 +3,7 @@
 capacity=20
 
 [idle]
-pics=ship_i_??.png
+pics=idle_??.png
 hotspot=115 78
 playercolor=true
 fps=10
