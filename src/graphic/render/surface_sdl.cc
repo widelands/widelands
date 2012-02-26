@@ -114,8 +114,8 @@ void SurfaceSDL::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 	x += m_offsx;
 	y += m_offsy;
 
-	assert(x < get_w());
-	assert(y < get_h());
+	if (x >= get_w() || y >= get_h())
+		return;
 	assert(m_surface);
 
 	if (SDL_MUSTLOCK(m_surface))
