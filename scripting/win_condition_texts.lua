@@ -51,5 +51,5 @@ game_status_territoral_lord = {
 
 game_status_territoral_lord_time = {
   end_in = _ "game will end in %i minutes.",
-	land = _ "%s %s %i%% of the land (%i of %i)."
+  land = _ "%s %s %i%% of the land (%i of %i)."
 }

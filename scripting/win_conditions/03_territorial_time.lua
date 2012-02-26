@@ -155,6 +155,17 @@ return {
 			return (part * 100) / whole
 		end
 
+		-- Helper function to get the points that the leader has
+		function _maxpoints(points)
+			local max = 0
+			for i=1,#points do
+				if points[i][2] > max then max = points[i][2] end
+			end
+			return max
+		end
+
+		-- Helper function that returns a string containing the current
+		-- land percentages of players/teams.
 		function _status(points, has_had)
 			local msg = ""
 			for i=1,#points do
@@ -182,7 +193,7 @@ return {
 
 			for idx, p in ipairs(plrs) do
 				local msg = ""
-				if remaining_time < remaining_max_time and (remaining_time % 300 == 0) then
+				if remaining_time < remaining_max_time and _maxpoints(points) > ( #fields / 2 ) then
 					if candidateisteam and currentcandidate == game_status_territoral_lord.team:format(p.team)
 						or not candidateisteam and currentcandidate == p.name then
 						msg = msg .. msg2 .. "\n\n"
