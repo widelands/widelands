@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-27 22:13+0100\n"
+"POT-Creation-Date: 2012-02-27 22:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2630,11 +2630,13 @@ msgid "No left resources found!"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1209
-msgid "Mine empty"
+msgid "Main vain exhausted"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1211
-msgid "This mines has run empty. You should consider to expand or destruct it."
+msgid ""
+"This mines' main vein exhausted. Expect strongly diminished returns on "
+"investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1225
