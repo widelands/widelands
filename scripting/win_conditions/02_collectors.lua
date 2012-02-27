@@ -181,8 +181,7 @@ while true do
 	local runs = 0
 	repeat
 		sleep(5000)
-		check_player_defeated(plrs, lost_game.title,
-			lost_game.body, wc_name, wc_version)
+		check_player_defeated(plrs, lost_game.title, lost_game.body, wc_name, wc_version)
 		runs = runs + 1
 	until runs >= 120 -- 120 * 5000ms = 600000 ms = 10 minutes
 	remaining_time = remaining_time - 10
