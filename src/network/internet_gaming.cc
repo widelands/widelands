@@ -246,8 +246,16 @@ void InternetGaming::handle_metaserver_communication() {
 			// from this read. This ensures that we process DISCONNECT
 			// packets that are followed immediately by connection close.
 			if (!m_deserializer.read(m_sock)) {
-				logout("CONNECTION_LOST");
 				setError();
+				const std::string & msg = InternetGamingMessages::get_message("CONNECTION_LOST");
+				dedicatedlog("InternetGaming: Error: %s\n", msg.c_str());
+				formatAndAddChat("", "", true, msg);
+				// Try to relogin
+				if (!relogin()) {
+					// Do not try to relogin again automatically.
+					reset();
+					setError();
+				}
 				return;
 			}
 
