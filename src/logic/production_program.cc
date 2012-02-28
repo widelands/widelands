@@ -1206,7 +1206,7 @@ void ProductionProgram::ActMine::informPlayer
 	ps.send_message
 		(game,
 		 "mine",
-		 _("Main vain exhausted"),
+		 _("Main vein exhausted"),
 		 _
 		 ("This mines' main vein exhausted. Expect strongly diminished returns on investment. "
 		  "You should consider to expand, dismantle or destruct it."),
