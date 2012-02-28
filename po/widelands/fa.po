@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-21 20:48+0100\n"
+"POT-Creation-Date: 2012-02-27 22:36+0100\n"
 "PO-Revision-Date: 2011-05-23 00:45+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Persian <fa@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-02-22 04:47+0000\n"
-"X-Generator: Launchpad (build 14838)\n"
+"X-Launchpad-Export-Date: 2012-02-28 05:27+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -996,7 +996,7 @@ msgstr ""
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:98
+#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr ""
 
@@ -1671,15 +1671,15 @@ msgstr ""
 msgid "Exit Replay"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:109
+#: ../../src/wui/watchwindow.cc:111
 msgid "Follow"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:118
+#: ../../src/wui/watchwindow.cc:120
 msgid "Center mainview on this"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:140 ../../src/ui_fsmenu/fileview.cc:44
+#: ../../src/wui/watchwindow.cc:142 ../../src/ui_fsmenu/fileview.cc:44
 msgid "Close"
 msgstr ""
 
@@ -1981,7 +1981,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:59
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:137
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:207
-#: ../../src/map_io/widelands_map_extradata_data_packet.cc:96
+#: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
 #: ../../src/map_io/widelands_map_object_packet.cc:61
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:85
 #: ../../src/game_io/game_player_economies_data_packet.cc:72
@@ -2634,12 +2634,13 @@ msgid "No left resources found!"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1209
-msgid "Mine empty"
+msgid "Main vain exhausted"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
-"This mines has run empty. You should consider to expand or destruct it."
+"This mines' main vein exhausted. Expect strongly diminished returns on "
+"investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1225
@@ -2705,17 +2706,17 @@ msgstr ""
 msgid "Enemy at site defeated!"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:673
+#: ../../src/logic/militarysite.cc:674
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:674
+#: ../../src/logic/militarysite.cc:675
 #, c-format
 msgid "Your %s is under attack.</p>"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:682
+#: ../../src/logic/militarysite.cc:683
 msgid "You are under attack"
 msgstr ""
 
@@ -3089,7 +3090,7 @@ msgstr ""
 msgid "elemental data: %s"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
+#: ../../src/map_io/widelands_map_extradata_data_packet.cc:100
 #, c-format
 msgid "extradata: %s"
 msgstr ""
@@ -4140,6 +4141,11 @@ msgstr ""
 msgid "Sending part %s of file %s to %s"
 msgstr ""
 
+#: ../../src/network/network_gaming_messages.cc:162
+#, c-format
+msgid "The player \"%s\" was defeated and became spectator."
+msgstr ""
+
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "No user with the name %s is logged in!"
@@ -4378,61 +4384,61 @@ msgstr ""
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:261
+#: ../../src/network/internet_gaming.cc:269
 msgid "Something went wrong: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:339
+#: ../../src/network/internet_gaming.cc:347
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:346
+#: ../../src/network/internet_gaming.cc:354
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:346
+#: ../../src/network/internet_gaming.cc:354
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:358
+#: ../../src/network/internet_gaming.cc:366
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:371
+#: ../../src/network/internet_gaming.cc:379
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:380
+#: ../../src/network/internet_gaming.cc:388
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:475
+#: ../../src/network/internet_gaming.cc:483
 msgid "ERROR: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:479
+#: ../../src/network/internet_gaming.cc:487
 msgid "Chat message could not be sent. "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:500
+#: ../../src/network/internet_gaming.cc:508
 msgid "Received an unknown command from the metaserver: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:632
+#: ../../src/network/internet_gaming.cc:640
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:644
+#: ../../src/network/internet_gaming.cc:652
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:717
+#: ../../src/network/internet_gaming.cc:725
 msgid "<unknown>"
 msgstr ""
 

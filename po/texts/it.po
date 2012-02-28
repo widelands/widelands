@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-21 19:48+0000\n"
-"PO-Revision-Date: 2012-02-22 12:47+0000\n"
+"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"PO-Revision-Date: 2012-02-27 12:27+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-23 04:32+0000\n"
-"X-Generator: Launchpad (build 14855)\n"
+"X-Launchpad-Export-Date: 2012-02-28 05:22+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -58,7 +58,7 @@ msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
-"- Quale versione di Widelands utilizzi(cioè il numero di build, o se è una "
+"- Quale versione di Widelands utilizzi (cioè il numero di build, o se è una "
 "compilazione <br> personalizzata da SVN)"
 
 #: ../../txts/README:125
@@ -433,14 +433,15 @@ msgstr ""
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
-"ALT      (Tenere) Seleziona il secondo strumento alternativo mentre premuto"
+"ALT (Tenere premuto) Seleziona il secondo strumento alternativo (fintanto "
+"che mantieni premuto)"
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
-"Costruire sempre una casa del guardaboschi ed una casa di allevamento del "
+"Costruisci sempre una casa del guardaboschi ed una casa di allevamento del "
 "pesce, così non rimarrai senza tronchi e cibo."
 
 #: ../../txts/tips/empire.tip:10
@@ -453,7 +454,7 @@ msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
-"Costruire sempre una capanna del guardaboschi e del guardiacaccia, così non "
+"Costruisci sempre una capanna del guardaboschi e del guardiacaccia, così non "
 "rimarrai senza tronchi e cibo."
 
 #: ../../txts/tips/general_game.tip:22
@@ -481,11 +482,11 @@ msgstr ""
 
 #: ../../txts/README:57
 msgid "C               Toggle census"
-msgstr "C               Mostra/Nascondi censimento"
+msgstr "C Mostra/Nascondi censimento"
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
-msgstr "C        Mostra/Nascondi censimento acceso/spento"
+msgstr "C Mostra/Nascondi censimento"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -1077,8 +1078,7 @@ msgid ""
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
 "Alcune costruzioni, come le fattorie, hanno un'area di lavoro molto piccola. "
-"Se la costruzione è circondata da alberi o strade, la produzione verrà "
-"fermata."
+"Se la costruzione è circondata da alberi o strade, la produzione si fermerà."
 
 #: ../../txts/developers:28
 #: ../../txts/developers:346
@@ -1119,7 +1119,7 @@ msgid ""
 "construction site."
 msgstr ""
 "Il processo di costruzione inizierà soltanto se esiste una strada per "
-"raggiungere il luogo della costruzione."
+"raggiungere il cantiere."
 
 #: ../../txts/COPYING:100
 msgid ""
@@ -1387,8 +1387,8 @@ msgid ""
 "Use priority buttons in building window to adjust delivery of a specific "
 "ware."
 msgstr ""
-"Usa i bottoni per la priorità nella finestra delle costruzioni per regolare "
-"la fornitura di una specifica merce."
+"Usa i bottoni per la priorità nella finestra dell'edificio per regolare la "
+"fornitura di una specifica merce."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
