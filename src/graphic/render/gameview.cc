@@ -74,7 +74,7 @@ inline static Sint8 node_brightness
 }
 
 
-#define RENDERMAP_INITIALIZANTONS                                             \
+#define RENDERMAP_INITIALIZATIONS                                             \
    viewofs -= m_offset;                                                       \
                                                                               \
    Map                   const & map             = egbase.map();              \
@@ -114,7 +114,7 @@ void GameView::rendermap
 	if (player.see_all())
 		return rendermap(egbase, viewofs);
 
-	RENDERMAP_INITIALIZANTONS;
+	RENDERMAP_INITIALIZATIONS;
 
 	const Player::Field * const first_player_field = player.fields();
 	Widelands::Time const gametime = egbase.get_gametime();
@@ -172,14 +172,11 @@ void GameView::rendermap
 			br_posx += TRIANGLE_WIDTH;
 			const Texture & tr_d_texture =
 				*g_gr->get_maptexture_data
-					(world.terrain_descr(first_player_field[tr_index].terrains.d)
-					 .get_texture());
+					(world.terrain_descr(first_player_field[tr_index].terrains.d).get_texture());
 			const Texture & f_d_texture =
-				*g_gr->get_maptexture_data
-					(world.terrain_descr(f_player_field.terrains.d).get_texture());
+				*g_gr->get_maptexture_data(world.terrain_descr(f_player_field.terrains.d).get_texture());
 			f_r_texture =
-				g_gr->get_maptexture_data
-					(world.terrain_descr(f_player_field.terrains.r).get_texture());
+				g_gr->get_maptexture_data(world.terrain_descr(f_player_field.terrains.r).get_texture());
 
 			uint8_t const roads =
 				f_player_field.roads | overlay_manager.get_road_overlay(f);
@@ -234,7 +231,7 @@ void GameView::rendermap
 		const int32_t dx2        = maxfx - minfx + 1;
 		int32_t dy2              = maxfy - minfy + 1;
 		int32_t linear_fy2       = minfy;
-		bool row_is_forward2 = linear_fy2 & 1;
+		bool row_is_forward2     = linear_fy2 & 1;
 		int32_t b_posy2          = linear_fy2 * TRIANGLE_HEIGHT - viewofs.y;
 
 		while (dy2--) {
@@ -243,12 +240,10 @@ void GameView::rendermap
 
 			{ //  Draw things on the node.
 				const int32_t linear_fx = minfx;
-				FCoords r(Coords(linear_fx, linear_fy2));
-				FCoords br
-					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
+				FCoords r (Coords(linear_fx, linear_fy2));
+				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
-				//  Calculate safe (bounded) field coordinates and get field
-				//  pointers.
+				//  Calculate safe (bounded) field coordinates and get field pointers.
 				map.normalize_coords(r);
 				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
@@ -259,11 +254,11 @@ void GameView::rendermap
 				map.get_tln(r, &tr);
 				map.get_ln(r, &f);
 				bool r_is_border;
-				uint8_t f_owner_number = f.field->get_owned_by(); //  FIXME PPoV
+				uint8_t f_owner_number = f.field->get_owned_by();   //  do not use if f_vision < 1 -> PPOV
 				uint8_t r_owner_number;
-				r_is_border = r.field->is_border(); //  FIXME PPoV
-				r_owner_number = r.field->get_owned_by(); //  FIXME PPoV
-				uint8_t br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
+				r_is_border = r.field->is_border();                 //  do not use if f_vision < 1 -> PPOV
+				r_owner_number = r.field->get_owned_by();           //  do not use if f_vision < 1 -> PPOV
+				uint8_t br_owner_number = br.field->get_owned_by(); //  do not use if f_vision < 1 -> PPOV
 				Player::Field const * r_player_field = first_player_field + r_index;
 				const Player::Field * br_player_field = first_player_field + br_index;
 				Widelands::Vision  r_vision =  r_player_field->vision;
@@ -290,64 +285,59 @@ void GameView::rendermap
 					r_player_field  = first_player_field +  r_index;
 					br_player_field = first_player_field + br_index;
 
-					//  FIXME PPoV
+					//  do not use if f_vision < 1 -> PPOV
 					const uint8_t tr_owner_number = tr.field->get_owned_by();
 
 					const bool f_is_border = r_is_border;
 					const uint8_t l_owner_number = f_owner_number;
 					const uint8_t bl_owner_number = br_owner_number;
 					f_owner_number = r_owner_number;
-					r_is_border = r.field->is_border();         //  FIXME PPoV
-					r_owner_number = r.field->get_owned_by();   //  FIXME PPoV
-					br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
+					r_is_border = r.field->is_border();         //  do not use if f_vision < 1 -> PPOV
+					r_owner_number = r.field->get_owned_by();   //  do not use if f_vision < 1 -> PPOV
+					br_owner_number = br.field->get_owned_by(); //  do not use if f_vision < 1 -> PPOV
 					Widelands::Vision const  f_vision =  r_vision;
 					Widelands::Vision const bl_vision = br_vision;
 					r_vision  = player.vision (r_index);
 					br_vision = player.vision(br_index);
 					const Point f_pos = r_pos, bl_pos = br_pos;
-					r_pos = Point
-						(r_pos.x + TRIANGLE_WIDTH,
-						 posy - r.field->get_height() * HEIGHT_FACTOR);
-					br_pos = Point
-						(br_pos.x + TRIANGLE_WIDTH,
-						 b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
-
-					//  Render border markes on and halfway between border nodes.
-					if (f_is_border) {
-						const Player & owner = egbase.player(f_owner_number);
-						uint32_t const anim = owner.frontier_anim();
-						if (1 < f_vision)
-							drawanim(f_pos, anim, 0, &owner);
-						if
-							((f_vision | r_vision)
-							 and
-							 r_owner_number == f_owner_number
-							 and
-							 ((tr_owner_number == f_owner_number)
-							  xor
-							  (br_owner_number == f_owner_number)))
-							drawanim(middle(f_pos, r_pos), anim, 0, &owner);
-						if
-							((f_vision | bl_vision)
-							 and
-							 bl_owner_number == f_owner_number
-							 and
-							 ((l_owner_number == f_owner_number)
-							  xor
-							  (br_owner_number == f_owner_number)))
-							drawanim(middle(f_pos, bl_pos), anim, 0, &owner);
-						if
-							((f_vision | br_vision)
-							 and
-							 br_owner_number == f_owner_number
-							 and
-							 ((r_owner_number == f_owner_number)
-							  xor
-							  (bl_owner_number == f_owner_number)))
-							drawanim(middle(f_pos, br_pos), anim, 0, &owner);
-					}
+					r_pos = Point(r_pos.x + TRIANGLE_WIDTH, posy - r.field->get_height() * HEIGHT_FACTOR);
+					br_pos = Point(br_pos.x + TRIANGLE_WIDTH, b_posy2 - br.field->get_height() * HEIGHT_FACTOR);
 
 					if (1 < f_vision) { // Render stuff that belongs to the node.
+						//  Render border markes on and halfway between border nodes.
+						if (f_is_border) {
+							const Player & owner = egbase.player(f_owner_number);
+							uint32_t const anim = owner.frontier_anim();
+							drawanim(f_pos, anim, 0, &owner);
+							if
+								((f_vision | r_vision)
+								 and
+								 r_owner_number == f_owner_number
+								 and
+								 ((tr_owner_number == f_owner_number)
+								 xor
+								 (br_owner_number == f_owner_number)))
+								drawanim(middle(f_pos, r_pos), anim, 0, &owner);
+							if
+								((f_vision | bl_vision)
+								 and
+								 bl_owner_number == f_owner_number
+								 and
+								 ((l_owner_number == f_owner_number)
+								 xor
+								 (br_owner_number == f_owner_number)))
+								drawanim(middle(f_pos, bl_pos), anim, 0, &owner);
+							if
+								((f_vision | br_vision)
+								 and
+								 br_owner_number == f_owner_number
+								 and
+								 ((r_owner_number == f_owner_number)
+								 xor
+								 (bl_owner_number == f_owner_number)))
+								drawanim(middle(f_pos, br_pos), anim, 0, &owner);
+						}
+
 
 						// Render bobs
 						// TODO - rendering order?
@@ -380,12 +370,24 @@ void GameView::rendermap
 							 it < end;
 							 ++it)
 							blit(f_pos - it->hotspot, it->picid);
-					} else if (f_vision == 1)
+					} else if (f_vision == 1) {
+						const Player * owner = f_player_field.owner ? egbase.get_player(f_player_field.owner) : 0;
+						if (owner) {
+							// Draw borders as they stood the last time we saw them
+							uint32_t const anim = owner->frontier_anim();
+							if (f_player_field.border)
+								drawanim(f_pos, anim, 0, owner);
+							if (f_player_field.border_r)
+								drawanim(middle(f_pos,  r_pos), anim, 0, owner);
+							if (f_player_field.border_br)
+								drawanim(middle(f_pos, bl_pos), anim, 0, owner);
+							if (f_player_field.border_bl)
+								drawanim(middle(f_pos, br_pos), anim, 0, owner);
+						}
 						if
 							(const Map_Object_Descr * const map_object_descr =
 							 f_player_field.map_object_descr[TCoords<>::None])
 						{
-							Player const * const owner = f_owner_number ? egbase.get_player(f_owner_number) : 0;
 							if
 								(const Player::Constructionsite_Information * const csinf =
 								 f_player_field.constructionsite[TCoords<>::None])
@@ -446,6 +448,7 @@ void GameView::rendermap
 								drawanim(f_pos, owner->flag_anim(), 0, owner);
 							}
 						}
+					}
 				}
 			}
 
@@ -597,7 +600,7 @@ void GameView::rendermap
 	(Widelands::Editor_Game_Base const &       egbase,
 	 Point                                     viewofs)
 {
-	RENDERMAP_INITIALIZANTONS;
+	RENDERMAP_INITIALIZATIONS;
 
 	rendermap_init();
 

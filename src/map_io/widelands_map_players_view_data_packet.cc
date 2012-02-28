@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,43 +40,46 @@ namespace Widelands {
 
 
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
-#define DIRNAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/view"
+#define DIRNAME_TEMPLATE PLAYERDIRNAME_TEMPLATE                     "/view"
 
 #define UNSEEN_TIMES_CURRENT_PACKET_VERSION             1
-#define UNSEEN_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/unseen_times_%u"
+#define UNSEEN_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE             "/unseen_times_%u"
 
 #define NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION     1
-#define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/node_immovable_kinds_%u"
+#define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE     "/node_immovable_kinds_%u"
 
 #define NODE_IMMOVABLES_CURRENT_PACKET_VERSION          2
-#define NODE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/node_immovables_%u"
+#define NODE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE          "/node_immovables_%u"
 
 #define ROADS_CURRENT_PACKET_VERSION                    1
-#define ROADS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/roads_%u"
+#define ROADS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                    "/roads_%u"
 
 #define TERRAINS_CURRENT_PACKET_VERSION                 1
-#define TERRAINS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/terrains_%u"
+#define TERRAINS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                 "/terrains_%u"
 
 #define TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION 1
 #define TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
 
 #define TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION      2
-#define TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovables_%u"
+#define TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE      "/triangle_immovables_%u"
 
 #define OWNERS_CURRENT_PACKET_VERSION                   0
-#define OWNERS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/owners_%u"
+#define OWNERS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                   "/owners_%u"
 
 #define SURVEYS_CURRENT_PACKET_VERSION                  1
-#define SURVEYS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/surveys_%u"
+#define SURVEYS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                  "/surveys_%u"
 
 #define SURVEY_AMOUNTS_CURRENT_PACKET_VERSION           1
-#define SURVEY_AMOUNTS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/survey_amounts_%u"
+#define SURVEY_AMOUNTS_FILENAME_TEMPLATE DIRNAME_TEMPLATE           "/survey_amounts_%u"
 
 #define SURVEY_TIMES_CURRENT_PACKET_VERSION             1
-#define SURVEY_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/survey_times_%u"
+#define SURVEY_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE             "/survey_times_%u"
 
-#define VISION_CURRENT_PACKET_VERSION             1
-#define VISION_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/vision_%u"
+#define VISION_CURRENT_PACKET_VERSION                   1
+#define VISION_FILENAME_TEMPLATE DIRNAME_TEMPLATE                   "/vision_%u"
+
+#define BORDER_CURRENT_PACKET_VERSION                   0
+#define BORDER_FILENAME_TEMPLATE DIRNAME_TEMPLATE                   "/border_%u"
 
 #define FILENAME_SIZE 48
 
@@ -389,6 +392,22 @@ void Map_Players_View_Data_Packet::Read
 			(FileRead,       survey_times_file,   survey_times_filename,
 			 SURVEY_TIMES_FILENAME_TEMPLATE, SURVEY_TIMES_CURRENT_PACKET_VERSION);
 
+		// Load border files
+		char border_filename[FILENAME_SIZE];
+		snprintf
+			(border_filename, sizeof(border_filename),
+			 BORDER_FILENAME_TEMPLATE, plnum, BORDER_CURRENT_PACKET_VERSION);
+		BitInBuffer<1> border_file;
+		bool borders = false;
+		try {
+			border_file.Open(fs, border_filename);
+			borders = true;
+		} catch (...) {
+			log
+				("Map_Players_View_Data_Packet::Read: No border file found, therefore no borders will be drawn "
+				 "in unseen areas until they get at least once seen again.\n");
+		}
+
 		for
 			(FCoords first_in_row(Coords(0, 0), &first_field);
 			 first_in_row.y < mapheight;
@@ -471,6 +490,14 @@ void Map_Players_View_Data_Packet::Read
 							(egbase, node_immovable_kinds_file, node_immovables_file, node_immovables_file_version);
 					f_player_field.map_object_descr[TCoords<>::None] = mod->map_object_descr;
 					f_player_field.constructionsite[TCoords<>::None] = mod->csi;
+
+					// if there is a border file, read in whether this field had a border the last time it was seen
+					if (borders) {
+						f_player_field.border    = (border_file.get() == 1);
+						f_player_field.border_r  = (border_file.get() == 1);
+						f_player_field.border_br = (border_file.get() == 1);
+						f_player_field.border_bl = (border_file.get() == 1);
+					}
 
 
 					break;
@@ -764,6 +791,7 @@ throw (_wexception)
 			BitOutBuffer<4>           survey_amounts_file;
 			FileWrite                   survey_times_file;
 			FileWrite                         vision_file;
+			BitOutBuffer<1>                   border_file;
 			for
 				(FCoords first_in_row(Coords(0, 0), &first_field);
 				 first_in_row.y < mapheight;
@@ -803,6 +831,12 @@ throw (_wexception)
 							mod->map_object_descr = f_player_field.map_object_descr[TCoords<>::None];
 							mod->csi              = f_player_field.constructionsite[TCoords<>::None];
 							write_unseen_immovable(mod, node_immovable_kinds_file, node_immovables_file);
+
+							// write whether this field had a border the last time it was seen
+							border_file.put(f_player_field.border    ? 1 : 0);
+							border_file.put(f_player_field.border_r  ? 1 : 0);
+							border_file.put(f_player_field.border_br ? 1 : 0);
+							border_file.put(f_player_field.border_bl ? 1 : 0);
 						}
 
 						//  triangles
@@ -928,6 +962,11 @@ throw (_wexception)
 				(vision_file,
 				 VISION_FILENAME_TEMPLATE,
 				 VISION_CURRENT_PACKET_VERSION);
+
+			WRITE
+				(border_file,
+				 BORDER_FILENAME_TEMPLATE,
+				 BORDER_CURRENT_PACKET_VERSION);
 		}
 }
 
