@@ -1,31 +1,30 @@
-# Arabic translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# Marathi translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-02-27 22:36+0100\n"
-"PO-Revision-Date: 2011-05-08 21:51+0000\n"
-"Last-Translator: raymond <Unknown>\n"
-"Language-Team: Arabic <ar@li.org>\n"
+"PO-Revision-Date: 2012-02-28 08:50+0000\n"
+"Last-Translator: Amod Ajit Karmarkar <amodkarmarkar@gmail.com>\n"
+"Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
-"3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2012-02-29 04:32+0000\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:34+0000\n"
 "X-Generator: Launchpad (build 14874)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
-msgstr "لا شيء"
+msgstr ""
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
-msgstr ""
+msgstr "विनंतीकर्ते"
 
 #: ../../src/writeHTML.cc:59
 msgid "Providers"
@@ -41,26 +40,26 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:104
 msgid "Employers"
-msgstr "أرباب العمل"
+msgstr ""
 
 #: ../../src/writeHTML.cc:267 ../../src/writeHTML.cc:273
 msgid "Building types"
-msgstr ""
+msgstr "इमारतीचे प्रकार"
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:515
 #: ../../src/writeHTML.cc:1456
 msgid "Icon"
-msgstr ""
+msgstr "चिन्ह"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:517
 #: ../../src/writeHTML.cc:1458 ../../src/wui/building_statistics_menu.cc:112
 #: ../../src/ui_fsmenu/internet_lobby.cc:154
 msgid "Name"
-msgstr "الاسم"
+msgstr "नाव"
 
 #: ../../src/writeHTML.cc:282 ../../src/wui/building_statistics_menu.cc:113
 msgid "Size"
-msgstr "حجم"
+msgstr "आकार"
 
 #: ../../src/writeHTML.cc:284 ../../src/writeHTML.cc:519
 msgid "Buildable"
@@ -72,7 +71,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:174
 msgid "Stop"
-msgstr "قِفْ"
+msgstr "थांबा"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
@@ -85,37 +84,37 @@ msgstr ""
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:376
 #: ../../src/logic/building.cc:528
 msgid "Mine"
-msgstr ""
+msgstr "खाण"
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:392
 #: ../../src/logic/building.cc:529
 msgid "Small"
-msgstr ""
+msgstr "लहान"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:386
 #: ../../src/logic/building.cc:530
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:257
 msgid "Medium"
-msgstr "متوسطة"
+msgstr "मध्यम"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:381
 #: ../../src/logic/building.cc:530
 msgid "Big"
-msgstr "كبير"
+msgstr "मोठे"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:97
 #: ../../src/editor/tools/editor_info_tool.cc:76
 #: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "Yes"
-msgstr "نعم"
+msgstr "होय"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:104
 #: ../../src/editor/tools/editor_info_tool.cc:76
 #: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "No"
-msgstr "ﻻ"
+msgstr ""
 
 #: ../../src/writeHTML.cc:355
 msgid "building_types.xhtml"
@@ -166,7 +165,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
-msgstr "تحسينات"
+msgstr ""
 
 #: ../../src/writeHTML.cc:463
 #, c-format
@@ -237,16 +236,16 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:717 ../../src/writeHTML.cc:862
 msgid "Programs"
-msgstr "برامج"
+msgstr ""
 
 #: ../../src/writeHTML.cc:754 ../../src/writeHTML.cc:1316
 #: ../../src/logic/building.cc:523
 msgid "mine"
-msgstr "الألغام"
+msgstr ""
 
 #: ../../src/writeHTML.cc:755
 msgid "breed"
-msgstr "تولد"
+msgstr ""
 
 #: ../../src/writeHTML.cc:756
 msgid "createitem"
@@ -270,11 +269,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:761
 msgid "walk"
-msgstr "سير"
+msgstr ""
 
 #: ../../src/writeHTML.cc:762
 msgid "animation"
-msgstr "رسوم متحركة"
+msgstr ""
 
 #: ../../src/writeHTML.cc:763 ../../src/writeHTML.cc:902
 msgid "return"
@@ -282,11 +281,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
-msgstr "كائن"
+msgstr ""
 
 #: ../../src/writeHTML.cc:765
 msgid "plant"
-msgstr "مصنع"
+msgstr ""
 
 #: ../../src/writeHTML.cc:766
 msgid "create_bob"
@@ -298,7 +297,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
-msgstr "جيولوجي"
+msgstr ""
 
 #: ../../src/writeHTML.cc:769
 msgid "geologist_find"
@@ -314,7 +313,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:778 ../../src/wui/ware_statistics_menu.cc:182
 msgid "Production"
-msgstr "الإنتاج"
+msgstr ""
 
 #: ../../src/writeHTML.cc:782 ../../src/wui/general_statistics_menu.cc:182
 #: ../../src/wui/transport_ui.cc:65 ../../src/wui/productionsitewindow.cc:88
@@ -362,7 +361,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:906 ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:801
 msgid "failed"
-msgstr "فشل"
+msgstr ""
 
 #: ../../src/writeHTML.cc:907 ../../src/logic/production_program.cc:412
 msgid "completed"
@@ -382,7 +381,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:916
 msgid "or"
-msgstr "أو"
+msgstr ""
 
 #: ../../src/writeHTML.cc:917
 msgid "unless"
@@ -390,7 +389,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:948 ../../src/writeHTML.cc:970
 msgid "economy"
-msgstr "الاقتصاد"
+msgstr ""
 
 #: ../../src/writeHTML.cc:950 ../../src/writeHTML.cc:972
 msgid "needs"
@@ -402,7 +401,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:992
 msgid "has"
-msgstr "وقد"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
@@ -422,7 +421,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1029
 msgid "experience"
-msgstr "تجربة"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1043
 msgid "Documentation for program command call"
@@ -443,7 +442,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1107
 msgid "worker"
-msgstr "عامل"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1118
 #, c-format
@@ -456,7 +455,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1135
 msgid "sleep"
-msgstr "النوم"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1180
 #, c-format
@@ -498,11 +497,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1238
 msgid "produce"
-msgstr "إنتاج"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1275
 msgid "recruit"
-msgstr "تجنيد"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1314
 msgid "Documentation for program command mine"
@@ -522,15 +521,15 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1350 ../../src/writeHTML.cc:1374
 msgid "attack"
-msgstr "هجوم"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1351 ../../src/writeHTML.cc:1375
 msgid "defense"
-msgstr "الدفاع"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1352 ../../src/writeHTML.cc:1376
 msgid "evade"
-msgstr "تهرب"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1365
 msgid "Documentation for program command train"
@@ -604,8 +603,6 @@ msgid ""
 "Options:\n"
 "\n"
 msgstr ""
-"خيارات :\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1296
 msgid ""
@@ -739,7 +736,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1545
 msgid "Warning: "
-msgstr "تحذير: "
+msgstr ""
 
 #: ../../src/wlapplication.cc:1549
 msgid "Game data error"
@@ -800,7 +797,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
-msgstr "أدوات"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
@@ -884,11 +881,11 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
 #: ../../src/logic/map.h:165
 msgid "Unknown"
-msgstr "غير معروف"
+msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 msgid "Help: "
-msgstr "مساعدة: "
+msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:83 ../../src/ui_basic/messagebox.cc:90
 #: ../../src/wui/game_main_menu_save_game.cc:85
@@ -901,7 +898,7 @@ msgstr "مساعدة: "
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:133
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:119
 msgid "OK"
-msgstr "موافق"
+msgstr ""
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
@@ -1011,7 +1008,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
-msgstr "هجوم"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:589
 msgid "Build mines"
@@ -1046,7 +1043,7 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:206
 msgid "Productivity"
-msgstr "إنتاجية"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:214
 msgid "Casualties"
@@ -1070,7 +1067,7 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:254
 msgid "Military"
-msgstr "العسكرية"
+msgstr ""
 
 #: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
@@ -1147,7 +1144,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
 msgid "Worker"
-msgstr "عامل"
+msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:76
 msgid "Exp"
@@ -1174,7 +1171,7 @@ msgstr ""
 #: ../../src/wui/game_options_menu.cc:47
 #: ../../src/wui/interactive_spectator.cc:60 ../../src/ui_fsmenu/main.cc:64
 msgid "Options"
-msgstr "خيارات"
+msgstr ""
 
 #: ../../src/wui/interactive_player.cc:114
 #: ../../src/wui/interactive_spectator.cc:62
@@ -1244,7 +1241,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:471
 #, c-format
 msgid "Spectator"
-msgstr "المشاهد"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:255
 #: ../../src/ui_fsmenu/netsetup_lan.cc:193
@@ -1255,7 +1252,7 @@ msgstr ""
 #: ../../src/wui/playerdescrgroup.cc:157
 #: ../../src/ui_fsmenu/netsetup_lan.cc:192
 msgid "Open"
-msgstr "فتح"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:277
 msgid "Shared in"
@@ -1302,15 +1299,15 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:429
 msgid "Start"
-msgstr "ابدء"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:437
 msgid "Type"
-msgstr "نوع"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:445
 msgid "Tribe"
-msgstr "قبيلة"
+msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:453
 #: ../../src/wui/playerdescrgroup.cc:101
@@ -1320,7 +1317,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:457
 #: ../../src/ui_fsmenu/launchSPG.cc:92
 msgid "Team"
-msgstr "فريق"
+msgstr ""
 
 #: ../../src/wui/trainingsitewindow.cc:57
 msgid "Soldiers in training"
@@ -1372,7 +1369,7 @@ msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:63 ../../src/ui_fsmenu/main.cc:74
 msgid "License"
-msgstr "الترخيص"
+msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:70
 msgid "Authors"
@@ -1404,11 +1401,11 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:55
 msgid "Status"
-msgstr "حالة"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Title"
-msgstr "العنوان"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:57
 msgid "Time sent"
@@ -1424,7 +1421,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:73
 msgid "Invert"
-msgstr "قلب"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:73
 msgid "Invert selection"
@@ -1543,7 +1540,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
-msgstr "كلمة السر:"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
@@ -1559,7 +1556,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:63
 msgid "Login"
-msgstr "تسجيل الدخول"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:69 ../../src/wui/game_main_menu_save_game.cc:95
 #: ../../src/ui_fsmenu/options.cc:56 ../../src/ui_fsmenu/options.cc:392
@@ -1568,12 +1565,12 @@ msgstr "تسجيل الدخول"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:128
 msgid "Cancel"
-msgstr "إلغاء"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:73 ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "nobody"
-msgstr "لا أحد"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
@@ -1601,7 +1598,7 @@ msgstr ""
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
-msgstr "جنود"
+msgstr ""
 
 #: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
@@ -1645,7 +1642,7 @@ msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:88
 msgid "Quantity"
-msgstr "الكمية"
+msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:201
 #: ../../src/logic/production_program.cc:430
@@ -1695,7 +1692,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:103
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:53
 msgid "Delete"
-msgstr "حذف"
+msgstr ""
 
 #: ../../src/wui/game_main_menu_save_game.cc:144
 #, c-format
@@ -1740,7 +1737,7 @@ msgstr ""
 
 #: ../../src/wui/interactive_base.cc:280
 msgid "PAUSE"
-msgstr "بوقفة"
+msgstr ""
 
 #: ../../src/wui/interactive_base.cc:300
 #, c-format
@@ -1776,7 +1773,7 @@ msgstr ""
 #: ../../src/wui/minimap.cc:145
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 msgid "Terrain"
-msgstr "أرض"
+msgstr ""
 
 #: ../../src/wui/minimap.cc:151
 msgid "Owner"
@@ -1926,7 +1923,7 @@ msgstr ""
 #: ../../src/logic/building.cc:525
 #: ../../src/editor/tools/editor_info_tool.cc:64
 msgid "big"
-msgstr "كبير"
+msgstr ""
 
 #: ../../src/logic/cmd_queue.cc:189
 #, c-format
@@ -2173,7 +2170,7 @@ msgstr ""
 
 #: ../../src/logic/map.cc:366
 msgid "Player 1"
-msgstr "اللاعب 1"
+msgstr ""
 
 #: ../../src/logic/instances.cc:75
 #, c-format
@@ -2366,7 +2363,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:863 ../../src/logic/production_program.cc:1407
 msgid "priority"
-msgstr "الأولوية"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:901 ../../src/logic/immovable.cc:1080
 #, c-format
@@ -2463,7 +2460,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:876
 #: ../../src/logic/production_program.cc:971
 msgid "count"
-msgstr "عد"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
@@ -3159,7 +3156,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:155
 msgid "Points"
-msgstr "نقاط"
+msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Game"
@@ -3250,7 +3247,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:397
 msgid "Apply"
-msgstr "تطبيق"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:72
 msgid "min."
@@ -3290,7 +3287,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:130
 msgid "Language"
-msgstr "اللغة"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:141
 msgid "In-game Options"
@@ -3347,7 +3344,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:403
 msgid "x"
-msgstr "x"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:408 ../../src/ui_fsmenu/options.cc:413
 msgid "px."
@@ -3407,7 +3404,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:64
 #: ../../src/ui_fsmenu/campaign_select.cc:266
 msgid "Name:"
-msgstr "إسم:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:60
 #: ../../src/ui_fsmenu/mapselect.cc:70
@@ -3426,12 +3423,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:82
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:74
 msgid "World:"
-msgstr "العالم:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr "لاعبي:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:80
 #: ../../src/ui_fsmenu/mapselect.cc:94
@@ -3812,16 +3809,16 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:54
 msgid "Campaign:"
-msgstr "حملة:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Difficulty:"
-msgstr "صعوبة:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:270
 msgid "Description:"
-msgstr "الوصف:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:163
 #: ../../src/ui_fsmenu/campaign_select.cc:165
@@ -4468,7 +4465,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:176
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:223
 msgid "Current:"
-msgstr "الحالي:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
 msgid "Bobs Menu"
@@ -4514,7 +4511,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:93
 msgid "Allow"
-msgstr "سماح"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:157
@@ -4577,7 +4574,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:72
 msgid "Resource"
-msgstr "المورد"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:73
 msgid "Set port space"
@@ -4626,7 +4623,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Resources:"
-msgstr "الموارد:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "Low"
@@ -4685,7 +4682,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:96
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
 msgid "Size: "
-msgstr "حجم: "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:103
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:89
@@ -4708,7 +4705,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "<Directory>"
-msgstr "<الدليل>"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:257
 msgid "<Not a map file>"
@@ -4768,7 +4765,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:204
 msgid "Player "
-msgstr "لاعب "
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:323
 msgid "Error!"
@@ -4807,7 +4804,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " port"
-msgstr " الميناء"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " walk"
@@ -4881,11 +4878,11 @@ msgstr ""
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
-msgstr "عدواني"
+msgstr ""
 
 #: ../../src/ai/defaultai.h:94
 msgid "Normal"
-msgstr "طبيعي"
+msgstr ""
 
 #: ../../src/ai/defaultai.h:103
 msgid "Defensive"

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-27 22:36+0100\n"
-"PO-Revision-Date: 2011-12-23 15:50+0000\n"
+"PO-Revision-Date: 2012-02-28 12:31+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2012-02-28 05:28+0000\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:35+0000\n"
 "X-Generator: Launchpad (build 14874)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -2756,7 +2756,7 @@ msgid "No left resources found!"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1209
-msgid "Main vain exhausted"
+msgid "Main vein exhausted"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1211
@@ -3422,7 +3422,7 @@ msgstr "Voľby hry"
 
 #: ../../src/ui_fsmenu/options.cc:148
 msgid "Use single Watchwindow Mode"
-msgstr "Použiť mód jediného sledovacieho okna"
+msgstr "Použiť režim jediného sledovacieho okna"
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Start roadbuilding after placing flag"
@@ -3992,7 +3992,7 @@ msgstr "Začni sieťovú hru"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:44
 msgid "List of games in your local network:"
-msgstr "Zoznam hier na vašej lokálnej sieti:"
+msgstr "Zoznam hier vo vašej lokálnej sieti:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:48
 msgid "Your nickname:"
@@ -4012,7 +4012,7 @@ msgstr "Načítať predchádzajúceho hostiteľa"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:123
 msgid "Host"
-msgstr "Host"
+msgstr "Hostiteľ"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125
 msgid "State"

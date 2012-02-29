@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-02-28 05:26+0000\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:33+0000\n"
 "X-Generator: Launchpad (build 14874)\n"
 
 #: ../../src/computer_player.cc:38
@@ -2794,7 +2794,7 @@ msgid "No left resources found!"
 msgstr "Nous avons trouvé qu'il ne restait plus de ressources!"
 
 #: ../../src/logic/production_program.cc:1209
-msgid "Main vain exhausted"
+msgid "Main vein exhausted"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1211

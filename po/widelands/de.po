@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-27 22:36+0100\n"
-"PO-Revision-Date: 2012-02-27 21:41+0000\n"
+"PO-Revision-Date: 2012-02-28 17:11+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-28 05:26+0000\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:33+0000\n"
 "X-Generator: Launchpad (build 14874)\n"
 
 #: ../../src/computer_player.cc:38
@@ -2788,14 +2788,18 @@ msgid "No left resources found!"
 msgstr "Keine weiteren Ressourcen gefunden!"
 
 #: ../../src/logic/production_program.cc:1209
-msgid "Main vain exhausted"
-msgstr ""
+msgid "Main vein exhausted"
+msgstr "Hauptader erschöpft"
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"Die Hauptader dieses Bergwerks ist erschöpft. Es ist davon auszugehen, dass "
+"die Produktivität des Bergwerks drastisch einbricht. Daher solltest du in "
+"Betracht ziehen, das Bergwerk - falls möglich - auszubauen, abzureißen oder "
+"zu zerstören."
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
