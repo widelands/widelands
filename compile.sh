@@ -181,6 +181,7 @@ var_updater=0 # 0 = false
             echo "fi"
             echo " "
             echo "bzr pull"
+            echo "touch CMakeLists.txt"
             echo "cd build"
             echo "make"
             if [ $var_build_lang -eq 1 ] ; then
