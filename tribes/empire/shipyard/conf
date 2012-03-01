@@ -28,24 +28,25 @@ call=ship
 [ship]
 check_map=seafaring
 construct=shipconstruction buildship 6
+animate=working 35000
 return=completed
 
 [idle]
-pics=shipyard_i_??.png
-hotspot=53 66
+pics=work_??.png
+hotspot=50 63
 playercolor=true
 
 [build]
-pics=shipyard_b_??.png
-hotspot=53 66
+pics=build_??.png
+hotspot=50 63
 playercolor=true
 
-#[working]
-#pics=shipyard_i_??.png
-#hotspot=53 66
-#playercolor=true
-#
-#[outofhouse]
-#pics=shipyard_i_??.png
-#hotspot=53 66
-#playercolor=true
+[working]
+pics=work_??.png
+hotspot=50 63
+playercolor=true
+
+[unoccupied]
+pics=vacant_??.png
+hotspot=50 63
+playercolor=true
