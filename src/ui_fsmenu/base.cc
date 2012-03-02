@@ -57,7 +57,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	Section & s = g_options.pull_section("global");
 
 #if USE_OPENGL
-#define GET_BOOL_USE_OPENGL s.get_bool("opengl", false)
+#define GET_BOOL_USE_OPENGL s.get_bool("opengl", true)
 #else
 #define GET_BOOL_USE_OPENGL false
 #endif

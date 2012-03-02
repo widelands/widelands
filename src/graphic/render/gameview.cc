@@ -232,7 +232,7 @@ void GameView::rendermap
 		int32_t dy2              = maxfy - minfy + 1;
 		int32_t linear_fy2       = minfy;
 		bool row_is_forward2     = linear_fy2 & 1;
-		int32_t b_posy2          = linear_fy2 * TRIANGLE_HEIGHT - viewofs.y;
+		int32_t b_posy2          = linear_fy2 * TRIANGLE_HEIGHT - viewofs.y - m_offset.y;
 
 		while (dy2--) {
 			const int32_t posy = b_posy2;
@@ -268,7 +268,7 @@ void GameView::rendermap
 					 +
 					 row_is_forward2 * (TRIANGLE_WIDTH / 2)
 					 -
-					 viewofs.x,
+					 viewofs.x - m_offset.x,
 					 posy - r.field->get_height() * HEIGHT_FACTOR);
 				Point br_pos
 					(r_pos.x - TRIANGLE_WIDTH / 2,

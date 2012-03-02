@@ -453,11 +453,8 @@ void RenderTarget::doblit
 	if (dst.x < 0) {
 		if (srcrc.w <= static_cast<uint32_t>(-dst.x))
 			return;
-
 		srcrc.x -= dst.x;
-
 		srcrc.w += dst.x;
-
 		dst.x = 0;
 	}
 
