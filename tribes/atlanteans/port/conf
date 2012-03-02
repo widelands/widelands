@@ -12,6 +12,6 @@ spidercloth=3
 gold=2
 
 [idle]
-pics=port_i_??.png  # ???
-hotspot=52 64
+pics=idle_??.png  # ???
+hotspot=54 65
 playercolor=true
