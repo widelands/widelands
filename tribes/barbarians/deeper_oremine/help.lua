@@ -5,37 +5,32 @@ set_textdomain("tribe_barbarians")
 
 return {
 	text =
-		rt(h1(_"The Barbarian Deeper Coal Mine")) ..
+		rt(h1(_"The Barbarian Deeper Iron Ore Mine")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
-		rt("image=tribes/barbarians/deeper_coalmine/deeper_coalmine_i_00.png", p(--text identical to coalmine
-			_[[Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>
-			Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]]
-		)) ..
+		rt("image=tribes/barbarians/deeper_oremine/deeper_oremine_i_00.png", p(--text identical to oremine
+			_[["I look at my own pick wearing away day by day and I realize why my work is important."]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic",_"Quote from an anonymous miner.")) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"Deeper Coal Mines exploit all of the resource down to the deepest level.<br>" .. _"But even after having done so, they will still have a 10% chance of finding some more coal.")) ..
+		rt(p(_"Deeper Iron Ore Mines exploit all of the resource down to the deepest level.<br>" .. _"But even after having done so, they will still have a 10% chance of finding some more iron ore.")) ..
 		rt(h3(_"Purpose:")) ..
-		image_line_text("tribes/barbarians/coal/menu.png", 1, p(_"Dig coal out of the ground in mountain terrain.")) ..
+		image_line_text("tribes/barbarians/ironore/menu.png", 1, p(_"Dig iron ore out of the ground in mountain terrain.")) ..
 		text_line(_"Working radius:", "2") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		image_line_dep("tribes/barbarians/big_inn/menu.png","tribes/barbarians/meal/menu.png","tribes/barbarians/deeper_coalmine/menu.png", p(_"Meals from a Big Inn")) ..
+		image_line_dep("tribes/barbarians/big_inn/menu.png","tribes/barbarians/meal/menu.png","tribes/barbarians/deeper_oremine/menu.png", p(_"Meals from a Big Inn")) ..
 		rt(h3(_"Outgoing:")) ..
-		image_line_dep("tribes/barbarians/resi_coal2/resi_00.png","tribes/barbarians/deeper_coalmine/menu.png","tribes/barbarians/coal/menu.png", p(_"Coal")) ..
-		image_line_out("tribes/barbarians/coal/menu.png","tribes/barbarians/metalworks/menu.png", p(_"Metalwork Shop")) ..
-		image_line_out("tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png", p(_"Axefactory")) ..
-		image_line_out("tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png", p(_"War Mill")) ..
-		image_line_out("tribes/barbarians/coal/menu.png","tribes/barbarians/helmsmithy/menu.png", p(_"Helmsmithy")) ..
-		image_line_out("tribes/barbarians/coal/menu.png","tribes/barbarians/smelting_works/menu.png", p(_"Smelting Works")) ..
-		image_line_out("tribes/barbarians/coal/menu.png","tribes/barbarians/lime_kiln/menu.png", p(_"Lime Kiln")) ..
+		image_line_dep("tribes/barbarians/resi_iron2/resi_00.png","tribes/barbarians/deeper_oremine/menu.png","tribes/barbarians/ironore/menu.png", p(_"Iron Ore")) ..
+		image_line_out("tribes/barbarians/ironore/menu.png","tribes/barbarians/smelting_works/menu.png", p(_"Smelting Works")) ..
+		rt(p(_"Iron ore always goes to the Smelting works. It has no other use.")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_image_line(_"Space required:",_"Mine plot","pics/mine.png") ..
-		text_image_line(_"Upgraded from:",_"Deep Coal Mine","tribes/barbarians/deep_coalmine/menu.png") ..
+		text_image_line(_"Upgraded from:",_"Deep Iron Ore Mine","tribes/barbarians/deep_oremine/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
 		image_line_text("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
 		image_line_text("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
@@ -58,5 +53,5 @@ return {
 		rt("text-align=right", p(_"Miner" .. _" to " .. _"Chief Miner" .. " (19 " .. _"EP" .. ")<br>" .. _"Chief Miner" .. _" to " .. _"Master Miner" .. " (28 " .. _"EP" ..")")) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If the food supply is steady, a Deeper Coal Mine can produce one coal in 14.4s on average.")
+		text_line(_"Performance:", _"If the food supply is steady, a Deeper Iron Ore Mine can produce one iron ore in 17.6s on average.")
 }
