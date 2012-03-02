@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-27 22:36+0100\n"
-"PO-Revision-Date: 2012-02-28 12:31+0000\n"
+"PO-Revision-Date: 2012-03-02 04:06+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2012-02-29 04:35+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-02 04:32+0000\n"
+"X-Generator: Launchpad (build 14886)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -166,7 +166,7 @@ msgstr "Stavba %s"
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
-msgstr "Rozšírenia:"
+msgstr "Vylepšenia"
 
 #: ../../src/writeHTML.cc:463
 #, c-format
@@ -259,23 +259,23 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:757
 msgid "setdescription"
-msgstr "zadajte popis"
+msgstr "nastaviť_popis"
 
 #: ../../src/writeHTML.cc:758
 msgid "setbobdescription"
-msgstr ""
+msgstr "nastaviť_popis_bobu"
 
 #: ../../src/writeHTML.cc:759
 msgid "findobject"
-msgstr "nájdi objekt"
+msgstr "nájsť_objekt"
 
 #: ../../src/writeHTML.cc:760
 msgid "findspace"
-msgstr ""
+msgstr "nájsť_miesto"
 
 #: ../../src/writeHTML.cc:761
 msgid "walk"
-msgstr "chôdza"
+msgstr "chodiť"
 
 #: ../../src/writeHTML.cc:762
 msgid "animation"
@@ -283,7 +283,7 @@ msgstr "animácia"
 
 #: ../../src/writeHTML.cc:763 ../../src/writeHTML.cc:902
 msgid "return"
-msgstr "ukončit"
+msgstr "vrátiť"
 
 #: ../../src/writeHTML.cc:764
 msgid "object"
@@ -295,11 +295,11 @@ msgstr "rastlina"
 
 #: ../../src/writeHTML.cc:766
 msgid "create_bob"
-msgstr ""
+msgstr "vytvoriť_bob"
 
 #: ../../src/writeHTML.cc:767
 msgid "removeobject"
-msgstr ""
+msgstr "odstrániť_objekt"
 
 #: ../../src/writeHTML.cc:768
 msgid "geologist"
@@ -311,7 +311,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:770 ../../src/writeHTML.cc:1391
 msgid "playFX"
-msgstr "prehrávanie špeciálnych efektov"
+msgstr "prehrať_zvuk"
 
 #: ../../src/writeHTML.cc:771
 msgid "UNKNOWN"
@@ -339,7 +339,7 @@ msgstr "Vstupy"
 #: ../../src/writeHTML.cc:814
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "Vstup od %s"
 
 #: ../../src/writeHTML.cc:826
 msgid "Output"
@@ -348,7 +348,7 @@ msgstr "Výstup"
 #: ../../src/writeHTML.cc:837 ../../src/writeHTML.cc:851
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "Výstup od %s"
 
 #: ../../src/writeHTML.cc:898 ../../src/writeHTML.cc:1041
 #: ../../src/writeHTML.cc:1103 ../../src/writeHTML.cc:1131
@@ -763,6 +763,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Vykresľovať pomocou OpenGL\n"
 
 #: ../../src/wlapplication.cc:1363
 msgid ""
@@ -932,11 +934,11 @@ msgstr "Hráči"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Späť"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Znovu"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -965,12 +967,12 @@ msgstr "Vytvárajú sa hráči"
 #: ../../src/editor/editorinteractive.cc:205
 #: ../../src/logic/editor_game_base.cc:277
 msgid "Loading world data"
-msgstr "Nahrávanie dát sveta"
+msgstr "Načítavajú sa dáta sveta"
 
 #: ../../src/editor/editorinteractive.cc:208
 #: ../../src/editor/editorinteractive.cc:605
 msgid "Loading graphics..."
-msgstr "Nahrávanie grafiky..."
+msgstr "Načítava sa grafika..."
 
 #: ../../src/editor/editorinteractive.cc:254
 msgid "Map unsaved"
@@ -1117,7 +1119,7 @@ msgstr "Nastavenia armády"
 
 #: ../../src/wui/fieldaction.cc:500
 msgid "Start attack"
-msgstr "Začať útok"
+msgstr "Zaútočiť"
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Attack"
@@ -1216,11 +1218,11 @@ msgstr "Opakovať misiu"
 #: ../../src/wui/dismantlesitewindow.cc:68
 #: ../../src/wui/constructionsitewindow.cc:74
 msgid "Building materials"
-msgstr ""
+msgstr "Stavebné materiály"
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
-msgstr ""
+msgstr "Nastavenia ekonomiky"
 
 #: ../../src/wui/transport_ui.cc:146 ../../src/wui/transport_ui.cc:242
 msgid "Decrease target"
@@ -1232,7 +1234,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:151 ../../src/wui/transport_ui.cc:247
 msgid "Reset to default"
-msgstr ""
+msgstr "Obnoviť predvolené"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"
@@ -1330,11 +1332,11 @@ msgstr "Robotníci v skladoch"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:67
 msgid "Decrease capacity"
-msgstr ""
+msgstr "Zmenšiť kapacitu"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid "Increase capacity"
-msgstr ""
+msgstr "Zväčšiť kapacitu"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -1349,13 +1351,13 @@ msgstr "<zadarmo>"
 #: ../../src/ui_fsmenu/launchMPG.cc:469
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Hráč %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:118
 #: ../../src/ui_fsmenu/launchMPG.cc:471
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Divák"
 
 #: ../../src/wui/multiplayersetupgroup.cc:255
 #: ../../src/ui_fsmenu/netsetup_lan.cc:193
@@ -1401,11 +1403,11 @@ msgstr "Scenár"
 #: ../../src/wui/multiplayersetupgroup.cc:354
 #: ../../src/ui_fsmenu/launchMPG.cc:290
 msgid "Savegame"
-msgstr ""
+msgstr "Uložená hra"
 
 #: ../../src/wui/multiplayersetupgroup.cc:405
 msgid "Client name"
-msgstr ""
+msgstr "Meno klienta"
 
 #: ../../src/wui/multiplayersetupgroup.cc:413
 msgid "Role"
@@ -1443,7 +1445,7 @@ msgstr "Vojaci:"
 
 #: ../../src/wui/attack_box.cc:182
 msgid "Send less soldiers"
-msgstr ""
+msgstr "Poslať menej vojakov"
 
 #: ../../src/wui/attack_box.cc:199
 msgid "Number of soldiers"
@@ -1467,7 +1469,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
@@ -1622,7 +1624,7 @@ msgstr "Zničiť"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "Rozobrať"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -1692,7 +1694,7 @@ msgstr "Prázdna prezývka"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Please enter a nickname!"
-msgstr "Prosím, zadajte vašu prezývku!"
+msgstr "Prosím, zadajte svoju prezývku!"
 
 #: ../../src/wui/login_box.cc:92
 msgid "Space in Nickname"
@@ -1708,7 +1710,7 @@ msgstr "Prádzne heslo"
 
 #: ../../src/wui/login_box.cc:100
 msgid "Please enter your password!"
-msgstr "Prosím, zadajte vaše heslo!"
+msgstr "Prosím, zadajte svoje heslo!"
 
 #: ../../src/wui/militarysitewindow.cc:58
 msgid "Soldiers"
@@ -1789,7 +1791,7 @@ msgstr "Nasledovať"
 
 #: ../../src/wui/watchwindow.cc:120
 msgid "Center mainview on this"
-msgstr ""
+msgstr "Vycentrovať pohľad na túto pozíciu"
 
 #: ../../src/wui/watchwindow.cc:142 ../../src/ui_fsmenu/fileview.cc:44
 msgid "Close"
@@ -1797,7 +1799,7 @@ msgstr "Zavrieť"
 
 #: ../../src/wui/game_main_menu_save_game.cc:64
 msgid "Map Name: "
-msgstr "Meno many: "
+msgstr "Názov mapy: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:68
 msgid "Game Time: "
@@ -1806,7 +1808,7 @@ msgstr "Herný čas: "
 #: ../../src/wui/game_main_menu_save_game.cc:103
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:53
 msgid "Delete"
-msgstr "Vymaž"
+msgstr "Vymazať"
 
 #: ../../src/wui/game_main_menu_save_game.cc:144
 #, c-format
@@ -1841,12 +1843,12 @@ msgstr " už existuje. Nahradiť?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:276
 msgid "File deletion"
-msgstr ""
+msgstr "Vymazanie súboru"
 
 #: ../../src/wui/game_main_menu_save_game.cc:278
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "Naozaj chcete zmazať súbor %s?"
 
 #: ../../src/wui/interactive_base.cc:277
 #, c-format
@@ -1899,7 +1901,7 @@ msgstr "Vlastník"
 
 #: ../../src/wui/minimap.cc:157
 msgid "Flags"
-msgstr "Príznaky"
+msgstr "Vlajky"
 
 #: ../../src/wui/minimap.cc:163
 msgid "Roads"
@@ -1953,11 +1955,11 @@ msgstr "Geológ objavil zdroje."
 #: ../../src/logic/worker.cc:1835
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Váš %s nedokáže nájsť cestu domov a pravdepodobne zomrie."
 
 #: ../../src/logic/worker.cc:1842
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Pracovník sa stratil!"
 
 #: ../../src/logic/worker.cc:3037
 #, c-format
@@ -3339,7 +3341,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:104 ../../src/ui_fsmenu/launchMPG.cc:169
 msgid "Type of game"
-msgstr ""
+msgstr "Typ hry"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
@@ -3651,7 +3653,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:650
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Nastavenie hry viacerých hráčov"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
@@ -3701,10 +3703,12 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"Momentálne ste %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:473
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "Pre pomoc kliknite na \"?\" v pravom hornom rohu."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:534
 msgid "Saved players are:"
@@ -3724,7 +3728,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:633
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Informácie o mape:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:634
 #, c-format
@@ -3734,12 +3738,12 @@ msgstr "* Veľkosť: %ux%u\n"
 #: ../../src/ui_fsmenu/launchMPG.cc:635
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i hráči\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:636
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Typ sveta: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:638
 msgid "* Scenario mode selected\n"
@@ -3747,17 +3751,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:651
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Nachádzate sa v hernom menu založenia hry pre viacerých hráčov."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid "Client settings"
-msgstr ""
+msgstr "Nastavenia klientov"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:655
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
 msgstr ""
+"Na ľavej strane je zoznam všetkých klientov vrátane vás. Pomocou tlačidla v "
+"zadnej časti vašej prezývky si môžete nastaviť rolu. Dostupné roly:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:659
 msgid ""
@@ -3765,26 +3771,34 @@ msgid ""
 "same color, these share the control over the player (\"shared kingdom "
 "mode\")."
 msgstr ""
+"Hráč s farbou vlajky. Ak si viacerí klienti vyberú rovnakú farbu, znamená "
+"to, že zdieľajú kontrolu nad hráčom (\"režim zdieľaného kráľovstva\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:663
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
+"A divácky režim, čo znamená, že vidíte všetko, ale nemáte kontrolu nad "
+"žiadnym hráčom."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid "Player settings"
-msgstr ""
+msgstr "Nastavenia hráčov"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:668
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
+"V strede sú nastavenia hráčov. Aby sa mohla hra začať, každý hráč musí byť "
+"jedno z nasledujúcich:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:671
 msgid "Connected to one or more clients (see \"Client settings\")."
 msgstr ""
+"Pripojený k jednému alebo viacerým klientom (pozrite \"Nastavenia "
+"klientov\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:674
 msgid ""
@@ -3792,6 +3806,8 @@ msgid ""
 "hover texts indicates the strength of the currently selected computer "
 "player)."
 msgstr ""
+"Hráč ovládaný počítačom (tvár na obrázku, ako aj text po prekrytí myšou "
+"naznačujú silu aktuálne vybraného počítačového hráča)."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:677
 msgid "Set as shared in starting position for another player."
@@ -3817,7 +3833,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:688
 msgid "Map informations"
-msgstr ""
+msgstr "Informácie o mape"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:691
 msgid ""
@@ -3826,6 +3842,10 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
+"Na pravej strane sú informácie o vybranej mape alebo uloženej hre. Tlačidlo "
+"napravo od názvu mapy ju umožňuje hostiteľovi zmeniť. Ďalej hostiteľ dokáže "
+"nastaviť presnú podmienku na víťazstvo a nakoniec začať hru, len čo sú "
+"nastavení všetci hráči."
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario: "
@@ -4275,7 +4295,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
-msgstr ""
+msgstr "Hráč \"%s\" bol porazený a stal sa divákom."
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -4521,7 +4541,7 @@ msgstr "Niečo sa pokazilo: "
 
 #: ../../src/network/internet_gaming.cc:347
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Boli ste úspešne opätovne pripojený k metaserveru!"
 
 #: ../../src/network/internet_gaming.cc:354
 msgid "Mixed up"
@@ -4563,7 +4583,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:640
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "Nebolo možné poslať správu: Nie ste pripojený k metaserveru!"
 
 #: ../../src/network/internet_gaming.cc:652
 msgid "Message could not be sent: Was this supposed to be a private message?"
