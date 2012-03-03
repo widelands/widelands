@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,13 @@ struct Editor_Unset_Port_Space_Tool : public Editor_Tool {
 	Editor_Unset_Port_Space_Tool();
 
 	int32_t handle_click_impl
-		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
+
+	int32_t handle_undo_impl
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
+
 	char const * get_sel_impl() const {return FSEL_EUPS_FILENAME;}
 };
 
@@ -42,7 +48,13 @@ struct Editor_Set_Port_Space_Tool : public Editor_Tool {
 	Editor_Set_Port_Space_Tool(Editor_Unset_Port_Space_Tool &);
 
 	int32_t handle_click_impl
-		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
+
+	int32_t handle_undo_impl
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
+
 	char const * get_sel_impl() const {return FSEL_ESPS_FILENAME;}
 
 private:

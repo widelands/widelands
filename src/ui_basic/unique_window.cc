@@ -84,7 +84,7 @@ UniqueWindow::UniqueWindow
 		delete m_registry->window;
 
 		m_registry->window = this;
-		if (m_registry->x >= 0) {
+		if (m_registry->valid_pos) {
 			set_pos(Point(m_registry->x, m_registry->y));
 			m_usedefaultpos = false;
 		}
@@ -106,6 +106,7 @@ UniqueWindow::~UniqueWindow()
 		m_registry->window = 0;
 		m_registry->x = get_x();
 		m_registry->y = get_y();
+		m_registry->valid_pos = true;
 
 		if (m_registry->onDelete) {
 			m_registry->onDelete();

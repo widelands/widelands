@@ -345,6 +345,9 @@ if (DEFINED WL_VERSION_MAJOR)
 	file (WRITE WL_RELEASE "${WL_VERSION}")
 endif (DEFINED WL_VERSION_MAJOR)
 
+# we need python to determine the current version
+find_package (PythonInterp REQUIRED)
+
 if (NOT DEFINED WL_VERSION)
   add_custom_target (
     BzrRevision ALL
@@ -487,8 +490,6 @@ set(CPACK_COMPONENT_DOCFILES_DISPLAY_NAME "Documentation")
 set(CPACK_COMPONENT_DOCFILES_HIDDEN TRUE)
 set(CPACK_COMPONENT_DOCFILES_REQUIRED FALSE)
 
-find_package (PythonInterp REQUIRED)
-
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES locale)
 
 install(
@@ -577,8 +578,8 @@ if (WIN32)
   set(CPACK_NSIS_MUI_FINISHPAGE_README "$INSTDIR\\\\ChangeLog")
   set(CPACK_PACKAGE_VENDOR "Widelands Development Team")
   # replace [ and ], they will cause problems in filename!
-  STRING(REPLACE "[" "-" PACKAGE_VERSION ${WL_VERSION})
-  STRING(REPLACE "]" "" PACKAGE_VERSION ${PACKAGE_VERSION})
+  string(REPLACE "[" "-" PACKAGE_VERSION ${WL_VERSION})
+  string(REPLACE "]" "" PACKAGE_VERSION ${PACKAGE_VERSION})
   set(CPACK_PACKAGE_VERSION "${PACKAGE_VERSION}(${CMAKE_BUILD_TYPE})")
   set(CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})
   set(CPACK_PACKAGE_VERSION_MINOR ${WL_VERSION_MINOR})

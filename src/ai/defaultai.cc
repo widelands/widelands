@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1463,19 +1463,19 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 bool DefaultAI::improve_transportation_ways (const Flag & flag)
 {
 	// First of all try to remove old building flags to clean up the road web if possible
-	container_iterate(std::list<const Flag *>, flags_to_be_removed, i) {
+	container_iterate(std::list<Widelands::Coords>, flags_to_be_removed, i) {
 		// Maybe the flag was already removed?
-		if (!(*i.current)) {
-			flags_to_be_removed.erase(i.current);
-			break;
-		}
-		if (!(*i.current)->get_building()) {
-			// Building is dismantled, but don't waste precious wares
-			if ((*i.current)->current_items() == 0) {
-				game().send_player_bulldoze(*const_cast<Flag *>(*i.current));
+		FCoords f = game().map().get_fcoords(*(i.current));
+		if (upcast(Flag, flag, f.field->get_immovable())) {
+			// Check if building is dismantled, but don't waste precious wares
+			if (!flag->get_building() && flag->current_items() == 0) {
+				game().send_player_bulldoze(*flag);
 				flags_to_be_removed.erase(i.current);
 				break;
 			}
+		} else {
+			flags_to_be_removed.erase(i.current);
+			break;
 		}
 	}
 
@@ -1486,36 +1486,32 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 	Map & map = game().map();
 
 	while (!queue.empty()) {
-		std::vector<NearFlag>::iterator f =
-			find(nearflags.begin(), nearflags.end(), queue.top().flag);
+		std::vector<NearFlag>::iterator f = find(nearflags.begin(), nearflags.end(), queue.top().flag);
 		if (f != nearflags.end()) {
-			queue.pop ();
+			queue.pop();
 			continue;
 		}
 
-		nearflags.push_back (queue.top());
-		queue.pop ();
+		nearflags.push_back(queue.top());
+		queue.pop();
 
 		NearFlag & nf = nearflags.back();
 
 		for (uint8_t i = 1; i <= 6; ++i) {
-		Road * const road = nf.flag->get_road(i);
+			Road * const road = nf.flag->get_road(i);
 
-		if (!road)
-			continue;
+			if (!road)
+				continue;
 
-		Flag * endflag = &road->get_flag(Road::FlagStart);
-		if (endflag == nf.flag)
-			endflag = &road->get_flag(Road::FlagEnd);
+			Flag * endflag = &road->get_flag(Road::FlagStart);
+			if (endflag == nf.flag)
+				endflag = &road->get_flag(Road::FlagEnd);
 
-			int32_t dist =
-				map.calc_distance(flag.get_position(), endflag->get_position());
-		if (dist > 12) //  out of range
-			continue;
+			int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
+			if (dist > 12) //  out of range
+				continue;
 
-			queue.push
-				(NearFlag
-				 	(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
+			queue.push(NearFlag(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
 		}
 	}
 
@@ -1632,7 +1628,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
-			flags_to_be_removed.push_back(&site.site->base_flag());
+			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
 			return true;
 		}
@@ -1652,7 +1648,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		// destruct the building and it's flag (via flag destruction)
 		// the destruction of the flag avoids that defaultAI will have too many
 		// unused roads - if needed the road will be rebuild directly.
-		flags_to_be_removed.push_back(&site.site->base_flag());
+		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
 		return true;
 	}
@@ -1683,7 +1679,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 				//
 				// Add a bonus if one building of this type is still unoccupied
 				if (((game().get_gametime() % 4) + site.bo->unoccupied) > 2) {
-					flags_to_be_removed.push_back(&site.site->base_flag());
+					flags_to_be_removed.push_back(site.site->base_flag().get_position());
 					game().send_player_dismantle(*site.site);
 					return true;
 				}
@@ -1800,7 +1796,7 @@ bool DefaultAI::check_mines(int32_t const gametime)
 		// destruct the building and it's flag (via flag destruction)
 		// the destruction of the flag avoids that defaultAI will have too many
 		// unused roads - if needed the road will be rebuild directly.
-		flags_to_be_removed.push_back(&site.site->base_flag());
+		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
 		return true;
 	}
@@ -1900,7 +1896,7 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 						// too many unused roads - if needed the road will be rebuild
 						// directly.
 						if (static_cast<int32_t>(ms->maxSoldierCapacity() * 4) < bf.military_influence) {
-							flags_to_be_removed.push_back(&ms->base_flag());
+							flags_to_be_removed.push_back(ms->base_flag().get_position());
 							game().send_player_dismantle(*ms);
 						}
 

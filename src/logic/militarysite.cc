@@ -640,6 +640,7 @@ void MilitarySite::reinit_after_conqueration(Game & game)
 	clear_requirements();
 	conquer_area(game);
 	update_soldier_request();
+	start_animation(game, descr().get_animation("idle"));
 }
 
 /// Calculates whether the military presence is still kept and \returns true if.

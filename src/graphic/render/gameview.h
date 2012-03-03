@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ class GameView : public RenderTarget
 public:
 	GameView(RenderTarget & rt):
 		RenderTarget(rt) {}
-	~GameView() {}
+	virtual ~GameView() {}
 
 	/**
 	 * Renders the map from a player's point of view into the current drawing
@@ -80,12 +80,12 @@ public:
 		 Point                               viewpoint,
 		 uint32_t                            flags);
 
-private:
+protected:
 	/**
 	 * Helper function to draw two terrain triangles. This is called from the
 	 * rendermap() functions.
 	 */
-	void draw_field
+	virtual void draw_field
 		(Rect          & subwin,
 		 Vertex  const &  f_vert,
 		 Vertex  const &  r_vert,
@@ -104,17 +104,18 @@ private:
 		 Widelands::Player           const *,
 		 Rect                                rc,
 		 Point                               viewpt,
+		 Point                               framept,
 		 uint32_t                            flags);
 
 	/**
 	 * This is called before the view of the game is rendered.
 	 */
-	void rendermap_init();
+	virtual void rendermap_init() {}
 
 	/**
 	* This is called after the view of the game is rendered.
 	*/
-	void rendermap_deint();
+	virtual void rendermap_deint() {}
 };
 
 #endif //WIDELANDS_GAMEVIEW_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -187,6 +187,10 @@ Graphic::Graphic
 		log("Graphics: OpenGL: Number of stencil buffer bits: %u\n", glInt);
 		m_caps.gl.stencil_buffer_bits = glInt;
 
+		glGetIntegerv(GL_MAX_TEXTURE_UNITS, &glInt);
+		log("Graphics: OpenGL: Maximum number of textures for multitextures: %u\n", glInt);
+		m_caps.gl.max_tex_combined = glInt;
+
 		str = reinterpret_cast<const char *>(glGetString(GL_VERSION));
 		m_caps.gl.major_version = atoi(str);
 		m_caps.gl.minor_version = strstr(str, ".")?atoi(strstr(str, ".") + 1):0;
@@ -195,14 +199,21 @@ Graphic::Graphic
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
 
 		const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
+
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
 			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);
-
 		log("Graphics: OpenGL: Textures ");
 		log
 			(m_caps.gl.tex_power_of_two?"must have a size power of two\n":
 			 "may have any size\n");
+
+		m_caps.gl.multitexture =
+			 ((strstr(extensions, "GL_ARB_multitexture") != 0) and
+			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0))
+			and (m_caps.gl.max_tex_combined >= 6);
+		log("Graphics: OpenGL: Multitextures are ");
+		log(m_caps.gl.multitexture ? "supported\n" : "not supported\n");
 
 		m_caps.offscreen_rendering = false;
 
@@ -725,6 +736,18 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
 	if (!png_ptr)
 		throw wexception("Graphic::save_png: could not create png struct");
 
+	png_infop info_ptr = png_create_info_struct(png_ptr);
+	if (!info_ptr) {
+		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(0));
+		throw wexception("Graphic::save_png: could not create png info struct");
+	}
+
+	// Set jump for error
+	if (setjmp(png_jmpbuf(png_ptr))) {
+		png_destroy_write_struct(&png_ptr, &info_ptr);
+		throw wexception("Graphic::save_png: Error writing PNG!");
+	}
+
 	//  Set another write function. This is potentially dangerouse because the
 	//  flush function is internally called by png_write_end(), this will crash
 	//  on newer libpngs. See here:
@@ -736,35 +759,14 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
 		 sw,
 		 &Graphic::m_png_write_function, &Graphic::m_png_flush_function);
 
-	png_infop info_ptr = png_create_info_struct(png_ptr);
-
-	if (!info_ptr) {
-		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(0));
-		throw wexception("Graphic::save_png: could not create png info struct");
-	}
-
-	// Set jump for error
-	if (setjmp(png_jmpbuf(png_ptr))) {
-		png_destroy_write_struct(&png_ptr, &info_ptr);
-		throw wexception("Graphic::save_png: could not set png setjmp");
-	}
-
 	// Fill info struct
 	png_set_IHDR
 		(png_ptr, info_ptr, pix.get_w(), pix.get_h(),
 		 8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
 		 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
-	// png_set_strip_16(png_ptr) ;
-
 	// Start writing
 	png_write_info(png_ptr, info_ptr);
-
-	// Strip data down
-	png_set_filler(png_ptr, 0, PNG_FILLER_AFTER);
-
-	png_set_packing(png_ptr);
-
 	{
 		uint32_t surf_w = pix.get_w();
 		uint32_t surf_h = pix.get_h();
@@ -1043,8 +1045,9 @@ uint32_t Graphic::get_maptexture
 */
 void Graphic::animate_maptextures(uint32_t time)
 {
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i)
+	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->animate(time);
+	}
 }
 
 /**
@@ -1052,8 +1055,9 @@ void Graphic::animate_maptextures(uint32_t time)
  */
 void Graphic::reset_texture_animation_reminder()
 {
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i)
+	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->reset_was_animated();
+	}
 }
 
 /**
@@ -1173,8 +1177,9 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 		return 0;
 }
 
+
 /**
- * Sets the name of the current world and loads the fitting road textures
+ * Sets the name of the current world and loads the fitting road and edge textures
  */
 void Graphic::set_world(std::string worldname) {
 	char buf[255];
@@ -1188,6 +1193,10 @@ void Graphic::set_world(std::string worldname) {
 	m_roadtextures->pic_road_normal = get_picture(PicMod_Game, buf, false);
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
 	m_roadtextures->pic_road_busy = get_picture(PicMod_Game, buf, false);
+
+	// load edge texture
+	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
+	m_edgetexture = get_picture(PicMod_Game, buf, false);
 }
 
 /**
@@ -1199,4 +1208,13 @@ PictureID Graphic::get_road_texture(int32_t const roadtex)
 {
 	return
 		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
+}
+
+/**
+ * Returns the alpha mask texture for edges.
+ * \return The edge texture (alpha mask)
+ */
+PictureID Graphic::get_edge_texture()
+{
+	return m_edgetexture;
 }

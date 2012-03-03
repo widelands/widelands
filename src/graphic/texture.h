@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +71,7 @@ struct Texture {
 private:
 	Colormap * m_colormap;
 	uint8_t  * m_pixels;
-	uint32_t   m_mmap_color;
+	uint32_t   m_mmap_color[256];
 	uint8_t  * m_curframe;
 	int32_t    m_frame_num;
 	char     * m_texture_picture;

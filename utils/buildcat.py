@@ -43,6 +43,7 @@ MAINPOTS = [( "maps/maps", [
             ] ),
             ( "win_conditions/win_conditions", [
                 "../../scripting/win_conditions/*.lua",
+                "../../scripting/win_condition_texts.lua",
             ]),
 ]
 

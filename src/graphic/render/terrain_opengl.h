@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
  */
 
 #ifdef USE_OPENGL
+#ifndef TERRAIN_OPENGL_H
+#define TERRAIN_OPENGL_H
 
 #include "gl_picture_texture.h"
 #include "vertex.h"
@@ -28,12 +30,12 @@ void draw_field_opengl
 	 Vertex const & p1,
 	 Vertex const & p2,
 	 Vertex const & p3,
-	 Texture const & texture)
+	 Texture const & texture,
+	 Texture const & left_texture,
+	 Texture const & top_texture)
 {
 	if (p1.b <= -128 and p2.b <= -128 and p3.b <= -128)
 		return;
-
-	glBindTexture(GL_TEXTURE_2D, texture.getTexture());
 
 	Vertex t1(p1), t2(p2), t3(p3);
 
@@ -49,39 +51,187 @@ void draw_field_opengl
 	if (t1.y < subwin.y and t2.y < subwin.y and t3.y < subwin.y)
 		return;
 
-	{
-		int const subxr = subwin.x + subwin.w;
-		if (t1.x > subxr and t2.x > subxr and t3.x > subxr)
-			return;
+	int const subxr = subwin.x + subwin.w;
+	if (t1.x > subxr and t2.x > subxr and t3.x > subxr)
+		return;
+
+	int const subyd = subwin.y + subwin.h;
+	if (t1.y > subyd and t2.y > subyd and t3.y > subyd)
+		return;
+
+	glEnable(GL_BLEND);
+
+	if (g_gr->caps().gl.multitexture) {
+
+		// load current texture
+		glActiveTextureARB(GL_TEXTURE0_ARB);
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+		// initialize all texture layers to prevent bug if some layers are skipped
+		for (int i = 1; i < 5; i++) {
+			glActiveTextureARB(GL_TEXTURE0_ARB + i);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, top_texture.getTexture());
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_ARB, GL_REPLACE);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+		}
+
+		if ((&top_texture != &texture) and not (p1.b == -128 and p3.b == -128)) {
+			// load top texture
+			glActiveTextureARB(GL_TEXTURE1_ARB);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, top_texture.getTexture());
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_ARB, GL_REPLACE);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+
+			GLuint edge = dynamic_cast<GLPictureTexture const &>
+				(*g_gr->get_edge_texture()).get_gl_texture();
+
+			// combine current and top texture
+			glActiveTextureARB(GL_TEXTURE2_ARB);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, edge);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_ARB, GL_INTERPOLATE_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE1_RGB_ARB, GL_TEXTURE1_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE2_RGB_ARB, GL_TEXTURE);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND1_RGB_ARB, GL_SRC_COLOR);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND2_RGB_ARB, GL_SRC_COLOR);
+		}
+
+		if ((&left_texture != &texture) and not (p1.b == -128 and p2.b == -128)) {
+			// load left texture
+			glActiveTextureARB(GL_TEXTURE3_ARB);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, left_texture.getTexture());
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_ARB, GL_REPLACE);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+
+			GLuint edge = dynamic_cast<GLPictureTexture const &>
+				(*g_gr->get_edge_texture()).get_gl_texture();
+
+			// combine current and left texture
+			glActiveTextureARB(GL_TEXTURE4_ARB);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, edge);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_ARB, GL_INTERPOLATE_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE1_RGB_ARB, GL_TEXTURE3_ARB);
+			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE2_RGB_ARB, GL_TEXTURE);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND1_RGB_ARB, GL_SRC_COLOR);
+			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND2_RGB_ARB, GL_SRC_COLOR);
+		}
+
+		// Fade effect for fog of war
+		glActiveTextureARB(GL_TEXTURE5_ARB);
+		glEnable(GL_TEXTURE_2D);
+		// texture does not matter but one has to be bound
+		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
+		glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_ARB, GL_MODULATE);
+		glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
+		glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+		glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE1_RGB_ARB, GL_PRIMARY_COLOR_ARB);
+		glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND1_RGB_ARB, GL_SRC_COLOR);
+
+		glBegin(GL_TRIANGLES); {
+			{
+				GLfloat const brightness = (150.0 + p1.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glMultiTexCoord2iARB(GL_TEXTURE0_ARB, t1.tx, t1.ty);
+			glMultiTexCoord2fARB(GL_TEXTURE1_ARB, t1.tx / TEXTURE_WIDTH, t1.ty / TEXTURE_WIDTH);
+			glMultiTexCoord2fARB(GL_TEXTURE2_ARB, 0, 0);
+			glMultiTexCoord2fARB(GL_TEXTURE3_ARB, t1.tx / TEXTURE_WIDTH, t1.ty / TEXTURE_WIDTH);
+			glMultiTexCoord2fARB(GL_TEXTURE4_ARB, 1, 0);
+			glMultiTexCoord2fARB(GL_TEXTURE5_ARB, t1.tx / TEXTURE_WIDTH, t1.ty / TEXTURE_WIDTH);
+			glVertex2f(t1.x, t1.y);
+
+			{
+				GLfloat const brightness = (150.0 + p2.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glMultiTexCoord2iARB(GL_TEXTURE0_ARB, t2.tx, t2.ty);
+			glMultiTexCoord2fARB(GL_TEXTURE1_ARB, t2.tx / TEXTURE_WIDTH, t2.ty / TEXTURE_WIDTH);
+			glMultiTexCoord2fARB(GL_TEXTURE2_ARB, 0.5, 1);
+			glMultiTexCoord2fARB(GL_TEXTURE3_ARB, t2.tx / TEXTURE_WIDTH, t2.ty / TEXTURE_WIDTH);
+			glMultiTexCoord2fARB(GL_TEXTURE4_ARB, 0, 0);
+			glMultiTexCoord2fARB(GL_TEXTURE5_ARB, t2.tx / TEXTURE_WIDTH, t2.ty / TEXTURE_WIDTH);
+			glVertex2f(t2.x, t2.y);
+
+			{
+				GLfloat const brightness = (150.0 + p3.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glMultiTexCoord2iARB(GL_TEXTURE0_ARB, t3.tx, t3.ty);
+			glMultiTexCoord2fARB(GL_TEXTURE1_ARB, t3.tx / TEXTURE_WIDTH, t3.ty / TEXTURE_WIDTH);
+			glMultiTexCoord2fARB(GL_TEXTURE2_ARB, 1, 0);
+			glMultiTexCoord2fARB(GL_TEXTURE3_ARB, t3.tx / TEXTURE_WIDTH, t3.ty / TEXTURE_WIDTH);
+			glMultiTexCoord2fARB(GL_TEXTURE4_ARB, 0.5, 1);
+			glMultiTexCoord2fARB(GL_TEXTURE5_ARB, t3.tx / TEXTURE_WIDTH, t3.ty / TEXTURE_WIDTH);
+			glVertex2f(t3.x, t3.y);
+		} glEnd();
+
+		// Cleanup OpenGL
+		glActiveTextureARB(GL_TEXTURE5_ARB);
+		glDisable(GL_TEXTURE_2D);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glActiveTextureARB(GL_TEXTURE4_ARB);
+		glDisable(GL_TEXTURE_2D);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glActiveTextureARB(GL_TEXTURE3_ARB);
+		glDisable(GL_TEXTURE_2D);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glActiveTextureARB(GL_TEXTURE2_ARB);
+		glDisable(GL_TEXTURE_2D);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glActiveTextureARB(GL_TEXTURE1_ARB);
+		glDisable(GL_TEXTURE_2D);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glActiveTextureARB(GL_TEXTURE0_ARB);
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+	} else {
+		// don't use multitexture
+		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
+		glBegin(GL_TRIANGLES); {
+			{
+				GLfloat const brightness = (150.0 + p1.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(t1.tx, t1.ty);
+			glVertex2f(t1.x, t1.y);
+
+			{
+				GLfloat const brightness = (150.0 + p2.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(t2.tx, t2.ty);
+			glVertex2f(t2.x, t2.y);
+
+			{
+				GLfloat const brightness = (150.0 + p3.b) / 150.0;
+				glColor3f(brightness, brightness, brightness);
+			}
+			glTexCoord2i(t3.tx, t3.ty);
+			glVertex2f(t3.x, t3.y);
+		} glEnd();
 	}
-	{
-		int const subyd = subwin.y + subwin.h;
-		if (t1.y > subyd and t2.y > subyd and t3.y > subyd)
-			return;
-	}
-
-	glBegin(GL_TRIANGLES); {
-		{
-			GLfloat const brightness = (150.0 + p1.b) / 150.0;
-			glColor3f(brightness, brightness, brightness);
-		}
-		glTexCoord2i(t1.tx, t1.ty);
-		glVertex2f(t1.x, t1.y);
-
-		{
-			GLfloat const brightness = (150.0 + p2.b) / 150.0;
-			glColor3f(brightness, brightness, brightness);
-		}
-		glTexCoord2i(t2.tx, t2.ty);
-		glVertex2f(t2.x, t2.y);
-
-		{
-			GLfloat const brightness = (150.0 + p3.b) / 150.0;
-			glColor3f(brightness, brightness, brightness);
-		}
-		glTexCoord2i(t3.tx, t3.ty);
-		glVertex2f(t3.x, t3.y);
-	} glEnd();
 }
 
 #define horiz_road_opengl(tex, start, end)                                    \
@@ -93,7 +243,7 @@ void draw_field_opengl
       glVertex2f(subwin.x + end.x,   subwin.y + end.y - 2);                   \
       glTexCoord2i(TEXTURE_WIDTH, 4);                                         \
       glVertex2f(subwin.x + end.x,   subwin.y + end.y + 2);                   \
-      glTexCoord2i(TEXTURE_WIDTH, 4);                                         \
+      glTexCoord2i(0, 4);                                                     \
       glVertex2f(subwin.x + start.x, subwin.y + start.y + 2);                 \
    } glEnd();                                                                 \
 
@@ -106,7 +256,7 @@ void draw_field_opengl
       glVertex2f(subwin.x + start.x + 3, subwin.y + start.y);                 \
       glTexCoord2i(TEXTURE_WIDTH, TEXTURE_HEIGHT);                            \
       glVertex2f(subwin.x + end.x + 3,   subwin.y + end.y);                   \
-      glTexCoord2i(TEXTURE_WIDTH - 6, TEXTURE_HEIGHT);                       \
+      glTexCoord2i(TEXTURE_WIDTH - 6, TEXTURE_HEIGHT);                        \
       glVertex2f(subwin.x + end.x - 3,   subwin.y + end.y);                   \
    } glEnd();                                                                 \
 
@@ -173,4 +323,5 @@ void draw_roads_opengl
 	}
 }
 
+#endif
 #endif

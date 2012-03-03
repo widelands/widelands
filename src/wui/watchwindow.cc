@@ -24,7 +24,9 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_gamebase.h"
+#include "interactive_player.h"
 #include "logic/map.h"
+#include "logic/player.h"
 #include "mapview.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
@@ -256,8 +258,14 @@ void WatchWindow::think()
 			(game().map(), bob->get_position(), pos.x, pos.y);
 		pos = bob->calc_drawpos(game(), pos);
 
-		mapview.set_viewpoint
-			(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
+		Widelands::Map & map = game().map();
+		if (1 < game().get_ipl()->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
+			mapview.set_viewpoint
+				(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
+		} else {
+			// stop tracking
+			views[cur_index].tracking = 0;
+		}
 	}
 
 	mapview.need_complete_redraw(); //  make sure that the view gets updated
@@ -325,7 +333,10 @@ void WatchWindow::do_follow()
 			p = bob->calc_drawpos(g, p);
 			int32_t const dist =
 				MapviewPixelFunctions::calc_pix_distance(map, p, pos);
-			if (!closest || closest_dist > dist) {
+			if
+				((!closest || closest_dist > dist)
+				 && (1 < game().get_ipl()->player().vision(map.get_index(bob->get_position(), map.get_width()))))
+			{
 				closest = bob;
 				closest_dist = dist;
 			}

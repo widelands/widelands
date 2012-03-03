@@ -1,6 +1,6 @@
 size=small
 program=program
-picture=ship_i_00.png
+picture=build_06.png
 
 [buildcost]
 blackwood=10
@@ -12,6 +12,6 @@ construction=idle 5000 210000
 transform=bob tribe:ship
 
 [idle]
-pics=ship-build_??.png
-hotspot=118 94
+pics=build_??.png
+hotspot=115 82
 playercolor=true

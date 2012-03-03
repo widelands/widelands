@@ -138,16 +138,6 @@ void Window::update_desired_size()
 	if (m_center_panel) {
 		uint32_t innerw, innerh;
 		m_center_panel->get_desired_size(innerw, innerh);
-
-		// Never bigger than maximum available size
-		// TODO fix this properly with a scrollbar after release of build16
-		// -->
-		if ((innerh + get_tborder() + get_bborder()) > get_parent()->get_h())
-			innerh = get_parent()->get_h() - get_tborder() - get_bborder();
-		if ((innerw + get_lborder() + get_rborder()) > get_parent()->get_w())
-			innerw = get_parent()->get_w() - get_lborder() - get_rborder();
-		// <--
-
 		set_desired_size
 			(innerw + get_lborder() + get_rborder(),
 			 innerh + get_tborder() + get_bborder());
@@ -214,33 +204,44 @@ void Window::move_inside_parent() {
 	if (Panel * const parent = get_parent()) {
 		int32_t px = get_x();
 		int32_t py = get_y();
-		if (px < 0) {
-			px = 0;
-			if (parent->get_dock_windows_to_edges() and not _docked_left)
-				dock_left();
-		} else if (px + static_cast<uint32_t>(get_w()) >= parent->get_inner_w()) {
-			assert (parent->get_inner_w() > static_cast<uint32_t>(get_w()));
-			px = parent->get_inner_w() - static_cast<uint32_t>(get_w());
-			if (parent->get_dock_windows_to_edges() and not _docked_right)
-				dock_right();
+		if
+			((parent->get_inner_w() < static_cast<uint32_t>(get_w())) and
+			(px + get_w() <= static_cast<int32_t>(parent->get_inner_w()) or px >= 0))
+			px = (static_cast<int32_t>(parent->get_inner_w()) - get_w()) / 2;
+		if
+			((parent->get_inner_h() < static_cast<uint32_t>(get_h())) and
+			(py + get_h() < static_cast<int32_t>(parent->get_inner_h()) or py > 0))
+				py = 0;
+
+		if (parent->get_inner_w() >= static_cast<uint32_t>(get_w())) {
+			if (px < 0) {
+				px = 0;
+				if (parent->get_dock_windows_to_edges() and not _docked_left)
+					_docked_left =  true;
+			} else if (px + static_cast<uint32_t>(get_w()) >= parent->get_inner_w()) {
+				px = static_cast<int32_t>(parent->get_inner_w()) - get_w();
+				if (parent->get_dock_windows_to_edges() and not _docked_right)
+					_docked_right = true;
+			}
+			if (_docked_left)
+				px -= VT_B_PIXMAP_THICKNESS;
+			else if (_docked_right)
+				px += VT_B_PIXMAP_THICKNESS;
 		}
-		if (py < 0)
-			py = 0;
-		else if (py + static_cast<uint32_t>(get_h()) > parent->get_inner_h()) {
-			assert(parent->get_inner_h() >= static_cast<uint32_t>(get_h()));
-			py = parent->get_inner_h() - static_cast<uint32_t>(get_h());
-			if
-				(not _is_minimal
-				 and
-				 parent->get_dock_windows_to_edges() and not _docked_bottom)
-				dock_bottom();
+		if (parent->get_inner_h() >= static_cast<uint32_t>(get_h())) {
+			if (py < 0)
+				py = 0;
+			else if (py + static_cast<uint32_t>(get_h()) > parent->get_inner_h()) {
+				py = static_cast<int32_t>(parent->get_inner_h()) - get_h();
+				if
+					(not _is_minimal
+					and
+					parent->get_dock_windows_to_edges() and not _docked_bottom)
+					_docked_bottom = true;
+			}
+			if (_docked_bottom)
+				py += BT_B_PIXMAP_THICKNESS;
 		}
-		if      (_docked_left)
-			px = 0;
-		else if (_docked_right)
-			px = parent->get_inner_w() - get_w();
-		if      (_docked_bottom)
-			py = parent->get_inner_h() - get_h();
 		set_pos(Point(px, py));
 	}
 }
@@ -255,8 +256,8 @@ void Window::center_to_parent()
 
 	set_pos
 		(Point
-		 	((parent.get_inner_w() - get_w()) / 2,
-		 	 (parent.get_inner_h() - get_h()) / 2));
+		((static_cast<int32_t>(parent.get_inner_w()) - get_w()) / 2,
+		 (static_cast<int32_t>(parent.get_inner_h()) - get_h()) / 2));
 }
 
 
@@ -281,22 +282,18 @@ void Window::draw_border(RenderTarget & dst)
 	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
 	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
 
-	const uint32_t hidden_width_left  = _docked_left  ?
-		VT_B_PIXMAP_THICKNESS : 0;
-	const uint32_t hidden_width_right = _docked_right ?
-		VT_B_PIXMAP_THICKNESS : 0;
 	const int32_t hz_bar_end = get_w() -
-		HZ_B_CORNER_PIXMAP_LEN + hidden_width_right;
+		HZ_B_CORNER_PIXMAP_LEN;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end -
 		HZ_B_MIDDLE_PIXMAP_LEN;
 
 	{ //  Top border.
-		int32_t pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
+		int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
 
 		dst.blitrect //  top left corner
 			(Point(0, 0),
 			 m_pic_top,
-			 Rect(Point(hidden_width_left, 0), pos, TP_B_PIXMAP_THICKNESS));
+			 Rect(Point(0, 0), pos, TP_B_PIXMAP_THICKNESS));
 
 		//  top bar
 		compile_assert(0 <= HZ_B_CORNER_PIXMAP_LEN);
@@ -316,7 +313,7 @@ void Window::draw_border(RenderTarget & dst)
 			 m_pic_top,
 			 Rect
 			 	(Point(HZ_B_TOTAL_PIXMAP_LEN - width, 0),
-			 	 width - hidden_width_right, TP_B_PIXMAP_THICKNESS));
+			 	 width, TP_B_PIXMAP_THICKNESS));
 	}
 
 	// draw the title if we have one
@@ -332,7 +329,7 @@ void Window::draw_border(RenderTarget & dst)
 		const int32_t vt_bar_end_minus_middle =
 			vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
 
-		if (not _docked_left) {
+		{ // Left border
 
 			compile_assert(0 <= VT_B_PIXMAP_THICKNESS);
 			dst.blitrect // left top thingy
@@ -364,7 +361,7 @@ void Window::draw_border(RenderTarget & dst)
 		}
 
 
-		if (not _docked_right) {
+		{ // Right border
 			const int32_t right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
 
 			dst.blitrect // right top thingy
@@ -393,13 +390,14 @@ void Window::draw_border(RenderTarget & dst)
 				 	(Point(0, VT_B_TOTAL_PIXMAP_LEN - height),
 				 	 VT_B_PIXMAP_THICKNESS, height));
 		}
-		if (not _docked_bottom) {
-			int32_t pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
+
+		{ // Bottom border
+			int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
 
 			dst.blitrect //  bottom left corner
 				(Point(0, get_h() - BT_B_PIXMAP_THICKNESS),
 				 m_pic_bottom,
-				 Rect(Point(hidden_width_left, 0), pos, BT_B_PIXMAP_THICKNESS));
+				 Rect(Point(0, 0), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
@@ -417,7 +415,7 @@ void Window::draw_border(RenderTarget & dst)
 				 m_pic_bottom,
 				 Rect
 				 	(Point(HZ_B_TOTAL_PIXMAP_LEN - width, 0),
-				 	 width - hidden_width_right, BT_B_PIXMAP_THICKNESS));
+				 	 width, BT_B_PIXMAP_THICKNESS));
 		}
 	}
 }
@@ -472,85 +470,44 @@ bool Window::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 	return true;
 }
 
+bool Window::handle_alt_drag(int32_t mx, int32_t my)
+{
+	_dragging = true;
+	_drag_start_win_x = get_x();
+	_drag_start_win_y = get_y();
+	_drag_start_mouse_x = get_x() + get_lborder() + mx;
+	_drag_start_mouse_y = get_y() + get_tborder() + my;
+	grab_mouse(true);
+	return true;
+}
+
 void Window::restore() {
 	assert(_is_minimal);
 	_is_minimal = false;
 	set_border
 		(get_lborder(), get_rborder(),
-		 get_tborder(), _docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS);
+		 get_tborder(), BT_B_PIXMAP_THICKNESS);
 	set_inner_size(get_inner_w(), _oldh);
 	move_inside_parent();
 }
 void Window::minimize() {
 	assert(not _is_minimal);
-	if (_docked_bottom) undock_bottom(); //  Minimal can not be bottom-docked.
+	int32_t y = get_y(), x = get_x();
+	if (_docked_bottom) {
+		y -= BT_B_PIXMAP_THICKNESS; //  Minimal can not be bottom-docked.
+		_docked_bottom = false;
+	}
+	if (y < 0) y = 0; //  Move into the screen
 	_oldh = get_inner_h();
 	_is_minimal = true;
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
 	set_size(get_w(), TP_B_PIXMAP_THICKNESS);
-	set_pos(Point(get_x(), get_y())); // If on border, this feels more natural
+	set_pos(Point(x, y)); // If on border, this feels more natural
 }
-
-inline void Window::dock_left() {
-	assert(not _docked_left);
-	_docked_left = true;
-	set_size(get_inner_w() + get_rborder(), get_h());
-	set_border(0, get_rborder(), get_tborder(), get_bborder());
-	layout();
-	assert(get_lborder() == 0);
-}
-
-inline void Window::undock_left() {
-	assert(_docked_left);
-	_docked_left = false;
-	set_size(VT_B_PIXMAP_THICKNESS + get_inner_w() + get_rborder(), get_h());
-	set_border
-		(VT_B_PIXMAP_THICKNESS, get_rborder(),
-		 get_tborder(), get_bborder());
-	layout();
-}
-
-inline void Window::dock_right() {
-	assert(not _docked_right);
-	_docked_right = true;
-	set_size(get_lborder() + get_inner_w(), get_h());
-	set_border(get_lborder(), 0, get_tborder(), get_bborder());
-	layout();
-}
-
-inline void Window::undock_right() {
-	assert(_docked_right);
-	_docked_right = false;
-	set_size(get_lborder() + get_inner_w() + VT_B_PIXMAP_THICKNESS, get_h());
-	set_border
-		(get_lborder(), VT_B_PIXMAP_THICKNESS,
-		 get_tborder(), get_bborder());
-	layout();
-}
-
-inline void Window::dock_bottom() {
-	assert(not _docked_bottom);
-	assert(not _is_minimal); //  Minimal windows can not be bottom-docked.
-	_docked_bottom = true;
-	set_size(get_w(), get_tborder() + get_inner_h());
-	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
-	layout();
-}
-
-inline void Window::undock_bottom() {
-	assert(_docked_bottom);
-	_docked_bottom = false;
-	set_size(get_w(), get_tborder() + get_inner_h() + BT_B_PIXMAP_THICKNESS);
-	set_border
-		(get_lborder(), get_rborder(),
-		 get_tborder(), BT_B_PIXMAP_THICKNESS);
-	layout();
-}
-
 
 /**
  * Drag the mouse if the left mouse button is clicked.
- * Ensure that the window isn't dragged out of the screen.
+ * Ensure that the window isn't fully dragged out of the screen.
  */
 bool Window::handle_mousemove
 		(const Uint8, int32_t mx, int32_t my, int32_t, int32_t)
@@ -558,10 +515,8 @@ bool Window::handle_mousemove
 	if (_dragging) {
 		const int32_t mouse_x = get_x() + get_lborder() + mx;
 		const int32_t mouse_y = get_y() + get_tborder() + my;
-		int32_t left = std::max
-			(0, _drag_start_win_x + mouse_x - _drag_start_mouse_x);
-		int32_t top  = std::max
-			(0, _drag_start_win_y + mouse_y - _drag_start_mouse_y);
+		int32_t left = _drag_start_win_x + mouse_x - _drag_start_mouse_x;
+		int32_t top  = _drag_start_win_y + mouse_y - _drag_start_mouse_y;
 		int32_t new_left = left, new_top = top;
 
 		if (const Panel * const parent = get_parent()) {
@@ -569,14 +524,21 @@ bool Window::handle_mousemove
 			const int32_t h = get_h();
 			const int32_t max_x = parent->get_inner_w();
 			const int32_t max_y = parent->get_inner_h();
-			assert(w <= max_x); //  These assertions will fail when having too
-			assert(h <= max_y); //  low resolution and opening a large window.
-			int32_t max_x_minus_w = max_x - w;
-			int32_t max_y_minus_h = max_y - h;
-			left = std::min(max_x_minus_w, left);
-			top  = std::min(max_y_minus_h, top);
+
+			left = std::min(static_cast<int32_t>(max_x - get_lborder()), left);
+			top  = std::min(static_cast<int32_t>(max_y - get_tborder()), top);
+			left = std::max(-static_cast<int32_t>(w - get_rborder()), left);
+			top  = std::max
+				(-static_cast<int32_t>(h - ((_is_minimal) ? get_tborder() : get_bborder())), top);
+			new_left = left; new_top = top;
+
 			const uint8_t psnap = parent->get_panel_snap_distance ();
 			const uint8_t bsnap = parent->get_border_snap_distance();
+
+			const uint32_t pborder_distance_l = abs(left);
+			const uint32_t pborder_distance_t = abs(top);
+			const uint32_t pborder_distance_r = abs(max_x - (left + w));
+			const uint32_t pborder_distance_b = abs(max_y - (top  + h));
 
 			//  These are needed to prefer snapping a shorter distance over a
 			//  longer distance, when there are several things to snap to.
@@ -584,25 +546,25 @@ bool Window::handle_mousemove
 			uint8_t nearest_snap_distance_y = bsnap;
 
 			//  Snap to parent borders.
-			if (left < nearest_snap_distance_x) {
-				nearest_snap_distance_x = left;
+			if (pborder_distance_l < nearest_snap_distance_x) {
+				nearest_snap_distance_x = pborder_distance_l;
 				assert(nearest_snap_distance_x < bsnap);
 				new_left = 0;
 			}
-			if (left + nearest_snap_distance_x > max_x_minus_w) {
-				nearest_snap_distance_x = max_x_minus_w - left;
+			if (pborder_distance_r < nearest_snap_distance_x) {
+				nearest_snap_distance_x = pborder_distance_r;
 				assert(nearest_snap_distance_x < bsnap);
-				new_left = max_x_minus_w;
+				new_left = max_x - w;
 			}
-			if (top < nearest_snap_distance_y) {
-				nearest_snap_distance_y = top;
+			if (pborder_distance_t < nearest_snap_distance_y) {
+				nearest_snap_distance_y = pborder_distance_t;
 				assert(nearest_snap_distance_y < bsnap);
 				new_top = 0;
 			}
-			if (top + nearest_snap_distance_y > max_y_minus_h) {
-				nearest_snap_distance_y = max_y_minus_h - top;
+			if (pborder_distance_b < nearest_snap_distance_y) {
+				nearest_snap_distance_y = pborder_distance_b;
 				assert(nearest_snap_distance_y < bsnap);
-				new_top = max_y_minus_h;
+				new_top = max_y - h;
 			}
 
 			if (nearest_snap_distance_x == bsnap)
@@ -669,41 +631,25 @@ bool Window::handle_mousemove
 				}
 			}
 
-			if (new_left < 0)             new_left = 0;
-			if (new_top  < 0)             new_top  = 0;
-			if (new_left > max_x_minus_w) new_left = max_x_minus_w;
-			if (new_top  > max_y_minus_h) new_top  = max_y_minus_h;
-
 			if (parent->get_dock_windows_to_edges()) {
-				if (new_left == 0) {
-					if (not _docked_left)
-						dock_left();
-				} else if (_docked_left)
-					undock_left();
-				if (new_left == max_x_minus_w) {
-					if (not _docked_right) {
-						dock_right();
-						new_left += VT_B_PIXMAP_THICKNESS;
-						_drag_start_win_x += VT_B_PIXMAP_THICKNESS; //  avoid jumping
-					}
+				if (new_left <= 0 and new_left >= -VT_B_PIXMAP_THICKNESS) {
+						new_left = -VT_B_PIXMAP_THICKNESS;
+						_docked_left = true;
+				} else if (_docked_left) {
+					_docked_left = false;
+				}
+				if (new_left >= (max_x - w) and new_left <= (max_x - w) + VT_B_PIXMAP_THICKNESS) {
+					new_left = (max_x - w) + VT_B_PIXMAP_THICKNESS;
+						_docked_right = true;
 				} else if (_docked_right) {
-					undock_right();
-					new_left -= VT_B_PIXMAP_THICKNESS;
-					_drag_start_win_x -= VT_B_PIXMAP_THICKNESS; //  avoid jumping
+					_docked_right = false;
 				}
 				if (not _is_minimal) { //  minimal windows can not be bottom-docked
-					if (new_top == max_y_minus_h) {
-						if (not _docked_bottom) {
-							dock_bottom();
-							new_top += BT_B_PIXMAP_THICKNESS;
-
-							//  avoid jumping
-							_drag_start_win_y += BT_B_PIXMAP_THICKNESS;
-						}
+					if (new_top >= (max_y - h) and new_top <= (max_y - h) + BT_B_PIXMAP_THICKNESS) {
+						new_top = (max_y - h) + BT_B_PIXMAP_THICKNESS;
+							_docked_bottom = true;
 					} else if (_docked_bottom) {
-						undock_bottom();
-						new_top -= BT_B_PIXMAP_THICKNESS;
-						_drag_start_win_y -= BT_B_PIXMAP_THICKNESS; //  avoid jumping
+						_docked_bottom = false;
 					}
 				}
 			}

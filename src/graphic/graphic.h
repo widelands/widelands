@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,6 +69,10 @@ struct GLCaps
 	int aux_buffers;
 	/// Whether the BlendEquation support is available
 	bool blendequation;
+	/// Maximum number of textures that can be combined
+	int max_tex_combined;
+	/// Whether multitexturing is supported
+	bool multitexture;
 };
 
 /**
@@ -189,6 +193,7 @@ struct Graphic {
 
 	void set_world(std::string);
 	PictureID get_road_texture(int32_t roadtex);
+	PictureID get_edge_texture();
 
 	GraphicCaps const & caps() const throw () {return m_caps;}
 
@@ -236,6 +241,7 @@ protected:
 	Picturemap m_picturemap;
 
 	Road_Textures * m_roadtextures;
+	PictureID m_edgetexture;
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
 };
