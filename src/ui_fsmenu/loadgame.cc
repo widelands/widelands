@@ -181,7 +181,15 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 
 		m_ok.set_enabled(true);
 		m_delete.set_enabled(true);
-		m_tamapname.set_text(gpdp.get_mapname());
+		
+		//Try to translate the map name.
+		//This will work on every official map as expected
+		//and 'fail silently' (not find a translation) for already translated campaign map names.
+		//It will also translate 'false-positively' on any user-made map which shares a name with
+		//the official maps, but this should not be a problem to worry about.
+		i18n::grab_textdomain("maps");
+		m_tamapname.set_text(_(gpdp.get_mapname()));
+		i18n::release_textdomain();
 
 		char buf[200];
 		uint32_t gametime = gpdp.get_gametime();
