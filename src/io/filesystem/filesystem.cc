@@ -308,7 +308,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 	}
 
 	//remove trailing slash
-	if (canonpath.size()>1) canonpath.erase(canonpath.end() - 1); 
+	if (canonpath.size() > 1) canonpath.erase(canonpath.end() - 1);
 #endif
 
 	return canonpath;

@@ -181,7 +181,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 
 		m_ok.set_enabled(true);
 		m_delete.set_enabled(true);
-		
+
 		//Try to translate the map name.
 		//This will work on every official map as expected
 		//and 'fail silently' (not find a translation) for already translated campaign map names.
