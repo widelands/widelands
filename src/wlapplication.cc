@@ -111,8 +111,8 @@ using std::endl;
 void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
-#ifdef __APPLE__
-		// on mac, the default data dir is relative to the executable directory
+#if defined (__APPLE__) || defined(WIN32)
+		// on mac and windows, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
 		log("Adding executable directory to search path\n");
 		g_fs->AddFileSystem(FileSystem::Create(s));
@@ -912,6 +912,11 @@ std::string WLApplication::get_executable_path()
 	}
 	executabledir = std::string(buffer, size);
 	executabledir.resize(executabledir.rfind('/') + 1);
+#elif WIN32
+	char filename[_MAX_PATH + 1] = {0};
+	GetModuleFileName(0, filename, _MAX_PATH);
+	executabledir = filename;
+	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
 #endif
 	log("Widelands executable directory: %s\n", executabledir.c_str());
 	return executabledir;
