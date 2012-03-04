@@ -397,7 +397,7 @@ void ConstructionSite::draw
 		g_gr->get_animation_size(a, tanim, wa, ha);
 		dst.drawanimrect
 			(pos, a, tanim - FRAME_LENGTH, get_owner(),
-			 Rect(Point(0, 0), w, std::min(ha, h - lines)));
+			 Rect(Point(0, 0), wa, std::min(ha, h - lines)));
 	}
 
 	assert(lines <= h);
