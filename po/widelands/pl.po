@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-27 22:36+0100\n"
-"PO-Revision-Date: 2012-02-25 09:36+0000\n"
+"PO-Revision-Date: 2012-03-03 11:52+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-02-29 04:34+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-04 04:42+0000\n"
+"X-Generator: Launchpad (build 14886)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1635,7 +1635,7 @@ msgstr "Debug"
 
 #: ../../src/wui/buildingwindow.cc:271
 msgid "Center view on this"
-msgstr ""
+msgstr "Wycentruj na tym widok"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -2785,13 +2785,15 @@ msgstr "Nie znaleziono wolnych zasobów!"
 
 #: ../../src/logic/production_program.cc:1209
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Wyczerpano główną żyłę"
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"Główna żyła kopalni została wyeksploatowana. Spodziewaj się znacznego "
+"zmniejszenia wydobycia. Rozważ rozbudowę, rozbiórkę lub zniszczenie kopalni."
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
@@ -4219,6 +4221,8 @@ msgstr "Serwer zawiesił się i awaryjnie zapisał grę."
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Connection to client timeouted: no response for 10 minutes!"
 msgstr ""
+"Połączenie z klientem przekroczyło limit czasu: brak odpowiedzi przez 10 "
+"minut!"
 
 #: ../../src/network/network_gaming_messages.cc:130
 msgid "Client and host have become desynchronized."
@@ -4256,7 +4260,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:137
 msgid "Received a PLAYERCOMMAND even though no game is running."
-msgstr ""
+msgstr "Otrzymano PLAYERCOMMAND, mimo że nie trwa w tej chwili gra."
 
 #: ../../src/network/network_gaming_messages.cc:138
 msgid "Unexpectedly received LAUNCH command from server."
@@ -4277,7 +4281,7 @@ msgstr "Serwer używa innej wersji protokołu"
 #: ../../src/network/network_gaming_messages.cc:142
 #, c-format
 msgid "Received command number %s, that is disallowed in this state."
-msgstr ""
+msgstr "Otrzymano polecenie numer %s, które jest w tym momencie zabronione."
 
 #: ../../src/network/network_gaming_messages.cc:143
 msgid "Client reports time to host that is running backwards."
@@ -4366,12 +4370,12 @@ msgstr "Wysyłam część %s pliku %s do %s"
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
-msgstr ""
+msgstr "Gracz \"%s\" został pokonany i obserwuje grę."
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "No user with the name %s is logged in!"
-msgstr ""
+msgstr "Nie znaleziono zalogowanego gracza o imieniu %s!"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1224
@@ -4400,7 +4404,7 @@ msgstr "Zostałeś rozłączony, gdyż metaserwer właśnie się restartuje."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "Połączenie przerwane normalnie."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
@@ -4412,7 +4416,7 @@ msgstr "Metaserwer nie odpowiada"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
-msgstr ""
+msgstr "Do twojej gry nie ma dostępu z internetu"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -4429,12 +4433,18 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming for setting up your internet "
 "connection for hosting a game online."
 msgstr ""
+"Metaserwer nie był w stanie połączyć się z twoją grą. Najprawdopodobniej nie "
+"jest ona dostępna z internetu! Patrz "
+"http://wl.widelands.org/wiki/InternetGaming jeśli chcesz hostować grę w "
+"internecie."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
 "You tried to relogin, but the server has no more knowledge of your previous "
 "state."
 msgstr ""
+"Próbowałeś się zalogować ponownie, lecz serwer nie posiada wiedzy o twoim "
+"poprzednim stanie."
 
 #: ../../src/network/nethost.cc:360
 msgid ""
@@ -4643,7 +4653,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:354
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr ""
+msgstr "Metaserwer odpowiedział dziwnym błędem podczas połączenia"
 
 #: ../../src/network/internet_gaming.cc:366
 #, c-format
@@ -4658,7 +4668,7 @@ msgstr ""
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr ""
+msgstr "UWAGA: Otrzymano komendę %s, mimo, że nie jesteśmy połączeni."
 
 #: ../../src/network/internet_gaming.cc:388
 #, c-format
