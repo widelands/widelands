@@ -22,7 +22,7 @@ function image_line_dep(image1, image2, image3, text)
 	if text then
 		return rt("image=" .. imgstr, text)
 	else
-		return rt("image=" .. imgstr .. " image-align=right", "")
+		return rt("image=" .. imgstr, "")
 	end
 end
 
