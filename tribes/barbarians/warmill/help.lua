@@ -21,15 +21,15 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		image_2_arrow("tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/warmill/menu.png") ..
+		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/warmill/menu.png"}) ..
 		rt(p(_"Provided by the " .. _"Smelting Works")) ..
-		image_2_arrow("tribes/barbarians/smelting_works/menu.png","tribes/barbarians/gold/menu.png","tribes/barbarians/warmill/menu.png") ..
+		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/gold/menu.png","tribes/barbarians/warmill/menu.png"}) ..
 		rt(p(_"Provided by the " .. _"Smelting Works")) ..
-		image_2_arrow("tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png") ..
-		rt(p(_"Provided by the " .. _"Coal mine" .. " or the " .. _"Burner")) ..
+		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png"}) ..
+		rt(p(_"Provided by the " .. _"Coal mine" .. " or the " .. _"Charcoal Burner's House")) ..
 		rt(h3(_"Outgoing:")) ..
-		image_2_arrow("tribes/barbarians/warmill/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png",p(_"Headquarters")) ..
-		image_2_arrow("tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png") ..
+		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png"},p(_"Headquarters")) ..
+		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
 		rt(p(_"Trainingscamp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..

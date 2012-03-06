@@ -22,13 +22,13 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		image_2_arrow("tribes/barbarians/tavern/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/granitemine/menu.png", p(_"Rations from a Tavern")) ..
-		image_2_arrow("tribes/barbarians/inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/granitemine/menu.png", p(_"Rations from an Inn")) ..
-		image_2_arrow("tribes/barbarians/big_inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/granitemine/menu.png", p(_"Rations from a Big Inn")) ..
+		dependencies({"tribes/barbarians/tavern/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/granitemine/menu.png"}, p(_"Rations from a Tavern")) ..
+		dependencies({"tribes/barbarians/inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/granitemine/menu.png"}, p(_"Rations from an Inn")) ..
+		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/granitemine/menu.png"}, p(_"Rations from a Big Inn")) ..
 		rt(h3(_"Outgoing:")) ..
-		image_2_arrow("tribes/barbarians/resi_granit2/resi_00.png","tribes/barbarians/granitemine/menu.png","tribes/barbarians/raw_stone/menu.png", p(_"Raw Stone")) ..
-		image_arrow("tribes/barbarians/raw_stone/menu.png","tribes/barbarians/constructionsite/construction_i_00.png",p(_"Construction Site")) ..
-		image_arrow("tribes/barbarians/raw_stone/menu.png","tribes/barbarians/lime_kiln/menu.png", p(_"Lime Kiln")) ..
+		dependencies({"tribes/barbarians/resi_granit2/resi_00.png","tribes/barbarians/granitemine/menu.png","tribes/barbarians/raw_stone/menu.png"}, p(_"Raw Stone")) ..
+		dependencies({"tribes/barbarians/raw_stone/menu.png","tribes/barbarians/constructionsite/construction_i_00.png"},p(_"Construction Site")) ..
+		dependencies({"tribes/barbarians/raw_stone/menu.png","tribes/barbarians/lime_kiln/menu.png"}, p(_"Lime Kiln")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..

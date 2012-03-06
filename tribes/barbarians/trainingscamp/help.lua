@@ -20,13 +20,13 @@ return {
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
-		image_2_arrow("pics/soldier_untrained.png","tribes/barbarians/trainingscamp/menu.png","pics/soldier_fulltrained-evade.png") ..
-		image_2_arrow("pics/soldier_untrained+evade.png","tribes/barbarians/trainingscamp/menu.png","pics/soldier_fulltrained.png") ..
+		dependencies({"pics/soldier_untrained.png","tribes/barbarians/trainingscamp/menu.png","pics/soldier_fulltrained-evade.png"}) ..
+		dependencies({"pics/soldier_untrained+evade.png","tribes/barbarians/trainingscamp/menu.png","pics/soldier_fulltrained.png"}) ..
 		rt(h3(_"Attack Training:")) ..
-		rt("image=tribes/barbarians/axefactory/menu.png;pics/arrow-right.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;pics/arrow-right.png;tribes/barbarians/trainingscamp/menu.png",p("")) ..
+		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
 		rt(p(_"Provided by the " .. _"Axefactory")) ..
 		rt(h3(_"Hitpoints Training:")) ..
-		rt("image=tribes/barbarians/warmill/menu.png;pics/arrow-right.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png;pics/arrow-right.png;tribes/barbarians/trainingscamp/menu.png",p("")) ..
+		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
 		rt(p(_"Provided by the " .. _"War Mill")) ..
 		rt(h3(_"Both Trainings:")) ..
 		image_line("tribes/barbarians/pittabread/menu.png",1,p(_"Pitta Bread" .. _" and")) ..

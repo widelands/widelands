@@ -21,13 +21,13 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		image_2_arrow("tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/axefactory/menu.png") ..
+		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/axefactory/menu.png"}) ..
 		rt(p(_"Provided by the " .. _"Smelting Works")) ..
-		image_2_arrow("tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png") ..
-		rt(p(_"Provided by the " .. _"Coal mine" .. " or the " .. _"Burner")) ..
+		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}) ..
+		rt(p(_"Provided by the " .. _"Coal mine" .. " or the " .. _"Charcoal Burner's House")) ..
 		rt(h3(_"Outgoing:")) ..
-		image_2_arrow("tribes/barbarians/axefactory/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png",p(_"Headquarters")) ..
-		image_2_arrow("tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png",p(_"Trainingscamp")) ..
+		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png"},p(_"Headquarters")) ..
+		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Trainingscamp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
@@ -57,7 +57,7 @@ return {
 		image_line("tribes/barbarians/blacksmith/menu.png", 1, p("1 " .. _"Blacksmith" .. _" or better" .. ".")) ..
 		text_line(_"Worker uses:",_"Hammer","tribes/barbarians/hammer/menu.png") ..
 		rt(h3(_"Experience levels:")) ..
-		image_arrow("tribes/barbarians/blacksmith/menu.png","tribes/barbarians/master-blacksmith/menu.png") ..
+		dependencies({"tribes/barbarians/blacksmith/menu.png","tribes/barbarians/master-blacksmith/menu.png"}) ..
 		rt(p(_"Blacksmith" .. _" to " .. _"Master Blacksmith" .. " (24 " .. _"EP" .. ")")) ..
 	--Production Section
 		rt(h2(_"Production")) ..

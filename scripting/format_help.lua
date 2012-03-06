@@ -5,22 +5,25 @@
 -- Functions used in the ingame help windows for formatting the text and pictures.
 
 -- RST
--- .. function:: image_2_arrow(image1, image2, image3[, text = nil])
+-- .. function:: dependencies(images[, text = nil])
 --
---    Creates a dependencies line.
+--    Creates a dependencies line of any length.
 --
---    :arg image1-3: images in the correct order from left to right from ressource
---       to the following worker.
---    :arg text: normally the name of the worker.
---    :returns: a row of pictures connected by arrows. If there is no text the
---       row will be aligned right else left with following text.
+--    :arg images: images in the correct order from left to right as table (set in {}).
+--    :arg text: comment of the image.
+--    :returns: a row of pictures connected by arrows.
 --
-function image_2_arrow(image1, image2, image3, text)
-	if text then
-		return rt("image=" .. image1 .. ";pics/arrow-right.png;" .. image2 .. ";pics/arrow-right.png;" .. image3, text)
-	else
-		return rt("image=" .. image1 .. ";pics/arrow-right.png;" .. image2 .. ";pics/arrow-right.png;" .. image3, "")
+function dependencies(images, text)
+	if not text then
+		text = ""
 	end
+
+	string = "image=" .. images[1]
+	for k,v in ipairs({unpack(images,2)}) do
+		string = string .. ";pics/arrow-right.png;" .. v
+	end
+
+	return rt(string, text)
 end
 
 -- RST
@@ -63,15 +66,6 @@ function text_line(t1, t2, imgstr)
 		return "<rt text-align=left image=" .. imgstr .. " image-align=right><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
 	else
 		return "<rt text-align=left><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-	end
-end
-
--- Two images connected by arrows followed by text.
-function image_arrow(image1, image2, text)
-	if text then
-		return rt("image=" .. image1 .. ";pics/arrow-right.png;" .. image2, text)
-	else
-		return rt("image=" .. image1 .. ";pics/arrow-right.png;" .. image2, "")
 	end
 end
 

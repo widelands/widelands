@@ -23,16 +23,16 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		image_2_arrow("tribes/barbarians/inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_coalmine/menu.png", p(_"Snacks from an Inn")) ..
-		image_2_arrow("tribes/barbarians/big_inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_coalmine/menu.png", p(_"Snacks from a Big Inn")) ..
+		dependencies({"tribes/barbarians/inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_coalmine/menu.png"}, p(_"Snacks from an Inn")) ..
+		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_coalmine/menu.png"}, p(_"Snacks from a Big Inn")) ..
 		rt(h3(_"Outgoing:")) ..
-		image_2_arrow("tribes/barbarians/resi_coal2/resi_00.png","tribes/barbarians/deep_coalmine/menu.png","tribes/barbarians/coal/menu.png", p(_"Coal")) ..
-		image_arrow("tribes/barbarians/coal/menu.png","tribes/barbarians/metalworks/menu.png", p(_"Metalwork Shop")) ..
-		image_arrow("tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png", p(_"Axefactory")) ..
-		image_arrow("tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png", p(_"War Mill")) ..
-		image_arrow("tribes/barbarians/coal/menu.png","tribes/barbarians/helmsmithy/menu.png", p(_"Helmsmithy")) ..
-		image_arrow("tribes/barbarians/coal/menu.png","tribes/barbarians/smelting_works/menu.png", p(_"Smelting Works")) ..
-		image_arrow("tribes/barbarians/coal/menu.png","tribes/barbarians/lime_kiln/menu.png", p(_"Lime Kiln")) ..
+		dependencies({"tribes/barbarians/resi_coal2/resi_00.png","tribes/barbarians/deep_coalmine/menu.png","tribes/barbarians/coal/menu.png"}, p(_"Coal")) ..
+		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/metalworks/menu.png"}, p(_"Metalwork Shop")) ..
+		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}, p(_"Axefactory")) ..
+		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png"}, p(_"War Mill")) ..
+		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/helmsmithy/menu.png"}, p(_"Helmsmithy")) ..
+		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
+		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/lime_kiln/menu.png"}, p(_"Lime Kiln")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..

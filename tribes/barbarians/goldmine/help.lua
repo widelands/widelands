@@ -22,12 +22,12 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		image_2_arrow("tribes/barbarians/tavern/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/goldmine/menu.png", p(_"Rations from a Tavern")) ..
-		image_2_arrow("tribes/barbarians/inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/goldmine/menu.png", p(_"Rations from an Inn")) ..
-		image_2_arrow("tribes/barbarians/big_inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/goldmine/menu.png", p(_"Rations from a Big Inn")) ..
+		dependencies({"tribes/barbarians/tavern/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/goldmine/menu.png"}, p(_"Rations from a Tavern")) ..
+		dependencies({"tribes/barbarians/inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/goldmine/menu.png"}, p(_"Rations from an Inn")) ..
+		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/goldmine/menu.png"}, p(_"Rations from a Big Inn")) ..
 		rt(h3(_"Outgoing:")) ..
-		image_2_arrow("tribes/barbarians/resi_gold2/resi_00.png","tribes/barbarians/goldmine/menu.png","tribes/barbarians/goldstone/menu.png", p(_"Gold Ore")) ..
-		image_arrow("tribes/barbarians/goldstone/menu.png","tribes/barbarians/smelting_works/menu.png", p(_"Smelting Works")) ..
+		dependencies({"tribes/barbarians/resi_gold2/resi_00.png","tribes/barbarians/goldmine/menu.png","tribes/barbarians/goldstone/menu.png"}, p(_"Gold Ore")) ..
+		dependencies({"tribes/barbarians/goldstone/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
 		rt(p(_"Gold ore always goes to the Smelting works. It has no other use.")) ..
 	--Building Section
 		rt(h2(_"Building")) ..

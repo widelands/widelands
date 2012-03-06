@@ -22,11 +22,11 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		image_2_arrow("tribes/barbarians/inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_oremine/menu.png", p(_"Snacks from an Inn")) ..
-		image_2_arrow("tribes/barbarians/big_inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_oremine/menu.png", p(_"Snacks from a Big Inn")) ..
+		dependencies({"tribes/barbarians/inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_oremine/menu.png"}, p(_"Snacks from an Inn")) ..
+		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_oremine/menu.png"}, p(_"Snacks from a Big Inn")) ..
 		rt(h3(_"Outgoing:")) ..
-		image_2_arrow("tribes/barbarians/resi_iron2/resi_00.png","tribes/barbarians/deep_oremine/menu.png","tribes/barbarians/ironore/menu.png", p(_"Iron Ore")) ..
-		image_arrow("tribes/barbarians/ironore/menu.png","tribes/barbarians/smelting_works/menu.png", p(_"Smelting Works")) ..
+		dependencies({"tribes/barbarians/resi_iron2/resi_00.png","tribes/barbarians/deep_oremine/menu.png","tribes/barbarians/ironore/menu.png"}, p(_"Iron Ore")) ..
+		dependencies({"tribes/barbarians/ironore/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
 		rt(p(_"Iron ore always goes to the Smelting works. It has no other use.")) ..
 	--Building Section
 		rt(h2(_"Building")) ..

@@ -21,8 +21,8 @@ return {
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
-		image_2_arrow("pics/soldier_untrained.png","tribes/barbarians/battlearena/menu.png","pics/soldier_untrained+evade.png") ..
-		image_2_arrow("pics/soldier_fulltrained-evade.png","tribes/barbarians/battlearena/menu.png","pics/soldier_fulltrained.png") ..
+		dependencies({"pics/soldier_untrained.png","tribes/barbarians/battlearena/menu.png","pics/soldier_untrained+evade.png"}) ..
+		dependencies({"pics/soldier_fulltrained-evade.png","tribes/barbarians/battlearena/menu.png","pics/soldier_fulltrained.png"}) ..
 		rt(h3(_"Evade Training:")) ..
 		image_line("tribes/barbarians/pittabread/menu.png",1,p(_"Pitta Bread" .. _" and")) ..
 		image_line("tribes/barbarians/strongbeer/menu.png",1,p(_"Strong Beer" .. _" and")) ..
