@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -344,6 +344,12 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 
 	MapData const & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
+
+	// If the same map was selected again, maybe the state of the "scenario" check box was changed
+	// So we should recheck all map predefined values,
+	// which is done in refresh(), if m_filename_proof is different to settings.mapfilename -> dummy rename
+	if (mapdata.filename == m_filename_proof)
+		m_filename_proof = m_filename_proof + "new";
 
 	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
 }
