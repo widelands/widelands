@@ -1,0 +1,66 @@
+use("aux", "formatting")
+use("aux", "format_help")
+
+set_textdomain("tribe_barbarians")
+
+return {
+	text =
+		--rt(h1(_"The Barbarian Axefactory")) ..
+	--Lore Section
+		rt(h2(_"Lore")) ..
+		rt("image=tribes/barbarians/warmill/warmill_i_00.png", p(
+			_[["A new Warriors Axe brings forth the best in its wielder – or the worst in its maker."]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", [[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])) ..
+	--General Section
+		rt(h2(_"General")) ..
+		text_line(_"Purpose:", _"The Barbarian Axefactory is the intermediate production site in a row of three. It is an upgrade from the Metalwork Shop but doesn't require additional qualification for the worker.") ..
+		rt("image=tribes/barbarians/axe/menu.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png image-align=right",p("It can make Axes, Sharp Axes and Broad Axes.")) ..
+		text_line(_"Working radius:", "n/a") ..
+		text_line(_"Conquer range:", "n/a") ..
+		text_line(_"Vision range:", "4") ..
+	--Dependencies
+		rt(h2(_"Dependencies")) ..
+		rt(h3(_"Incoming:")) ..
+		image_2_arrow("tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/axefactory/menu.png") ..
+		rt(p(_"Provided by the " .. _"Smelting Works")) ..
+		image_2_arrow("tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png") ..
+		rt(p(_"Provided by the " .. _"Coal mine" .. " or the " .. _"Burner")) ..
+		rt(h3(_"Outgoing:")) ..
+		image_2_arrow("tribes/barbarians/axefactory/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png",p(_"Headquarters")) ..
+		image_2_arrow("tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png",p(_"Trainingscamp")) ..
+	--Building Section
+		rt(h2(_"Building")) ..
+		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
+		text_line(_"Upgraded from:", _"Metalwork Shop","tribes/barbarians/metalworks/menu.png") ..
+		rt(h3(_"Upgrade Cost:")) ..
+		image_line("tribes/barbarians/blackwood/menu.png",1,p("1 " .. _"Blackwood")) ..
+		image_line("tribes/barbarians/thatchreed/menu.png",1,p("1 " .. _"Thatch Reed")) ..
+		image_line("tribes/barbarians/raw_stone/menu.png",2,p("2 " .. _"Raw Stone")) ..
+		image_line("tribes/barbarians/grout/menu.png",1,p("1 " .. _"Grout")) ..
+		image_line("tribes/barbarians/trunk/menu.png",1,p("1 " .. _"Trunk")) ..
+		rt(h3(_"Cost cumulative:")) ..
+		image_line("tribes/barbarians/blackwood/menu.png",2,p("2 " .. _"Blackwood")) ..
+		image_line("tribes/barbarians/thatchreed/menu.png",2,p("2 " .. _"Thatch Reed")) ..
+		image_line("tribes/barbarians/raw_stone/menu.png",4,p("4 " .. _"Raw Stone")) ..
+		image_line("tribes/barbarians/grout/menu.png",2,p("2 " .. _"Grout")) ..
+		image_line("tribes/barbarians/trunk/menu.png",2,p("2 " .. _"Trunk")) ..
+		rt(h3(_"Dismantle yields:")) ..
+		image_line("tribes/barbarians/blackwood/menu.png",1,p("1 " .. _"Blackwood")) ..
+		image_line("tribes/barbarians/thatchreed/menu.png",1,p("1 " .. _"Thatch Reed")) ..
+		image_line("tribes/barbarians/raw_stone/menu.png",2,p("2 " .. _"Raw Stone")) ..
+		image_line("tribes/barbarians/grout/menu.png",1,p("1 " .. _"Grout")) ..
+		image_line("tribes/barbarians/trunk/menu.png",1,p("1 " .. _"Trunk")) ..
+		text_line(_"Upgradeable to:",_"War Mill","tribes/barbarians/warmill/menu.png") ..
+	--Workers Section
+		rt(h2(_"Workers")) ..
+		rt(h3(_"Crew required:")) ..
+		image_line("tribes/barbarians/blacksmith/menu.png", 1, p("1 " .. _"Blacksmith" .. _" or better" .. ".")) ..
+		text_line(_"Worker uses:",_"Hammer","tribes/barbarians/hammer/menu.png") ..
+		rt(h3(_"Experience levels:")) ..
+		image_arrow("tribes/barbarians/blacksmith/menu.png","tribes/barbarians/master-blacksmith/menu.png") ..
+		rt(p(_"Blacksmith" .. _" to " .. _"Master Blacksmith" .. " (24 " .. _"EP" .. ")")) ..
+	--Production Section
+		rt(h2(_"Production")) ..
+		text_line(_"Performance:", _"If all needed wares are delivered in time, an Axefactory can produce each item in about 57s on average.") ..
+		rt(p(_"All three weapons take the same time for making, but the required raw materials vary."))
+}
