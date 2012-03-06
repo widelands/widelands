@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-27 22:36+0100\n"
-"PO-Revision-Date: 2012-03-03 14:19+0000\n"
+"PO-Revision-Date: 2012-03-05 18:18+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-04 04:42+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-06 04:34+0000\n"
+"X-Generator: Launchpad (build 14900)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -34,7 +34,7 @@ msgstr "Fornitori"
 
 #: ../../src/writeHTML.cc:74
 msgid "Successors"
-msgstr "Successori"
+msgstr "Beneficiari"
 
 #: ../../src/writeHTML.cc:89
 msgid "Predecessors"
@@ -77,11 +77,11 @@ msgstr "Stop"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
-msgstr "Portata<br/>conquista"
+msgstr "Raggio di <br/>conquista"
 
 #: ../../src/writeHTML.cc:293 ../../src/writeHTML.cc:521
 msgid "Vision<br/>range"
-msgstr "Portata<br/>visiva"
+msgstr "Raggio di visione"
 
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:376
 #: ../../src/logic/building.cc:528
@@ -149,12 +149,12 @@ msgstr "È migliorata."
 #: ../../src/writeHTML.cc:415
 #, c-format
 msgid "Conquer range is %u."
-msgstr "La portata della conquista è %u."
+msgstr "Il raggio di conquista è %u."
 
 #: ../../src/writeHTML.cc:423 ../../src/writeHTML.cc:649
 #, c-format
 msgid "Vision range is %u."
-msgstr "Portata visiva è %u."
+msgstr "Il raggio di visone è %u."
 
 #: ../../src/writeHTML.cc:431 ../../src/writeHTML.cc:656
 msgid "Build cost"
@@ -163,7 +163,7 @@ msgstr "Costo della costruzione"
 #: ../../src/writeHTML.cc:441
 #, c-format
 msgid "%s's constructionsite"
-msgstr "Luogo di costruzione di %s"
+msgstr "Cantiere di %s"
 
 #: ../../src/writeHTML.cc:453
 msgid "Enhancements"
@@ -180,7 +180,7 @@ msgstr "Tipi di operai"
 
 #: ../../src/writeHTML.cc:523
 msgid "Needed<br/>experience"
-msgstr "Necessaria<br/>esperienza"
+msgstr "Esperienza<br/>necessaria"
 
 #: ../../src/writeHTML.cc:525
 msgid "Becomes"
@@ -235,7 +235,7 @@ msgstr "Si genera nei magazzini."
 #: ../../src/writeHTML.cc:698
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr "Necessita esperienza di lavoro %u volte per diventare"
+msgstr "Necessita di eseguire il lavoro %u volte per diventare"
 
 #: ../../src/writeHTML.cc:706
 #, c-format
@@ -350,7 +350,7 @@ msgstr "Uscita"
 #: ../../src/writeHTML.cc:837 ../../src/writeHTML.cc:851
 #, c-format
 msgid "%s's output"
-msgstr "Output di %s"
+msgstr "Prodotto da %s"
 
 #: ../../src/writeHTML.cc:898 ../../src/writeHTML.cc:1041
 #: ../../src/writeHTML.cc:1103 ../../src/writeHTML.cc:1131
@@ -565,7 +565,7 @@ msgstr "Tipi di merce"
 
 #: ../../src/writeHTML.cc:1485
 msgid "ware_types.xhtml"
-msgstr "tipi_di_merce.xhtml"
+msgstr "ware_types.xhtml"
 
 #: ../../src/s2map.cc:224
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -2752,7 +2752,7 @@ msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
-"%s non è dichiarato come un output (\"output=%s\" non è stato trovaato nella "
+"%s non è dichiarato come un output (\"output=%s\" non è stato trovato nella "
 "sezione [global])"
 
 #: ../../src/logic/production_program.cc:917
@@ -4152,7 +4152,7 @@ msgstr "precarico: %s"
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr "il giocatore numero (%i) è fuori portata (1 .. %u)"
+msgstr "il giocatore numero (%i) è fuori range (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:143
 #, c-format

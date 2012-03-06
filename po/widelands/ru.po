@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-27 22:36+0100\n"
-"PO-Revision-Date: 2012-01-26 18:16+0000\n"
-"Last-Translator: Izon <Unknown>\n"
+"PO-Revision-Date: 2012-03-05 08:17+0000\n"
+"Last-Translator: Gleb Sinkovskiy <gleb.sinkovskiy@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-02-29 04:35+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-06 04:34+0000\n"
+"X-Generator: Launchpad (build 14900)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -712,6 +712,7 @@ msgstr ""
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
+" --dedicated=FILENAME Запустить выделенный сервер с картой FILENAME\n"
 
 #: ../../src/wlapplication.cc:1338
 msgid ""
@@ -752,7 +753,7 @@ msgstr ""
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
-msgstr ""
+msgstr " Включить рендеринг OpenGL\n"
 
 #: ../../src/wlapplication.cc:1363
 msgid ""
@@ -924,11 +925,11 @@ msgstr "Игроки"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Отменить"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Повторить"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -1048,7 +1049,7 @@ msgstr "Строить большие здания"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr ""
+msgstr "Строить здания порта"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
@@ -1207,7 +1208,7 @@ msgstr "Начать миссию заново"
 #: ../../src/wui/dismantlesitewindow.cc:68
 #: ../../src/wui/constructionsitewindow.cc:74
 msgid "Building materials"
-msgstr ""
+msgstr "Стройматериалы"
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
@@ -1239,11 +1240,11 @@ msgstr "Низкий приоритет"
 
 #: ../../src/wui/waresqueuedisplay.cc:231
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "Уменьшить количество изделий которые можно здесь хранить"
 
 #: ../../src/wui/waresqueuedisplay.cc:241
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "Увеличить количество изделий которые можно здесь хранить"
 
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
@@ -1321,11 +1322,11 @@ msgstr "Работники на складах"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:67
 msgid "Decrease capacity"
-msgstr ""
+msgstr "Уменьшить ёмкость"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid "Increase capacity"
-msgstr ""
+msgstr "Увеличить ёмкость"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -1377,7 +1378,7 @@ msgstr "ИИ: "
 #: ../../src/wui/multiplayersetupgroup.cc:316
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Случайно"
 
 #: ../../src/wui/multiplayersetupgroup.cc:310
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -1458,15 +1459,15 @@ msgstr "Когда ранены"
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Корабль"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
-msgstr ""
+msgstr "Идти в корабль"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
-msgstr ""
+msgstr "Идти к"
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
@@ -1613,7 +1614,7 @@ msgstr "Разрушить"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "Демонтировать"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -1625,7 +1626,7 @@ msgstr "Отладка"
 
 #: ../../src/wui/buildingwindow.cc:271
 msgid "Center view on this"
-msgstr ""
+msgstr "Центрировать вид здесь"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -1707,11 +1708,11 @@ msgstr "Солдаты"
 
 #: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
-msgstr ""
+msgstr "Потребление"
 
 #: ../../src/wui/ware_statistics_menu.cc:204
 msgid "Economy Health"
-msgstr ""
+msgstr "Здоровье экономики"
 
 #: ../../src/wui/warehousewindow.cc:132
 msgid "Normal policy"
@@ -1731,11 +1732,11 @@ msgstr "Удалить выбранные изделия отсюда"
 
 #: ../../src/wui/warehousewindow.cc:212
 msgid "Wares in dock"
-msgstr ""
+msgstr "Товары в доке"
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
-msgstr ""
+msgstr "Работники в доке"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
@@ -1859,19 +1860,19 @@ msgstr "НЕТ ИГРОВЫХ КОНТРОЛЛЕРОВ"
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "мин."
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
-msgstr ""
+msgstr "игра"
 
 #: ../../src/wui/minimap.cc:137 ../../src/ui_fsmenu/launchMPG.cc:65
 #: ../../src/ui_fsmenu/launchMPG.cc:165
@@ -1933,7 +1934,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:594
 msgid "Out of "
-msgstr ""
+msgstr "Недостаточно "
 
 #: ../../src/logic/worker.cc:597
 msgid ""
@@ -1957,7 +1958,7 @@ msgstr "Рабочий потерялся!"
 #: ../../src/logic/worker.cc:3037
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "занятых работников: %s"
 
 #: ../../src/logic/warehouse.cc:260 ../../src/logic/militarysite.cc:63
 msgid " conquer"
@@ -2043,7 +2044,7 @@ msgstr "большой"
 #: ../../src/logic/cmd_queue.cc:189
 #, c-format
 msgid "duetime (%i) < gametime (%i)"
-msgstr ""
+msgstr "необходимое время (%i) < игровое время (%i)"
 
 #: ../../src/logic/cmd_queue.cc:192 ../../src/logic/requirements.cc:50
 #: ../../src/logic/playercommand.cc:139 ../../src/logic/playercommand.cc:187
