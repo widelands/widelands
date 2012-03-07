@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/rangers_hut/b_ranger_i_00.png", p(
 			--"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
-			_[["He who can grow two trees where normally grows only one is more important than the most important general!"]])) ..
+			_[["He who can grow two trees where normally grows only one exceeds the most important general!"]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", [[Chat'Karuth in a conversation with a ranger]])) ..
 	--General Section
 		rt(h2(_"General")) ..
