@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -205,7 +205,7 @@ void Fullscreen_Menu_LaunchSPG::back_clicked()
 	m_settings->setMap(std::string(), std::string(), 0);
 	select_map();
 	if (m_settings->settings().mapname.empty())
-		end_modal(0);
+		return end_modal(0);
 	refresh();
 }
 
@@ -280,8 +280,12 @@ void Fullscreen_Menu_LaunchSPG::refresh()
 {
 	GameSettings const & settings = m_settings->settings();
 
-	m_mapname.set_text
-		(settings.mapname.size() != 0 ? settings.mapname : _("(no map)"));
+	{
+		// Translate the maps name
+		const char * nomap = _("(no map)");
+		i18n::Textdomain td("maps");
+		m_mapname.set_text(settings.mapname.size() != 0 ? _(settings.mapname) : nomap);
+	}
 	m_filename = settings.mapfilename;
 	m_nr_players = settings.players.size();
 

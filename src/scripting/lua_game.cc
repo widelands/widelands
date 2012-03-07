@@ -427,6 +427,10 @@ int L_Player::send_message(lua_State * L) {
 // UNTESTED
 int L_Player::message_box(lua_State * L) {
 	Game & game = get_game(L);
+	// don't show message boxes in replays, cause they crash the game
+	if (game.gameController()->getGameDescription() == "replay") {
+		return 1;
+	}
 
 	uint32_t w = 400;
 	uint32_t h = 300;

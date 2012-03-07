@@ -19,6 +19,7 @@
 
 #include <lua.hpp>
 
+#include "gamecontroller.h"
 #include "logic/player.h"
 #include "upcast.h"
 #include "wui/interactive_player.h"
@@ -542,6 +543,12 @@ int L_MapView::get_viewpoint_x(lua_State * L) {
 	return 1;
 }
 int L_MapView::set_viewpoint_x(lua_State * L) {
+	Widelands::Game & game = get_game(L);
+	// don't move view in replays
+	if (game.gameController()->getGameDescription() == "replay") {
+		return 0;
+	}
+
 	Map_View * mv = get();
 	Point p = mv->get_viewpoint();
 	p.x = luaL_checkuint32(L, -1);
@@ -553,6 +560,12 @@ int L_MapView::get_viewpoint_y(lua_State * L) {
 	return 1;
 }
 int L_MapView::set_viewpoint_y(lua_State * L) {
+	Widelands::Game & game = get_game(L);
+	// don't move view in replays
+	if (game.gameController()->getGameDescription() == "replay") {
+		return 0;
+	}
+
 	Map_View * mv = get();
 	Point p = mv->get_viewpoint();
 	p.y = luaL_checkuint32(L, -1);
