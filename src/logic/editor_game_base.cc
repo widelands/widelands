@@ -281,7 +281,7 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 	m_map->load_graphics(); // especially loads world data
 
 	container_iterate_const(Tribe_Vector, m_tribes, i) {
-		loader_ui.stepf(_("Loading tribe: %s"), (*i.current)->name().c_str());
+		loader_ui.stepf(_("Loading tribes"));
 		(*i.current)->load_graphics();
 	}
 
