@@ -117,7 +117,7 @@ Interactive_Base::Interactive_Base
 		 global_s.get_int("depth", 16),
 		 global_s.get_bool("fullscreen", false),
 #if USE_OPENGL
-		 global_s.get_bool("opengl", false));
+		 global_s.get_bool("opengl", true));
 #else
 		 false);
 #endif
