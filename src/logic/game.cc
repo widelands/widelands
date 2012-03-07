@@ -221,19 +221,8 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
 
-	// Determine text domain
-	std::string td(mapname);
-	uint32_t i;
-	for (i = td.size(); i and td[i] != '/' and td[i] != '\\'; --i) {}
-	td = "scenario_" + td.substr(i + 1);
-
 	loaderUI.step (_("Preloading a map"));
-	{
-
-		i18n::Textdomain textdomain(td); // load scenario textdomain
-		log("Loading the locals for scenario. file: %s.mo\n", mapname);
-		maploader->preload_map(true);
-	}
+	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (background.size() > 0)
 		loaderUI.set_background(background);
@@ -259,12 +248,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 		 	(*this, g_options.pull_section("global"), 1, true, false));
 
 	loaderUI.step (_("Loading a map"));
-
-	// Reload campaign textdomain
-	{
-		i18n::Textdomain textdomain(td);
-		maploader->load_map_complete(*this, true);
-	}
+	maploader->load_map_complete(*this, true);
 	maploader.reset();
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, 1));

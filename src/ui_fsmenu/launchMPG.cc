@@ -465,7 +465,13 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 				if (settings.scenario)
 					set_scenario_values();
 			}
-			m_mapname.set_text(settings.mapname);
+			//Try to translate the map name.
+			//This will work on every official map as expected
+			//and 'fail silently' (not find a translation) for already translated campaign map names.
+			//It will also translate 'false-positively' on any user-made map which shares a name with
+			//the official maps, but this should not be a problem to worry about.
+			i18n::Textdomain td("maps");
+			m_mapname.set_text(_(settings.mapname));
 		}
 	} else {
 		// Write client infos

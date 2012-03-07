@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -350,12 +350,9 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	}
 	tdname = "scenario_" + tdname.substr(i + 1);
 
-	i18n::Textdomain td(tdname);
-
 	Widelands::Map map;
 
-	Widelands::Map_Loader * const ml
-		= map.get_correct_loader(campmapfile.c_str());
+	Widelands::Map_Loader * const ml = map.get_correct_loader(campmapfile.c_str());
 	if (!ml) {
 		throw wexception
 			(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());
@@ -364,9 +361,10 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	map.set_filename(campmapfile.c_str());
 	ml->preload_map(true);
 
-	tamapname .set_text(map.get_name());
+	i18n::Textdomain td(tdname);
+	tamapname .set_text(_(map.get_name()));
 	taauthor  .set_text(map.get_author());
-	tamapdescr.set_text(map.get_description());
+	tamapdescr.set_text(_(map.get_description()));
 
 	// enable OK button
 	b_ok.set_enabled(true);
