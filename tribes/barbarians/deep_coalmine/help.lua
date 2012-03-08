@@ -27,7 +27,6 @@ return {
 		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/snack/menu.png","tribes/barbarians/deep_coalmine/menu.png"}, p(_"Snacks from a Big Inn")) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/resi_coal2/resi_00.png","tribes/barbarians/deep_coalmine/menu.png","tribes/barbarians/coal/menu.png"}, p(_"Coal")) ..
-		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/metalworks/menu.png"}, p(_"Metalwork Shop")) ..
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}, p(_"Axefactory")) ..
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png"}, p(_"War Mill")) ..
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/helmsmithy/menu.png"}, p(_"Helmsmithy")) ..
