@@ -12,6 +12,7 @@ thatchreed=4
 gold=2
 
 [idle]
-pics=port_i_??.png  # ???
-hotspot=52 64
+pics=port_i_??.png  # 20 frames
+hotspot=67 80
 playercolor=true
+fps=10
