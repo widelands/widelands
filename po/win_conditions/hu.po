@@ -7,15 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2010-08-30 23:31+0000\n"
-"Last-Translator: Papp Bence <papp.bence89@gmail.com>\n"
+"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"PO-Revision-Date: 2012-03-07 12:42+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:52+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-03-08 04:40+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
+
+#: ../../scripting/win_condition_texts.lua:31
+msgid "%i trees."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:30
+msgid "%s had "
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:28
+msgid "%s has %i trees at the moment."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:46
+msgid "%s owns more than half of the maps area."
+msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
@@ -32,6 +48,10 @@ msgstr ""
 msgid "Collectors"
 msgstr ""
 
+#: ../../scripting/win_condition_texts.lua:2
+msgid "Congratulations!"
+msgstr "Gratulálunk!"
+
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
 "Each player or team tries to obtain more than half of the maps' area. The "
@@ -41,34 +61,120 @@ msgstr ""
 
 #: ../../scripting/win_conditions/00_endless_game.lua:12
 msgid "Endless Game"
-msgstr ""
+msgstr "Végtelen játék"
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
 msgid "Endless Game (no fog)"
+msgstr "Végtelen játék (nincs köd)"
+
+#: ../../scripting/win_condition_texts.lua:49
+msgid "Keep it for %i more minutes to win the game."
 msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:23
+#: ../../scripting/win_condition_texts.lua:29
+msgid "Player overview:"
+msgstr "Játékos áttekintés:"
+
+#: ../../scripting/win_condition_texts.lua:41
+msgid "Points"
+msgstr "Pontok"
+
+#: ../../scripting/win_condition_texts.lua:22
+msgid "Status"
+msgstr "Állapot"
+
+#: ../../scripting/win_condition_texts.lua:38
+msgid "Status for %s<br>"
+msgstr "%s állapota<br>"
+
+#: ../../scripting/win_condition_texts.lua:45
+msgid "Team %i"
+msgstr "%i csapat"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:13
 msgid "Territorial Lord"
 msgstr ""
 
+#: ../../scripting/win_condition_texts.lua:27
+msgid "The game will end in %i minutes."
+msgstr "A játék %i perc múlva véget ér."
+
+#: ../../scripting/win_condition_texts.lua:40
+msgid "The game will end in %s."
+msgstr "A játék %s másodperc múlva véget ér."
+
 #: ../../scripting/win_conditions/01_defeat_all.lua:14
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr ""
 
+#: ../../scripting/win_condition_texts.lua:32
+msgid "The winner is %s "
+msgstr "%s a győztes "
+
 #: ../../scripting/win_conditions/00_endless_game.lua:14
 msgid "This is an endless game without rules."
-msgstr ""
+msgstr "Ez egy végtelen játék szabályok nélkül."
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:13
 msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:39
+msgid "Total: %i points"
+msgstr "Összesen %i pont"
+
+#: ../../scripting/win_condition_texts.lua:34
+msgid "Trees owned"
 msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid "Wood Gnome"
 msgstr ""
 
+#: ../../scripting/win_condition_texts.lua:7
+msgid "You are defeated!"
+msgstr "Vesztettél!"
+
+#: ../../scripting/win_condition_texts.lua:13
+msgid "You are the winner!"
+msgstr "Te nyertél!"
+
 #: ../../scripting/win_conditions/02_collectors.lua:15
 msgid ""
 "You get points for precious wares in your warehouses, the player with the "
 "highest number of wares at the end of 4 hours wins the game."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You have nothing to command left. If you want, you may continue as spectator."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:3
+msgid "You have won this game!"
+msgstr "Megnyerted ezt a játékot!"
+
+#: ../../scripting/win_condition_texts.lua:17
+msgid "You lost"
+msgstr "Vesztettél"
+
+#: ../../scripting/win_condition_texts.lua:48
+msgid "You own more than half of the maps area."
+msgstr "Te uralod a játékterület több, mint felét."
+
+#: ../../scripting/win_condition_texts.lua:47
+msgid "You still got %i minutes to prevent a victory."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:12
+msgid "You won"
+msgstr "Nyertél"
+
+#: ../../scripting/win_condition_texts.lua:18
+msgid "You've lost this game!"
+msgstr "Elvesztetted ezt a játékot!"
+
+#: ../../scripting/win_condition_texts.lua:33
+msgid "with %i trees."
 msgstr ""

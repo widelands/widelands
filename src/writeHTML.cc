@@ -1037,7 +1037,7 @@ void ProductionProgram::ActCall::writeHTML
 	fw.Text("productionsite_program_reference.xhtml");
 	fw.Text("#call\" title=\"");
 	fw.Text(_("Documentation for program command "));
-	fw.Text("call");	
+	fw.Text("call");
 	fw.Text("\">");
 	fw.Text("call");
 	fw.Text("</a> <a href=\"#program_");

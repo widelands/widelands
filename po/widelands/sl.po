@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-16 10:12+0100\n"
+"POT-Creation-Date: 2012-02-27 22:36+0100\n"
 "PO-Revision-Date: 2011-10-25 20:24+0000\n"
 "Last-Translator: Boštjan Miklavčič <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:49+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:35+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -105,15 +105,15 @@ msgstr "Velik"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:97
-#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "Yes"
 msgstr "Da"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:104
-#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "No"
 msgstr "Ne"
 
@@ -570,11 +570,11 @@ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
 "NAPAKA: Ni se bilo mogoče povezati na glavni strežnik (razlog zgoraj)!\n"
 
-#: ../../src/wlapplication.cc:899 ../../src/wlapplication.cc:907
+#: ../../src/wlapplication.cc:903 ../../src/wlapplication.cc:911
 msgid "could not find the path of the main executable"
 msgstr "ni bilo moč najti poti do glavnega programa"
 
-#: ../../src/wlapplication.cc:1024
+#: ../../src/wlapplication.cc:1028
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
@@ -582,7 +582,7 @@ msgstr ""
 "Na zaprtje zvoka se je čakalo 5 sekund. Zaradi težav je bil Widelands zaprt. "
 "Za odpravo težave posodobite gonilnik za zvok in/ali SDL.\n"
 
-#: ../../src/wlapplication.cc:1161
+#: ../../src/wlapplication.cc:1165
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -592,15 +592,15 @@ msgstr ""
 "Oprostite, ni podprt zagon igre v dvojen načinu z razhroščevanjem na WIN32.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1164
+#: ../../src/wlapplication.cc:1168
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double je onemogočeno. To ni razhroščevalna različica!"
 
-#: ../../src/wlapplication.cc:1285
+#: ../../src/wlapplication.cc:1289
 msgid "This is Widelands-"
 msgstr "To je Widelands-"
 
-#: ../../src/wlapplication.cc:1287
+#: ../../src/wlapplication.cc:1291
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -608,7 +608,7 @@ msgstr ""
 "Uporaba: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1288
+#: ../../src/wlapplication.cc:1292
 msgid ""
 "Options:\n"
 "\n"
@@ -616,7 +616,7 @@ msgstr ""
 "Možnosti:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1292
+#: ../../src/wlapplication.cc:1296
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -635,11 +635,11 @@ msgstr ""
 " --homedir=MAPA    Za nastavitvene datoteke, shranjene igre in posnetke "
 "uporabi navedeno MAPO\n"
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1304
 msgid "                      Default is ~/.widelands\n"
 msgstr "                      Privzeto je to ~/.widelands\n"
 
-#: ../../src/wlapplication.cc:1303
+#: ../../src/wlapplication.cc:1307
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback\n"
@@ -657,7 +657,7 @@ msgid ""
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1318
+#: ../../src/wlapplication.cc:1322
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -686,12 +686,12 @@ msgstr ""
 " --scenario=DATOTEKA Zagon igre s scenarijem DATOTEKA.\n"
 " --loadgame=DATOTEKA Odpre shranjeno igro DATOTEKA.\n"
 
-#: ../../src/wlapplication.cc:1331
+#: ../../src/wlapplication.cc:1335
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1334
+#: ../../src/wlapplication.cc:1338
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -712,14 +712,13 @@ msgid ""
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1354
+#: ../../src/wlapplication.cc:1358
 msgid ""
 " --opengl=[0|1]\n"
-"                      Enables opengl rendering\n"
-"                      *EXPERIMENTAL*\n"
+"                      Enables OpenGL rendering\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1360
+#: ../../src/wlapplication.cc:1363
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -757,7 +756,7 @@ msgstr ""
 "                      če okno prekriva pult.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1384
+#: ../../src/wlapplication.cc:1387
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -766,15 +765,15 @@ msgstr ""
 " --Zaženi igro dvakrat (za potrebe testiranja lokalnih omrežij)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1388
+#: ../../src/wlapplication.cc:1391
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr " --verbose            Omogoči zgovorna sporočila za razhroščevanje\n"
 
-#: ../../src/wlapplication.cc:1389
+#: ../../src/wlapplication.cc:1392
 msgid " --help               Show this help\n"
 msgstr " --help               Prikaži pomoč\n"
 
-#: ../../src/wlapplication.cc:1393
+#: ../../src/wlapplication.cc:1396
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -787,19 +786,19 @@ msgstr ""
 "Upamo da uživate v igri.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1542
+#: ../../src/wlapplication.cc:1545
 msgid "Warning: "
 msgstr "Opozorilo: "
 
-#: ../../src/wlapplication.cc:1546
+#: ../../src/wlapplication.cc:1549
 msgid "Game data error"
 msgstr "Napaka v podatkih igre"
 
-#: ../../src/wlapplication.cc:1551
+#: ../../src/wlapplication.cc:1554
 msgid "Unexpected error during the game"
 msgstr "Nepričakovana napaka med igro"
 
-#: ../../src/wlapplication.cc:1555
+#: ../../src/wlapplication.cc:1558
 msgid ""
 "\n"
 "\n"
@@ -813,7 +812,7 @@ msgstr ""
 "Izpis ob napaki boste našli na standardnem izhodu (stdout.txt na Oknih). "
 "Uporabljate različico "
 
-#: ../../src/wlapplication.cc:1561
+#: ../../src/wlapplication.cc:1564
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -825,24 +824,24 @@ msgstr ""
 "Widelands poskuša shraniti igro, ko pride no napake. Pogosto - toda ne vedno "
 "- je mogoče igro naložiti in z njo nadaljevati.\n"
 
-#: ../../src/wlapplication.cc:1678
+#: ../../src/wlapplication.cc:1681
 msgid "The address of the game server is invalid"
 msgstr "Naslov igralskega strežnika je neveljaven"
 
-#: ../../src/wlapplication.cc:1785 ../../src/network/nethost.cc:1996
+#: ../../src/wlapplication.cc:1788 ../../src/network/nethost.cc:1996
 msgid "Player"
 msgstr "Igralec"
 
-#: ../../src/wlapplication.cc:1974 ../../src/network/netclient.cc:198
+#: ../../src/wlapplication.cc:1977 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:806
 msgid "Preparing game"
 msgstr "Pripravljam igro"
 
-#: ../../src/wlapplication.cc:2082
+#: ../../src/wlapplication.cc:2085
 msgid "End of replay"
 msgstr "Konec ponovnega posnetka"
 
-#: ../../src/wlapplication.cc:2084
+#: ../../src/wlapplication.cc:2087
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -850,44 +849,52 @@ msgstr ""
 "Igra je v premoru, ker se je počasni posnetek iztekel. Po želji lahko "
 "nadaljujete z ogledom posnetka."
 
-#: ../../src/wlapplication.cc:2167 ../../src/logic/game.cc:385
+#: ../../src/wlapplication.cc:2170 ../../src/logic/game.cc:385
 #: ../../src/logic/game.cc:425
 msgid "Loading..."
 msgstr "Nalagam..."
 
-#: ../../src/editor/editorinteractive.cc:61
+#: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
 msgstr "Meni"
 
-#: ../../src/editor/editorinteractive.cc:64
+#: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
 msgstr "Orodja"
 
-#: ../../src/editor/editorinteractive.cc:68
+#: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
 msgstr "Velikostorodij"
 
-#: ../../src/editor/editorinteractive.cc:71
+#: ../../src/editor/editorinteractive.cc:72
 #: ../../src/wui/interactive_player.cc:120
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Minimap"
 msgstr "Mini zemljevid"
 
-#: ../../src/editor/editorinteractive.cc:74
+#: ../../src/editor/editorinteractive.cc:75
 #: ../../src/wui/interactive_player.cc:123
 msgid "Buildhelp"
 msgstr "Gradbeni pomočnik"
 
-#: ../../src/editor/editorinteractive.cc:77
+#: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
 msgstr "Igralci"
 
-#: ../../src/editor/editorinteractive.cc:156
+#: ../../src/editor/editorinteractive.cc:81
+msgid "Undo"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:84
+msgid "Redo"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
 msgstr "Nepodprt format"
 
-#: ../../src/editor/editorinteractive.cc:158
+#: ../../src/editor/editorinteractive.cc:173
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -895,36 +902,36 @@ msgid ""
 msgstr ""
 "Widelands ni mogel naložiti datoteke \"%s\". Format datoteke ni kompatibilen."
 
-#: ../../src/editor/editorinteractive.cc:176
-#: ../../src/editor/editorinteractive.cc:580
+#: ../../src/editor/editorinteractive.cc:192
+#: ../../src/editor/editorinteractive.cc:601
 #: ../../src/logic/editor_game_base.cc:284
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Nalagam pleme: %s"
 
-#: ../../src/editor/editorinteractive.cc:182
+#: ../../src/editor/editorinteractive.cc:198
 msgid "Creating players"
 msgstr "Ustvarjanje igralcev"
 
-#: ../../src/editor/editorinteractive.cc:189
+#: ../../src/editor/editorinteractive.cc:205
 #: ../../src/logic/editor_game_base.cc:277
 msgid "Loading world data"
 msgstr "Nalagam podatke o svetu"
 
-#: ../../src/editor/editorinteractive.cc:192
-#: ../../src/editor/editorinteractive.cc:584
+#: ../../src/editor/editorinteractive.cc:208
+#: ../../src/editor/editorinteractive.cc:605
 msgid "Loading graphics..."
 msgstr "Nalagam grafiko..."
 
-#: ../../src/editor/editorinteractive.cc:240
+#: ../../src/editor/editorinteractive.cc:254
 msgid "Map unsaved"
 msgstr "Zemljevid ni shranjen"
 
-#: ../../src/editor/editorinteractive.cc:241
+#: ../../src/editor/editorinteractive.cc:255
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Zemljevid ni shranjen, res želite zapustiti urejevalnik?"
 
-#: ../../src/editor/editorinteractive.cc:571
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:485
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:183
@@ -932,7 +939,7 @@ msgstr "Zemljevid ni shranjen, res želite zapustiti urejevalnik?"
 msgid "No Name"
 msgstr "Brez imena"
 
-#: ../../src/editor/editorinteractive.cc:573
+#: ../../src/editor/editorinteractive.cc:594
 #: ../../src/ui_fsmenu/netsetup_lan.cc:194
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
@@ -1051,7 +1058,7 @@ msgstr "Razhroščevalno okno"
 msgid "Build roads"
 msgstr "Gradi ceste"
 
-#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:98
+#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr "Opazuj"
 
@@ -1156,6 +1163,11 @@ msgstr "Zmagaj"
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
 msgstr "Ponovno začni misijo"
+
+#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/constructionsitewindow.cc:74
+msgid "Building materials"
+msgstr ""
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
@@ -1267,6 +1279,14 @@ msgstr "Roba v skladiščih"
 #: ../../src/wui/stock_menu.cc:71
 msgid "Workers in warehouses"
 msgstr "Delavci v skladiščih"
+
+#: ../../src/wui/soldiercapacitycontrol.cc:67
+msgid "Decrease capacity"
+msgstr ""
+
+#: ../../src/wui/soldiercapacitycontrol.cc:71
+msgid "Increase capacity"
+msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -1564,6 +1584,10 @@ msgstr "Skrij delovišče"
 msgid "Debug"
 msgstr "Razhroščevanje"
 
+#: ../../src/wui/buildingwindow.cc:271
+msgid "Center view on this"
+msgstr ""
+
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
 msgstr "Pomoč"
@@ -1711,15 +1735,15 @@ msgstr "Glasnost zvoka FX"
 msgid "Exit Replay"
 msgstr "Zapusti ponovni posnetek"
 
-#: ../../src/wui/watchwindow.cc:109
+#: ../../src/wui/watchwindow.cc:111
 msgid "Follow"
 msgstr "Sledi"
 
-#: ../../src/wui/watchwindow.cc:118
+#: ../../src/wui/watchwindow.cc:120
 msgid "Center mainview on this"
 msgstr "Pozicioniral pogled na izbranem"
 
-#: ../../src/wui/watchwindow.cc:140 ../../src/ui_fsmenu/fileview.cc:44
+#: ../../src/wui/watchwindow.cc:142 ../../src/ui_fsmenu/fileview.cc:44
 msgid "Close"
 msgstr "Zapri"
 
@@ -1776,21 +1800,21 @@ msgstr "Zbris datoteke"
 msgid "Do you really want to delete the file %s?"
 msgstr "Res želiš zbrisati datoteko %s?"
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:277
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/wui/interactive_base.cc:273
+#: ../../src/wui/interactive_base.cc:280
 msgid "PAUSE"
 msgstr "PREMOR"
 
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:300
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:305
 msgid "NO GAME CONTROLLER"
 msgstr "BREZ NADZORNIKA IGRE"
 
@@ -1962,17 +1986,17 @@ msgid "expected %s but found \"%s\""
 msgstr "pričakovano %s, najdeno pa \"%s\""
 
 #: ../../src/logic/building.cc:524
-#: ../../src/editor/tools/editor_info_tool.cc:61
+#: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "small"
 msgstr "majhen"
 
 #: ../../src/logic/building.cc:525
-#: ../../src/editor/tools/editor_info_tool.cc:62
+#: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "medium"
 msgstr "srednje velik"
 
 #: ../../src/logic/building.cc:525
-#: ../../src/editor/tools/editor_info_tool.cc:63
+#: ../../src/editor/tools/editor_info_tool.cc:64
 msgid "big"
 msgstr "velik"
 
@@ -2030,7 +2054,7 @@ msgstr "čas za izvedbo (%i) < čas igre (%i)"
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:59
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:137
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:207
-#: ../../src/map_io/widelands_map_extradata_data_packet.cc:96
+#: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
 #: ../../src/map_io/widelands_map_object_packet.cc:61
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:85
 #: ../../src/game_io/game_player_economies_data_packet.cc:72
@@ -2701,13 +2725,14 @@ msgid "No left resources found!"
 msgstr "Zmanjkalo zaloge!"
 
 #: ../../src/logic/production_program.cc:1209
-msgid "Mine empty"
-msgstr "Rudnik izčrpan"
+msgid "Main vein exhausted"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
-"This mines has run empty. You should consider to expand or destruct it."
-msgstr "Rudnik je postal izčrpan. Razmislite o širitvi, ali pa ga uničite."
+"This mines' main vein exhausted. Expect strongly diminished returns on "
+"investment. You should consider to expand, dismantle or destruct it."
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
@@ -2777,17 +2802,17 @@ msgstr "Vaši vojaki so premagali sovražnika pri %s."
 msgid "Enemy at site defeated!"
 msgstr "Sovražnik je premagan!"
 
-#: ../../src/logic/militarysite.cc:673
+#: ../../src/logic/militarysite.cc:674
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
 msgstr "Vaš %s je odkril sovražnika.</p>"
 
-#: ../../src/logic/militarysite.cc:674
+#: ../../src/logic/militarysite.cc:675
 #, c-format
 msgid "Your %s is under attack.</p>"
 msgstr "Vaš %s je napaden.</p>"
 
-#: ../../src/logic/militarysite.cc:682
+#: ../../src/logic/militarysite.cc:683
 msgid "You are under attack"
 msgstr "Napadeni ste"
 
@@ -3171,7 +3196,7 @@ msgstr "cestnipodatki: %s"
 msgid "elemental data: %s"
 msgstr "osnovni podatek: %s"
 
-#: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
+#: ../../src/map_io/widelands_map_extradata_data_packet.cc:100
 #, c-format
 msgid "extradata: %s"
 msgstr "dodatnipodatki: %s"
@@ -3464,8 +3489,8 @@ msgid "Remove Syncstream dumps on startup"
 msgstr "Odstrani izpise Syncstreama ob zagonu"
 
 #: ../../src/ui_fsmenu/options.cc:471
-msgid "OpenGL rendering *Highly experimental!*"
-msgstr "OpenGL izvedba *Zgolj poskusna!*"
+msgid "OpenGL rendering"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
@@ -4043,7 +4068,7 @@ msgstr "game_class: %s"
 msgid "frame number"
 msgstr "število sličic"
 
-#: ../../src/graphic/graphic.cc:1067
+#: ../../src/graphic/graphic.cc:1071
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Nalagam animacije: %d%% končano"
@@ -4249,6 +4274,11 @@ msgstr "Zaključen prenos datoteke %s do %s"
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Sending part %s of file %s to %s"
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:162
+#, c-format
+msgid "The player \"%s\" was defeated and became spectator."
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:42
@@ -4495,61 +4525,61 @@ msgstr ""
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:260
+#: ../../src/network/internet_gaming.cc:269
 msgid "Something went wrong: "
 msgstr "Prišlo je do napake: "
 
-#: ../../src/network/internet_gaming.cc:337
+#: ../../src/network/internet_gaming.cc:347
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:344
+#: ../../src/network/internet_gaming.cc:354
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:344
+#: ../../src/network/internet_gaming.cc:354
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:356
+#: ../../src/network/internet_gaming.cc:366
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:369
+#: ../../src/network/internet_gaming.cc:379
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:378
+#: ../../src/network/internet_gaming.cc:388
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:473
+#: ../../src/network/internet_gaming.cc:483
 msgid "ERROR: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:477
+#: ../../src/network/internet_gaming.cc:487
 msgid "Chat message could not be sent. "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:498
+#: ../../src/network/internet_gaming.cc:508
 msgid "Received an unknown command from the metaserver: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:630
+#: ../../src/network/internet_gaming.cc:640
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:642
+#: ../../src/network/internet_gaming.cc:652
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:725
 msgid "<unknown>"
 msgstr ""
 
@@ -4902,11 +4932,11 @@ msgstr ""
 msgid "Height Tools Options"
 msgstr "Nastavitev orodij za višino"
 
-#: ../../src/editor/tools/editor_info_tool.cc:43
+#: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
 msgstr "Podatki o polju"
 
-#: ../../src/editor/tools/editor_info_tool.cc:55
+#: ../../src/editor/tools/editor_info_tool.cc:56
 #, c-format
 msgid ""
 "1) Node info\n"
@@ -4919,27 +4949,27 @@ msgstr ""
 " Višina: %u\n"
 " Oznake: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:65
+#: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " flag"
 msgstr " zastava"
 
-#: ../../src/editor/tools/editor_info_tool.cc:66
+#: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " mine"
 msgstr " rudnik"
 
-#: ../../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " port"
 msgstr " pristanišče"
 
-#: ../../src/editor/tools/editor_info_tool.cc:68
+#: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " walk"
 msgstr " hoja"
 
-#: ../../src/editor/tools/editor_info_tool.cc:69
+#: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " swim"
 msgstr " plavanje"
 
-#: ../../src/editor/tools/editor_info_tool.cc:73
+#: ../../src/editor/tools/editor_info_tool.cc:74
 #, c-format
 msgid ""
 "\n"
@@ -4952,7 +4982,7 @@ msgstr ""
 " Ima nepremično bazo: %s\n"
 " Ima uteži: %s\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:79
+#: ../../src/editor/tools/editor_info_tool.cc:80
 msgid ""
 "2) Terrain Info\n"
 " Name: "
@@ -4960,7 +4990,7 @@ msgstr ""
 "2) Podatki o terenu\n"
 " Ime: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:87
+#: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
 msgid ""
 "\n"
@@ -4969,7 +4999,7 @@ msgstr ""
 "\n"
 " Število teksture: %i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:91
+#: ../../src/editor/tools/editor_info_tool.cc:92
 msgid ""
 "4) Map Info\n"
 " Name: "
@@ -4977,7 +5007,7 @@ msgstr ""
 "4) Podatki o zemljevidu\n"
 " Ime: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:95
+#: ../../src/editor/tools/editor_info_tool.cc:96
 #, c-format
 msgid ""
 "\n"
@@ -4988,8 +5018,8 @@ msgstr ""
 " Velikost: %ix%i\n"
 " Avtor: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:98
-#: ../../src/editor/tools/editor_info_tool.cc:109
+#: ../../src/editor/tools/editor_info_tool.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:110
 msgid ""
 "\n"
 " Descr: "
@@ -4997,7 +5027,7 @@ msgstr ""
 "\n"
 " Opis: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:102
+#: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
 msgid ""
 "\n"
@@ -5006,7 +5036,7 @@ msgstr ""
 "\n"
 " Število igralcev: %i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:105
+#: ../../src/editor/tools/editor_info_tool.cc:106
 msgid ""
 "5) World Info\n"
 " Name: "
@@ -5014,7 +5044,7 @@ msgstr ""
 "5) Podatki o svetu\n"
 " Ime: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:107
+#: ../../src/editor/tools/editor_info_tool.cc:108
 msgid ""
 "\n"
 " Author: "

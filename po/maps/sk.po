@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2012-01-13 22:52+0000\n"
+"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"PO-Revision-Date: 2012-02-28 01:31+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:42+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:32+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -161,6 +161,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Každý kmeň je obklopený štyrmi mohutnými horami. Kto si ich podmaní ako prvý "
+"a nárokuje si prírodné zdroje pre svoj vlastný kmeň? Rada I: Vodu možno "
+"nájsť popri rieke. Rada II: Snehuliaci značia ďalšie zdroje vody. Rada III: "
+"Každá hora obsahuje len jeden zdroj."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -202,6 +206,9 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
+"Stovky rokov tento ostrov slúžil ako svätyňa bohov. Žiaden človek si naň "
+"netrúfal vkročiť. Ale teraz, keďže jeden kmeň bol dostatočne drzý na to, aby "
+"sa usadil na pobreží tohto ostrova, mnoho ďalších nato nasledovalo."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -273,6 +280,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Hovorí sa, že starí vojnoví mnísi, žijúci v ešte starších močiaroch, sú "
+"kľúčom k ovládnutiu celého ostrova."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -489,6 +498,8 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
 msgstr ""
+"Úchvatná krása týchto smaragdových zemí zvábila mnohé kmene na pokus vziať "
+"si ich pre seba."
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
 msgid ""
@@ -569,7 +580,7 @@ msgstr "Traja bojovníci"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
 msgid "Together we're strong"
-msgstr ""
+msgstr "V jednote je sila"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
