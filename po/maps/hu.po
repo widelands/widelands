@@ -7,18 +7,18 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-27 21:36+0000\n"
-"PO-Revision-Date: 2010-08-30 23:34+0000\n"
-"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"PO-Revision-Date: 2012-03-07 12:50+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-28 05:20+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-08 04:39+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Szempárok a sötétben"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Egy hely amit otthonnak hívunk"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Ez a föld a miénk"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -48,6 +48,11 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
+"Egy apró, névtelen sziget fekszik néhány mérföldre Gerion partjával szemben. "
+"Eddig nem volt okod rá, hogy odahajózz, de tegnap az égből alászállt egy "
+"nagy tűzgolyó, megérintve a sziget közepét. Vajon ez az Istenek jele lenne? "
+"Úgy hiszed igen és reméled, hogy a néped megtalálja a sziget kincsét mielőtt "
+"más népek követnének."
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -56,6 +61,10 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only enough place for one tribe."
 msgstr ""
+"Hosszú ideje már, hogy a néped ezen a gyönyörű, magányos gleccsertó vidékén "
+"időzik. Senki sem háborította a vidéket és nem kellett szűkölködnie senkinek "
+"sem, de néhány hónapja a hegyeken átkelt egy másik nép, majd letelepedett a "
+"környéken. Biztos vagy benne, hogy nem fér meg egymás mellett a két törzs."
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
@@ -117,11 +126,11 @@ msgstr "Atoll"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "Barbárok - A második birodalom"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Kihívás. Az atlantisziak bemutatása"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -137,7 +146,7 @@ msgstr "Kráter"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "Sivatagi bajnokság"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -153,11 +162,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Könnyű. Bemutatja a barbárokat"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Könnyű. A birodalom bemutatása"
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -318,7 +327,7 @@ msgstr "Titokzatos labirintus"
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Még nem készült el"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid ""
@@ -372,33 +381,37 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:14
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "Az óramutató járásával megegyező kezdőpozíciók"
 
 #: ../../maps/Desert Tournament.wmf/elemental:12
 #: ../../maps/Four Castles.wmf/elemental:12
 #: ../../maps/Swamp Monks.wmf/elemental:12
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
-msgstr ""
+msgstr "Javasolt csapatok: (kék, piros) vs (sárga, zöld)"
 
 #: ../../maps/Four Mountains.wmf/elemental:12
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
 "yellow)"
 msgstr ""
+"Javasolt csapatok: (kék, piros) vs (sárga, zöld) vagy (kék, zöld) vs (piros, "
+"sárga)"
 
 #: ../../maps/Elven Forests.wmf/elemental:12
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
 "green)"
 msgstr ""
+"Javasolt csapatok: (kék, piros) vs (sárga, zöld) vagy (kék, sárga) vs "
+"(piros, zöld)"
 
 #: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
-msgstr ""
+msgstr "Javasolt csapatok: (kék, sárga) vs (piros, zöld)"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:12
 msgid "Suggested Teams: all ok."
-msgstr ""
+msgstr "Javasolt csapatok: minden rendben."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"

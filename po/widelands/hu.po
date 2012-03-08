@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-27 22:36+0100\n"
-"PO-Revision-Date: 2011-08-21 14:16+0000\n"
-"Last-Translator: HUNStree <hunstree@gmail.com>\n"
+"PO-Revision-Date: 2012-03-07 14:34+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-29 04:33+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-08 04:40+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -70,15 +70,15 @@ msgstr "Bővített"
 
 #: ../../src/writeHTML.cc:289 ../../src/wui/buildingwindow.cc:174
 msgid "Stop"
-msgstr "Leállít"
+msgstr "Leállítás"
 
 #: ../../src/writeHTML.cc:291
 msgid "Conquer<br/>range"
-msgstr "Hódítási<br>terület"
+msgstr "Hódítási<br/>terület"
 
 #: ../../src/writeHTML.cc:293 ../../src/writeHTML.cc:521
 msgid "Vision<br/>range"
-msgstr "Látó-<br>távolság"
+msgstr "Látó-<br/>távolság"
 
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:376
 #: ../../src/logic/building.cc:528
@@ -735,12 +735,30 @@ msgid ""
 " --xres=[...]         Width of the window in pixel.\n"
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
+" --speed_of_new_game  A játék sebessége, az új játék ilyen sebességgel\n"
+"                      fog indulni, 1000-es szorzótényezővel (0 megállítva,\n"
+"                      1000 normális sebesség).\n"
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Automatikusan elindítsa-e az útépítést\n"
+"                      egy meglévő utakhoz nem csatlakozó zászló\n"
+"                      elhelyezése után.\n"
+" --write_HTML=[yes|no]\n"
+"                      HTML súgó fájlok írása a játék adatokhoz.\n"
+"\n"
+"Grafikai opciók:\n"
+" --fullscreen=[yes|no]\n"
+"                      Teljes képernyőn fusson-e a játék.\n"
+" --depth=[16|32]      Színmélység bit per pixelben megadva.\n"
+" --xres=[...]         Képernyő szélessége pixelekben.\n"
+" --yres=[...]         Képernyő magassága pixelekben.\n"
 
 #: ../../src/wlapplication.cc:1358
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Enables OpenGL rendering\n"
 
 #: ../../src/wlapplication.cc:1363
 msgid ""
@@ -764,6 +782,23 @@ msgid ""
 "                      panel.\n"
 "\n"
 msgstr ""
+"\n"
+"A beépített ablakkezelő opciói:\n"
+" --border_snap_distance=[0 ...]\n"
+"                      Az ablak ragadjon a képernyő széléhez,\n"
+"                      ha az ablak széle ilyen távolságon belülre\n"
+"                      kerül a képernyő széléhez képest.\n"
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Az ablak képernyő széléhez illeszkedő felének\n"
+"                      eltűntetése, ha az ablak a képernyő szélén van.\n"
+" --panel_snap_distance=[0 ...]\n"
+"                      Az ablak ragadjon a panel széléhez,\n"
+"                      ha az ablak széle ilyen távolságon belülre\n"
+"                      kerül a panel széléhez képest.\n"
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Csak akkor mozgasson egy ablakot a panel széléhez\n"
+"                      ha az ablak túlnyúl a panelen.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1387
 msgid ""
@@ -804,7 +839,7 @@ msgstr "Figyelmeztetés: "
 
 #: ../../src/wlapplication.cc:1549
 msgid "Game data error"
-msgstr ""
+msgstr "Játékadat hiba"
 
 #: ../../src/wlapplication.cc:1554
 msgid "Unexpected error during the game"
@@ -864,7 +899,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2170 ../../src/logic/game.cc:385
 #: ../../src/logic/game.cc:425
 msgid "Loading..."
-msgstr "Betöltés..."
+msgstr "Betöltés…"
 
 #: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
@@ -896,11 +931,11 @@ msgstr "Játékosok"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Visszavonás"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Megismétlés"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -924,7 +959,7 @@ msgstr "%s törzs betöltése"
 
 #: ../../src/editor/editorinteractive.cc:198
 msgid "Creating players"
-msgstr ""
+msgstr "Játékosok létrehozása"
 
 #: ../../src/editor/editorinteractive.cc:205
 #: ../../src/logic/editor_game_base.cc:277
@@ -934,7 +969,7 @@ msgstr "Világ adatainak betöltése"
 #: ../../src/editor/editorinteractive.cc:208
 #: ../../src/editor/editorinteractive.cc:605
 msgid "Loading graphics..."
-msgstr "Képek betöltése..."
+msgstr "Grafika betöltése…"
 
 #: ../../src/editor/editorinteractive.cc:254
 msgid "Map unsaved"
@@ -962,7 +997,7 @@ msgstr "Ismeretlen"
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 msgid "Help: "
-msgstr ""
+msgstr "Súgó: "
 
 #: ../../src/ui_basic/helpwindow.cc:83 ../../src/ui_basic/messagebox.cc:90
 #: ../../src/wui/game_main_menu_save_game.cc:85
@@ -979,7 +1014,7 @@ msgstr "OK"
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
-msgstr "Felkészülés..."
+msgstr "Előkészítés…"
 
 #: ../../src/ui_basic/spinbox.cc:115
 msgid "Increase the value"
@@ -991,11 +1026,11 @@ msgstr "Érték csökkentése"
 
 #: ../../src/ui_basic/spinbox.cc:134
 msgid "Increase the value by 10"
-msgstr ""
+msgstr "Érték növelése tízzel"
 
 #: ../../src/ui_basic/spinbox.cc:142
 msgid "Decrease the value by 10"
-msgstr ""
+msgstr "Érték csökkentése tízzel"
 
 #: ../../src/wui/waresdisplay.cc:54 ../../src/wui/game_main_menu.cc:69
 #: ../../src/wui/stock_menu.cc:40
@@ -1025,7 +1060,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
-msgstr "Akció"
+msgstr "Műveletek"
 
 #: ../../src/wui/fieldaction.cc:370
 msgid "Build road"
@@ -1037,7 +1072,7 @@ msgstr "Zászló megsemmisítése"
 
 #: ../../src/wui/fieldaction.cc:390
 msgid "Configure economy"
-msgstr ""
+msgstr "Gazdaság beállítása"
 
 #: ../../src/wui/fieldaction.cc:396
 msgid "Send geologist to explore site"
@@ -1124,7 +1159,7 @@ msgstr "Termelékenység"
 
 #: ../../src/wui/general_statistics_menu.cc:214
 msgid "Casualties"
-msgstr ""
+msgstr "Veszteségek"
 
 #: ../../src/wui/general_statistics_menu.cc:222
 msgid "Kills"
@@ -1167,7 +1202,7 @@ msgstr "Építési statisztika"
 
 #: ../../src/wui/game_objectives_menu.cc:45
 msgid "Objectives Menu"
-msgstr "Feladatlista menü"
+msgstr "Célkitűzések menü"
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
@@ -1175,7 +1210,7 @@ msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
-msgstr ""
+msgstr "Küldetés újrakezdése"
 
 #: ../../src/wui/dismantlesitewindow.cc:68
 #: ../../src/wui/constructionsitewindow.cc:74
@@ -1196,7 +1231,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:151 ../../src/wui/transport_ui.cc:247
 msgid "Reset to default"
-msgstr ""
+msgstr "Visszaállítás az alapértelmezésre"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"
@@ -1253,7 +1288,7 @@ msgstr "Beállítások"
 #: ../../src/wui/interactive_player.cc:114
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
-msgstr ""
+msgstr "Statisztikák"
 
 #: ../../src/wui/interactive_player.cc:117
 msgid "Objectives"
@@ -1349,7 +1384,7 @@ msgstr "MI: "
 #: ../../src/wui/multiplayersetupgroup.cc:316
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Véletlenszerű"
 
 #: ../../src/wui/multiplayersetupgroup.cc:310
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -1359,7 +1394,7 @@ msgstr "Ember"
 #: ../../src/wui/multiplayersetupgroup.cc:352
 #: ../../src/ui_fsmenu/launchSPG.cc:231 ../../src/ui_fsmenu/launchMPG.cc:286
 msgid "Scenario"
-msgstr ""
+msgstr "Küldetés"
 
 #: ../../src/wui/multiplayersetupgroup.cc:354
 #: ../../src/ui_fsmenu/launchMPG.cc:290
@@ -1368,7 +1403,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:405
 msgid "Client name"
-msgstr ""
+msgstr "Kliensnév"
 
 #: ../../src/wui/multiplayersetupgroup.cc:413
 msgid "Role"
@@ -1376,7 +1411,7 @@ msgstr "Szerep"
 
 #: ../../src/wui/multiplayersetupgroup.cc:429
 msgid "Start"
-msgstr ""
+msgstr "Kezdés"
 
 #: ../../src/wui/multiplayersetupgroup.cc:437
 msgid "Type"
@@ -1410,7 +1445,7 @@ msgstr "Kevesebb harcos küldése"
 
 #: ../../src/wui/attack_box.cc:199
 msgid "Number of soldiers"
-msgstr ""
+msgstr "Katonák száma"
 
 #: ../../src/wui/attack_box.cc:209
 msgid "Send more soldiers"
@@ -1430,7 +1465,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Hajó"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
@@ -1455,7 +1490,7 @@ msgstr "Szerzők"
 #: ../../src/wui/game_options_menu.cc:77
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
-msgstr ""
+msgstr "Hangbeállítások"
 
 #: ../../src/wui/game_options_menu.cc:85
 #: ../../src/wui/interactive_spectator.cc:58
@@ -1470,11 +1505,11 @@ msgstr "Kilépés"
 #: ../../src/wui/game_message_menu.cc:44
 #: ../../src/wui/game_message_menu.cc:376
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Üzenet menü: Beérkezett üzenetek"
 
 #: ../../src/wui/game_message_menu.cc:54
 msgid "Select"
-msgstr "Kiválasztás"
+msgstr "Kijelölés"
 
 #: ../../src/wui/game_message_menu.cc:55
 msgid "Status"
@@ -1486,11 +1521,11 @@ msgstr "Cím"
 
 #: ../../src/wui/game_message_menu.cc:57
 msgid "Time sent"
-msgstr ""
+msgstr "Küldési idő"
 
 #: ../../src/wui/game_message_menu.cc:64
 msgid "Clear"
-msgstr ""
+msgstr "Törlés"
 
 #: ../../src/wui/game_message_menu.cc:64
 msgid "Clear selection"
@@ -1498,7 +1533,7 @@ msgstr "A kijelölés megszüntetése"
 
 #: ../../src/wui/game_message_menu.cc:73
 msgid "Invert"
-msgstr ""
+msgstr "Megfordít"
 
 #: ../../src/wui/game_message_menu.cc:73
 msgid "Invert selection"
@@ -1562,13 +1597,13 @@ msgstr "Épít"
 #: ../../src/wui/building_statistics_menu.cc:154
 #: ../../src/wui/building_statistics_menu.cc:176
 msgid "Show previous"
-msgstr ""
+msgstr "Előző megjelenítése"
 
 #: ../../src/wui/building_statistics_menu.cc:143
 #: ../../src/wui/building_statistics_menu.cc:165
 #: ../../src/wui/building_statistics_menu.cc:187
 msgid "Show next"
-msgstr ""
+msgstr "Következő megjelenítése"
 
 #: ../../src/wui/buildingwindow.cc:174
 msgid "Continue"
@@ -1622,8 +1657,7 @@ msgstr "Jelszó:"
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
-"FIGYELMEZTETÉS: A jelszó olvashatóan jelenik meg a képernyőn és a program "
-"kódolatlanul tárolja."
+"VIGYÁZAT: A jelszó megjelenik a képernyőn és titkosítatlanul tárolódik!"
 
 #: ../../src/wui/login_box.cc:52
 msgid "Log in to a registered account"
@@ -1649,7 +1683,7 @@ msgstr "Mégsem"
 #: ../../src/wui/login_box.cc:73 ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "nobody"
-msgstr "senki"
+msgstr "névtelen"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
@@ -1721,7 +1755,7 @@ msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:88
 msgid "Quantity"
-msgstr ""
+msgstr "Mennyiség"
 
 #: ../../src/wui/encyclopedia_window.cc:201
 #: ../../src/logic/production_program.cc:430
@@ -1746,7 +1780,7 @@ msgstr "Hangok hangereje"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
-msgstr ""
+msgstr "Kilépés a visszajátszásból"
 
 #: ../../src/wui/watchwindow.cc:111
 msgid "Follow"
@@ -1806,12 +1840,12 @@ msgstr " néven már létezik, felülírod?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:276
 msgid "File deletion"
-msgstr ""
+msgstr "Fájltörlés"
 
 #: ../../src/wui/game_main_menu_save_game.cc:278
 #, c-format
 msgid "Do you really want to delete the file %s?"
-msgstr ""
+msgstr "Tényleg szeretnéd törölni a következő fájlt: %s?"
 
 #: ../../src/wui/interactive_base.cc:277
 #, c-format
@@ -1833,19 +1867,19 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "n"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
-msgstr ""
+msgstr "ó"
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "perc"
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
-msgstr ""
+msgstr "játék"
 
 #: ../../src/wui/minimap.cc:137 ../../src/ui_fsmenu/launchMPG.cc:65
 #: ../../src/ui_fsmenu/launchMPG.cc:165
@@ -1872,7 +1906,7 @@ msgstr "Utak"
 
 #: ../../src/wui/minimap.cc:175
 msgid "Zoom"
-msgstr ""
+msgstr "Nagyítás"
 
 #: ../../src/wui/bulldozeconfirm.cc:70
 msgid "Destroy building?"
@@ -1881,7 +1915,7 @@ msgstr "Megsemmisíted az épületet?"
 #: ../../src/wui/bulldozeconfirm.cc:77
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "Tényleg el akarod pusztítani ezt: %s?"
 
 #: ../../src/wui/game_chat_menu.cc:37
 msgid "Chat Menu"
@@ -1903,7 +1937,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:594
 msgid "Out of "
-msgstr ""
+msgstr "Elfogyott a "
 
 #: ../../src/logic/worker.cc:597
 msgid ""
@@ -1922,7 +1956,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:1842
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Eltűnt egy munkás!"
 
 #: ../../src/logic/worker.cc:3037
 #, c-format
@@ -2080,7 +2114,7 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:194
 #, c-format
 msgid "game logic: %s"
-msgstr ""
+msgstr "játék logika: %s"
 
 #: ../../src/logic/bob.cc:85 ../../src/logic/immovable.cc:207
 #, c-format
@@ -2243,7 +2277,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1490
 #, c-format
 msgid "player message: %s"
-msgstr ""
+msgstr "játékos üzenet: %s"
 
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
@@ -2393,7 +2427,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:148
 msgid "no actions"
-msgstr ""
+msgstr "nincsenek műveletek"
 
 #: ../../src/logic/immovable.cc:221
 msgid "this program has already been declared"
@@ -3210,7 +3244,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:59
 msgid "List of games:"
-msgstr "A játékok listája:"
+msgstr "Játékok listája:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:63
 msgid "Name of your server:"
@@ -3283,19 +3317,19 @@ msgstr "Játék indítása"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:84
 msgid "Player's name"
-msgstr ""
+msgstr "Játékos neve"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:88
 msgid "Player's type"
-msgstr ""
+msgstr "Típusa"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player's tribe"
-msgstr ""
+msgstr "Törzs"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
-msgstr ""
+msgstr "Játék kezdés típusa"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:104 ../../src/ui_fsmenu/launchMPG.cc:169
 msgid "Type of game"
@@ -3330,7 +3364,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:421
 msgid "Advanced Options"
-msgstr ""
+msgstr "Haladó beállítások"
 
 #: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:397
 msgid "Apply"
@@ -3338,7 +3372,7 @@ msgstr "Alkalmaz"
 
 #: ../../src/ui_fsmenu/options.cc:72
 msgid "min."
-msgstr ""
+msgstr "perc"
 
 #: ../../src/ui_fsmenu/options.cc:78
 msgid "days"
@@ -3386,7 +3420,7 @@ msgstr "Egy nézőke ablak"
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Start roadbuilding after placing flag"
-msgstr ""
+msgstr "Útépítés elkezdése zászló elhelyezés után"
 
 #: ../../src/ui_fsmenu/options.cc:161
 msgid "Show buildings area preview"
@@ -3402,11 +3436,11 @@ msgstr "Ablakok igazítása a sarkokhoz"
 
 #: ../../src/ui_fsmenu/options.cc:179
 msgid "Save game automatically every"
-msgstr ""
+msgstr "Automatikus mentés ennyi időnként:"
 
 #: ../../src/ui_fsmenu/options.cc:183
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "Ennyi időnél idősebb felvételek törlése:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
@@ -3418,7 +3452,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 nap"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
@@ -3427,7 +3461,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:297
 msgid "Try system language"
-msgstr ""
+msgstr "Az operációs rendszer nyelve"
 
 #: ../../src/ui_fsmenu/options.cc:403
 msgid "x"
@@ -3439,29 +3473,29 @@ msgstr "px."
 
 #: ../../src/ui_fsmenu/options.cc:432
 msgid "Main menu font:"
-msgstr ""
+msgstr "Főmenü betűtípus:"
 
 #: ../../src/ui_fsmenu/options.cc:438
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "Hangjelzés üzenetérkezés esetén"
 
 #: ../../src/ui_fsmenu/options.cc:446
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
-"Ne tömörítse a Widelands adat fájlokat (térképek, visszajátszások, mentett "
+"Ne tömörítse a Widelands adatfájlokat (térképek, visszajátszások, mentett "
 "játékok)"
 
 #: ../../src/ui_fsmenu/options.cc:451
 msgid "Speed of a new game:"
-msgstr ""
+msgstr "Új játék sebessége:"
 
 #: ../../src/ui_fsmenu/options.cc:455
 msgid "Distance for windows to snap to other panels:"
-msgstr ""
+msgstr "Ablak távolsága a többi paneltől:"
 
 #: ../../src/ui_fsmenu/options.cc:459
 msgid "Distance for windows to snap to borders:"
-msgstr ""
+msgstr "Ablak távolsága a keretektől:"
 
 #: ../../src/ui_fsmenu/options.cc:465
 msgid "Remove Syncstream dumps on startup"
@@ -3469,11 +3503,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:471
 msgid "OpenGL rendering"
-msgstr ""
+msgstr "OpenGL renderelés"
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Csevegőablak megjelenítése átlátszó háttérrel a játékban"
 
 #: ../../src/ui_fsmenu/options.cc:515
 msgid "Pause"
@@ -3481,7 +3515,7 @@ msgstr "Szünet"
 
 #: ../../src/ui_fsmenu/options.cc:526
 msgid "FreeSerif (Default)"
-msgstr ""
+msgstr "FreeSerif (alapértelmezett)"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:54
@@ -3532,11 +3566,11 @@ msgstr "<szülő>"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "A folytatáshoz kattints vagy nyomd meg az ESC billentyűt…"
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
-msgstr ""
+msgstr "Szerkesztő menü"
 
 #: ../../src/ui_fsmenu/editor.cc:42
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
@@ -3609,7 +3643,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
-msgstr ""
+msgstr "Súgóablak megjelenítése"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:650
 msgid "Multiplayer Game Setup"
@@ -3799,11 +3833,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
-msgstr ""
+msgstr "Térkép név"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Minden térkép megjelenítése"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
@@ -3915,7 +3949,7 @@ msgstr "Leírás:"
 #: ../../src/ui_fsmenu/campaign_select.cc:226
 #: ../../src/ui_fsmenu/campaign_select.cc:421
 msgid "[No value found]"
-msgstr "[Érték nincs meg]"
+msgstr "[Nem található érték]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:170
 msgid "[Invalid entry]"
@@ -3932,19 +3966,19 @@ msgstr "Válaszd ki a felvételt!"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
-msgstr ""
+msgstr "Válaszd ki a játék típusát"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:48
 msgid "Internet game"
-msgstr ""
+msgstr "Internetes játék"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:53
 msgid "LAN / Direct IP"
-msgstr ""
+msgstr "LAN/ direkt IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:84
 msgid "Show login dialog"
-msgstr ""
+msgstr "Bejelentkezőablak megjelenítése"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:40
 msgid "Begin Network Game"
@@ -3952,7 +3986,7 @@ msgstr "Hálózati játék indítása"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:44
 msgid "List of games in your local network:"
-msgstr ""
+msgstr "Játékok listája a helyi hálózaton:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:48
 msgid "Your nickname:"
@@ -4518,7 +4552,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:487
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "Az üzenet nem lett elküldve. "
 
 #: ../../src/network/internet_gaming.cc:508
 msgid "Received an unknown command from the metaserver: "
@@ -4534,7 +4568,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:725
 msgid "<unknown>"
-msgstr ""
+msgstr "<ismeretlen>"
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
@@ -4656,7 +4690,7 @@ msgstr "Eszközök menü"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 msgid "Change height"
-msgstr ""
+msgstr "Magasság változtatása"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Noise height"
@@ -4721,7 +4755,7 @@ msgstr "Sziget mód"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Resources:"
-msgstr ""
+msgstr "Erőforrások:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "Low"
@@ -4743,11 +4777,11 @@ msgstr "Játékosok: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:342
 msgid "Generate Map"
-msgstr ""
+msgstr "Térkép generálása"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:488
 msgid "Generating random map..."
-msgstr ""
+msgstr "Véletlenszerű térkép generálása…"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:40
 msgid "Toolsize Menu"
@@ -4807,7 +4841,7 @@ msgstr "<Könyvtár>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:257
 msgid "<Not a map file>"
-msgstr ""
+msgstr "<nem térkép fájl>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:381
 msgid " exists already. Overwrite?"
@@ -4884,7 +4918,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
-msgstr "Magasság szerkesztő eszközök beállításai"
+msgstr "Magasság szerkesztő"
 
 #: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
