@@ -674,6 +674,11 @@ void Map::set_description(char const * const string)
 	snprintf(m_description, sizeof(m_description), "%s", string);
 }
 
+void Map::set_hint(std::string string)
+{
+	m_hint = string;
+}
+
 void Map::set_world_name(char const * const string)
 {
 	snprintf(m_worldname, sizeof(m_worldname), "%s", string);

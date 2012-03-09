@@ -184,6 +184,7 @@ struct Map :
 	void set_world_name (char const *);
 	void set_name       (char const *);
 	void set_description(char const *);
+	void set_hint       (std::string);
 	void set_background (char const *);
 	void add_tag        (std::string);
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
@@ -193,6 +194,7 @@ struct Map :
 	const char * get_author()      const {return m_author;}
 	const char * get_name()        const {return m_name;}
 	const char * get_description() const {return m_description;}
+	std::string  get_hint()        const {return m_hint;}
 	const char * get_world_name()  const {return m_worldname;}
 	const std::string & get_background() const {return m_background;}
 	typedef std::set<std::string> Tags;
@@ -377,6 +379,7 @@ private:
 	char        m_author       [61];
 	char        m_name         [61];
 	char        m_description[1024];
+	std::string m_hint;
 	char        m_worldname  [1024];
 	std::string m_background;
 	Tags        m_tags;

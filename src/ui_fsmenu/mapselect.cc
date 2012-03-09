@@ -269,7 +269,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		m_size      .set_text(buf);
 		sprintf(buf, "%i", map.nrplayers);
 		m_nr_players.set_text(buf);
-		m_descr     .set_text(_(map.description));
+		m_descr     .set_text(_(map.description) + (map.hint.empty() ? "" : (std::string("\n") + _(map.hint))));
 		m_world     .set_text(world);
 		m_load_map_as_scenario.set_enabled(map.scenario);
 	} else {
@@ -398,16 +398,17 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					ml->preload_map(true);
 
 					MapData mapdata;
-					mapdata.filename = name;
-					mapdata.name = map.get_name();
-					mapdata.author = map.get_author();
+					mapdata.filename    = name;
+					mapdata.name        = map.get_name();
+					mapdata.author      = map.get_author();
 					mapdata.description = map.get_description();
-					mapdata.world = map.get_world_name();
-					mapdata.nrplayers = map.get_nrplayers();
-					mapdata.width = map.get_width();
-					mapdata.height = map.get_height();
-					mapdata.scenario = map.scenario_types() & m_scenario_types;
-					mapdata.tags = map.get_tags();
+					mapdata.hint        = map.get_hint();
+					mapdata.world       = map.get_world_name();
+					mapdata.nrplayers   = map.get_nrplayers();
+					mapdata.width       = map.get_width();
+					mapdata.height      = map.get_height();
+					mapdata.scenario    = map.scenario_types() & m_scenario_types;
+					mapdata.tags        = map.get_tags();
 
 					if (!mapdata.width || !mapdata.height)
 						continue;
@@ -463,15 +464,16 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				ml->preload_map(true);
 
 				MapData mapdata;
-				mapdata.filename = name;
-				mapdata.name = map.get_name();
-				mapdata.author = map.get_author();
+				mapdata.filename    = name;
+				mapdata.name        = map.get_name();
+				mapdata.author      = map.get_author();
 				mapdata.description = map.get_description();
-				mapdata.world = map.get_world_name();
-				mapdata.nrplayers = map.get_nrplayers();
-				mapdata.width = map.get_width();
-				mapdata.height = map.get_height();
-				mapdata.scenario = map.scenario_types() & m_scenario_types;
+				mapdata.hint        = map.get_hint();
+				mapdata.world       = map.get_world_name();
+				mapdata.nrplayers   = map.get_nrplayers();
+				mapdata.width       = map.get_width();
+				mapdata.height      = map.get_height();
+				mapdata.scenario    = map.scenario_types() & m_scenario_types;
 
 				if (mapdata.nrplayers != dmap.players || mapdata.scenario != dmap.scenario)
 					throw wexception("Not useable!");
@@ -495,16 +497,17 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", name);
 
 				// Fill in the data we got from the dedicated server
-				mapdata.filename = name;
-				mapdata.name = dmap.path.substr(5, dmap.path.size() - 1);
-				mapdata.author = _("unknown");
+				mapdata.filename    = name;
+				mapdata.name        = dmap.path.substr(5, dmap.path.size() - 1);
+				mapdata.author      = _("unknown");
 				mapdata.description =
 					_("This map file is not present on your filesystem. Data shown here was sent by the server.");
-				mapdata.world = _("unknown");
-				mapdata.nrplayers = dmap.players;
-				mapdata.width = 1;
-				mapdata.height = 0;
-				mapdata.scenario = dmap.scenario;
+				mapdata.hint        = "";
+				mapdata.world       = _("unknown");
+				mapdata.nrplayers   = dmap.players;
+				mapdata.width       = 1;
+				mapdata.height      = 0;
+				mapdata.scenario    = dmap.scenario;
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
