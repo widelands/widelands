@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,9 +54,7 @@ Worker_Descr::Worker_Descr
 {
 	add_attribute(Map_Object::WORKER);
 
-	m_default_target_quantity =
-		global_s.get_positive
-			("default_target_quantity", std::numeric_limits<uint32_t>::max());
+	m_default_target_quantity = global_s.get_positive("default_target_quantity", 0);
 
 	if (Section * const s = prof.get_section("buildcost")) {
 		m_buildable = true;
