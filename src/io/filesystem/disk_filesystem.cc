@@ -133,7 +133,7 @@ int32_t RealFSImpl::FindFiles
 	if (not pattern.compare(0, 3, "../")) {
 		// Workaround: If pattern is a relative we need to fix the path
 		std::string m_root_save(m_root); // save orginal m_root
-		m_root = path;
+		m_root = FS_CanonicalizeName(path);
 		realpath = FS_CanonicalizeName(pattern);
 		realpath = realpath.substr(0, realpath.rfind('\\'));
 		m_root = m_root_save; // reset m_root
