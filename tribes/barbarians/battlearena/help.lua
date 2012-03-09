@@ -15,7 +15,7 @@ return {
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Trains soldiers in Evade up to level 2.") ..
 		rt(p(_[["Evade" increases the soldier's chance not to be hit by the enemy and so to remain totally unaffected.]])) ..
-		rt("_<p font-weight=bold font-decoration=underline font-size=12>Note:</p>_<p font-size=12> Barbarian soldiers cannot be trained in \"Defense\" and will remain at the level with which they came.<br><br></p>") ..
+		rt("_<p font-weight=bold font-decoration=underline font-size=12>Note: </p>_<p font-size=12>Barbarian soldiers cannot be trained in \"Defense\" and will remain at the level with which they came.<br><br></p>") ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
@@ -24,9 +24,9 @@ return {
 		dependencies({"pics/soldier_untrained.png","tribes/barbarians/battlearena/menu.png","pics/soldier_untrained+evade.png"}) ..
 		dependencies({"pics/soldier_fulltrained-evade.png","tribes/barbarians/battlearena/menu.png","pics/soldier_fulltrained.png"}) ..
 		rt(h3(_"Evade Training:")) ..
-		image_line("tribes/barbarians/pittabread/menu.png",1,p(_"Pitta Bread" .. _" and")) ..
-		image_line("tribes/barbarians/strongbeer/menu.png",1,p(_"Strong Beer" .. _" and")) ..
-		image_line("tribes/barbarians/fish/menu.png;tribes/barbarians/meat/menu.png",1,p(_"Fish" .. _" or " .. _"Meat")) ..
+		image_line("tribes/barbarians/pittabread/menu.png",1,p(_"%s and":format(_"Pitta Bread"))) ..
+		image_line("tribes/barbarians/strongbeer/menu.png",1,p(_"%s and":format(_"Strong Beer"))) ..
+		image_line("tribes/barbarians/fish/menu.png;tribes/barbarians/meat/menu.png",1,p(_"Fish or Meat")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Big plot","pics/big.png") ..
@@ -52,5 +52,5 @@ return {
 		text_line(_"Experience levels:", "n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a Battle Arena can train evade for one soldier from 0 to the highest in level in 1m10s on average.")
+		text_line(_"Performance:", _"If all needed wares are delivered in time, a Battle Arena can train Evade for one soldier from 0 to the highest in level in 1m10s on average.")
 }

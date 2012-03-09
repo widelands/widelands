@@ -14,16 +14,16 @@ return {
 		)) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"Deeper Coal Mines exploit all of the resource down to the deepest level.<br>" .. _"But even after having done so, they will still have a 10% chance of finding some more coal.")) ..
+		rt(p(_"A %s exploits all of the resource down to the deepest level.<br>But even after having done so, it will still have a %s chance of finding some more %s.":format(_"Deeper Coal Mine","10%",_"Coal"))) ..
 		rt(h3(_"Purpose:")) ..
-		image_line("tribes/barbarians/coal/menu.png", 1, p(_"Dig coal out of the ground in mountain terrain.")) ..
+		image_line("tribes/barbarians/ironore/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Coal"))) ..
 		text_line(_"Working radius:", "2") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/meal/menu.png","tribes/barbarians/deeper_coalmine/menu.png"}, p(_"Meals from a Big Inn")) ..
+		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/meal/menu.png","tribes/barbarians/deeper_coalmine/menu.png"}, p(_"%s from a Big Inn":format(_"Meal"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/resi_coal2/resi_00.png","tribes/barbarians/deeper_coalmine/menu.png","tribes/barbarians/coal/menu.png"}, p(_"Coal")) ..
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}, p(_"Axefactory")) ..
@@ -49,13 +49,13 @@ return {
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
-		image_line("tribes/barbarians/master-miner/menu.png",1, p("1 " .. _"Master Miner" .. _" or better" .. _" and")) ..
-		image_line("tribes/barbarians/chief-miner/menu.png",1, p("1 " .. _"Chief Miner" .. _" or better" .. _" and")) ..
-		image_line("tribes/barbarians/miner/menu.png",1, p("1 " .. _"Miner" .. _" or better" .. ".")) ..
+		image_line("tribes/barbarians/master-miner/menu.png", 1, p(_"%s and":format(_"Master Miner"))) ..
+		image_line("tribes/barbarians/chief-miner/menu.png", 1, p(_"%s or better and":format(_"Chief Miner"))) ..
+		image_line("tribes/barbarians/miner/menu.png", 1, p(_"%s or better":format(_"Miner"))) ..
 		text_line(_"Workers use:",_"Pick","tribes/barbarians/pick/menu.png") ..
 		rt(h3(_"Experience levels:")) ..
-		rt("text-align=right", p(_"Miner" .. _" to " .. _"Chief Miner" .. " (19 " .. _"EP" .. ")<br>" .. _"Chief Miner" .. _" to " .. _"Master Miner" .. " (28 " .. _"EP" ..")")) ..
+		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Miner",_"Chief Miner","19") .. "<br>" .. _"%s to %s (%s EP)":format(_"Chief Miner",_"Master Miner","28"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If the food supply is steady, a Deeper Coal Mine can produce one coal in 14.4s on average.")
+		text_line(_"Performance:", _"If the food supply is steady, a %s can produce one %s in %s on average.":format(_"Deeper Coal Mine",_"Coal","14.4s"))
 }

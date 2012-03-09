@@ -20,7 +20,7 @@ return {
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
-		rt(p(_"The Hunter's Hut needs animals in the vicinity to fell.")) ..
+		rt(p(_"The Hunter's Hut needs animals in the vicinity to hunt.")) ..
 		text_line(_"Incoming:", "n/a") ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/hunters_hut/menu.png","tribes/barbarians/meat/menu.png"},p(_"Meat")) ..

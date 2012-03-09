@@ -13,20 +13,20 @@ return {
 		rt("text-align=right",p("font-size=10 font-style=italic",_"Quote from an anonymous miner.")) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"Deeper Iron Ore Mines exploit all of the resource down to the deepest level.<br>" .. _"But even after having done so, they will still have a 10% chance of finding some more iron ore.")) ..
+		rt(p(_"A %s exploits all of the resource down to the deepest level.<br>But even after having done so, it will still have a %s chance of finding some more %s.":format(_"Deeper Iron Ore Mine","10%",_"Iron Ore"))) ..
 		rt(h3(_"Purpose:")) ..
-		image_line("tribes/barbarians/ironore/menu.png", 1, p(_"Dig iron ore out of the ground in mountain terrain.")) ..
+		image_line("tribes/barbarians/ironore/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Iron Ore"))) ..
 		text_line(_"Working radius:", "2") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/meal/menu.png","tribes/barbarians/deeper_oremine/menu.png"}, p(_"Meals from a Big Inn")) ..
+		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/meal/menu.png","tribes/barbarians/deeper_oremine/menu.png"}, p(_"%s from a Big Inn":format(_"Meal"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/resi_iron2/resi_00.png","tribes/barbarians/deeper_oremine/menu.png","tribes/barbarians/ironore/menu.png"}, p(_"Iron Ore")) ..
 		dependencies({"tribes/barbarians/ironore/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
-		rt(p(_"Iron ore always goes to the Smelting works. It has no other use.")) ..
+		rt(p(_"%s always goes to the %s. It has no other use.":format(_"Iron Ore",_"Smelting Works"))) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..
@@ -45,13 +45,13 @@ return {
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
-		image_line("tribes/barbarians/master-miner/menu.png",1, p("1 " .. _"Master Miner" .. _" or better" .. _" and")) ..
-		image_line("tribes/barbarians/chief-miner/menu.png",1, p("1 " .. _"Chief Miner" .. _" or better" .. _" and")) ..
-		image_line("tribes/barbarians/miner/menu.png",1, p("1 " .. _"Miner" .. _" or better" .. ".")) ..
+		image_line("tribes/barbarians/master-miner/menu.png", 1, p(_"%s and":format(_"Master Miner"))) ..
+		image_line("tribes/barbarians/chief-miner/menu.png", 1, p(_"%s or better and":format(_"Chief Miner"))) ..
+		image_line("tribes/barbarians/miner/menu.png", 1, p(_"%s or better":format(_"Miner"))) ..
 		text_line(_"Workers use:",_"Pick","tribes/barbarians/pick/menu.png") ..
 		rt(h3(_"Experience levels:")) ..
-		rt("text-align=right", p(_"Miner" .. _" to " .. _"Chief Miner" .. " (19 " .. _"EP" .. ")<br>" .. _"Chief Miner" .. _" to " .. _"Master Miner" .. " (28 " .. _"EP" ..")")) ..
+		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Miner",_"Chief Miner","19") .. "<br>" .. _"%s to %s (%s EP)":format(_"Chief Miner",_"Master Miner","28"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If the food supply is steady, a Deeper Iron Ore Mine can produce one iron ore in 17.6s on average.")
+		text_line(_"Performance:", _"If the food supply is steady, a %s can produce one %s in %s on average.":format(_"Deeper Iron Ore Mine",_"Iron Ore","17.6s"))
 }

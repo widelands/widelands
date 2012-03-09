@@ -14,18 +14,18 @@ return {
 		)) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"Coal Mines exploit only 1/3 of the resource. <br>" .. _"From there on, they will only have a 5% chance of finding coal.")) ..
+		rt(p(_"A %s exploits only %s of the resource. <br> From there on, it will only have a 5%% chance of finding %s.":format(_"Coal mine","1/3",_"Coal"))) ..
 		rt(h3(_"Purpose:")) ..
-		image_line("tribes/barbarians/coal/menu.png", 1, p(_"Dig coal out of the ground in mountain terrain.")) ..
+		image_line("tribes/barbarians/ironore/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Coal"))) ..
 		text_line(_"Working radius:", "2") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/tavern/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/coalmine/menu.png"}, p(_"Rations from a Tavern")) ..
-		dependencies({"tribes/barbarians/inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/coalmine/menu.png"}, p(_"Rations from an Inn")) ..
-		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/coalmine/menu.png"}, p(_"Rations from a Big Inn")) ..
+		dependencies({"tribes/barbarians/tavern/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/coalmine/menu.png"}, p(_"%s from a Tavern":format(_"Ration"))) ..
+		dependencies({"tribes/barbarians/inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/coalmine/menu.png"}, p(_"%s from an Inn":format(_"Ration"))) ..
+		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/ration/menu.png","tribes/barbarians/coalmine/menu.png"}, p(_"%s from a Big Inn":format(_"Ration"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/resi_coal2/resi_00.png","tribes/barbarians/coalmine/menu.png","tribes/barbarians/coal/menu.png"}, p(_"Coal")) ..
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}, p(_"Axefactory")) ..
@@ -47,11 +47,11 @@ return {
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
-		image_line("tribes/barbarians/miner/menu.png", 1, p("1 " .. _"Miner" .. _" or better" .. ".")) ..
+		image_line("tribes/barbarians/miner/menu.png", 1, p(_"%s or better":format(_"Miner"))) ..
 		text_line(_"Worker uses:",_"Pick","tribes/barbarians/pick/menu.png") ..
 		rt(h3(_"Experience levels:")) ..
-		rt("text-align=right", p(_"Miner" .. _" to " .. _"Chief Miner" .. " (19 " .. _"EP" .. ")<br>" .. _"Chief Miner" .. _" to " .. _"Master Miner" .. " (28 " .. _"EP" ..")")) ..
+		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Miner",_"Chief Miner","19") .. "<br>" .. _"%s to %s (%s EP)":format(_"Chief Miner",_"Master Miner","28"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If the food supply is steady, a Coal Mine can produce one coal in 32.5s on average.")
+		text_line(_"Performance:", _"If the food supply is steady, a %s can produce one %s in %s on average.":format(_"Coal mine",_"Coal","32.5s"))
 }
