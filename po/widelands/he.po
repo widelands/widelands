@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:44+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:39+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4694,66 +4694,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "building_types.xhtml"
-#~ msgstr "building_types_he_HE.xhtml"
-
-#~ msgid "worker_types.xhtml"
-#~ msgstr "worker_types_he_HE.xhtml"
-
-#~ msgid "geologist"
-#~ msgstr "גאולוג"
-
-#~ msgid "when"
-#~ msgstr "כאשר"
-
-#~ msgid "unless"
-#~ msgstr "אלא אם כן"
-
-#~ msgid "economy"
-#~ msgstr "כלכלה"
-
-#~ msgid "needs"
-#~ msgstr "צריך"
-
-#~ msgid "site"
-#~ msgstr "אתר"
-
-#~ msgid "workers"
-#~ msgstr "עובדים"
-
-#~ msgid "experience"
-#~ msgstr "חוויה"
-
-#~ msgid "call"
-#~ msgstr "שיחה"
-
-#~ msgid "worker"
-#~ msgstr "עובד"
-
-#~ msgid "sleep"
-#~ msgstr "לישון"
-
-#~ msgid "consume"
-#~ msgstr "לצרוך"
-
-#~ msgid "produce"
-#~ msgstr "ייצור"
-
-#~ msgid "check soldier"
-#~ msgstr "בדיקת החייל"
-
-#~ msgid "attack"
-#~ msgstr "מתקפה"
-
-#~ msgid "defense"
-#~ msgstr "הגנה"
-
-#~ msgid "train"
-#~ msgstr "רכבת"
-
-#~ msgid "construct"
-#~ msgstr "לבנות"
-
-#~ msgid "ware_types.xhtml"
-#~ msgstr "ware_types_he_HE.xhtml"

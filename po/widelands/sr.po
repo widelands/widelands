@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:45+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:40+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4659,42 +4659,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "animation"
-#~ msgstr "анимација"
-
-#~ msgid "and"
-#~ msgstr "и"
-
-#~ msgid "when"
-#~ msgstr "када"
-
-#~ msgid "or"
-#~ msgstr "или"
-
-#~ msgid "economy"
-#~ msgstr "економије"
-
-#~ msgid "has"
-#~ msgstr "има"
-
-#~ msgid "worker"
-#~ msgstr "радник"
-
-#~ msgid "consume"
-#~ msgstr "троше"
-
-#~ msgid "produce"
-#~ msgstr "производити"
-
-#~ msgid "recruit"
-#~ msgstr "регрут"
-
-#~ msgid "attack"
-#~ msgstr "напад"
-
-#~ msgid "defense"
-#~ msgstr "одбране"
-
-#~ msgid "evade"
-#~ msgstr "избећи"

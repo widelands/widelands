@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:44+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:40+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4673,24 +4673,3 @@ msgstr "설명 없음"
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr "정의된 설명이 없음"
-
-#~ msgid "walk"
-#~ msgstr "산책"
-
-#~ msgid "animation"
-#~ msgstr "애니메이션"
-
-#~ msgid "plant"
-#~ msgstr "식물"
-
-#~ msgid "geologist"
-#~ msgstr "지질 학자"
-
-#~ msgid "when"
-#~ msgstr "때"
-
-#~ msgid "economy"
-#~ msgstr "경제"
-
-#~ msgid "worker"
-#~ msgstr "노동자"

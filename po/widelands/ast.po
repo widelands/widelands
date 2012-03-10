@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:39+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4747,102 +4747,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "building_types.xhtml"
-#~ msgstr "tribes_de_construccion.xhtml"
-
-#~ msgid "worker_types.xhtml"
-#~ msgstr "tribes_de_trabayadores.xhtml"
-
-#~ msgid "breed"
-#~ msgstr "criar"
-
-#~ msgid "createitem"
-#~ msgstr "crearoxetu"
-
-#~ msgid "setdescription"
-#~ msgstr "ponerdescripción"
-
-#~ msgid "setbobdescription"
-#~ msgstr "ponerdescripciónobb"
-
-#~ msgid "findobject"
-#~ msgstr "alcontraroxetu"
-
-#~ msgid "findspace"
-#~ msgstr "alcontrarespaciu"
-
-#~ msgid "walk"
-#~ msgstr "caminar"
-
-#~ msgid "animation"
-#~ msgstr "animación"
-
-#~ msgid "return"
-#~ msgstr "volver"
-
-#~ msgid "object"
-#~ msgstr "oxetu"
-
-#~ msgid "plant"
-#~ msgstr "plantar"
-
-#~ msgid "create_bob"
-#~ msgstr "crear_obx_b"
-
-#~ msgid "removeobject"
-#~ msgstr "desaniciaroxetu"
-
-#~ msgid "geologist"
-#~ msgstr "xeólogu"
-
-#~ msgid "geologist_find"
-#~ msgstr "alcontrar_xeólogu"
-
-#~ msgid "playFX"
-#~ msgstr "reproducirFX"
-
-#~ msgid "productionsite_program_reference.xhtml"
-#~ msgstr "referencia_programa_produccionsitiu.xhtml"
-
-#~ msgid "Documentation for program command return"
-#~ msgstr "Documentación pal comandu del programa return"
-
-#~ msgid "and"
-#~ msgstr "y"
-
-#~ msgid "when"
-#~ msgstr "cuando"
-
-#~ msgid "or"
-#~ msgstr "o"
-
-#~ msgid "unless"
-#~ msgstr "a menos que"
-
-#~ msgid "economy"
-#~ msgstr "economía"
-
-#~ msgid "needs"
-#~ msgstr "necesita"
-
-#~ msgid "site"
-#~ msgstr "sitiu"
-
-#~ msgid "has"
-#~ msgstr "tien"
-
-#~ msgid "workers"
-#~ msgstr "trabayadores"
-
-#~ msgid "need"
-#~ msgstr "necesita"
-
-#~ msgid "experience"
-#~ msgstr "esperiencia"
-
-#~ msgid "Documentation for program command call"
-#~ msgstr "Documentación pal comandu del programa call"
-
-#~ msgid "call"
-#~ msgstr "llamada"

@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:44+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:40+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4812,108 +4812,3 @@ msgstr "nincs leírás"
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr "nincs leírás"
-
-#~ msgid "building_types.xhtml"
-#~ msgstr "building_types_hu_HU.xhtml"
-
-#~ msgid "worker_types.xhtml"
-#~ msgstr "worker_types_hu_HU.xhtml"
-
-#~ msgid "breed"
-#~ msgstr "tenyészt"
-
-#~ msgid "createitem"
-#~ msgstr "áruelőállítás"
-
-#~ msgid "setdescription"
-#~ msgstr "leírásbeállítás"
-
-#~ msgid "walk"
-#~ msgstr "séta"
-
-#~ msgid "animation"
-#~ msgstr "animáció"
-
-#~ msgid "return"
-#~ msgstr "vissza"
-
-#~ msgid "object"
-#~ msgstr "objektum"
-
-#~ msgid "plant"
-#~ msgstr "növény"
-
-#~ msgid "geologist"
-#~ msgstr "geológus"
-
-#~ msgid "and"
-#~ msgstr "és"
-
-#~ msgid "when"
-#~ msgstr "mikor"
-
-#~ msgid "or"
-#~ msgstr "vagy"
-
-#~ msgid "unless"
-#~ msgstr "kivéve, ha"
-
-#~ msgid "economy"
-#~ msgstr "gazdaság"
-
-#~ msgid "needs"
-#~ msgstr "szükségletek"
-
-#~ msgid "has"
-#~ msgstr "a"
-
-#~ msgid "workers"
-#~ msgstr "munkavállalók"
-
-#~ msgid "</span></a> <span class=\"keyword\">"
-#~ msgstr "</span></a> <span class=\"kulcsszó\">"
-
-#~ msgid "need"
-#~ msgstr "szükséges"
-
-#~ msgid "experience"
-#~ msgstr "tapasztalat"
-
-#~ msgid "call"
-#~ msgstr "hívás"
-
-#~ msgid "worker"
-#~ msgstr "munkás"
-
-#~ msgid "sleep"
-#~ msgstr "alvás"
-
-#~ msgid "animate"
-#~ msgstr "animálás"
-
-#~ msgid "produce"
-#~ msgstr "gyártás"
-
-#~ msgid "recruit"
-#~ msgstr "toboroz"
-
-#~ msgid "check soldier"
-#~ msgstr "katona ellenőrzés"
-
-#~ msgid "attack"
-#~ msgstr "támadás"
-
-#~ msgid "defense"
-#~ msgstr "védekezés"
-
-#~ msgid "evade"
-#~ msgstr "elkerüljék"
-
-#~ msgid "train"
-#~ msgstr "vonat"
-
-#~ msgid "construct"
-#~ msgstr "konstrukció"
-
-#~ msgid "ware_types.xhtml"
-#~ msgstr "ware_types_hu_HU.xhtml"

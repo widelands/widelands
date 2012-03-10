@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:39+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4666,57 +4666,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "animation"
-#~ msgstr "animació"
-
-#~ msgid "object"
-#~ msgstr "objecte"
-
-#~ msgid "plant"
-#~ msgstr "planta"
-
-#~ msgid "geologist"
-#~ msgstr "geòleg"
-
-#~ msgid "and"
-#~ msgstr "i"
-
-#~ msgid "when"
-#~ msgstr "quan"
-
-#~ msgid "or"
-#~ msgstr "o"
-
-#~ msgid "economy"
-#~ msgstr "economia"
-
-#~ msgid "site"
-#~ msgstr "lloc"
-
-#~ msgid "workers"
-#~ msgstr "treballadors"
-
-#~ msgid "experience"
-#~ msgstr "experiència"
-
-#~ msgid "worker"
-#~ msgstr "treballador"
-
-#~ msgid "consume"
-#~ msgstr "consumeixen"
-
-#~ msgid "produce"
-#~ msgstr "produir"
-
-#~ msgid "recruit"
-#~ msgstr "contractar"
-
-#~ msgid "attack"
-#~ msgstr "atac"
-
-#~ msgid "defense"
-#~ msgstr "defensa"
-
-#~ msgid "evade"
-#~ msgstr "evadir"

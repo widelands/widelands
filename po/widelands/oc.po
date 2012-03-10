@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:45+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:40+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4666,48 +4666,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "building_types.xhtml"
-#~ msgstr "building_types.xhtml"
-
-#~ msgid "worker_types.xhtml"
-#~ msgstr "worker_types.xhtml"
-
-#~ msgid "breed"
-#~ msgstr "raça"
-
-#~ msgid "setdescription"
-#~ msgstr "definirdescripcion"
-
-#~ msgid "animation"
-#~ msgstr "animacion"
-
-#~ msgid "return"
-#~ msgstr "retorn"
-
-#~ msgid "object"
-#~ msgstr "objècte"
-
-#~ msgid "plant"
-#~ msgstr "planta"
-
-#~ msgid "geologist"
-#~ msgstr "geològ"
-
-#~ msgid "and"
-#~ msgstr "e"
-
-#~ msgid "when"
-#~ msgstr "quand"
-
-#~ msgid "or"
-#~ msgstr "o"
-
-#~ msgid "economy"
-#~ msgstr "economia"
-
-#~ msgid "needs"
-#~ msgstr "demandas"
-
-#~ msgid "site"
-#~ msgstr "site"

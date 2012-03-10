@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:44+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:40+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4668,48 +4668,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "building_types.xhtml"
-#~ msgstr "jenis_bangunan.xhtml"
-
-#~ msgid "worker_types.xhtml"
-#~ msgstr "jenis_pekerja.xhtml"
-
-#~ msgid "animation"
-#~ msgstr "animasi"
-
-#~ msgid "geologist"
-#~ msgstr "ahli geologi"
-
-#~ msgid "and"
-#~ msgstr "dan"
-
-#~ msgid "or"
-#~ msgstr "atau"
-
-#~ msgid "economy"
-#~ msgstr "ekonomi"
-
-#~ msgid "site"
-#~ msgstr "situs"
-
-#~ msgid "workers"
-#~ msgstr "pekerja"
-
-#~ msgid "experience"
-#~ msgstr "pengalaman"
-
-#~ msgid "worker"
-#~ msgstr "pekerja"
-
-#~ msgid "animate"
-#~ msgstr "menghidupkan"
-
-#~ msgid "attack"
-#~ msgstr "serang"
-
-#~ msgid "defense"
-#~ msgstr "pertahanan"
-
-#~ msgid "evade"
-#~ msgstr "menghindari"

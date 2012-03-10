@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:45+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:40+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4658,48 +4658,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "walk"
-#~ msgstr "راه رفت"
-
-#~ msgid "animation"
-#~ msgstr "انیمیشن"
-
-#~ msgid "return"
-#~ msgstr "بازگشت"
-
-#~ msgid "object"
-#~ msgstr "شیء"
-
-#~ msgid "geologist"
-#~ msgstr "زمینشناس"
-
-#~ msgid "and"
-#~ msgstr "و"
-
-#~ msgid "or"
-#~ msgstr "یا"
-
-#~ msgid "economy"
-#~ msgstr "اقتصاد"
-
-#~ msgid "workers"
-#~ msgstr "کارگران"
-
-#~ msgid "worker"
-#~ msgstr "کارگر"
-
-#~ msgid "produce"
-#~ msgstr "تولید"
-
-#~ msgid "recruit"
-#~ msgstr "استخدام"
-
-#~ msgid "attack"
-#~ msgstr "حمله"
-
-#~ msgid "defense"
-#~ msgstr "دفاع"
-
-#~ msgid "evade"
-#~ msgstr "از سر باز کردن"

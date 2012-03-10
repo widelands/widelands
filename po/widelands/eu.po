@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:39+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4658,69 +4658,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "walk"
-#~ msgstr "oinez"
-
-#~ msgid "animation"
-#~ msgstr "animazioa"
-
-#~ msgid "object"
-#~ msgstr "objektua"
-
-#~ msgid "plant"
-#~ msgstr "landare"
-
-#~ msgid "geologist"
-#~ msgstr "Geologo"
-
-#~ msgid "and"
-#~ msgstr "eta"
-
-#~ msgid "or"
-#~ msgstr "edo"
-
-#~ msgid "economy"
-#~ msgstr "ekonomia"
-
-#~ msgid "needs"
-#~ msgstr "behar"
-
-#~ msgid "has"
-#~ msgstr "ditu"
-
-#~ msgid "need"
-#~ msgstr "behar"
-
-#~ msgid "experience"
-#~ msgstr "esperientzia"
-
-#~ msgid "call"
-#~ msgstr "deia"
-
-#~ msgid "worker"
-#~ msgstr "langilea"
-
-#~ msgid "sleep"
-#~ msgstr "lo"
-
-#~ msgid "animate"
-#~ msgstr "animatzeko"
-
-#~ msgid "consume"
-#~ msgstr "kontsumitzen"
-
-#~ msgid "produce"
-#~ msgstr "ekoizteko"
-
-#~ msgid "recruit"
-#~ msgstr "bildu"
-
-#~ msgid "attack"
-#~ msgstr "erasoa"
-
-#~ msgid "defense"
-#~ msgstr "defentsa"
-
-#~ msgid "construct"
-#~ msgstr "eraikitzeko"

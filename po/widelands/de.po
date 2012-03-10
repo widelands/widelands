@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 23:13+0100\n"
-"PO-Revision-Date: 2012-03-09 02:46+0000\n"
+"PO-Revision-Date: 2012-03-09 07:54+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:44+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:39+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -276,7 +276,7 @@ msgstr "Produkt des/der %s"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Dokumentation für das Programm Kommando "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -1738,7 +1738,7 @@ msgstr ""
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Lade Völker"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
@@ -5002,186 +5002,3 @@ msgstr "(Keine Beschreibung vorhanden.)"
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr "Keine Beschreibung vorhanden."
-
-#~ msgid "building_types.xhtml"
-#~ msgstr "building_types.xhtml"
-
-#~ msgid "worker_types.xhtml"
-#~ msgstr "Arbeiterarten.xhtml"
-
-#~ msgid "breed"
-#~ msgstr "züchten"
-
-#~ msgid "createitem"
-#~ msgstr "Erstelle Einheit"
-
-#~ msgid "setdescription"
-#~ msgstr "Setze Beschreibung"
-
-#~ msgid "setbobdescription"
-#~ msgstr "Setze Objektbeschreibung"
-
-#~ msgid "findobject"
-#~ msgstr "Finde Objekt"
-
-#~ msgid "findspace"
-#~ msgstr "Finde Platz"
-
-#~ msgid "walk"
-#~ msgstr "Gehe"
-
-#~ msgid "animation"
-#~ msgstr "Animation"
-
-#~ msgid "return"
-#~ msgstr "Gebe zurück"
-
-#~ msgid "object"
-#~ msgstr "Objekt"
-
-#~ msgid "plant"
-#~ msgstr "Pflanze"
-
-#~ msgid "create_bob"
-#~ msgstr "Erstelle Bob"
-
-#~ msgid "removeobject"
-#~ msgstr "Entferne Objekt"
-
-#~ msgid "geologist"
-#~ msgstr "Geologe"
-
-#~ msgid "geologist_find"
-#~ msgstr "Finde Gestein"
-
-#~ msgid "playFX"
-#~ msgstr "spiele Effekte"
-
-#~ msgid "productionsite_program_reference.xhtml"
-#~ msgstr "Produktionsgebäude_Programm_Referenz.xhtml"
-
-#~ msgid "Documentation for program command return"
-#~ msgstr "Dokumentation für das Programmkommando Gebe zurück"
-
-#~ msgid "and"
-#~ msgstr "und"
-
-#~ msgid "when"
-#~ msgstr "falls"
-
-#~ msgid "or"
-#~ msgstr "oder"
-
-#~ msgid "unless"
-#~ msgstr "solange nicht"
-
-#~ msgid "economy"
-#~ msgstr "Wirtschaft"
-
-#~ msgid "needs"
-#~ msgstr "braucht"
-
-#~ msgid "site"
-#~ msgstr "Gebäude"
-
-#~ msgid "has"
-#~ msgstr "hat"
-
-#~ msgid "workers"
-#~ msgstr "Arbeiter"
-
-#~ msgid "</span></a> <span class=\"keyword\">"
-#~ msgstr "</span></a> <span class=\"keyword\">"
-
-#~ msgid "need"
-#~ msgstr "braucht"
-
-#~ msgid "experience"
-#~ msgstr "Erfahrung"
-
-#~ msgid "Documentation for program command call"
-#~ msgstr "Dokumentation für das Programmkommando Rufe"
-
-#~ msgid "call"
-#~ msgstr "Rufe"
-
-#~ msgid "Documentation for program command worker"
-#~ msgstr "Dokumentation für das Programmkommando Arbeiter"
-
-#~ msgid "worker"
-#~ msgstr "Arbeiter"
-
-#~ msgid "Documentation for program command sleep"
-#~ msgstr "Dokumentation für das Programmkommando Schlafe"
-
-#~ msgid "sleep"
-#~ msgstr "Schlafe"
-
-#~ msgid "Documentation for program command check_map"
-#~ msgstr "Dokumentation für Programmbefehl check_map"
-
-#~ msgid "check_map"
-#~ msgstr "check_map"
-
-#~ msgid "Seafaring"
-#~ msgstr "Seefahrt"
-
-#~ msgid "Documentation for program command animate"
-#~ msgstr "Dokumentation für das Programmkommando Animiere"
-
-#~ msgid "animate"
-#~ msgstr "Animiere"
-
-#~ msgid "Documentation for program command consume"
-#~ msgstr "Dokumentation für das Programmkommando Verbrauche"
-
-#~ msgid "consume"
-#~ msgstr "Verbrauche"
-
-#~ msgid "Documentation for program command produce"
-#~ msgstr "Dokumentation für das Programmkommando Produziere"
-
-#~ msgid "produce"
-#~ msgstr "Produziere"
-
-#~ msgid "recruit"
-#~ msgstr "rekrutieren"
-
-#~ msgid "Documentation for program command mine"
-#~ msgstr "Dokumentation für das Programmkommando Baue ab"
-
-#~ msgid "Documentation for program command check_soldier"
-#~ msgstr "Dokumentation für das Programmkommando Überprüfe Soldat"
-
-#~ msgid "check soldier"
-#~ msgstr "überprüfe Soldat"
-
-#~ msgid "hp"
-#~ msgstr "LP"
-
-#~ msgid "attack"
-#~ msgstr "Attacke"
-
-#~ msgid "defense"
-#~ msgstr "Verteidigung"
-
-#~ msgid "evade"
-#~ msgstr "Ausweichen"
-
-#~ msgid "Documentation for program command train"
-#~ msgstr "Dokumentation für das Programmkommando Ausbilden"
-
-#~ msgid "train"
-#~ msgstr "Ausbilden"
-
-#~ msgid "Documentation for program command playFX"
-#~ msgstr "Dokumentation für das Programmkommando Spiele Sound"
-
-#~ msgid "Documentation for program command construct"
-#~ msgstr "Dokumentation für das Programm Kommando 'erstellen'"
-
-#~ msgid "construct"
-#~ msgstr "erstellen"
-
-#~ msgid "ware_types.xhtml"
-#~ msgstr "Warenarten.xhtml"

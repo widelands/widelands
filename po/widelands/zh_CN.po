@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:46+0000\n"
+"X-Launchpad-Export-Date: 2012-03-10 04:41+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4659,45 +4659,3 @@ msgstr ""
 #: ../../src/logic/map.h:166
 msgid "no description defined"
 msgstr ""
-
-#~ msgid "breed"
-#~ msgstr "品种"
-
-#~ msgid "animation"
-#~ msgstr "动画"
-
-#~ msgid "return"
-#~ msgstr "返回"
-
-#~ msgid "object"
-#~ msgstr "对象"
-
-#~ msgid "and"
-#~ msgstr "和"
-
-#~ msgid "when"
-#~ msgstr "当"
-
-#~ msgid "or"
-#~ msgstr "或"
-
-#~ msgid "economy"
-#~ msgstr "经济"
-
-#~ msgid "animate"
-#~ msgstr "动画"
-
-#~ msgid "produce"
-#~ msgstr "生产"
-
-#~ msgid "recruit"
-#~ msgstr "招募"
-
-#~ msgid "attack"
-#~ msgstr "冲击"
-
-#~ msgid "defense"
-#~ msgstr "国防"
-
-#~ msgid "evade"
-#~ msgstr "逃避"
