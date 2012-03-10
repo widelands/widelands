@@ -88,7 +88,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	/// configuration, set the default value 1.
 	void set_has_demand_check() {
 		if (m_default_target_quantity == std::numeric_limits<uint32_t>::max())
-			m_default_target_quantity = 1;
+			m_default_target_quantity = 0;
 	}
 
 	virtual void load_graphics();

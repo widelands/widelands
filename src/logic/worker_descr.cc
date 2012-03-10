@@ -54,7 +54,8 @@ Worker_Descr::Worker_Descr
 {
 	add_attribute(Map_Object::WORKER);
 
-	m_default_target_quantity = global_s.get_positive("default_target_quantity", 0);
+	m_default_target_quantity =
+		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
 
 	if (Section * const s = prof.get_section("buildcost")) {
 		m_buildable = true;
