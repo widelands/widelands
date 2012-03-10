@@ -413,6 +413,13 @@ void Ship::start_task_movetodock(Game & game, PortDock & pd)
 	start_task_idle(game, descr().main_animation(), 5000);
 }
 
+/**
+ * Send a message to the player, that an expedition is ready to start.
+ */
+void Ship::start_task_expedition(Game &) {
+#warning send message to player so the player can select in a UI where the ship should move to
+}
+
 void Ship::log_general_info(const Editor_Game_Base & egbase)
 {
 	Bob::log_general_info(egbase);

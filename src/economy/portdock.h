@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,7 +66,7 @@ struct PortDock : PlayerImmovable {
 
 	Fleet * get_fleet() const {return m_fleet;}
 	PortDock * get_dock(Flag & flag) const;
-	bool get_need_ship() const {return m_need_ship;}
+	bool get_need_ship() const {return m_need_ship || m_expedition_ready;}
 
 	virtual void set_economy(Economy *);
 
@@ -116,6 +116,9 @@ private:
 	PositionList m_dockpoints;
 	std::vector<ShippingItem> m_waiting;
 	bool m_need_ship;
+	bool m_start_expedition;
+	bool m_expedition_ready;
+	std::vector<WaresQueue *> m_expedition_wares;
 
 	// saving and loading
 protected:

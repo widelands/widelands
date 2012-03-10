@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include "portdock.h"
 
 #include "container_iterate.h"
+#include "wares_queue.h"
 #include "fleet.h"
 #include "log.h"
 #include "logic/game.h"
@@ -39,7 +40,9 @@ PortDock::PortDock() :
 	PlayerImmovable(portdock_descr),
 	m_fleet(0),
 	m_warehouse(0),
-	m_need_ship(false)
+	m_need_ship(false),
+	m_start_expedition(false),
+	m_expedition_ready(false)
 {
 }
 
@@ -302,6 +305,15 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 			set_need_ship(game, false);
 	}
 
+	if (m_expedition_ready)
+		if (ship.get_nritems() < 1) {
+#warning load the ship
+			ship.start_task_expedition(game);
+			// The expedition goods are now on the ship, so from now on it is independent from the port
+			// and thus we switch the port to normal, so we could even start a new expedition,
+			cancel_expedition();
+		}
+
 	m_fleet->update(game);
 }
 
@@ -345,12 +357,36 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 }
 
 
+/// \returns whether an expedition was started or is even ready
 bool PortDock::expedition_started() {
-	return false;
-#warning fix me!
+	return m_start_expedition || m_expedition_ready;
 }
-void PortDock::start_expedition() {};
-void PortDock::cancel_expedition() {};
+
+/// Start an expedition
+void PortDock::start_expedition() {
+	assert(!m_start_expedition);
+	m_start_expedition = true;
+	m_expedition_ready = true;
+#warning implement all the ware pick up stuff
+/*
+	std::map<Ware_Index, uint8_t> const & buildcost = m_warehouse->descr().buildcost();
+	size_t const buildcost_size = buildcost.size();
+	m_expedition_wares.resize(buildcost_size);
+	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+
+	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
+		WaresQueue & wq = *(m_expedition_wares[i] = new WaresQueue(*this, it->first, it->second));
+		wq.set_callback(PortDock::wares_queue_callback, this);
+
+	}
+*/
+}
+
+void PortDock::cancel_expedition() {
+	m_start_expedition = false;
+	m_expedition_ready = false;
+#warning implement the remove of the wares from expedition list and cancel requests
+}
 
 
 void PortDock::log_general_info(Editor_Game_Base const & egbase)

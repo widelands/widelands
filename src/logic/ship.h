@@ -76,6 +76,7 @@ struct Ship : Bob {
 
 	void start_task_ship(Game &);
 	void start_task_movetodock(Game &, PortDock &);
+	void start_task_expedition(Game &);
 
 	virtual void log_general_info(Editor_Game_Base const &);
 
