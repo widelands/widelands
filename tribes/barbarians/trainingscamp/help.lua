@@ -30,7 +30,7 @@ return {
 		rt(p(_"Provided by the " .. _"War Mill")) ..
 		rt(h3(_"Both Trainings:")) ..
 		image_line("tribes/barbarians/pittabread/menu.png",1,p(_"%s and":format(_"Pitta Bread"))) ..
-		image_line("tribes/barbarians/fish/menu.png;tribes/barbarians/meat/menu.png",1,p(_"Fish or Meat")) ..
+		image_line("tribes/barbarians/fish/menu.png;tribes/barbarians/meat/menu.png",1,p(_"Fish" .. _"or" .. _"Meat")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Big plot","pics/big.png") ..
@@ -56,5 +56,5 @@ return {
 		text_line(_"Experience levels:", "n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a Trainingscamp can train one new soldier in Attack and Hitpoints to the final level in 4m40s on average.")
+		text_line(_"Performance:", _"If all needed wares are delivered in time, a %s can train one new soldier in %s and %s to the final level in %s on average.":format(_"Trainingscamp",_"Attack",_"Hitpoints","4m40s"))
 }

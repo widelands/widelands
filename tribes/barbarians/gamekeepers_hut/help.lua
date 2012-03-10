@@ -40,5 +40,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The Gamekeeper pauses 52.5s before releasing the next animal.")
+		text_line(_"Performance:", _"The %s pauses %s before releasing the next animal.":format(_"Gamekeeper","52.5s"))
 }
