@@ -94,6 +94,14 @@ Tribe_Descr::Tribe_Descr
 					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 
+			// Read compatibility wares (removed wares existing in saved games from older builds
+			if (Section * const section = root_conf.get_section("compatibility_wares")) {
+				while (Section::Value const * const v = section->get_next_val()) {
+					log("Compatibility ware \"%s\"=\"%s\" loaded.\n", v->get_name(), v->get_string());
+					m_compatibility_wares[* new std::string(v->get_name())] = * new std::string(v->get_string());
+				}
+			}
+
 			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
 				m_immovables.add
 					(new Immovable_Descr
@@ -539,18 +547,44 @@ Ware_Index Tribe_Descr::safe_ware_index(std::string const & warename) const {
 	if (Ware_Index const result = ware_index(warename))
 		return result;
 	else
-		throw game_data_error
-			("tribe %s does not define ware type \"%s\"",
-			 name().c_str(), warename.c_str());
+		// If this point is reached, the defined ware is neither defined as normal ware nor as a compatibility.
+		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
 }
 Ware_Index Tribe_Descr::safe_ware_index(const char * const warename) const {
 	if (Ware_Index const result = ware_index(warename))
 		return result;
 	else
-		throw game_data_error
-			("tribe %s does not define ware type \"%s\"",
-			 name().c_str(), warename);
+		// If this point is reached, the defined ware is neither defined as normal ware nor as a compatibility.
+		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename);
 }
+
+Ware_Index Tribe_Descr::ware_index(std::string const & warename) const {
+	Ware_Index const wi = m_wares.get_index(warename);
+	if (!wi) {
+		// try to find the ware in compatibility wares std::map
+		std::map<std::string, std::string>::const_iterator it = m_compatibility_wares.find(warename);
+		if (m_compatibility_wares.find(warename) != m_compatibility_wares.end()) {
+			log ("ware %s found in compatibility map: %s!\n", warename.c_str(), it->second.c_str());
+			if (Ware_Index const result = m_wares.get_index(it->second))
+				return result;
+		}
+	}
+	return wi;
+}
+Ware_Index Tribe_Descr::ware_index(char const * const warename) const {
+	Ware_Index const wi = m_wares.get_index(warename);
+	if (!wi) {
+		// try to find the ware in compatibility wares std::map
+		std::map<std::string, std::string>::const_iterator it = m_compatibility_wares.find(warename);
+		if (m_compatibility_wares.find(warename) != m_compatibility_wares.end()) {
+			log ("ware %s found in compatibility map: %s!\n", warename, it->second.c_str());
+			if (Ware_Index const result = m_wares.get_index(it->second))
+				return result;
+		}
+	}
+	return wi;
+}
+
 
 /*
  * Return the given worker or die trying
