@@ -129,10 +129,10 @@ return {
 					if teampoints[t] > ( #fields / 2 ) then
 						-- this team owns more than half of the map's area
 						foundcandidate = true
-						if candidateisteam == true and currentcandidate == game_status_territoral_lord.team:format(t) then
+						if candidateisteam == true and currentcandidate == t then
 							remaining_time = remaining_time - 30
 						else
-							currentcandidate = game_status_territoral_lord.team:format(t)
+							currentcandidate = t
 							candidateisteam = true
 							remaining_time = 20 * 60 -- 20 minutes
 						end
@@ -146,6 +146,10 @@ return {
 
 		function _send_state()
 			local msg1 = game_status_territoral_lord.other1:format(currentcandidate)
+			if candidateisteam then
+				local teamstr = game_status_territoral_lord.team:format(currentcandidate)
+				msg1 = game_status_territoral_lord.other1:format(teamstr)
+			end
 			msg1 = msg1 .. "\n"
 			msg1 = msg1 .. game_status_territoral_lord.other2:format(remaining_time / 60)
 
@@ -154,7 +158,7 @@ return {
 			msg2 = msg2 .. game_status_territoral_lord.player2:format(remaining_time / 60)
 
 			for idx, p in ipairs(plrs) do
-				if candidateisteam and currentcandidate == game_status_territoral_lord.team:format(p.team)
+				if candidateisteam and currentcandidate == p.team
 					or not candidateisteam and currentcandidate == p.name then
 					p:send_message(game_status.title, msg2, {popup = true})
 				else
@@ -166,8 +170,7 @@ return {
 		-- Start a new coroutine that checks for defeated players
 		run(function()
 			sleep(5000)
-			check_player_defeated(plrs, lost_game.title,
-				lost_game.body, wc_name, wc_version)
+			check_player_defeated(plrs, lost_game.title, lost_game.body, wc_name, wc_version)
 		end)
 
 		-- here is the main loop!!!
@@ -182,7 +185,7 @@ return {
 			if remaining_time == 0 then
 				for idx, p in ipairs(plrs) do
 					p.see_all = 1
-					if candidateisteam and currentcandidate == game_status_territoral_lord.team:format(p.team)
+					if candidateisteam and currentcandidate == p.team
 						or not candidateisteam and currentcandidate == p.name then
 						p:send_message(won_game_over.title, won_game_over.body, {popup = true})
 						wl.game.report_result(p, true, _landsizes[p.number], make_extra_data(p, wc_name, wc_version))

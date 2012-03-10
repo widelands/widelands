@@ -310,9 +310,16 @@ struct Player :
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
 		const Map_Object_Descr             * map_object_descr[3];
+
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
 		const Constructionsite_Information * constructionsite[3];
+
+		/// Save whether the player saw a border the last time (s)he saw the node.
+		bool border;
+		bool border_r;
+		bool border_br;
+		bool border_bl;
 
 		//  Summary of intended layout (not yet fully implemented)
 		//
@@ -333,6 +340,13 @@ struct Player :
 		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
 		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
 		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
+		//  Constructionsite_Information[0]
+		//  Constructionsite_Information[1]
+		//  Constructionsite_Information[2]
+		//  border
+		//  border_r
+		//  border_br
+		//  border_bl
 		//  <end>                           0x100         0x160
 	};
 

@@ -3,7 +3,7 @@ picture=resi_00.png
 attrib=resi
 
 [program]
-animate=idle 300000
+animate=idle 600000
 remove=
 
 [idle]

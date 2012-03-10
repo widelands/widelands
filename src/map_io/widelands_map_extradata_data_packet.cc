@@ -88,6 +88,8 @@ throw (_wexception)
 					info.type     = Map::Extradata_Info::PIC;
 					info.filename = *pname;
 					info.data     = picture;
+					// replace \ with / in path or pics won't be saved on Windows
+					std::replace(info.filename.begin(), info.filename.end(), '\\', '/');
 					map.m_extradatainfos.push_back(info);
 				}
 			}

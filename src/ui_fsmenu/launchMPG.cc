@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -345,6 +345,12 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 	MapData const & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
 
+	// If the same map was selected again, maybe the state of the "scenario" check box was changed
+	// So we should recheck all map predefined values,
+	// which is done in refresh(), if m_filename_proof is different to settings.mapfilename -> dummy rename
+	if (mapdata.filename == m_filename_proof)
+		m_filename_proof = m_filename_proof + "new";
+
 	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
 }
 
@@ -459,7 +465,13 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 				if (settings.scenario)
 					set_scenario_values();
 			}
-			m_mapname.set_text(settings.mapname);
+			//Try to translate the map name.
+			//This will work on every official map as expected
+			//and 'fail silently' (not find a translation) for already translated campaign map names.
+			//It will also translate 'false-positively' on any user-made map which shares a name with
+			//the official maps, but this should not be a problem to worry about.
+			i18n::Textdomain td("maps");
+			m_mapname.set_text(_(settings.mapname));
 		}
 	} else {
 		// Write client infos

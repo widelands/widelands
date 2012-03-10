@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
+"POT-Creation-Date: 2012-02-27 21:36+0000\n"
 "PO-Revision-Date: 2012-01-10 22:20+0000\n"
 "Last-Translator: Tubuntu <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:45+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-28 05:24+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -248,7 +248,7 @@ msgstr "Charbon"
 msgid "Coal mine"
 msgstr "Mine de charbon"
 
-#: ../../tribes/barbarians/shipyard/conf:18
+#: ../../tribes/barbarians/shipyard/conf:21
 msgid "Constructing ship"
 msgstr "Navire en cours de construction"
 
@@ -1474,7 +1474,7 @@ msgstr "Durcisseur de bois"
 #: ../../tribes/barbarians/quarry/conf:15
 #: ../../tribes/barbarians/rangers_hut/conf:14
 #: ../../tribes/barbarians/scouts_hut/conf:17
-#: ../../tribes/barbarians/shipyard/conf:19
+#: ../../tribes/barbarians/shipyard/conf:22
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
 #: ../../tribes/barbarians/warmill/conf:39

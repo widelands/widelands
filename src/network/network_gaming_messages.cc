@@ -26,12 +26,12 @@
 #include <boost/format.hpp>
 #include <stdint.h>
 
-static std::map <std::string, std::string> igmessages;
+static std::map <std::string, std::string> ngmessages;
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string & NetworkGamingMessages::get_message(const std::string & code) {
-	if (igmessages.find(code) != igmessages.end())
-		return igmessages[code];
+	if (ngmessages.find(code) != ngmessages.end())
+		return ngmessages[code];
 	// if no message for code was found, just return code
 	return code;
 }
@@ -40,7 +40,7 @@ const std::string & NetworkGamingMessages::get_message(const std::string & code)
 const std::string & NetworkGamingMessages::get_message
 	(const std::string & code, const std::string & arg1, const std::string & arg2, const std::string & arg3)
 {
-	if (igmessages.find(code) == igmessages.end()) {
+	if (ngmessages.find(code) == ngmessages.end()) {
 		std::string & rv = * new std::string
 			((boost::format("%s, %s, %s, %s") % code % get_message(arg1) % get_message(arg2) % get_message(arg3))
 			.str());
@@ -120,43 +120,44 @@ const std::string & NetworkGamingMessages::get_message
 /// are loaded.
 void NetworkGamingMessages::fill_map() {
 	// messages from metaserver to client
-	igmessages["CLIENT_LEFT_GAME"]        = _("Client has left the game.");
-	igmessages["CLIENT_CRASHED"]          = _("Client crashed and performed an emergency save.");
-	igmessages["CONNECTION_LOST"]         = _("Connection was lost.");
-	igmessages["SERVER_LEFT"]             = _("Server has left the game.");
-	igmessages["GAME_STARTED_AT_CONNECT"] = _("The game has started just after you tried to connect.");
-	igmessages["SERVER_CRASHED"]          = _("Server has crashed and performed an emergency save.");
-	igmessages["CLIENT_TIMEOUTED"]        = _("Connection to client timeouted: no response for 10 minutes!");
-	igmessages["CLIENT_DESYNCED"]         = _("Client and host have become desynchronized.");
-	igmessages["KICKED"]                  = _("Kicked by the host: %s");
-	igmessages["MALFORMED_COMMANDS"]      = _("Client sent malformed commands: %s");
-	igmessages["SOMETHING_WRONG"]         = _("Something went wrong: %s");
-	igmessages["CLIENT_X_LEFT_GAME"]      = _("%s has left the game (%s)");
-	igmessages["UNKNOWN_LEFT_GAME"]       = _("Unknown user has left the game (%s)");
-	igmessages["SYNCREQUEST_WO_GAME"]     = _("Server sent a SYNCREQUEST even though no game is running.");
-	igmessages["PLAYERCMD_WO_GAME"]       = _("Received a PLAYERCOMMAND even though no game is running.");
-	igmessages["UNEXPECTED_LAUNCH"]       = _("Unexpectedly received LAUNCH command from server.");
-	igmessages["PLAYER_UPDATE_FOR_N_E_P"] = _("Server sent a player update for a player that does not exist.");
-	igmessages["USER_UPDATE_FOR_N_E_U"]   = _("Server sent an user update for a user that does not exist.");
-	igmessages["DIFFERENT_PROTOCOL_VERS"] = _("Server uses a different protocol version");
-	igmessages["PROTOCOL_EXCEPTION"]      = _("Received command number %s, that is disallowed in this state.");
-	igmessages["BACKWARTS_RUNNING_TIME"]  = _("Client reports time to host that is running backwards.");
-	igmessages["SIMULATING_BEYOND_TIME"]  = _("Client simulates beyond the game time allowed by the host.");
-	igmessages["CLIENT_SYNC_REP_TIMEOUT"] = _("Client did not submit sync report in time.");
-	igmessages["GAME_ALREADY_STARTED"]    = _("The game has already started.");
-	igmessages["NO_ACCESS_TO_PLAYER"]     = _("Client has no access to other player's settings.");
-	igmessages["NO_ACCESS_TO_SERVER"]     = _("Client has no access to server settings.");
-	igmessages["START_SENT_NOT_READY"]    = _("Client sent start command, although server is not yet ready.");
-	igmessages["TIME_SENT_NOT_READY"]     = _("Client sent TIME command even though game is not running.");
-	igmessages["PLAYERCMD_FOR_OTHER"]     = _("Client sent a playercommand for another player.");
-	igmessages["UNEXPECTED_SYNC_REP"]     = _("Client sent unexpected synchronization report.");
-	igmessages["REQUEST_OF_N_E_FILE"]     = _("Client requests file although none is available to send.");
-	igmessages["REQUEST_OF_N_E_FILEPART"] = _("Client requests file part that does not exist.");
-	igmessages["SENT_PLAYER_TO_LOBBY"]    = _("Host sent player %s to the lobby!");
-	igmessages["DIFFERENT_WL_VERSION"]    = _("WARNING: %s uses version: %s, while Host uses version: %s");
-	igmessages["CLIENT_HAS_JOINED_GAME"]  = _("%s has joined the game");
-	igmessages["GAME_SAVED_AS"]           = _("Game was saved as %s.");
-	igmessages["STARTED_SENDING_FILE"]    = _("Started to send file %s to %s!");
-	igmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %s to %s");
-	igmessages["SENDING_FILE_PART"]       = _("Sending part %s of file %s to %s");
+	ngmessages["CLIENT_LEFT_GAME"]        = _("Client has left the game.");
+	ngmessages["CLIENT_CRASHED"]          = _("Client crashed and performed an emergency save.");
+	ngmessages["CONNECTION_LOST"]         = _("Connection was lost.");
+	ngmessages["SERVER_LEFT"]             = _("Server has left the game.");
+	ngmessages["GAME_STARTED_AT_CONNECT"] = _("The game has started just after you tried to connect.");
+	ngmessages["SERVER_CRASHED"]          = _("Server has crashed and performed an emergency save.");
+	ngmessages["CLIENT_TIMEOUTED"]        = _("Connection to client timeouted: no response for 10 minutes!");
+	ngmessages["CLIENT_DESYNCED"]         = _("Client and host have become desynchronized.");
+	ngmessages["KICKED"]                  = _("Kicked by the host: %s");
+	ngmessages["MALFORMED_COMMANDS"]      = _("Client sent malformed commands: %s");
+	ngmessages["SOMETHING_WRONG"]         = _("Something went wrong: %s");
+	ngmessages["CLIENT_X_LEFT_GAME"]      = _("%s has left the game (%s)");
+	ngmessages["UNKNOWN_LEFT_GAME"]       = _("Unknown user has left the game (%s)");
+	ngmessages["SYNCREQUEST_WO_GAME"]     = _("Server sent a SYNCREQUEST even though no game is running.");
+	ngmessages["PLAYERCMD_WO_GAME"]       = _("Received a PLAYERCOMMAND even though no game is running.");
+	ngmessages["UNEXPECTED_LAUNCH"]       = _("Unexpectedly received LAUNCH command from server.");
+	ngmessages["PLAYER_UPDATE_FOR_N_E_P"] = _("Server sent a player update for a player that does not exist.");
+	ngmessages["USER_UPDATE_FOR_N_E_U"]   = _("Server sent an user update for a user that does not exist.");
+	ngmessages["DIFFERENT_PROTOCOL_VERS"] = _("Server uses a different protocol version");
+	ngmessages["PROTOCOL_EXCEPTION"]      = _("Received command number %s, that is disallowed in this state.");
+	ngmessages["BACKWARTS_RUNNING_TIME"]  = _("Client reports time to host that is running backwards.");
+	ngmessages["SIMULATING_BEYOND_TIME"]  = _("Client simulates beyond the game time allowed by the host.");
+	ngmessages["CLIENT_SYNC_REP_TIMEOUT"] = _("Client did not submit sync report in time.");
+	ngmessages["GAME_ALREADY_STARTED"]    = _("The game has already started.");
+	ngmessages["NO_ACCESS_TO_PLAYER"]     = _("Client has no access to other player's settings.");
+	ngmessages["NO_ACCESS_TO_SERVER"]     = _("Client has no access to server settings.");
+	ngmessages["START_SENT_NOT_READY"]    = _("Client sent start command, although server is not yet ready.");
+	ngmessages["TIME_SENT_NOT_READY"]     = _("Client sent TIME command even though game is not running.");
+	ngmessages["PLAYERCMD_FOR_OTHER"]     = _("Client sent a playercommand for another player.");
+	ngmessages["UNEXPECTED_SYNC_REP"]     = _("Client sent unexpected synchronization report.");
+	ngmessages["REQUEST_OF_N_E_FILE"]     = _("Client requests file although none is available to send.");
+	ngmessages["REQUEST_OF_N_E_FILEPART"] = _("Client requests file part that does not exist.");
+	ngmessages["SENT_PLAYER_TO_LOBBY"]    = _("Host sent player %s to the lobby!");
+	ngmessages["DIFFERENT_WL_VERSION"]    = _("WARNING: %s uses version: %s, while Host uses version: %s");
+	ngmessages["CLIENT_HAS_JOINED_GAME"]  = _("%s has joined the game");
+	ngmessages["GAME_SAVED_AS"]           = _("Game was saved as %s.");
+	ngmessages["STARTED_SENDING_FILE"]    = _("Started to send file %s to %s!");
+	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %s to %s");
+	ngmessages["SENDING_FILE_PART"]       = _("Sending part %s of file %s to %s");
+	ngmessages["PLAYER_DEFEATED"]         = _("The player \"%s\" was defeated and became spectator.");
 }

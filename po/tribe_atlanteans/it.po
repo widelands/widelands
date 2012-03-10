@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2012-02-01 12:20+0000\n"
+"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"PO-Revision-Date: 2012-02-28 12:44+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:44+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:32+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -225,7 +225,7 @@ msgstr "Carbone"
 msgid "Coal Mine"
 msgstr "Miniera di carbone"
 
-#: ../../tribes/atlanteans/shipyard/conf:18
+#: ../../tribes/atlanteans/shipyard/conf:21
 msgid "Constructing ship"
 msgstr "Nave in costruzione"
 
@@ -744,7 +744,7 @@ msgstr "Produce vanga"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:19
 msgid "Produce spidercloth"
-msgstr "Produce abiti di ragno"
+msgstr "Produce stoffa di ragno"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -987,7 +987,7 @@ msgstr "Allevatore di ragni"
 
 #: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
-msgstr "Abito di ragno"
+msgstr "Stoffa di ragno"
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
@@ -997,7 +997,7 @@ msgid ""
 msgstr ""
 "La stoffa di ragno è prodotta dal filato di ragno in un mulino di tessitura. "
 "È usata nella fucina di attrezzi e nel cantiere navale. Anche alcuni edifici "
-"più avanzati hanno bisogno di tela di ragno per la loro costruzione."
+"più avanzati hanno bisogno di stoffa di ragno per la loro costruzione."
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Spiderfarm"
@@ -1225,7 +1225,7 @@ msgid ""
 "processed to spidercloth in a weaving-mill."
 msgstr ""
 "Questo filato è prodotto dai ragni, che sono allevati negli allevamenti dei "
-"ragni. È trasformato in tela di ragno in un mulino tessile."
+"ragni. È trasformato in stoffa di ragno in un mulino tessile."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
@@ -1439,7 +1439,7 @@ msgstr "Casa del taglialegna"
 #: ../../tribes/atlanteans/quarry/conf:16
 #: ../../tribes/atlanteans/sawmill/conf:19
 #: ../../tribes/atlanteans/scouts_house/conf:18
-#: ../../tribes/atlanteans/shipyard/conf:19
+#: ../../tribes/atlanteans/shipyard/conf:22
 #: ../../tribes/atlanteans/smelting_works/conf:25
 #: ../../tribes/atlanteans/smokery/conf:27
 #: ../../tribes/atlanteans/spiderfarm/conf:17

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2012-02-10 09:47+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"PO-Revision-Date: 2012-02-27 12:27+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:44+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-28 05:22+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -58,7 +58,7 @@ msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
-"- Quale versione di Widelands utilizzi(cioè il numero di build, o se è una "
+"- Quale versione di Widelands utilizzi (cioè il numero di build, o se è una "
 "compilazione <br> personalizzata da SVN)"
 
 #: ../../txts/README:125
@@ -433,14 +433,15 @@ msgstr ""
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
-"ALT      (Tenere) Seleziona il secondo strumento alternativo mentre premuto"
+"ALT (Tenere premuto) Seleziona il secondo strumento alternativo (fintanto "
+"che mantieni premuto)"
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
-"Costruire sempre una casa del guardaboschi ed una casa di allevamento del "
+"Costruisci sempre una casa del guardaboschi ed una casa di allevamento del "
 "pesce, così non rimarrai senza tronchi e cibo."
 
 #: ../../txts/tips/empire.tip:10
@@ -453,7 +454,7 @@ msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
-"Costruire sempre una capanna del guardaboschi e del guardiacaccia, così non "
+"Costruisci sempre una capanna del guardaboschi e del guardiacaccia, così non "
 "rimarrai senza tronchi e cibo."
 
 #: ../../txts/tips/general_game.tip:22
@@ -461,14 +462,14 @@ msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
-"Qualche altra domanda? Le FAQ, il wiki e naturalmente i forum della nostra "
-"comunità possono essere trovati su www.widelands.org."
+"Qualche altra domanda? Puoi trovare le FAQ, il wiki e naturalmente i forum "
+"della nostra comunità su www.widelands.org."
 
-#: ../../txts/developers:156
+#: ../../txts/developers:157
 msgid "Atlantean"
 msgstr "Atlantidi"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:147
 msgid "Barbarian"
 msgstr "Barbaro"
 
@@ -476,16 +477,16 @@ msgstr "Barbaro"
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
-"Assicurati di mandare un geologo ad esaminare i siti prima di costruire un "
+"Assicurati di mandare un geologo ad esaminare i luoghi prima di costruire un "
 "pozzo o una miniera."
 
 #: ../../txts/README:57
 msgid "C               Toggle census"
-msgstr "C               Mostra/Nascondi censimento"
+msgstr "C Mostra/Nascondi censimento"
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
-msgstr "C        Mostra/Nascondi censimento acceso/spento"
+msgstr "C Mostra/Nascondi censimento"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -495,7 +496,7 @@ msgstr "CTRL+L   Carica Mappa"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Salva la mappa"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:144
 msgid "Campaign Story"
 msgstr "Storia della Campagna"
 
@@ -541,7 +542,7 @@ msgstr "Crea una Registrazione della Sessione</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl + F10 Chiude il gioco subito"
 
-#: ../../txts/developers:171
+#: ../../txts/developers:172
 msgid "Czech"
 msgstr "Ceco"
 
@@ -549,7 +550,7 @@ msgstr "Ceco"
 msgid "DELETE      Archive the current message"
 msgstr "ELIMINA Archivia il corrente messaggio"
 
-#: ../../txts/developers:178
+#: ../../txts/developers:179
 msgid "Dansk"
 msgstr "Danese"
 
@@ -557,11 +558,11 @@ msgstr "Danese"
 msgid "Development"
 msgstr "Sviluppo"
 
-#: ../../txts/developers:313
+#: ../../txts/developers:314
 msgid "Documentation, Help and Wiki"
 msgstr "Documentazione, Aiuto e Wiki"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:185
 msgid "Dutch"
 msgstr "Olandese"
 
@@ -573,7 +574,7 @@ msgstr "E        Mostra/Nascondi menu eventi"
 msgid "Elders"
 msgstr "Anziani"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:153
 msgid "Empire"
 msgstr "Impero"
 
@@ -597,15 +598,15 @@ msgstr "F11         Cattura una schermata"
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6           Mostra la console di debug (solo nelle build di debug)"
 
-#: ../../txts/developers:191
+#: ../../txts/developers:192
 msgid "Finnish"
 msgstr "Finlandese"
 
-#: ../../txts/developers:328
+#: ../../txts/developers:329
 msgid "Former elders"
 msgstr "Ex anziani"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:198
 msgid "French"
 msgstr "Francese"
 
@@ -625,7 +626,7 @@ msgstr ""
 "Termini e condizioni della licenza pubblica generica GNU per la copia, la "
 "distribuzione e la modifica"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:205
 msgid "Galician"
 msgstr "Galiziano"
 
@@ -633,16 +634,16 @@ msgstr "Galiziano"
 msgid "General game control"
 msgstr "Controlli generali di gioco"
 
-#: ../../txts/developers:209
+#: ../../txts/developers:210
 msgid "German"
 msgstr "Tedesco"
 
-#: ../../txts/developers:77
+#: ../../txts/developers:78
 msgid "Graphicians"
 msgstr "Grafici"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:339
+#: ../../txts/developers:340
 msgid "Graphics"
 msgstr "Grafica"
 
@@ -650,7 +651,7 @@ msgstr "Grafica"
 msgid "H        Toggles main menu"
 msgstr "H        Mostra/Nascondi il menu principale"
 
-#: ../../txts/developers:221
+#: ../../txts/developers:222
 msgid "Hebrew"
 msgstr "Ebraico"
 
@@ -675,11 +676,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home        Centra la mappa principale sulla posizione iniziale"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:332
+#: ../../txts/developers:333
 msgid "Homepage"
 msgstr "Pagina iniziale"
 
-#: ../../txts/developers:304
+#: ../../txts/developers:305
 msgid "Homepage Coders"
 msgstr "Pagina principale degli sviluppatori"
 
@@ -687,7 +688,7 @@ msgstr "Pagina principale degli sviluppatori"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Appendice: come applicare questi termini a nuovi programmi"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:227
 msgid "Hungarian"
 msgstr "Ungherese"
 
@@ -802,7 +803,7 @@ msgstr ""
 "sistemi, e l'acquirente non può imporre la scelta del sistema di "
 "distribuzione."
 
-#: ../../txts/developers:231
+#: ../../txts/developers:232
 msgid "Italian"
 msgstr "Italiano"
 
@@ -835,7 +836,7 @@ msgstr ""
 "Come per gli oggetti naturali (bobs), puoi anche selezionare molti animali o "
 "elementi dello sfondo con CTRL + click con il mouse."
 
-#: ../../txts/developers:270
+#: ../../txts/developers:271
 msgid "Linux Distributions"
 msgstr "Distribuzioni Linux"
 
@@ -857,7 +858,7 @@ msgstr ""
 "per accedere alla finestra dei messaggi, poi usa 'G' per spostarti nella "
 "posizione ed il tasto CANC per archiviare i messaggi"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:130
 msgid "Maps and Missions"
 msgstr "Mappe e Missioni"
 
@@ -865,7 +866,7 @@ msgstr "Mappe e Missioni"
 msgid "Miners will only work if supplied with food."
 msgstr "I minatori lavoreranno soltanto se viene fornito cibo."
 
-#: ../../txts/developers:107
+#: ../../txts/developers:108
 msgid "Musicians"
 msgstr "Musicisti"
 
@@ -873,7 +874,7 @@ msgstr "Musicisti"
 msgid "N               Toggle messages ('news')"
 msgstr "N Toggle messages ('news')"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:167
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -885,7 +886,7 @@ msgstr ""
 msgid "No warranty"
 msgstr "NON C'È GARANZIA"
 
-#: ../../txts/developers:292
+#: ../../txts/developers:293
 msgid "Non Unix Distributions"
 msgstr "Distribuzioni Non Unix"
 
@@ -927,11 +928,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Aiuto in linea"
 
-#: ../../txts/developers:357
+#: ../../txts/developers:358
 msgid "Other"
 msgstr "Altro"
 
-#: ../../txts/developers:281
+#: ../../txts/developers:282
 msgid "Other Unix Distributions"
 msgstr "Altre Distribuzioni Unix"
 
@@ -959,7 +960,7 @@ msgstr "PAGEUP         Aumenta la Velocità di Gioco"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr "PAUSA mette il gioco in pausa (solo per partite locali)"
 
-#: ../../txts/developers:266
+#: ../../txts/developers:267
 msgid "Packagers"
 msgstr "Pacchettizzatori"
 
@@ -972,7 +973,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr "Si prega di fornire sufficienti informazioni. Diteci:"
 
-#: ../../txts/developers:236
+#: ../../txts/developers:237
 msgid "Polish"
 msgstr "Polacco"
 
@@ -986,6 +987,14 @@ msgid ""
 msgstr ""
 "Premi Ctrl+(0-9) per memorizzare posizioni importanti, poi premi 0-9 per "
 "richiamarle."
+
+#: ../../txts/tips/general_game.tip:46
+msgid ""
+"Pressing and holding ALT GR key lets you drag the window below the mouse "
+"pointer."
+msgstr ""
+"Premendo e tenendo premuto il tasto ALT GR ti permette di trascinare la "
+"finestra sotto il puntatore."
 
 #: ../../txts/README:1
 msgid "README"
@@ -1021,7 +1030,7 @@ msgstr "Replay</p>"
 msgid "Reporting Bugs"
 msgstr "Segnalazione Bug"
 
-#: ../../txts/developers:244
+#: ../../txts/developers:245
 msgid "Russian"
 msgstr "Russo"
 
@@ -1049,7 +1058,7 @@ msgstr ""
 "Il tasto SPAZIO si comporta come nel gioco normale: attiva o disattiva "
 "l'aiuto alle costruzioni."
 
-#: ../../txts/developers:167
+#: ../../txts/developers:168
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -1057,7 +1066,7 @@ msgstr ""
 "Visita https://translations.launchpad.net/widelands per una lista delle "
 "persone che hanno aiutato a tradurre Widelands tramite launchpad.net."
 
-#: ../../txts/developers:249
+#: ../../txts/developers:250
 msgid "Slovak"
 msgstr "Slovacco"
 
@@ -1069,19 +1078,18 @@ msgid ""
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
 "Alcune costruzioni, come le fattorie, hanno un'area di lavoro molto piccola. "
-"Se la costruzione è circondata da alberi o strade, la produzione verrà "
-"fermata."
+"Se la costruzione è circondata da alberi o strade, la produzione si fermerà."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:345
+#: ../../txts/developers:346
 msgid "Sound"
 msgstr "Suono"
 
-#: ../../txts/developers:119
+#: ../../txts/developers:120
 msgid "Sound Effects"
 msgstr "Effetti sonori"
 
-#: ../../txts/developers:254
+#: ../../txts/developers:255
 msgid "Spanish"
 msgstr "Spagnolo"
 
@@ -1097,7 +1105,7 @@ msgstr ""
 msgid "Status"
 msgstr "Stato"
 
-#: ../../txts/developers:259
+#: ../../txts/developers:260
 msgid "Swedish"
 msgstr "Svedese"
 
@@ -1111,7 +1119,7 @@ msgid ""
 "construction site."
 msgstr ""
 "Il processo di costruzione inizierà soltanto se esiste una strada per "
-"raggiungere il luogo della costruzione."
+"raggiungere il cantiere."
 
 #: ../../txts/COPYING:100
 msgid ""
@@ -1359,11 +1367,11 @@ msgstr ""
 "della finestra altrimenti con il tasto centrale del mouse o con il tasto "
 "sinistro del mouse tenendo premuto CTRL."
 
-#: ../../txts/developers:350
+#: ../../txts/developers:351
 msgid "Translation"
 msgstr "Traduzione"
 
-#: ../../txts/developers:163
+#: ../../txts/developers:164
 msgid "Translators"
 msgstr "Traduttori"
 
@@ -1379,8 +1387,8 @@ msgid ""
 "Use priority buttons in building window to adjust delivery of a specific "
 "ware."
 msgstr ""
-"Usa i bottoni per la priorità nella finestra delle costruzioni per regolare "
-"la fornitura di una specifica merce."
+"Usa i bottoni per la priorità nella finestra dell'edificio per regolare la "
+"fornitura di una specifica merce."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""

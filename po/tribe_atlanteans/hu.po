@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2010-08-30 23:37+0000\n"
-"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"PO-Revision-Date: 2012-03-07 12:59+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:44+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-03-08 04:40+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -208,7 +208,7 @@ msgstr "Szén"
 msgid "Coal Mine"
 msgstr "Szénbánya"
 
-#: ../../tribes/atlanteans/shipyard/conf:18
+#: ../../tribes/atlanteans/shipyard/conf:21
 msgid "Constructing ship"
 msgstr ""
 
@@ -256,7 +256,7 @@ msgstr "Kristály bánya"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr ""
+msgstr "Nyers gránit darabokat vág ki a kövekből."
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -288,15 +288,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:208
 msgid "Dungeon"
-msgstr ""
+msgstr "Kazamata"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Farm"
-msgstr ""
+msgstr "Tanya"
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Farmer"
-msgstr ""
+msgstr "Földműves"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
@@ -422,7 +422,7 @@ msgstr "Főhadiszállás"
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Közepes főhadiszállás"
 
 #: ../../tribes/atlanteans/conf:77
 msgid "Heavy Double Trident"
@@ -492,7 +492,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:209
 msgid "Labyrinth"
-msgstr ""
+msgstr "Labirintus"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Light trident"
@@ -555,7 +555,7 @@ msgstr "Bányász"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
 msgid "Not enough space"
-msgstr ""
+msgstr "Nincs elég hely"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Outpost"
@@ -619,7 +619,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Sütőtálcát készít"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
@@ -1304,7 +1304,7 @@ msgstr "Favágókunyhó"
 #: ../../tribes/atlanteans/quarry/conf:16
 #: ../../tribes/atlanteans/sawmill/conf:19
 #: ../../tribes/atlanteans/scouts_house/conf:18
-#: ../../tribes/atlanteans/shipyard/conf:19
+#: ../../tribes/atlanteans/shipyard/conf:22
 #: ../../tribes/atlanteans/smelting_works/conf:25
 #: ../../tribes/atlanteans/smokery/conf:27
 #: ../../tribes/atlanteans/spiderfarm/conf:17

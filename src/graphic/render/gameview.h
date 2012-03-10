@@ -25,7 +25,7 @@ namespace Widelands {
 	struct Editor_Game_Base;
 };
 
-class Vertex;
+struct Vertex;
 struct Texture;
 
 #include "graphic/rendertarget.h"

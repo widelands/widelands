@@ -73,17 +73,7 @@ RealFSImpl::RealFSImpl(std::string const & Directory)
 : m_directory(Directory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
-#ifdef WIN32
-	m_root = Directory;
-	// Replace all slashes with backslashes for FileSystem::pathIsAbsolute
-	// and FileSystem::FS_CanonicalizeName to work properly.
-	for (uint32_t j = 0; j < m_root.size(); ++j) {
-		if (m_root[j] == '/')
-			m_root[j] = '\\';
-	}
-#else
 	m_root = FS_CanonicalizeName(Directory);
-#endif
 }
 
 
@@ -143,7 +133,7 @@ int32_t RealFSImpl::FindFiles
 	if (not pattern.compare(0, 3, "../")) {
 		// Workaround: If pattern is a relative we need to fix the path
 		std::string m_root_save(m_root); // save orginal m_root
-		m_root = path;
+		m_root = FS_CanonicalizeName(path);
 		realpath = FS_CanonicalizeName(pattern);
 		realpath = realpath.substr(0, realpath.rfind('\\'));
 		m_root = m_root_save; // reset m_root

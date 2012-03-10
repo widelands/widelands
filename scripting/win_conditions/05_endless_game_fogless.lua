@@ -9,8 +9,9 @@ set_textdomain("win_conditions")
 
 use("aux", "win_condition_texts")
 
-local wc_name = _ "Endless Game (no fog)"
-local wc_desc = _ "This is an endless game without rules. Fog of war is disabled."
+local wc_name    = _ "Endless Game (no fog)"
+local wc_desc    = _ "This is an endless game without rules. Fog of war is disabled."
+local wc_version = 1
 return {
 	name = wc_name,
 	description = wc_desc,
@@ -38,8 +39,7 @@ return {
 		-- from the list, send him a defeated message and give him full vision
 		repeat
 			sleep(5000)
-			check_player_defeated(plrs, lost_game.title,
-				lost_game.body)
+			check_player_defeated(plrs, lost_game.title, lost_game.body, wc_name, wc_version)
 		until count_factions(plrs) < 1
 
 	end

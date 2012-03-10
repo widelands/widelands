@@ -1403,8 +1403,7 @@ void NetHost::setMap
 	d->settings.mapfilename = mapfilename;
 	d->settings.savegame = savegame;
 
-	std::vector<PlayerSettings>::size_type oldplayers =
-		d->settings.players.size();
+	std::vector<PlayerSettings>::size_type oldplayers = d->settings.players.size();
 
 	SendPacket s;
 
@@ -2876,6 +2875,9 @@ void NetHost::report_result(uint8_t player, int32_t points, bool win, std::strin
 			user.winner               = win;
 			user.points               = points;
 			user.win_condition_string = extra;
+
+		if (!win)
+			sendSystemMessageCode("PLAYER_DEFEATED", user.name);
 		}
 	}
 

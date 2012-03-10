@@ -1,5 +1,5 @@
 -- =======================================================================
---                          Various mission threads                         
+--                          Various mission threads
 -- =======================================================================
 
 -- Mountain and frontier fields
@@ -52,12 +52,12 @@ function initial_message_and_small_food_economy()
    remember_cattlefarm()
 end
 
-function foottracks() 
+function foottracks()
    -- Hunter build and some time passed or expanded east
    local game = wl.Game()
    while true do
-      if (game.time > 240000 and #p1:get_buildings("hunters_hut") > 0)
-         or p1:seen_field(wl.Game().map:get_field(65, 28)) 
+      if (game.time > 900000 and #p1:get_buildings("hunters_hut") > 0)
+         or p1:seen_field(wl.Game().map:get_field(65, 28))
       then break end
       sleep(4239)
    end
@@ -68,7 +68,7 @@ function foottracks()
       wl.Game().map:get_field(69, 18):region(2)
    )
    p1:reveal_fields(fields)
-   
+
    local pts = scroll_smoothly_to(wl.Game().map:get_field(67,19))
 
    send_msg(order_msg_2_build_a_donjon)
@@ -86,12 +86,12 @@ function foottracks()
    o.done = true
    send_msg(order_msg_3_explore_further)
    o = add_obj(obj_explore_further)
-   
+
    p1:allow_buildings{"sentry", "barrier"}
 
    -- Wait till we see the mountain and at least one frontier
    while true do
-      if p1:seen_field(mountain) and 
+      if p1:seen_field(mountain) and
             (p1:seen_field(fr1) or p1:seen_field(fr2) or p1:seen_field(fr3))
       then
          break
@@ -115,8 +115,8 @@ function mining_and_trainingsites()
    local pts = scroll_smoothly_to(wl.Game().map:get_field(82,20))
 
    send_msg(order_msg_4_build_mining_economy)
-   local o = add_obj(obj_build_mining_economy) 
-   
+   local o = add_obj(obj_build_mining_economy)
+
    p1:allow_buildings{
       "coalmine",
       "oremine",
@@ -126,15 +126,15 @@ function mining_and_trainingsites()
       "metalworks",
       "burners_house",
    }
-   
+
    timed_scroll(array_reverse(pts), 10)
    sleep(500)
 
    while true do
       local h = p1:get_buildings{"coalmine","burners_house", "oremine",
          "tavern", "smelting_works", "metalworks"}
-      
-      if (#h.coalmine + #h.burners_house > 0) and 
+
+      if (#h.coalmine + #h.burners_house > 0) and
          #h.oremine > 0 and #h.tavern > 0 and #h.smelting_works > 0 and
          #h.metalworks > 0
       then
@@ -264,10 +264,10 @@ function renegade_fortresses()
       )
    do sleep(6834) end
 
-   prefilled_buildings(p1, 
-      {"barrier", 118, 100, soldiers = 
+   prefilled_buildings(p1,
+      {"barrier", 118, 100, soldiers =
          {[{0,0,0,0}]= 1, [{1,1,0,1}] = 1, [{0,1,0,0}] = 1}
-      }, 
+      },
       {"citadel", 117, 97, soldiers = {
          [{0,0,0,0}]=3, [{1,1,0,0}]=1, [{0,0,0,1}]=2,
          [{0,1,0,1}]=1, [{1,1,0,1}]=1, [{2,1,0,2}]=1,
@@ -278,13 +278,13 @@ function renegade_fortresses()
    -- Some something of the enemy land
    p1:reveal_fields(map:get_field(129,97):region(12))
 
-   local pts = scroll_smoothly_to(map:get_field(117,92))
+   local pts = scroll_smoothly_to(map:get_field(120,92))
 
    send_msg(order_msg_7_renegade_fortification)
    send_msg(order_msg_7_free_althunran)
    local o = add_obj(obj_military_assault_on_althunran)
 
-   timed_scroll(array_reverse(pts), 10)
+   timed_scroll(array_reverse(pts))
    sleep(500)
 
    while not (p3.defeated and p4.defeated) do

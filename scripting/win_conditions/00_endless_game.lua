@@ -24,8 +24,7 @@ return {
 		-- from the list, send him a defeated message and give him full vision
 		repeat
 			sleep(5000)
-			check_player_defeated(plrs, lost_game.title,
-				lost_game.body, wc_name, wc_version)
+			check_player_defeated(plrs, lost_game.title, lost_game.body, wc_name, wc_version)
 		until count_factions(plrs) < 1
 
 	end

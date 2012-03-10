@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,8 +37,7 @@ Item_Ware_Descr::Item_Ware_Descr
 	m_icon(g_gr ? g_gr->get_picture(PicMod_UI, "pics/but0.png") : PictureID()) // because of dedicated
 {
 	m_default_target_quantity =
-		global_s.get_positive
-			("default_target_quantity", std::numeric_limits<uint32_t>::max());
+		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
 
 	add_animation("idle", g_anim.get(directory, prof.get_safe_section("idle")));
 

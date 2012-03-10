@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -898,6 +898,50 @@ throw ()
 		field.terrains = f.field->get_terrains();
 		field.roads    = f.field->get_roads   ();
 		field.owner    = f.field->get_owned_by();
+
+		// Check if this node is part of a border
+		int32_t const mapwidth = map.get_width();
+		// right neighbour
+		FCoords        r = map.r_n(f);
+		Player_Number  r_owner_number = r.field->get_owned_by();
+		Map_Index      r_index        = map.get_index(r, mapwidth);
+		Vision         r_vision       = vision(r_index);
+		// top right neighbour
+		FCoords       tr = map.tr_n(f);
+		Player_Number tr_owner_number = tr.field->get_owned_by();
+		//Map_Index     tr_index        = map.get_index(tr, mapwidth);
+		//Vision        tr_vision       = vision(tr_index);
+		// bottom right neighbour
+		FCoords       br = map.br_n(f);
+		Player_Number br_owner_number = br.field->get_owned_by();
+		Map_Index     br_index        = map.get_index(br, mapwidth);
+		Vision        br_vision       = vision(br_index);
+		// bottom left neighbour
+		FCoords       bl = map.bl_n(f);
+		Player_Number bl_owner_number = bl.field->get_owned_by();
+		Map_Index     bl_index        = map.get_index(bl, mapwidth);
+		Vision        bl_vision       = vision(bl_index);
+		// left neighbour
+		FCoords        l = map.l_n(f);
+		Player_Number  l_owner_number = l.field->get_owned_by();
+		//Map_Index      l_index        = map.get_index(l, mapwidth);
+		//Vision         l_vision       = vision(l_index);
+
+
+		field.border    = f.field->is_border();
+		field.border_r  =
+			((1 |  r_vision) and (r_owner_number  == field.owner)
+			and
+			((tr_owner_number == field.owner) xor (br_owner_number == field.owner)));
+		field.border_br =
+			((1 | bl_vision) and (bl_owner_number == field.owner)
+			and
+			((l_owner_number  == field.owner) xor (br_owner_number == field.owner)));
+		field.border_bl =
+			((1 | br_vision) and (br_owner_number == field.owner)
+			and
+			((r_owner_number  == field.owner) xor (bl_owner_number == field.owner)));
+
 		{ //  map_object_descr[TCoords::None]
 
 			const Map_Object_Descr * map_object_descr;

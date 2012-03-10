@@ -45,6 +45,8 @@
 #include "log.h"
 #include <windows.h>
 #include <io.h>
+#include <direct.h>
+#define PATH_MAX MAX_PATH
 #else
 #include <glob.h>
 #include <sys/types.h>
@@ -63,11 +65,10 @@
 
 FileSystem::FileSystem()
 {
+	m_root = "";
 #ifdef WIN32
-	m_root = getWorkingDirectory();
 	m_filesep = '\\';
 #else
-	m_root = "/";
 	m_filesep = '/';
 #endif
 }
@@ -75,11 +76,12 @@ FileSystem::FileSystem()
 
 /**
  * \param path A file or directory name
- * \return True if ref path is absolute, false otherwise
+ * \return True if ref path is absolute and within this FileSystem, false otherwise
  */
 bool FileSystem::pathIsAbsolute(std::string const & path) const {
 	std::string::size_type const path_size = path  .size();
 	std::string::size_type const root_size = m_root.size();
+
 	if (path_size < root_size)
 		return false;
 
@@ -89,6 +91,12 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 	if (path.compare(0, m_root.size(), m_root))
 		return false;
 
+#ifdef WIN32
+	if (path.size() >= 3 && path[1] == ':' && path[2] == '\\') //"C:\"
+	{
+		return true;
+	}
+#endif
 	assert(root_size < path_size); //  Otherwise an invalid read happens below.
 	if (path[root_size] != m_filesep)
 		return false;
@@ -135,20 +143,12 @@ std::string FileSystem::fixCrossFile(std::string const & path) const {
  * \return The process' current working directory
  */
 std::string FileSystem::getWorkingDirectory() const {
-#ifndef WIN32
 	char cwd[PATH_MAX + 1];
 	char * const result = getcwd(cwd, PATH_MAX);
 	if (! result)
 		throw File_error("FileSystem::getWorkingDirectory()", "widelands", "can not run getcwd");
 
 	return std::string(cwd);
-#else
-	char filename[_MAX_PATH + 1];
-	GetModuleFileName(0, filename, _MAX_PATH);
-	std::string exedir(filename);
-	exedir = exedir.substr(0, exedir.rfind('\\'));
-	return exedir;
-#endif
 }
 
 
@@ -276,8 +276,16 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 			}
 			//remove double dot and the preceding component (if any)
 			else if (*str == '.' && *(str + 1) == '\0') {
-				if (i != components.begin())
+				if (i != components.begin()) {
+#ifdef WIN32
+					// On windows don't remove driveletter in this error condition
+					if (--i != components.begin())
+						i = components.erase(i);
+					else ++i;
+#else
 					i = components.erase(--i);
+#endif
+				}
 				i = components.erase(i);
 				continue;
 			}
@@ -299,11 +307,9 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 		canonpath += '\\';
 	}
 
-	canonpath.erase(canonpath.end() - 1); //remove trailing slash
+	//remove trailing slash
+	if (canonpath.size() > 1) canonpath.erase(canonpath.end() - 1);
 #endif
-
-	//debug info
-	//printf("canonpath = %s\n", canonpath.c_str());
 
 	return canonpath;
 }

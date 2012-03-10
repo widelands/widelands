@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -181,7 +181,16 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 
 		m_ok.set_enabled(true);
 		m_delete.set_enabled(true);
-		m_tamapname.set_text(gpdp.get_mapname());
+
+		//Try to translate the map name.
+		//This will work on every official map as expected
+		//and 'fail silently' (not find a translation) for already translated campaign map names.
+		//It will also translate 'false-positively' on any user-made map which shares a name with
+		//the official maps, but this should not be a problem to worry about.
+		{
+			i18n::Textdomain td("maps");
+			m_tamapname.set_text(_(gpdp.get_mapname()));
+		}
 
 		char buf[200];
 		uint32_t gametime = gpdp.get_gametime();

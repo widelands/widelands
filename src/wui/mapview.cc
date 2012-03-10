@@ -165,6 +165,7 @@ bool Map_View::handle_mousepress
 	if (btn == SDL_BUTTON_LEFT)
 #endif
 	{
+		stop_dragging();
 		track_sel(Point(x, y));
 
 		fieldclicked();

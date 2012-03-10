@@ -87,7 +87,7 @@ public:
 	/// configuration, set the default value 1.
 	void set_has_demand_check() {
 		if (m_default_target_quantity == std::numeric_limits<uint32_t>::max())
-			m_default_target_quantity = 1;
+			m_default_target_quantity = 0;
 	}
 
 	PictureID icon() const throw () {return m_icon;}

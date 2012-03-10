@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -169,20 +169,29 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			Widelands::Map_Loader * const m_ml =
-				map.get_correct_loader(name.c_str());
+			Widelands::Map_Loader * const m_ml = map.get_correct_loader(name.c_str());
 			m_ml->preload_map(true); //  This has worked before, no problem.
 			delete m_ml;
 		}
 
-		m_name  .set_text(map.get_name       ());
-		m_author.set_text(map.get_author     ());
-		m_descr .set_text(map.get_description());
-		m_world .set_text(map.get_world_name ());
+		// get translated worldsname
+		std::string world(map.get_world_name());
+		std::string worldpath("worlds/" + world);
+		Profile prof((worldpath + "/conf").c_str(), 0, "world_" + world);
+		Section & global = prof.get_safe_section("world");
+		world = global.get_safe_string("name");
+
+		// Translate the map data
+		i18n::Textdomain td("maps");
+		m_name  .set_text(_(map.get_name()));
+		m_author.set_text(map.get_author());
+		m_descr .set_text
+			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
+		m_world .set_text(world);
 
 		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());
-		m_nr_players .set_text(buf);
+		m_nr_players.set_text(buf);
 
 		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
 		m_size      .set_text(buf);

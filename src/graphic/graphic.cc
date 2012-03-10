@@ -187,7 +187,7 @@ Graphic::Graphic
 		log("Graphics: OpenGL: Number of stencil buffer bits: %u\n", glInt);
 		m_caps.gl.stencil_buffer_bits = glInt;
 
-		glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &glInt);
+		glGetIntegerv(GL_MAX_TEXTURE_UNITS, &glInt);
 		log("Graphics: OpenGL: Maximum number of textures for multitextures: %u\n", glInt);
 		m_caps.gl.max_tex_combined = glInt;
 
@@ -212,8 +212,8 @@ Graphic::Graphic
 			 ((strstr(extensions, "GL_ARB_multitexture") != 0) and
 			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0))
 			and (m_caps.gl.max_tex_combined >= 6);
-		log("Graphics: OpenGL: Multitextures are ");
-		log(m_caps.gl.multitexture ? "supported\n" : "not supported\n");
+		log("Graphics: OpenGL: Multitexture capabilities ");
+		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
 		m_caps.offscreen_rendering = false;
 

@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 10:12+0100\n"
-"PO-Revision-Date: 2011-04-27 08:45+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"POT-Creation-Date: 2012-02-27 22:36+0100\n"
+"PO-Revision-Date: 2012-02-18 23:06+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:47+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:32+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -105,15 +105,15 @@ msgstr "Velký"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:97
-#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "Yes"
 msgstr "Ano"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:104
-#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "No"
 msgstr "Ne"
 
@@ -469,11 +469,11 @@ msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command check_map"
-msgstr ""
+msgstr "Dokumentace pro programový příkaz check_map"
 
 #: ../../src/writeHTML.cc:1155
 msgid "check_map"
-msgstr ""
+msgstr "check_map"
 
 #: ../../src/writeHTML.cc:1160
 #, c-format
@@ -550,11 +550,11 @@ msgstr "Dokumentace pro programový příkaz přehrátZvuk"
 
 #: ../../src/writeHTML.cc:1406
 msgid "Documentation for program command construct"
-msgstr ""
+msgstr "Dokumentace pro programový příkaz construct"
 
 #: ../../src/writeHTML.cc:1408
 msgid "construct"
-msgstr ""
+msgstr "construct"
 
 #: ../../src/writeHTML.cc:1445 ../../src/writeHTML.cc:1451
 msgid "Ware types"
@@ -572,11 +572,11 @@ msgstr "Bluebyte Settlers II Map. Komentář není definován!"
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr "CHYBA: Připojení k metaserveru se nezdařilo (viz. důvod nahoře)!\n"
 
-#: ../../src/wlapplication.cc:899 ../../src/wlapplication.cc:907
+#: ../../src/wlapplication.cc:903 ../../src/wlapplication.cc:911
 msgid "could not find the path of the main executable"
 msgstr "Nelze nalézt cestu k hlavnímu příkazu"
 
-#: ../../src/wlapplication.cc:1024
+#: ../../src/wlapplication.cc:1028
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
@@ -584,7 +584,7 @@ msgstr ""
 "Po 5 vteřinách vypnut zvuk. Tyto problémy shazují widelands. Aktualizujte "
 "váš zvukový ovladač a/nebo SDL pro vyřešení tohoto problému.\n"
 
-#: ../../src/wlapplication.cc:1161
+#: ../../src/wlapplication.cc:1165
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -594,15 +594,15 @@ msgstr ""
 "Omlouváme se, na platformě WIN32 není povoleno ladění ve dvou instancích.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1164
+#: ../../src/wlapplication.cc:1168
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double je zakázáno. Toto není ladicí build!"
 
-#: ../../src/wlapplication.cc:1285
+#: ../../src/wlapplication.cc:1289
 msgid "This is Widelands-"
 msgstr "Toto jsou Widelands-"
 
-#: ../../src/wlapplication.cc:1287
+#: ../../src/wlapplication.cc:1291
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -610,7 +610,7 @@ msgstr ""
 "Použití: widelands <přepínač0>=<hodnota0> ... <přepínačN>=<hodnotaN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1288
+#: ../../src/wlapplication.cc:1292
 msgid ""
 "Options:\n"
 "\n"
@@ -618,7 +618,7 @@ msgstr ""
 "Volby:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1292
+#: ../../src/wlapplication.cc:1296
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -638,11 +638,11 @@ msgstr ""
 "--homedir=DIRNAME Use specified directory for widelands config\n"
 "files, savegames and replays\n"
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1304
 msgid "                      Default is ~/.widelands\n"
 msgstr "                      Default is ~/.widelands\n"
 
-#: ../../src/wlapplication.cc:1303
+#: ../../src/wlapplication.cc:1307
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback\n"
@@ -674,7 +674,7 @@ msgstr ""
 "Remove replays after this amount of days.\n"
 "If this is 0 replays are not deleted.\n"
 
-#: ../../src/wlapplication.cc:1318
+#: ../../src/wlapplication.cc:1322
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -704,12 +704,12 @@ msgstr ""
 "                      scénáře.\n"
 " --loadgame=SOUBOR    Přímo nahraje uloženou hru SOUBOR.\n"
 
-#: ../../src/wlapplication.cc:1331
+#: ../../src/wlapplication.cc:1335
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1334
+#: ../../src/wlapplication.cc:1338
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -730,17 +730,13 @@ msgid ""
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1354
+#: ../../src/wlapplication.cc:1358
 msgid ""
 " --opengl=[0|1]\n"
-"                      Enables opengl rendering\n"
-"                      *EXPERIMENTAL*\n"
+"                      Enables OpenGL rendering\n"
 msgstr ""
-" --opengl=[0|1]\n"
-"Zapnout OpenGL vykreslování\n"
-"*POKUSNÉ*\n"
 
-#: ../../src/wlapplication.cc:1360
+#: ../../src/wlapplication.cc:1363
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -780,7 +776,7 @@ msgstr ""
 "                      pokud se okno a panel překrývají.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1384
+#: ../../src/wlapplication.cc:1387
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -790,15 +786,15 @@ msgstr ""
 "                      sítě)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1388
+#: ../../src/wlapplication.cc:1391
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr " --verbose povolí verbose ladící zprávy\n"
 
-#: ../../src/wlapplication.cc:1389
+#: ../../src/wlapplication.cc:1392
 msgid " --help               Show this help\n"
 msgstr " --help               Zobrazí tuto nápovědu\n"
 
-#: ../../src/wlapplication.cc:1393
+#: ../../src/wlapplication.cc:1396
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -813,19 +809,19 @@ msgstr ""
 "Doufáme, že si užívate naší hry!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1542
+#: ../../src/wlapplication.cc:1545
 msgid "Warning: "
 msgstr "Upozornění: "
 
-#: ../../src/wlapplication.cc:1546
+#: ../../src/wlapplication.cc:1549
 msgid "Game data error"
 msgstr "Chyba herních dat"
 
-#: ../../src/wlapplication.cc:1551
+#: ../../src/wlapplication.cc:1554
 msgid "Unexpected error during the game"
 msgstr "Neočekávaná chyba v průběhu hry"
 
-#: ../../src/wlapplication.cc:1555
+#: ../../src/wlapplication.cc:1558
 msgid ""
 "\n"
 "\n"
@@ -839,7 +835,7 @@ msgstr ""
 "Další podrobnosti najdeš ve standardním výstupu (stdout.txt na Windows). "
 "Používáš verzi "
 
-#: ../../src/wlapplication.cc:1561
+#: ../../src/wlapplication.cc:1564
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -851,24 +847,24 @@ msgstr ""
 "Widelands se pokouší uložit hru, pokud při hře dojde k chybě. Často - ale "
 "bohužel ne vždy - je možné uloženou hru nahrát a pokračovat ve hraní.\n"
 
-#: ../../src/wlapplication.cc:1678
+#: ../../src/wlapplication.cc:1681
 msgid "The address of the game server is invalid"
 msgstr "Adresa herního serveru není platná"
 
-#: ../../src/wlapplication.cc:1785 ../../src/network/nethost.cc:1996
+#: ../../src/wlapplication.cc:1788 ../../src/network/nethost.cc:1996
 msgid "Player"
 msgstr "Hráč"
 
-#: ../../src/wlapplication.cc:1974 ../../src/network/netclient.cc:198
+#: ../../src/wlapplication.cc:1977 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:806
 msgid "Preparing game"
 msgstr "Připravuji hru"
 
-#: ../../src/wlapplication.cc:2082
+#: ../../src/wlapplication.cc:2085
 msgid "End of replay"
 msgstr "Konec záznamu"
 
-#: ../../src/wlapplication.cc:2084
+#: ../../src/wlapplication.cc:2087
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -876,44 +872,52 @@ msgstr ""
 "Byl dosažen konec záznamu a hra byla pozastavena. Pokud chcete, můžete hru "
 "odpauzovat a pokračovat ve sledování."
 
-#: ../../src/wlapplication.cc:2167 ../../src/logic/game.cc:385
+#: ../../src/wlapplication.cc:2170 ../../src/logic/game.cc:385
 #: ../../src/logic/game.cc:425
 msgid "Loading..."
 msgstr "Nahrávání..."
 
-#: ../../src/editor/editorinteractive.cc:61
+#: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
 msgstr "Nabídka"
 
-#: ../../src/editor/editorinteractive.cc:64
+#: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
 msgstr "Nástroje"
 
-#: ../../src/editor/editorinteractive.cc:68
+#: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
 msgstr "Velikost nástroje"
 
-#: ../../src/editor/editorinteractive.cc:71
+#: ../../src/editor/editorinteractive.cc:72
 #: ../../src/wui/interactive_player.cc:120
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Minimap"
 msgstr "Minimapa"
 
-#: ../../src/editor/editorinteractive.cc:74
+#: ../../src/editor/editorinteractive.cc:75
 #: ../../src/wui/interactive_player.cc:123
 msgid "Buildhelp"
 msgstr "Nápověda k výstavbě"
 
-#: ../../src/editor/editorinteractive.cc:77
+#: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
 msgstr "Hráči"
 
-#: ../../src/editor/editorinteractive.cc:156
+#: ../../src/editor/editorinteractive.cc:81
+msgid "Undo"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:84
+msgid "Redo"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
 msgstr "Nepodporovaný formát"
 
-#: ../../src/editor/editorinteractive.cc:158
+#: ../../src/editor/editorinteractive.cc:173
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -921,36 +925,36 @@ msgid ""
 msgstr ""
 "Widelands nemohly nahrát soubor \"%s\". Formát souboru není kompatibilní."
 
-#: ../../src/editor/editorinteractive.cc:176
-#: ../../src/editor/editorinteractive.cc:580
+#: ../../src/editor/editorinteractive.cc:192
+#: ../../src/editor/editorinteractive.cc:601
 #: ../../src/logic/editor_game_base.cc:284
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Nahrávání kmene: %s"
 
-#: ../../src/editor/editorinteractive.cc:182
+#: ../../src/editor/editorinteractive.cc:198
 msgid "Creating players"
 msgstr "Vytvoř hráče"
 
-#: ../../src/editor/editorinteractive.cc:189
+#: ../../src/editor/editorinteractive.cc:205
 #: ../../src/logic/editor_game_base.cc:277
 msgid "Loading world data"
 msgstr "Nahrávání dat světa"
 
-#: ../../src/editor/editorinteractive.cc:192
-#: ../../src/editor/editorinteractive.cc:584
+#: ../../src/editor/editorinteractive.cc:208
+#: ../../src/editor/editorinteractive.cc:605
 msgid "Loading graphics..."
 msgstr "Nahrávání grafiky..."
 
-#: ../../src/editor/editorinteractive.cc:240
+#: ../../src/editor/editorinteractive.cc:254
 msgid "Map unsaved"
 msgstr "Mapa neuložena"
 
-#: ../../src/editor/editorinteractive.cc:241
+#: ../../src/editor/editorinteractive.cc:255
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Mapa není uložena, opravdu chceš skončit?"
 
-#: ../../src/editor/editorinteractive.cc:571
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:485
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:183
@@ -958,7 +962,7 @@ msgstr "Mapa není uložena, opravdu chceš skončit?"
 msgid "No Name"
 msgstr "Beze jména"
 
-#: ../../src/editor/editorinteractive.cc:573
+#: ../../src/editor/editorinteractive.cc:594
 #: ../../src/ui_fsmenu/netsetup_lan.cc:194
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
@@ -1077,7 +1081,7 @@ msgstr "Okno ladění"
 msgid "Build roads"
 msgstr "Stavět cesty"
 
-#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:98
+#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr "Sledovat"
 
@@ -1183,21 +1187,26 @@ msgstr "Vyhlásit vítězství"
 msgid "Restart Mission"
 msgstr "Restart mise"
 
+#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/constructionsitewindow.cc:74
+msgid "Building materials"
+msgstr ""
+
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
 msgstr "Volby ekonomiky"
 
 #: ../../src/wui/transport_ui.cc:146 ../../src/wui/transport_ui.cc:242
 msgid "Decrease target"
-msgstr ""
+msgstr "Snížit cíl"
 
 #: ../../src/wui/transport_ui.cc:148 ../../src/wui/transport_ui.cc:244
 msgid "Increase target"
-msgstr ""
+msgstr "Zvýšit cíl"
 
 #: ../../src/wui/transport_ui.cc:151 ../../src/wui/transport_ui.cc:247
 msgid "Reset to default"
-msgstr ""
+msgstr "Obnovit výchozí"
 
 #: ../../src/wui/waresqueuedisplay.cc:173
 msgid "Highest priority"
@@ -1213,11 +1222,11 @@ msgstr "Nejnižší priorita"
 
 #: ../../src/wui/waresqueuedisplay.cc:231
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "Snížit počet zboží, které zde chceš uskladnit"
 
 #: ../../src/wui/waresqueuedisplay.cc:241
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "Zvýšit počet zboží, které zde chceš uskladnit"
 
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
@@ -1293,6 +1302,14 @@ msgstr "Zboží v skladišti"
 msgid "Workers in warehouses"
 msgstr "Dělníci v skladišti"
 
+#: ../../src/wui/soldiercapacitycontrol.cc:67
+msgid "Decrease capacity"
+msgstr ""
+
+#: ../../src/wui/soldiercapacitycontrol.cc:71
+msgid "Increase capacity"
+msgstr ""
+
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
 msgstr "Kapacita"
@@ -1343,7 +1360,7 @@ msgstr "UI: "
 #: ../../src/wui/multiplayersetupgroup.cc:316
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Náhodný"
 
 #: ../../src/wui/multiplayersetupgroup.cc:310
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -1378,7 +1395,7 @@ msgstr "Typ"
 
 #: ../../src/wui/multiplayersetupgroup.cc:445
 msgid "Tribe"
-msgstr ""
+msgstr "Kmen"
 
 #: ../../src/wui/multiplayersetupgroup.cc:453
 #: ../../src/wui/playerdescrgroup.cc:101
@@ -1424,15 +1441,15 @@ msgstr "Při zranění"
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
-msgstr ""
+msgstr "Jít k lodi"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
-msgstr ""
+msgstr "Jít k cíli"
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
@@ -1579,7 +1596,7 @@ msgstr "Zničit"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "Rozebrat"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -1588,6 +1605,10 @@ msgstr "Skrýt pracovní oblast"
 #: ../../src/wui/buildingwindow.cc:260
 msgid "Debug"
 msgstr "Ladění"
+
+#: ../../src/wui/buildingwindow.cc:271
+msgid "Center view on this"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -1669,11 +1690,11 @@ msgstr "Vojáci"
 
 #: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
-msgstr ""
+msgstr "Spotřeba"
 
 #: ../../src/wui/ware_statistics_menu.cc:204
 msgid "Economy Health"
-msgstr ""
+msgstr "Zdraví ekonomiky"
 
 #: ../../src/wui/warehousewindow.cc:132
 msgid "Normal policy"
@@ -1681,23 +1702,23 @@ msgstr "Normální politika"
 
 #: ../../src/wui/warehousewindow.cc:133
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "Přednostně zde uskladnit vybrané zboží"
 
 #: ../../src/wui/warehousewindow.cc:134
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Neskladovat zde vybrané zboží"
 
 #: ../../src/wui/warehousewindow.cc:135
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Vystěhovat odsud označené zboží"
 
 #: ../../src/wui/warehousewindow.cc:212
 msgid "Wares in dock"
-msgstr ""
+msgstr "Zboží v přístavu"
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
-msgstr ""
+msgstr "Pracovníci v přístavu"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
@@ -1736,15 +1757,15 @@ msgstr "Hlasitost zvuku"
 msgid "Exit Replay"
 msgstr "Ukončit přehrávání"
 
-#: ../../src/wui/watchwindow.cc:109
+#: ../../src/wui/watchwindow.cc:111
 msgid "Follow"
 msgstr "Následovat"
 
-#: ../../src/wui/watchwindow.cc:118
+#: ../../src/wui/watchwindow.cc:120
 msgid "Center mainview on this"
 msgstr "Vycentrovat hlavní pohled"
 
-#: ../../src/wui/watchwindow.cc:140 ../../src/ui_fsmenu/fileview.cc:44
+#: ../../src/wui/watchwindow.cc:142 ../../src/ui_fsmenu/fileview.cc:44
 msgid "Close"
 msgstr "Zavřít"
 
@@ -1801,35 +1822,35 @@ msgstr "Smazání souboru"
 msgid "Do you really want to delete the file %s?"
 msgstr "Opravu chcete smazat soubor %s?"
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:277
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/wui/interactive_base.cc:273
+#: ../../src/wui/interactive_base.cc:280
 msgid "PAUSE"
 msgstr "Pauza"
 
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:300
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:305
 msgid "NO GAME CONTROLLER"
 msgstr "ŽÁDNÝ OVLADAČ HRY"
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
@@ -1911,11 +1932,11 @@ msgstr "Geolog objevil zdroje."
 #: ../../src/logic/worker.cc:1835
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Tvoje %s nemohou najít cestu domů a pravděpodobně zemřou."
 
 #: ../../src/logic/worker.cc:1842
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Pracovník se ztratil!"
 
 #: ../../src/logic/worker.cc:3037
 #, c-format
@@ -1990,17 +2011,17 @@ msgid "expected %s but found \"%s\""
 msgstr "očekáváno %s ale nalezeno \"%s\""
 
 #: ../../src/logic/building.cc:524
-#: ../../src/editor/tools/editor_info_tool.cc:61
+#: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "small"
 msgstr "malá"
 
 #: ../../src/logic/building.cc:525
-#: ../../src/editor/tools/editor_info_tool.cc:62
+#: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "medium"
 msgstr "střední"
 
 #: ../../src/logic/building.cc:525
-#: ../../src/editor/tools/editor_info_tool.cc:63
+#: ../../src/editor/tools/editor_info_tool.cc:64
 msgid "big"
 msgstr "velká"
 
@@ -2058,7 +2079,7 @@ msgstr "zbývající čas (%i) < herní čas (%i)"
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:59
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:137
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:207
-#: ../../src/map_io/widelands_map_extradata_data_packet.cc:96
+#: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
 #: ../../src/map_io/widelands_map_object_packet.cc:61
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:85
 #: ../../src/game_io/game_player_economies_data_packet.cc:72
@@ -2663,7 +2684,7 @@ msgstr "vyčkat: %s"
 #: ../../src/logic/production_program.cc:668
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Neznámý parametr \"%s\""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
@@ -2708,7 +2729,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:927
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Vyrobeno %s"
 
 #: ../../src/logic/production_program.cc:1002
 msgid "Recruited "
@@ -2729,13 +2750,14 @@ msgid "No left resources found!"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1209
-msgid "Mine empty"
-msgstr "Důl je vytěžený"
+msgid "Main vein exhausted"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
-"This mines has run empty. You should consider to expand or destruct it."
-msgstr "Tento důl je již prázdný. Zvažte jeho rozšíření nebo zboření."
+"This mines' main vein exhausted. Expect strongly diminished returns on "
+"investment. You should consider to expand, dismantle or destruct it."
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
@@ -2783,12 +2805,12 @@ msgstr[2] "%u(+%u) vojáků"
 #: ../../src/logic/militarysite.cc:219
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "Tvoje %s bylo osídleno tvými vojáky."
 
 #: ../../src/logic/militarysite.cc:574
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Nepřítel porazil tvoje vojáky u %s."
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
@@ -2797,23 +2819,23 @@ msgstr "Vojenská budova ztracena!"
 #: ../../src/logic/militarysite.cc:625
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Tvoji vojáci porazili nepřítele u %s."
 
 #: ../../src/logic/militarysite.cc:630
 msgid "Enemy at site defeated!"
 msgstr "Nepřátelská budova dobyta!"
 
-#: ../../src/logic/militarysite.cc:673
+#: ../../src/logic/militarysite.cc:674
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Tvůj %s narazil na agresora.</p>"
 
-#: ../../src/logic/militarysite.cc:674
+#: ../../src/logic/militarysite.cc:675
 #, c-format
 msgid "Your %s is under attack.</p>"
 msgstr "Nepřítel útočí na tvoje %s.</p>"
 
-#: ../../src/logic/militarysite.cc:682
+#: ../../src/logic/militarysite.cc:683
 msgid "You are under attack"
 msgstr "Nepřítel na tebe útočí"
 
@@ -3197,7 +3219,7 @@ msgstr "data cesty: %s"
 msgid "elemental data: %s"
 msgstr "základní data: %s"
 
-#: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
+#: ../../src/map_io/widelands_map_extradata_data_packet.cc:100
 #, c-format
 msgid "extradata: %s"
 msgstr "extradata: %s"
@@ -3269,11 +3291,11 @@ msgstr "Body"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Game"
-msgstr ""
+msgstr "Hra"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:378
 msgid "Connection timed out"
-msgstr ""
+msgstr "Čas spojení vypršel"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:381
 msgid ""
@@ -3321,7 +3343,7 @@ msgstr "Typ startu"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:104 ../../src/ui_fsmenu/launchMPG.cc:169
 msgid "Type of game"
-msgstr ""
+msgstr "Typ hry"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
@@ -3436,11 +3458,11 @@ msgstr "Vypnuto"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 den"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
@@ -3488,12 +3510,12 @@ msgid "Remove Syncstream dumps on startup"
 msgstr "Odstranit synchronizační výpisy při startu"
 
 #: ../../src/ui_fsmenu/options.cc:471
-msgid "OpenGL rendering *Highly experimental!*"
-msgstr "Renderuji pomocí OpenGl *Pokusné!*"
+msgid "OpenGL rendering"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Zobrazit ve hře chat s průhledným pozadím"
 
 #: ../../src/ui_fsmenu/options.cc:515
 msgid "Pause"
@@ -3613,7 +3635,7 @@ msgstr "Vyberte mapu"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Uložená hra"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
@@ -3637,7 +3659,7 @@ msgstr "Nastavení hry více hráčů"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Klienti"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:216
 msgid "The host has not yet selected a map or saved game."
@@ -3698,7 +3720,7 @@ msgstr "<zavřeno>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:616
 msgid "There was an error!"
-msgstr ""
+msgstr "Nastala chyba!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:616
 msgid "The map file seems to be invalid!"
@@ -3815,7 +3837,7 @@ msgstr "Nahrej mapu jako scénář: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
@@ -3823,35 +3845,35 @@ msgstr "Název mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Zobrazit všechny mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Oficiální mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
-msgstr ""
+msgstr "2 týmy hráčů"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "3 Player Teams"
-msgstr ""
+msgstr "3 týmy hráčů"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "4 Player Teams"
-msgstr ""
+msgstr "4 týmy hráčů"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "Free for all"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "Nevyvážený"
 
 #: ../../src/ui_fsmenu/mapselect.cc:275
 msgid "(directory)"
@@ -3859,13 +3881,15 @@ msgstr "(adresář)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:498 ../../src/ui_fsmenu/mapselect.cc:501
 msgid "unknown"
-msgstr ""
+msgstr "neznámý"
 
 #: ../../src/ui_fsmenu/mapselect.cc:500
 msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Tato mapa není přítomna na vašem systému. Zobrazená data byla poskytnuta "
+"serverem."
 
 #: ../../src/ui_fsmenu/singleplayer.cc:39
 msgid "Single Player Menu"
@@ -3906,7 +3930,7 @@ msgstr "Opravdu chcete smazat "
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "Uložená hra z dedikovaného serveru"
 
 #: ../../src/ui_fsmenu/loadgame.cc:177
 msgid "Unknown gametime"
@@ -4045,7 +4069,7 @@ msgstr "game_class: %s"
 msgid "frame number"
 msgstr "číslo snímku"
 
-#: ../../src/graphic/graphic.cc:1067
+#: ../../src/graphic/graphic.cc:1071
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Nahrávání animací: %d%% dokončeno"
@@ -4249,6 +4273,11 @@ msgstr "Ukončen přesun souboru %s k %s"
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Sending part %s of file %s to %s"
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:162
+#, c-format
+msgid "The player \"%s\" was defeated and became spectator."
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:42
@@ -4489,61 +4518,61 @@ msgstr ""
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:260
+#: ../../src/network/internet_gaming.cc:269
 msgid "Something went wrong: "
 msgstr "Něco se pokazilo: "
 
-#: ../../src/network/internet_gaming.cc:337
+#: ../../src/network/internet_gaming.cc:347
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:344
+#: ../../src/network/internet_gaming.cc:354
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:344
+#: ../../src/network/internet_gaming.cc:354
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:356
+#: ../../src/network/internet_gaming.cc:366
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:369
+#: ../../src/network/internet_gaming.cc:379
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:378
+#: ../../src/network/internet_gaming.cc:388
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:473
+#: ../../src/network/internet_gaming.cc:483
 msgid "ERROR: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:477
+#: ../../src/network/internet_gaming.cc:487
 msgid "Chat message could not be sent. "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:498
+#: ../../src/network/internet_gaming.cc:508
 msgid "Received an unknown command from the metaserver: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:630
+#: ../../src/network/internet_gaming.cc:640
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:642
+#: ../../src/network/internet_gaming.cc:652
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:725
 msgid "<unknown>"
 msgstr ""
 
@@ -4896,11 +4925,11 @@ msgstr ""
 msgid "Height Tools Options"
 msgstr "Volby výškových nástrojů"
 
-#: ../../src/editor/tools/editor_info_tool.cc:43
+#: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
 msgstr "Informace o poli"
 
-#: ../../src/editor/tools/editor_info_tool.cc:55
+#: ../../src/editor/tools/editor_info_tool.cc:56
 #, c-format
 msgid ""
 "1) Node info\n"
@@ -4913,27 +4942,27 @@ msgstr ""
 " Výška: %u\n"
 " Caps: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:65
+#: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " flag"
 msgstr " vlajka"
 
-#: ../../src/editor/tools/editor_info_tool.cc:66
+#: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " mine"
 msgstr " důl"
 
-#: ../../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " port"
 msgstr " přístav"
 
-#: ../../src/editor/tools/editor_info_tool.cc:68
+#: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " walk"
 msgstr " chůze"
 
-#: ../../src/editor/tools/editor_info_tool.cc:69
+#: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " swim"
 msgstr " plavání"
 
-#: ../../src/editor/tools/editor_info_tool.cc:73
+#: ../../src/editor/tools/editor_info_tool.cc:74
 #, c-format
 msgid ""
 "\n"
@@ -4946,7 +4975,7 @@ msgstr ""
 " Má pevnou základnu: %s\n"
 " Má boby: %s\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:79
+#: ../../src/editor/tools/editor_info_tool.cc:80
 msgid ""
 "2) Terrain Info\n"
 " Name: "
@@ -4954,7 +4983,7 @@ msgstr ""
 "2) Informace o terénu\n"
 " Název: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:87
+#: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
 msgid ""
 "\n"
@@ -4963,7 +4992,7 @@ msgstr ""
 "\n"
 " Číslo textury: %i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:91
+#: ../../src/editor/tools/editor_info_tool.cc:92
 msgid ""
 "4) Map Info\n"
 " Name: "
@@ -4971,7 +5000,7 @@ msgstr ""
 "4) Informace o mapě\n"
 " Název: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:95
+#: ../../src/editor/tools/editor_info_tool.cc:96
 #, c-format
 msgid ""
 "\n"
@@ -4982,8 +5011,8 @@ msgstr ""
 " Velikost: %ix%i\n"
 " Autor: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:98
-#: ../../src/editor/tools/editor_info_tool.cc:109
+#: ../../src/editor/tools/editor_info_tool.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:110
 msgid ""
 "\n"
 " Descr: "
@@ -4991,7 +5020,7 @@ msgstr ""
 "\n"
 " Popis: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:102
+#: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
 msgid ""
 "\n"
@@ -5000,7 +5029,7 @@ msgstr ""
 "\n"
 " Počet hráčů: %i\n"
 
-#: ../../src/editor/tools/editor_info_tool.cc:105
+#: ../../src/editor/tools/editor_info_tool.cc:106
 msgid ""
 "5) World Info\n"
 " Name: "
@@ -5008,7 +5037,7 @@ msgstr ""
 "5) Informace o světě\n"
 " Název: "
 
-#: ../../src/editor/tools/editor_info_tool.cc:107
+#: ../../src/editor/tools/editor_info_tool.cc:108
 msgid ""
 "\n"
 " Author: "

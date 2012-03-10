@@ -948,12 +948,12 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 			owner().add_message_with_timeout
 				(game,
 				 *new Message
-				 	("geologist " + rdescr->name(),
+				 	("geologist " + rdescr->name(), // e.g. "geologist gold"
 				 	 game.get_gametime(), 60 * 60 * 1000,
 				 	 rdescr->descname(),
 				 	 message,
 				 	 position),
-				 90000, 8);
+				 300000, 8);
 		}
 
 		Tribe_Descr const & t = tribe();

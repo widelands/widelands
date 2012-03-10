@@ -1206,10 +1206,10 @@ void ProductionProgram::ActMine::informPlayer
 	ps.send_message
 		(game,
 		 "mine",
-		 _("Mine empty"),
+		 _("Main vein exhausted"),
 		 _
-		 ("This mines has run empty. You should consider to expand or "
-		  "destruct it."),
+		 ("This mines' main vein exhausted. Expect strongly diminished returns on investment. "
+		  "You should consider to expand, dismantle or destruct it."),
 		 60 * 60 * 1000,
 		 0);
 }
