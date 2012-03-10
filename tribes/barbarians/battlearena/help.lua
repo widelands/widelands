@@ -9,7 +9,7 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/battlearena/battlearena_i_00.png", p(
-			_[["No better friend you have in battle than the the enemy's blow that misses."]])) ..
+			_[["No better friend you have in battle than the enemy's blow that misses."]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", [[Said to originate from Neidhardt, the famous trainer.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
@@ -52,5 +52,5 @@ return {
 		text_line(_"Experience levels:", "n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a Battle Arena can train Evade for one soldier from 0 to the highest in level in 1m10s on average.")
+		text_line(_"Performance:", _"If all needed wares are delivered in time, a %s can train %s for one soldier from 0 to the highest level in %s on average.":format(_"Battle Arena",_"Evade","1m10s"))
 }
