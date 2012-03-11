@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2011-12-24 11:25+0000\n"
+"PO-Revision-Date: 2012-03-10 17:49+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:33+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -506,7 +506,7 @@ msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Pasie ovce."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -1373,7 +1373,7 @@ msgstr "Tkáč"
 
 #: ../../tribes/empire/conf:192
 msgid "Weaving Mill"
-msgstr "Tkací závod"
+msgstr "Tkáčovňa"
 
 #: ../../tribes/empire/conf:174
 msgid "Well"
@@ -1423,7 +1423,7 @@ msgstr "Vlna"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "Vlna je srsť oviec. Používa sa v tkáčovniach na výrobu látky."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
