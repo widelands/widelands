@@ -25,9 +25,11 @@ return {
 		rt(h3(_"Attack Training:")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
 		rt(p(_"Provided by the " .. _"Axefactory")) ..
-		rt(h3(_"Hitpoints Training:")) ..
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
 		rt(p(_"Provided by the " .. _"War Mill")) ..
+		rt(h3(_"Hitpoints Training:")) ..
+		dependencies({"tribes/barbarians/helmsmithy/menu.png","tribes/barbarians/helm/menu.png;tribes/barbarians/mask/menu.png;tribes/barbarians/warhelmet/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
+		rt(p(_"Provided by the " .. _"Helmsmithy")) ..
 		rt(h3(_"Both Trainings:")) ..
 		image_line("tribes/barbarians/pittabread/menu.png",1,p(_"%s and":format(_"Pitta Bread"))) ..
 		image_line("tribes/barbarians/fish/menu.png;tribes/barbarians/meat/menu.png",1,p(_"%s or %s":format(_"Fish",_"Meat"))) ..
