@@ -29,6 +29,7 @@
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
+#include "economy/wares_queue.h"
 #include "economy/warehousesupply.h"
 #include "editor_game_base.h"
 #include "findbob.h"
@@ -552,6 +553,18 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 	if (get_economy() != 0)
 		m_portdock->set_economy(get_economy());
 }
+
+
+/// PortDock's expedition waresqueue
+WaresQueue & Warehouse::waresqueue(Ware_Index const wi) {
+	container_iterate_const(std::vector<WaresQueue *>, m_expedition_wares, i)
+		if ((*i.current)->get_ware() == wi)
+			return **i.current;
+	throw wexception
+		("%s (%u) (building %s) has no WaresQueue for %u",
+		 name().c_str(), serial(), name().c_str(), wi.value());
+}
+
 
 void Warehouse::destroy(Editor_Game_Base & egbase)
 {

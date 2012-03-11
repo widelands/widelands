@@ -20,6 +20,8 @@
 #ifndef WUI_PORTDOCKWARES_DISPLAY_H
 #define WUI_PORTDOCKWARES_DISPLAY_H
 
+#include "interactive_gamebase.h"
+#include "ui_basic/box.h"
 #include "waresdisplay.h"
 
 namespace Widelands {
@@ -29,5 +31,9 @@ struct PortDock;
 AbstractWaresDisplay * create_portdock_wares_display
 	(UI::Panel * parent, uint32_t width, Widelands::PortDock & pd,
 	 Widelands::WareWorker type);
+
+UI::Box * create_portdock_expedition_display
+	(UI::Panel * parent, Widelands::Warehouse & wh, Interactive_GameBase &);
+
 
 #endif // WUI_PORTDOCKWARES_DISPLAY_H

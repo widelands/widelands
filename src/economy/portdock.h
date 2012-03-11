@@ -118,7 +118,6 @@ private:
 	bool m_need_ship;
 	bool m_start_expedition;
 	bool m_expedition_ready;
-	std::vector<WaresQueue *> m_expedition_wares;
 
 	// saving and loading
 protected:

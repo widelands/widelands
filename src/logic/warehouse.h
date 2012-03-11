@@ -198,7 +198,12 @@ public:
 	void set_ware_policy(Ware_Index ware, StockPolicy policy);
 	void set_worker_policy(Ware_Index ware, StockPolicy policy);
 
+	// PortDock stuff
 	PortDock * get_portdock() const {return m_portdock;}
+	size_t size_of_expedition_wares_queue() {return m_expedition_wares.size();}
+	WaresQueue * get_wares_queue(uint8_t num) {return m_expedition_wares.at(num);}
+	virtual WaresQueue & waresqueue(Ware_Index);
+	std::vector<WaresQueue *> & get_wares_queue_vector() {return m_expedition_wares;}
 
 	virtual void log_general_info(Editor_Game_Base const &);
 
@@ -251,7 +256,10 @@ private:
 	uint32_t m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
+
+	// PortDock stuff
 	PortDock * m_portdock;
+	std::vector<WaresQueue *> m_expedition_wares;
 };
 
 }

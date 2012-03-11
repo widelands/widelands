@@ -307,7 +307,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 
 	if (m_expedition_ready)
 		if (ship.get_nritems() < 1) {
-#warning load the ship
+#warning load the ship with the wares and the builder from the warehouse's expedition waresqueue and cleanup
 			ship.start_task_expedition(game);
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
@@ -366,20 +366,35 @@ bool PortDock::expedition_started() {
 void PortDock::start_expedition() {
 	assert(!m_start_expedition);
 	m_start_expedition = true;
-	m_expedition_ready = true;
-#warning implement all the ware pick up stuff
-/*
+
+	// Load the buildcosts for the port building + builder
 	std::map<Ware_Index, uint8_t> const & buildcost = m_warehouse->descr().buildcost();
 	size_t const buildcost_size = buildcost.size();
-	m_expedition_wares.resize(buildcost_size);
-	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
-
-	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-		WaresQueue & wq = *(m_expedition_wares[i] = new WaresQueue(*this, it->first, it->second));
-		wq.set_callback(PortDock::wares_queue_callback, this);
-
+	// Now try to cache all the wares directly from the portdocks warehouse, if they exist.
+	std::vector<WaresQueue *> & expedition_wares = m_warehouse->get_wares_queue_vector();
+	if (m_warehouse->size_of_expedition_wares_queue() != buildcost_size) {
+		// Initialize the wares queue
+		expedition_wares.resize(buildcost_size);
+		std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+		for (size_t i = 0; i < buildcost_size; ++i, ++it) {
+			//WaresQueue & wq = *(
+			expedition_wares[i] = new WaresQueue(*m_warehouse, it->first, it->second);
+			//wq.set_callback(PortDock::wares_queue_callback, this);
+		}
 	}
-*/
+
+
+	// The builder is requested in every way, even if it is already inside the portdocks warehouse
+	// This is to ensure that the callback function is at least called once and thus the expedition
+	// is started as soon as all needed materials + builder are ready
+	/*m_builder_request =
+		new Request
+			(*this,
+			 tribe().safe_worker_index("builder"),
+			 Partially_Finished_Building::request_builder_callback,
+			 wwWORKER);*/
+#warning this should be set through the waresqueue callback as soon as all wares + builder are available
+	m_expedition_ready = true;
 }
 
 void PortDock::cancel_expedition() {

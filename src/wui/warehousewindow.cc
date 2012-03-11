@@ -32,6 +32,7 @@ static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
 static const char pic_tab_dock_wares[] = "pics/menu_tab_wares_dock.png";
 static const char pic_tab_dock_workers[] = "pics/menu_tab_workers_dock.png";
+static const char pic_tab_expedition[] = "pics/start_expedition.png";
 
 static const char pic_policy_prefer[] = "pics/stock_policy_prefer.png";
 static const char pic_policy_dontstock[] = "pics/stock_policy_dontstock.png";
@@ -206,15 +207,22 @@ Warehouse_Window::Warehouse_Window
 
 	if (Widelands::PortDock * pd = wh.get_portdock()) {
 		get_tabs()->add
-			("wares",
+			("dock_wares",
 			 g_gr->get_picture(PicMod_UI, pic_tab_dock_wares),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 			 _("Wares in dock"));
 		get_tabs()->add
-			("workers",
+			("dock_workers",
 			 g_gr->get_picture(PicMod_UI, pic_tab_dock_workers),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
 			 _("Workers in dock"));
+		if (pd->expedition_started()) {
+			get_tabs()->add
+				("expedition_wares_queue",
+				 g_gr->get_picture(PicMod_UI, pic_tab_expedition),
+				 create_portdock_expedition_display(get_tabs(), warehouse(), igbase()),
+				 _("Expedition"));
+		}
 	}
 }
 
