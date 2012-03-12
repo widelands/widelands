@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/fishers_hut/fisher_i_00.png", p(
 			_[["What do you mean, my fish ain't fresh?!"]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed. (And new text.)]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h2(_"Purpose:")) ..
@@ -46,5 +46,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The Fisher pauses 18s before he goes fishing again.")
+		text_line(_"Performance:", _"The %s pauses %s before he goes fishing again.":format(_"Fisher","18s"))
 }

@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/battlearena/battlearena_i_00.png", p(
 			_[["No better friend you have in battle than the enemy's blow that misses."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[Said to originate from Neidhardt, the famous trainer.]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Said to originate from Neidhardt, the famous trainer.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Trains soldiers in Evade up to level 2.") ..

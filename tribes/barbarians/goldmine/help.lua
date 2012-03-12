@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/goldmine/goldmine_i_00.png", p(
 			_[["Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ..."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[Excerpt from "Our treasures underground",<br> a traditional Barbarian song.]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Excerpt from "Our Treasures Underground",<br> a traditional Barbarian song.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(p(_"A %s exploits only %s of the resource. <br> From there on, it will only have a 5%% chance of finding %s.":format(_"Gold Mine","1/3",_"Gold Ore"))) ..

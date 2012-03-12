@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/hunters_hut/hunter_i_00.png", p(
 			_[["As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,<br> as deadly as a viper."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [["The Art of Hunting"]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[["The Art of Hunting"]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h3(_"Purpose:")) ..

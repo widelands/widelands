@@ -11,7 +11,7 @@ return {
 		rt("image=tribes/barbarians/rangers_hut/b_ranger_i_00.png", p(
 			--"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
 			_[["He who can grow two trees where normally grows only one exceeds the most important general!"]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[Chat'Karuth in a conversation with a ranger]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[%s in a conversation with a %s]]:format("Chat'Karuth",_"Ranger"))) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Plant trees in the surrounding area.") ..
@@ -40,5 +40,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The %s needs %s to plant a tree, not counting the time he needs to reach the destination and go home again.":format(_"ranger","5s"))
+		text_line(_"Performance:", _"The %s needs %s to plant a tree, not counting the time he needs to reach the destination and go home again.":format(_"Ranger","5s"))
 }

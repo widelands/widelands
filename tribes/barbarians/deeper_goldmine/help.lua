@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/deeper_goldmine/deeper_goldmine_i_00.png", p(--text identical to goldmine
 			_[["Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ..."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[Excerpt from "Our treasures underground",<br> a traditional Barbarian song.]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Excerpt from "Our Treasures Underground",<br> a traditional Barbarian song.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(p(_"A %s exploits all of the resource down to the deepest level.<br>But even after having done so, it will still have a %s chance of finding some more %s.":format(_"Deeper Gold Mine","10%",_"Gold Ore"))) ..

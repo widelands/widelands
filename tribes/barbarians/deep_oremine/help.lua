@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/deeper_oremine/deeper_oremine_i_00.png", p(--text identical to oremine
 			_[["I look at my own pick wearing away day by day and I realize why my work is important."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic",_"Quote from an anonymous miner.")) ..
+		rt("text-align=right",p("font-size=10 font-style=italic",_[[Quote from an anonymous miner.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(p(_"A %s exploits only %s of the resource.<br>From there on, it will only have a 5%% chance of finding %s.":format(_"Deep Iron Ore Mine","2/3",_"Iron Ore"))) ..

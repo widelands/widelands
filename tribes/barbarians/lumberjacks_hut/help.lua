@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/lumberjacks_hut/lumberjacks_hut_i_00.png", p(
 			_[["Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[Krumta, carpenter of Chat'Karuth]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Krumta, carpenter of Chat'Karuth]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h3(_"Purpose:")) ..
@@ -45,5 +45,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The %s needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":format(_"lumberjack","12s"))
+		text_line(_"Performance:", _"The %s needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":format(_"Lumberjack","12s"))
 }
