@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/trainingscamp/trainingscamp_i_00.png", p(
 			_[["He who is strong shall not forgive nor forget, but revenge injustice suffered - in the past and for all future."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[Chief Chat'Karuth in a speech to his army.]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Chief Chat'Karuth in a speech to his army.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Trains soldiers in Attack up to level 4, and in Hitpoints up to level 2.<br>Equips the soldiers with all necessary weapons and armour parts.") ..

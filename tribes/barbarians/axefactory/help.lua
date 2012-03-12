@@ -14,16 +14,16 @@ return {
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"The Barbarian Axefactory is the intermediate production site in a row of three. It is an upgrade from the Metalwork Shop but doesn't require additional qualification for the worker.") ..
-		rt("image=tribes/barbarians/axe/menu.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png image-align=right",p("It can make Axes, Sharp Axes and Broad Axes.")) ..
+		rt("image=tribes/barbarians/axe/menu.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png image-align=right",p(_"It can make Axes, Sharp Axes and Broad Axes.")) ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/axefactory/menu.png"}p(_"%s from the Smelting Works":format(_"Iron"))) ..
+		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/axefactory/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
 		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}) ..
-		rt(p(_"Coal from the Coal mine or the Charcoal Burner's House")) ..
+		rt(p(_"%s from the Coal mine or the Charcoal Burner's House":format(_"Coal"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png"},p(_"Headquarters")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Trainingscamp")) ..
