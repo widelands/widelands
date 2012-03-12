@@ -26,7 +26,7 @@ return {
 		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png"}) ..
 		rt(p(_"Coal from the Coal mine or the Charcoal Burner's House")) ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png"},p(_"Headquarters")) ..
+		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
 		rt(p(_"Trainingscamp")) ..
 	--Building Section

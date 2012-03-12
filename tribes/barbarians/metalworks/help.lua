@@ -5,7 +5,7 @@ set_textdomain("tribe_barbarians")
 
 return {
 	text =
-		--rt(h1(_"The Barbarian Axefactory")) ..
+		--rt(h1(_"The Barbarian Metalwork Shop")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/metalworks/metalworks_i_00.png", p(
@@ -14,7 +14,8 @@ return {
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"The Barbarian Metalworks is the basic production site in a row of three and creates all the tools that Barbarians need. The other are for weapons.") ..
-		rt("image=tribes/barbarians/bakingtray/menu.png;tribes/barbarians/felling_axe/menu.png;tribes/barbarians/fire_tongs/menu.png;tribes/barbarians/fishing_rod/menu.png;tribes/barbarians/hammer/menu.png;tribes/barbarians/hunting_spear/menu.png;tribes/barbarians/kitchen_tools/menu.png;tribes/barbarians/pick/menu.png;tribes/barbarians/scythe/menu.png;tribes/barbarians/shovel/menu.png image-align=right",p(_"It can make Baking Trays, Felling Axes, Fire Tongs, Fishing Rods, Hammers, Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels")) ..
+		rt("image=tribes/barbarians/bakingtray/menu.png;tribes/barbarians/felling_axe/menu.png;tribes/barbarians/fire_tongs/menu.png;tribes/barbarians/fishing_rod/menu.png;tribes/barbarians/hammer/menu.png;tribes/barbarians/hunting_spear/menu.png;tribes/barbarians/kitchen_tools/menu.png;tribes/barbarians/pick/menu.png;tribes/barbarians/scythe/menu.png;tribes/barbarians/shovel/menu.png image-align=right",p("")) ..
+		rt(p(_"It can make Baking Trays, Felling Axes, Fire Tongs, Fishing Rods, Hammers, Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels.")) ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
@@ -56,7 +57,7 @@ return {
 		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
 		image_line("tribes/barbarians/grout/menu.png", 1, p("1 " .. _"Grout")) ..
 		image_line("tribes/barbarians/trunk/menu.png", 1, p("1 " .. _"Trunk")) ..
-		text_line(_"Upgradeable to:",_"Axe Factory","tribes/barbarians/axefactory/menu.png") ..
+		text_line(_"Upgradeable to:",_"Axefactory","tribes/barbarians/axefactory/menu.png") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..

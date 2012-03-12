@@ -25,7 +25,7 @@ return {
 		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}) ..
 		rt(p(_"%s from the Coal mine or the Charcoal Burner's House":format(_"Coal"))) ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png"},p(_"Headquarters")) ..
+		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Trainingscamp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
@@ -60,6 +60,6 @@ return {
 		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Blacksmith",_"Master Blacksmith","24"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, an Axefactory can produce each item in about 57s on average.") ..
+		text_line(_"Performance:", _"If all needed wares are delivered in time, an Axefactory can produce each item in about %s on average.":format("57s")) ..
 		rt(p(_"All three weapons take the same time for making, but the required raw materials vary."))
 }
