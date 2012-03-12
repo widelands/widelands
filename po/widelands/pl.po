@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 23:13+0100\n"
-"PO-Revision-Date: 2012-03-09 02:24+0000\n"
+"PO-Revision-Date: 2012-03-11 20:27+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-03-10 04:40+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-12 04:33+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -279,7 +279,7 @@ msgstr "%s jest tego wynikiem"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Dokumentacja dla polecenia: "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -1735,7 +1735,7 @@ msgstr ""
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Wczytywanie plemion"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
@@ -4409,7 +4409,7 @@ msgstr "Połączono z metaserwerem!"
 
 #: ../../src/network/internet_gaming.cc:354
 msgid "Mixed up"
-msgstr ""
+msgstr "Zmieszany"
 
 #: ../../src/network/internet_gaming.cc:354
 msgid "The metaserver sent a strange ERROR during connection"
@@ -4433,7 +4433,7 @@ msgstr "UWAGA: Otrzymano komendę %s, mimo, że nie jesteśmy połączeni."
 #: ../../src/network/internet_gaming.cc:388
 #, c-format
 msgid "Server time offset is %i seconds."
-msgstr ""
+msgstr "Różnica czasu serwera wynosi %i sekund."
 
 #: ../../src/network/internet_gaming.cc:483
 msgid "ERROR: "

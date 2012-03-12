@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 23:13+0100\n"
-"PO-Revision-Date: 2012-03-09 02:47+0000\n"
-"Last-Translator: Thomas Jungers <mpjungers@hotmail.com>\n"
+"PO-Revision-Date: 2012-03-11 16:33+0000\n"
+"Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-03-10 04:39+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-12 04:33+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -457,6 +457,8 @@ msgstr ""
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
+" --dedicated=FILENAME Démarre un serveur dédié avec FILENAME en tant que "
+"carte\n"
 
 #: ../../src/wlapplication.cc:1343
 msgid ""
@@ -503,6 +505,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                       Active le rendu OpenGL\n"
 
 #: ../../src/wlapplication.cc:1368
 msgid ""
@@ -677,11 +681,11 @@ msgstr "Joueurs"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Défaire"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Refaire"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -960,7 +964,7 @@ msgstr "Recommencer la mission"
 #: ../../src/wui/dismantlesitewindow.cc:68
 #: ../../src/wui/constructionsitewindow.cc:74
 msgid "Building materials"
-msgstr ""
+msgstr "Matériaux de construction"
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
@@ -1073,11 +1077,11 @@ msgstr "Travailleurs dans les entrepôts"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:67
 msgid "Decrease capacity"
-msgstr ""
+msgstr "Réduire la capacité"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid "Increase capacity"
-msgstr ""
+msgstr "Augmenter la capacité"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -1381,7 +1385,7 @@ msgstr "Champ de debug"
 
 #: ../../src/wui/buildingwindow.cc:271
 msgid "Center view on this"
-msgstr ""
+msgstr "Centrer la vue sur ceci"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -1748,7 +1752,7 @@ msgstr ""
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Chargement des tribus"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
@@ -2556,13 +2560,16 @@ msgstr "Nous avons trouvé qu'il ne restait plus de ressources!"
 
 #: ../../src/logic/production_program.cc:1209
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Veine principale épuisée"
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"La veine principale de la mine est épuisée. Attendez-vous à un retour sur "
+"investissement fortement réduit. Vous devriez envisager de l'étendre, la "
+"démanteler ou la détruire."
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
@@ -3060,7 +3067,7 @@ msgstr "Hall du méta-serveur"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
 msgid "Clients online:"
-msgstr ""
+msgstr "Clients en ligne :"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:59
 msgid "List of games:"
@@ -3101,7 +3108,7 @@ msgstr "Points"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Game"
-msgstr ""
+msgstr "Partie"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:378
 msgid "Connection timed out"
@@ -3113,6 +3120,9 @@ msgid ""
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
+"Widelands n'a pas pu obtenir l'adresse IP du serveur à temps.\n"
+"Il semble  y avoir un problème de réseau, soit de votre côté, soit du côté\n"
+"du serveur.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:407
 #: ../../src/network/internet_gaming.cc:99
@@ -3330,7 +3340,7 @@ msgstr "Empêcher la vidange de Syncstream au démarrage"
 
 #: ../../src/ui_fsmenu/options.cc:471
 msgid "OpenGL rendering"
-msgstr ""
+msgstr "Rendu OpenGL"
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
@@ -3969,7 +3979,7 @@ msgstr " Une sauvegarde automatique sera créée."
 
 #: ../../src/network/netclient.cc:1084
 msgid "Disconnected from Host"
-msgstr ""
+msgstr "Déconnecté de l'hôte"
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client has left the game."
@@ -3981,7 +3991,7 @@ msgstr "Le client a planté et fait une sauvegarde d'urgence."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Connection was lost."
-msgstr ""
+msgstr "La connexion a été perdue."
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "Server has left the game."
@@ -3998,6 +4008,7 @@ msgstr "Le serveur a planté et fait une sauvegarde d'urgence."
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Connection to client timeouted: no response for 10 minutes!"
 msgstr ""
+"Temps de connexion au client dépassé : aucune réponse pendant 10 minutes !"
 
 #: ../../src/network/network_gaming_messages.cc:130
 msgid "Client and host have become desynchronized."
@@ -4006,17 +4017,17 @@ msgstr "Le client et l'hôte ont été désynchronisés."
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Rejeté par l'hôte : %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "Le client a envoyé des commandes incorrectes : %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Quelque chose ne s'est pas bien passé : %s"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
@@ -4085,6 +4096,8 @@ msgstr "Le client n'a pas accès aux paramètres du serveur"
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
 msgstr ""
+"Le client a envoyé la commande de lancement, bien que le serveur ne soit pas "
+"encore prêt."
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
@@ -4141,62 +4154,69 @@ msgstr "Transfert du fichier %s à %s terminé"
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Sending part %s of file %s to %s"
-msgstr ""
+msgstr "Envoi de la partie %s du fichier %s à %s"
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
-msgstr ""
+msgstr "Le joueur \"%s\" a été vaincu et est devenu spectateur."
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "No user with the name %s is logged in!"
-msgstr ""
+msgstr "Aucun utilisateur avec le nom %s n'est connecté !"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1224
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Le mot de passe envoyé était incorrect !"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "La version du protocole que vous utilisez n'est pas supportée !"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Vous êtes déjà connecté !"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
 "You got disconnected, as you send a superuser command without superuser "
 "permission.This incident will be logged and reported to the administrator."
 msgstr ""
+"Vous avez été déconnecté, étant donné que vous avez utilisé une commande de "
+"super-utilisateur sans permission.  Cet incident sera enregistré et reporté "
+"à l'administrateur."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
 msgstr ""
+"Vous avez été déconnecté, étant donné que le serveur est en train de "
+"redémarrer."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "La connexion a été fermée par le client normalement."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "La connexion au méta-serveur a été perdue."
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "Le méta-serveur n'a pas répondu."
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
-msgstr ""
+msgstr "Votre partie ne peut pas être connectée à internet"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
+"Vous avez été déconnecté du méta-serveur, car vous n'avez pas répondu à une "
+"requête PING à temps."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -4211,6 +4231,8 @@ msgid ""
 "You tried to relogin, but the server has no more knowledge of your previous "
 "state."
 msgstr ""
+"Vous avez essayé de vous reconnecter, mais le serveur ne se souvient plus de "
+"votre état précédent."
 
 #: ../../src/network/nethost.cc:360
 msgid ""
@@ -4392,7 +4414,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:99
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "Widelands n'a pas pu se connecter au méta-serveur."
 
 #: ../../src/network/internet_gaming.cc:107
 msgid ""
@@ -4400,10 +4422,13 @@ msgid ""
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
+"Widelands n'a pas pu établir de connexion à l'adresse donnée.\n"
+"Soit il n'y avait pas de méta-serveur au port supposé, soit\n"
+"votre réseau ne fonctionne pas."
 
 #: ../../src/network/internet_gaming.cc:151
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr ""
+msgstr "Pour héberger une partie, veuillez jeter un œil aux notes à :"
 
 #: ../../src/network/internet_gaming.cc:269
 msgid "Something went wrong: "
@@ -4411,7 +4436,7 @@ msgstr "Quelque chose a raté : "
 
 #: ../../src/network/internet_gaming.cc:347
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Reconnecté au méta-serveur avec succès !"
 
 #: ../../src/network/internet_gaming.cc:354
 msgid "Mixed up"
@@ -4419,7 +4444,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:354
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr ""
+msgstr "Le méta-serveur a envoyé une ERREUR étrange pendant la connexion"
 
 #: ../../src/network/internet_gaming.cc:366
 #, c-format
@@ -4427,12 +4452,17 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
+"Un paquet LOGIN, RELOGIN, ou REJECTED était attendu du serveur, mais la "
+"commande %s a été reçue.  Peut-être le méta-serveur utilise-t-il une version "
+"du protocole différente ?"
 
 #: ../../src/network/internet_gaming.cc:379
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
+"WARNING : Une commande %s a été reçue, alors que nous ne sommes pas dans "
+"l'état CONNECTING."
 
 #: ../../src/network/internet_gaming.cc:388
 #, c-format
@@ -4441,27 +4471,30 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:483
 msgid "ERROR: "
-msgstr ""
+msgstr "ERREUR: "
 
 #: ../../src/network/internet_gaming.cc:487
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "Le message n'a pas pu être envoyé au chat. "
 
 #: ../../src/network/internet_gaming.cc:508
 msgid "Received an unknown command from the metaserver: "
-msgstr ""
+msgstr "Une commande inconnue a été reçue du méta-serveur : "
 
 #: ../../src/network/internet_gaming.cc:640
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
+"Le message n'a pas pu être envoyé : vous n'êtes pas connecté au méta-serveur "
+"!"
 
 #: ../../src/network/internet_gaming.cc:652
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
+"Le message n'a pas pu être envoyé : était-ce censé être un message privé ?"
 
 #: ../../src/network/internet_gaming.cc:725
 msgid "<unknown>"
-msgstr ""
+msgstr "<inconnu>"
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
