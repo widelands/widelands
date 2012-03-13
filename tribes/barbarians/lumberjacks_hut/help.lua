@@ -24,7 +24,7 @@ return {
 		text_line(_"Incoming:", "n/a") ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png"},p(_"Trunk")) ..
-		dependencies({"tribes/barbarians/trunk/menu.png","pics/small.png;pics/medium.png;pics/big.png"},p(_"Construction Site")) ..
+		dependencies({"tribes/barbarians/trunk/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
 		dependencies({"tribes/barbarians/trunk/menu.png","tribes/barbarians/burners_house/menu.png"},p(_"Charcoal Burner's House")) ..
 		dependencies({"tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"Metalwork Shop")) ..
 		dependencies({"tribes/barbarians/trunk/menu.png","tribes/barbarians/hardener/menu.png"},p(_"Wood Hardener")) ..

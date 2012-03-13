@@ -10,10 +10,10 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/metalworks/metalworks_i_00.png", p(
 			_[["We make it work!"]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Inscription on the threshold of the now ruined Olde Forge, at Harradsheim, the eldest known smithy.]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Inscription on the threshold of the now ruined Olde Forge at Harradsheim, the eldest known smithy.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"The Barbarian Metalworks is the basic production site in a row of three and creates all the tools that Barbarians need. The other are for weapons.") ..
+		text_line(_"Purpose:", _"The Barbarian Metalwork Shop is the basic production site in a row of three and creates all the tools that Barbarians need. The other are for weapons.") ..
 		rt("image=tribes/barbarians/bakingtray/menu.png;tribes/barbarians/felling_axe/menu.png;tribes/barbarians/fire_tongs/menu.png;tribes/barbarians/fishing_rod/menu.png;tribes/barbarians/hammer/menu.png;tribes/barbarians/hunting_spear/menu.png;tribes/barbarians/kitchen_tools/menu.png;tribes/barbarians/pick/menu.png;tribes/barbarians/scythe/menu.png;tribes/barbarians/shovel/menu.png image-align=right",p("")) ..
 		rt(p(_"It can make Baking Trays, Felling Axes, Fire Tongs, Fishing Rods, Hammers, Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels.")) ..
 		text_line(_"Working radius:", "n/a") ..
@@ -23,8 +23,7 @@ return {
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
 		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
-		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"}) ..
-		rt(p(_"%s from the Lumberjack's hut":format(_"Trunk"))) ..
+		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Lumberjack's hut":format(_"Trunk"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/bakingtray/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/baker/menu.png" },p(_"Baker")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/felling_axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/lumberjack/menu.png" },p(_"Lumberjack")) ..

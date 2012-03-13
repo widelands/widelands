@@ -24,7 +24,7 @@ return {
 		text_line(_"Incoming:", "n/a") ..
 		rt(h2(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/quarry/menu.png","tribes/barbarians/raw_stone/menu.png"},p(_"Raw Stone")) ..
-		dependencies({"tribes/barbarians/raw_stone/menu.png","pics/small.png;pics/medium.png;pics/big.png"},p(_"Construction Site")) ..
+		dependencies({"tribes/barbarians/raw_stone/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
 		dependencies({"tribes/barbarians/raw_stone/menu.png","tribes/barbarians/lime_kiln/menu.png"}, p(_"Lime Kiln")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
