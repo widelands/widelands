@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2012-03-11 21:43+0000\n"
+"PO-Revision-Date: 2012-03-12 08:22+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-12 04:33+0000\n"
+"X-Launchpad-Export-Date: 2012-03-13 04:39+0000\n"
 "X-Generator: Launchpad (build 14933)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -28,6 +28,8 @@ msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
 msgstr ""
+"A fűrészre a favágónak és az asztalosnak van szüksége, a szerszámkovács "
+"készíti."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -49,7 +51,7 @@ msgstr "Páncélkovács"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Armoursmithy"
-msgstr ""
+msgstr "Páncélkovácsműhely"
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
 msgid ""
@@ -88,7 +90,7 @@ msgstr "Erődítmény"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr ""
+msgstr "A haltenyésztő által használt nagy vödör. A szerszámkovács készíti."
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Blackroot"
@@ -149,7 +151,7 @@ msgstr "Sütőlapát"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr "Halat tenyészt"
+msgstr "Halakat tenyészt."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
@@ -169,7 +171,7 @@ msgstr "Építész"
 
 #: ../../tribes/atlanteans/conf:115
 msgid "Burner"
-msgstr "Faszénégető munkás"
+msgstr "Faszénkészítő"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -198,7 +200,7 @@ msgstr "Faszénégető kunyhója"
 
 #: ../../tribes/atlanteans/conf:149
 msgid "Citadel"
-msgstr "Fellegvár"
+msgstr "Citadella"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Coal"
@@ -252,7 +254,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Crystal Mine"
-msgstr "Kristály bánya"
+msgstr "Kristálybánya"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -304,7 +306,7 @@ msgstr "Kivágja a fákat."
 
 #: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
-msgstr "Fogó"
+msgstr "Parázsfogó"
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
@@ -322,7 +324,7 @@ msgstr "Haltenyésztő"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder's House"
-msgstr ""
+msgstr "Haltenyésztőház"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid ""
@@ -374,7 +376,7 @@ msgstr "Aranyérc"
 
 #: ../../tribes/atlanteans/conf:75
 msgid "Gold Yarn"
-msgstr ""
+msgstr "Aranyfonal"
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
@@ -453,6 +455,7 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
 msgstr ""
+"A lovak segítik a zsúfolt utakon a szállítást. A lovardában tenyésztik őket."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -539,11 +542,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
-msgstr ""
+msgstr "Gyémántot bányásznak"
 
 #: ../../tribes/atlanteans/crystalmine/conf:24
 msgid "Mine quartz"
-msgstr ""
+msgstr "Kvarcot bányásznak"
 
 #: ../../tribes/atlanteans/crystalmine/conf:23
 msgid "Mine stone"
@@ -643,7 +646,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
-msgstr "Fogót készít"
+msgstr "Parázsfogót készít"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
@@ -716,7 +719,7 @@ msgstr "Köntöst készít"
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Páncélt készít a katonák számára."
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
@@ -850,7 +853,7 @@ msgstr ""
 #: ../../tribes/atlanteans/dungeon/conf:30
 #: ../../tribes/atlanteans/labyrinth/conf:36
 msgid "Sleep"
-msgstr "Felfüggesztve"
+msgstr "Alvás"
 
 #: ../../tribes/atlanteans/conf:202
 msgid "Small Tower"
@@ -943,11 +946,11 @@ msgstr "Pók tenyészet"
 
 #: ../../tribes/atlanteans/conf:95
 msgid "Spideryarn"
-msgstr ""
+msgstr "Pókfonal"
 
 #: ../../tribes/atlanteans/conf:96
 msgid "Steel Shield"
-msgstr ""
+msgstr "Acél pajzs"
 
 #: ../../tribes/atlanteans/conf:97
 msgid "Steel Trident"
@@ -965,7 +968,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
-msgstr ""
+msgstr "Kőfaragó"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Stronghold"
@@ -993,7 +996,7 @@ msgstr "A kasza a farmerek szerszáma. A szerszámkovács készít kaszát."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
-msgstr "A Widelands fejlesztőcsapat"
+msgstr "A Widelands fejlesztőcsapata"
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
@@ -1129,7 +1132,7 @@ msgstr "Szerszámkovács"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Toolsmithy"
-msgstr ""
+msgstr "Szerszámkovácsműhely"
 
 #: ../../tribes/atlanteans/conf:160
 #: ../../tribes/atlanteans/conf:203
@@ -1138,11 +1141,11 @@ msgstr "Torony"
 
 #: ../../tribes/atlanteans/conf:131
 msgid "Trainer"
-msgstr ""
+msgstr "Kiképző"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Katonákat képez."
 
 #: ../../tribes/atlanteans/conf:100
 msgid "Trunk"
@@ -1157,91 +1160,109 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 0"
 
 #: ../../tribes/atlanteans/dungeon/conf:32
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Katona támadásának fejlesztése 0 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:33
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:34
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Katona támadásának fejlesztése 1 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:35
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:36
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Katona támadásának fejlesztése 2 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:37
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:38
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Katona támadásának fejlesztése 3 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:37
 msgid "Upgrade soldier defense 0"
-msgstr ""
+msgstr "Katona védekezésének fejlesztése 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:38
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Katona védekezésének fejlesztése 0 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:39
 msgid "Upgrade soldier defense 1"
-msgstr ""
+msgstr "Katona védekezésének fejlesztése 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:40
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Katona védekezésének fejlesztése 1 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Katona kitérésének fejlesztése 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:44
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Katona kitérésének fejlesztése 0 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Katona kitérésének fejlesztése 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Katona kitérésének fejlesztése 1 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Katona életerejének fejlesztése 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:42
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Katona életerejének fejlesztése 0 (csak kompatibilitási okokból, a régi "
+"mentések miatt(build13))"
 
 #: ../../tribes/atlanteans/conf:164
 msgid "Warehouse"
@@ -1256,10 +1277,12 @@ msgid ""
 "Water is the essence for life! It is used in the bakery, the horse farm and "
 "the spiderfarm."
 msgstr ""
+"A víz az élet eszenciája. A pékségben a lovardába, illetve a pók "
+"tenyészetnél is szükség van rá."
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Fegyverkovácsműhely"
 
 #: ../../tribes/atlanteans/conf:132
 msgid "Weaponsmith"
@@ -1314,7 +1337,7 @@ msgstr "Favágókunyhó"
 #: ../../tribes/atlanteans/well/conf:13
 #: ../../tribes/atlanteans/woodcutters_house/conf:16
 msgid "Work"
-msgstr ""
+msgstr "Munka"
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."

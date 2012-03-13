@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2012-03-11 21:34+0000\n"
+"PO-Revision-Date: 2012-03-12 08:26+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-12 04:33+0000\n"
+"X-Launchpad-Export-Date: 2012-03-13 04:39+0000\n"
 "X-Generator: Launchpad (build 14933)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
@@ -149,7 +149,7 @@ msgstr "Gerenda"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Sütőlapát"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -185,7 +185,7 @@ msgstr "Faszenet készít."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Meszet éget az égetőkemencében."
 
 #: ../../tribes/barbarians/conf:111
 msgid "Carrier"
@@ -245,7 +245,7 @@ msgstr "Szénbánya"
 
 #: ../../tribes/barbarians/shipyard/conf:21
 msgid "Constructing ship"
-msgstr ""
+msgstr "Építőhajó"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Construction Site"
@@ -289,7 +289,7 @@ msgstr "Védekezz és hódíts!"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Destroyed building"
-msgstr "Elpusztított épület"
+msgstr "Lerombolt épület"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -499,7 +499,7 @@ msgstr "Az áru szállításában segít a forgalmasabb utakon."
 
 #: ../../tribes/barbarians/conf:160
 msgid "High Tower"
-msgstr ""
+msgstr "Magas torony"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -671,7 +671,7 @@ msgstr "Búzát vet"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Mezőn dolgozik."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -916,19 +916,19 @@ msgstr "Éles fejsze"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Ship"
-msgstr ""
+msgstr "Hajó"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Ship construction site"
-msgstr ""
+msgstr "Hajókészítő"
 
 #: ../../tribes/barbarians/conf:139
 msgid "Shipwright"
-msgstr ""
+msgstr "Hajóács"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Shipyard"
-msgstr ""
+msgstr "Hajógyár"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Shovel"
@@ -1165,7 +1165,7 @@ msgstr "Kiképzőtábor"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Katonákat képez."
 
 #: ../../tribes/barbarians/conf:104
 msgid "Trunk"
@@ -1398,7 +1398,7 @@ msgstr "Munka"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
-msgstr ""
+msgstr "Építkezési területen dolgozik, új épületeket húz fel."
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
