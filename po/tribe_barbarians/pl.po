@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2012-01-17 12:04+0000\n"
+"PO-Revision-Date: 2012-03-13 21:10+0000\n"
 "Last-Translator: Stanisław Gackowski <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:42+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-14 04:38+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -670,15 +670,15 @@ msgstr "Chleb pita"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr "Sadź trzcinę"
+msgstr "Plant reed (Sadź trzcinę)"
 
 #: ../../tribes/barbarians/farm/conf:17
 msgid "Plant wheat"
-msgstr "Sadź pszenicę"
+msgstr "Plant wheat (Siej pszenicę)"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr "Obsadza pola."
+msgstr "Obsiewa pola."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -699,88 +699,88 @@ msgstr "Produce bakingtray (Produkuj blachę do pieczenia)"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr "Produkuj topór bojowy"
+msgstr "Produce battleaxe (Produkuj topór bojowy)"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr "Produkuj szeroki topór"
+msgstr "Produce broadaxe (Produkuj szeroki topór)"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr "Produkuj topór z brązu"
+msgstr "Produce bronzeaxe (Produkuj topór z brązu)"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
-msgstr "Produkuje topory drwalskie."
+msgstr "Produce felling axe (Produkuj topory drwalskie)"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr "Produkuj szczypce"
+msgstr "Produce fire tongs (Produkuj szczypce)"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr "Produkuj wędkę"
+msgstr "Produce fishing rod (Produkuj wędkę)"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr "Produkuj młotek"
+msgstr "Produce hammer (Produkuj młotek)"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr "Produkuj hełm"
+msgstr "Produce helm (Produkuj hełm)"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr "Produkuj włócznię"
+msgstr "Produce hunting spear (Produkuj dzidę)"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr "Produkuj przyobyr kuchenne"
+msgstr "Produce kitchen tools (Produkuj przybory kuchenne)"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr "Produkuj maskę"
+msgstr "Produce mask (Produkuj maskę)"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr "Produkuj posiłek"
+msgstr "Produce meal (Produkuj posiłek)"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr "Produkuj kilof"
+msgstr "Produce pick (Produkuj kilof)"
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr "Produkuj rację"
+msgstr "Produce ration (Produkuj rację)"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr "Produkuj kosę"
+msgstr "Produce scythe (Produkuj kosę)"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr "Produkuj ostry topór"
+msgstr "Produce sharpaxe (Produkuj ostry topór)"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr "Produkuj łopatę"
+msgstr "Produce shovel (Produkuj łopatę)"
 
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr "Produkuj przekąskę"
+msgstr "Produce snack (Produkuj przekąskę)"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr "Produkuj hełm wojownika"
+msgstr "Produce warhelmet (Produkuj hełm wojownika)"
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
-msgstr "Produkuj topór wojownika"
+msgstr "Produce warriorsaxe (Produkuj topór wojownika)"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
@@ -795,7 +795,7 @@ msgstr "Produkuje jedzenie dla górników."
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
-"Produkuje najlepsze piwa aby utrzymać wojowników silnych i zadowolonych "
+"Produkuje najlepsze piwa, aby utrzymać wojowników silnych i zadowolonych "
 "podczas treningu."
 
 #: ../../tribes/barbarians/blacksmith/conf:1

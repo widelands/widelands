@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 23:13+0100\n"
-"PO-Revision-Date: 2012-03-12 19:19+0000\n"
+"PO-Revision-Date: 2012-03-13 09:34+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-13 04:39+0000\n"
+"X-Launchpad-Export-Date: 2012-03-14 04:38+0000\n"
 "X-Generator: Launchpad (build 14933)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1209,7 +1209,7 @@ msgstr "Menj a hajóhoz"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
-msgstr ""
+msgstr "Menj a célhoz"
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
@@ -1287,7 +1287,7 @@ msgstr "Archívum"
 
 #: ../../src/wui/game_message_menu.cc:102
 msgid "center main mapview on location"
-msgstr ""
+msgstr "Nézet középre igazítása a helyhez"
 
 #: ../../src/wui/game_message_menu.cc:369
 msgid "Message Menu: Archive"
@@ -1360,7 +1360,7 @@ msgstr "Megsemmisít"
 
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Dismantle"
-msgstr ""
+msgstr "Leépítés"
 
 #: ../../src/wui/buildingwindow.cc:245 ../../src/wui/buildingwindow.cc:432
 msgid "Hide workarea"
@@ -1372,7 +1372,7 @@ msgstr "Hibakereső"
 
 #: ../../src/wui/buildingwindow.cc:271
 msgid "Center view on this"
-msgstr ""
+msgstr "Nézet ide igazítás"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -1384,7 +1384,7 @@ msgstr "Munkaterült megjelenítése"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr ""
+msgstr "Metakiszolgáló bejelentkezés"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
@@ -1667,6 +1667,8 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"Ez a törzs nem kompatibilis ezzel a térképpel, mert itt nem bányázható %s, "
+"pedig szüksége lenne rá"
 
 #: ../../src/logic/worker.cc:211
 #, c-format
@@ -1693,7 +1695,7 @@ msgstr "Geológus ásványkincseket talált."
 #: ../../src/logic/worker.cc:1835
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "%s nem talál haza, így valószínű meg fog halni."
 
 #: ../../src/logic/worker.cc:1842
 msgid "Worker got lost!"
@@ -1702,7 +1704,7 @@ msgstr "Eltűnt egy munkás!"
 #: ../../src/logic/worker.cc:3037
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "munkás betöltése: %s"
 
 #: ../../src/logic/warehouse.cc:260 ../../src/logic/militarysite.cc:63
 msgid " conquer"
@@ -1715,7 +1717,7 @@ msgstr "Egy új %s lett hozzáadva a gazdaságodhoz."
 
 #: ../../src/logic/player.cc:148 ../../src/logic/game.cc:486
 msgid "Missing starting position"
-msgstr ""
+msgstr "Hiányzó kezdőpont"
 
 #: ../../src/logic/player.cc:150 ../../src/logic/game.cc:488
 #, c-format
@@ -1950,7 +1952,7 @@ msgstr "zászló művelet: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:218
 #, c-format
 msgid "building %u: %s"
-msgstr ""
+msgstr "épület %u %s"
 
 #: ../../src/logic/playercommand.cc:493
 #, c-format
