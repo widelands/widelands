@@ -36,12 +36,12 @@ return {
 		rt(h3(_"Build Cost:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png", 2, p("2 " .. _"Blackwood")) ..
 		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/thatchreed/menu.png", 2, p("2 " .. _"Thatchreed")) ..
+		image_line("tribes/barbarians/thatchreed/menu.png", 2, p("2 " .. _"Thatch Reed")) ..
 		image_line("tribes/barbarians/trunk/menu.png", 2, p("2 " .. _"Trunk")) ..
 		rt(h3(_"Dismantle yields:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..
 		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/thatchreed/menu.png", 1, p("1 " .. _"Thatchreed")) ..
+		image_line("tribes/barbarians/thatchreed/menu.png", 1, p("1 " .. _"Thatch Reed")) ..
 		image_line("tribes/barbarians/trunk/menu.png", 1, p("1 " .. _"Trunk")) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
