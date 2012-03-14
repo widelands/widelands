@@ -23,7 +23,7 @@ return {
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/fernery/menu.png","tribes/barbarians/thatchreed/menu.png"},p(_"Thatch Reed")) ..
 		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
-		rt(p(_"The Fernery's output will only go to any construction sites that need it.")) ..
+		rt(p(_"The Fernery's output will only go to construction sites that need it.")) ..
 		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/weaving-mill/menu.png"},p(_"Weaving-Mill")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
