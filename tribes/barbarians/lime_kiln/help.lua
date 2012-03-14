@@ -5,7 +5,7 @@ set_textdomain("tribe_barbarians")
 
 return {
 	text =
-		--rt(h1(_"The Barbarian Fernery")) ..
+		--rt(h1(_"The Barbarian Limekiln")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/lime_kiln/stonegrinder_i_00.png", p(

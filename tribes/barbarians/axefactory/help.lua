@@ -8,7 +8,7 @@ return {
 		--rt(h1(_"The Barbarian Axefactory")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
-		rt("image=tribes/barbarians/warmill/warmill_i_00.png", p(
+		rt("image=tribes/barbarians/axefactory/axefactory_i_00.png", p(
 			_[["A new Warriors Axe brings forth the best in its wielder – or the worst in its maker."]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])) ..
 	--General Section
