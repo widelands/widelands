@@ -13,7 +13,7 @@ return {
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"The Barbarian Axefactory is the intermediate production site in a row of three. It is an upgrade from the Metalwork Shop but doesn't require additional qualification for the worker.") ..
+		text_line(_"Purpose:", _"The Barbarian Axefactory is the intermediate production site in a series of three buildings. It is an upgrade from the Metalwork Shop but doesn't require additional qualification for the worker.") ..
 		rt("image=tribes/barbarians/axe/menu.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png image-align=right",p(_"It can make Axes, Sharp Axes and Broad Axes.")) ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..
