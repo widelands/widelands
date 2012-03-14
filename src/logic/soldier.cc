@@ -1716,7 +1716,7 @@ Load/save support
 ==============================
 */
 
-#define SOLDIER_SAVEGAME_VERSION 1
+#define SOLDIER_SAVEGAME_VERSION 2
 
 Soldier::Loader::Loader()
 {
@@ -1727,11 +1727,14 @@ void Soldier::Loader::load(FileRead & fr)
 	Worker::Loader::load(fr);
 
 	uint8_t version = fr.Unsigned8();
-	if (version != SOLDIER_SAVEGAME_VERSION)
+	if (version > SOLDIER_SAVEGAME_VERSION)
 		throw game_data_error("unknown/unhandled version %u", version);
 
 	Soldier & soldier = get<Soldier>();
 	soldier.m_hp_current = fr.Unsigned32();
+	if (SOLDIER_SAVEGAME_VERSION < 2) // Hitpoints multiplied to make balance easier
+		soldier.m_hp_current *= 100;
+
 	soldier.m_hp_level =
 		std::min(fr.Unsigned32(), soldier.descr().get_max_hp_level());
 	soldier.m_attack_level =

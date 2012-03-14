@@ -1,6 +1,6 @@
 size=medium
 max_soldiers=3
-heal_per_second=1
+heal_per_second=100
 conquers=7
 enhancement=barrier
 
