@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 23:13+0100\n"
-"PO-Revision-Date: 2012-03-13 09:34+0000\n"
-"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"PO-Revision-Date: 2012-03-14 06:39+0000\n"
+"Last-Translator: Wanderer <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-14 04:38+0000\n"
+"X-Launchpad-Export-Date: 2012-03-15 04:30+0000\n"
 "X-Generator: Launchpad (build 14933)\n"
 
 #: ../../src/computer_player.cc:38
@@ -279,17 +279,17 @@ msgstr "A következő parancs dokumentációja: "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
-msgstr ""
+msgstr "az oldal dolgozói"
 
 #: ../../src/writeHTML.cc:1049
 #, c-format
 msgid "site's program %s"
-msgstr ""
+msgstr "oldal programja %s"
 
 #: ../../src/writeHTML.cc:1116
 #, c-format
 msgid "%s's program %s"
-msgstr ""
+msgstr "%s programja %s"
 
 #: ../../src/writeHTML.cc:1140 ../../src/writeHTML.cc:1181
 #, c-format
@@ -792,7 +792,7 @@ msgstr "Nagyméretű épületes"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr ""
+msgstr "Kikötő építése"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
@@ -942,7 +942,7 @@ msgstr "Célkitűzések menü"
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
-msgstr ""
+msgstr "Fölényes győzelem"
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
@@ -1104,7 +1104,7 @@ msgstr "Szabad"
 
 #: ../../src/wui/multiplayersetupgroup.cc:277
 msgid "Shared in"
-msgstr ""
+msgstr "Megosztva"
 
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/playerdescrgroup.cc:170
@@ -1135,7 +1135,7 @@ msgstr "Küldetés"
 #: ../../src/wui/multiplayersetupgroup.cc:354
 #: ../../src/ui_fsmenu/launchMPG.cc:290
 msgid "Savegame"
-msgstr ""
+msgstr "Játék mentése"
 
 #: ../../src/wui/multiplayersetupgroup.cc:405
 msgid "Client name"
@@ -1189,11 +1189,11 @@ msgstr "Több harcos küldése"
 
 #: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:129
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Visszavonulás: Soha!"
 
 #: ../../src/wui/attack_box.cc:239 ../../src/wui/military_box.cc:148
 msgid "Supported damage before retreat"
-msgstr ""
+msgstr "Visszavonulás elötti támogatott sebzés"
 
 #: ../../src/wui/attack_box.cc:241 ../../src/wui/military_box.cc:150
 msgid "Once injured"

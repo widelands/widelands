@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2012-02-01 12:39+0000\n"
+"PO-Revision-Date: 2012-03-14 18:15+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:42+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-15 04:30+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -426,7 +426,7 @@ msgstr "Miniera d'oro"
 
 #: ../../tribes/barbarians/conf:83
 msgid "Gold Ore"
-msgstr "Oro Estraibile"
+msgstr "Pepita d'oro"
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
@@ -697,96 +697,96 @@ msgstr "Porto"
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr "Produce ascia"
+msgstr "Produzione ascia"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
-msgstr "Produce una pala da fornaio"
+msgstr "Produzione pala da fornaio"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr "Produce ascia da battaglia"
+msgstr "Produzione ascia da battaglia"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr "Produce ascia larga"
+msgstr "Produzione ascia larga"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr "Produce ascia di bronzo"
+msgstr "Produzione ascia di bronzo"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
-msgstr "Produce ascia da disboscamento"
+msgstr "Produzione ascia da disboscamento"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr "Produce pinze per il fuoco"
+msgstr "Produzione pinze per il fuoco"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr "Produce canna da pesca"
+msgstr "Produzione canna da pesca"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr "Produce un martello"
+msgstr "Produzione martello"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr "Produce un elmo"
+msgstr "Produzione elmo"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr "Produce lancia da caccia"
+msgstr "Produzione lancia da caccia"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr "Produce strumenti da cucina"
+msgstr "Produzione strumenti da cucina"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr "Produce una maschera"
+msgstr "Produzione maschera"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr "Produce un pasto"
+msgstr "Produzione pasto"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr "Produce piccone"
+msgstr "Produzione piccone"
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr "Produce una razione"
+msgstr "Produzione razione"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr "Produce una falce"
+msgstr "Produzione falce"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr "Produce ascia affilata"
+msgstr "Produzione ascia affilata"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr "Produce vanga"
+msgstr "Produzione vanga"
 
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr "Produce spuntino"
+msgstr "Produzione spuntino"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr "Produce un elmo da guerra"
+msgstr "Produzione elmo da guerra"
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
-msgstr "Produce ascia da guerriero"
+msgstr "Produzione ascia da guerriero"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
