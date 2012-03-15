@@ -45,5 +45,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered and the economy doesn't need Water nor Wheat, a Cattle Farm can produce one Ox in %s.":format("30s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in %s on average.":format(_"Ox","30s"))
 }

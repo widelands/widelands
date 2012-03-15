@@ -51,5 +51,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, the Limekiln can produce a bucket of Grout in about %s on average.":format("41s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in about %s on average.":format(_"Grout","41s"))
 }

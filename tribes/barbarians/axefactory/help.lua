@@ -60,6 +60,6 @@ return {
 		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Blacksmith",_"Master Blacksmith","24"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, an Axefactory can produce each item in about %s on average.":format("57s")) ..
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in about %s on average.":format(_"each item","57s")) ..
 		rt(p(_"All three weapons take the same time for making, but the required raw materials vary."))
 }

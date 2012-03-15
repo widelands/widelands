@@ -50,5 +50,5 @@ return {
 		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Brewer",_"Master Brewer","19"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a Micro Brewery can produce one Beer in about %s on average.":format("60s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in about %s on average.":format(_"Beer","60s"))
 }
