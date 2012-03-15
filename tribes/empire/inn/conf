@@ -28,8 +28,8 @@ produce=meal
 
 [idle]
 pics=inn_i_??.png  # ???
-hotspot=73 75
+hotspot=52 75
 
 [working]
 pics=inn_i_??.png  # ???
-hotspot=73 75
+hotspot=52 75
