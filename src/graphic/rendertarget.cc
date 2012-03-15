@@ -224,10 +224,10 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs, Composite cm
 
 	if (clip(r)) {
 		if (m_offset.x < 0)
-			ofs.x += abs(m_offset.x);
+			ofs.x -= m_offset.x;
 
 		if (m_offset.y < 0)
-			ofs.y += abs(m_offset.y);
+			ofs.y -= m_offset.y;
 
 		// Make sure the offset is within bounds
 		ofs.x = ofs.x % srcw;
