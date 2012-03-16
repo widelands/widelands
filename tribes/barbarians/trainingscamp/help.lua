@@ -4,7 +4,7 @@ use("aux", "format_help")
 set_textdomain("tribe_barbarians")
 
 return {
-	text =
+	text = rt(p("font-weight=bold font-size=14 font-color=ff7700",_"Please note that the in-game help is incomplete and under active development.")) ..
 		--rt(h1(_"The Barbarian Trainingscamp")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
@@ -20,8 +20,8 @@ return {
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
-		dependencies({"pics/soldier_untrained.png","tribes/barbarians/trainingscamp/menu.png","pics/soldier_fulltrained-evade.png"}) ..
-		dependencies({"pics/soldier_untrained+evade.png","tribes/barbarians/trainingscamp/menu.png","pics/soldier_fulltrained.png"}) ..
+		dependencies({"tribes/barbarians/soldier/untrained.png","tribes/barbarians/trainingscamp/menu.png","tribes/barbarians/soldier/fulltrained-evade.png"}) ..
+		dependencies({"tribes/barbarians/soldier/untrained+evade.png","tribes/barbarians/trainingscamp/menu.png","tribes/barbarians/soldier/fulltrained.png"}) ..
 		rt(h3(_"Attack Training:")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
 		rt(p(_"Provided by the " .. _"Axefactory")) ..

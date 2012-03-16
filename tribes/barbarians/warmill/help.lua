@@ -4,7 +4,7 @@ use("aux", "format_help")
 set_textdomain("tribe_barbarians")
 
 return {
-	text =
+	text = rt(p("font-weight=bold font-size=14 font-color=ff7700",_"Please note that the in-game help is incomplete and under active development.")) ..
 		--rt(h1(_"The Barbarian War Mill")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
