@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2010-06-06 22:33+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-03-16 11:49+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:46+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-17 04:33+0000\n"
+"X-Generator: Launchpad (build 14951)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -58,6 +58,8 @@ msgid ""
 "Alternatively, you can directly click the flag where\n"
 "the road should end like so."
 msgstr ""
+"Případně můžeš kliknout přímo na vlajku, ke které \n"
+"má cesta vést."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
 msgid "And finally the yellow flag symbol only allows for flags."
@@ -65,7 +67,7 @@ msgstr "A konečně jen žlutý symbol vlajky umožňuje umístit vlajku."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
 msgid "Archive all messages in your inbox"
-msgstr ""
+msgstr "Archivovat všechny přijaté zprávy"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
 msgid ""
@@ -93,10 +95,12 @@ msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
 msgstr ""
+"Zaútoč a znič všechny vojenské budovy nepřítele i s jeho \n"
+"základnou."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
-msgstr ""
+msgstr "Útok:"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
@@ -105,19 +109,19 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
-msgstr ""
+msgstr "Postav vlajku na cestě"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:167
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "Rozděl cestu k dřevorubci postavením vlajky"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Build a quarry"
-msgstr ""
+msgstr "Postav lom"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid "Build a quarry next to the stones"
-msgstr ""
+msgstr "Postav lom vedle kamení"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:250
 msgid ""
@@ -145,11 +149,14 @@ msgid ""
 "to\n"
 "build a small training scenario for you. Let's do that now."
 msgstr ""
+"Ale to jsem odbočil. Zpět k vojákům. Co jsem chtěl udělat? Ach ano, chtěl "
+"jsem\n"
+"pro tebe vytvořit malý teréninkový scénář. Tak hurá na to."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
 msgid "Census and statistics"
-msgstr ""
+msgstr "Přehled a statistiky"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:650
 msgid ""
@@ -166,7 +173,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
 msgid "Close the messages window"
-msgstr ""
+msgstr "Zavřít okno zpráv"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:427
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:448
@@ -180,11 +187,11 @@ msgstr "Shrnutí"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "Připoj lom se základnou"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:347
 msgid "Connect your construction site"
-msgstr ""
+msgstr "Připoj staveniště"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:348
 msgid ""
@@ -197,14 +204,19 @@ msgid ""
 "front\n"
 "of your headquarters. Wait for the completion of the stonemason's hut."
 msgstr ""
+"Propoj pomocí cesty staveniště lomu se svou základnou. Po vybudování\n"
+"nové stavby jsi hned přepnutý v módu stavění cesty. Ale to nyní nejsi.\n"
+"Pro postavení úplně nové cesty jednoduše klikni na vlajku před staveništěm,\n"
+"klikni na ikonu pro stavění cesty a klikni a vlajku před velitelstvím.\n"
+"Poté počkej na dokončení stavby."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
-msgstr ""
+msgstr "Dobyj území kde můžeme postavit doly"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Conquer the mountain to the south west"
-msgstr ""
+msgstr "Dobyj horu na jihozápadě"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -219,11 +231,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid "Defeat the enemy"
-msgstr ""
+msgstr "Poraž nepřítele"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "Zdolej nepřátelský kmen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:690
 msgid ""
@@ -231,11 +243,14 @@ msgid ""
 "the\n"
 "number of attacking soldiers, then send them via the attack button."
 msgstr ""
+"Zdolej nedalekého nepřítele. Útok na budovu zahájíš kliknutím na dveře, "
+"zvolíš \n"
+"počet útočícich vojáků a kliknutím na tlačítko útok je vyšleš do boje."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
 msgid "Defeat your enemy"
-msgstr ""
+msgstr "Zdolej svého nepřítele"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:629
 msgid ""
@@ -253,7 +268,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid "Defense:"
-msgstr ""
+msgstr "Obrana:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Diving in"
@@ -262,25 +277,27 @@ msgstr "Vnoření"
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid "Enable the build help"
-msgstr ""
+msgstr "Povolit nápovědu při stavbě"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhance this fortress"
-msgstr ""
+msgstr "Vylepši tuto pevnost"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid "Enhance your fortress"
-msgstr ""
+msgstr "Vylepši svou pevnost"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "Vylepši svou pevnost na tvrz"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
 msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
 msgstr ""
+"Vylepši nyní svou pevnost na tvrz. Pamatuj, že můžeš zrychlit běh času \n"
+"pomocí klávesy PAGE UP, budování tvrzi zabere nějaký čas."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:664
 msgid ""
