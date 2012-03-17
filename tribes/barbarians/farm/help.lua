@@ -4,13 +4,13 @@ use("aux", "format_help")
 set_textdomain("tribe_barbarians")
 
 return {
-	text = rt(p("font-weight=bold font-size=14 font-color=ff7700",_"Please note that the in-game help is incomplete and under active development.")) ..
+	text =
 		--rt(h1(_"The Barbarian Farm")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/farm/farm_i_00.png", p(
-			_[[Text needed]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed]])) ..
+			[[Text needed]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", [[Source needed]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Seed and harvest wheat.","tribes/barbarians/wheat/menu.png") ..
@@ -47,5 +47,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"Calculation needed.")
+		text_line(_"Performance:", "Calculation needed")
 }

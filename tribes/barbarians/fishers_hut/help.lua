@@ -4,13 +4,13 @@ use("aux", "format_help")
 set_textdomain("tribe_barbarians")
 
 return {
-	text = rt(p("font-weight=bold font-size=14 font-color=ff7700",_"Please note that the in-game help is incomplete and under active development.")) ..
+	text =
 		--rt(h1(_"The Barbarian Fisher's Hut")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/fishers_hut/fisher_i_00.png", p(
 			_[["What do you mean, my fish ain't fresh?!"]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed. (And new text.)]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h2(_"Purpose:")) ..
