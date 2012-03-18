@@ -8,30 +8,30 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2011-03-24 12:04+0000\n"
+"PO-Revision-Date: 2012-03-17 16:44+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:47+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-18 04:33+0000\n"
+"X-Generator: Launchpad (build 14951)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
-msgstr ""
+msgstr "%i arbores"
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
-msgstr ""
+msgstr "%s habuerat "
 
 #: ../../scripting/win_condition_texts.lua:28
 msgid "%s has %i trees at the moment."
-msgstr ""
+msgstr "%s habet nunc %i arbores."
 
 #: ../../scripting/win_condition_texts.lua:46
 msgid "%s owns more than half of the maps area."
-msgstr ""
+msgstr "%s habet plus quam dimidia tabulae terra."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
@@ -70,7 +70,7 @@ msgstr "Ludus infiniens"
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
 msgid "Endless Game (no fog)"
-msgstr ""
+msgstr "Ludus infiniens (non nimbatus)"
 
 #: ../../scripting/win_condition_texts.lua:49
 msgid "Keep it for %i more minutes to win the game."
@@ -83,19 +83,19 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
-msgstr ""
+msgstr "Punctae"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../scripting/win_condition_texts.lua:38
 msgid "Status for %s<br>"
-msgstr ""
+msgstr "Status ludoris %s<br>"
 
 #: ../../scripting/win_condition_texts.lua:45
 msgid "Team %i"
-msgstr ""
+msgstr "Societas %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:13
 msgid "Territorial Lord"
@@ -103,11 +103,11 @@ msgstr "Rex territorii"
 
 #: ../../scripting/win_condition_texts.lua:27
 msgid "The game will end in %i minutes."
-msgstr ""
+msgstr "In %i minutas ludus finibitur."
 
 #: ../../scripting/win_condition_texts.lua:40
 msgid "The game will end in %s."
-msgstr ""
+msgstr "In %s ludus finibitur."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:14
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -115,7 +115,7 @@ msgstr "Gens vel societas omnes vincens victor ludi eris!"
 
 #: ../../scripting/win_condition_texts.lua:32
 msgid "The winner is %s "
-msgstr ""
+msgstr "Victor est %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:14
 msgid "This is an endless game without rules."
@@ -123,11 +123,11 @@ msgstr "Hic est ludus infinitus sine regulis"
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:13
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
+msgstr "Hic est infinitus ludus sine regulis et non nimbatus."
 
 #: ../../scripting/win_condition_texts.lua:39
 msgid "Total: %i points"
-msgstr ""
+msgstr "In summa: %i punctae"
 
 #: ../../scripting/win_condition_texts.lua:34
 msgid "Trees owned"
@@ -139,11 +139,11 @@ msgstr "Silvanus"
 
 #: ../../scripting/win_condition_texts.lua:7
 msgid "You are defeated!"
-msgstr ""
+msgstr "Victus es!"
 
 #: ../../scripting/win_condition_texts.lua:13
 msgid "You are the winner!"
-msgstr ""
+msgstr "Victor es!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:15
 msgid ""
@@ -160,15 +160,15 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
-msgstr ""
+msgstr "Hic ludus vicisti!"
 
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
-msgstr ""
+msgstr "Victus es."
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
-msgstr ""
+msgstr "Plus quam dimidiam tabulae terram habes."
 
 #: ../../scripting/win_condition_texts.lua:47
 msgid "You still got %i minutes to prevent a victory."
@@ -176,7 +176,7 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
-msgstr ""
+msgstr "Vicisti"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
@@ -184,4 +184,4 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
-msgstr ""
+msgstr "%i arboribus."

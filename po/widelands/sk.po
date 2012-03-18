@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 23:13+0100\n"
-"PO-Revision-Date: 2012-03-13 13:37+0000\n"
+"PO-Revision-Date: 2012-03-18 03:04+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2012-03-14 04:38+0000\n"
-"X-Generator: Launchpad (build 14933)\n"
+"X-Launchpad-Export-Date: 2012-03-18 04:33+0000\n"
+"X-Generator: Launchpad (build 14951)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -115,11 +115,11 @@ msgstr "Nie"
 
 #: ../../src/writeHTML.cc:375
 msgid "Is mine."
-msgstr "Je môj."
+msgstr "Je baňa."
 
 #: ../../src/writeHTML.cc:380
 msgid "Is big."
-msgstr "Je veľký-"
+msgstr "Je veľký."
 
 #: ../../src/writeHTML.cc:385
 msgid "Is medium."
@@ -145,7 +145,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:420 ../../src/writeHTML.cc:644
 #, c-format
 msgid "Vision range is %u."
-msgstr "Viditeľnosť je %u."
+msgstr "Dohľad je %u."
 
 #: ../../src/writeHTML.cc:428 ../../src/writeHTML.cc:651
 msgid "Build cost"
@@ -154,7 +154,7 @@ msgstr "Náklady na stavbu"
 #: ../../src/writeHTML.cc:438
 #, c-format
 msgid "%s's constructionsite"
-msgstr "Stavba %s"
+msgstr "Stavenisko %s"
 
 #: ../../src/writeHTML.cc:450
 msgid "Enhancements"
@@ -277,7 +277,7 @@ msgstr "Výstup od %s"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Dokumentácia k programovému príkazu "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -286,7 +286,7 @@ msgstr "pracovníci na tomto mieste"
 #: ../../src/writeHTML.cc:1049
 #, c-format
 msgid "site's program %s"
-msgstr ""
+msgstr "program stavby %s"
 
 #: ../../src/writeHTML.cc:1116
 #, c-format
@@ -308,7 +308,8 @@ msgstr "Bluebyte Settlers II Map. Komentár nie je definovaný!"
 
 #: ../../src/wlapplication.cc:383
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr "CHYBA: Pripojenie k metaserveru sa nepodarilo (viz. dôvod hore)!\n"
+msgstr ""
+"CHYBA: Pripojenie k metaserveru sa nepodarilo (pozrite dôvod vyššie)!\n"
 
 #: ../../src/wlapplication.cc:903 ../../src/wlapplication.cc:911
 msgid "could not find the path of the main executable"
@@ -736,7 +737,7 @@ msgstr "neznámy"
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 msgid "Help: "
-msgstr "Pomocník: "
+msgstr "Pomoc: "
 
 #: ../../src/ui_basic/helpwindow.cc:83 ../../src/ui_basic/messagebox.cc:90
 #: ../../src/wui/game_main_menu_save_game.cc:85
@@ -779,7 +780,7 @@ msgstr "Zásoby"
 #: ../../src/wui/soldierlist.cc:382 ../../src/wui/soldierlist.cc:396
 #: ../../src/wui/soldierlist.cc:418
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "Kliknite na vojaka, ktorého chcete poslať preč"
 
 #: ../../src/wui/fieldaction.cc:244
 msgid "Build small buildings"
@@ -795,7 +796,7 @@ msgstr "Postaviť veľké budovy"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build port buildings"
-msgstr ""
+msgstr "Postaviť prístavné budovy"
 
 #: ../../src/wui/fieldaction.cc:279
 msgid "Action"
@@ -922,7 +923,7 @@ msgstr "Vojsko"
 
 #: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
-msgstr "Opravné políčko"
+msgstr "Ladenie políčka"
 
 #: ../../src/wui/game_main_menu.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
@@ -962,11 +963,11 @@ msgstr "Nastavenia ekonomiky"
 
 #: ../../src/wui/transport_ui.cc:146 ../../src/wui/transport_ui.cc:242
 msgid "Decrease target"
-msgstr ""
+msgstr "Znížiť cieľ"
 
 #: ../../src/wui/transport_ui.cc:148 ../../src/wui/transport_ui.cc:244
 msgid "Increase target"
-msgstr ""
+msgstr "Zvýšiť cieľ"
 
 #: ../../src/wui/transport_ui.cc:151 ../../src/wui/transport_ui.cc:247
 msgid "Reset to default"
@@ -999,11 +1000,11 @@ msgstr "Pracovník"
 
 #: ../../src/wui/productionsitewindow.cc:76
 msgid "Exp"
-msgstr ""
+msgstr "Skú"
 
 #: ../../src/wui/productionsitewindow.cc:77
 msgid "Next Level"
-msgstr ""
+msgstr "Ďalšia úroveň"
 
 #: ../../src/wui/productionsitewindow.cc:144
 msgid "(vacant)"
@@ -1080,7 +1081,7 @@ msgstr "Kapacita"
 
 #: ../../src/wui/multiplayersetupgroup.cc:102
 msgid "<free>"
-msgstr "<zadarmo>"
+msgstr "<voľný>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:116
 #: ../../src/wui/multiplayersetupgroup.cc:282
@@ -1197,11 +1198,11 @@ msgstr "Ústup: nikdy!"
 
 #: ../../src/wui/attack_box.cc:239 ../../src/wui/military_box.cc:148
 msgid "Supported damage before retreat"
-msgstr ""
+msgstr "Znesiteľná škoda pred ústupom"
 
 #: ../../src/wui/attack_box.cc:241 ../../src/wui/military_box.cc:150
 msgid "Once injured"
-msgstr ""
+msgstr "Hneď po zranení"
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
@@ -1209,11 +1210,11 @@ msgstr "Loď"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
-msgstr ""
+msgstr "Ísť k lodi"
 
 #: ../../src/wui/shipwindow.cc:89
 msgid "Go to destination"
-msgstr ""
+msgstr "Ísť k cieľu"
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
@@ -1347,7 +1348,7 @@ msgstr "Zobraziť nasledujúce"
 
 #: ../../src/wui/buildingwindow.cc:174
 msgid "Continue"
-msgstr "Pokračuj"
+msgstr "Pokračovať"
 
 #: ../../src/wui/buildingwindow.cc:174
 msgid "Stop"
@@ -1376,7 +1377,7 @@ msgstr "Ladenie"
 
 #: ../../src/wui/buildingwindow.cc:271
 msgid "Center view on this"
-msgstr ""
+msgstr "Vycentrovať sem pohľad"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -1458,11 +1459,11 @@ msgstr "Vojaci"
 
 #: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
-msgstr ""
+msgstr "Spotreba"
 
 #: ../../src/wui/ware_statistics_menu.cc:204
 msgid "Economy Health"
-msgstr ""
+msgstr "Stav ekonomiky"
 
 #: ../../src/wui/warehousewindow.cc:132
 msgid "Normal policy"
@@ -1494,7 +1495,7 @@ msgstr "Encyklopédia tovarov kmeňov"
 
 #: ../../src/wui/encyclopedia_window.cc:87
 msgid "Consumed ware type(s)"
-msgstr ""
+msgstr "Spotrebované druhy tovaru"
 
 #: ../../src/wui/encyclopedia_window.cc:88
 msgid "Quantity"
@@ -1597,7 +1598,7 @@ msgstr "%u.%ux"
 
 #: ../../src/wui/interactive_base.cc:280
 msgid "PAUSE"
-msgstr "Pauza"
+msgstr "PAUZA"
 
 #: ../../src/wui/interactive_base.cc:300
 #, c-format
@@ -1610,19 +1611,19 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/wui/plot_area.cc:118
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
-msgstr ""
+msgstr "hra"
 
 #: ../../src/wui/minimap.cc:137 ../../src/ui_fsmenu/launchMPG.cc:65
 #: ../../src/ui_fsmenu/launchMPG.cc:165
@@ -1670,6 +1671,8 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"mal by ťažiť zdroj %s, ktorý neexistuje vo svete; kmeň nie je kompatibilný "
+"so svetom"
 
 #: ../../src/logic/worker.cc:211
 #, c-format
@@ -1677,6 +1680,8 @@ msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"mal by chovať zdroj typu %s, ktorý neexistuje vo svete; kmeň nie je "
+"kompatibilný so svetom"
 
 #: ../../src/logic/worker.cc:594
 msgid "Out of "
@@ -1686,7 +1691,8 @@ msgstr "Došlo "
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
-msgstr "Robotník tejto budovy nemôže nájsť viac zdrojov nasledujúceho typu: "
+msgstr ""
+"Pracovník tejto budovy nemôže nájsť viac zdrojov nasledujúceho typu: "
 
 #: ../../src/logic/worker.cc:944
 msgid "A geologist found resources."
@@ -1704,11 +1710,11 @@ msgstr "Pracovník sa stratil!"
 #: ../../src/logic/worker.cc:3037
 #, c-format
 msgid "loading worker: %s"
-msgstr "načítava sa robotník: %s"
+msgstr "načítava sa pracovník: %s"
 
 #: ../../src/logic/warehouse.cc:260 ../../src/logic/militarysite.cc:63
 msgid " conquer"
-msgstr " dobiť"
+msgstr " dobyť"
 
 #: ../../src/logic/warehouse.cc:466
 #, c-format
@@ -1717,7 +1723,7 @@ msgstr ""
 
 #: ../../src/logic/player.cc:148 ../../src/logic/game.cc:486
 msgid "Missing starting position"
-msgstr "Chýbajúca štartovacia pozícia"
+msgstr "Chýbajúca počiatočná pozícia"
 
 #: ../../src/logic/player.cc:150 ../../src/logic/game.cc:488
 #, c-format
@@ -1733,7 +1739,7 @@ msgstr ""
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Načítavajú sa kmene"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
@@ -1877,6 +1883,8 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"očakávané atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) alebo "
+"atrTotal (%u), ale nájdená neznáma hodnota atribútu (%u)"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:68
 msgid "\"min-max\""
@@ -1956,7 +1964,7 @@ msgstr "budova %u: %s"
 #: ../../src/logic/playercommand.cc:493
 #, c-format
 msgid "start/stop building: %s"
-msgstr "začať/skončiť stavbu: %s"
+msgstr "začať/ukončiť stavbu: %s"
 
 #: ../../src/logic/playercommand.cc:554
 #, c-format
@@ -1967,7 +1975,7 @@ msgstr "vylepšiť budovu: %s"
 #: ../../src/logic/playercommand.cc:1263
 #, c-format
 msgid "site %u: %s"
-msgstr ""
+msgstr "stavba %u: %s"
 
 #: ../../src/logic/playercommand.cc:690
 #, c-format
@@ -1982,17 +1990,17 @@ msgstr "zmeniť množstvo cieľa: %s"
 #: ../../src/logic/playercommand.cc:881
 #, c-format
 msgid "set ware target quantity: %s"
-msgstr ""
+msgstr "nastaviť cieľové množstvo tovarov: %s"
 
 #: ../../src/logic/playercommand.cc:1003
 #, c-format
 msgid "set worker target quantity: %s"
-msgstr ""
+msgstr "nastaviť cieľové množstvo pracovníkov: %s"
 
 #: ../../src/logic/playercommand.cc:1128
 #, c-format
 msgid "change training options: %s"
-msgstr ""
+msgstr "zmeniť výcvikové možnosti: %s"
 
 #: ../../src/logic/playercommand.cc:1192
 #, c-format
@@ -2002,7 +2010,7 @@ msgstr "vojak  %u: %s"
 #: ../../src/logic/playercommand.cc:1198
 #, c-format
 msgid "drop soldier: %s"
-msgstr "umiesniť vojaka: %s"
+msgstr "umiestniť vojaka: %s"
 
 #: ../../src/logic/playercommand.cc:1270
 #, c-format
@@ -2022,7 +2030,7 @@ msgstr "zmeniť konfiguráciu armády: %s"
 #: ../../src/logic/playercommand.cc:1485
 #, c-format
 msgid "(player %u): message id is null"
-msgstr "(hráč %u): číslo správy je prázdne"
+msgstr "(hráč %u): ID správy je nulové"
 
 #: ../../src/logic/playercommand.cc:1490
 #, c-format
@@ -2032,7 +2040,7 @@ msgstr "správa hráča: %s"
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% rozobraný"
 
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
@@ -2069,7 +2077,7 @@ msgstr "očakávané kladné celé číslo >= %u, ale nájdené \"%s\""
 
 #: ../../src/logic/soldier.cc:183
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"anim_name[,another_anim,...]\""
 
 #: ../../src/logic/soldier.cc:1253
 #, c-format
@@ -2100,7 +2108,7 @@ msgstr "Prednačítava sa mapa"
 
 #: ../../src/logic/game.cc:231
 msgid "Loading a world"
-msgstr "Nahrávanie sveta"
+msgstr "Načítava sa svet"
 
 #: ../../src/logic/game.cc:237
 #, c-format
@@ -2139,7 +2147,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:252 ../../src/logic/tribe.cc:273
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" je duplikovaný"
 
 #: ../../src/logic/tribe.cc:261 ../../src/logic/tribe.cc:282
 msgid "none found"
@@ -2163,7 +2171,7 @@ msgstr "kmeň %s: %s"
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
 msgid "loading critter: %s"
-msgstr ""
+msgstr "načítava sa tvor: %s"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -2191,11 +2199,11 @@ msgstr "program %s: %s"
 #: ../../src/logic/immovable.cc:259 ../../src/logic/immovable.cc:274
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr "očakávané 0 .. 255 ale nájdené %u"
+msgstr "očakávané 0 .. 255, ale nájdené %u"
 
 #: ../../src/logic/immovable.cc:261 ../../src/logic/immovable.cc:276
 msgid "duplicated"
-msgstr "zdvojené"
+msgstr "duplikované"
 
 #: ../../src/logic/immovable.cc:279
 #, c-format
@@ -2283,7 +2291,7 @@ msgstr "%u%% postavené"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr "[súboj] vojak %u prehral súboj\n"
+msgstr "[bitka] vojak %u prehral boj\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
@@ -2320,6 +2328,8 @@ msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
 "section)"
 msgstr ""
+"%s nie je deklarovaný ako vstup (\"%s=<count>\" nebol nájdený v sekcii "
+"[inputs])"
 
 #: ../../src/logic/production_program.cc:100
 #, c-format
@@ -2354,7 +2364,7 @@ msgstr "ekonomika potrebuje "
 
 #: ../../src/logic/production_program.cc:221
 msgid "site has "
-msgstr ""
+msgstr "stavba má "
 
 #: ../../src/logic/production_program.cc:247
 msgid "workers need experience"
@@ -2362,7 +2372,7 @@ msgstr "robotníci potrebujú skúsenosti"
 
 #: ../../src/logic/production_program.cc:272
 msgid "ware type or worker type"
-msgstr ""
+msgstr "typ tovaru alebo typ pracovníka"
 
 #: ../../src/logic/production_program.cc:335
 #, c-format
@@ -2376,7 +2386,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:363
 msgid "expected \"and\" or end of input"
-msgstr ""
+msgstr "očakávané \"a\" alebo koniec vstupu"
 
 #: ../../src/logic/production_program.cc:372
 msgid "expected condition at end of input"
@@ -2384,7 +2394,7 @@ msgstr "očakávaná podmienka na konci vstupu"
 
 #: ../../src/logic/production_program.cc:378
 msgid "expected \"or\" or end of input"
-msgstr ""
+msgstr "očakávané \"alebo\" alebo koniec vstupu"
 
 #: ../../src/logic/production_program.cc:411
 #: ../../src/logic/production_program.cc:801
@@ -2456,11 +2466,11 @@ msgstr "spánok: %s"
 #: ../../src/logic/production_program.cc:668
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Neznámy parameter \"%s\""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
-msgstr ""
+msgstr "Nezadaný žiadny parameter!"
 
 #: ../../src/logic/production_program.cc:702
 msgid "idle animation is default; calling is not allowed"
@@ -2473,8 +2483,9 @@ msgstr ""
 #: ../../src/logic/production_program.cc:828
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " chýbajú"
+msgstr[1] " chýba"
+msgstr[2] " chýbajú"
 
 #: ../../src/logic/production_program.cc:890
 #: ../../src/logic/production_program.cc:985
@@ -2483,6 +2494,8 @@ msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
+"%s nie je deklarovaný ako výstup (\"output=%s\" nebol nájdený v sekcii "
+"[global])"
 
 #: ../../src/logic/production_program.cc:917
 #: ../../src/logic/production_program.cc:1010
@@ -3082,7 +3095,7 @@ msgstr "Začni hrať"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:76
 msgid "Launch Game"
-msgstr "Spusti hru"
+msgstr "Spustenie hry"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:84
 msgid "Player's name"
