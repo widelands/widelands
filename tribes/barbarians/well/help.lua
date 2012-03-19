@@ -21,7 +21,7 @@ return {
 		rt(h2(_"Dependencies")) ..
 		text_line(_"Incoming:", "n/a") ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/well/menu.png","tribes/barbarians/water/menu.png"},p(_"Water")) ..
+		dependencies({"tribes/barbarians/resi_water1/resi_00.png","tribes/barbarians/well/menu.png","tribes/barbarians/water/menu.png"},p(_"Water")) ..
 		dependencies({"tribes/barbarians/water/menu.png","tribes/barbarians/bakery/menu.png"},p(_"Bakery")) ..
 		dependencies({"tribes/barbarians/water/menu.png","tribes/barbarians/micro-brewery/menu.png"},p(_"Micro Brewery")) ..
 		dependencies({"tribes/barbarians/water/menu.png","tribes/barbarians/brewery/menu.png"},p(_"Brewery")) ..

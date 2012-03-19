@@ -16,7 +16,7 @@ return {
 		rt(h2(_"General")) ..
 		rt(p(_"A %s exploits only %s of the resource.<br>From there on, it will only have a 5%% chance of finding %s.":format(_"Deep Coal Mine","2/3",_"Coal"))) ..
 		rt(h3(_"Purpose:")) ..
-		image_line("tribes/barbarians/ironore/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Coal"))) ..
+		image_line("tribes/barbarians/coal/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Coal"))) ..
 		text_line(_"Working radius:", "2") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
