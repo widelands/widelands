@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-27 21:36+0000\n"
-"PO-Revision-Date: 2012-03-07 14:11+0000\n"
+"POT-Creation-Date: 2012-03-08 22:13+0000\n"
+"PO-Revision-Date: 2012-03-13 09:04+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-08 04:40+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-14 04:38+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -24,6 +24,11 @@ msgid ""
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
+"Üzeneted érkezett. Feltűnt miképpen változott meg az ikonsorban az\n"
+"üzenetek ikonja? Mivel már nincs szükségünk a kőfejtőre, ezért legjobb "
+"lesz,\n"
+"ha leégetjük azt. Ehhez kattints az épületre, majd választ a lerombol "
+"lehetőséget."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
 msgid ""
@@ -58,6 +63,8 @@ msgid ""
 "Alternatively, you can directly click the flag where\n"
 "the road should end like so."
 msgstr ""
+"Természetesen a két zászló közötti területet összekötheted\n"
+"pár kattintással is. Megmutatom ezt is."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:266
 msgid "And finally the yellow flag symbol only allows for flags."
@@ -65,17 +72,17 @@ msgstr "És végül a sárga zászlónál értelemszerűen csak zászló lehet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
 msgid "Archive all messages in your inbox"
-msgstr ""
+msgstr "Minden beérkezett üzenet archiválása"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:407
 msgid ""
 "Archive all messages, including this one, that you currently have in your\n"
 " inbox."
-msgstr ""
+msgstr "Archiváld minden beérkezett üzeneted, beleértve ezt is."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:413
 msgid "Archive our inbox messages"
-msgstr ""
+msgstr "Archiváljuk a beérkezett üzeneteket"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:484
 msgid ""
@@ -85,12 +92,20 @@ msgid ""
 "vulnerable: any military site from another player can conquer the land. You\n"
 "therefore need military sites to keep military influence over your land."
 msgstr ""
+"Miután elkészült a katonai létesítmény, akár le is rombolhatod, ha kell a "
+"hely.\n"
+"Ettől a terület nem vész el, egészen addig amíg egy másik játékos meg nem\n"
+"hódítja azt. Hogy ezt kivédd, csak olyan helyeken rombold le ezeket az "
+"épületeket\n"
+"ahol nem tartasz ellenséges aktivitástól."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:683
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
 msgstr ""
+"Támadd meg és foglald el az ellenség összes katonai létesítményét,\n"
+"a főhadiszállást pedig rombold le."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
@@ -99,18 +114,20 @@ msgstr "Támadás:"
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
 msgstr ""
+"Alap oktatójáték - a térkép a Winterwind's első oktatójátékának barbáros "
+"pályáján alapul."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
-msgstr ""
+msgstr "Tűzz ki egy zászlót az útra"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:167
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "Tűzz ki egy zászlót a favágóház és főhadiszállás közé"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Build a quarry"
-msgstr ""
+msgstr "Építs kőfejtőt"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid "Build a quarry next to the stones"
@@ -128,8 +145,8 @@ msgid ""
 "earlier."
 msgstr ""
 "Építsünk egy kőfejtőt a kövek mellé. Emlékszel, hogy csináltam az előbb?\n"
-"Győződj meg róla, hogy az építés segítő aktív és kattints az épület leendő "
-"helyére.\n"
+"Győződj meg róla, hogy az építési segítség aktív és kattints az épület "
+"leendő helyére.\n"
 "A megjelenő ablakból válaszd ki a megfelelő építményt és helyezd el a "
 "térképen.\n"
 "Itt az ideje, hogy visszatérjek az építés segítő szimbólumaira."
@@ -148,11 +165,13 @@ msgid ""
 "to\n"
 "build a small training scenario for you. Let's do that now."
 msgstr ""
+"De elkalandoztam, térjünk vissza a katonákhoz. Mit is akartam csinálni?\n"
+"Már emlékszem. Építeni akartam gyakorlóterepet a számodra. Kezdjünk is bele."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
 msgid "Census and statistics"
-msgstr ""
+msgstr "Címke és statisztika"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:650
 msgid ""
@@ -169,7 +188,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
 msgid "Close the messages window"
-msgstr ""
+msgstr "Zárt be az üzentek ablakot"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:427
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:448
@@ -183,11 +202,11 @@ msgstr "Megkötéséről"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "Kösd össze a kőfejtőt a főhadiszállással"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:347
 msgid "Connect your construction site"
-msgstr ""
+msgstr "Kösd össze az építkezési területet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:348
 msgid ""
@@ -203,11 +222,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
-msgstr ""
+msgstr "Hódíts területet a leendő bányáknak"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Conquer the mountain to the south west"
-msgstr ""
+msgstr "Hódítsd meg a dél-nyugati hegyet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -219,14 +238,21 @@ msgid ""
 "so\n"
 "that they get a tick-symbol in front of them. Then, you can click the"
 msgstr ""
+"Jelenleg két üzeneted van. Ez amit éppen olvasol és az előző, ami arról "
+"informál,\n"
+"hogy egy főhadiszállás lett hozzáadva a gazdaságodhoz. Most pedig tanuljuk "
+"meg\n"
+"miképpen is lehet archiválni az üzeneteket. Mindegyik előtt található egy "
+"kis\n"
+"jelölőnégyzet, ezzel választhatjuk ki őket, majd kattintsunk az"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid "Defeat the enemy"
-msgstr ""
+msgstr "Győzd le az ellenséget"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "Győzd le az ellenséges törzset"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:690
 msgid ""
@@ -234,11 +260,15 @@ msgid ""
 "the\n"
 "number of attacking soldiers, then send them via the attack button."
 msgstr ""
+"Győzd le a közeli ellenséget. Ahhoz, hogy megtámadj egy épületet, kattints\n"
+"az ajtajára, majd válaszd ki hány katonát szeretnél mozgósítani, azután add "
+"ki \n"
+"a parancsot a támadásra."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
 msgid "Defeat your enemy"
-msgstr ""
+msgstr "Győzd le az ellenségedet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:629
 msgid ""
@@ -256,7 +286,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid "Defense:"
-msgstr "Védelem:"
+msgstr "Védekezés"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Diving in"
@@ -265,25 +295,28 @@ msgstr "Az első lépések"
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid "Enable the build help"
-msgstr ""
+msgstr "Aktiváld az építési segítséget"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhance this fortress"
-msgstr ""
+msgstr "Fejleszd ezt az erődöt"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid "Enhance your fortress"
-msgstr ""
+msgstr "Fejleszd az erődöd"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "Fejleszd az erődödet citadellává"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
 msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
 msgstr ""
+"Fejleszd az erődödet citadellává. Ne feledkezz meg, hogy gyorsíthatod a "
+"játék\n"
+"sebességén a PAGE_UP billentyűvel."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:664
 msgid ""
@@ -295,10 +328,15 @@ msgid ""
 "strategically\n"
 "important points like constricted points or mountains."
 msgstr ""
+"Fejleszd az erődöt citadellává. A citadella 12 katonát tud elszállásolni,\n"
+"ezzel a barbárok legnagyobb katonai létesítménye. Rengeteg nyersanyagra\n"
+"van szükség hozzá és sokáig is épül, de például szűk hegyi hágóknál ez "
+"nyújtja\n"
+"a legjobb védelmet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "Épületek fejlesztése"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
 msgid ""
@@ -306,10 +344,13 @@ msgid ""
 "for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
+"A kitérés azt adja meg, hogy mekkora esélye van egy katonának a támadás\n"
+"elkerülésére. Ez 25%-ról indul egy 0. szintű barbárnál és 15%-kal növekszik\n"
+"szintenként."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid "Evade:"
-msgstr "Elkerüljék:"
+msgstr "Kitérés:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
@@ -382,6 +423,15 @@ msgid ""
 "also\n"
 "vary in their vision range: buildings with a tower see farther than others."
 msgstr ""
+"A bővítés pofon egyszerű. Nincs más dolgod, mint valamilyen katonai "
+"építményt\n"
+"felhúzni a területed szélénél. A barbárok több ilyennel is rendelkeznek: "
+"őrbódé,\n"
+"erődítmény, helyőrség, erőd és citadella. Minél nagyobb az épület, annál "
+"drágább\n"
+"megépíteni azt, viszont annál nagyobb területet hódíthatsz meg és több "
+"katonát\n"
+"szállásolhatsz el. Viszont legmesszebb az őrtorony lát el."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:470
 msgid "Expanding your territory!"
@@ -404,15 +454,13 @@ msgid ""
 "then select\n"
 "the tab - and finally I'll choose the building."
 msgstr ""
-"Először, kattintsunk arra a szimbólumra ahová a kunyhót szeretnénk "
-"felhúzni.\n"
+"Először kattintsunk arra a szimbólumra ahová a kunyhót szeretnénk felhúzni.\n"
 "Egy ablak fog megjelenni a válaszható épületekkel. Egy sárga házat ábrázoló\n"
 "szimbólumra kell kattintani, ami azt jelenti, hogy csak kicsi és közepes "
 "épület fér\n"
 "el ott. A közepes épületek helyett válasszuk ki a kis épületeket, majd a "
 "favágóházat.\n"
-"Kattints az Ok gombra és figyeld amit csinálok. Lassan bemutatok minden "
-"lépést."
+"Kattints az Ok gombra és figyeld amit csinálok. Lassan mutatok minden lépést."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:498
 msgid ""
@@ -420,6 +468,13 @@ msgid ""
 "in mountains. Conquer some area on the mountains to the south-west of your\n"
 "headquarters by building some military buildings close to your border."
 msgstr ""
+"Egy teljes körű  gazdaságban szükség van szénre, vasra és aranyra. Ezeket "
+"pedig\n"
+"a hegyekből lehet kibányászni. Hódíts meg valamennyi területet a "
+"főhadiszállástól\n"
+"dél-nyugatra eső hegyen, azzal, hogy valamilyen katonai létesítményt építesz "
+"a\n"
+"határhoz közel."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:200
 msgid "Getting a quarry up."
@@ -437,10 +492,16 @@ msgid ""
 "your\n"
 "tribe, won or lost military buildings, resources found..."
 msgstr ""
+"Helló, újra én vagyok az. Éppen most küldtem neked egy üzenetet. A játék "
+"ilyen\n"
+"üzenetekkel kommunikál veled, hogy tudassa a fontosabb eseményeket, mint\n"
+"például kiürült bányák, támadás, harci győzelmek, veszteségek vagy "
+"ásványkincsek\n"
+"megtalálása…"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:620
 msgid "Hitpoints:"
-msgstr ""
+msgstr "Életerő:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid "How to build a quarry"
@@ -455,6 +516,10 @@ msgid ""
 "everything out for yourself. Otherwise, please bear with me, I am not the\n"
 "youngest and quickest anymore."
 msgstr ""
+"Sajnálom, de ezt el kell tüntetnem. Itt szükségünk lesz később a helyre.\n"
+"Ha túl lassan mutatom a dolgokat és szeretnél magad rájönni, akkor\n"
+"kezd el a valódi játékot. Ha viszont nem így gondolod, akkor kérlek\n"
+"várd meg míg megmutatom a dolgokat."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
 msgid ""
@@ -481,13 +546,15 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel\n"
 "road building by clicking on the starting flag of the road and selecting"
 msgstr ""
+"Ha úgy döntesz, hogy mégsem akarnál útat építeni, kattints csak a kezdő\n"
+"zászlóra és válaszd a"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:268
 msgid ""
 "If you place something on a field, the surrounding fields might have less\n"
 " space for holding buildings, so choose your fields wisely."
 msgstr ""
-"Ha felépítesz valami egy helyen, a környező területeken sokkal kisebb lesz\n"
+"Ha felépítesz valamit egy helyen, a környező területeken sokkal kisebb lesz\n"
 "a hely és így kevesebb dolog fér majd ott el. Szóval körültekintően válassz."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:583
@@ -499,7 +566,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid "Introducing messages"
-msgstr ""
+msgstr "Bevezető üzenet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:95
 msgid ""
@@ -509,6 +576,11 @@ msgid ""
 "clicking the fourth button from the left at the very bottom of the screen.\n"
 "Click the \"OK\" button and then give it a try."
 msgstr ""
+"Sokkal könnyebb úgy építkezni, ha aktiválod az építési segítséget, ezzel\n"
+"bekapcsolva a különböző szimbólumok megjelenítését a területeken.\n"
+"Aktiváláshoz választ ki az alsó ikonsorból a balról negyedik elemet vagy\n"
+"csak egyszerűen nyomd meg a SZÓKÖZ billentyűt. Kattints az OK gombra\n"
+"és próbáld is ki az itt leírtakat."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
 msgid ""
@@ -523,6 +595,9 @@ msgid ""
 "Also try to keep roads as short as possible and always remember to place as\n"
 "many flags as you can on road segments to share the load better."
 msgstr ""
+"Építkezz okosan, hogy megkönnyítsd a dolgodat, lehetőleg törekedj a\n"
+"minél rövidebb útvonal megépítésére. Illetve oszd fel az utakat zászlókkal,\n"
+"ezzel meggyorsítva a rakodás sebességét."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
@@ -536,6 +611,9 @@ msgid ""
 "the\n"
 "watch tab and then click on the corresponding buttons."
 msgstr ""
+"Gyorsan meg is mutatom mindkettőt. Emlékezz a „c” és az „s” billentyűvel\n"
+"aktiválhatod ezeket. Vagy egy üres területre kattintva a nézőkéből is \n"
+"elérhető mindkettő funkció."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:68
 msgid "Let's dive right in!"
@@ -549,6 +627,9 @@ msgid ""
 "geologist\n"
 "to it. I'll show you how it's done."
 msgstr ""
+"Akkor kutassuk is át a hegyeket. Először egy útra van szükségünk a hegyre,\n"
+"illetve egy zászlóra  végén. Azután kattintsunk a zászlóra és hívjunk egy\n"
+"geológust, hogy kutasson ásványkincsek után. Megmutatom a lépéseket."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -558,10 +639,17 @@ msgid ""
 "beneficial\n"
 "close to mountains because you can't build houses in mountains."
 msgstr ""
+"Próbáld is ki. Építs néhány katonai létesítményt a dél-nyugati határnál, "
+"ezzel\n"
+"felfedezve a hegyeket, melyeket átvizsgálunk ásványkincsek után a "
+"későbbiekben.\n"
+"A nagyobb épületek több és távolabbi területeket hódítanak meg, ez azért "
+"lehet hasznos, mert\n"
+"a hegyekre nem tudsz építkezni."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
-msgstr ""
+msgstr "Várjuk meg miket talál a geológus a hegyen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid "Lumberjack is done"
@@ -581,19 +669,19 @@ msgstr "Üzenetek"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
-msgstr ""
+msgstr "Bányászati következtetések"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Navigálj a billentyűzet nyilaival"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Navigálj az egér segítségével"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Navigálás"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -634,6 +722,12 @@ msgid ""
 "well. This infrastructure also varies from tribe to tribe. You'll get them\n"
 "explained in the introduction campaigns for the three tribes."
 msgstr ""
+"A bányák működéséhez élelmiszer fejadagokra lesz szükség. Ilyeneket a "
+"fogadóban\n"
+"tudnak előállítani. Ehhez viszont húsra, kenyérre és halra van szükség.\n"
+"Ezekhez persze további infrastruktúra bővítésekre lesz szükségünk. Ez "
+"mindhárom\n"
+"törzsnek különböző, de mindegyiket be fogom mutatni."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:271
 msgid ""
@@ -650,6 +744,8 @@ msgid ""
 "Now please rebuild the road between your quarry and your headquarters.\n"
 "We'll wait until the quarry is completed."
 msgstr ""
+"Most pedig kérlek építsd újra az utat a kőfejtő és a főhadiszállás között.\n"
+"Azután megvárjuk míg elkészül az épület."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:149
 msgid ""
@@ -666,6 +762,8 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
+"Már tudjuk hogyan áll az építkezés, most már csak meg kell várnunk még kész "
+"nem lesz."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
@@ -677,6 +775,13 @@ msgid ""
 "over\n"
 "the route the road takes like so:"
 msgstr ""
+"Visszatérve az útépítéshez, emlékezz, már az útépítő módban vagy amióta "
+"építésre\n"
+"jelölted a kőfejtőt. A két zászló közötti utat lehetőséged van lépésről-"
+"lépésre is\n"
+"felépíteni. Ehhez nincs más dolgod, mint mindig a legközelebbi zászlóra "
+"kattintva\n"
+"eljutni a legutolsó zászlóig. Hogy érthetőbb legyen meg is mutatom most."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
@@ -686,6 +791,10 @@ msgid ""
 "get\n"
 "the resources out of the ground."
 msgstr ""
+"Rendben van, most már birtokolunk valamennyi területet a hegyen.\n"
+"Ez pedig nagyon fontos, mert onnan tudjuk kibányászni a következő\n"
+"ásványkincseket: szén, vasérc, aranyérc és gránit. Mindegyik törzs\n"
+"másképp használja fel ezeket, de mindegyiknek szüksége van rá."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:575
 msgid ""
@@ -709,6 +818,9 @@ msgid ""
 "One more thing: around the field where your road would end you can see\n"
 "different markers. They have the following meaning:"
 msgstr ""
+"Még egy apróság: az útépítésekor láthatsz különböző jelzéseket a közeli "
+"területeken.\n"
+"Ezek a következőket jelentik:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Onward to the quarry"
@@ -720,7 +832,7 @@ msgstr "A másik módja a navigálásnak"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "Placing another flag"
-msgstr ""
+msgstr "Másik zászló elhelyezése"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:264
 msgid "Red building symbols can only hold small buildings and flags."
@@ -734,7 +846,7 @@ msgstr "Útépítés"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
-msgstr ""
+msgstr "Ásványkincsek keresése"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:366
 msgid ""
@@ -743,6 +855,10 @@ msgid ""
 "display an information string about the productivity of buildings or the\n"
 "progress of construction sites."
 msgstr ""
+"Ehhez hasonlóan az épületekről statisztikát is kérhetsz a nézőkéből.\n"
+"Vagy az „s” billentyű lenyomásával is aktiválhatod. Ez az építés "
+"állapotáról\n"
+"vagy kész épületnél a termelékenységről jelenít meg információkat."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:558
 msgid ""
@@ -751,14 +867,17 @@ msgid ""
 "help\n"
 "symbol for where a mine can be built is"
 msgstr ""
+"Szóval a geológusunk rengeteg szenet talált a hegyen. Építenünk kellene egy\n"
+"szénbányát. Ezt hasonlóan tudjuk meg tenni az eddigi építkezéseinkhez.\n"
+"Az építés segítség bekapcsolása után válasszuk ki a megfelelő jelzést, ami"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
-msgstr ""
+msgstr "Katonák és hadviselés"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:199
 msgid "Some stones were found"
-msgstr "Találtunk egy kis követ"
+msgstr "Találtunk követ"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
 msgid ""
@@ -779,6 +898,8 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
 msgstr ""
+"Köszönjük, hogy végigjátszottad ezt az oktató játékot. Reméljük sok\n"
+"örömöd lesz a  Widelands-ben. Ha gondolod látogass el hozzánk:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:137
 msgid ""
@@ -807,6 +928,8 @@ msgid ""
 "The connection between the fields is extremely steep. The speed increase in\n"
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"Rendkívül meredek terep. Lefelé nagyon gyorsak lesznek a rakodók,\n"
+"felfelé viszont igen csak meglassítja a munkájukat."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:531
 msgid ""
@@ -815,6 +938,9 @@ msgid ""
 "various\n"
 "resources:"
 msgstr ""
+"A geológus hamarosan megérkezik a zászlóhoz és belekezd a felderítésbe.\n"
+"A munkája során jelzéseket fog elhelyezni a területen. Ezek a következő\n"
+"jelentéssel bírnak:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:395
 msgid ""
@@ -824,6 +950,10 @@ msgid ""
 "available, but there is also a bell sound played whenever you receive a new\n"
 "message."
 msgstr ""
+"Az üzeneteket tartalmazó ablak az alsó ikonsor legutolsó elemére kattintva\n"
+"érhető el. Ez jelzi továbbá azt is, ha új üzenet érkezett. Ilyenkor "
+"megváltozik\n"
+"az ikon, illetve hangjelzés is hallható."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:414
 msgid ""
@@ -863,7 +993,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:330
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
+msgstr "Síkterep. A rakodók itt könnyen és gyorsan fognak haladni."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:621
 msgid ""
@@ -871,6 +1001,8 @@ msgid ""
 "hitpoints,\n"
 "with each hitpoint level he gains 28 hitpoints."
 msgstr ""
+"Egy katona életereje. Egy barbár harcos nagyjából 130 életerővel kezd,\n"
+"mely 28-cal növekszik minden szintlépéskor."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:279
 msgid ""
@@ -889,11 +1021,11 @@ msgid ""
 "weaknesses,\n"
 "but the general gameplay is the same for all. We play the barbarians for now."
 msgstr ""
-"Három különböző törzs van található a Widelandsben: a barbárok, a "
-"birodalmiak és\n"
+"Három különböző törzs található a Widelandsben: a barbárok, a birodalmiak "
+"és\n"
 "az atlantisziak. Minden törzsnek eltérő gazdasága, erősségei és gyengéi "
 "vannak,\n"
-"de az általános játék menet megegyezik. Most a barbárokat mutatjuk be."
+"de az általános játékmenet megegyezik. Most a barbárokat mutatjuk be."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:207
 msgid ""
@@ -912,6 +1044,8 @@ msgid ""
 "There is a small slope to climb to reach this field. This means your\n"
 "workers are faster walking downwards than they are walking upwards."
 msgstr ""
+"Van egy kis emelkedő. Itt a rakodók gyorsan fognak lefelé menni,\n"
+"viszont felfelé csak gyalogolni tudnak majd."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:472
 msgid ""
@@ -921,6 +1055,10 @@ msgid ""
 "basic build infrastructure and we do not have access to mountains which we\n"
 "need to mine minerals and coal. So we have to expand our territory."
 msgstr ""
+"Még van egy dolog, amit mindenképpen meg szeretnék mutatni neked. Ez\n"
+"pedig nem más, mint a területed bővítése. Kezdetkor még megfelel ekkora\n"
+"terület, viszont a hegyek már ezen kívül esnek és így bányászni sem tudunk.\n"
+"Szóval bővítsük ki a területet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:604
 msgid ""
@@ -968,15 +1106,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
 msgid "Trainings camp and soldier stats"
-msgstr ""
+msgstr "Kiképzőtáborok és katonai statisztikák"
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial01"
-msgstr ""
+msgstr "Oktatójáték 1"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:529
 msgid "Waiting for the geologist"
-msgstr ""
+msgstr "Várakozás a geológusra"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:177
 msgid "Waiting for the hut to be finished"
@@ -988,7 +1126,7 @@ msgstr "A favágóház felépítése"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:573
 msgid "Warfare and Training"
-msgstr ""
+msgstr "Hadviselés és kiképzés"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:83
 msgid ""
@@ -1023,6 +1161,9 @@ msgid ""
 "send a message that he can't find any in his working area the next time he\n"
 "tries to do some work."
 msgstr ""
+"Szép munka! Lássunk miképpen is működnek az üzenetek a játék során.\n"
+"Ehhez eltüntetek minden követ a kőfejtő mellöl, mire szegény kőfejtő\n"
+"küldeni fog egy üzenetet amiben leírja a dolgokat."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:180
 msgid ""
@@ -1045,6 +1186,10 @@ msgid ""
 "They are called the census and you can toggle them via the 'c' key or via\n"
 "the button on the watch tab of any field."
 msgstr ""
+"Amíg várunk mutatok még egy hasznos dolgot. Minden építkezési terület\n"
+"ugyanúgy néz ki, néhány épület pedig nagyon hasonlít. Néha ezért nehéz\n"
+"megmondani mi is az. Erre van egy funkció ami megjelenít egy címkét az\n"
+"épület nevével. Ezt a „c” billentyűvel vagy a nézőkéből tudod aktiválni."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
 msgid ""
@@ -1086,6 +1231,8 @@ msgid ""
 "like.\n"
 "To leave this game and return to the main menu click on the"
 msgstr ""
+"Még játszhatsz tovább a pályán, de, ha gondolod  be is fejezheted.\n"
+"A játék elhagyásához válaszd a főmenüből a"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:59
 msgid "You can dismiss this box by left-clicking on the button below."
@@ -1123,39 +1270,39 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:535
 msgid "a bit of coal"
-msgstr ""
+msgstr "egy kevés szén"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:539
 msgid "a bit of gold"
-msgstr ""
+msgstr "egy kevés arany"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:542
 msgid "a bit of granite"
-msgstr ""
+msgstr "egy kevés gránit"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:537
 msgid "a bit of iron"
-msgstr ""
+msgstr "egy kevés vas"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:536
 msgid "a lot of coal"
-msgstr ""
+msgstr "rengeteg szén"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
 msgid "a lot of gold"
-msgstr ""
+msgstr "rengeteg arany"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:544
 msgid "a lot of granite"
-msgstr ""
+msgstr "rengeteg gránit"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:538
 msgid "a lot of iron"
-msgstr ""
+msgstr "rengeteg vas"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
-msgstr ""
+msgstr "archiválás gombra, ezzel archiválva az üzeneteket."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:164
 msgid "build flag symbol."
@@ -1163,7 +1310,7 @@ msgstr "zászló kitűzése szimbólumát."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:714
 msgid "exit game button."
-msgstr ""
+msgstr "kilépés a játékból gombot."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:586
 msgid ""
@@ -1174,7 +1321,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:547
 msgid "nothing was found here"
-msgstr ""
+msgstr "semmi nincs ott"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:711
 msgid ""
@@ -1184,7 +1331,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."
-msgstr ""
+msgstr "megszakítás szimbólumot."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:299
 msgid "the road building symbol."
@@ -1192,8 +1339,8 @@ msgstr "útépítés szimbólumot."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:561
 msgid "this one."
-msgstr ""
+msgstr "ilyen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
-msgstr ""
+msgstr "víz"

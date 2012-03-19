@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-27 21:36+0000\n"
-"PO-Revision-Date: 2012-03-07 11:36+0000\n"
-"Last-Translator: Ferenc Nagy <Unknown>\n"
+"POT-Creation-Date: 2012-03-08 22:13+0000\n"
+"PO-Revision-Date: 2012-03-12 08:26+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-08 04:40+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-13 04:39+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -32,7 +32,7 @@ msgid ""
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
 "A sisak egy alapvető eszköz a harcosok megvédésére. A sisakkészítő gyártja "
-"és az edzőtáborban használatos - élelmiszerrel együtt - 0 és 1 közötti "
+"és az kiképzőtáborban használatos - élelmiszerrel együtt - 0 és 1 közötti "
 "életerővel rendelkező katonák képzésére."
 
 #: ../../tribes/barbarians/meal/conf:1
@@ -65,7 +65,7 @@ msgid ""
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
 "A harci sisak egy erősített páncél a barbár harcosoknak.  A sisakkészítő "
-"gyártja és az edzőtáborban használatos - élelmiszerrel együtt - 1 és 2 "
+"gyártja és az kiképzőtáborban használatos - élelmiszerrel együtt - 1 és 2 "
 "közötti életerővel rendelkező katonák képzésére."
 
 #: ../../tribes/barbarians/conf:41
@@ -132,8 +132,8 @@ msgid ""
 "(trainingscamp and battle arena)."
 msgstr ""
 "A kenyér és a hús mellett a hal is a barbárok élelmiszerei közé tartozik. "
-"Halat a kocsmában, fogadóban illetve nagy fogadóban és az "
-"edzőhelyeken(edzőtábor, küzdőtér) használnak."
+"Halat a kocsmában, fogadóban illetve nagy fogadóban és az  kiképzőhelyeken ( "
+"kiképzőtábor, küzdőtér) használnak."
 
 #: ../../tribes/barbarians/conf:192
 msgid "Big Inn"
@@ -149,7 +149,7 @@ msgstr "Gerenda"
 
 #: ../../tribes/barbarians/conf:70
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Sütőlapát"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -185,7 +185,7 @@ msgstr "Faszenet készít."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Meszet éget az égetőkemencében."
 
 #: ../../tribes/barbarians/conf:111
 msgid "Carrier"
@@ -218,7 +218,7 @@ msgstr "Fő bányász"
 
 #: ../../tribes/barbarians/conf:220
 msgid "Citadel"
-msgstr "Fellegvár"
+msgstr "Citadella"
 
 #: ../../tribes/barbarians/conf:230
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
@@ -245,7 +245,7 @@ msgstr "Szénbánya"
 
 #: ../../tribes/barbarians/shipyard/conf:21
 msgid "Constructing ship"
-msgstr ""
+msgstr "Építőhajó"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Construction Site"
@@ -289,7 +289,7 @@ msgstr "Védekezz és hódíts!"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Destroyed building"
-msgstr "Elpusztított épület"
+msgstr "Lerombolt épület"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -499,7 +499,7 @@ msgstr "Az áru szállításában segít a forgalmasabb utakon."
 
 #: ../../tribes/barbarians/conf:160
 msgid "High Tower"
-msgstr ""
+msgstr "Magas torony"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -614,8 +614,8 @@ msgid ""
 msgstr ""
 "A húsban nagyon sok energia van. A vadász állítja elő és a kocsmákban, "
 "fogadókban illetve nagy fogadókban használják a fejadagok, harapnivalók és "
-"ebédek elkészítéséhez a bányászok számára. Ezeken kívül még az edző "
-"helyeken(edzőtábor, küzdőtér) is használják."
+"ebédek elkészítéséhez a bányászok számára. Ezeken kívül még az "
+"kiképzőhelyeken ( kiképzőtábor, küzdőtér)) is használják."
 
 #: ../../tribes/barbarians/conf:200
 msgid "Metalwork Shop"
@@ -671,7 +671,7 @@ msgstr "Búzát vet"
 
 #: ../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Mezőn dolgozik."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -777,7 +777,7 @@ msgstr "Harci fejszét készít"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr "Szövetet készít a hajó vitorlához és ruhához."
+msgstr "Szövetet készít a hajó vitorlához és a katonáknak."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -916,19 +916,19 @@ msgstr "Éles fejsze"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Ship"
-msgstr ""
+msgstr "Hajó"
 
 #: ../../tribes/barbarians/conf:62
 msgid "Ship construction site"
-msgstr ""
+msgstr "Hajókészítő"
 
 #: ../../tribes/barbarians/conf:139
 msgid "Shipwright"
-msgstr ""
+msgstr "Hajóács"
 
 #: ../../tribes/barbarians/conf:197
 msgid "Shipyard"
-msgstr ""
+msgstr "Hajógyár"
 
 #: ../../tribes/barbarians/conf:100
 msgid "Shovel"
@@ -973,7 +973,7 @@ msgstr "Uzsonna"
 
 #: ../../tribes/barbarians/conf:115
 msgid "Soldier"
-msgstr "Harcos"
+msgstr "Katona"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
@@ -1157,15 +1157,15 @@ msgstr "Torony"
 
 #: ../../tribes/barbarians/conf:142
 msgid "Trainer"
-msgstr "Edző"
+msgstr "Kiképző"
 
 #: ../../tribes/barbarians/conf:226
 msgid "Trainingscamp"
-msgstr "Edzőtábor"
+msgstr "Kiképzőtábor"
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Katonákat képez."
 
 #: ../../tribes/barbarians/conf:104
 msgid "Trunk"
@@ -1398,7 +1398,7 @@ msgstr "Munka"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
-msgstr ""
+msgstr "Építkezési területen dolgozik, új épületeket húz fel."
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
