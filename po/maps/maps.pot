@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-19 19:58+0000\n"
+"POT-Creation-Date: 2012-03-19 21:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -40,6 +40,7 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/cconfig:74
+#: ../../maps/t03.wmf/elemental:7
 msgid ""
 "03 - This Land is our Land"
 msgstr ""
@@ -430,6 +431,11 @@ msgstr ""
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
 "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
+msgstr ""
+
+#: ../../maps/t03.wmf/elemental:9
+msgid ""
+"This tutorial explains the handling of military and training site buildings and will introduce fighting."
 msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9
