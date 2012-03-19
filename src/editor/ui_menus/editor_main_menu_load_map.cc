@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@
 #include "wui/overlay_manager.h"
 #include "logic/world.h"
 #include "map_io/map_loader.h"
+#include "profile/profile.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
@@ -172,10 +173,20 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 			delete m_ml;
 		}
 
-		m_name  ->set_text(map.get_name       ());
-		m_author->set_text(map.get_author     ());
-		m_descr ->set_text(map.get_description());
-		m_world ->set_text(map.get_world_name ());
+		// get translated worldsname
+		std::string world(map.get_world_name());
+		std::string worldpath("worlds/" + world);
+		Profile prof((worldpath + "/conf").c_str(), 0, "world_" + world);
+		Section & global = prof.get_safe_section("world");
+		world = global.get_safe_string("name");
+
+		// Translate the map data
+		i18n::Textdomain td("maps");
+		m_name  ->set_text(_(map.get_name()));
+		m_author->set_text(map.get_author());
+		m_descr ->set_text
+			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
+		m_world ->set_text(world);
 
 		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());

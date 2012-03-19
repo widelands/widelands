@@ -99,16 +99,23 @@ uint32_t Editor_History::do_action
 		 map, center, parent, tool.format_args(ind, parent));
 	if (draw && tool.is_unduable()) {
 		if
-			(undo_stack.front().tool.get_sel_impl() !=
-				std::string(m_draw_tool.get_sel_impl()))
+			(undo_stack.empty() or
+			 undo_stack.front().tool.get_sel_impl() != std::string(m_draw_tool.get_sel_impl()))
 		{
 			Editor_Tool_Action da
 				(m_draw_tool, Editor_Tool::First,
-				map, center, parent,
-				m_draw_tool.format_args(Editor_Tool::First, parent));
-			m_draw_tool.add_action(undo_stack.front(), *da.args);
-			undo_stack.pop_front();
+				 map, center, parent,
+				 m_draw_tool.format_args(Editor_Tool::First, parent));
+
+			if (not undo_stack.empty()) {
+				m_draw_tool.add_action(undo_stack.front(), *da.args);
+				undo_stack.pop_front();
+			}
+
+			redo_stack.clear();
 			undo_stack.push_front(da);
+			m_undo_button.set_enabled(true);
+			m_redo_button.set_enabled(false);
 		}
 		dynamic_cast<Editor_Draw_Tool *>
 			(&(undo_stack.front().tool))->add_action(ac, *undo_stack.front().args);

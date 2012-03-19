@@ -1,6 +1,6 @@
 size=medium
 max_soldiers=5
-heal_per_second=2
+heal_per_second=170
 conquers=9
 vision_range=21
 buildable=no

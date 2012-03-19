@@ -1,6 +1,6 @@
 size=medium
 max_soldiers=4
-heal_per_second=2
+heal_per_second=120
 conquers=9
 vision_range=17
 enhancement=high_tower

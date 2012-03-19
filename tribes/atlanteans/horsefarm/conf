@@ -31,8 +31,8 @@ recruit=horse
 
 [idle]
 pics=horsefarm_i_??.png  # ???
-hotspot=78 68
+hotspot=81 62
 
 [working]
 pics=horsefarm_i_??.png  # ???
-hotspot=78 68
+hotspot=81 62

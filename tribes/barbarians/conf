@@ -65,6 +65,10 @@ shipconstruction=_Ship construction site
 deer=_Deer
 wildboar=_Wildboar
 
+[compatibility_wares]
+# for compatibility with build15 and earlier
+flax=thatchreed
+
 [ware types]
 axe=_Axe
 bakingtray=_Bread Paddle

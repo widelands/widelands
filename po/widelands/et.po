@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-16 10:12+0100\n"
+"POT-Creation-Date: 2012-02-27 22:36+0100\n"
 "PO-Revision-Date: 2011-04-29 22:58+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:47+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:33+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -104,15 +104,15 @@ msgstr "Suur"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:97
-#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "Yes"
 msgstr "Jah"
 
 #: ../../src/writeHTML.cc:337 ../../src/writeHTML.cc:340
 #: ../../src/ui_basic/messagebox.cc:104
-#: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
+#: ../../src/editor/tools/editor_info_tool.cc:77
 msgid "No"
 msgstr "Ei"
 
@@ -567,32 +567,32 @@ msgstr ""
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:899 ../../src/wlapplication.cc:907
+#: ../../src/wlapplication.cc:903 ../../src/wlapplication.cc:911
 msgid "could not find the path of the main executable"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1024
+#: ../../src/wlapplication.cc:1028
 msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1161
+#: ../../src/wlapplication.cc:1165
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1164
+#: ../../src/wlapplication.cc:1168
 msgid "--double is disabled. This is not a debug build!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1285
+#: ../../src/wlapplication.cc:1289
 msgid "This is Widelands-"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1287
+#: ../../src/wlapplication.cc:1291
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -600,7 +600,7 @@ msgstr ""
 "Kasutus: widelands <valik0>=<väärtus0> ... <valikN>=<väärtusN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1288
+#: ../../src/wlapplication.cc:1292
 msgid ""
 "Options:\n"
 "\n"
@@ -608,7 +608,7 @@ msgstr ""
 "Valikud:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1292
+#: ../../src/wlapplication.cc:1296
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -620,11 +620,11 @@ msgid ""
 "                      files, savegames and replays\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1304
 msgid "                      Default is ~/.widelands\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1303
+#: ../../src/wlapplication.cc:1307
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback\n"
@@ -642,7 +642,7 @@ msgid ""
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1318
+#: ../../src/wlapplication.cc:1322
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -659,12 +659,12 @@ msgid ""
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1331
+#: ../../src/wlapplication.cc:1335
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1334
+#: ../../src/wlapplication.cc:1338
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -685,14 +685,13 @@ msgid ""
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1354
+#: ../../src/wlapplication.cc:1358
 msgid ""
 " --opengl=[0|1]\n"
-"                      Enables opengl rendering\n"
-"                      *EXPERIMENTAL*\n"
+"                      Enables OpenGL rendering\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1360
+#: ../../src/wlapplication.cc:1363
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -715,22 +714,22 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1384
+#: ../../src/wlapplication.cc:1387
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1388
+#: ../../src/wlapplication.cc:1391
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1389
+#: ../../src/wlapplication.cc:1392
 msgid " --help               Show this help\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1393
+#: ../../src/wlapplication.cc:1396
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -739,19 +738,19 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1542
+#: ../../src/wlapplication.cc:1545
 msgid "Warning: "
 msgstr "Hoiatus: "
 
-#: ../../src/wlapplication.cc:1546
+#: ../../src/wlapplication.cc:1549
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1551
+#: ../../src/wlapplication.cc:1554
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1555
+#: ../../src/wlapplication.cc:1558
 msgid ""
 "\n"
 "\n"
@@ -760,7 +759,7 @@ msgid ""
 "using build "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1561
+#: ../../src/wlapplication.cc:1564
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -768,103 +767,111 @@ msgid ""
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1678
+#: ../../src/wlapplication.cc:1681
 msgid "The address of the game server is invalid"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1785 ../../src/network/nethost.cc:1996
+#: ../../src/wlapplication.cc:1788 ../../src/network/nethost.cc:1996
 msgid "Player"
 msgstr "Mängija"
 
-#: ../../src/wlapplication.cc:1974 ../../src/network/netclient.cc:198
+#: ../../src/wlapplication.cc:1977 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:806
 msgid "Preparing game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:2082
+#: ../../src/wlapplication.cc:2085
 msgid "End of replay"
 msgstr ""
 
-#: ../../src/wlapplication.cc:2084
+#: ../../src/wlapplication.cc:2087
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/wlapplication.cc:2167 ../../src/logic/game.cc:385
+#: ../../src/wlapplication.cc:2170 ../../src/logic/game.cc:385
 #: ../../src/logic/game.cc:425
 msgid "Loading..."
 msgstr "Laadimine..."
 
-#: ../../src/editor/editorinteractive.cc:61
+#: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:64
+#: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"
 msgstr "Tööriistad"
 
-#: ../../src/editor/editorinteractive.cc:68
+#: ../../src/editor/editorinteractive.cc:69
 msgid "Toolsize"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:71
+#: ../../src/editor/editorinteractive.cc:72
 #: ../../src/wui/interactive_player.cc:120
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Minimap"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:74
+#: ../../src/editor/editorinteractive.cc:75
 #: ../../src/wui/interactive_player.cc:123
 msgid "Buildhelp"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:77
+#: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
 msgid "Players"
 msgstr "Mängijad"
 
-#: ../../src/editor/editorinteractive.cc:156
+#: ../../src/editor/editorinteractive.cc:81
+msgid "Undo"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:84
+msgid "Redo"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:158
+#: ../../src/editor/editorinteractive.cc:173
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:176
-#: ../../src/editor/editorinteractive.cc:580
+#: ../../src/editor/editorinteractive.cc:192
+#: ../../src/editor/editorinteractive.cc:601
 #: ../../src/logic/editor_game_base.cc:284
 #, c-format
 msgid "Loading tribe: %s"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:182
+#: ../../src/editor/editorinteractive.cc:198
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:189
+#: ../../src/editor/editorinteractive.cc:205
 #: ../../src/logic/editor_game_base.cc:277
 msgid "Loading world data"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:192
-#: ../../src/editor/editorinteractive.cc:584
+#: ../../src/editor/editorinteractive.cc:208
+#: ../../src/editor/editorinteractive.cc:605
 msgid "Loading graphics..."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:240
+#: ../../src/editor/editorinteractive.cc:254
 msgid "Map unsaved"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:241
+#: ../../src/editor/editorinteractive.cc:255
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:571
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:485
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:183
@@ -872,7 +879,7 @@ msgstr ""
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:573
+#: ../../src/editor/editorinteractive.cc:594
 #: ../../src/ui_fsmenu/netsetup_lan.cc:194
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
@@ -991,7 +998,7 @@ msgstr ""
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:98
+#: ../../src/wui/fieldaction.cc:466 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr ""
 
@@ -1095,6 +1102,11 @@ msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
+msgstr ""
+
+#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/constructionsitewindow.cc:74
+msgid "Building materials"
 msgstr ""
 
 #: ../../src/wui/transport_ui.cc:51
@@ -1204,6 +1216,14 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:71
 msgid "Workers in warehouses"
+msgstr ""
+
+#: ../../src/wui/soldiercapacitycontrol.cc:67
+msgid "Decrease capacity"
+msgstr ""
+
+#: ../../src/wui/soldiercapacitycontrol.cc:71
+msgid "Increase capacity"
 msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
@@ -1502,6 +1522,10 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
+#: ../../src/wui/buildingwindow.cc:271
+msgid "Center view on this"
+msgstr ""
+
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
 msgstr "Abi"
@@ -1649,15 +1673,15 @@ msgstr ""
 msgid "Exit Replay"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:109
+#: ../../src/wui/watchwindow.cc:111
 msgid "Follow"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:118
+#: ../../src/wui/watchwindow.cc:120
 msgid "Center mainview on this"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:140 ../../src/ui_fsmenu/fileview.cc:44
+#: ../../src/wui/watchwindow.cc:142 ../../src/ui_fsmenu/fileview.cc:44
 msgid "Close"
 msgstr ""
 
@@ -1710,21 +1734,21 @@ msgstr ""
 msgid "Do you really want to delete the file %s?"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:270
+#: ../../src/wui/interactive_base.cc:277
 #, c-format
 msgid "%u.%ux"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:273
+#: ../../src/wui/interactive_base.cc:280
 msgid "PAUSE"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:300
 #, c-format
 msgid "%s (%s)"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:305
 msgid "NO GAME CONTROLLER"
 msgstr ""
 
@@ -1891,17 +1915,17 @@ msgid "expected %s but found \"%s\""
 msgstr ""
 
 #: ../../src/logic/building.cc:524
-#: ../../src/editor/tools/editor_info_tool.cc:61
+#: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "small"
 msgstr "väike"
 
 #: ../../src/logic/building.cc:525
-#: ../../src/editor/tools/editor_info_tool.cc:62
+#: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "medium"
 msgstr "keskmine"
 
 #: ../../src/logic/building.cc:525
-#: ../../src/editor/tools/editor_info_tool.cc:63
+#: ../../src/editor/tools/editor_info_tool.cc:64
 msgid "big"
 msgstr "suur"
 
@@ -1959,7 +1983,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:59
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:137
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:207
-#: ../../src/map_io/widelands_map_extradata_data_packet.cc:96
+#: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
 #: ../../src/map_io/widelands_map_object_packet.cc:61
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:85
 #: ../../src/game_io/game_player_economies_data_packet.cc:72
@@ -2612,12 +2636,13 @@ msgid "No left resources found!"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1209
-msgid "Mine empty"
+msgid "Main vein exhausted"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
-"This mines has run empty. You should consider to expand or destruct it."
+"This mines' main vein exhausted. Expect strongly diminished returns on "
+"investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1225
@@ -2683,17 +2708,17 @@ msgstr ""
 msgid "Enemy at site defeated!"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:673
+#: ../../src/logic/militarysite.cc:674
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:674
+#: ../../src/logic/militarysite.cc:675
 #, c-format
 msgid "Your %s is under attack.</p>"
 msgstr ""
 
-#: ../../src/logic/militarysite.cc:682
+#: ../../src/logic/militarysite.cc:683
 msgid "You are under attack"
 msgstr ""
 
@@ -3067,7 +3092,7 @@ msgstr ""
 msgid "elemental data: %s"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_extradata_data_packet.cc:98
+#: ../../src/map_io/widelands_map_extradata_data_packet.cc:100
 #, c-format
 msgid "extradata: %s"
 msgstr ""
@@ -3358,7 +3383,7 @@ msgid "Remove Syncstream dumps on startup"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:471
-msgid "OpenGL rendering *Highly experimental!*"
+msgid "OpenGL rendering"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:476
@@ -3915,7 +3940,7 @@ msgstr ""
 msgid "frame number"
 msgstr ""
 
-#: ../../src/graphic/graphic.cc:1067
+#: ../../src/graphic/graphic.cc:1071
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr ""
@@ -4116,6 +4141,11 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Sending part %s of file %s to %s"
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:162
+#, c-format
+msgid "The player \"%s\" was defeated and became spectator."
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:42
@@ -4356,61 +4386,61 @@ msgstr ""
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:260
+#: ../../src/network/internet_gaming.cc:269
 msgid "Something went wrong: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:337
+#: ../../src/network/internet_gaming.cc:347
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:344
+#: ../../src/network/internet_gaming.cc:354
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:344
+#: ../../src/network/internet_gaming.cc:354
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:356
+#: ../../src/network/internet_gaming.cc:366
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:369
+#: ../../src/network/internet_gaming.cc:379
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:378
+#: ../../src/network/internet_gaming.cc:388
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:473
+#: ../../src/network/internet_gaming.cc:483
 msgid "ERROR: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:477
+#: ../../src/network/internet_gaming.cc:487
 msgid "Chat message could not be sent. "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:498
+#: ../../src/network/internet_gaming.cc:508
 msgid "Received an unknown command from the metaserver: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:630
+#: ../../src/network/internet_gaming.cc:640
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:642
+#: ../../src/network/internet_gaming.cc:652
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:725
 msgid "<unknown>"
 msgstr ""
 
@@ -4755,11 +4785,11 @@ msgstr ""
 msgid "Height Tools Options"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:43
+#: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:55
+#: ../../src/editor/tools/editor_info_tool.cc:56
 #, c-format
 msgid ""
 "1) Node info\n"
@@ -4768,27 +4798,27 @@ msgid ""
 " Caps: "
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:65
+#: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " flag"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:66
+#: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " mine"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " port"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:68
+#: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " walk"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:69
+#: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " swim"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:73
+#: ../../src/editor/tools/editor_info_tool.cc:74
 #, c-format
 msgid ""
 "\n"
@@ -4797,26 +4827,26 @@ msgid ""
 " Has bobs: %s\n"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:79
+#: ../../src/editor/tools/editor_info_tool.cc:80
 msgid ""
 "2) Terrain Info\n"
 " Name: "
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:87
+#: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
 msgid ""
 "\n"
 " Texture Number: %i\n"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:91
+#: ../../src/editor/tools/editor_info_tool.cc:92
 msgid ""
 "4) Map Info\n"
 " Name: "
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:95
+#: ../../src/editor/tools/editor_info_tool.cc:96
 #, c-format
 msgid ""
 "\n"
@@ -4824,27 +4854,27 @@ msgid ""
 " Author: "
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:98
-#: ../../src/editor/tools/editor_info_tool.cc:109
+#: ../../src/editor/tools/editor_info_tool.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:110
 msgid ""
 "\n"
 " Descr: "
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:102
+#: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
 msgid ""
 "\n"
 " Number of Players: %i\n"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:105
+#: ../../src/editor/tools/editor_info_tool.cc:106
 msgid ""
 "5) World Info\n"
 " Name: "
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:107
+#: ../../src/editor/tools/editor_info_tool.cc:108
 msgid ""
 "\n"
 " Author: "

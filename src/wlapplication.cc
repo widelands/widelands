@@ -266,7 +266,11 @@ m_gfx_w(0), m_gfx_h(0),
 m_gfx_fullscreen       (false),
 m_gfx_opengl           (true),
 m_default_datadirs     (true),
+#ifdef WIN32
+m_homedir(FileSystem::GetHomedir() + "\\.widelands"),
+#else
 m_homedir(FileSystem::GetHomedir() + "/.widelands"),
+#endif
 m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();

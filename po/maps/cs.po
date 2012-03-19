@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-16 09:12+0000\n"
-"PO-Revision-Date: 2012-02-08 23:26+0000\n"
-"Last-Translator: Martin Volf <Unknown>\n"
+"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"PO-Revision-Date: 2012-02-18 22:46+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 04:42+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-28 05:20+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -165,6 +165,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Každý z kmenů je obklopen čtyřmi mocnými horami. Kdo je pokoří jako první a "
+"prohlásí jejich nerostné bohatství za své? Rada I: Na vodu lze narazit v "
+"okolí řeky. Rada II: Sněhuláci označují další zdroje vody. Rada III: Každá "
+"hora obsahuje pouze jeden typ přírodního zdroje."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -206,6 +210,9 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
+"Po stovky let byl tento ostrov považován za svatyni Bohů. Dosud nikdy na něj "
+"nevstoupila lidská noha. Až nyní se našel jeden kmen natolik smělý, že "
+"osídlil pobřeží tohoto ostrova. A poté je následovalo i mnoho dalších."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -277,6 +284,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Říká se, že řád mnichů-válečníků, kteří žijí v těchto prastarých bažinách, "
+"je klíčem k ovládnutí celého ostrova."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -360,6 +369,10 @@ msgid ""
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
 msgstr ""
+"Pouze jeden malá plošina ve středu mapy spojuje čtyři soupeřící kmeny. Doveď "
+"své armády až na tuto plošinu a vybuduj tam na důkaz své neporazitelnosti "
+"obrovskou tvrz. Nápověda: ve středu mapy je místo pouze pro jednu tvrz. Na "
+"vodu se dá narazit všude, není potřeba posílat geology."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -445,10 +458,12 @@ msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
 "green)"
 msgstr ""
+"Doporučené týmy: (modrý, červený) proti (žlutý, zelený) nebo (modrý, žlutý) "
+"proti (červený, zelený)"
 
 #: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
-msgstr ""
+msgstr "Doporučené týmy: (modrý, žlutý) proti (červený, zelený)"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:12
 msgid "Suggested Teams: all ok."
@@ -491,6 +506,8 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
 msgstr ""
+"Mnoho kmenů uchvátila dechberoucí krása těchto smaragdových ostrovů natolik, "
+"že se pokusily zabrat je pro sebe."
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
 msgid ""
@@ -571,7 +588,7 @@ msgstr "Tři válečníci"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
 msgid "Together we're strong"
-msgstr ""
+msgstr "V jednotě je síla"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -594,6 +611,8 @@ msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Dobře chráněni ve svých mocných tvrzích, spřádají čtyři po moci bažící "
+"vojevůdci své plány na úplné ovládnutí těchto ostrovů..."
 
 #: ../../campaigns/cconfig:31
 msgid ""
@@ -673,7 +692,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:10
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Kdo se stane pravým králem velkého atolu?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"

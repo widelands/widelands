@@ -1,6 +1,6 @@
 size=big
 max_soldiers=12
-heal_per_second=2
+heal_per_second=200
 conquers=12
 
 [buildcost]

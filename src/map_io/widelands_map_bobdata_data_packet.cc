@@ -414,7 +414,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					{
 						Soldier_Descr const & descr = soldier->descr();
 
-						soldier->m_hp_current = fr.Unsigned32();
+						soldier->m_hp_current = fr.Unsigned32() * 100; // balance change: multiply times 100
 
 						if (soldier_worker_bob_packet_version <= 6) {
 							// no longer used values
