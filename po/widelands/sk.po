@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-08 23:13+0100\n"
-"PO-Revision-Date: 2012-03-18 03:04+0000\n"
+"PO-Revision-Date: 2012-03-18 15:20+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2012-03-18 04:33+0000\n"
-"X-Generator: Launchpad (build 14951)\n"
+"X-Launchpad-Export-Date: 2012-03-19 04:36+0000\n"
+"X-Generator: Launchpad (build 14969)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -2511,7 +2511,7 @@ msgstr ", "
 #: ../../src/logic/production_program.cc:927
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "Vyrobil %s"
 
 #: ../../src/logic/production_program.cc:1002
 msgid "Recruited "
@@ -2529,17 +2529,20 @@ msgstr "percento"
 #: ../../src/logic/production_program.cc:1188
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Žiadne ďalšie zdroje nenájdené!"
 
 #: ../../src/logic/production_program.cc:1209
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Hlavná žila vyčerpaná"
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"Hlavná žila tejto bane je vyčerpaná. Preto očakávajte prudko zníženú "
+"návratnosť investície. Mali by ste zvážiť rozšírenie, rozobratie alebo "
+"zničenie bane."
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
@@ -2560,28 +2563,28 @@ msgstr "úroveň"
 #: ../../src/logic/production_program.cc:1353
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr ""
+msgstr "Nenájdený žiadny vojak na tejto tréningovej úrovni!"
 
 #: ../../src/logic/production_program.cc:1329
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr ""
+msgstr "očakávaná úroveň > %u, ale nájdená \"%s\""
 
 #: ../../src/logic/militarysite.cc:114
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] "%u vojak"
-msgstr[1] "%u vojaci"
-msgstr[2] "%u vojakov"
+msgstr[0] "%u vojakov"
+msgstr[1] "%u vojak"
+msgstr[2] "%u vojaci"
 
 #: ../../src/logic/militarysite.cc:119
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] "%u(+%u) vojak"
-msgstr[1] "%u(+%u) vojaci"
-msgstr[2] "%u(+%u) vojakov"
+msgstr[0] "%u(+%u) vojakov"
+msgstr[1] "%u(+%u) vojak"
+msgstr[2] "%u(+%u) vojaci"
 
 #: ../../src/logic/militarysite.cc:219
 #, c-format
@@ -2595,7 +2598,7 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
-msgstr "Vojenská budova ztratená!"
+msgstr "Vojenská budova stratená!"
 
 #: ../../src/logic/militarysite.cc:625
 #, c-format
@@ -2609,16 +2612,16 @@ msgstr "Nepriateľ na mieste porazený!"
 #: ../../src/logic/militarysite.cc:674
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Vaša budova %s spozorovala útočníka.</p>"
 
 #: ../../src/logic/militarysite.cc:675
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr ""
+msgstr "Vaša budova %s bola napadnutá.</p>"
 
 #: ../../src/logic/militarysite.cc:683
 msgid "You are under attack"
-msgstr "Nepriateľ na teba útočí"
+msgstr "Útočí na vás nepriateľ"
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
@@ -2638,18 +2641,18 @@ msgstr ""
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "fronta tovaru: %s"
 
 #: ../../src/economy/economy_data_packet.cc:63
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "duplikovaný záznam pre %s"
 
 #: ../../src/economy/economy_data_packet.cc:94
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "cieľové množstvá: %s"
 
 #: ../../src/economy/economy_data_packet.cc:98
 #, c-format
@@ -2679,12 +2682,12 @@ msgstr "povolené budovy: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:85
 msgid "Invalid World"
-msgstr ""
+msgstr "Neplatný svet"
 
 #: ../../src/map_io/widelands_map_loader.cc:87
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
-msgstr ""
+msgstr "Svet \"%s\", určený mapou, neexistuje vo vašom súborovom systéme."
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:225
 #, c-format
@@ -2700,7 +2703,7 @@ msgstr "tovary: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
 msgid "partially_constructed_buildings: %s"
-msgstr ""
+msgstr "čiastočne_postavené_budovy: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:323
 #, c-format
@@ -2710,7 +2713,7 @@ msgstr "stavenisko: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:405
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "rozobratie stavby: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:589
 #, c-format
@@ -2722,32 +2725,32 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:667
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "sklad: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:748
 #, c-format
 msgid "militarysite: %s"
-msgstr ""
+msgstr "vojenská stavba: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:905
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
+msgstr "program %s bol preskočený v čase %u, ale čas je len %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1103
 #, c-format
 msgid "trainingsite: %s"
-msgstr ""
+msgstr "výcviková stavba: %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "uzol vlastní hráč %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr ""
+msgstr "vlastní hráč %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
@@ -2757,7 +2760,7 @@ msgstr "má vlajku (%u)"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "susedný uzol (%i, %i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
