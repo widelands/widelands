@@ -9,8 +9,8 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/cattlefarm/cattlefarm_i_00.png", p(
-			[[Text needed]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[Source needed]])) ..
+			_[[Text needed]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Breed Oxen for adding them to the transportation system.","tribes/barbarians/ox/menu.png") ..

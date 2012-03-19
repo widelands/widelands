@@ -9,8 +9,8 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/bakery/bakery_i_00.png", p(
-			[[Text needed]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", [[Source needed]])) ..
+			_[[Text needed]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Bake Pitta Bread for Soldiers and Miners alike.","tribes/barbarians/pittabread/menu.png") ..
