@@ -92,23 +92,24 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += _("3) Resources Info\n");
 	{
 		Widelands::Resource_Index ridx = f.get_resources();
-		int ramount = f.get_resources_amount();		
+		int ramount = f.get_resources_amount();
 
-		if (ramount > 0){
+		if (ramount > 0) {
 			snprintf
-			(buf1, sizeof(buf1), _("Resource name: %s\n"), world.get_resource(ridx)->name().c_str());
+			(buf1, sizeof(buf1), _(" Resource name: %s\n"), world.get_resource(ridx)->name().c_str());
+			buf += buf1;
+
+			snprintf
+			(buf1, sizeof(buf1), _(" Resource amount: %i\n"), ramount);
+			buf += buf1;
 		}
 		else
 		{
 			snprintf
-			(buf1, sizeof(buf1), _("Resource name: %s\n"), _("<none>"));
+			(buf1, sizeof(buf1), _(" Resource name: %s\n"), _("none"));
+			buf += buf1;
 		}
 
-		buf += buf1;
-
-		snprintf
-		(buf1, sizeof(buf1), _("Resource amount: %i\n"), ramount);
-		buf += buf1;
 	}
 
 	buf += _("4) Map Info\n Name: ");
