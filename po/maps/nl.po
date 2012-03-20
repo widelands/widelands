@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-08 22:13+0000\n"
+"POT-Creation-Date: 2012-03-19 21:47+0000\n"
 "PO-Revision-Date: 2012-01-07 21:46+0000\n"
 "Last-Translator: Teun Spaans <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-09 04:39+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-20 04:31+0000\n"
+"X-Generator: Launchpad (build 14969)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -159,7 +159,7 @@ msgstr "Woestijntoernooi"
 msgid "Dry Riverbed"
 msgstr "Droge rivierbedding"
 
-#: ../../maps/Four Mountains.wmf/elemental:10
+#: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
@@ -201,7 +201,7 @@ msgstr ""
 "naburige eiland. Deze vrede lijkt ten einde - je buurman begint uit te "
 "breiden."
 
-#: ../../maps/Sun of fire.wmf/elemental:12
+#: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
 "For hundreds of years this island was kept as sanctuary of the Gods. No "
 "human ever ventured to set a foot on it. But now, that a tribe was finally "
@@ -217,7 +217,7 @@ msgstr "Vier kastelen"
 msgid "Four Mountains"
 msgstr "Vier Bergen"
 
-#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
 "Four tribes struggle with their nearest neighbour to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
@@ -274,7 +274,7 @@ msgstr ""
 "tussen deze bergpieken. HINT: Monolieten markeren delfstoffen. Doe geen "
 "moeite om geologen elders te sturen."
 
-#: ../../maps/Swamp Monks.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:9
 msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
@@ -356,7 +356,7 @@ msgstr "Mystiek Labyrint"
 msgid "Not yet implemented"
 msgstr "Nog niet geïmplementeerd"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:10
+#: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army right away to this hill and build a giant stronghold "
@@ -428,17 +428,17 @@ msgstr ""
 "rijkdom in de weg staat. Maar velen zullen worden verscheurd door wolven of "
 "opgeslokt door het moeras... omgeven door vijandige stammen."
 
-#: ../../maps/Sun of fire.wmf/elemental:14
+#: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
 msgstr "Beginposities zijn met de klok mee"
 
-#: ../../maps/Desert Tournament.wmf/elemental:12
-#: ../../maps/Four Castles.wmf/elemental:12
-#: ../../maps/Swamp Monks.wmf/elemental:12
+#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:10
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
 msgstr "Teamsuggestie: (blauw, rood) tegen (geel, groen)"
 
-#: ../../maps/Four Mountains.wmf/elemental:12
+#: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
 "yellow)"
@@ -446,7 +446,7 @@ msgstr ""
 "Teamsuggestie: (blauw, rood) tegen (geel, groen) of (blauw, groen) tegen "
 "(rood, geel)"
 
-#: ../../maps/Elven Forests.wmf/elemental:12
+#: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
 "green)"
@@ -454,11 +454,11 @@ msgstr ""
 "Teamsuggestie: (blauw, rood) tegen (geel, groen) of (blauw, geel) tegen "
 "(rood, groen)"
 
-#: ../../maps/Atoll.wmf/elemental:12
+#: ../../maps/Atoll.wmf/elemental:10
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Teamsuggestie: (blauw, geel) tegen (rood, groen)"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:12
+#: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
 msgstr ""
 
@@ -494,7 +494,7 @@ msgstr "De oude vuurzon"
 msgid "The big lake"
 msgstr "Het grote meer"
 
-#: ../../maps/Elven Forests.wmf/elemental:10
+#: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
@@ -597,7 +597,7 @@ msgstr ""
 msgid "War of the Valleys"
 msgstr "Oorlog der Valleien"
 
-#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
@@ -678,7 +678,7 @@ msgstr ""
 "leefruimte is ook een zware en kleinge plek om te leven. Vergeet niet op je "
 "houtvoorraad te letten; je zult hem nodig hebben."
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
 msgstr ""
 

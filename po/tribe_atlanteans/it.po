@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2012-03-14 18:27+0000\n"
+"POT-Creation-Date: 2012-03-19 21:47+0000\n"
+"PO-Revision-Date: 2012-03-19 12:37+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-15 04:30+0000\n"
-"X-Generator: Launchpad (build 14933)\n"
+"X-Launchpad-Export-Date: 2012-03-20 04:33+0000\n"
+"X-Generator: Launchpad (build 14969)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -34,8 +34,8 @@ msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
 msgstr ""
-"Una sega è richiesta dal taglialegna e dal carpentiere. È prodotta "
-"dall'fabbro."
+"Una sega è richiesta dal taglialegna e dal carpentiere. È prodotta dal "
+"fabbro."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -66,8 +66,8 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
-"Dal momento che nessun Atlantide ama il pesce crudo, affumicarlo in un "
-"affumicatore è il sistema più comune per renderlo commestibile"
+"Dal momento che nessun Atlantideo ama il pesce crudo, affumicarlo in un "
+"affumicatore è il sistema più comune per renderlo commestibile."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -120,7 +120,7 @@ msgid ""
 "bakeries to make a tasty bread."
 msgstr ""
 "La farina di radici nere è prodotta nei mulini a partire dalla radici nere. "
-"È usata nei forni per produrre un pane gustoso"
+"È usata nei forni per produrre un pane gustoso."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -132,7 +132,7 @@ msgstr "Campo di radici nere"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
-msgstr "Mietitore di campo di radici nere"
+msgstr "Campo di radici nere mietuto"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"
@@ -166,7 +166,7 @@ msgstr "Pala per il pane"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr "Riproduzione pesci."
+msgstr "Fa riprodurre i pesci."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
@@ -657,7 +657,7 @@ msgstr "Porto"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
-msgstr "Produce scudi avanzati"
+msgstr "Produzione scudi avanzati"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
 msgid ""
@@ -668,102 +668,102 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr "Produce una pala da fornaio"
+msgstr "Produzione pala da fornaio"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
-msgstr "Farina di radici nere"
+msgstr "Produzione farina di radici nere"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bow"
-msgstr "Produce un'arco"
+msgstr "Produzione arco"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce bucket"
-msgstr "Produce secchio"
+msgstr "Produzione secchio"
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
-msgstr "Produce farina di mais"
+msgstr "Produzione farina di mais"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce double trident"
-msgstr "Produce tridente doppio"
+msgstr "Produzione tridente doppio"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:35
 msgid "Produce fire tongs"
-msgstr "Produce molle per il fuoco"
+msgstr "Produzione pinze per il fuoco"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
-msgstr "Poduce rete da pesca"
+msgstr "Produzione rete da pesca"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:21
 msgid "Produce golden tabard"
-msgstr "Produce tabarro dorato"
+msgstr "Produzione tabarro dorato"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:37
 msgid "Produce hammer"
-msgstr "Produce un martello"
+msgstr "Produzione martello"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "Produce heavy double trident"
-msgstr "Produce tridente doppio pesante"
+msgstr "Produzione tridente doppio pesante"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce hook pole"
-msgstr "Produce palo uncinato"
+msgstr "Produzione palo uncinato"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
-msgstr "Produce tridente leggero"
+msgstr "Produzione tridente leggero"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:31
 msgid "Produce long trident"
-msgstr "Produce tridente lungo"
+msgstr "Produzione tridente lungo"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce milking tongs"
-msgstr "Produce pinze da mungitura"
+msgstr "Produzione pinze da mungitura"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce pick"
-msgstr "Produce piccone"
+msgstr "Produzione piccone"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce saw"
-msgstr "Produce una sega"
+msgstr "Produzione sega"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce scythe"
-msgstr "Produce una falce"
+msgstr "Produzione falce"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:44
 msgid "Produce shovel"
-msgstr "Produce vanga"
+msgstr "Produzione vanga"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:19
 msgid "Produce spidercloth"
-msgstr "Produce stoffa di ragno"
+msgstr "Produzione stoffa di ragno"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
-msgstr "Procude scudi d'acciaio"
+msgstr "Produzione scudi d'acciaio"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:24
 msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
 msgstr ""
-"Produce scudi d'acciaio (solo per compatibilità con i vecchi salvataggi "
+"Produzione scudi d'acciaio (solo per compatibilità con i vecchi salvataggi "
 "(build13))"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:32
 msgid "Produce steel trident"
-msgstr "Produce tridente d'acciaio"
+msgstr "Produzione tridente d'acciaio"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:20
 msgid "Produce tabard"
-msgstr "Produce tabarro"
+msgstr "Produzione tabarro"
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."

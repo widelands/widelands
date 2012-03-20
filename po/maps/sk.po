@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-08 22:13+0000\n"
+"POT-Creation-Date: 2012-03-19 21:47+0000\n"
 "PO-Revision-Date: 2012-03-17 22:12+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-18 04:32+0000\n"
-"X-Generator: Launchpad (build 14951)\n"
+"X-Launchpad-Export-Date: 2012-03-20 04:31+0000\n"
+"X-Generator: Launchpad (build 14969)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -154,7 +154,7 @@ msgstr "Púštny turnaj"
 msgid "Dry Riverbed"
 msgstr "vyschnuté koryto rieky"
 
-#: ../../maps/Four Mountains.wmf/elemental:10
+#: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
@@ -199,7 +199,7 @@ msgstr ""
 "Po stáročia ste žili pokojne spolu s iným kmeňom na susednom ostrove. Zdá "
 "sa, že tento mier končí - váš sused sa začína rozširovať."
 
-#: ../../maps/Sun of fire.wmf/elemental:12
+#: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
 "For hundreds of years this island was kept as sanctuary of the Gods. No "
 "human ever ventured to set a foot on it. But now, that a tribe was finally "
@@ -218,7 +218,7 @@ msgstr "Štyri hrady"
 msgid "Four Mountains"
 msgstr "Štyri hory"
 
-#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
 "Four tribes struggle with their nearest neighbour to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
@@ -275,7 +275,7 @@ msgstr ""
 "vrcholmi týchto hôr. TIP: Ložiská rudy sú označené monolitmi. Netrápte sa s "
 "posielaním geológov inam."
 
-#: ../../maps/Swamp Monks.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:9
 msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
@@ -357,7 +357,7 @@ msgstr "Mystický labyrint"
 msgid "Not yet implemented"
 msgstr "Ešte nezavedené"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:10
+#: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army right away to this hill and build a giant stronghold "
@@ -431,17 +431,17 @@ msgstr ""
 "mnohí zomrú... Roztrhaní vlkmi, pohltení bažinou, obkľúčení nepriateľskými "
 "kmeňmi."
 
-#: ../../maps/Sun of fire.wmf/elemental:14
+#: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
 msgstr "Začiatočné pozície sú v smere pohybu hodinových ručičiek"
 
-#: ../../maps/Desert Tournament.wmf/elemental:12
-#: ../../maps/Four Castles.wmf/elemental:12
-#: ../../maps/Swamp Monks.wmf/elemental:12
+#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:10
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
 msgstr "Navrhované tímy: (modrý, červený) vs (žltý, zelený)"
 
-#: ../../maps/Four Mountains.wmf/elemental:12
+#: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
 "yellow)"
@@ -449,7 +449,7 @@ msgstr ""
 "Navrhované tímy: (modrý, červený) vs (žltý, zelený) alebo (modrý, zelený) vs "
 "(červený, žltý)"
 
-#: ../../maps/Elven Forests.wmf/elemental:12
+#: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
 "green)"
@@ -457,11 +457,11 @@ msgstr ""
 "Navrhované tímy: (modrý, červený) vs (žltý, zelený) alebo (modrý, žltý) vs "
 "(červený, zelený)"
 
-#: ../../maps/Atoll.wmf/elemental:12
+#: ../../maps/Atoll.wmf/elemental:10
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Navrhované tímy: (modrý, žltý) vs (červený, zelený)"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:12
+#: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
 msgstr "Navrhované tímy: všetky sú v poriadku."
 
@@ -497,7 +497,7 @@ msgstr "Starobylé ohnivé slnko"
 msgid "The big lake"
 msgstr "Veľké jazero"
 
-#: ../../maps/Elven Forests.wmf/elemental:10
+#: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
@@ -602,7 +602,7 @@ msgstr "Dve impéria súperia o poklady legendárneho polostrova..."
 msgid "War of the Valleys"
 msgstr "Vojna o údolia"
 
-#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
@@ -687,7 +687,7 @@ msgstr ""
 "sa v ňom ťažko. Nezabudnite sa postarať o zásoby dreva, budete ich "
 "potrebovať."
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
 msgstr "Kto sa stane skutočným kráľom veľkého atolu?"
 
