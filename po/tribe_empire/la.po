@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2011-03-23 16:25+0000\n"
+"PO-Revision-Date: 2012-03-21 05:35+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-20 04:34+0000\n"
-"X-Generator: Launchpad (build 14969)\n"
+"X-Launchpad-Export-Date: 2012-03-22 04:35+0000\n"
+"X-Generator: Launchpad (build 14981)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -25,7 +25,7 @@ msgstr ""
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Salipotens navis"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -206,7 +206,7 @@ msgstr "Colosseum"
 
 #: ../../tribes/empire/shipyard/conf:21
 msgid "Constructing ship"
-msgstr ""
+msgstr "navem faciens"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -250,7 +250,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:157
 msgid "Donjon"
-msgstr ""
+msgstr "arx"
 
 #: ../../tribes/empire/conf:104
 msgid "Donkey"
@@ -409,7 +409,7 @@ msgstr "Martellus"
 
 #: ../../tribes/empire/vineyard/conf:21
 msgid "Harvest vine"
-msgstr ""
+msgstr "Vinum metit"
 
 #: ../../tribes/empire/farm/conf:20
 msgid "Harvest wheat"
@@ -442,7 +442,7 @@ msgstr "Res per vias magnas portare adiuvat."
 
 #: ../../tribes/empire/conf:152
 msgid "High Tower"
-msgstr ""
+msgstr "Turris alta"
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
@@ -596,7 +596,7 @@ msgstr "spatium non satis est"
 
 #: ../../tribes/empire/conf:210
 msgid "Outpost"
-msgstr ""
+msgstr "specula"
 
 #: ../../tribes/empire/conf:86
 msgid "Pick"
@@ -632,7 +632,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:166
 msgid "Port"
-msgstr ""
+msgstr "Portus"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
@@ -668,7 +668,7 @@ msgstr "Harundinem fabricat"
 
 #: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce hammer"
-msgstr ""
+msgstr "malleum fabricat"
 
 #: ../../tribes/empire/weaponsmithy/conf:32
 msgid "Produce heavy lance"
@@ -824,7 +824,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:191
 msgid "Sheepfarm"
-msgstr ""
+msgstr "Ovile"
 
 #: ../../tribes/empire/conf:127
 msgid "Shepherd"
@@ -832,19 +832,19 @@ msgstr "Pastor"
 
 #: ../../tribes/empire/conf:140
 msgid "Ship"
-msgstr ""
+msgstr "navis"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
-msgstr ""
+msgstr "locus navium construendarum"
 
 #: ../../tribes/empire/conf:128
 msgid "Shipwright"
-msgstr ""
+msgstr "navifex"
 
 #: ../../tribes/empire/conf:187
 msgid "Shipyard"
-msgstr ""
+msgstr "navale"
 
 #: ../../tribes/empire/conf:91
 msgid "Shovel"
@@ -858,7 +858,7 @@ msgstr "Dormit"
 
 #: ../../tribes/empire/conf:153
 msgid "Small Tower"
-msgstr ""
+msgstr "Turris parva"
 
 #: ../../tribes/empire/smelting_works/conf:23
 msgid "Smelt gold"
@@ -1084,11 +1084,11 @@ msgstr "Turris"
 
 #: ../../tribes/empire/conf:132
 msgid "Trainer"
-msgstr ""
+msgstr "Exercitor"
 
 #: ../../tribes/empire/conf:219
 msgid "Trainingscamp"
-msgstr ""
+msgstr "Castra exercendi"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1359,7 +1359,7 @@ msgstr "In areis ad novum aedificium construendum laborat."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "In navale laborat ad construendas novas naves."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1

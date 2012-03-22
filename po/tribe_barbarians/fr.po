@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2012-01-10 22:20+0000\n"
-"Last-Translator: Tubuntu <Unknown>\n"
+"PO-Revision-Date: 2012-03-21 18:54+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-20 04:33+0000\n"
-"X-Generator: Launchpad (build 14969)\n"
+"X-Launchpad-Export-Date: 2012-03-22 04:35+0000\n"
+"X-Generator: Launchpad (build 14981)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -44,6 +44,8 @@ msgid ""
 "\"He loves the animals and to breed them<br>as we love to cook and eat "
 "them.\""
 msgstr ""
+"\"Il aime autant les animaux et leur élevage <br> que nous aimons les cuire "
+"et les manger.\""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:13
 msgid ""
@@ -80,6 +82,8 @@ msgstr ""
 msgid ""
 "\"No better friend you have in battle than the enemy's blow that misses.\""
 msgstr ""
+"\"Dans la bataille, vous n'aurez jamais meilleur ami que la flèche qui vous "
+"a manqué.\""
 
 #: ../../tribes/barbarians/well/help.lua:12
 msgid ""
@@ -104,7 +108,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "\"The Art of Hunting\""
-msgstr ""
+msgstr "\"L'art de la Chasse\""
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "\"We grow roofs\""
@@ -116,7 +120,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
-msgstr ""
+msgstr "\"Comment ça, il est pas frais mon poisson ??\""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:30
 #: ../../tribes/barbarians/deep_oremine/help.lua:30
@@ -125,7 +129,7 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr ""
+msgstr "%s est toujours pour un %s. Il n'a pas d'autre usage."
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -135,7 +139,7 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:58
 msgid "%s and"
-msgstr ""
+msgstr "%s et"
 
 #: ../../tribes/barbarians/coalmine/help.lua:28
 #: ../../tribes/barbarians/deep_coalmine/help.lua:27
@@ -190,7 +194,7 @@ msgstr ""
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "%s or %s"
-msgstr ""
+msgstr "%s ou %s"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/coalmine/help.lua:50
@@ -209,7 +213,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:59
 msgid "%s or better"
-msgstr ""
+msgstr "%s ou mieux"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:53
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:49
@@ -348,6 +352,9 @@ msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"Toutes les armes demandent le même temps pour leur fabrication, toutefois la "
+"consommation des mêmes matières premières augmente avec les étapes. Les deux "
+"dernières étapes nécessitent de l'or."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
@@ -361,6 +368,8 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
+"Un vieux proverbe barbare<br> qui veut dire que, parfois, il faut prendre "
+"des risques."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -525,6 +534,8 @@ msgstr "Planche à Pain"
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
 msgstr ""
+"Entreprendre l'élevage des bœufs afin d'améliorer le transport des "
+"marchandises."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -991,6 +1002,7 @@ msgstr ""
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
 msgstr ""
+"Extrait de \"Nos trésors souterrains\",<br>une chanson folklorique barbare."
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1035,7 +1047,7 @@ msgstr "Fermier"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into trunks."
-msgstr ""
+msgstr "Abattez des arbres dans les environs et ébranchez-en les troncs."
 
 #: ../../tribes/barbarians/conf:82
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
@@ -2531,11 +2543,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/deeper_oremine/help.lua:8
 msgid "The Barbarian Deeper Iron Ore Mine"
-msgstr ""
+msgstr "La mine de Fer très profonde des Barbares"
 
 #: ../../tribes/barbarians/farm/help.lua:8
 msgid "The Barbarian Farm"
-msgstr ""
+msgstr "La ferme des Barbares"
 
 #: ../../tribes/barbarians/fernery/help.lua:8
 msgid "The Barbarian Fernery"
@@ -2612,7 +2624,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:8
 msgid "The Barbarian Well"
-msgstr ""
+msgstr "Le puits des Barbares"
 
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "The Carrier needs %s to get one bucket full of water."
@@ -3510,7 +3522,7 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "chaque objet"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
