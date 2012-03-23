@@ -106,7 +106,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void skip_wait_for_capacity(Game &, Worker &);
 	void add_item(Editor_Game_Base &, WareInstance &);
 	bool has_pending_item(Game &, Flag & destflag);
-	bool ack_pending_item(Game &, Flag & destflag);
+	bool ack_pickup(Game &, Flag & destflag);
+	bool cancel_pickup(Game &, Flag & destflag);
 	WareInstance * fetch_pending_item(Game &, PlayerImmovable & dest);
 	Wares get_items();
 

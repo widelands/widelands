@@ -493,7 +493,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						(carrier_worker_bob_packet_version
 						 ==
 						 CARRIER_WORKER_BOB_PACKET_VERSION)
-						carrier->m_acked_ware = fr.Signed32();
+						carrier->m_promised_pickup_to = fr.Signed32();
 					else
 						throw game_data_error
 							(_("unknown/unhandled version %u"),
