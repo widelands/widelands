@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2011-04-25 22:35+0000\n"
-"Last-Translator: Kristjan SCHMIDT <Unknown>\n"
+"PO-Revision-Date: 2012-03-22 21:46+0000\n"
+"Last-Translator: Jens Beyer (Qcumber-some) <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-20 04:38+0000\n"
-"X-Generator: Launchpad (build 14969)\n"
+"X-Launchpad-Export-Date: 2012-03-23 04:35+0000\n"
+"X-Generator: Launchpad (build 14996)\n"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -288,7 +288,7 @@ msgstr "Sxtono"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
-msgstr "La programad-teamo de Larĝkamparo"
+msgstr "La programad-teamo de Widelands"
 
 #: ../../worlds/greenland/conf:4
 msgid "These are the beauty and bountiful countries of the barbarians"

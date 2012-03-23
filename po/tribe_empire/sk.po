@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2012-03-17 18:06+0000\n"
+"PO-Revision-Date: 2012-03-23 00:02+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-20 04:35+0000\n"
-"X-Generator: Launchpad (build 14969)\n"
+"X-Launchpad-Export-Date: 2012-03-23 04:35+0000\n"
+"X-Generator: Launchpad (build 14996)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -775,7 +775,7 @@ msgstr "Kameňolom"
 
 #: ../../tribes/empire/conf:88
 msgid "Ration"
-msgstr "Porcia"
+msgstr "Prídel"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator coal little"

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2012-03-21 16:48+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"PO-Revision-Date: 2012-03-22 10:48+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-22 04:35+0000\n"
-"X-Generator: Launchpad (build 14981)\n"
+"X-Launchpad-Export-Date: 2012-03-23 04:34+0000\n"
+"X-Generator: Launchpad (build 14996)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2277,7 +2277,7 @@ msgstr "L'indicatore di risorse segna acqua"
 
 #: ../../tribes/barbarians/battlearena/help.lua:13
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr "Si dice originario di Neidhardt, il famoso addestratore."
+msgstr "Attribuito a Neidhardt, il famoso istruttore."
 
 #: ../../tribes/barbarians/conf:148
 msgid "Scout"
@@ -2702,14 +2702,21 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ship's sails."
 msgstr ""
+"La serra per le felci coltiva le canne che soddisfano due differenti "
+"necessità per la tribù dei Barbari.<br> È il tradizionale materiale per i "
+"tetti, ed è intrecciato in un tessuto estremamente resistente che è usato "
+"per le vele delle loro navi."
 
 #: ../../tribes/barbarians/fernery/help.lua:26
 msgid "The Fernery's output will only go to construction sites that need it."
 msgstr ""
+"Il prodotto della serra per le felci va solo verso i cantieri che ne hanno "
+"necessità."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher's Hut needs water full of fish in the vicinity."
 msgstr ""
+"La capanna del pescatore ha bisogno di acque pescose nelle sue vicinanze."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -2726,28 +2733,40 @@ msgstr "Il cacciatore porta buona carne ai coloni."
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter's Hut needs animals in the vicinity to hunt."
 msgstr ""
+"La capanna del cacciatore ha bisogno di animali da cacciare nelle sue "
+"vicinanze."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:16
 msgid ""
 "The Limekiln processes Raw Stones to make \"Grout\", a substance that "
 "solidifies and so reinforces masonry."
 msgstr ""
+"La calchera trasforma la pietra grezza per produrre \"calce\", una sostanza "
+"che solidifica e quindi rinforza la muratura."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:32
 msgid ""
 "The Limekiln's output will only go to construction sites that need it. Those "
 "are predominantly houses that work with fire, and some military sites."
 msgstr ""
+"Il prodotto della calchera va solo verso i cantieri che ne hanno necessità. "
+"Questi sono solitamente case che lavorano con il fuoco, e qualche edificio "
+"militare."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:48
 msgid ""
 "The Lumberjack needs %s to fell a tree, not counting the time he needs to "
 "reach the destination and go home again."
 msgstr ""
+"Il taglialegna ha bisogno di %s per abbattere un albero, senza contare il "
+"tempo di cui ha bisogno per raggiungere la destinazione e tornare poi di "
+"nuovo a casa."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:23
 msgid "The Lumberjack's Hut needs trees in the immediate vicinity to fell."
 msgstr ""
+"La capanna del taglialegna ha bisogno di alberi di abbattere nelle sue "
+"immediate vicinanze."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:16
 msgid ""
@@ -2755,6 +2774,9 @@ msgid ""
 "component of the Snacks that Inns and Big Inns prepare for Miners in Deep "
 "Mines."
 msgstr ""
+"La piccola birreria produce birra di grado inferiore. La birra è una "
+"componente vitale degli spuntini che le locande  e le grandi locande "
+"preparano per i minatori delle miniere profonde."
 
 #: ../../tribes/barbarians/quarry/help.lua:23
 msgid "The Quarry needs stones in the vicinity."
@@ -2765,12 +2787,17 @@ msgid ""
 "The Ranger needs %s to plant a tree, not counting the time he needs to reach "
 "the destination and go home again."
 msgstr ""
+"La guardia forestale ha bisogno di %s per piantare un albero, senza contare "
+"il tempo di cui ha bisogno per raggiungere la destinazione e tornare poi di "
+"nuovo a casa."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:23
 msgid ""
 "The Ranger's Hut needs free space in the immediate vicinity to plant the "
 "trees."
 msgstr ""
+"La capanna della guardia forestale ha bisogno di spazio libero nelle sue "
+"immediate vicinanze per poter piantare gli alberi."
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
@@ -2958,6 +2985,11 @@ msgid ""
 "Stonford in the year of the great flood. <br> The same man had all the 244 "
 "granite blocks ready only a week later, that still fortify the city's levee."
 msgstr ""
+"Questa frase fu la risposta che diede Rimbert il Minatore - in seguito noto "
+"come Rimbert il Solitario - quando gli fu chiesto di rimanere seduto ad una "
+"riunione di emergenza a Stonford nell'anno della grande alluvione.<br> Lo "
+"stesso uomo fornì tutti i 244 blocchi di granito, che ancora rinforzano gli "
+"argini della città, una sola settimana dopo."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -3008,10 +3040,13 @@ msgid ""
 "Trains soldiers in Attack up to level 4, and in Hitpoints up to level "
 "2.<br>Equips the soldiers with all necessary weapons and armour parts."
 msgstr ""
+"Addestra i soldati in Attacco fino al livello 4, ed in Punti Ferita fino al "
+"livello 2.<br>Equipaggia i soldati con tutte le armi e le parti di armatura "
+"necessari."
 
 #: ../../tribes/barbarians/battlearena/help.lua:16
 msgid "Trains soldiers in Evade up to level 2."
-msgstr ""
+msgstr "Addestra i soldati in Evasione fino al livello 2."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
@@ -3325,7 +3360,7 @@ msgstr "Avanzato da:"
 #: ../../tribes/barbarians/warmill/help.lua:20
 #: ../../tribes/barbarians/well/help.lua:19
 msgid "Vision range:"
-msgstr ""
+msgstr "Raggio visivo:"
 
 #: ../../tribes/barbarians/conf:109
 msgid "War Helmet"
@@ -3409,7 +3444,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
-msgstr ""
+msgstr "Diffonde i brindisi tra i minatori"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Wildboar"
@@ -3481,7 +3516,7 @@ msgstr "Lavoro"
 #: ../../tribes/barbarians/trainingscamp/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:43
 msgid "Worker uses:"
-msgstr ""
+msgstr "Il lavoratore utilizza:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:54
 #: ../../tribes/barbarians/bakery/help.lua:48
@@ -3554,7 +3589,7 @@ msgstr "I lavoratori utilizzano:"
 #: ../../tribes/barbarians/warmill/help.lua:18
 #: ../../tribes/barbarians/well/help.lua:17
 msgid "Working radius:"
-msgstr ""
+msgstr "Raggio di lavoro:"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
