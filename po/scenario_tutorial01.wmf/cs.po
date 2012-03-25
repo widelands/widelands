@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2012-03-16 11:49+0000\n"
-"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
+"PO-Revision-Date: 2012-03-25 02:17+0000\n"
+"Last-Translator: Jezevec <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-20 04:38+0000\n"
-"X-Generator: Launchpad (build 14969)\n"
+"X-Launchpad-Export-Date: 2012-03-25 04:45+0000\n"
+"X-Generator: Launchpad (build 14981)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -24,6 +24,9 @@ msgid ""
 "no longer of any use and is just blocking space. To do that, click on the\n"
 "quarry and select the destroy button."
 msgstr ""
+"Dorazila ti zpráva. Vidíš se jak se změnilo tlačítko ve spodní části\n"
+"obrazovky? Nyní můžeš zlikvidovat kamenolom aby dál zbytečně\n"
+"nezabíral místo. Klikni na lom a vyber tlačítko zničit."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
 msgid ""
@@ -52,6 +55,9 @@ msgid ""
 "screen.\n"
 "Close the messages window now by right clicking into it."
 msgstr ""
+"Všechna okna ve Widelands mohou být zavřena pravým kliknutím. Některá\n"
+"také tlačítky ve spodní části obrazovky.\n"
+"Zavři okno se zprávami pravým kliknutím do něj."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid ""
@@ -134,6 +140,13 @@ msgid ""
 "activated\n"
 "earlier."
 msgstr ""
+"Vybuduj lom poblíž kamenů které vidíš. Pamatuješ si jak jsem to dělal "
+"předchvílí?\n"
+"Ujisti se, že máš zapnutou nápovědu ke stavbě a pak jednoduše klikni na "
+"místo,\n"
+"kam chces budovu postavit, vyber si ji ze zobrazeného seznamu a je hotovo.\n"
+"Možná je teď správná chvíle prozkoumat co který z těch symbolů aktivované\n"
+"nápovědy znamená."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
@@ -169,6 +182,12 @@ msgid ""
 "military influence any more. If an enemy builds a military building nearby,\n"
 "your construction site could burn down. No sweat, that won't happen here."
 msgstr ""
+"Tvrze nelze stavět rovnou. Nejjdříve je potřeba postavit pevnost a teprve\n"
+"tu lze vylepšit na tvrz. Pokud to chceš udělat, klikni na pevnost a pak si "
+"vyber\n"
+"tlačítko vylepšit na tvrz. Vojáci tvrz po dobu výstavby opustí. To znamená,\n"
+"že po tuto dobu nemá žádnou vojenskou sílu. Pokud nepřítel postaví poblíž\n"
+"svou vojenskou budovu, tvoje budova bude zničena. Tady to nehrozí."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
@@ -228,6 +247,10 @@ msgid ""
 "so\n"
 "that they get a tick-symbol in front of them. Then, you can click the"
 msgstr ""
+"Aktuálně máš dvě zprávy. Tuto, kterou právě čteš a další, která tě\n"
+"informuje o postavení nové základny. Pojď se naučit, jak archivovat\n"
+"zprávy: dají se vybrat klliknutím na zaškrtítko před zprávou.\n"
+"Pak klikni na"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid "Defeat the enemy"
@@ -312,7 +335,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "Vylepšování budov"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
 msgid ""

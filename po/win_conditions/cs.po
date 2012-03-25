@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2012-02-18 21:39+0000\n"
-"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
+"PO-Revision-Date: 2012-03-25 02:35+0000\n"
+"Last-Translator: Jezevec <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-20 04:38+0000\n"
-"X-Generator: Launchpad (build 14969)\n"
+"X-Launchpad-Export-Date: 2012-03-25 04:45+0000\n"
+"X-Generator: Launchpad (build 14981)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
@@ -53,7 +53,7 @@ msgstr "Sběratelé"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
-msgstr ""
+msgstr "Gratuluji!"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -96,7 +96,7 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:45
 msgid "Team %i"
-msgstr ""
+msgstr "Tým %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:13
 msgid "Territorial Lord"
@@ -104,7 +104,7 @@ msgstr "Vládce území"
 
 #: ../../scripting/win_condition_texts.lua:27
 msgid "The game will end in %i minutes."
-msgstr ""
+msgstr "Hra skončí během %i minut."
 
 #: ../../scripting/win_condition_texts.lua:40
 msgid "The game will end in %s."
@@ -116,7 +116,7 @@ msgstr "Kmen nebo tým, který dokáže porazit všechny ostatní, vyhrává!"
 
 #: ../../scripting/win_condition_texts.lua:32
 msgid "The winner is %s "
-msgstr ""
+msgstr "Vítězem je %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:14
 msgid "This is an endless game without rules."
@@ -128,7 +128,7 @@ msgstr "Toto je nekonečná hra bez pravidel. Válečná mlha je vypnuta."
 
 #: ../../scripting/win_condition_texts.lua:39
 msgid "Total: %i points"
-msgstr ""
+msgstr "Celkem: %i bodů"
 
 #: ../../scripting/win_condition_texts.lua:34
 msgid "Trees owned"
@@ -140,11 +140,11 @@ msgstr "Lesní skřítek"
 
 #: ../../scripting/win_condition_texts.lua:7
 msgid "You are defeated!"
-msgstr ""
+msgstr "Byl jsi poražen!"
 
 #: ../../scripting/win_condition_texts.lua:13
 msgid "You are the winner!"
-msgstr ""
+msgstr "Zvítězil si!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:15
 msgid ""
@@ -163,11 +163,11 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
-msgstr ""
+msgstr "Prohrál jsi"
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
-msgstr ""
+msgstr "Olvládáš více než polovinu mapy."
 
 #: ../../scripting/win_condition_texts.lua:47
 msgid "You still got %i minutes to prevent a victory."
@@ -175,11 +175,11 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
-msgstr ""
+msgstr "Vyhrál jsi"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
-msgstr ""
+msgstr "Tuhle hru jsi ztratil!"
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2012-03-24 00:13+0000\n"
+"PO-Revision-Date: 2012-03-24 22:10+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-24 04:33+0000\n"
+"X-Launchpad-Export-Date: 2012-03-25 04:45+0000\n"
 "X-Generator: Launchpad (build 14981)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -117,11 +117,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "\"The Art of Hunting\""
-msgstr ""
+msgstr "\"Umenie loviť\""
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "\"We grow roofs\""
-msgstr ""
+msgstr "\"Pestujeme strechy\""
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "\"We make it work!\""
@@ -187,7 +187,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
-msgstr ""
+msgstr "%s z drevorubačskej chatrče"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
@@ -265,6 +265,8 @@ msgid ""
 "A %s exploits all of the resource down to the deepest level.<br>But even "
 "after having done so, it will still have a %s chance of finding some more %s."
 msgstr ""
+"%s dokáže vyťažiť celý zdroj po najhlbšiu úroveň.<br>Ale aj po tom, čo sa "
+"tak stane, bude stále mať %s šancu, že nájde ešte trocha %s."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/goldmine/help.lua:16
@@ -272,6 +274,8 @@ msgid ""
 "A %s exploits only %s of the resource. <br> From there on, it will only have "
 "a 5%% chance of finding %s."
 msgstr ""
+"%s dokáže vyťažiť len %s zdroja. <br> Potom bude mať len 5%% šancu, že nájde "
+"%s."
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -280,6 +284,8 @@ msgid ""
 "A %s exploits only %s of the resource.<br>From there on, it will only have a "
 "5%% chance of finding %s."
 msgstr ""
+"%s dokáže vyťažiť len %s zdroja.<br>Potom bude mať len 5%% šancu, že nájde "
+"%s."
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
@@ -364,6 +370,8 @@ msgid ""
 "An %s exploits only %s of the resource. <br> From there on, it will only "
 "have a 5%% chance of finding %s."
 msgstr ""
+"%s dokáže vyťažiť len %s zdroja. <br> Potom bude mať len 5%% šancu, že nájde "
+"%s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -935,7 +943,7 @@ msgstr "Zničená budova"
 #: ../../tribes/barbarians/goldmine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:18
 msgid "Dig %s out of the ground in mountain terrain."
-msgstr ""
+msgstr "Kopať %s zo zeme na horskom teréne."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -998,6 +1006,7 @@ msgstr "Výcvik v uhýbaní:"
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
 msgstr ""
+"Úryvok z tradičnej barbarskej piesne<br>  \"Naše poklady v podzemí\"."
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1113,7 +1122,7 @@ msgstr "Rybár"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Fisher's Hut"
-msgstr "Rybárova chatrč"
+msgstr "Rybárska chatrč"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
@@ -1361,7 +1370,7 @@ msgstr "Lovec"
 
 #: ../../tribes/barbarians/conf:186
 msgid "Hunter's Hut"
-msgstr "Lovcova chatrč"
+msgstr "Lovecká chatrč"
 
 #: ../../tribes/barbarians/conf:91
 #: ../../tribes/barbarians/hunters_hut/help.lua:47
@@ -1381,6 +1390,8 @@ msgid ""
 "If all needed wares are delivered in time, a %s can train one new soldier in "
 "%s and %s to the final level in %s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, %s dokáže vycvičiť %s a %s jedného "
+"nového vojaka po konečnú úroveň v priemere za %s."
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 #: ../../tribes/barbarians/cattlefarm/help.lua:48
@@ -1416,6 +1427,7 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce %s in %s on average."
 msgstr ""
+"Pri stálom prívode jedla dokáže baňa vyprodukovať %s v priemere za %s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -1595,7 +1607,7 @@ msgstr "Drevorubač"
 
 #: ../../tribes/barbarians/conf:183
 msgid "Lumberjack's Hut"
-msgstr "Drevorubačova chatrč"
+msgstr "Drevorubačská chatrč"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Mask"
@@ -2057,7 +2069,7 @@ msgstr "Lesník"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Ranger's Hut"
-msgstr "Lesníkova chatrč"
+msgstr "Lesnícka chatrč"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:27
@@ -2491,7 +2503,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:8
 msgid "The Barbarian Axefactory"
-msgstr ""
+msgstr "Barbarská továreň na sekery"
 
 #: ../../tribes/barbarians/axefactory/help.lua:16
 msgid ""
@@ -2505,47 +2517,47 @@ msgstr ""
 
 #: ../../tribes/barbarians/bakery/help.lua:8
 msgid "The Barbarian Bakery"
-msgstr ""
+msgstr "Barbarská pekáreň"
 
 #: ../../tribes/barbarians/battlearena/help.lua:8
 msgid "The Barbarian Battle Arena"
-msgstr ""
+msgstr "Barbarská zápasnícka aréna"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:8
 msgid "The Barbarian Cattle Farm"
-msgstr ""
+msgstr "Barbarský kravín"
 
 #: ../../tribes/barbarians/coalmine/help.lua:8
 msgid "The Barbarian Coal Mine"
-msgstr ""
+msgstr "Barbarská uhoľná baňa"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:8
 msgid "The Barbarian Deep Coal Mine"
-msgstr ""
+msgstr "Barbarská hlbinná uhoľná baňa"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:8
 msgid "The Barbarian Deep Gold Mine"
-msgstr ""
+msgstr "Barbarská hlbinná zlatá baňa"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:8
 msgid "The Barbarian Deep Iron Ore Mine"
-msgstr ""
+msgstr "Barbarská hlbinná železnorudná baňa"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:8
 msgid "The Barbarian Deeper Coal Mine"
-msgstr ""
+msgstr "Barbarská hlbšia uhoľná baňa"
 
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:8
 msgid "The Barbarian Deeper Gold Mine"
-msgstr ""
+msgstr "Barbarská hlbšia zlatá baňa"
 
 #: ../../tribes/barbarians/deeper_oremine/help.lua:8
 msgid "The Barbarian Deeper Iron Ore Mine"
-msgstr ""
+msgstr "Barbarská hlbšia železnorudná baňa"
 
 #: ../../tribes/barbarians/farm/help.lua:8
 msgid "The Barbarian Farm"
-msgstr ""
+msgstr "Barbarská farma"
 
 #: ../../tribes/barbarians/fernery/help.lua:8
 msgid "The Barbarian Fernery"
@@ -2553,7 +2565,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:8
 msgid "The Barbarian Fisher's Hut"
-msgstr ""
+msgstr "Barbarská rybárska chatrč"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:8
 msgid "The Barbarian Gamekeeper's Hut"
@@ -2561,27 +2573,27 @@ msgstr "Barbarská hájnická chatrč"
 
 #: ../../tribes/barbarians/goldmine/help.lua:8
 msgid "The Barbarian Gold Mine"
-msgstr ""
+msgstr "Barbarská zlatá baňa"
 
 #: ../../tribes/barbarians/granitemine/help.lua:8
 msgid "The Barbarian Granite Mine"
-msgstr ""
+msgstr "Barbarský žulový lom"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:8
 msgid "The Barbarian Hunter's Hut"
-msgstr ""
+msgstr "Barbarská lovecká chatrč"
 
 #: ../../tribes/barbarians/oremine/help.lua:8
 msgid "The Barbarian Iron Ore Mine"
-msgstr ""
+msgstr "Barbarská železnorudná baňa"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:8
 msgid "The Barbarian Limekiln"
-msgstr ""
+msgstr "Barbarská vápenka"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:8
 msgid "The Barbarian Lumberjack's Hut"
-msgstr ""
+msgstr "Barbarská drevorubačská chatrč"
 
 #: ../../tribes/barbarians/metalworks/help.lua:8
 msgid "The Barbarian Metalwork Shop"
@@ -2598,33 +2610,35 @@ msgstr ""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:8
 msgid "The Barbarian Micro Brewery"
-msgstr ""
+msgstr "Barbarský mikropivovar"
 
 #: ../../tribes/barbarians/quarry/help.lua:8
 msgid "The Barbarian Quarry"
-msgstr ""
+msgstr "Barbarský kameňolom"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:8
 msgid "The Barbarian Ranger's Hut"
-msgstr ""
+msgstr "Barbarská lesnícka chatrč"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:8
 msgid "The Barbarian Trainingscamp"
-msgstr ""
+msgstr "Barbarský výcvikový tábor"
 
 #: ../../tribes/barbarians/warmill/help.lua:8
 msgid "The Barbarian War Mill"
-msgstr ""
+msgstr "Barbarský vojenský závod"
 
 #: ../../tribes/barbarians/warmill/help.lua:16
 msgid ""
 "The Barbarian War Mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an Axefactory."
 msgstr ""
+"Barbarský vojenský závod je najpokročilejšou produkčnou stavbou na zbrane. "
+"Vznikne len vylepšením továrne na sekery."
 
 #: ../../tribes/barbarians/well/help.lua:8
 msgid "The Barbarian Well"
-msgstr ""
+msgstr "Barbarská studňa"
 
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "The Carrier needs %s to get one bucket full of water."
