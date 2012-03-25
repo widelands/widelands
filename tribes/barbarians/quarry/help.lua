@@ -9,8 +9,8 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/quarry/b_quarry_i_00.png", p(
-			_[[Text needed.]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed.]])) ..
+			_[[Text needed]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h2(_"Purpose:")) ..
