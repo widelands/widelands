@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2012-03-17 16:44+0000\n"
+"POT-Creation-Date: 2012-03-19 21:47+0000\n"
+"PO-Revision-Date: 2012-03-25 08:20+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-18 04:33+0000\n"
-"X-Generator: Launchpad (build 14951)\n"
+"X-Launchpad-Export-Date: 2012-03-26 04:34+0000\n"
+"X-Generator: Launchpad (build 15008)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
@@ -53,7 +53,7 @@ msgstr "Collectores"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
-msgstr ""
+msgstr "Congratulamur!"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -74,12 +74,12 @@ msgstr "Ludus infiniens (non nimbatus)"
 
 #: ../../scripting/win_condition_texts.lua:49
 msgid "Keep it for %i more minutes to win the game."
-msgstr ""
+msgstr "Si habeas %i minutas posthac, victor eris!"
 
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
-msgstr ""
+msgstr "Ludorum rationarium:"
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
@@ -131,7 +131,7 @@ msgstr "In summa: %i punctae"
 
 #: ../../scripting/win_condition_texts.lua:34
 msgid "Trees owned"
-msgstr ""
+msgstr "arbores habitas"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid "Wood Gnome"
@@ -157,6 +157,7 @@ msgstr ""
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
+"Nihil, quod praesidere potes, superest. Si vis, spectator perseveras."
 
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
@@ -172,7 +173,7 @@ msgstr "Plus quam dimidiam tabulae terram habes."
 
 #: ../../scripting/win_condition_texts.lua:47
 msgid "You still got %i minutes to prevent a victory."
-msgstr ""
+msgstr "Adhuc %i minutas habes ad victoriam avertendam."
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
@@ -180,7 +181,7 @@ msgstr "Vicisti"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
-msgstr ""
+msgstr "In hoc ludo victus es!"
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

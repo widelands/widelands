@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2012-03-17 16:36+0000\n"
+"POT-Creation-Date: 2012-03-19 21:47+0000\n"
+"PO-Revision-Date: 2012-03-25 13:49+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-18 04:33+0000\n"
-"X-Generator: Launchpad (build 14951)\n"
+"X-Launchpad-Export-Date: 2012-03-26 04:34+0000\n"
+"X-Generator: Launchpad (build 15008)\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "%i %s<br>"
@@ -27,7 +27,7 @@ msgstr "%s est rex tumuli ab %s!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
 msgid "%s has won the game. Congratulations!"
-msgstr ""
+msgstr "%s victor est. Congratulamur!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
 msgid ""
@@ -68,22 +68,22 @@ msgstr "15 minutae"
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:25
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "1st to finish"
-msgstr ""
+msgstr "primus finiens"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "2nd to finish"
-msgstr ""
+msgstr "secundus finiens"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:27
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
 msgid "3rd to finish"
-msgstr ""
+msgstr "tertius finiens"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
 msgid "4th to finish"
-msgstr ""
+msgstr "quartus finiens"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -91,7 +91,7 @@ msgstr "quinque minutae"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid "Finish rewards"
-msgstr ""
+msgstr "Finiendi praemia"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:24
 msgid "First Island"
@@ -109,6 +109,10 @@ msgid ""
 "at\n"
 "the center of the third island for 20 minutes to win the game"
 msgstr ""
+"Si castellum in designatum locum finiveris, tibi tertia principa in tertia "
+"insula\n"
+"datur. Tibi castellum in media tertia insula aedificandum et XX minutas \n"
+"habendum est, si vincere vis."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
@@ -137,7 +141,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
 msgid "The reward for this feat amounts to<br><br>%s"
-msgstr ""
+msgstr "Praemium huius est<br><br>%s"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"

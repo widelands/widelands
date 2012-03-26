@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-08 22:13+0000\n"
-"PO-Revision-Date: 2012-03-17 16:16+0000\n"
+"POT-Creation-Date: 2012-03-19 21:47+0000\n"
+"PO-Revision-Date: 2012-03-25 08:19+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-18 04:33+0000\n"
-"X-Generator: Launchpad (build 14951)\n"
+"X-Launchpad-Export-Date: 2012-03-26 04:34+0000\n"
+"X-Generator: Launchpad (build 15008)\n"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:224
 msgid "Congratulations!"
-msgstr ""
+msgstr "Congratulamur!"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:212
 msgid "The player who defeats the other player wins the game"
@@ -27,7 +27,7 @@ msgstr "Victor erit hic, qui ludor alios ludores vincit."
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:212
 msgid "Together we're strong"
-msgstr ""
+msgstr "Coniuncti pervigemus"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:219
 msgid "You are defeated!"
@@ -37,6 +37,7 @@ msgstr "Victus es!"
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
+"Nihil, quod praesidere potes, superest. Si vis, spectator perseveras."
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:224
 msgid "You have won this game!"
