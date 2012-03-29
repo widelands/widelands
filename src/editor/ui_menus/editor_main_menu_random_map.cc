@@ -100,7 +100,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
-		 posx, posy, 20, 20,
+		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"));
 	widthupbtn->sigclicked.connect
@@ -108,7 +108,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"));
 	widthdownbtn->sigclicked.connect
@@ -130,7 +130,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
-		 posx, posy, 20, 20,
+		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"));
 	heightupbtn->sigclicked.connect
@@ -138,7 +138,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"));
 	heightdownbtn->sigclicked.connect
@@ -151,7 +151,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * waterupbtn = new UI::Button
 		(this, "water_up",
-		 posx, posy, 20, 20,
+		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"));
 	waterupbtn->sigclicked.connect
@@ -159,7 +159,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * waterdownbtn = new UI::Button
 		(this, "water_down",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"));
 	waterdownbtn->sigclicked.connect
@@ -176,7 +176,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * landupbtn = new UI::Button
 		(this, "land_up",
-		 posx, posy, 20, 20,
+		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"));
 	landupbtn->sigclicked.connect
@@ -184,7 +184,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * landdownbtn = new UI::Button
 		(this, "land_down",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"));
 	landdownbtn->sigclicked.connect
@@ -202,7 +202,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * wastelandupbtn = new UI::Button
 		(this, "wasteland_up",
-		 posx, posy, 20, 20,
+		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"));
 	wastelandupbtn->sigclicked.connect
@@ -210,7 +210,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * wastelanddownbtn = new UI::Button
 		(this, "wasteland_down",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"));
 	wastelanddownbtn->sigclicked.connect
@@ -312,7 +312,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * playerupbtn = new UI::Button
 		(this, "player_up",
-		 posx, posy, 20, 20,
+		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"));
 	playerupbtn->sigclicked.connect
@@ -320,7 +320,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	UI::Button * playerdownbtn = new UI::Button
 		(this, "player_down",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 posx, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"));
 	playerdownbtn->sigclicked.connect
