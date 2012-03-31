@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-29 23:08+0000\n"
+"PO-Revision-Date: 2012-03-30 19:53+0000\n"
 "Last-Translator: Mario Dautović <mario.dautovic@yahoo.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-03-30 04:31+0000\n"
+"X-Launchpad-Export-Date: 2012-03-31 04:47+0000\n"
 "X-Generator: Launchpad (build 15032)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1919,7 +1919,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Zadaci: %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
@@ -3803,7 +3803,7 @@ msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:45
 msgid "Objectives Menu"
-msgstr ""
+msgstr "Izbornik zadataka"
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
@@ -3914,7 +3914,7 @@ msgstr ""
 
 #: ../../src/wui/interactive_player.cc:117
 msgid "Objectives"
-msgstr ""
+msgstr "Zadaci"
 
 #: ../../src/wui/interactive_player.cc:126
 #: ../../src/wui/interactive_player.cc:287

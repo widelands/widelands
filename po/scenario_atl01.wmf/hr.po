@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-03-29 21:47+0000\n"
+"PO-Revision-Date: 2012-03-30 20:39+0000\n"
 "Last-Translator: Mario Dautović <mario.dautovic@yahoo.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-30 04:31+0000\n"
+"X-Launchpad-Export-Date: 2012-03-31 04:47+0000\n"
 "X-Generator: Launchpad (build 15032)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
@@ -35,6 +35,11 @@ msgid ""
 "plan,\n"
 "but I think, it could work."
 msgstr ""
+"Jedan moj prijatelj je samostalno  istražiao otok i pričao mi je o\n"
+"velikom jezeru na samom vrhu planine. Predlažem da napravimo\n"
+"brodić na ovom jezeru i čekamo dok se cijeli otok ne potopi ispod\n"
+"nas. Tada možemo otploviti. Znam da nije neki plan, ali moga bi\n"
+"funkcionirati."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:343
 msgid "A man comes to Jundlina"
@@ -49,6 +54,8 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
+"Nakon iskrcavanja na ovaj zagonetni otok blizu Atlantide, preostali "
+"atlantiđani se muče kako bi za sebe napravili novi dom."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:308
 msgid ""
@@ -74,6 +81,22 @@ msgid ""
 "times\n"
 "without taking away the ritual."
 msgstr ""
+"Ahh, ali ja mislim da je ovo nemoguće promijeniti. Spremanje hrane i objedi\n"
+"su nešto što je duboko usađeno u nama atlantiđanima. To je samo svečanost\n"
+"koja nam je potrebna za opće dobro. Stoga mislim da to ne možemo oduzeti\n"
+"sasvvim od pojedinaca. Ali možemo naći dogovor negdje na pola puta. Za\n"
+"mene je pečenje kruha problematično: mljevenje crnog korijena i kukuruza\n"
+"u brašno a zatim pečenje kruha je mučno i dosadno: Mislim da bi ovdje jako\n"
+"pomogla industrijalizacija. Kao prvo ja bih volio kad bih samo dobio svježe\n"
+"pečeni kruh dostavljen na moju adresu svaki dan. Oooh i što je još važnije:\n"
+"dimljenje ribe i mesa te njihovo guljenje zbog boljeg okusa je strašno. "
+"Moja\n"
+"kuća je puna dima i mirisa  tjednima poslje. Zar ne misliš da bi ovo bilo "
+"bolje\n"
+"raditi u posebnim građevinama gdje posljedice ne bi nikome smetale? Mislim\n"
+"da bi ove dvije stvari bile prihvaćene od ljudi i da bi smanjile vrijeme "
+"pripreme\n"
+"jela bez da moramo ukidati ritual."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:513
 msgid ""
@@ -111,6 +134,11 @@ msgid ""
 "not\n"
 "collapse."
 msgstr ""
+"Dok tvoja mreža puteva postaje veća i zahtjevnija, trebao bi koristiti "
+"konje,\n"
+"koji bi pomagali kod prenašanja stvari. Konji se uzgajajuu konjušnicama,\n"
+"koristeći vodu i kukuruz. Skladište će također pomoći kako se tvoj sustav\n"
+"opskrbe ne bi raspao."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:140
 msgid "Build 3 ships to escape from the island"
@@ -285,6 +313,9 @@ msgid ""
 "this\n"
 "a priority for now. You shall get your industry and soon!"
 msgstr ""
+"Razmislio sam o ovome, Sidoluse. Mislim da je sada došlo vrijeme. Ovo\n"
+"nam postaje od najveće važnosti za sada. Dobit ćeš tvoju industriju i\n"
+"to uskoro!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:442
 msgid ""
@@ -406,6 +437,9 @@ msgid ""
 "Leaving the dying Atlantis and their past behind, they started a quest to\n"
 "find a place sheltered by the fire and protected from the sea."
 msgstr ""
+"Napuštajući Atlantidu i njezinu prošlost na izdisaju, oni su počeli "
+"traganje\n"
+"za mjestom koje će pružiti zaklon od vatre i štitit će od morskih sila."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:246
 msgid "Loftomor and Sidolus arrive"
@@ -424,6 +458,11 @@ msgid ""
 "we\n"
 "escape?"
 msgstr ""
+"Neka nas Satul spasi! Lutas još pokušava doći do nas. Izvidnica me je "
+"izvjestila\n"
+"kako se ocean brzo podiže. Moramo otići na povišeno mjesto i iseliti sve, "
+"te\n"
+"ponjeti što možemo više robe iz našeg sjedišta u planine. Kako ćemo pobjeći?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:248
 msgid ""
@@ -434,6 +473,11 @@ msgid ""
 "new\n"
 "home?"
 msgstr ""
+"Neka vas Satul obojicu zagrije. Loftomor, ti si bio najcjenjeniji arhitekt "
+"na otoku.\n"
+"Sidolus, ti si najiskusniji ratnik i taktičar. Pozvao sam vas ovdje pred "
+"sobom kako\n"
+"bih zatražio vaš savjet: Što trebamo učiniti da nam ovo postane novi dom?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:298
 msgid ""
@@ -532,7 +576,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:30
 msgid "New Objectives"
-msgstr ""
+msgstr "Novi zadaci"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:160
 msgid ""
@@ -547,7 +591,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:511
 msgid "One more building"
-msgstr ""
+msgstr "Još jedna građevina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid "Opol seeks out Jundlina"
@@ -555,7 +599,7 @@ msgstr "Opol traži Jundlinu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:557
 msgid "Ostur seems confident"
-msgstr ""
+msgstr "Ostur izgleda siguran"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:550
 msgid ""
@@ -604,7 +648,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:156
 msgid "Proudest to the death"
-msgstr ""
+msgstr "Ponosni do smrti"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:335
 msgid ""
@@ -619,11 +663,11 @@ msgstr "Sidolus traži Jundlinu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:417
 msgid "Sidolus seems contrite"
-msgstr ""
+msgstr "Sidolus izgleda pokajnički"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:267
 msgid "Sidolus speaks"
-msgstr ""
+msgstr "Sidolus govori"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid ""
@@ -639,11 +683,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:175
 msgid "The god's disgrace"
-msgstr ""
+msgstr "Božja sramota"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:177
 msgid "The god's punishment"
-msgstr ""
+msgstr "Božja kazna"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:54
 msgid ""
@@ -654,15 +698,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "The princess' memoir"
-msgstr ""
+msgstr "Princezine uspomene"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "The supply of build wares"
-msgstr ""
+msgstr "Opskrba robom za gradnju"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:530
 msgid "The water is rising!"
-msgstr ""
+msgstr "Razina vode se diže!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -692,6 +736,9 @@ msgid ""
 "back\n"
 "to your work now, Opol, and may Satul warm you and all your guild members!"
 msgstr ""
+"Ovo je stvarno dobra vijest, Opol. Naša privreda napreduje jako dobro. Idi\n"
+"nazad na posao sada, Opol, i neka te grije Satul i sve tvoje cehovske "
+"radnike!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:166
 msgid ""
@@ -707,7 +754,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:193
 msgid "Uproar and confusion"
-msgstr ""
+msgstr "Zbrka i zbunjenost"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
@@ -764,7 +811,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "Izgubili smo %s do oceana!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:233
 msgid ""
@@ -792,6 +839,8 @@ msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
 msgstr ""
+"Pobijedio si na ovom zadatku. Započni sljedeći zadatak ili nastavi s\n"
+"ovim koliko god hoćeš."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:574
 msgid ""

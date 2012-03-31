@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-03-25 20:17+0000\n"
+"PO-Revision-Date: 2012-03-30 18:46+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:36+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-03-31 04:47+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -49,7 +49,9 @@ msgstr "\"Formujem nový kameň zo starého pomocou ohňa a vody.\""
 msgid ""
 "\"He loves the animals and to breed them<br>as we love to cook and eat "
 "them.\""
-msgstr "\"Zbožňuje zvieratá a ich chov,<br>ako my ich radi jeme upečené.\""
+msgstr ""
+"\"Zbožňuje zvieratá a chová ich rád,<br>tak ako my pečieme ich a utišujeme "
+"svoj hlad.\""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:13
 msgid ""
@@ -83,6 +85,8 @@ msgid ""
 "\"Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
+"\"Nech prvý zaženie hlad, druhý ťa upokojí; keď prehltneš tretí, je čas na "
+"ďalšiu smenu!\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -138,7 +142,7 @@ msgstr "\"Čo tým myslíš, že moje ryby nie sú čerstvé?!\""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr ""
+msgstr "%s sa vždy prináša do budovy %s. Nemá iné využitie."
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -183,7 +187,7 @@ msgstr "%s z hostinca"
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "%s z uhoľnej bane a uhliarne"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
@@ -289,7 +293,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
-msgstr ""
+msgstr "Trstinová farma dokáže vyprodukovať zväzok trstiny v priemere za %s."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -350,6 +354,10 @@ msgid ""
 "\t\t\tWood may serve for a household fire and to keep you warm, but when it "
 "comes to working with iron or gold, there is no way around coal."
 msgstr ""
+"Pred mnohými rokmi sa barbari naučili zavŕtať do úbočí pre čierny materiál, "
+"ktorý prikladajú do svojich pecí. <br>\n"
+"\t\t\tNa oheň v domácnosti a zahriatie poslúži aj drevo, ale keď sa jedná o "
+"prácu so železom a zlatom, bez uhlia sa nedá zaobísť."
 
 #: ../../tribes/barbarians/axefactory/help.lua:64
 msgid ""
@@ -364,6 +372,8 @@ msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"Výroba všetkých zbraní trvá rovnako dlho, ale spotreba tých istých surovín "
+"sa stále zvyšuje. Posledné dve potrebujú zlato."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
@@ -731,7 +741,7 @@ msgstr "Látka"
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
-msgstr "Látka je potrebná pre barbarské lode. Vyrába sa z trstenej krytiny."
+msgstr "Látka je potrebná pre barbarské lode. Vyrába sa z trstiny."
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:17
@@ -1066,11 +1076,11 @@ msgstr "Rúbe stromy."
 #: ../../tribes/barbarians/fernery/help.lua:42
 #: ../../tribes/barbarians/metalworks/help.lua:42
 msgid "Ferner"
-msgstr "Papradinár"
+msgstr "Trstinár"
 
 #: ../../tribes/barbarians/conf:192
 msgid "Fernery"
-msgstr "Papradiny"
+msgstr "Trstinová farma"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Field harvested"
@@ -1279,7 +1289,7 @@ msgstr "Malta"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
-msgstr "Sadí trstenú krytinu."
+msgstr "Sadí trstinu."
 
 #: ../../tribes/barbarians/conf:162
 msgid "Guardhall"
@@ -2243,7 +2253,7 @@ msgstr "Prieskumník"
 
 #: ../../tribes/barbarians/conf:189
 msgid "Scout's Hut"
-msgstr "Prieskumníkova chatrč"
+msgstr "Prieskumnícka chatrč"
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
@@ -2299,7 +2309,7 @@ msgstr "Spať"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Ferners"
-msgstr ""
+msgstr "Heslo trstinárskeho cechu"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Small Tower"
@@ -2483,13 +2493,15 @@ msgstr "Potrebný text."
 #: ../../tribes/barbarians/warmill/help.lua:44
 #: ../../tribes/barbarians/warmill/help.lua:50
 msgid "Thatch Reed"
-msgstr "Papradie na dosky"
+msgstr "Trstina"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
 "Thatch reed is produced in a fernery and used to make the roofs of buildings "
 "waterproof."
 msgstr ""
+"Trstina sa pestuje na trstinovej farme a slúži na ochranu striech budov pred "
+"vodou."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
@@ -2565,7 +2577,7 @@ msgstr "Barbarská farma"
 
 #: ../../tribes/barbarians/fernery/help.lua:8
 msgid "The Barbarian Fernery"
-msgstr ""
+msgstr "Barbarská trstinová farma"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:8
 msgid "The Barbarian Fisher's Hut"
@@ -2654,10 +2666,14 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ship's sails."
 msgstr ""
+"Na trstinovej farme sa pestuje trstina, ktorá má pre barbarov dva odlišné "
+"účely.<br>Je tradičným materiálom na zastrešovanie a tká sa z nej mimoriadne "
+"trvanlivá látka, z ktorej vyrábajú lodné plachty."
 
 #: ../../tribes/barbarians/fernery/help.lua:26
 msgid "The Fernery's output will only go to construction sites that need it."
 msgstr ""
+"Výstup z trstinovej farmy sa dostane len ku staveniskám, ktoré ho potrebujú."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher's Hut needs water full of fish in the vicinity."
@@ -3360,7 +3376,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
-msgstr ""
+msgstr "Opekaný chlieb rozšírený medzi baníkmi"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Wildboar"
@@ -3537,8 +3553,8 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "každý predmet"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
-msgstr ""
+msgstr "nie je k dispozícii"

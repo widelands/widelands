@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-23 17:38+0000\n"
+"PO-Revision-Date: 2012-03-30 23:55+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:39+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-03-31 04:47+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -3227,7 +3227,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:177
 msgid "Unknown gametime"
-msgstr ""
+msgstr "Neznámy herný čas"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:65
 msgid "Choose a replay!"
@@ -3290,15 +3290,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
-msgstr ""
+msgstr "Názov mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Zobraziť všetky mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Oficiálne mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
@@ -3306,15 +3306,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
-msgstr ""
+msgstr "Tímy 2 hráčov"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "3 Player Teams"
-msgstr ""
+msgstr "Tímy 3 hráčov"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "4 Player Teams"
-msgstr ""
+msgstr "Tímy 4 hráčov"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
@@ -3486,7 +3486,7 @@ msgstr "Vymazať nahrávky staršie ako:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
-msgstr ""
+msgstr "Vypnuté"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
@@ -3494,7 +3494,7 @@ msgstr "Nikdy"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 deň"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
