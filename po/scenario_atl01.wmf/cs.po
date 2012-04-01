@@ -7,24 +7,24 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2011-08-21 14:26+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-03-31 23:49+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:33+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-01 04:32+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - od Nemesis až k Genesis"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:472
 msgid "A dangerous finding"
-msgstr ""
+msgstr "Nebezpečný nález"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:565
 msgid ""
@@ -36,20 +36,26 @@ msgid ""
 "plan,\n"
 "but I think, it could work."
 msgstr ""
+"Jeden můj přítel prozkoumal ostrov na vlastní pěst a pověděl mi o velkém\n"
+"jezeře na vrcholku hory. Navrhuji abychom u jezera postavili lodě a počkali\n"
+"dokud se s námi ostrov neponoří. Potom můžeme odplout. Je to smělý plán,\n"
+"ale myslím, že může vyjít."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:343
 msgid "A man comes to Jundlina"
-msgstr ""
+msgstr "K Jundlině přichází muž"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:539
 msgid "A young man approaches"
-msgstr ""
+msgstr "Mladý muž přichází"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr ""
+"Po přistání na tajemném ostrově blízko Atlantidy se zbývající Atlantiďané "
+"snaží vybudovat pro sebe nový domov."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:308
 msgid ""
@@ -90,7 +96,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:496
 msgid "Another building."
-msgstr ""
+msgstr "Další budova."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:121
 msgid ""
@@ -102,6 +108,12 @@ msgid ""
 "buildings.<br><br>\n"
 "- Build a dungeon and a labyrinth.<br>"
 msgstr ""
+"Jako všechny ostatní kmeny, i Atlantiďané mohou cvičit své vojáky: \n"
+"v kobkách se trénuje útok - hlavní atribut Atlantiďanů - a v labyrintu "
+"trénují \n"
+"obratnost, zdraví a obranu. Předměty vyrobené průmyslem jsou použity\n"
+"k výcviku lepších vojáků v těchto dvou tréninkových budovách.<br><br>\n"
+"- Postav kobku a labyrint.<br>"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:132
 msgid ""
@@ -115,39 +127,39 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:140
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "Postav 3 lodě pro opuštění ostrova"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
 "Build a quarry, two woodcutter's houses, two forester's houses and a\n"
 "sawmill."
-msgstr ""
+msgstr "Postav lom, dva domky dřevorubce, dva domky lesníka a pilu."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:87
 msgid "Build a spiderfarm and a weaving mill"
-msgstr ""
+msgstr "Postav pavoučí farmu a tkalcovnu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:130
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a warehouse and a horsefarm"
-msgstr ""
+msgstr "Postav sklad a koňskou farmu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build industry and mines"
-msgstr ""
+msgstr "Postav průmysl a doly"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:119
 msgid "Build training buildings"
-msgstr ""
+msgstr "Postav tréninkové budovy"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build training buildings to improve your soldiers"
-msgstr ""
+msgstr "Postav tréninkové budovy na vylepšení svých vojáků"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:75
 msgid "Building lost!"
-msgstr ""
+msgstr "Budova ztracena!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:179
 msgid ""
@@ -175,15 +187,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:195
 msgid "Chaos emerges..."
-msgstr ""
+msgstr "Chaos přichází..."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:289
 msgid "Colionder arrives"
-msgstr ""
+msgstr "Colionder dorazil"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:306
 msgid "Colionder is in thought"
-msgstr ""
+msgstr "Colionder je zamyšlený"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:595
 msgid "Congratulations"
@@ -191,35 +203,35 @@ msgstr "Gratuluji"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:43
 msgid "Ensure the supply of build wares"
-msgstr ""
+msgstr "Zajisti dostatek stavebních materiálů"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:141
 msgid "Escape from the island"
-msgstr ""
+msgstr "Unikni z ostrova"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Establish a food production"
-msgstr ""
+msgstr "Vybuduj produkci potravin"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Vybuduj spolehlivou produkci potravin"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Establish a spidercloth production"
-msgstr ""
+msgstr "Vybuduj výrobu pavoučí látky"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:53
 msgid "Expand and Explore"
-msgstr ""
+msgstr "Ovládni a prozkoumej"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Expand your territory and explore the island"
-msgstr ""
+msgstr "Rozšiř své území a prozkoumej ostrov"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:158
 msgid "Favored by the god"
-msgstr ""
+msgstr "Požehnaný bohem"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid ""
@@ -277,6 +289,10 @@ msgid ""
 "if similar things happen again, I will make you responsible for them.\n"
 "Dismissed."
 msgstr ""
+"Nebojím se nákladů ani práce, pokud to udrží lidi na uzdě. Dostaneš své \n"
+"budovy. Ale pamatuj si, že nebudu tolerovat žádné odpadlické vojáky; pokud \n"
+"se podobná věc stane ještě jednou, poneseš za ni plnou odpovědnost.\n"
+"Odchod."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:400
 msgid ""
@@ -325,48 +341,48 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:549
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:587
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:324
 msgid "Jundlina agrees"
-msgstr ""
+msgstr "Jundlina souhlasí"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:453
 msgid "Jundlina considers the economy"
-msgstr ""
+msgstr "Jundlina zvažuje ekonomiku"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:409
 msgid "Jundlina is angry"
-msgstr ""
+msgstr "Jundlina je rozzlobená"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina is in thought"
-msgstr ""
+msgstr "Jundlina je zamyšlená"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:586
 msgid "Jundlina is relieved"
-msgstr ""
+msgstr "Jundlině se ulevilo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is reviewing the reports"
-msgstr ""
+msgstr "Jundlina zkoumá zprávy"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:280
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina is satisfied"
-msgstr ""
+msgstr "Jundlina je spokojená"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:497
 msgid "Jundlina is worried"
-msgstr ""
+msgstr "Jundlina je ustarané"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Jundlina nods"
-msgstr ""
+msgstr "Jundlina přikývne"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:440
 msgid "Jundlina received a letter"
-msgstr ""
+msgstr "Jundlina dostala dopis"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:296
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:355
@@ -377,19 +393,19 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:548
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:572
 msgid "Jundlina replies"
-msgstr ""
+msgstr "Jundlina odpovídá"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:408
 msgid "Jundlina summons Sidolus"
-msgstr ""
+msgstr "Jundlina povolává Sidola"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:226
 msgid "Jundlina writes down her memories"
-msgstr ""
+msgstr "Jundlina píše své paměti"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:281
 msgid "Jundlina's Memoirs"
-msgstr ""
+msgstr "Jundlininy Paměti"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:202
 msgid ""
@@ -408,11 +424,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:246
 msgid "Loftomor and Sidolus arrive"
-msgstr ""
+msgstr "Loftomor a Sidolus přicházejí"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Loftomor speaks"
-msgstr ""
+msgstr "Loftomor mluví"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:532
 msgid ""
@@ -490,6 +506,8 @@ msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the\n"
 "god?"
 msgstr ""
+"Nechť vás Satul hřeje, Jundlino. Jak mohu být k službám vašim nebo\n"
+"bohovi?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:389
 msgid ""
@@ -531,7 +549,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:30
 msgid "New Objectives"
-msgstr ""
+msgstr "Nové úkoly"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:160
 msgid ""
@@ -546,15 +564,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:511
 msgid "One more building"
-msgstr ""
+msgstr "Ještě jedna budova"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid "Opol seeks out Jundlina"
-msgstr ""
+msgstr "Opol vyhledal Jundlinu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:557
 msgid "Ostur seems confident"
-msgstr ""
+msgstr "Ostur si je jistý"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:550
 msgid ""
@@ -563,6 +581,9 @@ msgid ""
 "shore they will vanish in the sea before they can float. I fear we are "
 "doomed!"
 msgstr ""
+"Osture, nemáme čas. Voda stoupá moc rychle a kdybychom stavěli lodě na "
+"pobřeží, \n"
+"zmizí pod vodou dříve, než budou schopné plavby. Bojím se že jsme ztraceni!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:282
 msgid ""
@@ -614,15 +635,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:387
 msgid "Sidolus seeks out Jundlina"
-msgstr ""
+msgstr "Sidolus vyhledal Jundlinu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:417
 msgid "Sidolus seems contrite"
-msgstr ""
+msgstr "Sidolus vypadá zkroušeně"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:267
 msgid "Sidolus speaks"
-msgstr ""
+msgstr "Sidolus mluví"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid ""
@@ -642,7 +663,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:177
 msgid "The god's punishment"
-msgstr ""
+msgstr "Boží trest"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:54
 msgid ""
@@ -653,15 +674,15 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "The princess' memoir"
-msgstr ""
+msgstr "Paměti princezny"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "The supply of build wares"
-msgstr ""
+msgstr "Zásoba stavebních materiálů"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:530
 msgid "The water is rising!"
-msgstr ""
+msgstr "Voda stoupá!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -763,7 +784,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "Ztratili jsme %s kvůli oceánu!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:233
 msgid ""
@@ -791,6 +812,8 @@ msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
 msgstr ""
+"Vyhrál jsi tuto misi. Můžeš přejít k další misí, nebo pokračovat v této\n"
+"tak dlouho jak jen chceš."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:574
 msgid ""
@@ -805,4 +828,4 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "Tvá slova zní moudře, Coliondere. Budiž tedy."
