@@ -9,7 +9,7 @@ if (WL_VERSION_STANDARD)
 	# "Build${WL_VERSION_MINOR}" + ".${WL_VERSION_PATCH}" if WL_VERSION_PATCH is
 	# defined.
 	set (WL_VERSION_MAJOR 0)
-	set (WL_VERSION_MINOR 15)
+	set (WL_VERSION_MINOR 17)
 
 	# Just define in case that we release patches for official builds
 	#set (WL_VERSION_PATCH 90)
