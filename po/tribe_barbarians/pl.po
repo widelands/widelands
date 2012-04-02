@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2012-03-25 20:29+0000\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-03-28 20:28+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-26 04:34+0000\n"
-"X-Generator: Launchpad (build 15008)\n"
+"X-Launchpad-Export-Date: 2012-03-29 04:30+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -193,7 +193,7 @@ msgstr "%s z Karczmy"
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr "%s z Kopalni węgla lub Smolarni"
+msgstr "%s z kopalni węgla lub smolarni"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
@@ -300,6 +300,7 @@ msgstr ""
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
 msgstr ""
+"Paprociarnia jest w stanie wyprodukować jeden snop trzciny średnio w %s."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -363,24 +364,35 @@ msgid ""
 "\t\t\tWood may serve for a household fire and to keep you warm, but when it "
 "comes to working with iron or gold, there is no way around coal."
 msgstr ""
+"Wieki temu Barbarzyńcy nauczyli się drążyć zbocza gór w poszukiwaniu tego "
+"czarnego materiału zasilającego ich piece. <br>\n"
+"\t\t\tDrewno może służyć do podtrzymywania domowego ogniska i skutecznie cię "
+"ogrzeje, lecz gdy przychodzi do pracy ze złotem czy żelazem, na wysokości "
+"zadania stanie jedynie węgiel."
 
 #: ../../tribes/barbarians/axefactory/help.lua:64
 msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
 msgstr ""
+"Wszystkie trzy bronie produkowane są w tym samym czasie, ale wymagają "
+"różnych materiałów."
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"Wszystkie trzy bronie produkowane są w tym samym czasie, ale lepsze bronie "
+"wymagają więcej surowców. Dwie ostatnie wykorzystują złoto."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
 "An %s exploits only %s of the resource. <br> From there on, it will only "
 "have a 5%% chance of finding %s."
 msgstr ""
+"%s wydobędzie jedynie %s surowca. <br> Później będzie miała tylko 5%% szans "
+"na znalezienie %s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -388,6 +400,8 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
+"Stare barbarzyńskie przysłowie<br> mówiące o konieczności podejmowania "
+"czasem pewnego ryzyka."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -395,11 +409,11 @@ msgstr "Popiół"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid "Attack"
-msgstr ""
+msgstr "Atak"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:25
 msgid "Attack Training:"
-msgstr ""
+msgstr "Trening ataku:"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Axe"
@@ -417,7 +431,7 @@ msgstr "Fabryka toporów"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr ""
+msgstr "Piecze chleb pita tak dla żołnierzy, jak i dla górników."
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:122
@@ -437,11 +451,11 @@ msgstr "Piecze chleb dla pracowników."
 
 #: ../../tribes/barbarians/bakery/help.lua:51
 msgid "Baking Tray"
-msgstr ""
+msgstr "Blacha do pieczenia"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Barbarzyńska rymowanka"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -505,7 +519,7 @@ msgstr "Duża karczma"
 #: ../../tribes/barbarians/farm/help.lua:31
 #: ../../tribes/barbarians/trainingscamp/help.lua:38
 msgid "Big plot"
-msgstr ""
+msgstr "Duże pole"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/axefactory/help.lua:60
@@ -542,7 +556,7 @@ msgstr "Deski"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:33
 msgid "Both Trainings:"
-msgstr ""
+msgstr "Oba typy treningu:"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Bread Paddle"
@@ -550,7 +564,7 @@ msgstr "Łopata do chleba"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Hoduje woły dla wsparcia transportu towarów."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -598,7 +612,7 @@ msgstr "Topór z brązu"
 #: ../../tribes/barbarians/trainingscamp/help.lua:40
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build Cost:"
-msgstr ""
+msgstr "Koszt budowy:"
 
 #: ../../tribes/barbarians/conf:127
 #: ../../tribes/barbarians/metalworks/help.lua:32
@@ -634,7 +648,7 @@ msgstr "Budowniczy"
 #: ../../tribes/barbarians/warmill/help.lua:33
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "Building"
-msgstr ""
+msgstr "Budynek"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Burner"
@@ -650,7 +664,7 @@ msgstr "Wypala wapień w wapienniku."
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
-msgstr ""
+msgstr "Wymagane obliczenia"
 
 #: ../../tribes/barbarians/conf:115
 #: ../../tribes/barbarians/well/help.lua:42
@@ -663,11 +677,11 @@ msgstr "Nosi przedmioty wzdłuż dróg."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carve %s out of stones standing near the hut."
-msgstr ""
+msgstr "Pozyskuje %s ze skał w pobliżu chaty."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "Carve %s out of the rock in mountain terrain."
-msgstr ""
+msgstr "Wydobywa %s ze skał występujących w górach."
 
 #: ../../tribes/barbarians/conf:161
 #: ../../tribes/barbarians/conf:170
@@ -692,7 +706,7 @@ msgstr "Smolarnia"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
-msgstr ""
+msgstr "Wódz Chat'Karuth przemawia do swojej armii."
 
 #: ../../tribes/barbarians/coalmine/help.lua:53
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -764,7 +778,7 @@ msgstr "Węgiel"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "Węgiel z kopalni węgla lub smolarni"
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:212
@@ -801,7 +815,7 @@ msgstr "Kopalnia węgla"
 #: ../../tribes/barbarians/warmill/help.lua:19
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Conquer range:"
-msgstr ""
+msgstr "Zasięg podboju:"
 
 #: ../../tribes/barbarians/shipyard/conf:21
 msgid "Constructing ship"
@@ -825,7 +839,7 @@ msgstr "Plac budowy"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:37
 #: ../../tribes/barbarians/warmill/help.lua:42
 msgid "Cost cumulative:"
-msgstr ""
+msgstr "Łączny koszt:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:55
 #: ../../tribes/barbarians/bakery/help.lua:49
@@ -856,7 +870,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:41
 msgid "Crew required:"
-msgstr ""
+msgstr "Wymagani pracownicy:"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -938,7 +952,7 @@ msgstr "Broń i zwyciężaj!"
 #: ../../tribes/barbarians/warmill/help.lua:22
 #: ../../tribes/barbarians/well/help.lua:21
 msgid "Dependencies"
-msgstr ""
+msgstr "Zależności"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Destroyed building"
@@ -954,7 +968,7 @@ msgstr "Zniszczony budynek"
 #: ../../tribes/barbarians/goldmine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:18
 msgid "Dig %s out of the ground in mountain terrain."
-msgstr ""
+msgstr "Wykopuje %s z terenów górskich."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -993,7 +1007,7 @@ msgstr "Plac rozbiórki"
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Rozebranie zwraca:"
 
 #: ../../tribes/barbarians/conf:226
 msgid "Donjon"
@@ -1001,15 +1015,15 @@ msgstr "Stołp"
 
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Draw Water out of the deep."
-msgstr ""
+msgstr "Czerpie wodę z głębin."
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
-msgstr ""
+msgstr "Unik"
 
 #: ../../tribes/barbarians/battlearena/help.lua:26
 msgid "Evade Training:"
-msgstr ""
+msgstr "Trening uniku"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:13
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:13
@@ -1017,6 +1031,8 @@ msgstr ""
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
 msgstr ""
+"Fragment \"Naszych Podziemnych Skarbów\", <br> tradycyjnej barbarzyńskiej "
+"pieśni."
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1047,7 +1063,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:61
 #: ../../tribes/barbarians/well/help.lua:44
 msgid "Experience levels:"
-msgstr ""
+msgstr "Poziomy doświadczenia:"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Farm"
@@ -1061,7 +1077,7 @@ msgstr "Rolnik"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into trunks."
-msgstr ""
+msgstr "Ścina okoliczne drzewa i obrąbuje do postaci kłód."
 
 #: ../../tribes/barbarians/conf:82
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
@@ -1136,7 +1152,7 @@ msgstr "Chatka rybaka"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
-msgstr ""
+msgstr "Łowi ryby na brzegu w pobliży chaty."
 
 #: ../../tribes/barbarians/conf:85
 #: ../../tribes/barbarians/fishers_hut/help.lua:45
@@ -1198,7 +1214,7 @@ msgstr "Chatka gajowego"
 #: ../../tribes/barbarians/warmill/help.lua:15
 #: ../../tribes/barbarians/well/help.lua:15
 msgid "General"
-msgstr ""
+msgstr "Informacje ogólne"
 
 #: ../../tribes/barbarians/conf:135
 #: ../../tribes/barbarians/metalworks/help.lua:33
@@ -1352,11 +1368,11 @@ msgstr "Wysoka wieża"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid "Hitpoints"
-msgstr ""
+msgstr "Punkty życia"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:30
 msgid "Hitpoints Training:"
-msgstr ""
+msgstr "Trening punktów życia:"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -1370,7 +1386,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
-msgstr ""
+msgstr "Poluje na zwierzęta dla pozyskania mięsa."
 
 #: ../../tribes/barbarians/conf:137
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
@@ -1393,12 +1409,17 @@ msgid ""
 "If all needed wares are delivered in time, a %s can train %s for one soldier "
 "from 0 to the highest level in %s on average."
 msgstr ""
+"Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, %s "
+"może wytrenować %s jednego żołnierza od poziomu 0 do najwyższego poziomu "
+"średnio w %s."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid ""
 "If all needed wares are delivered in time, a %s can train one new soldier in "
 "%s and %s to the final level in %s on average."
 msgstr ""
+"Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, %s "
+"może wytrenować nowego żołnierza w %s oraz %s średnio w %s."
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 #: ../../tribes/barbarians/cattlefarm/help.lua:48
@@ -1406,6 +1427,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "%s on average."
 msgstr ""
+"Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten "
+"budynek może produkować %s średnio w %s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/lime_kiln/help.lua:54
@@ -1416,6 +1439,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "about %s on average."
 msgstr ""
+"Jeśli wszystkie potrzebne towary będą sprawnie dostarczane na miejsce, ten "
+"budynek może produkować %s średnio w około %s."
 
 #: ../../tribes/barbarians/coalmine/help.lua:56
 #: ../../tribes/barbarians/deep_coalmine/help.lua:59

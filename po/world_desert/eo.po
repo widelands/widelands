@@ -7,31 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2010-03-25 18:23+0000\n"
-"Last-Translator: alms21 <alms21@gmail.com>\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-03-26 18:27+0000\n"
+"Last-Translator: Jens Beyer (Qcumber-some) <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-20 04:37+0000\n"
-"X-Generator: Launchpad (build 14969)\n"
+"X-Launchpad-Export-Date: 2012-03-27 04:40+0000\n"
+"X-Generator: Launchpad (build 15011)\n"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
-msgstr ""
+msgstr "Fago"
 
 #: ../../worlds/desert/conf:72
 msgid "Beech medium"
-msgstr ""
+msgstr "Fago meza"
 
 #: ../../worlds/desert/conf:73
 msgid "Beech small"
-msgstr ""
+msgstr "Fago mala"
 
 #: ../../worlds/desert/conf:74
 msgid "Beech tiny"
-msgstr ""
+msgstr "Fago nana"
 
 #: ../../worlds/desert/conf:85
 msgid "Bunny"
@@ -87,7 +87,7 @@ msgstr "Oro"
 
 #: ../../worlds/desert/resconf:28
 msgid "Granite"
-msgstr ""
+msgstr "Granito"
 
 #: ../../worlds/desert/conf:18
 #: ../../worlds/desert/conf:19
@@ -109,11 +109,11 @@ msgstr "Meza Lariko"
 
 #: ../../worlds/desert/conf:77
 msgid "Larch small"
-msgstr ""
+msgstr "Lariko mala"
 
 #: ../../worlds/desert/conf:78
 msgid "Larch tiny"
-msgstr ""
+msgstr "Lariko nana"
 
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
@@ -150,7 +150,7 @@ msgstr "Palmet"
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
 msgid "Palm tiny"
-msgstr ""
+msgstr "Palmo mala"
 
 #: ../../worlds/desert/conf:23
 #: ../../worlds/desert/conf:24
@@ -159,7 +159,7 @@ msgstr ""
 #: ../../worlds/desert/conf:27
 #: ../../worlds/desert/conf:28
 msgid "Pebble"
-msgstr ""
+msgstr "Ŝtoneto"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
@@ -171,11 +171,11 @@ msgstr "Meza sorbuso"
 
 #: ../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr ""
+msgstr "Sorbuso mala"
 
 #: ../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Sorbuso nana"
 
 #: ../../worlds/desert/conf:89
 msgid "Sheep"
@@ -199,7 +199,7 @@ msgstr "Skeleto"
 #: ../../worlds/desert/conf:43
 #: ../../worlds/desert/conf:44
 msgid "Standing Stones"
-msgstr ""
+msgstr "Starantaj ŝtonoj"
 
 #: ../../worlds/desert/conf:45
 #: ../../worlds/desert/conf:46
@@ -212,11 +212,11 @@ msgstr "Sxtono"
 
 #: ../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "La programad-teamo de Widelands"
 
 #: ../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
-msgstr ""
+msgstr "Ĉi tiu estas la larĝa kaj sableca lando de la nomadoj"
 
 #: ../../worlds/desert/resconf:36
 msgid "Water"

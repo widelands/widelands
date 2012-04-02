@@ -1,0 +1,91 @@
+# Croatian translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-03-30 17:36+0000\n"
+"Last-Translator: Mario Dautović <mario.dautovic@yahoo.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-03-31 04:47+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:23
+msgid "%s and %s have established a smuggling route!"
+msgstr "%s i %s su uspustavili krijumčarsku rutu!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:37
+msgid "Game Status"
+msgstr "Stanje igre"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:32
+msgid ""
+"Game over! %s and %s have won the game! %s and %s only managed to\n"
+"smuggle %i wares."
+msgstr ""
+"Kraj! %s i %s su pobijedili! %s i %s su uspjeli\n"
+"prokrijumčariti samo %i robe."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
+msgid "Rules"
+msgstr "Pravila"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
+msgid "Smugglers"
+msgstr "Krijumčari"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+msgid ""
+"Smugglers is a Fun map for 4 players. You and your partner start diagonally\n"
+"to each other on a X-shaped island. Each player has a point in the\n"
+"center of the map where he should place a warehouse. If both players in a\n"
+"team succeed to build their warehouse in the right spot a smuggling route\n"
+"is established: all wares from the top player that are delivered to his\n"
+"warehouse are warped to the bottom player's warehouse. The aim of the game "
+"is to\n"
+"smuggle %i items from top to bottom."
+msgstr ""
+"Krijumčari je zabavni zemljovid za 4 igrača.  Ti i tvoj suigrač počinjete "
+"dijagonalno\n"
+"suprotno jedan od drugoga na otoku oblika slova x. Svai igrač ima mjesto u "
+"sredini\n"
+"zemljovida gdje bi trebao napraviti skladište. Ako oba igrača u ekipi "
+"uspiju\n"
+"sagraditi skladišta na pravom mjestu krijumčarska ruta je uspostavljena: sva "
+"roba\n"
+"od gornjeg igrača koja je dostavljena u skladište se prebacuje u skladište "
+"donjeg\n"
+"igrača. Cilj igre je prokrijumčariti %i stavki odozgo prema dolje."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
+msgid ""
+"The other team has the same goal and will try to interrupt your smuggling\n"
+"routes by burning down your warehouses. You will pay them back in their own\n"
+"coin of course!"
+msgstr ""
+"Druga ekipa ima isti cilj i pokušat će se miješati u vašu krijumčarsku\n"
+"rutu tako što će vam spaljivati skladišta. Vratit ćete im naravno\n"
+"istom mjerom!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:26
+msgid "The smuggling route of %s and %s has been broken!"
+msgstr "Krijumčarska ruta od %s i %s je uništena!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
+msgid "Wares smuggled"
+msgstr "Roba prokrijumčarena"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
+msgid ""
+"You can see the number of wares traded at any time in the general\n"
+"statistics menu. Good luck!"
+msgstr ""
+"U svakom trenutku možete vidjeti količinu robe kojom ste trgovali\n"
+"na izborniku za statistiku. Sretno!"

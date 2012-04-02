@@ -7,31 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-19 21:47+0000\n"
-"PO-Revision-Date: 2012-03-25 02:35+0000\n"
-"Last-Translator: Jezevec <Unknown>\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-03-31 12:59+0000\n"
+"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-26 04:34+0000\n"
-"X-Generator: Launchpad (build 15008)\n"
+"X-Launchpad-Export-Date: 2012-04-01 04:33+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
-msgstr ""
+msgstr "%i stromů."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
-msgstr ""
+msgstr "%s měl "
 
 #: ../../scripting/win_condition_texts.lua:28
 msgid "%s has %i trees at the moment."
-msgstr ""
+msgstr "%s má v tomto okamžiku %i stromů."
 
 #: ../../scripting/win_condition_texts.lua:46
 msgid "%s owns more than half of the maps area."
-msgstr ""
+msgstr "%s ovládá více než polovinu mapy."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
@@ -75,24 +75,24 @@ msgstr "Nekonečná hra (bez mlhy)"
 
 #: ../../scripting/win_condition_texts.lua:49
 msgid "Keep it for %i more minutes to win the game."
-msgstr ""
+msgstr "Udrž se ještě %i minut a vyhraješ hru."
 
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
-msgstr ""
+msgstr "Přehled hráče:"
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
-msgstr ""
+msgstr "Body"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: ../../scripting/win_condition_texts.lua:38
 msgid "Status for %s<br>"
-msgstr ""
+msgstr "Stav pro %s<br>"
 
 #: ../../scripting/win_condition_texts.lua:45
 msgid "Team %i"
@@ -108,7 +108,7 @@ msgstr "Hra skončí během %i minut."
 
 #: ../../scripting/win_condition_texts.lua:40
 msgid "The game will end in %s."
-msgstr ""
+msgstr "Hra skončí v %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:14
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -132,7 +132,7 @@ msgstr "Celkem: %i bodů"
 
 #: ../../scripting/win_condition_texts.lua:34
 msgid "Trees owned"
-msgstr ""
+msgstr "Vlastněné stromy"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid "Wood Gnome"
@@ -151,15 +151,19 @@ msgid ""
 "You get points for precious wares in your warehouses, the player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
+"Za každé vzácné zboží ve svém skladu dostaneš body. Vyhrává hráč s největším "
+"počtem zboží na konci 4 hodinové hry."
 
 #: ../../scripting/win_condition_texts.lua:8
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
+"Nezbylo ti už nic, co bys mohl ovládat. Pokud chceš, zůstaň ve hře jako "
+"pozorovatel."
 
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
-msgstr ""
+msgstr "Vyhrál jsi tuto hru!"
 
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
@@ -171,7 +175,7 @@ msgstr "Olvládáš více než polovinu mapy."
 
 #: ../../scripting/win_condition_texts.lua:47
 msgid "You still got %i minutes to prevent a victory."
-msgstr ""
+msgstr "Ještě stéle máš %i minut na to, abys zabránil porážce."
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
@@ -183,4 +187,4 @@ msgstr "Tuhle hru jsi ztratil!"
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
-msgstr ""
+msgstr "s %i stromy."
