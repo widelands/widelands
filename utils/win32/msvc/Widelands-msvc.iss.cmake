@@ -23,7 +23,7 @@
 #define Name "Widelands"
 #define VerName "Widelands @WL_VERSION@"
 #define VerNumber "@WL_VERSION_MAJOR@.@WL_VERSION_MINOR@.@WL_VERSION_PATCH@"
-#define Copyright "Widelands Development Team 2001-2011"
+#define Copyright "Widelands Development Team 2001-2012"
 #define SetupFileName "Widelands-@WL_VERSION@-win32"
 
 ;General String
