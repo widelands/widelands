@@ -1,0 +1,950 @@
+# Croatian translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-04-01 21:43+0000\n"
+"Last-Translator: Mario Dautović <mario.dautovic@yahoo.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-04-02 04:31+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
+
+#: ../../campaigns/atl01.wmf/elemental:9
+msgid "01 - From Nemesis to Genesis"
+msgstr "01 - Od osvete do postanka"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:472
+msgid "A dangerous finding"
+msgstr "Opasan pronalazak"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:565
+msgid ""
+"A friend of mine explored the island on his own and he told me of a big "
+"lake\n"
+"at the top of the mountain. I suggest we build the ships in this lake and "
+"wait\n"
+"until the island drowns beneath us. Then we can sail away. It is a bold "
+"plan,\n"
+"but I think, it could work."
+msgstr ""
+"Jedan moj prijatelj je samostalno  istražiao otok i pričao mi je o\n"
+"velikom jezeru na samom vrhu planine. Predlažem da napravimo\n"
+"brodić na ovom jezeru i čekamo dok se cijeli otok ne potopi ispod\n"
+"nas. Tada možemo otploviti. Znam da nije neki plan, ali moga bi\n"
+"funkcionirati."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:343
+msgid "A man comes to Jundlina"
+msgstr "Čovjek prilazi Jundlini"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:539
+msgid "A young man approaches"
+msgstr "Prilazi mladić"
+
+#: ../../campaigns/atl01.wmf/elemental:11
+msgid ""
+"After landing on a mysterious island close to Atlantis, the remaining "
+"Atlanteans struggle to make a new home for themselves."
+msgstr ""
+"Nakon iskrcavanja na ovaj zagonetni otok blizu Atlantide, preostali "
+"atlantiđani se muče kako bi za sebe napravili novi dom."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:308
+msgid ""
+"Ahh, but I think this is impossible to change. The preparing and eating of\n"
+"food is something deeply ingrained in us Atlanteans - it is just a ceremony\n"
+"that we need for our well being. So I guess we cannot take this away from\n"
+"the individuals completely. But we might find a compromise in between: For "
+"me,\n"
+"making bread is a troublesome task: grinding the blackroot and corn to "
+"flour\n"
+"and then baking the bread is tedious and boring: I feel a more industrial\n"
+"approach would be helpful here. I for one would love to just have fresh "
+"bread\n"
+"delivered to my house every day. Oooh and even more important: the smoking "
+"of\n"
+"fish and meat to cleanse them and improve their taste is terrible.  My house "
+"is\n"
+"full of smoke and stinks for weeks after it. Don't you think that this could "
+"be\n"
+"done in a special building were the side effects do not matter?  I think "
+"those\n"
+"two things would be accepted by the people and would reduce the cooking "
+"times\n"
+"without taking away the ritual."
+msgstr ""
+"Ahh, ali ja mislim da je ovo nemoguće promijeniti. Spremanje hrane i objedi\n"
+"su nešto što je duboko usađeno u nama atlantiđanima. To je samo svečanost\n"
+"koja nam je potrebna za opće dobro. Stoga mislim da to ne možemo oduzeti\n"
+"sasvvim od pojedinaca. Ali možemo naći dogovor negdje na pola puta. Za\n"
+"mene je pečenje kruha problematično: mljevenje crnog korijena i kukuruza\n"
+"u brašno a zatim pečenje kruha je mučno i dosadno: Mislim da bi ovdje jako\n"
+"pomogla industrijalizacija. Kao prvo ja bih volio kad bih samo dobio svježe\n"
+"pečeni kruh dostavljen na moju adresu svaki dan. Oooh i što je još važnije:\n"
+"dimljenje ribe i mesa te njihovo guljenje zbog boljeg okusa je strašno. "
+"Moja\n"
+"kuća je puna dima i mirisa  tjednima poslje. Zar ne misliš da bi ovo bilo "
+"bolje\n"
+"raditi u posebnim građevinama gdje posljedice ne bi nikome smetale? Mislim\n"
+"da bi ove dvije stvari bile prihvaćene od ljudi i da bi smanjile vrijeme "
+"pripreme\n"
+"jela bez da moramo ukidati ritual."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:513
+msgid ""
+"And yet another of these buildings. We know now that the tribe that built\n"
+"them once had complete control over the island. But I am no longer so scared "
+"of\n"
+"potential enemies. We know so much of this island already and there is no "
+"trace\n"
+"of this old economy to be found. I am starting to relax, but I will not let\n"
+"our guard down as we continue to explore this beautiful island. But without\n"
+"obvious dangers I am feeling very much at home here already."
+msgstr ""
+"Još jedna u nizu ovih građevina. Sada nam je poznato da je pleme koje ih je\n"
+"izgradilo imalo potpunu kontrolu nad otokom. Ali više nisam toliko uplašen\n"
+"od mogućih neprijatelja. Jako dobro poznajemo ovaj otok i nema nikakvih\n"
+"tragova ove stare civilizacije. Mogu se opustiti, ali neću raspustiti "
+"stražu.\n"
+"Štoviše, nastavljamo s istraživanjima ovog prekrasnog otoka. A bez\n"
+"očiglednih opasnosti već se sada ovdje osjećam kao kod kuće."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:496
+msgid "Another building."
+msgstr "Još jedna građevina."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:121
+msgid ""
+"As all other tribes, the Atlanteans are also able to train soldiers: the\n"
+"dungeon trains attack - the major attribute of the Atlanteans - and the\n"
+"labyrinth trains evasion, health points and defense. The items produced by "
+"the\n"
+"industry are used to train better soldiers in the two training "
+"buildings.<br><br>\n"
+"- Build a dungeon and a labyrinth.<br>"
+msgstr ""
+"Kao i sva druga plemena, Atlantiđani su također sposobni trenirati\n"
+"vojsku: tamnica pospješuje napad, koja je jedna od najboljih karakteristika\n"
+"Atlantiđana, a labirint trenira izbjegavanje, zdravlje i obranu. Stvari \n"
+"proizvedene u tvornicama se koriste u treniranju kako bi dobili bolje\n"
+"vojnike. One su proizvode u građevinama za trening.<br><br>\n"
+"- Izgradi tamnicu i labirint.<br>"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:132
+msgid ""
+"As your road network gets longer and more complicated, you should employ\n"
+"horses to help out your carriers. Horses are bred in horsefarms using water "
+"and\n"
+"corn. A warehouse will also help to ensure your transportation system does "
+"not\n"
+"collapse."
+msgstr ""
+"Dok tvoja mreža puteva postaje veća i zahtjevnija, trebao bi koristiti "
+"konje,\n"
+"koji bi pomagali kod prenašanja stvari. Konji se uzgajajuu konjušnicama,\n"
+"koristeći vodu i kukuruz. Skladište će također pomoći kako se tvoj sustav\n"
+"opskrbe ne bi raspao."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:140
+msgid "Build 3 ships to escape from the island"
+msgstr "Sagradi 3 broda kako bi pobjegao s otoka"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:45
+msgid ""
+"Build a quarry, two woodcutter's houses, two forester's houses and a\n"
+"sawmill."
+msgstr ""
+"Sagradi kamenolom; dvije kuće za drvosječe; dvije kuće za šumare i\n"
+"pilanu."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:87
+msgid "Build a spiderfarm and a weaving mill"
+msgstr "Sagradi farmu paukova i tekstilni pogon"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:130
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:131
+msgid "Build a warehouse and a horsefarm"
+msgstr "Sagradi skladište i farmu konja"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:102
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:103
+msgid "Build industry and mines"
+msgstr "Sagradi tvornicu i rudnike"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:119
+msgid "Build training buildings"
+msgstr "Sagradi vojarne"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:120
+msgid "Build training buildings to improve your soldiers"
+msgstr "Sagradi vojarne gdje ćeš pojačati svoje vojnike"
+
+#: ../../campaigns/atl01.wmf/scripting/init.lua:75
+msgid "Building lost!"
+msgstr "Izgubili ste građevina!"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:179
+msgid ""
+"But all seemed well. Only the horses seemed to feel something was wrong.\n"
+"In the nights, they went crazy and were full of fear. It was not long before "
+"the\n"
+"horsebreeder Xydra figured out what was wrong with them: The sea level in "
+"front\n"
+"of their stable was rising in an ever accelerating speed."
+msgstr ""
+"Sve je izgledalo u najboljem redu. Samo su konji osjetili nešto krivo u "
+"zraku.\n"
+"Po noći bi se razbjesnili i bili bi puni straha. Nije prošlo puno kako je "
+"konjušar\n"
+"Xydra uspio skužiti o čemu se tu radi i zašto su konji takvi. Razina mora "
+"ispred\n"
+"njihovih štala je rasla nevjorojatnom brzinom."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:208
+msgid ""
+"But not even this changed the mind of the god. The water kept on rising.\n"
+"Nearly driven crazy by guilt, pain and anger, Jundlina became a heretic:\n"
+"Secretly, she gathered people of the common folk who were not in line with "
+"the\n"
+"decision of the clerics to accept the god's will. Together with them, she "
+"set\n"
+"the temple on fire and stole a ship to flee from the god's influence of\n"
+"Atlantis. This small group started praying to Satul, the fire god and the "
+"worst\n"
+"enemy of Lutas."
+msgstr ""
+"Ali niti ovo nije promijenilo mišljenje bogova. Voda se i dalje uzdizala.\n"
+"Gotovo mahnita nošena krivicom, boli i ljutnjom, Jundlina je postala\n"
+"heretik: Tajno je okupila obične ljude iz naroda koji se nisu slagali "
+"odlukom\n"
+"svećenika koji su prihvaćali božju volju. Zajedno s njima zapalila je hram "
+"i\n"
+"ukrala brod kako bi izbjegla božjoj umiješanosti u Atlantidu. Mala grupa\n"
+"se počela moliti Satulu, bogu vatre i ljutom protivniku Lutasa."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:195
+msgid "Chaos emerges..."
+msgstr "Nastaje rasulo..."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:289
+msgid "Colionder arrives"
+msgstr "Dolati Colionder"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:306
+msgid "Colionder is in thought"
+msgstr "Colionder razmišlja"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:595
+msgid "Congratulations"
+msgstr "Čestitam"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:43
+msgid "Ensure the supply of build wares"
+msgstr "Osiguraj opskrbu izrađenih proizvoda"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:141
+msgid "Escape from the island"
+msgstr "Pobjegni s otoka"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:63
+msgid "Establish a food production"
+msgstr "Uspostavi proizvodnju hrane"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:62
+msgid "Establish a solid food production"
+msgstr "Uspostavi jaku proizvodnju hrane"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:88
+msgid "Establish a spidercloth production"
+msgstr "Uspostavi proizvodnju paučne tkanine"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:53
+msgid "Expand and Explore"
+msgstr "Proširi se i istražuj"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:52
+msgid "Expand your territory and explore the island"
+msgstr "Proširi svoje područje i istražuj otok"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:158
+msgid "Favored by the god"
+msgstr "Bog ti pomogao"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:64
+msgid ""
+"Food is very important for mines and military training areas. Establish\n"
+"a well working food environment by building at least one farm, one "
+"blackroot\n"
+"farm and a mill. The two kinds of flour together with water from a well\n"
+"will be baked into bread in a bakery, so build a bakery and a well, "
+"too.<br><br>\n"
+"The other two important food wares are smoked fish and smoked meat. Raw "
+"meat\n"
+"is delivered from a hunter. A fisher gets the fish out of the sea while a\n"
+"fish breeder makes sure that a school of fish does not go extinct by "
+"breeding\n"
+"more. Make sure that there are always fish left, otherwise the fish breeder\n"
+"won't be able to breed new ones. The smoking happens in a smokery, you\n"
+"will need at least two of those.<br><br>\n"
+"- Build a Farm and a Blackroot farm<br>\n"
+"- Build a mill to make flour and blackroot flour<br>\n"
+"- Build a well<br>\n"
+"- Build a bakery to bake bread from flour, blackroot flour and water.<br>\n"
+"- Build a hunter's house to get raw meat<br>\n"
+"- Build a fisher's house close to water to get raw fish<br>\n"
+"- Build a fishbreeder's house close to the fisher to make sure the fish do "
+"not die out<br>\n"
+"- Build two smokeries to smoke raw meat and fish."
+msgstr ""
+"Hrana je jako bitna za rudnike i vojne centre za vježbavanje. Postavi dobro\n"
+"usklađenu okolinu za proizvodnju hrane tako što ćeš sagraditi barem jednu\n"
+"farmu, jedno uzgajalište crnog korijena i jedan mlin. Iz dva brašna zajedno "
+"s\n"
+"vodom iz bunara ispeći ćeš kruh u pekari, pa sagradi i pekaru i bunar "
+"također.<br><br>\n"
+"Ostala dva važna prehrambena proizvoda su dimljena riba i dimljeno meso.\n"
+"Sirovo meso dobavljaju lovci, a ribiči love ribu iz mora dok se uzgajivač "
+"ribe\n"
+"brine da ribe ne izumru uzgajajući ih. Pobrini se da stalno ima malo ribe, "
+"jer\n"
+"će u protivnom izumrijeti i niti uzgajivač više neće moći pomoći. Dimljenje\n"
+"se odvija u pušnicama i trebat će ti barem dvije.<br><br>\n"
+"- Sagradi farmu i uzgajalište crnog korijena<br>\n"
+"- Sagradi mlin za proizvodnju brašna i crnog brašna<br>\n"
+"- Sagradi bunar<br>\n"
+"- Sagradi pekaru za pačenje kruha iz brašna, crnog brašna i vode<br>\n"
+"- Sagradi lovačku kuću za prikupljanje sirovog mesa<br>\n"
+"- Sagradi ribičku kuću blizu vode za lov ribe<br>\n"
+"- Sagradi mrijestilište blizu ribiča kako riba ne bi izumrla<br>\n"
+"- Sagradi dvije pušnice za dimljenje ribe i mesa"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:197
+msgid ""
+"Guilt-ridden, the king committed suicide. Without a monarch, the people\n"
+"turned to the clerics, but those had no substantial help to offer. Most\n"
+"accepted their fate while others tried to change the god's mind by offering\n"
+"animals in his temple. But to no avail..."
+msgstr ""
+"Opterećen krivnjom, kralj je počinio samoubojstvo. Bez vladara, ljudi\n"
+"se okreću k crkvenjacima, ali oni nemaju dovoljnu pomoć za ponuditi.\n"
+"Većin je prihvatila sudbinu dok su ostali pokušali promijeniti volju boga\n"
+"žrtvujući životinje u njegovom hramu. Ali bezuspješno..."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:419
+msgid ""
+"I agree with you and I have punished the trouble makers severely. But it is\n"
+"very difficult to keep my men quiet: they are bored and have nothing to do. "
+"I\n"
+"would like to ramp up their drill. I think more routine in their life would\n"
+"keep them occupied and focused on their duties. I would need a dungeon and "
+"a\n"
+"labyrinth for them.  I have the plans ready, but I guess they won't come\n"
+"cheap."
+msgstr ""
+"Slažem se s tobom pa sam kaznio izazivače nereda i to jako. Ali je jako "
+"teško\n"
+"držati moje ljude smirenima. Dosadno im je i nemaju što raditi. Želio bih\n"
+"pojačati njihove vježbe. Mislim da im treba malo više rutine u životu kako\n"
+"bi bili zauzeti i fokusirani na svoje obaveze. Trebat ću tamnicu i labirint "
+"za\n"
+"njih. Planovi su gotovi, ali mislim da to neće biti tako jeftino."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:430
+msgid ""
+"I do not fear the cost and labor as long as it keeps your people at bay. "
+"You\n"
+"shall get your buildings. But note that I will not tolerate any rogue "
+"soldier;\n"
+"if similar things happen again, I will make you responsible for them.\n"
+"Dismissed."
+msgstr ""
+"Ne bojim se cijene niti teškog rada sve dok mogu zadržati ljude u zaljevu.\n"
+"Dobit ćeš svoje građevine. Ali zapamti da neću tolerirati neposlušne\n"
+"vojnike . Ako se ponovi nešto slično, smatrat ću tebe odgovornim.\n"
+"Voljno."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:400
+msgid ""
+"I have considered this, Sidolus. I think, it is about time. We will make "
+"this\n"
+"a priority for now. You shall get your industry and soon!"
+msgstr ""
+"Razmislio sam o ovome, Sidoluse. Mislim da je sada došlo vrijeme. Ovo\n"
+"nam postaje od najveće važnosti za sada. Dobit ćeš tvoju industriju i\n"
+"to uskoro!"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:442
+msgid ""
+"I received an invitation from Sidolus. The first day of training in the "
+"newly\n"
+"finished labyrinth will be tomorrow. The dungeon is done as well and will "
+"start\n"
+"its work soon. I am looking forward to tomorrow; I am very interested in how "
+"our\n"
+"soldiers are trained and I wonder if the additional workload will keep them "
+"from\n"
+"bullying the civil population."
+msgstr ""
+"Dobio sam poziv od Sidolusa. Prvi dan vežbanja u novoizgrađenom labirintu "
+"će\n"
+"biti sutra. Tamnica je također gotova i počet će raditi sutra. Jedva čekam "
+"sutra.\n"
+"Jako me zanima kako su naši vojnici uvježbani i pitam se da li će ih ova "
+"zanimacija\n"
+"držati podalje od civilnog stanovništva i glupiranja s njima."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:104
+msgid ""
+"Iron ore, gold ore and coal are mined in the respective mines. The crystal "
+"mine\n"
+"is digging for crystal, quartz and diamond - all of them are rare materials "
+"and\n"
+"very seldom found. While it searches for them, it produces a lot of "
+"stone.<br>\n"
+"The ores have to be smelted in smelting works before they can be used. The\n"
+"refined materials are then used in the weapon smithy, the armor smithy and "
+"the\n"
+"tool smithy.<br><br>\n"
+"- Build a mine of each kind. Make sure to send geologists to the mountain "
+"first.<br>\n"
+"- Build a smelting works.<br>\n"
+"- Build an armor smithy and a weapon smithy.<br>\n"
+"- Build a tool smithy.<br>"
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:247
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:297
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:441
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:454
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:531
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:549
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:587
+msgid "Jundlina"
+msgstr "Jundlina"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:324
+msgid "Jundlina agrees"
+msgstr "Jundlina se slaže"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:453
+msgid "Jundlina considers the economy"
+msgstr "Jundlina se brine za privredu"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:409
+msgid "Jundlina is angry"
+msgstr "Jundlina je ljuta"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:473
+msgid "Jundlina is in thought"
+msgstr "Jundlina razmišlja"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:586
+msgid "Jundlina is relieved"
+msgstr "Jundlini je pao kamen sa srca"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:334
+msgid "Jundlina is reviewing the reports"
+msgstr "Jundlina pregledava izvještaje"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:280
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:333
+msgid "Jundlina is satisfied"
+msgstr "Jundlina je zadovoljna"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:497
+msgid "Jundlina is worried"
+msgstr "Jundlina je zabrinuta"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:399
+msgid "Jundlina nods"
+msgstr "Jundlina kima glavom"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:440
+msgid "Jundlina received a letter"
+msgstr "Jundlina je primila pismo"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:296
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:355
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:356
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:376
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:398
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:428
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:548
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:572
+msgid "Jundlina replies"
+msgstr "Jundlina odgovara"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:408
+msgid "Jundlina summons Sidolus"
+msgstr "Jundlina doziva Sidolusa"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:226
+msgid "Jundlina writes down her memories"
+msgstr "Jundlina zapisuje svoja sjećanja"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:281
+msgid "Jundlina's Memoirs"
+msgstr "Jundlinina sjećanja"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:202
+msgid ""
+"Jundlina, the late king's daughter and the highest priestess of the god\n"
+"was the most determined cleric. As countless offerings didn't change the\n"
+"situation, she convinced herself that to soothe the god, an offer of great\n"
+"personal value was needed. So she offered him her most beloved:\n"
+"her husband, father of her only child."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:216
+msgid ""
+"Leaving the dying Atlantis and their past behind, they started a quest to\n"
+"find a place sheltered by the fire and protected from the sea."
+msgstr ""
+"Napuštajući Atlantidu i njezinu prošlost na izdisaju, oni su počeli "
+"traganje\n"
+"za mjestom koje će pružiti zaklon od vatre i štitit će od morskih sila."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:246
+msgid "Loftomor and Sidolus arrive"
+msgstr "Loftomor i Sidolus dolaze"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:255
+msgid "Loftomor speaks"
+msgstr "Loftomor priča"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:532
+msgid ""
+"May Satul save us! Lutas is still trying to get to us. A scout informed me\n"
+"that the ocean is rising quickly. We have to reach higher ground and "
+"evacuate\n"
+"everybody and as much wares from the headquarters up the mountains. How can "
+"we\n"
+"escape?"
+msgstr ""
+"Neka nas Satul spasi! Lutas još pokušava doći do nas. Izvidnica me je "
+"izvjestila\n"
+"kako se ocean brzo podiže. Moramo otići na povišeno mjesto i iseliti sve, "
+"te\n"
+"ponjeti što možemo više robe iz našeg sjedišta u planine. Kako ćemo pobjeći?"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:248
+msgid ""
+"May Satul warm you both. Loftomor, you have been the island's most renowned\n"
+"architect. Sidolus, you are a seasoned warrior and strategist. I have "
+"called\n"
+"you before me to seek your counsel: What needs to be done to make this our "
+"new\n"
+"home?"
+msgstr ""
+"Neka vas Satul obojicu zagrije. Loftomor, ti si bio najcjenjeniji arhitekt "
+"na otoku.\n"
+"Sidolus, ti si najiskusniji ratnik i taktičar. Pozvao sam vas ovdje pred "
+"sobom kako\n"
+"bih zatražio vaš savjet: Što trebamo učiniti da nam ovo postane novi dom?"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:298
+msgid ""
+"May Satul warm you too, Colionder. Yes, I wondered if there is not a way\n"
+"that we can centralize our food production. We lose a lot of productivity\n"
+"because our people are accustomed to making their own food. I feel if we\n"
+"could split responsibilities, it would be better for us all. I want your\n"
+"thoughts on this."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:357
+msgid ""
+"May Satul warm you too, Opol. I wanted to delay production of spider cloth,\n"
+"but I understand your urgency. Your suggestion sounds fair to me, I will "
+"build\n"
+"your weaving-mill and spiderfarm. I will also build a goldweaver so that "
+"the\n"
+"golden tabards you make will not be golden by name alone."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:269
+msgid ""
+"May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need\n"
+"a good supply of building materials for we have to expand our territory "
+"swiftly.\n"
+"I will not feel safe on this island as long as we have not seen all shores\n"
+"on it. I brought plenty of good men from Atlantis. The military might is\n"
+"available. We only need some housings to live in."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:257
+msgid ""
+"May Satul warm you, Jundlina! The most important things for building a\n"
+"settlement are the building materials. There are some trees here, so we "
+"should\n"
+"build housings for some woodcutters and of course also for foresters, so\n"
+"we do not run out of trees. Oh, and we mustn't forget the sawmill, for most\n"
+"buildings can't be made out of trunks alone. Stronger buildings also need\n"
+"stone, but there is plenty to the north-east of here; we just need to build "
+"a\n"
+"quarry and my stonemasons will go to work promptly."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:369
+msgid ""
+"May Satul warm you, Jundlina!. The weaving-mill, goldweaver and spiderfarm\n"
+"buildings are complete and are starting their work at this very moment. The\n"
+"weaving guild is very grateful for your support and we will stand by our "
+"word\n"
+"and deliver the first tabard very soon."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:291
+msgid ""
+"May Satul warm you, Jundlina. Can I be of any service to you or the\n"
+"god?"
+msgstr ""
+"Neka te Satul grije, Jundlina. Mogu li biti ikako na uslizi tebi ili\n"
+"bogu?"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:389
+msgid ""
+"May Satul warm you, Jundlina. Have you considered mining for goods in the\n"
+"mountains around us? We are running short of quartz, crystal and diamonds "
+"for\n"
+"our buildings. Also we could use more iron, gold and especially coal. If we\n"
+"find an ample supply of those commodities, we could start producing weapons\n"
+"and tools; this would help enormously. Of course, we would need smelters,\n"
+"a weapon smithy, an armor smithy and a tool smithy. And maybe even more."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:345
+msgid ""
+"May Satul warm you, Jundlina. My Name is Opol and I am the highest weaver "
+"of\n"
+"the guild abandoning Atlantis and Lutas with you. I come with sad news "
+"indeed:\n"
+"We have no more spidercloth. Not a single piece is to be found in our\n"
+"warehouses.  Could you not help the weaver guild by arranging the building "
+"of a\n"
+"weaving-mill and a spiderfarm? The spiders deliver the finest silk and we "
+"will\n"
+"produce the finest spidercloth from it. We offer to also produce the "
+"tabards\n"
+"for young soldiers and the golden tabards for officers for you in exchange.\n"
+"You will need them for sure as soon as you want to recruit new soldiers."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:541
+msgid ""
+"May Satul warm you, Jundlina. My name is Ostur and I construct ships. I "
+"have\n"
+"invented a new kind of ship: smaller than those we are used to, but much\n"
+"sturdier. If we build them correctly, I am confident that we can go with "
+"them\n"
+"a much longer distance and maybe escape from Lutas' influence."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:30
+msgid "New Objectives"
+msgstr "Novi zadaci"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:160
+msgid ""
+"On the hidden and lost island of Atlantis, a proud tribe settled since the\n"
+"world was very young. Ruled by the bloodline of King Ajanthul - the first "
+"human\n"
+"to be empowered by the sea god Lutas to breathe above the sea level - and "
+"the\n"
+"wise clerics, who provided the link to Lutas - they prospered and became\n"
+"civilized."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:511
+msgid "One more building"
+msgstr "Još jedna građevina"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:367
+msgid "Opol seeks out Jundlina"
+msgstr "Opol traži Jundlinu"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:557
+msgid "Ostur seems confident"
+msgstr "Ostur izgleda siguran"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:550
+msgid ""
+"Ostur, we have no time. The water rises too fast and if we build the ships "
+"on\n"
+"shore they will vanish in the sea before they can float. I fear we are "
+"doomed!"
+msgstr ""
+"Ostur, nemamo vremena. Voda prebrzo nadolazi, a ako sagradimo brodove\n"
+"na obali, nestat će pod vodom prije nogoli zaplove. Bojim se da smo osuđeni\n"
+"na propast!"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:282
+msgid ""
+"Our building infrastructure is done and I spent some days making sure that\n"
+"they work well together. Now, there are other pressing matters. I called\n"
+"Colionder, my personal cook, before me to get his help with sorting some "
+"things\n"
+"out."
+msgstr ""
+"Naša infrastruktura je završena, a ja sam proveo nekoliko dana "
+"provjeravajući\n"
+"da sve radi kako treba. Sada postoje druge stvari za rješavati. Pozvao sam\n"
+"Coliondera, mog osobnog kuhara, i zatražio njegovu pomoć oko nekih stvari."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:455
+msgid ""
+"People are complaining about crowded streets and slow transportation. We\n"
+"need to help out our carriers on the roads. I decided to build a horsefarm\n"
+"so that the horses can help with the heavy wares.<br>\n"
+"Another way to take load from our roads is to build warehouses. We have "
+"claimed\n"
+"the mountain now, it seems a good idea to have a warehouse on the plateau "
+"to\n"
+"avoid having to transport everything up and down the slopes."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:588
+msgid ""
+"Praise Satul! Ostur, the young ship builder did it. We have three ships -\n"
+"never have I seen sturdier ones - with enough room to carry all of us and "
+"some\n"
+"wares too. And this rescue came just in time: Lutas is about to swallow the "
+"rest\n"
+"of this island, the water rises faster by the hour. But we can make our "
+"escape\n"
+"now and start over in some country farther away... I expect a long journey, "
+"but\n"
+"we will find the land of Satul in the end. This is what I promised my "
+"people.\n"
+"And myself."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:156
+msgid "Proudest to the death"
+msgstr "Ponosni do smrti"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:335
+msgid ""
+"Seems like our food production is finished and everybody is working "
+"together\n"
+"nicely. It is really starting to feel like home here."
+msgstr ""
+"Izgleda da je naša proizvodnja hrane završena i svi rade sretni zajedno, "
+"Stvarno\n"
+"ovdje počinje biti prava kućna i prijateljska atmosfera."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:387
+msgid "Sidolus seeks out Jundlina"
+msgstr "Sidolus traži Jundlinu"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:417
+msgid "Sidolus seems contrite"
+msgstr "Sidolus izgleda pokajnički"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:267
+msgid "Sidolus speaks"
+msgstr "Sidolus govori"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:184
+msgid ""
+"The clerics went into their meditation and the reason for the rising water\n"
+"was soon to be found: The god Lutas had lost faith in the Atlanteans because "
+"of\n"
+"the boldness of their king. He decided to withdraw the rights that were "
+"granted\n"
+"to King Ajanthul and his children. And so, he called them back below the "
+"sea\n"
+"again."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:175
+msgid "The god's disgrace"
+msgstr "Božja sramota"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:177
+msgid "The god's punishment"
+msgstr "Božja kazna"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:54
+msgid ""
+"The island is huge and as long as we are not sure that we are alone\n"
+"here, we cannot relax. Explore and conquer it, this is the\n"
+"only way to protect us from threats on the island and from Atlantis."
+msgstr ""
+"Otok je ogroman i sve dok nismo sigurni da smo sami ovdje, ne\n"
+"možemo se opustiti. Istraži i osvoji, to je jedini način da nas\n"
+"zaštitiš od svih prijetnji ovog otoka i Atlantide."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:225
+msgid "The princess' memoir"
+msgstr "Princezine uspomene"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:44
+msgid "The supply of build wares"
+msgstr "Opskrba robom za gradnju"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:530
+msgid "The water is rising!"
+msgstr "Razina vode se diže!"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:89
+msgid ""
+"The weavers produce spidercloth and tabards in the weaving-mill. "
+"Spidercloth\n"
+"is needed for the construction of some buildings and clothing while tabards\n"
+"are the uniforms of soldiers. The weaving-mill needs gold yarn and spider "
+"yarn\n"
+"as inputs. Spider yarn is produced by the spiderfarm while gold yarn is\n"
+"produced by the gold weaver out of gold.<br><br>\n"
+"- Build a Weaving-Mill<br>\n"
+"- Build a Spiderfarm<br>\n"
+"- Build a Goldweaver<br>"
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:142
+msgid ""
+"There is a lake at the top of the island. Build 3 ships in these waters\n"
+"and you might be able to rescue your people when the island is swallowed\n"
+"completely by the ocean. Build a shipyard close to the lake to start\n"
+"building ships."
+msgstr ""
+"Na vrhu otoka postoji jezero. Napravi  3 broda u tim vodama i možda\n"
+"budeš moga spasiti svoje ljude kada ocean proguta čitav otok. Sagradi\n"
+"brodogradilište blizu jezera kako bi počeo s izradom brodova."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:378
+msgid ""
+"This is good news indeed, Opol. Our economy is developing very well. Go "
+"back\n"
+"to your work now, Opol, and may Satul warm you and all your guild members!"
+msgstr ""
+"Ovo je stvarno dobra vijest, Opol. Naša privreda napreduje jako dobro. Idi\n"
+"nazad na posao sada, Opol, i neka te grije Satul i sve tvoje cehovske "
+"radnike!"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:166
+msgid ""
+"This story happens during the regency of King Askandor, the 43rd successor "
+"of\n"
+"King Ajanthul. He has been a good king, ruling Atlantis with wisdom and\n"
+"foresight. But with age, he became afraid of dying and so he began looking "
+"for\n"
+"a cure to death even though most clerics warned him. Some said, endless "
+"life\n"
+"was only for the gods and to seek for it was forbidden."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:193
+msgid "Uproar and confusion"
+msgstr "Zbrka i zbunjenost"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:474
+msgid ""
+"We found an old building, destroyed and burned by flames. I am very worried\n"
+"about this finding. The building is not of any kind I've ever seen. It is\n"
+"certainly not designed by any Atlantean architect I've ever heard about. "
+"The\n"
+"building is crude, the assemblage is sloppy. But the materials are very\n"
+"enduring: the wood used for it seemed to have been burned in a strange way\n"
+"before it was used as building material - it is hard as stone.<br><br>\n"
+"The implications frighten me. Are there others on this island? Where are "
+"they\n"
+"then? They work with fire, are they praying to Satul too? Are they friends "
+"or\n"
+"foe? And why is the building burned down? Has this island seen war? Is a\n"
+"war being waged on it right now?<br><br>\n"
+"We must improve our military capabilities. If there are foes on the island, "
+"we\n"
+"have to be prepared when we meet them. We should also enforce the "
+"fortification\n"
+"of our borders."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:498
+msgid ""
+"We found one more building of this strange making. We have yet to see any "
+"of\n"
+"its builders. But obviously there has been a community on this island "
+"before\n"
+"and obviously it has been militarized. I have to check on our military "
+"status\n"
+"with my generals. I will not allow that a potential enemy will find us\n"
+"unprepared."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:240
+msgid ""
+"We have established ourselves on this island. The next step is now to make "
+"it\n"
+"a home. I reckon we need to establish a sustainable economy and explore our\n"
+"surroundings. I called for specialists and will follow their advice."
+msgstr ""
+"Smjestili smo se na ovom otoku. Sljedeći korak je učiniti ga našim domom.\n"
+"Koliko se sjećam moramo osnovati održivu privredu i istražiti okolicu. Ja\n"
+"ću pozvati stručnjake i tražiti njihov savjet."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:227
+msgid ""
+"We left Atlantis and sailed east. We entered the forbidden sea on the sixth\n"
+"day without noticing any pursuers from Atlantis and without Lutas having "
+"smashed\n"
+"our ship. Now, we are out of his reach. One day later, we sighted an island\n"
+"which seems to have one of these fire spitting mountains on it. I deemed "
+"this\n"
+"a sign from the fire god and we landed on its shore."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/init.lua:77
+msgid "We lost a %s to the ocean!"
+msgstr "Izgubili smo %s do oceana!"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:233
+msgid ""
+"We spent the last week building two watchtowers on the mountains close to\n"
+"our landing area; and, of course, a hall for us all. We have very talented\n"
+"constructors in our group - still, the buildings do not match the art we\n"
+"had on Atlantis. I hope they will withstand the next rain. At least, the "
+"towers\n"
+"will warn us if a ship from Atlantis follows us and if the island is "
+"inhabited,\n"
+"we will see attackers a long time before they arrive."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:410
+msgid ""
+"What is this I hear, Sidolus? I received words about your soldiers\n"
+"misbehaving and bullying the common folk. What is this nonsense all about? "
+"They\n"
+"are servants for the common good and must not misuse their powers. This is\n"
+"inexcusable! Explain this, if you will!"
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:596
+msgid ""
+"You have won this mission. Continue with the next one or keep playing for\n"
+"as long as you like."
+msgstr ""
+"Pobijedio si na ovom zadatku. Započni sljedeći zadatak ili nastavi s\n"
+"ovim koliko god hoćeš."
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:574
+msgid ""
+"Your red hair is a signal from the fire god. I will trust you and support "
+"your\n"
+"plan. Our survival lays in your hands now, Ostur.\n"
+"<br><br>Swift now, we need a house for Ostur next to the lake and we need\n"
+"planks, trunks and spidercloth for the construction there. Forget about\n"
+"everything else, we need those wares on top of the mountain before our\n"
+"warehouses are all swallowed by the sea."
+msgstr ""
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:326
+msgid "Your words sound wise to me, Colionder. So be it then."
+msgstr "Tvoje riječi mudro zvuče, Colionde. Neka tako bude."

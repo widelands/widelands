@@ -9,6 +9,14 @@
 #ifndef IOAPI_H
 #define IOAPI_H
 
+// See: https://bugs.launchpad.net/widelands/+bug/536161
+// The Gentoo people decided it would be smart to rename this macro in their
+// version alone. Of course, we should not have bundled this file in the first
+// place so nothing to complain about here. The next few lines are a hackish
+// work around to avoid compile time problems on Gentoo.
+#ifndef OF
+#define OF _Z_OF
+#endif
 
 #define ZLIB_FILEFUNC_SEEK_CUR (1)
 #define ZLIB_FILEFUNC_SEEK_END (2)

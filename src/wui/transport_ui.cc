@@ -161,7 +161,7 @@ private:
 				if (m_display.ware_selected(id)) {
 					Economy::Target_Quantity const & tq =
 						m_economy.ware_target_quantity(id);
-					if (0 < tq.permanent) {
+					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
 						Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 						game.send_player_command
@@ -258,7 +258,7 @@ private:
 				if (m_display.ware_selected(id)) {
 					Economy::Target_Quantity const & tq =
 						m_economy.worker_target_quantity(id);
-					if (0 < tq.permanent) {
+					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
 						Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 						game.send_player_command

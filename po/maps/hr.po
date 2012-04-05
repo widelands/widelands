@@ -1,0 +1,746 @@
+# Croatian translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-03-30 17:14+0000\n"
+"Last-Translator: Mario Dautović <mario.dautovic@yahoo.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-03-31 04:47+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
+
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Oči u mraku"
+
+#: ../../campaigns/cconfig:98
+msgid "01 - From Nemesis to Genesis"
+msgstr "02 - Od osvete do postanka"
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr "01 - Putevima Malac' Mor-a"
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr "02 - Mjesto zvano dom"
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr "02 - Utočište progonjenih"
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr "03 - Ova zemlja je naša zemlja"
+
+#: ../../maps/Comet Island.wmf/elemental:9
+msgid ""
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
+"you have not seen any reason, to ship there, but yesterday a big fireball "
+"came from the sky and touched down in it's middle. Is this a sign of the "
+"Gods? You believe it is and you hope, that your tribe will find the treasure "
+"of this island, before other tribes will follow."
+msgstr ""
+"Nekoliko kilometara ispred Obale Gerion leži mali neimenovani otok. Sve do "
+"danas nije bilo nikakvog razloga ploviti ondje, ali jučer velika plamena "
+"kugla sišla s neba i pogodila samo sredinu otoka. Da li je ovo znak Bogova? "
+"Ti vjeruješ da je i nadaš se da će tvoje pleme naći blago na ovom otoku, "
+"prije nego i ostala plemena krenu istim stopama."
+
+#: ../../maps/Glacier Lake.wmf/elemental:9
+msgid ""
+"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
+"one disturbed you and the resources were enough for your whole tribe, but a "
+"few months ago another tribe came over the mountains and settled down. And "
+"you are sure, that there is only enough place for one tribe."
+msgstr ""
+"Dugo vremena je tvoje pleme boravilo na ovom prekrasnom i usamljenom jezeru "
+"prepunom ledenjaka. Nitko vam nije smetao, a prijeko potrebnih sredstava za "
+"život je bilo dovoljno za čitavo pleme. Međutim, prije nekoliko mjeseci "
+"jedno drugo pleme je sišlo sa planina i smjestilo se u blizini. Sada je samo "
+"jedno jasno, mjesta postoji samo za jedno pleme."
+
+#: ../../maps/Two frontiers.wmf/elemental:9
+msgid "A multiplayer-battle-map on a small circle-shaped island."
+msgstr "Zemljovid bitke za više igrača na malom kružnom otoku."
+
+#: ../../maps/Riverlands.wmf/elemental:9
+msgid ""
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
+msgstr ""
+"Zagonetna zemlja, prepuna raznolikih krajolika, koje presjeca mnoštvo "
+"velikih riječnih korita."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island "
+"Hopping\", where two or more groups try to reach the center island as fast "
+"as possible, to be the first building up a castle on the top of the center "
+"mountain."
+msgstr ""
+"Poseban turnir u kulturi atlantiđana, takozvano \"Otočno skakutanje\", gdje "
+"dvije ili više grupa pokušava doseći središte otoka što je brže moguće i "
+"prvi sagraditi zamak na vrhu središnje planine."
+
+#: ../../maps/Impact.wmf/elemental:9
+msgid ""
+"After an impact of an asteroid and the following harsh winter, three isles "
+"are connected by ice and stone, setting an end to the peaceful coexistence "
+"of three tribes."
+msgstr ""
+"Nakon strahovitog udara asteroida i ciče zime, kamenje i ledenjaci su "
+"spojili tri otoka u jedan, donoseći kraj mirnom suživotu njihovih triju "
+"plemena."
+
+#: ../../maps/The long way.wmf/elemental:9
+msgid ""
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way, than occupying the land of your enemies."
+msgstr ""
+"Još jedan čudno iskušenje Bogova. Za prijeći na drugu stranu izgleda da nema "
+"drugog rješenja nego zauzeti neprijateljsku zemlju."
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. During solstice they listened to the oracle and went on "
+"to war. The only survivor will sacrifice his enemies' treasures on the "
+"ancient altar, build there a splendid castle and gain goodwill and the "
+"respect of the Gods."
+msgstr ""
+"Usljedilo je još jedno otapanje. Tri plemena se skrivalo od jake zime među "
+"veličanstvenim planinama. Za vrijeme suncostaja poslušali su proročicu i "
+"krenuli u rat. Jedini preživjeli će žrtvovati blaga svojih neprijatelja na "
+"drevnom oltaru, sagraditi će ondje sjajan zamak i primiti dobru volju i "
+"poštovanje Bogova."
+
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
+msgstr "Atlantiđani - Utrka za vatrom"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "Atol"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr "Divljaci - Drugo carstvo"
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr "Izazov. Upoznajte atlantiđane"
+
+#: ../../maps/Checkmate.wmf/elemental:7
+msgid "Checkmate"
+msgstr "Šah-mat"
+
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Otok Kometa"
+
+#: ../../maps/Crater.wmf/elemental:7
+msgid "Crater"
+msgstr "Krater"
+
+#: ../../maps/Desert Tournament.wmf/elemental:7
+msgid "Desert Tournament"
+msgstr "Pustinjski turnir"
+
+#: ../../maps/Dry Riverbed.wmf/elemental:7
+msgid "Dry Riverbed"
+msgstr "Suho korito"
+
+#: ../../maps/Four Mountains.wmf/elemental:9
+msgid ""
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"Each mountain contains only one resource."
+msgstr ""
+"Svako pleme je okruženo sa četiri moćne planine. Tko će ih prvi pokoriti i "
+"steći pravo na njihova prirodna bogatstva prijeko potrebna vlastitom "
+"plemenu? Savjet I: Voda se može pronaći uz rijeku. Savjet II: Snješko "
+"označava dodatne izvore vode. Savjet III: Svaka planina sadrži samo jedan "
+"resurs."
+
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr "Lagano. Upoznajte Divljake"
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr "Lagano. Upoznajte Carstvo"
+
+#: ../../maps/Elven Forests.wmf/elemental:7
+msgid "Elven Forests"
+msgstr "Vilenjačka šuma"
+
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
+msgstr "Carstvo - Mjeseci progonstva"
+
+#: ../../maps/Finlakes.wmf/elemental:9
+msgid "Finnish Lakes"
+msgstr "Finska jezera"
+
+#: ../../maps/Firegames.wmf/elemental:7
+msgid "Firegames"
+msgstr "Igre s vatrom"
+
+#: ../../maps/Islands at war.wmf/elemental:11
+msgid ""
+"For centuries you've lived peacefully together with the other tribe on the "
+"neighboured island. This peace seems to end now - your neighbour begins to "
+"expand."
+msgstr ""
+"Stoljećima ste živjeli u miru sa drugim plemenom na susjednom otoku. Ovom "
+"miru je izgleda došao kraj - vaši susjedi se imaju namjeru širiti."
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid ""
+"For hundreds of years this island was kept as sanctuary of the Gods. No "
+"human ever ventured to set a foot on it. But now, that a tribe was finally "
+"barefaced enough to settle on the coast of that island, a lot others "
+"followed afterwards."
+msgstr ""
+"Četiri stotine godina ovaj otok je čuvan kao utočište Bogovima. Nitko se "
+"nikada nije usudio stati nogom na njegovo tlo. Ali sada, kada se konačno "
+"jedno pleme bezobrazno i bestidno smjestilo na obale ovog otoka, mnogi drugi "
+"počinju slijediti njihove postupke."
+
+#: ../../maps/Four Castles.wmf/elemental:7
+msgid "Four Castles"
+msgstr "Četiri zamka"
+
+#: ../../maps/Four Mountains.wmf/elemental:7
+msgid "Four Mountains"
+msgstr "Četiri planine"
+
+#: ../../maps/Desert Tournament.wmf/elemental:9
+msgid ""
+"Four tribes struggle with their nearest neighbour to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr ""
+"Četiri plemena se bore sa najbližim susjedima tko će prvi dosegnuti zlatnu "
+"planinu koja nudi nevjerojatna bogatstva. Mogu li dva preostala plemena "
+"mudro podijeliti to bogatstvo?"
+
+#: ../../maps/Glacier Lake.wmf/elemental:7
+msgid "Glacier Lake"
+msgstr "Jezero ledenjaka"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:7
+msgid "Golden Peninsula"
+msgstr "Zlatni poluotok"
+
+#: ../../maps/Impact.wmf/elemental:7
+msgid "Impact"
+msgstr "Udarac"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid ""
+"In this mountainous area two princes have settled. Now they are expanding "
+"their territories unaware of the fact that they are not alone!"
+msgstr ""
+"U ovom su se planinskom području smjestila dva kneza. Sada proširuju svoja "
+"područja i granice nesvjesni činjenice da ovdje nisu sami!"
+
+#: ../../maps/Firegames.wmf/elemental:9
+msgid ""
+"Is this a test by the Gods or an evil plan by someone else, that you and "
+"your tribe woke up on this island among fire and lava? Until now it seems as "
+"if you are alone, but no-one knows, what might happen if you meet an "
+"opponent tribe?"
+msgstr ""
+"Je li ovo kušnja od Bogova ili zla namjera nekog drugog što ste se tvoje "
+"pleme i ti probudili na ovom otoku punom vatre i lave? Sve do sada činilo se "
+"se da ste sami ovdje, ali nitko ne zna što se može dogoditi ako sretnete "
+"suparničko pleme."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
+msgstr "Otok poskakivanja"
+
+#: ../../maps/Islands at war.wmf/elemental:9
+msgid "Islands at war"
+msgstr "Otoci u ratu"
+
+#: ../../maps/War of the Valleys.wmf/elemental:9
+msgid ""
+"It is said that even sun and moon must find their way between the spires of "
+"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
+"Geologists elsewhere."
+msgstr ""
+"Kaže se da čak i sunce i mjesec moraju pronaći svoj put između tornjeva ovih "
+"planina. SAVJET: Monoliti označavaju mjesta s rudama. Ne zamarajte se slati "
+"geologe negdje drugdje."
+
+#: ../../maps/Swamp Monks.wmf/elemental:9
+msgid ""
+"It is said, that the old war monks, living in the even older swamps are the "
+"key to the control of the whole island."
+msgstr ""
+"Kaže se da su stari ratni redovnici, koji žive u još starijim močvarama, "
+"ključ za kontroliranje cijelog otoka."
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid ""
+"It seems as if this magical valley was inhabited by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offers enough space for a peaceful life. But can your tribe live in peace "
+"with your neighbours?"
+msgstr ""
+"Čini se kako su ove čarobne doline bile nastanjene bizonima još od postanka. "
+"Kada je tvoje pleme stiglo na ovo mjesto, bili ste sigurni da pruža dovoljno "
+"mjesta za miran suživot. Ali može li tvoje pleme živjeti u miru sa susjednim "
+"plemenom?"
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid ""
+"It smells like swamp, it looks like swamp and it is swamp. But it is the "
+"place you were born and you lived your whole life. If you don't want to lose "
+"it, defend it! "
+msgstr ""
+"Miriši na močvaru, izgleda kao moćvara i to je močvara. Ali to je mjesto "
+"gdje si rođen i gdje si proživio svoj cijeli život. Ako ga ne želiš "
+"izgubiti, brani ga! "
+
+#: ../../maps/Dry Riverbed.wmf/elemental:9
+msgid ""
+"It was a long time ago, since the last raindrop touched these grounds. No "
+"wonder, that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of water."
+msgstr ""
+"Prošlo je puno vremena od kada je zadnja kapljica kiše dodirnula ovu zemlju. "
+"Nije ni čudo što nije ostalo puno vode u ovom presušenom koritu rijeke. Svi "
+"znaju da će uskoro izbiti rat. Rat do posljednje kapi vode."
+
+#: ../../maps/Lake of tranquility.wmf/elemental:7
+msgid "Lake of Tranquility"
+msgstr "Jezero spokojstva"
+
+#: ../../maps/Last Bastion.wmf/elemental:9
+msgid "Last Bastion"
+msgstr "Posljednji bedem"
+
+#: ../../maps/Crater.wmf/elemental:9
+msgid ""
+"Long after a meteor crashed into a couple of mountains, life blossoms in the "
+"crater. Two tribes are now fighting for the rich resources."
+msgstr ""
+"Dugo nakon što je meteor udario u nekoliko planina, život je procvjetao u "
+"kraterima. Dva plemena se sada bore za njihova bogatstva."
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+msgstr ""
+"Mnogi krasni, zeleni otoci čekaju one dovoljno hrabre da pođu put tisuće "
+"valova koji svjetlucaju pod sunčevim zrakama."
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
+"found around the lakes."
+msgstr ""
+"Moćne planine dijele ovu zemlju na tri plodne doline. Ali put povezuje "
+"doline i stoga se borba čini neizbježna! Savjet: Voda se može pronaći oko "
+"jezera."
+
+#: ../../maps/Mystical Maze.wmf/elemental:9
+msgid "Mystical Maze"
+msgstr "Zagonetni labirint"
+
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+msgid "Not yet implemented"
+msgstr "Nije još implementirano"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:9
+msgid ""
+"Only a small hill in the centre of the map connects these four competing "
+"tribes. Lead your army right away to this hill and build a giant stronghold "
+"as a sign of your superiority! Hint: In the centre is only space for one "
+"stronghold. Water can be found everywhere, so there is no need to send out "
+"geologists."
+msgstr ""
+"Samo mali brežuljak u središtu zemljovida spaja ova četiri natjecateljska "
+"plemena. Povedi vojsku izravno na ovaj brežuljak i sagradi ogromnu tvrđavu "
+"kao znak svoje nadmoći! Savjet: U središtu ima mjesta za samo jednu tvrđavu. "
+"Voda se može pronaći svuda, stoga ne trebaš slati geologe."
+
+#: ../../maps/Rendez-Vous.wmf/elemental:7
+msgid "Rendez-Vous"
+msgstr "Susret"
+
+#: ../../maps/Riverlands.wmf/elemental:7
+msgid "Riverlands"
+msgstr "Riverlands"
+
+#: ../../campaigns/cconfig:38
+msgid ""
+"Six months ago, Lutius - a young general of the Empire - was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire's land. At first, everything was calm. He even talked to a few "
+"barbarian children and thought about a peaceful life - side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr ""
+"Prije šest mjeseci, Lutius - mladi vojskovođa Carstva - je bio poslan "
+"zajedno sa 150 vojnika na granicu iza sjeverne šume, gdje Divljačka plemena "
+"prelaze u zemlju koja pripada Carstvu. Njegov zadatak je bio obraniti zemlju "
+"Carstva. Prvo je sve bilo mirno. Lutius je čak razgovarao s nekoliko djece "
+"divljaka i razmišljao je o mirnom suživotu s ovim starinskim narodom. Počeo "
+"se osjećati sigurnijim i njegova vojska je počela manje mariti i paziti na "
+"moguće neprijatelje. To je bila njihova propast. Jedne noći u ožujku njegovu "
+"nepripremljenu vojsku je napala stotina boraca divljačke pješadije i potpuno "
+"je razbila. Lutius je jedva preživio zajedno sa samo nekolicinom svojih "
+"vojnika."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr "Krijumčari"
+
+#: ../../maps/The Far North.wmf/elemental:11
+msgid ""
+"Some say that impenetrable lands to the far north scared away even the most "
+"courageous settlers and the bravest of the brave warriors. Big and old "
+"forests, full of big and predatory game, cut across by wetlands and hills "
+"were shrouded in mystery. The ones who had managed to come back mentioned "
+"tremendous buildings, decorated with carvings and gold from majestic "
+"mountain ranges somewhere amongst the wilderness. Dozens of years after only "
+"some crumbly ruins remain of these good old times, covered with moss and "
+"trees. Their shapes give only an idea about the craftsmanship of ancient "
+"constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
+"People say that now nothing is blocking the road to wealth. But many will "
+"die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
+msgstr ""
+"Neki kažu da nepristupačna područja na krajnjem sjeveru odbijaju čak i "
+"najodvažnije doseljenike i najhrabrije od najhrabrijih ratnika. Velike, "
+"stare šume, pune velikih grabežljivaca, presječene vlažnim tlom i planinama, "
+"su zaodjenute velom tajni. Oni koji su otišli i upjeli se vratiti spominju "
+"ogromne građevine, ukrašene rezbarijama i zlatom sa veličanstvenih planina, "
+"koje su razbacane u divljinama. Desetak godina kasnije od ovih zdanja ostale "
+"su samo prašnjave ruševine, prekrivene mahovinom i drvećem. Njihov oblik "
+"daje samo naznaku koliko su vješti bili njihovi drevni graditelji. Nitko ne "
+"zna kako i zašto su nestali. Ljudi pričaju da sada ništa ne sprečava put "
+"bogatstva. Ali putem će mnogi poginuti, biti će rastrgani od vukova, močvara "
+"će ih progutati .... ili će biti okruženi neprijateljski raspoloženim "
+"plemenima."
+
+#: ../../maps/Sun of fire.wmf/elemental:12
+msgid "Start positions are clockwise"
+msgstr "Početne pozicije su u smjeru kazaljke na satu"
+
+#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:10
+msgid "Suggested Teams: (blue, red) vs (yellow, green)"
+msgstr "Predložene ekipe: (plava, crvena) protiv (žute, zelene)"
+
+#: ../../maps/Four Mountains.wmf/elemental:10
+msgid ""
+"Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
+"yellow)"
+msgstr ""
+"Predložene ekipe: (plava, crvena) protiv (žute, zelene) ili (plava, zelena) "
+"protiv (crvene, žute)"
+
+#: ../../maps/Elven Forests.wmf/elemental:10
+msgid ""
+"Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
+"green)"
+msgstr ""
+"Predložene ekipe: (plava, crvena) protiv (žute, zelene) ili (plava, žuta) "
+"protiv (crvene, zelene)"
+
+#: ../../maps/Atoll.wmf/elemental:10
+msgid "Suggested Teams: (blue, yellow) vs (red, green)"
+msgstr "Predložene ekipe: (plava, žuta) protiv (crvene, zelene)"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:10
+msgid "Suggested Teams: all ok."
+msgstr "Predložene ekipe: sve u redu."
+
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr "Močvarni otok"
+
+#: ../../maps/Swamp Monks.wmf/elemental:7
+msgid "Swamp Monks"
+msgstr "Močvarni redovnici"
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr "Daleki sjever"
+
+#: ../../maps/Plateau.wmf/elemental:7
+msgid "The Green Plateau"
+msgstr "Zelena visoravan"
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:7
+msgid "The Oasis Triangle"
+msgstr "Trokut oaza"
+
+#: ../../maps/The Thaw.wmf/elemental:9
+msgid "The Thaw"
+msgstr "Otapanje"
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr "Drevno vatreno sunce"
+
+#: ../../maps/The big lake.wmf/elemental:7
+msgid "The big lake"
+msgstr "Veliko jezero"
+
+#: ../../maps/Elven Forests.wmf/elemental:9
+msgid ""
+"The breath-taking beauty of these emerald lands has lured many tribes into "
+"an attempt of taking them for themselves."
+msgstr ""
+"Zapanjujuća ljepota ovih smaragdnih područja je primamila mnoga plemena u "
+"pokušaju da ih zauzmu samo za sebe."
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
+msgid ""
+"The four mighty harbours of the Craw Islands were trading their goods among "
+"each others for ages. All of them needed resources, they could not produce "
+"on their own territory and provided resources that the other could not "
+"produce in exchange. Based on these trades a very friendly commerce was "
+"common between the four harbours and the people living on the Craw Islands - "
+"just until lately two of the harbours united to an exclusive trade alliance, "
+"forcing the other two to do the same. Suddenly it seems it is only a matter "
+"of time, until the first fights between the harbours will shake the peaceful "
+"life that lasted so long..."
+msgstr ""
+"Četiri vrlo moćna lučka centra na Rakovom otoku su međusobno godinama "
+"razmjenjivala trgovačku robu. Svi oni su trebali robu koju sami nisu mogli "
+"proizvesi na svom području, a u isto vrijeme su snabdijevali ostale robom "
+"koju drugi nisu imali kod sebe. Trgovanje na ovaj način je bilo uobičajeno i "
+"razvilo se veliko prijateljstvo među ova četiri grada i njihovim "
+"stanovnicima Rakovog otoka - sve donedavno dvije luke su sklopile takav "
+"trgovački sporazom koji osalima nije donosio apsolutno ništa. Ostale dvije "
+"luke su bile primorane učiniti isto. Iznenada se činilo da je samo pitanje "
+"vremena kada će izbiti prvi rat među savezima koji bi potresao miroljubiv "
+"život na Rakovom otoku koji je tako dugu vladao."
+
+#: ../../maps/The long way.wmf/elemental:7
+msgid "The long way"
+msgstr "Dugačak put"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr "Prolaz kroz planine"
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid ""
+"There are two big questions around: Who created this unbelievably big maze "
+"and what can be found inside?"
+msgstr ""
+"Postavljaju se dva velika pitanja: Tko je napravio ovaj nevjerojatno veliki "
+"labirint i što možemo očekivati unutra?"
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
+msgid ""
+"There is something mystical, like a grey atmosphere, around these three "
+"oases, which no one found out about yet. Perhaps you will be the one, but be "
+"aware of the others, who are searching too!"
+msgstr ""
+"Ima nešto mistično, poput sivog ozračja, u ovim trima oazama, koje još nitko "
+"nije pronašao. Možda ćeš upravo ti biti prvi, ali budi na oprezu i drugi "
+"istražuju okolo!"
+
+#: ../../maps/Finlakes.wmf/elemental:11
+msgid ""
+"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
+"forests and mountains. It is up to you, to find a way through these lands."
+msgstr ""
+"Postoje prekrasana Finske prostranstva, ispunjena jezerima, rijekama, "
+"drevnim šumama i planinama. Ovisi o tebi hoćeš li naći prolaz kroz ovu "
+"zemlju."
+
+#: ../../maps/The big lake.wmf/elemental:9
+msgid ""
+"This island once came out of the deepest grounds of the sea. In those days, "
+"fire rose out of the salty seawater and brought ash, stones and earth to "
+"daylight. And the fire came nearer and nearer to the sun, while the mountain "
+"grew and grew. Until one day, when the whole firemountain exploded. Nowadays "
+"only this ring is left from that mighty firemountain. Do you think, that it "
+"is big enough for more than one tribe?"
+msgstr ""
+"Ovaj otok je najednom iznikao iz dubina mora. U tim vremenima, dizala se "
+"vatra kroz slanu morsku vodu i donosila je popeo, kamenje i zemlju na "
+"vidjelo dana. I vatra je prilazila bliže i bliže suncu, dok je planina rasla "
+"i rasla. Sve do jednog dana, kada je cijela vatrena planina eksplodirala. "
+"Danas je preostao otok u obliku prstena od nekadašnje vatrene planine. "
+"Misliš li da je dovoljno velik za više od jednog plemena?"
+
+#: ../../maps/Lake of tranquility.wmf/elemental:9
+msgid ""
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
+"hostile tribes arrive at its shores..."
+msgstr ""
+"Ovo jezero, duboko u najdrevnijim šumama, je dugo znano po svojoj ljepoti i "
+"idiličnoj atmosferi. Ipak, njegova svetost je sada ugrožena dok dva "
+"neprijateljski raspoložena plemena pristižu na obalu..."
+
+#: ../../maps/Three Warriors.wmf/elemental:9
+msgid "Three Warriors"
+msgstr "Tri ratnika"
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
+msgid "Together we're strong"
+msgstr "Zajedno smo jači"
+
+#: ../../maps/Twinkling Waves.wmf/elemental:9
+msgid "Twinkling Waves"
+msgstr "Svjetlucavi valovi"
+
+#: ../../maps/Two frontiers.wmf/elemental:7
+msgid "Two Frontiers"
+msgstr "Dvije granice"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:9
+msgid "Two empires race for the treasures of a legendary peninsula..."
+msgstr "Dva carstva se natječu za blaga legendarnog poluotoka..."
+
+#: ../../maps/War of the Valleys.wmf/elemental:7
+msgid "War of the Valleys"
+msgstr "Rat u dolinama"
+
+#: ../../maps/Four Castles.wmf/elemental:9
+msgid ""
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
+msgstr ""
+"Dobro zaštićeni u njihovoj moćnoj utvrdi, četvorica slave gladna gospodara "
+"rata završavaju svoje nacrte o osvajanju ovih prostora..."
+
+#: ../../campaigns/cconfig:31
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord "
+"knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father's spirit that he’d return to re-established "
+"order. While his brothers raged in blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr ""
+"Kada je Chat’Karuth umro, bio je vrlo star čovjek, otac tri snažna, "
+"ambiciozna sina i vojskovođa takve vojske koja je bila spremna ustati protiv "
+"drevne šume. Na kraju svoje slavne vladavine, Chat’Karuth je ostavio svom "
+"najstarijem sinu, Thronu, nasljedstvo i titulu novog vojskovođe, ta odluka "
+"je ostalu braću jako pogodila. Stari vojskovođa je znao za to. Kao što ga je "
+"otac učio, Thron je napustio glavni grad Al'thunran, dom i takozvanu "
+"\"Prijestolnicu među drvećem\" i povukao je svoje snage u brda gdje je i "
+"sahranio tijelo  svog oca. Tamo je obećao bogovima i duhu svoga oca da će se "
+"vratiti kako bi uspostavio zakon i red. Dok su njegova braća bijesnila u "
+"bratoubilačkom ratu protiv Throna  i malobrojne vojske koju je ostavio "
+"stražariti na rubovima Al'thunrana, mladi vojskovođa je krenio tražiti "
+"ponovno ujedinjenje svoje ambiciozne braće i htio je da sva plemena ponovo "
+"stupaju zajedno pod istim stijegom."
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
+"Kada je Bog izgubio nadu u Atlantiđane i potopio njihov otok, jedna žena je "
+"nastavila borbu za pravdu i drugu priliku za njezin narod. Ona je postala "
+"njihova legenda i predvodila je preostale Atlantiđane u novu budućnost u "
+"drgim krajevima svijeta. Jundlina je postala najmoćnija žena svog doba, ali "
+"uz visoku cijenu: njezinu čovječnost i dušu."
+
+#: ../../maps/Checkmate.wmf/elemental:9
+msgid ""
+"Whether just one of nature's strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
+msgstr ""
+"Bilo da se radi o jednom nepoznatom prirodnom fenomenu ili o tvorevini ludog "
+"(i željnog igre) boga, ovo čudno bojno polje čeka dvojicu protivnika za još "
+"jedan sukob."
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid ""
+"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
+"Sun heated up the Earth and melted glaciers and people plunged into the "
+"deep. But now - high in the majestic mountains, on the last scrap of land - "
+"two surviving tribes are sheltering. Even though the Gods showed mercy and "
+"the climate thus turned cooler again the water is still rising and rising. "
+"Onto the last secure place - the highest mountain range where the amount of "
+"gold and the space to live merely suffice for one tribe - only two opposite "
+"paths lead. But remember, be careful... this last living space is also a "
+"hard and small place to live. Don't forget to take care about your timber "
+"supplies, you'll need them."
+msgstr ""
+"Hiroviti Bogovi nisu uslišili naše molitve. Umjesto toga sunce je tisuću "
+"puta jače zasjalo i zagrijalo Zemlju, te otopilo ledenjake a ljude poslalo u "
+"morske dubine. Ali sada, visoko u moćnim planinama, na posljednjim "
+"preostalim komadićima zemlje, dva plemena su pronašli tamo pronašla "
+"utočište. Iako su Bogovi pokazali malo milosti, smirili klimu i snizili "
+"temperaturu, razina vode se i dalje samo diže i diže. Na posljednjem "
+"sigurnom mjestu, najvišljem planiniskom lancu, gdje je količina zlata i "
+"životnog prostora jedva dovoljna za jedno pleme, dva se bore za svoje mjesto "
+"ovdje. Ali zapamti, budi oprezan ... ovo zadnje malo mjesto za život je "
+"surovo i nemilosrdno prema svakome. Na zaboravi se pobrinuti za zalihe "
+"drveta, trebat će ti."
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "Tko će biti pravi kralj velikog atola?"
+
+#: ../../maps/Wisent Valley.wmf/elemental:9
+msgid "Wisent Valley"
+msgstr "Dolina bizona"
+
+#: ../../maps/Plateau.wmf/elemental:9
+msgid ""
+"You are standing on an island, crowned by mighty mountains, which keep a "
+"wonderful and mighty treasure in their middle - The Green Plateau, which is "
+"hard to get, but easy to lose, so if you want it, be aware of the other "
+"clans."
+msgstr ""
+"Stojiš na otoku, okrunjenom moćnim planinama koje skrivaju prekrasno i "
+"veličanstveno blago u samom njihovom središtu - na Zelenoj visoravni, na "
+"koju se teško stiže, ali u kojoj se lako zaluta. Ako je hoćete samo za sebe "
+"budi svjesni ostalih klanova."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
+"vs Red + Green."
+msgstr ""
+"Tvoja jako dobra krijumčarska ruta je iznenada postala jako prometna: Dva "
+"druga plemena su se pojavila i sada su suparnici u ovim mutnim poslovima. "
+"Koja ekipa će prva prokrijumčariti određenu količinu robe? Ekipe su: Plava + "
+"Žuta protiv Crvene + Zelene."

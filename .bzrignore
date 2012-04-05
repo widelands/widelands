@@ -20,3 +20,8 @@ update.sh
 widelands
 locale
 VERSION
+
+# help files written by writeHTML
+/tribes/**/*.xhtml
+/global/**/*.xhtml
+

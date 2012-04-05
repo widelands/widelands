@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
 "PO-Revision-Date: 2012-03-01 17:20+0000\n"
 "Last-Translator: Marcus E <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-02 04:32+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-27 04:35+0000\n"
+"X-Generator: Launchpad (build 15011)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -20,11 +20,11 @@ msgstr "CTRL+) 0-9 Kom ihåg och gå till tidigare ihågkomna platser"
 msgid ", / .       Go to previous / next location"
 msgstr ", / . Gå till tidigare / nästa plats"
 
-#: ../../txts/README:123
+#: ../../txts/README:126
 msgid "- how to reproduce the bug"
 msgstr "- hur man kan återskapa buggen"
 
-#: ../../txts/README:127
+#: ../../txts/README:130
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
@@ -33,7 +33,7 @@ msgstr ""
 "inträffade medan du spelade. För vidare förklaring, se sektionen om repriser "
 "nedan."
 
-#: ../../txts/README:129
+#: ../../txts/README:132
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) session record if possible, unless "
 "the<br>bug is trivial to reproduce. In fact, it may be a good idea to always "
@@ -45,7 +45,7 @@ msgstr ""
 "är en god idé att alltid spela in<br>dina sessioner om det dyker upp en "
 "bugg. För vidare förklaring, se nedan."
 
-#: ../../txts/README:121
+#: ../../txts/README:124
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
@@ -53,7 +53,7 @@ msgstr ""
 "- vilken version av Widelands använde du (m.a.o. vilken build, eller om det "
 "var<br>en egen kompilerad från CVS)"
 
-#: ../../txts/README:125
+#: ../../txts/README:128
 msgid "- which map you were playing"
 msgstr "- vilken karta du spelade"
 
@@ -259,7 +259,7 @@ msgid ""
 "contact you by electronic and paper mail."
 msgstr ""
 
-#: ../../txts/README:157
+#: ../../txts/README:160
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
@@ -360,7 +360,7 @@ msgstr ""
 "licensdokument är tillåten för alla, men att göra förändringar är "
 "förbjudet.<br>"
 
-#: ../../txts/README:145
+#: ../../txts/README:148
 msgid "Creating a Session Record</p>"
 msgstr "Skapa en inspelad session</p>"
 
@@ -372,7 +372,7 @@ msgstr "Ctrl+F10 Avsluta spelet omedelbart"
 msgid "Czech"
 msgstr "Tjeckiska"
 
-#: ../../txts/README:92
+#: ../../txts/README:95
 msgid "DELETE      Archive the current message"
 msgstr "DELETE Arkivera aktuellt meddelande"
 
@@ -436,7 +436,7 @@ msgstr "Före detta åldermän"
 msgid "French"
 msgstr "Franska"
 
-#: ../../txts/README:90
+#: ../../txts/README:93
 msgid "G           Go to location corresponding to current message"
 msgstr "G gå till platsen som aktuellt meddelande berör"
 
@@ -561,7 +561,7 @@ msgstr ""
 "till fri programvara som var och en kan mångfaldiga och ändra enligt dessa "
 "villkor."
 
-#: ../../txts/README:101
+#: ../../txts/README:104
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
@@ -569,7 +569,7 @@ msgstr ""
 "Om du behöver dokumentation eller hjälp om Widelands eller Widelands Editor, "
 "besök gärna hemsidan. Du kan hitta färsk webhjälp på:"
 
-#: ../../txts/README:113
+#: ../../txts/README:116
 msgid ""
 "If you want to report bugs, please send your report to the mailing list, "
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
@@ -579,7 +579,7 @@ msgstr ""
 "mailinglistan (på engelska), <widelands-public@list.sourceforge.net><br>För "
 "att prenumerera, gå in på följande sida:"
 
-#: ../../txts/README:88
+#: ../../txts/README:91
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "I meddelandefönstret är följande nya genvägar tillgängliga:"
@@ -686,7 +686,7 @@ msgstr "Ingen garanti"
 msgid "Non Unix Distributions"
 msgstr "Icke-UNIX-distributioner"
 
-#: ../../txts/README:160
+#: ../../txts/README:163
 msgid ""
 "Note that while recorded files are platform independent, they generally "
 "won't work across different versions of Widelands, because the user "
@@ -705,7 +705,7 @@ msgstr ""
 msgid "O               Toggle objectives display"
 msgstr "C               Visa/dölj uppdragsmål"
 
-#: ../../txts/README:154
+#: ../../txts/README:157
 msgid ""
 "On Windows, create a shortcut to the file widelands.exe (right-click on "
 "widelands.exe and choose Create Shortcut). Then edit the shortcut (right-"
@@ -719,7 +719,7 @@ msgstr ""
 "games\\widelands\\widelands.exe. Ändra den till: c:\\games\\widelands\\"
 "widelands.exe --record=filename.rec"
 
-#: ../../txts/README:97
+#: ../../txts/README:100
 msgid "Online Help"
 msgstr "Hjälp på nätet"
 
@@ -763,7 +763,7 @@ msgstr "Paketerare"
 msgid "Please look into our enduser manuals in our wiki-pages at:"
 msgstr "Var god och titta i våra användarmanualer på vår wiki-sida:"
 
-#: ../../txts/README:118
+#: ../../txts/README:121
 msgid "Please provide enough background information. Tell us:"
 msgstr "Var vänlig och bidra med tillräcklig bakgrundsinformation. Berätta:"
 
@@ -798,7 +798,13 @@ msgstr "LÄSMIG för redigeraren"
 msgid "README for the Widelands Editor"
 msgstr "LÄSMIG för Widelands redigerare"
 
-#: ../../txts/README:141
+#: ../../txts/tips/general_game.tip:50
+msgid ""
+"Removing a road holding Ctrl let you remove all flags up to the first "
+"junction."
+msgstr ""
+
+#: ../../txts/README:144
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic code, so we "
 "ask you to attach replay files to all bug reports that you submit. The "
@@ -812,11 +818,11 @@ msgstr ""
 "katalogen i din hemplats på Linux och i replays-underkatalogen i din "
 "Widelands-installation på Windows."
 
-#: ../../txts/README:134
+#: ../../txts/README:137
 msgid "Replays</p>"
 msgstr "Repriser</p>"
 
-#: ../../txts/README:109
+#: ../../txts/README:112
 msgid "Reporting Bugs"
 msgstr "Rapportera buggar"
 
@@ -1041,7 +1047,7 @@ msgstr ""
 msgid "To close an open window, right click it."
 msgstr "För att stänga ett fönster, högerklicka i det."
 
-#: ../../txts/README:151
+#: ../../txts/README:154
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
@@ -1103,7 +1109,7 @@ msgstr ""
 "Använd \"konfigurera ekonomi\"-menyn för att justera målkvantiteten av ett "
 "specifikt gods."
 
-#: ../../txts/README:139
+#: ../../txts/README:142
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -1133,11 +1139,17 @@ msgstr ""
 "längs med hela vägen. Typiskt är att sätta flaggor från slut till början. Om "
 "Shift också är nedtryckt så placeras flaggor från början till slut istället."
 
+#: ../../txts/README:88
+msgid ""
+"When removing a road, if Ctrl is pressed all flags up to the first junction "
+"are removed."
+msgstr ""
+
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
 msgstr "Widelands utvecklingslag"
 
-#: ../../txts/README:148
+#: ../../txts/README:151
 msgid ""
 "Widelands can record all your keypresses and mouse movements to a file. It "
 "can then replay an entire session from starting the game to exiting it. This "
@@ -1186,7 +1198,7 @@ msgstr ""
 "behövs frivilliga. Ditt bidrag (ja, jag talar om dig) behövs, speciellt inom "
 "det grafiska, för att göra Widelands till ett bättre spel."
 
-#: ../../txts/README:137
+#: ../../txts/README:140
 msgid ""
 "Widelands records every game you play in two files. One of these files has a "
 ".wrpl.wgf extension and contains an initial savegame. The other file has "

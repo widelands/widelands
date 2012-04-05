@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-27 21:36+0000\n"
-"PO-Revision-Date: 2011-03-24 07:33+0000\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-03-23 16:36+0000\n"
 "Last-Translator: Sonnrain <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-28 05:23+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-27 04:35+0000\n"
+"X-Generator: Launchpad (build 15011)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -34,13 +34,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Salipotens navis"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
+"Tunica et tridens levis sunt elementaria ferramenta iuvenium militum. "
+"Tunicae in textrinum fiunt."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -285,7 +287,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
-msgstr ""
+msgstr "arx"
 
 #: ../../tribes/atlanteans/conf:68
 msgid "Double Trident"
@@ -411,7 +413,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:76
 msgid "Hammer"
-msgstr "Martellus"
+msgstr "Malleus"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:19
 msgid "Harvest blackroot"
@@ -447,7 +449,7 @@ msgstr "Equus"
 
 #: ../../tribes/atlanteans/conf:136
 msgid "Horse Breeder"
-msgstr ""
+msgstr "agaso"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Horse Farm"
@@ -612,7 +614,7 @@ msgstr "Arbores colit."
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Port"
-msgstr ""
+msgstr "Portus"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -661,7 +663,7 @@ msgstr "Tunicam auream facit."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:37
 msgid "Produce hammer"
-msgstr ""
+msgstr "malleum fabricat"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "Produce heavy double trident"
@@ -1017,7 +1019,7 @@ msgstr "Piscator suaves pisces capit."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr ""
+msgstr "Rete piscarium ab instrumentorum fabro factum a piscatore utitur."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -1025,6 +1027,9 @@ msgid ""
 "and all smiths. Make sure you always got some in reserve! It is produced by "
 "the toolsmith."
 msgstr ""
+"Malleus instrumentum pernecessarium est. A geologo, a architecto, ab omnibus "
+"fabris abhibitur. Certissimus sis, ut semper nonnulli habeas! A fabro "
+"instrumentorum fit."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1140,7 +1145,7 @@ msgstr "Turris"
 
 #: ../../tribes/atlanteans/conf:131
 msgid "Trainer"
-msgstr ""
+msgstr "Exercitor"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1159,7 +1164,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Gradus aggressionis 0 excoli"
 
 #: ../../tribes/atlanteans/dungeon/conf:32
 msgid ""
@@ -1169,7 +1174,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:33
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Gradus aggressionis 1 excoli"
 
 #: ../../tribes/atlanteans/dungeon/conf:34
 msgid ""
@@ -1179,7 +1184,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:35
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Gradus aggressionis 2 excoli"
 
 #: ../../tribes/atlanteans/dungeon/conf:36
 msgid ""
@@ -1189,7 +1194,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:37
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Gradus aggressionis 3 excoli"
 
 #: ../../tribes/atlanteans/dungeon/conf:38
 msgid ""
@@ -1219,7 +1224,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Gradus vitationis 0 excoli"
 
 #: ../../tribes/atlanteans/labyrinth/conf:44
 msgid ""
@@ -1228,7 +1233,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Gradus vitationis 1 excoli"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid ""
@@ -1237,7 +1242,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Vitae punctae 0 excoli"
 
 #: ../../tribes/atlanteans/labyrinth/conf:42
 msgid ""

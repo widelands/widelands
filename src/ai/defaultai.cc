@@ -1896,8 +1896,12 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 						// too many unused roads - if needed the road will be rebuild
 						// directly.
 						if (static_cast<int32_t>(ms->maxSoldierCapacity() * 4) < bf.military_influence) {
-							flags_to_be_removed.push_back(ms->base_flag().get_position());
-							game().send_player_dismantle(*ms);
+							if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
+								flags_to_be_removed.push_back(ms->base_flag().get_position());
+								game().send_player_dismantle(*ms);
+							} else {
+								game().send_player_bulldoze(*ms);
+							}
 						}
 
 						// Else consider enhancing the building (if possible)

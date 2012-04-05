@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-27 21:36+0000\n"
-"PO-Revision-Date: 2011-12-24 11:25+0000\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-03-23 00:02+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-28 05:25+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-27 04:37+0000\n"
+"X-Generator: Launchpad (build 15011)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -54,7 +54,7 @@ msgstr "Zbroj"
 
 #: ../../tribes/empire/conf:189
 msgid "Armour Smithy"
-msgstr "Vyhňa na výrobu zbrojí"
+msgstr "Vyhňa na zbroje"
 
 #: ../../tribes/empire/conf:110
 msgid "Armoursmith"
@@ -212,7 +212,7 @@ msgstr "Koloseum"
 
 #: ../../tribes/empire/shipyard/conf:21
 msgid "Constructing ship"
-msgstr ""
+msgstr "Stavanie lode"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -506,7 +506,7 @@ msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Pasie ovce."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -775,7 +775,7 @@ msgstr "Kameňolom"
 
 #: ../../tribes/empire/conf:88
 msgid "Ration"
-msgstr "Porcia"
+msgstr "Prídel"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator coal little"
@@ -1153,7 +1153,7 @@ msgstr "Kováč nástrojov"
 
 #: ../../tribes/empire/conf:188
 msgid "Toolsmithy"
-msgstr "Vyhňa na výrobu nástrojov"
+msgstr "Vyhňa na nástroje"
 
 #: ../../tribes/empire/conf:154
 #: ../../tribes/empire/conf:211
@@ -1353,7 +1353,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"
-msgstr "Vyhňa na výrobu zbraní"
+msgstr "Vyhňa na zbrane"
 
 #: ../../tribes/empire/iron/conf:1
 msgid ""
@@ -1373,7 +1373,7 @@ msgstr "Tkáč"
 
 #: ../../tribes/empire/conf:192
 msgid "Weaving Mill"
-msgstr "Tkací závod"
+msgstr "Tkáčovňa"
 
 #: ../../tribes/empire/conf:174
 msgid "Well"
@@ -1423,7 +1423,7 @@ msgstr "Vlna"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "Vlna je srsť oviec. Používa sa v tkáčovniach na výrobu látky."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20

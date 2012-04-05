@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-27 21:36+0000\n"
-"PO-Revision-Date: 2012-02-18 20:51+0000\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-04-01 22:33+0000\n"
 "Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-28 05:23+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-04-02 04:31+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -293,7 +293,7 @@ msgstr "Objevuje zdroje pro těžbu."
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Rozebrat stavbu"
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
@@ -305,7 +305,7 @@ msgstr "Dvojitý trojzubec"
 
 #: ../../tribes/atlanteans/conf:208
 msgid "Dungeon"
-msgstr "Kobka"
+msgstr "Kobky"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Farm"
@@ -469,7 +469,7 @@ msgstr "Chovatel koní"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Horse Farm"
-msgstr "Koňská farma"
+msgstr "Stáje"
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
@@ -477,7 +477,7 @@ msgid ""
 "farm."
 msgstr ""
 "Koně pomáhají přepravovat náklad po často využívaných cestách. Jsou chováni "
-"na koňských farmách."
+"ve stájích."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -862,7 +862,7 @@ msgstr "Loď"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship construction site"
-msgstr ""
+msgstr "Rozestavěná loď"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Shipwright"
@@ -961,7 +961,7 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
-"Nebylo dost místa na umístění některých počátečních budov a ty\n"
+"Nebylo dost místa na umístění některých počátečních budov, které proto\n"
 "nebyly postaveny. To znamená, že jsi nyní v nevýhodě; zvaž restartování\n"
 "této mapy s férovými startovními podmínkami."
 
@@ -1130,8 +1130,8 @@ msgid ""
 "provided with corn."
 msgstr ""
 "Kukuřice se zpracovává ve mlýně na kukuřičnou mouku, kterou potřebuje každý "
-"atlantidský pekař k přípravě chleba. Kukuřici potřebují také koňské a "
-"pavoučí farmy."
+"atlantidský pekař k přípravě chleba. Kukuřici potřebují také stáje a pavoučí "
+"farmy."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1367,8 +1367,8 @@ msgid ""
 "Water is the essence for life! It is used in the bakery, the horse farm and "
 "the spiderfarm."
 msgstr ""
-"Voda je základní životní nutnost! Používá  se v pekárně, na koňské farmě a "
-"na pavoučí farmě."
+"Voda je základní životní nutnost! je zapotřebí v pekárně, ve stájích a na "
+"pavoučí farmě."
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Weapon Smithy"

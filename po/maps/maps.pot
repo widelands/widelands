@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-08 22:13+0000\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -129,7 +129,7 @@ msgid ""
 "Dry Riverbed"
 msgstr ""
 
-#: ../../maps/Four Mountains.wmf/elemental:10
+#: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint 3: Each mountain contains only one resource."
 msgstr ""
@@ -169,7 +169,7 @@ msgid ""
 "For centuries you've lived peacefully together with the other tribe on the neighboured island. This peace seems to end now - your neighbour begins to expand."
 msgstr ""
 
-#: ../../maps/Sun of fire.wmf/elemental:12
+#: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
 "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot others followed afterwards."
 msgstr ""
@@ -184,7 +184,7 @@ msgid ""
 "Four Mountains"
 msgstr ""
 
-#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
 "Four tribes struggle with their nearest neighbour to be the first to reach the mountain of gold that promises riches beyond belief. But can the two remaining ones share the resources wisely?"
 msgstr ""
@@ -229,7 +229,7 @@ msgid ""
 "It is said that even sun and moon must find their way between the spires of these mountains. HINT: Monoliths mark ore-spots. Don't bother sending Geologists elsewhere."
 msgstr ""
 
-#: ../../maps/Swamp Monks.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:9
 msgid ""
 "It is said, that the old war monks, living in the even older swamps are the key to the control of the whole island."
 msgstr ""
@@ -285,7 +285,7 @@ msgid ""
 "Not yet implemented"
 msgstr ""
 
-#: ../../maps/Rendez-Vous.wmf/elemental:10
+#: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
 "Only a small hill in the centre of the map connects these four competing tribes. Lead your army right away to this hill and build a giant stronghold as a sign of your superiority! Hint: In the centre is only space for one stronghold. Water can be found everywhere, so there is no need to send out geologists."
 msgstr ""
@@ -315,34 +315,34 @@ msgid ""
 "Some say that impenetrable lands to the far north scared away even the most courageous settlers and the bravest of the brave warriors. Big and old forests, full of big and predatory game, cut across by wetlands and hills were shrouded in mystery. The ones who had managed to come back mentioned tremendous buildings, decorated with carvings and gold from majestic mountain ranges somewhere amongst the wilderness. Dozens of years after only some crumbly ruins remain of these good old times, covered with moss and trees. Their shapes give only an idea about the craftsmanship of ancient constructors. Nobody knows why they (have) disappeared. Nobody knows why. People say that now nothing is blocking the road to wealth. But many will die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
 msgstr ""
 
-#: ../../maps/Sun of fire.wmf/elemental:14
+#: ../../maps/Sun of fire.wmf/elemental:12
 msgid ""
 "Start positions are clockwise"
 msgstr ""
 
-#: ../../maps/Desert Tournament.wmf/elemental:12
-#: ../../maps/Four Castles.wmf/elemental:12
-#: ../../maps/Swamp Monks.wmf/elemental:12
+#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green)"
 msgstr ""
 
-#: ../../maps/Four Mountains.wmf/elemental:12
+#: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, yellow)"
 msgstr ""
 
-#: ../../maps/Elven Forests.wmf/elemental:12
+#: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, green)"
 msgstr ""
 
-#: ../../maps/Atoll.wmf/elemental:12
+#: ../../maps/Atoll.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr ""
 
-#: ../../maps/Rendez-Vous.wmf/elemental:12
+#: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid ""
 "Suggested Teams: all ok."
 msgstr ""
@@ -387,7 +387,7 @@ msgid ""
 "The big lake"
 msgstr ""
 
-#: ../../maps/Elven Forests.wmf/elemental:10
+#: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into an attempt of taking them for themselves."
 msgstr ""
@@ -462,7 +462,7 @@ msgid ""
 "War of the Valleys"
 msgstr ""
 
-#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
 msgstr ""
@@ -487,7 +487,7 @@ msgid ""
 "Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
 msgstr ""
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:9
 msgid ""
 "Who will be the real King of the big atoll?"
 msgstr ""

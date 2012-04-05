@@ -9,7 +9,7 @@ if (WL_VERSION_STANDARD)
 	# "Build${WL_VERSION_MINOR}" + ".${WL_VERSION_PATCH}" if WL_VERSION_PATCH is
 	# defined.
 	set (WL_VERSION_MAJOR 0)
-	set (WL_VERSION_MINOR 15)
+	set (WL_VERSION_MINOR 17)
 
 	# Just define in case that we release patches for official builds
 	#set (WL_VERSION_PATCH 90)
@@ -620,3 +620,8 @@ elseif (WIN32)
 endif (WIN32)
 
 include(CPack)
+
+# Temporary warning about clang as long as widelands does not run stable
+IF (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
+  message( WARNING "WARNING!!! You seem to compile widelands using the clang/llvm compiler infrastructure. Please note that we do not yet support compiling with clang. You are very likely to run into problems. We are working on it, though. In the mean time, please use GCC infrastructure to compile widelands. You can use the CMake parameter -DCMAKE_CXX_COMPILER=g++ to force GCC if you have it installed. Thank you for your understanding.")
+ENDIF (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")

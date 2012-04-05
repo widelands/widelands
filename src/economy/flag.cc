@@ -434,7 +434,7 @@ bool Flag::has_pending_item(Game &, Flag & dest) {
  * item. Item with highest transfer priority is chosen.
  * \return true if an item is actually waiting for the carrier.
  */
-bool Flag::ack_pending_item(Game &, Flag & destflag) {
+bool Flag::ack_pickup(Game &, Flag & destflag) {
 	int32_t highest_pri = -1;
 	int32_t i_pri = -1;
 
@@ -462,6 +462,37 @@ bool Flag::ack_pending_item(Game &, Flag & destflag) {
 
 	return false;
 }
+/**
+ * Called by the carriercode when the carrier is called away from his job
+ * but has acknowledged a ware before. This ware is then freed again
+ * to be picked by another carrier. Returns true if an item was indeed
+ * made pending again
+ */
+bool Flag::cancel_pickup(Game & game, Flag & destflag) {
+	int32_t lowest_prio = MAX_TRANSFER_PRIORITY + 1;
+	int32_t i_pri = -1;
+
+	for (int32_t i = 0; i < m_item_filled; ++i) {
+		if (m_items[i].pending)
+			continue;
+
+		if (m_items[i].nextstep != &destflag)
+			continue;
+
+		if (m_items[i].priority < lowest_prio) {
+			lowest_prio = m_items[i].priority;
+			i_pri = i;
+		}
+	}
+
+	if (i_pri >= 0) {
+		m_items[i_pri].pending = true;
+		m_items[i_pri].item->update(game); //  will call call_carrier() if necessary
+		return true;
+	}
+
+	return false;
+}
 
 /**
  * Wake one sleeper from the capacity queue.
@@ -480,7 +511,7 @@ void Flag::wake_up_capacity_queue(Game & game)
  * Called by carrier code to retrieve one of the items on the flag that is meant
  * for that carrier.
  *
- * This function may return 0 even if \ref ack_pending_item() has already been
+ * This function may return 0 even if \ref ack_pickup() has already been
  * called successfully.
 */
 WareInstance * Flag::fetch_pending_item(Game & game, PlayerImmovable & dest)

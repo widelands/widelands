@@ -414,7 +414,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					{
 						Soldier_Descr const & descr = soldier->descr();
 
-						soldier->m_hp_current = fr.Unsigned32();
+						soldier->m_hp_current = fr.Unsigned32() * 100; // balance change: multiply times 100
 
 						if (soldier_worker_bob_packet_version <= 6) {
 							// no longer used values
@@ -493,7 +493,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						(carrier_worker_bob_packet_version
 						 ==
 						 CARRIER_WORKER_BOB_PACKET_VERSION)
-						carrier->m_acked_ware = fr.Signed32();
+						carrier->m_promised_pickup_to = fr.Signed32();
 					else
 						throw game_data_error
 							(_("unknown/unhandled version %u"),

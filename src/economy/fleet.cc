@@ -81,9 +81,11 @@ void Fleet::set_economy(Economy * e)
 	if (!m_ships.empty()) {
 		if (!m_ports.empty()) {
 			e = m_ports[0]->get_economy();
-		} else {
-			assert(e == 0);
 		}
+#ifdef DEBUG
+		else
+			assert(e == 0);
+#endif
 
 		if (upcast(Game, game, &owner().egbase())) {
 			container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
@@ -186,6 +188,11 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
  */
 void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
 {
+	if (m_ports.empty() and not other->m_ports.empty()) {
+		other->merge(egbase, this);
+		return;
+	}
+
 	while (!other->m_ships.empty()) {
 		Ship * ship = other->m_ships.back();
 		other->m_ships.pop_back();

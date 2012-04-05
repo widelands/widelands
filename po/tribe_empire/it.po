@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-27 21:36+0000\n"
-"PO-Revision-Date: 2012-02-01 12:42+0000\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"PO-Revision-Date: 2012-03-19 12:38+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-28 05:25+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-27 04:37+0000\n"
+"X-Generator: Launchpad (build 15011)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -337,8 +337,8 @@ msgstr "Canna da pesca"
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
-"Le verghe per il pesce sono necessarie per il pescatore, per prendere il "
-"pesce. Sono prodotte dal fabbro degli strumenti."
+"Le canne da pesca sono necessarie al pescatore per prendere il pesce. Sono "
+"prodotte dal fabbro degli strumenti."
 
 #: ../../tribes/empire/conf:70
 msgid "Flour"
@@ -668,87 +668,87 @@ msgstr "Porto"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
-msgstr "Produce lancia avanzata"
+msgstr "Produzione lancia avanzata"
 
 #: ../../tribes/empire/armoursmithy/conf:27
 msgid "Produce armour"
-msgstr "Produce una corazza"
+msgstr "Produzione corazza"
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "Produce axe"
-msgstr "Produce un'ascia"
+msgstr "Produzione ascia"
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr "Produce una pala da fornaio"
+msgstr "Produzione pala da fornaio"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
-msgstr "Produce un canestro"
+msgstr "Produzione canestro"
 
 #: ../../tribes/empire/armoursmithy/conf:28
 msgid "Produce chain armour"
-msgstr "Produce una corazza di maglia"
+msgstr "Produzione corazza di maglia"
 
 #: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
-msgstr "Produce molle per il fuoco"
+msgstr "Produzione pinze per il fuoco"
 
 #: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce fishing rod"
-msgstr "Produce canna da pesca"
+msgstr "Produzione canna da pesca"
 
 #: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce hammer"
-msgstr "Produce un martello"
+msgstr "Produzione martello"
 
 #: ../../tribes/empire/weaponsmithy/conf:32
 msgid "Produce heavy lance"
-msgstr "Produce lancia pesante"
+msgstr "Produzione lancia pesante"
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
-msgstr "Produce un'elmo"
+msgstr "Produzione elmo"
 
 #: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce hunting spear"
-msgstr "Produce lancia da caccia"
+msgstr "Produzione lancia da caccia"
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
-msgstr "Produce strumenti da cucina"
+msgstr "Produzione strumenti da cucina"
 
 #: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce lance"
-msgstr "Produce lancia"
+msgstr "Produzione lancia"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
-msgstr "Produce piccone"
+msgstr "Produzione piccone"
 
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid "Produce plate armour"
-msgstr "Produce un'armatura di piastre"
+msgstr "Produzione armatura di piastre"
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
-msgstr "Produce una sega"
+msgstr "Produzione sega"
 
 #: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce scythe"
-msgstr "Produce una falce"
+msgstr "Produzione falce"
 
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
-msgstr "Produce vanga"
+msgstr "Produzione vanga"
 
 #: ../../tribes/empire/weaponsmithy/conf:33
 msgid "Produce war lance"
-msgstr "Produce lance da guerra"
+msgstr "Produzione lancia da guerra"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
-msgstr "Produce lancia di legno"
+msgstr "Produzione lancia di legno"
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."

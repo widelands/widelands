@@ -1,6 +1,6 @@
 size=medium
 max_soldiers=3
-heal_per_second=1
+heal_per_second=110
 conquers=7
 
 # Stronghold was removed from buildable buildings after Build15 and should be removed after Build18

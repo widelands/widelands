@@ -1,6 +1,6 @@
 size=big
 max_soldiers=8
-heal_per_second=1
+heal_per_second=170
 conquers=11
 enhancement=citadel
 

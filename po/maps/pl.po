@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-02-27 21:36+0000\n"
+"POT-Creation-Date: 2012-03-26 08:30+0000\n"
 "PO-Revision-Date: 2012-03-03 11:53+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-04 04:42+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-27 04:33+0000\n"
+"X-Generator: Launchpad (build 15011)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -155,7 +155,7 @@ msgstr "Pustynny turniej"
 msgid "Dry Riverbed"
 msgstr "Suche koryto rzeki"
 
-#: ../../maps/Four Mountains.wmf/elemental:10
+#: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
@@ -200,7 +200,7 @@ msgstr ""
 "Setki lat żyłeś w pokoju z plemieniem na sąsiedniej wyspie. Ale ten pokój "
 "zaczyna się kończyć - Twój sąsiad zaczyna się rozwijać."
 
-#: ../../maps/Sun of fire.wmf/elemental:12
+#: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
 "For hundreds of years this island was kept as sanctuary of the Gods. No "
 "human ever ventured to set a foot on it. But now, that a tribe was finally "
@@ -219,7 +219,7 @@ msgstr "Cztery zamki"
 msgid "Four Mountains"
 msgstr "Cztery góry"
 
-#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
 "Four tribes struggle with their nearest neighbour to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
@@ -279,7 +279,7 @@ msgstr ""
 "tych gór. PODPOWIEDŹ: Monolity oznaczają rudę żelaza. Nie trać czasu na "
 "wysyłanie geologów w inne miejsca."
 
-#: ../../maps/Swamp Monks.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:9
 msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
@@ -362,7 +362,7 @@ msgstr "Mistyczny labirynt"
 msgid "Not yet implemented"
 msgstr "Jeszcze nie zaimplementowane"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:10
+#: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army right away to this hill and build a giant stronghold "
@@ -438,17 +438,17 @@ msgstr ""
 "drogi do ich bogactwa. Ale wiele zginie rozerwanych przez wilki, "
 "pochłoniętych przez bagna... otoczonych przez nieprzyjazne plemiona."
 
-#: ../../maps/Sun of fire.wmf/elemental:14
+#: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
 msgstr "Pozycje startowe podane zgodnie z ruchem wskazówek zegara"
 
-#: ../../maps/Desert Tournament.wmf/elemental:12
-#: ../../maps/Four Castles.wmf/elemental:12
-#: ../../maps/Swamp Monks.wmf/elemental:12
+#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:10
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
 msgstr "Sugerowane zespoły: (niebieski, czerwony) kontra (żółty, zielony)"
 
-#: ../../maps/Four Mountains.wmf/elemental:12
+#: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
 "yellow)"
@@ -456,7 +456,7 @@ msgstr ""
 "Sugerowane zespoły: (niebieski, czerwony) kontra (żółty, zielony) lub "
 "(niebieski, zielony) kontra (czerwony, żółty)"
 
-#: ../../maps/Elven Forests.wmf/elemental:12
+#: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
 "green)"
@@ -464,11 +464,11 @@ msgstr ""
 "Sugerowane zespoły: (niebieski, czerwony) kontra (żółty, zielony) lub "
 "(niebieski, żółty) kontra (czerwony, zielony)"
 
-#: ../../maps/Atoll.wmf/elemental:12
+#: ../../maps/Atoll.wmf/elemental:10
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Sugerowane zespoły: (niebieski, żółty) kontra (czerwony, zielony)"
 
-#: ../../maps/Rendez-Vous.wmf/elemental:12
+#: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
 msgstr "Sugerowane zespoły: dowolne."
 
@@ -504,7 +504,7 @@ msgstr "Starożytne słońce ognia"
 msgid "The big lake"
 msgstr "Wielkie jezioro"
 
-#: ../../maps/Elven Forests.wmf/elemental:10
+#: ../../maps/Elven Forests.wmf/elemental:9
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
@@ -616,7 +616,7 @@ msgstr "Dwa mocarstwa ścigają się o skarby legendarnego półwyspu..."
 msgid "War of the Valleys"
 msgstr "Wojna dolin"
 
-#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
@@ -699,7 +699,7 @@ msgstr ""
 "niełatwo tam przeżyć.Nie zapomnij zadbać o zasoby drewna, będziesz go "
 "potrzebował."
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
 msgstr "Kto zostanie prawdziwym królem wielkiego atolu?"
 
