@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-31 16:37+0000\n"
+"PO-Revision-Date: 2012-04-04 23:40+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2012-04-01 04:33+0000\n"
-"X-Generator: Launchpad (build 15032)\n"
+"X-Launchpad-Export-Date: 2012-04-05 04:33+0000\n"
+"X-Generator: Launchpad (build 15060)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -177,6 +177,7 @@ msgstr ""
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
+" --dedicated=NÁZOV_SÚBORU Spustí dedikovaný server s mapou NÁZOV_SÚBORU\n"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
@@ -705,7 +706,7 @@ msgstr "neznáma/nespracovaná verzia %u"
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "zavolať ekonomickú rovnováhu: %s"
 
 #: ../../src/economy/economy_data_packet.cc:63
 #: ../../src/economy/economy_data_packet.cc:82
@@ -839,7 +840,7 @@ msgstr "fronta správ: %s"
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "game_class: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -970,7 +971,7 @@ msgstr "veľká"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "funkcia na výpočet štatistík: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
@@ -1226,7 +1227,7 @@ msgstr "Vaši vojaci obsadili budovu %s."
 #: ../../src/logic/militarysite.cc:574
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri %s."
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
@@ -1235,7 +1236,7 @@ msgstr "Vojenská budova stratená!"
 #: ../../src/logic/militarysite.cc:625
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Vaši vojaci porazili nepriateľa pri %s."
 
 #: ../../src/logic/militarysite.cc:630
 msgid "Enemy at site defeated!"
@@ -1443,7 +1444,7 @@ msgstr "nesprávna podmienka: %s"
 #: ../../src/logic/production_program.cc:350
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
-msgstr ""
+msgstr "očakávané {\"failed\"|\"completed\"|\"skipped\"}, ale nájdené \"%s\""
 
 #: ../../src/logic/production_program.cc:363
 msgid "expected \"and\" or end of input"
@@ -1544,7 +1545,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:751
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "očakávané ware_type1[,ware_type2[,...]][:N] ..."
 
 #: ../../src/logic/production_program.cc:828
 msgid " is missing"
@@ -1619,6 +1620,7 @@ msgstr "typ vojaka"
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
+"očakávané {\"hp\"|\"attack\"|\"defense\"|\"evade\"}, ale nájdené \"%s\""
 
 #: ../../src/logic/production_program.cc:1247
 #: ../../src/logic/production_program.cc:1319
@@ -2117,6 +2119,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"očakávané 1, ale nájdených %u miest nosičov na ceste uloženej s verziou "
+"paketu 2 (stará)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:202
 #, c-format
@@ -2191,6 +2195,8 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
+"Od servera sa očakával paket LOGIN, RELOGIN alebo REJECTED, ale bol prijatý "
+"príkaz %s. Možno metaserver používa odlišnú verziu protokolu?"
 
 #: ../../src/network/internet_gaming.cc:379
 #, c-format
@@ -3872,7 +3878,7 @@ msgstr "Chyba pri ukladaní hry!!"
 #: ../../src/wui/game_main_menu_save_game.cc:218
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:379
 msgid "A File with the name "
-msgstr "Súbor s menom "
+msgstr "Súbor s názvom "
 
 #: ../../src/wui/game_main_menu_save_game.cc:222
 msgid " already exists. Overwrite?"
@@ -3956,7 +3962,7 @@ msgstr "Menu cieľov"
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
-msgstr ""
+msgstr "Vyhlásiť víťazstvo"
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
@@ -4440,26 +4446,26 @@ msgid ""
 " Texture Number: %i\n"
 msgstr ""
 "\n"
-" Textúra číslo: %i\n"
+" Číslo textúry: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "3) Resources Info\n"
-msgstr ""
+msgstr "3) Informácie o zdrojoch\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:99
 #: ../../src/editor/tools/editor_info_tool.cc:109
 #, c-format
 msgid " Resource name: %s\n"
-msgstr ""
+msgstr " Názov zdroja: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
 msgid " Resource amount: %i\n"
-msgstr ""
+msgstr " Množstvo zdroja: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:109
 msgid "none"
-msgstr ""
+msgstr "žiaden"
 
 #: ../../src/editor/tools/editor_info_tool.cc:115
 msgid ""
@@ -4597,7 +4603,7 @@ msgstr "Výška: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:124
 msgid "Create Map"
-msgstr "Vytvor mapu"
+msgstr "Vytvoriť mapu"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:69
 msgid "Random Number:"
@@ -4664,7 +4670,7 @@ msgstr "Generuje sa náhodná mapa..."
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
 msgid "Make Directory"
-msgstr "Vytvor priečinok"
+msgstr "Vytvoriť priečinok"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:207
 msgid "unnamed"
