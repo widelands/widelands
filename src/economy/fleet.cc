@@ -68,7 +68,7 @@ char const * Fleet::type_name() const throw ()
  */
 bool Fleet::active() const
 {
-	return !m_ships.empty() && m_ports.size() >= 2;
+	return !m_ships.empty() && !m_ports.empty();
 }
 
 /**
