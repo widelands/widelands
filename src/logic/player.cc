@@ -495,7 +495,7 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 	std::vector<OPtr<PlayerImmovable> > bulldozelist;
 	bulldozelist.push_back(&_imm);
 
-	while (bulldozelist.size()) {
+	while (!bulldozelist.empty()) {
 		PlayerImmovable * imm = bulldozelist.back().get(egbase());
 		bulldozelist.pop_back();
 		if (!imm)

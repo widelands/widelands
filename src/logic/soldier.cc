@@ -233,60 +233,60 @@ uint32_t Soldier_Descr::get_rand_anim
 	std::string run = animation_name;
 
 	if (strcmp(animation_name, "attack_success_w") == 0) {
-		assert(m_attack_success_w_name.size() > 0);
+		assert(!m_attack_success_w_name.empty());
 		uint32_t i = game.logic_rand() % m_attack_success_w_name.size();
 		run = m_attack_success_w_name[i];
 	}
 
 	if (strcmp(animation_name, "attack_success_e") == 0) {
-		assert(m_attack_success_e_name.size() > 0);
+		assert(!m_attack_success_e_name.empty());
 		uint32_t i = game.logic_rand() % m_attack_success_e_name.size();
 		run = m_attack_success_e_name[i];
 	}
 
 	if (strcmp(animation_name, "attack_failure_w") == 0) {
-		assert(m_attack_failure_w_name.size() > 0);
+		assert(!m_attack_failure_w_name.empty());
 		uint32_t i = game.logic_rand() % m_attack_failure_w_name.size();
 		run = m_attack_failure_w_name[i];
 	}
 
 	if (strcmp(animation_name, "attack_failure_e") == 0) {
-		assert(m_attack_failure_e_name.size() > 0);
+		assert(!m_attack_failure_e_name.empty());
 		uint32_t i = game.logic_rand() % m_attack_failure_e_name.size();
 		run = m_attack_failure_e_name[i];
 	}
 
 	if (strcmp(animation_name, "evade_success_w") == 0) {
-		assert(m_evade_success_w_name.size() > 0);
+		assert(!m_evade_success_w_name.empty());
 		uint32_t i = game.logic_rand() % m_evade_success_w_name.size();
 		run = m_evade_success_w_name[i];
 	}
 
 	if (strcmp(animation_name, "evade_success_e") == 0) {
-		assert(m_evade_success_e_name.size() > 0);
+		assert(!m_evade_success_e_name.empty());
 		uint32_t i = game.logic_rand() % m_evade_success_e_name.size();
 		run = m_evade_success_e_name[i];
 	}
 
 	if (strcmp(animation_name, "evade_failure_w") == 0) {
-		assert(m_evade_failure_w_name.size() > 0);
+		assert(!m_evade_failure_w_name.empty());
 		uint32_t i = game.logic_rand() % m_evade_failure_w_name.size();
 		run = m_evade_failure_w_name[i];
 	}
 
 	if (strcmp(animation_name, "evade_failure_e") == 0) {
-		assert(m_evade_failure_e_name.size() > 0);
+		assert(!m_evade_failure_e_name.empty());
 		uint32_t i = game.logic_rand() % m_evade_failure_e_name.size();
 		run = m_evade_failure_e_name[i];
 	}
 	if (strcmp(animation_name, "die_w") == 0) {
-		assert(m_die_w_name.size() > 0);
+		assert(!m_die_w_name.empty());
 		uint32_t i = game.logic_rand() % m_die_w_name.size();
 		run = m_die_w_name[i];
 	}
 
 	if (strcmp(animation_name, "die_e") == 0) {
-		assert(m_die_e_name.size() > 0);
+		assert(!m_die_e_name.empty());
 		uint32_t i = game.logic_rand() % m_die_e_name.size();
 		run = m_die_e_name[i];
 	}
@@ -1185,7 +1185,7 @@ void Soldier::defense_update(Game & game, State & state)
 
 	std::stable_sort(targets.begin(), targets.end(), SoldierDistance::Greater());
 
-	while (targets.size() > 0) {
+	while (!targets.empty()) {
 		const SoldierDistance & target = targets.back();
 
 		if (position == location) {

@@ -528,7 +528,7 @@ bool MilitarySite::attack(Soldier & enemy)
 	std::vector<Soldier *> present = presentSoldiers();
 	Soldier * defender = 0;
 
-	if (present.size()) {
+	if (!present.empty()) {
 		// Find soldier with greatest hitpoints
 		uint32_t current_max = 0;
 		container_iterate_const(std::vector<Soldier *>, present, i)
