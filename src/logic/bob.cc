@@ -928,7 +928,7 @@ bool Bob::checkNodeBlocked(Game & game, FCoords const & field, bool)
 	game.map().find_bobs
 		(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
-	if (soldiers.size()) {
+	if (!soldiers.empty()) {
 		container_iterate(std::vector<Bob *>, soldiers, i) {
 			Soldier & soldier = ref_cast<Soldier, Bob>(**i.current);
 			if (soldier.getBattle())
