@@ -391,6 +391,12 @@ include_directories(${PNG_INCLUDE_DIR})
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIR})
 
+# Check if we have a working minizip library
+find_package(Minizip)
+if (MINIZIP_FOUND)
+  include_directories(${MINIZIP_INCLUDE_DIR})
+endif (MINIZIP_FOUND)
+
 if (APPLE OR WIN32)
   find_package(intl REQUIRED)
   include_directories(${INTL_INCLUDE_DIR})
