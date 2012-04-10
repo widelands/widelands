@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-09 02:29+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-04-10 02:22+0000\n"
+"Last-Translator: Pablo Frigerio <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:39+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-10 04:44+0000\n"
+"X-Generator: Launchpad (build 15070)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -177,6 +177,8 @@ msgstr ""
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
+" --Dedicated=NOMBREDEARCHIVO Inicia un servidor dedicado con NOMBREDEARCHIVO "
+"como mapa\n"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
@@ -624,7 +626,7 @@ msgstr "Salida de %s"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Documentacion para comandos del programa "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -738,7 +740,7 @@ msgstr "economía: %s"
 #: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
-msgstr ""
+msgstr "Cargando portdock: %s"
 
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
@@ -1016,7 +1018,7 @@ msgstr "%u%% desmantelado"
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Cargando tribus"
 
 #: ../../src/logic/game.cc:224
 msgid "Preloading a map"
@@ -1170,7 +1172,7 @@ msgstr "probabilidad en rango [1, 254]"
 #: ../../src/logic/immovable.cc:1480
 #, c-format
 msgid "loading player immovable: %s"
-msgstr ""
+msgstr "Cargando jugador inmóvil: %s"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
@@ -1613,13 +1615,16 @@ msgstr "¡No quedan más recursos!"
 
 #: ../../src/logic/production_program.cc:1209
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Vena principal agotada"
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"La vena principal de esta mina ha sido agotada. Cuente con una considerable "
+"baja de rentabilidad en la inversión. Debería considerar expandir, "
+"desmantelar o destruirla."
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
@@ -1909,7 +1914,7 @@ msgstr "materiales: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
 msgid "partially_constructed_buildings: %s"
-msgstr ""
+msgstr "edificios_parcialmente_construidos: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:323
 #, c-format
@@ -1919,7 +1924,7 @@ msgstr "obras: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:405
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "lugar desmantelado: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:589
 #, c-format
@@ -2183,7 +2188,7 @@ msgstr "Problema de conexión"
 
 #: ../../src/network/internet_gaming.cc:99
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "Widelands no ha sido capaz de conectarse con el metaservidor."
 
 #: ../../src/network/internet_gaming.cc:105 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
@@ -2195,10 +2200,13 @@ msgid ""
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
+"Widelands no pudo estableces una conexión con la dirección proporcionada.\n"
+"O no había metaservidor en el puerto pretendido o\n"
+"su configuración de red esta dañada."
 
 #: ../../src/network/internet_gaming.cc:151
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr ""
+msgstr "Para hostear un juego, por favor eche un vistazo a las notas en:"
 
 #: ../../src/network/internet_gaming.cc:269
 msgid "Something went wrong: "
@@ -2206,15 +2214,15 @@ msgstr "Algo ha ido mal: "
 
 #: ../../src/network/internet_gaming.cc:347
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Reconexión realizada con exito con el metaservidor"
 
 #: ../../src/network/internet_gaming.cc:354
 msgid "Mixed up"
-msgstr ""
+msgstr "Mezclado"
 
 #: ../../src/network/internet_gaming.cc:354
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr ""
+msgstr "El metaservidor envió un ERROR extraño durante la conexión."
 
 #: ../../src/network/internet_gaming.cc:366
 #, c-format
@@ -2222,41 +2230,46 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
+"Se esperaba un inicio de sesión, reinicio de sesión o un paquete rechazado "
+"desde el servidor, pero se recibió el comando %s. Quizás el metaservidor "
+"esta usando una versión del protocolo diferente."
 
 #: ../../src/network/internet_gaming.cc:379
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
+"CUIDADO: se recibió el comando %s aunque no estamos en estado de CONEXIÓN"
 
 #: ../../src/network/internet_gaming.cc:388
 #, c-format
 msgid "Server time offset is %i seconds."
-msgstr ""
+msgstr "La compensacion del horario del servidor es %i segundos."
 
 #: ../../src/network/internet_gaming.cc:483
 msgid "ERROR: "
-msgstr ""
+msgstr "ERROR: "
 
 #: ../../src/network/internet_gaming.cc:487
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "El mensaje del chat no pudo ser enviado. "
 
 #: ../../src/network/internet_gaming.cc:508
 msgid "Received an unknown command from the metaserver: "
-msgstr ""
+msgstr "Se recibió un comando desconocido desde el metaservidor: "
 
 #: ../../src/network/internet_gaming.cc:640
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
+"El mensaje no pudo ser enviado: Usted no esta conectado con el metaservidor!"
 
 #: ../../src/network/internet_gaming.cc:652
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr ""
+msgstr "El mensaje no pudo ser enviado: se supone que es un mensaje privado?"
 
 #: ../../src/network/internet_gaming.cc:725
 msgid "<unknown>"
-msgstr ""
+msgstr "<desconocido>"
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -2266,37 +2279,41 @@ msgstr ""
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1224
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "La contraseña enviada es incorrecta!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "La versión del protocolo que usted esta usando no es soportada!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Usted ya ha iniciado sesión!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
 "You got disconnected, as you send a superuser command without superuser "
 "permission.This incident will be logged and reported to the administrator."
 msgstr ""
+"Usted fue desconectado por enviar un comando de superusuario sin tener "
+"permisos de superusuario. Este incidente será registrado y enviado al "
+"administrador."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
 msgstr ""
+"Usted fue desconectado debido a que el metaservidor se está reiniciando."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "La conexión fue cerrada por el cliente con normalidad"
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "Se perdió la conexión con el metaservidor"
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "El metaservidor no responde"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
@@ -2307,6 +2324,8 @@ msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
+"Usted fue desconectado desde el metaservidor por no responder al PING a "
+"tiempo."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -2315,12 +2334,18 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming for setting up your internet "
 "connection for hosting a game online."
 msgstr ""
+"El metaservidor no fue capaz de conectarse con su juego. Parece ser que no "
+"se puede conectar a su juego desde internet! por favor eche un vistazo a "
+"http://wl.widelands.org/wiki/InternetGaming para configurar su conexión a "
+"internet y poder hostear un juego en linea."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
 "You tried to relogin, but the server has no more knowledge of your previous "
 "state."
 msgstr ""
+"Usted intento reiniciar sesión, pero el servidor no posee conocimiento de su "
+"estado previo."
 
 #: ../../src/network/netclient.cc:105
 msgid ""
@@ -2341,6 +2366,8 @@ msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
+"El archivo recibido fue comprobado. A pesar de que la verificación del MD5 "
+"tuvo éxito, no puedo manejar el archivo."
 
 #: ../../src/network/netclient.cc:1080
 msgid " An automatic savegame will be created."
@@ -2687,7 +2714,7 @@ msgstr "%s se ha unido al juego"
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Game was saved as %s."
-msgstr ""
+msgstr "El juego fue salvado como %s"
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
@@ -2707,7 +2734,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
-msgstr ""
+msgstr "El jugador \"%s\" fue derrotado y se convirtió en espectador."
 
 #: ../../src/scripting/lua_game.cc:439 ../../src/ui_basic/helpwindow.cc:83
 #: ../../src/ui_basic/messagebox.cc:90
@@ -4552,7 +4579,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:109
 msgid "none"
-msgstr ""
+msgstr "Ningún"
 
 #: ../../src/editor/tools/editor_info_tool.cc:115
 msgid ""
