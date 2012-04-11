@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-01-22 02:02+0000\n"
-"Last-Translator: MadkaT <Unknown>\n"
+"PO-Revision-Date: 2012-04-11 02:44+0000\n"
+"Last-Translator: Pablo Frigerio <Unknown>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:33+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-11 04:33+0000\n"
+"X-Generator: Launchpad (build 15070)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -210,6 +210,10 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
+"Durante cientos de años esta isla se ha mantenido como un santuario de los "
+"dioses. Ningún ser humano se aventuró a poner un pie en ella. Pero ahora, "
+"esa tribu descarada se atrevió a establecerse en la costa de la isla, muchas "
+"otras la siguieron."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -225,6 +229,9 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Cuatro tribus luchas con su vecino más cercano para ser las primeras en "
+"alcanzar la montaña de oro que promete riquezas más alla de lo que imaginas. "
+"Pero pueden las dos restantes compartir los recursos de forma inteligente?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -281,6 +288,9 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Se dice que los monjes de las antiguas guerras, quienes viven en los "
+"pantanos aún más antiguos que ellas, son la clave para controlar la isla "
+"entera."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -582,7 +592,7 @@ msgstr "Tres Guerreros"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
 msgid "Together we're strong"
-msgstr ""
+msgstr "Juntos somos fuertes"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -688,7 +698,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "¿Quién será el verdadero Rey del gran atolón?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
