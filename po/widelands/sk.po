@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-04-13 21:00+0000\n"
+"PO-Revision-Date: 2012-04-14 19:26+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2012-04-14 04:36+0000\n"
+"X-Launchpad-Export-Date: 2012-04-15 04:35+0000\n"
 "X-Generator: Launchpad (build 15070)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -2760,7 +2760,7 @@ msgstr "Znížiť hodnotu o 10"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
-msgstr "Vyberte kampaň"
+msgstr "Vyberte si kampaň"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:54
 msgid "Campaign:"
@@ -2940,7 +2940,7 @@ msgstr "Mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:65
 msgid "Select a map"
-msgstr "Vyberte mapu"
+msgstr "Vyberte si mapu"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
