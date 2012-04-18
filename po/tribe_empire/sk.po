@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-03-23 00:02+0000\n"
+"PO-Revision-Date: 2012-04-17 15:30+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:37+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-18 04:36+0000\n"
+"X-Generator: Launchpad (build 15108)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -406,7 +406,7 @@ msgstr "Hrozno"
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
-msgstr "Pestuje révu."
+msgstr "Pestuje vinič."
 
 #: ../../tribes/empire/conf:150
 msgid "Guardhall"
@@ -422,7 +422,7 @@ msgstr "Kladivo"
 
 #: ../../tribes/empire/vineyard/conf:21
 msgid "Harvest vine"
-msgstr "Zberať révu"
+msgstr "Zberať vinič"
 
 #: ../../tribes/empire/farm/conf:20
 msgid "Harvest wheat"
@@ -639,7 +639,7 @@ msgstr "Chliev"
 
 #: ../../tribes/empire/vineyard/conf:19
 msgid "Plant vine"
-msgstr "Zasadiť révu"
+msgstr "Zasadiť vinič"
 
 #: ../../tribes/empire/farm/conf:18
 msgid "Plant wheat"
@@ -1049,16 +1049,15 @@ msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
-"Toto hrozno je tvorí základ chutného vína. Zberá sa vo vinohrade a "
-"spracováva vo vinárskom závode."
+"Toto hrozno tvorí základ chutného vína. Zberá sa vo vinohrade a spracováva "
+"vo vinárskom závode."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
-"Tento košík potrebuje pestovateľ révy na zber hrozna. Vyrába ho kováč "
-"nástrojov."
+"Tento košík potrebuje vinohradník na zber hrozna. Vyrába ho kováč nástrojov."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
@@ -1308,23 +1307,23 @@ msgstr ""
 
 #: ../../tribes/empire/conf:135
 msgid "Vine Farmer"
-msgstr "Pestovateľ révy"
+msgstr "Vinohradník"
 
 #: ../../tribes/empire/conf:50
 msgid "Vine medium"
-msgstr "Stredná réva"
+msgstr "Stredný vinič"
 
 #: ../../tribes/empire/conf:53
 msgid "Vine ripe"
-msgstr "Zrelá réva"
+msgstr "Zrelý vinič"
 
 #: ../../tribes/empire/conf:51
 msgid "Vine small"
-msgstr "Malá réva"
+msgstr "Malý vinič"
 
 #: ../../tribes/empire/conf:52
 msgid "Vine tiny"
-msgstr "Maličká réva"
+msgstr "Maličký vinič"
 
 #: ../../tribes/empire/conf:181
 msgid "Vineyard"
