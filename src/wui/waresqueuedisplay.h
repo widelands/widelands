@@ -82,6 +82,7 @@ private:
 
 	uint32_t         m_cache_size;
 	uint32_t         m_cache_filled;
+	uint32_t         m_cache_max_fill;
 	uint32_t         m_total_height;
 	bool             m_show_only;
 
@@ -91,6 +92,8 @@ private:
 	void decrease_max_fill_clicked();
 	void increase_max_fill_clicked();
 	void radiogroup_changed(int32_t);
+
+	void compute_max_fill_buttons_enabled_state();
 };
 
 #endif // _WARESQUEUEDISPLAY_H_
