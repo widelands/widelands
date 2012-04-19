@@ -1034,7 +1034,7 @@ bool WLApplication::init_hardware() {
 
 void terminate (int) {
 	 log
-		  (_("Waited 5 seconds to close audio. Problems here so killing widelands."
+		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
 			  " Update your sound driver and/or SDL to fix this problem\n"));
 #ifndef WIN32
 	raise(SIGKILL);
