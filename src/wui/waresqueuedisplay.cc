@@ -118,6 +118,7 @@ void WaresQueueDisplay::think()
 		update();
 
 	if (static_cast<uint32_t>(m_queue->get_max_fill()) != m_cache_max_fill) {
+		m_cache_max_fill = m_queue->get_max_fill();
 		compute_max_fill_buttons_enabled_state();
 		update();
 	}
@@ -287,23 +288,20 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
  */
 void WaresQueueDisplay::decrease_max_fill_clicked()
 {
-	uint32_t cur = m_queue->get_max_fill();
-
-	assert (cur > 0);
+	assert (m_cache_max_fill > 0);
 
 	m_igb.game().send_player_set_ware_max_fill
-			(m_building, m_ware_index, cur - 1);
+			(m_building, m_ware_index, m_cache_max_fill - 1);
 
 }
 
 void WaresQueueDisplay::increase_max_fill_clicked()
 {
-	uint32_t cur = m_queue->get_max_fill();
 
-	assert (cur < m_queue->get_max_size());
+	assert (m_cache_max_fill < m_queue->get_max_size());
 
 	m_igb.game().send_player_set_ware_max_fill
-			(m_building, m_ware_index, cur + 1);
+			(m_building, m_ware_index, m_cache_max_fill + 1);
 
 }
 
@@ -316,10 +314,9 @@ void WaresQueueDisplay::compute_max_fill_buttons_enabled_state()
 		if (m_increase_max_fill) m_increase_max_fill->set_enabled(false);
 		if (m_decrease_max_fill) m_decrease_max_fill->set_enabled(false);
 	} else {
-		uint32_t cur = m_queue->get_max_fill();
 
-		if (m_decrease_max_fill) m_decrease_max_fill->set_enabled(cur > 0);
-		if (m_increase_max_fill) m_increase_max_fill->set_enabled(cur < m_queue->get_max_size());
+		if (m_decrease_max_fill) m_decrease_max_fill->set_enabled(m_cache_max_fill > 0);
+		if (m_increase_max_fill) m_increase_max_fill->set_enabled(m_cache_max_fill < m_queue->get_max_size());
 	}
 }
 
