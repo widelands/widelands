@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-09 02:01+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-04-20 19:22+0000\n"
+"Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:39+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-21 04:34+0000\n"
+"X-Generator: Launchpad (build 15120)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -596,7 +596,7 @@ msgstr "%ss produktion"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Dokumentation för programkommando "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -747,11 +747,11 @@ msgstr "Spelare"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Ångra"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Gör om"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -983,11 +983,11 @@ msgstr "lastar boskap: %s"
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% nedmonterad"
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Laddar stam"
 
 #: ../../src/logic/game.cc:224
 msgid "Preloading a map"
@@ -1515,11 +1515,11 @@ msgstr "vänta: %s"
 #: ../../src/logic/production_program.cc:668
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Okänd parameter \"%s\""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
-msgstr ""
+msgstr "Ingen parameter given!"
 
 #: ../../src/logic/production_program.cc:702
 msgid "idle animation is default; calling is not allowed"
@@ -1581,13 +1581,16 @@ msgstr "Inga kvarlämnade resurser hittades!"
 
 #: ../../src/logic/production_program.cc:1209
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Huvudvenen är tömd"
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"Den här gruvans huvudven är tömd. Förvänta dig kraftigt minskad återbäring "
+"på investering. Du borde överväga att uppgradera, nedmontera eller förstöra "
+"gruvan."
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
@@ -1708,7 +1711,7 @@ msgstr "konstruktionsplats av typ \"konstruktionsplats\" saknas"
 
 #: ../../src/logic/tribe.cc:143
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr ""
+msgstr "nedmonterningsplats \"nedmonteringsplats\" saknas"
 
 #: ../../src/logic/tribe.cc:260 ../../src/logic/tribe.cc:281
 #, c-format
@@ -1875,7 +1878,7 @@ msgstr "varor: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
 msgid "partially_constructed_buildings: %s"
-msgstr ""
+msgstr "delvis_konstruerade_byggnades: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:323
 #, c-format
@@ -1885,7 +1888,7 @@ msgstr "byggarbetsplats: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:405
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "nedmonteringsplats: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:589
 #, c-format
@@ -2093,7 +2096,7 @@ msgstr "osedd oflyttbar: %s"
 #: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:64
 #, c-format
 msgid "port_spaces data: %s"
-msgstr ""
+msgstr "hamn_platser data: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
@@ -2147,7 +2150,7 @@ msgstr "Anslutningsproblem"
 
 #: ../../src/network/internet_gaming.cc:99
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "Widelands har inte kunnat ansluta till metaservern."
 
 #: ../../src/network/internet_gaming.cc:105 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
@@ -2159,6 +2162,9 @@ msgid ""
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
+"Widelands kunde inte etablera en anslutning till den givna adressen.\n"
+"Antingen finns det ingen metaserver som körs på den förmodade porten eller\n"
+"är dina nätverksinställingar felaktiga."
 
 #: ../../src/network/internet_gaming.cc:151
 msgid "For hosting a game, please take a look at the notes at:"
@@ -2208,15 +2214,17 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:508
 msgid "Received an unknown command from the metaserver: "
-msgstr ""
+msgstr "Mottog okänt kommando från metaserver: "
 
 #: ../../src/network/internet_gaming.cc:640
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "Meddelande kunde inte skickas: Du är inte ansluten till metaservern!"
 
 #: ../../src/network/internet_gaming.cc:652
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
+"Meddelande kunde inte skickas: Var det meningen att det skulle vara ett "
+"private meddelande?"
 
 #: ../../src/network/internet_gaming.cc:725
 msgid "<unknown>"
