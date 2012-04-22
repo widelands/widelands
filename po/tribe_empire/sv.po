@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2011-08-21 14:13+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-04-21 08:09+0000\n"
+"Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:37+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-22 04:35+0000\n"
+"X-Generator: Launchpad (build 15120)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
@@ -28,7 +28,7 @@ msgstr ""
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Ett sjödugligt skepp"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -122,7 +122,7 @@ msgstr "Bröd"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Brödspade"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -212,7 +212,7 @@ msgstr "Amfiteater"
 
 #: ../../tribes/empire/shipyard/conf:21
 msgid "Constructing ship"
-msgstr ""
+msgstr "Bygger skepp"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -252,7 +252,7 @@ msgstr "Upptäcker gruvresurser."
 
 #: ../../tribes/empire/conf:146
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Nedmontera plats"
 
 #: ../../tribes/empire/conf:157
 msgid "Donjon"
@@ -507,7 +507,7 @@ msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Behåller får."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -660,7 +660,7 @@ msgstr "Plåtrustning"
 
 #: ../../tribes/empire/conf:166
 msgid "Port"
-msgstr ""
+msgstr "Hamn"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
@@ -859,19 +859,19 @@ msgstr "Fåraherde"
 
 #: ../../tribes/empire/conf:140
 msgid "Ship"
-msgstr ""
+msgstr "Skepp"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
-msgstr ""
+msgstr "Byggplats för skepp"
 
 #: ../../tribes/empire/conf:128
 msgid "Shipwright"
-msgstr ""
+msgstr "Skeppsbyggare"
 
 #: ../../tribes/empire/conf:187
 msgid "Shipyard"
-msgstr ""
+msgstr "Skeppsvarv"
 
 #: ../../tribes/empire/conf:91
 msgid "Shovel"
@@ -982,6 +982,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Brödspaden är bagarens verktyg, varje bagare behöver en egen. Den produceras "
+"av verktygssmeden."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -1425,7 +1427,7 @@ msgstr "Ull"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "Ull är hår från får. Vävkvarnen använder det för att göra tyg."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
@@ -1471,7 +1473,7 @@ msgstr "Arbetar vid byggarbetsplatser för att uppföra en ny byggnad."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Arbetar i varvet och bygger nya skepp."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
