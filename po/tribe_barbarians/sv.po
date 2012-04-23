@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2011-08-21 14:17+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-04-22 16:03+0000\n"
+"Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:36+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-23 04:33+0000\n"
+"X-Generator: Launchpad (build 15135)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
@@ -1075,7 +1075,7 @@ msgstr "Vetefält, nysått"
 
 #: ../../tribes/barbarians/conf:83
 msgid "Fire Tongs"
-msgstr "Eldtång"
+msgstr "Smidestång"
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -1083,7 +1083,7 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
-"Eldtänger är verktyg för smältaren, som arbetar i smälteriet. Produceras i "
+"Smidestång är verktyg för smältaren, som arbetar i smälteriet. Produceras i "
 "metallverken (men slutar produceras i byggnaden om den uppgraderas till en "
 "yxfabrik och krigskvarn)."
 
@@ -1858,7 +1858,7 @@ msgstr "Producera avverkningsyxa"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr "Producera eldtång"
+msgstr "Tillverka smidestång"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
@@ -2546,7 +2546,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:8
 msgid "The Barbarian Hunter's Hut"
-msgstr ""
+msgstr "Den barbariska jägarkojan"
 
 #: ../../tribes/barbarians/oremine/help.lua:8
 msgid "The Barbarian Iron Ore Mine"
@@ -2632,7 +2632,7 @@ msgstr "Jägaren för gott kött till nybyggarna."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter's Hut needs animals in the vicinity to hunt."
-msgstr ""
+msgstr "Jägarkojan behöver djur i närheten för att kunna jaga"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:16
 msgid ""
@@ -3239,7 +3239,7 @@ msgstr "Härbre"
 
 #: ../../tribes/barbarians/conf:110
 msgid "Warriors Axe"
-msgstr "Stridsyxa"
+msgstr "Krigaryxa"
 
 #: ../../tribes/barbarians/conf:111
 #: ../../tribes/barbarians/well/help.lua:24
