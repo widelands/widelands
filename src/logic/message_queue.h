@@ -101,8 +101,8 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 		insert
 			(std::map<Message_Id, Message *>::end(),
 			 std::pair<Message_Id, Message *>(++m_current_message_id, &message));
-		return m_current_message_id;
 		assert_counts();
+		return m_current_message_id;
 	}
 
 	/// Sets the status of the message with the given id, if it exists.
