@@ -41,7 +41,7 @@ end
 -- =======================================================================
 
 -- RST
--- .. function:: check_player_defeated(plrs, heading, msg)
+-- .. function:: check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
 --
 --    Checks whether one of the players in the list was defeated and if yes,
 --    removes that player from the list and sends him/her a message.
@@ -49,7 +49,8 @@ end
 --    :arg plrs:    List of Players to be checked
 --    :arg heading: Heading of the message the defeated player will get
 --    :arg msg:     Message the defeated player will get
---    :arg wc_name: Name of the win condition
+--    :arg wc_name: Name of the win condition. If not nil, meth:`wl.game.Game.report_result`
+--       will be called.
 --    :arg wc_ver:  Version of the win condition
 --
 --    :returns: :const:`nil`
@@ -58,7 +59,9 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
       if p.defeated then
          p:send_message(heading, msg, { popup = true })
          p.see_all = 1
-         wl.game.report_result(p, false, 0, make_extra_data(p, wc_name, wc_ver))
+         if (wc_name and wc_ver) then
+            wl.game.report_result(p, false, 0, make_extra_data(p, wc_name, wc_ver))
+         end
          table.remove(plrs, idx)
          break
       end
