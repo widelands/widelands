@@ -107,11 +107,11 @@ endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 # unit_test_framework is for testing only
 if (WL_UNIT_TESTS)
   message(STATUS "Enabled unit tests")
-if (DEFINED MSVC)
-  set (BUILD_SHARED_LIBS OFF)
-else (DEFINED MSVC)
-  set (Boost_USE_STATIC_LIBS  OFF)
-endif (DEFINED MSVC)
+  if (DEFINED MSVC)
+    set (BUILD_SHARED_LIBS OFF)
+  else (DEFINED MSVC)
+    set (Boost_USE_STATIC_LIBS  OFF)
+  endif (DEFINED MSVC)
   set (Boost_FIND_COMPONENTS unit_test_framework signals)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
@@ -277,10 +277,10 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
-#on freeBSD this must be explicitely linked
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+# on BSD this must be explicitly linked
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   find_library(EXECINFO_LIBRARY NAMES execinfo)
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 
 # Check for opengl

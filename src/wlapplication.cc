@@ -976,7 +976,7 @@ bool WLApplication::init_hardware() {
 	int result = -1;
 
 	//add default video mode
-#if defined(__linux__) || defined(__FreeBSD__)
+#if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	videomode.push_back("x11");
 #elif WIN32
 	videomode.push_back("windib");
@@ -1034,8 +1034,8 @@ bool WLApplication::init_hardware() {
 
 void terminate (int) {
 	 log
-		  (_("Waited 5 seconds to close audio. problems here so killing widelands."
-			  " update your sound driver and/or SDL to fix this problem\n"));
+		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
+			  " Update your sound driver and/or SDL to fix this problem\n"));
 #ifndef WIN32
 	raise(SIGKILL);
 #endif
