@@ -277,10 +277,10 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
-#on freeBSD this must be explicitely linked
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+# on BSD this must be explicitly linked
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   find_library(EXECINFO_LIBRARY NAMES execinfo)
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 
 # Check for opengl
