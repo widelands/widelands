@@ -5,8 +5,8 @@ welcome_msg = rt(
    h1(_"Smugglers") ..
    h2(_"Rules") ..
    p(_
-[[Smugglers is a Fun map for 4 players. You and your partner start diagonally
-to each other on a X-shaped island. Each player has a point in the
+[[Smugglers is a fun map for 4 players. You and your partner start diagonally
+to each other on an X-shaped island. Each player has a point in the
 center of the map where he should place a warehouse. If both players in a
 team succeed to build their warehouse in the right spot a smuggling route
 is established: all wares from the top player that are delivered to his
