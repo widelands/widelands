@@ -52,6 +52,7 @@ m_ware_type(Widelands::wwWARE),
 m_max_fill_indicator(g_gr->get_picture(PicMod_Game, pic_max_fill_indicator)),
 m_cache_size(queue->get_max_size()),
 m_cache_filled(queue->get_filled()),
+m_cache_max_fill(queue->get_max_fill()),
 m_total_height(0),
 m_show_only(show_only)
 {
@@ -115,6 +116,13 @@ void WaresQueueDisplay::think()
 
 	if (static_cast<uint32_t>(m_queue->get_filled()) != m_cache_filled)
 		update();
+
+	if (static_cast<uint32_t>(m_queue->get_max_fill()) != m_cache_max_fill) {
+		m_cache_max_fill = m_queue->get_max_fill();
+		compute_max_fill_buttons_enabled_state();
+		update();
+	}
+
 }
 
 /**
@@ -126,6 +134,7 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 		return;
 
 	m_cache_filled = m_queue->get_filled();
+	m_cache_max_fill = m_queue->get_max_fill();
 
 	uint32_t nr_wares_to_draw = std::min(m_cache_filled, m_cache_size);
 	uint32_t nr_empty_to_draw = m_cache_size - nr_wares_to_draw;
@@ -217,6 +226,9 @@ void WaresQueueDisplay::update_priority_buttons()
 void WaresQueueDisplay::update_max_fill_buttons() {
 	delete m_increase_max_fill;
 	delete m_decrease_max_fill;
+	m_increase_max_fill = 0;
+	m_decrease_max_fill = 0;
+
 	if (m_cache_size <= 0 or m_show_only)
 		return;
 
@@ -242,12 +254,10 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	m_increase_max_fill->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
 
-	// Disable those buttons for replay watchers
-	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	if (not can_act) {
-		m_increase_max_fill->set_enabled(false);
-		m_decrease_max_fill->set_enabled(false);
-	}
+	m_increase_max_fill->set_repeating(true);
+	m_decrease_max_fill->set_repeating(true);
+	compute_max_fill_buttons_enabled_state();
+
 }
 
 /**
@@ -278,23 +288,35 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
  */
 void WaresQueueDisplay::decrease_max_fill_clicked()
 {
-	uint32_t cur = m_queue->get_max_fill();
-
-	if (cur <= 0)
-		return;
+	assert (m_cache_max_fill > 0);
 
 	m_igb.game().send_player_set_ware_max_fill
-			(m_building, m_ware_index, cur - 1);
+			(m_building, m_ware_index, m_cache_max_fill - 1);
+
 }
 
 void WaresQueueDisplay::increase_max_fill_clicked()
 {
-	uint32_t cur = m_queue->get_max_fill();
 
-	if (cur >= m_queue->get_max_size())
-		return;
+	assert (m_cache_max_fill < m_queue->get_max_size());
 
 	m_igb.game().send_player_set_ware_max_fill
-			(m_building, m_ware_index, cur + 1);
+			(m_building, m_ware_index, m_cache_max_fill + 1);
+
+}
+
+void WaresQueueDisplay::compute_max_fill_buttons_enabled_state()
+{
+
+	// Disable those buttons for replay watchers
+	bool const can_act = m_igb.can_act(m_building.owner().player_number());
+	if (not can_act) {
+		if (m_increase_max_fill) m_increase_max_fill->set_enabled(false);
+		if (m_decrease_max_fill) m_decrease_max_fill->set_enabled(false);
+	} else {
+
+		if (m_decrease_max_fill) m_decrease_max_fill->set_enabled(m_cache_max_fill > 0);
+		if (m_increase_max_fill) m_increase_max_fill->set_enabled(m_cache_max_fill < m_queue->get_max_size());
+	}
 }
 
