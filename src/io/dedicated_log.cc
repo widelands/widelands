@@ -72,8 +72,8 @@ void DedicatedLog::chat(ChatMessage & c) {
 
 	std::string temp("<tr>");
 	temp += "<td class=\"time\">";
-	char ts[13];
-	strftime(ts, sizeof(ts), "[%H:%M]", localtime(&c.time));
+	char ts[32];
+	strftime(ts, sizeof(ts), "[%Y-%m-%d, %H:%M]", localtime(&c.time));
 	temp += (boost::format("%s</td><td class=\"player%i\">") % ts % c.playern).str();
 	temp += c.sender.empty() ? "SYSTEM" : c.sender;
 	temp += "</td><td class=\"recipient\"> ->" + c.recipient + "</td><td class=\"message\">";
@@ -194,7 +194,11 @@ void DedicatedLog::dlog(std::string msg) {
 	if (m_log_file_path.empty())
 		return;
 
-	std::string temp("<tr><td class=\"log\">");
+	std::string temp("<tr><td class=\"time\">");
+	char ts[32];
+	strftime(ts, sizeof(ts), "[%Y-%m-%d, %H:%M]", localtime(&c.time));
+	temp += ts;
+	temp += "</td><td class=\"log\">";
 	temp += msg;
 	temp += "</td></tr>\n";
 	m_chat.Printf(temp.c_str());
@@ -280,7 +284,7 @@ bool DedicatedLog::set_log_file_path (std::string path) {
 	m_log_file_path = path;
 
 	// Initialize the log file
-	m_chat.Printf("<tr><th>Widelands dedicated server log:</th></tr>\n");
+	m_chat.Printf("<tr><th></th><th>Widelands dedicated server log:</th></tr>\n");
 	m_chat.Write(*root, m_log_file_path.c_str()); // Not WriteAppend, to make sure the file is cleared
 	return true;
 }
