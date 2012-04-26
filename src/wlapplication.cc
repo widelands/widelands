@@ -384,7 +384,7 @@ void WLApplication::run()
 			uint32_t            maxcl  = s.get_natural("maxclients",     8);
 			for (;;) { // endless loop
 				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
-					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
+					dedicatedlog(_("ERROR: Could not connect to metaserver (reason above)!\n"));
 					return;
 				}
 				std::string realservername(server);

@@ -519,6 +519,9 @@ struct Client {
 	uint32_t desiredspeed;
 	bool dedicated_access;
 	time_t hung_since;
+	/// The delta time where the last information about the hung client was sent to the other clients relative
+	/// to when the last answer of the client was received.
+	time_t  lastdelta;
 };
 
 struct NetHostImpl {
@@ -555,7 +558,7 @@ struct NetHostImpl {
 	NetworkTime time;
 
 	/// Whether we're waiting for all clients to report back.
-	bool waiting;
+	bool    waiting;
 	int32_t lastframe;
 
 	/**
@@ -563,6 +566,7 @@ struct NetHostImpl {
 	 * as we're not \ref waiting.
 	 */
 	uint32_t networkspeed;
+	time_t   lastpauseping;
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
@@ -574,7 +578,7 @@ struct NetHostImpl {
 	md5_checksum syncreport;
 	bool syncreport_arrived;
 
-	NetHostImpl(NetHost * const h) : chat(h), hp(h), npsb(&hp) {
+	NetHostImpl(NetHost * const h) : chat(h), hp(h), npsb(&hp), lastpauseping(0) {
 		dedicated_start = false;
 	}
 };
@@ -755,6 +759,7 @@ void NetHost::run(bool const autorun)
 				InternetGaming::ref().set_game_done();
 			return;
 		}
+		delete lm;
 	}
 
 	// if this is an internet game, tell the metaserver that the game started
@@ -1214,6 +1219,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			else
 				c.msg = (format(_("Could not save the game to the file \"%s\"! (%s)")) % savename % error).str();
 			send(c);
+			delete error;
 		}
 
 	} else if (cmd == "pwd") {
@@ -1352,6 +1358,8 @@ void NetHost::sendSystemMessageCode
 	msg.playern = UserSettings::none(); //  == System message
 	// c.sender remains empty to indicate a system message
 	d->chat.receive(msg);
+	if (m_is_dedicated)
+		DedicatedLog::get()->chat(msg);
 }
 
 int32_t NetHost::getFrametime()
@@ -2160,8 +2168,7 @@ void NetHost::checkHungClients()
 		if (delta == 0) {
 			++nrready;
 			// reset the hung_since time
-			if (m_is_dedicated)
-				d->clients.at(i).hung_since = 0;
+			d->clients.at(i).hung_since = 0;
 		} else {
 			++nrdelayed;
 			if
@@ -2177,15 +2184,31 @@ void NetHost::checkHungClients()
 					("[Host]: Client %i (%s) hung\n",
 					 i, d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
-				// If this is a dedicated server, there is no host that cares about kicking hung players
-				// This is especially problematic, if the last or all players hung and the dedicated
-				// server does not automatically restart.
-				if (m_is_dedicated) {
-					if (d->clients.at(i).hung_since == 0)
-						d->clients.at(i).hung_since = time(0);
-					else if (d->clients.at(i).hung_since < (time(0) - 600)) {
-						// 10 minutes for all other players to react before the dedicated server takes care
-						// about the situation itself
+				if (d->clients.at(i).hung_since == 0) {
+					d->clients.at(i).hung_since = time(0);
+					d->clients.at(i).lastdelta = 0;
+				} else if (time_t deltanow = time(0) - d->clients.at(i).hung_since > 60) {
+
+					// inform the other clients about the problem regulary
+					if (deltanow - d->clients.at(i).lastdelta > 30) {
+						char buf[5];
+						snprintf(buf, sizeof(buf), "%li", deltanow);
+						sendSystemMessageCode
+							("CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, buf);
+						d->clients.at(i).lastdelta = deltanow;
+						if (m_is_dedicated) {
+							snprintf(buf, sizeof(buf), "%li", 300 - deltanow);
+							sendSystemMessageCode
+								("CLIENT_HUNG_AUTOKICK", d->settings.users.at(d->clients.at(i).usernum).name, buf);
+						}
+					}
+
+					// If this is a dedicated server, there is no host that cares about kicking hung players
+					// This is especially problematic, if the last or all players hung and the dedicated
+					// server does not automatically restart.
+					// 5 minutes for all other players to react before the dedicated server takes care
+					// about the situation itself
+					if ((d->clients.at(i).hung_since < (time(0) - 300)) && m_is_dedicated) {
 						disconnectClient(i, "CLIENT_TIMEOUTED");
 						// Try to save the game
 						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(0)).str();;
@@ -2193,6 +2216,7 @@ void NetHost::checkHungClients()
 						SaveHandler & sh = d->game->save_handler();
 						if (sh.save_game(*d->game, savename, error))
 							sendSystemMessageCode("GAME_SAVED_AS", savename);
+						delete error;
 					}
 				}
 			}
@@ -2260,8 +2284,8 @@ void NetHost::updateNetworkSpeed()
 	if (m_forced_pause)
 		d->networkspeed = 0;
 
-	// No pause was forced - normal speed calculation
 	else {
+		// No pause was forced - normal speed calculation
 		std::vector<uint32_t> speeds;
 
 		if (!m_is_dedicated)
@@ -2394,12 +2418,13 @@ void NetHost::handle_network ()
 
 		Client peer;
 
-		peer.sock = sock;
-		peer.playernum = UserSettings::notConnected();
+		peer.sock               = sock;
+		peer.playernum          = UserSettings::notConnected();
 		peer.syncreport_arrived = false;
-		peer.desiredspeed = 1000;
-		peer.usernum = -1; // == no user assigned for now.
-		peer.hung_since = 0;
+		peer.desiredspeed       = 1000;
+		peer.usernum            = -1; // == no user assigned for now.
+		peer.hung_since         = 0;
+		peer.lastdelta          = 0;
 		d->clients.push_back(peer);
 	}
 
@@ -2440,6 +2465,15 @@ void NetHost::handle_network ()
 				disconnectClient(i, "MALFORMED_COMMANDS", true, e.what());
 			}
 		}
+	}
+
+	// If a pause was forced, send a ping regulary to keep the sockets up and running
+	if (m_forced_pause && (time(0) > (d->lastpauseping + 20))) {
+		d->lastpauseping = time(0);
+
+		SendPacket s;
+		s.Unsigned8(NETCMD_PING);
+		broadcast(s);
 	}
 
 	reaper();
@@ -2508,7 +2542,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	switch (cmd) {
 	case NETCMD_PONG:
-		dedicatedlog("[Host]: client %u: got pong\n", i);
+		dedicatedlog("[Host]: Client %u: got pong\n", i);
 		break;
 
 	case NETCMD_SETTING_MAP:
@@ -2657,7 +2691,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		int32_t time = r.Signed32();
 		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
-			("[Host]: client %u (%u) sent player command %i for %i, time = %i\n",
+			("[Host]: Client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
 		recvClientTime(i, time);
 		if (plcmd.sender() != client.playernum + 1)
@@ -2791,7 +2825,6 @@ void NetHost::disconnectClient
 	// If the client was completely connected before the disconnect, free the
 	// user settings and send changes to the clients
 	if (client.usernum >= 0) {
-		sendSystemMessageCode("CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
 		uint8_t position = d->settings.users.at(client.usernum).position;
 		d->settings.users.at(client.usernum).position = UserSettings::notConnected();
 		client.playernum = UserSettings::notConnected();
@@ -2802,8 +2835,9 @@ void NetHost::disconnectClient
 		// statistics.
 		// d->settings.users.at(client.usernum).name = std::string();
 
-
 		// Broadcast the user changes to everybody
+		sendSystemMessageCode("CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
+
 		SendPacket s;
 		s.Unsigned8(NETCMD_SETTING_USER);
 		s.Unsigned32(client.usernum);
