@@ -1356,6 +1356,8 @@ void NetHost::sendSystemMessageCode
 	msg.playern = UserSettings::none(); //  == System message
 	// c.sender remains empty to indicate a system message
 	d->chat.receive(msg);
+	if (m_is_dedicated)
+		DedicatedLog::get()->chat(msg);
 }
 
 int32_t NetHost::getFrametime()
