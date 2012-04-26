@@ -759,6 +759,7 @@ void NetHost::run(bool const autorun)
 				InternetGaming::ref().set_game_done();
 			return;
 		}
+		delete lm;
 	}
 
 	// if this is an internet game, tell the metaserver that the game started
@@ -1218,6 +1219,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			else
 				c.msg = (format(_("Could not save the game to the file \"%s\"! (%s)")) % savename % error).str();
 			send(c);
+			delete error;
 		}
 
 	} else if (cmd == "pwd") {
@@ -2214,6 +2216,7 @@ void NetHost::checkHungClients()
 						SaveHandler & sh = d->game->save_handler();
 						if (sh.save_game(*d->game, savename, error))
 							sendSystemMessageCode("GAME_SAVED_AS", savename);
+						delete error;
 					}
 				}
 			}
