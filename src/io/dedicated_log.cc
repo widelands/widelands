@@ -196,7 +196,9 @@ void DedicatedLog::dlog(std::string msg) {
 
 	std::string temp("<tr><td class=\"time\">");
 	char ts[32];
-	strftime(ts, sizeof(ts), "[%Y-%m-%d, %H:%M]", localtime(&c.time));
+	time_t * t = new time_t(time(0));
+	strftime(ts, sizeof(ts), "[%Y-%m-%d, %H:%M]", localtime(t));
+	delete t;
 	temp += ts;
 	temp += "</td><td class=\"log\">";
 	temp += msg;
