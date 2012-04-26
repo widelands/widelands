@@ -2825,7 +2825,6 @@ void NetHost::disconnectClient
 	// If the client was completely connected before the disconnect, free the
 	// user settings and send changes to the clients
 	if (client.usernum >= 0) {
-		sendSystemMessageCode("CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
 		uint8_t position = d->settings.users.at(client.usernum).position;
 		d->settings.users.at(client.usernum).position = UserSettings::notConnected();
 		client.playernum = UserSettings::notConnected();
@@ -2836,8 +2835,9 @@ void NetHost::disconnectClient
 		// statistics.
 		// d->settings.users.at(client.usernum).name = std::string();
 
-
 		// Broadcast the user changes to everybody
+		sendSystemMessageCode("CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
+
 		SendPacket s;
 		s.Unsigned8(NETCMD_SETTING_USER);
 		s.Unsigned32(client.usernum);
