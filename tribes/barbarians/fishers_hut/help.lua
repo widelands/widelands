@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/fishers_hut/fisher_i_00.png", p(
 			_[["What do you mean, my fish ain't fresh?!"]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed.]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Source needed]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h2(_"Purpose:")) ..
