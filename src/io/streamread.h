@@ -71,7 +71,7 @@ struct StreamRead : boost::noncopyable {
 	int32_t Signed32();
 	uint32_t Unsigned32();
 	std::string String();
-	__attribute__((noreturn)) virtual char const * CString() {throw;}
+	virtual char const * CString() {throw;}
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.

@@ -2131,7 +2131,7 @@ struct ReplayGameController : public GameController {
 		}
 	}
 
-	__attribute__((noreturn)) void sendPlayerCommand(Widelands::PlayerCommand &)
+	void sendPlayerCommand(Widelands::PlayerCommand &)
 	{
 		throw wexception("Trying to send a player command during replay");
 	}

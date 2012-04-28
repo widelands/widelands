@@ -60,8 +60,7 @@ struct IdleWareSupply : public Supply {
 
 	virtual uint32_t nr_supplies(Game const &, Request const &) const;
 	virtual WareInstance & launch_item(Game &, Request const &);
-	virtual Worker & launch_worker(Game &, Request const &)
-		__attribute__ ((noreturn));
+	virtual Worker & launch_worker(Game &, Request const &);
 
 private:
 	WareInstance & m_ware;

@@ -178,7 +178,7 @@ public:
 	virtual std::string get_statistics_string();
 
 	/// \returns the queue for a ware type or \throws _wexception.
-	virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));
+	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base &);
@@ -187,8 +187,7 @@ public:
 	void hide_options();
 
 	virtual bool fetch_from_flag(Game &);
-	virtual bool get_building_work(Game &, Worker &, bool success)
-		__attribute__ ((noreturn));
+	virtual bool get_building_work(Game &, Worker &, bool success);
 
 	bool leave_check_and_wait(Game &, Worker &);
 	void leave_skip(Game &, Worker &);
