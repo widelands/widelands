@@ -890,7 +890,7 @@ void NetHost::run(bool const autorun)
 		clearComputerPlayers();
 		d->game = 0;
 
-		while (d->clients.size() > 0) {
+		while (!d->clients.empty()) {
 			disconnectClient(0, "SERVER_CRASHED");
 			reaper();
 		}
@@ -1258,7 +1258,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		// Read in maps
 		std::vector<std::string> directories;
 		directories.push_back("maps");
-		while (directories.size()) {
+		while (!directories.empty()) {
 			filenameset_t files;
 			g_fs->FindFiles(directories.at(directories.size() - 1).c_str(), "*", &files, 0);
 			directories.resize(directories.size() - 1);

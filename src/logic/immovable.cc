@@ -1401,7 +1401,7 @@ void PlayerImmovable::init(Editor_Game_Base & egbase)
 */
 void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 {
-	while (m_workers.size())
+	while (!m_workers.empty())
 		m_workers[0]->set_location(0);
 
 	if (m_owner)

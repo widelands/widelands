@@ -412,7 +412,7 @@ void ProductionProgram::ActReturn::execute
 		m_result == Completed ? _("completed") : _("skipped");
 	statistics_string += ' ';
 	statistics_string += ps.top_state().program->descname();
-	if (m_conditions.size()) {
+	if (!m_conditions.empty()) {
 		std::string result_string = statistics_string;
 		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
 			char const * const operator_string = _(" and ");

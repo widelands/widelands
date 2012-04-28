@@ -203,7 +203,7 @@ void SoldierPanel::think()
 	}
 
 	// Second pass: add new soldiers
-	while (soldierlist.size()) {
+	while (!soldierlist.empty()) {
 		Icon icon;
 		icon.soldier = soldierlist.back();
 		soldierlist.pop_back();

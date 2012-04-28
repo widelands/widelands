@@ -100,7 +100,7 @@ void release_textdomain() {
 
 	//don't try to get the previous TD when the very first one ('widelands')
 	//just got dropped
-	if (textdomains.size()) {
+	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
 		char const * const localedir = textdomains.back().second.c_str();
 
@@ -235,7 +235,7 @@ void set_locale(std::string name) {
 
 	SETLOCALE(LC_ALL, ""); //  call to libintl
 
-	if (textdomains.size()) {
+	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
 		char const * const localedir = textdomains.back().second.c_str();
 		bind_textdomain_codeset (domain, "UTF-8");
