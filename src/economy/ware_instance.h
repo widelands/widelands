@@ -31,7 +31,7 @@ namespace Widelands {
 struct Economy;
 struct Editor_Game_Base;
 struct Game;
-class IdleWareSupply;
+struct IdleWareSupply;
 class Map_Object;
 struct PlayerImmovable;
 struct Transfer;

@@ -291,7 +291,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	 * request a new carrier
 	 */
 	if (upcast(Game, game, &egbase))
-	container_iterate(SlotVector, m_carrier_slots, i)
+	container_iterate(SlotVector, m_carrier_slots, i) {
 		if (Carrier * const carrier = i.current->carrier.get(*game)) {
 			//  This happens after a road split. Tell the carrier what's going on.
 			carrier->set_location    (this);
@@ -301,6 +301,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 			 (i.current->carrier_type == 1 or
 			  m_type == Road_Busy))
 			_request_carrier(*i.current);
+	}
 }
 
 /**
