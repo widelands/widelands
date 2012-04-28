@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-03-31 18:24+0000\n"
-"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
+"PO-Revision-Date: 2012-04-24 22:45+0000\n"
+"Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-01 04:33+0000\n"
-"X-Generator: Launchpad (build 15032)\n"
+"X-Launchpad-Export-Date: 2012-04-26 04:32+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -24,6 +24,8 @@ msgid ""
 "\"A new Warriors Axe brings forth the best in its wielder – or the worst in "
 "its maker.\""
 msgstr ""
+"\"Nové válečnické sekery vynáší na světlo to nejlepší těch kdo je drží - "
+"nebo to nejhorší svých tvůrců.\""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:12
 msgid ""
@@ -43,19 +45,23 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "\"Forming new stone from old with fire and water.\""
-msgstr ""
+msgstr "\"Vytvoření nového kamene ze starého pomocí ohně a vody.\""
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
 "\"He loves the animals and to breed them<br>as we love to cook and eat "
 "them.\""
 msgstr ""
+"\"On miluje zvířata a množí je tak,<br>\r\n"
+"jako je my vaříme a jíme.\""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:13
 msgid ""
 "\"He who can grow two trees where normally grows only one exceeds the most "
 "important general!\""
 msgstr ""
+"\"Ten, kdo dokáže vypěstovat dva stromy tam, kde by jinak rostl jen jeden, "
+"předčí i nejdůležitějšího generála!\""
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""
@@ -68,7 +74,7 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:12
 msgid ""
 "\"I can handle tons of granite, man, but no more of your vain prattle.\""
-msgstr ""
+msgstr "\"Vypořádám se s tunami žuly, ale to tvoje kecání už nevydržím.\""
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:12
 #: ../../tribes/barbarians/deeper_oremine/help.lua:12
@@ -83,6 +89,8 @@ msgid ""
 "\"Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
+"\"Ať první zažene hlad, druhý ať ti udělá dobře, a až spolykáš svůj třetí, "
+"je čas na další směnu!\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -94,6 +102,9 @@ msgid ""
 "\"Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.\""
 msgstr ""
+"\"Ó jak sladký je zdroj života,<br>\r\n"
+"co padá z nebes<br>\r\n"
+"a nechává zemi pít.\""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -349,12 +360,16 @@ msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
 msgstr ""
+"Všechny tři zbraně zaberou stejný čas při výrobě, ale každá potřebuje jiný "
+"surový materiál."
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"Všechny zbraně potřebují stejnou dávku času, abys je mohl vyrobit, ale "
+"spotřeba daného materiálu roste s každým kusem. Poslední dvě potřebují zlato."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
@@ -368,6 +383,8 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
+"Staré Barbarské přísloví<br>\r\n"
+"naznačující, že někdy je potřeba riskovat."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -379,7 +396,7 @@ msgstr "Útok"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:25
 msgid "Attack Training:"
-msgstr ""
+msgstr "Trénink útoku:"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Axe"
@@ -522,7 +539,7 @@ msgstr "Tvrzené dřevo"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:33
 msgid "Both Trainings:"
-msgstr ""
+msgstr "Oba tréninky:"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Bread Paddle"
@@ -530,7 +547,7 @@ msgstr "Sázecí lopata"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Chovej Voly, abys je mohl využít v přepravním systému."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -578,7 +595,7 @@ msgstr "Bronzová sekera"
 #: ../../tribes/barbarians/trainingscamp/help.lua:40
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build Cost:"
-msgstr ""
+msgstr "Cena stavby:"
 
 #: ../../tribes/barbarians/conf:127
 #: ../../tribes/barbarians/metalworks/help.lua:32
@@ -614,7 +631,7 @@ msgstr "Stavař"
 #: ../../tribes/barbarians/warmill/help.lua:33
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "Building"
-msgstr ""
+msgstr "Stavba"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Burner"
@@ -630,7 +647,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
-msgstr ""
+msgstr "Nutnost výpočtu."
 
 #: ../../tribes/barbarians/conf:115
 #: ../../tribes/barbarians/well/help.lua:42
@@ -672,7 +689,7 @@ msgstr "Dům uhlíře"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
-msgstr ""
+msgstr "Náčelník Chat'Karuth v proslovu ke své armádě."
 
 #: ../../tribes/barbarians/coalmine/help.lua:53
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -742,7 +759,7 @@ msgstr "Uhlí"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "Uhlí z uhelného dolu a nebo od Uhlíře."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:212
@@ -834,7 +851,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:41
 msgid "Crew required:"
-msgstr ""
+msgstr "Potřeba posádky."
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -916,7 +933,7 @@ msgstr "Bránit a dobýt!"
 #: ../../tribes/barbarians/warmill/help.lua:22
 #: ../../tribes/barbarians/well/help.lua:21
 msgid "Dependencies"
-msgstr ""
+msgstr "Závislosti"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Destroyed building"
@@ -983,11 +1000,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
-msgstr ""
+msgstr "Úhyb."
 
 #: ../../tribes/barbarians/battlearena/help.lua:26
 msgid "Evade Training:"
-msgstr ""
+msgstr "Trénink úhybu:"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:13
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:13
@@ -1025,7 +1042,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:61
 #: ../../tribes/barbarians/well/help.lua:44
 msgid "Experience levels:"
-msgstr ""
+msgstr "Úrovně zkušeností:"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Farm"
@@ -1039,7 +1056,7 @@ msgstr "Sedlák"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into trunks."
-msgstr ""
+msgstr "Pokácej v okolí stromy a přeměň je na kmeny."
 
 #: ../../tribes/barbarians/conf:82
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
@@ -1347,7 +1364,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
-msgstr ""
+msgstr "Lov zvěř, abys produkoval maso."
 
 #: ../../tribes/barbarians/conf:137
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
@@ -1435,7 +1452,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:23
 #: ../../tribes/barbarians/well/help.lua:22
 msgid "Incoming:"
-msgstr ""
+msgstr "Příchozí:"
 
 #: ../../tribes/barbarians/bakery/help.lua:28
 #: ../../tribes/barbarians/conf:197
@@ -1455,6 +1472,8 @@ msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
 msgstr ""
+"Nápis na prahu dnes již zničené Staré Hutě u Harradsheim, nejstarší známého "
+"kovárny."
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/conf:92
@@ -1507,13 +1526,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:17
 msgid "It can make Axes, Sharp Axes and Broad Axes."
-msgstr ""
+msgstr "Může vyrábět sekery, ostré sekery a široké sekery."
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
 "It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
+"Může vyrábět Pekařské lopaty, dřevorubecké sekery, kovářské kleště, rybářské "
+"pruty, kladiva, lovecké oštěpy, kuchyňské nářadí, krumpáče, kosy a rýče."
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "It can not be upgraded."

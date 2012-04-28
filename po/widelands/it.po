@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-29 17:46+0000\n"
+"PO-Revision-Date: 2012-04-26 17:27+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-30 04:31+0000\n"
-"X-Generator: Launchpad (build 15032)\n"
+"X-Launchpad-Export-Date: 2012-04-27 04:33+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1611,7 +1611,7 @@ msgstr "Nessuna risorsa rimasta trovata!"
 
 #: ../../src/logic/production_program.cc:1209
 msgid "Main vein exhausted"
-msgstr "Filone principale esaurito"
+msgstr "Filone princ. esaurito"
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
@@ -4009,7 +4009,7 @@ msgstr "Menù dei messaggi: Messaggi in arrivo"
 
 #: ../../src/wui/game_message_menu.cc:54
 msgid "Select"
-msgstr "Seleziona"
+msgstr "Selez."
 
 #: ../../src/wui/game_message_menu.cc:55
 msgid "Status"
@@ -4047,7 +4047,7 @@ msgstr "Archivia i messaggi selezionati"
 #: ../../src/wui/game_message_menu.cc:92
 #: ../../src/wui/game_message_menu.cc:379
 msgid "Show Archive"
-msgstr "Mostra l'archivio"
+msgstr "Archivio"
 
 #: ../../src/wui/game_message_menu.cc:102
 msgid "center main mapview on location"
@@ -4063,7 +4063,7 @@ msgstr "Ripristina i messaggi selezionati"
 
 #: ../../src/wui/game_message_menu.cc:372
 msgid "Show Inbox"
-msgstr "Mostra inbox"
+msgstr "In arrivo"
 
 #: ../../src/wui/game_objectives_menu.cc:45
 msgid "Objectives Menu"

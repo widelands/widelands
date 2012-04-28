@@ -1,45 +1,46 @@
-# Spanish translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# Swedish translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-04-13 01:26+0000\n"
-"Last-Translator: Pablo Frigerio <Unknown>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2012-04-21 08:02+0000\n"
+"Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
+"Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-14 04:36+0000\n"
-"X-Generator: Launchpad (build 15070)\n"
+"X-Launchpad-Export-Date: 2012-04-22 04:35+0000\n"
+"X-Generator: Launchpad (build 15120)\n"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:23
 msgid "%s and %s have established a smuggling route!"
-msgstr "¡%s y %s han establecido una ruta de contrabando!"
+msgstr "%s och %s har etablerat en smugglingsrutt!"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:37
 msgid "Game Status"
-msgstr "Estado de la partida"
+msgstr "Spelstatus"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:32
 msgid ""
 "Game over! %s and %s have won the game! %s and %s only managed to\n"
 "smuggle %i wares."
 msgstr ""
-"Game over! %s and %s have won the game! %s and %s only managed to\n"
-"smuggle %i wares."
+"Spelet är över! %s och %s har vunnit spelet! %s och %s lyckades bara "
+"smuggla\n"
+"%i varor."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Rules"
-msgstr "Reglas"
+msgstr "Regler"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
 msgid "Smugglers"
-msgstr "Contrabandistas"
+msgstr "Smugglare"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid ""
@@ -52,16 +53,6 @@ msgid ""
 "is to\n"
 "smuggle %i items from top to bottom."
 msgstr ""
-"Contrabandistas es un mapa divertido para 4 jugadores. tú y tu compañero "
-"empiezan en diagonal\n"
-"uno al otro en una isla con forma de X. Cada jugador posee un punto en el\n"
-"centro del mapa donde debe colocar un almacén. Si ambos jugadores de un\n"
-"equipo completa la construcción de su almacén en el punto correcto, una ruta "
-"de contrabando\n"
-"se establece: todas las mercancías del jugador de arriba que sean enviadas a "
-"su almacén aparecerán en el almacén del jugador de abajo. El objetivo del "
-"juego es\n"
-"contrabandear %i de artículos desde arriba hacia abajo."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid ""
@@ -69,23 +60,19 @@ msgid ""
 "routes by burning down your warehouses. You will pay them back in their own\n"
 "coin of course!"
 msgstr ""
-"El otro equipo tiene el mismo objetivo y es tratar de interrumpir tus rutas\n"
-"de tráfico quemando tus almacenes. Tu les pagarás con su propia\n"
-"moneda obviamente!"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:26
 msgid "The smuggling route of %s and %s has been broken!"
-msgstr "La ruta de tráfico de %s y %s ha sido destruida!"
+msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
 msgid "Wares smuggled"
-msgstr "Mercancía de contrabando"
+msgstr "Varor smugglade"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
 msgid ""
 "You can see the number of wares traded at any time in the general\n"
 "statistics menu. Good luck!"
 msgstr ""
-"Usted puede ver el número de mercancías comerciadas en cualquier momento en "
-"el menú\n"
-"de estadísticas generales. Buena suerte!"
+"Du kan se antalet bytta varor när som helst i den generella\n"
+"statitisik menyn. Lycka till!"

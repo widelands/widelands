@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-09 00:41+0000\n"
-"Last-Translator: James Thorrold <jameslin@inbox.com>\n"
+"PO-Revision-Date: 2012-04-15 15:11+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:40+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-16 04:36+0000\n"
+"X-Generator: Launchpad (build 15099)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -187,24 +187,6 @@ msgid ""
 " --xres=[...]         Width of the window in pixel.\n"
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
-" --speed_of_new_game  De snelheid waarop het nieuwe spel zal\n"
-"                      lopen bij het starten, met factor 1000 (0 is pauze,\n"
-"                      1000 is normale snelheid).\n"
-" --auto_roadbuild_mode=[yes|no]\n"
-"                      Of automatisch naar wegenbouw modus omgeschakeld\n"
-"                      moet worden nadat een vlag geplaatst is die niet "
-"verbonden \n"
-"                      is met een weg.\n"
-" --write_HTML=[yes|no]\n"
-"                      Schrijf HTML-hulpbestanden voor geparste spel data.\n"
-"\n"
-"Grafische opties:\n"
-" --fullscreen=[yes|no]\n"
-"                      Of het hele beeld gebruikt moet worden\n"
-"                      voor het spel scherm.\n"
-" --depth=[16|32]      Kleurdiepte in aantal bits per pixel.\n"
-" --xres=[...]         Breedte van het scherm in pixels.\n"
-" --yres=[...]         Hoogte van het scherm in pixels.\n"
 
 #: ../../src/wlapplication.cc:1367
 msgid ""
@@ -606,7 +588,7 @@ msgstr "%s's output"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Documentation for program command "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -720,7 +702,7 @@ msgstr "economy: %s"
 #: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
-msgstr ""
+msgstr "loading portdock: %s"
 
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
@@ -757,11 +739,11 @@ msgstr "Players"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Undo"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Redo"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -994,11 +976,11 @@ msgstr "loading critter: %s"
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% dismantled"
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Loading tribes"
 
 #: ../../src/logic/game.cc:224
 msgid "Preloading a map"
