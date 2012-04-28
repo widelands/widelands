@@ -401,18 +401,33 @@ include_directories(${SDL_INCLUDE_DIR})
 
 find_package(SDL_image REQUIRED)
 include_directories(${SDLIMAGE_INCLUDE_DIR})
+if (NOT SDLIMAGE_FOUND)
+  message(FATAL_ERROR "Required package SDL_image not found, please install and re-run cmake")
+endif (NOT SDLIMAGE_FOUND)
 
 find_package(SDL_mixer REQUIRED)
 include_directories(${SDLMIXER_INCLUDE_DIR})
+if (NOT SDLMIXER_FOUND)
+  message(FATAL_ERROR "Required package SDL_mixer not found, please install and re-run cmake")
+endif (NOT SDLMIXER_FOUND)
 
 find_package(SDL_net REQUIRED)
 include_directories(${SDLNET_INCLUDE_DIR})
+if (NOT SDLNET_FOUND)
+  message(FATAL_ERROR "Required package SDL_net not found, please install and re-run cmake")
+endif (NOT SDLNET_FOUND)
 
 find_package(SDL_ttf REQUIRED)
 include_directories(${SDLTTF_INCLUDE_DIR})
+if (NOT SDLTTF_FOUND)
+  message(FATAL_ERROR "Required package SDL_ttf not found, please install and re-run cmake")
+endif (NOT SDLTTF_FOUND)
 
 find_package(SDL_gfx REQUIRED)
 include_directories(${SDLGFX_INCLUDE_DIR})
+if (NOT SDLGFX_FOUND)
+  message(FATAL_ERROR "Required package SDL_gfx not found, please install and re-run cmake")
+endif (NOT SDLGFX_FOUND)
 
 find_package(Lua51 REQUIRED)
 include_directories(${LUA_INCLUDE_DIR})
