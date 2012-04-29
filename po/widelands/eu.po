@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-04-27 19:04+0000\n"
+"POT-Creation-Date: 2012-04-28 23:17+0200\n"
+"PO-Revision-Date: 2012-04-29 00:07+0000\n"
 "Last-Translator: Mikel Alzibar <mikelalzibar@gmail.com>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-04-28 04:32+0000\n"
+"X-Launchpad-Export-Date: 2012-04-29 04:36+0000\n"
 "X-Generator: Launchpad (build 15149)\n"
 
 #: ../../src/computer_player.cc:38
@@ -37,11 +37,9 @@ msgstr "Ezin izan da exekutagarri nagusiaren bidea aurkitu"
 
 #: ../../src/wlapplication.cc:1037
 msgid ""
-"Waited 5 seconds to close audio. problems here so killing widelands. update "
+"Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"Itxaronda 5 segundu audioa ixteko. Arazoak daudenez Widelands itxiko da. "
-"Eguneratu zure soinu kontrolagailuak edota SDL arazo hau konpontzeko.\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -252,12 +250,12 @@ msgstr ""
 msgid "The address of the game server is invalid"
 msgstr "Joko zerbitzariaren helbidea okerra da"
 
-#: ../../src/wlapplication.cc:1797 ../../src/network/nethost.cc:1995
+#: ../../src/wlapplication.cc:1797 ../../src/network/nethost.cc:2003
 msgid "Player"
 msgstr "Jokalaria"
 
 #: ../../src/wlapplication.cc:1986 ../../src/network/netclient.cc:198
-#: ../../src/network/nethost.cc:806
+#: ../../src/network/nethost.cc:811
 msgid "Preparing game"
 msgstr "Jokoa prestatzen"
 
@@ -553,7 +551,7 @@ msgid "Ware types"
 msgstr "Salgai motak"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
-#: ../../src/economy/fleet.cc:739 ../../src/economy/portdock.cc:441
+#: ../../src/economy/fleet.cc:746 ../../src/economy/portdock.cc:441
 #: ../../src/economy/request.cc:243 ../../src/economy/wares_queue.cc:289
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:85
 #: ../../src/game_io/game_game_class_data_packet.cc:44
@@ -638,7 +636,7 @@ msgstr "bertsio ezezaguna %u"
 msgid "economy: %s"
 msgstr "ekonomia: %s"
 
-#: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
+#: ../../src/economy/fleet.cc:748 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
 msgstr ""
@@ -1164,7 +1162,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_building_data_packet.cc:103
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "%u jokalaria ez da existitzen"
 
 #: ../../src/logic/playercommand.cc:141
 #, c-format
@@ -1184,22 +1182,22 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:241
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "eraiki: %s"
 
 #: ../../src/logic/playercommand.cc:289
 #, c-format
 msgid "build flag: %s"
-msgstr ""
+msgstr "bandera jarri: %s"
 
 #: ../../src/logic/playercommand.cc:376
 #, c-format
 msgid "build road: %s"
-msgstr ""
+msgstr "bidea eraiki: %s"
 
 #: ../../src/logic/playercommand.cc:430
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "bandera %u: %s"
 
 #: ../../src/logic/playercommand.cc:436
 #, c-format
@@ -1220,7 +1218,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:554
 #, c-format
 msgid "enhance building: %s"
-msgstr ""
+msgstr "eraikina hobetu: %s"
 
 #: ../../src/logic/playercommand.cc:680 ../../src/logic/playercommand.cc:1185
 #: ../../src/logic/playercommand.cc:1263
@@ -1231,7 +1229,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:690
 #, c-format
 msgid "set ware priority: %s"
-msgstr ""
+msgstr "salgaiaren lehentasuna ezarri: %s"
 
 #: ../../src/logic/playercommand.cc:818
 #, c-format
@@ -1286,7 +1284,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1490
 #, c-format
 msgid "player message: %s"
-msgstr ""
+msgstr "jokalariaren mezua: %s"
 
 #: ../../src/logic/production_program.cc:87
 #, c-format
@@ -1322,7 +1320,7 @@ msgstr "ez "
 #: ../../src/logic/production_program.cc:171
 #: ../../src/logic/production_program.cc:192
 msgid "economy needs "
-msgstr ""
+msgstr "ekonomia beharrak "
 
 #: ../../src/logic/production_program.cc:221
 msgid "site has "
@@ -1330,7 +1328,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:247
 msgid "workers need experience"
-msgstr ""
+msgstr "langileek esperientzia behar dute"
 
 #: ../../src/logic/production_program.cc:272
 msgid "ware type or worker type"
@@ -1339,7 +1337,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "invalid condition: %s"
-msgstr ""
+msgstr "invalid condition: %s"
 
 #: ../../src/logic/production_program.cc:350
 #, c-format
@@ -1365,7 +1363,7 @@ msgstr "huts egin du"
 
 #: ../../src/logic/production_program.cc:412
 msgid "completed"
-msgstr ""
+msgstr "osatuta"
 
 #: ../../src/logic/production_program.cc:412
 msgid "skipped"
@@ -1437,7 +1435,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
-msgstr ""
+msgstr "Ez da parametrorik eman!"
 
 #: ../../src/logic/production_program.cc:702
 msgid "idle animation is default; calling is not allowed"
@@ -1450,8 +1448,8 @@ msgstr ""
 #: ../../src/logic/production_program.cc:828
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " ez da aurkitzen"
+msgstr[1] " ez dira aurkitzen"
 
 #: ../../src/logic/production_program.cc:890
 #: ../../src/logic/production_program.cc:985
@@ -1465,12 +1463,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1010
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:924
 #: ../../src/logic/production_program.cc:1017
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:927
 #, c-format
@@ -1483,7 +1481,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:1049
 msgid "distance"
-msgstr ""
+msgstr "distantzia"
 
 #: ../../src/logic/production_program.cc:1060
 #: ../../src/logic/production_program.cc:1071
@@ -1518,7 +1516,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1247
 #: ../../src/logic/production_program.cc:1319
 msgid "level"
-msgstr ""
+msgstr "maila"
 
 #: ../../src/logic/production_program.cc:1266
 #: ../../src/logic/production_program.cc:1353
@@ -1547,8 +1545,8 @@ msgstr ""
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Langilea falta da"
+msgstr[1] "Langileak falta dira"
 
 #: ../../src/logic/productionsite.cc:259
 msgid "(stopped)"
@@ -1582,7 +1580,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1253
 #, c-format
 msgid "bad direction '%d'"
-msgstr ""
+msgstr "norabide okerra '%d'"
 
 #: ../../src/logic/soldier.cc:1430
 #, c-format
@@ -1600,11 +1598,11 @@ msgstr "ez"
 
 #: ../../src/logic/soldier.cc:1453 ../../src/logic/soldier.cc:1461
 msgid "Logic error"
-msgstr ""
+msgstr "Errore logikoa"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
-msgstr ""
+msgstr "Atseden hartzen"
 
 #: ../../src/logic/trainingsite.cc:175
 msgid "Not Working"
@@ -1621,7 +1619,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:260 ../../src/logic/tribe.cc:281
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" bikoiztuta dago"
 
 #: ../../src/logic/tribe.cc:269 ../../src/logic/tribe.cc:290
 msgid "none found"
@@ -1670,10 +1668,12 @@ msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
+"Eraikin honetako langileak ezin dezake hurrengo motako baliabide gehiago "
+"aurkitu: "
 
 #: ../../src/logic/worker.cc:944
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Geologo batek baliabideak aurkitu ditu."
 
 #: ../../src/logic/worker.cc:1835
 #, c-format
@@ -1682,7 +1682,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:1842
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Langile bat galdu da!"
 
 #: ../../src/logic/worker.cc:3037
 #, c-format
@@ -1697,12 +1697,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
 msgid "allowed buildings: %s"
-msgstr ""
+msgstr "baimendutako eraikinak: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr ""
+msgstr "baimendutako langile motak: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
@@ -1762,7 +1762,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_building_data_packet.cc:109
 #, c-format
 msgid "buildings: %s"
-msgstr ""
+msgstr "eraikinak: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:225
 #, c-format
@@ -1800,7 +1800,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:667
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "biltegia: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:748
 #, c-format
@@ -1845,7 +1845,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "bandera bat du (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
@@ -1855,17 +1855,17 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "banderak: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr ""
+msgstr "bandera okerra (%u) emandako kokapenean (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "ez dago banderarik emandako kokapenean (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
@@ -1881,7 +1881,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
@@ -1891,7 +1891,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "altuerak: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:85
 msgid "Invalid World"
@@ -1920,12 +1920,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Helburuak: %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
@@ -1971,7 +1971,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:150
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:155
 #, c-format
@@ -1991,7 +1991,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "errepidea: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:129
 msgid "no carrier slot"
@@ -2007,7 +2007,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:202
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "errepidea %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:209
 #, c-format
@@ -2031,87 +2031,87 @@ msgstr ""
 msgid "item %u: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:99
+#: ../../src/network/internet_gaming.cc:108
 #: ../../src/ui_fsmenu/internet_lobby.cc:407
 msgid "Connection problem"
 msgstr "Konexio-arazoa"
 
-#: ../../src/network/internet_gaming.cc:99
+#: ../../src/network/internet_gaming.cc:108
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "Widelands ez da gai izan metazerbitzarira konektatzeko."
 
-#: ../../src/network/internet_gaming.cc:105 ../../src/network/netclient.cc:103
+#: ../../src/network/internet_gaming.cc:114 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:107
+#: ../../src/network/internet_gaming.cc:116
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:151
+#: ../../src/network/internet_gaming.cc:163
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:269
+#: ../../src/network/internet_gaming.cc:294
 msgid "Something went wrong: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:347
+#: ../../src/network/internet_gaming.cc:384
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:354
+#: ../../src/network/internet_gaming.cc:391
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:354
+#: ../../src/network/internet_gaming.cc:391
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:366
+#: ../../src/network/internet_gaming.cc:403
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:379
+#: ../../src/network/internet_gaming.cc:416
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:388
+#: ../../src/network/internet_gaming.cc:425
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:483
+#: ../../src/network/internet_gaming.cc:522
 msgid "ERROR: "
-msgstr ""
+msgstr "ERROREA: "
 
-#: ../../src/network/internet_gaming.cc:487
+#: ../../src/network/internet_gaming.cc:526
 msgid "Chat message could not be sent. "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:508
+#: ../../src/network/internet_gaming.cc:547
 msgid "Received an unknown command from the metaserver: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:640
+#: ../../src/network/internet_gaming.cc:679
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "Mezua ezin izan da bidali: Ez zaude metazerbitzarira konektatuta!"
 
-#: ../../src/network/internet_gaming.cc:652
+#: ../../src/network/internet_gaming.cc:691
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:725
+#: ../../src/network/internet_gaming.cc:764
 msgid "<unknown>"
-msgstr ""
+msgstr "<ezezaguna>"
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -2119,9 +2119,9 @@ msgid "No user with the name %s is logged in!"
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:43
-#: ../../src/network/nethost.cc:1224
+#: ../../src/network/nethost.cc:1230
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Bidalitako pasahitza okerra zen!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
@@ -2147,11 +2147,11 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "Metazerbitzariarekin konexioa galdu da."
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "Metazerbitzariak ez du erantzuten"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
@@ -2231,7 +2231,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:401 ../../src/network/nethost.cc:427
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "%s bezeroa ezin izan da aurkitu."
 
 #: ../../src/network/nethost.cc:412
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -2284,86 +2284,88 @@ msgstr ""
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
 
-#: ../../src/network/nethost.cc:700
+#: ../../src/network/nethost.cc:704
 #, c-format
 msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1166
+#: ../../src/network/nethost.cc:1171
 msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1173
+#: ../../src/network/nethost.cc:1178
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1178
+#: ../../src/network/nethost.cc:1183
 msgid "pwd          $ - Sends the password $ to the host"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1185
+#: ../../src/network/nethost.cc:1190
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1190
+#: ../../src/network/nethost.cc:1195
 #, c-format
 msgid "%s told me to run the command: \"%s\""
 msgstr ""
 
-#: ../../src/network/nethost.cc:1199
+#: ../../src/network/nethost.cc:1204
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1202
+#: ../../src/network/nethost.cc:1207
 msgid "Can not save, as long as no game is running!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1213
+#: ../../src/network/nethost.cc:1218
 msgid "Game successfully saved!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1215
+#: ../../src/network/nethost.cc:1220
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1221
+#: ../../src/network/nethost.cc:1227
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Zerbitzari hau ez dago pasahitzez babestua!"
 
-#: ../../src/network/nethost.cc:1237
+#: ../../src/network/nethost.cc:1243
 msgid "The password was correct, access was granted!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1243
+#: ../../src/network/nethost.cc:1249
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1927
+#: ../../src/network/nethost.cc:1935
 #, c-format
 msgid "Computer%u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2091
+#: ../../src/network/nethost.cc:2099
 #, c-format
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
+"Zerbitzari hau pasahitzez babestua dago. Pasahitza bidali dezakezu horrela: "
+"\"@%s pwd PASAHITZA\""
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client has left the game."
-msgstr ""
+msgstr "Bezeroak jokoa utzi du."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Client crashed and performed an emergency save."
@@ -2371,11 +2373,11 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Connection was lost."
-msgstr ""
+msgstr "Konexioa galdu da."
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "Server has left the game."
-msgstr ""
+msgstr "Zerbitzariak jokoa utzi du."
 
 #: ../../src/network/network_gaming_messages.cc:127
 msgid "The game has started just after you tried to connect."
@@ -2411,12 +2413,12 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "%s-k jokoa utzi du (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Jokalari ezezagunak joka utzi du (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Server sent a SYNCREQUEST even though no game is running."
@@ -2461,7 +2463,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "The game has already started."
-msgstr ""
+msgstr "Joko hau jadanik hasi da."
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client has no access to other player's settings."
@@ -2533,6 +2535,18 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:163
+#, c-format
+msgid "Client %s did not answer for more than %s seconds."
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:165
+#, c-format
+msgid ""
+"Client %s will automatically be kicked, if no answer is received within %s "
+"seconds."
 msgstr ""
 
 #: ../../src/scripting/lua_game.cc:439 ../../src/ui_basic/helpwindow.cc:83
@@ -3674,6 +3688,16 @@ msgstr ""
 msgid "Debug Field"
 msgstr ""
 
+#: ../../src/wui/game_debug_ui.cc:373
+#, c-format
+msgid "Resource name: %s\n"
+msgstr ""
+
+#: ../../src/wui/game_debug_ui.cc:379
+#, c-format
+msgid "Resource amount: %i/%i\n"
+msgstr ""
+
 #: ../../src/wui/game_main_menu.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
 msgid "Main Menu"
@@ -4207,23 +4231,23 @@ msgstr ""
 msgid "Workers in dock"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:173
+#: ../../src/wui/waresqueuedisplay.cc:182
 msgid "Highest priority"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:181
+#: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Normal priority"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:189
+#: ../../src/wui/waresqueuedisplay.cc:198
 msgid "Lowest priority"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:231
+#: ../../src/wui/waresqueuedisplay.cc:243
 msgid "Decrease the number of wares you want to be stored here."
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:241
+#: ../../src/wui/waresqueuedisplay.cc:253
 msgid "Increase the number of wares you want to be stored here."
 msgstr ""
 
@@ -4700,3 +4724,10 @@ msgstr ""
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr ""
+
+#~ msgid ""
+#~ "Waited 5 seconds to close audio. problems here so killing widelands. update "
+#~ "your sound driver and/or SDL to fix this problem\n"
+#~ msgstr ""
+#~ "Itxaronda 5 segundu audioa ixteko. Arazoak daudenez Widelands itxiko da. "
+#~ "Eguneratu zure soinu kontrolagailuak edota SDL arazo hau konpontzeko.\n"

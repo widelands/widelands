@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-26 10:30+0200\n"
+"POT-Creation-Date: 2012-04-28 23:17+0200\n"
 "PO-Revision-Date: 2012-03-31 21:12+0000\n"
 "Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-04-01 04:33+0000\n"
-"X-Generator: Launchpad (build 15032)\n"
+"X-Launchpad-Export-Date: 2012-04-29 04:37+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -37,11 +37,9 @@ msgstr "Nelze nalézt cestu k hlavnímu příkazu"
 
 #: ../../src/wlapplication.cc:1037
 msgid ""
-"Waited 5 seconds to close audio. problems here so killing widelands. update "
+"Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"Po 5 vteřinách vypnut zvuk. Tyto problémy shazují widelands. Aktualizujte "
-"váš zvukový ovladač a/nebo SDL pro vyřešení tohoto problému.\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -332,12 +330,12 @@ msgstr ""
 msgid "The address of the game server is invalid"
 msgstr "Adresa herního serveru není platná"
 
-#: ../../src/wlapplication.cc:1797 ../../src/network/nethost.cc:1995
+#: ../../src/wlapplication.cc:1797 ../../src/network/nethost.cc:2003
 msgid "Player"
 msgstr "Hráč"
 
 #: ../../src/wlapplication.cc:1986 ../../src/network/netclient.cc:198
-#: ../../src/network/nethost.cc:806
+#: ../../src/network/nethost.cc:811
 msgid "Preparing game"
 msgstr "Připravuji hru"
 
@@ -637,7 +635,7 @@ msgid "Ware types"
 msgstr "Typy zboží"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
-#: ../../src/economy/fleet.cc:739 ../../src/economy/portdock.cc:441
+#: ../../src/economy/fleet.cc:746 ../../src/economy/portdock.cc:441
 #: ../../src/economy/request.cc:243 ../../src/economy/wares_queue.cc:289
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:85
 #: ../../src/game_io/game_game_class_data_packet.cc:44
@@ -722,7 +720,7 @@ msgstr "neznámá verze %u"
 msgid "economy: %s"
 msgstr "ekonomika: %s"
 
-#: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
+#: ../../src/economy/fleet.cc:748 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
 msgstr "nahrávání přístavu: %s"
@@ -2160,20 +2158,20 @@ msgstr "data zboží: %s"
 msgid "item %u: %s"
 msgstr "zboží %u: %s"
 
-#: ../../src/network/internet_gaming.cc:99
+#: ../../src/network/internet_gaming.cc:108
 #: ../../src/ui_fsmenu/internet_lobby.cc:407
 msgid "Connection problem"
 msgstr "Problém při připojení"
 
-#: ../../src/network/internet_gaming.cc:99
+#: ../../src/network/internet_gaming.cc:108
 msgid "Widelands has not been able to connect to the metaserver."
 msgstr "Widelands se nepodařilo připojit k metaserveru."
 
-#: ../../src/network/internet_gaming.cc:105 ../../src/network/netclient.cc:103
+#: ../../src/network/internet_gaming.cc:114 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
 msgstr "Nepodařilo se navázat spojení s hostitelem"
 
-#: ../../src/network/internet_gaming.cc:107
+#: ../../src/network/internet_gaming.cc:116
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
@@ -2183,27 +2181,27 @@ msgstr ""
 "Buď na udaném portu neběží žádný metaserver \n"
 "nebo máš chybné síťové nastavení."
 
-#: ../../src/network/internet_gaming.cc:151
+#: ../../src/network/internet_gaming.cc:163
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr "Pro hostování hry se prosím podívej na poznámky na:"
 
-#: ../../src/network/internet_gaming.cc:269
+#: ../../src/network/internet_gaming.cc:294
 msgid "Something went wrong: "
 msgstr "Něco se pokazilo: "
 
-#: ../../src/network/internet_gaming.cc:347
+#: ../../src/network/internet_gaming.cc:384
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Úspěšné znovupřipojení k metaserveru!"
 
-#: ../../src/network/internet_gaming.cc:354
+#: ../../src/network/internet_gaming.cc:391
 msgid "Mixed up"
 msgstr "Zmatené"
 
-#: ../../src/network/internet_gaming.cc:354
+#: ../../src/network/internet_gaming.cc:391
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Metaserver poslal během připojení podivnou CHYBU"
 
-#: ../../src/network/internet_gaming.cc:366
+#: ../../src/network/internet_gaming.cc:403
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
@@ -2212,39 +2210,39 @@ msgstr ""
 "Očekávám od serveru paket LOGIN, RELOGIN nebo REJECTED, ale přišel příkaz "
 "%s. Možná metaserver používá jinou verzi protokolu?"
 
-#: ../../src/network/internet_gaming.cc:379
+#: ../../src/network/internet_gaming.cc:416
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 "UOPZORNĚNÍ: byl přijatý příkaz %s přestože nejsme ve stavu CONNECTING."
 
-#: ../../src/network/internet_gaming.cc:388
+#: ../../src/network/internet_gaming.cc:425
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr "Časový offset serveru je %i sekund."
 
-#: ../../src/network/internet_gaming.cc:483
+#: ../../src/network/internet_gaming.cc:522
 msgid "ERROR: "
 msgstr "CHYBA: "
 
-#: ../../src/network/internet_gaming.cc:487
+#: ../../src/network/internet_gaming.cc:526
 msgid "Chat message could not be sent. "
 msgstr "Zpráva chatu nemohla být odeslána. "
 
-#: ../../src/network/internet_gaming.cc:508
+#: ../../src/network/internet_gaming.cc:547
 msgid "Received an unknown command from the metaserver: "
 msgstr "Byl přijat neznámý příkaz od metaserveru: "
 
-#: ../../src/network/internet_gaming.cc:640
+#: ../../src/network/internet_gaming.cc:679
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Zpráva nemohla být odeslána: Nejsi připojen k metaserveru!"
 
-#: ../../src/network/internet_gaming.cc:652
+#: ../../src/network/internet_gaming.cc:691
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Zpráva nemohla být odeslána: Měla to být privátní zpráva?"
 
-#: ../../src/network/internet_gaming.cc:725
+#: ../../src/network/internet_gaming.cc:764
 msgid "<unknown>"
 msgstr "<neznámý>"
 
@@ -2254,7 +2252,7 @@ msgid "No user with the name %s is logged in!"
 msgstr "Uživatel jménem %s není přihlášen!"
 
 #: ../../src/network/internet_gaming_messages.cc:43
-#: ../../src/network/nethost.cc:1224
+#: ../../src/network/nethost.cc:1230
 msgid "The sent password was incorrect!"
 msgstr "Odeslané heslo je chybné!"
 
@@ -2440,7 +2438,7 @@ msgstr "Není zde vynucené pozastavení - není co ukončit."
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Neplatný příkaz! Použij /help pro seznam příkazů."
 
-#: ../../src/network/nethost.cc:700
+#: ../../src/network/nethost.cc:704
 #, c-format
 msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
@@ -2449,7 +2447,7 @@ msgstr ""
 "Toto je dedikovaný server pošli \"@%s help\" pro celý seznam dostupných "
 "příkazů."
 
-#: ../../src/network/nethost.cc:1166
+#: ../../src/network/nethost.cc:1171
 msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $<br>save $ - Saves the current game state as "
@@ -2459,7 +2457,7 @@ msgstr ""
 "$ - zkusí spustit hostitelský příkaz $<br>save $ - uloží stav probíhající "
 "hry jako $.wgf"
 
-#: ../../src/network/nethost.cc:1173
+#: ../../src/network/nethost.cc:1178
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
@@ -2467,11 +2465,11 @@ msgstr ""
 "<br>Dostupné příkazy hostitele jsou:<br>help           - zobrazí tento "
 "help<br>host         $ - zkusí spustit hostitelský příkaz $"
 
-#: ../../src/network/nethost.cc:1178
+#: ../../src/network/nethost.cc:1183
 msgid "pwd          $ - Sends the password $ to the host"
 msgstr "pwd          $ - odešle hostiteli heslo $"
 
-#: ../../src/network/nethost.cc:1185
+#: ../../src/network/nethost.cc:1190
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
@@ -2479,47 +2477,47 @@ msgstr ""
 "Přístup k hostitelským příkazům byl odepřen. K získání přístupu pošli pomocí "
 "příkazu pwd heslo."
 
-#: ../../src/network/nethost.cc:1190
+#: ../../src/network/nethost.cc:1195
 #, c-format
 msgid "%s told me to run the command: \"%s\""
 msgstr "%s mi přikázal provedení příkazu: \"%s\""
 
-#: ../../src/network/nethost.cc:1199
+#: ../../src/network/nethost.cc:1204
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr "Sorry! Ukládání bylo na tomto dedikovaném serveru deaktivováno!"
 
-#: ../../src/network/nethost.cc:1202
+#: ../../src/network/nethost.cc:1207
 msgid "Can not save, as long as no game is running!"
 msgstr "Nemůžu nic uložit, protože neběží žádná hra!"
 
-#: ../../src/network/nethost.cc:1213
+#: ../../src/network/nethost.cc:1218
 msgid "Game successfully saved!"
 msgstr "Hra úspěšně uložena!"
 
-#: ../../src/network/nethost.cc:1215
+#: ../../src/network/nethost.cc:1220
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
 msgstr "Nepodařilo se uložit hru do souboru \"%s\"! (%s)"
 
-#: ../../src/network/nethost.cc:1221
+#: ../../src/network/nethost.cc:1227
 msgid "This server is not password protected!"
 msgstr "Tento server není chráněný heslem!"
 
-#: ../../src/network/nethost.cc:1237
+#: ../../src/network/nethost.cc:1243
 msgid "The password was correct, access was granted!"
 msgstr "Heslo je správné, přístup byl povolen!"
 
-#: ../../src/network/nethost.cc:1243
+#: ../../src/network/nethost.cc:1249
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr "Neznámý příkaz \"%s\"! pro dedikovaný server!"
 
-#: ../../src/network/nethost.cc:1927
+#: ../../src/network/nethost.cc:1935
 #, c-format
 msgid "Computer%u"
 msgstr "Počítač%u"
 
-#: ../../src/network/nethost.cc:2091
+#: ../../src/network/nethost.cc:2099
 #, c-format
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
@@ -2701,6 +2699,18 @@ msgstr "Odesílám část %s souboru %s pro %s"
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
 msgstr "Hráč \"%s\" byl poražen a pokračuje jako divák."
+
+#: ../../src/network/network_gaming_messages.cc:163
+#, c-format
+msgid "Client %s did not answer for more than %s seconds."
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:165
+#, c-format
+msgid ""
+"Client %s will automatically be kicked, if no answer is received within %s "
+"seconds."
+msgstr ""
 
 #: ../../src/scripting/lua_game.cc:439 ../../src/ui_basic/helpwindow.cc:83
 #: ../../src/ui_basic/messagebox.cc:90
@@ -3887,6 +3897,16 @@ msgstr "Chat menu"
 msgid "Debug Field"
 msgstr "Ladicí políčko"
 
+#: ../../src/wui/game_debug_ui.cc:373
+#, c-format
+msgid "Resource name: %s\n"
+msgstr ""
+
+#: ../../src/wui/game_debug_ui.cc:379
+#, c-format
+msgid "Resource amount: %i/%i\n"
+msgstr ""
+
 #: ../../src/wui/game_main_menu.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
 msgid "Main Menu"
@@ -4425,23 +4445,23 @@ msgstr "Zboží v přístavu"
 msgid "Workers in dock"
 msgstr "Pracovníci v přístavu"
 
-#: ../../src/wui/waresqueuedisplay.cc:173
+#: ../../src/wui/waresqueuedisplay.cc:182
 msgid "Highest priority"
 msgstr "Nejvyšší priorita"
 
-#: ../../src/wui/waresqueuedisplay.cc:181
+#: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Normal priority"
 msgstr "Normální priorita"
 
-#: ../../src/wui/waresqueuedisplay.cc:189
+#: ../../src/wui/waresqueuedisplay.cc:198
 msgid "Lowest priority"
 msgstr "Nejnižší priorita"
 
-#: ../../src/wui/waresqueuedisplay.cc:231
+#: ../../src/wui/waresqueuedisplay.cc:243
 msgid "Decrease the number of wares you want to be stored here."
 msgstr "Snížit počet zboží, které zde chceš uskladnit"
 
-#: ../../src/wui/waresqueuedisplay.cc:241
+#: ../../src/wui/waresqueuedisplay.cc:253
 msgid "Increase the number of wares you want to be stored here."
 msgstr "Zvýšit počet zboží, které zde chceš uskladnit"
 

@@ -7,31 +7,49 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"POT-Creation-Date: 2012-04-28 21:17+0000\n"
 "PO-Revision-Date: 2011-10-04 18:46+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:41+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-29 04:40+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:23
-msgid "%s and %s have established a smuggling route!"
-msgstr "%s i %s utworzyli szlak przemytniczy!"
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:29
+msgid ""
+"A new smuggling route from %s to %s has been established!. Every ware "
+"smuggled here\n"
+"is worth %i points."
+msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:37
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
+msgid "A receiving spot"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:16
+msgid "A sending spot"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:48
 msgid "Game Status"
 msgstr "Stan Gry"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:32
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:39
 msgid ""
 "Game over! %s and %s have won the game! %s and %s only managed to\n"
-"smuggle %i wares."
+"acquire %i points."
 msgstr ""
-"Koniec gry! Wygrali %s i %s! %s i %s zdołali przeszmuglować jedynie\n"
-" %i towarów."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:20
+msgid ""
+"Remember that the map has rotational symmetry: When you have found a spot to "
+"the top-left\n"
+"of your headquarters, the corresponding spot will be to the bottom-right of "
+"the headquarters\n"
+"of your team mate."
+msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Rules"
@@ -44,40 +62,28 @@ msgstr "Przemytnicy"
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid ""
 "Smugglers is a Fun map for 4 players. You and your partner start diagonally\n"
-"to each other on a X-shaped island. Each player has a point in the\n"
-"center of the map where he should place a warehouse. If both players in a\n"
-"team succeed to build their warehouse in the right spot a smuggling route\n"
-"is established: all wares from the top player that are delivered to his\n"
-"warehouse are warped to the bottom player's warehouse. The aim of the game "
-"is to\n"
-"smuggle %i items from top to bottom."
+"to each other on a point symmetric island. There are plenty of smuggling "
+"tunnels\n"
+"on this island each consisting of a receiving and a sending end. To "
+"establish a smuggling\n"
+"route you need to build a warehouse on a sending/receiving spot while your "
+"team\n"
+"mate has to build one on the corresponding receiving/sending spot. A ware is "
+"then transported\n"
+"each 10 seconds. For harder to defend smuggling routes you get points for "
+"smuggling:\n"
+"2 or 3 per ware. The first team to have %i points wins."
 msgstr ""
-"Przemytnicy to mapa dla 4 graczy. Ty i twój sojusznik rozpoczynacie grę\n"
-"po dwóch stronach przekątnej wyspy w kształcie \"X\". Każdy gracz\n"
-"ma wyznaczony punkt w środku wyspy, w którym ma zbudować\n"
-"magazyn. Jeśli obaj gracze w drużynie zdołają zbudować swoje magazyny,\n"
-"utworzony zostaje szlak przemytniczy: wszystkie towary górnego gracza\n"
-"przenoszone są do magazynu dolnego gracza. Celem gry jest\n"
-"przeszmuglowanie %i sztuk towarów na południe wyspy."
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
-msgid ""
-"The other team has the same goal and will try to interrupt your smuggling\n"
-"routes by burning down your warehouses. You will pay them back in their own\n"
-"coin of course!"
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:33
+msgid "The smuggling route worth %i from %s to %s has been broken!"
 msgstr ""
-"Przeciwnicy mają ten sam cel i będą próbowali ci przeszkodzić i zerwać\n"
-"twój szlak niszcząc twoje magazyny. Oczywiście nie pozostaniesz im dłużny!"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:26
-msgid "The smuggling route of %s and %s has been broken!"
-msgstr "Szlak przemytniczy %s i %s został zerwany!"
-
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:124
 msgid "Wares smuggled"
 msgstr "Przeszmuglowane towary"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:24
 msgid ""
 "You can see the number of wares traded at any time in the general\n"
 "statistics menu. Good luck!"

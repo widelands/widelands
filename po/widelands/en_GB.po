@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-04-15 15:11+0000\n"
-"Last-Translator: Hans Joachim Desserud <Unknown>\n"
+"POT-Creation-Date: 2012-04-28 23:17+0200\n"
+"PO-Revision-Date: 2012-04-29 00:07+0000\n"
+"Last-Translator: David Allwicher <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-04-16 04:36+0000\n"
-"X-Generator: Launchpad (build 15099)\n"
+"X-Launchpad-Export-Date: 2012-04-29 04:39+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -36,11 +36,9 @@ msgstr "could not find the path of the main executable"
 
 #: ../../src/wlapplication.cc:1037
 msgid ""
-"Waited 5 seconds to close audio. problems here so killing widelands. update "
+"Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"Waited 5 seconds to close audio. problems here so killing widelands. update "
-"your sound driver and/or SDL to fix this problem\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -310,12 +308,12 @@ msgstr ""
 msgid "The address of the game server is invalid"
 msgstr "The address of the game server is invalid"
 
-#: ../../src/wlapplication.cc:1797 ../../src/network/nethost.cc:1995
+#: ../../src/wlapplication.cc:1797 ../../src/network/nethost.cc:2003
 msgid "Player"
 msgstr "Player"
 
 #: ../../src/wlapplication.cc:1986 ../../src/network/netclient.cc:198
-#: ../../src/network/nethost.cc:806
+#: ../../src/network/nethost.cc:811
 msgid "Preparing game"
 msgstr "Preparing game"
 
@@ -614,7 +612,7 @@ msgid "Ware types"
 msgstr "Ware types"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
-#: ../../src/economy/fleet.cc:739 ../../src/economy/portdock.cc:441
+#: ../../src/economy/fleet.cc:746 ../../src/economy/portdock.cc:441
 #: ../../src/economy/request.cc:243 ../../src/economy/wares_queue.cc:289
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:85
 #: ../../src/game_io/game_game_class_data_packet.cc:44
@@ -699,7 +697,7 @@ msgstr "unknown version %u"
 msgid "economy: %s"
 msgstr "economy: %s"
 
-#: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
+#: ../../src/economy/fleet.cc:748 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
 msgstr "loading portdock: %s"
@@ -2126,85 +2124,85 @@ msgstr "ware data: %s"
 msgid "item %u: %s"
 msgstr "item %u: %s"
 
-#: ../../src/network/internet_gaming.cc:99
+#: ../../src/network/internet_gaming.cc:108
 #: ../../src/ui_fsmenu/internet_lobby.cc:407
 msgid "Connection problem"
 msgstr "Connection problem"
 
-#: ../../src/network/internet_gaming.cc:99
+#: ../../src/network/internet_gaming.cc:108
 msgid "Widelands has not been able to connect to the metaserver."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:105 ../../src/network/netclient.cc:103
+#: ../../src/network/internet_gaming.cc:114 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
 msgstr "Could not establish connection to host"
 
-#: ../../src/network/internet_gaming.cc:107
+#: ../../src/network/internet_gaming.cc:116
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:151
+#: ../../src/network/internet_gaming.cc:163
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:269
+#: ../../src/network/internet_gaming.cc:294
 msgid "Something went wrong: "
 msgstr "Something went wrong: "
 
-#: ../../src/network/internet_gaming.cc:347
+#: ../../src/network/internet_gaming.cc:384
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:354
+#: ../../src/network/internet_gaming.cc:391
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:354
+#: ../../src/network/internet_gaming.cc:391
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:366
+#: ../../src/network/internet_gaming.cc:403
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:379
+#: ../../src/network/internet_gaming.cc:416
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:388
+#: ../../src/network/internet_gaming.cc:425
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:483
+#: ../../src/network/internet_gaming.cc:522
 msgid "ERROR: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:487
+#: ../../src/network/internet_gaming.cc:526
 msgid "Chat message could not be sent. "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:508
+#: ../../src/network/internet_gaming.cc:547
 msgid "Received an unknown command from the metaserver: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:640
+#: ../../src/network/internet_gaming.cc:679
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:652
+#: ../../src/network/internet_gaming.cc:691
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:725
+#: ../../src/network/internet_gaming.cc:764
 msgid "<unknown>"
 msgstr ""
 
@@ -2214,7 +2212,7 @@ msgid "No user with the name %s is logged in!"
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:43
-#: ../../src/network/nethost.cc:1224
+#: ../../src/network/nethost.cc:1230
 msgid "The sent password was incorrect!"
 msgstr ""
 
@@ -2388,77 +2386,77 @@ msgstr "There is no forced pause - nothing to end."
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Invalid command! Type /help for a list of commands."
 
-#: ../../src/network/nethost.cc:700
+#: ../../src/network/nethost.cc:704
 #, c-format
 msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1166
+#: ../../src/network/nethost.cc:1171
 msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1173
+#: ../../src/network/nethost.cc:1178
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1178
+#: ../../src/network/nethost.cc:1183
 msgid "pwd          $ - Sends the password $ to the host"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1185
+#: ../../src/network/nethost.cc:1190
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1190
+#: ../../src/network/nethost.cc:1195
 #, c-format
 msgid "%s told me to run the command: \"%s\""
 msgstr ""
 
-#: ../../src/network/nethost.cc:1199
+#: ../../src/network/nethost.cc:1204
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1202
+#: ../../src/network/nethost.cc:1207
 msgid "Can not save, as long as no game is running!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1213
+#: ../../src/network/nethost.cc:1218
 msgid "Game successfully saved!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1215
+#: ../../src/network/nethost.cc:1220
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1221
+#: ../../src/network/nethost.cc:1227
 msgid "This server is not password protected!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1237
+#: ../../src/network/nethost.cc:1243
 msgid "The password was correct, access was granted!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1243
+#: ../../src/network/nethost.cc:1249
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr "Unknown dedicated server command \"%s\"!"
 
-#: ../../src/network/nethost.cc:1927
+#: ../../src/network/nethost.cc:1935
 #, c-format
 msgid "Computer%u"
 msgstr "Computer%u"
 
-#: ../../src/network/nethost.cc:2091
+#: ../../src/network/nethost.cc:2099
 #, c-format
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
@@ -2637,6 +2635,18 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:163
+#, c-format
+msgid "Client %s did not answer for more than %s seconds."
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:165
+#, c-format
+msgid ""
+"Client %s will automatically be kicked, if no answer is received within %s "
+"seconds."
 msgstr ""
 
 #: ../../src/scripting/lua_game.cc:439 ../../src/ui_basic/helpwindow.cc:83
@@ -3782,6 +3792,16 @@ msgstr "Chat Menu"
 msgid "Debug Field"
 msgstr "Debug Field"
 
+#: ../../src/wui/game_debug_ui.cc:373
+#, c-format
+msgid "Resource name: %s\n"
+msgstr ""
+
+#: ../../src/wui/game_debug_ui.cc:379
+#, c-format
+msgid "Resource amount: %i/%i\n"
+msgstr ""
+
 #: ../../src/wui/game_main_menu.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
 msgid "Main Menu"
@@ -4319,23 +4339,23 @@ msgstr ""
 msgid "Workers in dock"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:173
+#: ../../src/wui/waresqueuedisplay.cc:182
 msgid "Highest priority"
 msgstr "Highest priority"
 
-#: ../../src/wui/waresqueuedisplay.cc:181
+#: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Normal priority"
 msgstr "Normal priority"
 
-#: ../../src/wui/waresqueuedisplay.cc:189
+#: ../../src/wui/waresqueuedisplay.cc:198
 msgid "Lowest priority"
 msgstr "Lowest priority"
 
-#: ../../src/wui/waresqueuedisplay.cc:231
+#: ../../src/wui/waresqueuedisplay.cc:243
 msgid "Decrease the number of wares you want to be stored here."
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:241
+#: ../../src/wui/waresqueuedisplay.cc:253
 msgid "Increase the number of wares you want to be stored here."
 msgstr ""
 
@@ -4845,3 +4865,10 @@ msgstr "no description defined"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "no descr"
+
+#~ msgid ""
+#~ "Waited 5 seconds to close audio. problems here so killing widelands. update "
+#~ "your sound driver and/or SDL to fix this problem\n"
+#~ msgstr ""
+#~ "Waited 5 seconds to close audio. problems here so killing widelands. update "
+#~ "your sound driver and/or SDL to fix this problem\n"

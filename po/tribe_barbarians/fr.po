@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-04-14 22:21+0000\n"
-"Last-Translator: Emmanuel Andry <Unknown>\n"
+"POT-Creation-Date: 2012-04-28 21:17+0000\n"
+"PO-Revision-Date: 2012-04-29 00:06+0000\n"
+"Last-Translator: David Allwicher <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-15 04:35+0000\n"
-"X-Generator: Launchpad (build 15070)\n"
+"X-Launchpad-Export-Date: 2012-04-29 04:35+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -2439,13 +2439,10 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
-msgid "Source needed"
-msgstr "Source nécessaire"
-
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
-msgid "Source needed."
-msgstr "Source nécessaire."
+msgid "Source needed"
+msgstr "Source nécessaire"
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -2504,12 +2501,9 @@ msgstr "Taverne"
 #: ../../tribes/barbarians/bakery/help.lua:12
 #: ../../tribes/barbarians/cattlefarm/help.lua:12
 #: ../../tribes/barbarians/farm/help.lua:12
+#: ../../tribes/barbarians/quarry/help.lua:12
 msgid "Text needed"
 msgstr "Texte nécessaire"
-
-#: ../../tribes/barbarians/quarry/help.lua:12
-msgid "Text needed."
-msgstr "Texte nécessaire."
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
 #: ../../tribes/barbarians/axefactory/help.lua:42
@@ -3623,3 +3617,9 @@ msgstr "chaque objet"
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
 msgstr "n/d"
+
+#~ msgid "Source needed."
+#~ msgstr "Source nécessaire."
+
+#~ msgid "Text needed."
+#~ msgstr "Texte nécessaire."
