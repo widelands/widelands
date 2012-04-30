@@ -47,6 +47,7 @@
 static const char pic_tab_production[] = "pics/menu_tab_wares_production.png";
 static const char pic_tab_consumption[] = "pics/menu_tab_wares_consumption.png";
 static const char pic_tab_economy[] = "pics/menu_tab_wares_econ_health.png";
+static const char pic_tab_stock[] = "pics/menu_tab_wares_econ_health.png"; //TODO replace place holder
 
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive
@@ -203,6 +204,16 @@ m_parent(&parent)
 		("economy_health", g_gr->get_picture(PicMod_UI, pic_tab_economy),
 			m_plot_economy, _("Economy Health"));
 
+	m_plot_stock = new WUIPlot_Area
+			(tabs,
+			 0, 0, plot_width, plot_height);
+	m_plot_stock->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot_stock->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+
+	tabs->add
+		("stock", g_gr->get_picture(PicMod_UI, pic_tab_stock),
+			m_plot_stock, _("Stock"));
+
 	tabs->activate(0);
 
 	//add tabbed environment to box
@@ -232,6 +243,12 @@ m_parent(&parent)
 			(cur_ware,
 				parent.get_player()->get_ware_consumption_statistics
 				(Widelands::Ware_Index(cur_ware)));
+
+		m_plot_stock->register_plot_data
+			(cur_ware,
+				parent.get_player()->get_ware_stock_statistics
+				(Widelands::Ware_Index(cur_ware)),
+				colors[cur_ware]);
 	}
 
 	box->add
@@ -273,6 +290,7 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
 		m_plot_production->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		m_plot_consumption->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		m_plot_economy->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
+		m_plot_stock->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 
 	} else { //deactivate ware
 		uint8_t old_color = m_color_map[static_cast<size_t>(id)];
@@ -285,6 +303,7 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
 	m_plot_production->show_plot(static_cast<size_t>(id), what);
 	m_plot_consumption->show_plot(static_cast<size_t>(id), what);
 	m_plot_economy->show_plot(static_cast<size_t>(id), what);
+	m_plot_stock->show_plot(static_cast<size_t>(id), what);
 }
 
 /**
@@ -295,5 +314,6 @@ void Ware_Statistics_Menu::set_time(int32_t timescale) {
 	m_plot_production->set_time_id(timescale);
 	m_plot_consumption->set_time_id(timescale);
 	m_plot_economy->set_time_id(timescale);
+	m_plot_stock->set_time_id(timescale);
 }
 
