@@ -5,7 +5,7 @@ welcome_msg = rt(
    h1(_"Smugglers") ..
    h2(_"Rules") ..
    p(_
-[[Smugglers is a Fun map for 4 players. You and your partner start diagonally
+[[Smugglers is a fun map for 4 players. You and your partner start diagonally
 to each other on a point symmetric island. There are plenty of smuggling tunnels
 on this island each consisting of a receiving and a sending end. To establish a smuggling
 route you need to build a warehouse on a sending/receiving spot while your team
