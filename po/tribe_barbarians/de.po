@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-04-29 00:07+0000\n"
-"Last-Translator: David Allwicher <Unknown>\n"
+"PO-Revision-Date: 2012-04-29 13:44+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:35+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-04-30 04:31+0000\n"
+"X-Generator: Launchpad (build 15171)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -1015,7 +1015,7 @@ msgstr "Abbruch des Gebäudes"
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr "Gewonnenes Baumaterial:"
+msgstr "Gewonnenes Baumaterial beim Abbruch:"
 
 #: ../../tribes/barbarians/conf:226
 msgid "Donjon"
@@ -3616,9 +3616,3 @@ msgstr "jedes"
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
 msgstr "nicht verfügbar"
-
-#~ msgid "Source needed."
-#~ msgstr "Quelle benötigt."
-
-#~ msgid "Text needed."
-#~ msgstr "Text benötigt."

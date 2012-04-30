@@ -10,8 +10,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:39+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-04-30 04:32+0000\n"
+"X-Generator: Launchpad (build 15171)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -4918,11 +4918,3 @@ msgstr "ingen beskrivning angiven"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "ingen beskr"
-
-#~ msgid ""
-#~ "Waited 5 seconds to close audio. problems here so killing widelands. update "
-#~ "your sound driver and/or SDL to fix this problem\n"
-#~ msgstr ""
-#~ "Väntade 5 sekunder på att stänga ljudet, då problem uppstod avslutades "
-#~ "Widelands. Uppdatera dina ljuddrivrutiner och/eller SDL för att lösa detta "
-#~ "problem.\n"

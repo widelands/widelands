@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:35+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-04-30 04:32+0000\n"
+"X-Generator: Launchpad (build 15171)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -3566,9 +3566,3 @@ msgstr "každý predmet"
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
 msgstr "nie je k dispozícii"
-
-#~ msgid "Source needed."
-#~ msgstr "Potrebný zdroj."
-
-#~ msgid "Text needed."
-#~ msgstr "Potrebný text."
