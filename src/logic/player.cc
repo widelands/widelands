@@ -1233,8 +1233,8 @@ const std::string & Player::getAI() const
  */
 void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 {
-	 //version 1 and 2 only differs in an additional statistic.
-	 //Use version 1 code for both
+	 //version 1, 2 and 3 only differs in an additional statistic.
+	 //Use version 1 code for all of them
 	if ((version == 2) || (version == 1) || (version == 3)) {
 		uint16_t nr_wares = fr.Unsigned16();
 		uint16_t nr_entries = fr.Unsigned16();
