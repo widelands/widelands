@@ -49,7 +49,7 @@ Statebox::Statebox
 		m_pic_graphics = picid;
 	} else
 		m_pic_graphics =
-			g_gr->get_picture(PicMod_UI, "pics/checkbox_light_new.png");
+			g_gr->get_picture(PicMod_UI, "pics/checkbox_light.png");
 }
 
 
@@ -74,7 +74,7 @@ void Statebox::set_enabled(bool const enabled)
 	if (not (m_flags & Has_Custom_Picture)) {
 		m_pic_graphics = g_gr->get_picture
 			(PicMod_UI,
-			 enabled ? "pics/checkbox_light_new.png" : "pics/checkbox.png");
+			 enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
 		set_flags
 			(Is_Highlighted, m_flags & Is_Highlighted and m_flags & Is_Enabled);
 	}
