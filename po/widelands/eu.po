@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-04-28 23:17+0200\n"
-"PO-Revision-Date: 2012-04-29 00:07+0000\n"
+"PO-Revision-Date: 2012-04-30 10:43+0000\n"
 "Last-Translator: Mikel Alzibar <mikelalzibar@gmail.com>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-04-30 04:32+0000\n"
+"X-Launchpad-Export-Date: 2012-05-01 05:09+0000\n"
 "X-Generator: Launchpad (build 15171)\n"
 
 #: ../../src/computer_player.cc:38
@@ -2050,6 +2050,9 @@ msgid ""
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
+"Widelands-ek ezin izan du konexio bat ezarri emandako helbidearekin.\n"
+"Ez dago metazerbitzaririk martxan suposatutako portuan edo\n"
+"zure sareko konfigurazioa okerra da."
 
 #: ../../src/network/internet_gaming.cc:163
 msgid "For hosting a game, please take a look at the notes at:"
@@ -2061,7 +2064,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:384
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Arrakasta metazerbitzarira birkonektatzean!"
 
 #: ../../src/network/internet_gaming.cc:391
 msgid "Mixed up"
@@ -2099,7 +2102,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:547
 msgid "Received an unknown command from the metaserver: "
-msgstr ""
+msgstr "Metazerbitzaritik komando ezezagun bat jaso da: "
 
 #: ../../src/network/internet_gaming.cc:679
 msgid "Message could not be sent: You are not connected to the metaserver!"
@@ -2125,7 +2128,7 @@ msgstr "Bidalitako pasahitza okerra zen!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "Erabiltzen ari zaren protokoloaren bertsioa ez dago onartua!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
@@ -2139,11 +2142,11 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
-msgstr ""
+msgstr "Deskonektatua izan zara metazerbitzaria berrabiatzen baitago."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "Konexioa bezeroak itxi du era normalean."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
@@ -2222,7 +2225,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:395
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "Zergatik nahi duzu zure burua ohartarazi?"
 
 #: ../../src/network/nethost.cc:397
 msgid "Why would you want to warn the dedicated server?"
@@ -2282,7 +2285,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:485
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Komando baliogabea! Idatzi /help komando zerrenda lortzeko."
 
 #: ../../src/network/nethost.cc:704
 #, c-format
@@ -2390,6 +2393,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Connection to client timeouted: no response for 10 minutes!"
 msgstr ""
+"Bezeroarekin konexioa denboraz kanpo: ez da erantzunik egon 10 minututan!"
 
 #: ../../src/network/network_gaming_messages.cc:130
 msgid "Client and host have become desynchronized."
@@ -2442,7 +2446,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:141
 msgid "Server uses a different protocol version"
-msgstr ""
+msgstr "Zerbitzariak protokoloaren beste bertsio bat erabiltzen du"
 
 #: ../../src/network/network_gaming_messages.cc:142
 #, c-format
@@ -2471,11 +2475,13 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Bezeroak ez du atzipenik zerbitzariaren kofiguraziora."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
 msgstr ""
+"Bezeroak hasteko komandoa bidali du, baina zerbitzaria ez dago prest "
+"oraindik."
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
@@ -2510,7 +2516,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:157
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s jokora sartu da"
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
@@ -2540,7 +2546,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
-msgstr ""
+msgstr "%s ezeroak ez du erantzun %s segundu baino gehiagotan."
 
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
@@ -2561,7 +2567,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:133
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:57
 msgid "OK"
-msgstr ""
+msgstr "Ados"
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
@@ -2574,11 +2580,11 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 msgid "Help: "
-msgstr ""
+msgstr "Laguntza: "
 
 #: ../../src/ui_basic/progresswindow.cc:50
 msgid "Preparing..."
-msgstr ""
+msgstr "Prestatzen..."
 
 #: ../../src/ui_basic/spinbox.cc:115
 msgid "Increase the value"
