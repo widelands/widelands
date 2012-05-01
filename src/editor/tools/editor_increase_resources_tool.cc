@@ -135,7 +135,6 @@ int32_t Editor_Increase_Resources_Tool::handle_undo_impl
 	Editor_Interactive & parent, Editor_Action_Args & args)
 {
 	return m_set_tool.handle_undo_impl(map, center, parent, args);
-	return 0;
 }
 
 Editor_Action_Args Editor_Increase_Resources_Tool::format_args_impl(Editor_Interactive & parent)
