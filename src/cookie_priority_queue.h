@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -192,7 +192,8 @@ void cookie_priority_queue<_T, _Cw, _CA>::pop(typename cookie_priority_queue<_T,
 }
 
 template<typename _T, typename _Cw, typename _CA>
-void cookie_priority_queue<_T, _Cw, _CA>::decrease_key(typename cookie_priority_queue<_T, _Cw, _CA>::type * elt)
+void cookie_priority_queue<_T, _Cw, _CA>::decrease_key
+	(typename cookie_priority_queue<_T, _Cw, _CA>::type * elt)
 {
 	cookie & elt_cookie(ca(elt));
 
@@ -215,7 +216,8 @@ void cookie_priority_queue<_T, _Cw, _CA>::decrease_key(typename cookie_priority_
 }
 
 template<typename _T, typename _Cw, typename _CA>
-void cookie_priority_queue<_T, _Cw, _CA>::increase_key(typename cookie_priority_queue<_T, _Cw, _CA>::type * elt)
+void cookie_priority_queue<_T, _Cw, _CA>::increase_key
+	(typename cookie_priority_queue<_T, _Cw, _CA>::type * elt)
 {
 	cookie & elt_cookie(ca(elt));
 
