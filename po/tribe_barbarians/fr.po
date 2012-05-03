@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-04-29 00:06+0000\n"
-"Last-Translator: David Allwicher <Unknown>\n"
+"PO-Revision-Date: 2012-05-03 01:22+0000\n"
+"Last-Translator: Michael Colignon <ledesillusionniste@hotmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-30 04:31+0000\n"
-"X-Generator: Launchpad (build 15171)\n"
+"X-Launchpad-Export-Date: 2012-05-03 05:10+0000\n"
+"X-Generator: Launchpad (build 15185)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -118,6 +118,8 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
+"\"Doux et souple.<br> Et pourtant inaltéré par le temps et les "
+"intempéries.<br> Rayons de soleil, forgés jusqu'à la fin des temps...\""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -269,7 +271,7 @@ msgstr "%s ou mieux et"
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s à %s (%s EP)"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:16
