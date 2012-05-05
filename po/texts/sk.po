@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-04-15 13:23+0000\n"
+"PO-Revision-Date: 2012-05-04 15:39+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:34+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-05-05 04:33+0000\n"
+"X-Generator: Launchpad (build 15195)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -43,8 +43,8 @@ msgid ""
 "record<br>your sessions in case a bug surfaces. For more explanation, see "
 "below."
 msgstr ""
-"- pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku relácie, ak je to "
-"možné, pokiaľ<br>chybu nie je triviálne napodobniť. V skutočnosti môže byť "
+"- ak je to možné, pošlite nám skomprimovanú (zip, gzip, bzip2) nahrávku "
+"relácie, pokiaľ<br>chybu nie je triviálne napodobniť. V skutočnosti môže byť "
 "dobrý nápad vždy nahrávať<br>relácie v prípade, že sa objaví chyba. Pre viac "
 "informácií pozrite nižšie."
 
@@ -292,7 +292,7 @@ msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
-"Vždy postavte lesníkovu a hájnikovu chatrč, aby vám nedošlo drevo a jedlo."
+"Vždy postavte lesnícku a hájnickú chatrč, aby vám nedošlo drevo a jedlo."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -314,7 +314,7 @@ msgstr "Barbari"
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
-"Predtým než postavíte studňu alebo baňu, pošlite na preskúmanie oblasti "
+"Predtým, než postavíte studňu alebo baňu, pošlite na preskúmanie oblasti "
 "geológa."
 
 #: ../../txts/README:57
@@ -363,7 +363,7 @@ msgstr "Vytváranie záznamu relácie</p>"
 
 #: ../../txts/README:81
 msgid "Ctrl+F10    Quit the game immediately"
-msgstr "Ctrl+F10    Ukončiť hru okamžiťe"
+msgstr "Ctrl+F10    Okamžite ukončiť hru"
 
 #: ../../txts/developers:174
 msgid "Czech"
@@ -556,7 +556,8 @@ msgid ""
 "sure to visit our homepage. You can find an up to date online help at:"
 msgstr ""
 "Ak potrebujete dokumentáciu alebo pomoc pre Widelands alebo Widelands "
-"Editor, iste navštívte našu stránku. Najnovšiu online pomoc môžno nájsť na:"
+"Editor, určite navštívte našu stránku. Najnovšiu pomoc online môžete nájsť "
+"na:"
 
 #: ../../txts/README:116
 msgid ""
@@ -641,9 +642,9 @@ msgid ""
 "messages window, then use 'G' for Go To and the Delete key to archive "
 "messages."
 msgstr ""
-"Spravujte svoje správy efektívnejšie: stlačením 'N' (nové správy) sa "
-"dostanete do okna správ, 'G' na 'Ísť na' a stlačením klávesu Delete "
-"archivujete správy."
+"Spravujte svoje správy efektívnejšie: stlačením klávesu 'N' (nové správy) sa "
+"dostanete do okna správ, 'G' aktivujete 'Ísť na' a klávesu Delete môžete "
+"správy archivovať."
 
 #: ../../txts/developers:132
 msgid "Maps and Missions"
@@ -856,8 +857,8 @@ msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
-"Pozrite https://translations.launchpad.net/widelands pre zoznam ľudí, ktorí "
-"pomáhali preložiť Widelands cez launchpad.net."
+"Pre zoznam ľudí, ktorí pomáhali preložiť Widelands cez launchpad.net, sa "
+"pozrite na https://translations.launchpad.net/widelands."
 
 #: ../../txts/developers:252
 msgid "Slovak"
@@ -1077,7 +1078,7 @@ msgstr "Prekladatelia"
 msgid ""
 "Use '@name' at the beginning of a chat message to send it to only one player."
 msgstr ""
-"Použite '@name' na začiatku chat správy, aby ste ju poslali len jednému "
+"Na začiatku chat správy napíšte '@meno', aby ste ju poslali len jednému "
 "hráčovi."
 
 #: ../../txts/tips/general_game.tip:26
@@ -1137,6 +1138,8 @@ msgid ""
 "When removing a road, if Ctrl is pressed all flags up to the first junction "
 "are removed."
 msgstr ""
+"Ak pri rušení cesty držíte Ctrl, odstránia sa všetky vlajky po prvú "
+"križovatku."
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
