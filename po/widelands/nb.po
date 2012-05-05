@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-24 17:11+0000\n"
-"Last-Translator: Hans Joachim Desserud <Unknown>\n"
+"PO-Revision-Date: 2012-04-15 19:19+0000\n"
+"Last-Translator: mr.x <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:39+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-16 04:36+0000\n"
+"X-Generator: Launchpad (build 15099)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -39,8 +39,8 @@ msgid ""
 "Waited 5 seconds to close audio. problems here so killing widelands. update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"Ventet 5 sekunder for å stenge lyd. Støtte på problemer, så stenger "
-"widelands. Oppdater lydkortdriveren din og/eller SDL for å fikse problemet\n"
+"Ventet i 5 sekunder for å stoppe lyden. Støtte på problemer, så widelands "
+"lukkes. Oppdater lydkortdriveren din og/eller SDL for å fikse problemet\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -180,6 +180,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Slår på OpenGL grafikk.\n"
 
 #: ../../src/wlapplication.cc:1372
 msgid ""
@@ -464,7 +466,7 @@ msgstr "Kampegenskaper"
 #, c-format
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr ""
+msgstr "Livspoeng er %u, pluss %u for hvert nivå over 0 (maksimum %u)."
 
 #: ../../src/writeHTML.cc:596
 #, c-format
@@ -498,7 +500,7 @@ msgstr "Dukker opp i varehuset."
 #: ../../src/writeHTML.cc:693
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Trenger å jobbe %u ganger for å få nok erfaring til å bli"
 
 #: ../../src/writeHTML.cc:701
 #, c-format
@@ -554,7 +556,7 @@ msgstr "%s's utspill"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Dokumentasjon for program kommandoer "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -668,7 +670,7 @@ msgstr "økonomi: %s"
 #: ../../src/economy/fleet.cc:741 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
-msgstr ""
+msgstr "laster portkai: %s"
 
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
@@ -789,7 +791,7 @@ msgstr "interaktiv spiller: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:66
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "Det er ikke noe flagg på denne lokasjonen."
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:68
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
@@ -912,7 +914,7 @@ msgstr ""
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
 msgid "lua function: %s"
-msgstr ""
+msgstr "luafunksjon: %s"
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
@@ -927,7 +929,7 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:194
 #, c-format
 msgid "game logic: %s"
-msgstr ""
+msgstr "spill-logikk: %s"
 
 #: ../../src/logic/constructionsite.cc:91
 #, c-format
@@ -994,6 +996,9 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
+"Widelands kunne ikke starte spillet, fordi det ikke er noen startposisjon "
+"for spiller nummer %u. \n"
+"Du kan legge til en startposisjon i editoren manuelt for å fikse dette."
 
 #: ../../src/logic/immovable.cc:144 ../../src/logic/production_program.cc:1614
 #, c-format
@@ -1020,17 +1025,17 @@ msgstr "forventet 0 .. 255 men fant %u"
 
 #: ../../src/logic/immovable.cc:261 ../../src/logic/immovable.cc:276
 msgid "duplicated"
-msgstr ""
+msgstr "duplikert"
 
 #: ../../src/logic/immovable.cc:279
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr ""
+msgstr "[terreng tilhørighet] \"%s\" (ikke i gjeldende verden): %s"
 
 #: ../../src/logic/immovable.cc:315
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr ""
+msgstr "immovable %s har ikke ett program \"%s\""
 
 #: ../../src/logic/immovable.cc:772
 #, c-format
@@ -1171,12 +1176,12 @@ msgstr "Soldatene dine har beseiret fienden ved %s."
 
 #: ../../src/logic/militarysite.cc:630
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Vellykket angrep!"
 
 #: ../../src/logic/militarysite.cc:674
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "Din %s oppdaget en motstander.</p>"
 
 #: ../../src/logic/militarysite.cc:675
 #, c-format
@@ -1216,7 +1221,7 @@ msgstr "bygg: %s"
 #: ../../src/logic/playercommand.cc:289
 #, c-format
 msgid "build flag: %s"
-msgstr ""
+msgstr "sett flagg: %s"
 
 #: ../../src/logic/playercommand.cc:376
 #, c-format
@@ -1308,7 +1313,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1485
 #, c-format
 msgid "(player %u): message id is null"
-msgstr ""
+msgstr "(spiller %u): meldings id er null"
 
 #: ../../src/logic/playercommand.cc:1490
 #, c-format
@@ -1321,6 +1326,8 @@ msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
 "section)"
 msgstr ""
+"%s er ikke avklart som en input (\"%s=<count>\" Ble ikke funnet i blant "
+"[inputs] )"
 
 #: ../../src/logic/production_program.cc:100
 #, c-format
@@ -1431,7 +1438,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:512
 #, c-format
 msgid "%s handling method already defined"
-msgstr ""
+msgstr "Handlingsmønsteret til %s allerede satt"
 
 #: ../../src/logic/production_program.cc:502
 msgid "failure"
@@ -1466,7 +1473,7 @@ msgstr "Ukjent parameter «%s»"
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
-msgstr ""
+msgstr "Ingen parameter ble gitt!"
 
 #: ../../src/logic/production_program.cc:702
 msgid "idle animation is default; calling is not allowed"
@@ -1537,12 +1544,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
 msgid "soldier type"
-msgstr ""
+msgstr "soldattype"
 
 #: ../../src/logic/production_program.cc:1238
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
-msgstr ""
+msgstr "forventet {\"hp\"|\"attack\"|\"defense\"|\"evade\"}men fant \"%s\""
 
 #: ../../src/logic/production_program.cc:1247
 #: ../../src/logic/production_program.cc:1319
@@ -3869,7 +3876,7 @@ msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
-msgstr ""
+msgstr "Start oppdrag på nytt"
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
@@ -4077,7 +4084,7 @@ msgstr "<ledig>"
 
 #: ../../src/wui/multiplayersetupgroup.cc:277
 msgid "Shared in"
-msgstr ""
+msgstr "Delt i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/playerdescrgroup.cc:170
@@ -4139,7 +4146,7 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:139
 msgid "game"
-msgstr ""
+msgstr "spill"
 
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
@@ -4589,6 +4596,10 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Kart lagrings error!\n"
+"Lagret kart kan ha blitt korrupt!\n"
+"\n"
+"Grunn gitt:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
@@ -4623,6 +4634,8 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Kan ikke fjerne spiller. Spilleren er fortsatt aktiv en eller annen plass. "
+"Ta vekk alle bygninger og bobs som tilhører denne spilleren og prøv igjenn."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
@@ -4650,7 +4663,7 @@ msgstr "Tillat"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
-msgstr ""
+msgstr "Høyde Verktøy valg"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
@@ -4664,11 +4677,11 @@ msgstr "Sett verdi"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:44
 msgid "Resources Tools Options"
-msgstr ""
+msgstr "Ressurs Verktøy valg"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:98
 msgid "Current Selection"
-msgstr ""
+msgstr "Gjeldene utvalg"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:47
 msgid "Tool Menu"
@@ -4719,7 +4732,7 @@ msgstr "Sett verdi: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
 msgid "Bobs Menu"
-msgstr ""
+msgstr "Bobs Meny"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs Menu"

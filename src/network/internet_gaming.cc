@@ -42,10 +42,16 @@ InternetGaming::InternetGaming() :
 	gameupdateonmetaserver   (true),
 	clientupdate             (false),
 	gameupdate               (false),
-	time_offset              (0)
+	time_offset              (0),
+	lastping                 (time(0))
 {
 	// Fill the list of possible messages from the server
 	InternetGamingMessages::fill_map();
+
+	// Set connection tracking variables to 0
+	lastbrokensocket[0]      = 0;
+	lastbrokensocket[1]      = 0;
+
 }
 
 /// resets all stored variables without the chat messages for a clean new login (not relogin)
@@ -69,6 +75,9 @@ void InternetGaming::reset() {
 	time_offset              = 0;
 	waitcmd                  = "";
 	waittimeout              = std::numeric_limits<int32_t>::max();
+	lastbrokensocket[0]      = 0;
+	lastbrokensocket[1]      = 0;
+	lastping                 = time(0);
 
 	clientlist.clear();
 	gamelist.clear();
@@ -110,6 +119,9 @@ void InternetGaming::initialiseConnection() {
 
 	m_sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (m_sockset, m_sock);
+
+	// Of course not 100% true, but we just care about an answer at all, so we reset this tracker
+	lastping = time(0);
 }
 
 
@@ -250,6 +262,19 @@ void InternetGaming::handle_metaserver_communication() {
 				const std::string & msg = InternetGamingMessages::get_message("CONNECTION_LOST");
 				dedicatedlog("InternetGaming: Error: %s\n", msg.c_str());
 				formatAndAddChat("", "", true, msg);
+
+				// Check how much time passed since the socket broke the last time
+				// Maybe something is completely wrong at the moment?
+				// At least it seems to be, if the socket broke three times in the last 10 seconds...
+				time_t now = time(0);
+				if ((now - lastbrokensocket[1] < 10) && (now - lastbrokensocket[0] < 10)) {
+					reset();
+					setError();
+					return;
+				}
+				lastbrokensocket[1] = lastbrokensocket[0];
+				lastbrokensocket[0] = now;
+
 				// Try to relogin
 				if (!relogin()) {
 					// Do not try to relogin again automatically.
@@ -303,6 +328,18 @@ void InternetGaming::handle_metaserver_communication() {
 				reset();
 				setError();
 			}
+		}
+	}
+
+	// Check connection to the metaserver
+	// Was a ping received in the last 4 minutes?
+	if (time(0) - lastping > 240)  {
+		// Try to relogin
+		setError();
+		if (!relogin()) {
+			// Do not try to relogin again automatically.
+			reset();
+			setError();
 		}
 	}
 }
@@ -394,6 +431,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			SendPacket s;
 			s.String(IGPCMD_PONG);
 			s.send(m_sock);
+
+			lastping = time(0);
 		}
 
 		else if (cmd == IGPCMD_CHAT) {

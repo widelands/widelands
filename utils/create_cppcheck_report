@@ -1,12 +1,14 @@
 #!/bin/bash
-FILE=cppcheck_report.xhtml
-echo "<?xml version=\"1.0\" encoding=\"us-ascii\"?>"                                                                     >  $FILE
-echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" >> $FILE
-echo "<html xmlns=\"http://www.w3.org/1999/xhtml\">"                                                                     >> $FILE
-echo "<head><title>cppcheck error report for Widelands C++ source code</title></head>"                                   >> $FILE
-echo "<body>"                                                                                                            >> $FILE
-echo "<div>"                                                                                                             >> $FILE
-cppcheck --force --quiet --enable=all -I src src 2>&1 | sed "s@^\[\(.*\):\([[:digit:]]\+\)\]: \(.*\)\$@<a href=\"http://bazaar.launchpad.net/%7Ewidelands-dev/widelands/trunk/annotate/head%3A/\1\?#L\2\">\1:\2</a>: \3<br/>@" >> $FILE
-echo "</div>"                                                                                                            >> $FILE
-echo "</body>"                                                                                                           >> $FILE
-echo "</html>"                                                                                                           >> $FILE
+FILE=cppcheck_report.html
+echo "<!doctype html>"                                                                 >  $FILE
+echo "<html>"                                                                          >> $FILE
+echo "<head><title>cppcheck error report for Widelands C++ source code</title></head>" >> $FILE
+echo "<body>"                                                                          >> $FILE
+echo "<h2>Issues found by "                                                            >> $FILE
+cppcheck --version                                                                     >> $FILE
+echo "</h2>"                                                                           >> $FILE
+echo "<div>"                                                                           >> $FILE
+cppcheck --force --quiet --verbose --std=posix --std=c99 --std=c++11 --enable=all -I src src 2>&1 | sed "s@^\[\(.*\):\([[:digit:]]\+\)\]: \(.*\)\$@<a href=\"http://bazaar.launchpad.net/%7Ewidelands-dev/widelands/trunk/annotate/head%3A/\1\?#L\2\">\1:\2</a>: \3<br/>@" >> $FILE
+echo "</div>"                                                                          >> $FILE
+echo "</body>"                                                                         >> $FILE
+echo "</html>"                                                                         >> $FILE

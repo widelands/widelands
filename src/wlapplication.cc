@@ -384,7 +384,7 @@ void WLApplication::run()
 			uint32_t            maxcl  = s.get_natural("maxclients",     8);
 			for (;;) { // endless loop
 				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
-					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
+					dedicatedlog(_("ERROR: Could not connect to metaserver (reason above)!\n"));
 					return;
 				}
 				std::string realservername(server);
@@ -976,7 +976,7 @@ bool WLApplication::init_hardware() {
 	int result = -1;
 
 	//add default video mode
-#if defined(__linux__) || defined(__FreeBSD__)
+#if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	videomode.push_back("x11");
 #elif WIN32
 	videomode.push_back("windib");
@@ -1034,8 +1034,8 @@ bool WLApplication::init_hardware() {
 
 void terminate (int) {
 	 log
-		  (_("Waited 5 seconds to close audio. problems here so killing widelands."
-			  " update your sound driver and/or SDL to fix this problem\n"));
+		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
+			  " Update your sound driver and/or SDL to fix this problem\n"));
 #ifndef WIN32
 	raise(SIGKILL);
 #endif
@@ -2131,7 +2131,7 @@ struct ReplayGameController : public GameController {
 		}
 	}
 
-	__attribute__((noreturn)) void sendPlayerCommand(Widelands::PlayerCommand &)
+	void sendPlayerCommand(Widelands::PlayerCommand &)
 	{
 		throw wexception("Trying to send a player command during replay");
 	}

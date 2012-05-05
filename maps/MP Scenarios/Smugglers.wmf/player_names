@@ -1,28 +1,28 @@
-# Automatically created by Widelands bzr6002[trunk] (Debug)
+# Automatically created by Widelands bzr5785[scenarios] (RelWithDebInfo)
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Player Blue"
+name="Spieler 1"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_2]
-name="Player Red"
+name="Spieler 2"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_3]
-name="Player Yellow"
+name="Spieler 3"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_4]
-name="Player Green"
+name="Spieler 4"
 tribe="barbarians"
 ai=
 closeable="false"

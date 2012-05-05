@@ -1079,7 +1079,7 @@ void Game::WriteStatistics(FileWrite & fw)
 
 	const Player_Number nr_players = map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *this)
-		if (m_general_stats.size()) {
+		if (!m_general_stats.empty()) {
 			entries = m_general_stats[p - 1].land_size.size();
 			break;
 		}

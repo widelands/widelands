@@ -442,7 +442,7 @@ void * RealFSImpl::fastLoad
 
 #ifdef __APPLE__
 	file = open(fullname.c_str(), O_RDONLY);
-#elif defined (__FreeBSD__)
+#elif defined (__FreeBSD__) || defined (__OpenBSD__)
 	file = open(fullname.c_str(), O_RDONLY);
 #else
 	file = open(fullname.c_str(), O_RDONLY|O_NOATIME);

@@ -62,8 +62,6 @@ add_library (widelands_all STATIC ${WL_SRCS_CC} ${WL_SRCS_H})
 set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 
-configure_file (${CMAKE_CURRENT_SOURCE_DIR}/CppCheckSuppressions.cmake ${CMAKE_CURRENT_BINARY_DIR}/CppCheckSuppressions)
-
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
   find_package (PythonInterp REQUIRED)
   set (commands "")
@@ -82,18 +80,6 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
       COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
     )
     list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash})
-    if (WL_EXTRAWARNINGS)
-      add_custom_command(
-	OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${sourcenoslash}"
-	COMMAND ${CMAKE_COMMAND} -DWL_SOURCES_BINARY_ROOT=${WL_SOURCES_BINARY_ROOT} -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
-	DEPENDS ${sourcefile}
-	COMMENT "Checking ${sourcewithoutpath} with CppCheck"
-      )
-      list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${sourcenoslash})
-#        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp};${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}")
-    else (WL_EXTRAWARNINGS)
-#        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}")
-    endif (WL_EXTRAWARNINGS)
   endforeach(sourcefile ${WL_CODECHECK_SRCS})
   add_custom_target(codecheck DEPENDS ${commands})
   add_dependencies(widelands codecheck)
@@ -127,13 +113,13 @@ target_link_libraries(widelands_all ${PNG_LIBRARY})
 target_link_libraries(widelands_all ${ZLIB_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
 target_link_libraries(widelands_all ${GLEW_LIBRARY})
-target_link_libraries(widelands_all ${Boost_LIBRARIES})
+target_link_libraries(widelands_all ${Boost_SIGNALS_LIBRARY})
 if (MINIZIP_FOUND)
   target_link_libraries(widelands_all ${MINIZIP_LIBRARY})
 endif (MINIZIP_FOUND)
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_all ${EXECINFO_LIBRARY})
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (DEFINED WL_EXTRA_LINK_LIBRARIES)
   target_link_libraries(widelands_all ${WL_EXTRA_LINK_LIBRARIES})

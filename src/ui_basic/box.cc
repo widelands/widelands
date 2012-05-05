@@ -100,7 +100,7 @@ void Box::update_desired_size()
 			maxbreadth = breadth;
 	}
 
-	if (m_items.size())
+	if (!m_items.empty())
 		totaldepth += (m_items.size() - 1) * m_inner_spacing;
 
 	if (m_orientation == Horizontal) {
@@ -142,7 +142,7 @@ void Box::layout()
 		totaldepth += depth;
 	}
 
-	if (m_items.size())
+	if (!m_items.empty())
 		totaldepth += (m_items.size() - 1) * m_inner_spacing;
 
 	bool needscrollbar = false;

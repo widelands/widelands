@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-01-10 22:31+0000\n"
-"Last-Translator: Tubuntu <Unknown>\n"
+"PO-Revision-Date: 2012-04-09 15:49+0000\n"
+"Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:35+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-10 04:43+0000\n"
+"X-Generator: Launchpad (build 15070)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -32,12 +32,12 @@ msgid ""
 "A saw is needed by the woodcutter and the carpenter. It is produced by the "
 "toolsmith."
 msgstr ""
-"Une scie est nécessaire au bucheron et au charpentier. Elle est produite "
+"Une scie est nécessaire au bûcheron et au charpentier. Elle est produite "
 "dans la forge à outil."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr "Un navire de transport"
+msgstr "Un digne navire de mer"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -94,11 +94,12 @@ msgstr "Caserne"
 #: ../../tribes/atlanteans/conf:148
 #: ../../tribes/atlanteans/conf:156
 msgid "Barrier"
-msgstr "Barrière"
+msgstr "Barricade"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr "Grands seaux pour le pisciculteur, produit par le forgeron d'outils."
+msgstr ""
+"Grands seaux pour le pisciculteur, produits par le forgeron d'outils."
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Blackroot"
@@ -131,7 +132,7 @@ msgstr "Champs de racines noires"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
-msgstr "Champs de racines noires récolté"
+msgstr "Champs de racines noires moissoné"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"

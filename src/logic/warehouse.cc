@@ -581,7 +581,7 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 		m_portdock = 0;
 	}
 
-	while (m_planned_workers.size()) {
+	while (!m_planned_workers.empty()) {
 		m_planned_workers.back().cleanup();
 		m_planned_workers.pop_back();
 	}
@@ -589,7 +589,7 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	//  all cached workers are unbound and freed
 	container_iterate(IncorporatedWorkers, m_incorporated_workers, cpair) {
 		WorkerList & clist = cpair->second;
-		while (clist.size()) {
+		while (!clist.empty()) {
 			Worker * w = clist.back();
 			clist.pop_back();
 
@@ -1298,7 +1298,7 @@ bool Warehouse::attack(Soldier & enemy)
 
 void Warehouse::PlannedWorkers::cleanup()
 {
-	while (requests.size()) {
+	while (!requests.empty()) {
 		delete requests.back();
 		requests.pop_back();
 	}

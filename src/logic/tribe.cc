@@ -230,7 +230,7 @@ Tribe_Descr::Tribe_Descr
 				m_ ## w ## s_order_coords[id] = std::pair<uint32_t, uint32_t> \
 					(m_ ## w ## s_order.size(), column.size() - 1); \
 			} \
-			if (column.size()) m_##w##s_order.push_back(column); \
+			if (!column.empty()) m_##w##s_order.push_back(column); \
 		} \
 \
 		/* Check that every ##w## has been added */ \

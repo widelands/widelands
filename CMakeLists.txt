@@ -107,11 +107,11 @@ endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 # unit_test_framework is for testing only
 if (WL_UNIT_TESTS)
   message(STATUS "Enabled unit tests")
-if (DEFINED MSVC)
-  set (BUILD_SHARED_LIBS OFF)
-else (DEFINED MSVC)
-  set (Boost_USE_STATIC_LIBS  OFF)
-endif (DEFINED MSVC)
+  if (DEFINED MSVC)
+    set (BUILD_SHARED_LIBS OFF)
+  else (DEFINED MSVC)
+    set (Boost_USE_STATIC_LIBS  OFF)
+  endif (DEFINED MSVC)
   set (Boost_FIND_COMPONENTS unit_test_framework signals)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
@@ -277,10 +277,10 @@ if (DEFINED WL_3RDPARTY_DIR)
   set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 endif (DEFINED WL_3RDPARTY_DIR)
 
-#on freeBSD this must be explicitely linked
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+# on BSD this must be explicitly linked
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   find_library(EXECINFO_LIBRARY NAMES execinfo)
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 
 # Check for opengl
@@ -407,18 +407,33 @@ include_directories(${SDL_INCLUDE_DIR})
 
 find_package(SDL_image REQUIRED)
 include_directories(${SDLIMAGE_INCLUDE_DIR})
+if (NOT SDLIMAGE_FOUND)
+  message(FATAL_ERROR "Required package SDL_image not found, please install and re-run cmake")
+endif (NOT SDLIMAGE_FOUND)
 
 find_package(SDL_mixer REQUIRED)
 include_directories(${SDLMIXER_INCLUDE_DIR})
+if (NOT SDLMIXER_FOUND)
+  message(FATAL_ERROR "Required package SDL_mixer not found, please install and re-run cmake")
+endif (NOT SDLMIXER_FOUND)
 
 find_package(SDL_net REQUIRED)
 include_directories(${SDLNET_INCLUDE_DIR})
+if (NOT SDLNET_FOUND)
+  message(FATAL_ERROR "Required package SDL_net not found, please install and re-run cmake")
+endif (NOT SDLNET_FOUND)
 
 find_package(SDL_ttf REQUIRED)
 include_directories(${SDLTTF_INCLUDE_DIR})
+if (NOT SDLTTF_FOUND)
+  message(FATAL_ERROR "Required package SDL_ttf not found, please install and re-run cmake")
+endif (NOT SDLTTF_FOUND)
 
 find_package(SDL_gfx REQUIRED)
 include_directories(${SDLGFX_INCLUDE_DIR})
+if (NOT SDLGFX_FOUND)
+  message(FATAL_ERROR "Required package SDL_gfx not found, please install and re-run cmake")
+endif (NOT SDLGFX_FOUND)
 
 find_package(Lua51 REQUIRED)
 include_directories(${LUA_INCLUDE_DIR})
@@ -626,8 +641,3 @@ elseif (WIN32)
 endif (WIN32)
 
 include(CPack)
-
-# Temporary warning about clang as long as widelands does not run stable
-IF (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-  message( WARNING "WARNING!!! You seem to compile widelands using the clang/llvm compiler infrastructure. Please note that we do not yet support compiling with clang. You are very likely to run into problems. We are working on it, though. In the mean time, please use GCC infrastructure to compile widelands. You can use the CMake parameter -DCMAKE_CXX_COMPILER=g++ to force GCC if you have it installed. Thank you for your understanding.")
-ENDIF (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")

@@ -6,13 +6,13 @@ welcome_msg = rt(
    h2(_"Rules") ..
    p(_
 [[Island Hopping is a traditional tournament in the Atlantean culture. The
-rules of the game are simple: You start with a headquarters one one island.
+rules of the game are simple: You start with a headquarters on one island.
 When you finish a castle at the end of the first island, you are granted a
 second headquarters on a second island which will contain all wares from your
 first headquarters.]]) .. p(_
 [[If you finish a castle at the target area on the second island, you will get
 a third headquarters on the third island. You must build and hold a castle at
-the center of the third island for 20 minutes to win the game]]) .. p(_
+the center of the third island for 20 minutes to win the game.]]) .. p(_
 [[Whenever you finish an island, you get bonus wares depending how many players
 have finished the island before you. The earlier you finish, the less wares you
 get. See below for the details.]]) .. p(_

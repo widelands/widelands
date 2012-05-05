@@ -49,7 +49,7 @@ Statebox::Statebox
 		m_pic_graphics = picid;
 	} else
 		m_pic_graphics =
-			g_gr->get_picture(PicMod_UI, "pics/checkbox_light_new.png");
+			g_gr->get_picture(PicMod_UI, "pics/checkbox_light.png");
 }
 
 
@@ -74,7 +74,7 @@ void Statebox::set_enabled(bool const enabled)
 	if (not (m_flags & Has_Custom_Picture)) {
 		m_pic_graphics = g_gr->get_picture
 			(PicMod_UI,
-			 enabled ? "pics/checkbox_light_new.png" : "pics/checkbox.png");
+			 enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
 		set_flags
 			(Is_Highlighted, m_flags & Is_Highlighted and m_flags & Is_Enabled);
 	}
@@ -130,7 +130,7 @@ void Statebox::draw(RenderTarget & dst)
 
 		if (m_flags & Is_Highlighted)
 			dst.draw_rect
-				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
+				(Rect(Point(0, 0), STATEBOX_WIDTH + 1, STATEBOX_HEIGHT + 1), RGBColor(100, 100,  80));
 	}
 }
 
@@ -139,8 +139,11 @@ void Statebox::draw(RenderTarget & dst)
  * Highlight the checkbox when the mouse moves into it
  */
 void Statebox::handle_mousein(bool const inside) {
-	set_flags(Is_Highlighted, inside);
-	update();
+	bool oldhl = m_flags & Is_Highlighted;
+	set_flags(Is_Highlighted, inside and m_flags & Is_Enabled);
+
+	if (oldhl != m_flags & Is_Highlighted)
+		update();
 }
 
 
@@ -159,6 +162,9 @@ bool Statebox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 	return btn == SDL_BUTTON_LEFT;
 }
 
+bool Statebox::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t) {
+	return true; // We handle this always by lighting up
+}
 
 /**
  * Toggle the checkbox state
