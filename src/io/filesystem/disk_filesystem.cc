@@ -526,7 +526,7 @@ struct RealFSStreamRead : public StreamRead {
 		fclose(m_file);
 	}
 
-	size_t Data(void * const data, size_t const bufsize) {
+	size_t Data(void * data, size_t const bufsize) {
 		return fread(data, 1, bufsize, m_file);
 	}
 

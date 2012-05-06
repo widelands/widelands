@@ -78,7 +78,7 @@ void DedicatedLog::chat(ChatMessage & c) {
 	temp += c.sender.empty() ? "SYSTEM" : c.sender;
 	temp += "</td><td class=\"recipient\"> ->" + c.recipient + "</td><td class=\"message\">";
 	temp += c.msg + "</td></tr>\n";
-	m_chat.Printf(temp.c_str());
+	m_chat.Printf("%s", temp.c_str());
 	m_chat.WriteAppend(*root, m_chat_file_path.c_str());
 }
 
@@ -185,7 +185,7 @@ void DedicatedLog::info_update() {
 		}
 	}
 	temp += "</table>\n";
-	m_chat.Printf(temp.c_str());
+	m_chat.Printf("%s", temp.c_str());
 	m_chat.Write(*root, m_info_file_path.c_str());
 }
 
@@ -203,7 +203,7 @@ void DedicatedLog::dlog(std::string msg) {
 	temp += "</td><td class=\"log\">";
 	temp += msg;
 	temp += "</td></tr>\n";
-	m_chat.Printf(temp.c_str());
+	m_chat.Printf("%s", temp.c_str());
 	m_chat.WriteAppend(*root, m_log_file_path.c_str());
 }
 

@@ -106,7 +106,7 @@ template<typename Base> struct basic_FileRead : public Base {
 	/// does not specify a position.
 	Pos GetPos() const throw () {return filepos;}
 
-	size_t Data(void * const dst, const size_t bufsize) {
+	size_t Data(void * dst, size_t bufsize) {
 		assert(data);
 		size_t read = 0;
 		for (; read < bufsize and filepos < length; ++read, ++filepos)

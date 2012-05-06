@@ -56,6 +56,8 @@ class L_Map : public L_MapModuleClass {
 public:
 	LUNA_CLASS_HEAD(L_Map);
 
+	virtual ~L_Map() {}
+
 	L_Map() {}
 	L_Map(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Map' directly!");

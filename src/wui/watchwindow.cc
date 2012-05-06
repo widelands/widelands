@@ -294,10 +294,7 @@ void WatchWindow::stop_tracking_by_drag(int32_t, int32_t) {
 void WatchWindow::do_follow()
 {
 	Widelands::Game & g = game();
-	if
-		(Widelands::Map_Object const * const obj =
-			views[cur_index].tracking.get(g))
-	{
+	if (views[cur_index].tracking.get(g)) {
 		views[cur_index].tracking = 0;
 	} else {
 		//  Find the nearest bob. Other object types can not move and are

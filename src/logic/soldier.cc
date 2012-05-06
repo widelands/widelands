@@ -753,7 +753,7 @@ Bob::Task const Soldier::taskAttack = {
 void Soldier::start_task_attack
 	(Game & game, Building & building, uint8_t retreat)
 {
-	dynamic_cast<Attackable const &>(building);
+	//dynamic_cast<Attackable const &>(building);
 
 	push_task(game, taskAttack);
 	State & state  = top_state();

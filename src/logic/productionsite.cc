@@ -655,7 +655,7 @@ bool ProductionSite::fetch_from_flag(Game & game)
 }
 
 
-void ProductionSite::log_general_info(Editor_Game_Base & egbase) {
+void ProductionSite::log_general_info(Editor_Game_Base const & egbase) {
 	Building::log_general_info(egbase);
 
 	molog("m_is_stopped: %u\n", m_is_stopped);
