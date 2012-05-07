@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-05-05 22:58+0000\n"
+"PO-Revision-Date: 2012-05-06 18:11+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-06 04:33+0000\n"
+"X-Launchpad-Export-Date: 2012-05-07 04:33+0000\n"
 "X-Generator: Launchpad (build 15195)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -38,7 +38,7 @@ msgid ""
 "\"Evade\" increases the soldier's chance not to be hit by the enemy and so "
 "to remain totally unaffected."
 msgstr ""
-"\"Uhýbanie\" zvyšuje šancu vojaka, aby ho nezasiahol nepriateľ, a tak zostal "
+"\"Uhýbanie\" zvyšuje šancu vojaka, že ho minie nepriateľ, a tak zostane "
 "úplne nedotknutý."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
@@ -305,7 +305,7 @@ msgid ""
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
 "Väčšie sústo než prídel, podáva sa baníkom v hlbinných baniach. Vyrába sa v "
-"hostinci alebo vo veľkom hostinci z rýb/mäsa, pita chleba a piva."
+"hostinci alebo vo veľkom hostinci z rýb/mäsa, chleba pita a piva."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -313,17 +313,17 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
-"Helma je základnou pomôckou na ochranu bojovníkov.  Vyrába sa vo vyhni na "
-"helmy a používa vo výcvikovom tábore - spolu s jedlom - na trénovanie bodov "
-"zdravia vojakov z úrovne 0 na úroveň 1."
+"Helma je základnou pomôckou na ochranu bojovníkov. Vyrába sa vo vyhni na "
+"helmy a používa sa vo výcvikovom tábore - spolu s jedlom - na trénovanie "
+"bodov zdravia vojakov z úrovne 0 na úroveň 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
-"Obedy sa vyrábajú z pita chleba, silného piva a mäsa/rýb vo veľkom hostinci. "
-"Toto výživné jedlo je presne to, čo potrebujú pracovníci v hlbších baniach."
+"Obedy sa vyrábajú z chleba pita, silného piva a mäsa/rýb vo veľkom hostinci. "
+"Toto výživné jedlo je presne to, čo potrebujú robotníci v hlbších baniach."
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
@@ -335,9 +335,9 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
-"Malé sústo, aby boli baníci silní a schopní pracovať.  Navyše prieskumník "
-"konzumuje prídely na svojich cestách. Prídely sa vyrábajú v krčme, hostinci "
-"a veľkom hostinci z rýb alebo mäsa alebo pita chleba."
+"Malé sústo, ktoré dodá baníkom silu a udrží ich pri práci.  Prídely "
+"konzumuje na svojich cestách aj prieskumník. Vyrábajú sa v krčme, hostinci a "
+"veľkom hostinci z rýb alebo mäsa alebo chleba pita."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -424,7 +424,7 @@ msgstr "Továreň na sekery"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr "Piecť pita chlieb pre vojakov a baníkov."
+msgstr "Piecť chlieb pita pre vojakov a baníkov."
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:122
@@ -487,7 +487,7 @@ msgid ""
 "snacks."
 msgstr ""
 "Pivo sa vyrába v mikropivovaroch a používa sa v hostincoch a veľkých "
-"hostincoch na výrobu olovrantov."
+"hostincoch na výrobu desiat."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -495,7 +495,7 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
-"Okrem pita chleba a mäsa, potraviny barbarov tvoria tiež ryby. Využívajú sa "
+"Okrem chleba pita a mäsa, potraviny barbarov tvoria tiež ryby. Využívajú sa "
 "v krčmách, hostincoch a veľkých hostincoch a vo výcvikových stavbách "
 "(výcvikový tábor a zápasnícka aréna)."
 
@@ -695,7 +695,7 @@ msgstr "Kravín"
 #: ../../tribes/barbarians/conf:199
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
 msgid "Charcoal Burner's House"
-msgstr "Sídlo uhliara"
+msgstr "Uhliareň"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
@@ -1314,7 +1314,7 @@ msgstr "Kladivo"
 
 #: ../../tribes/barbarians/fernery/conf:17
 msgid "Harvest reed"
-msgstr "Zberať tŕstie"
+msgstr "Zberať trstinu"
 
 #: ../../tribes/barbarians/farm/conf:19
 msgid "Harvest wheat"
@@ -1345,7 +1345,7 @@ msgstr "Kováč heliem"
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:31
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid "Helmsmithy"
-msgstr "Vyhňa na výrobu heliem"
+msgstr "Vyhňa na helmy"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
@@ -1567,7 +1567,7 @@ msgstr "Kuchynské nástroje"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat'Karuth"
-msgstr "Krumta, stolár Chat'Karuth-a"
+msgstr "Krumta, Chat'Karuthov stolár"
 
 #: ../../tribes/barbarians/coalmine/help.lua:35
 #: ../../tribes/barbarians/conf:191
@@ -1852,11 +1852,11 @@ msgstr "Krompáč"
 #: ../../tribes/barbarians/conf:99
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 msgid "Pitta Bread"
-msgstr "Pita chlieb"
+msgstr "Chlieb pita"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr "Sadiť tŕstie"
+msgstr "Sadiť trstinu"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:17
 msgid "Plant trees in the surrounding area."
@@ -1985,7 +1985,7 @@ msgstr "Pripravuje jedlo pre baníkov."
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
-"Vyrába tie najlepšie pivá, aby boli bojovníci silní a šťastní počas tréningu."
+"Vyrába tie najlepšie pivá na posilnenie a uspokojenie vojakov počas tréningu."
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
@@ -2191,19 +2191,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
-msgstr "Stredné tŕstie"
+msgstr "Stredná trstina"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Reed ripe"
-msgstr "Zrelé tŕstie"
+msgstr "Zrelá trstina"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Reed small"
-msgstr "Malé tŕstie"
+msgstr "Malá trstina"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed tiny"
-msgstr "Maličké tŕstie"
+msgstr "Maličká trstina"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
@@ -2465,7 +2465,7 @@ msgstr "Opevnenie"
 #: ../../tribes/barbarians/fishers_hut/help.lua:29
 #: ../../tribes/barbarians/hunters_hut/help.lua:29
 msgid "Tavern"
-msgstr "Kuchyňa"
+msgstr "Krčma"
 
 #: ../../tribes/barbarians/bakery/help.lua:12
 #: ../../tribes/barbarians/cattlefarm/help.lua:12
@@ -2765,8 +2765,8 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
-"Barbarskí pekári vynikajú v tvorbe tohto plochého a chutného pita chleba. "
-"Vyrába sa z pšenice a vody na základe tajného receptu. Pita chlieb sa "
+"Barbarskí pekári vynikajú v tvorbe tohto plochého a chutného chleba pita. "
+"Vyrába sa z pšenice a vody na základe tajného receptu. Chlieb pita sa "
 "používa v krčmách, hostincoch a veľkých hostincoch na prípravu prídelov, "
 "desiat a obedov. Spotrebováva sa aj vo výcvikových stavbách (výcvikový tábor "
 "a zápasnícka aréna)."
@@ -2821,7 +2821,7 @@ msgid ""
 "helmsmithy."
 msgstr ""
 "Barbari zvyčajne pridávajú do ohňa uhlie. Ťaží sa v uhoľných baniach alebo "
-"sa vyrába z kmeňov stromov v sídle uhliara. Míňa ho viacero budov: vápenka, "
+"sa vyrába z kmeňov stromov v uhliarni. Spotrebúva ho viacero budov: vápenka, "
 "taviareň, továreň na sekery, vojenský závod, vyhňa na helmy."
 
 #: ../../tribes/barbarians/hammer/conf:1
@@ -3074,9 +3074,9 @@ msgid ""
 "by hardening them in the fire which gives blackwood."
 msgstr ""
 "Kmene stromov sú hlavným stavebným materiálom barbarov. Stromy rúbu "
-"drevorubači; lesníci sa starajú o zásobu lesov. Kmene sa tiež používajú v "
+"drevorubači; lesníci sa starajú o zásobu stromov. Kmene sa používajú aj v "
 "kovodielni na výrobu základných nástrojov a v uhliarni na výrobu uhlia. V "
-"lakovni dreva sa kmene spevňujú na ohni a vznikne z nich upravené drevo."
+"lakovni dreva sa kmene spevňujú na ohni a vzniká z nich upravené drevo."
 
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
