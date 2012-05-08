@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-05-06 21:46+0000\n"
+"PO-Revision-Date: 2012-05-07 20:16+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-07 04:33+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-08 04:32+0000\n"
+"X-Generator: Launchpad (build 15204)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -1118,15 +1118,15 @@ msgstr "Krompáč používajú kamenári a baníci. Vyrába ho kováč nástrojo
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr "Túto pílku potrebuje pilčík. Vyrába ju kováč nástrojov."
+msgstr "Túto pílku potrebuje piliar. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters."
 msgstr ""
-"Tento oštep je ľahký, aby sa dal vrhať, ale silný, aby zabil jedno zviera na "
-"jednu ranu. Používajú ho len lovci."
+"Tento oštep je dosť ľahký na hod, ale zároveň dosť ťažký na to, aby dokázal "
+"skoliť zviera jednou ranou. Používajú ho len lovci."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
