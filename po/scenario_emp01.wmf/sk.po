@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-03-10 16:35+0000\n"
+"PO-Revision-Date: 2012-05-12 00:13+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:33+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-05-12 05:09+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
@@ -43,11 +43,12 @@ msgid ""
 "space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 " \"Ahoj, Lutius, dostala som správu, že náš prvý drevorubač začal dnes "
-"pracovať. Možno by bolo dobré počkať, kým vyprázdni miesto pre dve sídla, "
-"aby sme mohli rýchlejšie ťažiť drevo. <br> Ale, nanešťastie, kmene stromov "
-"sú k ničomu pri oprave našej lode - potrebujeme vylepšené drevo, aké tiež "
-"potrebuje každá loď a každá väčšia budova. Takže by sme mali postaviť pílu - "
-"hneď ako získame dostatok miesta.\"<br><br>-- NOVÁ ÚLOHA --<br> "
+"pracovať. Možno by bolo dobré počkať, kým vyprázdni miesto pre ďalšie dva "
+"drevorubačské domy, aby sme mohli rýchlejšie ťažiť drevo. <br> Ale, "
+"nanešťastie, kmene stromov sú k ničomu pri oprave našej lode - potrebujeme "
+"vylepšené drevo, aké tiež potrebuje každá loď a každá väčšia budova. Mali by "
+"sme preto postaviť pílu - hneď ako budeme mať dostatok miesta.\"<br><br>-- "
+"NOVÁ ÚLOHA --<br> "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid ""
@@ -62,7 +63,7 @@ msgstr ""
 "Nuž, nie som jednou z dievčat, ktoré si myslia, že potrebujeme viac kasární. "
 "Namiesto toho by sme sa mohli sústrediť na iné veci.<br> Je úplne jasné, že "
 "na opravu našej lode potrebujeme drevo. A tak som sa včera prešla lesom a "
-"našla skvelé miesto pre sídlo drevorubača, južne od našej dočasnej "
+"našla skvelé miesto pre drevorubačský dom, južne od našej dočasnej "
 "základne.\"<br><br>-- NOVÁ ÚLOHA --<br> "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:117
@@ -156,10 +157,10 @@ msgid ""
 "is a good step forward. Now we can feel a bit safer and can look forward to "
 "repair our ship.\" "
 msgstr ""
-" \"Pane, videl som, že kasárne sú postavené, a tak som priradil jedného z "
-"mojich najlepších vojakov, aby hliadkoval na púšti.<br> Je to dobrý krok "
-"vpred. Teraz sa môžeme cítiť o niečo bezpečnejšie a sústrediť sa na opravu "
-"našej lode.\" "
+" \"Pane, všimol som si, že bola dokončená stavba kasární, a tak som do nich "
+"pridelil jedného zo svojich najlepších vojakov s cieľom hliadkovať na "
+"púšti.<br> Je to dobrý krok vpred. Teraz sa môžeme cítiť o niečo "
+"bezpečnejšie a sústrediť sa na opravu lode.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:125
 msgid ""
@@ -172,13 +173,13 @@ msgid ""
 "completed this mission. You may continue playing if you wish, otherwise move "
 "on to the next mission.\" "
 msgstr ""
-" \"Dnes som dostal správu, že naša loď je kompletne opravená. V tomto "
-"momente moji ľudia nakladajú všetko do našej novo opravenej lode, dúfajúc, "
-"že nám poslúži lepšie ako naposledy.<br> Táto noc bude našou poslednou na "
-"tomto ostrove. Zajtra ráno ho opustíme, hľadajúc nové miesto pre našu "
-"osadu.<br> Stále som zvedavý, či ešte niekdy uvidíme Fremil.<br><br>---------"
-"------------ VÍŤAZSTVO! ----------------------<br><br> Dokončili ste túto "
-"misiu. Ak si prajete, môžete pokračovať v hraní, inak prejdite na ďalšiu "
+" \"Dnes som dostal správu o úplnej oprave našej lode. Moji ľudia momentálne "
+"nakladajú všetko do našej novo opravenej lode, dúfajúc, že nám poslúži "
+"lepšie ako naposledy.<br> Táto noc bude našou poslednou na tomto ostrove. "
+"Zajtra ráno ho opustíme a vydáme sa hľadať nové miesto vo vyhnanstve.<br> "
+"Stále som zvedavý, či ešte niekedy uvidíme Fremil.<br><br>-------------------"
+"-- VÍŤAZSTVO! ----------------------<br><br> Dokončili ste túto misiu. Ak si "
+"prajete, môžete pokračovať v hraní. V opačnom prípade prejdite na ďalšiu "
 "misiu.\" "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:14
@@ -247,8 +248,7 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:171
 msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
-msgstr ""
-"* Postavte sídlo horára, aby ste udržiavali zdroje dreva na tomto ostrove."
+msgstr "* Postavte horáreň na udržanie zdrojov dreva na tomto ostrove."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:69
 msgid ""
@@ -257,9 +257,9 @@ msgid ""
 "take a while. You can speed the game up using PAGE UP and slow it down again "
 "with PAGE DOWN."
 msgstr ""
-"* Postavte sídlo drevorubača na symbole červeného domu, južne od vašej "
-"dočasnej základne. Vyrúbanie dostatku stromov pre viac budov chvíľu potrvá. "
-"Hru môžete zrýchliť stlačením PAGE UP a opäť znížiť s PAGE DOWN."
+"* Postavte drevorubačský dom na symbole červeného domu, južne od vašej "
+"dočasnej základne. Vyrúbanie dostatku stromov pre viacero budov chvíľu "
+"potrvá. Hru môžete zrýchliť stlačením PAGE UP a opäť spomaliť s PAGE DOWN."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:153
 msgid ""
@@ -268,9 +268,9 @@ msgid ""
 "while. You can speed the game up using PAGE UP and slow it down again with "
 "PAGE DOWN."
 msgstr ""
-"* Postavte sídlo drevorubača na červenom bode, južne od vašej dočasnej "
-"základne. Vyrúbanie dostatku stromov pre viac budov chvíľu potrvá. Hru "
-"môžete zrýchliť stlačením PAGE UP a opäť znížiť s PAGE DOWN."
+"* Postavte drevorubačský dom na červenom bode, južne od vašej dočasnej "
+"základne. Vyrúbanie dostatku stromov pre viacero budov chvíľu potrvá. Hru "
+"môžete zrýchliť stlačením PAGE UP a opäť spomaliť s PAGE DOWN."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:107
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:178
@@ -287,7 +287,7 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
-"* Postavte dve ďalšie sídla drevorubačov a pílu, akonáhle je pre ne dostatok "
+"* Postavte ďalšie dva drevorubačské domy a pílu, akonáhle je pre ne dostatok "
 "miesta."
 
 #: ../../campaigns/emp01.wmf/elemental:7
@@ -338,11 +338,11 @@ msgstr "Postav kasárne"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Build a forester's house"
-msgstr "Postavte sídlo horára"
+msgstr "Postavte horáreň"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Build a lumberjack's house"
-msgstr "Postavte sídlo drevorubača"
+msgstr "Postavte drevorubačský dom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Build a quarry"
@@ -350,7 +350,7 @@ msgstr "Postavte kameňolom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr "Postavte dve sídla drevorubačov a pílu"
+msgstr "Postavte dva drevorubačské domy a pílu"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:23

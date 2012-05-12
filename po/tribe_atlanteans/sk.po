@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-03-30 18:00+0000\n"
+"PO-Revision-Date: 2012-05-11 23:18+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:35+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-05-12 05:09+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -206,7 +206,7 @@ msgstr "Dedina s hradom"
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Charcoal Burner's House"
-msgstr "Sídlo uhliara"
+msgstr "Uhliareň"
 
 #: ../../tribes/atlanteans/conf:149
 msgid "Citadel"
@@ -338,7 +338,7 @@ msgstr "Chovateľ rýb"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder's House"
-msgstr "Sídlo chovateľa rýb"
+msgstr "Rybnikársky dom"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid ""
@@ -356,7 +356,7 @@ msgstr "Rybár"
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Fisher's House"
-msgstr "Sídlo rybára"
+msgstr "Rybársky dom"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Fishing Net"
@@ -483,7 +483,7 @@ msgstr "Lovec"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Hunter's House"
-msgstr "Sídlo lovca"
+msgstr "Lovecký dom"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
@@ -839,7 +839,7 @@ msgstr "Prieskumník"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Scout's House"
-msgstr "Sídlo prieskumníka"
+msgstr "Prieskumnícky dom"
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
@@ -1396,7 +1396,7 @@ msgstr "Drevorubač"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Woodcutter's House"
-msgstr "Sídlo drevorubača"
+msgstr "Drevorubačský dom"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21

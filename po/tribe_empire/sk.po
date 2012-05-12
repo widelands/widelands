@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-05-07 20:16+0000\n"
+"PO-Revision-Date: 2012-05-11 23:58+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-08 04:32+0000\n"
-"X-Generator: Launchpad (build 15204)\n"
+"X-Launchpad-Export-Date: 2012-05-12 05:09+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -328,7 +328,7 @@ msgstr "Rybár"
 
 #: ../../tribes/empire/conf:172
 msgid "Fisher's House"
-msgstr "Sídlo rybára"
+msgstr "Rybársky dom"
 
 #: ../../tribes/empire/conf:69
 msgid "Fishing Rod"
@@ -470,7 +470,7 @@ msgstr "Lovec"
 
 #: ../../tribes/empire/conf:173
 msgid "Hunter's House"
-msgstr "Sídlo lovca"
+msgstr "Lovecký dom"
 
 #: ../../tribes/empire/conf:77
 msgid "Hunting Spear"
@@ -521,7 +521,7 @@ msgstr "Drevorubač"
 
 #: ../../tribes/empire/conf:170
 msgid "Lumberjack's House"
-msgstr "Sídlo drevorubača"
+msgstr "Drevorubačský dom"
 
 #: ../../tribes/empire/conf:83
 msgid "Marble"
@@ -542,7 +542,7 @@ msgid ""
 "stonemason's house."
 msgstr ""
 "Mramorové stĺpy zobrazujú vyspelú kultúru impéria, a tak ich potrebuje "
-"takmer každá väčšia budova. Vyrábajú sa z mramoru v sídle kamenára."
+"takmer každá väčšia budova. Vyrábajú sa z mramoru v kamenárskom dome."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -550,8 +550,8 @@ msgid ""
 "in a quarry. Marble is used as building material and gets formed into marble "
 "columns in the stonemason's house."
 msgstr ""
-"Mramor je prekrásny kameň, ktorý sa vyrezáva z hôr alebo vyrába v "
-"kameňolome. Používa sa ako stavebný materiál a v sídle kamenára sa z neho "
+"Mramor je prekrásny kameň, ktorý sa vyrezáva z hôr alebo sa produkuje v "
+"kameňolome. Používa sa ako stavebný materiál a v kamenárskom dome sa z neho "
 "formujú mramorové stĺpy."
 
 #: ../../tribes/empire/conf:123
@@ -830,7 +830,7 @@ msgstr "Prieskumník"
 
 #: ../../tribes/empire/conf:175
 msgid "Scout's House"
-msgstr "Sídlo prieskumníka"
+msgstr "Prieskumnícky dom"
 
 #: ../../tribes/empire/scout/conf:1
 msgid ""
@@ -926,7 +926,7 @@ msgstr "Kamenár"
 
 #: ../../tribes/empire/conf:176
 msgid "Stonemason's House"
-msgstr "Sídlo kamenára"
+msgstr "Kamenársky dom"
 
 #: ../../tribes/empire/conf:92
 msgid "Stones"
