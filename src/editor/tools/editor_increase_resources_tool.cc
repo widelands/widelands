@@ -98,7 +98,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
 		if
-		(res == args.cur_res
+		((res == args.cur_res or not mr.location().field->get_resources_amount())
 		        and
 		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
 		{
