@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2012-01-26 08:22+0000\n"
-"Last-Translator: Izon <Unknown>\n"
+"PO-Revision-Date: 2012-05-23 03:30+0000\n"
+"Last-Translator: Vladimir Kovalenko <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:35+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-05-24 10:30+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -568,7 +568,7 @@ msgstr "Бронзовый топор"
 #: ../../tribes/barbarians/trainingscamp/help.lua:40
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build Cost:"
-msgstr ""
+msgstr "Затраты на постройку:"
 
 #: ../../tribes/barbarians/conf:127
 #: ../../tribes/barbarians/metalworks/help.lua:32
@@ -604,7 +604,7 @@ msgstr "Строитель"
 #: ../../tribes/barbarians/warmill/help.lua:33
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "Building"
-msgstr ""
+msgstr "Строительство"
 
 #: ../../tribes/barbarians/conf:128
 msgid "Burner"
@@ -769,7 +769,7 @@ msgstr "Угольная шахта"
 #: ../../tribes/barbarians/warmill/help.lua:19
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Conquer range:"
-msgstr ""
+msgstr "Захватываемая область:"
 
 #: ../../tribes/barbarians/shipyard/conf:21
 msgid "Constructing ship"
@@ -824,7 +824,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:41
 msgid "Crew required:"
-msgstr ""
+msgstr "Требуемые работники:"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -906,7 +906,7 @@ msgstr "Защищать и завоёвывать!"
 #: ../../tribes/barbarians/warmill/help.lua:22
 #: ../../tribes/barbarians/well/help.lua:21
 msgid "Dependencies"
-msgstr ""
+msgstr "Зависимости"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Destroyed building"
@@ -961,7 +961,7 @@ msgstr "Снос площадки"
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Отдача демонтажа:"
 
 #: ../../tribes/barbarians/conf:226
 msgid "Donjon"
@@ -1015,7 +1015,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:61
 #: ../../tribes/barbarians/well/help.lua:44
 msgid "Experience levels:"
-msgstr ""
+msgstr "Уровни опыта:"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Farm"
@@ -1165,7 +1165,7 @@ msgstr "Хижина егеря"
 #: ../../tribes/barbarians/warmill/help.lua:15
 #: ../../tribes/barbarians/well/help.lua:15
 msgid "General"
-msgstr ""
+msgstr "Основное"
 
 #: ../../tribes/barbarians/conf:135
 #: ../../tribes/barbarians/metalworks/help.lua:33
@@ -1373,6 +1373,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "%s on average."
 msgstr ""
+"Если все необходимые товары доставлены вовремя, то это строение может "
+"произвести %s в среднем за %s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/lime_kiln/help.lua:54
@@ -1383,6 +1385,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "about %s on average."
 msgstr ""
+"Если все необходимые товары доставлены вовремя, то это строение может "
+"произвести %s в среднем за %s."
 
 #: ../../tribes/barbarians/coalmine/help.lua:56
 #: ../../tribes/barbarians/deep_coalmine/help.lua:59
@@ -1425,7 +1429,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:23
 #: ../../tribes/barbarians/well/help.lua:22
 msgid "Incoming:"
-msgstr ""
+msgstr "Входящие:"
 
 #: ../../tribes/barbarians/bakery/help.lua:28
 #: ../../tribes/barbarians/conf:197
@@ -1562,7 +1566,7 @@ msgstr "Цементник"
 #: ../../tribes/barbarians/warmill/help.lua:10
 #: ../../tribes/barbarians/well/help.lua:10
 msgid "Lore"
-msgstr ""
+msgstr "Мудрость"
 
 #: ../../tribes/barbarians/conf:140
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:43
@@ -1737,7 +1741,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:23
 msgid "Outgoing:"
-msgstr ""
+msgstr "Исходящие:"
 
 #: ../../tribes/barbarians/conf:172
 msgid "Outpost"
@@ -1778,7 +1782,7 @@ msgstr "Бык"
 #: ../../tribes/barbarians/warmill/help.lua:65
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "Performance:"
-msgstr ""
+msgstr "Производительность:"
 
 #: ../../tribes/barbarians/coalmine/help.lua:51
 #: ../../tribes/barbarians/conf:98
@@ -1970,7 +1974,7 @@ msgstr "Изготавливает оружие для солдат и инст�
 #: ../../tribes/barbarians/warmill/help.lua:64
 #: ../../tribes/barbarians/well/help.lua:46
 msgid "Production"
-msgstr ""
+msgstr "Производство"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:27
 #: ../../tribes/barbarians/trainingscamp/help.lua:29
@@ -2007,7 +2011,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:16
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Purpose:"
-msgstr ""
+msgstr "Назначение:"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Quarry"
@@ -2024,6 +2028,8 @@ msgid ""
 "Ragnald the Child's answer to the question, what he's doing in the dirt. His "
 "\"new stone\" now is an important building material."
 msgstr ""
+"Ответ потомка Рэгнальда на вопрос, что он делает в грязи. Теперь его \"новый "
+"камень\" — важнейший строительный материал."
 
 #: ../../tribes/barbarians/conf:142
 #: ../../tribes/barbarians/metalworks/help.lua:41
@@ -2386,7 +2392,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:34
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Space required:"
-msgstr ""
+msgstr "Требуемая площадка:"
 
 #: ../../tribes/barbarians/conf:145
 #: ../../tribes/barbarians/metalworks/help.lua:39
@@ -2998,7 +3004,7 @@ msgstr ""
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
 msgid "Upgrade Cost:"
-msgstr ""
+msgstr "Затраты на улучшение:"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:39
 #: ../../tribes/barbarians/deep_goldmine/help.lua:35
@@ -3007,7 +3013,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:34
 #: ../../tribes/barbarians/deeper_oremine/help.lua:34
 msgid "Upgrade cost:"
-msgstr ""
+msgstr "Затраты на улучшение:"
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -3156,7 +3162,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:54
 #: ../../tribes/barbarians/well/help.lua:38
 msgid "Upgradeable to:"
-msgstr ""
+msgstr "Улучшается до:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -3187,7 +3193,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:33
 msgid "Upgraded from:"
-msgstr ""
+msgstr "Улучшено из:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:20
 #: ../../tribes/barbarians/bakery/help.lua:19
@@ -3218,7 +3224,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:20
 #: ../../tribes/barbarians/well/help.lua:19
 msgid "Vision range:"
-msgstr ""
+msgstr "Дальность обзора:"
 
 #: ../../tribes/barbarians/conf:109
 msgid "War Helmet"
@@ -3372,7 +3378,7 @@ msgstr "работа"
 #: ../../tribes/barbarians/trainingscamp/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:43
 msgid "Worker uses:"
-msgstr ""
+msgstr "Работники используют:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:54
 #: ../../tribes/barbarians/bakery/help.lua:48
@@ -3403,7 +3409,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:56
 #: ../../tribes/barbarians/well/help.lua:40
 msgid "Workers"
-msgstr ""
+msgstr "Работники"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:54
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
@@ -3414,7 +3420,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:60
 msgid "Workers use:"
-msgstr ""
+msgstr "Работники используют:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:18
 #: ../../tribes/barbarians/bakery/help.lua:17
@@ -3445,7 +3451,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:18
 #: ../../tribes/barbarians/well/help.lua:17
 msgid "Working radius:"
-msgstr ""
+msgstr "Рабочая площадь:"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
