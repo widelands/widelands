@@ -623,8 +623,7 @@ with each hitpoint level he gains 28 hitpoints.]]
       ) .. h2(_"Attack:") .. p(_
 [[The amount of damage a soldier inflicts upon a successful attack on the
 enemy. A barbarian soldier with attack level 0 inflicts ~14 hitpoints damage
-when he succeeds to hit an enemy. For each attack level, he gains 7 damage.
-]]
+when he succeeds to hit an enemy. For each attack level, he gains 7 damage.]]
       ) .. h2(_"Defense:") .. p(_
 [[Defense is the value that is subtracted from the attack value. The barbarians
 can not train in this skill and therefore have always defense level 0 which
