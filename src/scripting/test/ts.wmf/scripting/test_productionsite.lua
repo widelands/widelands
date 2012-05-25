@@ -68,6 +68,15 @@ function productionsite_tests:test_set_workers()
    assert_equal(0, rv.carrier)
    assert_equal(nil, rv.blacksmith)
 end
+function productionsite_tests:test_worker_name()
+   local f = self.inn.fields[1]
+   while #f.bobs > 0 do
+      f.bobs[1]:remove()
+   end
+   self.inn:set_workers("innkeeper", 1) -- Innkeeper will be created as an instance.
+   assert_equal(1, #f.bobs)
+   assert_equal(f.bobs[1].name, "innkeeper")
+end
 function productionsite_tests:test_set_workers_warmill()
    self.warmill:set_workers("master-blacksmith",1)
    assert_equal(1, _cnt(self.warmill:get_workers("all")))
