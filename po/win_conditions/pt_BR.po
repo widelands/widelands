@@ -7,31 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-28 21:17+0000\n"
-"PO-Revision-Date: 2011-12-08 12:42+0000\n"
+"POT-Creation-Date: 2012-05-25 18:55+0000\n"
+"PO-Revision-Date: 2012-05-25 23:20+0000\n"
 "Last-Translator: Tomas Abril <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:40+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-05-26 04:42+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
-msgstr ""
+msgstr "%i árvores."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
-msgstr ""
+msgstr "%s tem "
 
 #: ../../scripting/win_condition_texts.lua:28
 msgid "%s has %i trees at the moment."
-msgstr ""
+msgstr "%s tem %i arvores no momento."
 
 #: ../../scripting/win_condition_texts.lua:46
 msgid "%s owns more than half of the maps area."
-msgstr ""
+msgstr "%s possui mais da metade da área do mapa."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
@@ -54,7 +54,7 @@ msgstr "Colecionadores"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
-msgstr ""
+msgstr "Parabéns!"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -76,7 +76,7 @@ msgstr "Jogo sem fim (sem nevoeiro)"
 
 #: ../../scripting/win_condition_texts.lua:49
 msgid "Keep it for %i more minutes to win the game."
-msgstr ""
+msgstr "Mantenha por %i mais minutos para vencer o jogo."
 
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
@@ -85,11 +85,11 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
-msgstr ""
+msgstr "Pontos"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
-msgstr ""
+msgstr "Situação"
 
 #: ../../scripting/win_condition_texts.lua:38
 msgid "Status for %s<br>"
@@ -97,7 +97,7 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:45
 msgid "Team %i"
-msgstr ""
+msgstr "Time %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:13
 msgid "Territorial Lord"
@@ -105,11 +105,11 @@ msgstr "Senhor do Território"
 
 #: ../../scripting/win_condition_texts.lua:27
 msgid "The game will end in %i minutes."
-msgstr ""
+msgstr "O jogo vai terminar em %i minutos."
 
 #: ../../scripting/win_condition_texts.lua:40
 msgid "The game will end in %s."
-msgstr ""
+msgstr "O jogo vai terminar em %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:14
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -118,7 +118,7 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:32
 msgid "The winner is %s "
-msgstr ""
+msgstr "O vencedor é %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:14
 msgid "This is an endless game without rules."
@@ -131,11 +131,11 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:39
 msgid "Total: %i points"
-msgstr ""
+msgstr "Total: %i pontos"
 
 #: ../../scripting/win_condition_texts.lua:34
 msgid "Trees owned"
-msgstr ""
+msgstr "Arvores possuídas"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid "Wood Gnome"
@@ -143,11 +143,11 @@ msgstr "Gnomo de Madeira"
 
 #: ../../scripting/win_condition_texts.lua:7
 msgid "You are defeated!"
-msgstr ""
+msgstr "Você está derrotado!"
 
 #: ../../scripting/win_condition_texts.lua:13
 msgid "You are the winner!"
-msgstr ""
+msgstr "Você é o vencedor!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:15
 msgid ""
@@ -165,11 +165,11 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
-msgstr ""
+msgstr "Você venceu este jogo!"
 
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
-msgstr ""
+msgstr "Você perdeu"
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
@@ -181,7 +181,7 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
-msgstr ""
+msgstr "Você venceu!"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
@@ -189,4 +189,4 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
-msgstr ""
+msgstr "com %i arvores."

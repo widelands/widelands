@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-04-28 23:17+0200\n"
+"POT-Creation-Date: 2012-05-25 20:55+0200\n"
 "PO-Revision-Date: 2012-05-06 13:37+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2012-05-07 04:33+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-26 04:40+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -2991,7 +2991,7 @@ msgstr "Začni hrať"
 msgid "Show the help window"
 msgstr "Zobraziť okno s pomocou"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:662
+#: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:664
 msgid "Multiplayer Game Setup"
 msgstr "Nastavenie hry viacerých hráčov"
 
@@ -3140,15 +3140,15 @@ msgstr "* Typ sveta: %s\n"
 msgid "* Scenario mode selected\n"
 msgstr "* Zvolený režim scenára\n"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:663
+#: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid "You are in the multiplayer launch game menu."
 msgstr "Nachádzate sa v hernom menu založenia hry pre viacerých hráčov."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:664
+#: ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Client settings"
 msgstr "Nastavenia klientov"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:667
+#: ../../src/ui_fsmenu/launchMPG.cc:669
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
@@ -3156,7 +3156,7 @@ msgstr ""
 "Na ľavej strane je zoznam všetkých klientov vrátane vás. Pomocou tlačidla v "
 "zadnej časti vašej prezývky si môžete nastaviť rolu. Dostupné roly:"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:671
+#: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share the control over the player (\"shared kingdom "
@@ -3165,7 +3165,7 @@ msgstr ""
 "Hráč s farbou vlajky. Ak si viacerí klienti vyberú rovnakú farbu, znamená "
 "to, že zdieľajú kontrolu nad hráčom (\"režim zdieľaného kráľovstva\")."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:675
+#: ../../src/ui_fsmenu/launchMPG.cc:677
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
@@ -3173,11 +3173,11 @@ msgstr ""
 "A divácky režim, čo znamená, že vidíte všetko, ale nemáte kontrolu nad "
 "žiadnym hráčom."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:677
+#: ../../src/ui_fsmenu/launchMPG.cc:679
 msgid "Player settings"
 msgstr "Nastavenia hráčov"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:680
+#: ../../src/ui_fsmenu/launchMPG.cc:682
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
@@ -3185,13 +3185,13 @@ msgstr ""
 "V strede sú nastavenia hráčov. Aby sa mohla hra začať, každý hráč musí byť "
 "jedno z nasledujúcich:"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:683
+#: ../../src/ui_fsmenu/launchMPG.cc:685
 msgid "Connected to one or more clients (see \"Client settings\")."
 msgstr ""
 "Pripojený k jednému alebo viacerým klientom (pozrite \"Nastavenia "
 "klientov\")."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:686
+#: ../../src/ui_fsmenu/launchMPG.cc:688
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicates the strength of the currently selected computer "
@@ -3200,15 +3200,15 @@ msgstr ""
 "Hráč ovládaný počítačom (tvár na obrázku, ako aj text po prekrytí myšou "
 "naznačujú silu aktuálne vybraného počítačového hráča)."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:689
+#: ../../src/ui_fsmenu/launchMPG.cc:691
 msgid "Set as shared in starting position for another player."
 msgstr "Nastavený na zdieľanie počiatočnej pozície s iným hráčom."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:690
+#: ../../src/ui_fsmenu/launchMPG.cc:692
 msgid "Closed."
 msgstr "Uzavretý."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:693
+#: ../../src/ui_fsmenu/launchMPG.cc:695
 msgid ""
 "The later three are only settable by the hosting client by left clicking the "
 "\"type\" button of a player. Hosting players can further set the "
@@ -3220,7 +3220,7 @@ msgstr ""
 "hráča (budovy, tovar a pracovníkov, s ktorými hráč začína) a kmeň a tím "
 "počítačových hráčov."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:698
+#: ../../src/ui_fsmenu/launchMPG.cc:700
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
@@ -3228,11 +3228,11 @@ msgstr ""
 "Každý klient pripojený k hráčovi (zvolenej \"role\" hráč) môže nastaviť kmeň "
 "aj tím tohto hráča"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:700
+#: ../../src/ui_fsmenu/launchMPG.cc:702
 msgid "Map informations"
 msgstr "Informácie o mape"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:703
+#: ../../src/ui_fsmenu/launchMPG.cc:705
 msgid ""
 "On the right side are informations about the selected map or savegame. A "
 "button right to the map name allows the host to change to a different one. "

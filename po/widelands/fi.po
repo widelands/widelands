@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-04-28 23:17+0200\n"
+"POT-Creation-Date: 2012-05-25 20:55+0200\n"
 "PO-Revision-Date: 2012-03-09 02:43+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:37+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-05-26 04:38+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2949,7 +2949,7 @@ msgstr "Aloita peli"
 msgid "Show the help window"
 msgstr "Näytä ohjeikkuna"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:662
+#: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:664
 msgid "Multiplayer Game Setup"
 msgstr "Moninpeli asetukset"
 
@@ -3091,15 +3091,15 @@ msgstr "* Maailma: %s\n"
 msgid "* Scenario mode selected\n"
 msgstr "* Skenaario tila valittu\n"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:663
+#: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid "You are in the multiplayer launch game menu."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:664
+#: ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Client settings"
 msgstr "Asiakasasetukset"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:667
+#: ../../src/ui_fsmenu/launchMPG.cc:669
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
@@ -3107,7 +3107,7 @@ msgstr ""
 "Vasemmalla on luettelo kaikista asiakkaista, sinä mukaanlukien. Kutsumanimen "
 "viereisellä painikkeella voit vaihtaa roolia. Valittavat roolit ovat:"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:671
+#: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share the control over the player (\"shared kingdom "
@@ -3117,7 +3117,7 @@ msgstr ""
 "värin, nämä asiakkaat jakavat pelaajan hallinnan (\"jaettu valtakunta -"
 "tila\")."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:675
+#: ../../src/ui_fsmenu/launchMPG.cc:677
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
@@ -3125,11 +3125,11 @@ msgstr ""
 "Ja katsoja tila, jossa voit bähdä kaiken, mutta et voi hallita mitään "
 "pelaajaa."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:677
+#: ../../src/ui_fsmenu/launchMPG.cc:679
 msgid "Player settings"
 msgstr "Pelaaja asetukset"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:680
+#: ../../src/ui_fsmenu/launchMPG.cc:682
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
@@ -3137,12 +3137,12 @@ msgstr ""
 "Keskellä ovat pelaajien asetukset. Ennen kuin peli voi alkaa, jokisen "
 "pelaajan täyyy olla yksi seuraavista:"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:683
+#: ../../src/ui_fsmenu/launchMPG.cc:685
 msgid "Connected to one or more clients (see \"Client settings\")."
 msgstr ""
 "Liitetty yhteen tai useampaan asiakkaaseen (katso \"Asiakasasetukset\")."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:686
+#: ../../src/ui_fsmenu/launchMPG.cc:688
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicates the strength of the currently selected computer "
@@ -3151,15 +3151,15 @@ msgstr ""
 "Liitetty tietokoneen hallitsemaan pelaajaan (Pelaajan vaikeustaso näkyy "
 "kuvan naamasta sekä tekstistä kun hiiren vie valitun pelaajan päälle)."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:689
+#: ../../src/ui_fsmenu/launchMPG.cc:691
 msgid "Set as shared in starting position for another player."
 msgstr "Asetettu jakamaan aloituspaikka toisen pelaajan kanssa."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:690
+#: ../../src/ui_fsmenu/launchMPG.cc:692
 msgid "Closed."
 msgstr "Suljettu."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:693
+#: ../../src/ui_fsmenu/launchMPG.cc:695
 msgid ""
 "The later three are only settable by the hosting client by left clicking the "
 "\"type\" button of a player. Hosting players can further set the "
@@ -3167,7 +3167,7 @@ msgid ""
 "player starts with) and the tribe an team for computer players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launchMPG.cc:698
+#: ../../src/ui_fsmenu/launchMPG.cc:700
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
@@ -3175,11 +3175,11 @@ msgstr ""
 "Jokainen pelaajaan liitetty asiakas (\"Rooli\" on pelaaja) voi asettaa oman "
 "pelaajan heimon ja joukkueen."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:700
+#: ../../src/ui_fsmenu/launchMPG.cc:702
 msgid "Map informations"
 msgstr "Kartan tiedot"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:703
+#: ../../src/ui_fsmenu/launchMPG.cc:705
 msgid ""
 "On the right side are informations about the selected map or savegame. A "
 "button right to the map name allows the host to change to a different one. "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-04-28 23:17+0200\n"
+"POT-Creation-Date: 2012-05-25 20:55+0200\n"
 "PO-Revision-Date: 2012-05-03 01:19+0000\n"
 "Last-Translator: Michael Colignon <ledesillusionniste@hotmail.com>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:33+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-26 04:38+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -3022,7 +3022,7 @@ msgstr "Commencer la partie"
 msgid "Show the help window"
 msgstr "Afficher la fenêtre d'aide"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:662
+#: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:664
 msgid "Multiplayer Game Setup"
 msgstr "Confiuration du jeu multijoueur"
 
@@ -3176,15 +3176,15 @@ msgstr "* Tpe de monde:%s\n"
 msgid "* Scenario mode selected\n"
 msgstr "* Mode de scénario sélectionné\n"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:663
+#: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid "You are in the multiplayer launch game menu."
 msgstr "Vous êtes dans le menu de lancement du jeux multijoueur"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:664
+#: ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Client settings"
 msgstr "Configuration des clients"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:667
+#: ../../src/ui_fsmenu/launchMPG.cc:669
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
@@ -3193,7 +3193,7 @@ msgstr ""
 "le bouton derrière votre surnom, vous pouvez définir votre rôle. Les rôles "
 "disponibles sont:"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:671
+#: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share the control over the player (\"shared kingdom "
@@ -3203,7 +3203,7 @@ msgstr ""
 "même couleur, ils partageront les contrôles du joueur (\"mode de royaume "
 "partagé\")."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:675
+#: ../../src/ui_fsmenu/launchMPG.cc:677
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
@@ -3211,11 +3211,11 @@ msgstr ""
 "Et mode spectateur, veut dire que vous pouvez tout voir, mais que vous ne "
 "pouvez contrôler aucun joueur"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:677
+#: ../../src/ui_fsmenu/launchMPG.cc:679
 msgid "Player settings"
 msgstr "Configuration des joueurs"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:680
+#: ../../src/ui_fsmenu/launchMPG.cc:682
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
@@ -3223,11 +3223,11 @@ msgstr ""
 "Au milieu sont les réglages pour les joueurs. Pour démarrer un jeu, chaque "
 "joueur doit être un de ce qui suit:"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:683
+#: ../../src/ui_fsmenu/launchMPG.cc:685
 msgid "Connected to one or more clients (see \"Client settings\")."
 msgstr "Connecté à un ou plusieurs clients (voir \"Réglages Clients\")."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:686
+#: ../../src/ui_fsmenu/launchMPG.cc:688
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicates the strength of the currently selected computer "
@@ -3236,16 +3236,16 @@ msgstr ""
 "Connecté à un joueur informatique (le visage sur la photo ainsi que le "
 "souris sur le texte indiquent la force de l'actuel joueur informatique)."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:689
+#: ../../src/ui_fsmenu/launchMPG.cc:691
 msgid "Set as shared in starting position for another player."
 msgstr ""
 "Définir en tant que position de départ partagée pour un autre joueur."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:690
+#: ../../src/ui_fsmenu/launchMPG.cc:692
 msgid "Closed."
 msgstr "Fermé."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:693
+#: ../../src/ui_fsmenu/launchMPG.cc:695
 msgid ""
 "The later three are only settable by the hosting client by left clicking the "
 "\"type\" button of a player. Hosting players can further set the "
@@ -3258,7 +3258,7 @@ msgstr ""
 "bâtiments, marchandises et travailleurs avec lesquels le joueur démarre) et "
 "les tribu et équipe des joueurs joués par l'ordinateur."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:698
+#: ../../src/ui_fsmenu/launchMPG.cc:700
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
@@ -3266,11 +3266,11 @@ msgstr ""
 "Chaque client connecté à un joueur (le \"rôle\" définit par le joueur) peu "
 "choisir la tribu et l'équipe pour ce joueur"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:700
+#: ../../src/ui_fsmenu/launchMPG.cc:702
 msgid "Map informations"
 msgstr "Informations de la carte"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:703
+#: ../../src/ui_fsmenu/launchMPG.cc:705
 msgid ""
 "On the right side are informations about the selected map or savegame. A "
 "button right to the map name allows the host to change to a different one. "

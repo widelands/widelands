@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-28 21:17+0000\n"
+"POT-Creation-Date: 2012-05-25 18:55+0000\n"
 "PO-Revision-Date: 2012-03-14 18:21+0000\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-29 04:33+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-05-26 04:34+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
@@ -25,7 +25,7 @@ msgstr "01 - Dalla nemesi alla genesi"
 msgid "A dangerous finding"
 msgstr "Una scoperta pericolosa"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:565
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:564
 msgid ""
 "A friend of mine explored the island on his own and he told me of a big "
 "lake\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "A man comes to Jundlina"
 msgstr "Un uomo arriva da Jundlina"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:539
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:538
 msgid "A young man approaches"
 msgstr "Un giovane si avvicina"
 
@@ -107,7 +107,7 @@ msgstr ""
 "due cose vengano accettate dalla gente e ridurrebbero i tempi di cottura\n"
 "senza portar via il rituale."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:513
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:512
 msgid ""
 "And yet another of these buildings. We know now that the tribe that built\n"
 "them once had complete control over the island. But I am no longer so scared "
@@ -129,7 +129,7 @@ msgstr ""
 "Ma senza\n"
 "pericoli ovvi mi sto sentendo già molto a casa qui."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:496
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:495
 msgid "Another building."
 msgstr "Un altro edificio."
 
@@ -260,7 +260,7 @@ msgstr "Colionder arriva"
 msgid "Colionder is in thought"
 msgstr "Colionder sta pensando"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:595
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:594
 msgid "Congratulations"
 msgstr "Congratulazioni"
 
@@ -465,9 +465,9 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:297
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:441
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:454
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:531
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:549
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:587
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:530
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:548
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:586
 msgid "Jundlina"
 msgstr "Jundlina"
 
@@ -487,7 +487,7 @@ msgstr "Jundlina è arrabbiata"
 msgid "Jundlina is in thought"
 msgstr "Jundlina sta pensando"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:586
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:585
 msgid "Jundlina is relieved"
 msgstr "Jundlina è alleviata"
 
@@ -500,7 +500,7 @@ msgstr "Jundlina sta esaminando i rapporti"
 msgid "Jundlina is satisfied"
 msgstr "Jundlina è soddisfatta"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:497
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:496
 msgid "Jundlina is worried"
 msgstr "Jundlina è preoccupata"
 
@@ -518,8 +518,8 @@ msgstr "Jundlina ha ricevuto una lettera"
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:376
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:398
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:428
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:548
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:572
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:547
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:571
 msgid "Jundlina replies"
 msgstr "Jundlina risponde"
 
@@ -567,7 +567,7 @@ msgstr "Loftomor e Sidolus arrivano"
 msgid "Loftomor speaks"
 msgstr "Loftomor parla"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:532
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:531
 msgid ""
 "May Satul save us! Lutas is still trying to get to us. A scout informed me\n"
 "that the ocean is rising quickly. We have to reach higher ground and "
@@ -755,7 +755,7 @@ msgstr ""
 "i tabarri per i giovani soldati ed i tabarri dorati per gli ufficiali.\n"
 "Ne avrai sicuramente bisogno non appena vorrai reclutare nuovi soldati."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:541
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:540
 msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I "
 "have\n"
@@ -796,7 +796,7 @@ msgstr ""
 "e divennero\n"
 "civilizzati."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:511
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:510
 msgid "One more building"
 msgstr "Ancora un edificio"
 
@@ -804,11 +804,11 @@ msgstr "Ancora un edificio"
 msgid "Opol seeks out Jundlina"
 msgstr "Opol cerca Jundlina"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:557
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:556
 msgid "Ostur seems confident"
 msgstr "Ostur sembra fiducioso"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:550
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:549
 msgid ""
 "Ostur, we have no time. The water rises too fast and if we build the ships "
 "on\n"
@@ -857,7 +857,7 @@ msgstr ""
 "la montagna ora, sembra una buona idea avere un magazzino ai suoi piedi per\n"
 "evitare di trasportare tutto su e giù per i pendii."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:588
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:587
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships -\n"
 "never have I seen sturdier ones - with enough room to carry all of us and "
@@ -956,7 +956,7 @@ msgstr "Le memoria della principessa"
 msgid "The supply of build wares"
 msgstr "L'offerta di beni per la costruzione"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:530
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:529
 msgid "The water is rising!"
 msgstr "L'acqua sta crescendo"
 
@@ -1079,7 +1079,7 @@ msgstr ""
 "la fortificazione\n"
 "dei nostri confini."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:498
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:497
 msgid ""
 "We found one more building of this strange making. We have yet to see any "
 "of\n"
@@ -1173,7 +1173,7 @@ msgstr ""
 "non\n"
 "è scusabile! Spiegamelo, se ci riesci!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:596
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:595
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
@@ -1182,7 +1182,7 @@ msgstr ""
 "per\n"
 "quanto tempo vuoi."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:574
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:573
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your\n"

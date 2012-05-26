@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-04-28 23:17+0200\n"
-"PO-Revision-Date: 2012-05-05 02:20+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"POT-Creation-Date: 2012-05-25 20:55+0200\n"
+"PO-Revision-Date: 2012-05-25 08:12+0000\n"
+"Last-Translator: Koneu <koneu93@googlemail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-05-06 04:33+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-26 04:38+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -32,16 +32,16 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:907 ../../src/wlapplication.cc:915
 msgid "could not find the path of the main executable"
-msgstr "konnte den Pfad zum Hauptprogramm nicht finden"
+msgstr "konnte den Pfad der Hauptanwendung nicht finden"
 
 #: ../../src/wlapplication.cc:1037
 msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"Probleme beim Beenden von Widelands Audio. Der Prozess wurde beendet. Bitte "
-"führen Sie ein Update Ihres Audio Treibers und/oder SDL durch, damit das "
-"Problem nicht mehr auftritt.\n"
+"Wartete 5 Sekunden auf das Schließen von Widelands Audio. Es ist ein Problem "
+"aufgetreten, also wird Widelands beendet. Aktualisiere die Audiotreiber "
+"und/oder SDL um das Problem zu beheben.\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -56,7 +56,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1177
 msgid "--double is disabled. This is not a debug build!"
-msgstr "--double ist nicht möglich, dies ist kein debug build!"
+msgstr "--double ist deaktiviert. Dies ist nicht die Debug-Version!"
 
 #: ../../src/wlapplication.cc:1298
 msgid "This is Widelands-"
@@ -89,14 +89,16 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
-" --<Konfigurationselementname>=Wert überschreibt die Einstellung aus der "
-"Konfigurationsdatei.\n"
-"--logfile=DATEINAME schreibt in die Logdatei mit dem Namen DATEINAME statt "
-"ins Terminal.\n"
-"--datadir=DIRNAME Benutzt das Verzeichnis DIRNAME für die Widelands-"
-"Datendateien.\n"
-"--homedir=DIRNAME Benutzt das Verzeichnis DIRNAME für die "
-"Widelandskonfigurationsdateien, Spielstände und Spielaufzeichnungen.\n"
+" --<Name-deEinstellung>=Wert ersetzt die Einstellung in der config-Datei.\n"
+"\n"
+" --logfile=DATEINAME Schreibt Log in die Datei DATEINAME anstatt ins \n"
+"                      Terminal\n"
+" --datadir=VERZEICHNISNAME Benutzt das angegebene Verzeichnis für die "
+"Widelands\n"
+"                      Daten\n"
+" --homedir=VERZEICHNISNAME Benutzt das angegebene Verzeichnis für die "
+"Widelands-config-\n"
+"                      Dateien, Spielstände und Aufzeichnungen\n"
 
 #: ../../src/wlapplication.cc:1313
 msgid "                      Default is ~/.widelands\n"
@@ -291,7 +293,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1554
 msgid "Warning: "
-msgstr "Warnung: "
+msgstr "Achtung: "
 
 #: ../../src/wlapplication.cc:1558
 msgid "Game data error"
@@ -322,15 +324,15 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
-". Bitte füge der Meldung diese Information hinzu.\n"
+". Bitte füge der Meldung diese Informationen hinzu.\n"
 "\n"
-"Widelands versucht eine Speicherung durchzuführen wenn ein Fehler auftrat. "
-"Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden "
-"und fortzusetzen.\n"
+"Widelands versucht einen Spielstand zu schreiben, wenn im Spielverlauf ein "
+"Fehler auftrat. Es ist oft - wenn auch nicht immer - möglich, das Spiel "
+"wieder zu laden und weiterzuspielen.\n"
 
 #: ../../src/wlapplication.cc:1690
 msgid "The address of the game server is invalid"
-msgstr "Die Adresse des Spieler-Servers ist inkorrekt"
+msgstr "Die Adresse des Spiel-Servers ist ungültig"
 
 #: ../../src/wlapplication.cc:1797 ../../src/network/nethost.cc:2003
 msgid "Player"
@@ -339,7 +341,7 @@ msgstr "Spieler"
 #: ../../src/wlapplication.cc:1986 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:811
 msgid "Preparing game"
-msgstr "Bereite Spiel vor"
+msgstr "Spiel vorbereiten"
 
 #: ../../src/wlapplication.cc:2094
 msgid "End of replay"
@@ -357,7 +359,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2179 ../../src/logic/game.cc:369
 #: ../../src/logic/game.cc:409
 msgid "Loading..."
-msgstr "Lade..."
+msgstr "Laden..."
 
 #: ../../src/writeHTML.cc:44
 msgid "Requesters"
@@ -386,7 +388,7 @@ msgstr "Gebäudearten"
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:512
 #: ../../src/writeHTML.cc:1465
 msgid "Icon"
-msgstr "Bild"
+msgstr "Symbol"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:514
 #: ../../src/writeHTML.cc:1467 ../../src/ui_fsmenu/internet_lobby.cc:154
@@ -3035,7 +3037,7 @@ msgstr "Spiel starten"
 msgid "Show the help window"
 msgstr "Das Hilfefenster anzeigen"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:662
+#: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:664
 msgid "Multiplayer Game Setup"
 msgstr "Multiplayer Spieleinstellungen"
 
@@ -3192,15 +3194,15 @@ msgstr "* Welttyp: %s\n"
 msgid "* Scenario mode selected\n"
 msgstr "* Szenariomodus gewählt\n"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:663
+#: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid "You are in the multiplayer launch game menu."
 msgstr "Sie befinden sich in dem Multiplayer-Start-Spielmenü."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:664
+#: ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Client settings"
 msgstr "Benutzereinstellungen"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:667
+#: ../../src/ui_fsmenu/launchMPG.cc:669
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
@@ -3209,7 +3211,7 @@ msgstr ""
 "Der Knopf hinter deinem Nicknamen ermöglicht dir, deine Rolle im Spiel zu "
 "verändern. Mögliche Rollen sind:"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:671
+#: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share the control over the player (\"shared kingdom "
@@ -3219,7 +3221,7 @@ msgstr ""
 "Spieler (die selbe farbige Flagge) ausgewählt haben, kontrollieren sie den "
 "Spieler zusammen (\"Gemeinsames Königreich\")."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:675
+#: ../../src/ui_fsmenu/launchMPG.cc:677
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
@@ -3227,11 +3229,11 @@ msgstr ""
 "Und Beobachtermodus. Als Beobachter kannst du alle Geschehnisse im Spiel "
 "sehen, kontrollierst aber keinen Spieler."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:677
+#: ../../src/ui_fsmenu/launchMPG.cc:679
 msgid "Player settings"
 msgstr "Spielereinstellungen"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:680
+#: ../../src/ui_fsmenu/launchMPG.cc:682
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
@@ -3240,12 +3242,12 @@ msgstr ""
 "Spiel starten zu können muss jeder Spieler in einem der folgenden Zustände "
 "sein:"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:683
+#: ../../src/ui_fsmenu/launchMPG.cc:685
 msgid "Connected to one or more clients (see \"Client settings\")."
 msgstr ""
 "Mit einem oder mehreren Benutzern verknüpft (siehe \"Benutzereinstellungen\")"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:686
+#: ../../src/ui_fsmenu/launchMPG.cc:688
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicates the strength of the currently selected computer "
@@ -3254,15 +3256,15 @@ msgstr ""
 "Mit einem Computer Spieler verknüpft (das gesicht und der Hovertext deuten "
 "die Stärke des derzeitig ausgewählten Computer Spielers an)."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:689
+#: ../../src/ui_fsmenu/launchMPG.cc:691
 msgid "Set as shared in starting position for another player."
 msgstr "Als weiterer Startpunkt für einen anderen Spieler gesetzt."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:690
+#: ../../src/ui_fsmenu/launchMPG.cc:692
 msgid "Closed."
 msgstr "Geschlossen."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:693
+#: ../../src/ui_fsmenu/launchMPG.cc:695
 msgid ""
 "The later three are only settable by the hosting client by left clicking the "
 "\"type\" button of a player. Hosting players can further set the "
@@ -3275,7 +3277,7 @@ msgstr ""
 "und Arbeitern mit denen der Spieler beginnt) und den Stamm für die "
 "Computerspieler einstellen."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:698
+#: ../../src/ui_fsmenu/launchMPG.cc:700
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
@@ -3283,11 +3285,11 @@ msgstr ""
 "Jeder Benutzer, der mit einem Spieler verknüpft ist (also die \"Rolle\" "
 "dieses Spielers hat), kann das Volk und das Team dieses Spielers einstellen."
 
-#: ../../src/ui_fsmenu/launchMPG.cc:700
+#: ../../src/ui_fsmenu/launchMPG.cc:702
 msgid "Map informations"
 msgstr "Karteninformationen"
 
-#: ../../src/ui_fsmenu/launchMPG.cc:703
+#: ../../src/ui_fsmenu/launchMPG.cc:705
 msgid ""
 "On the right side are informations about the selected map or savegame. A "
 "button right to the map name allows the host to change to a different one. "
