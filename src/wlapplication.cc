@@ -2296,7 +2296,8 @@ bool WLApplication::redirect_output(std::string path)
 	if (!newfp) return false;
 	/* Redirect standard error */
 	std::string stderrfile = path + "/stderr.txt";
-	freopen(stderrfile.c_str(), "w", stderr);
+	newfp = freopen(stderrfile.c_str(), "w", stderr);
+	if (!newfp) return false;
 
 	/* Line buffered */
 	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
