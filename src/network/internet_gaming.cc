@@ -115,7 +115,7 @@ void InternetGaming::initialiseConnection() {
 			 _
 			 	("Widelands could not establish a connection to the given address.\n"
 			 	 "Either there was no metaserver running at the supposed port or\n"
-			 	 "your network setup is broken."));
+			 	 "your snetwork setup is broken."));
 
 	m_sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (m_sockset, m_sock);
@@ -399,7 +399,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			logout();
 			setError();
 			throw warning
-				(_
+				(_("Unexpected packet"),
+				 _
 				 	("Expected a LOGIN, RELOGIN or REJECTED packet from server, but received command "
 				 	 "%s. Maybe the metaserver is using a different protocol version ?"),
 				 cmd.c_str());
@@ -442,7 +443,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			std::string type     = packet.String();
 
 			if (type != "public" && type != "private" && type != "system")
-				throw warning("Invalid chat message type \"%s\".", type.c_str());
+				throw warning(_("Invalid message type"), _("Invalid chat message type \"%s\"."), type.c_str());
 
 			bool        personal = type == "private";
 			bool        system   = type == "system";
@@ -747,7 +748,10 @@ void InternetGaming::send(std::string const & msg) {
  */
 bool InternetGaming::str2bool(std::string str) {
 	if ((str != "true") && (str != "false"))
-		throw warning("Conversion from std::string to bool failed. String was \"%s\"", str.c_str());
+		throw warning
+			(_("Conversion error"),
+			_("Conversion from std::string to bool failed. String was \"%s\""), str.c_str());
+
 	return str == "true";
 }
 
