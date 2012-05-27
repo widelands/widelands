@@ -115,7 +115,7 @@ void InternetGaming::initialiseConnection() {
 			 _
 			 	("Widelands could not establish a connection to the given address.\n"
 			 	 "Either there was no metaserver running at the supposed port or\n"
-			 	 "your snetwork setup is broken."));
+			 	 "your network setup is broken."));
 
 	m_sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (m_sockset, m_sock);
