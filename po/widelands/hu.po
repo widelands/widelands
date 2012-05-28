@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-03-17 16:17+0000\n"
-"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"PO-Revision-Date: 2012-05-27 13:41+0000\n"
+"Last-Translator: Matyas Mechler <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:39+0000\n"
+"X-Launchpad-Export-Date: 2012-05-28 05:11+0000\n"
 "X-Generator: Launchpad (build 15288)\n"
 
 #: ../../src/computer_player.cc:38
@@ -827,7 +827,7 @@ msgstr "Ismeretlen"
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:87
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "Parancssor: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
