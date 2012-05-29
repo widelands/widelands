@@ -534,6 +534,9 @@ struct Player :
 	std::vector<uint32_t> const * get_ware_consumption_statistics
 		(Ware_Index const) const;
 
+	std::vector<uint32_t> const * get_ware_stock_statistics
+		(Ware_Index const) const;
+
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
@@ -619,6 +622,13 @@ private:
 	 * m_ware_consumptions[ware_id][time_index]
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_consumptions;
+
+	/**
+	 * Statistics of wares stored inside of warehouses over the
+	 * life of the game, indexed as
+	 * m_ware_stocks[ware_id][time_index]
+	 */
+	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
 	BuildingStats m_building_stats;
 };

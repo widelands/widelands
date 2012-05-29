@@ -23,6 +23,7 @@
 #include "cmd_expire_message.h"
 #include "cmd_luacoroutine.h"
 #include "constructionsite.h"
+#include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "findimmovable.h"
@@ -94,7 +95,8 @@ Player::Player
 	m_current_produced_statistics(tribe_descr.get_nrwares    ()),
 	m_current_consumed_statistics(tribe_descr.get_nrwares    ()),
 	m_ware_productions  (tribe_descr.get_nrwares    ()),
-	m_ware_consumptions  (tribe_descr.get_nrwares    ())
+	m_ware_consumptions  (tribe_descr.get_nrwares    ()),
+	m_ware_stocks  (tribe_descr.get_nrwares          ())
 {
 	set_name(name);
 }
@@ -1057,13 +1059,39 @@ void Player::sample_statistics()
 {
 	assert (m_ware_productions.size() == tribe().get_nrwares().value());
 	assert (m_ware_consumptions.size() == tribe().get_nrwares().value());
+	assert (m_ware_stocks.size() == tribe().get_nrwares().value());
 
+	//calculate stocks
+	std::vector<uint32_t> stocks(tribe().get_nrwares().value());
+
+	const uint32_t nrecos = get_nr_economies();
+	for (uint32_t i = 0; i < nrecos; ++i) {
+		const std::vector<Widelands::Warehouse *> & warehouses =
+			get_economy_by_number(i)->warehouses();
+
+		for
+			(std::vector<Widelands::Warehouse *>::const_iterator it =
+			 warehouses.begin();
+			 it != warehouses.end();
+			 ++it)
+		{
+			for (uint32_t id; id < stocks.size(); ++id) {
+				stocks[id] += (*it)->get_economy()->stock_ware
+					(Ware_Index(static_cast<size_t>(id)));
+			}
+		}
+	}
+
+
+	//update statistics
 	for (uint32_t i = 0; i < m_ware_productions.size(); ++i) {
 		m_ware_productions[i].push_back(m_current_produced_statistics[i]);
 		m_current_produced_statistics[i] = 0;
 
 		m_ware_consumptions[i].push_back(m_current_consumed_statistics[i]);
 		m_current_consumed_statistics[i] = 0;
+
+		m_ware_stocks[i].push_back(stocks[i]);
 	}
 }
 
@@ -1115,6 +1143,14 @@ const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 	assert(ware.value() < m_ware_consumptions.size());
 
 	return &m_ware_consumptions[ware];
+}
+
+const std::vector<uint32_t> * Player::get_ware_stock_statistics
+		(Ware_Index const ware) const
+{
+	assert(ware.value() < m_ware_stocks.size());
+
+	return &m_ware_stocks[ware];
 }
 
 
@@ -1193,12 +1229,13 @@ const std::string & Player::getAI() const
  *   0 - old style statistics (before WiHack 2010)
  *   1 - statistics with ware names
  *   2 - with consumption statistics
+ *   3 - with stock statistics
  */
 void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 {
-	 //version 1 and 2 only differs in an additional statistic.
-	 //Use version 1 code for both
-	if ((version == 2) || (version == 1)) {
+	 //version 1, 2 and 3 only differs in an additional statistic.
+	 //Use version 1 code for all of them
+	if ((version == 2) || (version == 1) || (version == 3)) {
 		uint16_t nr_wares = fr.Unsigned16();
 		uint16_t nr_entries = fr.Unsigned16();
 
@@ -1222,7 +1259,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 		}
 
 		//read consumption statistics if it exists
-		if (version == 2) {
+		if ((version == 2) || (version == 3)) {
 			nr_wares = fr.Unsigned16();
 			nr_entries = fr.Unsigned16();
 
@@ -1234,7 +1271,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 				Ware_Index idx = tribe().ware_index(name);
 				if (!idx) {
 					log
-						("Player %u statistics: unknown ware name %s",
+						("Player %u consumption statistics: unknown ware name %s",
 						player_number(), name.c_str());
 					continue;
 				}
@@ -1243,6 +1280,29 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 
 				for (uint32_t j = 0; j < nr_entries; ++j)
 					m_ware_consumptions[idx][j] = fr.Unsigned32();
+			}
+
+			//read stock statistics if it exists
+			if (version == 3) {
+				nr_wares = fr.Unsigned16();
+				nr_entries = fr.Unsigned16();
+
+				for (uint32_t i = 0; i < m_ware_stocks.size(); ++i)
+					m_ware_stocks[i].resize(nr_entries);
+
+				for (uint16_t i = 0; i < nr_wares; ++i) {
+					std::string name = fr.CString();
+					Ware_Index idx = tribe().ware_index(name);
+					if (!idx) {
+						log
+							("Player %u stock statistics: unknown ware name %s",
+							player_number(), name.c_str());
+						continue;
+					}
+
+					for (uint32_t j = 0; j < nr_entries; ++j)
+						m_ware_stocks[idx][j] = fr.Unsigned32();
+				}
 			}
 		}
 	} else if (version == 0) {
@@ -1293,8 +1353,24 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 		}
 	}
 
+	//create empty stock statistic if it is missing
+	if (version < 3) {
+		uint16_t nr_entries = m_ware_productions[0].size();
+
+		for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
+			m_ware_stocks[i].resize(nr_entries);
+
+			for (uint32_t j = 0; j < nr_entries; ++j)
+				m_ware_stocks[i][j] = 0;
+		}
+	}
+
+	//all statistics should have the same size
 	assert(m_ware_productions.size() == m_ware_consumptions.size());
 	assert(m_ware_productions[0].size() == m_ware_consumptions[0].size());
+
+	assert(m_ware_productions.size() == m_ware_stocks.size());
+	assert(m_ware_productions[0].size() == m_ware_stocks[0].size());
 }
 
 
@@ -1326,6 +1402,18 @@ void Player::WriteStatistics(FileWrite & fw) const {
 		fw.Unsigned32(m_current_consumed_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_consumptions[i].size(); ++j)
 			fw.Unsigned32(m_ware_consumptions[i][j]);
+	}
+
+	//write stock statistics
+	fw.Unsigned16(m_ware_stocks.size());
+	fw.Unsigned16(m_ware_stocks[0].size());
+
+	for (uint8_t i = 0; i < m_ware_stocks.size(); ++i) {
+		fw.CString
+			(tribe().get_ware_descr
+			 (Ware_Index(static_cast<Ware_Index::value_t>(i)))->name());
+		for (uint32_t j = 0; j < m_ware_stocks[i].size(); ++j)
+			fw.Unsigned32(m_ware_stocks[i][j]);
 	}
 }
 
