@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-05-25 08:12+0000\n"
+"PO-Revision-Date: 2012-05-29 21:23+0000\n"
 "Last-Translator: Koneu <koneu93@googlemail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:38+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-05-30 05:13+0000\n"
+"X-Generator: Launchpad (build 15316)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -23,7 +23,7 @@ msgstr "Kein(e)"
 
 #: ../../src/s2map.cc:224
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar definiert!"
+msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar vorhanden!"
 
 #: ../../src/wlapplication.cc:387
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
