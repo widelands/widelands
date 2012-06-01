@@ -588,6 +588,12 @@ void Worker::informPlayer
 	if (building.name() == "fish_breeders_house")
 		return;
 
+	// Translate the Resource name (if it is defined by the world)
+	World const & world = game.map().world();
+	int32_t residx = world.get_resource(res_type.c_str());
+	if (residx != -1)
+		res_type = world.get_resource(residx)->descname();
+
 	building.send_message
 		(game,
 		 "mine",
