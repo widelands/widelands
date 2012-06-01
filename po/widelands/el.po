@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-03-09 02:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-05-31 12:18+0000\n"
+"Last-Translator: Γιάννης Α. <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:39+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-06-01 05:11+0000\n"
+"X-Generator: Launchpad (build 15342)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -60,7 +60,7 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
-"Χρήση: widelands <επιλογή0>=<αξία0> ... <επιλογήN>=<αξίαN>\n"
+"Χρήση: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1301
@@ -85,7 +85,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1313
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      Η προεπιλογή είναι ~/.widelands\n"
 
 #: ../../src/wlapplication.cc:1316
 msgid ""
@@ -121,6 +121,19 @@ msgid ""
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
+"Sound options:\n"
+" --nosound            Αρχίζει με τον ήχο απενεργοποιημένο.\n"
+" --disable_fx         Απενεργοποίηση ηχητικών εφέ.\n"
+" --disable_music      Απενεργοποίηση μουσικής.\n"
+"\n"
+" --nozip              Μην αποθηκεύεις αρχεία ως δυαδικά αρχεία zip.\n"
+"\n"
+" --editor             Απευθείας αρχίζει τον συντάκτη Widelands.\n"
+"                      Μπορείτε να προσθέσετε ένα =FILENAME για φόρτωση\n"
+"                      απευθείας του χάρτη FILENAME στον συντάκτη.\n"
+" --scenario=FILENAME  Απευθείας αρχίζει τον χάρτη FILENAME ως\n"
+"                      χάρτη με σενάριο.\n"
+" --loadgame=FILENAME  Απευθείας αρχίζει το σωσμένο παιχνίδι FILENAME.\n"
 
 #: ../../src/wlapplication.cc:1344
 msgid ""
@@ -153,6 +166,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Ενεργοποιεί απόδοση OpenGL.\n"
 
 #: ../../src/wlapplication.cc:1372
 msgid ""
@@ -241,7 +256,7 @@ msgstr "Παίκτης"
 #: ../../src/wlapplication.cc:1986 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:811
 msgid "Preparing game"
-msgstr ""
+msgstr "Προετοιμασία παιχνιδιού"
 
 #: ../../src/wlapplication.cc:2094
 msgid "End of replay"
