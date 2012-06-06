@@ -1075,7 +1075,7 @@ void Player::sample_statistics()
 			 it != warehouses.end();
 			 ++it)
 		{
-			for (uint32_t id; id < stocks.size(); ++id) {
+			for (uint32_t id = 0; id < stocks.size(); ++id) {
 				stocks[id] += (*it)->get_economy()->stock_ware
 					(Ware_Index(static_cast<size_t>(id)));
 			}
