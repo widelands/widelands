@@ -146,7 +146,7 @@ throw (_wexception)
 			if (!pfb)
 				fw.Unsigned8(0);
 			else {
-				if (upcast(const ConstructionSite, cs, pfb))
+				if (is_a(ConstructionSite, pfb))
 					fw.Unsigned8(1);
 				else // DismantleSite
 					fw.Unsigned8(2);

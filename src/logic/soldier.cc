@@ -1363,7 +1363,8 @@ void Soldier::battle_update(Game & game, State &)
 	Map & map = game.map();
 	Soldier & opponent = *m_battle->opponent(*this);
 	if (opponent.get_position() != get_position()) {
-		if (upcast(Building, building, map[get_position()].get_immovable())) {
+		if (is_a(Building, map[get_position()].get_immovable()))
+		{
 			// Note that this does not use the "leavebuilding" task,
 			// because that task is geared towards orderly workers leaving
 			// their location, whereas this case can also happen when

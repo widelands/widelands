@@ -317,7 +317,7 @@ Road * Flag::get_road(Flag & flag)
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
 	for (uint8_t road_id = 6; road_id; --road_id)
-		if (Road * const road = get_road(road_id))
+		if (get_road(road_id) != NULL)
 			++counter;
 	return counter;
 }
