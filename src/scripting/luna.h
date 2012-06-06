@@ -73,6 +73,7 @@
  */
 class LunaClass {
 	public:
+		virtual ~LunaClass() {}
 		virtual void __persist(lua_State *) = 0;
 		virtual void __unpersist(lua_State *) = 0;
 		virtual const char * get_modulename() = 0;
