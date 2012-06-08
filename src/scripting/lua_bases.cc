@@ -80,9 +80,9 @@ const PropertyType<L_EditorGameBase> L_EditorGameBase::Properties[] = {
 };
 
 
-void L_EditorGameBase::__persist(lua_State * L) {
+void L_EditorGameBase::__persist(lua_State * /* L */) {
 }
-void L_EditorGameBase::__unpersist(lua_State * L) {
+void L_EditorGameBase::__unpersist(lua_State * /* L */) {
 }
 
 /*

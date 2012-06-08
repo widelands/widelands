@@ -1845,7 +1845,7 @@ bool NetHost::isPaused()
 	return false;
 }
 
-void NetHost::setPaused(bool paused)
+void NetHost::setPaused(bool /* paused */)
 {
 }
 

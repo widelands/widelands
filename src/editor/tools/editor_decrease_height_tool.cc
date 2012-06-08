@@ -30,7 +30,7 @@
 int32_t Editor_Decrease_Height_Tool::handle_click_impl
 	(Widelands::Map & map,
 	Widelands::Node_and_Triangle<> center,
-	Editor_Interactive & parent,
+	Editor_Interactive & /* parent */,
 	Editor_Action_Args & args)
 {
 	if (args.origHights.empty()) {
@@ -52,7 +52,7 @@ int32_t Editor_Decrease_Height_Tool::handle_click_impl
 int32_t Editor_Decrease_Height_Tool::handle_undo_impl
 	(Widelands::Map & map,
 	Widelands::Node_and_Triangle<> center,
-	Editor_Interactive & parent,
+	Editor_Interactive & /* parent */,
 	Editor_Action_Args & args)
 {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr

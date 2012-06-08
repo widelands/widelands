@@ -30,7 +30,7 @@
 int32_t Editor_Noise_Height_Tool::handle_click_impl
 	(Widelands::Map           &           map,
 	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         parent,
+	Editor_Interactive         &         /* parent */,
 	Editor_Action_Args & args)
 {
 	if (args.origHights.empty()) {

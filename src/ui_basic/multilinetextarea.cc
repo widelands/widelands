@@ -150,7 +150,7 @@ void Multiline_Textarea::set_align(Align const align)
 /**
  * Callback from the scrollbar.
  */
-void Multiline_Textarea::scrollpos_changed(int32_t const pixels)
+void Multiline_Textarea::scrollpos_changed(int32_t const /* pixels */)
 {
 	update(0, 0, get_eff_w(), get_h());
 }

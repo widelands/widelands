@@ -28,7 +28,7 @@
 int32_t Editor_Increase_Height_Tool::handle_click_impl
 	(Widelands::Map & map,
 	Widelands::Node_and_Triangle<> center,
-	Editor_Interactive & parent,
+	Editor_Interactive & /* parent */,
 	Editor_Action_Args & args)
 {
 	if (args.origHights.empty()) {
