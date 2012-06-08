@@ -292,7 +292,7 @@ forbidden = [
 allowed = [
     "RoutingNode * a;",
     "Blahtype & b;",
-    "/** Some comment",
+    "/** Some comment **/",
     "std::vector<RoutingNode *> & nodes",
     "if (a && b)",
     "\tOpen.push(&start);",
@@ -368,5 +368,8 @@ allowed = [
     "friend class NoteReceiver<T>;",
 
     'a %= a;',
+    
+    'Texture const &  /* f_r_texture */',
+    'int32_t estimate(Map & /* map */, FCoords /* pos */) const {return 0;}',
 
 ]
