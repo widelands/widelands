@@ -40,6 +40,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <iterator>
 
 #ifdef WIN32
 #include "log.h"

@@ -813,7 +813,6 @@ Terrain_Descr
 
 ==============================================================================
 */
-
 Terrain_Descr::Terrain_Descr
 	(char                       const * const directory,
 	 Section                          * const s,
@@ -860,11 +859,12 @@ m_texture           (0)
 		uint32_t i = 0;
 		int32_t cur_res = 0;
 		while (i <= str1.size()) {
-			if (str1[i] == ' ' || str1[i] == ' ' || str1[i] == '\t') {
+			if (i != str1.size() &&
+					(str1[i] == ' ' || str1[i] == ' ' || str1[i] == '\t')) {
 				++i;
 				continue;
 			}
-			if (str1[i] == ',' || i == str1.size()) {
+			if (i == str1.size() || str1[i] == ',') {
 				const int32_t res = resources->get_index(curres.c_str());;
 				if (res == -1)
 					throw game_data_error
