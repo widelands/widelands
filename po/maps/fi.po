@@ -8,21 +8,21 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2010-02-15 19:23+0000\n"
-"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
+"PO-Revision-Date: 2012-04-26 10:52+0000\n"
+"Last-Translator: Juhani Numminen <juhaninumminen0@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:33+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-27 04:33+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Silmät pimeässä"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Paikka, jota kutsutaan kodiksi"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
@@ -42,7 +42,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Tämä on meidän maamme"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -117,7 +117,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlanteanit - Tulijuoksu"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -125,11 +125,11 @@ msgstr "Atolli"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "Barbaarit - Toinen valtakunta"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Haastava. Esittelee Atlantenit"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -161,11 +161,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Helppo. Esittelee barbaarit"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Helppo. Esittelee imperiumin"
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
@@ -173,7 +173,7 @@ msgstr "Haltiametsät"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "Imperiumi - Karkoituksen kuukaudet"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -189,6 +189,8 @@ msgid ""
 "neighboured island. This peace seems to end now - your neighbour begins to "
 "expand."
 msgstr ""
+"Satojen vuosien ajan olemme eläneet sovussa naapurisaaren heimon kanssa. "
+"Rauhanaika näyttää nyt päättyvän - naapurimme alkaa laajentua."
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -282,6 +284,9 @@ msgid ""
 "place you were born and you lived your whole life. If you don't want to lose "
 "it, defend it! "
 msgstr ""
+"Se haisee suolle, se näytää suolta ja se on suo. Mutta se on myös paikka, "
+"jossa synnyit ja olet elänyt koko elämäsi. Jos et halua menettää sitä, sinun "
+"on puolustettava sitä! "
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
@@ -361,7 +366,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Salakuljettajat"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -399,27 +404,31 @@ msgstr ""
 #: ../../maps/Four Castles.wmf/elemental:10
 #: ../../maps/Swamp Monks.wmf/elemental:10
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
-msgstr ""
+msgstr "Ehdotetut joukkueet: (sininen, punainen) vs (keltainen, vihreä)"
 
 #: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
 "yellow)"
 msgstr ""
+"Ehdotetut joukkueet: (sininen, punainen) vs (keltainen, vihreä) tai "
+"(sininen, vihreä) vs (punainen, keltainen)"
 
 #: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
 "green)"
 msgstr ""
+"Ehdotetut joukkueet: (sininen, punainen) vs (keltainen, vihreä) tai "
+"(sininen, keltainen) vs (punainen, vihreä)"
 
 #: ../../maps/Atoll.wmf/elemental:10
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
-msgstr ""
+msgstr "Ehdotetut joukkueet: (sininen, keltainen) vs (punainen, vihreä)"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
-msgstr ""
+msgstr "Ehdotetut joukkueet: kaikki ok."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -427,7 +436,7 @@ msgstr "Suosaari"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
-msgstr ""
+msgstr "Suomunkit"
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -534,7 +543,7 @@ msgstr "Kolme soturia"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
 msgid "Together we're strong"
-msgstr ""
+msgstr "Yhdessä olemme vahvoja"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -618,7 +627,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Kuka on suuren atollin oikea kuningas?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"

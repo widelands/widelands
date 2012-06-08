@@ -38,6 +38,7 @@ private:
 	Interactive_Player * m_parent;
 	WUIPlot_Area       * m_plot_production;
 	WUIPlot_Area       * m_plot_consumption;
+	WUIPlot_Area       * m_plot_stock;
 	DifferentialPlot_Area       * m_plot_economy;
 	std::vector<uint8_t> m_color_map; //maps ware index to colors
 	std::vector<bool> m_active_colors;

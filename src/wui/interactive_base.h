@@ -57,7 +57,7 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	virtual ~Interactive_Base();
 
 	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
-	virtual void reference_player_tribe(const int32_t, const void * const) {}
+	virtual void reference_player_tribe(Widelands::Player_Number, const void * const) {}
 
 	bool m_show_workarea_preview;
 

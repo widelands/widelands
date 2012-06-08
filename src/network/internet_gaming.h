@@ -186,8 +186,12 @@ private:
 	std::vector<ChatMessage> ingame_system_chat;
 
 	/// An important response of the metaserver, the client is waiting for.
-	std::string               waitcmd;
-	int32_t                   waittimeout;
+	std::string              waitcmd;
+	int32_t                  waittimeout;
+
+	/// Connection tracking specific variables
+	time_t                   lastbrokensocket[2];
+	time_t                   lastping;
 
 };
 

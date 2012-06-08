@@ -418,7 +418,7 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 				}
 			}
 
-			if (list.size()) {
+			if (!list.empty()) {
 				set_program_objvar
 					(game, state, list[game.logic_rand() % list.size()].object);
 				break;
@@ -443,7 +443,7 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 				map.find_reachable_bobs
 					(area, &list, cstep, FindBobAttribute(action.iparam2));
 
-			if (list.size()) {
+			if (!list.empty()) {
 				set_program_objvar
 					(game, state, list[game.logic_rand() % list.size()]);
 				break;
@@ -587,6 +587,12 @@ void Worker::informPlayer
 	// NOTE  AND fish_breeders
 	if (building.name() == "fish_breeders_house")
 		return;
+
+	// Translate the Resource name (if it is defined by the world)
+	World const & world = game.map().world();
+	int32_t residx = world.get_resource(res_type.c_str());
+	if (residx != -1)
+		res_type = world.get_resource(residx)->descname();
 
 	building.send_message
 		(game,

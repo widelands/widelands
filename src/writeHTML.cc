@@ -902,7 +902,7 @@ void ProductionProgram::ActReturn::writeHTML
 		(m_result == Failed    ? "failed"    :
 		 m_result == Completed ? "completed" :
 		 "skipped");
-	if (m_conditions.size()) {
+	if (!m_conditions.empty()) {
 		std::string op;
 		fw.Text(" <span class=\"keyword\">");
 		if (m_is_when) {

@@ -317,7 +317,7 @@ Road * Flag::get_road(Flag & flag)
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
 	for (uint8_t road_id = 6; road_id; --road_id)
-		if (Road * const road = get_road(road_id))
+		if (get_road(road_id) != NULL)
 			++counter;
 	return counter;
 }
@@ -499,7 +499,7 @@ bool Flag::cancel_pickup(Game & game, Flag & destflag) {
 */
 void Flag::wake_up_capacity_queue(Game & game)
 {
-	while (m_capacity_wait.size()) {
+	while (!m_capacity_wait.empty()) {
 		Worker * const w = m_capacity_wait[0].get(game);
 		m_capacity_wait.erase(m_capacity_wait.begin());
 		if (w and w->wakeup_flag_capacity(game, *this))
@@ -714,7 +714,7 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 {
 	//molog("Flag::cleanup\n");
 
-	while (m_flag_jobs.size()) {
+	while (!m_flag_jobs.empty()) {
 		delete m_flag_jobs.begin()->request;
 		m_flag_jobs.erase(m_flag_jobs.begin());
 	}

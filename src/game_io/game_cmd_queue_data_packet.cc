@@ -114,7 +114,7 @@ void Game_Cmd_Queue_Data_Packet::Write
 		// Make a copy, so we can pop stuff
 		std::priority_queue<Cmd_Queue::cmditem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
 
-		while (p.size()) {
+		while (!p.empty()) {
 			Cmd_Queue::cmditem const & it = p.top();
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {

@@ -1412,7 +1412,7 @@ bool DefaultAI::improve_roads (int32_t gametime)
 }
 
 
-/// connects a specific flag to another economy
+// connects a specific flag to another economy
 bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 {
 	FindNodeWithFlagOrRoad functor;
@@ -1431,20 +1431,22 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 		return false;
 
 	// then choose the one with the shortest path
-	Path & path = *new Path();;
+	Path * path = new Path();
 	bool found = false;
 	check.set_openend(false);
 	Coords closest;
 	container_iterate_const(std::vector<Coords>, reachable, i) {
-		Path & path2 = *new Path();
-		if (map.findpath(flag.get_position(), *i.current, 0, path2, check) < 0)
-			continue;
-
-		if (!found || path.get_nsteps() > path2.get_nsteps()) {
-			path = path2;
-			closest = *i.current;
-			found = true;
+		Path * path2 = new Path();
+		if (map.findpath(flag.get_position(), *i.current, 0, *path2, check) >= 0) {
+			if (!found || path->get_nsteps() > path2->get_nsteps()) {
+				delete path;
+				path = path2;
+				path2 = NULL;
+				closest = *i.current;
+				found = true;
+			}
 		}
+		delete path2;
 	}
 
 	if (found) {
@@ -1453,10 +1455,12 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 			game().send_player_build_flag(player_number(), closest);
 
 		// and finally build the road
-		game().send_player_build_road(player_number(), path);
+		game().send_player_build_road(player_number(), *path);
 		return true;
+	} else {
+		delete path;
+		return false;
 	}
-	return false;
 }
 
 /// adds alternative ways to already existing ones

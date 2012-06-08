@@ -666,7 +666,7 @@ void Building::act(Game & game, uint32_t const data)
 		bool wakeup = false;
 
 		// Wake up one worker
-		while (m_leave_queue.size()) {
+		while (!m_leave_queue.empty()) {
 			upcast(Worker, worker, m_leave_queue[0].get(game));
 
 			m_leave_queue.erase(m_leave_queue.begin());
@@ -682,7 +682,7 @@ void Building::act(Game & game, uint32_t const data)
 			}
 		}
 
-		if (m_leave_queue.size())
+		if (!m_leave_queue.empty())
 			schedule_act(game, m_leave_time - time);
 
 		if (!wakeup)

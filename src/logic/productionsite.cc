@@ -655,7 +655,7 @@ bool ProductionSite::fetch_from_flag(Game & game)
 }
 
 
-void ProductionSite::log_general_info(Editor_Game_Base & egbase) {
+void ProductionSite::log_general_info(Editor_Game_Base const & egbase) {
 	Building::log_general_info(egbase);
 
 	molog("m_is_stopped: %u\n", m_is_stopped);
@@ -719,7 +719,7 @@ bool ProductionSite::get_building_work
 		return true;
 	}
 
-	if (m_produced_items.size()) {
+	if (!m_produced_items.empty()) {
 		//  There is still a produced item waiting for delivery. Carry it out
 		//  before continuing with the program.
 		std::pair<Ware_Index, uint8_t> & ware_type_with_count =
@@ -742,7 +742,7 @@ bool ProductionSite::get_building_work
 		return true;
 	}
 
-	if (m_recruited_workers.size()) {
+	if (!m_recruited_workers.empty()) {
 		//  There is still a recruited worker waiting to be released. Send it
 		//  out.
 		std::pair<Ware_Index, uint8_t> & worker_type_with_count =
@@ -853,7 +853,7 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	std::string const & program_name = top_state().program->name();
 
 	m_stack.pop_back();
-	if (m_stack.size())
+	if (!m_stack.empty())
 		top_state().phase = result;
 
 	switch (result) {

@@ -115,8 +115,8 @@ public:
 	void exit();
 
 	//  reference functions
-	void   reference_player_tribe(Widelands::Player_Number, void const *);
-	void unreference_player_tribe(Widelands::Player_Number, void const *);
+	void   reference_player_tribe(Widelands::Player_Number, void const * const);
+	void unreference_player_tribe(Widelands::Player_Number, void const * const);
 	bool is_player_tribe_referenced(Widelands::Player_Number);
 	void set_need_save(bool const t) {m_need_save = t;}
 

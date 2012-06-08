@@ -650,6 +650,8 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 		infotext += (format(_("* Scenario mode selected\n"))).str();
 	infotext += "\n";
 	infotext += map.get_description();
+	infotext += "\n";
+	infotext += map.get_hint();
 
 	m_map_info.set_text(infotext);
 	m_filename_proof = m_settings->settings().mapfilename;

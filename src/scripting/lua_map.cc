@@ -981,6 +981,8 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, __hash),
 	PROP_RO(L_MapObject, serial),
 	PROP_RO(L_MapObject, type),
+	PROP_RO(L_MapObject, name),
+	PROP_RO(L_MapObject, descname),
 	{0, 0, 0},
 };
 
@@ -1041,6 +1043,31 @@ int L_MapObject::get_type(lua_State * L) {
 	lua_pushstring(L, get(L, get_egbase(L))->type_name());
 	return 1;
 }
+
+/* RST
+	.. attribute:: name
+
+		(RO) The internal name of this immovable. This is the same as the
+		directory name of this immovable in the tribe or world directory.
+*/
+int L_MapObject::get_name(lua_State * L) {
+	lua_pushstring(L, get(L, get_egbase(L))->descr().name().c_str());
+	return 1;
+}
+
+/* RST
+	.. attribute:: descname
+
+		(RO) The descriptive (and translated) name of this Map Object. Use this
+		in messages to the player instead of name.
+*/
+	int L_MapObject::get_descname(lua_State * L) {
+	lua_pushstring(L, get(L, get_egbase(L))->descr().descname().c_str());
+	return 1;
+}
+
+
+
 
 /*
  ==========================================================
@@ -1180,19 +1207,6 @@ int L_BaseImmovable::get_size(lua_State * L) {
 					 o->get_size());
 			break;
 	}
-	return 1;
-}
-
-/* RST
-	.. attribute:: name
-
-		(RO) The internal name of this immovable. This is the same as the
-		directory name of this immovable in the tribe or world directory.
-*/
-int L_BaseImmovable::get_name(lua_State * L) {
-	BaseImmovable * o = get(L, get_egbase(L));
-
-	lua_pushstring(L, o->name().c_str());
 	return 1;
 }
 
@@ -1989,7 +2003,6 @@ const MethodType<L_Bob> L_Bob::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Bob> L_Bob::Properties[] = {
-	PROP_RO(L_Bob, name),
 	{0, 0, 0},
 };
 
@@ -1998,16 +2011,6 @@ const PropertyType<L_Bob> L_Bob::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: name
-
-		(RO) The name of this bob's type
-*/
-// UNTESTED
-int L_Bob::get_name(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->name());
-	return 1;
-}
 
 /* RST
 	.. method:: has_caps(capname)

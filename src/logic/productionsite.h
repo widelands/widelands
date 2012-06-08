@@ -132,7 +132,7 @@ public:
 	ProductionSite(const ProductionSite_Descr & descr);
 	virtual ~ProductionSite();
 
-	void log_general_info(Editor_Game_Base &);
+	void log_general_info(Editor_Game_Base const &);
 
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);

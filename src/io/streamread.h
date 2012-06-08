@@ -55,7 +55,7 @@ struct StreamRead : boost::noncopyable {
 	 * \return the number of bytes that were actually read. Will return 0 at
 	 * end of stream.
 	 */
-	virtual size_t Data(void * const data, size_t bufsize) = 0;
+	virtual size_t Data(void * data, size_t bufsize) = 0;
 
 	/**
 	 * \return \c true if the end of file / end of stream has been reached.
@@ -71,7 +71,7 @@ struct StreamRead : boost::noncopyable {
 	int32_t Signed32();
 	uint32_t Unsigned32();
 	std::string String();
-	__attribute__((noreturn)) virtual char const * CString() {throw;}
+	virtual char const * CString() {throw;}
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.

@@ -92,7 +92,6 @@ int32_t Editor_Decrease_Resources_Tool::handle_undo_impl
 	Editor_Action_Args & args)
 {
 	return parent.tools.set_resources.handle_undo_impl(map, center, parent, args);
-	return 0;
 }
 
 Editor_Action_Args Editor_Decrease_Resources_Tool::format_args_impl(Editor_Interactive & parent)

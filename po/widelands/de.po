@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-03-26 10:30+0200\n"
-"PO-Revision-Date: 2012-03-22 15:28+0000\n"
-"Last-Translator: wl-zocker <Unknown>\n"
+"PO-Revision-Date: 2012-04-27 00:00+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:38+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-04-28 04:32+0000\n"
+"X-Generator: Launchpad (build 15149)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -166,7 +166,7 @@ msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
 " --dedicated=DATEINAME Startet einen dedizierten Server mit der Karte "
-"DATEINAME als Voreinstellung.\n"
+"DATEINAME als Voreinstellung\n"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
@@ -263,7 +263,7 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
-" --double             Startet das Spiel doppelt (Für Tests über das\n"
+" --double             Startet das Spiel doppelt (für Tests über das\n"
 "                      lokale Netz)\n"
 "\n"
 
@@ -273,7 +273,7 @@ msgstr " --verbose Ausführliche Debugmeldungen ermöglichen\n"
 
 #: ../../src/wlapplication.cc:1401
 msgid " --help               Show this help\n"
-msgstr " --help               Zeigt diese Hilfe an.\n"
+msgstr " --help               Zeigt diese Hilfe an\n"
 
 #: ../../src/wlapplication.cc:1405
 msgid ""
@@ -3691,7 +3691,7 @@ msgstr "OpenGL als Engine verwenden"
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
-msgstr "Zeige den Chat im Spiel mit transparentem Hintergrund."
+msgstr "Zeige den Chat im Spiel mit transparentem Hintergrund"
 
 #: ../../src/ui_fsmenu/options.cc:515
 msgid "Pause"

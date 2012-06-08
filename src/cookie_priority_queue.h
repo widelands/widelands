@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,41 +122,42 @@ struct default_cookie_accessor {
 };
 
 
-template<typename _T, typename _C, typename _CA>
-cookie_priority_queue<_T, _C, _CA>::cookie_priority_queue
-	(const typename cookie_priority_queue<_T, _C, _CA>::compare & _c,
-	 const typename cookie_priority_queue<_T, _C, _CA>::cookie_accessor & _a)
+template<typename _T, typename _Cw, typename _CA>
+cookie_priority_queue<_T, _Cw, _CA>::cookie_priority_queue
+	(const typename cookie_priority_queue<_T, _Cw, _CA>::compare & _c,
+	 const typename cookie_priority_queue<_T, _Cw, _CA>::cookie_accessor & _a)
 : c(_c), ca(_a)
 {
 }
 
-template<typename _T, typename _C, typename _CA>
-cookie_priority_queue<_T, _C, _CA>::~cookie_priority_queue()
+template<typename _T, typename _Cw, typename _CA>
+cookie_priority_queue<_T, _Cw, _CA>::~cookie_priority_queue()
 {
 	for (typename container::iterator it = d.begin(); it != d.end(); ++it)
 		cookie_pos(ca(*it)) = bad_pos();
 }
 
-template<typename _T, typename _C, typename _CA>
-typename cookie_priority_queue<_T, _C, _CA>::size_type cookie_priority_queue<_T, _C, _CA>::size() const
+template<typename _T, typename _Cw, typename _CA>
+typename cookie_priority_queue<_T, _Cw, _CA>::size_type cookie_priority_queue<_T, _Cw, _CA>::size() const
 {
 	return d.size();
 }
 
-template<typename _T, typename _C, typename _CA>
-bool cookie_priority_queue<_T, _C, _CA>::empty() const
+template<typename _T, typename _Cw, typename _CA>
+bool cookie_priority_queue<_T, _Cw, _CA>::empty() const
 {
 	return d.empty();
 }
 
-template<typename _T, typename _C, typename _CA>
-typename cookie_priority_queue<_T, _C, _CA>::type * cookie_priority_queue<_T, _C, _CA>::top() const
+template<typename _T, typename _Cw, typename _CA>
+typename cookie_priority_queue<_T, _Cw, _CA>::type * cookie_priority_queue<_T, _Cw, _CA>::top() const
 {
 	return *d.begin();
 }
 
-template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::push(typename cookie_priority_queue<_T, _C, _CA>::type * elt)
+template<typename _T, typename _Cw, typename _CA>
+void cookie_priority_queue<_T, _Cw, _CA>::push
+	(typename cookie_priority_queue<_T, _Cw, _CA>::type * elt)
 {
 	cookie & elt_cookie(ca(elt));
 
@@ -168,8 +169,9 @@ void cookie_priority_queue<_T, _C, _CA>::push(typename cookie_priority_queue<_T,
 	decrease_key(elt);
 }
 
-template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::pop(typename cookie_priority_queue<_T, _C, _CA>::type * elt)
+template<typename _T, typename _Cw, typename _CA>
+void cookie_priority_queue<_T, _Cw, _CA>::pop
+	(typename cookie_priority_queue<_T, _Cw, _CA>::type * elt)
 {
 	cookie & elt_cookie(ca(elt));
 
@@ -191,8 +193,9 @@ void cookie_priority_queue<_T, _C, _CA>::pop(typename cookie_priority_queue<_T, 
 		increase_key(*d.begin());
 }
 
-template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::decrease_key(typename cookie_priority_queue<_T, _C, _CA>::type * elt)
+template<typename _T, typename _Cw, typename _CA>
+void cookie_priority_queue<_T, _Cw, _CA>::decrease_key
+	(typename cookie_priority_queue<_T, _Cw, _CA>::type * elt)
 {
 	cookie & elt_cookie(ca(elt));
 
@@ -214,8 +217,9 @@ void cookie_priority_queue<_T, _C, _CA>::decrease_key(typename cookie_priority_q
 	//selftest();
 }
 
-template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::increase_key(typename cookie_priority_queue<_T, _C, _CA>::type * elt)
+template<typename _T, typename _Cw, typename _CA>
+void cookie_priority_queue<_T, _Cw, _CA>::increase_key
+	(typename cookie_priority_queue<_T, _Cw, _CA>::type * elt)
 {
 	cookie & elt_cookie(ca(elt));
 
@@ -257,18 +261,18 @@ void cookie_priority_queue<_T, _C, _CA>::increase_key(typename cookie_priority_q
 	//selftest();
 }
 
-template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::swap
-	(typename cookie_priority_queue<_T, _C, _CA>::cookie & a,
-	 typename cookie_priority_queue<_T, _C, _CA>::cookie & b)
+template<typename _T, typename _Cw, typename _CA>
+void cookie_priority_queue<_T, _Cw, _CA>::swap
+	(typename cookie_priority_queue<_T, _Cw, _CA>::cookie & a,
+	 typename cookie_priority_queue<_T, _Cw, _CA>::cookie & b)
 {
 	std::swap(d[cookie_pos(a)], d[cookie_pos(b)]);
 	std::swap(cookie_pos(a), cookie_pos(b));
 }
 
 // Disable in release builds.
-template<typename _T, typename _C, typename _CA>
-void cookie_priority_queue<_T, _C, _CA>::selftest()
+template<typename _T, typename _Cw, typename _CA>
+void cookie_priority_queue<_T, _Cw, _CA>::selftest()
 {
 	for (size_type pos = 0; pos < d.size(); ++pos) {
 		cookie & elt_cookie(ca(d[pos]));

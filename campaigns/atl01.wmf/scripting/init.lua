@@ -74,7 +74,7 @@ end
 function send_building_lost_message(f)
    p1:send_message(_"Building lost!",
       rt(p(
-         (_"We lost a %s to the ocean!"):format(f.immovable.name)
+         (_"We lost a %s to the ocean!"):format(f.immovable.descname)
       )), { field = f, popup = true }
    )
 end

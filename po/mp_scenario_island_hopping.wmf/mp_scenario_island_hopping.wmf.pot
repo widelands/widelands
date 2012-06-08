@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"POT-Creation-Date: 2012-05-25 18:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,10 +14,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/init.lua:101
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid ""
-"%i %s<br>"
+"%i %s<br>\n"
+""
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
@@ -109,7 +109,6 @@ msgid ""
 "First Island"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/init.lua:94
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:94
 msgid ""
 "Game Status"
@@ -119,13 +118,13 @@ msgstr ""
 msgid ""
 "If you finish a castle at the target area on the second island, you will get\n"
 "a third headquarters on the third island. You must build and hold a castle at\n"
-"the center of the third island for 20 minutes to win the game"
+"the center of the third island for 20 minutes to win the game."
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
 "Island Hopping is a traditional tournament in the Atlantean culture. The\n"
-"rules of the game are simple: You start with a headquarters one one island.\n"
+"rules of the game are simple: You start with a headquarters on one island.\n"
 "When you finish a castle at the end of the first island, you are granted a\n"
 "second headquarters on a second island which will contain all wares from your\n"
 "first headquarters."

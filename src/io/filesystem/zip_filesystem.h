@@ -21,8 +21,8 @@
 #define ZIP_FILESYSTEM_H
 
 #include "filesystem.h"
-#include "unzip.h"
-#include "zip.h"
+#include <minizip/unzip.h>
+#include <minizip/zip.h>
 
 #include <string>
 #include <cstring>
@@ -58,17 +58,15 @@ struct ZipFilesystem : public FileSystem {
 	virtual void   MakeDirectory      (std::string const & dirname);
 
 	virtual StreamRead  * OpenStreamRead
-		(const std::string & fname) __attribute__ ((noreturn));
+		(const std::string & fname);
 	virtual StreamWrite * OpenStreamWrite
-		(const std::string & fname) __attribute__ ((noreturn));
+		(const std::string & fname);
 
 	virtual FileSystem &   MakeSubFileSystem(std::string const & dirname);
 	virtual FileSystem & CreateSubFileSystem
 		(std::string const & dirname, Type);
-	virtual void Unlink(std::string const & filename)
-		__attribute__ ((noreturn));
-	virtual void Rename(std::string const &, std::string const &)
-		__attribute__ ((noreturn));
+	virtual void Unlink(std::string const & filename);
+	virtual void Rename(std::string const &, std::string const &);
 
 	virtual unsigned long long DiskSpace();
 

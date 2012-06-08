@@ -56,6 +56,8 @@ class L_Map : public L_MapModuleClass {
 public:
 	LUNA_CLASS_HEAD(L_Map);
 
+	virtual ~L_Map() {}
+
 	L_Map() {}
 	L_Map(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Map' directly!");
@@ -118,8 +120,10 @@ public:
 	 * attributes
 	 */
 	int get___hash(lua_State *);
-	int get_serial(lua_State * L);
-	int get_type(lua_State * L);
+	int get_serial(lua_State *);
+	int get_type(lua_State *);
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
 
 	/*
 	 * Lua Methods
@@ -150,7 +154,6 @@ public:
 	 * Properties
 	 */
 	int get_size(lua_State * L);
-	int get_name(lua_State * L);
 	int get_fields(lua_State * L);
 
 	/*
@@ -551,7 +554,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
 	int has_caps(lua_State *);
 
 	/*

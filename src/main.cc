@@ -28,6 +28,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <typeinfo>
+#include <unistd.h>
 
 #include <SDL_main.h>
 

@@ -139,7 +139,7 @@ RichTextImpl::~RichTextImpl()
  */
 void RichTextImpl::clear()
 {
-	while (elements.size()) {
+	while (!elements.empty()) {
 		delete elements.back();
 		elements.pop_back();
 	}

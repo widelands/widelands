@@ -98,7 +98,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
 		if
-		((res == args.cur_res or not res)
+		((res == args.cur_res or not mr.location().field->get_resources_amount())
 		        and
 		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
 		{
@@ -135,7 +135,6 @@ int32_t Editor_Increase_Resources_Tool::handle_undo_impl
 	Editor_Interactive & parent, Editor_Action_Args & args)
 {
 	return m_set_tool.handle_undo_impl(map, center, parent, args);
-	return 0;
 }
 
 Editor_Action_Args Editor_Increase_Resources_Tool::format_args_impl(Editor_Interactive & parent)

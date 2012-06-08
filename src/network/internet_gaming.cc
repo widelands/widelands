@@ -42,10 +42,16 @@ InternetGaming::InternetGaming() :
 	gameupdateonmetaserver   (true),
 	clientupdate             (false),
 	gameupdate               (false),
-	time_offset              (0)
+	time_offset              (0),
+	lastping                 (time(0))
 {
 	// Fill the list of possible messages from the server
 	InternetGamingMessages::fill_map();
+
+	// Set connection tracking variables to 0
+	lastbrokensocket[0]      = 0;
+	lastbrokensocket[1]      = 0;
+
 }
 
 /// resets all stored variables without the chat messages for a clean new login (not relogin)
@@ -69,6 +75,9 @@ void InternetGaming::reset() {
 	time_offset              = 0;
 	waitcmd                  = "";
 	waittimeout              = std::numeric_limits<int32_t>::max();
+	lastbrokensocket[0]      = 0;
+	lastbrokensocket[1]      = 0;
+	lastping                 = time(0);
 
 	clientlist.clear();
 	gamelist.clear();
@@ -110,6 +119,9 @@ void InternetGaming::initialiseConnection() {
 
 	m_sockset = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket (m_sockset, m_sock);
+
+	// Of course not 100% true, but we just care about an answer at all, so we reset this tracker
+	lastping = time(0);
 }
 
 
@@ -250,6 +262,19 @@ void InternetGaming::handle_metaserver_communication() {
 				const std::string & msg = InternetGamingMessages::get_message("CONNECTION_LOST");
 				dedicatedlog("InternetGaming: Error: %s\n", msg.c_str());
 				formatAndAddChat("", "", true, msg);
+
+				// Check how much time passed since the socket broke the last time
+				// Maybe something is completely wrong at the moment?
+				// At least it seems to be, if the socket broke three times in the last 10 seconds...
+				time_t now = time(0);
+				if ((now - lastbrokensocket[1] < 10) && (now - lastbrokensocket[0] < 10)) {
+					reset();
+					setError();
+					return;
+				}
+				lastbrokensocket[1] = lastbrokensocket[0];
+				lastbrokensocket[0] = now;
+
 				// Try to relogin
 				if (!relogin()) {
 					// Do not try to relogin again automatically.
@@ -303,6 +328,18 @@ void InternetGaming::handle_metaserver_communication() {
 				reset();
 				setError();
 			}
+		}
+	}
+
+	// Check connection to the metaserver
+	// Was a ping received in the last 4 minutes?
+	if (time(0) - lastping > 240)  {
+		// Try to relogin
+		setError();
+		if (!relogin()) {
+			// Do not try to relogin again automatically.
+			reset();
+			setError();
 		}
 	}
 }
@@ -362,7 +399,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			logout();
 			setError();
 			throw warning
-				(_
+				(_("Unexpected packet"),
+				 _
 				 	("Expected a LOGIN, RELOGIN or REJECTED packet from server, but received command "
 				 	 "%s. Maybe the metaserver is using a different protocol version ?"),
 				 cmd.c_str());
@@ -394,6 +432,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			SendPacket s;
 			s.String(IGPCMD_PONG);
 			s.send(m_sock);
+
+			lastping = time(0);
 		}
 
 		else if (cmd == IGPCMD_CHAT) {
@@ -403,7 +443,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			std::string type     = packet.String();
 
 			if (type != "public" && type != "private" && type != "system")
-				throw warning("Invalid chat message type \"%s\".", type.c_str());
+				throw warning(_("Invalid message type"), _("Invalid chat message type \"%s\"."), type.c_str());
 
 			bool        personal = type == "private";
 			bool        system   = type == "system";
@@ -708,7 +748,10 @@ void InternetGaming::send(std::string const & msg) {
  */
 bool InternetGaming::str2bool(std::string str) {
 	if ((str != "true") && (str != "false"))
-		throw warning("Conversion from std::string to bool failed. String was \"%s\"", str.c_str());
+		throw warning
+			(_("Conversion error"),
+			_("Conversion from std::string to bool failed. String was \"%s\""), str.c_str());
+
 	return str == "true";
 }
 

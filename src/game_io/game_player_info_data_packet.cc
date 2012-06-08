@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 14
+#define CURRENT_PACKET_VERSION 15
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -111,7 +111,9 @@ void Game_Player_Info_Data_Packet::Read
 					if (packet_version >= 6)
 						player.setAI(fr.CString());
 
-					if (packet_version >= 14)
+					if (packet_version >= 15)
+						player.ReadStatistics(fr, 3);
+					else if (packet_version >= 14)
 						player.ReadStatistics(fr, 2);
 					else if (packet_version >= 12)
 						player.ReadStatistics(fr, 1);

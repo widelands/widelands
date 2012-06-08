@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"POT-Creation-Date: 2012-05-25 18:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -2488,14 +2488,10 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
-msgid ""
-"Source needed"
-msgstr ""
-
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
 msgid ""
-"Source needed."
+"Source needed"
 msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
@@ -2560,13 +2556,9 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/help.lua:12
 #: ../../tribes/barbarians/cattlefarm/help.lua:12
 #: ../../tribes/barbarians/farm/help.lua:12
-msgid ""
-"Text needed"
-msgstr ""
-
 #: ../../tribes/barbarians/quarry/help.lua:12
 msgid ""
-"Text needed."
+"Text needed"
 msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:36

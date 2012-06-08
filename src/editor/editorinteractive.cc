@@ -510,7 +510,7 @@ void Editor_Interactive::select_tool
  *  data is a pointer to a tribe (for buildings)
  */
 void Editor_Interactive::reference_player_tribe
-(Widelands::Player_Number const player, void const * const data) {
+(Widelands::Player_Number player, void const * const data) {
 	assert(0 < player);
 	assert(player <= egbase().map().get_nrplayers());
 

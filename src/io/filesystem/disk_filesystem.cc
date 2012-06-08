@@ -130,7 +130,9 @@ int32_t RealFSImpl::FindFiles
 
 	std::string realpath = path;
 
-	if (not pattern.compare(0, 3, "../")) {
+	// Check if path is relative - both \ and / are possibly used depending on the file we work on,
+	// so we have to check for both.
+	if ((not pattern.compare(0, 3, "../")) || (not pattern.compare(0, 3, "..\\"))) {
 		// Workaround: If pattern is a relative we need to fix the path
 		std::string m_root_save(m_root); // save orginal m_root
 		m_root = FS_CanonicalizeName(path);
@@ -309,7 +311,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname)
 	try {
 		std::string::size_type it = 0;
 		while (it < dirname.size()) {
-			it = dirname.find('/', it);
+			it = dirname.find(m_filesep, it);
 
 			FileSystemPath fspath(FS_CanonicalizeName(dirname.substr(0, it)));
 			if (fspath.m_exists and !fspath.m_isDirectory)
@@ -442,7 +444,7 @@ void * RealFSImpl::fastLoad
 
 #ifdef __APPLE__
 	file = open(fullname.c_str(), O_RDONLY);
-#elif defined (__FreeBSD__)
+#elif defined (__FreeBSD__) || defined (__OpenBSD__)
 	file = open(fullname.c_str(), O_RDONLY);
 #else
 	file = open(fullname.c_str(), O_RDONLY|O_NOATIME);
@@ -526,7 +528,7 @@ struct RealFSStreamRead : public StreamRead {
 		fclose(m_file);
 	}
 
-	size_t Data(void * const data, size_t const bufsize) {
+	size_t Data(void * data, size_t const bufsize) {
 		return fread(data, 1, bufsize, m_file);
 	}
 

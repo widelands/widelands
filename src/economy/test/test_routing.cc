@@ -184,7 +184,7 @@ struct TestingNode_DefaultNodes_Fixture {
 		nodes.push_back(d1);
 	}
 	~TestingNode_DefaultNodes_Fixture() {
-		while (nodes.size()) {
+		while (!nodes.empty()) {
 			TestingRoutingNode * n = nodes.back();
 			delete n;
 			nodes.pop_back();
@@ -396,7 +396,7 @@ struct ComplexRouterFixture {
 		nodes.push_back(d0);
 	}
 	~ComplexRouterFixture() {
-		while (nodes.size()) {
+		while (!nodes.empty()) {
 			RoutingNode * n = nodes.back();
 			delete n;
 			nodes.pop_back();

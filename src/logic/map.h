@@ -199,7 +199,7 @@ struct Map :
 	const std::string & get_background() const {return m_background;}
 	typedef std::set<std::string> Tags;
 	const Tags & get_tags() const {return m_tags;}
-	const bool has_tag(std::string & s) const {return m_tags.count(s);}
+	bool has_tag(std::string & s) const {return m_tags.count(s);}
 
 	Player_Number get_nrplayers() const throw () {return m_nrplayers;}
 	ScenarioTypes scenario_types() const throw () {return m_scenario_types;}

@@ -15,19 +15,30 @@ set_textdomain("mp_scenario_smugglers.wmf")
 game = wl.Game()
 map = game.map
 
-wares_to_smuggle = 150 -- How many are needed to win?
+points_to_win = 1000
 
-warehouse_regions = {
-   map:get_field(52, 50):region(2), -- Blue player,
-   map:get_field(59, 50):region(2), -- Red player,
-   map:get_field(59, 60):region(2), -- Yellow player,
-   map:get_field(52, 60):region(2), -- Green player,
+route_descrs = {
+   { value = 0, send = map:get_field(33, 13):region(2), recv = map:get_field(123, 91):region(2) },
+   { value = 0, send = map:get_field(120, 97):region(2), recv = map:get_field(25, 19):region(2) },
+   { value = 0, send = map:get_field(110, 17):region(2), recv = map:get_field(36, 118):region(2) },
+   { value = 0, send = map:get_field(41, 119):region(2), recv = map:get_field(114, 20):region(2) },
+
+   { value = 2, send = map:get_field(35, 52):region(2), recv = map:get_field(96, 77):region(2) },
+   { value = 2, send = map:get_field(98, 55):region(2), recv = map:get_field(34, 76):region(2) },
+
+   { value = 3, send = map:get_field(64, 57):region(2), recv = map:get_field(78, 73):region(2) },
+   { value = 3, send = map:get_field(77, 58):region(2), recv = map:get_field(65, 72):region(2) },
+
+   { value = 2, send = map:get_field(62, 93):region(2), recv = map:get_field(78, 34):region(2) },
+   { value = 2, send = map:get_field(80, 95):region(2), recv = map:get_field(63, 29):region(2) },
+   { value = 2, send = map:get_field(18, 66):region(2), recv = map:get_field(121, 61):region(2) },
+   { value = 2, send = map:get_field(124, 72):region(2), recv = map:get_field(19, 57):region(2) }
 }
 
 -- =================
 -- Global Variables 
 -- =================
-wares_smuggled = { 0, 0 }
+points = { 0, 0 }
 
 -- =================
 -- Utility functions
@@ -46,8 +57,8 @@ use("map", "smuggling")
 -- ================
 function assign_teams()
    game.players[1].team = 1
-   game.players[3].team = 1
-   game.players[2].team = 2
+   game.players[2].team = 1
+   game.players[3].team = 2
    game.players[4].team = 2
 end
 
@@ -107,22 +118,13 @@ function place_headquarters()
    end
 end
 
-function show_middle_to_everybody()
-   local area = map:get_field(55,55):region(12)
-
-   for idx,plr in ipairs(game.players) do
-      plr:reveal_fields(area)
-      plr:hide_fields(area)
-   end
-end
-
 function setup_statistics_hook()
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
       name = _ "Wares smuggled",
       pic = "map:genstats_wares_smuggled.png",
       calculator = function(p) 
-         return wares_smuggled[p.team]
+         return points[p.team]
       end,
    }
 end
@@ -130,12 +132,25 @@ end
 function initialize()
    assign_teams()
    place_headquarters()
-   show_middle_to_everybody()
 
-   send_to_all(welcome_msg:format(wares_to_smuggle))
+   function reveal_smuggling_spots()
+      for idx,plr in ipairs(game.players) do
+         for idx,region in ipairs(route_descrs) do
+            plr:reveal_fields(region.recv)
+            plr:reveal_fields(region.send)
+            plr:hide_fields(region.recv)
+            plr:hide_fields(region.send)
+         end
+      end
+   end
 
-   run(wait_for_established_route, game.players[1], game.players[3])
-   run(wait_for_established_route, game.players[2], game.players[4])
+
+   send_to_all(welcome_msg:format(points_to_win))
+
+
+   for idx,descr in ipairs(route_descrs) do
+      run(wait_for_established_route, descr)
+   end
 end
 
 setup_statistics_hook()

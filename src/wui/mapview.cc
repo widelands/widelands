@@ -101,11 +101,12 @@ void Map_View::draw(RenderTarget & dst)
 	} else {
 		gameview = new GameViewSDL(dst);
 	}
-
-	if (upcast(Interactive_Player const, interactive_player, &intbase()))
+	if (upcast(Interactive_Player const, interactive_player, &intbase())) {
 		gameview->rendermap(egbase, interactive_player->player(), m_viewpoint);
-	else
+	} else {
 		gameview->rendermap(egbase, m_viewpoint);
+	}
+	delete gameview;
 
 	m_complete_redraw_needed = false;
 	if (char const * const text = tooltip())
