@@ -417,6 +417,23 @@ void Ship::start_task_movetodock(Game & game, PortDock & pd)
  * Send a message to the player, that an expedition is ready to start.
  */
 void Ship::start_task_expedition(Game &) {
+	// A ship with task expedition can be in two states: EXP_WAITING or EXP_SCOUTING (or EXP_COLONIZING)
+	// in both states, the owning player of this ship can give direction change commands to change the
+	// direction of the moving ship / send the ship in a direction. Once the ship is on it's way, it is in
+	// EXP_SCOUTING state. in the backend, a click on a direction button leads to the calculation of the
+	// way the ship should take until the next event occurs. It will than follow that path until the coords
+	// of the event are reached, or the user cancels the path through a direction change.
+	//
+	// The EXP_WAITING state means, that the an event happend and thus the ship stopped
+	// and waits for a new command. Such an event can be:
+	// * expedition is ready to start
+	// * new island appeared in vision range (only outer ring of vision range has to be checked due to the
+	//   always ongoing movement.
+	// * island was completely sourrounded
+	// * a port build space was found
+	//
+	// Following this logic, we set the state to EXP_WAITING and send a message to the player as information,
+	// that a user interaction is needed.
 #warning send message to player so the player can select in a UI where the ship should move to
 }
 
