@@ -594,8 +594,8 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 			clist.pop_back();
 
 			if (upcast(Game, game, &egbase))
-				if (egbase.objects().object_still_available(w))
-					w->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+				if (game->objects().object_still_available(w))
+					w->reset_tasks(*game);
 		}
 	}
 	m_incorporated_workers.clear();

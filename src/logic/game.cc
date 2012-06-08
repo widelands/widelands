@@ -480,7 +480,7 @@ bool Game::run
 			}
 		} else
 			// Is a scenario!
-			iterate_players_existing(p, nr_players, *this, plr)
+			iterate_players_existing_novar(p, nr_players, *this)
 				if (not map().get_starting_pos(p))
 				throw warning
 					(_("Missing starting position"),
