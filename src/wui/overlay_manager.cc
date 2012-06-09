@@ -202,8 +202,7 @@ void Overlay_Manager::register_overlay
 		if (jt->first == it->first) {
 			// There are several overlays registered for this location.
 			if (jt->second.level < it->second.level) {
-				std::swap<Overlay_Manager::Registered_Overlays>
-					(it->second, jt->second);
+				std::swap(it->second, jt->second);
 				it = overlay_map.lower_bound(c);
 			} else ++it;
 		} else break; // it is the last element, break this loop.
