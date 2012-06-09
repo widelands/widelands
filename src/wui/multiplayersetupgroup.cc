@@ -38,7 +38,7 @@
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup
 		(UI::Panel            * const parent, uint8_t id,
-		 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+		 int32_t const /* x */, int32_t const /* y */, int32_t const w, int32_t const h,
 		 GameSettingsProvider * const settings,
 		 UI::Font * font)
 		 :
@@ -143,7 +143,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 struct MultiPlayerPlayerGroup : public UI::Box {
 	MultiPlayerPlayerGroup
 		(UI::Panel            * const parent, uint8_t id,
-		 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
+		 int32_t const /* x */, int32_t const /* y */, int32_t const w, int32_t const h,
 		 GameSettingsProvider * const settings,
 		 NetworkPlayerSettingsBackend * const npsb,
 		 UI::Font * font,
@@ -383,7 +383,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup
 	(UI::Panel            * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 GameSettingsProvider * const settings,
-	 uint32_t butw, uint32_t buth,
+	 uint32_t /* butw */, uint32_t buth,
 	 std::string const & fname, uint32_t const fsize)
 :
 UI::Panel(parent, x, y, w, h),

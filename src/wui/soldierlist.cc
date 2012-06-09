@@ -327,7 +327,12 @@ void SoldierPanel::handle_mousein(bool inside)
 		m_mouseover_fn(0);
 }
 
-bool SoldierPanel::handle_mousemove(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
+bool SoldierPanel::handle_mousemove
+	(Uint8 /* state */,
+	 int32_t x,
+	 int32_t y,
+	 int32_t /* xdiff */,
+	 int32_t /* ydiff */)
 {
 	if (m_mouseover_fn)
 		m_mouseover_fn(find_soldier(x, y));

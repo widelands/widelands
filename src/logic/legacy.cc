@@ -376,7 +376,7 @@ struct FakeAttackController : public BaseImmovable {
 
 
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead & fr, uint8_t const version) {
+		virtual void load(FileRead & fr, uint8_t const /* version */) {
 			BaseImmovable::Loader::load(fr);
 
 			try {
@@ -457,7 +457,7 @@ struct FakeBattle : public BaseImmovable {
 	}
 
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead & fr, uint8_t const version) {
+		virtual void load(FileRead & fr, uint8_t const /* version */) {
 			BaseImmovable::Loader::load(fr);
 
 			fr.Unsigned32();

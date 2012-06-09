@@ -37,7 +37,7 @@
 int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 	(Widelands::Map           &           map,
 	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         parent,
+	Editor_Interactive         &         /* parent */,
 	Editor_Action_Args         &         args)
 {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr

@@ -557,7 +557,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 
 void Map_Bobdata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & /* fs */, Editor_Game_Base & /* egbase */, Map_Map_Object_Saver & /* mos */)
 throw (_wexception)
 {
 	throw wexception("bobdata packet is deprecated");

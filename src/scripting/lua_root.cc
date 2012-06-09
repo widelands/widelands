@@ -85,13 +85,13 @@ const PropertyType<L_Game> L_Game::Properties[] = {
 	{0, 0, 0},
 };
 
-L_Game::L_Game(lua_State * L) {
+L_Game::L_Game(lua_State * /* L */) {
 	// Nothing to do.
 }
 
-void L_Game::__persist(lua_State * L) {
+void L_Game::__persist(lua_State * /* L */) {
 }
-void L_Game::__unpersist(lua_State * L) {
+void L_Game::__unpersist(lua_State * /* L */) {
 }
 
 
@@ -247,13 +247,13 @@ const PropertyType<L_Editor> L_Editor::Properties[] = {
 	{0, 0, 0},
 };
 
-L_Editor::L_Editor(lua_State * L) {
+L_Editor::L_Editor(lua_State * /* L */) {
 	// Nothing to do.
 }
 
-void L_Editor::__persist(lua_State * L) {
+void L_Editor::__persist(lua_State * /* L */) {
 }
-void L_Editor::__unpersist(lua_State * L) {
+void L_Editor::__unpersist(lua_State * /* L */) {
 }
 
 /*

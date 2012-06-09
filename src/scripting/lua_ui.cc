@@ -363,7 +363,7 @@ int L_Button::get_name(lua_State * L) {
 		Press and hold this button. This is mainly to visualize a pressing
 		event in tutorials
 */
-int L_Button::press(lua_State * L) {
+int L_Button::press(lua_State * /* L */) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
@@ -374,7 +374,7 @@ int L_Button::press(lua_State * L) {
 		Click this button just as if the user would have moused over and clicked
 		it.
 */
-int L_Button::click(lua_State * L) {
+int L_Button::click(lua_State * /* L */) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
@@ -434,7 +434,7 @@ int L_Tab::get_active(lua_State * L) {
 
 		Click this tab making it the active one.
 */
-int L_Tab::click(lua_State * L) {
+int L_Tab::click(lua_State * /* L */) {
 	get()->activate();
 	return 0;
 }
@@ -483,7 +483,7 @@ int L_Window::get_name(lua_State * L) {
 		Closes this window. This invalidates this Object, do
 		not use it any longer.
 */
-int L_Window::close(lua_State * L) {
+int L_Window::close(lua_State * /* L */) {
 	delete m_panel;
 	m_panel = 0;
 	return 0;
@@ -683,7 +683,7 @@ int L_MapView::start_road_building(lua_State * L) {
 		If he wasn't, this will do nothing.
 */
 // UNTESTED
-int L_MapView::abort_road_building(lua_State * L) {
+int L_MapView::abort_road_building(lua_State * /* L */) {
 	Interactive_Base * me = get();
 	if (me->is_building_road())
 		me->abort_build_road();
@@ -699,7 +699,7 @@ int L_MapView::abort_road_building(lua_State * L) {
 		This is especially useful for automated testing of features and is for
 		example used in the widelands Lua test suite.
 */
-int L_MapView::close(lua_State * l) {
+int L_MapView::close(lua_State * /* l */) {
 	get()->end_modal(0);
 	return 0;
 }

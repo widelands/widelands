@@ -1267,7 +1267,7 @@ static void unpersistthread(int ref, UnpersistInfo * upi)
 	}
 }
 
-static void unpersistuserdata(int ref, UnpersistInfo * upi)
+static void unpersistuserdata(int /* ref */, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 2);

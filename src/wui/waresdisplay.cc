@@ -316,7 +316,7 @@ WaresDisplay::WaresDisplay
 : AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}
 
-RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::Ware_Index const ware) {
+RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::Ware_Index const /* ware */) {
 	return RGBColor(0, 0, 0);
 }
 

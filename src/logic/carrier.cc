@@ -123,7 +123,7 @@ void Carrier::road_update(Game & game, State & state)
  * a second carrier (ox or something). If we promised a flag that we would pick up
  * a ware there, we have to make sure that they do not count on us anymore.
  */
-void Carrier::road_pop(Game & game, State & state)
+void Carrier::road_pop(Game & game, State & /* state */)
 {
 	if (m_promised_pickup_to != NOONE && get_location(game)) {
 		Road & road      = ref_cast<Road, PlayerImmovable>(*get_location(game));

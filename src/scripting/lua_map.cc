@@ -804,9 +804,9 @@ const PropertyType<L_Map> L_Map::Properties[] = {
 	{0, 0, 0},
 };
 
-void L_Map::__persist(lua_State * L) {
+void L_Map::__persist(lua_State * /* L */) {
 }
-void L_Map::__unpersist(lua_State * L) {
+void L_Map::__unpersist(lua_State * /* L */) {
 }
 
 /*

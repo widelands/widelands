@@ -125,7 +125,7 @@ public:
 		set_size(w, h);
 	}
 protected:
-	std::string info_for_ware(Widelands::Ware_Index const ware) {
+	std::string info_for_ware(Widelands::Ware_Index const /* ware */) {
 		return "";
 	}
 
