@@ -859,11 +859,6 @@ m_texture           (0)
 		uint32_t i = 0;
 		int32_t cur_res = 0;
 		while (i <= str1.size()) {
-			if (i != str1.size() &&
-					(str1[i] == ' ' || str1[i] == ' ' || str1[i] == '\t')) {
-				++i;
-				continue;
-			}
 			if (i == str1.size() || str1[i] == ',') {
 				const int32_t res = resources->get_index(curres.c_str());;
 				if (res == -1)
@@ -873,7 +868,7 @@ m_texture           (0)
 						 s->get_name(), curres.c_str());
 				m_valid_resources[cur_res++] = res;
 				curres = "";
-			} else
+			} else if (str1[i] != ' ' && str1[i] != '\t')
 				curres.append(1, str1[i]);
 			++i;
 		}
