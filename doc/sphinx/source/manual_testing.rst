@@ -10,7 +10,7 @@ The following directories are currently available:
 
 ``compatibility/``
    This directory contains old savegame states from earlier builds. You can load
-   them manualle by using the --loadgame switch on the commandline.
+   them manualle by using the ``--loadgame`` switch on the commandline.
 
 ``lua/``
    This directory contains two maps that contain a complete test suite for most
@@ -40,7 +40,7 @@ The following directories are currently available:
       widelands --loadgame=/home/sirver/.widelands/save/lua_persistence.wgf
 
    The test suite will then be run and check if everything was loaded alright.
-   Output will be printed to stdout again.
+   Output will be printed to stdout again and Widelands should exit.
    
    
    
