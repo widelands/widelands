@@ -42,7 +42,14 @@ The following directories are currently available:
    The test suite will then be run and check if everything was loaded alright.
    Output will be printed to stdout again and Widelands should exit.
    
-   
+``richtext/``
+   This contains a test suite for the rich text rendering engine that is
+   contained in ``src/graphic/text/``. The test stuff consists of a thin
+   python wrapper (using cython) and a stand alone c++ program that can render
+   rich text. Compilation is done using SCons, take a look at SConscript for
+   details. The ``test.py`` script renders all examples in the ``test``
+   sub-directory and checks if they match pixel by pixel. To get everything
+   working in this directory, you need SDL, SDL_TTF, cython and numpy.
    
 
 

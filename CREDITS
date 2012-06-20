@@ -74,9 +74,15 @@ The Widelands Development Team thanks the following projects:
     * by Lablua, PUC-Rio
     * http://www.lua.org
 
+
     Pluto
     * by Ben Sunshine-Hill, Rob Hoelz
     * http://luaforge.net/projects/pluto/
+
+
+    Lodepng (for testing, not in Widelands itself)
+    * by Lode Vandevenne
+    * http://lodev.org/lodepng/
 
 
 and last but not least:
@@ -90,6 +96,4 @@ and last but not least:
 A big thank you goes to "Studio 10a", owned by Stichting Voorburgse en
 Leidschendamse Lokale Omroep Midvliet, for supporting the recording of
 some of our sound effects!
-
-February 2011
 

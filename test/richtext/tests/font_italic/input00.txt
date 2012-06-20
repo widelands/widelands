@@ -1,0 +1,1 @@
+<rt><p>Hello <font italic=yes>some bold</font> World</p></rt>
