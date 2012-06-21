@@ -18,21 +18,28 @@
  */
 
 // TODO: kill font.h
+// TODO: kill graphic/richtext.cc
 // TODO: kill wordwrap.h
 // TODO: kill text_parser
-#include "log.h" // TODO: kill this
 
-#include "font_handler1.h"
+#include <boost/format.hpp>
+
+#include "log.h" // TODO: kill this
 
 #include "io/filesystem/filesystem.h"
 
 #include "graphic.h"
 #include "text/rt_render.h"
+#include "text/rt_errors.h"
 #include "text/sdl_ttf_font.h"
 #include "rendertarget.h"
 #include "picture.h"
 
+#include "font_handler1.h"
+
+
 using namespace std;
+using namespace boost;
 
 namespace UI {
 
@@ -84,6 +91,7 @@ public:
 		(RenderTarget & dst,
 		 Point dstpoint,
 		 const std::string & text,
+		 uint32_t = 0,
 		 Align = Align_TopLeft);
 
 private:
@@ -102,16 +110,23 @@ Font_Handler1::~Font_Handler1() {
 	delete m_renderer;
 }
 
-void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::string & text, Align align) {
+void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::string & text, uint32_t w, Align align) {
 	log("text: %s\n", text.c_str());
-	SDL_Surface * text_surface = m_renderer->render(text, 250); // TODO: width
+	SDL_Surface * text_surface = 0;
+	try {
+		text_surface = m_renderer->render(text, w);
+	} catch (RT::Exception & e) {
+		log((format("Text rendering error: %s") % e.what()).str().c_str()); // TODO: should throw
+	}
+	if (!text_surface)
+		return;
+
 	PictureID p = g_gr->convert_sdl_surface_to_picture(text_surface, true);
 
 	if (align & Align_HCenter) dstpoint.x -= p->get_w() / 2;
 	else if (align & Align_Right) dstpoint.x -= p->get_w();
 	if (align & Align_VCenter) dstpoint.y -= p->get_h() / 2;
 	else if (align & Align_Bottom) dstpoint.y -= p->get_h();
-
 
 	dst.blit(Point(dstpoint.x, dstpoint.y), p);
 }

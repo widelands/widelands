@@ -72,6 +72,10 @@
 /// Prosa font color
 #define PROSA_FONT_CLR_FG    RGBColor(255, 255,   0)
 
+/// Colors for good/ok/bad
+#define UI_FONT_CLR_BAD_HEX   "ff0000"
+#define UI_FONT_CLR_OK_HEX   "ffff00"
+#define UI_FONT_CLR_GOOD_HEX   "325b1f"
 //@}
 
 /** \name Text colors

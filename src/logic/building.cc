@@ -753,16 +753,10 @@ void Building::draw_help
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
-		//  TODO make more here
-		//  FTODO fix this all
-		// UI::g_fh->draw_text_shadow
-			// (dst, UI::TextStyle::ui_small(),
-			 // pos - Point(0, 48),
-			 // info_string(igbase.building_census_format()),
-			 // UI::Align_Center);
 		UI::g_fh1->draw_text
 			(dst, pos - Point(0, 48),
 			 info_string(igbase.building_census_format()),
+			 0,
 			 UI::Align_Center);
 	}
 
@@ -772,10 +766,10 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_small(),
-			 pos - Point(0, 35),
+		UI::g_fh1->draw_text
+			(dst, pos - Point(0, 35),
 			 info_string(igbase.building_statistics_format()),
+			 0,
 			 UI::Align_Center);
 	}
 }

@@ -30,7 +30,9 @@ def parse_args():
 
 def _compare(r, infile, profiles):
     dname = os.path.dirname(infile)
-    width = int(open(dname + "/width").read())
+    width = 0
+    if os.path.exists(dname + "/width"):
+        width = int(open(dname + "/width").read())
     correct = dname + "/correct.png"
     ref_map_fn = dname + "/ref_map"
 

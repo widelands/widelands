@@ -142,7 +142,7 @@ public:
 
 	uint32_t height() {return m_h;}
 
-	void fit_nodes(vector<RenderNode*> & rv, uint32_t w, Borders p);
+	uint32_t fit_nodes(vector<RenderNode*> & rv, uint32_t w, Borders p);
 
 private:
 	struct ConstraintChange {
@@ -222,9 +222,10 @@ uint32_t Layout::m_fit_line(vector<RenderNode*> & rv, uint32_t w, const Borders 
  * example unneeded spaces), append the rest to the vector
  * we got
  */
-void Layout::fit_nodes(vector<RenderNode*> & rv, uint32_t w, Borders p) {
+uint32_t Layout::fit_nodes(vector<RenderNode*> & rv, uint32_t w, Borders p) {
 	m_h = p.top;
 
+	uint32_t max_line_width = 0;
 	while (m_idx < m_all_nodes.size()) {
 		size_t first_idx = rv.size();
 		uint32_t biggest_hotspot = m_fit_line(rv, w, p);
@@ -233,6 +234,7 @@ void Layout::fit_nodes(vector<RenderNode*> & rv, uint32_t w, Borders p) {
 			RenderNode * n = rv[j];
 			line_height = max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 			n->set_y(m_h + biggest_hotspot - n->hotspot_y());
+			max_line_width = max(max_line_width, n->x() + n->width() + p.right);
 		}
 
 		// Go over again and adjust position for VALIGN
@@ -261,10 +263,12 @@ void Layout::fit_nodes(vector<RenderNode*> & rv, uint32_t w, Borders p) {
 				n->set_x(p.left);
 				p.left += n->width();
 				cc.delta_offset_x = -n->width();
+				max_line_width = max(max_line_width, n->x() + n->width() + p.right);
 			} else {
-				n->set_x(w - n->width());
+				n->set_x(w - n->width() - p.right);
 				w -= n->width();
 				cc.delta_w = n->width();
+				max_line_width = max(max_line_width, w);
 			}
 			m_constraint_changes.push(cc);
 			rv.push_back(n);
@@ -275,6 +279,7 @@ void Layout::fit_nodes(vector<RenderNode*> & rv, uint32_t w, Borders p) {
 	}
 
 	m_h += p.bottom;
+	return max_line_width;
 }
 
 class TextNode : public RenderNode {
@@ -787,7 +792,10 @@ public:
 
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
-		layout.fit_nodes(nodes_to_render, m_w, padding);
+		uint32_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding);
+
+		if (m_w == INFINITE_WIDTH)
+			m_w = max_line_width;
 
 		// Collect all tags from children
 		foreach(RenderNode * rn, nodes_to_render)
@@ -896,6 +904,9 @@ SDL_Surface * Renderer::render(string text, uint32_t width, IRefMap ** pprm) {
 		"DejaVuSerif.ttf", 16,
 		{ 0, 0, 0, 0 }, IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM
 	};
+
+	if (!width)
+		width = INFINITE_WIDTH;
 
 	RTTagHandler rtrn(*rt, m_fc, default_fs, *m_imgl, width);
 	vector<RenderNode*> nodes;

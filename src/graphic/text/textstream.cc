@@ -87,24 +87,29 @@ void TextStream::expect(string n, bool skip_whitespace) {
 string TextStream::till_any(string chars) {
 	// Boost should provide a function here, but I was unable to figure it out
 	// Sticking with a double loop because chars will likely be short
+	string rv;
+
 	size_t j = m_i;
 	size_t started_at = m_i;
 	bool found = false;
-	while (!found and j < m_end) {
+	while (j < m_end) {
 		for (size_t k = 0; k < chars.size(); ++k) {
 			if (chars[k] == m_t[j]) {
 				found = true;
 				break;
 			}
 		}
+		if (found) break;
+		
+		if (m_t[j] == '\\')
+			++j;
+		rv += m_t[j];
 		++j;
 	}
 	if (!found)
 		throw EOT_Impl(started_at, peek(100, started_at));
-	--j;
-
-	string rv = m_t.substr(m_i, j - m_i);
 	m_consume(j - started_at);
+	
 	return rv;
 }
 

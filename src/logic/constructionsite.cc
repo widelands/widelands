@@ -18,6 +18,7 @@
  */
 
 #include <cstdio>
+#include <boost/format.hpp>
 
 #include "editor_game_base.h"
 #include "i18n.h"
@@ -85,11 +86,15 @@ Print completion percentage.
 */
 std::string ConstructionSite::get_statistics_string()
 {
-	char buffer[40];
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("%u%% built"), (get_built_per64k() * 100) >> 16);
-	return buffer;
+	unsigned int percent = (get_built_per64k() * 100) >> 16;
+
+	std::string clr = UI_FONT_CLR_OK_HEX;
+	if (percent <= 25) clr = UI_FONT_CLR_BAD_HEX;
+	else if (percent >= 75) clr = UI_FONT_CLR_GOOD_HEX;
+
+	std::string perc_s = (boost::format("<font color=%s>%i</font>") % clr % percent).str();
+
+	return (boost::format(_("%s%% built")) % perc_s.c_str()).str();
 }
 
 /*

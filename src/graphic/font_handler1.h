@@ -40,6 +40,7 @@ struct IFont_Handler1 { // TODO: rename: TextRenderer
 		(RenderTarget &,
 		 Point dstpoint,
 		 const std::string & text,
+		 uint32_t w = 0,
 		 Align = Align_TopLeft) = 0;
 
 	// FTODO: flush cache

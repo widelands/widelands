@@ -25,19 +25,13 @@ using namespace std;
 using namespace boost;
 
 string as_uifont
-	(const string & txt, int size, const string & face, UI::Align align, RGBColor clr)
+	(const string & txt, int size, const string & face, RGBColor clr)
 {
-	string align_str;
-	switch (align) {
-		case UI::Align_Left: align_str = "left"; break;
-		case UI::Align_Right: align_str = "right"; break;
-		default: align_str = "center";
-	}
 
 	// UI Text is always bold due to historic reasons
 	return (format
-		("<rt><p align=%s><font face=%s size=%i shadow=1 bold=1 color=%02x%02x%02x>%s</font></p></rt>")
-		 % align_str.c_str() % face.c_str() % size % int(clr.r()) % int(clr.g()) % int(clr.b()) % txt.c_str()
+		("<rt><p><font face=%s size=%i shadow=1 bold=1 color=%02x%02x%02x>%s</font></p></rt>")
+		 % face.c_str() % size % int(clr.r()) % int(clr.g()) % int(clr.b()) % txt.c_str()
 		 ).str();
 }
 
