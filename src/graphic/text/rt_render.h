@@ -39,13 +39,14 @@ public:
 		BOLD = 1,
 		ITALIC = 2,
 		UNDERLINE = 4,
+		SHADOW = 8,
 	};
 	virtual ~IFont() {};
 
 	virtual void dimensions(std::string, int, uint32_t *, uint32_t *) = 0;
 	virtual SDL_Surface * render(std::string, SDL_Color clr, int) = 0;
 
-	virtual uint32_t ascent() const = 0;
+	virtual uint32_t ascent(int) const = 0;
 };
 
 /**

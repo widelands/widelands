@@ -24,6 +24,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/editor_mapselect.h"
@@ -275,6 +276,7 @@ m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
 	UI::g_fh = new UI::Font_Handler();
+	UI::g_fh1 = UI::create_fonthandler(*g_fs);
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 
@@ -319,6 +321,8 @@ WLApplication::~WLApplication()
 	assert(UI::g_fh);
 	delete UI::g_fh;
 	UI::g_fh = 0;
+	delete UI::g_fh1;
+	UI::g_fh1 = 0;
 
 	assert(g_fs);
 	delete g_fs;

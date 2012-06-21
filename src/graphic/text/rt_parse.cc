@@ -307,6 +307,7 @@ Parser::Parser() :
 		tc.allowed_attrs.insert("bold");
 		tc.allowed_attrs.insert("italic");
 		tc.allowed_attrs.insert("underline");
+		tc.allowed_attrs.insert("shadow");
 		tc.allowed_attrs.insert("ref");
 
 		tc.allowed_childs.insert("br");

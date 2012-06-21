@@ -26,9 +26,13 @@
 #include "rt_errors.h"
 #include "rt_render.h"
 #include "sdl_ttf_font.h"
+#include "sdl_helper.h"
 
 using namespace std;
 using namespace boost;
+
+static const int SHADOW_OFFSET = 1;
+static const SDL_Color SHADOW_CLR = { 0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
 
@@ -39,7 +43,7 @@ public:
 
 	void dimensions(string, int, uint32_t * w, uint32_t * h);
 	virtual SDL_Surface * render(string, SDL_Color clr, int);
-	uint32_t ascent() const;
+	uint32_t ascent(int) const;
 
 private:
 	void m_set_style(int);
@@ -63,21 +67,69 @@ void SDLTTF_Font::dimensions(string txt, int style, uint32_t * gw, uint32_t * gh
 
 	int w, h;
 	TTF_SizeUTF8(m_font, txt.c_str(), &w, &h);
+
+	if (style & SHADOW) {
+		w += SHADOW_OFFSET; h += SHADOW_OFFSET;
+	}
 	*gw = w; *gh = h;
 }
 
 SDL_Surface * SDLTTF_Font::render(string txt, SDL_Color clr, int style) {
 	m_set_style(style);
 
-	SDL_Surface * text_surface = TTF_RenderUTF8_Blended(m_font, txt.c_str(), clr);
+	SDL_Surface * text_surface = 0;
+
+	if (style & SHADOW) {
+		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(m_font, txt.c_str(), clr);
+		SDL_Surface * shadow = TTF_RenderUTF8_Blended(m_font, txt.c_str(), SHADOW_CLR);
+		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
+
+		if (text_surface->format->BitsPerPixel != 32)
+			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
+
+		SDL_Rect dstrct1 = { 0, 0, 0, 0 };
+		SDL_SetAlpha(shadow, 0, SDL_ALPHA_OPAQUE);
+		SDL_BlitSurface(shadow, 0, text_surface, &dstrct1);
+
+		Uint32 * spix = (Uint32*)tsurf->pixels;
+		Uint32 * dpix = (Uint32*)text_surface->pixels;
+
+		// Alpha Blend the Text onto the Shadow. This is really slow, but it is
+		// the only compatible way to do it using SDL 1.2. SDL 2.0 offers more
+		// functionality but is not yet released.
+		Uint8 sr, sg, sb, sa, dr, dg, db, da, outa, outr=0, outg=0, outb=0;
+		for (uint32_t y = 0; y < tsurf->h; ++y) {
+			for (uint32_t x = 0; x < tsurf->w; ++x) {
+				size_t sidx = (y*tsurf->pitch + 4*x) / 4;
+				size_t didx = ((y+SHADOW_OFFSET)*text_surface->pitch + (x+SHADOW_OFFSET)*4) / 4;
+
+				SDL_GetRGBA(spix[sidx], tsurf->format, &sr, &sg, &sb, &sa);
+				SDL_GetRGBA(dpix[didx], text_surface->format, &dr, &dg, &db, &da);
+
+				outa = (255*sa + da*(255 - sa)) / 255;
+				if (outa) {
+					outr = (255 * sa*sr + da*dr*(255-sa)) / outa / 255;
+					outg = (255 * sa*sg + da*dg*(255-sa)) / outa / 255;
+					outb = (255 * sa*sb + da*db*(255-sa)) / outa / 255;
+				}
+				dpix[didx] = SDL_MapRGBA(text_surface->format, outr, outg, outb, outa);
+			}
+		}
+		SDL_FreeSurface(tsurf);
+		SDL_FreeSurface(shadow);
+	} else
+		text_surface= TTF_RenderUTF8_Blended(m_font, txt.c_str(), clr);
 
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 	return text_surface;
 }
 
-uint32_t SDLTTF_Font::ascent() const {
-	return TTF_FontAscent(m_font);
+uint32_t SDLTTF_Font::ascent(int style) const {
+	uint32_t rv = TTF_FontAscent(m_font);
+	if (style & SHADOW)
+		rv += SHADOW_OFFSET;
+	return rv;
 }
 
 void SDLTTF_Font::m_set_style(int style) {

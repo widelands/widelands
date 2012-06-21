@@ -25,8 +25,10 @@
 
 #include "economy/flag.h"
 #include "economy/request.h"
+#include "text_layout.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -555,7 +557,7 @@ std::string Building::info_string(std::string const & format) {
 			}
 		} else
 			result << *i.current;
-	return result.str();
+	return as_uifont(result.str());
 }
 
 
@@ -752,9 +754,14 @@ void Building::draw_help
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
 		//  TODO make more here
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_small(),
-			 pos - Point(0, 48),
+		//  FTODO fix this all
+		// UI::g_fh->draw_text_shadow
+			// (dst, UI::TextStyle::ui_small(),
+			 // pos - Point(0, 48),
+			 // info_string(igbase.building_census_format()),
+			 // UI::Align_Center);
+		UI::g_fh1->draw_text
+			(dst, pos - Point(0, 48),
 			 info_string(igbase.building_census_format()),
 			 UI::Align_Center);
 	}

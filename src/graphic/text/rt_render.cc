@@ -29,6 +29,7 @@
 #include "rt_render.h"
 #include "rt_parse.h"
 #include "textstream.h"
+#include "sdl_helper.h"
 
 using namespace std;
 using namespace boost;
@@ -40,31 +41,6 @@ namespace RT {
 static const uint32_t INFINITE_WIDTH = 2147483647; // 2^31-1
 
 // Helper Stuff {{{
-SDL_Surface * m_make_surface(int32_t w, int32_t h) {
-	 SDL_Surface *surface;
-	 Uint32 rmask, gmask, bmask, amask;
-	 /* SDL interprets each pixel as a 32-bit number, so our masks must depend
-		 on the endianness (byte order) of the machine */
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-	 rmask = 0xff000000;
-	 gmask = 0x00ff0000;
-	 bmask = 0x0000ff00;
-	 amask = 0x000000ff;
-#else
-	 rmask = 0x000000ff;
-	 gmask = 0x0000ff00;
-	 bmask = 0x00ff0000;
-	 amask = 0xff000000;
-#endif
-
-	 surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32,
-											  rmask, gmask, bmask, amask);
-	 if (!surface)
-		 throw RenderError((format("Was unable to create a Surface: %s") % SDL_GetError()).str());
-
-	 return surface;
-}
-
 enum HAlign {
 	HALIGN_LEFT,
 	HALIGN_RIGHT,
@@ -333,7 +309,7 @@ TextNode::TextNode(IFont & font, NodeStyle & ns, string txt)
 	m_font.dimensions(m_txt, ns.font_style, &m_w, &m_h);
 }
 uint32_t TextNode::hotspot_y() {
-	return m_font.ascent();
+	return m_font.ascent(m_s.font_style);
 }
 SDL_Surface * TextNode::render() {
 	return m_font.render(m_txt, m_s.font_color, m_s.font_style);
@@ -356,7 +332,7 @@ private:
 };
 SDL_Surface * FillingTextNode::render() {
 	SDL_Surface * t = m_font.render(m_txt, m_s.font_color, m_s.font_style);
-	SDL_Surface * rv = m_make_surface(m_w, m_h);
+	SDL_Surface * rv = empty_sdl_surface(m_w, m_h);
 	SDL_SetAlpha(t, 0, SDL_ALPHA_OPAQUE);
 	for (uint32_t x = 0; x < m_w; x += t->w) {
 		SDL_Rect dstrect = { x, 0, 0, 0 };
@@ -414,7 +390,7 @@ public:
 	virtual uint32_t width() {return m_w;}
 	virtual uint32_t hotspot_y() {return m_h;}
 	virtual SDL_Surface * render() {
-		SDL_Surface * rv = m_make_surface(m_w, m_h);
+		SDL_Surface * rv = empty_sdl_surface(m_w, m_h);
 
 		// Draw background image (tiling)
 		if (m_bg) {
@@ -454,7 +430,7 @@ public:
 	virtual uint32_t height() {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint32_t hotspot_y() {return height();}
 	virtual SDL_Surface * render() {
-		SDL_Surface * rv = m_make_surface(width(), height());
+		SDL_Surface * rv = empty_sdl_surface(width(), height());
 
 		// Draw Solid background Color
 		bool set_alpha = true;
@@ -638,6 +614,7 @@ public:
 		if (a.has("bold")) m_ns.font_style |= a["bold"].get_bool() ? IFont::BOLD : 0;
 		if (a.has("italic")) m_ns.font_style |= a["italic"].get_bool() ? IFont::ITALIC : 0;
 		if (a.has("underline")) m_ns.font_style |= a["underline"].get_bool() ? IFont::UNDERLINE : 0;
+		if (a.has("shadow")) m_ns.font_style |= a["shadow"].get_bool() ? IFont::SHADOW : 0;
 		if (a.has("ref")) m_ns.reference = a["ref"].get_string();
 	}
 };
