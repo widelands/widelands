@@ -22,6 +22,7 @@
 
 #include <map>
 #include <stdint.h>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -73,11 +74,13 @@ struct Child {
 };
 
 
+typedef std::set<std::string> TagSet;
+
 class IParser {
 public:
 	virtual ~IParser() {};
 
-	virtual ITag * parse(std::string text) = 0;
+	virtual ITag * parse(std::string text, const TagSet &) = 0;
 	virtual std::string remaining_text() = 0;
 };
 

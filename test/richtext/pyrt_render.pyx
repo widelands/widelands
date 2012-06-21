@@ -1,5 +1,6 @@
 from libc.stdint cimport *
-cimport libcpp.string as cstr
+from libcpp.string cimport string as cppstr
+from libcpp.set cimport set as cppset
 
 cdef extern from "SDL.h":
     struct SDL_Surface:
@@ -12,9 +13,9 @@ cdef extern from "SDL.h":
 
 cdef extern from "rt_render.h" namespace "RT":
     cdef cppclass IRefMap:
-        cstr.string query(int16_t, int16_t)
+        cppstr query(int16_t, int16_t)
     cdef cppclass IRenderer:
-        SDL_Surface * render(char*, uint32_t, IRefMap **) except +
+        SDL_Surface * render(char*, uint32_t, IRefMap **, cppset[cppstr] &) except +
 
     struct IImageLoader:
         pass
@@ -50,10 +51,14 @@ cdef class Renderer(object):
     def __del__(self):
         del self._renderer
 
-    def render(self, text, width):
+    def render(self, text, width, allowed_tags = set()):
         cdef IRefMap * rm
+        cdef cppset[cppstr] allowed_set
 
-        cdef SDL_Surface * rv = self._renderer.render(text, width, &rm)
+        for tag in allowed_tags:
+            allowed_set.insert(cppstr(<char*>(tag)))
+
+        cdef SDL_Surface * rv = self._renderer.render(text, width, &rm, allowed_set)
 
         a = np.empty((rv.h, rv.w, 4), np.uint8)
         cdef uint32_t x, y, i

@@ -24,6 +24,7 @@
 
 #include <stdint.h>
 #include <string>
+#include <set>
 
 namespace RT {
 /**
@@ -90,12 +91,13 @@ public:
  * This is the rendering engine. It does not do any caching at all and
  * it works entirely inside the SDL Framework.
  */
+typedef std::set<std::string> TagSet;
 class IRenderer {
 public:
 	IRenderer(IFontLoader *) {};
 	virtual ~IRenderer() {};
 
-	virtual SDL_Surface * render(std::string, uint32_t, IRefMap ** = 0) = 0;
+	virtual SDL_Surface * render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
 };
 
 IRenderer * setup_renderer(IFontLoader * fl, IImageLoader * imgl);

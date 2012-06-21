@@ -17,19 +17,18 @@
  *
  */
 
-#include <string>
 #include <queue>
+#include <string>
 #include <vector>
 
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
-#include <boost/algorithm/string.hpp>
 #include <SDL.h>
 
-#include "rt_render.h"
 #include "rt_parse.h"
-#include "textstream.h"
+#include "rt_render.h"
 #include "sdl_helper.h"
+#include "textstream.h"
 
 using namespace std;
 using namespace boost;
@@ -880,7 +879,7 @@ public:
 	Renderer(IFontLoader * fl, IImageLoader * imgl, IParser * p);
 	virtual ~Renderer();
 
-	virtual SDL_Surface * render(std::string, uint32_t, IRefMap **);
+	virtual SDL_Surface * render(std::string, uint32_t, IRefMap **, const TagSet &);
 
 private:
 	FontCache m_fc;
@@ -897,8 +896,8 @@ Renderer::~Renderer() {
 	delete m_imgl;
 }
 
-SDL_Surface * Renderer::render(string text, uint32_t width, IRefMap ** pprm) {
-	ITag * rt = m_p->parse(text);
+SDL_Surface * Renderer::render(string text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
+	ITag * rt = m_p->parse(text, allowed_tags);
 
 	NodeStyle default_fs = {
 		"DejaVuSerif.ttf", 16,

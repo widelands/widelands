@@ -115,13 +115,13 @@ public:
 	virtual const string & name() const {return m_name;}
 	virtual const AttrMap & attrs() const {return m_am;}
 	virtual const ChildList & childs() const {return m_childs;}
-	void parse(TextStream & ts, TagConstraints & tcs);
+	void parse(TextStream & ts, TagConstraints & tcs, const TagSet &);
 
 private:
 	void m_parse_opening_tag(TextStream & ts, TagConstraints & tcs);
 	void m_parse_closing_tag(TextStream & ts);
 	void m_parse_attribute(TextStream & ts, unordered_set<string> &);
-	void m_parse_content(TextStream & ts, TagConstraints & tc);
+	void m_parse_content(TextStream & ts, TagConstraints & tc, const TagSet &);
 
 	string m_name;
 	AttrMap m_am;
@@ -165,7 +165,7 @@ void Tag::m_parse_attribute(TextStream & ts, unordered_set<string> & allowed_att
 	m_am.add_attribute(name, new Attr(name, ts.parse_string()));
 }
 
-void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs)
+void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & allowed_tags)
 {
 	TagConstraint tc = tcs[m_name];
 
@@ -186,20 +186,22 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs)
 
 		Tag * child = new Tag();
 		line = ts.line(); col = ts.col(); size_t cpos = ts.pos();
-		child->parse(ts, tcs);
-		if (tc.allowed_childs.count(child->name()) == 0)
-			throw SyntaxError_Impl(line, col, "an allowed child tag", child->name(), ts.peek(100, cpos));
+		child->parse(ts, tcs, allowed_tags);
+		if (!tc.allowed_childs.count(child->name()))
+			throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
+		if (!allowed_tags.empty() and !allowed_tags.count(child->name()))
+			throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 
 		m_childs.push_back(new Child(child));
 	}
 }
 
-void Tag::parse(TextStream & ts, TagConstraints & tcs) {
+void Tag::parse(TextStream & ts, TagConstraints & tcs, const TagSet & allowed_tags) {
 	m_parse_opening_tag(ts, tcs);
 
 	TagConstraint tc = tcs[m_name];
 	if (tc.has_closing_tag) {
-		m_parse_content(ts, tcs);
+		m_parse_content(ts, tcs, allowed_tags);
 		m_parse_closing_tag(ts);
 	}
 }
@@ -212,7 +214,7 @@ class Parser : public IParser {
 public:
 	Parser();
 	virtual ~Parser();
-	virtual ITag * parse(string text);
+	virtual ITag * parse(string text, const TagSet &);
 	virtual string remaining_text();
 
 private:
@@ -326,7 +328,7 @@ Parser::~Parser() {
 		delete m_ts;
 }
 
-ITag * Parser::parse(string text) {
+ITag * Parser::parse(string text, const TagSet & allowed_tags) {
 	if (m_ts) {
 		delete m_ts;
 		m_ts = 0;
@@ -335,7 +337,7 @@ ITag * Parser::parse(string text) {
 
 	m_ts->skip_ws(); m_ts->rskip_ws();
 	Tag * rv = new Tag();
-	rv->parse(*m_ts, m_tcs);
+	rv->parse(*m_ts, m_tcs, allowed_tags);
 
 	return rv;
 }

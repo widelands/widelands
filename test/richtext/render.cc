@@ -86,23 +86,21 @@ string read_file(string fn) {
 	return txt;
 }
 
-int parse_arguments(int argc, char** argv, int32_t * w, string & outname, string & inname) {
-	if (argc < 2) {
-		cout << "Usage: render <width in pixels> [outname] [inname] < input.txt" << endl << endl <<
+int parse_arguments
+	(int argc, char** argv, int32_t * w, string & outname, string & inname, set<string> & allowed_tags)
+{
+	if (argc < 4) {
+		cout << "Usage: render <width in pixels> <outname> <inname> [allowed tag1] [allowed tags2] ... < input.txt" << endl << endl <<
 			"input.txt should contain a valid rich text formatting" << endl;
 		return 1;
 	}
 
 	*w = strtol(argv[1], 0, 10);
-	if (argc > 2)
-		outname = argv[2];
-	else
-		outname = "out.png";
+	outname = argv[2];
+	inname = argv[3];
 
-	if (argc > 3)
-		inname = argv[3];
-	else
-		inname = "-";
+	for(int i = 4; i < argc; i++)
+		allowed_tags.insert(argv[i]);
 
 	return 0;
 }
@@ -111,9 +109,10 @@ int parse_arguments(int argc, char** argv, int32_t * w, string & outname, string
 int main(int argc, char *argv[])
 {
 	int32_t w;
+	set<string> allowed_tags;
 
 	string outname, inname;
-	if (parse_arguments(argc, argv, &w, outname, inname))
+	if (parse_arguments(argc, argv, &w, outname, inname, allowed_tags))
 		return 0;
 
 	SDL_Init(SDL_INIT_VIDEO);
@@ -130,7 +129,7 @@ int main(int argc, char *argv[])
 
 	SDL_Surface * surface = 0;
 	try {
-		surface = renderer->render(txt, w);
+		surface = renderer->render(txt, w, 0, allowed_tags);
 	} catch(RT::Exception & e) {
 			cout << e.what() << endl;
 	}
