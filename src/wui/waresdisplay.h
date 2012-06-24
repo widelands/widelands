@@ -135,4 +135,27 @@ private:
 	vector_type         m_warelists;
 };
 
+/**
+ * Displays the build costs of a given building
+ */
+
+struct BuildcostDisplay : public UI::Panel {
+	BuildcostDisplay
+	(UI::Panel * const parent,
+	 int32_t const x, int32_t const y,
+	 int32_t columns,
+	 Widelands::Building_Descr const * building = NULL);
+
+	virtual ~BuildcostDisplay();
+
+	void set_building(Widelands::Building_Descr const * building);
+
+private:
+	virtual void draw(RenderTarget &);
+
+private:
+	const Widelands::Building_Descr * m_building;
+	int32_t m_columns;
+};
+
 #endif

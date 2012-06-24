@@ -346,3 +346,90 @@ void WaresDisplay::add_warelist
 	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(&wares);
 }
+
+
+/*
+====================================================
+struct BuildcostDisplay
+====================================================
+*/
+
+BuildcostDisplay::BuildcostDisplay
+	(UI::Panel * const parent,
+	 const int32_t x, const int32_t y,
+	 int32_t columns,
+	 Widelands::Building_Descr const * building)
+	:
+	UI::Panel (parent, x, y, 0, 0), m_columns(columns)
+{
+	set_building(building);
+}
+
+BuildcostDisplay::~BuildcostDisplay()
+{}
+
+void BuildcostDisplay::set_building(Widelands::Building_Descr const * building) {
+	m_building = building;
+	if (m_building) {
+		int32_t c = m_building->buildcost().size();
+		set_desired_size
+			((c < m_columns ? c : m_columns) * (WARE_MENU_PIC_WIDTH + 4) + 1,
+			 ((c / m_columns) + (c % m_columns != 0)) * (WARE_MENU_PIC_HEIGHT + 3 + 8) + 1);
+		set_visible(true);
+	} else {
+		set_desired_size(0, 0);
+		set_visible(false);
+	}
+}
+
+void BuildcostDisplay::draw(RenderTarget & dst)
+{
+	if (not m_building)
+		return;
+
+	Point p = Point(2, 2);
+	Widelands::Tribe_Descr const & tribe = m_building->tribe();
+
+	Widelands::Buildcost const & cost = m_building->buildcost();
+	Widelands::Buildcost::const_iterator c;
+
+	Widelands::Tribe_Descr::WaresOrder::iterator i;
+	std::vector<Widelands::Ware_Index>::iterator j;
+	Widelands::Tribe_Descr::WaresOrder order = tribe.wares_order();
+
+	for (i = order.begin(); i != order.end(); i++)
+		for (j = i->begin(); j != i->end(); j++)
+			if ((c = cost.find(*j)) != cost.end()) {
+				//  draw a background
+				const PictureID picid =
+				g_gr->get_picture (PicMod_Game, "pics/ware_list_bg.png");
+				uint32_t w, h;
+				g_gr->get_picture_size(picid, w, h);
+
+				dst.blit(p, picid);
+
+				const Point pos = p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1);
+				// Draw it
+				dst.blit
+				(pos,
+				 tribe.get_ware_descr(c->first)->icon());
+				dst.fill_rect
+				(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
+				 RGBColor(0, 0, 0));
+
+				UI::g_fh->draw_text
+				(dst, UI::TextStyle::ui_ultrasmall(),
+				 p + Point(WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT - 4),
+				 boost::lexical_cast<std::string, uint32_t>(c->second),
+				 UI::Align_Right);
+
+				p.x += (WARE_MENU_PIC_WIDTH + 4);
+				if (p.x >= (m_columns * (WARE_MENU_PIC_WIDTH + 4))) {
+					p.x = 2;
+					p.y += (WARE_MENU_PIC_HEIGHT + 3 + 8);
+				}
+			}
+}
+
+
+
