@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-03-09 02:38+0000\n"
-"Last-Translator: Gleb Sinkovskiy <gleb.sinkovskiy@gmail.com>\n"
+"PO-Revision-Date: 2012-06-24 21:03+0000\n"
+"Last-Translator: TroubleMakerDV <grayman2000@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:40+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-06-25 05:10+0000\n"
+"X-Generator: Launchpad (build 15482)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -43,6 +43,9 @@ msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Больше 5 секунд не удается отключить звук. Это проблема, придется аварийно "
+"закрыть Widelands. Обновите свой звуковой драйвер и (или) SDL, чтобы "
+"устранить эту проблему.\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -605,7 +608,7 @@ msgstr "Готово: %s"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Документация по программной команде "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -992,11 +995,11 @@ msgstr "загрузка сущностей: %s"
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "Разобрано: %u%%"
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Загружаем племена"
 
 #: ../../src/logic/game.cc:224
 msgid "Preloading a map"
@@ -1082,7 +1085,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:315
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr ""
+msgstr "у непередвигаемого объекта %s нет программы \"%s\""
 
 #: ../../src/logic/immovable.cc:772
 #, c-format
@@ -1520,7 +1523,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:670
 msgid "No parameter given!"
-msgstr ""
+msgstr "Параметр не передан!"
 
 #: ../../src/logic/production_program.cc:702
 msgid "idle animation is default; calling is not allowed"
@@ -1679,6 +1682,11 @@ msgid ""
 "not be executed). Strange things may happen. No solution for this problem "
 "has been implemented yet. (bug #1951113) (The game has been paused.)"
 msgstr ""
+"В движке игры произошла логическая ошибка. %s #%u игрока %u не может "
+"проложить путь из (%i, %i) (с неподвижным %s) к противнику (%s #%u игрока "
+"%u) на (%i, %i) (с неподвижным %s). %s теперь будет оставлен (но не будет "
+"выполнен). Странные вещи могут происходить. Пока не было найдено решение "
+"этой проблемы. (ошибка #1951113) (Игра была приостановлена.)"
 
 #: ../../src/logic/soldier.cc:1441 ../../src/logic/soldier.cc:1446
 msgid "no"
@@ -4497,7 +4505,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu.cc:60
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 msgid "New Random Map"
-msgstr ""
+msgstr "Новая случайная карта"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
