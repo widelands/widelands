@@ -354,24 +354,25 @@ struct BuildcostDisplay
 ====================================================
 */
 
-BuildcostDisplay::BuildcostDisplay
+WaresMapDisplay::WaresMapDisplay
 	(UI::Panel * const parent,
 	 const int32_t x, const int32_t y,
 	 int32_t columns,
-	 Widelands::Building_Descr const * building)
+	 Widelands::Tribe_Descr const & tribe,
+	 maptype const * map)
 	:
-	UI::Panel (parent, x, y, 0, 0), m_columns(columns)
+	UI::Panel (parent, x, y, 0, 0), m_tribe(tribe), m_columns(columns)
 {
-	set_building(building);
+	set_map(map);
 }
 
-BuildcostDisplay::~BuildcostDisplay()
+WaresMapDisplay::~WaresMapDisplay()
 {}
 
-void BuildcostDisplay::set_building(Widelands::Building_Descr const * building) {
-	m_building = building;
-	if (m_building) {
-		int32_t c = m_building->buildcost().size();
+void WaresMapDisplay::set_map(maptype const * map) {
+	m_map = map;
+	if (m_map) {
+		int32_t c = m_map->size();
 		set_desired_size
 			((c < m_columns ? c : m_columns) * (WARE_MENU_PIC_WIDTH + 4) + 1,
 			 ((c / m_columns) + (c % m_columns != 0)) * (WARE_MENU_PIC_HEIGHT + 3 + 8) + 1);
@@ -382,24 +383,22 @@ void BuildcostDisplay::set_building(Widelands::Building_Descr const * building) 
 	}
 }
 
-void BuildcostDisplay::draw(RenderTarget & dst)
+void WaresMapDisplay::draw(RenderTarget & dst)
 {
-	if (not m_building)
+	if (not m_map)
 		return;
 
 	Point p = Point(2, 2);
-	Widelands::Tribe_Descr const & tribe = m_building->tribe();
 
-	Widelands::Buildcost const & cost = m_building->buildcost();
-	Widelands::Buildcost::const_iterator c;
+	maptype::const_iterator c;
 
 	Widelands::Tribe_Descr::WaresOrder::iterator i;
 	std::vector<Widelands::Ware_Index>::iterator j;
-	Widelands::Tribe_Descr::WaresOrder order = tribe.wares_order();
+	Widelands::Tribe_Descr::WaresOrder order = m_tribe.wares_order();
 
 	for (i = order.begin(); i != order.end(); i++)
 		for (j = i->begin(); j != i->end(); j++)
-			if ((c = cost.find(*j)) != cost.end()) {
+			if ((c = m_map->find(*j)) != m_map->end()) {
 				//  draw a background
 				const PictureID picid =
 				g_gr->get_picture (PicMod_Game, "pics/ware_list_bg.png");
@@ -412,7 +411,7 @@ void BuildcostDisplay::draw(RenderTarget & dst)
 				// Draw it
 				dst.blit
 				(pos,
-				 tribe.get_ware_descr(c->first)->icon());
+				 m_tribe.get_ware_descr(c->first)->icon());
 				dst.fill_rect
 				(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
 				 RGBColor(0, 0, 0));
