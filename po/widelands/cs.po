@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-03-31 21:12+0000\n"
-"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
+"PO-Revision-Date: 2012-06-25 20:16+0000\n"
+"Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:38+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-06-26 05:10+0000\n"
+"X-Generator: Launchpad (build 15482)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -40,6 +40,9 @@ msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Počkejte  vteřin pro ukončení audia. Problémy způsobují pád Widelands. "
+"Stáhněte si nejnovější ovladače k zvukové kartě a /nebo SDL pro vyřešení "
+"tohoto problému\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -2703,7 +2706,7 @@ msgstr "Hráč \"%s\" byl poražen a pokračuje jako divák."
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
-msgstr ""
+msgstr "Klient %s neodpovídá více než %s vteřin."
 
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
@@ -2711,6 +2714,8 @@ msgid ""
 "Client %s will automatically be kicked, if no answer is received within %s "
 "seconds."
 msgstr ""
+"Klient %s bude automaticky odpojen, pokud nebude obdržena žádná odpověď "
+"během %s vteřin."
 
 #: ../../src/scripting/lua_game.cc:439 ../../src/ui_basic/helpwindow.cc:83
 #: ../../src/ui_basic/messagebox.cc:90
@@ -3900,12 +3905,12 @@ msgstr "Ladicí políčko"
 #: ../../src/wui/game_debug_ui.cc:373
 #, c-format
 msgid "Resource name: %s\n"
-msgstr ""
+msgstr "Název suroviny: %s\n"
 
 #: ../../src/wui/game_debug_ui.cc:379
 #, c-format
 msgid "Resource amount: %i/%i\n"
-msgstr ""
+msgstr "Množství suroviny : %i%i\n"
 
 #: ../../src/wui/game_main_menu.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
