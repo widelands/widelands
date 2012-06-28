@@ -25,6 +25,7 @@
 #include "interactive_gamebase.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
+#include "waresdisplay.h"
 
 /**
  * Base class for all building windows.
@@ -66,6 +67,8 @@ protected:
 	void act_start_stop();
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();
+	void show_costPrev(WaresMapDisplay::maptype const & cost, std::string text);
+	void hide_costPrev();
 
 	void create_ware_queue_panel
 		(UI::Box *, Widelands::Building &, Widelands::WaresQueue *, bool = false);
@@ -79,6 +82,9 @@ private:
 	Widelands::Building & m_building;
 
 	UI::Tab_Panel * m_tabs;
+
+	UI::Textarea * m_prevtext;
+	WaresMapDisplay * m_enhancecostPrev;
 
 	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
 	UI::Button * m_toggle_workarea;
