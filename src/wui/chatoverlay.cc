@@ -85,7 +85,7 @@ void ChatOverlay::think()
 /**
  * Callback that is run when a new chat message comes in.
  */
-void ChatOverlay::Impl::receive(const ChatMessage & note)
+void ChatOverlay::Impl::receive(const ChatMessage & /* note */)
 {
 	recompute();
 }

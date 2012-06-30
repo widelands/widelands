@@ -135,4 +135,32 @@ private:
 	vector_type         m_warelists;
 };
 
+
+/**
+ * Displays the build costs of a given building
+ */
+
+struct WaresMapDisplay : public UI::Panel {
+	typedef std::map<Widelands::Ware_Index, uint8_t> maptype;
+
+	WaresMapDisplay
+		(UI::Panel * const parent,
+		 int32_t const x, int32_t const y,
+		 int32_t columns,
+		 Widelands::Tribe_Descr const & tribe,
+		 maptype const * map = NULL);
+
+	virtual ~WaresMapDisplay();
+
+	void set_map(maptype const * map);
+
+private:
+	virtual void draw(RenderTarget &);
+
+private:
+	Widelands::Tribe_Descr const & m_tribe;
+	maptype const * m_map;
+	int32_t m_columns;
+};
+
 #endif

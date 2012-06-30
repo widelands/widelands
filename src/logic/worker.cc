@@ -588,6 +588,12 @@ void Worker::informPlayer
 	if (building.name() == "fish_breeders_house")
 		return;
 
+	// Translate the Resource name (if it is defined by the world)
+	World const & world = game.map().world();
+	int32_t residx = world.get_resource(res_type.c_str());
+	if (residx != -1)
+		res_type = world.get_resource(residx)->descname();
+
 	building.send_message
 		(game,
 		 "mine",
@@ -988,7 +994,7 @@ bool Worker::run_playFX(Game & game, State & state, Action const & action)
  * If we are currently carrying some ware item, hand it off to the currently
  * selected immovable (\ref objvar1) for construction.
  */
-bool Worker::run_construct(Game & game, State & state, Action const & action)
+bool Worker::run_construct(Game & game, State & state, Action const & /* action */)
 {
 	Immovable * imm = dynamic_cast<Immovable *>(state.objvar1.get(game));
 	if (!imm) {
@@ -1268,7 +1274,7 @@ void Worker::incorporate(Game & game)
  *
  * This sets the needed experience on a value between max and min
  */
-void Worker::create_needed_experience(Game & game)
+void Worker::create_needed_experience(Game & /* game */)
 {
 	if (descr().get_level_experience() == -1) {
 		m_current_exp = -1;
@@ -1387,7 +1393,7 @@ void Worker::start_task_transfer(Game & game, Transfer * t)
 	}
 }
 
-void Worker::transfer_pop(Game & game, State & state)
+void Worker::transfer_pop(Game & /* game */, State & /* state */)
 {
 	if (m_transfer) {
 		m_transfer->has_failed();
@@ -1395,7 +1401,7 @@ void Worker::transfer_pop(Game & game, State & state)
 	}
 }
 
-void Worker::transfer_update(Game & game, State & state) {
+void Worker::transfer_update(Game & game, State & /* state */) {
 	Map & map = game.map();
 	PlayerImmovable * location = get_location(game);
 
@@ -1629,7 +1635,7 @@ bool Worker::is_shipping()
 	return get_state(taskShipping);
 }
 
-void Worker::shipping_pop(Game & game, State & state)
+void Worker::shipping_pop(Game & game, State & /* state */)
 {
 	// Defense against unorderly cleanup via reset_tasks
 	if (!get_location(game)) {
@@ -1947,7 +1953,7 @@ void Worker::start_task_gowarehouse(Game & game)
 }
 
 
-void Worker::gowarehouse_update(Game & game, State & state)
+void Worker::gowarehouse_update(Game & game, State & /* state */)
 {
 	PlayerImmovable * const location = get_location(game);
 
@@ -2015,7 +2021,7 @@ void Worker::gowarehouse_update(Game & game, State & state)
 }
 
 void Worker::gowarehouse_signalimmediate
-	(Game &, State & state, std::string const & signal)
+	(Game &, State & /* state */, std::string const & signal)
 {
 	if (signal == "transfer") {
 		// We are assigned a transfer, make sure our supply disappears immediately

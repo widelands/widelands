@@ -608,7 +608,7 @@ void Editor_Game_Base::unconquer_area
 	//  covered.
 	// SirVer, TODO: In the editor, no buildings should burn down when a military
 	// building is removed. Check this again though
-	if (upcast(Game, game, this)) {
+	if (is_a(Game, this)) {
 		++player_area.radius;
 		player_area.player_number = destroying_player;
 		cleanup_playerimmovables_area(player_area);

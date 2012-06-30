@@ -39,7 +39,7 @@
 
 Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
-	 bool autolaunch)
+	 bool /* autolaunch */)
 	:
 	Fullscreen_Menu_Base("launchgamemenu.jpg"),
 

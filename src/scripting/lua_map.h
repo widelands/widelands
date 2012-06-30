@@ -120,8 +120,10 @@ public:
 	 * attributes
 	 */
 	int get___hash(lua_State *);
-	int get_serial(lua_State * L);
-	int get_type(lua_State * L);
+	int get_serial(lua_State *);
+	int get_type(lua_State *);
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
 
 	/*
 	 * Lua Methods
@@ -152,7 +154,6 @@ public:
 	 * Properties
 	 */
 	int get_size(lua_State * L);
-	int get_name(lua_State * L);
 	int get_fields(lua_State * L);
 
 	/*
@@ -553,7 +554,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
 	int has_caps(lua_State *);
 
 	/*

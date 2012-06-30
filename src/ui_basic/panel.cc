@@ -668,7 +668,7 @@ bool Panel::handle_key(bool, SDL_keysym)
  * It should be only overwritten by the UI::Window class.
  * \return true if the click was processed, false otherwise
  */
-bool Panel::handle_alt_drag(int32_t x, int32_t y)
+bool Panel::handle_alt_drag(int32_t /* x */, int32_t /* y */)
 {
 	return false;
 }

@@ -671,7 +671,7 @@ void NetHost::initComputerPlayer(Widelands::Player_Number p)
 void NetHost::initComputerPlayers()
 {
 	const Widelands::Player_Number nr_players = d->game->map().get_nrplayers();
-	iterate_players_existing(p, nr_players, *d->game, plr) {
+	iterate_players_existing_novar(p, nr_players, *d->game) {
 		if (p == d->settings.playernum + 1)
 			continue;
 
@@ -1845,7 +1845,7 @@ bool NetHost::isPaused()
 	return false;
 }
 
-void NetHost::setPaused(bool paused)
+void NetHost::setPaused(bool /* paused */)
 {
 }
 

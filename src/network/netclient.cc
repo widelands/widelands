@@ -391,7 +391,11 @@ bool NetClient::canLaunch()
 	return true;
 }
 
-void NetClient::setMap(std::string const & name, std::string const & path, uint32_t players, bool savegame)
+void NetClient::setMap
+	(std::string const & name,
+	 std::string const & path,
+	 uint32_t /* players */,
+	 bool savegame)
 {
 	// only accessible, if server is a dedicated server and access is granted
 	if (!m_dedicated_access)
@@ -410,7 +414,7 @@ void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
 	// client is not allowed to do this
 }
 
-void NetClient::setPlayerAI(uint8_t, std::string const &, bool const random_ai)
+void NetClient::setPlayerAI(uint8_t, std::string const &, bool const /* random_ai */)
 {
 	// client is not allowed to do this
 }
@@ -562,7 +566,7 @@ bool NetClient::isPaused()
 	return false;
 }
 
-void NetClient::setPaused(bool paused)
+void NetClient::setPaused(bool /* paused */)
 {
 }
 

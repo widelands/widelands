@@ -242,7 +242,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 /**
  * a message was double clicked
  */
-void GameMessageMenu::double_clicked(uint32_t const t) {
+void GameMessageMenu::double_clicked(uint32_t const /* t */) {
 	if (m_centerviewbtn->enabled()) center_view();
 }
 

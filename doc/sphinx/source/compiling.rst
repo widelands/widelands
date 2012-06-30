@@ -1,29 +1,30 @@
+Compiling Widelands
+===================
+
 This document describes steps needed to compile Widelands for different
 systems using different compilers. If you have problems, please also have a
 look at our website http://www.widelands.org, especially the FAQ.
 
 
-
-================
-= Dependencies =
-================
+Dependencies
+------------
 These are the libraries you need. You also need the headers and link libraries
 (on some distributions these come in separate packages, e.g. 'libpng-dev'),
 for Widelands makes direct use of them:
-   - SDL >= 1.2.8
-   - SDL_mixer >= 1.2.6
-   - SDL_image
-   - SDL_net
-   - SDL_ttf >= 2.0.0
-   - SDL_gfx
-   - GLEW, when compiling with OpenGL support
-   - boost >= 1.35
-   - lua >= 5.1
-   - gettext (look at FAQ if you have problems with -lintl)
-   - libpng
-   - zlib
-   - libiconv (only needed under win32)
-   - libintl (only needed under win32)
+- SDL >= 1.2.8
+- SDL_mixer >= 1.2.6
+- SDL_image
+- SDL_net
+- SDL_ttf >= 2.0.0
+- SDL_gfx
+- GLEW, when compiling with OpenGL support
+- boost >= 1.35
+- lua >= 5.1
+- gettext (look at FAQ if you have problems with -lintl)
+- libpng
+- zlib
+- libiconv (only needed under win32)
+- libintl (only needed under win32)
 
 Make sure you have them all. If you encounter library versions that do not work,
 please tell us.
@@ -49,12 +50,11 @@ If you are a developer, you might (optionally!) make use of the following softwa
      Used to generate source code documentation.
 
 
-=======================
-= Unix/Mac OS X/Linux =
-=======================
+Unix/Mac OS X/Linux
+-------------------
 
 CMake
-------------------
+^^^^^
 The easiest way to start with CMake is the script compile.sh, which is primarily
 used as entry point for beginners. It creates the out of source build directory
 (see below for details), initializes the cmake commands, compiles the sources and then starts the game.
@@ -201,32 +201,28 @@ If you want to do it manually, follow this path:
     Obviously a developer command.
 
 
-
-=============
-=  Windows  =
-=============
+Windows
+-------
 If you're searching for a good SVN tool for windows, we recommend Tortoise
 SVN.
 Check http://tortoisesvn.sourceforge.net.
 
 mingw and msys
-------------------
+^^^^^^^^^^^^^^
 This describes the steps needed to set up a free development enviroment
 under Windows and compiling Widelands.
- - get the latest MSYS snapshot from http://sourceforge.net/projects/mingw
- - install it
- - get the latest complete mingw tarball from
-   http://sourceforge.net/projects/mingw
- - unpack it under the MSYS sh-shell in the dir /mingw
- - get all library source tarballs which are mentioned in DEPENDENCIES and STDPort from http://www.stlport.com
- - compile and install all stuff
- - check out a widelands SVN version or get a build source release
- - unpack it, edit the makefile user variables and run make
- - if there were no problems, you're done. start developing and commit your
-   changes
+- get the latest MSYS snapshot from http://sourceforge.net/projects/mingw
+- install it
+- get the latest complete mingw tarball from http://sourceforge.net/projects/mingw
+- unpack it under the MSYS sh-shell in the dir /mingw
+- get all library source tarballs which are mentioned in DEPENDENCIES and STDPort from http://www.stlport.com
+- compile and install all stuff
+- check out a widelands SVN version or get a build source release
+- unpack it, edit the makefile user variables and run make
+- if there were no problems, you're done. start developing and commit your changes
 
 InnoSetup
-------------------
+^^^^^^^^^
 Since Build10 we support an Innosetup file, which can be used for compiling a Setup
 (like the official Widelands-Setup available on sourceforge.net-mirrors).
 Innosetup can be downloaded from http://www.jrsoftware.org
@@ -234,7 +230,5 @@ Innosetup can be downloaded from http://www.jrsoftware.org
 If you've installed InnoSetup, you just need to open [Widelands]/build/win32/Widelands.iss.
 You might change few settings or directly start packing/compiling the setup.
 
-ATTENTION!
-Please check if all needed *.dll-files are in [Widelands]-directory during Setup packing/compile.
-Else your setup might be useless :-?
-
+.. note:: Please check if all needed \*.dll-files are in [Widelands]-directory during Setup packing/compile.
+          Else your setup might be useless :-?

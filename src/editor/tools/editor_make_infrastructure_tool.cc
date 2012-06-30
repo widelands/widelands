@@ -51,7 +51,7 @@ int32_t Editor_Make_Infrastructure_Tool::handle_click_impl
 	(Widelands::Map &,
 	Widelands::Node_and_Triangle<> const,
 	Editor_Interactive         &         parent,
-	Editor_Action_Args         &         args)
+	Editor_Action_Args         &         /* args */)
 {
 	show_field_action
 	(&parent, parent.egbase().get_player(m_player), &m_registry);

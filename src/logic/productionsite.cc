@@ -265,7 +265,7 @@ std::string ProductionSite::get_statistics_string()
  * Detect if the workers are experienced enough for an upgrade
  * @param idx Index of the enhanchement
  */
-bool ProductionSite::has_workers(Building_Index targetSite, Game & game)
+bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
 	if (upcast(ProductionSite_Descr const, bld, tribe().get_building_descr(targetSite))) {
@@ -504,7 +504,7 @@ Request & ProductionSite::request_worker(Ware_Index const wareid) {
 void ProductionSite::request_worker_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 Ware_Index              widx,
+	 Ware_Index              /* widx */,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

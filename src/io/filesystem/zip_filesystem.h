@@ -21,8 +21,8 @@
 #define ZIP_FILESYSTEM_H
 
 #include "filesystem.h"
-#include "unzip.h"
-#include "zip.h"
+#include <minizip/unzip.h>
+#include <minizip/zip.h>
 
 #include <string>
 #include <cstring>

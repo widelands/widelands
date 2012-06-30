@@ -17,6 +17,23 @@ from time import time
 import os
 import re
 
+def strip_multi_line_c_comments(input_lines):
+    """
+    Remove multi-line C comments from a one-line-per-entry list of strings,
+    but preserve new lines so that line-numbering is not affected.
+    """
+    new_lines = "".join(input_lines)
+        
+    def fixup(match):
+        "Remove everything except newlines"
+        orig_string = match.string[match.start():match.end()]
+        return "\n" * orig_string.count("\n")
+        
+    # Strip multi-line c-style comments
+    new_lines = re.sub(r"/\*.*?\*/", fixup, new_lines, flags=re.DOTALL | re.M)
+    
+    return new_lines.splitlines(True)
+
 class Preprocessor(object):
     """
     This class knows how to remove certain
@@ -61,33 +78,13 @@ $)
             # Strings are replaced with blanks
             line = self._literal_chars.sub(lambda k: "'%s'" % ((len(k.group(0))-2)*" "),line)
             line = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),line)
-
-            # Strip comments and strings
-            # Multiline comments
-            start_idx = line.find('/*')
-            if not in_comment:
-                if start_idx != -1:
-                    stop_idx = line.find("*/",start_idx+2)
-                    if stop_idx != -1:
-                        line = line[:start_idx] + line[stop_idx+2:]
-                    else:
-                        line = line[:start_idx].strip()
-                        in_comment = True
-
-            if in_comment:
-                stop_idx = line.find('*/')
-                if stop_idx == -1:
-                    line = ""
-                else:
-                    line = line[stop_idx+2:].strip()
-                    in_comment = False
-
-            # Single line comments
-            idx = line.find('//')
-            if idx != -1:
-                line = line[:idx].strip()
+            
+            # Remove whitespace followed by single-line comment (old behaviour)
+            line = re.sub(r"\s*//.*$", "", line)
 
             new_lines.append( line )
+    
+        new_lines = strip_multi_line_c_comments(new_lines)
 
         self._stripped_comments_and_strings[fn] = new_lines
 

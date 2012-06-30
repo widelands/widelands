@@ -139,7 +139,7 @@ m_selected_information(0)
 
 	uint32_t plr_in_game = 0;
 	Player_Number const nr_players = game.map().get_nrplayers();
-	iterate_players_existing_const(p, nr_players, game, player) ++plr_in_game;
+	iterate_players_existing_novar(p, nr_players, game) ++plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
 		char buffer[36];
@@ -287,7 +287,7 @@ General_Statistics_Menu::~General_Statistics_Menu() {
 		m_my_registry->selected_information = m_selected_information;
 		m_my_registry->time = m_plot.get_time();
 		Player_Number const nr_players = game.map().get_nrplayers();
-		iterate_players_existing_const(p, nr_players, game, player) {
+		iterate_players_existing_novar(p, nr_players, game) {
 			m_my_registry->selected_players[p - 1] = m_cbs[p - 1]->get_perm_pressed();
 		}
 	}

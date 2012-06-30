@@ -188,7 +188,7 @@ uint32_t persist_object
 uint32_t unpersist_object
 	(lua_State * L,
 	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
-	 uint32_t size)
+	 uint32_t /* size */)
 {
 	// Save the mol in the registry
 	lua_pushlightuserdata(L, &mol);
