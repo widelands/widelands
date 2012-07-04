@@ -118,11 +118,14 @@ std::string FileSystem::fixCrossFile(std::string const & path) const {
 	for (uint32_t i = 0; i < path_size; ++i) {
 		temp = path.at(i);
 #ifdef WIN32
-		if (temp == "/")
+		if (temp == ":")
+			fixedPath.at(i) = "-";
+		else if (temp == "/")
 #else
 		if (temp == "\\")
 #endif
 			fixedPath.at(i) = m_filesep;
+
 		// As a security measure, eat all:
 		// * tildes
 		// * double dots
