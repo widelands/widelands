@@ -1008,7 +1008,7 @@ throw ()
 	//  as well of this change.
 	if (!m_team_player_uptodate)
 		update_team_players();
-	if (!forward && m_team_player.size()) {
+	if (!forward && !m_team_player.empty()) {
 		for (uint8_t j = 0; j < m_team_player.size(); ++j)
 			m_team_player[j]->see_node(map, first_map_field, f, gametime, true);
 	}
@@ -1040,7 +1040,7 @@ throw ()
 	//  as well of this change.
 	if (!m_team_player_uptodate)
 		update_team_players();
-	if (!forward && m_team_player.size()) {
+	if (!forward && !m_team_player.empty()) {
 		for (uint8_t j = 0; j < m_team_player.size(); ++j)
 			m_team_player[j]->unsee_node(i, gametime, true);
 	}
