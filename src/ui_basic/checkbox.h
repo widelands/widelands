@@ -94,7 +94,7 @@ private:
 struct Checkbox : public Statebox {
 	Checkbox
 		(Panel             * const parent,
-		 Point               const p,
+		 Point               const & p,
 		 PictureID           const picid        = g_gr->get_no_picture(),
 		 std::string const &       tooltip_text = std::string())
 		: Statebox(parent, p, picid, tooltip_text)

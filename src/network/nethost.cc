@@ -261,7 +261,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerName(number, name);
 	}
 
-	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) {
+	virtual void setPlayer(uint8_t const number, PlayerSettings const & ps) {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayer(number, ps);

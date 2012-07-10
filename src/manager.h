@@ -94,11 +94,11 @@ template<typename T> struct Manager {
 	typedef std::vector<T *> container;
 	typedef typename container::size_type Index;
 	Index size() const {return items.size();}
-	T const & operator[](Index const i) const {
+	T const & operator[](Index const & i) const {
 		assert(i < size());
 		return *items[i];
 	}
-	T       & operator[](Index const i)       {
+	T       & operator[](Index const & i)       {
 		assert(i < size());
 		return *items[i];
 	}

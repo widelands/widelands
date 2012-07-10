@@ -81,7 +81,7 @@ struct NetClient :
 	virtual void setPlayerTribe   (uint8_t number, std::string const & tribe, bool const random_tribe = false);
 	virtual void setPlayerInit     (uint8_t number, uint8_t index);
 	virtual void setPlayerName     (uint8_t number, std::string const & name);
-	virtual void setPlayer         (uint8_t number, PlayerSettings ps);
+	virtual void setPlayer         (uint8_t number, PlayerSettings const & ps);
 	virtual void setPlayerNumber   (uint8_t number);
 	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team);
 	virtual void setPlayerCloseable(uint8_t number, bool closeable);

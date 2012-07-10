@@ -95,7 +95,7 @@ template<typename Base> struct basic_FileRead : public Base {
 
 	/// Set the file pointer to the given location.
 	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
-	void SetFilePos(Pos const pos) {
+	void SetFilePos(Pos const & pos) {
 		assert(data);
 		if (pos >= length)
 			throw File_Boundary_Exceeded();
@@ -114,7 +114,7 @@ template<typename Base> struct basic_FileRead : public Base {
 		return read;
 	}
 
-	char * Data(uint32_t const bytes, const Pos pos = Pos::Null()) {
+	char * Data(uint32_t const bytes, const Pos & pos = Pos::Null()) {
 		assert(data);
 
 		Pos i = pos;
@@ -127,7 +127,7 @@ template<typename Base> struct basic_FileRead : public Base {
 		return data + i;
 	}
 
-	char * CString(Pos const pos) {
+	char * CString(Pos const & pos) {
 		assert(data);
 
 		Pos i = pos.isNull() ? filepos : pos;

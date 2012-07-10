@@ -41,10 +41,10 @@ struct WarehouseSupply : public Supply {
 
 	WareList const & get_wares  () const {return m_wares;}
 	WareList const & get_workers() const {return m_workers;}
-	uint32_t stock_wares  (Ware_Index const i) const {
+	uint32_t stock_wares  (Ware_Index const & i) const {
 		return m_wares  .stock(i);
 	}
-	uint32_t stock_workers(Ware_Index const i) const {
+	uint32_t stock_workers(Ware_Index const & i) const {
 		return m_workers.stock(i);
 	}
 	void add_wares     (Ware_Index, uint32_t count);

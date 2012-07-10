@@ -109,10 +109,10 @@ struct Economy {
 	void remove_supply(Supply &);
 
 	/// information about this economy
-	WareList::count_type stock_ware  (Ware_Index const i) {
+	WareList::count_type stock_ware  (Ware_Index const & i) {
 		return m_wares  .stock(i);
 	}
-	WareList::count_type stock_worker(Ware_Index const i) {
+	WareList::count_type stock_worker(Ware_Index const & i) {
 		return m_workers.stock(i);
 	}
 
@@ -126,16 +126,16 @@ struct Economy {
 	/// ware type by overproducing a worker type from it.
 	bool needs_worker(Ware_Index) const;
 
-	Target_Quantity const & ware_target_quantity  (Ware_Index const i) const {
+	Target_Quantity const & ware_target_quantity  (Ware_Index const & i) const {
 		return m_ware_target_quantities[i.value()];
 	}
-	Target_Quantity       & ware_target_quantity  (Ware_Index const i)       {
+	Target_Quantity       & ware_target_quantity  (Ware_Index const & i)       {
 		return m_ware_target_quantities[i.value()];
 	}
-	Target_Quantity const & worker_target_quantity(Ware_Index const i) const {
+	Target_Quantity const & worker_target_quantity(Ware_Index const & i) const {
 		return m_worker_target_quantities[i.value()];
 	}
-	Target_Quantity       & worker_target_quantity(Ware_Index const i)       {
+	Target_Quantity       & worker_target_quantity(Ware_Index const & i)       {
 		return m_worker_target_quantities[i.value()];
 	}
 

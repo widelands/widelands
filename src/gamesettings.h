@@ -146,7 +146,7 @@ struct GameSettingsProvider {
 	virtual void setPlayerTribe    (uint8_t number, std::string const &, bool const random_tribe = false) = 0;
 	virtual void setPlayerInit     (uint8_t number, uint8_t index) = 0;
 	virtual void setPlayerName     (uint8_t number, std::string const &) = 0;
-	virtual void setPlayer         (uint8_t number, PlayerSettings) = 0;
+	virtual void setPlayer         (uint8_t number, PlayerSettings const &) = 0;
 	virtual void setPlayerNumber   (uint8_t number) = 0;
 	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) = 0;
 	virtual void setPlayerCloseable(uint8_t number, bool closeable) = 0;

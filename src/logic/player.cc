@@ -612,7 +612,7 @@ void Player::dismantle_building(Building * building) {
 	_enhance_or_dismantle(building);
 }
 void Player::_enhance_or_dismantle
-	(Building * building, Building_Index const index_of_new_building)
+	(Building * building, Building_Index const & index_of_new_building)
 {
 	if
 		(&building->owner() == this
@@ -1126,7 +1126,7 @@ void Player::ware_consumed(Ware_Index const wareid, uint8_t const count) {
  * Get current ware production statistics
  */
 const std::vector<uint32_t> * Player::get_ware_production_statistics
-		(Ware_Index const ware) const
+		(Ware_Index const & ware) const
 {
 	assert(ware.value() < m_ware_productions.size());
 
@@ -1138,7 +1138,7 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
  * Get current ware consumption statistics
  */
 const std::vector<uint32_t> * Player::get_ware_consumption_statistics
-		(Ware_Index const ware) const {
+		(Ware_Index const & ware) const {
 
 	assert(ware.value() < m_ware_consumptions.size());
 
@@ -1146,7 +1146,7 @@ const std::vector<uint32_t> * Player::get_ware_consumption_statistics
 }
 
 const std::vector<uint32_t> * Player::get_ware_stock_statistics
-		(Ware_Index const ware) const
+		(Ware_Index const & ware) const
 {
 	assert(ware.value() < m_ware_stocks.size());
 

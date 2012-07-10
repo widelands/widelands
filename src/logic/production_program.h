@@ -177,7 +177,7 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a ware of type ware_type.
 		struct Economy_Needs_Ware : public Condition {
-			Economy_Needs_Ware(Ware_Index const i) : ware_type(i) {}
+			Economy_Needs_Ware(Ware_Index const & i) : ware_type(i) {}
 			virtual bool evaluate(ProductionSite const &) const;
 			std::string description(Tribe_Descr const &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -190,7 +190,7 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a worker of type worker_type.
 		struct Economy_Needs_Worker : public Condition {
-			Economy_Needs_Worker(Ware_Index const i) : worker_type(i) {}
+			Economy_Needs_Worker(Ware_Index const & i) : worker_type(i) {}
 			virtual bool evaluate(ProductionSite const &) const;
 			std::string description(Tribe_Descr const &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML

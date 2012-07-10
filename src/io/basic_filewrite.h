@@ -76,14 +76,14 @@ template <typename Base> struct basic_FileWrite : public Base {
 
 	/// Set the file pointer to a new location. The position can be beyond the
 	/// current end of file.
-	void SetPos(const Pos pos) throw () {filepos = pos;}
+	void SetPos(const Pos & pos) throw () {filepos = pos;}
 
 	/**
 	 * Write data at the given location. If pos is NoPos(), write at the
 	 * file pointer and advance the file pointer.
 	 */
 	void Data
-		(const void * const src, const size_t size, Pos const pos = Pos::Null())
+		(const void * const src, const size_t size, Pos const & pos = Pos::Null())
 	{
 		assert(data or not filelength);
 
