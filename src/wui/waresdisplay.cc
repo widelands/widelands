@@ -397,7 +397,7 @@ void WaresMapDisplay::draw(RenderTarget & dst)
 	Widelands::Tribe_Descr::WaresOrder order = m_tribe.wares_order();
 
 	for (i = order.begin(); i != order.end(); i++)
-		for (j = i->begin(); j != i->end(); j++)
+		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = m_map->find(*j)) != m_map->end()) {
 				//  draw a background
 				const PictureID picid =

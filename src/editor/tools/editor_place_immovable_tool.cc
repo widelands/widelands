@@ -69,7 +69,7 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 			        and
 			        mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK)
 				egbase.create_immovable(mr.location(), *i, 0);
-			i++;
+			++i;
 		} while (mr.advance(map));
 	}
 	return radius + 2;
@@ -99,7 +99,7 @@ int32_t Editor_Place_Immovable_Tool::handle_undo_impl
 		if (!i->empty())
 			egbase.create_immovable(mr.location(), *i, 0);
 
-		i++;
+		++i;
 	} while (mr.advance(map));
 	return radius + 2;
 }

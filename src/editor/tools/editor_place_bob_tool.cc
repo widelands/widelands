@@ -63,7 +63,7 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 					bob->remove(egbase); //  There is already a bob. Remove it.
 				descr.create(egbase, 0, mr.location());
 			}
-			i++;
+			++i;
 		} while (mr.advance(map));
 		return mr.radius() + 2;
 	} else
@@ -92,7 +92,7 @@ int32_t Editor_Place_Bob_Tool::handle_undo_impl
 			} else if (Bob * const bob = mr.location().field->get_first_bob()) {
 				bob->remove(egbase);
 			}
-			i++;
+			++i;
 		} while (mr.advance(map));
 		return mr.radius() + 2;
 	} else
