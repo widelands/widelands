@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-05-03 01:19+0000\n"
-"Last-Translator: Michael Colignon <ledesillusionniste@hotmail.com>\n"
+"PO-Revision-Date: 2012-07-10 23:00+0000\n"
+"Last-Translator: Audiger Jeremy <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:38+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-07-11 05:13+0000\n"
+"X-Generator: Launchpad (build 15593)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -39,9 +39,9 @@ msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"A attendu 5 secondes pour terminer l'audio. Des problèmes ici pour tuer "
-"Widelands. Mettez à jour votre pilote de carte son et/ou SDL pour régler ce "
-"problème.\n"
+"Attendu 5 secondes pour terminer l'audio. Des problèmes ici pour fermer "
+"Widelands. Mettez à jour votre pilote de carte son et/ou SDL pour résoudre "
+"ce problème.\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -55,7 +55,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1177
 msgid "--double is disabled. This is not a debug build!"
-msgstr "--double est désactivé. Ce n'est pas une compilation de débogage !"
+msgstr "--double est désactivé. Ce n'est pas une version de débogage !"
 
 #: ../../src/wlapplication.cc:1298
 msgid "This is Widelands-"
@@ -361,7 +361,7 @@ msgid ""
 "unpause the game and continue watching if you want to."
 msgstr ""
 "La fin du replay a été atteinte et le jeu a été mis en pause. Vous pouvez "
-"réactiver le jeu  et continuer la visualisation si vous le désirez."
+"désactiver la mise en pause et continuer la visualisation si vous le désirez."
 
 #: ../../src/wlapplication.cc:2179 ../../src/logic/game.cc:369
 #: ../../src/logic/game.cc:409

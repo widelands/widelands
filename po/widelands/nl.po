@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-03-09 02:02+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-07-10 06:11+0000\n"
+"Last-Translator: Teun Spaans <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:38+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-07-11 05:13+0000\n"
+"X-Generator: Launchpad (build 15593)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -40,6 +40,9 @@ msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"5 seconden gewacht op het sluiten van de audio. Er zijn problemen dus we "
+"sluiten Widelands. Update je geluidsdrivers en/of SDL om het probleem op te "
+"lossen.\n"
 
 #: ../../src/wlapplication.cc:1174
 msgid ""
@@ -213,6 +216,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Zet OpenGL rendering aan\n"
 
 #: ../../src/wlapplication.cc:1372
 msgid ""
@@ -557,7 +562,7 @@ msgstr "Verschijnt in Warenhuizen"
 #: ../../src/writeHTML.cc:693
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr "Heeft %u keer ervaring nodig van werken om te worden"
+msgstr "Heeft %u keer werkervaring nodig om te worden"
 
 #: ../../src/writeHTML.cc:701
 #, c-format
@@ -764,11 +769,11 @@ msgstr "Spelers"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Ongedaan maken"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Opnieuw"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -835,7 +840,7 @@ msgstr "opdrachten lijst: %s"
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr "game_class: %s"
+msgstr "Spelklasse: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -1005,7 +1010,7 @@ msgstr "%u%% ontmanteld"
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Stammen laden"
 
 #: ../../src/logic/game.cc:224
 msgid "Preloading a map"
@@ -1158,7 +1163,7 @@ msgstr "kans in bereik [1. 254]"
 #: ../../src/logic/immovable.cc:1480
 #, c-format
 msgid "loading player immovable: %s"
-msgstr ""
+msgstr "onbeweegbare speler laden: %s"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
@@ -2119,7 +2124,7 @@ msgstr "ongeziene onverplaatsbare: %s"
 #: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:64
 #, c-format
 msgid "port_spaces data: %s"
-msgstr ""
+msgstr "haven_ruimte gegevens: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
@@ -2173,7 +2178,7 @@ msgstr "Verbindingsprobleem"
 
 #: ../../src/network/internet_gaming.cc:108
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "Widelands kon geen verbinding tot stand brengen met de metaserver."
 
 #: ../../src/network/internet_gaming.cc:114 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
@@ -2188,7 +2193,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:163
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr ""
+msgstr "Neem AUB. een kijkje in de notities om een game to hosten in:"
 
 #: ../../src/network/internet_gaming.cc:294
 msgid "Something went wrong: "
@@ -2196,7 +2201,7 @@ msgstr "Er ging iets fout: "
 
 #: ../../src/network/internet_gaming.cc:384
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Succesvol herverbonden met de metaserver!"
 
 #: ../../src/network/internet_gaming.cc:391
 msgid "Mixed up"
@@ -2204,7 +2209,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:391
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr ""
+msgstr "De metaserver stuurde een vreemde ERROR gedurende de verbinding"
 
 #: ../../src/network/internet_gaming.cc:403
 #, c-format
@@ -2222,41 +2227,43 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:425
 #, c-format
 msgid "Server time offset is %i seconds."
-msgstr ""
+msgstr "Server achterstand is %i seconden"
 
 #: ../../src/network/internet_gaming.cc:522
 msgid "ERROR: "
-msgstr ""
+msgstr "ERROR: "
 
 #: ../../src/network/internet_gaming.cc:526
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "Chat bericht kon niet verzonden worden. "
 
 #: ../../src/network/internet_gaming.cc:547
 msgid "Received an unknown command from the metaserver: "
-msgstr ""
+msgstr "Een onbekend commando gekregen van de metaserver: "
 
 #: ../../src/network/internet_gaming.cc:679
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
+"Bericht kon niet verzonden worden: Je bent niet verbonden met de metaserver!"
 
 #: ../../src/network/internet_gaming.cc:691
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
+"Bericht kon niet verzonden worden: Was dit bedoelt als een prive bericht?"
 
 #: ../../src/network/internet_gaming.cc:764
 msgid "<unknown>"
-msgstr ""
+msgstr "<onbekend>"
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "No user with the name %s is logged in!"
-msgstr ""
+msgstr "De gebruiker met de naam %s heeft ingelogd!"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1230
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Het verstuurde wachtwoord is incorrrect"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
@@ -2387,7 +2394,7 @@ msgstr "Het is niet mogelijk jezelf te verwijderen!"
 
 #: ../../src/network/nethost.cc:425
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "je kunt de speciale server niet kicken"
 
 #: ../../src/network/nethost.cc:430
 #, c-format
@@ -2464,6 +2471,8 @@ msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
+"Geen toegang tot de host. Stuur, om toegang te krijgen, het wachtwoord met "
+"het pwd commando."
 
 #: ../../src/network/nethost.cc:1195
 #, c-format
@@ -3037,6 +3046,12 @@ msgid ""
 "Normally such a file should be send from the host to you, but perhaps the "
 "transfer was not yet finished!?!"
 msgstr ""
+"Widelands probeerde het spel te starten met een bestand dat niet op de "
+"opgegeven plaats gevonden kon worden.\n"
+"Het bestand was: %s\n"
+"Wanneer dit gebeurt, kan de host een bestand selecteren waarvoor u geen "
+"rechten heeft. Normaal stuurt de host u zo'n bestand toe, maar misschien was "
+"de overdracht nog niet voltooid!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:449
 msgid ""
@@ -3187,6 +3202,10 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
+"De laatste drie kunnen alleen gezet worden door de host/gastheer door te "
+"klikken op de knop voor \"type\" speler. Host/gastheer spelers kunnen ook de "
+"beginsituatie van elke speler (set gebouwen, warenhuizen en werkers waarmee "
+"de speler begint) en de stam en team van computerspelers instellen."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:700
 msgid ""
@@ -4395,11 +4414,11 @@ msgstr "Herstellen naar standaard"
 
 #: ../../src/wui/ware_statistics_menu.cc:193
 msgid "Consumption"
-msgstr ""
+msgstr "Consumptie"
 
 #: ../../src/wui/ware_statistics_menu.cc:204
 msgid "Economy Health"
-msgstr ""
+msgstr "Economische gezondheid"
 
 #: ../../src/wui/warehousewindow.cc:132
 msgid "Normal policy"
