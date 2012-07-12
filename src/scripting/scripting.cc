@@ -249,7 +249,7 @@ void LuaInterface_Impl::register_scripts
 
 	for
 		(filenameset_t::iterator i = scripting_files.begin();
-		 i != scripting_files.end(); i++)
+		 i != scripting_files.end(); ++i)
 	{
 		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
 			continue;
