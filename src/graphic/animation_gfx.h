@@ -38,7 +38,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	}
 
 	const PictureID & get_frame
-		(Index                    const i,
+		(Index                    const & i,
 		 Widelands::Player_Number const player_number,
 		 const RGBColor & playercolor)
 	{
@@ -54,7 +54,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 		return m_plrframes[player_number][i];
 	}
 
-	const PictureID & get_frame(Index const i) const {
+	const PictureID & get_frame(Index const & i) const {
 		assert(i < nr_frames());
 		return m_plrframes[0][i];
 	}

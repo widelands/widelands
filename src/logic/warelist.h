@@ -52,7 +52,7 @@ struct WareList {
 	void remove(WareList const & wl);
 	count_type stock(Ware_Index) const;
 
-	void set_nrwares(Ware_Index const i) {
+	void set_nrwares(Ware_Index const & i) {
 		assert(m_wares.empty());
 		m_wares.resize(i.value(), 0);
 	}

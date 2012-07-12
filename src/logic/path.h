@@ -51,7 +51,7 @@ struct Path {
 
 	typedef std::vector<Direction> Step_Vector;
 	Step_Vector::size_type get_nsteps() const throw () {return m_path.size();}
-	Direction operator[](Step_Vector::size_type const i) const {
+	Direction operator[](Step_Vector::size_type const & i) const {
 		assert(i < m_path.size());
 		return m_path[m_path.size() - i - 1];
 	}
@@ -84,7 +84,7 @@ struct CoordPath {
 
 	typedef std::vector<Direction> Step_Vector;
 	Step_Vector::size_type get_nsteps() const throw () {return m_path.size();}
-	Direction operator[](Step_Vector::size_type const i) const {
+	Direction operator[](Step_Vector::size_type const & i) const {
 		assert(i < m_path.size());
 		return m_path[i];
 	}
@@ -93,8 +93,8 @@ struct CoordPath {
 	int32_t get_index(Coords field) const;
 
 	void reverse();
-	void truncate (const std::vector<char>::size_type after);
-	void starttrim(const std::vector<char>::size_type before);
+	void truncate (const std::vector<char>::size_type & after);
+	void starttrim(const std::vector<char>::size_type & before);
 	void append(const Map & map, const Path & tail);
 	void append(CoordPath const & tail);
 

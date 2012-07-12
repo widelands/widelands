@@ -506,7 +506,7 @@ void Immovable::draw
 }
 
 void Immovable::draw_construction
-	(const Editor_Game_Base & game, RenderTarget & dst, const Point pos)
+	(const Editor_Game_Base & game, RenderTarget & dst, const Point & pos)
 {
 	const ImmovableProgram::ActConstruction * constructionact = 0;
 	if (m_program_ptr < m_program->size())

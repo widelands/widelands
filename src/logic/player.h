@@ -99,7 +99,7 @@ struct Player :
 	Message_Id add_message_with_timeout
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
 
-	void set_message_status(Message_Id const id, Message::Status const status) {
+	void set_message_status(Message_Id const & id, Message::Status const status) {
 		messages().set_message_status(id, status);
 	}
 
@@ -420,13 +420,13 @@ struct Player :
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(Ware_Index const i) const throw () {
+	bool is_worker_type_allowed(Ware_Index const & i) const throw () {
 		return m_allowed_worker_types.at(i);
 	}
 	void allow_worker_type(Ware_Index, bool allow);
 
 	// Allowed buildings
-	bool is_building_type_allowed(Building_Index const i) const throw () {
+	bool is_building_type_allowed(Building_Index const & i) const throw () {
 		return m_allowed_building_types[i];
 	}
 	void allow_building_type(Building_Index, bool allow);
@@ -465,7 +465,7 @@ struct Player :
 	bool    has_economy(Economy &) const throw ();
 	typedef std::vector<Economy *> Economies;
 	Economies::size_type get_economy_number(Economy const *) const throw ();
-	Economy * get_economy_by_number(Economies::size_type const i) const {
+	Economy * get_economy_by_number(Economies::size_type const & i) const {
 		return m_economies[i];
 	}
 	uint32_t get_nr_economies() const {return m_economies.size();}
@@ -523,19 +523,19 @@ struct Player :
 
 	// Statistics
 	Building_Stats_vector const & get_building_statistics
-		(Building_Index const i) const
+		(Building_Index const & i) const
 	{
 		return m_building_stats[i];
 	}
 
 	std::vector<uint32_t> const * get_ware_production_statistics
-		(Ware_Index const) const;
+		(Ware_Index const &) const;
 
 	std::vector<uint32_t> const * get_ware_consumption_statistics
-		(Ware_Index const) const;
+		(Ware_Index const &) const;
 
 	std::vector<uint32_t> const * get_ware_stock_statistics
-		(Ware_Index const) const;
+		(Ware_Index const &) const;
 
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
@@ -563,7 +563,7 @@ private:
 	void update_team_players();
 	void play_message_sound(const std::string & sender);
 	void _enhance_or_dismantle
-		(Building *, Building_Index const index_of_new_building = Building_Index::Null());
+		(Building *, Building_Index const & index_of_new_building = Building_Index::Null());
 
 private:
 	MessageQueue           m_messages;
