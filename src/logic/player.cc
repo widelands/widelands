@@ -1075,9 +1075,9 @@ void Player::sample_statistics()
 			 it != warehouses.end();
 			 ++it)
 		{
+			Widelands::WareList const & wares = (*it)->get_wares();
 			for (uint32_t id = 0; id < stocks.size(); ++id) {
-				stocks[id] += (*it)->get_economy()->stock_ware
-					(Ware_Index(static_cast<size_t>(id)));
+				stocks[id] += wares.stock(Ware_Index(static_cast<size_t>(id)));
 			}
 		}
 	}
