@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 18:55+0000\n"
-"PO-Revision-Date: 2012-07-10 23:16+0000\n"
+"PO-Revision-Date: 2012-07-11 15:41+0000\n"
 "Last-Translator: Audiger Jeremy <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-11 05:12+0000\n"
+"X-Launchpad-Export-Date: 2012-07-12 04:36+0000\n"
 "X-Generator: Launchpad (build 15593)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -325,8 +325,8 @@ msgid ""
 msgstr ""
 "Un casque est l'outil de base de protection des guerriers. Il est produit "
 "dans la forge de casques et utilisé dans les camps d'entrainement - avec de "
-"la nourriture - pour entrainer les soldats en points de santé du niveau 0 "
-"vers les points de santé niveau 1."
+"la nourriture - pour améliorer les points de santé des soldats du niveau 0 "
+"au niveau 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
@@ -360,8 +360,8 @@ msgid ""
 msgstr ""
 "Un casque de guerre est une pièce avancée de l'armure des guerriers "
 "barbares. Il est produit dans les forges de casques et utilisé dans les "
-"camps d'entrainement - avec de la nourriture - pour les points de santé des "
-"soldats du niveau 1 au niveau 2."
+"camps d'entrainement - avec de la nourriture - pour améliorer les points de "
+"santé des soldats du niveau 1 au niveau 2."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
