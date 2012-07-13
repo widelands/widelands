@@ -65,11 +65,11 @@ struct Overlay_Manager {
 		static Job_Id Null() {Job_Id result; result.id = 0; return result;}
 
 		operator bool() const throw () {return id;}
-		bool operator<(const Job_Id & other) const throw () {return id < other.id;}
+		bool operator<(const Job_Id other) const throw () {return id < other.id;}
 	private:
 		friend struct Overlay_Manager;
 		Job_Id operator++() throw () {++id; return *this;}
-		bool operator== (Job_Id const & other) const throw () {
+		bool operator== (Job_Id const other) const throw () {
 			return id == other.id;
 		}
 		uint32_t id;
@@ -168,10 +168,10 @@ struct Overlay_Manager {
 private:
 	struct Registered_Overlays {
 		Registered_Overlays
-			(const Job_Id    & Jobid,
-			 const PictureID & Picid,
-			 const Point     & Hotspot,
-			 const int32_t     Level)
+			(const Job_Id    Jobid,
+			 const PictureID Picid,
+			 const Point     Hotspot,
+			 const int32_t   Level)
 			:
 			picid(Picid),
 			hotspot(Hotspot),

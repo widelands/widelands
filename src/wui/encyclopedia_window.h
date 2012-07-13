@@ -49,7 +49,7 @@ private:
 		Widelands::Ware_Index m_i;
 		const Widelands::Item_Ware_Descr * m_descr;
 
-		bool operator<(const Ware & o) const {
+		bool operator<(const Ware o) const {
 			return m_descr->descname() < o.m_descr->descname();
 		}
 	};

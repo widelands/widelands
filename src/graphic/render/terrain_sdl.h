@@ -533,7 +533,7 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-	(SurfaceSDL & dst, Point const & start, Point const & end, SurfaceSDL const & src)
+	(SurfaceSDL & dst, Point const start, Point const end, SurfaceSDL const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
@@ -560,7 +560,7 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-	(SurfaceSDL & dst, Point const & start, Point const & end, SurfaceSDL const & src)
+	(SurfaceSDL & dst, Point const start, Point const end, SurfaceSDL const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();

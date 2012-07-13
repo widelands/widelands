@@ -24,7 +24,7 @@
 
 struct Rect : public Point {
 	Rect() throw () {}
-	Rect(const Point  & p, const uint32_t W, const uint32_t H) throw ()
+	Rect(const Point p, const uint32_t W, const uint32_t H) throw ()
 		: Point(p), w(W), h(H)
 	{}
 	Point bottom_right() const {return *this + Point(w, h);}

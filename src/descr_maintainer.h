@@ -66,7 +66,7 @@ private:
 	typename T::Index nitemsw;
 	T * * items;
 
-	void reserve(const typename T::Index & n) {
+	void reserve(const typename T::Index n) {
 		T * * const new_items =
 			static_cast<T * *>(realloc(items, sizeof(T *) * n));
 		if (not new_items)
@@ -130,7 +130,7 @@ private Descr_Maintainer<T>
 			idx == -1 ? T_Index::Null() :
 			T_Index(static_cast<typename T_Index::value_t>(idx));
 	}
-	T * get(T_Index const & idx) const {
+	T * get(T_Index const idx) const {
 		return idx ? Descr_Maintainer<T>::get(idx.value()) : 0;
 	}
 };

@@ -533,7 +533,7 @@ Point Soldier::calc_drawpos
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
 void Soldier::draw
-	(Editor_Game_Base const & game, RenderTarget & dst, Point const & pos) const
+	(Editor_Game_Base const & game, RenderTarget & dst, Point const pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
 

@@ -147,7 +147,7 @@ void CoordPath::reverse()
 Truncate the path after the given number of steps
 ===============
 */
-void CoordPath::truncate(const std::vector<char>::size_type & after) {
+void CoordPath::truncate(const std::vector<char>::size_type after) {
 	assert(after <= m_path.size());
 
 	m_path.erase(m_path.begin() + after, m_path.end());
@@ -159,7 +159,7 @@ void CoordPath::truncate(const std::vector<char>::size_type & after) {
 Opposite of truncate: remove the first n steps of the path.
 ===============
 */
-void CoordPath::starttrim(const std::vector<char>::size_type & before) {
+void CoordPath::starttrim(const std::vector<char>::size_type before) {
 	assert(before <= m_path.size());
 
 	m_path.erase(m_path.begin(), m_path.begin() + before);

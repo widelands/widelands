@@ -1127,8 +1127,8 @@ Used to draw a dotted frame border on the mini map.
 template<typename T>
 static bool draw_minimap_frameborder
 	(Widelands::FCoords  const f,
-	 Point               const & ptopleft,
-	 Point               const & pbottomright,
+	 Point               const ptopleft,
+	 Point               const pbottomright,
 	 int32_t             const mapwidth,
 	 int32_t             const mapheight,
 	 int32_t             const modx,
@@ -1188,9 +1188,9 @@ static void draw_minimap_int
 	 int32_t                            const mapwidth,
 	 Widelands::Editor_Game_Base const &       egbase,
 	 Widelands::Player           const * const player,
-	 Rect                                const & rc,
-	 Point                               const & viewpoint,
-	 Point                               const & framepoint,
+	 Rect                                const rc,
+	 Point                               const viewpoint,
+	 Point                               const framepoint,
 	 uint32_t                            const flags)
 {
 	Widelands::Map const & map = egbase.map();

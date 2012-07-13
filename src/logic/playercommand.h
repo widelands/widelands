@@ -89,8 +89,8 @@ struct Cmd_Build:public PlayerCommand {
 	Cmd_Build
 		(int32_t        const _duetime,
 		 int32_t        const p,
-		 Coords         const & c,
-		 Building_Index const & i)
+		 Coords         const c,
+		 Building_Index const i)
 		: PlayerCommand(_duetime, p), coords(c), bi(i)
 	{}
 
@@ -111,7 +111,7 @@ private:
 
 struct Cmd_BuildFlag:public PlayerCommand {
 	Cmd_BuildFlag() : PlayerCommand() {} // For savegame loading
-	Cmd_BuildFlag (int32_t const t, int32_t const p, Coords const & c) :
+	Cmd_BuildFlag (int32_t const t, int32_t const p, Coords const c) :
 		PlayerCommand(t, p), coords(c)
 	{}
 
@@ -198,7 +198,7 @@ struct Cmd_EnhanceBuilding:public PlayerCommand {
 		(int32_t        const _duetime,
 		 int32_t        const p,
 		 Building     &       b,
-		 Building_Index const & i)
+		 Building_Index const i)
 		: PlayerCommand(_duetime, p), serial(b.serial()), bi(i)
 	{}
 
@@ -540,7 +540,7 @@ private:
 struct PlayerMessageCommand : public PlayerCommand {
 	PlayerMessageCommand () : PlayerCommand() {} //  for savegames
 	PlayerMessageCommand
-		(uint32_t const t, Player_Number const p, Message_Id const & i)
+		(uint32_t const t, Player_Number const p, Message_Id const i)
 		: PlayerCommand(t, p), m_message_id(i)
 	{}
 
@@ -558,7 +558,7 @@ private:
 struct Cmd_MessageSetStatusRead : public PlayerMessageCommand {
 	Cmd_MessageSetStatusRead () : PlayerMessageCommand() {}
 	Cmd_MessageSetStatusRead
-		(uint32_t const t, Player_Number const p, Message_Id const & i)
+		(uint32_t const t, Player_Number const p, Message_Id const i)
 		: PlayerMessageCommand(t, p, i)
 	{}
 
@@ -573,7 +573,7 @@ struct Cmd_MessageSetStatusRead : public PlayerMessageCommand {
 struct Cmd_MessageSetStatusArchived : public PlayerMessageCommand {
 	Cmd_MessageSetStatusArchived () : PlayerMessageCommand() {}
 	Cmd_MessageSetStatusArchived
-		(uint32_t const t, Player_Number const p, Message_Id const & i)
+		(uint32_t const t, Player_Number const p, Message_Id const i)
 		: PlayerMessageCommand(t, p, i)
 	{}
 

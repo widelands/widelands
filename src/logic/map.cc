@@ -809,7 +809,7 @@ struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob *> * const list, FindBob const & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
-	void operator()(const Map &, const FCoords & cur) {
+	void operator()(const Map &, const FCoords cur) {
 		for
 			(Bob * bob = cur.field->get_first_bob();
 			 bob;
@@ -896,7 +896,7 @@ struct FindImmovablesCallback {
 		(std::vector<ImmovableFound> * const list, FindImmovable const & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
-	void operator()(const Map &, const FCoords & cur) {
+	void operator()(const Map &, const FCoords cur) {
 		BaseImmovable * const imm = cur.field->get_immovable();
 
 		if (!imm)
@@ -1005,7 +1005,7 @@ struct FindNodesCallback {
 		(std::vector<Coords> * const list, FindNode const & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
-	void operator()(const Map & map, const FCoords & cur) {
+	void operator()(const Map & map, const FCoords cur) {
 		if (m_functor.accept(map, cur)) {
 			if (m_list)
 				m_list->push_back(cur);

@@ -98,7 +98,7 @@ private:
 		 uint32_t            const * const random2,
 		 uint32_t            const * const random3,
 		 uint32_t            const * const random4,
-		 FCoords                     const & fc);
+		 FCoords                     const fc);
 
 	uint8_t make_node_elevation
 		(double elevation, Coords);
@@ -110,7 +110,7 @@ private:
 		(uint32_t                  * const random2,
 		 uint32_t                  * const random3,
 		 uint32_t                  * const random4,
-		 Coords const & c0, Coords const & c1, Coords const & c2,
+		 Coords const c0, Coords const c1, Coords const c2,
 		 uint32_t const h1, uint32_t const h2, uint32_t const h3,
 		 RNG                       &       rng,
 		 MapGenAreaInfo::MapGenTerrainType & terrType);

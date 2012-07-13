@@ -200,7 +200,7 @@ public:
 	Point calc_drawpos(Editor_Game_Base const &, Point) const;
 	/// Draw this soldier
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const Point &) const;
+		(const Editor_Game_Base &, RenderTarget &, const Point) const;
 
 	static void calc_info_icon_size
 		(Tribe_Descr const &, uint32_t & w, uint32_t & h);
