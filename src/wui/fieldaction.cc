@@ -223,7 +223,7 @@ private:
 	Widelands::FCoords  m_node;
 
 	UI::Box m_box;
-	WaresMapDisplay m_buildcostPrev;
+	WaresMapDisplay * m_buildcostPrev;
 	UI::Tab_Panel      m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
@@ -285,7 +285,7 @@ FieldActionWindow::FieldActionWindow
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
 	m_box(this, 0, 0, UI::Box::Vertical),
-	m_buildcostPrev(&m_box, 0, 0, 6, m_plr->tribe(), NULL),
+	m_buildcostPrev(0),
 	m_tabpanel(&m_box, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_fastclick(true),
 	m_best_tab(0),
@@ -294,8 +294,13 @@ FieldActionWindow::FieldActionWindow
 {
 	ib->set_sel_freeze(true);
 
+
 	m_box.add(&m_tabpanel, UI::Box::AlignCenter);
-	m_box.add(&m_buildcostPrev, UI::Box::AlignLeft);
+	if (m_plr) {
+		m_buildcostPrev = new WaresMapDisplay(&m_box, 0, 0, 6, m_plr->tribe(), NULL);
+		m_box.add(m_buildcostPrev, UI::Box::AlignLeft);
+	}
+
 	set_center_panel(&m_box);
 
 	char filename[] = "pics/workarea0cumulative.png";
@@ -313,6 +318,7 @@ FieldActionWindow::~FieldActionWindow()
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	ibase().set_sel_freeze(false);
 	delete m_attack_box;
+	delete m_buildcostPrev;
 }
 
 
@@ -838,7 +844,7 @@ void FieldActionWindow::act_build(Widelands::Building_Index::value_t const idx)
 void FieldActionWindow::building_icon_mouse_out
 	(Widelands::Building_Index::value_t)
 {
-	m_buildcostPrev.set_map(NULL);
+	m_buildcostPrev->set_map(NULL);
 	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 		m_workarea_preview_job_id = Overlay_Manager::Job_Id::Null();
@@ -849,7 +855,7 @@ void FieldActionWindow::building_icon_mouse_out
 void FieldActionWindow::building_icon_mouse_in
 	(Widelands::Building_Index::value_t const idx)
 {
-	m_buildcostPrev.set_map
+	m_buildcostPrev->set_map
 		(&m_plr->tribe().get_building_descr(Widelands::Building_Index(idx))->buildcost());
 
 	if (ibase().m_show_workarea_preview and not m_workarea_preview_job_id) {
