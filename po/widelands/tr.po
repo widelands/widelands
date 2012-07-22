@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-03-09 02:01+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-07-21 13:33+0000\n"
+"Last-Translator: Ercin Senturk <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:40+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:32+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -709,11 +709,11 @@ msgstr "Oyuncular"
 
 #: ../../src/editor/editorinteractive.cc:81
 msgid "Undo"
-msgstr ""
+msgstr "Geri Al"
 
 #: ../../src/editor/editorinteractive.cc:84
 msgid "Redo"
-msgstr ""
+msgstr "Yinele"
 
 #: ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -910,7 +910,7 @@ msgstr "büyük"
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "İstatistik fonksiyonunu hesapla: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:75
 #, c-format
@@ -935,21 +935,21 @@ msgstr "oyun mantığı: %s"
 #: ../../src/logic/constructionsite.cc:91
 #, c-format
 msgid "%u%% built"
-msgstr ""
+msgstr "%u%% inşa"
 
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
 msgid "loading critter: %s"
-msgstr ""
+msgstr "yükleme kriteri: %s"
 
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% sökülmüş"
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
-msgstr ""
+msgstr "Kabileler yükleniyor"
 
 #: ../../src/logic/game.cc:224
 msgid "Preloading a map"
@@ -957,12 +957,12 @@ msgstr "Harita yüklenmeye hazırlanıyor"
 
 #: ../../src/logic/game.cc:231
 msgid "Loading a world"
-msgstr ""
+msgstr "Dünya yükleniyor"
 
 #: ../../src/logic/game.cc:237
 #, c-format
 msgid "Adding player %u"
-msgstr ""
+msgstr "%u Oyuncusu ekleniyor"
 
 #: ../../src/logic/game.cc:250
 msgid "Loading a map"
@@ -971,11 +971,11 @@ msgstr "Harita yükleniyor"
 #: ../../src/logic/game.cc:278 ../../src/logic/game.cc:354
 #: ../../src/logic/game.cc:391
 msgid "Preloading map"
-msgstr ""
+msgstr "Harita hazırlanıyor"
 
 #: ../../src/logic/game.cc:293
 msgid "Configuring players"
-msgstr ""
+msgstr "Oyuncular ayarlanıyor"
 
 #: ../../src/logic/game.cc:326
 msgid "Loading map"
@@ -983,7 +983,7 @@ msgstr "Harita yükleniyor"
 
 #: ../../src/logic/game.cc:472
 msgid "Creating player infrastructure"
-msgstr ""
+msgstr "Oyuncu altyapısı oluşturuluyor"
 
 #: ../../src/logic/game.cc:486 ../../src/logic/player.cc:148
 msgid "Missing starting position"
