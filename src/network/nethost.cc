@@ -2472,8 +2472,9 @@ void NetHost::handle_network ()
 		}
 	}
 
-	// If a pause was forced, send a ping regulary to keep the sockets up and running
-	if (m_forced_pause && (time(0) > (d->lastpauseping + 20))) {
+	// If a pause was forced or if the players all pause, send a ping regularly
+        // to keep the sockets up and running
+	if ((m_forced_pause || realSpeed() == 0) && (time(0) > (d->lastpauseping + 20))) {
 		d->lastpauseping = time(0);
 
 		SendPacket s;
