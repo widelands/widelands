@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-25 18:55+0000\n"
-"PO-Revision-Date: 2012-07-21 17:30+0000\n"
+"PO-Revision-Date: 2012-07-25 12:35+0000\n"
 "Last-Translator: Ercin Senturk <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-22 04:32+0000\n"
-"X-Generator: Launchpad (build 15654)\n"
+"X-Launchpad-Export-Date: 2012-07-26 04:35+0000\n"
+"X-Generator: Launchpad (build 15679)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -601,17 +601,19 @@ msgstr "İki Cephe"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
-msgstr ""
+msgstr "İki kabile efsanevi yarımadanın hazineleri için yarışıyor..."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
-msgstr ""
+msgstr "Vadilerin Savaşı"
 
 #: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Devasa kalelerinde iyi korunan dört açgözlü savaşlordu, bu topraklara "
+"hükmetme planlarını tamamlıyorlar..."
 
 #: ../../campaigns/cconfig:31
 msgid ""
@@ -629,6 +631,18 @@ msgid ""
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
 msgstr ""
+"Chat'Karuth öldüğünde yaşlıydı, üç güçlü ve hırslı çocuk babasıydı ve kadim "
+"ormanlara karşı gelecek herhangi bir düşmanla başedebilecek bir ordunun "
+"savaşlordu idi. Chat’Karuth en büyük oğlu Thron'a kabilenin savaşlordu "
+"ünvanını bıraktı - diğer iki oğlunu memnun etmeyen bir karar. Yaşlı "
+"savaşlordu bunu biliyordu. Babasının buyurduğu üzere, Thron başkent "
+"Al’thunran,  Ağaçların İçindeki Krallığın evini terketti ve kuvvetlerini "
+"babasının mezarının bulunduğu yüksek tepelere taşıdı. Orda tanrılara ve "
+"babasının ruhuna, geri dönüp düzeni tekrar sağlayacağına yemin etti. "
+"Kardeşleri,  Thron ve Al’thunran'ın sınırlarını korumak için bırakılmış "
+"birkaç kuvvete karşı körü körüne savaşırken, genç savaşlordu hırslı "
+"kardeşlerini birleştirmek ve kabileleri tekrar aynı bayrak altına sokmanın "
+"yollarını arıyordu."
 
 #: ../../campaigns/cconfig:45
 msgid ""
@@ -662,11 +676,11 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Büyük mercanadanın gerçek Kralı kim olacak?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
-msgstr ""
+msgstr "Bizon Vadisi"
 
 #: ../../maps/Plateau.wmf/elemental:9
 msgid ""
