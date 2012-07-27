@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-07-10 06:11+0000\n"
-"Last-Translator: Teun Spaans <Unknown>\n"
+"PO-Revision-Date: 2012-07-26 16:16+0000\n"
+"Last-Translator: Ben Wouda <Big_ben_lair@hotmail.com>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-07-11 05:13+0000\n"
-"X-Generator: Launchpad (build 15593)\n"
+"X-Launchpad-Export-Date: 2012-07-27 05:18+0000\n"
+"X-Generator: Launchpad (build 15694)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -170,7 +170,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:1344
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
-msgstr ""
+msgstr " --dedicated=FILENAME Begin een vaste server met FILENAME als map\n"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
@@ -432,7 +432,7 @@ msgstr "Klein"
 #: ../../src/logic/building.cc:530
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:257
 msgid "Medium"
-msgstr "Gemiddeld"
+msgstr "Middelgroot"
 
 #: ../../src/writeHTML.cc:330 ../../src/writeHTML.cc:378
 #: ../../src/logic/building.cc:530
@@ -618,7 +618,7 @@ msgstr "%ss uitvoer"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Documentatie voor programma commando's "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -717,7 +717,7 @@ msgstr "gedupliceerde invoer voor %s"
 #: ../../src/economy/economy_data_packet.cc:94
 #, c-format
 msgid "target quantities: %s"
-msgstr "doel aantallen: %s"
+msgstr "gewenste hoeveelheid: %s"
 
 #: ../../src/economy/economy_data_packet.cc:98
 #, c-format
@@ -737,7 +737,7 @@ msgstr "laden havendok: %s"
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
 msgid "waresqueue: %s"
-msgstr "goederenrij: %s"
+msgstr "goederen wachtrij: %s"
 
 #: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
@@ -792,7 +792,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:601
 #, c-format
 msgid "Loading tribe: %s"
-msgstr "Laden stam: %s"
+msgstr "Stam laden: %s"
 
 #: ../../src/editor/editorinteractive.cc:198
 msgid "Creating players"
@@ -961,7 +961,7 @@ msgstr "klein"
 #: ../../src/logic/building.cc:525
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid "medium"
-msgstr "gemiddeld"
+msgstr "middel groot"
 
 #: ../../src/logic/building.cc:525
 #: ../../src/editor/tools/editor_info_tool.cc:64
@@ -1605,13 +1605,15 @@ msgstr "Geen overgebleven bronnen gevonden!"
 
 #: ../../src/logic/production_program.cc:1209
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Hoofdader uitgeput"
 
 #: ../../src/logic/production_program.cc:1211
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"Deze mijn is uitgeput, Verwacht sterk verminderde opbrengsten. Het is aan te "
+"bevelen de mijn uit te breiden, te ontmantelen of op te heffen"
 
 #: ../../src/logic/production_program.cc:1225
 #: ../../src/logic/production_program.cc:1298
@@ -1733,7 +1735,7 @@ msgstr "bouwplaats type \"constructionsite\" mist"
 
 #: ../../src/logic/tribe.cc:143
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr ""
+msgstr "ontmantelings locatie \"distmantlesite\" is niet gevonden"
 
 #: ../../src/logic/tribe.cc:260 ../../src/logic/tribe.cc:281
 #, c-format
@@ -2190,6 +2192,9 @@ msgid ""
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
+"Widelands kon geen verbiding krijgen met het opgegeven netwerk adres.\n"
+"Er is op de aangegeven locatie geen poort beschikbaar of\n"
+"de netwerk verbinding is verbroken."
 
 #: ../../src/network/internet_gaming.cc:163
 msgid "For hosting a game, please take a look at the notes at:"
@@ -2205,7 +2210,7 @@ msgstr "Succesvol herverbonden met de metaserver!"
 
 #: ../../src/network/internet_gaming.cc:391
 msgid "Mixed up"
-msgstr ""
+msgstr "gehusseld"
 
 #: ../../src/network/internet_gaming.cc:391
 msgid "The metaserver sent a strange ERROR during connection"
@@ -2217,12 +2222,16 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
+"Verwachte een LOGIN, RELOGIN of REJECTED packet van de server, maar heb dit "
+"comando %s ontvangen. Misschien gebruikt de metaserver een andere protocol "
+"versie ?"
 
 #: ../../src/network/internet_gaming.cc:416
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
+"WAARSCHUWING: ontvangen commando: %s zonder in CONNECTING state te zijn."
 
 #: ../../src/network/internet_gaming.cc:425
 #, c-format
@@ -2267,11 +2276,11 @@ msgstr "Het verstuurde wachtwoord is incorrrect"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "De gebruikte versie van het protocol word niet ondersteund!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "U bent reeds ingelogged!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
