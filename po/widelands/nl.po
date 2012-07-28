@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-07-26 16:16+0000\n"
-"Last-Translator: Ben Wouda <Big_ben_lair@hotmail.com>\n"
+"PO-Revision-Date: 2012-07-27 10:16+0000\n"
+"Last-Translator: BenW <Big_ben_lair@hotmail.com>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-07-27 05:18+0000\n"
+"X-Launchpad-Export-Date: 2012-07-28 04:34+0000\n"
 "X-Generator: Launchpad (build 15694)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -2287,32 +2287,39 @@ msgid ""
 "You got disconnected, as you send a superuser command without superuser "
 "permission.This incident will be logged and reported to the administrator."
 msgstr ""
+"De verbinding verbroken, omdat u een superuser commando verzonden heeft "
+"zonder superuser rechten. Dit incident word geregistreerd en gemeld aan de "
+"beheerder"
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
 msgstr ""
+"U bent de verbinding verloren, aangezien de metaserver momenteel opnieuw "
+"opstart"
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "verbinding is normaal gesloten door de cliënt"
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "De verbinding met de metaserver is verbroken."
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "Metaserver geeft geen responce"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
-msgstr ""
+msgstr "Je spel is niet geschikt om verbinding te maken met het internet"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
+"De verbinding met de metaservers is afgebroeken, omdat de PING aanvraag niet "
+"optijd terrug gestuurd is."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -2354,7 +2361,7 @@ msgstr " Een automatische opgeslagen spel wordt gecreërd."
 
 #: ../../src/network/netclient.cc:1084
 msgid "Disconnected from Host"
-msgstr ""
+msgstr "Verbinding met de Host is verbroken"
 
 #: ../../src/network/nethost.cc:360
 msgid ""
@@ -2542,7 +2549,7 @@ msgstr "Cient is gecrashed en heeft een reddingsbestand opgeslagen."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Connection was lost."
-msgstr ""
+msgstr "Verbinding is verbroken"
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "Server has left the game."
@@ -2567,7 +2574,7 @@ msgstr "Client en host zijn niet langer gesynchroniseerd."
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Verwijderd door de host: %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
@@ -2577,7 +2584,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Er is iets mis gegeaan: %s"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
@@ -2642,7 +2649,7 @@ msgstr "Client heeft geen toegang tot instellingen van andere spelers."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Client heeft geen toegang tot de server instellingen."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
@@ -2687,7 +2694,7 @@ msgstr "%s heeft zich bij het spel gevoegd."
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Game was saved as %s."
-msgstr ""
+msgstr "Spel opgeslagen als %s"
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
@@ -2917,7 +2924,7 @@ msgstr "Punten"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Game"
-msgstr ""
+msgstr "Spel"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:378
 msgid "Connection timed out"
@@ -2994,7 +3001,7 @@ msgstr "Clients"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:169 ../../src/ui_fsmenu/launchSPG.cc:104
 msgid "Type of game"
-msgstr ""
+msgstr "speltype"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:215 ../../src/ui_fsmenu/launchSPG.cc:285
 msgid "(no map)"
@@ -3768,7 +3775,7 @@ msgstr "Debug"
 
 #: ../../src/wui/buildingwindow.cc:271
 msgid "Center view on this"
-msgstr ""
+msgstr "Beeld centreren"
 
 #: ../../src/wui/buildingwindow.cc:284
 msgid "Help"
@@ -3790,7 +3797,7 @@ msgstr "Wil je dit echt vernietigen %s?"
 #: ../../src/wui/constructionsitewindow.cc:74
 #: ../../src/wui/dismantlesitewindow.cc:68
 msgid "Building materials"
-msgstr ""
+msgstr "Bouwmaterialen"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
@@ -3907,12 +3914,12 @@ msgstr "Debugveld"
 #: ../../src/wui/game_debug_ui.cc:373
 #, c-format
 msgid "Resource name: %s\n"
-msgstr ""
+msgstr "Grondstof naam: %s\n"
 
 #: ../../src/wui/game_debug_ui.cc:379
 #, c-format
 msgid "Resource amount: %i/%i\n"
-msgstr ""
+msgstr "Hoeveelheid grondstof: %i/%i\n"
 
 #: ../../src/wui/game_main_menu.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:50
@@ -4321,7 +4328,7 @@ msgstr "Initialisatie"
 
 #: ../../src/wui/plot_area.cc:116
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: ../../src/wui/plot_area.cc:117
 msgid "h"
@@ -4370,11 +4377,11 @@ msgstr "Ga naar bestemming"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:67
 msgid "Decrease capacity"
-msgstr ""
+msgstr "Capaciteit verminderen"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid "Increase capacity"
-msgstr ""
+msgstr "Capaciteit verhogen"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:77
 msgid "Capacity"
@@ -4447,7 +4454,7 @@ msgstr "Verwijder geselecteerde goederen van hier"
 
 #: ../../src/wui/warehousewindow.cc:212
 msgid "Wares in dock"
-msgstr ""
+msgstr "Goederen in de haven"
 
 #: ../../src/wui/warehousewindow.cc:217
 msgid "Workers in dock"
@@ -4550,22 +4557,22 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "3) Resources Info\n"
-msgstr ""
+msgstr "3) grondstof informatie\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:99
 #: ../../src/editor/tools/editor_info_tool.cc:109
 #, c-format
 msgid " Resource name: %s\n"
-msgstr ""
+msgstr " Grondstof naam: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
 msgid " Resource amount: %i\n"
-msgstr ""
+msgstr " Grondstof hoeveelheid: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:109
 msgid "none"
-msgstr ""
+msgstr "geen"
 
 #: ../../src/editor/tools/editor_info_tool.cc:115
 msgid ""
