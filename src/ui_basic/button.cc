@@ -288,6 +288,11 @@ void Button::handle_mousein(bool const inside)
 	if (oldhl == m_highlighted)
 		return;
 
+	if (m_highlighted)
+		sigmousein();
+	else
+		sigmouseout();
+
 	update();
 }
 

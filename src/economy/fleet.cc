@@ -116,8 +116,8 @@ void Fleet::init(Editor_Game_Base & egbase)
 }
 
 struct StepEvalFindFleet {
-	int32_t estimate(Map & map, FCoords pos) const {return 0;}
-	int32_t stepcost(Map & map, FCoords from, int32_t fromcost, WalkingDir dir, FCoords to) const {
+	int32_t estimate(Map & /* map */, FCoords /* pos */) const {return 0;}
+	int32_t stepcost(Map & /* map */, FCoords from, int32_t fromcost, WalkingDir /* dir */, FCoords to) const {
 		if (!(to.field->nodecaps() & (MOVECAPS_SWIM | MOVECAPS_WALK)))
 			return -1;
 
@@ -402,7 +402,7 @@ struct StepEvalFindPorts {
 		return std::max(0, est - 5 * map.calc_cost(0));
 	}
 
-	int32_t stepcost(Map & map, FCoords from, int32_t fromcost, WalkingDir dir, FCoords to) const
+	int32_t stepcost(Map & map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const
 	{
 		if (!(to.field->nodecaps() & MOVECAPS_SWIM))
 			return -1;
@@ -493,7 +493,7 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 	}
 }
 
-void Fleet::add_port(Editor_Game_Base & egbase, PortDock * port)
+void Fleet::add_port(Editor_Game_Base & /* egbase */, PortDock * port)
 {
 	m_ports.push_back(port);
 	port->set_fleet(this);
@@ -584,7 +584,7 @@ void Fleet::update(Editor_Game_Base & egbase)
  *
  * @note Do not call this directly; instead, trigger it via @ref update
  */
-void Fleet::act(Game & game, uint32_t data)
+void Fleet::act(Game & game, uint32_t /* data */)
 {
 	m_act_pending = false;
 

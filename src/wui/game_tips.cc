@@ -54,7 +54,7 @@ m_lastTip       (0)
 	for (uint8_t i = 0; i < names.size(); ++i)
 		load_tips(names[i]);
 
-	if (m_tips.size() > 0) {
+	if (!m_tips.empty()) {
 		// add visualization only if any tips are loaded
 		m_progressWindow.add_visualization(this);
 		m_registered = true;

@@ -1471,7 +1471,7 @@ void NetHost::setMap
 	writeSettingAllPlayers(s);
 	broadcast(s);
 
-	// If possible, offer the map / savegame as transfer
+	// If possible, offer the map / saved game as transfer
 	// TODO not yet able to handle directory type maps / savegames
 	if (!g_fs->IsDirectory(mapfilename)) {
 		// Read in the file
@@ -1483,8 +1483,7 @@ void NetHost::setMap
 		file->filename = mapfilename;
 		uint32_t leftparts = file->bytes = fr.GetSize();
 		while (leftparts > 0) {
-			uint32_t readout
-				= (leftparts > NETFILEPARTSIZE) ? NETFILEPARTSIZE : leftparts;
+			uint32_t readout = (leftparts > NETFILEPARTSIZE) ? NETFILEPARTSIZE : leftparts;
 			FilePart fp;
 			memcpy(fp.part, fr.Data(readout), readout);
 			file->parts.push_back(fp);
@@ -1497,6 +1496,12 @@ void NetHost::setMap
 		md5sum.Data(&complete[0], file->bytes);
 		md5sum.FinishChecksum();
 		file->md5sum = md5sum.GetChecksum().str();
+	} else {
+		// reset previously offered map / saved game
+		if (file) {
+			delete file;
+			file = 0;
+		}
 	}
 
 	s.reset();
@@ -1845,7 +1850,7 @@ bool NetHost::isPaused()
 	return false;
 }
 
-void NetHost::setPaused(bool paused)
+void NetHost::setPaused(bool /* paused */)
 {
 }
 
@@ -2467,8 +2472,9 @@ void NetHost::handle_network ()
 		}
 	}
 
-	// If a pause was forced, send a ping regulary to keep the sockets up and running
-	if (m_forced_pause && (time(0) > (d->lastpauseping + 20))) {
+	// If a pause was forced or if the players all pause, send a ping regularly
+        // to keep the sockets up and running
+	if ((m_forced_pause || realSpeed() == 0) && (time(0) > (d->lastpauseping + 20))) {
 		d->lastpauseping = time(0);
 
 		SendPacket s;
@@ -2572,6 +2578,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 						Section & s = prof.get_safe_section("global");
 						uint8_t nr_players = s.get_safe_int("nr_players");
 
+						d->settings.scenario = false;
 						d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
 					} catch (_wexception const & e) {}
 				}

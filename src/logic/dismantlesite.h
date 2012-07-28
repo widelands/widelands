@@ -73,6 +73,8 @@ public:
 
 	virtual bool get_building_work(Game &, Worker &, bool success);
 
+	static void count_returned_wares(const Building_Descr & building, std::map<Ware_Index, uint8_t> & res);
+
 protected:
 	virtual uint32_t build_step_time() const {return DISMANTLESITE_STEP_TIME;}
 

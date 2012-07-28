@@ -241,7 +241,7 @@ void Textarea::update_desired_size()
  * Set both the actual and the desired size to the
  * size needed to fit the given \p text.
  */
-void Textarea::set_fixed_size(const std::string & text)
+void Textarea::set_fixed_size(const std::string & /* text */)
 {
 	uint32_t w = m_textstyle.calc_bare_width(m_text);
 	uint32_t h = m_textstyle.font->height();

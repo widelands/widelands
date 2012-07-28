@@ -28,6 +28,7 @@
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
+#include "logic/dismantlesite.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
@@ -71,6 +72,17 @@ Building_Window::Building_Window
 	vbox->add(m_capsbuttons, UI::Box::AlignLeft, true);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
+
+	UI::Box * prevbox = new UI::Box(vbox, 0, 0, UI::Box::Vertical);
+
+	m_prevtext = new UI::Textarea(prevbox);
+	m_prevtext->set_desired_size(0, 0);
+	prevbox->add(m_prevtext, UI::Box::AlignLeft);
+
+	m_enhancecostPrev = new WaresMapDisplay(prevbox, 0, 0, 10, m_building.tribe(), NULL);
+	prevbox->add(m_enhancecostPrev, UI::Box::AlignLeft);
+
+	vbox->add(prevbox, UI::Box::AlignLeft);
 
 	set_center_panel(vbox);
 	set_think(true);
@@ -222,13 +234,22 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-							 building_descr.get_buildicon(), //  button id = building id)
-							 buffer);
+							 building_descr.get_buildicon()); //  button id = building id)
 					enhancebtn->sigclicked.connect
 						(boost::bind
 							(&Building_Window::act_enhance,
 							 boost::ref(*this),
 							 boost::ref(*i.current)));
+					enhancebtn->sigmousein.connect
+						(boost::bind
+							(&Building_Window::show_costPrev,
+							 boost::ref(*this),
+							 boost::ref
+								(*reinterpret_cast<WaresMapDisplay::maptype const *>
+									(&building_descr.buildcost())),
+							 std::string(buffer)));
+					enhancebtn->sigmouseout.connect
+						(boost::bind(&Building_Window::hide_costPrev, boost::ref(*this)));
 					capsbuttons->add
 						(enhancebtn,
 						 UI::Box::AlignCenter);
@@ -250,13 +271,22 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		}
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
+			WaresMapDisplay::maptype wares;
+			Widelands::DismantleSite::count_returned_wares(m_building.descr(), wares);
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-					 g_gr->get_picture(PicMod_Game, pic_dismantle),
-					 _("Dismantle"));
+					 g_gr->get_picture(PicMod_Game, pic_dismantle));
 			dismantlebtn->sigclicked.connect(boost::bind(&Building_Window::act_dismantle, boost::ref(*this)));
+			dismantlebtn->sigmousein.connect
+				(boost::bind
+					(&Building_Window::show_costPrev,
+					 boost::ref(*this),
+					 wares,
+					 _("Dismantle")));
+			dismantlebtn->sigmouseout.connect
+				(boost::bind(&Building_Window::hide_costPrev, boost::ref(*this)));
 			capsbuttons->add
 				(dismantlebtn,
 				 UI::Box::AlignCenter);
@@ -405,6 +435,29 @@ void Building_Window::act_debug()
 	show_field_debug
 		(igbase(),
 		 igbase().game().map().get_fcoords(m_building.get_position()));
+}
+
+/*
+===============
+Show the enhancecosts / dismanteleresults preview
+===============
+*/
+void Building_Window::show_costPrev(WaresMapDisplay::maptype const & cost, std::string text)
+{
+	m_enhancecostPrev->set_map(&cost);
+	m_prevtext->set_text(text);
+}
+
+/*
+===============
+Hide the Preview
+===============
+*/
+void Building_Window::hide_costPrev()
+{
+	m_enhancecostPrev->set_map(NULL);
+	m_prevtext->set_text("");
+	m_prevtext->set_desired_size(0, 0);
 }
 
 /**

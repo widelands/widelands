@@ -179,13 +179,13 @@ bool WarehouseSupply::has_storage() const throw ()
 	return true;
 }
 
-void WarehouseSupply::get_ware_type(WareWorker & type, Ware_Index & ware) const
+void WarehouseSupply::get_ware_type(WareWorker & /* type */, Ware_Index & /* ware */) const
 {
 	throw wexception
 		("WarehouseSupply::get_ware_type: calling this is nonsensical");
 }
 
-void WarehouseSupply::send_to_storage(Game &, Warehouse * wh)
+void WarehouseSupply::send_to_storage(Game &, Warehouse * /* wh */)
 {
 	throw wexception("WarehouseSupply::send_to_storage: should never be called");
 }
@@ -808,7 +808,7 @@ bool Warehouse::fetch_from_flag(Game & game)
  * requirements.
  */
 uint32_t Warehouse::count_workers
-	(Game const & game, Ware_Index ware, Requirements const & req)
+	(Game const & /* game */, Ware_Index ware, Requirements const & req)
 {
 	uint32_t sum = 0;
 
@@ -995,7 +995,7 @@ void Warehouse::request_cb
 /**
  * Receive a ware from a transfer that was not associated to a \ref Request.
  */
-void Warehouse::receive_ware(Game & game, Ware_Index ware)
+void Warehouse::receive_ware(Game & /* game */, Ware_Index ware)
 {
 	m_supply->add_wares(ware, 1);
 }
@@ -1076,7 +1076,7 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
  * Return the number of workers of the given type that we plan to
  * create in this warehouse.
  */
-uint32_t Warehouse::get_planned_workers(Game & game, Ware_Index index) const
+uint32_t Warehouse::get_planned_workers(Game & /* game */, Ware_Index index) const
 {
 	container_iterate_const(std::vector<PlannedWorkers>, m_planned_workers, i) {
 		if (i.current->index == index)
@@ -1093,7 +1093,7 @@ uint32_t Warehouse::get_planned_workers(Game & game, Ware_Index index) const
  * This is the current stock plus any incoming transfers.
  */
 std::vector<uint32_t> Warehouse::calc_available_for_worker
-	(Game & game, Ware_Index index) const
+	(Game & /* game */, Ware_Index index) const
 {
 	const Worker_Descr & w_desc = *tribe().get_worker_descr(index);
 	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
@@ -1408,7 +1408,7 @@ int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) 
 	return 0;
 }
 
-int Warehouse::outcorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
+int Warehouse::outcorporateSoldier(Editor_Game_Base & /* egbase */, Soldier & soldier) {
 
 	Ware_Index const ware = tribe().safe_worker_index("soldier");
 	if (m_incorporated_workers.count(ware)) {

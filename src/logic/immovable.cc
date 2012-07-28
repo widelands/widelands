@@ -1240,7 +1240,7 @@ void ImmovableProgram::ActConstruction::execute(Game & g, Immovable & imm) const
  *
  * If the immovable is not currently in construction mode, return \c false.
  */
-bool Immovable::construct_remaining_buildcost(Game & game, Buildcost * buildcost)
+bool Immovable::construct_remaining_buildcost(Game & /* game */, Buildcost * buildcost)
 {
 	ActConstructionData * d = get_action_data<ActConstructionData>();
 	if (!d)

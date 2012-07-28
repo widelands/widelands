@@ -125,7 +125,7 @@ public:
 		set_size(w, h);
 	}
 protected:
-	std::string info_for_ware(Widelands::Ware_Index const ware) {
+	std::string info_for_ware(Widelands::Ware_Index const /* ware */) {
 		return "";
 	}
 
@@ -208,7 +208,7 @@ m_parent(&parent)
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_stock->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_stock->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot_stock->set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
 
 	tabs->add
 		("stock", g_gr->get_picture(PicMod_UI, pic_tab_stock),

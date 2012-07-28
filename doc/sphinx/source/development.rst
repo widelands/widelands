@@ -1,5 +1,5 @@
-README for developers
----------------------
+Developers Information
+======================
 
 This file is simply a collection of thoughts, useful pieces of
 information, etc.
@@ -19,10 +19,13 @@ be the same.
 This property of the Widelands game logic is extremely important for two
 reasons:
 - Multiplayer by parallel simulation:
+
   Every host keeps the complete state of the simulation in memory, and only
   player commands are exchanged to keep network traffic low. The properties
   above guarantuee that there is no desync.
+  
 - Demo recording
+
   By creating a savegame followed by a sequence of player commands, it is
   possible to create a demo recording of a game (similar to Age of Empires,
   for example)

@@ -152,7 +152,7 @@ public:
 	uint32_t minSoldierCapacity() const {return 0;}
 	uint32_t maxSoldierCapacity() const {return 4294967295U;}
 	uint32_t soldierCapacity() const {return maxSoldierCapacity();}
-	void setSoldierCapacity(uint32_t capacity) {
+	void setSoldierCapacity(uint32_t /* capacity */) {
 		throw wexception("Not implemented for a Warehouse!");
 	}
 	void dropSoldier(Soldier &) {

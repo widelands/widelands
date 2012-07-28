@@ -188,7 +188,7 @@ bool Economy::find_route
 }
 
 struct ZeroEstimator {
-	int32_t operator()(RoutingNode & node) const {return 0;}
+	int32_t operator()(RoutingNode & /* node */) const {return 0;}
 };
 
 /**

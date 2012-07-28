@@ -45,6 +45,41 @@ def _make_tests_from_checker( c ):
 
     return allowed_tests + forbidden_tests
 
+class CommentsTest(unittest.TestCase):
+    """
+    Tests that comment stripping is working correctly
+    """
+    def __init__(self, before, after):
+        unittest.TestCase.__init__(self)
+        self.before = before
+        self.after = after
+        
+    def runTest(self):
+        preprocessor = Preprocessor()
+        after = preprocessor.get_preprocessed_data("test", self.before, True, False)
+        self.assertTrue(after == self.after,
+            "Stripping comments from %r failed. Expected %r, got %r"
+            % (self.before, self.after, after)
+            )
+        
+comment_tests = [
+    # Let's get the basics right.
+    ("a b c",
+     "a b c"),
+    # Whitespace before comments should be stripped
+    ("a b c       // a",
+     "a b c"),
+    # Single line comment shouldn't affect the next line
+    ("a b c       // a\nd e",
+     "a b c\nd e"),
+    # Multi-line comments should retain original line numbering
+    ("a /* \n b \n */ c",
+     "a \n\n c"),
+    # Multiple comments on one line should work
+    ("int32_t estimate(Map & /* map */, FCoords /* pos */) const {return 0;}\ntest",
+     "int32_t estimate(Map & "       ", FCoords "       ") const {return 0;}\ntest"),
+]
+
 if __name__ == '__main__':
     import sys
 
@@ -59,5 +94,8 @@ if __name__ == '__main__':
     else:
         for checker in d._checkers:
             suite.addTests( _make_tests_from_checker(checker) )
+
+    for before, after in comment_tests:
+        suite.addTest(CommentsTest(before, after.splitlines(True)))
 
     unittest.TextTestRunner(verbosity=1).run(suite)

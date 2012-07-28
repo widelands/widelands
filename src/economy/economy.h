@@ -31,9 +31,6 @@
 #include "logic/wareworker.h"
 
 
-/**
- * Economy represents a network of Flag through which wares can be transported.
- */
 namespace Widelands {
 struct Player;
 struct Game;
@@ -45,6 +42,16 @@ struct Request;
 struct Supply;
 struct Router;
 
+/**
+ * Each Economy represents all building and flags, which are connected over the same
+ * street network. In general a player can own multiple Economys, which
+ * operate independent from each other.
+ * During the game Economy objects can be merged or splitted due to
+ * new roads or destroyed ones.
+ *
+ * Every Economy tracks the amount of wares inside of it and how high the
+ * demand for each ware is.
+ */
 struct Economy {
 	friend class EconomyDataPacket;
 

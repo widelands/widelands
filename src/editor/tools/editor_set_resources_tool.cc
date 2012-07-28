@@ -34,7 +34,7 @@
 int32_t Editor_Set_Resources_Tool::handle_click_impl
 	(Widelands::Map           &          map,
 	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive        &          parent,
+	Editor_Interactive        &          /* parent */,
 	Editor_Action_Args        &          args)
 {
 	Widelands::World const & world = map.world();
@@ -88,7 +88,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 
 int32_t Editor_Set_Resources_Tool::handle_undo_impl
 	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
-	Editor_Interactive & parent, Editor_Action_Args & args)
+	Editor_Interactive & /* parent */, Editor_Action_Args & args)
 {
 	Widelands::World const & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
@@ -130,8 +130,8 @@ int32_t Editor_Set_Resources_Tool::handle_undo_impl
 			map.recalc_for_field_area
 			(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
 		}
-		ir++;
-		it++;
+		++ir;
+		++it;
 	} while (mr.advance(map));
 	args.orgRes.clear();
 	args.orgResT.clear();

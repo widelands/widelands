@@ -75,7 +75,7 @@ there is not already another resource there.
 int32_t Editor_Increase_Resources_Tool::handle_click_impl
 	(Widelands::Map           &           map,
 	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         parent,
+	Editor_Interactive         &         /* parent */,
 	Editor_Action_Args         &         args)
 {
 	Widelands::World const & world = map.world();

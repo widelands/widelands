@@ -37,14 +37,14 @@ void Editor_Draw_Tool::add_action
 }
 
 int32_t Editor_Draw_Tool::handle_click_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<Widelands::Coords> center,
-	Editor_Interactive & parent, Editor_Action_Args & args)
+	(Widelands::Map & /* map */, Widelands::Node_and_Triangle<Widelands::Coords> /* center */,
+	Editor_Interactive & /* parent */, Editor_Action_Args & args)
 {
 
 	for
 		(std::list<Editor_Tool_Action *>::iterator i = args.draw_actions.begin();
 	        i != args.draw_actions.end();
-	        i++)
+	        ++i)
 	{
 		(*i)->tool.handle_click
 			(static_cast<Editor_Tool::Tool_Index>((*i)->i),
@@ -54,13 +54,13 @@ int32_t Editor_Draw_Tool::handle_click_impl
 }
 
 int32_t Editor_Draw_Tool::handle_undo_impl
-	(Widelands::Map & map, Widelands::Node_and_Triangle<Widelands::Coords> center,
-	Editor_Interactive & parent, Editor_Action_Args & args)
+	(Widelands::Map & /* map */, Widelands::Node_and_Triangle<Widelands::Coords> /* center */,
+	Editor_Interactive & /* parent */, Editor_Action_Args & args)
 {
 	for
 		(std::list<Editor_Tool_Action *>::reverse_iterator i = args.draw_actions.rbegin();
 	        i != args.draw_actions.rend();
-	        i++)
+	        ++i)
 	{
 		(*i)->tool.handle_undo
 		(static_cast<Editor_Tool::Tool_Index>((*i)->i),

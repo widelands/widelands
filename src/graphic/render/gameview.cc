@@ -1014,16 +1014,16 @@ void GameView::renderminimap
  */
 
 void GameView::draw_field
-	(Rect          & subwin,
-	 Vertex  const &  f_vert,
-	 Vertex  const &  r_vert,
-	 Vertex  const & bl_vert,
-	 Vertex  const & br_vert,
-	 uint8_t         roads,
-	 Texture const & tr_d_texture,
-	 Texture const &  l_r_texture,
-	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture)
+	(Rect          & /* subwin */,
+	 Vertex  const &  /* f_vert */,
+	 Vertex  const &  /* r_vert */,
+	 Vertex  const & /* bl_vert */,
+	 Vertex  const & /* br_vert */,
+	 uint8_t         /* roads */,
+	 Texture const & /* tr_d_texture */,
+	 Texture const &  /* l_r_texture */,
+	 Texture const &  /* f_d_texture */,
+	 Texture const &  /* f_r_texture */)
 {
 
 }

@@ -315,7 +315,7 @@ void WUIPlot_Area::draw_plot_line
  * draw the background and the axis of the diagram
  */
 uint32_t WUIPlot_Area::draw_diagram
-	(RenderTarget & dst, float const xline_length, float const yline_length) {
+	(RenderTarget & dst, float const xline_length, float const /* yline_length */) {
 
 	uint32_t time_in_ms_, how_many_ticks, max_x;
 	char buffer[200];

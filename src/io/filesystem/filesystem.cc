@@ -40,13 +40,13 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <iterator>
 
 #ifdef WIN32
 #include "log.h"
 #include <windows.h>
 #include <io.h>
 #include <direct.h>
-#define PATH_MAX MAX_PATH
 #else
 #include <glob.h>
 #include <sys/types.h>
@@ -61,6 +61,7 @@
 #ifdef _MSC_VER
 #define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
 #define S_ISREG(x) ((x&_S_IFREG)?1:0)
+#define PATH_MAX MAX_PATH
 #endif
 
 FileSystem::FileSystem()
@@ -117,7 +118,9 @@ std::string FileSystem::fixCrossFile(std::string const & path) const {
 	for (uint32_t i = 0; i < path_size; ++i) {
 		temp = path.at(i);
 #ifdef WIN32
-		if (temp == "/")
+		if (temp == ":")
+			fixedPath.at(i) = '-';
+		else if (temp == "/")
 #else
 		if (temp == "\\")
 #endif

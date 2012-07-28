@@ -931,7 +931,7 @@ void ProductionProgram::ActProduce::execute
 }
 
 bool ProductionProgram::ActProduce::get_building_work
-	(Game & game, ProductionSite & psite, Worker & worker) const
+	(Game & game, ProductionSite & psite, Worker & /* worker */) const
 {
 	// We reach this point once all wares have been carried outside the building
 	psite.program_step(game);
@@ -1022,7 +1022,7 @@ void ProductionProgram::ActRecruit::execute
 }
 
 bool ProductionProgram::ActRecruit::get_building_work
-	(Game & game, ProductionSite & psite, Worker & worker) const
+	(Game & game, ProductionSite & psite, Worker & /* worker */) const
 {
 	// We reach this point once all recruits have been guided outside the building
 	psite.program_step(game);
