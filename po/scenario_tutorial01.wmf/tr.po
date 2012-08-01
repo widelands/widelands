@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-25 18:55+0000\n"
-"PO-Revision-Date: 2012-07-30 20:00+0000\n"
+"PO-Revision-Date: 2012-08-01 00:26+0000\n"
 "Last-Translator: Ercin Senturk <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-31 04:34+0000\n"
-"X-Generator: Launchpad (build 15702)\n"
+"X-Launchpad-Export-Date: 2012-08-01 04:33+0000\n"
+"X-Generator: Launchpad (build 15719)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -98,27 +98,27 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
-msgstr ""
+msgstr "Saldırı:"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
-msgstr ""
+msgstr "Temel Eğitim - Winterwind'in Barbarlar ders 1 için kullandığı harita"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:168
 msgid "Build a flag on the road"
-msgstr ""
+msgstr "Yola bir bayrak ekle"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:167
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "Oduncuya giden yolu bölmek için bir bayrak ekle"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:278
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bir taş ocağı inşa et"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:277
 msgid "Build a quarry next to the stones"
-msgstr ""
+msgstr "Taşların yanına bir taş ocağı inşa et"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:250
 msgid ""
@@ -131,14 +131,20 @@ msgid ""
 "activated\n"
 "earlier."
 msgstr ""
+"Şurdaki taşların yanına bir taş ocağı kur. Nasıl yaptığımı hatırlıyor "
+"musun?\n"
+"İnşa Yardım açık mı kontrol et, şimdi sadece binayı inşa etmek istediğin\n"
+" yere tıkla, çıkan pencereden uygun binayı seç ve inşa başladı. Belki \n"
+"daha önce aktifleştirdiğimiz inşa yardım sembollerini açıklamak için\n"
+"iyi bir zaman."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
-msgstr ""
+msgstr "Bağlantı yolu inşa etme"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:118
 msgid "Building the lumberjack"
-msgstr ""
+msgstr "Oduncu inşa etme"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:593
 msgid ""
@@ -146,6 +152,9 @@ msgid ""
 "to\n"
 "build a small training scenario for you. Let's do that now."
 msgstr ""
+"Fakat konu dışına çıktım. Askerlere dönelim. Ne yapmak üzereydim? Aha, "
+"senin\n"
+"için bir eğitim senaryosu yapıyordum. Hadi başlayalım."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
@@ -163,11 +172,17 @@ msgid ""
 "military influence any more. If an enemy builds a military building nearby,\n"
 "your construction site could burn down. No sweat, that won't happen here."
 msgstr ""
+"Hisarlar doğrudan inşa edilemez. Önce bir kale inşa etmelisin ve\n"
+"onu hisara yükseltmelisin.Bunu yapmak için kaleye tıkla, sonra hisara\n"
+"yükselt düğmesini seç. İnşa devam ederken askerler kaleden ayrılacak.\n"
+"Bunun anlamı kalenin artık askeri bir etkisi yok. Eğer yakın bir yere\n"
+"düşman askeri bina inşa ederse, şantiyen yıkılabilir. Endişelenme, \n"
+"burda birşey olmaz."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
 msgid "Close the messages window"
-msgstr ""
+msgstr "Mesaj penceresini kapa"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:427
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:448
@@ -177,15 +192,15 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:696
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
 msgid "Conclusion"
-msgstr ""
+msgstr "Sonuç"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "Taş ocağını karargaha bağla"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:347
 msgid "Connect your construction site"
-msgstr ""
+msgstr "Şantiyeni bağla"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:348
 msgid ""
@@ -201,11 +216,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
-msgstr ""
+msgstr "Maden kurabileceğimiz bir alan ele geçir"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:497
 msgid "Conquer the mountain to the south west"
-msgstr ""
+msgstr "Güney batıdaki dağı ele geçir"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:400
 msgid ""
@@ -220,11 +235,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 msgid "Defeat the enemy"
-msgstr ""
+msgstr "Düşmanı yen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:687
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "Düşman kabileyi yen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
 msgid ""
@@ -236,7 +251,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:673
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat your enemy"
-msgstr ""
+msgstr "Düşmanını yen"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid ""
@@ -254,7 +269,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:627
 msgid "Defense:"
-msgstr ""
+msgstr "Defans:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Diving in"
@@ -263,11 +278,11 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
 msgid "Enable the build help"
-msgstr ""
+msgstr "İnşa yardımı aç"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:643
 msgid "Enhance this fortress"
-msgstr ""
+msgstr "Bu kaleyi yükselt"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress"
