@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-25 20:55+0200\n"
-"PO-Revision-Date: 2012-03-26 18:50+0000\n"
-"Last-Translator: Jens Beyer (Qcumber-some) <Unknown>\n"
+"PO-Revision-Date: 2012-08-16 11:03+0000\n"
+"Last-Translator: Michael Moroni <michael.moroni@mailoo.org>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:38+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-08-17 04:33+0000\n"
+"X-Generator: Launchpad (build 15810)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2608,7 +2608,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/netsetup_lan.cc:69
 #: ../../src/ui_fsmenu/singleplayer.cc:61
 msgid "Back"
-msgstr "Returnite"
+msgstr "Malantaŭen"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:163
 #: ../../src/ui_fsmenu/campaign_select.cc:165
@@ -2616,30 +2616,30 @@ msgstr "Returnite"
 #: ../../src/ui_fsmenu/campaign_select.cc:226
 #: ../../src/ui_fsmenu/campaign_select.cc:419
 msgid "[No value found]"
-msgstr ""
+msgstr "[Neniu valoro trovata]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:170
 msgid "[Invalid entry]"
-msgstr ""
+msgstr "[Nevalida ero]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:264
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose your map!"
-msgstr ""
+msgstr "Elektu vian mapon!"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:266
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 #: ../../src/ui_fsmenu/mapselect.cc:64
 msgid "Name:"
-msgstr ""
+msgstr "Nomo:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:268
 #: ../../src/ui_fsmenu/editor_mapselect.cc:60
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:79
 msgid "Author:"
-msgstr ""
+msgstr "Aŭtoro:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:358
 #, c-format
