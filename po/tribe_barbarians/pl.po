@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 18:55+0000\n"
-"PO-Revision-Date: 2012-08-12 09:47+0000\n"
-"Last-Translator: Mateusz Micał <Unknown>\n"
+"PO-Revision-Date: 2012-08-18 12:54+0000\n"
+"Last-Translator: BartekChom <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-13 05:07+0000\n"
-"X-Generator: Launchpad (build 15791)\n"
+"X-Launchpad-Export-Date: 2012-08-21 04:35+0000\n"
+"X-Generator: Launchpad (build 15810)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -1457,6 +1457,7 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce %s in %s on average."
 msgstr ""
+"Jeśli dostawy żywności są stabilne, ta kopalnia wyprodukuje %s w średnio %s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -1505,6 +1506,8 @@ msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
 msgstr ""
+"Napis na progu zniszczonej Starej Kuźni w Harradsheimie, najstarszego "
+"znanego ośrodka kowalstwa"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/conf:92
@@ -1565,6 +1568,8 @@ msgid ""
 "It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
+"Może wytwarzać Łopaty do Chleba, Topory Drwalskie, Szczypce, Wędki, Młotki, "
+"Włócznie, Przybory Kuchenne, Kilofy, Kosy i Lopaty."
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "It can not be upgraded."
@@ -1702,7 +1707,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:31
 #: ../../tribes/barbarians/warmill/help.lua:34
 msgid "Medium plot"
-msgstr ""
+msgstr "Średnie pole"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/conf:204
@@ -1727,7 +1732,7 @@ msgstr "Mały browar"
 #: ../../tribes/barbarians/granitemine/help.lua:34
 #: ../../tribes/barbarians/oremine/help.lua:34
 msgid "Mine plot"
-msgstr ""
+msgstr "Pole kopalni"
 
 #: ../../tribes/barbarians/coalmine/help.lua:50
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -1798,7 +1803,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:23
 msgid "Outgoing:"
-msgstr ""
+msgstr "Wychodzące:"
 
 #: ../../tribes/barbarians/conf:172
 msgid "Outpost"
@@ -2069,7 +2074,7 @@ msgstr "Dostarczone przez "
 #: ../../tribes/barbarians/warmill/help.lua:16
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Purpose:"
-msgstr ""
+msgstr "Przeznaczenie:"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Quarry"
@@ -2086,6 +2091,8 @@ msgid ""
 "Ragnald the Child's answer to the question, what he's doing in the dirt. His "
 "\"new stone\" now is an important building material."
 msgstr ""
+"Ragnald Dziecko odpowiedział na pytanie, co robi w błocie. Jego \"nowy "
+"kamień\" jest teraz ważnym materiałem budowlanym."
 
 #: ../../tribes/barbarians/conf:142
 #: ../../tribes/barbarians/metalworks/help.lua:41
@@ -2324,7 +2331,7 @@ msgstr "Sleep (Śpij)"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Ferners"
-msgstr ""
+msgstr "Hasło Gildii Paprociarzy"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Small Tower"
@@ -2338,7 +2345,7 @@ msgstr "Mała wieża"
 #: ../../tribes/barbarians/rangers_hut/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Small plot"
-msgstr ""
+msgstr "Małe pole"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
@@ -2452,7 +2459,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:34
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Space required:"
-msgstr ""
+msgstr "Wymagane miejsce:"
 
 #: ../../tribes/barbarians/conf:145
 #: ../../tribes/barbarians/metalworks/help.lua:39
@@ -2518,7 +2525,7 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "The %s pauses %s before going to work again."
-msgstr ""
+msgstr "%s czeka %s zanim znów zacznie pracować."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -2528,7 +2535,7 @@ msgstr "Topór to podstawowa broń barbarzyńców. Każdy młody żołnierz taki
 
 #: ../../tribes/barbarians/axefactory/help.lua:8
 msgid "The Barbarian Axefactory"
-msgstr ""
+msgstr "Barbarzyńska fabryka toporów"
 
 #: ../../tribes/barbarians/axefactory/help.lua:16
 msgid ""
@@ -2536,10 +2543,13 @@ msgid ""
 "three buildings. It is an upgrade from the Metalwork Shop but doesn't "
 "require additional qualification for the worker."
 msgstr ""
+"Barbarzyńska fabryka toporów jest pośrednim ogniwem w łańcuchu trzech "
+"budynków. Jest ulepszeniem narzędziowni, ale nie wymaga dodatkowych "
+"umiejętności od pracownika."
 
 #: ../../tribes/barbarians/bakery/help.lua:8
 msgid "The Barbarian Bakery"
-msgstr ""
+msgstr "Barbarzyńska piekarnia"
 
 #: ../../tribes/barbarians/battlearena/help.lua:8
 msgid "The Barbarian Battle Arena"
@@ -3065,7 +3075,7 @@ msgstr ""
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
 msgid "Upgrade Cost:"
-msgstr ""
+msgstr "Koszt ulepszenia:"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:39
 #: ../../tribes/barbarians/deep_goldmine/help.lua:35
@@ -3074,7 +3084,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:34
 #: ../../tribes/barbarians/deeper_oremine/help.lua:34
 msgid "Upgrade cost:"
-msgstr ""
+msgstr "Koszt ulepszenia:"
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -3223,7 +3233,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:54
 #: ../../tribes/barbarians/well/help.lua:38
 msgid "Upgradeable to:"
-msgstr ""
+msgstr "Można ulepszyć do:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -3254,7 +3264,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:33
 msgid "Upgraded from:"
-msgstr ""
+msgstr "Jest ulepszeniem:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:20
 #: ../../tribes/barbarians/bakery/help.lua:19
@@ -3285,7 +3295,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:20
 #: ../../tribes/barbarians/well/help.lua:19
 msgid "Vision range:"
-msgstr ""
+msgstr "Zasięg obserwacji:"
 
 #: ../../tribes/barbarians/conf:109
 msgid "War Helmet"
@@ -3440,7 +3450,7 @@ msgstr "Pracuj"
 #: ../../tribes/barbarians/trainingscamp/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:43
 msgid "Worker uses:"
-msgstr ""
+msgstr "Pracownik używa:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:54
 #: ../../tribes/barbarians/bakery/help.lua:48
@@ -3471,7 +3481,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:56
 #: ../../tribes/barbarians/well/help.lua:40
 msgid "Workers"
-msgstr ""
+msgstr "Pracownicy"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:54
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
@@ -3482,7 +3492,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:60
 msgid "Workers use:"
-msgstr ""
+msgstr "Pracownicy używają:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:18
 #: ../../tribes/barbarians/bakery/help.lua:17
@@ -3513,7 +3523,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:18
 #: ../../tribes/barbarians/well/help.lua:17
 msgid "Working radius:"
-msgstr ""
+msgstr "Zasięg:"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
@@ -3546,8 +3556,8 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "każdy przedmiot"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
-msgstr ""
+msgstr "n/d"
