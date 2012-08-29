@@ -908,7 +908,8 @@ std::string WLApplication::get_executable_path()
 	}
 	executabledir = std::string(buffer);
 	executabledir.resize(executabledir.rfind('/') + 1);
-#elif __linux__
+#endif
+#ifdef __linux__
 	char buffer[PATH_MAX];
 	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
 	if (size <= 0) {
@@ -916,7 +917,8 @@ std::string WLApplication::get_executable_path()
 	}
 	executabledir = std::string(buffer, size);
 	executabledir.resize(executabledir.rfind('/') + 1);
-#elif WIN32
+#endif
+#ifdef WIN32
 	char filename[_MAX_PATH + 1] = {0};
 	GetModuleFileName(0, filename, _MAX_PATH);
 	executabledir = filename;
@@ -978,9 +980,11 @@ bool WLApplication::init_hardware() {
 	//add default video mode
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	videomode.push_back("x11");
-#elif WIN32
+#endif
+#ifdef WIN32
 	videomode.push_back("windib");
-#elif __APPLE__
+#endif
+#ifdef __APPLE__
 	videomode.push_back("Quartz");
 #endif
 	//if a video mode is given on the command line, add that one first
@@ -1621,7 +1625,7 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-#if WIN32
+#ifdef WIN32
 	//  The Winsock2 library needs to get called through WSAStartup, to initiate
 	//  the use of the Winsock DLL by Widelands.
 	WSADATA wsaData;

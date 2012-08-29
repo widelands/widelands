@@ -37,6 +37,7 @@
 #include <fcntl.h>
 #endif
 
+using std::cout;
 using std::cerr;
 using std::endl;
 using std::flush;
@@ -51,6 +52,7 @@ int main(int argc, char * argv[])
 	// if Widelands is called as dedicated server, Widelands should be forked and started as daemon
 	bool dedicated = false;
 	bool daemon    = false;
+#endif
 	for (int i = 1; i < argc && !(daemon && dedicated); ++i) {
 		std::string opt = argv[i];
 
@@ -58,6 +60,13 @@ int main(int argc, char * argv[])
 		if (opt.size() < 8)
 			continue;
 
+		if (opt == "--version") {
+			cout << "Widelands " << build_id() << '(' << build_type() << ')' << "\n";
+			return 0;
+		}
+
+
+#ifndef WIN32
 		std::string::size_type const pos = opt.find('=');
 		if (pos == std::string::npos) { //  if no equals sign found
 			if (opt == "--daemon")
@@ -90,8 +99,9 @@ int main(int argc, char * argv[])
 			printf("Child has PID %i.\n", pid);
 			return 0;
 		}
-	}
 #endif
+	}
+
 
 	WLApplication * g_app = 0;
 	try {
