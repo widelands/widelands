@@ -1701,7 +1701,7 @@ void NetHost::setPlayerShared(uint8_t number, uint8_t shared) {
 		return;
 
 	PlayerSettings & sharedplr = d->settings.players.at(shared - 1);
-	assert(sharedplr.state != PlayerSettings::stateClosed || sharedplr.state != PlayerSettings::stateShared);
+	assert(sharedplr.state != PlayerSettings::stateClosed && sharedplr.state != PlayerSettings::stateShared);
 
 	player.shared_in = shared;
 	player.tribe     = sharedplr.tribe;
