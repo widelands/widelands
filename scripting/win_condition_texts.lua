@@ -48,3 +48,8 @@ game_status_territoral_lord = {
   player1 = _ "You own more than half of the maps area.",
   player2 = _ "Keep it for %i more minutes to win the game."
 }
+
+game_status_territoral_lord_time = {
+  end_in = _ "game will end in %i minutes.",
+  land = _ "%s %s %i%% of the land (%i of %i)."
+}
