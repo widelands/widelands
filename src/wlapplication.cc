@@ -1625,7 +1625,7 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-#if WIN32
+#ifdef WIN32
 	//  The Winsock2 library needs to get called through WSAStartup, to initiate
 	//  the use of the Winsock DLL by Widelands.
 	WSADATA wsaData;
