@@ -52,7 +52,7 @@ int main(int argc, char * argv[])
 	// if Widelands is called as dedicated server, Widelands should be forked and started as daemon
 	bool dedicated = false;
 	bool daemon    = false;
-#endif
+
 	for (int i = 1; i < argc && !(daemon && dedicated); ++i) {
 		std::string opt = argv[i];
 
@@ -65,8 +65,6 @@ int main(int argc, char * argv[])
 			return 0;
 		}
 
-
-#ifndef WIN32
 		std::string::size_type const pos = opt.find('=');
 		if (pos == std::string::npos) { //  if no equals sign found
 			if (opt == "--daemon")
@@ -99,9 +97,8 @@ int main(int argc, char * argv[])
 			printf("Child has PID %i.\n", pid);
 			return 0;
 		}
-#endif
 	}
-
+#endif
 
 	WLApplication * g_app = 0;
 	try {
