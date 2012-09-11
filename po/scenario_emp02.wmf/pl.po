@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 18:55+0000\n"
-"PO-Revision-Date: 2011-10-14 17:51+0000\n"
-"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
+"PO-Revision-Date: 2012-09-10 20:57+0000\n"
+"Last-Translator: BartekChom <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:34+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-09-11 04:32+0000\n"
+"X-Generator: Launchpad (build 15924)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid ""
@@ -194,11 +194,11 @@ msgid ""
 "<br> "
 msgstr ""
 " \"Lucjuszu, mam dla Ciebie dobre wieści:<br> Kiedy poszedłem na wschód, "
-"znalazłem większą górę.<br> Nie jestem pewien - geolog by miał sprawdzić czy "
-"mam rację - ale mam wrażenie że mogli byśmy wykopać marmur w niektórych "
-"miejscach na górze.<br> Było by to dobre źródło aby wzomcnić nasze zapasy "
-"jakościowego marmuru, ponad te marne ilości dostępne z kamieniołomów. Może "
-"miałeś rację, kiedy powiedziałeś, że ta wyspa jest jak raj.<br> Pozwól nam "
+"znalazłem większą górę.<br> Nie jestem pewien - geolog musiałby sprawdzić, "
+"czy mam rację - ale mam wrażenie, że moglibyśmy wydobyć marmur w niektórych "
+"miejscach na górze.<br> Byłoby to dobre źródło, aby powiększyć nasze zapasy "
+"dobrego marmuru ponad te marne ilości dostępne z kamieniołomów. Może miałeś "
+"rację, kiedy powiedziałeś, że ta wyspa jest jak raj.<br> Pozwól nam "
 "rozszerzyć nasze terytoria i zacząć wykopywać marmur.\"<br><br>-- NOWE CELE -"
 "-<br> "
 
@@ -208,9 +208,9 @@ msgid ""
 "infrastructure is getting better and better. Now we should think of "
 "preparing ourselves for battle.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
-" \"To dobrze. Pierwsza wojskowa budowla jest gotowa, a infrastruktura "
-"górnictwa z dnia na dzień wygląda lepiej. Mielibyśmy się zacząć "
-"przygotowywać na bitwę.\"<br><br>-- NOWE CELE --<br> "
+" \"To dobrze. Pierwszy duży budynek wojskowy jest gotowy, a infrastruktura "
+"górnicza z dnia na dzień wygląda lepiej. Powinniśmy pomyśleć o przygotowaniu "
+"się do walki.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:216
 msgid ""
@@ -223,12 +223,12 @@ msgid ""
 "you wish, otherwise move on to the next mission.\" "
 msgstr ""
 " \"Dzisiaj gołąb wylądował na naszej wyspie.<br> Przyniósł wiadomość, która "
-"zapełnia mnie ciemnymi myślami i przynosi z powrotem moje obawy.<br> "
-"Wiadomość była zaadresowana do mnie, błagając mnie, abym wrócił do miasta "
-"Fremil.<br> Jest tam napisane, że Imperium było zaatakowane barbarzyńcami. "
-"Byli zaatakowani z północy, przez plemie, które mi zabronili attakować.<br> "
-"Wiem, co teraz bym miał zrobić...<br><br> Dokończyłeś tą misję. Możesz "
-"kontynuować grę jeżeli chcesz lub przejść do kolejnej misji.\" "
+"zapełnia mnie ciemnymi myślami i przywraca moje obawy.<br> Wiadomość była "
+"zaadresowana do mnie, błagając mnie, abym wrócił do miasta Fremil.<br> Jest "
+"tam napisane, że Imperium toczy wojnę z barbarzyńcami. Zostali zaatakowani z "
+"północy przez plemię, które zabronili mi atakować.<br> Jest dla mnie jasne, "
+"co teraz muszę zrobić...<br><br>Udało ci się zakończyć tę misję. Możesz "
+"kontynuować rozgrywkę bądź przejść do następnej misji.\" "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid ""
@@ -239,9 +239,9 @@ msgid ""
 "their country.\"<br><br>--------------------- VICTORY! ----------------------"
 msgstr ""
 " \"Dzisiaj jest dumny dzień. Walczyliśmy za nasz nowy dom i wygraliśmy.<br> "
-"Cały czas paru barbarzyńców się chowa na naszej wyspie, ale jestem pewien, "
-"że w krótce ich znajdziemy.<br> Każdy barbarzyńca, który na nas nie "
-"zaatakuje, będzie wysłany na łodzi, razem z innymi pokojowymi, do swojego "
+"Cały czas paru barbarzyńców chowa się na naszej wyspie, ale jestem pewien, "
+"że wkrótce ich znajdziemy.<br> Każdy barbarzyńca, który nas nie zaatakuje, "
+"będzie wysłany na łodzi, razem z innymi pokojowymi, do swojego "
 "kraju.\"<br><br>--------------------- ZWYCIĘSTWO! ----------------------"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:68
@@ -250,7 +250,7 @@ msgid ""
 "* As soon as you have enough soldiers, attack and completely destroy the "
 "barbarian buildings.<br>"
 msgstr ""
-"* Kiedy tylko masz wystarczająco dużo żołnierzy, zaatakuj i zniszcz "
+"* Kiedy tylko będziesz miał wystarczająco dużo żołnierzy, zaatakuj i zniszcz "
 "wszystkie budynki barbarzyńców.<br>"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:20
@@ -265,14 +265,14 @@ msgid ""
 "infrastructure (coal mine and / or charcoal burner, iron ore mine, "
 "toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr ""
-"* Zbuduj kamieniarz a potem dokończ górniczą i produkcyjną infrastukturę "
-"(kopalnię węgla i/lub piec do węgla drzewnego, kopalnie rudy żelaza,  "
-"pracownie rzemieślnik, zbrojmistrza i hutę)."
+"* Zbuduj pracownię kamieniarza, a potem dokończ infrastrukturę górniczą i "
+"produkcyjną (kopalnię węgla i/lub piec do węgla drzewnego, kopalnię rudy "
+"żelaza, pracownie rzemieślnika i zbrojmistrza oraz hutę)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:136
 msgid "* Build some barracks and sentries around the colony."
-msgstr "* Zbuduj baraki i strażnice dookoła kolonii."
+msgstr "* Zbuduj koszary i strażnice dookoła kolonii."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:94
@@ -286,8 +286,8 @@ msgid ""
 "tower, on the eastern frontier. To watch deep inside the enemy territory, "
 "build a tower."
 msgstr ""
-"* Zbuduj wiekszę wojskowe budynki, takie jak bariera, wieża czy placówka na "
-"wschodnim froncie. Żeby zobaczyj dalej do terytorium wroga, zbuduj wieżę."
+"* Zbuduj większe budynki wojskowe, takie jak bariera, wieża czy placówka, na "
+"wschodnim froncie. Żeby widzieć dalej na terytorium wroga, zbuduj wieżę."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:36
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:146
@@ -301,12 +301,10 @@ msgid ""
 "barbarian headquarters stood before), to avoid new settlements of other "
 "tribes in that region."
 msgstr ""
-"* Na koniec zbuduj fortecę na półwyspie<br> (blizko miejsca gdzie kwatera "
-"główna barbarzyńców wcześniej stała), aby się upewnić że inne plemiona nie "
+"* Na koniec zbuduj fortecę na półwyspie<br> (blisko miejsca, gdzie wcześniej "
+"stała kwatera główna barbarzyńców), aby upewnić się, że inne plemiona nie "
 "będą tworzyć osady w tym miejscu."
 
-# Foodstuffs?!
-# rewording (EITHER bread, meat or fish instead of OR and OR...)
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:52
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
@@ -321,15 +319,16 @@ msgid ""
 "wine and all mines need at least rations, which are produced out of bread OR "
 "meat OR fish."
 msgstr ""
-"* Aby wyprodukawać wytrzymujące jedzienie dla naszych górników, musimy "
-"zbudować tawernę. Aby zapewnić ich z dobrymi i silnymi napojami, mielibyśmy "
-"zbudować browar i winnicę.<br> Oczywiście to oznacza, że potrzebujemy więcej "
-"zasobów do przygotowywania jedzenia - takich jak ryba, mięso lub chleb.<br> "
-"Aby je zapewnić, musisz zbudować chatkę rybaka, farmę, młyn i piekarnię.<br> "
-"Możesz też potrzebować chatę myśliwego,<br> chlew, plantację winorośli i "
-"studnie.<br> Zależy na Tobie co zbudujesz.<br> Ale pamiętaj - kopalnie węgla "
-"i żelaza potrzebują piwo i kopalnie marmuru i złota wino, i wszystkie "
-"minimalnie racje, które są produkowane z chleba LUB mięsa LUB ryby."
+"* Aby wyprodukować krzepiącą żywność dla naszych górników, musimy zbudować "
+"tawernę. Aby zaopatrzyć ich w dobre, mocne napoje, moglibyśmy zbudować "
+"browar i winnicę.<br> Oczywiście to oznacza, że potrzebujemy więcej zasobów "
+"do przygotowywania jedzenia - takich jak ryba, mięso lub chleb.<br> Aby je "
+"zapewnić, musisz zbudować chatkę rybaka, farmę, młyn i piekarnię.<br> Możesz "
+"też potrzebować chatę myśliwego,<br> chlew, plantację winorośli i "
+"studnie.<br> Zależy od Ciebie, co zbudujesz.<br> Ale pamiętaj - kopalnie "
+"węgla i żelaza potrzebują piwo, a kopalnie marmuru i złota wino, zaś "
+"wszystkie przynajmniej racje, które są produkowane z chleba LUB mięsa LUB "
+"ryby."
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "02 - An Outpost for Exile"
@@ -349,7 +348,7 @@ msgstr "Nowa wyspa"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:163
 msgid "Amalea comes in..."
-msgstr "Amalea wchodzi..."
+msgstr "Wchodzi Amalea..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Amalea smiles"
@@ -369,11 +368,11 @@ msgstr "Zbuduj kamieniarza i górniczą infrastrukturę"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:10
 msgid "Build up a wood economy"
-msgstr "Wytwórz gospodarkę dzrewną"
+msgstr "Wytwórz gospodarkę drzewną"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:182
 msgid "Command for Attack"
-msgstr "Rozkad do ataku"
+msgstr "Rozkaz do ataku"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:130
 msgid "Dangerous shipparts"
@@ -401,9 +400,9 @@ msgid ""
 "land on a green, mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr ""
-"Wreszcie statek został naprawiony, więc Lutius i jego ludzie wyruszyli w "
+"Wreszcie statek został naprawiony, więc Lucjusz i jego ludzie wyruszyli w "
 "poszukiwaniu dobrego miejsca na nowy początek. Kilka dni później wylądowali "
-"na zielonej, śródziemnomorskiej wyspie, wyglądającej niczym raj. Szczęśliwi, "
+"na zielonej, śródziemnomorskiej wyspie, wyglądającej niczym raj. Szczęśliwi "
 "ruszyli poznawać swój nowy dom."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161
