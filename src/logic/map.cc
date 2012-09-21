@@ -225,7 +225,7 @@ void Map::recalc_default_resources() {
 				const int8_t resr =
 					terr.get_default_resources();
 				if
-					(terr.get_is() & TERRAIN_UNPASSABLE
+					((terr.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
 					m[resr] += 3;
@@ -237,7 +237,7 @@ void Map::recalc_default_resources() {
 				const int8_t resd =
 					terd.get_default_resources();
 				if
-					(terd.get_is() & TERRAIN_UNPASSABLE
+					((terd.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
 					m[resd] += 3;
@@ -252,7 +252,7 @@ void Map::recalc_default_resources() {
 				const int8_t resd =
 					terd.get_default_resources();
 				if
-					(terd.get_is() & TERRAIN_UNPASSABLE
+					((terd.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
 					m[resd] += 3;
@@ -267,7 +267,7 @@ void Map::recalc_default_resources() {
 				const int8_t resr =
 					terr.get_default_resources();
 				if
-					(terr.get_is() & TERRAIN_UNPASSABLE
+					((terr.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
 					m[resr] += 3;
@@ -457,7 +457,7 @@ void Map::set_origin(Coords const new_origin) {
 	for (uint8_t i = 2; i;) { //  Rotate each odd row, then each even.
 		--i;
 		uint16_t k = new_origin.x;
-		if (i and new_origin.y & 1 and ++k == w)
+		if (i and (new_origin.y & 1) and ++k == w)
 			k = 0;
 		uint16_t const nk = w - k;
 		if      (k == nk)
@@ -1421,6 +1421,7 @@ void Map::recalc_nodecaps_pass2(FCoords const f)
 						building = BUILDCAPS_SMALL;
 					else
 						goto end; // can't build buildings next to big objects
+					break;
 				}
 			}
 
@@ -1742,6 +1743,7 @@ void Map::get_neighbour
 	case WALK_W:  get_ln (f, o); break;
 	default:
 		assert(false);
+		break;
 	}
 }
 
@@ -1757,6 +1759,7 @@ void Map::get_neighbour
 	case WALK_W:  get_ln (f, o); break;
 	default:
 		assert(false);
+		break;
 	}
 }
 

@@ -39,7 +39,7 @@ BadRecord_error::BadRecord_error
 	 uint8_t             const _code,
 	 uint8_t             const _expectedcode)
 throw ()
-: Journalfile_error(_filename), code(_code), expectedcode(_expectedcode)
+: Journalfile_error(_filename), offset(0), code(_code), expectedcode(_expectedcode)
 {
 	text  = "Journal file ";
 	text += _filename;
@@ -52,7 +52,7 @@ throw ()
 BadEvent_error::BadEvent_error
 	(std::string const & _filename, uint8_t const _type)
 throw ()
-: Journalfile_error(_filename), type(_type)
+: Journalfile_error(_filename), offset(0), type(_type)
 {
 	text  = "Journal file '";
 	text += _filename;

@@ -122,12 +122,14 @@ void ProductionProgram::parse_ware_type_group
 					 count, count_max);
 			//  fallthrough
 		}
+		/* no break */
 		case '\0':
 		case ' ':
 			group.second = count;
 			return;
 		case ',':
 			++parameters;
+			break;
 		}
 	}
 }
@@ -279,6 +281,8 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 	} catch (_wexception const & e) {
 		throw game_data_error("economy: %s", e.what());
 	}
+
+	return 0; // will never be reached
 }
 
 
@@ -295,6 +299,8 @@ ProductionProgram::ActReturn::Condition * create_site_condition
 	} catch (_wexception const & e) {
 		throw game_data_error("site: %s", e.what());
 	}
+
+	return 0; // will never be reached
 }
 
 
@@ -311,6 +317,8 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 	} catch (_wexception const & e) {
 		throw game_data_error("workers: %s", e.what());
 	}
+
+	return 0; // will never be reached
 }
 
 
@@ -334,6 +342,8 @@ ProductionProgram::ActReturn::create_condition
 	} catch (_wexception const & e) {
 		throw game_data_error(_("invalid condition: %s"), e.what());
 	}
+
+	return 0; // will never be reached
 }
 
 
@@ -565,6 +575,7 @@ void ProductionProgram::ActCall::execute
 		ps.top_state().phase = None;
 		ps.m_program_timer   = true;
 		ps.m_program_time    = ps.schedule_act(game, 10);
+		break;
 	}
 }
 
@@ -685,7 +696,8 @@ void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) 
 			}
 		}
 		default:
-			assert(false);;
+			assert(false);
+			break;
 	}
 }
 

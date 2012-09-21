@@ -99,6 +99,7 @@ void GameViewSDL::draw_field
 			break;
 		default:
 			assert(false);
+			break;
 		}
 		sdlsurf->unset_subwin();
 	}

@@ -487,6 +487,7 @@ bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 		case SDLK_KP2:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_DOWN:
 			selected = selection_index() + 1;
 			if (selected < size())
@@ -500,6 +501,7 @@ bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 		case SDLK_KP8:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_UP:
 			selected = selection_index();
 			if (selected > 0)

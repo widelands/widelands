@@ -63,7 +63,7 @@ using boost::format;
 
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(NetHost * const _h) : h(_h) {}
+	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(0), m_cur_wincondition(0) {}
 
 	virtual void setScenario(bool is_scenario) {h->setScenario(is_scenario);}
 
@@ -139,6 +139,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				newstate = PlayerSettings::stateClosed;
 				break;
 			} // else fall through
+			/* no break */
 		case PlayerSettings::stateComputer:
 			{
 				Computer_Player::ImplementationVector const & impls =
@@ -309,7 +310,7 @@ private:
 };
 
 struct HostChatProvider : public ChatProvider {
-	HostChatProvider(NetHost * const _h) : h(_h) {}
+	HostChatProvider(NetHost * const _h) : h(_h), kickClient(0) {}
 
 	void send(std::string const & msg) {
 		ChatMessage c;
@@ -578,7 +579,26 @@ struct NetHostImpl {
 	md5_checksum syncreport;
 	bool syncreport_arrived;
 
-	NetHostImpl(NetHost * const h) : chat(h), hp(h), npsb(&hp), lastpauseping(0) {
+	NetHostImpl(NetHost * const h) :
+		localdesiredspeed(0),
+		chat(h),
+		hp(h),
+		npsb(&hp),
+		promoter(0),
+		svsock(0),
+		sockset(0),
+		game(0),
+		pseudo_networktime(0),
+		last_heartbeat(0),
+		committed_networktime(0),
+		waiting(false),
+		lastframe(0),
+		networkspeed(0),
+		lastpauseping(0),
+		syncreport_pending(false),
+		syncreport_time(0),
+		syncreport_arrived(false)
+	{
 		dedicated_start = false;
 	}
 };

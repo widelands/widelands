@@ -436,7 +436,7 @@ private:
 };
 
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
-	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} ///< For savegame loading
+	Cmd_Destroy_Map_Object() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object &);
 	virtual void execute (Game &);
 
@@ -450,7 +450,7 @@ private:
 };
 
 struct Cmd_Act : public GameLogicCommand {
-	Cmd_Act() : GameLogicCommand(0) {} ///< For savegame loading
+	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
 	Cmd_Act (int32_t t, Map_Object &, int32_t a);
 
 	virtual void execute (Game &);

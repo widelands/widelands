@@ -261,6 +261,7 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_DELETE:
 			archive_or_restore();
 			return true;

@@ -408,6 +408,8 @@ uint32_t * MapGenerator::generate_random_value_map
 		delete[] values;
 		throw;
 	}
+
+	return 0; // Should not be reached
 }
 
 

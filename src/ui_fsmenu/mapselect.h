@@ -61,7 +61,7 @@ struct MapData {
 	bool scenario; // is this a scenario we should list?
 
 	MapData()
-		: width(0), height(0), nrplayers(0) {}
+		: width(0), height(0), nrplayers(0), scenario(false) {}
 };
 
 /**

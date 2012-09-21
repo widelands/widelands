@@ -687,7 +687,7 @@ struct RSPairStruct {
 	uint32_t pairid;
 	int32_t nexttimer;
 
-	RSPairStruct() : pairid(0) {}
+	RSPairStruct() : pairid(0), nexttimer(0) {}
 };
 
 /**

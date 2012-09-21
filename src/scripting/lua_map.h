@@ -692,9 +692,9 @@ class L_PlayerSlot : public L_MapModuleClass {
 public:
 	LUNA_CLASS_HEAD(L_PlayerSlot);
 
-	L_PlayerSlot() {}
+	L_PlayerSlot() : m_plr(0) {}
 	L_PlayerSlot(Widelands::Player_Number plr) : m_plr(plr) {}
-	L_PlayerSlot(lua_State * L) {
+	L_PlayerSlot(lua_State * L) : m_plr(0) {
 		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
 	}
 	virtual ~L_PlayerSlot() {}

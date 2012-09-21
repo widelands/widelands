@@ -73,7 +73,13 @@ struct DedicatedMapInfos {
  * Think of it as the Model in MVC.
  */
 struct GameSettings {
-	GameSettings() : savegame(false) {}
+	GameSettings() :
+		playernum(0),
+		usernum(0),
+		scenario(false),
+		multiplayer(false),
+		savegame(false)
+	{}
 
 	/// Number of player position
 	int16_t playernum;

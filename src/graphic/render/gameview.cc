@@ -396,7 +396,7 @@ void GameView::rendermap
 								uint32_t anim;
 								try {
 									anim = csinf->becomes->get_animation("build");
-								} catch (Map_Object_Descr::Animation_Nonexistent) {
+								} catch (Map_Object_Descr::Animation_Nonexistent & e) {
 									try {
 										anim = csinf->becomes->get_animation("unoccupied");
 									} catch (Map_Object_Descr::Animation_Nonexistent) {
@@ -425,7 +425,7 @@ void GameView::rendermap
 									uint32_t a;
 									try {
 										a = csinf->was->get_animation("unoccupied");
-									} catch (Map_Object_Descr::Animation_Nonexistent) {
+									} catch (Map_Object_Descr::Animation_Nonexistent & e) {
 										a = csinf->was->get_animation("idle");
 									}
 									drawanimrect
@@ -438,7 +438,7 @@ void GameView::rendermap
 								uint32_t picid;
 								try {
 									picid = building->get_animation("unoccupied");
-								} catch (Map_Object_Descr::Animation_Nonexistent) {
+								} catch (Map_Object_Descr::Animation_Nonexistent & e) {
 									picid = building->get_animation("idle");
 								}
 								drawanim(f_pos, picid, 0, owner);
@@ -1089,7 +1089,7 @@ inline static uint32_t calc_minimap_color
 		// * winterland -> orange
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if (flags & MiniMap::Roads and dynamic_cast<Road const *>(immovable))
+			if ((flags & MiniMap::Roads) and dynamic_cast<Road const *>(immovable))
 			{
 				if (!(flags & MiniMap::Owner) && !strcmp(egbase.map().get_world_name(), "winterland"))
 						pixelcolor = blend_color(format, pixelcolor, 255, 127, 0);
@@ -1098,9 +1098,9 @@ inline static uint32_t calc_minimap_color
 			}
 
 			if
-				((flags & MiniMap::Flags and dynamic_cast<Flag const *>(immovable))
+				(((flags & MiniMap::Flags) and dynamic_cast<Flag const *>(immovable))
 				 or
-				 (flags & MiniMap::Bldns
+				 ((flags & MiniMap::Bldns)
 				  and
 				  dynamic_cast<Widelands::Building const *>(immovable)))
 			{
@@ -1340,7 +1340,8 @@ void GameView::draw_minimap
 			 w, egbase, player, rc2, viewpt, framept, flags);
 		break;
 	default:
-		assert (false);
+		assert(false);
+		break;
 	}
 
 	SDL_UnlockSurface(surface);

@@ -470,8 +470,9 @@ int32_t Section::get_int(char const * const name, int32_t const def)
 		return v->get_int();
 	} catch (std::exception const & e) {
 		m_profile->error("%s", e.what());
-		return def;
 	}
+
+	return def;
 }
 
 
@@ -492,16 +493,16 @@ uint32_t Section::get_natural(char const * const name, uint32_t const def)
 
 uint32_t Section::get_positive(char const * const name, uint32_t const def)
 {
-	if (Value * const v = get_val(name))
+	if (Value * const v = get_val(name)) {
 		try {
 			return v->get_positive();
 		} catch (std::exception const & e) {
 			m_profile->error("%s", e.what());
 			return def;
 		}
-	else
-		return def;
+	}
 
+	return def;
 }
 
 
@@ -524,8 +525,9 @@ bool Section::get_bool(char const * const name, bool const def)
 		return v->get_bool();
 	} catch (std::exception const & e) {
 		m_profile->error("%s", e.what());
-		return def;
 	}
+
+	return def;
 }
 
 /**
@@ -1043,6 +1045,7 @@ void Profile::write
 						break;
 					default:
 						tempstr += *it;
+						break;
 					}
 
 				if (multiline)

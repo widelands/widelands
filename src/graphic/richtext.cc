@@ -218,7 +218,16 @@ struct TextBuilder {
 	/// parts of a line onto the same text baseline).
 	std::vector<Elt> elements;
 
-	TextBuilder(RichTextImpl & _rti) : rti(_rti) {}
+	TextBuilder(RichTextImpl & _rti) :
+		rti(_rti),
+		images_width(0),
+		images_height(0),
+		maxwidth(0),
+		text_y(0),
+		linewidth(0),
+		spacewidth(0),
+		linespacing(0)
+	{}
 
 	/**
 	 * Update data that is specific to the current @ref textblock.

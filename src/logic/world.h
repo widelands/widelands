@@ -45,7 +45,7 @@ struct World_Descr_Header {
 
 struct Resource_Descr : boost::noncopyable {
 	typedef Resource_Index Index;
-	Resource_Descr() {}
+	Resource_Descr() : m_is_detectable(true), m_max_amount(0) {}
 	~Resource_Descr() {}
 
 	void parse(Section &, std::string const &);

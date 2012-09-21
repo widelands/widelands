@@ -17,6 +17,7 @@
  *
  */
 
+#ifdef USE_OPENGL
 #ifndef GAMEVIEW_OPENGL_H_
 #define GAMEVIEW_OPENGL_H_
 
@@ -52,3 +53,4 @@ protected:
 
 
 #endif /* GAMEVIEW_OPENGL_H_ */
+#endif /* USE_OPENGL */

@@ -270,6 +270,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_DELETE:
 			if (d->cursor_pos < d->text.size()) {
 				d->erase_bytes(d->cursor_pos, d->next_char(d->cursor_pos));
@@ -289,6 +290,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_LEFT: {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d->prev_char(d->cursor_pos);
@@ -312,6 +314,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_RIGHT:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d->next_char(d->cursor_pos);
@@ -330,6 +333,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_DOWN:
 			if (d->cursor_pos < d->text.size()) {
 				d->refresh_ww();
@@ -359,6 +363,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_UP:
 			if (d->cursor_pos > 0) {
 				d->refresh_ww();
@@ -386,6 +391,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(0);
@@ -404,6 +410,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(d->text.size());

@@ -196,7 +196,12 @@ protected:
 		Coords coord;
 		/*@}*/
 
-		State() : coord(Coords::Null()) {}
+		State() :
+			program(0),
+			ip(0),
+			phase(0),
+			flags(0),
+			coord(Coords::Null()) {}
 	};
 
 	Request & request_worker(Ware_Index);

@@ -834,12 +834,13 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
  */
 PictureID Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
 {
+#ifdef USE_OPENGL
 	if (g_opengl)
 	{
-#ifdef USE_OPENGL
 		return PictureID(new GLPictureTexture(surf));
+	} else
 #endif
-	} else {
+	{
 		SDL_Surface * surface;
 		if (alpha)
 			surface = SDL_DisplayFormatAlpha(surf);

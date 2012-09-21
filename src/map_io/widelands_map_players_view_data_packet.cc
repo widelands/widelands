@@ -452,7 +452,7 @@ void Map_Players_View_Data_Packet::Read
 					//  his information about the node from file.
 					try {
 						f_player_field.time_node_last_unseen = unseen_times_file.Unsigned32();
-					} catch (const FileRead::File_Boundary_Exceeded) {
+					} catch (const FileRead::File_Boundary_Exceeded & e) {
 						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
@@ -464,7 +464,7 @@ void Map_Players_View_Data_Packet::Read
 					}
 
 					try {owner = owners_file.Unsigned8();}
-					catch (const FileRead::File_Boundary_Exceeded) {
+					catch (const FileRead::File_Boundary_Exceeded & e) {
 						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
@@ -513,8 +513,7 @@ void Map_Players_View_Data_Packet::Read
 
 					//  map_object_descr
 					const Map_Object_Descr * map_object_descr;
-					if (const BaseImmovable * base_immovable = f.field->get_immovable())
-					{
+					if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
 						if (Road::IsRoadDescr(map_object_descr))
 							map_object_descr = 0;
@@ -526,6 +525,7 @@ void Map_Players_View_Data_Packet::Read
 								map_object_descr = 0;
 					} else map_object_descr = 0;
 					f_player_field.map_object_descr[TCoords<>::None] = map_object_descr;
+					break;
 				}
 
 				//  triangles
@@ -539,7 +539,7 @@ void Map_Players_View_Data_Packet::Read
 					//  The player has seen the D triangle but does not see it now.
 					//  Load his information about the triangle from file.
 					try {f_player_field.terrains.d = terrains_file.get();}
-					catch (const FileRead::File_Boundary_Exceeded) {
+					catch (const FileRead::File_Boundary_Exceeded & e) {
 						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\": node (%i, %i) t = D: unexpected end of file "
@@ -564,7 +564,7 @@ void Map_Players_View_Data_Packet::Read
 					//  The player has seen the R triangle but does not see it now.
 					//  Load his information about the triangle from file.
 					try {f_player_field.terrains.r = terrains_file.get();}
-					catch (const FileRead::File_Boundary_Exceeded) {
+					catch (const FileRead::File_Boundary_Exceeded & e) {
 						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\": node (%i, %i) t = R: unexpected end of file "
@@ -587,7 +587,7 @@ void Map_Players_View_Data_Packet::Read
 						//  The player has seen the SouthWest edge but does not see
 						//  it now. Load his information about this edge from file.
 						try {roads  = roads_file.get() << Road_SouthWest;}
-						catch (const FileRead::File_Boundary_Exceeded) {
+						catch (const FileRead::File_Boundary_Exceeded & e) {
 							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i): unexpected end of file while "
@@ -600,7 +600,7 @@ void Map_Players_View_Data_Packet::Read
 						//  The player has seen the SouthEast edge but does not see
 						//  it now. Load his information about this edge from file.
 						try {roads |= roads_file.get() << Road_SouthEast;}
-						catch (const FileRead::File_Boundary_Exceeded) {
+						catch (const FileRead::File_Boundary_Exceeded & e) {
 							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i): unexpected end of file while "
@@ -613,7 +613,7 @@ void Map_Players_View_Data_Packet::Read
 						//  The player has seen the      East edge but does not see
 						//  it now. Load his information about this edge from file.
 						try {roads |= roads_file.get() << Road_East;}
-						catch (const FileRead::File_Boundary_Exceeded) {
+						catch (const FileRead::File_Boundary_Exceeded & e) {
 							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i): unexpected end of file while "
@@ -630,14 +630,14 @@ void Map_Players_View_Data_Packet::Read
 				//  geologic survey
 				try {
 					if
-						(f_everseen & bl_everseen & br_everseen
+						((f_everseen & bl_everseen & br_everseen)
 						 and
 						 surveys_file.get())
 					{
 						try {
 							f_player_field.resource_amounts.d =
 								survey_amounts_file.get();
-						} catch (const FileRead::File_Boundary_Exceeded) {
+						} catch (const FileRead::File_Boundary_Exceeded & e) {
 							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i) t = D: unexpected end of file "
@@ -647,7 +647,7 @@ void Map_Players_View_Data_Packet::Read
 						try {
 							f_player_field.time_triangle_last_surveyed[TCoords<>::D] =
 								survey_times_file.Unsigned32();
-						} catch (const FileRead::File_Boundary_Exceeded) {
+						} catch (const FileRead::File_Boundary_Exceeded & e) {
 							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\":%lu: node (%i, %i) t = D: unexpected end of "
@@ -658,7 +658,7 @@ void Map_Players_View_Data_Packet::Read
 								 f.x, f.y);
 						}
 					}
-				} catch (const FileRead::File_Boundary_Exceeded) {
+				} catch (const FileRead::File_Boundary_Exceeded & e) {
 					throw game_data_error
 						("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": "
 						 "node (%i, %i) t = D: unexpected end of file while reading "
@@ -667,14 +667,14 @@ void Map_Players_View_Data_Packet::Read
 				}
 				try {
 					if
-						(f_everseen & br_everseen &  r_everseen
+						((f_everseen & br_everseen &  r_everseen)
 						 and
 						 surveys_file.get())
 					{
 						try {
 							f_player_field.resource_amounts.r =
 								survey_amounts_file.get();
-						} catch (const FileRead::File_Boundary_Exceeded) {
+						} catch (const FileRead::File_Boundary_Exceeded & e) {
 							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i) t = R: unexpected end of file "
@@ -684,7 +684,7 @@ void Map_Players_View_Data_Packet::Read
 						try {
 							f_player_field.time_triangle_last_surveyed[TCoords<>::R] =
 								survey_times_file.Unsigned32();
-						} catch (const FileRead::File_Boundary_Exceeded) {
+						} catch (const FileRead::File_Boundary_Exceeded & e) {
 							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\":%lu: node (%i, %i) t = R: unexpected end of "
@@ -695,7 +695,7 @@ void Map_Players_View_Data_Packet::Read
 								 f.x, f.y);
 						}
 					}
-				} catch (const FileRead::File_Boundary_Exceeded) {
+				} catch (const FileRead::File_Boundary_Exceeded & e) {
 					throw game_data_error
 						("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": "
 						 "node (%i, %i) t = R: unexpected end of file while reading "

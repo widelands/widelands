@@ -501,7 +501,9 @@ Load/save support
 
 #define WAREINSTANCE_SAVEGAME_VERSION 1
 
-WareInstance::Loader::Loader()
+WareInstance::Loader::Loader() :
+	m_location(0),
+	m_transfer_nextstep(0)
 {
 }
 
@@ -617,6 +619,8 @@ Map_Object::Loader * WareInstance::load
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());
 	}
+
+	return 0; // Should never be reached
 }
 
 }

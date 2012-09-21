@@ -159,7 +159,7 @@ public:
 
 	L_Message(uint8_t, Widelands::Message_Id);
 	L_Message() : m_plr(0), m_mid(0) {}
-	L_Message(lua_State * L) {
+	L_Message(lua_State * L) : m_plr(0) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 

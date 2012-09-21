@@ -387,7 +387,7 @@ void FieldActionWindow::add_buttons_auto()
 				if
 					(!building
 					 ||
-					 building->get_playercaps() & Building::PCap_Bulldoze)
+					 (building->get_playercaps() & Building::PCap_Bulldoze))
 					add_button
 						(buildbox, "rip_flag",
 						 pic_ripflag,
@@ -975,7 +975,7 @@ void show_field_action
 		w.add_buttons_road
 			(target != ibase->get_build_road_start()
 			 and
-			 player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG);
+			 (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 		return w.init();
 	}
 

@@ -260,7 +260,7 @@ void DismantleSite::draw
 	uint32_t anim;
 	try {
 		anim = m_building->get_animation("unoccupied");
-	} catch (Map_Object_Descr::Animation_Nonexistent) {
+	} catch (Map_Object_Descr::Animation_Nonexistent & e) {
 		anim = m_building->get_animation("idle");
 	}
 	uint32_t w, h;

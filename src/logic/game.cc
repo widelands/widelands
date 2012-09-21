@@ -262,6 +262,8 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 		m_ctrl = 0;
 		throw;
 	}
+
+	return false;
 }
 
 
@@ -421,6 +423,8 @@ bool Game::run_load_game(std::string filename) {
 		m_ctrl = 0;
 		throw;
 	}
+
+	return false;
 }
 
 /**

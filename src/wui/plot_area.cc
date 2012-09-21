@@ -59,6 +59,7 @@ spacing(5),
 space_at_bottom(15),
 space_at_right(5),
 m_time    (TIME_GAME),
+m_sample_rate(0),
 m_plotmode(PLOTMODE_ABSOLUTE),
 m_game_time_id(0)
 {}

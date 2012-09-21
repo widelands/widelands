@@ -418,6 +418,7 @@ void Main_Menu_New_Random_Map::button_clicked(Main_Menu_New_Random_Map::ButtonID
 		if (m_res_amount == m_res_amounts.size())
 			m_res_amount = 0;
 		m_res->set_title(m_res_amounts[m_res_amount].c_str());
+		break;
 	}
 
 	char buffer[200];
