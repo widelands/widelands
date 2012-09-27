@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-05-25 18:55+0000\n"
-"PO-Revision-Date: 2012-07-11 15:41+0000\n"
-"Last-Translator: Audiger Jeremy <Unknown>\n"
+"PO-Revision-Date: 2012-09-26 10:19+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-12 04:36+0000\n"
-"X-Generator: Launchpad (build 15593)\n"
+"X-Launchpad-Export-Date: 2012-09-27 04:32+0000\n"
+"X-Generator: Launchpad (build 16033)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -307,6 +307,8 @@ msgstr ""
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
 msgstr ""
+"Une fougeraie peut produire une gerbe de chaumes et de roseaux en %s en "
+"moyenne."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -1019,7 +1021,7 @@ msgstr "Démanteler le site"
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Démonter les sites de production:"
 
 #: ../../tribes/barbarians/conf:226
 msgid "Donjon"
@@ -2347,7 +2349,7 @@ msgstr "Au repos"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Ferners"
-msgstr ""
+msgstr "Slogan de la guilde des Agriculteurs"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Small Tower"
@@ -2702,10 +2704,16 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ship's sails."
 msgstr ""
+"La Fougeraie cultive des roseaux qui servent à deux buts différents pour la "
+"tribu Barbare.<br>C'est le matériau traditionnel des toitures, et il est "
+"tissé en une étoffe extrêmement résistante qu'ils utilisent pour les voiles "
+"de leurs bateaux."
 
 #: ../../tribes/barbarians/fernery/help.lua:26
 msgid "The Fernery's output will only go to construction sites that need it."
 msgstr ""
+"La production des Fougeraies ira seulement aux sites de construction en "
+"ayant besoin."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher's Hut needs water full of fish in the vicinity."
