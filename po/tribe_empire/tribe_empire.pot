@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-05-25 18:55+0000\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -798,6 +798,11 @@ msgid ""
 "Produce lance"
 msgstr ""
 
+#: ../../tribes/empire/inn/conf:22
+msgid ""
+"Produce meal"
+msgstr ""
+
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid ""
 "Produce pick"
@@ -806,6 +811,11 @@ msgstr ""
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid ""
 "Produce plate armour"
+msgstr ""
+
+#: ../../tribes/empire/inn/conf:21
+msgid ""
+"Produce ration"
 msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:43
@@ -1481,7 +1491,7 @@ msgstr ""
 #: ../../tribes/empire/foresters_house/conf:16
 #: ../../tribes/empire/goldmine/conf:22
 #: ../../tribes/empire/hunters_house/conf:16
-#: ../../tribes/empire/inn/conf:20
+#: ../../tribes/empire/inn/conf:23
 #: ../../tribes/empire/lumberjacks_house/conf:16
 #: ../../tribes/empire/marblemine/conf:26
 #: ../../tribes/empire/mill/conf:20
