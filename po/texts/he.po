@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-05-25 18:55+0000\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
 "PO-Revision-Date: 2010-08-30 23:34+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-26 04:35+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:34+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -395,11 +395,11 @@ msgid ""
 "can be found at www.widelands.org."
 msgstr ""
 
-#: ../../txts/developers:159
+#: ../../txts/developers:161
 msgid "Atlantean"
 msgstr ""
 
-#: ../../txts/developers:149
+#: ../../txts/developers:151
 msgid "Barbarian"
 msgstr "ברבר"
 
@@ -424,7 +424,7 @@ msgstr ""
 msgid "CTRL+S   Save Map"
 msgstr ""
 
-#: ../../txts/developers:146
+#: ../../txts/developers:148
 msgid "Campaign Story"
 msgstr ""
 
@@ -456,7 +456,7 @@ msgstr ""
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr ""
 
-#: ../../txts/developers:174
+#: ../../txts/developers:176
 msgid "Czech"
 msgstr "צ'כית"
 
@@ -464,7 +464,7 @@ msgstr "צ'כית"
 msgid "DELETE      Archive the current message"
 msgstr ""
 
-#: ../../txts/developers:181
+#: ../../txts/developers:183
 msgid "Dansk"
 msgstr "דני"
 
@@ -472,11 +472,11 @@ msgstr "דני"
 msgid "Development"
 msgstr ""
 
-#: ../../txts/developers:316
+#: ../../txts/developers:318
 msgid "Documentation, Help and Wiki"
 msgstr ""
 
-#: ../../txts/developers:187
+#: ../../txts/developers:189
 msgid "Dutch"
 msgstr "הולנדית"
 
@@ -488,7 +488,7 @@ msgstr ""
 msgid "Elders"
 msgstr ""
 
-#: ../../txts/developers:155
+#: ../../txts/developers:157
 msgid "Empire"
 msgstr "אימפריה"
 
@@ -512,15 +512,15 @@ msgstr ""
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../txts/developers:194
+#: ../../txts/developers:196
 msgid "Finnish"
 msgstr "פינית"
 
-#: ../../txts/developers:331
+#: ../../txts/developers:333
 msgid "Former elders"
 msgstr ""
 
-#: ../../txts/developers:200
+#: ../../txts/developers:202
 msgid "French"
 msgstr "צרפתית"
 
@@ -538,7 +538,7 @@ msgid ""
 "and modification"
 msgstr "הרישיון הציבורי הכללי של GNU תניות ותנאים להעתקה, הפצה ושינוי"
 
-#: ../../txts/developers:207
+#: ../../txts/developers:209
 msgid "Galician"
 msgstr "גליציאנית"
 
@@ -546,16 +546,16 @@ msgstr "גליציאנית"
 msgid "General game control"
 msgstr ""
 
-#: ../../txts/developers:212
+#: ../../txts/developers:214
 msgid "German"
 msgstr "גרמנית"
 
-#: ../../txts/developers:80
+#: ../../txts/developers:82
 msgid "Graphicians"
 msgstr ""
 
 #: ../../txts/developers:18
-#: ../../txts/developers:342
+#: ../../txts/developers:344
 msgid "Graphics"
 msgstr "גרפיקה"
 
@@ -563,7 +563,7 @@ msgstr "גרפיקה"
 msgid "H        Toggles main menu"
 msgstr ""
 
-#: ../../txts/developers:224
+#: ../../txts/developers:226
 msgid "Hebrew"
 msgstr "עברית"
 
@@ -583,11 +583,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr ""
 
 #: ../../txts/developers:23
-#: ../../txts/developers:335
+#: ../../txts/developers:337
 msgid "Homepage"
 msgstr "דף הבית"
 
-#: ../../txts/developers:307
+#: ../../txts/developers:309
 msgid "Homepage Coders"
 msgstr ""
 
@@ -595,7 +595,7 @@ msgstr ""
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "איך להחיל תנאים אלה על התוכניות החדשות שלך"
 
-#: ../../txts/developers:229
+#: ../../txts/developers:231
 msgid "Hungarian"
 msgstr "הונגרית"
 
@@ -693,7 +693,7 @@ msgstr ""
 "האם הוא או היא מוכנים להפיץ תוכנה באמצעות מערכת אחרת כלשהי והרישיון אינו "
 "יכול לכפות בחירה זו."
 
-#: ../../txts/developers:234
+#: ../../txts/developers:236
 msgid "Italian"
 msgstr "איטלקית"
 
@@ -722,7 +722,7 @@ msgid ""
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
 
-#: ../../txts/developers:273
+#: ../../txts/developers:275
 msgid "Linux Distributions"
 msgstr ""
 
@@ -741,7 +741,7 @@ msgid ""
 "messages."
 msgstr ""
 
-#: ../../txts/developers:132
+#: ../../txts/developers:134
 msgid "Maps and Missions"
 msgstr ""
 
@@ -749,7 +749,7 @@ msgstr ""
 msgid "Miners will only work if supplied with food."
 msgstr ""
 
-#: ../../txts/developers:110
+#: ../../txts/developers:112
 msgid "Musicians"
 msgstr "מוזיקאים"
 
@@ -757,17 +757,23 @@ msgstr "מוזיקאים"
 msgid "N               Toggle messages ('news')"
 msgstr ""
 
-#: ../../txts/developers:169
+#: ../../txts/developers:171
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
+msgstr ""
+
+#: ../../txts/tips/general_game.tip:54
+msgid ""
+"New soldiers are recruted in the headquarters or a warehouse if all needed "
+"tools are available. Trainingsites are for improving their abilities."
 msgstr ""
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
 msgstr "העדר אחריות"
 
-#: ../../txts/developers:295
+#: ../../txts/developers:297
 msgid "Non Unix Distributions"
 msgstr ""
 
@@ -797,11 +803,11 @@ msgstr ""
 msgid "Online Help"
 msgstr ""
 
-#: ../../txts/developers:360
+#: ../../txts/developers:362
 msgid "Other"
 msgstr ""
 
-#: ../../txts/developers:284
+#: ../../txts/developers:286
 msgid "Other Unix Distributions"
 msgstr ""
 
@@ -827,7 +833,7 @@ msgstr ""
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr ""
 
-#: ../../txts/developers:269
+#: ../../txts/developers:271
 msgid "Packagers"
 msgstr ""
 
@@ -839,7 +845,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/developers:239
+#: ../../txts/developers:241
 msgid "Polish"
 msgstr "פולנית"
 
@@ -893,7 +899,7 @@ msgstr ""
 msgid "Reporting Bugs"
 msgstr ""
 
-#: ../../txts/developers:247
+#: ../../txts/developers:249
 msgid "Russian"
 msgstr "רוסית"
 
@@ -918,13 +924,13 @@ msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
 
-#: ../../txts/developers:170
+#: ../../txts/developers:172
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 
-#: ../../txts/developers:252
+#: ../../txts/developers:254
 msgid "Slovak"
 msgstr "סלובקית"
 
@@ -937,15 +943,15 @@ msgid ""
 msgstr ""
 
 #: ../../txts/developers:28
-#: ../../txts/developers:348
+#: ../../txts/developers:350
 msgid "Sound"
 msgstr ""
 
-#: ../../txts/developers:122
+#: ../../txts/developers:124
 msgid "Sound Effects"
 msgstr ""
 
-#: ../../txts/developers:257
+#: ../../txts/developers:259
 msgid "Spanish"
 msgstr "ספרדית"
 
@@ -959,7 +965,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ../../txts/developers:262
+#: ../../txts/developers:264
 msgid "Swedish"
 msgstr "שוודית"
 
@@ -1177,11 +1183,11 @@ msgid ""
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
 
-#: ../../txts/developers:353
+#: ../../txts/developers:355
 msgid "Translation"
 msgstr "תרגום"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:168
 msgid "Translators"
 msgstr "מתרגמים"
 
