@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-02-21 22:30+0000\n"
+"PO-Revision-Date: 2012-10-06 11:37+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
+"X-Launchpad-Export-Date: 2012-10-07 04:33+0000\n"
 "X-Generator: Launchpad (build 16061)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
@@ -23,7 +23,7 @@ msgstr "%i Bäume."
 
 #: ../../scripting/win_condition_texts.lua:54
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr ""
+msgstr "%s %s %i%% des Landes (%i von %i)."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
@@ -67,6 +67,10 @@ msgid ""
 "least 20 minutes or the one with the most territory after 4 hours, whichever "
 "comes first."
 msgstr ""
+"Jeder Spieler und jedes Team versucht mehr als die Hälfte der Landfläche der "
+"Karte einzunehmen. Ziel der Spieler bzw. der Teams ist es, für 20 Minuten am "
+"Stück mindestens die Hälfte der gesamten Landfläche zu halten, bzw. nach "
+"Ablauf von 4 Spielstunden die größte Landfläche zu besitzen."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -117,7 +121,7 @@ msgstr "Landherr"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:13
 msgid "Territorial Time"
-msgstr ""
+msgstr "Landherr (Zeit)"
 
 #: ../../scripting/win_condition_texts.lua:27
 msgid "The game will end in %i minutes."
@@ -207,7 +211,7 @@ msgstr "Du hast dieses Spiel verloren!"
 
 #: ../../scripting/win_condition_texts.lua:53
 msgid "game will end in %i minutes."
-msgstr ""
+msgstr "Das Spiel wird in %i Minuten enden."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-08-29 18:54+0000\n"
+"PO-Revision-Date: 2012-10-06 11:30+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:37+0000\n"
+"X-Launchpad-Export-Date: 2012-10-07 04:33+0000\n"
 "X-Generator: Launchpad (build 16061)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4485,7 +4485,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:406
 msgid "Unexpected packet"
-msgstr ""
+msgstr "Unerwartetes Paket"
 
 #: ../../src/network/internet_gaming.cc:408
 #, c-format
@@ -4512,12 +4512,12 @@ msgstr "Der Unterschied der Serverzeit zur lokalen Zeit beträgt %i Sekunden."
 
 #: ../../src/network/internet_gaming.cc:450
 msgid "Invalid message type"
-msgstr ""
+msgstr "Ungültige Nachrichten-Art"
 
 #: ../../src/network/internet_gaming.cc:450
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Ungültige Chat-Nachrichten-Art \"%s\""
 
 #: ../../src/network/internet_gaming.cc:527
 msgid "ERROR: "
@@ -4545,12 +4545,14 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:772
 msgid "Conversion error"
-msgstr ""
+msgstr "Umwandlungsfehler"
 
 #: ../../src/network/internet_gaming.cc:773
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
 msgstr ""
+"Es ist ein Fehler bei der Umwandlung eines std::string zu bool aufgetreten. "
+"Der String war \"%s\""
 
 #: ../../src/network/internet_gaming.cc:788
 msgid "<unknown>"
