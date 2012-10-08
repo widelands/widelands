@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-04-29 13:44+0000\n"
-"Last-Translator: wl-zocker <Unknown>\n"
+"PO-Revision-Date: 2012-10-07 15:03+0000\n"
+"Last-Translator: Das MC <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
+"X-Launchpad-Export-Date: 2012-10-08 05:09+0000\n"
 "X-Generator: Launchpad (build 16061)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -46,7 +46,7 @@ msgid ""
 "\"A new Warriors Axe brings forth the best in its wielder – or the worst in "
 "its maker.\""
 msgstr ""
-"„Eine neue Streitaxt bring ihrem Träger das Beste -  oder ihrem Schmied das "
+"„Eine neue Streitaxt bringt ihrem Träger das Beste - oder ihrem Schmied das "
 "Schlimmste.“"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:12
@@ -177,7 +177,7 @@ msgstr "\"Was soll das heißen, mein Fisch sei nicht frisch?!\""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr "% s geht immer an den% s. Es hat keine andere Verwendung."
+msgstr "%s geht immer an den %s. Es hat keine andere Verwendung."
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -329,7 +329,7 @@ msgstr ""
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
 msgstr ""
-"Ein Reethof kann ein Bündel Reet durchschnittlich alle % s produzieren."
+"Ein Reethof kann ein Bündel Reet durchschnittlich alle %s produzieren."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -786,7 +786,7 @@ msgstr "Kohle"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr "Kohle aus  einer Kohlenmine oder einer Köhlerei"
+msgstr "Kohle aus  einer Kohlemine oder einer Köhlerei"
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:212
@@ -889,7 +889,7 @@ msgstr "Schlägt Granitstücke aus herumliegenden Felsen."
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:37
 msgid "Deep Coal Mine"
-msgstr "Tiefe Kohlenmine"
+msgstr "Tiefe Kohlemine"
 
 #: ../../tribes/barbarians/conf:217
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -909,7 +909,7 @@ msgstr "Tiefe Eisenmine"
 #: ../../tribes/barbarians/deep_coalmine/help.lua:48
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 msgid "Deeper Coal Mine"
-msgstr "Tiefste Kohlenmine"
+msgstr "Tiefste Kohlemine"
 
 #: ../../tribes/barbarians/conf:216
 #: ../../tribes/barbarians/deep_goldmine/help.lua:44
