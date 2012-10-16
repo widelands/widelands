@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2010-06-06 20:59+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2012-10-15 13:26+0000\n"
+"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:36+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-10-16 04:33+0000\n"
+"X-Generator: Launchpad (build 16137)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -43,15 +43,15 @@ msgstr "זירה"
 
 #: ../../tribes/empire/conf:58
 msgid "Armour"
-msgstr ""
+msgstr "נשק"
 
 #: ../../tribes/empire/conf:189
 msgid "Armour Smithy"
-msgstr ""
+msgstr "בית מלאכת נשק"
 
 #: ../../tribes/empire/conf:110
 msgid "Armoursmith"
-msgstr ""
+msgstr "מרכיב נשק"
 
 #: ../../tribes/empire/conf:33
 msgid "Ashes"
@@ -71,7 +71,7 @@ msgstr "מאפיה"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "אופה לחם לפועלים."
 
 #: ../../tribes/empire/conf:208
 msgid "Barracks"
@@ -133,15 +133,15 @@ msgstr "בנאי"
 
 #: ../../tribes/empire/conf:114
 msgid "Burner"
-msgstr ""
+msgstr "שורף"
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "שורף פחם."
 
 #: ../../tribes/empire/conf:115
 msgid "Carpenter"
-msgstr ""
+msgstr "נגר"
 
 #: ../../tribes/empire/conf:103
 msgid "Carrier"
@@ -149,7 +149,7 @@ msgstr "סבל"
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "סוחב פריטים לאורך הדרכים שלך."
 
 #: ../../tribes/empire/conf:149
 #: ../../tribes/empire/conf:212
@@ -167,7 +167,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:185
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "שורף פחם"
 
 #: ../../tribes/empire/conf:156
 msgid "Citadel"
@@ -189,7 +189,7 @@ msgstr "פחם"
 
 #: ../../tribes/empire/conf:199
 msgid "Coal Mine"
-msgstr ""
+msgstr "מכרה פחם"
 
 #: ../../tribes/empire/conf:217
 msgid "Colosseum"
@@ -201,7 +201,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
-msgstr ""
+msgstr "אתר בנייה"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
@@ -209,27 +209,27 @@ msgstr ""
 
 #: ../../tribes/empire/conf:198
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "מכרה פחם עמוק"
 
 #: ../../tribes/empire/conf:202
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "מכרה זהב עמוק"
 
 #: ../../tribes/empire/conf:200
 msgid "Deep Iron Ore Mine"
-msgstr ""
+msgstr "מכרה מחצבי ברזל עמוק"
 
 #: ../../tribes/empire/conf:196
 msgid "Deep Marble Mine"
-msgstr ""
+msgstr "מכרה שיש עמוק"
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "להגן ולכבוש!"
 
 #: ../../tribes/empire/conf:39
 msgid "Destroyed building"
-msgstr ""
+msgstr "בניין שנהרס"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -253,7 +253,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:190
 msgid "Donkeyfarm"
-msgstr ""
+msgstr "חוות קופים"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
