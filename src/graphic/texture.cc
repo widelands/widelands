@@ -208,10 +208,7 @@ Texture::~Texture ()
 /**
  * Return the basic terrain colour to be used in the minimap.
 */
-Uint32 Texture::get_minimap_color(const char shade) {
-	assert(shade >= -128);
-	assert(shade <= 127);
-
+Uint32 Texture::get_minimap_color(char shade) {
 	if (not m_pixels)
 		return m_mmap_color[128 + shade];
 

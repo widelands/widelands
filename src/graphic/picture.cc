@@ -28,7 +28,6 @@ struct NullPicture : IPicture {
 	virtual uint32_t get_h() {return 0;}
 
 	virtual IPixelAccess & pixelaccess() {throw wexception("pixelaccess() attempted on null picture");}
-	virtual Surface & surface() {throw wexception("surface() attempted on null picture");}
 };
 
 /**

@@ -116,7 +116,7 @@ void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::str
 	try {
 		text_surface = m_renderer->render(text, w);
 	} catch (RT::Exception & e) {
-		log((format("Text rendering error: %s") % e.what()).str().c_str()); // TODO: should throw
+		log((format("Text rendering error: %s") % e.what()).str().c_str()); // TODO(sirver): Should throw
 	}
 	if (!text_surface)
 		return;

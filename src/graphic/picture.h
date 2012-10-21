@@ -28,7 +28,6 @@
 #include "picture_id.h"
 
 struct IPixelAccess;
-struct Surface;
 
 /**
  * Interface to a bitmap that can act as the source of a rendering
