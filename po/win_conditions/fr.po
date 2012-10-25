@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-05-03 00:21+0000\n"
-"Last-Translator: Michael Colignon <ledesillusionniste@hotmail.com>\n"
+"PO-Revision-Date: 2012-10-24 13:51+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-10-25 05:09+0000\n"
+"X-Generator: Launchpad (build 16179)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
@@ -23,7 +23,7 @@ msgstr "%i arbres."
 
 #: ../../scripting/win_condition_texts.lua:54
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr ""
+msgstr "%s %s %i%% du territoire (%i of %i)."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
@@ -68,6 +68,10 @@ msgid ""
 "least 20 minutes or the one with the most territory after 4 hours, whichever "
 "comes first."
 msgstr ""
+"Chaque joueur ou équipe doit essayer d'obtenir plus de la moitié du "
+"territoire de la carte. Le gagnant sera le joueur ou l'équipe qui gardera ce "
+"territoire au moins 20 minutes ou celui avec le plus grand territoire au "
+"bout de 4 heures, selon ce qui arrive en premier."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -118,7 +122,7 @@ msgstr "Maître du territoire"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:13
 msgid "Territorial Time"
-msgstr ""
+msgstr "Temps territorial"
 
 #: ../../scripting/win_condition_texts.lua:27
 msgid "The game will end in %i minutes."
@@ -209,7 +213,7 @@ msgstr "Vous avez perdu cette partie !"
 
 #: ../../scripting/win_condition_texts.lua:53
 msgid "game will end in %i minutes."
-msgstr ""
+msgstr "Le jeu se terminera dans %i minutes."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
