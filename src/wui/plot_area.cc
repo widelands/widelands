@@ -389,9 +389,11 @@ uint32_t WUIPlot_Area::draw_diagram
 			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
 			 LINE_COLOR, 2);
 
+		// The space at the end is intentional to have the tick centered
+		// over the number, not to the left
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%u", max_x / how_many_ticks * i);
+			 "-%u ", max_x / how_many_ticks * i);
 
 		UI::g_fh->draw_text
 			(dst, xtickstyle,
