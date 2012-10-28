@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-04-11 08:24+0000\n"
-"Last-Translator: LiSrt <Unknown>\n"
+"PO-Revision-Date: 2012-10-27 16:28+0000\n"
+"Last-Translator: _aD <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-10-28 04:32+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -64,6 +64,8 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
+"As no Atlantean likes raw fish, smoking it in a smokery is the most common "
+"way to make it edible."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -158,7 +160,7 @@ msgstr "Bread"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Bread Paddle"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -291,7 +293,7 @@ msgstr "Discovers resources for mining."
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Dismantle Site"
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
@@ -542,6 +544,9 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Meat is one of the food resources of the Atlanteans. It comes from wild game "
+"taken by the hunter and has to be smoked in a smokery before being delivered "
+"to mines and training sites (dungeon and labyrinth)."
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
@@ -641,7 +646,7 @@ msgstr "Plants trees."
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
@@ -933,6 +938,9 @@ msgid ""
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
 msgstr ""
+"Smoked meat is made out of meat in a smokery. It is delivered to the mines "
+"and training sites (labyrinth and dungeon) where the miners and soldiers "
+"prepare a nutritious lunch for themselves."
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
@@ -956,6 +964,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Some of your starting buildings didn't have enough room and\n"
+"weren't built. You are at an disadvantage with this; consider restarting\n"
+"this map with a fair starting condition."
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
@@ -1044,6 +1055,7 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"The bread paddle is the tool of the baker, produced by the toolsmith."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
@@ -1098,17 +1110,22 @@ msgid ""
 "These transparent quartz' are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
+"Transparent quartz is used to build some exclusive buildings. They are mine "
+"in crystal mines."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
 "These wonderful diamonds are used to build some exclusive buildings. They "
 "are mined in a crystal mine."
 msgstr ""
+"These wonderful diamonds are used to build some exclusive buildings. They "
+"are mined in crystal mines."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
 msgstr ""
+"This bow, produced by the toolsmith, is used by the Atlantean hunter."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -1116,12 +1133,17 @@ msgid ""
 "baker needs for a good bread. Also horse farms and spiderfarms need to be "
 "provided with corn."
 msgstr ""
+"This corn is processed in the mill to fine cornflour that every Atlantean "
+"baker needs to bake good bread. Horse farms and spider farms also need to be "
+"provided with corn."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to hang up all the meat and fish to the "
 "top of the smokery. It is created by the toolsmith."
 msgstr ""
+"This hook pole is used by the smoker to hang up all the meat and fish to the "
+"top of the smokery. It is created by the toolsmith."
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1139,6 +1161,8 @@ msgid ""
 "advanced soldiers in the dungeon to train from attack level 1 to level 2 "
 "(together with food)."
 msgstr ""
+"This is the medium trident. It is produced in the weapon smithy and used by "
+"advanced soldiers in the dungeon to train from attack level 1 to level 2."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1147,12 +1171,17 @@ msgid ""
 "used in the dungeon - together with food - to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
+"This is the most dangerous weapon of the Atlantean military. Only the best "
+"of the best soldiers may use it. It is produced in the weapon smithy and "
+"used in the dungeon to train soldiers from attack level 3 to level 4."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
 "This steel shield is produced in the armoursmithy and used in the labyrinth -"
 "together with food - to train soldiers from Defense level 0 to level 1."
 msgstr ""
+"This steel shield is produced in the armour smithy and used in the labyrinth "
+" to train soldiers from defence level 0 to level 1."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -1160,6 +1189,9 @@ msgid ""
 "water. It is appreciated as basic food for miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
 msgstr ""
+"This tasty bread is made in bakeries out of cornflour, blackroot flour and "
+"water. It is appreciated as basic food for miners, scouts and soldiers in "
+"training sites (labyrinth and dungeon)."
 
 #: ../../tribes/atlanteans/conf:6
 msgid ""
@@ -1174,12 +1206,16 @@ msgid ""
 "This yarn is produced by spiders, which are bred on spiderfarms. It is "
 "processed to spidercloth in a weaving-mill."
 msgstr ""
+"This yarn is produced by spiders which are bred on spider farms. It is "
+"processed to spidercloth in a weaving mill."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
 "This yarn, made of gold by the goldweaver, is used for weaving the exclusive "
 "golden tabard in the weaving-mill."
 msgstr ""
+"This yarn, made out of gold by the gold weaver, is used for weaving the "
+"exclusive golden tabard in the weaving mill."
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
@@ -1212,6 +1248,9 @@ msgid ""
 "the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
 "the smokery also need trunks for their work."
 msgstr ""
+"Trunks are the base for planks which are used in nearly every building of "
+"the Atlanteans. As well as the sawmill, the charcoal burner,  tool smithy "
+"and the smokery also need trunks for their work."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 msgid "Upgrade soldier attack 0"
@@ -1330,6 +1369,8 @@ msgid ""
 "Water is the essence for life! It is used in the bakery, the horse farm and "
 "the spiderfarm."
 msgstr ""
+"Water is the essence for life! It is used in the bakery, the horse farm and "
+"the spider farm."
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Weapon Smithy"
@@ -1396,7 +1437,7 @@ msgstr "Works at construction sites to create a new building."
 
 #: ../../tribes/atlanteans/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Works at the shipyard and constructs new ships."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."

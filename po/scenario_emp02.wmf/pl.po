@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-09-10 20:57+0000\n"
-"Last-Translator: BartekChom <Unknown>\n"
+"PO-Revision-Date: 2012-10-27 10:30+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:33+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-10-28 04:31+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid ""
@@ -128,14 +128,14 @@ msgid ""
 "build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE "
 "--<br> "
 msgstr ""
-" \"Witaj Lucjuszu, nie chcę wzbudzać paniki, ale znalazłem coś, co nie daje "
+" \"Witaj Lucjuszu, nie chcę wzbudzać paniki, lecz znalazłem coś, co nie daje "
 "mi spokoju, a wręcz sieje panikę w moim sercu. Kiedy przeszedłem się na "
-"południowy brzeg, zauważyłem resztki innej łodzi. Nie wiem, czy jest to "
-"wszystko, co z niej zostało. W każdym razie: te szczątki nie wyglądają na "
-"stare.<br> Może ludzie na tej łodzi trafili na ten sam sztorm, co przyniósł "
-"na do Malac' Mor, i znaleźli się tutaj.<br> Proszę Cię, bądź ostrożny i "
-"zbuduj jakieś koszary i strażnice dokoła naszej koloni.\"<br><br>-- NOWE "
-"CELE --<br> "
+"południowy brzeg, zauważyłem resztki innej łodzi. Nie wiem, czy te szczątki "
+"to wszystko, co z niej zostało. W każdym razie, nie wyglądają na stare.<br> "
+"Być może ludzie na tej łodzi trafili na ten sam sztorm, co przyniósł na do "
+"Malac' Mor, i znaleźli się tutaj.<br> Proszę Cię, bądź ostrożny i zbuduj "
+"jakieś koszary i strażnice dokoła naszej kolonii.\"<br><br>-- NOWE CELE --"
+"<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:225
 msgid ""
@@ -265,9 +265,9 @@ msgid ""
 "infrastructure (coal mine and / or charcoal burner, iron ore mine, "
 "toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr ""
-"* Zbuduj pracownię kamieniarza, a potem dokończ infrastrukturę górniczą i "
-"produkcyjną (kopalnię węgla i/lub piec do węgla drzewnego, kopalnię rudy "
-"żelaza, pracownie rzemieślnika i zbrojmistrza oraz hutę)."
+"* Zbuduj zakład kamieniarski, a potem dokończ infrastrukturę górniczą i "
+"produkcyjną (kopalnię węgla i/lub mielerz, kopalnię rudy żelaza, pracownię "
+"rzemieślnika, warsztat płatnerski, zbrojownię oraz hutę)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:136
@@ -321,14 +321,14 @@ msgid ""
 msgstr ""
 "* Aby wyprodukować krzepiącą żywność dla naszych górników, musimy zbudować "
 "tawernę. Aby zaopatrzyć ich w dobre, mocne napoje, moglibyśmy zbudować "
-"browar i winnicę.<br> Oczywiście to oznacza, że potrzebujemy więcej zasobów "
-"do przygotowywania jedzenia - takich jak ryba, mięso lub chleb.<br> Aby je "
-"zapewnić, musisz zbudować chatkę rybaka, farmę, młyn i piekarnię.<br> Możesz "
-"też potrzebować chatę myśliwego,<br> chlew, plantację winorośli i "
-"studnie.<br> Zależy od Ciebie, co zbudujesz.<br> Ale pamiętaj - kopalnie "
-"węgla i żelaza potrzebują piwo, a kopalnie marmuru i złota wino, zaś "
-"wszystkie przynajmniej racje, które są produkowane z chleba LUB mięsa LUB "
-"ryby."
+"browar i winiarnię.<br> Oczywiście to oznacza, że potrzebujemy więcej "
+"zasobów do przygotowywania jedzenia - takich jak ryba, mięso lub chleb.<br> "
+"Aby je zapewnić, musisz zbudować chatkę rybaka, farmę, młyn i piekarnię.<br> "
+"Możesz też potrzebować chaty myśliwego,<br> chlewu, plantacji winorośli i "
+"studni.<br> Od ciebie zależy, co chcesz zbudować.<br> Ale pamiętaj - "
+"kopalnie węgla i żelaza potrzebują piwa, zaś kopalnie marmuru i złota wina, "
+"wszystkie zaś wymagają przynajmniej racji produkowanych z chleba LUB mięsa "
+"LUB ryby."
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "02 - An Outpost for Exile"
@@ -356,7 +356,7 @@ msgstr "Amalea się uśmiecha"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:202
 msgid "As time is running by"
-msgstr "Kiedy czas leci do przodyu"
+msgstr "Kiedy czas leci do przodu"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:18
 msgid "Build a quarry"
@@ -364,11 +364,11 @@ msgstr "Zbuduj kamieniołom"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:42
 msgid "Build a stonemason and mining infrastructure"
-msgstr "Zbuduj kamieniarza i górniczą infrastrukturę"
+msgstr "Zbuduj chatę kamieniarza i infrastrukturę górniczą"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:10
 msgid "Build up a wood economy"
-msgstr "Wytwórz gospodarkę drzewną"
+msgstr "Rozwiń gospodarkę drzewną"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:182
 msgid "Command for Attack"
@@ -423,11 +423,11 @@ msgstr "Nasza nowa tawerna"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:26
 msgid "Protect your colony"
-msgstr "Oboń swoją kolonie"
+msgstr "Obroń swoją kolonie"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Protect your eastern frontier"
-msgstr "Ohroń swój wschodni front"
+msgstr "Chroń swoją wschodnią granicę"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:50
 msgid "Provide your miners with food"
@@ -439,7 +439,7 @@ msgstr "Saledus jest zdumiony"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "Saledus looks unhappy"
-msgstr "Saledus nie wygląda szcześliwie"
+msgstr "Saledus wygląda na niezadowolonego"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:143
 msgid "Saledus smiles"
