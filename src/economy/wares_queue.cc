@@ -64,8 +64,8 @@ WaresQueue::WaresQueue
 void WaresQueue::cleanup() {
 	assert(m_ware);
 
-	if (uint8_t const count = m_filled && m_owner.get_economy())
-		m_owner.get_economy()->remove_wares(m_ware, count);
+	if (m_filled && m_owner.get_economy())
+		m_owner.get_economy()->remove_wares(m_ware, m_filled);
 
 	m_filled = 0;
 	m_max_size = 0;
