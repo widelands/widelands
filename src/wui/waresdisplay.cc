@@ -156,6 +156,7 @@ void AbstractWaresDisplay::layout()
 
 void WaresDisplay::remove_all_warelists() {
 	m_warelists.clear();
+	update();
 }
 
 
@@ -345,6 +346,9 @@ void WaresDisplay::add_warelist
 {
 	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(&wares);
+
+	wares.changed.connect(boost::bind(&WaresDisplay::update, boost::ref(*this)));
+	update();
 }
 
 

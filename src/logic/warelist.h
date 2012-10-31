@@ -22,6 +22,9 @@
 
 #include "widelands.h"
 
+#include <boost/signal.hpp>
+#include <boost/bind.hpp>
+
 #include <SDL.h>
 
 #include <cassert>
@@ -59,6 +62,8 @@ struct WareList {
 
 	bool operator== (WareList const &)    const;
 	bool operator!= (WareList const & wl) const {return not (*this == wl);}
+
+	mutable boost::signal<void ()> changed;
 
 private:
 	vector_type m_wares;
