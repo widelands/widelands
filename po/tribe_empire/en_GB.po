@@ -8,24 +8,26 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2010-11-29 10:49+0000\n"
-"Last-Translator: LiSrt <Unknown>\n"
+"PO-Revision-Date: 2012-10-30 23:03+0000\n"
+"Last-Translator: _aD <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:36+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-10-31 04:32+0000\n"
+"X-Generator: Launchpad (build 16218)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"A real meal is made by inns from fish or meat, along with bread. It "
+"satisfies the needs of miners in deep mines."
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "A seaworthy ship"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -33,6 +35,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"A small bite to keep miners strong and working. Rations are also consumed by "
+"the scout on his scouting trips. They are produced in a tavern from fish or "
+"meat, along with bread."
 
 #: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
@@ -89,6 +94,9 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
+"Basic armour for Empire soldiers. It is produced in the armour smithy and "
+"used in the trainingscamp - together with food- to train soldiers from "
+"healthpoints level 1 to healthpoints level 2."
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
@@ -103,6 +111,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
+"used in taverns, inns and training sites (arena, colosseum and "
+"trainingscamp)."
 
 #: ../../tribes/empire/conf:63
 msgid "Bread"
@@ -110,7 +121,7 @@ msgstr "Bread"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Bread Paddle"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -183,6 +194,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"Cloth is needed to build several buildings. It is also consumed in the "
+"armour smithy."
 
 #: ../../tribes/empire/conf:66
 msgid "Coal"
@@ -198,7 +211,7 @@ msgstr "Colosseum"
 
 #: ../../tribes/empire/shipyard/conf:21
 msgid "Constructing ship"
-msgstr ""
+msgstr "Constructing ship"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -238,7 +251,7 @@ msgstr "Discovers resources for mining."
 
 #: ../../tribes/empire/conf:146
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Dismantle Site"
 
 #: ../../tribes/empire/conf:157
 msgid "Donjon"
@@ -301,6 +314,8 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
 
 #: ../../tribes/empire/conf:68
 msgid "Fish"
@@ -334,6 +349,8 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Flour is produced by the mill from wheat and is needed in the bakery to "
+"produce the tasty Empire bread."
 
 #: ../../tribes/empire/conf:118
 msgid "Forester"
@@ -370,6 +387,9 @@ msgid ""
 "with it. It is produced in the smelting works out of goldstone and processed "
 "in the armour smithy and the weapon smithy."
 msgstr ""
+"Gold is the most valuable of all metals; armour and weapons are garnished "
+"with it. It is produced in the smelting works from goldstone and processed "
+"in the armour smithy and the weapon smithy."
 
 #: ../../tribes/empire/conf:72
 msgid "Goldstone"
@@ -377,7 +397,7 @@ msgstr "Goldstone"
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "Goldstones are mined in goldmines and processed in smelting works."
-msgstr ""
+msgstr "Goldstones are mined in gold mines and processed in smelting works."
 
 #: ../../tribes/empire/conf:73
 msgid "Grape"
@@ -441,6 +461,8 @@ msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
+"How can one create a ration or meal if there are no kitchen tools? They are "
+"produced in a tool smithy and used in taverns and inns."
 
 #: ../../tribes/empire/conf:120
 msgid "Hunter"
@@ -479,10 +501,12 @@ msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"Iron ores need to be smelted in the smelting works to produce iron. Iron ore "
+"is mined produced from iron mines."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Tending sheep."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -518,6 +542,9 @@ msgid ""
 "for nearly every bigger building. They are produced out of marble in a "
 "stonemason's house."
 msgstr ""
+"Marble columns present the high culture of the Empire, so they are needed "
+"for nearly every bigger building. They are produced out of marble in a "
+"stonemason's house."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -525,6 +552,9 @@ msgid ""
 "in a quarry. Marble is used as building material and gets formed into marble "
 "columns in the stonemason's house."
 msgstr ""
+"Marble is the beautiful stone, cut from the mountains or produced by "
+"quarries. Marble is used as building material and gets formed into marble "
+"columns in the stonemason's house."
 
 #: ../../tribes/empire/conf:123
 msgid "Master Miner"
@@ -545,6 +575,10 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+"lunch for the miners and is consumed in the training sites (arena, "
+"colosseum, trainingscamp). There are two sources of meat: pork from "
+"piggeries and the meat of wild game hunted by the hunters."
 
 #: ../../tribes/empire/conf:178
 msgid "Mill"
@@ -624,7 +658,7 @@ msgstr "Plate Armour"
 
 #: ../../tribes/empire/conf:166
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
@@ -684,7 +718,7 @@ msgstr "Produce lance"
 
 #: ../../tribes/empire/inn/conf:22
 msgid "Produce meal"
-msgstr ""
+msgstr "Produce meal"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
@@ -696,7 +730,7 @@ msgstr "Produce plate armour"
 
 #: ../../tribes/empire/inn/conf:21
 msgid "Produce ration"
-msgstr ""
+msgstr "Produce ration"
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
@@ -712,7 +746,7 @@ msgstr "Produce shovel"
 
 #: ../../tribes/empire/weaponsmithy/conf:33
 msgid "Produce war lance"
-msgstr ""
+msgstr "Produce war lance"
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
@@ -831,19 +865,19 @@ msgstr "Shepherd"
 
 #: ../../tribes/empire/conf:140
 msgid "Ship"
-msgstr ""
+msgstr "Ship"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
-msgstr ""
+msgstr "Ship construction site"
 
 #: ../../tribes/empire/conf:128
 msgid "Shipwright"
-msgstr ""
+msgstr "Shipwright"
 
 #: ../../tribes/empire/conf:187
 msgid "Shipyard"
-msgstr ""
+msgstr "Shipyard"
 
 #: ../../tribes/empire/conf:91
 msgid "Shovel"
@@ -910,6 +944,8 @@ msgid ""
 "Stones are a basic building material of the Empire. It is produced in "
 "quarries and marble mines."
 msgstr ""
+"Stones are a basic building material of the Empire. They are produced in "
+"quarries and marble mines."
 
 #: ../../tribes/empire/conf:160
 msgid "Stronghold"
@@ -945,12 +981,17 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"The bakers of the Empire make very tasty bread out of flour and water. It is "
+"used in taverns and inns to prepare rations and meals. Bread is also "
+"consumed in the training sites (arena, colosseum, trainingscamp)."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"The bread paddle is the tool of the baker, each baker needs their own. It is "
+"produced by the tool smithy."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -958,6 +999,9 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"The chain-armour is a medium armour for Empire soldiers. It is produced in "
+"an armour smithy and used in a trainingscamp - together with food - to train "
+"soldiers from healthpoints level 2 to level 3."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -965,6 +1009,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"The fires of the Empire smelting works, armour smithies and weapon smithies "
+"are usually fed with coal. It is mined in coal mines or produced by a "
+"charcoal burner out of trunks."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -972,6 +1019,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"The hammer is an essential tool. It is needed by the geologist, the builder, "
+"the armour- and weapon smithy. Make sure you always have some in reserve! It "
+"is produced by the tool smithy."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -980,6 +1030,10 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"The helmet is the basic defense of a warrior. It is produced in an armour "
+"smithy. Together with a wood lance it is the equipment to fit out young "
+"soldiers. Helmets are also used in trainingscamps - together with food - to "
+"train soldiers from healthpoints level 0 to healthpoints level 1."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -987,6 +1041,9 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"The plate armour is the strongest armour existing for the Empire soldiers. "
+"It is produced in the armour smithy and used in the trainingscamp  - "
+"together with food - to train soldiers from healthpoints level 3 to level 4."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -1001,18 +1058,24 @@ msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
+"These grapes are the basic ingredient for a tasty wine. They are harvested "
+"in a vineyard and processed in a winery."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"This basket is needed by the vine farmer for harvesting grapes. It is "
+"produced by the tool smithy."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"This beer is produced in a brewery out of wheat and water. It is consumed by "
+"miners in coal and iron ore mines."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -1020,6 +1083,9 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"This is a strong lance with a steel-tip and a small blade. It is produced in "
+"the weapon smithy and used in the trainingscamp - together with food - to "
+"train soldiers from attack level 2 to level 3."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -1027,6 +1093,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"This is an advanced lance, with steel tip. It is produced in a weapon smithy "
+"and used in a trainingscamp - together with food - to train soldiers from "
+"attack level 1 to level 2."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -1034,6 +1103,9 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"This is the best and sharpest weapon the Empire weapon smithy creates for "
+"the warriors. It is used in the trainingscamp - together with food - to "
+"train soldiers from attack level 3 to level 4."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -1045,6 +1117,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"This lance has an iron spike. It is produced in a weapon smithy and used in "
+"a trainingscamp - together with food - to train soldiers from attack level 0 "
+"to attack level 1."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1056,7 +1131,7 @@ msgstr ""
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
+msgstr "This saw is needed by the sawyer. It is produced by the tool smithy."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
@@ -1071,6 +1146,8 @@ msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"This tasty wine is consumed in marble and gold mines. It is produced in a "
+"winery."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1078,6 +1155,9 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"This wooden lance is the basic weapon in the Empire military system. It is "
+"produced in the weapon smithy. Together with a helmet it is the equipment to "
+"fit out young soldiers."
 
 #: ../../tribes/empire/conf:131
 msgid "Toolsmith"
@@ -1114,6 +1194,9 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"Trunks are an important building material for Empire. The lumberjacks fell "
+"the trees; foresters care for the supply of trees. Trunks are also used by "
+"the charcoal burner, the toolsmithy and the sawmill."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1275,6 +1358,9 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"Water is the essence of  life! It is used in the bakery and the brewery. The "
+"donkey farm, the sheep farm and the piggery also need to be supplied with "
+"water."
 
 #: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"
@@ -1285,6 +1371,8 @@ msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Weapons, armour and tools are made of iron. It is produced from iron ore in "
+"the smelting works."
 
 #: ../../tribes/empire/conf:133
 msgid "Weaponsmith"
@@ -1312,6 +1400,9 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Wheat is essential for survival. It is produced in farms and consumed by "
+"mills and breweries. Donkey farms, sheep farms and piggeries also need to be "
+"supplied with wheat."
 
 #: ../../tribes/empire/conf:97
 msgid "Wine"
@@ -1334,6 +1425,8 @@ msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"Wood is a basic building material of the Empire. It is also consumed in the "
+"weapon smithy."
 
 #: ../../tribes/empire/conf:100
 msgid "Wool"
@@ -1341,7 +1434,7 @@ msgstr "Wool"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "Wool is shorn from sheep and used in the weaving mill to make cloth."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
@@ -1387,7 +1480,7 @@ msgstr "Works at construction sites to create a new building."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Works at the shipyard and constructs new ships."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
@@ -1396,4 +1489,4 @@ msgstr "Works deep in the mines to obtain coal, iron or gold."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Works in the sawmill."
