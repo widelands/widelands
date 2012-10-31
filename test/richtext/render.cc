@@ -28,7 +28,7 @@
 #include "rt_parse.h"
 #include "rt_render.h"
 #include "sdl_ttf_font.h"
-#include "lodepng_image_loader.h"
+#include "thin_graphic.h"
 
 using namespace std;
 
@@ -123,9 +123,9 @@ int main(int argc, char *argv[])
 	else
 		txt = read_file(inname);
 
+	IGraphic * thin_graphic = create_thin_graphic();
 	RT::IFontLoader * floader = RT::ttf_fontloader_from_file();
-	RT::IImageLoader * imgl = setup_lodepng_img_loader();
-	RT::IRenderer * renderer = RT::setup_renderer(floader, imgl);
+	RT::IRenderer * renderer = RT::setup_renderer(thin_graphic, floader, imgl);
 
 	SDL_Surface * surface = 0;
 	try {
@@ -142,6 +142,7 @@ int main(int argc, char *argv[])
 	}
 
 	delete renderer;
+	delete thin_graphic;
 
 	SDL_Quit();
 

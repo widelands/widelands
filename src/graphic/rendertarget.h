@@ -33,7 +33,7 @@ struct Player;
 };
 
 /**
- * This abstract class represents anything that can be rendered to.
+ * This class represents anything that can be rendered to.
  *
  * It supports windows, which are composed of a clip rectangle and a drawing
  * offset:

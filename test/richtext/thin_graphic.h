@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef LODEPNG_IMAGE_LOADER_H
-#define LODEPNG_IMAGE_LOADER_H
+#ifndef THIN_GRAPHIC_H
+#define THIN_GRAPHIC_H
 
-#include "rt_render.h"
+#include "graphic/igraphic.h"
 
-RT::IImageLoader * setup_lodepng_img_loader();
+IGraphic * create_thin_graphic();
 
-#endif /* end of include guard: LODEPNG_IMAGE_LOADER_H */
+#endif /* end of include guard: THIN_GRAPHIC_H */
 

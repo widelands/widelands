@@ -20,18 +20,20 @@
 #include <string>
 #include <map>
 
+#include <boost/utility.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <SDL.h>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
-#include "lodepng.h"
 
+#include "thin_graphic.h"
+#include "lodepng.h"
 #include "rt_errors.h"
-#include "lodepng_image_loader.h"
 
 using namespace std;
 using namespace boost;
 
-class LodePngImageLoader : public RT::IImageLoader {
+class LodePngImageLoader {
 private:
 	typedef std::pair<const string, SDL_Surface *> MapEntry;
 	map<string, SDL_Surface*> m_imgcache;
@@ -78,7 +80,45 @@ public:
 	}
 };
 
-RT::IImageLoader * setup_lodepng_img_loader() {
-	return new LodePngImageLoader();
+
+// TODO(sirver): Rename to TinyGraphics
+class ThinGraphic : boost::noncopyable {
+public:
+	virtual ~ThinGraphic() {}
+	virtual PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
+	virtual PictureID load_image(std::string const &, bool alpha = false) = 0;
+	virtual const PictureID & get_picture(PicMod, std::string const &, bool alpha = true);
+	virtual void add_picture_to_cache(PicMod, const std::string &, PictureID);
+
+private:
+	LodePngImageLoader m_imgl;
+};
+
+
+ThinGraphic::ThinGraphic() {
+}
+
+PictureID ThinGraphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
+{
+	// TODO(sirver): ImplementThis
+}
+
+PictureID ThinGraphic::load_image(std::string const & fname, bool const alpha) {
+	// TODO(sirver): implement this
+}
+
+const PictureID & ThinGraphic::get_picture
+	(PicMod const module, const std::string & fname, bool alpha)
+{
+	// TODO(sirver): Implement this
+}
+
+void ThinGraphic::add_picture_to_cache(PicMod module, const std::string & name, PictureID pic) {
+	// TODO(sirver): Implement this
+}
+
+
+IGraphic * create_thin_graphic() {
+	return new ThinGraphic();
 }
 

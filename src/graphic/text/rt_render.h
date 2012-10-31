@@ -26,6 +26,9 @@
 #include <string>
 #include <set>
 
+#include "graphic/igraphic.h"
+#include "graphic/picture.h"
+
 namespace RT {
 /**
  * Wrapper object around a font.
@@ -45,7 +48,7 @@ public:
 	virtual ~IFont() {};
 
 	virtual void dimensions(std::string, int, uint32_t *, uint32_t *) = 0;
-	virtual SDL_Surface * render(std::string, SDL_Color clr, int) = 0;
+	virtual PictureID render(std::string, SDL_Color clr, int) = 0;
 
 	virtual uint32_t ascent(int) const = 0;
 };
@@ -60,21 +63,6 @@ public:
 	virtual ~IFontLoader() {};
 
 	virtual IFont * load(std::string name, int ptsize) = 0;
-};
-
-/**
- * Loader class that can create Images from a name. This is the bridge
- * to the g_fs in Widelands but can be reimplemented for standalone programs/test
- * cases.
- *
- * Note that we do not take ownership of the loaded SDL_Surface. If you want it
- * Freed, you have to do it yourself.
- */
-class IImageLoader {
-public:
-	virtual ~IImageLoader() {};
-
-	virtual SDL_Surface * load(std::string name) = 0;
 };
 
 /**
@@ -97,10 +85,11 @@ public:
 	IRenderer(IFontLoader *) {};
 	virtual ~IRenderer() {};
 
-	virtual SDL_Surface * render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
+	virtual IPicture render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
 };
 
-IRenderer * setup_renderer(IFontLoader * fl, IImageLoader * imgl);
+// Setup a renderer, takes ownership of fl and imgl, but not of gr.
+IRenderer * setup_renderer(const IGraphic& gr, IFontLoader * fl);
 };
 
 #endif /* end of include guard: RT_RENDER_H */

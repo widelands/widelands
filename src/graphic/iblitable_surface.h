@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,36 +17,30 @@
  *
  */
 
-#ifndef PICTURE_H
-#define PICTURE_H
+#ifndef IBLITABLE_SURFACE_H
+#define IBLITABLE_SURFACE_H
 
-#include <stdint.h>
-#include <string>
+#include "compositemode.h"
+#include "picture_id.h"
+#include "point.h"
+#include "rect.h"
 
 #include <boost/noncopyable.hpp>
 
-#include "picture_id.h"
-
-struct IPixelAccess;
-
 /**
- * Interface to a bitmap that can act as the source of a rendering
- * operation.
+ * Interface to a basic surfaces that can be used as destination for blitting.
  */
-struct IPicture : boost::noncopyable {
-	IPicture() {}
-	virtual ~IPicture() {}
+struct IBlitableSurface : boost::noncopyable {
+	virtual ~IBlitableSurface() {}
 
-	virtual bool valid() = 0;
-
-	virtual uint32_t get_w() = 0; // TODO(sirver): Should only be called w() and h()
+	//@{
+	/// Get width and height
+	virtual uint32_t get_w() = 0; // TODO(sirver): Should only be w()
 	virtual uint32_t get_h() = 0;
+	//@}
 
-	// TODO(sirver): Seems like this is not really needed?
-	virtual IPixelAccess & pixelaccess() = 0;
-
-public:
-	static const PictureID & null();
+	/// This draws a part aother surface to this surface
+	virtual void blit(Point, PictureID, Rect srcrc, Composite cm = CM_Normal) = 0;
 };
 
 #endif

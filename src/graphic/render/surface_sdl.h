@@ -83,7 +83,7 @@ struct SurfaceSDL : IOffscreenSurface {
 		 RGBColor, uint8_t width);
 
 	void blit(Point, PictureID, Rect srcrc, Composite cm);
-	void fast_blit(PictureID);
+	void fast_blit(PictureID); // TODO(sirver): This function is never used. Remove it
 
 	void set_subwin(Rect r);
 	void unset_subwin();

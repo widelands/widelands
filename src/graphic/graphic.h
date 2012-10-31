@@ -20,16 +20,17 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
-#include "animation_gfx.h"
-#include "picture_id.h"
-#include "surfaceptr.h"
-#include "rect.h"
-
-#include <png.h>
-
 #include <vector>
 #include <map>
+
 #include <boost/shared_ptr.hpp>
+#include <png.h>
+
+#include "animation_gfx.h"
+#include "igraphic.h"
+#include "picture_id.h"
+#include "rect.h"
+#include "surfaceptr.h"
 
 #define MAX_RECTS 20
 
@@ -88,24 +89,6 @@ struct GraphicCaps
 };
 
 /**
- * Picture caches (modules).
- *
- * \ref Graphic maintains a cache of \ref PictureID s to avoid continuous re-loading of
- * pictures that may not be referenced all the time (e.g. UI elements).
- *
- * This cache is separated into different modules, and can be flushed per-module.
- */
-enum PicMod {
-	PicMod_UI = 0,
-	PicMod_Menu,
-	PicMod_Game,
-
-	// Must be last
-	PicMod_Last
-};
-
-
-/**
  * A renderer to get pixels to a 16bit framebuffer.
  *
  * Picture IDs can be allocated using \ref get_picture() and used in
@@ -116,11 +99,11 @@ enum PicMod {
  * appropriate module flag; the user can request to flush one single picture
  * alone, but this is only used (and useful) in the editor.
  */
-struct Graphic {
+struct Graphic : public virtual IGraphic {
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
 		 bool fullscreen, bool opengl);
-	~Graphic();
+	virtual ~Graphic();
 
 	int32_t get_xres() const;
 	int32_t get_yres() const;
@@ -136,10 +119,10 @@ struct Graphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	PictureID load_image(std::string const &, bool alpha = false);
-	const PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
+	virtual PictureID load_image(std::string const &, bool alpha = false);
+	virtual const PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
 		__attribute__ ((pure));
-	void add_picture_to_cache(PicMod, const std::string &, PictureID);
+	virtual void add_picture_to_cache(PicMod, const std::string &, PictureID);
 	const PictureID & get_no_picture() const;
 
 	void get_picture_size
@@ -150,7 +133,7 @@ struct Graphic {
 	void save_png(SurfacePtr surf, StreamWrite *) const;
 	void save_png(IPixelAccess & pix, StreamWrite *) const;
 
-	PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
+	virtual PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 
 	OffscreenSurfacePtr create_offscreen_surface(int32_t w, int32_t h);
 	PictureID create_picture(int32_t w, int32_t h, bool alpha = false);

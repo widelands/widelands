@@ -21,8 +21,9 @@
 #include <string>
 #include <vector>
 
-#include <boost/format.hpp>
 #include <boost/foreach.hpp>
+#include <boost/format.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <SDL.h>
 
 #include "rt_parse.h"
@@ -401,10 +402,10 @@ public:
 			SDL_Rect dstrect;
 			SDL_Rect srcrect = {0, 0, 0, 0};
 			SDL_SetAlpha(m_bg, 0, SDL_ALPHA_OPAQUE);
-			for (uint32_t x = 0; x < m_w; x += m_bg->w) {
+			for (uint32_t x = 0; x < m_w; x += m_bg->get_w()) {
 				dstrect.x = x;
 				dstrect.y = 0;
-				srcrect.w = min(static_cast<uint32_t>(m_bg->w), m_w - x);
+				srcrect.w = min(static_cast<uint32_t>(m_bg->get_w()), m_w - x);
 				srcrect.h = m_h;
 				SDL_BlitSurface(m_bg, &srcrect, rv, &dstrect);
 			}
@@ -414,13 +415,13 @@ public:
 	virtual bool is_expanding() {return m_expanding;}
 	virtual void set_w(uint32_t w) {m_w = w;}
 
-	void set_background(SDL_Surface * s) {
+	void set_background(IPicture s) {
 		m_bg = s; m_h = s->h;
 	}
 
 private:
 	uint32_t m_w, m_h;
-	SDL_Surface * m_bg;
+	IPicture m_bg;
 	bool m_expanding;
 };
 
@@ -451,10 +452,10 @@ public:
 			SDL_Rect srcrect = {0, 0, 0, 0};
 			SDL_SetAlpha(m_bg_img, 0, SDL_ALPHA_OPAQUE);
 			for (uint32_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->h) {
-				for (uint32_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->w) {
+				for (uint32_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->get_w()) {
 					dstrect.x = x;
 					dstrect.y = y;
-					srcrect.w = min(static_cast<uint32_t>(m_bg_img->w), m_w + m_margin.left - x);
+					srcrect.w = min(static_cast<uint32_t>(m_bg_img->get_w()), m_w + m_margin.left - x);
 					srcrect.h = min(static_cast<uint32_t>(m_bg_img->h), m_h + m_margin.top - y);
 					SDL_BlitSurface(m_bg_img, &srcrect, rv, &dstrect);
 				}
@@ -493,7 +494,7 @@ private:
 	vector<RenderNode*> m_nodes_to_render;
 	Borders m_margin;
 	SDL_Color m_bg_clr;
-	SDL_Surface * m_bg_img; // Owned by the image loader
+	IPicture m_bg_img; // Owned by the image loader
 	vector<Reference> m_refs;
 };
 
@@ -502,7 +503,7 @@ public:
 	ImgRenderNode(NodeStyle & ns, SDL_Surface * sur) : RenderNode(ns), m_sur(sur) {
 	}
 
-	virtual uint32_t width() {return m_sur->w;}
+	virtual uint32_t width() {return m_sur->get_w();}
 	virtual uint32_t height() {return m_sur->h;}
 	virtual uint32_t hotspot_y() {return m_sur->h;}
 	virtual SDL_Surface * render() {
@@ -883,8 +884,9 @@ public:
 
 private:
 	FontCache m_fc;
-	IImageLoader * m_imgl;
-	IParser * m_p;
+	scoped_ptr<IImageLoader> m_imgl;
+	scoped_ptr<IParser> m_p;
+	IGraphic * gr;
 };
 
 Renderer::Renderer(IFontLoader * fl, IImageLoader * imgl, IParser * p) :
@@ -892,8 +894,6 @@ Renderer::Renderer(IFontLoader * fl, IImageLoader * imgl, IParser * p) :
 }
 
 Renderer::~Renderer() {
-	delete m_p;
-	delete m_imgl;
 }
 
 SDL_Surface * Renderer::render(string text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
@@ -923,8 +923,8 @@ SDL_Surface * Renderer::render(string text, uint32_t width, IRefMap ** pprm, con
 	return rv;
 }
 
-IRenderer * setup_renderer(IFontLoader * fl, IImageLoader * imgl) {
-	return new Renderer(fl, imgl, setup_parser());
+IRenderer * setup_renderer(IGraphic& gr, IFontLoader * fl, IImageLoader * imgl) {
+	return new Renderer(gr, fl, imgl, setup_parser());
 }
 
 };
