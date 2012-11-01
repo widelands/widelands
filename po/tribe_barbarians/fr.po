@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-04-14 22:21+0000\n"
-"Last-Translator: Emmanuel Andry <Unknown>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-09-26 10:19+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-15 04:35+0000\n"
-"X-Generator: Launchpad (build 15070)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -118,6 +118,8 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
+"\"Doux et souple.<br> Et pourtant inaltéré par le temps et les "
+"intempéries.<br> Rayons de soleil, forgés jusqu'à la fin des temps...\""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -269,7 +271,7 @@ msgstr "%s ou mieux et"
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s à %s (%s EP)"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:16
@@ -305,6 +307,8 @@ msgstr ""
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
 msgstr ""
+"Une fougeraie peut produire une gerbe de chaumes et de roseaux en %s en "
+"moyenne."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -323,8 +327,8 @@ msgid ""
 msgstr ""
 "Un casque est l'outil de base de protection des guerriers. Il est produit "
 "dans la forge de casques et utilisé dans les camps d'entrainement - avec de "
-"la nourriture - pour entrainer les soldats en points de santé du niveau 0 "
-"vers les points de santé niveau 1."
+"la nourriture - pour améliorer les points de santé des soldats du niveau 0 "
+"au niveau 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
@@ -358,8 +362,8 @@ msgid ""
 msgstr ""
 "Un casque de guerre est une pièce avancée de l'armure des guerriers "
 "barbares. Il est produit dans les forges de casques et utilisé dans les "
-"camps d'entrainement - avec de la nourriture - pour les points de santé des "
-"soldats du niveau 1 au niveau 2."
+"camps d'entrainement - avec de la nourriture - pour améliorer les points de "
+"santé des soldats du niveau 1 au niveau 2."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
@@ -1017,7 +1021,7 @@ msgstr "Démanteler le site"
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Démonter les sites de production:"
 
 #: ../../tribes/barbarians/conf:226
 msgid "Donjon"
@@ -2345,7 +2349,7 @@ msgstr "Au repos"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Ferners"
-msgstr ""
+msgstr "Slogan de la guilde des Agriculteurs"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Small Tower"
@@ -2439,13 +2443,10 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
-msgid "Source needed"
-msgstr "Source nécessaire"
-
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
-msgid "Source needed."
-msgstr "Source nécessaire."
+msgid "Source needed"
+msgstr "Source nécessaire"
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -2504,12 +2505,9 @@ msgstr "Taverne"
 #: ../../tribes/barbarians/bakery/help.lua:12
 #: ../../tribes/barbarians/cattlefarm/help.lua:12
 #: ../../tribes/barbarians/farm/help.lua:12
+#: ../../tribes/barbarians/quarry/help.lua:12
 msgid "Text needed"
 msgstr "Texte nécessaire"
-
-#: ../../tribes/barbarians/quarry/help.lua:12
-msgid "Text needed."
-msgstr "Texte nécessaire."
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
 #: ../../tribes/barbarians/axefactory/help.lua:42
@@ -2706,10 +2704,16 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ship's sails."
 msgstr ""
+"La Fougeraie cultive des roseaux qui servent à deux buts différents pour la "
+"tribu Barbare.<br>C'est le matériau traditionnel des toitures, et il est "
+"tissé en une étoffe extrêmement résistante qu'ils utilisent pour les voiles "
+"de leurs bateaux."
 
 #: ../../tribes/barbarians/fernery/help.lua:26
 msgid "The Fernery's output will only go to construction sites that need it."
 msgstr ""
+"La production des Fougeraies ira seulement aux sites de construction en "
+"ayant besoin."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher's Hut needs water full of fish in the vicinity."
@@ -3036,10 +3040,13 @@ msgid ""
 "Trains soldiers in Attack up to level 4, and in Hitpoints up to level "
 "2.<br>Equips the soldiers with all necessary weapons and armour parts."
 msgstr ""
+"Entraîne les soldats en vue d'améliorer l'attaque au niveau 4 et les "
+"dommages causés niveau 2.<br>Equipe les soldats avec toutes les armes et "
+"armures nécessaires."
 
 #: ../../tribes/barbarians/battlearena/help.lua:16
 msgid "Trains soldiers in Evade up to level 2."
-msgstr "Entraîne les soldats en esquive jusqu'au niveau 2."
+msgstr "Entraîne les soldats en vue d'améliorer l'esquive au niveau 2."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."

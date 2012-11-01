@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-04-26 13:37+0000\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-09-27 20:39+0000\n"
 "Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-27 04:33+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -47,6 +47,17 @@ msgid ""
 "level 2 evade. This is one fearsome warrior then! The individual statistics\n"
 "have the following meaning:"
 msgstr ""
+"Voják je tvořen stejně jako obyčejný dělník: nosič vezme nástroj ve\n"
+"skladišti jakmile je požadavek na určitou profesi a není splněn. Nástroj\n"
+"pro vytvoření barbarského vojáka je sekera. Nově vytvořený voják má\n"
+"úroveň 0. Pro vylepšení vojáka v jedné ze čtyř kategorií je nezbytný "
+"trénink.\n"
+"Trénink probíhá na cvičištích jako je tréninkový tábor nebo\n"
+"bitevní aréna: vojáci dorazí na místo (jak právě činí naši malí přátelé),\n"
+"spotřebují nějaké zboží a postoupí o jednu úroveň v jedné kategorii.\n"
+"Pokud je barbarský voják plně vycvičen, má úroveň životnosti 3,\n"
+"úroveň útoku 5, úroveň  obrany 0 a úroveň úhybu 2. Tomu říkám válečník!\n"
+"Jednotlivé statistiky mají následující význam:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:438
 msgid ""
@@ -104,7 +115,7 @@ msgstr ""
 "svou vojenskou nadvládu nad vlastní zemí, potřebuješ udržovat své vojenské "
 "budovy."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:683
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:682
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
@@ -148,13 +159,13 @@ msgid ""
 "activated\n"
 "earlier."
 msgstr ""
-"Vybuduj lom poblíž kamenů které vidíš. Pamatuješ si jak jsem to dělal "
-"předchvílí?\n"
-"Ujisti se, že máš zapnutou nápovědu ke stavbě a pak jednoduše klikni na "
-"místo,\n"
-"kam chces budovu postavit, vyber si ji ze zobrazeného seznamu a je hotovo.\n"
-"Možná je teď správná chvíle prozkoumat co který z těch symbolů aktivované\n"
-"nápovědy znamená."
+"Vybuduj lom poblíž kamenů které zde vidíš. Pamatuješ si, jak jsem to dělal "
+"před\n"
+"chvílí? Ujisti se, že máš zapnutou nápovědu ke stavbě a pak jednoduše klikni "
+"na\n"
+"místo, kde chceš budovu postavit, vyber si ji ze zobrazeného seznamu a je\n"
+"hotovo. Možná je teď správná chvíle prozkoumat, co který z těch symbolů\n"
+"aktivované nápovědy znamená."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:134
 msgid "Building a connecting road"
@@ -179,7 +190,7 @@ msgstr ""
 msgid "Census and statistics"
 msgstr "Přehled a statistiky"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:650
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:649
 msgid ""
 "Citadels can not be built directly. Instead, you have to construct a "
 "fortress\n"
@@ -207,8 +218,8 @@ msgstr "Zavřít okno zpráv"
 msgid "Closing windows"
 msgstr "Zavírání oken"
 
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:696
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:698
 msgid "Conclusion"
 msgstr "Shrnutí"
 
@@ -260,15 +271,15 @@ msgstr ""
 "zprávy: dají se vybrat klliknutím na zaškrtítko před zprávou.\n"
 "Pak klikni na"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 msgid "Defeat the enemy"
 msgstr "Poraž nepřítele"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:687
 msgid "Defeat the enemy tribe"
 msgstr "Zdolej nepřátelský kmen"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:690
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
 msgid ""
 "Defeat the nearby enemy. To attack a building, click on its doors, choose "
 "the\n"
@@ -278,12 +289,12 @@ msgstr ""
 "zvolíš \n"
 "počet útočícich vojáků a kliknutím na tlačítko útok je vyšleš do boje."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:673
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat your enemy"
 msgstr "Zdolej svého nepřítele"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:629
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid ""
 "Defense is the value that is subtracted from the attack value. The "
 "barbarians\n"
@@ -296,8 +307,15 @@ msgid ""
 "subtracted\n"
 "are because of the defense ability."
 msgstr ""
+"Obrana představuje hodnotu, která je odečtena z útočné hodnoty. Barbaři\n"
+"nemohou trénovat tuto vlastnost a tak mají úroveň obrany vždy 0, což \n"
+"znamená, že si vždy odečtou 3 životy z utrženého zranění. Pokud by\n"
+"útočník, který by barbarského válečníka zasáhl, měl úroveň útoku 15,\n"
+"barbar by ztratil 15 - 3 = 12 životů. 3 životy by byly ušetřeny, díky "
+"schopnosti\n"
+"obrany."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:627
 msgid "Defense:"
 msgstr "Obrana:"
 
@@ -310,19 +328,19 @@ msgstr "Vnoření"
 msgid "Enable the build help"
 msgstr "Povolit nápovědu při stavbě"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:643
 msgid "Enhance this fortress"
 msgstr "Vylepši tuto pevnost"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress"
 msgstr "Vylepši svou pevnost"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:661
 msgid "Enhance your fortress to a citadel"
 msgstr "Vylepši svou pevnost na tvrz"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:656
 msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
@@ -330,7 +348,7 @@ msgstr ""
 "Vylepši nyní svou pevnost na tvrz. Pamatuj, že můžeš zrychlit běh času \n"
 "pomocí klávesy PAGE UP, budování tvrzi zabere nějaký čas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:664
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid ""
 "Enhance your fortress to a mighty citadel. The citadel can house 12 "
 "soldiers\n"
@@ -340,12 +358,19 @@ msgid ""
 "strategically\n"
 "important points like constricted points or mountains."
 msgstr ""
+"Vylepši si svou pevnost na mocnou citadelu. Citadela může ubytovat 12 "
+"vojáků\n"
+"a je největší vojenskou budovou, jakou mohou barbaři postavit. Také hodně "
+"stojí\n"
+"a její stavba dlouho trvá. Nejvíce se hodí pro střežení strategicky "
+"důležitých\n"
+"bodů jako místa pro stavby a nebo hory."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhancing buildings"
 msgstr "Vylepšování budov"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. It is 25% "
 "for\n"
@@ -354,19 +379,19 @@ msgstr ""
 "Úhyb představuje šanci, že bude voják schopen vykrýt útok. Ta představuje "
 "25% pro úhyb úrovně 0 a stoupá s každou úrovní o 15%."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:634
 msgid "Evade:"
 msgstr "Úhyb:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
-msgstr "Na symbolu zeleného domu, může být postaveno cokoliv."
+msgstr "Na symbolu zeleného domu může být postaveno cokoliv."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:262
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
 msgstr ""
-"Na symbolu zeleného domu, může být postaveno cokoliv, kromě velkých budov."
+"Na symbolu žlutého domu může být postaveno cokoliv kromě velkých budov."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:294
 msgid ""
@@ -375,6 +400,10 @@ msgid ""
 "construction site. You can enter road building mode for any flag by\n"
 "left-clicking on a flag and selecting"
 msgstr ""
+"Výborně! Okamžitě po umístění budovy jsi v módu pro stavbu silnic.\n"
+"Nová cesta začne na vlajce před nově umístěným staveništěm.\n"
+"Můžeš vstoupit do módu pro stavbu silnic pro jakoukoliv vlajku tak,\n"
+"že na vlajku klikneš levým tlačítkem a vybereš ji"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:429
 msgid ""
@@ -385,6 +414,11 @@ msgid ""
 "pressing\n"
 "the button below, then right click into the messages window to close it."
 msgstr ""
+"Výborně! Mimochodem: zavření okna je ve Widelands vyřešeno jednoduše\n"
+"kliknutím pravým tlačítkem na okno. To funguje pro všechna okna, vyjma\n"
+"těch příběhových, jako je toto. Jen si to zkus. Nejprve zavři toto okno \n"
+"stisknutím tlačítka pod textem a poté klikni pravým tlačítkem na okno \n"
+"vzkazů, abys ho zavřel."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:227
 msgid ""
@@ -448,6 +482,20 @@ msgid ""
 "then select\n"
 "the tab - and finally I'll choose the building."
 msgstr ""
+"Nejprve kliknu levým tlačítkem na symbol, kde chci postavit dřevorubcovu "
+"chatu.\n"
+"Objeví se okno, kde můžu vybírat mezi budovami. Protože kliknu na symbol "
+"žlutého\n"
+"domu - to znamená, že na pozemku pod ním lze stavět středně velké a malé "
+"budovy\n"
+"- zobrazí se mi všechny střední budovy, které mohu stavět. Chata dřevorubce "
+"je\n"
+"malá budova, proto se dále přepnu na panel s malými budovami. Tam vyberu "
+"chatu\n"
+"dřevorubce.\n"
+"Klikni na tlačítko \"OK\" a sleduj mě. Budu postupovat opravdu pomalu: "
+"kliknu na\n"
+"žlutý dům - pak změním panel - a nakonec vyberu budovu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:498
 msgid ""
@@ -476,6 +524,13 @@ msgid ""
 "your\n"
 "tribe, won or lost military buildings, resources found..."
 msgstr ""
+"Ahoj, to jsem zase já! Tentokrát jsem ti poslal vzkaz. Vzkazy (zprávy) ti "
+"jsou\n"
+"poslány Widelands aby tě informovaly o důležitých událostech : prázdných "
+"dolech\n"
+"útocích na tvůj kmen, zabraných či ztracených vojenských budovách, "
+"nalezených\n"
+"surovinách,..."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:620
 msgid "Hitpoints:"
@@ -494,8 +549,12 @@ msgid ""
 "everything out for yourself. Otherwise, please bear with me, I am not the\n"
 "youngest and quickest anymore."
 msgstr ""
+"Omlouvám se, ale musím to znovu strhnout. Mohli bychom tady potřebovat\n"
+"místo později. Jestli jsem na tebe moc pomalý, můžeš klidně jít hrát ostrou\n"
+"hru a prostě na všechno přijít sám. V opačném případě však buď prosím \n"
+"trpělivý, nejsem už nejmladší a ani nejrychlejší."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid ""
 "I created a sparring partner for you: It is an empire tribe close to your\n"
 "citadel. To attack its buildings, click on the door of your target "
@@ -506,8 +565,15 @@ msgid ""
 "the defenders will come from all nearby military buildings of the enemy and\n"
 "intercept your forces."
 msgstr ""
+"Vytvořil jsem ti cvičného nepřítele: Je to imperiální kmen blízko u tvé\n"
+"citadely. Abys mohl zaútočit na jejich budovy, klikni na dveře cílové "
+"budovy,\n"
+"vyber počet vojáků, které si přeješ poslat  a klikni na tlačítko útoku.\n"
+"Tví vojáci vyrazí z nejbližších vojenských budov. Stejně tak vyrazí vojáci "
+"obránců a \n"
+"střetnou se s tvými silami."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:646
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid ""
 "I will create an enemy for you soon, but let's make sure you are prepared.\n"
 "This fortress is already quite strong and conquers a lot of space. But there "
@@ -558,6 +624,11 @@ msgid ""
 "clicking the fourth button from the left at the very bottom of the screen.\n"
 "Click the \"OK\" button and then give it a try."
 msgstr ""
+"Je snažší pochopit, co je možné posavit na jakém poli, jsou-li povoleny "
+"symboly\n"
+"nápovědy stavby. Pokud je chceš povolit, zmáčkni mezerník nebo klikni\n"
+"na čtvrtý symbol zleva úplně dole na obrazovce. Klikni na  \"OK\" a "
+"vyszkoušej si to."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
 msgid ""
@@ -574,12 +645,14 @@ msgid ""
 "Also try to keep roads as short as possible and always remember to place as\n"
 "many flags as you can on road segments to share the load better."
 msgstr ""
+"Nezapomeň na svahy když stavíš cesty a využij je ve svůj prospěch.\n"
+"Snaž se také udržet cesty co nejkratší a dávej co nejvíce vlajek \n"
+"na úsek cesty aby byl náklad co nejlépe rozložen."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
 msgstr ""
-"Klikni levým tlačítkem myši na okénko \"OK\" abys zavřel tento box a poté to "
-"zkus."
+"Zavři tento panel kliknutím na tlačítko \"OK\" a pak si to vyzkoušej."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
@@ -589,6 +662,9 @@ msgid ""
 "the\n"
 "watch tab and then click on the corresponding buttons."
 msgstr ""
+"Hned ti tyhle dvě zpřístupním. Pamatuj: ´c´ a ´s´ jsou ony klávesy.\n"
+"Také můžeš kliknout na jakékoliv pole bez budovy, vybrat \"watch tab\"\n"
+"a poté kliknout na odpovídající tlačítko."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:68
 msgid "Let's dive right in!"
@@ -602,6 +678,9 @@ msgid ""
 "geologist\n"
 "to it. I'll show you how it's done."
 msgstr ""
+"Zkusme se podívat po surovinách v této hoře. Nejprve k hoře postavíme cestu\n"
+"a umístíme vlajku. Poté stačí kliknout na vlajku a zavolat k ní geologa.\n"
+"Ukážu ti jak se to dělá."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -674,6 +753,11 @@ msgid ""
 "symbol\n"
 "in between the two blue flags we just placed and then click on the"
 msgstr ""
+"Jde jim to hezky, že? Jenom chudák nosič musí překonávat velký kus cesty.\n"
+"Můžeme mu to usnadnit (a docílit vyšší efektivity), když na cestu přidáme "
+"další\n"
+"modrou vlajku. Teď si to zkus sám: klikni na symbol žluté vlajky uprostřed\n"
+"cesty mezi dvěma modrými vlajkami, které jsem zrovna umístil, a pak klikni na"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:563
 msgid ""
@@ -690,6 +774,9 @@ msgid ""
 "medium or big building symbol, you will have to select the small buildings\n"
 "tab first to find it. Go on, check it out!"
 msgstr ""
+"Teď jdi a zkus si to sám. Lom je malá budova, takže když klikneš na symbol\n"
+"střední či velké budovy, budeš muset nejprve vybrat kartu malých budov,\n"
+"abys mohl najít tu svou. Jen si to vyzkoušej!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:342
 msgid ""
@@ -706,6 +793,10 @@ msgid ""
 "blue\n"
 "flags and carry wares from one blue flag to the other."
 msgstr ""
+"Pozorně teď sleduj, jak stavař vychází ze základny a míří na staveniště. "
+"Své\n"
+"místo zaujme také nosič: postaví se mezi dvě modré vlajky a bude přenášet\n"
+"zboží od jedné vlajky ke druhé."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
@@ -721,6 +812,13 @@ msgid ""
 "over\n"
 "the route the road takes like so:"
 msgstr ""
+"Teď k téhle cestě. Pamatuj: jsme již v modu pro stavbu silnic od chvíle, kdy "
+"jsi vydal \n"
+"příkaz ke stavbě lomu.  Buď můžeš cestu prodloužit o jedno políčko "
+"jednoduše\n"
+"kliknutím levým tlačítkem  několikrát na sousedící políčka abys měl přesnou "
+"kontrolu\n"
+"nad stavbou cesty, a to asi takhle:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
@@ -797,10 +895,13 @@ msgid ""
 "help\n"
 "symbol for where a mine can be built is"
 msgstr ""
+"Tak, náš geolog našel na této hoře hodně uhlí. Měl bys tu tedy\n"
+"postavit uhelný důl. Stavba dolu probíhá stejně jako stavba domu. Postav\n"
+"důl tam, kde je symbol pro stavbu."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
-msgstr ""
+msgstr "Vojáci a Vojenství"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:199
 msgid "Some stones were found"
@@ -816,7 +917,7 @@ msgid ""
 "move your view over there."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:716
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:715
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
@@ -832,6 +933,12 @@ msgid ""
 "the\n"
 "blue flag in front of my headquarters."
 msgstr ""
+"To ještě nestačí. Ještě musím připojit dřevorubcovu chatu ke zbytku "
+"dopravní\n"
+"sítě. Když jsem založil staveniště, dostal jsem se automaticky do režimu\n"
+"stavby cest, takže jediné, co musím udělat, je kliknout na modrou vlajku "
+"před\n"
+"základnou."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:624
 msgid ""
@@ -840,12 +947,20 @@ msgid ""
 "damage\n"
 "when he succeeds to hit an enemy. For each attack level, he gains 7 damage."
 msgstr ""
+"Hodnota poškození, které voják způsobí při úspěšném ptoku na nepřítele. "
+"Barbarský voják \n"
+"s úrovní útoku nula způsobí  zranění za ~14 životů, pokud uspěje se svým "
+"útokem na \n"
+"nepřítele. Za každou úroveň útoku vzroste poškožení o 7."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:335
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in\n"
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"Spojení mezi políčky je extrémně strmé. Nárůst rychlosti je v jednom směru "
+"je obrovský,\n"
+"naproti tomu zpomalení v opačném směru je také podstatné."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:531
 msgid ""
@@ -854,6 +969,9 @@ msgid ""
 "various\n"
 "resources:"
 msgstr ""
+"Geolog brzy dorazí k vlajce a začne prozkoumávat prostor ve svém okolí. "
+"Umístí následující\n"
+"značky pro různé suroviny:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:395
 msgid ""
@@ -887,6 +1005,10 @@ msgid ""
 "flags\n"
 "and player indicators on and off inside the minimap."
 msgstr ""
+"Minimapa ukazuje kompletní mapu ve zmenšeném měřítku. Můžeš přímo skočit\n"
+"ma libovolné políčko tak, že na něj klikneš levým tlačítkem.  V minimapě "
+"můžeš \n"
+"také přepínat indikátory budov, cest, vlajek a hráčů."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:169
 msgid ""
@@ -911,6 +1033,8 @@ msgid ""
 "hitpoints,\n"
 "with each hitpoint level he gains 28 hitpoints."
 msgstr ""
+"Celkový počet životů vojáka. Barbarský voják začíná s ~130 životy,\n"
+"za každou úroveň životů, se zvýší celkový  počet o 28."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:279
 msgid ""
@@ -929,6 +1053,11 @@ msgid ""
 "weaknesses,\n"
 "but the general gameplay is the same for all. We play the barbarians for now."
 msgstr ""
+"Ve Widelands jsou tři různé kmeny: barbaři, císařství a atlantiďané. Každý "
+"kmen\n"
+"má jinou ekonomiku, jiné přednosti a slabiny, ale obecné herní principy "
+"jsou\n"
+"stejné pro všechny. Teď budeme hrát za barbary."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:207
 msgid ""
@@ -976,8 +1105,14 @@ msgid ""
 "to\n"
 "demonstrate."
 msgstr ""
+"A je to. Všechny ty symboly ti vysvětlím za chvilku. Nejprve ti ukážu, jak\n"
+"postavit chatu dřevorubce a jak ji cestou připojit k základně. Hned vedle "
+"těch\n"
+"stromů je krásné místečko pro dřevorubce. V následujícím panelu ti "
+"vysvětlím\n"
+"všechny kroky a jakmile klikneš na tlačítko \"OK\", tak ti je i předvedu."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:700
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:699
 msgid ""
 "This concludes the tutorial. There is some stuff we have not covered here --"
 "\n"
@@ -1026,6 +1161,11 @@ msgid ""
 "clicking on the build help button at the bottom of the screen which is the\n"
 "fourth one from the left. Or you can use the SPACE key to toggle it."
 msgstr ""
+"Pro dřevorubcovu chatu musíme najít hezké místo. To si můžeme usnadnit tak,\n"
+"že aktivujeme nápovědu k výstavbě. Lze to provést dvěma způsoby: buď můžeš\n"
+"kliknout na tlačítko nápovědy k výstavbě na spodním okraji obrazovky "
+"(čtvrté\n"
+"zleva), nebo můžeš nápovědu přepínat pomocí mezerníku."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:54
 msgid "Welcome to Widelands!"
@@ -1051,6 +1191,9 @@ msgid ""
 "go faster, simply use the PAGE UP key on your keyboard to increase the game\n"
 "speed. You can use PAGE DOWN to make the game slower again."
 msgstr ""
+"Výborně! Počkáme, až bude chata dokončena. Pokud chceš, aby se to stalo\n"
+"rychleji, jednoduše stiskni na klávesnici PAGE UP a hra se zrychlí.\n"
+"Klávesou PAGE DOWN můžeš hru zase zpomalit."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:360
 msgid ""
@@ -1070,6 +1213,8 @@ msgid ""
 "construction,\n"
 "not destruction. This tutorial will get you through the basics of the game."
 msgstr ""
+"Widelands je budovací strategická hra v pomalém tempu s důrazem na stavbu,\n"
+"nikoliv ničení. Tento tutoriál tě seznámí s úplnými základy hry."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:256
 msgid ""
@@ -1079,6 +1224,10 @@ msgid ""
 "help\n"
 "eases recognition:"
 msgstr ""
+"Ve Widelands můžeš stavět 4 věci: vlajky, malé budovy, střední budovy a "
+"velké\n"
+"budovy. Avšak ne každé pole je vhodné ke stavbě všech těchto věcí. Díky\n"
+"nápovědě ke stavbě je snadné pole rozlišit:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:502
 msgid ""
@@ -1091,7 +1240,7 @@ msgid ""
 "fields farther up."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:708
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:707
 msgid ""
 "You can continue playing this map or you can end this game whenever you "
 "like.\n"
@@ -1100,7 +1249,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:59
 msgid "You can dismiss this box by left-clicking on the button below."
-msgstr "Tento panel můžeš zrušit kliknutím na tlačítko pod ním."
+msgstr "Tento panel můžeš zavřít kliknutím na tlačítko dole."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:74
 msgid ""
@@ -1119,6 +1268,14 @@ msgid ""
 "for\n"
 "him to stay in."
 msgstr ""
+"Na začátku hry máš obvykle jednu základnu. To je ta velká budova s modrou\n"
+"vlajkou před vstupem. Základna slouží jako skladiště, kde se přechovává "
+"zboží,\n"
+"pracovníci a vojáci. Některé zboží je potřebné ke stavbě domů, z jiného se\n"
+"vyrábí další zboží. Zboží v základně pochopitelně nevydrží navěky, proto\n"
+"musíš zajistit také jeho přísun. Nejdůležitějším zbožím na začátku hry je\n"
+"základní stavební materiál: klády a kámen. Nyní zařídíme, aby nám nedošly\n"
+"klády. K tomu potřebujeme dřevorubce a chatu, ve které bude přebývat."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:535
 msgid "a bit of coal"
@@ -1160,7 +1317,7 @@ msgstr "tlačítko \"ulož zprávu\" pro odeslání  zprávy do archivu"
 msgid "build flag symbol."
 msgstr "symbol pro umístění vlajky"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:714
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:713
 msgid "exit game button."
 msgstr "tlačítko pro ukončení hry"
 
@@ -1175,7 +1332,7 @@ msgstr ""
 msgid "nothing was found here"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:711
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:710
 msgid ""
 "options menu button on the very left at the bottom of the screen.\n"
 "Then click the"

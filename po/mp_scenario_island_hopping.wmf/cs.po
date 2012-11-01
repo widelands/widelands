@@ -7,24 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-03-31 12:10+0000\n"
-"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-06-25 20:17+0000\n"
+"Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-01 04:33+0000\n"
-"X-Generator: Launchpad (build 15032)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/init.lua:101
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
-msgid "%i %s<br>"
-msgstr "%i %s<br>"
+msgid "%i %s<br>\n"
+msgstr "%i %s<br>\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
 msgid "%s has been King of the Hill since %s!"
-msgstr "%s byl králem hor od %s!"
+msgstr "%s je Králem Hory od %s!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
 msgid "%s has won the game. Congratulations!"
@@ -40,7 +39,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:49
 msgid "%s lost control of the hill."
-msgstr "%s ztratil kontrolu nad horami."
+msgstr "%s ztratil kontrolu nad Horou."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
 msgid "%s was the first to reach the Island number %i."
@@ -98,7 +97,6 @@ msgstr "Odměny za dokončení"
 msgid "First Island"
 msgstr "První ostrov"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/init.lua:94
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:94
 msgid "Game Status"
 msgstr "Stav hry"
@@ -109,26 +107,25 @@ msgid ""
 "get\n"
 "a third headquarters on the third island. You must build and hold a castle "
 "at\n"
-"the center of the third island for 20 minutes to win the game"
+"the center of the third island for 20 minutes to win the game."
 msgstr ""
-"Až dokončíš hrad v cílové zóně na druhém ostrově, dostaneš\n"
-"třetí velitelství na třetím ostrově. A když uprostřed třetího ostrova\n"
-"vybuduješ hrad a ubráníš ho 20 minut, vyhrál jsi."
+"Jakmile dokončíš hrad v cílovém místě na druhém ostrově, obdržíš\n"
+"třetí základnu na třetím ostrově. Abys vyhrál, musíš vybudovat hrad\n"
+"uprostřed třetího ostrova a udržet ho 20 minut."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
 "Island Hopping is a traditional tournament in the Atlantean culture. The\n"
-"rules of the game are simple: You start with a headquarters one one island.\n"
+"rules of the game are simple: You start with a headquarters on one island.\n"
 "When you finish a castle at the end of the first island, you are granted a\n"
 "second headquarters on a second island which will contain all wares from "
 "your\n"
 "first headquarters."
 msgstr ""
-"Island Hopping je tradiční turnaj atlantidské kultury. Pravidla jsou\n"
-"velice jednoduchá: Začínáš s velitelstvím na jednom z ostrovů.\n"
-"V okamžiku, kdy na konci ostrova dokončíš stavbu hradu, dostaneš\n"
-"druhé velitelství na druhém ostrově, ve kterém bude veškeré zboží\n"
-"z tvého prvního velitelství."
+"Island Hopping je tradiční turnaj kultury Antlantiďanů. Pravidla hry jsou\n"
+"jednoduchá: Začínáš se základnou na jednom z ostrovů. Jakmile dokončíš\n"
+"hrad na konci prvního ostrova, obdržíš na druhém ostrově další\n"
+"základnu, ve které bude všechno zboží z první základny."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"

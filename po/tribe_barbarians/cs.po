@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-04-24 22:45+0000\n"
-"Last-Translator: Martin Volf <Unknown>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-06-25 20:27+0000\n"
+"Last-Translator: Jiří Locker <jiri.locker@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-26 04:32+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -51,9 +51,7 @@ msgstr "\"Vytvoření nového kamene ze starého pomocí ohně a vody.\""
 msgid ""
 "\"He loves the animals and to breed them<br>as we love to cook and eat "
 "them.\""
-msgstr ""
-"\"On miluje zvířata a množí je tak,<br>\r\n"
-"jako je my vaříme a jíme.\""
+msgstr "\"On miluje zvířata a množí je tak,<br>jako je my vaříme a jíme.\""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:13
 msgid ""
@@ -83,6 +81,8 @@ msgid ""
 "\"I look at my own pick wearing away day by day and I realize why my work is "
 "important.\""
 msgstr ""
+"\"Pozoruji svůj krumpáč, jak je den za dnem více opotřebovaný, a dochází mi, "
+"proč je moje práce důležitá.\""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:12
 msgid ""
@@ -102,9 +102,7 @@ msgid ""
 "\"Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.\""
 msgstr ""
-"\"Ó jak sladký je zdroj života,<br>\r\n"
-"co padá z nebes<br>\r\n"
-"a nechává zemi pít.\""
+"\"Ó jak sladký je zdroj života,<br>co padá z nebes<br>a nechává zemi pít.\""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -113,6 +111,8 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
+"\"Měkké a ohebné.<br> A přece nedotčené časem nebo počasím.<br> Paprsky "
+"slunce ukované navěčnost...\""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -207,7 +207,7 @@ msgstr "%s ze Slévárny"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
-msgstr ""
+msgstr "%s hovoří s %s"
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
@@ -274,6 +274,8 @@ msgid ""
 "A %s exploits all of the resource down to the deepest level.<br>But even "
 "after having done so, it will still have a %s chance of finding some more %s."
 msgstr ""
+"%s vytěží veškeré zásoby včetně těch z nejhlubší úrovně.<br>Dokonce i poté "
+"však bude mít %s šanci nalézt další %s."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/goldmine/help.lua:16
@@ -281,6 +283,7 @@ msgid ""
 "A %s exploits only %s of the resource. <br> From there on, it will only have "
 "a 5%% chance of finding %s."
 msgstr ""
+"%s vytěží pouze %s zásob.<br>Poté bude mít pouze 5%% šanci nalézt další %s."
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -289,10 +292,11 @@ msgid ""
 "A %s exploits only %s of the resource.<br>From there on, it will only have a "
 "5%% chance of finding %s."
 msgstr ""
+"%s vytěží pouze %s zásob.<br>Poté bude mít pouze 5%% šanci nalézt další %s."
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
-msgstr ""
+msgstr "Kapradiny vyrobí snop doškového rákosí průměrně asi jednou za %s."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -354,6 +358,10 @@ msgid ""
 "\t\t\tWood may serve for a household fire and to keep you warm, but when it "
 "comes to working with iron or gold, there is no way around coal."
 msgstr ""
+"Před dávnými časy se barbaří naučili zavrtávat do skalistých svahů, aby "
+"dobývali černý poklad, jenž živí jejich pece.<br>\n"
+"\t\t\tDřevo snad poslouží k zahřátí u domácího ohniště, ale když dojde na "
+"práci se železem nebo zlatem, bez uhlí se nelze obejít."
 
 #: ../../tribes/barbarians/axefactory/help.lua:64
 msgid ""
@@ -376,6 +384,7 @@ msgid ""
 "An %s exploits only %s of the resource. <br> From there on, it will only "
 "have a 5%% chance of finding %s."
 msgstr ""
+"%s vytěží pouze %s zásob.<br>Poté bude mít pouze 5%% šanci nalézt další %s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -383,8 +392,7 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
-"Staré Barbarské přísloví<br>\r\n"
-"naznačující, že někdy je potřeba riskovat."
+"Staré Barbarské přísloví<br>naznačující, že někdy je potřeba riskovat."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -414,7 +422,7 @@ msgstr "Továrna na sekery"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr ""
+msgstr "Peče chlebové placky pro vojáky a horníky."
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:122
@@ -434,11 +442,11 @@ msgstr "Peče chléb pro pracovníky."
 
 #: ../../tribes/barbarians/bakery/help.lua:51
 msgid "Baking Tray"
-msgstr ""
+msgstr "Pečicí plech"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Barbarská dětská říkanka"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -502,7 +510,7 @@ msgstr "Hostinec"
 #: ../../tribes/barbarians/farm/help.lua:31
 #: ../../tribes/barbarians/trainingscamp/help.lua:38
 msgid "Big plot"
-msgstr ""
+msgstr "Velký pozemek"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/axefactory/help.lua:60
@@ -643,7 +651,7 @@ msgstr "Vypaluje uhlí"
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Vyrábí maltu ve vápence."
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
@@ -988,7 +996,7 @@ msgstr "Rozebrat stavbu"
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Rozebrání přinese:"
 
 #: ../../tribes/barbarians/conf:226
 msgid "Donjon"
@@ -1671,7 +1679,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:31
 #: ../../tribes/barbarians/warmill/help.lua:34
 msgid "Medium plot"
-msgstr ""
+msgstr "Střední pozemek"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/conf:204
@@ -1696,7 +1704,7 @@ msgstr "Minipivovar"
 #: ../../tribes/barbarians/granitemine/help.lua:34
 #: ../../tribes/barbarians/oremine/help.lua:34
 msgid "Mine plot"
-msgstr ""
+msgstr "Pozemek pro důl"
 
 #: ../../tribes/barbarians/coalmine/help.lua:50
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -2303,7 +2311,7 @@ msgstr "Malá věž"
 #: ../../tribes/barbarians/rangers_hut/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Small plot"
-msgstr ""
+msgstr "Malý pozemek"
 
 #: ../../tribes/barbarians/smelting_works/conf:25
 msgid "Smelt gold"
@@ -2380,12 +2388,9 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
-msgid "Source needed"
-msgstr ""
-
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
-msgid "Source needed."
+msgid "Source needed"
 msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
@@ -2445,11 +2450,8 @@ msgstr "Kuchyň"
 #: ../../tribes/barbarians/bakery/help.lua:12
 #: ../../tribes/barbarians/cattlefarm/help.lua:12
 #: ../../tribes/barbarians/farm/help.lua:12
-msgid "Text needed"
-msgstr ""
-
 #: ../../tribes/barbarians/quarry/help.lua:12
-msgid "Text needed."
+msgid "Text needed"
 msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
@@ -2719,6 +2721,11 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
+"Barbarští pekaři jsou mistři v přípravě těchto chutných chlebových placek, "
+"zvaných též \"pita\". Připravují je podle tajného receptu z pšenice a vody. "
+"Chlebové placky se používají v kuchyních, hospodách a hostincích k přípravě "
+"porcí, svačin a jídel. Kromě toho jsou ještě potřebné během výcviku ve "
+"výcvikovém táboře a bitevní aréně."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -2840,6 +2847,8 @@ msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of trunks in the wood hardener."
 msgstr ""
+"Toto ohněm tvrzené dřevo je tvrdé jako železo a používá se ke stavbě "
+"několika budov. Vyrábí se z klád v tesařství."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -2995,6 +3004,10 @@ msgid ""
 "burner's house in the production of coal. The wood hardener refines trunks "
 "by hardening them in the fire which gives blackwood."
 msgstr ""
+"Klády jsou základním stavebním materiálem barbarů. Stromy kácí dřevorubci; "
+"lesníci se starají o obnovu porostu. Klády se také používají v železárnách k "
+"výrobě základních nástrojů a v milíři k výrobě uhlí. Tvrzením v ohni se v "
+"tesařství z kmenů získává tvrzené dřevo."
 
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36

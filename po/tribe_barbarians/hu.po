@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2012-03-12 08:26+0000\n"
-"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-10-29 15:51+0000\n"
+"Last-Translator: Major Gabesz <major.gabesz@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:36+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-10-30 04:31+0000\n"
+"X-Generator: Launchpad (build 16206)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -22,45 +22,56 @@ msgid ""
 "\"A new Warriors Axe brings forth the best in its wielder – or the worst in "
 "its maker.\""
 msgstr ""
+"\"Az új Harci Fejsze legjobbat hozza ki a forgatójából - vagy a "
+"legrosszabbat az ellenségből.\""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:12
 msgid ""
 "\"As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.\""
 msgstr ""
+"\"Csendes, mint a párduc,<br> ügyes, mint a menyét,<br> sebes, mint a "
+"nyílvessző,<br> halálos, mint a vipera.\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:17
 msgid ""
 "\"Evade\" increases the soldier's chance not to be hit by the enemy and so "
 "to remain totally unaffected."
 msgstr ""
+"A \"Kitérés\" fejleszti a harcosok képességét arra, hogy ne tudják eltalálni "
+"őket és kevesebb sebezést kapjanak."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "\"Forming new stone from old with fire and water.\""
-msgstr ""
+msgstr "\"Alakíts új követ a régiből tűzzel és vízzel.\""
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
 "\"He loves the animals and to breed them<br>as we love to cook and eat "
 "them.\""
 msgstr ""
+"Szereti az állatokat és eteti őket, <br> mint ahogyan szeretjük tálalni "
+"őket.\""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:13
 msgid ""
 "\"He who can grow two trees where normally grows only one exceeds the most "
 "important general!\""
-msgstr ""
+msgstr "\"Ő, aki egy fa helyett kettőt ültet, ő a legfontosabb tábornok!\""
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""
 "\"He who is strong shall not forgive nor forget, but revenge injustice "
 "suffered - in the past and for all future.\""
 msgstr ""
+"Ő, ki erős és sosem felejtett és felejt, minden törvénytelen kobakot bevert -"
+" a múltban és a jövőben.\""
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
 msgid ""
 "\"I can handle tons of granite, man, but no more of your vain prattle.\""
 msgstr ""
+"\"Gránitok sokaságát emelem meg, de felesleges fecsegésed nem érdekel.\""
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:12
 #: ../../tribes/barbarians/deeper_oremine/help.lua:12
@@ -69,23 +80,29 @@ msgid ""
 "\"I look at my own pick wearing away day by day and I realize why my work is "
 "important.\""
 msgstr ""
+"\"Nézem minden nap, ahogyan csákányom kopik, ezért fontos munkámmal "
+"nemzetünk gyarapodik.\""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:12
 msgid ""
 "\"Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
+"Először is üsd el éhséged, másodszorra nyugodtságot kapsz, hogy lenyelhesd "
+"harmadik lehetőséged, itt az idő a következő váltásra!\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
 "\"No better friend you have in battle than the enemy's blow that misses.\""
-msgstr ""
+msgstr "\"Nincs nagyobb barátod a harcban, mint az ellenséged hibája.\""
 
 #: ../../tribes/barbarians/well/help.lua:12
 msgid ""
 "\"Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.\""
 msgstr ""
+"\"Óh, milyen édes az élet eredete,<br> az égből jön <br> és a föld szívja "
+"magába.\""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -94,6 +111,8 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
+"Lágy és alkalmazkodó.<br> Még nem érintette idő és a természet.<br> "
+"Napsugár, kikovácsolta az örökkévalóság...\""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -101,22 +120,24 @@ msgid ""
 "soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable "
 "lumberjack.\""
 msgstr ""
+"Csapj kétszázat és kisgyermek vagy. Csapj százat és katona vagy. Csapj "
+"ötvenet és hős vagy. Csapj huszat és hamarosan a legjobb favágó leszel.\""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "\"The Art of Hunting\""
-msgstr ""
+msgstr "\"A vadászat művészete\""
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "\"We grow roofs\""
-msgstr ""
+msgstr "\"Tetőket emelünk\""
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "\"We make it work!\""
-msgstr ""
+msgstr "\"Megcsináljuk, működik!\""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
-msgstr ""
+msgstr "\"Hogyan mondod, hogy a halaim nem frissek?!\""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:30
 #: ../../tribes/barbarians/deep_oremine/help.lua:30
@@ -125,7 +146,7 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr ""
+msgstr "%s mindig megy a %s mélyére. Nincs semmi haszna."
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -135,7 +156,7 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:58
 msgid "%s and"
-msgstr ""
+msgstr "%s és"
 
 #: ../../tribes/barbarians/coalmine/help.lua:28
 #: ../../tribes/barbarians/deep_coalmine/help.lua:27
@@ -148,14 +169,14 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr ""
+msgstr "%s a Nagy Fogadóból"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr ""
+msgstr "%s a Nagy Kocsmából"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -165,32 +186,32 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr ""
+msgstr "%s a Kocsmából"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "%s a Szénbányából vagy a Szénégetőtől"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
-msgstr ""
+msgstr "%s a Favágó kunyhójából"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr ""
+msgstr "%s az Olvaasztóműhelyből"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
-msgstr ""
+msgstr "%s helyettesíthető %s alapanyaggal"
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "%s or %s"
-msgstr ""
+msgstr "%s vagy %s"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/coalmine/help.lua:50
@@ -209,13 +230,13 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:59
 msgid "%s or better"
-msgstr ""
+msgstr "%s vagy jobb"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:53
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:49
 #: ../../tribes/barbarians/deeper_oremine/help.lua:49
 msgid "%s or better and"
-msgstr ""
+msgstr "%s vagy jobb és"
 
 #: ../../tribes/barbarians/axefactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -270,16 +291,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
-msgstr ""
+msgstr "A Nádarató egy köteg Szalmát %s daradot termel átlagosan."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
-"Egy nagyobb adag a napi fejadagnál, hogy ellássa a bányászokat a mély "
-"bányákban. Egy kocsmában vagy nagy kocsmában készül hal/hús, pitta kenyér és "
-"sör felhasználásával."
+"Nagyobb adag az élelmiszernél, amit a mélyebb bányákban használnak a "
+"bányászok. Kocsmában, Fogadóban készül hal vagy hú és sör felhasználásával."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -302,7 +322,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Hajózásra alkalmas hajó"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -2350,12 +2370,9 @@ msgstr ""
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
-msgid "Source needed"
-msgstr ""
-
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
-msgid "Source needed."
+msgid "Source needed"
 msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
@@ -2416,11 +2433,8 @@ msgstr "Kocsma"
 #: ../../tribes/barbarians/bakery/help.lua:12
 #: ../../tribes/barbarians/cattlefarm/help.lua:12
 #: ../../tribes/barbarians/farm/help.lua:12
-msgid "Text needed"
-msgstr ""
-
 #: ../../tribes/barbarians/quarry/help.lua:12
-msgid "Text needed."
+msgid "Text needed"
 msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
