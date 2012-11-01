@@ -72,7 +72,7 @@ struct Coords {
 			if (y < new_origin.y)
 				y += extent.h;
 			y -= new_origin.y;
-			if (y & 1 and new_origin.y & 1 and ++new_origin.x == extent.w)
+			if ((y & 1) and (new_origin.y & 1) and ++new_origin.x == extent.w)
 				new_origin.x = 0;
 			if (x < new_origin.x)
 				x += extent.w;
@@ -124,7 +124,7 @@ template <typename Area_type = Area<> > struct HollowArea : public Area_type {
 struct Field;
 
 struct FCoords : public Coords {
-	FCoords() throw () {}
+	FCoords() throw () : field(0) {}
 	FCoords(const Coords & nc, Field * const nf) throw () : Coords(nc), field(nf)
 	{}
 
@@ -134,7 +134,7 @@ struct FCoords : public Coords {
 	 *
 	 * \note You really want to use \ref Map::get_fcoords instead.
 	 */
-	explicit FCoords(const Coords & nc) throw () : Coords(nc) {}
+	explicit FCoords(const Coords & nc) throw () : Coords(nc), field(0) {}
 
 	Field * field;
 };
@@ -143,7 +143,7 @@ struct FCoords : public Coords {
 template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 	enum TriangleIndex {D, R, None};
 
-	TCoords() throw () {}
+	TCoords() throw () : t() {}
 	TCoords(const Coords_type C, const TriangleIndex T = None) throw ()
 		: Coords_type(C), t(T)
 	{}

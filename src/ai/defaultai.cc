@@ -63,6 +63,7 @@ DefaultAI::DefaultAI(Game & game, Player_Number const pid, uint8_t const t) :
 	type                         (t),
 	m_buildable_changed          (true),
 	m_mineable_changed           (true),
+	player                       (0),
 	tribe                        (0),
 	total_constructionsites      (0),
 	next_road_due                (2000),
@@ -72,6 +73,7 @@ DefaultAI::DefaultAI(Game & game, Player_Number const pid, uint8_t const t) :
 	next_mine_check_due          (0),
 	next_militarysite_check_due  (0),
 	next_attack_consideration_due(300000),
+	inhibit_road_building        (0),
 	time_of_last_construction    (0),
 	numof_warehouses             (0)
 {}
@@ -522,7 +524,7 @@ void DefaultAI::update_buildable_field
 				 or
 				 (dynamic_cast<Road const *>(imm)
 				  &&
-				  fse.field->nodecaps() & BUILDCAPS_FLAG))
+				  (fse.field->nodecaps() & BUILDCAPS_FLAG)))
 			field.preferred = true;
 
 		for (uint32_t i = 0; i < immovables.size(); ++i) {
@@ -652,7 +654,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 			 or
 			 (dynamic_cast<Road const *>(imm)
 			  &&
-			  fse.field->nodecaps() & BUILDCAPS_FLAG))
+			  (fse.field->nodecaps() & BUILDCAPS_FLAG)))
 		field.preferred = true;
 
 	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {

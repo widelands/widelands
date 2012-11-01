@@ -185,7 +185,7 @@ bool CheckStepRoad::allowed
 			return
 				dynamic_cast<Flag const *>(imm)
 				or
-				(dynamic_cast<Road const *>(imm) and endcaps & BUILDCAPS_FLAG);
+				(dynamic_cast<Road const *>(imm) and (endcaps & BUILDCAPS_FLAG));
 		}
 
 	return true;

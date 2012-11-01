@@ -260,6 +260,9 @@ Building::Building(const Building_Descr & building_descr) :
 PlayerImmovable(building_descr),
 m_optionswindow(0),
 m_flag         (0),
+m_anim(0),
+m_animstart(0),
+m_leave_time(0),
 m_defeating_player(0),
 m_priority (DEFAULT_PRIORITY),
 m_seeing(false)
@@ -552,6 +555,7 @@ std::string Building::info_string(std::string const & format) {
 				break;
 			default: //  invalid format sequence
 				result << '%' << *i.current;
+				break;
 			}
 		} else
 			result << *i.current;

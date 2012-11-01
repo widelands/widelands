@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
 "PO-Revision-Date: 2012-03-19 12:38+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:37+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:36+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -722,6 +722,10 @@ msgstr "Produzione strumenti da cucina"
 msgid "Produce lance"
 msgstr "Produzione lancia"
 
+#: ../../tribes/empire/inn/conf:22
+msgid "Produce meal"
+msgstr ""
+
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
 msgstr "Produzione piccone"
@@ -729,6 +733,10 @@ msgstr "Produzione piccone"
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid "Produce plate armour"
 msgstr "Produzione armatura di piastre"
+
+#: ../../tribes/empire/inn/conf:21
+msgid "Produce ration"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
@@ -1460,7 +1468,7 @@ msgstr ""
 #: ../../tribes/empire/foresters_house/conf:16
 #: ../../tribes/empire/goldmine/conf:22
 #: ../../tribes/empire/hunters_house/conf:16
-#: ../../tribes/empire/inn/conf:20
+#: ../../tribes/empire/inn/conf:23
 #: ../../tribes/empire/lumberjacks_house/conf:16
 #: ../../tribes/empire/marblemine/conf:26
 #: ../../tribes/empire/mill/conf:20

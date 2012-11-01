@@ -123,11 +123,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error & e) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error & e) {
 		//TODO: handle me
 	}
 
@@ -138,11 +138,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error & e) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error & e) {
 		//TODO: handle me
 	}
 
@@ -156,11 +156,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("."));
 #endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error & e) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error & e) {
 		//TODO: handle me
 	}
 
@@ -186,11 +186,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
 #endif
 			}
-			catch (FileNotFound_error e) {}
-			catch (FileAccessDenied_error e) {
+			catch (FileNotFound_error & e) {}
+			catch (FileAccessDenied_error & e) {
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
-			catch (FileType_error e) {
+			catch (FileType_error & e) {
 				//TODO: handle me
 			}
 		}
@@ -1250,7 +1250,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 		try {
 			journal->start_recording(m_commandline["record"]);
-		} catch (Journalfile_error e) {
+		} catch (Journalfile_error & e) {
 			wout << "Journal file error: " << e.what() << endl;
 		}
 
@@ -1264,7 +1264,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		try {
 			journal->start_playback(m_commandline["playback"]);
 		}
-		catch (Journalfile_error e) {
+		catch (Journalfile_error & e) {
 			wout << "Journal file error: " << e.what() << endl;
 		}
 
@@ -1615,6 +1615,7 @@ void WLApplication::mainmenu_singleplayer()
 			break;
 		default:
 			assert(false);
+			break;
 		}
 	}
 
@@ -1647,6 +1648,7 @@ void WLApplication::mainmenu_multiplayer()
 				break;
 			default:
 				assert(false);
+				break;
 		}
 
 		if (internet) {
@@ -1743,6 +1745,7 @@ void WLApplication::mainmenu_editor()
 		}
 		default:
 			assert(false);
+			break;
 		}
 	}
 }

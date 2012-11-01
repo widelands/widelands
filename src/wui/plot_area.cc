@@ -57,8 +57,10 @@ WUIPlot_Area::WUIPlot_Area
 UI::Panel (parent, x, y, w, h),
 spacing(5),
 space_at_bottom(15),
-space_at_right(5),
+space_at_right(10),
+space_left_of_label(15),
 m_time    (TIME_GAME),
+m_sample_rate(0),
 m_plotmode(PLOTMODE_ABSOLUTE),
 m_game_time_id(0)
 {}
@@ -211,7 +213,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 
 	//  plot the pixels
 	float sub =
-		xline_length
+		(xline_length - space_left_of_label)
 		/
 		(static_cast<float>(time_in_ms_)
 		 /
@@ -236,7 +238,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				}
 
 				dataset = &m_data;
-				sub = xline_length / static_cast<float>(nr_samples);
+				sub = (xline_length - space_left_of_label) / static_cast<float>(nr_samples);
 			}
 
 			draw_plot_line
@@ -379,7 +381,7 @@ uint32_t WUIPlot_Area::draw_diagram
 	UI::TextStyle xtickstyle(UI::TextStyle::ui_small());
 	xtickstyle.fg = RGBColor(255, 0, 0);
 
-	float sub = xline_length / how_many_ticks;
+	float sub = (xline_length - space_left_of_label) / how_many_ticks;
 	float posx = get_inner_w() - space_at_right;
 
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
@@ -388,9 +390,11 @@ uint32_t WUIPlot_Area::draw_diagram
 			 static_cast<int32_t>(posx), get_inner_h() - space_at_bottom + 3,
 			 LINE_COLOR, 2);
 
+		// The space at the end is intentional to have the tick centered
+		// over the number, not to the left
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%u", max_x / how_many_ticks * i);
+			 "-%u ", max_x / how_many_ticks * i);
 
 		UI::g_fh->draw_text
 			(dst, xtickstyle,

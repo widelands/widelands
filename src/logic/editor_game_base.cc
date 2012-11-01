@@ -555,6 +555,7 @@ void Editor_Game_Base::set_road
 		break;
 	default:
 		assert(false);
+		break;
 	}
 	uint8_t const road = f.field->get_roads() & mask;
 	Map_Index const           i = f        .field - &first_field;

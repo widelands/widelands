@@ -362,7 +362,8 @@ void FieldDebugWindow::think()
 		}
 		default:
 			snprintf(buffer, sizeof(buffer), "  seen %u times\n", vision - 1);
-			str +=  buffer;
+			str += buffer;
+			break;
 		}
 	}
 	{

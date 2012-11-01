@@ -152,6 +152,8 @@ struct Tribe_Descr : boost::noncopyable {
 				return result;
 			else if (not result)
 				throw Nonexistent();
+
+		return 0;
 	}
 	uint8_t flag_style_index    (std::string const & stylename) const {
 		for (uint8_t result = m_anim_flag.size();;)
@@ -159,6 +161,8 @@ struct Tribe_Descr : boost::noncopyable {
 				return result;
 			else if (not result)
 				throw Nonexistent();
+
+		return 0;
 	}
 	uint8_t frontier_style_index(char const * const stylename) const {
 		for (uint8_t result = m_anim_frontier.size();;)
@@ -166,6 +170,8 @@ struct Tribe_Descr : boost::noncopyable {
 				return result;
 			else if (not result)
 				throw Nonexistent();
+
+		return 0;
 	}
 	uint8_t flag_style_index    (char const * const stylename) const {
 		for (uint8_t result = m_anim_flag.size();;)
@@ -173,6 +179,8 @@ struct Tribe_Descr : boost::noncopyable {
 				return result;
 			else if (not result)
 				throw Nonexistent();
+
+		return 0;
 	}
 	uint8_t next_frontier_style_index(uint8_t i) const {
 		return ++i == m_anim_frontier.size() ? 0 : i;

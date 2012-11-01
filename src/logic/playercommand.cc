@@ -960,7 +960,8 @@ Cmd_ResetWareTargetQuantity::Cmd_ResetWareTargetQuantity
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type)
 	:
-	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
+	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
+	m_economy(0)
 {}
 
 void Cmd_ResetWareTargetQuantity::execute(Game & game)
@@ -1003,7 +1004,7 @@ void Cmd_ResetWareTargetQuantity::Read
 }
 
 Cmd_ResetWareTargetQuantity::Cmd_ResetWareTargetQuantity(StreamRead & des)
-	: Cmd_ChangeTargetQuantity(des)
+	: Cmd_ChangeTargetQuantity(des), m_economy(0)
 {}
 
 void Cmd_ResetWareTargetQuantity::serialize(StreamWrite & ser)
@@ -1082,7 +1083,8 @@ Cmd_ResetWorkerTargetQuantity::Cmd_ResetWorkerTargetQuantity
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type)
 	:
-	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
+	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
+	m_economy(0)
 {}
 
 void Cmd_ResetWorkerTargetQuantity::execute(Game & game)
@@ -1125,7 +1127,7 @@ void Cmd_ResetWorkerTargetQuantity::Read
 }
 
 Cmd_ResetWorkerTargetQuantity::Cmd_ResetWorkerTargetQuantity(StreamRead & des)
-	: Cmd_ChangeTargetQuantity(des)
+	: Cmd_ChangeTargetQuantity(des), m_economy(0)
 {}
 
 void Cmd_ResetWorkerTargetQuantity::serialize(StreamWrite & ser)
@@ -1450,7 +1452,8 @@ void Cmd_EnemyFlagAction::Write
 
 Cmd_ChangeMilitaryConfig::Cmd_ChangeMilitaryConfig(StreamRead & des)
 :
-PlayerCommand (0, des.Unsigned8())
+PlayerCommand (0, des.Unsigned8()),
+serial(0)
 {
 	retreat = des.Unsigned8();
 	/// Read reserved data
@@ -1602,7 +1605,7 @@ Cmd_SetStockPolicy::Cmd_SetStockPolicy
 }
 
 Cmd_SetStockPolicy::Cmd_SetStockPolicy()
-: PlayerCommand()
+: PlayerCommand(), m_warehouse(0), m_isworker(false), m_policy()
 {
 }
 

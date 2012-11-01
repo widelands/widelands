@@ -28,7 +28,9 @@
 Overlay_Manager::Overlay_Manager() :
 m_are_graphics_loaded(false),
 m_showbuildhelp(false),
-m_callback(0)
+m_callback(0),
+m_callback_data(0),
+m_callback_data_i(0)
 #ifndef NDEBUG
 //  No need to initialize (see comment for get_a_job_id) other than to shut up
 //  Valgrind.

@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
 "PO-Revision-Date: 2010-08-30 23:37+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:40+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -113,7 +113,7 @@ msgstr ""
 "Necesitas\n"
 "instalacións militares para manter influencia militar no territorio."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:683
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:682
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
@@ -187,7 +187,7 @@ msgstr ""
 msgid "Census and statistics"
 msgstr "Censo e estatísticas"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:650
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:649
 msgid ""
 "Citadels can not be built directly. Instead, you have to construct a "
 "fortress\n"
@@ -217,8 +217,8 @@ msgstr "Pecha a fiestra das mensaxes"
 msgid "Closing windows"
 msgstr "Pechar fiestras"
 
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:696
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:698
 msgid "Conclusion"
 msgstr "Conclusión"
 
@@ -267,15 +267,15 @@ msgstr ""
 "arquivar mensaxes. Podes desmarcalas na caixa de entrada para que queden\n"
 "prefixadas cun símbolo de “visto”. Logo podes premer"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 msgid "Defeat the enemy"
 msgstr "Derrota o inimigo"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:687
 msgid "Defeat the enemy tribe"
 msgstr "Derrota a tribo inimiga"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:690
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
 msgid ""
 "Defeat the nearby enemy. To attack a building, click on its doors, choose "
 "the\n"
@@ -285,12 +285,12 @@ msgstr ""
 "escolle a cantidade de soldados para atacalo, e logo preme no botón\n"
 "de atacar para envialos."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:673
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat your enemy"
 msgstr "Derrota o inimigo"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:629
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid ""
 "Defense is the value that is subtracted from the attack value. The "
 "barbarians\n"
@@ -310,7 +310,7 @@ msgstr ""
 "(15 - 3 =) 12 puntos de vida. Eses tres puntos que se subtraen son por\n"
 "mor da habilidade defensiva."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:627
 msgid "Defense:"
 msgstr "Defensa:"
 
@@ -324,19 +324,19 @@ msgstr "Mergullarse"
 msgid "Enable the build help"
 msgstr "Activar o asistente de construción"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:643
 msgid "Enhance this fortress"
 msgstr "Mellora esta fortaleza"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress"
 msgstr "Mellora a fortaleza"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:661
 msgid "Enhance your fortress to a citadel"
 msgstr "Converte a fortaleza nunha cidadela"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:656
 msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
@@ -345,7 +345,7 @@ msgstr ""
 "tempo\n"
 "vaia máis a présa coa tecla Re Páx ─construír unha cidadela leva o seu─."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:664
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid ""
 "Enhance your fortress to a mighty citadel. The citadel can house 12 "
 "soldiers\n"
@@ -361,11 +361,11 @@ msgstr ""
 "un tempo ademais. Cómpre construíla en zonas de especial importancia\n"
 "estratexia como puntos estreitos ou montañas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhancing buildings"
 msgstr "Mellorar edificios"
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. It is 25% "
 "for\n"
@@ -374,7 +374,7 @@ msgstr ""
 "Os soldados teñen unha certa probabilidade de esquivar os ataques. No\n"
 "nivel cero é do 25% para os bárbaros, e aumenta un 15% por cada nivel."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:634
 msgid "Evade:"
 msgstr "Esquivar:"
 
@@ -536,7 +536,7 @@ msgstr ""
 "partida de verdade e ir descubrindo as cousas pola túa conta. Senón,\n"
 "ten paciencia comigo, que xa me pesan os anos."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid ""
 "I created a sparring partner for you: It is an empire tribe close to your\n"
 "citadel. To attack its buildings, click on the door of your target "
@@ -554,7 +554,7 @@ msgstr ""
 "proximidades. Do mesmo xeito, das instalacións militares inimigas dos\n"
 "arredores sairán defensores que se enfrontarán ás túas forzas."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:646
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid ""
 "I will create an enemy for you soon, but let's make sure you are prepared.\n"
 "This fortress is already quite strong and conquers a lot of space. But there "
@@ -927,7 +927,7 @@ msgstr ""
 "Parece haber moita rocha ao oeste do cuartel xeral. Ensinareiche a mover\n"
 "a vista alí."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:716
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:715
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
@@ -1151,7 +1151,7 @@ msgstr ""
 "Explicareiche os pasos que tes que dar e logo pedireiche que premas no\n"
 "botón de «aceptar» para deixarme amosarcho."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:700
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:699
 msgid ""
 "This concludes the tutorial. There is some stuff we have not covered here --"
 "\n"
@@ -1299,7 +1299,7 @@ msgid ""
 msgstr ""
 
 # A cadea irá seguida doutra que dirá algo como «o botón de blablabla».
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:708
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:707
 msgid ""
 "You can continue playing this map or you can end this game whenever you "
 "like.\n"
@@ -1379,7 +1379,7 @@ msgstr "o botón de «arquivar» as mensaxes para metelas no arquivo."
 msgid "build flag symbol."
 msgstr "o símbolo de construción dunha bandeira."
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:714
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:713
 msgid "exit game button."
 msgstr "o botón de «saír» do xogo."
 
@@ -1397,7 +1397,7 @@ msgid "nothing was found here"
 msgstr "aquí non se atopou nada"
 
 # A seguinte cade comezará máis ou menos como «o botón de blablabla».
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:711
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:710
 msgid ""
 "options menu button on the very left at the bottom of the screen.\n"
 "Then click the"

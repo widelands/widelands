@@ -76,7 +76,7 @@ void Statebox::set_enabled(bool const enabled)
 			(PicMod_UI,
 			 enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
 		set_flags
-			(Is_Highlighted, m_flags & Is_Highlighted and m_flags & Is_Enabled);
+			(Is_Highlighted, (m_flags & Is_Highlighted) and (m_flags & Is_Enabled));
 	}
 
 	update();
@@ -140,9 +140,9 @@ void Statebox::draw(RenderTarget & dst)
  */
 void Statebox::handle_mousein(bool const inside) {
 	bool oldhl = m_flags & Is_Highlighted;
-	set_flags(Is_Highlighted, inside and m_flags & Is_Enabled);
+	set_flags(Is_Highlighted, inside and (m_flags & Is_Enabled));
 
-	if (oldhl != m_flags & Is_Highlighted)
+	if (oldhl != (m_flags & Is_Highlighted))
 		update();
 }
 
@@ -151,7 +151,7 @@ void Statebox::handle_mousein(bool const inside) {
  * Left-click: Toggle checkbox state
  */
 bool Statebox::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_LEFT and m_flags & Is_Enabled) {
+	if (btn == SDL_BUTTON_LEFT and (m_flags & Is_Enabled)) {
 		clicked();
 		return true;
 	} else

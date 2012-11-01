@@ -189,8 +189,9 @@ Command * ReplayReader::GetNextCommand(uint32_t const time)
 		log("REPLAY: Caught exception %s\n", e.what());
 		delete m_cmdlog;
 		m_cmdlog = 0;
-		return 0;
 	}
+
+	return 0;
 }
 
 

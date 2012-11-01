@@ -174,9 +174,10 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 	(std::string const & directory, Profile & prof,
 	 Section & global_s, const char * anim_name)
 {
+	std::vector<std::string> list;
 	try {
 		const char * anim_string = global_s.get_safe_string(anim_name);
-		std::vector<std::string> list(split_string(anim_string, ","));
+		list = split_string(anim_string, ",");
 		if (list.size() < 1)
 			throw game_data_error
 				(_("expected %s but found \"%s\""),
@@ -194,11 +195,11 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 				((*i.current).c_str(),
 				 g_anim.get (directory, anim_s, "idle_00.png"));
 		}
-		return list;
 	} catch (_wexception const & e) {
 		throw game_data_error("%s : %s", anim_name, e.what());
 	}
 
+	return list;
 }
 
 /**
@@ -312,6 +313,16 @@ IMPLEMENTATION
 Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr)
 {
 	m_battle = 0;
+	m_hp_level      = 0;
+	m_attack_level  = 0;
+	m_defense_level = 0;
+	m_evade_level   = 0;
+
+	m_hp_current    = get_max_hitpoints();
+
+	m_combat_walking   = CD_NONE;
+	m_combat_walkstart = 0;
+	m_combat_walkend   = 0;
 }
 
 
@@ -855,7 +866,7 @@ void Soldier::attack_update(Game & game, State & state)
 
 	if
 		(!enemy or
-		 (state.ivar1 & CF_RETREAT_WHEN_INJURED and
+		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) and
 		  state.ui32var3 > get_current_hitpoints() and
 		  defenders > 0))
 	{
@@ -1584,7 +1595,7 @@ bool Soldier::checkNodeBlocked
 
 	if
 		(!attackdefense ||
-		 (attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED and
+		 ((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) and
 		  attackdefense->ui32var3 > get_current_hitpoints()))
 	{
 		// Retreating or non-combatant soldiers act like normal bobs
@@ -1719,7 +1730,8 @@ Load/save support
 
 #define SOLDIER_SAVEGAME_VERSION 2
 
-Soldier::Loader::Loader()
+Soldier::Loader::Loader() :
+		m_battle(0)
 {
 }
 

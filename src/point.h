@@ -24,7 +24,7 @@
 #include <limits>
 
 struct Point {
-	Point() throw () {}
+	Point() throw () : x(0), y(0) {}
 	Point(const int32_t px, const int32_t py) throw () : x(px), y(py) {}
 
 	static Point invalid() throw () {

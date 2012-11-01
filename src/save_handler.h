@@ -39,7 +39,7 @@ class SaveHandler {
 
 
 public:
-	SaveHandler() : m_initialized(false), m_allow_autosaving(true) {}
+	SaveHandler() : m_lastSaveTime(0), m_initialized(false), m_allow_autosaving(true) {}
 	void think(Widelands::Game &, int32_t currenttime);
 	std::string create_file_name(std::string dir, std::string filename);
 	bool save_game

@@ -282,6 +282,7 @@ IMPLEMENTATION
 Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
 	Building(warehouse_descr),
 	m_supply(new WarehouseSupply(this)),
+	m_next_military_act(0),
 	m_portdock(0)
 {
 	uint8_t nr_worker_types_without_cost =

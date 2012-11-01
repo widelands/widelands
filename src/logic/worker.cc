@@ -2917,7 +2917,9 @@ Load/save support
 
 #define WORKER_SAVEGAME_VERSION 2
 
-Worker::Loader::Loader()
+Worker::Loader::Loader() :
+	m_location(0),
+	m_carried_item(0)
 {
 }
 
@@ -3042,6 +3044,8 @@ Map_Object::Loader * Worker::load
 	} catch (const std::exception & e) {
 		throw wexception(_("loading worker: %s"), e.what());
 	}
+
+	return 0; // Should not be reached
 }
 
 /**

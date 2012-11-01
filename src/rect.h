@@ -23,7 +23,7 @@
 #include "point.h"
 
 struct Rect : public Point {
-	Rect() throw () {}
+	Rect() throw () : w(0), h(0) {}
 	Rect(const Point p, const uint32_t W, const uint32_t H) throw ()
 		: Point(p), w(W), h(H)
 	{}

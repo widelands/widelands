@@ -216,7 +216,7 @@ void Journal::start_recording(std::string const & filename)
 		m_record = true;
 		log("Recording into %s\n", m_recordname.c_str());
 	}
-	catch (std::ofstream::failure e) {
+	catch (std::ofstream::failure & e) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log
@@ -266,7 +266,7 @@ void Journal::start_playback(std::string const & filename)
 		m_playback = true;
 		log("Playing back from %s\n", m_playbackname.c_str());
 	}
-	catch (std::ifstream::failure e) {
+	catch (std::ifstream::failure & e) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log
@@ -385,9 +385,9 @@ bool Journal::read_event(SDL_Event & e)
 	if (!m_playback)
 		return false;
 
-	try {
-		bool haveevent = false;
+	bool haveevent = false;
 
+	try {
 		uint8_t recordtype;
 		read(recordtype);
 		switch (recordtype) {
@@ -445,8 +445,6 @@ bool Journal::read_event(SDL_Event & e)
 			throw BadRecord_error(m_playbackname, recordtype, RFC_INVALID);
 			break;
 		}
-
-		return haveevent;
 	} catch (std::ifstream::failure const &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
@@ -454,6 +452,8 @@ bool Journal::read_event(SDL_Event & e)
 		stop_playback();
 		throw Journalfile_error(m_playbackname);
 	}
+
+	return haveevent;
 }
 
 /**

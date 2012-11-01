@@ -257,10 +257,12 @@ bool Fullscreen_Menu_LoadGame::handle_key(bool down, SDL_keysym code)
 	case SDLK_KP2:
 		if (code.mod & KMOD_NUM)
 			break;
+		/* no break */
 	case SDLK_DOWN:
 	case SDLK_KP8:
 		if (code.mod & KMOD_NUM)
 			break;
+		/* no break */
 	case SDLK_UP:
 		m_list.handle_key(down, code);
 		return true;
@@ -271,6 +273,7 @@ bool Fullscreen_Menu_LoadGame::handle_key(bool down, SDL_keysym code)
 	case SDLK_KP_PERIOD:
 		if (code.mod & KMOD_NUM)
 			break;
+		/* no break */
 	case SDLK_DELETE:
 		clicked_delete();
 		return true;

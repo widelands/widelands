@@ -140,7 +140,14 @@ struct Player :
 	struct Field : boost::noncopyable {
 		Field() :
 			military_influence(0),
-			vision            (0)
+			vision            (0),
+			roads(0),
+			owner(0),
+			time_node_last_unseen(0),
+			border(0),
+			border_r(0),
+			border_br(0),
+			border_bl(0)
 		{
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the

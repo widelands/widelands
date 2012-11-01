@@ -67,7 +67,7 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 			if
 			(not mr.location().field->get_immovable()
 			        and
-			        mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK)
+			        (mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK))
 				egbase.create_immovable(mr.location(), *i, 0);
 			++i;
 		} while (mr.advance(map));

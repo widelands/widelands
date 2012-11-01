@@ -41,7 +41,7 @@ struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage> {
 	/// Layouted message list
 	UI::RichText rt;
 
-	Impl() : chat(0), havemessages(false) {}
+	Impl() : transparent(false), chat(0), havemessages(false), oldest(0) {}
 
 	void recompute();
 	virtual void receive(const ChatMessage & note);

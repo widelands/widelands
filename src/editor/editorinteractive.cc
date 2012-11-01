@@ -287,7 +287,7 @@ void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel) {
 	// workaround for SDLs middle button emulation
 	mask |= SDL_BUTTON_MMASK;
 #endif
-	if (target_changed and SDL_GetMouseState(0, 0) & mask)
+	if (target_changed and (SDL_GetMouseState(0, 0) & mask))
 		map_clicked(true);
 }
 

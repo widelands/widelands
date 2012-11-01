@@ -447,7 +447,7 @@ void PortDock::log_general_info(Editor_Game_Base const & egbase)
 
 #define PORTDOCK_SAVEGAME_VERSION 2
 
-PortDock::Loader::Loader()
+PortDock::Loader::Loader() : m_warehouse(0)
 {
 }
 

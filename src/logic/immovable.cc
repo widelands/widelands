@@ -345,6 +345,7 @@ Immovable::Immovable(const Immovable_Descr & imm_descr) :
 BaseImmovable (imm_descr),
 m_owner(0),
 m_anim        (0),
+m_animstart   (0),
 m_program     (0),
 m_program_ptr (0),
 m_anim_construction_total(0),
@@ -987,6 +988,7 @@ ImmovableProgram::ActGrow::ActGrow
 				goto end;
 			default:
 				++p;
+				break;
 			}
 	end:
 		type_name = parameters;
@@ -1083,10 +1085,12 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				probability = value;
 			//  fallthrough
 			}
+			/* no break */
 			case '\0':
 				goto end;
 			default:
 				++p;
+				break;
 			}
 	end:
 		type_name = parameters;
@@ -1117,7 +1121,7 @@ void ImmovableProgram::ActSeed::execute
 		FCoords const f = map.get_fcoords(mr.location());
 		if
 			(not f.field->get_immovable()        and
-			 f.field->nodecaps() & MOVECAPS_WALK and
+			 (f.field->nodecaps() & MOVECAPS_WALK) and
 			 game.logic_rand() % (6 * 256) < descr.terrain_suitability(f, map))
 			game.create_immovable
 				(mr.location(),
@@ -1176,14 +1180,15 @@ struct ActConstructionData : ImmovableActionData {
 			uint8_t version = fr.Unsigned8();
 			if (version == CONSTRUCTION_DATA_VERSION) {
 				d->delivered.load(fr, *imm.descr().get_owner_tribe());
-
-				return d;
 			} else
 				throw game_data_error("unknown version %u", version);
 		} catch (const _wexception & e) {
 			delete d;
+			d = 0;
 			throw game_data_error("ActConstructionData: %s", e.what());
 		}
+
+		return d;
 	}
 
 	Buildcost delivered;

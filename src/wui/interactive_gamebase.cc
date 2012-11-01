@@ -33,6 +33,8 @@ Interactive_GameBase::Interactive_GameBase
 	 PlayerType pt, bool const chatenabled)
 	:
 	Interactive_Base(_game, global_s),
+	m_chatProvider(0),
+	m_chatOverlay(0),
 	m_building_census_format
 		(global_s.get_string("building_census_format",       "%N")),
 	m_building_statistics_format

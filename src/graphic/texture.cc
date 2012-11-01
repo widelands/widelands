@@ -46,7 +46,8 @@ Texture::Texture
 	m_frame_num(0),
 	m_nrframes (0),
 	m_frametime(frametime),
-	is_32bit   (format.BytesPerPixel == 4)
+	is_32bit   (format.BytesPerPixel == 4),
+	m_was_animated(false)
 {
 
 	// Load the pictures one by one

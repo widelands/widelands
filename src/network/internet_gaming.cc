@@ -36,6 +36,8 @@ InternetGaming::InternetGaming() :
 	m_sock                   (0),
 	m_sockset                (0),
 	m_state                  (OFFLINE),
+	m_reg                    (false),
+	m_port                   (INTERNET_GAMING_PORT),
 	m_clientrights           (INTERNET_CLIENT_UNREGISTERED),
 	m_maxclients             (1),
 	m_gameip                 (""),
@@ -44,6 +46,7 @@ InternetGaming::InternetGaming() :
 	clientupdate             (false),
 	gameupdate               (false),
 	time_offset              (0),
+	waittimeout              (std::numeric_limits<int32_t>::max()),
 	lastping                 (time(0))
 {
 	// Fill the list of possible messages from the server

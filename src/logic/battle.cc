@@ -42,9 +42,11 @@ Battle::Battle ()
 	Map_Object(&g_Battle_Descr),
 	m_first(0),
 	m_second(0),
+	m_creationtime(0),
 	m_readyflags(0),
 	m_damage(0),
-	m_first_strikes(true)
+	m_first_strikes(true),
+	m_last_attack_hits(false)
 {}
 
 Battle::Battle(Game & game, Soldier & First, Soldier & Second) :

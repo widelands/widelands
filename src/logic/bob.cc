@@ -826,6 +826,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 	case IDLE: start.field = 0; break;
 	default:
 		assert(false);
+		break;
 	}
 
 	if (start.field) {

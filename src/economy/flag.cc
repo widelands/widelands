@@ -47,6 +47,7 @@ Map_Object_Descr g_flag_descr("flag", "Flag");
 */
 Flag::Flag() :
 PlayerImmovable(g_flag_descr),
+m_animstart(0),
 m_building(0),
 m_item_capacity(8),
 m_item_filled(0),

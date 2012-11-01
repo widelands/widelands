@@ -31,7 +31,7 @@
 /// from the file.
 template<uint8_t const Size> struct BitInBuffer {
 	compile_assert(Size == 1 or Size == 2 or Size == 4);
-	BitInBuffer() : mask(0x00) {}
+	BitInBuffer() : buffer(0), mask(0x00) {}
 	void Open(FileSystem & fs, char const * const filename) {
 		fr.Open(fs, filename);
 	}

@@ -63,7 +63,7 @@ using boost::format;
 
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(NetHost * const _h) : h(_h) {}
+	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(0), m_cur_wincondition(0) {}
 
 	virtual void setScenario(bool is_scenario) {h->setScenario(is_scenario);}
 
@@ -139,6 +139,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				newstate = PlayerSettings::stateClosed;
 				break;
 			} // else fall through
+			/* no break */
 		case PlayerSettings::stateComputer:
 			{
 				Computer_Player::ImplementationVector const & impls =
@@ -309,7 +310,7 @@ private:
 };
 
 struct HostChatProvider : public ChatProvider {
-	HostChatProvider(NetHost * const _h) : h(_h) {}
+	HostChatProvider(NetHost * const _h) : h(_h), kickClient(0) {}
 
 	void send(std::string const & msg) {
 		ChatMessage c;
@@ -578,7 +579,26 @@ struct NetHostImpl {
 	md5_checksum syncreport;
 	bool syncreport_arrived;
 
-	NetHostImpl(NetHost * const h) : chat(h), hp(h), npsb(&hp), lastpauseping(0) {
+	NetHostImpl(NetHost * const h) :
+		localdesiredspeed(0),
+		chat(h),
+		hp(h),
+		npsb(&hp),
+		promoter(0),
+		svsock(0),
+		sockset(0),
+		game(0),
+		pseudo_networktime(0),
+		last_heartbeat(0),
+		committed_networktime(0),
+		waiting(false),
+		lastframe(0),
+		networkspeed(0),
+		lastpauseping(0),
+		syncreport_pending(false),
+		syncreport_time(0),
+		syncreport_arrived(false)
+	{
 		dedicated_start = false;
 	}
 };
@@ -1389,6 +1409,13 @@ bool NetHost::canLaunch()
 		return false;
 	if (d->game)
 		return false;
+
+	// if there is one client that is currently receiving a file, we can not launch.
+	for (std::vector<Client>::iterator j = d->clients.begin(); j != d->clients.end(); ++j) {
+		if (!d->settings.users[j->usernum].ready)
+			return false;
+	}
+
 	// all players must be connected to a controller (human/ai) or be closed.
 	// but not all should be closed!
 	bool one_not_closed = false;
@@ -1895,6 +1922,7 @@ void NetHost::writeSettingUser(SendPacket & packet, uint32_t const number)
 {
 	packet.String(d->settings.users.at(number).name);
 	packet.Signed32(d->settings.users.at(number).position);
+	packet.Unsigned8(d->settings.users.at(number).ready ? 1 : 0);
 }
 
 void NetHost::writeSettingAllUsers(SendPacket & packet)
@@ -1991,6 +2019,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string const & playerna
 				client.usernum = i;
 				d->settings.users[i].winner = false;
 				d->settings.users[i].points = 0;
+				d->settings.users[i].ready  = true;
 				break;
 			}
 	if (client.usernum == -1) {
@@ -2747,6 +2776,13 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		sendSystemMessageCode
 			("STARTED_SENDING_FILE", file->filename, d->settings.users.at(client.usernum).name);
 		sendFilePart(client.sock, 0);
+		// Remember client as "currently receiving file"
+		d->settings.users[client.usernum].ready = false;
+		SendPacket s;
+		s.Unsigned8(NETCMD_SETTING_USER);
+		s.Unsigned32(client.usernum);
+		writeSettingUser(s, client.usernum);
+		broadcast(s);
 		break;
 	}
 
@@ -2764,6 +2800,12 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (part == file->parts.size() - 1) {
 			sendSystemMessageCode
 				("COMPLETED_FILE_TRANSFER", file->filename, d->settings.users.at(client.usernum).name);
+			d->settings.users[client.usernum].ready = true;
+			SendPacket s;
+			s.Unsigned8(NETCMD_SETTING_USER);
+			s.Unsigned32(client.usernum);
+			writeSettingUser(s, client.usernum);
+			broadcast(s);
 			return;
 		}
 		++part;
