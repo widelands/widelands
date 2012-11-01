@@ -51,7 +51,7 @@ public:
 	virtual long get_int() const;
 	virtual bool get_bool() const;
 	virtual string get_string() const;
-	virtual void get_color(SDL_Color *) const;
+	virtual RGBColor get_color() const;
 
 private:
 	string m_name, m_value;
@@ -69,15 +69,15 @@ bool Attr::get_bool() const {
 		return true;
 	return false;
 }
-void Attr::get_color(SDL_Color * clr) const {
+RGBColor Attr::get_color() const {
 	if (m_value.size() != 6)
 		throw InvalidColor((format("Could not parse '%s' as a color.") % m_value).str());
 
 	uint32_t clrn = strtol(m_value.c_str(), 0, 16);
-	clr->r = (clrn >> 16) & 0xff;
-	clr->g = (clrn >> 8) & 0xff;
-	clr->b = clrn & 0xff;
-	clr->unused = SDL_ALPHA_OPAQUE;
+	return RGBColor(
+		(clrn >> 16) & 0xff,
+		(clrn >> 8) & 0xff,
+		clrn & 0xff);
 }
 
 // This is basically a map<string, Attr>, but because there is no

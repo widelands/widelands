@@ -28,6 +28,7 @@ using namespace boost;
 
 namespace RT {
 
+	// TODO(sirver): is this still needed?
 SDL_Surface * empty_sdl_surface(int32_t w, int32_t h) {
 	 SDL_Surface *surface;
 	 Uint32 rmask, gmask, bmask, amask;

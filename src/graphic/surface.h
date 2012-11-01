@@ -42,15 +42,6 @@ public:
 	/// Draws a rect (frame only) to the surface.
 	virtual void draw_rect(Rect, RGBColor) = 0;
 
-	/// Draws a filled rect to the surface.
-	virtual void fill_rect(Rect, RGBAColor) = 0;
-
-	/// Clears the complete surface to black.
-	virtual void clear() {
-		fill_rect
-			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(255, 255, 255, 255));
-	}
-
 	/// draw a line to the surface
 	virtual void draw_line
 		(int32_t /* x1 */,

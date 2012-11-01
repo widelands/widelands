@@ -22,10 +22,9 @@
 #ifndef MD5_H
 #define MD5_H
 
-#include <string>
+#include <cassert>
 #include <cstring>
-
-#include "io/streamwrite.h"
+#include <string>
 
 /* Structure to save state of computation between the single steps.  */
 struct md5_ctx {
@@ -118,5 +117,8 @@ private:
 	md5_checksum sum;
 	md5_ctx ctx;
 };
+
+class _DummyMD5Base {};
+typedef MD5Checksum<_DummyMD5Base> SimpleMD5Checksum;
 
 #endif

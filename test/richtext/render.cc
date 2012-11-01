@@ -32,18 +32,7 @@
 
 using namespace std;
 
-int save_png(string fn, SDL_Surface * surf) {
-	std::vector<unsigned char> image;
-	image.resize(surf->w*surf->h*4);
-
-	// Copy pixel data
-	for (uint32_t y = 0; y < surf->h; ++y) {
-		for (uint32_t x = 0; x < surf->w; ++x) {
-			for (int i = 0; i < 4; ++i)
-				image[y*surf->w+x+i] = static_cast<unsigned char*>(surf->pixels)[y*surf->pitch + x + i];
-		}
-	}
-
+int save_png(string fn, IPixelAccess & pa) {
 	// Save png data
 	std::vector<unsigned char> png;
 
@@ -53,7 +42,7 @@ int save_png(string fn, SDL_Surface * surf) {
 	st.encoder.force_palette = LAC_NO;
 	vector<unsigned char> out;
 	int error = lodepng::encode
-		(out, static_cast<const unsigned char*>(surf->pixels), surf->w, surf->h, st);
+		(out, static_cast<const unsigned char*>(pa.get_pixels()), pa.get_w(), pa.get_h(), st);
 	if(error) {
 		std::cout << "PNG encoding error: " << lodepng_error_text(error) << std::endl;
 		return 0;
@@ -125,24 +114,21 @@ int main(int argc, char *argv[])
 
 	IGraphic * thin_graphic = create_thin_graphic();
 	RT::IFontLoader * floader = RT::ttf_fontloader_from_file();
-	RT::IRenderer * renderer = RT::setup_renderer(thin_graphic, floader, imgl);
+	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
 
-	SDL_Surface * surface = 0;
 	try {
-		surface = renderer->render(txt, w, 0, allowed_tags);
+		PictureID image = renderer->render(txt, w, 0, allowed_tags);
+
+		IPixelAccess & pa = image->pixelaccess();
+		pa.lock(IPixelAccess::Lock_Normal);
+		save_png(outname, pa);
+		pa.unlock(IPixelAccess::Unlock_Update);
 	} catch(RT::Exception & e) {
 			cout << e.what() << endl;
 	}
 
-	if (surface) {
-		SDL_LockSurface(surface);
-		save_png(outname, surface);
-		SDL_UnlockSurface(surface);
-		SDL_FreeSurface(surface);
-	}
-
 	delete renderer;
-	delete thin_graphic;
+	delete thin_graphic; // Will free all images
 
 	SDL_Quit();
 

@@ -26,6 +26,8 @@
 #include <string>
 #include <vector>
 
+#include "rgbcolor.h"
+
 #include "rt_errors.h"
 
 struct SDL_Color;
@@ -41,7 +43,7 @@ public:
 	virtual long get_int() const = 0;
 	virtual bool get_bool() const = 0;
 	virtual std::string get_string() const = 0;
-	virtual void get_color(SDL_Color *) const = 0;
+	virtual RGBColor get_color() const = 0;
 };
 
 class IAttrMap {

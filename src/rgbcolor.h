@@ -30,6 +30,7 @@ struct RGBColor : protected SDL_Color {
 		SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;
 	}
 
+	// TODO(sirver): Makes no sense that this is protected here but not in RGBAColor
 	Uint8 r() const throw () {return SDL_Color::r;}
 	Uint8 g() const throw () {return SDL_Color::g;}
 	Uint8 b() const throw () {return SDL_Color::b;}

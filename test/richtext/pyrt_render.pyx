@@ -17,16 +17,17 @@ cdef extern from "rt_render.h" namespace "RT":
     cdef cppclass IRenderer:
         SDL_Surface * render(char*, uint32_t, IRefMap **, cppset[cppstr] &) except +
 
-    struct IImageLoader:
-        pass
     struct IFontLoader:
         pass
-    IRenderer * setup_renderer(IFontLoader*, IImageLoader*) except +
+    IRenderer * setup_renderer(IGraphic, IFontLoader*) except +
 
 cdef extern from "sdl_ttf_font.h" namespace "RT":
     IFontLoader * ttf_fontloader_from_file()
-cdef extern from "lodepng_image_loader.h":
-    IImageLoader * setup_lodepng_img_loader()
+cdef extern from "thin_graphic.h":
+    struct IGraphic:
+        pass
+
+    IGraphic * create_thin_graphic()
 
 cimport numpy as np
 import numpy as np
@@ -44,9 +45,9 @@ cdef class Renderer(object):
     cdef IRenderer * _renderer
 
     def __init__(self):
+        cdef IGraphic * thin_graphic = create_thin_graphic()
         cdef IFontLoader * fl = ttf_fontloader_from_file()
-        cdef IImageLoader * imgl = setup_lodepng_img_loader()
-        self._renderer = setup_renderer(fl, imgl)
+        self._renderer = setup_renderer(thin_graphic[0], fl)
 
     def __del__(self):
         del self._renderer
@@ -58,21 +59,24 @@ cdef class Renderer(object):
         for tag in allowed_tags:
             allowed_set.insert(cppstr(<char*>(tag)))
 
-        cdef SDL_Surface * rv = self._renderer.render(text, width, &rm, allowed_set)
+        # TODO: no longer SDL_Surface
+        # cdef SDL_Surface * rv = self._renderer.render(text, width, &rm, allowed_set)
 
-        a = np.empty((rv.h, rv.w, 4), np.uint8)
-        cdef uint32_t x, y, i
-        for y in range(rv.h):
-            for x in range(rv.w):
-                for i in range(4):
-                    a[y,x,i] = (<char*>(rv.pixels))[y*rv.pitch+x*4+i]
+        # TODO: wrap pixelaccess and whatnot
+        # a = np.empty((rv.h, rv.w, 4), np.uint8)
+        # cdef uint32_t x, y, i
+        # for y in range(rv.h):
+            # for x in range(rv.w):
+                # for i in range(4):
+                    # a[y,x,i] = (<char*>(rv.pixels))[y*rv.pitch+x*4+i]
 
-        SDL_FreeSurface(rv)
+        # SDL_FreeSurface(rv)
 
-        cdef RefMap rrm = RefMap()
-        rrm._refmap = rm
+        # cdef RefMap rrm = RefMap()
+        # rrm._refmap = rm
 
-        return a, rrm
+        # return a, rrm
+        return None
 
 
 

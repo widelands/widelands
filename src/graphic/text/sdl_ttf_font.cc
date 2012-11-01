@@ -23,10 +23,11 @@
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
+#include "md5.h"
 #include "rt_errors.h"
 #include "rt_render.h"
-#include "sdl_ttf_font.h"
 #include "sdl_helper.h"
+#include "sdl_ttf_font.h"
 
 using namespace std;
 using namespace boost;
@@ -38,11 +39,11 @@ namespace RT {
 
 class SDLTTF_Font : public IFont {
 public:
-	virtual ~SDLTTF_Font();
 	SDLTTF_Font(TTF_Font* ttf);
+	virtual ~SDLTTF_Font();
 
 	void dimensions(string, int, uint32_t * w, uint32_t * h);
-	virtual SDL_Surface * render(string, SDL_Color clr, int);
+	virtual PictureID render(IGraphic &, string, RGBColor clr, int);
 	uint32_t ascent(int) const;
 
 private:
@@ -52,9 +53,8 @@ private:
 	int m_style;
 };
 
-SDLTTF_Font::SDLTTF_Font(TTF_Font * font) {
-	m_font = font;
-	m_style = TTF_STYLE_NORMAL;
+SDLTTF_Font::SDLTTF_Font(TTF_Font * font) :
+	m_font(font), m_style(TTF_STYLE_NORMAL) {
 }
 
 SDLTTF_Font::~SDLTTF_Font() {
@@ -74,13 +74,14 @@ void SDLTTF_Font::dimensions(string txt, int style, uint32_t * gw, uint32_t * gh
 	*gw = w; *gh = h;
 }
 
-SDL_Surface * SDLTTF_Font::render(string txt, SDL_Color clr, int style) {
+PictureID SDLTTF_Font::render(IGraphic & gr, string txt, RGBColor clr, int style) {
 	m_set_style(style);
 
 	SDL_Surface * text_surface = 0;
 
+	SDL_Color sdlclr = { clr.r(), clr.g(), clr.b(), 0 };
 	if (style & SHADOW) {
-		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(m_font, txt.c_str(), clr);
+		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(m_font, txt.c_str(), sdlclr);
 		SDL_Surface * shadow = TTF_RenderUTF8_Blended(m_font, txt.c_str(), SHADOW_CLR);
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
 
@@ -118,11 +119,27 @@ SDL_Surface * SDLTTF_Font::render(string txt, SDL_Color clr, int style) {
 		SDL_FreeSurface(tsurf);
 		SDL_FreeSurface(shadow);
 	} else
-		text_surface= TTF_RenderUTF8_Blended(m_font, txt.c_str(), clr);
+		text_surface= TTF_RenderUTF8_Blended(m_font, txt.c_str(), sdlclr);
 
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
-	return text_surface;
+
+	// TODO: calculate a hash of this
+	// TODO(sirver): Proper (maybe new?) PicMod Namesapce
+	// TODO: get a clearer picture who caches what when
+	SimpleMD5Checksum cs;
+	cs.Data(txt.c_str(), txt.size());
+	cs.Data(&sdlclr.r, 1);
+	cs.Data(&sdlclr.g, 1);
+	cs.Data(&sdlclr.b, 1);
+	cs.Data(&style, sizeof(style));
+	cs.FinishChecksum();
+
+	PictureID rv = gr.convert_sdl_surface_to_picture(text_surface, true);
+
+	// TODO(sirver): Should this really be done here?
+	gr.add_picture_to_cache(PicMod_UI, txt + "_" + cs.GetChecksum().str(), rv);
+	return rv;
 }
 
 uint32_t SDLTTF_Font::ascent(int style) const {
@@ -150,7 +167,7 @@ class SDLTTF_FontLoaderFromFile : public IFontLoader {
 public:
 	SDLTTF_FontLoaderFromFile();
 	virtual ~SDLTTF_FontLoaderFromFile();
-	virtual IFont * load(std::string face, int ptsize);
+	virtual IFont * load(std::string name, int ptsize);
 };
 
 SDLTTF_FontLoaderFromFile::SDLTTF_FontLoaderFromFile() {

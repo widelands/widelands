@@ -20,14 +20,14 @@
 #ifndef RT_RENDER_H
 #define RT_RENDER_H
 
-#include <SDL.h>
-
 #include <stdint.h>
 #include <string>
 #include <set>
 
+#include "graphic/iblitable_surface.h"
 #include "graphic/igraphic.h"
 #include "graphic/picture.h"
+#include "rgbcolor.h"
 
 namespace RT {
 /**
@@ -47,8 +47,9 @@ public:
 	};
 	virtual ~IFont() {};
 
+	// TODO(sirver): Get rid of all SDL_Color
 	virtual void dimensions(std::string, int, uint32_t *, uint32_t *) = 0;
-	virtual PictureID render(std::string, SDL_Color clr, int) = 0;
+	virtual PictureID render(IGraphic &, std::string, RGBColor clr, int) = 0;
 
 	virtual uint32_t ascent(int) const = 0;
 };
@@ -85,11 +86,11 @@ public:
 	IRenderer(IFontLoader *) {};
 	virtual ~IRenderer() {};
 
-	virtual IPicture render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
+	virtual PictureID render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
 };
 
-// Setup a renderer, takes ownership of fl and imgl, but not of gr.
-IRenderer * setup_renderer(const IGraphic& gr, IFontLoader * fl);
+// Setup a renderer, takes ownership of fl but not of gr.
+IRenderer* setup_renderer(IGraphic& gr, IFontLoader* fl);
 };
 
 #endif /* end of include guard: RT_RENDER_H */

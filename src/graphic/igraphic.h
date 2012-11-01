@@ -21,6 +21,8 @@
 #define IGRAPHIC_H
 
 #include <string>
+
+#include "graphic/iblitable_surface.h"
 #include "graphic/picture.h"
 
 struct SDL_Surface;
@@ -46,10 +48,11 @@ enum PicMod {
 class IGraphic {
 public:
 	virtual ~IGraphic() { };
-	virtual PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false) = 0;
+	virtual PictureID convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) = 0;
 	virtual PictureID load_image(std::string const &, bool alpha = false) = 0;
 	virtual const PictureID & get_picture(PicMod, std::string const &, bool alpha = true) = 0;
 	virtual void add_picture_to_cache(PicMod, const std::string &, PictureID) = 0; // TODO(sirver): Really needed?
+	virtual IBlitableSurface * create_surface(int32_t w, int32_t h) = 0;
 };
 
 

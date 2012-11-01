@@ -105,13 +105,14 @@ struct Graphic : public virtual IGraphic {
 		 bool fullscreen, bool opengl);
 	virtual ~Graphic();
 
+	// TODO(sirver): Clean this up: all const stuff is stupid
 	int32_t get_xres() const;
 	int32_t get_yres() const;
 	RenderTarget * get_render_target();
 	void toggle_fullscreen();
 	void update_fullscreen();
 	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
-	void update_rectangle(Rect const & rect) {
+	void update_rectangle(const Rect const & rect) {
 		update_rectangle (rect.x, rect.y, rect.w, rect.h);
 	}
 	bool need_update() const;
@@ -119,10 +120,10 @@ struct Graphic : public virtual IGraphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	virtual PictureID load_image(std::string const &, bool alpha = false);
-	virtual const PictureID & get_picture(PicMod, std::string const &, bool alpha = true)
+	virtual PictureID load_image(const std::string&, bool alpha = false);
+	virtual const PictureID & get_picture(PicMod, const std::string&, bool alpha = true)
 		__attribute__ ((pure));
-	virtual void add_picture_to_cache(PicMod, const std::string &, PictureID);
+	virtual void add_picture_to_cache(PicMod, const std::string&, PictureID);
 	const PictureID & get_no_picture() const;
 
 	void get_picture_size
@@ -135,6 +136,7 @@ struct Graphic : public virtual IGraphic {
 
 	virtual PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 
+	IBlitableSurface * create_surface(int32_t w, int32_t h);
 	OffscreenSurfacePtr create_offscreen_surface(int32_t w, int32_t h);
 	PictureID create_picture(int32_t w, int32_t h, bool alpha = false);
 

@@ -20,17 +20,20 @@
 #ifndef IBLITABLE_SURFACE_H
 #define IBLITABLE_SURFACE_H
 
-#include "compositemode.h"
-#include "picture_id.h"
-#include "point.h"
-#include "rect.h"
-
 #include <boost/noncopyable.hpp>
+
+#include "compositemode.h"
+#include "picture.h"
+#include "pixelaccess.h"
+#include "point.h"
+#include "rgbcolor.h"
+#include "rect.h"
 
 /**
  * Interface to a basic surfaces that can be used as destination for blitting.
  */
-struct IBlitableSurface : boost::noncopyable {
+class IBlitableSurface : boost::noncopyable, public virtual IPicture {
+public:
 	virtual ~IBlitableSurface() {}
 
 	//@{
@@ -38,9 +41,24 @@ struct IBlitableSurface : boost::noncopyable {
 	virtual uint32_t get_w() = 0; // TODO(sirver): Should only be w()
 	virtual uint32_t get_h() = 0;
 	//@}
+	//
+	virtual bool valid() = 0;
 
-	/// This draws a part aother surface to this surface
+	/// This draws a part of another surface to this surface
 	virtual void blit(Point, PictureID, Rect srcrc, Composite cm = CM_Normal) = 0;
+
+	/// Draws a filled rect to the surface.
+	virtual void fill_rect(Rect, RGBAColor) = 0;
+
+	/// Clears the complete surface to black.
+	virtual void clear() {
+		fill_rect
+			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(255, 255, 255, 255));
+	}
+
+
+	/// Access the pixels directly of this surface
+	virtual IPixelAccess & pixelaccess() = 0;
 };
 
 #endif

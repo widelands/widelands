@@ -37,12 +37,14 @@ struct IPicture : boost::noncopyable {
 	IPicture() {}
 	virtual ~IPicture() {}
 
+	// TODO(sirver): Where is valid needed?
 	virtual bool valid() = 0;
 
 	virtual uint32_t get_w() = 0; // TODO(sirver): Should only be called w() and h()
 	virtual uint32_t get_h() = 0;
 
-	// TODO(sirver): Seems like this is not really needed?
+	// TODO(sirver): Should this really be composed? It duplicates
+	// quite some stuff
 	virtual IPixelAccess & pixelaccess() = 0;
 
 public:

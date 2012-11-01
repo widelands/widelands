@@ -17,6 +17,7 @@
  *
  */
 
+// TODO(sirver): Read through this file again. There are a lot of stray comments which are not longer needed
 #include <queue>
 #include <string>
 #include <vector>
@@ -28,7 +29,7 @@
 
 #include "rt_parse.h"
 #include "rt_render.h"
-#include "sdl_helper.h"
+#include "sdl_helper.h" // TODO(sirver): Still needed?
 #include "textstream.h"
 
 using namespace std;
@@ -59,7 +60,7 @@ struct Borders {
 struct NodeStyle {
 	string font_face;
 	uint16_t font_size;
-	SDL_Color font_color;
+	RGBColor font_color;
 	int font_style;
 
 	uint8_t spacing;
@@ -68,6 +69,7 @@ struct NodeStyle {
 	string reference;
 };
 
+// TODO(sirver): Use Rect
 struct Reference {
 	SDL_Rect dim;
 	string ref;
@@ -109,7 +111,7 @@ public:
 	virtual uint32_t width() = 0;
 	virtual uint32_t height() = 0;
 	virtual uint32_t hotspot_y() = 0;
-	virtual SDL_Surface * render() = 0;
+	virtual PictureID render(IGraphic & gr) = 0;
 
 	virtual bool is_non_mandatory_space() {return false;}
 	virtual bool is_expanding() {return false;}
@@ -299,7 +301,7 @@ public:
 		return rv;
 	}
 
-	virtual SDL_Surface * render();
+	virtual PictureID render(IGraphic & gr);
 
 protected:
 	uint32_t m_w, m_h;
@@ -316,8 +318,8 @@ TextNode::TextNode(IFont & font, NodeStyle & ns, string txt)
 uint32_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
-SDL_Surface * TextNode::render() {
-	return m_font.render(m_txt, m_s.font_color, m_s.font_style);
+PictureID TextNode::render(IGraphic & gr) {
+	return m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
 }
 
 class FillingTextNode : public TextNode {
@@ -327,7 +329,7 @@ public:
 			m_w = w;
 		};
 	virtual ~FillingTextNode() {};
-	virtual SDL_Surface * render();
+	virtual PictureID render(IGraphic & gr);
 
 	virtual bool is_expanding() {return m_expanding;}
 	virtual void set_w(uint32_t w) {m_w = w;}
@@ -335,21 +337,19 @@ public:
 private:
 	bool m_expanding;
 };
-SDL_Surface * FillingTextNode::render() {
-	SDL_Surface * t = m_font.render(m_txt, m_s.font_color, m_s.font_style);
-	SDL_Surface * rv = empty_sdl_surface(m_w, m_h);
-	SDL_SetAlpha(t, 0, SDL_ALPHA_OPAQUE);
-	for (uint32_t x = 0; x < m_w; x += t->w) {
-		SDL_Rect dstrect = { x, 0, 0, 0 };
-		SDL_Rect srcrect = {
-			0, 0,
-			min(static_cast<uint32_t>(t->w), m_w - x),
-			m_h
-		};
-		SDL_BlitSurface(t, &srcrect, rv, &dstrect);
+PictureID FillingTextNode::render(IGraphic & gr) {
+	PictureID t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
+	IBlitableSurface * rv = gr.create_surface(m_w, m_h);
+	for (uint32_t x = 0; x < m_w; x += t->get_w()) {
+		Rect srcrect(
+				Point(0,0),
+				min(static_cast<uint32_t>(t->get_w()), m_w - x),
+				m_h
+		);
+		rv->blit(Point(x,0), t, srcrect, CM_Solid);
 	}
-	SDL_FreeSurface(t);
-	return rv;
+	// TODO(sirver): need to free t?
+	return PictureID(rv);
 }
 
 
@@ -358,10 +358,11 @@ public:
 	WordSpacerNode(IFont & font, NodeStyle & ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
-	virtual SDL_Surface * render() {
-		SDL_Surface * sur = TextNode::render();
-		if (m_show_spaces)
-			SDL_FillRect(sur, 0, SDL_MapRGBA(sur->format, 0xff, 0, 0, SDL_ALPHA_OPAQUE));
+	virtual PictureID render(IGraphic & gr) {
+		PictureID sur = TextNode::render(gr);
+		// TODO(sirver): I cannot draw in this now, it is read only
+		// if (m_show_spaces)
+			// SDL_FillRect(sur, 0, SDL_MapRGBA(sur->format, 0xff, 0, 0, SDL_ALPHA_OPAQUE));
 		return sur;
 	}
 	virtual bool is_non_mandatory_space() {return true;}
@@ -377,7 +378,7 @@ public:
 	virtual uint32_t height() {return 0;}
 	virtual uint32_t width() {return INFINITE_WIDTH; }
 	virtual uint32_t hotspot_y() {return 0;}
-	virtual SDL_Surface * render() {
+	virtual PictureID render(IGraphic & gr) {
 		assert(0); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
@@ -389,100 +390,103 @@ private:
 class SpaceNode : public RenderNode {
 public:
 	SpaceNode(NodeStyle & ns, uint32_t w, uint32_t h = 0, bool expanding = false) :
-		RenderNode(ns), m_w(w), m_h(h), m_bg(0), m_expanding(expanding) {}
+		RenderNode(ns), m_w(w), m_h(h), m_expanding(expanding) {}
 
 	virtual uint32_t height() {return m_h;}
 	virtual uint32_t width() {return m_w;}
 	virtual uint32_t hotspot_y() {return m_h;}
-	virtual SDL_Surface * render() {
-		SDL_Surface * rv = empty_sdl_surface(m_w, m_h);
+	virtual PictureID render(IGraphic & gr) {
+		IBlitableSurface * rv = gr.create_surface(m_w, m_h);
 
 		// Draw background image (tiling)
 		if (m_bg) {
-			SDL_Rect dstrect;
-			SDL_Rect srcrect = {0, 0, 0, 0};
-			SDL_SetAlpha(m_bg, 0, SDL_ALPHA_OPAQUE);
+			Point dst;
+			Rect srcrect(Point(0,0), 1, 1);
+			// SDL_SetAlpha(m_bg, 0, SDL_ALPHA_OPAQUE);
+			// TODO: check this
 			for (uint32_t x = 0; x < m_w; x += m_bg->get_w()) {
-				dstrect.x = x;
-				dstrect.y = 0;
+				dst.x = x;
+				dst.y = 0;
 				srcrect.w = min(static_cast<uint32_t>(m_bg->get_w()), m_w - x);
 				srcrect.h = m_h;
-				SDL_BlitSurface(m_bg, &srcrect, rv, &dstrect);
+				rv->blit(dst, m_bg, srcrect, CM_Normal);
 			}
 		}
-		return rv;
+		return PictureID(rv);
 	}
 	virtual bool is_expanding() {return m_expanding;}
 	virtual void set_w(uint32_t w) {m_w = w;}
 
-	void set_background(IPicture s) {
-		m_bg = s; m_h = s->h;
+	void set_background(PictureID s) {
+		m_bg = s; m_h = s->get_h();
 	}
 
 private:
 	uint32_t m_w, m_h;
-	IPicture m_bg;
+	PictureID m_bg;
 	bool m_expanding;
 };
 
 class SubTagRenderNode : public RenderNode {
 public:
-	SubTagRenderNode(NodeStyle & ns) : RenderNode(ns), m_bg_img(0) {
-			m_bg_clr.r = m_bg_clr.g = m_bg_clr.b = m_bg_clr.unused = 0;
+	SubTagRenderNode(NodeStyle & ns) : RenderNode(ns) {
+			m_bg_clr = RGBColor(0,0,0);
 	}
 
 	virtual uint32_t width() {return m_w + m_margin.left + m_margin.right;}
 	virtual uint32_t height() {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint32_t hotspot_y() {return height();}
-	virtual SDL_Surface * render() {
-		SDL_Surface * rv = empty_sdl_surface(width(), height());
+	virtual PictureID render(IGraphic & gr) {
+		IBlitableSurface * rv = gr.create_surface(width(), height());
 
 		// Draw Solid background Color
+		// TODO(sirver): A lot of set_alpha and so on is missing here
 		bool set_alpha = true;
-		if (m_bg_clr.r or m_bg_clr.g or m_bg_clr.b or m_bg_clr.unused) {
-			SDL_Rect fill_rect = { m_margin.left, m_margin.top, m_w, m_h };
-			SDL_FillRect(rv, &fill_rect, SDL_MapRGBA(rv->format, m_bg_clr.r, m_bg_clr.g, m_bg_clr.b,
-						m_bg_clr.unused));
+		if (m_bg_clr.r() or m_bg_clr.g() or m_bg_clr.b()) {
+			Rect fill_rect(Point(m_margin.left, m_margin.top), m_w, m_h);
+			rv->fill_rect(fill_rect, m_bg_clr);
 			set_alpha = false;
 		}
 
 		// Draw background image (tiling)
 		if (m_bg_img) {
-			SDL_Rect dstrect;
-			SDL_Rect srcrect = {0, 0, 0, 0};
-			SDL_SetAlpha(m_bg_img, 0, SDL_ALPHA_OPAQUE);
-			for (uint32_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->h) {
+			Point dst;
+			Rect src(0,0,0,0);
+
+			for (uint32_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->get_h()) {
 				for (uint32_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->get_w()) {
-					dstrect.x = x;
-					dstrect.y = y;
-					srcrect.w = min(static_cast<uint32_t>(m_bg_img->get_w()), m_w + m_margin.left - x);
-					srcrect.h = min(static_cast<uint32_t>(m_bg_img->h), m_h + m_margin.top - y);
-					SDL_BlitSurface(m_bg_img, &srcrect, rv, &dstrect);
+					dst.x = x; dst.y = y;
+					src.w = min(static_cast<uint32_t>(m_bg_img->get_w()), m_w + m_margin.left - x);
+					src.h = min(static_cast<uint32_t>(m_bg_img->get_h()), m_h + m_margin.top - y);
+					rv->blit(dst, m_bg_img, src, CM_Normal);
 				}
 			}
 			set_alpha = false;
 		}
 
 		foreach(RenderNode * n, m_nodes_to_render) {
-			SDL_Surface * nsur = n->render();
-			if (set_alpha)
-				SDL_SetAlpha(nsur, 0, SDL_ALPHA_OPAQUE);
-			SDL_Rect dstrect = { n->x() + m_margin.left, n->y() + m_margin.top, 0, 0 };
-			SDL_BlitSurface(nsur, 0, rv,  &dstrect);
-			SDL_FreeSurface(nsur);
+			PictureID nsur = n->render(gr);
+			// if (set_alpha)
+				// SDL_SetAlpha(nsur, 0, SDL_ALPHA_OPAQUE);
+			Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
+			Rect src = Rect(0, 0, rv->get_w(), rv->get_h());
+
+			rv->blit(dst, nsur, src, CM_Normal);
+			// TODO(sirver): Free nsur
+			// SDL_FreeSurface(nsur);
 			delete n;
 		}
 
 		m_nodes_to_render.clear();
 
-		return rv;
+		return PictureID(rv);
 	}
 	virtual const vector<Reference> get_references() {return m_refs;}
 	void set_dimensions(uint32_t inner_w, uint32_t inner_h, Borders margin) {
 		m_w=inner_w; m_h=inner_h; m_margin= margin;
 	}
-	void set_background(SDL_Color clr) {m_bg_clr = clr;}
-	void set_background(SDL_Surface * img) {m_bg_img = img;}
+	void set_background(RGBColor clr) {m_bg_clr = clr;}
+	void set_background(PictureID img) {m_bg_img = img;}
 	void set_nodes_to_render(vector<RenderNode*> & n) {m_nodes_to_render=n;}
 	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, string s) {
 		Reference r = { {x, y, w, h}, s };
@@ -493,26 +497,23 @@ private:
 	uint32_t m_w, m_h;
 	vector<RenderNode*> m_nodes_to_render;
 	Borders m_margin;
-	SDL_Color m_bg_clr;
-	IPicture m_bg_img; // Owned by the image loader
+	RGBColor m_bg_clr;
+	PictureID m_bg_img; // Owned by the image loader
 	vector<Reference> m_refs;
 };
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle & ns, SDL_Surface * sur) : RenderNode(ns), m_sur(sur) {
+	ImgRenderNode(NodeStyle & ns, PictureID sur) : RenderNode(ns) {
 	}
 
-	virtual uint32_t width() {return m_sur->get_w();}
-	virtual uint32_t height() {return m_sur->h;}
-	virtual uint32_t hotspot_y() {return m_sur->h;}
-	virtual SDL_Surface * render() {
-		m_sur->refcount++; // Keep this surface around
-		return m_sur;
-	}
+	virtual uint32_t width() {return m_picture->get_w();} // TODO(sirver): should only be w()
+	virtual uint32_t height() {return m_picture->get_h();} // TODO(sirver): should only be h()
+	virtual uint32_t hotspot_y() {return m_picture->get_h();}
+	virtual PictureID render(IGraphic & gr) {return m_picture;}
 
 private:
-	SDL_Surface * m_sur; // Note: this is owned by the image loader.
+	PictureID m_picture; // Note: this is not owned by us.
 };
 
 // End: Helper Stuff }}}
@@ -524,7 +525,6 @@ public:
 		foreach(FontMapPair & pair, m_fontmap)
 			delete pair.second;
 		m_fontmap.clear();
-		delete m_fl;
 	}
 
 	IFont & get_font(NodeStyle & style);
@@ -544,7 +544,7 @@ private:
 	typedef std::pair<const FontDescr, IFont *> FontMapPair;
 
 	FontMap m_fontmap;
-	IFontLoader * m_fl;
+	scoped_ptr<IFontLoader> m_fl;
 };
 IFont & FontCache::get_font(NodeStyle & ns) {
 	FontDescr fd = { ns.font_face, ns.font_size };
@@ -559,12 +559,12 @@ IFont & FontCache::get_font(NodeStyle & ns) {
 
 
 class TagHandler;
-TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IImageLoader & imgl);
+TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr);
 
 class TagHandler {
 public:
-	TagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl) :
-		m_tag(tag), m_fc(fc), m_ns(ns), m_imgl(imgl) {}
+	TagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
+		m_tag(tag), m_fc(fc), m_ns(ns), gr_(gr) {}
 	virtual ~TagHandler() {};
 
 	virtual void enter() {};
@@ -577,7 +577,7 @@ protected:
 	ITag & m_tag;
 	FontCache & m_fc;
 	NodeStyle m_ns;
-	IImageLoader & m_imgl;
+	IGraphic & gr_;
 };
 
 void TagHandler::m_make_text_nodes(string txt, vector<RenderNode*> & nodes, NodeStyle & ns) {
@@ -598,7 +598,7 @@ void TagHandler::m_make_text_nodes(string txt, vector<RenderNode*> & nodes, Node
 void TagHandler::emit(vector<RenderNode*> & nodes) {
 	foreach(Child * c, m_tag.childs()) {
 		if (c->tag) {
-			TagHandler * th = create_taghandler(*c->tag, m_fc, m_ns, m_imgl);
+			TagHandler * th = create_taghandler(*c->tag, m_fc, m_ns, gr_);
 			th->enter();
 			th->emit(nodes);
 			delete th;
@@ -609,11 +609,11 @@ void TagHandler::emit(vector<RenderNode*> & nodes) {
 
 class FontTagHandler : public TagHandler {
 public:
-	FontTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl) : TagHandler(tag, fc, ns, imgl) {}
+	FontTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) : TagHandler(tag, fc, ns, gr) {}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
-		if (a.has("color")) a["color"].get_color(&m_ns.font_color);
+		if (a.has("color")) m_ns.font_color = a["color"].get_color();
 		if (a.has("size")) m_ns.font_size = a["size"].get_int();
 		if (a.has("face")) m_ns.font_face = a["face"].get_string();
 		if (a.has("bold")) m_ns.font_style |= a["bold"].get_bool() ? IFont::BOLD : 0;
@@ -626,8 +626,8 @@ public:
 
 class PTagHandler : public TagHandler {
 public:
-	PTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl)
-		: TagHandler(tag, fc, ns, imgl), m_indent(0) {
+	PTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr)
+		: TagHandler(tag, fc, ns, gr), m_indent(0) {
 	}
 
 	void enter() {
@@ -662,13 +662,13 @@ private:
 
 class ImgTagHandler : public TagHandler {
 public:
-	ImgTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl) :
-		TagHandler(tag, fc, ns, imgl) {
+	ImgTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
+		TagHandler(tag, fc, ns, gr) {
 	}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
-		m_rn = new ImgRenderNode(m_ns, m_imgl.load(a["src"].get_string()));
+		m_rn = new ImgRenderNode(m_ns, gr_.load_image(a["src"].get_string(), true));
 	}
 	void emit(vector<RenderNode*> & nodes) {
 		nodes.push_back(m_rn);
@@ -680,8 +680,8 @@ private:
 
 class VspaceTagHandler : public TagHandler {
 public:
-	VspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl) :
-		TagHandler(tag, fc, ns, imgl), m_space(0) {}
+	VspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
+		TagHandler(tag, fc, ns, gr), m_space(0) {}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
@@ -699,8 +699,8 @@ private:
 
 class HspaceTagHandler : public TagHandler {
 public:
-	HspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl) :
-		TagHandler(tag, fc, ns, imgl), m_bg(0), m_space(0) {}
+	HspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
+		TagHandler(tag, fc, ns, gr), m_space(0) {}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
@@ -713,7 +713,7 @@ public:
 		if (a.has("fill")) {
 			m_fill_text = a["fill"].get_string();
 			try {
-				m_bg = m_imgl.load(m_fill_text);
+				m_bg = gr_.load_image(m_fill_text, true);
 				m_fill_text = "";
 			} catch(BadImage &) {
 			}
@@ -743,14 +743,14 @@ public:
 
 private:
 	string m_fill_text;
-	SDL_Surface * m_bg;
+	PictureID m_bg;
 	uint32_t m_space;
 };
 
 class BrTagHandler : public TagHandler {
 public:
-	BrTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl) :
-		TagHandler(tag, fc, ns, imgl) {
+	BrTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
+		TagHandler(tag, fc, ns, gr) {
 	}
 
 	void emit(vector<RenderNode*> & nodes) {
@@ -761,8 +761,8 @@ public:
 
 class SubTagHandler : public TagHandler {
 public:
-	SubTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl, uint32_t gw = 0)
-		: TagHandler(tag, fc, ns, imgl), m_w(gw), m_rn(new SubTagRenderNode(ns)) {
+	SubTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr, uint32_t gw = 0)
+		: TagHandler(tag, fc, ns, gr), m_w(gw), m_rn(new SubTagRenderNode(ns)) {
 	}
 
 	void enter() {
@@ -814,12 +814,12 @@ public:
 		const IAttrMap & a = m_tag.attrs();
 		if (a.has("width")) m_w = a["width"].get_int();
 		if (a.has("background")) {
-			SDL_Color clr;
+			RGBColor clr;
 			try {
-				a["background"].get_color(&clr);
+				clr = a["background"].get_color();
 				m_rn->set_background(clr);
 			} catch (InvalidColor &) {
-				m_rn->set_background(m_imgl.load(a["background"].get_string()));
+				m_rn->set_background(gr_.load_image(a["background"].get_string(), false));
 			}
 		}
 		if (a.has("float")) {
@@ -842,8 +842,8 @@ private:
 
 class RTTagHandler : public SubTagHandler {
 public:
-	RTTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IImageLoader & imgl, uint32_t w) :
-		SubTagHandler(tag, fc, ns, imgl, w) {
+	RTTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & ggr, uint32_t w) :
+		SubTagHandler(tag, fc, ns, ggr, w) {
 	}
 
 	virtual void handle_unique_attributes() {
@@ -853,12 +853,12 @@ public:
 };
 
 template<typename T> TagHandler * create_taghandler
-	(ITag & tag, FontCache & fc, NodeStyle & ns, IImageLoader & imgl)
+	(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr)
 {
-	return new T(tag, fc, ns, imgl);
+	return new T(tag, fc, ns, gr);
 }
-typedef std::map<std::string, TagHandler*(*)(ITag & tag, FontCache & fc, NodeStyle & ns, IImageLoader & imgl)> TagHandlerMap;
-TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IImageLoader & imgl) {
+typedef std::map<std::string, TagHandler*(*)(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr)> TagHandlerMap;
+TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr) {
 	static TagHandlerMap map;
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
@@ -872,42 +872,41 @@ TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IImag
 	TagHandlerMap::iterator i = map.find(tag.name());
 	if (i == map.end())
 		throw RenderError((format("No Tag handler for %s. This is a bug, please submit a report.") % tag.name()).str());
-	return i->second(tag, fc, ns, imgl);
+	return i->second(tag, fc, ns, gr);
 }
 
 class Renderer : public IRenderer {
 public:
-	Renderer(IFontLoader * fl, IImageLoader * imgl, IParser * p);
+	Renderer(IGraphic & gr, IFontLoader * fl, IParser * p);
 	virtual ~Renderer();
 
-	virtual SDL_Surface * render(std::string, uint32_t, IRefMap **, const TagSet &);
+	virtual PictureID render(std::string, uint32_t, IRefMap **, const TagSet &);
 
 private:
+	IGraphic & gr_;
 	FontCache m_fc;
-	scoped_ptr<IImageLoader> m_imgl;
 	scoped_ptr<IParser> m_p;
-	IGraphic * gr;
 };
 
-Renderer::Renderer(IFontLoader * fl, IImageLoader * imgl, IParser * p) :
-	IRenderer(fl), m_fc(fl), m_imgl(imgl), m_p(p) {
+Renderer::Renderer(IGraphic & gr, IFontLoader * fl, IParser * p) :
+	IRenderer(fl), gr_(gr), m_fc(fl), m_p(p) {
 }
 
 Renderer::~Renderer() {
 }
 
-SDL_Surface * Renderer::render(string text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
+PictureID Renderer::render(string text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
 	ITag * rt = m_p->parse(text, allowed_tags);
 
 	NodeStyle default_fs = {
 		"DejaVuSerif.ttf", 16,
-		{ 0, 0, 0, 0 }, IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM
+		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM
 	};
 
 	if (!width)
 		width = INFINITE_WIDTH;
 
-	RTTagHandler rtrn(*rt, m_fc, default_fs, *m_imgl, width);
+	RTTagHandler rtrn(*rt, m_fc, default_fs, gr_, width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);
@@ -915,7 +914,7 @@ SDL_Surface * Renderer::render(string text, uint32_t width, IRefMap ** pprm, con
 	assert(nodes.size() == 1);
 	if (pprm)
 		*pprm = new RefMap(nodes[0]->get_references());
-	SDL_Surface * rv = nodes[0]->render();
+	PictureID rv = nodes[0]->render(gr_);
 
 	delete nodes[0];
 	delete rt;
@@ -923,8 +922,8 @@ SDL_Surface * Renderer::render(string text, uint32_t width, IRefMap ** pprm, con
 	return rv;
 }
 
-IRenderer * setup_renderer(IGraphic& gr, IFontLoader * fl, IImageLoader * imgl) {
-	return new Renderer(gr, fl, imgl, setup_parser());
+IRenderer * setup_renderer(IGraphic& gr, IFontLoader * fl) {
+	return new Renderer(gr, fl, setup_parser());
 }
 
 };

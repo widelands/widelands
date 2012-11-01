@@ -25,6 +25,7 @@
 struct IOffscreenSurface;
 struct Surface;
 
+// TODO(sirver): Not shared pointers, please. Make clear who owns this.
 typedef boost::shared_ptr<IOffscreenSurface> OffscreenSurfacePtr;
 typedef boost::shared_ptr<Surface> SurfacePtr;
 

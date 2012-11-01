@@ -23,6 +23,9 @@
 
 struct IPicture;
 
+// TODO(sirver): This should not really be a shared pointer. It is clear
+// who owns this usually.
+// TODO(sirver): Get rid of this as fast as possible. Horrible!
 typedef boost::shared_ptr<IPicture> PictureID;
 
 #endif
