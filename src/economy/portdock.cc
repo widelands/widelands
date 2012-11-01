@@ -295,7 +295,12 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 
 	if (m_expedition_ready)
 		if (ship.get_nritems() < 1) {
-#warning load the ship with the wares and the builder from the warehouse's expedition waresqueue and cleanup
+			// Load the ship
+			std::vector<ShippingItem> * wares = expedition_wares(game);
+			while (wares->size() > 0) {
+				ship.add_item(game, wares->back());
+				wares->pop_back();
+			}
 			ship.start_task_expedition(game);
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
@@ -395,6 +400,25 @@ void PortDock::start_expedition() {
 			 wwWORKER);*/
 }
 
+/// Converts the expeditions WaresQueues to ShippingItems
+std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
+	std::vector<ShippingItem> * wares = new std::vector<ShippingItem>;
+
+	std::vector<WaresQueue *> & expedition_wares = m_warehouse->get_wares_queue_vector();
+	for (uint8_t i = 0; i < expedition_wares.size(); ++i) {
+		Ware_Index wi = expedition_wares.at(i)->get_ware();
+		uint32_t numb = expedition_wares.at(i)->get_filled();
+		for (uint32_t j = 0; j < numb; ++j) {
+			WareInstance * temp = new WareInstance(wi, owner().tribe().get_ware_descr(wi));
+			temp->init(game);
+			wares->push_back(ShippingItem(*temp));
+		}
+		// Reset wares queue
+		expedition_wares.at(i)->cleanup();
+	}
+	return wares;
+}
+
 
 /// Called everytime a ware is added to the expedition's wares queue
 void PortDock::expedition_wares_queue_callback(Game & game, WaresQueue *, Ware_Index, void * const data)
@@ -408,8 +432,6 @@ void PortDock::expedition_wares_queue_callback(Game & game, WaresQueue *, Ware_I
 		WaresQueue * wq = wh->get_wares_queue(n);
 		if (wq->get_max_fill() != wq->get_filled())
 			return;
-		else
-			log("WaresQueue %u is filled up!\n", n);
 	}
 
 #warning take care about the builder
@@ -422,6 +444,7 @@ void PortDock::cancel_expedition() {
 	m_start_expedition = false;
 	m_expedition_ready = false;
 #warning implement the remove of the wares from expedition list and cancel requests
+	m_warehouse->get_wares_queue_vector().resize(0);
 }
 
 

@@ -103,6 +103,7 @@ struct PortDock : PlayerImmovable {
 	void start_expedition();
 	void cancel_expedition();
 	void set_expedition_ready(bool ready) {m_expedition_ready = ready;}
+	std::vector<ShippingItem> * expedition_wares(Game &);
 	static void expedition_wares_queue_callback(Game &, WaresQueue *, Ware_Index, void * data);
 
 private:
