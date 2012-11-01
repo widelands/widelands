@@ -385,6 +385,11 @@ void PortDock::start_expedition() {
 			WaresQueue & wq = *(expedition_wares[i] = new WaresQueue(*m_warehouse, it->first, it->second));
 			wq.set_callback(PortDock::expedition_wares_queue_callback, this);
 		}
+	} else {
+		// reresize the WaresQueues
+		for (size_t i = 0; i < expedition_wares.size(); ++i) {
+			expedition_wares[i]->set_max_fill(expedition_wares[i]->get_max_size());
+		}
 	}
 
 
@@ -414,7 +419,8 @@ std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
 			wares->push_back(ShippingItem(*temp));
 		}
 		// Reset wares queue
-		expedition_wares.at(i)->cleanup();
+		expedition_wares.at(i)->set_filled(0);
+		expedition_wares.at(i)->set_max_fill(0);
 	}
 	return wares;
 }
@@ -441,10 +447,19 @@ void PortDock::expedition_wares_queue_callback(Game & game, WaresQueue *, Ware_I
 }
 
 void PortDock::cancel_expedition() {
+	// Reset
 	m_start_expedition = false;
 	m_expedition_ready = false;
-#warning implement the remove of the wares from expedition list and cancel requests
-	m_warehouse->get_wares_queue_vector().resize(0);
+
+	// Put all wares from the WaresQueues back into the warehouse
+	std::vector<WaresQueue *> & expedition_wares = m_warehouse->get_wares_queue_vector();
+	for (uint8_t i = 0; i < expedition_wares.size(); ++i) {
+		m_warehouse->insert_wares(expedition_wares.at(i)->get_ware(), expedition_wares.at(i)->get_filled());
+		expedition_wares.at(i)->set_filled(0);
+		expedition_wares.at(i)->set_max_fill(0);
+	}
+
+	#warning take care about the workers as well
 }
 
 
