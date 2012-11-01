@@ -17,6 +17,8 @@
  *
  */
 
+#include <iostream> // TODO(sirver): Remove again
+
 // TODO(sirver): Read through this file again. There are a lot of stray comments which are not longer needed
 #include <queue>
 #include <string>
@@ -409,7 +411,7 @@ public:
 				dst.y = 0;
 				srcrect.w = min(static_cast<uint32_t>(m_bg->get_w()), m_w - x);
 				srcrect.h = m_h;
-				rv->blit(dst, m_bg, srcrect, CM_Normal);
+				rv->blit(dst, m_bg, srcrect, CM_Solid);
 			}
 		}
 		return PictureID(rv);
@@ -458,7 +460,7 @@ public:
 					dst.x = x; dst.y = y;
 					src.w = min(static_cast<uint32_t>(m_bg_img->get_w()), m_w + m_margin.left - x);
 					src.h = min(static_cast<uint32_t>(m_bg_img->get_h()), m_h + m_margin.top - y);
-					rv->blit(dst, m_bg_img, src, CM_Normal);
+					rv->blit(dst, m_bg_img, src, CM_Solid);
 				}
 			}
 			set_alpha = false;
@@ -468,10 +470,11 @@ public:
 			PictureID nsur = n->render(gr);
 			// if (set_alpha)
 				// SDL_SetAlpha(nsur, 0, SDL_ALPHA_OPAQUE);
+			cout << "SDL_ALPHA_OPAQUE: " << SDL_ALPHA_OPAQUE << endl;
 			Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
 			Rect src = Rect(0, 0, rv->get_w(), rv->get_h());
 
-			rv->blit(dst, nsur, src, CM_Normal);
+			rv->blit(dst, nsur, src, set_alpha ? CM_Solid : CM_Normal);
 			// TODO(sirver): Free nsur
 			// SDL_FreeSurface(nsur);
 			delete n;

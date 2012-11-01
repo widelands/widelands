@@ -17,6 +17,8 @@
  *
  */
 
+#include <iostream> // TODO(sirver): remove me
+
 #include <string>
 #include <map>
 
@@ -39,21 +41,40 @@ using namespace std;
 using namespace boost;
 
 
+#include <iostream> // TODO(sirver): Remove me
+
 class ThinSDLSurfacePA : boost::noncopyable, public virtual IPixelAccess {
 public:
 	ThinSDLSurfacePA(SDL_Surface* surf) : surf_(surf) {}
 	virtual ~ThinSDLSurfacePA() {}
 
-	 // TODO(sirver): Should only be w
+	 // TODO(sirver): Should only be w, should be const
 	virtual uint32_t get_w() {return surf_->w;}
 	virtual uint32_t get_h() {return surf_->h;}
 	virtual SDL_PixelFormat const & format() const {return *surf_->format;}
 	virtual uint16_t get_pitch() const {return surf_->pitch;}
-	virtual uint8_t * get_pixels() const {return static_cast<uint8_t*>(surf_->pixels);}
+	virtual uint8_t * get_pixels() const {
+   cout << "w: " << surf_->w << endl;
+   cout << "h: " << surf_->h << endl;
+   cout << "pitch: " << get_pitch() << endl;
+   cout << "BitsPerPixel: " << (int)format().BitsPerPixel << endl;
+   cout << "BytesPerPixel: " << (int)format().BytesPerPixel << endl;
+   cout << "Rmask: " << format().Rmask << endl;
+   cout << "Gmask: " << format().Gmask << endl;
+   cout << "Bmask: " << format().Bmask << endl;
+   cout << "Amask: " << format().Amask << endl;
+   // 5   Uint8  Rloss, Gloss, Bloss, Aloss;
+   // 6   Uint8  Rshift, Gshift, Bshift, Ashift;
+   // 7   Uint32 Rmask, Gmask, Bmask, Amask;
+   // 8   Uint32 colorkey;
+   // 9   Uint8  alpha;
+		return static_cast<uint8_t*>(surf_->pixels);
+	}
 
 	virtual void lock(LockMode) {SDL_LockSurface(surf_);}
 	virtual void unlock(UnlockMode) {SDL_UnlockSurface(surf_);}
 
+	// TODO(sirver): These functions are wrong
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y) {
 		return static_cast<uint32_t*>(surf_->pixels)[y*surf_->pitch + x];
 	}
@@ -68,15 +89,21 @@ private:
 
 class ThinSDLSurface : public virtual IBlitableSurface {
 public:
-	ThinSDLSurface(SDL_Surface * surf) : surf_(surf), pa_(surf) {
-	}
+	ThinSDLSurface(SDL_Surface * surf, bool free_pixels) :
+		surf_(surf), pa_(surf), free_pixels_(free_pixels)
+	{}
 	virtual ~ThinSDLSurface() {
 		if (surf_) {
-			// TODO(sirver): Next line might crash
-			free(surf_->pixels);
-			SDL_FreeSurface(surf_);
+			cout << "~ThinSDLSurface: before SDL_FreeSurface" << endl;
+			// TODO(sirver): Leaking left and right
+			// SDL_FreeSurface(surf_);
+			if (free_pixels_) {
+				cout << "~ThinSDLSurface: before freeing" << endl;
+				free(surf_->pixels);
+			}
 		}
 		surf_ = 0;
+		cout << "~ThinSDLSurface: all done" << endl;
 	}
 
 	virtual bool valid() {return true;}
@@ -117,6 +144,7 @@ public:
 private:
 	SDL_Surface * surf_;
 	ThinSDLSurfacePA pa_;
+	bool free_pixels_;
 };
 
 
@@ -143,13 +171,10 @@ ThinGraphic::~ThinGraphic() {
 
 PictureID ThinGraphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
 {
-	SDL_Surface * surface;
-	if (alpha)
-		surface = SDL_DisplayFormatAlpha(surf);
-	else
-		surface = SDL_DisplayFormat(surf);
-	SDL_FreeSurface(surf);
-	return PictureID(new ThinSDLSurface(surface));
+	PictureID rv(new ThinSDLSurface(surf, false));
+	// TODO(sirver): We are leaking left and right here
+	// SDL_FreeSurface(surf);
+	return rv;
 }
 
 // TODO(sirver): Pass a PicMod and add to cache immediately
@@ -185,7 +210,7 @@ PictureID ThinGraphic::load_image(const std::string & s, bool alpha) {
 		throw RT::BadImage
 			((format("Problem creating surface for image %s: %s\n") % s % SDL_GetError()).str());
 
-	ThinSDLSurface* rv = new ThinSDLSurface(surf);
+	ThinSDLSurface* rv = new ThinSDLSurface(surf, true);
 	return m_imgcache[s] = PictureID(rv);
 }
 
@@ -207,7 +232,7 @@ const PictureID & ThinGraphic::get_picture
 }
 
 IBlitableSurface * ThinGraphic::create_surface(int32_t w, int32_t h) {
-	return new ThinSDLSurface(RT::empty_sdl_surface(w,h));
+	return new ThinSDLSurface(RT::empty_sdl_surface(w,h), false);
 }
 
 
