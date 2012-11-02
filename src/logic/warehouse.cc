@@ -87,14 +87,10 @@ void WarehouseSupply::set_economy(Economy * const e)
 
 	if (m_economy) {
 		m_economy->remove_supply(*this);
-		for
-			(Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
+		for (Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
 			if (m_wares.stock(i))
 				m_economy->remove_wares(i, m_wares.stock(i));
-		for
-			(Ware_Index i = Ware_Index::First();
-			 i < m_workers.get_nrwareids();
-			 ++i)
+		for (Ware_Index i = Ware_Index::First(); i < m_workers.get_nrwareids(); ++i)
 			if (m_workers.stock(i))
 				m_economy->remove_workers(i, m_workers.stock(i));
 	}
@@ -102,14 +98,10 @@ void WarehouseSupply::set_economy(Economy * const e)
 	m_economy = e;
 
 	if (m_economy) {
-		for
-			(Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
+		for (Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
 			if (m_wares.stock(i))
 				m_economy->add_wares(i, m_wares.stock(i));
-		for
-			(Ware_Index i = Ware_Index::First();
-			 i < m_workers.get_nrwareids();
-			 ++i)
+		for (Ware_Index i = Ware_Index::First(); i < m_workers.get_nrwareids(); ++i)
 			if (m_workers.stock(i))
 				m_economy->add_workers(i, m_workers.stock(i));
 		m_economy->add_supply(*this);
@@ -570,6 +562,7 @@ WaresQueue & Warehouse::waresqueue(Ware_Index const wi) {
 void Warehouse::handle_expedition_worker_callback(Game & g, Request & r, Worker * w) {
 	for (uint8_t i = 0; i < m_expedition_workers.size(); ++i)
 		if (m_expedition_workers.at(i)->worker_request == &r) {
+			m_expedition_workers.at(i)->worker_request = 0;
 			m_expedition_workers.at(i)->worker = w;
 			delete &r;
 			// Check if this one was the last one we waited for
@@ -756,6 +749,14 @@ void Warehouse::set_economy(Economy * const e)
 			(*req_it.current)->set_economy(e);
 	}
 
+	// Take care about the expeditions WaresQueues
+	for (uint8_t i = 0; i < m_expedition_wares.size(); ++i) {
+		if (old)
+			m_expedition_wares.at(i)->remove_from_economy(*old);
+		if (e)
+			m_expedition_wares.at(i)->add_to_economy(*e);
+	}
+
 	if (e)
 		e->add_warehouse(*this);
 }
@@ -849,9 +850,7 @@ uint32_t Warehouse::count_workers
 
 /// Start a worker of a given type. The worker will
 /// be assigned a job by the caller.
-Worker & Warehouse::launch_worker
-	(Game & game, Ware_Index ware, Requirements const & req)
-{
+Worker & Warehouse::launch_worker(Game & game, Ware_Index ware, Requirements const & req) {
 	do {
 		if (m_supply->stock_workers(ware)) {
 			uint32_t unincorporated = m_supply->stock_workers(ware);

@@ -597,9 +597,10 @@ void Player::start_stop_building(PlayerImmovable & imm) {
 void Player::start_or_cancel_expedition(Warehouse & wh) {
 	if (&wh.owner() == this)
 		if (PortDock * pd = wh.get_portdock()) {
-			if (pd->expedition_started())
-				pd->cancel_expedition();
-			else
+			if (pd->expedition_started()) {
+				upcast(Game, game, &egbase());
+				pd->cancel_expedition(*game);
+			} else
 				pd->start_expedition();
 		}
 }

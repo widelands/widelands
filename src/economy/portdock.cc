@@ -304,7 +304,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 			ship.start_task_expedition(game);
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
-			cancel_expedition();
+			cancel_expedition(game);
 		}
 
 	if (ship.get_nritems() < ship.get_capacity() && !m_waiting.empty()) {
@@ -404,7 +404,8 @@ void PortDock::start_expedition() {
 			 wwWORKER);
 }
 
-/// Converts the expeditions WaresQueues to ShippingItems
+/// Converts the expeditions WaresQueues as well as workers to ShippingItems
+/// \note Should only be called if all wares and workers arrived.
 std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
 	std::vector<ShippingItem> * wares = new std::vector<ShippingItem>;
 
@@ -421,6 +422,13 @@ std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
 		expedition_wares.at(i)->set_filled(0);
 		expedition_wares.at(i)->set_max_fill(0);
 	}
+	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
+	for (uint8_t i = 0; i < ew.size(); ++i) {
+		assert(!ew.at(i)->worker_request);
+		wares->push_back(ShippingItem(*ew.at(i)->worker));
+	}
+	// Reset expedition workers list
+	ew.resize(0);
 	return wares;
 }
 
@@ -442,13 +450,17 @@ void PortDock::check_expedition_wares_and_workers(Game & game) {
 			return;
 	}
 
-#warning take care about the builder
-	// If this point is reached, all needed wares are stored and waiting for a ship
+	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
+	for (uint8_t i = 0; i < ew.size(); ++i) {
+		if (ew.at(i)->worker_request);
+			return;
+	}
+	// If this point is reached, all needed wares and workers are stored and waiting for a ship
 	set_expedition_ready(true);
 	get_fleet()->update(game);
 }
 
-void PortDock::cancel_expedition() {
+void PortDock::cancel_expedition(Game & game) {
 	// Reset
 	m_start_expedition = false;
 	m_expedition_ready = false;
@@ -461,7 +473,16 @@ void PortDock::cancel_expedition() {
 		expedition_wares.at(i)->set_max_fill(0);
 	}
 
-	#warning take care about the workers as well
+	// Send all workers from the expedition list back inside the warehouse
+	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
+	for (uint8_t i = 0; i < ew.size(); ++i) {
+		if (ew.at(i)->worker_request)
+			delete &ew.at(i)->worker_request;
+		else
+			m_warehouse->incorporate_worker(game, *ew.at(i)->worker);
+	}
+	// Reset expedition workers list
+	ew.resize(0);
 }
 
 
