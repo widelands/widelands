@@ -392,17 +392,16 @@ void PortDock::start_expedition() {
 		}
 	}
 
-
-#warning builder is needed as well
 	// The builder is requested in every way, even if it is already inside the portdocks warehouse
 	// This is to ensure that the callback function is at least called once and thus the expedition
 	// is started as soon as all needed materials + builder are ready
-	/*m_builder_request =
+	m_warehouse->get_expedition_workers().push_back(new Warehouse::Expedition_Worker);
+	m_warehouse->get_expedition_workers().back()->worker_request =
 		new Request
-			(*this,
-			 tribe().safe_worker_index("builder"),
-			 Partially_Finished_Building::request_builder_callback,
-			 wwWORKER);*/
+			(*m_warehouse,
+			 owner().tribe().safe_worker_index("builder"),
+			 Warehouse::request_expedition_worker_callback,
+			 wwWORKER);
 }
 
 /// Converts the expeditions WaresQueues to ShippingItems
@@ -430,20 +429,23 @@ std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
 void PortDock::expedition_wares_queue_callback(Game & game, WaresQueue *, Ware_Index, void * const data)
 {
 	PortDock  & pd = *static_cast<PortDock *>(data);
-	Warehouse * wh = pd.get_warehouse();
+	pd.check_expedition_wares_and_workers(game);
+}
 
-	pd.set_expedition_ready(false);
+/// Gets called if a ware or a worker arrives to check if everything is available
+void PortDock::check_expedition_wares_and_workers(Game & game) {
+	set_expedition_ready(false);
 
-	for (uint8_t n = 0; n < wh->size_of_expedition_wares_queue(); ++n) {
-		WaresQueue * wq = wh->get_wares_queue(n);
+	for (uint8_t n = 0; n < m_warehouse->size_of_expedition_wares_queue(); ++n) {
+		WaresQueue * wq = m_warehouse->get_wares_queue(n);
 		if (wq->get_max_fill() != wq->get_filled())
 			return;
 	}
 
 #warning take care about the builder
 	// If this point is reached, all needed wares are stored and waiting for a ship
-	pd.set_expedition_ready(true);
-	pd.get_fleet()->update(game);
+	set_expedition_ready(true);
+	get_fleet()->update(game);
 }
 
 void PortDock::cancel_expedition() {

@@ -566,6 +566,18 @@ WaresQueue & Warehouse::waresqueue(Ware_Index const wi) {
 		 name().c_str(), serial(), name().c_str(), wi.value());
 }
 
+/// keeps track of arriving expedition workers
+void Warehouse::handle_expedition_worker_callback(Game & g, Request & r, Worker * w) {
+	for (uint8_t i = 0; i < m_expedition_workers.size(); ++i)
+		if (m_expedition_workers.at(i)->worker_request == &r) {
+			m_expedition_workers.at(i)->worker = w;
+			delete &r;
+			// Check if this one was the last one we waited for
+			return m_portdock->check_expedition_wares_and_workers(g);
+		}
+	assert(false);
+}
+
 
 void Warehouse::destroy(Editor_Game_Base & egbase)
 {
