@@ -1,16 +1,16 @@
-# German translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# Occitan (post 1500) translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-11-02 16:14+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2012-11-02 11:05+0000\n"
+"Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
+"Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,29 +23,24 @@ msgid ""
 "smuggled here\n"
 "is worth %i points."
 msgstr ""
-"Eine neue Schmuggelroute von %s zu %s wurde eingerichtet! Jede Ware die "
-"hier\n"
-"geschmuggelt wird bringt %i Punkte."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid "A receiving spot"
-msgstr "Empfängerpunkt"
+msgstr "Un luòc de recepcion"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid "A sending spot"
-msgstr "Sendepunkt"
+msgstr "Un luòc d'expedicion"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:48
 msgid "Game Status"
-msgstr "Spielstatus"
+msgstr "Estat de la partida"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:39
 msgid ""
 "Game over! %s and %s have won the game! %s and %s only managed to\n"
 "acquire %i points."
 msgstr ""
-"Game Over! %s und %s haben das Spiel gewonnen!\n"
-"%s und %s haben nur %i Punkte geschafft."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:20
 msgid ""
@@ -55,19 +50,14 @@ msgid ""
 "the headquarters\n"
 "of your team mate."
 msgstr ""
-"Vergiss nicht, dass die Karte punktsymetrisch ist: Wenn du einen Punkt oben "
-"links von\n"
-"deinem Hauptquartier findest, dann hat dein Partner einen ähnlichen Punkt "
-"unten\n"
-"rechts von seinem Hauptquartier."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Rules"
-msgstr "Regeln"
+msgstr "Règlas"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
 msgid "Smugglers"
-msgstr "Schmuggler"
+msgstr "Contrabanda"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid ""
@@ -84,35 +74,17 @@ msgid ""
 "smuggling:\n"
 "2 or 3 per ware. The first team to have %i points wins."
 msgstr ""
-"Smugglers ist eine Spaß Karte für 4 Spieler. Sie und Ihr Verbündeter starten "
-"diagonal\n"
-"gegenüber, jeder auf einer Punktsymetrischen Insel. Es gibt massig "
-"Schmuggeltunnel\n"
-"auf dieser Insel. Jeder hat dabei ein sendenes und empfangendes Ende. Um "
-"eine Schmuggelroute\n"
-"aufzubauen müssen sie ein Lagerhaus auf einem sendenen oder empfangenden Ort "
-"bauen und Ihr\n"
-"Verbündeter muss ein Lagerhaus auf dem dazugehörigen sendenen oder "
-"empfangenden Ort bauen.\n"
-"Die Waren werden dann alle 10 Sekunden transferiert. Um den Kampf um "
-"Schmuggelrouten anzuheizen,\n"
-"erhalten Sie Punkte für das Schmuggeln: je 2 oder 3 pro Ware. Die "
-"Mannschaft, die als erstes %i Punkte hat,\n"
-"gewinnt das Spiel."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:33
 msgid "The smuggling route worth %i from %s to %s has been broken!"
 msgstr ""
-"Die Schmuggelroute im Wert von %i Punkten von %s zu %s wurde unterbrochen!"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:124
 msgid "Wares smuggled"
-msgstr "Ware geschmuggelt"
+msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:24
 msgid ""
 "You can see the number of wares traded at any time in the general\n"
 "statistics menu. Good luck!"
 msgstr ""
-"Du kannst die Anzahl der geschmuggelten Waren zu jedem Zeitpunkt im "
-"allgemeinen Statistikmenü nachschauen. Viel Erfolg!"
