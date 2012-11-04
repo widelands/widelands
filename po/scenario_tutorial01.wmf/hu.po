@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-11-02 21:53+0000\n"
+"PO-Revision-Date: 2012-11-03 22:04+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-03 04:35+0000\n"
+"X-Launchpad-Export-Date: 2012-11-04 04:31+0000\n"
 "X-Generator: Launchpad (build 16218)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -27,7 +27,7 @@ msgstr ""
 "Üzeneted érkezett. Feltűnt, miképpen változott meg az ikonsorban az\n"
 "üzenetek ikonja? Mivel már nincs szükségünk a kőfejtőre, ezért legjobb "
 "lesz,\n"
-"ha leégetjük azt. Ehhez kattints az épületre, majd válaszd a „Lerombol” "
+"ha leégetjük azt. Ehhez kattints az épületre, majd válaszd a „Megsemmisít” "
 "gombot."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:610
@@ -76,6 +76,10 @@ msgid ""
 "screen.\n"
 "Close the messages window now by right clicking into it."
 msgstr ""
+"A Widelandsben minden ablak bezárható, ha jobb egérgombbal kattintasz "
+"rajtuk. Egyes\n"
+"ablakok a képernyő alján lévő gombokkal is be-, illetve kikapcsolhatóak.\n"
+"Most zárd be az üzenetek ablakát a rajta való jobb egérkattintással."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:318
 msgid ""
@@ -203,6 +207,14 @@ msgid ""
 "military influence any more. If an enemy builds a military building nearby,\n"
 "your construction site could burn down. No sweat, that won't happen here."
 msgstr ""
+"Közvetlenül citadellát nem építhetsz. Ehelyett először egy erődöt kell "
+"építened,\n"
+"és aztán azt citadellává fejlesztened. Ehhez kattints az erődre, majd\n"
+"válaszd a „Továbbfejlesztés: Citadella” gombot. Az építkezés idejére\n"
+"a katonák elhagyják az épületet. Ez azt jelenti, hogy az erődödnek már "
+"nincs\n"
+"hadi szerepe. Ha egy ellenség egy katonai épületet emel a közelben,\n"
+"az építési területed leéghet. Nyugalom, ezúttal ez nem fog megtörténni."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
@@ -217,7 +229,7 @@ msgstr "Ablak bezárása"
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:696
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
 msgid "Conclusion"
-msgstr "Megkötéséről"
+msgstr "Befejezés"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
@@ -238,6 +250,15 @@ msgid ""
 "front\n"
 "of your headquarters. Wait for the completion of the stonemason's hut."
 msgstr ""
+"Kösd össze a köfejtő építési területét és a főhadiszállásodat egy úttal. "
+"Mikor\n"
+"utasítást adsz ki egy új épület létesítésére, közvetlenül az útépítő módba "
+"kerülsz. De most\n"
+"nem abban vagy. Egy teljesen új út építéséhez csak kattints az építési "
+"területed\n"
+"előtti zászlóra, nyomd meg az útépítés gombját, majd kattints a "
+"főhadiszállásod\n"
+"előtti zászlóra. Aztán várd meg, míg a kőfejtő kunyhója elkészül."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:496
 msgid "Conquer an area were we can build mines"
@@ -341,9 +362,9 @@ msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
 msgstr ""
-"Fejleszd az erődödet citadellává. Ne feledkezz meg, hogy gyorsíthatod a "
+"Most akkor fejleszd az erődödet citadellává. Ne feledd, hogy gyorsíthatod a "
 "játék\n"
-"sebességét a PAGE UP billentyűvel."
+"sebességét a PAGE UP billentyűvel – egy citadella építése eltart egy darabig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid ""
@@ -562,6 +583,12 @@ msgid ""
 "the defenders will come from all nearby military buildings of the enemy and\n"
 "intercept your forces."
 msgstr ""
+"Csináltam neked egy edzőtársat: egy birodalmi törzset, a citadellád\n"
+"közelébe. Épületeik megtámadásához kattints a kívánt épület bejáratára,\n"
+"add meg, hogy hány katonát kívánsz odaküldeni, és kattints a „Támadás”\n"
+"gombra. Katonáid minden közeli hadi épületből fognak érkezni. Hasonlóan,\n"
+"a védők is az ellenség minden közeli katonai épületéből érkeznek majd, és\n"
+"visszatartják erőidet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid ""
@@ -570,6 +597,10 @@ msgid ""
 "is\n"
 "an even bigger building: the citadel."
 msgstr ""
+"Hamarosan készítek neked ellenséget, de győződjünk meg arról, hogy fel vagy "
+"rá készülve.\n"
+"Ez az erődítmény már így is igen erős és sok helyet foglal. De létezik\n"
+"még ennél is nagyobb építmény: a citadella."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
 msgid ""
@@ -622,6 +653,9 @@ msgid ""
 "buildings\n"
 "tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
+"Csak kattints bármelyik ház szimbólumra a kövek mellett, a megjelenő "
+"ablakban\n"
+"válaszd a „Kis épületek építése” fület, majd kattints a köfejtő képére."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid ""
@@ -1163,6 +1197,17 @@ msgid ""
 "fun\n"
 "playing!"
 msgstr ""
+"Ezzel az oktató játék végéhez értünk. Vannak még dolgok, amikről nem "
+"beszéltünk –\n"
+"még csak egyetlen termelő épületet sem emeltünk, pedig az áruk előállítása\n"
+"a legfontosabb dolog a Widelandsben –, de az alapokat már megtanultad. A "
+"többit\n"
+"a különböző törzsek saját bemutató hadjáratain végighaladva\n"
+"ismerheted meg. Mindegyik néhány küldetésből áll, melyek megismertetnek a "
+"törzsekkel\n"
+"és azok gazdaságával, miközben bemutatják a Widelands kerettörténetét is. Jó "
+"szórakozást\n"
+"a játékhoz!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
 msgid "Trainings camp and soldier stats"
@@ -1370,7 +1415,7 @@ msgstr "zászló kitűzése szimbólumát."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:713
 msgid "exit game button."
-msgstr "kilépés a játékból gombot."
+msgstr "„Kilépés a játékból” gombot."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:586
 msgid ""
@@ -1390,6 +1435,8 @@ msgid ""
 "options menu button on the very left at the bottom of the screen.\n"
 "Then click the"
 msgstr ""
+"„Beállítások” menü gombját, bal szélen a képernyő alján.\n"
+"Majd nyomd meg a"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."
