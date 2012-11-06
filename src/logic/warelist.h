@@ -20,15 +20,11 @@
 #ifndef WARELIST_H
 #define WARELIST_H
 
-#include "widelands.h"
-
-#include <boost/signal.hpp>
-#include <boost/bind.hpp>
-
-#include <SDL.h>
-
 #include <cassert>
 #include <vector>
+
+#include "widelands.h"
+#include "observable.h"
 
 namespace Widelands {
 
@@ -36,7 +32,7 @@ namespace Widelands {
  * WareList is a simple wrapper around an array of ware types.
  * It is useful for warehouses and for economy-wide inventory.
  */
-struct WareList {
+struct WareList : virtual public Observable {
 	WareList() {};
 	~WareList();
 
@@ -62,8 +58,6 @@ struct WareList {
 
 	bool operator== (WareList const &)    const;
 	bool operator!= (WareList const & wl) const {return not (*this == wl);}
-
-	mutable boost::signal<void ()> changed;
 
 private:
 	vector_type m_wares;

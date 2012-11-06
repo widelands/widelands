@@ -20,6 +20,7 @@
 #ifndef WARESDISPLAY_H
 #define WARESDISPLAY_H
 
+#include "observer.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
 #include "logic/tribe.h"
@@ -43,7 +44,7 @@ struct WareList;
  *
  * For practical purposes, use one of the derived classes, e.g. @ref WaresDisplay.
  */
-struct AbstractWaresDisplay : public UI::Panel {
+struct AbstractWaresDisplay : public UI::Panel, virtual public Observer {
 	AbstractWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
@@ -79,6 +80,9 @@ struct AbstractWaresDisplay : public UI::Panel {
 
 	Widelands::Ware_Index ware_at_point(int32_t x, int32_t y) const;
 	Widelands::WareWorker get_type() const {return m_type;}
+
+	// implements Observer
+	void observed_changed() {update();}
 
 protected:
 	virtual void layout();
