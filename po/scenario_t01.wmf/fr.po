@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-11-02 15:20+0000\n"
+"PO-Revision-Date: 2012-11-07 12:06+0000\n"
 "Last-Translator: El Pensador <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-03 04:33+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-11-08 04:41+0000\n"
+"X-Generator: Launchpad (build 16232)\n"
 "X-Poedit-Language: French\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
@@ -407,7 +407,7 @@ msgstr "Le conseiller"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:58
 msgid "The elder remarks..."
-msgstr "L'ancien remarque..."
+msgstr "L'ancien fait remarquer..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:87
 msgid "The elder speaks..."
