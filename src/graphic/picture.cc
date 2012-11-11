@@ -37,6 +37,6 @@ struct NullPicture : IPicture {
  */
 const PictureID & IPicture::null()
 {
-	static PictureID thenull(new NullPicture);
+	static IPicture* thenull = new NullPicture;
 	return thenull;
 }

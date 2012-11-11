@@ -25,8 +25,6 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "picture_id.h"
-
 struct IPixelAccess;
 
 /**
@@ -48,7 +46,7 @@ struct IPicture : boost::noncopyable {
 	virtual IPixelAccess & pixelaccess() = 0;
 
 public:
-	static const PictureID & null();
+	static const IPicture & null();
 };
 
 #endif

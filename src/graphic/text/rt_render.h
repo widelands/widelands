@@ -49,7 +49,7 @@ public:
 
 	// TODO(sirver): Get rid of all SDL_Color
 	virtual void dimensions(std::string, int, uint32_t *, uint32_t *) = 0;
-	virtual PictureID render(IGraphic &, std::string, RGBColor clr, int) = 0;
+	virtual IPicture* render(IGraphic &, std::string, RGBColor clr, int) = 0;
 
 	virtual uint32_t ascent(int) const = 0;
 };
@@ -86,7 +86,7 @@ public:
 	IRenderer(IFontLoader *) {};
 	virtual ~IRenderer() {};
 
-	virtual PictureID render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
+	virtual IPicture* render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
 };
 
 // Setup a renderer, takes ownership of fl but not of gr.

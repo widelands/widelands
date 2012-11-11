@@ -16,15 +16,15 @@ cdef extern from "thin_graphic.h":
         uint32_t get_h()
         uint32_t get_w()
 
-    cdef cppclass PictureID:
-        IPixelAccess& pixelaccess "operator->()->pixelaccess"()
+    cdef cppclass IPicture:
+        IPixelAccess& pixelaccess()
     IGraphic * create_thin_graphic()
 
 cdef extern from "rt_render.h" namespace "RT":
     cdef cppclass IRefMap:
         cppstr query(int16_t, int16_t)
     cdef cppclass IRenderer:
-        PictureID render(char*, uint32_t, IRefMap **, cppset[cppstr] &) except +
+        IPicture* render(char*, uint32_t, IRefMap **, cppset[cppstr] &) except +
 
     struct IFontLoader:
         pass
@@ -64,7 +64,7 @@ cdef class Renderer(object):
             allowed_set.insert(cppstr(<char*>(tag)))
 
         print "PYALIVE 1"
-        cdef PictureID rv = self._renderer.render(text, width, &rm, allowed_set)
+        cdef IPicture* rv = self._renderer.render(text, width, &rm, allowed_set)
         print "PYALIVE 2"
         cdef IPixelAccess* p = &rv.pixelaccess()
         print "PYALIVE 3"
@@ -80,8 +80,8 @@ cdef class Renderer(object):
                     a[y,x,i] = pixels[y*p.get_pitch() + x*4 + i]
         p.unlock # DIRTY HACK: Will call unlock with correct params
 
-        # SDL_FreeSurface(rv)
-        # TODO(sirver): Free rv?
+        del rv
+        # TODO(sirver): cleanup this file, remove prints
 
         cdef RefMap rrm = RefMap()
         rrm._refmap = rm

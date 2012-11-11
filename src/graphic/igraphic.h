@@ -30,7 +30,7 @@ struct SDL_Surface;
 /**
  * Picture caches (modules).
  *
- * \ref Graphic maintains a cache of \ref PictureID s to avoid continuous re-loading of
+ * \ref Graphic maintains a cache of \ref IPicture to avoid continuous re-loading of
  * pictures that may not be referenced all the time (e.g. UI elements).
  *
  * This cache is separated into different modules, and can be flushed per-module.
@@ -48,10 +48,10 @@ enum PicMod {
 class IGraphic {
 public:
 	virtual ~IGraphic() { };
-	virtual PictureID convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) = 0;
-	virtual PictureID load_image(std::string const &, bool alpha = false) = 0;
-	virtual const PictureID & get_picture(PicMod, std::string const &, bool alpha = true) = 0;
-	virtual void add_picture_to_cache(PicMod, const std::string &, PictureID) = 0; // TODO(sirver): Really needed?
+	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) = 0;
+	virtual IPicture* load_image(std::string const &, bool alpha = false) = 0;
+	virtual const IPicture & get_picture(PicMod, std::string const &, bool alpha = true) = 0;
+	virtual void add_picture_to_cache(PicMod, const std::string &, IPicture*) = 0; // TODO(sirver): Really needed?
 	virtual IBlitableSurface * create_surface(int32_t w, int32_t h) = 0;
 };
 

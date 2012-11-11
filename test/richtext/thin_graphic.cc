@@ -112,9 +112,9 @@ public:
 
 	virtual IPixelAccess & pixelaccess() {return pa_;}
 
-	void blit(Point const dst, PictureID src, Rect const srcrc, Composite cm)
+	void blit(Point const dst, IPicture& src, Rect const srcrc, Composite cm)
 	{
-		upcast(ThinSDLSurface, sdlsurf, src.get());
+		upcast(ThinSDLSurface, sdlsurf, &src);
 		assert(sdlsurf);
 		assert(this);
 		SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
@@ -138,6 +138,7 @@ public:
 	void fill_rect(Rect rc, RGBAColor clr) {
 		const uint32_t color = clr.map(*surf_->format);
 		SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
+		cout << "color : " << color << endl;
 		SDL_FillRect(surf_, &r, color);
 	}
 
@@ -152,26 +153,26 @@ private:
 class ThinGraphic : boost::noncopyable, virtual public IGraphic {
 public:
 	virtual ~ThinGraphic();
-	virtual PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
-	virtual PictureID load_image(const std::string &, bool alpha = false);
-	virtual const PictureID & get_picture(PicMod, std::string const &, bool alpha = true);
-	virtual void add_picture_to_cache(PicMod, const std::string &, PictureID);
+	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
+	virtual IPicture* load_image(const std::string &, bool alpha = false);
+	virtual const IPicture & get_picture(PicMod, std::string const &, bool alpha = true);
+	virtual void add_picture_to_cache(PicMod, const std::string &, IPicture*);
 	IBlitableSurface * create_surface(int32_t w, int32_t h);
 
 private:
-	typedef std::pair<const string, PictureID> MapEntry;
-	typedef map<string, PictureID> GraphicMap;
+	typedef std::pair<const string, IPicture*> MapEntry;
+	typedef map<string, IPicture*> GraphicMap;
 	GraphicMap m_imgcache;
 };
 
 
 ThinGraphic::~ThinGraphic() {
-	// TODO(sirver): This leaks memory due to the shared_ptr approach
+	// TODO(sirver): delete the images we own
 }
 
-PictureID ThinGraphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
+IPicture* ThinGraphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
 {
-	PictureID rv(new ThinSDLSurface(surf, false));
+	IPicture* rv(new ThinSDLSurface(surf, false));
 	// TODO(sirver): We are leaking left and right here
 	// SDL_FreeSurface(surf);
 	return rv;
@@ -180,7 +181,7 @@ PictureID ThinGraphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool a
 // TODO(sirver): Pass a PicMod and add to cache immediately
 // TODO: understand the semantic of these functions. Is load_image
 // caching already. Is get_picture calling load image?
-PictureID ThinGraphic::load_image(const std::string & s, bool alpha) {
+IPicture* ThinGraphic::load_image(const std::string & s, bool alpha) {
 	unsigned w, h;
 	unsigned char * image;
 
@@ -211,24 +212,24 @@ PictureID ThinGraphic::load_image(const std::string & s, bool alpha) {
 			((format("Problem creating surface for image %s: %s\n") % s % SDL_GetError()).str());
 
 	ThinSDLSurface* rv = new ThinSDLSurface(surf, true);
-	return m_imgcache[s] = PictureID(rv);
+	return m_imgcache[s] = rv;
 }
 
 // TODO(sirver): Why is this exposed?
-void ThinGraphic::add_picture_to_cache(PicMod /* module */, const std::string & name, PictureID pic) {
+void ThinGraphic::add_picture_to_cache(PicMod /* module */, const std::string & name, IPicture* pic) {
 	// We ignore module completely here.
 	m_imgcache[name] = pic;
 }
 
-const PictureID & ThinGraphic::get_picture
+const IPicture & ThinGraphic::get_picture
 	(PicMod const module, const std::string & fname, bool alpha)
 {
 	GraphicMap::iterator i = m_imgcache.find(fname);
 	if (i != m_imgcache.end())
-		return i->second;
+		return *i->second;
 
 	load_image(fname, alpha);
-	return m_imgcache[fname];
+	return *m_imgcache[fname];
 }
 
 IBlitableSurface * ThinGraphic::create_surface(int32_t w, int32_t h) {

@@ -45,7 +45,7 @@ public:
 	virtual bool valid() = 0;
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(Point, PictureID, Rect srcrc, Composite cm = CM_Normal) = 0;
+	virtual void blit(Point, IPicture&, Rect srcrc, Composite cm = CM_Normal) = 0;
 
 	/// Draws a filled rect to the surface.
 	virtual void fill_rect(Rect, RGBAColor) = 0;

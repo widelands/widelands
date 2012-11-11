@@ -43,7 +43,7 @@ public:
 	virtual ~SDLTTF_Font();
 
 	void dimensions(string, int, uint32_t * w, uint32_t * h);
-	virtual PictureID render(IGraphic &, string, RGBColor clr, int);
+	virtual IPicture* render(IGraphic &, string, RGBColor clr, int);
 	uint32_t ascent(int) const;
 
 private:
@@ -74,7 +74,7 @@ void SDLTTF_Font::dimensions(string txt, int style, uint32_t * gw, uint32_t * gh
 	*gw = w; *gh = h;
 }
 
-PictureID SDLTTF_Font::render(IGraphic & gr, string txt, RGBColor clr, int style) {
+IPicture* SDLTTF_Font::render(IGraphic & gr, string txt, RGBColor clr, int style) {
 	m_set_style(style);
 
 	SDL_Surface * text_surface = 0;
@@ -135,7 +135,7 @@ PictureID SDLTTF_Font::render(IGraphic & gr, string txt, RGBColor clr, int style
 	cs.Data(&style, sizeof(style));
 	cs.FinishChecksum();
 
-	PictureID rv = gr.convert_sdl_surface_to_picture(text_surface, true);
+	IPicture* rv = gr.convert_sdl_surface_to_picture(text_surface, true);
 
 	// TODO(sirver): Should this really be done here?
 	gr.add_picture_to_cache(PicMod_UI, txt + "_" + cs.GetChecksum().str(), rv);
