@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-08-16 11:03+0000\n"
-"Last-Translator: Michael Moroni <michael.moroni@mailoo.org>\n"
+"PO-Revision-Date: 2012-11-12 23:14+0000\n"
+"Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:37+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-11-13 04:38+0000\n"
+"X-Generator: Launchpad (build 16251)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -49,7 +49,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:512
 #: ../../src/writeHTML.cc:1465
 msgid "Icon"
-msgstr "Piktogramo"
+msgstr "Ikono"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:514
 #: ../../src/writeHTML.cc:1467 ../../src/wui/building_statistics_menu.cc:112
