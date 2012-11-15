@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-11-12 16:51+0000\n"
-"Last-Translator: guess880 <guessian@gmail.com>\n"
+"PO-Revision-Date: 2012-11-14 17:16+0000\n"
+"Last-Translator: guess880 <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-13 04:38+0000\n"
-"X-Generator: Launchpad (build 16251)\n"
+"X-Launchpad-Export-Date: 2012-11-15 04:38+0000\n"
+"X-Generator: Launchpad (build 16265)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -160,6 +160,10 @@ msgid ""
 "to\n"
 "build a small training scenario for you. Let's do that now."
 msgstr ""
+"話が脱線してしまいました。兵士の話に戻ります。\n"
+"何をしようとしていたのでしたっけ?\n"
+"そうだ、小さな訓練シナリオを作ろうと思っていたのでした。\n"
+"それではやってみましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:358
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:379
@@ -388,7 +392,8 @@ msgid ""
 "the raw stone."
 msgstr ""
 "良くできました。木こり小屋が完成しました。\n"
-"木こりはすぐに移動し、木の伐採を開始して、木材の収入が確保されました。\n"
+"木こりはすぐに移動し、木の伐採を開始するでしょう。\n"
+"これで木材の収入が確保されました。\n"
 "次は原石の確保です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:477
@@ -403,7 +408,7 @@ msgid ""
 msgstr ""
 "拡大するには、領土の隅に軍事施設を建てるのが簡単です。\n"
 "バーバリアンは、いくつかの特徴的な軍事施設を持っています。\n"
-"歩哨、障壁、天守閣、要塞、砦です。\n"
+"歩哨所、関所、ダンジョン、要塞、城砦です。\n"
 "大きな建物は、建築するにはより高価ですが、より多くの周りの土地を支配し、\n"
 "より多くの兵士が駐留することができます。\n"
 "また、建物ごとに視界の範囲は異なります。塔のある建物は、\n"
@@ -531,6 +536,8 @@ msgid ""
 "scroll here\n"
 "via right-button scrolling or open the minimap by clicking on the"
 msgstr ""
+"もしこの領土の南西部に戻ってきたくなったら、右クリックでのスクロールか、\n"
+"以下のボタンをクリックしてミニマップを開いてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:388
 msgid "Introducing messages"
@@ -607,11 +614,11 @@ msgstr ""
 "南西部国境にいくつか軍事施設を建築してください。\n"
 "資源を探索するために、この山の一部を獲得したいのです。\n"
 "山の中には家を建てることができないため、\n"
-"大きな建物で山に近い有益な多くの土地を支配しましょう。"
+"大きな建物を利用して山に近い有益な多くの土地を支配しましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
-msgstr ""
+msgstr "山で地質学者が何を見つけるか待って見てみましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid "Lumberjack is done"
@@ -631,7 +638,7 @@ msgstr "メッセージ"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
-msgstr ""
+msgstr "採掘の結果"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
@@ -685,6 +692,11 @@ msgid ""
 "well. This infrastructure also varies from tribe to tribe. You'll get them\n"
 "explained in the introduction campaigns for the three tribes."
 msgstr ""
+"鉱山には食料が必要なことに注意してください。\n"
+"糧食は酒場で生産され、酒場は糧食を生産するために肉、ピタパン、魚を必要とします。\n"
+"鉱山で効果的に生産させるには、さらに多くのインフラが必要です。\n"
+"インフラは部族によって異なります。\n"
+"三つの部族の導入キャンペーンでそれらの説明を得ることができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:271
 msgid ""
@@ -764,6 +776,14 @@ msgid ""
 "and a\n"
 "warehouse to the north east of here."
 msgstr ""
+"さて、最後の話題に移りましょう。\n"
+"兵士と、彼らの訓練と彼らの職業、戦争についての話をします。\n"
+"前述したように、Widelandsは築き上げることが目的で、破壊が目的ではありません。\n"
+"したがって、戦争は軍事戦略というよりも経済に焦点が当てられたものです。\n"
+"しかし、戦争は他のプレイヤーに挑戦する一つの方法を提供しており、\n"
+"それは説明に値するいくつかのゲームの仕組みを持っています。\n"
+"部族の経済は、個々のチュートリアルキャンペーンで説明されています。\n"
+"では、ここから北東に訓練所と倉庫があるちょっとしたトレーニング場所を作ります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:327
 msgid ""
@@ -818,10 +838,14 @@ msgid ""
 "help\n"
 "symbol for where a mine can be built is"
 msgstr ""
+"地質学者はこの山で大量の石炭を発見しました。\n"
+"したがってここには炭鉱を建設すべきです。\n"
+"鉱山の建設は建物を建てるのと同じです。\n"
+"鉱山が建設可能なビルドヘルプのシンボルは"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
-msgstr ""
+msgstr "兵士と戦争"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:199
 msgid "Some stones were found"
@@ -882,6 +906,8 @@ msgid ""
 "various\n"
 "resources:"
 msgstr ""
+"地質学者はすぐに旗に到着し、周囲の探索を始めます。\n"
+"彼はさまざまな資源があることを示す以下のマークを設置します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:395
 msgid ""
@@ -919,6 +945,10 @@ msgid ""
 "flags\n"
 "and player indicators on and off inside the minimap."
 msgstr ""
+"ミニマップは、ミニチュアの全体マップを表示します。\n"
+"直接それを左クリックして、任意のフィールドにジャンプすることができます。\n"
+"また、ミニマップの内側に建物、道路、旗およびプレーヤーのインジケータを\n"
+"表示することができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:169
 msgid ""
@@ -1055,7 +1085,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:529
 msgid "Waiting for the geologist"
-msgstr ""
+msgstr "地質学者を待つ"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:177
 msgid "Waiting for the hut to be finished"
@@ -1100,7 +1130,7 @@ msgid ""
 "send a message that he can't find any in his working area the next time he\n"
 "tries to do some work."
 msgstr ""
-"よくできました!メッセージが実際のゲームでどのように機能するかを見てみましょう。\n"
+"良くできました!メッセージが実際のゲームでどのように機能するかを見てみましょう。\n"
 "これのために、採石場の可哀そうな石工からすべての石を奪います。\n"
 "すると彼は作業領域内に同じ仕事をするための次の機会が見つからない\n"
 "というメッセージを送信します。"
@@ -1111,7 +1141,7 @@ msgid ""
 "go faster, simply use the PAGE UP key on your keyboard to increase the game\n"
 "speed. You can use PAGE DOWN to make the game slower again."
 msgstr ""
-"よくできました!小屋が完成するまでの待ちましょう。\n"
+"良くできました!小屋が完成するまで待ちましょう。\n"
 "早く進めたい場合、ゲーム速度を上げるために\n"
 "キーボードのPageUpキーを押してください。\n"
 "再びゲームを遅くするためにはPageDownキーを押します。"
@@ -1130,9 +1160,9 @@ msgstr ""
 "待っている間、別の便利な機能を紹介します。\n"
 "すべての建設現場は同じように見え、いくつかの建物も同じように見えます。\n"
 "そしてそれらを区別するのが難しい場合があります。\n"
-"Widelandsは、建物の上にラベルテキストを表示する機能を提供しています。\n"
+"Widelandsは、建物の上にテキストラベルを表示する機能を提供しています。\n"
 "それはセンサスと呼ばれ、cキーを押す、\n"
-"または任意のフィールドの時計タブのボタンを押すことで切り替えることができます。"
+"または任意のフィールドの監視タブのボタンを押すことで切り替えることができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
 msgid ""
@@ -1152,6 +1182,10 @@ msgid ""
 "help\n"
 "eases recognition:"
 msgstr ""
+"Widelandsのフィールドには建設可能なものが4種類あります。\n"
+"旗、小さな建物、中規模の建物、そして大規模な建物です。\n"
+"ただしすべてがどこにでも建てられるわけではありません。\n"
+"ビルドヘルプを利用することで何が建てられるか分かりやすくなります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:502
 msgid ""
@@ -1202,35 +1236,35 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:535
 msgid "a bit of coal"
-msgstr ""
+msgstr "少量の石炭"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:539
 msgid "a bit of gold"
-msgstr ""
+msgstr "少量の金"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:542
 msgid "a bit of granite"
-msgstr ""
+msgstr "少量の花崗岩"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:537
 msgid "a bit of iron"
-msgstr ""
+msgstr "少量の鉄鉱石"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:536
 msgid "a lot of coal"
-msgstr ""
+msgstr "大量の石炭"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:540
 msgid "a lot of gold"
-msgstr ""
+msgstr "大量の金"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:544
 msgid "a lot of granite"
-msgstr ""
+msgstr "大量の花崗岩"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:538
 msgid "a lot of iron"
-msgstr ""
+msgstr "大量の鉄鉱石"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:405
 msgid "archive message button to move them into your archive."
@@ -1249,11 +1283,11 @@ msgid ""
 "minimap button at the bottom of the screen. Alternatively you could also "
 "press\n"
 "'m' on your keyboard"
-msgstr ""
+msgstr "画面下部のミニマップボタンです。代わりにmキーを押すことでも表示できます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:547
 msgid "nothing was found here"
-msgstr ""
+msgstr "何も見つからなかった"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:710
 msgid ""
@@ -1271,8 +1305,8 @@ msgstr "道路敷設シンボル"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:561
 msgid "this one."
-msgstr ""
+msgstr "これです。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:545
 msgid "water"
-msgstr ""
+msgstr "水"
