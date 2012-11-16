@@ -399,7 +399,7 @@ private:
 class SpaceNode : public RenderNode {
 public:
 	SpaceNode(NodeStyle & ns, uint32_t w, uint32_t h = 0, bool expanding = false) :
-		RenderNode(ns), m_w(w), m_h(h), m_expanding(expanding) {}
+		RenderNode(ns), m_w(w), m_h(h), m_bg(NULL), m_expanding(expanding) {}
 
 	virtual uint32_t height() {return m_h;}
 	virtual uint32_t width() {return m_w;}
@@ -427,6 +427,7 @@ public:
 	virtual void set_w(uint32_t w) {m_w = w;}
 
 	void set_background(IPicture* s) {
+		// TODO(sirver): who owns this?
 		m_bg = s; m_h = s->get_h();
 	}
 
@@ -666,8 +667,9 @@ public:
 			m_ns.spacing = a["spacing"].get_int();
 	}
 	void emit(vector<RenderNode*> & nodes) {
-		if (m_indent)
+		if (m_indent) {
 			nodes.push_back(new SpaceNode(m_ns, m_indent));
+		}
 		TagHandler::emit(nodes);
 
 		nodes.push_back(new NewlineNode(m_ns));
@@ -717,7 +719,7 @@ private:
 class HspaceTagHandler : public TagHandler {
 public:
 	HspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
-		TagHandler(tag, fc, ns, gr), m_space(0) {}
+		TagHandler(tag, fc, ns, gr), m_bg(NULL), m_space(0) {}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();

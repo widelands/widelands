@@ -94,7 +94,6 @@ int parse_arguments
 	return 0;
 }
 
-
 int main(int argc, char *argv[])
 {
 	int32_t w;
@@ -116,27 +115,24 @@ int main(int argc, char *argv[])
 	RT::IFontLoader * floader = RT::ttf_fontloader_from_file();
 	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
 
-	// TODO(sirver): remove the loop again
-	for (int n = 0; n < 100; ++n) {
-		IPicture* image = 0;
-		try {
-			cout << "ALIVE 7" << endl;
-			image = renderer->render(txt, w, 0, allowed_tags);
-			cout << "ALIVE 8" << endl;
+IPicture* image = 0;
+	try {
+		cout << "ALIVE 7" << endl;
+		image = renderer->render(txt, w, 0, allowed_tags);
+		cout << "ALIVE 8" << endl;
 
-			IPixelAccess & pa = image->pixelaccess();
-			pa.lock(IPixelAccess::Lock_Normal);
-			cout << "ALIVE 9" << endl;
-			save_png(outname, pa);
-			cout << "ALIVE 10" << endl;
-			pa.unlock(IPixelAccess::Unlock_Update);
-			cout << "ALIVE 11" << endl;
-		} catch(RT::Exception & e) {
-			cout << e.what() << endl;
-		}
-		if (image)
-			delete image;
+		IPixelAccess & pa = image->pixelaccess();
+		pa.lock(IPixelAccess::Lock_Normal);
+		cout << "ALIVE 9" << endl;
+		save_png(outname, pa);
+		cout << "ALIVE 10" << endl;
+		pa.unlock(IPixelAccess::Unlock_Update);
+		cout << "ALIVE 11" << endl;
+	} catch(RT::Exception & e) {
+		cout << e.what() << endl;
 	}
+	if (image)
+		delete image;
 
 	cout << "ALIVE 12" << endl;
 	delete renderer;

@@ -63,14 +63,10 @@ cdef class Renderer(object):
         for tag in allowed_tags:
             allowed_set.insert(cppstr(<char*>(tag)))
 
-        print "PYALIVE 1"
         cdef IPicture* rv = self._renderer.render(text, width, &rm, allowed_set)
-        print "PYALIVE 2"
         cdef IPixelAccess* p = &rv.pixelaccess()
-        print "PYALIVE 3"
 
         a = np.empty((p.get_h(), p.get_w(), 4), np.uint8)
-        print "PYALIVE 4"
         cdef uint32_t x, y, i, clr
         cdef uint8_t* pixels=p.get_pixels()
         p.lock # DIRTY HACK: Will call lock with correct params
@@ -81,7 +77,6 @@ cdef class Renderer(object):
         p.unlock # DIRTY HACK: Will call unlock with correct params
 
         del rv
-        # TODO(sirver): cleanup this file, remove prints
 
         cdef RefMap rrm = RefMap()
         rrm._refmap = rm

@@ -17,8 +17,6 @@
  *
  */
 
-#include <iostream> // TODO(sirver): remove me
-
 #include <string>
 #include <map>
 
@@ -54,20 +52,6 @@ public:
 	virtual SDL_PixelFormat const & format() const {return *surf_->format;}
 	virtual uint16_t get_pitch() const {return surf_->pitch;}
 	virtual uint8_t * get_pixels() const {
-   cout << "w: " << surf_->w << endl;
-   cout << "h: " << surf_->h << endl;
-   cout << "pitch: " << get_pitch() << endl;
-   cout << "BitsPerPixel: " << (int)format().BitsPerPixel << endl;
-   cout << "BytesPerPixel: " << (int)format().BytesPerPixel << endl;
-   cout << "Rmask: " << format().Rmask << endl;
-   cout << "Gmask: " << format().Gmask << endl;
-   cout << "Bmask: " << format().Bmask << endl;
-   cout << "Amask: " << format().Amask << endl;
-   // 5   Uint8  Rloss, Gloss, Bloss, Aloss;
-   // 6   Uint8  Rshift, Gshift, Bshift, Ashift;
-   // 7   Uint32 Rmask, Gmask, Bmask, Amask;
-   // 8   Uint32 colorkey;
-   // 9   Uint8  alpha;
 		return static_cast<uint8_t*>(surf_->pixels);
 	}
 
@@ -94,16 +78,13 @@ public:
 	{}
 	virtual ~ThinSDLSurface() {
 		if (surf_) {
-			cout << "~ThinSDLSurface: before SDL_FreeSurface" << endl;
 			// TODO(sirver): Leaking left and right
 			// SDL_FreeSurface(surf_);
 			if (free_pixels_) {
-				cout << "~ThinSDLSurface: before freeing" << endl;
 				free(surf_->pixels);
 			}
 		}
 		surf_ = 0;
-		cout << "~ThinSDLSurface: all done" << endl;
 	}
 
 	virtual bool valid() {return true;}
@@ -138,7 +119,6 @@ public:
 	void fill_rect(Rect rc, RGBAColor clr) {
 		const uint32_t color = clr.map(*surf_->format);
 		SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
-		cout << "color : " << color << endl;
 		SDL_FillRect(surf_, &r, color);
 	}
 

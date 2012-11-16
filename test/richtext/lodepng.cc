@@ -358,7 +358,7 @@ static void lodepng_set32bitInt(unsigned char* buffer, unsigned value)
 #ifdef LODEPNG_COMPILE_ENCODER
 static void lodepng_add32bitInt(ucvector* buffer, unsigned value)
 {
-  ucvector_resize(buffer, buffer->size + 4); /*todo: give error if resize failed*/
+  ucvector_resize(buffer, buffer->size + 4);
   lodepng_set32bitInt(&buffer->data[buffer->size - 4], value);
 }
 #endif /*LODEPNG_COMPILE_ENCODER*/
@@ -5061,7 +5061,7 @@ static unsigned filter(unsigned char* out, const unsigned char* in, unsigned w, 
     for(type = 0; type < 5; type++)
     {
       ucvector_init(&attempt[type]);
-      ucvector_resize(&attempt[type], linebytes); /*todo: give error if resize failed*/
+      ucvector_resize(&attempt[type], linebytes);
     }
     for(y = 0; y < h; y++) /*try the 5 filter types*/
     {
