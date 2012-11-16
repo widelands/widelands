@@ -130,8 +130,8 @@ int32_t Editor_Set_Resources_Tool::handle_undo_impl
 			map.recalc_for_field_area
 			(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
 		}
-		ir++;
-		it++;
+		++ir;
+		++it;
 	} while (mr.advance(map));
 	args.orgRes.clear();
 	args.orgResT.clear();

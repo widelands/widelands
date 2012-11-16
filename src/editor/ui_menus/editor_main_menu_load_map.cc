@@ -140,13 +140,9 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 
 
 void Main_Menu_Load_Map::clicked_ok() {
-	std::string filename(m_ls->get_selected());
+	const char * const filename(m_ls->get_selected());
 
-	if
-		(g_fs->IsDirectory(filename.c_str())
-		 &&
-		 !WL_Map_Loader::is_widelands_map(filename))
-	{
+	if (g_fs->IsDirectory(filename) && !Widelands::WL_Map_Loader::is_widelands_map(filename)) {
 		m_curdir = filename;
 		m_ls->clear();
 		m_mapfiles.clear();
@@ -238,7 +234,6 @@ void Main_Menu_Load_Map::fill_list() {
 		const char * const name = pname->c_str();
 		if
 			(strcmp(FileSystem::FS_Filename(name), ".")    and
-			 // Upsy, appeared again. ignore
 			 strcmp(FileSystem::FS_Filename(name), "..")   and
 			 g_fs->IsDirectory(name)                       and
 			 not WL_Map_Loader::is_widelands_map(name))

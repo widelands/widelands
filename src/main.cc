@@ -37,6 +37,7 @@
 #include <fcntl.h>
 #endif
 
+using std::cout;
 using std::cerr;
 using std::endl;
 using std::flush;
@@ -51,12 +52,18 @@ int main(int argc, char * argv[])
 	// if Widelands is called as dedicated server, Widelands should be forked and started as daemon
 	bool dedicated = false;
 	bool daemon    = false;
+
 	for (int i = 1; i < argc && !(daemon && dedicated); ++i) {
 		std::string opt = argv[i];
 
 		// At least a size of 8 is needed for --daemon, --dedicated is even longer
 		if (opt.size() < 8)
 			continue;
+
+		if (opt == "--version") {
+			cout << "Widelands " << build_id() << '(' << build_type() << ')' << "\n";
+			return 0;
+		}
 
 		std::string::size_type const pos = opt.find('=');
 		if (pos == std::string::npos) { //  if no equals sign found

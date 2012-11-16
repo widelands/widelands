@@ -266,12 +266,9 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
  */
 void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
-	if
-		(g_fs->IsDirectory(name)
-		 &&
-		 !Widelands::WL_Map_Loader::is_widelands_map(name))
-	{
-		m_curdir = g_fs->FS_CanonicalizeName(name);
+
+	if (g_fs->IsDirectory(name) && !Widelands::WL_Map_Loader::is_widelands_map(name)) {
+		m_curdir = name;
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
@@ -288,9 +285,13 @@ void Main_Menu_Save_Map::fill_list() {
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {
-		m_parentdir = g_fs->FS_CanonicalizeName(m_curdir + "/..");
+#ifndef WIN32
+		m_parentdir = m_curdir.substr(0, m_curdir.rfind('/'));
+#else
+		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
+#endif
 		m_ls->add
-			("<parent>",
+			(_("<parent>"),
 			 m_parentdir.c_str(),
 			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
 	}
@@ -323,7 +324,7 @@ void Main_Menu_Save_Map::fill_list() {
 	{
 		char const * const name = pname->c_str();
 
-		// we do not list S2 files since we only write wlmf
+		// we do not list S2 files since we only write wmf
 		if (upcast(Widelands::WL_Map_Loader, ml, map.get_correct_loader(name))) {
 			try {
 				ml->preload_map(true);

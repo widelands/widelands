@@ -117,6 +117,8 @@ inline bool match_force_skip(char * & candidate, char const * pattern) {
 			return true;
 		} else if (*p != *pattern)
 			return false;
+
+	return false;
 }
 
 /**

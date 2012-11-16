@@ -107,6 +107,7 @@ protected:
 	int32_t const spacing;
 	int32_t const space_at_bottom;
 	int32_t const space_at_right;
+	int32_t const space_left_of_label;
 
 	static const uint32_t time_in_ms[];
 	static const uint32_t nr_samples = 30;   // How many samples per diagramm when relative plotting

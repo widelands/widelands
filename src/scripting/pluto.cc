@@ -903,6 +903,7 @@ static void persist(PersistInfo * pi)
 			break;
 		default:
 			lua_assert(false);
+			break;
 	}
 }
 
@@ -1330,7 +1331,7 @@ int inreftable(lua_State * L, int ref)
 static void unpersist(UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
-	int stacksize = lua_gettop(upi->L); stacksize = stacksize; /* DEBUG */
+	int stacksize = lua_gettop(upi->L);
 	lua_checkstack(upi->L, 2);
 	if (upi->fr->Unsigned8()) {
 		int ref = upi->fr->Signed32();
@@ -1373,6 +1374,7 @@ static void unpersist(UnpersistInfo * upi)
 				break;
 			default:
 				lua_assert(false);
+				break;
 		}
 					/* perms reftbl ... obj */
 		lua_assert

@@ -124,11 +124,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error & e) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error & e) {
 		//TODO: handle me
 	}
 
@@ -139,11 +139,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error & e) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error & e) {
 		//TODO: handle me
 	}
 
@@ -157,11 +157,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("."));
 #endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error & e) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error & e) {
 		//TODO: handle me
 	}
 
@@ -187,11 +187,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
 #endif
 			}
-			catch (FileNotFound_error e) {}
-			catch (FileAccessDenied_error e) {
+			catch (FileNotFound_error & e) {}
+			catch (FileAccessDenied_error & e) {
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
-			catch (FileType_error e) {
+			catch (FileType_error & e) {
 				//TODO: handle me
 			}
 		}
@@ -912,7 +912,8 @@ std::string WLApplication::get_executable_path()
 	}
 	executabledir = std::string(buffer);
 	executabledir.resize(executabledir.rfind('/') + 1);
-#elif __linux__
+#endif
+#ifdef __linux__
 	char buffer[PATH_MAX];
 	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
 	if (size <= 0) {
@@ -920,7 +921,8 @@ std::string WLApplication::get_executable_path()
 	}
 	executabledir = std::string(buffer, size);
 	executabledir.resize(executabledir.rfind('/') + 1);
-#elif WIN32
+#endif
+#ifdef WIN32
 	char filename[_MAX_PATH + 1] = {0};
 	GetModuleFileName(0, filename, _MAX_PATH);
 	executabledir = filename;
@@ -982,9 +984,11 @@ bool WLApplication::init_hardware() {
 	//add default video mode
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	videomode.push_back("x11");
-#elif WIN32
+#endif
+#ifdef WIN32
 	videomode.push_back("windib");
-#elif __APPLE__
+#endif
+#ifdef __APPLE__
 	videomode.push_back("Quartz");
 #endif
 	//if a video mode is given on the command line, add that one first
@@ -1250,7 +1254,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 		try {
 			journal->start_recording(m_commandline["record"]);
-		} catch (Journalfile_error e) {
+		} catch (Journalfile_error & e) {
 			wout << "Journal file error: " << e.what() << endl;
 		}
 
@@ -1264,7 +1268,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		try {
 			journal->start_playback(m_commandline["playback"]);
 		}
-		catch (Journalfile_error e) {
+		catch (Journalfile_error & e) {
 			wout << "Journal file error: " << e.what() << endl;
 		}
 
@@ -1615,6 +1619,7 @@ void WLApplication::mainmenu_singleplayer()
 			break;
 		default:
 			assert(false);
+			break;
 		}
 	}
 
@@ -1625,7 +1630,7 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-#if WIN32
+#ifdef WIN32
 	//  The Winsock2 library needs to get called through WSAStartup, to initiate
 	//  the use of the Winsock DLL by Widelands.
 	WSADATA wsaData;
@@ -1647,6 +1652,7 @@ void WLApplication::mainmenu_multiplayer()
 				break;
 			default:
 				assert(false);
+				break;
 		}
 
 		if (internet) {
@@ -1743,6 +1749,7 @@ void WLApplication::mainmenu_editor()
 		}
 		default:
 			assert(false);
+			break;
 		}
 	}
 }

@@ -32,7 +32,7 @@ struct Map_Map_Object_Loader;
 
 
 struct Cmd_Call_Economy_Balance : public GameLogicCommand {
-	Cmd_Call_Economy_Balance () : GameLogicCommand (0) {} ///< for load and save
+	Cmd_Call_Economy_Balance () : GameLogicCommand(0), m_timerid(0) {} ///< for load and save
 
 	Cmd_Call_Economy_Balance (int32_t starttime, Economy *, uint32_t timerid);
 

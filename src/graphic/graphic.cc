@@ -834,12 +834,13 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
  */
 PictureID Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
 {
+#ifdef USE_OPENGL
 	if (g_opengl)
 	{
-#ifdef USE_OPENGL
 		return PictureID(new GLPictureTexture(surf));
+	} else
 #endif
-	} else {
+	{
 		SDL_Surface * surface;
 		if (alpha)
 			surface = SDL_DisplayFormatAlpha(surf);
@@ -1072,32 +1073,25 @@ void Graphic::reset_texture_animation_reminder()
 void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 	assert(m_animations.empty());
 
-	clock_t start = clock();
-
-	const std::string step_description = _("Loading animations: %d%% complete");
-	uint32_t last_shown = 100;
 	const uint32_t nr_animations = g_anim.get_nranimations();
-	for (uint32_t id = 0; id < nr_animations;) {
-		const uint32_t percent = 100 * id / nr_animations;
-		if (percent != last_shown) {
-			last_shown = percent;
-			loader_ui.stepf(step_description.c_str(), percent);
-		}
-		++id;
-		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));
-	}
-	loader_ui.step(std::string());
+	m_animations.reserve(nr_animations);
+}
 
-	clock_t end = clock();
-	printf
-		("load_animations took %f seconds\n",
-		 (float(end - start) / CLOCKS_PER_SEC));
+void Graphic::ensure_animation_loaded(uint32_t const anim) {
+	if (anim >= m_animations.size()) {
+		m_animations.resize(anim + 1);
+	}
+	if (!m_animations.at(anim - 1))
+	{
+	  //log("Loading animation %i\n", anim);
+	  m_animations.at(anim - 1) = new AnimationGfx(g_anim.get_animation(anim));
+	}
 }
 
 /**
  * Return the number of frames in this animation
  */
-AnimationGfx::Index Graphic::nr_frames(const uint32_t anim) const
+AnimationGfx::Index Graphic::nr_frames(const uint32_t anim)
 {
 	return get_animation(anim)->nr_frames();
 }
@@ -1106,7 +1100,7 @@ AnimationGfx::Index Graphic::nr_frames(const uint32_t anim) const
  * writes the size of an animation frame to w and h
 */
 void Graphic::get_animation_size
-	(uint32_t const anim, uint32_t const time, uint32_t & w, uint32_t & h) const
+	(uint32_t const anim, uint32_t const time, uint32_t & w, uint32_t & h)
 {
 	AnimationData const * const data = g_anim.get_animation(anim);
 	AnimationGfx  const * const gfx  =        get_animation(anim);
@@ -1162,11 +1156,12 @@ void Graphic::m_png_flush_function
  * @param anim the number of the animation
  * @return the AnimationGfs object of the given number
  */
-AnimationGfx * Graphic::get_animation(uint32_t const anim) const
+AnimationGfx * Graphic::get_animation(uint32_t const anim)
 {
-	if (!anim || anim > m_animations.size())
+	if (!anim)
 		return 0;
 
+	ensure_animation_loaded(anim);
 	return m_animations[anim - 1];
 }
 

@@ -323,6 +323,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 	}
 	default:
 		assert(false);
+		break;
 	}
 
 	validate_pointer(&m_last_building_index, vec.size());
@@ -457,6 +458,7 @@ void Building_Statistics_Menu::update() {
 				break;
 			default:
 				assert(false);
+				break;
 			}
 			te->set_picture(Columns::Size, g_gr->get_picture(PicMod_UI, pic));
 		}

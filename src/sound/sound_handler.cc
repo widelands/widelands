@@ -56,13 +56,16 @@ Sound_Handler g_sound_handler;
  * \sa Sound_Handler::init()
 */
 Sound_Handler::Sound_Handler():
-m_nosound             (false),
-m_lock_audio_disabling(false),
-m_disable_music       (false),
-m_disable_fx          (false),
-m_random_order        (true),
-m_current_songset     (""),
-m_fx_lock             (0)
+	m_egbase              (0),
+	m_nosound             (false),
+	m_lock_audio_disabling(false),
+	m_disable_music       (false),
+	m_disable_fx          (false),
+	m_music_volume        (MIX_MAX_VOLUME),
+	m_fx_volume           (MIX_MAX_VOLUME),
+	m_random_order        (true),
+	m_current_songset     (""),
+	m_fx_lock             (0)
 {}
 
 /// Housekeeping: unset hooks. Audio data will be freed automagically by the

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2011-03-25 07:23+0000\n"
-"Last-Translator: Sonnrain <Unknown>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-05-01 11:28+0000\n"
+"Last-Translator: LiliaLivida <portugalskykral@gmail.com>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:33+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:32+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -23,7 +23,7 @@ msgstr "I - De oculis in caligone"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - A Nemesi ad Genesim"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
@@ -35,7 +35,7 @@ msgstr "II - Locus quam domicilium"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
-msgstr ""
+msgstr "Specula pro exsilium"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
@@ -85,6 +85,10 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"Praecipuum certamen Atlantidensium saepe  etiam \"Saltus insulanorum\" "
+"nominatur. In certamine  duae vel plurae manus celerrime in medio positam "
+"insulam pervenire temptant, ut ante alias manus arcem in culmine medii "
+"montis aedificent."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -130,7 +134,7 @@ msgstr "Barbari - Secundum imperium"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Difficilis. Atlantidenses introducuntur."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -159,6 +163,11 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Unaquaque tribus a quattuor montibus altis circumdatur. Quis ante alios "
+"fontes montium pro tribu sua capiet obsidebitque? Consilium I: Aquam "
+"quaerendum est apud flumen. Consilium II: Staturae de nive factae alias "
+"fontes aquae significent. Consilium III: Unusquisque mons fontem unam tantum "
+"continet."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -200,6 +209,9 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
+"Quattuor saecula haec insula erat templum deorum.  Pes hominis numquam in "
+"illam insulam venit. Sed nunc, cum una tribus satis temeraria erat, ut "
+"coloniam in litorem illius insulae deduceret, multae aliae sequuntur."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -215,6 +227,9 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Quattuor tribus temptant quaque ante finitimum suum  montem multo cum auro "
+"obsidere, qui mons divitias ingentes offert. Poteruntne prudenter aliae duae "
+"tribus fontes communiter uti?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -249,7 +264,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Saltus insulanorum"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -269,6 +284,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Antiqui militares monachi viventes in multo antiquioribus paludibus claves "
+"imperii super hanc insulam esse traduntur."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -277,6 +294,10 @@ msgid ""
 "offers enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbours?"
 msgstr ""
+"Perpulchra valles videtur ab inicio dierum a bovis feris incolari.  Cum "
+"tribus tua huc venisset, certus eras hunc locum spatium satis magnum pro "
+"vitam in pace offerre.  Potestne tribus tua cum finitimis suis in pace "
+"vivere?"
 
 #: ../../maps/Swamp Island.wmf/elemental:11
 msgid ""
@@ -369,10 +390,6 @@ msgid ""
 "March his unprepared army was attacked by 100 barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
-
-#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
-msgid "Smugglers"
 msgstr ""
 
 #: ../../maps/The Far North.wmf/elemental:11
@@ -619,6 +636,6 @@ msgstr ""
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "appeared and now a rivalry under smugglers has been started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
-"vs Red + Green."
+"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs "
+"Yellow + Green."
 msgstr ""

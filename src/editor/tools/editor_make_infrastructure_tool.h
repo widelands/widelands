@@ -29,7 +29,7 @@
  * \TODO Implement undo for this tool
 */
 struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
-	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false) {}
+	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false), m_player(0) {}
 
 	void set_player(Widelands::Player_Number const n) throw ()
 		{m_player = n;}

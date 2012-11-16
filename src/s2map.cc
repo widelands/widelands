@@ -231,6 +231,7 @@ void S2_Map_Loader::load_s2mf_header()
 	case 2: m_map.set_world_name("winterland"); break;
 	default:
 		assert(false);
+		break;
 	}
 }
 
@@ -329,6 +330,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 					cerr
 						<< "ERROR: Unknown texture1: " << hex << c << dec << " ("
 						<< x << "," << y << ") (defaults to water!)" << endl;
+					break;
 				}
 				f->set_terrain_d(c);
 			}
@@ -380,6 +382,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 					cerr
 						<< "ERROR: Unknown texture1: " << hex << c << dec << " ("
 						<< x << "," << y << ") (defaults to water!)" << endl;
+					break;
 				}
 				f->set_terrain_r(c);
 			}
@@ -552,7 +555,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				case 0x48: res = "iron";   amount = c & 7; break;
 				case 0x50: res = "gold";   amount = c & 7; break;
 				case 0x59: res = "granit"; amount = c & 7; break;
-				default:   res = "";       amount = 0;
+				default:   res = "";       amount = 0; break;
 				};
 
 				int32_t nres = 0;

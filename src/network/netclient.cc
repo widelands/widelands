@@ -383,6 +383,15 @@ bool NetClient::canLaunch()
 		return false;
 	if (d->game)
 		return false;
+
+	// if there is one client that is currently receiving a file, we can not launch.
+	for (uint8_t i = 0; i < d->settings.users.size(); ++i) {
+		if (d->settings.users[i].position = d->settings.users[i].notConnected())
+			continue;
+		if (!d->settings.users[i].ready)
+			return false;
+	}
+
 	// all players must be connected to a controller (human/ai) or be closed.
 	for (size_t i = 0; i < d->settings.players.size(); ++i) {
 		if (d->settings.players.at(i).state == PlayerSettings::stateOpen)
@@ -602,6 +611,7 @@ void NetClient::recvOneUser
 
 	d->settings.users.at(number).name     = packet.String  ();
 	d->settings.users.at(number).position = packet.Signed32();
+	d->settings.users.at(number).ready    = packet.Unsigned8() == 1;
 	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
 		d->settings.playernum = d->settings.users.at(number).position;

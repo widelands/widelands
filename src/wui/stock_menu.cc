@@ -40,8 +40,6 @@ Stock_Menu::Stock_Menu
 UI::UniqueWindow(&plr, "stock_menu", &registry, 640, 480, _("Stock")),
 m_player(plr)
 {
-	set_cache(false);
-
 	UI::Tab_Panel * tabs =
 		 new UI::Tab_Panel
 			 (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));

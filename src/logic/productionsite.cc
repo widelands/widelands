@@ -872,6 +872,7 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		break;
 	case Skipped:
 		m_skipped_programs[program_name] = game.get_gametime();
+		break;
 	case None:
 		break;
 	}

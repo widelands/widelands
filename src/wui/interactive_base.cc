@@ -805,7 +805,7 @@ void Interactive_Base::roadb_add_overlay()
 				  or
 				  (dynamic_cast<const Widelands::Road *>(imm)
 				   and
-				   caps & Widelands::BUILDCAPS_FLAG)))
+				   (caps & Widelands::BUILDCAPS_FLAG))))
 				continue;
 		}
 
@@ -830,6 +830,7 @@ void Interactive_Base::roadb_add_overlay()
 		case 3: name = "pics/roadb_red.png";    break;
 		default:
 			assert(false);
+			break;
 		}
 
 		egbase().map().overlay_manager().register_overlay
@@ -874,6 +875,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 	case SDLK_KP9:
 		if (code.mod & KMOD_NUM)
 			break;
+		/* no break */
 	case SDLK_PAGEUP:
 		if (!get_display_flag(dfSpeed))
 			break;
@@ -894,6 +896,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 	case SDLK_KP3:
 		if (code.mod & KMOD_NUM)
 			break;
+		/* no break */
 	case SDLK_PAGEDOWN:
 		if (!get_display_flag(dfSpeed))
 			break;

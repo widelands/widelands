@@ -41,6 +41,7 @@ m_nr_buildings (0),
 m_nr_bobs      (0),
 m_nr_wares     (0),
 m_nr_immovables(0),
+m_nr_battles   (0),
 m_nr_fleets    (0),
 m_nr_portdocks (0),
 m_lastserial   (0)
@@ -103,7 +104,7 @@ Serial Map_Map_Object_Saver::register_object(Map_Object const & obj) {
 
 	assert(!rec.registered);
 
-	if      (dynamic_cast<AreaWatcher  const *>(&obj));
+	if      (dynamic_cast<AreaWatcher  const *>(&obj)) {/* do nothing */}
 	else if (dynamic_cast<Flag         const *>(&obj)) ++m_nr_flags;
 	else if (dynamic_cast<Road         const *>(&obj)) ++m_nr_roads;
 	else if (dynamic_cast<Building     const *>(&obj)) ++m_nr_buildings;

@@ -87,6 +87,8 @@ struct Button : public NamedPanel {
 	void set_draw_flat_background(bool set);
 
 	boost::signal<void ()> sigclicked;
+	boost::signal<void ()> sigmousein;
+	boost::signal<void ()> sigmouseout;
 
 protected:
 	virtual void clicked() {} /// Override this to react on the click.

@@ -50,7 +50,8 @@ Road::Road() :
 	PlayerImmovable  (g_road_descr),
 	m_busyness            (0),
 	m_busyness_last_update(0),
-	m_type           (0)
+	m_type           (0),
+	m_idle_index(0)
 {
 	m_flags[0] = m_flags[1] = 0;
 	m_flagidx[0] = m_flagidx[1] = -1;

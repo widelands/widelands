@@ -58,6 +58,7 @@ struct UserSettings {
 	bool        winner;
 	uint32_t    points;
 	std::string win_condition_string;
+	bool        ready; // until now only used as a check for whether user is currently receiving a file or not
 };
 
 struct DedicatedMapInfos {
@@ -73,7 +74,13 @@ struct DedicatedMapInfos {
  * Think of it as the Model in MVC.
  */
 struct GameSettings {
-	GameSettings() : savegame(false) {}
+	GameSettings() :
+		playernum(0),
+		usernum(0),
+		scenario(false),
+		multiplayer(false),
+		savegame(false)
+	{}
 
 	/// Number of player position
 	int16_t playernum;

@@ -55,6 +55,7 @@ Scrollbar::Scrollbar
 	m_steps         (100),
 	m_pressed       (None),
 	m_time_nextact  (0),
+	m_knob_grabdelta(0),
 	m_pic_minus
 		(g_gr->get_picture
 		 	(PicMod_UI,

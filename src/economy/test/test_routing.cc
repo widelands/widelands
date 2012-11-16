@@ -136,10 +136,10 @@ public:
 					chain_begin_found = false;
 					if (*i == *j) {
 						chain_begin_found = true;
-						j++;
+						++j;
 					}
 				} else {
-					j++;
+					++j;
 					if (j == n.end()) {
 						return true;
 					}

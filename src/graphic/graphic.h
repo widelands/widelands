@@ -163,18 +163,19 @@ struct Graphic : public virtual IGraphic {
 	void reset_texture_animation_reminder();
 
 	void load_animations(UI::ProgressWindow & loader_ui);
-	AnimationGfx::Index nr_frames(uint32_t const anim = 0) const;
+	void ensure_animation_loaded(uint32_t anim);
+	AnimationGfx::Index nr_frames(uint32_t const anim = 0);
 	uint32_t get_animation_frametime(uint32_t anim) const;
 	void get_animation_size
 		(const uint32_t anim,
 		 const uint32_t time,
 		 uint32_t & w,
 		 uint32_t & h)
-		const;
+		;
 
 	void screenshot(const char & fname) const;
 	Texture * get_maptexture_data(uint32_t id);
-	AnimationGfx * get_animation(uint32_t) const;
+	AnimationGfx * get_animation(uint32_t);
 
 	void set_world(std::string);
 	PictureID get_road_texture(int32_t roadtex);

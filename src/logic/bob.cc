@@ -826,6 +826,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 	case IDLE: start.field = 0; break;
 	default:
 		assert(false);
+		break;
 	}
 
 	if (start.field) {
@@ -1178,7 +1179,7 @@ void Bob::Loader::load_finish()
 	//  See bug #537392 for more information:
 	//   https://bugs.launchpad.net/widelands/+bug/537392
 	Bob & bob = get<Bob>();
-	if (!bob.m_stack.size() && !egbase().get_gametime())
+	if (bob.m_stack.empty() && !egbase().get_gametime())
 		if (upcast(Game, game, &egbase())) {
 			bob.init_auto_task(*game);
 		}

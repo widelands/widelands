@@ -776,7 +776,7 @@ int L_Player::set_flag_style(lua_State * L) {
 
 	try {
 		p.set_flag_style(p.tribe().flag_style_index(name));
-	} catch (Tribe_Descr::Nonexistent) {
+	} catch (Tribe_Descr::Nonexistent & e) {
 		return report_error(L, "Flag style <%s> does not exist!\n", name);
 	}
 	return 0;
@@ -798,7 +798,7 @@ int L_Player::set_frontier_style(lua_State * L) {
 
 	try {
 		p.set_frontier_style(p.tribe().frontier_style_index(name));
-	} catch (Tribe_Descr::Nonexistent) {
+	} catch (Tribe_Descr::Nonexistent & e) {
 		return report_error(L, "Frontier style <%s> does not exist!\n", name);
 	}
 	return 0;

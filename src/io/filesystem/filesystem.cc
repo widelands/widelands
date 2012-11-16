@@ -47,7 +47,6 @@
 #include <windows.h>
 #include <io.h>
 #include <direct.h>
-#define PATH_MAX MAX_PATH
 #else
 #include <glob.h>
 #include <sys/types.h>
@@ -62,6 +61,7 @@
 #ifdef _MSC_VER
 #define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
 #define S_ISREG(x) ((x&_S_IFREG)?1:0)
+#define PATH_MAX MAX_PATH
 #endif
 
 FileSystem::FileSystem()
@@ -118,7 +118,9 @@ std::string FileSystem::fixCrossFile(std::string const & path) const {
 	for (uint32_t i = 0; i < path_size; ++i) {
 		temp = path.at(i);
 #ifdef WIN32
-		if (temp == "/")
+		if (temp == ":")
+			fixedPath.at(i) = '-';
+		else if (temp == "/")
 #else
 		if (temp == "\\")
 #endif
@@ -320,26 +322,35 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
  * / or \  (or the whole string)
  */
 char const * FileSystem::FS_Filename(char const * p) {
-	for (char const * result = p;; ++p)
-		if      (*p == '\0')
-			return result;
-		else if (*p == '/' || *p == '\\')
+	char const * result = p;
+
+	while (*p != '\0') {
+		if (*p == '/' || *p == '\\')
 			result = p + 1;
+		++p;
+	}
+
+	return result;
 }
 
 char const * FileSystem::FS_Filename(char const * p, char const * & extension)
 {
 	extension = 0;
-	for (char const * result = p;; ++p)
-		if (*p == '\0') {
-			if (not extension)
-				extension = p;
-			return result;
-		} else if (*p == '/' || *p == '\\') {
+	char const * result = p;
+
+	while (*p != '\0') {
+		if (*p == '/' || *p == '\\') {
 			extension = 0;
 			result = p + 1;
 		} else if (*p == '.')
 			extension = p;
+		++p;
+	}
+
+
+	if (not extension)
+		extension = p;
+	return result;
 }
 
 std::string FileSystem::FS_FilenameWoExt(char const * const p)
@@ -399,6 +410,7 @@ throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 bool FileSystem::check_writeable_for_data(char const * const path)
 {
 	RealFSImpl fs(path);
+
 	if (fs.IsDirectory(".widelands"))
 		return true;
 	try {
@@ -408,7 +420,8 @@ bool FileSystem::check_writeable_for_data(char const * const path)
 		return true;
 	} catch (...) {
 		log("Directory %s is not writeable - next try\n", path);
-		return false;
 	}
+
+	return false;
 }
 #endif

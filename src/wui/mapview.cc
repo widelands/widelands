@@ -96,9 +96,12 @@ void Map_View::draw(RenderTarget & dst)
 	egbase.map().overlay_manager().load_graphics();
 
 	GameView * gameview;
+#ifdef USE_OPENGL
 	if (g_opengl) {
 		gameview = new GameViewOpenGL(dst);
-	} else {
+	} else
+#endif
+	{
 		gameview = new GameViewSDL(dst);
 	}
 	if (upcast(Interactive_Player const, interactive_player, &intbase())) {

@@ -20,6 +20,7 @@
 #include "internet_gaming.h"
 
 #include "i18n.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "internet_gaming_messages.h"
 #include "log.h"
 #include "warning.h"
@@ -35,6 +36,8 @@ InternetGaming::InternetGaming() :
 	m_sock                   (0),
 	m_sockset                (0),
 	m_state                  (OFFLINE),
+	m_reg                    (false),
+	m_port                   (INTERNET_GAMING_PORT),
 	m_clientrights           (INTERNET_CLIENT_UNREGISTERED),
 	m_maxclients             (1),
 	m_gameip                 (""),
@@ -43,6 +46,7 @@ InternetGaming::InternetGaming() :
 	clientupdate             (false),
 	gameupdate               (false),
 	time_offset              (0),
+	waittimeout              (std::numeric_limits<int32_t>::max()),
 	lastping                 (time(0))
 {
 	// Fill the list of possible messages from the server
@@ -702,7 +706,7 @@ void InternetGaming::send(std::string const & msg) {
 		// with a "/" - let's see...
 
 		// Split up in "cmd" "arg"
-		std::string cmd, arg;;
+		std::string cmd, arg;
 		std::string temp = msg.substr(1); // cut off '/'
 		std::string::size_type const space = temp.find(' ');
 		if (space > temp.size())
@@ -714,9 +718,25 @@ void InternetGaming::send(std::string const & msg) {
 		arg = temp.substr(space + 1);
 
 		if (cmd == "motd") {
-			// send the request to change the motd
 			SendPacket m;
 			m.String(IGPCMD_MOTD);
+			// Check whether motd is attached or should be loaded from a file
+			if (arg.size() > 1 && arg.at(0) == '%') {
+				// Seems we should load the motd from a file
+				temp = arg.substr(1); // cut of the "%"
+				if (g_fs->FileExists(temp) && !g_fs->IsDirectory(temp)) {
+					// Read in the file
+					Widelands::FileRead fr;
+					fr.Open(*g_fs, temp.c_str());
+					if (!fr.EndOfFile()) {
+						arg = fr.ReadLine();
+						while (!fr.EndOfFile()) {
+							arg += fr.ReadLine();
+						}
+					}
+				}
+			}
+			// send the request to change the motd
 			m.String(arg);
 			m.send(m_sock);
 			return;

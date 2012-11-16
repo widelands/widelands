@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-05-25 18:55+0000\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -17,6 +17,11 @@ msgstr ""
 #: ../../scripting/win_condition_texts.lua:31
 msgid ""
 "%i trees."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:54
+msgid ""
+"%s %s %i%% of the land (%i of %i)."
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:30
@@ -54,6 +59,11 @@ msgstr ""
 #: ../../scripting/win_condition_texts.lua:2
 msgid ""
 "Congratulations!"
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:15
+msgid ""
+"Each player or team tries to obtain more than half of the maps' area. The winner will be the player or the team that is able to keep that area for at least 20 minutes or the one with the most territory after 4 hours, whichever comes first."
 msgstr ""
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
@@ -105,6 +115,11 @@ msgstr ""
 #: ../../scripting/win_conditions/03_territorial_lord.lua:13
 msgid ""
 "Territorial Lord"
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:13
+msgid ""
+"Territorial Time"
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:27
@@ -200,6 +215,11 @@ msgstr ""
 #: ../../scripting/win_condition_texts.lua:18
 msgid ""
 "You've lost this game!"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:53
+msgid ""
+"game will end in %i minutes."
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:33

@@ -621,6 +621,7 @@ template<typename T> static void draw_field_int
 				break;
 			default:
 				assert(false);
+				break;
 			}
 		} else if (&f_r_texture != &tr_d_texture) {
 			dither_edge_horiz<T>(dst, f_vert, r_vert, f_r_texture, tr_d_texture);
@@ -639,6 +640,7 @@ template<typename T> static void draw_field_int
 				break;
 			default:
 				assert(false);
+				break;
 			}
 		} else if (&f_r_texture != &f_d_texture) {
 			dither_edge_vert<T>(dst, f_vert, br_vert, f_r_texture, f_d_texture);
@@ -657,6 +659,7 @@ template<typename T> static void draw_field_int
 				break;
 			default:
 				assert(false);
+				break;
 			}
 		} else if (&l_r_texture != &f_d_texture) {
 			dither_edge_vert<T>(dst, f_vert, bl_vert, f_d_texture, l_r_texture);

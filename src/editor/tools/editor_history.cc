@@ -27,6 +27,9 @@
 
 Editor_Action_Args::Editor_Action_Args(Editor_Interactive & base):
 	sel_radius(base.get_sel_radius()),
+	change_by(0),
+	cur_res(0),
+	set_to(0),
 	m_interval(0, 0),
 	refcount(0)
 {}

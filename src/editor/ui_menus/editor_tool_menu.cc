@@ -136,6 +136,7 @@ void Editor_Tool_Menu::changed_to() {
 		break;
 	default:
 		assert(false);
+		break;
 	}
 
 	parent.select_tool(*current_tool_pointer, Editor_Tool::First);
@@ -191,6 +192,7 @@ void Editor_Tool_Menu::changed_to() {
 					(parent,
 					parent.tools.increase_resources,
 					*current_registry_pointer);
+				break;
 			}
 	}
 }

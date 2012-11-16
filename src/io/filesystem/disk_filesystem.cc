@@ -415,14 +415,14 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		file = 0;
 
 		length = size;
-
-		return data;
 	} catch (...) {
 		if (file)
 			fclose(file);
 		free(data);
 		throw;
 	}
+
+	return data;
 }
 
 #ifndef _MSC_VER

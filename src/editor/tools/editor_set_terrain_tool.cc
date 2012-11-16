@@ -61,7 +61,7 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl
 		do {
 			max = std::max
 			      (max, map.change_terrain(mr.location(), *i));
-			i++;
+			++i;
 		} while (mr.advance(map));
 	}
 	return radius + max;
@@ -89,7 +89,7 @@ int32_t Editor_Set_Terrain_Tool::handle_undo_impl
 		do {
 			max = std::max
 			      (max, map.change_terrain(mr.location(), *i));
-			i++;
+			++i;
 		} while (mr.advance(map));
 		return radius + max;
 	} else return radius;

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2010-08-30 23:36+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-07-21 13:10+0000\n"
+"Last-Translator: Ercin Senturk <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:40+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:33
 msgid ""
@@ -106,6 +106,11 @@ msgid ""
 "has detected us so far, so we should keep quiet and build up our\n"
 "infrastructure. Soon we will be strong enough to raid their positions."
 msgstr ""
+"Sonunda! Zafer için ilk adımımız atıldı! Dün gece yasak adaya \n"
+"ayak bastık ve adanın kuzeybatısında  devriye atan bir kaç korumayı\n"
+"hakladık. Oldukça eminim ki diğer savaş lordları bizi farketmedi,\n"
+"o halde sessizliğimizi korumalı ve yapılanmamızı hazırlamalıyız.\n"
+"Yakında onları yağmalayacak kadar güçlü olacağız."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:141
 msgid ""
@@ -118,7 +123,7 @@ msgstr ""
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:69
 msgid "First Briefing"
-msgstr ""
+msgstr "İlk Açıklama"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:121
 msgid ""
@@ -126,6 +131,8 @@ msgid ""
 "strong\n"
 "warlord less on this island!"
 msgstr ""
+"Harika! Erwyn Son binasının yerlebir olduğunu görünce pes etti. Bu adadan "
+"bir savaş lordu eksildi!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:131
 msgid ""
@@ -133,27 +140,29 @@ msgid ""
 "warlord\n"
 "less on this island!"
 msgstr ""
+"Harika! Jomo Son binasının yerlebir olduğunu görünce pes etti. Bu adadan bir "
+"savaş lordu eksildi!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:130
 msgid "Jomo defeated"
-msgstr ""
+msgstr "Jomo yenildi"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:136
 msgid "Last Briefing"
-msgstr ""
+msgstr "Son Açıklama"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:82
 #: ../../maps/Plateau.wmf/scripting/texts.lua:98
 msgid "Second Briefing"
-msgstr ""
+msgstr "İkinci Açıklama"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:73
 msgid "The forbidden island"
-msgstr ""
+msgstr "Yasak ada"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:140
 msgid "Victory!"
-msgstr ""
+msgstr "Zafer!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:103
 msgid ""
@@ -176,3 +185,17 @@ msgid ""
 "of\n"
 "the food supply."
 msgstr ""
+"Harika! Askerlerimiz sonunda Lanissa ve askerlerini yendi. Kadim kale "
+"bizimdir!\n"
+"Kalenin en yüksek kulesinden o kadar uzakları görebilmek inanılmaz. Bütün\n"
+"adayı gözetleyebiliriz. Merak ediyorum da Lanissa neden bizi burdan görüp \n"
+"hazırlık yapmadı acaba. Sanırım bazı şeyler asla gün ışığına çıkmaz. Şu "
+"anda\n"
+"tek önemli şey geri kalan direnen askerler. Düşmanı Erwyn' den kalenin "
+"kuzey\n"
+"ve doğu tarından gözledik. Güçlü bir Savaş lordu olarak bilinir, şüphesiz "
+"en\n"
+"güçlü askerler komutasındadır. Güneyde, Jomo -genç bir savaş lordu- "
+"tarafından\n"
+"korunan yiyecek yapıları keşfettik. Bu yapılarla ilgilenip yiyecek ikmalini "
+"kesmeliyiz."

@@ -59,7 +59,7 @@ struct FindNodeUnowned {
 		// only interested in fields we can walk on.
 		// Fields should either be completely unowned or owned by an opposing player
 		return
-			fc.field->nodecaps() & MOVECAPS_WALK
+			(fc.field->nodecaps() & MOVECAPS_WALK)
 			&&
 			((fc.field->get_owned_by() == 0)
 			 || player->is_hostile(*game.get_player(fc.field->get_owned_by())))
@@ -169,9 +169,14 @@ struct BuildableField {
 		next_update_due    (0),
 		reachable          (false),
 		preferred          (false),
+		avoid_military(0),
+		enemy_nearby(0),
 		unowned_land_nearby(0),
 		trees_nearby       (0),
-		stones_nearby      (0)
+		stones_nearby      (0),
+		water_nearby(0),
+		space_consumers_nearby(0),
+		military_influence(0)
 	{}
 };
 
@@ -189,7 +194,8 @@ struct MineableField {
 		coords         (fc),
 		next_update_due(0),
 		reachable      (false),
-		preferred      (false)
+		preferred      (false),
+		mines_nearby(0)
 	{}
 };
 

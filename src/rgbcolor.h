@@ -55,7 +55,9 @@ struct RGBAColor {
 	Uint8 b;
 	Uint8 a;
 
-	RGBAColor() {}
+	RGBAColor() {
+		r = g = b = a = 0;
+	}
 	RGBAColor(Uint8 _r, Uint8 _g, Uint8 _b, Uint8 _a) {
 		r = _r;
 		g = _g;

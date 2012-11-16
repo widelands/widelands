@@ -2,7 +2,6 @@ size=medium
 max_soldiers=5
 heal_per_second=130
 conquers=8
-enhanced_building=yes
 
 [buildcost]
 blackwood=5

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-26 08:30+0000\n"
-"PO-Revision-Date: 2011-02-14 14:57+0000\n"
-"Last-Translator: LiSrt <Unknown>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-10-27 16:20+0000\n"
+"Last-Translator: _aD <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-27 04:33+0000\n"
-"X-Generator: Launchpad (build 15011)\n"
+"X-Launchpad-Export-Date: 2012-10-28 04:31+0000\n"
+"X-Generator: Launchpad (build 16194)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -87,6 +87,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"A special tournament in Atlantean culture is the so-called \"Island "
+"Hopping\", where two or more groups try to reach the centre island as fast "
+"as possible to be the first to build a castle there."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -122,7 +125,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlanteans - The Run for the Fire"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -163,6 +166,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"Each mountain contains only one resource."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -205,6 +212,9 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
+"For hundreds of years this island was kept as sanctuary for the Gods. No "
+"human ever ventured to set a foot on it until now. A tribe has arrived which "
+"is barefaced enough to settle on the coast with many followers after them."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -220,6 +230,9 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Four tribes struggle with their nearest neighbour to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining tribes share the resources wisely?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -255,7 +268,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Island Hopping"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -276,6 +289,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"It is said that the old war monks, living in the even older swamps, are the "
+"key to controlling this entire island."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -360,6 +375,11 @@ msgid ""
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
 msgstr ""
+"Only a small hill in the centre of the map connects these four competing "
+"tribes. Lead your army to this hill immediately and build a giant stronghold "
+"as a sign of your superiority! Hint: In the centre there is space for only "
+"one stronghold. Water can be found everywhere so there is no need to send "
+"out geologists."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -393,10 +413,6 @@ msgstr ""
 "and was completely scattered. He and only a handful of his soldiers barely "
 "escaped with their lives."
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
-msgid "Smugglers"
-msgstr ""
-
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
 "Some say that impenetrable lands to the far north scared away even the most "
@@ -425,33 +441,37 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "Start positions are clockwise"
 
 #: ../../maps/Desert Tournament.wmf/elemental:10
 #: ../../maps/Four Castles.wmf/elemental:10
 #: ../../maps/Swamp Monks.wmf/elemental:10
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
-msgstr ""
+msgstr "Suggested teams: Blue and red vs. yellow and green"
 
 #: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
 "yellow)"
 msgstr ""
+"Suggested teams: Blue and red vs. yellow and green, or blue and green vs. "
+"red and yellow"
 
 #: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
 "green)"
 msgstr ""
+"Suggested teams: Blue and red vs. yellow and green, or blue and yellow vs. "
+"red and green"
 
 #: ../../maps/Atoll.wmf/elemental:10
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
-msgstr ""
+msgstr "Suggested teams: Blue and yellow vs. red and green"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
-msgstr ""
+msgstr "Suggested teams: any."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -490,6 +510,8 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
 msgstr ""
+"The breathtaking beauty of these emerald lands has lured many tribes into an "
+"attempt to take them."
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
 msgid ""
@@ -503,6 +525,15 @@ msgid ""
 "of time, until the first fights between the harbours will shake the peaceful "
 "life that lasted so long..."
 msgstr ""
+"The four mighty harbours of the Craw Islands were trading their goods "
+"amongst each other for ages. All of them needed resources they could not "
+"produce on their own territory and provided resources that the other could "
+"not produce in exchange. Based on these trades a very friendly commerce was "
+"common between the four harbours and the people living on the Craw Islands - "
+"until lately two of the harbours united to an exclusive trade alliance, "
+"forcing the other two to do the same. Suddenly it seems it is only a matter "
+"of time until the first fights between them shake the peaceful life that "
+"lasted so long..."
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
@@ -570,7 +601,7 @@ msgstr "Three Warriors"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
 msgid "Together we're strong"
-msgstr ""
+msgstr "Together we're strong"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -593,6 +624,8 @@ msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Well-protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
 
 #: ../../campaigns/cconfig:31
 msgid ""
@@ -632,6 +665,11 @@ msgid ""
 "a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the world, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -669,7 +707,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Who will be the real King of the big atoll?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
@@ -691,6 +729,10 @@ msgstr ""
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "appeared and now a rivalry under smugglers has been started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Yellow "
-"vs Red + Green."
+"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs "
+"Yellow + Green."
 msgstr ""
+"Your well established smuggling routes suddenly became busy: two other "
+"tribes appeared and now a rivalry between smugglers has been started. Which "
+"team will be the first to smuggle a certain number of wares? Teams are: Blue "
+"and red vs. yellow and green."

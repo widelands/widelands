@@ -28,14 +28,19 @@
 #include <cstdlib>
 #include <utility>
 
-#if __APPLE__  && LIBINTL_VERSION >= 0x001201
+#ifdef __APPLE__
+# if LIBINTL_VERSION >= 0x001201
 // for older libintl versions, setlocale is just fine
-#define SETLOCALE libintl_setlocale
-#elif _WIN32
-#define SETLOCALE setlocale
-#else
-#define SETLOCALE std::setlocale
+#  define SETLOCALE libintl_setlocale
+# endif // LIBINTL_VERSION
+#else // __APPLE__
+# if defined WIN32
+#  define SETLOCALE setlocale
+# else
+#  define SETLOCALE std::setlocale
+# endif
 #endif
+
 
 extern int _nl_msg_cat_cntr;
 

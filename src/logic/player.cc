@@ -139,7 +139,7 @@ void Player::create_default_infrastructure() {
 				ncr->push_arg(further_pos);
 				game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr));
 			}
-		} catch (Tribe_Descr::Nonexistent) {
+		} catch (Tribe_Descr::Nonexistent & e) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "
 				 "(tribe edited between preload and game start?)",
@@ -1008,7 +1008,7 @@ throw ()
 	//  as well of this change.
 	if (!m_team_player_uptodate)
 		update_team_players();
-	if (!forward && m_team_player.size()) {
+	if (!forward && !m_team_player.empty()) {
 		for (uint8_t j = 0; j < m_team_player.size(); ++j)
 			m_team_player[j]->see_node(map, first_map_field, f, gametime, true);
 	}
@@ -1040,7 +1040,7 @@ throw ()
 	//  as well of this change.
 	if (!m_team_player_uptodate)
 		update_team_players();
-	if (!forward && m_team_player.size()) {
+	if (!forward && !m_team_player.empty()) {
 		for (uint8_t j = 0; j < m_team_player.size(); ++j)
 			m_team_player[j]->unsee_node(i, gametime, true);
 	}
@@ -1075,9 +1075,9 @@ void Player::sample_statistics()
 			 it != warehouses.end();
 			 ++it)
 		{
+			Widelands::WareList const & wares = (*it)->get_wares();
 			for (uint32_t id = 0; id < stocks.size(); ++id) {
-				stocks[id] += (*it)->get_economy()->stock_ware
-					(Ware_Index(static_cast<size_t>(id)));
+				stocks[id] += wares.stock(Ware_Index(static_cast<size_t>(id)));
 			}
 		}
 	}

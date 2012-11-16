@@ -197,6 +197,7 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
 	case    Set_To_Decrease: set_to    -= 0 < set_to;     break;
 	default:
 		assert(false);
+		break;
 	}
 	m_increase_tool.set_change_by(change_by);
 	m_increase_tool.decrease_tool().set_change_by(change_by);

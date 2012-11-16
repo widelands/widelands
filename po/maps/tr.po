@@ -1,0 +1,699 @@
+# Turkish translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-07-25 12:35+0000\n"
+"Last-Translator: Ercin Senturk <Unknown>\n"
+"Language-Team: Turkish <tr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-10-05 04:33+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
+
+#: ../../campaigns/cconfig:64
+msgid "01 - Eyes in the Dark"
+msgstr "01 - Karanlıktaki Gözler"
+
+#: ../../campaigns/cconfig:98
+msgid "01 - From Nemesis to Genesis"
+msgstr "01 - Yok Oluştan Yaratılışa"
+
+#: ../../campaigns/cconfig:81
+msgid "01 - The Strands of Malac' Mor"
+msgstr "01 - Malac' Mor Kıyıları"
+
+#: ../../campaigns/cconfig:69
+msgid "02 - A Place to call Home"
+msgstr "02 - Ev Denilebilecek Yer"
+
+#: ../../campaigns/cconfig:86
+msgid "02 - An Outpost for Exile"
+msgstr "02 - Sürgün Karakolu"
+
+#: ../../campaigns/cconfig:74
+msgid "03 - This Land is our Land"
+msgstr "03 - Bu Topraklar Bizim"
+
+#: ../../maps/Comet Island.wmf/elemental:9
+msgid ""
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
+"you have not seen any reason, to ship there, but yesterday a big fireball "
+"came from the sky and touched down in it's middle. Is this a sign of the "
+"Gods? You believe it is and you hope, that your tribe will find the treasure "
+"of this island, before other tribes will follow."
+msgstr ""
+"Gerion Sahilinin birkaç kilometre ilerisinde isimsiz bir ada yatar. Şimdiye "
+"kadar oraya gitmek için bir sebebin yoktu fakat dün büyük bir göktaşı adanın "
+"ortasına düştü. Bu Tanrılardan bir işaret mi? Öyle olduğuna inanıyorsun ve "
+"diğer kabilelerden önce adanın hazinesini bulmayı umuyorsun."
+
+#: ../../maps/Glacier Lake.wmf/elemental:9
+msgid ""
+"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
+"one disturbed you and the resources were enough for your whole tribe, but a "
+"few months ago another tribe came over the mountains and settled down. And "
+"you are sure, that there is only enough place for one tribe."
+msgstr ""
+"Uzun zamandır kabilen bu güzel ve yanlız buzul gölünde yaşadı. Kimse seni "
+"rahatsız etmedi ve kaynaklar tüm kabilen için yeterliydi, fakat birkaç ay "
+"önce dağların ardından başka bir kabile geldi buraya yerleşti. Ve sen burada "
+"yanlızca bir kabile için yeterli yer olduğuna eminsin."
+
+#: ../../maps/Two frontiers.wmf/elemental:9
+msgid "A multiplayer-battle-map on a small circle-shaped island."
+msgstr "Dairesel şekilli küçük bir adada çokoyunculu bir savaş haritası"
+
+#: ../../maps/Riverlands.wmf/elemental:9
+msgid ""
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
+msgstr ""
+"Mistik bir kara parçası, farklı manzaralarla dolu, hepsi de bir avuç büyük "
+"nehirle kesilmiş."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in atlantean culture is the so named \"Island "
+"Hopping\", where two or more groups try to reach the center island as fast "
+"as possible, to be the first building up a castle on the top of the center "
+"mountain."
+msgstr ""
+"İki ya da daha fazla grubun adanın merkezine mümkün olduğunca hızlı ulaşıp, "
+"merkezdeki dağın tepesine ilk kaleyi kurmaya çalıştıkları, Atlan "
+"geleneklerinde \"Hoplama Adası\" adında özel bir turnuva."
+
+#: ../../maps/Impact.wmf/elemental:9
+msgid ""
+"After an impact of an asteroid and the following harsh winter, three isles "
+"are connected by ice and stone, setting an end to the peaceful coexistence "
+"of three tribes."
+msgstr ""
+"Bir asteroit darbesi  ve çarpışmanın ardından gelen sert kış , üç adayı buz "
+"ve kayalarla birleştirdi ve burdaki üç kabilenin barış içinde yaşamasına son "
+"verdi."
+
+#: ../../maps/The long way.wmf/elemental:9
+msgid ""
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way, than occupying the land of your enemies."
+msgstr ""
+"Tanrılardan başka bir garip sınama daha. Öteki tarafa geçmek için düşmanın "
+"topraklarını almaktan başka çare yok."
+
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. During solstice they listened to the oracle and went on "
+"to war. The only survivor will sacrifice his enemies' treasures on the "
+"ancient altar, build there a splendid castle and gain goodwill and the "
+"respect of the Gods."
+msgstr ""
+"Bir çözülme daha. Üç kabile devasa dağların arasında kıştan korunuyordu. "
+"Gündönümünde kabileler kahinlerini dinledi ve savaş kararı aldı. Savaşın sağ "
+"kalanı, düşmanlarının hazinesini, kadim sunağa  görkemli bir kale inşa "
+"ederek kurban edip Tanrıların iyi niyetini ve saygısını kazanacak."
+
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans - The Run for the Fire"
+msgstr "Atlanlar - Ateş için Yarış"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "Mercanada"
+
+#: ../../campaigns/cconfig:27
+msgid "Barbarians - The second Empire"
+msgstr "Barbarlar - İkinci İpmaratorluk"
+
+#: ../../campaigns/cconfig:44
+msgid "Challenging. Introduces the Atlanteans"
+msgstr "Zorlayıcı. Atlanlarla Tanışın"
+
+#: ../../maps/Checkmate.wmf/elemental:7
+msgid "Checkmate"
+msgstr "Şah mat"
+
+#: ../../maps/Comet Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Kuyrukluyıldız Adası"
+
+#: ../../maps/Crater.wmf/elemental:7
+msgid "Crater"
+msgstr "Krater"
+
+#: ../../maps/Desert Tournament.wmf/elemental:7
+msgid "Desert Tournament"
+msgstr "Çöl Turnuvası"
+
+#: ../../maps/Dry Riverbed.wmf/elemental:7
+msgid "Dry Riverbed"
+msgstr "Kuru Nehiryatağı"
+
+#: ../../maps/Four Mountains.wmf/elemental:9
+msgid ""
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"Each mountain contains only one resource."
+msgstr ""
+"Her bir kabile dört devasa dağ ile sarılmış. Kim önce onları fethedip "
+"kaynalarını kendi kabilesi için isteyecek? İpucu I: Su Nehir boyunca "
+"bulunabilir. İpucu II: Karadam öteki su kaynaklarını işaret eder. İpucu III: "
+"Her dağ yanlızca bir kaynak barındırır."
+
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr "Kolay. Barbarlarla tanışın."
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr "Kolay. İmparatorlukla tanışın."
+
+#: ../../maps/Elven Forests.wmf/elemental:7
+msgid "Elven Forests"
+msgstr "Elf Ormanı"
+
+#: ../../campaigns/cconfig:34
+msgid "Empire - The Months of Exile"
+msgstr "İmparatorluk - Sürgün Ayları"
+
+#: ../../maps/Finlakes.wmf/elemental:9
+msgid "Finnish Lakes"
+msgstr "Fin Gölleri"
+
+#: ../../maps/Firegames.wmf/elemental:7
+msgid "Firegames"
+msgstr "Ateşoyunları"
+
+#: ../../maps/Islands at war.wmf/elemental:11
+msgid ""
+"For centuries you've lived peacefully together with the other tribe on the "
+"neighboured island. This peace seems to end now - your neighbour begins to "
+"expand."
+msgstr ""
+"Yüzyıllardır komşu adadaki kabileyle barış içinde yaşadın. Bu barış sona "
+"eriyor - komşun genişlemeye başladı."
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid ""
+"For hundreds of years this island was kept as sanctuary of the Gods. No "
+"human ever ventured to set a foot on it. But now, that a tribe was finally "
+"barefaced enough to settle on the coast of that island, a lot others "
+"followed afterwards."
+msgstr ""
+"Yüzyıllardır bu ada Tanrılar için bir tapınak oldu. Hiç kimse adaya ayak "
+"basmaya bile cüret etmedi. Fakat şimdi, yüzsüz bir kabile adanın kıyısına "
+"yerleşti, daha birçokları onu takip etti."
+
+#: ../../maps/Four Castles.wmf/elemental:7
+msgid "Four Castles"
+msgstr "Dört Kale"
+
+#: ../../maps/Four Mountains.wmf/elemental:7
+msgid "Four Mountains"
+msgstr "Dört Dağ"
+
+#: ../../maps/Desert Tournament.wmf/elemental:9
+msgid ""
+"Four tribes struggle with their nearest neighbour to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr ""
+"Dört kabile altın dağın sunduğu inanılmaz zenginlik için en yakın komşusu "
+"ile yarışıyor. Fakat kalan ikisi kaynakları akıllıca paylaşabilecek mi?"
+
+#: ../../maps/Glacier Lake.wmf/elemental:7
+msgid "Glacier Lake"
+msgstr "Buzul Göl"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:7
+msgid "Golden Peninsula"
+msgstr "Altın Yarımada"
+
+#: ../../maps/Impact.wmf/elemental:7
+msgid "Impact"
+msgstr "Darbe"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid ""
+"In this mountainous area two princes have settled. Now they are expanding "
+"their territories unaware of the fact that they are not alone!"
+msgstr ""
+"Bu dağlık araziye iki prens yerleşti. Burada yanlız olmadıkları gerçeğinden "
+"habersiz  bölgelerini genişletiyorlar."
+
+#: ../../maps/Firegames.wmf/elemental:9
+msgid ""
+"Is this a test by the Gods or an evil plan by someone else, that you and "
+"your tribe woke up on this island among fire and lava? Until now it seems as "
+"if you are alone, but no-one knows, what might happen if you meet an "
+"opponent tribe?"
+msgstr ""
+"Sen ve kabilen bu adada ateş ve lavların arasında uyandınız, bu Tanrıların "
+"bir sınaması mı yoksa başka birinin şeytani bir planı mı? Şimdiye kadar "
+"görünen o ki yanlızsınız, fakat düşman bir kabileyle karışılaşırsanız ne "
+"olur kimse bilemez."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
+msgstr ""
+
+#: ../../maps/Islands at war.wmf/elemental:9
+msgid "Islands at war"
+msgstr "Adalar Savaşta"
+
+#: ../../maps/War of the Valleys.wmf/elemental:9
+msgid ""
+"It is said that even sun and moon must find their way between the spires of "
+"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
+"Geologists elsewhere."
+msgstr ""
+"Denir ki bu dağların sivri tepelerinin arasıdan geçmek için güneş ve ay bile "
+"yol ararmış. İpucu: Dikmetaşlar madenleri işaret eder. Jeolog göndermekle "
+"vakit kaybetmeyin."
+
+#: ../../maps/Swamp Monks.wmf/elemental:9
+msgid ""
+"It is said, that the old war monks, living in the even older swamps are the "
+"key to the control of the whole island."
+msgstr ""
+"Denir ki, kendilerinden daha yaşlı bataklıklarda yaşayan savaş rahipleri tüm "
+"adayı kontrol etmenin anahtarıdır."
+
+#: ../../maps/Wisent Valley.wmf/elemental:11
+msgid ""
+"It seems as if this magical valley was inhabited by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offers enough space for a peaceful life. But can your tribe live in peace "
+"with your neighbours?"
+msgstr ""
+"Sanki bu büyülü vadi günlerin başlangıcından beri bizonları barındırıyor. "
+"Kabilen buraya geldiğinde, buranın barış içinde yaşamaya yetecek kadar "
+"toprak sunduğuna emindiniz. Fakat kabilen komşularıyla barış içinde "
+"yaşayabilecek mi?"
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid ""
+"It smells like swamp, it looks like swamp and it is swamp. But it is the "
+"place you were born and you lived your whole life. If you don't want to lose "
+"it, defend it! "
+msgstr ""
+"Bataklık gibi kokuyor, bataklık gibi görünüyor... Burası bataklık. Fakat "
+"burası senin doğduğun ve hayatın boyunca yaşadığın yer. Eğer kaybetmek "
+"istemiyorsan, savun! "
+
+#: ../../maps/Dry Riverbed.wmf/elemental:9
+msgid ""
+"It was a long time ago, since the last raindrop touched these grounds. No "
+"wonder, that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of water."
+msgstr ""
+"Son yağmur damlası bu topraklara düşeli çok uzun zaman oldu. Bu kuru nehir "
+"yatağında pek su bulunmamasına şaşmamalı. Herkes biliyor, yakında savaş "
+"çıkacak. Son su için savaş."
+
+#: ../../maps/Lake of tranquility.wmf/elemental:7
+msgid "Lake of Tranquility"
+msgstr "Sukünet Gölü"
+
+#: ../../maps/Last Bastion.wmf/elemental:9
+msgid "Last Bastion"
+msgstr "Son Kale"
+
+#: ../../maps/Crater.wmf/elemental:9
+msgid ""
+"Long after a meteor crashed into a couple of mountains, life blossoms in the "
+"crater. Two tribes are now fighting for the rich resources."
+msgstr ""
+"Birkaç dağa meteor çarptıktan çok sonra, kraterde hayat canlandı. Şimdi iki "
+"kabile zengin kaynaklar için savaşıyor."
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+msgstr ""
+"Gün ışığında parıldayan bin dalgayı geçebilecek kadar cesur olanları birçok "
+"güzel, yeşil ada beklemekte."
+
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
+"found around the lakes."
+msgstr ""
+"Yüce dağlar bu toprakları üç verimli vadiye bölmüş. Fakat vadileri "
+"birleştiren bir geçit ve savaş kaçınılmaz görünüyor! İpcucu: Su Göl "
+"civarında bulunabilir."
+
+#: ../../maps/Mystical Maze.wmf/elemental:9
+msgid "Mystical Maze"
+msgstr "Mistik Labirent"
+
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+msgid "Not yet implemented"
+msgstr "Daha tamamlanmadı"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:9
+msgid ""
+"Only a small hill in the centre of the map connects these four competing "
+"tribes. Lead your army right away to this hill and build a giant stronghold "
+"as a sign of your superiority! Hint: In the centre is only space for one "
+"stronghold. Water can be found everywhere, so there is no need to send out "
+"geologists."
+msgstr ""
+"Birbiriyle mücadele eden bu dört kabileyi, sadece haritanın merkezindeki bir "
+"tepelik birleştiriyor. Ordunu bu tepeye gönder ve oraya gücünün simgesi "
+"olarak devasa bir kale inşa et! İpucu: Merkezde yanlızca bir kale için yer "
+"var. Su heryerde bulunabilir, jeolog göndermeye gerek yok."
+
+#: ../../maps/Rendez-Vous.wmf/elemental:7
+msgid "Rendez-Vous"
+msgstr "Randevu"
+
+#: ../../maps/Riverlands.wmf/elemental:7
+msgid "Riverlands"
+msgstr ""
+
+#: ../../campaigns/cconfig:38
+msgid ""
+"Six months ago, Lutius - a young general of the Empire - was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire's land. At first, everything was calm. He even talked to a few "
+"barbarian children and thought about a peaceful life - side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr ""
+"Altı ay önce, Lutius -İmparatorluktan genç bir general- 150 askerle birlikte "
+"kuzey ormanının ötesine, barbarların İmparatorluk topraklarından geçtiği "
+"cepheye gönderildi. Görevi İmparatorluk topraklarını savunmaktı. Önceleri "
+"herşey sakindi. Lutius barbar çocuklarla bile sohbet edip, onlara barışçıl "
+"bir yaşamı öğretiyordu- arkaik halkla omuz omuza. Kendini rahat hissetmeye "
+"başladı ve ordusunun dikkati bu potansiyel düşmana karşı  azalmaya başladı. "
+"Bu onların felaketiydi. Bir Mart gecesi, hazırlıksız ordusu 100 barbar "
+"piyadenin saldırısına uğradı ve tamamen dağıtıldı. Sadece canı ve bir avuç "
+"askeri kurtuldu."
+
+#: ../../maps/The Far North.wmf/elemental:11
+msgid ""
+"Some say that impenetrable lands to the far north scared away even the most "
+"courageous settlers and the bravest of the brave warriors. Big and old "
+"forests, full of big and predatory game, cut across by wetlands and hills "
+"were shrouded in mystery. The ones who had managed to come back mentioned "
+"tremendous buildings, decorated with carvings and gold from majestic "
+"mountain ranges somewhere amongst the wilderness. Dozens of years after only "
+"some crumbly ruins remain of these good old times, covered with moss and "
+"trees. Their shapes give only an idea about the craftsmanship of ancient "
+"constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
+"People say that now nothing is blocking the road to wealth. But many will "
+"die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
+msgstr ""
+"Bazıları der ki kuzeydeki nüfuz edilemez topraklar en cesur yerleşimcilerin "
+"ve en yiğit savaşçıların bile gözünü korkuturmuş. Büyük ve eski ormanlar, "
+"boydan boya sulak araziyle kesilmiş ve tepeler gizemle örtülmüş. Geriye "
+"dönmeyi becerebilenler işlemelerle bezenmiş muzzam yapılardan, vahşi doğanın "
+"içinde devasa dağların eteklerindeki altından bahsederler. Onlarca yıl sonra "
+" eski güzel zamanlardan geriye sadece yosun ve ağaç kaplı ufalanan harabeler "
+"kalmış. Harabelerin şekilleri, eski zamanın işçiliğine dair yanlızca fikir "
+"verebiliyor. Kimse neden ortadan kaybolduklarını bilmiyor.  Kimse nedeni "
+"bilmiyor. İnsanlar şimdi zenginliğe giden yolu tıkayan hiçbir şey yok "
+"diyorlar. Ama birçoğu kurtlar tarafından parçalanacak, bataklık tarafından "
+"yutulacak,,, saldırgan kabilelerce kapana kıstırılacak."
+
+#: ../../maps/Sun of fire.wmf/elemental:12
+msgid "Start positions are clockwise"
+msgstr "Başlangıç pozisyonları saat yönünde"
+
+#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:10
+msgid "Suggested Teams: (blue, red) vs (yellow, green)"
+msgstr "Önerilen Takımlar: (mavi, kırmızı) vs (sarı, yeşil)"
+
+#: ../../maps/Four Mountains.wmf/elemental:10
+msgid ""
+"Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
+"yellow)"
+msgstr ""
+"Önerilen Takımlar: (mavi, kırmızı) vs (sarı, yeşil) ya da (mavi, yeşil) vs "
+"(kırmızı,sarı )"
+
+#: ../../maps/Elven Forests.wmf/elemental:10
+msgid ""
+"Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
+"green)"
+msgstr ""
+"Önerilen Takımlar: (mavi, kırmızı) vs (sarı, yeşil) ya da (mavi, sarı) vs "
+"(kırmızı,yeşil )"
+
+#: ../../maps/Atoll.wmf/elemental:10
+msgid "Suggested Teams: (blue, yellow) vs (red, green)"
+msgstr "Önerilen Takımlar: (mavi, sarı) vs (kırmızı,yeşil )"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:10
+msgid "Suggested Teams: all ok."
+msgstr "Önerilen Takımlar: hepsi uygun"
+
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr "Bataklık Ada"
+
+#: ../../maps/Swamp Monks.wmf/elemental:7
+msgid "Swamp Monks"
+msgstr "Bataklık Rahipleri"
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr "Uzak Kuzey"
+
+#: ../../maps/Plateau.wmf/elemental:7
+msgid "The Green Plateau"
+msgstr "Yeşil Plato"
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:7
+msgid "The Oasis Triangle"
+msgstr "Vaha Üçgeni"
+
+#: ../../maps/The Thaw.wmf/elemental:9
+msgid "The Thaw"
+msgstr ""
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr "Ateşin kadim güneşi"
+
+#: ../../maps/The big lake.wmf/elemental:7
+msgid "The big lake"
+msgstr "Büyük göl"
+
+#: ../../maps/Elven Forests.wmf/elemental:9
+msgid ""
+"The breath-taking beauty of these emerald lands has lured many tribes into "
+"an attempt of taking them for themselves."
+msgstr ""
+"Zümrüt toprakların nefes kesen güzelliği birçok kabileyi kendisini almaları "
+"için cezbetti."
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
+msgid ""
+"The four mighty harbours of the Craw Islands were trading their goods among "
+"each others for ages. All of them needed resources, they could not produce "
+"on their own territory and provided resources that the other could not "
+"produce in exchange. Based on these trades a very friendly commerce was "
+"common between the four harbours and the people living on the Craw Islands - "
+"just until lately two of the harbours united to an exclusive trade alliance, "
+"forcing the other two to do the same. Suddenly it seems it is only a matter "
+"of time, until the first fights between the harbours will shake the peaceful "
+"life that lasted so long..."
+msgstr ""
+"Yıllardır Craw adasının dört büyük limanı aralarında ticaret yapıyordu. "
+"Hepsi kendi üretemediği ürünleri, diğerlerinin üretemediği ürünlerle "
+"değişiyordu. Bu karşılıklı ticaret sonucu Craw adasında barış hüküm "
+"sürmekteydi- ta ki iki liman aralarında ticaret anlaşması yapana ve diğer "
+"ikisini de buna zorlayana kadar. Birdenbire vaziyet öyle bir hal aldı ki "
+"limanların savaş başlatması ve  uzun süredir devam eden barış ortamını "
+"bozması an meselesiydi..."
+
+#: ../../maps/The long way.wmf/elemental:7
+msgid "The long way"
+msgstr "Uzun yol"
+
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The pass through the mountains"
+msgstr "Dağlardaki geçit"
+
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid ""
+"There are two big questions around: Who created this unbelievably big maze "
+"and what can be found inside?"
+msgstr ""
+"İki büyük soru var: Bu inanılmaz labirenti kim yaptı ve içinde ne var?"
+
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
+msgid ""
+"There is something mystical, like a grey atmosphere, around these three "
+"oases, which no one found out about yet. Perhaps you will be the one, but be "
+"aware of the others, who are searching too!"
+msgstr ""
+"Bu üç vahanın çevresinde kimsenin bulamadığı mistik bişeyler var, gri "
+"atmosfer gibi. Belki de bulan sen olursun ama öteki arayanlara dikkat et."
+
+#: ../../maps/Finlakes.wmf/elemental:11
+msgid ""
+"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
+"forests and mountains. It is up to you, to find a way through these lands."
+msgstr ""
+"Burada güzel Fin toprakları var, göller, nehirler, eski ormanlar ve dağlar. "
+"Bu topraklarda bir yol bulmak senin elinde."
+
+#: ../../maps/The big lake.wmf/elemental:9
+msgid ""
+"This island once came out of the deepest grounds of the sea. In those days, "
+"fire rose out of the salty seawater and brought ash, stones and earth to "
+"daylight. And the fire came nearer and nearer to the sun, while the mountain "
+"grew and grew. Until one day, when the whole firemountain exploded. Nowadays "
+"only this ring is left from that mighty firemountain. Do you think, that it "
+"is big enough for more than one tribe?"
+msgstr ""
+"Bu ada bir zamanlar denizin en derin yerlerinden çıktı. O günlerde, ateş "
+"tuzlu deniz suyundan çıktı ve külü, taşları ve toprağı günyüzüne çıkardı. "
+"Dağ büyürken ateş güneşe yaklaştı. Tüm ateş dağının patladığı güne kadar. Bu "
+"günlerde ateştağından geriye sadece bu halka kaldı. Burasının birden fazla "
+"kabile için yeterli olduğunu düşünüyor musun?"
+
+#: ../../maps/Lake of tranquility.wmf/elemental:9
+msgid ""
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
+"hostile tribes arrive at its shores..."
+msgstr ""
+"En eski ormanların derinliklerindeki bu göl, uzun zamandır güzelliği ve "
+"sakinliği ile bilindi. Şimdi kıyılarına gelen iki düşman kabile yüzünden "
+"kutsallığı huzursuz edildi..."
+
+#: ../../maps/Three Warriors.wmf/elemental:9
+msgid "Three Warriors"
+msgstr "Üç Savaşçı"
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
+msgid "Together we're strong"
+msgstr "Birlikte güçlüyüz"
+
+#: ../../maps/Twinkling Waves.wmf/elemental:9
+msgid "Twinkling Waves"
+msgstr "Parıldayan Dalgalar"
+
+#: ../../maps/Two frontiers.wmf/elemental:7
+msgid "Two Frontiers"
+msgstr "İki Cephe"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:9
+msgid "Two empires race for the treasures of a legendary peninsula..."
+msgstr "İki kabile efsanevi yarımadanın hazineleri için yarışıyor..."
+
+#: ../../maps/War of the Valleys.wmf/elemental:7
+msgid "War of the Valleys"
+msgstr "Vadilerin Savaşı"
+
+#: ../../maps/Four Castles.wmf/elemental:9
+msgid ""
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
+msgstr ""
+"Devasa kalelerinde iyi korunan dört açgözlü savaşlordu, bu topraklara "
+"hükmetme planlarını tamamlıyorlar..."
+
+#: ../../campaigns/cconfig:31
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord "
+"knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father's spirit that he’d return to re-established "
+"order. While his brothers raged in blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr ""
+"Chat'Karuth öldüğünde yaşlıydı, üç güçlü ve hırslı çocuk babasıydı ve kadim "
+"ormanlara karşı gelecek herhangi bir düşmanla başedebilecek bir ordunun "
+"savaşlordu idi. Chat’Karuth en büyük oğlu Thron'a kabilenin savaşlordu "
+"ünvanını bıraktı - diğer iki oğlunu memnun etmeyen bir karar. Yaşlı "
+"savaşlordu bunu biliyordu. Babasının buyurduğu üzere, Thron başkent "
+"Al’thunran,  Ağaçların İçindeki Krallığın evini terketti ve kuvvetlerini "
+"babasının mezarının bulunduğu yüksek tepelere taşıdı. Orda tanrılara ve "
+"babasının ruhuna, geri dönüp düzeni tekrar sağlayacağına yemin etti. "
+"Kardeşleri,  Thron ve Al’thunran'ın sınırlarını korumak için bırakılmış "
+"birkaç kuvvete karşı körü körüne savaşırken, genç savaşlordu hırslı "
+"kardeşlerini birleştirmek ve kabileleri tekrar aynı bayrak altına sokmanın "
+"yollarını arıyordu."
+
+#: ../../campaigns/cconfig:45
+msgid ""
+"When the God lost faith in the Atlanteans and drowned their island, one "
+"woman's struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
+
+#: ../../maps/Checkmate.wmf/elemental:9
+msgid ""
+"Whether just one of nature's strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
+msgstr ""
+
+#: ../../maps/Last Bastion.wmf/elemental:11
+msgid ""
+"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
+"Sun heated up the Earth and melted glaciers and people plunged into the "
+"deep. But now - high in the majestic mountains, on the last scrap of land - "
+"two surviving tribes are sheltering. Even though the Gods showed mercy and "
+"the climate thus turned cooler again the water is still rising and rising. "
+"Onto the last secure place - the highest mountain range where the amount of "
+"gold and the space to live merely suffice for one tribe - only two opposite "
+"paths lead. But remember, be careful... this last living space is also a "
+"hard and small place to live. Don't forget to take care about your timber "
+"supplies, you'll need them."
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "Büyük mercanadanın gerçek Kralı kim olacak?"
+
+#: ../../maps/Wisent Valley.wmf/elemental:9
+msgid "Wisent Valley"
+msgstr "Bizon Vadisi"
+
+#: ../../maps/Plateau.wmf/elemental:9
+msgid ""
+"You are standing on an island, crowned by mighty mountains, which keep a "
+"wonderful and mighty treasure in their middle - The Green Plateau, which is "
+"hard to get, but easy to lose, so if you want it, be aware of the other "
+"clans."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"appeared and now a rivalry under smugglers has been started: Which team will "
+"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs "
+"Yellow + Green."
+msgstr ""
