@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-03-26 19:14+0000\n"
-"Last-Translator: Jens Beyer (Qcumber-some) <Unknown>\n"
+"PO-Revision-Date: 2012-11-15 23:56+0000\n"
+"Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:32+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-11-16 04:31+0000\n"
+"X-Generator: Launchpad (build 16272)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -23,7 +23,7 @@ msgstr "01 - Okuloj en malumo"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
-msgstr "01 - De nemezo genezo"
+msgstr "De nemezo al genezo"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
@@ -39,7 +39,7 @@ msgstr "02 - Antauposteno por ekzilo"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr "03 - Tio ĉi lando estas nia lando"
+msgstr "Ĉi tiu lando estas nia lando"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -108,7 +108,7 @@ msgstr "Atolo"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "Barbaroj - La dua Imperio"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
@@ -164,7 +164,7 @@ msgstr "Lagos Finna"
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
-msgstr ""
+msgstr "Fajrludoj"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -172,6 +172,8 @@ msgid ""
 "neighboured island. This peace seems to end now - your neighbour begins to "
 "expand."
 msgstr ""
+"Dum jarcentoj vi vivis en paco kune kun la alia tribo el la najbara insuloj. "
+"Ĉi tiu paco ŝajnas nun finigita  - viaj najbaruloj ekekspansiiĝas"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -228,7 +230,7 @@ msgstr ""
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
-msgstr "Insulos ĉe milito"
+msgstr "Insuloj en milito"
 
 #: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
@@ -267,11 +269,11 @@ msgstr ""
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
-msgstr "Lago de trankvilama"
+msgstr "Lago de la trankvileco"
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
-msgstr ""
+msgstr "La Lasta Bastiono"
 
 #: ../../maps/Crater.wmf/elemental:9
 msgid ""
@@ -294,7 +296,7 @@ msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
-msgstr ""
+msgstr "Mistika Labirinto"
 
 #: ../../campaigns/cconfig:91
 #: ../../campaigns/cconfig:103
