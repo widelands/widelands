@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-11-15 23:56+0000\n"
+"PO-Revision-Date: 2012-11-17 04:24+0000\n"
 "Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-16 04:31+0000\n"
-"X-Generator: Launchpad (build 16272)\n"
+"X-Launchpad-Export-Date: 2012-11-17 04:30+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -49,6 +49,11 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
+"Je kelkaj mejloj antaŭ la Gerion-a marbordo troviĝas sennoma insuleto. Ĝis "
+"nun, vi havis neniun kialon por vojaĝi ŝipe tien, sed hieraŭ grandan fajran "
+"bulon alvenis el la ĉielo kaj surteriĝis meze de la insulo. Ĉu tio estas ia "
+"signo el la Dioj? Vi ja pensas ke temas pri tio kaj vi esperas trovi la "
+"trezoron de ĉi tiu insulo, antaŭ ol la aliaj triboj."
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -57,6 +62,10 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only enough place for one tribe."
 msgstr ""
+"Antaŭ tre longa tempo via tribo loĝadis ĉe ĉi tiu bela kaj sola glacia lago. "
+"Neniu perturbis vin kaj la resursojn sufiĉis por la tuta tribo, tamen antaŭ "
+"kelkaj monatoj alia tribo alvenis el la montaroj kaj ekstarigis sin ĉi tie. "
+"Kaj vi ja scias ke ĉi tie estas nur loko por unu tribo."
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
@@ -67,6 +76,8 @@ msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
 msgstr ""
+"Mistika lando, plena da malsimilaj pejzaĝoj, kaj per ĉiuj pasas aron da "
+"grandaj riveroj"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
@@ -75,6 +86,10 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"Speciala turniro en la atlantida kulturo estas la tiel nomata \"De insulo al "
+"insulo\", kie du aŭ pliaj grupoj provas atingi la insulan centros kiel eble "
+"plej rapide. Por gajni la turniron oni devas konstrui kastelon en la pinto "
+"de la centra monto."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -82,12 +97,17 @@ msgid ""
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
 msgstr ""
+"Post faliĝo de asteroido kaj la sekvanta terura vintro, tri insuloj estas "
+"nun konektataj per glacio kaj ŝtono, tio signifas la finon de la paca "
+"kunekzistado el la tri triboj"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
+"Alia stranga pruvo el la Dioj. Por atingi la alian flankon, ŝajnas ke ne "
+"ekzistas alia maniero krom preterpasi la landon el viaj malamikoj."
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
@@ -100,7 +120,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlantidoj - La Kurado pro la Fajro"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
@@ -112,7 +132,7 @@ msgstr "Barbaroj - La dua Imperio"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Defiante. Enkondukante la Atlantidojn"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
