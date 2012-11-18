@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-11-14 17:16+0000\n"
+"PO-Revision-Date: 2012-11-17 17:19+0000\n"
 "Last-Translator: guess880 <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-15 04:38+0000\n"
-"X-Generator: Launchpad (build 16265)\n"
+"X-Launchpad-Export-Date: 2012-11-18 04:31+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
 msgid ""
@@ -49,6 +49,20 @@ msgid ""
 "level 2 evade. This is one fearsome warrior then! The individual statistics\n"
 "have the following meaning:"
 msgstr ""
+"兵士は、通常の労働者のように生み出されます。\n"
+"満たされていないある特定の職種への要求が起こるや否や、\n"
+"運び手は道具をつかみます。\n"
+"バーバリアンの兵士を生み出すための道具は斧です。\n"
+"新しく作成された兵士はレベル0です。\n"
+"兵士の四つの能力のいずれかを伸ばすためには訓練が必要です。\n"
+"訓練は訓練所もしくは闘技場のような訓練場所で行われます。\n"
+"兵士たちは(小さな仲間が現在行っているように)そこに行き、\n"
+"いくつかの品物を消費し、一つの能力のレベルを上げます。\n"
+"バーバリアンの兵士が完全に訓練されている場合、\n"
+"彼はレベル3のヒットポイント、レベル5の攻撃力、レベル0の防御力、\n"
+"そしてレベル2の回避力を持っています。\n"
+"これは、恐ろしい戦士です!\n"
+"個々の統計には以下の意味があります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:438
 msgid ""
@@ -102,11 +116,11 @@ msgstr ""
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
-msgstr ""
+msgstr "敵のすべての軍事施設を攻撃して占領し、敵の本部を破壊してください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:623
 msgid "Attack:"
-msgstr ""
+msgstr "攻撃力:"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid "Basic tutorial - map based on Winterwind's tutorial 1 for Barbarians"
@@ -181,6 +195,13 @@ msgid ""
 "military influence any more. If an enemy builds a military building nearby,\n"
 "your construction site could burn down. No sweat, that won't happen here."
 msgstr ""
+"城塞は直接建設することはできません。最初に要塞を建設する必要があり、\n"
+"それを城塞に拡張する必要があります。\n"
+"そのためには、要塞をクリックし、城塞に拡張するボタンを選択してください。\n"
+"兵士たちは拡張が終わるまで要塞から離れます。\n"
+"これは要塞に軍事的影響力がないことを意味しています。\n"
+"もし近くに敵の軍事施設がある場合、建築場所は破壊されてしまいます。\n"
+"心配しないでください、ここではそのようなことは起きません。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:437
@@ -195,7 +216,7 @@ msgstr "ウィンドウを閉じる"
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:696
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
 msgid "Conclusion"
-msgstr ""
+msgstr "終わりに"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:346
 msgid "Connect the quarry to the headquarters"
@@ -244,7 +265,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 msgid "Defeat the enemy"
-msgstr ""
+msgstr "敵を倒す"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:687
 msgid "Defeat the enemy tribe"
@@ -260,7 +281,7 @@ msgstr ""
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:673
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid "Defeat your enemy"
-msgstr ""
+msgstr "敵を倒そう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid ""
@@ -275,14 +296,21 @@ msgid ""
 "subtracted\n"
 "are because of the defense ability."
 msgstr ""
+"防御力は攻撃値から減らされる値です。\n"
+"バーバリアンはこの能力を訓練することはできないため、\n"
+"常に防御力のレベルは0です。\n"
+"それは与えられたダメージからは常に3しか引けないということを意味しています。\n"
+"もし15ヒットポイントの攻撃値を持つ敵がバーバリアンの兵士に攻撃すれば\n"
+"バーバリアンは15から3を引いた12ヒットポイントのダメージを受けることになります。\n"
+"減らされる3ヒットポイントがすなわち防御力です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:627
 msgid "Defense:"
-msgstr ""
+msgstr "守備力"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:64
 msgid "Diving in"
-msgstr ""
+msgstr "はじめよう"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:92
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:93
@@ -291,7 +319,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:643
 msgid "Enhance this fortress"
-msgstr ""
+msgstr "要塞を拡張する"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid "Enhance your fortress"
@@ -306,6 +334,9 @@ msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
 msgstr ""
+"要塞を城塞に拡張してください。\n"
+"PAGEUPキーで速度を上げることができるのを覚えておいてください。\n"
+"城塞の建築には時間がかかります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid ""
@@ -320,7 +351,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid "Enhancing buildings"
-msgstr ""
+msgstr "建物の拡張"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid ""
@@ -328,10 +359,13 @@ msgid ""
 "for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
+"回避力は兵士が攻撃を回避できる機会のことです。\n"
+"レベル0の回避力のバーバリアンの値は25%で、\n"
+"レベルが上がるごとに15%増加します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:634
 msgid "Evade:"
-msgstr ""
+msgstr "回避力"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:260
 msgid "Everything can be built on the green house symbol."
@@ -408,7 +442,7 @@ msgid ""
 msgstr ""
 "拡大するには、領土の隅に軍事施設を建てるのが簡単です。\n"
 "バーバリアンは、いくつかの特徴的な軍事施設を持っています。\n"
-"歩哨所、関所、ダンジョン、要塞、城砦です。\n"
+"歩哨所、関所、ダンジョン、要塞、城塞です。\n"
 "大きな建物は、建築するにはより高価ですが、より多くの周りの土地を支配し、\n"
 "より多くの兵士が駐留することができます。\n"
 "また、建物ごとに視界の範囲は異なります。塔のある建物は、\n"
@@ -442,7 +476,7 @@ msgstr ""
 "木こり小屋は小規模な建物なので小規模建築物のタブを選択します。\n"
 "それから木こり小屋を選びます。\n"
 "デモを見るにはOKボタンをクリックしてください。\n"
-"これらを本当にゆっくり行います。\n"
+"デモではこれらをゆっくりと行ってみせます。\n"
 "クリックします - タブを選択します - そして最後に建物を選びます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:498
@@ -477,7 +511,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:620
 msgid "Hitpoints:"
-msgstr ""
+msgstr "ヒットポイント"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:248
 msgid "How to build a quarry"
@@ -504,6 +538,12 @@ msgid ""
 "the defenders will come from all nearby military buildings of the enemy and\n"
 "intercept your forces."
 msgstr ""
+"スパーリングパートナーを用意しました。城塞の近くの帝国部族です。\n"
+"彼らの建物を攻撃するには、目標の建物のドアをクリックし、\n"
+"送り込みたい兵士の人数を選択し、攻撃ボタンをクリックします。\n"
+"兵士は近くのすべての軍事施設から集まってくるでしょう。\n"
+"同様に、攻撃を妨げるために、近くのすべての軍事施設から\n"
+"敵が集まってきます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid ""
@@ -512,6 +552,9 @@ msgid ""
 "is\n"
 "an even bigger building: the citadel."
 msgstr ""
+"すぐに敵を用意しますが、準備ができるのを待ちます。\n"
+"この要塞はすでにかなり協力で多くの土地を占領しています。\n"
+"しかしさらに大きな建物があります。城塞です。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:301
 msgid ""
@@ -587,7 +630,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:68
 msgid "Let's dive right in!"
-msgstr ""
+msgstr "さあはじめよう!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:520
 msgid ""
@@ -693,10 +736,11 @@ msgid ""
 "explained in the introduction campaigns for the three tribes."
 msgstr ""
 "鉱山には食料が必要なことに注意してください。\n"
-"糧食は酒場で生産され、酒場は糧食を生産するために肉、ピタパン、魚を必要とします。\n"
+"糧食は酒場で生産され、酒場は糧食を生産するために肉、ピタパン、\n"
+"魚を必要とします。\n"
 "鉱山で効果的に生産させるには、さらに多くのインフラが必要です。\n"
 "インフラは部族によって異なります。\n"
-"三つの部族の導入キャンペーンでそれらの説明を得ることができます。"
+"三つの部族それぞれの導入キャンペーンで説明を得ることができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:271
 msgid ""
@@ -745,6 +789,10 @@ msgid ""
 "over\n"
 "the route the road takes like so:"
 msgstr ""
+"さて、道路についてですが、以下のことを覚えておいてください。\n"
+"採石場の建設を命じたので、すでに道路敷設モードになっています。\n"
+"敷設するルートをすべて自分で決めたい場合には、\n"
+"目的地まで隣接するフィールドを左クリックで一つずつ選択していきます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
@@ -778,12 +826,14 @@ msgid ""
 msgstr ""
 "さて、最後の話題に移りましょう。\n"
 "兵士と、彼らの訓練と彼らの職業、戦争についての話をします。\n"
-"前述したように、Widelandsは築き上げることが目的で、破壊が目的ではありません。\n"
+"前述したように、Widelandsは築き上げることが目的で、\n"
+"破壊が目的ではありません。\n"
 "したがって、戦争は軍事戦略というよりも経済に焦点が当てられたものです。\n"
 "しかし、戦争は他のプレイヤーに挑戦する一つの方法を提供しており、\n"
 "それは説明に値するいくつかのゲームの仕組みを持っています。\n"
 "部族の経済は、個々のチュートリアルキャンペーンで説明されています。\n"
-"では、ここから北東に訓練所と倉庫があるちょっとしたトレーニング場所を作ります。"
+"では、ここから北東に訓練所と倉庫があるちょっとしたトレーニング場所を\n"
+"作ります。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:327
 msgid ""
@@ -870,6 +920,8 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
 msgstr ""
+"このチュートリアルをプレイしてくれてありがとうございます。\n"
+"Widelandsを楽しみ、サイトに訪れることを忘れないでください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:137
 msgid ""
@@ -890,6 +942,10 @@ msgid ""
 "damage\n"
 "when he succeeds to hit an enemy. For each attack level, he gains 7 damage."
 msgstr ""
+"敵に攻撃が成功したときに与えるダメージの量です。\n"
+"攻撃力のレベル0がの兵士が攻撃に成功した場合、\n"
+"敵に最大14ポイントのダメージを与えます。\n"
+"攻撃力のレベルが上がるたびに7ダメージ増加します。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:335
 msgid ""
@@ -972,6 +1028,8 @@ msgid ""
 "hitpoints,\n"
 "with each hitpoint level he gains 28 hitpoints."
 msgstr ""
+"兵士の体力です。バーバリアンの兵士のヒットポイントは130からはじまり、\n"
+"レベルが上がるたびに28ポイントずつ増えます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:279
 msgid ""
@@ -1040,6 +1098,11 @@ msgid ""
 "symbols which symbolize the individual soldier's current levels in the four\n"
 "different categories hitpoints, attack, defense and evade."
 msgstr ""
+"訓練所に向かっている兵士たちを見てみましょう。\n"
+"彼らは、通常の労働者とは違って見えます。\n"
+"彼らは、頭上に残りヒットポイントが表示されるヘルスバーを持っており、\n"
+"また、四つの異なる能力の(ヒットポイント、攻撃力、防御力、回避力)の\n"
+"現在のレベルを示す四つのシンボルを持っています。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:108
 msgid ""
@@ -1074,6 +1137,13 @@ msgid ""
 "fun\n"
 "playing!"
 msgstr ""
+"これでチュートリアルは終わりです。ここでは取り上げていないものがいくつかあります。\n"
+"生産する建物がWidelandsで最も重要なものであるにもかかわらず、\n"
+"一つも生産する建物を建設していません。\n"
+"残りについては個々の部族の導入キャンペーンを通じて学ぶことができます。\n"
+"Widelandsのバックグラウンドストーリーを紹介しながら、\n"
+"部族とその経済を説明するいくつかのシナリオでキャンペーンは構成されています。\n"
+"楽しんで遊んでください!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:602
 msgid "Trainings camp and soldier stats"
@@ -1108,18 +1178,18 @@ msgid ""
 "fourth one from the left. Or you can use the SPACE key to toggle it."
 msgstr ""
 "木こり小屋に適した場所を見つける必要があります。\n"
-"簡単に見つけるには、ビルドヘルプを有効にしてください。\n"
+"簡単に見つけるには、ビルドヘルプを有効にします。\n"
 "ビルドヘルプを有効にするには二つの方法があります。\n"
 "画面下部の左から4番目のビルドヘルプのボタンをクリックして切り替えるか、\n"
 "SPACEキーで切り替えてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:54
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Widelandsにようこそ!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:52
 msgid "Welcome to the Widelands tutorial!"
-msgstr "Wirelandsのチュートリアルにようこそ!"
+msgstr "Widelandsのチュートリアルにようこそ!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:450
 msgid ""
@@ -1162,7 +1232,7 @@ msgstr ""
 "そしてそれらを区別するのが難しい場合があります。\n"
 "Widelandsは、建物の上にテキストラベルを表示する機能を提供しています。\n"
 "それはセンサスと呼ばれ、cキーを押す、\n"
-"または任意のフィールドの監視タブのボタンを押すことで切り替えることができます。"
+"または任意のフィールド上で監視タブのボタンを押すことで切り替えることができます。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
 msgid ""
@@ -1204,6 +1274,8 @@ msgid ""
 "like.\n"
 "To leave this game and return to the main menu click on the"
 msgstr ""
+"このマップを続けて遊ぶこともできますし、好きなときに止めることができます。\n"
+"ゲームを終了し、メインメニューに戻るには、"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:59
 msgid "You can dismiss this box by left-clicking on the button below."
@@ -1276,7 +1348,7 @@ msgstr "旗を立てるシンボル"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:713
 msgid "exit game button."
-msgstr ""
+msgstr "ゲームを終了するボタンをクリックしてください。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:586
 msgid ""
@@ -1293,7 +1365,7 @@ msgstr "何も見つからなかった"
 msgid ""
 "options menu button on the very left at the bottom of the screen.\n"
 "Then click the"
-msgstr ""
+msgstr "画面下部の一番左のオプションメニューボタンをクリックし、"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:304
 msgid "the abort symbol."
