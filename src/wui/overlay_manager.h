@@ -75,7 +75,7 @@ struct Overlay_Manager {
 		uint32_t id;
 	};
 	struct Overlay_Info {
-		PictureID picid;
+		IPicture* picid;
 		Point hotspot;
 	};
 
@@ -120,15 +120,13 @@ struct Overlay_Manager {
 	 */
 	void register_overlay
 		(Widelands::TCoords<>,
-		 PictureID picid,
+		 const IPicture* picid,
 		 int32_t level,
 		 Point   hotspot = Point::invalid(),
 		 Job_Id          = Job_Id::Null());
 
-	//  if picid == -1 remove all overlays
-	void remove_overlay
-		(Widelands::TCoords<>, PictureID picid = g_gr->get_no_picture());
-
+	// removes all overlays when picid is zero
+	void remove_overlay(Widelands::TCoords<>, const IPicture* picid);
 	void remove_overlay(Job_Id);
 
 	uint8_t get_overlays(Widelands::FCoords c, Overlay_Info *) const;
@@ -169,7 +167,7 @@ private:
 	struct Registered_Overlays {
 		Registered_Overlays
 			(const Job_Id    Jobid,
-			 const PictureID Picid,
+			 const IPicture* Picid,
 			 const Point     Hotspot,
 			 const int32_t   Level)
 			:
@@ -180,7 +178,7 @@ private:
 			jobids.insert(Jobid);
 		}
 		std::set<Job_Id> jobids;
-		PictureID picid;
+		const IPicture*  picid;
 		Point            hotspot;
 		int32_t level;
 	};

@@ -75,9 +75,9 @@ private:
 	UI::Button   * m_decrease_max_fill;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
-	PictureID        m_icon;            //< Index to ware's picture
-	PictureID        m_icon_grey;
-	PictureID        m_max_fill_indicator;
+	IPicture* m_icon;            //< Index to ware's picture
+	IPicture* m_icon_grey;
+	IPicture* m_max_fill_indicator;
 
 
 	uint32_t         m_cache_size;

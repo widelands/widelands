@@ -34,7 +34,7 @@ Item_Ware_Descr::Item_Ware_Descr
 	m_tribe(tribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
-	m_icon(g_gr ? g_gr->get_picture(PicMod_UI, "pics/but0.png") : PictureID()) // because of dedicated
+	m_icon(g_gr ? g_gr->get_picture(PicMod_UI, "pics/but0.png") : 0) // because of dedicated
 {
 	m_default_target_quantity =
 		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());

@@ -65,17 +65,17 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 	m_checkboxes.resize(nr_terrains);
 
-	const PictureID green =
+	const IPicture* green =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
-	const PictureID water =
+	const IPicture* water =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
-	const PictureID mountain =
+	const IPicture* mountain =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png");
-	const PictureID dead =
+	const IPicture* dead =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png");
-	const PictureID unpassable =
+	const IPicture* unpassable =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png");
-	const PictureID dry =
+	const IPicture* dry =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
 #define small_pich 20
 #define small_picw 20
@@ -95,7 +95,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-			PictureID picture;
+			IPicture* picture;
 
 			// If offscreen rendering is not available only the terrain (and not
 			// the terrain type) is shown.

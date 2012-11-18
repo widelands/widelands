@@ -21,7 +21,6 @@
 
 #include <boost/scoped_array.hpp>
 
-#include "graphic/picture_id.h"
 #include "graphic/pixelaccess.h"
 #include "graphic/surface.h"
 
@@ -59,8 +58,8 @@ struct GLSurfaceScreen : Surface, IPixelAccess {
 		 int32_t x2, int32_t y2,
 		 RGBColor, uint8_t width);
 
-	virtual void blit(Point, PictureID, Rect srcrc, Composite cm);
-	virtual void fast_blit(PictureID);
+	virtual void blit(Point, const IPicture* , Rect srcrc, Composite cm);
+	virtual void fast_blit(const IPicture* );
 	//@}
 
 private:

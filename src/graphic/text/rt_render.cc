@@ -323,10 +323,10 @@ uint32_t TextNode::hotspot_y() {
 IBlitableSurface* TextNode::render(IGraphic & gr) {
 	// TODO(sirver): who owns this surface?
 	// TODO(sirver): what about the image?
-	IPicture* img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
+	const IPicture* img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
 	IBlitableSurface* rv = gr.create_surface(img->get_w(), img->get_h());
 	// TODO(sirver): next line, remove the construction of a picture ID
-	rv->blit(Point(0,0), *img, Rect(0, 0, img->get_w(), img->get_h()), CM_Copy);
+	rv->blit(Point(0,0), img, Rect(0, 0, img->get_w(), img->get_h()), CM_Copy);
 	return rv;
 }
 
@@ -346,7 +346,7 @@ private:
 	bool m_expanding;
 };
 IBlitableSurface* FillingTextNode::render(IGraphic & gr) {
-	IPicture* t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
+	const IPicture* t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
 	IBlitableSurface* rv = gr.create_surface(m_w, m_h);
 	for (uint32_t x = 0; x < m_w; x += t->get_w()) {
 		Rect srcrect(
@@ -354,7 +354,7 @@ IBlitableSurface* FillingTextNode::render(IGraphic & gr) {
 				min(static_cast<uint32_t>(t->get_w()), m_w - x),
 				m_h
 		);
-		rv->blit(Point(x,0), *t, srcrect, CM_Solid);
+		rv->blit(Point(x,0), t, srcrect, CM_Solid);
 	}
 	// TODO(sirver): need to free t?
 	return rv;
@@ -418,7 +418,7 @@ public:
 				dst.y = 0;
 				srcrect.w = min(static_cast<uint32_t>(m_bg->get_w()), m_w - x);
 				srcrect.h = m_h;
-				rv->blit(dst, *m_bg, srcrect, CM_Solid);
+				rv->blit(dst, m_bg, srcrect, CM_Solid);
 			}
 		}
 		return rv;
@@ -426,20 +426,20 @@ public:
 	virtual bool is_expanding() {return m_expanding;}
 	virtual void set_w(uint32_t w) {m_w = w;}
 
-	void set_background(IPicture* s) {
+	void set_background(const IPicture* s) {
 		// TODO(sirver): who owns this?
 		m_bg = s; m_h = s->get_h();
 	}
 
 private:
 	uint32_t m_w, m_h;
-	IPicture* m_bg;
+	const IPicture* m_bg;
 	bool m_expanding;
 };
 
 class SubTagRenderNode : public RenderNode {
 public:
-	SubTagRenderNode(NodeStyle & ns) : RenderNode(ns), m_bg_img(0), m_bg_clr(0,0,0) {
+	SubTagRenderNode(NodeStyle & ns) : RenderNode(ns), m_bg_clr(0,0,0), m_bg_img(0) {
 	}
 
 	virtual uint32_t width() {return m_w + m_margin.left + m_margin.right;}
@@ -467,7 +467,7 @@ public:
 					dst.x = x; dst.y = y;
 					src.w = min(static_cast<uint32_t>(m_bg_img->get_w()), m_w + m_margin.left - x);
 					src.h = min(static_cast<uint32_t>(m_bg_img->get_h()), m_h + m_margin.top - y);
-					rv->blit(dst, *m_bg_img, src, CM_Solid);
+					rv->blit(dst, m_bg_img, src, CM_Solid);
 				}
 			}
 			set_alpha = false;
@@ -482,7 +482,7 @@ public:
 			Rect src = Rect(0, 0, rv->get_w(), rv->get_h());
 
 			// TODO(sirver): conversion should not be necessary here
-			rv->blit(dst, *nsur, src, set_alpha ? CM_Solid : CM_Normal);
+			rv->blit(dst, nsur, src, set_alpha ? CM_Solid : CM_Normal);
 			// TODO(sirver): Free nsur
 			// SDL_FreeSurface(nsur);
 			delete n;
@@ -497,7 +497,7 @@ public:
 		m_w=inner_w; m_h=inner_h; m_margin= margin;
 	}
 	void set_background(RGBColor clr) {m_bg_clr = clr;}
-	void set_background(IPicture* img) {m_bg_img = img;}
+	void set_background(const IPicture* img) {m_bg_img = img;}
 	void set_nodes_to_render(vector<RenderNode*> & n) {m_nodes_to_render=n;}
 	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, string s) {
 		Reference r = { {x, y, w, h}, s };
@@ -509,13 +509,13 @@ private:
 	vector<RenderNode*> m_nodes_to_render;
 	Borders m_margin;
 	RGBColor m_bg_clr;
-	IPicture* m_bg_img; // Owned by the image loader
+	const IPicture* m_bg_img; // Owned by the image loader
 	vector<Reference> m_refs;
 };
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle & ns, IPicture* sur) : RenderNode(ns), m_picture(sur) {
+	ImgRenderNode(NodeStyle & ns, const IPicture* sur) : RenderNode(ns), m_picture(sur) {
 	}
 
 	virtual uint32_t width() {return m_picture->get_w();} // TODO(sirver): should only be w()
@@ -524,14 +524,14 @@ public:
 	virtual IBlitableSurface* render(IGraphic & gr);
 
 private:
-	IPicture* m_picture; // Note: this is not owned by us.
+	const IPicture* m_picture; // Note: this is not owned by us.
 	// TODO(sirver): this should be a reference to an image
 };
 
 IBlitableSurface* ImgRenderNode::render(IGraphic& gr) {
 	IBlitableSurface* rv = gr.create_surface(m_picture->get_w(), m_picture->get_h());
 	// TODO(sirver): Id rather not do this at all or when, then only once
-	rv->blit(Point(0,0), *m_picture, Rect(0, 0, m_picture->get_w(), m_picture->get_h()), CM_Copy);
+	rv->blit(Point(0,0), m_picture, Rect(0, 0, m_picture->get_w(), m_picture->get_h()), CM_Copy);
 	return rv;
 }
 // End: Helper Stuff }}}
@@ -762,7 +762,7 @@ public:
 
 private:
 	string m_fill_text;
-	IPicture* m_bg;
+	const IPicture* m_bg;
 	uint32_t m_space;
 };
 

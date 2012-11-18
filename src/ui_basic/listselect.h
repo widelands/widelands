@@ -63,12 +63,12 @@ struct BaseListselect : public Panel {
 	void add
 		(const char * const name,
 		 uint32_t value,
-		 const PictureID picid = g_gr->get_no_picture(),
+		 const IPicture* picid = g_gr->get_no_picture(),
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string());
 	void add_front
 		(const char * const name,
-		 const PictureID picid = g_gr->get_no_picture(),
+		 const IPicture* picid = g_gr->get_no_picture(),
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string());
 	void remove(uint32_t);
@@ -133,7 +133,7 @@ private:
 		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
-		PictureID picid;
+		IPicture* picid;
 		std::string name;
 		std::string tooltip;
 	};
@@ -149,7 +149,7 @@ private:
 	int32_t m_last_click_time;
 	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
-	PictureID m_check_picid;
+	IPicture* m_check_picid;
 
 	std::string m_fontname;
 	uint32_t    m_fontsize;
@@ -170,7 +170,7 @@ struct Listselect : public BaseListselect {
 	void add
 		(const char * const name,
 		 Entry value,
-		 const PictureID picid = g_gr->get_no_picture(),
+		 const IPicture* picid = g_gr->get_no_picture(),
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string())
 	{
@@ -180,7 +180,7 @@ struct Listselect : public BaseListselect {
 	void add_front
 		(const char * const name,
 		 Entry value,
-		 const PictureID picid = g_gr->get_no_picture(),
+		 const IPicture* picid = g_gr->get_no_picture(),
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string())
 	{
@@ -225,7 +225,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add
 		(const char * const name,
 		 Entry      &       value,
-		 const PictureID picid = g_gr->get_no_picture(),
+		 const IPicture* picid = g_gr->get_no_picture(),
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string())
 	{
@@ -234,7 +234,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add_front
 		(const char * const name,
 		 Entry      &       value,
-		 const PictureID picid = g_gr->get_no_picture(),
+		 const IPicture* picid = g_gr->get_no_picture(),
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string())
 	{

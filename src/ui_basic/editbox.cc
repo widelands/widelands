@@ -42,7 +42,7 @@ struct EditBoxImpl {
 	/*@}*/
 
 	/// Background tile style.
-	PictureID background;
+	IPicture* background;
 
 	/// Maximum number of characters in the input
 	uint32_t maxLength;
@@ -63,7 +63,7 @@ struct EditBoxImpl {
 EditBox::EditBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const PictureID & background,
+	 const IPicture* background,
 	 Align _align)
 	:
 	Panel(parent, x, y, w, h),

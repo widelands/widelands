@@ -39,7 +39,7 @@ struct Tab : public NamedPanel {
 		(Tab_Panel * parent,
 		 uint32_t,
 		 std::string const & name,
-		 PictureID,
+		 const IPicture* ,
 		 std::string const & gtooltip,
 		 Panel             * gpanel);
 
@@ -50,7 +50,7 @@ private:
 	Tab_Panel * m_parent;
 	uint32_t    m_id;
 
-	PictureID   picid;
+	const IPicture* picid;
 	std::string tooltip;
 	Panel     * panel;
 };
@@ -68,16 +68,16 @@ private:
 struct Tab_Panel : public Panel {
 	friend struct Tab;
 
-	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
+	Tab_Panel(Panel * parent, int32_t x, int32_t y, const IPicture* background);
 	// For Fullscreen menus
 	Tab_Panel
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 PictureID background);
+		 const IPicture* background);
 
 	uint32_t add
 		(std::string const & name,
-		 PictureID           picid,
+		 const IPicture* picid,
 		 Panel             * panel,
 		 std::string const & tooltip = std::string());
 
@@ -107,7 +107,7 @@ private:
 	uint32_t         m_active;         ///< index of the currently active tab
 	int32_t          m_highlight;      ///< index of the highlighted button
 
-	PictureID        m_pic_background; ///< picture used to draw background
+	const IPicture* m_pic_background; ///< picture used to draw background
 };
 };
 

@@ -261,7 +261,7 @@ void SurfaceSDL::clear() {
 
 
 void SurfaceSDL::blit
-	(Point const dst, PictureID src, Rect const srcrc, Composite cm)
+	(Point const dst, const IPicture* src, Rect const srcrc, Composite cm)
 {
 	upcast(SurfaceSDL, sdlsurf, src.get());
 	assert(sdlsurf);
@@ -288,7 +288,7 @@ void SurfaceSDL::blit
 /*
  * Fast blit, simply copy the source to the destination
  */
-void SurfaceSDL::fast_blit(PictureID const src) {
+void SurfaceSDL::fast_blit(IPicture* src) {
 	SDL_BlitSurface
 		(dynamic_cast<SurfaceSDL *>(src.get())->get_sdl_surface(),
 		 0, m_surface, 0);

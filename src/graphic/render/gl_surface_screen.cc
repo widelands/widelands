@@ -256,7 +256,7 @@ void GLSurfaceScreen::clear()
 
 
 void GLSurfaceScreen::blit
-	(Point const dst, PictureID const src, Rect const srcrc, Composite cm)
+	(Point const dst, const IPicture* src, Rect const srcrc, Composite cm)
 {
 	upcast(GLPictureTexture, oglsrc, src.get());
 	assert(oglsrc);
@@ -307,7 +307,7 @@ void GLSurfaceScreen::blit
 	glLoadIdentity();
 }
 
-void GLSurfaceScreen::fast_blit(PictureID src)
+void GLSurfaceScreen::fast_blit(IPicture* src)
 {
 	blit(Point(0, 0), src, Rect(Point(0, 0), src->get_w(), src->get_h()), CM_Normal);
 }

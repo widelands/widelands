@@ -24,7 +24,6 @@
 #include "point.h"
 #include "rgbcolor.h"
 #include "graphic.h"
-#include "picture_id.h"
 
 #include <SDL_ttf.h>
 

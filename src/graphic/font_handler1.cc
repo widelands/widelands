@@ -121,7 +121,7 @@ void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::str
 	if (!text_surface)
 		return;
 
-	PictureID p = g_gr->convert_sdl_surface_to_picture(text_surface, true);
+	IPicture* p = g_gr->convert_sdl_surface_to_picture(text_surface, true);
 
 	if (align & Align_HCenter) dstpoint.x -= p->get_w() / 2;
 	else if (align & Align_Right) dstpoint.x -= p->get_w();

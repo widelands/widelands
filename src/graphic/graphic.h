@@ -28,7 +28,6 @@
 
 #include "animation_gfx.h"
 #include "igraphic.h"
-#include "picture_id.h"
 #include "rect.h"
 #include "surfaceptr.h"
 
@@ -46,7 +45,7 @@ struct SDL_Surface;
 struct SDL_Rect;
 
 //@{
-/// This table is used by create_grayed_out_pic()to map colors to grayscle. It
+/// This table is used by create_grayed_out_pic()to map colors to grayscale. It
 /// is initialized in Graphic::Graphic().
 extern uint32_t luminance_table_r[0x100];
 extern uint32_t luminance_table_g[0x100];
@@ -109,6 +108,7 @@ struct Graphic : public virtual IGraphic {
 	int32_t get_xres() const;
 	int32_t get_yres() const;
 	RenderTarget * get_render_target();
+	// TODO(sirver): no fan of rendertarget
 	void toggle_fullscreen();
 	void update_fullscreen();
 	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
@@ -120,29 +120,29 @@ struct Graphic : public virtual IGraphic {
 
 	void flush(PicMod module);
 	void flush_animations();
-	virtual PictureID load_image(const std::string&, bool alpha = false);
-	virtual const PictureID & get_picture(PicMod, const std::string&, bool alpha = true)
+	virtual IPicture* load_image(const std::string&, bool alpha = false);
+	virtual const IPicture* get_picture(PicMod, const std::string&, bool alpha = true)
 		__attribute__ ((pure));
-	virtual void add_picture_to_cache(PicMod, const std::string&, PictureID);
-	const PictureID & get_no_picture() const;
+	virtual void add_picture_to_cache(PicMod, const std::string&, IPicture* );
+	const IPicture* get_no_picture() const {return 0;} // TODO(sirver): remove function
 
 	void get_picture_size
-		(const PictureID & pic, uint32_t & w, uint32_t & h) const;
-	PictureID get_offscreen_picture(OffscreenSurfacePtr surface) const;
+		(const IPicture* pic, uint32_t & w, uint32_t & h) const;
+	IPicture* get_offscreen_picture(OffscreenSurfacePtr surface) const;
 
-	void save_png(const PictureID &, StreamWrite *) const;
+	void save_png(const IPicture* , StreamWrite *) const;
 	void save_png(SurfacePtr surf, StreamWrite *) const;
 	void save_png(IPixelAccess & pix, StreamWrite *) const;
 
-	virtual PictureID convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
+	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 
 	IBlitableSurface * create_surface(int32_t w, int32_t h);
 	OffscreenSurfacePtr create_offscreen_surface(int32_t w, int32_t h);
-	PictureID create_picture(int32_t w, int32_t h, bool alpha = false);
+	IPicture* create_picture(int32_t w, int32_t h, bool alpha = false);
 
-	PictureID create_grayed_out_pic(const PictureID & picid);
-	PictureID create_changed_luminosity_pic
-		(const PictureID & picid, const float factor, const bool halve_alpha = false);
+	IPicture* create_grayed_out_pic(const IPicture* picid);
+	IPicture* create_changed_luminosity_pic
+		(const IPicture* picid, const float factor, const bool halve_alpha = false);
 
 	enum  ResizeMode {
 		// do not worry about proportions, just sketch to requested size
@@ -155,8 +155,8 @@ struct Graphic : public virtual IGraphic {
 		ResizeMode_Average,
 	};
 
-	PictureID get_resized_picture
-		(PictureID, uint32_t w, uint32_t h, ResizeMode);
+	IPicture* get_resized_picture
+		(IPicture* , uint32_t w, uint32_t h, ResizeMode);
 
 	uint32_t get_maptexture(char const & fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
@@ -178,8 +178,8 @@ struct Graphic : public virtual IGraphic {
 	AnimationGfx * get_animation(uint32_t);
 
 	void set_world(std::string);
-	PictureID get_road_texture(int32_t roadtex);
-	PictureID get_edge_texture();
+	IPicture* get_road_texture(int32_t roadtex);
+	IPicture* get_edge_texture();
 
 	GraphicCaps const & caps() const throw () {return m_caps;}
 
@@ -214,7 +214,7 @@ protected:
 	GraphicCaps m_caps;
 
 	struct PictureRec {
-		PictureID picture;
+		IPicture* picture;
 
 		/// bit-mask of modules that this picture exists in
 		uint32_t modules;
@@ -227,7 +227,7 @@ protected:
 	Picturemap m_picturemap;
 
 	Road_Textures * m_roadtextures;
-	PictureID m_edgetexture;
+	IPicture* m_edgetexture;
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
 };

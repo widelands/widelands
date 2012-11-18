@@ -20,12 +20,12 @@
 #include "graphic.h"
 
 #include "build_info.h"
+#include "container_iterate.h"
 #include "diranimations.h"
-#include "wexception.h"
 #include "i18n.h"
 #include "log.h"
-#include "container_iterate.h"
 #include "upcast.h"
+#include "wexception.h"
 
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -452,7 +452,8 @@ void Graphic::flush_animations() {
 }
 
 
-PictureID Graphic::load_image(std::string const & fname, bool const alpha) {
+// TODO(sirver): Only the conversion is graphic specific
+IPicture* Graphic::load_image(std::string const & fname, bool const alpha) {
 	//log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
 	FileRead fr;
 	SDL_Surface * sdlsurf;
@@ -475,7 +476,8 @@ PictureID Graphic::load_image(std::string const & fname, bool const alpha) {
  *
  * \return 0 (a null-picture) if the picture cannot be loaded.
 */
-const PictureID & Graphic::get_picture
+// TODO(sirver): should signal error in some way
+const IPicture* Graphic::get_picture
 	(PicMod const module, const std::string & fname, bool alpha)
 {
 	//  Check if the picture is already loaded.
@@ -490,7 +492,7 @@ const PictureID & Graphic::get_picture
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (std::exception const & e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
-			return get_no_picture();
+			return 0;
 		}
 
 		it = m_picturemap.insert(std::make_pair(fname, rec)).first;
@@ -501,11 +503,12 @@ const PictureID & Graphic::get_picture
 }
 
 /**
- * Add the given picture to the cache under the given name.
+ * Add the given picture to the cache under the given name. The graphics object takes ownership
+ * of the object.
  *
  * This overwrites pre-existing cache entries, if any.
  */
-void Graphic::add_picture_to_cache(PicMod module, const std::string & name, PictureID pic)
+void Graphic::add_picture_to_cache(PicMod module, const std::string & name, IPicture* pic)
 {
 	PictureRec rec;
 	rec.picture = pic;
@@ -514,20 +517,12 @@ void Graphic::add_picture_to_cache(PicMod module, const std::string & name, Pict
 }
 
 /**
- * \return an empty, invalid, null picture
- */
-const PictureID & Graphic::get_no_picture() const
-{
-	return IPicture::null();
-}
-
-/**
  * Produces a resized version of the specified picture
  *
  * Might return same id if dimensions are the same
  */
-PictureID Graphic::get_resized_picture
-	(PictureID src,
+IPicture* Graphic::get_resized_picture
+	(IPicture* src,
 	 uint32_t const w, uint32_t const h,
 	 ResizeMode const mode)
 {
@@ -704,7 +699,7 @@ SDL_Surface * Graphic::extract_sdl_surface(IPixelAccess & pix, Rect srcrect)
  * Throws an exception if the picture doesn't exist.
 */
 void Graphic::get_picture_size
-	(const PictureID & pic, uint32_t & w, uint32_t & h) const
+	(const IPicture* pic, uint32_t & w, uint32_t & h) const
 {
 	w = pic->get_w();
 	h = pic->get_h();
@@ -714,7 +709,7 @@ void Graphic::get_picture_size
  * This is purely a convenience function intended to allow casting
  * pointers without including a whole bunch of headers.
  */
-PictureID Graphic::get_offscreen_picture(OffscreenSurfacePtr surface) const
+IPicture* Graphic::get_offscreen_picture(OffscreenSurfacePtr surface) const
 {
 	return surface;
 }
@@ -812,14 +807,14 @@ void Graphic::save_png(SurfacePtr surf, StreamWrite * sw) const
 }
 
 /**
- * Saves a PictureID to a png. This can be a file or part of a stream. This
- * function retrieves the Surface for the PictureID and calls
+ * Saves a IPicture* to a png. This can be a file or part of a stream. This
+ * function retrieves the Surface for the IPicture* and calls
  * save_png(Surface, StreamWrite)
  *
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
+void Graphic::save_png(const IPicture* pic_index, StreamWrite * sw) const
 {
 	save_png(pic_index->pixelaccess(), sw);
 }
@@ -832,12 +827,13 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * sw) const
  * @param alpha if true the surface is created with alpha channel
  * @return the new Surface created from the SDL_Surface
  */
-PictureID Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
+// TODO(sirver): this function can be in Picture. This would clean up the design
+IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
 {
 #ifdef USE_OPENGL
 	if (g_opengl)
 	{
-		return PictureID(new GLPictureTexture(surf));
+		return new GLPictureTexture(surf);
 	} else
 #endif
 	{
@@ -847,7 +843,7 @@ PictureID Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 		else
 			surface = SDL_DisplayFormat(surf);
 		SDL_FreeSurface(surf);
-		return PictureID(new SurfaceSDL(*surface));
+		return new IPicture(new SurfaceSDL(*surface));
 	}
 }
 
@@ -897,12 +893,12 @@ IBlitableSurface * Graphic::create_surface(int32_t w, int32_t h) {
  * @param alpha if true the surface is created with alpha channel
  * @return the new created surface
  */
-PictureID Graphic::create_picture(int32_t w, int32_t h, bool alpha)
+IPicture* Graphic::create_picture(int32_t w, int32_t h, bool alpha)
 {
 #ifdef USE_OPENGL
 	if (g_opengl)
 	{
-		return PictureID(new GLPictureTexture(w, h));
+		return new IPicture(new GLPictureTexture(w, h));
 	}
 	else
 #endif
@@ -918,7 +914,7 @@ PictureID Graphic::create_picture(int32_t w, int32_t h, bool alpha)
 			SDL_FreeSurface(&tsurf);
 			return OffscreenSurfacePtr(new SurfaceSDL(surf));
 		}
-		return PictureID(new SurfaceSDL(tsurf));
+		return new IPicture(new SurfaceSDL(tsurf));
 	}
 }
 
@@ -926,20 +922,20 @@ PictureID Graphic::create_picture(int32_t w, int32_t h, bool alpha)
 /**
  * Create a grayed version of the given picture.
  *
- * @param picid the PictureID ot to grayed out
+ * @param picture to be grayed out
  * @return the gray version of the picture
  */
-PictureID Graphic::create_grayed_out_pic(const PictureID & picid)
+IPicture* Graphic::create_grayed_out_pic(const IPicture* picid)
 {
 	if (!picid || !picid->valid())
-		return get_no_picture();
+		return 0;
 
 	IPixelAccess & origpix = picid->pixelaccess();
 	uint32_t w = picid->get_w();
 	uint32_t h = picid->get_h();
 	const SDL_PixelFormat & origfmt = origpix.format();
 
-	PictureID destpicture = create_picture(w, h, origfmt.Amask);
+	IPicture* destpicture = create_picture(w, h, origfmt.Amask);
 	IPixelAccess & destpix = destpicture->pixelaccess();
 	const SDL_PixelFormat & destfmt = destpix.format();
 
@@ -976,23 +972,23 @@ PictureID Graphic::create_grayed_out_pic(const PictureID & picid)
 /**
  * Creates an picture with changed luminosity from the given picture.
  *
- * @param picid the PictureID of the picture to modify
+ * @param picture to modify
  * @param factor the factor the luminosity should be changed by
  * @param half_alpha whether the opacity should be halved or not
  * @return a new picture with 50% luminosity
  */
-PictureID Graphic::create_changed_luminosity_pic
-	(const PictureID & picid, const float factor, const bool halve_alpha)
+IPicture* Graphic::create_changed_luminosity_pic
+	(const IPicture* picid, const float factor, const bool halve_alpha)
 {
 	if (!picid || !picid->valid())
-		return get_no_picture();
+		return 0;
 
 	IPixelAccess & origpix = picid->pixelaccess();
 	uint32_t w = picid->get_w();
 	uint32_t h = picid->get_h();
 	const SDL_PixelFormat & origfmt = origpix.format();
 
-	PictureID destpicture = create_picture(w, h, origfmt.Amask);
+	IPicture* destpicture = create_picture(w, h, origfmt.Amask);
 	IPixelAccess & destpix = destpicture->pixelaccess();
 	const SDL_PixelFormat & destfmt = destpix.format();
 
@@ -1110,7 +1106,7 @@ void Graphic::get_animation_size
 		w = h = 0;
 	} else {
 		// Get the frame and its data. Ignore playerclrs.
-		const PictureID & frame =
+		const IPicture* frame =
 			gfx->get_frame((time / data->frametime) % gfx->nr_frames());
 		w = frame->get_w();
 		h = frame->get_h();
@@ -1205,7 +1201,7 @@ void Graphic::set_world(std::string worldname) {
  * if not done yet.
  * \return The road texture
  */
-PictureID Graphic::get_road_texture(int32_t const roadtex)
+IPicture* Graphic::get_road_texture(int32_t const roadtex)
 {
 	return
 		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
@@ -1215,7 +1211,7 @@ PictureID Graphic::get_road_texture(int32_t const roadtex)
  * Returns the alpha mask texture for edges.
  * \return The edge texture (alpha mask)
  */
-PictureID Graphic::get_edge_texture()
+IPicture* Graphic::get_edge_texture()
 {
 	return m_edgetexture;
 }

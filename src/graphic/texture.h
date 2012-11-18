@@ -21,7 +21,6 @@
 #define TEXTURE_H
 
 #include "colormap.h"
-#include "picture_id.h"
 
 #include "graphic/render/gl_picture_texture.h"
 
@@ -33,8 +32,8 @@
  * This contains all the road textures needed to render roads
  */
 struct Road_Textures {
-	PictureID pic_road_normal;
-	PictureID pic_road_busy;
+	IPicture* pic_road_normal;
+	IPicture* pic_road_busy;
 };
 
 /** struct Texture

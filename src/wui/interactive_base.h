@@ -130,7 +130,7 @@ private:
 			 		 Widelands::TCoords<>
 			 		 	(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
-			 const PictureID Pic                     = g_gr->get_no_picture(),
+			 const IPicture* Pic                     = g_gr->get_no_picture(),
 			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
 			:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
@@ -140,7 +140,7 @@ private:
 		bool              triangles; //  otherwise nodes
 		Widelands::Node_and_Triangle<>     pos;
 		uint32_t              radius;
-		PictureID             pic;
+		const IPicture* pic;
 		Overlay_Manager::Job_Id jobid;
 	} m_sel;
 

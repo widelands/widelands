@@ -74,7 +74,7 @@ m_click_recursion_protect(false)
 			height = h;
 	}
 
-	const PictureID tab_icon =
+	const IPicture* tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 	Point pos;
 	uint32_t cur_x = bobs_in_row;

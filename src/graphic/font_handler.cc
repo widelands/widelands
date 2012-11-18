@@ -58,7 +58,7 @@ struct LineCacheEntry {
 	/*@}*/
 
 	/*@{*/
-	PictureID picture;
+	IPicture* picture;
 	uint32_t width;
 	uint32_t height;
 	/*@}*/
@@ -275,7 +275,7 @@ void Font_Handler::draw_caret
 
 	int caret_x = style.calc_bare_width(sub);
 
-	PictureID caretpic = g_gr->get_picture(PicMod_UI, "pics/caret.png");
+	IPicture* caretpic = g_gr->get_picture(PicMod_UI, "pics/caret.png");
 	Point caretpt;
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->get_w();
 	caretpt.y = dstpoint.y + (style.font->height() - caretpic->get_h()) / 2;

@@ -50,7 +50,7 @@ public:
 	virtual ~IGraphic() { };
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) = 0;
 	virtual IPicture* load_image(std::string const &, bool alpha = false) = 0;
-	virtual const IPicture & get_picture(PicMod, std::string const &, bool alpha = true) = 0;
+	virtual const IPicture* get_picture(PicMod, std::string const &, bool alpha = true) = 0;
 	virtual void add_picture_to_cache(PicMod, const std::string &, IPicture*) = 0; // TODO(sirver): Really needed?
 	virtual IBlitableSurface * create_surface(int32_t w, int32_t h) = 0;
 };

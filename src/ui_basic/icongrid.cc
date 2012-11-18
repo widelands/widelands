@@ -35,8 +35,8 @@ struct IconGridButton : public Button {
 		(Icon_Grid         & parent,
 		 std::string const & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_pictute_id,
-		 const PictureID foreground_picture_id,
+		 const IPicture* background_pictute_id,
+		 const IPicture* foreground_picture_id,
 		 const uint32_t callback_argument_id,
 		 Textarea          & ta, std::string const & descr)
 		:
@@ -87,7 +87,7 @@ Icon_Grid::Icon_Grid
  * Returns the index of the newly added icon.
 */
 int32_t Icon_Grid::add
-	(std::string const & name, PictureID const picid,
+	(std::string const & name, const IPicture* picid,
 	 void * const data, std::string const & descr)
 {
 	Item it;

@@ -100,11 +100,11 @@ private:
 
 	std::string m_title;
 
-	PictureID m_pic_lborder;
-	PictureID m_pic_rborder;
-	PictureID m_pic_top;
-	PictureID m_pic_bottom;
-	PictureID m_pic_background;
+	IPicture* m_pic_lborder;
+	IPicture* m_pic_rborder;
+	IPicture* m_pic_top;
+	IPicture* m_pic_bottom;
+	IPicture* m_pic_background;
 
 	Panel * m_center_panel;
 	Panel * m_fastclick_panel;

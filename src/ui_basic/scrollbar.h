@@ -97,10 +97,10 @@ private:
 	int32_t   m_time_nextact;
 	int32_t   m_knob_grabdelta; ///< only while m_pressed == Knob
 
-	PictureID m_pic_minus;      ///< left/up
-	PictureID m_pic_plus;       ///< right/down
-	PictureID m_pic_background;
-	PictureID m_pic_buttons;
+	IPicture* m_pic_minus;      ///< left/up
+	IPicture* m_pic_plus;       ///< right/down
+	IPicture* m_pic_background;
+	IPicture* m_pic_buttons;
 };
 
 }

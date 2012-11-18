@@ -75,7 +75,7 @@ throw (_wexception)
 					if (!surf)
 						continue; //  Illegal pic. Skip it.
 
-					PictureID const picture = g_gr->convert_sdl_surface_to_picture(surf);
+					IPicture* picture = g_gr->convert_sdl_surface_to_picture(surf);
 
 					std::string picname = FileSystem::FS_Filename(pname->c_str());
 					picname = "map:" + picname;

@@ -38,14 +38,14 @@ public:
 
 	//@{
 	/// Get width and height
-	virtual uint32_t get_w() = 0; // TODO(sirver): Should only be w()
-	virtual uint32_t get_h() = 0;
+	virtual uint32_t get_w() const = 0; // TODO(sirver): Should only be w()
+	virtual uint32_t get_h() const = 0;
 	//@}
 	//
-	virtual bool valid() = 0;
+	virtual bool valid() const = 0;
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(Point, IPicture&, Rect srcrc, Composite cm = CM_Normal) = 0;
+	virtual void blit(const Point&, const IPicture*, Rect srcrc, Composite cm = CM_Normal) = 0;
 
 	/// Draws a filled rect to the surface.
 	virtual void fill_rect(Rect, RGBAColor) = 0;

@@ -187,7 +187,7 @@ void RenderTarget::clear()
  * I the source surface contains a alpha channel this is used during
  * the blit.
  */
-void RenderTarget::blit(const Point dst, const PictureID picture, Composite cm)
+void RenderTarget::blit(const Point dst, const IPicture* picture, Composite cm)
 {
 	if (picture->valid())
 		doblit
@@ -199,7 +199,7 @@ void RenderTarget::blit(const Point dst, const PictureID picture, Composite cm)
  * Like \ref blit, but use only a sub-rectangle of the source picture.
  */
 void RenderTarget::blitrect
-	(Point const dst, PictureID const picture, Rect const srcrc, Composite cm)
+	(Point const dst, const IPicture* picture, Rect const srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -214,7 +214,7 @@ void RenderTarget::blitrect
  * The pixel from ofs inside picture is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, PictureID const picture, Point ofs, Composite cm)
+void RenderTarget::tile(Rect r, const IPicture* picture, Point ofs, Composite cm)
 {
 	if (!picture->valid())
 		return;
@@ -305,7 +305,7 @@ void RenderTarget::drawanim
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	const PictureID & frame =
+	const IPicture* frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -337,7 +337,7 @@ void RenderTarget::drawstatic
 	}
 
 	// Get the frame and its data
-	const PictureID & frame =
+	const IPicture* frame =
 		player ?
 		gfx->get_frame
 			(0, player->player_number(), player->get_playercolor())
@@ -345,7 +345,7 @@ void RenderTarget::drawstatic
 		gfx->get_frame
 			(0);
 
-	PictureID dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
+	IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
 
 	dst -= Point(frame->get_w() / 2, frame->get_h() / 2);
 
@@ -374,7 +374,7 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	const PictureID & frame =
+	const IPicture* frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -449,7 +449,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Point dst, PictureID src, Rect srcrc, Composite cm)
+	(Point dst, const IPicture* src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);

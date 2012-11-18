@@ -206,7 +206,7 @@ void GameTips::show_tip(int32_t index) {
 	Rect text_area;
 
 	// try to load a background
-	const PictureID pic_background =
+	const IPicture* pic_background =
 		g_gr->get_picture(PicMod_Menu, m_background_picture.c_str());
 	if (pic_background != g_gr->get_no_picture()) {
 		uint32_t w = 0;

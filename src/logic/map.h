@@ -22,7 +22,6 @@
 
 #include "economy/itransport_cost_calculator.h"
 #include "field.h"
-#include "graphic/picture_id.h"
 #include "objective.h"
 #include "widelands_geometry.h"
 #include "world.h"
@@ -41,6 +40,7 @@
 
 struct Overlay_Manager;
 struct S2_Map_Loader;
+class IPicture;
 
 namespace Widelands {
 
@@ -404,7 +404,7 @@ private:
 		enum Type {
 			PIC,
 		};
-		PictureID   data;
+		IPicture* data;
 		std::string filename;
 		Type        type;
 	};

@@ -99,7 +99,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					PictureID pic = g_gr->load_image(filename, true);
+					IPicture* pic = g_gr->load_image(filename, true);
 					if (width == 0) { //  This is the first frame.
 						width  = pic->get_w();
 						height = pic->get_h();
@@ -179,7 +179,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						PictureID picture = g_gr->load_image(filename, true);
+						IPicture* picture = g_gr->load_image(filename, true);
 						if (width != picture->get_w() or height != picture->get_h())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
@@ -254,17 +254,17 @@ Encodes the given surface into a frame
 void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 {
 	assert(m_plrframes[0].size() == m_pcmasks.size());
-	std::vector<PictureID> & frames = m_plrframes[plr];
+	std::vector<IPicture* > & frames = m_plrframes[plr];
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
-		PictureID origpic = m_plrframes[0][i];
+		IPicture* origpic = m_plrframes[0][i];
 		uint32_t w = origpic->get_w();
 		uint32_t h = origpic->get_h();
 		IPixelAccess & origpix = m_plrframes[0][i]->pixelaccess();
 		IPixelAccess & pcmask = m_pcmasks[i]->pixelaccess();
 
-		PictureID newpicture = g_gr->create_picture(w, h, true);
+		IPicture* newpicture = g_gr->create_picture(w, h, true);
 		IPixelAccess & newpix = newpicture->pixelaccess();
 
 		const SDL_PixelFormat & fmt = origpix.format();

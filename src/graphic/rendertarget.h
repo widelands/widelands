@@ -21,7 +21,6 @@
 #define RENDERTARGET_H
 
 #include "compositemode.h"
-#include "picture_id.h"
 #include "surfaceptr.h"
 #include "rect.h"
 #include "rgbcolor.h"
@@ -67,9 +66,9 @@ struct RenderTarget {
 	void brighten_rect(Rect, int32_t factor);
 	void clear();
 
-	void blit(Point dst, PictureID picture, Composite cm = CM_Normal);
-	void blitrect(Point dst, PictureID picture, Rect src, Composite cm = CM_Normal);
-	void tile(Rect, PictureID picture, Point ofs, Composite cm = CM_Normal);
+	void blit(Point dst, const IPicture* picture, Composite cm = CM_Normal);
+	void blitrect(Point dst, const IPicture* picture, Rect src, Composite cm = CM_Normal);
+	void tile(Rect, const IPicture* picture, Point ofs, Composite cm = CM_Normal);
 
 	void drawanim
 		(Point                     dst,
@@ -96,7 +95,7 @@ struct RenderTarget {
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, PictureID src, Rect srcrc, Composite cm = CM_Normal);
+	void doblit(Point dst, const IPicture* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
 	SurfacePtr m_surface;

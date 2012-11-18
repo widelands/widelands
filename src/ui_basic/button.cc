@@ -35,7 +35,7 @@ Button::Button //  for textual buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 PictureID background_picture_id,
+	 const IPicture* background_picture_id,
 	 std::string const & title_text,
 	 std::string const & tooltip_text,
 	 bool const _enabled, bool const flat)
@@ -68,8 +68,8 @@ Button::Button //  for pictorial buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 PictureID background_picture_id,
-	 const PictureID foreground_picture_id,
+	 const IPicture* background_picture_id,
+	 const IPicture* foreground_picture_id,
 	 const std::string & tooltip_text,
 	 bool const _enabled, bool const flat)
 	:
@@ -104,7 +104,7 @@ Button::~Button()
 /**
  * Sets a new picture for the Button.
 */
-void Button::set_pic(PictureID const picid)
+void Button::set_pic(const IPicture* picid)
 {
 	m_title.clear();
 

@@ -233,7 +233,7 @@ void AbstractWaresDisplay::draw_ware
 	Point p = ware_position(id);
 
 	//  draw a background
-	const PictureID picid =
+	const IPicture* picid =
 		g_gr->get_picture
 			(PicMod_Game,
 			 ware_selected(id) ?  "pics/ware_list_bg_selected.png"
@@ -404,7 +404,7 @@ void WaresMapDisplay::draw(RenderTarget & dst)
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = m_map->find(*j)) != m_map->end()) {
 				//  draw a background
-				const PictureID picid =
+				const IPicture* picid =
 				g_gr->get_picture (PicMod_Game, "pics/ware_list_bg.png");
 				uint32_t w, h;
 				g_gr->get_picture_size(picid, w, h);

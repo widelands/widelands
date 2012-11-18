@@ -39,7 +39,7 @@ struct Statebox : public Panel {
 	Statebox
 		(Panel * parent,
 		 Point,
-		 PictureID picid                  = g_gr->get_no_picture(),
+		 const IPicture* picid                  = 0,
 		 std::string const & tooltip_text = std::string());
 	~Statebox();
 
@@ -81,7 +81,7 @@ private:
 		if (enable)
 			m_flags |= flags;
 	}
-	PictureID    m_pic_graphics;
+	const IPicture* m_pic_graphics;
 };
 
 
@@ -95,7 +95,7 @@ struct Checkbox : public Statebox {
 	Checkbox
 		(Panel             * const parent,
 		 Point               const p,
-		 PictureID           const picid        = g_gr->get_no_picture(),
+		 const IPicture* picid        = 0,
 		 std::string const &       tooltip_text = std::string())
 		: Statebox(parent, p, picid, tooltip_text)
 	{}

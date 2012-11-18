@@ -87,15 +87,15 @@ public:
 		surf_ = 0;
 	}
 
-	virtual bool valid() {return true;}
-	virtual uint32_t get_w() {return surf_->w;}
-	virtual uint32_t get_h() {return surf_->h;}
+	virtual bool valid() const {return true;}
+	virtual uint32_t get_w() const {return surf_->w;}
+	virtual uint32_t get_h() const {return surf_->h;}
 
 	virtual IPixelAccess & pixelaccess() {return pa_;}
 
-	void blit(Point const dst, IPicture& src, Rect const srcrc, Composite cm)
+	void blit(const Point& dst, const IPicture* src, Rect const srcrc, Composite cm)
 	{
-		upcast(ThinSDLSurface, sdlsurf, &src);
+		upcast(const ThinSDLSurface, sdlsurf, src);
 		assert(sdlsurf);
 		assert(this);
 		SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
@@ -135,7 +135,7 @@ public:
 	virtual ~ThinGraphic();
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 	virtual IPicture* load_image(const std::string &, bool alpha = false);
-	virtual const IPicture & get_picture(PicMod, std::string const &, bool alpha = true);
+	virtual const IPicture* get_picture(PicMod, std::string const &, bool alpha = true);
 	virtual void add_picture_to_cache(PicMod, const std::string &, IPicture*);
 	IBlitableSurface * create_surface(int32_t w, int32_t h);
 
@@ -201,15 +201,15 @@ void ThinGraphic::add_picture_to_cache(PicMod /* module */, const std::string & 
 	m_imgcache[name] = pic;
 }
 
-const IPicture & ThinGraphic::get_picture
+const IPicture* ThinGraphic::get_picture
 	(PicMod const module, const std::string & fname, bool alpha)
 {
 	GraphicMap::iterator i = m_imgcache.find(fname);
 	if (i != m_imgcache.end())
-		return *i->second;
+		return i->second;
 
 	load_image(fname, alpha);
-	return *m_imgcache[fname];
+	return m_imgcache[fname];
 }
 
 IBlitableSurface * ThinGraphic::create_surface(int32_t w, int32_t h) {

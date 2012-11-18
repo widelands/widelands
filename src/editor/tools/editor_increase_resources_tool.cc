@@ -103,7 +103,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
-			PictureID picid =
+			const IPicture* picid =
 			    g_gr->get_picture
 			    (PicMod_Menu,
 			     world.get_resource(res)->get_editor_pic
