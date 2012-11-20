@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-11-17 21:43+0000\n"
+"PO-Revision-Date: 2012-11-20 04:06+0000\n"
 "Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-11-18 04:30+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-11-20 04:32+0000\n"
+"X-Generator: Launchpad (build 16286)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2634,7 +2634,7 @@ msgstr "¡Construcción militar perdida!"
 #: ../../src/logic/militarysite.cc:625
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr "El enemigo ha derrotado a tus soldados en %s."
+msgstr "Tus soldados han derrotado al enemigo en %s"
 
 #: ../../src/logic/militarysite.cc:630
 msgid "Enemy at site defeated!"
@@ -4949,7 +4949,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "3) Resources Info\n"
-msgstr ""
+msgstr "3) Información de recurso\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:99
 #: ../../src/editor/tools/editor_info_tool.cc:109

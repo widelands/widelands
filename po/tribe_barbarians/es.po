@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-11-17 22:11+0000\n"
+"PO-Revision-Date: 2012-11-20 04:29+0000\n"
 "Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-18 04:30+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-11-20 04:32+0000\n"
+"X-Generator: Launchpad (build 16286)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1199,7 +1199,7 @@ msgstr "Cabaña de guardabosques"
 #: ../../tribes/barbarians/warmill/help.lua:15
 #: ../../tribes/barbarians/well/help.lua:15
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../../tribes/barbarians/conf:135
 #: ../../tribes/barbarians/metalworks/help.lua:33
@@ -1373,7 +1373,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
-msgstr ""
+msgstr "Caza animales para producir carne."
 
 #: ../../tribes/barbarians/conf:137
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
@@ -1433,6 +1433,8 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce %s in %s on average."
 msgstr ""
+"Si la suministro de alimento es constante, esta mina puede producir% s en% s "
+"en promedio."
 
 #: ../../tribes/barbarians/axefactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -1544,7 +1546,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "It can not be upgraded."
-msgstr ""
+msgstr "No puede ser mejorado"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Kitchen Tools"
@@ -1552,7 +1554,7 @@ msgstr "Utensilios de cocina"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat'Karuth"
-msgstr ""
+msgstr "Krumta, carpintero de Chat'Karuth"
 
 #: ../../tribes/barbarians/coalmine/help.lua:35
 #: ../../tribes/barbarians/conf:191
@@ -1814,7 +1816,7 @@ msgstr "Buey"
 #: ../../tribes/barbarians/warmill/help.lua:65
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "Performance:"
-msgstr ""
+msgstr "Rendimiento:"
 
 #: ../../tribes/barbarians/coalmine/help.lua:51
 #: ../../tribes/barbarians/conf:98
@@ -1845,7 +1847,7 @@ msgstr "Plantar caña"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:17
 msgid "Plant trees in the surrounding area."
-msgstr ""
+msgstr "Planta árboles en el área circundante."
 
 #: ../../tribes/barbarians/farm/conf:17
 msgid "Plant wheat"
@@ -3461,7 +3463,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:60
 msgid "Workers use:"
-msgstr ""
+msgstr "Trabajadores usados:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:18
 #: ../../tribes/barbarians/bakery/help.lua:17
@@ -3492,7 +3494,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:18
 #: ../../tribes/barbarians/well/help.lua:17
 msgid "Working radius:"
-msgstr ""
+msgstr "Radio de trabajo:"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
@@ -3527,7 +3529,7 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "cada objeto"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
