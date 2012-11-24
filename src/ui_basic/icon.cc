@@ -37,7 +37,7 @@ Icon::Icon
 	set_think(false);
 }
 
-void Icon::setIcon(IPicture* picture_id) {
+void Icon::setIcon(const IPicture* picture_id) {
 	m_pic = picture_id;
 	update();
 }

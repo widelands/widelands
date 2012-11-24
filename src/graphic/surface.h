@@ -20,9 +20,9 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
-#include "blitable_surface.h"
-#include "rgbcolor.h"
+#include "iblitable_surface.h"
 #include "rect.h"
+#include "rgbcolor.h"
 #include "surfaceptr.h"
 #include "wexception.h"
 

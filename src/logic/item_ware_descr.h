@@ -68,7 +68,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack
-	IPicture* icon() const throw () {return m_icon;}
+	const IPicture* icon() const throw () {return m_icon;}
 
 	/// \return ware's localized descriptive text
 	std::string const & helptext() const throw () {return m_helptext;}
@@ -104,7 +104,7 @@ private:
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture
-	IPicture* m_icon;       ///< Index of ware's picture in picture stack
+	const IPicture* m_icon;       ///< Index of ware's picture in picture stack
 	uint8_t     m_preciousness;
 };
 

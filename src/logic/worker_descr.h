@@ -91,7 +91,7 @@ public:
 			m_default_target_quantity = 1;
 	}
 
-	IPicture* icon() const throw () {return m_icon;}
+	const IPicture* icon() const throw () {return m_icon;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 	DirAnimations const & get_right_walk_anims(bool const carries_ware) const {
 		return carries_ware ? m_walkload_anims : m_walk_anims;
@@ -126,7 +126,7 @@ protected:
 	Point             m_ware_hotspot;
 	uint32_t          m_default_target_quantity;
 	std::string const m_icon_fname; ///< Filename of worker's icon
-	IPicture* m_icon;       ///< Pointer to icon into picture stack
+	const IPicture* m_icon;       ///< Pointer to icon into picture stack
 	DirAnimations     m_walk_anims;
 	DirAnimations     m_walkload_anims;
 	bool              m_buildable;

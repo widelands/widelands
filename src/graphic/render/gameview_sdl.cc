@@ -78,7 +78,7 @@ void GameViewSDL::draw_field
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	upcast(SurfaceSDL, sdlsurf, m_surface.get());
+	upcast(SurfaceSDL, sdlsurf, m_surface);
 	if (sdlsurf)
 	{
 		sdlsurf->set_subwin(subwin);

@@ -249,12 +249,11 @@ void Scrollbar::action(Area const area)
 
 
 void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
-	IPicture* pic;
 
 	dst.tile(r, m_pic_buttons, Point(get_x(), get_y()));
 
 	// Draw the picture
-	pic = g_gr->get_no_picture();
+	const IPicture* pic = NULL;
 	if (area == Minus)
 		pic = m_pic_minus;
 	else if (area == Plus)

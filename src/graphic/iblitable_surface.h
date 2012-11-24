@@ -32,7 +32,7 @@
 /**
  * Interface to a basic surfaces that can be used as destination for blitting.
  */
-class IBlitableSurface : boost::noncopyable, public virtual IPicture {
+class IBlitableSurface : public virtual IPicture {
 public:
 	virtual ~IBlitableSurface() {}
 

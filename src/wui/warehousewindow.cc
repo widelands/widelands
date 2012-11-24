@@ -70,7 +70,7 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
 	WaresDisplay::draw_ware(dst, ware);
 
 	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type(), ware);
-	IPicture* picid;
+	const IPicture* picid;
 
 	switch (policy) {
 	case Warehouse::SP_Prefer: picid = g_gr->get_picture(PicMod_UI, pic_policy_prefer); break;

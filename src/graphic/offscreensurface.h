@@ -28,7 +28,7 @@
  * Interface to surfaces that can act conveniently both as
  * source and as destination for rendering.
  */
-struct IOffscreenSurface : Surface, IPicture, IPixelAccess {
+struct IOffscreenSurface : Surface, IPixelAccess {
 };
 
 #endif // OFFSCREENSURFACE_H

@@ -102,8 +102,10 @@ Texture::Texture
 		}
 
 #ifdef USE_OPENGL
+#if 0
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
+			// TODO(sirver): broken for OpenGL
 			boost::shared_ptr<GLPictureTexture> surface(new GLPictureTexture(surf));
 			m_glFrames.push_back(surface);
 
@@ -137,6 +139,7 @@ Texture::Texture
 			++m_nrframes;
 			continue;
 		}
+#endif
 #endif
 
 		// Determine color map if it's the first frame

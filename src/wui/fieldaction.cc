@@ -228,7 +228,7 @@ private:
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
-	IPicture* workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
+	const IPicture* workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 
 	/// Variables to use with attack dialog.
 	AttackBox * m_attack_box;

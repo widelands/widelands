@@ -133,7 +133,7 @@ private:
 		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
-		IPicture* picid;
+		const IPicture* picid;
 		std::string name;
 		std::string tooltip;
 	};
@@ -149,7 +149,7 @@ private:
 	int32_t m_last_click_time;
 	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
-	IPicture* m_check_picid;
+	const IPicture* m_check_picid;
 
 	std::string m_fontname;
 	uint32_t    m_fontsize;

@@ -47,8 +47,8 @@ public:
 	virtual ~ThinSDLSurfacePA() {}
 
 	 // TODO(sirver): Should only be w, should be const
-	virtual uint32_t get_w() {return surf_->w;}
-	virtual uint32_t get_h() {return surf_->h;}
+	virtual uint32_t get_w() const {return surf_->w;}
+	virtual uint32_t get_h() const {return surf_->h;}
 	virtual SDL_PixelFormat const & format() const {return *surf_->format;}
 	virtual uint16_t get_pitch() const {return surf_->pitch;}
 	virtual uint8_t * get_pixels() const {

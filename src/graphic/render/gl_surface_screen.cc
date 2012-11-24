@@ -258,8 +258,9 @@ void GLSurfaceScreen::clear()
 void GLSurfaceScreen::blit
 	(Point const dst, const IPicture* src, Rect const srcrc, Composite cm)
 {
-	upcast(GLPictureTexture, oglsrc, src.get());
-	assert(oglsrc);
+	upcast(const GLPictureTexture, const_oglsrc, src);
+	assert(const_oglsrc);
+	GLPictureTexture* oglsrc = const_cast<GLPictureTexture*>(const_oglsrc);
 	assert(g_opengl);
 
 	/* Set a texture scaling factor. Normaly texture coordiantes
@@ -307,7 +308,3 @@ void GLSurfaceScreen::blit
 	glLoadIdentity();
 }
 
-void GLSurfaceScreen::fast_blit(IPicture* src)
-{
-	blit(Point(0, 0), src, Rect(Point(0, 0), src->get_w(), src->get_h()), CM_Normal);
-}

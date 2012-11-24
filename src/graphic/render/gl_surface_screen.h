@@ -59,7 +59,6 @@ struct GLSurfaceScreen : Surface, IPixelAccess {
 		 RGBColor, uint8_t width);
 
 	virtual void blit(Point, const IPicture* , Rect srcrc, Composite cm);
-	virtual void fast_blit(const IPicture* );
 	//@}
 
 private:

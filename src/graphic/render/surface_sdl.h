@@ -47,12 +47,18 @@ struct SurfaceSDL : IOffscreenSurface {
 	{}
 	~SurfaceSDL();
 
-	virtual uint32_t get_w() {return m_w;}
-	virtual uint32_t get_h() {return m_h;}
+	// Implements IBlitableSurface
+	virtual uint32_t get_w() const {return m_w;}
+	virtual uint32_t get_h() const {return m_h;}
+	bool valid() const {return m_surface;}
+	void blit(const Point&, const IPicture* , Rect srcrc, Composite cm);
+	void fill_rect(Rect, RGBAColor);
+	virtual IPixelAccess & pixelaccess() {return *this;}
+
 
 	/// Set surface, only call once
 	void set_sdl_surface(SDL_Surface & surface);
-	SDL_Surface * get_sdl_surface() {return m_surface;}
+	SDL_Surface * get_sdl_surface() const {return m_surface;}
 
 	/// Get width and height
 	void update();
@@ -74,7 +80,6 @@ struct SurfaceSDL : IOffscreenSurface {
 
 	void clear();
 	void draw_rect(Rect, RGBColor);
-	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
 
 	void draw_line
@@ -82,17 +87,12 @@ struct SurfaceSDL : IOffscreenSurface {
 		 int32_t x2, int32_t y2,
 		 RGBColor, uint8_t width);
 
-	void blit(Point, const IPicture* , Rect srcrc, Composite cm);
-	void fast_blit(const IPicture* ); // TODO(sirver): This function is never used. Remove it
-
 	void set_subwin(Rect r);
 	void unset_subwin();
 
 	void set_isscreen(bool screen);
 
-	bool valid() {return m_surface;}
 
-	virtual IPixelAccess & pixelaccess() {return *this;}
 
 private:
 	SDL_Surface * m_surface;

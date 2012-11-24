@@ -219,7 +219,7 @@ void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<INet_Game> const 
 	joingame.set_enabled(false);
 	std::string localservername = servername.text();
 	for (uint32_t i = 0; i < games.size(); ++i) {
-		IPicture* pic;
+		const IPicture* pic;
 		if (games.at(i).connectable) {
 			if (games.at(i).build_id == build_id())
 				pic = g_gr->get_picture(PicMod_UI, "pics/continue.png");
@@ -274,7 +274,7 @@ void Fullscreen_Menu_Internet_Lobby::fillClientList(std::vector<INet_Client> con
 		er.set_string(2, client.points);
 		er.set_string(3, client.game);
 
-		IPicture* pic;
+		const IPicture* pic;
 		switch (convert_clienttype(client.type)) {
 			case 0: // UNREGISTERED
 				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_red.png");

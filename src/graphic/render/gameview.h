@@ -44,7 +44,7 @@ struct Texture;
 class GameView : public RenderTarget
 {
 public:
-	GameView(RenderTarget & rt):
+	GameView(RenderTarget & rt) :
 		RenderTarget(rt) {}
 	virtual ~GameView() {}
 

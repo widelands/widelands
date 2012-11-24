@@ -43,7 +43,7 @@ using Widelands::TCoords;
 /**
  * Build a render target for the given surface.
  */
-RenderTarget::RenderTarget(SurfacePtr bmp)
+RenderTarget::RenderTarget(Surface* bmp)
 {
 	m_surface = bmp;
 	reset();
@@ -54,7 +54,7 @@ RenderTarget::RenderTarget(SurfacePtr bmp)
  */
 RenderTarget::RenderTarget(OffscreenSurfacePtr surf)
 {
-	m_surface = surf;
+	m_surface = surf.get();
 	reset();
 }
 
@@ -187,7 +187,7 @@ void RenderTarget::clear()
  * I the source surface contains a alpha channel this is used during
  * the blit.
  */
-void RenderTarget::blit(const Point dst, const IPicture* picture, Composite cm)
+void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
 {
 	if (picture->valid())
 		doblit

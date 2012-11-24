@@ -112,7 +112,7 @@ struct Graphic : public virtual IGraphic {
 	void toggle_fullscreen();
 	void update_fullscreen();
 	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
-	void update_rectangle(const Rect const & rect) {
+	void update_rectangle(const Rect& rect) {
 		update_rectangle (rect.x, rect.y, rect.w, rect.h);
 	}
 	bool need_update() const;
@@ -131,7 +131,7 @@ struct Graphic : public virtual IGraphic {
 	IPicture* get_offscreen_picture(OffscreenSurfacePtr surface) const;
 
 	void save_png(const IPicture* , StreamWrite *) const;
-	void save_png(SurfacePtr surf, StreamWrite *) const;
+	void save_png(Surface* surf, StreamWrite *) const;
 	void save_png(IPixelAccess & pix, StreamWrite *) const;
 
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
@@ -155,8 +155,9 @@ struct Graphic : public virtual IGraphic {
 		ResizeMode_Average,
 	};
 
-	IPicture* get_resized_picture
-		(IPicture* , uint32_t w, uint32_t h, ResizeMode);
+	// TODO(sirver): should either be const as well or other derivatives shouldn't be eithwr
+	const IPicture* get_resized_picture
+		(const IPicture*, uint32_t w, uint32_t h, ResizeMode);
 
 	uint32_t get_maptexture(char const & fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
@@ -178,8 +179,8 @@ struct Graphic : public virtual IGraphic {
 	AnimationGfx * get_animation(uint32_t);
 
 	void set_world(std::string);
-	IPicture* get_road_texture(int32_t roadtex);
-	IPicture* get_edge_texture();
+	const IPicture* get_road_texture(int32_t roadtex);
+	const IPicture* get_edge_texture();
 
 	GraphicCaps const & caps() const throw () {return m_caps;}
 
@@ -196,7 +197,7 @@ protected:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	SurfacePtr m_screen;
+	Surface* m_screen;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
@@ -227,7 +228,7 @@ protected:
 	Picturemap m_picturemap;
 
 	Road_Textures * m_roadtextures;
-	IPicture* m_edgetexture;
+	const IPicture* m_edgetexture;
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
 };

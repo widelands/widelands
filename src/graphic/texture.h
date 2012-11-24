@@ -32,8 +32,8 @@
  * This contains all the road textures needed to render roads
  */
 struct Road_Textures {
-	IPicture* pic_road_normal;
-	IPicture* pic_road_busy;
+	const IPicture* pic_road_normal;
+	const IPicture* pic_road_busy;
 };
 
 /** struct Texture

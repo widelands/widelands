@@ -40,8 +40,8 @@ Panel * Panel::_g_mousein   = 0;
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::_g_allow_user_input = true;
-IPicture* Panel::s_default_cursor = g_gr->get_no_picture();
-IPicture* Panel::s_default_cursor_click = g_gr->get_no_picture();
+const IPicture* Panel::s_default_cursor = g_gr->get_no_picture();
+const IPicture* Panel::s_default_cursor_click = g_gr->get_no_picture();
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -861,7 +861,8 @@ void Panel::do_draw(RenderTarget & dst)
 			_needdraw = false;
 		}
 
-		dst.blit(Point(_lborder, _tborder), _cache);
+		// TODO(sirver): check if caching is still done?
+		dst.blit(Point(_lborder, _tborder), _cache.get());
 	} else {
 		Rect innerwindow
 			(Point(_lborder, _tborder),

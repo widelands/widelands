@@ -59,7 +59,7 @@ struct ImageElement : Element {
 		dst.blit(Point(0, 0), image);
 	}
 
-	IPicture* image;
+	const IPicture* image;
 };
 
 struct TextlineElement : Element {

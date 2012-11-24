@@ -43,10 +43,10 @@ struct IFont_Handler1 { // TODO: rename: TextRenderer
 		 uint32_t w = 0,
 		 Align = Align_TopLeft) = 0;
 
-	// FTODO: flush cache
+	// TODO(sirver): flush cache
 };
 
-IFont_Handler1 * create_fonthandler(LayeredFileSystem &);
+IFont_Handler1 * create_fonthandler(IGraphic& gr, LayeredFileSystem & lfs) ;
 
 extern IFont_Handler1 * g_fh1;
 

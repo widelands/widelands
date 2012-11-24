@@ -404,7 +404,7 @@ private:
 		enum Type {
 			PIC,
 		};
-		IPicture* data;
+		const IPicture* data;
 		std::string filename;
 		Type        type;
 	};

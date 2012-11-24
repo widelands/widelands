@@ -105,9 +105,9 @@ protected:
 
 	std::string m_title;          //  title string used when _mypic == 0
 
-	IPicture* m_pic_background; //  background texture (picture ID)
-	IPicture* m_pic_custom;     //  custom icon on the button
-	IPicture* m_pic_custom_disabled;
+	const IPicture* m_pic_background; //  background texture (picture ID)
+	const IPicture* m_pic_custom;     //  custom icon on the button
+	const IPicture* m_pic_custom_disabled;
 	Font * m_font;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"

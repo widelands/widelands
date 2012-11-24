@@ -21,11 +21,14 @@
 #define RENDERTARGET_H
 
 #include "compositemode.h"
-#include "surfaceptr.h"
+#include "picture.h"
 #include "rect.h"
 #include "rgbcolor.h"
+#include "surfaceptr.h"
 
 #include <vector>
+
+class Surface;
 
 namespace Widelands {
 struct Player;
@@ -46,8 +49,9 @@ struct Player;
  * \note If the sub-window would be empty/invisible, \ref enter_window() returns
  * false and doesn't change the window state at all.
 */
-struct RenderTarget {
-	RenderTarget(SurfacePtr);
+class RenderTarget {
+public:
+	RenderTarget(Surface*);
 	RenderTarget(OffscreenSurfacePtr);
 	void set_window(Rect const & rc, Point const & ofs);
 	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
@@ -66,7 +70,7 @@ struct RenderTarget {
 	void brighten_rect(Rect, int32_t factor);
 	void clear();
 
-	void blit(Point dst, const IPicture* picture, Composite cm = CM_Normal);
+	void blit(const Point& dst, const IPicture* picture, Composite cm = CM_Normal);
 	void blitrect(Point dst, const IPicture* picture, Rect src, Composite cm = CM_Normal);
 	void tile(Rect, const IPicture* picture, Point ofs, Composite cm = CM_Normal);
 
@@ -90,7 +94,7 @@ struct RenderTarget {
 
 	void reset();
 
-	SurfacePtr get_surface() {return m_surface;}
+	Surface* get_surface() {return m_surface;}
 
 protected:
 	bool clip(Rect & r) const throw ();
@@ -98,12 +102,11 @@ protected:
 	void doblit(Point dst, const IPicture* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
-	SurfacePtr m_surface;
+	Surface* m_surface;
 	///The current clip rectangle
 	Rect m_rect;
 	///Drawing offset
 	Point m_offset;
-
 };
 
 #endif

@@ -386,7 +386,8 @@ bool NetClient::canLaunch()
 
 	// if there is one client that is currently receiving a file, we can not launch.
 	for (uint8_t i = 0; i < d->settings.users.size(); ++i) {
-		if (d->settings.users[i].position = d->settings.users[i].notConnected())
+		d->settings.users[i].position = d->settings.users[i].notConnected();
+		if (d->settings.users[i].position)
 			continue;
 		if (!d->settings.users[i].ready)
 			return false;

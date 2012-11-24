@@ -598,8 +598,12 @@ template<typename T> static void draw_field_int
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	upcast(SurfaceSDL, rt_normal, g_gr->get_road_texture(Widelands::Road_Normal).get());
-	upcast(SurfaceSDL, rt_busy, g_gr->get_road_texture(Widelands::Road_Busy).get());
+	upcast(const SurfaceSDL, const_rt_normal, g_gr->get_road_texture(Widelands::Road_Normal));
+	upcast(const SurfaceSDL, const_rt_busy, g_gr->get_road_texture(Widelands::Road_Busy));
+
+	// TODO(sirver): those casts should not be needed
+	SurfaceSDL* rt_busy = const_cast<SurfaceSDL*>(const_rt_busy);
+	SurfaceSDL* rt_normal = const_cast<SurfaceSDL*>(const_rt_normal);
 
 	dst.lock(IPixelAccess::Lock_Normal);
 

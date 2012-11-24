@@ -276,7 +276,7 @@ m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
 	UI::g_fh = new UI::Font_Handler();
-	UI::g_fh1 = UI::create_fonthandler(*g_fs);
+	UI::g_fh1 = UI::create_fonthandler(*g_gr, *g_fs);
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 

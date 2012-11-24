@@ -297,12 +297,13 @@ Graphic::Graphic
 
 	if (g_opengl)
 	{
-		m_screen.reset(new GLSurfaceScreen(w, h));
+		// TODO(sirver): basically disabled OpenGL for now
+		// m_screen.reset(new GLSurfaceScreen(w, h));
 	}
 	else
 #endif
 	{
-		boost::shared_ptr<SurfaceSDL> screen(new SurfaceSDL(*sdlsurface));
+		SurfaceSDL* screen = new SurfaceSDL(*sdlsurface);
 		screen->set_isscreen(true);
 		m_screen = screen;
 	}
@@ -521,8 +522,8 @@ void Graphic::add_picture_to_cache(PicMod module, const std::string & name, IPic
  *
  * Might return same id if dimensions are the same
  */
-IPicture* Graphic::get_resized_picture
-	(IPicture* src,
+const IPicture* Graphic::get_resized_picture
+	(const IPicture* src,
 	 uint32_t const w, uint32_t const h,
 	 ResizeMode const mode)
 {
@@ -580,7 +581,7 @@ IPicture* Graphic::get_resized_picture
 	SDL_Surface * srcsdl = 0;
 	bool free_source = true;
 
-	if (upcast(SurfaceSDL, srcsurf, src.get())) {
+	if (upcast(const SurfaceSDL, srcsurf, src)) {
 		if
 			(srcrect.x != 0 || srcrect.w != uint32_t(srcsurf->get_w()) ||
 			 srcrect.y != 0 || srcrect.h != uint32_t(srcsurf->get_h()))
@@ -601,7 +602,10 @@ IPicture* Graphic::get_resized_picture
 			free_source = false;
 		}
 	} else {
-		srcsdl = extract_sdl_surface(src->pixelaccess(), srcrect);
+		// TODO(sirver): this cast is ugly
+		// TODO(sirver): is the srcrect even used?
+		IPicture* nonconst = const_cast<IPicture*>(src);
+		srcsdl = extract_sdl_surface(nonconst->pixelaccess(), srcrect);
 	}
 
 	// Third step: perform the zoom and placement
@@ -709,9 +713,10 @@ void Graphic::get_picture_size
  * This is purely a convenience function intended to allow casting
  * pointers without including a whole bunch of headers.
  */
+// TODO(sirver): this function is odd and has to go away
 IPicture* Graphic::get_offscreen_picture(OffscreenSurfacePtr surface) const
 {
-	return surface;
+	return surface.get();
 }
 
 
@@ -801,22 +806,22 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(SurfacePtr surf, StreamWrite * sw) const
+// TODO(sirver): Maybe IPicture?
+void Graphic::save_png(Surface* surf, StreamWrite * sw) const
 {
 	save_png(surf->pixelaccess(), sw);
 }
 
 /**
- * Saves a IPicture* to a png. This can be a file or part of a stream. This
- * function retrieves the Surface for the IPicture* and calls
- * save_png(Surface, StreamWrite)
- *
+ * Saves a IPicture* to a png. This can be a file or part of a stream.
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(const IPicture* pic_index, StreamWrite * sw) const
+void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
 {
-	save_png(pic_index->pixelaccess(), sw);
+	// TODO(sirver): cast is ugly
+	IPicture* nonconst = const_cast<IPicture*>(pic);
+	save_png(nonconst->pixelaccess(), sw);
 }
 
 /**
@@ -833,18 +838,18 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 #ifdef USE_OPENGL
 	if (g_opengl)
 	{
-		return new GLPictureTexture(surf);
-	} else
+		// return new GLPictureTexture(surf);
+		// TODO(sirver): OpenGL is essentially not working
+		return NULL;
+	} 
 #endif
-	{
-		SDL_Surface * surface;
-		if (alpha)
-			surface = SDL_DisplayFormatAlpha(surf);
-		else
-			surface = SDL_DisplayFormat(surf);
-		SDL_FreeSurface(surf);
-		return new IPicture(new SurfaceSDL(*surface));
-	}
+	SDL_Surface * surface;
+	if (alpha)
+		surface = SDL_DisplayFormatAlpha(surf);
+	else
+		surface = SDL_DisplayFormat(surf);
+	SDL_FreeSurface(surf);
+	return new SurfaceSDL(*surface);
 }
 
 /**
@@ -880,7 +885,8 @@ OffscreenSurfacePtr Graphic::create_offscreen_surface(int32_t w, int32_t h)
 // TODO(sirver): this is bullshit, there is too much overlap with the create_offscreen_surface.
 // En plus, this does not work for OpenGL, find a way to make it work
 IBlitableSurface * Graphic::create_surface(int32_t w, int32_t h) {
-	return create_offscreen_surface(w, h);
+	// TODO(sirver): this will likely crash at runtime and badly
+	return create_offscreen_surface(w, h).get();
 }
 
 /**
@@ -898,24 +904,23 @@ IPicture* Graphic::create_picture(int32_t w, int32_t h, bool alpha)
 #ifdef USE_OPENGL
 	if (g_opengl)
 	{
-		return new IPicture(new GLPictureTexture(w, h));
+		// return new GLPictureTexture(w, h);
+		// TODO(sirver): gl rendering is now broken
+		return NULL;
 	}
-	else
 #endif
-	{
-		const SDL_PixelFormat & format = *m_sdl_screen->format;
-		SDL_Surface & tsurf = *SDL_CreateRGBSurface
-			(SDL_SWSURFACE,
-			 w, h,
-			 format.BitsPerPixel,
-			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
-		if (alpha) {
-			SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
-			SDL_FreeSurface(&tsurf);
-			return OffscreenSurfacePtr(new SurfaceSDL(surf));
-		}
-		return new IPicture(new SurfaceSDL(tsurf));
+	const SDL_PixelFormat & format = *m_sdl_screen->format;
+	SDL_Surface & tsurf = *SDL_CreateRGBSurface
+		(SDL_SWSURFACE,
+		 w, h,
+		 format.BitsPerPixel,
+		 format.Rmask, format.Gmask, format.Bmask, format.Amask);
+	if (alpha) {
+		SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
+		SDL_FreeSurface(&tsurf);
+		return new SurfaceSDL(surf);
 	}
+	return new SurfaceSDL(tsurf);
 }
 
 
@@ -925,14 +930,17 @@ IPicture* Graphic::create_picture(int32_t w, int32_t h, bool alpha)
  * @param picture to be grayed out
  * @return the gray version of the picture
  */
-IPicture* Graphic::create_grayed_out_pic(const IPicture* picid)
+IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 {
-	if (!picid || !picid->valid())
+	if (!pic || !pic->valid())
 		return 0;
 
-	IPixelAccess & origpix = picid->pixelaccess();
-	uint32_t w = picid->get_w();
-	uint32_t h = picid->get_h();
+	// TODO(sirver): cast is pretty ugly
+	IPicture* nonconst = const_cast<IPicture*>(pic);
+
+	IPixelAccess & origpix = nonconst->pixelaccess();
+	uint32_t w = pic->get_w();
+	uint32_t h = pic->get_h();
 	const SDL_PixelFormat & origfmt = origpix.format();
 
 	IPicture* destpicture = create_picture(w, h, origfmt.Amask);
@@ -978,14 +986,17 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* picid)
  * @return a new picture with 50% luminosity
  */
 IPicture* Graphic::create_changed_luminosity_pic
-	(const IPicture* picid, const float factor, const bool halve_alpha)
+	(const IPicture* pic, const float factor, const bool halve_alpha)
 {
-	if (!picid || !picid->valid())
+	if (!pic || !pic->valid())
 		return 0;
 
-	IPixelAccess & origpix = picid->pixelaccess();
-	uint32_t w = picid->get_w();
-	uint32_t h = picid->get_h();
+	// TODO(sirver): cast is pretty ugly
+	IPicture* nonconst = const_cast<IPicture*>(pic);
+
+	IPixelAccess & origpix = nonconst->pixelaccess();
+	uint32_t w = pic->get_w();
+	uint32_t h = pic->get_h();
 	const SDL_PixelFormat & origfmt = origpix.format();
 
 	IPicture* destpicture = create_picture(w, h, origfmt.Amask);
@@ -1201,7 +1212,7 @@ void Graphic::set_world(std::string worldname) {
  * if not done yet.
  * \return The road texture
  */
-IPicture* Graphic::get_road_texture(int32_t const roadtex)
+const IPicture* Graphic::get_road_texture(int32_t const roadtex)
 {
 	return
 		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
@@ -1211,7 +1222,7 @@ IPicture* Graphic::get_road_texture(int32_t const roadtex)
  * Returns the alpha mask texture for edges.
  * \return The edge texture (alpha mask)
  */
-IPicture* Graphic::get_edge_texture()
+const IPicture* Graphic::get_edge_texture()
 {
 	return m_edgetexture;
 }

@@ -68,8 +68,8 @@ struct IPixelAccess : boost::noncopyable {
 
 	/// Get width and height
 	//@{
-	virtual uint32_t get_w() = 0; // TODO(sirver): Should only be w
-	virtual uint32_t get_h() = 0;
+	virtual uint32_t get_w() const = 0; // TODO(sirver): Should only be w
+	virtual uint32_t get_h() const = 0;
 	//@}
 
 	/// This returns the pixel format for direct pixel access.

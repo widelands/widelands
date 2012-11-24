@@ -42,7 +42,7 @@ struct EditBoxImpl {
 	/*@}*/
 
 	/// Background tile style.
-	IPicture* background;
+	const IPicture* background;
 
 	/// Maximum number of characters in the input
 	uint32_t maxLength;

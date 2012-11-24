@@ -40,7 +40,7 @@ Fullscreen_Menu_Base
 */
 
 struct Fullscreen_Menu_Base::Data {
-	IPicture* res_background;
+	const IPicture* res_background;
 	UI::TextStyle textstyle_small;
 	UI::TextStyle textstyle_big;
 };
@@ -72,7 +72,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	// Load background graphics
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
-	IPicture* background = g_gr->get_picture(PicMod_Menu, buffer, false);
+	const IPicture* background = g_gr->get_picture(PicMod_Menu, buffer, false);
 	if (!background || background == g_gr->get_no_picture())
 		throw wexception
 			("could not open splash screen; make sure that all data files are "

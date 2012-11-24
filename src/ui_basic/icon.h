@@ -33,11 +33,11 @@ struct Icon : public Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 const IPicture* picture_id);
 
-	void setIcon(IPicture* picture_id);
+	void setIcon(const IPicture* picture_id);
 	virtual void draw(RenderTarget &);
 
 private:
-	IPicture* m_pic;
+	const IPicture* m_pic;
 	int32_t   m_w, m_h;
 };
 

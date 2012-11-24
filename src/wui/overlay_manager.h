@@ -75,7 +75,7 @@ struct Overlay_Manager {
 		uint32_t id;
 	};
 	struct Overlay_Info {
-		IPicture* picid;
+		const IPicture* picid;
 		Point hotspot;
 	};
 

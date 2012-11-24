@@ -100,11 +100,11 @@ private:
 
 	std::string m_title;
 
-	IPicture* m_pic_lborder;
-	IPicture* m_pic_rborder;
-	IPicture* m_pic_top;
-	IPicture* m_pic_bottom;
-	IPicture* m_pic_background;
+	const IPicture* m_pic_lborder;
+	const IPicture* m_pic_rborder;
+	const IPicture* m_pic_top;
+	const IPicture* m_pic_bottom;
+	const IPicture* m_pic_background;
 
 	Panel * m_center_panel;
 	Panel * m_fastclick_panel;

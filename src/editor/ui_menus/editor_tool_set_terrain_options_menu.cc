@@ -95,7 +95,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-			IPicture* picture;
+			const IPicture* picture = 0;
 
 			// If offscreen rendering is not available only the terrain (and not
 			// the terrain type) is shown.
@@ -152,7 +152,8 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			}
 
 			//  Save this surface, so we can free it later on.
-			m_surfaces.push_back(picture);
+			// m_surfaces.push_back(picture);
+			// TODO(sirver): We did never free this. Handle this again.
 
 			UI::Checkbox & cb = *new UI::Checkbox(this, pos, picture);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
