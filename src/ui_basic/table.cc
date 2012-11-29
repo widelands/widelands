@@ -280,8 +280,10 @@ void Table<void *>::draw(RenderTarget & dst)
 			uint32_t pich = 0;
 			uint32_t stringw = 0;
 			uint32_t stringh = g_fh->get_fontheight(m_fontname, m_fontsize);
-			if (entry_picture != g_gr->get_no_picture())
-				g_gr->get_picture_size(entry_picture, picw, pich);
+			if (entry_picture) {
+				uint32_t picw = entry_picture->get_w();
+				uint32_t pich = entry_picture->get_h();
+			}
 			Point point =
 				Point(curx, y)
 				+
@@ -290,7 +292,7 @@ void Table<void *>::draw(RenderTarget & dst)
 					 alignment & Align_HCenter ? (curw - (picw + stringw)) / 2 :
 					 1,
 					 0);
-			if (entry_picture != g_gr->get_no_picture())
+			if (entry_picture)
 				dst.blit
 					(point +
 					 Point
@@ -599,7 +601,7 @@ void Table<void *>::Entry_Record::set_string
 {
 	assert(col < m_data.size());
 
-	m_data.at(col).d_picture = g_gr->get_no_picture();
+	m_data.at(col).d_picture = NULL;
 	m_data.at(col).d_string  = str;
 }
 const IPicture* Table<void *>::Entry_Record::get_picture(uint8_t const col) const

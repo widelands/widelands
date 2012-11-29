@@ -44,7 +44,7 @@ namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string & background)
 	: m_xres(0), m_yres(0),
-	m_background_pic(g_gr->get_no_picture())
+	m_background_pic(NULL)
 {
 	set_background(background);
 	step(_("Preparing..."));
@@ -63,10 +63,7 @@ void ProgressWindow::draw_background
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	if
-		(m_background_pic == g_gr->get_no_picture()
-		 or xres != m_xres or yres != m_yres)
-	{
+	if (!m_background_pic or xres != m_xres or yres != m_yres) {
 		// (Re-)Load background graphics
 		// Note that the old pic is freed automatically
 		const IPicture* background_original =
@@ -127,9 +124,7 @@ void ProgressWindow::set_background(const std::string & file_name) {
 		}
 	} else
 		m_background = "pics/progress.png";
-	if (m_background_pic != g_gr->get_no_picture()) {
-		m_background_pic = g_gr->get_no_picture();
-	}
+	m_background_pic = NULL;
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
 }

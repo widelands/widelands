@@ -51,8 +51,8 @@ Button::Button //  for textual buttons
 	m_time_nextact  (0),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
-	m_pic_custom    (g_gr->get_no_picture()),
-	m_pic_custom_disabled(g_gr->get_no_picture()),
+	m_pic_custom    (NULL),
+	m_pic_custom_disabled(NULL),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -125,7 +125,7 @@ void Button::set_title(std::string const & title) {
 	if (m_title == title)
 		return;
 
-	m_pic_custom = g_gr->get_no_picture();
+	m_pic_custom = NULL;
 	m_title      = title;
 
 	update();
@@ -164,7 +164,7 @@ void Button::draw(RenderTarget & dst)
 {
 	// Draw the background
 	if (not m_flat or m_draw_flat_background) {
-		assert(m_pic_background != g_gr->get_no_picture());
+		assert(m_pic_background);
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 		dst.tile(Rect(Point(0, 0), get_w(), get_h()), m_pic_background, Point(get_x(), get_y()));
 	}
@@ -175,8 +175,8 @@ void Button::draw(RenderTarget & dst)
 
 	//  if we got a picture, draw it centered
 	if (m_pic_custom) {
-		uint32_t cpw, cph;
-		g_gr->get_picture_size(m_pic_custom, cpw, cph);
+		uint32_t cpw = m_pic_custom->get_w();
+		uint32_t cph = m_pic_custom->get_h();
 
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).

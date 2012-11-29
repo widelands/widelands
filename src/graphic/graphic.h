@@ -124,10 +124,7 @@ struct Graphic : public virtual IGraphic {
 	virtual const IPicture* get_picture(PicMod, const std::string&, bool alpha = true)
 		__attribute__ ((pure));
 	virtual void add_picture_to_cache(PicMod, const std::string&, IPicture* );
-	const IPicture* get_no_picture() const {return 0;} // TODO(sirver): remove function
 
-	void get_picture_size
-		(const IPicture* pic, uint32_t & w, uint32_t & h) const;
 	IPicture* get_offscreen_picture(OffscreenSurfacePtr surface) const;
 
 	void save_png(const IPicture* , StreamWrite *) const;

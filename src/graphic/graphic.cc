@@ -699,17 +699,6 @@ SDL_Surface * Graphic::extract_sdl_surface(IPixelAccess & pix, Rect srcrect)
 }
 
 /**
- * Stores the picture size in pw and ph.
- * Throws an exception if the picture doesn't exist.
-*/
-void Graphic::get_picture_size
-	(const IPicture* pic, uint32_t & w, uint32_t & h) const
-{
-	w = pic->get_w();
-	h = pic->get_h();
-}
-
-/**
  * This is purely a convenience function intended to allow casting
  * pointers without including a whole bunch of headers.
  */
@@ -841,7 +830,7 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 		// return new GLPictureTexture(surf);
 		// TODO(sirver): OpenGL is essentially not working
 		return NULL;
-	} 
+	}
 #endif
 	SDL_Surface * surface;
 	if (alpha)

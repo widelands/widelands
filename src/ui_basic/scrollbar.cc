@@ -259,9 +259,9 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 	else if (area == Plus)
 		pic = m_pic_plus;
 
-	if (pic != g_gr->get_no_picture()) {
-		uint32_t cpw, cph;
-		g_gr->get_picture_size(pic, cpw, cph);
+	if (pic) {
+		uint32_t cpw = pic->get_w();
+		uint32_t cph = pic->get_h();
 
 		dst.blit(r + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
 	}

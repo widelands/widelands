@@ -238,8 +238,8 @@ void AbstractWaresDisplay::draw_ware
 			(PicMod_Game,
 			 ware_selected(id) ?  "pics/ware_list_bg_selected.png"
 			                   :  "pics/ware_list_bg.png");
-	uint32_t w, h;
-	g_gr->get_picture_size(picid, w, h);
+	uint32_t w = picid->get_w();
+	uint32_t h = picid->get_h();
 
 	dst.blit(p, picid);
 
@@ -406,8 +406,8 @@ void WaresMapDisplay::draw(RenderTarget & dst)
 				//  draw a background
 				const IPicture* picid =
 				g_gr->get_picture (PicMod_Game, "pics/ware_list_bg.png");
-				uint32_t w, h;
-				g_gr->get_picture_size(picid, w, h);
+				uint32_t w = picid->get_w();
+				uint32_t h = picid->get_h();
 
 				dst.blit(p, picid);
 

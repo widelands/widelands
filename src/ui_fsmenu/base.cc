@@ -73,7 +73,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
 	const IPicture* background = g_gr->get_picture(PicMod_Menu, buffer, false);
-	if (!background || background == g_gr->get_no_picture())
+	if (!background)
 		throw wexception
 			("could not open splash screen; make sure that all data files are "
 			 "installed");

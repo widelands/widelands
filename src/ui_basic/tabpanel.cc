@@ -228,8 +228,8 @@ void Tab_Panel::draw(RenderTarget & dst)
 				 MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
-		uint32_t cpw, cph;
-		g_gr->get_picture_size(m_tabs[idx]->picid, cpw, cph);
+		uint32_t cpw = m_tabs[idx]->picid->get_w();
+		uint32_t cph = m_tabs[idx]->picid->get_h();
 
 		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),

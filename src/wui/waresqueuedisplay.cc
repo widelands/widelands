@@ -64,8 +64,8 @@ m_show_only(show_only)
 	m_icon_grey = g_gr->create_grayed_out_pic(m_icon);
 	m_icon_grey = g_gr->create_changed_luminosity_pic(m_icon_grey, 0.65);
 
-	uint32_t pw, ph;
-	g_gr->get_picture_size(m_max_fill_indicator, pw, ph);
+	uint32_t pw = m_max_fill_indicator->get_w();
+	uint32_t ph = m_max_fill_indicator->get_h();
 
 	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
 	uint32_t picture_height = show_only ? WARE_MENU_PIC_HEIGHT :
@@ -149,8 +149,7 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 		dst.blit(point, m_icon_grey);
 
 	if (not m_show_only) {
-		uint32_t pw, ph;
-		g_gr->get_picture_size(m_max_fill_indicator, pw, ph);
+		uint32_t pw = m_max_fill_indicator->get_w();
 		point.y = Border;
 		point.x = Border + CellWidth + CellSpacing +
 			(m_queue->get_max_fill() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;

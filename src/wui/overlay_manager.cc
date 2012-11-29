@@ -164,9 +164,7 @@ void Overlay_Manager::register_overlay
 	assert(level != 5); //  level == 5 is undefined behavior
 
 	if (hotspot == Point::invalid()) {
-		uint32_t picture_width, picture_height;
-		g_gr->get_picture_size(picid, picture_width, picture_height);
-		hotspot = Point(picture_width / 2, picture_height / 2);
+		hotspot = Point(picid->get_w() / 2, picid->get_h() / 2);
 	}
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
@@ -311,11 +309,7 @@ void Overlay_Manager::load_graphics() {
 
 	//  Special case for flag, which has a different formula for hotspot_y.
 	buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
-	{
-		uint32_t hotspot_x, hotspot_y;
-		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
-		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y - 1);
-	}
+	buildhelp_info->hotspot = Point(buildhelp_info->picid->get_w() / 2, buildhelp_info->picid->get_h() - 1);
 
 	const Overlay_Info * const buildhelp_infos_end =
 		buildhelp_info + Widelands::Field::Buildhelp_None;
@@ -324,9 +318,7 @@ void Overlay_Manager::load_graphics() {
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
 		buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
-		uint32_t hotspot_x, hotspot_y;
-		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
-		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y / 2);
+		buildhelp_info->hotspot = Point(buildhelp_info->picid->get_w() / 2, buildhelp_info->picid->get_h() / 2);
 	}
 
 	m_are_graphics_loaded = true;

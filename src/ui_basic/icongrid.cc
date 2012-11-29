@@ -117,7 +117,7 @@ int32_t Icon_Grid::add
 	UI::Button * btn = new IconGridButton
 		(*this, name,
 		 x, y, m_cell_width, m_cell_height,
-		 g_gr->get_no_picture(), picid,
+		 NULL, picid,
 		 idx, m_ta, descr);
 	btn->sigclicked.connect(boost::bind(&Icon_Grid::clicked_button, this, idx));
 

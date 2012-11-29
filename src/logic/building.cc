@@ -58,7 +58,7 @@ Building_Descr::Building_Descr
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
-	m_buildicon     (g_gr->get_no_picture()),
+	m_buildicon     (NULL),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),

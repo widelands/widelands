@@ -129,14 +129,10 @@ Editor_Tool_Change_Resources_Options_Menu
 	//  Find the maximal width and height for the resource pictures.
 	uint32_t resource_pic_max_width = 0, resource_pic_max_height = 0;
 	for (Widelands::Resource_Index i = 0; i < nr_resources; ++i) {
-		uint32_t w, h;
-		g_gr->get_picture_size
-			(g_gr->get_picture
-			 	(PicMod_Game,
-			 	 world.get_resource(i)->get_editor_pic(100000).c_str()),
-			 w, h);
-		resource_pic_max_width  = std::max(resource_pic_max_width,  w);
-		resource_pic_max_height = std::max(resource_pic_max_height, h);
+		const IPicture* picid = g_gr->get_picture(
+				PicMod_Game, world.get_resource(i)->get_editor_pic(100000).c_str());
+		resource_pic_max_width  = std::max(resource_pic_max_width,  picid->get_w());
+		resource_pic_max_height = std::max(resource_pic_max_height, picid->get_h());
 	}
 
 	const uint32_t resources_in_row =

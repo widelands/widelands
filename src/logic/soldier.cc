@@ -580,11 +580,14 @@ void Soldier::draw_info_icon
 	const IPicture* attackpic = get_attack_level_pic();
 	const IPicture* defensepic = get_defense_level_pic();
 	const IPicture* evadepic = get_evade_level_pic();
-	uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
-	g_gr->get_picture_size(hppic,      hpw, hph);
-	g_gr->get_picture_size(attackpic,  atw, ath);
-	g_gr->get_picture_size(defensepic, dew, deh);
-	g_gr->get_picture_size(evadepic,   evw, evh);
+	uint32_t hpw = hppic->get_w();
+	uint32_t hph = hppic->get_h();
+	uint32_t atw = attackpic->get_w();
+	uint32_t ath = attackpic->get_h();
+	uint32_t dew = defensepic->get_w();
+	uint32_t deh = defensepic->get_h();
+	uint32_t evw = evadepic->get_w();
+	uint32_t evh = evadepic->get_h();
 
 	uint32_t totalwidth = std::max(std::max(atw + dew, hpw + evw), 2 * w);
 	uint32_t totalheight = 5 + std::max(hph + ath, evh + deh);
@@ -638,11 +641,14 @@ void Soldier::calc_info_icon_size
 	const IPicture* attackpic = soldierdesc->get_attack_level_pic(0);
 	const IPicture* defensepic = soldierdesc->get_defense_level_pic(0);
 	const IPicture* evadepic = soldierdesc->get_evade_level_pic(0);
-	uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
-	g_gr->get_picture_size(hppic,      hpw, hph);
-	g_gr->get_picture_size(attackpic,  atw, ath);
-	g_gr->get_picture_size(defensepic, dew, deh);
-	g_gr->get_picture_size(evadepic,   evw, evh);
+	uint32_t hpw = hppic->get_w();
+	uint32_t hph = hppic->get_h();
+	uint32_t atw = attackpic->get_w();
+	uint32_t ath = attackpic->get_h();
+	uint32_t dew = defensepic->get_w();
+	uint32_t deh = defensepic->get_h();
+	uint32_t evw = evadepic->get_w();
+	uint32_t evh = evadepic->get_h();
 
 	uint32_t animw;
 	animw = SOLDIER_HP_BAR_WIDTH;
