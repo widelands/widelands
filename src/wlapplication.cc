@@ -276,7 +276,8 @@ m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
 	UI::g_fh = new UI::Font_Handler();
-	UI::g_fh1 = UI::create_fonthandler(*g_gr, *g_fs);
+	// TODO(sirver): bring this thing back
+	// UI::g_fh1 = UI::create_fonthandler(*g_gr, *g_fs);
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 
@@ -321,8 +322,9 @@ WLApplication::~WLApplication()
 	assert(UI::g_fh);
 	delete UI::g_fh;
 	UI::g_fh = 0;
-	delete UI::g_fh1;
-	UI::g_fh1 = 0;
+	// TODO(sirver): bring this back
+	// delete UI::g_fh1;
+	// UI::g_fh1 = 0;
 
 	assert(g_fs);
 	delete g_fs;

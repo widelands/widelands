@@ -174,7 +174,7 @@ void Button::draw(RenderTarget & dst)
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  if we got a picture, draw it centered
-	if (m_pic_custom != g_gr->get_no_picture()) {
+	if (m_pic_custom) {
 		uint32_t cpw, cph;
 		g_gr->get_picture_size(m_pic_custom, cpw, cph);
 

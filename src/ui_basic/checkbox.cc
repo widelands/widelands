@@ -39,7 +39,7 @@ Statebox::Statebox
 	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
 	m_flags(Is_Enabled)
 {
-	if (picid != g_gr->get_no_picture()) {
+	if (picid) {
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 		set_desired_size(w, h);

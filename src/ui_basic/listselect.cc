@@ -410,7 +410,7 @@ void BaseListselect::draw(RenderTarget & dst)
 			 m_align);
 
 		// Now draw pictures
-		if (er.picid != g_gr->get_no_picture()) {
+		if (er.picid) {
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
 			if (g_gr->caps().offscreen_rendering and false)

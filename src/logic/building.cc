@@ -757,11 +757,14 @@ void Building::draw_help
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
+		// TODO(sirver): bring this back
+#if 0
 		UI::g_fh1->draw_text
 			(dst, pos - Point(0, 48),
 			 info_string(igbase.building_census_format()),
 			 0,
 			 UI::Align_Center);
+#endif
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
@@ -770,11 +773,14 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
+		// TODO(sirver): bring this back
+#if 0
 		UI::g_fh1->draw_text
 			(dst, pos - Point(0, 35),
 			 info_string(igbase.building_statistics_format()),
 			 0,
 			 UI::Align_Center);
+#endif
 	}
 }
 
