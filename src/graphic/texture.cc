@@ -30,26 +30,23 @@
 
 #include <SDL_image.h>
 
+using namespace std;
+
 /**
  * Create a texture, taking the pixel data from a Pic.
  * Currently it converts a 16 bit pic to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
-Texture::Texture
-	(char            const &       fnametmpl,
-	 uint32_t                const frametime,
-	 SDL_PixelFormat const &       format)
-	:
-	m_colormap (0),
-	m_pixels   (0),
-	m_curframe (0),
-	m_frame_num(0),
-	m_nrframes (0),
-	m_frametime(frametime),
-	is_32bit   (format.BytesPerPixel == 4),
-	m_was_animated(false)
+Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFormat& format)
+	:	m_colormap (0),
+		m_pixels   (0),
+		m_curframe (0),
+		m_frame_num(0),
+		m_nrframes (0),
+		m_frametime(frametime),
+		is_32bit   (format.BytesPerPixel == 4),
+		m_was_animated(false)
 {
-
 	// Load the pictures one by one
 	char fname[256];
 
@@ -57,7 +54,7 @@ Texture::Texture
 		int32_t nr = m_nrframes;
 
 		// create the file name by reverse-scanning for '?' and replacing
-		snprintf(fname, sizeof(fname), "%s", &fnametmpl);
+		snprintf(fname, sizeof(fname), "%s", fnametmpl.c_str());
 		char * p = fname + strlen(fname);
 		while (p > fname) {
 			if (*--p != '?')
@@ -198,7 +195,7 @@ Texture::Texture
 	}
 
 	if (!m_nrframes)
-		throw wexception("%s: texture has no frames", &fnametmpl);
+		throw wexception("%s: texture has no frames", fnametmpl.c_str());
 }
 
 

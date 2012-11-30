@@ -118,9 +118,11 @@ struct Graphic : public virtual IGraphic {
 	bool need_update() const;
 	void refresh(bool force = true);
 
-	void flush(PicMod module);
 	void flush_animations();
+
+	// TODO(sirver): these functions should go into a class of its own
 	virtual IPicture* load_image(const std::string&, bool alpha = false);
+	void flush(PicMod module);
 	virtual const IPicture* get_picture(PicMod, const std::string&, bool alpha = true)
 		__attribute__ ((pure));
 	virtual void add_picture_to_cache(PicMod, const std::string&, IPicture* );
@@ -139,39 +141,23 @@ struct Graphic : public virtual IGraphic {
 
 	IPicture* create_grayed_out_pic(const IPicture* picid);
 	IPicture* create_changed_luminosity_pic
-		(const IPicture* picid, const float factor, const bool halve_alpha = false);
-
-	enum  ResizeMode {
-		// do not worry about proportions, just sketch to requested size
-		ResizeMode_Loose,
-		// keep proportions, clip wider edge
-		ResizeMode_Clip,
-		// keep proportions, leave empty border if needed
-		ResizeMode_LeaveBorder,
-		// keep proportions, balance clipping and borders
-		ResizeMode_Average,
-	};
+		(const IPicture* picid, float factor, bool halve_alpha = false);
 
 	// TODO(sirver): should either be const as well or other derivatives shouldn't be eithwr
-	const IPicture* get_resized_picture
-		(const IPicture*, uint32_t w, uint32_t h, ResizeMode);
+	const IPicture* get_resized_picture(const IPicture*, uint32_t w, uint32_t h);
 
-	uint32_t get_maptexture(char const & fnametempl, uint32_t frametime);
+	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
 	void load_animations(UI::ProgressWindow & loader_ui);
 	void ensure_animation_loaded(uint32_t anim);
-	AnimationGfx::Index nr_frames(uint32_t const anim = 0);
+	AnimationGfx::Index nr_frames(uint32_t anim = 0);
 	uint32_t get_animation_frametime(uint32_t anim) const;
-	void get_animation_size
-		(const uint32_t anim,
-		 const uint32_t time,
-		 uint32_t & w,
-		 uint32_t & h)
-		;
+	// TODO(sirver): should take pointer instead
+	void get_animation_size (uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h);
 
-	void screenshot(const char & fname) const;
+	void screenshot(const std::string& fname) const;
 	Texture * get_maptexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t);
 
@@ -179,7 +165,7 @@ struct Graphic : public virtual IGraphic {
 	const IPicture* get_road_texture(int32_t roadtex);
 	const IPicture* get_edge_texture();
 
-	GraphicCaps const & caps() const throw () {return m_caps;}
+	const GraphicCaps& caps() const throw () {return m_caps;}
 
 private:
 	SDL_Surface * extract_sdl_surface(IPixelAccess & pix, Rect srcrect);

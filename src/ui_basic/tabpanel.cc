@@ -208,17 +208,19 @@ void Tab_Panel::draw(RenderTarget & dst)
 	// draw the background
 	compile_assert(2 < TP_BUTTON_WIDTH);
 	compile_assert(4 < TP_BUTTON_HEIGHT);
-	dst.tile
-		(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
-		 m_pic_background, Point(get_x(), get_y()));
-	assert(TP_BUTTON_HEIGHT - 2 <= get_h());
-	dst.tile
-		(Rect
-		 	(Point(0, TP_BUTTON_HEIGHT - 2),
-		 	 get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
-		 m_pic_background,
-		 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
 
+	if (m_pic_background) {
+		dst.tile
+			(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
+			 m_pic_background, Point(get_x(), get_y()));
+		assert(TP_BUTTON_HEIGHT - 2 <= get_h());
+		dst.tile
+			(Rect
+			 (Point(0, TP_BUTTON_HEIGHT - 2),
+			  get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
+			 m_pic_background,
+			 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
+	}
 
 	// draw the buttons
 	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
@@ -228,9 +230,9 @@ void Tab_Panel::draw(RenderTarget & dst)
 				 MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
+		assert(m_tabs[idx]->picid);
 		uint32_t cpw = m_tabs[idx]->picid->get_w();
 		uint32_t cph = m_tabs[idx]->picid->get_h();
-
 		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
 			 m_tabs[idx]->picid);

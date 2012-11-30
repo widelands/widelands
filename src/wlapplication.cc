@@ -643,7 +643,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 						snprintf(buffer, sizeof(buffer), SCREENSHOT_DIR "/shot%04u.png", nr);
 						if (g_fs->FileExists(buffer))
 							continue;
-						g_gr->screenshot(*buffer);
+						g_gr->screenshot(buffer);
 						break;
 					}
 				}

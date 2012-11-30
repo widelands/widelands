@@ -39,7 +39,7 @@ struct Tab : public NamedPanel {
 		(Tab_Panel * parent,
 		 uint32_t,
 		 std::string const & name,
-		 const IPicture* ,
+		 const IPicture*,
 		 std::string const & gtooltip,
 		 Panel             * gpanel);
 

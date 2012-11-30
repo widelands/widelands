@@ -53,6 +53,8 @@
 #include <cstring>
 #include <iostream>
 
+using namespace std;
+
 Graphic * g_gr;
 bool g_opengl;
 
@@ -66,10 +68,10 @@ uint32_t luminance_table_b[0x100];
  * Initialize the SDL video mode.
 */
 Graphic::Graphic
-	(int32_t const w, int32_t const h,
-	 int32_t const bpp,
-	 bool    const fullscreen,
-	 bool    const opengl)
+	(int32_t w, int32_t h,
+	 int32_t bpp,
+	 bool    fullscreen,
+	 bool    opengl)
 	:
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
@@ -166,15 +168,14 @@ Graphic::Graphic
 
 		g_opengl = true;
 
-		GLboolean glBool;
-		GLint glInt;
-		const char * str;
 
+		GLboolean glBool;
 		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
 		log
 			("Graphics: OpenGL: Double buffering %s\n",
 			 (glBool == GL_TRUE)?"enabled":"disabled");
 
+		GLint glInt;
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
 		log("Graphics: OpenGL: Max texture size: %u\n", glInt);
 		m_caps.gl.tex_max_size = glInt;
@@ -191,7 +192,7 @@ Graphic::Graphic
 		log("Graphics: OpenGL: Maximum number of textures for multitextures: %u\n", glInt);
 		m_caps.gl.max_tex_combined = glInt;
 
-		str = reinterpret_cast<const char *>(glGetString(GL_VERSION));
+		const char * str = reinterpret_cast<const char *>(glGetString(GL_VERSION));
 		m_caps.gl.major_version = atoi(str);
 		m_caps.gl.minor_version = strstr(str, ".")?atoi(strstr(str, ".") + 1):0;
 		log
@@ -222,7 +223,7 @@ Graphic::Graphic
 #endif
 
 	/* Information about the video capabilities. */
-	SDL_VideoInfo const * info = SDL_GetVideoInfo();
+	const SDL_VideoInfo* info = SDL_GetVideoInfo();
 	char videodrvused[16];
 	SDL_VideoDriverName(videodrvused, 16);
 	log
@@ -425,9 +426,9 @@ void Graphic::refresh(bool force)
  * \note This only removes the cache entries. If the corresonding resources
  * are still in use somewhere, they will not be freed.
  */
-void Graphic::flush(PicMod const module)
+void Graphic::flush(PicMod module)
 {
-	std::vector<std::string> eraselist;
+	vector<string> eraselist;
 
 	for (pmit it = m_picturemap.begin(); it != m_picturemap.end(); ++it) {
 		it->second.modules &= ~(1 << module);
@@ -447,14 +448,14 @@ void Graphic::flush(PicMod const module)
 
 /// flushes the animations in m_animations
 void Graphic::flush_animations() {
-	container_iterate_const(std::vector<AnimationGfx *>, m_animations, i)
+	container_iterate_const(vector<AnimationGfx *>, m_animations, i)
 		delete *i.current;
 	m_animations.clear();
 }
 
 
 // TODO(sirver): Only the conversion is graphic specific
-IPicture* Graphic::load_image(std::string const & fname, bool const alpha) {
+IPicture* Graphic::load_image(const string& fname, bool alpha) {
 	//log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
 	FileRead fr;
 	SDL_Surface * sdlsurf;
@@ -479,7 +480,7 @@ IPicture* Graphic::load_image(std::string const & fname, bool const alpha) {
 */
 // TODO(sirver): should signal error in some way
 const IPicture* Graphic::get_picture
-	(PicMod const module, const std::string & fname, bool alpha)
+	(PicMod module, const string& fname, bool alpha)
 {
 	//  Check if the picture is already loaded.
 	pmit it = m_picturemap.find(fname);
@@ -491,12 +492,12 @@ const IPicture* Graphic::get_picture
 			rec.picture = load_image(fname, alpha);
 			rec.modules = 0;
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
-		} catch (std::exception const & e) {
+		} catch (exception& e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
 			return 0;
 		}
 
-		it = m_picturemap.insert(std::make_pair(fname, rec)).first;
+		it = m_picturemap.insert(make_pair(fname, rec)).first;
 	}
 
 	it->second.modules |= 1 << module;
@@ -509,12 +510,12 @@ const IPicture* Graphic::get_picture
  *
  * This overwrites pre-existing cache entries, if any.
  */
-void Graphic::add_picture_to_cache(PicMod module, const std::string & name, IPicture* pic)
+void Graphic::add_picture_to_cache(PicMod module, const string& name, IPicture* pic)
 {
 	PictureRec rec;
 	rec.picture = pic;
 	rec.modules = 1 << module;
-	m_picturemap.insert(std::make_pair(name, rec));
+	m_picturemap.insert(make_pair(name, rec));
 }
 
 /**
@@ -522,86 +523,24 @@ void Graphic::add_picture_to_cache(PicMod module, const std::string & name, IPic
  *
  * Might return same id if dimensions are the same
  */
-const IPicture* Graphic::get_resized_picture
-	(const IPicture* src,
-	 uint32_t const w, uint32_t const h,
-	 ResizeMode const mode)
-{
-	if (src->get_w() == w and src->get_h() == h)
+const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, uint32_t h) {
+	if (src->get_w() == w and src->get_h() == h) {
 		return src;
+	}
 
 	// First step: compute scaling factors
-	Rect srcrect;
-	Rect destrect;
-
-	if (mode == ResizeMode_Loose) {
-		srcrect = Rect(Point(0, 0), src->get_w(), src->get_h());
-		destrect = Rect(Point(0, 0), w, h);
-	} else {
-		const double ratio_x = double(w) / src->get_w();
-		const double ratio_y = double(h) / src->get_h();
-		double ratio;
-
-		if (ResizeMode_Clip == mode)
-			ratio = std::max(ratio_x, ratio_y);
-		else if (ResizeMode_LeaveBorder == mode)
-			ratio = std::min(ratio_x, ratio_y);
-		else // average
-			ratio = (ratio_x + ratio_y) / 2;
-
-		uint32_t fullwidth(src->get_w() * ratio);
-		uint32_t fullheight(src->get_h() * ratio);
-
-		if (fullwidth <= w) {
-			srcrect.x = 0;
-			srcrect.w = src->get_w();
-			destrect.x = (w - fullwidth) / 2;
-			destrect.w = fullwidth;
-		} else {
-			srcrect.w = std::min(src->get_w(), uint32_t(w / ratio));
-			srcrect.x = (src->get_w() - srcrect.w) / 2;
-			destrect.x = 0;
-			destrect.w = w;
-		}
-
-		if (fullheight <= h) {
-			srcrect.y = 0;
-			srcrect.h = src->get_h();
-			destrect.y = (h - fullheight) / 2;
-			destrect.h = fullheight;
-		} else {
-			srcrect.h = std::min(src->get_h(), uint32_t(h / ratio));
-			srcrect.y = (src->get_h() - srcrect.h) / 2;
-			destrect.y = 0;
-			destrect.h = h;
-		}
-	}
+	Rect srcrect = Rect(Point(0, 0), src->get_w(), src->get_h());
+	Rect destrect = Rect(Point(0, 0), w, h);
 
 	// Second step: get source material
 	SDL_Surface * srcsdl = 0;
 	bool free_source = true;
 
 	if (upcast(const SurfaceSDL, srcsurf, src)) {
-		if
-			(srcrect.x != 0 || srcrect.w != uint32_t(srcsurf->get_w()) ||
-			 srcrect.y != 0 || srcrect.h != uint32_t(srcsurf->get_h()))
-		{
-			const SDL_PixelFormat & fmt = *srcsurf->get_sdl_surface()->format;
-			srcsdl = SDL_CreateRGBSurface
-				(SDL_SWSURFACE, srcrect.w, srcrect.h,
-				 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
-			SDL_Rect srcrc = {srcrect.x, srcrect.y, srcrect.w, srcrect.h};
-			SDL_Rect dstrc = {0, 0, 0, 0};
-			bool alpha = srcsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
-			uint8_t alphaval = srcsurf->get_sdl_surface()->format->alpha;
-			SDL_SetAlpha(srcsurf->get_sdl_surface(), 0, 0);
-			SDL_BlitSurface(srcsurf->get_sdl_surface(), &srcrc, srcsdl, &dstrc);
-			SDL_SetAlpha(srcsurf->get_sdl_surface(), alpha ? SDL_SRCALPHA : 0, alphaval);
-		} else {
-			srcsdl = srcsurf->get_sdl_surface();
-			free_source = false;
-		}
+		srcsdl = srcsurf->get_sdl_surface();
+		free_source = false;
 	} else {
+		// I guess this is just in OpenGL
 		// TODO(sirver): this cast is ugly
 		// TODO(sirver): is the srcrect even used?
 		IPicture* nonconst = const_cast<IPicture*>(src);
@@ -626,7 +565,9 @@ const IPicture* Graphic::get_resized_picture
 
 		Uint32 fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
 
+		// TODO(sirver): remove logs below
 		if (destrect.x > 0) {
+			log("aaaaaaa here 1\n");
 			dstrc.x = 0;
 			dstrc.y = destrect.y;
 			dstrc.w = destrect.x;
@@ -634,6 +575,7 @@ const IPicture* Graphic::get_resized_picture
 			SDL_FillRect(placed, &dstrc, fillcolor);
 		}
 		if (destrect.x + zoomed->w < placed->w) {
+			log("aaaaaaa here 2\n");
 			dstrc.x = destrect.x + zoomed->w;
 			dstrc.y = destrect.y;
 			dstrc.w = placed->w - destrect.x - zoomed->w;
@@ -641,6 +583,7 @@ const IPicture* Graphic::get_resized_picture
 			SDL_FillRect(placed, &dstrc, fillcolor);
 		}
 		if (destrect.y > 0) {
+			log("aaaaaaa here 3\n");
 			dstrc.x = 0;
 			dstrc.y = 0;
 			dstrc.w = placed->w;
@@ -648,6 +591,7 @@ const IPicture* Graphic::get_resized_picture
 			SDL_FillRect(placed, &dstrc, fillcolor);
 		}
 		if (destrect.y + zoomed->h < placed->h) {
+			log("aaaaaaa here 3\n");
 			dstrc.x = 0;
 			dstrc.y = destrect.y + zoomed->h;
 			dstrc.w = placed->w;
@@ -948,14 +892,12 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 			//  grayscale to begin with.
 			color.a >>= 1;
 
-			uint8_t const gray =
+			color.r = color.g = color.b =
 				(luminance_table_r[color.r] +
 				 luminance_table_g[color.g] +
 				 luminance_table_b[color.b] +
 				 8388608U) //  compensate for truncation:  .5 * 2^24
 				>> 24;
-
-			color.r = color.g = color.b = gray;
 
 			destpix.set_pixel(x, y, color.map(destfmt));
 		}
@@ -975,7 +917,7 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
  * @return a new picture with 50% luminosity
  */
 IPicture* Graphic::create_changed_luminosity_pic
-	(const IPicture* pic, const float factor, const bool halve_alpha)
+	(const IPicture* pic, float factor, bool halve_alpha)
 {
 	if (!pic || !pic->valid())
 		return 0;
@@ -1029,14 +971,13 @@ IPicture* Graphic::create_changed_luminosity_pic
  * \note Terrain textures are not reused, even if fnametempl matches.
  * These textures are freed when PicMod_Game is flushed.
 */
-uint32_t Graphic::get_maptexture
-	(const char & fnametempl, const uint32_t frametime)
+uint32_t Graphic::get_maptexture(const string& fnametempl, uint32_t frametime)
 {
 	try {
 		m_maptextures.push_back
 			(new Texture(fnametempl, frametime, *m_sdl_screen->format));
-	} catch (std::exception const & e) {
-		log("Failed to load maptexture %s: %s\n", &fnametempl, e.what());
+	} catch (exception& e) {
+		log("Failed to load maptexture %s: %s\n", fnametempl.c_str(), e.what());
 		return 0;
 	}
 
@@ -1069,11 +1010,10 @@ void Graphic::reset_texture_animation_reminder()
 void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 	assert(m_animations.empty());
 
-	const uint32_t nr_animations = g_anim.get_nranimations();
-	m_animations.reserve(nr_animations);
+	m_animations.reserve(g_anim.get_nranimations());
 }
 
-void Graphic::ensure_animation_loaded(uint32_t const anim) {
+void Graphic::ensure_animation_loaded(uint32_t anim) {
 	if (anim >= m_animations.size()) {
 		m_animations.resize(anim + 1);
 	}
@@ -1087,7 +1027,7 @@ void Graphic::ensure_animation_loaded(uint32_t const anim) {
 /**
  * Return the number of frames in this animation
  */
-AnimationGfx::Index Graphic::nr_frames(const uint32_t anim)
+AnimationGfx::Index Graphic::nr_frames(uint32_t anim)
 {
 	return get_animation(anim)->nr_frames();
 }
@@ -1096,10 +1036,10 @@ AnimationGfx::Index Graphic::nr_frames(const uint32_t anim)
  * writes the size of an animation frame to w and h
 */
 void Graphic::get_animation_size
-	(uint32_t const anim, uint32_t const time, uint32_t & w, uint32_t & h)
+	(uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h)
 {
-	AnimationData const * const data = g_anim.get_animation(anim);
-	AnimationGfx  const * const gfx  =        get_animation(anim);
+	const AnimationData* data = g_anim.get_animation(anim);
+	const AnimationGfx* gfx  =        get_animation(anim);
 
 	if (!data || !gfx) {
 		log("WARNING: Animation %u does not exist\n", anim);
@@ -1116,10 +1056,10 @@ void Graphic::get_animation_size
 /**
  * Save a screenshot to the given file.
 */
-void Graphic::screenshot(const char & fname) const
+void Graphic::screenshot(const string& fname) const
 {
-	log("Save screenshot to %s\n", &fname);
-	StreamWrite * sw = g_fs->OpenStreamWrite(std::string(&fname));
+	log("Save screenshot to %s\n", fname.c_str());
+	StreamWrite * sw = g_fs->OpenStreamWrite(fname);
 	save_png(m_screen, sw);
 	delete sw;
 }
@@ -1152,7 +1092,7 @@ void Graphic::m_png_flush_function
  * @param anim the number of the animation
  * @return the AnimationGfs object of the given number
  */
-AnimationGfx * Graphic::get_animation(uint32_t const anim)
+AnimationGfx * Graphic::get_animation(uint32_t anim)
 {
 	if (!anim)
 		return 0;
@@ -1178,7 +1118,7 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 /**
  * Sets the name of the current world and loads the fitting road and edge textures
  */
-void Graphic::set_world(std::string worldname) {
+void Graphic::set_world(string worldname) {
 	char buf[255];
 
 	if (m_roadtextures)
@@ -1201,7 +1141,7 @@ void Graphic::set_world(std::string worldname) {
  * if not done yet.
  * \return The road texture
  */
-const IPicture* Graphic::get_road_texture(int32_t const roadtex)
+const IPicture* Graphic::get_road_texture(int32_t roadtex)
 {
 	return
 		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);

@@ -20,13 +20,15 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include <stdint.h>
+#include <string>
+#include <vector>
+
+#include <boost/shared_ptr.hpp>
+
 #include "colormap.h"
 
 #include "graphic/render/gl_picture_texture.h"
-
-#include <boost/shared_ptr.hpp>
-#include <stdint.h>
-#include <vector>
 
 /**
  * This contains all the road textures needed to render roads
@@ -48,7 +50,7 @@ struct Road_Textures {
 */
 struct Texture {
 	Texture
-		(char const & fnametempl, uint32_t frametime, const SDL_PixelFormat &);
+		(const std::string& fnametempl, uint32_t frametime, const SDL_PixelFormat&);
 	~Texture();
 
 	const char * get_texture_picture() const {return m_texture_picture;}

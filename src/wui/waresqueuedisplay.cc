@@ -173,28 +173,16 @@ void WaresQueueDisplay::update_priority_buttons()
 	pos.y = Border + (m_total_height - 2 * Border - 3 * PriorityButtonSize) / 2;
 
 	m_priority_radiogroup->add_button
-			(this,
-			pos,
-			g_gr->get_resized_picture
-				(g_gr->get_picture(PicMod_Game,  pic_priority_high),
-				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
-			_("Highest priority"));
+		(this, pos, g_gr->get_picture(PicMod_Game,  pic_priority_high),
+		 _("Highest priority"));
 	pos.y += PriorityButtonSize;
 	m_priority_radiogroup->add_button
-			(this,
-			pos,
-			g_gr->get_resized_picture
-				(g_gr->get_picture(PicMod_Game,  pic_priority_normal),
-				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
-			_("Normal priority"));
+			(this, pos, g_gr->get_picture(PicMod_Game,  pic_priority_normal),
+			 _("Normal priority"));
 	pos.y += PriorityButtonSize;
 	m_priority_radiogroup->add_button
-			(this,
-			pos,
-			g_gr->get_resized_picture
-				(g_gr->get_picture(PicMod_Game,  pic_priority_low),
-				PriorityButtonSize, PriorityButtonSize, Graphic::ResizeMode_Clip),
-			_("Lowest priority"));
+			(this, pos, g_gr->get_picture(PicMod_Game,  pic_priority_low),
+			 _("Lowest priority"));
 
 	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
 	switch (priority) {

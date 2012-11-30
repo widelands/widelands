@@ -70,9 +70,7 @@ void ProgressWindow::draw_background
 			g_gr->get_picture(PicMod_Menu, m_background.c_str());
 
 		const IPicture* background_resized  =
-			g_gr->get_resized_picture
-				(background_original, xres, yres,
-				 Graphic::ResizeMode_Loose);
+			g_gr->get_resized_picture(background_original, xres, yres);
 
 		m_background_pic = background_resized;
 

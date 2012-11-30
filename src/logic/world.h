@@ -117,7 +117,7 @@ struct Terrain_Descr : boost::noncopyable {
 private:
 	const std::string m_name;
 	const std::string m_descname;
-	char  * m_picnametempl;
+	std::string m_picnametempl;
 	uint32_t    m_frametime;
 	uint8_t   m_is;
 
