@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-11-26 11:51+0000\n"
+"PO-Revision-Date: 2012-11-29 15:05+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-11-27 05:10+0000\n"
-"X-Generator: Launchpad (build 16309)\n"
+"X-Launchpad-Export-Date: 2012-11-30 04:34+0000\n"
+"X-Generator: Launchpad (build 16319)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2975,16 +2975,16 @@ msgstr "«%s»-stamma finst ikkje"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:139
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "bobar: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr ""
+msgstr "tillatne typar arbeidarar: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:129
 msgid "no carrier slot"
-msgstr ""
+msgstr "Ingen bererplassar"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:133
 #, c-format
@@ -2992,75 +2992,77 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"Venta 1, men fann %u plassar til berarar i vei lagra med pakkeversjon 2 "
+"(gammal)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:202
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "veg %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:209
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "vegdata: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:71
 #, c-format
 msgid "elemental data: %s"
-msgstr ""
+msgstr "elementdata: %s"
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:100
 #, c-format
 msgid "extradata: %s"
-msgstr ""
+msgstr "ekstradata: %s"
 
 #: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:64
 #, c-format
 msgid "port_spaces data: %s"
-msgstr ""
+msgstr "flytt_rom-data: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:143
 #, c-format
 msgid "unseen immovable: %s"
-msgstr ""
+msgstr "usedd uflyttbar: %s"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:109
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "ukjend objekthovud %u"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:112
 #, c-format
 msgid "map objects: %s"
-msgstr ""
+msgstr "kartobjekt: %s"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:51
 msgid "Metaserver Lobby"
-msgstr ""
+msgstr "Resepsjon for metatenar"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
 msgid "Clients online:"
-msgstr ""
+msgstr "Pålogga klientar"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:59
 msgid "List of games:"
-msgstr ""
+msgstr "Spelliste"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:63
 msgid "Name of your server:"
-msgstr ""
+msgstr "Namnet på tenaren din:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:67
 msgid "Maximum of players:"
-msgstr ""
+msgstr "Største tal på spelarar"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:80
 #: ../../src/ui_fsmenu/netsetup_lan.cc:59
 msgid "Join this game"
-msgstr ""
+msgstr "Delta i dette spelet"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:85
 msgid "Open a new game"
-msgstr ""
+msgstr "Opne eit nytt spel"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:90
 #: ../../src/ui_fsmenu/launchSPG.cc:65
@@ -3072,19 +3074,19 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadreplay.cc:43 ../../src/ui_fsmenu/multiplayer.cc:58
 #: ../../src/ui_fsmenu/netsetup_lan.cc:69
 msgid "Back"
-msgstr ""
+msgstr "Attende"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:155
 msgid "Points"
-msgstr ""
+msgstr "Poeng"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Game"
-msgstr ""
+msgstr "Spel"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:378
 msgid "Connection timed out"
-msgstr ""
+msgstr "Tidsavbrot på sambandet"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:381
 msgid ""
@@ -3092,6 +3094,9 @@ msgid ""
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
+"Widelands klara ikkje å skaffe IP-addressa til tenaren i tide.\n"
+"Det verker som om det er ein nettverkfeil, anten på di side\n"
+"eller på tenaren si side.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:407
 #: ../../src/network/internet_gaming.cc:112
@@ -3104,47 +3109,47 @@ msgstr "Widelands klarte ikkje å kopla til serveren."
 
 #: ../../src/ui_fsmenu/launchSPG.cc:55
 msgid "Select map"
-msgstr ""
+msgstr "Vel kart"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:70 ../../src/ui_fsmenu/launchMPG.cc:127
 msgid "Start game"
-msgstr ""
+msgstr "Start spelet"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:76
 msgid "Launch Game"
-msgstr ""
+msgstr "Køyr spel"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:84
 msgid "Player's name"
-msgstr ""
+msgstr "Spelarnamn"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:88
 msgid "Player's type"
-msgstr ""
+msgstr "Spelartype"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player's tribe"
-msgstr ""
+msgstr "Spelarstamme"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
-msgstr ""
+msgstr "Start"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:104 ../../src/ui_fsmenu/launchMPG.cc:169
 msgid "Type of game"
-msgstr ""
+msgstr "Speltype"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
-msgstr ""
+msgstr "Skift til posisjon"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:233 ../../src/ui_fsmenu/launchMPG.cc:288
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "Vinnevilkår er sette gjennom scenariet"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:259 ../../src/ui_fsmenu/launchMPG.cc:423
 msgid "File not found"
-msgstr ""
+msgstr "Fann ikkje fila"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:261
 #, c-format
@@ -3156,311 +3161,318 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finished!?!"
 msgstr ""
+"Widelands prøvde å starte eit spel med ei fil som ikkje blei funnen på "
+"angiven stad.\n"
+"Fila var: %s\n"
+"Viss dette er eit nettverkspel kan verten ha vald ei fil du ikkje har.  "
+"Vanlegvis blir ei slik fil sendt til deg frå verten, men overføringa var "
+"kanskje ikkje ferdig!?!"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:285 ../../src/ui_fsmenu/launchMPG.cc:215
 msgid "(no map)"
-msgstr ""
+msgstr "(inge kart)"
 
 #: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:421
 msgid "Advanced Options"
-msgstr ""
+msgstr "Avanserte val"
 
 #: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:397
 msgid "Apply"
-msgstr ""
+msgstr "Bruk"
 
 #: ../../src/ui_fsmenu/options.cc:72
 msgid "min."
-msgstr ""
+msgstr "min."
 
 #: ../../src/ui_fsmenu/options.cc:78
 msgid "days"
-msgstr ""
+msgstr "dagar"
 
 #: ../../src/ui_fsmenu/options.cc:85
 msgid "General Options"
-msgstr ""
+msgstr "Allmennval"
 
 #: ../../src/ui_fsmenu/options.cc:92
 msgid "Fullscreen"
-msgstr ""
+msgstr "Fullskjerm"
 
 #: ../../src/ui_fsmenu/options.cc:98
 msgid "Grab Input"
-msgstr ""
+msgstr "Bruk inngang"
 
 #: ../../src/ui_fsmenu/options.cc:104
 msgid "Enable Music"
-msgstr ""
+msgstr "Skru på musikk"
 
 #: ../../src/ui_fsmenu/options.cc:110
 msgid "Enable Sound"
-msgstr ""
+msgstr "Skru på lyd"
 
 #: ../../src/ui_fsmenu/options.cc:115
 msgid "Maximum FPS:"
-msgstr ""
+msgstr "Maksimalt BPS:"
 
 #: ../../src/ui_fsmenu/options.cc:125
 msgid "In-game resolution"
-msgstr ""
+msgstr "Speloppløysing"
 
 #: ../../src/ui_fsmenu/options.cc:130
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #: ../../src/ui_fsmenu/options.cc:141
 msgid "In-game Options"
-msgstr ""
+msgstr "Spelval"
 
 #: ../../src/ui_fsmenu/options.cc:148
 msgid "Use single Watchwindow Mode"
-msgstr ""
+msgstr "Bruk enkeltsynsvindaugemodus"
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Start roadbuilding after placing flag"
-msgstr ""
+msgstr "Start vegbygging etter flagplanting"
 
 #: ../../src/ui_fsmenu/options.cc:161
 msgid "Show buildings area preview"
-msgstr ""
+msgstr "Føresyn byggeområde"
 
 #: ../../src/ui_fsmenu/options.cc:168
 msgid "Snap windows only when overlapping"
-msgstr ""
+msgstr "Berre fest vindauge ved overlapping"
 
 #: ../../src/ui_fsmenu/options.cc:174
 msgid "Dock windows to edges"
-msgstr ""
+msgstr "Fest vindauga til kantane"
 
 #: ../../src/ui_fsmenu/options.cc:179
 msgid "Save game automatically every"
-msgstr ""
+msgstr "Lagra spelet automatisk kvart"
 
 #: ../../src/ui_fsmenu/options.cc:183
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "Fjern reprisar som er eldre enn:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
-msgstr ""
+msgstr "Av"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "Aldri"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
 msgid "%ix%i %i bit"
-msgstr ""
+msgstr "%ix%i %i bit"
 
 #: ../../src/ui_fsmenu/options.cc:297
 msgid "Try system language"
-msgstr ""
+msgstr "Prøv systemspråket"
 
 #: ../../src/ui_fsmenu/options.cc:403
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:408 ../../src/ui_fsmenu/options.cc:413
 msgid "px."
-msgstr ""
+msgstr "px."
 
 #: ../../src/ui_fsmenu/options.cc:432
 msgid "Main menu font:"
-msgstr ""
+msgstr "Skrifttype for hovedmeny:"
 
 #: ../../src/ui_fsmenu/options.cc:438
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "Spel av ein lyd når meldingar kjem"
 
 #: ../../src/ui_fsmenu/options.cc:446
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
+"Ikkje komprimer datafiler for widelands (kart, filmar og lagra spel)."
 
 #: ../../src/ui_fsmenu/options.cc:451
 msgid "Speed of a new game:"
-msgstr ""
+msgstr "Hastigheit for nytt spel"
 
 #: ../../src/ui_fsmenu/options.cc:455
 msgid "Distance for windows to snap to other panels:"
-msgstr ""
+msgstr "Avstand før vindauge klistrar seg til andre panel:"
 
 #: ../../src/ui_fsmenu/options.cc:459
 msgid "Distance for windows to snap to borders:"
-msgstr ""
+msgstr "Avstand før vindauge klistrar seg til kantar:"
 
 #: ../../src/ui_fsmenu/options.cc:465
 msgid "Remove Syncstream dumps on startup"
-msgstr ""
+msgstr "Fjern synkstraumdumpar ved oppstart"
 
 #: ../../src/ui_fsmenu/options.cc:471
 msgid "OpenGL rendering"
-msgstr ""
+msgstr "OpenGL-syning"
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Syn i speleprat med gjennomsynleg bakgrunn"
 
 #: ../../src/ui_fsmenu/options.cc:515
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../src/ui_fsmenu/options.cc:526
 msgid "FreeSerif (Default)"
-msgstr ""
+msgstr "FreeSerif (standard)"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:54
 #: ../../src/ui_fsmenu/campaign_select.cc:264
 msgid "Choose your map!"
-msgstr ""
+msgstr "Vel deg eit kart!"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 #: ../../src/ui_fsmenu/mapselect.cc:64
 #: ../../src/ui_fsmenu/campaign_select.cc:266
 msgid "Name:"
-msgstr ""
+msgstr "Namn:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:60
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/ui_fsmenu/campaign_select.cc:268
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:79
 msgid "Author:"
-msgstr ""
+msgstr "Forfattar:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:65
 #: ../../src/ui_fsmenu/mapselect.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:65
 msgid "Size:"
-msgstr ""
+msgstr "Storleik:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:70
 #: ../../src/ui_fsmenu/mapselect.cc:82
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:74
 msgid "World:"
-msgstr ""
+msgstr "Verd:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr ""
+msgstr "Spelarar"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:80
 #: ../../src/ui_fsmenu/mapselect.cc:94
 msgid "Descr:"
-msgstr ""
+msgstr "Skildr.:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:229
 #: ../../src/ui_fsmenu/mapselect.cc:345
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:227
 msgid "<parent>"
-msgstr ""
+msgstr "<forelder>"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "Trykk ESC eller klikk for å helde fram…"
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
-msgstr ""
+msgstr "Endremeny"
 
 #: ../../src/ui_fsmenu/editor.cc:42
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
 #: ../../src/editor/ui_menus/editor_main_menu.cc:55
 msgid "New Map"
-msgstr ""
+msgstr "Nytt kart"
 
 #: ../../src/ui_fsmenu/editor.cc:47
 #: ../../src/editor/ui_menus/editor_main_menu.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:51
 msgid "Load Map"
-msgstr ""
+msgstr "Last kart"
 
 #: ../../src/ui_fsmenu/main.cc:39
 msgid "Play Tutorial"
-msgstr ""
+msgstr "Spel innføring"
 
 #: ../../src/ui_fsmenu/main.cc:44
 msgid "Single Player"
-msgstr ""
+msgstr "Éinspelar"
 
 #: ../../src/ui_fsmenu/main.cc:49
 msgid "Multi Player"
-msgstr ""
+msgstr "Fleirspelar"
 
 #: ../../src/ui_fsmenu/main.cc:54
 msgid "Watch Replay"
-msgstr ""
+msgstr "Sjå reprise"
 
 #: ../../src/ui_fsmenu/main.cc:59
 msgid "Editor"
-msgstr ""
+msgstr "Endreprogram"
 
 #: ../../src/ui_fsmenu/main.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu.cc:80
 msgid "View Readme"
-msgstr ""
+msgstr "Syn Lesmeg"
 
 #: ../../src/ui_fsmenu/main.cc:85
 msgid "Version "
-msgstr ""
+msgstr "Versjon "
 
 #: ../../src/ui_fsmenu/main.cc:90
 msgid "by the Widelands Development Team"
-msgstr ""
+msgstr "av utviklarlaget for Widelands"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Vel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:65
 msgid "Select a map"
-msgstr ""
+msgstr "Vel eit kart"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Lagra spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Vel eit lagra spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:85
 msgid "Cancel selection"
-msgstr ""
+msgstr "Avbryt val"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:122
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Endre kart eller lagra spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
-msgstr ""
+msgstr "Syn hjelpevindauget"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:664
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Oppsett for spel med fleire spelarar"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Klientar"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:216
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "Verten har ikkje vald eit kart eller lagra spelet."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:292
 msgid "The game is a saved game - the win condition was set before."
-msgstr ""
+msgstr "Spelet er eit lagra spel - vilkåra for å vinne er allereie sette."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:393
 msgid "Saved game is directory"
-msgstr ""
+msgstr "Lagra spel er ei mappe"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:395
 msgid ""
@@ -3470,6 +3482,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, "
 "please select another saved game or zip the directories content."
 msgstr ""
+"ÅTVARING:\n"
+"Det lagra spelet du valde er ei mappe.  Dette skjer, viss du brukar valet "
+"«ikkjekomprimer» eller dekomprimerte det lagra spelet manuelt.\n"
+"Widelands kan ikkje overføre mappestrukturar til klientane, ver snill å "
+"velje eit anna lagra spel eller komprimer innhaldet i mappa."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:425
 #, c-format
@@ -3481,12 +3498,20 @@ msgid ""
 "Normally such a file should be send from the host to you, but perhaps the "
 "transfer was not yet finished!?!"
 msgstr ""
+"Widelands prøvde å starte eit spel med ei fil som ikkje blei funnen ved "
+"given sti.\n"
+"Fila var: %s\n"
+"Viss dette skjer, kan verten ha vald ei fil du ikkje har.  Vanlegvis blir ei "
+"slik fil sendt frå verten til deg, men kanskje overføringa ikkje var ferdig "
+"!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:449
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write the host about this problem."
 msgstr ""
+"Den valde fila blei ikkje funnen.  Viss den ikkje er automatisk sendt til "
+"deg, ver snill og skriv til verten om dette problemet."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:484
 #, c-format
@@ -3494,63 +3519,68 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
+"Akkurat no er du %s\n"
+"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:485
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "Klikk på «?» i øvre høgre hjørnet for å få hjelp."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:546
 msgid "Saved players are:"
-msgstr ""
+msgstr "Lagra spelarar er:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "<closed>"
-msgstr ""
+msgstr "<lukka>"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:628
 msgid "There was an error!"
-msgstr ""
+msgstr "Det var ein feil!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:628
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "Kartfila verkar ugyldeg!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:645
 msgid "Map informations:\n"
-msgstr ""
+msgstr "Kartinformasjonar:\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:646
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr ""
+msgstr "* Storleik: %ux%u\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:647
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i spelarar\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:648
 #, c-format
 msgid "* World type: %s\n"
-msgstr ""
+msgstr "* Verdtype: %s\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 msgid "* Scenario mode selected\n"
-msgstr ""
+msgstr "* Scenariomodus vald\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:665
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Du er i fleirspelar-køyr-spelet-menyen"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Client settings"
-msgstr ""
+msgstr "Klientinnstillingar"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:669
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
 msgstr ""
+"På den venstre sida er ei liste over alle klientane, deg sjølv inkludert.  "
+"Med knappen etter kallenamnet ditt kan du endre rolla di.  Tilbodne rollar "
+"er:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid ""
@@ -3558,26 +3588,31 @@ msgid ""
 "same color, these share the control over the player (\"shared kingdom "
 "mode\")."
 msgstr ""
+"Spelaren med flagfargen.  Viss meir enn ein klient vel same fargen, delar "
+"dei kontroll over spelaren («delt kongedøme-modus»)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:677
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
+"Og tilskodarmodus, kor du kan sjå alt, men ikkje kontrollere noken spelarar"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:679
 msgid "Player settings"
-msgstr ""
+msgstr "Spelarval"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:682
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
+"I midten er vala for spelarane.  For å starte eit spel må kvar spelar vera "
+"ein av følgande:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:685
 msgid "Connected to one or more clients (see \"Client settings\")."
-msgstr ""
+msgstr "Kopla til ein eller fleire klientar (sjå «Klientval»)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:688
 msgid ""
@@ -3585,6 +3620,8 @@ msgid ""
 "hover texts indicates the strength of the currently selected computer "
 "player)."
 msgstr ""
+"Kopla til ein dataspelar (andletet i biletet i tillegg til mus over tekst "
+"visar styrken på den valde dataspelaren)."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:691
 msgid "Set as shared in starting position for another player."
