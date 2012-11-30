@@ -135,6 +135,7 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
 	LineCache::iterator it = linecache.insert(linecache.begin(), LineCacheEntry());
 	it->style = style;
 	it->text = text;
+	it->picture = 0;
 	render_line(*it);
 
 	while (linecache.size() > MaxLineCacheSize)
@@ -149,9 +150,6 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
  */
 void Font_Handler::Data::render_line(LineCacheEntry & lce)
 {
-	//static int count = 0;
-	//log("render_line(%s): %i\n", lce.text.c_str(), ++count);
-
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r(), lce.style.fg.g(), lce.style.fg.b(), 0};
 
