@@ -17,6 +17,9 @@
  *
  */
 
+// TODO(sirver): picid -> pic everywhere
+
+
 #include "graphic.h"
 
 #include "build_info.h"

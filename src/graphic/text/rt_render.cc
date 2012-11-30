@@ -20,6 +20,7 @@
 #include <iostream> // TODO(sirver): Remove again
 
 // TODO(sirver): Read through this file again. There are a lot of stray comments which are not longer needed
+// TODO(sirver): seems like everything except for rich text rendering is working now
 #include <queue>
 #include <string>
 #include <vector>

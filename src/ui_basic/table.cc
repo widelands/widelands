@@ -281,8 +281,8 @@ void Table<void *>::draw(RenderTarget & dst)
 			uint32_t stringw = 0;
 			uint32_t stringh = g_fh->get_fontheight(m_fontname, m_fontsize);
 			if (entry_picture) {
-				uint32_t picw = entry_picture->get_w();
-				uint32_t pich = entry_picture->get_h();
+				picw = entry_picture->get_w();
+				pich = entry_picture->get_h();
 			}
 			Point point =
 				Point(curx, y)
