@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-11-29 15:05+0000\n"
+"PO-Revision-Date: 2012-11-30 22:41+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-11-30 04:34+0000\n"
+"X-Launchpad-Export-Date: 2012-12-01 04:33+0000\n"
 "X-Generator: Launchpad (build 16319)\n"
 
 #: ../../src/computer_player.cc:38
@@ -3625,11 +3625,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:691
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Vel som delt startstad for ein annan spelar."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:692
 msgid "Closed."
-msgstr ""
+msgstr "Lukka"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:695
 msgid ""
@@ -3638,16 +3638,22 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
+"Dei tre sistnemde kan berre styrast av vertsklienten med å venstretrykke på "
+"«type»-knappen til ein spelar.  Vertsspelarar kan styre oppstartskåra til "
+"kvar spelar (byggsett, varar og arbeidarar spelaren startar med) og stamma "
+"og laget til dataspelarar"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:700
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
 msgstr ""
+"Kvar klient som er kopla til ein spelar (den valde «rolle»-spelaren kan "
+"velje stamme og lag til den spelaren"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:702
 msgid "Map informations"
-msgstr ""
+msgstr "Kartinfo"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:705
 msgid ""
@@ -3656,126 +3662,132 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
+"På høgre side er informasjon om valde kart eller lagra spel.  Ein knapp til "
+"høgre for kartet let verten endre til eit anna.  Vidare kan verten velje "
+"kåra for å vinne og til slutt starte spelet så snart alle spelarane er setne "
+"opp."
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario: "
-msgstr ""
+msgstr "Last kart som scenario: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
-msgstr ""
+msgstr "Kartnamn"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Syn alle kart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Offisielt kart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1 mot 1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "2 Player Teams"
-msgstr ""
+msgstr "Lag på to spelarar"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "3 Player Teams"
-msgstr ""
+msgstr "Trespelarlag"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "4 Player Teams"
-msgstr ""
+msgstr "Firespelarlag"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "Fritt for alle"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "Ubalansert"
 
 #: ../../src/ui_fsmenu/mapselect.cc:277
 msgid "(directory)"
-msgstr ""
+msgstr "(mappe)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:502 ../../src/ui_fsmenu/mapselect.cc:506
 msgid "unknown"
-msgstr ""
+msgstr "ukjend"
 
 #: ../../src/ui_fsmenu/mapselect.cc:504
 msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Denne kartfila finst ikkje i filsystemet ditt.  Data som er vist her blei "
+"sendt av tenaren."
 
 #: ../../src/ui_fsmenu/singleplayer.cc:39
 msgid "Single Player Menu"
-msgstr ""
+msgstr "Meny for einspelar"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:46
 msgid "New Game"
-msgstr ""
+msgstr "Nytt spel"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:51
 msgid "Campaigns"
-msgstr ""
+msgstr "Kampanjar"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:56
 msgid "Load Game"
-msgstr ""
+msgstr "Last spel"
 
 #: ../../src/ui_fsmenu/loadgame.cc:74
 msgid "Choose saved game!"
-msgstr ""
+msgstr "Vel eit lagra spel!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:78 ../../src/ui_fsmenu/loadreplay.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:56
 msgid "Map Name:"
-msgstr ""
+msgstr "Kartnamn:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:83 ../../src/ui_fsmenu/loadreplay.cc:74
 msgid "Gametime:"
-msgstr ""
+msgstr "Speltid:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:128 ../../src/ui_fsmenu/loadreplay.cc:116
 msgid "Delete file"
-msgstr ""
+msgstr "Slett fil"
 
 #: ../../src/ui_fsmenu/loadgame.cc:129 ../../src/ui_fsmenu/loadreplay.cc:117
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Vil du verkeleg slette "
 
 #: ../../src/ui_fsmenu/loadgame.cc:176
 msgid "Savegame from dedicated server"
-msgstr ""
+msgstr "Lagra spel frå dedikert tenar"
 
 #: ../../src/ui_fsmenu/loadgame.cc:177
 msgid "Unknown gametime"
-msgstr ""
+msgstr "Ukjend speltid"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
-msgstr ""
+msgstr "Vel ei kampanje"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:54
 msgid "Campaign:"
-msgstr ""
+msgstr "Kampanje:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Difficulty:"
-msgstr ""
+msgstr "Vanskeligheitsgrad"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:270
 msgid "Description:"
-msgstr ""
+msgstr "Skildring"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:163
 #: ../../src/ui_fsmenu/campaign_select.cc:165
@@ -3783,119 +3795,119 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:226
 #: ../../src/ui_fsmenu/campaign_select.cc:419
 msgid "[No value found]"
-msgstr ""
+msgstr "[Ingen verdi funnen]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:170
 msgid "[Invalid entry]"
-msgstr ""
+msgstr "[Ugyldeg innlegg]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:358
 #, c-format
 msgid "Invalid path to file in cconfig: %s"
-msgstr ""
+msgstr "Ugyldeg sti til fil i cconfig: %s"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:65
 msgid "Choose a replay!"
-msgstr ""
+msgstr "Vel ei reprise!"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
-msgstr ""
+msgstr "Vel speltype"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:48
 msgid "Internet game"
-msgstr ""
+msgstr "Nettspel"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:53
 msgid "LAN / Direct IP"
-msgstr ""
+msgstr "Lokalt nettverk (LAN) / Direkte IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:84
 msgid "Show login dialog"
-msgstr ""
+msgstr "Vis dialog for pålogging"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:40
 msgid "Begin Network Game"
-msgstr ""
+msgstr "Start nettverksspel"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:44
 msgid "List of games in your local network:"
-msgstr ""
+msgstr "Liste over spill på ditt lokale nettverk:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:48
 msgid "Your nickname:"
-msgstr ""
+msgstr "Kallenamnet ditt:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:52
 msgid "Host to connect:"
-msgstr ""
+msgstr "Kople til vert:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:64
 msgid "Host a new game"
-msgstr ""
+msgstr "Ver vert for eit nytt spel"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:75
 msgid "Load previous host"
-msgstr ""
+msgstr "Last forrige vert"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:123
 msgid "Host"
-msgstr ""
+msgstr "Vert"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125
 msgid "State"
-msgstr ""
+msgstr "Fylke"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:87
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "kommandokø: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:66
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "Det er ingen flag ved givne posisjon"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:74
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "økonomiar: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr ""
+msgstr "Spelet har ingen spelarar!"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:80
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "interaktiv spelar: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:65
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "førelast: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "spelar (%i) er utanfor utvalet (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:145
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "spelarinfo: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "game_class: %s"
 
 #: ../../src/graphic/animation.cc:139
 msgid "frame number"
-msgstr ""
+msgstr "rammetal"
 
 #: ../../src/network/netclient.cc:103 ../../src/network/internet_gaming.cc:118
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Kunne ikkje kople til verten"
 
 #: ../../src/network/netclient.cc:105
 msgid ""
@@ -3903,32 +3915,37 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"Widelands kunne ikkje kople til den gitte adressa.\n"
+"Anten er det ingen Widelands-tenar som køyrer på den gitte porten eller\n"
+"slo tenaren seg av mens du prøvde å kople til."
 
 #: ../../src/network/netclient.cc:839
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "fila til /me feila md5 sjekksum."
 
 #: ../../src/network/netclient.cc:869
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
+"/me sjekka den mottekne fila. Sjølv om md5 sjekksummen var i orden, kan eg "
+"ikkje handtera fila."
 
 #: ../../src/network/netclient.cc:1084
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr " Eit automatisk lagra spel vil opprettast."
 
 #: ../../src/network/netclient.cc:1088
 msgid "Disconnected from Host"
-msgstr ""
+msgstr "Kopla frå verten"
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client has left the game."
-msgstr ""
+msgstr "Klienten har forlate spelet"
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "Klienten krasja og nødlagra."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Connection was lost."
