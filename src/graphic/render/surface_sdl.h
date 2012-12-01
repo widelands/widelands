@@ -39,18 +39,11 @@ struct SurfaceSDL : IOffscreenSurface {
 		m_w(surface.w), m_h(surface.h),
 		m_isscreen(false)
 	{}
-	SurfaceSDL():
-		m_surface(0),
-		m_offsx(0), m_offsy(0),
-		m_w(0), m_h(0),
-		m_isscreen(false)
-	{}
 	~SurfaceSDL();
 
 	// Implements IBlitableSurface
 	virtual uint32_t get_w() const {return m_w;}
 	virtual uint32_t get_h() const {return m_h;}
-	bool valid() const {return m_surface;}
 	void blit(const Point&, const IPicture* , Rect srcrc, Composite cm);
 	void fill_rect(Rect, RGBAColor);
 	virtual IPixelAccess & pixelaccess() {return *this;}

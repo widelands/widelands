@@ -189,10 +189,9 @@ void RenderTarget::clear()
  */
 void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
 {
-	if (picture->valid())
-		doblit
-			(Rect(dst, 0, 0),
-			 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
+	doblit
+		(Rect(dst, 0, 0),
+		 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
 }
 
 /**
@@ -204,8 +203,7 @@ void RenderTarget::blitrect
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	if (picture->valid())
-		doblit(Rect(dst, 0, 0), picture, srcrc, cm);
+	doblit(Rect(dst, 0, 0), picture, srcrc, cm);
 }
 
 /**
@@ -216,9 +214,6 @@ void RenderTarget::blitrect
  */
 void RenderTarget::tile(Rect r, const IPicture* picture, Point ofs, Composite cm)
 {
-	if (!picture->valid())
-		return;
-
 	int32_t srcw = picture->get_w();
 	int32_t srch = picture->get_h();
 

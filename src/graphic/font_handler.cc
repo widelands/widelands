@@ -193,7 +193,7 @@ void Font_Handler::draw_text
 
 	do_align(align, dstpoint.x, dstpoint.y, lce.width + 2 * LINE_MARGIN, lce.height);
 
-	if (lce.picture && lce.picture->valid())
+	if (lce.picture)
 		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.picture);
 
 	if (caret <= text.size())
@@ -230,7 +230,7 @@ uint32_t Font_Handler::draw_text_raw
 {
 	const LineCacheEntry & lce = d->get_line(style, text);
 
-	if (lce.picture && lce.picture->valid())
+	if (lce.picture)
 		dst.blit(dstpoint, lce.picture);
 
 	return lce.width;

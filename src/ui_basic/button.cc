@@ -59,7 +59,7 @@ Button::Button //  for textual buttons
 {
 	set_think(false);
 
-	if (m_pic_background && m_pic_background->valid())
+	if (m_pic_background)
 		set_cache(true);
 }
 
@@ -91,7 +91,7 @@ Button::Button //  for pictorial buttons
 {
 	set_think(false);
 
-	if (m_pic_background && m_pic_background->valid())
+	if (m_pic_background)
 		set_cache(true);
 }
 

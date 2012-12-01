@@ -37,8 +37,6 @@ struct GLPictureTexture : IPicture, IPixelAccess {
 
 	/// Interface implementation
 	//@{
-	virtual bool valid();
-
 	virtual uint32_t get_w();
 	virtual uint32_t get_h();
 

@@ -32,8 +32,6 @@ struct GLSurfaceScreen : Surface, IPixelAccess {
 
 	/// Interface implementations
 	//@{
-	virtual bool valid();
-
 	virtual uint32_t get_w();
 	virtual uint32_t get_h();
 

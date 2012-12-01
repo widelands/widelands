@@ -868,7 +868,7 @@ IPicture* Graphic::create_picture(int32_t w, int32_t h, bool alpha)
  */
 IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 {
-	if (!pic || !pic->valid())
+	if (!pic)
 		return 0;
 
 	// TODO(sirver): cast is pretty ugly
@@ -922,7 +922,7 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 IPicture* Graphic::create_changed_luminosity_pic
 	(const IPicture* pic, float factor, bool halve_alpha)
 {
-	if (!pic || !pic->valid())
+	if (!pic)
 		return 0;
 
 	// TODO(sirver): cast is pretty ugly

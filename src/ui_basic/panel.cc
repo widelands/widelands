@@ -846,7 +846,7 @@ void Panel::do_draw(RenderTarget & dst)
 		uint32_t innerh = _h - (_tborder + _bborder);
 
 		if
-			(!_cache || !_cache->valid() ||
+			(!_cache ||
 			 static_cast<Surface *>(_cache.get())->get_w() != innerw ||
 			 static_cast<Surface *>(_cache.get())->get_h() != innerh)
 		{

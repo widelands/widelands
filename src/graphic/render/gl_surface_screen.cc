@@ -31,11 +31,6 @@ GLSurfaceScreen::GLSurfaceScreen(uint32_t w, uint32_t h)
 	m_h = h;
 }
 
-bool GLSurfaceScreen::valid()
-{
-	return true;
-}
-
 uint32_t GLSurfaceScreen::get_w()
 {
 	return m_w;

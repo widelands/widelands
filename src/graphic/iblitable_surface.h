@@ -42,7 +42,6 @@ public:
 	virtual uint32_t get_h() const = 0;
 	//@}
 	//
-	virtual bool valid() const = 0;
 
 	/// This draws a part of another surface to this surface
 	virtual void blit(const Point&, const IPicture*, Rect srcrc, Composite cm = CM_Normal) = 0;

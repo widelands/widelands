@@ -158,11 +158,6 @@ void GLPictureTexture::init(uint32_t w, uint32_t h)
 	handle_glerror();
 }
 
-bool GLPictureTexture::valid()
-{
-	return true;
-}
-
 uint32_t GLPictureTexture::get_w()
 {
 	return m_w;
