@@ -26,7 +26,7 @@
 #include "point.h"
 
 struct RenderTarget;
-struct LayeredFileSystem;
+struct FileSystem;
 
 namespace UI {
 
@@ -46,7 +46,7 @@ struct IFont_Handler1 { // TODO: rename: TextRenderer
 	// TODO(sirver): flush cache
 };
 
-IFont_Handler1 * create_fonthandler(IGraphic& gr, LayeredFileSystem & lfs) ;
+IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs) ;
 
 extern IFont_Handler1 * g_fh1;
 

@@ -275,9 +275,6 @@ m_homedir(FileSystem::GetHomedir() + "/.widelands"),
 m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
-	UI::g_fh = new UI::Font_Handler();
-	// TODO(sirver): bring this thing back
-	// UI::g_fh1 = UI::create_fonthandler(*g_gr, *g_fs);
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 
@@ -304,6 +301,10 @@ m_redirected_stdio(false)
 	else
 		g_gr = 0;
 
+	UI::g_fh = new UI::Font_Handler();
+	// TODO(sirver): There must be only one
+	UI::g_fh1 = UI::create_fonthandler(*g_gr, g_fs);
+
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
 }
@@ -322,9 +323,10 @@ WLApplication::~WLApplication()
 	assert(UI::g_fh);
 	delete UI::g_fh;
 	UI::g_fh = 0;
-	// TODO(sirver): bring this back
-	// delete UI::g_fh1;
-	// UI::g_fh1 = 0;
+
+	assert(UI::g_fh1);
+	delete UI::g_fh1;
+	UI::g_fh1 = 0;
 
 	assert(g_fs);
 	delete g_fs;

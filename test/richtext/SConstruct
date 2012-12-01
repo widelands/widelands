@@ -10,8 +10,15 @@ env.ParseConfig("pkg-config sdl --libs")
 env.Append(LIBS="SDL_ttf")
 env.Append(CPPPATH="../../src/graphic/text")
 env.Append(CPPPATH="../../src/")
-rt_srcs = Glob("../../src/graphic/text/*.cc") + ["../../src/md5.cc"]
-rt_lib = env.Library(rt_srcs)
+rt_lib = env.Library([
+    "../../src/graphic/text/rt_parse.cc",
+    "../../src/graphic/text/rt_render.cc",
+    "../../src/graphic/text/sdl_helper.cc",
+    "../../src/graphic/text/sdl_ttf_font_impl.cc",
+    "../../src/graphic/text/sdl_ttf_font_loader_from_file.cc",
+    "../../src/graphic/text/textstream.cc",
+    "../../src/md5.cc",
+])
 
 # Debug program that renders one text
 render_env = env.Clone()

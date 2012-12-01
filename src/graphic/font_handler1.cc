@@ -47,7 +47,7 @@ namespace UI {
 
 class Font_Handler1 : public IFont_Handler1 {
 public:
-	Font_Handler1(IGraphic& gr, LayeredFileSystem& fs);
+	Font_Handler1(IGraphic& gr, FileSystem* fs);
 	virtual ~Font_Handler1();
 
 	void draw_text
@@ -58,14 +58,11 @@ public:
 		 Align = Align_TopLeft);
 
 private:
-	LayeredFileSystem & m_fs; // TODO(sirver): never used
-	RT::IRenderer * m_renderer;
+	RT::IRenderer* m_renderer;
 };
 
-Font_Handler1::Font_Handler1(IGraphic& gr, LayeredFileSystem & fs) :
-	m_fs(fs)
-{
-	RT::IFontLoader * floader = RT::ttf_fontloader_from_file();
+Font_Handler1::Font_Handler1(IGraphic& gr, FileSystem* fs) {
+	RT::IFontLoader * floader = RT::ttf_fontloader_from_filesystem(fs);
 	m_renderer = RT::setup_renderer(gr, floader);
 }
 Font_Handler1::~Font_Handler1() {
@@ -76,7 +73,9 @@ void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::str
 	log("text: %s\n", text.c_str());
 	IPicture* p = 0;
 	try {
+		ALIVE();
 		p = m_renderer->render(text, w);
+		ALIVE();
 	} catch (RT::Exception & e) {
 		log("Text rendering error: %s", e.what()); // TODO(sirver): Should throw
 	}
@@ -91,7 +90,7 @@ void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::str
 	dst.blit(Point(dstpoint.x, dstpoint.y), p);
 }
 
-IFont_Handler1 * create_fonthandler(IGraphic& gr, LayeredFileSystem & lfs) {
+IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs) {
 	return new Font_Handler1(gr, lfs);
 }
 

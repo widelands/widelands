@@ -83,7 +83,7 @@ public:
 typedef std::set<std::string> TagSet;
 class IRenderer {
 public:
-	IRenderer(IFontLoader *) {};
+	IRenderer() {};
 	virtual ~IRenderer() {};
 
 	virtual IPicture* render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;

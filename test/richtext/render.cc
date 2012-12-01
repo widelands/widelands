@@ -117,28 +117,20 @@ int main(int argc, char *argv[])
 
 IPicture* image = 0;
 	try {
-		cout << "ALIVE 7" << endl;
 		image = renderer->render(txt, w, 0, allowed_tags);
-		cout << "ALIVE 8" << endl;
 
 		IPixelAccess & pa = image->pixelaccess();
 		pa.lock(IPixelAccess::Lock_Normal);
-		cout << "ALIVE 9" << endl;
 		save_png(outname, pa);
-		cout << "ALIVE 10" << endl;
 		pa.unlock(IPixelAccess::Unlock_Update);
-		cout << "ALIVE 11" << endl;
 	} catch(RT::Exception & e) {
 		cout << e.what() << endl;
 	}
 	if (image)
 		delete image;
 
-	cout << "ALIVE 12" << endl;
 	delete renderer;
-	cout << "ALIVE 13" << endl;
 	delete thin_graphic; // Will free all images
-	cout << "ALIVE 13" << endl;
 
 	SDL_Quit();
 

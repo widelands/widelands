@@ -17,18 +17,38 @@
  *
  */
 
-#ifndef SDL_TTF_FONT_H
-#define SDL_TTF_FONT_H
+
+#ifndef SDL_TTF_FONT_IMPL_H
+#define SDL_TTF_FONT_IMPL_H
+
+#include <string>
+
+#include <SDL_ttf.h>
 
 #include "rt_render.h"
 
-class FileSystem;
-
 namespace RT {
-RT::IFontLoader * ttf_fontloader_from_file();
-RT::IFontLoader * ttf_fontloader_from_filesystem(FileSystem*);
-}
+
+// Implementation of a Font object using SDL_ttf.
+class SDLTTF_Font : public IFont {
+public:
+	SDLTTF_Font(TTF_Font* ttf);
+	virtual ~SDLTTF_Font();
+
+	void dimensions(std::string, int, uint32_t * w, uint32_t * h);
+	virtual IPicture* render(IGraphic &, std::string, RGBColor clr, int);
+	uint32_t ascent(int) const;
+
+private:
+	void m_set_style(int);
+
+	TTF_Font * m_font;
+	int m_style;
+};
+
+}  // namespace RT
 
 
-#endif /* end of include guard: SDL_TTF_FONT_H */
+
+#endif /* end of include guard: SDL_TTF_FONT_IMPL_H */
 

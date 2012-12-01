@@ -104,7 +104,6 @@ struct Graphic : public virtual IGraphic {
 		 bool fullscreen, bool opengl);
 	virtual ~Graphic();
 
-	// TODO(sirver): Clean this up: all const stuff is stupid
 	int32_t get_xres() const;
 	int32_t get_yres() const;
 	RenderTarget * get_render_target();

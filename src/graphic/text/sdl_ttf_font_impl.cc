@@ -17,8 +17,8 @@
  *
  */
 
+// TODO(sirver): check includes
 #include <string>
-#include <exception>
 
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
@@ -27,7 +27,7 @@
 #include "rt_errors.h"
 #include "rt_render.h"
 #include "sdl_helper.h"
-#include "sdl_ttf_font.h"
+#include "sdl_ttf_font_impl.h"
 
 using namespace std;
 using namespace boost;
@@ -36,22 +36,6 @@ static const int SHADOW_OFFSET = 1;
 static const SDL_Color SHADOW_CLR = { 0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
-
-class SDLTTF_Font : public IFont {
-public:
-	SDLTTF_Font(TTF_Font* ttf);
-	virtual ~SDLTTF_Font();
-
-	void dimensions(string, int, uint32_t * w, uint32_t * h);
-	virtual IPicture* render(IGraphic &, string, RGBColor clr, int);
-	uint32_t ascent(int) const;
-
-private:
-	void m_set_style(int);
-
-	TTF_Font * m_font;
-	int m_style;
-};
 
 SDLTTF_Font::SDLTTF_Font(TTF_Font * font) :
 	m_font(font), m_style(TTF_STYLE_NORMAL) {
@@ -163,31 +147,4 @@ void SDLTTF_Font::m_set_style(int style) {
 	TTF_SetFontStyle(m_font, sdl_style);
 }
 
-class SDLTTF_FontLoaderFromFile : public IFontLoader {
-public:
-	SDLTTF_FontLoaderFromFile();
-	virtual ~SDLTTF_FontLoaderFromFile();
-	virtual IFont * load(std::string name, int ptsize);
-};
-
-SDLTTF_FontLoaderFromFile::SDLTTF_FontLoaderFromFile() {
-	TTF_Init();
-}
-SDLTTF_FontLoaderFromFile::~SDLTTF_FontLoaderFromFile() {
-	TTF_Quit();
-}
-
-IFont* SDLTTF_FontLoaderFromFile::load(std::string face, int ptsize) {
-	TTF_Font * mfont = TTF_OpenFontIndex(("fonts/" + face).c_str(), ptsize, 0);
-	if(!mfont)
-		throw BadFont((format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError()).str());
-
-	return new SDLTTF_Font(mfont);
-}
-
-IFontLoader * ttf_fontloader_from_file() {
-	return new SDLTTF_FontLoaderFromFile();
-}
-
-}
-
+}  // namespace RT

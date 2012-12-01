@@ -821,7 +821,7 @@ OffscreenSurfacePtr Graphic::create_offscreen_surface(int32_t w, int32_t h)
 // TODO(sirver): this is bullshit, there is too much overlap with the create_offscreen_surface.
 // En plus, this does not work for OpenGL, find a way to make it work
 IBlitableSurface * Graphic::create_surface(int32_t w, int32_t h) {
-	// TODO(sirver): this will likely crash at runtime and badly
+	// TODO(sirver): this will crash on runtime
 	return create_offscreen_surface(w, h).get();
 }
 
