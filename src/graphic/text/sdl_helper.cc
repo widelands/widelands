@@ -28,8 +28,7 @@ using namespace boost;
 
 namespace RT {
 
-	// TODO(sirver): is this still needed?
-SDL_Surface * empty_sdl_surface(int32_t w, int32_t h) {
+SDL_Surface * empty_sdl_surface(int32_t w, int32_t h, bool alpha) {
 	 SDL_Surface *surface;
 	 Uint32 rmask, gmask, bmask, amask;
 	 /* SDL interprets each pixel as a 32-bit number, so our masks must depend
@@ -38,12 +37,12 @@ SDL_Surface * empty_sdl_surface(int32_t w, int32_t h) {
 	 rmask = 0xff000000;
 	 gmask = 0x00ff0000;
 	 bmask = 0x0000ff00;
-	 amask = 0x000000ff;
+	 amask = alpha ? 0x000000ff : 0;
 #else
 	 rmask = 0x000000ff;
 	 gmask = 0x0000ff00;
 	 bmask = 0x00ff0000;
-	 amask = 0xff000000;
+	 amask = alpha ? 0xff000000 : 0;
 #endif
 
 	 surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32,

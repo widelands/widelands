@@ -137,7 +137,7 @@ public:
 	virtual IPicture* load_image(const std::string &, bool alpha = false);
 	virtual const IPicture* get_picture(PicMod, std::string const &, bool alpha = true);
 	virtual void add_picture_to_cache(PicMod, const std::string &, IPicture*);
-	IBlitableSurface * create_surface(int32_t w, int32_t h);
+	IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false);
 
 private:
 	typedef std::pair<const string, IPicture*> MapEntry;
@@ -178,12 +178,12 @@ IPicture* ThinGraphic::load_image(const std::string & s, bool alpha) {
 	rmask = 0xff000000;
 	gmask = 0x00ff0000;
 	bmask = 0x0000ff00;
-	amask = 0x000000ff;
+	amask = alpha ? 0x000000ff : 0;
 #else
 	rmask = 0x000000ff;
 	gmask = 0x0000ff00;
 	bmask = 0x00ff0000;
-	amask = 0xff000000;
+	amask = alpha ? 0xff000000 : 0;
 #endif
 
 	SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(image, w, h, 32, w*4, rmask, gmask, bmask, amask);
@@ -212,8 +212,8 @@ const IPicture* ThinGraphic::get_picture
 	return m_imgcache[fname];
 }
 
-IBlitableSurface * ThinGraphic::create_surface(int32_t w, int32_t h) {
-	return new ThinSDLSurface(RT::empty_sdl_surface(w,h), false);
+IBlitableSurface * ThinGraphic::create_surface(int32_t w, int32_t h, bool alpha) {
+	return new ThinSDLSurface(RT::empty_sdl_surface(w,h,alpha), false);
 }
 
 

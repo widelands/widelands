@@ -264,8 +264,8 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 		IPixelAccess & origpix = m_plrframes[0][i]->pixelaccess();
 		IPixelAccess & pcmask = m_pcmasks[i]->pixelaccess();
 
-		IPicture* newpicture = g_gr->create_picture(w, h, true);
-		IPixelAccess & newpix = newpicture->pixelaccess();
+		Surface* new_surface = g_gr->create_surface(w, h, true);
+		IPixelAccess & newpix = new_surface->pixelaccess();
 
 		const SDL_PixelFormat & fmt = origpix.format();
 		const SDL_PixelFormat & fmt_pc = pcmask.format();
@@ -319,7 +319,7 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 		pcmask.unlock(IPixelAccess::Unlock_NoChange);
 		newpix.unlock(IPixelAccess::Unlock_Update);
 
-		frames.push_back(newpicture);
+		frames.push_back(new_surface);
 	}
 }
 

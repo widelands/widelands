@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	RT::IFontLoader * floader = RT::ttf_fontloader_from_file();
 	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
 
-IPicture* image = 0;
+	IPicture* image = 0;
 	try {
 		image = renderer->render(txt, w, 0, allowed_tags);
 

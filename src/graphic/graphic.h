@@ -131,8 +131,7 @@ struct Graphic : public virtual IGraphic {
 
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 
-	Surface* create_surface(int32_t w, int32_t h);
-	IPicture* create_picture(int32_t w, int32_t h, bool alpha = false);
+	Surface* create_surface(int32_t w, int32_t h, bool alpha = false);
 
 	IPicture* create_grayed_out_pic(const IPicture* picid);
 	IPicture* create_changed_luminosity_pic

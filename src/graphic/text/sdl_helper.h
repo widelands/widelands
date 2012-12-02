@@ -24,7 +24,7 @@ struct SDL_Surface;
 
 namespace RT {
 
-SDL_Surface * empty_sdl_surface(int32_t w, int32_t h);
+SDL_Surface * empty_sdl_surface(int32_t w, int32_t h, bool alpha);
 
 };
 

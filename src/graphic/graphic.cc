@@ -17,6 +17,7 @@
  *
  */
 
+// TODO(sirver): IPicture could be something read only. Pixelaccess can then be separated out into ro and rw
 // TODO(sirver): picid -> pic everywhere
 // TODO(sirver): untangle which features in Surface should stay there and
 // which can go. Especially as IBlitableSurface and Surface are too similar.
@@ -780,18 +781,20 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 /**
  * Create an surface of specified size.
  *
- * // TODO(sirver): this will likely not be true for much longer
- * \note surfaces with an alpha channel are not supported due to
- * limitations in the SDL blitter.
+ * \note Handle surfaces with an alpha channel carefully, since SDL does not
+ * support to blit two surfaces with alpha channel on top of each other. The
+ * results when trying are rather funny at times and tend to crash.
  *
  * @param w width of the new surface
  * @param h height of the new surface
  * @return the new created surface
  */
-Surface* Graphic::create_surface(int32_t w, int32_t h)
+Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 {
 #ifdef USE_OPENGL
-	// TODO(sirver): fix this
+	// TODO(sirver): this used to be in create_picture
+		// return new GLPictureTexture(w, h);
+		// TODO(sirver): gl rendering is now broken
 	if (g_opengl)
 	{
 		throw wexception("OpenGL mode does not support offscreen surfaces");
@@ -805,44 +808,14 @@ Surface* Graphic::create_surface(int32_t w, int32_t h)
 			 w, h,
 			 format.BitsPerPixel,
 			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
+		if (alpha) {
+			SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
+			SDL_FreeSurface(&tsurf);
+			return new SurfaceSDL(surf);
+		}
 		return new SurfaceSDL(tsurf);
 	}
 }
-
-/**
- * Create a picture with initially undefined contents.
- *
- * Use \ref IPicture::pixelaccess to upload image data afterwards.
- *
- * @param w width of the new surface
- * @param h height of the new surface
- * @param alpha if true the surface is created with alpha channel
- * @return the new created surface
- */
-IPicture* Graphic::create_picture(int32_t w, int32_t h, bool alpha)
-{
-#ifdef USE_OPENGL
-	if (g_opengl)
-	{
-		// return new GLPictureTexture(w, h);
-		// TODO(sirver): gl rendering is now broken
-		return NULL;
-	}
-#endif
-	const SDL_PixelFormat & format = *m_sdl_screen->format;
-	SDL_Surface & tsurf = *SDL_CreateRGBSurface
-		(SDL_SWSURFACE,
-		 w, h,
-		 format.BitsPerPixel,
-		 format.Rmask, format.Gmask, format.Bmask, format.Amask);
-	if (alpha) {
-		SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
-		SDL_FreeSurface(&tsurf);
-		return new SurfaceSDL(surf);
-	}
-	return new SurfaceSDL(tsurf);
-}
-
 
 /**
  * Create a grayed version of the given picture.
@@ -863,8 +836,8 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 	uint32_t h = pic->get_h();
 	const SDL_PixelFormat & origfmt = origpix.format();
 
-	IPicture* destpicture = create_picture(w, h, origfmt.Amask);
-	IPixelAccess & destpix = destpicture->pixelaccess();
+	Surface* dest = create_surface(w, h, origfmt.Amask);
+	IPixelAccess & destpix = dest->pixelaccess();
 	const SDL_PixelFormat & destfmt = destpix.format();
 
 	origpix.lock(IPixelAccess::Lock_Normal);
@@ -892,7 +865,7 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 	origpix.unlock(IPixelAccess::Unlock_NoChange);
 	destpix.unlock(IPixelAccess::Unlock_Update);
 
-	return destpicture;
+	return dest;
 }
 
 /**
@@ -917,8 +890,8 @@ IPicture* Graphic::create_changed_luminosity_pic
 	uint32_t h = pic->get_h();
 	const SDL_PixelFormat & origfmt = origpix.format();
 
-	IPicture* destpicture = create_picture(w, h, origfmt.Amask);
-	IPixelAccess & destpix = destpicture->pixelaccess();
+	Surface* dest = create_surface(w, h, origfmt.Amask);
+	IPixelAccess & destpix = dest->pixelaccess();
 	const SDL_PixelFormat & destfmt = destpix.format();
 
 	origpix.lock(IPixelAccess::Lock_Normal);
@@ -942,7 +915,7 @@ IPicture* Graphic::create_changed_luminosity_pic
 	origpix.unlock(IPixelAccess::Unlock_NoChange);
 	destpix.unlock(IPixelAccess::Unlock_Update);
 
-	return destpicture;
+	return dest;
 }
 
 

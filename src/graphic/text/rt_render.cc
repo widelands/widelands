@@ -321,7 +321,7 @@ IBlitableSurface* TextNode::render(IGraphic & gr) {
 	// TODO(sirver): who owns this surface?
 	// TODO(sirver): what about the image?
 	const IPicture* img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	IBlitableSurface* rv = gr.create_surface(img->get_w(), img->get_h());
+	IBlitableSurface* rv = gr.create_surface(img->get_w(), img->get_h(), true);
 	assert(rv);
 	assert(img);
 	rv->blit(Point(0,0), img, Rect(0, 0, img->get_w(), img->get_h()), CM_Copy);
@@ -345,7 +345,7 @@ private:
 };
 IBlitableSurface* FillingTextNode::render(IGraphic & gr) {
 	const IPicture* t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	IBlitableSurface* rv = gr.create_surface(m_w, m_h);
+	IBlitableSurface* rv = gr.create_surface(m_w, m_h, true);
 	for (uint32_t x = 0; x < m_w; x += t->get_w()) {
 		Rect srcrect(
 				Point(0,0),
@@ -403,7 +403,7 @@ public:
 	virtual uint32_t width() {return m_w;}
 	virtual uint32_t hotspot_y() {return m_h;}
 	virtual IBlitableSurface* render(IGraphic & gr) {
-		IBlitableSurface* rv = gr.create_surface(m_w, m_h);
+		IBlitableSurface* rv = gr.create_surface(m_w, m_h, m_bg != NULL);
 
 		// Draw background image (tiling)
 		if (m_bg) {
@@ -444,7 +444,7 @@ public:
 	virtual uint32_t height() {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint32_t hotspot_y() {return height();}
 	virtual IBlitableSurface* render(IGraphic & gr) {
-		IBlitableSurface* rv = gr.create_surface(width(), height());
+		IBlitableSurface* rv = gr.create_surface(width(), height(), true);
 
 		// Draw Solid background Color
 		// TODO(sirver): A lot of set_alpha and so on is missing here
@@ -473,13 +473,11 @@ public:
 
 		foreach(RenderNode * n, m_nodes_to_render) {
 			IBlitableSurface* nsur = n->render(gr);
-			// TODO(sirver): render should return a reference and no pointer
 			// if (set_alpha)
 				// SDL_SetAlpha(nsur, 0, SDL_ALPHA_OPAQUE);
 			Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
 			Rect src = Rect(0, 0, rv->get_w(), rv->get_h());
 
-			// TODO(sirver): conversion should not be necessary here
 			rv->blit(dst, nsur, src, set_alpha ? CM_Solid : CM_Normal);
 			// TODO(sirver): Free nsur
 			// SDL_FreeSurface(nsur);
@@ -527,7 +525,8 @@ private:
 };
 
 IBlitableSurface* ImgRenderNode::render(IGraphic& gr) {
-	IBlitableSurface* rv = gr.create_surface(m_picture->get_w(), m_picture->get_h());
+	// TODO(sirver): maybe alpha can be false in some cases, depends on the image in question
+	IBlitableSurface* rv = gr.create_surface(m_picture->get_w(), m_picture->get_h(), true);
 	// TODO(sirver): Id rather not do this at all or when, then only once
 	rv->blit(Point(0,0), m_picture, Rect(0, 0, m_picture->get_w(), m_picture->get_h()), CM_Copy);
 	return rv;
