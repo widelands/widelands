@@ -21,7 +21,7 @@
 
 #include "constants.h"
 #include "graphic/font_handler.h"
-#include "graphic/offscreensurface.h"
+#include "graphic/iblitable_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/wordwrap.h"
 #include "log.h"
@@ -262,8 +262,7 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_h = nh;
 
 	if (_cache) {
-		// The old surface is freed automatically
-		_cache = g_gr->create_offscreen_surface(_w, _h);
+		_cache.reset(g_gr->create_surface(_w, _h));
 	}
 
 	if (_parent)
@@ -533,7 +532,7 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
- * from an \ref IOffscreenSurface containing the cached image, provided that
+ * from an \ref Surface containing the cached image, provided that
  * the graphics system supports it.
  *
  * \note Caching only works properly for solid panels that have no transparency.
@@ -547,7 +546,7 @@ void Panel::set_cache(bool cache)
 		_flags |= pf_cache;
 	} else {
 		_flags &= ~pf_cache;
-		_cache.reset();
+		_cache.reset(NULL);
 	}
 }
 
@@ -847,15 +846,15 @@ void Panel::do_draw(RenderTarget & dst)
 
 		if
 			(!_cache ||
-			 static_cast<Surface *>(_cache.get())->get_w() != innerw ||
-			 static_cast<Surface *>(_cache.get())->get_h() != innerh)
+			 _cache.get()->get_w() != innerw ||
+			 _cache.get()->get_h() != innerh)
 		{
-			_cache = g_gr->create_offscreen_surface(innerw, innerh);
+			_cache.reset(g_gr->create_surface(innerw, innerh));
 			_needdraw = true;
 		}
 
 		if (_needdraw) {
-			RenderTarget inner(_cache);
+			RenderTarget inner(_cache.get());
 			do_draw_inner(inner);
 
 			_needdraw = false;

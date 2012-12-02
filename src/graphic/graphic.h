@@ -29,7 +29,7 @@
 #include "animation_gfx.h"
 #include "igraphic.h"
 #include "rect.h"
-#include "surfaceptr.h"
+#include "surface.h"
 
 #define MAX_RECTS 20
 
@@ -37,12 +37,11 @@ namespace UI {struct ProgressWindow;}
 
 struct IPixelAccess;
 struct RenderTarget;
-struct Graphic;
 struct Road_Textures;
+struct SDL_Rect;
+struct SDL_Surface;
 struct StreamWrite;
 struct Texture;
-struct SDL_Surface;
-struct SDL_Rect;
 
 //@{
 /// This table is used by create_grayed_out_pic()to map colors to grayscale. It
@@ -126,16 +125,13 @@ struct Graphic : public virtual IGraphic {
 		__attribute__ ((pure));
 	virtual void add_picture_to_cache(PicMod, const std::string&, IPicture* );
 
-	IPicture* get_offscreen_picture(OffscreenSurfacePtr surface) const;
-
 	void save_png(const IPicture* , StreamWrite *) const;
 	void save_png(Surface* surf, StreamWrite *) const;
 	void save_png(IPixelAccess & pix, StreamWrite *) const;
 
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 
-	IBlitableSurface * create_surface(int32_t w, int32_t h);
-	OffscreenSurfacePtr create_offscreen_surface(int32_t w, int32_t h);
+	Surface* create_surface(int32_t w, int32_t h);
 	IPicture* create_picture(int32_t w, int32_t h, bool alpha = false);
 
 	IPicture* create_grayed_out_pic(const IPicture* picid);
@@ -183,6 +179,7 @@ protected:
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
+	// TODO(sirver): What?!?
 	SDL_Surface * m_sdl_screen;
 	/// A RenderTarget for m_screen. This is initialized during init()
 	RenderTarget * m_rendertarget;

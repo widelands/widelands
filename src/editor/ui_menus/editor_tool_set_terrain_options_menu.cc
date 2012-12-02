@@ -17,26 +17,26 @@
  *
  */
 
-#include "editor_tool_set_terrain_options_menu.h"
+#include <SDL_keysym.h>
+#include <boost/foreach.hpp>
 
-#include "editor/tools/editor_set_terrain_tool.h"
 #include "editor/editorinteractive.h"
+#include "editor/tools/editor_set_terrain_tool.h"
+#include "graphic/graphic.h"
+#include "graphic/iblitable_surface.h"
+#include "graphic/rendertarget.h"
+#include "graphic/texture.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include <SDL_keysym.h>
-#include "wlapplication.h"
 #include "logic/world.h"
 #include "logic/worlddata.h"
-
 #include "ui_basic/button.h"
-#include "ui_basic/panel.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/panel.h"
+#include "wlapplication.h"
 
-#include "graphic/graphic.h"
-#include "graphic/texture.h"
-#include "graphic/rendertarget.h"
+#include "editor_tool_set_terrain_options_menu.h"
 
-#include "log.h"
 
 Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	(Editor_Interactive         & parent,
@@ -52,7 +52,6 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	Widelands::Terrain_Index const nr_terrains = world.get_nr_terrains();
 	const uint32_t terrains_in_row = static_cast<uint32_t>
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
-
 
 	int32_t check[] = {
 		0,                                            //  "green"
@@ -99,61 +98,51 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 			// If offscreen rendering is not available only the terrain (and not
 			// the terrain type) is shown.
-			// TODO: Find a way to render this without offscreen rendering
+			// // TODO(sirver): whatTODO: Find a way to render this without offscreen rendering
 			//       or implement offscreen rendering for opengl
-			if (g_gr->caps().offscreen_rendering)
-			{
-				OffscreenSurfacePtr offscreen = g_gr->create_offscreen_surface(64, 64);
-				picture = g_gr->get_offscreen_picture(offscreen);
+			if (g_gr->caps().offscreen_rendering) {
+				IBlitableSurface* offscreen = g_gr->create_surface(64, 64);
 
-				//  get the rendertarget for this
-				RenderTarget target(offscreen);
+				const IPicture* tex = g_gr->get_picture(PicMod_Game,
+						g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
+							->get_texture_picture());
+				offscreen->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
 
-				//  first, blit the terrain texture
-				target.blit
-					(Point(0, 0),
-					 g_gr->get_picture
-					 	(PicMod_Game,
-					 	 g_gr->get_maptexture_data
-					 	 	(world.terrain_descr(i).get_texture())
-					 	 ->get_texture_picture()));
-
-				Point pic(1, 64 - small_pich - 1);
+				Point pt(1, 64 - small_pich - 1);
 
 				//  check is green
 				if (ter_is == 0) {
-					target.blit(pic, green);
-					pic.x += small_picw + 1;
+					offscreen->blit(pt, green, Rect(0, 0, green->get_w(), green->get_h()));
+					pt.x += small_picw + 1;
 				} else {
 					if (ter_is & TERRAIN_WATER) {
-						target.blit(pic, water);
-						pic.x += small_picw + 1;
+						offscreen->blit(pt, water, Rect(0, 0, water->get_w(), water->get_h()));
+						pt.x += small_picw + 1;
 					}
 					if (ter_is & TERRAIN_MOUNTAIN) {
-						target.blit(pic, mountain);
-						pic.x += small_picw + 1;
+						offscreen->blit(pt, mountain, Rect(0, 0, mountain->get_w(), mountain->get_h()));
+						pt.x += small_picw + 1;
 					}
 					if (ter_is & TERRAIN_ACID) {
-						target.blit(pic, dead);
-						pic.x += small_picw + 1;
+						offscreen->blit(pt, dead, Rect(0, 0, dead->get_w(), dead->get_h()));
+						pt.x += small_picw + 1;
 					}
 					if (ter_is & TERRAIN_UNPASSABLE) {
-						target.blit(pic, unpassable);
-						pic.x += small_picw + 1;
+						offscreen->blit(pt, unpassable, Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
+						pt.x += small_picw + 1;
 					}
 					if (ter_is & TERRAIN_DRY)
-						target.blit(pic, dry);
+						offscreen->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
 				}
+				offscreen_surfaces_.push_back(offscreen); // Make sure we delete this later on.
+				picture = offscreen;
 			} else {
 				picture = g_gr->get_picture
 					(PicMod_Game,
 					 g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 					 ->get_texture_picture());
 			}
-
-			//  Save this surface, so we can free it later on.
-			// m_surfaces.push_back(picture);
-			// TODO(sirver): We did never free this. Handle this again.
+			assert(picture);
 
 			UI::Checkbox & cb = *new UI::Checkbox(this, pos, picture);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
@@ -188,6 +177,9 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu()
 {
+	BOOST_FOREACH(IPicture* pic, offscreen_surfaces_)
+		delete pic;
+	offscreen_surfaces_.clear();
 }
 
 

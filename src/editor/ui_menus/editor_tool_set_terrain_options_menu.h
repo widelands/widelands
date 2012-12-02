@@ -20,11 +20,12 @@
 #ifndef EDITOR_TOOL_SET_TERRAIN_TOOL_H
 #define EDITOR_TOOL_SET_TERRAIN_TOOL_H
 
-#include "editor_tool_options_menu.h"
+#include <vector>
 
 #include "ui_basic/textarea.h"
 
-#include <vector>
+#include "editor_tool_options_menu.h"
+
 
 struct Editor_Interactive;
 struct Editor_Set_Terrain_Tool;
@@ -38,7 +39,9 @@ struct Editor_Tool_Set_Terrain_Options_Menu : public Editor_Tool_Options_Menu {
 	virtual ~Editor_Tool_Set_Terrain_Options_Menu();
 
 private:
-	std::vector<IPicture*>       m_surfaces;
+	// When we are using an offscreen surface, we have to delete it,
+	// when we are closed. So we keep a pointer around.
+	std::vector<IPicture*>  offscreen_surfaces_;
 	UI::Textarea                m_cur_selection;
 	Editor_Set_Terrain_Tool   & m_tool;
 	void selected(int32_t, bool);

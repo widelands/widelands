@@ -23,7 +23,8 @@
 #include "rgbcolor.h"
 #include "rect.h"
 
-#include "graphic/offscreensurface.h"
+#include "graphic/pixelaccess.h"
+#include "graphic/surface.h"
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right
@@ -32,7 +33,8 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-struct SurfaceSDL : IOffscreenSurface {
+class SurfaceSDL : virtual public Surface, virtual public IPixelAccess {
+public:
 	SurfaceSDL(SDL_Surface & surface) :
 		m_surface(&surface),
 		m_offsx(0), m_offsy(0),
@@ -44,8 +46,8 @@ struct SurfaceSDL : IOffscreenSurface {
 	// Implements IBlitableSurface
 	virtual uint32_t get_w() const {return m_w;}
 	virtual uint32_t get_h() const {return m_h;}
-	void blit(const Point&, const IPicture* , Rect srcrc, Composite cm);
-	void fill_rect(Rect, RGBAColor);
+	void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
+	void fill_rect(const Rect&, RGBAColor);
 	virtual IPixelAccess & pixelaccess() {return *this;}
 
 
@@ -72,20 +74,19 @@ struct SurfaceSDL : IOffscreenSurface {
 	void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
 
 	void clear();
-	void draw_rect(Rect, RGBColor);
-	void brighten_rect(Rect, int32_t factor);
+	void draw_rect(const Rect&, RGBColor);
+	void brighten_rect(const Rect&, int32_t factor);
 
 	void draw_line
 		(int32_t x1, int32_t y1,
 		 int32_t x2, int32_t y2,
 		 RGBColor, uint8_t width);
 
-	void set_subwin(Rect r);
+	// TODO(sirver): what is that? same as rendertarget?
+	void set_subwin(const Rect& r);
 	void unset_subwin();
 
 	void set_isscreen(bool screen);
-
-
 
 private:
 	SDL_Surface * m_surface;

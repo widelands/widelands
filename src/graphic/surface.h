@@ -23,7 +23,6 @@
 #include "iblitable_surface.h"
 #include "rect.h"
 #include "rgbcolor.h"
-#include "surfaceptr.h"
 #include "wexception.h"
 
 #include <boost/noncopyable.hpp>
@@ -40,9 +39,10 @@ public:
 	virtual void update() = 0;
 
 	/// Draws a rect (frame only) to the surface.
-	virtual void draw_rect(Rect, RGBColor) = 0;
+	virtual void draw_rect(const Rect&, RGBColor) = 0;
 
 	/// draw a line to the surface
+	// TODO(sirver): why not pure virtual?
 	virtual void draw_line
 		(int32_t /* x1 */,
 		 int32_t /* y1 */,
@@ -56,7 +56,7 @@ public:
 
 	/// makes a rectangle on the surface brighter (or darker).
 	/// @note this is slow in SDL mode. Use with care
-	virtual void brighten_rect(Rect, int32_t factor) = 0;
+	virtual void brighten_rect(const Rect&, int32_t factor) = 0;
 
 	virtual IPixelAccess & pixelaccess() = 0;
 };

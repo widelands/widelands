@@ -27,11 +27,12 @@
 #include "logic/tribe.h"
 #include "vertex.h"
 
-#include "offscreensurface.h"
+#include "surface.h"
 
 #include "log.h"
 #include "upcast.h"
 
+// TODO(sirver): check if this class has any valid use
 using Widelands::BaseImmovable;
 using Widelands::Coords;
 using Widelands::FCoords;
@@ -43,21 +44,11 @@ using Widelands::TCoords;
 /**
  * Build a render target for the given surface.
  */
-RenderTarget::RenderTarget(Surface* bmp)
+RenderTarget::RenderTarget(Surface* surf)
 {
-	m_surface = bmp;
+	m_surface = surf;
 	reset();
 }
-
-/**
- * Build a render target for the given surface.
- */
-RenderTarget::RenderTarget(OffscreenSurfacePtr surf)
-{
-	m_surface = surf.get();
-	reset();
-}
-
 
 /**
  * Sets an arbitrary drawing window.

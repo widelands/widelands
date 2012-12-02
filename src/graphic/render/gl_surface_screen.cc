@@ -250,6 +250,7 @@ void GLSurfaceScreen::clear()
 }
 
 
+// TODO(sirver): fix const madness
 void GLSurfaceScreen::blit
 	(Point const dst, const IPicture* src, Rect const srcrc, Composite cm)
 {

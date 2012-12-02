@@ -22,7 +22,6 @@
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
-#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "log.h"

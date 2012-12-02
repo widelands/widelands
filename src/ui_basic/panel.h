@@ -21,11 +21,11 @@
 #ifndef UI_PANEL_H
 #define UI_PANEL_H
 
-#include <boost/signals/trackable.hpp>
 #include <boost/noncopyable.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <boost/signals/trackable.hpp>
 
 #include "point.h"
-#include "graphic/surfaceptr.h"
 #include "graphic/graphic.h"
 
 #include <SDL_keyboard.h>
@@ -263,7 +263,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	OffscreenSurfacePtr _cache;
+	boost::scoped_ptr<Surface> _cache;
 	bool _needdraw;
 
 	/**

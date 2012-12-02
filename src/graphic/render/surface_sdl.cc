@@ -134,7 +134,7 @@ void SurfaceSDL::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 		SDL_UnlockSurface(m_surface);
 }
 
-void SurfaceSDL::set_subwin(Rect r) {
+void SurfaceSDL::set_subwin(const Rect& r) {
 	m_offsx = r.x;
 	m_offsy = r.y;
 	m_w = r.w;

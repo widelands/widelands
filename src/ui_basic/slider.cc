@@ -16,17 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#include "slider.h"
+#include <cmath>
 
 #include "mouse_constants.h"
-#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 
-
-#include <cmath>
+#include "slider.h"
 
 namespace UI {
 

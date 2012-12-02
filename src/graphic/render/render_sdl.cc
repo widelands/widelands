@@ -64,7 +64,7 @@ void SurfaceSDL::update() {
 Draws the outline of a rectangle
 ===============
 */
-void SurfaceSDL::draw_rect(const Rect rc, const RGBColor clr) {
+void SurfaceSDL::draw_rect(const Rect& rc, const RGBColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -91,7 +91,7 @@ void SurfaceSDL::draw_rect(const Rect rc, const RGBColor clr) {
 Draws a filled rectangle
 ===============
 */
-void SurfaceSDL::fill_rect(const Rect rc, const RGBAColor clr) {
+void SurfaceSDL::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -116,7 +116,7 @@ This function is slow as hell.
   highlight things.
 ===============
 */
-void SurfaceSDL::brighten_rect(const Rect rc, const int32_t factor) {
+void SurfaceSDL::brighten_rect(const Rect& rc, const int32_t factor) {
 	if (!factor)
 		return;
 	assert(rc.x >= 0);
@@ -261,7 +261,7 @@ void SurfaceSDL::clear() {
 
 
 void SurfaceSDL::blit
-	(const Point& dst, const IPicture* src, Rect const srcrc, Composite cm)
+	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
 	upcast(const SurfaceSDL, sdlsurf, src);
 	assert(sdlsurf);

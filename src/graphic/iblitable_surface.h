@@ -44,10 +44,10 @@ public:
 	//
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&, const IPicture*, Rect srcrc, Composite cm = CM_Normal) = 0;
+	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
 
 	/// Draws a filled rect to the surface.
-	virtual void fill_rect(Rect, RGBAColor) = 0;
+	virtual void fill_rect(const Rect&, RGBAColor) = 0;
 
 	/// Clears the complete surface to black.
 	virtual void clear() {

@@ -24,7 +24,6 @@
 #include "picture.h"
 #include "rect.h"
 #include "rgbcolor.h"
-#include "surfaceptr.h"
 
 #include <vector>
 
@@ -52,7 +51,6 @@ struct Player;
 class RenderTarget {
 public:
 	RenderTarget(Surface*);
-	RenderTarget(OffscreenSurfacePtr);
 	void set_window(Rect const & rc, Point const & ofs);
 	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
 

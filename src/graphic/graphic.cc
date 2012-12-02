@@ -18,8 +18,8 @@
  */
 
 // TODO(sirver): picid -> pic everywhere
-
-
+// TODO(sirver): untangle which features in Surface should stay there and
+// which can go. Especially as IBlitableSurface and Surface are too similar.
 #include "graphic.h"
 
 #include "build_info.h"
@@ -646,17 +646,6 @@ SDL_Surface * Graphic::extract_sdl_surface(IPixelAccess & pix, Rect srcrect)
 }
 
 /**
- * This is purely a convenience function intended to allow casting
- * pointers without including a whole bunch of headers.
- */
-// TODO(sirver): this function is odd and has to go away
-IPicture* Graphic::get_offscreen_picture(OffscreenSurfacePtr surface) const
-{
-	return surface.get();
-}
-
-
-/**
  * Saves a pixel region to a png. This can be a file or part of a stream.
  *
  * @param surf The Surface to save
@@ -789,18 +778,20 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 }
 
 /**
- * Create a empty offscreen surface of specified size.
+ * Create an surface of specified size.
  *
- * \note Offscreen surfaces with an alpha channel are not supported due to
+ * // TODO(sirver): this will likely not be true for much longer
+ * \note surfaces with an alpha channel are not supported due to
  * limitations in the SDL blitter.
  *
  * @param w width of the new surface
  * @param h height of the new surface
  * @return the new created surface
  */
-OffscreenSurfacePtr Graphic::create_offscreen_surface(int32_t w, int32_t h)
+Surface* Graphic::create_surface(int32_t w, int32_t h)
 {
 #ifdef USE_OPENGL
+	// TODO(sirver): fix this
 	if (g_opengl)
 	{
 		throw wexception("OpenGL mode does not support offscreen surfaces");
@@ -814,15 +805,8 @@ OffscreenSurfacePtr Graphic::create_offscreen_surface(int32_t w, int32_t h)
 			 w, h,
 			 format.BitsPerPixel,
 			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
-		return OffscreenSurfacePtr(new SurfaceSDL(tsurf));
+		return new SurfaceSDL(tsurf);
 	}
-}
-
-// TODO(sirver): this is bullshit, there is too much overlap with the create_offscreen_surface.
-// En plus, this does not work for OpenGL, find a way to make it work
-IBlitableSurface * Graphic::create_surface(int32_t w, int32_t h) {
-	// TODO(sirver): this will crash on runtime
-	return create_offscreen_surface(w, h).get();
 }
 
 /**
