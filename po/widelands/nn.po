@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-11-30 22:41+0000\n"
+"PO-Revision-Date: 2012-12-01 10:04+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-12-01 04:33+0000\n"
+"X-Launchpad-Export-Date: 2012-12-02 04:33+0000\n"
 "X-Generator: Launchpad (build 16319)\n"
 
 #: ../../src/computer_player.cc:38
@@ -3949,174 +3949,176 @@ msgstr "Klienten krasja og nødlagra."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Connection was lost."
-msgstr ""
+msgstr "Sambandet blei broten."
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "Server has left the game."
-msgstr ""
+msgstr "Tenaren forlét spelet"
 
 #: ../../src/network/network_gaming_messages.cc:127
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "Spelet har starta rett etter at du prøvde å kople til."
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "Tenar krasja og naudlagra."
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Connection to client timeouted: no response for 10 minutes!"
-msgstr ""
+msgstr "Samband med klienten fekk tidsavbrot: ingen signal på 10 minutt!"
 
 #: ../../src/network/network_gaming_messages.cc:130
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "Klienten og verten har vorte usynkronisert."
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Sparka av verten: %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "Klienten sendte ugyldige ordre: %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Noka gjekk galt: %s"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "%s har forlate spelet (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Ukjend brukar har forlate spelet (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr ""
+"Tenaren sendte ein SYNKFORESPURNAD sjølv om det ikkje er noken spel som "
+"køyrer."
 
 #: ../../src/network/network_gaming_messages.cc:137
 msgid "Received a PLAYERCOMMAND even though no game is running."
-msgstr ""
+msgstr "Fekk ei SPELARORDRE sjølv om det ikkje er noken spel som køyrer."
 
 #: ../../src/network/network_gaming_messages.cc:138
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
+msgstr "Mottok ei uventa KØYR-ordre frå tenaren."
 
 #: ../../src/network/network_gaming_messages.cc:139
 msgid "Server sent a player update for a player that does not exist."
-msgstr ""
+msgstr "Tenaren sendte ei spelaroppdatering for ein spelar som ikkje finst."
 
 #: ../../src/network/network_gaming_messages.cc:140
 msgid "Server sent an user update for a user that does not exist."
-msgstr ""
+msgstr "Tenaren sendte ein brukaroppdatering for ein brukar som ikkje finst."
 
 #: ../../src/network/network_gaming_messages.cc:141
 msgid "Server uses a different protocol version"
-msgstr ""
+msgstr "Tenaren brukar ei anna protokollversjon"
 
 #: ../../src/network/network_gaming_messages.cc:142
 #, c-format
 msgid "Received command number %s, that is disallowed in this state."
-msgstr ""
+msgstr "Fekk ordre %s, som ikkje er tillaten i denne tilstanden."
 
 #: ../../src/network/network_gaming_messages.cc:143
 msgid "Client reports time to host that is running backwards."
-msgstr ""
+msgstr "Klient raporterar tid til verten som køyrer baklengs."
 
 #: ../../src/network/network_gaming_messages.cc:144
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr ""
+msgstr "Klienten simulerer utover speletida verten har tillate."
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "Client did not submit sync report in time."
-msgstr ""
+msgstr "Klienten leverte ikkje synkroniseringsmelding i tide."
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "The game has already started."
-msgstr ""
+msgstr "Spelet har allereie starta."
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Klienten har ikkje tilgang til innstillingane til andre spelarar."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Klienten har ikkje tilgang til tenarinnstillingane."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
-msgstr ""
+msgstr "Klienten sendte start-ordra, sjølv om tenaren ikkje er klar enno."
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent TIME command even though game is not running."
-msgstr ""
+msgstr "Klienten sendte TID-ordra sjølv om spelet ikkje køyrer."
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client sent a playercommand for another player."
-msgstr ""
+msgstr "Klienten sendte ei spelarordre for ein annan spelar."
 
 #: ../../src/network/network_gaming_messages.cc:152
 msgid "Client sent unexpected synchronization report."
-msgstr ""
+msgstr "Klienten sendte uventa synkroniseringsmelding."
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "Client requests file although none is available to send."
-msgstr ""
+msgstr "Klienten bed om ei fil sjølv om ingen er tilbodne for sending."
 
 #: ../../src/network/network_gaming_messages.cc:154
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "Klienten bed om ein fildel som ikkje finst."
 
 #: ../../src/network/network_gaming_messages.cc:155
 #, c-format
 msgid "Host sent player %s to the lobby!"
-msgstr ""
+msgstr "Verten sendte spelar %s til lobbyen!"
 
 #: ../../src/network/network_gaming_messages.cc:156
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
-msgstr ""
+msgstr "ÅTVARING: %s brukar versjon %s, men verten brukar versjon: %s"
 
 #: ../../src/network/network_gaming_messages.cc:157
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s har vorte med i spelet."
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Game was saved as %s."
-msgstr ""
+msgstr "Spelet vart lagra som %s."
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Starta overføring av fil %s til %s!"
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "Fullførte overføring av fil %s til %s"
 
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Sending part %s of file %s to %s"
-msgstr ""
+msgstr "Sendar del %s av fil %s til %s"
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
-msgstr ""
+msgstr "Spelar «%s» har vorte overvunne og vart ein tilskodar."
 
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
-msgstr ""
+msgstr "Klient %s svara ikkje på meir enn %s sekund."
 
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
@@ -4124,56 +4126,61 @@ msgid ""
 "Client %s will automatically be kicked, if no answer is received within %s "
 "seconds."
 msgstr ""
+"Klient %s sparkast automatisk viss svar ikkje vert motteken på %s sekund."
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "No user with the name %s is logged in!"
-msgstr ""
+msgstr "Ingen brukar med namnet %s er pålogga!"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1250
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Det sendte passordet var gale!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "Protokollversjonen du brukar er ikkje støtta!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Du er allereie pålogga!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
 "You got disconnected, as you send a superuser command without superuser "
 "permission.This incident will be logged and reported to the administrator."
 msgstr ""
+"Du blei fråkopla, sia du sendte ei superbrukarordre utan superbrukartilgang. "
+" Denne hendinga rapporterast til administratoren."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
-msgstr ""
+msgstr "Du blei fråkopla sia metatenaren startar på nytt."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "Sambandet vart broten av klienten på vanleg vis."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "Sambandet med metatenaren vart broten."
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "Metatenaren svara ikkje"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
-msgstr ""
+msgstr "Spelet ditt kan ikkje koplast til frå internett"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
+"Du blei fråkopla frå metatenaren, sia du ikkje svarte PING-førespurnaden i "
+"tide."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -4182,12 +4189,18 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming for setting up your internet "
 "connection for hosting a game online."
 msgstr ""
+"Metatenaren kunne ikkje kople til spelet ditt.  Han kan mest sannsynleg "
+"ikkje koplast til frå verdsveven!  Ver snill å sjå "
+"http://wl.widelands.org/wiki/InternetGaming for oppsett av internettsamband "
+"for å halde eit spel på veven."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
 "You tried to relogin, but the server has no more knowledge of your previous "
 "state."
 msgstr ""
+"Du prøvde å logge på att, men tenaren kjennar ikkje til den tidlegare "
+"statusen din."
 
 #: ../../src/network/nethost.cc:361
 msgid ""
@@ -4198,31 +4211,36 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
+"<br>Moglege tenarordre er:<br>/help  -  Synar denne hjelpen<br>/announce "
+"<msg>  -  Send ei pratemelding som erklæring (systemprat)<br>/warn <namn> "
+"<grunn>  -  Åtvar brukar <namn> om <grunn><br>/kick <namn> <grunn>  -  Spark "
+"brukar <namn> for <grunn><br>/forcePause - Tving spelet til å "
+"pause.<br>/endForcedPause - får spelet attende til vanleg hastigheit."
 
 #: ../../src/network/nethost.cc:375
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Gale bruk. Prøv: /announce <melding>"
 
 #: ../../src/network/nethost.cc:388
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Gale bruk. Prøv: /warn <namn> <grunn>"
 
 #: ../../src/network/nethost.cc:396
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "Kvifor vil du åtvare deg sjølv?"
 
 #: ../../src/network/nethost.cc:398
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Kvifor vil du åtvare den tilegna tenaren?"
 
 #: ../../src/network/nethost.cc:402 ../../src/network/nethost.cc:428
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Kunne ikkje finne klient %s."
 
 #: ../../src/network/nethost.cc:413
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Gale bruk. Prøv: /kick <namn> <grunn>"
 
 #: ../../src/network/nethost.cc:424
 msgid "You can not kick yourself!"
