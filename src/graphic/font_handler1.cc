@@ -73,9 +73,7 @@ void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::str
 	log("text: %s\n", text.c_str());
 	IPicture* p = 0;
 	try {
-		ALIVE();
 		p = m_renderer->render(text, w);
-		ALIVE();
 	} catch (RT::Exception & e) {
 		log("Text rendering error: %s", e.what()); // TODO(sirver): Should throw
 	}

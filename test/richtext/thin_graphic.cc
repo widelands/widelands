@@ -93,7 +93,7 @@ public:
 
 	virtual IPixelAccess & pixelaccess() {return pa_;}
 
-	void blit(const Point& dst, const IPicture* src, Rect const srcrc, Composite cm)
+	void blit(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 	{
 		upcast(const ThinSDLSurface, sdlsurf, src);
 		assert(sdlsurf);
@@ -116,7 +116,7 @@ public:
 		}
 	}
 
-	void fill_rect(Rect rc, RGBAColor clr) {
+	void fill_rect(const Rect& rc, RGBAColor clr) {
 		const uint32_t color = clr.map(*surf_->format);
 		SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
 		SDL_FillRect(surf_, &r, color);

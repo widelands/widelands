@@ -36,13 +36,6 @@ class IBlitableSurface : public virtual IPicture {
 public:
 	virtual ~IBlitableSurface() {}
 
-	//@{
-	/// Get width and height
-	virtual uint32_t get_w() const = 0; // TODO(sirver): Should only be w()
-	virtual uint32_t get_h() const = 0;
-	//@}
-	//
-
 	/// This draws a part of another surface to this surface
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
 
@@ -54,10 +47,6 @@ public:
 		fill_rect
 			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(255, 255, 255, 255));
 	}
-
-
-	/// Access the pixels directly of this surface
-	virtual IPixelAccess & pixelaccess() = 0;
 };
 
 #endif

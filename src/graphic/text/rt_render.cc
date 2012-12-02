@@ -17,9 +17,6 @@
  *
  */
 
-#include <iostream> // TODO(sirver): Remove again
-#include "log.h" // TODO(sirver): remove as wedd
-
 // TODO(sirver): Read through this file again. There are a lot of stray comments which are not longer needed
 // TODO(sirver): seems like everything except for rich text rendering is working now
 #include <queue>
@@ -33,7 +30,6 @@
 
 #include "rt_parse.h"
 #include "rt_render.h"
-#include "sdl_helper.h" // TODO(sirver): Still needed?
 #include "textstream.h"
 
 using namespace std;
@@ -73,9 +69,8 @@ struct NodeStyle {
 	string reference;
 };
 
-// TODO(sirver): Use Rect
 struct Reference {
-	SDL_Rect dim;
+	Rect dim;
 	string ref;
 
 	inline bool contains(int16_t x, int16_t y) const {
@@ -299,7 +294,7 @@ public:
 	virtual const vector<Reference> get_references() {
 		vector<Reference> rv;
 		if (!m_s.reference.empty()) {
-			Reference r = { {0, 0, m_w, m_h}, m_s.reference};
+			Reference r = { Rect(0, 0, m_w, m_h), m_s.reference};
 			rv.push_back(r);
 		}
 		return rv;
@@ -323,18 +318,13 @@ uint32_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
 IBlitableSurface* TextNode::render(IGraphic & gr) {
-	ALIVE();
 	// TODO(sirver): who owns this surface?
 	// TODO(sirver): what about the image?
-	ALIVE();
 	const IPicture* img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	ALIVE();
 	IBlitableSurface* rv = gr.create_surface(img->get_w(), img->get_h());
-	ALIVE();
 	assert(rv);
 	assert(img);
-	rv->blit(Point(0,0), img, Rect(0, 0, img->get_w(), img->get_h()), CM_Solid); // was CM_COPY
-	ALIVE();
+	rv->blit(Point(0,0), img, Rect(0, 0, img->get_w(), img->get_h()), CM_Copy);
 	return rv;
 }
 
@@ -354,12 +344,8 @@ private:
 	bool m_expanding;
 };
 IBlitableSurface* FillingTextNode::render(IGraphic & gr) {
-	ALIVE();
-	ALIVE();
 	const IPicture* t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	ALIVE();
 	IBlitableSurface* rv = gr.create_surface(m_w, m_h);
-	ALIVE();
 	for (uint32_t x = 0; x < m_w; x += t->get_w()) {
 		Rect srcrect(
 				Point(0,0),
@@ -368,7 +354,6 @@ IBlitableSurface* FillingTextNode::render(IGraphic & gr) {
 		);
 		rv->blit(Point(x,0), t, srcrect, CM_Solid);
 	}
-	ALIVE();
 	// TODO(sirver): need to free t?
 	return rv;
 }
@@ -380,7 +365,6 @@ public:
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
 	virtual IBlitableSurface* render(IGraphic & gr) {
-		ALIVE();
 		IBlitableSurface* sur = TextNode::render(gr);
 		// TODO(sirver): I cannot draw in this now, it is read only
 		// // TODO(sirver): should instead create a new surface on i can draw. make render return images again
@@ -402,7 +386,6 @@ public:
 	virtual uint32_t width() {return INFINITE_WIDTH; }
 	virtual uint32_t hotspot_y() {return 0;}
 	virtual IBlitableSurface* render(IGraphic & gr) {
-		ALIVE();
 		assert(0); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
@@ -420,7 +403,6 @@ public:
 	virtual uint32_t width() {return m_w;}
 	virtual uint32_t hotspot_y() {return m_h;}
 	virtual IBlitableSurface* render(IGraphic & gr) {
-		ALIVE();
 		IBlitableSurface* rv = gr.create_surface(m_w, m_h);
 
 		// Draw background image (tiling)
@@ -462,23 +444,18 @@ public:
 	virtual uint32_t height() {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint32_t hotspot_y() {return height();}
 	virtual IBlitableSurface* render(IGraphic & gr) {
-		ALIVE();
 		IBlitableSurface* rv = gr.create_surface(width(), height());
 
 		// Draw Solid background Color
 		// TODO(sirver): A lot of set_alpha and so on is missing here
-		ALIVE();
 		bool set_alpha = true;
-		ALIVE();
 		if (m_bg_clr.r() or m_bg_clr.g() or m_bg_clr.b()) {
 			Rect fill_rect(Point(m_margin.left, m_margin.top), m_w, m_h);
 			rv->fill_rect(fill_rect, m_bg_clr);
 			set_alpha = false;
 		}
-		ALIVE();
 
 		// Draw background image (tiling)
-		ALIVE();
 		if (m_bg_img) {
 			Point dst;
 			Rect src(0,0,0,0);
@@ -493,9 +470,7 @@ public:
 			}
 			set_alpha = false;
 		}
-		ALIVE();
 
-		ALIVE();
 		foreach(RenderNode * n, m_nodes_to_render) {
 			IBlitableSurface* nsur = n->render(gr);
 			// TODO(sirver): render should return a reference and no pointer
@@ -510,11 +485,8 @@ public:
 			// SDL_FreeSurface(nsur);
 			delete n;
 		}
-		ALIVE();
 
-		ALIVE();
 		m_nodes_to_render.clear();
-		ALIVE();
 
 		return rv;
 	}
@@ -526,7 +498,7 @@ public:
 	void set_background(const IPicture* img) {m_bg_img = img;}
 	void set_nodes_to_render(vector<RenderNode*> & n) {m_nodes_to_render=n;}
 	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, string s) {
-		Reference r = { {x, y, w, h}, s };
+		Reference r = { Rect(x, y, w, h), s };
 		m_refs.push_back(r);
 	}
 
@@ -555,7 +527,6 @@ private:
 };
 
 IBlitableSurface* ImgRenderNode::render(IGraphic& gr) {
-	ALIVE();
 	IBlitableSurface* rv = gr.create_surface(m_picture->get_w(), m_picture->get_h());
 	// TODO(sirver): Id rather not do this at all or when, then only once
 	rv->blit(Point(0,0), m_picture, Rect(0, 0, m_picture->get_w(), m_picture->get_h()), CM_Copy);
@@ -942,43 +913,28 @@ Renderer::~Renderer() {
 }
 
 IPicture* Renderer::render(string text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
-		ALIVE();
 	ITag * rt = m_p->parse(text, allowed_tags);
-		ALIVE();
 
 	NodeStyle default_fs = {
 		"DejaVuSerif.ttf", 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM
 	};
-		ALIVE();
 
 	if (!width)
 		width = INFINITE_WIDTH;
-		ALIVE();
 
-		ALIVE();
 	RTTagHandler rtrn(*rt, m_fc, default_fs, gr_, width);
-		ALIVE();
 	vector<RenderNode*> nodes;
-		ALIVE();
 	rtrn.enter();
-		ALIVE();
 	rtrn.emit(nodes);
-		ALIVE();
 
-		ALIVE();
 	assert(nodes.size() == 1);
-		ALIVE();
 	if (pprm)
 		*pprm = new RefMap(nodes[0]->get_references());
-		ALIVE();
 	IBlitableSurface* rv = nodes[0]->render(gr_);
-		ALIVE();
 
 	delete nodes[0];
-		ALIVE();
 	delete rt;
-		ALIVE();
 
 	return rv;
 }

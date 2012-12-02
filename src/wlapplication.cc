@@ -301,6 +301,7 @@ m_redirected_stdio(false)
 	else
 		g_gr = 0;
 
+	TTF_Init(); // TODO not here
 	UI::g_fh = new UI::Font_Handler();
 	// TODO(sirver): There must be only one
 	UI::g_fh1 = UI::create_fonthandler(*g_gr, g_fs);
@@ -327,6 +328,8 @@ WLApplication::~WLApplication()
 	assert(UI::g_fh1);
 	delete UI::g_fh1;
 	UI::g_fh1 = 0;
+
+	TTF_Quit(); // TODO not here
 
 	assert(g_fs);
 	delete g_fs;

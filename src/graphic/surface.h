@@ -57,8 +57,6 @@ public:
 	/// makes a rectangle on the surface brighter (or darker).
 	/// @note this is slow in SDL mode. Use with care
 	virtual void brighten_rect(const Rect&, int32_t factor) = 0;
-
-	virtual IPixelAccess & pixelaccess() = 0;
 };
 
 #endif

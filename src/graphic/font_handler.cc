@@ -86,15 +86,17 @@ private:
 Font_Handler::Font_Handler() :
 	d(new Data)
 {
-	if (TTF_Init() == -1)
-		throw wexception
-			("True Type library did not initialize: %s\n", TTF_GetError());
+	// TODO(sirver): this used to be here. Where now?
+	// if (TTF_Init() == -1)
+		// throw wexception
+			// ("True Type library did not initialize: %s\n", TTF_GetError());
 }
 
 
 Font_Handler::~Font_Handler() {
 	Font::shutdown();
-	TTF_Quit();
+	// TODO(sirver): this used to be here. Where now?
+	// TTF_Quit();
 }
 
 

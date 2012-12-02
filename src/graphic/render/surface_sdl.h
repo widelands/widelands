@@ -43,49 +43,47 @@ public:
 	{}
 	~SurfaceSDL();
 
-	// Implements IBlitableSurface
+	// Implements IPicture and IPixelAccess
 	virtual uint32_t get_w() const {return m_w;}
 	virtual uint32_t get_h() const {return m_h;}
-	void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
-	void fill_rect(const Rect&, RGBAColor);
+
+	// Implement IPicture
 	virtual IPixelAccess & pixelaccess() {return *this;}
 
+	// Implements IBlitableSurface
+	void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
+	void fill_rect(const Rect&, RGBAColor);
+
+	// Implements Surface
+	void update();
+	void draw_rect(const Rect&, RGBColor);
+	void draw_line
+		(int32_t x1, int32_t y1,
+		 int32_t x2, int32_t y2,
+		 RGBColor, uint8_t width);
+	void brighten_rect(const Rect&, int32_t factor);
+
+	// Implements IPixelAccess
+	SDL_PixelFormat const & format() const;
+	void lock(LockMode);
+	void unlock(UnlockMode);
+	uint32_t get_pixel(uint32_t x, uint32_t y);
+	void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
+	uint16_t get_pitch() const {return m_surface->pitch;}
+	uint8_t * get_pixels() const;
 
 	/// Set surface, only call once
 	void set_sdl_surface(SDL_Surface & surface);
 	SDL_Surface * get_sdl_surface() const {return m_surface;}
 
-	/// Get width and height
-	void update();
-
 	/// Save a bitmap of this to a file
 	void save_bmp(const char & fname) const;
 
-	SDL_PixelFormat const & format() const;
-	uint8_t * get_pixels() const;
-	uint16_t get_pitch() const {return m_surface->pitch;}
-
-	/// Lock
-	void lock(LockMode);
-	void unlock(UnlockMode);
-
-	/// For the slowest: Indirect pixel access
-	uint32_t get_pixel(uint32_t x, uint32_t y);
-	void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
-
 	void clear();
-	void draw_rect(const Rect&, RGBColor);
-	void brighten_rect(const Rect&, int32_t factor);
-
-	void draw_line
-		(int32_t x1, int32_t y1,
-		 int32_t x2, int32_t y2,
-		 RGBColor, uint8_t width);
 
 	// TODO(sirver): what is that? same as rendertarget?
 	void set_subwin(const Rect& r);
 	void unset_subwin();
-
 	void set_isscreen(bool screen);
 
 private:
