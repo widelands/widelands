@@ -302,19 +302,18 @@ Graphic::Graphic
 
 	if (g_opengl)
 	{
-		// TODO(sirver): basically disabled OpenGL for now
-		// m_screen.reset(new GLSurfaceScreen(w, h));
+		screen_.reset(new GLSurfaceScreen(w, h));
 	}
 	else
 #endif
 	{
 		SurfaceSDL* screen = new SurfaceSDL(*sdlsurface);
-		screen->set_isscreen(true);
-		m_screen = screen;
+		screen->set_isscreen(true); // TODO(sirver): maybe into constructor
+		screen_.reset(screen);
 	}
 
 	m_sdl_screen = sdlsurface;
-	m_rendertarget = new RenderTarget(m_screen);
+	m_rendertarget = new RenderTarget(screen_.get());
 }
 
 /**
@@ -334,7 +333,7 @@ Graphic::~Graphic()
 */
 int32_t Graphic::get_xres() const
 {
-	return m_screen->get_w();
+	return screen_->get_w();
 }
 
 /**
@@ -342,7 +341,7 @@ int32_t Graphic::get_xres() const
 */
 int32_t Graphic::get_yres() const
 {
-	return m_screen->get_h();
+	return screen_->get_h();
 }
 
 /**
@@ -415,7 +414,7 @@ void Graphic::refresh(bool force)
 #endif
 
 	if (force or m_update_fullscreen)
-		m_screen->update();
+		screen_->update();
 	else
 		SDL_UpdateRects
 			(m_sdl_screen, m_nr_update_rects, m_update_rects);
@@ -1020,7 +1019,7 @@ void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
 	StreamWrite * sw = g_fs->OpenStreamWrite(fname);
-	save_png(m_screen, sw);
+	save_png(screen_.get(), sw);
 	delete sw;
 }
 

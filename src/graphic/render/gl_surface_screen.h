@@ -32,8 +32,8 @@ struct GLSurfaceScreen : Surface, IPixelAccess {
 
 	/// Interface implementations
 	//@{
-	virtual uint32_t get_w();
-	virtual uint32_t get_h();
+	virtual uint32_t get_w() const;
+	virtual uint32_t get_h() const;
 
 	virtual void update();
 
@@ -47,16 +47,16 @@ struct GLSurfaceScreen : Surface, IPixelAccess {
 	virtual IPixelAccess & pixelaccess() {return *this;}
 
 	virtual void clear();
-	virtual void draw_rect(Rect, RGBColor);
-	virtual void fill_rect(Rect, RGBAColor);
-	virtual void brighten_rect(Rect, int32_t factor);
+	virtual void draw_rect(const Rect&, RGBColor);
+	virtual void fill_rect(const Rect&, RGBAColor);
+	virtual void brighten_rect(const Rect&, int32_t factor);
 
 	virtual void draw_line
 		(int32_t x1, int32_t y1,
 		 int32_t x2, int32_t y2,
 		 RGBColor, uint8_t width);
 
-	virtual void blit(Point, const IPicture* , Rect srcrc, Composite cm);
+	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
 	//@}
 
 private:

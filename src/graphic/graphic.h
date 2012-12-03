@@ -23,7 +23,7 @@
 #include <vector>
 #include <map>
 
-#include <boost/shared_ptr.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <png.h>
 
 #include "animation_gfx.h"
@@ -174,13 +174,13 @@ protected:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	Surface* m_screen;
+	boost::scoped_ptr<Surface> screen_;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
 	// TODO(sirver): What?!?
 	SDL_Surface * m_sdl_screen;
-	/// A RenderTarget for m_screen. This is initialized during init()
+	/// A RenderTarget for screen_. This is initialized during init()
 	RenderTarget * m_rendertarget;
 	/// keeps track which screen regions needs to be redrawn during the next
 	/// update(). Only used for SDL rendering.

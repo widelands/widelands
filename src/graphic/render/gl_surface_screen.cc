@@ -31,12 +31,12 @@ GLSurfaceScreen::GLSurfaceScreen(uint32_t w, uint32_t h)
 	m_h = h;
 }
 
-uint32_t GLSurfaceScreen::get_w()
+uint32_t GLSurfaceScreen::get_w() const
 {
 	return m_w;
 }
 
-uint32_t GLSurfaceScreen::get_h()
+uint32_t GLSurfaceScreen::get_h() const
 {
 	return m_h;
 }
@@ -74,6 +74,7 @@ void GLSurfaceScreen::lock(IPixelAccess::LockMode mode)
 {
 	assert(!m_pixels);
 
+	// TODO(sirver): what happens when mode is not normal?
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
 	if (mode == Lock_Normal) {
@@ -127,7 +128,7 @@ void GLSurfaceScreen::set_pixel(uint32_t x, uint32_t y, Uint32 clr)
 /**
  * Draws the outline of a rectangle
  */
-void GLSurfaceScreen::draw_rect(const Rect rc, const RGBColor clr)
+void GLSurfaceScreen::draw_rect(const Rect& rc, const RGBColor clr)
 {
 	assert(g_opengl);
 	glDisable(GL_BLEND);
@@ -148,7 +149,7 @@ void GLSurfaceScreen::draw_rect(const Rect rc, const RGBColor clr)
 /**
  * Draws a filled rectangle
  */
-void GLSurfaceScreen::fill_rect(const Rect rc, const RGBAColor clr) {
+void GLSurfaceScreen::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 0);
@@ -171,7 +172,7 @@ void GLSurfaceScreen::fill_rect(const Rect rc, const RGBAColor clr) {
 /**
  * Change the brightness of the given rectangle
  */
-void GLSurfaceScreen::brighten_rect(const Rect rc, const int32_t factor)
+void GLSurfaceScreen::brighten_rect(const Rect& rc, const int32_t factor)
 {
 	if (!factor)
 		return;
@@ -250,9 +251,8 @@ void GLSurfaceScreen::clear()
 }
 
 
-// TODO(sirver): fix const madness
 void GLSurfaceScreen::blit
-	(Point const dst, const IPicture* src, Rect const srcrc, Composite cm)
+	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
 	upcast(const GLPictureTexture, const_oglsrc, src);
 	assert(const_oglsrc);
@@ -262,7 +262,7 @@ void GLSurfaceScreen::blit
 	/* Set a texture scaling factor. Normaly texture coordiantes
 	* (see glBegin()...glEnd() Block below) are given in the range 0-1
 	* to avoid the calculation (and let opengl do it) the texture
-	* space is modified. glMatrixMode select which matrix to manipulate
+	* space is modified. glMatrixMode select which matrixconst  to manipulate
 	* (the texture transformation matrix in this case). glLoadIdentity()
 	* resets the (selected) matrix to the identity matrix. And finally
 	* glScalef() calculates the texture matrix.

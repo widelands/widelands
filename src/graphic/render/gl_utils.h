@@ -32,7 +32,7 @@ const SDL_PixelFormat & gl_rgba_format();
 GLenum _handle_glerror(const char * file, unsigned int line);
 
 /**
- * handle_glerror() is intended to make debugging of oengl easier. It logs the
+ * handle_glerror() is intended to make debugging of OpenGL easier. It logs the
  * error code returned by glGetError and returns the error code.
  */
 #define handle_glerror() _handle_glerror(__FILE__, __LINE__)
