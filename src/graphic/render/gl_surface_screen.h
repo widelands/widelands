@@ -51,10 +51,8 @@ struct GLSurfaceScreen : Surface, IPixelAccess {
 	virtual void fill_rect(const Rect&, RGBAColor);
 	virtual void brighten_rect(const Rect&, int32_t factor);
 
-	virtual void draw_line
-		(int32_t x1, int32_t y1,
-		 int32_t x2, int32_t y2,
-		 RGBColor, uint8_t width);
+	virtual void draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t y2,
+			const RGBColor&, uint8_t width);
 
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
 	//@}

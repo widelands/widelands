@@ -20,12 +20,11 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
+#include <boost/noncopyable.hpp>
+
 #include "iblitable_surface.h"
 #include "rect.h"
 #include "rgbcolor.h"
-#include "wexception.h"
-
-#include <boost/noncopyable.hpp>
 
 /**
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
@@ -42,17 +41,8 @@ public:
 	virtual void draw_rect(const Rect&, RGBColor) = 0;
 
 	/// draw a line to the surface
-	// TODO(sirver): why not pure virtual?
-	virtual void draw_line
-		(int32_t /* x1 */,
-		 int32_t /* y1 */,
-		 int32_t /* x2 */,
-		 int32_t /* y2 */,
-		 RGBColor /* color */,
-		 uint8_t /* width = 1 */)
-	{
-		throw wexception("draw_line() not implemented");
-	}
+	virtual void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
+			const RGBColor& color, uint8_t width = 1) = 0;
 
 	/// makes a rectangle on the surface brighter (or darker).
 	/// @note this is slow in SDL mode. Use with care

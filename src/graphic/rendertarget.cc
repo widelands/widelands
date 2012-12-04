@@ -130,7 +130,7 @@ int32_t RenderTarget::get_h() const
  */
 void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
-	 RGBColor const color, uint8_t width)
+	 const RGBColor& color, uint8_t width)
 {
 	m_surface->draw_line
 		(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,

@@ -81,6 +81,7 @@ struct GLCaps
 struct GraphicCaps
 {
 	/// The renderer allows rendering (blit, draw_line) to offscreen surfaces
+	// // TODO(sirver): remove when appropriate
 	bool offscreen_rendering;
 	/// The capabilities of the opengl hardware and drive
 	GLCaps gl;

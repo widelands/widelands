@@ -57,12 +57,8 @@ public:
 	int32_t get_w() const;
 	int32_t get_h() const;
 
-	void draw_line
-		(int32_t x1,
-		 int32_t y1,
-		 int32_t x2,
-		 int32_t y2,
-		 RGBColor color, uint8_t width = 1);
+	void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const
+			RGBColor& color, uint8_t width = 1);
 	void draw_rect(Rect, RGBColor);
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);

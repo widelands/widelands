@@ -199,13 +199,8 @@ void SurfaceSDL::brighten_rect(const Rect& rc, const int32_t factor) {
 * This function could be faster by using direct pixel
 * access instead of the set_pixel() function
 */
-void SurfaceSDL::draw_line
-		(int32_t x1,
-		 int32_t y1,
-		 int32_t x2,
-		 int32_t y2,
-		 RGBColor color,
-		 uint8_t width)
+void SurfaceSDL::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
+		const RGBColor& color, uint8_t width)
 {
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
 	int32_t dy = y2 - y1;      /* the vertical distance of the line */
