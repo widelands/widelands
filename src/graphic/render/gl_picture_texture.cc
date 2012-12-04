@@ -158,23 +158,19 @@ void GLPictureTexture::init(uint32_t w, uint32_t h)
 	handle_glerror();
 }
 
-uint32_t GLPictureTexture::get_w()
-{
+uint32_t GLPictureTexture::get_w() const {
 	return m_w;
 }
 
-uint32_t GLPictureTexture::get_h()
-{
+uint32_t GLPictureTexture::get_h() const {
 	return m_h;
 }
 
-const SDL_PixelFormat & GLPictureTexture::format() const
-{
+const SDL_PixelFormat & GLPictureTexture::format() const {
 	return gl_rgba_format();
 }
 
-void GLPictureTexture::lock(LockMode mode)
-{
+void GLPictureTexture::lock(LockMode mode) {
 	assert(!m_pixels);
 
 	m_pixels.reset(new uint8_t[m_tex_w * m_tex_h * 4]);
@@ -185,8 +181,7 @@ void GLPictureTexture::lock(LockMode mode)
 	}
 }
 
-void GLPictureTexture::unlock(UnlockMode mode)
-{
+void GLPictureTexture::unlock(UnlockMode mode) {
 	assert(m_pixels);
 
 	if (mode == Unlock_Update) {
@@ -199,18 +194,16 @@ void GLPictureTexture::unlock(UnlockMode mode)
 	m_pixels.reset(0);
 }
 
-uint16_t GLPictureTexture::get_pitch() const
-{
+uint16_t GLPictureTexture::get_pitch() const {
 	return 4 * m_tex_w;
 }
 
-uint8_t * GLPictureTexture::get_pixels() const
-{
+uint8_t * GLPictureTexture::get_pixels() const {
 	return m_pixels.get();
 }
 
-uint32_t GLPictureTexture::get_pixel(uint32_t x, uint32_t y)
-{
+// TODO(sirver): should be const
+uint32_t GLPictureTexture::get_pixel(uint32_t x, uint32_t y) {
 	assert(m_pixels);
 	assert(x < m_w);
 	assert(y < m_h);
@@ -219,8 +212,7 @@ uint32_t GLPictureTexture::get_pixel(uint32_t x, uint32_t y)
 	return *(reinterpret_cast<uint32_t *>(data));
 }
 
-void GLPictureTexture::set_pixel(uint32_t x, uint32_t y, uint32_t clr)
-{
+void GLPictureTexture::set_pixel(uint32_t x, uint32_t y, uint32_t clr) {
 	assert(m_pixels);
 	assert(x < m_w);
 	assert(y < m_h);

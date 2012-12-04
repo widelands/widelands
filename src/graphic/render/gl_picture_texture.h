@@ -37,8 +37,8 @@ struct GLPictureTexture : IPicture, IPixelAccess {
 
 	/// Interface implementation
 	//@{
-	virtual uint32_t get_w();
-	virtual uint32_t get_h();
+	virtual uint32_t get_w() const;
+	virtual uint32_t get_h() const;
 
 	virtual const SDL_PixelFormat & format() const;
 	virtual void lock(LockMode);

@@ -761,11 +761,8 @@ void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
 IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
 {
 #ifdef USE_OPENGL
-	if (g_opengl)
-	{
-		// return new GLPictureTexture(surf);
-		// TODO(sirver): OpenGL is essentially not working
-		return NULL;
+	if (g_opengl) {
+		return new GLPictureTexture(surf);
 	}
 #endif
 	SDL_Surface * surface;
@@ -1031,7 +1028,7 @@ void Graphic::screenshot(const string& fname) const
 void Graphic::m_png_write_function
 	(png_structp png_ptr, png_bytep data, png_size_t length)
 {
-	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Data(data, length);
+	static_cast<StreamWrite *>(png
 }
 
 /**
