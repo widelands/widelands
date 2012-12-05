@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-12-02 15:31+0000\n"
+"PO-Revision-Date: 2012-12-04 17:30+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-12-03 04:32+0000\n"
-"X-Generator: Launchpad (build 16319)\n"
+"X-Launchpad-Export-Date: 2012-12-05 05:12+0000\n"
+"X-Generator: Launchpad (build 16335)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -4287,7 +4287,7 @@ msgstr "Det er ingen tvungen pause, det er ingenting å avslutte."
 
 #: ../../src/network/nethost.cc:486
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Kommandoen er ugyldeg!  Skriv /help for ei liste over kommandoar."
 
 #: ../../src/network/nethost.cc:724
 #, c-format
@@ -4295,6 +4295,8 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
+"Dette er ein dedisert tenar skriv «@%s help» for ei fullstendig liste over "
+"tilbodne kommandoar."
 
 #: ../../src/network/nethost.cc:1191
 msgid ""
@@ -4302,62 +4304,69 @@ msgid ""
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
+"<br>Tilbodne vertskommandoar er:<br>help, visar denne hjelpefila<br>host $, "
+"prøver å køyre vertsordra $<br>save $, lagrar den noverande spelestatusen "
+"som $.wgf"
 
 #: ../../src/network/nethost.cc:1198
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
+"<br>Tilbodne vertskomandoar er:<br>help, visar denne hjelpefila<br>host $, "
+"prøver å køyre vertsordra $"
 
 #: ../../src/network/nethost.cc:1203
 msgid "pwd          $ - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd $, sender passord $ til verten"
 
 #: ../../src/network/nethost.cc:1210
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
+"Tilgang til vertskommandoar avkrefta.  For å få tilgang, send passordet med "
+"pwd-komandoen."
 
 #: ../../src/network/nethost.cc:1215
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr ""
+msgstr "%s ba meg køyre «%s»"
 
 #: ../../src/network/nethost.cc:1224
 msgid "Sorry! Saving was deactivated on this dedicated server!"
-msgstr ""
+msgstr "Orsak! Lagring vart avslådd på denne dedikerte tenaren!"
 
 #: ../../src/network/nethost.cc:1227
 msgid "Can not save, as long as no game is running!"
-msgstr ""
+msgstr "Kan ikkje lagre når ingen spel køyrer!"
 
 #: ../../src/network/nethost.cc:1238
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Spel lagra"
 
 #: ../../src/network/nethost.cc:1240
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Kunne ikkje lagre spelet til fila «%s»! (%s)"
 
 #: ../../src/network/nethost.cc:1247
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Denne tenaren er ikkje passordverna!"
 
 #: ../../src/network/nethost.cc:1263
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "Passordet var rett, tilgang given!"
 
 #: ../../src/network/nethost.cc:1269
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr ""
+msgstr "Ukjend dedikert tenarordre «%s»!"
 
 #: ../../src/network/nethost.cc:1960
 #, c-format
 msgid "Computer%u"
-msgstr ""
+msgstr "Datamaskin%u"
 
 #: ../../src/network/nethost.cc:2124
 #, c-format
@@ -4365,41 +4374,42 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
+"Denne tenaren er passordverna.  Du kan gi passordet med «@%s pwd PASSORD»"
 
 #: ../../src/network/internet_gaming.cc:112
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "Widelands kunne ikkje kople til metatenaren."
 
 #: ../../src/network/internet_gaming.cc:120
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr ""
+msgstr "Widelands kunne ikkje kople til noka på den givne adressa."
 
 #: ../../src/network/internet_gaming.cc:167
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr ""
+msgstr "For å vere spelvert, sjå notata ved:"
 
 #: ../../src/network/internet_gaming.cc:298
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Noka gjekk gale: "
 
 #: ../../src/network/internet_gaming.cc:388
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Klara å kople til metatenaren att!"
 
 #: ../../src/network/internet_gaming.cc:395
 msgid "Mixed up"
-msgstr ""
+msgstr "Forvirra"
 
 #: ../../src/network/internet_gaming.cc:395
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr ""
+msgstr "Metatenaren sendte ein merkeleg FEIL mens han kopla til"
 
 #: ../../src/network/internet_gaming.cc:406
 msgid "Unexpected packet"
-msgstr ""
+msgstr "Uventa pakke"
 
 #: ../../src/network/internet_gaming.cc:408
 #, c-format
@@ -4407,12 +4417,14 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
+"Venta ei LOGG PÅ, LOGG PÅ ATT eller AVVIST pakke frå tenaren, men fekk ordre "
+"%s.  Kan vere at metatenaren brukar ein annan protokollversjon?"
 
 #: ../../src/network/internet_gaming.cc:421
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr ""
+msgstr "ÅTVARING: Fekk ei %s-ordre sjølv om me ikkje er i LOGGAR PÅ-modus."
 
 #: ../../src/network/internet_gaming.cc:430
 #, c-format
@@ -4421,16 +4433,16 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:450
 msgid "Invalid message type"
-msgstr ""
+msgstr "Ugyldig meldingstype"
 
 #: ../../src/network/internet_gaming.cc:450
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Ugyldig pratemelding type «%s»."
 
 #: ../../src/network/internet_gaming.cc:527
 msgid "ERROR: "
-msgstr ""
+msgstr "FEIL: "
 
 #: ../../src/network/internet_gaming.cc:531
 msgid "Chat message could not be sent. "
