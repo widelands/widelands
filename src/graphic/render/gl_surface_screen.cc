@@ -20,7 +20,7 @@
 
 #include <cmath>
 
-#include "gl_picture_texture.h"
+#include "gl_surface_texture.h"
 #include "gl_utils.h"
 #include "graphic/graphic.h"
 #include "upcast.h"
@@ -249,9 +249,9 @@ void GLSurfaceScreen::clear()
 void GLSurfaceScreen::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
-	upcast(const GLPictureTexture, const_oglsrc, src);
+	upcast(const GLSurfaceTexture, const_oglsrc, src);
 	assert(const_oglsrc);
-	GLPictureTexture* oglsrc = const_cast<GLPictureTexture*>(const_oglsrc);
+	GLSurfaceTexture* oglsrc = const_cast<GLSurfaceTexture*>(const_oglsrc);
 	assert(g_opengl);
 
 	/* Set a texture scaling factor. Normaly texture coordiantes

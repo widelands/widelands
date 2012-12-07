@@ -100,48 +100,42 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			// the terrain type) is shown.
 			// // TODO(sirver): whatTODO: Find a way to render this without offscreen rendering
 			//       or implement offscreen rendering for opengl
-			if (g_gr->caps().offscreen_rendering) {
-				IBlitableSurface* offscreen = g_gr->create_surface(64, 64);
+			// // TODO(sirver): simplify
+			IBlitableSurface* offscreen = g_gr->create_surface(64, 64);
 
-				const IPicture* tex = g_gr->get_picture(PicMod_Game,
-						g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
-							->get_texture_picture());
-				offscreen->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
+			const IPicture* tex = g_gr->get_picture(PicMod_Game,
+					g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
+						->get_texture_picture());
+			offscreen->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
 
-				Point pt(1, 64 - small_pich - 1);
+			Point pt(1, 64 - small_pich - 1);
 
-				//  check is green
-				if (ter_is == 0) {
-					offscreen->blit(pt, green, Rect(0, 0, green->get_w(), green->get_h()));
-					pt.x += small_picw + 1;
-				} else {
-					if (ter_is & TERRAIN_WATER) {
-						offscreen->blit(pt, water, Rect(0, 0, water->get_w(), water->get_h()));
-						pt.x += small_picw + 1;
-					}
-					if (ter_is & TERRAIN_MOUNTAIN) {
-						offscreen->blit(pt, mountain, Rect(0, 0, mountain->get_w(), mountain->get_h()));
-						pt.x += small_picw + 1;
-					}
-					if (ter_is & TERRAIN_ACID) {
-						offscreen->blit(pt, dead, Rect(0, 0, dead->get_w(), dead->get_h()));
-						pt.x += small_picw + 1;
-					}
-					if (ter_is & TERRAIN_UNPASSABLE) {
-						offscreen->blit(pt, unpassable, Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
-						pt.x += small_picw + 1;
-					}
-					if (ter_is & TERRAIN_DRY)
-						offscreen->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
-				}
-				offscreen_surfaces_.push_back(offscreen); // Make sure we delete this later on.
-				picture = offscreen;
+			//  check is green
+			if (ter_is == 0) {
+				offscreen->blit(pt, green, Rect(0, 0, green->get_w(), green->get_h()));
+				pt.x += small_picw + 1;
 			} else {
-				picture = g_gr->get_picture
-					(PicMod_Game,
-					 g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
-					 ->get_texture_picture());
+				if (ter_is & TERRAIN_WATER) {
+					offscreen->blit(pt, water, Rect(0, 0, water->get_w(), water->get_h()));
+					pt.x += small_picw + 1;
+				}
+				if (ter_is & TERRAIN_MOUNTAIN) {
+					offscreen->blit(pt, mountain, Rect(0, 0, mountain->get_w(), mountain->get_h()));
+					pt.x += small_picw + 1;
+				}
+				if (ter_is & TERRAIN_ACID) {
+					offscreen->blit(pt, dead, Rect(0, 0, dead->get_w(), dead->get_h()));
+					pt.x += small_picw + 1;
+				}
+				if (ter_is & TERRAIN_UNPASSABLE) {
+					offscreen->blit(pt, unpassable, Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
+					pt.x += small_picw + 1;
+				}
+				if (ter_is & TERRAIN_DRY)
+					offscreen->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
 			}
+			offscreen_surfaces_.push_back(offscreen); // Make sure we delete this later on.
+			picture = offscreen;
 			assert(picture);
 
 			UI::Checkbox & cb = *new UI::Checkbox(this, pos, picture);

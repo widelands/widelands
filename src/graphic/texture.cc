@@ -99,11 +99,9 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 		}
 
 #ifdef USE_OPENGL
-#if 0
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
-			// TODO(sirver): broken for OpenGL
-			boost::shared_ptr<GLPictureTexture> surface(new GLPictureTexture(surf));
+			boost::shared_ptr<GLSurfaceTexture> surface(new GLSurfaceTexture(surf));
 			m_glFrames.push_back(surface);
 
 			// calculate shades on the first frame
@@ -136,7 +134,6 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 			++m_nrframes;
 			continue;
 		}
-#endif
 #endif
 
 		// Determine color map if it's the first frame

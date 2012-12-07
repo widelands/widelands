@@ -27,7 +27,8 @@
 /**
  * This surface represents the screen in OpenGL mode.
  */
-struct GLSurfaceScreen : Surface, IPixelAccess {
+class GLSurfaceScreen : virtual public Surface, virtual public IPixelAccess {
+public:
 	GLSurfaceScreen(uint32_t w, uint32_t h);
 
 	/// Interface implementations

@@ -27,8 +27,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "colormap.h"
-
-#include "graphic/render/gl_picture_texture.h"
+#include "graphic/render/gl_surface_texture.h"
 
 /**
  * This contains all the road textures needed to render roads
@@ -81,7 +80,8 @@ private:
 	bool       is_32bit;
 	bool       m_was_animated;
 #ifdef USE_OPENGL
-	std::vector<boost::shared_ptr<GLPictureTexture> > m_glFrames;
+	// TODO(sirver): not shared please
+	std::vector<boost::shared_ptr<GLSurfaceTexture> > m_glFrames;
 #endif
 };
 

@@ -21,7 +21,7 @@
 #ifndef TERRAIN_OPENGL_H
 #define TERRAIN_OPENGL_H
 
-#include "gl_picture_texture.h"
+#include "gl_surface_texture.h"
 #include "vertex.h"
 
 
@@ -90,7 +90,7 @@ void draw_field_opengl
 			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
 			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
 
-			GLuint edge = dynamic_cast<GLPictureTexture const &>
+			GLuint edge = dynamic_cast<GLSurfaceTexture const &>
 				(*g_gr->get_edge_texture()).get_gl_texture();
 
 			// combine current and top texture
@@ -117,7 +117,7 @@ void draw_field_opengl
 			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
 			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
 
-			GLuint edge = dynamic_cast<GLPictureTexture const &>
+			GLuint edge = dynamic_cast<GLSurfaceTexture const &>
 				(*g_gr->get_edge_texture()).get_gl_texture();
 
 			// combine current and left texture
@@ -271,10 +271,10 @@ void draw_roads_opengl
 	uint8_t road;
 
 	GLuint rt_normal =
-		dynamic_cast<GLPictureTexture const &>
+		dynamic_cast<GLSurfaceTexture const &>
 		(*g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
 	GLuint rt_busy   =
-		dynamic_cast<GLPictureTexture const &>
+		dynamic_cast<GLSurfaceTexture const &>
 		(*g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
 
 	glDisable(GL_BLEND);

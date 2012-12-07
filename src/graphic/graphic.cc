@@ -41,7 +41,6 @@
 #include "texture.h"
 
 #include "render/surface_sdl.h"
-#include "render/gl_picture_texture.h"
 #include "render/gl_surface_screen.h"
 
 #include "logic/roadtype.h"
@@ -220,6 +219,7 @@ Graphic::Graphic
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
+		// TODO(sirver): get rid of this variable
 		m_caps.offscreen_rendering = false;
 
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
@@ -275,7 +275,7 @@ Graphic::Graphic
 		glViewport(0, 0, w, h);
 
 		// Set up OpenGL projection matrix. This transforms opengl coordiantes to
-		// screen coordiantes. We set up a simple Orthogonal view which takes just
+		// screen coordinates. We set up a simple Orthogonal view which takes just
 		// the x, y coordinates and ignores the z coordinate.
 		// Note that the top and bottom values are interchanged. This is to invert
 		// the y axis to get the same coordinates as with opengl.
@@ -762,7 +762,7 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
-		return new GLPictureTexture(surf);
+		return new GLSurfaceTexture(surf);
 	}
 #endif
 	SDL_Surface * surface;
@@ -788,12 +788,9 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 {
 #ifdef USE_OPENGL
-	// TODO(sirver): this used to be in create_picture
-		// return new GLPictureTexture(w, h);
-		// TODO(sirver): gl rendering is now broken
 	if (g_opengl)
 	{
-		throw wexception("OpenGL mode does not support offscreen surfaces");
+		return new GLSurfaceTexture(w, h);
 	}
 	else
 #endif

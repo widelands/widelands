@@ -25,15 +25,16 @@
 #include <GL/glew.h>
 #include <SDL_opengl.h>
 
-#include "graphic/picture.h"
 #include "graphic/pixelaccess.h"
+#include "graphic/surface.h"
 
 struct SDL_Surface;
 
-struct GLPictureTexture : IPicture, IPixelAccess {
-	GLPictureTexture(SDL_Surface * surface);
-	GLPictureTexture(int w, int h);
-	~GLPictureTexture();
+class GLSurfaceTexture : virtual public Surface, virtual public IPixelAccess {
+public:
+	GLSurfaceTexture(SDL_Surface * surface);
+	GLSurfaceTexture(int w, int h);
+	~GLSurfaceTexture();
 
 	/// Interface implementation
 	//@{
@@ -49,6 +50,14 @@ struct GLPictureTexture : IPicture, IPixelAccess {
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
 
 	virtual IPixelAccess & pixelaccess() {return *this;}
+
+	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal);
+	virtual void fill_rect(const Rect&, RGBAColor);
+	virtual void update(); // TODO(sirver): what is this for?
+	virtual void draw_rect(const Rect&, RGBColor);
+	virtual void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
+			const RGBColor& color, uint8_t width = 1);
+	virtual void brighten_rect(const Rect&, int32_t factor);
 	//@}
 
 	GLuint get_gl_texture() const {return m_texture;}
