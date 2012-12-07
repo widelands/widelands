@@ -36,16 +36,20 @@ Rendering functions of the software renderer.
 #include "io/filesystem/layered_filesystem.h"
 #include "wui/minimap.h"
 
-#include "sdl_surface_texture.h"
 #include "graphic/graphic.h"
 
 #include <SDL.h>
+
+#include "sdl_surface.h"
 
 using Widelands::Flag;
 using Widelands::PlayerImmovable;
 using Widelands::Road;
 
 SDLSurface::~SDLSurface() {
+	// TODO(sirver): not really needed for screen, but does it hurt?
+	if (m_surface)
+		SDL_FreeSurface(m_surface);
 }
 
 void SDLSurface::set_sdl_surface(SDL_Surface & surface)

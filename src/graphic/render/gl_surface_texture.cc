@@ -27,7 +27,6 @@
 
 #include "gl_surface_texture.h"
 
-
 /**
  * Initialize an OpenGL texture of the given dimensions.
  *

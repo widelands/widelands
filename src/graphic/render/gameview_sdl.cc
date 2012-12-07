@@ -34,7 +34,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "sdl_surface_texture.h"
 #include "graphic/texture.h"
 
 #include "wui/overlay_manager.h"

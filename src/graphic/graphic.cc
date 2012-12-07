@@ -38,12 +38,10 @@
 #include "font_handler.h"
 #include "picture.h"
 #include "rendertarget.h"
-#include "screen.h"
 #include "texture.h"
 
-#include "render/sdl_surface_texture.h"
-#include "render/sdl_surface_screen.h"
 #include "render/gl_surface_screen.h"
+#include "render/sdl_surface.h"
 
 #include "logic/roadtype.h"
 #include "logic/widelands_fileread.h"
@@ -309,7 +307,7 @@ Graphic::Graphic
 	else
 #endif
 	{
-		screen_.reset(new SDLSurfaceScreen(*sdlsurface));
+		screen_.reset(new SDLSurface(*sdlsurface));
 	}
 
 	m_sdl_screen = sdlsurface;
@@ -405,7 +403,6 @@ bool Graphic::need_update() const
 void Graphic::refresh(bool force)
 {
 #ifdef USE_OPENGL
-	// TODO(sirver): this could be just deleted I think
 	if (g_opengl) {
 		SDL_GL_SwapBuffers();
 		m_update_fullscreen = false;
@@ -414,10 +411,10 @@ void Graphic::refresh(bool force)
 	}
 #endif
 
-	// TODO(sirver): this should go into SDLScreen
-	if (force or m_update_fullscreen)
-		screen_->update();
-	else
+	if (force or m_update_fullscreen) {
+		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
+		SDL_Flip(m_sdl_screen);
+	} else
 		SDL_UpdateRects
 			(m_sdl_screen, m_nr_update_rects, m_update_rects);
 
@@ -541,7 +538,7 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 	SDL_Surface * srcsdl = 0;
 	bool free_source = true;
 
-	if (upcast(const SDLSurfaceTexture, srcsurf, src)) {
+	if (upcast(const SDLSurface, srcsurf, src)) {
 		srcsdl = srcsurf->get_sdl_surface();
 		free_source = false;
 	} else {
@@ -773,7 +770,7 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 	else
 		surface = SDL_DisplayFormat(surf);
 	SDL_FreeSurface(surf);
-	return new SDLSurfaceTexture(*surface);
+	return new SDLSurface(*surface);
 }
 
 /**
@@ -806,9 +803,9 @@ Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 		if (alpha) {
 			SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
 			SDL_FreeSurface(&tsurf);
-			return new SDLSurfaceTexture(surf);
+			return new SDLSurface(surf);
 		}
-		return new SDLSurfaceTexture(tsurf);
+		return new SDLSurface(tsurf);
 	}
 }
 

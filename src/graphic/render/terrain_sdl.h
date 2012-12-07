@@ -31,9 +31,9 @@
 
 #include "logic/roadtype.h"
 
-#include "sdl_surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
+#include "sdl_surface.h"
 
 
 ///Must be a power of two
