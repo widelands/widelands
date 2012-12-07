@@ -23,12 +23,3 @@ SDLSurfaceTexture::~SDLSurfaceTexture() {
 	if (m_surface)
 		SDL_FreeSurface(m_surface);
 }
-
-/*
- * Updating the whole Surface
- */
-void SDLSurfaceTexture::update() {
-	SDL_UpdateRect(m_surface, m_offsx, m_offsy, m_w, m_h);
-}
-
-

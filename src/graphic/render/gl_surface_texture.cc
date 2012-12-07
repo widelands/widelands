@@ -320,9 +320,6 @@ void GLSurfaceTexture::fill_rect(const Rect&, RGBAColor) {
 	// TODO(sirver): implement me
 }
 // TODO(sirver): the next four methods seem to be unused. remove them and refactor
-void GLSurfaceTexture::update() {
-	assert(0); // Never here!
-}
 void GLSurfaceTexture::draw_rect(const Rect&, RGBColor) {
 	// TODO(sirver): when gl supports offscreen rendering, caching is also done for OpenGL
 	// TODO(sirver): implement me

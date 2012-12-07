@@ -33,7 +33,7 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-class SDLSurface : virtual public Surface, virtual public IPixelAccess {
+class SDLSurface : public virtual Surface, public virtual IPixelAccess {
 public:
 	SDLSurface(SDL_Surface & surface) :
 		m_surface(&surface),
@@ -54,7 +54,6 @@ public:
 	virtual void fill_rect(const Rect&, RGBAColor);
 
 	// Implements Surface
-	virtual void update() = 0; // TODO(sirver): I think this is only needed for screen
 	virtual void draw_rect(const Rect&, RGBColor);
 	virtual void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const
 			RGBColor&, uint8_t width);

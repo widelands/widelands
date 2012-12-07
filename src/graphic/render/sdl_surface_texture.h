@@ -23,14 +23,13 @@
 #include "sdl_surface.h"
 
 // TODO(sirver): maybe too much virtual inheritance around here
-class SDLSurfaceTexture : public SDLSurface {
+// TODO(sirver): eventuell kann screen von texture ableiten und nur funktionen überschreiben.
+class SDLSurfaceTexture : public virtual SDLSurface {
 public:
 	SDLSurfaceTexture(SDL_Surface & surface) :
 		SDLSurface(surface)
 	{}
 	virtual ~SDLSurfaceTexture();
-
-	virtual void update();
 };
 #endif /* end of include guard: SDL_SURFACE_TEXTURE_H */
 

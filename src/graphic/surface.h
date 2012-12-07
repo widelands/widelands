@@ -34,9 +34,6 @@ class Surface : public virtual IBlitableSurface {
 public:
 	virtual ~Surface() {}
 
-	/// Update the screen. This is only useful for the screen surface.
-	virtual void update() = 0;
-
 	/// Draws a rect (frame only) to the surface.
 	virtual void draw_rect(const Rect&, RGBColor) = 0;
 

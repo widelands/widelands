@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,24 +13,22 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#ifndef SDL_SURFACE_SCREEN_H
-#define SDL_SURFACE_SCREEN_H
+#ifndef SCREEN_H
+#define SCREEN_H
 
-#include "graphic/screen.h"
-#include "sdl_surface.h"
+#include "surface.h"
 
-class SDLSurfaceScreen : virtual public Screen, virtual public SDLSurface {
+class Screen : public virtual Surface {
 public:
-	SDLSurfaceScreen(SDL_Surface & surface) :
-		SDLSurface(surface)
-	{}
-	virtual ~SDLSurfaceScreen() {}
+	virtual ~Screen() {}
 
-	virtual void update();
+	/// Update the screen. This is only useful for the screen surface.
+	virtual void update() = 0;
 };
-#endif /* end of include guard: SDL_SURFACE_SCREEN_H */
+
+#endif /* end of include guard: SCREEN_H */
 

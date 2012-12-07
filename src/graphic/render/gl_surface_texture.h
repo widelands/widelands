@@ -53,7 +53,6 @@ public:
 
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal);
 	virtual void fill_rect(const Rect&, RGBAColor);
-	virtual void update(); // TODO(sirver): what is this for?
 	virtual void draw_rect(const Rect&, RGBColor);
 	virtual void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 			const RGBColor& color, uint8_t width = 1);

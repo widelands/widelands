@@ -38,6 +38,7 @@
 #include "font_handler.h"
 #include "picture.h"
 #include "rendertarget.h"
+#include "screen.h"
 #include "texture.h"
 
 #include "render/sdl_surface_texture.h"
@@ -308,8 +309,7 @@ Graphic::Graphic
 	else
 #endif
 	{
-		SDLSurface* screen = new SDLSurfaceScreen(*sdlsurface);
-		screen_.reset(screen);
+		screen_.reset(new SDLSurfaceScreen(*sdlsurface));
 	}
 
 	m_sdl_screen = sdlsurface;
@@ -405,6 +405,7 @@ bool Graphic::need_update() const
 void Graphic::refresh(bool force)
 {
 #ifdef USE_OPENGL
+	// TODO(sirver): this could be just deleted I think
 	if (g_opengl) {
 		SDL_GL_SwapBuffers();
 		m_update_fullscreen = false;
@@ -413,6 +414,7 @@ void Graphic::refresh(bool force)
 	}
 #endif
 
+	// TODO(sirver): this should go into SDLScreen
 	if (force or m_update_fullscreen)
 		screen_->update();
 	else
