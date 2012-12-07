@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-12-05 14:10+0000\n"
+"PO-Revision-Date: 2012-12-06 13:05+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-12-06 04:31+0000\n"
+"X-Launchpad-Export-Date: 2012-12-07 04:32+0000\n"
 "X-Generator: Launchpad (build 16341)\n"
 
 #: ../../src/computer_player.cc:38
@@ -4485,66 +4485,66 @@ msgstr "PROBLEM: lydeininga opna fleire gonger, prøver å lukke"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:147
 msgid "Make Directory"
-msgstr ""
+msgstr "Opprett mappe"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
-msgstr ""
+msgstr "Skriv inn mappenamn: "
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
-msgstr ""
+msgstr "Vel tereng"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:176
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:223
 msgid "Current:"
-msgstr ""
+msgstr "Noverande"
 
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
 msgid "Bobs Menu"
-msgstr ""
+msgstr "Bobs-meny"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:44
 msgid "Resources Tools Options"
-msgstr ""
+msgstr "Resursverktøyval"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 msgid "In-/Decrease Value"
-msgstr ""
+msgstr "Auk/senk verdi"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:79
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
 msgid "Set Value"
-msgstr ""
+msgstr "Sett verdi"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:98
 msgid "Current Selection"
-msgstr ""
+msgstr "Gjeldande utval"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
-msgstr ""
+msgstr "Tillét bygg"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:61
 msgid "Allowed Buildings:"
-msgstr ""
+msgstr "Tilletne bygg"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:67
 msgid "Forbidden Buildings:"
-msgstr ""
+msgstr "Forbodne bygg"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:84
 msgid "Forbid"
-msgstr ""
+msgstr "Forby"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:92
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:93
 msgid "Allow"
-msgstr ""
+msgstr "Tillét"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:157
@@ -4552,7 +4552,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "Breidd: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:161
@@ -4560,198 +4560,200 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Height: %u"
-msgstr ""
+msgstr "Høgd: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:124
 msgid "Create Map"
-msgstr ""
+msgstr "Lag kart"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:47
 #: ../../src/editor/ui_menus/editor_main_menu.cc:75
 msgid "Map Options"
-msgstr ""
+msgstr "Kartval"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:70
 msgid "Nr Players:"
-msgstr ""
+msgstr "Tal på spelarar"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:101
 msgid "Set origin"
-msgstr ""
+msgstr "Vel origo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:103
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
+"Vel posisjonen som skal ha koordinata (0,0).  Dette blir hjørnet øvst til "
+"venstre ved eit laga minikart."
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:47
 msgid "Tool Menu"
-msgstr ""
+msgstr "Verktøymeny"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 msgid "Change height"
-msgstr ""
+msgstr "Endre høgd"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Noise height"
-msgstr ""
+msgstr "Støyhøgd"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Immovable"
-msgstr ""
+msgstr "Uflyttbar"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Bob"
-msgstr ""
+msgstr "Bob"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:72
 msgid "Resource"
-msgstr ""
+msgstr "Ressurs"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:73
 msgid "Set port space"
-msgstr ""
+msgstr "Vel portrom"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs Menu"
-msgstr ""
+msgstr "Uflyttbare bobbar-meny"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 #: ../../src/editor/ui_menus/editor_main_menu.cc:60
 msgid "New Random Map"
-msgstr ""
+msgstr "Nytt tilfeldig kart"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:69
 msgid "Random Number:"
-msgstr ""
+msgstr "Tilfeldig tal:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:168
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:439
 #, c-format
 msgid "Water: %u %%"
-msgstr ""
+msgstr "Vatn: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:194
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:442
 #, c-format
 msgid "Land: %u %%"
-msgstr ""
+msgstr "Land: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:220
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:445
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr ""
+msgstr "Audemark: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:230
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:448
 #, c-format
 msgid "Mountains: %u %%"
-msgstr ""
+msgstr "Fjell: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Island mode:"
-msgstr ""
+msgstr "Øymodus:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Resources:"
-msgstr ""
+msgstr "Ressursar:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "Low"
-msgstr ""
+msgstr "Låg"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:258
 msgid "High"
-msgstr ""
+msgstr "Høg"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:295
 msgid "Map ID:"
-msgstr ""
+msgstr "Kart-ID:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:329
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:451
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Spelarar: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:342
 msgid "Generate Map"
-msgstr ""
+msgstr "Lag kart"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:489
 msgid "Generating random map..."
-msgstr ""
+msgstr "Lagar tilfeldig kart…"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:40
 msgid "Toolsize Menu"
-msgstr ""
+msgstr "Meny for verktøystorleik"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:74
 #, c-format
 msgid "Current Size: %u"
-msgstr ""
+msgstr "Noverande storleik: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
 msgid "Save Map"
-msgstr ""
+msgstr "Lagra kart"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:85
 msgid "Exit Editor"
-msgstr ""
+msgstr "Avslutt redigeringsprogram"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:82
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:69
 msgid "Name: "
-msgstr ""
+msgstr "Namn: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:89
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:76
 msgid "Author: "
-msgstr ""
+msgstr "Forfattar: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:96
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:83
 msgid "Size: "
-msgstr ""
+msgstr "Storleik: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:103
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:90
 msgid "World: "
-msgstr ""
+msgstr "Verd: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:110
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:97
 msgid "Players: "
-msgstr ""
+msgstr "Spelarar: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:117
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:105
 msgid "Descr: "
-msgstr ""
+msgstr "Skildr: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:207
 msgid "unnamed"
-msgstr ""
+msgstr "namnlaus"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "<Directory>"
-msgstr ""
+msgstr "<Mappe>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:257
 msgid "<Not a map file>"
-msgstr ""
+msgstr "<Ikkje ei kartfil>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:381
 msgid " exists already. Overwrite?"
-msgstr ""
+msgstr " finnst allereie.  Overskriv?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:404
 msgid "Save Map Error!!"
-msgstr ""
+msgstr "Feil ved lagring av kart!!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:400
 msgid ""
@@ -4760,63 +4762,69 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Kartlagrefeil!\n"
+"Lagra kart kan ha vorte korrupt!\n"
+"\n"
+"Grunn gitt:\n"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
 msgid "Noise Height Options"
-msgstr ""
+msgstr "Støyhøgdval"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
-msgstr ""
+msgstr "Minst: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
-msgstr ""
+msgstr "Maks: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
-msgstr ""
+msgstr "Sett verdi: %u"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:42
 msgid "Player Options"
-msgstr ""
+msgstr "Spelarval"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:48
 msgid "Add player"
-msgstr ""
+msgstr "Legg til spelar"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:55
 msgid "Remove last player"
-msgstr ""
+msgstr "Fjern siste spelar"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:70
 msgid "Number of Players"
-msgstr ""
+msgstr "Tal på spelarar"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:204
 msgid "Player "
-msgstr ""
+msgstr "Spelar "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:323
 msgid "Error!"
-msgstr ""
+msgstr "Feil!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:325
 msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
+"Kan ikkje fjerne spelar. Spelaren er framleis aktiv ein eller annan stad. Ta "
+"vekk alle bygg og bobbar som er avhengige av denne spelaren og prøv att."
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
-msgstr ""
+msgstr "Verktøyval for høgd"
 
 #: ../../src/editor/tools/editor_info_tool.cc:44
 msgid "Field Information"
-msgstr ""
+msgstr "Feltinformasjon"
 
 #: ../../src/editor/tools/editor_info_tool.cc:56
 #, c-format
@@ -4826,26 +4834,30 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
+"1) Info om dobbeltpunkt\n"
+" Koordinat (%i, %i)\n"
+" Høgd: %u\n"
+" Toppar: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " flag"
-msgstr ""
+msgstr " flag"
 
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " mine"
-msgstr ""
+msgstr " gruve"
 
 #: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " port"
-msgstr ""
+msgstr " havn"
 
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " walk"
-msgstr ""
+msgstr " gå"
 
 #: ../../src/editor/tools/editor_info_tool.cc:70
 msgid " swim"
-msgstr ""
+msgstr " svøm"
 
 #: ../../src/editor/tools/editor_info_tool.cc:74
 #, c-format
@@ -4855,12 +4867,18 @@ msgid ""
 " Has base immovable: %s\n"
 " Has bobs: %s\n"
 msgstr ""
+"\n"
+" Eigd av %i\n"
+" Har uflyttbar base: %s\n"
+" Har bobbar: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:80
 msgid ""
 "2) Terrain Info\n"
 " Name: "
 msgstr ""
+"2) Terrenginfo\n"
+" Namn: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
@@ -4868,31 +4886,35 @@ msgid ""
 "\n"
 " Texture Number: %i\n"
 msgstr ""
+"\n"
+" Tekstur nummer %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "3) Resources Info\n"
-msgstr ""
+msgstr "3) Ressursinfo\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:99
 #: ../../src/editor/tools/editor_info_tool.cc:109
 #, c-format
 msgid " Resource name: %s\n"
-msgstr ""
+msgstr " Namn på ressursen: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
 msgid " Resource amount: %i\n"
-msgstr ""
+msgstr " Ressursmengd: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:109
 msgid "none"
-msgstr ""
+msgstr "ingen"
 
 #: ../../src/editor/tools/editor_info_tool.cc:115
 msgid ""
 "4) Map Info\n"
 " Name: "
 msgstr ""
+"4) Kartinfo\n"
+" Namn: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:119
 #, c-format
@@ -4901,6 +4923,9 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
+"\n"
+" Storleik: %ix%i\n"
+" Forfattar: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:122
 #: ../../src/editor/tools/editor_info_tool.cc:133
@@ -4908,6 +4933,8 @@ msgid ""
 "\n"
 " Descr: "
 msgstr ""
+"\n"
+" Skildr: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #, c-format
@@ -4915,35 +4942,41 @@ msgid ""
 "\n"
 " Number of Players: %i\n"
 msgstr ""
+"\n"
+" Tal på spelarar: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:129
 msgid ""
 "5) World Info\n"
 " Name: "
 msgstr ""
+"5) Verdsinfo\n"
+" Namn: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:131
 msgid ""
 "\n"
 " Author: "
 msgstr ""
+"\n"
+" Forfattar: "
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
-msgstr ""
+msgstr "Aggressiv"
 
 #: ../../src/ai/defaultai.h:94
 msgid "Normal"
-msgstr ""
+msgstr "Vanleg"
 
 #: ../../src/ai/defaultai.h:103
 msgid "Defensive"
-msgstr ""
+msgstr "Varsam"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr ""
+msgstr "inga skildr"
 
 #: ../../src/logic/map.h:166
 msgid "no description defined"
-msgstr ""
+msgstr "inga skildring vald"
