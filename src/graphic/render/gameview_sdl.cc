@@ -34,7 +34,7 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "surface_sdl.h"
+#include "sdl_surface_texture.h"
 #include "graphic/texture.h"
 
 #include "wui/overlay_manager.h"
@@ -78,7 +78,7 @@ void GameViewSDL::draw_field
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	upcast(SurfaceSDL, sdlsurf, m_surface);
+	upcast(SDLSurface, sdlsurf, m_surface);
 	if (sdlsurf)
 	{
 		sdlsurf->set_subwin(subwin);

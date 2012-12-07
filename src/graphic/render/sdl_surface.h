@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SURFACE_SDL_H
-#define SURFACE_SDL_H
+#ifndef SDL_SURFACE_H
+#define SDL_SURFACE_H
 
 #include "rgbcolor.h"
 #include "rect.h"
@@ -33,15 +33,14 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-class SurfaceSDL : virtual public Surface, virtual public IPixelAccess {
+class SDLSurface : virtual public Surface, virtual public IPixelAccess {
 public:
-	SurfaceSDL(SDL_Surface & surface) :
+	SDLSurface(SDL_Surface & surface) :
 		m_surface(&surface),
 		m_offsx(0), m_offsy(0),
-		m_w(surface.w), m_h(surface.h),
-		m_isscreen(false)
+		m_w(surface.w), m_h(surface.h)
 	{}
-	~SurfaceSDL();
+	virtual ~SDLSurface();
 
 	// Implements IPicture and IPixelAccess
 	virtual uint32_t get_w() const {return m_w;}
@@ -51,45 +50,41 @@ public:
 	virtual IPixelAccess & pixelaccess() {return *this;}
 
 	// Implements IBlitableSurface
-	void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
-	void fill_rect(const Rect&, RGBAColor);
+	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
+	virtual void fill_rect(const Rect&, RGBAColor);
 
 	// Implements Surface
-	void update();
-	void draw_rect(const Rect&, RGBColor);
-	void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const
+	virtual void update() = 0; // TODO(sirver): I think this is only needed for screen
+	virtual void draw_rect(const Rect&, RGBColor);
+	virtual void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const
 			RGBColor&, uint8_t width);
-	void brighten_rect(const Rect&, int32_t factor);
+	virtual void brighten_rect(const Rect&, int32_t factor);
 
 	// Implements IPixelAccess
-	SDL_PixelFormat const & format() const;
-	void lock(LockMode);
-	void unlock(UnlockMode);
-	uint32_t get_pixel(uint32_t x, uint32_t y);
-	void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
-	uint16_t get_pitch() const {return m_surface->pitch;}
-	uint8_t * get_pixels() const;
+	virtual SDL_PixelFormat const & format() const;
+	virtual void lock(LockMode);
+	virtual void unlock(UnlockMode);
+	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
+	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
+	virtual uint16_t get_pitch() const {return m_surface->pitch;}
+	virtual uint8_t * get_pixels() const;
 
 	/// Set surface, only call once
 	void set_sdl_surface(SDL_Surface & surface);
 	SDL_Surface * get_sdl_surface() const {return m_surface;}
-
-	/// Save a bitmap of this to a file
-	void save_bmp(const char & fname) const;
 
 	void clear();
 
 	// TODO(sirver): what is that? same as rendertarget?
 	void set_subwin(const Rect& r);
 	void unset_subwin();
-	void set_isscreen(bool screen);
 
-private:
+protected:
 	SDL_Surface * m_surface;
 	int32_t m_offsx;
 	int32_t m_offsy;
 	uint32_t m_w, m_h;
-	bool m_isscreen;
 };
 
-#endif
+
+#endif /* end of include guard: SDL_SURFACE_H */

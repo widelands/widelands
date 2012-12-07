@@ -40,7 +40,8 @@
 #include "rendertarget.h"
 #include "texture.h"
 
-#include "render/surface_sdl.h"
+#include "render/sdl_surface_texture.h"
+#include "render/sdl_surface_screen.h"
 #include "render/gl_surface_screen.h"
 
 #include "logic/roadtype.h"
@@ -307,8 +308,7 @@ Graphic::Graphic
 	else
 #endif
 	{
-		SurfaceSDL* screen = new SurfaceSDL(*sdlsurface);
-		screen->set_isscreen(true); // TODO(sirver): maybe into constructor
+		SDLSurface* screen = new SDLSurfaceScreen(*sdlsurface);
 		screen_.reset(screen);
 	}
 
@@ -539,7 +539,7 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 	SDL_Surface * srcsdl = 0;
 	bool free_source = true;
 
-	if (upcast(const SurfaceSDL, srcsurf, src)) {
+	if (upcast(const SDLSurfaceTexture, srcsurf, src)) {
 		srcsdl = srcsurf->get_sdl_surface();
 		free_source = false;
 	} else {
@@ -771,7 +771,7 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 	else
 		surface = SDL_DisplayFormat(surf);
 	SDL_FreeSurface(surf);
-	return new SurfaceSDL(*surface);
+	return new SDLSurfaceTexture(*surface);
 }
 
 /**
@@ -804,9 +804,9 @@ Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha)
 		if (alpha) {
 			SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
 			SDL_FreeSurface(&tsurf);
-			return new SurfaceSDL(surf);
+			return new SDLSurfaceTexture(surf);
 		}
-		return new SurfaceSDL(tsurf);
+		return new SDLSurfaceTexture(tsurf);
 	}
 }
 

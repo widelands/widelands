@@ -31,7 +31,6 @@
 
 #include "rendertarget.h"
 #include "surface.h"
-#include "graphic/render/surface_sdl.h"
 #include "wordwrap.h"
 
 #include <SDL_image.h>

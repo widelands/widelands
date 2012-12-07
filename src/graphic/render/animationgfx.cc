@@ -21,7 +21,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 
-#include "surface_sdl.h"
 #include "graphic/graphic.h"
 #include "graphic/picture.h"
 

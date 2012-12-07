@@ -22,7 +22,7 @@ Rendering functions of the software renderer.
 */
 
 
-#include "log.h"
+// TODO(sirver): check includes
 #include "upcast.h"
 #include "wexception.h"
 #include "logic/building.h"
@@ -36,7 +36,7 @@ Rendering functions of the software renderer.
 #include "io/filesystem/layered_filesystem.h"
 #include "wui/minimap.h"
 
-#include "surface_sdl.h"
+#include "sdl_surface_texture.h"
 #include "graphic/graphic.h"
 
 #include <SDL.h>
@@ -45,18 +45,124 @@ using Widelands::Flag;
 using Widelands::PlayerImmovable;
 using Widelands::Road;
 
-/*
- * Updating the whole Surface
- */
-void SurfaceSDL::update() {
-	if (m_isscreen) {
-		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
-		SDL_Flip(m_surface);
-		//log("SurfaceSDL::update(): update complete screen\n");
-	} else {
-		SDL_UpdateRect(m_surface, m_offsx, m_offsy, m_w, m_h);
-		//log("SurfaceSDL::update()\n");
+SDLSurface::~SDLSurface() {
+}
+
+void SDLSurface::set_sdl_surface(SDL_Surface & surface)
+{
+	if (m_surface)
+		SDL_FreeSurface(m_surface);
+
+	m_surface = &surface;
+	m_w = m_surface->w;
+	m_h = m_surface->h;
+}
+
+const SDL_PixelFormat & SDLSurface::format() const {
+	assert(m_surface);
+	return *m_surface->format;
+}
+
+uint8_t * SDLSurface::get_pixels() const {
+	assert(m_surface);
+
+	return
+		static_cast<uint8_t *>(m_surface->pixels)
+		+
+		m_offsy * m_surface->pitch
+		+
+		m_offsx * m_surface->format->BytesPerPixel;
+}
+
+void SDLSurface::lock(LockMode) {
+	if (SDL_MUSTLOCK(m_surface))
+		SDL_LockSurface(m_surface);
+}
+
+void SDLSurface::unlock(UnlockMode) {
+	if (SDL_MUSTLOCK(m_surface))
+		SDL_UnlockSurface(m_surface);
+}
+
+uint32_t SDLSurface::get_pixel(uint32_t x, uint32_t y) {
+	x += m_offsx;
+	y += m_offsy;
+
+	assert(x < get_w());
+	assert(y < get_h());
+	assert(m_surface);
+
+	// Locking not needed: reading only
+	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
+	Uint8 * const pix =
+		static_cast<Uint8 *>(m_surface->pixels) +
+		y * m_surface->pitch + x * bytes_per_pixel;
+
+	switch (bytes_per_pixel) {
+	case 1:
+		return *pix; //  Maybe needed for save_png.
+	case 2:
+		return *reinterpret_cast<const Uint16 *>(pix);
+	case 3: //Needed for save_png.
+		//  We can not dereference a pointer to a size 4 object in this case
+		//  since that would casue a read beyond the end of the block pointed to
+		//  by m_surface. Furthermore it would not be properly aligned to a 4
+		//  byte boundary.
+		//
+		//  Suppose that the image is 2 * 2 pixels. Then m_surface points to a
+		//  block of size 2 * 2 * 3 = 12. The values for the last pixel are at
+		//  m_surface[9], m_surface[10] and m_surface[11]. But m_surface[12] is
+		//  beyond the end of the block, so we can not read 4 bytes starting at
+		//  m_surface[9] (even if unaligned access is allowed).
+		//
+		//  Therefore we read the 3 bytes separately and get the result by
+		//  shifting the values. It is alignment safe.
+		return pix[0] << 0x00 | pix[1] << 0x08 | pix[2] << 0x10;
+	case 4:
+		return *reinterpret_cast<const Uint32 *>(pix);
 	}
+	assert(false);
+
+	return 0; // Should never be here
+}
+
+void SDLSurface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
+	x += m_offsx;
+	y += m_offsy;
+
+	if (x >= get_w() || y >= get_h())
+		return;
+	assert(m_surface);
+
+	if (SDL_MUSTLOCK(m_surface))
+		SDL_LockSurface(m_surface);
+
+	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
+	Uint8 * const pix =
+		static_cast<Uint8 *>(m_surface->pixels) +
+		y * m_surface->pitch + x * bytes_per_pixel;
+	switch (bytes_per_pixel) {
+	case 2: *reinterpret_cast<Uint16 *>(pix) = static_cast<Uint16>(clr); break;
+	case 4: *reinterpret_cast<Uint32 *>(pix) = clr;                      break;
+	};
+
+	if (SDL_MUSTLOCK(m_surface))
+		SDL_UnlockSurface(m_surface);
+}
+
+void SDLSurface::set_subwin(const Rect& r) {
+	m_offsx = r.x;
+	m_offsy = r.y;
+	m_w = r.w;
+	m_h = r.h;
+}
+
+// TODO(sirver): are they used/usefull?
+void SDLSurface::unset_subwin() {
+	m_offsx = 0;
+	m_offsy = 0;
+	m_w = m_surface->w;
+	m_h = m_surface->h;
 }
 
 /*
@@ -64,13 +170,12 @@ void SurfaceSDL::update() {
 Draws the outline of a rectangle
 ===============
 */
-void SurfaceSDL::draw_rect(const Rect& rc, const RGBColor clr) {
+void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
-	//log("SurfaceSDL::draw_rect()\n");
 	const uint32_t color = clr.map(format());
 
 	const Point bl = rc.bottom_right() - Point(1, 1);
@@ -91,13 +196,12 @@ void SurfaceSDL::draw_rect(const Rect& rc, const RGBColor clr) {
 Draws a filled rectangle
 ===============
 */
-void SurfaceSDL::fill_rect(const Rect& rc, const RGBAColor clr) {
+void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
-	//log("SurfaceSDL::fill_rect()\n");
 	const uint32_t color = clr.map(format());
 
 	SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
@@ -116,15 +220,13 @@ This function is slow as hell.
   highlight things.
 ===============
 */
-void SurfaceSDL::brighten_rect(const Rect& rc, const int32_t factor) {
+void SDLSurface::brighten_rect(const Rect& rc, const int32_t factor) {
 	if (!factor)
 		return;
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
-
-	//log("SurfaceSDL::brighten_rect()\n");
 
 	const Point bl = rc.bottom_right();
 
@@ -199,7 +301,7 @@ void SurfaceSDL::brighten_rect(const Rect& rc, const int32_t factor) {
 * This function could be faster by using direct pixel
 * access instead of the set_pixel() function
 */
-void SurfaceSDL::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
+void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 		const RGBColor& color, uint8_t width)
 {
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
@@ -250,15 +352,15 @@ void SurfaceSDL::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 Clear the entire bitmap to black
 ===============
 */
-void SurfaceSDL::clear() {
+void SDLSurface::clear() {
 	SDL_FillRect(m_surface, 0, 0);
 }
 
 
-void SurfaceSDL::blit
+void SDLSurface::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
-	upcast(const SurfaceSDL, sdlsurf, src);
+	upcast(const SDLSurface, sdlsurf, src);
 	assert(sdlsurf);
 	assert(this);
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};

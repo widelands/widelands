@@ -31,7 +31,7 @@
 
 #include "logic/roadtype.h"
 
-#include "surface_sdl.h"
+#include "sdl_surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 
@@ -87,7 +87,7 @@ struct RightEdge {
  * The edge lists will be overwritten with undefined values.
  */
 template<typename T> static void render_edge_lists
-	(SurfaceSDL & dst, Texture const & tex,
+	(SDLSurface & dst, Texture const & tex,
 	 int32_t y, int32_t height,
 	 LeftEdge * left, RightEdge * right,
 	 int32_t dbdx, int32_t dtydx)
@@ -216,7 +216,7 @@ struct WLPolygon {
  * texture x coordinates.
  */
 template<typename T> static void render_triangle
-	(SurfaceSDL & dst,
+	(SDLSurface & dst,
 	 Vertex const & p1, Vertex const & p2, Vertex const & p3,
 	 Texture const & tex)
 {
@@ -346,7 +346,7 @@ template<typename T> static void render_triangle
  * rendering could be handled as a special case then.
 */
 template<typename T> static void dither_edge_horiz
-	(SurfaceSDL & dst,
+	(SDLSurface & dst,
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ttex, Texture const & btex)
 {
@@ -443,7 +443,7 @@ template<typename T> static void dither_edge_horiz
  * \see dither_edge_horiz
  */
 template<typename T> static void dither_edge_vert
-	(SurfaceSDL & dst,
+	(SDLSurface & dst,
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ltex, Texture const & rtex)
 {
@@ -533,7 +533,7 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-	(SurfaceSDL & dst, Point const start, Point const end, SurfaceSDL const & src)
+	(SDLSurface & dst, Point const start, Point const end, SDLSurface const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
@@ -560,7 +560,7 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-	(SurfaceSDL & dst, Point const start, Point const end, SurfaceSDL const & src)
+	(SDLSurface & dst, Point const start, Point const end, SDLSurface const & src)
 {
 	int32_t const dstw = dst.get_w();
 	int32_t const dsth = dst.get_h();
@@ -587,7 +587,7 @@ template<typename T> static void render_road_vert
 }
 
 template<typename T> static void draw_field_int
-	(SurfaceSDL       & dst,
+	(SDLSurface       & dst,
 	 Vertex  const &  f_vert,
 	 Vertex  const &  r_vert,
 	 Vertex  const & bl_vert,
@@ -598,12 +598,12 @@ template<typename T> static void draw_field_int
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	upcast(const SurfaceSDL, const_rt_normal, g_gr->get_road_texture(Widelands::Road_Normal));
-	upcast(const SurfaceSDL, const_rt_busy, g_gr->get_road_texture(Widelands::Road_Busy));
+	upcast(const SDLSurface, const_rt_normal, g_gr->get_road_texture(Widelands::Road_Normal));
+	upcast(const SDLSurface, const_rt_busy, g_gr->get_road_texture(Widelands::Road_Busy));
 
 	// TODO(sirver): those casts should not be needed
-	SurfaceSDL* rt_busy = const_cast<SurfaceSDL*>(const_rt_busy);
-	SurfaceSDL* rt_normal = const_cast<SurfaceSDL*>(const_rt_normal);
+	SDLSurface* rt_busy = const_cast<SDLSurface*>(const_rt_busy);
+	SDLSurface* rt_normal = const_cast<SDLSurface*>(const_rt_normal);
 
 	dst.lock(IPixelAccess::Lock_Normal);
 
