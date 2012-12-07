@@ -44,6 +44,70 @@ public:
 	/// makes a rectangle on the surface brighter (or darker).
 	/// @note this is slow in SDL mode. Use with care
 	virtual void brighten_rect(const Rect&, int32_t factor) = 0;
+
+	// TODO(sirver): Below: pixelaccess.
+	enum LockMode {
+		/**
+		 * Normal mode preserves pre-existing pixel data so that it can
+		 * be read or modified.
+		 */
+		Lock_Normal = 0,
+
+		/**
+		 * Discard mode discards pre-existing pixel data. All pixels
+		 * will be undefined unless they are re-written.
+		 */
+		Lock_Discard
+	};
+
+	enum UnlockMode {
+		/**
+		 * Update mode will ensure that any changes in the pixel data
+		 * will appear in subsequent operations.
+		 */
+		Unlock_Update = 0,
+
+		/**
+		 * NoChange mode indicates that the caller changed no pixel data.
+		 *
+		 * \note If the caller did change pixel data but specifies NoChange
+		 * mode, the results are undefined.
+		 */
+		Unlock_NoChange
+	};
+
+	/// This returns the pixel format for direct pixel access.
+	virtual SDL_PixelFormat const & format() const = 0;
+
+	/**
+	 * Lock/Unlock pairs must guard any of the direct pixel access using the
+	 * functions below.
+	 *
+	 * \note Lock/Unlock pairs cannot be nested.
+	 */
+	//@{
+	virtual void lock(LockMode) = 0;
+	virtual void unlock(UnlockMode) = 0;
+	//@}
+
+	//@{
+	virtual uint32_t get_pixel(uint32_t x, uint32_t y) = 0;
+	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr) = 0;
+	//@}
+
+	/**
+	 * \return Pitch of the raw pixel data, i.e. the number of bytes
+	 * contained in each image row. This can be strictly larger than
+	 * bytes per pixel times the width.
+	 */
+	virtual uint16_t get_pitch() const = 0;
+
+	/**
+	 * \return Pointer to the raw pixel data.
+	 *
+	 * \warning May only be called inside lock/unlock pairs.
+	 */
+	virtual uint8_t * get_pixels() const = 0;
 };
 
 #endif

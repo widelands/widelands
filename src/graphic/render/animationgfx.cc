@@ -260,19 +260,18 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 		IPicture* origpic = m_plrframes[0][i];
 		uint32_t w = origpic->get_w();
 		uint32_t h = origpic->get_h();
-		IPixelAccess & origpix = m_plrframes[0][i]->pixelaccess();
-		IPixelAccess & pcmask = m_pcmasks[i]->pixelaccess();
+		upcast(Surface, orig_surface, m_plrframes[0][i]);
+		upcast(Surface, pcmask_surface, m_pcmasks[i]);
 
 		Surface* new_surface = g_gr->create_surface(w, h, true);
-		IPixelAccess & newpix = new_surface->pixelaccess();
 
-		const SDL_PixelFormat & fmt = origpix.format();
-		const SDL_PixelFormat & fmt_pc = pcmask.format();
-		const SDL_PixelFormat & destfmt = newpix.format();
+		const SDL_PixelFormat & fmt = orig_surface->format();
+		const SDL_PixelFormat & fmt_pc = pcmask_surface->format();
+		const SDL_PixelFormat & destfmt = new_surface->format();
 
-		origpix.lock(IPixelAccess::Lock_Normal);
-		pcmask.lock(IPixelAccess::Lock_Normal);
-		newpix.lock(IPixelAccess::Lock_Discard);
+		orig_surface->lock(Surface::Lock_Normal);
+		pcmask_surface->lock(Surface::Lock_Normal);
+		new_surface->lock(Surface::Lock_Discard);
 		// This could be done significantly faster, but since we
 		// cache the result, let's keep it simple for now.
 		for (uint32_t y = 0; y < h; ++y) {
@@ -281,8 +280,8 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 				RGBAColor mask;
 				RGBAColor product;
 
-				source.set(fmt, origpix.get_pixel(x, y));
-				mask.set(fmt_pc, pcmask.get_pixel(x, y));
+				source.set(fmt, orig_surface->get_pixel(x, y));
+				mask.set(fmt_pc, pcmask_surface->get_pixel(x, y));
 
 				if
 					(uint32_t const influence =
@@ -311,12 +310,12 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 					product = source;
 				}
 
-				newpix.set_pixel(x, y, product.map(destfmt));
+				new_surface->set_pixel(x, y, product.map(destfmt));
 			}
 		}
-		origpix.unlock(IPixelAccess::Unlock_NoChange);
-		pcmask.unlock(IPixelAccess::Unlock_NoChange);
-		newpix.unlock(IPixelAccess::Unlock_Update);
+		orig_surface->unlock(Surface::Unlock_NoChange);
+		pcmask_surface->unlock(Surface::Unlock_NoChange);
+		new_surface->unlock(Surface::Unlock_Update);
 
 		frames.push_back(new_surface);
 	}

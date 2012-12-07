@@ -35,7 +35,6 @@
 
 namespace UI {struct ProgressWindow;}
 
-struct IPixelAccess;
 struct RenderTarget;
 struct Road_Textures;
 struct SDL_Rect;
@@ -128,8 +127,7 @@ struct Graphic : public virtual IGraphic {
 	virtual void add_picture_to_cache(PicMod, const std::string&, IPicture* );
 
 	void save_png(const IPicture* , StreamWrite *) const;
-	void save_png(Surface* surf, StreamWrite *) const;
-	void save_png(IPixelAccess & pix, StreamWrite *) const;
+	void save_png(Surface& surf, StreamWrite *) const;
 
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 
@@ -164,7 +162,7 @@ struct Graphic : public virtual IGraphic {
 	const GraphicCaps& caps() const throw () {return m_caps;}
 
 private:
-	SDL_Surface * extract_sdl_surface(IPixelAccess & pix, Rect srcrect);
+	SDL_Surface * extract_sdl_surface(Surface & surf, Rect srcrect);
 
 protected:
 	// Static helper function for png writing

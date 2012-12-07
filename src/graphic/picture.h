@@ -25,8 +25,6 @@
 
 #include <boost/noncopyable.hpp>
 
-struct IPixelAccess;
-
 /**
  * Interface to a bitmap that can act as the source of a rendering
  * operation.
@@ -38,10 +36,6 @@ public:
 
 	virtual uint32_t get_w() const = 0; // TODO(sirver): Should only be called w() and h()
 	virtual uint32_t get_h() const = 0;
-
-	// TODO(sirver): Should this really be composed? It duplicates
-	// quite some stuff
-	virtual IPixelAccess & pixelaccess() = 0;
 };
 
 #endif

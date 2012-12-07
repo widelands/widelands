@@ -106,9 +106,9 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 
 			// calculate shades on the first frame
 			if (!m_nrframes) {
-				surface->lock(IPixelAccess::Lock_Normal);
+				surface->lock(Surface::Lock_Normal);
 				uint32_t mmap_color_base = surface->get_pixel(0, 0);
-				surface->unlock(IPixelAccess::Unlock_NoChange);
+				surface->unlock(Surface::Unlock_NoChange);
 
 				int32_t i, shade, r, g, b, a;
 				for (i = -128; i < 128; i++) {

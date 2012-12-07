@@ -26,7 +26,6 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/utility.hpp>
 
-#include "graphic/pixelaccess.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/sdl_helper.h"
 #include "upcast.h"
@@ -41,7 +40,7 @@ using namespace boost;
 
 #include <iostream> // TODO(sirver): Remove me
 
-class ThinSDLSurfacePA : boost::noncopyable, public virtual IPixelAccess {
+class ThinSDLSurfacePA : public virtual IBlitableSurface {
 public:
 	ThinSDLSurfacePA(SDL_Surface* surf) : surf_(surf) {}
 	virtual ~ThinSDLSurfacePA() {}

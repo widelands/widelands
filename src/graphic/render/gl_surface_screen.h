@@ -21,13 +21,12 @@
 
 #include <boost/scoped_array.hpp>
 
-#include "graphic/pixelaccess.h"
 #include "graphic/surface.h"
 
 /**
  * This surface represents the screen in OpenGL mode.
  */
-class GLSurfaceScreen : virtual public Surface, virtual public IPixelAccess {
+class GLSurfaceScreen : virtual public Surface {
 public:
 	GLSurfaceScreen(uint32_t w, uint32_t h);
 
@@ -45,7 +44,6 @@ public:
 	virtual uint8_t * get_pixels() const;
 	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
-	virtual IPixelAccess & pixelaccess() {return *this;}
 
 	virtual void draw_rect(const Rect&, RGBColor);
 	virtual void fill_rect(const Rect&, RGBAColor);

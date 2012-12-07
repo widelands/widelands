@@ -70,7 +70,7 @@ void GLSurfaceScreen::swap_rows()
 	}
 }
 
-void GLSurfaceScreen::lock(IPixelAccess::LockMode mode)
+void GLSurfaceScreen::lock(Surface::LockMode mode)
 {
 	assert(!m_pixels);
 
@@ -83,7 +83,7 @@ void GLSurfaceScreen::lock(IPixelAccess::LockMode mode)
 	}
 }
 
-void GLSurfaceScreen::unlock(IPixelAccess::UnlockMode mode)
+void GLSurfaceScreen::unlock(Surface::UnlockMode mode)
 {
 	assert(m_pixels);
 

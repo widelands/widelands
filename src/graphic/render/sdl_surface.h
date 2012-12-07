@@ -23,7 +23,6 @@
 #include "rgbcolor.h"
 #include "rect.h"
 
-#include "graphic/pixelaccess.h"
 #include "graphic/surface.h"
 
 /**
@@ -33,7 +32,7 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-class SDLSurface : public virtual Surface, public virtual IPixelAccess {
+class SDLSurface : public virtual Surface {
 public:
 	SDLSurface(SDL_Surface & surface) :
 		m_surface(&surface),
@@ -42,12 +41,9 @@ public:
 	{}
 	virtual ~SDLSurface();
 
-	// Implements IPicture and IPixelAccess
+	// Implements IPicture
 	virtual uint32_t get_w() const {return m_w;}
 	virtual uint32_t get_h() const {return m_h;}
-
-	// Implement IPicture
-	virtual IPixelAccess & pixelaccess() {return *this;}
 
 	// Implements IBlitableSurface
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
@@ -59,7 +55,6 @@ public:
 			RGBColor&, uint8_t width);
 	virtual void brighten_rect(const Rect&, int32_t factor);
 
-	// Implements IPixelAccess
 	virtual SDL_PixelFormat const & format() const;
 	virtual void lock(LockMode);
 	virtual void unlock(UnlockMode);

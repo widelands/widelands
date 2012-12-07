@@ -605,7 +605,7 @@ template<typename T> static void draw_field_int
 	SDLSurface* rt_busy = const_cast<SDLSurface*>(const_rt_busy);
 	SDLSurface* rt_normal = const_cast<SDLSurface*>(const_rt_normal);
 
-	dst.lock(IPixelAccess::Lock_Normal);
+	dst.lock(Surface::Lock_Normal);
 
 	render_triangle<T> (dst, f_vert, br_vert, r_vert, f_r_texture);
 	render_triangle<T> (dst, f_vert, bl_vert, br_vert, f_d_texture);
@@ -670,7 +670,7 @@ template<typename T> static void draw_field_int
 		}
 	}
 
-	dst.unlock(IPixelAccess::Unlock_Update);
+	dst.unlock(Surface::Unlock_Update);
 
 	// FIXME: similar textures may not need dithering
 }

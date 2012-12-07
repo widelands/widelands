@@ -25,12 +25,11 @@
 #include <GL/glew.h>
 #include <SDL_opengl.h>
 
-#include "graphic/pixelaccess.h"
 #include "graphic/surface.h"
 
 struct SDL_Surface;
 
-class GLSurfaceTexture : virtual public Surface, virtual public IPixelAccess {
+class GLSurfaceTexture : virtual public Surface {
 public:
 	GLSurfaceTexture(SDL_Surface * surface);
 	GLSurfaceTexture(int w, int h);
@@ -48,8 +47,6 @@ public:
 	virtual uint8_t * get_pixels() const;
 	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr);
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
-
-	virtual IPixelAccess & pixelaccess() {return *this;}
 
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal);
 	virtual void fill_rect(const Rect&, RGBAColor);

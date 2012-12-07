@@ -21,6 +21,10 @@
 // TODO(sirver): picid -> pic everywhere
 // TODO(sirver): untangle which features in Surface should stay there and
 // which can go. Especially as IBlitableSurface and Surface are too similar.
+// TODO(sirver): das ganze virtuelle ableiten kann man dann auch wieder sein lassen
+// TODO(sirver): const IPicture -> IPicture, dann static cast.
+// TODO(sirver): screenshots in beiden impl testen. Scheinen kaputt zu sein.
+// TODO(sirver): Surfaces sind jetzt intern für graphic. Umbennen und funktionen hoch in IBlitableSurface
 #include "graphic.h"
 
 #include "build_info.h"
@@ -545,8 +549,8 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 		// I guess this is just in OpenGL
 		// TODO(sirver): this cast is ugly
 		// TODO(sirver): is the srcrect even used?
-		IPicture* nonconst = const_cast<IPicture*>(src);
-		srcsdl = extract_sdl_surface(nonconst->pixelaccess(), srcrect);
+		upcast(Surface, nonconst, const_cast<IPicture*>(src));
+		srcsdl = extract_sdl_surface(*nonconst, srcrect);
 	}
 
 	// Third step: perform the zoom and placement
@@ -612,24 +616,24 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
  * Create and return an \ref SDL_Surface that contains the given sub-rectangle
  * of the given pixel region.
  */
-SDL_Surface * Graphic::extract_sdl_surface(IPixelAccess & pix, Rect srcrect)
+SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect)
 {
 	assert(srcrect.x >= 0);
 	assert(srcrect.y >= 0);
-	assert(srcrect.x + srcrect.w <= pix.get_w());
-	assert(srcrect.y + srcrect.h <= pix.get_h());
+	assert(srcrect.x + srcrect.w <= surf.get_w());
+	assert(srcrect.y + srcrect.h <= surf.get_h());
 
-	const SDL_PixelFormat & fmt = pix.format();
+	const SDL_PixelFormat & fmt = surf.format();
 	SDL_Surface * dest = SDL_CreateRGBSurface
 		(SDL_SWSURFACE, srcrect.w, srcrect.h,
 		 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 
-	pix.lock(IPixelAccess::Lock_Normal);
+	surf.lock(Surface::Lock_Normal);
 	SDL_LockSurface(dest);
 
-	uint32_t srcpitch = pix.get_pitch();
+	uint32_t srcpitch = surf.get_pitch();
 	uint32_t rowsize = srcrect.w * fmt.BytesPerPixel;
-	uint8_t * srcpix = pix.get_pixels() + srcpitch * srcrect.y + fmt.BytesPerPixel * srcrect.x;
+	uint8_t * srcpix = surf.get_pixels() + srcpitch * srcrect.y + fmt.BytesPerPixel * srcrect.x;
 	uint8_t * dstpix = static_cast<uint8_t *>(dest->pixels);
 
 	for (uint32_t y = 0; y < srcrect.h; ++y) {
@@ -639,7 +643,7 @@ SDL_Surface * Graphic::extract_sdl_surface(IPixelAccess & pix, Rect srcrect)
 	}
 
 	SDL_UnlockSurface(dest);
-	pix.unlock(IPixelAccess::Unlock_NoChange);
+	surf.unlock(Surface::Unlock_NoChange);
 
 	return dest;
 }
@@ -650,7 +654,7 @@ SDL_Surface * Graphic::extract_sdl_surface(IPixelAccess & pix, Rect srcrect)
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
+void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 {
 	// Save a png
 	png_structp png_ptr =
@@ -685,28 +689,28 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
 
 	// Fill info struct
 	png_set_IHDR
-		(png_ptr, info_ptr, pix.get_w(), pix.get_h(),
+		(png_ptr, info_ptr, surf.get_w(), surf.get_h(),
 		 8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
 		 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
 	// Start writing
 	png_write_info(png_ptr, info_ptr);
 	{
-		uint32_t surf_w = pix.get_w();
-		uint32_t surf_h = pix.get_h();
+		uint32_t surf_w = surf.get_w();
+		uint32_t surf_h = surf.get_h();
 		uint32_t row_size = 4 * surf_w;
 
 		boost::scoped_array<png_byte> row(new png_byte[row_size]);
 
 		//Write each row
-		const SDL_PixelFormat & fmt = pix.format();
-		pix.lock(IPixelAccess::Lock_Normal);
+		const SDL_PixelFormat & fmt = surf.format();
+		surf.lock(Surface::Lock_Normal);
 
 		// Write each row
 		for (uint32_t y = 0; y < surf_h; ++y) {
 			for (uint32_t x = 0; x < surf_w; ++x) {
 				RGBAColor color;
-				color.set(fmt, pix.get_pixel(x, y));
+				color.set(fmt, surf.get_pixel(x, y));
 				row[4 * x] = color.r;
 				row[4 * x + 1] = color.g;
 				row[4 * x + 2] = color.b;
@@ -716,24 +720,12 @@ void Graphic::save_png(IPixelAccess & pix, StreamWrite * sw) const
 			png_write_row(png_ptr, row.get());
 		}
 
-		pix.unlock(IPixelAccess::Unlock_NoChange);
+		surf.unlock(Surface::Unlock_NoChange);
 	}
 
 	// End write
 	png_write_end(png_ptr, info_ptr);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
-}
-
-/**
- * Saves a surface to a png. This can be a file or part of a stream.
- *
- * @param surf The Surface to save
- * @param sw a StreamWrite where the png is written to
- */
-// TODO(sirver): Maybe IPicture?
-void Graphic::save_png(Surface* surf, StreamWrite * sw) const
-{
-	save_png(surf->pixelaccess(), sw);
 }
 
 /**
@@ -745,7 +737,7 @@ void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
 {
 	// TODO(sirver): cast is ugly
 	IPicture* nonconst = const_cast<IPicture*>(pic);
-	save_png(nonconst->pixelaccess(), sw);
+	save_png(nonconst, sw);
 }
 
 /**
@@ -821,24 +813,22 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 		return 0;
 
 	// TODO(sirver): cast is pretty ugly
-	IPicture* nonconst = const_cast<IPicture*>(pic);
+	upcast(Surface, nonconst, const_cast<IPicture*>(pic));
 
-	IPixelAccess & origpix = nonconst->pixelaccess();
 	uint32_t w = pic->get_w();
 	uint32_t h = pic->get_h();
-	const SDL_PixelFormat & origfmt = origpix.format();
+	const SDL_PixelFormat & origfmt = nonconst->format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
-	IPixelAccess & destpix = dest->pixelaccess();
-	const SDL_PixelFormat & destfmt = destpix.format();
+	const SDL_PixelFormat & destfmt = dest->format();
 
-	origpix.lock(IPixelAccess::Lock_Normal);
-	destpix.lock(IPixelAccess::Lock_Discard);
+	nonconst->lock(Surface::Lock_Normal);
+	dest->lock(Surface::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
 
-			color.set(origfmt, origpix.get_pixel(x, y));
+			color.set(origfmt, nonconst->get_pixel(x, y));
 
 			//  Halve the opacity to give some difference for pictures that are
 			//  grayscale to begin with.
@@ -851,11 +841,11 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 				 8388608U) //  compensate for truncation:  .5 * 2^24
 				>> 24;
 
-			destpix.set_pixel(x, y, color.map(destfmt));
+			dest->set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	origpix.unlock(IPixelAccess::Unlock_NoChange);
-	destpix.unlock(IPixelAccess::Unlock_Update);
+	nonconst->unlock(Surface::Unlock_NoChange);
+	dest->unlock(Surface::Unlock_Update);
 
 	return dest;
 }
@@ -875,24 +865,22 @@ IPicture* Graphic::create_changed_luminosity_pic
 		return 0;
 
 	// TODO(sirver): cast is pretty ugly
-	IPicture* nonconst = const_cast<IPicture*>(pic);
+	upcast(Surface, nonconst, const_cast<IPicture*>(pic));
 
-	IPixelAccess & origpix = nonconst->pixelaccess();
 	uint32_t w = pic->get_w();
 	uint32_t h = pic->get_h();
-	const SDL_PixelFormat & origfmt = origpix.format();
+	const SDL_PixelFormat & origfmt = nonconst->format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
-	IPixelAccess & destpix = dest->pixelaccess();
-	const SDL_PixelFormat & destfmt = destpix.format();
+	const SDL_PixelFormat & destfmt = dest->format();
 
-	origpix.lock(IPixelAccess::Lock_Normal);
-	destpix.lock(IPixelAccess::Lock_Discard);
+	nonconst->lock(Surface::Lock_Normal);
+	dest->lock(Surface::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
 
-			color.set(origfmt, origpix.get_pixel(x, y));
+			color.set(origfmt, nonconst->get_pixel(x, y));
 
 			if (halve_alpha)
 				color.a >>= 1;
@@ -901,11 +889,11 @@ IPicture* Graphic::create_changed_luminosity_pic
 			color.g = color.g * factor > 255 ? 255 : color.g * factor;
 			color.b = color.b * factor > 255 ? 255 : color.b * factor;
 
-			destpix.set_pixel(x, y, color.map(destfmt));
+			dest->set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	origpix.unlock(IPixelAccess::Unlock_NoChange);
-	destpix.unlock(IPixelAccess::Unlock_Update);
+	nonconst->unlock(Surface::Unlock_NoChange);
+	dest->unlock(Surface::Unlock_Update);
 
 	return dest;
 }

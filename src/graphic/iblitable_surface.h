@@ -24,7 +24,6 @@
 
 #include "compositemode.h"
 #include "picture.h"
-#include "pixelaccess.h"
 #include "point.h"
 #include "rgbcolor.h"
 #include "rect.h"
