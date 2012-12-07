@@ -47,7 +47,6 @@ public:
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
 	virtual IPixelAccess & pixelaccess() {return *this;}
 
-	virtual void clear();
 	virtual void draw_rect(const Rect&, RGBColor);
 	virtual void fill_rect(const Rect&, RGBAColor);
 	virtual void brighten_rect(const Rect&, int32_t factor);

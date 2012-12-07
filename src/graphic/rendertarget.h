@@ -62,7 +62,6 @@ public:
 	void draw_rect(Rect, RGBColor);
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
-	void clear();
 
 	void blit(const Point& dst, const IPicture* picture, Composite cm = CM_Normal);
 	void blitrect(Point dst, const IPicture* picture, Rect src, Composite cm = CM_Normal);

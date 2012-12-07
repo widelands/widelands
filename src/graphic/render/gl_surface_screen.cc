@@ -235,17 +235,6 @@ void GLSurfaceScreen::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
 	} glEnd();
 }
 
-/**
- * Clear the entire screen to black
- */
-void GLSurfaceScreen::clear()
-{
-	assert(g_opengl);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-}
-
-
 void GLSurfaceScreen::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {

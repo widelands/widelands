@@ -41,12 +41,6 @@ public:
 
 	/// Draws a filled rect to the surface.
 	virtual void fill_rect(const Rect&, RGBAColor) = 0;
-
-	/// Clears the complete surface to black.
-	virtual void clear() {
-		fill_rect
-			(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(255, 255, 255, 255));
-	}
 };
 
 #endif

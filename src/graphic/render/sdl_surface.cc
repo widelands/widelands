@@ -351,16 +351,6 @@ void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 }
 
 
-/*
-===============
-Clear the entire bitmap to black
-===============
-*/
-void SDLSurface::clear() {
-	SDL_FillRect(m_surface, 0, 0);
-}
-
-
 void SDLSurface::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {

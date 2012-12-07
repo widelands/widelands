@@ -159,16 +159,6 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 		m_surface->brighten_rect(r, factor);
 }
 
-void RenderTarget::clear()
-{
-	if
-		(not m_rect.x and not m_rect.y
-		 and
-		 m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
-		m_surface->clear();
-	else m_surface->fill_rect(m_rect, RGBColor(0, 0, 0));
-}
-
 /**
  * Blits a Picture on the screen or (if possible) on another Surface
  * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
