@@ -275,21 +275,9 @@ Graphic::Graphic
 
 #if USE_OPENGL
 	if (g_opengl) {
-		glViewport(0, 0, w, h);
-
-		// Set up OpenGL projection matrix. This transforms opengl coordiantes to
-		// screen coordinates. We set up a simple Orthogonal view which takes just
-		// the x, y coordinates and ignores the z coordinate.
-		// Note that the top and bottom values are interchanged. This is to invert
-		// the y axis to get the same coordinates as with opengl.
-		// The exact values of near and far clipping plane are not important.
-		// We draw everything with z = 0. They just must not be null and have
-		// different sign.
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		//glOrtho(left, right, bottom, top, nearVal, farVal);
-		glOrtho(0, w, h, 0, -1, 1);
-
+		// Most of this stuff is done by the GLSurface classes on rendering. We
+		// only set GL params which never change throughout the run of the
+		// program and setup global parameters.
 		// Reset modelview matrix, disable depth testing (we do not need it)
 		// And select backbuffer as default drawing target
 		glMatrixMode(GL_MODELVIEW);
@@ -301,6 +289,8 @@ Graphic::Graphic
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		SDL_GL_SwapBuffers();
+
+		GLSurfaceTexture::Initialize();
 	}
 
 	if (g_opengl)
@@ -324,6 +314,11 @@ Graphic::~Graphic()
 {
 	delete m_rendertarget;
 	delete m_roadtextures;
+
+#if USE_OPENGL
+	if (g_opengl)
+		GLSurfaceTexture::Cleanup();
+#endif
 
 	// Remove traces of cached pictures
 	UI::g_fh->flush_cache();

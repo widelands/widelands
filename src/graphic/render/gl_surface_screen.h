@@ -21,43 +21,23 @@
 
 #include <boost/scoped_array.hpp>
 
-#include "graphic/surface.h"
+#include "gl_surface.h"
 
 /**
  * This surface represents the screen in OpenGL mode.
  */
-class GLSurfaceScreen : public Surface {
+class GLSurfaceScreen : public GLSurface {
 public:
 	GLSurfaceScreen(uint32_t w, uint32_t h);
 
 	/// Interface implementations
-	//@{
-	virtual uint32_t get_w() const;
-	virtual uint32_t get_h() const;
-
-	virtual const SDL_PixelFormat & format() const;
 	virtual void lock(LockMode);
 	virtual void unlock(UnlockMode);
 	virtual uint16_t get_pitch() const;
-	virtual uint8_t * get_pixels() const;
-	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
-	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
-
-	virtual void draw_rect(const Rect&, RGBColor);
-	virtual void fill_rect(const Rect&, RGBAColor);
-	virtual void brighten_rect(const Rect&, int32_t factor);
-
-	virtual void draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-			const RGBColor&, uint8_t width);
-
-	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
-	//@}
 
 private:
+	virtual void setup_gl();
 	void swap_rows();
-
-	/// Size of the screen
-	uint32_t m_w, m_h;
 
 	/// Pixel data while locked
 	boost::scoped_array<uint8_t> m_pixels;

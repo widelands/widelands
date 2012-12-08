@@ -16,46 +16,31 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GL_PICTURE_TEXTURE_H
-#define GL_PICTURE_TEXTURE_H
+#ifndef GL_SURFACE_TEXTURE_H
+#define GL_SURFACE_TEXTURE_H
 
-#include <boost/scoped_array.hpp>
-
-#define NO_SDL_GLEXT
-#include <GL/glew.h>
-#include <SDL_opengl.h>
-
-#include "graphic/surface.h"
+#include "gl_surface.h"
 
 struct SDL_Surface;
 
-class GLSurfaceTexture : public Surface {
+class GLSurfaceTexture : public GLSurface {
 public:
+	// Call this once before using any instance of this class and Cleanup once
+	// before the program exits.
+	static void Initialize();
+	static void Cleanup();
+
 	GLSurfaceTexture(SDL_Surface * surface);
 	GLSurfaceTexture(int w, int h);
 	~GLSurfaceTexture();
 
 	/// Interface implementation
 	//@{
-	virtual uint32_t get_w() const;
-	virtual uint32_t get_h() const;
-
-	virtual const SDL_PixelFormat & format() const;
 	virtual void lock(LockMode);
 	virtual void unlock(UnlockMode);
 	virtual uint16_t get_pitch() const;
-	virtual uint8_t * get_pixels() const;
-	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr);
-	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
 
-	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal);
-	virtual void fill_rect(const Rect&, RGBAColor);
-	virtual void draw_rect(const Rect&, RGBColor);
-	virtual void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-			const RGBColor& color, uint8_t width = 1);
-	virtual void brighten_rect(const Rect&, int32_t factor);
-	//@}
-
+	// TODO(sirver): which is actually needed?
 	GLuint get_gl_texture() const {return m_texture;}
 	uint32_t get_tex_w() const {return m_tex_w;}
 	uint32_t get_tex_h() const {return m_tex_h;}
@@ -64,17 +49,15 @@ private:
 	void init(uint32_t w, uint32_t h);
 
 private:
-	GLuint m_texture;
+	virtual void setup_gl();
 
-	/// Logical width and height of the surface
-	uint32_t m_w, m_h;
+	static GLuint gl_framebuffer_id_;
+	GLuint m_texture;
 
 	/// Keep the size of the opengl texture. This is necessary because some
 	/// systems support only a power of two for texture sizes.
 	uint32_t m_tex_w, m_tex_h;
 
-	/// Pixel data, while the texture is locked
-	boost::scoped_array<uint8_t> m_pixels;
 };
 
-#endif //GL_PICTURE_TEXTURE_H
+#endif //GL_SURFACE_TEXTURE_H

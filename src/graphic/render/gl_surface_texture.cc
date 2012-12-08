@@ -16,16 +16,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "log.h"
-
-#include <SDL_video.h>
+#include "wexception.h"
+#include "graphic/graphic.h"
 
 #include "gl_utils.h"
-#include "graphic/graphic.h"
-#include "upcast.h"
-#include "wexception.h"
 
 #include "gl_surface_texture.h"
+
+GLuint GLSurfaceTexture::gl_framebuffer_id_;
+
+/**
+ * Initial global resources needed for fast offscreen rendering.
+ */
+void GLSurfaceTexture::Initialize() {
+	// Generate the framebuffer for Offscreen rendering.
+	glGenFramebuffers(1, &gl_framebuffer_id_);
+}
+
+/**
+ * Free global resources.
+ */
+void GLSurfaceTexture::Cleanup() {
+	glDeleteFramebuffers(1, &gl_framebuffer_id_);
+}
 
 /**
  * Initialize an OpenGL texture of the given dimensions.
@@ -154,9 +167,8 @@ void GLSurfaceTexture::init(uint32_t w, uint32_t h)
 	// set texture filter to use linear filtering. This looks nicer for resized
 	// texture. Most textures and images are not resized so the filtering
 	// makes no difference
-	// TODO(sirver): Was liner
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	// TODO(sirver): this might leak memory
 		glTexImage2D
@@ -164,18 +176,6 @@ void GLSurfaceTexture::init(uint32_t w, uint32_t h)
 			 GL_UNSIGNED_BYTE, 0);
 
 	handle_glerror();
-}
-
-uint32_t GLSurfaceTexture::get_w() const {
-	return m_w;
-}
-
-uint32_t GLSurfaceTexture::get_h() const {
-	return m_h;
-}
-
-const SDL_PixelFormat & GLSurfaceTexture::format() const {
-	return gl_rgba_format();
 }
 
 void GLSurfaceTexture::lock(LockMode mode) {
@@ -206,129 +206,20 @@ uint16_t GLSurfaceTexture::get_pitch() const {
 	return 4 * m_tex_w;
 }
 
-uint8_t * GLSurfaceTexture::get_pixels() const {
-	return m_pixels.get();
-}
-
-// TODO(sirver): should be const
-uint32_t GLSurfaceTexture::get_pixel(uint32_t x, uint32_t y) {
-	assert(m_pixels);
-	assert(x < m_w);
-	assert(y < m_h);
-
-	uint8_t * data = &m_pixels[(y * m_tex_w + x) * 4];
-	return *(reinterpret_cast<uint32_t *>(data));
-}
-
-void GLSurfaceTexture::set_pixel(uint32_t x, uint32_t y, uint32_t clr) {
-	assert(m_pixels);
-	assert(x < m_w);
-	assert(y < m_h);
-
-	uint8_t * data = &m_pixels[(y * m_tex_w + x) * 4];
-	*(reinterpret_cast<uint32_t *>(data)) = clr;
-}
-
-void GLSurfaceTexture::blit(const Point& dst, const IPicture* src,
-		const Rect& srcrc, Composite cm) {
-	upcast(const GLSurfaceTexture, const_oglsrc, src);
-	assert(const_oglsrc);
-	GLSurfaceTexture* oglsrc = const_cast<GLSurfaceTexture*>(const_oglsrc);
-	assert(g_opengl);
-
-	// TODO(sirver): when used like this, it should be a scoped_ptr. Maybe this can be
-	// used globally though.
-	GLuint id;
-	glGenFramebuffers(1, &id);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, id);
+void GLSurfaceTexture::setup_gl() {
+	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
 	glFramebufferTexture2D(GL_FRAMEBUFFER,
 		GL_COLOR_ATTACHMENT0,
 		GL_TEXTURE_2D,
-		m_texture, // TODO(sirver): set to 0 to detach again
+		m_texture,
 		0);
 
-	// TODO(sirver): one to one copy from screen
-	/* Set a texture scaling factor. Normaly texture coordiantes
-	* (see glBegin()...glEnd() Block below) are given in the range 0-1
-	* to avoid the calculation (and let opengl do it) the texture
-	* space is modified. glMatrixMode select which matrixconst  to manipulate
-	* (the texture transformation matrix in this case). glLoadIdentity()
-	* resets the (selected) matrix to the identity matrix. And finally
-	* glScalef() calculates the texture matrix.
-	*/
-	glMatrixMode(GL_TEXTURE);
-	glLoadIdentity();
-	glScalef
-		(1.0f / static_cast<GLfloat>(oglsrc->get_tex_w()),
-		 1.0f / static_cast<GLfloat>(oglsrc->get_tex_h()), 1);
-
-	// Enable Alpha blending
-	if (cm == CM_Normal) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	} else {
-		glDisable(GL_BLEND);
-	}
-
-	glViewport(0, 0, get_tex_w(), get_tex_h());
-
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, oglsrc->get_gl_texture());
-
 	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
 	glLoadIdentity();
+
+	// Note: we do not want to reverse y for textures, we only want this for
+	// the screen.
 	glOrtho(0, get_tex_w(), 0, get_tex_h(), -1, 1);
 
-	glBegin(GL_QUADS); {
-		//  set color white, otherwise textures get mixed with color
-		glColor3f(1.0, 1.0, 1.0);
-		//  top-left
-		glTexCoord2i(srcrc.x,           srcrc.y);
-		glVertex2i  (dst.x,             dst.y);
-		//  top-right
-		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
-		glVertex2i  (dst.x + srcrc.w,   dst.y);
-		//  bottom-right
-		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
-		glVertex2i  (dst.x + srcrc.w,   dst.y + srcrc.h);
-		//  bottom-left
-		glTexCoord2i(srcrc.x,           srcrc.y + srcrc.h);
-		glVertex2i  (dst.x,             dst.y + srcrc.h);
-	} glEnd();
-	glPopMatrix();
-
-	glMatrixMode(GL_TEXTURE);
-	glLoadIdentity();
-
-	// glBindTexture(GL_TEXTURE_2D, m_texture);
-	// glGenerateMipmap(GL_TEXTURE_2D);
-	// glBindTexture(GL_TEXTURE_2D, 0);
-
-	// TODO(sirver): this might be expensive
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	glDeleteFramebuffers(1, &id);
-
-	// TODO(sirver): ugly!!
-		glViewport(0, 0, 1680, 1000);
-
+	glViewport(0, 0, get_tex_w(), get_tex_h());
 }
-void GLSurfaceTexture::fill_rect(const Rect&, RGBAColor) {
-	// TODO(sirver): implement me
-}
-// TODO(sirver): the next four methods seem to be unused. remove them and refactor
-void GLSurfaceTexture::draw_rect(const Rect&, RGBColor) {
-	// TODO(sirver): when gl supports offscreen rendering, caching is also done for OpenGL
-	// TODO(sirver): implement me
-}
-void GLSurfaceTexture::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-		const RGBColor& color, uint8_t width) {
-	assert(0); // Never here!
-}
-void GLSurfaceTexture::brighten_rect(const Rect&, int32_t factor) {
-	// TODO(sirver): when gl supports offscreen rendering, caching is also done for OpenGL
-	// TODO(sirver): implement me
-}
-
