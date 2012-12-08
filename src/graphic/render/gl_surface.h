@@ -48,7 +48,8 @@ public:
 			const RGBColor&, uint8_t width);
 
 protected:
-	virtual void setup_gl() = 0;
+	virtual void setup_gl() {}
+	virtual void reset_gl() {}
 
 	/// Logical width and height of the surface
 	uint32_t m_w, m_h;

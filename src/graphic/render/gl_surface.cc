@@ -82,6 +82,8 @@ void GLSurface::draw_rect(const Rect& rc, const RGBColor clr)
 		glVertex2f(rc.x + 0.5f,        rc.y + rc.h - 0.5f);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
+
+	reset_gl();
 }
 
 
@@ -107,6 +109,8 @@ void GLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
+
+	reset_gl();
 }
 
 /**
@@ -116,8 +120,6 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 {
 	if (!factor)
 		return;
-
-	setup_gl();
 
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -131,6 +133,8 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 
 		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 	}
+
+	setup_gl();
 
 	/* glBlendFunc is a very nice feature of opengl. You can specify how the
 	* color is calculated.
@@ -162,6 +166,8 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 
 	if (factor < 0)
 		glBlendEquation(GL_FUNC_ADD);
+
+	reset_gl();
 }
 
 void GLSurface::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
@@ -177,17 +183,19 @@ void GLSurface::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
 		glVertex2f(x1 + 0.5f, y1 + 0.5f);
 		glVertex2f(x2 + 0.5f, y2 + 0.5f);
 	} glEnd();
+
+	reset_gl();
 }
 
 void GLSurface::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
-	setup_gl();
-
 	upcast(const GLSurfaceTexture, const_oglsrc, src);
 	assert(const_oglsrc);
 	GLSurfaceTexture* oglsrc = const_cast<GLSurfaceTexture*>(const_oglsrc);
 	assert(g_opengl);
+
+	setup_gl();
 
 	/* Set a texture scaling factor. Normaly texture coordiantes
 	* (see glBegin()...glEnd() Block below) are given in the range 0-1
@@ -232,6 +240,8 @@ void GLSurface::blit
 	} glEnd();
 
 	glLoadIdentity();
+
+	reset_gl();
 }
 
 

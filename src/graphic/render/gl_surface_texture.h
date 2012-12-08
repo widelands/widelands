@@ -50,6 +50,7 @@ private:
 
 private:
 	virtual void setup_gl();
+	virtual void reset_gl();
 
 	static GLuint gl_framebuffer_id_;
 	GLuint m_texture;

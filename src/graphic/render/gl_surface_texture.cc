@@ -214,12 +214,22 @@ void GLSurfaceTexture::setup_gl() {
 		m_texture,
 		0);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
 	// Note: we do not want to reverse y for textures, we only want this for
 	// the screen.
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
 	glOrtho(0, get_tex_w(), 0, get_tex_h(), -1, 1);
 
+	glPushAttrib(GL_VIEWPORT_BIT);
 	glViewport(0, 0, get_tex_w(), get_tex_h());
+}
+
+void GLSurfaceTexture::reset_gl() {
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+
+	glPopAttrib();
 }

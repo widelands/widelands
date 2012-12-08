@@ -275,9 +275,18 @@ Graphic::Graphic
 
 #if USE_OPENGL
 	if (g_opengl) {
-		// Most of this stuff is done by the GLSurface classes on rendering. We
-		// only set GL params which never change throughout the run of the
-		// program and setup global parameters.
+		// Set up OpenGL projection matrix. This transforms opengl coordinates to
+		// screen coordinates. We set up a simple Orthogonal view which takes just
+		// the x, y coordinates and ignores the z coordinate. Note that the top and
+		// bottom values are interchanged. This is to invert the y axis to get the
+		// same coordinates as with opengl. The exact values of near and far
+		// clipping plane are not important. We draw everything with z = 0. They
+		// just must not be null and have different sign.
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, w, h, 0, -1, 1);
+		glViewport(0, 0, w, h);
+
 		// Reset modelview matrix, disable depth testing (we do not need it)
 		// And select backbuffer as default drawing target
 		glMatrixMode(GL_MODELVIEW);
@@ -402,6 +411,11 @@ void Graphic::refresh(bool force)
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, screen_->get_w(), screen_->get_h(), 0, -1, 1);
+		glViewport(0, 0, screen_->get_w(), screen_->get_h());
+
 		SDL_GL_SwapBuffers();
 		m_update_fullscreen = false;
 		m_nr_update_rects = 0;

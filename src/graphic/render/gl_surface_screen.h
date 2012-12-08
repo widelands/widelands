@@ -36,7 +36,6 @@ public:
 	virtual uint16_t get_pitch() const;
 
 private:
-	virtual void setup_gl();
 	void swap_rows();
 
 	/// Pixel data while locked

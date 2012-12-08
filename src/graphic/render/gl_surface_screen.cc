@@ -70,20 +70,3 @@ void GLSurfaceScreen::unlock(Surface::UnlockMode mode)
 uint16_t GLSurfaceScreen::get_pitch() const {
 	return 4 * m_w;
 }
-
-void GLSurfaceScreen::setup_gl() {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	// Set up OpenGL projection matrix. This transforms opengl coordinates to
-	// screen coordinates. We set up a simple Orthogonal view which takes just
-	// the x, y coordinates and ignores the z coordinate. Note that the top and
-	// bottom values are interchanged. This is to invert the y axis to get the
-	// same coordinates as with opengl. The exact values of near and far
-	// clipping plane are not important. We draw everything with z = 0. They
-	// just must not be null and have different sign.
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0, get_w(), get_h(), 0, -1, 1);
-	glViewport(0, 0, get_w(), get_h());
-}
-
