@@ -413,10 +413,7 @@ void BaseListselect::draw(RenderTarget & dst)
 		if (er.picid) {
 			uint32_t w = er.picid->get_w();
 			uint32_t h = er.picid->get_h();
-			if (g_gr->caps().offscreen_rendering and false)
-				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid, CM_Solid);
-			else
-				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
 		}
 
 		y += lineheight;

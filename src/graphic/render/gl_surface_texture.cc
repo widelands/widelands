@@ -48,6 +48,10 @@ void GLSurfaceTexture::Cleanup() {
 GLSurfaceTexture::GLSurfaceTexture(int w, int h)
 {
 	init(w, h);
+
+	glTexImage2D
+		(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0, GL_RGBA,
+		 GL_UNSIGNED_BYTE, 0);
 }
 
 /**
@@ -169,11 +173,6 @@ void GLSurfaceTexture::init(uint32_t w, uint32_t h)
 	// makes no difference
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	// TODO(sirver): this might leak memory
-		glTexImage2D
-			(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0, GL_RGBA,
-			 GL_UNSIGNED_BYTE, 0);
 
 	handle_glerror();
 }

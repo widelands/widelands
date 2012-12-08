@@ -151,13 +151,14 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
 
-	// And now simply draw a rect with facor as the color
+	// And now simply draw a rect with factor as the color
 	// (this is the source color) over the region
 	glBegin(GL_QUADS); {
-		glColor3f
+		glColor4f
 			((fabsf(factor) / 256.0f),
 			 (fabsf(factor) / 256.0f),
-			 (fabsf(factor) / 256.0f));
+			 (fabsf(factor) / 256.0f),
+			 0);
 		glVertex2f(rc.x,        rc.y);
 		glVertex2f(rc.x + rc.w, rc.y);
 		glVertex2f(rc.x + rc.w, rc.y + rc.h);

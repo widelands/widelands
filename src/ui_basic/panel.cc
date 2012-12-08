@@ -262,7 +262,7 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_h = nh;
 
 	if (_cache) {
-		_cache.reset(g_gr->create_surface(_w, _h));
+		_cache.reset(g_gr->create_surface(_w, _h, false));
 	}
 
 	if (_parent)
@@ -532,16 +532,12 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
- * from an \ref Surface containing the cached image, provided that
- * the graphics system supports it.
+ * from an \ref Surface containing the cached image.
  *
  * \note Caching only works properly for solid panels that have no transparency.
  */
 void Panel::set_cache(bool cache)
 {
-	if (!g_gr->caps().offscreen_rendering)
-		return;
-
 	if (cache) {
 		_flags |= pf_cache;
 	} else {
@@ -849,7 +845,7 @@ void Panel::do_draw(RenderTarget & dst)
 			 _cache.get()->get_w() != innerw ||
 			 _cache.get()->get_h() != innerh)
 		{
-			_cache.reset(g_gr->create_surface(innerw, innerh));
+			_cache.reset(g_gr->create_surface(innerw, innerh, false));
 			_needdraw = true;
 		}
 
@@ -860,8 +856,7 @@ void Panel::do_draw(RenderTarget & dst)
 			_needdraw = false;
 		}
 
-		// TODO(sirver): check if caching is still done?
-		dst.blit(Point(_lborder, _tborder), _cache.get());
+		dst.blit(Point(_lborder, _tborder), _cache.get(), CM_Copy);
 	} else {
 		Rect innerwindow
 			(Point(_lborder, _tborder),

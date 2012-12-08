@@ -157,9 +157,6 @@ Graphic::Graphic
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
 
-	// Set rendering capabilities for sdl. They are overwritten if in opengl mode
-	m_caps.offscreen_rendering = true;
-
 #ifdef USE_OPENGL
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
@@ -221,9 +218,6 @@ Graphic::Graphic
 			and (m_caps.gl.max_tex_combined >= 6);
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
-
-		// TODO(sirver): get rid of this variable
-		m_caps.offscreen_rendering = false;
 
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
 	}
