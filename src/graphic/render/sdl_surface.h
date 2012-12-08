@@ -32,7 +32,7 @@
 * subdirectory.
 * Surfaces are created through Graphic::create_surface() functions.
 */
-class SDLSurface : public virtual Surface {
+class SDLSurface : public Surface {
 public:
 	SDLSurface(SDL_Surface & surface) :
 		m_surface(&surface),

@@ -21,7 +21,6 @@
 // TODO(sirver): picid -> pic everywhere
 // TODO(sirver): untangle which features in Surface should stay there and
 // which can go. Especially as IBlitableSurface and Surface are too similar.
-// TODO(sirver): das ganze virtuelle ableiten kann man dann auch wieder sein lassen
 // TODO(sirver): const IPicture -> IPicture, dann static cast.
 // TODO(sirver): screenshots in beiden impl testen. Scheinen kaputt zu sein.
 // TODO(sirver): Surfaces sind jetzt intern für graphic. Umbennen und funktionen hoch in IBlitableSurface

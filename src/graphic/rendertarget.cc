@@ -160,12 +160,10 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 }
 
 /**
- * Blits a Picture on the screen or (if possible) on another Surface
- * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
- * to a non screen surface.
+ * Blits a Picture on another Surface
  *
  * This blit function copies the pixels to the destination surface.
- * I the source surface contains a alpha channel this is used during
+ * If the source surface contains a alpha channel this is used during
  * the blit.
  */
 void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)

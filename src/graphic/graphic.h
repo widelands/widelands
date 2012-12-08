@@ -98,7 +98,7 @@ struct GraphicCaps
  * appropriate module flag; the user can request to flush one single picture
  * alone, but this is only used (and useful) in the editor.
  */
-struct Graphic : public virtual IGraphic {
+struct Graphic : public IGraphic {
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
 		 bool fullscreen, bool opengl);

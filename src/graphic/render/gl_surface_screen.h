@@ -26,7 +26,7 @@
 /**
  * This surface represents the screen in OpenGL mode.
  */
-class GLSurfaceScreen : virtual public Surface {
+class GLSurfaceScreen : public Surface {
 public:
 	GLSurfaceScreen(uint32_t w, uint32_t h);
 
@@ -34,8 +34,6 @@ public:
 	//@{
 	virtual uint32_t get_w() const;
 	virtual uint32_t get_h() const;
-
-	virtual void update();
 
 	virtual const SDL_PixelFormat & format() const;
 	virtual void lock(LockMode);

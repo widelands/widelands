@@ -30,7 +30,7 @@
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
  * It also allows low level pixel access.
  */
-class Surface : public virtual IBlitableSurface {
+class Surface : public IBlitableSurface {
 public:
 	virtual ~Surface() {}
 

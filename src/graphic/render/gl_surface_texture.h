@@ -29,7 +29,7 @@
 
 struct SDL_Surface;
 
-class GLSurfaceTexture : virtual public Surface {
+class GLSurfaceTexture : public Surface {
 public:
 	GLSurfaceTexture(SDL_Surface * surface);
 	GLSurfaceTexture(int w, int h);

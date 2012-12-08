@@ -41,12 +41,6 @@ uint32_t GLSurfaceScreen::get_h() const
 	return m_h;
 }
 
-void GLSurfaceScreen::update()
-{
-	assert(g_opengl);
-	SDL_GL_SwapBuffers();
-}
-
 const SDL_PixelFormat & GLSurfaceScreen::format() const
 {
 	return gl_rgba_format();
