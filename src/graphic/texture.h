@@ -24,8 +24,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/shared_ptr.hpp>
-
 #include "colormap.h"
 #include "graphic/render/gl_surface_texture.h"
 
@@ -80,8 +78,7 @@ private:
 	bool       is_32bit;
 	bool       m_was_animated;
 #ifdef USE_OPENGL
-	// TODO(sirver): not shared please
-	std::vector<boost::shared_ptr<GLSurfaceTexture> > m_glFrames;
+	std::vector<GLSurfaceTexture*> m_glFrames;
 #endif
 };
 

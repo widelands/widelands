@@ -76,14 +76,14 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 		g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png");
 	const IPicture* dry =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
-#define small_pich 20
-#define small_picw 20
+
+	static const int small_pich = 20;
+	static const int small_picw = 20;
 
 	uint32_t cur_x = 0;
 	Point pos(hmargin(), vmargin());
-	for (size_t checkfor = 0; checkfor < 6; ++checkfor)
+	for (size_t checkfor = 0; checkfor < 6; ++checkfor) {
 		for (Widelands::Terrain_Index i  = 0; i < nr_terrains; ++i) {
-
 			const uint8_t ter_is = world.get_ter(i).get_is();
 			if (ter_is != check[checkfor])
 				continue;
@@ -94,51 +94,41 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-			const IPicture* picture = 0;
-
-			// If offscreen rendering is not available only the terrain (and not
-			// the terrain type) is shown.
-			// // TODO(sirver): whatTODO: Find a way to render this without offscreen rendering
-			//       or implement offscreen rendering for opengl
-			// // TODO(sirver): simplify
-			IBlitableSurface* offscreen = g_gr->create_surface(64, 64);
-
+			IBlitableSurface* surf = g_gr->create_surface(64, 64);
 			const IPicture* tex = g_gr->get_picture(PicMod_Game,
 					g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 						->get_texture_picture());
-			offscreen->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
+			surf->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
 
 			Point pt(1, 64 - small_pich - 1);
 
 			//  check is green
 			if (ter_is == 0) {
-				offscreen->blit(pt, green, Rect(0, 0, green->get_w(), green->get_h()));
+				surf->blit(pt, green, Rect(0, 0, green->get_w(), green->get_h()));
 				pt.x += small_picw + 1;
 			} else {
 				if (ter_is & TERRAIN_WATER) {
-					offscreen->blit(pt, water, Rect(0, 0, water->get_w(), water->get_h()));
+					surf->blit(pt, water, Rect(0, 0, water->get_w(), water->get_h()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_MOUNTAIN) {
-					offscreen->blit(pt, mountain, Rect(0, 0, mountain->get_w(), mountain->get_h()));
+					surf->blit(pt, mountain, Rect(0, 0, mountain->get_w(), mountain->get_h()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_ACID) {
-					offscreen->blit(pt, dead, Rect(0, 0, dead->get_w(), dead->get_h()));
+					surf->blit(pt, dead, Rect(0, 0, dead->get_w(), dead->get_h()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_UNPASSABLE) {
-					offscreen->blit(pt, unpassable, Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
+					surf->blit(pt, unpassable, Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_DRY)
-					offscreen->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
+					surf->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
 			}
-			offscreen_surfaces_.push_back(offscreen); // Make sure we delete this later on.
-			picture = offscreen;
-			assert(picture);
+			offscreen_surfaces_.push_back(surf); // Make sure we delete this later on.
 
-			UI::Checkbox & cb = *new UI::Checkbox(this, pos, picture);
+			UI::Checkbox & cb = *new UI::Checkbox(this, pos, surf);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_state(m_tool.is_enabled(i));
 			cb.changedto.connect
@@ -148,6 +138,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			pos.x += TEXTURE_WIDTH + hspacing();
 			++cur_x;
 		}
+	}
 	pos.y += TEXTURE_HEIGHT + vspacing();
 
 	set_inner_size
@@ -175,7 +166,6 @@ Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu()
 		delete pic;
 	offscreen_surfaces_.clear();
 }
-
 
 void Editor_Tool_Set_Terrain_Options_Menu::selected
 	(int32_t const n, bool const t)

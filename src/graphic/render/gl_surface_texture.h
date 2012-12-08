@@ -40,7 +40,6 @@ public:
 	virtual void unlock(UnlockMode);
 	virtual uint16_t get_pitch() const;
 
-	// TODO(sirver): which is actually needed?
 	GLuint get_gl_texture() const {return m_texture;}
 	uint32_t get_tex_w() const {return m_tex_w;}
 	uint32_t get_tex_h() const {return m_tex_h;}

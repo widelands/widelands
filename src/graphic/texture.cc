@@ -17,7 +17,9 @@
  *
  */
 
-#include "texture.h"
+#include <boost/foreach.hpp>
+
+#include <SDL_image.h>
 
 #include "io/filesystem/layered_filesystem.h"
 #include "io/fileread.h"
@@ -28,7 +30,8 @@
 #include "wexception.h"
 #include "container_iterate.h"
 
-#include <SDL_image.h>
+#include "texture.h"
+
 
 using namespace std;
 
@@ -101,7 +104,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 #ifdef USE_OPENGL
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
-			boost::shared_ptr<GLSurfaceTexture> surface(new GLSurfaceTexture(surf));
+			GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
 			m_glFrames.push_back(surface);
 
 			// calculate shades on the first frame
@@ -201,6 +204,10 @@ Texture::~Texture ()
 	delete m_colormap;
 	free(m_pixels);
 	free(m_texture_picture);
+
+	BOOST_FOREACH(GLSurfaceTexture* surf, m_glFrames)
+		delete surf;
+	m_glFrames.clear();
 }
 
 /**

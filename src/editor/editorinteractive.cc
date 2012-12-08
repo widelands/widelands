@@ -127,7 +127,7 @@ void Editor_Interactive::register_overlays() {
 		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
 			const IPicture* picid = g_gr->get_picture(PicMod_Game, fname);
-			assert(picid); // TODO(sirver): proper error checking
+			assert(picid);
 			uint32_t w = picid->get_w();
 			uint32_t h = picid->get_h();
 			map.overlay_manager().register_overlay
