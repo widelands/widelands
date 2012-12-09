@@ -20,7 +20,34 @@
 #ifndef THIN_GRAPHIC_H
 #define THIN_GRAPHIC_H
 
+#include <SDL.h>
+
 #include "graphic/igraphic.h"
+#include "graphic/iblitable_surface.h"
+
+
+class ThinSDLSurface : public IBlitableSurface {
+public:
+	ThinSDLSurface(SDL_Surface * surf, bool free_pixels);
+	virtual ~ThinSDLSurface();
+
+	virtual uint32_t get_w() const {return surf_->w;}
+	virtual uint32_t get_h() const {return surf_->h;}
+
+	virtual uint16_t get_pitch() const {return surf_->pitch;}
+	virtual uint8_t * get_pixels() const {
+		return static_cast<uint8_t*>(surf_->pixels);
+	}
+
+	void lock() {SDL_LockSurface(surf_);}
+	void unlock() {SDL_UnlockSurface(surf_);}
+	void blit(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm);
+	void fill_rect(const Rect& rc, RGBAColor clr);
+
+private:
+	SDL_Surface* surf_;
+	bool free_pixels_;
+};
 
 IGraphic * create_thin_graphic();
 

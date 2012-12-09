@@ -32,7 +32,7 @@
 
 using namespace std;
 
-int save_png(string fn, IPixelAccess & pa) {
+int save_png(string fn, ThinSDLSurface& surf) {
 	// Save png data
 	std::vector<unsigned char> png;
 
@@ -42,7 +42,7 @@ int save_png(string fn, IPixelAccess & pa) {
 	st.encoder.force_palette = LAC_NO;
 	vector<unsigned char> out;
 	int error = lodepng::encode
-		(out, static_cast<const unsigned char*>(pa.get_pixels()), pa.get_w(), pa.get_h(), st);
+		(out, static_cast<const unsigned char*>(surf.get_pixels()), surf.get_w(), surf.get_h(), st);
 	if(error) {
 		std::cout << "PNG encoding error: " << lodepng_error_text(error) << std::endl;
 		return 0;
@@ -119,10 +119,10 @@ int main(int argc, char *argv[])
 	try {
 		image = renderer->render(txt, w, 0, allowed_tags);
 
-		IPixelAccess & pa = image->pixelaccess();
-		pa.lock(IPixelAccess::Lock_Normal);
-		save_png(outname, pa);
-		pa.unlock(IPixelAccess::Unlock_Update);
+		ThinSDLSurface* surf = static_cast<ThinSDLSurface*>(image);
+		surf->lock();
+		save_png(outname, *surf);
+		surf->unlock();
 	} catch(RT::Exception & e) {
 		cout << e.what() << endl;
 	}

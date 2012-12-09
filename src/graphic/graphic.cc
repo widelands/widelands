@@ -480,11 +480,11 @@ IPicture* Graphic::load_image(const string& fname, bool alpha) {
 }
 
 /**
- * Retrieves the picture ID of the picture with the given filename.
- * If the picture has already been loaded, the old ID is reused.
- * The picture is placed into the module(s) given by mod.
+ * Retrieves the picture with the given filename. If the picture has already
+ * been loaded, the old ID is reused. The picture is placed into the module(s)
+ * given by mod.
  *
- * \return 0 (a null-picture) if the picture cannot be loaded.
+ * \return NULL if the picture cannot be loaded.
 */
 // TODO(sirver): should signal error in some way
 const IPicture* Graphic::get_picture
@@ -499,7 +499,6 @@ const IPicture* Graphic::get_picture
 		try {
 			rec.picture = load_image(fname, alpha);
 			rec.modules = 0;
-			//log("Graphic::get_picture(): loading picture '%s'\n", fname.c_str());
 		} catch (exception& e) {
 			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
 			return 0;

@@ -8,16 +8,17 @@ cdef extern from "thin_graphic.h":
         pass
 
 cdef extern from "thin_graphic.h":
-    cdef cppclass IPixelAccess:
+    cdef cppclass ThinSDLSurface:
         uint8_t* get_pixels()
         uint16_t get_pitch()
-        int lock "lock(IPixelAccess::Lock_Normal)" # DIRTY HACK
-        int unlock "unlock(IPixelAccess::Unlock_Update)" # DIRTY HACK
+        void lock()
+        void unlock()
         uint32_t get_h()
         uint32_t get_w()
 
     cdef cppclass IPicture:
-        IPixelAccess& pixelaccess()
+        pass
+
     IGraphic * create_thin_graphic()
 
 cdef extern from "rt_render.h" namespace "RT":
@@ -64,17 +65,17 @@ cdef class Renderer(object):
             allowed_set.insert(cppstr(<char*>(tag)))
 
         cdef IPicture* rv = self._renderer.render(text, width, &rm, allowed_set)
-        cdef IPixelAccess* p = &rv.pixelaccess()
+        cdef ThinSDLSurface* surf = <ThinSDLSurface*>(rv)
 
-        a = np.empty((p.get_h(), p.get_w(), 4), np.uint8)
+        a = np.empty((surf.get_h(), surf.get_w(), 4), np.uint8)
         cdef uint32_t x, y, i, clr
-        cdef uint8_t* pixels=p.get_pixels()
-        p.lock # DIRTY HACK: Will call lock with correct params
-        for y in range(p.get_h()):
-            for x in range(p.get_w()):
+        cdef uint8_t* pixels=surf.get_pixels()
+        surf.lock()
+        for y in range(surf.get_h()):
+            for x in range(surf.get_w()):
                 for i in range(4):
-                    a[y,x,i] = pixels[y*p.get_pitch() + x*4 + i]
-        p.unlock # DIRTY HACK: Will call unlock with correct params
+                    a[y,x,i] = pixels[y*surf.get_pitch() + x*4 + i]
+        surf.unlock()
 
         del rv
 

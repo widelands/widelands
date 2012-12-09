@@ -37,98 +37,50 @@
 using namespace std;
 using namespace boost;
 
-
-#include <iostream> // TODO(sirver): Remove me
-
-class ThinSDLSurfacePA : public virtual IBlitableSurface {
-public:
-	ThinSDLSurfacePA(SDL_Surface* surf) : surf_(surf) {}
-	virtual ~ThinSDLSurfacePA() {}
-
-	 // TODO(sirver): Should only be w, should be const
-	virtual uint32_t get_w() const {return surf_->w;}
-	virtual uint32_t get_h() const {return surf_->h;}
-	virtual SDL_PixelFormat const & format() const {return *surf_->format;}
-	virtual uint16_t get_pitch() const {return surf_->pitch;}
-	virtual uint8_t * get_pixels() const {
-		return static_cast<uint8_t*>(surf_->pixels);
-	}
-
-	virtual void lock(LockMode) {SDL_LockSurface(surf_);}
-	virtual void unlock(UnlockMode) {SDL_UnlockSurface(surf_);}
-
-	// TODO(sirver): These functions are wrong
-	virtual uint32_t get_pixel(uint32_t x, uint32_t y) {
-		return static_cast<uint32_t*>(surf_->pixels)[y*surf_->pitch + x];
-	}
-	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr) {
-		static_cast<uint32_t*>(surf_->pixels)[y*surf_->pitch + x] = clr;
-	}
-
-
-private:
-	SDL_Surface* surf_;
-};
-
-class ThinSDLSurface : public virtual IBlitableSurface {
-public:
-	ThinSDLSurface(SDL_Surface * surf, bool free_pixels) :
-		surf_(surf), pa_(surf), free_pixels_(free_pixels)
+ThinSDLSurface::ThinSDLSurface(SDL_Surface * surf, bool free_pixels) :
+		surf_(surf), free_pixels_(free_pixels)
 	{}
-	virtual ~ThinSDLSurface() {
-		if (surf_) {
-			// TODO(sirver): Leaking left and right
-			// SDL_FreeSurface(surf_);
-			if (free_pixels_) {
-				free(surf_->pixels);
-			}
-		}
-		surf_ = 0;
-	}
 
-	virtual bool valid() const {return true;}
-	virtual uint32_t get_w() const {return surf_->w;}
-	virtual uint32_t get_h() const {return surf_->h;}
-
-	virtual IPixelAccess & pixelaccess() {return pa_;}
-
-	void blit(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
-	{
-		upcast(const ThinSDLSurface, sdlsurf, src);
-		assert(sdlsurf);
-		assert(this);
-		SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
-		SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
-
-		bool alpha;
-		uint8_t alphaval;
-		if (cm == CM_Solid || cm == CM_Copy) {
-			alpha = sdlsurf->surf_->flags & SDL_SRCALPHA;
-			alphaval = sdlsurf->surf_->format->alpha;
-			SDL_SetAlpha(sdlsurf->surf_, 0, 0);
-		}
-
-		SDL_BlitSurface(sdlsurf->surf_, &srcrect, surf_, &dstrect);
-
-		if (cm == CM_Solid || cm == CM_Copy) {
-			SDL_SetAlpha(sdlsurf->surf_, alpha?SDL_SRCALPHA:0, alphaval);
+ThinSDLSurface::~ThinSDLSurface() {
+	if (surf_) {
+		// TODO(sirver): Leaking left and right
+		// SDL_FreeSurface(surf_);
+		if (free_pixels_) {
+			free(surf_->pixels);
 		}
 	}
+	surf_ = 0;
+}
 
-	void fill_rect(const Rect& rc, RGBAColor clr) {
-		const uint32_t color = clr.map(*surf_->format);
-		SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
-		SDL_FillRect(surf_, &r, color);
+void ThinSDLSurface::blit(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
+{
+	upcast(const ThinSDLSurface, sdlsurf, src);
+	assert(sdlsurf);
+	assert(this);
+	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
+	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
+
+	bool alpha;
+	uint8_t alphaval;
+	if (cm == CM_Solid || cm == CM_Copy) {
+		alpha = sdlsurf->surf_->flags & SDL_SRCALPHA;
+		alphaval = sdlsurf->surf_->format->alpha;
+		SDL_SetAlpha(sdlsurf->surf_, 0, 0);
 	}
 
-private:
-	SDL_Surface * surf_;
-	ThinSDLSurfacePA pa_;
-	bool free_pixels_;
-};
+	SDL_BlitSurface(sdlsurf->surf_, &srcrect, surf_, &dstrect);
 
+	if (cm == CM_Solid || cm == CM_Copy) {
+		SDL_SetAlpha(sdlsurf->surf_, alpha?SDL_SRCALPHA:0, alphaval);
+	}
+}
 
-// TODO(sirver): Rename to TinyGraphics
+void ThinSDLSurface::fill_rect(const Rect& rc, RGBAColor clr) {
+	const uint32_t color = clr.map(*surf_->format);
+	SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
+	SDL_FillRect(surf_, &r, color);
+}
+
 class ThinGraphic : boost::noncopyable, virtual public IGraphic {
 public:
 	virtual ~ThinGraphic();
@@ -146,7 +98,9 @@ private:
 
 
 ThinGraphic::~ThinGraphic() {
-	// TODO(sirver): delete the images we own
+	BOOST_FOREACH(MapEntry& p, m_imgcache)
+		delete p.second;
+	m_imgcache.clear();
 }
 
 IPicture* ThinGraphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
