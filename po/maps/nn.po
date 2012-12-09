@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2011-04-16 18:51+0000\n"
-"Last-Translator: Odin Hørthe Omdal <odin.omdal@gmail.com>\n"
+"PO-Revision-Date: 2012-12-08 15:30+0000\n"
+"Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:32+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-12-09 04:34+0000\n"
+"X-Generator: Launchpad (build 16341)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -86,6 +86,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"«Øyhopping» er namnet på ei spesiell turnering i den atlantiske kulturen, "
+"kor to eller fleire grupper prøvar å nå midten på øya så raskt som mogleg, "
+"for å vere den første som bygg eit slott på toppen av fjellet midt på øya."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -113,6 +116,10 @@ msgid ""
 "ancient altar, build there a splendid castle and gain goodwill and the "
 "respect of the Gods."
 msgstr ""
+"Ei ny tining har starta.  Tre stammar låg i ly blant dei majestetiske "
+"fjella.  Då det var vintersolverv høyrde dei på oraklet og gjekk til krig.  "
+"Den einaste overlevande vil ofre skatten til fiendane ved eit gamalt alter, "
+"bygge eit vedunderleg slott og få godviljen og respekten til gudane."
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
@@ -157,6 +164,9 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Kvar stamme er omgitt av fire store fjell.  Kven vil erobre dei og krave "
+"resursane til sin eigen stamme?  Tips 1: Vatn er å finne langs elva.  Tips "
+"2: Snømenn visar andre vasskjelder.  Tips 3: Kvart fjell har berre ein resurs"
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -188,6 +198,8 @@ msgid ""
 "neighboured island. This peace seems to end now - your neighbour begins to "
 "expand."
 msgstr ""
+"I fleire hundre år har du budd fredeleg saman med den andre stamma på "
+"naboøya.  Denne freden ser ut til å slutte no, naboen din byrjer å utvida."
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -196,6 +208,9 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
+"I fleire hundre år var denne øya eit reservat for gudane.  Ingen menneske "
+"har nokon gong sete foten på henne.  Men no var stammen endeleg dristige nok "
+"til å busette seg på kysten til den øya, mange andre kom etter."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -211,6 +226,9 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Fire stammar kjeklar med den næraste naboen deira om å vere den første til å "
+"nå gullfjellet som lovar rikdom hinsides fantasi.  Men kan dei to "
+"gjenverande dela resursane på ein god måte?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -229,6 +247,8 @@ msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories unaware of the fact that they are not alone!"
 msgstr ""
+"I dette fjellrike området har to prinsar slått seg ned.  No utvidar dei rika "
+"sine utan å vite at dei ikkje er åleine!"
 
 #: ../../maps/Firegames.wmf/elemental:9
 msgid ""
@@ -237,10 +257,14 @@ msgid ""
 "if you are alone, but no-one knows, what might happen if you meet an "
 "opponent tribe?"
 msgstr ""
+"Er dette ein prøve frå gudane, eller ein vond plan av nokon andre, at du og "
+"stamma di har vakna på denne øya blant eld og lava?  Til no verker det som "
+"om de er åleine, men ingen veit kva som kan skje viss du møter ein fiendtleg "
+"stamme."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "Øyhopping"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -252,12 +276,17 @@ msgid ""
 "these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
 "Geologists elsewhere."
 msgstr ""
+"Det er sagt at sjølv sola og månen må finna vegen mellom toppane på desse "
+"fjella.  Tips: Monolittar markerer kvar det er malm.  Ikkje bry deg med å "
+"sende geologar andre stader."
 
 #: ../../maps/Swamp Monks.wmf/elemental:9
 msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Det er sagt at dei gamle krigsmunkane som bur i dei endå eldre sumpane er "
+"nøkkelen til å styre heile øya."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -266,6 +295,9 @@ msgid ""
 "offers enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbours?"
 msgstr ""
+"Det verker som om visentar har budd i denne magiske dalen si tidas morgon.  "
+"Når stamma di kjem til denne staden var du sikker på at det var nokk plass "
+"til eit fredfylt liv.  Men kan stamma di leva i fred med naboane dine?"
 
 #: ../../maps/Swamp Island.wmf/elemental:11
 msgid ""
@@ -273,6 +305,9 @@ msgid ""
 "place you were born and you lived your whole life. If you don't want to lose "
 "it, defend it! "
 msgstr ""
+"Det luktar som ei myr, det ser ut som ei myr og det er ei myr.  Men det er "
+"her du blei fødd og har budd heile livet ditt.  Viss du ikkje vil miste det "
+"må du forsvare det. "
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
@@ -280,6 +315,9 @@ msgid ""
 "wonder, that there is not much water left in this dry riverbed. Everyone "
 "knows: soon there will be a war. A war about the last of water."
 msgstr ""
+"Det var lenge sia det har regna.  Ikkje rart det ikkje er mykje vatn att i "
+"dette inntørka elveleiet.  Alle veit at det snart blir krig.  Ei krig om det "
+"siste vatnet."
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -294,6 +332,8 @@ msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the "
 "crater. Two tribes are now fighting for the rich resources."
 msgstr ""
+"Lenge etter at ein meteor slo ned i eit par fjell yrer det av liv i "
+"krateret.  To stammar kjemar no om dei rike resursane."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""

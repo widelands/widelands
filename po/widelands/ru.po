@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-11-02 16:19+0000\n"
-"Last-Translator: Gleb Sinkovskiy <gleb.sinkovskiy@gmail.com>\n"
+"PO-Revision-Date: 2012-12-08 07:13+0000\n"
+"Last-Translator: Глория Хрусталёва <gloriya@hushmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-11-03 04:34+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-12-09 04:35+0000\n"
+"X-Generator: Launchpad (build 16341)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3006,7 +3006,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_object_packet.cc:109
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "неизвестный заголовок объекта %u"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:112
 #, c-format
@@ -3019,7 +3019,7 @@ msgstr "Прихожая метасервера"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
 msgid "Clients online:"
-msgstr ""
+msgstr "Клиенты в сети:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:59
 msgid "List of games:"
@@ -3060,7 +3060,7 @@ msgstr "Очки"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Game"
-msgstr ""
+msgstr "Игра"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:378
 msgid "Connection timed out"
@@ -3112,7 +3112,7 @@ msgstr "Начальные условия"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:104 ../../src/ui_fsmenu/launchMPG.cc:169
 msgid "Type of game"
-msgstr ""
+msgstr "Тип игры"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
@@ -3227,11 +3227,11 @@ msgstr "Откл."
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "Никогда"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 день"
 
 #: ../../src/ui_fsmenu/options.cc:275
 #, c-format
@@ -3280,7 +3280,7 @@ msgstr "Удалять дампы синхронизации при запуск
 
 #: ../../src/ui_fsmenu/options.cc:471
 msgid "OpenGL rendering"
-msgstr ""
+msgstr "OpenGL рендеринг"
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
@@ -3622,11 +3622,11 @@ msgstr "Карта"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Показать все карты"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Официальная карта"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
@@ -3903,6 +3903,7 @@ msgstr "Сервер вышел из строя и выполняется чре
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Connection to client timeouted: no response for 10 minutes!"
 msgstr ""
+"Соединение с клиентом прекращено по таймауту: нет ответа в течении 10 минут!"
 
 #: ../../src/network/network_gaming_messages.cc:130
 msgid "Client and host have become desynchronized."
@@ -3980,11 +3981,11 @@ msgstr "Игра уже началась"
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client has no access to other player's settings."
-msgstr ""
+msgstr "Клиент не имеет доступа к другим настройкам игрока."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
-msgstr ""
+msgstr "Клиент не имеет доступа к настройкам сервера."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent start command, although server is not yet ready."
@@ -4029,7 +4030,7 @@ msgstr "%s присоединился к игре"
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Game was saved as %s."
-msgstr ""
+msgstr "Игра сохранена как  %s."
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
@@ -4054,7 +4055,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
-msgstr ""
+msgstr "Клиент %s не отвечает более чем %s секунд."
 
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
@@ -4071,15 +4072,15 @@ msgstr ""
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1250
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Отправленный пароль неверен!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "Используемая вами версия протокола не поддерживается!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Вы уже вошли!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
@@ -4105,7 +4106,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
-msgstr ""
+msgstr "Ваша игра не доступна из интернета"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -4162,7 +4163,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:402 ../../src/network/nethost.cc:428
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Клиент %s не найден."
 
 #: ../../src/network/nethost.cc:413
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -4174,7 +4175,7 @@ msgstr "Вы не можете кикнуть себя!"
 
 #: ../../src/network/nethost.cc:426
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "Вы не можете выпнуть выделенный сервер"
 
 #: ../../src/network/nethost.cc:431
 #, c-format
@@ -4261,16 +4262,16 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1238
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Игра сохранена!"
 
 #: ../../src/network/nethost.cc:1240
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr ""
+msgstr "Не удаётся сохранить игру в файл  \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1247
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Данный сервер не защищён паролем!"
 
 #: ../../src/network/nethost.cc:1263
 msgid "The password was correct, access was granted!"
@@ -4348,20 +4349,20 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:450
 msgid "Invalid message type"
-msgstr ""
+msgstr "Некорректный тип сообщения"
 
 #: ../../src/network/internet_gaming.cc:450
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Некорректный тип сообщения чата \"%s\"."
 
 #: ../../src/network/internet_gaming.cc:527
 msgid "ERROR: "
-msgstr ""
+msgstr "ОШИБКА: "
 
 #: ../../src/network/internet_gaming.cc:531
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "Сообщение не может быть отправлено в чат. "
 
 #: ../../src/network/internet_gaming.cc:552
 msgid "Received an unknown command from the metaserver: "
