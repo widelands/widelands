@@ -32,7 +32,7 @@
 
 using namespace std;
 
-int save_png(string fn, ThinSDLSurface& surf) {
+int save_png(const string& fn, const ThinSDLSurface& surf) {
 	// Save png data
 	std::vector<unsigned char> png;
 
@@ -115,19 +115,15 @@ int main(int argc, char *argv[])
 	RT::IFontLoader * floader = RT::ttf_fontloader_from_file();
 	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
 
-	IPicture* image = 0;
 	try {
-		image = renderer->render(txt, w, 0, allowed_tags);
-
-		ThinSDLSurface* surf = static_cast<ThinSDLSurface*>(image);
-		surf->lock();
-		save_png(outname, *surf);
-		surf->unlock();
+		// TODO(sirver): currently leaks memory.
+		const ThinSDLSurface& surf = *static_cast<const ThinSDLSurface*>(renderer->render(txt, w, 0, allowed_tags));
+		surf.lock();
+		save_png(outname, surf);
+		surf.unlock();
 	} catch(RT::Exception & e) {
 		cout << e.what() << endl;
 	}
-	if (image)
-		delete image;
 
 	delete renderer;
 	delete thin_graphic; // Will free all images

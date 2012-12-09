@@ -15,6 +15,7 @@ cdef extern from "thin_graphic.h":
         void unlock()
         uint32_t get_h()
         uint32_t get_w()
+    ctypedef ThinSDLSurface CThinSDLSurface "const ThinSDLSurface"
 
     cdef cppclass IPicture:
         pass
@@ -24,8 +25,9 @@ cdef extern from "thin_graphic.h":
 cdef extern from "rt_render.h" namespace "RT":
     cdef cppclass IRefMap:
         cppstr query(int16_t, int16_t)
+    ctypedef IPicture CIPicture "const IPicture"
     cdef cppclass IRenderer:
-        IPicture* render(char*, uint32_t, IRefMap **, cppset[cppstr] &) except +
+        CIPicture* render(char*, uint32_t, IRefMap **, cppset[cppstr] &) except +
 
     struct IFontLoader:
         pass
@@ -64,8 +66,9 @@ cdef class Renderer(object):
         for tag in allowed_tags:
             allowed_set.insert(cppstr(<char*>(tag)))
 
-        cdef IPicture* rv = self._renderer.render(text, width, &rm, allowed_set)
-        cdef ThinSDLSurface* surf = <ThinSDLSurface*>(rv)
+        # TODO(sirver): delete rv, as it leaks memory
+        cdef CIPicture* rv = self._renderer.render(text, width, &rm, allowed_set)
+        cdef CThinSDLSurface* surf = <CThinSDLSurface*>(rv)
 
         a = np.empty((surf.get_h(), surf.get_w(), 4), np.uint8)
         cdef uint32_t x, y, i, clr
@@ -76,8 +79,6 @@ cdef class Renderer(object):
                 for i in range(4):
                     a[y,x,i] = pixels[y*surf.get_pitch() + x*4 + i]
         surf.unlock()
-
-        del rv
 
         cdef RefMap rrm = RefMap()
         rrm._refmap = rm

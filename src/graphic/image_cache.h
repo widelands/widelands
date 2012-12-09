@@ -70,7 +70,7 @@ public:
 	/// Inserts this entry into the ImageCache. Overwrites existing entries /
 	//without freeing the image first, so be careful. Returns the picture just
 	//inserted / for convenience.
-	virtual const IPicture* insert(PicMod, const std::string& hash, IPicture*) = 0;
+	virtual const IPicture* insert(PicMod, const std::string& hash, const IPicture*) = 0;
 
 	/// Loads an Image from disk and caches it. If it was already
 	/// cached, it is simply returned.

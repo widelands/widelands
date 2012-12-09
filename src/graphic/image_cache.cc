@@ -37,13 +37,13 @@ public:
 
 	// Implements ImageCache
 	virtual const IPicture* get(PicMod, const string& hash) const;
-	virtual const IPicture* insert(PicMod, const string& hash, IPicture*);
+	virtual const IPicture* insert(PicMod, const string& hash, const IPicture*);
 	virtual const IPicture* load(PicMod, const string& fn, bool alpha);
 	virtual void flush(PicMod);
 
 private:
 	struct PictureRec {
-		IPicture* picture;
+		const IPicture* picture;
 
 		/// bit-mask of modules that this picture exists in
 		uint32_t modules;
@@ -70,7 +70,7 @@ const IPicture* ImageCacheImpl::get(PicMod module, const string& hash) const {
 	return (it->second.modules & (1 << module)) ? it->second.picture : NULL;
 }
 
-const IPicture* ImageCacheImpl::insert(PicMod module, const string& name, IPicture* pic) {
+const IPicture* ImageCacheImpl::insert(PicMod module, const string& name, const IPicture* pic) {
 	PictureRec rec;
 	rec.picture = pic;
 	rec.modules = 1 << module;

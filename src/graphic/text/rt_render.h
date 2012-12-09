@@ -47,8 +47,8 @@ public:
 	};
 	virtual ~IFont() {};
 
-	virtual void dimensions(std::string, int, uint32_t *, uint32_t *) = 0;
-	virtual const IPicture* render(IGraphic &, std::string, RGBColor clr, int) = 0;
+	virtual void dimensions(const std::string&, int, uint32_t *, uint32_t *) = 0;
+	virtual const IPicture* render(IGraphic &, const std::string&, const RGBColor& clr, int) = 0;
 
 	virtual uint32_t ascent(int) const = 0;
 };
@@ -62,12 +62,12 @@ class IFontLoader {
 public:
 	virtual ~IFontLoader() {};
 
-	virtual IFont * load(std::string name, int ptsize) = 0;
+	virtual IFont * load(const std::string& name, int ptsize) = 0;
 };
 
 /**
  * A map that maps pixels to a string. The string are the references which can be used
- * for hyperlink like constructions
+ * for hyperlink like constructions.
  */
 class IRefMap {
 public:
@@ -76,8 +76,8 @@ public:
 };
 
 /**
- * This is the rendering engine. It does not do any caching at all and
- * it works entirely inside the SDL Framework.
+ * This is the rendering engine. It caches heavily using ImageCache and
+ * therefore, the returned images are not owned by the caller.
  */
 typedef std::set<std::string> TagSet;
 class IRenderer {
@@ -85,7 +85,10 @@ public:
 	IRenderer() {};
 	virtual ~IRenderer() {};
 
-	virtual IPicture* render(std::string, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
+	// Render the given string in the given width. Restricts the allowed tags to
+	// the ones in TagSet. If an IRefMap pointer is given, it will be filled with
+	// clickable hyperlinks, the user must delete the object himself. Never delete the return value.
+	virtual const IPicture* render(const std::string&, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
 };
 
 // Setup a renderer, takes ownership of fl but not of gr.

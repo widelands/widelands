@@ -44,7 +44,7 @@ SDLTTF_Font::~SDLTTF_Font() {
 	font_ = 0;
 }
 
-void SDLTTF_Font::dimensions(string txt, int style, uint32_t * gw, uint32_t * gh) {
+void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32_t * gh) {
 	m_set_style(style);
 
 	int w, h;
@@ -56,7 +56,7 @@ void SDLTTF_Font::dimensions(string txt, int style, uint32_t * gw, uint32_t * gh
 	*gw = w; *gh = h;
 }
 
-const IPicture* SDLTTF_Font::render(IGraphic & gr, string txt, RGBColor clr, int style) {
+const IPicture* SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
 	SimpleMD5Checksum checksum;
 	checksum.Data(font_name_.c_str(), font_name_.size());
 	checksum.Data(&ptsize_, sizeof(ptsize_));

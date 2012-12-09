@@ -29,6 +29,7 @@
 #include <SDL.h>
 
 #include "graphic/image_cache.h"
+#include "md5.h"
 
 #include "rt_parse.h"
 #include "textstream.h"
@@ -288,7 +289,7 @@ uint32_t Layout::fit_nodes(vector<RenderNode*> & rv, uint32_t w, Borders p) {
 
 class TextNode : public RenderNode {
 public:
-	TextNode(IFont & font, NodeStyle &, string txt);
+	TextNode(IFont & font, NodeStyle &, const string& txt);
 	virtual ~TextNode() {};
 
 	virtual uint32_t width() {return m_w;}
@@ -307,12 +308,12 @@ public:
 
 protected:
 	uint32_t m_w, m_h;
-	string m_txt;
+	const string m_txt;
 	NodeStyle m_s;
 	IFont & m_font;
 };
 
-TextNode::TextNode(IFont & font, NodeStyle & ns, string txt)
+TextNode::TextNode(IFont & font, NodeStyle & ns, const string& txt)
 	: RenderNode(ns), m_txt(txt), m_s(ns), m_font(font)
 {
 	m_font.dimensions(m_txt, ns.font_style, &m_w, &m_h);
@@ -333,7 +334,7 @@ IBlitableSurface* TextNode::render(IGraphic & gr) {
 
 class FillingTextNode : public TextNode {
 public:
-	FillingTextNode(IFont & font, NodeStyle & ns, uint32_t w, string txt, bool expanding = false) :
+	FillingTextNode(IFont & font, NodeStyle & ns, uint32_t w, const string& txt, bool expanding = false) :
 		TextNode(font, ns, txt), m_expanding(expanding) {
 			m_w = w;
 		};
@@ -364,7 +365,7 @@ IBlitableSurface* FillingTextNode::render(IGraphic & gr) {
 
 class WordSpacerNode : public TextNode {
 public:
-	WordSpacerNode(IFont & font, NodeStyle & ns) : TextNode(font, ns, " ") {}
+	WordSpacerNode(IFont& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
 	virtual IBlitableSurface* render(IGraphic & gr) {
@@ -498,7 +499,7 @@ public:
 	void set_background(RGBColor clr) {m_bg_clr = clr;}
 	void set_background(const IPicture* img) {m_bg_img = img;}
 	void set_nodes_to_render(vector<RenderNode*> & n) {m_nodes_to_render=n;}
-	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, string s) {
+	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, const string& s) {
 		Reference r = { Rect(x, y, w, h), s };
 		m_refs.push_back(r);
 	}
@@ -549,7 +550,7 @@ public:
 
 private:
 	struct FontDescr {
-		std::string face;
+		string face;
 		uint16_t size;
 
 		bool operator<(const FontDescr & o) const {
@@ -558,8 +559,8 @@ private:
 				(size == o.size && face < o.face);
 		}
 	};
-	typedef std::map<FontDescr, IFont *> FontMap;
-	typedef std::pair<const FontDescr, IFont *> FontMapPair;
+	typedef map<FontDescr, IFont *> FontMap;
+	typedef pair<const FontDescr, IFont *> FontMapPair;
 
 	FontMap m_fontmap;
 	scoped_ptr<IFontLoader> m_fl;
@@ -589,7 +590,7 @@ public:
 	virtual void emit(vector<RenderNode*> &);
 
 private:
-	void m_make_text_nodes(string txt, vector<RenderNode*> & nodes, NodeStyle & ns);
+	void m_make_text_nodes(const string& txt, vector<RenderNode*> & nodes, NodeStyle & ns);
 
 protected:
 	ITag & m_tag;
@@ -598,7 +599,7 @@ protected:
 	IGraphic & gr_;
 };
 
-void TagHandler::m_make_text_nodes(string txt, vector<RenderNode*> & nodes, NodeStyle & ns) {
+void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*> & nodes, NodeStyle & ns) {
 	TextStream ts(txt);
 
 	vector<string> words;
@@ -607,7 +608,7 @@ void TagHandler::m_make_text_nodes(string txt, vector<RenderNode*> & nodes, Node
 		ts.skip_ws();
 		if (ts.pos() != cpos)
 			nodes.push_back(new WordSpacerNode(m_fc.get_font(ns), ns));
-		string word = ts.till_any_or_end(" \t\n\r");
+		const string word = ts.till_any_or_end(" \t\n\r");
 		if (word.size())
 			nodes.push_back(new TextNode(m_fc.get_font(ns), ns, word));
 	}
@@ -652,13 +653,13 @@ public:
 		const IAttrMap & a = m_tag.attrs();
 		if (a.has("indent")) m_indent = a["indent"].get_int();
 		if (a.has("align")) {
-			string align = a["align"].get_string();
+			const string align = a["align"].get_string();
 			if (align=="left") m_ns.halign = HALIGN_LEFT;
 			else if (align=="right") m_ns.halign = HALIGN_RIGHT;
 			else if (align=="center" or align=="middle") m_ns.halign = HALIGN_CENTER;
 		}
 		if (a.has("valign")) {
-			string align = a["valign"].get_string();
+			const string align = a["valign"].get_string();
 			if (align=="top") m_ns.valign = VALIGN_TOP;
 			else if (align=="bottom") m_ns.valign = VALIGN_BOTTOM;
 			else if (align=="center" or align=="middle") m_ns.valign = VALIGN_CENTER;
@@ -842,12 +843,12 @@ public:
 			}
 		}
 		if (a.has("float")) {
-			string s = a["float"].get_string();
+			const string s = a["float"].get_string();
 			if (s == "right") m_rn->set_floating(RenderNode::FLOAT_RIGHT);
 			else if (s == "left") m_rn->set_floating(RenderNode::FLOAT_LEFT);
 		}
 		if (a.has("valign")) {
-			string align = a["valign"].get_string();
+			const string align = a["valign"].get_string();
 			if (align=="top") m_rn->set_valign(VALIGN_TOP);
 			else if (align=="bottom") m_rn->set_valign(VALIGN_BOTTOM);
 			else if (align=="center" or align=="middle") m_rn->set_valign(VALIGN_CENTER);
@@ -876,7 +877,7 @@ template<typename T> TagHandler * create_taghandler
 {
 	return new T(tag, fc, ns, gr);
 }
-typedef std::map<std::string, TagHandler*(*)(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr)> TagHandlerMap;
+typedef map<const string, TagHandler*(*)(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr)> TagHandlerMap;
 TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr) {
 	static TagHandlerMap map;
 	if (map.empty()) {
@@ -899,7 +900,7 @@ public:
 	Renderer(IGraphic & gr, IFontLoader * fl, IParser * p);
 	virtual ~Renderer();
 
-	virtual IPicture* render(std::string, uint32_t, IRefMap **, const TagSet &);
+	virtual const IPicture* render(const string&, uint32_t, IRefMap **, const TagSet &);
 
 private:
 	IGraphic & gr_;
@@ -914,7 +915,7 @@ Renderer::Renderer(IGraphic & gr, IFontLoader * fl, IParser * p) :
 Renderer::~Renderer() {
 }
 
-IPicture* Renderer::render(string text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
+const IPicture* Renderer::render(const string& text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
 	ITag * rt = m_p->parse(text, allowed_tags);
 
 	NodeStyle default_fs = {
@@ -933,7 +934,7 @@ IPicture* Renderer::render(string text, uint32_t width, IRefMap ** pprm, const T
 	assert(nodes.size() == 1);
 	if (pprm)
 		*pprm = new RefMap(nodes[0]->get_references());
-	IBlitableSurface* rv = nodes[0]->render(gr_);
+	const IPicture* rv = nodes[0]->render(gr_);
 
 	delete nodes[0];
 	delete rt;

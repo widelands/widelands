@@ -33,7 +33,7 @@ class SDLTTF_FontLoaderFromFile : public IFontLoader {
 public:
 	SDLTTF_FontLoaderFromFile();
 	virtual ~SDLTTF_FontLoaderFromFile();
-	virtual IFont * load(string name, int ptsize);
+	virtual IFont * load(const string& name, int ptsize);
 };
 
 SDLTTF_FontLoaderFromFile::SDLTTF_FontLoaderFromFile() {
@@ -43,7 +43,7 @@ SDLTTF_FontLoaderFromFile::~SDLTTF_FontLoaderFromFile() {
 	TTF_Quit();
 }
 
-IFont* SDLTTF_FontLoaderFromFile::load(string face, int ptsize) {
+IFont* SDLTTF_FontLoaderFromFile::load(const string& face, int ptsize) {
 	TTF_Font * mfont = TTF_OpenFontIndex(("fonts/" + face).c_str(), ptsize, 0);
 	if(!mfont)
 		throw BadFont((format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError()).str());

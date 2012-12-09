@@ -39,8 +39,8 @@ public:
 		return static_cast<uint8_t*>(surf_->pixels);
 	}
 
-	void lock() {SDL_LockSurface(surf_);}
-	void unlock() {SDL_UnlockSurface(surf_);}
+	void lock() const {SDL_LockSurface(surf_);}
+	void unlock() const {SDL_UnlockSurface(surf_);}
 	void blit(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm);
 	void fill_rect(const Rect& rc, RGBAColor clr);
 
