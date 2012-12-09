@@ -48,7 +48,7 @@ IFont* SDLTTF_FontLoaderFromFile::load(string face, int ptsize) {
 	if(!mfont)
 		throw BadFont((format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError()).str());
 
-	return new SDLTTF_Font(mfont);
+	return new SDLTTF_Font(mfont, face, ptsize);
 }
 
 IFontLoader * ttf_fontloader_from_file() {

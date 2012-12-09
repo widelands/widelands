@@ -306,14 +306,6 @@ void Font_Handler::do_align
 	}
 }
 
-/*
- * Flushes the cached picture ids
- */
-void Font_Handler::flush_cache()
-{
-	d->linecache.clear();
-}
-
 /**
  * Compute the total size of the given text, when wrapped to the given
  * maximum width and rendered in the given text style.

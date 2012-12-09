@@ -47,9 +47,8 @@ public:
 	};
 	virtual ~IFont() {};
 
-	// TODO(sirver): Get rid of all SDL_Color
 	virtual void dimensions(std::string, int, uint32_t *, uint32_t *) = 0;
-	virtual IPicture* render(IGraphic &, std::string, RGBColor clr, int) = 0;
+	virtual const IPicture* render(IGraphic &, std::string, RGBColor clr, int) = 0;
 
 	virtual uint32_t ascent(int) const = 0;
 };

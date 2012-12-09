@@ -28,9 +28,12 @@
 #include <boost/scoped_ptr.hpp>
 #include <SDL.h>
 
+#include "graphic/image_cache.h"
+
 #include "rt_parse.h"
-#include "rt_render.h"
 #include "textstream.h"
+
+#include "rt_render.h"
 
 using namespace std;
 using namespace boost;
@@ -449,7 +452,7 @@ public:
 		// Draw Solid background Color
 		// TODO(sirver): A lot of set_alpha and so on is missing here
 		bool set_alpha = true;
-		if (m_bg_clr.r() or m_bg_clr.g() or m_bg_clr.b()) {
+		if (m_bg_clr.r or m_bg_clr.g or m_bg_clr.b) {
 			Rect fill_rect(Point(m_margin.left, m_margin.top), m_w, m_h);
 			rv->fill_rect(fill_rect, m_bg_clr);
 			set_alpha = false;
@@ -684,7 +687,7 @@ public:
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
-		m_rn = new ImgRenderNode(m_ns, gr_.load_image(a["src"].get_string(), true));
+		m_rn = new ImgRenderNode(m_ns, gr_.imgcache().load(PicMod_RichText, a["src"].get_string(), true));
 	}
 	void emit(vector<RenderNode*> & nodes) {
 		nodes.push_back(m_rn);
@@ -729,7 +732,7 @@ public:
 		if (a.has("fill")) {
 			m_fill_text = a["fill"].get_string();
 			try {
-				m_bg = gr_.load_image(m_fill_text, true);
+				m_bg = gr_.imgcache().load(PicMod_RichText, m_fill_text, true);
 				m_fill_text = "";
 			} catch(BadImage &) {
 			}
@@ -835,7 +838,7 @@ public:
 				clr = a["background"].get_color();
 				m_rn->set_background(clr);
 			} catch (InvalidColor &) {
-				m_rn->set_background(gr_.load_image(a["background"].get_string(), false));
+				m_rn->set_background(gr_.imgcache().load(PicMod_RichText, a["background"].get_string(), false));
 			}
 		}
 		if (a.has("float")) {

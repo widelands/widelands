@@ -17,16 +17,14 @@
  *
  */
 
-// TODO(sirver): check includes
-#include <string>
-
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
+#include "graphic/image_cache.h"
 #include "md5.h"
 #include "rt_errors.h"
-#include "rt_render.h"
 #include "sdl_helper.h"
+
 #include "sdl_ttf_font_impl.h"
 
 using namespace std;
@@ -37,20 +35,20 @@ static const SDL_Color SHADOW_CLR = { 0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
 
-SDLTTF_Font::SDLTTF_Font(TTF_Font * font) :
-	m_font(font), m_style(TTF_STYLE_NORMAL) {
+SDLTTF_Font::SDLTTF_Font(TTF_Font * font, const string& face, int ptsize) :
+	font_(font), style_(TTF_STYLE_NORMAL), font_name_(face), ptsize_(ptsize) {
 }
 
 SDLTTF_Font::~SDLTTF_Font() {
-	TTF_CloseFont(m_font);
-	m_font = 0;
+	TTF_CloseFont(font_);
+	font_ = 0;
 }
 
 void SDLTTF_Font::dimensions(string txt, int style, uint32_t * gw, uint32_t * gh) {
 	m_set_style(style);
 
 	int w, h;
-	TTF_SizeUTF8(m_font, txt.c_str(), &w, &h);
+	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
 
 	if (style & SHADOW) {
 		w += SHADOW_OFFSET; h += SHADOW_OFFSET;
@@ -58,15 +56,29 @@ void SDLTTF_Font::dimensions(string txt, int style, uint32_t * gw, uint32_t * gh
 	*gw = w; *gh = h;
 }
 
-IPicture* SDLTTF_Font::render(IGraphic & gr, string txt, RGBColor clr, int style) {
+const IPicture* SDLTTF_Font::render(IGraphic & gr, string txt, RGBColor clr, int style) {
+	SimpleMD5Checksum checksum;
+	checksum.Data(font_name_.c_str(), font_name_.size());
+	checksum.Data(&ptsize_, sizeof(ptsize_));
+	checksum.Data(txt.c_str(), txt.size());
+	checksum.Data(&clr.r, 1);
+	checksum.Data(&clr.g, 1);
+	checksum.Data(&clr.b, 1);
+	checksum.Data(&style, sizeof(style));
+	checksum.FinishChecksum();
+	const string cs = checksum.GetChecksum().str();
+
+	const IPicture* rv = gr.imgcache().get(PicMod_Text, cs);
+	if (rv) return rv;
+
 	m_set_style(style);
 
 	SDL_Surface * text_surface = 0;
 
-	SDL_Color sdlclr = { clr.r(), clr.g(), clr.b(), 0 };
+	SDL_Color sdlclr = { clr.r, clr.g, clr.b, 0 };
 	if (style & SHADOW) {
-		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(m_font, txt.c_str(), sdlclr);
-		SDL_Surface * shadow = TTF_RenderUTF8_Blended(m_font, txt.c_str(), SHADOW_CLR);
+		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
+		SDL_Surface * shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET, true);
 
 		if (text_surface->format->BitsPerPixel != 32)
@@ -103,31 +115,17 @@ IPicture* SDLTTF_Font::render(IGraphic & gr, string txt, RGBColor clr, int style
 		SDL_FreeSurface(tsurf);
 		SDL_FreeSurface(shadow);
 	} else
-		text_surface= TTF_RenderUTF8_Blended(m_font, txt.c_str(), sdlclr);
+		text_surface= TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	// TODO: calculate a hash of this
-	// TODO(sirver): Proper (maybe new?) PicMod Namesapce
-	// TODO: get a clearer picture who caches what when
-	SimpleMD5Checksum cs;
-	cs.Data(txt.c_str(), txt.size());
-	cs.Data(&sdlclr.r, 1);
-	cs.Data(&sdlclr.g, 1);
-	cs.Data(&sdlclr.b, 1);
-	cs.Data(&style, sizeof(style));
-	cs.FinishChecksum();
-
-	IPicture* rv = gr.convert_sdl_surface_to_picture(text_surface, true);
-
-	// TODO(sirver): Should this really be done here?
-	gr.add_picture_to_cache(PicMod_UI, txt + "_" + cs.GetChecksum().str(), rv);
-	return rv;
+	return gr.imgcache().insert(PicMod_Text, cs,
+			gr.convert_sdl_surface_to_picture(text_surface, true));
 }
 
 uint32_t SDLTTF_Font::ascent(int style) const {
-	uint32_t rv = TTF_FontAscent(m_font);
+	uint32_t rv = TTF_FontAscent(font_);
 	if (style & SHADOW)
 		rv += SHADOW_OFFSET;
 	return rv;
@@ -141,10 +139,10 @@ void SDLTTF_Font::m_set_style(int style) {
 
 	// Remember the last style. This should avoid that SDL_TTF flushes its
 	// glyphcache all too often
-	if (sdl_style == m_style)
+	if (sdl_style == style_)
 		return;
-	m_style = sdl_style;
-	TTF_SetFontStyle(m_font, sdl_style);
+	style_ = sdl_style;
+	TTF_SetFontStyle(font_, sdl_style);
 }
 
 }  // namespace RT

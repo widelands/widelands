@@ -11,6 +11,7 @@ env.Append(LIBS="SDL_ttf")
 env.Append(CPPPATH="../../src/graphic/text")
 env.Append(CPPPATH="../../src/")
 rt_lib = env.Library([
+    "../../src/graphic/image_cache.cc",
     "../../src/graphic/text/rt_parse.cc",
     "../../src/graphic/text/rt_render.cc",
     "../../src/graphic/text/sdl_helper.cc",

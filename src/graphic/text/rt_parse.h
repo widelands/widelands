@@ -30,8 +30,6 @@
 
 #include "rt_errors.h"
 
-struct SDL_Color;
-
 namespace RT {
 
 struct Child;

@@ -189,19 +189,6 @@ protected:
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 
-	struct PictureRec {
-		IPicture* picture;
-
-		/// bit-mask of modules that this picture exists in
-		uint32_t modules;
-	};
-
-	typedef std::map<std::string, PictureRec> Picturemap;
-	typedef Picturemap::iterator pmit;
-
-	/// hash of cached filename/picture pairs
-	Picturemap m_picturemap;
-
 	Road_Textures * m_roadtextures;
 	const IPicture* m_edgetexture;
 	std::vector<Texture *> m_maptextures;

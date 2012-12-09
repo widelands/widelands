@@ -83,10 +83,6 @@ struct Font_Handler {
 	uint32_t get_fontheight(std::string const & name, int32_t size);
 	void do_align
 		(Align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
-	// This deletes all cached pictures, it is called
-	// from the graphics code before the graphics are flushed,
-	// to make sure that everything is forgotten
-	void flush_cache();
 
 private:
 	struct Data;

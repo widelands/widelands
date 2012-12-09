@@ -32,18 +32,20 @@ namespace RT {
 // Implementation of a Font object using SDL_ttf.
 class SDLTTF_Font : public IFont {
 public:
-	SDLTTF_Font(TTF_Font* ttf);
+	SDLTTF_Font(TTF_Font* ttf, const std::string& face, int ptsize);
 	virtual ~SDLTTF_Font();
 
 	void dimensions(std::string, int, uint32_t * w, uint32_t * h);
-	virtual IPicture* render(IGraphic &, std::string, RGBColor clr, int);
+	virtual const IPicture* render(IGraphic &, std::string, RGBColor clr, int);
 	uint32_t ascent(int) const;
 
 private:
 	void m_set_style(int);
 
-	TTF_Font * m_font;
-	int m_style;
+	TTF_Font * font_;
+	int style_;
+	const std::string font_name_;
+	const int ptsize_;
 };
 
 }  // namespace RT

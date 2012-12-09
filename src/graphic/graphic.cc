@@ -322,9 +322,6 @@ Graphic::~Graphic()
 	if (g_opengl)
 		GLSurfaceTexture::Cleanup();
 #endif
-
-	// Remove traces of cached pictures
-	UI::g_fh->flush_cache();
 }
 
 /**
@@ -430,9 +427,6 @@ void Graphic::refresh(bool force)
 
 /**
  * Clear all cached resources from the given module.
- *
- * \note This only removes the cache entries. If the corresonding resources
- * are still in use somewhere, they will not be freed.
  */
 void Graphic::flush(PicMod module)
 {
@@ -749,7 +743,6 @@ void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
  * @param alpha if true the surface is created with alpha channel
  * @return the new Surface created from the SDL_Surface
  */
-// TODO(sirver): this function can be in Picture. This would clean up the design
 IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
 {
 #ifdef USE_OPENGL

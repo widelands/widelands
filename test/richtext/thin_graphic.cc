@@ -26,6 +26,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/utility.hpp>
 
+#include "graphic/image_cache.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/sdl_helper.h"
 #include "upcast.h"
@@ -36,6 +37,46 @@
 
 using namespace std;
 using namespace boost;
+
+namespace {
+class ImageLoader : public IImageLoader {
+public:
+	virtual ~ImageLoader() {}
+
+	virtual IPicture* load(const string& s, bool alpha) {
+		unsigned w, h;
+		unsigned char * image;
+
+		unsigned error = lodepng_decode32_file(&image, &w, &h,
+				("imgs/" + s).c_str());
+		if (error)
+			throw RT::BadImage
+				((format("Problem loading image %s: %s\n") % s % lodepng_error_text(error)).str());
+
+		Uint32 rmask, gmask, bmask, amask;
+		/* SDL interprets each pixel as a 32-bit number, so our masks must depend
+			on the endianness (byte order) of the machine */
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+		rmask = 0xff000000;
+		gmask = 0x00ff0000;
+		bmask = 0x0000ff00;
+		amask = alpha ? 0x000000ff : 0;
+#else
+		rmask = 0x000000ff;
+		gmask = 0x0000ff00;
+		bmask = 0x00ff0000;
+		amask = alpha ? 0xff000000 : 0;
+#endif
+
+		SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(image, w, h, 32, w*4, rmask, gmask, bmask, amask);
+		if (!surf)
+			throw RT::BadImage
+				((format("Problem creating surface for image %s: %s\n") % s % SDL_GetError()).str());
+
+		return new ThinSDLSurface(surf, true);
+	}
+};
+}  // namespace
 
 ThinSDLSurface::ThinSDLSurface(SDL_Surface * surf, bool free_pixels) :
 		surf_(surf), free_pixels_(free_pixels)
@@ -83,91 +124,22 @@ void ThinSDLSurface::fill_rect(const Rect& rc, RGBAColor clr) {
 
 class ThinGraphic : boost::noncopyable, virtual public IGraphic {
 public:
-	virtual ~ThinGraphic();
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
-	virtual IPicture* load_image(const std::string &, bool alpha = false);
-	virtual const IPicture* get_picture(PicMod, std::string const &, bool alpha = true);
-	virtual void add_picture_to_cache(PicMod, const std::string &, IPicture*);
-	IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false);
+	ThinGraphic() :
+		img_cache_(create_image_cache(new ImageLoader())) {}
+	virtual ~ThinGraphic() {}
+
+	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface* surf, bool alpha = false) {
+		return new ThinSDLSurface(surf, false);
+	}
+	IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) {
+		return new ThinSDLSurface(RT::empty_sdl_surface(w,h,alpha), false);
+	}
+
+	ImageCache& imgcache() const {return *img_cache_.get();}
 
 private:
-	typedef std::pair<const string, IPicture*> MapEntry;
-	typedef map<string, IPicture*> GraphicMap;
-	GraphicMap m_imgcache;
+	boost::scoped_ptr<ImageCache> img_cache_;
 };
-
-
-ThinGraphic::~ThinGraphic() {
-	BOOST_FOREACH(MapEntry& p, m_imgcache)
-		delete p.second;
-	m_imgcache.clear();
-}
-
-IPicture* ThinGraphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
-{
-	IPicture* rv(new ThinSDLSurface(surf, false));
-	// TODO(sirver): We are leaking left and right here
-	// SDL_FreeSurface(surf);
-	return rv;
-}
-
-// TODO(sirver): Pass a PicMod and add to cache immediately
-// TODO: understand the semantic of these functions. Is load_image
-// caching already. Is get_picture calling load image?
-IPicture* ThinGraphic::load_image(const std::string & s, bool alpha) {
-	unsigned w, h;
-	unsigned char * image;
-
-	unsigned error = lodepng_decode32_file(&image, &w, &h,
-			("imgs/" + s).c_str());
-	if (error)
-		throw RT::BadImage
-			((format("Problem loading image %s: %s\n") % s % lodepng_error_text(error)).str());
-
-	Uint32 rmask, gmask, bmask, amask;
-	/* SDL interprets each pixel as a 32-bit number, so our masks must depend
-		on the endianness (byte order) of the machine */
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-	rmask = 0xff000000;
-	gmask = 0x00ff0000;
-	bmask = 0x0000ff00;
-	amask = alpha ? 0x000000ff : 0;
-#else
-	rmask = 0x000000ff;
-	gmask = 0x0000ff00;
-	bmask = 0x00ff0000;
-	amask = alpha ? 0xff000000 : 0;
-#endif
-
-	SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(image, w, h, 32, w*4, rmask, gmask, bmask, amask);
-	if (!surf)
-		throw RT::BadImage
-			((format("Problem creating surface for image %s: %s\n") % s % SDL_GetError()).str());
-
-	ThinSDLSurface* rv = new ThinSDLSurface(surf, true);
-	return m_imgcache[s] = rv;
-}
-
-// TODO(sirver): Why is this exposed?
-void ThinGraphic::add_picture_to_cache(PicMod /* module */, const std::string & name, IPicture* pic) {
-	// We ignore module completely here.
-	m_imgcache[name] = pic;
-}
-
-const IPicture* ThinGraphic::get_picture
-	(PicMod const module, const std::string & fname, bool alpha)
-{
-	GraphicMap::iterator i = m_imgcache.find(fname);
-	if (i != m_imgcache.end())
-		return i->second;
-
-	load_image(fname, alpha);
-	return m_imgcache[fname];
-}
-
-IBlitableSurface * ThinGraphic::create_surface(int32_t w, int32_t h, bool alpha) {
-	return new ThinSDLSurface(RT::empty_sdl_surface(w,h,alpha), false);
-}
 
 
 IGraphic * create_thin_graphic() {
