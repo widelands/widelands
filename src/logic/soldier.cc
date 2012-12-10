@@ -611,7 +611,7 @@ void Soldier::draw_info_icon
 	const RGBColor & color = owner().get_playercolor();
 	RGBColor complement_color;
 
-	if (static_cast<uint32_t>(color.r()) + color.g() + color.b() > 128 * 3)
+	if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3)
 		complement_color = RGBColor(32, 32, 32);
 	else
 		complement_color = RGBColor(224, 224, 224);

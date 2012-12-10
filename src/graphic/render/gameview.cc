@@ -1077,7 +1077,7 @@ inline static uint32_t calc_minimap_color
 			pixelcolor = blend_color
 				(format,
 				 pixelcolor,
-				 player_color.r(),  player_color.g(), player_color.b());
+				 player_color.r,  player_color.g, player_color.b);
 		}
 	}
 

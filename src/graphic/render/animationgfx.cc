@@ -295,9 +295,9 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 						>> 24;
 					RGBAColor plrclr;
 
-					plrclr.r = (player_color.r() * intensity) >> 8;
-					plrclr.g = (player_color.g() * intensity) >> 8;
-					plrclr.b = (player_color.b() * intensity) >> 8;
+					plrclr.r = (player_color.r * intensity) >> 8;
+					plrclr.g = (player_color.g * intensity) >> 8;
+					plrclr.b = (player_color.b * intensity) >> 8;
 
 					product.r =
 						(plrclr.r * influence + source.r * (65536 - influence)) >> 16;

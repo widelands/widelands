@@ -75,7 +75,7 @@ void GLSurface::draw_rect(const Rect& rc, const RGBColor clr)
 	glLineWidth(1);
 
 	glBegin(GL_LINE_LOOP); {
-		glColor3ub(clr.r(), clr.g(), clr.b());
+		glColor3ub(clr.r, clr.g, clr.b);
 		glVertex2f(rc.x + 0.5f,        rc.y + 0.5f);
 		glVertex2f(rc.x + rc.w - 0.5f, rc.y + 0.5f);
 		glVertex2f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
@@ -180,7 +180,7 @@ void GLSurface::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
 	glDisable(GL_TEXTURE_2D);
 	glLineWidth(width);
 	glBegin(GL_LINES); {
-		glColor3ub(color.r(), color.g(), color.b());
+		glColor3ub(color.r, color.g, color.b);
 		glVertex2f(x1 + 0.5f, y1 + 0.5f);
 		glVertex2f(x2 + 0.5f, y2 + 0.5f);
 	} glEnd();
