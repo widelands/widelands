@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-09 16:40+0000\n"
+"PO-Revision-Date: 2012-12-10 15:38+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-10 04:33+0000\n"
-"X-Generator: Launchpad (build 16341)\n"
+"X-Launchpad-Export-Date: 2012-12-11 04:34+0000\n"
+"X-Generator: Launchpad (build 16356)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -44,16 +44,22 @@ msgid ""
 "record<br>your sessions in case a bug surfaces. For more explanation, see "
 "below."
 msgstr ""
+"- send oss eit komprimert (zip, gzip, bzip2) øktopptak viss mogleg, med "
+"mindre <br>feilen er umonaleg å reprodusera.  Faktisk kan det vere ein god "
+"idé å alltid ta opp<br> økta di i tilfelle det kjem ein feil.  For meir "
+"forklaring, sjå under."
 
 #: ../../txts/README:124
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
 msgstr ""
+"- kva versjon av Widelands brukte du (dvs. byggenummeret, eller viss det "
+"er<br>ei tilpassa bygging frå SVN)"
 
 #: ../../txts/README:128
 msgid "- which map you were playing"
-msgstr ""
+msgstr "- kva kart du spelte"
 
 #: ../../txts/COPYING:20
 msgid ""
@@ -72,10 +78,23 @@ msgid ""
 "having been made by running the Program). Whether that is true depends on "
 "what the Program does.<br>"
 msgstr ""
+"0 Lisensen gjeld alle program eller andre verk som har ein merknad frå "
+"kopiretthaldaren som seier det kan fordelast under denne generelle "
+"utgivingslisensen.  Programmet, under, refererer til kva slikt program eller "
+"verk som helst, og eit verk som er basert på programmet tyder anten "
+"programmet eller andre verk baserte på det under lova for kopirett: det vil "
+"seie, eit verk som inneheld programmet eller ein del av det, anten direkte "
+"eller med endringar og/eller omsett til eit anna språk. (Omsetting er "
+"inkludert utan avgrensingar i endring av kåra.)  Alle lisensen gjeld blir "
+"adressert som deg.<br>Aktivitetar anna enn kopiering, fordeling og endring "
+"er ikkje dekka av denne lisensen.  Å køyre programmet er fullt lov og "
+"resultatet av programmet blir berre dekka viss det er eit verk basert på "
+"programmet (uavhengig av å ha vore laga med å køyre programmet).  Om det er "
+"tilfellet avhenger av kva programmet gjer.<br>"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
-msgstr ""
+msgstr "1-0 Endrar verktøystorleik"
 
 #: ../../txts/COPYING:22
 msgid ""
@@ -88,6 +107,12 @@ msgid ""
 "a fee for the physical act of transferring a copy, and you may at your "
 "option offer warranty protection in exchange for a fee.<br>"
 msgstr ""
+"1 Du kan kopiera og fordela ordrette kopiar av kjeldekoda til programmet "
+"slik du får henne, i kva medium som helst, så lenge du legg ved høveleg "
+"kopirett og frådrag av garanti, held alle referansar til denne lisensen og "
+"fraveret av garanti lik, og gir andre mottakarar ein kopi av lisensen saman "
+"med programmet.<br> Du kan ta pengar for å overføre ein kopi, og du kan "
+"velje å garantere tryggleik mot gjelding.<br>"
 
 #: ../../txts/COPYING:66
 msgid ""
@@ -322,6 +347,14 @@ msgid ""
 "a version number of this License, you may choose any version ever published "
 "by the Free Software Foundation."
 msgstr ""
+"9 Free Software Foundation kan gi ut gjennomsyna og/eller nye versjonar av "
+"den generelle utgivingslisensen no og då.  Slike nye versjonar vil likna den "
+"noverande, men kan vere ulike i detaljar for nye program eller "
+"ottar.<br>Kvar versjon får sitt eigne versjonstall.  Viss programmet har ein "
+"given versjon av lisensen som gjeld det og seinare versjonar, har du valet "
+"om å følge kåra for den versjonen eller seinare versjonar utgivne av Free "
+"Software Foundation.  Viss programmet ikkje har noka versjonnummer av "
+"lisensen kan du velje kva versjon du vil utgiven av Free Software Foundation."
 
 #: ../../txts/COPYING:96
 msgid ""
@@ -339,83 +372,105 @@ msgid ""
 "Boston, MA  02111-1307  USA<br><br><br>Also add information on how to "
 "contact you by electronic and paper mail."
 msgstr ""
+"<ei linje med namn og kort skildring av programmet.><br>Kopirett (C) <år>  "
+"<forfattarnamn><br><br>Dette programmet er fri programvare, du kan fordela "
+"det og/eller endra<br>det under kåra i GNU General Public Licensesom utgiven "
+"av<br>Free Software Foundation, anten versjon 2 av lisensen, eller<br>(etter "
+"eige val) seinare versjonar.<br><br>Dette programmet er utgiven i håpet om "
+"at det er nyttig,<br>men UTAN GARANTI; sjølv utan indikasjon om garanti "
+"for<br>SALBARHEIT eller SØMMELEGHEIT TIL EI GIVEN HENSIKT.  Sjå<br>GNU "
+"General Public License for detaljar.<br><br>Du burde fått ein kopi av GNU "
+"General Public License<br>med dette programmet, viss ikkje, skriv til Free "
+"Software<br>Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-"
+"1307  USA<br><br><br>Legg ved informasjon om korleis kontakta deg med papir- "
+"eller elektronisk post."
 
 #: ../../txts/README:160
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
 msgstr ""
+"Binærfila filnamn.rec blir laga.  For å spele henne, følg dei same stega "
+"skildra over, men byt ut --record med --playback."
 
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr ""
+msgstr "Alt (Hald) Vel andre alternative verktøy mens trykka"
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
+"Alltid bygg eit skogplantar- og fiskeynglarhus sånn at du ikkje går tom for "
+"ved og mat."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr ""
+msgstr "Alltid bygg eit skogplantarhus sånn at du ikkje går tom for ved."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
+"Altid bygg eit skogvaktar- og dyrepassarhus så du ikkje går tom for ved og "
+"mat."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"Fleire spurnadar?  FAQ-delen, wiki-en og samfunnsidene våre er å finne på "
+"www.widelands.org (på engelsk)"
 
 #: ../../txts/developers:161
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlantisk"
 
 #: ../../txts/developers:151
 msgid "Barbarian"
-msgstr ""
+msgstr "Barbar"
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
+"Sørg for å senda ein geolog for å undersøka område før du bygg ein brønn "
+"eller ei gruve."
 
 #: ../../txts/README:57
 msgid "C               Toggle census"
-msgstr ""
+msgstr "C Slå folketelling på/av"
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
-msgstr ""
+msgstr "C Slår folketellinga på/av"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "Ctrl+L Last kart"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "Ctrl+S Lagra kart"
 
 #: ../../txts/developers:148
 msgid "Campaign Story"
-msgstr ""
+msgstr "Kampanjar"
 
 #: ../../txts/README:16
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Sjekk heimesida til Widelandsprosjektet:"
 
 #: ../../txts/developers:8
 msgid "Chieftain"
-msgstr ""
+msgstr "Hovding"
 
 #: ../../txts/developers:34
 msgid "Coders"
-msgstr ""
+msgstr "Kodarar"
 
 #: ../../txts/COPYING:8
 msgid ""
@@ -424,129 +479,133 @@ msgid ""
 "distribute verbatim copies of this license document, but changing it is not "
 "allowed.<br>"
 msgstr ""
+"Kopirett (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, "
+"Suite 330, Boston, MA 02111-1307 USA<br>Alle kan kopiera og fordela "
+"nøyaktige kopiar av dette lisensdokumentet, men ikkje endra det.<br>"
 
 #: ../../txts/README:148
 msgid "Creating a Session Record</p>"
-msgstr ""
+msgstr "Filmar økt</p>"
 
 #: ../../txts/README:81
 msgid "Ctrl+F10    Quit the game immediately"
-msgstr ""
+msgstr "Ctrl+F10 Avslutt spelet med ein gong"
 
 #: ../../txts/developers:176
 msgid "Czech"
-msgstr ""
+msgstr "tsjekkisk"
 
 #: ../../txts/README:95
 msgid "DELETE      Archive the current message"
-msgstr ""
+msgstr "DELETE Arkiver den gjeldande meldinga"
 
 #: ../../txts/developers:183
 msgid "Dansk"
-msgstr ""
+msgstr "Dansk"
 
 #: ../../txts/developers:1
 msgid "Development"
-msgstr ""
+msgstr "Utvikling"
 
 #: ../../txts/developers:318
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Dokumentasjon, hjelp og wiki"
 
 #: ../../txts/developers:189
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlandsk"
 
 #: ../../txts/editor_readme:25
 msgid "E        Toggles event menu"
-msgstr ""
+msgstr "E Slår hendingmenyen på/av"
 
 #: ../../txts/developers:14
 msgid "Elders"
-msgstr ""
+msgstr "Eldre"
 
 #: ../../txts/developers:157
 msgid "Empire"
-msgstr ""
+msgstr "Imperium"
 
 #: ../../txts/COPYING:82
 msgid "End of Terms and Conditions"
-msgstr ""
+msgstr "Slutt på Vilkåra"
 
 #: ../../txts/README:63
 msgid "F               Toggle Fullscreen"
-msgstr ""
+msgstr "F Gå til/frå fullskjerm"
 
 #: ../../txts/editor_readme:27
 msgid "F        Toggles fullscreen"
-msgstr ""
+msgstr "F Gå til/frå fullskjerm"
 
 #: ../../txts/README:83
 msgid "F11         Take a screenshot"
-msgstr ""
+msgstr "F11 Tek eit skjermbilete"
 
 #: ../../txts/README:79
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6 Visar feilsøkingskonsollen (berre i feilsøkeversjonar)"
 
 #: ../../txts/developers:196
 msgid "Finnish"
-msgstr ""
+msgstr "Finsk"
 
 #: ../../txts/developers:333
 msgid "Former elders"
-msgstr ""
+msgstr "Tidlegare eldre"
 
 #: ../../txts/developers:202
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
 #: ../../txts/README:93
 msgid "G           Go to location corresponding to current message"
-msgstr ""
+msgstr "G Gå til staden tilsvarande denne meldinga"
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
-msgstr ""
+msgstr "GNU generelle utgjevingslisens"
 
 #: ../../txts/COPYING:17
 msgid ""
 "GNU general public license terms and conditions for copying, distribution "
 "and modification"
 msgstr ""
+"Vilkåra frå GNU generelle utgjevingslisens for å kopiera, fordela og endra"
 
 #: ../../txts/developers:209
 msgid "Galician"
-msgstr ""
+msgstr "Galisisk"
 
 #: ../../txts/README:36
 msgid "General game control"
-msgstr ""
+msgstr "Generell spelekontroll"
 
 #: ../../txts/developers:214
 msgid "German"
-msgstr ""
+msgstr "Tysk"
 
 #: ../../txts/developers:82
 msgid "Graphicians"
-msgstr ""
+msgstr "Grafikarar"
 
 #: ../../txts/developers:18
 #: ../../txts/developers:344
 msgid "Graphics"
-msgstr ""
+msgstr "Grafikk"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
-msgstr ""
+msgstr "H Visar/skjular hovudmenyen"
 
 #: ../../txts/developers:226
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebraisk"
 
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Å halde nede Alt slår andre alternative verktøy på (viss det finst)."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -554,38 +613,41 @@ msgid ""
 "cases the complete opposite of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
+"Å halde nede Shift slår første alternative verktøy på.  Dette verktøyet er "
+"stort sett motsettinga av det vanlege verktøyet. (for eksempel sletting av "
+"ting i staden for plassering)"
 
 #: ../../txts/README:65
 msgid "Home        Center main mapview on starting location"
-msgstr ""
+msgstr "Heim Midstill hovudvisinga på kartet til startstad"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:337
 msgid "Homepage"
-msgstr ""
+msgstr "Heimeside"
 
 #: ../../txts/developers:309
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Kodarar for heimesida"
 
 #: ../../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
-msgstr ""
+msgstr "Korleis bruke desse vilkåra i dei nye programma dine"
 
 #: ../../txts/developers:231
 msgid "Hungarian"
-msgstr ""
+msgstr "Ungarsk"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr ""
+msgstr "I Aktivererar infoverktøy"
 
 #: ../../txts/COPYING:51
 msgid ""
 "If any portion of this section is held invalid or unenforceable under any "
 "particular circumstance, the balance of the section is intended to apply and "
 "the section as a whole is intended to apply in other circumstances."
-msgstr ""
+msgstr "Viss nokon del av denne bolken er ugyldig eller ikkje tvingbar under"
 
 #: ../../txts/COPYING:36
 msgid ""
@@ -595,6 +657,10 @@ msgid ""
 "even though third parties are notcompelled to copy the source along with the "
 "object code."
 msgstr ""
+"Viss fordeling av køyrbar- eller objekt-kode blir gjordt med å tilby tilgang "
+"til ein kopi frå ein given stad, tel tilsvarande tilbod om å kopiera "
+"kjeldekoda frå same staden som fordeling av kjeldekoden, sjølv om "
+"tredjeparten ikkje treng å kopiera kjeldekoden saman med objektkoden."
 
 #: ../../txts/COPYING:98
 msgid ""
