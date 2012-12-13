@@ -70,7 +70,7 @@ BaseListselect::BaseListselect
 
 	if (show_check) {
 		uint32_t pic_h;
-		m_check_picid = g_gr->get_picture(PicMod_Game,  "pics/list_selected.png");
+		m_check_picid = g_gr->imgcache().load(PicMod_Game,  "pics/list_selected.png");
 		m_max_pic_width = m_check_picid->get_w();
 		pic_h = m_check_picid->get_h();
 		if (pic_h > m_lineheight)

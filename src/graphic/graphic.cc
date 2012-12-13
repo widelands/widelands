@@ -39,6 +39,7 @@
 #include "io/streamwrite.h"
 
 #include "font_handler.h"
+#include "image_cache.h"
 #include "picture.h"
 #include "rendertarget.h"
 #include "texture.h"
@@ -70,6 +71,33 @@ uint32_t luminance_table_r[0x100];
 uint32_t luminance_table_g[0x100];
 uint32_t luminance_table_b[0x100];
 
+// Helper stuff {{{
+namespace {
+class ImageLoader : public IImageLoader {
+public:
+	ImageLoader(Graphic& gr) : gr_(gr) {}
+	virtual ~ImageLoader() {}
+
+	IPicture* load(const string& fname, bool alpha) {
+		FileRead fr;
+		SDL_Surface * sdlsurf;
+
+		//fastOpen tries to use mmap
+		fr.fastOpen(*g_fs, fname.c_str());
+
+		sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+
+		if (!sdlsurf)
+			throw wexception("%s", IMG_GetError());
+
+		return gr_.convert_sdl_surface_to_picture(sdlsurf, alpha);
+	}
+private:
+	Graphic& gr_;
+};
+}  // namespace
+// End: Helper stuff }}}
+
 /**
  * Initialize the SDL video mode.
 */
@@ -82,7 +110,8 @@ Graphic::Graphic
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(false),
-	m_roadtextures     (0)
+	m_roadtextures     (0),
+	img_cache_(create_image_cache(new ImageLoader(*this)))
 {
 	// Initialize the table used to create grayed pictures
 	for
@@ -425,98 +454,12 @@ void Graphic::refresh(bool force)
 	m_nr_update_rects = 0;
 }
 
-/**
- * Clear all cached resources from the given module.
- */
-void Graphic::flush(PicMod module)
-{
-	vector<string> eraselist;
-
-	for (pmit it = m_picturemap.begin(); it != m_picturemap.end(); ++it) {
-		it->second.modules &= ~(1 << module);
-		if (!it->second.modules)
-			eraselist.push_back(it->first);
-	}
-
-	while (!eraselist.empty()) {
-		m_picturemap.erase(eraselist.back());
-		eraselist.pop_back();
-	}
-
-	if (module == PicMod_UI) // Flush the cached Fontdatas
-		UI::g_fh->flush_cache();
-}
-
 
 /// flushes the animations in m_animations
 void Graphic::flush_animations() {
 	container_iterate_const(vector<AnimationGfx *>, m_animations, i)
 		delete *i.current;
 	m_animations.clear();
-}
-
-
-// TODO(sirver): Only the conversion is graphic specific
-IPicture* Graphic::load_image(const string& fname, bool alpha) {
-	//log("Graphic::LoadImage(\"%s\")\n", fname.c_str());
-	FileRead fr;
-	SDL_Surface * sdlsurf;
-
-	//fastOpen tries to use mmap
-	fr.fastOpen(*g_fs, fname.c_str());
-
-	sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-
-	if (!sdlsurf)
-		throw wexception("%s", IMG_GetError());
-
-	return convert_sdl_surface_to_picture(sdlsurf, alpha);
-}
-
-/**
- * Retrieves the picture with the given filename. If the picture has already
- * been loaded, the old ID is reused. The picture is placed into the module(s)
- * given by mod.
- *
- * \return NULL if the picture cannot be loaded.
-*/
-// TODO(sirver): should signal error in some way
-const IPicture* Graphic::get_picture
-	(PicMod module, const string& fname, bool alpha)
-{
-	//  Check if the picture is already loaded.
-	pmit it = m_picturemap.find(fname);
-
-	if (it == m_picturemap.end()) {
-		PictureRec rec;
-
-		try {
-			rec.picture = load_image(fname, alpha);
-			rec.modules = 0;
-		} catch (exception& e) {
-			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
-			return 0;
-		}
-
-		it = m_picturemap.insert(make_pair(fname, rec)).first;
-	}
-
-	it->second.modules |= 1 << module;
-	return it->second.picture;
-}
-
-/**
- * Add the given picture to the cache under the given name. The graphics object takes ownership
- * of the object.
- *
- * This overwrites pre-existing cache entries, if any.
- */
-void Graphic::add_picture_to_cache(PicMod module, const string& name, IPicture* pic)
-{
-	PictureRec rec;
-	rec.picture = pic;
-	rec.modules = 1 << module;
-	m_picturemap.insert(make_pair(name, rec));
 }
 
 /**
@@ -1061,13 +1004,13 @@ void Graphic::set_world(string worldname) {
 	// Load the road textures
 	m_roadtextures = new Road_Textures();
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
-	m_roadtextures->pic_road_normal = get_picture(PicMod_Game, buf, false);
+	m_roadtextures->pic_road_normal = imgcache().load(PicMod_Game, buf, false);
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
-	m_roadtextures->pic_road_busy = get_picture(PicMod_Game, buf, false);
+	m_roadtextures->pic_road_busy = imgcache().load(PicMod_Game, buf, false);
 
 	// load edge texture
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
-	m_edgetexture = get_picture(PicMod_Game, buf, false);
+	m_edgetexture = imgcache().load(PicMod_Game, buf, false);
 }
 
 /**

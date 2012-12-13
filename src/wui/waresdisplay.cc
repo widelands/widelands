@@ -234,7 +234,7 @@ void AbstractWaresDisplay::draw_ware
 
 	//  draw a background
 	const IPicture* picid =
-		g_gr->get_picture
+		g_gr->imgcache().load
 			(PicMod_Game,
 			 ware_selected(id) ?  "pics/ware_list_bg_selected.png"
 			                   :  "pics/ware_list_bg.png");
@@ -405,7 +405,7 @@ void WaresMapDisplay::draw(RenderTarget & dst)
 			if ((c = m_map->find(*j)) != m_map->end()) {
 				//  draw a background
 				const IPicture* picid =
-				g_gr->get_picture (PicMod_Game, "pics/ware_list_bg.png");
+				g_gr->imgcache().load (PicMod_Game, "pics/ware_list_bg.png");
 				uint32_t w = picid->get_w();
 				uint32_t h = picid->get_h();
 

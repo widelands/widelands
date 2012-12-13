@@ -76,23 +76,23 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	joingame
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes
 	servername
 		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png")),
 
 // List
 	clientsonline
@@ -222,12 +222,12 @@ void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<INet_Game> const 
 		const IPicture* pic;
 		if (games.at(i).connectable) {
 			if (games.at(i).build_id == build_id())
-				pic = g_gr->get_picture(PicMod_UI, "pics/continue.png");
+				pic = g_gr->imgcache().load(PicMod_UI, "pics/continue.png");
 			else {
-				pic = g_gr->get_picture(PicMod_UI, "pics/different.png");
+				pic = g_gr->imgcache().load(PicMod_UI, "pics/different.png");
 			}
 		} else {
-			pic = g_gr->get_picture(PicMod_UI, "pics/stop.png");
+			pic = g_gr->imgcache().load(PicMod_UI, "pics/stop.png");
 		}
 		// If one of the servers has the same name as the local name of the
 		// clients server, we disable the 'hostgame' button to avoid having more
@@ -277,16 +277,16 @@ void Fullscreen_Menu_Internet_Lobby::fillClientList(std::vector<INet_Client> con
 		const IPicture* pic;
 		switch (convert_clienttype(client.type)) {
 			case 0: // UNREGISTERED
-				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_red.png");
+				pic = g_gr->imgcache().load(PicMod_UI, "pics/roadb_red.png");
 				er.set_picture(0, pic);
 				break;
 			case 1: // REGISTERED
-				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_yellow.png");
+				pic = g_gr->imgcache().load(PicMod_UI, "pics/roadb_yellow.png");
 				er.set_picture(0, pic);
 				break;
 			case 2: // SUPERUSER
 			case 3: // BOT
-				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_green.png");
+				pic = g_gr->imgcache().load(PicMod_UI, "pics/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;

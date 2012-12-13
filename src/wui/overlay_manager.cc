@@ -308,7 +308,7 @@ void Overlay_Manager::load_graphics() {
 	const char * const * filename = filenames;
 
 	//  Special case for flag, which has a different formula for hotspot_y.
-	buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
+	buildhelp_info->picid = g_gr->imgcache().load(PicMod_Game, *filename);
 	buildhelp_info->hotspot = Point(buildhelp_info->picid->get_w() / 2, buildhelp_info->picid->get_h() - 1);
 
 	const Overlay_Info * const buildhelp_infos_end =
@@ -317,7 +317,7 @@ void Overlay_Manager::load_graphics() {
 		++buildhelp_info, ++filename;
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
-		buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
+		buildhelp_info->picid = g_gr->imgcache().load(PicMod_Game, *filename);
 		buildhelp_info->hotspot = Point(buildhelp_info->picid->get_w() / 2, buildhelp_info->picid->get_h() / 2);
 	}
 

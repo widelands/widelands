@@ -51,15 +51,15 @@ Editor_Tool_Change_Resources_Options_Menu
 		 get_inner_w() - hmargin() - width,
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
 		 width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_Game, "pics/scrollbar_up.png")),
 	m_change_by_decrease
 		(this, "decr_change_by",
 		 hmargin(),
 		 m_change_by_increase.get_y(),
 		 width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_Game, "pics/scrollbar_down.png")),
 	m_change_by_value
 		(this,
 		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
@@ -82,14 +82,14 @@ Editor_Tool_Change_Resources_Options_Menu
 		 m_change_by_increase.get_x(),
 		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
 		 width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_Game, "pics/scrollbar_up.png")),
 	m_set_to_decrease
 		(this, "decr_set_to",
 		 hmargin(),
 		 m_set_to_increase.get_y(), width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_Game, "pics/scrollbar_down.png")),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
@@ -129,7 +129,7 @@ Editor_Tool_Change_Resources_Options_Menu
 	//  Find the maximal width and height for the resource pictures.
 	uint32_t resource_pic_max_width = 0, resource_pic_max_height = 0;
 	for (Widelands::Resource_Index i = 0; i < nr_resources; ++i) {
-		const IPicture* picid = g_gr->get_picture(
+		const IPicture* picid = g_gr->imgcache().load(
 				PicMod_Game, world.get_resource(i)->get_editor_pic(100000).c_str());
 		resource_pic_max_width  = std::max(resource_pic_max_width,  picid->get_w());
 		resource_pic_max_height = std::max(resource_pic_max_height, picid->get_h());
@@ -161,7 +161,7 @@ Editor_Tool_Change_Resources_Options_Menu
 		m_radiogroup.add_button
 			(this,
 			 pos,
-			 g_gr->get_picture
+			 g_gr->imgcache().load
 			 	(PicMod_Game,
 			 	 world.get_resource(i)->get_editor_pic(100000).c_str()));
 	}

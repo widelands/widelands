@@ -78,9 +78,7 @@ throw (_wexception)
 					IPicture* picture = g_gr->convert_sdl_surface_to_picture(surf);
 
 					std::string picname = FileSystem::FS_Filename(pname->c_str());
-					picname = "map:" + picname;
-
-					g_gr->add_picture_to_cache(PicMod_Game, picname, picture);
+					g_gr->imgcache().insert(PicMod_Game, "map:" + picname, picture);
 
 					//  OK, the pic is now known to the game. But when the game is
 					//  saved, this data has to be regenerated.

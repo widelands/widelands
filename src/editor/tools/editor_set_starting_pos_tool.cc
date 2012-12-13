@@ -89,7 +89,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 		char picname[] = "pics/editor_player_00_starting_pos.png";
 		picname[19] += m_current_player / 10;
 		picname[20] += m_current_player % 10;
-		const IPicture* picid = g_gr->get_picture(PicMod_Game,  picname);
+		const IPicture* picid = g_gr->imgcache().load(PicMod_Game,  picname);
 
 		//  check if field is valid
 		if

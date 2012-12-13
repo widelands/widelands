@@ -67,7 +67,7 @@ void ProgressWindow::draw_background
 		// (Re-)Load background graphics
 		// Note that the old pic is freed automatically
 		const IPicture* background_original =
-			g_gr->get_picture(PicMod_Menu, m_background.c_str());
+			g_gr->imgcache().load(PicMod_Menu, m_background.c_str());
 
 		const IPicture* background_resized  =
 			g_gr->get_resized_picture(background_original, xres, yres);

@@ -36,7 +36,7 @@ class SDLTTF_FontLoaderFromFilesystem : public IFontLoader {
 public:
 	SDLTTF_FontLoaderFromFilesystem(FileSystem* fs);
 	virtual ~SDLTTF_FontLoaderFromFilesystem();
-	virtual IFont * load(string name, int ptsize);
+	virtual IFont * load(const string& name, int ptsize);
 
 private:
 	FileSystem* fs_;
@@ -52,7 +52,7 @@ SDLTTF_FontLoaderFromFilesystem::~SDLTTF_FontLoaderFromFilesystem() {
 	// TTF_Quit();
 }
 
-IFont* SDLTTF_FontLoaderFromFilesystem::load(string face, int ptsize) {
+IFont* SDLTTF_FontLoaderFromFilesystem::load(const string& face, int ptsize) {
 	std::string filename = "fonts/";
 	filename += face;
 
@@ -70,7 +70,7 @@ IFont* SDLTTF_FontLoaderFromFilesystem::load(string face, int ptsize) {
 	if(!font)
 		throw BadFont((format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError()).str());
 
-	return new SDLTTF_Font(font);
+	return new SDLTTF_Font(font, face, ptsize);
 }
 
 IFontLoader * ttf_fontloader_from_filesystem(FileSystem* fs) {

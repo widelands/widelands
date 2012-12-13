@@ -65,17 +65,17 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	m_checkboxes.resize(nr_terrains);
 
 	const IPicture* green =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_green.png");
 	const IPicture* water =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_water.png");
 	const IPicture* mountain =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png");
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_mountain.png");
 	const IPicture* dead =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png");
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_dead.png");
 	const IPicture* unpassable =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png");
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_unpassable.png");
 	const IPicture* dry =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_dry.png");
 
 	static const int small_pich = 20;
 	static const int small_picw = 20;
@@ -95,7 +95,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			}
 
 			IBlitableSurface* surf = g_gr->create_surface(64, 64);
-			const IPicture* tex = g_gr->get_picture(PicMod_Game,
+			const IPicture* tex = g_gr->imgcache().load(PicMod_Game,
 					g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 						->get_texture_picture());
 			surf->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));

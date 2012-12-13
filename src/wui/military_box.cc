@@ -64,7 +64,7 @@ UI::Slider & MilitaryBox::add_slider
 			 0, 0,
 			 width, height,
 			 min, max, initial,
-			 g_gr->get_picture(PicMod_Game, picname),
+			 g_gr->imgcache().load(PicMod_Game, picname),
 			 hint);
 	parent.add(&result, UI::Box::AlignTop);
 	return result;
@@ -94,7 +94,7 @@ UI::Button & MilitaryBox::add_button
 		new UI::Button
 			(&parent, name,
 			 8, 8, 26, 26,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+			 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 			 text,
 			 tooltip_text);
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));

@@ -43,15 +43,15 @@ Editor_Player_Menu::Editor_Player_Menu
 	m_add_player
 		(this, "add_player",
 		 get_inner_w() - 5 - 20, 5, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/scrollbar_up.png"),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
 		 5, 5, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/scrollbar_down.png"),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())
 {
@@ -140,7 +140,7 @@ void Editor_Player_Menu::update() {
 			m_plr_names[p - 1] =
 				new UI::EditBox
 					(this, posx, posy, 140, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"));
+					 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"));
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&Editor_Player_Menu::name_changed, this, p - 1));
 			posx += 140 + spacing;
@@ -152,7 +152,7 @@ void Editor_Player_Menu::update() {
 				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+					 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 					 std::string());
 			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
 				(boost::bind(&Editor_Player_Menu::player_tribe_clicked, boost::ref(*this), p - 1));
@@ -176,7 +176,7 @@ void Editor_Player_Menu::update() {
 				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+					 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 					 NULL,
 					 std::string());
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
@@ -186,7 +186,7 @@ void Editor_Player_Menu::update() {
 		char text[] = "pics/fsel_editor_set_player_00_pos.png";
 		text[28] += p / 10;
 		text[29] += p % 10;
-		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->get_picture(PicMod_Game, text));
+		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->imgcache().load(PicMod_Game, text));
 		posy += size + spacing;
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
@@ -230,7 +230,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			picsname[19] += old_nr_players / 10;
 			picsname[20] += old_nr_players % 10;
 			map.overlay_manager().remove_overlay
-				(sp, g_gr->get_picture(PicMod_Game, picsname));
+				(sp, g_gr->imgcache().load(PicMod_Game, picsname));
 		}
 	}
 	map.set_nrplayers(nr_players);
@@ -431,7 +431,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 		picsname += static_cast<char>((n % 10) + 0x30);
 		picsname += "_starting_pos.png";
 		overlay_manager.remove_overlay
-			(start_pos, g_gr->get_picture(PicMod_Game,  picsname));
+			(start_pos, g_gr->imgcache().load(PicMod_Game,  picsname));
 	}
 
 	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);

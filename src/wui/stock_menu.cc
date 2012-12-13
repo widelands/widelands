@@ -42,30 +42,30 @@ m_player(plr)
 {
 	UI::Tab_Panel * tabs =
 		 new UI::Tab_Panel
-			 (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+			 (this, 0, 0, g_gr->imgcache().load(PicMod_UI, "pics/but1.png"));
 	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
 	tabs->add
-		("total_wares", g_gr->get_picture(PicMod_UI, pic_tab_wares),
+		("total_wares", g_gr->imgcache().load(PicMod_UI, pic_tab_wares),
 		 m_all_wares, _("Wares (total)"));
 
 	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add
-		("workers_total", g_gr->get_picture(PicMod_UI, pic_tab_workers),
+		("workers_total", g_gr->imgcache().load(PicMod_UI, pic_tab_workers),
 		 m_all_workers, _("Workers (total)"));
 
 	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
 	tabs->add
 		("wares_in_warehouses",
-		 g_gr->get_picture (PicMod_UI, pic_tab_wares_warehouse),
+		 g_gr->imgcache().load (PicMod_UI, pic_tab_wares_warehouse),
 		 m_warehouse_wares, _("Wares in warehouses")
 	);
 
 	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add
 		("workers_in_warehouses",
-		 g_gr->get_picture(PicMod_UI, pic_tab_workers_warehouse),
+		 g_gr->imgcache().load(PicMod_UI, pic_tab_workers_warehouse),
 		 m_warehouse_workers, _("Workers in warehouses")
 	);
 }

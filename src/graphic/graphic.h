@@ -28,6 +28,7 @@
 
 #include "animation_gfx.h"
 #include "igraphic.h"
+#include "image_cache.h"
 #include "rect.h"
 #include "surface.h"
 
@@ -114,15 +115,10 @@ struct Graphic : public IGraphic {
 	bool need_update() const;
 	void refresh(bool force = true);
 
+	ImageCache& imgcache() const {return *img_cache_.get();}
 	void flush_animations();
 
-	// TODO(sirver): these functions should go into a class of its own
-	virtual IPicture* load_image(const std::string&, bool alpha = false);
-	void flush(PicMod module);
-	virtual const IPicture* get_picture(PicMod, const std::string&, bool alpha = true)
-		__attribute__ ((pure));
-	virtual void add_picture_to_cache(PicMod, const std::string&, IPicture* );
-
+	// TODO(sirver): Only one of these is relly needed
 	void save_png(const IPicture* , StreamWrite *) const;
 	void save_png(Surface& surf, StreamWrite *) const;
 
@@ -188,6 +184,8 @@ protected:
 	bool m_update_fullscreen;
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
+	// The cache holding the images.
+	boost::scoped_ptr<ImageCache> img_cache_;
 
 	Road_Textures * m_roadtextures;
 	const IPicture* m_edgetexture;

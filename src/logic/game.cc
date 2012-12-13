@@ -276,7 +276,7 @@ void Game::init_newgame
 	(UI::ProgressWindow * loaderUI, GameSettings const & settings)
 {
 	if (loaderUI) {
-		g_gr->flush(PicMod_Menu);
+		g_gr->imgcache().flush(PicMod_Menu);
 		loaderUI->step(_("Preloading map"));
 	}
 
@@ -352,7 +352,7 @@ void Game::init_savegame
 	(UI::ProgressWindow * loaderUI, GameSettings const & settings)
 {
 	if (loaderUI) {
-		g_gr->flush(PicMod_Menu);
+		g_gr->imgcache().flush(PicMod_Menu);
 		loaderUI->step(_("Preloading map"));
 	}
 
@@ -577,7 +577,7 @@ bool Game::run
 		delete get_ibase();
 		set_ibase(0);
 
-		g_gr->flush(PicMod_Game);
+		g_gr->imgcache().flush(PicMod_Game);
 		g_anim.flush();
 		g_gr->flush_animations();
 

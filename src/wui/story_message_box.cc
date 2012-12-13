@@ -65,7 +65,7 @@ Story_Message_Box::Story_Message_Box
 	UI::Button * okbtn = new UI::Button
 		(this, "ok",
 		 posx, posy, but_width, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 		 button_text);
 	okbtn->sigclicked.connect(boost::bind(&Story_Message_Box::clicked_ok, boost::ref(*this)));
 		posx += but_width;

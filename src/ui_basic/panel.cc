@@ -137,8 +137,8 @@ int32_t Panel::run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->get_picture(PicMod_UI,  "pics/cursor.png");
-	s_default_cursor_click = g_gr->get_picture(PicMod_UI,  "pics/cursor_click.png");
+	s_default_cursor = g_gr->imgcache().load(PicMod_UI,  "pics/cursor.png");
+	s_default_cursor_click = g_gr->imgcache().load(PicMod_UI,  "pics/cursor_click.png");
 
 	// Loop
 	_running = true;

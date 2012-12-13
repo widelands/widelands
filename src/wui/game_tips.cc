@@ -207,7 +207,7 @@ void GameTips::show_tip(int32_t index) {
 
 	// try to load a background
 	const IPicture* pic_background =
-		g_gr->get_picture(PicMod_Menu, m_background_picture.c_str());
+		g_gr->imgcache().load(PicMod_Menu, m_background_picture.c_str());
 	if (pic_background) {
 		uint32_t w = pic_background->get_w();
 		uint32_t h = pic_background->get_h();

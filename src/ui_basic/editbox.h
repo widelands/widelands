@@ -41,7 +41,7 @@ struct EditBox : public Panel {
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const IPicture* background =
-		 	g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 	g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 Align align = Align_Center);
 	virtual ~EditBox();
 
