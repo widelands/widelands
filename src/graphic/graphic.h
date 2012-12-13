@@ -184,6 +184,8 @@ protected:
 	bool m_update_fullscreen;
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
+	/// The class that gets images from disk.
+	boost::scoped_ptr<IImageLoader> img_loader_;
 	// The cache holding the images.
 	boost::scoped_ptr<ImageCache> img_cache_;
 

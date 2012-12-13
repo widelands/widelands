@@ -26,12 +26,14 @@
 
 #include "picture.h"
 
+#include "image_loader.h"
 #include "image_cache.h"
 
 using namespace std;
 
 class ImageCacheImpl : public ImageCache {
 public:
+	// Ownership of loader is not taken.
 	ImageCacheImpl(IImageLoader* loader) : img_loader_(loader) {}
 	~ImageCacheImpl();
 
@@ -54,7 +56,7 @@ private:
 	/// hash of cached filename/picture pairs
 	PictureMap m_picturemap;
 
-	boost::scoped_ptr<IImageLoader> img_loader_;
+	IImageLoader* img_loader_;
 };
 
 ImageCacheImpl::~ImageCacheImpl() {

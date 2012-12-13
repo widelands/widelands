@@ -125,7 +125,8 @@ void ThinSDLSurface::fill_rect(const Rect& rc, RGBAColor clr) {
 class ThinGraphic : boost::noncopyable, virtual public IGraphic {
 public:
 	ThinGraphic() :
-		img_cache_(create_image_cache(new ImageLoader())) {}
+		img_loader_(new ImageLoader()),
+		img_cache_(create_image_cache(img_loader_)) {}
 	virtual ~ThinGraphic() {}
 
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface* surf, bool alpha = false) {
@@ -139,6 +140,7 @@ public:
 
 private:
 	boost::scoped_ptr<ImageCache> img_cache_;
+	boost::scoped_ptr<ImageLoader> img_loader_;
 };
 
 

@@ -39,7 +39,7 @@
 #include "io/streamwrite.h"
 
 #include "font_handler.h"
-#include "image_cache.h"
+#include "image_loader.h"
 #include "picture.h"
 #include "rendertarget.h"
 #include "texture.h"
@@ -78,7 +78,7 @@ public:
 	ImageLoader(Graphic& gr) : gr_(gr) {}
 	virtual ~ImageLoader() {}
 
-	IPicture* load(const string& fname, bool alpha) {
+	IPicture* load(const string& fname, bool alpha) const {
 		FileRead fr;
 		SDL_Surface * sdlsurf;
 
@@ -111,7 +111,8 @@ Graphic::Graphic
 	m_nr_update_rects  (0),
 	m_update_fullscreen(false),
 	m_roadtextures     (0),
-	img_cache_(create_image_cache(new ImageLoader(*this)))
+	img_loader_(new ImageLoader(*this)),
+	img_cache_(create_image_cache(img_loader_.get()))
 {
 	// Initialize the table used to create grayed pictures
 	for
@@ -897,7 +898,8 @@ void Graphic::ensure_animation_loaded(uint32_t anim) {
 	if (!m_animations.at(anim - 1))
 	{
 	  //log("Loading animation %i\n", anim);
-	  m_animations.at(anim - 1) = new AnimationGfx(g_anim.get_animation(anim));
+	  m_animations.at(anim - 1) = new AnimationGfx(
+			  *img_loader_.get(), g_anim.get_animation(anim));
 	}
 }
 

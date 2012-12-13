@@ -22,6 +22,7 @@
 #include "io/streamwrite.h"
 
 #include "graphic/graphic.h"
+#include "graphic/image_loader.h"
 #include "graphic/picture.h"
 
 #include "log.h"
@@ -46,7 +47,7 @@ Load the animation
 */
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
-AnimationGfx::AnimationGfx(AnimationData const * const data) :
+AnimationGfx::AnimationGfx(const IImageLoader& il, AnimationData const * const data) :
 	m_hotspot(data->hotspot)
 {
 	m_hasplrclrs = data->hasplrclrs;
@@ -98,7 +99,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					IPicture* pic = g_gr->load_image(filename, true);
+					IPicture* pic = il.load(filename, true);
 					if (width == 0) { //  This is the first frame.
 						width  = pic->get_w();
 						height = pic->get_h();
@@ -178,7 +179,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						IPicture* picture = g_gr->load_image(filename, true);
+						IPicture* picture = il.load(filename, true);
 						if (width != picture->get_w() or height != picture->get_h())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "

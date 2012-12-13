@@ -25,6 +25,7 @@
 #include <boost/utility.hpp>
 
 class IPicture;
+class IImageLoader;
 
 /**
  * Picture caches (modules).
@@ -42,16 +43,6 @@ enum PicMod {
 	// Must be last
 	PicMod_Last
 };
-
-/// This only knows how to load an image. It is the only thing that is
-//implementation dependant in the ImageCache below.
-class IImageLoader {
-public:
-	virtual ~IImageLoader() {}
-
-	virtual IPicture* load(const std::string& fn, bool alpha) = 0;
-};
-
 
 // This class can load and cache images, so that they are already available
 // when requested the next time. When another part of the program generates a

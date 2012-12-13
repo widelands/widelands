@@ -20,6 +20,7 @@
 #ifndef ANIMATION_GFX_H
 #define ANIMATION_GFX_H
 
+class IImageLoader;
 class IPicture;
 
 #include "animation.h"
@@ -27,7 +28,7 @@ class IPicture;
 #include "rgbcolor.h"
 
 struct AnimationGfx { /// The graphics belonging to an animation.
-	AnimationGfx(AnimationData const * data);
+	AnimationGfx(const IImageLoader&, AnimationData const * data);
 	~AnimationGfx();
 
 	const Point get_hotspot() const throw () {return m_hotspot;}
