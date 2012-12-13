@@ -27,6 +27,7 @@
 #include <boost/utility.hpp>
 
 #include "graphic/image_cache.h"
+#include "graphic/image_loader.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/sdl_helper.h"
 #include "upcast.h"
@@ -43,7 +44,7 @@ class ImageLoader : public IImageLoader {
 public:
 	virtual ~ImageLoader() {}
 
-	virtual IPicture* load(const string& s, bool alpha) {
+	virtual IPicture* load(const string& s, bool alpha) const {
 		unsigned w, h;
 		unsigned char * image;
 
@@ -126,7 +127,7 @@ class ThinGraphic : boost::noncopyable, virtual public IGraphic {
 public:
 	ThinGraphic() :
 		img_loader_(new ImageLoader()),
-		img_cache_(create_image_cache(img_loader_)) {}
+		img_cache_(create_image_cache(img_loader_.get())) {}
 	virtual ~ThinGraphic() {}
 
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface* surf, bool alpha = false) {

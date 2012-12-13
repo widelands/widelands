@@ -87,7 +87,8 @@ public:
 
 	// Render the given string in the given width. Restricts the allowed tags to
 	// the ones in TagSet. If an IRefMap pointer is given, it will be filled with
-	// clickable hyperlinks, the user must delete the object himself. Never delete the return value.
+	// clickable hyperlinks, the user must delete the object himself. The returned image is cached,
+	// therefor never delete the return value.
 	virtual const IPicture* render(const std::string&, uint32_t, IRefMap ** = 0, const TagSet & = TagSet()) = 0;
 };
 

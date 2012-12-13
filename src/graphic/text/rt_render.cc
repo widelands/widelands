@@ -17,6 +17,7 @@
  *
  */
 
+#include <log.h> // TODO(sirver): remove
 // TODO(sirver): Read through this file again. There are a lot of stray comments which are not longer needed
 // TODO(sirver): seems like everything except for rich text rendering is working now
 #include <queue>
@@ -916,8 +917,17 @@ Renderer::~Renderer() {
 }
 
 const IPicture* Renderer::render(const string& text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
-	ITag * rt = m_p->parse(text, allowed_tags);
+	SimpleMD5Checksum checksum;
+	checksum.Data(text.c_str(), text.size());
+	checksum.Data(&width, sizeof(width));
+	checksum.FinishChecksum();
+	const string cs = checksum.GetChecksum().str();
+	const IPicture* rv = gr_.imgcache().get(PicMod_RichText, cs);
+	if (rv) {
+		return rv;
+	}
 
+	ITag * rt = m_p->parse(text, allowed_tags);
 	NodeStyle default_fs = {
 		"DejaVuSerif.ttf", 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM
@@ -934,12 +944,12 @@ const IPicture* Renderer::render(const string& text, uint32_t width, IRefMap ** 
 	assert(nodes.size() == 1);
 	if (pprm)
 		*pprm = new RefMap(nodes[0]->get_references());
-	const IPicture* rv = nodes[0]->render(gr_);
+	rv = nodes[0]->render(gr_);
 
 	delete nodes[0];
 	delete rt;
 
-	return rv;
+	return gr_.imgcache().insert(PicMod_RichText, cs, rv);
 }
 
 IRenderer * setup_renderer(IGraphic& gr, IFontLoader * fl) {

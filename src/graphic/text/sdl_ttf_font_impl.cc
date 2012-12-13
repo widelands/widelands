@@ -17,6 +17,8 @@
  *
  */
 
+#include "log.h" // TODO(sirver): remove
+
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
@@ -68,7 +70,7 @@ const IPicture* SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 	checksum.FinishChecksum();
 	const string cs = checksum.GetChecksum().str();
 
-	const IPicture* rv = gr.imgcache().load(PicMod_Text, cs);
+	const IPicture* rv = gr.imgcache().get(PicMod_Text, cs);
 	if (rv) return rv;
 
 	m_set_style(style);

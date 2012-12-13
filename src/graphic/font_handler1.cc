@@ -72,7 +72,6 @@ Font_Handler1::~Font_Handler1() {
 void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::string & text, uint32_t w, Align align) {
 	log("text: %s\n", text.c_str());
 	const IPicture* p = 0;
-	// TODO(sirver): ownage is not clear
 	try {
 		p = m_renderer->render(text, w);
 	} catch (RT::Exception & e) {
