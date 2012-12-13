@@ -579,12 +579,12 @@ IFont & FontCache::get_font(NodeStyle & ns) {
 
 
 class TagHandler;
-TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr);
+TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, ImageCache& img_cache);
 
 class TagHandler {
 public:
-	TagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
-		m_tag(tag), m_fc(fc), m_ns(ns), gr_(gr) {}
+	TagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache) :
+		m_tag(tag), m_fc(fc), m_ns(ns), img_cache_(img_cache) {}
 	virtual ~TagHandler() {};
 
 	virtual void enter() {};
@@ -597,7 +597,7 @@ protected:
 	ITag & m_tag;
 	FontCache & m_fc;
 	NodeStyle m_ns;
-	IGraphic & gr_;
+	ImageCache& img_cache_;
 };
 
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*> & nodes, NodeStyle & ns) {
@@ -618,7 +618,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*> & node
 void TagHandler::emit(vector<RenderNode*> & nodes) {
 	foreach(Child * c, m_tag.childs()) {
 		if (c->tag) {
-			TagHandler * th = create_taghandler(*c->tag, m_fc, m_ns, gr_);
+			TagHandler * th = create_taghandler(*c->tag, m_fc, m_ns, img_cache_);
 			th->enter();
 			th->emit(nodes);
 			delete th;
@@ -629,7 +629,7 @@ void TagHandler::emit(vector<RenderNode*> & nodes) {
 
 class FontTagHandler : public TagHandler {
 public:
-	FontTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) : TagHandler(tag, fc, ns, gr) {}
+	FontTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache) : TagHandler(tag, fc, ns, img_cache) {}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
@@ -646,8 +646,8 @@ public:
 
 class PTagHandler : public TagHandler {
 public:
-	PTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr)
-		: TagHandler(tag, fc, ns, gr), m_indent(0) {
+	PTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache)
+		: TagHandler(tag, fc, ns, img_cache), m_indent(0) {
 	}
 
 	void enter() {
@@ -683,13 +683,13 @@ private:
 
 class ImgTagHandler : public TagHandler {
 public:
-	ImgTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
-		TagHandler(tag, fc, ns, gr) {
+	ImgTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache) :
+		TagHandler(tag, fc, ns, img_cache) {
 	}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
-		m_rn = new ImgRenderNode(m_ns, gr_.imgcache().load(PicMod_RichText, a["src"].get_string(), true));
+		m_rn = new ImgRenderNode(m_ns, img_cache_.load(PicMod_RichText, a["src"].get_string(), true));
 	}
 	void emit(vector<RenderNode*> & nodes) {
 		nodes.push_back(m_rn);
@@ -701,8 +701,8 @@ private:
 
 class VspaceTagHandler : public TagHandler {
 public:
-	VspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
-		TagHandler(tag, fc, ns, gr), m_space(0) {}
+	VspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache) :
+		TagHandler(tag, fc, ns, img_cache), m_space(0) {}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
@@ -720,8 +720,8 @@ private:
 
 class HspaceTagHandler : public TagHandler {
 public:
-	HspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
-		TagHandler(tag, fc, ns, gr), m_bg(NULL), m_space(0) {}
+	HspaceTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache) :
+		TagHandler(tag, fc, ns, img_cache), m_bg(NULL), m_space(0) {}
 
 	void enter() {
 		const IAttrMap & a = m_tag.attrs();
@@ -734,7 +734,7 @@ public:
 		if (a.has("fill")) {
 			m_fill_text = a["fill"].get_string();
 			try {
-				m_bg = gr_.imgcache().load(PicMod_RichText, m_fill_text, true);
+				m_bg = img_cache_.load(PicMod_RichText, m_fill_text, true);
 				m_fill_text = "";
 			} catch(BadImage &) {
 			}
@@ -770,8 +770,8 @@ private:
 
 class BrTagHandler : public TagHandler {
 public:
-	BrTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr) :
-		TagHandler(tag, fc, ns, gr) {
+	BrTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache) :
+		TagHandler(tag, fc, ns, img_cache) {
 	}
 
 	void emit(vector<RenderNode*> & nodes) {
@@ -782,8 +782,8 @@ public:
 
 class SubTagHandler : public TagHandler {
 public:
-	SubTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & gr, uint32_t gw = 0)
-		: TagHandler(tag, fc, ns, gr), m_w(gw), m_rn(new SubTagRenderNode(ns)) {
+	SubTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache, uint32_t gw = 0)
+		: TagHandler(tag, fc, ns, img_cache), m_w(gw), m_rn(new SubTagRenderNode(ns)) {
 	}
 
 	void enter() {
@@ -840,7 +840,7 @@ public:
 				clr = a["background"].get_color();
 				m_rn->set_background(clr);
 			} catch (InvalidColor &) {
-				m_rn->set_background(gr_.imgcache().load(PicMod_RichText, a["background"].get_string(), false));
+				m_rn->set_background(img_cache_.load(PicMod_RichText, a["background"].get_string(), false));
 			}
 		}
 		if (a.has("float")) {
@@ -863,8 +863,8 @@ private:
 
 class RTTagHandler : public SubTagHandler {
 public:
-	RTTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, IGraphic & ggr, uint32_t w) :
-		SubTagHandler(tag, fc, ns, ggr, w) {
+	RTTagHandler(ITag & tag, FontCache & fc, NodeStyle ns, ImageCache& img_cache, uint32_t w) :
+		SubTagHandler(tag, fc, ns, img_cache, w) {
 	}
 
 	virtual void handle_unique_attributes() {
@@ -874,12 +874,12 @@ public:
 };
 
 template<typename T> TagHandler * create_taghandler
-	(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr)
+	(ITag & tag, FontCache & fc, NodeStyle & ns, ImageCache& gr)
 {
 	return new T(tag, fc, ns, gr);
 }
-typedef map<const string, TagHandler*(*)(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr)> TagHandlerMap;
-TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IGraphic & gr) {
+typedef map<const string, TagHandler*(*)(ITag & tag, FontCache & fc, NodeStyle & ns, ImageCache& img_cache)> TagHandlerMap;
+TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, ImageCache & img_cache) {
 	static TagHandlerMap map;
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
@@ -893,7 +893,7 @@ TagHandler * create_taghandler(ITag & tag, FontCache & fc, NodeStyle & ns, IGrap
 	TagHandlerMap::iterator i = map.find(tag.name());
 	if (i == map.end())
 		throw RenderError((format("No Tag handler for %s. This is a bug, please submit a report.") % tag.name()).str());
-	return i->second(tag, fc, ns, gr);
+	return i->second(tag, fc, ns, img_cache);
 }
 
 class Renderer : public IRenderer {
@@ -927,6 +927,7 @@ const IPicture* Renderer::render(const string& text, uint32_t width, IRefMap ** 
 		return rv;
 	}
 
+	// TODO: generating of the Imap must move in another function
 	ITag * rt = m_p->parse(text, allowed_tags);
 	NodeStyle default_fs = {
 		"DejaVuSerif.ttf", 16,
@@ -936,7 +937,7 @@ const IPicture* Renderer::render(const string& text, uint32_t width, IRefMap ** 
 	if (!width)
 		width = INFINITE_WIDTH;
 
-	RTTagHandler rtrn(*rt, m_fc, default_fs, gr_, width);
+	RTTagHandler rtrn(*rt, m_fc, default_fs, gr_.imgcache(), width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);
