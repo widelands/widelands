@@ -116,17 +116,15 @@ int main(int argc, char *argv[])
 	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
 
 	try {
-		// TODO(sirver): currently leaks memory.
-		const ThinSDLSurface& surf = *static_cast<const ThinSDLSurface*>(renderer->render(txt, w, 0, allowed_tags));
+		const ThinSDLSurface& surf = *static_cast<const ThinSDLSurface*>(renderer->render(txt, w, allowed_tags));
 		surf.lock();
 		save_png(outname, surf);
 		surf.unlock();
 	} catch(RT::Exception & e) {
 		cout << e.what() << endl;
 	}
-
 	delete renderer;
-	delete thin_graphic; // Will free all images
+	delete thin_graphic;  // Will free all images
 
 	SDL_Quit();
 

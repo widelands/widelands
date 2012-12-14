@@ -56,7 +56,7 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32
 	*gw = w; *gh = h;
 }
 
-const IPicture* SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
+const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
 	SimpleMD5Checksum checksum;
 	checksum.Data(font_name_.c_str(), font_name_.size());
 	checksum.Data(&ptsize_, sizeof(ptsize_));
@@ -69,7 +69,7 @@ const IPicture* SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 	const string cs = checksum.GetChecksum().str();
 
 	const IPicture* rv = gr.imgcache().get(PicMod_Text, cs);
-	if (rv) return rv;
+	if (rv) return *rv;
 
 	m_set_style(style);
 
@@ -120,7 +120,7 @@ const IPicture* SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return gr.imgcache().insert(PicMod_Text, cs,
+	return *gr.imgcache().insert(PicMod_Text, cs,
 			gr.convert_sdl_surface_to_picture(text_surface, true));
 }
 

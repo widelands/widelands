@@ -68,8 +68,7 @@ def main():
         return testfunc
 
     for t in tests:
-        for i in range(5): # TODO(sirver): remove?
-            suite.addTest(unittest.FunctionTestCase(_make_test(t)))
+        suite.addTest(unittest.FunctionTestCase(_make_test(t)))
     unittest.TextTestRunner(verbosity=2 if args.verbose else 1).run(suite)
 
     if args.profile:

@@ -27,7 +27,8 @@ cdef extern from "rt_render.h" namespace "RT":
         cppstr query(int16_t, int16_t)
     ctypedef IPicture CIPicture "const IPicture"
     cdef cppclass IRenderer:
-        CIPicture* render(char*, uint32_t, IRefMap **, cppset[cppstr] &) except +
+        CIPicture* render(char*, uint32_t, cppset[cppstr] &) except +
+        IRefMap* make_reference_map(char*, uint32_t, cppset[cppstr] &) except +
 
     struct IFontLoader:
         pass
@@ -66,9 +67,9 @@ cdef class Renderer(object):
         for tag in allowed_tags:
             allowed_set.insert(cppstr(<char*>(tag)))
 
-        # TODO(sirver): delete rv, as it leaks memory
-        cdef CIPicture* rv = self._renderer.render(text, width, &rm, allowed_set)
+        cdef CIPicture* rv = self._renderer.render(text, width, allowed_set)
         cdef CThinSDLSurface* surf = <CThinSDLSurface*>(rv)
+        rm = self._renderer.make_reference_map(text, width, allowed_set)
 
         a = np.empty((surf.get_h(), surf.get_w(), 4), np.uint8)
         cdef uint32_t x, y, i, clr
