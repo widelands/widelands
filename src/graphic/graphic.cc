@@ -18,6 +18,7 @@
  */
 
 // TODO(sirver): screenshots in beiden impl testen. Scheinen kaputt zu sein.
+// TODO(sirver): fix style.
 #include "graphic.h"
 
 #include "build_info.h"

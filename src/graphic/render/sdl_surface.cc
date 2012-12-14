@@ -137,7 +137,6 @@ void SDLSurface::set_subwin(const Rect& r) {
 	m_h = r.h;
 }
 
-// TODO(sirver): are they used/usefull?
 void SDLSurface::unset_subwin() {
 	m_offsx = 0;
 	m_offsy = 0;

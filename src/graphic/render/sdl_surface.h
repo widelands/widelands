@@ -67,7 +67,6 @@ public:
 	void set_sdl_surface(SDL_Surface & surface);
 	SDL_Surface * get_sdl_surface() const {return m_surface;}
 
-	// TODO(sirver): what is that? same as rendertarget?
 	void set_subwin(const Rect& r);
 	void unset_subwin();
 

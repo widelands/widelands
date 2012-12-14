@@ -32,7 +32,6 @@
 #include "log.h"
 #include "upcast.h"
 
-// TODO(sirver): check if this class has any valid use
 using Widelands::BaseImmovable;
 using Widelands::Coords;
 using Widelands::FCoords;

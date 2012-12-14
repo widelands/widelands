@@ -17,11 +17,6 @@
  *
  */
 
-// TODO(sirver): ü
-#include <iostream>
-using namespace std;
-#define ALIVE() cout << "Alive in " << __FILE__ << ":" << __LINE__ << endl;
-
 #include <string>
 #include <map>
 
@@ -100,43 +95,26 @@ ThinSDLSurface::~ThinSDLSurface() {
 
 void ThinSDLSurface::blit(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
-	ALIVE();
 	upcast(const ThinSDLSurface, sdlsurf, src);
-	ALIVE();
 	assert(sdlsurf);
 	assert(sdlsurf->surf_);
-	ALIVE();
 	assert(this);
-	ALIVE();
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
-	ALIVE();
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
-	ALIVE();
 	bool alpha;
-	ALIVE();
 	uint8_t alphaval;
-	ALIVE();
 	if (cm == CM_Solid || cm == CM_Copy) {
-	ALIVE();
 		alpha = sdlsurf->surf_->flags & SDL_SRCALPHA;
 		alphaval = sdlsurf->surf_->format->alpha;
-	ALIVE();
 		SDL_SetAlpha(sdlsurf->surf_, 0, 0);
-	ALIVE();
 	}
 
-	ALIVE();
 	SDL_BlitSurface(sdlsurf->surf_, &srcrect, surf_, &dstrect);
-	ALIVE();
 
-	ALIVE();
 	if (cm == CM_Solid || cm == CM_Copy) {
-	ALIVE();
 		SDL_SetAlpha(sdlsurf->surf_, alpha?SDL_SRCALPHA:0, alphaval);
-	ALIVE();
 	}
-	ALIVE();
 }
 
 void ThinSDLSurface::fill_rect(const Rect& rc, RGBAColor clr) {
