@@ -114,7 +114,7 @@ template <> struct Table<void *> : public Panel {
 		Entry_Record(void * entry);
 
 		void set_picture
-			(uint8_t col, const IPicture* picid, std::string const & = std::string());
+			(uint8_t col, const IPicture* pic, std::string const & = std::string());
 		void set_string(uint8_t col, std::string const &);
 		const IPicture* get_picture(uint8_t col) const;
 		std::string const & get_string(uint8_t col) const;

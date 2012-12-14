@@ -87,7 +87,7 @@ Icon_Grid::Icon_Grid
  * Returns the index of the newly added icon.
 */
 int32_t Icon_Grid::add
-	(std::string const & name, const IPicture* picid,
+	(std::string const & name, const IPicture* pic,
 	 void * const data, std::string const & descr)
 {
 	Item it;
@@ -117,7 +117,7 @@ int32_t Icon_Grid::add
 	UI::Button * btn = new IconGridButton
 		(*this, name,
 		 x, y, m_cell_width, m_cell_height,
-		 NULL, picid,
+		 NULL, pic,
 		 idx, m_ta, descr);
 	btn->sigclicked.connect(boost::bind(&Icon_Grid::clicked_button, this, idx));
 

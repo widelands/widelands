@@ -45,7 +45,10 @@ public:
 	/// @note this is slow in SDL mode. Use with care
 	virtual void brighten_rect(const Rect&, int32_t factor) = 0;
 
-	// TODO(sirver): Below: pixelaccess.
+	/// The functions below are for direct pixel access. This should be used
+	/// only very sparingly as / it is potentially expensive (especially for
+	/// OpenGL). At the moment, only the code inside graphic / is actually using
+	/// this.
 	enum LockMode {
 		/**
 		 * Normal mode preserves pre-existing pixel data so that it can

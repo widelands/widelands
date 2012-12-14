@@ -17,7 +17,6 @@
  *
  */
 
-// TODO(sirver): picid -> pic everywhere
 // TODO(sirver): screenshots in beiden impl testen. Scheinen kaputt zu sein.
 #include "graphic.h"
 

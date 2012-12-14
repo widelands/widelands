@@ -123,9 +123,9 @@ struct Graphic : public IGraphic {
 
 	Surface* create_surface(int32_t w, int32_t h, bool alpha = false);
 
-	const IPicture* create_grayed_out_pic(const IPicture* picid);
+	const IPicture* create_grayed_out_pic(const IPicture* pic);
 	const IPicture* create_changed_luminosity_pic
-		(const IPicture* picid, float factor, bool halve_alpha = false);
+		(const IPicture* pic, float factor, bool halve_alpha = false);
 	const IPicture* get_resized_picture(const IPicture*, uint32_t w, uint32_t h);
 
 	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);

@@ -589,11 +589,11 @@ Table<void *>::Entry_Record::Entry_Record(void * const e)
 {}
 
 void Table<void *>::Entry_Record::set_picture
-	(uint8_t const col, const IPicture* picid, std::string const & str)
+	(uint8_t const col, const IPicture* pic, std::string const & str)
 {
 	assert(col < m_data.size());
 
-	m_data.at(col).d_picture = picid;
+	m_data.at(col).d_picture = pic;
 	m_data.at(col).d_string  = str;
 }
 void Table<void *>::Entry_Record::set_string

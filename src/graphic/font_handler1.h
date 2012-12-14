@@ -33,7 +33,7 @@ namespace UI {
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
-struct IFont_Handler1 { // TODO: rename: TextRenderer
+struct IFont_Handler1 {
 	virtual ~IFont_Handler1() {};
 
 	virtual void draw_text
@@ -42,8 +42,6 @@ struct IFont_Handler1 { // TODO: rename: TextRenderer
 		 const std::string & text,
 		 uint32_t w = 0,
 		 Align = Align_TopLeft) = 0;
-
-	// TODO(sirver): flush cache
 };
 
 IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs) ;

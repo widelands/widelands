@@ -50,7 +50,7 @@ private:
 	Tab_Panel * m_parent;
 	uint32_t    m_id;
 
-	const IPicture* picid;
+	const IPicture* pic;
 	std::string tooltip;
 	Panel     * panel;
 };
@@ -77,7 +77,7 @@ struct Tab_Panel : public Panel {
 
 	uint32_t add
 		(std::string const & name,
-		 const IPicture* picid,
+		 const IPicture* pic,
 		 Panel             * panel,
 		 std::string const & tooltip = std::string());
 

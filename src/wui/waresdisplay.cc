@@ -233,15 +233,15 @@ void AbstractWaresDisplay::draw_ware
 	Point p = ware_position(id);
 
 	//  draw a background
-	const IPicture* picid =
+	const IPicture* pic =
 		g_gr->imgcache().load
 			(PicMod_Game,
 			 ware_selected(id) ?  "pics/ware_list_bg_selected.png"
 			                   :  "pics/ware_list_bg.png");
-	uint32_t w = picid->get_w();
-	uint32_t h = picid->get_h();
+	uint32_t w = pic->get_w();
+	uint32_t h = pic->get_h();
 
-	dst.blit(p, picid);
+	dst.blit(p, pic);
 
 	const Point pos = p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1);
 	// Draw it
@@ -404,12 +404,12 @@ void WaresMapDisplay::draw(RenderTarget & dst)
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = m_map->find(*j)) != m_map->end()) {
 				//  draw a background
-				const IPicture* picid =
+				const IPicture* pic =
 				g_gr->imgcache().load (PicMod_Game, "pics/ware_list_bg.png");
-				uint32_t w = picid->get_w();
-				uint32_t h = picid->get_h();
+				uint32_t w = pic->get_w();
+				uint32_t h = pic->get_h();
 
-				dst.blit(p, picid);
+				dst.blit(p, pic);
 
 				const Point pos = p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1);
 				// Draw it

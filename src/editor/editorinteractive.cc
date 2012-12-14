@@ -126,12 +126,12 @@ void Editor_Interactive::register_overlays() {
 	iterate_player_numbers(p, nr_players) {
 		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const IPicture* picid = g_gr->imgcache().load(PicMod_Game, fname);
-			assert(picid);
-			uint32_t w = picid->get_w();
-			uint32_t h = picid->get_h();
+			const IPicture* pic = g_gr->imgcache().load(PicMod_Game, fname);
+			assert(pic);
+			uint32_t w = pic->get_w();
+			uint32_t h = pic->get_h();
 			map.overlay_manager().register_overlay
-			(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
+			(sp, pic, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 

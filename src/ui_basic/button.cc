@@ -104,15 +104,15 @@ Button::~Button()
 /**
  * Sets a new picture for the Button.
 */
-void Button::set_pic(const IPicture* picid)
+void Button::set_pic(const IPicture* pic)
 {
 	m_title.clear();
 
-	if (m_pic_custom == picid)
+	if (m_pic_custom == pic)
 		return;
 
-	m_pic_custom = picid;
-	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
+	m_pic_custom = pic;
+	m_pic_custom_disabled = g_gr->create_grayed_out_pic(pic);
 
 	update();
 }

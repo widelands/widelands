@@ -54,7 +54,7 @@ uint8_t Overlay_Manager::get_overlays
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
 	while (it != overlay_map.end() and it->first == c and it->second.level <= MAX_OVERLAYS_PER_NODE)
 	{
-		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
 		if (++num_ret == MAX_OVERLAYS_PER_NODE)
 			goto end;
@@ -70,7 +70,7 @@ uint8_t Overlay_Manager::get_overlays
 		}
 	}
 	while (it != overlay_map.end() and it->first == c) {
-		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
 		if (++num_ret == MAX_OVERLAYS_PER_NODE)
 			goto end;
@@ -100,7 +100,7 @@ uint8_t Overlay_Manager::get_overlays
 		 and
 		 num_ret < MAX_OVERLAYS_PER_TRIANGLE)
 	{
-		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
 		++num_ret;
 		++it;
@@ -155,7 +155,7 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
  */
 void Overlay_Manager::register_overlay
 	(Widelands::TCoords<> const c,
-	 const IPicture* picid,
+	 const IPicture* pic,
 	 int32_t              const level,
 	 Point                      hotspot,
 	 Job_Id               const jobid)
@@ -164,7 +164,7 @@ void Overlay_Manager::register_overlay
 	assert(level != 5); //  level == 5 is undefined behavior
 
 	if (hotspot == Point::invalid()) {
-		hotspot = Point(picid->get_w() / 2, picid->get_h() / 2);
+		hotspot = Point(pic->get_w() / 2, pic->get_h() / 2);
 	}
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
@@ -173,7 +173,7 @@ void Overlay_Manager::register_overlay
 		 it != overlay_map.end() and it->first == c;
 		 ++it)
 		if
-			(it->second.picid   == picid
+			(it->second.pic   == pic
 			 and
 			 it->second.hotspot == hotspot
 			 and
@@ -185,7 +185,7 @@ void Overlay_Manager::register_overlay
 
 	overlay_map.insert
 		(std::pair<Widelands::Coords const, Registered_Overlays>
-		 	(c, Registered_Overlays(jobid, picid, hotspot, level)));
+		 	(c, Registered_Overlays(jobid, pic, hotspot, level)));
 
 	//  Now manually sort, so that they are ordered
 	//    * first by c (done by std::multimap)
@@ -213,7 +213,7 @@ void Overlay_Manager::register_overlay
  * remove one (or many) overlays from a node or triangle
  */
 void Overlay_Manager::remove_overlay
-	(Widelands::TCoords<> const c, const IPicture* picid)
+	(Widelands::TCoords<> const c, const IPicture* pic)
 {
 	assert(c.t <= 2);
 
@@ -222,7 +222,7 @@ void Overlay_Manager::remove_overlay
 	if (overlay_map.count(c)) {
 		Registered_Overlays_Map::iterator it = overlay_map.lower_bound(c);
 		do {
-			if (picid and it->second.picid == picid) {
+			if (pic and it->second.pic == pic) {
 				overlay_map.erase(it);
 				it = overlay_map.lower_bound(c);
 			} else {
@@ -308,8 +308,8 @@ void Overlay_Manager::load_graphics() {
 	const char * const * filename = filenames;
 
 	//  Special case for flag, which has a different formula for hotspot_y.
-	buildhelp_info->picid = g_gr->imgcache().load(PicMod_Game, *filename);
-	buildhelp_info->hotspot = Point(buildhelp_info->picid->get_w() / 2, buildhelp_info->picid->get_h() - 1);
+	buildhelp_info->pic = g_gr->imgcache().load(PicMod_Game, *filename);
+	buildhelp_info->hotspot = Point(buildhelp_info->pic->get_w() / 2, buildhelp_info->pic->get_h() - 1);
 
 	const Overlay_Info * const buildhelp_infos_end =
 		buildhelp_info + Widelands::Field::Buildhelp_None;
@@ -317,8 +317,8 @@ void Overlay_Manager::load_graphics() {
 		++buildhelp_info, ++filename;
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
-		buildhelp_info->picid = g_gr->imgcache().load(PicMod_Game, *filename);
-		buildhelp_info->hotspot = Point(buildhelp_info->picid->get_w() / 2, buildhelp_info->picid->get_h() / 2);
+		buildhelp_info->pic = g_gr->imgcache().load(PicMod_Game, *filename);
+		buildhelp_info->hotspot = Point(buildhelp_info->pic->get_w() / 2, buildhelp_info->pic->get_h() / 2);
 	}
 
 	m_are_graphics_loaded = true;

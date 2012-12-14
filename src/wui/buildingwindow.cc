@@ -90,7 +90,7 @@ Building_Window::Building_Window
 	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
 	for (Workarea_Info::size_type i = 0; i < NUMBER_OF_WORKAREA_PICS; ++i) {
 		++filename[13];
-		workarea_cumulative_picid[i] = g_gr->imgcache().load(PicMod_Game, filename);
+		workarea_cumulative_pic[i] = g_gr->imgcache().load(PicMod_Game, filename);
 	}
 
 	show_workarea();
@@ -447,7 +447,7 @@ void Building_Window::show_workarea()
 		do
 			overlay_manager.register_overlay
 				(mr.location(),
-					workarea_cumulative_picid[i],
+					workarea_cumulative_pic[i],
 					0,
 					Point::invalid(),
 					m_workarea_job_id);

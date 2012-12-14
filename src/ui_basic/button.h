@@ -57,7 +57,7 @@ struct Button : public NamedPanel {
 		 bool const flat     = false);
 	~Button();
 
-	void set_pic(const IPicture* picid);
+	void set_pic(const IPicture* pic);
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
 

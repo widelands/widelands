@@ -228,7 +228,7 @@ private:
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
-	const IPicture* workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
+	const IPicture* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
 
 	/// Variables to use with attack dialog.
 	AttackBox * m_attack_box;
@@ -307,7 +307,7 @@ FieldActionWindow::FieldActionWindow
 	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
 	for (Workarea_Info::size_type i = 0; i < NUMBER_OF_WORKAREA_PICS; ++i) {
 		++filename[13];
-		workarea_cumulative_picid[i] = g_gr->imgcache().load(PicMod_Game, filename);
+		workarea_cumulative_pic[i] = g_gr->imgcache().load(PicMod_Game, filename);
 	}
 }
 
@@ -879,7 +879,7 @@ void FieldActionWindow::building_icon_mouse_in
 			do
 				m_overlay_manager.register_overlay
 					(mr.location(),
-					 workarea_cumulative_picid[i],
+					 workarea_cumulative_pic[i],
 					 0,
 					 Point::invalid(),
 					 m_workarea_preview_job_id);

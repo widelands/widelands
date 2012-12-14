@@ -39,7 +39,7 @@ struct Statebox : public Panel {
 	Statebox
 		(Panel * parent,
 		 Point,
-		 const IPicture* picid                  = 0,
+		 const IPicture* pic                  = 0,
 		 std::string const & tooltip_text = std::string());
 	~Statebox();
 
@@ -95,9 +95,9 @@ struct Checkbox : public Statebox {
 	Checkbox
 		(Panel             * const parent,
 		 Point               const p,
-		 const IPicture* picid        = 0,
+		 const IPicture* pic        = 0,
 		 std::string const &       tooltip_text = std::string())
-		: Statebox(parent, p, picid, tooltip_text)
+		: Statebox(parent, p, pic, tooltip_text)
 	{}
 
 private:

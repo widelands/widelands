@@ -63,9 +63,9 @@ m_click_recursion_protect(false)
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
-		const IPicture* picid = g_gr->imgcache().load(PicMod_Game, world.get_bob_descr(j)->get_picture());
-		uint32_t w = picid->get_w();
-		uint32_t h = picid->get_h();
+		const IPicture* pic = g_gr->imgcache().load(PicMod_Game, world.get_bob_descr(j)->get_picture());
+		uint32_t w = pic->get_w();
+		uint32_t h = pic->get_h();
 		if (w > width)
 			width = w;
 		if (h > height)

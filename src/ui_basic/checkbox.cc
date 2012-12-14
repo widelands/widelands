@@ -27,26 +27,26 @@
 namespace UI {
 /**
  * Stateboxes start out enabled and unchecked.
- * If picid is non-zero, the given picture is used instead of the normal
+ * If pic is non-zero, the given picture is used instead of the normal
  * checkbox graphics.
 */
 Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
-	 const IPicture* picid,
+	 const IPicture* pic,
 	 std::string const &       tooltip_text)
 	:
 	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
 	m_flags(Is_Enabled)
 {
-	if (picid) {
-		uint32_t w = picid->get_w();
-		uint32_t h = picid->get_h();
+	if (pic) {
+		uint32_t w = pic->get_w();
+		uint32_t h = pic->get_h();
 		set_desired_size(w, h);
 		set_size(w, h);
 
 		set_flags(Has_Custom_Picture, true);
-		m_pic_graphics = picid;
+		m_pic_graphics = pic;
 	} else
 		m_pic_graphics =
 			g_gr->imgcache().load(PicMod_UI, "pics/checkbox_light.png");
