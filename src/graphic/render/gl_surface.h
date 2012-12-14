@@ -39,6 +39,7 @@ public:
 	virtual uint8_t * get_pixels() const;
 	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr);
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
+
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
 	virtual void fill_rect(const Rect&, RGBAColor);
 	virtual void draw_rect(const Rect&, RGBColor);
@@ -48,8 +49,6 @@ public:
 			const RGBColor&, uint8_t width);
 
 protected:
-	virtual void setup_gl() {}
-	virtual void reset_gl() {}
 
 	/// Logical width and height of the surface
 	uint32_t m_w, m_h;

@@ -68,8 +68,6 @@ void GLSurface::set_pixel(uint32_t x, uint32_t y, uint32_t clr) {
 void GLSurface::draw_rect(const Rect& rc, const RGBColor clr)
 {
 	assert(g_opengl);
-	setup_gl();
-
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glLineWidth(1);
@@ -82,8 +80,6 @@ void GLSurface::draw_rect(const Rect& rc, const RGBColor clr)
 		glVertex2f(rc.x + 0.5f,        rc.y + rc.h - 0.5f);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
-
-	reset_gl();
 }
 
 
@@ -96,8 +92,6 @@ void GLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(rc.w >= 0);
 	assert(rc.h >= 0);
 	assert(g_opengl);
-	setup_gl();
-
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 
@@ -109,8 +103,6 @@ void GLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
-
-	reset_gl();
 }
 
 /**
@@ -133,8 +125,6 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 
 		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 	}
-
-	setup_gl();
 
 	/* glBlendFunc is a very nice feature of opengl. You can specify how the
 	* color is calculated.
@@ -168,14 +158,12 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	if (factor < 0)
 		glBlendEquation(GL_FUNC_ADD);
 
-	reset_gl();
+	glEnable(GL_TEXTURE_2D);
 }
 
 void GLSurface::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
 		y2, const RGBColor& color, uint8_t width)
 {
-	setup_gl();
-
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glLineWidth(width);
@@ -185,20 +173,20 @@ void GLSurface::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
 		glVertex2f(x2 + 0.5f, y2 + 0.5f);
 	} glEnd();
 
-	reset_gl();
+	glEnable(GL_TEXTURE_2D);
 }
 
 void GLSurface::blit
-	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
+	(const Point& dst, const IPicture* pic, const Rect& srcrc, Composite cm)
 {
-	upcast(const GLSurfaceTexture, const_oglsrc, src);
-	assert(const_oglsrc);
-	GLSurfaceTexture* oglsrc = const_cast<GLSurfaceTexture*>(const_oglsrc);
+	// Note: This function is highly optimized and therefore does not restore
+	// all state. It also assumes that all other glStuff restores state to make
+	// this function faster.
+
 	assert(g_opengl);
+	const GLSurfaceTexture* src = static_cast<const GLSurfaceTexture*>(pic);
 
-	setup_gl();
-
-	/* Set a texture scaling factor. Normaly texture coordiantes
+	/* Set a texture scaling factor. Normally texture coordinates
 	* (see glBegin()...glEnd() Block below) are given in the range 0-1
 	* to avoid the calculation (and let opengl do it) the texture
 	* space is modified. glMatrixMode select which matrixconst  to manipulate
@@ -209,8 +197,8 @@ void GLSurface::blit
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
 	glScalef
-		(1.0f / static_cast<GLfloat>(oglsrc->get_tex_w()),
-		 1.0f / static_cast<GLfloat>(oglsrc->get_tex_h()), 1);
+		(1.0f / static_cast<GLfloat>(src->get_tex_w()),
+		 1.0f / static_cast<GLfloat>(src->get_tex_h()), 1);
 
 	// Enable Alpha blending
 	if (cm == CM_Normal) {
@@ -220,29 +208,24 @@ void GLSurface::blit
 		glDisable(GL_BLEND);
 	}
 
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, oglsrc->get_gl_texture());
+	glBindTexture(GL_TEXTURE_2D, src->get_gl_texture());
 
 	glBegin(GL_QUADS); {
-		//  set color white, otherwise textures get mixed with color
+		// set color white, otherwise textures get mixed with color
 		glColor3f(1.0, 1.0, 1.0);
-		//  top-left
-		glTexCoord2i(srcrc.x,           srcrc.y);
-		glVertex2i  (dst.x,             dst.y);
-		//  top-right
+		// top-left
+		glTexCoord2i(srcrc.x, srcrc.y);
+		glVertex2i(dst.x, dst.y);
+		// top-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
-		glVertex2f  (dst.x + srcrc.w,   dst.y);
-		//  bottom-right
+		glVertex2f(dst.x + srcrc.w, dst.y);
+		// bottom-right
 		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
-		glVertex2f  (dst.x + srcrc.w,   dst.y + srcrc.h);
-		//  bottom-left
-		glTexCoord2i(srcrc.x,           srcrc.y + srcrc.h);
-		glVertex2f  (dst.x,             dst.y + srcrc.h);
+		glVertex2f(dst.x + srcrc.w, dst.y + srcrc.h);
+		// bottom-left
+		glTexCoord2i(srcrc.x, srcrc.y + srcrc.h);
+		glVertex2f(dst.x, dst.y + srcrc.h);
 	} glEnd();
-
-	glLoadIdentity();
-
-	reset_gl();
 }
 
 

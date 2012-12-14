@@ -153,6 +153,8 @@ GLSurfaceTexture::~GLSurfaceTexture()
 void GLSurfaceTexture::init(uint32_t w, uint32_t h)
 {
 	handle_glerror();
+	assert(w);
+	assert(h);
 
 	m_w = w;
 	m_h = h;
@@ -203,6 +205,48 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 
 uint16_t GLSurfaceTexture::get_pitch() const {
 	return 4 * m_tex_w;
+}
+
+void GLSurfaceTexture::draw_rect(const Rect& rc, const RGBColor clr)
+{
+	setup_gl();
+	GLSurface::draw_rect(rc, clr);
+	reset_gl();
+}
+
+
+/**
+ * Draws a filled rectangle
+ */
+void GLSurfaceTexture::fill_rect(const Rect& rc, const RGBAColor clr) {
+	setup_gl();
+	GLSurface::fill_rect(rc, clr);
+	reset_gl();
+}
+
+/**
+ * Change the brightness of the given rectangle
+ */
+void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
+{
+	setup_gl();
+	GLSurface::brighten_rect(rc, factor);
+	reset_gl();
+}
+
+void GLSurfaceTexture::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
+		y2, const RGBColor& color, uint8_t width)
+{
+	setup_gl();
+	GLSurface::draw_line(x1, y1, x2, y2, color, width);
+	reset_gl();
+}
+
+void GLSurfaceTexture::blit
+	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm) {
+	setup_gl();
+	GLSurface::blit(dst, static_cast<const GLSurfaceTexture*>(src), srcrc, cm);
+	reset_gl();
 }
 
 void GLSurfaceTexture::setup_gl() {

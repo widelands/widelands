@@ -450,6 +450,9 @@ public:
 	virtual uint32_t height() {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint32_t hotspot_y() {return height();}
 	virtual IBlitableSurface* render(IGraphic & gr) {
+		if (!width() || !height()) {
+			return 0;
+		}
 		IBlitableSurface* rv = gr.create_surface(width(), height(), true);
 
 		// Draw Solid background Color
