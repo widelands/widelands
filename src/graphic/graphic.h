@@ -105,7 +105,6 @@ struct Graphic : public IGraphic {
 	int32_t get_xres() const;
 	int32_t get_yres() const;
 	RenderTarget * get_render_target();
-	// TODO(sirver): no fan of rendertarget
 	void toggle_fullscreen();
 	void update_fullscreen();
 	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
@@ -118,19 +117,15 @@ struct Graphic : public IGraphic {
 	ImageCache& imgcache() const {return *img_cache_.get();}
 	void flush_animations();
 
-	// TODO(sirver): Only one of these is relly needed
-	void save_png(const IPicture* , StreamWrite *) const;
-	void save_png(Surface& surf, StreamWrite *) const;
+	void save_png(const IPicture*, StreamWrite*) const;
 
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
 
 	Surface* create_surface(int32_t w, int32_t h, bool alpha = false);
 
-	IPicture* create_grayed_out_pic(const IPicture* picid);
-	IPicture* create_changed_luminosity_pic
+	const IPicture* create_grayed_out_pic(const IPicture* picid);
+	const IPicture* create_changed_luminosity_pic
 		(const IPicture* picid, float factor, bool halve_alpha = false);
-
-	// TODO(sirver): should either be const as well or other derivatives shouldn't be eithwr
 	const IPicture* get_resized_picture(const IPicture*, uint32_t w, uint32_t h);
 
 	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
@@ -141,7 +136,6 @@ struct Graphic : public IGraphic {
 	void ensure_animation_loaded(uint32_t anim);
 	AnimationGfx::Index nr_frames(uint32_t anim = 0);
 	uint32_t get_animation_frametime(uint32_t anim) const;
-	// TODO(sirver): should take pointer instead
 	void get_animation_size (uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h);
 
 	void screenshot(const std::string& fname) const;
@@ -171,7 +165,6 @@ protected:
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
-	// TODO(sirver): What?!?
 	SDL_Surface * m_sdl_screen;
 	/// A RenderTarget for screen_. This is initialized during init()
 	RenderTarget * m_rendertarget;

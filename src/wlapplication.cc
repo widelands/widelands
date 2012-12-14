@@ -301,9 +301,10 @@ m_redirected_stdio(false)
 	else
 		g_gr = 0;
 
-	TTF_Init(); // TODO not here
+	if (TTF_Init() == -1)
+		throw wexception
+			("True Type library did not initialize: %s\n", TTF_GetError());
 	UI::g_fh = new UI::Font_Handler();
-	// TODO(sirver): There must be only one
 	UI::g_fh1 = UI::create_fonthandler(*g_gr, g_fs);
 
 	//make sure we didn't forget to read any global option

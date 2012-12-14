@@ -319,7 +319,7 @@ void RenderTarget::drawstatic
 		gfx->get_frame
 			(0);
 
-	IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
+	const IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
 
 	dst -= Point(frame->get_w() / 2, frame->get_h() / 2);
 

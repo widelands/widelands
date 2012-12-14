@@ -17,13 +17,8 @@
  *
  */
 
-// TODO(sirver): IPicture could be something read only. Pixelaccess can then be separated out into ro and rw
 // TODO(sirver): picid -> pic everywhere
-// TODO(sirver): untangle which features in Surface should stay there and
-// which can go. Especially as IBlitableSurface and Surface are too similar.
-// TODO(sirver): const IPicture -> IPicture, dann static cast.
 // TODO(sirver): screenshots in beiden impl testen. Scheinen kaputt zu sein.
-// TODO(sirver): Surfaces sind jetzt intern für graphic. Umbennen und funktionen hoch in IBlitableSurface
 #include "graphic.h"
 
 #include "build_info.h"
@@ -486,10 +481,8 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 		free_source = false;
 	} else {
 		// I guess this is just in OpenGL
-		// TODO(sirver): this cast is ugly
-		// TODO(sirver): is the srcrect even used?
-		upcast(Surface, nonconst, const_cast<IPicture*>(src));
-		srcsdl = extract_sdl_surface(*nonconst, srcrect);
+		srcsdl = extract_sdl_surface
+			(*static_cast<Surface*>(const_cast<IPicture*>(src)), srcrect);
 	}
 
 	// Third step: perform the zoom and placement
@@ -593,7 +586,7 @@ SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect)
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(Surface & surf, StreamWrite * sw) const
+void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
 {
 	// Save a png
 	png_structp png_ptr =
@@ -625,6 +618,8 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 		(png_ptr,
 		 sw,
 		 &Graphic::m_png_write_function, &Graphic::m_png_flush_function);
+
+	Surface& surf = *static_cast<Surface*>(const_cast<IPicture*>(pic));
 
 	// Fill info struct
 	png_set_IHDR
@@ -665,18 +660,6 @@ void Graphic::save_png(Surface & surf, StreamWrite * sw) const
 	// End write
 	png_write_end(png_ptr, info_ptr);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
-}
-
-/**
- * Saves a IPicture* to a png. This can be a file or part of a stream.
- * @param surf The Surface to save
- * @param sw a StreamWrite where the png is written to
- */
-void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
-{
-	// TODO(sirver): cast is ugly
-	IPicture* nonconst = const_cast<IPicture*>(pic);
-	save_png(nonconst, sw);
 }
 
 /**
@@ -745,28 +728,27 @@ Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha)
  * @param picture to be grayed out
  * @return the gray version of the picture
  */
-IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
+const IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 {
 	if (!pic)
 		return 0;
 
-	// TODO(sirver): cast is pretty ugly
-	upcast(Surface, nonconst, const_cast<IPicture*>(pic));
+	Surface& surf = *static_cast<Surface*>(const_cast<IPicture*>(pic));
 
 	uint32_t w = pic->get_w();
 	uint32_t h = pic->get_h();
-	const SDL_PixelFormat & origfmt = nonconst->format();
+	const SDL_PixelFormat & origfmt = surf.format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
 	const SDL_PixelFormat & destfmt = dest->format();
 
-	nonconst->lock(Surface::Lock_Normal);
+	surf.lock(Surface::Lock_Normal);
 	dest->lock(Surface::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
 
-			color.set(origfmt, nonconst->get_pixel(x, y));
+			color.set(origfmt, surf.get_pixel(x, y));
 
 			//  Halve the opacity to give some difference for pictures that are
 			//  grayscale to begin with.
@@ -782,7 +764,7 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 			dest->set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	nonconst->unlock(Surface::Unlock_NoChange);
+	surf.unlock(Surface::Unlock_NoChange);
 	dest->unlock(Surface::Unlock_Update);
 
 	return dest;
@@ -796,29 +778,28 @@ IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
  * @param half_alpha whether the opacity should be halved or not
  * @return a new picture with 50% luminosity
  */
-IPicture* Graphic::create_changed_luminosity_pic
+const IPicture* Graphic::create_changed_luminosity_pic
 	(const IPicture* pic, float factor, bool halve_alpha)
 {
 	if (!pic)
 		return 0;
 
-	// TODO(sirver): cast is pretty ugly
-	upcast(Surface, nonconst, const_cast<IPicture*>(pic));
+	Surface& surf = *static_cast<Surface*>(const_cast<IPicture*>(pic));
 
 	uint32_t w = pic->get_w();
 	uint32_t h = pic->get_h();
-	const SDL_PixelFormat & origfmt = nonconst->format();
+	const SDL_PixelFormat & origfmt = surf.format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
 	const SDL_PixelFormat & destfmt = dest->format();
 
-	nonconst->lock(Surface::Lock_Normal);
+	surf.lock(Surface::Lock_Normal);
 	dest->lock(Surface::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
 
-			color.set(origfmt, nonconst->get_pixel(x, y));
+			color.set(origfmt, surf.get_pixel(x, y));
 
 			if (halve_alpha)
 				color.a >>= 1;
@@ -830,7 +811,7 @@ IPicture* Graphic::create_changed_luminosity_pic
 			dest->set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	nonconst->unlock(Surface::Unlock_NoChange);
+	surf.unlock(Surface::Unlock_NoChange);
 	dest->unlock(Surface::Unlock_Update);
 
 	return dest;

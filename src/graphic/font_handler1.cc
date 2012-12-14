@@ -17,26 +17,17 @@
  *
  */
 
-// TODO: kill font.h
-// TODO: kill graphic/richtext.cc
-// TODO: kill wordwrap.h
-// TODO: kill text_parser
-
-#include <boost/format.hpp>
-
-#include "log.h" // TODO: kill this
-
 #include "io/filesystem/filesystem.h"
+#include "wexception.h"
 
 #include "graphic.h"
-#include "text/rt_render.h"
-#include "text/rt_errors.h"
-#include "text/sdl_ttf_font.h"
-#include "rendertarget.h"
 #include "picture.h"
+#include "rendertarget.h"
+#include "text/rt_errors.h"
+#include "text/rt_render.h"
+#include "text/sdl_ttf_font.h"
 
 #include "font_handler1.h"
-
 
 using namespace std;
 using namespace boost;
@@ -70,12 +61,11 @@ Font_Handler1::~Font_Handler1() {
 }
 
 void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::string & text, uint32_t w, Align align) {
-	// log("text: %s\n", text.c_str());
 	const IPicture* p = 0;
 	try {
 		p = m_renderer->render(text, w);
-	} catch (RT::Exception & e) {
-		log("Text rendering error: %s", e.what()); // TODO(sirver): Should throw
+	} catch (RT::Exception& e) {
+		throw wexception("Richtext rendering error: %s", e.what());
 	}
 	if (!p)
 		return;
@@ -94,4 +84,4 @@ IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs) {
 
 IFont_Handler1 * g_fh1 = 0;
 
-} // namespace UI
+} // namespace UIae
