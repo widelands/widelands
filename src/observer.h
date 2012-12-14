@@ -40,11 +40,11 @@ public:
 	virtual void observed_changed() = 0;
 
 protected:
-	void start_observing(const Observable*);
-	void stop_observing(const Observable*);
+	void start_observing(const Observable *);
+	void stop_observing(const Observable *);
 
 private:
-	std::set<Observable*> observed_;
+	std::set<Observable *> observed_;
 };
 
 #endif /* end of include guard: OBSERVER_H */

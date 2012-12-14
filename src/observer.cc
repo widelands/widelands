@@ -26,19 +26,19 @@
 #define foreach BOOST_FOREACH
 
 Observer::~Observer() {
-	foreach(Observable* o, observed_)
+	foreach(Observable * o, observed_)
 		o->remove_observer(this);
 	observed_.clear();
 }
 
-void Observer::start_observing(const Observable* const_o) {
-	Observable* o = const_cast<Observable*>(const_o);
+void Observer::start_observing(const Observable * const_o) {
+	Observable * o = const_cast<Observable *>(const_o);
 	o->add_observer(this);
 	observed_.insert(o);
 }
 
-void Observer::stop_observing(const Observable* const_o) {
-	Observable* o = const_cast<Observable*>(const_o);
+void Observer::stop_observing(const Observable * const_o) {
+	Observable * o = const_cast<Observable *>(const_o);
 	o->remove_observer(this);
 	observed_.erase(o);
 }
