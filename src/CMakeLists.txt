@@ -128,9 +128,9 @@ endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
 target_link_libraries(widelands widelands_all)
 target_link_libraries(widelands ${SDL_LIBRARY})
 
-if (APPLE OR WIN32)
+if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   target_link_libraries(widelands_all ${INTL_LIBRARY})
-endif (APPLE OR WIN32)
+endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
 if (WIN32)
   if (DEFINED MSVC)

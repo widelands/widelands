@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-03-17 16:22+0000\n"
-"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"PO-Revision-Date: 2012-11-09 20:30+0000\n"
+"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:33+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-11-10 04:32+0000\n"
+"X-Generator: Launchpad (build 16251)\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
 msgid ""
@@ -22,12 +22,17 @@ msgid ""
 "trying not to fall asleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
+" \"Ahogy apám mondta, olykor harcolni kell, máskor veszteg maradni és várni, "
+"vigyázva, hogy ne vegyen erőt rajtunk az álom vagy a halál, mielőtt a "
+"megfelelő idő eljönne. Így hát én is ezt teszem... várok.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:45
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days.\" "
 msgstr ""
+" \"Üdvözlégy, törzsfőnök. A nevem Khantrukh, és már sok telet megéltem. "
+"Kérlek, engedd, hogy átsegítselek tanácsaimmal e borús napokon.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:89
 msgid ""
@@ -39,6 +44,12 @@ msgid ""
 "a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
 "NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Jól tudom, törzsfőnök, hogy sem te, sem harcosaid nem óhajtanak sokáig "
+"maradni eme elhagyatott helyen. De ettől függetenül, az otthonunk "
+"visszafoglalásáért vívott harcunk elhúzódhat, ezért talán bölcs lenne "
+"előkészületeket tennünk.<br> Azt javasolnám, gyűjtsünk követ a továbbiakra - "
+"ki tudja, milyen erődítményeket kell építenünk hamarosan. És - mintha a sors "
+"ajándéka lenne -, épp a közelben, hatalmas sziklák vannak...\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:105
 msgid ""
@@ -47,6 +58,10 @@ msgid ""
 "legacy.<br> They are a constant reminder why we have to hide here... and why "
 "we must return in the end!\" "
 msgstr ""
+" \"Egy újabb álmatlan éjszakámon felmentem a dombra és a távolba figyeltem. "
+"A tüzek még mindig égnek, apám hagyatékával csillapítva éhségüket.<br> Ezek "
+"folyvást emlékeztetnek, miért kell itt bujkálnunk... és hogy miért kell a "
+"végén visszatérnünk!\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:11
 msgid ""
@@ -54,6 +69,10 @@ msgid ""
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
 "sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr ""
+" \"Már hónapok teltek el, és mi még mindig az öreg erdő sötétjében "
+"rejtőzködünk.<br> Harcosaim nappal vadásznak, éjjel pedig álmatlanul "
+"fekszenek - hallgatva, amint átszűrődik az ősi erdőn a kegyeten mészárlás "
+"távoli zaja.\" "
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:22
 msgid ""
@@ -64,6 +83,12 @@ msgid ""
 "my spirits high and those of my warriors awake, not to let greed or despair "
 "destroy the bonds between us as well.\" "
 msgstr ""
+" \"Apám csontjai békében pihennek abban a földben, melyen ő egykor véget "
+"vetett a köztünk támadt értelmetlen vérontásnak. Fájdalom, hogy békéje csak "
+"egy emberöltőn át tartott.<br> Boldreth, hűséges társam és barátom a béke és "
+"a kellem forrása számomra e sötét időkben. Lelkemet emeli, harcosaimét ébren "
+"tartja, nehogy kapzsiság vagy kétségbeesés eltépje a közöttünk fűződött "
+"szálakat is.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:51
 msgid ""
@@ -74,6 +99,12 @@ msgid ""
 "harsh lands. I believe to the east of our campsite are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" „Senki, csak az istenek tudják, meddig kell itt rejtőzködnünk. A harcosok "
+"azt remélik, hogy maholnap dicsőséggel vonulhatunk be ismét, de én erősen "
+"kétlem, hogy ez mostanában lesz. És a napok máris egyre rövidebbek és "
+"hidegebbek...<br>Fel kell készülnünk arra, hogy esetleg e zord vidéken kell "
+"szembenéznünk a téllel. Azt hiszem, táborunktól keletre van pár alkalmas "
+"hely, hogy egy favágókunyhót emeljünk.”<br><br>-- ÚJ CÉLKITŰZÉSEK --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:60
 msgid ""
@@ -83,6 +114,11 @@ msgid ""
 "men would appreciate a way as short and plain as possible - the wood will "
 "surely be heavy enough, nevertheless.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" Nyilvánvaló, hogy embereinknek túlságosan kimerítő lenne végig a vadonon át "
+"gyalogolni a favágókunyhóhoz. Utat kell építenünk kastélyunk és a "
+"favágókunyhó között. Nem nehéz rájönni, hogy a férfiak a lehető legrövidebb "
+"és legsíkabb útnak örülnének – épp elég nehéz lesz nekik a fa is.<br><br>-- "
+"ÚJ CÉLKITŰZÉS --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:81
 msgid ""
@@ -151,6 +187,9 @@ msgid ""
 "away.<br> The red lights flash in the darkness and dance to the rhythm of "
 "the wardrums that haunt me even in my nightmares.\" "
 msgstr ""
+" \"Innen, mérföldek távolából is látni a bősz lángokat, melyek elemésztik "
+"Al'thunrant.<br> A vörös fények úgy világlanak és táncolnak a sötétben, "
+"ahogy a harci dobok szólnak, melyek még rémálmaimban is kísértenek.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:10
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
@@ -158,6 +197,8 @@ msgid ""
 "* Build a lumberjack's hut at the red house symbol just right of your "
 "headquarters by clicking on it and selecting a lumberjack's hut.<br>"
 msgstr ""
+"* Építs egy favágókunyhót a főhadiszállásodtól közvetlenül jobbra eső piros "
+"ház szimbólumon úgy, hogy rákattintasz és kiválasztod a favágókunyhót.<br>"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:27
 #: ../../campaigns/t01.wmf/scripting/texts.lua:82
@@ -181,6 +222,20 @@ msgid ""
 "However, you can also click farther away from the flag to build several "
 "steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
+"* Építs egy utat főhadiszállásod és a favágókunyhó építési területe "
+"közé.<br> Miután elhelyezed a favágókunyhót, egy zászló is készül hozzá. Ezt "
+"össze kell kötnöd egy másik zászlóval úgy, hogy utat építesz közöttük.<br> "
+"Ha egy zászlóra kattintasz, és az útépítést választod, kis szimbólumok "
+"jelennek meg körülötte, melyek azt mutatják, milyen irányokban tudod építeni "
+"az utat.<br> Ezeknek a szimbólumoknak a színe azt jelzi, milyen meredek lesz "
+"az út azon szakasza. A zöld síkot, a sárga meredeket, a piros nagyon "
+"meredeket jelent. Minél meredekebb az út, embereid annál nehezebben haladnak "
+"majd rajtuk (és annál lassabban szállítják áruidat).<br> Bármelyik "
+"szimbólumra kattinthatsz az út első szakaszának megépítéséhez. Új "
+"szimbólumok jelennek majd meg, mutatva, hová épülhet az út következő része, "
+"és így tovább. Ugyanakkor a zászlótól messzebb is kattinthatsz, hogy több "
+"szakaszt építs egyszerre. Az út befejezéséhez kattints a főhadiszállás "
+"előtti zászlóra."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:34
 #: ../../campaigns/t01.wmf/scripting/texts.lua:90
@@ -215,14 +270,17 @@ msgid ""
 "* Press SPACE to see where you can build.<br> The red house symbols show you "
 "where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
+"* Nyomd meg a SZÓKÖZ billentyűt, hogy lásd, hol építkezhetsz.<br> A piros "
+"ház szimbólumok mutatják, hol emelhető kis épület – mint például egy "
+"favágókunyhó.<br>"
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Szempárok a sötétben"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
-msgstr "Egy öreg ember szólalt meg…"
+msgstr "Egy öreg ember így szól..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:111
 msgid "At the tomb"
@@ -230,7 +288,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:7
 msgid "Build a lumberjack's hut"
-msgstr ""
+msgstr "Építs egy favágókunyhót"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:25
 msgid "Build a ranger's hut"
@@ -253,6 +311,8 @@ msgid ""
 "In this tutorial the basic gameplay and control as well as basic production "
 "buildings of the Barbarians are introduced."
 msgstr ""
+"Ez az oktatójáték az alapvető játékmenetet és irányítást, továbbá a barbárok "
+"egyszerűbb termelő épületeit mutatja be."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
@@ -272,7 +332,7 @@ msgstr "Feladat teljesítve"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
-msgstr ""
+msgstr "Valaki megszólít"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
@@ -281,7 +341,7 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
 msgid "The advisor"
-msgstr ""
+msgstr "A tanácsadó"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:58
 msgid "The elder remarks..."
@@ -305,7 +365,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:7
 msgid "The story begins"
-msgstr "A történet elkezdődött"
+msgstr "A történet elkezdődik"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:132
 msgid "Thron looks furious..."
@@ -317,7 +377,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:9
 msgid "Thron sighs..."
-msgstr "Thron sóhajtott…"
+msgstr "Thron sóhajt…"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:103
 #: ../../campaigns/t01.wmf/scripting/texts.lua:113

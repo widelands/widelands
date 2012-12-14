@@ -28,15 +28,15 @@ Observable::~Observable() {
 	observers_.clear();
 }
 
-void Observable::add_observer(Observer* o) {
+void Observable::add_observer(Observer * o) {
 	observers_.insert(o);
 }
 
-void Observable::remove_observer(Observer* o) {
+void Observable::remove_observer(Observer * o) {
 	observers_.erase(o);
 }
 
 void Observable::notify_observers() {
-	foreach(Observer* o, observers_)
+	foreach(Observer * o, observers_)
 		o->observed_changed();
 }

@@ -26,21 +26,21 @@
 
 class Observer;
 
-/* 
+/*
  * An item that can be observed by an Observer. See comments there as well.
  */
 class Observable : boost::noncopyable {
 public:
 	virtual ~Observable();
 
-	void add_observer(Observer*);
-	void remove_observer(Observer*);
+	void add_observer(Observer *);
+	void remove_observer(Observer *);
 
 protected:
 	void notify_observers();
 
 private:
-	std::set<Observer*> observers_;
+	std::set<Observer *> observers_;
 };
 
 #endif /* end of include guard: OBSERVABLE_H */

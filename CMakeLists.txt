@@ -404,10 +404,10 @@ if (MINIZIP_FOUND)
   include_directories(${MINIZIP_INCLUDE_DIR})
 endif (MINIZIP_FOUND)
 
-if (APPLE OR WIN32)
+if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   find_package(intl REQUIRED)
   include_directories(${INTL_INCLUDE_DIR})
-endif (APPLE OR WIN32)
+endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
 find_package(SDL REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})
