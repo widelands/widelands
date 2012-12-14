@@ -51,7 +51,7 @@ void WareList::add(Ware_Index const i, const count_type count) {
 	m_wares[i] += count;
 	assert(m_wares[i] >= count);
 
-	changed();
+	notify_observers();
 }
 
 
@@ -77,7 +77,7 @@ void WareList::remove(Ware_Index const i, const count_type count) {
 	assert(m_wares[i] >= count);
 	m_wares[i] -= count;
 
-	changed();
+	notify_observers();
 }
 
 

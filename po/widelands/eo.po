@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-08-16 11:03+0000\n"
-"Last-Translator: Michael Moroni <michael.moroni@mailoo.org>\n"
+"PO-Revision-Date: 2012-12-12 19:05+0000\n"
+"Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:37+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-12-13 04:37+0000\n"
+"X-Generator: Launchpad (build 16361)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -44,12 +44,12 @@ msgstr "Dungantoj"
 
 #: ../../src/writeHTML.cc:267 ../../src/writeHTML.cc:273
 msgid "Building types"
-msgstr ""
+msgstr "Tipoj de konstruaĵoj"
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:512
 #: ../../src/writeHTML.cc:1465
 msgid "Icon"
-msgstr "Piktogramo"
+msgstr "Piktograma"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:514
 #: ../../src/writeHTML.cc:1467 ../../src/wui/building_statistics_menu.cc:112
@@ -63,24 +63,24 @@ msgstr "Grandeco"
 
 #: ../../src/writeHTML.cc:284
 msgid "Buildable"
-msgstr ""
+msgstr "Konstruebla"
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
-msgstr ""
+msgstr "Plibonigita"
 
 #: ../../src/writeHTML.cc:288
 msgid "Conquer<br/>range"
-msgstr ""
+msgstr "Konkera</br>rango"
 
 #: ../../src/writeHTML.cc:290 ../../src/writeHTML.cc:516
 msgid "Vision<br/>range"
-msgstr ""
+msgstr "Videbla<br>rango"
 
 #: ../../src/writeHTML.cc:317 ../../src/writeHTML.cc:373
 #: ../../src/logic/building.cc:531
 msgid "Mine"
-msgstr ""
+msgstr "Mino"
 
 #: ../../src/writeHTML.cc:321 ../../src/writeHTML.cc:389
 #: ../../src/logic/building.cc:532
@@ -114,7 +114,7 @@ msgstr "Ne"
 
 #: ../../src/writeHTML.cc:375
 msgid "Is mine."
-msgstr ""
+msgstr "Estas mino"
 
 #: ../../src/writeHTML.cc:380
 msgid "Is big."
@@ -122,29 +122,29 @@ msgstr "Estas granda."
 
 #: ../../src/writeHTML.cc:385
 msgid "Is medium."
-msgstr ""
+msgstr "Estas meza"
 
 #: ../../src/writeHTML.cc:391
 msgid "Is small."
-msgstr ""
+msgstr "Estas malgranda"
 
 #: ../../src/writeHTML.cc:398
 msgid "Is not buildable."
-msgstr ""
+msgstr "Estas ne konstruebla"
 
 #: ../../src/writeHTML.cc:405
 msgid "Is enhanced."
-msgstr ""
+msgstr "Estas plibonigita"
 
 #: ../../src/writeHTML.cc:412
 #, c-format
 msgid "Conquer range is %u."
-msgstr ""
+msgstr "Konkera rango estas %u"
 
 #: ../../src/writeHTML.cc:420 ../../src/writeHTML.cc:644
 #, c-format
 msgid "Vision range is %u."
-msgstr ""
+msgstr "La videbla rango estas %u."
 
 #: ../../src/writeHTML.cc:428 ../../src/writeHTML.cc:651
 msgid "Build cost"
@@ -157,7 +157,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:450
 msgid "Enhancements"
-msgstr ""
+msgstr "Plibonigoj"
 
 #: ../../src/writeHTML.cc:460
 #, c-format
@@ -166,11 +166,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:501 ../../src/writeHTML.cc:507
 msgid "Worker types"
-msgstr ""
+msgstr "Tipoj de laboristoj"
 
 #: ../../src/writeHTML.cc:518
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Sperto<br>estas bezonata"
 
 #: ../../src/writeHTML.cc:520
 msgid "Becomes"
@@ -192,11 +192,15 @@ msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
+"Atako estas inter %u kaj %u, plus %u pro ĉiu nivelo super 0 (la maksimuma "
+"nivelo estas %u)"
 
 #: ../../src/writeHTML.cc:606
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Defendo estas %u, plus %u pro ĉiu nivelo super 0 (la maksimuma nivelo estas "
+"%u)"
 
 #: ../../src/writeHTML.cc:616
 #, c-format
@@ -206,7 +210,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:662 ../../src/writeHTML.cc:673
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "Kreado de %s"
 
 #: ../../src/writeHTML.cc:684
 msgid "Spawns in warehouses."
@@ -224,21 +228,21 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:712 ../../src/writeHTML.cc:857
 msgid "Programs"
-msgstr ""
+msgstr "Programaroj"
 
 #: ../../src/writeHTML.cc:766
 msgid "UNKNOWN"
-msgstr ""
+msgstr "NEKONATA"
 
 #: ../../src/writeHTML.cc:773 ../../src/wui/ware_statistics_menu.cc:183
 msgid "Production"
-msgstr ""
+msgstr "Produktado"
 
 #: ../../src/writeHTML.cc:777 ../../src/wui/general_statistics_menu.cc:182
 #: ../../src/wui/transport_ui.cc:65 ../../src/wui/productionsitewindow.cc:88
 #: ../../src/wui/warehousewindow.cc:205
 msgid "Workers"
-msgstr ""
+msgstr "Laboristoj"
 
 #: ../../src/writeHTML.cc:788
 #, c-format
@@ -247,21 +251,21 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:798
 msgid "Inputs"
-msgstr ""
+msgstr "Enigoj"
 
 #: ../../src/writeHTML.cc:809
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "%s'a enigo"
 
 #: ../../src/writeHTML.cc:821
 msgid "Output"
-msgstr ""
+msgstr "Eligo"
 
 #: ../../src/writeHTML.cc:832 ../../src/writeHTML.cc:846
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "%s'a eligo"
 
 #: ../../src/writeHTML.cc:895 ../../src/writeHTML.cc:1039
 #: ../../src/writeHTML.cc:1102 ../../src/writeHTML.cc:1131
@@ -271,11 +275,11 @@ msgstr ""
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Dokumentado por programaj komandoj "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
-msgstr ""
+msgstr "Ĉi tieaj laboristoj"
 
 #: ../../src/writeHTML.cc:1049
 #, c-format
@@ -294,7 +298,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1454 ../../src/writeHTML.cc:1460
 msgid "Ware types"
-msgstr ""
+msgstr "Tipoj de komercaĵoj"
 
 #: ../../src/s2map.cc:224
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -303,6 +307,7 @@ msgstr "Bluabitiko Setlantoj II Mapo. Estas nenia komento difinita!"
 #: ../../src/wlapplication.cc:387
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
+"ERARE: Ne eblis konektiĝi al la metaservilo (La kialo troviĝas sube)!\n"
 
 #: ../../src/wlapplication.cc:907 ../../src/wlapplication.cc:916
 msgid "could not find the path of the main executable"
@@ -368,7 +373,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1317
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      defaûlte estas ~/.widelands\n"
 
 #: ../../src/wlapplication.cc:1320
 msgid ""
@@ -473,7 +478,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1405
 msgid " --help               Show this help\n"
-msgstr ""
+msgstr " --help Montras ĉi tiun helpon\n"
 
 #: ../../src/wlapplication.cc:1409
 msgid ""
@@ -483,6 +488,11 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
+"Ĉu cimraportoj? Sugestoj? Rigardu la retejon pri la projekto:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Ni esperas ke al vi ŝatus ĉi tiun ludon!\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1558
 msgid "Warning: "
@@ -515,7 +525,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1696
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "La adreso de la luda servilo estas nevalida"
 
 #: ../../src/wlapplication.cc:1804 ../../src/network/nethost.cc:2028
 msgid "Player"
@@ -543,7 +553,7 @@ msgstr "Ŝargante..."
 
 #: ../../src/editor/editorinteractive.cc:62
 msgid "Menu"
-msgstr ""
+msgstr "Menuo"
 
 #: ../../src/editor/editorinteractive.cc:65
 msgid "Tools"

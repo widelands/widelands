@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-05-21 23:16+0000\n"
-"Last-Translator: Vladimir Kovalenko <vladmy@gmail.com>\n"
+"PO-Revision-Date: 2012-12-08 06:13+0000\n"
+"Last-Translator: Глория Хрусталёва <gloriya@hushmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-12-09 04:35+0000\n"
+"X-Generator: Launchpad (build 16341)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
@@ -66,6 +66,10 @@ msgid ""
 "least 20 minutes or the one with the most territory after 4 hours, whichever "
 "comes first."
 msgstr ""
+"Каждый игрок или команда пытается занять большую часть территории карты. "
+"Победителем становится игрок или команда которые займут данную территорию "
+"более чем на 20 минут, либо игрок или команда которые занимают наибольшую "
+"территорию после 4 часов игры, в зависимости от того, что произойдёт скорее."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -202,7 +206,7 @@ msgstr "Вы проиграли эту игру!"
 
 #: ../../scripting/win_condition_texts.lua:53
 msgid "game will end in %i minutes."
-msgstr ""
+msgstr "игра завершится в течении %i минут."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

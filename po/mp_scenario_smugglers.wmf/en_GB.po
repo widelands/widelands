@@ -1,0 +1,113 @@
+# English (United Kingdom) translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"PO-Revision-Date: 2012-11-02 16:22+0000\n"
+"Last-Translator: _aD <Unknown>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-11-03 04:35+0000\n"
+"X-Generator: Launchpad (build 16218)\n"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:29
+msgid ""
+"A new smuggling route from %s to %s has been established!. Every ware "
+"smuggled here\n"
+"is worth %i points."
+msgstr ""
+"A new smuggling route from %s to %s has been established! Every ware "
+"smuggled here\n"
+"is worth %i points."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
+msgid "A receiving spot"
+msgstr "A receiving end"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:16
+msgid "A sending spot"
+msgstr "A sending end"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:48
+msgid "Game Status"
+msgstr "Game Status"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:39
+msgid ""
+"Game over! %s and %s have won the game! %s and %s only managed to\n"
+"acquire %i points."
+msgstr ""
+"Game over. %s and %s have won the game! %s and %s only managed to\n"
+"acquire %i points."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:20
+msgid ""
+"Remember that the map has rotational symmetry: When you have found a spot to "
+"the top-left\n"
+"of your headquarters, the corresponding spot will be to the bottom-right of "
+"the headquarters\n"
+"of your team mate."
+msgstr ""
+"Remember that the map is symmetrical: if you find the end of a smuggling "
+"tunnel at the\n"
+"top-left of your headquarters, the corresponding end will be to the bottom-"
+"right of your\n"
+"teammate's headquarters."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
+msgid "Rules"
+msgstr "Rules"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
+msgid "Smugglers"
+msgstr "Smugglers"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+msgid ""
+"Smugglers is a fun map for 4 players. You and your partner start diagonally\n"
+"to each other on a point symmetric island. There are plenty of smuggling "
+"tunnels\n"
+"on this island each consisting of a receiving and a sending end. To "
+"establish a smuggling\n"
+"route you need to build a warehouse on a sending/receiving spot while your "
+"team\n"
+"mate has to build one on the corresponding receiving/sending spot. A ware is "
+"then transported\n"
+"each 10 seconds. For harder to defend smuggling routes you get points for "
+"smuggling:\n"
+"2 or 3 per ware. The first team to have %i points wins."
+msgstr ""
+"Smugglers is a fun map for 4 players. You and your teammate start diagonally "
+"opposite each\n"
+"other on a symmetrical island. There are plenty of smuggling tunnels, each "
+"consisting of a\n"
+"receiving and a sending end. To establish a smuggling route you both must "
+"build warehouses on\n"
+"corresponding ends of a tunnel. A ware is then transported every 10 seconds. "
+"For the\n"
+"smuggling routes which are harder to defend you get an additional one or two "
+"points per ware.\n"
+"The first team to %i points wins."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:33
+msgid "The smuggling route worth %i from %s to %s has been broken!"
+msgstr "The smuggling route worth %i from %s to %s has been broken!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:124
+msgid "Wares smuggled"
+msgstr "Wares smuggled"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:24
+msgid ""
+"You can see the number of wares traded at any time in the general\n"
+"statistics menu. Good luck!"
+msgstr ""
+"You can see the number of smuggled wares at any time in the\n"
+"general statistics menu. Good luck!"
