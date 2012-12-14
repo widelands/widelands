@@ -17,8 +17,6 @@
  *
  */
 
-#include "log.h" // TODO(sirver): remove
-
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 

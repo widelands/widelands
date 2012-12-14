@@ -17,37 +17,13 @@
  *
  */
 
-/*
-Rendering functions of the software renderer.
-*/
-
-
-// TODO(sirver): check includes
-#include "upcast.h"
-#include "wexception.h"
-#include "logic/building.h"
-#include "logic/editor_game_base.h"
-#include "logic/map.h"
-#include "logic/player.h"
-#include "logic/world.h"
-#include "economy/flag.h"
-#include "economy/road.h"
-#include "io/filesystem/filesystem.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "wui/minimap.h"
-
-#include "graphic/graphic.h"
+#include <cassert>
 
 #include <SDL.h>
 
 #include "sdl_surface.h"
 
-using Widelands::Flag;
-using Widelands::PlayerImmovable;
-using Widelands::Road;
-
 SDLSurface::~SDLSurface() {
-	// TODO(sirver): not really needed for screen, but does it hurt?
 	if (m_surface)
 		SDL_FreeSurface(m_surface);
 }
@@ -354,9 +330,7 @@ void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 void SDLSurface::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
-	upcast(const SDLSurface, sdlsurf, src);
-	assert(sdlsurf);
-	assert(this);
+	const SDLSurface* sdlsurf = static_cast<const SDLSurface*>(src);
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 

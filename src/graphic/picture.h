@@ -34,7 +34,7 @@ public:
 	IPicture() {}
 	virtual ~IPicture() {}
 
-	virtual uint32_t get_w() const = 0; // TODO(sirver): Should only be called w() and h()
+	virtual uint32_t get_w() const = 0;
 	virtual uint32_t get_h() const = 0;
 };
 

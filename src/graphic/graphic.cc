@@ -503,9 +503,7 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 
 		Uint32 fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
 
-		// TODO(sirver): remove logs below
 		if (destrect.x > 0) {
-			log("aaaaaaa here 1\n");
 			dstrc.x = 0;
 			dstrc.y = destrect.y;
 			dstrc.w = destrect.x;
@@ -513,7 +511,6 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 			SDL_FillRect(placed, &dstrc, fillcolor);
 		}
 		if (destrect.x + zoomed->w < placed->w) {
-			log("aaaaaaa here 2\n");
 			dstrc.x = destrect.x + zoomed->w;
 			dstrc.y = destrect.y;
 			dstrc.w = placed->w - destrect.x - zoomed->w;
@@ -521,7 +518,6 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 			SDL_FillRect(placed, &dstrc, fillcolor);
 		}
 		if (destrect.y > 0) {
-			log("aaaaaaa here 3\n");
 			dstrc.x = 0;
 			dstrc.y = 0;
 			dstrc.w = placed->w;
@@ -529,7 +525,6 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 			SDL_FillRect(placed, &dstrc, fillcolor);
 		}
 		if (destrect.y + zoomed->h < placed->h) {
-			log("aaaaaaa here 3\n");
 			dstrc.x = 0;
 			dstrc.y = destrect.y + zoomed->h;
 			dstrc.w = placed->w;

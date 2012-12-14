@@ -44,12 +44,8 @@ private:
 
 SDLTTF_FontLoaderFromFilesystem::SDLTTF_FontLoaderFromFilesystem(FileSystem* fs)
 	: fs_(fs) {
-	// TODO(sirver): this is already done in the old font renderer
-	// TTF_Init();
 }
 SDLTTF_FontLoaderFromFilesystem::~SDLTTF_FontLoaderFromFilesystem() {
-	// TODO(sirver): this is already done in the old font renderer
-	// TTF_Quit();
 }
 
 IFont* SDLTTF_FontLoaderFromFilesystem::load(const string& face, int ptsize) {
