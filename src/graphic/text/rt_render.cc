@@ -24,10 +24,11 @@
 #include <string>
 #include <vector>
 
+#include <SDL.h>
 #include <boost/foreach.hpp>
 #include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/scoped_ptr.hpp>
-#include <SDL.h>
 
 #include "graphic/image_cache.h"
 #include "md5.h"
@@ -917,11 +918,12 @@ Renderer::~Renderer() {
 }
 
 const IPicture* Renderer::render(const string& text, uint32_t width, IRefMap ** pprm, const TagSet & allowed_tags) {
-	SimpleMD5Checksum checksum;
-	checksum.Data(text.c_str(), text.size());
-	checksum.Data(&width, sizeof(width));
-	checksum.FinishChecksum();
-	const string cs = checksum.GetChecksum().str();
+	// SimpleMD5Checksum checksum;
+	// checksum.Data(text.c_str(), text.size());
+	// checksum.Data(&width, sizeof(width));
+	// checksum.FinishChecksum();
+	// const string cs = checksum.GetChecksum().str();
+	const string cs = boost::lexical_cast<string>(width) + text;
 	const IPicture* rv = gr_.imgcache().get(PicMod_RichText, cs);
 	if (rv) {
 		return rv;
