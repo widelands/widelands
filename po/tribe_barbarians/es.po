@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-08-18 21:35+0000\n"
-"Last-Translator: Pablo Frigerio <Unknown>\n"
+"PO-Revision-Date: 2012-11-20 05:06+0000\n"
+"Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-11-21 04:35+0000\n"
+"X-Generator: Launchpad (build 16293)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -53,8 +53,8 @@ msgid ""
 "\"He loves the animals and to breed them<br>as we love to cook and eat "
 "them.\""
 msgstr ""
-"\"El ama a los animales y ama criarlos, como nosotros amamos cocinarlos y "
-"comerlos\""
+"El ama a los animales y ama criarlos, así como nosotros amamos cocinarlos y "
+"comerlos"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:13
 msgid ""
@@ -74,7 +74,7 @@ msgstr ""
 msgid ""
 "\"I can handle tons of granite, man, but no more of your vain prattle.\""
 msgstr ""
-"\"Puedo manejar toneladas de granito hombre, pero no puedo manejar más tu "
+"Puedo manejar toneladas de granito,  pero hombre, no puedo manejar más tu "
 "parloteo vano\""
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:12
@@ -315,9 +315,9 @@ msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
-"La comida está hecha de pan de pita, cerveza y pescado o carne, en una "
-"posada. Este alimento  es exactamente lo que los trabajadores en una mina "
-"extrema necesitan."
+"La comida se hace de pan de pita, cerveza y pescado o carne, en una posada. "
+"Este alimento es exactamente lo que los trabajadores en una mina profunda "
+"necesitan."
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
@@ -330,9 +330,9 @@ msgid ""
 "big inn out of fish or meat or pitta bread."
 msgstr ""
 "Un pequeño bocado permite a los mineros mantenerse fuertes y trabajando. "
-"También el explorador consume las raciones en sus viajes de exploración. Las "
-"raciones se producen en una taberna, una posada o un hotel a cabo a partir "
-"de pescado, de carne o pan de pita."
+"También el explorador consume raciones en sus viajes de exploración. Las "
+"raciones se producen en una taberna, una posada o un hotel a partir de "
+"pescado, de carne o pan de pita."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -383,7 +383,7 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
-"Un antiguo proverbio Bárbaron<br> dice que algunas veces necesitas tomar "
+"Un antiguo proverbio Bárbaro<br> dice que algunas veces necesitas tomar "
 "riesgos."
 
 #: ../../tribes/barbarians/conf:41
@@ -414,7 +414,7 @@ msgstr "Armería"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr ""
+msgstr "Hornea pan de pita tanto para los soldados como para los mineros."
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:122
@@ -434,11 +434,11 @@ msgstr "Hace pan para los obreros"
 
 #: ../../tribes/barbarians/bakery/help.lua:51
 msgid "Baking Tray"
-msgstr ""
+msgstr "Bandeja para hornear"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Canción de cuna bárbara"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -548,7 +548,7 @@ msgstr "Rodillo para Pan"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Cría bueyes para añadirlos al sistema de trasporte"
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
@@ -691,7 +691,7 @@ msgstr "Casa del quemador de leña"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
-msgstr ""
+msgstr "El jefe Chat'Karuth en un discurso a su ejército."
 
 #: ../../tribes/barbarians/coalmine/help.lua:53
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -763,7 +763,7 @@ msgstr "Carbón"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "Carbón de la mina de carbón o de la casa del quemador de leña"
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:212
@@ -800,7 +800,7 @@ msgstr "Mina de carbón"
 #: ../../tribes/barbarians/warmill/help.lua:19
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Conquer range:"
-msgstr ""
+msgstr "Rango de conquista:"
 
 #: ../../tribes/barbarians/shipyard/conf:21
 msgid "Constructing ship"
@@ -824,7 +824,7 @@ msgstr "Construcción"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:37
 #: ../../tribes/barbarians/warmill/help.lua:42
 msgid "Cost cumulative:"
-msgstr ""
+msgstr "Costo acumulativo:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:55
 #: ../../tribes/barbarians/bakery/help.lua:49
@@ -855,7 +855,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:41
 msgid "Crew required:"
-msgstr ""
+msgstr "Tripulación requerida"
 
 #: ../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -937,7 +937,7 @@ msgstr "¡Defender y conquistar!"
 #: ../../tribes/barbarians/warmill/help.lua:22
 #: ../../tribes/barbarians/well/help.lua:21
 msgid "Dependencies"
-msgstr ""
+msgstr "Dependencias"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Destroyed building"
@@ -1000,15 +1000,15 @@ msgstr "Torre"
 
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Draw Water out of the deep."
-msgstr ""
+msgstr "Sacar agua de las profundidades."
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
-msgstr ""
+msgstr "Evasión"
 
 #: ../../tribes/barbarians/battlearena/help.lua:26
 msgid "Evade Training:"
-msgstr ""
+msgstr "Entrenamiento de evasión:"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:13
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:13
@@ -1016,6 +1016,8 @@ msgstr ""
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
 msgstr ""
+"Extracto de \"Nuestros tesoros bajo tierra\",<br> una canción bárbara "
+"tradicional."
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1046,7 +1048,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:61
 #: ../../tribes/barbarians/well/help.lua:44
 msgid "Experience levels:"
-msgstr ""
+msgstr "Niveles de experiencia:"
 
 #: ../../tribes/barbarians/conf:207
 msgid "Farm"
@@ -1060,7 +1062,7 @@ msgstr "Granjero"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into trunks."
-msgstr ""
+msgstr "Tala árboles de los alrededores y conviértelos en troncos."
 
 #: ../../tribes/barbarians/conf:82
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
@@ -1197,7 +1199,7 @@ msgstr "Cabaña de guardabosques"
 #: ../../tribes/barbarians/warmill/help.lua:15
 #: ../../tribes/barbarians/well/help.lua:15
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../../tribes/barbarians/conf:135
 #: ../../tribes/barbarians/metalworks/help.lua:33
@@ -1371,7 +1373,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
-msgstr ""
+msgstr "Caza animales para producir carne."
 
 #: ../../tribes/barbarians/conf:137
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
@@ -1431,6 +1433,8 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce %s in %s on average."
 msgstr ""
+"Si la suministro de alimento es constante, esta mina puede producir% s en% s "
+"en promedio."
 
 #: ../../tribes/barbarians/axefactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -1542,7 +1546,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "It can not be upgraded."
-msgstr ""
+msgstr "No puede ser mejorado"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Kitchen Tools"
@@ -1550,7 +1554,7 @@ msgstr "Utensilios de cocina"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat'Karuth"
-msgstr ""
+msgstr "Krumta, carpintero de Chat'Karuth"
 
 #: ../../tribes/barbarians/coalmine/help.lua:35
 #: ../../tribes/barbarians/conf:191
@@ -1812,7 +1816,7 @@ msgstr "Buey"
 #: ../../tribes/barbarians/warmill/help.lua:65
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "Performance:"
-msgstr ""
+msgstr "Rendimiento:"
 
 #: ../../tribes/barbarians/coalmine/help.lua:51
 #: ../../tribes/barbarians/conf:98
@@ -1843,7 +1847,7 @@ msgstr "Plantar caña"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:17
 msgid "Plant trees in the surrounding area."
-msgstr ""
+msgstr "Planta árboles en el área circundante."
 
 #: ../../tribes/barbarians/farm/conf:17
 msgid "Plant wheat"
@@ -2052,7 +2056,7 @@ msgstr "Cantera"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:13
 #: ../../tribes/barbarians/oremine/help.lua:13
 msgid "Quote from an anonymous miner."
-msgstr ""
+msgstr "Cita de un minero anónimo."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid ""
@@ -2149,18 +2153,18 @@ msgstr "Ración"
 #: ../../tribes/barbarians/warmill/help.lua:45
 #: ../../tribes/barbarians/warmill/help.lua:51
 msgid "Raw Stone"
-msgstr "Piedra"
+msgstr "Piedra en bruto"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:24
 msgid "Raw Stone from the Granite Mine or Quarry"
-msgstr ""
+msgstr "Piedra en bruto de la mina de granito o de la cantera"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
-"Las piedras en bruto es un material de construcción básico de los bárbaros. "
+"Las piedras en bruto son un material de construcción básico de los bárbaros. "
 "Se produce en las canteras y las minas de granito."
 
 #: ../../tribes/barbarians/grout/conf:1
@@ -2169,8 +2173,8 @@ msgid ""
 "building material. Grout is produced in a lime kiln."
 msgstr ""
 "La piedra en bruto puede ser procesada en una lechada que proporciona un "
-"material sólido y duro material de construcción.  La lechada se produce en "
-"un horno de cal."
+"material de construcción sólido y duro.  La lechada se produce en un horno "
+"de cal."
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
@@ -2191,46 +2195,47 @@ msgstr "Caña recién plantada"
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
 msgstr ""
+"Libera animales en la naturaleza para mantener la producción de carne."
 
 #: ../../tribes/barbarians/conf:52
 msgid "Resource indicator coal little"
-msgstr "Indicador recurso poco carbón"
+msgstr "Indicador de poco carbón"
 
 #: ../../tribes/barbarians/conf:53
 msgid "Resource indicator coal much"
-msgstr "Indicador recurso mucho carbón"
+msgstr "Indicador de mucho carbón"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Resource indicator gold little"
-msgstr "Indicador recurso poco oro"
+msgstr "Indicador de poco oro"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator gold much"
-msgstr "Indicador recurso mucho oro"
+msgstr "Indicador de mucho oro"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator granite little"
-msgstr "Indicador de recursos poco granito"
+msgstr "Indicador de poco granito"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator granite much"
-msgstr "Indicador de recursos mucho granito"
+msgstr "Indicador de mucho granito"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator iron little"
-msgstr "Indicador recurso poco hierro"
+msgstr "Indicador de poco hierro"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator iron much"
-msgstr "Indicador recurso mucho hierro"
+msgstr "Indicador de mucho hierro"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator no resource"
-msgstr "Indicador recurso vacío"
+msgstr "Indicador de recurso vacío"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Resource indicator water"
-msgstr "Indicador recurso agua"
+msgstr "Indicador de agua"
 
 #: ../../tribes/barbarians/battlearena/help.lua:13
 msgid "Said to originate from Neidhardt, the famous trainer."
@@ -2323,7 +2328,7 @@ msgstr "Fundir hierro"
 #: ../../tribes/barbarians/conf:144
 #: ../../tribes/barbarians/metalworks/help.lua:30
 msgid "Smelter"
-msgstr "Forjador"
+msgstr "Fundidor"
 
 #: ../../tribes/barbarians/coalmine/help.lua:34
 #: ../../tribes/barbarians/conf:200
@@ -2346,7 +2351,7 @@ msgstr "Forja"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr "Produce cascos para los soldados."
+msgstr "Funde cascos para los soldados."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
@@ -2384,6 +2389,8 @@ msgid ""
 "Song written by Sigurd the Bard<br> when the first rain fell after the Great "
 "Drought in the 21st year of Chat'Karuth' reign."
 msgstr ""
+"Canción escrita por Sigurd el bardo<br>cuando la primera lluvia cayó después "
+"de la Gran Sequía del año 21 del reinado de Chat'Karuth ."
 
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
@@ -2391,7 +2398,7 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "Fuente necesaria"
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -2422,7 +2429,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:34
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Space required:"
-msgstr ""
+msgstr "Espacio requerido:"
 
 #: ../../tribes/barbarians/conf:145
 #: ../../tribes/barbarians/metalworks/help.lua:39
@@ -2452,7 +2459,7 @@ msgstr "Taberna"
 #: ../../tribes/barbarians/farm/help.lua:12
 #: ../../tribes/barbarians/quarry/help.lua:12
 msgid "Text needed"
-msgstr ""
+msgstr "Texto necesitado"
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
 #: ../../tribes/barbarians/axefactory/help.lua:42
@@ -2511,7 +2518,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/bakery/help.lua:8
 msgid "The Barbarian Bakery"
-msgstr ""
+msgstr "La panadería barbara"
 
 #: ../../tribes/barbarians/battlearena/help.lua:8
 msgid "The Barbarian Battle Arena"
@@ -2523,19 +2530,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/coalmine/help.lua:8
 msgid "The Barbarian Coal Mine"
-msgstr ""
+msgstr "La mina de carbón barbara"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:8
 msgid "The Barbarian Deep Coal Mine"
-msgstr ""
+msgstr "La mina de carbón profunda barbara"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:8
 msgid "The Barbarian Deep Gold Mine"
-msgstr ""
+msgstr "La mina de oro profunda barbara"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:8
 msgid "The Barbarian Deep Iron Ore Mine"
-msgstr ""
+msgstr "La mina de hierro profunda barbara"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:8
 msgid "The Barbarian Deeper Coal Mine"
@@ -2551,7 +2558,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/farm/help.lua:8
 msgid "The Barbarian Farm"
-msgstr ""
+msgstr "La granja barbara"
 
 #: ../../tribes/barbarians/fernery/help.lua:8
 msgid "The Barbarian Fernery"
@@ -2559,7 +2566,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:8
 msgid "The Barbarian Fisher's Hut"
-msgstr ""
+msgstr "La cabaña del pescador barbaro"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:8
 msgid "The Barbarian Gamekeeper's Hut"
@@ -2567,19 +2574,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/goldmine/help.lua:8
 msgid "The Barbarian Gold Mine"
-msgstr ""
+msgstr "La mina de oro barbara"
 
 #: ../../tribes/barbarians/granitemine/help.lua:8
 msgid "The Barbarian Granite Mine"
-msgstr ""
+msgstr "La mina de granito barbara"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:8
 msgid "The Barbarian Hunter's Hut"
-msgstr ""
+msgstr "La cabaña del cazador barbaro"
 
 #: ../../tribes/barbarians/oremine/help.lua:8
 msgid "The Barbarian Iron Ore Mine"
-msgstr ""
+msgstr "La mina de mineral de hierro barbara"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:8
 msgid "The Barbarian Limekiln"
@@ -2587,7 +2594,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:8
 msgid "The Barbarian Lumberjack's Hut"
-msgstr ""
+msgstr "La cabaña del leñador barbaro"
 
 #: ../../tribes/barbarians/metalworks/help.lua:8
 msgid "The Barbarian Metalwork Shop"
@@ -2606,7 +2613,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:8
 msgid "The Barbarian Quarry"
-msgstr ""
+msgstr "La cantera barbara"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:8
 msgid "The Barbarian Ranger's Hut"
@@ -2614,7 +2621,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:8
 msgid "The Barbarian Trainingscamp"
-msgstr ""
+msgstr "El campo de entrenamiento barbaro"
 
 #: ../../tribes/barbarians/warmill/help.lua:8
 msgid "The Barbarian War Mill"
@@ -2696,7 +2703,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:23
 msgid "The Quarry needs stones in the vicinity."
-msgstr ""
+msgstr "La cantera necesita piedras en la cercanía."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:43
 msgid ""
@@ -2818,7 +2825,7 @@ msgstr ""
 #: ../../tribes/barbarians/warehouse/help.lua:8
 #: ../../tribes/barbarians/weaving-mill/help.lua:8
 msgid "The help text of this building is under construction."
-msgstr ""
+msgstr "El texo de ayuda de esta construicción esta aún en contrucción."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
@@ -2853,10 +2860,10 @@ msgid ""
 "train soldiers from attack level 4 to level 5."
 msgstr ""
 "El hacha de los guerreros es la más peligrosa de todas las armas bárbaras. "
-"Sólo unos pocos guerreros nunca fueron capaces de manejar los ejes de las "
-"grandes y potentes. Se produce en una fábrica de la guerra y se utiliza, "
-"junto con la comida - en un campo de entrenamiento para ascender a soldados "
-"del nivel de ataque de 4 a nivel 5."
+"Sólo unos pocos guerreros fueron capaces de manejar esas  grandes y potentes "
+"hachas. Se producen en un molino de guerra y se utilizan -junto con la "
+"comida - en un campo de entrenamiento para ascender a soldados de nivel de "
+"ataque 4 a nivel 5."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -2874,9 +2881,10 @@ msgid ""
 "soldiers from attack level 3 to 4."
 msgstr ""
 "Esta es un arma peligrosa que los bárbaros son capaces de producir. Se "
-"produce en la fábrica de hacha. Sólo guerreros entrenados son capaces de "
-"manejar un arma. Se utilizan en los campos de entrenamiento -junto con los "
-"alimentos - desde el nivel de ataque de 3 a nivel 4."
+"producen en la fábrica de hacha. Sólo guerreros entrenados son capaces de "
+"manejar éstas arma. Se utilizan en los campos de entrenamiento -junto con "
+"los alimentos - en un campo de entrenamiento para ascender a soldados de "
+"nivel de ataque 3 a nivel 4."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -2884,9 +2892,9 @@ msgid ""
 "and used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 2 to healthpoints level 3."
 msgstr ""
-"Esta es la armadura más bárbaro mejorada. Se produce en la forja de "
+"Esta es la armadura bárbara más mejorada. Se produce en la forja de "
 "armaduras y se utilizan en el campo de entrenamiento - junto con los "
-"alimentos - para entrenar a soldados del nivel de vida 2 al nivel 3."
+"alimentos - para entrenar a soldados con nivel de vida 2 al nivel 3."
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
@@ -2902,9 +2910,9 @@ msgid ""
 "metalwork shop (but ceases to be produced by the building if it is enhanced "
 "to an axefactory and war mill)."
 msgstr ""
-"Esta selección es utilizado por los albañiles y los mineros. Se produce en "
-"el taller de carpintería metálica (pero deja de ser producido por el "
-"edificio si se ha mejorado para un molino de fábrica de hachas y la guerra)."
+"Esta pico es utilizado por los albañiles y los mineros. Se produce en el "
+"taller de carpintería metálica (pero deja de ser producido por el edificio "
+"si se mejora a una fábrica de hachas y a un molino de guerra)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -2913,10 +2921,11 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
-"Esta lanza es lo suficientemente ligero como para ser lanzado, pero es "
-"suficiente para matar a cualquier animal de un solo golpe. Es utilizado por "
-"los cazadores. Producidos en las obras de metal (pero cesa si se ha mejorado "
-"el edificio siendo ahora un molino de de guerra o una fábrica de hachas)."
+"Esta lanza es lo suficientemente ligera como para ser lanzada, pero es lo "
+"suficientemente pesada como para matar a cualquier animal de un solo golpe. "
+"Es utilizada por los cazadores. Es producida en las obras de metal (pero "
+"deja de ser producido por el edificio si se mejora a una fábrica de hachas y "
+"a un molino de guerra)."
 
 #: ../../tribes/barbarians/conf:166
 #: ../../tribes/barbarians/conf:173
@@ -3031,17 +3040,17 @@ msgid ""
 "burner's house in the production of coal. The wood hardener refines trunks "
 "by hardening them in the fire which gives blackwood."
 msgstr ""
-"Los troncos son un material de construcción principal de los bárbaros. Los "
-"árboles son talados por los leñadores, los guardaparques cuidan que no sufra "
-"en exceso la masa forestal. Los troncos también se utilizan en el taller de "
+"Los troncos son el principal material de construcción de los bárbaros. Los "
+"árboles son talados por los leñadores, los forestales cuidan que no sufra en "
+"exceso la masa forestal. Los troncos también se utilizan en el taller de "
 "carpintería para construir herramientas básicas, y en la casa del carbonero "
-"en la producción de carbón. El endurecedor de madera refina los troncos por "
-"el endurecimiento en el fuego."
+"para la producción de carbón. El endurecedor de madera refina los troncos "
+"mediante el endurecimiento con fuego."
 
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
 msgid "Upgrade Cost:"
-msgstr ""
+msgstr "costo de mejora:"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:39
 #: ../../tribes/barbarians/deep_goldmine/help.lua:35
@@ -3050,7 +3059,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:34
 #: ../../tribes/barbarians/deeper_oremine/help.lua:34
 msgid "Upgrade cost:"
-msgstr ""
+msgstr "costo de mejora:"
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -3148,7 +3157,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Mejorar vida de soldado 1"
+msgstr "Mejorar puntos de vida de soldado 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid ""
@@ -3199,7 +3208,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:54
 #: ../../tribes/barbarians/well/help.lua:38
 msgid "Upgradeable to:"
-msgstr ""
+msgstr "Mejorable a:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -3230,7 +3239,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:33
 msgid "Upgraded from:"
-msgstr ""
+msgstr "Mejorado desde:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:20
 #: ../../tribes/barbarians/bakery/help.lua:19
@@ -3261,7 +3270,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:20
 #: ../../tribes/barbarians/well/help.lua:19
 msgid "Vision range:"
-msgstr ""
+msgstr "Rango de visión"
 
 #: ../../tribes/barbarians/conf:109
 msgid "War Helmet"
@@ -3297,7 +3306,7 @@ msgstr ""
 #: ../../tribes/barbarians/cattlefarm/help.lua:24
 #: ../../tribes/barbarians/micro-brewery/help.lua:23
 msgid "Water from the Well"
-msgstr ""
+msgstr "Agua de un pozo"
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -3331,7 +3340,7 @@ msgstr "Trigo"
 #: ../../tribes/barbarians/cattlefarm/help.lua:23
 #: ../../tribes/barbarians/micro-brewery/help.lua:24
 msgid "Wheat from the Farm"
-msgstr ""
+msgstr "El trigo de la granja"
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
@@ -3339,13 +3348,13 @@ msgid ""
 "bakeries, micro breweries and breweries. Also Cattle farms need to be "
 "supplied with wheat."
 msgstr ""
-"El trigo es esencial para sobrevivir. Se produce en las granjas y consumidos "
-"por las panaderías, pequeñas fábricas de cerveza y cervecerías. También las "
-"explotaciones de ganado vacuno necesitan trigo."
+"El trigo es esencial para sobrevivir. Se produce en las granjas y es "
+"consumido en las panaderías, pequeñas fábricas de cerveza y cervecerías. "
+"También las vaquerías necesitan trigo."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
-msgstr ""
+msgstr "Un brindis generalizado entre los mineros"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Wildboar"
@@ -3354,7 +3363,7 @@ msgstr "Jabalí"
 #: ../../tribes/barbarians/conf:190
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
 msgid "Wood Hardener"
-msgstr "Carpintería"
+msgstr "Endurecedor de madera"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
@@ -3448,7 +3457,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:56
 #: ../../tribes/barbarians/well/help.lua:40
 msgid "Workers"
-msgstr ""
+msgstr "Trabajadores"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:54
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
@@ -3459,7 +3468,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:60
 msgid "Workers use:"
-msgstr ""
+msgstr "Trabajadores usados:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:18
 #: ../../tribes/barbarians/bakery/help.lua:17
@@ -3490,7 +3499,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:18
 #: ../../tribes/barbarians/well/help.lua:17
 msgid "Working radius:"
-msgstr ""
+msgstr "Radio de trabajo:"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
@@ -3517,15 +3526,15 @@ msgid ""
 msgstr ""
 "Los jóvenes guerreros están orgullosos de aprender a luchar con esta "
 "poderosa arma. Es más pesada y más cortante que el hacha normal. Se produce "
-"en fabricas de hachas y los molinos de la guerra. En campos de "
-"entrenamiento, se utiliza - junto con los alimentos - para entrenar a "
-"soldados del nivel de ataque 0 a nivel 1"
+"en fabricas de hachas y los molinos de guerra. En campos los de "
+"entrenamiento se utiliza - junto con los alimentos - para entrenar a "
+"soldados desde el nivel de ataque 0 a nivel 1"
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "cada objeto"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
