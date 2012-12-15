@@ -95,8 +95,8 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			}
 
 			IBlitableSurface* surf = g_gr->create_surface(64, 64);
-			const IPicture* tex = g_gr->imgcache().load(PicMod_Game,
-					g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
+			const IPicture* tex = g_gr->imgcache().load
+				(PicMod_Game, g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 						->get_texture_picture());
 			surf->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
 

@@ -51,8 +51,8 @@ public:
 	virtual void fill_rect(const Rect&, RGBAColor);
 	virtual void draw_rect(const Rect&, RGBColor);
 	virtual void brighten_rect(const Rect&, int32_t factor);
-	virtual void draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-			const RGBColor&, uint8_t width);
+	virtual void draw_line
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
 
 	GLuint get_gl_texture() const {return m_texture;}

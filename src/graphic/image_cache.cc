@@ -95,8 +95,9 @@ void ImageCacheImpl::flush(PicMod module) {
 	}
 }
 
-const IPicture* ImageCacheImpl::load(PicMod module,
-		const string& fname, bool alpha) {
+const IPicture* ImageCacheImpl::load
+		(PicMod module, const string& fname, bool alpha)
+{
 	//  Check if the picture is already loaded.
 	PictureMap::iterator it = m_picturemap.find(fname);
 

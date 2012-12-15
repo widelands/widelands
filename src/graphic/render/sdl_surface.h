@@ -51,8 +51,8 @@ public:
 
 	// Implements Surface
 	virtual void draw_rect(const Rect&, RGBColor);
-	virtual void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const
-			RGBColor&, uint8_t width);
+	virtual void draw_line
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);
 	virtual void brighten_rect(const Rect&, int32_t factor);
 
 	virtual SDL_PixelFormat const & format() const;

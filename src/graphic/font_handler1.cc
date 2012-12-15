@@ -60,7 +60,9 @@ Font_Handler1::~Font_Handler1() {
 	delete m_renderer;
 }
 
-void Font_Handler1::draw_text(RenderTarget & dst, Point dstpoint, const std::string & text, uint32_t w, Align align) {
+void Font_Handler1::draw_text
+		(RenderTarget & dst, Point dstpoint, const std::string & text, uint32_t w, Align align)
+{
 	const IPicture* p = 0;
 	try {
 		p = m_renderer->render(text, w);

@@ -45,7 +45,7 @@ SDLTTF_FontLoaderFromFile::~SDLTTF_FontLoaderFromFile() {
 
 IFont* SDLTTF_FontLoaderFromFile::load(const string& face, int ptsize) {
 	TTF_Font * mfont = TTF_OpenFontIndex(("fonts/" + face).c_str(), ptsize, 0);
-	if(!mfont)
+	if (!mfont)
 		throw BadFont((format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError()).str());
 
 	return new SDLTTF_Font(mfont, face, ptsize);

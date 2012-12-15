@@ -48,9 +48,10 @@ void GLSurfaceTexture::Initialize() {
 		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
 	}
 	if (!fbs) {
-		throw wexception("No support for GL_ARB_framebuffer_object or GL_ARB_framebuffer_object "
-				"in OpenGL implementation. One of these is needed for Widelands in OpenGL mode. You can "
-				"try launching Widelands with --opengl=0");
+		throw wexception
+			("No support for GL_ARB_framebuffer_object or GL_ARB_framebuffer_object "
+			 "in OpenGL implementation. One of these is needed for Widelands in OpenGL mode. You can "
+			 "try launching Widelands with --opengl=0.");
 	}
 }
 
@@ -268,8 +269,8 @@ void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
 	reset_gl();
 }
 
-void GLSurfaceTexture::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
-		y2, const RGBColor& color, uint8_t width)
+void GLSurfaceTexture::draw_line
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width)
 {
 	setup_gl();
 	GLSurface::draw_line(x1, y1, x2, y2, color, width);
@@ -286,18 +287,10 @@ void GLSurfaceTexture::blit
 void GLSurfaceTexture::setup_gl() {
 	if (use_arb_) {
 		glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-		glFramebufferTexture2D(GL_FRAMEBUFFER,
-			GL_COLOR_ATTACHMENT0,
-			GL_TEXTURE_2D,
-			m_texture,
-			0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 	} else {
 		glBindFramebufferEXT(GL_FRAMEBUFFER, gl_framebuffer_id_);
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER,
-			GL_COLOR_ATTACHMENT0,
-			GL_TEXTURE_2D,
-			m_texture,
-			0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 	}
 
 	// Note: we do not want to reverse y for textures, we only want this for

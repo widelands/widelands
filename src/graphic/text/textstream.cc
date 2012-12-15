@@ -56,7 +56,7 @@ void TextStream::skip_ws() {
 		m_consume(1);
 }
 void TextStream::rskip_ws() {
-	while (m_i < m_end and isspace(m_t[m_end-1]))
+	while (m_i < m_end and isspace(m_t[m_end - 1]))
 		--m_end;
 }
 

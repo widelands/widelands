@@ -29,28 +29,28 @@ using namespace boost;
 namespace RT {
 
 SDL_Surface * empty_sdl_surface(int32_t w, int32_t h, bool alpha) {
-	 SDL_Surface *surface;
-	 Uint32 rmask, gmask, bmask, amask;
-	 /* SDL interprets each pixel as a 32-bit number, so our masks must depend
-		 on the endianness (byte order) of the machine */
+	SDL_Surface* surface;
+	Uint32 rmask, gmask, bmask, amask;
+	/* SDL interprets each pixel as a 32-bit number, so our masks must depend
+		on the endianness (byte order) of the machine */
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-	 rmask = 0xff000000;
-	 gmask = 0x00ff0000;
-	 bmask = 0x0000ff00;
-	 amask = alpha ? 0x000000ff : 0;
+	rmask = 0xff000000;
+	gmask = 0x00ff0000;
+	bmask = 0x0000ff00;
+	amask = alpha ? 0x000000ff : 0;
 #else
-	 rmask = 0x000000ff;
-	 gmask = 0x0000ff00;
-	 bmask = 0x00ff0000;
-	 amask = alpha ? 0xff000000 : 0;
+	rmask = 0x000000ff;
+	gmask = 0x0000ff00;
+	bmask = 0x00ff0000;
+	amask = alpha ? 0xff000000 : 0;
 #endif
 
-	 surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32,
-											  rmask, gmask, bmask, amask);
-	 if (!surface)
-		 throw RenderError((format("Was unable to create a Surface: %s") % SDL_GetError()).str());
+	surface = SDL_CreateRGBSurface
+		(SDL_SWSURFACE, w, h, 32, rmask, gmask, bmask, amask);
+	if (!surface)
+		throw RenderError((format("Was unable to create a Surface: %s") % SDL_GetError()).str());
 
-	 return surface;
+	return surface;
 }
 
 }

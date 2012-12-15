@@ -38,8 +38,8 @@ public:
 	virtual void draw_rect(const Rect&, RGBColor) = 0;
 
 	/// draw a line to the surface
-	virtual void draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-			const RGBColor& color, uint8_t width = 1) = 0;
+	virtual void draw_line
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1) = 0;
 
 	/// makes a rectangle on the surface brighter (or darker).
 	/// @note this is slow in SDL mode. Use with care

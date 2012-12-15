@@ -40,7 +40,7 @@ public:
 	std::string till_any_or_end(std::string);
 	std::string parse_string();
 
-	void skip(size_t d) {m_i+=d;}
+	void skip(size_t d) {m_i += d;}
 	void skip_ws();
 	void rskip_ws();
 

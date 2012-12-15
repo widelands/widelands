@@ -44,7 +44,7 @@ struct IFont_Handler1 {
 		 Align = Align_TopLeft) = 0;
 };
 
-IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs) ;
+IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs);
 
 extern IFont_Handler1 * g_fh1;
 

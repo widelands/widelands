@@ -15,7 +15,7 @@ import re
 regexp = re.compile(r"""(?x)
 ([^\s](?:(?:&&)|(?:\|\|)))|
 ((?:(?:&&)|(?:\|\|))[^\s])|
-([^\s>(&*:!{+\-[.](?<!operator)[*&][^\s>)}])|          # Type*, Type&, operator
+([^\s>(&*:!{+\-[.](?<!operator)[*&][^*\s>)},])|          # Type*, Type&, operator
 ([+\-*/|^&!<]?={1,2}[^\s=])|   # '+= a', 'a== a', 'a!= a'
 ([^\s=!+-/^*/&|^<>r%][+\-*/^&|!<>%]?={1,2})|   # ' +=a', ' ==a', ' !=a', doesn't match 'r=' for operator=
 
@@ -182,6 +182,8 @@ forbidden = [
 ]
 
 allowed = [
+    "char** argv",
+    "AnimationGfx(const IImageLoader&, AnimationData const * data);",
     "RoutingNode* a;",
     "Blahtype& b;",
     "std::vector<RoutingNode*> & nodes",

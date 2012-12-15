@@ -869,9 +869,8 @@ void Graphic::ensure_animation_loaded(uint32_t anim) {
 	}
 	if (!m_animations.at(anim - 1))
 	{
-	  //log("Loading animation %i\n", anim);
-	  m_animations.at(anim - 1) = new AnimationGfx(
-			  *img_loader_.get(), g_anim.get_animation(anim));
+	  m_animations.at(anim - 1) =
+		  new AnimationGfx(*img_loader_.get(), g_anim.get_animation(anim));
 	}
 }
 

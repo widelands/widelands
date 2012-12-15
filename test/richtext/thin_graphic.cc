@@ -48,8 +48,8 @@ public:
 		unsigned w, h;
 		unsigned char * image;
 
-		unsigned error = lodepng_decode32_file(&image, &w, &h,
-				("imgs/" + s).c_str());
+		unsigned error = lodepng_decode32_file
+			(&image, &w, &h, ("imgs/" + s).c_str());
 		if (error)
 			throw RT::BadImage
 				((format("Problem loading image %s: %s\n") % s % lodepng_error_text(error)).str());
@@ -69,7 +69,7 @@ public:
 		amask = alpha ? 0xff000000 : 0;
 #endif
 
-		SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(image, w, h, 32, w*4, rmask, gmask, bmask, amask);
+		SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(image, w, h, 32, w * 4, rmask, gmask, bmask, amask);
 		if (!surf)
 			throw RT::BadImage
 				((format("Problem creating surface for image %s: %s\n") % s % SDL_GetError()).str());
@@ -135,7 +135,7 @@ public:
 	}
 	IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const {
 		assert(w && h);
-		return new ThinSDLSurface(RT::empty_sdl_surface(w,h,alpha), false);
+		return new ThinSDLSurface(RT::empty_sdl_surface(w, h, alpha), false);
 	}
 
 	ImageCache& imgcache() const {return *img_cache_.get();}

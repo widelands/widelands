@@ -41,7 +41,7 @@ using namespace std;
  * be changed to load a 8 bit file directly, however.
  */
 Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFormat& format)
-	:	m_colormap (0),
+	: m_colormap (0),
 		m_pixels   (0),
 		m_curframe (0),
 		m_frame_num(0),

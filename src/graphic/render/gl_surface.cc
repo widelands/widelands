@@ -155,8 +155,8 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	glEnable(GL_TEXTURE_2D);
 }
 
-void GLSurface::draw_line (int32_t x1, int32_t y1, int32_t x2, int32_t
-		y2, const RGBColor& color, uint8_t width)
+void GLSurface::draw_line
+	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width)
 {
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);

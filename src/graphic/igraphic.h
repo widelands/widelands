@@ -22,15 +22,15 @@
 
 #include <string>
 
-#include "graphic/iblitable_surface.h"
-#include "graphic/picture.h"
+#include "iblitable_surface.h"
+#include "picture.h"
 
 struct SDL_Surface;
 class ImageCache;
 
 class IGraphic {
 public:
-	virtual ~IGraphic() { };
+	virtual ~IGraphic() {};
 
 	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) const = 0;
 	virtual IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const = 0;

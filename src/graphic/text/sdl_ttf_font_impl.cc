@@ -31,7 +31,7 @@ using namespace std;
 using namespace boost;
 
 static const int SHADOW_OFFSET = 1;
-static const SDL_Color SHADOW_CLR = { 0, 0, 0, SDL_ALPHA_OPAQUE};
+static const SDL_Color SHADOW_CLR = {0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
 
@@ -75,7 +75,7 @@ const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 
 	SDL_Surface * text_surface = 0;
 
-	SDL_Color sdlclr = { clr.r, clr.g, clr.b, 0 };
+	SDL_Color sdlclr = {clr.r, clr.g, clr.b, 0};
 	if (style & SHADOW) {
 		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface * shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
@@ -84,30 +84,30 @@ const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
 
-		SDL_Rect dstrct1 = { 0, 0, 0, 0 };
+		SDL_Rect dstrct1 = {0, 0, 0, 0};
 		SDL_SetAlpha(shadow, 0, SDL_ALPHA_OPAQUE);
 		SDL_BlitSurface(shadow, 0, text_surface, &dstrct1);
 
-		Uint32 * spix = (Uint32*)tsurf->pixels;
-		Uint32 * dpix = (Uint32*)text_surface->pixels;
+		Uint32* spix = static_cast<Uint32*>(tsurf->pixels);
+		Uint32* dpix = static_cast<Uint32*>(text_surface->pixels);
 
 		// Alpha Blend the Text onto the Shadow. This is really slow, but it is
 		// the only compatible way to do it using SDL 1.2. SDL 2.0 offers more
 		// functionality but is not yet released.
-		Uint8 sr, sg, sb, sa, dr, dg, db, da, outa, outr=0, outg=0, outb=0;
+		Uint8 sr, sg, sb, sa, dr, dg, db, da, outa, outr = 0, outg = 0, outb = 0;
 		for (uint32_t y = 0; y < tsurf->h; ++y) {
 			for (uint32_t x = 0; x < tsurf->w; ++x) {
-				size_t sidx = (y*tsurf->pitch + 4*x) / 4;
-				size_t didx = ((y+SHADOW_OFFSET)*text_surface->pitch + (x+SHADOW_OFFSET)*4) / 4;
+				size_t sidx = (y * tsurf->pitch + 4 * x) / 4;
+				size_t didx = ((y + SHADOW_OFFSET) * text_surface->pitch + (x + SHADOW_OFFSET) * 4) / 4;
 
 				SDL_GetRGBA(spix[sidx], tsurf->format, &sr, &sg, &sb, &sa);
 				SDL_GetRGBA(dpix[didx], text_surface->format, &dr, &dg, &db, &da);
 
-				outa = (255*sa + da*(255 - sa)) / 255;
+				outa = (255 * sa + da * (255 - sa)) / 255;
 				if (outa) {
-					outr = (255 * sa*sr + da*dr*(255-sa)) / outa / 255;
-					outg = (255 * sa*sg + da*dg*(255-sa)) / outa / 255;
-					outb = (255 * sa*sb + da*db*(255-sa)) / outa / 255;
+					outr = (255 * sa * sr + da * dr * (255 - sa)) / outa / 255;
+					outg = (255 * sa * sg + da * dg * (255 - sa)) / outa / 255;
+					outb = (255 * sa * sb + da * db * (255 - sa)) / outa / 255;
 				}
 				dpix[didx] = SDL_MapRGBA(text_surface->format, outr, outg, outb, outa);
 			}
@@ -115,13 +115,13 @@ const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 		SDL_FreeSurface(tsurf);
 		SDL_FreeSurface(shadow);
 	} else
-		text_surface= TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
+		text_surface = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *gr.imgcache().insert(PicMod_Text, cs,
-			gr.convert_sdl_surface_to_picture(text_surface, true));
+	return
+		*gr.imgcache().insert(PicMod_Text, cs, gr.convert_sdl_surface_to_picture(text_surface, true));
 }
 
 uint32_t SDLTTF_Font::ascent(int style) const {

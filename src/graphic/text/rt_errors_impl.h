@@ -26,7 +26,11 @@ namespace RT {
 
 struct SyntaxError_Impl : public SyntaxError {
 	SyntaxError_Impl(size_t line, size_t col, std::string expected, std::string got, std::string next_chars)
-		: SyntaxError((boost::format("Syntax error at %1%:%2%: expected %3%, got '%4%'. String continues with: '%5%'") % line % col % expected % got % next_chars).str()) {}
+		: SyntaxError
+		  ((boost::format("Syntax error at %1%:%2%: expected %3%, got '%4%'. String continues with: '%5%'")
+					% line % col % expected % got % next_chars)
+			.str())
+	{}
 };
 }
 

@@ -43,7 +43,7 @@ int save_png(const string& fn, const ThinSDLSurface& surf) {
 	vector<unsigned char> out;
 	int error = lodepng::encode
 		(out, static_cast<const unsigned char*>(surf.get_pixels()), surf.get_w(), surf.get_h(), st);
-	if(error) {
+	if (error) {
 		std::cout << "PNG encoding error: " << lodepng_error_text(error) << std::endl;
 		return 0;
 	}
@@ -53,7 +53,7 @@ int save_png(const string& fn, const ThinSDLSurface& surf) {
 	return 0;
 }
 
-string read_stdin(void) {
+string read_stdin() {
 	string txt;
 	while (not cin.eof()) {
 		string line;
@@ -76,11 +76,11 @@ string read_file(string fn) {
 }
 
 int parse_arguments
-	(int argc, char** argv, int32_t * w, string & outname, string & inname, set<string> & allowed_tags)
+	(int argc, char** argv, int32_t* w, string & outname, string & inname, set<string> & allowed_tags)
 {
 	if (argc < 4) {
-		cout << "Usage: render <width in pixels> <outname> <inname> [allowed tag1] [allowed tags2] ... < input.txt" << endl << endl <<
-			"input.txt should contain a valid rich text formatting" << endl;
+		cout << "Usage: render <width in pixels> <outname> <inname> [allowed tag1] [allowed tags2] ... < "
+			"input.txt" << endl << endl << "input.txt should contain a valid rich text formatting" << endl;
 		return 1;
 	}
 
@@ -88,13 +88,13 @@ int parse_arguments
 	outname = argv[2];
 	inname = argv[3];
 
-	for(int i = 4; i < argc; i++)
+	for (int i = 4; i < argc; i++)
 		allowed_tags.insert(argv[i]);
 
 	return 0;
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char** argv)
 {
 	int32_t w;
 	set<string> allowed_tags;
@@ -116,11 +116,12 @@ int main(int argc, char *argv[])
 	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
 
 	try {
-		const ThinSDLSurface& surf = *static_cast<const ThinSDLSurface*>(renderer->render(txt, w, allowed_tags));
+		const ThinSDLSurface& surf = *static_cast<const ThinSDLSurface*>
+			(renderer->render(txt, w, allowed_tags));
 		surf.lock();
 		save_png(outname, surf);
 		surf.unlock();
-	} catch(RT::Exception & e) {
+	} catch (RT::Exception & e) {
 		cout << e.what() << endl;
 	}
 	delete renderer;

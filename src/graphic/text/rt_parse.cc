@@ -74,10 +74,7 @@ RGBColor Attr::get_color() const {
 		throw InvalidColor((format("Could not parse '%s' as a color.") % m_value).str());
 
 	uint32_t clrn = strtol(m_value.c_str(), 0, 16);
-	return RGBColor(
-		(clrn >> 16) & 0xff,
-		(clrn >> 8) & 0xff,
-		clrn & 0xff);
+	return RGBColor((clrn >> 16) & 0xff, (clrn >> 8) & 0xff, clrn & 0xff);
 }
 
 // This is basically a map<string, Attr>, but because there is no
@@ -169,7 +166,7 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 {
 	TagConstraint tc = tcs[m_name];
 
-	while (true) {
+	for (;;) {
 		if (not tc.text_allowed)
 			ts.skip_ws();
 

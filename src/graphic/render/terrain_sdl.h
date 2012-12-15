@@ -598,8 +598,10 @@ template<typename T> static void draw_field_int
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	SDLSurface* rt_busy = const_cast<SDLSurface*>(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Busy)));
-	SDLSurface* rt_normal = const_cast<SDLSurface*>(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Normal)));
+	SDLSurface* rt_busy = const_cast<SDLSurface*>
+		(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Busy)));
+	SDLSurface* rt_normal = const_cast<SDLSurface*>
+		(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Normal)));
 
 	dst.lock(Surface::Lock_Normal);
 

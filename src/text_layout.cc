@@ -28,9 +28,9 @@ string as_uifont
 	(const string & txt, int size, const string & face, RGBColor clr)
 {
 	// UI Text is always bold due to historic reasons
-	return (format
-		("<rt><p><font face=%s size=%i shadow=1 bold=1 color=%02x%02x%02x>%s</font></p></rt>")
-		 % face.c_str() % size % int(clr.r) % int(clr.g) % int(clr.b) % txt.c_str()
-		 ).str();
+	return
+		(format("<rt><p><font face=%s size=%i shadow=1 bold=1 color=%02x%02x%02x>%s</font></p></rt>")
+		 % face.c_str() % size % int(clr.r) % int(clr.g) % int(clr.b) % txt.c_str())
+			.str();
 }
 

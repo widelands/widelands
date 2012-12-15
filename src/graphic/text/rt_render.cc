@@ -55,7 +55,7 @@ enum VAlign {
 	VALIGN_CENTER,
 };
 struct Borders {
-	Borders() {left=top=right=bottom=0;}
+	Borders() {left = top = right = bottom = 0;}
 	uint8_t left, top, right, bottom;
 };
 
@@ -76,8 +76,7 @@ struct Reference {
 	string ref;
 
 	inline bool contains(int16_t x, int16_t y) const {
-		if (dim.x <= x and x <= dim.x + dim.w and
-			 dim.y <= y and y <= dim.y + dim.h)
+		if (dim.x <= x and x <= dim.x + dim.w and dim.y <= y and y <= dim.y + dim.h)
 			return true;
 		return false;
 	}
@@ -106,7 +105,8 @@ public:
 		FLOAT_RIGHT,
 		FLOAT_LEFT,
 	};
-	RenderNode(NodeStyle& ns) : m_floating(NO_FLOAT), m_halign(ns.halign), m_valign(ns.valign), m_x(0), m_y(0) {}
+	RenderNode(NodeStyle& ns)
+		: m_floating(NO_FLOAT), m_halign(ns.halign), m_valign(ns.valign), m_x(0), m_y(0) {}
 	virtual ~RenderNode() {};
 
 	virtual uint32_t width() = 0;
@@ -126,8 +126,8 @@ public:
 	void set_halign(HAlign halign) {m_halign = halign;}
 	VAlign valign() {return m_valign;}
 	void set_valign(VAlign valign) {m_valign = valign;}
-	void set_x(uint32_t nx) {m_x=nx;}
-	void set_y(uint32_t ny) {m_y=ny;}
+	void set_x(uint32_t nx) {m_x = nx;}
+	void set_y(uint32_t ny) {m_y = ny;}
 	uint32_t x() {return m_x;}
 	uint32_t y() {return m_y;}
 
@@ -156,7 +156,7 @@ private:
 		int32_t delta_offset_x;
 
 		bool operator<(const ConstraintChange& o) const {
-			return at_y > o.at_y || (at_y == o.at_y&& delta_w > o.delta_w);
+			return at_y > o.at_y || (at_y == o.at_y && delta_w > o.delta_w);
 		}
 	};
 
@@ -207,8 +207,8 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (not rv.empty() and rv[rv.size()-1]->halign() != HALIGN_LEFT) {
-			if (rv[rv.size()-1]->halign() == HALIGN_CENTER)
+		if (not rv.empty() and (*rv.rbegin())->halign() != HALIGN_LEFT) {
+			if ((*rv.rbegin())->halign() == HALIGN_CENTER)
 				rem_space /= 2; // Otherwise, we align right
 			for (size_t idx = first_idx; idx < rv.size(); ++idx)
 				rv[idx]->set_x(rv[idx]->x() + rem_space);
@@ -262,7 +262,7 @@ uint32_t Layout::fit_nodes(vector<RenderNode*>& rv, uint32_t w, Borders p) {
 		if ((m_idx < m_all_nodes.size()) and m_all_nodes[m_idx]->get_floating()) {
 			RenderNode* n = m_all_nodes[m_idx];
 			n->set_y(m_h);
-			ConstraintChange cc = { m_h + n->height(), 0, 0 };
+			ConstraintChange cc = {m_h + n->height(), 0, 0};
 			if (n->get_floating() == RenderNode::FLOAT_LEFT) {
 				n->set_x(p.left);
 				p.left += n->width();
@@ -300,7 +300,7 @@ public:
 	virtual const vector<Reference> get_references() {
 		vector<Reference> rv;
 		if (!m_s.reference.empty()) {
-			Reference r = { Rect(0, 0, m_w, m_h), m_s.reference};
+			Reference r = {Rect(0, 0, m_w, m_h), m_s.reference};
 			rv.push_back(r);
 		}
 		return rv;
@@ -318,7 +318,7 @@ protected:
 TextNode::TextNode(IFont& font, NodeStyle& ns, const string& txt)
 	: RenderNode(ns), m_txt(txt), m_s(ns), m_font(font)
 {
-	m_font.dimensions(m_txt, ns.font_style,&m_w,&m_h);
+	m_font.dimensions(m_txt, ns.font_style, &m_w, &m_h);
 }
 uint32_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
@@ -326,7 +326,7 @@ uint32_t TextNode::hotspot_y() {
 IBlitableSurface* TextNode::render(IGraphic& gr) {
 	const IPicture& img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
 	IBlitableSurface* rv = gr.create_surface(img.get_w(), img.get_h(), true);
-	rv->blit(Point(0,0), &img, Rect(0, 0, img.get_w(), img.get_h()), CM_Copy);
+	rv->blit(Point(0, 0), &img, Rect(0, 0, img.get_w(), img.get_h()), CM_Copy);
 	return rv;
 }
 
@@ -353,12 +353,8 @@ IBlitableSurface* FillingTextNode::render(IGraphic& gr) {
 	const IPicture& t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
 	IBlitableSurface* rv = gr.create_surface(m_w, m_h, true);
 	for (uint32_t x = 0; x < m_w; x += t.get_w()) {
-		Rect srcrect(
-				Point(0,0),
-				min(static_cast<uint32_t>(t.get_w()), m_w - x),
-				m_h
-		);
-		rv->blit(Point(x,0), &t, srcrect, CM_Solid);
+		Rect srcrect(Point(0, 0), min(static_cast<uint32_t>(t.get_w()), m_w - x), m_h);
+		rv->blit(Point(x, 0), &t, srcrect, CM_Solid);
 	}
 	return rv;
 }
@@ -398,7 +394,7 @@ public:
 	virtual uint32_t width() {return INFINITE_WIDTH; }
 	virtual uint32_t hotspot_y() {return 0;}
 	virtual IBlitableSurface* render(IGraphic& gr) {
-		assert(0); // This should never be called
+		assert(false); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
 
@@ -423,7 +419,7 @@ public:
 		// Draw background image (tiling)
 		if (m_bg) {
 			Point dst;
-			Rect srcrect(Point(0,0), 1, 1);
+			Rect srcrect(Point(0, 0), 1, 1);
 			for (uint32_t x = 0; x < m_w; x += m_bg->get_w()) {
 				dst.x = x;
 				dst.y = 0;
@@ -452,7 +448,7 @@ private:
  */
 class SubTagRenderNode : public RenderNode {
 public:
-	SubTagRenderNode(NodeStyle& ns) : RenderNode(ns), m_bg_clr(0,0,0), m_bg_img(0) {
+	SubTagRenderNode(NodeStyle& ns) : RenderNode(ns), m_bg_clr(0, 0, 0), m_bg_img(0) {
 	}
 	virtual ~SubTagRenderNode() {
 		foreach(RenderNode* n, m_nodes_to_render) {
@@ -481,7 +477,7 @@ public:
 		// Draw background image (tiling)
 		if (m_bg_img) {
 			Point dst;
-			Rect src(0,0,0,0);
+			Rect src(0, 0, 0, 0);
 
 			for (uint32_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->get_h()) {
 				for (uint32_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->get_w()) {
@@ -512,13 +508,13 @@ public:
 	}
 	virtual const vector<Reference> get_references() {return m_refs;}
 	void set_dimensions(uint32_t inner_w, uint32_t inner_h, Borders margin) {
-		m_w=inner_w; m_h=inner_h; m_margin= margin;
+		m_w = inner_w; m_h = inner_h; m_margin = margin;
 	}
 	void set_background(RGBColor clr) {m_bg_clr = clr;}
 	void set_background(const IPicture* img) {m_bg_img = img;}
-	void set_nodes_to_render(vector<RenderNode*>& n) {m_nodes_to_render=n;}
+	void set_nodes_to_render(vector<RenderNode*>& n) {m_nodes_to_render = n;}
 	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, const string& s) {
-		Reference r = { Rect(x, y, w, h), s };
+		Reference r = {Rect(x, y, w, h), s};
 		m_refs.push_back(r);
 	}
 
@@ -547,7 +543,7 @@ private:
 
 IBlitableSurface* ImgRenderNode::render(IGraphic& gr) {
 	IBlitableSurface* rv = gr.create_surface(m_picture.get_w(), m_picture.get_h(), true);
-	rv->blit(Point(0,0), &m_picture, Rect(0, 0, m_picture.get_w(), m_picture.get_h()), CM_Copy);
+	rv->blit(Point(0, 0), &m_picture, Rect(0, 0, m_picture.get_w(), m_picture.get_h()), CM_Copy);
 	return rv;
 }
 // End: Helper Stuff
@@ -572,9 +568,7 @@ private:
 		uint16_t size;
 
 		bool operator<(const FontDescr& o) const {
-			return
-				size < o.size ||
-				(size == o.size&& face < o.face);
+			return size < o.size || (size == o.size && face < o.face);
 		}
 	};
 	typedef map<FontDescr, IFont*> FontMap;
@@ -584,14 +578,14 @@ private:
 	scoped_ptr<IFontLoader> m_fl;
 };
 IFont& FontCache::get_font(NodeStyle& ns) {
-	FontDescr fd = { ns.font_face, ns.font_size };
+	FontDescr fd = {ns.font_face, ns.font_size};
 	FontMap::iterator i = m_fontmap.find(fd);
 	if (i != m_fontmap.end())
-		return*i->second;
+		return *i->second;
 
 	IFont* font = m_fl->load(ns.font_face, ns.font_size);
 	m_fontmap[fd] = font;
-	return*font;
+	return *font;
 }
 
 
@@ -645,7 +639,8 @@ void TagHandler::emit(vector<RenderNode*>& nodes) {
 
 class FontTagHandler : public TagHandler {
 public:
-	FontTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache) : TagHandler(tag, fc, ns, img_cache) {}
+	FontTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache)
+		: TagHandler(tag, fc, ns, img_cache) {}
 
 	void enter() {
 		const IAttrMap& a = m_tag.attrs();
@@ -752,7 +747,7 @@ public:
 			try {
 				m_bg = img_cache_.load(PicMod_RichText, m_fill_text, true);
 				m_fill_text = "";
-			} catch(BadImage&) {
+			} catch (BadImage&) {
 			}
 		}
 	}
@@ -867,9 +862,9 @@ public:
 		}
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
-			if (align=="top") m_rn->set_valign(VALIGN_TOP);
-			else if (align=="bottom") m_rn->set_valign(VALIGN_BOTTOM);
-			else if (align=="center" or align=="middle") m_rn->set_valign(VALIGN_CENTER);
+			if (align == "top") m_rn->set_valign(VALIGN_TOP);
+			else if (align == "bottom") m_rn->set_valign(VALIGN_BOTTOM);
+			else if (align == "center" or align == "middle") m_rn->set_valign(VALIGN_CENTER);
 		}
 	}
 
@@ -896,21 +891,23 @@ template<typename T> TagHandler* create_taghandler
 {
 	return new T(tag, fc, ns, gr);
 }
-typedef map<const string, TagHandler*(*)(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache& img_cache)> TagHandlerMap;
+typedef map<const string, TagHandler* (*)
+	(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache& img_cache)> TagHandlerMap;
 TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache& img_cache) {
 	static TagHandlerMap map;
 	if (map.empty()) {
-		map["br"] =&create_taghandler<BrTagHandler>;
-		map["font"] =&create_taghandler<FontTagHandler>;
-		map["sub"] =&create_taghandler<SubTagHandler>;
-		map["p"] =&create_taghandler<PTagHandler>;
-		map["img"] =&create_taghandler<ImgTagHandler>;
-		map["vspace"] =&create_taghandler<VspaceTagHandler>;
-		map["space"] =&create_taghandler<HspaceTagHandler>;
+		map["br"] = &create_taghandler<BrTagHandler>;
+		map["font"] = &create_taghandler<FontTagHandler>;
+		map["sub"] = &create_taghandler<SubTagHandler>;
+		map["p"] = &create_taghandler<PTagHandler>;
+		map["img"] = &create_taghandler<ImgTagHandler>;
+		map["vspace"] = &create_taghandler<VspaceTagHandler>;
+		map["space"] = &create_taghandler<HspaceTagHandler>;
 	}
 	TagHandlerMap::iterator i = map.find(tag.name());
 	if (i == map.end())
-		throw RenderError((format("No Tag handler for %s. This is a bug, please submit a report.") % tag.name()).str());
+		throw RenderError
+			((format("No Tag handler for %s. This is a bug, please submit a report.") % tag.name()).str());
 	return i->second(tag, fc, ns, img_cache);
 }
 
