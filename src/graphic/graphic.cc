@@ -316,8 +316,10 @@ Graphic::Graphic
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		SDL_GL_SwapBuffers();
+		glEnable(GL_TEXTURE_2D);
 
 		GLSurfaceTexture::Initialize();
+
 	}
 
 	if (g_opengl)
