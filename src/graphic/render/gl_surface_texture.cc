@@ -16,28 +16,52 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+
 #include "wexception.h"
 #include "graphic/graphic.h"
 
+#include "gl_surface.h"  // for glew.h
 #include "gl_utils.h"
 
 #include "gl_surface_texture.h"
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
+bool use_arb_;
 
 /**
  * Initial global resources needed for fast offscreen rendering.
  */
 void GLSurfaceTexture::Initialize() {
+	const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
+
 	// Generate the framebuffer for Offscreen rendering.
-	glGenFramebuffers(1, &gl_framebuffer_id_);
+	bool fbs = false;
+	if (strstr(extensions, "GL_ARB_framebuffer_object") != 0) {
+		fbs = true;
+		use_arb_ = true;
+		glGenFramebuffers(1, &gl_framebuffer_id_);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	} else if (strstr(extensions, "GL_EXT_framebuffer_object") != 0) {
+		fbs = true;
+		use_arb_ = false;
+		glGenFramebuffersEXT(1, &gl_framebuffer_id_);
+		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
+	}
+	if (!fbs) {
+		throw wexception("No support for GL_ARB_framebuffer_object or GL_ARB_framebuffer_object "
+				"in OpenGL implementation. One of these is needed for Widelands in OpenGL mode. You can "
+				"try launching Widelands with --opengl=0");
+	}
 }
 
 /**
  * Free global resources.
  */
 void GLSurfaceTexture::Cleanup() {
-	glDeleteFramebuffers(1, &gl_framebuffer_id_);
+	if (use_arb_)
+		glDeleteFramebuffers(1, &gl_framebuffer_id_);
+	else
+		glDeleteFramebuffersEXT(1, &gl_framebuffer_id_);
 }
 
 /**
@@ -260,12 +284,21 @@ void GLSurfaceTexture::blit
 }
 
 void GLSurfaceTexture::setup_gl() {
-	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-	glFramebufferTexture2D(GL_FRAMEBUFFER,
-		GL_COLOR_ATTACHMENT0,
-		GL_TEXTURE_2D,
-		m_texture,
-		0);
+	if (use_arb_) {
+		glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
+		glFramebufferTexture2D(GL_FRAMEBUFFER,
+			GL_COLOR_ATTACHMENT0,
+			GL_TEXTURE_2D,
+			m_texture,
+			0);
+	} else {
+		glBindFramebufferEXT(GL_FRAMEBUFFER, gl_framebuffer_id_);
+		glFramebufferTexture2DEXT(GL_FRAMEBUFFER,
+			GL_COLOR_ATTACHMENT0,
+			GL_TEXTURE_2D,
+			m_texture,
+			0);
+	}
 
 	// Note: we do not want to reverse y for textures, we only want this for
 	// the screen.
@@ -279,7 +312,10 @@ void GLSurfaceTexture::setup_gl() {
 }
 
 void GLSurfaceTexture::reset_gl() {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	if (use_arb_)
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	else
+		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
 
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();

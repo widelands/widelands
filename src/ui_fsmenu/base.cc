@@ -56,19 +56,6 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 {
 	Section & s = g_options.pull_section("global");
 
-#if USE_OPENGL
-#define GET_BOOL_USE_OPENGL s.get_bool("opengl", true)
-#else
-#define GET_BOOL_USE_OPENGL false
-#endif
-	WLApplication::get()->init_graphics
-		(get_w(), get_h(),
-		 s.get_int("depth", 16),
-		 s.get_bool("fullscreen", false),
-		 GET_BOOL_USE_OPENGL);
-#undef GET_BOOL_USE_OPENGL
-
-
 	// Load background graphics
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);

@@ -102,7 +102,7 @@ Graphic::Graphic
 	:
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
-	m_update_fullscreen(false),
+	m_update_fullscreen(true),
 	m_roadtextures     (0),
 	img_loader_(new ImageLoader(*this)),
 	img_cache_(create_image_cache(img_loader_.get()))
@@ -292,6 +292,8 @@ Graphic::Graphic
 
 #if USE_OPENGL
 	if (g_opengl) {
+		glViewport(0, 0, w, h);
+
 		// Set up OpenGL projection matrix. This transforms opengl coordinates to
 		// screen coordinates. We set up a simple Orthogonal view which takes just
 		// the x, y coordinates and ignores the z coordinate. Note that the top and
@@ -302,7 +304,6 @@ Graphic::Graphic
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, w, h, 0, -1, 1);
-		glViewport(0, 0, w, h);
 
 		// Reset modelview matrix, disable depth testing (we do not need it)
 		// And select backbuffer as default drawing target
@@ -425,11 +426,6 @@ void Graphic::refresh(bool force)
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, screen_->get_w(), screen_->get_h(), 0, -1, 1);
-		glViewport(0, 0, screen_->get_w(), screen_->get_h());
-
 		SDL_GL_SwapBuffers();
 		m_update_fullscreen = false;
 		m_nr_update_rects = 0;
