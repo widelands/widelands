@@ -130,10 +130,10 @@ public:
 		img_cache_(create_image_cache(img_loader_.get())) {}
 	virtual ~ThinGraphic() {}
 
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface* surf, bool alpha = false) {
+	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface* surf, bool alpha = false) const {
 		return new ThinSDLSurface(surf, false);
 	}
-	IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) {
+	IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const {
 		assert(w && h);
 		return new ThinSDLSurface(RT::empty_sdl_surface(w,h,alpha), false);
 	}

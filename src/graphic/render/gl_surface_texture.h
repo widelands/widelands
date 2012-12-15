@@ -31,7 +31,7 @@ public:
 	static void Cleanup();
 
 	GLSurfaceTexture(SDL_Surface * surface);
-	GLSurfaceTexture(int w, int h);
+	GLSurfaceTexture(int w, int h, bool alpha);
 	virtual ~GLSurfaceTexture();
 
 	/// Interface implementation
@@ -39,6 +39,7 @@ public:
 	virtual void lock(LockMode);
 	virtual void unlock(UnlockMode);
 	virtual uint16_t get_pitch() const;
+	virtual const SDL_PixelFormat & format() const;
 
 	// Note: the following functions are reimplemented here though they
 	// basically only call the functions in GLSurface wrapped in calls to
@@ -69,6 +70,10 @@ private:
 	/// Keep the size of the opengl texture. This is necessary because some
 	/// systems support only a power of two for texture sizes.
 	uint32_t m_tex_w, m_tex_h;
+
+	/// Internally, all surfaces are with alpha channel. We can ignore it, when
+	/// we should not have one, though.
+	bool has_alpha_;
 };
 
 #endif //GL_SURFACE_TEXTURE_H

@@ -35,7 +35,6 @@ public:
 	/// Interface implementations
 	virtual uint32_t get_w() const;
 	virtual uint32_t get_h() const;
-	virtual const SDL_PixelFormat & format() const;
 	virtual uint8_t * get_pixels() const;
 	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr);
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y);

@@ -119,9 +119,9 @@ struct Graphic : public IGraphic {
 
 	void save_png(const IPicture*, StreamWrite*) const;
 
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false);
+	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false) const;
 
-	Surface* create_surface(int32_t w, int32_t h, bool alpha = false);
+	Surface* create_surface(int32_t w, int32_t h, bool alpha = false) const;
 
 	const IPicture* create_grayed_out_pic(const IPicture* pic);
 	const IPicture* create_changed_luminosity_pic
@@ -149,7 +149,7 @@ struct Graphic : public IGraphic {
 	const GraphicCaps& caps() const throw () {return m_caps;}
 
 private:
-	SDL_Surface * extract_sdl_surface(Surface & surf, Rect srcrect);
+	SDL_Surface * extract_sdl_surface(Surface & surf, Rect srcrect) const;
 
 protected:
 	// Static helper function for png writing

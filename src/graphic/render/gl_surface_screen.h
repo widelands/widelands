@@ -34,12 +34,10 @@ public:
 	virtual void lock(LockMode);
 	virtual void unlock(UnlockMode);
 	virtual uint16_t get_pitch() const;
+	virtual const SDL_PixelFormat & format() const;
 
 private:
 	void swap_rows();
-
-	/// Pixel data while locked
-	boost::scoped_array<uint8_t> m_pixels;
 };
 
 #endif // GL_SURFACE_SCREEN_H

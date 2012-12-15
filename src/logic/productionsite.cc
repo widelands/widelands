@@ -247,7 +247,7 @@ std::string ProductionSite::get_statistics_string()
 	else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
 		char buffer[1000];
 		snprintf
-			(buffer, sizeof(buffer),
+			(buffer, sizeof(buffer), "%s",
 			 ngettext("Worker missing", "Workers missing", nr_requests));
 		return buffer;
 	}

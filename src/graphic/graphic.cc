@@ -17,8 +17,6 @@
  *
  */
 
-// TODO(sirver): screenshots in beiden impl testen. Scheinen kaputt zu sein.
-// TODO(sirver): fix style.
 #include "graphic.h"
 
 #include "build_info.h"
@@ -543,7 +541,7 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
  * Create and return an \ref SDL_Surface that contains the given sub-rectangle
  * of the given pixel region.
  */
-SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect)
+SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect) const
 {
 	assert(srcrect.x >= 0);
 	assert(srcrect.y >= 0);
@@ -665,7 +663,7 @@ void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
  * @param alpha if true the surface is created with alpha channel
  * @return the new Surface created from the SDL_Surface
  */
-IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha)
+IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha) const
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
@@ -692,12 +690,12 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
  * @param h height of the new surface
  * @return the new created surface
  */
-Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha)
+Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha) const
 {
 #ifdef USE_OPENGL
 	if (g_opengl)
 	{
-		return new GLSurfaceTexture(w, h);
+		return new GLSurfaceTexture(w, h, alpha);
 	}
 	else
 #endif

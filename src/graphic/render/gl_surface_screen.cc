@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "gl_utils.h"
 #include "gl_surface_screen.h"
 
 GLSurfaceScreen::GLSurfaceScreen(uint32_t w, uint32_t h)
@@ -41,6 +42,10 @@ void GLSurfaceScreen::swap_rows()
 		begin_row += m_w * 4;
 		end_row -= m_w * 4;
 	}
+}
+
+const SDL_PixelFormat & GLSurfaceScreen::format() const {
+	return gl_rgb_format();
 }
 
 void GLSurfaceScreen::lock(Surface::LockMode mode)

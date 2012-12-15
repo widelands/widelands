@@ -20,7 +20,6 @@
 #include <cmath>
 
 #include "gl_surface_texture.h"
-#include "gl_utils.h"
 #include "graphic/graphic.h"
 #include "upcast.h"
 
@@ -33,11 +32,6 @@ uint32_t GLSurface::get_w() const {
 uint32_t GLSurface::get_h() const {
 	return m_h;
 }
-
-const SDL_PixelFormat & GLSurface::format() const {
-	return gl_rgba_format();
-}
-
 
 uint8_t * GLSurface::get_pixels() const
 {
