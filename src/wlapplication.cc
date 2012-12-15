@@ -24,6 +24,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/editor_mapselect.h"
@@ -274,7 +275,6 @@ m_homedir(FileSystem::GetHomedir() + "/.widelands"),
 m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
-	UI::g_fh = new UI::Font_Handler();
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 
@@ -301,6 +301,12 @@ m_redirected_stdio(false)
 	else
 		g_gr = 0;
 
+	if (TTF_Init() == -1)
+		throw wexception
+			("True Type library did not initialize: %s\n", TTF_GetError());
+	UI::g_fh = new UI::Font_Handler();
+	UI::g_fh1 = UI::create_fonthandler(*g_gr, g_fs);
+
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
 }
@@ -319,6 +325,12 @@ WLApplication::~WLApplication()
 	assert(UI::g_fh);
 	delete UI::g_fh;
 	UI::g_fh = 0;
+
+	assert(UI::g_fh1);
+	delete UI::g_fh1;
+	UI::g_fh1 = 0;
+
+	TTF_Quit(); // TODO not here
 
 	assert(g_fs);
 	delete g_fs;
@@ -637,7 +649,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 						snprintf(buffer, sizeof(buffer), SCREENSHOT_DIR "/shot%04u.png", nr);
 						if (g_fs->FileExists(buffer))
 							continue;
-						g_gr->screenshot(*buffer);
+						g_gr->screenshot(buffer);
 						break;
 					}
 				}

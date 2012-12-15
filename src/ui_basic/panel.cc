@@ -21,7 +21,7 @@
 
 #include "constants.h"
 #include "graphic/font_handler.h"
-#include "graphic/offscreensurface.h"
+#include "graphic/iblitable_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/wordwrap.h"
 #include "log.h"
@@ -40,8 +40,8 @@ Panel * Panel::_g_mousein   = 0;
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::_g_allow_user_input = true;
-PictureID Panel::s_default_cursor = g_gr->get_no_picture();
-PictureID Panel::s_default_cursor_click = g_gr->get_no_picture();
+const IPicture* Panel::s_default_cursor = NULL;
+const IPicture* Panel::s_default_cursor_click = NULL;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -137,8 +137,8 @@ int32_t Panel::run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->get_picture(PicMod_UI,  "pics/cursor.png");
-	s_default_cursor_click = g_gr->get_picture(PicMod_UI,  "pics/cursor_click.png");
+	s_default_cursor = g_gr->imgcache().load(PicMod_UI,  "pics/cursor.png");
+	s_default_cursor_click = g_gr->imgcache().load(PicMod_UI,  "pics/cursor_click.png");
 
 	// Loop
 	_running = true;
@@ -262,8 +262,7 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_h = nh;
 
 	if (_cache) {
-		// The old surface is freed automatically
-		_cache = g_gr->create_offscreen_surface(_w, _h);
+		_cache.reset(g_gr->create_surface(_w, _h, false));
 	}
 
 	if (_parent)
@@ -533,21 +532,17 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
- * from an \ref IOffscreenSurface containing the cached image, provided that
- * the graphics system supports it.
+ * from an \ref Surface containing the cached image.
  *
  * \note Caching only works properly for solid panels that have no transparency.
  */
 void Panel::set_cache(bool cache)
 {
-	if (!g_gr->caps().offscreen_rendering)
-		return;
-
 	if (cache) {
 		_flags |= pf_cache;
 	} else {
 		_flags &= ~pf_cache;
-		_cache.reset();
+		_cache.reset(NULL);
 	}
 }
 
@@ -846,22 +841,22 @@ void Panel::do_draw(RenderTarget & dst)
 		uint32_t innerh = _h - (_tborder + _bborder);
 
 		if
-			(!_cache || !_cache->valid() ||
-			 static_cast<Surface *>(_cache.get())->get_w() != innerw ||
-			 static_cast<Surface *>(_cache.get())->get_h() != innerh)
+			(!_cache ||
+			 _cache.get()->get_w() != innerw ||
+			 _cache.get()->get_h() != innerh)
 		{
-			_cache = g_gr->create_offscreen_surface(innerw, innerh);
+			_cache.reset(g_gr->create_surface(innerw, innerh, false));
 			_needdraw = true;
 		}
 
 		if (_needdraw) {
-			RenderTarget inner(_cache);
+			RenderTarget inner(_cache.get());
 			do_draw_inner(inner);
 
 			_needdraw = false;
 		}
 
-		dst.blit(Point(_lborder, _tborder), _cache);
+		dst.blit(Point(_lborder, _tborder), _cache.get(), CM_Copy);
 	} else {
 		Rect innerwindow
 			(Point(_lborder, _tborder),
@@ -1091,8 +1086,8 @@ void Panel::ui_mousemove
 		return;
 
 	Panel * p;
-	uint32_t w, h;
-	g_gr->get_picture_size(s_default_cursor, w, h);
+	uint32_t w = s_default_cursor->get_w();
+	uint32_t h = s_default_cursor->get_h();
 
 	g_gr->update_rectangle(x - xdiff, y - ydiff, w, h);
 	g_gr->update_rectangle(x, y, w, h);

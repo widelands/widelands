@@ -51,7 +51,7 @@ struct Element {
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect & _bbox, const PictureID & _image)
+	ImageElement(const Rect & _bbox, const IPicture* _image)
 		: Element(_bbox), image(_image) {}
 
 	virtual void draw(RenderTarget & dst)
@@ -59,7 +59,7 @@ struct ImageElement : Element {
 		dst.blit(Point(0, 0), image);
 	}
 
-	PictureID image;
+	const IPicture* image;
 };
 
 struct TextlineElement : Element {
@@ -337,7 +337,7 @@ void RichText::parse(const std::string & rtext)
 			 img_it != cur_block_images.end();
 			 ++img_it)
 		{
-			const PictureID image = g_gr->get_picture(PicMod_Game, *img_it);
+			const IPicture* image = g_gr->imgcache().load(PicMod_Game, *img_it);
 			if (!image)
 				continue;
 

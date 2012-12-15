@@ -1,0 +1,30 @@
+<rt>
+<p><font size=20 underline=1>A bullet list</font></p>
+<sub padding=10 width=490>
+<p>
+<sub valign=top><p><space fill=" "><img src=bullet.png></p></sub><sub width=450>
+<p>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor.
+</p>
+</sub>
+
+<sub valign=top><p><space fill=" "><img src=bullet.png></p></sub><sub width=450>
+<p>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</p>
+</sub>
+
+<sub valign=top><p><space fill=" "><img src=bullet.png></p></sub><sub width=450>
+<p>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor.
+</p>
+</sub>
+</p>
+
+</sub>
+</rt>

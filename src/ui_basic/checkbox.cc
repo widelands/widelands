@@ -27,29 +27,29 @@
 namespace UI {
 /**
  * Stateboxes start out enabled and unchecked.
- * If picid is non-zero, the given picture is used instead of the normal
+ * If pic is non-zero, the given picture is used instead of the normal
  * checkbox graphics.
 */
 Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
-	 PictureID           const picid,
+	 const IPicture* pic,
 	 std::string const &       tooltip_text)
 	:
 	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
 	m_flags(Is_Enabled)
 {
-	if (picid != g_gr->get_no_picture()) {
-		uint32_t w, h;
-		g_gr->get_picture_size(picid, w, h);
+	if (pic) {
+		uint32_t w = pic->get_w();
+		uint32_t h = pic->get_h();
 		set_desired_size(w, h);
 		set_size(w, h);
 
 		set_flags(Has_Custom_Picture, true);
-		m_pic_graphics = picid;
+		m_pic_graphics = pic;
 	} else
 		m_pic_graphics =
-			g_gr->get_picture(PicMod_UI, "pics/checkbox_light.png");
+			g_gr->imgcache().load(PicMod_UI, "pics/checkbox_light.png");
 }
 
 
@@ -72,7 +72,7 @@ void Statebox::set_enabled(bool const enabled)
 	set_flags(Is_Enabled, enabled);
 
 	if (not (m_flags & Has_Custom_Picture)) {
-		m_pic_graphics = g_gr->get_picture
+		m_pic_graphics = g_gr->imgcache().load
 			(PicMod_UI,
 			 enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
 		set_flags
@@ -105,8 +105,8 @@ void Statebox::draw(RenderTarget & dst)
 {
 	if (m_flags & Has_Custom_Picture) {
 		// center picture
-		uint32_t w, h;
-		g_gr->get_picture_size(m_pic_graphics, w, h);
+		uint32_t w = m_pic_graphics->get_w();
+		uint32_t h = m_pic_graphics->get_h();
 
 		dst.blit
 			(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2),

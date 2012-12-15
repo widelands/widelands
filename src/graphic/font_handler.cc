@@ -31,7 +31,6 @@
 
 #include "rendertarget.h"
 #include "surface.h"
-#include "graphic/render/surface_sdl.h"
 #include "wordwrap.h"
 
 #include <SDL_image.h>
@@ -58,7 +57,7 @@ struct LineCacheEntry {
 	/*@}*/
 
 	/*@{*/
-	PictureID picture;
+	IPicture* picture;
 	uint32_t width;
 	uint32_t height;
 	/*@}*/
@@ -86,15 +85,11 @@ private:
 Font_Handler::Font_Handler() :
 	d(new Data)
 {
-	if (TTF_Init() == -1)
-		throw wexception
-			("True Type library did not initialize: %s\n", TTF_GetError());
 }
 
 
 Font_Handler::~Font_Handler() {
 	Font::shutdown();
-	TTF_Quit();
 }
 
 
@@ -135,6 +130,7 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
 	LineCache::iterator it = linecache.insert(linecache.begin(), LineCacheEntry());
 	it->style = style;
 	it->text = text;
+	it->picture = 0;
 	render_line(*it);
 
 	while (linecache.size() > MaxLineCacheSize)
@@ -149,11 +145,8 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
  */
 void Font_Handler::Data::render_line(LineCacheEntry & lce)
 {
-	//static int count = 0;
-	//log("render_line(%s): %i\n", lce.text.c_str(), ++count);
-
 	TTF_Font * font = lce.style.font->get_ttf_font();
-	SDL_Color sdl_fg = {lce.style.fg.r(), lce.style.fg.g(), lce.style.fg.b(), 0};
+	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, 0};
 
 	// Work around an Issue in SDL_TTF that dies when the surface
 	// has zero width
@@ -195,7 +188,7 @@ void Font_Handler::draw_text
 
 	do_align(align, dstpoint.x, dstpoint.y, lce.width + 2 * LINE_MARGIN, lce.height);
 
-	if (lce.picture && lce.picture->valid())
+	if (lce.picture)
 		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.picture);
 
 	if (caret <= text.size())
@@ -232,7 +225,7 @@ uint32_t Font_Handler::draw_text_raw
 {
 	const LineCacheEntry & lce = d->get_line(style, text);
 
-	if (lce.picture && lce.picture->valid())
+	if (lce.picture)
 		dst.blit(dstpoint, lce.picture);
 
 	return lce.width;
@@ -275,7 +268,7 @@ void Font_Handler::draw_caret
 
 	int caret_x = style.calc_bare_width(sub);
 
-	PictureID caretpic = g_gr->get_picture(PicMod_UI, "pics/caret.png");
+	const IPicture* caretpic = g_gr->imgcache().load(PicMod_UI, "pics/caret.png");
 	Point caretpt;
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->get_w();
 	caretpt.y = dstpoint.y + (style.font->height() - caretpic->get_h()) / 2;
@@ -305,14 +298,6 @@ void Font_Handler::do_align
 		else if (align & Align_Right)
 			dstx -= w;
 	}
-}
-
-/*
- * Flushes the cached picture ids
- */
-void Font_Handler::flush_cache()
-{
-	d->linecache.clear();
 }
 
 /**

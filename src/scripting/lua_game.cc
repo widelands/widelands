@@ -1027,7 +1027,7 @@ int L_Objective::set_title(lua_State * L) {
 /* RST
 	.. attribute:: body
 
-		(RW) The complete text of this objective. Can be Widelands RichText.
+		(RW) The complete text of this objective. Can be Widelands Richtext.
 */
 int L_Objective::get_body(lua_State * L) {
 	Objective & o = get(L, get_game(L));

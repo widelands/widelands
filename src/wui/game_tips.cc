@@ -206,12 +206,11 @@ void GameTips::show_tip(int32_t index) {
 	Rect text_area;
 
 	// try to load a background
-	const PictureID pic_background =
-		g_gr->get_picture(PicMod_Menu, m_background_picture.c_str());
-	if (pic_background != g_gr->get_no_picture()) {
-		uint32_t w = 0;
-		uint32_t h = 0;
-		g_gr->get_picture_size(pic_background, w, h);
+	const IPicture* pic_background =
+		g_gr->imgcache().load(PicMod_Menu, m_background_picture.c_str());
+	if (pic_background) {
+		uint32_t w = pic_background->get_w();
+		uint32_t h = pic_background->get_h();
 		// center picture
 		Point pt((xres - w) / 2, (yres - h) / 2);
 		tips_area = Rect(pt, w, h);

@@ -24,7 +24,6 @@
 #include "writeHTML.h"
 
 #include "io/filewrite.h"
-#include "graphic/picture_id.h"
 
 #include <stdint.h>
 #include <cstring>
@@ -33,6 +32,7 @@
 
 struct Profile;
 struct Section;
+class IPicture;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
@@ -68,7 +68,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack
-	PictureID icon() const throw () {return m_icon;}
+	const IPicture* icon() const throw () {return m_icon;}
 
 	/// \return ware's localized descriptive text
 	std::string const & helptext() const throw () {return m_helptext;}
@@ -104,7 +104,7 @@ private:
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture
-	PictureID   m_icon;       ///< Index of ware's picture in picture stack
+	const IPicture* m_icon;       ///< Index of ware's picture in picture stack
 	uint8_t     m_preciousness;
 };
 

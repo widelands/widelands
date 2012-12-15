@@ -25,8 +25,10 @@
 
 #include "economy/flag.h"
 #include "economy/request.h"
+#include "text_layout.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -56,7 +58,7 @@ Building_Descr::Building_Descr
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
-	m_buildicon     (g_gr->get_no_picture()),
+	m_buildicon     (NULL),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
@@ -222,7 +224,7 @@ Called whenever building graphics need to be loaded.
 void Building_Descr::load_graphics()
 {
 	if (m_buildicon_fname.size())
-		m_buildicon = g_gr->get_picture(PicMod_Game, m_buildicon_fname.c_str());
+		m_buildicon = g_gr->imgcache().load(PicMod_Game, m_buildicon_fname.c_str());
 }
 
 /*
@@ -559,7 +561,7 @@ std::string Building::info_string(std::string const & format) {
 			}
 		} else
 			result << *i.current;
-	return result.str();
+	return as_uifont(result.str());
 }
 
 
@@ -755,11 +757,10 @@ void Building::draw_help
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
-		//  TODO make more here
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_small(),
-			 pos - Point(0, 48),
+		UI::g_fh1->draw_text
+			(dst, pos - Point(0, 48),
 			 info_string(igbase.building_census_format()),
+			 0,
 			 UI::Align_Center);
 	}
 
@@ -769,10 +770,10 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_small(),
-			 pos - Point(0, 35),
+		UI::g_fh1->draw_text
+			(dst, pos - Point(0, 35),
 			 info_string(igbase.building_statistics_format()),
+			 0,
 			 UI::Align_Center);
 	}
 }

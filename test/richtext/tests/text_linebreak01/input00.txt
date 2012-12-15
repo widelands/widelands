@@ -1,0 +1,6 @@
+<rt db_show_spaces=1>
+   <p>
+      Hello   
+      beautiful  World
+   </p>
+</rt>

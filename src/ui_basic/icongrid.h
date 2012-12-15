@@ -47,7 +47,7 @@ struct Icon_Grid : public Panel {
 
 	int32_t add
 		(std::string const & name,
-		 PictureID           picid,
+		 const IPicture* pic,
 		 void              * data,
 		 std::string const & descr = std::string());
 	void * get_data(int32_t idx);

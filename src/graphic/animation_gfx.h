@@ -20,24 +20,26 @@
 #ifndef ANIMATION_GFX_H
 #define ANIMATION_GFX_H
 
+class IImageLoader;
+class IPicture;
+
 #include "animation.h"
 #include "logic/widelands.h"
-#include "picture_id.h"
 #include "rgbcolor.h"
 
 struct AnimationGfx { /// The graphics belonging to an animation.
-	AnimationGfx(AnimationData const * data);
+	AnimationGfx(const IImageLoader&, AnimationData const * data);
 	~AnimationGfx();
 
 	const Point get_hotspot() const throw () {return m_hotspot;}
-	typedef std::vector<PictureID> Frames;
+	typedef std::vector<IPicture* > Frames;
 	typedef Frames::size_type Index;
 	Index nr_frames() const
 	{
 		assert((*m_plrframes)[0]); return m_plrframes[0].size();
 	}
 
-	const PictureID & get_frame
+	const IPicture* get_frame
 		(Index                    const i,
 		 Widelands::Player_Number const player_number,
 		 const RGBColor & playercolor)
@@ -54,7 +56,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 		return m_plrframes[player_number][i];
 	}
 
-	const PictureID & get_frame(Index const i) const {
+	const IPicture* get_frame(Index const i) const {
 		assert(i < nr_frames());
 		return m_plrframes[0][i];
 	}

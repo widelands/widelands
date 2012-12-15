@@ -1,0 +1,5 @@
+<rt>
+<p>Left Aligned Text</p>
+<p align=center>Center Aligned Text</p>
+<p align=right>Right Aligned Text</p>
+</rt>

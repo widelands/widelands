@@ -114,9 +114,9 @@ template <> struct Table<void *> : public Panel {
 		Entry_Record(void * entry);
 
 		void set_picture
-			(uint8_t col, PictureID picid, std::string const & = std::string());
+			(uint8_t col, const IPicture* pic, std::string const & = std::string());
 		void set_string(uint8_t col, std::string const &);
-		PictureID get_picture(uint8_t col) const;
+		const IPicture* get_picture(uint8_t col) const;
 		std::string const & get_string(uint8_t col) const;
 		void * entry() const throw () {return m_entry;}
 		void set_color(const  RGBColor c) {
@@ -137,7 +137,7 @@ template <> struct Table<void *> : public Panel {
 		bool     use_clr;
 		RGBColor clr;
 		struct _data {
-			PictureID   d_picture;
+			const IPicture* d_picture;
 			std::string d_string;
 			bool d_checked;
 

@@ -21,12 +21,11 @@
 #ifndef UI_PANEL_H
 #define UI_PANEL_H
 
-#include <boost/signals/trackable.hpp>
 #include <boost/noncopyable.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <boost/signals/trackable.hpp>
 
 #include "point.h"
-#include "graphic/picture_id.h"
-#include "graphic/surfaceptr.h"
 #include "graphic/graphic.h"
 
 #include <SDL_keyboard.h>
@@ -264,7 +263,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	OffscreenSurfacePtr _cache;
+	boost::scoped_ptr<Surface> _cache;
 	bool _needdraw;
 
 	/**
@@ -303,8 +302,8 @@ private:
 	static Panel * _g_mousegrab;
 	static Panel * _g_mousein;
 	static bool _g_allow_user_input;
-	static PictureID s_default_cursor;
-	static PictureID s_default_cursor_click;
+	static const IPicture* s_default_cursor;
+	static const IPicture* s_default_cursor_click;
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {

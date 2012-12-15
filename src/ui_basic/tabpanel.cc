@@ -42,7 +42,7 @@ Tab::Tab
 	(Tab_Panel         * const parent,
 	 uint32_t            const id,
 	 std::string const &       name,
-	 PictureID           const gpicid,
+	 const IPicture* gpic,
 	 std::string const &       gtooltip,
 	 Panel             * const gpanel)
 	:
@@ -51,7 +51,7 @@ Tab::Tab
 		 TP_BUTTON_HEIGHT, gtooltip),
 	m_parent(parent),
 	m_id(id),
-	picid(gpicid),
+	pic(gpic),
 	tooltip(gtooltip),
 	panel(gpanel)
 {
@@ -78,7 +78,7 @@ void Tab::activate() {
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 PictureID const background)
+	 const IPicture* background)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
@@ -88,7 +88,7 @@ Tab_Panel::Tab_Panel
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
-	 PictureID const background)
+	 const IPicture* background)
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
@@ -150,7 +150,7 @@ void Tab_Panel::update_desired_size()
 */
 uint32_t Tab_Panel::add
 	(std::string const & name,
-	 PictureID           const picid,
+	 const IPicture* pic,
 	 Panel             * const panel,
 	 std::string const &       tooltip_text)
 {
@@ -158,7 +158,7 @@ uint32_t Tab_Panel::add
 	assert(panel->get_parent() == this);
 
 	uint32_t id = m_tabs.size();
-	m_tabs.push_back(new Tab(this, id, name, picid, tooltip_text, panel));
+	m_tabs.push_back(new Tab(this, id, name, pic, tooltip_text, panel));
 
 	panel->set_pos(Point(0, TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
 	panel->set_visible(id == m_active);
@@ -208,17 +208,19 @@ void Tab_Panel::draw(RenderTarget & dst)
 	// draw the background
 	compile_assert(2 < TP_BUTTON_WIDTH);
 	compile_assert(4 < TP_BUTTON_HEIGHT);
-	dst.tile
-		(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
-		 m_pic_background, Point(get_x(), get_y()));
-	assert(TP_BUTTON_HEIGHT - 2 <= get_h());
-	dst.tile
-		(Rect
-		 	(Point(0, TP_BUTTON_HEIGHT - 2),
-		 	 get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
-		 m_pic_background,
-		 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
 
+	if (m_pic_background) {
+		dst.tile
+			(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
+			 m_pic_background, Point(get_x(), get_y()));
+		assert(TP_BUTTON_HEIGHT - 2 <= get_h());
+		dst.tile
+			(Rect
+			 (Point(0, TP_BUTTON_HEIGHT - 2),
+			  get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
+			 m_pic_background,
+			 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
+	}
 
 	// draw the buttons
 	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
@@ -228,12 +230,12 @@ void Tab_Panel::draw(RenderTarget & dst)
 				 MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
-		uint32_t cpw, cph;
-		g_gr->get_picture_size(m_tabs[idx]->picid, cpw, cph);
-
+		assert(m_tabs[idx]->pic);
+		uint32_t cpw = m_tabs[idx]->pic->get_w();
+		uint32_t cph = m_tabs[idx]->pic->get_h();
 		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
-			 m_tabs[idx]->picid);
+			 m_tabs[idx]->pic);
 
 		// Draw top part of border
 		RGBColor black(0, 0, 0);

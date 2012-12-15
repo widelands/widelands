@@ -47,17 +47,17 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_advanced_options
 		(this, "advanced_options",
 		 get_w() * 9 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 _("Advanced Options"), std::string(), true, false),
 	m_cancel
 		(this, "cancel",
 		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -65,18 +65,18 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this,
 		 (get_w() / 2) - (m_vbutw * 2), get_h() * 3833 / 10000, get_w() / 5, m_vbutw,
 		 opt.maxfps, 0, 100, "",
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 	m_sb_autosave
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8167 / 10000, get_w() / 4, m_vbutw,
 		 opt.autosave / 60, 0, 100, _("min."),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"), true),
 
 	m_sb_remove_replays
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
 		 opt.remove_replays, 0, 365, _("days"),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"), true),
 
 // Title
 	m_title
@@ -279,12 +279,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 			m_resolutions[i].yres  == opt.yres and
 			m_resolutions[i].depth == opt.depth;
 		did_select_a_res |= selected;
-		m_reslist.add(buf, 0, g_gr->get_no_picture(), selected);
+		m_reslist.add(buf, 0, NULL, selected);
 	}
 	if (not did_select_a_res) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", opt.xres, opt.yres, opt.depth);
-		m_reslist.add(buf, 0, g_gr->get_no_picture(), true);
+		m_reslist.add(buf, 0, NULL, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
 		m_resolutions[entry].xres  = opt.xres;
@@ -295,11 +295,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	// Fill language list
 	m_language_list.add
 		(_("Try system language"), "", // "try", as many translations are missing.
-		 g_gr->get_no_picture(), "" == opt.language);
+		 NULL, "" == opt.language);
 
 	m_language_list.add
 		("English", "en",
-		 g_gr->get_no_picture(), "en" == opt.language);
+		 NULL, "en" == opt.language);
 
 	filenameset_t files;
 	Section * s = &g_options.pull_section("global");
@@ -325,14 +325,14 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		char const * const abbrev = FileSystem::FS_Filename(path);
 		m_language_list.add
 			(s->get_string(abbrev, abbrev), abbrev,
-			 g_gr->get_no_picture(), abbrev == opt.language);
+			 NULL, abbrev == opt.language);
 		own_selected |= abbrev == opt.language;
 	}
 	// Add currently used language manually
 	if (!own_selected)
 		m_language_list.add
 			(s->get_string(opt.language.c_str(), opt.language.c_str()),
-			 opt.language, g_gr->get_no_picture(), true);
+			 opt.language, NULL, true);
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
@@ -388,12 +388,12 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_cancel
 		(this, "cancel",
 		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() / 4,   get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -401,17 +401,17 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this,
 		 get_w() * 18 / 25, get_h() * 63 / 100, get_w() / 4, m_vbutw,
 		 opt.speed_of_new_game / 1000, 0, 100, _("x"),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 	m_sb_dis_panel
 		(this,
 		 get_w() * 18 / 25, get_h() * 6768 / 10000, get_w() / 4, m_vbutw,
 		 opt.panel_snap_distance, 0, 100, _("px."),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 	m_sb_dis_border
 		(this,
 		 get_w() * 18 / 25, get_h() * 7235 / 10000, get_w() / 4, m_vbutw,
 		 opt.border_snap_distance, 0, 100, _("px."),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 
 
 // Title
@@ -523,15 +523,15 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
 		did_select_a_font = cmpbool;
 		m_ui_font_list.add
-			(_("FreeSerif (Default)"), "serif", g_gr->get_no_picture(), cmpbool);
+			(_("FreeSerif (Default)"), "serif", NULL, cmpbool);
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
-			("FreeSans", "sans", g_gr->get_no_picture(), cmpbool);
+			("FreeSans", "sans", NULL, cmpbool);
 		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
-			("Widelands", UI_FONT_NAME_WIDELANDS, g_gr->get_no_picture(), cmpbool);
+			("Widelands", UI_FONT_NAME_WIDELANDS, NULL, cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
 		filenameset_t files;
@@ -553,7 +553,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 			cmpbool = !strcmp(name, opt.ui_font.c_str());
 			did_select_a_font |= cmpbool;
 			m_ui_font_list.add
-				(name, name, g_gr->get_no_picture(), cmpbool);
+				(name, name, NULL, cmpbool);
 		}
 
 		if (!did_select_a_font)

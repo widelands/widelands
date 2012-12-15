@@ -1,0 +1,5 @@
+<rt>
+<p><font size=20 underline=1>Heading before</font></p>
+<p><img src="bar_left.png"><space fill="bar_middle.png"><img src="bar_right.png"></p>
+<p><font size=20 underline=1>Heading after</font></p>
+</rt>

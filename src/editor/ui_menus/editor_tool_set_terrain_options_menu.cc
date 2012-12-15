@@ -17,26 +17,26 @@
  *
  */
 
-#include "editor_tool_set_terrain_options_menu.h"
+#include <SDL_keysym.h>
+#include <boost/foreach.hpp>
 
-#include "editor/tools/editor_set_terrain_tool.h"
 #include "editor/editorinteractive.h"
+#include "editor/tools/editor_set_terrain_tool.h"
+#include "graphic/graphic.h"
+#include "graphic/iblitable_surface.h"
+#include "graphic/rendertarget.h"
+#include "graphic/texture.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include <SDL_keysym.h>
-#include "wlapplication.h"
 #include "logic/world.h"
 #include "logic/worlddata.h"
-
 #include "ui_basic/button.h"
-#include "ui_basic/panel.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/panel.h"
+#include "wlapplication.h"
 
-#include "graphic/graphic.h"
-#include "graphic/texture.h"
-#include "graphic/rendertarget.h"
+#include "editor_tool_set_terrain_options_menu.h"
 
-#include "log.h"
 
 Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	(Editor_Interactive         & parent,
@@ -53,7 +53,6 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	const uint32_t terrains_in_row = static_cast<uint32_t>
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
 
-
 	int32_t check[] = {
 		0,                                            //  "green"
 		TERRAIN_DRY,                                  //  "dry"
@@ -65,26 +64,26 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 	m_checkboxes.resize(nr_terrains);
 
-	const PictureID green =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
-	const PictureID water =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
-	const PictureID mountain =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png");
-	const PictureID dead =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png");
-	const PictureID unpassable =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png");
-	const PictureID dry =
-		g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
-#define small_pich 20
-#define small_picw 20
+	const IPicture* green =
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_green.png");
+	const IPicture* water =
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_water.png");
+	const IPicture* mountain =
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_mountain.png");
+	const IPicture* dead =
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_dead.png");
+	const IPicture* unpassable =
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_unpassable.png");
+	const IPicture* dry =
+		g_gr->imgcache().load(PicMod_Game, "pics/terrain_dry.png");
+
+	static const int small_pich = 20;
+	static const int small_picw = 20;
 
 	uint32_t cur_x = 0;
 	Point pos(hmargin(), vmargin());
-	for (size_t checkfor = 0; checkfor < 6; ++checkfor)
+	for (size_t checkfor = 0; checkfor < 6; ++checkfor) {
 		for (Widelands::Terrain_Index i  = 0; i < nr_terrains; ++i) {
-
 			const uint8_t ter_is = world.get_ter(i).get_is();
 			if (ter_is != check[checkfor])
 				continue;
@@ -95,66 +94,41 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-			PictureID picture;
+			IBlitableSurface* surf = g_gr->create_surface(64, 64);
+			const IPicture* tex = g_gr->imgcache().load(PicMod_Game,
+					g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
+						->get_texture_picture());
+			surf->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
 
-			// If offscreen rendering is not available only the terrain (and not
-			// the terrain type) is shown.
-			// TODO: Find a way to render this without offscreen rendering
-			//       or implement offscreen rendering for opengl
-			if (g_gr->caps().offscreen_rendering)
-			{
-				OffscreenSurfacePtr offscreen = g_gr->create_offscreen_surface(64, 64);
-				picture = g_gr->get_offscreen_picture(offscreen);
+			Point pt(1, 64 - small_pich - 1);
 
-				//  get the rendertarget for this
-				RenderTarget target(offscreen);
-
-				//  first, blit the terrain texture
-				target.blit
-					(Point(0, 0),
-					 g_gr->get_picture
-					 	(PicMod_Game,
-					 	 g_gr->get_maptexture_data
-					 	 	(world.terrain_descr(i).get_texture())
-					 	 ->get_texture_picture()));
-
-				Point pic(1, 64 - small_pich - 1);
-
-				//  check is green
-				if (ter_is == 0) {
-					target.blit(pic, green);
-					pic.x += small_picw + 1;
-				} else {
-					if (ter_is & TERRAIN_WATER) {
-						target.blit(pic, water);
-						pic.x += small_picw + 1;
-					}
-					if (ter_is & TERRAIN_MOUNTAIN) {
-						target.blit(pic, mountain);
-						pic.x += small_picw + 1;
-					}
-					if (ter_is & TERRAIN_ACID) {
-						target.blit(pic, dead);
-						pic.x += small_picw + 1;
-					}
-					if (ter_is & TERRAIN_UNPASSABLE) {
-						target.blit(pic, unpassable);
-						pic.x += small_picw + 1;
-					}
-					if (ter_is & TERRAIN_DRY)
-						target.blit(pic, dry);
-				}
+			//  check is green
+			if (ter_is == 0) {
+				surf->blit(pt, green, Rect(0, 0, green->get_w(), green->get_h()));
+				pt.x += small_picw + 1;
 			} else {
-				picture = g_gr->get_picture
-					(PicMod_Game,
-					 g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
-					 ->get_texture_picture());
+				if (ter_is & TERRAIN_WATER) {
+					surf->blit(pt, water, Rect(0, 0, water->get_w(), water->get_h()));
+					pt.x += small_picw + 1;
+				}
+				if (ter_is & TERRAIN_MOUNTAIN) {
+					surf->blit(pt, mountain, Rect(0, 0, mountain->get_w(), mountain->get_h()));
+					pt.x += small_picw + 1;
+				}
+				if (ter_is & TERRAIN_ACID) {
+					surf->blit(pt, dead, Rect(0, 0, dead->get_w(), dead->get_h()));
+					pt.x += small_picw + 1;
+				}
+				if (ter_is & TERRAIN_UNPASSABLE) {
+					surf->blit(pt, unpassable, Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
+					pt.x += small_picw + 1;
+				}
+				if (ter_is & TERRAIN_DRY)
+					surf->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
 			}
+			offscreen_surfaces_.push_back(surf); // Make sure we delete this later on.
 
-			//  Save this surface, so we can free it later on.
-			m_surfaces.push_back(picture);
-
-			UI::Checkbox & cb = *new UI::Checkbox(this, pos, picture);
+			UI::Checkbox & cb = *new UI::Checkbox(this, pos, surf);
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_state(m_tool.is_enabled(i));
 			cb.changedto.connect
@@ -164,6 +138,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			pos.x += TEXTURE_WIDTH + hspacing();
 			++cur_x;
 		}
+	}
 	pos.y += TEXTURE_HEIGHT + vspacing();
 
 	set_inner_size
@@ -187,8 +162,10 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu()
 {
+	BOOST_FOREACH(IPicture* pic, offscreen_surfaces_)
+		delete pic;
+	offscreen_surfaces_.clear();
 }
-
 
 void Editor_Tool_Set_Terrain_Options_Menu::selected
 	(int32_t const n, bool const t)

@@ -81,16 +81,16 @@ BulldozeConfirm::BulldozeConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
-			 g_gr->get_picture(PicMod_Game, "pics/menu_okay.png"));
+			 g_gr->imgcache().load(PicMod_UI,   "pics/but4.png"),
+			 g_gr->imgcache().load(PicMod_Game, "pics/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&BulldozeConfirm::ok, this));
 
 	UI::Button * cancelbtn =
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
-			 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"));
+			 g_gr->imgcache().load(PicMod_UI,   "pics/but4.png"),
+			 g_gr->imgcache().load(PicMod_Game, "pics/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&BulldozeConfirm::die, this));
 
 	center_to_parent();

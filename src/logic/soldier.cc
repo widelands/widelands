@@ -211,16 +211,16 @@ void Soldier_Descr::load_graphics() {
 	m_defense_pics.resize(m_max_defense_level + 1);
 	m_evade_pics  .resize(m_max_evade_level   + 1);
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i)
-		m_hp_pics[i] = g_gr->get_picture(PicMod_Game,  m_hp_pics_fn[i].c_str());
+		m_hp_pics[i] = g_gr->imgcache().load(PicMod_Game,  m_hp_pics_fn[i].c_str());
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i)
 		m_attack_pics[i] =
-			g_gr->get_picture(PicMod_Game,  m_attack_pics_fn[i].c_str());
+			g_gr->imgcache().load(PicMod_Game,  m_attack_pics_fn[i].c_str());
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i)
 		m_defense_pics[i] =
-			g_gr->get_picture(PicMod_Game,  m_defense_pics_fn[i].c_str());
+			g_gr->imgcache().load(PicMod_Game,  m_defense_pics_fn[i].c_str());
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i)
 		m_evade_pics[i] =
-			g_gr->get_picture(PicMod_Game,  m_evade_pics_fn[i].c_str());
+			g_gr->imgcache().load(PicMod_Game,  m_evade_pics_fn[i].c_str());
 	Worker_Descr::load_graphics();
 }
 
@@ -576,15 +576,18 @@ void Soldier::draw_info_icon
 	uint32_t w;
 	w = SOLDIER_HP_BAR_WIDTH;
 
-	const PictureID hppic = get_hp_level_pic();
-	const PictureID attackpic = get_attack_level_pic();
-	const PictureID defensepic = get_defense_level_pic();
-	const PictureID evadepic = get_evade_level_pic();
-	uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
-	g_gr->get_picture_size(hppic,      hpw, hph);
-	g_gr->get_picture_size(attackpic,  atw, ath);
-	g_gr->get_picture_size(defensepic, dew, deh);
-	g_gr->get_picture_size(evadepic,   evw, evh);
+	const IPicture* hppic = get_hp_level_pic();
+	const IPicture* attackpic = get_attack_level_pic();
+	const IPicture* defensepic = get_defense_level_pic();
+	const IPicture* evadepic = get_evade_level_pic();
+	uint32_t hpw = hppic->get_w();
+	uint32_t hph = hppic->get_h();
+	uint32_t atw = attackpic->get_w();
+	uint32_t ath = attackpic->get_h();
+	uint32_t dew = defensepic->get_w();
+	uint32_t deh = defensepic->get_h();
+	uint32_t evw = evadepic->get_w();
+	uint32_t evh = evadepic->get_h();
 
 	uint32_t totalwidth = std::max(std::max(atw + dew, hpw + evw), 2 * w);
 	uint32_t totalheight = 5 + std::max(hph + ath, evh + deh);
@@ -608,7 +611,7 @@ void Soldier::draw_info_icon
 	const RGBColor & color = owner().get_playercolor();
 	RGBColor complement_color;
 
-	if (static_cast<uint32_t>(color.r()) + color.g() + color.b() > 128 * 3)
+	if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3)
 		complement_color = RGBColor(32, 32, 32);
 	else
 		complement_color = RGBColor(224, 224, 224);
@@ -634,15 +637,18 @@ void Soldier::calc_info_icon_size
 {
 	const Soldier_Descr * soldierdesc = static_cast<const Soldier_Descr *>
 		(tribe.get_worker_descr(tribe.worker_index("soldier")));
-	const PictureID hppic = soldierdesc->get_hp_level_pic(0);
-	const PictureID attackpic = soldierdesc->get_attack_level_pic(0);
-	const PictureID defensepic = soldierdesc->get_defense_level_pic(0);
-	const PictureID evadepic = soldierdesc->get_evade_level_pic(0);
-	uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
-	g_gr->get_picture_size(hppic,      hpw, hph);
-	g_gr->get_picture_size(attackpic,  atw, ath);
-	g_gr->get_picture_size(defensepic, dew, deh);
-	g_gr->get_picture_size(evadepic,   evw, evh);
+	const IPicture* hppic = soldierdesc->get_hp_level_pic(0);
+	const IPicture* attackpic = soldierdesc->get_attack_level_pic(0);
+	const IPicture* defensepic = soldierdesc->get_defense_level_pic(0);
+	const IPicture* evadepic = soldierdesc->get_evade_level_pic(0);
+	uint32_t hpw = hppic->get_w();
+	uint32_t hph = hppic->get_h();
+	uint32_t atw = attackpic->get_w();
+	uint32_t ath = attackpic->get_h();
+	uint32_t dew = defensepic->get_w();
+	uint32_t deh = defensepic->get_h();
+	uint32_t evw = evadepic->get_w();
+	uint32_t evh = evadepic->get_h();
 
 	uint32_t animw;
 	animw = SOLDIER_HP_BAR_WIDTH;

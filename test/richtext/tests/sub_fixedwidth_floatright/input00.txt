@@ -1,0 +1,12 @@
+<rt>
+<sub width=106 float=right background=00ff00>
+   <p><font color=ff0000 size=21>
+   This text is inside Sub
+   </font></p>
+</sub>
+<p>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</p></rt>

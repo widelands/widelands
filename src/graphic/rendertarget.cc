@@ -27,7 +27,7 @@
 #include "logic/tribe.h"
 #include "vertex.h"
 
-#include "offscreensurface.h"
+#include "surface.h"
 
 #include "log.h"
 #include "upcast.h"
@@ -43,21 +43,11 @@ using Widelands::TCoords;
 /**
  * Build a render target for the given surface.
  */
-RenderTarget::RenderTarget(SurfacePtr bmp)
-{
-	m_surface = bmp;
-	reset();
-}
-
-/**
- * Build a render target for the given surface.
- */
-RenderTarget::RenderTarget(OffscreenSurfacePtr surf)
+RenderTarget::RenderTarget(Surface* surf)
 {
 	m_surface = surf;
 	reset();
 }
-
 
 /**
  * Sets an arbitrary drawing window.
@@ -139,7 +129,7 @@ int32_t RenderTarget::get_h() const
  */
 void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
-	 RGBColor const color, uint8_t width)
+	 const RGBColor& color, uint8_t width)
 {
 	m_surface->draw_line
 		(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,
@@ -168,44 +158,30 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 		m_surface->brighten_rect(r, factor);
 }
 
-void RenderTarget::clear()
-{
-	if
-		(not m_rect.x and not m_rect.y
-		 and
-		 m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
-		m_surface->clear();
-	else m_surface->fill_rect(m_rect, RGBColor(0, 0, 0));
-}
-
 /**
- * Blits a Picture on the screen or (if possible) on another Surface
- * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
- * to a non screen surface.
+ * Blits a Picture on another Surface
  *
  * This blit function copies the pixels to the destination surface.
- * I the source surface contains a alpha channel this is used during
+ * If the source surface contains a alpha channel this is used during
  * the blit.
  */
-void RenderTarget::blit(const Point dst, const PictureID picture, Composite cm)
+void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
 {
-	if (picture->valid())
-		doblit
-			(Rect(dst, 0, 0),
-			 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
+	doblit
+		(Rect(dst, 0, 0),
+		 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
 }
 
 /**
  * Like \ref blit, but use only a sub-rectangle of the source picture.
  */
 void RenderTarget::blitrect
-	(Point const dst, PictureID const picture, Rect const srcrc, Composite cm)
+	(Point const dst, const IPicture* picture, Rect const srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	if (picture->valid())
-		doblit(Rect(dst, 0, 0), picture, srcrc, cm);
+	doblit(Rect(dst, 0, 0), picture, srcrc, cm);
 }
 
 /**
@@ -214,11 +190,8 @@ void RenderTarget::blitrect
  * The pixel from ofs inside picture is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, PictureID const picture, Point ofs, Composite cm)
+void RenderTarget::tile(Rect r, const IPicture* picture, Point ofs, Composite cm)
 {
-	if (!picture->valid())
-		return;
-
 	int32_t srcw = picture->get_w();
 	int32_t srch = picture->get_h();
 
@@ -305,7 +278,7 @@ void RenderTarget::drawanim
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	const PictureID & frame =
+	const IPicture* frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -337,7 +310,7 @@ void RenderTarget::drawstatic
 	}
 
 	// Get the frame and its data
-	const PictureID & frame =
+	const IPicture* frame =
 		player ?
 		gfx->get_frame
 			(0, player->player_number(), player->get_playercolor())
@@ -345,7 +318,7 @@ void RenderTarget::drawstatic
 		gfx->get_frame
 			(0);
 
-	PictureID dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
+	const IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
 
 	dst -= Point(frame->get_w() / 2, frame->get_h() / 2);
 
@@ -374,7 +347,7 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	const PictureID & frame =
+	const IPicture* frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -449,7 +422,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Point dst, PictureID src, Rect srcrc, Composite cm)
+	(Point dst, const IPicture* src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);

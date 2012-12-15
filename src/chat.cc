@@ -130,7 +130,7 @@ std::string ChatMessage::color() const
 	if ((playern >= 0) && playern < MAX_PLAYERS) {
 		const RGBColor & clr = Player::Colors[playern];
 		char buf[sizeof("ffffff")];
-		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r(), clr.g(), clr.b());
+		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r, clr.g, clr.b);
 		return buf;
 	}
 	return "999999";

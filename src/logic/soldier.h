@@ -20,7 +20,6 @@
 #ifndef SOLDIER_H
 #define SOLDIER_H
 
-#include "graphic/picture_id.h"
 #include "worker.h"
 #include "tattribute.h"
 
@@ -67,16 +66,16 @@ struct Soldier_Descr : public Worker_Descr {
 	uint32_t get_defense_incr_per_level() const {return m_defense_incr;}
 	uint32_t get_evade_incr_per_level  () const {return m_evade_incr;}
 
-	PictureID get_hp_level_pic     (uint32_t const level) const {
+	const IPicture* get_hp_level_pic     (uint32_t const level) const {
 		assert(level <= m_max_hp_level);      return m_hp_pics     [level];
 	}
-	PictureID get_attack_level_pic (uint32_t const level) const {
+	const IPicture* get_attack_level_pic (uint32_t const level) const {
 		assert(level <= m_max_attack_level);  return m_attack_pics [level];
 	}
-	PictureID get_defense_level_pic(uint32_t const level) const {
+	const IPicture* get_defense_level_pic(uint32_t const level) const {
 		assert(level <= m_max_defense_level); return m_defense_pics[level];
 	}
-	PictureID get_evade_level_pic  (uint32_t const level) const {
+	const IPicture* get_evade_level_pic  (uint32_t const level) const {
 		assert(level <= m_max_evade_level);   return m_evade_pics  [level];
 	}
 
@@ -110,10 +109,10 @@ protected:
 	uint32_t m_max_evade_level;
 
 	//  level pictures
-	std::vector<PictureID>   m_hp_pics;
-	std::vector<PictureID>   m_attack_pics;
-	std::vector<PictureID>   m_evade_pics;
-	std::vector<PictureID>   m_defense_pics;
+	std::vector<const IPicture* >   m_hp_pics;
+	std::vector<const IPicture* >   m_attack_pics;
+	std::vector<const IPicture* >   m_evade_pics;
+	std::vector<const IPicture* >   m_defense_pics;
 	std::vector<std::string> m_hp_pics_fn;
 	std::vector<std::string> m_attack_pics_fn;
 	std::vector<std::string> m_evade_pics_fn;
@@ -227,16 +226,16 @@ public:
 	uint32_t get_defense() const;
 	uint32_t get_evade() const;
 
-	PictureID get_hp_level_pic     () const {
+	const IPicture* get_hp_level_pic     () const {
 		return descr().get_hp_level_pic     (m_hp_level);
 	}
-	PictureID get_attack_level_pic () const {
+	const IPicture* get_attack_level_pic () const {
 		return descr().get_attack_level_pic (m_attack_level);
 	}
-	PictureID get_defense_level_pic() const {
+	const IPicture* get_defense_level_pic() const {
 		return descr().get_defense_level_pic(m_defense_level);
 	}
-	PictureID get_evade_level_pic  () const {
+	const IPicture* get_evade_level_pic  () const {
 		return descr().get_evade_level_pic  (m_evade_level);
 	}
 

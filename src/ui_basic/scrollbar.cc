@@ -57,16 +57,16 @@ Scrollbar::Scrollbar
 	m_time_nextact  (0),
 	m_knob_grabdelta(0),
 	m_pic_minus
-		(g_gr->get_picture
+		(g_gr->imgcache().load
 		 	(PicMod_UI,
 		 	 horiz ? "pics/scrollbar_left.png"  : "pics/scrollbar_up.png")),
 	m_pic_plus
-		(g_gr->get_picture
+		(g_gr->imgcache().load
 		 	(PicMod_UI,
 		 	 horiz ? "pics/scrollbar_right.png" : "pics/scrollbar_down.png")),
 	m_pic_background
-		(g_gr->get_picture(PicMod_UI, "pics/scrollbar_background.png")),
-	m_pic_buttons   (g_gr->get_picture(PicMod_UI, "pics/but3.png"))
+		(g_gr->imgcache().load(PicMod_UI, "pics/scrollbar_background.png")),
+	m_pic_buttons   (g_gr->imgcache().load(PicMod_UI, "pics/but3.png"))
 {
 	set_think(true);
 }
@@ -249,20 +249,19 @@ void Scrollbar::action(Area const area)
 
 
 void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
-	PictureID pic;
 
 	dst.tile(r, m_pic_buttons, Point(get_x(), get_y()));
 
 	// Draw the picture
-	pic = g_gr->get_no_picture();
+	const IPicture* pic = NULL;
 	if (area == Minus)
 		pic = m_pic_minus;
 	else if (area == Plus)
 		pic = m_pic_plus;
 
-	if (pic != g_gr->get_no_picture()) {
-		uint32_t cpw, cph;
-		g_gr->get_picture_size(pic, cpw, cph);
+	if (pic) {
+		uint32_t cpw = pic->get_w();
+		uint32_t cph = pic->get_h();
 
 		dst.blit(r + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
 	}

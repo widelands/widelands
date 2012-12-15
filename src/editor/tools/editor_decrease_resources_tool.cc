@@ -60,13 +60,12 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 		        and
 		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
 		{
-			PictureID picid;
 			//  Ok, we're doing something. First remove the current overlays.
 			std::string str =
 			    map.world().get_resource(res)->get_editor_pic
 			    (mr.location().field->get_resources_amount());
-			picid = g_gr->get_picture(PicMod_Menu, str.c_str());
-			map.overlay_manager().remove_overlay(mr.location(), picid);
+			const IPicture* pic = g_gr->imgcache().load(PicMod_Menu, str.c_str());
+			map.overlay_manager().remove_overlay(mr.location(), pic);
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);
 				mr.location().field->set_starting_res_amount(0);
@@ -75,8 +74,8 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 				mr.location().field->set_starting_res_amount(amount);
 				//  set new overlay
 				str = map.world().get_resource(args.cur_res)->get_editor_pic(amount);
-				picid = g_gr->get_picture(PicMod_Menu, str.c_str());
-				map.overlay_manager().register_overlay(mr.location(), picid, 4);
+				pic = g_gr->imgcache().load(PicMod_Menu, str.c_str());
+				map.overlay_manager().register_overlay(mr.location(), pic, 4);
 				map.recalc_for_field_area
 				(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
 			}

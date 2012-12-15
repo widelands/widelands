@@ -35,7 +35,7 @@ Button::Button //  for textual buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 PictureID background_picture_id,
+	 const IPicture* background_picture_id,
 	 std::string const & title_text,
 	 std::string const & tooltip_text,
 	 bool const _enabled, bool const flat)
@@ -51,15 +51,15 @@ Button::Button //  for textual buttons
 	m_time_nextact  (0),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
-	m_pic_custom    (g_gr->get_no_picture()),
-	m_pic_custom_disabled(g_gr->get_no_picture()),
+	m_pic_custom    (NULL),
+	m_pic_custom_disabled(NULL),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
 	set_think(false);
 
-	if (m_pic_background && m_pic_background->valid())
+	if (m_pic_background)
 		set_cache(true);
 }
 
@@ -68,8 +68,8 @@ Button::Button //  for pictorial buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 PictureID background_picture_id,
-	 const PictureID foreground_picture_id,
+	 const IPicture* background_picture_id,
+	 const IPicture* foreground_picture_id,
 	 const std::string & tooltip_text,
 	 bool const _enabled, bool const flat)
 	:
@@ -91,7 +91,7 @@ Button::Button //  for pictorial buttons
 {
 	set_think(false);
 
-	if (m_pic_background && m_pic_background->valid())
+	if (m_pic_background)
 		set_cache(true);
 }
 
@@ -104,15 +104,15 @@ Button::~Button()
 /**
  * Sets a new picture for the Button.
 */
-void Button::set_pic(PictureID const picid)
+void Button::set_pic(const IPicture* pic)
 {
 	m_title.clear();
 
-	if (m_pic_custom == picid)
+	if (m_pic_custom == pic)
 		return;
 
-	m_pic_custom = picid;
-	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
+	m_pic_custom = pic;
+	m_pic_custom_disabled = g_gr->create_grayed_out_pic(pic);
 
 	update();
 }
@@ -125,7 +125,7 @@ void Button::set_title(std::string const & title) {
 	if (m_title == title)
 		return;
 
-	m_pic_custom = g_gr->get_no_picture();
+	m_pic_custom = NULL;
 	m_title      = title;
 
 	update();
@@ -164,7 +164,7 @@ void Button::draw(RenderTarget & dst)
 {
 	// Draw the background
 	if (not m_flat or m_draw_flat_background) {
-		assert(m_pic_background != g_gr->get_no_picture());
+		assert(m_pic_background);
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 		dst.tile(Rect(Point(0, 0), get_w(), get_h()), m_pic_background, Point(get_x(), get_y()));
 	}
@@ -174,9 +174,9 @@ void Button::draw(RenderTarget & dst)
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  if we got a picture, draw it centered
-	if (m_pic_custom != g_gr->get_no_picture()) {
-		uint32_t cpw, cph;
-		g_gr->get_picture_size(m_pic_custom, cpw, cph);
+	if (m_pic_custom) {
+		uint32_t cpw = m_pic_custom->get_w();
+		uint32_t cph = m_pic_custom->get_h();
 
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).

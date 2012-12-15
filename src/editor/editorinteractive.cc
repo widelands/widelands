@@ -54,7 +54,7 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 
 #define INIT_BUTTON(picture, name, tooltip)                         \
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
-	g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+	g_gr->imgcache().load(PicMod_Game, "pics/" picture ".png"),                      \
 	tooltip                                                                      \
 
 	m_toggle_main_menu
@@ -126,11 +126,12 @@ void Editor_Interactive::register_overlays() {
 	iterate_player_numbers(p, nr_players) {
 		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			PictureID const picid = g_gr->get_picture(PicMod_Game, fname);
-			uint32_t w, h;
-			g_gr->get_picture_size(picid, w, h);
+			const IPicture* pic = g_gr->imgcache().load(PicMod_Game, fname);
+			assert(pic);
+			uint32_t w = pic->get_w();
+			uint32_t h = pic->get_h();
 			map.overlay_manager().register_overlay
-			(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
+			(sp, pic, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 
@@ -146,7 +147,7 @@ void Editor_Interactive::register_overlays() {
 			    (amount);
 			if (immname.size())
 				overlay_manager.register_overlay
-				(fc, g_gr->get_picture(PicMod_Menu, immname.c_str()), 4);
+				(fc, g_gr->imgcache().load(PicMod_Menu, immname.c_str()), 4);
 		}
 	}
 
@@ -581,7 +582,7 @@ void Editor_Interactive::run_editor(std::string const & filename) {
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);
-		g_gr->flush(PicMod_Menu);
+		g_gr->imgcache().flush(PicMod_Menu);
 
 		{
 			Widelands::Map & map = *new Widelands::Map;
@@ -619,7 +620,7 @@ void Editor_Interactive::run_editor(std::string const & filename) {
 
 	editor.cleanup_objects();
 
-	g_gr->flush(PicMod_Game);
+	g_gr->imgcache().flush(PicMod_Game);
 	g_gr->flush_animations();
 	g_anim.flush();
 }

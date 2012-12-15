@@ -22,7 +22,6 @@
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
-#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "log.h"
@@ -71,8 +70,9 @@ BaseListselect::BaseListselect
 
 	if (show_check) {
 		uint32_t pic_h;
-		m_check_picid = g_gr->get_picture(PicMod_Game,  "pics/list_selected.png");
-		g_gr->get_picture_size(m_check_picid, m_max_pic_width, pic_h);
+		m_check_pic = g_gr->imgcache().load(PicMod_Game,  "pics/list_selected.png");
+		m_max_pic_width = m_check_pic->get_w();
+		pic_h = m_check_pic->get_h();
 		if (pic_h > m_lineheight)
 			m_lineheight = pic_h;
 	}
@@ -116,23 +116,23 @@ void BaseListselect::clear() {
 void BaseListselect::add
 	(char const * const   name,
 	 uint32_t             entry,
-	 PictureID    const   picid,
+	 const IPicture*   pic,
 	 bool         const   sel,
 	 std::string  const & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 
 	er->m_entry = entry;
-	er->picid   = picid;
+	er->pic   = pic;
 	er->use_clr = false;
 	er->name    = std::string(name);
 	er->tooltip = tooltip_text;
 	uint32_t entry_height = 0;
-	if (picid == g_gr->get_no_picture()) {
+	if (!pic) {
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	} else {
-		uint32_t w, h;
-		g_gr->get_picture_size(picid, w, h);
+		uint32_t w = pic->get_w();
+		uint32_t h = pic->get_h();
 		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
 			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
 		if (m_max_pic_width < w)
@@ -154,7 +154,7 @@ void BaseListselect::add
 
 void BaseListselect::add_front
 	(char const * const   name,
-	 PictureID    const   picid,
+	 const IPicture*   pic,
 	 bool         const   sel,
 	 std::string  const & tooltip_text)
 {
@@ -164,17 +164,17 @@ void BaseListselect::add_front
 	container_iterate_const(Entry_Record_deque, m_entry_records, i)
 		++(*i.current)->m_entry;
 
-	er->picid   = picid;
+	er->pic   = pic;
 	er->use_clr = false;
 	er->name    = std::string(name);
 	er->tooltip = tooltip_text;
 
 	uint32_t entry_height = 0;
-	if (picid == g_gr->get_no_picture())
+	if (!pic)
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	else {
-		uint32_t w, h;
-		g_gr->get_picture_size(picid, w, h);
+		uint32_t w = pic->get_w();
+		uint32_t h = pic->get_h();
 		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
 			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
 		if (m_max_pic_width < w)
@@ -288,8 +288,8 @@ void BaseListselect::select(const uint32_t i)
 
 	if (m_show_check) {
 		if (m_selection != no_selection_index())
-			m_entry_records[m_selection]->picid = g_gr->get_no_picture();
-		m_entry_records[i]->picid = m_check_picid;
+			m_entry_records[m_selection]->pic = NULL;
+		m_entry_records[i]->pic = m_check_pic;
 	}
 	m_selection = i;
 
@@ -410,13 +410,10 @@ void BaseListselect::draw(RenderTarget & dst)
 			 m_align);
 
 		// Now draw pictures
-		if (er.picid != g_gr->get_no_picture()) {
-			uint32_t w, h;
-			g_gr->get_picture_size(er.picid, w, h);
-			if (g_gr->caps().offscreen_rendering and false)
-				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid, CM_Solid);
-			else
-				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+		if (er.pic) {
+			uint32_t w = er.pic->get_w();
+			uint32_t h = er.pic->get_h();
+			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.pic);
 		}
 
 		y += lineheight;

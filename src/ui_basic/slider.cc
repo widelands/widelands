@@ -16,17 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#include "slider.h"
+#include <cmath>
 
 #include "mouse_constants.h"
-#include "graphic/offscreensurface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 
-
-#include <cmath>
+#include "slider.h"
 
 namespace UI {
 
@@ -54,7 +51,7 @@ Slider::Slider
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const int32_t min_value, const int32_t max_value, const int32_t value,
-	 const PictureID background_picture_id,
+	 const IPicture* background_picture_id,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled,
@@ -555,7 +552,7 @@ DiscreteSlider::DiscreteSlider
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const std::vector<std::string> labels_in,
 	 uint32_t m_value,
-	 const PictureID background_picture_id,
+	 const IPicture* background_picture_id,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled)

@@ -71,7 +71,7 @@ ConstructionSite_Window::ConstructionSite_Window
 			 UI::Box::AlignLeft);
 
 
-	get_tabs()->add("wares", g_gr->get_picture(PicMod_UI, pic_tab_wares), &box, _("Building materials"));
+	get_tabs()->add("wares", g_gr->imgcache().load(PicMod_UI, pic_tab_wares), &box, _("Building materials"));
 }
 
 

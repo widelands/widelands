@@ -820,7 +820,6 @@ Terrain_Descr::Terrain_Descr
 :
 m_name              (s->get_name()),
 m_descname          (s->get_string("name", s->get_name())),
-m_picnametempl      (0),
 m_frametime         (FRAME_LENGTH),
 m_valid_resources   (0),
 m_nr_valid_resources(0),
@@ -907,12 +906,11 @@ m_texture           (0)
 			(fnametmpl, sizeof(fnametmpl),
 			 "%s/pics/%s_??.png", directory, m_name.c_str());
 
-	m_picnametempl = strdup(fnametmpl);
+	m_picnametempl = fnametmpl;
 }
 
 Terrain_Descr::~Terrain_Descr()
 {
-	free(m_picnametempl);
 	delete[] m_valid_resources;
 	m_nr_valid_resources = 0;
 	m_valid_resources    = 0;
@@ -924,10 +922,9 @@ Terrain_Descr::~Terrain_Descr()
 Trigger load of the actual animation frames.
 ===============
 */
-void Terrain_Descr::load_graphics()
-{
-	if (m_picnametempl)
-		m_texture = g_gr->get_maptexture(*m_picnametempl, m_frametime);
+void Terrain_Descr::load_graphics() {
+	if (!m_picnametempl.empty())
+		m_texture = g_gr->get_maptexture(m_picnametempl, m_frametime);
 }
 
 }

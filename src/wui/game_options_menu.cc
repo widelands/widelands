@@ -52,36 +52,36 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 		 _("README")),
 	license
 		(this, "license",
 		 posx(0, 1),
 		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 		 _("License")),
 	authors
 		(this, "authors",
 		 posx(0, 1),
 		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 		 _("Authors")),
 	sound
 		(this, "sound_options",
 		 posx(0, 1),
 		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
 		 buttonw(1), 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 		 _("Sound Options")),
 	save_game
 		(this, "save_game",
 		 posx(0, 1),
 		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
 		 buttonw(1), 35,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+		 g_gr->imgcache().load(PicMod_Game, "pics/menu_save_game.png"),
 		 _("Save Game")),
 	exit_game
 		(this, "exit_game",
@@ -89,8 +89,8 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap() +
 		 35 + vspacing(),
 		 buttonw(1), 35,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+		 g_gr->imgcache().load(PicMod_Game, "pics/menu_exit_game.png"),
 		 _("Exit Game"))
 {
 	readme.sigclicked.connect

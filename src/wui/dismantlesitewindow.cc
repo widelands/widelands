@@ -65,7 +65,7 @@ DismantleSite_Window::DismantleSite_Window
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
-	get_tabs()->add("wares", g_gr->get_picture(PicMod_UI, pic_tab_wares), &box, _("Building materials"));
+	get_tabs()->add("wares", g_gr->imgcache().load(PicMod_UI, pic_tab_wares), &box, _("Building materials"));
 }
 
 
