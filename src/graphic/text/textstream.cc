@@ -100,7 +100,7 @@ string TextStream::till_any(string chars) {
 			}
 		}
 		if (found) break;
-		
+
 		if (m_t[j] == '\\')
 			++j;
 		rv += m_t[j];
@@ -109,7 +109,7 @@ string TextStream::till_any(string chars) {
 	if (!found)
 		throw EOT_Impl(started_at, peek(100, started_at));
 	m_consume(j - started_at);
-	
+
 	return rv;
 }
 

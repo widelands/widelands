@@ -22,6 +22,7 @@
  */
 
 #include "md5.h"
+#include <cstdio>
 
 using namespace std;
 

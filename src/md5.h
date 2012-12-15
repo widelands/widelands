@@ -24,6 +24,7 @@
 
 #include <cassert>
 #include <cstring>
+#include <stdint.h>
 #include <string>
 
 /* Structure to save state of computation between the single steps.  */
