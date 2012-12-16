@@ -470,10 +470,10 @@ bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 bool BaseListselect::handle_mousemove(Uint8, int32_t, int32_t y, int32_t, int32_t) {
 	y = (y + m_scrollpos) / get_lineheight();
 	if (y < 0 or static_cast<int32_t>(m_entry_records.size()) <= y) {
-		set_tooltip(0);
+		set_tooltip("");
 		return false;
 	}
-	set_tooltip(m_entry_records.at(y)->tooltip.empty() ? 0 : m_entry_records.at(y)->tooltip.c_str());
+	set_tooltip(m_entry_records.at(y)->tooltip);
 	return true;
 }
 

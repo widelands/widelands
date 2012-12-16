@@ -112,8 +112,7 @@ void Map_View::draw(RenderTarget & dst)
 	delete gameview;
 
 	m_complete_redraw_needed = false;
-	if (char const * const text = tooltip())
-		draw_tooltip(dst, text);
+	draw_tooltip(dst, tooltip());
 }
 
 void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)

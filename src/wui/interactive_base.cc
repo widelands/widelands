@@ -195,15 +195,13 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 								   (center.node, map.get_width()))
 						   or
 						   player.is_hostile(*productionsite->get_owner())))
-						return set_tooltip(0);
+						return set_tooltip("");
 				}
-				std::string const s =
-					productionsite->info_string(igbase->building_tooltip_format());
-				if (s.size())
-					return set_tooltip(s.c_str());
+				set_tooltip(productionsite->info_string(igbase->building_tooltip_format()));
+				return;
 			}
 	}
-	set_tooltip(0);
+	set_tooltip("");
 }
 
 /*

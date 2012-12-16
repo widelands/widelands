@@ -59,7 +59,7 @@ Panel::Panel
 	_border_snap_distance(0), _panel_snap_distance(0),
 	_desired_w(nw), _desired_h(nh),
 	_running(false),
-	_tooltip(tooltip_text.size() ? strdup(tooltip_text.c_str()) : 0)
+	_tooltip(tooltip_text)
 {
 	assert(nparent != this);
 	if (_parent) {
@@ -107,8 +107,6 @@ Panel::~Panel()
 		else
 			_parent->_lchild = _prev;
 	}
-
-	free(_tooltip);
 }
 
 
@@ -187,8 +185,7 @@ int32_t Panel::run()
 			if (Panel * lowest = _mousein) {
 				while (Panel * const mousein = lowest->_mousein)
 					lowest = mousein;
-				if (char const * const text = lowest->tooltip())
-					draw_tooltip(rt, text);
+				draw_tooltip(rt, lowest->tooltip());
 			}
 
 			g_gr->refresh();
@@ -642,7 +639,7 @@ bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
  */
 bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t)
 {
-	return _tooltip;
+	return !_tooltip.empty();
 }
 
 /**
@@ -1111,21 +1108,14 @@ void Panel::ui_key(bool const down, SDL_keysym const code)
 }
 
 /**
- * Set the tooltip for the panel.
- */
-void Panel::set_tooltip(const char * const text) {
-	assert(not text or *text);
-	if (_tooltip != text) {
-		free(_tooltip);
-		_tooltip = text ? strdup(text) : 0;
-	}
-}
-
-/**
  * Draw the tooltip.
  */
 void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 {
+	if (text.empty())
+		return;
+
+	// TODO(sirver): here
 	static const uint32_t TIP_WIDTH_MAX = 360;
 	static TextStyle tooltip_style;
 	if (!tooltip_style.font) {
