@@ -45,3 +45,11 @@ string as_tooltip(const string & txt) {
 	return f.str();
 }
 
+string as_waresdisplay_text(const string & txt) {
+	static format f("<rt><p><font face=DejaVuSansCondensed size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
+
+	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
+	f % txt;
+	return f.str();
+}
+

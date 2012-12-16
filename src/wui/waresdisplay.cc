@@ -21,9 +21,11 @@
 #include <boost/lexical_cast.hpp>
 #include <cstdio>
 
+#include "text_layout.h"
 #include "graphic/font.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "logic/editor_game_base.h"
@@ -33,6 +35,8 @@
 #include "wexception.h"
 
 #include "waresdisplay.h"
+
+const int WARE_MENU_INFO_SIZE = 12;
 
 AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
@@ -64,7 +68,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_callback_function(callback_function)
 {
 	//resize the configuration of our wares if they won't fit in the current window
-	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + 8 + 3);
+	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
 	const_cast<Widelands::Tribe_Descr &>(m_tribe).resize_ware_orders(number);
 
 	// Find out geometry from icons_order
@@ -82,7 +86,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	// 25 is height of m_curware text
 	set_desired_size
 		(columns * (WARE_MENU_PIC_WIDTH  + 3) + 1,
-		 rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1 + 25);
+		 rows * (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3) + 1 + 25);
 }
 
 
@@ -131,7 +135,7 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 
 
 	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
-	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + 8 + 3);
+	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
 	if (m_horizontal) {
 		unsigned int s = i;
 		i = j;
@@ -214,10 +218,10 @@ Point AbstractWaresDisplay::ware_position(Widelands::Ware_Index id) const
 	Point p(2, 2);
 	if (m_horizontal) {
 		p.x += icons_order_coords()[id].second  * (WARE_MENU_PIC_WIDTH + 3);
-		p.y += icons_order_coords()[id].first * (WARE_MENU_PIC_HEIGHT + 3 + 8);
+		p.y += icons_order_coords()[id].first * (WARE_MENU_PIC_HEIGHT + 3 + WARE_MENU_INFO_SIZE);
 	} else {
 		p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
-		p.y += icons_order_coords()[id].second * (WARE_MENU_PIC_HEIGHT + 3 + 8);
+		p.y += icons_order_coords()[id].second * (WARE_MENU_PIC_HEIGHT + 3 + WARE_MENU_INFO_SIZE);
 	}
 	return p;
 }
@@ -236,33 +240,28 @@ void AbstractWaresDisplay::draw_ware
 	Point p = ware_position(id);
 
 	//  draw a background
-	const IPicture* pic =
+	const IPicture* bgpic =
 		g_gr->imgcache().load
 			(PicMod_Game,
 			 ware_selected(id) ?  "pics/ware_list_bg_selected.png"
 			                   :  "pics/ware_list_bg.png");
-	uint32_t w = pic->get_w();
-	uint32_t h = pic->get_h();
+	uint32_t w = bgpic->get_w();
+	uint32_t h = bgpic->get_h();
 
-	dst.blit(p, pic);
+	dst.blit(p, bgpic);
 
-	const Point pos = p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1);
-	// Draw it
-	dst.blit
-		(pos,
-		 m_type == Widelands::wwWORKER ?
-		 m_tribe.get_worker_descr(id)->icon()
-		 :
-		 m_tribe.get_ware_descr  (id)->icon());
+	const IPicture* icon = m_type == Widelands::wwWORKER ? m_tribe.get_worker_descr(id)->icon()
+		: m_tribe.get_ware_descr(id)->icon();
+
+	dst.blit(p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
+
 	dst.fill_rect
-		(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
+		(Rect(p + Point(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
 		 info_color_for_ware(id));
 
-	UI::g_fh->draw_text
-		(dst, UI::TextStyle::ui_ultrasmall(),
-		 p + Point(WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT - 4),
-		 info_for_ware(id),
-		 UI::Align_Right);
+	const IPicture* text = UI::g_fh1->render(as_waresdisplay_text(info_for_ware(id)));
+	dst.blit(p + Point
+			(w - text->get_w() - 1, WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->get_h()), text);
 }
 
 // Wares highlighting/selecting
@@ -382,7 +381,7 @@ void WaresMapDisplay::set_map(maptype const * map) {
 		int32_t c = m_map->size();
 		set_desired_size
 			((c < m_columns ? c : m_columns) * (WARE_MENU_PIC_WIDTH + 4) + 1,
-			 ((c / m_columns) + (c % m_columns != 0)) * (WARE_MENU_PIC_HEIGHT + 3 + 8) + 1);
+			 ((c / m_columns) + (c % m_columns != 0)) * (WARE_MENU_PIC_HEIGHT + 3 + WARE_MENU_INFO_SIZE) + 1);
 		set_visible(true);
 	} else {
 		set_desired_size(0, 0);
@@ -407,8 +406,7 @@ void WaresMapDisplay::draw(RenderTarget & dst)
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = m_map->find(*j)) != m_map->end()) {
 				//  draw a background
-				const IPicture* pic =
-				g_gr->imgcache().load (PicMod_Game, "pics/ware_list_bg.png");
+				const IPicture* pic = g_gr->imgcache().load (PicMod_Game, "pics/ware_list_bg.png");
 				uint32_t w = pic->get_w();
 				uint32_t h = pic->get_h();
 
@@ -420,7 +418,7 @@ void WaresMapDisplay::draw(RenderTarget & dst)
 				(pos,
 				 m_tribe.get_ware_descr(c->first)->icon());
 				dst.fill_rect
-				(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, 8),
+				(Rect(pos + Point(0, WARE_MENU_PIC_HEIGHT), WARE_MENU_PIC_WIDTH, WARE_MENU_INFO_SIZE),
 				 RGBColor(0, 0, 0));
 
 				UI::g_fh->draw_text
@@ -432,7 +430,7 @@ void WaresMapDisplay::draw(RenderTarget & dst)
 				p.x += (WARE_MENU_PIC_WIDTH + 4);
 				if (p.x >= (m_columns * (WARE_MENU_PIC_WIDTH + 4))) {
 					p.x = 2;
-					p.y += (WARE_MENU_PIC_HEIGHT + 3 + 8);
+					p.y += (WARE_MENU_PIC_HEIGHT + 3 + WARE_MENU_INFO_SIZE);
 				}
 			}
 }
