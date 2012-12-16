@@ -290,7 +290,7 @@ void GLSurfaceTexture::setup_gl() {
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 	} else {
 		glBindFramebufferEXT(GL_FRAMEBUFFER, gl_framebuffer_id_);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
+		glFramebufferTexture2DEXT(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 	}
 
 	// Note: we do not want to reverse y for textures, we only want this for
