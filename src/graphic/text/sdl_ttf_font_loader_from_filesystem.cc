@@ -19,6 +19,7 @@
 
 #include <string>
 
+#include <boost/foreach.hpp>
 #include <boost/format.hpp>
 
 #include "rt_errors.h"
@@ -40,22 +41,30 @@ public:
 
 private:
 	FileSystem* fs_;
+	vector<FileRead*> filereads_;
 };
 
 SDLTTF_FontLoaderFromFilesystem::SDLTTF_FontLoaderFromFilesystem(FileSystem* fs)
 	: fs_(fs) {
 }
 SDLTTF_FontLoaderFromFilesystem::~SDLTTF_FontLoaderFromFilesystem() {
+	BOOST_FOREACH(FileRead* fr, filereads_)
+		delete fr;
+	filereads_.clear();
 }
 
 IFont* SDLTTF_FontLoaderFromFilesystem::load(const string& face, int ptsize) {
 	std::string filename = "fonts/";
 	filename += face;
 
-	FileRead fr;
-	fr.Open(*fs_, filename.c_str());
+	// Some older versions of sdl_ttf seem to rely on this block of memory to
+	// remain intact, therefore, we keep it around till the program exits and
+	// this class is destroyed.
+	FileRead* fr = new FileRead();
+	fr->Open(*fs_, filename.c_str());
+	filereads_.push_back(fr);
 
-	SDL_RWops* ops = SDL_RWFromMem(fr.Data(0), fr.GetSize());
+	SDL_RWops* ops = SDL_RWFromMem(fr->Data(0), fr->GetSize());
 	if (!ops)
 		throw BadFont("could not load font!: RWops Pointer invalid");
 
