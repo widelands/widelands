@@ -465,6 +465,7 @@ public:
 			return 0;
 		}
 		IBlitableSurface* rv = gr.create_surface(width(), height(), true);
+		rv->fill_rect(Rect(0, 0, rv->get_w(), rv->get_h()), RGBAColor(255, 255, 255, 0));
 
 		// Draw Solid background Color
 		bool set_alpha = true;
@@ -494,7 +495,7 @@ public:
 			IBlitableSurface* nsur = n->render(gr);
 			if (nsur) {
 				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
-				Rect src = Rect(0, 0, rv->get_w(), rv->get_h());
+				Rect src = Rect(0, 0, nsur->get_w(), nsur->get_h());
 
 				rv->blit(dst, nsur, src, set_alpha ? CM_Solid : CM_Normal);
 				delete nsur;
@@ -793,8 +794,8 @@ public:
 
 class SubTagHandler : public TagHandler {
 public:
-	SubTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache, uint32_t gw = 0)
-		: TagHandler(tag, fc, ns, img_cache), m_w(gw), m_rn(new SubTagRenderNode(ns)) {
+	SubTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache, uint32_t max_w = 0, bool shrink_to_fit = false)
+		: TagHandler(tag, fc, ns, img_cache), shrink_to_fit_(shrink_to_fit), m_w(max_w), m_rn(new SubTagRenderNode(ns)) {
 	}
 
 	void enter() {
@@ -825,9 +826,9 @@ public:
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
 		uint32_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding);
-
-		if (m_w == INFINITE_WIDTH)
-			m_w = max_line_width;
+		if (shrink_to_fit_) {
+			m_w = min(m_w, max_line_width);
+		}
 
 		// Collect all tags from children
 		foreach(RenderNode* rn, nodes_to_render)
@@ -845,7 +846,10 @@ public:
 	// Handle attributes that are in sub, but not in rt.
 	virtual void handle_unique_attributes() {
 		const IAttrMap& a = m_tag.attrs();
-		if (a.has("width")) m_w = a["width"].get_int();
+		if (a.has("width")) {
+			m_w = a["width"].get_int();
+			shrink_to_fit_ = false;
+		}
 		if (a.has("background")) {
 			RGBColor clr;
 			try {
@@ -869,6 +873,7 @@ public:
 	}
 
 private:
+	bool shrink_to_fit_;
 	uint32_t m_w;
 	SubTagRenderNode* m_rn;
 };
@@ -876,7 +881,7 @@ private:
 class RTTagHandler : public SubTagHandler {
 public:
 	RTTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache, uint32_t w) :
-		SubTagHandler(tag, fc, ns, img_cache, w) {
+		SubTagHandler(tag, fc, ns, img_cache, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in sub.

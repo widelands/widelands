@@ -36,10 +36,11 @@ def _compare(r, infile, profiles):
     correct = dname + "/correct.png"
     ref_map_fn = dname + "/ref_map"
 
-    b = np.asarray(Image.open(correct))
     st = time.time()
     a, refmap = r.render(open(infile).read(), width)
     et = time.time()
+    # Image.fromarray(a).save(dname + "/new.png")
+    b = np.asarray(Image.open(correct))
     assert_equal(a, b)
     profiles[infile] = (et-st)
 

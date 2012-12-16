@@ -17,6 +17,8 @@
  *
  */
 
+#include <boost/utility.hpp>
+
 #include "io/filesystem/filesystem.h"
 #include "wexception.h"
 
@@ -48,27 +50,36 @@ public:
 		 uint32_t = 0,
 		 Align = Align_TopLeft);
 
+	const IPicture* render(const string& text, uint32_t w = 0);
+
 private:
-	RT::IRenderer* m_renderer;
+	boost::scoped_ptr<RT::IRenderer> renderer_;
 };
 
 Font_Handler1::Font_Handler1(IGraphic& gr, FileSystem* fs) {
 	RT::IFontLoader * floader = RT::ttf_fontloader_from_filesystem(fs);
-	m_renderer = RT::setup_renderer(gr, floader);
+	renderer_.reset(RT::setup_renderer(gr, floader));
 }
 Font_Handler1::~Font_Handler1() {
-	delete m_renderer;
+}
+
+const IPicture* Font_Handler1::render(const string& text, uint32_t w) {
+	const IPicture* p = 0;
+	try {
+		p = renderer_->render(text, w);
+	} catch (RT::Exception& e) {
+		throw wexception("Richtext rendering error: %s", e.what());
+	}
+	return p;
 }
 
 void Font_Handler1::draw_text
 		(RenderTarget & dst, Point dstpoint, const std::string & text, uint32_t w, Align align)
 {
-	const IPicture* p = 0;
-	try {
-		p = m_renderer->render(text, w);
-	} catch (RT::Exception& e) {
-		throw wexception("Richtext rendering error: %s", e.what());
-	}
+	if (text.empty())
+		return;
+
+	const IPicture* p = render(text, w);
 	if (!p)
 		return;
 

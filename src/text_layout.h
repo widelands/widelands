@@ -25,6 +25,14 @@
 #include "constants.h"
 #include "rgbcolor.h"
 
+
+/**
+ * Checks it the given string is RichText or not. Does not do validity checking.
+ */
+inline bool is_richtext(const std::string& text) {
+	return text.substr(0, 3) == "<rt";
+}
+
 /**
  * Convenience functions to convert simple text into a valid block
  * of rich text which can be rendered.
@@ -32,7 +40,7 @@
 std::string as_uifont
 	(const std::string&, int = UI_FONT_SIZE_SMALL,
 	 const std::string& = UI_FONT_NAME, RGBColor = UI_FONT_CLR_FG);
-
+std::string as_tooltip(const std::string&);
 
 #endif /* end of include guard: TEXT_LAYOUT_H */
 

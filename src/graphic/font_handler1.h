@@ -22,6 +22,8 @@
 
 #include <string>
 
+#include <boost/noncopyable.hpp>
+
 #include "ui_basic/align.h"
 #include "point.h"
 
@@ -33,7 +35,8 @@ namespace UI {
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
-struct IFont_Handler1 {
+class IFont_Handler1 : boost::noncopyable {
+public:
 	virtual ~IFont_Handler1() {};
 
 	virtual void draw_text
@@ -42,6 +45,13 @@ struct IFont_Handler1 {
 		 const std::string & text,
 		 uint32_t w = 0,
 		 Align = Align_TopLeft) = 0;
+
+	/*
+	 * Renders the given text into an image. Will return NULL on error or if the
+	 * resulting image would have no size. The image is cached and therefore
+	 * ownership remains with this class.
+	 */
+	virtual const IPicture* render(const std::string& text, uint32_t w = 0) = 0;
 };
 
 IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs);

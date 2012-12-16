@@ -29,8 +29,18 @@ string as_uifont
 {
 	// UI Text is always bold due to historic reasons
 	return
-		(format("<rt><p><font face=%s size=%i shadow=1 bold=1 color=%02x%02x%02x>%s</font></p></rt>")
+		(format("<rt><p><font face=%s size=%i shadow=1 color=%02x%02x%02x>%s</font></p></rt>")
 		 % face.c_str() % size % int(clr.r) % int(clr.g) % int(clr.b) % txt.c_str())
+			.str();
+}
+
+string as_tooltip
+	(const string & txt)
+{
+	return
+		(format("<rt><p><font face=%s size=%i bold=1 color=%02x%02x%02x>%s</font></p></rt>")
+		 % UI_FONT_NAME % UI_FONT_SIZE_SMALL % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g)
+		 % int(UI_FONT_TOOLTIP_CLR.b) % txt.c_str())
 			.str();
 }
 

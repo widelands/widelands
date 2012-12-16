@@ -17,18 +17,20 @@
  *
  */
 
-#include "panel.h"
+#include <boost/concept_check.hpp>
 
 #include "constants.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/iblitable_surface.h"
 #include "graphic/rendertarget.h"
-#include "graphic/wordwrap.h"
 #include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-#include <boost/concept_check.hpp>
+#include "text_layout.h"
+
+#include "panel.h"
 
 namespace UI {
 
@@ -1115,25 +1117,21 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	if (text.empty())
 		return;
 
-	// TODO(sirver): here
-	static const uint32_t TIP_WIDTH_MAX = 360;
-	static TextStyle tooltip_style;
-	if (!tooltip_style.font) {
-		tooltip_style.font = Font::get(UI_FONT_TOOLTIP);
-		tooltip_style.fg = UI_FONT_TOOLTIP_CLR;
-		tooltip_style.bold = true;
+	std::string text_to_render = text;
+	if (!is_richtext(text_to_render)) {
+		text_to_render = as_tooltip(text);
 	}
 
-	WordWrap ww(tooltip_style, TIP_WIDTH_MAX);
+	static const uint32_t TIP_WIDTH_MAX = 360;
+	const IPicture* rendered_text = UI::g_fh1->render(text_to_render, TIP_WIDTH_MAX);
+	if (!rendered_text)
+		return;
 
-	ww.wrap(text);
+	uint32_t tip_width = rendered_text->get_w() + 4;
+	uint32_t tip_height = rendered_text->get_h() + 4;
 
-	uint32_t tip_width = ww.width() + 4;
-	uint32_t tip_height = ww.height() + 4;
-
-	const WLApplication & wlapplication = *WLApplication::get();
 	Rect r
-		(wlapplication.get_mouse_position() + Point(2, 32),
+		(WLApplication::get()->get_mouse_position() + Point(2, 32),
 		 tip_width, tip_height);
 	const Point tooltip_bottom_right = r.bottom_right();
 	const Point screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
@@ -1144,8 +1142,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-
-	ww.draw(dst, r + Point(2, 2));
+	dst.blit(r + Point(2, 2), rendered_text);
 }
 
 std::string Panel::ui_fn() {

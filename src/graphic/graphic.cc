@@ -678,7 +678,7 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 }
 
 /**
- * Create an surface of specified size.
+ * Create an surface of specified size. The surface in not blanked and will be random.
  *
  * \note Handle surfaces with an alpha channel carefully, since SDL does not
  * support to blit two surfaces with alpha channel on top of each other. The

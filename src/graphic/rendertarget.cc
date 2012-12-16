@@ -168,7 +168,7 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
 {
 	doblit
-		(Rect(dst, 0, 0),
+		(dst,
 		 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
 }
 
