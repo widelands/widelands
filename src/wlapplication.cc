@@ -365,7 +365,8 @@ void WLApplication::run()
 			game.run_load_game(m_filename.c_str());
 		} catch (Widelands::game_data_error const & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -375,7 +376,8 @@ void WLApplication::run()
 			game.run_splayer_scenario_direct(m_filename.c_str());
 		} catch (Widelands::game_data_error const & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -445,7 +447,8 @@ void WLApplication::run()
 
 				InternetGaming::ref().logout();
 			}
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -1529,7 +1532,8 @@ void WLApplication::mainmenu()
 					Widelands::Game game;
 					try {
 						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
-					} catch (...) {
+					} catch (std::exception const & e) {
+						log("Fata exception: %s\n", e.what());
 						emergency_save(game);
 						throw;
 					}
@@ -1983,7 +1987,8 @@ bool WLApplication::new_game()
 	if (code == 2) { // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.getMap().c_str());
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -2010,7 +2015,8 @@ bool WLApplication::new_game()
 				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(&loaderUI, sp.settings());
 			game.run(&loaderUI, Widelands::Game::NewNonScenario);
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -2040,7 +2046,8 @@ bool WLApplication::load_game()
 	try {
 		if (game.run_load_game(filename))
 			return true;
-	} catch (...) {
+	} catch (std::exception const & e) {
+		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -2082,7 +2089,8 @@ bool WLApplication::campaign_game()
 		// Load selected campaign-map-file
 		if (filename.size())
 			return game.run_splayer_scenario_direct(filename.c_str());
-	} catch (...) {
+	} catch (std::exception const & e) {
+		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -2203,7 +2211,8 @@ void WLApplication::replay()
 		ReplayGameController rgc(game, m_filename);
 
 		game.run(&loaderUI, Widelands::Game::Loaded);
-	} catch (...) {
+	} catch (std::exception const & e) {
+		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
 		m_filename.clear();
 		throw;
