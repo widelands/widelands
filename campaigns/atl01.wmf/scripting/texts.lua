@@ -26,7 +26,7 @@ end
 -- Append an objective text to a dialog box in a nice fashion.
 function new_objectives(...)
    local s = rt(
-   "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+   "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
    .. _"New Objectives" .. "</p>")
 
    for idx,obj in ipairs{...} do
