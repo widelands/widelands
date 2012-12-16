@@ -42,11 +42,12 @@
 /// \name Fonts
 /// Font constants, defined including size
 //@{
-#define UI_FONT_NAME_SERIF      "FreeSerif.ttf"
-#define UI_FONT_NAME_SANS       "FreeSans.ttf"
+#define UI_FONT_NAME_SERIF      "DejaVuSerif.ttf"
+#define UI_FONT_NAME_SANS       "DejaVuSans.ttf"
 #define UI_FONT_NAME_WIDELANDS  "Widelands/Widelands.ttf"
 
 #define UI_FONT_NAME            UI_FONT_NAME_SERIF
+#define UI_FONT_NAME_NO_EXT     "DejaVuSerif"
 #define UI_FONT_SIZE_BIG        22
 #define UI_FONT_SIZE_SMALL      14
 #define UI_FONT_SIZE_ULTRASMALL 10

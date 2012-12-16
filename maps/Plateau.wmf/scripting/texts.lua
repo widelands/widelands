@@ -46,7 +46,7 @@ obj_defeat_jomo = {
 -- =====================
 function _msg(title, text, ...)
    local s = 
-"<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=3333FF>"
+"<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=3333FF>"
    .. title ..  "</p></rt><rt>" .. 
    "<rt><p line-spacing=3 font-size=12>" .. reflow(text)
    objs = {...}

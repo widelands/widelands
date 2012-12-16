@@ -57,6 +57,7 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32
 }
 
 const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
+	// TODO(sirver): Make this cheaper!
 	SimpleMD5Checksum checksum;
 	checksum.Data(font_name_.c_str(), font_name_.size());
 	checksum.Data(&ptsize_, sizeof(ptsize_));
@@ -132,9 +133,11 @@ uint32_t SDLTTF_Font::ascent(int style) const {
 }
 
 void SDLTTF_Font::m_set_style(int style) {
+	// Those must have been handled by loading the correct font.
+	assert(!(style & BOLD));
+	assert(!(style & ITALIC));
+
 	int sdl_style = TTF_STYLE_NORMAL;
-	if (style & BOLD) sdl_style |= TTF_STYLE_BOLD;
-	if (style & ITALIC) sdl_style |= TTF_STYLE_ITALIC;
 	if (style & UNDERLINE) sdl_style |= TTF_STYLE_UNDERLINE;
 
 	// Remember the last style. This should avoid that SDL_TTF flushes its

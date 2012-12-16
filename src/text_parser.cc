@@ -55,7 +55,7 @@ Text_Block::Text_Block() {
 	m_font_weight = "normal";
 	m_font_style = "normal";
 	m_font_decoration = "none";
-	m_font_face = "FreeSans.ttf";
+	m_font_face = "DejaVuSans.ttf";
 	m_line_spacing = 0;
 }
 

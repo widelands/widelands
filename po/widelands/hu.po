@@ -3288,8 +3288,8 @@ msgid "Pause"
 msgstr "Szünet"
 
 #: ../../src/ui_fsmenu/options.cc:526
-msgid "FreeSerif (Default)"
-msgstr "FreeSerif (alapértelmezett)"
+msgid "DejaVuSerif (Default)"
+msgstr "DejaVuSerif (alapértelmezett)"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:54

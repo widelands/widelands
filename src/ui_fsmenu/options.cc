@@ -523,11 +523,11 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
 		did_select_a_font = cmpbool;
 		m_ui_font_list.add
-			(_("FreeSerif (Default)"), "serif", NULL, cmpbool);
+			(_("DejaVuSerif (Default)"), "serif", NULL, cmpbool);
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
-			("FreeSans", "sans", NULL, cmpbool);
+			("DejaVuSans", "sans", NULL, cmpbool);
 		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add

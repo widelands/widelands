@@ -35,7 +35,7 @@ cdef extern from "rt_render.h" namespace "RT":
     IRenderer * setup_renderer(IGraphic, IFontLoader*) except +
 
 cdef extern from "sdl_ttf_font.h" namespace "RT":
-    IFontLoader * ttf_fontloader_from_file()
+    IFontLoader * ttf_fontloader_from_file(cppstr)
 
 cimport numpy as np
 import numpy as np
@@ -54,7 +54,7 @@ cdef class Renderer(object):
 
     def __init__(self):
         cdef IGraphic * thin_graphic = create_thin_graphic()
-        cdef IFontLoader * fl = ttf_fontloader_from_file()
+        cdef IFontLoader * fl = ttf_fontloader_from_file("../../fonts")
         self._renderer = setup_renderer(thin_graphic[0], fl)
 
     def __del__(self):

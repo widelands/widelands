@@ -112,7 +112,7 @@ int main(int argc, char** argv)
 		txt = read_file(inname);
 
 	IGraphic * thin_graphic = create_thin_graphic();
-	RT::IFontLoader * floader = RT::ttf_fontloader_from_file();
+	RT::IFontLoader * floader = RT::ttf_fontloader_from_file("../../fonts");
 	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
 
 	try {

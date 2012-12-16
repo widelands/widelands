@@ -579,12 +579,20 @@ private:
 	scoped_ptr<IFontLoader> m_fl;
 };
 IFont& FontCache::get_font(NodeStyle& ns) {
+	if (ns.font_style & IFont::BOLD) {
+		ns.font_face += "Bold";
+		ns.font_style &= ~IFont::BOLD;
+	}
+	if (ns.font_style & IFont::ITALIC) {
+		ns.font_face += "Italic";
+		ns.font_style &= ~IFont::ITALIC;
+	}
 	FontDescr fd = {ns.font_face, ns.font_size};
 	FontMap::iterator i = m_fontmap.find(fd);
 	if (i != m_fontmap.end())
 		return *i->second;
 
-	IFont* font = m_fl->load(ns.font_face, ns.font_size);
+	IFont* font = m_fl->load(ns.font_face + ".ttf", ns.font_size);
 	m_fontmap[fd] = font;
 	return *font;
 }
@@ -943,7 +951,7 @@ RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& 
 	boost::scoped_ptr<ITag> rt(m_p->parse(text, allowed_tags));
 
 	NodeStyle default_fs = {
-		"DejaVuSerif.ttf", 16,
+		"DejaVuSerif", 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM
 	};
 

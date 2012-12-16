@@ -31,12 +31,17 @@ namespace RT {
 
 class SDLTTF_FontLoaderFromFile : public IFontLoader {
 public:
-	SDLTTF_FontLoaderFromFile();
+	SDLTTF_FontLoaderFromFile(const string& dir);
 	virtual ~SDLTTF_FontLoaderFromFile();
 	virtual IFont * load(const string& name, int ptsize);
+
+private:
+	const string dir_;
 };
 
-SDLTTF_FontLoaderFromFile::SDLTTF_FontLoaderFromFile() {
+SDLTTF_FontLoaderFromFile::SDLTTF_FontLoaderFromFile(const string& dir)
+	: dir_(dir)
+{
 	TTF_Init();
 }
 SDLTTF_FontLoaderFromFile::~SDLTTF_FontLoaderFromFile() {
@@ -44,15 +49,15 @@ SDLTTF_FontLoaderFromFile::~SDLTTF_FontLoaderFromFile() {
 }
 
 IFont* SDLTTF_FontLoaderFromFile::load(const string& face, int ptsize) {
-	TTF_Font * mfont = TTF_OpenFontIndex(("fonts/" + face).c_str(), ptsize, 0);
+	TTF_Font * mfont = TTF_OpenFontIndex((dir_ + "/" + face).c_str(), ptsize, 0);
 	if (!mfont)
 		throw BadFont((format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError()).str());
 
 	return new SDLTTF_Font(mfont, face, ptsize);
 }
 
-IFontLoader * ttf_fontloader_from_file() {
-	return new SDLTTF_FontLoaderFromFile();
+IFontLoader * ttf_fontloader_from_file(const std::string& dir) {
+	return new SDLTTF_FontLoaderFromFile(dir);
 }
 
 }

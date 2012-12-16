@@ -20,12 +20,14 @@
 #ifndef SDL_TTF_FONT_H
 #define SDL_TTF_FONT_H
 
+#include <string>
+
 #include "rt_render.h"
 
 class FileSystem;
 
 namespace RT {
-RT::IFontLoader * ttf_fontloader_from_file();
+RT::IFontLoader * ttf_fontloader_from_file(const std::string&);
 RT::IFontLoader * ttf_fontloader_from_filesystem(FileSystem*);
 }
 

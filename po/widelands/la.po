@@ -3188,8 +3188,8 @@ msgid "Pause"
 msgstr "Intercapeda"
 
 #: ../../src/ui_fsmenu/options.cc:526
-msgid "FreeSerif (Default)"
-msgstr "FreeSerif (Default)"
+msgid "DejaVuSerif (Default)"
+msgstr "DejaVuSerif (Default)"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:54

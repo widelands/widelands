@@ -3169,7 +3169,7 @@ msgid "Pause"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:526
-msgid "FreeSerif (Default)"
+msgid "DejaVuSerif (Default)"
 msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51

@@ -3332,8 +3332,8 @@ msgid "Pause"
 msgstr "Pauza"
 
 #: ../../src/ui_fsmenu/options.cc:526
-msgid "FreeSerif (Default)"
-msgstr "FreeSerif (výchozí)"
+msgid "DejaVuSerif (Default)"
+msgstr "DejaVuSerif (výchozí)"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:54
