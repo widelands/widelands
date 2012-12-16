@@ -20,7 +20,8 @@
 #ifndef WARESDISPLAY_H
 #define WARESDISPLAY_H
 
-#include "observer.h"
+#include <boost/signal.hpp>
+
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
 #include "logic/tribe.h"
@@ -44,7 +45,7 @@ struct WareList;
  *
  * For practical purposes, use one of the derived classes, e.g. @ref WaresDisplay.
  */
-struct AbstractWaresDisplay : public UI::Panel, virtual public Observer {
+struct AbstractWaresDisplay : public UI::Panel {
 	AbstractWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
@@ -81,9 +82,6 @@ struct AbstractWaresDisplay : public UI::Panel, virtual public Observer {
 	Widelands::Ware_Index ware_at_point(int32_t x, int32_t y) const;
 	Widelands::WareWorker get_type() const {return m_type;}
 
-	// implements Observer
-	void observed_changed() {update();}
-
 protected:
 	virtual void layout();
 
@@ -116,7 +114,8 @@ private:
 /*
 struct WaresDisplay
 ------------------
-Panel that displays the contents of a WareList.
+Panel that displays the contents of many WareLists. The ware_lists
+must be valid while they are registered with this class.
 */
 struct WaresDisplay : public AbstractWaresDisplay {
 	WaresDisplay
@@ -137,6 +136,7 @@ protected:
 private:
 	typedef std::vector<Widelands::WareList const *> vector_type;
 	vector_type         m_warelists;
+	std::vector<boost::signals::connection> connections_;
 };
 
 

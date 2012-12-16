@@ -17,22 +17,22 @@
  *
  */
 
-#include "waresdisplay.h"
+#include <boost/foreach.hpp>
+#include <boost/lexical_cast.hpp>
+#include <cstdio>
 
-#include "logic/editor_game_base.h"
+#include "graphic/font.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
-#include "i18n.h"
-#include "logic/player.h"
-#include "graphic/font.h"
 #include "graphic/rendertarget.h"
+#include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-
 #include "wexception.h"
 
-#include <cstdio>
-#include <boost/lexical_cast.hpp>
+#include "waresdisplay.h"
 
 AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
@@ -156,6 +156,9 @@ void AbstractWaresDisplay::layout()
 
 void WaresDisplay::remove_all_warelists() {
 	m_warelists.clear();
+	BOOST_FOREACH(boost::signals::connection& c, connections_)
+		c.disconnect();
+	connections_.clear();
 	update();
 }
 
@@ -346,8 +349,8 @@ void WaresDisplay::add_warelist
 {
 	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(&wares);
-	start_observing(&wares);
 
+	connections_.push_back(wares.changed.connect(boost::bind(&WaresDisplay::update, boost::ref(*this))));
 	update();
 }
 
