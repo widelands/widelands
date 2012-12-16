@@ -46,7 +46,7 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 			Widelands::Message & msg =
 				*new Widelands::Message
 				("Game Logic", game.get_gametime(),
-				 -1, "Lua Coroutine Failed", e.what());
+				 Forever(), "Lua Coroutine Failed", e.what());
 			game.player(i).add_message(game, msg, true);
 		}
 		game.gameController()->setDesiredSpeed(0);
