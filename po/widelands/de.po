@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-11-08 12:11+0000\n"
+"PO-Revision-Date: 2012-12-16 22:19+0000\n"
 "Last-Translator: Elmux <bla.mail@gmx.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-11-09 04:33+0000\n"
-"X-Generator: Launchpad (build 16250)\n"
+"X-Launchpad-Export-Date: 2012-12-17 04:35+0000\n"
+"X-Generator: Launchpad (build 16372)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -3354,8 +3354,8 @@ msgid "Pause"
 msgstr "Pause"
 
 #: ../../src/ui_fsmenu/options.cc:526
-msgid "FreeSerif (Default)"
-msgstr "FreeSerif (Standard)"
+msgid "DejaVuSerif (Default)"
+msgstr "DejaVuSerif (Standard)"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
 #: ../../src/ui_fsmenu/mapselect.cc:54

@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:36+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-12-17 04:35+0000\n"
+"X-Generator: Launchpad (build 16372)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -3165,7 +3165,7 @@ msgid "Pause"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:526
-msgid "FreeSerif (Default)"
+msgid "DejaVuSerif (Default)"
 msgstr ""
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:51
