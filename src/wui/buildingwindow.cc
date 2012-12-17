@@ -48,7 +48,7 @@ Building_Window::Building_Window
 	UI::Window
 		(&parent, "building_window",
 		 0, 0, Width, 0,
-		 b.info_string(parent.building_window_title_format()).c_str()),
+		 b.descname()),
 	m_registry(registry),
 	m_building       (b),
 	m_workarea_job_id(Overlay_Manager::Job_Id::Null())

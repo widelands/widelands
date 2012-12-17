@@ -24,6 +24,14 @@
 using namespace std;
 using namespace boost;
 
+string as_window_title(const string& txt) {
+	static format f("<rt><p><font face=%s size=13 bold=1 color=%02x%02x%02x>%s</font></p></rt>");
+
+	f % UI_FONT_NAME_NO_EXT;
+	f % int(UI_FONT_CLR_FG.r) % int(UI_FONT_CLR_FG.g) % int(UI_FONT_CLR_FG.b);
+	f % txt;
+	return f.str();
+}
 string as_uifont(const string & txt, int size) {
 	// UI Text is always bold due to historic reasons
 	static format f("<rt><p><font face=%s size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
@@ -45,7 +53,7 @@ string as_tooltip(const string & txt) {
 	return f.str();
 }
 
-string as_waresdisplay_text(const string & txt) {
+string as_waresinfo(const string & txt) {
 	static format f("<rt><p><font face=DejaVuSansCondensed size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
 
 	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);

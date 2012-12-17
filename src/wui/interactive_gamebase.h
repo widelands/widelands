@@ -67,9 +67,6 @@ struct Interactive_GameBase : public Interactive_Base {
 	std::string const & building_tooltip_format     () const {
 		return m_building_tooltip_format;
 	}
-	std::string const & building_window_title_format() const {
-		return m_building_window_title_format;
-	}
 
 	virtual bool can_see(Widelands::Player_Number) const = 0;
 	virtual bool can_act(Widelands::Player_Number) const = 0;
@@ -88,7 +85,6 @@ protected:
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
 	std::string              m_building_tooltip_format;
-	std::string              m_building_window_title_format;
 	bool                     m_chatenabled;
 
 	PlayerType m_playertype;

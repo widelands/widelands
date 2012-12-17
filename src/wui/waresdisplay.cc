@@ -259,7 +259,7 @@ void AbstractWaresDisplay::draw_ware
 		(Rect(p + Point(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
 		 info_color_for_ware(id));
 
-	const IPicture* text = UI::g_fh1->render(as_waresdisplay_text(info_for_ware(id)));
+	const IPicture* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
 	dst.blit(p + Point
 			(w - text->get_w() - 1, WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->get_h()), text);
 }

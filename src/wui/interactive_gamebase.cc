@@ -41,8 +41,6 @@ Interactive_GameBase::Interactive_GameBase
 		(global_s.get_string("building_statistics_format",   "%t")),
 	m_building_tooltip_format
 		(global_s.get_string("building_tooltip_format",      "%r")),
-	m_building_window_title_format
-		(global_s.get_string("building_window_title_format", "%A")),
 	m_chatenabled(chatenabled),
 	m_playertype(pt)
 {}

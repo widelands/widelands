@@ -36,8 +36,6 @@ using namespace boost;
 
 namespace UI {
 
-// Private Stuff {{{
-
 class Font_Handler1 : public IFont_Handler1 {
 public:
 	Font_Handler1(IGraphic& gr, FileSystem* fs);

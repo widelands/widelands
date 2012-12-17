@@ -53,15 +53,15 @@ namespace UI {
 struct Window : public NamedPanel {
 	Window
 		(Panel      * parent,
-		 std::string const & name,
+		 const std::string& name,
 		 int32_t      x,
 		 int32_t      y,
 		 uint32_t     w,
 		 uint32_t     h,
-		 char const * title);
+		 const std::string& title);
 
 	void set_title(const std::string &);
-	std::string const & get_title() const throw () {return m_title;}
+	std::string const & get_title() const {return m_title;}
 
 	void set_center_panel(Panel * panel);
 	void move_out_of_the_way();
