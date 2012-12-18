@@ -811,10 +811,23 @@ public:
 
 		handle_unique_attributes();
 		const IAttrMap& a = m_tag.attrs();
+		if (a.has("background")) {
+			RGBColor clr;
+			try {
+				clr = a["background"].get_color();
+				m_rn->set_background(clr);
+			} catch (InvalidColor&) {
+				m_rn->set_background(img_cache_.load(PicMod_RichText, a["background"].get_string(), false));
+			}
+		}
 		if (a.has("padding")) {
 			uint8_t p = a["padding"].get_int();
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
+		if (a.has("padding_r")) padding.right = a["padding_r"].get_int();
+		if (a.has("padding_b")) padding.bottom = a["padding_b"].get_int();
+		if (a.has("padding_l")) padding.left = a["padding_l"].get_int();
+		if (a.has("padding_t")) padding.top = a["padding_t"].get_int();
 		if (a.has("margin")) {
 			uint8_t p = a["margin"].get_int();
 			margin.left = margin.top = margin.right = margin.bottom = p;
@@ -857,15 +870,6 @@ public:
 		if (a.has("width")) {
 			m_w = a["width"].get_int();
 			shrink_to_fit_ = false;
-		}
-		if (a.has("background")) {
-			RGBColor clr;
-			try {
-				clr = a["background"].get_color();
-				m_rn->set_background(clr);
-			} catch (InvalidColor&) {
-				m_rn->set_background(img_cache_.load(PicMod_RichText, a["background"].get_string(), false));
-			}
 		}
 		if (a.has("float")) {
 			const string s = a["float"].get_string();

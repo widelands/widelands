@@ -39,9 +39,12 @@ def _compare(r, infile, profiles):
     st = time.time()
     a, refmap = r.render(open(infile).read(), width)
     et = time.time()
-    # Image.fromarray(a).save(dname + "/new.png")
     b = np.asarray(Image.open(correct))
-    assert_equal(a, b)
+    try:
+        assert_equal(a, b)
+    except:
+        Image.fromarray(a).save(dname + "/new.png")
+        raise
     profiles[infile] = (et-st)
 
     if os.path.exists(ref_map_fn):

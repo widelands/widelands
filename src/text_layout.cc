@@ -24,6 +24,14 @@
 using namespace std;
 using namespace boost;
 
+string as_game_tip(const string& txt) {
+	static format f("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28><p align=center><font color=21211b face=%s size=16>%s</font></p></rt>");
+
+	f % UI_FONT_NAME_NO_EXT;
+	f % txt;
+	return f.str();
+}
+
 string as_window_title(const string& txt) {
 	static format f("<rt><p><font face=%s size=13 bold=1 color=%02x%02x%02x>%s</font></p></rt>");
 

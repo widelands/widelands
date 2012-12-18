@@ -19,28 +19,17 @@
  * http://www.wesnoth.org
  */
 
-#include "font_handler.h"
+#include <list>
 
-#include "io/filesystem/filesystem.h"
-#include "font.h"
-#include "helper.h"
-#include "log.h"
-#include "wexception.h"
-#include "text_parser.h"
-#include "upcast.h"
-
-#include "rendertarget.h"
-#include "surface.h"
-#include "wordwrap.h"
-
-#include <SDL_image.h>
 #include <SDL_ttf.h>
 
-#include <algorithm>
-#include <iostream>
-#include <boost/concept_check.hpp>
-#include <boost/concept_check.hpp>
-#include <scripting/pdep/llimits.h>
+#include "graphic.h"
+#include "log.h"
+#include "rendertarget.h"
+#include "wexception.h"
+#include "wordwrap.h"
+
+#include "font_handler.h"
 
 namespace UI {
 
@@ -230,28 +219,6 @@ uint32_t Font_Handler::draw_text_raw
 
 	return lce.width;
 }
-
-/**
- * Draw multi-line text, optionally with wrapping.
- *
- * @note Consider using @ref WordWrap directly, if the same multi-line
- * text is going to be rendered many times.
- */
-void Font_Handler::draw_multiline
-	(RenderTarget & dst,
-	 const TextStyle & style,
-	 Point dstpoint,
-	 const std::string & text,
-	 Align align,
-	 uint32_t wrap,
-	 uint32_t caret)
-{
-	WordWrap ww(style, wrap);
-
-	ww.wrap(text);
-	ww.draw(dst, dstpoint, align, caret);
-}
-
 
 /**
  * Draw the caret for the given text rendered exactly at the given point

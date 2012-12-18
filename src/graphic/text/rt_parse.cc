@@ -225,7 +225,12 @@ Parser::Parser() :
 	{ // rt tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
+		tc.allowed_attrs.insert("padding_r");
+		tc.allowed_attrs.insert("padding_l");
+		tc.allowed_attrs.insert("padding_b");
+		tc.allowed_attrs.insert("padding_t");
 		tc.allowed_attrs.insert("db_show_spaces");
+		tc.allowed_attrs.insert("background");
 
 		tc.allowed_childs.insert("p");
 		tc.allowed_childs.insert("vspace");
@@ -267,6 +272,10 @@ Parser::Parser() :
 	{ // sub tag
 		TagConstraint tc;
 		tc.allowed_attrs.insert("padding");
+		tc.allowed_attrs.insert("padding_r");
+		tc.allowed_attrs.insert("padding_l");
+		tc.allowed_attrs.insert("padding_b");
+		tc.allowed_attrs.insert("padding_t");
 		tc.allowed_attrs.insert("margin");
 		tc.allowed_attrs.insert("float");
 		tc.allowed_attrs.insert("valign");

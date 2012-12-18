@@ -24,11 +24,15 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "ui_basic/align.h"
 #include "point.h"
+
+#include "ui_basic/align.h"
 
 struct RenderTarget;
 struct FileSystem;
+
+class IPicture;
+class IGraphic;
 
 namespace UI {
 
