@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-16 21:09+0000\n"
+"PO-Revision-Date: 2012-12-17 15:06+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-17 04:34+0000\n"
+"X-Launchpad-Export-Date: 2012-12-18 04:32+0000\n"
 "X-Generator: Launchpad (build 16372)\n"
 
 #: ../../txts/README:69
@@ -1329,7 +1329,7 @@ msgstr ""
 
 #: ../../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
-msgstr ""
+msgstr "Versjon 2, juni 1991<br></p></rt>"
 
 #: ../../txts/README:86
 msgid ""
@@ -1337,16 +1337,22 @@ msgid ""
 "is to place flags from end to start. If Shift is also down, place flags from "
 "start to end instead."
 msgstr ""
+"Viss du held Ctrl nede i det du fullførar ein veg, plantar du flag langs "
+"heile vegen.  Standard er å planta flag frå slutten til byrjinga av vegen.  "
+"Viss du òg held Shift nede blir flaga planta frå byrjinga til sluten i "
+"staden."
 
 #: ../../txts/README:88
 msgid ""
 "When removing a road, if Ctrl is pressed all flags up to the first junction "
 "are removed."
 msgstr ""
+"Viss du held Ctrl nede når du fjernar ein veg, fjernar du alle flaga fram "
+"til første kryss."
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Widelands utviklarlag"
 
 #: ../../txts/README:151
 msgid ""
@@ -1354,6 +1360,8 @@ msgid ""
 "can then replay an entire session from starting the game to exiting it. This "
 "is really helpful for debugging problems."
 msgstr ""
+"Widelands kan ta opp alle tasttrykka og musrørslene dine og lagra dei i ei "
+"fil.  Desse kan vere til god hjelp ved feilsøking av problem."
 
 #: ../../txts/README:13
 msgid ""
@@ -1365,6 +1373,12 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you."
 msgstr ""
+"Widelands er eit strategispel som skal spelast på omtrent same måte som "
+"Settlers II av BlueByte.<br>I dette spelet startar du med eit lite stykke "
+"land utan anna enn nokre få nyttige resursar.  Med dei kan du bygga deg eit "
+"imperium med tusenvis av innbyggarar.  På vegen mot dette målet må du bygga "
+"ein økonomisk infrastruktur, utforska landa rundt deg og trossa fiendar som "
+"prøvar å styra verda akkurat som deg."
 
 #: ../../txts/README:22
 msgid ""
@@ -1372,6 +1386,9 @@ msgid ""
 "information, see the file 'COPYING' or select the License button from the "
 "main menu."
 msgstr ""
+"Widelands er lisensiert under GNU Generelle utgjevingslisens (GPL). For meir "
+"informasjon, sjå fila «COPYING» eller trykk på knappen merka Lisens i "
+"hovudmenyen."
 
 #: ../../txts/README:31
 msgid ""
@@ -1380,6 +1397,9 @@ msgid ""
 "required, especially in the area of graphics, to make Widelands a better "
 "game."
 msgstr ""
+"Widelands held på å bli spelbart, men for å ble meir spelbart treng me "
+"frivillige.  Bidraga dine (ja, eg snakkar til deg) er naudsynte, spesielt i "
+"høve til grafikk, for å gjere Widelands eit betre spel."
 
 #: ../../txts/README:140
 msgid ""
@@ -1389,12 +1409,18 @@ msgid ""
 "players, such as building a road or attacking an enemy. The rest of the "
 "filenames will tell you the time you started the game."
 msgstr ""
+"Widelands tek opp alle spela du speler i to filar.  Ei av dei er i .wrpl.wgf "
+"og har det lagra spelet.  Den andre er i .wrpl og har alle ordra som blei "
+"sende av alle spelarane, som å bygga vegar eller angripa fiendar.  Resten av "
+"filnamna seier når du starta spelet."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial in our "
 "wiki at www.widelands.org"
 msgstr ""
+"Du kan finna generell hjelp til skriveprogrammet i tillegg til ei kort "
+"innføring på wiki-sidene våre på www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -1402,24 +1428,33 @@ msgid ""
 "during selection. If you then click on the map, an instance of one of the "
 "selected object types will be placed."
 msgstr ""
+"Du kan velja fleire naturobjekttypar (bobbar) viss du held nede Ctrl mens du "
+"vel dei.  Viss du så trykkar på kartet, vil eit eksemplar av eitt av dei "
+"valde objekttypane plasserast der."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be "
 "printed as '-> Nickname is tired'."
 msgstr ""
+"Du kan bruka «/me» i byrjinga på ei pratemelding: «/me er trøytt» synest som "
+"«-> Kallenamn er trøytt»."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
 "real speed is then democratically set."
 msgstr ""
+"Du kan bruka «Page Up»- og «Page Down»-tastane for å endra farta du vil ha - "
+"den ekte farta blir så sett demokratisk."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings - "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Området ditt kan utvidast med å bygga ymse militærbygg - vaktpost, fort, "
+"brakke osb."
 
 #: ../../txts/COPYING:102
 msgid ""
@@ -1428,7 +1463,11 @@ msgid ""
 "Hacker.<br><br><signature of Ty Coon>, 1 April 1989<br>Ty Coon, President of "
 "Vice"
 msgstr ""
+"Yoyodyne, Inc., fråskriv seg her all kopirettinteresse i programmet<br> "
+"«Gnomevision» (som gjer flyttingar ved kompilatorar) skriven av James "
+"Hacker.<br><br>signaturen til Ty Croon>, 1. april 1989<br>Ty Coon, "
+"Visepresident"
 
 #: ../../txts/README:5
 msgid "an open source strategy game"
-msgstr ""
+msgstr "eit strategispel med open kjeldekode"
