@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-18 15:42+0000\n"
+"PO-Revision-Date: 2012-12-19 11:53+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-19 05:09+0000\n"
+"X-Launchpad-Export-Date: 2012-12-20 04:37+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -3105,17 +3105,17 @@ msgstr ""
 #: ../../tribes/barbarians/conf:111
 #: ../../tribes/barbarians/well/help.lua:24
 msgid "Water"
-msgstr ""
+msgstr "Water"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:27
 msgid "Water from a Well"
-msgstr ""
+msgstr "Water vun de Soot"
 
 #: ../../tribes/barbarians/bakery/help.lua:24
 #: ../../tribes/barbarians/cattlefarm/help.lua:24
 #: ../../tribes/barbarians/micro-brewery/help.lua:23
 msgid "Water from the Well"
-msgstr ""
+msgstr "Water vun de Soot"
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -3135,12 +3135,12 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:188
 msgid "Well"
-msgstr ""
+msgstr "Soot"
 
 #: ../../tribes/barbarians/conf:112
 #: ../../tribes/barbarians/farm/help.lua:24
 msgid "Wheat"
-msgstr ""
+msgstr "Weeten"
 
 #: ../../tribes/barbarians/bakery/help.lua:23
 #: ../../tribes/barbarians/cattlefarm/help.lua:23
@@ -3206,7 +3206,7 @@ msgstr ""
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
-msgstr ""
+msgstr "Arbeid"
 
 #: ../../tribes/barbarians/axefactory/help.lua:57
 #: ../../tribes/barbarians/bakery/help.lua:51
@@ -3260,7 +3260,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:56
 #: ../../tribes/barbarians/well/help.lua:40
 msgid "Workers"
-msgstr ""
+msgstr "Arbeiders"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:54
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
