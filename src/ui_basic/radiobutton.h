@@ -62,7 +62,7 @@ struct Radiogroup {
 	boost::signal<void ()> clicked; //  clicked without things changed
 
 	int32_t add_button
-		(Panel * parent, Point, const IPicture* pic, char const * tooltip = 0, Radiobutton ** = NULL);
+		(Panel * parent, Point, const IPicture* pic, const std::string& tooltip = "", Radiobutton ** = NULL);
 
 	int32_t get_state() const throw () {return m_state;}
 	void set_state(int32_t state);

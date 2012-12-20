@@ -97,7 +97,7 @@ int32_t Radiogroup::add_button
 	(Panel      * const parent,
 	 Point        const p,
 	 const IPicture* pic,
-	 char const * const tooltip,
+	 const std::string& tooltip,
 	 Radiobutton **     ret_btn)
 {
 	++m_highestid;
