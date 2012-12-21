@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-19 15:35+0000\n"
+"PO-Revision-Date: 2012-12-20 14:31+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-20 04:37+0000\n"
+"X-Launchpad-Export-Date: 2012-12-21 04:32+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -614,6 +614,10 @@ msgid ""
 "clicking the fourth button from the left at the very bottom of the screen.\n"
 "Click the \"OK\" button and then give it a try."
 msgstr ""
+"Det er lettare å skjøna kva som kan byggast kor når\n"
+"bygghjelpen er på.  Slå han på anten med å trykka på mellomromstasten eller\n"
+"med å trykka den fjerde knappen frå venstre nederst på skjermen.\n"
+"Trykk «Greitt» og prøv."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:283
 msgid ""
@@ -621,6 +625,8 @@ msgid ""
 "buildings\n"
 "tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
+"Berre trykk på eit hussymbol attmed steinane, vel fana med små\n"
+"bygg i vindauget som synast, og trykk på steinbrotet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:338
 msgid ""
@@ -628,10 +634,13 @@ msgid ""
 "Also try to keep roads as short as possible and always remember to place as\n"
 "many flags as you can on road segments to share the load better."
 msgstr ""
+"Følg med på bakkane når du byggar vegar og bruk dei til eigen fordel.\n"
+"Prøv òg å halda vegane så korte som mogleg og hugs å alltid ha så\n"
+"mange flag du kan på eit vegstykke for å fordela arbeidet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:88
 msgid "Left-click the \"OK\" button to close this box and then try it."
-msgstr ""
+msgstr "Venstreklikk «OK»-knappen for å lukke denne boksen og prøva det ut."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:371
 msgid ""
@@ -641,10 +650,13 @@ msgid ""
 "the\n"
 "watch tab and then click on the corresponding buttons."
 msgstr ""
+"La meg raskt slå dei to på for deg.  Hugs at «c» og «s» er tastane.\n"
+"Alternativt kan du trykka på kva område som helst utan bygg, velga\n"
+"sjå-fana og trykka dei tilsvarande knappane."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:68
 msgid "Let's dive right in!"
-msgstr ""
+msgstr "La oss hoppa i det!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:520
 msgid ""
@@ -654,6 +666,10 @@ msgid ""
 "geologist\n"
 "to it. I'll show you how it's done."
 msgstr ""
+"La oss søka etter ressursar i dette fjellet.  Først byggar me ein veg til\n"
+"fjella og plantar eit flag.  Så trykkar me på flaget og tilkallar ein "
+"geolog.\n"
+"Eg visar deg korleis du skal gjere det."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:489
 msgid ""
@@ -663,14 +679,18 @@ msgid ""
 "beneficial\n"
 "close to mountains because you can't build houses in mountains."
 msgstr ""
+"La oss prøva det no: bygg eit par militære bygg langs grensa i\n"
+"sørvest.  Me ønskar å erobra noka av fjellet her for å kunne leita etter\n"
+"resursar.  Større bygg vil erobra meir land, som kan vere ein fordel\n"
+"i nærleiken av fjell, sia ein ikkje kan bygga vanlege bygg i fjella."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:549
 msgid "Let's wait and see what the geologist finds on the mountain."
-msgstr ""
+msgstr "La oss venta og sjå kva geologen finn i fjellet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:188
 msgid "Lumberjack is done"
-msgstr ""
+msgstr "Tømraren er ferdig"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:104
 msgid "Lumberjack's spot"
