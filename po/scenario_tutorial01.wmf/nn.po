@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-20 14:31+0000\n"
+"PO-Revision-Date: 2012-12-21 17:02+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-21 04:32+0000\n"
+"X-Launchpad-Export-Date: 2012-12-22 04:33+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:462
@@ -694,31 +694,31 @@ msgstr "Tømraren er ferdig"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:104
 msgid "Lumberjack's spot"
-msgstr ""
+msgstr "Tømrarfelt"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:460
 msgid "Message arrived!"
-msgstr ""
+msgstr "Melding moteken"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:389
 msgid "Messages"
-msgstr ""
+msgstr "Meldingar"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:556
 msgid "Mining conclusion"
-msgstr ""
+msgstr "Gruvedrift konklusjon"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:213
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Flytta synsfeltet med piltastane"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Move your view with the mouse"
-msgstr ""
+msgstr "Flytta synsfeltet med musa"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:214
 msgid "Moving your view"
-msgstr ""
+msgstr "Flytta synsfeltet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:215
 msgid ""
@@ -731,10 +731,15 @@ msgid ""
 "move\n"
 "your mouse around and you'll see the view scroll."
 msgstr ""
+"Å flytta synsfeltet er naudsynt for å sjå heile økonomien\n"
+"din.  Det er to måtar å flytta synsfeltet ditt i Widelands.  Den første er\n"
+"å bruka piltastane på tastaturet.  Den andre er vanlegare og\n"
+"raskare: trykk og hald nede høgre museknapp kvar som helst på kartet og\n"
+"flytt musa rundt for å sjå synsfeltet endra seg."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:41
 msgid "Nice and easy does it all the time"
-msgstr ""
+msgstr "Greitt og lett verkar kvar gong"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:160
 msgid ""
@@ -746,6 +751,13 @@ msgid ""
 "symbol\n"
 "in between the two blue flags we just placed and then click on the"
 msgstr ""
+"Er det ikkje fint å sjå korleis dei jobbar?  Men dei stakkars berarane har "
+"ein veldig lang veg å gå.\n"
+"Me kan gjera det lettare for han (og meir effektivt for oss) viss me plantar "
+"eit\n"
+"blått flag til på vegen.  Du kan prøva sjølv: trykk på det gule "
+"flaggteiknet\n"
+"mellom dei to blå flaga me nettopp planta og så trykka på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:563
 msgid ""
@@ -755,6 +767,11 @@ msgid ""
 "well. This infrastructure also varies from tribe to tribe. You'll get them\n"
 "explained in the introduction campaigns for the three tribes."
 msgstr ""
+"Merk at ei gruve treng rasjonar for å verka.  Rasjonar blir\n"
+"laga i kroar og kroar treng mat, pitabrød og fisk for å laga\n"
+"dei.  Du treng mykje meir infrastruktur for å få gruvene til å verka\n"
+"godt.  Infrastrukturen varierer frå stamme til stamme.  Du får det\n"
+"forklart i inføringskampanjane for dei tre stammane."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:271
 msgid ""
@@ -762,12 +779,17 @@ msgid ""
 "medium or big building symbol, you will have to select the small buildings\n"
 "tab first to find it. Go on, check it out!"
 msgstr ""
+"Prøv det.  Steinbrotet er eit lite bygg så viss du trykkar på eit\n"
+"middels eller stort byggteikn, må du velja små bygg-fana\n"
+"for å finna det.  Berre prøv!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:342
 msgid ""
 "Now please rebuild the road between your quarry and your headquarters.\n"
 "We'll wait until the quarry is completed."
 msgstr ""
+"Ver snill og bygg vegen mellom steinbrotet og hovudkvarteret ditt att.\n"
+"Me ventar til steinbrotet er ferdig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:149
 msgid ""
@@ -776,10 +798,14 @@ msgid ""
 "blue\n"
 "flags and carry wares from one blue flag to the other."
 msgstr ""
+"Følg nøye med mens ein byggar forlét hovudkvarteret og går til\n"
+"byggeplassen.  Ein berar vil stå mellom dei to blå\n"
+"flaga og bera varar frå eitt blått flag til det andre."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
 msgstr ""
+"No veit me kva som skjer.  La oss venta på at steinbrotet blir ferdig."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""
@@ -791,6 +817,10 @@ msgid ""
 "over\n"
 "the route the road takes like so:"
 msgstr ""
+"Om denne vegen.  Hugs at me allereie er i vegbyggemodus sia du\n"
+"nettopp ba om steinbrotet.  Du kan gjera han lengre eit stykke om gongen\n"
+"med å trykke på nabofeltet mange gonger for fin kontroll på\n"
+"vegen slik:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:515
 msgid ""
@@ -800,6 +830,11 @@ msgid ""
 "get\n"
 "the resources out of the ground."
 msgstr ""
+"No eig me noka land på dette fjellet.  Fjell er veldig\n"
+"viktige, sia dei inneheld resursar: kol, jernmalm, gullmalm og\n"
+"granitt.  Kvar stamme brukar resursane på ulike måtar, men alle treng gruar "
+"for å få\n"
+"resursane ut av jorda."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:575
 msgid ""
@@ -817,38 +852,48 @@ msgid ""
 "and a\n"
 "warehouse to the north east of here."
 msgstr ""
+"Siste emne no.  Me skal snakka om soldatar, treninga og\n"
+"yrket deira: krigføring.  Som nemnt handlar Widelands om å bygga,\n"
+"ikkje brenne: difor er òg krigføring meir fokusert på økonomi enn\n"
+"militære strategiar.  Likevel tilbyd krigføring ein måte å utfordra\n"
+"motspelarane og har spelmekanismar som treng forklaring.\n"
+"Stammeøkonomiane blir forklara i dei individuelle innføringskampanjane.\n"
+"Greitt, eg skal laga eit lite treneområde med treningsleir og eit\n"
+"varehus eit stykke nordaust."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:327
 msgid ""
 "One more thing: around the field where your road would end you can see\n"
 "different markers. They have the following meaning:"
 msgstr ""
+"Ein ting til: rundt området vegen skal ende ser du\n"
+"ulike merke.  Dei tydar følgande:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:238
 msgid "Onward to the quarry"
-msgstr ""
+msgstr "Mot steinbrotet"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:225
 msgid "Other ways to move the view"
-msgstr ""
+msgstr "Andre måtar å flytta seg"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:157
 msgid "Placing another flag"
-msgstr ""
+msgstr "Å planta eit anna flag"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:264
 msgid "Red building symbols can only hold small buildings and flags."
-msgstr ""
+msgstr "Raude byggteikn har berre plass til små bygg og flag."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:292
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:316
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:325
 msgid "Road building"
-msgstr ""
+msgstr "Vegbygging"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:513
 msgid "Searching for resources"
-msgstr ""
+msgstr "Å søka etter resursar"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:366
 msgid ""
@@ -857,6 +902,10 @@ msgid ""
 "display an information string about the productivity of buildings or the\n"
 "progress of construction sites."
 msgstr ""
+"Noka liknande er byggstatistikk som slås på/av med ein\n"
+"knapp i synefana i kva område som helst.  Snarvegen er «s».  Dette\n"
+"syner informasjon om kva/kor mykje bygga lagar eller\n"
+"kor langt byggeområde er komne."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:558
 msgid ""
@@ -865,14 +914,17 @@ msgid ""
 "help\n"
 "symbol for where a mine can be built is"
 msgstr ""
+"Geologen vår fant mykje kol i dette fjellet.  Difor bør du\n"
+"bygga ei kolgruve her.  Gruvebygging er som husbygging.  Bygghjelpteiknet\n"
+"for kvar ei gruve kan byggast er"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:574
 msgid "Soldiers and Warfare"
-msgstr ""
+msgstr "Soldatar og krigføring"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:199
 msgid "Some stones were found"
-msgstr ""
+msgstr "Nokre steinar blei funne"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:202
 msgid ""
@@ -883,12 +935,19 @@ msgid ""
 "how to\n"
 "move your view over there."
 msgstr ""
+"Steinar kan utvinnast i granittgruver, men det er lettare å bygga eit "
+"steinbrot\n"
+"i nærleiken av nokre steinar som ligg og sleng.  Det er ein haug\n"
+"rett vest (venstre) for hovudkvarteret.  No skal eg visa deg korleis\n"
+"flytta synsfeltet dit."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:715
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
 msgstr ""
+"Takk for å spela denne innføringa.  Kos deg med Widelands og husk\n"
+"å vitja oss på"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:137
 msgid ""
@@ -898,6 +957,10 @@ msgid ""
 "the\n"
 "blue flag in front of my headquarters."
 msgstr ""
+"Det held ikkje enno.  Eg treng framleis å kopla tømmerhytta til\n"
+"resten av vegnettet.  Etter at eg gav ordre om byggeplass kom eg\n"
+"automatisk i vegbyggemodus, så eg treng berre trykka på det\n"
+"blå flaget framfor hovudkvarteret."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:624
 msgid ""
@@ -906,12 +969,17 @@ msgid ""
 "damage\n"
 "when he succeeds to hit an enemy. For each attack level, he gains 7 damage."
 msgstr ""
+"Mengda skade ein soldat gjer etter eit vellukka angrep på\n"
+"fienden.  Ein barbarsoldat med angrep nivå 0 tek 14 liv\n"
+"i eit vellukka angrep på fienden.  For kvart angrepsnivå får han 7 skade."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:335
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in\n"
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"Sambandet mellom felta er utruleg bratt.  Fartsaukinga ein\n"
+"veg er enorm mens senkinga den andre vegen òg er merkbar."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:531
 msgid ""
@@ -920,6 +988,9 @@ msgid ""
 "various\n"
 "resources:"
 msgstr ""
+"Geologen kjem snart til flaget og startar undersøkinga av\n"
+"området ikring.  Han set følgande skilt på dei ulike\n"
+"resursane:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:395
 msgid ""
@@ -929,6 +1000,10 @@ msgid ""
 "available, but there is also a bell sound played whenever you receive a new\n"
 "message."
 msgstr ""
+"Meldingvindauget kan bli slått på/av med knappane heilt til høgre på\n"
+"botnen av skjermen.  Denne knappen endrar utsjånad viss nye meldingar\n"
+"er tilbodne, men det er òg ein ringelyd når du får ei ny\n"
+"melding."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:414
 msgid ""
@@ -944,6 +1019,15 @@ msgid ""
 "check\n"
 "box in front of them. Then, click the archive all button"
 msgstr ""
+"Meldingvindauget er sentralt for å halde kontroll på formuen til stamma.  "
+"Men\n"
+"du får mange meldingar i ekte spel.  For å halda hovudet klårt bør du\n"
+"prøva å halda inboksen tom.  Arkiver alle meldingane i inboksen no.  For å "
+"gjera\n"
+"det må du opna meldingvindauget med «n» eller trykka på knappen heil til "
+"høgre\n"
+"på botnen av skjermen.  Så merkar du alle meldingane med å merka dei i\n"
+"boksen framfor dei.  Så trykkar du på «arkiver alle»"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:589
 msgid ""
@@ -953,6 +1037,10 @@ msgid ""
 "flags\n"
 "and player indicators on and off inside the minimap."
 msgstr ""
+"Minikartet visar deg heile kartet i miniatyr.  Du kan hoppa direkte til\n"
+"kva stad som helst med å trykka på han.  Du kan òg veksla mellom å visa "
+"bygg, vegar, flag\n"
+"og spelarområde eller ikkje på kartet."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:169
 msgid ""
@@ -964,11 +1052,17 @@ msgid ""
 "headquarters\n"
 "to your lumberjack's hut."
 msgstr ""
+"Dess kortare vegbolkane er, di raskare blir varane flytt.\n"
+"Du bør difor sikra at vegane dine har så mange flag som mogleg.\n"
+"Bygg eit blått flag no midt på vegen som koplar hovudkvarteret\n"
+"med tømmerhytta."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:330
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr ""
+"Terrenget er flatt her.  Berarane dine vil vera veldig raske i dette "
+"terrenget."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:621
 msgid ""
