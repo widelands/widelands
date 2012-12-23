@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-05-12 18:58+0000\n"
+"PO-Revision-Date: 2012-12-22 17:57+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:34+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-12-23 04:33+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -1045,7 +1045,7 @@ msgstr ""
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
-msgstr "Otvorené okno zatvoríte kliknutím pravým tlačidlom myši na neho."
+msgstr "Otvorené okno môžete zatvoriť kliknutím naň pravým tlačidlom myši."
 
 #: ../../txts/README:154
 msgid ""
@@ -1053,7 +1053,7 @@ msgid ""
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
 "Aby ste vytvorili záznam relácie, spustite hru s parametrom --record. V "
-"Linuxe jednoducho stačí spustiť Widelands takto: $ ./widelands --"
+"systéme Linux jednoducho stačí spustiť Widelands takto: $ ./widelands --"
 "record=filename.rec"
 
 #: ../../txts/COPYING:93
@@ -1194,9 +1194,9 @@ msgid ""
 "required, especially in the area of graphics, to make Widelands a better "
 "game."
 msgstr ""
-"Hra Widelands má blízko k hrateľnosti, ale aby bola hrateľnejšia, potrebuje "
-"dobrovoľníkov. Vaša pomoc (áno, hovorím s vami) je potrebná, hlavne v "
-"oblasti grafiky, aby sa stala z Widelands lepšia hra."
+"Hra Widelands je na pokraji hrateľnosti, ale aby sa mohla stať hrateľnejšou, "
+"potrebuje dobrovoľníkov. Na jej vylepšenie je potrebná vaša pomoc (áno, "
+"hovorím s vami), hlavne v oblasti grafiky."
 
 #: ../../txts/README:140
 msgid ""
