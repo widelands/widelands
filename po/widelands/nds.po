@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-12-20 18:18+0000\n"
+"PO-Revision-Date: 2012-12-24 16:30+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-12-21 04:32+0000\n"
+"X-Launchpad-Export-Date: 2012-12-25 04:31+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: ../../src/computer_player.cc:38
@@ -32,7 +32,7 @@ msgstr "Anbeders"
 
 #: ../../src/writeHTML.cc:74
 msgid "Successors"
-msgstr ""
+msgstr "Nafolger"
 
 #: ../../src/writeHTML.cc:89
 msgid "Predecessors"
@@ -63,7 +63,7 @@ msgstr "Gröte"
 
 #: ../../src/writeHTML.cc:284
 msgid "Buildable"
-msgstr ""
+msgstr "Buubor"
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
@@ -130,7 +130,7 @@ msgstr "Is lütt."
 
 #: ../../src/writeHTML.cc:398
 msgid "Is not buildable."
-msgstr ""
+msgstr "Is nich bubor."
 
 #: ../../src/writeHTML.cc:405
 msgid "Is enhanced."
@@ -340,6 +340,8 @@ msgid ""
 "Options:\n"
 "\n"
 msgstr ""
+"Instellungen:\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1309
 msgid ""
@@ -473,7 +475,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1558
 msgid "Warning: "
-msgstr ""
+msgstr "Wohrschau: "
 
 #: ../../src/wlapplication.cc:1562
 msgid "Game data error"
@@ -511,7 +513,7 @@ msgstr "Speler"
 #: ../../src/wlapplication.cc:1993 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:831
 msgid "Preparing game"
-msgstr ""
+msgstr "Mak Spel praat"
 
 #: ../../src/wlapplication.cc:2101
 msgid "End of replay"
@@ -544,12 +546,12 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:120
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Minimap"
-msgstr ""
+msgstr "Lütt Koort"
 
 #: ../../src/editor/editorinteractive.cc:75
 #: ../../src/wui/interactive_player.cc:123
 msgid "Buildhelp"
-msgstr ""
+msgstr "Buhelp"
 
 #: ../../src/editor/editorinteractive.cc:78
 #: ../../src/ui_fsmenu/launchMPG.cc:161
@@ -583,7 +585,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:198
 msgid "Creating players"
-msgstr ""
+msgstr "Speeler herstellen"
 
 #: ../../src/editor/editorinteractive.cc:205
 #: ../../src/logic/editor_game_base.cc:277
@@ -659,7 +661,7 @@ msgstr ""
 #: ../../src/wui/waresdisplay.cc:54 ../../src/wui/game_main_menu.cc:69
 #: ../../src/wui/stock_menu.cc:40 ../../src/wui/ware_statistics_menu.cc:215
 msgid "Stock"
-msgstr ""
+msgstr "Lager"
 
 #: ../../src/wui/soldierlist.cc:387 ../../src/wui/soldierlist.cc:401
 #: ../../src/wui/soldierlist.cc:423
@@ -740,15 +742,15 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:513
 msgid "Start attack"
-msgstr ""
+msgstr "Angreep anfangen"
 
 #: ../../src/wui/fieldaction.cc:518
 msgid "Attack"
-msgstr ""
+msgstr "Angreep"
 
 #: ../../src/wui/fieldaction.cc:602
 msgid "Build mines"
-msgstr ""
+msgstr "Bu Berchwerk"
 
 #: ../../src/wui/fieldaction.cc:618
 msgid "Build flag"
@@ -803,7 +805,7 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:254
 msgid "Military"
-msgstr ""
+msgstr "Militörisch"
 
 #: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
@@ -890,7 +892,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:75
 #: ../../src/wui/productionsitewindow.cc:88
 msgid "Worker"
-msgstr ""
+msgstr "Arbeider"
 
 #: ../../src/wui/productionsitewindow.cc:76
 msgid "Exp"
@@ -911,18 +913,18 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:108
 #: ../../src/wui/interactive_spectator.cc:54
 msgid "Chat"
-msgstr ""
+msgstr "Schnack"
 
 #: ../../src/wui/interactive_player.cc:111
 #: ../../src/wui/game_options_menu.cc:47
 #: ../../src/wui/interactive_spectator.cc:60 ../../src/ui_fsmenu/main.cc:64
 msgid "Options"
-msgstr ""
+msgstr "Instellungen"
 
 #: ../../src/wui/interactive_player.cc:114
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
-msgstr ""
+msgstr "in Tallen"
 
 #: ../../src/wui/interactive_player.cc:117
 msgid "Objectives"
@@ -931,34 +933,34 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:126
 #: ../../src/wui/interactive_player.cc:287
 msgid "Messages"
-msgstr ""
+msgstr "Nahrichten"
 
 #: ../../src/wui/interactive_player.cc:129
 msgid "Ware help"
-msgstr ""
+msgstr "Kram Help"
 
 #: ../../src/wui/interactive_player.cc:295
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u nee Nahricht"
+msgstr[1] "%u nee Nahrichten"
 
 #: ../../src/wui/stock_menu.cc:53
 msgid "Wares (total)"
-msgstr ""
+msgstr "Kram (kumplett)"
 
 #: ../../src/wui/stock_menu.cc:58
 msgid "Workers (total)"
-msgstr ""
+msgstr "Arbeiders (kumplett)"
 
 #: ../../src/wui/stock_menu.cc:64
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "Kram in Lagerhüsern"
 
 #: ../../src/wui/stock_menu.cc:71
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "Arbeiders in Lagerhüsern"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:67
 msgid "Decrease capacity"
@@ -981,24 +983,24 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:481
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Speeler %i"
 
 #: ../../src/wui/multiplayersetupgroup.cc:118
 #: ../../src/ui_fsmenu/launchMPG.cc:483
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Tokieker"
 
 #: ../../src/wui/multiplayersetupgroup.cc:255
 #: ../../src/ui_fsmenu/netsetup_lan.cc:193
 msgid "Closed"
-msgstr ""
+msgstr "Sloten"
 
 #: ../../src/wui/multiplayersetupgroup.cc:266
 #: ../../src/wui/playerdescrgroup.cc:157
 #: ../../src/ui_fsmenu/netsetup_lan.cc:192
 msgid "Open"
-msgstr ""
+msgstr "Apen"
 
 #: ../../src/wui/multiplayersetupgroup.cc:277
 msgid "Shared in"
@@ -1007,7 +1009,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:297
 #: ../../src/wui/playerdescrgroup.cc:170
 msgid "Computer"
-msgstr ""
+msgstr "Rekner"
 
 #: ../../src/wui/multiplayersetupgroup.cc:300
 #: ../../src/wui/playerdescrgroup.cc:172
@@ -1018,12 +1020,12 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:316
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Tofällig"
 
 #: ../../src/wui/multiplayersetupgroup.cc:310
 #: ../../src/wui/playerdescrgroup.cc:180
 msgid "Human"
-msgstr ""
+msgstr "Mensch"
 
 #: ../../src/wui/multiplayersetupgroup.cc:352
 #: ../../src/ui_fsmenu/launchSPG.cc:231 ../../src/ui_fsmenu/launchMPG.cc:286
@@ -1037,7 +1039,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:405
 msgid "Client name"
-msgstr ""
+msgstr "Bruker Naam"
 
 #: ../../src/wui/multiplayersetupgroup.cc:413
 msgid "Role"
@@ -1049,7 +1051,7 @@ msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:437
 msgid "Type"
-msgstr ""
+msgstr "Aart"
 
 #: ../../src/wui/multiplayersetupgroup.cc:445
 msgid "Tribe"
@@ -1099,7 +1101,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:65
 msgid "Ship"
-msgstr ""
+msgstr "Schipp"
 
 #: ../../src/wui/shipwindow.cc:84
 msgid "Go to ship"
@@ -1111,47 +1113,47 @@ msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
-msgstr ""
+msgstr "LIESMI"
 
 #: ../../src/wui/game_options_menu.cc:63 ../../src/ui_fsmenu/main.cc:74
 msgid "License"
-msgstr ""
+msgstr "Lizenz"
 
 #: ../../src/wui/game_options_menu.cc:70
 msgid "Authors"
-msgstr ""
+msgstr "Makers"
 
 #: ../../src/wui/game_options_menu.cc:77
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
-msgstr ""
+msgstr "Gedruus Instellung"
 
 #: ../../src/wui/game_options_menu.cc:85
 #: ../../src/wui/interactive_spectator.cc:58
 #: ../../src/wui/game_main_menu_save_game.cc:61
 msgid "Save Game"
-msgstr ""
+msgstr "Speel sekern"
 
 #: ../../src/wui/game_options_menu.cc:94 ../../src/ui_fsmenu/main.cc:79
 msgid "Exit Game"
-msgstr ""
+msgstr "Speel ennen"
 
 #: ../../src/wui/game_message_menu.cc:44
 #: ../../src/wui/game_message_menu.cc:377
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Nahrichten Menü: Ingang"
 
 #: ../../src/wui/game_message_menu.cc:54
 msgid "Select"
-msgstr ""
+msgstr "Utwahl"
 
 #: ../../src/wui/game_message_menu.cc:55
 msgid "Status"
-msgstr ""
+msgstr "Tostand"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: ../../src/wui/game_message_menu.cc:57
 msgid "Time sent"
@@ -1159,19 +1161,19 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:64
 msgid "Clear"
-msgstr ""
+msgstr "Leeren"
 
 #: ../../src/wui/game_message_menu.cc:64
 msgid "Clear selection"
-msgstr ""
+msgstr "Utwahl upheben"
 
 #: ../../src/wui/game_message_menu.cc:73
 msgid "Invert"
-msgstr ""
+msgstr "Umdreihn"
 
 #: ../../src/wui/game_message_menu.cc:73
 msgid "Invert selection"
-msgstr ""
+msgstr "Utwahl umdreihen"
 
 #: ../../src/wui/game_message_menu.cc:83
 #: ../../src/wui/game_message_menu.cc:379
@@ -1181,7 +1183,7 @@ msgstr ""
 #: ../../src/wui/game_message_menu.cc:92
 #: ../../src/wui/game_message_menu.cc:380
 msgid "Show Archive"
-msgstr ""
+msgstr "Wies Spieker"
 
 #: ../../src/wui/game_message_menu.cc:102
 msgid "center main mapview on location"
@@ -1189,7 +1191,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:370
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Nahrichten Menü: Spieker"
 
 #: ../../src/wui/game_message_menu.cc:372
 msgid "Restore selected messages"
@@ -1197,7 +1199,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Show Inbox"
-msgstr ""
+msgstr "Wies Ingang"
 
 #: ../../src/wui/building_statistics_menu.cc:89
 msgid "Total Productivity: "
@@ -1205,11 +1207,11 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:93
 msgid "Owned: "
-msgstr ""
+msgstr "Besitt: "
 
 #: ../../src/wui/building_statistics_menu.cc:99
 msgid "In Build: "
-msgstr ""
+msgstr "In Bu "
 
 #: ../../src/wui/building_statistics_menu.cc:105
 msgid "Jump to unproductive: "
@@ -1221,31 +1223,31 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:115
 msgid "Owned"
-msgstr ""
+msgstr "Besitten"
 
 #: ../../src/wui/building_statistics_menu.cc:116
 msgid "Build"
-msgstr ""
+msgstr "Buen"
 
 #: ../../src/wui/building_statistics_menu.cc:132
 #: ../../src/wui/building_statistics_menu.cc:154
 #: ../../src/wui/building_statistics_menu.cc:176
 msgid "Show previous"
-msgstr ""
+msgstr "Wies vörderen"
 
 #: ../../src/wui/building_statistics_menu.cc:143
 #: ../../src/wui/building_statistics_menu.cc:165
 #: ../../src/wui/building_statistics_menu.cc:187
 msgid "Show next"
-msgstr ""
+msgstr "Wies neegste"
 
 #: ../../src/wui/buildingwindow.cc:186
 msgid "Continue"
-msgstr ""
+msgstr "Wietermaken"
 
 #: ../../src/wui/buildingwindow.cc:186
 msgid "Stop"
-msgstr ""
+msgstr "Anhollen"
 
 #: ../../src/wui/buildingwindow.cc:204
 #, c-format
@@ -1266,7 +1268,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:290
 msgid "Debug"
-msgstr ""
+msgstr "Fehlersök"
 
 #: ../../src/wui/buildingwindow.cc:301
 msgid "Center view on this"
@@ -1274,11 +1276,11 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:314
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: ../../src/wui/buildingwindow.cc:488
 msgid "Show workarea"
-msgstr ""
+msgstr "Wies Arbeidsgegend"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
@@ -1286,11 +1288,11 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Ökelnaam:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
-msgstr ""
+msgstr "Passwoort:"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
@@ -1306,7 +1308,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:63
 msgid "Login"
-msgstr ""
+msgstr "Anmelldung"
 
 #: ../../src/wui/login_box.cc:69 ../../src/wui/game_main_menu_save_game.cc:95
 #: ../../src/ui_fsmenu/options.cc:56 ../../src/ui_fsmenu/options.cc:392
@@ -1320,7 +1322,7 @@ msgstr "Vun wegen"
 #: ../../src/wui/login_box.cc:73 ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "nobody"
-msgstr ""
+msgstr "Keeneen"
 
 #: ../../src/wui/login_box.cc:85
 msgid "Empty Nickname"
@@ -2891,7 +2893,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
 msgid "Clients online:"
-msgstr ""
+msgstr "Brukers online:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:59
 msgid "List of games:"
@@ -3156,7 +3158,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:476
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Schriev de Schnack in Speel ahn Böhn"
 
 #: ../../src/ui_fsmenu/options.cc:515
 msgid "Pause"
@@ -3292,7 +3294,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
-msgstr ""
+msgstr "Wies de Helpfinster"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:149 ../../src/ui_fsmenu/launchMPG.cc:664
 msgid "Multiplayer Game Setup"
@@ -3300,7 +3302,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:157
 msgid "Clients"
-msgstr ""
+msgstr "Brukers"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:216
 msgid "The host has not yet selected a map or saved game."
@@ -3396,7 +3398,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Client settings"
-msgstr ""
+msgstr "Bruker Instellungen"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:669
 msgid ""
@@ -3486,7 +3488,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Wies all Kaartn"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
@@ -3739,7 +3741,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client has left the game."
-msgstr ""
+msgstr "Bruker het de Speel verlaaten."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Client crashed and performed an emergency save."
@@ -4016,7 +4018,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:402 ../../src/network/nethost.cc:428
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Der Bruker %s kunn nich funnen warden"
 
 #: ../../src/network/nethost.cc:413
 msgid "Wrong use, should be: /kick <name> <reason>"
