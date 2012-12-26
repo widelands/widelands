@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-12-16 22:18+0000\n"
+"PO-Revision-Date: 2012-12-25 20:38+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-12-17 04:37+0000\n"
-"X-Generator: Launchpad (build 16372)\n"
+"X-Launchpad-Export-Date: 2012-12-26 04:33+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -153,7 +153,7 @@ msgstr "Koszt budowy"
 #: ../../src/writeHTML.cc:438
 #, c-format
 msgid "%s's constructionsite"
-msgstr "%s jest placem budowy"
+msgstr "plac budowy %s"
 
 #: ../../src/writeHTML.cc:450
 msgid "Enhancements"
@@ -162,7 +162,7 @@ msgstr "Rozbudowane"
 #: ../../src/writeHTML.cc:460
 #, c-format
 msgid "%s's enhancement"
-msgstr "%s jest rozszerzeniem tego budynku"
+msgstr "ulepszenie %s"
 
 #: ../../src/writeHTML.cc:501 ../../src/writeHTML.cc:507
 msgid "Worker types"
@@ -170,7 +170,7 @@ msgstr "Typy pracowników"
 
 #: ../../src/writeHTML.cc:518
 msgid "Needed<br/>experience"
-msgstr "Potrzebowano<br/>doświadczenia"
+msgstr "Potrzebne<br/>doświadczenie"
 
 #: ../../src/writeHTML.cc:520
 msgid "Becomes"
@@ -208,27 +208,26 @@ msgstr ""
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Wymijanie to %u, plus %u dla każdego poziomu powyżej 0 (maksymalny poziom to "
-"%u)."
+"Unik to %u, plus %u dla każdego poziomu powyżej 0 (maksymalny poziom to %u)."
 
 #: ../../src/writeHTML.cc:662 ../../src/writeHTML.cc:673
 #, c-format
 msgid "%s's creation"
-msgstr "%s jest tego produktem"
+msgstr "produkt %s"
 
 #: ../../src/writeHTML.cc:684
 msgid "Spawns in warehouses."
-msgstr "Odrodzenie w magazynach"
+msgstr "Tworzy się w magazynach."
 
 #: ../../src/writeHTML.cc:693
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr "Potrzebuje doświadczenie z pracowania %u razy aby zostać"
+msgstr "Potrzebuje doświadczenia z pracy %u razy aby zostać:"
 
 #: ../../src/writeHTML.cc:701
 #, c-format
 msgid "%s's promotion"
-msgstr "%s jest jego awansem"
+msgstr "awans %s"
 
 #: ../../src/writeHTML.cc:712 ../../src/writeHTML.cc:857
 msgid "Programs"
@@ -251,7 +250,7 @@ msgstr "Pracownicy"
 #: ../../src/writeHTML.cc:788
 #, c-format
 msgid "%s's employee"
-msgstr "%s jest tego pracownikiem"
+msgstr "pracownik %s"
 
 #: ../../src/writeHTML.cc:798
 msgid "Inputs"
@@ -260,7 +259,7 @@ msgstr "Przyjmuje"
 #: ../../src/writeHTML.cc:809
 #, c-format
 msgid "%s's input"
-msgstr "%s jest tego wkładem"
+msgstr "wkład %s"
 
 #: ../../src/writeHTML.cc:821
 msgid "Output"
@@ -269,7 +268,7 @@ msgstr "Zwraca"
 #: ../../src/writeHTML.cc:832 ../../src/writeHTML.cc:846
 #, c-format
 msgid "%s's output"
-msgstr "%s jest tego wynikiem"
+msgstr "produkt %s"
 
 #: ../../src/writeHTML.cc:895 ../../src/writeHTML.cc:1039
 #: ../../src/writeHTML.cc:1102 ../../src/writeHTML.cc:1131
@@ -293,7 +292,7 @@ msgstr "program budynku %s"
 #: ../../src/writeHTML.cc:1116
 #, c-format
 msgid "%s's program %s"
-msgstr "%s jest programem %s"
+msgstr "program %s %s"
 
 #: ../../src/writeHTML.cc:1140 ../../src/writeHTML.cc:1181
 #, c-format
@@ -684,7 +683,7 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
-"Widelands nie mogło załadować plik \"%s\". Format pliku wygląda na "
+"Widelands nie mogło załadować pliku \"%s\". Format pliku wygląda na "
 "nieobsługiwany."
 
 #: ../../src/editor/editorinteractive.cc:192
@@ -836,7 +835,7 @@ msgstr "Etykiety budynków"
 
 #: ../../src/wui/fieldaction.cc:470
 msgid "Debug window"
-msgstr "Usuwania błędów"
+msgstr "Okno debugu"
 
 #: ../../src/wui/fieldaction.cc:477 ../../src/wui/fieldaction.cc:625
 msgid "Build roads"
@@ -911,7 +910,7 @@ msgstr "Zniszczone budynki wojskowe"
 
 #: ../../src/wui/general_statistics_menu.cc:246
 msgid "Civilian buildings lost"
-msgstr "Stracone budynki cywilistów"
+msgstr "Stracone budynki cywilne"
 
 #: ../../src/wui/general_statistics_menu.cc:254
 msgid "Military"
@@ -919,7 +918,7 @@ msgstr "Wojskowych"
 
 #: ../../src/wui/game_debug_ui.cc:236
 msgid "Debug Field"
-msgstr "Pole usuwania błędów"
+msgstr "Pole debugu"
 
 #: ../../src/wui/game_debug_ui.cc:374
 #, c-format
@@ -952,7 +951,7 @@ msgstr "Lista zadań"
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
-msgstr "Potwerdić zwycięstwo"
+msgstr "Ogłoś zwycięstwo"
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
@@ -1006,7 +1005,7 @@ msgstr "Pracownicy"
 
 #: ../../src/wui/productionsitewindow.cc:76
 msgid "Exp"
-msgstr "Eksp."
+msgstr "Dośw."
 
 #: ../../src/wui/productionsitewindow.cc:77
 msgid "Next Level"
@@ -2378,7 +2377,7 @@ msgstr "nie "
 #: ../../src/logic/production_program.cc:173
 #: ../../src/logic/production_program.cc:194
 msgid "economy needs "
-msgstr "gospodarka potrzebuje "
+msgstr "potrzeba: "
 
 #: ../../src/logic/production_program.cc:223
 msgid "site has "
@@ -2386,7 +2385,7 @@ msgstr "teren ma "
 
 #: ../../src/logic/production_program.cc:249
 msgid "workers need experience"
-msgstr "pracownicy potrzebują doświadczenia"
+msgstr "potrzeba pracownikom doświadczenia"
 
 #: ../../src/logic/production_program.cc:274
 msgid "ware type or worker type"
@@ -2426,7 +2425,7 @@ msgstr "zakończono"
 
 #: ../../src/logic/production_program.cc:422
 msgid "skipped"
-msgstr "Pominięto"
+msgstr "Pominięto:"
 
 #: ../../src/logic/production_program.cc:428
 #: ../../src/logic/production_program.cc:837
@@ -2436,11 +2435,11 @@ msgstr " oraz "
 #: ../../src/logic/production_program.cc:429
 #: ../../src/logic/production_program.cc:816
 msgid " because: "
-msgstr " ponieważ: "
+msgstr " , ponieważ: "
 
 #: ../../src/logic/production_program.cc:441
 msgid " because not: "
-msgstr " ponieważ nie "
+msgstr " , ponieważ nie "
 
 #: ../../src/logic/production_program.cc:490
 #, c-format
