@@ -642,6 +642,7 @@ NetHost::NetHost (std::string const & playername, bool internet)
 	UserSettings hostuser;
 	hostuser.name = playername;
 	hostuser.position = UserSettings::none();
+	hostuser.ready = true;
 	d->settings.users.push_back(hostuser);
 	file = 0; //  Initialize as 0 pointer - unfortunately needed in struct.
 }
@@ -1443,8 +1444,13 @@ void NetHost::setMap
 	SendPacket s;
 
 	// Care about the host
-	if (static_cast<int32_t>(maxplayers) <= d->settings.playernum)
+	if
+		(static_cast<int32_t>(maxplayers) <= d->settings.playernum
+		 &&
+		 d->settings.playernum != UserSettings::none())
+	{
 		setPlayerNumber(UserSettings::none());
+	}
 
 	while (oldplayers > maxplayers) {
 		--oldplayers;
@@ -1996,7 +2002,7 @@ bool NetHost::haveUserName(std::string const & name, uint8_t ignoreplayer) {
 
 
 /// Respond to a client's Hello message.
-void NetHost::welcomeClient (uint32_t const number, std::string const & playername)
+void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 {
 	assert(number < d->clients.size());
 
@@ -2027,14 +2033,14 @@ void NetHost::welcomeClient (uint32_t const number, std::string const & playerna
 		UserSettings newuser;
 		newuser.winner = false;
 		newuser.points = 0;
+		newuser.ready  = true;
 		d->settings.users.push_back(newuser);
 	}
 
 	// Assign the player a name, preferably the name chosen by the client
+	if (playername.empty()) // Make sure there is at least a name base.
+		playername = _("Player");
 	std::string effective_name = playername;
-
-	if (effective_name.empty())
-		effective_name = _("Player");
 
 	if (haveUserName(effective_name, client.usernum)) {
 		uint32_t i = 2;
