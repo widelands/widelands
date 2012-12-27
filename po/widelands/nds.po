@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 17:25+0200\n"
-"PO-Revision-Date: 2012-12-24 16:30+0000\n"
+"PO-Revision-Date: 2012-12-26 16:05+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-12-25 04:31+0000\n"
+"X-Launchpad-Export-Date: 2012-12-27 05:08+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: ../../src/computer_player.cc:38
@@ -63,7 +63,7 @@ msgstr "Gröte"
 
 #: ../../src/writeHTML.cc:284
 msgid "Buildable"
-msgstr "Buubor"
+msgstr "Bubor"
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
@@ -4495,24 +4495,24 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:110
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:97
 msgid "Players: "
-msgstr ""
+msgstr "Speelers: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:117
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:105
 msgid "Descr: "
-msgstr ""
+msgstr "Beschr: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:207
 msgid "unnamed"
-msgstr ""
+msgstr "ahn Naam"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "<Directory>"
-msgstr ""
+msgstr "<Orner>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:257
 msgid "<Not a map file>"
-msgstr ""
+msgstr "<Keen Kaartedatei>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:381
 msgid " exists already. Overwrite?"
@@ -4552,7 +4552,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:42
 msgid "Player Options"
-msgstr ""
+msgstr "Speeler Instellungen"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:48
 msgid "Add player"
@@ -4560,19 +4560,19 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:55
 msgid "Remove last player"
-msgstr ""
+msgstr "Hebb letzten Speeler wek"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:70
 msgid "Number of Players"
-msgstr ""
+msgstr "Tall vun Speelers"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:204
 msgid "Player "
-msgstr ""
+msgstr "Speeler "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:323
 msgid "Error!"
-msgstr ""
+msgstr "Failer!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:325
 msgid ""
@@ -4656,7 +4656,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:109
 msgid "none"
-msgstr ""
+msgstr "keen"
 
 #: ../../src/editor/tools/editor_info_tool.cc:115
 msgid ""
@@ -4700,20 +4700,20 @@ msgstr ""
 
 #: ../../src/ai/defaultai.h:85
 msgid "Aggressive"
-msgstr ""
+msgstr "angreepsch"
 
 #: ../../src/ai/defaultai.h:94
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 #: ../../src/ai/defaultai.h:103
 msgid "Defensive"
-msgstr ""
+msgstr "Faselich"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr ""
+msgstr "Keen beschr"
 
 #: ../../src/logic/map.h:166
 msgid "no description defined"
-msgstr ""
+msgstr "Keen Beschrieven vörhanden"
