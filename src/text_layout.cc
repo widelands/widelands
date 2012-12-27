@@ -25,7 +25,9 @@ using namespace std;
 using namespace boost;
 
 string as_game_tip(const string& txt) {
-	static format f("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28><p align=center><font color=21211b face=%s size=16>%s</font></p></rt>");
+	static format f
+		("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
+		 "<p align=center><font color=21211b face=%s size=16>%s</font></p></rt>");
 
 	f % UI_FONT_NAME_NO_EXT;
 	f % txt;
@@ -62,7 +64,8 @@ string as_tooltip(const string & txt) {
 }
 
 string as_waresinfo(const string & txt) {
-	static format f("<rt><p><font face=DejaVuSansCondensed size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
+	static format f
+		("<rt><p><font face=DejaVuSansCondensed size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
 
 	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
 	f % txt;

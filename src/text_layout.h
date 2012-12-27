@@ -30,7 +30,7 @@
  * Checks it the given string is RichText or not. Does not do validity checking.
  */
 inline bool is_richtext(const std::string& text) {
-	return text.substr(0, 3) == "<rt";
+	return text.compare(0, 3, "<rt") == 0;
 }
 
 /**

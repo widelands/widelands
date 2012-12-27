@@ -261,7 +261,8 @@ void AbstractWaresDisplay::draw_ware
 
 	const IPicture* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
 	if (text) // might be zero when there is no info text.
-		dst.blit(p + Point
+		dst.blit
+			(p + Point
 				(w - text->get_w() - 1, WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->get_h()), text);
 }
 
