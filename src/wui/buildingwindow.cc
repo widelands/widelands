@@ -173,6 +173,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	bool const can_act = igbase().can_act(owner_number);
 
 	if (can_act) {
+		bool requires_destruction_separator = false;
+
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
@@ -188,6 +190,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				capsbuttons->add
 					(stopbtn,
 					 UI::Box::AlignCenter);
+				requires_destruction_separator = true;
 			}
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
@@ -225,7 +228,21 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					capsbuttons->add
 						(enhancebtn,
 						 UI::Box::AlignCenter);
+					requires_destruction_separator = true;
 				}
+		}
+
+		if
+			(requires_destruction_separator
+			 and
+			 (m_capscache & Widelands::Building::PCap_Bulldoze
+			  or
+			  m_capscache & Widelands::Building::PCap_Dismantle)
+			)
+		{
+			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+
+			capsbuttons->add(spacer, UI::Box::AlignCenter);
 		}
 
 		if (m_capscache & Widelands::Building::PCap_Bulldoze) {
