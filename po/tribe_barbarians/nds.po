@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-24 16:12+0000\n"
+"PO-Revision-Date: 2012-12-28 10:42+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-25 04:31+0000\n"
+"X-Launchpad-Export-Date: 2012-12-29 04:34+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -175,7 +175,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
-msgstr ""
+msgstr "%s vun de Boomschlegers Kaat"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
@@ -489,7 +489,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:43
 #: ../../tribes/barbarians/warmill/help.lua:49
 msgid "Blackwood"
-msgstr ""
+msgstr "Haartholt"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:33
 msgid "Both Trainings:"
@@ -628,13 +628,13 @@ msgstr ""
 #: ../../tribes/barbarians/cattlefarm/help.lua:43
 #: ../../tribes/barbarians/conf:149
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Beister Tüchter"
 
 #: ../../tribes/barbarians/conf:205
 #: ../../tribes/barbarians/farm/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:28
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Beister Hoff"
 
 #: ../../tribes/barbarians/conf:199
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
@@ -686,7 +686,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:80
 msgid "Cloth"
-msgstr ""
+msgstr "Kattuun"
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
@@ -1225,7 +1225,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Buet Reet an"
 
 #: ../../tribes/barbarians/conf:162
 msgid "Guardhall"
@@ -1244,7 +1244,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fernery/conf:17
 msgid "Harvest reed"
-msgstr ""
+msgstr "Aarntet Reet"
 
 #: ../../tribes/barbarians/farm/conf:19
 msgid "Harvest wheat"
@@ -1528,11 +1528,11 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:43
 #: ../../tribes/barbarians/metalworks/help.lua:29
 msgid "Lumberjack"
-msgstr ""
+msgstr "Boomschleger"
 
 #: ../../tribes/barbarians/conf:183
 msgid "Lumberjack's Hut"
-msgstr ""
+msgstr "Boomschlegers Kaat"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Mask"
@@ -1699,7 +1699,7 @@ msgstr ""
 #: ../../tribes/barbarians/cattlefarm/help.lua:48
 #: ../../tribes/barbarians/conf:116
 msgid "Ox"
-msgstr ""
+msgstr "Oss"
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/bakery/help.lua:55
@@ -1757,7 +1757,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr ""
+msgstr "Plantet Reet"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:17
 msgid "Plant trees in the surrounding area."
@@ -2065,7 +2065,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:45
 #: ../../tribes/barbarians/warmill/help.lua:51
 msgid "Raw Stone"
-msgstr ""
+msgstr "Gesteen"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:24
 msgid "Raw Stone from the Granite Mine or Quarry"
@@ -2085,19 +2085,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed medium"
-msgstr ""
+msgstr "Reet middel"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Reed ripe"
-msgstr ""
+msgstr "Reet riep"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Reed small"
-msgstr ""
+msgstr "Reet lütt"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed tiny"
-msgstr ""
+msgstr "Reet lüürlütt"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
@@ -2336,7 +2336,7 @@ msgstr ""
 #: ../../tribes/barbarians/quarry/help.lua:41
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "Stonemason"
-msgstr ""
+msgstr "Steenhauer"
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
 #: ../../tribes/barbarians/conf:106
@@ -2380,7 +2380,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:44
 #: ../../tribes/barbarians/warmill/help.lua:50
 msgid "Thatch Reed"
-msgstr ""
+msgstr "Reet"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
@@ -2422,7 +2422,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:8
 msgid "The Barbarian Cattle Farm"
-msgstr ""
+msgstr "De barbarske Beister Hoff"
 
 #: ../../tribes/barbarians/coalmine/help.lua:8
 msgid "The Barbarian Coal Mine"
@@ -2490,7 +2490,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:8
 msgid "The Barbarian Lumberjack's Hut"
-msgstr ""
+msgstr "De barbarske Boomschlegers Kaat"
 
 #: ../../tribes/barbarians/metalworks/help.lua:8
 msgid "The Barbarian Metalwork Shop"
@@ -2865,7 +2865,7 @@ msgstr ""
 #: ../../tribes/barbarians/well/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:37
 msgid "Trunk"
-msgstr ""
+msgstr "Boomstamm"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid ""
@@ -3166,7 +3166,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:190
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
 msgid "Wood Hardener"
-msgstr ""
+msgstr "Holt Härtner"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/bakery/conf:21
