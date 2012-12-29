@@ -94,7 +94,7 @@ class TestingTransportCostCalculator : public ITransportCostCalculator {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
 		double xd = (c1.x - c2.x);
-		double yd = (c2.y - c2.y);
+		double yd = (c1.y - c2.y);
 		return static_cast<int32_t>((xd * xd + yd * yd) * 1000);
 	}
 };
