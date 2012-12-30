@@ -383,6 +383,13 @@ void WLApplication::run()
 		}
 	} else if (m_game_type == INTERNET) {
 		Widelands::Game game;
+		#ifdef WIN32
+			//  The Winsock2 library needs to get called through WSAStartup, to initiate
+			//  the use of the Winsock DLL by Widelands.
+			WSADATA wsaData;
+			if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
+				throw wexception("initialization of Wsock2-library failed");
+		#endif // WIN32
 		try {
 			// disable sound completely
 			g_sound_handler.m_nosound = true;
@@ -447,8 +454,12 @@ void WLApplication::run()
 
 				InternetGaming::ref().logout();
 			}
+		#ifdef WIN32
+			// Clean up winsock2 data
+			WSACleanup();
+		#endif
 		} catch (std::exception const & e) {
-			log("Fata exception: %s\n", e.what());
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
