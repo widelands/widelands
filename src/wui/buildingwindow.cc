@@ -172,9 +172,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	bool const can_see = igbase().can_see(owner_number);
 	bool const can_act = igbase().can_act(owner_number);
 
+	bool requires_destruction_separator = false;
 	if (can_act) {
-		bool requires_destruction_separator = false;
-
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
@@ -190,7 +189,13 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				capsbuttons->add
 					(stopbtn,
 					 UI::Box::AlignCenter);
-				requires_destruction_separator = true;
+
+				// Add a fixed width separator rather than infinite space so the
+				// enhance/destroy/dismantle buttons are fixed in their position
+				// and not subject to the number of buttons on the right of the
+				// panel.
+				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+				capsbuttons->add(spacer, UI::Box::AlignCenter);
 			}
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
@@ -232,19 +237,6 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				}
 		}
 
-		if
-			(requires_destruction_separator
-			 and
-			 (m_capscache & Widelands::Building::PCap_Bulldoze
-			  or
-			  m_capscache & Widelands::Building::PCap_Dismantle)
-			)
-		{
-			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
-
-			capsbuttons->add(spacer, UI::Box::AlignCenter);
-		}
-
 		if (m_capscache & Widelands::Building::PCap_Bulldoze) {
 			UI::Button * destroybtn =
 				new UI::Button
@@ -257,6 +249,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			capsbuttons->add
 				(destroybtn,
 				 UI::Box::AlignCenter);
+
+			requires_destruction_separator = true;
 		}
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
@@ -279,6 +273,16 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			capsbuttons->add
 				(dismantlebtn,
 				 UI::Box::AlignCenter);
+
+			requires_destruction_separator = true;
+		}
+
+		if (requires_destruction_separator and can_see) {
+			// Need this as well as the infinite space from the can_see section
+			// to ensure there is a separation.
+			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+			capsbuttons->add(spacer, UI::Box::AlignCenter);
+			capsbuttons->add_inf_space();
 		}
 	}
 
@@ -322,7 +326,12 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			 UI::Box::AlignCenter);
 
 		if (m_building.descr().has_help_text()) {
-			capsbuttons->add_inf_space();
+			if (not requires_destruction_separator) {
+				// When there was no separation of destruction buttons put
+				// the infinite space here (e.g. Warehouses)
+				capsbuttons->add_inf_space();
+			}
+
 			UI::Button * helpbtn =
 				new UI::Button
 					(capsbuttons, "help", 0, 0, 34, 34,
