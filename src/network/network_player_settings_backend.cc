@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,7 +136,7 @@ void NetworkPlayerSettingsBackend::toggle_team(uint8_t id) {
 	s->setPlayerTeam(id, newteam);
 }
 
-/// Check if all settings vor the player are still valid
+/// Check if all settings for the player are still valid
 void NetworkPlayerSettingsBackend::refresh(uint8_t id) {
 	GameSettings const & settings = s->settings();
 

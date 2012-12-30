@@ -802,9 +802,15 @@ public:
 
 class SubTagHandler : public TagHandler {
 public:
-	SubTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache, uint32_t max_w = 0, bool shrink_to_fit = false)
-		: TagHandler(tag, fc, ns, img_cache), shrink_to_fit_(shrink_to_fit), m_w(max_w), m_rn(new SubTagRenderNode(ns)) {
-	}
+	SubTagHandler
+		(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache,
+		 uint32_t max_w = 0, bool shrink_to_fit = false)
+		:
+			TagHandler(tag, fc, ns, img_cache),
+			shrink_to_fit_(shrink_to_fit),
+			m_w(max_w),
+			m_rn(new SubTagRenderNode(ns))
+	{}
 
 	void enter() {
 		Borders padding, margin;
