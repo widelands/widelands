@@ -20,19 +20,19 @@
 #ifndef ANIMATION_GFX_H
 #define ANIMATION_GFX_H
 
-class IImageLoader;
-class IPicture;
+class ImageLoaderImpl;
 
+#include "picture_impl.h"
 #include "animation.h"
 #include "logic/widelands.h"
 #include "rgbcolor.h"
 
 struct AnimationGfx { /// The graphics belonging to an animation.
-	AnimationGfx(const IImageLoader&, AnimationData const * data);
+	AnimationGfx(const ImageLoaderImpl&, AnimationData const * data);
 	~AnimationGfx();
 
 	const Point get_hotspot() const throw () {return m_hotspot;}
-	typedef std::vector<IPicture* > Frames;
+	typedef std::vector<ImageImpl* > Frames;
 	typedef Frames::size_type Index;
 	Index nr_frames() const
 	{

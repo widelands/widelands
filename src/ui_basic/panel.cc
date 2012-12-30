@@ -835,6 +835,8 @@ void Panel::do_draw(RenderTarget & dst)
 
 	draw_border(dst);
 
+	// TODO(sirver): this is disabled for the moment. The design is completely unclear to me.
+#if 0
 	if (_flags & pf_cache) {
 		uint32_t innerw = _w - (_lborder + _rborder);
 		uint32_t innerh = _h - (_tborder + _bborder);
@@ -857,13 +859,16 @@ void Panel::do_draw(RenderTarget & dst)
 
 		dst.blit(Point(_lborder, _tborder), _cache.get(), CM_Copy);
 	} else {
+#endif
 		Rect innerwindow
 			(Point(_lborder, _tborder),
 				_w - (_lborder + _rborder), _h - (_tborder + _bborder));
 
 		if (dst.enter_window(innerwindow, 0, 0))
 			do_draw_inner(dst);
+#if 0
 	}
+#endif
 
 	dst.set_window(outerrc, outerofs);
 }

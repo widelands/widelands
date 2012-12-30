@@ -90,8 +90,8 @@ void draw_field_opengl
 			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
 			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
 
-			GLuint edge = dynamic_cast<GLSurfaceTexture const &>
-				(*g_gr->get_edge_texture()).get_gl_texture();
+			GLuint edge = static_cast<const GLSurfaceTexture&>
+				(g_gr->get_edge_texture()).get_gl_texture();
 
 			// combine current and top texture
 			glActiveTextureARB(GL_TEXTURE2_ARB);
@@ -117,8 +117,8 @@ void draw_field_opengl
 			glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS_ARB);
 			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
 
-			GLuint edge = dynamic_cast<GLSurfaceTexture const &>
-				(*g_gr->get_edge_texture()).get_gl_texture();
+			GLuint edge = static_cast<const GLSurfaceTexture&>
+				(g_gr->get_edge_texture()).get_gl_texture();
 
 			// combine current and left texture
 			glActiveTextureARB(GL_TEXTURE4_ARB);
@@ -271,11 +271,11 @@ void draw_roads_opengl
 	uint8_t road;
 
 	GLuint rt_normal =
-		dynamic_cast<GLSurfaceTexture const &>
-		(*g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
+		static_cast<const GLSurfaceTexture&>
+		(g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
 	GLuint rt_busy   =
-		dynamic_cast<GLSurfaceTexture const &>
-		(*g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
+		static_cast<const GLSurfaceTexture&>
+		(g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
 
 	glDisable(GL_BLEND);
 	glColor4f(1.0f, 1.0f, 1.0f, 0.6f);

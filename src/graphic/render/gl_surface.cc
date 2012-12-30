@@ -19,8 +19,11 @@
 
 #include <cmath>
 
+// TODO(sirver): if I refactor Graphic to an interface and then make the implementation public in graphic/
+// i could maybe avoid a lot of casting to ImageImpl.. not sure though.
 #include "gl_surface_texture.h"
 #include "graphic/graphic.h"
+#include "graphic/picture_impl.h"
 #include "upcast.h"
 
 #include "gl_surface.h"
@@ -178,7 +181,8 @@ void GLSurface::blit
 	// this function faster.
 
 	assert(g_opengl);
-	const GLSurfaceTexture* src = static_cast<const GLSurfaceTexture*>(pic);
+	GLSurfaceTexture& surf = static_cast<GLSurfaceTexture&>
+		(static_cast<const ImageImpl*>(pic)->surface());
 
 	/* Set a texture scaling factor. Normally texture coordinates
 	* (see glBegin()...glEnd() Block below) are given in the range 0-1
@@ -191,8 +195,8 @@ void GLSurface::blit
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
 	glScalef
-		(1.0f / static_cast<GLfloat>(src->get_tex_w()),
-		 1.0f / static_cast<GLfloat>(src->get_tex_h()), 1);
+		(1.0f / static_cast<GLfloat>(surf.get_tex_w()),
+		 1.0f / static_cast<GLfloat>(surf.get_tex_h()), 1);
 
 	// Enable Alpha blending
 	if (cm == CM_Normal) {
@@ -202,7 +206,7 @@ void GLSurface::blit
 		glDisable(GL_BLEND);
 	}
 
-	glBindTexture(GL_TEXTURE_2D, src->get_gl_texture());
+	glBindTexture(GL_TEXTURE_2D, surf.get_gl_texture());
 
 	glBegin(GL_QUADS); {
 		// set color white, otherwise textures get mixed with color

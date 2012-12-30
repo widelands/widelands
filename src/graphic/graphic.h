@@ -37,12 +37,13 @@
 namespace UI {struct ProgressWindow;}
 
 struct RenderTarget;
-struct Road_Textures;
 struct SDL_Rect;
 struct SDL_Surface;
 struct StreamWrite;
 struct Texture;
+class ImageImpl;
 class Screen;
+class ImageLoaderImpl;
 
 //@{
 /// This table is used by create_grayed_out_pic()to map colors to grayscale. It
@@ -143,13 +144,14 @@ struct Graphic : public IGraphic {
 	AnimationGfx * get_animation(uint32_t);
 
 	void set_world(std::string);
-	const IPicture* get_road_texture(int32_t roadtex);
-	const IPicture* get_edge_texture();
+	Surface& get_road_texture(int32_t roadtex);
+	Surface& get_edge_texture();
 
 	const GraphicCaps& caps() const throw () {return m_caps;}
 
 private:
 	SDL_Surface * extract_sdl_surface(Surface & surf, Rect srcrect) const;
+	void save_png_(Surface & surf, StreamWrite*) const;
 
 protected:
 	// Static helper function for png writing
@@ -178,12 +180,15 @@ protected:
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 	/// The class that gets images from disk.
-	boost::scoped_ptr<IImageLoader> img_loader_;
+	boost::scoped_ptr<ImageLoaderImpl> img_loader_;
 	// The cache holding the images.
 	boost::scoped_ptr<ImageCache> img_cache_;
 
-	Road_Textures * m_roadtextures;
-	const IPicture* m_edgetexture;
+	// The texture needed to draw roads.
+	boost::scoped_ptr<ImageImpl> pic_road_normal_;
+	boost::scoped_ptr<ImageImpl> pic_road_busy_;
+	boost::scoped_ptr<ImageImpl> edgetexture_;
+
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
 };

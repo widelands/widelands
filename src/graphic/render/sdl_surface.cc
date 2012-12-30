@@ -21,6 +21,8 @@
 
 #include <SDL.h>
 
+#include "graphic/picture_impl.h"
+
 #include "sdl_surface.h"
 
 SDLSurface::~SDLSurface() {
@@ -329,21 +331,22 @@ void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 void SDLSurface::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
-	const SDLSurface* sdlsurf = static_cast<const SDLSurface*>(src);
+	SDL_Surface* sdlsurf = static_cast<SDLSurface&>
+		(static_cast<const ImageImpl*>(src)->surface()).get_sdl_surface();
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
 	bool alpha;
 	uint8_t alphaval;
 	if (cm == CM_Solid || cm == CM_Copy) {
-		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
-		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
-		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
+		alpha = sdlsurf->flags & SDL_SRCALPHA;
+		alphaval = sdlsurf->format->alpha;
+		SDL_SetAlpha(sdlsurf, 0, 0);
 	}
 
-	SDL_BlitSurface(sdlsurf->get_sdl_surface(), &srcrect, m_surface, &dstrect);
+	SDL_BlitSurface(sdlsurf, &srcrect, m_surface, &dstrect);
 
 	if (cm == CM_Solid || cm == CM_Copy) {
-		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
+		SDL_SetAlpha(sdlsurf, alpha?SDL_SRCALPHA:0, alphaval);
 	}
 }

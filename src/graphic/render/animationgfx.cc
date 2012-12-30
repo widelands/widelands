@@ -22,11 +22,11 @@
 #include "io/streamwrite.h"
 
 #include "graphic/graphic.h"
-#include "graphic/image_loader.h"
+#include "graphic/picture_impl.h"
+#include "graphic/image_loader_impl.h"
 #include "graphic/picture.h"
 
 #include "log.h"
-#include "upcast.h"
 
 #include <SDL.h>
 
@@ -47,7 +47,7 @@ Load the animation
 */
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
-AnimationGfx::AnimationGfx(const IImageLoader& il, AnimationData const * const data) :
+AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, AnimationData const * const data) :
 	m_hotspot(data->hotspot)
 {
 	m_hasplrclrs = data->hasplrclrs;
@@ -99,7 +99,7 @@ AnimationGfx::AnimationGfx(const IImageLoader& il, AnimationData const * const d
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					IPicture* pic = il.load(filename, true);
+					ImageImpl* pic = il.load(filename, true);
 					if (width == 0) { //  This is the first frame.
 						width  = pic->get_w();
 						height = pic->get_h();
@@ -179,7 +179,7 @@ AnimationGfx::AnimationGfx(const IImageLoader& il, AnimationData const * const d
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						IPicture* picture = il.load(filename, true);
+						ImageImpl* picture = il.load(filename, true);
 						if (width != picture->get_w() or height != picture->get_h())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
@@ -254,24 +254,24 @@ Encodes the given surface into a frame
 void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 {
 	assert(m_plrframes[0].size() == m_pcmasks.size());
-	std::vector<IPicture* > & frames = m_plrframes[plr];
+	std::vector<ImageImpl* > & frames = m_plrframes[plr];
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
-		IPicture* origpic = m_plrframes[0][i];
+		ImageImpl* origpic = m_plrframes[0][i];
 		uint32_t w = origpic->get_w();
 		uint32_t h = origpic->get_h();
-		upcast(Surface, orig_surface, m_plrframes[0][i]);
-		upcast(Surface, pcmask_surface, m_pcmasks[i]);
+		Surface& orig_surface = m_plrframes[0][i]->surface();
+		Surface& pcmask_surface = m_pcmasks[i]->surface();
 
 		Surface* new_surface = g_gr->create_surface(w, h, true);
 
-		const SDL_PixelFormat & fmt = orig_surface->format();
-		const SDL_PixelFormat & fmt_pc = pcmask_surface->format();
+		const SDL_PixelFormat & fmt = orig_surface.format();
+		const SDL_PixelFormat & fmt_pc = pcmask_surface.format();
 		const SDL_PixelFormat & destfmt = new_surface->format();
 
-		orig_surface->lock(Surface::Lock_Normal);
-		pcmask_surface->lock(Surface::Lock_Normal);
+		orig_surface.lock(Surface::Lock_Normal);
+		pcmask_surface.lock(Surface::Lock_Normal);
 		new_surface->lock(Surface::Lock_Discard);
 		// This could be done significantly faster, but since we
 		// cache the result, let's keep it simple for now.
@@ -281,8 +281,8 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 				RGBAColor mask;
 				RGBAColor product;
 
-				source.set(fmt, orig_surface->get_pixel(x, y));
-				mask.set(fmt_pc, pcmask_surface->get_pixel(x, y));
+				source.set(fmt, orig_surface.get_pixel(x, y));
+				mask.set(fmt_pc, pcmask_surface.get_pixel(x, y));
 
 				if
 					(uint32_t const influence =
@@ -314,11 +314,11 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 				new_surface->set_pixel(x, y, product.map(destfmt));
 			}
 		}
-		orig_surface->unlock(Surface::Unlock_NoChange);
-		pcmask_surface->unlock(Surface::Unlock_NoChange);
+		orig_surface.unlock(Surface::Unlock_NoChange);
+		pcmask_surface.unlock(Surface::Unlock_NoChange);
 		new_surface->unlock(Surface::Unlock_Update);
 
-		frames.push_back(new_surface);
+		frames.push_back(new_picture(new_surface));
 	}
 }
 

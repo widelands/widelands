@@ -24,6 +24,7 @@
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "graphic/graphic.h"
 #include "graphic/iblitable_surface.h"
+#include "graphic/picture_impl.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "i18n.h"
@@ -126,9 +127,9 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				if (ter_is & TERRAIN_DRY)
 					surf->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
 			}
-			offscreen_surfaces_.push_back(surf); // Make sure we delete this later on.
+			offscreen_surfaces_.push_back(new_picture(surf)); // Make sure we delete this later on.
 
-			UI::Checkbox & cb = *new UI::Checkbox(this, pos, surf);
+			UI::Checkbox & cb = *new UI::Checkbox(this, pos, offscreen_surfaces_.back());
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_state(m_tool.is_enabled(i));
 			cb.changedto.connect

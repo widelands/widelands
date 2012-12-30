@@ -32,7 +32,8 @@
 #include "io/streamwrite.h"
 
 #include "font_handler.h"
-#include "image_loader.h"
+#include "picture_impl.h"
+#include "image_loader_impl.h"
 #include "picture.h"
 #include "rendertarget.h"
 #include "texture.h"
@@ -64,32 +65,6 @@ uint32_t luminance_table_r[0x100];
 uint32_t luminance_table_g[0x100];
 uint32_t luminance_table_b[0x100];
 
-// Helper stuff {{{
-namespace {
-class ImageLoader : public IImageLoader {
-public:
-	ImageLoader(Graphic& gr) : gr_(gr) {}
-	virtual ~ImageLoader() {}
-
-	IPicture* load(const string& fname, bool alpha) const {
-		FileRead fr;
-		SDL_Surface * sdlsurf;
-
-		//fastOpen tries to use mmap
-		fr.fastOpen(*g_fs, fname.c_str());
-
-		sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-
-		if (!sdlsurf)
-			throw wexception("%s", IMG_GetError());
-
-		return gr_.convert_sdl_surface_to_picture(sdlsurf, alpha);
-	}
-private:
-	Graphic& gr_;
-};
-}  // namespace
-// End: Helper stuff }}}
 
 /**
  * Initialize the SDL video mode.
@@ -103,8 +78,7 @@ Graphic::Graphic
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
-	m_roadtextures     (0),
-	img_loader_(new ImageLoader(*this)),
+	img_loader_(new ImageLoaderImpl(*this)),
 	img_cache_(create_image_cache(img_loader_.get()))
 {
 	// Initialize the table used to create grayed pictures
@@ -342,7 +316,6 @@ Graphic::Graphic
 Graphic::~Graphic()
 {
 	delete m_rendertarget;
-	delete m_roadtextures;
 
 #if USE_OPENGL
 	if (g_opengl)
@@ -469,16 +442,15 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 	Rect destrect = Rect(Point(0, 0), w, h);
 
 	// Second step: get source material
+	Surface* srcsurf = &static_cast<const ImageImpl*>(src)->surface();
 	SDL_Surface * srcsdl = 0;
 	bool free_source = true;
-
-	if (upcast(const SDLSurface, srcsurf, src)) {
-		srcsdl = srcsurf->get_sdl_surface();
+	if (upcast(const SDLSurface, sdlsrcsurf, srcsurf)) {
+		srcsdl = sdlsrcsurf->get_sdl_surface();
 		free_source = false;
 	} else {
-		// I guess this is just in OpenGL
-		srcsdl = extract_sdl_surface
-			(*static_cast<Surface*>(const_cast<IPicture*>(src)), srcrect);
+		// This is in OpenGL
+		srcsdl = extract_sdl_surface(*srcsurf, srcrect);
 	}
 
 	// Third step: perform the zoom and placement
@@ -532,6 +504,7 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 		zoomed = placed;
 	}
 
+	// TODO(sirver): all of these functions could be implemented in a lazy caching ImageImpl
 	return convert_sdl_surface_to_picture(zoomed);
 }
 
@@ -577,7 +550,10 @@ SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect) const
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
+void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const {
+	save_png_(static_cast<const ImageImpl*>(pic)->surface(), sw);
+}
+void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 {
 	// Save a png
 	png_structp png_ptr =
@@ -609,8 +585,6 @@ void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
 		(png_ptr,
 		 sw,
 		 &Graphic::m_png_write_function, &Graphic::m_png_flush_function);
-
-	Surface& surf = *static_cast<Surface*>(const_cast<IPicture*>(pic));
 
 	// Fill info struct
 	png_set_IHDR
@@ -665,7 +639,7 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
-		return new GLSurfaceTexture(surf);
+		return new_picture(new GLSurfaceTexture(surf));
 	}
 #endif
 	SDL_Surface * surface;
@@ -674,7 +648,7 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 	else
 		surface = SDL_DisplayFormat(surf);
 	SDL_FreeSurface(surf);
-	return new SDLSurface(*surface);
+	return new_picture(new SDLSurface(*surface));
 }
 
 /**
@@ -724,10 +698,10 @@ const IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 	if (!pic)
 		return 0;
 
-	Surface& surf = *static_cast<Surface*>(const_cast<IPicture*>(pic));
+	Surface& surf = static_cast<const ImageImpl*>(pic)->surface();
 
-	uint32_t w = pic->get_w();
-	uint32_t h = pic->get_h();
+	uint32_t w = surf.get_w();
+	uint32_t h = surf.get_h();
 	const SDL_PixelFormat & origfmt = surf.format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
@@ -758,7 +732,7 @@ const IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 	surf.unlock(Surface::Unlock_NoChange);
 	dest->unlock(Surface::Unlock_Update);
 
-	return dest;
+	return new_picture(dest);
 }
 
 /**
@@ -775,10 +749,10 @@ const IPicture* Graphic::create_changed_luminosity_pic
 	if (!pic)
 		return 0;
 
-	Surface& surf = *static_cast<Surface*>(const_cast<IPicture*>(pic));
+	Surface& surf = static_cast<const ImageImpl*>(pic)->surface();
 
-	uint32_t w = pic->get_w();
-	uint32_t h = pic->get_h();
+	uint32_t w = surf.get_w();
+	uint32_t h = surf.get_h();
 	const SDL_PixelFormat & origfmt = surf.format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
@@ -805,7 +779,7 @@ const IPicture* Graphic::create_changed_luminosity_pic
 	surf.unlock(Surface::Unlock_NoChange);
 	dest->unlock(Surface::Unlock_Update);
 
-	return dest;
+	return new_picture(dest);
 }
 
 
@@ -910,7 +884,8 @@ void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
 	StreamWrite * sw = g_fs->OpenStreamWrite(fname);
-	save_png(screen_.get(), sw);
+	Surface& screen = *screen_.get();
+	save_png_(screen, sw);
 	delete sw;
 }
 
@@ -971,37 +946,32 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 void Graphic::set_world(string worldname) {
 	char buf[255];
 
-	if (m_roadtextures)
-		delete m_roadtextures;
-
 	// Load the road textures
-	m_roadtextures = new Road_Textures();
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
-	m_roadtextures->pic_road_normal = imgcache().load(PicMod_Game, buf, false);
+	pic_road_normal_.reset(img_loader_->load(buf, false));
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
-	m_roadtextures->pic_road_busy = imgcache().load(PicMod_Game, buf, false);
+	pic_road_busy_.reset(img_loader_->load(buf, false));
 
 	// load edge texture
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
-	m_edgetexture = imgcache().load(PicMod_Game, buf, false);
+	edgetexture_.reset(img_loader_->load(buf, false));
 }
 
 /**
- * Retrives the texture of the road type. This loads the road texture
- * if not done yet.
+ * Retrives the texture of the road type.
  * \return The road texture
  */
-const IPicture* Graphic::get_road_texture(int32_t roadtex)
+Surface& Graphic::get_road_texture(int32_t roadtex)
 {
 	return
-		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
+		(roadtex == Widelands::Road_Normal ? pic_road_normal_ : pic_road_busy_)->surface();
 }
 
 /**
  * Returns the alpha mask texture for edges.
  * \return The edge texture (alpha mask)
  */
-const IPicture* Graphic::get_edge_texture()
+Surface& Graphic::get_edge_texture()
 {
-	return m_edgetexture;
+	return edgetexture_->surface();
 }

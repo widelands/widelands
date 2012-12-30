@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,36 +13,31 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#ifndef IBLITABLE_SURFACE_H
-#define IBLITABLE_SURFACE_H
+#ifndef PICTURE_IMPL_H
+#define PICTURE_IMPL_H
 
-#include <boost/noncopyable.hpp>
-
-#include "compositemode.h"
 #include "picture.h"
-#include "point.h"
-#include "rgbcolor.h"
-#include "rect.h"
 
-/**
- * Interface to a basic surfaces that can be used as destination for blitting.
- */
-class IBlitableSurface {
+class Surface;
+class IBlitableSurface;
+
+// TODO(sirver): document this. Internal to graphic
+class ImageImpl : public IPicture {
 public:
-	virtual ~IBlitableSurface() {}
+	virtual ~ImageImpl() {}
 
 	virtual uint32_t get_w() const = 0;
 	virtual uint32_t get_h() const = 0;
 
-	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
-
-	/// Draws a filled rect to the surface.
-	virtual void fill_rect(const Rect&, RGBAColor) = 0;
+	virtual Surface& surface() const = 0;
 };
 
-#endif
+// TODO(sirver): takes ownership of surf
+ImageImpl* new_picture(IBlitableSurface* surf);
+
+#endif /* end of include guard: PICTURE_IMPL_H */
+

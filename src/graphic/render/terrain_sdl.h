@@ -598,10 +598,8 @@ template<typename T> static void draw_field_int
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	SDLSurface* rt_busy = const_cast<SDLSurface*>
-		(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Busy)));
-	SDLSurface* rt_normal = const_cast<SDLSurface*>
-		(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Normal)));
+	SDLSurface& rt_busy = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Busy));
+	SDLSurface& rt_normal = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Normal));
 
 	dst.lock(Surface::Lock_Normal);
 
@@ -616,10 +614,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_horiz<T> (dst, f_vert, r_vert, *rt_normal);
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_horiz<T> (dst, f_vert, r_vert, *rt_busy);
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
 				break;
 			default:
 				assert(false);
@@ -635,10 +633,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, br_vert, *rt_normal);
+				render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, br_vert, *rt_busy);
+				render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
 				break;
 			default:
 				assert(false);
@@ -654,10 +652,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, bl_vert, *rt_normal);
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, bl_vert, *rt_busy);
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
 				break;
 			default:
 				assert(false);

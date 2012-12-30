@@ -28,6 +28,7 @@
 #include <boost/scoped_ptr.hpp>
 
 #include "graphic/image_cache.h"
+#include "graphic/picture_impl.h"
 
 #include "rt_parse.h"
 #include "textstream.h"
@@ -112,7 +113,7 @@ public:
 	virtual uint32_t width() = 0;
 	virtual uint32_t height() = 0;
 	virtual uint32_t hotspot_y() = 0;
-	virtual IBlitableSurface* render(IGraphic& gr) = 0;
+	virtual IPicture* render(IGraphic& gr) = 0;
 
 	virtual bool is_non_mandatory_space() {return false;}
 	virtual bool is_expanding() {return false;}
@@ -306,7 +307,7 @@ public:
 		return rv;
 	}
 
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual IPicture* render(IGraphic& gr);
 
 protected:
 	uint32_t m_w, m_h;
@@ -323,11 +324,11 @@ TextNode::TextNode(IFont& font, NodeStyle& ns, const string& txt)
 uint32_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
-IBlitableSurface* TextNode::render(IGraphic& gr) {
+IPicture* TextNode::render(IGraphic& gr) {
 	const IPicture& img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
 	IBlitableSurface* rv = gr.create_surface(img.get_w(), img.get_h(), true);
 	rv->blit(Point(0, 0), &img, Rect(0, 0, img.get_w(), img.get_h()), CM_Copy);
-	return rv;
+	return new_picture(rv);
 }
 
 /*
@@ -341,7 +342,7 @@ public:
 			m_w = w;
 		};
 	virtual ~FillingTextNode() {};
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual IPicture* render(IGraphic& gr);
 
 	virtual bool is_expanding() {return m_expanding;}
 	virtual void set_w(uint32_t w) {m_w = w;}
@@ -349,14 +350,14 @@ public:
 private:
 	bool m_expanding;
 };
-IBlitableSurface* FillingTextNode::render(IGraphic& gr) {
+IPicture* FillingTextNode::render(IGraphic& gr) {
 	const IPicture& t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
 	IBlitableSurface* rv = gr.create_surface(m_w, m_h, true);
 	for (uint32_t x = 0; x < m_w; x += t.get_w()) {
 		Rect srcrect(Point(0, 0), min(static_cast<uint32_t>(t.get_w()), m_w - x), m_h);
 		rv->blit(Point(x, 0), &t, srcrect, CM_Solid);
 	}
-	return rv;
+	return new_picture(rv);
 }
 
 /*
@@ -368,11 +369,11 @@ public:
 	WordSpacerNode(IFont& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
-	virtual IBlitableSurface* render(IGraphic& gr) {
+	virtual IPicture* render(IGraphic& gr) {
 		if (m_show_spaces) {
 			IBlitableSurface* rv = gr.create_surface(m_w, m_h, true);
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
-			return rv;
+			return new_picture(rv);
 		}
 		return TextNode::render(gr);
 	}
@@ -393,7 +394,7 @@ public:
 	virtual uint32_t height() {return 0;}
 	virtual uint32_t width() {return INFINITE_WIDTH; }
 	virtual uint32_t hotspot_y() {return 0;}
-	virtual IBlitableSurface* render(IGraphic& gr) {
+	virtual IPicture* render(IGraphic& gr) {
 		assert(false); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
@@ -413,7 +414,7 @@ public:
 	virtual uint32_t height() {return m_h;}
 	virtual uint32_t width() {return m_w;}
 	virtual uint32_t hotspot_y() {return m_h;}
-	virtual IBlitableSurface* render(IGraphic& gr) {
+	virtual IPicture* render(IGraphic& gr) {
 		IBlitableSurface* rv = gr.create_surface(m_w, m_h, m_bg != NULL);
 
 		// Draw background image (tiling)
@@ -428,7 +429,7 @@ public:
 				rv->blit(dst, m_bg, srcrect, CM_Solid);
 			}
 		}
-		return rv;
+		return new_picture(rv);
 	}
 	virtual bool is_expanding() {return m_expanding;}
 	virtual void set_w(uint32_t w) {m_w = w;}
@@ -460,7 +461,7 @@ public:
 	virtual uint32_t width() {return m_w + m_margin.left + m_margin.right;}
 	virtual uint32_t height() {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint32_t hotspot_y() {return height();}
-	virtual IBlitableSurface* render(IGraphic& gr) {
+	virtual IPicture* render(IGraphic& gr) {
 		if (!width() || !height()) {
 			return 0;
 		}
@@ -492,7 +493,7 @@ public:
 		}
 
 		foreach(RenderNode* n, m_nodes_to_render) {
-			IBlitableSurface* nsur = n->render(gr);
+			IPicture* nsur = n->render(gr);
 			if (nsur) {
 				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
 				Rect src = Rect(0, 0, nsur->get_w(), nsur->get_h());
@@ -505,7 +506,7 @@ public:
 
 		m_nodes_to_render.clear();
 
-		return rv;
+		return new_picture(rv);
 	}
 	virtual const vector<Reference> get_references() {return m_refs;}
 	void set_dimensions(uint32_t inner_w, uint32_t inner_h, Borders margin) {
@@ -536,16 +537,16 @@ public:
 	virtual uint32_t width() {return m_picture.get_w();}
 	virtual uint32_t height() {return m_picture.get_h();}
 	virtual uint32_t hotspot_y() {return m_picture.get_h();}
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual IPicture* render(IGraphic& gr);
 
 private:
 	const IPicture& m_picture;
 };
 
-IBlitableSurface* ImgRenderNode::render(IGraphic& gr) {
+IPicture* ImgRenderNode::render(IGraphic& gr) {
 	IBlitableSurface* rv = gr.create_surface(m_picture.get_w(), m_picture.get_h(), true);
 	rv->blit(Point(0, 0), &m_picture, Rect(0, 0, m_picture.get_w(), m_picture.get_h()), CM_Copy);
-	return rv;
+	return new_picture(rv);
 }
 // End: Helper Stuff
 

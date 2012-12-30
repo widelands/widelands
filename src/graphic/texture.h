@@ -27,14 +27,6 @@
 #include "colormap.h"
 #include "graphic/render/gl_surface_texture.h"
 
-/**
- * This contains all the road textures needed to render roads
- */
-struct Road_Textures {
-	const IPicture* pic_road_normal;
-	const IPicture* pic_road_busy;
-};
-
 /** struct Texture
 *
 * Texture represents are terrain texture, which is strictly
