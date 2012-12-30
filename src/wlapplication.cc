@@ -383,13 +383,6 @@ void WLApplication::run()
 		}
 	} else if (m_game_type == INTERNET) {
 		Widelands::Game game;
-		#ifdef WIN32
-			//  The Winsock2 library needs to get called through WSAStartup, to initiate
-			//  the use of the Winsock DLL by Widelands.
-			WSADATA wsaData;
-			if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-				throw wexception("initialization of Wsock2-library failed");
-		#endif // WIN32
 		try {
 			// disable sound completely
 			g_sound_handler.m_nosound = true;
@@ -454,10 +447,6 @@ void WLApplication::run()
 
 				InternetGaming::ref().logout();
 			}
-		#ifdef WIN32
-			// Clean up winsock2 data
-			WSACleanup();
-		#endif
 		} catch (std::exception const & e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1040,6 +1029,9 @@ bool WLApplication::init_hardware() {
 			("Failed to initialize SDL, no valid video driver: %s",
 			 SDL_GetError());
 
+	if(SDLNet_Init()==-1)
+		throw wexception("SDLNet_Init: %s\n", SDLNet_GetError());
+
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
@@ -1081,7 +1073,7 @@ void WLApplication::shutdown_hardware()
 			<< endl;
 
 	init_graphics(0, 0, 0, false, false);
-
+	SDLNet_Quit();
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
@@ -1653,14 +1645,6 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-#ifdef WIN32
-	//  The Winsock2 library needs to get called through WSAStartup, to initiate
-	//  the use of the Winsock DLL by Widelands.
-	WSADATA wsaData;
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-		throw wexception("initialization of Wsock2-library failed");
-#endif // WIN32
-
 	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
@@ -1734,10 +1718,6 @@ void WLApplication::mainmenu_multiplayer()
 			}
 		}
 	}
-#ifdef WIN32
-	// Clean up winsock2 data
-	WSACleanup();
-#endif
 }
 
 void WLApplication::mainmenu_editor()
