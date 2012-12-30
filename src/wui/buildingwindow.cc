@@ -17,7 +17,7 @@
  *
  */
 
-#include "bulldozeconfirm.h"
+#include "buildingconfirm.h"
 #include "game_debug_ui.h"
 #include "graphic/picture.h"
 #include "graphic/rendertarget.h"
@@ -362,7 +362,13 @@ Callback for bulldozing request
 */
 void Building_Window::act_bulldoze()
 {
-	show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+		if (m_building.get_playercaps() & Widelands::Building::PCap_Bulldoze)
+			igbase().game().send_player_bulldoze(m_building);
+	}
+	else {
+		show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+	}
 }
 
 /*
@@ -372,8 +378,13 @@ Callback for dismantling request
 */
 void Building_Window::act_dismantle()
 {
-	if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
-		igbase().game().send_player_dismantle(m_building);
+	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+		if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
+			igbase().game().send_player_dismantle(m_building);
+	}
+	else {
+		show_dismantle_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+	}
 }
 
 void Building_Window::act_start_stop() {
@@ -385,15 +396,21 @@ void Building_Window::act_start_stop() {
 
 /*
 ===============
-Callback for bulldozing request
+Callback for enhancement request
 ===============
 */
 void Building_Window::act_enhance(Widelands::Building_Index const id)
 {
-	if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
-		igbase().game().send_player_enhance_building (m_building, id);
-
-	die();
+	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
+			igbase().game().send_player_enhance_building(m_building, id);
+	}
+	else {
+		show_enhance_confirm
+			(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()),
+			 m_building,
+			 id);
+	}
 }
 
 /*
