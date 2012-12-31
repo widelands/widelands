@@ -28,7 +28,7 @@
 
 #include "ui_basic/align.h"
 
-struct RenderTarget;
+class RenderTarget;
 struct FileSystem;
 
 class IPicture;

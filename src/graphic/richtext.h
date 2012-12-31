@@ -29,7 +29,7 @@
 #include "rgbcolor.h"
 
 
-struct RenderTarget;
+class RenderTarget;
 
 namespace UI {
 

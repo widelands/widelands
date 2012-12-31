@@ -36,7 +36,7 @@
 
 namespace UI {struct ProgressWindow;}
 
-struct RenderTarget;
+class RenderTarget;
 struct Road_Textures;
 struct SDL_Rect;
 struct SDL_Surface;
