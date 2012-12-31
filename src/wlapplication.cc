@@ -304,6 +304,10 @@ m_redirected_stdio(false)
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
+
+	if (SDLNet_Init() == -1)
+		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
+
 	UI::g_fh = new UI::Font_Handler();
 	UI::g_fh1 = UI::create_fonthandler(*g_gr, g_fs);
 
@@ -329,6 +333,8 @@ WLApplication::~WLApplication()
 	assert(UI::g_fh1);
 	delete UI::g_fh1;
 	UI::g_fh1 = 0;
+
+	SDLNet_Quit();
 
 	TTF_Quit(); // TODO not here
 
@@ -366,7 +372,7 @@ void WLApplication::run()
 		} catch (Widelands::game_data_error const & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (std::exception const & e) {
-			log("Fata exception: %s\n", e.what());
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -377,7 +383,7 @@ void WLApplication::run()
 		} catch (Widelands::game_data_error const & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
 		} catch (std::exception const & e) {
-			log("Fata exception: %s\n", e.what());
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -1029,9 +1035,6 @@ bool WLApplication::init_hardware() {
 			("Failed to initialize SDL, no valid video driver: %s",
 			 SDL_GetError());
 
-	if(SDLNet_Init()==-1)
-		throw wexception("SDLNet_Init: %s\n", SDLNet_GetError());
-
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
@@ -1073,7 +1076,6 @@ void WLApplication::shutdown_hardware()
 			<< endl;
 
 	init_graphics(0, 0, 0, false, false);
-	SDLNet_Quit();
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
