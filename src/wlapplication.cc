@@ -304,6 +304,10 @@ m_redirected_stdio(false)
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
+
+	if (SDLNet_Init() == -1)
+		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
+
 	UI::g_fh = new UI::Font_Handler();
 	UI::g_fh1 = UI::create_fonthandler(*g_gr, g_fs);
 
@@ -329,6 +333,8 @@ WLApplication::~WLApplication()
 	assert(UI::g_fh1);
 	delete UI::g_fh1;
 	UI::g_fh1 = 0;
+
+	SDLNet_Quit();
 
 	TTF_Quit(); // TODO not here
 
@@ -366,7 +372,7 @@ void WLApplication::run()
 		} catch (Widelands::game_data_error const & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (std::exception const & e) {
-			log("Fata exception: %s\n", e.what());
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -377,19 +383,12 @@ void WLApplication::run()
 		} catch (Widelands::game_data_error const & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
 		} catch (std::exception const & e) {
-			log("Fata exception: %s\n", e.what());
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
 	} else if (m_game_type == INTERNET) {
 		Widelands::Game game;
-		#ifdef WIN32
-			//  The Winsock2 library needs to get called through WSAStartup, to initiate
-			//  the use of the Winsock DLL by Widelands.
-			WSADATA wsaData;
-			if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-				throw wexception("initialization of Wsock2-library failed");
-		#endif // WIN32
 		try {
 			// disable sound completely
 			g_sound_handler.m_nosound = true;
@@ -454,10 +453,6 @@ void WLApplication::run()
 
 				InternetGaming::ref().logout();
 			}
-		#ifdef WIN32
-			// Clean up winsock2 data
-			WSACleanup();
-		#endif
 		} catch (std::exception const & e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1081,7 +1076,6 @@ void WLApplication::shutdown_hardware()
 			<< endl;
 
 	init_graphics(0, 0, 0, false, false);
-
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
@@ -1653,14 +1647,6 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-#ifdef WIN32
-	//  The Winsock2 library needs to get called through WSAStartup, to initiate
-	//  the use of the Winsock DLL by Widelands.
-	WSADATA wsaData;
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-		throw wexception("initialization of Wsock2-library failed");
-#endif // WIN32
-
 	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
@@ -1734,10 +1720,6 @@ void WLApplication::mainmenu_multiplayer()
 			}
 		}
 	}
-#ifdef WIN32
-	// Clean up winsock2 data
-	WSACleanup();
-#endif
 }
 
 void WLApplication::mainmenu_editor()
