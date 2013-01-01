@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2006, 2008-2009, 2012 by the Widelands Development Team
+ * Copyright (C) 2004-2006, 2008-2009, 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -472,6 +472,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				ing->build_id    = packet.String();
 				ing->connectable = str2bool(packet.String());
 				gamelist.push_back(*ing);
+				delete ing;
+				ing = 0;
 			}
 			gameupdate = true;
 		}
@@ -495,6 +497,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				inc->type        = packet.String();
 				inc->points      = packet.String();
 				clientlist.push_back(*inc);
+				delete inc;
+				inc = 0;
 			}
 			clientupdate = true;
 		}

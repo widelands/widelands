@@ -35,7 +35,7 @@
 
 
 struct DirAnimations;
-struct RenderTarget;
+class RenderTarget;
 namespace UI {struct Tab_Panel;}
 
 namespace Widelands {

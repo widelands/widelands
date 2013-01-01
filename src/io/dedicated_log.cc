@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 by the Widelands Development Team
+ * Copyright (C) 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,6 +119,8 @@ void DedicatedLog::game_start(std::vector<std::string> clients, std::string mapn
 	new_game->times.push_back(time(0));
 	new_game->clients = clients;
 	d_games.push_back(*new_game);
+	delete new_game;
+	new_game = 0;
 	info_update();
 }
 

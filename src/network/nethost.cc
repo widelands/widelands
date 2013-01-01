@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2012 by the Widelands Development Team
+ * Copyright (C) 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,6 +64,10 @@ using boost::format;
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(0), m_cur_wincondition(0) {}
+	~HostGameSettingsProvider() {
+		delete m_lua;
+		m_lua = 0;
+	}
 
 	virtual void setScenario(bool is_scenario) {h->setScenario(is_scenario);}
 
@@ -286,7 +290,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual void nextWinCondition() {
 		if (m_win_conditions.size() < 1) {
 			// Register win condition scripts
-			m_lua = create_LuaInterface();
+			if (!m_lua)
+				m_lua = create_LuaInterface();
 			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 
 			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
@@ -1296,6 +1301,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 					info.players  = map.get_nrplayers();
 					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
 					d->settings.maps.push_back(info);
+					delete ml;
 				} else {
 					if
 						(g_fs->IsDirectory(name)
@@ -2473,7 +2479,8 @@ void NetHost::handle_network ()
 		InternetGaming::ref().handle_metaserver_communication();
 		// Maybe an important message was send on the metaserver,
 		// that we should show in game as well.
-		std::vector<ChatMessage> msgs = InternetGaming::ref().getIngameSystemMessages();
+		std::vector<ChatMessage> msgs;
+		InternetGaming::ref().getIngameSystemMessages(msgs);
 		for (uint8_t i = 0; i < msgs.size(); ++i)
 			send(msgs.at(i));
 	}
@@ -2629,6 +2636,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 						ml->preload_map(true);
 						d->settings.scenario = scenario;
 						d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
+						delete ml;
 					}
 				}
 			}

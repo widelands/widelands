@@ -34,7 +34,7 @@
 #include <string>
 #include <cstring>
 
-struct RenderTarget;
+class RenderTarget;
 
 namespace UI {
 
