@@ -709,6 +709,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		log
 			("[Client] SETTING_MAP '%s' '%s'\n",
 			 d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
+
+		// New map was set, so we clean up the buffer of a previously requested file
+		if (file)
+			delete file;
 		break;
 	}
 
@@ -784,6 +788,12 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_FILE_PART: {
+		// Only go on, if we are waiting for a file part at the moment. It can happen, that an "unrequested"
+		// part is send by the server if the map was changed just a moment ago and there was an outstanding
+		// request from the client.
+		if (!file)
+			return; // silently ignore
+
 		uint32_t part = packet.Unsigned32();
 		uint32_t size = packet.Unsigned32();
 
