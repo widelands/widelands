@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2006, 2008-2009, 2012 by the Widelands Development Team
+ * Copyright (C) 2004-2006, 2008-2009, 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,11 +120,10 @@ struct InternetGaming : public ChatProvider {
 	/// ChatProvider: returns the list of chatmessages.
 	std::vector<ChatMessage> const & getMessages() const {return messages;}
 
-	/// \returns and resets the ingame_system_chat messages
-	std::vector<ChatMessage> const & getIngameSystemMessages() {
-		std::vector<ChatMessage> const * temp = new std::vector<ChatMessage>(ingame_system_chat);
+	/// writes the ingame_system_chat messages to \arg msg and resets it afterwards
+	void getIngameSystemMessages(std::vector<ChatMessage> msg) {
+		msg = ingame_system_chat;
 		ingame_system_chat.clear();
-		return *temp;
 	}
 
 private:
