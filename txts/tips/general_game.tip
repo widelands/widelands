@@ -53,3 +53,8 @@ sec=4
 [Tip 14]
 text=_New soldiers are recruted in the headquarters or a warehouse if all needed tools are available. Trainingsites are for improving their abilities.
 sec=6
+
+[Tip 15]
+text=_If you like to live dangerously, pressing Ctrl while clicking the enhance, dismantle or destroy building buttons will skip the confirmation.
+sec=6
+
