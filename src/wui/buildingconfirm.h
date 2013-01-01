@@ -40,6 +40,6 @@ void show_dismantle_confirm
 void show_enhance_confirm
 	(Interactive_Player & player,
 	 Widelands::Building & building,
-	 Widelands::Building_Index const & id);
+	 const Widelands::Building_Index & id);
 
 #endif // _BUILDINGCONFIRM_H_

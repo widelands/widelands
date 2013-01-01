@@ -32,10 +32,10 @@ using boost::format;
 
 struct BuildingActionConfirm : public UI::Window {
 	BuildingActionConfirm
-		(Interactive_Player        & parent,
-		 const std::string         & windowtitle,
-		 const char *                message,
-		 Widelands::Building       & building);
+		(Interactive_Player & parent,
+		 const std::string & windowtitle,
+		 const std::string & message,
+		 Widelands::Building & building);
 
 	Interactive_Player & iaplayer() const {
 		return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
@@ -52,9 +52,20 @@ protected:
  * Confirmation dialog box for the bulldoze request for a building.
  */
 struct BulldozeConfirm : public BuildingActionConfirm {
+	/**
+	 * Create a BulldozeConfirm window.
+	 * No further action is required by the caller: any action necessary to actually
+	 * bulldoze the building if the user confirms is taken automatically.
+	 *
+	 * \param building this is the building that the confirmation dialog displays.
+	 * \param todestroy if this is non-zero, then this immovable will be bulldozed
+	 * instead of \p building if the user confirms the dialog.
+	 * This is useful in the combination where \p todestroy is the base flag
+	 * of \p building.
+	 */
 	BulldozeConfirm
-		(Interactive_Player         & parent,
-		 Widelands::Building        & building,
+		(Interactive_Player & parent,
+		 Widelands::Building & building,
 		 Widelands::PlayerImmovable * todestroy = 0);
 
 	virtual void think();
@@ -69,8 +80,8 @@ private:
  */
 struct DismantleConfirm : public BuildingActionConfirm {
 	DismantleConfirm
-		(Interactive_Player         & parent,
-		 Widelands::Building        & building);
+		(Interactive_Player & parent,
+		 Widelands::Building & building);
 
 	virtual void think();
 	virtual void ok();
@@ -81,24 +92,24 @@ struct DismantleConfirm : public BuildingActionConfirm {
  */
 struct EnhanceConfirm : public BuildingActionConfirm {
 	EnhanceConfirm
-		(Interactive_Player              & parent,
-		 Widelands::Building             & building,
-		 Widelands::Building_Index const & id);
+		(Interactive_Player & parent,
+		 Widelands::Building & building,
+		 const Widelands::Building_Index & id);
 
 	virtual void think();
 	virtual void ok();
 
 private:
     // Do not make this a reference - it is a stack variable in the caller
-	Widelands::Building_Index const m_id;
+	const Widelands::Building_Index m_id;
 };
 
 
 BuildingActionConfirm::BuildingActionConfirm
-	(Interactive_Player         & parent,
-	 const std::string          & windowtitle,
-	 const char *                 message,
-	 Widelands::Building        & building)
+	(Interactive_Player & parent,
+	 const std::string & windowtitle,
+	 const std::string & message,
+	 Widelands::Building & building)
 	:
 	UI::Window
 		(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
@@ -114,7 +125,7 @@ BuildingActionConfirm::BuildingActionConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 g_gr->imgcache().load(PicMod_UI,   "pics/but4.png"),
+			 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 			 g_gr->imgcache().load(PicMod_Game, "pics/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&BuildingActionConfirm::ok, this));
 
@@ -122,7 +133,7 @@ BuildingActionConfirm::BuildingActionConfirm
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 g_gr->imgcache().load(PicMod_UI,   "pics/but4.png"),
+			 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 			 g_gr->imgcache().load(PicMod_Game, "pics/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&BuildingActionConfirm::die, this));
 
@@ -133,15 +144,12 @@ BuildingActionConfirm::BuildingActionConfirm
 
 /*
 ===============
-Create the panels.
-If todestroy is 0, the building will be destroyed when the user confirms it.
-Otherwise, todestroy is destroyed when the user confirms it. This is useful to
-confirm building destruction when the building's base flag is removed.
+Create the panels for bulldoze confirmation.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm
-	(Interactive_Player         & parent,
-	 Widelands::Building        & building,
+	(Interactive_Player & parent,
+	 Widelands::Building & building,
 	 Widelands::PlayerImmovable * todestroy)
 	:
 	BuildingActionConfirm
@@ -162,13 +170,13 @@ Make sure the building still exists and can in fact be bulldozed.
 */
 void BulldozeConfirm::think()
 {
-	Widelands::Editor_Game_Base const & egbase = iaplayer().egbase();
-	upcast(Widelands::Building,        building,  m_building .get(egbase));
+	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
+	upcast(Widelands::Building, building, m_building .get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if
 		(not todestroy ||
-		 not building  ||
+		 not building ||
 		 not iaplayer().can_act(building->owner().player_number())
 		 or not
 		 (building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
@@ -181,8 +189,8 @@ void BulldozeConfirm::think()
  */
 void BulldozeConfirm::ok()
 {
-	Widelands::Game & game   = iaplayer().game();
-	upcast(Widelands::Building,        building,  m_building.get(game));
+	Widelands::Game & game = iaplayer().game();
+	upcast(Widelands::Building, building, m_building.get(game));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(game));
 
 	if
@@ -202,12 +210,12 @@ void BulldozeConfirm::ok()
 
 /*
 ===============
-Create the panels.
+Create the panels for dismantle confirmation.
 ===============
 */
 DismantleConfirm::DismantleConfirm
-	(Interactive_Player         & parent,
-	 Widelands::Building        & building)
+	(Interactive_Player & parent,
+	 Widelands::Building & building)
 	:
 	BuildingActionConfirm
 		(parent,
@@ -226,11 +234,11 @@ Make sure the building still exists and can in fact be dismantled.
 */
 void DismantleConfirm::think()
 {
-	Widelands::Editor_Game_Base const & egbase = iaplayer().egbase();
-	upcast(Widelands::Building,        building,  m_building .get(egbase));
+	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
+	upcast(Widelands::Building, building, m_building.get(egbase));
 
 	if
-		(not building  ||
+		(not building ||
 		 not iaplayer().can_act(building->owner().player_number())
 		 or not
 		 (building->get_playercaps() & Widelands::Building::PCap_Dismantle))
@@ -243,8 +251,8 @@ void DismantleConfirm::think()
  */
 void DismantleConfirm::ok()
 {
-	Widelands::Game & game   = iaplayer().game();
-	upcast(Widelands::Building,        building,    m_building.get(game));
+	Widelands::Game & game = iaplayer().game();
+	upcast(Widelands::Building, building, m_building.get(game));
 	upcast(Widelands::PlayerImmovable, todismantle, m_building.get(game));
 
 	if
@@ -262,13 +270,13 @@ void DismantleConfirm::ok()
 
 /*
 ===============
-Create the panels.
+Create the panels for enhancement confirmation.
 ===============
 */
 EnhanceConfirm::EnhanceConfirm
-	(Interactive_Player              & parent,
-	 Widelands::Building             & building,
-	 Widelands::Building_Index const & id)
+	(Interactive_Player & parent,
+	 Widelands::Building & building,
+	 const Widelands::Building_Index & id)
 	:
 	BuildingActionConfirm
 		(parent,
@@ -288,11 +296,11 @@ Make sure the building still exists and can in fact be enhanced.
 */
 void EnhanceConfirm::think()
 {
-	Widelands::Editor_Game_Base const & egbase = iaplayer().egbase();
-	upcast(Widelands::Building, building, m_building .get(egbase));
+	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
+	upcast(Widelands::Building, building, m_building.get(egbase));
 
 	if
-		(not building  ||
+		(not building ||
 		 not iaplayer().can_act(building->owner().player_number())
 		 or not
 		 (building->get_playercaps() & Widelands::Building::PCap_Enhancable))
@@ -305,8 +313,8 @@ void EnhanceConfirm::think()
  */
 void EnhanceConfirm::ok()
 {
-	Widelands::Game & game   = iaplayer().game();
-	upcast(Widelands::Building,        building,  m_building.get(game));
+	Widelands::Game & game = iaplayer().game();
+	upcast(Widelands::Building, building, m_building.get(game));
 
 	if
 		(building &&
@@ -332,8 +340,8 @@ void EnhanceConfirm::ok()
  * of \p building
  */
 void show_bulldoze_confirm
-	(Interactive_Player         &       player,
-	 Widelands::Building        &       building,
+	(Interactive_Player & player,
+	 Widelands::Building & building,
 	 Widelands::PlayerImmovable * const todestroy)
 {
 	new BulldozeConfirm(player, building, todestroy);
@@ -347,8 +355,8 @@ void show_bulldoze_confirm
  * \param building this is the building that the confirmation dialog displays.
  */
 void show_dismantle_confirm
-	(Interactive_Player         &       player,
-	 Widelands::Building        &       building)
+	(Interactive_Player & player,
+	 Widelands::Building & building)
 {
 	new DismantleConfirm(player, building);
 }
@@ -362,9 +370,9 @@ void show_dismantle_confirm
  * \param id building ID
  */
 void show_enhance_confirm
-	(Interactive_Player              & player,
-	 Widelands::Building             & building,
-	 Widelands::Building_Index const & id)
+	(Interactive_Player & player,
+	 Widelands::Building & building,
+	 const Widelands::Building_Index & id)
 {
 	new EnhanceConfirm(player, building, id);
 }
