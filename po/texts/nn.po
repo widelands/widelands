@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-12 13:41+0000\n"
+"PO-Revision-Date: 2012-12-17 15:06+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-13 04:37+0000\n"
-"X-Generator: Launchpad (build 16361)\n"
+"X-Launchpad-Export-Date: 2012-12-18 04:32+0000\n"
+"X-Generator: Launchpad (build 16372)\n"
 
 #: ../../txts/README:69
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -730,7 +730,7 @@ msgstr "Det er ikkje hensikten til denne bolken å få deg"
 
 #: ../../txts/developers:236
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -738,36 +738,40 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
+"Hald eit auge med fiskarane dine.  Etter at fiskeresursane i eit område er "
+"oppbrukte  vil dei slutte å fiska."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Hurtigtastar"
 
 #: ../../txts/README:47
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "Hurtigtastar (i spelet)"
 
 #: ../../txts/COPYING:1
 msgid "License"
-msgstr ""
+msgstr "Lisens"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Like with natural objects (bobs), you can also select multiple animals or "
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
+"Som naturlege objekt (bobar), kan du velge fleire dyr eller bakketeksturar "
+"med Ctrl + museklikk."
 
 #: ../../txts/developers:275
 msgid "Linux Distributions"
-msgstr ""
+msgstr "Linux-distribusjonar"
 
 #: ../../txts/README:53
 msgid "M               Toggle minimap"
-msgstr ""
+msgstr "M Slå minikart på/av"
 
 #: ../../txts/editor_readme:31
 msgid "M        Toggles minimap"
-msgstr ""
+msgstr "M Slår minikart på/av"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -775,42 +779,49 @@ msgid ""
 "messages window, then use 'G' for Go To and the Delete key to archive "
 "messages."
 msgstr ""
+"Handsam meldingane dine meir effektivt: trykk «N» som i nyhende for å opna "
+"meldingvindauget, så bruk «G» som i Gå til og Delete-tasten for å arkivera "
+"meldingar."
 
 #: ../../txts/developers:134
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Kart og oppdrag"
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Gruvearbeidarar vil kun jobba viss dei blir forsynde med mat."
 
 #: ../../txts/developers:112
 msgid "Musicians"
-msgstr ""
+msgstr "Musikarar"
 
 #: ../../txts/README:55
 msgid "N               Toggle messages ('news')"
-msgstr ""
+msgstr "N Visar/skjular meldingar (nyhende)"
 
 #: ../../txts/developers:171
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
 msgstr ""
+"MERK: denne lista inneheld personar som omsette Widelands før me flytta til "
+"launcpad.net. "
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "New soldiers are recruted in the headquarters or a warehouse if all needed "
 "tools are available. Trainingsites are for improving their abilities."
 msgstr ""
+"Nye soldatar rekrutterast i hovudkvarteret eller i eit varehus viss alle "
+"naudsynte verktøy er tilbodne.  Treneområde er for å forbetra evnene deira."
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
-msgstr ""
+msgstr "Ingen garanti"
 
 #: ../../txts/developers:297
 msgid "Non Unix Distributions"
-msgstr ""
+msgstr "Distribusjonar som ikkje er Unix"
 
 #: ../../txts/README:163
 msgid ""
@@ -820,10 +831,14 @@ msgid ""
 "change between versions. Session records are not intended to serve as demo "
 "files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr ""
+"Merk at mens opptekne filar er systemsjølvstendige virkar dei stort sett "
+"ikkje på tvers av Widelands-versjonar, sia grensesnittet og rekkefølga på "
+"henting av funksjonar kan endrast mellom versjonar.  Øktopptak er ikkje "
+"meint til å vera demo-filar, dei er til som hjelp i feilsøking."
 
 #: ../../txts/README:61
 msgid "O               Toggle objectives display"
-msgstr ""
+msgstr "O Visar/skjuler oversikta over mål"
 
 #: ../../txts/README:157
 msgid ""
@@ -833,89 +848,99 @@ msgid ""
 "should read something like c:\\games\\widelands\\widelands.exe. Change this "
 "to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr ""
+"I Windows, lag ein snarveg til fila widelands.exe (høgreklikk widelands.exe "
+"og vel Lag snarveg).  Så endrar du snarvegen med å høgreklikke han og velje "
+"Eigenskapar).  Tekstfeltet merka Mål vil innehalde noka som c:\\games\\"
+"widelands\\widelands.exe. Endre dette til c:\\games\\widelands\\"
+"widelands.exe --record=filnavn.rec."
 
 #: ../../txts/README:100
 msgid "Online Help"
-msgstr ""
+msgstr "Hjelp på verdsveven"
 
 #: ../../txts/developers:362
 msgid "Other"
-msgstr ""
+msgstr "Anna"
 
 #: ../../txts/developers:286
 msgid "Other Unix Distributions"
-msgstr ""
+msgstr "Andre Unix-distribusjonar"
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
 msgstr ""
+"Er dataspelarane våre for kjedelege?  Vitj heimestaden vår, "
+"www.widelands.org, for å møta andre spelarar og spela over nettet."
 
 #: ../../txts/editor_readme:33
 msgid "P        Toggles player menu"
-msgstr ""
+msgstr "P Visar/skjular spelarmenyen"
 
 #: ../../txts/README:74
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr ""
+msgstr "PageDown Senkar spelhastigheita"
 
 #: ../../txts/README:72
 msgid "PAGEUP         Increase gamespeed"
-msgstr ""
+msgstr "PageUp Auker spelhastigheita"
 
 #: ../../txts/README:76
 msgid "PAUSE         Pauses the game (only for local games)"
-msgstr ""
+msgstr "Pause Pausar spelet (berre lokale spel)"
 
 #: ../../txts/developers:271
 msgid "Packagers"
-msgstr ""
+msgstr "Pakkarar"
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
-msgstr ""
+msgstr "Ver snill å sjå sluttbrukar-manualane våre på wiki-sidene på:"
 
 #: ../../txts/README:121
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Gi oss nok bakgrunnsinfo.  Fortel oss:"
 
 #: ../../txts/developers:241
 msgid "Polish"
-msgstr ""
+msgstr "Polsk"
 
 #: ../../txts/COPYING:11
 msgid "Preamble"
-msgstr ""
+msgstr "Forord"
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
 msgstr ""
+"Trykk Ctrl+(0-9) for å lagra viktige stadar, og trykk 0-9 for å kome til dei."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Pressing and holding ALT GR key lets you drag the window below the mouse "
 "pointer."
-msgstr ""
+msgstr "Viss du held nede Alt Gr kan du dra vindauget under musepeikaren."
 
 #: ../../txts/README:1
 msgid "README"
-msgstr ""
+msgstr "LESMEG"
 
 #: ../../txts/editor_readme:4
 msgid "README for the Editor"
-msgstr ""
+msgstr "LESMEG til skriveprogrammet"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "LESMEG for skriveprogrammet til Widelands"
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "Removing a road holding Ctrl let you remove all flags up to the first "
 "junction."
 msgstr ""
+"Viss du held nede Ctrl mens du fjernar ein veg fjernar du òg alle flaga til "
+"første krysset."
 
 #: ../../txts/README:144
 msgid ""
@@ -925,49 +950,57 @@ msgid ""
 "Linux and in the replays subdirectory of your Widelands installation on "
 "Windows."
 msgstr ""
+"Filmar er veldig nyttige for å finna feil i den logiske koden i spelet, så "
+"me bed deg legga ved filmar til alle feilrapportar du sendar inn.  Filmane "
+"lagrast i ~/.widelands/replays-mappa i heimemappa di i Linux og spelar av "
+"undermappa til Widelands-installasjonen din i Windows."
 
 #: ../../txts/README:137
 msgid "Replays</p>"
-msgstr ""
+msgstr "Filmar</p>"
 
 #: ../../txts/README:112
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Å rapportera feil"
 
 #: ../../txts/developers:249
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
 #: ../../txts/README:59
 msgid "S               Toggle statistics"
-msgstr ""
+msgstr "S Visar/skjuler statistikk"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr ""
+msgstr "Shift (Hald nede) Vel første alternative verktøy"
 
 #: ../../txts/README:51
 msgid "SPACE       Toggle build-help"
-msgstr ""
+msgstr "Mellomrom Slå byggehjelp på/av"
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
-msgstr ""
+msgstr "Mellomrom Slå bygghjelp på/av"
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
+"Mellomrom-tasten oppfører seg som i vanleg spel.  Han slår bygghjelpa på "
+"eller av."
 
 #: ../../txts/developers:172
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
 msgstr ""
+"Sjå https://translations.launchpad.net/widelands for ei liste over dei som "
+"har vore med på å omsetta Widelands gjennom launchpad.net"
 
 #: ../../txts/developers:254
 msgid "Slovak"
-msgstr ""
+msgstr "Slovakisk"
 
 #: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/barbarians.tip:2
@@ -976,43 +1009,48 @@ msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
+"Nokre bygg, som gardar har eit veldig lite arbeidsområde.  Viss bygget blir "
+"krinsa av tre eller vegar vil produksjonen stoppa."
 
 #: ../../txts/developers:28
 #: ../../txts/developers:350
 msgid "Sound"
-msgstr ""
+msgstr "Lyd"
 
 #: ../../txts/developers:124
 msgid "Sound Effects"
-msgstr ""
+msgstr "Lydeffektar"
 
 #: ../../txts/developers:259
 msgid "Spanish"
-msgstr ""
+msgstr "Spansk"
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr ""
+"Del opp vegane dine i kortare bolkar med å planta nokre flag.  Dette gjer at "
+"varetransporten går raskare."
 
 #: ../../txts/README:27
 msgid "Status"
-msgstr ""
+msgstr "Tilstand"
 
 #: ../../txts/developers:264
 msgid "Swedish"
-msgstr ""
+msgstr "Svensk"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
-msgstr ""
+msgstr "T Visar/skjular verktøymenyen"
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr ""
+"Byggearbeidet vil ikkje starta før det finst ein veg til byggeplassen."
 
 #: ../../txts/COPYING:100
 msgid ""
@@ -1024,6 +1062,13 @@ msgid ""
 "sign a copyright disclaimer for the program, if necessary.  Here is a "
 "sample; alter the names:"
 msgstr ""
+"Dei hypotetiske ordra «syn w» og «syn c» burde visa dei tilsvarande delane "
+"av den generelle utgivingslisensen.  Sjølvsagt kan ordra du brukar vera "
+"andre enn «syn w» og «syn c», dei kan til og med vera musetrykk eller "
+"menyinnlegg, kva enn som passar programmet ditt.<br><br>Du bør òg få "
+"arbeidsgivaren din (viss du er programmǿr) eller skulen din, viss du har "
+"ein, til å fråskriva kopiretten for programmet, viss naudsynt.  Her er eit "
+"døme, byt ut namna."
 
 #: ../../txts/COPYING:14
 msgid ""
@@ -1063,12 +1108,46 @@ msgid ""
 "precise terms and conditions for copying, distribution and modification "
 "follow.<br>"
 msgstr ""
+"Lisensen til dei fleste program er laga for å ta vekk fridommen din til å "
+"dela og endra han.  På den andre sida er GNU generelle utgjevingslisens laga "
+"for å garantera fridommen din til å dela og endra fri programvare, for å "
+"sikra at programvaren er fri for alle brukarane.  GNU generelle "
+"utgjevingslisens gjeld det meste av programvaren til Free Software "
+"Foundation og andre program kor forfattaren brukar han.  (Noka av "
+"programvaren til Free Software Foundation er dekka av GNU Biblotek-generelle "
+"utgivingslisens i staden.)  Du kan bruka han til programma dine òg.<br> Når "
+"me snakkar om fri programvare er det snakk om fridom.  Dei generelle "
+"utgivingslisensane våre er laga for å garantera at du har fridommen til å gi "
+"eksemplar av fri programvare vidare (og eventuelt ta betalt for dette), at "
+"du får tilgang til kjeldekoden, at du kan endra programvaren eller bruka "
+"delar av han i nye frie program, og at du veit at du kan gjere alt "
+"dette.<br> For å verna rettane dine må me laga forbod for at ingen skal ta "
+"frå deg desse rettane.  Desse forboda gir deg litt ansvar viss du fordelar "
+"eksemplar av programvaren, eller viss du endrar han.<br> For eksempel, viss "
+"du fordelar eksemplar av eit slikt program, anten gratis eller for pengar, "
+"må du gi mottakaren alle rettane du har.  Du må forsikra at dei òg mottek "
+"eller får tilgang til kjeldekoden.  Og du må visa dei desse kåra så dei veit "
+"rettane sine.<br>Me vernar rettane dine i to steg: 1 tek kopirett på "
+"programvaren og 2 tilbyd deg denne lisensen som gir deg lovleg tillating til "
+"å kopiera, fordela og/eller endra programvaren.<br>I tillegg, for å verna "
+"oss sjølve og kvar forfattar, vil me forsikra om at alle skjøner at det "
+"ikkje er noken garanti for denne frie programvaren.  Viss programvaren er "
+"endra av nokon andre og gitt vidare, vil me at mottakarane veit at dei ikkje "
+"har originalen, så problem som blir skapa av andre ikkje skadar ryktet til "
+"den første forfattaren.<br>Til slutt blir fri programvare stadig trua av "
+"patent.  Me ønskar å unngå faren om at dei som fordelar programvare får "
+"patent på det, og gjer at programvaren blir eigt.  For å unngå dette, har me "
+"gjort det klart at patentet må vere lisensiert for at alle kan bruka det "
+"fritt eller ikkje lisensiert i det heile.<br>Dei konkrete kåra for "
+"kopiering, fordeling og endring følgjer.<br>"
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse."
 msgstr ""
+"Taltastane (1 - 0) lét deg velje storleiken på det valde området rundt "
+"peikaren direkte."
 
 #: ../../txts/COPYING:33
 msgid ""
@@ -1082,6 +1161,14 @@ msgid ""
 "and so on) of the operating system on which the executable runs, unless that "
 "component itself accompanies the executable."
 msgstr ""
+"Kjeldekoda til eit arbeid tyder den foretrukne formen av verket for å endra "
+"det.  For eit køyrbart verk tyder fulleint kjeldekode all kjeldekoden til "
+"alle modulane det inneheld, i tillegg til filar som styrar grensesnittet, i "
+"tillegg til manusa brukt til å kompilera og installera den køyrbare fila.  "
+"Men, som eit særskild høve, treng ikkje kjeldekoda innehalde noka som stort "
+"sett gis ut (anten som kjelde eller binærformat) med hovuddelane "
+"(kompilator, kernel, osb.) til operativsystemet den køyrbare fila køyrar på, "
+"med mindre den delen kjem med den køyrbare fila."
 
 #: ../../txts/COPYING:27
 msgid ""
@@ -1101,6 +1188,16 @@ msgid ""
 "with a work based on the Program) on a volume of a storage or distribution "
 "medium does not bring the other work under the scope of this License."
 msgstr ""
+"Desse krava gjeld heile det endra verket.  Viss det er delar av verket som "
+"ikkje er basert på programmet, og kan ses på som uavhengige adskilde delar, "
+"gjeld denne lisensen, og kåra dens, ikkje dei delane når du gir dei ut som "
+"eigne verk.  Men når du fordelar dei same delane som del av eit verk som er "
+"basert på programmet, må heile utgivinga vere i tråd med denne lisensen, og "
+"kåra for det gjeld andre lisenshaldarar sjølvstende frå kven som skreiv "
+"det.<br>Dermed prøvar denne bolken ikkje å krevja rettar eller endra rettane "
+"dine til verk som er heilt dine, heller å prøve å utføra retten til å styra "
+"utgivinga eller verk(et) basert på programmet.<br>I tillegg, gjeld ikkje "
+"lisensen andre verk som nemnar eller informerer om verket."
 
 #: ../../txts/editor_readme:10
 msgid ""
@@ -1109,6 +1206,10 @@ msgid ""
 "progress and as the Editor becomes better and better this text will also get "
 "longer and more complete."
 msgstr ""
+"Dette skriveprogrammet er laga for spelarar som vil laga sine eigne kart til "
+"bruk i Widelands.<br>Som du kan sjå er dette skriveprogrammet eit verk i "
+"arbeid og mens skriveprogrammet blir betre blir denne teksten lengre og meir "
+"fulleint."
 
 #: ../../txts/COPYING:104
 msgid ""
@@ -1118,28 +1219,41 @@ msgid ""
 "library.  If this is what you want to do, use the GNU Library General Public "
 "License instead of this License."
 msgstr ""
+"Denne generelle offentlege lisensen tillét ikkje bruk av programmet ditt i "
+"ufrie program.  Viss programmet ditt er eit bibliotek for underrutinar kan "
+"du sjå det som nyttigare å tillata lenking av ufrie program med biblioteket. "
+" Viss dette er det du vil gjere, bruk GNU Mindre Generelle Utgjevingslisens "
+"(GNU Library General Public License) i staden for denne lisensen."
 
 #: ../../txts/COPYING:57
 msgid ""
 "This section is intended to make thoroughly clear what is believed to be a "
 "consequence of the rest of this License."
 msgstr ""
+"Denne bolken skal gjera det heilt klårt kva som er sett på som konsekvens av "
+"resten av lisensen."
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file. And there "
 "you further can find a short tutorial about building a map."
 msgstr ""
+"Dei sidene er kanskje meir fulleinte og oppdaterte enn denne fila.  I "
+"tillegg kan du der finne ei kort innføring om korleis du kan lage ditt eigne "
+"kart."
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
-msgstr ""
+msgstr "Høgreklikk eit ope vindauge for å lukka det."
 
 #: ../../txts/README:154
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr ""
+"For å lage eit øktopptak, start spelet med --record-parameteret.  I Linux "
+"kan du ganske enkelt starta Widelands med å køyre: $ ./widelands --"
+"record=filename.rec"
 
 #: ../../txts/COPYING:93
 msgid ""
@@ -1148,43 +1262,56 @@ msgid ""
 "exclusion of warranty; and each file should have at least the copyright line "
 "and a pointer to where the full notice is found."
 msgstr ""
+"For å gjera det, legg til følgande merknadar i programmet.  Det er tryggast "
+"å legga dei til i byrjinga på kvar kjeldefil for å formidla fritaket frå "
+"garanti mest effektivt, og kvar fil bør minst ha kopirettlinja og ein peikar "
+"til der den fulle merknaden er."
 
 #: ../../txts/README:42
 msgid ""
 "To minimize/maximize a window, click on the titlebar of that window either "
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
+"For å minimere eller maksimere eit vindauge, klikk på tittellinja til "
+"vindauget med midterste museknapp eller med venstre museknapp mens du held "
+"Ctrl nede."
 
 #: ../../txts/developers:355
 msgid "Translation"
-msgstr ""
+msgstr "Omsetting"
 
 #: ../../txts/developers:168
 msgid "Translators"
-msgstr ""
+msgstr "Omsettarar"
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use '@name' at the beginning of a chat message to send it to only one player."
 msgstr ""
+"Bruk «@namn» i byrjinga av ei pratemelding for å kun sende ho til ein spelar."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use priority buttons in building window to adjust delivery of a specific "
 "ware."
 msgstr ""
+"Bruk prioriteringsknappar i byggevindauget for å justera levering av ei "
+"given vare."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ',' (comma) and '.' (period) keys to go back and forth between "
 "recently visited places in the world."
 msgstr ""
+"Bruk «,» (komma-) og «.» (punktum-) tastane for å gå att og fram mellom "
+"nyleg vitja stadar i verda."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the 'configure economy' menu to adjust the target quantity of a specific "
 "ware."
 msgstr ""
+"Bruk «juster økonomi»-menyen for å tilpassa målmengda for ei given vare."
 
 #: ../../txts/README:142
 msgid ""
@@ -1195,10 +1322,14 @@ msgid ""
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
 msgstr ""
+"Bruk Syn Film-valet i hovudmenyen for å sjå ein film av eit tidlegare spel.  "
+"Merk at den minste endring i speldatafiler i Widelands kan gjere ein film "
+"ukompatibel og «usynkronisert».  Dette liknar korleis nettverksspel kan gå "
+"ut av synkronisering viss ein spelar har ein anna versjon av spelet."
 
 #: ../../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
-msgstr ""
+msgstr "Versjon 2, juni 1991<br></p></rt>"
 
 #: ../../txts/README:86
 msgid ""
@@ -1206,16 +1337,22 @@ msgid ""
 "is to place flags from end to start. If Shift is also down, place flags from "
 "start to end instead."
 msgstr ""
+"Viss du held Ctrl nede i det du fullførar ein veg, plantar du flag langs "
+"heile vegen.  Standard er å planta flag frå slutten til byrjinga av vegen.  "
+"Viss du òg held Shift nede blir flaga planta frå byrjinga til sluten i "
+"staden."
 
 #: ../../txts/README:88
 msgid ""
 "When removing a road, if Ctrl is pressed all flags up to the first junction "
 "are removed."
 msgstr ""
+"Viss du held Ctrl nede når du fjernar ein veg, fjernar du alle flaga fram "
+"til første kryss."
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Widelands utviklarlag"
 
 #: ../../txts/README:151
 msgid ""
@@ -1223,6 +1360,8 @@ msgid ""
 "can then replay an entire session from starting the game to exiting it. This "
 "is really helpful for debugging problems."
 msgstr ""
+"Widelands kan ta opp alle tasttrykka og musrørslene dine og lagra dei i ei "
+"fil.  Desse kan vere til god hjelp ved feilsøking av problem."
 
 #: ../../txts/README:13
 msgid ""
@@ -1234,6 +1373,12 @@ msgid ""
 "lands around you and face enemies who are trying to rule the world just like "
 "you."
 msgstr ""
+"Widelands er eit strategispel som skal spelast på omtrent same måte som "
+"Settlers II av BlueByte.<br>I dette spelet startar du med eit lite stykke "
+"land utan anna enn nokre få nyttige resursar.  Med dei kan du bygga deg eit "
+"imperium med tusenvis av innbyggarar.  På vegen mot dette målet må du bygga "
+"ein økonomisk infrastruktur, utforska landa rundt deg og trossa fiendar som "
+"prøvar å styra verda akkurat som deg."
 
 #: ../../txts/README:22
 msgid ""
@@ -1241,6 +1386,9 @@ msgid ""
 "information, see the file 'COPYING' or select the License button from the "
 "main menu."
 msgstr ""
+"Widelands er lisensiert under GNU Generelle utgjevingslisens (GPL). For meir "
+"informasjon, sjå fila «COPYING» eller trykk på knappen merka Lisens i "
+"hovudmenyen."
 
 #: ../../txts/README:31
 msgid ""
@@ -1249,6 +1397,9 @@ msgid ""
 "required, especially in the area of graphics, to make Widelands a better "
 "game."
 msgstr ""
+"Widelands held på å bli spelbart, men for å ble meir spelbart treng me "
+"frivillige.  Bidraga dine (ja, eg snakkar til deg) er naudsynte, spesielt i "
+"høve til grafikk, for å gjere Widelands eit betre spel."
 
 #: ../../txts/README:140
 msgid ""
@@ -1258,12 +1409,18 @@ msgid ""
 "players, such as building a road or attacking an enemy. The rest of the "
 "filenames will tell you the time you started the game."
 msgstr ""
+"Widelands tek opp alle spela du speler i to filar.  Ei av dei er i .wrpl.wgf "
+"og har det lagra spelet.  Den andre er i .wrpl og har alle ordra som blei "
+"sende av alle spelarane, som å bygga vegar eller angripa fiendar.  Resten av "
+"filnamna seier når du starta spelet."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial in our "
 "wiki at www.widelands.org"
 msgstr ""
+"Du kan finna generell hjelp til skriveprogrammet i tillegg til ei kort "
+"innføring på wiki-sidene våre på www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -1271,24 +1428,33 @@ msgid ""
 "during selection. If you then click on the map, an instance of one of the "
 "selected object types will be placed."
 msgstr ""
+"Du kan velja fleire naturobjekttypar (bobbar) viss du held nede Ctrl mens du "
+"vel dei.  Viss du så trykkar på kartet, vil eit eksemplar av eitt av dei "
+"valde objekttypane plasserast der."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be "
 "printed as '-> Nickname is tired'."
 msgstr ""
+"Du kan bruka «/me» i byrjinga på ei pratemelding: «/me er trøytt» synest som "
+"«-> Kallenamn er trøytt»."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
 "real speed is then democratically set."
 msgstr ""
+"Du kan bruka «Page Up»- og «Page Down»-tastane for å endra farta du vil ha - "
+"den ekte farta blir så sett demokratisk."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings - "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Området ditt kan utvidast med å bygga ymse militærbygg - vaktpost, fort, "
+"brakke osb."
 
 #: ../../txts/COPYING:102
 msgid ""
@@ -1297,7 +1463,11 @@ msgid ""
 "Hacker.<br><br><signature of Ty Coon>, 1 April 1989<br>Ty Coon, President of "
 "Vice"
 msgstr ""
+"Yoyodyne, Inc., fråskriv seg her all kopirettinteresse i programmet<br> "
+"«Gnomevision» (som gjer flyttingar ved kompilatorar) skriven av James "
+"Hacker.<br><br>signaturen til Ty Croon>, 1. april 1989<br>Ty Coon, "
+"Visepresident"
 
 #: ../../txts/README:5
 msgid "an open source strategy game"
-msgstr ""
+msgstr "eit strategispel med open kjeldekode"
