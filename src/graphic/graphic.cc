@@ -17,6 +17,8 @@
  *
  */
 
+// TODO(sirver): rt test cases are broken again
+
 #include "graphic.h"
 
 #include "build_info.h"
