@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-28 10:08+0000\n"
+"PO-Revision-Date: 2013-01-01 14:15+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-29 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-01-02 04:33+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -150,11 +150,11 @@ msgstr "Brootschuuver"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr ""
+msgstr "Tüchtet Fisch."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Tüchted Speen vur de Gaarn-Produkschoon."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -162,7 +162,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
-msgstr ""
+msgstr "Ammel"
 
 #: ../../tribes/atlanteans/conf:114
 msgid "Builder"
@@ -315,15 +315,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
-msgstr ""
+msgstr "Fisch"
 
 #: ../../tribes/atlanteans/conf:118
 msgid "Fish Breeder"
-msgstr ""
+msgstr "Fischtüchter"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder's House"
-msgstr ""
+msgstr "Fischtüchters Huus"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid ""
@@ -334,15 +334,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
-msgstr ""
+msgstr "Fischer"
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Fisher's House"
-msgstr ""
+msgstr "Fischers Huus"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Fishing Net"
-msgstr ""
+msgstr "Hamm"
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Forester"
@@ -435,7 +435,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Hook pole"
-msgstr ""
+msgstr "Hakenstiff"
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Horse"
@@ -465,7 +465,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
-msgstr ""
+msgstr "Jachtbagen"
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Iron"
@@ -630,7 +630,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce bucket"
-msgstr ""
+msgstr "Fardigt Ammel"
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
@@ -646,7 +646,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce fishing net"
-msgstr ""
+msgstr "Fardigt Hamm"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:21
 msgid "Produce golden tabard"
@@ -662,7 +662,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce hook pole"
-msgstr ""
+msgstr "Fardigt Hakenstiff"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
@@ -686,7 +686,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce scythe"
-msgstr ""
+msgstr "Fardigt Seiß"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:44
 msgid "Produce shovel"
@@ -694,7 +694,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/weaving-mill/conf:19
 msgid "Produce spidercloth"
-msgstr ""
+msgstr "Fardigt Speendauk"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -808,7 +808,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:90
 msgid "Scythe"
-msgstr ""
+msgstr "Seiß"
 
 #: ../../tribes/atlanteans/conf:152
 #: ../../tribes/atlanteans/conf:154
@@ -872,19 +872,19 @@ msgstr ""
 
 #: ../../tribes/atlanteans/smokery/conf:26
 msgid "Smoke fish"
-msgstr ""
+msgstr "Rökert Fisch"
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
-msgstr ""
+msgstr "Rökert Fleesch"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Smoked fish"
-msgstr ""
+msgstr "Smoorfisch"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Smoked meat"
-msgstr ""
+msgstr "Smoorfleesch"
 
 #: ../../tribes/atlanteans/smoked_meat/conf:1
 msgid ""
@@ -895,15 +895,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
-msgstr ""
+msgstr "Rökerer"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Smokery"
-msgstr ""
+msgstr "Rökeree"
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Rökert Fleesch un Fisch."
 
 #: ../../tribes/atlanteans/conf:108
 msgid "Soldier"
@@ -918,11 +918,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
-msgstr ""
+msgstr "Speentüchter"
 
 #: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
-msgstr ""
+msgstr "Speendauk"
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
@@ -933,11 +933,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Spiderfarm"
-msgstr ""
+msgstr "Speen Hoff"
 
 #: ../../tribes/atlanteans/conf:95
 msgid "Spideryarn"
-msgstr ""
+msgstr "Speengaarn"
 
 #: ../../tribes/atlanteans/conf:96
 msgid "Steel Shield"

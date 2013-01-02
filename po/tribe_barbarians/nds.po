@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-28 10:42+0000\n"
+"PO-Revision-Date: 2013-01-01 14:20+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-29 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-01-02 04:33+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -497,7 +497,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:74
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Brootschuuver"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
@@ -1067,18 +1067,18 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:26
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "Fish"
-msgstr ""
+msgstr "Fisch"
 
 #: ../../tribes/barbarians/conf:133
 #: ../../tribes/barbarians/fishers_hut/help.lua:44
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
 #: ../../tribes/barbarians/metalworks/help.lua:31
 msgid "Fisher"
-msgstr ""
+msgstr "Fischer"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Fisher's Hut"
-msgstr ""
+msgstr "Fischers Kaat"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
@@ -1087,7 +1087,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:85
 #: ../../tribes/barbarians/fishers_hut/help.lua:45
 msgid "Fishing Rod"
-msgstr ""
+msgstr "Angel"
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid ""
@@ -1318,7 +1318,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:91
 #: ../../tribes/barbarians/hunters_hut/help.lua:47
 msgid "Hunting Spear"
-msgstr ""
+msgstr "Jachtspeet"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid ""
@@ -1472,7 +1472,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:94
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "Köken Warktüüg"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat'Karuth"
@@ -1580,7 +1580,7 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:26
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "Meat"
-msgstr ""
+msgstr "Fleesch"
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -1811,7 +1811,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr ""
+msgstr "Fardigt Angel"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
@@ -1823,11 +1823,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr ""
+msgstr "Fardigt Jachtspeet"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr ""
+msgstr "Fardigt Köken Warktüüg"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
@@ -1849,7 +1849,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr ""
+msgstr "Fardigt Seiß"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
@@ -2163,7 +2163,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:102
 #: ../../tribes/barbarians/farm/help.lua:46
 msgid "Scythe"
-msgstr ""
+msgstr "Seiß"
 
 #: ../../tribes/barbarians/farm/help.lua:16
 msgid "Seed and harvest wheat."
@@ -2462,7 +2462,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:8
 msgid "The Barbarian Fisher's Hut"
-msgstr ""
+msgstr "De barbaske Fischers Kaat"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:8
 msgid "The Barbarian Gamekeeper's Hut"
