@@ -184,9 +184,6 @@ GLSurfaceTexture::~GLSurfaceTexture()
 void GLSurfaceTexture::init(uint32_t w, uint32_t h)
 {
 	handle_glerror();
-	assert(w);
-	assert(h);
-
 	m_w = w;
 	m_h = h;
 
