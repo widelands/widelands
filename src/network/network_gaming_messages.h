@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 by the Widelands Development Team
+ * Copyright (C) 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,8 @@
 struct NetworkGamingMessages {
 public:
 	// Before calling this function the first time, keep in mind to first fill_map()
-	static const std::string & get_message(const std::string & code);
-	static const std::string & get_message
+	static const std::string get_message(const std::string & code);
+	static const std::string get_message
 		(const std::string & code,
 		 const std::string & arg1, const std::string & arg2 = "", const std::string & arg3 = "");
 
