@@ -2340,6 +2340,9 @@ void NetHost::updateNetworkSpeed()
 			if (d->clients.at(i).playernum <= UserSettings::highestPlayernum())
 				speeds.push_back(d->clients.at(i).desiredspeed);
 		}
+		if (speeds.empty()) // Possible in dedicated server games with only spectators
+			return;
+
 		std::sort(speeds.begin(), speeds.end());
 
 		// Abuse prevention for 2 players
