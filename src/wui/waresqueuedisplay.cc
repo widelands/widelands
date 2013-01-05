@@ -64,7 +64,6 @@ m_show_only(show_only)
 	m_icon_grey = g_gr->create_grayed_out_pic(m_icon);
 	m_icon_grey = g_gr->create_changed_luminosity_pic(m_icon_grey, 0.65);
 
-	uint32_t pw = m_max_fill_indicator->get_w();
 	uint32_t ph = m_max_fill_indicator->get_h();
 
 	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;

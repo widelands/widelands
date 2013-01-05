@@ -411,7 +411,6 @@ void BaseListselect::draw(RenderTarget & dst)
 
 		// Now draw pictures
 		if (er.pic) {
-			uint32_t w = er.pic->get_w();
 			uint32_t h = er.pic->get_h();
 			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.pic);
 		}

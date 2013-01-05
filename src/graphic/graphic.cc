@@ -243,9 +243,9 @@ Graphic::Graphic
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
-GCC_DIAG_OFF(old-style-cast)
+GCC_DIAG_OFF("-Wold-style-cast")
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
-GCC_DIAG_ON(old-style-cast)
+GCC_DIAG_ON ("-Wold-style-cast")
 	}
 #endif
 
@@ -860,7 +860,7 @@ void Graphic::reset_texture_animation_reminder()
 /**
  * Load all animations that are registered with the AnimationManager
 */
-void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
+void Graphic::load_animations() {
 	assert(m_animations.empty());
 
 	m_animations.reserve(g_anim.get_nranimations());
