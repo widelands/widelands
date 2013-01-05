@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -156,8 +156,13 @@ std::string LuaInterface_Impl::m_register_script
 	(FileSystem & fs, std::string path, std::string ns)
 {
 		size_t length;
-		std::string data(static_cast<char *>(fs.Load(path, length)));
+		void * input_data = fs.Load(path, length);
+
+		std::string data(static_cast<char *>(input_data));
 		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
+
+		// make sure the input_data is freed
+		free(input_data);
 
 		size_t pos = name.find_last_of("/\\");
 		if (pos != std::string::npos)  name = name.substr(pos + 1);

@@ -42,6 +42,7 @@ struct SpinBox : public Panel {
 		 	g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 bool big = false,
 		 Align align = Align_Center);
+	~SpinBox();
 
 	void setValue(int32_t);
 	void setInterval(int32_t min, int32_t max);
