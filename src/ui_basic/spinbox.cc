@@ -149,6 +149,11 @@ SpinBox::SpinBox
 	set_font(UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
 
+SpinBox::~SpinBox() {
+	delete sbi;
+	sbi = 0;
+}
+
 
 /**
  * private function - takes care about all updates in the UI elements

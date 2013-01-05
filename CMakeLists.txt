@@ -157,8 +157,9 @@ option (WL_STRICT "If strict compilation mode is requested (almost every warning
 
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
-set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wno-attributes -Wall")
-set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wextra -Wsign-promo")
+set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wall -Wextra")
+set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wsign-promo")
+set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op")
 set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
@@ -198,12 +199,21 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   IF (Compiler_generic_warnings_supported)
     set (WL_COMPILERFLAG_GENERICWARNINGS " ${PARAMETER_COMPILERFLAG_GENERICWARNINGS}") #the space is on purpose!
   ENDIF (Compiler_generic_warnings_supported)
-  IF (WL_EXTRAWARNINGS)
-    CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_EXTRAWARNINGS} Compiler_extra_warnings_supported)
-    IF (Compiler_extra_warnings_supported)
-      set (WL_COMPILERFLAG_EXTRAWARNINGS " ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}") #the space is on purpose!
-    ENDIF (Compiler_extra_warnings_supported)
-  ENDIF (WL_EXTRAWARNINGS)
+
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_EXTRAWARNINGS} Compiler_extra_warnings_supported)
+  IF (Compiler_extra_warnings_supported)
+    set (WL_COMPILERFLAG_EXTRAWARNINGS " ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}") #the space is on purpose!
+  ELSE (Compiler_extra_warnings_supported)
+    message("Warning: couldn't set the following compiler options: ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}. Most likely these options are available in a newer release of your compiler.")
+  ENDIF (Compiler_extra_warnings_supported)
+
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)
+  IF (Compiler_gcc_warnings_supported)
+    set (WL_COMPILERFLAG_GCCWARNINGS " ${PARAMETER_COMPILERFLAG_GCCWARNINGS}") #the space is on purpose!
+  ELSE (Compiler_gcc_warnings_supported)
+    message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM.")
+  ENDIF (Compiler_gcc_warnings_supported)
+
 
   IF (WL_STRICT)
     CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
@@ -215,7 +225,7 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 #This can be removed if no one uses gcc 4.5.1 or 4.5.2 any more
 IF (CMAKE_COMPILER_IS_GNUCXX)

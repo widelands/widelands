@@ -161,6 +161,8 @@ void Sound_Handler::shutdown()
 	char * text = new char[15];
 	SDL_AudioDriverName(text, 20);
 	log("SDL_AUDIODRIVER %s\n", text);
+	delete text;
+	text = 0;
 
 	if (numtimesopened != 1) {
 		log (_("PROBLEM: sound device opened multiple times, trying to close"));
