@@ -96,8 +96,8 @@ const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 		// the only compatible way to do it using SDL 1.2. SDL 2.0 offers more
 		// functionality but is not yet released.
 		Uint8 sr, sg, sb, sa, dr, dg, db, da, outa, outr = 0, outg = 0, outb = 0;
-		for (uint32_t y = 0; y < tsurf->h; ++y) {
-			for (uint32_t x = 0; x < tsurf->w; ++x) {
+		for (int y = 0; y < tsurf->h; ++y) {
+			for (int x = 0; x < tsurf->w; ++x) {
 				size_t sidx = (y * tsurf->pitch + 4 * x) / 4;
 				size_t didx = ((y + SHADOW_OFFSET) * text_surface->pitch + (x + SHADOW_OFFSET) * 4) / 4;
 
