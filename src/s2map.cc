@@ -31,14 +31,12 @@
 #include "wexception.h"
 
 #include <iostream>
+#include <iomanip>
 
 using std::cerr;
-using std::ios;
 using std::endl;
-
-// TEMP
-#define hex ios::hex
-#define dec ios::dec
+using std::ios;
+using std::setiosflags;
 
 // this is a detail of S2 maps
 #define CRITTER_PER_DEFINITION   1
@@ -328,9 +326,11 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				default:
 					c = 7;
 					cerr
-						<< "ERROR: Unknown texture1: " << hex << c << dec << " ("
+						<< "ERROR: Unknown texture1: "
+						<< setiosflags(ios::hex) << c
+						<< setiosflags(ios::dec) << " ("
 						<< x << "," << y << ") (defaults to water!)" << endl;
-					break;
+						break;
 				}
 				f->set_terrain_d(c);
 			}
@@ -380,7 +380,9 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				default:
 					c = 7;
 					cerr
-						<< "ERROR: Unknown texture1: " << hex << c << dec << " ("
+						<< "ERROR: Unknown texture1: "
+						<< setiosflags(ios::hex) << c
+						<< setiosflags(ios::dec) << " ("
 						<< x << "," << y << ") (defaults to water!)" << endl;
 					break;
 				}
