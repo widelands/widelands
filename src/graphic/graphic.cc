@@ -469,7 +469,6 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 
 	// First step: compute scaling factors
 	Rect srcrect = Rect(Point(0, 0), src->get_w(), src->get_h());
-	Rect destrect = Rect(Point(0, 0), w, h);
 
 	// Second step: get source material
 	SDL_Surface * srcsdl = 0;
@@ -486,7 +485,7 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 
 	// Third step: perform the zoom and placement
 	SDL_Surface * zoomed = zoomSurface
-		(srcsdl, double(destrect.w) / srcsdl->w, double(destrect.h) / srcsdl->h, 1);
+		(srcsdl, double(w) / srcsdl->w, double(h) / srcsdl->h, 1);
 	if (free_source)
 		SDL_FreeSurface(srcsdl);
 
@@ -495,39 +494,28 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 		SDL_Surface * placed = SDL_CreateRGBSurface
 			(SDL_SWSURFACE, w, h,
 			 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
-		SDL_Rect srcrc = {0, 0, zoomed->w, zoomed->h};
-		SDL_Rect dstrc = {destrect.x, destrect.y};
+		SDL_Rect srcrc =
+			{0, 0,
+			 static_cast<Uint16>(zoomed->w), static_cast<Uint16>(zoomed->h)
+			};  // For some reason SDL_Surface and SDL_Rect express w,h in different types
+		SDL_Rect dstrc = {0, 0, 0, 0};
 		SDL_SetAlpha(zoomed, 0, 0);
-		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc);
+		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc); // Updates dstrc
 
 		Uint32 fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
 
-		if (destrect.x > 0) {
-			dstrc.x = 0;
-			dstrc.y = destrect.y;
-			dstrc.w = destrect.x;
-			dstrc.h = zoomed->h;
-			SDL_FillRect(placed, &dstrc, fillcolor);
-		}
-		if (destrect.x + zoomed->w < placed->w) {
-			dstrc.x = destrect.x + zoomed->w;
-			dstrc.y = destrect.y;
-			dstrc.w = placed->w - destrect.x - zoomed->w;
-			dstrc.h = zoomed->h;
-			SDL_FillRect(placed, &dstrc, fillcolor);
-		}
-		if (destrect.y > 0) {
-			dstrc.x = 0;
+		if (zoomed->w < placed->w) {
+			dstrc.x = zoomed->w;
 			dstrc.y = 0;
-			dstrc.w = placed->w;
-			dstrc.h = destrect.y;
+			dstrc.w = placed->w - zoomed->w;
+			dstrc.h = zoomed->h;
 			SDL_FillRect(placed, &dstrc, fillcolor);
 		}
-		if (destrect.y + zoomed->h < placed->h) {
+		if (zoomed->h < placed->h) {
 			dstrc.x = 0;
-			dstrc.y = destrect.y + zoomed->h;
+			dstrc.y = zoomed->h;
 			dstrc.w = placed->w;
-			dstrc.h = placed->h - destrect.y - zoomed->h;
+			dstrc.h = placed->h - zoomed->h;
 			SDL_FillRect(placed, &dstrc, fillcolor);
 		}
 
