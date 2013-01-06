@@ -28,7 +28,7 @@
 #include "pluto.h"
 
 // Widelands: silence warnings about unused variables, usually because they
-//are only used in conditional asserts 
+//are only used in conditional asserts
 #include "compile_diagnostics.h"
 GCC_DIAG_OFF("-Wunused-variable")
 
