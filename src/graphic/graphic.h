@@ -132,7 +132,7 @@ struct Graphic : public IGraphic {
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
-	void load_animations(UI::ProgressWindow & loader_ui);
+	void load_animations();
 	void ensure_animation_loaded(uint32_t anim);
 	AnimationGfx::Index nr_frames(uint32_t anim = 0);
 	uint32_t get_animation_frametime(uint32_t anim) const;
@@ -177,15 +177,15 @@ protected:
 	bool m_update_fullscreen;
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
-	/// The class that gets images from disk.
-	boost::scoped_ptr<IImageLoader> img_loader_;
-	// The cache holding the images.
-	boost::scoped_ptr<ImageCache> img_cache_;
-
 	Road_Textures * m_roadtextures;
 	const IPicture* m_edgetexture;
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
+
+	/// The class that gets images from disk.
+	boost::scoped_ptr<IImageLoader> img_loader_;
+	// The cache holding the images.
+	boost::scoped_ptr<ImageCache> img_cache_;
 };
 
 extern Graphic * g_gr;

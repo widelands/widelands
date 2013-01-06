@@ -128,10 +128,8 @@ void Editor_Interactive::register_overlays() {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
 			const IPicture* pic = g_gr->imgcache().load(PicMod_Game, fname);
 			assert(pic);
-			uint32_t w = pic->get_w();
-			uint32_t h = pic->get_h();
 			map.overlay_manager().register_overlay
-			(sp, pic, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
+				(sp, pic, 8, Point(pic->get_w() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 

@@ -305,8 +305,6 @@ void Panel::set_desired_size(uint32_t w, uint32_t h)
 	if (_desired_w == w && _desired_h == h)
 		return;
 
-	assert(w >= 0);
-	assert(h >= 0);
 	assert(w < 3000);
 	assert(h < 3000);
 

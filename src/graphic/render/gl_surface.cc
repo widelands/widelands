@@ -83,8 +83,6 @@ void GLSurface::draw_rect(const Rect& rc, const RGBColor clr)
 void GLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
-	assert(rc.w >= 0);
-	assert(rc.h >= 0);
 	assert(g_opengl);
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
