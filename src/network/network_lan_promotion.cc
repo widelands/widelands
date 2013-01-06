@@ -154,7 +154,6 @@ GCC_DIAG_ON("-Wold-style-cast")
 			 sizeof(addr));
 	}
 }
-#pragma GCC diagnostic error "-Wold-style-cast"
 
 /*** class LAN_Game_Promoter ***/
 
