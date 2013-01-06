@@ -263,7 +263,7 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_gfx_w(0), m_gfx_h(0),
+m_gfx_w(0), m_gfx_h(0), m_gfx_bpp(0),
 m_gfx_fullscreen       (false),
 m_gfx_opengl           (true),
 m_default_datadirs     (true),
@@ -790,11 +790,11 @@ void WLApplication::set_input_grab(bool grab)
  */
 
 void WLApplication::init_graphics
-	(int32_t const w, int32_t const h, int32_t const bpp,
-	 bool const fullscreen, bool const opengl)
+	(const int32_t w, const int32_t h, const int32_t bpp,
+	 const bool fullscreen, const bool opengl)
 {
 	if
-		(w == m_gfx_w && h == m_gfx_h &&
+		(w == m_gfx_w && h == m_gfx_h && bpp == m_gfx_bpp &&
 		 fullscreen == m_gfx_fullscreen &&
 		 opengl == m_gfx_opengl)
 		return;
@@ -804,6 +804,7 @@ void WLApplication::init_graphics
 
 	m_gfx_w = w;
 	m_gfx_h = h;
+	m_gfx_bpp = bpp;
 	m_gfx_fullscreen = fullscreen;
 	m_gfx_opengl = opengl;
 

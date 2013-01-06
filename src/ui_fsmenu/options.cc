@@ -236,37 +236,43 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	// take a copy to not change real video info structure
-	SDL_PixelFormat  fmt = *SDL_GetVideoInfo()->vfmt;
+	SDL_PixelFormat fmt = *SDL_GetVideoInfo()->vfmt;
+
 	fmt.BitsPerPixel = 16;
-	if
-		(SDL_Rect const * const * const modes =
-		 	SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
-		for (uint32_t i = 0; modes[i]; ++i)
-			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
-				res const this_res = {modes[i]->w, modes[i]->h, 16};
+	const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
+	for (/* init above */; modes && *modes; ++modes)
+	{
+		const SDL_Rect & mode = **modes;
+		if (640 <= mode.w and 480 <= mode.h)
+		{
+			const Resolution this_res = {mode.w, mode.h, fmt.BitsPerPixel};
 			if
 				(m_resolutions.empty()
-				 or
-				 this_res.xres != m_resolutions.rbegin()->xres
-				 or
-				 this_res.yres != m_resolutions.rbegin()->yres)
+				 || this_res.xres != m_resolutions.rbegin()->xres
+				 || this_res.yres != m_resolutions.rbegin()->yres)
+			{
 				m_resolutions.push_back(this_res);
 			}
+		}
+	}
+
 	fmt.BitsPerPixel = 32;
-	if
-		(SDL_Rect const * const * const modes =
-		 	SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
-		for (uint32_t i = 0; modes[i]; ++i)
-			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
-				res const this_res = {modes[i]->w, modes[i]->h, 32};
-				if
-					(m_resolutions.empty()
-					 or
-					 this_res.xres != m_resolutions.rbegin()->xres
-					 or
-					 this_res.yres != m_resolutions.rbegin()->yres)
-					m_resolutions.push_back(this_res);
+	modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
+	for (/* init above */; modes && *modes; ++modes)
+	{
+		const SDL_Rect & mode = **modes;
+		if (640 <= mode.w and 480 <= mode.h)
+		{
+			const Resolution this_res = {mode.w, mode.h, fmt.BitsPerPixel};
+			if
+				(m_resolutions.empty()
+				 || this_res.xres != m_resolutions.rbegin()->xres
+				 || this_res.yres != m_resolutions.rbegin()->yres)
+			{
+				m_resolutions.push_back(this_res);
 			}
+		}
+	}
 
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
@@ -343,6 +349,26 @@ void Fullscreen_Menu_Options::advanced_options() {
 	}
 }
 
+bool Fullscreen_Menu_Options::handle_key(bool down, SDL_keysym code)
+{
+	if (down)
+	{
+		switch (code.sym)
+		{
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				end_modal(static_cast<int32_t>(om_ok));
+				return true;
+			case SDLK_ESCAPE:
+				end_modal(static_cast<int32_t>(om_cancel));
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+
+	return Fullscreen_Menu_Base::handle_key(down, code);
+}
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
@@ -560,6 +586,28 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 			m_ui_font_list.select(0);
 	}
 }
+
+bool Fullscreen_Menu_Advanced_Options::handle_key(bool down, SDL_keysym code)
+{
+	if (down)
+	{
+		switch (code.sym)
+		{
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				end_modal(static_cast<int32_t>(om_ok));
+				return true;
+			case SDLK_ESCAPE:
+				end_modal(static_cast<int32_t>(om_cancel));
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+
+	return Fullscreen_Menu_Base::handle_key(down, code);
+}
+
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	// Write all remaining data from UI elements
