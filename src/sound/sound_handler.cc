@@ -330,8 +330,8 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	Interactive_Base const & ibase = *m_egbase->get_ibase();
 	Point const vp = ibase.get_viewpoint();
 
-	int32_t const xres = ibase.get_xres();
-	int32_t const yres = ibase.get_yres();
+	int32_t const xres = g_gr->get_xres();
+	int32_t const yres = g_gr->get_yres();
 
 	MapviewPixelFunctions::get_pix(m_egbase->map(), position, sx, sy);
 	sx -= vp.x;

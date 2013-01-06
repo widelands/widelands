@@ -182,6 +182,13 @@ struct WLApplication {
 		(int32_t w, int32_t h, int32_t bpp,
 		 bool fullscreen, bool opengl);
 
+	/**
+	 * Refresh the graphics from the latest options.
+	 *
+	 * \note See caveats for \ref init_graphics()
+	 */
+	void refresh_graphics();
+
 	void handle_input(InputCallback const *);
 
 	void mainmenu();

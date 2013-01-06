@@ -71,7 +71,7 @@ struct InteractiveBaseInternals {
 Interactive_Base::Interactive_Base
 	(Editor_Game_Base & the_egbase, Section & global_s)
 	:
-	Map_View(0, 0, 0, get_xres(), get_yres(), *this),
+	Map_View(0, 0, 0, global_s.get_int("xres", XRES), global_s.get_int("yres", YRES), *this),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
@@ -112,15 +112,7 @@ Interactive_Base::Interactive_Base
 		(global_s.get_bool("dock_windows_to_edges", false));
 
 	//  Switch to the new graphics system now, if necessary.
-	WLApplication::get()->init_graphics
-		(get_xres(), get_yres(),
-		 global_s.get_int("depth", 16),
-		 global_s.get_bool("fullscreen", false),
-#if USE_OPENGL
-		 global_s.get_bool("opengl", true));
-#else
-		 false);
-#endif
+	WLApplication::get()->refresh_graphics();
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
@@ -234,28 +226,6 @@ bool Interactive_Base::buildhelp() {
 }
 void Interactive_Base::show_buildhelp(bool t) {
 	egbase().map().overlay_manager().show_buildhelp(t);
-}
-
-
-/**
- * Retrieves the configured in-game resolution.
- *
- * \note For most purposes, you should use \ref Graphic::get_xres instead.
- */
-int32_t Interactive_Base::get_xres()
-{
-	return g_options.pull_section("global").get_int("xres", XRES);
-}
-
-
-/**
- * Retrieves the configured in-game resolution.
- *
- * \note For most purposes, you should use \ref Graphic::get_yres instead.
- */
-int32_t Interactive_Base::get_yres()
-{
-	return g_options.pull_section("global").get_int("yres", YRES);
 }
 
 

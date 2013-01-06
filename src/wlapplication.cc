@@ -815,6 +815,23 @@ void WLApplication::init_graphics
 	}
 }
 
+void WLApplication::refresh_graphics()
+{
+	Section & s = g_options.pull_section("global");
+
+	//  Switch to the new graphics system now, if necessary.
+	init_graphics
+		(s.get_int("xres", XRES),
+		 s.get_int("yres", YRES),
+		 s.get_int("depth", 16),
+		 s.get_bool("fullscreen", false),
+#if USE_OPENGL
+		 s.get_bool("opengl", true));
+#else
+		 false);
+#endif
+}
+
 /**
  * Read the config file, parse the commandline and give all other internal
  * parameters sensible default values
@@ -1515,6 +1532,9 @@ void WLApplication::mainmenu()
 	std::string message;
 
 	for (;;) {
+		// Refresh graphics system in case we just changed resolution.
+		refresh_graphics();
+
 		Fullscreen_Menu_Main mm;
 
 		if (message.size()) {
