@@ -36,7 +36,8 @@
 
 namespace UI {struct ProgressWindow;}
 
-struct RenderTarget;
+class RenderTarget;
+struct Road_Textures;
 struct SDL_Rect;
 struct SDL_Surface;
 struct StreamWrite;
@@ -133,7 +134,7 @@ struct Graphic : public IGraphic {
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
-	void load_animations(UI::ProgressWindow & loader_ui);
+	void load_animations();
 	void ensure_animation_loaded(uint32_t anim);
 	AnimationGfx::Index nr_frames(uint32_t anim = 0);
 	uint32_t get_animation_frametime(uint32_t anim) const;
@@ -179,6 +180,8 @@ protected:
 	bool m_update_fullscreen;
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
+	const IPicture* m_edgetexture;
+
 	/// The class that gets images from disk.
 	boost::scoped_ptr<ImageLoaderImpl> img_loader_;
 	// The cache holding the images.

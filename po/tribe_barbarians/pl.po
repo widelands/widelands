@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-10-27 10:32+0000\n"
+"PO-Revision-Date: 2012-12-30 11:55+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-28 04:32+0000\n"
-"X-Generator: Launchpad (build 16194)\n"
+"X-Launchpad-Export-Date: 2012-12-31 04:33+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -115,7 +115,7 @@ msgid ""
 "sun, wrought into eternity ...\""
 msgstr ""
 "\"Miękkie i giętkie.<br> A jednak nienaruszone przez czas i pogodę.<br> "
-"Promienie słońca przekute na wieczność...\""
+"Promienie słońca przekute w wieczność...\""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -173,14 +173,14 @@ msgstr "%s i"
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr "%s z Dużej Karczmy"
+msgstr "%s z dużej karczmy"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr "%s z Tawerny"
+msgstr "%s z tawerny"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -190,7 +190,7 @@ msgstr "%s z Tawerny"
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr "%s z Karczmy"
+msgstr "%s z karczmy"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
@@ -199,14 +199,14 @@ msgstr "%s z kopalni węgla lub smolarni"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
-msgstr "%s z Chaty drwala"
+msgstr "%s z chaty drwala"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr "%s z Huty"
+msgstr "%s z huty"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
@@ -352,10 +352,10 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
-"Hełm wojownika to ulepszona zbroja dla barbarzyńskich wojowników. "
-"Produkowany jest przez płatnerza i wykorzystywany w obozie szkoleniowym - "
-"razem z jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z "
-"poziomu 1 do poziomu 2."
+"Hełm wojownika to ulepszony ekwipunek barbarzyńskich wojowników. Produkowany "
+"jest przez płatnerza i wykorzystywany w obozie szkoleniowym - razem z "
+"jedzeniem - do podnoszenia liczby punktów zdrowia żołnierzy z poziomu 1 do "
+"poziomu 2."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
@@ -377,15 +377,15 @@ msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
 msgstr ""
-"Wszystkie trzy bronie produkowane są w tym samym czasie, ale wymagają "
-"różnych materiałów."
+"Wszystkie trzy bronie produkowane są tak samo szybko, ale wymagają różnych "
+"materiałów."
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
-"Wszystkie trzy bronie produkowane są w tym samym czasie, ale lepsze bronie "
+"Wszystkie trzy bronie produkowane są tak samo szybko, ale lepsze bronie "
 "wymagają więcej surowców. Dwie ostatnie wykorzystują złoto."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
@@ -504,7 +504,7 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
-"Oprócz chleba pita i mięsa, ryby są również składnikiem wyżywienia "
+"Oprócz chleba pita i mięsa, również ryby są składnikiem wyżywienia "
 "barbarzyńców. Są używane w tawernach, karczmach, dużych karczmach i "
 "budynkach treningu wojsk (obozach szkoleniowych i arenach bitewnych)."
 
@@ -923,7 +923,7 @@ msgstr "Jeleń"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr "Broń i zwyciężaj!"
+msgstr "Broń i podbijaj!"
 
 #: ../../tribes/barbarians/axefactory/help.lua:22
 #: ../../tribes/barbarians/bakery/help.lua:21
@@ -1079,7 +1079,7 @@ msgstr "Rolnik"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into trunks."
-msgstr "Ścina okoliczne drzewa i obrąbuje do postaci kłód."
+msgstr "Ścina okoliczne drzewa i obrąbuje je do postaci kłód."
 
 #: ../../tribes/barbarians/conf:82
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
@@ -1102,7 +1102,7 @@ msgstr "Paprociarnia"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Field harvested"
-msgstr "Zebrane pole"
+msgstr "Zżęte pole"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field medium"
@@ -1896,96 +1896,96 @@ msgstr "Port"
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr "Produce axe (Produkuj topór)"
+msgstr "Produkuj topór"
 
 #: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce bakingtray"
-msgstr "Produce bakingtray (Produkuj blachę do pieczenia)"
+msgstr "Produkuj blachę do pieczenia"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"
-msgstr "Produce battleaxe (Produkuj topór bojowy)"
+msgstr "Produkuj topór bojowy"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce broadaxe"
-msgstr "Produce broadaxe (Produkuj szeroki topór)"
+msgstr "Produkuj szeroki topór"
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr "Produce bronzeaxe (Produkuj topór z brązu)"
+msgstr "Produkuj topór z brązu"
 
 #: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce felling axe"
-msgstr "Produce felling axe (Produkuj topory drwalskie)"
+msgstr "Produkuj topory drwalskie"
 
 #: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fire tongs"
-msgstr "Produce fire tongs (Produkuj szczypce)"
+msgstr "Produkuj szczypce"
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr "Produce fishing rod (Produkuj wędkę)"
+msgstr "Produkuj wędkę"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr "Produce hammer (Produkuj młotek)"
+msgstr "Produkuj młotek"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr "Produce helm (Produkuj hełm)"
+msgstr "Produkuj hełm"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr "Produce hunting spear (Produkuj dzidę)"
+msgstr "Produkuj włócznię"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
-msgstr "Produce kitchen tools (Produkuj przybory kuchenne)"
+msgstr "Produkuj narzędzia kuchenne"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr "Produce mask (Produkuj maskę)"
+msgstr "Produkuj maskę"
 
 #: ../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr "Produce meal (Produkuj posiłek)"
+msgstr "Produkuj posiłek"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr "Produce pick (Produkuj kilof)"
+msgstr "Produkuj kilof"
 
 #: ../../tribes/barbarians/big_inn/conf:24
 #: ../../tribes/barbarians/inn/conf:23
 #: ../../tribes/barbarians/tavern/conf:23
 msgid "Produce ration"
-msgstr "Produce ration (Produkuj rację)"
+msgstr "Produkuj rację"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr "Produce scythe (Produkuj kosę)"
+msgstr "Produkuj kosę"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr "Produce sharpaxe (Produkuj ostry topór)"
+msgstr "Produkuj ostry topór"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr "Produce shovel (Produkuj łopatę)"
+msgstr "Produkuj łopatę"
 
 #: ../../tribes/barbarians/big_inn/conf:25
 #: ../../tribes/barbarians/inn/conf:24
 msgid "Produce snack"
-msgstr "Produce snack (Produkuj przekąskę)"
+msgstr "Produkuj przekąskę"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr "Produce warhelmet (Produkuj hełm wojownika)"
+msgstr "Produkuj hełm wojownika"
 
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce warriorsaxe"
-msgstr "Produce warriorsaxe (Produkuj topór wojownika)"
+msgstr "Produkuj topór wojownika"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."

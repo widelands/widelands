@@ -17,7 +17,7 @@
  *
  */
 
-#include "bulldozeconfirm.h"
+#include "buildingconfirm.h"
 #include "game_debug_ui.h"
 #include "graphic/picture.h"
 #include "graphic/rendertarget.h"
@@ -172,6 +172,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	bool const can_see = igbase().can_see(owner_number);
 	bool const can_act = igbase().can_act(owner_number);
 
+	bool requires_destruction_separator = false;
 	if (can_act) {
 		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
 			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
@@ -188,6 +189,13 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				capsbuttons->add
 					(stopbtn,
 					 UI::Box::AlignCenter);
+
+				// Add a fixed width separator rather than infinite space so the
+				// enhance/destroy/dismantle buttons are fixed in their position
+				// and not subject to the number of buttons on the right of the
+				// panel.
+				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+				capsbuttons->add(spacer, UI::Box::AlignCenter);
 			}
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
@@ -225,6 +233,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					capsbuttons->add
 						(enhancebtn,
 						 UI::Box::AlignCenter);
+					requires_destruction_separator = true;
 				}
 		}
 
@@ -240,6 +249,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			capsbuttons->add
 				(destroybtn,
 				 UI::Box::AlignCenter);
+
+			requires_destruction_separator = true;
 		}
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
@@ -262,6 +273,16 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			capsbuttons->add
 				(dismantlebtn,
 				 UI::Box::AlignCenter);
+
+			requires_destruction_separator = true;
+		}
+
+		if (requires_destruction_separator and can_see) {
+			// Need this as well as the infinite space from the can_see section
+			// to ensure there is a separation.
+			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+			capsbuttons->add(spacer, UI::Box::AlignCenter);
+			capsbuttons->add_inf_space();
 		}
 	}
 
@@ -305,7 +326,12 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			 UI::Box::AlignCenter);
 
 		if (m_building.descr().has_help_text()) {
-			capsbuttons->add_inf_space();
+			if (not requires_destruction_separator) {
+				// When there was no separation of destruction buttons put
+				// the infinite space here (e.g. Warehouses)
+				capsbuttons->add_inf_space();
+			}
+
 			UI::Button * helpbtn =
 				new UI::Button
 					(capsbuttons, "help", 0, 0, 34, 34,
@@ -345,7 +371,13 @@ Callback for bulldozing request
 */
 void Building_Window::act_bulldoze()
 {
-	show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+		if (m_building.get_playercaps() & Widelands::Building::PCap_Bulldoze)
+			igbase().game().send_player_bulldoze(m_building);
+	}
+	else {
+		show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+	}
 }
 
 /*
@@ -355,8 +387,13 @@ Callback for dismantling request
 */
 void Building_Window::act_dismantle()
 {
-	if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
-		igbase().game().send_player_dismantle(m_building);
+	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+		if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
+			igbase().game().send_player_dismantle(m_building);
+	}
+	else {
+		show_dismantle_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+	}
 }
 
 void Building_Window::act_start_stop() {
@@ -368,15 +405,21 @@ void Building_Window::act_start_stop() {
 
 /*
 ===============
-Callback for bulldozing request
+Callback for enhancement request
 ===============
 */
 void Building_Window::act_enhance(Widelands::Building_Index const id)
 {
-	if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
-		igbase().game().send_player_enhance_building (m_building, id);
-
-	die();
+	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
+			igbase().game().send_player_enhance_building(m_building, id);
+	}
+	else {
+		show_enhance_confirm
+			(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()),
+			 m_building,
+			 id);
+	}
 }
 
 /*

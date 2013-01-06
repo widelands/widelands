@@ -25,7 +25,7 @@
 #include "point.h"
 #include "ui_basic/align.h"
 
-struct RenderTarget;
+class RenderTarget;
 
 namespace UI {
 

@@ -17,13 +17,14 @@
  *
  */
 
-#ifndef _BULLDOZECONFIRM_H_
-#define _BULLDOZECONFIRM_H_
+#ifndef _BUILDINGCONFIRM_H_
+#define _BUILDINGCONFIRM_H_
 
 struct Interactive_Player;
 
 namespace Widelands {
 class Building;
+struct Building_Index;
 struct PlayerImmovable;
 }
 
@@ -34,8 +35,11 @@ void show_bulldoze_confirm
 
 void show_dismantle_confirm
 	(Interactive_Player & player,
+	 Widelands::Building & building);
+
+void show_enhance_confirm
+	(Interactive_Player & player,
 	 Widelands::Building & building,
-	 Widelands::PlayerImmovable * const todestroy = 0);
+	 const Widelands::Building_Index & id);
 
-
-#endif // _BULLDOZECONFIRM_H_
+#endif // _BUILDINGCONFIRM_H_

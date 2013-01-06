@@ -36,7 +36,7 @@ struct Game;
 struct Map;
 struct Map_Loader;
 };
-struct RenderTarget;
+class RenderTarget;
 struct GameController;
 struct GameSettingsProvider;
 

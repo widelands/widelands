@@ -54,8 +54,6 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	: UI::Panel(0, 0, 0, gr_x(), gr_y()),
 	d(new Data)
 {
-	Section & s = g_options.pull_section("global");
-
 	// Load background graphics
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);

@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
+#include "compile_diagnostics.h"
 
 #include "disk_filesystem.h"
 
@@ -425,12 +426,6 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	return data;
 }
 
-#ifndef _MSC_VER
-/// \note The MAP_FAILED macro from glibc uses old-style cast. We can not fix
-/// this ourselves, so we temporarily turn the error into a warning. It is
-/// turned back into an error after this function.
-#pragma GCC diagnostic warning "-Wold-style-cast"
-#endif
 void * RealFSImpl::fastLoad
 	(const std::string & fname, size_t & length, bool & fast)
 {
@@ -455,22 +450,24 @@ void * RealFSImpl::fastLoad
 	data = mmap(0, length, PROT_READ, MAP_PRIVATE, file, 0);
 
 	//if mmap doesn't work for some strange reason try the old way
-	if (data == MAP_FAILED)
+GCC_DIAG_OFF("-Wold-style-cast")
+	if (data == MAP_FAILED) {
+GCC_DIAG_ON("-Wold-style-cast")
 		return Load(fname, length);
+	}
 
 	fast = true;
 
 	assert(data);
+GCC_DIAG_OFF("-Wold-style-cast")
 	assert(data != MAP_FAILED);
+GCC_DIAG_ON("-Wold-style-cast")
 
 	close(file);
 
 	return data;
 #endif
 }
-#ifndef _MSC_VER
-#pragma GCC diagnostic error "-Wold-style-cast"
-#endif
 
 /**
  * Write the given block of memory to the repository.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2006, 2008-2009, 2012 by the Widelands Development Team
+ * Copyright (C) 2004-2006, 2008-2009, 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include "internet_gaming.h"
 
+#include "compile_diagnostics.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "internet_gaming_messages.h"
@@ -106,7 +107,9 @@ void InternetGaming::initialiseConnection() {
 	IPaddress peer;
 	if (hostent * const he = gethostbyname(m_meta.c_str())) {
 		peer.host = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
+GCC_DIAG_OFF("-Wold-style-cast")
 		peer.port = htons(m_port);
+GCC_DIAG_ON("-Wold-style-cast")
 	} else
 		throw warning
 			(_("Connection problem"), "%s", _("Widelands has not been able to connect to the metaserver."));
@@ -472,6 +475,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				ing->build_id    = packet.String();
 				ing->connectable = str2bool(packet.String());
 				gamelist.push_back(*ing);
+				delete ing;
+				ing = 0;
 			}
 			gameupdate = true;
 		}
@@ -495,6 +500,8 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				inc->type        = packet.String();
 				inc->points      = packet.String();
 				clientlist.push_back(*inc);
+				delete inc;
+				inc = 0;
 			}
 			clientupdate = true;
 		}

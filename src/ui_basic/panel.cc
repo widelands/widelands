@@ -260,10 +260,6 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_w = nw;
 	_h = nh;
 
-	if (_cache) {
-		_cache.reset(g_gr->create_surface(_w, _h, false));
-	}
-
 	if (_parent)
 		move_inside_parent();
 
@@ -309,8 +305,6 @@ void Panel::set_desired_size(uint32_t w, uint32_t h)
 	if (_desired_w == w && _desired_h == h)
 		return;
 
-	assert(w >= 0);
-	assert(h >= 0);
 	assert(w < 3000);
 	assert(h < 3000);
 
