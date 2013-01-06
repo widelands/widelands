@@ -72,13 +72,17 @@ struct NodeStyle {
 };
 
 struct Reference {
-	Rect dim;
+	Rect dim; // w & h are uint32_t; x & y are int32_t
 	string ref;
 
+	// Why isn't Rect::contains() suitable?
+	// There is a small difference...
+	// Rect::contains() excludes the bottom and right edges.
+	// Reference::contains() includes the bottom and right edges
 	inline bool contains(int16_t x, int16_t y) const {
-		if (dim.x <= x and x <= dim.x + dim.w and dim.y <= y and y <= dim.y + dim.h)
-			return true;
-		return false;
+		return
+			dim.x <= x && x <= dim.x + static_cast<int32_t>(dim.w) &&
+			dim.y <= y && y <= dim.y + static_cast<int32_t>(dim.h);
 	}
 };
 
@@ -393,7 +397,7 @@ public:
 	virtual uint32_t height() {return 0;}
 	virtual uint32_t width() {return INFINITE_WIDTH; }
 	virtual uint32_t hotspot_y() {return 0;}
-	virtual IBlitableSurface* render(IGraphic& gr) {
+	virtual IBlitableSurface* render(IGraphic& /* gr */) {
 		assert(false); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
@@ -962,7 +966,8 @@ RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& 
 
 	NodeStyle default_fs = {
 		"DejaVuSerif", 16,
-		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM
+		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
+		""
 	};
 
 	if (!width)

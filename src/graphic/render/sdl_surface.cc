@@ -183,7 +183,10 @@ void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(rc.h >= 1);
 	const uint32_t color = clr.map(format());
 
-	SDL_Rect r = {rc.x, rc.y, rc.w, rc.h};
+	SDL_Rect r = {
+		static_cast<Sint16>(rc.x), static_cast<Sint16>(rc.y),
+		static_cast<Uint16>(rc.w), static_cast<Uint16>(rc.h)
+		};
 	SDL_FillRect(m_surface, &r, color);
 }
 
@@ -330,8 +333,14 @@ void SDLSurface::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
 {
 	const SDLSurface* sdlsurf = static_cast<const SDLSurface*>(src);
-	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
-	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
+	SDL_Rect srcrect = {
+		static_cast<Sint16>(srcrc.x), static_cast<Sint16>(srcrc.y),
+		static_cast<Uint16>(srcrc.w), static_cast<Uint16>(srcrc.h)
+		};
+	SDL_Rect dstrect = {
+		static_cast<Sint16>(dst.x), static_cast<Sint16>(dst.y),
+		0, 0
+		};
 
 	bool alpha;
 	uint8_t alphaval;
