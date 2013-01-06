@@ -27,6 +27,11 @@
 
 #include "pluto.h"
 
+// Widelands: silence warnings about unused variables, usually because they
+//are only used in conditional asserts 
+#include "compile_diagnostics.h"
+GCC_DIAG_OFF("-Wunused-variable")
+
 
 // Forward declarated from lua_impl.h. So we do not need to include it
 int luna_restore_object(lua_State * L);

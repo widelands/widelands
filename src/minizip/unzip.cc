@@ -1,3 +1,7 @@
+/* Don't want to modify the minizip/zlib sources, so lets silence the warnings */
+#include "compile_diagnostics.h"
+GCC_DIAG_OFF("-Wold-style-cast")
+
 /*
 ================================================================================
 
