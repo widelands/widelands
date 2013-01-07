@@ -239,8 +239,10 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	SDL_PixelFormat fmt = *SDL_GetVideoInfo()->vfmt;
 
 	fmt.BitsPerPixel = 16;
-	const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
-	for (/* init above */; modes && *modes; ++modes)
+	for
+		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
+		 modes && *modes;
+		 ++modes)
 	{
 		const SDL_Rect & mode = **modes;
 		if (640 <= mode.w and 480 <= mode.h)
@@ -257,8 +259,10 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	}
 
 	fmt.BitsPerPixel = 32;
-	modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
-	for (/* init above */; modes && *modes; ++modes)
+	for
+		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
+		 modes && *modes;
+		 ++modes)
 	{
 		const SDL_Rect & mode = **modes;
 		if (640 <= mode.w and 480 <= mode.h)
