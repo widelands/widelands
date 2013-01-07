@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-01-02 18:25+0100\n"
+"POT-Creation-Date: 2013-01-06 16:48+0100\n"
 "PO-Revision-Date: 2013-01-03 00:17+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-01-04 04:33+0000\n"
-"X-Generator: Launchpad (build 16393)\n"
+"X-Launchpad-Export-Date: 2013-01-07 04:37+0000\n"
+"X-Generator: Launchpad (build 16402)\n"
 
 #: ../../src/wui/building_statistics_menu.cc:116
 msgid "Build"
@@ -26,7 +26,7 @@ msgstr "Construir"
 msgid "None"
 msgstr "Nenhum"
 
-#: ../../src/s2map.cc:224
+#: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa Bluebyte Settlers II. Sem comentário definido!"
 
@@ -34,11 +34,11 @@ msgstr "Mapa Bluebyte Settlers II. Sem comentário definido!"
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr "ERRO:não foi possível a conexão ao metaservidror (motivo acima)\n"
 
-#: ../../src/wlapplication.cc:928 ../../src/wlapplication.cc:937
+#: ../../src/wlapplication.cc:930 ../../src/wlapplication.cc:939
 msgid "could not find the path of the main executable"
 msgstr "não foi possivel encontrar caminho para o executável principal"
 
-#: ../../src/wlapplication.cc:1062
+#: ../../src/wlapplication.cc:1064
 msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
@@ -47,7 +47,7 @@ msgstr ""
 "Widelands. Actualize o seu controlador de som e/ou SDL para corrigir este "
 "problema\n"
 
-#: ../../src/wlapplication.cc:1198
+#: ../../src/wlapplication.cc:1200
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -57,15 +57,15 @@ msgstr ""
 "Desculpe, não existe um exemplo prévio de debugging no WIN32\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1201
+#: ../../src/wlapplication.cc:1203
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double está desactivado. Esta não é uma versão de debug!"
 
-#: ../../src/wlapplication.cc:1322
+#: ../../src/wlapplication.cc:1324
 msgid "This is Widelands-"
 msgstr "Isto é Widelands-"
 
-#: ../../src/wlapplication.cc:1324
+#: ../../src/wlapplication.cc:1326
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -73,7 +73,7 @@ msgstr ""
 "Uso: widelands <opção0>=<valor0> ... <opçãoN>=<valorN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1325
+#: ../../src/wlapplication.cc:1327
 msgid ""
 "Options:\n"
 "\n"
@@ -81,7 +81,7 @@ msgstr ""
 "Opções:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1329
+#: ../../src/wlapplication.cc:1331
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -102,11 +102,11 @@ msgstr ""
 " --homedir=DIRECTORIO  Usar este directorio para guardar os ficheiros\n"
 "                        de configuração, jogos guardados e repetições.\n"
 
-#: ../../src/wlapplication.cc:1337
+#: ../../src/wlapplication.cc:1339
 msgid "                      Default is ~/.widelands\n"
 msgstr "                      A predefinição é ~/.widelands\n"
 
-#: ../../src/wlapplication.cc:1340
+#: ../../src/wlapplication.cc:1342
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback\n"
@@ -139,7 +139,7 @@ msgstr ""
 "                      Remover repetições despois deste número de dias.\n"
 "                      Se for 0 as repetições não serão apagadas.\n"
 
-#: ../../src/wlapplication.cc:1355
+#: ../../src/wlapplication.cc:1357
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -170,14 +170,14 @@ msgstr ""
 "\n"
 " --loadgame=FICHEIRO  Inicia directamente o FICHEIRO do jogo guardado.\n"
 
-#: ../../src/wlapplication.cc:1368
+#: ../../src/wlapplication.cc:1370
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
 " --dedicated=NOMEDOFICHEIRO Inicia um servidor dedicado com o NOMEDOFICHEIRO "
 "como mapa\n"
 
-#: ../../src/wlapplication.cc:1371
+#: ../../src/wlapplication.cc:1373
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -215,13 +215,13 @@ msgstr ""
 " --xres=[...]         Largura da janela em pixel.\n"
 " --yres=[...]         Altura da janela em pixel.\n"
 
-#: ../../src/wlapplication.cc:1391
+#: ../../src/wlapplication.cc:1393
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1396
+#: ../../src/wlapplication.cc:1398
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -262,7 +262,7 @@ msgstr ""
 "                      se a janela se sobrepuser ao painel.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1420
+#: ../../src/wlapplication.cc:1422
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -272,15 +272,15 @@ msgstr ""
 "                     (para teste de localhost da rede)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1424
+#: ../../src/wlapplication.cc:1426
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr " --verbose            Activa mensagens de depuração verbosas\n"
 
-#: ../../src/wlapplication.cc:1425
+#: ../../src/wlapplication.cc:1427
 msgid " --help               Show this help\n"
 msgstr " --help               Apresenta esta ajuda\n"
 
-#: ../../src/wlapplication.cc:1429
+#: ../../src/wlapplication.cc:1431
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -291,19 +291,19 @@ msgstr ""
 "Relatórios de bugs? Sugestões? Acede à página do projecto\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1579
+#: ../../src/wlapplication.cc:1581
 msgid "Warning: "
 msgstr "Aviso: "
 
-#: ../../src/wlapplication.cc:1583
+#: ../../src/wlapplication.cc:1585
 msgid "Game data error"
 msgstr "Erro de dados de jogo"
 
-#: ../../src/wlapplication.cc:1588
+#: ../../src/wlapplication.cc:1590
 msgid "Unexpected error during the game"
 msgstr "Erro inesperado durante o jogo"
 
-#: ../../src/wlapplication.cc:1592
+#: ../../src/wlapplication.cc:1594
 msgid ""
 "\n"
 "\n"
@@ -317,7 +317,7 @@ msgstr ""
 "encontrar as mensagens relacionadas no ficheiro de saída standard "
 "(stdout.txt no Windows). Está a usar a versão "
 
-#: ../../src/wlapplication.cc:1598
+#: ../../src/wlapplication.cc:1600
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -328,24 +328,24 @@ msgstr ""
 "durante o mesmo. É frequente - embora nem sempre - ser possível voltar a "
 "carregá-lo e continuar a jogar.\n"
 
-#: ../../src/wlapplication.cc:1709
+#: ../../src/wlapplication.cc:1711
 msgid "The address of the game server is invalid"
 msgstr "O endereço do servidor do jogo é inválido."
 
-#: ../../src/wlapplication.cc:1813 ../../src/network/nethost.cc:2048
+#: ../../src/wlapplication.cc:1815 ../../src/network/nethost.cc:2050
 msgid "Player"
 msgstr "Jogador"
 
-#: ../../src/wlapplication.cc:2003 ../../src/network/netclient.cc:198
+#: ../../src/wlapplication.cc:2005 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:837
 msgid "Preparing game"
 msgstr "Preparando jogo"
 
-#: ../../src/wlapplication.cc:2114
+#: ../../src/wlapplication.cc:2116
 msgid "End of replay"
 msgstr "Fim da repetição"
 
-#: ../../src/wlapplication.cc:2116
+#: ../../src/wlapplication.cc:2118
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -353,7 +353,7 @@ msgstr ""
 "A repetição acabou e o jogo foi pausado. Podes tirar o jogo da pausa e "
 "continuar a vê-la se quiseres."
 
-#: ../../src/wlapplication.cc:2199 ../../src/logic/game.cc:371
+#: ../../src/wlapplication.cc:2201 ../../src/logic/game.cc:371
 #: ../../src/logic/game.cc:411
 msgid "Loading..."
 msgstr "A carregar..."
@@ -388,7 +388,7 @@ msgid "Icon"
 msgstr "Ícone"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:514
-#: ../../src/writeHTML.cc:1467 ../../src/ui_fsmenu/internet_lobby.cc:154
+#: ../../src/writeHTML.cc:1467 ../../src/ui_fsmenu/internet_lobby.cc:155
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Name"
 msgstr "Nome"
@@ -767,11 +767,11 @@ msgstr ""
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:172
+#: ../../src/editor/editorinteractive.cc:170
 msgid "Unsupported format"
 msgstr "Formato não suportado"
 
-#: ../../src/editor/editorinteractive.cc:174
+#: ../../src/editor/editorinteractive.cc:172
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -780,35 +780,35 @@ msgstr ""
 "Widelands não conseguiu carregar o ficheiro \"%s\". O formato parece ser "
 "incompatível."
 
-#: ../../src/editor/editorinteractive.cc:193
-#: ../../src/editor/editorinteractive.cc:602
+#: ../../src/editor/editorinteractive.cc:191
+#: ../../src/editor/editorinteractive.cc:600
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Carregando tribo: %s"
 
-#: ../../src/editor/editorinteractive.cc:199
+#: ../../src/editor/editorinteractive.cc:197
 msgid "Creating players"
 msgstr "Criando jogadores"
 
-#: ../../src/editor/editorinteractive.cc:206
+#: ../../src/editor/editorinteractive.cc:204
 #: ../../src/logic/editor_game_base.cc:277
 msgid "Loading world data"
 msgstr "Carregando dados do mundo"
 
-#: ../../src/editor/editorinteractive.cc:209
-#: ../../src/editor/editorinteractive.cc:606
+#: ../../src/editor/editorinteractive.cc:207
+#: ../../src/editor/editorinteractive.cc:604
 msgid "Loading graphics..."
 msgstr "Carregando gráficos..."
 
-#: ../../src/editor/editorinteractive.cc:255
+#: ../../src/editor/editorinteractive.cc:253
 msgid "Map unsaved"
 msgstr "Mapa não guardado"
 
-#: ../../src/editor/editorinteractive.cc:256
+#: ../../src/editor/editorinteractive.cc:254
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "O Mapa não foi guardado, queres sair na mesma?"
 
-#: ../../src/editor/editorinteractive.cc:593
+#: ../../src/editor/editorinteractive.cc:591
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:183
@@ -816,8 +816,8 @@ msgstr "O Mapa não foi guardado, queres sair na mesma?"
 msgid "No Name"
 msgstr "Sem nome"
 
-#: ../../src/editor/editorinteractive.cc:595
-#: ../../src/ui_fsmenu/netsetup_lan.cc:194
+#: ../../src/editor/editorinteractive.cc:593
+#: ../../src/ui_fsmenu/netsetup_lan.cc:198
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:487
 #: ../../src/logic/map.h:165
@@ -2157,107 +2157,107 @@ msgstr "dados das mercadorias: %s"
 msgid "item %u: %s"
 msgstr "item %u: %s"
 
-#: ../../src/network/internet_gaming.cc:112
-#: ../../src/ui_fsmenu/internet_lobby.cc:407
+#: ../../src/network/internet_gaming.cc:115
+#: ../../src/ui_fsmenu/internet_lobby.cc:410
 msgid "Connection problem"
 msgstr "Problema de ligação"
 
-#: ../../src/network/internet_gaming.cc:112
+#: ../../src/network/internet_gaming.cc:115
 msgid "Widelands has not been able to connect to the metaserver."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:118 ../../src/network/netclient.cc:103
+#: ../../src/network/internet_gaming.cc:121 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
 msgstr "Não conseguiu estabelecer ligação ao host"
 
-#: ../../src/network/internet_gaming.cc:120
+#: ../../src/network/internet_gaming.cc:123
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:167
+#: ../../src/network/internet_gaming.cc:170
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:298
+#: ../../src/network/internet_gaming.cc:301
 msgid "Something went wrong: "
 msgstr "Alguma coisa correu mal: "
 
-#: ../../src/network/internet_gaming.cc:388
+#: ../../src/network/internet_gaming.cc:391
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:398
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:398
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:406
+#: ../../src/network/internet_gaming.cc:409
 msgid "Unexpected packet"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:408
+#: ../../src/network/internet_gaming.cc:411
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:421
+#: ../../src/network/internet_gaming.cc:424
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:430
+#: ../../src/network/internet_gaming.cc:433
 #, c-format
 msgid "Server time offset is %i seconds."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:450
+#: ../../src/network/internet_gaming.cc:453
 msgid "Invalid message type"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:450
+#: ../../src/network/internet_gaming.cc:453
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:531
+#: ../../src/network/internet_gaming.cc:534
 msgid "ERROR: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:535
+#: ../../src/network/internet_gaming.cc:538
 msgid "Chat message could not be sent. "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:556
+#: ../../src/network/internet_gaming.cc:559
 msgid "Received an unknown command from the metaserver: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:688
+#: ../../src/network/internet_gaming.cc:691
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:700
+#: ../../src/network/internet_gaming.cc:703
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:776
+#: ../../src/network/internet_gaming.cc:779
 msgid "Conversion error"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:777
+#: ../../src/network/internet_gaming.cc:780
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:792
+#: ../../src/network/internet_gaming.cc:795
 msgid "<unknown>"
 msgstr ""
 
@@ -2267,7 +2267,7 @@ msgid "No user with the name %s is logged in!"
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:43
-#: ../../src/network/nethost.cc:1256
+#: ../../src/network/nethost.cc:1258
 msgid "The sent password was incorrect!"
 msgstr ""
 
@@ -2449,260 +2449,260 @@ msgid ""
 "commands."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1197
+#: ../../src/network/nethost.cc:1199
 msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1204
+#: ../../src/network/nethost.cc:1206
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1209
+#: ../../src/network/nethost.cc:1211
 msgid "pwd          $ - Sends the password $ to the host"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1216
+#: ../../src/network/nethost.cc:1218
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1221
+#: ../../src/network/nethost.cc:1223
 #, c-format
 msgid "%s told me to run the command: \"%s\""
 msgstr ""
 
-#: ../../src/network/nethost.cc:1230
+#: ../../src/network/nethost.cc:1232
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1233
+#: ../../src/network/nethost.cc:1235
 msgid "Can not save, as long as no game is running!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1244
+#: ../../src/network/nethost.cc:1246
 msgid "Game successfully saved!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1246
+#: ../../src/network/nethost.cc:1248
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1253
+#: ../../src/network/nethost.cc:1255
 msgid "This server is not password protected!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1269
+#: ../../src/network/nethost.cc:1271
 msgid "The password was correct, access was granted!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1275
+#: ../../src/network/nethost.cc:1277
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr "Comando desconhecido \"%s\" do servidor dedicado !"
 
-#: ../../src/network/nethost.cc:1980
+#: ../../src/network/nethost.cc:1982
 #, c-format
 msgid "Computer%u"
 msgstr "Computador%u"
 
-#: ../../src/network/nethost.cc:2145
+#: ../../src/network/nethost.cc:2147
 #, c-format
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:123
+#: ../../src/network/network_gaming_messages.cc:121
 msgid "Client has left the game."
 msgstr "Cliente deixou o jogo."
 
-#: ../../src/network/network_gaming_messages.cc:124
+#: ../../src/network/network_gaming_messages.cc:122
 msgid "Client crashed and performed an emergency save."
 msgstr "O cliente crashou e foi feita uma salvaguarda de emergência do jogo."
 
-#: ../../src/network/network_gaming_messages.cc:125
+#: ../../src/network/network_gaming_messages.cc:123
 msgid "Connection was lost."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:126
+#: ../../src/network/network_gaming_messages.cc:124
 msgid "Server has left the game."
 msgstr "Servidor saiu do jogo."
 
-#: ../../src/network/network_gaming_messages.cc:127
+#: ../../src/network/network_gaming_messages.cc:125
 msgid "The game has started just after you tried to connect."
 msgstr "O jogo começou mesmo antes de ligar."
 
-#: ../../src/network/network_gaming_messages.cc:128
+#: ../../src/network/network_gaming_messages.cc:126
 msgid "Server has crashed and performed an emergency save."
 msgstr "O servidor crashou e foi feita uma salvaguarda de emergência."
 
-#: ../../src/network/network_gaming_messages.cc:129
+#: ../../src/network/network_gaming_messages.cc:127
 msgid "Connection to client timeouted: no response for 10 minutes!"
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:130
+#: ../../src/network/network_gaming_messages.cc:128
 msgid "Client and host have become desynchronized."
 msgstr "O cliente e o anfitrião ficaram dessincronizados."
 
-#: ../../src/network/network_gaming_messages.cc:131
+#: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Kicked by the host: %s"
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:132
+#: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "Client sent malformed commands: %s"
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:133
+#: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Something went wrong: %s"
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:134
+#: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s saiu do jogo (%s)"
 
-#: ../../src/network/network_gaming_messages.cc:135
+#: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "Utilizador desconhecido deixou o jogo (%s)"
 
-#: ../../src/network/network_gaming_messages.cc:136
+#: ../../src/network/network_gaming_messages.cc:134
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "O Servidor enviou um SYNCREQUEST apesar do jogo não estar a correr."
 
-#: ../../src/network/network_gaming_messages.cc:137
+#: ../../src/network/network_gaming_messages.cc:135
 msgid "Received a PLAYERCOMMAND even though no game is running."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:138
+#: ../../src/network/network_gaming_messages.cc:136
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Recebi inesperadamente um comando LAUNCH vindo do servidor."
 
-#: ../../src/network/network_gaming_messages.cc:139
+#: ../../src/network/network_gaming_messages.cc:137
 msgid "Server sent a player update for a player that does not exist."
 msgstr ""
 "O Servidor enviou uma actualização de jogador para um que não existe."
 
-#: ../../src/network/network_gaming_messages.cc:140
+#: ../../src/network/network_gaming_messages.cc:138
 msgid "Server sent an user update for a user that does not exist."
 msgstr ""
 "O Servidor enviou uma actualização de utilizador para um que não existe."
 
-#: ../../src/network/network_gaming_messages.cc:141
+#: ../../src/network/network_gaming_messages.cc:139
 msgid "Server uses a different protocol version"
 msgstr "O servidor usa um protocolo diferente de versão"
 
-#: ../../src/network/network_gaming_messages.cc:142
+#: ../../src/network/network_gaming_messages.cc:140
 #, c-format
 msgid "Received command number %s, that is disallowed in this state."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:143
+#: ../../src/network/network_gaming_messages.cc:141
 msgid "Client reports time to host that is running backwards."
 msgstr "O cliente informa o anfitrião de que o tempo está a andar para trás."
 
-#: ../../src/network/network_gaming_messages.cc:144
+#: ../../src/network/network_gaming_messages.cc:142
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr ""
 "O cliente simula para além do tempo de jogo permitido pelo anfitrião."
 
-#: ../../src/network/network_gaming_messages.cc:145
+#: ../../src/network/network_gaming_messages.cc:143
 msgid "Client did not submit sync report in time."
 msgstr "O cliente não submeteu o relatório de sincronia em tempo útil."
 
-#: ../../src/network/network_gaming_messages.cc:146
+#: ../../src/network/network_gaming_messages.cc:144
 msgid "The game has already started."
 msgstr "O jogo já começou"
 
-#: ../../src/network/network_gaming_messages.cc:147
+#: ../../src/network/network_gaming_messages.cc:145
 msgid "Client has no access to other player's settings."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:148
+#: ../../src/network/network_gaming_messages.cc:146
 msgid "Client has no access to server settings."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:149
+#: ../../src/network/network_gaming_messages.cc:147
 msgid "Client sent start command, although server is not yet ready."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:150
+#: ../../src/network/network_gaming_messages.cc:148
 msgid "Client sent TIME command even though game is not running."
 msgstr "O Cliente enviou o comando TIME apesar do jogo não estar a correr."
 
-#: ../../src/network/network_gaming_messages.cc:151
+#: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent a playercommand for another player."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:152
+#: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent unexpected synchronization report."
 msgstr "O Cliente enviou um relatorio de sincronização inesperado."
 
-#: ../../src/network/network_gaming_messages.cc:153
+#: ../../src/network/network_gaming_messages.cc:151
 msgid "Client requests file although none is available to send."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:154
+#: ../../src/network/network_gaming_messages.cc:152
 msgid "Client requests file part that does not exist."
 msgstr "O Cliente está a solicitar uma parte de ficheiro que não existe."
 
-#: ../../src/network/network_gaming_messages.cc:155
+#: ../../src/network/network_gaming_messages.cc:153
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "O anfitrião enviou o jogador %s para o lóbi !"
 
-#: ../../src/network/network_gaming_messages.cc:156
+#: ../../src/network/network_gaming_messages.cc:154
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
 "AVISO :%s usa a versão: %s, enquanto que o anfitrião usa a versão: %s"
 
-#: ../../src/network/network_gaming_messages.cc:157
+#: ../../src/network/network_gaming_messages.cc:155
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s ligou-se ao jogo"
 
-#: ../../src/network/network_gaming_messages.cc:158
+#: ../../src/network/network_gaming_messages.cc:156
 #, c-format
 msgid "Game was saved as %s."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:159
+#: ../../src/network/network_gaming_messages.cc:157
 #, c-format
 msgid "Started to send file %s to %s!"
 msgstr "Ficheiro %s está a ser enviado para %s!"
 
-#: ../../src/network/network_gaming_messages.cc:160
+#: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Completed transfer of file %s to %s"
 msgstr "Transferência do ficheiro %s para %s concluída !"
 
-#: ../../src/network/network_gaming_messages.cc:161
+#: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Sending part %s of file %s to %s"
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:162
+#: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:163
+#: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
 msgstr ""
 
-#: ../../src/network/network_gaming_messages.cc:165
+#: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid ""
 "Client %s will automatically be kicked, if no answer is received within %s "
@@ -2728,7 +2728,7 @@ msgstr "OK"
 msgid "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
 msgstr "Sound_Handler tempo de fecho %i, freq %i, formato %i, canal %i\n"
 
-#: ../../src/sound/sound_handler.cc:166
+#: ../../src/sound/sound_handler.cc:168
 msgid "PROBLEM: sound device opened multiple times, trying to close"
 msgstr ""
 "PROBLEMA: o dispositivo de som abriu multiplas vezes, a tentar fechar"
@@ -2777,11 +2777,11 @@ msgstr "Descrição:"
 #: ../../src/ui_fsmenu/campaign_select.cc:78
 #: ../../src/ui_fsmenu/campaign_select.cc:285 ../../src/ui_fsmenu/editor.cc:52
 #: ../../src/ui_fsmenu/editor_mapselect.cc:90
-#: ../../src/ui_fsmenu/internet_lobby.cc:90
+#: ../../src/ui_fsmenu/internet_lobby.cc:91
 #: ../../src/ui_fsmenu/launchMPG.cc:132 ../../src/ui_fsmenu/launchSPG.cc:65
 #: ../../src/ui_fsmenu/loadgame.cc:53 ../../src/ui_fsmenu/loadreplay.cc:43
 #: ../../src/ui_fsmenu/mapselect.cc:105 ../../src/ui_fsmenu/multiplayer.cc:58
-#: ../../src/ui_fsmenu/netsetup_lan.cc:69
+#: ../../src/ui_fsmenu/netsetup_lan.cc:71
 #: ../../src/ui_fsmenu/singleplayer.cc:61
 msgid "Back"
 msgstr "Voltar"
@@ -2871,55 +2871,55 @@ msgstr "<parent>"
 msgid "Close"
 msgstr "Fechar"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:51
+#: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Metaserver Lobby"
 msgstr "Recepção do Metaserver"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:55
+#: ../../src/ui_fsmenu/internet_lobby.cc:56
 msgid "Clients online:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:59
+#: ../../src/ui_fsmenu/internet_lobby.cc:60
 msgid "List of games:"
 msgstr "Lista dos jogos:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:63
+#: ../../src/ui_fsmenu/internet_lobby.cc:64
 msgid "Name of your server:"
 msgstr "Nome do teu servidor:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:67
+#: ../../src/ui_fsmenu/internet_lobby.cc:68
 msgid "Maximum of players:"
 msgstr "Máximo de jogadores:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:80
-#: ../../src/ui_fsmenu/netsetup_lan.cc:59
+#: ../../src/ui_fsmenu/internet_lobby.cc:81
+#: ../../src/ui_fsmenu/netsetup_lan.cc:61
 msgid "Join this game"
 msgstr "Junta-te a este jogo"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:85
+#: ../../src/ui_fsmenu/internet_lobby.cc:86
 msgid "Open a new game"
 msgstr "Abrir novo jogo"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:155
+#: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Points"
 msgstr "Pontos"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:156
+#: ../../src/ui_fsmenu/internet_lobby.cc:157
 msgid "Game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:378
+#: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection timed out"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:381
+#: ../../src/ui_fsmenu/internet_lobby.cc:382
 msgid ""
 "Widelands has not been able to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:408
+#: ../../src/ui_fsmenu/internet_lobby.cc:411
 msgid "Widelands has not been able to connect to the host."
 msgstr "Widelands não conseguiu ligar-se ao host."
 
@@ -2932,7 +2932,7 @@ msgid "Please select"
 msgstr "Por favor selecciona"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:65 ../../src/ui_fsmenu/launchMPG.cc:165
-#: ../../src/ui_fsmenu/netsetup_lan.cc:124 ../../src/wui/minimap.cc:137
+#: ../../src/ui_fsmenu/netsetup_lan.cc:126 ../../src/wui/minimap.cc:137
 msgid "Map"
 msgstr "Mapa"
 
@@ -3400,49 +3400,49 @@ msgid "Show login dialog"
 msgstr "Mostar o diálogo de autenticação"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:115
-#: ../../src/ui_fsmenu/netsetup_lan.cc:118 ../../src/wui/login_box.cc:73
+#: ../../src/ui_fsmenu/netsetup_lan.cc:120 ../../src/wui/login_box.cc:73
 msgid "nobody"
 msgstr "minha_alcunha"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:40
+#: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
 msgstr "Começar jogo em rede"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:44
+#: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
 msgstr "Lista dos jogos na tua rede local:"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:48
+#: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
 msgstr "A tua alcunha:"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:52
+#: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
 msgstr "Ligar ao Anfitrião:"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:64
+#: ../../src/ui_fsmenu/netsetup_lan.cc:66
 msgid "Host a new game"
 msgstr "Ser Anfitrião de Novo Jogo"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:75
+#: ../../src/ui_fsmenu/netsetup_lan.cc:77
 msgid "Load previous host"
 msgstr "Carregar o Anfitrião anterior"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:123
+#: ../../src/ui_fsmenu/netsetup_lan.cc:125
 msgid "Host"
 msgstr "Anfitrião"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:125
+#: ../../src/ui_fsmenu/netsetup_lan.cc:127
 msgid "State"
 msgstr "Estado"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:192
+#: ../../src/ui_fsmenu/netsetup_lan.cc:196
 #: ../../src/wui/multiplayersetupgroup.cc:266
 #: ../../src/wui/playerdescrgroup.cc:157
 msgid "Open"
 msgstr "Aberto"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:193
+#: ../../src/ui_fsmenu/netsetup_lan.cc:197
 #: ../../src/wui/multiplayersetupgroup.cc:255
 msgid "Closed"
 msgstr "Fechado"
@@ -4419,23 +4419,23 @@ msgstr ""
 msgid "Workers in dock"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:177
+#: ../../src/wui/waresqueuedisplay.cc:176
 msgid "Highest priority"
 msgstr "Prioridade máxima"
 
-#: ../../src/wui/waresqueuedisplay.cc:181
+#: ../../src/wui/waresqueuedisplay.cc:180
 msgid "Normal priority"
 msgstr "Prioridade normal"
 
-#: ../../src/wui/waresqueuedisplay.cc:185
+#: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Lowest priority"
 msgstr "Prioridade mínima"
 
-#: ../../src/wui/waresqueuedisplay.cc:230
+#: ../../src/wui/waresqueuedisplay.cc:229
 msgid "Decrease the number of wares you want to be stored here."
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:240
+#: ../../src/wui/waresqueuedisplay.cc:239
 msgid "Increase the number of wares you want to be stored here."
 msgstr ""
 
