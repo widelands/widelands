@@ -780,26 +780,28 @@ void Interactive_Base::roadb_add_overlay()
 		if (m_buildroad->get_index(neighb) >= 0)
 			continue; // the road can't cross itself
 
-		int32_t const slope =
-			abs(endpos.field->get_height() - neighb.field->get_height());
-		int32_t icon;
+		int32_t slope;
 
-		if (slope < 2)
-			icon = 1;
-		else if (slope < 4)
-			icon = 2;
+		if
+			(Widelands::WALK_E == dir
+			 || Widelands::WALK_NE == dir
+			 || Widelands::WALK_SE == dir)
+			slope = neighb.field->get_height() - endpos.field->get_height();
 		else
-			icon = 3;
+			slope = endpos.field->get_height() - neighb.field->get_height();
 
-		char const * name;
-		switch (icon) {
-		case 1: name = "pics/roadb_green.png";  break;
-		case 2: name = "pics/roadb_yellow.png"; break;
-		case 3: name = "pics/roadb_red.png";    break;
-		default:
-			assert(false);
-			break;
-		}
+		const char * name = 0;
+
+		if (slope <= -4)
+			name = "pics/roadb_reddown.png";
+		else if (slope <= -2)
+			name = "pics/roadb_yellowdown.png";
+		else if (slope < 2)
+			name = "pics/roadb_green.png";
+		else if (slope < 4)
+			name = "pics/roadb_yellow.png";
+		else
+			name = "pics/roadb_red.png";
 
 		egbase().map().overlay_manager().register_overlay
 			(neighb,
