@@ -113,9 +113,6 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	virtual void cleanup_for_load() {};
 
 private:
-	static int32_t get_xres();
-	static int32_t get_yres();
-
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
 
