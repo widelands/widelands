@@ -29,7 +29,7 @@
 #include "ui_basic/align.h"
 
 class RenderTarget;
-struct FileSystem;
+class FileSystem;
 
 class IPicture;
 class IGraphic;

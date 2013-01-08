@@ -42,7 +42,8 @@ struct StreamWrite;
  * operations.
  * \todo const correctness
  */
-struct FileSystem {
+class FileSystem {
+public:
 	//  TODO This should be unnecessary. Make it so.
 	enum Type {
 		DIR,
