@@ -1,6 +1,6 @@
 #ifndef BUILD_ID_H
 #define BUILD_ID_H
-#define WLCR "(C) 2002-2012 "
+#define WLCR "(C) 2002-2013 "
 
 #include <string>
 
