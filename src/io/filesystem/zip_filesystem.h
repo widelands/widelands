@@ -33,7 +33,8 @@
 #endif
 #endif
 
-struct ZipFilesystem : public FileSystem {
+class ZipFilesystem : public FileSystem {
+public:
 	ZipFilesystem(std::string const &);
 	virtual ~ZipFilesystem();
 

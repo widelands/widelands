@@ -41,7 +41,8 @@
  * $CWD  <-- the current-working directory; this is useful for debugging, when
  * the executable isn't in the root of the game-data directory
  */
-struct LayeredFileSystem : public FileSystem {
+class LayeredFileSystem : public FileSystem {
+public:
 	LayeredFileSystem();
 	virtual ~LayeredFileSystem();
 
@@ -102,7 +103,8 @@ extern LayeredFileSystem * g_fs;
 /// stack and make sure that it is removed when the object goes out of scope.
 /// This is exception-safe, unlike calling g_fs->AddFileSystem and
 /// g_fs->RemoveFileSystem directly.
-struct FileSystemLayer {
+class FileSystemLayer {
+public:
 	FileSystemLayer(FileSystem & fs) : m_fs(fs) {g_fs->AddFileSystem(fs);}
 	~FileSystemLayer() {g_fs->RemoveFileSystem(m_fs);}
 private:
