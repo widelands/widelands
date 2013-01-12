@@ -26,7 +26,8 @@
 #include <cstring>
 
 /// \todo const correctness
-struct RealFSImpl : public FileSystem {
+class RealFSImpl : public FileSystem {
+public:
 	RealFSImpl(std::string const & Directory);
 
 	virtual int32_t FindFiles

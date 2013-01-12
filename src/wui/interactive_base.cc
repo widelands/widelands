@@ -71,7 +71,7 @@ struct InteractiveBaseInternals {
 Interactive_Base::Interactive_Base
 	(Editor_Game_Base & the_egbase, Section & global_s)
 	:
-	Map_View(0, 0, 0, get_xres(), get_yres(), *this),
+	Map_View(0, 0, 0, global_s.get_int("xres", XRES), global_s.get_int("yres", YRES), *this),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
@@ -112,15 +112,7 @@ Interactive_Base::Interactive_Base
 		(global_s.get_bool("dock_windows_to_edges", false));
 
 	//  Switch to the new graphics system now, if necessary.
-	WLApplication::get()->init_graphics
-		(get_xres(), get_yres(),
-		 global_s.get_int("depth", 16),
-		 global_s.get_bool("fullscreen", false),
-#if USE_OPENGL
-		 global_s.get_bool("opengl", true));
-#else
-		 false);
-#endif
+	WLApplication::get()->refresh_graphics();
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
@@ -234,28 +226,6 @@ bool Interactive_Base::buildhelp() {
 }
 void Interactive_Base::show_buildhelp(bool t) {
 	egbase().map().overlay_manager().show_buildhelp(t);
-}
-
-
-/**
- * Retrieves the configured in-game resolution.
- *
- * \note For most purposes, you should use \ref Graphic::get_xres instead.
- */
-int32_t Interactive_Base::get_xres()
-{
-	return g_options.pull_section("global").get_int("xres", XRES);
-}
-
-
-/**
- * Retrieves the configured in-game resolution.
- *
- * \note For most purposes, you should use \ref Graphic::get_yres instead.
- */
-int32_t Interactive_Base::get_yres()
-{
-	return g_options.pull_section("global").get_int("yres", YRES);
 }
 
 
@@ -810,26 +780,28 @@ void Interactive_Base::roadb_add_overlay()
 		if (m_buildroad->get_index(neighb) >= 0)
 			continue; // the road can't cross itself
 
-		int32_t const slope =
-			abs(endpos.field->get_height() - neighb.field->get_height());
-		int32_t icon;
+		int32_t slope;
 
-		if (slope < 2)
-			icon = 1;
-		else if (slope < 4)
-			icon = 2;
+		if
+			(Widelands::WALK_E == dir
+			 || Widelands::WALK_NE == dir
+			 || Widelands::WALK_SE == dir)
+			slope = neighb.field->get_height() - endpos.field->get_height();
 		else
-			icon = 3;
+			slope = endpos.field->get_height() - neighb.field->get_height();
 
-		char const * name;
-		switch (icon) {
-		case 1: name = "pics/roadb_green.png";  break;
-		case 2: name = "pics/roadb_yellow.png"; break;
-		case 3: name = "pics/roadb_red.png";    break;
-		default:
-			assert(false);
-			break;
-		}
+		const char * name = 0;
+
+		if (slope <= -4)
+			name = "pics/roadb_reddown.png";
+		else if (slope <= -2)
+			name = "pics/roadb_yellowdown.png";
+		else if (slope < 2)
+			name = "pics/roadb_green.png";
+		else if (slope < 4)
+			name = "pics/roadb_yellow.png";
+		else
+			name = "pics/roadb_red.png";
 
 		egbase().map().overlay_manager().register_overlay
 			(neighb,

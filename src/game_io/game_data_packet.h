@@ -22,7 +22,7 @@
 
 #include "wexception.h"
 
-struct FileSystem;
+class FileSystem;
 
 namespace Widelands {
 

@@ -263,7 +263,7 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_gfx_w(0), m_gfx_h(0),
+m_gfx_w(0), m_gfx_h(0), m_gfx_bpp(0),
 m_gfx_fullscreen       (false),
 m_gfx_opengl           (true),
 m_default_datadirs     (true),
@@ -790,11 +790,11 @@ void WLApplication::set_input_grab(bool grab)
  */
 
 void WLApplication::init_graphics
-	(int32_t const w, int32_t const h, int32_t const bpp,
-	 bool const fullscreen, bool const opengl)
+	(const int32_t w, const int32_t h, const int32_t bpp,
+	 const bool fullscreen, const bool opengl)
 {
 	if
-		(w == m_gfx_w && h == m_gfx_h &&
+		(w == m_gfx_w && h == m_gfx_h && bpp == m_gfx_bpp &&
 		 fullscreen == m_gfx_fullscreen &&
 		 opengl == m_gfx_opengl)
 		return;
@@ -804,6 +804,7 @@ void WLApplication::init_graphics
 
 	m_gfx_w = w;
 	m_gfx_h = h;
+	m_gfx_bpp = bpp;
 	m_gfx_fullscreen = fullscreen;
 	m_gfx_opengl = opengl;
 
@@ -813,6 +814,23 @@ void WLApplication::init_graphics
 		g_gr = new Graphic
 			(w, h, bpp, fullscreen, opengl);
 	}
+}
+
+void WLApplication::refresh_graphics()
+{
+	Section & s = g_options.pull_section("global");
+
+	//  Switch to the new graphics system now, if necessary.
+	init_graphics
+		(s.get_int("xres", XRES),
+		 s.get_int("yres", YRES),
+		 s.get_int("depth", 16),
+		 s.get_bool("fullscreen", false),
+#if USE_OPENGL
+		 s.get_bool("opengl", true));
+#else
+		 false);
+#endif
 }
 
 /**
@@ -1515,6 +1533,9 @@ void WLApplication::mainmenu()
 	std::string message;
 
 	for (;;) {
+		// Refresh graphics system in case we just changed resolution.
+		refresh_graphics();
+
 		Fullscreen_Menu_Main mm;
 
 		if (message.size()) {

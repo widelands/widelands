@@ -86,11 +86,11 @@ void Fullscreen_Menu_Base::draw(RenderTarget & dst) {
 
 
 uint32_t Fullscreen_Menu_Base::gr_x() {
-	return g_options.pull_section("global").get_int("xres", XRES);
+	return g_gr->get_xres();
 }
 
 uint32_t Fullscreen_Menu_Base::gr_y() {
-	return g_options.pull_section("global").get_int("yres", YRES);
+	return g_gr->get_yres();
 }
 
 
