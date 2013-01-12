@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-01-06 16:48+0100\n"
-"PO-Revision-Date: 2013-01-09 17:12+0000\n"
+"PO-Revision-Date: 2013-01-11 19:34+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-01-10 04:31+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"X-Launchpad-Export-Date: 2013-01-12 04:32+0000\n"
+"X-Generator: Launchpad (build 16420)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -985,7 +985,7 @@ msgstr "logika gry: %s"
 #: ../../src/logic/constructionsite.cc:97
 #, c-format
 msgid "%s%% built"
-msgstr ""
+msgstr "zbudowano %s%%"
 
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
