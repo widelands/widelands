@@ -39,7 +39,7 @@ struct Immovable_Descr;
 };
 
 extern struct Profile g_options;
-struct FileSystem;
+class FileSystem;
 
 /**
  * Represents one section inside the .ini-style file, basically as a list of

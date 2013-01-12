@@ -33,7 +33,8 @@
 #endif
 #endif
 
-struct ZipFilesystem : public FileSystem {
+class ZipFilesystem : public FileSystem {
+public:
 	ZipFilesystem(std::string const &);
 	virtual ~ZipFilesystem();
 
@@ -70,7 +71,6 @@ struct ZipFilesystem : public FileSystem {
 
 	virtual unsigned long long DiskSpace();
 
-public:
 	static FileSystem * CreateFromDirectory(std::string const & directory);
 
 	virtual std::string getBasename() {return m_zipfilename;};
@@ -81,7 +81,6 @@ private:
 	void m_Close();
 	std::string strip_basename(std::string);
 
-private:
 	enum State {
 		STATE_IDLE,
 		STATE_ZIPPING,
