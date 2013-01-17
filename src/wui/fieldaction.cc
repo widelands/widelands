@@ -20,6 +20,7 @@
 #include "fieldaction.h"
 
 #include "attack_box.h"
+#include "buildingconfirm.h"
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
 #include "economy/economy.h"
@@ -163,7 +164,8 @@ FieldActionWindow IMPLEMENTATION
 
 ==============================================================================
 */
-struct FieldActionWindow : public UI::UniqueWindow {
+class FieldActionWindow : public UI::UniqueWindow {
+public:
 	FieldActionWindow
 		(Interactive_Base           * ibase,
 		 Widelands::Player          * plr,
@@ -763,11 +765,18 @@ void FieldActionWindow::act_ripflag()
 	Widelands::Editor_Game_Base & egbase = ibase().egbase();
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
-			if (building->get_playercaps() & Building::PCap_Bulldoze)
-				show_bulldoze_confirm
-					(ref_cast<Interactive_Player, Interactive_Base>(ibase()),
-					 *building,
-					 flag);
+			if (building->get_playercaps() & Building::PCap_Bulldoze) {
+				if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+					ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
+						(*flag);
+				}
+				else {
+					show_bulldoze_confirm
+						(ref_cast<Interactive_Player, Interactive_Base>(ibase()),
+						 *building,
+						 flag);
+				}
+			}
 		} else {
 			ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
 					(*flag, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));

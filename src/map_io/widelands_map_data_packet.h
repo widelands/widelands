@@ -23,7 +23,7 @@
 #include "wexception.h"
 #include "logic/widelands_filewrite.h"
 
-struct FileSystem;
+class FileSystem;
 
 namespace Widelands {
 

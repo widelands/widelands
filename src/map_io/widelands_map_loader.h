@@ -24,7 +24,7 @@
 #include <cstring>
 #include "map_loader.h"
 
-struct FileSystem;
+class FileSystem;
 
 namespace Widelands {
 
