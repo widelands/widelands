@@ -35,7 +35,7 @@
 #include <cstring>
 #include <vector>
 
-namespace UI {struct Window;}
+namespace UI {class Window;}
 struct BuildingHints;
 struct Interactive_GameBase;
 struct Profile;
