@@ -321,8 +321,8 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
  * Returns the filename of this path, everything after the last
  * / or \  (or the whole string)
  */
-char const * FileSystem::FS_Filename(char const * p) {
-	char const * result = p;
+const char * FileSystem::FS_Filename(const char * p) {
+	const char * result = p;
 
 	while (*p != '\0') {
 		if (*p == '/' || *p == '\\')
@@ -333,10 +333,10 @@ char const * FileSystem::FS_Filename(char const * p) {
 	return result;
 }
 
-char const * FileSystem::FS_Filename(char const * p, char const * & extension)
+const char * FileSystem::FS_Filename(const char * p, const char * & extension)
 {
 	extension = 0;
-	char const * result = p;
+	const char * result = p;
 
 	while (*p != '\0') {
 		if (*p == '/' || *p == '\\') {
@@ -353,9 +353,9 @@ char const * FileSystem::FS_Filename(char const * p, char const * & extension)
 	return result;
 }
 
-std::string FileSystem::FS_FilenameWoExt(char const * const p)
+std::string FileSystem::FS_FilenameWoExt(const char * const p)
 {
-	char const * extension;
+	const char * extension = 0;
 	std::string fname(p ? FileSystem::FS_Filename(p, extension) : "");
 	return
 		extension ? fname.substr(0, fname.length() - strlen(extension)) : fname;
