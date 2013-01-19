@@ -753,7 +753,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 					char * complete = complete_buf.get();
 #endif
 					fr.DataComplete(complete, bytes);
-					MD5Checksum<FileRead> md5sum;
+					SimpleMD5Checksum md5sum;
 					md5sum.Data(complete, bytes);
 					md5sum.FinishChecksum();
 					std::string localmd5 = md5sum.GetChecksum().str();
@@ -844,7 +844,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			char * complete = complete_buf.get();
 #endif
 			fr.DataComplete(complete, file->bytes);
-			MD5Checksum<FileRead> md5sum;
+			SimpleMD5Checksum md5sum;
 			md5sum.Data(complete, file->bytes);
 			md5sum.FinishChecksum();
 			std::string localmd5 = md5sum.GetChecksum().str();

@@ -40,7 +40,7 @@ struct md5_checksum;
 namespace Widelands {
 struct Command;
 struct Game;
-struct PlayerCommand;
+class PlayerCommand;
 struct StreamRead;
 struct StreamWrite;
 
