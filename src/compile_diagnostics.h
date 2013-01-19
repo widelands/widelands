@@ -25,8 +25,6 @@
  * use in the middle of functions.
  */
 #if ((__GNUC__ * 100) + __GNUC_MINOR__) >= 406
-# define GCC_DIAG_STR(s) #s
-# define GCC_DIAG_JOINSTR(x, y) GCC_DIAG_STR(x ## y)
 # define GCC_DIAG_DO_PRAGMA(x) _Pragma (#x)
 # define GCC_DIAG_PRAGMA(x) GCC_DIAG_DO_PRAGMA(GCC diagnostic x)
 # define GCC_DIAG_OFF(x) GCC_DIAG_PRAGMA(push) \
@@ -37,5 +35,23 @@
 # define GCC_DIAG_ON(x)
 #endif
 
+/* Macros for disabling Clang warnings and errors
+ * From https://svn.boost.org/trac/boost/wiki/Guidelines/WarningsGuidelines and
+ * slightly modified.
+ */
+#ifdef __clang__
+# define CLANG_DIAG_DO_PRAGMA(x) _Pragma (#x)
+// _Pragma is unary operator  #pragma ("")
+# define CLANG_DIAG_PRAGMA(x) CLANG_DIAG_DO_PRAGMA(clang diagnostic x)
+# define CLANG_DIAG_OFF(x) CLANG_DIAG_PRAGMA(push) \
+		 CLANG_DIAG_PRAGMA(ignored x)
+// For example: #pragma clang diagnostic ignored "-Wno-unused-variable"
+# define CLANG_DIAG_ON(x) CLANG_DIAG_PRAGMA(pop)
+// For example: #pragma clang diagnostic warning "-Wno-unused-variable"
+#else // Ensure these macros so nothing for other compilers.
+# define CLANG_DIAG_OFF(x)
+# define CLANG_DIAG_ON(x)
+# define CLANG_DIAG_PRAGMA(x)
+#endif
 
 #endif
