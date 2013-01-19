@@ -58,7 +58,7 @@ enum {
 
 struct Player;
 struct Map_Loader;
-struct PlayerCommand;
+class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
 
