@@ -109,7 +109,7 @@ Player::~Player() {
 
 void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
-	if (/* const Coords starting_pos = */map.get_starting_pos(m_plnum)) {
+	if (map.get_starting_pos(m_plnum)) {
 		try {
 			Tribe_Descr::Initialization const & initialization =
 				tribe().initialization(m_initialization_index);

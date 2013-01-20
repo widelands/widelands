@@ -48,7 +48,7 @@
 // For example: #pragma clang diagnostic ignored "-Wno-unused-variable"
 # define CLANG_DIAG_ON(x) CLANG_DIAG_PRAGMA(pop)
 // For example: #pragma clang diagnostic warning "-Wno-unused-variable"
-#else // Ensure these macros so nothing for other compilers.
+#else // Ensure these macros do nothing for other compilers.
 # define CLANG_DIAG_OFF(x)
 # define CLANG_DIAG_ON(x)
 # define CLANG_DIAG_PRAGMA(x)
