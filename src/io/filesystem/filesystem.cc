@@ -333,32 +333,22 @@ const char * FileSystem::FS_Filename(const char * p) {
 	return result;
 }
 
-const char * FileSystem::FS_Filename(const char * p, const char * & extension)
+std::string FileSystem::FS_FilenameExt(const std::string & f)
 {
-	extension = 0;
-	const char * result = p;
+	// Find last '.' - denotes start of extension
+	size_t ext_start = f.rfind('.');
 
-	while (*p != '\0') {
-		if (*p == '/' || *p == '\\') {
-			extension = 0;
-			result = p + 1;
-		} else if (*p == '.')
-			extension = p;
-		++p;
-	}
-
-
-	if (not extension)
-		extension = p;
-	return result;
+	if (std::string::npos == ext_start)
+		return "";
+	else
+		return f.substr(ext_start);
 }
 
 std::string FileSystem::FS_FilenameWoExt(const char * const p)
 {
-	const char * extension = 0;
-	std::string fname(p ? FileSystem::FS_Filename(p, extension) : "");
-	return
-		extension ? fname.substr(0, fname.length() - strlen(extension)) : fname;
+	std::string fname(p ? FileSystem::FS_Filename(p) : "");
+	std::string ext(FileSystem::FS_FilenameExt(fname));
+	return fname.substr(0, fname.length() - ext.length());
 }
 
 /// Create a filesystem from a zipfile or a real directory
