@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-01-06 16:48+0100\n"
-"PO-Revision-Date: 2013-01-11 19:34+0000\n"
+"PO-Revision-Date: 2013-01-19 10:02+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-01-12 04:32+0000\n"
-"X-Generator: Launchpad (build 16420)\n"
+"X-Launchpad-Export-Date: 2013-01-20 04:31+0000\n"
+"X-Generator: Launchpad (build 16430)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -401,7 +401,7 @@ msgstr "Można budować"
 
 #: ../../src/writeHTML.cc:286
 msgid "Enhanced"
-msgstr "Rozbudowane"
+msgstr "Ulepszony"
 
 #: ../../src/writeHTML.cc:288
 msgid "Conquer<br/>range"
@@ -468,12 +468,12 @@ msgstr "Nie można zbudować."
 
 #: ../../src/writeHTML.cc:405
 msgid "Is enhanced."
-msgstr "Jest rozbudowany."
+msgstr "Jest ulepszony."
 
 #: ../../src/writeHTML.cc:412
 #, c-format
 msgid "Conquer range is %u."
-msgstr "Pole zdobycia jest %u"
+msgstr "Zasięg podboju wynosi %u"
 
 #: ../../src/writeHTML.cc:420 ../../src/writeHTML.cc:644
 #, c-format
@@ -491,7 +491,7 @@ msgstr "plac budowy %s"
 
 #: ../../src/writeHTML.cc:450
 msgid "Enhancements"
-msgstr "Rozbudowane"
+msgstr "Ulepszenia"
 
 #: ../../src/writeHTML.cc:460
 #, c-format
@@ -512,7 +512,7 @@ msgstr "Staje się"
 
 #: ../../src/writeHTML.cc:579
 msgid "Combat Properties"
-msgstr "Ustwienia walki"
+msgstr "Ustawienia walki"
 
 #: ../../src/writeHTML.cc:586
 #, c-format
@@ -3839,7 +3839,7 @@ msgstr "Wyświetl zasięg"
 #: ../../src/wui/constructionsitewindow.cc:74
 #: ../../src/wui/dismantlesitewindow.cc:68
 msgid "Building materials"
-msgstr "Materiały budowlane"
+msgstr "Materiały do budowy"
 
 #: ../../src/wui/encyclopedia_window.cc:70
 msgid "Tribe ware encyclopedia"
@@ -4106,7 +4106,7 @@ msgstr "Lista zadań"
 
 #: ../../src/wui/game_objectives_menu.cc:67
 msgid "Claim Victory"
-msgstr "Ogłoś zwycięstwo"
+msgstr "Osiągnij zwycięstwo"
 
 #: ../../src/wui/game_objectives_menu.cc:75
 msgid "Restart Mission"
@@ -4181,7 +4181,7 @@ msgstr "Stracone budynki cywilne"
 
 #: ../../src/wui/general_statistics_menu.cc:254
 msgid "Military"
-msgstr "Wojskowych"
+msgstr "Wojsko"
 
 #: ../../src/wui/interactive_base.cc:275
 #, c-format
@@ -4431,7 +4431,7 @@ msgstr "Pojemność"
 #: ../../src/wui/soldierlist.cc:387 ../../src/wui/soldierlist.cc:401
 #: ../../src/wui/soldierlist.cc:423
 msgid "Click soldier to send away"
-msgstr "Kliknij w żołnierza, by go odesłać"
+msgstr "Kliknij żołnierza, by go odesłać"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"
