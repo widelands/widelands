@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef _SOLDIERCAPACITYCONTROL_H_
 #define _SOLDIERCAPACITYCONTROL_H_
 
-struct Interactive_GameBase;
+class Interactive_GameBase;
 
 namespace UI {
 struct Panel;
