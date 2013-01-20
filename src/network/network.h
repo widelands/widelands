@@ -31,7 +31,7 @@
 #include <string>
 #include <vector>
 
-struct Deserializer;
+class Deserializer;
 
 struct SyncCallback {
 	virtual ~SyncCallback() {}
@@ -130,7 +130,8 @@ struct NetTransferFile {
 	std::vector<FilePart> parts;
 };
 
-struct Deserializer {
+class Deserializer {
+public:
 	/**
 	 * Read data from the given socket.
 	 * \return \c false if the socket was disconnected or another error
@@ -138,17 +139,16 @@ struct Deserializer {
 	 * \c true if some data could be read (this does not imply that \ref avail
 	 * will return \c true !)
 	 */
-	bool read (TCPsocket);
+	bool read(TCPsocket sock);
 
 	/**
 	 * \return \c true if an entire packet has been received.
 	 */
-	bool avail () const;
+	bool avail() const;
 
 private:
 	friend struct RecvPacket;
 	std::vector<uint8_t> queue;
-	size_t index;
 };
 
 

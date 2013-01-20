@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,25 +40,24 @@ static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
 /**
  * Extends the wares display to show and modify stock policy of items.
  */
-struct WarehouseWaresDisplay : WaresDisplay {
+class WarehouseWaresDisplay : public WaresDisplay {
+public:
 	WarehouseWaresDisplay
 		(UI::Panel * parent, uint32_t width,
-		 Interactive_GameBase &, Warehouse &, Widelands::WareWorker type, bool selectable);
+		 Warehouse & wh, Widelands::WareWorker type, bool selectable);
 
 protected:
 	virtual void draw_ware(RenderTarget & dst, Widelands::Ware_Index ware);
 
 private:
-	Interactive_GameBase & m_igbase;
 	Warehouse & m_warehouse;
 };
 
 WarehouseWaresDisplay::WarehouseWaresDisplay
-	(UI::Panel * parent, uint32_t width, Interactive_GameBase & igbase,
+	(UI::Panel * parent, uint32_t width,
 	 Warehouse & wh, Widelands::WareWorker type, bool selectable)
 :
 WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable),
-m_igbase(igbase),
 m_warehouse(wh)
 {
 	set_inner_size(width, 0);
@@ -110,7 +109,7 @@ WarehouseWaresPanel::WarehouseWaresPanel
 	m_wh(wh),
 	m_can_act(m_gb.can_act(m_wh.owner().player_number())),
 	m_type(type),
-	m_display(this, width, m_gb, m_wh, m_type, m_can_act)
+	m_display(this, width, m_wh, m_type, m_can_act)
 {
 	add(&m_display, UI::Box::AlignLeft, true);
 

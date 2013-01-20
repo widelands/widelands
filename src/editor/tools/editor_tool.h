@@ -36,7 +36,8 @@ namespace Widelands {struct Map;}
  * one function (like delete_building, place building, modify building are 3
  * tools).
  */
-struct Editor_Tool : boost::noncopyable {
+class Editor_Tool : boost::noncopyable {
+public:
 	Editor_Tool(Editor_Tool & second, Editor_Tool & third, bool uda = true) :
 		m_second(second), m_third(third), undoable(uda)
 	{}

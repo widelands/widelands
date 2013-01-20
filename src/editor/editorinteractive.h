@@ -39,7 +39,7 @@
 
 
 class Editor;
-struct Editor_Tool;
+class Editor_Tool;
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,

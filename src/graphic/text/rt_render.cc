@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -402,9 +402,6 @@ public:
 		assert(false); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
-
-private:
-	uint32_t m_w;
 };
 
 /*

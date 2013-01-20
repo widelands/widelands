@@ -50,7 +50,8 @@ namespace UI {
  * Minimize means, that the window is only the caption bar, nothing inside.
  * Another click on this bar resizes the window again
  */
-struct Window : public NamedPanel {
+class Window : public NamedPanel {
+public:
 	Window
 		(Panel      * parent,
 		 const std::string& name,
@@ -61,7 +62,7 @@ struct Window : public NamedPanel {
 		 const std::string& title);
 
 	void set_title(const std::string &);
-	std::string const & get_title() const {return m_title;}
+	const std::string & get_title() const {return m_title;}
 
 	void set_center_panel(Panel * panel);
 	void move_out_of_the_way();
@@ -93,7 +94,7 @@ protected:
 
 private:
 	bool _is_minimal;
-	uint32_t _oldw, _oldh;  // if it is, these are the old formats
+	uint32_t _oldh;  // if it is, this is the old height
 	bool _dragging, _docked_left, _docked_right, _docked_bottom;
 	int32_t _drag_start_win_x, _drag_start_win_y;
 	int32_t _drag_start_mouse_x, _drag_start_mouse_y;

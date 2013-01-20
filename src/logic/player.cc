@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,7 +109,7 @@ Player::~Player() {
 
 void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
-	if (Coords const starting_pos = map.get_starting_pos(m_plnum)) {
+	if (map.get_starting_pos(m_plnum)) {
 		try {
 			Tribe_Descr::Initialization const & initialization =
 				tribe().initialization(m_initialization_index);

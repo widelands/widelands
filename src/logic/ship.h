@@ -24,7 +24,7 @@
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
 
-namespace UI {struct Window;}
+namespace UI {class Window;}
 struct Interactive_GameBase;
 
 namespace Widelands {

@@ -114,9 +114,15 @@ public:
 	std::string getWorkingDirectory() const;
 	std::string FS_CanonicalizeName(std::string path) const;
 	bool pathIsAbsolute(std::string const & path) const;
-	static char const * FS_Filename(char const *);
-	static char const * FS_Filename(char const *, char const * & extension);
-	static std::string FS_FilenameWoExt(char const *);
+
+	///Given a filename, return the name with any path stripped off.
+	static const char * FS_Filename(const char * n);
+
+	///Given a filename (without any path), return the extension, if any.
+	static std::string FS_FilenameExt(const std::string & f);
+
+	///Given a filename, return the name with any path or extension stripped off.
+	static std::string FS_FilenameWoExt(const char * n);
 	static std::string GetHomedir();
 
 	virtual unsigned long long DiskSpace() = 0;
