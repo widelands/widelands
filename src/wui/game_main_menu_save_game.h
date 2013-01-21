@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 
 #include "ref_cast.h"
 
-struct Interactive_GameBase;
+class Interactive_GameBase;
 
 struct SaveWarnMessageBox;
 struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {

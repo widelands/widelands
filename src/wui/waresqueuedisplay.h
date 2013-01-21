@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/button.h"
 
-struct Interactive_GameBase;
+class Interactive_GameBase;
 
 namespace UI {
 struct Panel;
