@@ -58,3 +58,7 @@ sec=6
 text=_If you like to live dangerously, pressing Ctrl while clicking the enhance, dismantle or destroy building buttons will skip the confirmation.
 sec=6
 
+[Tip 16]
+text=_Press I to quickly toggle the display of your stock inventory.
+sec=4
+
