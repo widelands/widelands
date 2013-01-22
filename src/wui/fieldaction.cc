@@ -110,7 +110,10 @@ void BuildGrid::add(Widelands::Building_Index::value_t const id)
 		*m_tribe.get_building_descr(Widelands::Building_Index(id));
 	UI::Icon_Grid::add
 		(descr.name(), descr.get_buildicon(),
-		 reinterpret_cast<void *>(id), descr.descname());
+		 reinterpret_cast<void *>(id),
+		 descr.descname() + "<br>" + _("Buildcosts:") + "<br>" +
+			waremap_to_string(m_tribe, descr.buildcost()));
+;
 }
 
 
@@ -224,8 +227,6 @@ private:
 
 	Widelands::FCoords  m_node;
 
-	UI::Box m_box;
-	WaresMapDisplay * m_buildcostPrev;
 	UI::Tab_Panel      m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
@@ -286,9 +287,7 @@ FieldActionWindow::FieldActionWindow
 	m_map(&ib->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
-	m_box(this, 0, 0, UI::Box::Vertical),
-	m_buildcostPrev(0),
-	m_tabpanel(&m_box, 0, 0, g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
+	m_tabpanel(this, 0, 0, g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 	m_fastclick(true),
 	m_best_tab(0),
 	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null()),
@@ -297,13 +296,7 @@ FieldActionWindow::FieldActionWindow
 	ib->set_sel_freeze(true);
 
 
-	m_box.add(&m_tabpanel, UI::Box::AlignCenter);
-	if (m_plr) {
-		m_buildcostPrev = new WaresMapDisplay(&m_box, 0, 0, 6, m_plr->tribe(), NULL);
-		m_box.add(m_buildcostPrev, UI::Box::AlignLeft);
-	}
-
-	set_center_panel(&m_box);
+	set_center_panel(&m_tabpanel);
 
 	char filename[] = "pics/workarea0cumulative.png";
 	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
@@ -320,7 +313,6 @@ FieldActionWindow::~FieldActionWindow()
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	ibase().set_sel_freeze(false);
 	delete m_attack_box;
-	delete m_buildcostPrev;
 }
 
 
@@ -853,7 +845,6 @@ void FieldActionWindow::act_build(Widelands::Building_Index::value_t const idx)
 void FieldActionWindow::building_icon_mouse_out
 	(Widelands::Building_Index::value_t)
 {
-	m_buildcostPrev->set_map(NULL);
 	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 		m_workarea_preview_job_id = Overlay_Manager::Job_Id::Null();
@@ -864,9 +855,6 @@ void FieldActionWindow::building_icon_mouse_out
 void FieldActionWindow::building_icon_mouse_in
 	(Widelands::Building_Index::value_t const idx)
 {
-	m_buildcostPrev->set_map
-		(&m_plr->tribe().get_building_descr(Widelands::Building_Index(idx))->buildcost());
-
 	if (ibase().m_show_workarea_preview and not m_workarea_preview_job_id) {
 		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
 		Widelands::HollowArea<> hollow_area(Widelands::Area<>(m_node, 0), 0);

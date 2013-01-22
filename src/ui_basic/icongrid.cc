@@ -38,29 +38,25 @@ struct IconGridButton : public Button {
 		 const IPicture* background_pictute_id,
 		 const IPicture* foreground_picture_id,
 		 const uint32_t callback_argument_id,
-		 Textarea          & ta, std::string const & descr)
+		 std::string const & tooltip_text)
 		:
 		Button
 			(&parent, name, x, y, w, h, background_pictute_id,
 			 foreground_picture_id,
-			 "", true, true),
-			 m_icongrid(parent), m_ta(ta), m_descr(descr),
+			 tooltip_text, true, true),
+			 m_icongrid(parent),
 			 _callback_argument_id(callback_argument_id)
 		{}
 
 private:
 	Icon_Grid & m_icongrid;
-	Textarea  & m_ta;
-	std::string m_descr;
 	const uint32_t _callback_argument_id;
 
 	void handle_mousein(bool const inside) {
 		if (inside) {
 			m_icongrid.mousein(_callback_argument_id);
-			m_ta.set_text(m_descr);
 		} else {
 			m_icongrid.mouseout(_callback_argument_id);
-			m_ta.set_text("");
 		}
 		Button::handle_mousein(inside);
 	}
@@ -77,8 +73,7 @@ Icon_Grid::Icon_Grid
 	Panel            (parent, x, y, 0, 0),
 	m_columns        (cols),
 	m_cell_width     (cellw),
-	m_cell_height    (cellh),
-	m_ta         (this, 0, 0, 0, g_fh->get_fontheight(UI_FONT_SMALL) + 2)
+	m_cell_height    (cellh)
 {}
 
 
@@ -88,7 +83,7 @@ Icon_Grid::Icon_Grid
 */
 int32_t Icon_Grid::add
 	(std::string const & name, const IPicture* pic,
-	 void * const data, std::string const & descr)
+	 void * const data, std::string const & tooltip_text)
 {
 	Item it;
 
@@ -100,14 +95,10 @@ int32_t Icon_Grid::add
 	int32_t const rows = (m_items.size() + m_columns - 1) / m_columns;
 
 	if (rows <= 1) {
-		set_desired_size(m_cell_width * m_columns, m_cell_height + m_ta.get_h());
-		m_ta.set_size(get_inner_w(), m_ta.get_h());
-		m_ta.set_pos(Point(0, m_cell_height));
+		set_desired_size(m_cell_width * m_columns, m_cell_height);
 	} else {
 		set_desired_size
-			(m_cell_width * m_columns, m_cell_height * rows + m_ta.get_h());
-		m_ta.set_size(get_inner_w(), m_ta.get_h());
-		m_ta.set_pos(Point(0, m_cell_height * rows));
+			(m_cell_width * m_columns, m_cell_height * rows);
 	}
 
 	uint32_t idx = m_items.size() - 1;
@@ -118,7 +109,7 @@ int32_t Icon_Grid::add
 		(*this, name,
 		 x, y, m_cell_width, m_cell_height,
 		 NULL, pic,
-		 idx, m_ta, descr);
+		 idx, tooltip_text);
 	btn->sigclicked.connect(boost::bind(&Icon_Grid::clicked_button, this, idx));
 
 	return idx;

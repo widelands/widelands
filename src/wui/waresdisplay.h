@@ -45,7 +45,8 @@ struct WareList;
  *
  * For practical purposes, use one of the derived classes, e.g. @ref WaresDisplay.
  */
-struct AbstractWaresDisplay : public UI::Panel {
+class AbstractWaresDisplay : public UI::Panel {
+public:
 	AbstractWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
@@ -112,12 +113,13 @@ private:
 };
 
 /*
-struct WaresDisplay
+class WaresDisplay
 ------------------
 Panel that displays the contents of many WareLists. The ware_lists
 must be valid while they are registered with this class.
 */
-struct WaresDisplay : public AbstractWaresDisplay {
+class WaresDisplay : public AbstractWaresDisplay {
+public:
 	WaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
@@ -139,32 +141,9 @@ private:
 	std::vector<boost::signals::connection> connections_;
 };
 
-
-/**
- * Displays the build costs of a given building
- */
-
-struct WaresMapDisplay : public UI::Panel {
-	typedef std::map<Widelands::Ware_Index, uint8_t> maptype;
-
-	WaresMapDisplay
-		(UI::Panel * const parent,
-		 int32_t const x, int32_t const y,
-		 int32_t columns,
-		 Widelands::Tribe_Descr const & tribe,
-		 maptype const * map = NULL);
-
-	virtual ~WaresMapDisplay();
-
-	void set_map(maptype const * map);
-
-private:
-	virtual void draw(RenderTarget &);
-
-private:
-	Widelands::Tribe_Descr const & m_tribe;
-	maptype const * m_map;
-	int32_t m_columns;
-};
+// Convert a ware:number map to an rt string.
+std::string waremap_to_string
+		(Widelands::Tribe_Descr const & tribe,
+		 std::map<Widelands::Ware_Index, uint8_t> const & map);
 
 #endif

@@ -69,6 +69,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 
 	/// \return index to ware's icon inside picture stack
 	const IPicture* icon() const throw () {return m_icon;}
+	std::string icon_name() const throw () {return m_icon_fname;}
 
 	/// \return ware's localized descriptive text
 	std::string const & helptext() const throw () {return m_helptext;}

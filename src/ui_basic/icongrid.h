@@ -49,7 +49,7 @@ struct Icon_Grid : public Panel {
 		(std::string const & name,
 		 const IPicture* pic,
 		 void              * data,
-		 std::string const & descr = std::string());
+		 std::string const & tooltip_text = std::string());
 	void * get_data(int32_t idx);
 
 private:
@@ -64,7 +64,6 @@ private:
 	int32_t m_cell_width; ///< size of one cell
 	int32_t m_cell_height;
 
-	Textarea          m_ta;
 	std::vector<Item> m_items;
 };
 
