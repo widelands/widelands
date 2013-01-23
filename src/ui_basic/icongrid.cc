@@ -34,10 +34,10 @@ struct IconGridButton : public Button {
 	IconGridButton
 		(Icon_Grid         & parent,
 		 const std::string & name,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const IPicture* background_pictute_id,
 		 const IPicture* foreground_picture_id,
-		 const uint32_t callback_argument_id,
+		 uint32_t callback_argument_id,
 		 const std::string & tooltip_text)
 		:
 		Button
@@ -52,7 +52,7 @@ private:
 	Icon_Grid & m_icongrid;
 	const uint32_t _callback_argument_id;
 
-	void handle_mousein(const bool inside) {
+	void handle_mousein(bool inside) {
 		if (inside) {
 			m_icongrid.mousein(_callback_argument_id);
 		} else {
@@ -67,8 +67,8 @@ private:
 */
 Icon_Grid::Icon_Grid
 	(Panel  * const parent,
-	 const int32_t x, const int32_t y, const int32_t cellw, const int32_t cellh,
-	 const int32_t cols)
+	 int32_t x, int32_t y, int32_t cellw, int32_t cellh,
+	 int32_t cols)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_columns        (cols),
@@ -123,7 +123,7 @@ void Icon_Grid::clicked_button(uint32_t idx) {
 /**
  * Returns the user-defined data of the icon with the given index.
 */
-void * Icon_Grid::get_data(const int32_t idx)
+void * Icon_Grid::get_data(int32_t idx)
 {
 	assert(static_cast<uint32_t>(idx) < m_items.size());
 

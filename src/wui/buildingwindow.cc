@@ -165,7 +165,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	if (can_act) {
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building))
 			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
-				bool const is_stopped = productionsite->is_stopped();
+				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
 					new UI::Button
 						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
@@ -383,7 +383,7 @@ void Building_Window::act_start_stop() {
 Callback for enhancement request
 ===============
 */
-void Building_Window::act_enhance(const Widelands::Building_Index id)
+void Building_Window::act_enhance(Widelands::Building_Index id)
 {
 	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)

@@ -40,7 +40,7 @@ const int WARE_MENU_INFO_SIZE = 12;
 
 AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
-	 const int32_t x, const int32_t y,
+	 int32_t x, int32_t y,
 	 const Widelands::Tribe_Descr & tribe,
 	 Widelands::WareWorker type,
 	 bool selectable,
@@ -91,7 +91,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 
 
 bool AbstractWaresDisplay::handle_mousemove
-	(uint8_t, const int32_t x, const int32_t y, int32_t, int32_t)
+	(uint8_t, int32_t x, int32_t y, int32_t, int32_t)
 {
 	const Widelands::Ware_Index index = ware_at_point(x, y);
 
@@ -108,7 +108,7 @@ bool AbstractWaresDisplay::handle_mousemove
 }
 
 bool AbstractWaresDisplay::handle_mousepress
-	(uint8_t btn, const int32_t x, const int32_t y)
+	(uint8_t btn, int32_t x, int32_t y)
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::Ware_Index ware = ware_at_point(x, y);
@@ -313,14 +313,14 @@ bool AbstractWaresDisplay::ware_hidden(Widelands::Ware_Index ware) {
 
 WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,
-	 const int32_t x, const int32_t y,
+	 int32_t x, int32_t y,
 	 const Widelands::Tribe_Descr & tribe,
 	 Widelands::WareWorker type,
 	 bool selectable)
 : AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}
 
-RGBColor AbstractWaresDisplay::info_color_for_ware(const Widelands::Ware_Index /* ware */) {
+RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::Ware_Index /* ware */) {
 	return RGBColor(0, 0, 0);
 }
 

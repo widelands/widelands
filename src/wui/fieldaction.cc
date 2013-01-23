@@ -64,7 +64,7 @@ struct BuildGrid : public UI::Icon_Grid {
 	BuildGrid
 		(UI::Panel                    * parent,
 		 const Widelands::Tribe_Descr & tribe,
-		 const int32_t x, const int32_t y,
+		 int32_t x, int32_t y,
 		 int32_t cols);
 
 	boost::signal<void (Widelands::Building_Index::value_t)> buildclicked;
@@ -86,7 +86,7 @@ private:
 BuildGrid::BuildGrid
 	(UI::Panel                    * parent,
 	 const Widelands::Tribe_Descr & tribe,
-	 const int32_t x, const int32_t y,
+	 int32_t x, int32_t y,
 	 int32_t                        cols)
 :
 	UI::Icon_Grid
@@ -104,7 +104,7 @@ BuildGrid::BuildGrid
 Add a new building to the list of buildable buildings
 ===============
 */
-void BuildGrid::add(Widelands::Building_Index::value_t const id)
+void BuildGrid::add(Widelands::Building_Index::value_t id)
 {
 	const Widelands::Building_Descr & descr =
 		*m_tribe.get_building_descr(Widelands::Building_Index(id));
@@ -125,7 +125,7 @@ The icon with the given index has been clicked. Figure out which building it
 belongs to and trigger signal buildclicked.
 ===============
 */
-void BuildGrid::clickslot(const int32_t idx)
+void BuildGrid::clickslot(int32_t idx)
 {
 	buildclicked(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
@@ -211,7 +211,7 @@ private:
 		(const std::string & name,
 		 const char * picname,
 		 UI::Panel * panel,
-		 const std::string & tooltip_text = std::string());
+		 const std::string & tooltip_text = "");
 	UI::Button & add_button
 		(UI::Box *,
 		 const char * name,
@@ -518,7 +518,7 @@ void FieldActionWindow::add_buttons_attack ()
 Add buttons for house building.
 ===============
 */
-void FieldActionWindow::add_buttons_build(const int32_t buildcaps)
+void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 {
 	if (not m_plr)
 		return;
@@ -602,7 +602,7 @@ void FieldActionWindow::add_buttons_build(const int32_t buildcaps)
 Buttons used during road building: Set flag here and Abort
 ===============
 */
-void FieldActionWindow::add_buttons_road(const bool flag)
+void FieldActionWindow::add_buttons_road(bool flag)
 {
 	UI::Box & buildbox = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
@@ -641,7 +641,7 @@ UI::Button & FieldActionWindow::add_button
 	 const char        * const picname,
 	 void (FieldActionWindow::*fn)(),
 	 const std::string & tooltip_text,
-	 const bool                repeating)
+	 bool                repeating)
 {
 	UI::Button & button =
 		*new UI::Button
@@ -827,7 +827,7 @@ void FieldActionWindow::act_removeroad()
 Start construction of the building with the give description index
 ===============
 */
-void FieldActionWindow::act_build(const Widelands::Building_Index::value_t idx)
+void FieldActionWindow::act_build(Widelands::Building_Index::value_t idx)
 {
 	Widelands::Game & game = ref_cast<Game, Editor_Game_Base>(ibase().egbase());
 	game.send_player_build

@@ -49,7 +49,7 @@ class AbstractWaresDisplay : public UI::Panel {
 public:
 	AbstractWaresDisplay
 		(UI::Panel * const parent,
-		 const int32_t x, const int32_t y,
+		 int32_t x, int32_t y,
 		 const Widelands::Tribe_Descr &,
 		 Widelands::WareWorker type,
 		 bool selectable,
@@ -86,7 +86,7 @@ public:
 protected:
 	virtual void layout();
 
-	virtual std::string info_for_ware(const Widelands::Ware_Index) = 0;
+	virtual std::string info_for_ware(Widelands::Ware_Index) = 0;
 
 	virtual RGBColor info_color_for_ware(Widelands::Ware_Index);
 
@@ -122,7 +122,7 @@ class WaresDisplay : public AbstractWaresDisplay {
 public:
 	WaresDisplay
 		(UI::Panel * const parent,
-		 const int32_t x, const int32_t y,
+		 int32_t x, int32_t y,
 		 const Widelands::Tribe_Descr &,
 		 Widelands::WareWorker type,
 		 bool selectable);
