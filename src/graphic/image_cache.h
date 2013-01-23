@@ -33,7 +33,7 @@ class IImageLoader;
  * This cache is separated into different modules, and can be flushed
  * per-module.
  */
-// TODO(sirver): kill these
+// TODO(#sirver): kill these
 enum PicMod {
 	PicMod_UI = 0,
 	PicMod_Menu,

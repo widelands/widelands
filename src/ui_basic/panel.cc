@@ -829,7 +829,7 @@ void Panel::do_draw(RenderTarget & dst)
 
 	draw_border(dst);
 
-	// TODO(sirver): this is disabled for the moment. The design is completely unclear to me.
+	// TODO(#sirver): this is disabled for the moment. The design is completely unclear to me.
 #if 0
 	if (_flags & pf_cache) {
 		uint32_t innerw = _w - (_lborder + _rborder);

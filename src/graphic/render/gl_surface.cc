@@ -19,7 +19,7 @@
 
 #include <cmath>
 
-// TODO(sirver): if I refactor Graphic to an interface and then make the implementation public in graphic/
+// TODO(#sirver): if I refactor Graphic to an interface and then make the implementation public in graphic/
 // i could maybe avoid a lot of casting to ImageImpl.. not sure though.
 #include "gl_surface_texture.h"
 #include "graphic/graphic.h"

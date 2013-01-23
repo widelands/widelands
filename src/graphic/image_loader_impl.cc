@@ -43,7 +43,7 @@ ImageImpl* ImageLoaderImpl::load(const string& fname, bool alpha) const {
 	if (!sdlsurf)
 		throw wexception("%s", IMG_GetError());
 
-	// // TODO(sirver): this should most probably return a surface now.
+	// // TODO(#sirver): this should most probably return a surface now.
 	return static_cast<ImageImpl*>(gr_.convert_sdl_surface_to_picture(sdlsurf, alpha));
 }
 

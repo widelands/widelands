@@ -57,7 +57,7 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32
 }
 
 const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
-	// TODO(sirver): Make this cheaper!
+	// TODO(#sirver): Make this cheaper!
 	SimpleMD5Checksum checksum;
 	checksum.Data(font_name_.c_str(), font_name_.size());
 	checksum.Data(&ptsize_, sizeof(ptsize_));

@@ -24,13 +24,21 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/foreach.hpp>
 
+#include "log.h"
 #include "picture.h"
-
+#include "picture_impl.h"
 #include "image_loader.h"
+
 #include "image_cache.h"
 
 using namespace std;
 
+namespace  {
+
+// Implementation stuff {{{
+
+// End: Implementation stuff }}}
+class ImageImplFromDisk;
 class ImageCacheImpl : public ImageCache {
 public:
 	// Ownership of loader is not taken.
@@ -40,22 +48,20 @@ public:
 	// Implements ImageCache
 	virtual const IPicture* get(PicMod, const string& hash) const;
 	virtual const IPicture* insert(PicMod, const string& hash, const IPicture*);
+
+	// NOCOM(#sirver): load should not be here. flush
 	virtual const IPicture* load(PicMod, const string& fn, bool alpha);
 	virtual void flush(PicMod);
 
 private:
 	struct PictureRec {
 		const IPicture* picture;
-
-		/// bit-mask of modules that this picture exists in
-		uint32_t modules;
 	};
 
 	typedef map<string, PictureRec> PictureMap;
 
 	/// hash of cached filename/picture pairs
 	PictureMap m_picturemap;
-
 	IImageLoader* img_loader_;
 };
 
@@ -69,24 +75,43 @@ const IPicture* ImageCacheImpl::get(PicMod module, const string& hash) const {
 	PictureMap::const_iterator it = m_picturemap.find(hash);
 	if (it == m_picturemap.end())
 		return NULL;
-	return (it->second.modules & (1 << module)) ? it->second.picture : NULL;
+	return it->second.picture;
 }
 
 const IPicture* ImageCacheImpl::insert(PicMod module, const string& name, const IPicture* pic) {
 	PictureRec rec;
-	rec.picture = pic;
-	rec.modules = 1 << module;
+	rec.picture = new IPicture(pic;
 	m_picturemap.insert(make_pair(name, rec));
 	return pic;
 }
 
+const IPicture* ImageCacheImpl::load
+		(PicMod module, const string& fname, bool alpha)
+{
+	//  Check if the picture is already loaded.
+	PictureMap::iterator it = m_picturemap.find(fname);
+	if (it == m_picturemap.end()) {
+		// NOCOM(#sirver): PictureRec is not really needed anymore.
+		PictureRec rec;
+		rec.image = new ImageImplFromDisk(this, picmod, fname, alpha);
+		it = m_picturemap.insert(make_pair(fname, rec)).first;
+	}
+
+	if (!img->has_surface()) {
+		log("ImgCache: Loading %s from disk.\n", fname.c_str());
+		ImageImpl* img = img_loader_->load(fname, alpha);
+		img->set_surface(img);
+	}
+
+	return it->second.picture;
+}
+
 void ImageCacheImpl::flush(PicMod module) {
+	return; // NOCOM(#sirver): this does nothing currently
 	vector<string> eraselist;
 
 	BOOST_FOREACH(PictureMap::value_type& entry, m_picturemap) {
-		entry.second.modules &= ~(1 << module);
-		if (!entry.second.modules)
-			eraselist.push_back(entry.first);
+		eraselist.push_back(entry.first);
 	}
 
 	while (!eraselist.empty()) {
@@ -95,25 +120,9 @@ void ImageCacheImpl::flush(PicMod module) {
 	}
 }
 
-const IPicture* ImageCacheImpl::load
-		(PicMod module, const string& fname, bool alpha)
-{
-	//  Check if the picture is already loaded.
-	PictureMap::iterator it = m_picturemap.find(fname);
-
-	if (it == m_picturemap.end()) {
-		PictureRec rec;
-
-		rec.picture = img_loader_->load(fname, alpha);
-		rec.modules = 0;
-
-		it = m_picturemap.insert(make_pair(fname, rec)).first;
-	}
-
-	it->second.modules |= 1 << module;
-	return it->second.picture;
-}
+}  // namespace
 
 ImageCache* create_image_cache(IImageLoader* loader) {
 	return new ImageCacheImpl(loader);
 }
+

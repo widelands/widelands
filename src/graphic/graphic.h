@@ -37,6 +37,7 @@
 namespace UI {struct ProgressWindow;}
 
 class RenderTarget;
+class SurfaceCache;
 struct Road_Textures;
 struct SDL_Rect;
 struct SDL_Surface;
@@ -116,7 +117,9 @@ struct Graphic : public IGraphic {
 	bool need_update() const;
 	void refresh(bool force = true);
 
+	// NOCOM(#sirver): rename imgcache or make it a function?
 	ImageCache& imgcache() const {return *img_cache_.get();}
+	SurfaceCache& surface_cache() const {return *surface_cache_.get();}
 	void flush_animations();
 
 	void save_png(const IPicture*, StreamWrite*) const;
@@ -186,6 +189,8 @@ protected:
 	boost::scoped_ptr<ImageLoaderImpl> img_loader_;
 	// The cache holding the images.
 	boost::scoped_ptr<ImageCache> img_cache_;
+	// NOCOM(#sirver): document me
+	boost::scoped_ptr<SurfaceCache> surface_cache_;
 
 	// The texture needed to draw roads.
 	boost::scoped_ptr<ImageImpl> pic_road_normal_;

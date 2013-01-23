@@ -29,7 +29,7 @@
  * Interface to a bitmap that can act as the source of a rendering
  * operation.
  */
-// TODO(sirver): rename to Image ?
+// TODO(#sirver): rename to Image ?
 class IPicture : boost::noncopyable {
 public:
 	virtual ~IPicture() {}

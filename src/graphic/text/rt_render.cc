@@ -80,7 +80,7 @@ struct Reference {
 	// There is a small difference...
 	// Rect::contains() excludes the bottom and right edges.
 	// Reference::contains() includes the bottom and right edges
-	// TODO(sirver): check this, likely that it is.
+	// TODO(#sirver): check this, likely that it is.
 	inline bool contains(int16_t x, int16_t y) const {
 		return
 			dim.x <= x && x <= dim.x + static_cast<int32_t>(dim.w) &&

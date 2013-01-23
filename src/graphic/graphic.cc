@@ -17,7 +17,7 @@
  *
  */
 
-// TODO(sirver): rt test cases are broken again
+// TODO(#sirver): rt test cases are broken again
 
 #include <config.h>
 
@@ -38,6 +38,7 @@
 #include "log.h"
 #include "logic/roadtype.h"
 #include "logic/widelands_fileread.h"
+#include "surface_cache.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"
@@ -78,7 +79,8 @@ Graphic::Graphic
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	img_loader_(new ImageLoaderImpl(*this)),
-	img_cache_(create_image_cache(img_loader_.get()))
+	img_cache_(create_image_cache(img_loader_.get())),
+	surface_cache_(new SurfaceCache())
 {
 	// Initialize the table used to create grayed pictures
 	for
@@ -493,7 +495,7 @@ const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, ui
 		zoomed = placed;
 	}
 
-	// TODO(sirver): all of these functions could be implemented in a lazy caching ImageImpl
+	// TODO(#sirver): all of these functions could be implemented in a lazy caching ImageImpl
 	return convert_sdl_surface_to_picture(zoomed);
 }
 

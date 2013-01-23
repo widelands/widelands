@@ -25,7 +25,7 @@
 class Surface;
 class IBlitableSurface;
 
-// TODO(sirver): document this. Internal to graphic
+// TODO(#sirver): document this. Internal to graphic
 class ImageImpl : public IPicture {
 public:
 	virtual ~ImageImpl() {}
@@ -36,7 +36,7 @@ public:
 	virtual Surface& surface() const = 0;
 };
 
-// TODO(sirver): takes ownership of surf
+// TODO(#sirver): takes ownership of surf
 ImageImpl* new_picture(IBlitableSurface* surf);
 
 #endif /* end of include guard: PICTURE_IMPL_H */

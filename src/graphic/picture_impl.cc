@@ -22,9 +22,9 @@
 
 #include "picture_impl.h"
 
-// TODO(sirver): the name of the file is wrong!
+// TODO(#sirver): the name of the file is wrong!
 namespace {
-// TODO(sirver): document this
+// TODO(#sirver): document this
 class SimpleImageImpl : public ImageImpl {
 public:
 	explicit SimpleImageImpl(Surface* surf) : surf_(surf) {}
