@@ -40,8 +40,8 @@ const int WARE_MENU_INFO_SIZE = 12;
 
 AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
-	 int32_t const x, int32_t const y,
-	 Widelands::Tribe_Descr const & tribe,
+	 const int32_t x, const int32_t y,
+	 const Widelands::Tribe_Descr & tribe,
 	 Widelands::WareWorker type,
 	 bool selectable,
 	 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
@@ -91,9 +91,9 @@ AbstractWaresDisplay::AbstractWaresDisplay
 
 
 bool AbstractWaresDisplay::handle_mousemove
-	(Uint8, int32_t const x, int32_t const y, int32_t, int32_t)
+	(uint8_t, const int32_t x, const int32_t y, int32_t, int32_t)
 {
-	Widelands::Ware_Index const index = ware_at_point(x, y);
+	const Widelands::Ware_Index index = ware_at_point(x, y);
 
 	m_curware.set_text
 		(index ?
@@ -108,7 +108,7 @@ bool AbstractWaresDisplay::handle_mousemove
 }
 
 bool AbstractWaresDisplay::handle_mousepress
-	(Uint8 btn, int32_t const x, int32_t const y)
+	(uint8_t btn, const int32_t x, const int32_t y)
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::Ware_Index ware = ware_at_point(x, y);
@@ -186,7 +186,7 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 	}
 }
 
-Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() const
+const Widelands::Tribe_Descr::WaresOrder & AbstractWaresDisplay::icons_order() const
 {
 	switch (m_type) {
 		case Widelands::wwWARE:
@@ -199,7 +199,7 @@ Widelands::Tribe_Descr::WaresOrder const & AbstractWaresDisplay::icons_order() c
 	throw wexception("Invalid m_type %d", m_type);
 }
 
-Widelands::Tribe_Descr::WaresOrderCoords const & AbstractWaresDisplay::icons_order_coords() const
+const Widelands::Tribe_Descr::WaresOrderCoords & AbstractWaresDisplay::icons_order_coords() const
 {
 	switch (m_type) {
 		case Widelands::wwWARE:
@@ -313,14 +313,14 @@ bool AbstractWaresDisplay::ware_hidden(Widelands::Ware_Index ware) {
 
 WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,
-	 int32_t const x, int32_t const y,
-	 Widelands::Tribe_Descr const & tribe,
+	 const int32_t x, const int32_t y,
+	 const Widelands::Tribe_Descr & tribe,
 	 Widelands::WareWorker type,
 	 bool selectable)
 : AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}
 
-RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::Ware_Index const /* ware */) {
+RGBColor AbstractWaresDisplay::info_color_for_ware(const Widelands::Ware_Index /* ware */) {
 	return RGBColor(0, 0, 0);
 }
 
@@ -345,7 +345,7 @@ add a ware list to be displayed in this WaresDisplay
 ===============
 */
 void WaresDisplay::add_warelist
-	(Widelands::WareList const & wares)
+	(const Widelands::WareList & wares)
 {
 	//  If you register something twice, it is counted twice. Not my problem.
 	m_warelists.push_back(&wares);
@@ -355,11 +355,11 @@ void WaresDisplay::add_warelist
 }
 
 
-std::string waremap_to_string
-		(Widelands::Tribe_Descr const & tribe,
-		 std::map<Widelands::Ware_Index, uint8_t> const & map)
+std::string waremap_to_richtext
+		(const Widelands::Tribe_Descr & tribe,
+		 const std::map<Widelands::Ware_Index, uint8_t> & map)
 {
-	std::string ret("");
+	std::string ret;
 
 	std::map<Widelands::Ware_Index, uint8_t>::const_iterator c;
 
@@ -373,7 +373,7 @@ std::string waremap_to_string
 				ret += "<sub width=30 padding=2><p align=center>"
 						 "<sub width=26 background=454545><p align=center><img src=\""
 						+ tribe.get_ware_descr(c->first)->icon_name()
-						+ "\"></p></sub><sub width=26 background=010101><p><font size=9>"
+						+ "\"></p></sub><sub width=26 background=000000><p><font size=9>"
 						+ boost::lexical_cast<std::string>(static_cast<int32_t>(c->second))
 						+ "</font></p></sub></p></sub>";
 			}

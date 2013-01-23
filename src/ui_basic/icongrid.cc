@@ -33,12 +33,12 @@ namespace UI {
 struct IconGridButton : public Button {
 	IconGridButton
 		(Icon_Grid         & parent,
-		 std::string const & name,
+		 const std::string & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const IPicture* background_pictute_id,
 		 const IPicture* foreground_picture_id,
 		 const uint32_t callback_argument_id,
-		 std::string const & tooltip_text)
+		 const std::string & tooltip_text)
 		:
 		Button
 			(&parent, name, x, y, w, h, background_pictute_id,
@@ -52,7 +52,7 @@ private:
 	Icon_Grid & m_icongrid;
 	const uint32_t _callback_argument_id;
 
-	void handle_mousein(bool const inside) {
+	void handle_mousein(const bool inside) {
 		if (inside) {
 			m_icongrid.mousein(_callback_argument_id);
 		} else {
@@ -67,8 +67,8 @@ private:
 */
 Icon_Grid::Icon_Grid
 	(Panel  * const parent,
-	 int32_t const x, int32_t const y, int32_t const cellw, int32_t const cellh,
-	 int32_t  const cols)
+	 const int32_t x, const int32_t y, const int32_t cellw, const int32_t cellh,
+	 const int32_t cols)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_columns        (cols),
@@ -82,8 +82,8 @@ Icon_Grid::Icon_Grid
  * Returns the index of the newly added icon.
 */
 int32_t Icon_Grid::add
-	(std::string const & name, const IPicture* pic,
-	 void * const data, std::string const & tooltip_text)
+	(const std::string & name, const IPicture* pic,
+	 void * data, const std::string & tooltip_text)
 {
 	Item it;
 
@@ -92,7 +92,7 @@ int32_t Icon_Grid::add
 	m_items.push_back(it);
 
 	// resize
-	int32_t const rows = (m_items.size() + m_columns - 1) / m_columns;
+	const int32_t rows = (m_items.size() + m_columns - 1) / m_columns;
 
 	if (rows <= 1) {
 		set_desired_size(m_cell_width * m_columns, m_cell_height);
@@ -123,7 +123,7 @@ void Icon_Grid::clicked_button(uint32_t idx) {
 /**
  * Returns the user-defined data of the icon with the given index.
 */
-void * Icon_Grid::get_data(int32_t const idx)
+void * Icon_Grid::get_data(const int32_t idx)
 {
 	assert(static_cast<uint32_t>(idx) < m_items.size());
 

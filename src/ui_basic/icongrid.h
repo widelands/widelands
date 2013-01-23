@@ -49,7 +49,7 @@ struct Icon_Grid : public Panel {
 		(std::string const & name,
 		 const IPicture* pic,
 		 void              * data,
-		 std::string const & tooltip_text = std::string());
+		 const std::string & tooltip_text = "");
 	void * get_data(int32_t idx);
 
 private:

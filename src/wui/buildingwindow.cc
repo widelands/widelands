@@ -35,9 +35,9 @@
 
 #include "buildingwindow.h"
 
-static char const * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
-static char const * pic_dismantle          = "pics/menu_bld_dismantle.png";
-static char const * pic_debug              = "pics/menu_debug.png";
+static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
+static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";
+static const char * pic_debug              = "pics/menu_debug.png";
 
 
 Building_Window::Building_Window
@@ -156,15 +156,15 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	m_capscache = building().get_playercaps();
 	m_capscache_player_number = igbase().player_number();
 
-	Widelands::Player const & owner = building().owner();
-	Widelands::Player_Number const owner_number = owner.player_number();
-	bool const can_see = igbase().can_see(owner_number);
-	bool const can_act = igbase().can_act(owner_number);
+	const Widelands::Player & owner = building().owner();
+	const Widelands::Player_Number owner_number = owner.player_number();
+	const bool can_see = igbase().can_see(owner_number);
+	const bool can_act = igbase().can_act(owner_number);
 
 	bool requires_destruction_separator = false;
 	if (can_act) {
-		if (upcast(Widelands::ProductionSite const, productionsite, &m_building))
-			if (not dynamic_cast<Widelands::MilitarySite const *>(productionsite)) {
+		if (upcast(const Widelands::ProductionSite, productionsite, &m_building))
+			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
 					new UI::Button
@@ -188,12 +188,12 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			}
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
-			std::set<Widelands::Building_Index> const & enhancements =
+			const std::set<Widelands::Building_Index> & enhancements =
 				m_building.enhancements();
-			Widelands::Tribe_Descr const & tribe  = owner.tribe();
+			const Widelands::Tribe_Descr & tribe  = owner.tribe();
 			container_iterate_const(std::set<Widelands::Building_Index>, enhancements, i)
 				if (owner.is_building_type_allowed(*i.current)) {
-					Widelands::Building_Descr const & building_descr =
+					const Widelands::Building_Descr & building_descr =
 						*tribe.get_building_descr(*i.current);
 					char buffer[128];
 					snprintf
@@ -204,8 +204,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 							 building_descr.get_buildicon(),
-							 std::string(buffer) + "<br>" + _("Buildcosts:") + "<br>" +
-								 waremap_to_string(tribe, building_descr.buildcost())); //  button id = building id
+							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
+								 waremap_to_richtext(tribe, building_descr.buildcost())); //  button id = building id
 					enhancebtn->sigclicked.connect
 						(boost::bind
 							(&Building_Window::act_enhance,
@@ -242,8 +242,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
 					 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 					 g_gr->imgcache().load(PicMod_Game, pic_dismantle),
-					 std::string(_("Dismantle")) + "<br>" + _("Returns:") + "<br>" +
-						 waremap_to_string(owner.tribe(), wares));
+					 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
+						 waremap_to_richtext(owner.tribe(), wares));
 			dismantlebtn->sigclicked.connect(boost::bind(&Building_Window::act_dismantle, boost::ref(*this)));
 			capsbuttons->add
 				(dismantlebtn,
@@ -372,7 +372,7 @@ void Building_Window::act_dismantle()
 }
 
 void Building_Window::act_start_stop() {
-	if (dynamic_cast<Widelands::ProductionSite const *>(&m_building))
+	if (dynamic_cast<const Widelands::ProductionSite *>(&m_building))
 		igbase().game().send_player_start_stop_building (m_building);
 
 	die();
@@ -383,7 +383,7 @@ void Building_Window::act_start_stop() {
 Callback for enhancement request
 ===============
 */
-void Building_Window::act_enhance(Widelands::Building_Index const id)
+void Building_Window::act_enhance(const Widelands::Building_Index id)
 {
 	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
@@ -417,12 +417,12 @@ void Building_Window::show_workarea()
 	if (m_workarea_job_id)
 		return; // already shown, nothing to be done
 
-	Workarea_Info const & workarea_info = m_building.descr().m_workarea_info;
+	const Workarea_Info & workarea_info = m_building.descr().m_workarea_info;
 	if (workarea_info.size() == 0)
 		return; // building has no workarea
 
 	Widelands::Map & map =
-		ref_cast<Interactive_GameBase const, UI::Panel>(*get_parent()).egbase()
+		ref_cast<const Interactive_GameBase, UI::Panel>(*get_parent()).egbase()
 		.map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	m_workarea_job_id = overlay_manager.get_a_job_id();
@@ -460,7 +460,7 @@ void Building_Window::hide_workarea()
 {
 	if (m_workarea_job_id) {
 		Widelands::Map & map =
-			ref_cast<Interactive_GameBase const, UI::Panel>(*get_parent()).egbase()
+			ref_cast<const Interactive_GameBase, UI::Panel>(*get_parent()).egbase()
 			.map();
 		Overlay_Manager & overlay_manager = map.overlay_manager();
 		overlay_manager.remove_overlay(m_workarea_job_id);
