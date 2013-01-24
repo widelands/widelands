@@ -116,14 +116,11 @@ int32_t RealFSImpl::FindFiles
 	std::string buf;
 	struct _finddata_t c_file;
 	long hFile;
-	int32_t count;
 
 	if (path.size())
 		buf = m_directory + '\\' + path + '\\' + pattern;
 	else
 		buf = m_directory + '\\' + pattern;
-
-	count = 0;
 
 	hFile = _findfirst(buf.c_str(), &c_file);
 	if (hFile == -1)
