@@ -539,7 +539,7 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 		nrscanned++;
 	}
 
-	molog("Found %zu fields for the dock\n", dock.size());
+	molog("Found %lu fields for the dock\n", static_cast<long unsigned int>(dock.size()));
 
 	m_portdock = new PortDock;
 	m_portdock->set_owner(get_owner());

@@ -649,7 +649,9 @@ void Fleet::log_general_info(Editor_Game_Base const & egbase)
 {
 	Map_Object::log_general_info(egbase);
 
-	molog("%zu ships and %zu ports\n", m_ships.size(), m_ports.size());
+	molog
+		("%lu ships and %lu ports\n",  static_cast<long unsigned int>(m_ships.size()),
+		 static_cast<long unsigned int>(m_ports.size()));
 }
 
 #define FLEET_SAVEGAME_VERSION 3
