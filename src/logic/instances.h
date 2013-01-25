@@ -31,6 +31,7 @@
 
 #include "ref_cast.h"
 
+#include "log.h"
 #include "cmd_queue.h"
 
 

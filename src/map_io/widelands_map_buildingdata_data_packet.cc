@@ -989,10 +989,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 statistics_string_length)
 						log
 							("WARNING: productionsite statistics string can be at "
-							 "most %lu characters but a loaded building has the "
-							 "string \"%s\" of length %lu\n",
-							 static_cast<long unsigned int>(sizeof(productionsite.m_statistics_buffer) - 1),
-							 statistics_string, static_cast<long unsigned int>(statistics_string_length));
+							 "most %"PRIuS" characters but a loaded building has the "
+							 "string \"%s\" of length %"PRIuS"\n",
+							 sizeof(productionsite.m_statistics_buffer) - 1,
+							 statistics_string, statistics_string_length);
 				}
 				if (4 <= packet_version) {
 					char const * const result_string        = fr.CString();
@@ -1007,10 +1007,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						 result_string_length)
 						log
 							("WARNING: productionsite result string can be at "
-							 "most %lu characters but a loaded building has the "
-							 "string \"%s\" of length %lu\n",
-							 static_cast<long unsigned int>(sizeof(productionsite.m_result_buffer) - 1),
-							 result_string, static_cast<long unsigned int>(result_string_length));
+							 "most %"PRIuS" characters but a loaded building has the "
+							 "string \"%s\" of length %"PRIuS"\n",
+							 sizeof(productionsite.m_result_buffer) - 1,
+							 result_string, result_string_length);
 				}
 			}
 		} else

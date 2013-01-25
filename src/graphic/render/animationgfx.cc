@@ -220,9 +220,8 @@ end:
 
 	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
 		throw wexception
-			("animation has %lu frames but playercolor mask has only %lu frames",
-			 static_cast<long unsigned int>(m_plrframes[0].size()),
-			 static_cast<long unsigned int>(m_pcmasks.size()));
+			("animation has %"PRIuS" frames but playercolor mask has only %"PRIuS" frames",
+			 m_plrframes[0].size(), m_pcmasks.size());
 #ifdef VALIDATE_ANIMATION_CROPPING
 	if
 		(char const * const where =
