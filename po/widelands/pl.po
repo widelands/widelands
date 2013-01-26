@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-01-06 16:48+0100\n"
+"POT-Creation-Date: 2013-01-25 08:23+0100\n"
 "PO-Revision-Date: 2013-01-19 10:02+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-01-20 04:31+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-26 04:38+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -30,11 +30,11 @@ msgstr "Mapa z Bluebyte Settlers II. Brak komentarza!"
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr "BŁĄD: Nie można się połączyć z metaserwerem (powód powyżej)!\n"
 
-#: ../../src/wlapplication.cc:930 ../../src/wlapplication.cc:939
+#: ../../src/wlapplication.cc:948 ../../src/wlapplication.cc:957
 msgid "could not find the path of the main executable"
 msgstr "nie można znaleźć ścieżki do głównego pliku wykonywalnego"
 
-#: ../../src/wlapplication.cc:1064
+#: ../../src/wlapplication.cc:1082
 msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
@@ -42,7 +42,7 @@ msgstr ""
 "Czekano 5 sekund na zamknięcie audio. Z powodu problemów zamknięto "
 "Widelands. Zaktualizuj sterownik dźwięku i/lub SDL aby naprawić ten problem\n"
 
-#: ../../src/wlapplication.cc:1200
+#: ../../src/wlapplication.cc:1218
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -52,15 +52,15 @@ msgstr ""
 "Przepraszamy, brak debugowania podwójnej instancji na WIN32.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1203
+#: ../../src/wlapplication.cc:1221
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double jest zablokowane. To nie jest debugowy build!"
 
-#: ../../src/wlapplication.cc:1324
+#: ../../src/wlapplication.cc:1342
 msgid "This is Widelands-"
 msgstr "Widelands -"
 
-#: ../../src/wlapplication.cc:1326
+#: ../../src/wlapplication.cc:1344
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -68,7 +68,7 @@ msgstr ""
 "Składnia: widelands <opcja0>=<wartość0> ...<opcjaN>=<wartośćN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1327
+#: ../../src/wlapplication.cc:1345
 msgid ""
 "Options:\n"
 "\n"
@@ -76,7 +76,7 @@ msgstr ""
 "Opcje:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1331
+#: ../../src/wlapplication.cc:1349
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -97,11 +97,11 @@ msgstr ""
 " --homedir=ŚCIEŻKA Używa danego folderu dla plików konfiguracji, zapisów\n"
 "                      gry i powtórek z Widelands\n"
 
-#: ../../src/wlapplication.cc:1339
+#: ../../src/wlapplication.cc:1357
 msgid "                      Default is ~/.widelands\n"
 msgstr "                      Domyślne to ~/.widelands\n"
 
-#: ../../src/wlapplication.cc:1342
+#: ../../src/wlapplication.cc:1360
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback\n"
@@ -134,7 +134,7 @@ msgstr ""
 "                      Usuwa powtórki po wyznaczonej liczbie dni\n"
 "                      Jeśli ustawione na 0, powtórki nie są usuwane\n"
 
-#: ../../src/wlapplication.cc:1357
+#: ../../src/wlapplication.cc:1375
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -163,13 +163,13 @@ msgstr ""
 " --scenario=NAZWAPLIKU Ładuje przy starcie mapę NAZWAPLIKU jako scenariusz.\n"
 " --loadgame=NAZWAPLIKU Ładuje przy starcie zapis gry NAZWAPLIKU.\n"
 
-#: ../../src/wlapplication.cc:1370
+#: ../../src/wlapplication.cc:1388
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
 " --dedicated=NAZWAPLIKU Uruchamia serwer dedykowany z mapą NAZWAPLIKU\n"
 
-#: ../../src/wlapplication.cc:1373
+#: ../../src/wlapplication.cc:1391
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -206,7 +206,7 @@ msgstr ""
 " --xres=[...]         Szerokość okna w pikselach.\n"
 " --yres=[...]         Wysokość okna w pikselach.\n"
 
-#: ../../src/wlapplication.cc:1393
+#: ../../src/wlapplication.cc:1411
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
@@ -214,7 +214,7 @@ msgstr ""
 " --opengl=[0|1]\n"
 "                      Włącza renderowanie OpenGL\n"
 
-#: ../../src/wlapplication.cc:1398
+#: ../../src/wlapplication.cc:1416
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -255,7 +255,7 @@ msgstr ""
 "                      tylko, gdy okno zachodzi na panel.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1422
+#: ../../src/wlapplication.cc:1440
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -266,15 +266,15 @@ msgstr ""
 "                      rozgrywki sieciowej)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1426
+#: ../../src/wlapplication.cc:1444
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr " --verbose Pokazuj pełne wiadomości z debugowania.\n"
 
-#: ../../src/wlapplication.cc:1427
+#: ../../src/wlapplication.cc:1445
 msgid " --help               Show this help\n"
 msgstr " --help             Wyświetlenie tego opisu\n"
 
-#: ../../src/wlapplication.cc:1431
+#: ../../src/wlapplication.cc:1449
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -288,19 +288,19 @@ msgstr ""
 "Mamy nadzieję, że gra Ci się podoba!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1581
+#: ../../src/wlapplication.cc:1602
 msgid "Warning: "
 msgstr "Ostrzeżenie: "
 
-#: ../../src/wlapplication.cc:1585
+#: ../../src/wlapplication.cc:1606
 msgid "Game data error"
 msgstr "Błąd danych w grze"
 
-#: ../../src/wlapplication.cc:1590
+#: ../../src/wlapplication.cc:1611
 msgid "Unexpected error during the game"
 msgstr "W trakcie gry wystąpił nieoczekiwany błąd"
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1615
 msgid ""
 "\n"
 "\n"
@@ -314,7 +314,7 @@ msgstr ""
 "znajdziesz w standardowym wyjściu (w Windowsie plik stdout.txt). Używasz "
 "wersji "
 
-#: ../../src/wlapplication.cc:1600
+#: ../../src/wlapplication.cc:1621
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -326,24 +326,24 @@ msgstr ""
 "Widelands stara się zapisać grę w przypadku wystąpienia błędu. Czasami, choć "
 "nie zawsze, możliwe jest jej wczytanie i kontynuowanie rozgrywki.\n"
 
-#: ../../src/wlapplication.cc:1711
+#: ../../src/wlapplication.cc:1732
 msgid "The address of the game server is invalid"
 msgstr "Adres serwera jest niepoprawny"
 
-#: ../../src/wlapplication.cc:1815 ../../src/network/nethost.cc:2050
+#: ../../src/wlapplication.cc:1836 ../../src/network/nethost.cc:2050
 msgid "Player"
 msgstr "Gracz"
 
-#: ../../src/wlapplication.cc:2005 ../../src/network/netclient.cc:198
+#: ../../src/wlapplication.cc:2026 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:837
 msgid "Preparing game"
 msgstr "Przygotowywanie gry"
 
-#: ../../src/wlapplication.cc:2116
+#: ../../src/wlapplication.cc:2137
 msgid "End of replay"
 msgstr "Koniec powtórki"
 
-#: ../../src/wlapplication.cc:2118
+#: ../../src/wlapplication.cc:2139
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -351,7 +351,7 @@ msgstr ""
 "Koniec powtórki, gra została wstrzymana. Możesz wznowić grę i kontynuować "
 "oglądanie."
 
-#: ../../src/wlapplication.cc:2201 ../../src/logic/game.cc:371
+#: ../../src/wlapplication.cc:2222 ../../src/logic/game.cc:371
 #: ../../src/logic/game.cc:411
 msgid "Loading..."
 msgstr "Wczytywanie..."
@@ -577,7 +577,7 @@ msgstr "Produkcja"
 
 #: ../../src/writeHTML.cc:777 ../../src/wui/general_statistics_menu.cc:182
 #: ../../src/wui/productionsitewindow.cc:88 ../../src/wui/transport_ui.cc:65
-#: ../../src/wui/warehousewindow.cc:205
+#: ../../src/wui/warehousewindow.cc:204
 msgid "Workers"
 msgstr "Pracownicy"
 
@@ -658,11 +658,11 @@ msgstr "Typy surowców"
 #: ../../src/logic/playercommand.cc:287 ../../src/logic/playercommand.cc:374
 #: ../../src/logic/playercommand.cc:434 ../../src/logic/playercommand.cc:491
 #: ../../src/logic/playercommand.cc:552 ../../src/logic/playercommand.cc:688
-#: ../../src/logic/playercommand.cc:879 ../../src/logic/playercommand.cc:943
-#: ../../src/logic/playercommand.cc:1002 ../../src/logic/playercommand.cc:1066
-#: ../../src/logic/playercommand.cc:1128 ../../src/logic/playercommand.cc:1198
-#: ../../src/logic/playercommand.cc:1270 ../../src/logic/playercommand.cc:1368
-#: ../../src/logic/playercommand.cc:1447 ../../src/logic/playercommand.cc:1491
+#: ../../src/logic/playercommand.cc:879 ../../src/logic/playercommand.cc:942
+#: ../../src/logic/playercommand.cc:1001 ../../src/logic/playercommand.cc:1064
+#: ../../src/logic/playercommand.cc:1126 ../../src/logic/playercommand.cc:1196
+#: ../../src/logic/playercommand.cc:1268 ../../src/logic/playercommand.cc:1366
+#: ../../src/logic/playercommand.cc:1444 ../../src/logic/playercommand.cc:1488
 #: ../../src/logic/replay.cc:117 ../../src/logic/requirements.cc:50
 #: ../../src/logic/ship.cc:533
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:137
@@ -1312,8 +1312,8 @@ msgstr "wznów/zatrzymaj budowę: %s"
 msgid "enhance building: %s"
 msgstr "rozbuduj budynek: %s"
 
-#: ../../src/logic/playercommand.cc:680 ../../src/logic/playercommand.cc:1187
-#: ../../src/logic/playercommand.cc:1265
+#: ../../src/logic/playercommand.cc:680 ../../src/logic/playercommand.cc:1185
+#: ../../src/logic/playercommand.cc:1263
 #, c-format
 msgid "site %u: %s"
 msgstr "teren %u: %s"
@@ -1333,48 +1333,48 @@ msgstr "zmień wartość docelową: %s"
 msgid "set ware target quantity: %s"
 msgstr "ustal docelową ilość towaru: %s"
 
-#: ../../src/logic/playercommand.cc:1004
+#: ../../src/logic/playercommand.cc:1003
 #, c-format
 msgid "set worker target quantity: %s"
 msgstr "ustal docelową liczbę robotników: %s"
 
-#: ../../src/logic/playercommand.cc:1130
+#: ../../src/logic/playercommand.cc:1128
 #, c-format
 msgid "change training options: %s"
 msgstr "zmień opcje treningu: %s"
 
-#: ../../src/logic/playercommand.cc:1194
+#: ../../src/logic/playercommand.cc:1192
 #, c-format
 msgid "soldier %u: %s"
 msgstr "żołnierz %u: %s"
 
-#: ../../src/logic/playercommand.cc:1200
+#: ../../src/logic/playercommand.cc:1198
 #, c-format
 msgid "drop soldier: %s"
 msgstr "odrzuć żołnierza: %s"
 
-#: ../../src/logic/playercommand.cc:1272
+#: ../../src/logic/playercommand.cc:1270
 #, c-format
 msgid "change soldier capacity: %s"
 msgstr "zmień liczbę żołnierzy: %s"
 
-#: ../../src/logic/playercommand.cc:1438
+#: ../../src/logic/playercommand.cc:1435
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
 msgstr ""
 "odwrót: wartość przekracza dozwolony zakres. Otrzymano %u, oczekiwano %u-%u"
 
-#: ../../src/logic/playercommand.cc:1449
+#: ../../src/logic/playercommand.cc:1446
 #, c-format
 msgid "change military config: %s"
 msgstr "zmień ustawienia wojskowe: %s"
 
-#: ../../src/logic/playercommand.cc:1488
+#: ../../src/logic/playercommand.cc:1485
 #, c-format
 msgid "(player %u): message id is null"
 msgstr "(gracz %u): id wiadomości jest pusty"
 
-#: ../../src/logic/playercommand.cc:1493
+#: ../../src/logic/playercommand.cc:1490
 #, c-format
 msgid "player message: %s"
 msgstr "wiadomość gracza: %s"
@@ -2990,7 +2990,7 @@ msgid "Select a saved game"
 msgstr "Wybierz zapisaną grę"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:85 ../../src/ui_fsmenu/options.cc:56
-#: ../../src/ui_fsmenu/options.cc:392
+#: ../../src/ui_fsmenu/options.cc:422
 #: ../../src/wui/game_main_menu_save_game.cc:95 ../../src/wui/login_box.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:129
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
@@ -3526,11 +3526,11 @@ msgstr "Otwarty"
 msgid "Closed"
 msgstr "Zamknięty"
 
-#: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:451
 msgid "Advanced Options"
 msgstr "Zaawansowane opcje"
 
-#: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:397
+#: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:427
 msgid "Apply"
 msgstr "Zastosuj"
 
@@ -3618,64 +3618,64 @@ msgstr "Nigdy"
 msgid "1 day"
 msgstr "1 dzień"
 
-#: ../../src/ui_fsmenu/options.cc:275
+#: ../../src/ui_fsmenu/options.cc:285
 #, c-format
 msgid "%ix%i %i bit"
 msgstr "%ix%i %i-bitowa"
 
-#: ../../src/ui_fsmenu/options.cc:297
+#: ../../src/ui_fsmenu/options.cc:307
 msgid "Try system language"
 msgstr "Użyj języka systemu"
 
-#: ../../src/ui_fsmenu/options.cc:403
+#: ../../src/ui_fsmenu/options.cc:433
 msgid "x"
 msgstr "x"
 
-#: ../../src/ui_fsmenu/options.cc:408 ../../src/ui_fsmenu/options.cc:413
+#: ../../src/ui_fsmenu/options.cc:438 ../../src/ui_fsmenu/options.cc:443
 msgid "px."
 msgstr "piks."
 
-#: ../../src/ui_fsmenu/options.cc:432
+#: ../../src/ui_fsmenu/options.cc:462
 msgid "Main menu font:"
 msgstr "Czcionka menu głównego:"
 
-#: ../../src/ui_fsmenu/options.cc:438
+#: ../../src/ui_fsmenu/options.cc:468
 msgid "Play a sound at message arrival."
 msgstr "Odtwarzaj dźwięk po otrzymaniu wiadomości"
 
-#: ../../src/ui_fsmenu/options.cc:446
+#: ../../src/ui_fsmenu/options.cc:476
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr "Nie pakuj plików danych Widelands (mapy, zapisy gry i powtórki)."
 
-#: ../../src/ui_fsmenu/options.cc:451
+#: ../../src/ui_fsmenu/options.cc:481
 msgid "Speed of a new game:"
 msgstr "Prędkość nowej gry:"
 
-#: ../../src/ui_fsmenu/options.cc:455
+#: ../../src/ui_fsmenu/options.cc:485
 msgid "Distance for windows to snap to other panels:"
 msgstr "Odległość dla okien do przyciągnięcia do innych paneli:"
 
-#: ../../src/ui_fsmenu/options.cc:459
+#: ../../src/ui_fsmenu/options.cc:489
 msgid "Distance for windows to snap to borders:"
 msgstr "Odległość dla okien do przyciągnięcia do brzegów ekranu:"
 
-#: ../../src/ui_fsmenu/options.cc:465
+#: ../../src/ui_fsmenu/options.cc:495
 msgid "Remove Syncstream dumps on startup"
 msgstr "Usuwa backup Syncstream przy starcie"
 
-#: ../../src/ui_fsmenu/options.cc:471
+#: ../../src/ui_fsmenu/options.cc:501
 msgid "OpenGL rendering"
 msgstr "Renderowanie OpenGL"
 
-#: ../../src/ui_fsmenu/options.cc:476
+#: ../../src/ui_fsmenu/options.cc:506
 msgid "Show in game chat with transparent background"
 msgstr "Pokaż przezroczyste okno czatu"
 
-#: ../../src/ui_fsmenu/options.cc:515
+#: ../../src/ui_fsmenu/options.cc:545
 msgid "Pause"
 msgstr "Wstrzymaj"
 
-#: ../../src/ui_fsmenu/options.cc:526
+#: ../../src/ui_fsmenu/options.cc:556
 msgid "DejaVuSerif (Default)"
 msgstr "DejaVuSerif (domyślna)"
 
@@ -3795,44 +3795,52 @@ msgstr "Ulepszyć budynek?"
 msgid "Do you really want to enhance this %s?"
 msgstr "Czy na pewno chcesz ulepszyć %s?"
 
-#: ../../src/wui/buildingwindow.cc:187
+#: ../../src/wui/buildingwindow.cc:176
 msgid "Continue"
 msgstr "Kontynuuj"
 
-#: ../../src/wui/buildingwindow.cc:187
+#: ../../src/wui/buildingwindow.cc:176
 msgid "Stop"
 msgstr "Stop"
 
-#: ../../src/wui/buildingwindow.cc:212
+#: ../../src/wui/buildingwindow.cc:201
 #, c-format
 msgid "Enhance to %s"
 msgstr "Ulepsz do %s"
 
-#: ../../src/wui/buildingwindow.cc:246
+#: ../../src/wui/buildingwindow.cc:207 ../../src/wui/fieldaction.cc:114
+msgid "Construction costs:"
+msgstr ""
+
+#: ../../src/wui/buildingwindow.cc:227
 msgid "Destroy"
 msgstr "Zniszcz"
 
-#: ../../src/wui/buildingwindow.cc:270
+#: ../../src/wui/buildingwindow.cc:245
 msgid "Dismantle"
 msgstr "Rozbierz"
 
-#: ../../src/wui/buildingwindow.cc:296 ../../src/wui/buildingwindow.cc:528
+#: ../../src/wui/buildingwindow.cc:245
+msgid "Returns:"
+msgstr ""
+
+#: ../../src/wui/buildingwindow.cc:271 ../../src/wui/buildingwindow.cc:480
 msgid "Hide workarea"
 msgstr "Ukryj zasięg"
 
-#: ../../src/wui/buildingwindow.cc:311
+#: ../../src/wui/buildingwindow.cc:286
 msgid "Debug"
 msgstr "Debug"
 
-#: ../../src/wui/buildingwindow.cc:322
+#: ../../src/wui/buildingwindow.cc:297
 msgid "Center view on this"
 msgstr "Wycentruj na tym widok"
 
-#: ../../src/wui/buildingwindow.cc:340
+#: ../../src/wui/buildingwindow.cc:315
 msgid "Help"
 msgstr "Pomoc"
 
-#: ../../src/wui/buildingwindow.cc:531
+#: ../../src/wui/buildingwindow.cc:483
 msgid "Show workarea"
 msgstr "Wyświetl zasięg"
 
@@ -3853,95 +3861,95 @@ msgstr "Zużywane typy towarów"
 msgid "Quantity"
 msgstr "Ilość"
 
-#: ../../src/wui/fieldaction.cc:247
+#: ../../src/wui/fieldaction.cc:250
 msgid "Build small buildings"
 msgstr "Małe budynki"
 
-#: ../../src/wui/fieldaction.cc:248
+#: ../../src/wui/fieldaction.cc:251
 msgid "Build medium buildings"
 msgstr "Średnie budynki"
 
-#: ../../src/wui/fieldaction.cc:249
+#: ../../src/wui/fieldaction.cc:252
 msgid "Build large buildings"
 msgstr "Duże budynki"
 
-#: ../../src/wui/fieldaction.cc:250
+#: ../../src/wui/fieldaction.cc:253
 msgid "Build port buildings"
 msgstr "Buduj budynki portowe"
 
-#: ../../src/wui/fieldaction.cc:282
+#: ../../src/wui/fieldaction.cc:285
 msgid "Action"
 msgstr "Akcja"
 
-#: ../../src/wui/fieldaction.cc:383
+#: ../../src/wui/fieldaction.cc:377
 msgid "Build road"
 msgstr "Buduj drogę"
 
-#: ../../src/wui/fieldaction.cc:395
+#: ../../src/wui/fieldaction.cc:389
 msgid "Destroy this flag"
 msgstr "Zniszcz flagę"
 
-#: ../../src/wui/fieldaction.cc:403
+#: ../../src/wui/fieldaction.cc:397
 msgid "Configure economy"
 msgstr "Konfiguruj gospodarkę"
 
-#: ../../src/wui/fieldaction.cc:409
+#: ../../src/wui/fieldaction.cc:403
 msgid "Send geologist to explore site"
 msgstr "Wyślij geologa do zbadania miejsca"
 
-#: ../../src/wui/fieldaction.cc:427
+#: ../../src/wui/fieldaction.cc:421
 msgid "Put a flag"
 msgstr "Postaw flagę"
 
-#: ../../src/wui/fieldaction.cc:434
+#: ../../src/wui/fieldaction.cc:428
 msgid "Destroy a road"
 msgstr "Zniszcz drogę"
 
-#: ../../src/wui/fieldaction.cc:452
+#: ../../src/wui/fieldaction.cc:446
 msgid "Watch field in a separate window"
 msgstr "Obserwuj miejsce w oddzielnym oknie"
 
-#: ../../src/wui/fieldaction.cc:457
+#: ../../src/wui/fieldaction.cc:451
 msgid "Toggle building statistics display"
 msgstr "Statystyki budynków"
 
-#: ../../src/wui/fieldaction.cc:463
+#: ../../src/wui/fieldaction.cc:457
 msgid "Toggle building label display"
 msgstr "Etykiety budynków"
 
-#: ../../src/wui/fieldaction.cc:470
+#: ../../src/wui/fieldaction.cc:464
 msgid "Debug window"
 msgstr "Okno debugu"
 
-#: ../../src/wui/fieldaction.cc:477 ../../src/wui/fieldaction.cc:625
+#: ../../src/wui/fieldaction.cc:471 ../../src/wui/fieldaction.cc:619
 msgid "Build roads"
 msgstr "Drogi"
 
-#: ../../src/wui/fieldaction.cc:479 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:473 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr "Obserwacja"
 
-#: ../../src/wui/fieldaction.cc:487
+#: ../../src/wui/fieldaction.cc:481
 msgid "Military settings"
 msgstr "Opcje wojskowe"
 
-#: ../../src/wui/fieldaction.cc:513
+#: ../../src/wui/fieldaction.cc:507
 msgid "Start attack"
 msgstr "Rozpocznij atak"
 
-#: ../../src/wui/fieldaction.cc:518
+#: ../../src/wui/fieldaction.cc:512
 msgid "Attack"
 msgstr "Atak"
 
-#: ../../src/wui/fieldaction.cc:602
+#: ../../src/wui/fieldaction.cc:596
 msgid "Build mines"
 msgstr "Kopalnie"
 
-#: ../../src/wui/fieldaction.cc:618
+#: ../../src/wui/fieldaction.cc:612
 msgid "Build flag"
 msgstr "Postaw flagę"
 
-#: ../../src/wui/fieldaction.cc:622
+#: ../../src/wui/fieldaction.cc:616
 msgid "Cancel road"
 msgstr "Anuluj budowę drogi"
 
@@ -4151,7 +4159,7 @@ msgstr "Budynki"
 
 #: ../../src/wui/general_statistics_menu.cc:198
 #: ../../src/wui/productionsitewindow.cc:66 ../../src/wui/transport_ui.cc:60
-#: ../../src/wui/warehousewindow.cc:195
+#: ../../src/wui/warehousewindow.cc:194
 msgid "Wares"
 msgstr "Towary"
 
@@ -4183,21 +4191,21 @@ msgstr "Stracone budynki cywilne"
 msgid "Military"
 msgstr "Wojsko"
 
-#: ../../src/wui/interactive_base.cc:275
+#: ../../src/wui/interactive_base.cc:245
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/wui/interactive_base.cc:278
+#: ../../src/wui/interactive_base.cc:248
 msgid "PAUSE"
 msgstr "PAUZA"
 
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:268
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/wui/interactive_base.cc:303
+#: ../../src/wui/interactive_base.cc:273
 msgid "NO GAME CONTROLLER"
 msgstr "BRAK KONTROLERA GRY"
 
@@ -4216,7 +4224,7 @@ msgid "Objectives"
 msgstr "Zadania"
 
 #: ../../src/wui/interactive_player.cc:126
-#: ../../src/wui/interactive_player.cc:287
+#: ../../src/wui/interactive_player.cc:291
 msgid "Messages"
 msgstr "Wiadomości"
 
@@ -4224,7 +4232,7 @@ msgstr "Wiadomości"
 msgid "Ware help"
 msgstr "Informacje o towarach"
 
-#: ../../src/wui/interactive_player.cc:295
+#: ../../src/wui/interactive_player.cc:299
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -4477,27 +4485,27 @@ msgstr "Zużycie"
 msgid "Economy Health"
 msgstr "Stan ekonomii"
 
-#: ../../src/wui/warehousewindow.cc:132
+#: ../../src/wui/warehousewindow.cc:131
 msgid "Normal policy"
 msgstr "Normalna polityka"
 
-#: ../../src/wui/warehousewindow.cc:133
+#: ../../src/wui/warehousewindow.cc:132
 msgid "Preferably store selected wares here"
 msgstr "Preferuj gromadzenie zaznaczonych towarów tutaj"
 
-#: ../../src/wui/warehousewindow.cc:134
+#: ../../src/wui/warehousewindow.cc:133
 msgid "Do not store selected wares here"
 msgstr "Nie gromadź zaznaczonych towarów tutaj"
 
-#: ../../src/wui/warehousewindow.cc:135
+#: ../../src/wui/warehousewindow.cc:134
 msgid "Remove selected wares from here"
 msgstr "Usuń stądzaznaczone towary"
 
-#: ../../src/wui/warehousewindow.cc:212
+#: ../../src/wui/warehousewindow.cc:211
 msgid "Wares in dock"
 msgstr "Towary w doku"
 
-#: ../../src/wui/warehousewindow.cc:217
+#: ../../src/wui/warehousewindow.cc:216
 msgid "Workers in dock"
 msgstr "Pracownicy w doku"
 

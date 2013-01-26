@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-01-06 16:48+0100\n"
+"POT-Creation-Date: 2013-01-25 08:23+0100\n"
 "PO-Revision-Date: 2013-01-03 00:21+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-01-07 04:37+0000\n"
-"X-Generator: Launchpad (build 16402)\n"
+"X-Launchpad-Export-Date: 2013-01-26 04:38+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -33,17 +33,17 @@ msgstr "Mapa de Settlers II © Bluebyte. ¡Sin comentario definido!"
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr "ERROR: ¡No se pudo conectar con el metaservidor (razón arriba)!\n"
 
-#: ../../src/wlapplication.cc:930 ../../src/wlapplication.cc:939
+#: ../../src/wlapplication.cc:948 ../../src/wlapplication.cc:957
 msgid "could not find the path of the main executable"
 msgstr "No se ha podido encontrar la ruta del ejecutable principal"
 
-#: ../../src/wlapplication.cc:1064
+#: ../../src/wlapplication.cc:1082
 msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1200
+#: ../../src/wlapplication.cc:1218
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -53,15 +53,15 @@ msgstr ""
 "Lo siento, no se permite depuración de doble instancia en WIN32.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1203
+#: ../../src/wlapplication.cc:1221
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double está deshabilitado. Esta no es una versión de depuración."
 
-#: ../../src/wlapplication.cc:1324
+#: ../../src/wlapplication.cc:1342
 msgid "This is Widelands-"
 msgstr "Esto es Widelands-"
 
-#: ../../src/wlapplication.cc:1326
+#: ../../src/wlapplication.cc:1344
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
@@ -69,7 +69,7 @@ msgstr ""
 "Uso: widelands <opción0>=<valor0> ... <opciónN>=<valorN>\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1327
+#: ../../src/wlapplication.cc:1345
 msgid ""
 "Options:\n"
 "\n"
@@ -77,7 +77,7 @@ msgstr ""
 "Opciones:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1331
+#: ../../src/wlapplication.cc:1349
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -99,11 +99,11 @@ msgstr ""
 " --homedir=NOMBRE_DIRECTORIO Nombre del directorio para los archivos de\n"
 "                      configuración, partidas guardadas y repeticiones\n"
 
-#: ../../src/wlapplication.cc:1339
+#: ../../src/wlapplication.cc:1357
 msgid "                      Default is ~/.widelands\n"
 msgstr "                      Por defecto es ~/.widelands\n"
 
-#: ../../src/wlapplication.cc:1342
+#: ../../src/wlapplication.cc:1360
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback\n"
@@ -140,7 +140,7 @@ msgstr ""
 "indicados.\n"
 "                      Si es 0, las repeticiones no se borrarán.\n"
 
-#: ../../src/wlapplication.cc:1357
+#: ../../src/wlapplication.cc:1375
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -170,14 +170,14 @@ msgstr ""
 "                      FILENAME como mapa de escenario.\n"
 " --loadgame=FILENAME Lee la partida guardada FILENAME.\n"
 
-#: ../../src/wlapplication.cc:1370
+#: ../../src/wlapplication.cc:1388
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
 " --Dedicated=NOMBREDEARCHIVO Inicia un servidor dedicado con NOMBREDEARCHIVO "
 "como mapa\n"
 
-#: ../../src/wlapplication.cc:1373
+#: ../../src/wlapplication.cc:1391
 msgid ""
 " --speed_of_new_game  The speed that the new game will run at\n"
 "                      when started, with factor 1000 (0 is pause,\n"
@@ -215,7 +215,7 @@ msgstr ""
 " --xres=[...]         Ancho de la ventana en píxeles.\n"
 " --yres=[...]         Alto de la ventana en píxeles.\n"
 
-#: ../../src/wlapplication.cc:1393
+#: ../../src/wlapplication.cc:1411
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
@@ -223,7 +223,7 @@ msgstr ""
 " --opengl=[0|1]\n"
 "                      Permite renderizado con OpenGL\n"
 
-#: ../../src/wlapplication.cc:1398
+#: ../../src/wlapplication.cc:1416
 msgid ""
 "\n"
 "Options for the internal window manager:\n"
@@ -265,7 +265,7 @@ msgstr ""
 "                      panel.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1422
+#: ../../src/wlapplication.cc:1440
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
@@ -275,15 +275,15 @@ msgstr ""
 "                       juego en red)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1426
+#: ../../src/wlapplication.cc:1444
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr " --verbose            Activar mostrar mensajes de depuración.\n"
 
-#: ../../src/wlapplication.cc:1427
+#: ../../src/wlapplication.cc:1445
 msgid " --help               Show this help\n"
 msgstr " --help                Muestra esta ayuda\n"
 
-#: ../../src/wlapplication.cc:1431
+#: ../../src/wlapplication.cc:1449
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -297,19 +297,19 @@ msgstr ""
 "¡Esperamos que disfrutes el juego!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1581
+#: ../../src/wlapplication.cc:1602
 msgid "Warning: "
 msgstr "Aviso: "
 
-#: ../../src/wlapplication.cc:1585
+#: ../../src/wlapplication.cc:1606
 msgid "Game data error"
 msgstr "Error de datos de juego"
 
-#: ../../src/wlapplication.cc:1590
+#: ../../src/wlapplication.cc:1611
 msgid "Unexpected error during the game"
 msgstr "Error inesperado durante el juego"
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1615
 msgid ""
 "\n"
 "\n"
@@ -323,7 +323,7 @@ msgstr ""
 "Encontrarás mensajes relacionados al error en la salida estándar (stdout.txt "
 "en Windows). Estás utilizando la versión "
 
-#: ../../src/wlapplication.cc:1600
+#: ../../src/wlapplication.cc:1621
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -336,24 +336,24 @@ msgstr ""
 "A veces es posible - aunque no siempre - cargar el juego y continuar "
 "jugando.\n"
 
-#: ../../src/wlapplication.cc:1711
+#: ../../src/wlapplication.cc:1732
 msgid "The address of the game server is invalid"
 msgstr "La dirección del servidor del juego no es válida."
 
-#: ../../src/wlapplication.cc:1815 ../../src/network/nethost.cc:2050
+#: ../../src/wlapplication.cc:1836 ../../src/network/nethost.cc:2050
 msgid "Player"
 msgstr "Jugador"
 
-#: ../../src/wlapplication.cc:2005 ../../src/network/netclient.cc:198
+#: ../../src/wlapplication.cc:2026 ../../src/network/netclient.cc:198
 #: ../../src/network/nethost.cc:837
 msgid "Preparing game"
 msgstr "Preparando juego"
 
-#: ../../src/wlapplication.cc:2116
+#: ../../src/wlapplication.cc:2137
 msgid "End of replay"
 msgstr "Fin de la repetición"
 
-#: ../../src/wlapplication.cc:2118
+#: ../../src/wlapplication.cc:2139
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
@@ -361,7 +361,7 @@ msgstr ""
 "Se ha alcanzado el final de la repetición y el juego se ha pausado. Puedes "
 "quitar la pausa del juego y continuar mirando si quieres."
 
-#: ../../src/wlapplication.cc:2201 ../../src/logic/game.cc:371
+#: ../../src/wlapplication.cc:2222 ../../src/logic/game.cc:371
 #: ../../src/logic/game.cc:411
 msgid "Loading..."
 msgstr "Cargando..."
@@ -588,7 +588,7 @@ msgstr "Producción"
 
 #: ../../src/writeHTML.cc:777 ../../src/wui/general_statistics_menu.cc:182
 #: ../../src/wui/productionsitewindow.cc:88 ../../src/wui/transport_ui.cc:65
-#: ../../src/wui/warehousewindow.cc:205
+#: ../../src/wui/warehousewindow.cc:204
 msgid "Workers"
 msgstr "Trabajadores"
 
@@ -669,11 +669,11 @@ msgstr "Tipos de Mercancías"
 #: ../../src/logic/playercommand.cc:287 ../../src/logic/playercommand.cc:374
 #: ../../src/logic/playercommand.cc:434 ../../src/logic/playercommand.cc:491
 #: ../../src/logic/playercommand.cc:552 ../../src/logic/playercommand.cc:688
-#: ../../src/logic/playercommand.cc:879 ../../src/logic/playercommand.cc:943
-#: ../../src/logic/playercommand.cc:1002 ../../src/logic/playercommand.cc:1066
-#: ../../src/logic/playercommand.cc:1128 ../../src/logic/playercommand.cc:1198
-#: ../../src/logic/playercommand.cc:1270 ../../src/logic/playercommand.cc:1368
-#: ../../src/logic/playercommand.cc:1447 ../../src/logic/playercommand.cc:1491
+#: ../../src/logic/playercommand.cc:879 ../../src/logic/playercommand.cc:942
+#: ../../src/logic/playercommand.cc:1001 ../../src/logic/playercommand.cc:1064
+#: ../../src/logic/playercommand.cc:1126 ../../src/logic/playercommand.cc:1196
+#: ../../src/logic/playercommand.cc:1268 ../../src/logic/playercommand.cc:1366
+#: ../../src/logic/playercommand.cc:1444 ../../src/logic/playercommand.cc:1488
 #: ../../src/logic/replay.cc:117 ../../src/logic/requirements.cc:50
 #: ../../src/logic/ship.cc:533
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:137
@@ -1320,8 +1320,8 @@ msgstr "continuar/parar construccion: %s"
 msgid "enhance building: %s"
 msgstr "mejorar construcción: %s"
 
-#: ../../src/logic/playercommand.cc:680 ../../src/logic/playercommand.cc:1187
-#: ../../src/logic/playercommand.cc:1265
+#: ../../src/logic/playercommand.cc:680 ../../src/logic/playercommand.cc:1185
+#: ../../src/logic/playercommand.cc:1263
 #, c-format
 msgid "site %u: %s"
 msgstr "lugar %u: %s"
@@ -1341,47 +1341,47 @@ msgstr "cambiar objetivo de cantidad: %s"
 msgid "set ware target quantity: %s"
 msgstr "Establecer objetivo de cantidad de mercancía: %s"
 
-#: ../../src/logic/playercommand.cc:1004
+#: ../../src/logic/playercommand.cc:1003
 #, c-format
 msgid "set worker target quantity: %s"
 msgstr "Elegir objetivo de cantidad de trabajadores: %s"
 
-#: ../../src/logic/playercommand.cc:1130
+#: ../../src/logic/playercommand.cc:1128
 #, c-format
 msgid "change training options: %s"
 msgstr "cambiar opciones de entrenamiento: %s"
 
-#: ../../src/logic/playercommand.cc:1194
+#: ../../src/logic/playercommand.cc:1192
 #, c-format
 msgid "soldier %u: %s"
 msgstr "soldado %u: %s"
 
-#: ../../src/logic/playercommand.cc:1200
+#: ../../src/logic/playercommand.cc:1198
 #, c-format
 msgid "drop soldier: %s"
 msgstr "sacar soldado: %s"
 
-#: ../../src/logic/playercommand.cc:1272
+#: ../../src/logic/playercommand.cc:1270
 #, c-format
 msgid "change soldier capacity: %s"
 msgstr "cambiar capacidad de soldados: %s"
 
-#: ../../src/logic/playercommand.cc:1438
+#: ../../src/logic/playercommand.cc:1435
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
 msgstr "retirada: valor fuera de rango. Recibido %u esperado %u-%u"
 
-#: ../../src/logic/playercommand.cc:1449
+#: ../../src/logic/playercommand.cc:1446
 #, c-format
 msgid "change military config: %s"
 msgstr "Cambiar configuración militar: %s"
 
-#: ../../src/logic/playercommand.cc:1488
+#: ../../src/logic/playercommand.cc:1485
 #, c-format
 msgid "(player %u): message id is null"
 msgstr "(jugador %u): el id del mensaje es nulo"
 
-#: ../../src/logic/playercommand.cc:1493
+#: ../../src/logic/playercommand.cc:1490
 #, c-format
 msgid "player message: %s"
 msgstr "mensage del jugador: %s"
@@ -3009,7 +3009,7 @@ msgid "Select a saved game"
 msgstr "Selecciona una partida guardada"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:85 ../../src/ui_fsmenu/options.cc:56
-#: ../../src/ui_fsmenu/options.cc:392
+#: ../../src/ui_fsmenu/options.cc:422
 #: ../../src/wui/game_main_menu_save_game.cc:95 ../../src/wui/login_box.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:129
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
@@ -3552,11 +3552,11 @@ msgstr "Abierto"
 msgid "Closed"
 msgstr "Cerrado"
 
-#: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:451
 msgid "Advanced Options"
 msgstr "Opciones Avanzadas"
 
-#: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:397
+#: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:427
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -3644,65 +3644,65 @@ msgstr "Nunca"
 msgid "1 day"
 msgstr "1 día"
 
-#: ../../src/ui_fsmenu/options.cc:275
+#: ../../src/ui_fsmenu/options.cc:285
 #, c-format
 msgid "%ix%i %i bit"
 msgstr "%ix%i %i pieza"
 
-#: ../../src/ui_fsmenu/options.cc:297
+#: ../../src/ui_fsmenu/options.cc:307
 msgid "Try system language"
 msgstr "Intentar el sistema de lenguaje"
 
-#: ../../src/ui_fsmenu/options.cc:403
+#: ../../src/ui_fsmenu/options.cc:433
 msgid "x"
 msgstr "x"
 
-#: ../../src/ui_fsmenu/options.cc:408 ../../src/ui_fsmenu/options.cc:413
+#: ../../src/ui_fsmenu/options.cc:438 ../../src/ui_fsmenu/options.cc:443
 msgid "px."
 msgstr "px."
 
-#: ../../src/ui_fsmenu/options.cc:432
+#: ../../src/ui_fsmenu/options.cc:462
 msgid "Main menu font:"
 msgstr "Fuente del menú principal:"
 
-#: ../../src/ui_fsmenu/options.cc:438
+#: ../../src/ui_fsmenu/options.cc:468
 msgid "Play a sound at message arrival."
 msgstr "Reproducir sonido al llegar mensaje"
 
-#: ../../src/ui_fsmenu/options.cc:446
+#: ../../src/ui_fsmenu/options.cc:476
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 "No comprimir con zip archivos de datos (maps, replays and savegames)."
 
-#: ../../src/ui_fsmenu/options.cc:451
+#: ../../src/ui_fsmenu/options.cc:481
 msgid "Speed of a new game:"
 msgstr "Rapidez del nuevo juego:"
 
-#: ../../src/ui_fsmenu/options.cc:455
+#: ../../src/ui_fsmenu/options.cc:485
 msgid "Distance for windows to snap to other panels:"
 msgstr "Distancia para que las ventanas se alineen con otros paneles"
 
-#: ../../src/ui_fsmenu/options.cc:459
+#: ../../src/ui_fsmenu/options.cc:489
 msgid "Distance for windows to snap to borders:"
 msgstr "Distancia para que las ventanas se alineen con los bordes"
 
-#: ../../src/ui_fsmenu/options.cc:465
+#: ../../src/ui_fsmenu/options.cc:495
 msgid "Remove Syncstream dumps on startup"
 msgstr "Elimina volcados de sincronización al inicio"
 
-#: ../../src/ui_fsmenu/options.cc:471
+#: ../../src/ui_fsmenu/options.cc:501
 msgid "OpenGL rendering"
 msgstr "Renderizado OpenGL"
 
-#: ../../src/ui_fsmenu/options.cc:476
+#: ../../src/ui_fsmenu/options.cc:506
 msgid "Show in game chat with transparent background"
 msgstr "Mostrar en el chat con fondo transparente"
 
-#: ../../src/ui_fsmenu/options.cc:515
+#: ../../src/ui_fsmenu/options.cc:545
 msgid "Pause"
 msgstr "Pausa"
 
-#: ../../src/ui_fsmenu/options.cc:526
+#: ../../src/ui_fsmenu/options.cc:556
 msgid "DejaVuSerif (Default)"
 msgstr "DejaVuSerif (Por defecto)"
 
@@ -3822,44 +3822,52 @@ msgstr ""
 msgid "Do you really want to enhance this %s?"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:187
+#: ../../src/wui/buildingwindow.cc:176
 msgid "Continue"
 msgstr "Continuar"
 
-#: ../../src/wui/buildingwindow.cc:187
+#: ../../src/wui/buildingwindow.cc:176
 msgid "Stop"
 msgstr "Detener"
 
-#: ../../src/wui/buildingwindow.cc:212
+#: ../../src/wui/buildingwindow.cc:201
 #, c-format
 msgid "Enhance to %s"
 msgstr "Mejorar a %s"
 
-#: ../../src/wui/buildingwindow.cc:246
+#: ../../src/wui/buildingwindow.cc:207 ../../src/wui/fieldaction.cc:114
+msgid "Construction costs:"
+msgstr ""
+
+#: ../../src/wui/buildingwindow.cc:227
 msgid "Destroy"
 msgstr "Destruir"
 
-#: ../../src/wui/buildingwindow.cc:270
+#: ../../src/wui/buildingwindow.cc:245
 msgid "Dismantle"
 msgstr "Desmantelar"
 
-#: ../../src/wui/buildingwindow.cc:296 ../../src/wui/buildingwindow.cc:528
+#: ../../src/wui/buildingwindow.cc:245
+msgid "Returns:"
+msgstr ""
+
+#: ../../src/wui/buildingwindow.cc:271 ../../src/wui/buildingwindow.cc:480
 msgid "Hide workarea"
 msgstr "Esconder área de trabajo"
 
-#: ../../src/wui/buildingwindow.cc:311
+#: ../../src/wui/buildingwindow.cc:286
 msgid "Debug"
 msgstr "Depurar"
 
-#: ../../src/wui/buildingwindow.cc:322
+#: ../../src/wui/buildingwindow.cc:297
 msgid "Center view on this"
 msgstr "Centrar vista en esto"
 
-#: ../../src/wui/buildingwindow.cc:340
+#: ../../src/wui/buildingwindow.cc:315
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../../src/wui/buildingwindow.cc:531
+#: ../../src/wui/buildingwindow.cc:483
 msgid "Show workarea"
 msgstr "Mostrar área de trabajo"
 
@@ -3880,95 +3888,95 @@ msgstr "Tipo(s) de mercancías consumidas"
 msgid "Quantity"
 msgstr "Cantidad"
 
-#: ../../src/wui/fieldaction.cc:247
+#: ../../src/wui/fieldaction.cc:250
 msgid "Build small buildings"
 msgstr "Construcciones pequeñas"
 
-#: ../../src/wui/fieldaction.cc:248
+#: ../../src/wui/fieldaction.cc:251
 msgid "Build medium buildings"
 msgstr "Construcciones medianas"
 
-#: ../../src/wui/fieldaction.cc:249
+#: ../../src/wui/fieldaction.cc:252
 msgid "Build large buildings"
 msgstr "Construcciones grandes"
 
-#: ../../src/wui/fieldaction.cc:250
+#: ../../src/wui/fieldaction.cc:253
 msgid "Build port buildings"
 msgstr "Construir edificios portuarios"
 
-#: ../../src/wui/fieldaction.cc:282
+#: ../../src/wui/fieldaction.cc:285
 msgid "Action"
 msgstr "Acciones"
 
-#: ../../src/wui/fieldaction.cc:383
+#: ../../src/wui/fieldaction.cc:377
 msgid "Build road"
 msgstr "Trazar caminos"
 
-#: ../../src/wui/fieldaction.cc:395
+#: ../../src/wui/fieldaction.cc:389
 msgid "Destroy this flag"
 msgstr "Destruir esta bandera"
 
-#: ../../src/wui/fieldaction.cc:403
+#: ../../src/wui/fieldaction.cc:397
 msgid "Configure economy"
 msgstr "Configurar economía"
 
-#: ../../src/wui/fieldaction.cc:409
+#: ../../src/wui/fieldaction.cc:403
 msgid "Send geologist to explore site"
 msgstr "Enviar geólogo a explorar la zona"
 
-#: ../../src/wui/fieldaction.cc:427
+#: ../../src/wui/fieldaction.cc:421
 msgid "Put a flag"
 msgstr "Colocar una bandera"
 
-#: ../../src/wui/fieldaction.cc:434
+#: ../../src/wui/fieldaction.cc:428
 msgid "Destroy a road"
 msgstr "Destruir un camino"
 
-#: ../../src/wui/fieldaction.cc:452
+#: ../../src/wui/fieldaction.cc:446
 msgid "Watch field in a separate window"
 msgstr "Observar zona en una ventana independiente"
 
-#: ../../src/wui/fieldaction.cc:457
+#: ../../src/wui/fieldaction.cc:451
 msgid "Toggle building statistics display"
 msgstr "Mostrar u ocultar estadísticas de construcciones"
 
-#: ../../src/wui/fieldaction.cc:463
+#: ../../src/wui/fieldaction.cc:457
 msgid "Toggle building label display"
 msgstr "Mostrar u ocultar nombres de construcciones"
 
-#: ../../src/wui/fieldaction.cc:470
+#: ../../src/wui/fieldaction.cc:464
 msgid "Debug window"
 msgstr "Ventana de depuración"
 
-#: ../../src/wui/fieldaction.cc:477 ../../src/wui/fieldaction.cc:625
+#: ../../src/wui/fieldaction.cc:471 ../../src/wui/fieldaction.cc:619
 msgid "Build roads"
 msgstr "Trazar caminos"
 
-#: ../../src/wui/fieldaction.cc:479 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:473 ../../src/wui/watchwindow.cc:100
 msgid "Watch"
 msgstr "Ver"
 
-#: ../../src/wui/fieldaction.cc:487
+#: ../../src/wui/fieldaction.cc:481
 msgid "Military settings"
 msgstr "Ajustes militares"
 
-#: ../../src/wui/fieldaction.cc:513
+#: ../../src/wui/fieldaction.cc:507
 msgid "Start attack"
 msgstr "Comenzar ataque"
 
-#: ../../src/wui/fieldaction.cc:518
+#: ../../src/wui/fieldaction.cc:512
 msgid "Attack"
 msgstr "Ataque"
 
-#: ../../src/wui/fieldaction.cc:602
+#: ../../src/wui/fieldaction.cc:596
 msgid "Build mines"
 msgstr "Construir minas"
 
-#: ../../src/wui/fieldaction.cc:618
+#: ../../src/wui/fieldaction.cc:612
 msgid "Build flag"
 msgstr "Colocar bandera"
 
-#: ../../src/wui/fieldaction.cc:622
+#: ../../src/wui/fieldaction.cc:616
 msgid "Cancel road"
 msgstr "Cancelar"
 
@@ -4178,7 +4186,7 @@ msgstr "Construcciones"
 
 #: ../../src/wui/general_statistics_menu.cc:198
 #: ../../src/wui/productionsitewindow.cc:66 ../../src/wui/transport_ui.cc:60
-#: ../../src/wui/warehousewindow.cc:195
+#: ../../src/wui/warehousewindow.cc:194
 msgid "Wares"
 msgstr "Mercancías"
 
@@ -4210,21 +4218,21 @@ msgstr "Edificios civiles perdidos"
 msgid "Military"
 msgstr "Milicia"
 
-#: ../../src/wui/interactive_base.cc:275
+#: ../../src/wui/interactive_base.cc:245
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/wui/interactive_base.cc:278
+#: ../../src/wui/interactive_base.cc:248
 msgid "PAUSE"
 msgstr "PAUSA"
 
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:268
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/wui/interactive_base.cc:303
+#: ../../src/wui/interactive_base.cc:273
 msgid "NO GAME CONTROLLER"
 msgstr "FALTA CONTROLADOR DE JUEGOS"
 
@@ -4243,7 +4251,7 @@ msgid "Objectives"
 msgstr "Objetivos"
 
 #: ../../src/wui/interactive_player.cc:126
-#: ../../src/wui/interactive_player.cc:287
+#: ../../src/wui/interactive_player.cc:291
 msgid "Messages"
 msgstr "Mensajes"
 
@@ -4251,7 +4259,7 @@ msgstr "Mensajes"
 msgid "Ware help"
 msgstr "Ayuda de mercancías"
 
-#: ../../src/wui/interactive_player.cc:295
+#: ../../src/wui/interactive_player.cc:299
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -4505,27 +4513,27 @@ msgstr "Consumo"
 msgid "Economy Health"
 msgstr "Salud Económica"
 
-#: ../../src/wui/warehousewindow.cc:132
+#: ../../src/wui/warehousewindow.cc:131
 msgid "Normal policy"
 msgstr "Política normal"
 
-#: ../../src/wui/warehousewindow.cc:133
+#: ../../src/wui/warehousewindow.cc:132
 msgid "Preferably store selected wares here"
 msgstr "Preferiblemente almacén selecciono mercancías aquí"
 
-#: ../../src/wui/warehousewindow.cc:134
+#: ../../src/wui/warehousewindow.cc:133
 msgid "Do not store selected wares here"
 msgstr "No almacenar mercancías seleccionadas aquí"
 
-#: ../../src/wui/warehousewindow.cc:135
+#: ../../src/wui/warehousewindow.cc:134
 msgid "Remove selected wares from here"
 msgstr "Eliminar mercancías seleccionadas desde aquí"
 
-#: ../../src/wui/warehousewindow.cc:212
+#: ../../src/wui/warehousewindow.cc:211
 msgid "Wares in dock"
 msgstr "Mercancía almacenada"
 
-#: ../../src/wui/warehousewindow.cc:217
+#: ../../src/wui/warehousewindow.cc:216
 msgid "Workers in dock"
 msgstr "Trabajadores  en paro"
 
