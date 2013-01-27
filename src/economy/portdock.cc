@@ -350,7 +350,7 @@ void PortDock::log_general_info(Editor_Game_Base const & egbase)
 
 	Coords pos(m_warehouse->get_position());
 	molog
-		("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %zu\n",
+		("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %"PRIuS"\n",
 		 m_warehouse ? m_warehouse->serial() : 0, pos.x, pos.y,
 		 m_fleet ? m_fleet->serial() : 0,
 		 m_need_ship ? "true" : "false",

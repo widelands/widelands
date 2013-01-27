@@ -116,14 +116,11 @@ int32_t RealFSImpl::FindFiles
 	std::string buf;
 	struct _finddata_t c_file;
 	long hFile;
-	int32_t count;
 
 	if (path.size())
 		buf = m_directory + '\\' + path + '\\' + pattern;
 	else
 		buf = m_directory + '\\' + pattern;
-
-	count = 0;
 
 	hFile = _findfirst(buf.c_str(), &c_file);
 	if (hFile == -1)
@@ -406,9 +403,8 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		if (size and (result != 1)) {
 			assert(false);
 			throw wexception
-				("RealFSImpl::Load: read failed for %s (%s) with size %lu",
-				 fname.c_str(), fullname.c_str(),
-				 static_cast<long unsigned int>(size));
+				("RealFSImpl::Load: read failed for %s (%s) with size %"PRIuS"",
+				 fname.c_str(), fullname.c_str(), size);
 		}
 		static_cast<int8_t *>(data)[size] = 0;
 
