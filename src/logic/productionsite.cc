@@ -590,6 +590,9 @@ void ProductionSite::act(Game & game, uint32_t const data)
 {
 	Building::act(game, data);
 
+	if (!can_start_working())
+		return;
+
 	if
 		(m_program_timer
 		 and
