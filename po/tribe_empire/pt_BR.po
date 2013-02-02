@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-25 07:23+0000\n"
-"PO-Revision-Date: 2012-05-25 23:21+0000\n"
-"Last-Translator: Tomas Abril <Unknown>\n"
+"PO-Revision-Date: 2013-02-02 01:53+0000\n"
+"Last-Translator: Rubens Bueno <rubensvsbueno@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-26 04:36+0000\n"
-"X-Generator: Launchpad (build 16451)\n"
+"X-Launchpad-Export-Date: 2013-02-02 04:30+0000\n"
+"X-Generator: Launchpad (build 16462)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Um Navio pronto para navegar"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -121,7 +121,7 @@ msgstr "Pão"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Pá de pão"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -507,7 +507,7 @@ msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Cuidando de carneiros."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -719,7 +719,7 @@ msgstr "Produz lança"
 
 #: ../../tribes/empire/inn/conf:22
 msgid "Produce meal"
-msgstr ""
+msgstr "Produzir refeição"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
@@ -731,7 +731,7 @@ msgstr "Produz armadura de placas"
 
 #: ../../tribes/empire/inn/conf:21
 msgid "Produce ration"
-msgstr ""
+msgstr "Produzir ração"
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
@@ -1439,7 +1439,7 @@ msgstr "Lã"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr ""
+msgstr "A lã é o pelo do carneiro. As tecelagens o usam para fazer tecido."
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
@@ -1485,7 +1485,7 @@ msgstr "Trabalha nas áreas de cosntrução para criar um novo edifício."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Trabalha no Estaleiro naval onde constrói as novas embarcações"
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
