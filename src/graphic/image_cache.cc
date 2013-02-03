@@ -33,7 +33,22 @@
 
 using namespace std;
 
+
 namespace  {
+
+class NullPicture : public IPicture {
+public:
+	virtual ~NullPicture() {}
+
+	virtual uint32_t get_w() const {return 0;}
+	virtual uint32_t get_h() const {return 0;}
+
+	virtual Surface* surface() const {
+		// This method should never been called. Check for if (pic) before
+		// blitting!
+		assert(0);
+	}
+};
 
 // NOCOM(#sirver): documentation
 class FromDiskImage : public IPicture {
@@ -248,6 +263,11 @@ const IPicture& ImageCacheImpl::new_permanent_picture(const string& hash, Surfac
 }
 
 }  // namespace
+
+static const IPicture& IPicture::Null() {
+	static const NullPicture null;
+	return null;
+}
 
 ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache) {
 	return new ImageCacheImpl(loader, surface_cache);

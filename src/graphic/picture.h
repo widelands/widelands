@@ -30,8 +30,11 @@
  * operation.
  */
 // TODO(#sirver): rename to Image ?
+// NOCOM(#sirver): move to image_cache!
 class IPicture : boost::noncopyable {
 public:
+	static const IPicture& Null();
+
 	virtual ~IPicture() {}
 
 	virtual uint32_t get_w() const = 0;
@@ -40,5 +43,6 @@ public:
 	// NOCOM(#sirver): kinda implementation detaily
 	virtual Surface* surface() const = 0;
 };
+
 
 #endif

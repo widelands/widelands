@@ -24,6 +24,8 @@
 
 #include <boost/utility.hpp>
 
+#include "picture.h"
+
 class IPicture;
 class IImageLoader;
 class Surface;
@@ -59,6 +61,7 @@ public:
 //  of nothing
 // Takes ownership of img_loader, but not of SurfaceCache.
 ImageCache* create_image_cache(IImageLoader*, SurfaceCache*);
+
 
 #endif /* end of include guard: IMAGE_CACHE_H */
 
