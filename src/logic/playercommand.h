@@ -26,6 +26,7 @@
 #include "path.h"
 #include "trainingsite.h"
 #include "warehouse.h"
+#include "worker.h"
 
 namespace Widelands {
 
@@ -234,6 +235,29 @@ struct Cmd_DismantleBuilding:public PlayerCommand {
 	virtual uint8_t id() const {return QUEUE_CMD_DISMANTLEBUILDING;}
 
 	Cmd_DismantleBuilding (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+};
+
+struct Cmd_EvictWorker : public PlayerCommand {
+	Cmd_EvictWorker() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_EvictWorker
+		(int32_t const t, int32_t const p,
+		 Worker & w)
+		: PlayerCommand(t, p), serial(w.serial())
+	{}
+
+	// Write these commands to a file (for savegames)
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_EVICTWORKER;}
+
+	Cmd_EvictWorker (StreamRead &);
 
 	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);

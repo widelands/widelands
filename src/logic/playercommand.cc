@@ -63,6 +63,7 @@ enum {
 	PLCMD_SETSTOCKPOLICY,
 	PLCMD_SETWAREMAXFILL,
 	PLCMD_DISMANTLEBUILDING,
+	PLCMD_EVICTWORKER,
 };
 
 /*** class PlayerCommand ***/
@@ -101,6 +102,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_SETSTOCKPOLICY: return new Cmd_SetStockPolicy(des);
 	case PLCMD_SETWAREMAXFILL: return new Cmd_SetWareMaxFill(des);
 	case PLCMD_DISMANTLEBUILDING: return new Cmd_DismantleBuilding(des);
+	case PLCMD_EVICTWORKER: return new Cmd_EvictWorker(des);
 	default:
 		throw wexception
 			("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -617,6 +619,63 @@ void Cmd_DismantleBuilding::Write
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_DISMANTLEBUILDING_VERSION);
+	// Write base classes
+	PlayerCommand::Write(fw, egbase, mos);
+
+	// Now serial
+	Map_Object const & obj = *egbase.objects().get_object(serial);
+	fw.Unsigned32(mos.get_object_file_index(obj));
+}
+
+/*** Cmd_EvictWorker ***/
+Cmd_EvictWorker::Cmd_EvictWorker (StreamRead& des) :
+	PlayerCommand (0, des.Unsigned8())
+{
+	serial = des.Unsigned32();
+}
+
+void Cmd_EvictWorker::execute (Game & game)
+{
+	upcast(Worker, worker, game.objects().get_object(serial));
+	if (worker && worker->owner().player_number() == sender()) {
+		worker->reset_tasks(game);
+		worker->start_task_gowarehouse(game);
+	}
+}
+
+void Cmd_EvictWorker::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_EVICTWORKER);
+	ser.Unsigned8 (sender());
+	ser.Unsigned32(serial);
+}
+#define PLAYER_CMD_EVICTWORKER_VERSION 1
+void Cmd_EvictWorker::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_EVICTWORKER_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			uint32_t const worker_serial = fr.Unsigned32();
+			try {
+				serial = mol.get<Map_Object>(worker_serial).serial();
+			} catch (_wexception const & e) {
+				throw game_data_error
+					("worker %u: %s", worker_serial, e.what());
+			}
+		} else
+			throw game_data_error
+				("unknown/unhandled version %u", packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error("evict worker: %s", e.what());
+	}
+}
+void Cmd_EvictWorker::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	// First, write version
+	fw.Unsigned16(PLAYER_CMD_EVICTWORKER_VERSION);
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 

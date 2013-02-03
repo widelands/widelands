@@ -85,14 +85,17 @@ ProductionSite_Window::ProductionSite_Window
 			 i < productionsite().descr().nr_working_positions(); ++i)
 			m_worker_table->add(i);
 
-		m_worker_caps->add_inf_space();
-		UI::Button * evict_button = new UI::Button
-						(m_worker_caps, "evict", 0, 0, 34, 34,
-						 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
-						 g_gr->imgcache().load(PicMod_Game, "pics/menu_drop_soldier.png"),
-						 _("Terminate the empoyment of the selected worker"));
-		evict_button->sigclicked.connect(boost::bind(&ProductionSite_Window::evict_worker, boost::ref(*this)));
-		m_worker_caps->add(evict_button, UI::Box::AlignCenter);
+		if (igbase().can_act(building().owner().player_number())) {
+			m_worker_caps->add_inf_space();
+			UI::Button * evict_button = new UI::Button
+							(m_worker_caps, "evict", 0, 0, 34, 34,
+							 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+							 g_gr->imgcache().load(PicMod_Game, "pics/menu_drop_soldier.png"),
+							 _("Terminate the empoyment of the selected worker"));
+			evict_button->sigclicked.connect
+					(boost::bind(&ProductionSite_Window::evict_worker, boost::ref(*this)));
+			m_worker_caps->add(evict_button, UI::Box::AlignCenter);
+		}
 
 		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
 		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
@@ -181,8 +184,7 @@ void ProductionSite_Window::evict_worker() {
 		Widelands::Worker * worker =
 			productionsite().working_positions()[m_worker_table->get_selected()].worker;
 		if (worker) {
-			worker->reset_tasks(igbase().game());
-			worker->start_task_gowarehouse(igbase().game());
+			igbase().game().send_player_evict_worker(*worker);
 		}
 	}
 }

@@ -66,8 +66,8 @@ struct Map_Object_Descr : boost::noncopyable {
 			throw Animation_Nonexistent();
 		return it->second;
 	}
-	uint32_t get_animation(const std::string & name) const {
-		return get_animation(name.c_str());
+	uint32_t get_animation(const std::string & animname) const {
+		return get_animation(animname.c_str());
 	}
 
 	uint32_t main_animation() const throw () {
