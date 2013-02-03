@@ -48,7 +48,6 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	m_total_width     (0),
-	m_max_pic_width   (0),
 	m_fontname        (UI_FONT_NAME),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
 	m_headerheight    (15),

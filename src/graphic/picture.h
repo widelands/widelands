@@ -36,6 +36,9 @@ public:
 
 	virtual uint32_t get_w() const = 0;
 	virtual uint32_t get_h() const = 0;
+
+	// NOCOM(#sirver): kinda implementation detaily
+	virtual Surface* surface() const = 0;
 };
 
 #endif

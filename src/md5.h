@@ -69,9 +69,10 @@ void md5_process_block (void const * buffer, uint32_t len, md5_ctx *);
  *
  * Instances of this class can be copied.
  */
-template <typename Base> struct MD5Checksum : public Base {
+template <typename Base> class MD5Checksum : public Base {
+public:
 	MD5Checksum() {Reset();}
-	explicit MD5Checksum(MD5Checksum const & other)
+	explicit MD5Checksum(const MD5Checksum & other)
 		:
 		Base(),
 		can_handle_data(other.can_handle_data), sum(other.sum), ctx(other.ctx)
@@ -91,7 +92,7 @@ template <typename Base> struct MD5Checksum : public Base {
 	///
 	/// \param data data to compute chksum for
 	/// \param size size of data
-	void Data(void const * const newdata, size_t const size) {
+	void Data(const void * const newdata, const size_t size) {
 		assert(can_handle_data);
 		md5_process_bytes(newdata, size, &ctx);
 	}
@@ -108,7 +109,7 @@ template <typename Base> struct MD5Checksum : public Base {
 	/// before this function.
 	///
 	/// \return a pointer to an array of 16 bytes containing the checksum.
-	md5_checksum const & GetChecksum() const {
+	const md5_checksum & GetChecksum() const {
 		assert(!can_handle_data);
 		return sum;
 	}

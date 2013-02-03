@@ -22,7 +22,6 @@
 #include "container_iterate.h"
 #include "economy.h"
 #include "flag.h"
-#include "portdock.h"
 #include "logic/game.h"
 #include "logic/mapastar.h"
 #include "logic/path.h"
@@ -31,6 +30,7 @@
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
+#include "portdock.h"
 #include "routing_node.h"
 #include "upcast.h"
 
@@ -649,7 +649,8 @@ void Fleet::log_general_info(Editor_Game_Base const & egbase)
 {
 	Map_Object::log_general_info(egbase);
 
-	molog("%zu ships and %zu ports\n", m_ships.size(), m_ports.size());
+	molog
+		("%"PRIuS" ships and %"PRIuS" ports\n",  m_ships.size(), m_ports.size());
 }
 
 #define FLEET_SAVEGAME_VERSION 3

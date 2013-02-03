@@ -18,7 +18,7 @@ FIND_PATH(SDLGFX_INCLUDE_DIR SDL_framerate.h SDL_gfxBlitFunc.h
   HINTS
   $ENV{SDLGFXDIR}
   $ENV{SDLDIR}
-  PATH_SUFFIXES include
+  PATH_SUFFIXES include SDL
   PATHS
   ~/Library/Frameworks
   /Library/Frameworks

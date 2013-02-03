@@ -42,8 +42,8 @@ struct Button;
 ///   1. a reference type,
 ///   2. a pointer type or
 ///   3. uintptr_t.
-template<typename Entry> struct Table {
-
+template<typename Entry> class Table {
+public:
 	struct Entry_Record {
 	};
 
@@ -108,8 +108,8 @@ template<typename Entry> struct Table {
 	virtual bool handle_key(bool down, SDL_keysym code);
 };
 
-template <> struct Table<void *> : public Panel {
-
+template <> class Table<void *> : public Panel {
+public:
 	struct Entry_Record {
 		Entry_Record(void * entry);
 
@@ -132,7 +132,7 @@ template <> struct Table<void *> : public Panel {
 		bool  is_checked(uint8_t col) const;
 
 	private:
-		friend struct Table<void *>;
+		friend class Table<void *>;
 		void *   m_entry;
 		bool     use_clr;
 		RGBColor clr;
@@ -261,7 +261,6 @@ private:
 
 	Columns            m_columns;
 	uint32_t           m_total_width;
-	uint32_t           m_max_pic_width;
 	std::string        m_fontname;
 	uint32_t           m_fontsize;
 	uint32_t           m_headerheight;
@@ -281,8 +280,10 @@ private:
 };
 
 template <typename Entry>
-	struct Table<const Entry * const> : public Table<void *>
+	class Table<const Entry * const> : public Table<void *>
 {
+public:
+
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
@@ -310,7 +311,8 @@ template <typename Entry>
 	}
 };
 
-template <typename Entry> struct Table<Entry * const> : public Table<void *> {
+template <typename Entry> class Table<Entry * const> : public Table<void *> {
+public:
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
@@ -337,7 +339,8 @@ template <typename Entry> struct Table<Entry * const> : public Table<void *> {
 	}
 };
 
-template <typename Entry> struct Table<const Entry &> : public Table<void *> {
+template <typename Entry> class Table<const Entry &> : public Table<void *> {
+public:
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
@@ -367,7 +370,8 @@ template <typename Entry> struct Table<const Entry &> : public Table<void *> {
 	}
 };
 
-template <typename Entry> struct Table<Entry &> : public Table<void *> {
+template <typename Entry> class Table<Entry &> : public Table<void *> {
+public:
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
@@ -396,7 +400,8 @@ template <typename Entry> struct Table<Entry &> : public Table<void *> {
 };
 
 compile_assert(sizeof(void *) == sizeof(uintptr_t));
-template <> struct Table<uintptr_t> : public Table<void *> {
+template <> class Table<uintptr_t> : public Table<void *> {
+public:
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
@@ -424,7 +429,8 @@ template <> struct Table<uintptr_t> : public Table<void *> {
 		return reinterpret_cast<uintptr_t>(Base::get_selected());
 	}
 };
-template <> struct Table<uintptr_t const> : public Table<uintptr_t> {
+template <> class Table<uintptr_t const> : public Table<uintptr_t> {
+public:
 	typedef Table<uintptr_t> Base;
 	Table
 		(Panel * parent,

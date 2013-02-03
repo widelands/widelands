@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,27 +17,26 @@
  *
  */
 
-#ifndef IGRAPHIC_H
-#define IGRAPHIC_H
+#include "surface_cache.h"
 
-#include <string>
-
-#include "iblitable_surface.h"
-
-struct SDL_Surface;
-class ImageCache;
-
-class IGraphic {
-public:
-	virtual ~IGraphic() {};
-
-	// NOCOM(#sirver): this function now has to die (or return surfaces).
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) const = 0;
-	virtual IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const = 0;
-
-	virtual ImageCache& imgcache() const = 0;
+typedef map<string, Surface*> SurfaceMap;
+class SurfaceCache::Impl {
+	SurfaceMap surfaces;
 };
 
+SurfaceCache::SurfaceCache() : p_(new SurfaceCache::Impl()) {}
+SurfaceCache::~SurfaceCache() {}
 
-#endif /* end of include guard: IGRAPHIC_H */
+// NOCOM(#sirver): implement clever hashing here.
+Surface* SurfaceCache::get(const std::string& hash) {
+	ImageMap::const_iterator it = p_.surfaces.find(hash);
+	if (it == p_.surfaces.end()) {
+		return NULL;
+	}
+	return it->second;
+}
+Surface* SurfaceCache::insert(const std::string& hash, Surface* surf) {
+	images_.insert(make_pair(hash, surf));
+	return surf;
+}
 

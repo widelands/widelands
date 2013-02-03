@@ -124,14 +124,15 @@ struct Graphic : public IGraphic {
 
 	void save_png(const IPicture*, StreamWrite*) const;
 
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false) const;
+	virtual Surface* convert_sdl_surface_to_surface(SDL_Surface *, bool alpha = false) const;
 
 	Surface* create_surface(int32_t w, int32_t h, bool alpha = false) const;
 
-	const IPicture* create_grayed_out_pic(const IPicture* pic);
-	const IPicture* create_changed_luminosity_pic
-		(const IPicture* pic, float factor, bool halve_alpha = false);
-	const IPicture* get_resized_picture(const IPicture*, uint32_t w, uint32_t h);
+	// NOCOM(#sirver): those below are now internal to graphic/
+	// NOCOM(#sirver): halve_alpha was defaulted to false
+	Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha);
+	Surface* gray_out_surface(Surface* surf);
+	Surface* resize_surface(Surface*, uint32_t w, uint32_t h);
 
 	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
@@ -183,7 +184,6 @@ protected:
 	bool m_update_fullscreen;
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
-	const IPicture* m_edgetexture;
 
 	/// The class that gets images from disk.
 	boost::scoped_ptr<ImageLoaderImpl> img_loader_;

@@ -28,7 +28,8 @@
 #define FSEL_EUPS_FILENAME "pics/fsel_editor_unset_port_space.png"
 
 /// Unsets a buildspace for ports.
-struct Editor_Unset_Port_Space_Tool : public Editor_Tool {
+class Editor_Unset_Port_Space_Tool : public Editor_Tool {
+public:
 	Editor_Unset_Port_Space_Tool();
 
 	int32_t handle_click_impl
@@ -44,7 +45,8 @@ struct Editor_Unset_Port_Space_Tool : public Editor_Tool {
 
 
 /// Sets a buildspace for ports.
-struct Editor_Set_Port_Space_Tool : public Editor_Tool {
+class Editor_Set_Port_Space_Tool : public Editor_Tool {
+public:
 	Editor_Set_Port_Space_Tool(Editor_Unset_Port_Space_Tool &);
 
 	int32_t handle_click_impl
@@ -56,9 +58,6 @@ struct Editor_Set_Port_Space_Tool : public Editor_Tool {
 		 Editor_Interactive & parent, Editor_Action_Args & args);
 
 	char const * get_sel_impl() const {return FSEL_ESPS_FILENAME;}
-
-private:
-	Editor_Unset_Port_Space_Tool & m_unset_tool;
 };
 
 int32_t Editor_Tool_Set_Port_Space_Callback

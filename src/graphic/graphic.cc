@@ -435,24 +435,21 @@ void Graphic::flush_animations() {
  *
  * Might return same id if dimensions are the same
  */
-const IPicture* Graphic::get_resized_picture(const IPicture* src, uint32_t w, uint32_t h) {
-	if (src->get_w() == w and src->get_h() == h) {
-		return src;
-	}
+Surface* Graphic::resize_surface(Surface* src, uint32_t w, uint32_t h) {
+	assert(w != src->get_w() || h != src->get_h());
 
 	// First step: compute scaling factors
 	Rect srcrect = Rect(Point(0, 0), src->get_w(), src->get_h());
 
 	// Second step: get source material
-	Surface* srcsurf = &static_cast<const ImageImpl*>(src)->surface();
 	SDL_Surface * srcsdl = 0;
 	bool free_source = true;
-	if (upcast(const SDLSurface, sdlsrcsurf, srcsurf)) {
+	if (upcast(const SDLSurface, sdlsrcsurf, src)) {
 		srcsdl = sdlsrcsurf->get_sdl_surface();
 		free_source = false;
 	} else {
 		// This is in OpenGL
-		srcsdl = extract_sdl_surface(*srcsurf, srcrect);
+		srcsdl = extract_sdl_surface(*src, srcrect);
 	}
 
 	// Third step: perform the zoom and placement
@@ -625,12 +622,13 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
  * takes ownership of surf
  * @param alpha if true the surface is created with alpha channel
  * @return the new Surface created from the SDL_Surface
+ * // NOCOM(#sirver): comments
  */
-IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha) const
+Surface* Graphic::convert_sdl_surface_to_surface(SDL_Surface * surf, bool alpha) const
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
-		return new_picture(new GLSurfaceTexture(surf));
+		return new GLSurfaceTexture(surf);
 	}
 #endif
 	SDL_Surface * surface;
@@ -639,7 +637,7 @@ IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha
 	else
 		surface = SDL_DisplayFormat(surf);
 	SDL_FreeSurface(surf);
-	return new_picture(new SDLSurface(*surface));
+	return new SDLSurface(*surface);
 }
 
 /**
@@ -683,28 +681,25 @@ Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha) const
  *
  * @param picture to be grayed out
  * @return the gray version of the picture
+ * // NOCOM(#sirver): docu
  */
-const IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
-{
-	if (!pic)
-		return 0;
+Surface* Graphic::gray_out_surface(Surface* surf) {
+	assert(surf);
 
-	Surface& surf = static_cast<const ImageImpl*>(pic)->surface();
-
-	uint32_t w = surf.get_w();
-	uint32_t h = surf.get_h();
-	const SDL_PixelFormat & origfmt = surf.format();
+	uint32_t w = surf->get_w();
+	uint32_t h = surf->get_h();
+	const SDL_PixelFormat & origfmt = surf->format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
 	const SDL_PixelFormat & destfmt = dest->format();
 
-	surf.lock(Surface::Lock_Normal);
+	surf->lock(Surface::Lock_Normal);
 	dest->lock(Surface::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
 
-			color.set(origfmt, surf.get_pixel(x, y));
+			color.set(origfmt, surf->get_pixel(x, y));
 
 			//  Halve the opacity to give some difference for pictures that are
 			//  grayscale to begin with.
@@ -720,10 +715,10 @@ const IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
 			dest->set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	surf.unlock(Surface::Unlock_NoChange);
+	surf->unlock(Surface::Unlock_NoChange);
 	dest->unlock(Surface::Unlock_Update);
 
-	return new_picture(dest);
+	return dest;
 }
 
 /**
@@ -733,29 +728,26 @@ const IPicture* Graphic::create_grayed_out_pic(const IPicture* pic)
  * @param factor the factor the luminosity should be changed by
  * @param half_alpha whether the opacity should be halved or not
  * @return a new picture with 50% luminosity
+ * // NOCOM(#sirver): docu
  */
-const IPicture* Graphic::create_changed_luminosity_pic
-	(const IPicture* pic, float factor, bool halve_alpha)
+Surface* Graphic::change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha) {
 {
-	if (!pic)
-		return 0;
+	assert(surf);
 
-	Surface& surf = static_cast<const ImageImpl*>(pic)->surface();
-
-	uint32_t w = surf.get_w();
-	uint32_t h = surf.get_h();
-	const SDL_PixelFormat & origfmt = surf.format();
+	uint32_t w = surf->get_w();
+	uint32_t h = surf->get_h();
+	const SDL_PixelFormat & origfmt = surf->format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
 	const SDL_PixelFormat & destfmt = dest->format();
 
-	surf.lock(Surface::Lock_Normal);
+	surf->lock(Surface::Lock_Normal);
 	dest->lock(Surface::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
 
-			color.set(origfmt, surf.get_pixel(x, y));
+			color.set(origfmt, surf->get_pixel(x, y));
 
 			if (halve_alpha)
 				color.a >>= 1;
@@ -767,10 +759,10 @@ const IPicture* Graphic::create_changed_luminosity_pic
 			dest->set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	surf.unlock(Surface::Unlock_NoChange);
+	surf->unlock(Surface::Unlock_NoChange);
 	dest->unlock(Surface::Unlock_Update);
 
-	return new_picture(dest);
+	return dest;
 }
 
 

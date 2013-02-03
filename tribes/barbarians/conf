@@ -15,19 +15,19 @@ wares_order= raw_stone,trunk, blackwood, grout, thatchreed, cloth; fish, meat, w
 
 workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builder, lime-burner, ferner, weaver, shipwright; fisher , hunter , gamekeeper, farmer, baker, brewer, master-brewer, innkeeper; geologist,miner, chief-miner, master-miner, burner, smelter; blacksmith, master-blacksmith; soldier, trainer, helmsmith, scout
 
-# No idea for the frontier. Maybe some javelins?
+
 [frontier]
 name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
 playercolor=true
 
-# Not just a plain color, maybe a cross or some stribes
+
 [flag]
 name=flag
 pics=pics/flag_??.png
-hotspot=14 34
-fps=15
+hotspot=10 38
+fps=5
 playercolor=true
 
 [compatibility_immovable]

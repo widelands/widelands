@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010-2012 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -439,12 +439,12 @@ void Map_Players_View_Data_Packet::Read
 				//  Store the player's view of roads and ownership in these
 				//  temporary variables and save it in the player when set.
 				uint8_t         roads = 0;
-				Player_Number owner;
+				Player_Number owner = 0;
 
 				switch (f_vision) { //  owner and map_object_descr
 				case 0:
 					//  The player has never seen this node, so he has no
-					//  information about it. Neither should he be be informed about
+					//  information about it. Neither should he be informed about
 					//  it now.
 					break;
 				case 1: {

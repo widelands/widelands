@@ -220,7 +220,7 @@ end:
 
 	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
 		throw wexception
-			("animation has %zu frames but playercolor mask has only %zu frames",
+			("animation has %"PRIuS" frames but playercolor mask has only %"PRIuS" frames",
 			 m_plrframes[0].size(), m_pcmasks.size());
 #ifdef VALIDATE_ANIMATION_CROPPING
 	if

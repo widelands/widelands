@@ -1533,7 +1533,7 @@ void NetHost::setMap
 		std::vector<char> complete(file->bytes);
 		fr.SetFilePos(0);
 		fr.DataComplete(&complete[0], file->bytes);
-		MD5Checksum<FileRead> md5sum;
+		SimpleMD5Checksum md5sum;
 		md5sum.Data(&complete[0], file->bytes);
 		md5sum.FinishChecksum();
 		file->md5sum = md5sum.GetChecksum().str();

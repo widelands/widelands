@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2007-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -903,8 +903,7 @@ Cmd_ResetWareTargetQuantity::Cmd_ResetWareTargetQuantity
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type)
 	:
-	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
-	m_economy(0)
+	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
 {}
 
 void Cmd_ResetWareTargetQuantity::execute(Game & game)
@@ -947,7 +946,7 @@ void Cmd_ResetWareTargetQuantity::Read
 }
 
 Cmd_ResetWareTargetQuantity::Cmd_ResetWareTargetQuantity(StreamRead & des)
-	: Cmd_ChangeTargetQuantity(des), m_economy(0)
+	: Cmd_ChangeTargetQuantity(des)
 {}
 
 void Cmd_ResetWareTargetQuantity::serialize(StreamWrite & ser)
@@ -1026,8 +1025,7 @@ Cmd_ResetWorkerTargetQuantity::Cmd_ResetWorkerTargetQuantity
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type)
 	:
-	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
-	m_economy(0)
+	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
 {}
 
 void Cmd_ResetWorkerTargetQuantity::execute(Game & game)
@@ -1070,7 +1068,7 @@ void Cmd_ResetWorkerTargetQuantity::Read
 }
 
 Cmd_ResetWorkerTargetQuantity::Cmd_ResetWorkerTargetQuantity(StreamRead & des)
-	: Cmd_ChangeTargetQuantity(des), m_economy(0)
+	: Cmd_ChangeTargetQuantity(des)
 {}
 
 void Cmd_ResetWorkerTargetQuantity::serialize(StreamWrite & ser)
@@ -1395,8 +1393,7 @@ void Cmd_EnemyFlagAction::Write
 
 Cmd_ChangeMilitaryConfig::Cmd_ChangeMilitaryConfig(StreamRead & des)
 :
-PlayerCommand (0, des.Unsigned8()),
-serial(0)
+PlayerCommand (0, des.Unsigned8())
 {
 	retreat = des.Unsigned8();
 	/// Read reserved data

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,9 +35,9 @@
 #include <cstring>
 #include <vector>
 
-namespace UI {struct Window;}
+namespace UI {class Window;}
 struct BuildingHints;
-struct Interactive_GameBase;
+class Interactive_GameBase;
 struct Profile;
 class IPicture;
 

@@ -361,7 +361,7 @@ void Ship::set_economy(Game & game, Economy * e)
  */
 void Ship::set_destination(Game & game, PortDock & pd)
 {
-	molog("set_destination to %u (currently %zu items)\n", pd.serial(), m_items.size());
+	molog("set_destination to %u (currently %"PRIuS" items)\n", pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
@@ -423,7 +423,7 @@ void Ship::log_general_info(const Editor_Game_Base & egbase)
 	Bob::log_general_info(egbase);
 
 	molog
-		("Fleet: %u, destination: %u, lastdock: %u, carrying: %zu\n",
+		("Fleet: %u, destination: %u, lastdock: %u, carrying: %"PRIuS"\n",
 		 m_fleet? m_fleet->serial() : 0,
 		 m_destination.serial(), m_lastdock.serial(),
 		 m_items.size());

@@ -158,8 +158,8 @@ option (WL_STRICT "If strict compilation mode is requested (almost every warning
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wall -Wextra")
-set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wsign-promo")
-set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op")
+set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wshadow -Wsign-promo -Wundef -Wunused -Wformat -Wformat-nonliteral -Wformat-security")
+set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op -Wsync-nand -Wtrampolines")
 set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe

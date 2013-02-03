@@ -23,7 +23,7 @@
 #include "logic/widelands_geometry.h"
 #include "editor_action_args.h"
 
-struct Editor_Tool;
+class Editor_Tool;
 namespace Widelands {class map;}
 struct Editor_Interactive;
 

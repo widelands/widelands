@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -2814,7 +2814,7 @@ void Worker::scout_update(Game & game, State & state)
 			// Parse randomly the reachable fields, maximum 50 iterations
 			uint8_t iterations = list.size() % 51;
 			for (uint8_t i = 0; i < iterations; ++i) {
-				uint8_t const lidx = game.logic_rand() % list.size();
+				const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
 				Coords const coord = list[lidx];
 				list.erase(list.begin() + lidx);
 				Map_Index idx = map.get_index(coord, map.get_width());
@@ -2823,7 +2823,7 @@ void Worker::scout_update(Game & game, State & state)
 				// If the field is not yet discovered, go there
 				if (!visible) {
 					molog
-						("[scout]: Go to interessting field (%i, %i)\n",
+						("[scout]: Go to interesting field (%i, %i)\n",
 						 coord.x, coord.y);
 					if
 						(!start_task_movepath(game, coord, 0,

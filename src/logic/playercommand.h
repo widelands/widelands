@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,8 @@ namespace Widelands {
  * reasonably unique (to be precise, they must be unique per duetime) and
  * the same across all hosts, to ensure parallel simulation.
  */
-struct PlayerCommand : public GameLogicCommand {
+class PlayerCommand : public GameLogicCommand {
+public:
 	PlayerCommand (int32_t time, Player_Number);
 
 	/// For savegame loading
@@ -344,7 +345,7 @@ private:
 };
 
 struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
-	Cmd_ResetWareTargetQuantity() : Cmd_ChangeTargetQuantity(), m_economy(0), m_ware_type() {}
+	Cmd_ResetWareTargetQuantity() : Cmd_ChangeTargetQuantity(), m_ware_type() {}
 	Cmd_ResetWareTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index);
@@ -361,7 +362,6 @@ struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
 	virtual void serialize (StreamWrite &);
 
 private:
-	uint32_t m_economy;
 	Ware_Index m_ware_type;
 };
 
@@ -388,7 +388,7 @@ private:
 };
 
 struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
-	Cmd_ResetWorkerTargetQuantity() : Cmd_ChangeTargetQuantity(), m_economy(0), m_ware_type() {}
+	Cmd_ResetWorkerTargetQuantity() : Cmd_ChangeTargetQuantity(), m_ware_type() {}
 	Cmd_ResetWorkerTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index);
@@ -405,7 +405,6 @@ struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
 	virtual void serialize (StreamWrite &);
 
 private:
-	uint32_t m_economy;
 	Ware_Index m_ware_type;
 };
 
@@ -517,12 +516,12 @@ private:
 
 // This is at very early stage, more vars should be added
 struct Cmd_ChangeMilitaryConfig : public PlayerCommand {
-	Cmd_ChangeMilitaryConfig() : PlayerCommand(), serial(0), retreat(0) {} // For savegame loading
+	Cmd_ChangeMilitaryConfig() : PlayerCommand(), retreat(0) {} // For savegame loading
 	Cmd_ChangeMilitaryConfig
 		(int32_t      const t,
 		 int32_t      const p,
 		 uint32_t     const ret)
-		: PlayerCommand(t, p), serial(0), retreat(ret)
+		: PlayerCommand(t, p), retreat(ret)
 	{}
 
 	// Write these commands to a file (for savegames)
@@ -537,7 +536,6 @@ struct Cmd_ChangeMilitaryConfig : public PlayerCommand {
 	virtual void serialize (StreamWrite &);
 
 private:
-	Serial        serial;
 	// By now only retreat info is stored
 	uint8_t       retreat;
 };

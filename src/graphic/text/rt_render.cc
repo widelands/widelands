@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -403,9 +403,6 @@ public:
 		assert(false); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
-
-private:
-	uint32_t m_w;
 };
 
 /*
@@ -454,7 +451,8 @@ private:
  */
 class SubTagRenderNode : public RenderNode {
 public:
-	SubTagRenderNode(NodeStyle& ns) : RenderNode(ns), m_bg_clr(0, 0, 0), m_bg_img(0) {
+	SubTagRenderNode(NodeStyle& ns) : RenderNode(ns), m_bg_clr_set(false),
+		m_bg_clr(0, 0, 0), m_bg_img(0) {
 	}
 	virtual ~SubTagRenderNode() {
 		foreach(RenderNode* n, m_nodes_to_render) {
@@ -475,7 +473,7 @@ public:
 
 		// Draw Solid background Color
 		bool set_alpha = true;
-		if (m_bg_clr.r or m_bg_clr.g or m_bg_clr.b) {
+		if (m_bg_clr_set) {
 			Rect fill_rect(Point(m_margin.left, m_margin.top), m_w, m_h);
 			rv->fill_rect(fill_rect, m_bg_clr);
 			set_alpha = false;
@@ -517,7 +515,10 @@ public:
 	void set_dimensions(uint32_t inner_w, uint32_t inner_h, Borders margin) {
 		m_w = inner_w; m_h = inner_h; m_margin = margin;
 	}
-	void set_background(RGBColor clr) {m_bg_clr = clr;}
+	void set_background(RGBColor clr) {
+		m_bg_clr = clr;
+		m_bg_clr_set = true;
+	}
 	void set_background(const IPicture* img) {m_bg_img = img;}
 	void set_nodes_to_render(vector<RenderNode*>& n) {m_nodes_to_render = n;}
 	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, const string& s) {
@@ -530,6 +531,7 @@ private:
 	vector<RenderNode*> m_nodes_to_render;
 	Borders m_margin;
 	RGBColor m_bg_clr;
+	bool m_bg_clr_set;
 	const IPicture* m_bg_img; // Not owned.
 	vector<Reference> m_refs;
 };
