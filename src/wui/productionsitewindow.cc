@@ -91,7 +91,7 @@ ProductionSite_Window::ProductionSite_Window
 							(m_worker_caps, "evict", 0, 0, 34, 34,
 							 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
 							 g_gr->imgcache().load(PicMod_Game, "pics/menu_drop_soldier.png"),
-							 _("Terminate the empoyment of the selected worker"));
+							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
 					(boost::bind(&ProductionSite_Window::evict_worker, boost::ref(*this)));
 			m_worker_caps->add(evict_button, UI::Box::AlignCenter);
