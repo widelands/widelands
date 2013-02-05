@@ -40,6 +40,8 @@ public:
 
 	/// This draws a part of another surface to this surface
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
+	// NOCOM(#sirver): maybe only one of these is needed, that would be desirable
+	virtual void blit(const Point&, const IBlitableSurface*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
 
 	/// Draws a filled rect to the surface.
 	virtual void fill_rect(const Rect&, RGBAColor) = 0;

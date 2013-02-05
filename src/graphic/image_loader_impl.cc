@@ -31,7 +31,7 @@
 
 using namespace std;
 
-ImageImpl* ImageLoaderImpl::load(const string& fname, bool alpha) const {
+Surface* ImageLoaderImpl::load(const string& fname, bool alpha) const {
 	FileRead fr;
 	SDL_Surface * sdlsurf;
 
@@ -41,9 +41,8 @@ ImageImpl* ImageLoaderImpl::load(const string& fname, bool alpha) const {
 	sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
 	if (!sdlsurf)
-		throw wexception("%s", IMG_GetError());
+		throw wexception("Could not open image %s: %s", fname.c_str(), IMG_GetError());
 
-	// // TODO(#sirver): this should most probably return a surface now.
-	return static_cast<ImageImpl*>(gr_.convert_sdl_surface_to_picture(sdlsurf, alpha));
+	return gr_.create_surface(sdlsurf, alpha);
 }
 

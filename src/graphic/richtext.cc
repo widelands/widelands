@@ -337,7 +337,7 @@ void RichText::parse(const std::string & rtext)
 			 img_it != cur_block_images.end();
 			 ++img_it)
 		{
-			const IPicture* image = g_gr->imgcache().load(PicMod_Game, *img_it);
+			const IPicture* image = g_gr->imgcache().get(*img_it, true);
 			if (!image)
 				continue;
 

@@ -26,16 +26,18 @@
 
 struct SDL_Surface;
 class ImageCache;
+class SurfaceCache;
 
 class IGraphic {
 public:
 	virtual ~IGraphic() {};
 
-	// NOCOM(#sirver): this function now has to die (or return surfaces).
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) const = 0;
 	virtual IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const = 0;
+	// NOCOM(#sirver): I have a hunch that alpha should default to true.
+	virtual IBlitableSurface * create_surface(SDL_Surface*, bool alpha = false) const = 0;
 
 	virtual ImageCache& imgcache() const = 0;
+	virtual SurfaceCache& surface_cache() const = 0;
 };
 
 

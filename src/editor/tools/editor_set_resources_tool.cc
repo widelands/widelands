@@ -59,10 +59,8 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res)) {
 			//  Ok, we're doing something. First remove the current overlays.
 			const IPicture* pic =
-			    g_gr->imgcache().load
-			    (PicMod_Menu,
-			     world.get_resource(res)->get_editor_pic
-			     (mr.location().field->get_resources_amount()).c_str());
+				 g_gr->imgcache().get(world.get_resource(res)->get_editor_pic
+						 (mr.location().field->get_resources_amount()), true);
 			overlay_manager.remove_overlay(mr.location(), pic);
 
 			if (not amount) {
@@ -73,10 +71,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 				mr.location().field->set_starting_res_amount(amount);
 				//  set new overlay
 				pic =
-				    g_gr->imgcache().load
-				    (PicMod_Menu,
-				     world.get_resource(args.cur_res)->get_editor_pic(amount)
-				     .c_str());
+				    g_gr->imgcache().get(world.get_resource(args.cur_res)->get_editor_pic(amount), true);
 				overlay_manager.register_overlay(mr.location(), pic, 4);
 				map.recalc_for_field_area
 				(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
@@ -108,10 +103,10 @@ int32_t Editor_Set_Resources_Tool::handle_undo_impl
 			amount = max_amount;
 
 		const IPicture* pic =
-		    g_gr->imgcache().load
-		    (PicMod_Menu,
+		    g_gr->imgcache().get
+		    (
 		     world.get_resource(res)->get_editor_pic
-		     (mr.location().field->get_resources_amount()).c_str());
+		     (mr.location().field->get_resources_amount()), true);
 		overlay_manager.remove_overlay(mr.location(), pic);
 
 		if (not amount) {
@@ -121,11 +116,8 @@ int32_t Editor_Set_Resources_Tool::handle_undo_impl
 			mr.location().field->set_resources(*it, amount);
 			mr.location().field->set_starting_res_amount(amount);
 			//  set new overlay
-			pic =
-			    g_gr->imgcache().load
-			    (PicMod_Menu,
-			     world.get_resource(*it)->get_editor_pic(amount)
-			     .c_str());
+			pic = g_gr->imgcache().get(
+					world.get_resource(*it)->get_editor_pic(amount), true);
 			overlay_manager.register_overlay(mr.location(), pic, 4);
 			map.recalc_for_field_area
 			(Widelands::Area<Widelands::FCoords>(mr.location(), 0));

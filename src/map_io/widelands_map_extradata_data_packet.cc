@@ -75,17 +75,16 @@ throw (_wexception)
 					if (!surf)
 						continue; //  Illegal pic. Skip it.
 
-					IPicture* picture = g_gr->convert_sdl_surface_to_picture(surf);
-
-					std::string picname = FileSystem::FS_Filename(pname->c_str());
-					g_gr->imgcache().insert(PicMod_Game, "map:" + picname, picture);
+					const IPicture* image = g_gr->imgcache().new_permanent_picture(
+							std::string("map:") +
+								FileSystem::FS_Filename(pname->c_str()), g_gr->create_surface(surf));
 
 					//  OK, the pic is now known to the game. But when the game is
 					//  saved, this data has to be regenerated.
 					Map::Extradata_Info info;
 					info.type     = Map::Extradata_Info::PIC;
 					info.filename = *pname;
-					info.data     = picture;
+					info.data     = image;
 					// replace \ with / in path or pics won't be saved on Windows
 					std::replace(info.filename.begin(), info.filename.end(), '\\', '/');
 					map.m_extradatainfos.push_back(info);

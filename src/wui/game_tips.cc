@@ -105,7 +105,7 @@ void GameTips::stop() {
 
 void GameTips::show_tip(int32_t index) {
 	// try to load a background
-	const IPicture* pic_background = g_gr->imgcache().load(PicMod_Menu, BG_IMAGE);
+	const IPicture* pic_background = g_gr->imgcache().get(BG_IMAGE, true);
 	assert(pic_background);
 
 	RenderTarget & rt = *g_gr->get_render_target();

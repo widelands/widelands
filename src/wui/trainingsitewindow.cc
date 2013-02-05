@@ -52,7 +52,7 @@ TrainingSite_Window::TrainingSite_Window
 ProductionSite_Window  (parent, ts, registry)
 {
 	get_tabs()->add
-		("soldiers", g_gr->imgcache().load(PicMod_Game, pic_tab_military),
+		("soldiers", g_gr->imgcache().get(pic_tab_military, true),
 		 create_soldier_list(*get_tabs(), parent, trainingsite()),
 		 _("Soldiers in training"));
 }

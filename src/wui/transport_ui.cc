@@ -49,18 +49,18 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 		UI::UniqueWindow
 			(&parent, "economy_options", &economy.m_optionswindow_registry, 0, 0,
 			 _("Economy options")),
-		m_tabpanel(this, 0, 0, g_gr->imgcache().load(PicMod_UI, "pics/but1.png"))
+		m_tabpanel(this, 0, 0, g_gr->imgcache().get("pics/but1.png", true))
 	{
 		set_center_panel(&m_tabpanel);
 
 		m_tabpanel.add
 			("wares",
-			 g_gr->imgcache().load(PicMod_UI, pic_tab_wares),
+			 g_gr->imgcache().get(pic_tab_wares, true),
 			 new Economy_Options_Ware_Panel(&m_tabpanel, parent, economy),
 			 _("Wares"));
 		m_tabpanel.add
 			("workers",
-			 g_gr->imgcache().load(PicMod_UI, pic_tab_workers),
+			 g_gr->imgcache().get(pic_tab_workers, true),
 			 new Economy_Options_Worker_Panel(&m_tabpanel, parent, economy),
 			 _("Workers"));
 
@@ -139,7 +139,7 @@ private:
 	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
-		  g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),            \
+		  g_gr->imgcache().get("pics/but4.png", true),            \
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&Economy_Options_Ware_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
@@ -234,7 +234,7 @@ private:
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
-		  g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),              \
+		  g_gr->imgcache().get("pics/but4.png", true),              \
 		  text, tooltip, m_can_act);                                  \
 	b->sigclicked.connect(boost::bind(&Economy_Options_Worker_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);

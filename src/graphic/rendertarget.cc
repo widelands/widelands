@@ -167,9 +167,10 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
  */
 void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
 {
+	const ImageImpl* image = static_cast<const ImageImpl*>(picture);
 	doblit
 		(dst,
-		 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
+		 image->surface(), Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
 }
 
 /**
@@ -180,8 +181,9 @@ void RenderTarget::blitrect
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
+	const ImageImpl* image = static_cast<const ImageImpl*>(picture);
 
-	doblit(Rect(dst, 0, 0), picture, srcrc, cm);
+	doblit(Rect(dst, 0, 0), image->surface(), srcrc, cm);
 }
 
 /**
@@ -278,7 +280,7 @@ void RenderTarget::drawanim
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	const IPicture* frame =
+	const Surface* frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -310,7 +312,7 @@ void RenderTarget::drawstatic
 	}
 
 	// Get the frame and its data
-	const IPicture* frame =
+	const Surface* frame =
 		player ?
 		gfx->get_frame
 			(0, player->player_number(), player->get_playercolor())
@@ -318,13 +320,15 @@ void RenderTarget::drawstatic
 		gfx->get_frame
 			(0);
 
-	const IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
+	// NOCOM(#sirver): this is currently broken
+	// const IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
 
 	dst -= Point(frame->get_w() / 2, frame->get_h() / 2);
 
 	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
 
-	doblit(Rect(dst, 0, 0), dark_frame, srcrc);
+	// NOCOM(#sirver): this is currently broken
+	// doblit(Rect(dst, 0, 0), dark_frame, srcrc);
 }
 
 /**
@@ -347,7 +351,7 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	const IPicture* frame =
+	const Surface* frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->player_number(), player->get_playercolor())
@@ -422,7 +426,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Point dst, const IPicture* src, Rect srcrc, Composite cm)
+	(Point dst, const Surface* src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);

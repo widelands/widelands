@@ -66,17 +66,17 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	m_checkboxes.resize(nr_terrains);
 
 	const IPicture* green =
-		g_gr->imgcache().load(PicMod_Game, "pics/terrain_green.png");
+		g_gr->imgcache().get("pics/terrain_green.png", true);
 	const IPicture* water =
-		g_gr->imgcache().load(PicMod_Game, "pics/terrain_water.png");
+		g_gr->imgcache().get("pics/terrain_water.png", true);
 	const IPicture* mountain =
-		g_gr->imgcache().load(PicMod_Game, "pics/terrain_mountain.png");
+		g_gr->imgcache().get("pics/terrain_mountain.png", true);
 	const IPicture* dead =
-		g_gr->imgcache().load(PicMod_Game, "pics/terrain_dead.png");
+		g_gr->imgcache().get("pics/terrain_dead.png", true);
 	const IPicture* unpassable =
-		g_gr->imgcache().load(PicMod_Game, "pics/terrain_unpassable.png");
+		g_gr->imgcache().get("pics/terrain_unpassable.png", true);
 	const IPicture* dry =
-		g_gr->imgcache().load(PicMod_Game, "pics/terrain_dry.png");
+		g_gr->imgcache().get("pics/terrain_dry.png", true);
 
 	static const int small_pich = 20;
 	static const int small_picw = 20;
@@ -96,9 +96,8 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			}
 
 			IBlitableSurface* surf = g_gr->create_surface(64, 64);
-			const IPicture* tex = g_gr->imgcache().load
-				(PicMod_Game, g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
-						->get_texture_picture());
+			const IPicture* tex = g_gr->imgcache().get(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
+						->get_texture_picture(), true);
 			surf->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
 
 			Point pt(1, 64 - small_pich - 1);
@@ -127,9 +126,11 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				if (ter_is & TERRAIN_DRY)
 					surf->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
 			}
-			offscreen_surfaces_.push_back(new_picture(surf)); // Make sure we delete this later on.
+			// NOCOM(#sirver): add this back in in some way or another.
+			// offscreen_surfaces_.push_back(surf); // Make sure we delete this later on.
 
-			UI::Checkbox & cb = *new UI::Checkbox(this, pos, offscreen_surfaces_.back());
+			// NOCOM(#sirver): this is currently broken
+			UI::Checkbox & cb = *new UI::Checkbox(this, pos, NULL); // offscreen_surfaces_.back());
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_state(m_tool.is_enabled(i));
 			cb.changedto.connect

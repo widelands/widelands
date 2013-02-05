@@ -62,7 +62,7 @@ ProductionSite_Window::ProductionSite_Window
 				 UI::Box::AlignLeft);
 
 		get_tabs()->add
-			("wares", g_gr->imgcache().load(PicMod_Game, pic_tab_wares),
+			("wares", g_gr->imgcache().get(pic_tab_wares, true),
 			 prod_box, _("Wares"));
 	}
 
@@ -82,7 +82,7 @@ ProductionSite_Window::ProductionSite_Window
 			m_worker_table->add(i);
 
 		get_tabs()->add
-			("workers", g_gr->imgcache().load(PicMod_UI, pic_tab_workers),
+			("workers", g_gr->imgcache().get(pic_tab_workers, true),
 			 m_worker_table,
 			 productionsite().descr().nr_working_positions() > 1 ?
 			 _("Workers") : _("Worker"));

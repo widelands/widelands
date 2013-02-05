@@ -1345,7 +1345,7 @@ void GameView::draw_minimap
 
 	SDL_UnlockSurface(surface);
 
-	IPicture* picture = g_gr->convert_sdl_surface_to_picture(surface);
-
-	m_surface->blit(Point(rc.x, rc.y), picture, rc2);
+	// NOCOM(#sirver): add some caching to this. horrible.
+	boost::scoped_ptr<Surface> minimap_surface(g_gr->create_surface(surface));
+	m_surface->blit(Point(rc.x, rc.y), minimap_surface.get(), rc2);
 }

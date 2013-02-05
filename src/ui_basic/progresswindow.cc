@@ -65,14 +65,8 @@ void ProgressWindow::draw_background
 
 	if (!m_background_pic or xres != m_xres or yres != m_yres) {
 		// (Re-)Load background graphics
-		// Note that the old pic is freed automatically
-		const IPicture* background_original =
-			g_gr->imgcache().load(PicMod_Menu, m_background.c_str());
-
-		const IPicture* background_resized  =
-			g_gr->get_resized_picture(background_original, xres, yres);
-
-		m_background_pic = background_resized;
+		m_background_pic = g_gr->imgcache().resize(
+				g_gr->imgcache().get(m_background, true), xres, yres);
 
 		const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 		m_label_rectangle.x = xres / 4;
@@ -85,6 +79,7 @@ void ProgressWindow::draw_background
 		m_yres = yres;
 	}
 
+	// NOCOM(#sirver): blit should now take in IPicture
 	rt.blit(Point(0, 0), m_background_pic);
 
 	Rect border_rect = m_label_rectangle;
@@ -127,6 +122,8 @@ void ProgressWindow::set_background(const std::string & file_name) {
 	update(true);
 }
 
+// NOCOM(#sirver): versuch erstmal dieses file zum compilen zu kriegen. Kann man die const referenz acendern?
+// // NOCOM(#sirver): schau in error file wie man das alleine compiled.
 void ProgressWindow::step(const std::string & description) {
 	RenderTarget & rt = *g_gr->get_render_target();
 

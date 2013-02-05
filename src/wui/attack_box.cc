@@ -82,7 +82,7 @@ UI::Slider & AttackBox::add_slider
 			 0, 0,
 			 width, height,
 			 min, max, initial,
-			 g_gr->imgcache().load(PicMod_Game, picname),
+			 g_gr->imgcache().get(picname, true),
 			 hint);
 	parent.add(&result, UI::Box::AlignCenter);
 	return result;
@@ -115,7 +115,7 @@ UI::Button & AttackBox::add_button
 		new UI::Button
 			(&parent, text,
 			 8, 8, 26, 26,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+			 g_gr->imgcache().get("pics/but2.png", true),
 			 text,
 			 tooltip_text);
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));

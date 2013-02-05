@@ -49,7 +49,7 @@ m_increase_max_fill(0),
 m_decrease_max_fill(0),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::wwWARE),
-m_max_fill_indicator(g_gr->imgcache().load(PicMod_Game, pic_max_fill_indicator)),
+m_max_fill_indicator(g_gr->imgcache().get(pic_max_fill_indicator, true)),
 m_cache_size(queue->get_max_size()),
 m_cache_filled(queue->get_filled()),
 m_cache_max_fill(queue->get_max_fill()),
@@ -61,8 +61,9 @@ m_show_only(show_only)
 	set_tooltip(ware.descname().c_str());
 
 	m_icon = ware.icon();
-	m_icon_grey = g_gr->create_grayed_out_pic(m_icon);
-	m_icon_grey = g_gr->create_changed_luminosity_pic(m_icon_grey, 0.65);
+
+	m_icon_grey = g_gr->imgcache().change_luminosity(
+			g_gr->imgcache().gray_out(m_icon), 0.65, false);
 
 	uint32_t ph = m_max_fill_indicator->get_h();
 
@@ -172,15 +173,15 @@ void WaresQueueDisplay::update_priority_buttons()
 	pos.y = Border + (m_total_height - 2 * Border - 3 * PriorityButtonSize) / 2;
 
 	m_priority_radiogroup->add_button
-		(this, pos, g_gr->imgcache().load(PicMod_Game,  pic_priority_high),
+		(this, pos, g_gr->imgcache().get( pic_priority_high, true),
 		 _("Highest priority"));
 	pos.y += PriorityButtonSize;
 	m_priority_radiogroup->add_button
-			(this, pos, g_gr->imgcache().load(PicMod_Game,  pic_priority_normal),
+			(this, pos, g_gr->imgcache().get( pic_priority_normal, true),
 			 _("Normal priority"));
 	pos.y += PriorityButtonSize;
 	m_priority_radiogroup->add_button
-			(this, pos, g_gr->imgcache().load(PicMod_Game,  pic_priority_low),
+			(this, pos, g_gr->imgcache().get( pic_priority_low, true),
 			 _("Lowest priority"));
 
 	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
@@ -224,8 +225,8 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	m_decrease_max_fill = new UI::Button
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
-		 g_gr->imgcache().load(PicMod_UI, "pics/scrollbar_left.png"),
+		 g_gr->imgcache().get("pics/but4.png", true),
+		 g_gr->imgcache().get("pics/scrollbar_left.png", true),
 		 _("Decrease the number of wares you want to be stored here."));
 	m_decrease_max_fill->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
@@ -234,8 +235,8 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	m_increase_max_fill = new UI::Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
-		 g_gr->imgcache().load(PicMod_UI, "pics/scrollbar_right.png"),
+		 g_gr->imgcache().get("pics/but4.png", true),
+		 g_gr->imgcache().get("pics/scrollbar_right.png", true),
 		 _("Increase the number of wares you want to be stored here."));
 	m_increase_max_fill->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));

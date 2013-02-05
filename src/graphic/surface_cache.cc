@@ -17,10 +17,17 @@
  *
  */
 
+#include <map>
+
+#include "surface.h"
+
 #include "surface_cache.h"
+
+using namespace std;
 
 typedef map<string, Surface*> SurfaceMap;
 class SurfaceCache::Impl {
+public:
 	SurfaceMap surfaces;
 };
 
@@ -29,14 +36,14 @@ SurfaceCache::~SurfaceCache() {}
 
 // NOCOM(#sirver): implement clever hashing here.
 Surface* SurfaceCache::get(const std::string& hash) {
-	ImageMap::const_iterator it = p_.surfaces.find(hash);
-	if (it == p_.surfaces.end()) {
+	SurfaceMap::const_iterator it = p_->surfaces.find(hash);
+	if (it == p_->surfaces.end()) {
 		return NULL;
 	}
 	return it->second;
 }
 Surface* SurfaceCache::insert(const std::string& hash, Surface* surf) {
-	images_.insert(make_pair(hash, surf));
+	p_->surfaces.insert(make_pair(hash, surf));
 	return surf;
 }
 

@@ -84,7 +84,7 @@ Button::Button //  for pictorial buttons
 	m_time_nextact  (0),
 	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
-	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
+	m_pic_custom_disabled(g_gr->imgcache().gray_out(foreground_picture_id)),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -112,7 +112,7 @@ void Button::set_pic(const IPicture* pic)
 		return;
 
 	m_pic_custom = pic;
-	m_pic_custom_disabled = g_gr->create_grayed_out_pic(pic);
+	m_pic_custom_disabled = g_gr->imgcache().gray_out(pic);
 
 	update();
 }

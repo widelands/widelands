@@ -26,10 +26,35 @@
 #include "graphic.h"
 #include "log.h"
 #include "rendertarget.h"
+#include "picture_impl.h"
 #include "wexception.h"
 #include "wordwrap.h"
 
 #include "font_handler.h"
+
+namespace {
+class TextCachingImage : public ImageImpl {
+public:
+	TextCachingImage(Surface *surf) : surf_(surf) {}
+	virtual ~TextCachingImage() {}
+
+	// Implements IPicture.
+	virtual uint32_t get_w() const {return surf_->get_w();}
+	virtual uint32_t get_h() const {return surf_->get_h();}
+
+	virtual const std::string& hash() const {
+		// This should never ever be called, it is only needed for ImageImpl
+		// that are managed by ImageCache.
+		assert(0);
+	}
+	virtual Surface* surface() const {
+		return surf_.get();
+	}
+
+private:
+	boost::scoped_ptr<Surface> surf_;
+};
+}
 
 namespace UI {
 
@@ -46,7 +71,7 @@ struct LineCacheEntry {
 	/*@}*/
 
 	/*@{*/
-	IPicture* picture;
+	TextCachingImage* image;
 	uint32_t width;
 	uint32_t height;
 	/*@}*/
@@ -115,11 +140,11 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
 		return *it;
 	}
 
-	// Cache miss; render a new picture
+	// Cache miss; render a new image.
 	LineCache::iterator it = linecache.insert(linecache.begin(), LineCacheEntry());
 	it->style = style;
 	it->text = text;
-	it->picture = 0;
+	it->image = 0;
 	render_line(*it);
 
 	while (linecache.size() > MaxLineCacheSize)
@@ -129,7 +154,7 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
 }
 
 /**
- * Render the picture of a \ref LineCacheEntry whose key data has
+ * Render the image of a \ref LineCacheEntry whose key data has
  * already been filled in.
  */
 void Font_Handler::Data::render_line(LineCacheEntry & lce)
@@ -157,9 +182,9 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 		return;
 	}
 
-	lce.picture = g_gr->convert_sdl_surface_to_picture(text_surface, true);
-	lce.width = lce.picture->get_w();
-	lce.height = lce.picture->get_h();
+	lce.image = new TextCachingImage(g_gr->create_surface(text_surface, true));
+	lce.width = lce.image->get_w();
+	lce.height = lce.image->get_h();
 }
 
 /**
@@ -177,8 +202,8 @@ void Font_Handler::draw_text
 
 	do_align(align, dstpoint.x, dstpoint.y, lce.width + 2 * LINE_MARGIN, lce.height);
 
-	if (lce.picture)
-		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.picture);
+	if (lce.image)
+		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image);
 
 	if (caret <= text.size())
 		draw_caret(dst, style, dstpoint, text, caret);
@@ -214,8 +239,8 @@ uint32_t Font_Handler::draw_text_raw
 {
 	const LineCacheEntry & lce = d->get_line(style, text);
 
-	if (lce.picture)
-		dst.blit(dstpoint, lce.picture);
+	if (lce.image)
+		dst.blit(dstpoint, lce.image);
 
 	return lce.width;
 }
@@ -235,7 +260,7 @@ void Font_Handler::draw_caret
 
 	int caret_x = style.calc_bare_width(sub);
 
-	const IPicture* caretpic = g_gr->imgcache().load(PicMod_UI, "pics/caret.png");
+	const IPicture* caretpic = g_gr->imgcache().get("pics/caret.png", true);
 	Point caretpt;
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->get_w();
 	caretpt.y = dstpoint.y + (style.font->height() - caretpic->get_h()) / 2;

@@ -79,8 +79,8 @@ Graphic::Graphic
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	img_loader_(new ImageLoaderImpl(*this)),
-	img_cache_(create_image_cache(img_loader_.get())),
-	surface_cache_(new SurfaceCache())
+	surface_cache_(new SurfaceCache()),
+	img_cache_(create_image_cache(img_loader_.get(), surface_cache_.get()))
 {
 	// Initialize the table used to create grayed pictures
 	for
@@ -492,8 +492,7 @@ Surface* Graphic::resize_surface(Surface* src, uint32_t w, uint32_t h) {
 		zoomed = placed;
 	}
 
-	// TODO(#sirver): all of these functions could be implemented in a lazy caching ImageImpl
-	return convert_sdl_surface_to_picture(zoomed);
+	return create_surface(zoomed);
 }
 
 /**
@@ -539,7 +538,7 @@ SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect) const
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const {
-	save_png_(static_cast<const ImageImpl*>(pic)->surface(), sw);
+	save_png_(*static_cast<const ImageImpl*>(pic)->surface(), sw);
 }
 void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 {
@@ -624,7 +623,7 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
  * @return the new Surface created from the SDL_Surface
  * // NOCOM(#sirver): comments
  */
-Surface* Graphic::convert_sdl_surface_to_surface(SDL_Surface * surf, bool alpha) const
+Surface* Graphic::create_surface(SDL_Surface * surf, bool alpha) const
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
@@ -731,7 +730,6 @@ Surface* Graphic::gray_out_surface(Surface* surf) {
  * // NOCOM(#sirver): docu
  */
 Surface* Graphic::change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha) {
-{
 	assert(surf);
 
 	uint32_t w = surf->get_w();
@@ -776,7 +774,6 @@ Surface* Graphic::change_luminosity_of_surface(Surface* surf, float factor, bool
  * frametime is in milliseconds.
  * \return 0 if the texture couldn't be loaded.
  * \note Terrain textures are not reused, even if fnametempl matches.
- * These textures are freed when PicMod_Game is flushed.
 */
 uint32_t Graphic::get_maptexture(const string& fnametempl, uint32_t frametime)
 {
@@ -853,7 +850,7 @@ void Graphic::get_animation_size
 		w = h = 0;
 	} else {
 		// Get the frame and its data. Ignore playerclrs.
-		const IPicture* frame =
+		const Surface* frame =
 			gfx->get_frame((time / data->frametime) % gfx->nr_frames());
 		w = frame->get_w();
 		h = frame->get_h();
@@ -931,6 +928,7 @@ void Graphic::set_world(string worldname) {
 
 	// Load the road textures
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
+	// NOCOM(#sirver): does true hurt here?
 	pic_road_normal_.reset(img_loader_->load(buf, false));
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
 	pic_road_busy_.reset(img_loader_->load(buf, false));
@@ -947,7 +945,7 @@ void Graphic::set_world(string worldname) {
 Surface& Graphic::get_road_texture(int32_t roadtex)
 {
 	return
-		(roadtex == Widelands::Road_Normal ? pic_road_normal_ : pic_road_busy_)->surface();
+		roadtex == Widelands::Road_Normal ? *pic_road_normal_.get() : *pic_road_busy_.get();
 }
 
 /**
@@ -956,5 +954,5 @@ Surface& Graphic::get_road_texture(int32_t roadtex)
  */
 Surface& Graphic::get_edge_texture()
 {
-	return edgetexture_->surface();
+	return *edgetexture_;
 }

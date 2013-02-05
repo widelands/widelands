@@ -116,7 +116,7 @@ Interactive_Base::Interactive_Base
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
-	m_sel.pic = g_gr->imgcache().load(PicMod_Game, "pics/fsel.png");
+	m_sel.pic = g_gr->imgcache().get("pics/fsel.png", true);
 
 	m_label_speed.set_visible(false);
 	m_label_speed_shadow.set_visible(false);
@@ -210,7 +210,7 @@ void Interactive_Base::set_sel_radius(const uint32_t n) {
  * Set/Unset sel picture
  */
 void Interactive_Base::set_sel_picture(const char * const file) {
-	m_sel.pic = g_gr->imgcache().load(PicMod_Game, file);
+	m_sel.pic = g_gr->imgcache().get(file, true);
 	set_sel_pos(get_sel_pos()); //  redraw
 }
 void Interactive_Base::unset_sel_picture() {
@@ -805,7 +805,7 @@ void Interactive_Base::roadb_add_overlay()
 
 		egbase().map().overlay_manager().register_overlay
 			(neighb,
-			 g_gr->imgcache().load(PicMod_Game, name),
+			 g_gr->imgcache().get(name, true),
 			 7,
 			 Point::invalid(),
 			 m_road_buildhelp_overlay_jobid);

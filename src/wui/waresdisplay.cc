@@ -241,10 +241,7 @@ void AbstractWaresDisplay::draw_ware
 
 	//  draw a background
 	const IPicture* bgpic =
-		g_gr->imgcache().load
-			(PicMod_Game,
-			 ware_selected(id) ?  "pics/ware_list_bg_selected.png"
-			                   :  "pics/ware_list_bg.png");
+		g_gr->imgcache().get(ware_selected(id) ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png", true);
 	uint32_t w = bgpic->get_w();
 
 	dst.blit(p, bgpic);

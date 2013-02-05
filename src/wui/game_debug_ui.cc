@@ -103,7 +103,7 @@ void Widelands::Map_Object::create_debug_panels
 	(Widelands::Editor_Game_Base const & egbase, UI::Tab_Panel & tabs)
 {
 	tabs.add
-		("debug", g_gr->imgcache().load(PicMod_Game, "pics/menu_debug.png"),
+		("debug", g_gr->imgcache().get("pics/menu_debug.png", true),
 		 new MapObjectDebugPanel(tabs, egbase, *this));
 }
 
@@ -148,7 +148,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	m_object          (&obj),
 	m_tabs
 		(this, 0, 0,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"))
+		 g_gr->imgcache().get("pics/but1.png", true))
 {
 	char buffer[128];
 
@@ -243,7 +243,7 @@ FieldDebugWindow::FieldDebugWindow
 	m_ui_immovable
 		(this, "immovable",
 		 0, 280, 214, 24,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().get("pics/but0.png", true),
 		 ""),
 
 	m_ui_bobs(this, 0, 304, 214, 96)

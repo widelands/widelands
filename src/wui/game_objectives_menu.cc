@@ -62,7 +62,7 @@ GameObjectivesMenu::GameObjectivesMenu
 		 25,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+		 g_gr->imgcache().get("pics/but4.png", true),
 		 &GameObjectivesMenu::claim_victory, *this,
 		 _("Claim Victory"), std::string(), false),
 	m_restart_mission
@@ -70,7 +70,7 @@ GameObjectivesMenu::GameObjectivesMenu
 		 25 + BUTTON_WIDTH + 25,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+		 g_gr->imgcache().get("pics/but4.png", true),
 		 &GameObjectivesMenu::restart_mission, *this,
 		 _("Restart Mission")),
 #endif

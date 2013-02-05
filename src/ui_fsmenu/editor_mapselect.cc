@@ -86,12 +86,12 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().get("pics/but0.png", true),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().get("pics/but2.png", true),
 		 _("OK"), std::string(), false, false),
 
 // Map list
@@ -228,7 +228,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		m_list.add
 			(_("<parent>"),
 			 m_parentdir.c_str(),
-			 g_gr->imgcache().load(PicMod_Game, "pics/ls_dir.png"));
+			 g_gr->imgcache().get("pics/ls_dir.png", true));
 	}
 
 	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
@@ -248,7 +248,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		m_list.add
 			(FileSystem::FS_Filename(name),
 			 name,
-			 g_gr->imgcache().load(PicMod_Game, "pics/ls_dir.png"));
+			 g_gr->imgcache().get("pics/ls_dir.png", true));
 	}
 
 	Widelands::Map map;
@@ -266,10 +266,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 				m_list.add
 					(FileSystem::FS_Filename(name),
 					 name,
-					 g_gr->imgcache().load
-					 	(PicMod_Game,
-					 	 dynamic_cast<WL_Map_Loader const *>(m_ml) ?
-					 	 "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+					 g_gr->imgcache().get(dynamic_cast<WL_Map_Loader const *>(m_ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png", true));
 			} catch (_wexception const &) {} //  we simply skip illegal entries
 			delete m_ml;
 		}

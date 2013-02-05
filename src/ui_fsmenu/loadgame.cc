@@ -49,17 +49,17 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().get("pics/but0.png", true),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().get("pics/but2.png", true),
 		 _("OK"), std::string(), false, false),
 	m_delete
 		(this, "delete",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().get("pics/but0.png", true),
 		 _("Delete"), std::string(), false, false),
 
 // Savegame list

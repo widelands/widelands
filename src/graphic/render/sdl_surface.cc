@@ -332,10 +332,13 @@ void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 
 
 void SDLSurface::blit
-	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
+	(const Point& dst, const IPicture* pic, const Rect& srcrc, Composite cm) {
+	return blit(dst, static_cast<const ImageImpl*>(pic)->surface(), srcrc, cm);
+}
+void SDLSurface::blit
+	(const Point& dst, const IBlitableSurface* src, const Rect& srcrc, Composite cm)
 {
-	SDL_Surface* sdlsurf = static_cast<SDLSurface&>
-		(static_cast<const ImageImpl*>(src)->surface()).get_sdl_surface();
+	SDL_Surface* sdlsurf = static_cast<const SDLSurface*>(src)->get_sdl_surface();
 	SDL_Rect srcrect = {
 		static_cast<Sint16>(srcrc.x), static_cast<Sint16>(srcrc.y),
 		static_cast<Uint16>(srcrc.w), static_cast<Uint16>(srcrc.h)

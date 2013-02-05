@@ -22,7 +22,6 @@
 
 #include <string>
 
-#include "picture_impl.h"
 #include "image_loader.h"
 
 class Graphic;
@@ -32,7 +31,7 @@ public:
 	ImageLoaderImpl(Graphic& gr) : gr_(gr) {}
 	virtual ~ImageLoaderImpl() {}
 
-	ImageImpl* load(const std::string& fname, bool alpha) const;
+	Surface* load(const std::string& fname, bool alpha) const;
 
 private:
 	Graphic& gr_;

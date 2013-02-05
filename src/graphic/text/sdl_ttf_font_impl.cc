@@ -20,7 +20,10 @@
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
+// NOCOM(#sirver): check includes
 #include "graphic/image_cache.h"
+#include "graphic/surface.h"
+#include "graphic/surface_cache.h"
 #include "md5.h"
 #include "rt_errors.h"
 #include "sdl_helper.h"
@@ -56,7 +59,7 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32
 	*gw = w; *gh = h;
 }
 
-const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
+const IBlitableSurface& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
 	// TODO(#sirver): Make this cheaper!
 	SimpleMD5Checksum checksum;
 	checksum.Data(font_name_.c_str(), font_name_.size());
@@ -69,7 +72,7 @@ const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 	checksum.FinishChecksum();
 	const string cs = checksum.GetChecksum().str();
 
-	const IPicture* rv = gr.imgcache().get(PicMod_Text, cs);
+	const IBlitableSurface* rv = gr.surface_cache().get(cs);
 	if (rv) return *rv;
 
 	m_set_style(style);
@@ -122,7 +125,8 @@ const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
 	return
-		*gr.imgcache().insert(PicMod_Text, cs, gr.convert_sdl_surface_to_picture(text_surface, true));
+		*gr.surface_cache().insert(cs,
+				static_cast<Surface*>(gr.create_surface(text_surface, true)));
 }
 
 uint32_t SDLTTF_Font::ascent(int style) const {

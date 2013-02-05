@@ -47,6 +47,8 @@ public:
 
 	// Implements IBlitableSurface
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
+	// NOCOM(#sirver): remove one
+	virtual void blit(const Point&, const IBlitableSurface*, const Rect& srcrc, Composite cm);
 	virtual void fill_rect(const Rect&, RGBAColor);
 
 	// Implements Surface

@@ -40,6 +40,8 @@ public:
 	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
 
 	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
+	// NOCOM(#sirver): remove one
+	virtual void blit(const Point&, const IBlitableSurface*, const Rect& srcrc, Composite cm);
 	virtual void fill_rect(const Rect&, RGBAColor);
 	virtual void draw_rect(const Rect&, RGBColor);
 	virtual void brighten_rect(const Rect&, int32_t factor);

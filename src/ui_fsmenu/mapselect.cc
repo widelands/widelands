@@ -101,12 +101,12 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().get("pics/but0.png", true),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().get("pics/but2.png", true),
 		 _("OK"), std::string(), false, false),
 
 // Checkbox
@@ -341,7 +341,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 			te.set_string(0, "");
 			te.set_picture
-				(1,  g_gr->imgcache().load(PicMod_Game, "pics/ls_dir.png"),
+				(1,  g_gr->imgcache().get("pics/ls_dir.png", true),
 				_("<parent>"));
 
 			++ndirs;
@@ -372,7 +372,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 			te.set_string(0, "");
 			te.set_picture
-				(1,  g_gr->imgcache().load(PicMod_Game, "pics/ls_dir.png"),
+				(1,  g_gr->imgcache().get("pics/ls_dir.png", true),
 				FileSystem::FS_Filename(name));
 
 			++ndirs;
@@ -428,12 +428,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					te.set_string(0, buf);
 					i18n::Textdomain td("maps");
 					te.set_picture
-						(1,  g_gr->imgcache().load
-						(PicMod_Game,
-						dynamic_cast<WL_Map_Loader const *>(ml) ?
-						(mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
+						(1,  g_gr->imgcache().get(dynamic_cast<WL_Map_Loader const *>(ml) ? (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
 						:
-						"pics/ls_s2map.png"),
+						"pics/ls_s2map.png", true),
 						_(mapdata.name));
 				} catch (const std::exception & e) {
 					log
@@ -489,8 +486,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				sprintf(buf, "(%i)", mapdata.nrplayers);
 				te.set_string(0, buf);
 				te.set_picture
-					(1, g_gr->imgcache().load
-						(PicMod_Game, (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
+					(1, g_gr->imgcache().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png"), true),
 					 mapdata.name.c_str());
 
 			} catch (...) {
@@ -517,9 +513,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				sprintf(buf, "(%i)", mapdata.nrplayers);
 				te.set_string(0, buf);
 				te.set_picture
-					(1, g_gr->imgcache().load
-						(PicMod_Game, (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
-					 mapdata.name.c_str());
+					(1, g_gr->imgcache().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png"), true), mapdata.name.c_str());
 			}
 
 			delete ml;

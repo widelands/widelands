@@ -172,15 +172,18 @@ void GLSurface::draw_line
 }
 
 void GLSurface::blit
-	(const Point& dst, const IPicture* pic, const Rect& srcrc, Composite cm)
+	(const Point& dst, const IPicture* pic, const Rect& srcrc, Composite cm) {
+	return blit(dst, static_cast<const ImageImpl*>(pic)->surface(), srcrc, cm);
+}
+void GLSurface::blit
+	(const Point& dst, const IBlitableSurface* pic, const Rect& srcrc, Composite cm)
 {
 	// Note: This function is highly optimized and therefore does not restore
 	// all state. It also assumes that all other glStuff restores state to make
 	// this function faster.
 
 	assert(g_opengl);
-	GLSurfaceTexture& surf = static_cast<GLSurfaceTexture&>
-		(static_cast<const ImageImpl*>(pic)->surface());
+	const GLSurfaceTexture& surf = *static_cast<const GLSurfaceTexture*>(pic);
 
 	/* Set a texture scaling factor. Normally texture coordinates
 	* (see glBegin()...glEnd() Block below) are given in the range 0-1

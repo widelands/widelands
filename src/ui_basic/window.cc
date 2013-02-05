@@ -86,15 +86,15 @@ Window::Window
 		_drag_start_win_x(0), _drag_start_win_y(0),
 		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
 		m_pic_lborder
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_l_border.png")),
+			(g_gr->imgcache().get("pics/win_l_border.png", true)),
 		m_pic_rborder
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_r_border.png")),
+			(g_gr->imgcache().get("pics/win_r_border.png", true)),
 		m_pic_top
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_top.png")),
+			(g_gr->imgcache().get("pics/win_top.png", true)),
 		m_pic_bottom
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_bot.png")),
+			(g_gr->imgcache().get("pics/win_bot.png", true)),
 		m_pic_background
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_bg.png")),
+			(g_gr->imgcache().get("pics/win_bg.png", true)),
 		m_center_panel(0),
 		m_fastclick_panel(0)
 {

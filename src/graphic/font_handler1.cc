@@ -36,6 +36,8 @@ using namespace boost;
 
 namespace UI {
 
+// NOCOM(#sirver): this class should no longer be used. use ImageCache
+// directly.
 class Font_Handler1 : public IFont_Handler1 {
 public:
 	Font_Handler1(IGraphic& gr, FileSystem* fs);
@@ -55,22 +57,15 @@ private:
 };
 
 Font_Handler1::Font_Handler1(IGraphic& gr, FileSystem* fs) {
-	RT::IFontLoader * floader = RT::ttf_fontloader_from_filesystem(fs);
-	renderer_.reset(RT::setup_renderer(gr, floader));
 }
 Font_Handler1::~Font_Handler1() {
 }
 
 const IPicture* Font_Handler1::render(const string& text, uint32_t w) {
-	const IPicture* p = 0;
-	try {
-		p = renderer_->render(text, w);
-	} catch (RT::Exception& e) {
-		throw wexception("Richtext rendering error: %s", e.what());
-	}
-	return p;
+	return g_gr->imgcache().render_text(text, w);
 }
 
+// NOCOM(#sirver): get rid of this function first.
 void Font_Handler1::draw_text
 		(RenderTarget & dst, Point dstpoint, const std::string & text, uint32_t w, Align align)
 {

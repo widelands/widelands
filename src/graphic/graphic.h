@@ -43,7 +43,6 @@ struct SDL_Rect;
 struct SDL_Surface;
 struct StreamWrite;
 struct Texture;
-class ImageImpl;
 class Screen;
 class ImageLoaderImpl;
 
@@ -119,14 +118,14 @@ struct Graphic : public IGraphic {
 
 	// NOCOM(#sirver): rename imgcache or make it a function?
 	ImageCache& imgcache() const {return *img_cache_.get();}
+	// NOCOM(#sirver): who needs direct access to this? should be passed down.
 	SurfaceCache& surface_cache() const {return *surface_cache_.get();}
 	void flush_animations();
 
 	void save_png(const IPicture*, StreamWrite*) const;
 
-	virtual Surface* convert_sdl_surface_to_surface(SDL_Surface *, bool alpha = false) const;
-
 	Surface* create_surface(int32_t w, int32_t h, bool alpha = false) const;
+	virtual Surface* create_surface(SDL_Surface *, bool alpha = false) const;
 
 	// NOCOM(#sirver): those below are now internal to graphic/
 	// NOCOM(#sirver): halve_alpha was defaulted to false
@@ -187,15 +186,15 @@ protected:
 
 	/// The class that gets images from disk.
 	boost::scoped_ptr<ImageLoaderImpl> img_loader_;
-	// The cache holding the images.
-	boost::scoped_ptr<ImageCache> img_cache_;
 	// NOCOM(#sirver): document me
 	boost::scoped_ptr<SurfaceCache> surface_cache_;
+	// The cache holding the images.
+	boost::scoped_ptr<ImageCache> img_cache_;
 
 	// The texture needed to draw roads.
-	boost::scoped_ptr<ImageImpl> pic_road_normal_;
-	boost::scoped_ptr<ImageImpl> pic_road_busy_;
-	boost::scoped_ptr<ImageImpl> edgetexture_;
+	boost::scoped_ptr<Surface> pic_road_normal_;
+	boost::scoped_ptr<Surface> pic_road_busy_;
+	boost::scoped_ptr<Surface> edgetexture_;
 
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;

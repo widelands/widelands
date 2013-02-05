@@ -92,7 +92,7 @@ public:
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, const IPicture* src, Rect srcrc, Composite cm = CM_Normal);
+	void doblit(Point dst, const Surface* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
 	Surface* m_surface;

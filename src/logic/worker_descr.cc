@@ -160,7 +160,7 @@ Worker_Descr::~Worker_Descr()
  */
 void Worker_Descr::load_graphics()
 {
-	m_icon = g_gr->imgcache().load(PicMod_Game, m_icon_fname.c_str());
+	m_icon = g_gr->imgcache().get(m_icon_fname.c_str(), true);
 }
 
 

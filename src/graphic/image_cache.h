@@ -26,9 +26,13 @@
 
 #include "picture.h"
 
-class IPicture;
 class IImageLoader;
+class IPicture;
 class Surface;
+class SurfaceCache;
+
+// NOCOM(#sirver): replace permanent image through a function that takes a CachableImage which
+// is an image implementation.
 
 // NOCOM(#sirver): check comment
 // This class can load and cache images, so that they are already available
@@ -46,15 +50,19 @@ public:
 	//without freeing the image first, so be careful. Returns the picture just
 	//inserted / for convenience.
 	// // NOCOM(#sirver): ownership is taken.
-	virtual const IPicture& new_permanent_picture(const std::string& hash, Surface*) = 0;
+	// // NOCOM(#sirver): all methods return object and ownership is retained
+	virtual const IPicture* new_permanent_picture(const std::string& hash, Surface*) = 0;
+	// NOCOM(#sirver): maybe new_temporary_picture that might get deleted for rich text.
 
 	/// Returns the image associated with the given hash. If no image by this hash is known,
 	/// it will try to load one from disk with the filename = hash. If this fails, it will throw an
 	/// error.
-	virtual const IPicture& get(PicMod, const std::string& hash, bool alpha = true) = 0;
-	virtual const IPicture& get_resized(const std::string& hash, uint32_t w, uint32_t h) = 0;
-	virtual const IPicture& get_grayed_out(const std::string& hash) = 0;
-	virtual const IPicture& get_changed_luminosity(const std::string& hash, float factor, bool halve_alpha) = 0;
+	// NOCOM(#sirver): document this
+	virtual const IPicture* get(const std::string& hash, bool alpha = true) = 0;
+	virtual const IPicture* render_text(const std::string& text, uint32_t w) = 0;
+	virtual const IPicture* resize(const IPicture*, uint32_t w, uint32_t h) = 0;
+	virtual const IPicture* gray_out(const IPicture*) = 0;
+	virtual const IPicture* change_luminosity(const IPicture*, float factor, bool halve_alpha) = 0;
 };
 
 // NOCOM(#sirver): Should not take owernshi
