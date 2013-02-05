@@ -24,8 +24,8 @@
 
 struct Rect : public Point {
 	Rect() throw () : w(0), h(0) {}
-	Rect(int32_t x, int32_t y, uint32_t W, uint32_t H) throw ()
-		: Point(x, y), w(W), h(H)
+	Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H) throw ()
+		: Point(gx, gy), w(W), h(H)
 	{}
 	Rect(const Point& p, uint32_t W, uint32_t H) throw ()
 		: Point(p), w(W), h(H)
