@@ -72,7 +72,7 @@ public:
 	ImageLoader(Graphic& gr) : gr_(gr) {}
 	virtual ~ImageLoader() {}
 
-	IPicture* load(const string& fname, bool alpha) const {
+	IPicture* load(const string& fname, bool alpha, bool intensity) const {
 		FileRead fr;
 		SDL_Surface * sdlsurf;
 
@@ -84,7 +84,7 @@ public:
 		if (!sdlsurf)
 			throw wexception("%s", IMG_GetError());
 
-		return gr_.convert_sdl_surface_to_picture(sdlsurf, alpha);
+		return gr_.convert_sdl_surface_to_picture(sdlsurf, alpha, intensity);
 	}
 private:
 	Graphic& gr_;
@@ -238,8 +238,7 @@ Graphic::Graphic
 
 		m_caps.gl.multitexture =
 			 ((strstr(extensions, "GL_ARB_multitexture") != 0) and
-			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0))
-			and (m_caps.gl.max_tex_combined >= 6);
+			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0));
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
@@ -650,13 +649,14 @@ void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
  * @param surf a SDL_Surface from which the Surface will be created; this function
  * takes ownership of surf
  * @param alpha if true the surface is created with alpha channel
+ * @param intensity if true the surface is created as an intensity texture in OpenGL mode
  * @return the new Surface created from the SDL_Surface
  */
-IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha) const
+IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha, bool intensity) const
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
-		return new GLSurfaceTexture(surf);
+		return new GLSurfaceTexture(surf, intensity);
 	}
 #endif
 	SDL_Surface * surface;
@@ -974,7 +974,7 @@ void Graphic::set_world(string worldname) {
 
 	// load edge texture
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
-	m_edgetexture = imgcache().load(PicMod_Game, buf, false);
+	m_edgetexture = imgcache().load(PicMod_Game, buf, false, true);
 }
 
 /**

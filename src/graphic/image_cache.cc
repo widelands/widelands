@@ -40,7 +40,7 @@ public:
 	// Implements ImageCache
 	virtual const IPicture* get(PicMod, const string& hash) const;
 	virtual const IPicture* insert(PicMod, const string& hash, const IPicture*);
-	virtual const IPicture* load(PicMod, const string& fn, bool alpha);
+	virtual const IPicture* load(PicMod, const string& fn, bool alpha, bool intensity);
 	virtual void flush(PicMod);
 
 private:
@@ -96,7 +96,7 @@ void ImageCacheImpl::flush(PicMod module) {
 }
 
 const IPicture* ImageCacheImpl::load
-		(PicMod module, const string& fname, bool alpha)
+		(PicMod module, const string& fname, bool alpha, bool intensity)
 {
 	//  Check if the picture is already loaded.
 	PictureMap::iterator it = m_picturemap.find(fname);
@@ -104,7 +104,7 @@ const IPicture* ImageCacheImpl::load
 	if (it == m_picturemap.end()) {
 		PictureRec rec;
 
-		rec.picture = img_loader_->load(fname, alpha);
+		rec.picture = img_loader_->load(fname, alpha, intensity);
 		rec.modules = 0;
 
 		it = m_picturemap.insert(make_pair(fname, rec)).first;

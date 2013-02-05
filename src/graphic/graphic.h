@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,7 +119,10 @@ struct Graphic : public IGraphic {
 
 	void save_png(const IPicture*, StreamWrite*) const;
 
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface *, bool alpha = false) const;
+	virtual IPicture* convert_sdl_surface_to_picture
+		(SDL_Surface *,
+		 bool alpha = false,
+		 bool intensity = false) const;
 
 	Surface* create_surface(int32_t w, int32_t h, bool alpha = false) const;
 

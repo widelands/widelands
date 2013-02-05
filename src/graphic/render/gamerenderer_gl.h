@@ -27,6 +27,10 @@
 #include <vector>
 #include <boost/scoped_array.hpp>
 
+namespace Widelands {
+struct Coords;
+}
+
 class GLSurface;
 
 /**
@@ -47,19 +51,29 @@ struct GameRendererGL : GameRenderer {
 		 Point                               viewofs);
 
 private:
-	void draw();
-	void draw_terrain();
-	void setup_terrain_base();
-	void draw_terrain_base();
-
-	uint patch_index(int32_t fx, int32_t fy) const;
-
 	struct basevertex {
 		float x;
 		float y;
 		float tcx;
 		float tcy;
 	};
+
+	struct edgefuzzvertex {
+		basevertex base;
+		float edgex;
+		float edgey;
+		uint32_t pad[2];
+	};
+
+	void draw();
+	void draw_terrain();
+	void prepare_terrain_base();
+	void draw_terrain_base();
+	void prepare_terrain_fuzz();
+	void draw_terrain_fuzz();
+
+	uint patch_index(int32_t fx, int32_t fy) const;
+	void compute_basevertex(const Widelands::Coords & coords, basevertex & vtx) const;
 
 	/**
 	 * The following variables are only valid during rendering.
@@ -87,6 +101,11 @@ private:
 	uint m_patch_indices_size;
 	std::vector<uint> m_terrain_freq;
 	std::vector<uint> m_terrain_freq_cum;
+
+	boost::scoped_array<edgefuzzvertex> m_edge_vertices;
+	uint m_edge_vertices_size;
+	std::vector<uint> m_terrain_edge_freq;
+	std::vector<uint> m_terrain_edge_freq_cum;
 	/*@}*/
 };
 

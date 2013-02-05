@@ -30,7 +30,7 @@ public:
 	static void Initialize();
 	static void Cleanup();
 
-	GLSurfaceTexture(SDL_Surface * surface);
+	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
 	GLSurfaceTexture(int w, int h, bool alpha);
 	virtual ~GLSurfaceTexture();
 

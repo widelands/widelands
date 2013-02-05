@@ -30,7 +30,7 @@ class IImageLoader {
 public:
 	virtual ~IImageLoader() {}
 
-	virtual IPicture* load(const std::string& fn, bool alpha) const = 0;
+	virtual IPicture* load(const std::string& fn, bool alpha, bool intensity = false) const = 0;
 };
 
 #endif /* end of include guard: IMAGE_LOADER_H */

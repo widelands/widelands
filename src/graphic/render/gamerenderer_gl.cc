@@ -37,7 +37,8 @@ static const uint PatchSize = 4;
 
 GameRendererGL::GameRendererGL() :
 	m_patch_vertices_size(0),
-	m_patch_indices_size(0)
+	m_patch_indices_size(0),
+	m_edge_vertices_size(0)
 {
 }
 
@@ -129,13 +130,35 @@ void GameRendererGL::draw_terrain()
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
-	setup_terrain_base();
+	prepare_terrain_base();
 	draw_terrain_base();
+	if (g_gr->caps().gl.multitexture && g_gr->caps().gl.max_tex_combined >= 2) {
+		prepare_terrain_fuzz();
+		draw_terrain_fuzz();
+	}
 
 	glDisable(GL_SCISSOR_TEST);
 }
 
-void GameRendererGL::setup_terrain_base()
+void GameRendererGL::compute_basevertex(const Coords & coords, basevertex & vtx) const
+{
+	Map const & map = m_egbase->map();
+	Coords ncoords(coords);
+	map.normalize_coords(ncoords);
+	FCoords fcoords = map.get_fcoords(ncoords);
+	Point pix;
+	MapviewPixelFunctions::get_basepix(coords, pix.x, pix.y);
+	pix.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+	pix -= m_offset;
+	vtx.x = pix.x;
+	vtx.y = pix.y;
+	Point tex;
+	MapviewPixelFunctions::get_basepix(coords, tex.x, tex.y);
+	vtx.tcx = float(tex.x) / TEXTURE_WIDTH;
+	vtx.tcy = float(tex.y) / TEXTURE_HEIGHT;
+}
+
+void GameRendererGL::prepare_terrain_base()
 {
 	Map const & map = m_egbase->map();
 
@@ -161,19 +184,7 @@ void GameRendererGL::setup_terrain_base()
 						(m_patch_size.x + outerx * PatchSize + innerx,
 						 m_patch_size.y + outery * PatchSize + innery);
 					assert(index == patch_index(coords.x, coords.y));
-					Coords ncoords(coords);
-					map.normalize_coords(ncoords);
-					FCoords fcoords = map.get_fcoords(ncoords);
-					Point pix;
-					MapviewPixelFunctions::get_basepix(coords, pix.x, pix.y);
-					pix.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
-					pix -= m_offset;
-					m_patch_vertices[index].x = pix.x;
-					m_patch_vertices[index].y = pix.y;
-					Point tex;
-					MapviewPixelFunctions::get_basepix(coords, tex.x, tex.y);
-					m_patch_vertices[index].tcx = float(tex.x) / TEXTURE_WIDTH;
-					m_patch_vertices[index].tcy = float(tex.y) / TEXTURE_HEIGHT;
+					compute_basevertex(coords, m_patch_vertices[index]);
 					++index;
 
 					if
@@ -181,6 +192,9 @@ void GameRendererGL::setup_terrain_base()
 						 coords.x > m_maxfx || coords.y > m_maxfy)
 						continue;
 
+					Coords ncoords(coords);
+					map.normalize_coords(ncoords);
+					FCoords fcoords = map.get_fcoords(ncoords);
 					Terrain_Index ter_d = fcoords.field->get_terrains().d;
 					Terrain_Index ter_r = fcoords.field->get_terrains().r;
 					if (ter_d >= m_terrain_freq.size())
@@ -278,4 +292,268 @@ void GameRendererGL::draw_terrain_base()
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+}
+
+/*
+ * Schematic of triangle neighborhood:
+ *
+ *               *
+ *              / \
+ *             / u \
+ *         (f)/     \
+ *    *------*------* (r)
+ *     \  l / \  r / \
+ *      \  /   \  /   \
+ *       \/  d  \/ rr  \
+ *       *------*------* (br)
+ *        \ dd /
+ *         \  /
+ *          \/
+ *          *
+ */
+void GameRendererGL::prepare_terrain_fuzz()
+{
+	assert(sizeof(edgefuzzvertex) == 32);
+
+	Map const & map = m_egbase->map();
+
+	if (m_terrain_edge_freq.size() < 16)
+		m_terrain_edge_freq.resize(16);
+	m_terrain_edge_freq.assign(m_terrain_edge_freq.size(), 0);
+
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			FCoords fcoords = map.get_fcoords(ncoords);
+
+			Terrain_Index ter_d = fcoords.field->get_terrains().d;
+			Terrain_Index ter_r = fcoords.field->get_terrains().r;
+			Terrain_Index ter_u = map.tr_n(fcoords).field->get_terrains().d;
+			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
+			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
+			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
+
+			if (ter_r != ter_d) {
+				if (ter_r >= m_terrain_edge_freq.size())
+					m_terrain_edge_freq.resize(ter_r + 1);
+				m_terrain_edge_freq[ter_r] += 1;
+				if (ter_d >= m_terrain_edge_freq.size())
+					m_terrain_edge_freq.resize(ter_d + 1);
+				m_terrain_edge_freq[ter_d] += 1;
+			}
+			if (ter_r != ter_u) {
+				if (ter_u >= m_terrain_edge_freq.size())
+					m_terrain_edge_freq.resize(ter_u + 1);
+				m_terrain_edge_freq[ter_u] += 1;
+			}
+			if (ter_r != ter_rr) {
+				if (ter_rr >= m_terrain_edge_freq.size())
+					m_terrain_edge_freq.resize(ter_rr + 1);
+				m_terrain_edge_freq[ter_rr] += 1;
+			}
+			if (ter_d != ter_l) {
+				if (ter_l >= m_terrain_edge_freq.size())
+					m_terrain_edge_freq.resize(ter_l + 1);
+				m_terrain_edge_freq[ter_l] += 1;
+			}
+			if (ter_d != ter_dd) {
+				if (ter_dd >= m_terrain_edge_freq.size())
+					m_terrain_edge_freq.resize(ter_dd + 1);
+				m_terrain_edge_freq[ter_dd] += 1;
+			}
+		}
+	}
+
+	uint nrtriangles = 0;
+	m_terrain_edge_freq_cum.resize(m_terrain_edge_freq.size());
+	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter) {
+		m_terrain_edge_freq_cum[ter] = nrtriangles;
+		nrtriangles += m_terrain_edge_freq[ter];
+	}
+
+	if (3 * nrtriangles > m_edge_vertices_size) {
+		m_edge_vertices.reset(new edgefuzzvertex[3 * nrtriangles]);
+		m_edge_vertices_size = 3 * nrtriangles;
+	}
+
+	std::vector<uint> indexs;
+	indexs.resize(m_terrain_edge_freq_cum.size());
+	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter)
+		indexs[ter] = 3 * m_terrain_edge_freq_cum[ter];
+
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			FCoords fcoords = map.get_fcoords(ncoords);
+
+			Terrain_Index ter_d = fcoords.field->get_terrains().d;
+			Terrain_Index ter_r = fcoords.field->get_terrains().r;
+			Terrain_Index ter_u = map.tr_n(fcoords).field->get_terrains().d;
+			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
+			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
+			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
+
+			Coords f(fx, fy);
+			Coords rn(fx + 1, fy);
+			Coords brn(fx + (fy & 1), fy + 1);
+			Coords bln(brn.x - 1, brn.y);
+
+			uint index;
+			if (ter_r != ter_d) {
+				index = indexs[ter_r];
+				compute_basevertex(f, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				compute_basevertex(bln, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.5;
+				m_edge_vertices[index].edgey = 1.0;
+				++index;
+				compute_basevertex(brn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 1.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				indexs[ter_r] = index;
+
+				index = indexs[ter_d];
+				compute_basevertex(f, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				compute_basevertex(brn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 1.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				compute_basevertex(rn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.5;
+				m_edge_vertices[index].edgey = 1.0;
+				++index;
+				indexs[ter_d] = index;
+			}
+			if (ter_r != ter_u) {
+				index = indexs[ter_u];
+				compute_basevertex(f, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				compute_basevertex(brn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.5;
+				m_edge_vertices[index].edgey = 1.0;
+				++index;
+				compute_basevertex(rn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 1.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				indexs[ter_u] = index;
+			}
+			if (ter_r != ter_rr) {
+				index = indexs[ter_rr];
+				compute_basevertex(f, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.5;
+				m_edge_vertices[index].edgey = 1.0;
+				++index;
+				compute_basevertex(brn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 1.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				compute_basevertex(rn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				indexs[ter_rr] = index;
+			}
+			if (ter_d != ter_l) {
+				index = indexs[ter_l];
+				compute_basevertex(f, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 1.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				compute_basevertex(bln, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				compute_basevertex(brn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.5;
+				m_edge_vertices[index].edgey = 1.0;
+				++index;
+				indexs[ter_l] = index;
+			}
+			if (ter_d != ter_dd) {
+				index = indexs[ter_dd];
+				compute_basevertex(f, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.5;
+				m_edge_vertices[index].edgey = 1.0;
+				++index;
+				compute_basevertex(bln, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 1.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				compute_basevertex(brn, m_edge_vertices[index].base);
+				m_edge_vertices[index].edgex = 0.0;
+				m_edge_vertices[index].edgey = 0.0;
+				++index;
+				indexs[ter_dd] = index;
+			}
+		}
+	}
+
+	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter) {
+		assert(indexs[ter] == 3 * (m_terrain_edge_freq_cum[ter] + m_terrain_edge_freq[ter]));
+	}
+}
+
+void GameRendererGL::draw_terrain_fuzz()
+{
+	Map const & map = m_egbase->map();
+	World const & world = map.world();
+
+	glVertexPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].base.x);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].base.tcx);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glActiveTextureARB(GL_TEXTURE1_ARB);
+	glClientActiveTextureARB(GL_TEXTURE1_ARB);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].edgex);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	GLuint edge = dynamic_cast<GLSurfaceTexture const &>
+		(*g_gr->get_edge_texture()).get_gl_texture();
+	glBindTexture(GL_TEXTURE_2D, edge);
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
+	glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_ARB, GL_REPLACE);
+	glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_ARB, GL_PREVIOUS);
+	glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_RGB_ARB, GL_SRC_COLOR);
+	glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_ALPHA_ARB, GL_REPLACE);
+	glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_ALPHA_ARB, GL_TEXTURE);
+	glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND0_ALPHA_ARB, GL_SRC_ALPHA);
+	glActiveTextureARB(GL_TEXTURE0_ARB);
+	glClientActiveTextureARB(GL_TEXTURE0_ARB);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_SRC_ALPHA);
+
+	for (Terrain_Index ter = 0; ter < m_terrain_freq.size(); ++ter) {
+		if (!m_terrain_edge_freq[ter])
+			continue;
+
+		const Texture & texture =
+				*g_gr->get_maptexture_data
+					(world.terrain_descr(ter).get_texture());
+		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
+		glDrawArrays
+			(GL_TRIANGLES,
+			 3 * m_terrain_edge_freq_cum[ter], 3 * m_terrain_edge_freq[ter]);
+	}
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glActiveTextureARB(GL_TEXTURE1_ARB);
+	glClientActiveTextureARB(GL_TEXTURE1_ARB);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisable(GL_TEXTURE_2D);
+	glActiveTextureARB(GL_TEXTURE0_ARB);
+	glClientActiveTextureARB(GL_TEXTURE0_ARB);
 }

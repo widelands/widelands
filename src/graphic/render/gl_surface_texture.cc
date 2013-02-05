@@ -85,7 +85,7 @@ GLSurfaceTexture::GLSurfaceTexture(int w, int h, bool alpha)
  *
  * \note Takes ownership of the given surface.
  */
-GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
+GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 {
 	init(surface->w, surface->h);
 
@@ -166,7 +166,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
 	SDL_LockSurface(surface);
 
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0,
+		(GL_TEXTURE_2D, 0, intensity ? GL_INTENSITY : GL_RGBA, m_tex_w, m_tex_h, 0,
 		 pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_UnlockSurface(surface);
