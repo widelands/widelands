@@ -120,9 +120,7 @@ struct Graphic : public IGraphic {
 	void save_png(const IPicture*, StreamWrite*) const;
 
 	virtual IPicture* convert_sdl_surface_to_picture
-		(SDL_Surface *,
-		 bool alpha = false,
-		 bool intensity = false) const;
+		(SDL_Surface *, bool alpha = false, bool intensity = false) const;
 
 	Surface* create_surface(int32_t w, int32_t h, bool alpha = false) const;
 

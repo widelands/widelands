@@ -509,6 +509,9 @@ void GameRendererGL::draw_terrain_fuzz()
 	Map const & map = m_egbase->map();
 	World const & world = map.world();
 
+	if (m_edge_vertices_size == 0)
+		return;
+
 	glVertexPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].base.x);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].base.tcx);
 	glEnableClientState(GL_VERTEX_ARRAY);
