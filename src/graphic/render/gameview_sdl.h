@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2012 by the Widelands Development Team
+ * Copyright (C) 2011-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,29 +22,12 @@
 
 #include "gameview.h"
 
-class GameViewSDL : public GameView
+struct GameViewSDL : public GameView
 {
 public:
 	GameViewSDL(RenderTarget & rt):
 		GameView(rt) {}
 	~GameViewSDL() {}
-
-protected:
-	/**
-	 * Helper function to draw two terrain triangles. This is called from the
-	 * rendermap() functions.
-	 */
-	void draw_field
-		(Rect          & subwin,
-		 Vertex  const &  f_vert,
-		 Vertex  const &  r_vert,
-		 Vertex  const & bl_vert,
-		 Vertex  const & br_vert,
-		 uint8_t         roads,
-		 Texture const & tr_d_texture,
-		 Texture const &  l_r_texture,
-		 Texture const &  f_d_texture,
-		 Texture const &  f_r_texture);
 };
 
 #endif /* GAMEVIEW_SDL_H_ */

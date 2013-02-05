@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,8 +66,8 @@ struct Map_Object_Descr : boost::noncopyable {
 			throw Animation_Nonexistent();
 		return it->second;
 	}
-	uint32_t get_animation(const std::string & name) const {
-		return get_animation(name.c_str());
+	uint32_t get_animation(const std::string & animname) const {
+		return get_animation(animname.c_str());
 	}
 
 	uint32_t main_animation() const throw () {

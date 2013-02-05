@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -128,15 +128,15 @@ struct Tribe_Descr : boost::noncopyable {
 	Immovable_Descr const * get_immovable_descr(int32_t const index) const {
 		return m_immovables.get(index);
 	}
-	Immovable_Descr const * get_immovable_descr(const std::string & name) const {
-		return m_immovables.get(get_immovable_index(name.c_str()));
+	Immovable_Descr const * get_immovable_descr(const std::string & immname) const {
+		return m_immovables.get(get_immovable_index(immname.c_str()));
 	}
 	int32_t get_bob(char const * const l) const {return m_bobs.get_index(l);}
 	Bob::Descr const * get_bob_descr(uint16_t const index) const {
 		return m_bobs.get(index);
 	}
-	Bob::Descr const * get_bob_descr(const std::string & name) const {
-		return m_bobs.exists(name.c_str());
+	Bob::Descr const * get_bob_descr(const std::string & bobname) const {
+		return m_bobs.exists(bobname.c_str());
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 

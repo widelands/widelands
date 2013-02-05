@@ -17,8 +17,6 @@
  *
  */
 
-#ifdef USE_OPENGL
-
 #include "gameview_opengl.h"
 
 #include "constants.h"
@@ -100,5 +98,3 @@ void GameViewOpenGL::rendermap_deint()
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
 }
-
-#endif

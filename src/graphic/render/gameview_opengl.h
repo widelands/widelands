@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,15 @@
  *
  */
 
-#ifdef USE_OPENGL
 #ifndef GAMEVIEW_OPENGL_H_
 #define GAMEVIEW_OPENGL_H_
 
 #include "gameview.h"
 
-class GameViewOpenGL : public GameView
+struct Texture;
+struct Vertex;
+
+struct GameViewOpenGL : public GameView
 {
 public:
 	GameViewOpenGL(RenderTarget & rt):
@@ -53,4 +55,3 @@ protected:
 
 
 #endif /* GAMEVIEW_OPENGL_H_ */
-#endif /* USE_OPENGL */
