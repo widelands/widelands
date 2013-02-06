@@ -32,6 +32,8 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
 
+#include "upcast.h"
+
 using namespace Widelands;
 
 static const uint PatchSize = 4;
@@ -54,6 +56,7 @@ void GameRendererGL::rendermap
 	 Widelands::Player           const &       player,
 	 Point                                     viewofs)
 {
+	m_dst = &dst;
 	m_surface = dynamic_cast<GLSurface *>(dst.get_surface());
 	if (!m_surface)
 		return;
@@ -70,6 +73,7 @@ void GameRendererGL::rendermap
 	 Widelands::Editor_Game_Base const & egbase,
 	 Point                               viewofs)
 {
+	m_dst = &dst;
 	m_surface = dynamic_cast<GLSurface *>(dst.get_surface());
 	if (!m_surface)
 		return;
@@ -154,11 +158,12 @@ void GameRendererGL::draw()
 	prepare_terrain_base();
 	draw_terrain_base();
 	if (g_gr->caps().gl.multitexture && g_gr->caps().gl.max_tex_combined >= 2) {
-		prepare_terrain_fuzz();
-		draw_terrain_fuzz();
+		prepare_terrain_dither();
+		draw_terrain_dither();
 	}
 	prepare_roads();
 	draw_roads();
+	draw_objects();
 
 	glDisable(GL_SCISSOR_TEST);
 }
@@ -343,9 +348,9 @@ void GameRendererGL::draw_terrain_base()
  *          \/
  *          *
  */
-void GameRendererGL::prepare_terrain_fuzz()
+void GameRendererGL::prepare_terrain_dither()
 {
-	assert(sizeof(edgefuzzvertex) == 32);
+	assert(sizeof(dithervertex) == 32);
 
 	Map const & map = m_egbase->map();
 	World const & world = map.world();
@@ -366,12 +371,12 @@ void GameRendererGL::prepare_terrain_fuzz()
 			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
 			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
 			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
-			int32_t lyr_d = world.get_ter(ter_d).edge_fuzz_layer();
-			int32_t lyr_r = world.get_ter(ter_r).edge_fuzz_layer();
-			int32_t lyr_u = world.get_ter(ter_u).edge_fuzz_layer();
-			int32_t lyr_rr = world.get_ter(ter_rr).edge_fuzz_layer();
-			int32_t lyr_l = world.get_ter(ter_l).edge_fuzz_layer();
-			int32_t lyr_dd = world.get_ter(ter_dd).edge_fuzz_layer();
+			int32_t lyr_d = world.get_ter(ter_d).dither_layer();
+			int32_t lyr_r = world.get_ter(ter_r).dither_layer();
+			int32_t lyr_u = world.get_ter(ter_u).dither_layer();
+			int32_t lyr_rr = world.get_ter(ter_rr).dither_layer();
+			int32_t lyr_l = world.get_ter(ter_l).dither_layer();
+			int32_t lyr_dd = world.get_ter(ter_dd).dither_layer();
 
 			if (lyr_r > lyr_d) {
 				if (ter_r >= m_terrain_edge_freq.size())
@@ -413,7 +418,7 @@ void GameRendererGL::prepare_terrain_fuzz()
 	}
 
 	if (3 * nrtriangles > m_edge_vertices_size) {
-		m_edge_vertices.reset(new edgefuzzvertex[3 * nrtriangles]);
+		m_edge_vertices.reset(new dithervertex[3 * nrtriangles]);
 		m_edge_vertices_size = 3 * nrtriangles;
 	}
 
@@ -434,12 +439,12 @@ void GameRendererGL::prepare_terrain_fuzz()
 			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
 			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
 			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
-			int32_t lyr_d = world.get_ter(ter_d).edge_fuzz_layer();
-			int32_t lyr_r = world.get_ter(ter_r).edge_fuzz_layer();
-			int32_t lyr_u = world.get_ter(ter_u).edge_fuzz_layer();
-			int32_t lyr_rr = world.get_ter(ter_rr).edge_fuzz_layer();
-			int32_t lyr_l = world.get_ter(ter_l).edge_fuzz_layer();
-			int32_t lyr_dd = world.get_ter(ter_dd).edge_fuzz_layer();
+			int32_t lyr_d = world.get_ter(ter_d).dither_layer();
+			int32_t lyr_r = world.get_ter(ter_r).dither_layer();
+			int32_t lyr_u = world.get_ter(ter_u).dither_layer();
+			int32_t lyr_rr = world.get_ter(ter_rr).dither_layer();
+			int32_t lyr_l = world.get_ter(ter_l).dither_layer();
+			int32_t lyr_dd = world.get_ter(ter_dd).dither_layer();
 
 			Coords f(fx, fy);
 			Coords rn(fx + 1, fy);
@@ -554,7 +559,7 @@ void GameRendererGL::prepare_terrain_fuzz()
 	}
 }
 
-void GameRendererGL::draw_terrain_fuzz()
+void GameRendererGL::draw_terrain_dither()
 {
 	Map const & map = m_egbase->map();
 	World const & world = map.world();
@@ -562,16 +567,16 @@ void GameRendererGL::draw_terrain_fuzz()
 	if (m_edge_vertices_size == 0)
 		return;
 
-	glVertexPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].x);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].tcx);
-	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(edgefuzzvertex), &m_edge_vertices[0].color);
+	glVertexPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].x);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].tcx);
+	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(dithervertex), &m_edge_vertices[0].color);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
 
 	glActiveTextureARB(GL_TEXTURE1_ARB);
 	glClientActiveTextureARB(GL_TEXTURE1_ARB);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].edgex);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].edgex);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	GLuint edge = dynamic_cast<GLSurfaceTexture const &>
 		(*g_gr->get_edge_texture()).get_gl_texture();
@@ -754,7 +759,7 @@ void GameRendererGL::draw_roads()
 	GLuint rt_normal =
 		dynamic_cast<GLSurfaceTexture const &>
 		(*g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
-	GLuint rt_busy   =
+	GLuint rt_busy =
 		dynamic_cast<GLSurfaceTexture const &>
 		(*g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
 
@@ -780,4 +785,188 @@ void GameRendererGL::draw_roads()
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
+}
+
+void GameRendererGL::draw_objects()
+{
+	Map const & map = m_egbase->map();
+
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			FCoords f = map.get_fcoords(ncoords);
+			FCoords r = map.r_n(f);
+			FCoords bl = map.bl_n(f);
+			FCoords br = map.br_n(f);
+			Point f_pos, r_pos, bl_pos, br_pos;
+			MapviewPixelFunctions::get_basepix(Coords(fx, fy), f_pos.x, f_pos.y);
+			MapviewPixelFunctions::get_basepix(Coords(fx + 1, fy), r_pos.x, r_pos.y);
+			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1) - 1, fy + 1), bl_pos.x, bl_pos.y);
+			MapviewPixelFunctions::get_basepix(Coords(fx + (fy & 1), fy + 1), br_pos.x, br_pos.y);
+			f_pos.y -= f.field->get_height() * HEIGHT_FACTOR;
+			r_pos.y -= r.field->get_height() * HEIGHT_FACTOR;
+			bl_pos.y -= bl.field->get_height() * HEIGHT_FACTOR;
+			br_pos.y -= br.field->get_height() * HEIGHT_FACTOR;
+			f_pos -= m_offset;
+			r_pos -= m_offset;
+			bl_pos -= m_offset;
+			br_pos -= m_offset;
+
+			uint8_t f_owner_number = f.field->get_owned_by();
+			uint8_t r_owner_number = r.field->get_owned_by();
+			uint8_t bl_owner_number = bl.field->get_owned_by();
+			uint8_t br_owner_number = br.field->get_owned_by();
+			bool f_isborder = f.field->is_border();
+			bool r_isborder = r.field->is_border();
+			bool bl_isborder = bl.field->is_border();
+			bool br_isborder = br.field->is_border();
+			Vision f_vision = 2;
+			Vision r_vision = 2;
+			Vision bl_vision = 2;
+			Vision br_vision = 2;
+
+			if (m_player && !m_player->see_all()) {
+				Player::Field const & f_pl = m_player->fields()[map.get_index(f, map.get_width())];
+				Player::Field const & r_pl = m_player->fields()[map.get_index(r, map.get_width())];
+				Player::Field const & bl_pl = m_player->fields()[map.get_index(bl, map.get_width())];
+				Player::Field const & br_pl = m_player->fields()[map.get_index(br, map.get_width())];
+
+				f_vision = f_pl.vision;
+				r_vision = r_pl.vision;
+				bl_vision = bl_pl.vision;
+				br_vision = br_pl.vision;
+				if (f_vision == 1) {
+					f_owner_number = f_pl.owner;
+					f_isborder = f_pl.border;
+				}
+				if (r_vision == 1) {
+					r_owner_number = r_pl.owner;
+					r_isborder = r_pl.border;
+				}
+				if (bl_vision == 1) {
+					bl_owner_number = bl_pl.owner;
+					bl_isborder = bl_pl.border;
+				}
+				if (br_vision == 1) {
+					br_owner_number = br_pl.owner;
+					br_isborder = br_pl.border;
+				}
+			}
+
+			if (f_isborder) {
+				Player const & owner = m_egbase->player(f_owner_number);
+				uint32_t const anim = owner.frontier_anim();
+				if (f_vision)
+					m_dst->drawanim(f_pos, anim, 0, &owner);
+				if
+					((f_vision || r_vision) &&
+					 r_isborder &&
+					 (r_owner_number == f_owner_number || !r_owner_number))
+					m_dst->drawanim(middle(f_pos, r_pos), anim, 0, &owner);
+				if
+					((f_vision || bl_vision) &&
+					 bl_isborder &&
+					 (bl_owner_number == f_owner_number || !bl_owner_number))
+					m_dst->drawanim(middle(f_pos, bl_pos), anim, 0, &owner);
+				if
+					((f_vision || br_vision) &&
+					 br_isborder &&
+					 (br_owner_number == f_owner_number || !br_owner_number))
+					m_dst->drawanim(middle(f_pos, br_pos), anim, 0, &owner);
+			}
+
+			if (1 < f_vision) { // Render stuff that belongs to the node.
+				if (BaseImmovable * const imm = f.field->get_immovable())
+					imm->draw(*m_egbase, *m_dst, f, f_pos);
+				for
+					(Bob * bob = f.field->get_first_bob();
+					 bob;
+					 bob = bob->get_next_bob())
+					bob->draw(*m_egbase, *m_dst, f_pos);
+
+				//  Render overlays on nodes.
+				Overlay_Manager::Overlay_Info
+					overlay_info[MAX_OVERLAYS_PER_NODE];
+
+				const Overlay_Manager::Overlay_Info * const end =
+					overlay_info
+					+
+					map.overlay_manager().get_overlays(f, overlay_info);
+
+				for
+					(const Overlay_Manager::Overlay_Info * it = overlay_info;
+					 it < end;
+					 ++it)
+					m_dst->blit(f_pos - it->hotspot, it->pic);
+			} else if (f_vision == 1) {
+				Player::Field const & f_pl = m_player->fields()[map.get_index(f, map.get_width())];
+				const Player * owner = f_owner_number ? m_egbase->get_player(f_owner_number) : 0;
+				if
+					(const Map_Object_Descr * const map_object_descr =
+						f_pl.map_object_descr[TCoords<>::None])
+				{
+					if
+						(const Player::Constructionsite_Information * const csinf =
+						 f_pl.constructionsite[TCoords<>::None])
+					{
+						// draw the partly finished constructionsite
+						uint32_t anim;
+						try {
+							anim = csinf->becomes->get_animation("build");
+						} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+							try {
+								anim = csinf->becomes->get_animation("unoccupied");
+							} catch (Map_Object_Descr::Animation_Nonexistent) {
+								anim = csinf->becomes->get_animation("idle");
+							}
+						}
+						const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
+						uint32_t cur_frame =
+							csinf->totaltime ? csinf->completedtime * nr_frames / csinf->totaltime : 0;
+						uint32_t tanim = cur_frame * FRAME_LENGTH;
+						uint32_t w, h;
+						g_gr->get_animation_size(anim, tanim, w, h);
+						uint32_t lines = h * csinf->completedtime * nr_frames;
+						if (csinf->totaltime)
+							lines /= csinf->totaltime;
+						assert(h * cur_frame <= lines);
+						lines -= h * cur_frame; //  This won't work if pictures have various sizes.
+
+						if (cur_frame) // not the first frame
+							// draw the prev frame from top to where next image will be drawing
+							m_dst->drawanimrect
+								(f_pos, anim, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
+						else if (csinf->was) {
+							// Is the first frame, but there was another building here before,
+							// get its last build picture and draw it instead.
+							uint32_t a;
+							try {
+								a = csinf->was->get_animation("unoccupied");
+							} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+								a = csinf->was->get_animation("idle");
+							}
+							m_dst->drawanimrect
+								(f_pos, a, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
+						}
+						assert(lines <= h);
+						m_dst->drawanimrect(f_pos, anim, tanim, owner, Rect(Point(0, h - lines), w, lines));
+					} else if (upcast(const Building_Descr, building, map_object_descr)) {
+						// this is a building therefore we either draw unoccupied or idle animation
+						uint32_t pic;
+						try {
+							pic = building->get_animation("unoccupied");
+						} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+							pic = building->get_animation("idle");
+						}
+						m_dst->drawanim(f_pos, pic, 0, owner);
+					} else if (const uint32_t pic = map_object_descr->main_animation()) {
+						m_dst->drawanim(f_pos, pic, 0, owner);
+					} else if (map_object_descr == &Widelands::g_flag_descr) {
+						m_dst->drawanim(f_pos, owner->flag_anim(), 0, owner);
+					}
+				}
+			}
+		}
+	}
 }

@@ -61,7 +61,7 @@ private:
 		uint32_t pad[3];
 	};
 
-	struct edgefuzzvertex {
+	struct dithervertex {
 		float x;
 		float y;
 		float tcx;
@@ -75,10 +75,11 @@ private:
 	void draw();
 	void prepare_terrain_base();
 	void draw_terrain_base();
-	void prepare_terrain_fuzz();
-	void draw_terrain_fuzz();
+	void prepare_terrain_dither();
+	void draw_terrain_dither();
 	void prepare_roads();
 	void draw_roads();
+	void draw_objects();
 
 	uint patch_index(int32_t fx, int32_t fy) const;
 	uint8_t field_brightness(const Widelands::FCoords & coords) const;
@@ -90,6 +91,7 @@ private:
 	 * The following variables are only valid during rendering.
 	 */
 	/*@{*/
+	RenderTarget * m_dst;
 	GLSurface * m_surface;
 	Widelands::Editor_Game_Base const * m_egbase;
 	Widelands::Player const * m_player;
@@ -113,7 +115,7 @@ private:
 	std::vector<uint> m_terrain_freq;
 	std::vector<uint> m_terrain_freq_cum;
 
-	boost::scoped_array<edgefuzzvertex> m_edge_vertices;
+	boost::scoped_array<dithervertex> m_edge_vertices;
 	uint m_edge_vertices_size;
 	std::vector<uint> m_terrain_edge_freq;
 	std::vector<uint> m_terrain_edge_freq_cum;

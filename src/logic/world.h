@@ -113,7 +113,7 @@ struct Terrain_Descr : boost::noncopyable {
 	int32_t get_default_resources_amount() const throw () {
 		return m_default_amount;
 	}
-	int32_t edge_fuzz_layer() const {return m_edge_fuzz_layer;}
+	int32_t dither_layer() const {return m_dither_layer;}
 
 private:
 	const std::string m_name;
@@ -122,7 +122,7 @@ private:
 	uint32_t    m_frametime;
 	uint8_t   m_is;
 
-	int32_t m_edge_fuzz_layer;
+	int32_t m_dither_layer;
 
 	uint8_t         * m_valid_resources;
 	uint8_t           m_nr_valid_resources;
