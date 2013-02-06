@@ -30,6 +30,7 @@
 
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
+#include "wui/overlay_manager.h"
 
 using namespace Widelands;
 
@@ -38,7 +39,8 @@ static const uint PatchSize = 4;
 GameRendererGL::GameRendererGL() :
 	m_patch_vertices_size(0),
 	m_patch_indices_size(0),
-	m_edge_vertices_size(0)
+	m_edge_vertices_size(0),
+	m_road_vertices_size(0)
 {
 }
 
@@ -77,11 +79,6 @@ void GameRendererGL::rendermap
 	m_player = 0;
 
 	draw();
-}
-
-void GameRendererGL::draw()
-{
-	draw_terrain();
 }
 
 uint GameRendererGL::patch_index(int32_t fx, int32_t fy) const
@@ -128,7 +125,7 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 	return brightness;
 }
 
-void GameRendererGL::draw_terrain()
+void GameRendererGL::draw()
 {
 	assert(m_offset.x >= 0); // divisions involving negative numbers are bad
 	assert(m_offset.y >= 0);
@@ -160,6 +157,8 @@ void GameRendererGL::draw_terrain()
 		prepare_terrain_fuzz();
 		draw_terrain_fuzz();
 	}
+	prepare_roads();
+	draw_roads();
 
 	glDisable(GL_SCISSOR_TEST);
 }
@@ -613,4 +612,172 @@ void GameRendererGL::draw_terrain_fuzz()
 	glDisable(GL_TEXTURE_2D);
 	glActiveTextureARB(GL_TEXTURE0_ARB);
 	glClientActiveTextureARB(GL_TEXTURE0_ARB);
+}
+
+uint8_t GameRendererGL::field_roads(const FCoords & coords) const
+{
+	if (m_player) {
+		const Map & map = m_egbase->map();
+		const Player::Field & pf = m_player->fields()[Map::get_index(coords, map.get_width())];
+		return pf.roads | map.get_overlay_manager().get_road_overlay(coords);
+	} else {
+		return coords.field->get_roads();
+	}
+}
+
+void GameRendererGL::prepare_roads()
+{
+	const Map & map = m_egbase->map();
+
+	m_road_freq[0] = 0;
+	m_road_freq[1] = 0;
+
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			FCoords fcoords = map.get_fcoords(ncoords);
+			uint8_t roads = field_roads(fcoords);
+
+			for (int dir = 0; dir < 3; ++dir) {
+				uint8_t road = (roads >> (2 * dir)) & Road_Mask;
+				if (road >= Road_Normal && road <= Road_Busy) {
+					++m_road_freq[road - Road_Normal];
+				}
+			}
+		}
+	}
+
+	uint nrquads = m_road_freq[0] + m_road_freq[1];
+	if (4 * nrquads > m_road_vertices_size) {
+		m_road_vertices.reset(new basevertex[4 * nrquads]);
+		m_road_vertices_size = 4 * nrquads;
+	}
+
+	uint indexs[2];
+	indexs[0] = 0;
+	indexs[1] = 4 * m_road_freq[0];
+
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			FCoords fcoords = map.get_fcoords(ncoords);
+			uint8_t roads = field_roads(fcoords);
+
+			uint8_t road = (roads >> Road_East) & Road_Mask;
+			if (road >= Road_Normal && road <= Road_Busy) {
+				uint index = indexs[road - Road_Normal];
+				basevertex start, end;
+				compute_basevertex(Coords(fx, fy), start);
+				compute_basevertex(Coords(fx + 1, fy), end);
+				m_road_vertices[index] = start;
+				m_road_vertices[index].y -= 2;
+				m_road_vertices[index].tcy -= 2.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = start;
+				m_road_vertices[index].y += 2;
+				m_road_vertices[index].tcy += 2.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = end;
+				m_road_vertices[index].y += 2;
+				m_road_vertices[index].tcy += 2.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = end;
+				m_road_vertices[index].y -= 2;
+				m_road_vertices[index].tcy -= 2.0 / TEXTURE_HEIGHT;
+				++index;
+				indexs[road - Road_Normal] = index;
+			}
+
+			road = (roads >> Road_SouthEast) & Road_Mask;
+			if (road >= Road_Normal && road <= Road_Busy) {
+				uint index = indexs[road - Road_Normal];
+				basevertex start, end;
+				compute_basevertex(Coords(fx, fy), start);
+				compute_basevertex(Coords(fx + (fy & 1), fy + 1), end);
+				m_road_vertices[index] = start;
+				m_road_vertices[index].x += 3;
+				m_road_vertices[index].tcx += 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = start;
+				m_road_vertices[index].x -= 3;
+				m_road_vertices[index].tcx -= 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = end;
+				m_road_vertices[index].x -= 3;
+				m_road_vertices[index].tcx -= 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = end;
+				m_road_vertices[index].x += 3;
+				m_road_vertices[index].tcx += 3.0 / TEXTURE_HEIGHT;
+				++index;
+				indexs[road - Road_Normal] = index;
+			}
+
+			road = (roads >> Road_SouthWest) & Road_Mask;
+			if (road >= Road_Normal && road <= Road_Busy) {
+				uint index = indexs[road - Road_Normal];
+				basevertex start, end;
+				compute_basevertex(Coords(fx, fy), start);
+				compute_basevertex(Coords(fx + (fy & 1) - 1, fy + 1), end);
+				m_road_vertices[index] = start;
+				m_road_vertices[index].x += 3;
+				m_road_vertices[index].tcx += 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = start;
+				m_road_vertices[index].x -= 3;
+				m_road_vertices[index].tcx -= 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = end;
+				m_road_vertices[index].x -= 3;
+				m_road_vertices[index].tcx -= 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices[index] = end;
+				m_road_vertices[index].x += 3;
+				m_road_vertices[index].tcx += 3.0 / TEXTURE_HEIGHT;
+				++index;
+				indexs[road - Road_Normal] = index;
+			}
+		}
+	}
+
+	assert(indexs[0] == 4 * m_road_freq[0]);
+	assert(indexs[1] == 4 * nrquads);
+}
+
+void GameRendererGL::draw_roads()
+{
+	if (!m_road_freq[0] && !m_road_freq[1])
+		return;
+
+	GLuint rt_normal =
+		dynamic_cast<GLSurfaceTexture const &>
+		(*g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
+	GLuint rt_busy   =
+		dynamic_cast<GLSurfaceTexture const &>
+		(*g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
+
+	glVertexPointer(2, GL_FLOAT, sizeof(basevertex), &m_road_vertices[0].x);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(basevertex), &m_road_vertices[0].tcx);
+	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(basevertex), &m_road_vertices[0].color);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+
+	glDisable(GL_BLEND);
+
+	if (m_road_freq[0]) {
+		glBindTexture(GL_TEXTURE_2D, rt_normal);
+		glDrawArrays(GL_QUADS, 0, 4 * m_road_freq[0]);
+	}
+
+	if (m_road_freq[1]) {
+		glBindTexture(GL_TEXTURE_2D, rt_busy);
+		glDrawArrays(GL_QUADS, 4 * m_road_freq[0], 4 * m_road_freq[1]);
+	}
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
 }

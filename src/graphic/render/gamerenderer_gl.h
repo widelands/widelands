@@ -73,14 +73,16 @@ private:
 	};
 
 	void draw();
-	void draw_terrain();
 	void prepare_terrain_base();
 	void draw_terrain_base();
 	void prepare_terrain_fuzz();
 	void draw_terrain_fuzz();
+	void prepare_roads();
+	void draw_roads();
 
 	uint patch_index(int32_t fx, int32_t fy) const;
 	uint8_t field_brightness(const Widelands::FCoords & coords) const;
+	uint8_t field_roads(const Widelands::FCoords & coords) const;
 	template<typename vertex>
 	void compute_basevertex(const Widelands::Coords & coords, vertex & vtx) const;
 
@@ -115,6 +117,10 @@ private:
 	uint m_edge_vertices_size;
 	std::vector<uint> m_terrain_edge_freq;
 	std::vector<uint> m_terrain_edge_freq_cum;
+
+	uint m_road_freq[2];
+	boost::scoped_array<basevertex> m_road_vertices;
+	uint m_road_vertices_size;
 	/*@}*/
 };
 
