@@ -29,6 +29,7 @@
 
 namespace Widelands {
 struct Coords;
+struct FCoords;
 }
 
 class GLSurface;
@@ -56,13 +57,19 @@ private:
 		float y;
 		float tcx;
 		float tcy;
+		uint8_t color[4];
+		uint32_t pad[3];
 	};
 
 	struct edgefuzzvertex {
-		basevertex base;
+		float x;
+		float y;
+		float tcx;
+		float tcy;
 		float edgex;
 		float edgey;
-		uint32_t pad[2];
+		uint8_t color[4];
+		uint32_t pad[1];
 	};
 
 	void draw();
@@ -73,7 +80,9 @@ private:
 	void draw_terrain_fuzz();
 
 	uint patch_index(int32_t fx, int32_t fy) const;
-	void compute_basevertex(const Widelands::Coords & coords, basevertex & vtx) const;
+	uint8_t field_brightness(const Widelands::FCoords & coords) const;
+	template<typename vertex>
+	void compute_basevertex(const Widelands::Coords & coords, vertex & vtx) const;
 
 	/**
 	 * The following variables are only valid during rendering.

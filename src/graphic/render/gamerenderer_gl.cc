@@ -102,10 +102,34 @@ uint GameRendererGL::patch_index(int32_t fx, int32_t fy) const
 		innery * PatchSize + innerx;
 }
 
+uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
+{
+	uint32_t brightness;
+	brightness = 144 + coords.field->get_brightness();
+	brightness = (brightness * 255) / 160;
+	if (brightness > 255)
+		brightness = 255;
+
+	if (m_player && !m_player->see_all()) {
+		const Map & map = m_egbase->map();
+		const Player::Field & pf = m_player->fields()[Map::get_index(coords, map.get_width())];
+		if (pf.vision == 0) {
+			return 0;
+		} else if (pf.vision == 1) {
+			static const uint32_t DecayTime = 20000;
+			Duration time_ago = m_egbase->get_gametime() - pf.time_node_last_unseen;
+			if (time_ago < DecayTime)
+				brightness = (brightness * (2 * DecayTime - time_ago)) / (2 * DecayTime);
+			else
+				brightness = brightness / 2;
+		}
+	}
+
+	return brightness;
+}
+
 void GameRendererGL::draw_terrain()
 {
-	assert(sizeof(basevertex) == 16);
-
 	assert(m_offset.x >= 0); // divisions involving negative numbers are bad
 	assert(m_offset.y >= 0);
 
@@ -140,7 +164,8 @@ void GameRendererGL::draw_terrain()
 	glDisable(GL_SCISSOR_TEST);
 }
 
-void GameRendererGL::compute_basevertex(const Coords & coords, basevertex & vtx) const
+template<typename vertex>
+void GameRendererGL::compute_basevertex(const Coords & coords, vertex & vtx) const
 {
 	Map const & map = m_egbase->map();
 	Coords ncoords(coords);
@@ -156,10 +181,15 @@ void GameRendererGL::compute_basevertex(const Coords & coords, basevertex & vtx)
 	MapviewPixelFunctions::get_basepix(coords, tex.x, tex.y);
 	vtx.tcx = float(tex.x) / TEXTURE_WIDTH;
 	vtx.tcy = float(tex.y) / TEXTURE_HEIGHT;
+	uint8_t brightness = field_brightness(fcoords);
+	vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
+	vtx.color[3] = 255;
 }
 
 void GameRendererGL::prepare_terrain_base()
 {
+	assert(sizeof(basevertex) == 32);
+
 	Map const & map = m_egbase->map();
 
 	uint reqsize = m_patch_size.w * m_patch_size.h;
@@ -269,8 +299,10 @@ void GameRendererGL::draw_terrain_base()
 
 	glVertexPointer(2, GL_FLOAT, sizeof(basevertex), &m_patch_vertices[0].x);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(basevertex), &m_patch_vertices[0].tcx);
+	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(basevertex), &m_patch_vertices[0].color);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
 
 	glColor3f(1.0, 1.0, 1.0);
 	glDisable(GL_BLEND);
@@ -292,6 +324,7 @@ void GameRendererGL::draw_terrain_base()
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
 }
 
 /*
@@ -421,30 +454,30 @@ void GameRendererGL::prepare_terrain_fuzz()
 			uint index;
 			if (lyr_r > lyr_d) {
 				index = indexs[ter_r];
-				compute_basevertex(f, m_edge_vertices[index].base);
+				compute_basevertex(f, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
-				compute_basevertex(bln, m_edge_vertices[index].base);
+				compute_basevertex(bln, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.5;
 				m_edge_vertices[index].edgey = TyOne;
 				++index;
-				compute_basevertex(brn, m_edge_vertices[index].base);
+				compute_basevertex(brn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 1.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				indexs[ter_r] = index;
 			} else if (ter_d != ter_r) {
 				index = indexs[ter_d];
-				compute_basevertex(f, m_edge_vertices[index].base);
+				compute_basevertex(f, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
-				compute_basevertex(brn, m_edge_vertices[index].base);
+				compute_basevertex(brn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 1.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
-				compute_basevertex(rn, m_edge_vertices[index].base);
+				compute_basevertex(rn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.5;
 				m_edge_vertices[index].edgey = TyOne;
 				++index;
@@ -452,15 +485,15 @@ void GameRendererGL::prepare_terrain_fuzz()
 			}
 			if ((lyr_u > lyr_r) || (lyr_u == lyr_r && ter_u != ter_r)) {
 				index = indexs[ter_u];
-				compute_basevertex(f, m_edge_vertices[index].base);
+				compute_basevertex(f, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
-				compute_basevertex(brn, m_edge_vertices[index].base);
+				compute_basevertex(brn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.5;
 				m_edge_vertices[index].edgey = TyOne;
 				++index;
-				compute_basevertex(rn, m_edge_vertices[index].base);
+				compute_basevertex(rn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 1.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
@@ -468,15 +501,15 @@ void GameRendererGL::prepare_terrain_fuzz()
 			}
 			if (lyr_rr > lyr_r) {
 				index = indexs[ter_rr];
-				compute_basevertex(f, m_edge_vertices[index].base);
+				compute_basevertex(f, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.5;
 				m_edge_vertices[index].edgey = TyOne;
 				++index;
-				compute_basevertex(brn, m_edge_vertices[index].base);
+				compute_basevertex(brn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 1.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
-				compute_basevertex(rn, m_edge_vertices[index].base);
+				compute_basevertex(rn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
@@ -484,15 +517,15 @@ void GameRendererGL::prepare_terrain_fuzz()
 			}
 			if ((lyr_l > lyr_d) || (lyr_l == lyr_d && ter_l != ter_d)) {
 				index = indexs[ter_l];
-				compute_basevertex(f, m_edge_vertices[index].base);
+				compute_basevertex(f, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 1.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
-				compute_basevertex(bln, m_edge_vertices[index].base);
+				compute_basevertex(bln, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
-				compute_basevertex(brn, m_edge_vertices[index].base);
+				compute_basevertex(brn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.5;
 				m_edge_vertices[index].edgey = TyOne;
 				++index;
@@ -500,15 +533,15 @@ void GameRendererGL::prepare_terrain_fuzz()
 			}
 			if (lyr_dd > lyr_d) {
 				index = indexs[ter_dd];
-				compute_basevertex(f, m_edge_vertices[index].base);
+				compute_basevertex(f, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.5;
 				m_edge_vertices[index].edgey = TyOne;
 				++index;
-				compute_basevertex(bln, m_edge_vertices[index].base);
+				compute_basevertex(bln, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 1.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
-				compute_basevertex(brn, m_edge_vertices[index].base);
+				compute_basevertex(brn, m_edge_vertices[index]);
 				m_edge_vertices[index].edgex = 0.0;
 				m_edge_vertices[index].edgey = TyZero;
 				++index;
@@ -530,10 +563,12 @@ void GameRendererGL::draw_terrain_fuzz()
 	if (m_edge_vertices_size == 0)
 		return;
 
-	glVertexPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].base.x);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].base.tcx);
+	glVertexPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].x);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(edgefuzzvertex), &m_edge_vertices[0].tcx);
+	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(edgefuzzvertex), &m_edge_vertices[0].color);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
 
 	glActiveTextureARB(GL_TEXTURE1_ARB);
 	glClientActiveTextureARB(GL_TEXTURE1_ARB);
@@ -571,6 +606,7 @@ void GameRendererGL::draw_terrain_fuzz()
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
 	glActiveTextureARB(GL_TEXTURE1_ARB);
 	glClientActiveTextureARB(GL_TEXTURE1_ARB);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
