@@ -22,7 +22,7 @@
 
 #include "picture.h"
 
-class Surface;
+class IBlitableSurface;
 
 // TODO(#sirver): document this. Internal to graphic
 class ImageImpl : public IPicture {
@@ -32,9 +32,8 @@ public:
 	// Implements IPicture.
 	virtual uint32_t get_w() const = 0;
 	virtual uint32_t get_h() const = 0;
-
 	virtual const std::string& hash() const = 0;
-	virtual Surface* surface() const = 0;
+	virtual IBlitableSurface* surface() const = 0;
 };
 
 #endif /* end of include guard: PICTURE_IMPL_H */

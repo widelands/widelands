@@ -149,10 +149,7 @@ public:
 
 	// Implements DerivedImage.
 	virtual Surface* recalculate_surface() const {
-		log("#sirver hash: %s\n", hash().c_str());
-		log("#sirver trying to resize: %s\n", original_.hash().c_str());
-		Surface* rv = g_gr->resize_surface(original_.surface(), w_, h_);
-		log("#sirver done\n");
+		Surface* rv = g_gr->resize_surface(static_cast<Surface*>(original_.surface()), w_, h_);
 		return rv;
 	}
 
@@ -169,7 +166,8 @@ public:
 
 	// Implements DerivedImage.
 	virtual Surface* recalculate_surface() const {
-		return g_gr->gray_out_surface(original_.surface());
+		// NOCOM(#sirver): cast suzck
+		return g_gr->gray_out_surface(static_cast<Surface*>(original_.surface()));
 
 	}
 };
@@ -182,7 +180,7 @@ public:
 
 	// Implements DerivedImage.
 	virtual Surface* recalculate_surface() const {
-		return g_gr->change_luminosity_of_surface(original_.surface(), factor_, halve_alpha_);
+		return g_gr->change_luminosity_of_surface(static_cast<Surface*>(original_.surface()), factor_, halve_alpha_);
 	}
 
 private:
@@ -325,5 +323,9 @@ const IPicture* ImageCacheImpl::render_text(const std::string& text, uint32_t wi
 
 ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache, RT::IRenderer* rt_renderer) {
 	return new ImageCacheImpl(loader, surface_cache, rt_renderer);
+}
+
+IPicture* new_uncached_image(Surface* surf) {
+	return new InMemoryImage("", surf);
 }
 

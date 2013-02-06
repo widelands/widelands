@@ -73,6 +73,8 @@ public:
 // Takes ownership of img_loader, but not of SurfaceCache.
 ImageCache* create_image_cache(IImageLoader*, SurfaceCache*, RT::IRenderer*);
 
+// NOCOM(#sirver): refactor and offer direct acces to InMemoryImage
+IPicture* new_uncached_image(Surface* surf);
 
 #endif /* end of include guard: IMAGE_CACHE_H */
 

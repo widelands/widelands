@@ -431,7 +431,7 @@ public:
 				dst.y = 0;
 				srcrect.w = min(static_cast<uint32_t>(m_bg->get_w()), m_w - x);
 				srcrect.h = m_h;
-				rv->blit(dst, m_bg, srcrect, CM_Solid);
+				rv->blit(dst, m_bg->surface(), srcrect, CM_Solid);
 			}
 		}
 		return rv;
@@ -492,7 +492,7 @@ public:
 					dst.x = x; dst.y = y;
 					src.w = min(static_cast<uint32_t>(m_bg_img->get_w()), m_w + m_margin.left - x);
 					src.h = min(static_cast<uint32_t>(m_bg_img->get_h()), m_h + m_margin.top - y);
-					rv->blit(dst, m_bg_img, src, CM_Solid);
+					rv->blit(dst, m_bg_img->surface(), src, CM_Solid);
 				}
 			}
 			set_alpha = false;
@@ -555,7 +555,7 @@ private:
 
 IBlitableSurface* ImgRenderNode::render(IGraphic& gr) {
 	IBlitableSurface* rv = gr.create_surface(m_image.get_w(), m_image.get_h(), true);
-	rv->blit(Point(0, 0), &m_image, Rect(0, 0, m_image.get_w(), m_image.get_h()), CM_Copy);
+	rv->blit(Point(0, 0), m_image.surface(), Rect(0, 0, m_image.get_w(), m_image.get_h()), CM_Copy);
 	return rv;
 }
 // End: Helper Stuff

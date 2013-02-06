@@ -95,42 +95,40 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-			IBlitableSurface* surf = g_gr->create_surface(64, 64);
+			Surface* surf = g_gr->create_surface(64, 64);
 			const IPicture* tex = g_gr->imgcache().get(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 						->get_texture_picture(), true);
-			surf->blit(Point(0, 0), tex, Rect(0, 0, tex->get_w(), tex->get_h()));
+			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->get_w(), tex->get_h()));
 
 			Point pt(1, 64 - small_pich - 1);
 
 			//  check is green
 			if (ter_is == 0) {
-				surf->blit(pt, green, Rect(0, 0, green->get_w(), green->get_h()));
+				surf->blit(pt, green->surface(), Rect(0, 0, green->get_w(), green->get_h()));
 				pt.x += small_picw + 1;
 			} else {
 				if (ter_is & TERRAIN_WATER) {
-					surf->blit(pt, water, Rect(0, 0, water->get_w(), water->get_h()));
+					surf->blit(pt, water->surface(), Rect(0, 0, water->get_w(), water->get_h()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_MOUNTAIN) {
-					surf->blit(pt, mountain, Rect(0, 0, mountain->get_w(), mountain->get_h()));
+					surf->blit(pt, mountain->surface(), Rect(0, 0, mountain->get_w(), mountain->get_h()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_ACID) {
-					surf->blit(pt, dead, Rect(0, 0, dead->get_w(), dead->get_h()));
+					surf->blit(pt, dead->surface(), Rect(0, 0, dead->get_w(), dead->get_h()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_UNPASSABLE) {
-					surf->blit(pt, unpassable, Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
+					surf->blit(pt, unpassable->surface(), Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_DRY)
-					surf->blit(pt, dry, Rect(0, 0, dry->get_w(), dry->get_h()));
+					surf->blit(pt, dry->surface(), Rect(0, 0, dry->get_w(), dry->get_h()));
 			}
-			// NOCOM(#sirver): add this back in in some way or another.
-			// offscreen_surfaces_.push_back(surf); // Make sure we delete this later on.
+			offscreen_images_.push_back(new_uncached_image(surf)); // Make sure we delete this later on.
 
-			// NOCOM(#sirver): this is currently broken
-			UI::Checkbox & cb = *new UI::Checkbox(this, pos, NULL); // offscreen_surfaces_.back());
+			UI::Checkbox & cb = *new UI::Checkbox(this, pos, offscreen_images_.back());
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
 			cb.set_state(m_tool.is_enabled(i));
 			cb.changedto.connect
@@ -164,9 +162,9 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu()
 {
-	BOOST_FOREACH(IPicture* pic, offscreen_surfaces_)
+	BOOST_FOREACH(IPicture* pic, offscreen_images_)
 		delete pic;
-	offscreen_surfaces_.clear();
+	offscreen_images_.clear();
 }
 
 void Editor_Tool_Set_Terrain_Options_Menu::selected

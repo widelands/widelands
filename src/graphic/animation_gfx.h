@@ -27,6 +27,8 @@ class ImageLoaderImpl;
 #include "logic/widelands.h"
 #include "rgbcolor.h"
 
+class Surface;
+
 // NOCOM(#sirver): this should use the image cache as well and not own the image data.
 struct AnimationGfx { /// The graphics belonging to an animation.
 	AnimationGfx(const ImageLoaderImpl&, AnimationData const * data);

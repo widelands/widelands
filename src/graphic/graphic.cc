@@ -542,7 +542,8 @@ SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect) const
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const {
-	save_png_(*static_cast<const ImageImpl*>(pic)->surface(), sw);
+	// NOCOM(#sirver): this cast suckz
+	save_png_(*static_cast<Surface*>(pic->surface()), sw);
 }
 void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 {

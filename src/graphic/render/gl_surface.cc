@@ -172,10 +172,6 @@ void GLSurface::draw_line
 }
 
 void GLSurface::blit
-	(const Point& dst, const IPicture* pic, const Rect& srcrc, Composite cm) {
-	return blit(dst, static_cast<const ImageImpl*>(pic)->surface(), srcrc, cm);
-}
-void GLSurface::blit
 	(const Point& dst, const IBlitableSurface* pic, const Rect& srcrc, Composite cm)
 {
 	// Note: This function is highly optimized and therefore does not restore

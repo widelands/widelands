@@ -79,7 +79,6 @@ void ProgressWindow::draw_background
 		m_yres = yres;
 	}
 
-	// NOCOM(#sirver): blit should now take in IPicture
 	rt.blit(Point(0, 0), m_background_pic);
 
 	Rect border_rect = m_label_rectangle;

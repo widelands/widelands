@@ -55,7 +55,6 @@ public:
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);
 	// NOCOM(#sirver): Only one should be needed here.
 	virtual void blit(const Point&, const IBlitableSurface*, const Rect& srcrc, Composite cm);
-	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
 
 	GLuint get_gl_texture() const {return m_texture;}
 	uint32_t get_tex_w() const {return m_tex_w;}

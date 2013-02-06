@@ -167,10 +167,9 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
  */
 void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
 {
-	const ImageImpl* image = static_cast<const ImageImpl*>(picture);
 	doblit
 		(dst,
-		 image->surface(), Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
+		 picture->surface(), Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
 }
 
 /**
@@ -181,9 +180,8 @@ void RenderTarget::blitrect
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
-	const ImageImpl* image = static_cast<const ImageImpl*>(picture);
 
-	doblit(dst, image->surface(), srcrc, cm);
+	doblit(dst, picture->surface(), srcrc, cm);
 }
 
 /**
@@ -236,7 +234,7 @@ void RenderTarget::tile(Rect r, const IPicture* picture, Point ofs, Composite cm
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r + Point(tx, ty), picture, srcrc, cm);
+				m_surface->blit(r + Point(tx, ty), picture->surface(), srcrc, cm);
 
 				tx += srcrc.w;
 
@@ -426,7 +424,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Point dst, const Surface* src, Rect srcrc, Composite cm)
+	(Point dst, const IBlitableSurface* src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);

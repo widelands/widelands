@@ -281,13 +281,6 @@ void GLSurfaceTexture::blit
 	reset_gl();
 }
 
-void GLSurfaceTexture::blit
-	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm) {
-	setup_gl();
-	GLSurface::blit(dst, src, srcrc, cm);
-	reset_gl();
-}
-
 void GLSurfaceTexture::setup_gl() {
 	if (use_arb_) {
 		glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
