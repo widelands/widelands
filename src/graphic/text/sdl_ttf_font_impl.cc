@@ -124,8 +124,7 @@ const IBlitableSurface& SDLTTF_Font::render(IGraphic & gr, const string& txt, co
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return
-		*gr.surface_cache().insert(cs,
+	return *gr.surface_cache().insert(cs,
 				static_cast<Surface*>(gr.create_surface(text_surface, true)));
 }
 

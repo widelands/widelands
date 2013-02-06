@@ -17,6 +17,7 @@
  *
  */
 
+#include "log.h" // NOCOM(#sirver): remove again
 #include <queue>
 #include <string>
 #include <vector>
@@ -331,7 +332,7 @@ uint32_t TextNode::hotspot_y() {
 }
 IBlitableSurface* TextNode::render(IGraphic& gr) {
 	const IBlitableSurface& img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	IBlitableSurface* rv = gr.create_surface(img.get_w(), img.get_h(), true);
+	IBlitableSurface* rv = gr.create_surface(img.get_w(), img.get_h(), false);
 	rv->blit(Point(0, 0), &img, Rect(0, 0, img.get_w(), img.get_h()), CM_Copy);
 	return rv;
 }
@@ -820,7 +821,8 @@ public:
 			shrink_to_fit_(shrink_to_fit),
 			m_w(max_w),
 			m_rn(new SubTagRenderNode(ns))
-	{}
+	{
+	}
 
 	void enter() {
 		Borders padding, margin;
@@ -868,10 +870,11 @@ public:
 		}
 
 		// Collect all tags from children
-		foreach(RenderNode* rn, nodes_to_render)
-			foreach(const Reference& r, rn->get_references()) {
-				m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
-			}
+	foreach(RenderNode* rn, nodes_to_render) {
+		foreach(const Reference& r, rn->get_references()) {
+			m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
+		}
+	}
 
 		m_rn->set_dimensions(m_w, layout.height(), margin);
 		m_rn->set_nodes_to_render(nodes_to_render);
@@ -970,7 +973,7 @@ Renderer::~Renderer() {
 RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& allowed_tags) {
 	boost::scoped_ptr<ITag> rt(m_p->parse(text, allowed_tags));
 
-	NodeStyle default_fs = {
+	NodeStyle default_style = {
 		"DejaVuSerif", 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
@@ -979,7 +982,10 @@ RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& 
 	if (!width)
 		width = INFINITE_WIDTH;
 
-	RTTagHandler rtrn(*rt, m_fc, default_fs, gr_.imgcache(), width);
+	log("#sirver rt.get(): %p\n", rt.get());
+	log("#sirver width: %i\n", width);
+	gr_.imgcache();
+	RTTagHandler rtrn(*rt, m_fc, default_style, gr_.imgcache(), width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);
@@ -990,7 +996,9 @@ RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& 
 
 // NOCOM(#sirver): describe what kind of caching is done.
 IBlitableSurface* Renderer::render(const string& text, uint32_t width, const TagSet& allowed_tags) {
+	log("#sirver text: %s,width: %i\n", text.c_str(), width);
 	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
+
 	return node->render(gr_);
 }
 

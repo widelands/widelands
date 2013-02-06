@@ -275,6 +275,13 @@ void GLSurfaceTexture::draw_line
 }
 
 void GLSurfaceTexture::blit
+	(const Point& dst, const IBlitableSurface* src, const Rect& srcrc, Composite cm) {
+	setup_gl();
+	GLSurface::blit(dst, src, srcrc, cm);
+	reset_gl();
+}
+
+void GLSurfaceTexture::blit
 	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm) {
 	setup_gl();
 	GLSurface::blit(dst, src, srcrc, cm);

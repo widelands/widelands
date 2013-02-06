@@ -20,6 +20,8 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
+#include "log.h" // NOCOM(#sirver): remove again
+
 #include <vector>
 #include <map>
 
@@ -45,6 +47,9 @@ struct StreamWrite;
 struct Texture;
 class Screen;
 class ImageLoaderImpl;
+namespace RT {
+class IRenderer;
+}
 
 //@{
 /// This table is used by create_grayed_out_pic()to map colors to grayscale. It
@@ -188,6 +193,8 @@ protected:
 	boost::scoped_ptr<ImageLoaderImpl> img_loader_;
 	// NOCOM(#sirver): document me
 	boost::scoped_ptr<SurfaceCache> surface_cache_;
+	// NOCOM(#sirver): document me
+	boost::scoped_ptr<RT::IRenderer> rt_renderer_;
 	// The cache holding the images.
 	boost::scoped_ptr<ImageCache> img_cache_;
 

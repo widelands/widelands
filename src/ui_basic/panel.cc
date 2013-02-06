@@ -1122,13 +1122,16 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	}
 
 	static const uint32_t TIP_WIDTH_MAX = 360;
-	const IPicture* rendered_text = UI::g_fh1->render(text_to_render, TIP_WIDTH_MAX);
+	const IPicture* rendered_text = g_gr->imgcache().render_text(text_to_render, TIP_WIDTH_MAX);
 	if (!rendered_text)
 		return;
 
 	uint32_t tip_width = rendered_text->get_w() + 4;
 	uint32_t tip_height = rendered_text->get_h() + 4;
+	log("#sirver tip_width: %i,tip_height: %i\n", tip_width, tip_height);
 
+	// NOCOM(#sirver): remove next line
+	g_gr->save_png(rendered_text, g_fs->OpenStreamWrite("test.png"));
 	Rect r
 		(WLApplication::get()->get_mouse_position() + Point(2, 32),
 		 tip_width, tip_height);

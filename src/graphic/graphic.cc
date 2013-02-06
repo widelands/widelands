@@ -50,6 +50,8 @@
 #include "render/gl_surface_screen.h"
 #include "render/sdl_surface.h"
 #include "rendertarget.h"
+#include "text/sdl_ttf_font.h"
+#include "text/rt_render.h"
 #include "texture.h"
 
 #include "graphic.h"
@@ -78,9 +80,11 @@ Graphic::Graphic
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
+	// NOCOM(#sirver): diagramm der abhängigkeiten zeichnen
 	img_loader_(new ImageLoaderImpl(*this)),
+	rt_renderer_(RT::setup_renderer(*this, RT::ttf_fontloader_from_filesystem(g_fs))),
 	surface_cache_(new SurfaceCache()),
-	img_cache_(create_image_cache(img_loader_.get(), surface_cache_.get()))
+	img_cache_(create_image_cache(img_loader_.get(), surface_cache_.get(), rt_renderer_.get()))
 {
 	// Initialize the table used to create grayed pictures
 	for
@@ -625,6 +629,7 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
  */
 Surface* Graphic::create_surface(SDL_Surface * surf, bool alpha) const
 {
+	// NOCOM(#sirver): drop alpha and make this a Surface::Create function that only depends on g_opengl.
 #ifdef USE_OPENGL
 	if (g_opengl) {
 		return new GLSurfaceTexture(surf);

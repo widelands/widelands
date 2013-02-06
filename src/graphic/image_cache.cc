@@ -32,7 +32,6 @@
 #include "text/rt_render.h"
 #include "text/rt_errors.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "text/sdl_ttf_font.h"
 
 #include "image_loader.h"
 #include "log.h"
@@ -141,8 +140,7 @@ public:
 	ResizedImage(const string& hash, const ImageImpl& original, SurfaceCache* surface_cache, uint32_t w, uint32_t h) :
 		DerivedImage(hash, original, surface_cache), w_(w), h_(h) {
 			log("#sirver original_.hash(): %s\n", original_.hash().c_str());
-			assert(w != original.get_w());
-			assert(h != original.get_h());
+			assert(w != original.get_w() || h != original.get_h());
 	}
 
 	// Overwrites DerivedImage.
@@ -192,6 +190,7 @@ private:
 	bool halve_alpha_;
 };
 
+// NOCOM(#sirver): rename to ImageTrove
 class RTImage : public ImageImpl {
 public:
 	RTImage(const string& hash, SurfaceCache* surface_cache, RT::IRenderer* rt_renderer,
@@ -230,13 +229,10 @@ private:
 class ImageCacheImpl : public ImageCache {
 public:
 	// No ownership is taken here.
-	ImageCacheImpl(IImageLoader* loader, SurfaceCache* surface_cache)
-		: image_loader_(loader), surface_cache_(surface_cache) {
-			// NOCOM(#sirver): fs should be passed in
-			RT::IFontLoader * floader = RT::ttf_fontloader_from_filesystem(g_fs);
-			rt_renderer_.reset(RT::setup_renderer(*g_gr, floader));
+	ImageCacheImpl(IImageLoader* loader, SurfaceCache* surface_cache, RT::IRenderer* rt_renderer)
+		: image_loader_(loader), surface_cache_(surface_cache), rt_renderer_(rt_renderer) {
 		}
-	~ImageCacheImpl();
+	virtual ~ImageCacheImpl();
 
 	// Implements ImageCache
 	virtual const IPicture* new_permanent_picture(const std::string& hash, Surface*);
@@ -251,9 +247,11 @@ private:
 
 	// hash of cached filename/picture pairs
 	ImageMap images_;
-	IImageLoader* image_loader_;
-	SurfaceCache* surface_cache_;
-	boost::scoped_ptr<RT::IRenderer> rt_renderer_;
+
+	// None of these are owned.
+	IImageLoader* const image_loader_;
+	SurfaceCache* const surface_cache_;
+	RT::IRenderer* const rt_renderer_;
 };
 
 ImageCacheImpl::~ImageCacheImpl() {
@@ -275,20 +273,13 @@ const IPicture* ImageCacheImpl::resize(const IPicture* goriginal, uint32_t w, ui
 	const ImageImpl *original = static_cast<const ImageImpl*>(goriginal);
 	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();
 	// NOCOM(#sirver): a simple 'contains' would be good here. count?
-	ALIVE();
 	ImageMap::const_iterator it = images_.find(new_hash);
 	if (it == images_.end()) {
-	ALIVE();
 		if (goriginal->get_w() == w and goriginal->get_h() == h) {
-	ALIVE();
 			return goriginal;
-	ALIVE();
 		}
-	ALIVE();
 		images_.insert(make_pair(new_hash, new ResizedImage(new_hash, *original, surface_cache_, w, h)));
-	ALIVE();
 	}
-	ALIVE();
 	return get(new_hash);
 }
 
@@ -325,14 +316,14 @@ const IPicture* ImageCacheImpl::render_text(const std::string& text, uint32_t wi
 	ImageMap::const_iterator it = images_.find(hash);
 	if (it == images_.end()) {
 		images_.insert(make_pair(hash,
-					new RTImage(hash, surface_cache_, rt_renderer_.get(), text, width)));
+					new RTImage(hash, surface_cache_, rt_renderer_, text, width)));
 	}
 	return get(hash);
 }
 
 }  // namespace
 
-ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache) {
-	return new ImageCacheImpl(loader, surface_cache);
+ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache, RT::IRenderer* rt_renderer) {
+	return new ImageCacheImpl(loader, surface_cache, rt_renderer);
 }
 

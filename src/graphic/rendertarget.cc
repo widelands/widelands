@@ -183,7 +183,7 @@ void RenderTarget::blitrect
 	assert(0 <= srcrc.y);
 	const ImageImpl* image = static_cast<const ImageImpl*>(picture);
 
-	doblit(Rect(dst, 0, 0), image->surface(), srcrc, cm);
+	doblit(dst, image->surface(), srcrc, cm);
 }
 
 /**
@@ -292,7 +292,7 @@ void RenderTarget::drawanim
 
 	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
 
-	doblit(Rect(dst, 0, 0), frame, srcrc);
+	doblit(dst, frame, srcrc);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
@@ -363,7 +363,7 @@ void RenderTarget::drawanimrect
 
 	dst += srcrc;
 
-	doblit(Rect(dst, 0, 0), frame, srcrc);
+	doblit(dst, frame, srcrc);
 }
 
 /**
