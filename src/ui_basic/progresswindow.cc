@@ -121,8 +121,6 @@ void ProgressWindow::set_background(const std::string & file_name) {
 	update(true);
 }
 
-// NOCOM(#sirver): versuch erstmal dieses file zum compilen zu kriegen. Kann man die const referenz acendern?
-// // NOCOM(#sirver): schau in error file wie man das alleine compiled.
 void ProgressWindow::step(const std::string & description) {
 	RenderTarget & rt = *g_gr->get_render_target();
 

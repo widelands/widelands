@@ -275,7 +275,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	boost::scoped_ptr<Surface> _cache;
+	boost::scoped_ptr<IPicture> _cache;
 	bool _needdraw;
 
 	/**

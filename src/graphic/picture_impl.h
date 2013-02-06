@@ -24,7 +24,7 @@
 
 class IBlitableSurface;
 
-// TODO(#sirver): document this. Internal to graphic
+// NOCOM(#sirver): document this
 class ImageImpl : public IPicture {
 public:
 	virtual ~ImageImpl() {}

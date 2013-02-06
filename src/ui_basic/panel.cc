@@ -829,8 +829,6 @@ void Panel::do_draw(RenderTarget & dst)
 
 	draw_border(dst);
 
-	// TODO(#sirver): this is disabled for the moment. The design is completely unclear to me.
-#if 0
 	if (_flags & pf_cache) {
 		uint32_t innerw = _w - (_lborder + _rborder);
 		uint32_t innerh = _h - (_tborder + _bborder);
@@ -840,12 +838,13 @@ void Panel::do_draw(RenderTarget & dst)
 			 _cache.get()->get_w() != innerw ||
 			 _cache.get()->get_h() != innerh)
 		{
-			_cache.reset(g_gr->create_surface(innerw, innerh, false));
+			_cache.reset(new_uncached_image(g_gr->create_surface(innerw, innerh, true)));
 			_needdraw = true;
 		}
 
 		if (_needdraw) {
-			RenderTarget inner(_cache.get());
+			// NOCOM(#sirver): this casting suckz!!!!!
+			RenderTarget inner(static_cast<Surface*>(_cache->surface()));
 			do_draw_inner(inner);
 
 			_needdraw = false;
@@ -853,16 +852,13 @@ void Panel::do_draw(RenderTarget & dst)
 
 		dst.blit(Point(_lborder, _tborder), _cache.get(), CM_Copy);
 	} else {
-#endif
 		Rect innerwindow
 			(Point(_lborder, _tborder),
 				_w - (_lborder + _rborder), _h - (_tborder + _bborder));
 
 		if (dst.enter_window(innerwindow, 0, 0))
 			do_draw_inner(dst);
-#if 0
 	}
-#endif
 
 	dst.set_window(outerrc, outerofs);
 }
@@ -1128,10 +1124,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	uint32_t tip_width = rendered_text->get_w() + 4;
 	uint32_t tip_height = rendered_text->get_h() + 4;
-	log("#sirver tip_width: %i,tip_height: %i\n", tip_width, tip_height);
 
-	// NOCOM(#sirver): remove next line
-	g_gr->save_png(rendered_text, g_fs->OpenStreamWrite("test.png"));
 	Rect r
 		(WLApplication::get()->get_mouse_position() + Point(2, 32),
 		 tip_width, tip_height);
