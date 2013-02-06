@@ -316,6 +316,7 @@ void GameRendererGL::prepare_terrain_fuzz()
 	assert(sizeof(edgefuzzvertex) == 32);
 
 	Map const & map = m_egbase->map();
+	World const & world = map.world();
 
 	if (m_terrain_edge_freq.size() < 16)
 		m_terrain_edge_freq.resize(16);
@@ -333,31 +334,38 @@ void GameRendererGL::prepare_terrain_fuzz()
 			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
 			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
 			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
+			int32_t lyr_d = world.get_ter(ter_d).edge_fuzz_layer();
+			int32_t lyr_r = world.get_ter(ter_r).edge_fuzz_layer();
+			int32_t lyr_u = world.get_ter(ter_u).edge_fuzz_layer();
+			int32_t lyr_rr = world.get_ter(ter_rr).edge_fuzz_layer();
+			int32_t lyr_l = world.get_ter(ter_l).edge_fuzz_layer();
+			int32_t lyr_dd = world.get_ter(ter_dd).edge_fuzz_layer();
 
-			if (ter_r != ter_d) {
+			if (lyr_r > lyr_d) {
 				if (ter_r >= m_terrain_edge_freq.size())
 					m_terrain_edge_freq.resize(ter_r + 1);
 				m_terrain_edge_freq[ter_r] += 1;
+			} else if (ter_d != ter_r) {
 				if (ter_d >= m_terrain_edge_freq.size())
 					m_terrain_edge_freq.resize(ter_d + 1);
 				m_terrain_edge_freq[ter_d] += 1;
 			}
-			if (ter_r != ter_u) {
+			if ((lyr_u > lyr_r) || (lyr_u == lyr_r && ter_u != ter_r)) {
 				if (ter_u >= m_terrain_edge_freq.size())
 					m_terrain_edge_freq.resize(ter_u + 1);
 				m_terrain_edge_freq[ter_u] += 1;
 			}
-			if (ter_r != ter_rr) {
+			if (lyr_rr > lyr_r) {
 				if (ter_rr >= m_terrain_edge_freq.size())
 					m_terrain_edge_freq.resize(ter_rr + 1);
 				m_terrain_edge_freq[ter_rr] += 1;
 			}
-			if (ter_d != ter_l) {
+			if ((lyr_l > lyr_d) || (lyr_l == lyr_d && ter_l != ter_d)) {
 				if (ter_l >= m_terrain_edge_freq.size())
 					m_terrain_edge_freq.resize(ter_l + 1);
 				m_terrain_edge_freq[ter_l] += 1;
 			}
-			if (ter_d != ter_dd) {
+			if (lyr_dd > lyr_d) {
 				if (ter_dd >= m_terrain_edge_freq.size())
 					m_terrain_edge_freq.resize(ter_dd + 1);
 				m_terrain_edge_freq[ter_dd] += 1;
@@ -394,105 +402,115 @@ void GameRendererGL::prepare_terrain_fuzz()
 			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
 			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
 			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
+			int32_t lyr_d = world.get_ter(ter_d).edge_fuzz_layer();
+			int32_t lyr_r = world.get_ter(ter_r).edge_fuzz_layer();
+			int32_t lyr_u = world.get_ter(ter_u).edge_fuzz_layer();
+			int32_t lyr_rr = world.get_ter(ter_rr).edge_fuzz_layer();
+			int32_t lyr_l = world.get_ter(ter_l).edge_fuzz_layer();
+			int32_t lyr_dd = world.get_ter(ter_dd).edge_fuzz_layer();
 
 			Coords f(fx, fy);
 			Coords rn(fx + 1, fy);
 			Coords brn(fx + (fy & 1), fy + 1);
 			Coords bln(brn.x - 1, brn.y);
 
+			// Hack texture coordinates to avoid wrap-around
+			static const float TyZero = 1.0 / TEXTURE_HEIGHT;
+			static const float TyOne = 1.0 - TyZero;
+
 			uint index;
-			if (ter_r != ter_d) {
+			if (lyr_r > lyr_d) {
 				index = indexs[ter_r];
 				compute_basevertex(f, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				compute_basevertex(bln, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = 1.0;
+				m_edge_vertices[index].edgey = TyOne;
 				++index;
 				compute_basevertex(brn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				indexs[ter_r] = index;
-
+			} else if (ter_d != ter_r) {
 				index = indexs[ter_d];
 				compute_basevertex(f, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				compute_basevertex(brn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				compute_basevertex(rn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = 1.0;
+				m_edge_vertices[index].edgey = TyOne;
 				++index;
 				indexs[ter_d] = index;
 			}
-			if (ter_r != ter_u) {
+			if ((lyr_u > lyr_r) || (lyr_u == lyr_r && ter_u != ter_r)) {
 				index = indexs[ter_u];
 				compute_basevertex(f, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				compute_basevertex(brn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = 1.0;
+				m_edge_vertices[index].edgey = TyOne;
 				++index;
 				compute_basevertex(rn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				indexs[ter_u] = index;
 			}
-			if (ter_r != ter_rr) {
+			if (lyr_rr > lyr_r) {
 				index = indexs[ter_rr];
 				compute_basevertex(f, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = 1.0;
+				m_edge_vertices[index].edgey = TyOne;
 				++index;
 				compute_basevertex(brn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				compute_basevertex(rn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				indexs[ter_rr] = index;
 			}
-			if (ter_d != ter_l) {
+			if ((lyr_l > lyr_d) || (lyr_l == lyr_d && ter_l != ter_d)) {
 				index = indexs[ter_l];
 				compute_basevertex(f, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				compute_basevertex(bln, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				compute_basevertex(brn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = 1.0;
+				m_edge_vertices[index].edgey = TyOne;
 				++index;
 				indexs[ter_l] = index;
 			}
-			if (ter_d != ter_dd) {
+			if (lyr_dd > lyr_d) {
 				index = indexs[ter_dd];
 				compute_basevertex(f, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = 1.0;
+				m_edge_vertices[index].edgey = TyOne;
 				++index;
 				compute_basevertex(bln, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				compute_basevertex(brn, m_edge_vertices[index].base);
 				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = 0.0;
+				m_edge_vertices[index].edgey = TyZero;
 				++index;
 				indexs[ter_dd] = index;
 			}

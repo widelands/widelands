@@ -821,6 +821,7 @@ Terrain_Descr::Terrain_Descr
 m_name              (s->get_name()),
 m_descname          (s->get_string("name", s->get_name())),
 m_frametime         (FRAME_LENGTH),
+m_edge_fuzz_layer   (0),
 m_valid_resources   (0),
 m_nr_valid_resources(0),
 m_default_resources (-1),
@@ -895,6 +896,8 @@ m_texture           (0)
 		else
 			throw game_data_error("%s: invalid type '%s'", m_name.c_str(), is);
 	}
+
+	m_edge_fuzz_layer = s->get_int("edge_fuzz_layer", 0);
 
 	// Determine template of the texture animation pictures
 	char fnametmpl[256];

@@ -113,6 +113,7 @@ struct Terrain_Descr : boost::noncopyable {
 	int32_t get_default_resources_amount() const throw () {
 		return m_default_amount;
 	}
+	int32_t edge_fuzz_layer() const {return m_edge_fuzz_layer;}
 
 private:
 	const std::string m_name;
@@ -121,12 +122,13 @@ private:
 	uint32_t    m_frametime;
 	uint8_t   m_is;
 
+	int32_t m_edge_fuzz_layer;
+
 	uint8_t         * m_valid_resources;
 	uint8_t           m_nr_valid_resources;
 	int8_t            m_default_resources;
 	int32_t           m_default_amount;
 	uint32_t          m_texture; //  renderer's texture
-
 };
 
 struct MapGenInfo;
