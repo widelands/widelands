@@ -29,17 +29,11 @@ struct Vertex;
  * Software-rendering implementation of @ref GameRenderer.
  */
 struct GameRendererSDL : GameRenderer {
-	void rendermap
-		(RenderTarget & dst,
-		 Widelands::Editor_Game_Base const &       egbase,
-		 Widelands::Player           const &       player,
-		 Point                                     viewofs);
-	void rendermap
-		(RenderTarget & dst,
-		 Widelands::Editor_Game_Base const & egbase,
-		 Point                               viewofs);
+	void draw();
 
 private:
+	void draw_terrain();
+
 	/**
 	 * Helper function to draw two terrain triangles. This is called from the
 	 * rendermap() functions.

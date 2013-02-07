@@ -41,8 +41,8 @@ struct RenderTarget;
  */
 struct GameRenderer {
 public:
-	GameRenderer() {}
-	virtual ~GameRenderer() {}
+	GameRenderer();
+	virtual ~GameRenderer();
 
 	/**
 	 * Renders the map from a player's point of view into the
@@ -51,20 +51,47 @@ public:
 	 * @param viewofs is the offset of the upper left corner of
 	 * the window into the map, in pixels.
 	 */
-	virtual void rendermap
+	void rendermap
 		(RenderTarget & dst,
 		 Widelands::Editor_Game_Base const &       egbase,
 		 Widelands::Player           const &       player,
-		 Point                                     viewofs) = 0;
+		 Point                                     viewofs);
 
 	/**
 	 * Renders the map from an omniscient perspective.
 	 * This is used for spectators, players that see all, and in the editor.
 	 */
-	virtual void rendermap
+	void rendermap
 		(RenderTarget & dst,
 		 Widelands::Editor_Game_Base const & egbase,
-		 Point                               viewofs) = 0;
+		 Point                               viewofs);
+
+protected:
+	virtual void draw() = 0;
+
+	void draw_objects();
+
+	/**
+	 * The following variables, which are setup by @ref rendermap,
+	 * are only valid during rendering,
+	 * and should be treated as read-only by derived classes.
+	 */
+	/*@{*/
+	RenderTarget * m_dst;
+	Widelands::Editor_Game_Base const * m_egbase;
+	Widelands::Player const * m_player;
+
+	/// Translation from map pixel coordinates to @ref m_dst pixel coordinates
+	Point m_dst_offset;
+
+	int32_t m_minfx;
+	int32_t m_minfy;
+	int32_t m_maxfx;
+	int32_t m_maxfy;
+	/*@}*/
+
+private:
+	void draw_wrapper();
 };
 
 #endif //WIDELANDS_GAMEVIEW_H

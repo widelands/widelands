@@ -41,16 +41,6 @@ struct GameRendererGL : GameRenderer {
 	GameRendererGL();
 	virtual ~GameRendererGL();
 
-	void rendermap
-		(RenderTarget & dst,
-		 Widelands::Editor_Game_Base const &       egbase,
-		 Widelands::Player           const &       player,
-		 Point                                     viewofs);
-	void rendermap
-		(RenderTarget & dst,
-		 Widelands::Editor_Game_Base const & egbase,
-		 Point                               viewofs);
-
 private:
 	struct basevertex {
 		float x;
@@ -79,7 +69,6 @@ private:
 	void draw_terrain_dither();
 	void prepare_roads();
 	void draw_roads();
-	void draw_objects();
 
 	uint patch_index(int32_t fx, int32_t fy) const;
 	uint8_t field_brightness(const Widelands::FCoords & coords) const;
@@ -91,13 +80,7 @@ private:
 	 * The following variables are only valid during rendering.
 	 */
 	/*@{*/
-	RenderTarget * m_dst;
 	GLSurface * m_surface;
-	Widelands::Editor_Game_Base const * m_egbase;
-	Widelands::Player const * m_player;
-
-	/// Translation from map pixel coordinates to @ref m_dst pixel coordinates
-	Point m_dst_offset;
 
 	/// Bounding rectangle inside the destination surface
 	Rect m_rect;
@@ -107,10 +90,6 @@ private:
 	/// to the bounding rectangle)
 	Point m_surface_offset;
 
-	int32_t m_minfx;
-	int32_t m_minfy;
-	int32_t m_maxfx;
-	int32_t m_maxfy;
 	Rect m_patch_size;
 	boost::scoped_array<basevertex> m_patch_vertices;
 	uint m_patch_vertices_size;
