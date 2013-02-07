@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2012 by the Widelands Development Team
+ * Copyright (C) 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-#include "gameview.h"
+#include "minimaprenderer.h"
 #include "upcast.h"
 
 #include "economy/road.h"
@@ -49,7 +49,7 @@ using namespace Widelands;
  * Calculate the field at the top-left corner of the clipping rect
  * The entire clipping rect will be used for drawing.
  */
-void GameView::renderminimap
+void MiniMapRenderer::renderminimap
 	(Widelands::Editor_Game_Base const &       egbase,
 	 Player                      const * const player,
 	 Point                               const viewpoint,
@@ -325,7 +325,7 @@ Draw a minimap into the given rectangle of the bitmap.
 viewpt is the field at the top left of the rectangle.
 ===============
 */
-void GameView::draw_minimap
+void MiniMapRenderer::draw_minimap
 	(Widelands::Editor_Game_Base const &       egbase,
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,

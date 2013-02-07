@@ -26,7 +26,7 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/render/gameview.h"
+#include "graphic/render/minimaprenderer.h"
 
 
 MiniMap::View::View
@@ -60,9 +60,9 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 
 void MiniMap::View::draw(RenderTarget & dst)
 {
-	GameView gameview(dst);
+	MiniMapRenderer mmr(dst);
 
-	gameview.renderminimap
+	mmr.renderminimap
 		(m_ibase.egbase(),
 		 m_ibase.get_player(),
 		 (*m_flags) & (MiniMap::Zoom2) ?

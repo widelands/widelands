@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_GAMEVIEW_H
-#define WIDELANDS_GAMEVIEW_H
+#ifndef WIDELANDS_MINIMAPRENDERER_H
+#define WIDELANDS_MINIMAPRENDERER_H
 
 #include "graphic/rendertarget.h"
 
@@ -29,16 +29,13 @@ namespace Widelands {
 
 /**
  * This class renders the minimap.
- *
- * @todo Rename this class to reflect its new purpose;
- * check for software vs. OpenGL rendering related refactorings
  */
-class GameView : public RenderTarget
+class MiniMapRenderer : public RenderTarget
 {
 public:
-	GameView(RenderTarget & rt) :
+	MiniMapRenderer(RenderTarget & rt) :
 		RenderTarget(rt) {}
-	virtual ~GameView() {}
+	virtual ~MiniMapRenderer() {}
 
 	/**
 	 * Render the minimap. If player is not 0, it renders from that player's
@@ -62,4 +59,4 @@ protected:
 		 uint32_t                            flags);
 };
 
-#endif //WIDELANDS_GAMEVIEW_H
+#endif //WIDELANDS_MINIMAPRENDERER_H
