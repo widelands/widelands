@@ -96,12 +96,16 @@ private:
 	Widelands::Editor_Game_Base const * m_egbase;
 	Widelands::Player const * m_player;
 
+	/// Translation from map pixel coordinates to @ref m_dst pixel coordinates
+	Point m_dst_offset;
+
 	/// Bounding rectangle inside the destination surface
 	Rect m_rect;
 
-	/// Top-left corner of bounding rectangle maps to this pixel coordinate
-	/// of the map
-	Point m_offset;
+	/// Translation from map pixel coordinates to surface pixel coordinates
+	/// (relative to the top-left corner of the surface, @b not relative
+	/// to the bounding rectangle)
+	Point m_surface_offset;
 
 	int32_t m_minfx;
 	int32_t m_minfy;

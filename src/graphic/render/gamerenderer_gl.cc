@@ -61,7 +61,8 @@ void GameRendererGL::rendermap
 	if (!m_surface)
 		return;
 	m_rect = dst.get_rect();
-	m_offset = viewofs + m_rect - dst.get_offset();
+	m_dst_offset = -viewofs;
+	m_surface_offset = m_rect + dst.get_offset() - viewofs;
 	m_egbase = &egbase;
 	m_player = &player;
 
@@ -78,7 +79,8 @@ void GameRendererGL::rendermap
 	if (!m_surface)
 		return;
 	m_rect = dst.get_rect();
-	m_offset = viewofs + m_rect - dst.get_offset();
+	m_dst_offset = -viewofs;
+	m_surface_offset = m_rect + dst.get_offset() - viewofs;
 	m_egbase = &egbase;
 	m_player = 0;
 
@@ -131,13 +133,15 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 
 void GameRendererGL::draw()
 {
-	assert(m_offset.x >= 0); // divisions involving negative numbers are bad
-	assert(m_offset.y >= 0);
+	Point tl_map = m_rect - m_surface_offset;
 
-	m_minfx = m_offset.x / TRIANGLE_WIDTH - 1;
-	m_minfy = m_offset.y / TRIANGLE_HEIGHT - 1;
-	m_maxfx = (m_offset.x + m_rect.w + (TRIANGLE_WIDTH / 2)) / TRIANGLE_WIDTH;
-	m_maxfy = (m_offset.y + m_rect.h) / TRIANGLE_HEIGHT;
+	assert(tl_map.x >= 0); // divisions involving negative numbers are bad
+	assert(tl_map.y >= 0);
+
+	m_minfx = tl_map.x / TRIANGLE_WIDTH - 1;
+	m_minfy = tl_map.y / TRIANGLE_HEIGHT - 1;
+	m_maxfx = (tl_map.x + m_rect.w + (TRIANGLE_WIDTH / 2)) / TRIANGLE_WIDTH;
+	m_maxfy = (tl_map.y + m_rect.h) / TRIANGLE_HEIGHT;
 
 	// fudge for triangle boundary effects and for height differences
 	m_minfx -= 1;
@@ -178,7 +182,7 @@ void GameRendererGL::compute_basevertex(const Coords & coords, vertex & vtx) con
 	Point pix;
 	MapviewPixelFunctions::get_basepix(coords, pix.x, pix.y);
 	pix.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
-	pix -= m_offset;
+	pix += m_surface_offset;
 	vtx.x = pix.x;
 	vtx.y = pix.y;
 	Point tex;
@@ -808,10 +812,10 @@ void GameRendererGL::draw_objects()
 			r_pos.y -= r.field->get_height() * HEIGHT_FACTOR;
 			bl_pos.y -= bl.field->get_height() * HEIGHT_FACTOR;
 			br_pos.y -= br.field->get_height() * HEIGHT_FACTOR;
-			f_pos -= m_offset;
-			r_pos -= m_offset;
-			bl_pos -= m_offset;
-			br_pos -= m_offset;
+			f_pos += m_dst_offset;
+			r_pos += m_dst_offset;
+			bl_pos += m_dst_offset;
+			br_pos += m_dst_offset;
 
 			uint8_t f_owner_number = f.field->get_owned_by();
 			uint8_t r_owner_number = r.field->get_owned_by();
