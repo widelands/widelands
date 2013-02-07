@@ -81,7 +81,7 @@ private:
 	void draw_roads();
 	void draw_objects();
 
-	uint patch_index(int32_t fx, int32_t fy) const;
+	uint32_t patch_index(int32_t fx, int32_t fy) const;
 	uint8_t field_brightness(const Widelands::FCoords & coords) const;
 	uint8_t field_roads(const Widelands::FCoords & coords) const;
 	template<typename vertex>
@@ -109,20 +109,19 @@ private:
 	int32_t m_maxfy;
 	Rect m_patch_size;
 	boost::scoped_array<basevertex> m_patch_vertices;
-	uint m_patch_vertices_size;
+	uint32_t m_patch_vertices_size;
 	boost::scoped_array<uint16_t> m_patch_indices;
-	uint m_patch_indices_size;
-	std::vector<uint> m_terrain_freq;
-	std::vector<uint> m_terrain_freq_cum;
-
+	uint32_t m_patch_indices_size;
+	std::vector<uint32_t> m_terrain_freq;
+	std::vector<uint32_t> m_terrain_freq_cum;
 	boost::scoped_array<dithervertex> m_edge_vertices;
-	uint m_edge_vertices_size;
-	std::vector<uint> m_terrain_edge_freq;
-	std::vector<uint> m_terrain_edge_freq_cum;
+	uint32_t m_edge_vertices_size;
+	std::vector<uint32_t> m_terrain_edge_freq;
+	std::vector<uint32_t> m_terrain_edge_freq_cum;
 
-	uint m_road_freq[2];
+	uint32_t m_road_freq[2];
 	boost::scoped_array<basevertex> m_road_vertices;
-	uint m_road_vertices_size;
+	uint32_t m_road_vertices_size;
 	/*@}*/
 };
 

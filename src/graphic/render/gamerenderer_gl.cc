@@ -36,7 +36,7 @@
 
 using namespace Widelands;
 
-static const uint PatchSize = 4;
+static const uint32_t PatchSize = 4;
 
 GameRendererGL::GameRendererGL() :
 	m_patch_vertices_size(0),
@@ -85,18 +85,18 @@ void GameRendererGL::rendermap
 	draw();
 }
 
-uint GameRendererGL::patch_index(int32_t fx, int32_t fy) const
+uint32_t GameRendererGL::patch_index(int32_t fx, int32_t fy) const
 {
-	uint x = fx - m_patch_size.x;
-	uint y = fy - m_patch_size.y;
+	uint32_t x = fx - m_patch_size.x;
+	uint32_t y = fy - m_patch_size.y;
 
 	assert(x < m_patch_size.w);
 	assert(y < m_patch_size.h);
 
-	uint outerx = x / PatchSize;
-	uint outery = y / PatchSize;
-	uint innerx = x % PatchSize;
-	uint innery = y % PatchSize;
+	uint32_t outerx = x / PatchSize;
+	uint32_t outery = y / PatchSize;
+	uint32_t innerx = x % PatchSize;
+	uint32_t innery = y % PatchSize;
 
 	return
 		(outery * (m_patch_size.w / PatchSize) + outerx) * (PatchSize * PatchSize) +
@@ -196,7 +196,7 @@ void GameRendererGL::prepare_terrain_base()
 
 	Map const & map = m_egbase->map();
 
-	uint reqsize = m_patch_size.w * m_patch_size.h;
+	uint32_t reqsize = m_patch_size.w * m_patch_size.h;
 	if (reqsize > 0x10000)
 		throw wexception("Too many vertices; decrease screen resolution");
 
@@ -209,11 +209,11 @@ void GameRendererGL::prepare_terrain_base()
 		m_terrain_freq.resize(16);
 	m_terrain_freq.assign(m_terrain_freq.size(), 0);
 
-	uint index = 0;
-	for (uint outery = 0; outery < m_patch_size.h / PatchSize; ++outery) {
-		for (uint outerx = 0; outerx < m_patch_size.w / PatchSize; ++outerx) {
-			for (uint innery = 0; innery < PatchSize; ++innery) {
-				for (uint innerx = 0; innerx < PatchSize; ++innerx) {
+	uint32_t index = 0;
+	for (uint32_t outery = 0; outery < m_patch_size.h / PatchSize; ++outery) {
+		for (uint32_t outerx = 0; outerx < m_patch_size.w / PatchSize; ++outerx) {
+			for (uint32_t innery = 0; innery < PatchSize; ++innery) {
+				for (uint32_t innerx = 0; innerx < PatchSize; ++innerx) {
 					Coords coords
 						(m_patch_size.x + outerx * PatchSize + innerx,
 						 m_patch_size.y + outery * PatchSize + innery);
@@ -243,8 +243,8 @@ void GameRendererGL::prepare_terrain_base()
 	}
 
 	m_terrain_freq_cum.resize(m_terrain_freq.size());
-	uint nrtriangles = 0;
-	for (uint idx = 0; idx < m_terrain_freq.size(); ++idx) {
+	uint32_t nrtriangles = 0;
+	for (uint32_t idx = 0; idx < m_terrain_freq.size(); ++idx) {
 		m_terrain_freq_cum[idx] = nrtriangles;
 		nrtriangles += m_terrain_freq[idx];
 	}
@@ -257,10 +257,10 @@ void GameRendererGL::prepare_terrain_base()
 	index = 0;
 	for (Terrain_Index ter = 0; ter < m_terrain_freq.size(); ++ter) {
 		assert(index == 3 * m_terrain_freq_cum[ter]);
-		for (uint outery = 0; outery < m_patch_size.h / PatchSize; ++outery) {
-			for (uint outerx = 0; outerx < m_patch_size.w / PatchSize; ++outerx) {
-				for (uint innery = 0; innery < PatchSize; ++innery) {
-					for (uint innerx = 0; innerx < PatchSize; ++innerx) {
+		for (uint32_t outery = 0; outery < m_patch_size.h / PatchSize; ++outery) {
+			for (uint32_t outerx = 0; outerx < m_patch_size.w / PatchSize; ++outerx) {
+				for (uint32_t innery = 0; innery < PatchSize; ++innery) {
+					for (uint32_t innerx = 0; innerx < PatchSize; ++innerx) {
 						Coords coords
 							(m_patch_size.x + PatchSize * outerx + innerx,
 							 m_patch_size.y + PatchSize * outery + innery);
@@ -410,7 +410,7 @@ void GameRendererGL::prepare_terrain_dither()
 		}
 	}
 
-	uint nrtriangles = 0;
+	uint32_t nrtriangles = 0;
 	m_terrain_edge_freq_cum.resize(m_terrain_edge_freq.size());
 	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter) {
 		m_terrain_edge_freq_cum[ter] = nrtriangles;
@@ -422,7 +422,7 @@ void GameRendererGL::prepare_terrain_dither()
 		m_edge_vertices_size = 3 * nrtriangles;
 	}
 
-	std::vector<uint> indexs;
+	std::vector<uint32_t> indexs;
 	indexs.resize(m_terrain_edge_freq_cum.size());
 	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter)
 		indexs[ter] = 3 * m_terrain_edge_freq_cum[ter];
@@ -455,7 +455,7 @@ void GameRendererGL::prepare_terrain_dither()
 			static const float TyZero = 1.0 / TEXTURE_HEIGHT;
 			static const float TyOne = 1.0 - TyZero;
 
-			uint index;
+			uint32_t index;
 			if (lyr_r > lyr_d) {
 				index = indexs[ter_r];
 				compute_basevertex(f, m_edge_vertices[index]);
@@ -653,13 +653,13 @@ void GameRendererGL::prepare_roads()
 		}
 	}
 
-	uint nrquads = m_road_freq[0] + m_road_freq[1];
+	uint32_t nrquads = m_road_freq[0] + m_road_freq[1];
 	if (4 * nrquads > m_road_vertices_size) {
 		m_road_vertices.reset(new basevertex[4 * nrquads]);
 		m_road_vertices_size = 4 * nrquads;
 	}
 
-	uint indexs[2];
+	uint32_t indexs[2];
 	indexs[0] = 0;
 	indexs[1] = 4 * m_road_freq[0];
 
@@ -672,7 +672,7 @@ void GameRendererGL::prepare_roads()
 
 			uint8_t road = (roads >> Road_East) & Road_Mask;
 			if (road >= Road_Normal && road <= Road_Busy) {
-				uint index = indexs[road - Road_Normal];
+				uint32_t index = indexs[road - Road_Normal];
 				basevertex start, end;
 				compute_basevertex(Coords(fx, fy), start);
 				compute_basevertex(Coords(fx + 1, fy), end);
@@ -697,7 +697,7 @@ void GameRendererGL::prepare_roads()
 
 			road = (roads >> Road_SouthEast) & Road_Mask;
 			if (road >= Road_Normal && road <= Road_Busy) {
-				uint index = indexs[road - Road_Normal];
+				uint32_t index = indexs[road - Road_Normal];
 				basevertex start, end;
 				compute_basevertex(Coords(fx, fy), start);
 				compute_basevertex(Coords(fx + (fy & 1), fy + 1), end);
@@ -722,7 +722,7 @@ void GameRendererGL::prepare_roads()
 
 			road = (roads >> Road_SouthWest) & Road_Mask;
 			if (road >= Road_Normal && road <= Road_Busy) {
-				uint index = indexs[road - Road_Normal];
+				uint32_t index = indexs[road - Road_Normal];
 				basevertex start, end;
 				compute_basevertex(Coords(fx, fy), start);
 				compute_basevertex(Coords(fx + (fy & 1) - 1, fy + 1), end);
