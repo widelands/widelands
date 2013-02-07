@@ -99,9 +99,12 @@ void Map_View::draw(RenderTarget & dst)
 	egbase.map().overlay_manager().load_graphics();
 
 	if (!m_renderer) {
+#ifdef USE_OPENGL
 		if (g_opengl) {
 			m_renderer.reset(new GameRendererGL());
-		} else {
+		} else
+#endif
+		{
 			m_renderer.reset(new GameRendererSDL());
 		}
 	}
