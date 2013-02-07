@@ -888,21 +888,6 @@ void GameRendererGL::draw_objects()
 					 bob;
 					 bob = bob->get_next_bob())
 					bob->draw(*m_egbase, *m_dst, f_pos);
-
-				//  Render overlays on nodes.
-				Overlay_Manager::Overlay_Info
-					overlay_info[MAX_OVERLAYS_PER_NODE];
-
-				const Overlay_Manager::Overlay_Info * const end =
-					overlay_info
-					+
-					map.overlay_manager().get_overlays(f, overlay_info);
-
-				for
-					(const Overlay_Manager::Overlay_Info * it = overlay_info;
-					 it < end;
-					 ++it)
-					m_dst->blit(f_pos - it->hotspot, it->pic);
 			} else if (f_vision == 1) {
 				Player::Field const & f_pl = m_player->fields()[map.get_index(f, map.get_width())];
 				const Player * owner = f_owner_number ? m_egbase->get_player(f_owner_number) : 0;
@@ -970,6 +955,62 @@ void GameRendererGL::draw_objects()
 						m_dst->drawanim(f_pos, owner->flag_anim(), 0, owner);
 					}
 				}
+			}
+
+			{
+				// Render overlays on the node
+				Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_NODE];
+
+				const Overlay_Manager::Overlay_Info * const end =
+					overlay_info
+					+
+					map.overlay_manager().get_overlays(f, overlay_info);
+
+				for
+					(const Overlay_Manager::Overlay_Info * it = overlay_info;
+					 it < end;
+					 ++it)
+					m_dst->blit(f_pos - it->hotspot, it->pic);
+			}
+
+			{
+				// Render overlays on the R triangle
+				Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
+				Overlay_Manager::Overlay_Info const * end =
+					overlay_info
+					+
+					map.overlay_manager().get_overlays
+							 	(TCoords<>(f, TCoords<>::R), overlay_info);
+
+				Point pos
+					((f_pos.x + r_pos.x + br_pos.x) / 3,
+					 (f_pos.y + r_pos.y + br_pos.y) / 3);
+
+				for
+					(Overlay_Manager::Overlay_Info const * it = overlay_info;
+					 it < end;
+					 ++it)
+					m_dst->blit(pos - it->hotspot, it->pic);
+			}
+
+			{
+				// Render overlays on the D triangle
+				Overlay_Manager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
+				Overlay_Manager::Overlay_Info const * end =
+					overlay_info
+					+
+					map.overlay_manager().get_overlays
+							 	(TCoords<>(f, TCoords<>::D), overlay_info);
+
+				Point pos
+					((f_pos.x + bl_pos.x + br_pos.x) / 3,
+					 (f_pos.y + bl_pos.y + br_pos.y) / 3);
+
+				for
+					(Overlay_Manager::Overlay_Info const * it = overlay_info;
+					 it < end;
+					 ++it)
+					m_dst->blit(pos - it->hotspot, it->pic);
 			}
 		}
 	}
