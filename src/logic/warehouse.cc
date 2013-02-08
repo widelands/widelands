@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1354,7 +1354,8 @@ void Warehouse::check_remove_stock(Game & game)
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
 
-			launch_item(game, ware);
+			WareInstance & item = launch_item(game, ware);
+			do_launch_item(game, item);
 			break;
 		}
 	}
