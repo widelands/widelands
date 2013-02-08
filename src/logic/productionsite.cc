@@ -708,7 +708,6 @@ bool ProductionSite::get_building_work
 
 	// Default actions first
 	if (WareInstance * const item = worker.fetch_carried_item(game)) {
-
 		worker.start_task_dropoff(game, *item);
 		return true;
 	}

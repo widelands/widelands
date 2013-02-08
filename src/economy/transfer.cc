@@ -184,18 +184,6 @@ PlayerImmovable * Transfer::get_next_step
 				 &m_route.get_flag(m_game, m_route.get_nrsteps() - 1))
 				m_route.truncate(m_route.get_nrsteps() - 1);
 
-#if 1
-	if (m_item && (m_item->serial() == 1265)) {
-		log
-			("Item %u ready at location %u (flag %u) for destination %u\n",
-			 m_item->serial(), location->serial(), locflag.serial(), destination->serial());
-		for (int i = 0; i <= m_route.get_nrsteps() && i < 5; ++i) {
-			log("  %i: flag %u\n", i, m_route.get_flag(m_game, i).serial());
-		}
-		log("---\n");
-	}
-#endif
-
 	// Reroute into PortDocks or the associated warehouse when appropriate
 	if (m_route.get_nrsteps() >= 1) {
 		Flag & curflag(m_route.get_flag(m_game, 0));

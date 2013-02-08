@@ -2240,8 +2240,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 
 	if (WareInstance * const item = fetch_carried_item(game)) {
 		if (item->get_next_move_step(game) == location) {
-			item->set_location(game, location);
-			item->update(game); //  this might remove the item and ack any requests
+			item->enter_building(game, *dynamic_cast<Building *>(location));
 		} else {
 			// The item changed its mind and doesn't want to go to this building
 			// after all, so carry it back out.
