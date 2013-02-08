@@ -43,7 +43,7 @@ void GameRenderer::rendermap
 	(RenderTarget & dst,
 	 Widelands::Editor_Game_Base const &       egbase,
 	 Widelands::Player           const &       player,
-	 Point                                     viewofs)
+	 Point                       const &       viewofs)
 {
 	m_dst = &dst;
 	m_dst_offset = -viewofs;
@@ -56,7 +56,7 @@ void GameRenderer::rendermap
 void GameRenderer::rendermap
 	(RenderTarget & dst,
 	 Widelands::Editor_Game_Base const & egbase,
-	 Point                               viewofs)
+	 Point                       const & viewofs)
 {
 	m_dst = &dst;
 	m_dst_offset = -viewofs;

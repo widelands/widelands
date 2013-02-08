@@ -39,7 +39,7 @@ struct RenderTarget;
  * so that target-specific optimizations (such as caching data) can
  * be effective.
  */
-struct GameRenderer {
+class GameRenderer {
 public:
 	GameRenderer();
 	virtual ~GameRenderer();
@@ -55,7 +55,7 @@ public:
 		(RenderTarget & dst,
 		 Widelands::Editor_Game_Base const &       egbase,
 		 Widelands::Player           const &       player,
-		 Point                                     viewofs);
+		 Point                       const &       viewofs);
 
 	/**
 	 * Renders the map from an omniscient perspective.
@@ -64,7 +64,7 @@ public:
 	void rendermap
 		(RenderTarget & dst,
 		 Widelands::Editor_Game_Base const & egbase,
-		 Point                               viewofs);
+		 Point                       const & viewofs);
 
 protected:
 	virtual void draw() = 0;
