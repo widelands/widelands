@@ -38,7 +38,8 @@ class GLSurface;
 /**
  * OpenGL implementation of @ref GameRenderer.
  */
-struct GameRendererGL : GameRenderer {
+class GameRendererGL : public GameRenderer {
+public:
 	GameRendererGL();
 	virtual ~GameRendererGL();
 

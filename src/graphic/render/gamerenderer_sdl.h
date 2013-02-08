@@ -28,7 +28,8 @@ struct Vertex;
 /**
  * Software-rendering implementation of @ref GameRenderer.
  */
-struct GameRendererSDL : GameRenderer {
+class GameRendererSDL : public GameRenderer {
+protected:
 	void draw();
 
 private:
