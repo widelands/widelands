@@ -154,6 +154,7 @@ struct Game : Editor_Game_Base {
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);
 	void send_player_enhance_building (Building &, Building_Index);
+	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority
 		(PlayerImmovable &, int32_t type, Ware_Index index, int32_t prio);
 	void send_player_set_ware_max_fill
