@@ -68,6 +68,11 @@ private:
 
 	void draw();
 	void prepare_terrain_base();
+	void collect_terrain_base(bool onlyscan);
+	void count_terrain_base(Widelands::Terrain_Index ter);
+	void add_terrain_base_triangle
+		(Widelands::Terrain_Index ter,
+		 const Widelands::Coords & p1, const Widelands::Coords & p2, const Widelands::Coords & p3);
 	void draw_terrain_base();
 	void prepare_terrain_dither();
 	void collect_terrain_dither(bool onlyscan);
@@ -79,7 +84,7 @@ private:
 	void prepare_roads();
 	void draw_roads();
 
-	uint32_t patch_index(int32_t fx, int32_t fy) const;
+	uint32_t patch_index(const Widelands::Coords & f) const;
 	uint8_t field_brightness(const Widelands::FCoords & coords) const;
 	uint8_t field_roads(const Widelands::FCoords & coords) const;
 	template<typename vertex>
@@ -104,6 +109,7 @@ private:
 	uint32_t m_patch_vertices_size;
 	boost::scoped_array<uint16_t> m_patch_indices;
 	uint32_t m_patch_indices_size;
+	std::vector<uint32_t> m_patch_indices_indexs;
 	std::vector<uint32_t> m_terrain_freq;
 	std::vector<uint32_t> m_terrain_freq_cum;
 	boost::scoped_array<dithervertex> m_edge_vertices;

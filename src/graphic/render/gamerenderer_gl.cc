@@ -49,10 +49,10 @@ GameRendererGL::~GameRendererGL()
 {
 }
 
-uint32_t GameRendererGL::patch_index(int32_t fx, int32_t fy) const
+uint32_t GameRendererGL::patch_index(const Coords & f) const
 {
-	uint32_t x = fx - m_patch_size.x;
-	uint32_t y = fy - m_patch_size.y;
+	uint32_t x = f.x - m_patch_size.x;
+	uint32_t y = f.y - m_patch_size.y;
 
 	assert(x < m_patch_size.w);
 	assert(y < m_patch_size.h);
@@ -146,11 +146,70 @@ void GameRendererGL::compute_basevertex(const Coords & coords, vertex & vtx) con
 	vtx.color[3] = 255;
 }
 
+void GameRendererGL::count_terrain_base(Terrain_Index ter)
+{
+	if (ter >= m_terrain_freq.size())
+		m_terrain_freq.resize(ter + 1);
+	m_terrain_freq[ter] += 1;
+}
+
+void GameRendererGL::add_terrain_base_triangle
+	(Terrain_Index ter, const Coords & p1, const Coords & p2, const Coords & p3)
+{
+	uint32_t index = m_patch_indices_indexs[ter];
+	m_patch_indices[index++] = patch_index(p1);
+	m_patch_indices[index++] = patch_index(p2);
+	m_patch_indices[index++] = patch_index(p3);
+	m_patch_indices_indexs[ter] = index;
+}
+
+void GameRendererGL::collect_terrain_base(bool onlyscan)
+{
+	Map const & map = m_egbase->map();
+
+	uint32_t index = 0;
+	for (uint32_t outery = 0; outery < m_patch_size.h / PatchSize; ++outery) {
+		for (uint32_t outerx = 0; outerx < m_patch_size.w / PatchSize; ++outerx) {
+			for (uint32_t innery = 0; innery < PatchSize; ++innery) {
+				for (uint32_t innerx = 0; innerx < PatchSize; ++innerx) {
+					Coords coords
+						(m_patch_size.x + outerx * PatchSize + innerx,
+						 m_patch_size.y + outery * PatchSize + innery);
+
+					if (onlyscan) {
+						assert(index == patch_index(coords));
+						compute_basevertex(coords, m_patch_vertices[index]);
+						++index;
+					}
+
+					if (coords.x >= m_minfx && coords.y >= m_minfy && coords.x <= m_maxfx && coords.y <= m_maxfy) {
+						Coords ncoords(coords);
+						map.normalize_coords(ncoords);
+						FCoords fcoords = map.get_fcoords(ncoords);
+						Terrain_Index ter_d = fcoords.field->get_terrains().d;
+						Terrain_Index ter_r = fcoords.field->get_terrains().r;
+
+						if (onlyscan) {
+							count_terrain_base(ter_d);
+							count_terrain_base(ter_r);
+						} else {
+							Coords brn(coords.x + (coords.y & 1), coords.y + 1);
+							Coords bln(brn.x - 1, brn.y);
+							Coords rn(coords.x + 1, coords.y);
+
+							add_terrain_base_triangle(ter_d, coords, bln, brn);
+							add_terrain_base_triangle(ter_r, coords, brn, rn);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 void GameRendererGL::prepare_terrain_base()
 {
 	assert(sizeof(basevertex) == 32);
-
-	Map const & map = m_egbase->map();
 
 	uint32_t reqsize = m_patch_size.w * m_patch_size.h;
 	if (reqsize > 0x10000)
@@ -165,38 +224,7 @@ void GameRendererGL::prepare_terrain_base()
 		m_terrain_freq.resize(16);
 	m_terrain_freq.assign(m_terrain_freq.size(), 0);
 
-	uint32_t index = 0;
-	for (uint32_t outery = 0; outery < m_patch_size.h / PatchSize; ++outery) {
-		for (uint32_t outerx = 0; outerx < m_patch_size.w / PatchSize; ++outerx) {
-			for (uint32_t innery = 0; innery < PatchSize; ++innery) {
-				for (uint32_t innerx = 0; innerx < PatchSize; ++innerx) {
-					Coords coords
-						(m_patch_size.x + outerx * PatchSize + innerx,
-						 m_patch_size.y + outery * PatchSize + innery);
-					assert(index == patch_index(coords.x, coords.y));
-					compute_basevertex(coords, m_patch_vertices[index]);
-					++index;
-
-					if
-						(coords.x < m_minfx || coords.y < m_minfy ||
-						 coords.x > m_maxfx || coords.y > m_maxfy)
-						continue;
-
-					Coords ncoords(coords);
-					map.normalize_coords(ncoords);
-					FCoords fcoords = map.get_fcoords(ncoords);
-					Terrain_Index ter_d = fcoords.field->get_terrains().d;
-					Terrain_Index ter_r = fcoords.field->get_terrains().r;
-					if (ter_d >= m_terrain_freq.size())
-						m_terrain_freq.resize(ter_d + 1);
-					m_terrain_freq[ter_d] += 1;
-					if (ter_r >= m_terrain_freq.size())
-						m_terrain_freq.resize(ter_r + 1);
-					m_terrain_freq[ter_r] += 1;
-				}
-			}
-		}
-	}
+	collect_terrain_base(true);
 
 	m_terrain_freq_cum.resize(m_terrain_freq.size());
 	uint32_t nrtriangles = 0;
@@ -210,42 +238,14 @@ void GameRendererGL::prepare_terrain_base()
 		m_patch_indices_size = 3 * nrtriangles;
 	}
 
-	index = 0;
-	for (Terrain_Index ter = 0; ter < m_terrain_freq.size(); ++ter) {
-		assert(index == 3 * m_terrain_freq_cum[ter]);
-		for (uint32_t outery = 0; outery < m_patch_size.h / PatchSize; ++outery) {
-			for (uint32_t outerx = 0; outerx < m_patch_size.w / PatchSize; ++outerx) {
-				for (uint32_t innery = 0; innery < PatchSize; ++innery) {
-					for (uint32_t innerx = 0; innerx < PatchSize; ++innerx) {
-						Coords coords
-							(m_patch_size.x + PatchSize * outerx + innerx,
-							 m_patch_size.y + PatchSize * outery + innery);
-						if
-							(coords.x < m_minfx || coords.y < m_minfy ||
-							 coords.x > m_maxfx || coords.y > m_maxfy)
-							continue;
+	m_patch_indices_indexs.resize(m_terrain_freq.size());
+	for (Terrain_Index ter = 0; ter < m_terrain_freq.size(); ++ter)
+		m_patch_indices_indexs[ter] = 3 * m_terrain_freq_cum[ter];
 
-						Coords ncoords(coords);
-						map.normalize_coords(ncoords);
-						FCoords fcoords = map.get_fcoords(ncoords);
-						if (fcoords.field->get_terrains().d == ter) {
-							Coords brn(coords.x + (coords.y & 1), coords.y + 1);
-							Coords bln(brn.x - 1, brn.y);
-							m_patch_indices[index++] = patch_index(coords.x, coords.y);
-							m_patch_indices[index++] = patch_index(bln.x, bln.y);
-							m_patch_indices[index++] = patch_index(brn.x, brn.y);
-						}
-						if (fcoords.field->get_terrains().r == ter) {
-							Coords brn(coords.x + (coords.y & 1), coords.y + 1);
-							Coords rn(coords.x + 1, coords.y);
-							m_patch_indices[index++] = patch_index(coords.x, coords.y);
-							m_patch_indices[index++] = patch_index(brn.x, brn.y);
-							m_patch_indices[index++] = patch_index(rn.x, rn.y);
-						}
-					}
-				}
-			}
-		}
+	collect_terrain_base(false);
+
+	for (Terrain_Index ter = 0; ter < m_terrain_freq.size(); ++ter) {
+		assert(m_patch_indices_indexs[ter] == 3 * (m_terrain_freq_cum[ter] + m_terrain_freq[ter]));
 	}
 }
 
@@ -385,8 +385,6 @@ void GameRendererGL::collect_terrain_dither(bool onlyscan)
 void GameRendererGL::prepare_terrain_dither()
 {
 	assert(sizeof(dithervertex) == 32);
-
-	Map const & map = m_egbase->map();
 
 	if (m_terrain_edge_freq.size() < 16)
 		m_terrain_edge_freq.resize(16);
