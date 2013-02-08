@@ -17,11 +17,13 @@
  *
  */
 
-#ifdef USE_OPENGL
+//#ifdef USE_OPENGL
 #ifndef WIDELANDS_GAMERENDERER_GL_H
 #define WIDELANDS_GAMERENDERER_GL_H
 
 #include "gamerenderer.h"
+
+#include "logic/widelands.h"
 
 #include "rect.h"
 
@@ -68,6 +70,11 @@ private:
 	void prepare_terrain_base();
 	void draw_terrain_base();
 	void prepare_terrain_dither();
+	void collect_terrain_dither(bool onlyscan);
+	void add_terrain_dither_triangle
+		(bool onlyscan, Widelands::Terrain_Index ter,
+		 const Widelands::Coords & edge1, const Widelands::Coords & edge2,
+		 const Widelands::Coords & opposite);
 	void draw_terrain_dither();
 	void prepare_roads();
 	void draw_roads();
@@ -103,6 +110,7 @@ private:
 	uint32_t m_edge_vertices_size;
 	std::vector<uint32_t> m_terrain_edge_freq;
 	std::vector<uint32_t> m_terrain_edge_freq_cum;
+	std::vector<uint32_t> m_terrain_edge_indexs;
 
 	uint32_t m_road_freq[2];
 	boost::scoped_array<basevertex> m_road_vertices;
@@ -111,4 +119,4 @@ private:
 };
 
 #endif // WIDELANDS_GAMERENDERER_GL_H
-#endif // USE_OPENGL
+//#endif // USE_OPENGL

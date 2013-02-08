@@ -17,7 +17,7 @@
  *
  */
 
-#ifdef USE_OPENGL
+//#ifdef USE_OPENGL
 #include "gamerenderer_gl.h"
 
 #include "gl_surface.h"
@@ -287,101 +287,38 @@ void GameRendererGL::draw_terrain_base()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-/*
- * Schematic of triangle neighborhood:
- *
- *               *
- *              / \
- *             / u \
- *         (f)/     \
- *    *------*------* (r)
- *     \  l / \  r / \
- *      \  /   \  /   \
- *       \/  d  \/ rr  \
- *       *------*------* (br)
- *        \ dd /
- *         \  /
- *          \/
- *          *
- */
-void GameRendererGL::prepare_terrain_dither()
+void GameRendererGL::add_terrain_dither_triangle
+	(bool onlyscan, Terrain_Index ter, const Coords & edge1, const Coords & edge2, const Coords & opposite)
 {
-	assert(sizeof(dithervertex) == 32);
+	if (onlyscan) {
+		if (ter >= m_terrain_edge_freq.size())
+			m_terrain_edge_freq.resize(ter + 1);
+		m_terrain_edge_freq[ter] += 1;
+	} else {
+		static const float TyZero = 1.0 / TEXTURE_HEIGHT;
+		static const float TyOne = 1.0 - TyZero;
 
+		uint32_t index = m_terrain_edge_indexs[ter];
+		compute_basevertex(edge1, m_edge_vertices[index]);
+		m_edge_vertices[index].edgex = 0.0;
+		m_edge_vertices[index].edgey = TyZero;
+		++index;
+		compute_basevertex(edge2, m_edge_vertices[index]);
+		m_edge_vertices[index].edgex = 1.0;
+		m_edge_vertices[index].edgey = TyZero;
+		++index;
+		compute_basevertex(opposite, m_edge_vertices[index]);
+		m_edge_vertices[index].edgex = 0.5;
+		m_edge_vertices[index].edgey = TyOne;
+		++index;
+		m_terrain_edge_indexs[ter] = index;
+	}
+}
+
+void GameRendererGL::collect_terrain_dither(bool onlyscan)
+{
 	Map const & map = m_egbase->map();
 	World const & world = map.world();
-
-	if (m_terrain_edge_freq.size() < 16)
-		m_terrain_edge_freq.resize(16);
-	m_terrain_edge_freq.assign(m_terrain_edge_freq.size(), 0);
-
-	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
-		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
-			Coords ncoords(fx, fy);
-			map.normalize_coords(ncoords);
-			FCoords fcoords = map.get_fcoords(ncoords);
-
-			Terrain_Index ter_d = fcoords.field->get_terrains().d;
-			Terrain_Index ter_r = fcoords.field->get_terrains().r;
-			Terrain_Index ter_u = map.tr_n(fcoords).field->get_terrains().d;
-			Terrain_Index ter_rr = map.r_n(fcoords).field->get_terrains().d;
-			Terrain_Index ter_l = map.l_n(fcoords).field->get_terrains().r;
-			Terrain_Index ter_dd = map.bl_n(fcoords).field->get_terrains().r;
-			int32_t lyr_d = world.get_ter(ter_d).dither_layer();
-			int32_t lyr_r = world.get_ter(ter_r).dither_layer();
-			int32_t lyr_u = world.get_ter(ter_u).dither_layer();
-			int32_t lyr_rr = world.get_ter(ter_rr).dither_layer();
-			int32_t lyr_l = world.get_ter(ter_l).dither_layer();
-			int32_t lyr_dd = world.get_ter(ter_dd).dither_layer();
-
-			if (lyr_r > lyr_d) {
-				if (ter_r >= m_terrain_edge_freq.size())
-					m_terrain_edge_freq.resize(ter_r + 1);
-				m_terrain_edge_freq[ter_r] += 1;
-			} else if (ter_d != ter_r) {
-				if (ter_d >= m_terrain_edge_freq.size())
-					m_terrain_edge_freq.resize(ter_d + 1);
-				m_terrain_edge_freq[ter_d] += 1;
-			}
-			if ((lyr_u > lyr_r) || (lyr_u == lyr_r && ter_u != ter_r)) {
-				if (ter_u >= m_terrain_edge_freq.size())
-					m_terrain_edge_freq.resize(ter_u + 1);
-				m_terrain_edge_freq[ter_u] += 1;
-			}
-			if (lyr_rr > lyr_r) {
-				if (ter_rr >= m_terrain_edge_freq.size())
-					m_terrain_edge_freq.resize(ter_rr + 1);
-				m_terrain_edge_freq[ter_rr] += 1;
-			}
-			if ((lyr_l > lyr_d) || (lyr_l == lyr_d && ter_l != ter_d)) {
-				if (ter_l >= m_terrain_edge_freq.size())
-					m_terrain_edge_freq.resize(ter_l + 1);
-				m_terrain_edge_freq[ter_l] += 1;
-			}
-			if (lyr_dd > lyr_d) {
-				if (ter_dd >= m_terrain_edge_freq.size())
-					m_terrain_edge_freq.resize(ter_dd + 1);
-				m_terrain_edge_freq[ter_dd] += 1;
-			}
-		}
-	}
-
-	uint32_t nrtriangles = 0;
-	m_terrain_edge_freq_cum.resize(m_terrain_edge_freq.size());
-	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter) {
-		m_terrain_edge_freq_cum[ter] = nrtriangles;
-		nrtriangles += m_terrain_edge_freq[ter];
-	}
-
-	if (3 * nrtriangles > m_edge_vertices_size) {
-		m_edge_vertices.reset(new dithervertex[3 * nrtriangles]);
-		m_edge_vertices_size = 3 * nrtriangles;
-	}
-
-	std::vector<uint32_t> indexs;
-	indexs.resize(m_terrain_edge_freq_cum.size());
-	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter)
-		indexs[ter] = 3 * m_terrain_edge_freq_cum[ter];
 
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
 		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
@@ -407,111 +344,76 @@ void GameRendererGL::prepare_terrain_dither()
 			Coords brn(fx + (fy & 1), fy + 1);
 			Coords bln(brn.x - 1, brn.y);
 
-			// Hack texture coordinates to avoid wrap-around
-			static const float TyZero = 1.0 / TEXTURE_HEIGHT;
-			static const float TyOne = 1.0 - TyZero;
-
-			uint32_t index;
 			if (lyr_r > lyr_d) {
-				index = indexs[ter_r];
-				compute_basevertex(f, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				compute_basevertex(bln, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = TyOne;
-				++index;
-				compute_basevertex(brn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				indexs[ter_r] = index;
+				add_terrain_dither_triangle(onlyscan, ter_r, brn, f, bln);
 			} else if (ter_d != ter_r) {
-				index = indexs[ter_d];
-				compute_basevertex(f, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				compute_basevertex(brn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				compute_basevertex(rn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = TyOne;
-				++index;
-				indexs[ter_d] = index;
+				add_terrain_dither_triangle(onlyscan, ter_d, f, brn, rn);
 			}
 			if ((lyr_u > lyr_r) || (lyr_u == lyr_r && ter_u != ter_r)) {
-				index = indexs[ter_u];
-				compute_basevertex(f, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				compute_basevertex(brn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = TyOne;
-				++index;
-				compute_basevertex(rn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				indexs[ter_u] = index;
+				add_terrain_dither_triangle(onlyscan, ter_u, rn, f, brn);
 			}
 			if (lyr_rr > lyr_r) {
-				index = indexs[ter_rr];
-				compute_basevertex(f, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = TyOne;
-				++index;
-				compute_basevertex(brn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				compute_basevertex(rn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				indexs[ter_rr] = index;
+				add_terrain_dither_triangle(onlyscan, ter_rr, brn, rn, f);
 			}
 			if ((lyr_l > lyr_d) || (lyr_l == lyr_d && ter_l != ter_d)) {
-				index = indexs[ter_l];
-				compute_basevertex(f, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				compute_basevertex(bln, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				compute_basevertex(brn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = TyOne;
-				++index;
-				indexs[ter_l] = index;
+				add_terrain_dither_triangle(onlyscan, ter_l, f, bln, brn);
 			}
 			if (lyr_dd > lyr_d) {
-				index = indexs[ter_dd];
-				compute_basevertex(f, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.5;
-				m_edge_vertices[index].edgey = TyOne;
-				++index;
-				compute_basevertex(bln, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 1.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				compute_basevertex(brn, m_edge_vertices[index]);
-				m_edge_vertices[index].edgex = 0.0;
-				m_edge_vertices[index].edgey = TyZero;
-				++index;
-				indexs[ter_dd] = index;
+				add_terrain_dither_triangle(onlyscan, ter_dd, bln, brn, f);
 			}
 		}
 	}
+}
+
+/*
+ * Schematic of triangle neighborhood:
+ *
+ *               *
+ *              / \
+ *             / u \
+ *         (f)/     \
+ *    *------*------* (r)
+ *     \  l / \  r / \
+ *      \  /   \  /   \
+ *       \/  d  \/ rr  \
+ *       *------*------* (br)
+ *        \ dd /
+ *         \  /
+ *          \/
+ *          *
+ */
+void GameRendererGL::prepare_terrain_dither()
+{
+	assert(sizeof(dithervertex) == 32);
+
+	Map const & map = m_egbase->map();
+
+	if (m_terrain_edge_freq.size() < 16)
+		m_terrain_edge_freq.resize(16);
+	m_terrain_edge_freq.assign(m_terrain_edge_freq.size(), 0);
+
+	collect_terrain_dither(true);
+
+	uint32_t nrtriangles = 0;
+	m_terrain_edge_freq_cum.resize(m_terrain_edge_freq.size());
+	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter) {
+		m_terrain_edge_freq_cum[ter] = nrtriangles;
+		nrtriangles += m_terrain_edge_freq[ter];
+	}
+
+	if (3 * nrtriangles > m_edge_vertices_size) {
+		m_edge_vertices.reset(new dithervertex[3 * nrtriangles]);
+		m_edge_vertices_size = 3 * nrtriangles;
+	}
+
+	m_terrain_edge_indexs.resize(m_terrain_edge_freq_cum.size());
+	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter)
+		m_terrain_edge_indexs[ter] = 3 * m_terrain_edge_freq_cum[ter];
+
+	collect_terrain_dither(false);
 
 	for (Terrain_Index ter = 0; ter < m_terrain_edge_freq.size(); ++ter) {
-		assert(indexs[ter] == 3 * (m_terrain_edge_freq_cum[ter] + m_terrain_edge_freq[ter]));
+		assert(m_terrain_edge_indexs[ter] == 3 * (m_terrain_edge_freq_cum[ter] + m_terrain_edge_freq[ter]));
 	}
 }
 
@@ -743,4 +645,4 @@ void GameRendererGL::draw_roads()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-#endif // USE_OPENGL
+//#endif // USE_OPENGL
