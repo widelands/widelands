@@ -40,7 +40,7 @@ namespace UI {
 // directly.
 class Font_Handler1 : public IFont_Handler1 {
 public:
-	Font_Handler1(IGraphic& gr, FileSystem* fs);
+	Font_Handler1(FileSystem* fs);
 	virtual ~Font_Handler1();
 
 	void draw_text
@@ -56,7 +56,7 @@ private:
 	boost::scoped_ptr<RT::IRenderer> renderer_;
 };
 
-Font_Handler1::Font_Handler1(IGraphic& gr, FileSystem* fs) {
+Font_Handler1::Font_Handler1(FileSystem* fs) {
 }
 Font_Handler1::~Font_Handler1() {
 }
@@ -84,8 +84,8 @@ void Font_Handler1::draw_text
 	dst.blit(Point(dstpoint.x, dstpoint.y), p);
 }
 
-IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs) {
-	return new Font_Handler1(gr, lfs);
+IFont_Handler1 * create_fonthandler(FileSystem* lfs) {
+	return new Font_Handler1(lfs);
 }
 
 IFont_Handler1 * g_fh1 = 0;

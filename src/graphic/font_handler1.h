@@ -32,7 +32,6 @@ class RenderTarget;
 class FileSystem;
 
 class IPicture;
-class IGraphic;
 
 namespace UI {
 
@@ -58,7 +57,7 @@ public:
 	virtual const IPicture* render(const std::string& text, uint32_t w = 0) = 0;
 };
 
-IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs);
+IFont_Handler1 * create_fonthandler(FileSystem* lfs);
 
 extern IFont_Handler1 * g_fh1;
 

@@ -32,12 +32,9 @@ using namespace std;
 
 Surface* ImageLoaderImpl::load(const string& fname) const {
 	FileRead fr;
-	SDL_Surface * sdlsurf;
 
-	//fastOpen tries to use mmap
 	fr.fastOpen(*g_fs, fname.c_str());
-
-	sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+	SDL_Surface *sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
 	if (!sdlsurf)
 		throw wexception("Could not open image %s: %s", fname.c_str(), IMG_GetError());

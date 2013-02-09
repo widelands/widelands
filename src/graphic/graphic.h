@@ -27,7 +27,6 @@
 #include <boost/scoped_ptr.hpp>
 #include <png.h>
 
-#include "igraphic.h"
 #include "image_cache.h"
 #include "rect.h"
 
@@ -101,11 +100,11 @@ struct GraphicCaps
  * appropriate module flag; the user can request to flush one single picture
  * alone, but this is only used (and useful) in the editor.
  */
-struct Graphic : public IGraphic {
+struct Graphic {
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
 		 bool fullscreen, bool opengl);
-	virtual ~Graphic();
+	~Graphic();
 
 	int32_t get_xres() const;
 	int32_t get_yres() const;
