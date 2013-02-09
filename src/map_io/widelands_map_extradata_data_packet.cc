@@ -17,20 +17,19 @@
  *
  */
 
-#include "widelands_map_extradata_data_packet.h"
+#include <SDL_image.h>
 
-#include "logic/editor_game_base.h"
-#include "io/filewrite.h"
-#include "logic/game_data_error.h"
-// Since we are lying about the path of the pictures
-// we also include graphic.h
 #include "graphic/graphic.h"
+#include "graphic/surface.h"
+#include "io/filewrite.h"
+#include "logic/editor_game_base.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "profile/profile.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "profile/profile.h"
 
-#include <SDL_image.h>
+#include "widelands_map_extradata_data_packet.h"
 
 namespace Widelands {
 
@@ -77,7 +76,7 @@ throw (_wexception)
 
 					const IPicture* image = g_gr->imgcache().new_permanent_picture(
 							std::string("map:") +
-								FileSystem::FS_Filename(pname->c_str()), g_gr->create_surface(surf));
+								FileSystem::FS_Filename(pname->c_str()), Surface::create(surf));
 
 					//  OK, the pic is now known to the game. But when the game is
 					//  saved, this data has to be regenerated.

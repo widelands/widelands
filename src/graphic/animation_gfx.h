@@ -42,7 +42,7 @@ private:
 	std::vector<const IPicture*> m_pcmasks;
 	Point m_hotspot;
 	bool m_hasplrclrs;
-	ImageCache* const img_cache_; // Not owned.
+	ImageCache* const image_cache_; // Not owned.
 };
 
 #endif

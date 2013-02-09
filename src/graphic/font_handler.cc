@@ -26,6 +26,7 @@
 #include "graphic.h"
 #include "log.h"
 #include "rendertarget.h"
+#include "surface.h"
 #include "wexception.h"
 #include "wordwrap.h"
 
@@ -157,7 +158,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 		return;
 	}
 
-	lce.image = new_uncached_image(g_gr->create_surface(text_surface));
+	lce.image = new_uncached_image(Surface::create(text_surface));
 	lce.width = lce.image->width();
 	lce.height = lce.image->height();
 }

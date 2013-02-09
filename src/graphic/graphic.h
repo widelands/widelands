@@ -120,15 +120,12 @@ struct Graphic : public IGraphic {
 	void refresh(bool force = true);
 
 	// NOCOM(#sirver): rename imgcache or make it a function?
-	ImageCache& imgcache() const {return *img_cache_.get();}
+	ImageCache& imgcache() const {return *image_cache_.get();}
 	// NOCOM(#sirver): who needs direct access to this? should be passed down.
 	SurfaceCache& surface_cache() const {return *surface_cache_.get();}
 	void flush_animations();
 
 	void save_png(const IPicture*, StreamWrite*) const;
-
-	Surface* create_surface(int32_t w, int32_t h) const;
-	virtual Surface* create_surface(SDL_Surface *) const;
 
 	// NOCOM(#sirver): those below are now internal to graphic/
 	// NOCOM(#sirver): halve_alpha was defaulted to false
@@ -188,13 +185,13 @@ protected:
 	GraphicCaps m_caps;
 
 	/// The class that gets images from disk.
-	boost::scoped_ptr<ImageLoaderImpl> img_loader_;
+	boost::scoped_ptr<ImageLoaderImpl> image_loader_;
 	// NOCOM(#sirver): document me
 	boost::scoped_ptr<SurfaceCache> surface_cache_;
 	// NOCOM(#sirver): document me
 	boost::scoped_ptr<RT::IRenderer> rt_renderer_;
 	// The cache holding the images.
-	boost::scoped_ptr<ImageCache> img_cache_;
+	boost::scoped_ptr<ImageCache> image_cache_;
 
 	// The texture needed to draw roads.
 	boost::scoped_ptr<Surface> pic_road_normal_;

@@ -28,13 +28,9 @@ class Graphic;
 
 class ImageLoaderImpl : public IImageLoader {
 public:
-	ImageLoaderImpl(Graphic& gr) : gr_(gr) {}
 	virtual ~ImageLoaderImpl() {}
 
 	Surface* load(const std::string& fname) const;
-
-private:
-	Graphic& gr_;
 };
 
 

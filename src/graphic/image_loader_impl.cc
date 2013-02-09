@@ -24,7 +24,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "wexception.h"
 
-#include "graphic.h"
+#include "surface.h"
 
 #include "image_loader_impl.h"
 
@@ -42,6 +42,6 @@ Surface* ImageLoaderImpl::load(const string& fname) const {
 	if (!sdlsurf)
 		throw wexception("Could not open image %s: %s", fname.c_str(), IMG_GetError());
 
-	return gr_.create_surface(sdlsurf);
+	return Surface::create(sdlsurf);
 }
 

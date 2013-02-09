@@ -23,11 +23,12 @@
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/surface.h"
 #include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "wlapplication.h"
 #include "text_layout.h"
+#include "wlapplication.h"
 
 #include "panel.h"
 
@@ -837,7 +838,7 @@ void Panel::do_draw(RenderTarget & dst)
 			 _cache.get()->width() != innerw ||
 			 _cache.get()->height() != innerh)
 		{
-			_cache.reset(new_uncached_image(g_gr->create_surface(innerw, innerh)));
+			_cache.reset(new_uncached_image(Surface::create(innerw, innerh)));
 			_needdraw = true;
 		}
 

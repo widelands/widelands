@@ -36,7 +36,7 @@ public:
 	virtual ~SDLTTF_Font();
 
 	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h);
-	virtual const Surface& render(IGraphic &, const std::string&, const RGBColor& clr, int);
+	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*);
 	uint16_t ascent(int) const;
 
 private:

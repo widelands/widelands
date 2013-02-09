@@ -193,7 +193,7 @@ public:
 		Surface& orig_surface = *original_.surface();
 		Surface& pcmask_surface = *mask_.surface();
 
-		Surface* new_surface = g_gr->create_surface(orig_surface.width(), orig_surface.height());
+		Surface* new_surface = Surface::create(orig_surface.width(), orig_surface.height());
 
 		const SDL_PixelFormat & fmt = orig_surface.format();
 		const SDL_PixelFormat & fmt_pc = pcmask_surface.format();

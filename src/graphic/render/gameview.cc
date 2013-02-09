@@ -1346,6 +1346,6 @@ void GameView::draw_minimap
 	SDL_UnlockSurface(surface);
 
 	// NOCOM(#sirver): add some caching to this. horrible.
-	boost::scoped_ptr<Surface> minimap_surface(g_gr->create_surface(surface));
+	boost::scoped_ptr<Surface> minimap_surface(Surface::create(surface));
 	m_surface->blit(Point(rc.x, rc.y), minimap_surface.get(), rc2);
 }

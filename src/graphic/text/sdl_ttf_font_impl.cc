@@ -22,11 +22,11 @@
 
 // NOCOM(#sirver): check includes
 #include "graphic/image_cache.h"
+#include "graphic/render/sdl_helper.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "md5.h"
 #include "rt_errors.h"
-#include "sdl_helper.h"
 
 #include "sdl_ttf_font_impl.h"
 
@@ -59,7 +59,7 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16
 	*gw = w; *gh = h;
 }
 
-const Surface& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
+const Surface& SDLTTF_Font::render(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
 	// TODO(#sirver): Make this cheaper!
 	SimpleMD5Checksum checksum;
 	checksum.Data(font_name_.c_str(), font_name_.size());
@@ -72,7 +72,7 @@ const Surface& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBCo
 	checksum.FinishChecksum();
 	const string cs = checksum.GetChecksum().str();
 
-	const Surface* rv = gr.surface_cache().get(cs);
+	const Surface* rv = surface_cache->get(cs);
 	if (rv) return *rv;
 
 	m_set_style(style);
@@ -83,7 +83,7 @@ const Surface& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBCo
 	if (style & SHADOW) {
 		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface * shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
-		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET, true);
+		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
 
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
@@ -124,7 +124,7 @@ const Surface& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBCo
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *gr.surface_cache().insert(cs, gr.create_surface(text_surface));
+	return *surface_cache->insert(cs, Surface::create(text_surface));
 }
 
 uint16_t SDLTTF_Font::ascent(int style) const {

@@ -32,8 +32,8 @@
 
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
-AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* img_cache)
-	: m_hotspot(data.hotspot), m_hasplrclrs(data.hasplrclrs), img_cache_(img_cache) {
+AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* image_cache)
+	: m_hotspot(data.hotspot), m_hasplrclrs(data.hasplrclrs), image_cache_(image_cache) {
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
 	//  replaced with "idle_00". Then the code looks if there is a file with
@@ -74,7 +74,7 @@ AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* img_cache)
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					const IPicture* pic = img_cache->get(filename);
+					const IPicture* pic = image_cache->get(filename);
 					if (width == 0) { //  This is the first frame.
 						width  = pic->width();
 						height = pic->height();
@@ -104,7 +104,7 @@ AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* img_cache)
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						const IPicture* picture = img_cache->get(filename);
+						const IPicture* picture = image_cache->get(filename);
 						if (width != picture->width() or height != picture->height())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
@@ -158,7 +158,7 @@ const IPicture& AnimationGfx::get_frame(size_t i, const RGBColor& playercolor) {
 
 	assert(m_frames.size() == m_pcmasks.size());
 
-	return *img_cache_->player_colored(playercolor, &original, m_pcmasks[i]);
+	return *image_cache_->player_colored(playercolor, &original, m_pcmasks[i]);
 }
 
 const IPicture& AnimationGfx::get_frame(size_t i) const {

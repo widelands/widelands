@@ -24,9 +24,11 @@
 #include <string>
 #include <set>
 
-#include "graphic/igraphic.h"
 #include "graphic/picture.h"
 #include "rgbcolor.h"
+
+class SurfaceCache;
+class ImageCache;
 
 namespace RT {
 /**
@@ -49,7 +51,7 @@ public:
 	virtual ~IFont() {};
 
 	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
-	virtual const Surface& render(IGraphic &, const std::string&, const RGBColor& clr, int) = 0;
+	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) = 0;
 
 	virtual uint16_t ascent(int) const = 0;
 };
@@ -77,8 +79,8 @@ public:
 };
 
 /**
- * This is the rendering engine. It caches heavily using ImageCache and
- * therefore, the returned images are not owned by the caller.
+ * This is the rendering engine. The returned images are not owned by the
+ * caller.
  */
 typedef std::set<std::string> TagSet;
 class IRenderer {
@@ -99,8 +101,8 @@ public:
 	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet & = TagSet()) = 0;
 };
 
-// Setup a renderer, takes ownership of fl but not of gr.
-IRenderer* setup_renderer(IGraphic& gr, IFontLoader* fl);
+// Setup a renderer, takes ownership of fl but of nothing else.
+IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*, IFontLoader* fl);
 };
 
 #endif /* end of include guard: RT_RENDER_H */

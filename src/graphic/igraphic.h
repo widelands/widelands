@@ -27,12 +27,10 @@ class Surface;
 class SurfaceCache;
 struct SDL_Surface;
 
+// NOCOM(#sirver): Is this still in use?
 class IGraphic {
 public:
 	virtual ~IGraphic() {};
-
-	virtual Surface * create_surface(int32_t w, int32_t h) const = 0;
-	virtual Surface * create_surface(SDL_Surface*) const = 0;
 
 	virtual ImageCache& imgcache() const = 0;
 	virtual SurfaceCache& surface_cache() const = 0;

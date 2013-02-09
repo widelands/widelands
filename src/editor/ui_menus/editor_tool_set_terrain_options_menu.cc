@@ -94,7 +94,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				pos.y += TEXTURE_HEIGHT + vspacing();
 			}
 
-			Surface* surf = g_gr->create_surface(64, 64);
+			Surface* surf = Surface::create(64, 64);
 			const IPicture* tex = g_gr->imgcache().get(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 						->get_texture_picture());
 			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()));

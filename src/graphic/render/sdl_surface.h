@@ -30,7 +30,6 @@
 * way is to use the base struct Surface wherever possible. Everything which
 * needs to know about the underlying renderer should go to the graphics
 * subdirectory.
-* Surfaces are created through Graphic::create_surface() functions.
 */
 class SDLSurface : public Surface {
 public:

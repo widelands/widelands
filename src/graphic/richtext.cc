@@ -333,11 +333,11 @@ void RichText::parse(const std::string & rtext)
 		text.images_width = 0;
 
 		for
-			(std::vector<std::string>::const_iterator img_it = cur_block_images.begin();
-			 img_it != cur_block_images.end();
-			 ++img_it)
+			(std::vector<std::string>::const_iterator image_it = cur_block_images.begin();
+			 image_it != cur_block_images.end();
+			 ++image_it)
 		{
-			const IPicture* image = g_gr->imgcache().get(*img_it);
+			const IPicture* image = g_gr->imgcache().get(*image_it);
 			if (!image)
 				continue;
 

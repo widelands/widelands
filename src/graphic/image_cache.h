@@ -71,7 +71,7 @@ public:
 
 // NOCOM(#sirver): Should not take owernshi
 //  of nothing
-// Takes ownership of img_loader, but not of SurfaceCache.
+// Takes ownership of image_loader, but not of SurfaceCache.
 ImageCache* create_image_cache(IImageLoader*, SurfaceCache*, RT::IRenderer*);
 
 // NOCOM(#sirver): refactor and offer direct acces to InMemoryImage

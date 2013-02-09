@@ -82,10 +82,11 @@ Graphic::Graphic
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	// NOCOM(#sirver): diagramm der abhängigkeiten zeichnen
-	img_loader_(new ImageLoaderImpl(*this)),
-	rt_renderer_(RT::setup_renderer(*this, RT::ttf_fontloader_from_filesystem(g_fs))),
+	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(new SurfaceCache()),
-	img_cache_(create_image_cache(img_loader_.get(), surface_cache_.get(), rt_renderer_.get()))
+	// NOCOM(#sirver): do not pass NULL, but solve cycle here
+	rt_renderer_(RT::setup_renderer(NULL, surface_cache_.get(), RT::ttf_fontloader_from_filesystem(g_fs))),
+	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get(), rt_renderer_.get()))
 {
 	// Initialize the table used to create grayed pictures
 	for
@@ -497,7 +498,7 @@ Surface* Graphic::resize_surface(Surface* src, uint32_t w, uint32_t h) {
 		zoomed = placed;
 	}
 
-	return create_surface(zoomed);
+	return Surface::create(zoomed);
 }
 
 /**
@@ -620,60 +621,6 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 }
 
 /**
- * Create a Picture from an SDL_Surface.
- *
- * @param surf a SDL_Surface from which the Surface will be created; this function
- * takes ownership of surf
- * @param alpha if true the surface is created with alpha channel
- * @return the new Surface created from the SDL_Surface
- * // NOCOM(#sirver): comments
- */
-Surface* Graphic::create_surface(SDL_Surface * surf) const
-{
-#ifdef USE_OPENGL
-	if (g_opengl) {
-		return new GLSurfaceTexture(surf);
-	}
-#endif
-	SDL_Surface * surface = SDL_DisplayFormatAlpha(surf);
-	SDL_FreeSurface(surf);
-	return new SDLSurface(*surface);
-}
-
-/**
- * Create an surface of specified size. The surface in not blanked and will be random.
- *
- * \note Handle surfaces with an alpha channel carefully, since SDL does not
- * support to blit two surfaces with alpha channel on top of each other. The
- * results when trying are rather funny at times and tend to crash.
- *
- * @param w width of the new surface
- * @param h height of the new surface
- * @return the new created surface
- */
-Surface* Graphic::create_surface(int32_t w, int32_t h) const
-{
-#ifdef USE_OPENGL
-	if (g_opengl)
-	{
-		return new GLSurfaceTexture(w, h);
-	}
-	else
-#endif
-	{
-		const SDL_PixelFormat & format = *m_sdl_screen->format;
-		SDL_Surface & tsurf = *SDL_CreateRGBSurface
-			(SDL_SWSURFACE,
-			 w, h,
-			 format.BitsPerPixel,
-			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
-		SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
-		SDL_FreeSurface(&tsurf);
-		return new SDLSurface(surf);
-	}
-}
-
-/**
  * Create a grayed version of the given picture.
  *
  * @param picture to be grayed out
@@ -687,7 +634,7 @@ Surface* Graphic::gray_out_surface(Surface* surf) {
 	uint16_t h = surf->height();
 	const SDL_PixelFormat & origfmt = surf->format();
 
-	Surface* dest = create_surface(w, h);
+	Surface* dest = Surface::create(w, h);
 	const SDL_PixelFormat & destfmt = dest->format();
 
 	surf->lock(Surface::Lock_Normal);
@@ -734,7 +681,7 @@ Surface* Graphic::change_luminosity_of_surface(Surface* surf, float factor, bool
 	uint16_t h = surf->height();
 	const SDL_PixelFormat & origfmt = surf->format();
 
-	Surface* dest = create_surface(w, h);
+	Surface* dest = Surface::create(w, h);
 	const SDL_PixelFormat & destfmt = dest->format();
 
 	surf->lock(Surface::Lock_Normal);
@@ -822,7 +769,7 @@ void Graphic::ensure_animation_loaded(uint32_t anim) {
 	if (!m_animations.at(anim - 1))
 	{
 	  m_animations.at(anim - 1) =
-		  new AnimationGfx(g_anim.get_animation(anim), img_cache_.get());
+		  new AnimationGfx(g_anim.get_animation(anim), image_cache_.get());
 	}
 }
 
@@ -926,13 +873,13 @@ void Graphic::set_world(string worldname) {
 
 	// Load the road textures
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
-	pic_road_normal_.reset(img_loader_->load(buf));
+	pic_road_normal_.reset(image_loader_->load(buf));
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
-	pic_road_busy_.reset(img_loader_->load(buf));
+	pic_road_busy_.reset(image_loader_->load(buf));
 
 	// load edge texture
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
-	edgetexture_.reset(img_loader_->load(buf));
+	edgetexture_.reset(image_loader_->load(buf));
 }
 
 /**

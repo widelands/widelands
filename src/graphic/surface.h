@@ -33,6 +33,10 @@
  */
 class Surface : boost::noncopyable {
 public:
+	// NOCOM(#sirver): docu
+	static Surface* create(SDL_Surface*);
+	static Surface* create(uint16_t w, uint16_t h);
+
 	virtual ~Surface() {}
 
 	/// Dimensions.
