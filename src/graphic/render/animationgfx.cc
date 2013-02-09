@@ -24,6 +24,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image_loader_impl.h"
 #include "graphic/picture.h"
+#include "graphic/surface.h"
 
 #include "log.h"
 
@@ -100,13 +101,13 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, AnimationData const * cons
 				try {
 					Surface* pic = il.load(filename, true);
 					if (width == 0) { //  This is the first frame.
-						width  = pic->get_w();
-						height = pic->get_h();
-					} else if (width != pic->get_w() or height != pic->get_h())
+						width  = pic->width();
+						height = pic->height();
+					} else if (width != pic->width() or height != pic->height())
 						throw wexception
 							("wrong size: (%u, %u), should be (%u, %u) like the "
 							 "first frame",
-							 pic->get_w(), pic->get_h(), width, height);
+							 pic->width(), pic->height(), width, height);
 					//  Get a new AnimFrame.
 					m_plrframes[0].push_back(pic);
 #ifdef VALIDATE_ANIMATION_CROPPING
@@ -179,11 +180,11 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, AnimationData const * cons
 				if (g_fs->FileExists(filename)) {
 					try {
 						Surface* picture = il.load(filename, true);
-						if (width != picture->get_w() or height != picture->get_h())
+						if (width != picture->width() or height != picture->height())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
 								 "be (%u, %u) like the animation frame",
-								 picture->get_w(), picture->get_h(), width, height);
+								 picture->width(), picture->height(), width, height);
 						m_pcmasks.push_back(picture);
 						break;
 					} catch (std::exception const & e) {
@@ -257,8 +258,8 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
-		uint32_t w = m_plrframes[0][i]->get_w();
-		uint32_t h = m_plrframes[0][i]->get_h();
+		uint16_t w = m_plrframes[0][i]->width();
+		uint16_t h = m_plrframes[0][i]->height();
 		Surface& orig_surface = *m_plrframes[0][i];
 		Surface& pcmask_surface = *m_pcmasks[i];
 

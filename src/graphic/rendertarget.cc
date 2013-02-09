@@ -61,23 +61,23 @@ void RenderTarget::set_window(Rect const & rc, Point const & ofs)
 
 	if (m_rect.x < 0) {
 		m_offset.x += m_rect.x;
-		m_rect.w = std::max(static_cast<int32_t>(m_rect.w) + m_rect.x, 0);
+		m_rect.w = std::max<int32_t>(m_rect.w + m_rect.x, 0);
 		m_rect.x = 0;
 	}
 
-	if (m_rect.x + m_rect.w > m_surface->get_w())
+	if (m_rect.x + m_rect.w > m_surface->width())
 		m_rect.w =
-			std::max(static_cast<int32_t>(m_surface->get_w()) - m_rect.x, 0);
+			std::max<int32_t>(m_surface->width() - m_rect.x, 0);
 
 	if (m_rect.y < 0) {
 		m_offset.y += m_rect.y;
-		m_rect.h = std::max(static_cast<int32_t>(m_rect.h) + m_rect.y, 0);
+		m_rect.h = std::max<int32_t>(m_rect.h + m_rect.y, 0);
 		m_rect.y = 0;
 	}
 
-	if (m_rect.y + m_rect.h > m_surface->get_h())
+	if (m_rect.y + m_rect.h > m_surface->height())
 		m_rect.h =
-			std::max(static_cast<int32_t>(m_surface->get_h()) - m_rect.y, 0);
+			std::max<int32_t>(m_surface->height() - m_rect.y, 0);
 }
 
 /**
@@ -111,17 +111,17 @@ bool RenderTarget::enter_window
 /**
  * Returns the true size of the render target (ignoring the window settings).
  */
-int32_t RenderTarget::get_w() const
+int32_t RenderTarget::width() const
 {
-	return m_surface->get_w();
+	return m_surface->width();
 }
 
 /**
  * Returns the true size of the render target (ignoring the window settings).
  */
-int32_t RenderTarget::get_h() const
+int32_t RenderTarget::height() const
 {
-	return m_surface->get_h();
+	return m_surface->height();
 }
 
 /**
@@ -169,7 +169,7 @@ void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
 {
 	doblit
 		(dst,
-		 picture->surface(), Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
+		 picture->surface(), Rect(Point(0, 0), picture->width(), picture->height()), cm);
 }
 
 /**
@@ -192,8 +192,8 @@ void RenderTarget::blitrect
  */
 void RenderTarget::tile(Rect r, const IPicture* picture, Point ofs, Composite cm)
 {
-	int32_t srcw = picture->get_w();
-	int32_t srch = picture->get_h();
+	int32_t srcw = picture->width();
+	int32_t srch = picture->height();
 
 	if (clip(r)) {
 		if (m_offset.x < 0)
@@ -288,7 +288,7 @@ void RenderTarget::drawanim
 
 	dst -= gfx->get_hotspot();
 
-	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
+	Rect srcrc(Point(0, 0), frame->width(), frame->height());
 
 	doblit(dst, frame, srcrc);
 
@@ -321,9 +321,9 @@ void RenderTarget::drawstatic
 	// NOCOM(#sirver): this is currently broken
 	// const IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
 
-	dst -= Point(frame->get_w() / 2, frame->get_h() / 2);
+	dst -= Point(frame->width() / 2, frame->height() / 2);
 
-	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
+	Rect srcrc(Point(0, 0), frame->width(), frame->height());
 
 	// NOCOM(#sirver): this is currently broken
 	// doblit(Rect(dst, 0, 0), dark_frame, srcrc);
@@ -371,8 +371,8 @@ void RenderTarget::drawanimrect
 void RenderTarget::reset()
 {
 	m_rect.x = m_rect.y = 0;
-	m_rect.w = m_surface->get_w();
-	m_rect.h = m_surface->get_h();
+	m_rect.w = m_surface->width();
+	m_rect.h = m_surface->height();
 
 	m_offset.x = m_offset.y = 0;
 }
@@ -424,7 +424,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Point dst, const IBlitableSurface* src, Rect srcrc, Composite cm)
+	(Point dst, const Surface* src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);

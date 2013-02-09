@@ -344,8 +344,8 @@ void RichText::parse(const std::string & rtext)
 			Rect bbox;
 			bbox.x = text.images_width;
 			bbox.y = m->height;
-			bbox.w = image->get_w();
-			bbox.h = image->get_h();
+			bbox.w = image->width();
+			bbox.h = image->height();
 
 			text.images_height = std::max(text.images_height, bbox.h);
 			text.images_width += bbox.w;

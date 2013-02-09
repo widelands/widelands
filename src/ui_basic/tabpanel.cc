@@ -231,8 +231,8 @@ void Tab_Panel::draw(RenderTarget & dst)
 
 		// Draw the icon
 		assert(m_tabs[idx]->pic);
-		uint32_t cpw = m_tabs[idx]->pic->get_w();
-		uint32_t cph = m_tabs[idx]->pic->get_h();
+		uint16_t cpw = m_tabs[idx]->pic->width();
+		uint16_t cph = m_tabs[idx]->pic->height();
 		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
 			 m_tabs[idx]->pic);

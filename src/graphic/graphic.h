@@ -32,7 +32,6 @@
 #include "igraphic.h"
 #include "image_cache.h"
 #include "rect.h"
-#include "surface.h"
 
 #define MAX_RECTS 20
 
@@ -40,6 +39,7 @@ namespace UI {struct ProgressWindow;}
 
 class RenderTarget;
 class SurfaceCache;
+class Surface;
 struct Road_Textures;
 struct SDL_Rect;
 struct SDL_Surface;

@@ -215,7 +215,7 @@ uint32_t WordWrap::width() const
  */
 uint32_t WordWrap::height() const
 {
-	uint32_t fontheight = m_style.font->height();
+	uint16_t fontheight = m_style.font->height();
 	uint32_t lineskip = m_style.font->lineskip();
 
 	return fontheight + (m_lines.size() - 1) * lineskip;
@@ -263,7 +263,7 @@ uint32_t WordWrap::line_offset(uint32_t line) const
  */
 void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret)
 {
-	uint32_t fontheight = m_style.font->height();
+	uint16_t fontheight = m_style.font->height();
 	uint32_t lineskip = m_style.font->lineskip();
 	uint32_t caretline, caretpos;
 
@@ -280,7 +280,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 	++where.y;
 	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += lineskip) {
-		if (where.y >= dst.get_h() || int32_t(where.y + fontheight) <= 0)
+		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
 
 		g_fh->draw_text

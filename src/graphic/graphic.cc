@@ -334,7 +334,7 @@ Graphic::~Graphic()
 */
 int32_t Graphic::get_xres() const
 {
-	return screen_->get_w();
+	return screen_->width();
 }
 
 /**
@@ -342,7 +342,7 @@ int32_t Graphic::get_xres() const
 */
 int32_t Graphic::get_yres() const
 {
-	return screen_->get_h();
+	return screen_->height();
 }
 
 /**
@@ -439,10 +439,10 @@ void Graphic::flush_animations() {
  * Might return same id if dimensions are the same
  */
 Surface* Graphic::resize_surface(Surface* src, uint32_t w, uint32_t h) {
-	assert(w != src->get_w() || h != src->get_h());
+	assert(w != src->width() || h != src->height());
 
 	// First step: compute scaling factors
-	Rect srcrect = Rect(Point(0, 0), src->get_w(), src->get_h());
+	Rect srcrect = Rect(Point(0, 0), src->width(), src->height());
 
 	// Second step: get source material
 	SDL_Surface * srcsdl = 0;
@@ -506,8 +506,8 @@ SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect) const
 {
 	assert(srcrect.x >= 0);
 	assert(srcrect.y >= 0);
-	assert(srcrect.x + srcrect.w <= surf.get_w());
-	assert(srcrect.y + srcrect.h <= surf.get_h());
+	assert(srcrect.x + srcrect.w <= surf.width());
+	assert(srcrect.y + srcrect.h <= surf.height());
 
 	const SDL_PixelFormat & fmt = surf.format();
 	SDL_Surface * dest = SDL_CreateRGBSurface
@@ -541,8 +541,7 @@ SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect) const
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const {
-	// NOCOM(#sirver): this cast suckz
-	save_png_(*static_cast<Surface*>(pic->surface()), sw);
+	save_png_(*pic->surface(), sw);
 }
 void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 {
@@ -579,15 +578,15 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 
 	// Fill info struct
 	png_set_IHDR
-		(png_ptr, info_ptr, surf.get_w(), surf.get_h(),
+		(png_ptr, info_ptr, surf.width(), surf.height(),
 		 8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
 		 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
 	// Start writing
 	png_write_info(png_ptr, info_ptr);
 	{
-		uint32_t surf_w = surf.get_w();
-		uint32_t surf_h = surf.get_h();
+		uint16_t surf_w = surf.width();
+		uint16_t surf_h = surf.height();
 		uint32_t row_size = 4 * surf_w;
 
 		boost::scoped_array<png_byte> row(new png_byte[row_size]);
@@ -690,8 +689,8 @@ Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha) const
 Surface* Graphic::gray_out_surface(Surface* surf) {
 	assert(surf);
 
-	uint32_t w = surf->get_w();
-	uint32_t h = surf->get_h();
+	uint16_t w = surf->width();
+	uint16_t h = surf->height();
 	const SDL_PixelFormat & origfmt = surf->format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
@@ -737,8 +736,8 @@ Surface* Graphic::gray_out_surface(Surface* surf) {
 Surface* Graphic::change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha) {
 	assert(surf);
 
-	uint32_t w = surf->get_w();
-	uint32_t h = surf->get_h();
+	uint16_t w = surf->width();
+	uint16_t h = surf->height();
 	const SDL_PixelFormat & origfmt = surf->format();
 
 	Surface* dest = create_surface(w, h, origfmt.Amask);
@@ -857,8 +856,8 @@ void Graphic::get_animation_size
 		// Get the frame and its data. Ignore playerclrs.
 		const Surface* frame =
 			gfx->get_frame((time / data->frametime) % gfx->nr_frames());
-		w = frame->get_w();
-		h = frame->get_h();
+		w = frame->width();
+		h = frame->height();
 	}
 }
 

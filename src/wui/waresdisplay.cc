@@ -242,7 +242,7 @@ void AbstractWaresDisplay::draw_ware
 	//  draw a background
 	const IPicture* bgpic =
 		g_gr->imgcache().get(ware_selected(id) ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png", true);
-	uint32_t w = bgpic->get_w();
+	uint16_t w = bgpic->width();
 
 	dst.blit(p, bgpic);
 
@@ -259,7 +259,7 @@ void AbstractWaresDisplay::draw_ware
 	if (text) // might be zero when there is no info text.
 		dst.blit
 			(p + Point
-				(w - text->get_w() - 1, WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->get_h()), text);
+				(w - text->width() - 1, WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->height()), text);
 }
 
 // Wares highlighting/selecting

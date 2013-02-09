@@ -65,11 +65,10 @@ m_show_only(show_only)
 	m_icon_grey = g_gr->imgcache().change_luminosity(
 			g_gr->imgcache().gray_out(m_icon), 0.65, false);
 
-	uint32_t ph = m_max_fill_indicator->get_h();
+	uint16_t ph = m_max_fill_indicator->height();
 
 	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
-	uint32_t picture_height = show_only ? WARE_MENU_PIC_HEIGHT :
-		std::max(WARE_MENU_PIC_HEIGHT, static_cast<int32_t>(ph));
+	uint32_t picture_height = show_only ? WARE_MENU_PIC_HEIGHT : std::max<int32_t>(WARE_MENU_PIC_HEIGHT, ph);
 
 	m_total_height = std::max(priority_button_height, picture_height) + 2 * Border;
 
@@ -149,7 +148,7 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 		dst.blit(point, m_icon_grey);
 
 	if (not m_show_only) {
-		uint32_t pw = m_max_fill_indicator->get_w();
+		uint16_t pw = m_max_fill_indicator->width();
 		point.y = Border;
 		point.x = Border + CellWidth + CellSpacing +
 			(m_queue->get_max_fill() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;

@@ -29,7 +29,9 @@
 #include <boost/scoped_ptr.hpp>
 
 #include "graphic/image_cache.h"
+#include "graphic/surface.h"
 
+#include "rect.h"
 #include "rt_parse.h"
 #include "textstream.h"
 
@@ -42,7 +44,7 @@ using namespace boost;
 
 namespace RT {
 
-static const uint32_t INFINITE_WIDTH = 2147483647; // 2^31-1
+static const uint16_t INFINITE_WIDTH = 65535; // 2^16-1
 
 // Helper Stuff
 enum HAlign {
@@ -115,14 +117,14 @@ public:
 		: m_floating(NO_FLOAT), m_halign(ns.halign), m_valign(ns.valign), m_x(0), m_y(0) {}
 	virtual ~RenderNode() {};
 
-	virtual uint32_t width() = 0;
-	virtual uint32_t height() = 0;
-	virtual uint32_t hotspot_y() = 0;
-	virtual IBlitableSurface* render(IGraphic& gr) = 0;
+	virtual uint16_t width() = 0;
+	virtual uint16_t height() = 0;
+	virtual uint16_t hotspot_y() = 0;
+	virtual Surface* render(IGraphic& gr) = 0;
 
 	virtual bool is_non_mandatory_space() {return false;}
 	virtual bool is_expanding() {return false;}
-	virtual void set_w(uint32_t) {} // Only, when expanding
+	virtual void set_w(uint16_t) {} // Only, when expanding
 
 	virtual const vector<Reference> get_references() {return vector<Reference>();}
 
@@ -132,16 +134,16 @@ public:
 	void set_halign(HAlign halign) {m_halign = halign;}
 	VAlign valign() {return m_valign;}
 	void set_valign(VAlign valign) {m_valign = valign;}
-	void set_x(uint32_t nx) {m_x = nx;}
-	void set_y(uint32_t ny) {m_y = ny;}
-	uint32_t x() {return m_x;}
-	uint32_t y() {return m_y;}
+	void set_x(uint16_t nx) {m_x = nx;}
+	void set_y(uint16_t ny) {m_y = ny;}
+	uint16_t x() {return m_x;}
+	uint16_t y() {return m_y;}
 
 private:
 	Floating m_floating;
 	HAlign m_halign;
 	VAlign m_valign;
-	uint32_t m_x, m_y;
+	uint16_t m_x, m_y;
 };
 
 class Layout {
@@ -149,15 +151,15 @@ public:
 	Layout(vector<RenderNode*>& all) : m_h(0), m_idx(0), m_all_nodes(all) {}
 	virtual ~Layout() {}
 
-	uint32_t height() {return m_h;}
-	uint32_t fit_nodes(vector<RenderNode*>& rv, uint32_t w, Borders p);
+	uint16_t height() {return m_h;}
+	uint16_t fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p);
 
 private:
 	// Represents a change in the rendering constraints. For example when an
 	// Image is inserted, the width will become wider after it. This is a
 	// constraint change.
 	struct ConstraintChange {
-		uint32_t at_y;
+		uint16_t at_y;
 		int32_t delta_w;
 		int32_t delta_offset_x;
 
@@ -166,22 +168,22 @@ private:
 		}
 	};
 
-	uint32_t m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders&);
+	uint16_t m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders&);
 
-	uint32_t m_h;
+	uint16_t m_h;
 	size_t m_idx;
 	vector<RenderNode*>& m_all_nodes;
 	priority_queue<ConstraintChange> m_constraint_changes;
 };
-uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& p) {
+uint16_t Layout::m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders& p) {
 	while (m_idx < m_all_nodes.size() and m_all_nodes[m_idx]->is_non_mandatory_space())
 		delete m_all_nodes[m_idx++];
 
-	uint32_t x = p.left;
+	uint16_t x = p.left;
 	size_t first_idx = rv.size();
 	while (m_idx < m_all_nodes.size()) {
 		RenderNode* n = m_all_nodes[m_idx];
-		uint32_t nw = n->width();
+		uint16_t nw = n->width();
 		if (x + nw + p.right > w or n->get_floating())
 			break;
 
@@ -196,7 +198,7 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
 	}
 
 	// Remaining space in this line
-	uint32_t rem_space = w - p.right - x;
+	uint16_t rem_space = w - p.right - x;
 
 	// Find expanding nodes
 	vector<size_t> expanding_nodes;
@@ -205,7 +207,7 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
 			expanding_nodes.push_back(idx);
 
 	if (expanding_nodes.size()) { // If there are expanding nodes, we fill the space
-		uint32_t individual_w = rem_space / expanding_nodes.size();
+		uint16_t individual_w = rem_space / expanding_nodes.size();
 		foreach(size_t idx, expanding_nodes) {
 			rv[idx]->set_w(individual_w);
 			for (size_t nidx = idx + 1; nidx < rv.size(); ++nidx)
@@ -222,7 +224,7 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
 	}
 
 	// Find the biggest hotspot of the truly remaining items.
-	uint32_t cur_line_hotspot = 0;
+	uint16_t cur_line_hotspot = 0;
 	for (size_t idx = first_idx; idx < rv.size(); ++idx)
 		cur_line_hotspot = max(cur_line_hotspot, rv[idx]->hotspot_y());
 
@@ -232,24 +234,24 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
  * Take ownership of all nodes, delete those that we do not render anyways (for
  * example unneeded spaces), append the rest to the vector we got.
  */
-uint32_t Layout::fit_nodes(vector<RenderNode*>& rv, uint32_t w, Borders p) {
+uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p) {
 	m_h = p.top;
 
-	uint32_t max_line_width = 0;
+	uint16_t max_line_width = 0;
 	while (m_idx < m_all_nodes.size()) {
 		size_t first_idx = rv.size();
-		uint32_t biggest_hotspot = m_fit_line(rv, w, p);
-		uint32_t line_height = 0;
+		uint16_t biggest_hotspot = m_fit_line(rv, w, p);
+		int line_height = 0;
 		for (size_t j = first_idx; j < rv.size(); ++j) {
 			RenderNode* n = rv[j];
 			line_height = max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 			n->set_y(m_h + biggest_hotspot - n->hotspot_y());
-			max_line_width = max(max_line_width, n->x() + n->width() + p.right);
+			max_line_width = max<int>(max_line_width, n->x() + n->width() + p.right);
 		}
 
 		// Go over again and adjust position for VALIGN
 		for (size_t j = first_idx; j < rv.size(); ++j) {
-			uint32_t space = line_height - rv[j]->height();
+			uint16_t space = line_height - rv[j]->height();
 			if (!space or rv[j]->valign() == VALIGN_BOTTOM)
 				continue;
 			if (rv[j]->valign() == VALIGN_CENTER)
@@ -273,7 +275,7 @@ uint32_t Layout::fit_nodes(vector<RenderNode*>& rv, uint32_t w, Borders p) {
 				n->set_x(p.left);
 				p.left += n->width();
 				cc.delta_offset_x = -n->width();
-				max_line_width = max(max_line_width, n->x() + n->width() + p.right);
+				max_line_width = max<int>(max_line_width, n->x() + n->width() + p.right);
 			} else {
 				n->set_x(w - n->width() - p.right);
 				w -= n->width();
@@ -300,9 +302,9 @@ public:
 	TextNode(IFont& font, NodeStyle&, const string& txt);
 	virtual ~TextNode() {};
 
-	virtual uint32_t width() {return m_w;}
-	virtual uint32_t height() {return m_h + m_s.spacing;}
-	virtual uint32_t hotspot_y();
+	virtual uint16_t width() {return m_w;}
+	virtual uint16_t height() {return m_h + m_s.spacing;}
+	virtual uint16_t hotspot_y();
 	virtual const vector<Reference> get_references() {
 		vector<Reference> rv;
 		if (!m_s.reference.empty()) {
@@ -312,10 +314,10 @@ public:
 		return rv;
 	}
 
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual Surface* render(IGraphic& gr);
 
 protected:
-	uint32_t m_w, m_h;
+	uint16_t m_w, m_h;
 	const string m_txt;
 	NodeStyle m_s;
 	IFont& m_font;
@@ -326,13 +328,13 @@ TextNode::TextNode(IFont& font, NodeStyle& ns, const string& txt)
 {
 	m_font.dimensions(m_txt, ns.font_style, &m_w, &m_h);
 }
-uint32_t TextNode::hotspot_y() {
+uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
-IBlitableSurface* TextNode::render(IGraphic& gr) {
-	const IBlitableSurface& img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	IBlitableSurface* rv = gr.create_surface(img.get_w(), img.get_h(), false);
-	rv->blit(Point(0, 0), &img, Rect(0, 0, img.get_w(), img.get_h()), CM_Copy);
+Surface* TextNode::render(IGraphic& gr) {
+	const Surface& img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
+	Surface* rv = gr.create_surface(img.width(), img.height(), false);
+	rv->blit(Point(0, 0), &img, Rect(0, 0, img.width(), img.height()), CM_Copy);
 	return rv;
 }
 
@@ -344,24 +346,24 @@ IBlitableSurface* TextNode::render(IGraphic& gr) {
  */
 class FillingTextNode : public TextNode {
 public:
-	FillingTextNode(IFont& font, NodeStyle& ns, uint32_t w, const string& txt, bool expanding = false) :
+	FillingTextNode(IFont& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
 		TextNode(font, ns, txt), m_expanding(expanding) {
 			m_w = w;
 		};
 	virtual ~FillingTextNode() {};
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual Surface* render(IGraphic& gr);
 
 	virtual bool is_expanding() {return m_expanding;}
-	virtual void set_w(uint32_t w) {m_w = w;}
+	virtual void set_w(uint16_t w) {m_w = w;}
 
 private:
 	bool m_expanding;
 };
-IBlitableSurface* FillingTextNode::render(IGraphic& gr) {
-	const IBlitableSurface& t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	IBlitableSurface* rv = gr.create_surface(m_w, m_h, true);
-	for (uint32_t x = 0; x < m_w; x += t.get_w()) {
-		Rect srcrect(Point(0, 0), min(static_cast<uint32_t>(t.get_w()), m_w - x), m_h);
+Surface* FillingTextNode::render(IGraphic& gr) {
+	const Surface& t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
+	Surface* rv = gr.create_surface(m_w, m_h, true);
+	for (uint16_t x = 0; x < m_w; x += t.width()) {
+		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - x), m_h);
 		rv->blit(Point(x, 0), &t, srcrect, CM_Solid);
 	}
 	return rv;
@@ -376,9 +378,9 @@ public:
 	WordSpacerNode(IFont& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
-	virtual IBlitableSurface* render(IGraphic& gr) {
+	virtual Surface* render(IGraphic& gr) {
 		if (m_show_spaces) {
-			IBlitableSurface* rv = gr.create_surface(m_w, m_h, true);
+			Surface* rv = gr.create_surface(m_w, m_h, true);
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
 			return rv;
 		}
@@ -398,10 +400,10 @@ bool WordSpacerNode::m_show_spaces;
 class NewlineNode : public RenderNode {
 public:
 	NewlineNode(NodeStyle& ns) : RenderNode(ns) {}
-	virtual uint32_t height() {return 0;}
-	virtual uint32_t width() {return INFINITE_WIDTH; }
-	virtual uint32_t hotspot_y() {return 0;}
-	virtual IBlitableSurface* render(IGraphic& /* gr */) {
+	virtual uint16_t height() {return 0;}
+	virtual uint16_t width() {return INFINITE_WIDTH; }
+	virtual uint16_t hotspot_y() {return 0;}
+	virtual Surface* render(IGraphic& /* gr */) {
 		assert(false); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
@@ -412,23 +414,23 @@ public:
  */
 class SpaceNode : public RenderNode {
 public:
-	SpaceNode(NodeStyle& ns, uint32_t w, uint32_t h = 0, bool expanding = false) :
+	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false) :
 		RenderNode(ns), m_w(w), m_h(h), m_bg(NULL), m_expanding(expanding) {}
 
-	virtual uint32_t height() {return m_h;}
-	virtual uint32_t width() {return m_w;}
-	virtual uint32_t hotspot_y() {return m_h;}
-	virtual IBlitableSurface* render(IGraphic& gr) {
-		IBlitableSurface* rv = gr.create_surface(m_w, m_h, m_bg != NULL);
+	virtual uint16_t height() {return m_h;}
+	virtual uint16_t width() {return m_w;}
+	virtual uint16_t hotspot_y() {return m_h;}
+	virtual Surface* render(IGraphic& gr) {
+		Surface* rv = gr.create_surface(m_w, m_h, m_bg != NULL);
 
 		// Draw background image (tiling)
 		if (m_bg) {
 			Point dst;
 			Rect srcrect(Point(0, 0), 1, 1);
-			for (uint32_t x = 0; x < m_w; x += m_bg->get_w()) {
+			for (uint16_t x = 0; x < m_w; x += m_bg->width()) {
 				dst.x = x;
 				dst.y = 0;
-				srcrect.w = min(static_cast<uint32_t>(m_bg->get_w()), m_w - x);
+				srcrect.w = min<int>(m_bg->width(), m_w - x);
 				srcrect.h = m_h;
 				rv->blit(dst, m_bg->surface(), srcrect, CM_Solid);
 			}
@@ -436,14 +438,14 @@ public:
 		return rv;
 	}
 	virtual bool is_expanding() {return m_expanding;}
-	virtual void set_w(uint32_t w) {m_w = w;}
+	virtual void set_w(uint16_t w) {m_w = w;}
 
 	void set_background(const IPicture* s) {
-		m_bg = s; m_h = s->get_h();
+		m_bg = s; m_h = s->height();
 	}
 
 private:
-	uint32_t m_w, m_h;
+	uint16_t m_w, m_h;
 	const IPicture* m_bg;  // not owned
 	bool m_expanding;
 };
@@ -463,15 +465,15 @@ public:
 		m_nodes_to_render.clear();
 	}
 
-	virtual uint32_t width() {return m_w + m_margin.left + m_margin.right;}
-	virtual uint32_t height() {return m_h + m_margin.top + m_margin.bottom;}
-	virtual uint32_t hotspot_y() {return height();}
-	virtual IBlitableSurface* render(IGraphic& gr) {
+	virtual uint16_t width() {return m_w + m_margin.left + m_margin.right;}
+	virtual uint16_t height() {return m_h + m_margin.top + m_margin.bottom;}
+	virtual uint16_t hotspot_y() {return height();}
+	virtual Surface* render(IGraphic& gr) {
 		if (!width() || !height()) {
 			return 0;
 		}
-		IBlitableSurface* rv = gr.create_surface(width(), height(), true);
-		rv->fill_rect(Rect(0, 0, rv->get_w(), rv->get_h()), RGBAColor(255, 255, 255, 0));
+		Surface* rv = gr.create_surface(width(), height(), true);
+		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
 		// Draw Solid background Color
 		bool set_alpha = true;
@@ -486,11 +488,11 @@ public:
 			Point dst;
 			Rect src(0, 0, 0, 0);
 
-			for (uint32_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->get_h()) {
-				for (uint32_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->get_w()) {
+			for (uint16_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->height()) {
+				for (uint16_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->width()) {
 					dst.x = x; dst.y = y;
-					src.w = min(static_cast<uint32_t>(m_bg_img->get_w()), m_w + m_margin.left - x);
-					src.h = min(static_cast<uint32_t>(m_bg_img->get_h()), m_h + m_margin.top - y);
+					src.w = min<int>(m_bg_img->width(), m_w + m_margin.left - x);
+					src.h = min<int>(m_bg_img->height(), m_h + m_margin.top - y);
 					rv->blit(dst, m_bg_img->surface(), src, CM_Solid);
 				}
 			}
@@ -498,10 +500,10 @@ public:
 		}
 
 		foreach(RenderNode* n, m_nodes_to_render) {
-			IBlitableSurface* nsur = n->render(gr);
+			Surface* nsur = n->render(gr);
 			if (nsur) {
 				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
-				Rect src = Rect(0, 0, nsur->get_w(), nsur->get_h());
+				Rect src = Rect(0, 0, nsur->width(), nsur->height());
 
 				rv->blit(dst, nsur, src, set_alpha ? CM_Solid : CM_Normal);
 				delete nsur;
@@ -514,7 +516,7 @@ public:
 		return rv;
 	}
 	virtual const vector<Reference> get_references() {return m_refs;}
-	void set_dimensions(uint32_t inner_w, uint32_t inner_h, Borders margin) {
+	void set_dimensions(uint16_t inner_w, uint16_t inner_h, Borders margin) {
 		m_w = inner_w; m_h = inner_h; m_margin = margin;
 	}
 	void set_background(RGBColor clr) {
@@ -529,7 +531,7 @@ public:
 	}
 
 private:
-	uint32_t m_w, m_h;
+	uint16_t m_w, m_h;
 	vector<RenderNode*> m_nodes_to_render;
 	Borders m_margin;
 	RGBColor m_bg_clr;
@@ -543,18 +545,18 @@ public:
 	ImgRenderNode(NodeStyle& ns, const IPicture& image) : RenderNode(ns), m_image(image) {
 	}
 
-	virtual uint32_t width() {return m_image.get_w();}
-	virtual uint32_t height() {return m_image.get_h();}
-	virtual uint32_t hotspot_y() {return m_image.get_h();}
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual uint16_t width() {return m_image.width();}
+	virtual uint16_t height() {return m_image.height();}
+	virtual uint16_t hotspot_y() {return m_image.height();}
+	virtual Surface* render(IGraphic& gr);
 
 private:
 	const IPicture& m_image;
 };
 
-IBlitableSurface* ImgRenderNode::render(IGraphic& gr) {
-	IBlitableSurface* rv = gr.create_surface(m_image.get_w(), m_image.get_h(), true);
-	rv->blit(Point(0, 0), m_image.surface(), Rect(0, 0, m_image.get_w(), m_image.get_h()), CM_Copy);
+Surface* ImgRenderNode::render(IGraphic& gr) {
+	Surface* rv = gr.create_surface(m_image.width(), m_image.height(), true);
+	rv->blit(Point(0, 0), m_image.surface(), Rect(0, 0, m_image.width(), m_image.height()), CM_Copy);
 	return rv;
 }
 // End: Helper Stuff
@@ -708,7 +710,7 @@ public:
 	}
 
 private:
-	uint32_t m_indent;
+	uint16_t m_indent;
 };
 
 class ImgTagHandler : public TagHandler {
@@ -745,7 +747,7 @@ public:
 	}
 
 private:
-	uint32_t m_space;
+	uint16_t m_space;
 };
 
 class HspaceTagHandler : public TagHandler {
@@ -795,7 +797,7 @@ public:
 private:
 	string m_fill_text;
 	const IPicture* m_bg;
-	uint32_t m_space;
+	uint16_t m_space;
 };
 
 class BrTagHandler : public TagHandler {
@@ -814,7 +816,7 @@ class SubTagHandler : public TagHandler {
 public:
 	SubTagHandler
 		(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache,
-		 uint32_t max_w = 0, bool shrink_to_fit = false)
+		 uint16_t max_w = 0, bool shrink_to_fit = false)
 		:
 			TagHandler(tag, fc, ns, img_cache),
 			shrink_to_fit_(shrink_to_fit),
@@ -857,13 +859,13 @@ public:
 			foreach(RenderNode* n, subnodes) {
 				if (n->width() >= INFINITE_WIDTH)
 					continue;
-				m_w = max(m_w, n->width() + padding.left + padding.right);
+				m_w = max<int>(m_w, n->width() + padding.left + padding.right);
 			}
 		}
 
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
-		uint32_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding);
+		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding);
 		if (shrink_to_fit_) {
 			m_w = min(m_w, max_line_width);
 		}
@@ -904,13 +906,13 @@ public:
 
 private:
 	bool shrink_to_fit_;
-	uint32_t m_w;
+	uint16_t m_w;
 	SubTagRenderNode* m_rn;
 };
 
 class RTTagHandler : public SubTagHandler {
 public:
-	RTTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache, uint32_t w) :
+	RTTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache, uint16_t w) :
 		SubTagHandler(tag, fc, ns, img_cache, w, true) {
 	}
 
@@ -951,11 +953,11 @@ public:
 	Renderer(IGraphic& gr, IFontLoader* fl, IParser* p);
 	virtual ~Renderer();
 
-	virtual IBlitableSurface* render(const string&, uint32_t, const TagSet&);
-	virtual IRefMap* make_reference_map(const std::string&, uint32_t, const TagSet&);
+	virtual Surface* render(const string&, uint16_t, const TagSet&);
+	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet&);
 
 private:
-	RenderNode* layout_(const string& text, uint32_t width, const TagSet& allowed_tags);
+	RenderNode* layout_(const string& text, uint16_t width, const TagSet& allowed_tags);
 
 	IGraphic& gr_;
 	FontCache m_fc;
@@ -969,7 +971,7 @@ Renderer::Renderer(IGraphic& gr, IFontLoader* fl, IParser* p) :
 Renderer::~Renderer() {
 }
 
-RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& allowed_tags) {
+RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	boost::scoped_ptr<ITag> rt(m_p->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
@@ -994,14 +996,14 @@ RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& 
 }
 
 // NOCOM(#sirver): describe what kind of caching is done.
-IBlitableSurface* Renderer::render(const string& text, uint32_t width, const TagSet& allowed_tags) {
+Surface* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	log("#sirver text: %s,width: %i\n", text.c_str(), width);
 	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 
 	return node->render(gr_);
 }
 
-IRefMap* Renderer::make_reference_map(const string& text, uint32_t width, const TagSet& allowed_tags) {
+IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {
 
 	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 	return new RefMap(node->get_references());

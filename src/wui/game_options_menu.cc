@@ -129,7 +129,7 @@ GameOptionsMenu::GameOptionsMenu
 
 	set_inner_size
 		(hmargin() + hmargin() +
-		 std::max(static_cast<int32_t>(get_inner_w()), readme.get_w()),
+		 std::max<int32_t>(get_inner_w(), readme.get_w()),
 		 get_inner_h());
 	if (get_usedefaultpos())
 		center_to_parent();

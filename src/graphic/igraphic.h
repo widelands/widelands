@@ -22,19 +22,18 @@
 
 #include <string>
 
-#include "iblitable_surface.h"
-
-struct SDL_Surface;
 class ImageCache;
+class Surface;
 class SurfaceCache;
+struct SDL_Surface;
 
 class IGraphic {
 public:
 	virtual ~IGraphic() {};
 
-	virtual IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const = 0;
+	virtual Surface * create_surface(int32_t w, int32_t h, bool alpha = true) const = 0;
 	// NOCOM(#sirver): I have a hunch that alpha should default to true.
-	virtual IBlitableSurface * create_surface(SDL_Surface*, bool alpha = false) const = 0;
+	virtual Surface * create_surface(SDL_Surface*, bool alpha = false) const = 0;
 
 	virtual ImageCache& imgcache() const = 0;
 	virtual SurfaceCache& surface_cache() const = 0;

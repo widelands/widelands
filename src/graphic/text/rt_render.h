@@ -24,7 +24,6 @@
 #include <string>
 #include <set>
 
-#include "graphic/iblitable_surface.h"
 #include "graphic/igraphic.h"
 #include "graphic/picture.h"
 #include "rgbcolor.h"
@@ -49,10 +48,10 @@ public:
 	};
 	virtual ~IFont() {};
 
-	virtual void dimensions(const std::string&, int, uint32_t *, uint32_t *) = 0;
-	virtual const IBlitableSurface& render(IGraphic &, const std::string&, const RGBColor& clr, int) = 0;
+	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
+	virtual const Surface& render(IGraphic &, const std::string&, const RGBColor& clr, int) = 0;
 
-	virtual uint32_t ascent(int) const = 0;
+	virtual uint16_t ascent(int) const = 0;
 };
 
 /**
@@ -92,12 +91,12 @@ public:
 	// text, number of entries in the tagse), therefore never delete the return
 	// value and mind key collisions when using same string and text with
 	// another tag set with the same number of entries.
-	virtual IBlitableSurface* render(const std::string&, uint32_t, const TagSet & = TagSet()) = 0;
+	virtual Surface* render(const std::string&, uint16_t, const TagSet & = TagSet()) = 0;
 
 	// Returns a reference map of the clickable hyperlinks in the image. This
 	// will do no caching and needs to do all layouting, so do not call this too
 	// often. The returned object must be freed.
-	virtual IRefMap* make_reference_map(const std::string&, uint32_t, const TagSet & = TagSet()) = 0;
+	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet & = TagSet()) = 0;
 };
 
 // Setup a renderer, takes ownership of fl but not of gr.

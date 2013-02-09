@@ -527,9 +527,9 @@ bool Window::handle_mousemove
 			const int32_t max_x = parent->get_inner_w();
 			const int32_t max_y = parent->get_inner_h();
 
-			left = min(static_cast<int32_t>(max_x - get_lborder()), left);
-			top  = min(static_cast<int32_t>(max_y - get_tborder()), top);
-			left = max(-static_cast<int32_t>(w - get_rborder()), left);
+			left = min<int32_t>(max_x - get_lborder(), left);
+			top  = min<int32_t>(max_y - get_tborder(), top);
+			left = max<int32_t>(get_rborder() - w, left);
 			top  = max
 				(-static_cast<int32_t>(h - ((_is_minimal) ? get_tborder() : get_bborder())), top);
 			new_left = left; new_top = top;

@@ -158,8 +158,8 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 	}
 
 	lce.image = new_uncached_image(g_gr->create_surface(text_surface, true));
-	lce.width = lce.image->get_w();
-	lce.height = lce.image->get_h();
+	lce.width = lce.image->width();
+	lce.height = lce.image->height();
 }
 
 /**
@@ -237,8 +237,8 @@ void Font_Handler::draw_caret
 
 	const IPicture* caretpic = g_gr->imgcache().get("pics/caret.png", true);
 	Point caretpt;
-	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->get_w();
-	caretpt.y = dstpoint.y + (style.font->height() - caretpic->get_h()) / 2;
+	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->width();
+	caretpt.y = dstpoint.y + (style.font->height() - caretpic->height()) / 2;
 
 	dst.blit(caretpt, caretpic);
 }

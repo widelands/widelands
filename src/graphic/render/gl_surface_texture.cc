@@ -181,7 +181,7 @@ GLSurfaceTexture::~GLSurfaceTexture()
 	glDeleteTextures(1, &m_texture);
 }
 
-void GLSurfaceTexture::init(uint32_t w, uint32_t h)
+void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 {
 	handle_glerror();
 	m_w = w;
@@ -275,7 +275,7 @@ void GLSurfaceTexture::draw_line
 }
 
 void GLSurfaceTexture::blit
-	(const Point& dst, const IBlitableSurface* src, const Rect& srcrc, Composite cm) {
+	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm) {
 	setup_gl();
 	GLSurface::blit(dst, src, srcrc, cm);
 	reset_gl();

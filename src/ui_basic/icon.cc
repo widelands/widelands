@@ -44,8 +44,8 @@ void Icon::setIcon(const IPicture* picture_id) {
 
 void Icon::draw(RenderTarget & dst) {
 	assert(m_pic);
-	int32_t w = (m_w - m_pic->get_w()) / 2;
-	int32_t h = (m_h - m_pic->get_h()) / 2;
+	int32_t w = (m_w - m_pic->width()) / 2;
+	int32_t h = (m_h - m_pic->height()) / 2;
 	dst.blit(Point(w, h), m_pic);
 }
 

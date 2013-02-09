@@ -22,7 +22,6 @@
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
 
 #include "button.h"
 #include "mouse_constants.h"
@@ -278,8 +277,8 @@ void Table<void *>::draw(RenderTarget & dst)
 			uint32_t stringw = 0;
 			uint32_t stringh = g_fh->get_fontheight(m_fontname, m_fontsize);
 			if (entry_picture) {
-				picw = entry_picture->get_w();
-				pich = entry_picture->get_h();
+				picw = entry_picture->width();
+				pich = entry_picture->height();
 			}
 			Point point =
 				Point(curx, y)

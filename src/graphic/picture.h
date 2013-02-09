@@ -29,19 +29,19 @@
  * Interface to a bitmap that can act as the source of a rendering
  * operation.
  */
-class IBlitableSurface; // // NOCOM(#sirver): remove again?
+class Surface; // // NOCOM(#sirver): remove again?
 // TODO(#sirver): rename to Image ?
 // NOCOM(#sirver): move to image_cache!
 class IPicture : boost::noncopyable {
 public:
 	virtual ~IPicture() {}
 
-	virtual uint32_t get_w() const = 0;
-	virtual uint32_t get_h() const = 0;
+	virtual uint16_t width() const = 0;
+	virtual uint16_t height() const = 0;
 
 	// NOCOM(#sirver): this somewhat leaks the implementation.
 	// NOCOM(#sirver): Check if some casts become unnecessary now.
-	virtual IBlitableSurface* surface() const = 0;
+	virtual Surface* surface() const = 0;
 	virtual const std::string& hash() const = 0;
 };
 

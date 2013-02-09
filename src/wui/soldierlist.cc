@@ -221,7 +221,7 @@ void SoldierPanel::think()
 			if (icon_it.current->row <= icon.row)
 				insertpos = icon_it.current + 1;
 
-			icon.pos.x = std::max(icon.pos.x, static_cast<int32_t>(icon_it.current->pos.x + m_icon_width));
+			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_it.current->pos.x + m_icon_width);
 		}
 
 		icon.cache_health = 0;

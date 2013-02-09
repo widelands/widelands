@@ -42,11 +42,11 @@ public:
 	virtual ~SDLSurface();
 
 	// Implements IPicture
-	virtual uint32_t get_w() const {return m_w;}
-	virtual uint32_t get_h() const {return m_h;}
+	virtual uint16_t width() const {return m_w;}
+	virtual uint16_t height() const {return m_h;}
 
-	// Implements IBlitableSurface
-	virtual void blit(const Point&, const IBlitableSurface*, const Rect& srcrc, Composite cm);
+	// Implements Surface
+	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm);
 	virtual void fill_rect(const Rect&, RGBAColor);
 
 	// Implements Surface
@@ -58,8 +58,8 @@ public:
 	virtual SDL_PixelFormat const & format() const;
 	virtual void lock(LockMode);
 	virtual void unlock(UnlockMode);
-	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
-	virtual void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
+	virtual uint32_t get_pixel(uint16_t x, uint16_t y);
+	virtual void set_pixel(uint16_t x, uint16_t y, Uint32 clr);
 	virtual uint16_t get_pitch() const {return m_surface->pitch;}
 	virtual uint8_t * get_pixels() const;
 
@@ -74,7 +74,7 @@ protected:
 	SDL_Surface * m_surface;
 	int32_t m_offsx;
 	int32_t m_offsy;
-	uint32_t m_w, m_h;
+	uint16_t m_w, m_h;
 };
 
 

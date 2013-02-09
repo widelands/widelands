@@ -175,8 +175,8 @@ void Button::draw(RenderTarget & dst)
 
 	//  if we got a picture, draw it centered
 	if (m_pic_custom) {
-		uint32_t cpw = m_pic_custom->get_w();
-		uint32_t cph = m_pic_custom->get_h();
+		uint16_t cpw = m_pic_custom->width();
+		uint16_t cph = m_pic_custom->height();
 
 		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
 		//  is that -1 >> 1 is -1 but -1 / 2 is 0).

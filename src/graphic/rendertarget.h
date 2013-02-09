@@ -54,8 +54,8 @@ public:
 	void set_window(Rect const & rc, Point const & ofs);
 	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
 
-	int32_t get_w() const;
-	int32_t get_h() const;
+	int32_t width() const;
+	int32_t height() const;
 
 	void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
@@ -92,7 +92,7 @@ public:
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, const IBlitableSurface* src, Rect srcrc, Composite cm = CM_Normal);
+	void doblit(Point dst, const Surface* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
 	Surface* m_surface;

@@ -129,7 +129,7 @@ void Editor_Interactive::register_overlays() {
 			const IPicture* pic = g_gr->imgcache().get(fname, true);
 			assert(pic);
 			map.overlay_manager().register_overlay
-				(sp, pic, 8, Point(pic->get_w() / 2, STARTING_POS_HOTSPOT_Y));
+				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 

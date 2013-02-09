@@ -64,12 +64,12 @@ void SDLSurface::unlock(UnlockMode) {
 		SDL_UnlockSurface(m_surface);
 }
 
-uint32_t SDLSurface::get_pixel(uint32_t x, uint32_t y) {
+uint32_t SDLSurface::get_pixel(uint16_t x, uint16_t y) {
 	x += m_offsx;
 	y += m_offsy;
 
-	assert(x < get_w());
-	assert(y < get_h());
+	assert(x < width());
+	assert(y < height());
 	assert(m_surface);
 
 	// Locking not needed: reading only
@@ -106,11 +106,11 @@ uint32_t SDLSurface::get_pixel(uint32_t x, uint32_t y) {
 	return 0; // Should never be here
 }
 
-void SDLSurface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
+void SDLSurface::set_pixel(uint16_t x, uint16_t y, const Uint32 clr) {
 	x += m_offsx;
 	y += m_offsy;
 
-	if (x >= get_w() || y >= get_h())
+	if (x >= width() || y >= height())
 		return;
 	assert(m_surface);
 
@@ -330,7 +330,7 @@ void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 
 
 void SDLSurface::blit
-	(const Point& dst, const IBlitableSurface* src, const Rect& srcrc, Composite cm)
+	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm)
 {
 	SDL_Surface* sdlsurf = static_cast<const SDLSurface*>(src)->get_sdl_surface();
 	SDL_Rect srcrect = {

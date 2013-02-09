@@ -22,7 +22,6 @@
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
-#include "graphic/iblitable_surface.h"
 #include "graphic/rendertarget.h"
 #include "log.h"
 #include "profile/profile.h"
@@ -835,16 +834,15 @@ void Panel::do_draw(RenderTarget & dst)
 
 		if
 			(!_cache ||
-			 _cache.get()->get_w() != innerw ||
-			 _cache.get()->get_h() != innerh)
+			 _cache.get()->width() != innerw ||
+			 _cache.get()->height() != innerh)
 		{
 			_cache.reset(new_uncached_image(g_gr->create_surface(innerw, innerh, true)));
 			_needdraw = true;
 		}
 
 		if (_needdraw) {
-			// NOCOM(#sirver): this casting suckz!!!!!
-			RenderTarget inner(static_cast<Surface*>(_cache->surface()));
+			RenderTarget inner(_cache->surface());
 			do_draw_inner(inner);
 
 			_needdraw = false;
@@ -1080,8 +1078,8 @@ void Panel::ui_mousemove
 		return;
 
 	Panel * p;
-	uint32_t w = s_default_cursor->get_w();
-	uint32_t h = s_default_cursor->get_h();
+	uint16_t w = s_default_cursor->width();
+	uint16_t h = s_default_cursor->height();
 
 	g_gr->update_rectangle(x - xdiff, y - ydiff, w, h);
 	g_gr->update_rectangle(x, y, w, h);
@@ -1122,8 +1120,8 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	if (!rendered_text)
 		return;
 
-	uint32_t tip_width = rendered_text->get_w() + 4;
-	uint32_t tip_height = rendered_text->get_h() + 4;
+	uint16_t tip_width = rendered_text->width() + 4;
+	uint16_t tip_height = rendered_text->height() + 4;
 
 	Rect r
 		(WLApplication::get()->get_mouse_position() + Point(2, 32),

@@ -60,8 +60,8 @@ m_click_recursion_protect(false)
 	for (int32_t j = 0; j < nr_immovables; ++j) {
 		const Immovable_Descr & descr = *world.get_immovable_descr(j);
 		const IPicture* pic = g_gr->imgcache().get(descr.get_picture(), true);
-		uint32_t w = pic->get_w();
-		uint32_t h = pic->get_h();
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		if (w > width)
 			width  = w;
 		if (h > height)

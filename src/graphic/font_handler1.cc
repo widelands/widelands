@@ -76,10 +76,10 @@ void Font_Handler1::draw_text
 	if (!p)
 		return;
 
-	if (align & Align_HCenter) dstpoint.x -= p->get_w() / 2;
-	else if (align & Align_Right) dstpoint.x -= p->get_w();
-	if (align & Align_VCenter) dstpoint.y -= p->get_h() / 2;
-	else if (align & Align_Bottom) dstpoint.y -= p->get_h();
+	if (align & Align_HCenter) dstpoint.x -= p->width() / 2;
+	else if (align & Align_Right) dstpoint.x -= p->width();
+	if (align & Align_VCenter) dstpoint.y -= p->height() / 2;
+	else if (align & Align_Bottom) dstpoint.y -= p->height();
 
 	dst.blit(Point(dstpoint.x, dstpoint.y), p);
 }

@@ -27,11 +27,11 @@
 
 #include "gl_surface.h"
 
-uint32_t GLSurface::get_w() const {
+uint16_t GLSurface::width() const {
 	return m_w;
 }
 
-uint32_t GLSurface::get_h() const {
+uint16_t GLSurface::height() const {
 	return m_h;
 }
 
@@ -40,7 +40,7 @@ uint8_t * GLSurface::get_pixels() const
 	return m_pixels.get();
 }
 
-uint32_t GLSurface::get_pixel(uint32_t x, uint32_t y) {
+uint32_t GLSurface::get_pixel(uint16_t x, uint16_t y) {
 	assert(m_pixels);
 	assert(x < m_w);
 	assert(y < m_h);
@@ -49,7 +49,7 @@ uint32_t GLSurface::get_pixel(uint32_t x, uint32_t y) {
 	return *(reinterpret_cast<uint32_t *>(data));
 }
 
-void GLSurface::set_pixel(uint32_t x, uint32_t y, uint32_t clr) {
+void GLSurface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 	assert(m_pixels);
 	assert(x < m_w);
 	assert(y < m_h);
@@ -171,7 +171,7 @@ void GLSurface::draw_line
 }
 
 void GLSurface::blit
-	(const Point& dst, const IBlitableSurface* pic, const Rect& srcrc, Composite cm)
+	(const Point& dst, const Surface* pic, const Rect& srcrc, Composite cm)
 {
 	// Note: This function is highly optimized and therefore does not restore
 	// all state. It also assumes that all other glStuff restores state to make

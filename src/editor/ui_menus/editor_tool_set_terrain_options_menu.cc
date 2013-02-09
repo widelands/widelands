@@ -23,8 +23,8 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "graphic/graphic.h"
-#include "graphic/iblitable_surface.h"
 #include "graphic/rendertarget.h"
+#include "graphic/surface.h"
 #include "graphic/texture.h"
 #include "i18n.h"
 #include "logic/map.h"
@@ -97,33 +97,33 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			Surface* surf = g_gr->create_surface(64, 64);
 			const IPicture* tex = g_gr->imgcache().get(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
 						->get_texture_picture(), true);
-			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->get_w(), tex->get_h()));
+			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()));
 
 			Point pt(1, 64 - small_pich - 1);
 
 			//  check is green
 			if (ter_is == 0) {
-				surf->blit(pt, green->surface(), Rect(0, 0, green->get_w(), green->get_h()));
+				surf->blit(pt, green->surface(), Rect(0, 0, green->width(), green->height()));
 				pt.x += small_picw + 1;
 			} else {
 				if (ter_is & TERRAIN_WATER) {
-					surf->blit(pt, water->surface(), Rect(0, 0, water->get_w(), water->get_h()));
+					surf->blit(pt, water->surface(), Rect(0, 0, water->width(), water->height()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_MOUNTAIN) {
-					surf->blit(pt, mountain->surface(), Rect(0, 0, mountain->get_w(), mountain->get_h()));
+					surf->blit(pt, mountain->surface(), Rect(0, 0, mountain->width(), mountain->height()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_ACID) {
-					surf->blit(pt, dead->surface(), Rect(0, 0, dead->get_w(), dead->get_h()));
+					surf->blit(pt, dead->surface(), Rect(0, 0, dead->width(), dead->height()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_UNPASSABLE) {
-					surf->blit(pt, unpassable->surface(), Rect(0, 0, unpassable->get_w(), unpassable->get_h()));
+					surf->blit(pt, unpassable->surface(), Rect(0, 0, unpassable->width(), unpassable->height()));
 					pt.x += small_picw + 1;
 				}
 				if (ter_is & TERRAIN_DRY)
-					surf->blit(pt, dry->surface(), Rect(0, 0, dry->get_w(), dry->get_h()));
+					surf->blit(pt, dry->surface(), Rect(0, 0, dry->width(), dry->height()));
 			}
 			offscreen_images_.push_back(new_uncached_image(surf)); // Make sure we delete this later on.
 

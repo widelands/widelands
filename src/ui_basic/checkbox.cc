@@ -40,8 +40,8 @@ Statebox::Statebox
 	m_flags(Is_Enabled)
 {
 	if (pic) {
-		uint32_t w = pic->get_w();
-		uint32_t h = pic->get_h();
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		set_desired_size(w, h);
 		set_size(w, h);
 
@@ -103,8 +103,8 @@ void Statebox::draw(RenderTarget & dst)
 {
 	if (m_flags & Has_Custom_Picture) {
 		// center picture
-		uint32_t w = m_pic_graphics->get_w();
-		uint32_t h = m_pic_graphics->get_h();
+		uint16_t w = m_pic_graphics->width();
+		uint16_t h = m_pic_graphics->height();
 
 		dst.blit
 			(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2),

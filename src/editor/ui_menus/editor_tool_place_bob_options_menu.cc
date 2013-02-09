@@ -64,8 +64,8 @@ m_click_recursion_protect(false)
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
 		const IPicture* pic = g_gr->imgcache().get(world.get_bob_descr(j)->get_picture(), true);
-		uint32_t w = pic->get_w();
-		uint32_t h = pic->get_h();
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		if (w > width)
 			width = w;
 		if (h > height)

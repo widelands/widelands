@@ -47,7 +47,7 @@ SDLTTF_Font::~SDLTTF_Font() {
 	font_ = 0;
 }
 
-void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32_t * gh) {
+void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16_t * gh) {
 	m_set_style(style);
 
 	int w, h;
@@ -59,7 +59,7 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32
 	*gw = w; *gh = h;
 }
 
-const IBlitableSurface& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
+const Surface& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
 	// TODO(#sirver): Make this cheaper!
 	SimpleMD5Checksum checksum;
 	checksum.Data(font_name_.c_str(), font_name_.size());
@@ -72,7 +72,7 @@ const IBlitableSurface& SDLTTF_Font::render(IGraphic & gr, const string& txt, co
 	checksum.FinishChecksum();
 	const string cs = checksum.GetChecksum().str();
 
-	const IBlitableSurface* rv = gr.surface_cache().get(cs);
+	const Surface* rv = gr.surface_cache().get(cs);
 	if (rv) return *rv;
 
 	m_set_style(style);
@@ -124,12 +124,11 @@ const IBlitableSurface& SDLTTF_Font::render(IGraphic & gr, const string& txt, co
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *gr.surface_cache().insert(cs,
-				static_cast<Surface*>(gr.create_surface(text_surface, true)));
+	return *gr.surface_cache().insert(cs, gr.create_surface(text_surface, true));
 }
 
-uint32_t SDLTTF_Font::ascent(int style) const {
-	uint32_t rv = TTF_FontAscent(font_);
+uint16_t SDLTTF_Font::ascent(int style) const {
+	uint16_t rv = TTF_FontAscent(font_);
 	if (style & SHADOW)
 		rv += SHADOW_OFFSET;
 	return rv;
