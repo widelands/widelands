@@ -38,7 +38,7 @@ MiniMap::View::View
 	m_ibase       (ibase),
 	m_viewx       (0),
 	m_viewy       (0),
-	m_pic_map_spot(g_gr->imgcache().get("pics/map_spot.png", true)),
+	m_pic_map_spot(g_gr->imgcache().get("pics/map_spot.png")),
 	m_flags       (flags)
 {}
 
@@ -140,38 +140,38 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 	button_terrn
 		(this, "terrain",
 		 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->imgcache().get("pics/but0.png", true),
-		 g_gr->imgcache().get("pics/button_terrn.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->imgcache().get("pics/button_terrn.png"),
 		 _("Terrain")),
 	button_owner
 		(this, "owner",
 		 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->imgcache().get("pics/but0.png", true),
-		 g_gr->imgcache().get("pics/button_owner.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->imgcache().get("pics/button_owner.png"),
 		 _("Owner")),
 	button_flags
 		(this, "flags",
 		 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->imgcache().get("pics/but0.png", true),
-		 g_gr->imgcache().get("pics/button_flags.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->imgcache().get("pics/button_flags.png"),
 		 _("Flags")),
 	button_roads
 		(this, "roads",
 		 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->imgcache().get("pics/but0.png", true),
-		 g_gr->imgcache().get("pics/button_roads.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->imgcache().get("pics/button_roads.png"),
 		 _("Roads")),
 	button_bldns
 		(this, "buildings",
 		 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->imgcache().get("pics/but0.png", true),
-		 g_gr->imgcache().get("pics/button_bldns.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->imgcache().get("pics/button_bldns.png"),
 		 _("Buildings")),
 	button_zoom
 		(this, "zoom",
 		 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->imgcache().get("pics/but0.png", true),
-		 g_gr->imgcache().get("pics/button_zoom.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->imgcache().get("pics/button_zoom.png"),
 		 _("Zoom"))
 {
 	button_terrn.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), Terrn));

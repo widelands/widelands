@@ -31,7 +31,7 @@ public:
 	static void Cleanup();
 
 	GLSurfaceTexture(SDL_Surface * surface);
-	GLSurfaceTexture(int w, int h, bool alpha);
+	GLSurfaceTexture(int w, int h);
 	virtual ~GLSurfaceTexture();
 
 	/// Interface implementation
@@ -53,7 +53,6 @@ public:
 	virtual void brighten_rect(const Rect&, int32_t factor);
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);
-	// NOCOM(#sirver): Only one should be needed here.
 	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm);
 
 	GLuint get_gl_texture() const {return m_texture;}

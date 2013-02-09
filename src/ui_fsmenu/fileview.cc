@@ -40,7 +40,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 	close_button
 		(this, "close",
 		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
-		 g_gr->imgcache().get("pics/but0.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
 	close_button.sigclicked.connect(boost::bind(&Fullscreen_Menu_TextView::end_modal, boost::ref(*this), 0));

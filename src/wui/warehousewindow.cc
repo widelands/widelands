@@ -72,9 +72,9 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
 	const IPicture* pic;
 
 	switch (policy) {
-	case Warehouse::SP_Prefer: pic = g_gr->imgcache().get(pic_policy_prefer, true); break;
-	case Warehouse::SP_DontStock: pic = g_gr->imgcache().get(pic_policy_dontstock, true); break;
-	case Warehouse::SP_Remove: pic = g_gr->imgcache().get(pic_policy_remove, true); break;
+	case Warehouse::SP_Prefer: pic = g_gr->imgcache().get(pic_policy_prefer); break;
+	case Warehouse::SP_DontStock: pic = g_gr->imgcache().get(pic_policy_dontstock); break;
+	case Warehouse::SP_Remove: pic = g_gr->imgcache().get(pic_policy_remove); break;
 	default:
 		// don't draw anything for the normal policy
 		return;
@@ -121,8 +121,8 @@ WarehouseWaresPanel::WarehouseWaresPanel
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
 		b = new UI::Button                                                             \
 			(buttons, #policy, 0, 0, 34, 34,                                                  \
-			 g_gr->imgcache().get("pics/but4.png", true),                                   \
-			 g_gr->imgcache().get("pics/stock_policy_button_" #policy ".png", true),      \
+			 g_gr->imgcache().get("pics/but4.png"),                                   \
+			 g_gr->imgcache().get("pics/stock_policy_button_" #policy ".png"),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
 			(boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)), \
@@ -184,7 +184,7 @@ Warehouse_Window::Warehouse_Window
 {
 	get_tabs()->add
 		("wares",
-		 g_gr->imgcache().get(pic_tab_wares, true),
+		 g_gr->imgcache().get(pic_tab_wares),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -194,7 +194,7 @@ Warehouse_Window::Warehouse_Window
 		 _("Wares"));
 	get_tabs()->add
 		("workers",
-		 g_gr->imgcache().get(pic_tab_workers, true),
+		 g_gr->imgcache().get(pic_tab_workers),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -206,12 +206,12 @@ Warehouse_Window::Warehouse_Window
 	if (Widelands::PortDock * pd = wh.get_portdock()) {
 		get_tabs()->add
 			("wares",
-			 g_gr->imgcache().get(pic_tab_dock_wares, true),
+			 g_gr->imgcache().get(pic_tab_dock_wares),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 			 _("Wares in dock"));
 		get_tabs()->add
 			("workers",
-			 g_gr->imgcache().get(pic_tab_dock_workers, true),
+			 g_gr->imgcache().get(pic_tab_dock_workers),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
 			 _("Workers in dock"));
 	}

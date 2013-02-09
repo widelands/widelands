@@ -93,13 +93,13 @@ m_flag_to_connect(Widelands::Coords::Null()),
 
 #define INIT_BTN_this(picture, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->imgcache().get("pics/" picture ".png", true),                      \
+ g_gr->imgcache().get("pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->imgcache().get("pics/" picture ".png", true),                      \
+ g_gr->imgcache().get("pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 
@@ -300,7 +300,7 @@ void Interactive_Player::think()
 				 nr_new_messages);
 			msg_tooltip = buffer;
 		}
-		m_toggle_message_menu.set_pic(g_gr->imgcache().get(msg_icon, true));
+		m_toggle_message_menu.set_pic(g_gr->imgcache().get(msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
 	}
 }

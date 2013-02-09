@@ -31,7 +31,7 @@ public:
 	ImageLoaderImpl(Graphic& gr) : gr_(gr) {}
 	virtual ~ImageLoaderImpl() {}
 
-	Surface* load(const std::string& fname, bool alpha) const;
+	Surface* load(const std::string& fname) const;
 
 private:
 	Graphic& gr_;

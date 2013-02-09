@@ -45,7 +45,7 @@ void GLSurfaceScreen::swap_rows()
 }
 
 const SDL_PixelFormat & GLSurfaceScreen::format() const {
-	return gl_rgb_format();
+	return gl_rgba_format();
 }
 
 void GLSurfaceScreen::lock(Surface::LockMode mode)

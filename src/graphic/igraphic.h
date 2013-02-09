@@ -31,9 +31,8 @@ class IGraphic {
 public:
 	virtual ~IGraphic() {};
 
-	virtual Surface * create_surface(int32_t w, int32_t h, bool alpha = true) const = 0;
-	// NOCOM(#sirver): I have a hunch that alpha should default to true.
-	virtual Surface * create_surface(SDL_Surface*, bool alpha = false) const = 0;
+	virtual Surface * create_surface(int32_t w, int32_t h) const = 0;
+	virtual Surface * create_surface(SDL_Surface*) const = 0;
 
 	virtual ImageCache& imgcache() const = 0;
 	virtual SurfaceCache& surface_cache() const = 0;

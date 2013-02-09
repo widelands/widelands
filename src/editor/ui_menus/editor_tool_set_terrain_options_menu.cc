@@ -65,17 +65,17 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	m_checkboxes.resize(nr_terrains);
 
 	const IPicture* green =
-		g_gr->imgcache().get("pics/terrain_green.png", true);
+		g_gr->imgcache().get("pics/terrain_green.png");
 	const IPicture* water =
-		g_gr->imgcache().get("pics/terrain_water.png", true);
+		g_gr->imgcache().get("pics/terrain_water.png");
 	const IPicture* mountain =
-		g_gr->imgcache().get("pics/terrain_mountain.png", true);
+		g_gr->imgcache().get("pics/terrain_mountain.png");
 	const IPicture* dead =
-		g_gr->imgcache().get("pics/terrain_dead.png", true);
+		g_gr->imgcache().get("pics/terrain_dead.png");
 	const IPicture* unpassable =
-		g_gr->imgcache().get("pics/terrain_unpassable.png", true);
+		g_gr->imgcache().get("pics/terrain_unpassable.png");
 	const IPicture* dry =
-		g_gr->imgcache().get("pics/terrain_dry.png", true);
+		g_gr->imgcache().get("pics/terrain_dry.png");
 
 	static const int small_pich = 20;
 	static const int small_picw = 20;
@@ -96,7 +96,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 			Surface* surf = g_gr->create_surface(64, 64);
 			const IPicture* tex = g_gr->imgcache().get(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
-						->get_texture_picture(), true);
+						->get_texture_picture());
 			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()));
 
 			Point pt(1, 64 - small_pich - 1);

@@ -42,7 +42,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	m_edit =
 		new UI::EditBox
 			(this, spacing, posy, get_inner_w() - 2 * spacing, 20,
-			 g_gr->imgcache().get("pics/but1.png", true));
+			 g_gr->imgcache().get("pics/but1.png"));
 	m_edit->setText(dirname);
 	m_dirname = dirname;
 	m_edit->changed.connect(boost::bind(&Main_Menu_Save_Map_Make_Directory::edit_changed, this));
@@ -53,7 +53,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 		UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 g_gr->imgcache().get("pics/but0.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
 		 _("OK"),
 		 std::string(),
 		 m_dirname.size());
@@ -63,7 +63,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
-		 g_gr->imgcache().get("pics/but1.png", true),
+		 g_gr->imgcache().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect
 		(boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 0));

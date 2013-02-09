@@ -136,8 +136,8 @@ int32_t Panel::run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->imgcache().get( "pics/cursor.png", true);
-	s_default_cursor_click = g_gr->imgcache().get( "pics/cursor_click.png", true);
+	s_default_cursor = g_gr->imgcache().get( "pics/cursor.png");
+	s_default_cursor_click = g_gr->imgcache().get( "pics/cursor_click.png");
 
 	// Loop
 	_running = true;
@@ -837,7 +837,7 @@ void Panel::do_draw(RenderTarget & dst)
 			 _cache.get()->width() != innerw ||
 			 _cache.get()->height() != innerh)
 		{
-			_cache.reset(new_uncached_image(g_gr->create_surface(innerw, innerh, true)));
+			_cache.reset(new_uncached_image(g_gr->create_surface(innerw, innerh)));
 			_needdraw = true;
 		}
 

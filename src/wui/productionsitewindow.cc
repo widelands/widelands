@@ -62,7 +62,7 @@ ProductionSite_Window::ProductionSite_Window
 				 UI::Box::AlignLeft);
 
 		get_tabs()->add
-			("wares", g_gr->imgcache().get(pic_tab_wares, true),
+			("wares", g_gr->imgcache().get(pic_tab_wares),
 			 prod_box, _("Wares"));
 	}
 
@@ -100,7 +100,7 @@ ProductionSite_Window::ProductionSite_Window
 		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
 		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
 		get_tabs()->add
-			("workers", g_gr->imgcache().get(pic_tab_workers, true),
+			("workers", g_gr->imgcache().get(pic_tab_workers),
 			 worker_box,
 			 productionsite().descr().nr_working_positions() > 1 ?
 			 _("Workers") : _("Worker"));

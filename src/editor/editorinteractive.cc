@@ -54,7 +54,7 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 
 #define INIT_BUTTON(picture, name, tooltip)                         \
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
-	g_gr->imgcache().get("pics/" picture ".png", false),                      \
+	g_gr->imgcache().get("pics/" picture ".png"),                      \
 	tooltip                                                                      \
 
 	m_toggle_main_menu
@@ -126,7 +126,7 @@ void Editor_Interactive::register_overlays() {
 	iterate_player_numbers(p, nr_players) {
 		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const IPicture* pic = g_gr->imgcache().get(fname, true);
+			const IPicture* pic = g_gr->imgcache().get(fname);
 			assert(pic);
 			map.overlay_manager().register_overlay
 				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
@@ -145,7 +145,7 @@ void Editor_Interactive::register_overlays() {
 			    (amount);
 			if (immname.size())
 				overlay_manager.register_overlay
-				(fc, g_gr->imgcache().get(immname.c_str(), true), 4);
+				(fc, g_gr->imgcache().get(immname.c_str()), 4);
 		}
 	}
 

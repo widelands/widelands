@@ -106,7 +106,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 			const IPicture* pic =
 			    g_gr->imgcache().get
 			    (world.get_resource(res)->get_editor_pic
-			     (mr.location().field->get_resources_amount()), true);
+			     (mr.location().field->get_resources_amount()));
 			overlay_manager.remove_overlay(mr.location(), pic);
 
 			if (not amount) {
@@ -117,7 +117,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 				mr.location().field->set_starting_res_amount(amount);
 				//  set new overlay
 				pic = g_gr->imgcache().get
-				        (world.get_resource(args.cur_res)->get_editor_pic(amount), true);
+				        (world.get_resource(args.cur_res)->get_editor_pic(amount));
 				overlay_manager.register_overlay(mr.location(), pic, 4);
 				map.recalc_for_field_area
 				(Widelands::Area<Widelands::FCoords>(mr.location(), 0));

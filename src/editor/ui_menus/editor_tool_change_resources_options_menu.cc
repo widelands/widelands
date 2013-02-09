@@ -52,15 +52,15 @@ Editor_Tool_Change_Resources_Options_Menu
 		 get_inner_w() - hmargin() - BUTTON_WIDTH,
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->imgcache().get("pics/but1.png", true),
-		 g_gr->imgcache().get("pics/scrollbar_up.png", true)),
+		 g_gr->imgcache().get("pics/but1.png"),
+		 g_gr->imgcache().get("pics/scrollbar_up.png")),
 	m_change_by_decrease
 		(this, "decr_change_by",
 		 hmargin(),
 		 m_change_by_increase.get_y(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->imgcache().get("pics/but1.png", true),
-		 g_gr->imgcache().get("pics/scrollbar_down.png", true)),
+		 g_gr->imgcache().get("pics/but1.png"),
+		 g_gr->imgcache().get("pics/scrollbar_down.png")),
 	m_change_by_value
 		(this,
 		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
@@ -83,14 +83,14 @@ Editor_Tool_Change_Resources_Options_Menu
 		 m_change_by_increase.get_x(),
 		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->imgcache().get("pics/but1.png", true),
-		 g_gr->imgcache().get("pics/scrollbar_up.png", true)),
+		 g_gr->imgcache().get("pics/but1.png"),
+		 g_gr->imgcache().get("pics/scrollbar_up.png")),
 	m_set_to_decrease
 		(this, "decr_set_to",
 		 hmargin(),
 		 m_set_to_increase.get_y(), BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->imgcache().get("pics/but1.png", true),
-		 g_gr->imgcache().get("pics/scrollbar_down.png", true)),
+		 g_gr->imgcache().get("pics/but1.png"),
+		 g_gr->imgcache().get("pics/scrollbar_down.png")),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
@@ -130,7 +130,7 @@ Editor_Tool_Change_Resources_Options_Menu
 	//  Find the maximal width and height for the resource pictures.
 	uint16_t resource_pic_max_width = 0, resource_pic_max_height = 0;
 	for (Widelands::Resource_Index i = 0; i < nr_resources; ++i) {
-		const IPicture* pic = g_gr->imgcache().get(world.get_resource(i)->get_editor_pic(100000).c_str(), true);
+		const IPicture* pic = g_gr->imgcache().get(world.get_resource(i)->get_editor_pic(100000).c_str());
 		resource_pic_max_width  = std::max(resource_pic_max_width,  pic->width());
 		resource_pic_max_height = std::max(resource_pic_max_height, pic->height());
 	}
@@ -161,7 +161,7 @@ Editor_Tool_Change_Resources_Options_Menu
 		m_radiogroup.add_button
 			(this,
 			 pos,
-			 g_gr->imgcache().get(world.get_resource(i)->get_editor_pic(100000), true));
+			 g_gr->imgcache().get(world.get_resource(i)->get_editor_pic(100000)));
 	}
 	pos.y += resource_pic_max_height + vspacing();
 

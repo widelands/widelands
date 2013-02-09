@@ -124,7 +124,7 @@ const Surface& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBCo
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *gr.surface_cache().insert(cs, gr.create_surface(text_surface, true));
+	return *gr.surface_cache().insert(cs, gr.create_surface(text_surface));
 }
 
 uint16_t SDLTTF_Font::ascent(int style) const {

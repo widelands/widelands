@@ -30,7 +30,7 @@
 
 using namespace std;
 
-Surface* ImageLoaderImpl::load(const string& fname, bool alpha) const {
+Surface* ImageLoaderImpl::load(const string& fname) const {
 	FileRead fr;
 	SDL_Surface * sdlsurf;
 
@@ -42,6 +42,6 @@ Surface* ImageLoaderImpl::load(const string& fname, bool alpha) const {
 	if (!sdlsurf)
 		throw wexception("Could not open image %s: %s", fname.c_str(), IMG_GetError());
 
-	return gr_.create_surface(sdlsurf, alpha);
+	return gr_.create_surface(sdlsurf);
 }
 

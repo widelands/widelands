@@ -35,7 +35,7 @@ Button::Button //  for textual buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 const IPicture* background_picture_id,
+	 const IPicture* bg_pic,
 	 std::string const & title_text,
 	 std::string const & tooltip_text,
 	 bool const _enabled, bool const flat)
@@ -50,7 +50,7 @@ Button::Button //  for textual buttons
 	m_draw_flat_background(false),
 	m_time_nextact  (0),
 	m_title         (title_text),
-	m_pic_background(background_picture_id),
+	m_pic_background(bg_pic),
 	m_pic_custom    (NULL),
 	m_pic_custom_disabled(NULL),
 	m_font(UI::Font::ui_small()),
@@ -68,8 +68,8 @@ Button::Button //  for pictorial buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const IPicture* background_picture_id,
-	 const IPicture* foreground_picture_id,
+	 const IPicture* bg_pic,
+	 const IPicture* fg_pic,
 	 const std::string & tooltip_text,
 	 bool const _enabled, bool const flat)
 	:
@@ -82,9 +82,9 @@ Button::Button //  for pictorial buttons
 	m_flat          (flat),
 	m_draw_flat_background(false),
 	m_time_nextact  (0),
-	m_pic_background(background_picture_id),
-	m_pic_custom    (foreground_picture_id),
-	m_pic_custom_disabled(g_gr->imgcache().gray_out(foreground_picture_id)),
+	m_pic_background(bg_pic),
+	m_pic_custom    (fg_pic),
+	m_pic_custom_disabled(fg_pic ? g_gr->imgcache().gray_out(fg_pic) : NULL),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)

@@ -337,8 +337,6 @@ Surface* TextNode::render(IGraphic& gr) {
 	return rv;
 }
 
-// NOCOM(#sirver): all of this here should directly cache surfaces and pass those around - maybe
-// bottom level not. Difficult to say.
 /*
  * Text that might need to expand to fill the space between other elements. One
  * example are ... in a table like construction.
@@ -360,7 +358,7 @@ private:
 };
 Surface* FillingTextNode::render(IGraphic& gr) {
 	const Surface& t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	Surface* rv = gr.create_surface(m_w, m_h, true);
+	Surface* rv = gr.create_surface(m_w, m_h);
 	for (uint16_t x = 0; x < m_w; x += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - x), m_h);
 		rv->blit(Point(x, 0), &t, srcrect, CM_Solid);
@@ -379,7 +377,7 @@ public:
 
 	virtual Surface* render(IGraphic& gr) {
 		if (m_show_spaces) {
-			Surface* rv = gr.create_surface(m_w, m_h, true);
+			Surface* rv = gr.create_surface(m_w, m_h);
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
 			return rv;
 		}
@@ -420,7 +418,7 @@ public:
 	virtual uint16_t width() {return m_w;}
 	virtual uint16_t hotspot_y() {return m_h;}
 	virtual Surface* render(IGraphic& gr) {
-		Surface* rv = gr.create_surface(m_w, m_h, m_bg != NULL);
+		Surface* rv = gr.create_surface(m_w, m_h);
 
 		// Draw background image (tiling)
 		if (m_bg) {
@@ -468,7 +466,7 @@ public:
 	virtual uint16_t height() {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint16_t hotspot_y() {return height();}
 	virtual Surface* render(IGraphic& gr) {
-		Surface* rv = gr.create_surface(width(), height(), true);
+		Surface* rv = gr.create_surface(width(), height());
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
 		// Draw Solid background Color
@@ -551,7 +549,7 @@ private:
 };
 
 Surface* ImgRenderNode::render(IGraphic& gr) {
-	Surface* rv = gr.create_surface(m_image.width(), m_image.height(), true);
+	Surface* rv = gr.create_surface(m_image.width(), m_image.height());
 	rv->blit(Point(0, 0), m_image.surface(), Rect(0, 0, m_image.width(), m_image.height()), CM_Copy);
 	return rv;
 }
@@ -717,7 +715,7 @@ public:
 
 	void enter() {
 		const IAttrMap& a = m_tag.attrs();
-		m_rn = new ImgRenderNode(m_ns, *img_cache_.get(a["src"].get_string(), true));
+		m_rn = new ImgRenderNode(m_ns, *img_cache_.get(a["src"].get_string()));
 	}
 	void emit(vector<RenderNode*>& nodes) {
 		nodes.push_back(m_rn);
@@ -762,7 +760,7 @@ public:
 		if (a.has("fill")) {
 			m_fill_text = a["fill"].get_string();
 			try {
-				m_bg = img_cache_.get(m_fill_text, true);
+				m_bg = img_cache_.get(m_fill_text);
 				m_fill_text = "";
 			} catch (BadImage&) {
 			}
@@ -832,7 +830,7 @@ public:
 				clr = a["background"].get_color();
 				m_rn->set_background(clr);
 			} catch (InvalidColor&) {
-				m_rn->set_background(img_cache_.get(a["background"].get_string(), true));
+				m_rn->set_background(img_cache_.get(a["background"].get_string()));
 			}
 		}
 		if (a.has("padding")) {

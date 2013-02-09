@@ -61,7 +61,7 @@ public:
 	/// it will try to load one from disk with the filename = hash. If this fails, it will throw an
 	/// error.
 	// NOCOM(#sirver): document this
-	virtual const IPicture* get(const std::string& hash, bool alpha = true) = 0;
+	virtual const IPicture* get(const std::string& hash) = 0;
 	virtual const IPicture* render_text(const std::string& text, uint16_t w) = 0;
 	virtual const IPicture* resize(const IPicture*, uint16_t w, uint16_t h) = 0;
 	virtual const IPicture* gray_out(const IPicture*) = 0;

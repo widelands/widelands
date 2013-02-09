@@ -127,8 +127,8 @@ struct Graphic : public IGraphic {
 
 	void save_png(const IPicture*, StreamWrite*) const;
 
-	Surface* create_surface(int32_t w, int32_t h, bool alpha = false) const;
-	virtual Surface* create_surface(SDL_Surface *, bool alpha = false) const;
+	Surface* create_surface(int32_t w, int32_t h) const;
+	virtual Surface* create_surface(SDL_Surface *) const;
 
 	// NOCOM(#sirver): those below are now internal to graphic/
 	// NOCOM(#sirver): halve_alpha was defaulted to false

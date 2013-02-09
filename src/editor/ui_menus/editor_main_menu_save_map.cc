@@ -72,7 +72,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->imgcache().get("pics/but1.png", true));
+			 g_gr->imgcache().get("pics/but1.png"));
 	m_editbox->setText(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&Main_Menu_Save_Map::edit_box_changed, this));
 
@@ -129,21 +129,21 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	m_ok_btn = new UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 g_gr->imgcache().get("pics/but0.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
 		 _("OK"));
 	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 posx, posy, 80, 20,
-		 g_gr->imgcache().get("pics/but1.png", true),
+		 g_gr->imgcache().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
 		 spacing, posy, 120, 20,
-		 g_gr->imgcache().get("pics/but1.png", true),
+		 g_gr->imgcache().get("pics/but1.png"),
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
 		(boost::bind(&Main_Menu_Save_Map::clicked_make_directory, boost::ref(*this)));
@@ -293,7 +293,7 @@ void Main_Menu_Save_Map::fill_list() {
 		m_ls->add
 			(_("<parent>"),
 			 m_parentdir.c_str(),
-			 g_gr->imgcache().get("pics/ls_dir.png", true));
+			 g_gr->imgcache().get("pics/ls_dir.png"));
 	}
 
 	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
@@ -312,7 +312,7 @@ void Main_Menu_Save_Map::fill_list() {
 		m_ls->add
 			(FileSystem::FS_Filename(name),
 			 name,
-			 g_gr->imgcache().get("pics/ls_dir.png", true));
+			 g_gr->imgcache().get("pics/ls_dir.png"));
 	}
 
 	Widelands::Map map;
@@ -331,7 +331,7 @@ void Main_Menu_Save_Map::fill_list() {
 				m_ls->add
 					(FileSystem::FS_Filename(name),
 					 name,
-					 g_gr->imgcache().get("pics/ls_wlmap.png", true));
+					 g_gr->imgcache().get("pics/ls_wlmap.png"));
 			} catch (_wexception const &) {} //  we simply skip illegal entries
 			delete ml;
 		}

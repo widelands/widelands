@@ -50,9 +50,8 @@ namespace  {
 // NOCOM(#sirver): documentation
 class FromDiskImage : public IPicture {
 public:
-	FromDiskImage(const string& filename, SurfaceCache* surface_cache, bool alpha, IImageLoader* image_loader) :
+	FromDiskImage(const string& filename, SurfaceCache* surface_cache, IImageLoader* image_loader) :
 		filename_(filename),
-		alpha_(alpha),
 		image_loader_(image_loader),
 		surface_cache_(surface_cache) {
 			Surface* surf = reload_image_();
@@ -74,13 +73,12 @@ public:
 private:
 	Surface* reload_image_() const {
 		log("FromDiskImage: Loading %s.\n", filename_.c_str());
-		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_, alpha_));
+		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_));
 		return surf;
 	}
 	uint16_t w_, h_;
 
 	const string filename_;
-	const bool alpha_;
 	// Nothing owned
 	IImageLoader* const image_loader_;
 	SurfaceCache* const surface_cache_;
@@ -195,7 +193,7 @@ public:
 		Surface& orig_surface = *original_.surface();
 		Surface& pcmask_surface = *mask_.surface();
 
-		Surface* new_surface = g_gr->create_surface(orig_surface.width(), orig_surface.height(), true);
+		Surface* new_surface = g_gr->create_surface(orig_surface.width(), orig_surface.height());
 
 		const SDL_PixelFormat & fmt = orig_surface.format();
 		const SDL_PixelFormat & fmt_pc = pcmask_surface.format();
@@ -303,7 +301,7 @@ public:
 
 	// Implements ImageCache
 	virtual const IPicture* new_permanent_picture(const std::string& hash, Surface*);
-	virtual const IPicture* get(const std::string& hash, bool alpha = true);
+	virtual const IPicture* get(const std::string& hash);
 	virtual const IPicture* render_text(const std::string& text, uint16_t w);
 	virtual const IPicture* resize(const IPicture*, uint16_t w, uint16_t h);
 	virtual const IPicture* gray_out(const IPicture*);
@@ -328,10 +326,10 @@ ImageCacheImpl::~ImageCacheImpl() {
 	images_.clear();
 }
 
-const IPicture* ImageCacheImpl::get(const string& hash, bool alpha) {
+const IPicture* ImageCacheImpl::get(const string& hash) {
 	ImageMap::const_iterator it = images_.find(hash);
 	if (it == images_.end()) {
-		images_.insert(make_pair(hash, new FromDiskImage(hash, surface_cache_, alpha, image_loader_)));
+		images_.insert(make_pair(hash, new FromDiskImage(hash, surface_cache_, image_loader_)));
 		return get(hash);
 	}
 	return it->second;
@@ -352,6 +350,7 @@ const IPicture* ImageCacheImpl::resize(const IPicture* original, uint16_t w, uin
 
 const IPicture* ImageCacheImpl::gray_out(const IPicture* original) {
 	const string new_hash = original->hash() + ":greyed_out";
+	log("#sirver original->hash: %s\n", original->hash().c_str());
 	// NOCOM(#sirver): a simple 'contains' would be good here. count?
 	ImageMap::const_iterator it = images_.find(new_hash);
 	if (it == images_.end()) {

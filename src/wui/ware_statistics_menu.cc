@@ -168,7 +168,7 @@ m_parent(&parent)
 
 	UI::Tab_Panel * tabs =
 		 new UI::Tab_Panel
-			 (box, spacing, 0, g_gr->imgcache().get("pics/but1.png", true));
+			 (box, spacing, 0, g_gr->imgcache().get("pics/but1.png"));
 
 
 	m_plot_production =
@@ -179,7 +179,7 @@ m_parent(&parent)
 	m_plot_production->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("production", g_gr->imgcache().get(pic_tab_production, true),
+		("production", g_gr->imgcache().get(pic_tab_production),
 			m_plot_production, _("Production"));
 
 	m_plot_consumption =
@@ -190,7 +190,7 @@ m_parent(&parent)
 	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("consumption", g_gr->imgcache().get(pic_tab_consumption, true),
+		("consumption", g_gr->imgcache().get(pic_tab_consumption),
 			m_plot_consumption, _("Consumption"));
 
 	m_plot_economy =
@@ -201,7 +201,7 @@ m_parent(&parent)
 	m_plot_economy->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("economy_health", g_gr->imgcache().get(pic_tab_economy, true),
+		("economy_health", g_gr->imgcache().get(pic_tab_economy),
 			m_plot_economy, _("Economy Health"));
 
 	m_plot_stock = new WUIPlot_Area
@@ -211,7 +211,7 @@ m_parent(&parent)
 	m_plot_stock->set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
 
 	tabs->add
-		("stock", g_gr->imgcache().get(pic_tab_stock, true),
+		("stock", g_gr->imgcache().get(pic_tab_stock),
 			m_plot_stock, _("Stock"));
 
 	tabs->activate(0);
@@ -262,7 +262,7 @@ m_parent(&parent)
 		(new WUIPlot_Generic_Area_Slider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
-			g_gr->imgcache().get("pics/but1.png", true)),
+			g_gr->imgcache().get("pics/but1.png")),
 		 UI::Box::AlignLeft, true);
 
 }

@@ -70,9 +70,8 @@ void GLSurfaceTexture::Cleanup() {
  *
  * The initial data of the texture is undefined.
  */
-GLSurfaceTexture::GLSurfaceTexture(int w, int h, bool alpha)
+GLSurfaceTexture::GLSurfaceTexture(int w, int h)
 {
-	has_alpha_ = alpha;
 	init(w, h);
 
 	glTexImage2D
@@ -122,13 +121,11 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
 		{
 			if (fmt.Amask == 0xff000000) {
 				pixels_format = GL_RGBA;
-				has_alpha_ = true;
 			} else {
 				pixels_format = GL_RGBA;
 				// Read four bytes per pixel but ignore the alpha value
 				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
 				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
-				has_alpha_ = false;
 			}
 		} else if
 			(fmt.Bmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
@@ -136,18 +133,15 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
 		{
 			if (fmt.Amask == 0xff000000) {
 				pixels_format = GL_BGRA;
-				has_alpha_ = true;
 			} else {
 				pixels_format = GL_BGRA;
 				// Read four bytes per pixel but ignore the alpha value
 				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
 				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
-				has_alpha_ = false;
 			}
 		} else
 			throw wexception("OpenGL: Unknown pixel format");
 	} else  if (bpp == 3) {
-		has_alpha_ = false;
 		if
 			(fmt.Rmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
 			 fmt.Bmask == 0x00ff0000)
@@ -208,7 +202,7 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 }
 
 const SDL_PixelFormat & GLSurfaceTexture::format() const {
-	return has_alpha_ ? gl_rgba_format() : gl_rgba_format();
+	return gl_rgba_format();
 }
 
 void GLSurfaceTexture::lock(LockMode mode) {

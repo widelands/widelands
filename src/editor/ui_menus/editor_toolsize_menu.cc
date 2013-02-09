@@ -42,15 +42,15 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 	m_increase
 		(this, "incr",
 		 80, 25, 20, 20,
-		 g_gr->imgcache().get("pics/but0.png", true),
-		 g_gr->imgcache().get("pics/scrollbar_up.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->imgcache().get("pics/scrollbar_up.png"),
 		 std::string(),
 		 parent.get_sel_radius() < MAX_TOOL_AREA),
 	m_decrease
 		(this, "decr",
 		 60, 25, 20, 20,
-		 g_gr->imgcache().get("pics/but0.png", true),
-		 g_gr->imgcache().get("pics/scrollbar_down.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->imgcache().get("pics/scrollbar_down.png"),
 		 std::string(),
 		 0 < parent.get_sel_radius())
 {

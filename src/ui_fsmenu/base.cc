@@ -58,7 +58,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
 	d->res_background = g_gr->imgcache().resize(
-			g_gr->imgcache().get(buffer, true), get_w(), get_h());
+			g_gr->imgcache().get(buffer), get_w(), get_h());
 
 	d->textstyle_small = UI::TextStyle::ui_small();
 	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());

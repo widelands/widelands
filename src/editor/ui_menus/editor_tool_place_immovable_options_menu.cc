@@ -43,7 +43,7 @@ Editor_Tool_Place_Immovable_Options_Menu
 		 UI::UniqueWindow::Registry  & registry)
 :
 Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Immovable Bobs Menu")),
-m_tabpanel(this, 0, 0, g_gr->imgcache().get("pics/but1.png", true)),
+m_tabpanel(this, 0, 0, g_gr->imgcache().get("pics/but1.png")),
 m_pit     (pit),
 m_click_recursion_protect(false)
 {
@@ -59,7 +59,7 @@ m_click_recursion_protect(false)
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_immovables; ++j) {
 		const Immovable_Descr & descr = *world.get_immovable_descr(j);
-		const IPicture* pic = g_gr->imgcache().get(descr.get_picture(), true);
+		const IPicture* pic = g_gr->imgcache().get(descr.get_picture());
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
 		if (w > width)
@@ -71,7 +71,7 @@ m_click_recursion_protect(false)
 	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart,
 	//                     (immovables_in_row)*(height+1+space)+ystart+yend);
 	const IPicture* tab_icon =
-		g_gr->imgcache().get("pics/list_first_entry.png", true);
+		g_gr->imgcache().get("pics/list_first_entry.png");
 
 	Point pos;
 	uint32_t cur_x = immovables_in_row;
@@ -91,7 +91,7 @@ m_click_recursion_protect(false)
 
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box, pos,
-			 g_gr->imgcache().get(world.get_immovable_descr(i)->get_picture(), true));
+			 g_gr->imgcache().get(world.get_immovable_descr(i)->get_picture()));
 
 		cb.set_desired_size(width, height);
 		cb.set_state(m_pit.is_enabled(i));

@@ -39,17 +39,17 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but0.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but2.png", true),
+		 g_gr->imgcache().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 	m_delete
 		(this, "delete",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but0.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
 // Replay list

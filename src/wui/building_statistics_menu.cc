@@ -127,8 +127,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
-			 g_gr->imgcache().get("pics/but4.png", true),
-			 g_gr->imgcache().get("pics/scrollbar_left.png", true),
+			 g_gr->imgcache().get("pics/but4.png"),
+			 g_gr->imgcache().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[Prev_Owned]->sigclicked.connect
@@ -138,8 +138,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
-			 g_gr->imgcache().get("pics/but4.png", true),
-			 g_gr->imgcache().get("pics/scrollbar_right.png", true),
+			 g_gr->imgcache().get("pics/but4.png"),
+			 g_gr->imgcache().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[Next_Owned]->sigclicked.connect
@@ -149,8 +149,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 g_gr->imgcache().get("pics/but4.png", true),
-			 g_gr->imgcache().get("pics/scrollbar_left.png", true),
+			 g_gr->imgcache().get("pics/but4.png"),
+			 g_gr->imgcache().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[Prev_Construction]->sigclicked.connect
@@ -160,8 +160,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 g_gr->imgcache().get("pics/but4.png", true),
-			 g_gr->imgcache().get("pics/scrollbar_right.png", true),
+			 g_gr->imgcache().get("pics/but4.png"),
+			 g_gr->imgcache().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[Next_Construction]->sigclicked.connect
@@ -171,8 +171,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 g_gr->imgcache().get("pics/but4.png", true),
-			 g_gr->imgcache().get("pics/scrollbar_left.png", true),
+			 g_gr->imgcache().get("pics/but4.png"),
+			 g_gr->imgcache().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[Prev_Unproductive]->sigclicked.connect
@@ -182,8 +182,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 g_gr->imgcache().get("pics/but4.png", true),
-			 g_gr->imgcache().get("pics/scrollbar_right.png", true),
+			 g_gr->imgcache().get("pics/but4.png"),
+			 g_gr->imgcache().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[Next_Unproductive]->sigclicked.connect
@@ -460,7 +460,7 @@ void Building_Statistics_Menu::update() {
 				assert(false);
 				break;
 			}
-			te->set_picture(Columns::Size, g_gr->imgcache().get(pic, true));
+			te->set_picture(Columns::Size, g_gr->imgcache().get(pic));
 		}
 
 		if (productionsite and nr_owned) {

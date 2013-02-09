@@ -30,7 +30,7 @@ class IImageLoader {
 public:
 	virtual ~IImageLoader() {}
 
-	virtual Surface* load(const std::string& fn, bool alpha) const = 0;
+	virtual Surface* load(const std::string& fn) const = 0;
 };
 
 #endif /* end of include guard: IMAGE_LOADER_H */

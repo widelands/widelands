@@ -53,7 +53,7 @@ MilitarySite_Window::MilitarySite_Window
 Building_Window(parent, ms, registry)
 {
 	get_tabs()->add
-		("soldiers", g_gr->imgcache().get(pic_tab_military, true),
+		("soldiers", g_gr->imgcache().get(pic_tab_military),
 		 create_soldier_list(*get_tabs(), parent, militarysite()),
 		 _("Soldiers"));
 }

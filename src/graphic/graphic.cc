@@ -628,19 +628,14 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
  * @return the new Surface created from the SDL_Surface
  * // NOCOM(#sirver): comments
  */
-Surface* Graphic::create_surface(SDL_Surface * surf, bool alpha) const
+Surface* Graphic::create_surface(SDL_Surface * surf) const
 {
-	// NOCOM(#sirver): drop alpha and make this a Surface::Create function that only depends on g_opengl.
 #ifdef USE_OPENGL
 	if (g_opengl) {
 		return new GLSurfaceTexture(surf);
 	}
 #endif
-	SDL_Surface * surface;
-	if (alpha)
-		surface = SDL_DisplayFormatAlpha(surf);
-	else
-		surface = SDL_DisplayFormat(surf);
+	SDL_Surface * surface = SDL_DisplayFormatAlpha(surf);
 	SDL_FreeSurface(surf);
 	return new SDLSurface(*surface);
 }
@@ -656,12 +651,12 @@ Surface* Graphic::create_surface(SDL_Surface * surf, bool alpha) const
  * @param h height of the new surface
  * @return the new created surface
  */
-Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha) const
+Surface* Graphic::create_surface(int32_t w, int32_t h) const
 {
 #ifdef USE_OPENGL
 	if (g_opengl)
 	{
-		return new GLSurfaceTexture(w, h, alpha);
+		return new GLSurfaceTexture(w, h);
 	}
 	else
 #endif
@@ -672,12 +667,9 @@ Surface* Graphic::create_surface(int32_t w, int32_t h, bool alpha) const
 			 w, h,
 			 format.BitsPerPixel,
 			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
-		if (alpha) {
-			SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
-			SDL_FreeSurface(&tsurf);
-			return new SDLSurface(surf);
-		}
-		return new SDLSurface(tsurf);
+		SDL_Surface & surf = *SDL_DisplayFormatAlpha(&tsurf);
+		SDL_FreeSurface(&tsurf);
+		return new SDLSurface(surf);
 	}
 }
 
@@ -695,7 +687,7 @@ Surface* Graphic::gray_out_surface(Surface* surf) {
 	uint16_t h = surf->height();
 	const SDL_PixelFormat & origfmt = surf->format();
 
-	Surface* dest = create_surface(w, h, origfmt.Amask);
+	Surface* dest = create_surface(w, h);
 	const SDL_PixelFormat & destfmt = dest->format();
 
 	surf->lock(Surface::Lock_Normal);
@@ -742,7 +734,7 @@ Surface* Graphic::change_luminosity_of_surface(Surface* surf, float factor, bool
 	uint16_t h = surf->height();
 	const SDL_PixelFormat & origfmt = surf->format();
 
-	Surface* dest = create_surface(w, h, origfmt.Amask);
+	Surface* dest = create_surface(w, h);
 	const SDL_PixelFormat & destfmt = dest->format();
 
 	surf->lock(Surface::Lock_Normal);
@@ -934,14 +926,13 @@ void Graphic::set_world(string worldname) {
 
 	// Load the road textures
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
-	// NOCOM(#sirver): does true hurt here?
-	pic_road_normal_.reset(img_loader_->load(buf, false));
+	pic_road_normal_.reset(img_loader_->load(buf));
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
-	pic_road_busy_.reset(img_loader_->load(buf, false));
+	pic_road_busy_.reset(img_loader_->load(buf));
 
 	// load edge texture
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
-	edgetexture_.reset(img_loader_->load(buf, false));
+	edgetexture_.reset(img_loader_->load(buf));
 }
 
 /**

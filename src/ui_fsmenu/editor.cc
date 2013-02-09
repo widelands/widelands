@@ -38,17 +38,17 @@ Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 	new_map
 		(this, "new_map",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but1.png", true),
+		 g_gr->imgcache().get("pics/but1.png"),
 		 _("New Map"), std::string(), true, false),
 	load_map
 		(this, "load_map",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but1.png", true),
+		 g_gr->imgcache().get("pics/but1.png"),
 		 _("Load Map"), std::string(), true, false),
 	back
 		(this, "back",
 		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but0.png", true),
+		 g_gr->imgcache().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false)
 {
 	new_map.sigclicked.connect
