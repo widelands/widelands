@@ -70,7 +70,7 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
 	WaresDisplay::draw_ware(dst, ware);
 
 	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type(), ware);
-	const IPicture* pic;
+	const Image* pic;
 
 	switch (policy) {
 	case Warehouse::SP_Prefer: pic = g_gr->imgcache().get(pic_policy_prefer); break;

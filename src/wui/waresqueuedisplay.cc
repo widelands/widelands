@@ -68,9 +68,9 @@ m_show_only(show_only)
 	uint16_t ph = m_max_fill_indicator->height();
 
 	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
-	uint32_t picture_height = show_only ? WARE_MENU_PIC_HEIGHT : std::max<int32_t>(WARE_MENU_PIC_HEIGHT, ph);
+	uint32_t image_height = show_only ? WARE_MENU_PIC_HEIGHT : std::max<int32_t>(WARE_MENU_PIC_HEIGHT, ph);
 
-	m_total_height = std::max(priority_button_height, picture_height) + 2 * Border;
+	m_total_height = std::max(priority_button_height, image_height) + 2 * Border;
 
 	max_size_changed();
 

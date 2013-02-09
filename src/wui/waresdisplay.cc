@@ -240,13 +240,13 @@ void AbstractWaresDisplay::draw_ware
 	Point p = ware_position(id);
 
 	//  draw a background
-	const IPicture* bgpic =
+	const Image* bgpic =
 		g_gr->imgcache().get(ware_selected(id) ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png");
 	uint16_t w = bgpic->width();
 
 	dst.blit(p, bgpic);
 
-	const IPicture* icon = m_type == Widelands::wwWORKER ? m_tribe.get_worker_descr(id)->icon()
+	const Image* icon = m_type == Widelands::wwWORKER ? m_tribe.get_worker_descr(id)->icon()
 		: m_tribe.get_ware_descr(id)->icon();
 
 	dst.blit(p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
@@ -255,7 +255,7 @@ void AbstractWaresDisplay::draw_ware
 		(Rect(p + Point(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
 		 info_color_for_ware(id));
 
-	const IPicture* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
+	const Image* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
 	if (text) // might be zero when there is no info text.
 		dst.blit
 			(p + Point

@@ -161,41 +161,41 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 }
 
 /**
- * Blits a Picture on another Surface
+ * Blits a Image on another Surface
  *
  * This blit function copies the pixels to the destination surface.
  * If the source surface contains a alpha channel this is used during
  * the blit.
  */
-void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
+void RenderTarget::blit(const Point& dst, const Image* image, Composite cm)
 {
 	doblit
 		(dst,
-		 picture, Rect(Point(0, 0), picture->width(), picture->height()), cm);
+		 image, Rect(Point(0, 0), image->width(), image->height()), cm);
 }
 
 /**
- * Like \ref blit, but use only a sub-rectangle of the source picture.
+ * Like \ref blit, but use only a sub-rectangle of the source image.
  */
 void RenderTarget::blitrect
-	(Point const dst, const IPicture* picture, Rect const srcrc, Composite cm)
+	(Point const dst, const Image* image, Rect const srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	doblit(dst, picture, srcrc, cm);
+	doblit(dst, image, srcrc, cm);
 }
 
 /**
- * Fill the given rectangle with the given picture.
+ * Fill the given rectangle with the given image.
  *
- * The pixel from ofs inside picture is placed at the top-left corner of
+ * The pixel from ofs inside image is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, const IPicture* picture, Point ofs, Composite cm)
+void RenderTarget::tile(Rect r, const Image* image, Point ofs, Composite cm)
 {
-	int32_t srcw = picture->width();
-	int32_t srch = picture->height();
+	int32_t srcw = image->width();
+	int32_t srch = image->height();
 
 	if (clip(r)) {
 		if (m_offset.x < 0)
@@ -215,7 +215,7 @@ void RenderTarget::tile(Rect r, const IPicture* picture, Point ofs, Composite cm
 		if (ofs.y < 0)
 			ofs.y += srch;
 
-		// Blit the picture into the rectangle
+		// Blit the image into the rectangle
 		uint32_t ty = 0;
 
 		while (ty < r.h) {
@@ -236,7 +236,7 @@ void RenderTarget::tile(Rect r, const IPicture* picture, Point ofs, Composite cm
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r + Point(tx, ty), picture->surface(), srcrc, cm);
+				m_surface->blit(r + Point(tx, ty), image->surface(), srcrc, cm);
 
 				tx += srcrc.w;
 
@@ -279,7 +279,7 @@ void RenderTarget::drawanim
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
-	const IPicture& frame =
+	const Image& frame =
 		player ? gfx->get_frame(framenumber, player->get_playercolor()) : gfx->get_frame(framenumber);
 
 	dst -= gfx->hotspot();
@@ -306,8 +306,8 @@ void RenderTarget::drawstatic
 	}
 
 	// Get the frame and its data
-	const IPicture& frame = player ? gfx->get_frame(0, player->get_playercolor()) : gfx->get_frame(0);
-	const IPicture* dark_frame = ImageTransformations::change_luminosity(&frame, 1.22, true);
+	const Image& frame = player ? gfx->get_frame(0, player->get_playercolor()) : gfx->get_frame(0);
+	const Image* dark_frame = ImageTransformations::change_luminosity(&frame, 1.22, true);
 
 	dst -= Point(frame.width() / 2, frame.height() / 2);
 	Rect srcrc(Point(0, 0), frame.width(), frame.height());
@@ -333,7 +333,7 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
-	const IPicture& frame =
+	const Image& frame =
 		player ?
 		gfx->get_frame
 			(framenumber, player->get_playercolor())
@@ -408,7 +408,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Point dst, const IPicture* src, Rect srcrc, Composite cm)
+	(Point dst, const Image* src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);

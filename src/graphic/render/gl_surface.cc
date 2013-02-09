@@ -19,8 +19,6 @@
 
 #include <cmath>
 
-// TODO(#sirver): if I refactor Graphic to an interface and then make the implementation public in graphic/
-// i could maybe avoid a lot of casting to IPicture.. not sure though.
 #include "gl_surface_texture.h"
 #include "graphic/graphic.h"
 #include "upcast.h"
@@ -171,14 +169,14 @@ void GLSurface::draw_line
 }
 
 void GLSurface::blit
-	(const Point& dst, const Surface* pic, const Rect& srcrc, Composite cm)
+	(const Point& dst, const Surface* image, const Rect& srcrc, Composite cm)
 {
 	// Note: This function is highly optimized and therefore does not restore
 	// all state. It also assumes that all other glStuff restores state to make
 	// this function faster.
 
 	assert(g_opengl);
-	const GLSurfaceTexture& surf = *static_cast<const GLSurfaceTexture*>(pic);
+	const GLSurfaceTexture& surf = *static_cast<const GLSurfaceTexture*>(image);
 
 	/* Set a texture scaling factor. Normally texture coordinates
 	* (see glBegin()...glEnd() Block below) are given in the range 0-1

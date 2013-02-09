@@ -20,7 +20,7 @@
 #include "buildingconfirm.h"
 #include "game_debug_ui.h"
 #include "graphic/graphic.h"
-#include "graphic/picture.h"
+#include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "interactive_player.h"
 #include "logic/dismantlesite.h"

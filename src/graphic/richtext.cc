@@ -20,12 +20,12 @@
 #include "richtext.h"
 
 #include "font.h"
-#include "graphic.h"
-#include "picture.h"
-#include "rect.h"
-#include "text_parser.h"
-#include "rendertarget.h"
 #include "font_handler.h"
+#include "graphic.h"
+#include "image.h"
+#include "rect.h"
+#include "rendertarget.h"
+#include "text_parser.h"
 
 namespace UI {
 
@@ -51,7 +51,7 @@ struct Element {
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect & _bbox, const IPicture* _image)
+	ImageElement(const Rect & _bbox, const Image* _image)
 		: Element(_bbox), image(_image) {}
 
 	virtual void draw(RenderTarget & dst)
@@ -59,7 +59,7 @@ struct ImageElement : Element {
 		dst.blit(Point(0, 0), image);
 	}
 
-	const IPicture* image;
+	const Image* image;
 };
 
 struct TextlineElement : Element {
@@ -337,7 +337,7 @@ void RichText::parse(const std::string & rtext)
 			 image_it != cur_block_images.end();
 			 ++image_it)
 		{
-			const IPicture* image = g_gr->imgcache().get(*image_it);
+			const Image* image = g_gr->imgcache().get(*image_it);
 			if (!image)
 				continue;
 

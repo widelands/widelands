@@ -86,14 +86,14 @@ void AnimationManager::flush()
  * The sound effects reside in the given directory and are described by
  * the given section.
  *
- * This function looks for pictures in this order:
+ * This function looks for image files in this order:
  *    key 'pics', if present
  *    picnametempl, if not null
  *    \<sectionname\>_??.bmp
  *
  * \param directory     which directory to look in for image and sound files
  * \param s             conffile section to search for data on this animation
- * \param picnametempl  a template for the picture names
+ * \param picnametempl  a template for the image names
 */
 uint32_t AnimationManager::get
 	(char       const * const directory,
@@ -108,7 +108,7 @@ uint32_t AnimationManager::get
 	ad.hotspot.y = 0;
 	ad.picnametempl = "";
 
-	// Determine picture name template
+	// Determine image name template
 
 	char templbuf[256];
 	if (char const * const pics = s.get_string("pics"))

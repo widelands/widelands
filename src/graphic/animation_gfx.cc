@@ -25,11 +25,11 @@
 #include "log.h"
 #include "wexception.h"
 
-#include "image_transformations.h"
 #include "animation.h"
 #include "animation_gfx.h"
+#include "image.h"
 #include "image_cache.h"
-#include "picture.h"
+#include "image_transformations.h"
 
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
@@ -45,18 +45,18 @@ AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* image_cache)
 	//  animation.
 
 	//  Allocate a buffer for the filename. It must be large enough to hold the
-	//  picture name template, the "_pc" (3 characters) part for playercolor
+	//  image name template, the "_pc" (3 characters) part for playercolor
 	//  masks, the extension (4 characters including the dot) and the null
-	//  terminator. Copy the picture name template into the buffer.
+	//  terminator. Copy the image name template into the buffer.
 	char filename[256];
 	std::string::size_type const picnametempl_size = data.picnametempl.size();
 	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
 		throw wexception
-			("buffer too small (%lu) for picture name temlplate of size %lu\n",
+			("buffer too small (%lu) for image name template of size %lu\n",
 			 static_cast<long unsigned>(sizeof(filename)), static_cast<long unsigned>(picnametempl_size));
 	strcpy(filename, data.picnametempl.c_str());
 
-	//  Find out where in the picture name template the number is. Search
+	//  Find out where in the image name template the number is. Search
 	//  backwards from the end.
 	char * const after_basename = filename + picnametempl_size;
 	char * last_digit = after_basename;
@@ -75,17 +75,17 @@ AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* image_cache)
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					const IPicture* pic = image_cache->get(filename);
+					const Image* image = image_cache->get(filename);
 					if (width == 0) { //  This is the first frame.
-						width  = pic->width();
-						height = pic->height();
-					} else if (width != pic->width() or height != pic->height())
+						width  = image->width();
+						height = image->height();
+					} else if (width != image->width() or height != image->height())
 						throw wexception
 							("wrong size: (%u, %u), should be (%u, %u) like the "
 							 "first frame",
-							 pic->width(), pic->height(), width, height);
+							 image->width(), image->height(), width, height);
 					//  Get a new AnimFrame.
-					m_frames.push_back(pic);
+					m_frames.push_back(image);
 				} catch (std::exception const & e) {
 					throw wexception
 						("could not load animation frame %s: %s\n",
@@ -105,13 +105,13 @@ AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* image_cache)
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						const IPicture* picture = image_cache->get(filename);
-						if (width != picture->width() or height != picture->height())
+						const Image* image = image_cache->get(filename);
+						if (width != image->width() or height != image->height())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
 								 "be (%u, %u) like the animation frame",
-								 picture->width(), picture->height(), width, height);
-						m_pcmasks.push_back(picture);
+								 image->width(), image->height(), width, height);
+						m_pcmasks.push_back(image);
 						break;
 					} catch (std::exception const & e) {
 						throw wexception
@@ -150,10 +150,10 @@ end:
 			 m_frames.size(), m_pcmasks.size());
 }
 
-const IPicture& AnimationGfx::get_frame(size_t i, const RGBColor& playercolor) {
+const Image& AnimationGfx::get_frame(size_t i, const RGBColor& playercolor) {
 	assert(i < nr_frames());
 
-	const IPicture& original = get_frame(i);
+	const Image& original = get_frame(i);
 	if (!m_hasplrclrs)
 		return original;
 
@@ -162,7 +162,7 @@ const IPicture& AnimationGfx::get_frame(size_t i, const RGBColor& playercolor) {
 	return *ImageTransformations::player_colored(playercolor, &original, m_pcmasks[i]);
 }
 
-const IPicture& AnimationGfx::get_frame(size_t i) const {
+const Image& AnimationGfx::get_frame(size_t i) const {
 	assert(i < nr_frames());
 	return *m_frames[i];
 }

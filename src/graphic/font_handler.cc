@@ -48,7 +48,7 @@ struct LineCacheEntry {
 	/*@}*/
 
 	/*@{*/
-	const IPicture* image;
+	const Image* image;
 	uint32_t width;
 	uint32_t height;
 	/*@}*/
@@ -237,12 +237,12 @@ void Font_Handler::draw_caret
 
 	int caret_x = style.calc_bare_width(sub);
 
-	const IPicture* caretpic = g_gr->imgcache().get("pics/caret.png");
+	const Image* caret_image = g_gr->imgcache().get("pics/caret.png");
 	Point caretpt;
-	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->width();
-	caretpt.y = dstpoint.y + (style.font->height() - caretpic->height()) / 2;
+	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
+	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
 
-	dst.blit(caretpt, caretpic);
+	dst.blit(caretpt, caret_image);
 }
 
 

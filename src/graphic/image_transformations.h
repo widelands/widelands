@@ -21,16 +21,16 @@
 #define IMAGE_TRANSFORMATIONS_H
 
 struct RGBColor;
-class IPicture;
+class Image;
 
 namespace ImageTransformations {
 
 // NOCOM(#sirver): docu
 void initialize();
-const IPicture* resize(const IPicture* original, uint16_t w, uint16_t h);
-const IPicture* gray_out(const IPicture* original);
-const IPicture* change_luminosity(const IPicture* original, float factor, bool halve_alpha);
-const IPicture* player_colored(const RGBColor& clr, const IPicture* original, const IPicture* mask);
+const Image* resize(const Image* original, uint16_t w, uint16_t h);
+const Image* gray_out(const Image* original);
+const Image* change_luminosity(const Image* original, float factor, bool halve_alpha);
+const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask);
 
 }
 

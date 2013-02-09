@@ -58,7 +58,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 
 		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res)) {
 			//  Ok, we're doing something. First remove the current overlays.
-			const IPicture* pic = g_gr->imgcache().get
+			const Image* pic = g_gr->imgcache().get
 				(world.get_resource(res)->get_editor_pic (mr.location().field->get_resources_amount()));
 			overlay_manager.remove_overlay(mr.location(), pic);
 
@@ -101,7 +101,7 @@ int32_t Editor_Set_Resources_Tool::handle_undo_impl
 		if (amount > max_amount)
 			amount = max_amount;
 
-		const IPicture* pic =
+		const Image* pic =
 		    g_gr->imgcache().get
 		    (world.get_resource(res)->get_editor_pic(mr.location().field->get_resources_amount()));
 		overlay_manager.remove_overlay(mr.location(), pic);

@@ -59,7 +59,7 @@ m_click_recursion_protect(false)
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_immovables; ++j) {
 		const Immovable_Descr & descr = *world.get_immovable_descr(j);
-		const IPicture* pic = g_gr->imgcache().get(descr.get_picture());
+		const Image* pic = g_gr->imgcache().get(descr.get_picture());
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
 		if (w > width)
@@ -70,7 +70,7 @@ m_click_recursion_protect(false)
 
 	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart,
 	//                     (immovables_in_row)*(height+1+space)+ystart+yend);
-	const IPicture* tab_icon =
+	const Image* tab_icon =
 		g_gr->imgcache().get("pics/list_first_entry.png");
 
 	Point pos;

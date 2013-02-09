@@ -117,7 +117,7 @@ void BaseListselect::clear() {
 void BaseListselect::add
 	(char const * const   name,
 	 uint32_t             entry,
-	 const IPicture*   pic,
+	 const Image*   pic,
 	 bool         const   sel,
 	 std::string  const & tooltip_text)
 {
@@ -155,7 +155,7 @@ void BaseListselect::add
 
 void BaseListselect::add_front
 	(char const * const   name,
-	 const IPicture*   pic,
+	 const Image*   pic,
 	 bool         const   sel,
 	 std::string  const & tooltip_text)
 {

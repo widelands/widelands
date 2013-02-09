@@ -42,7 +42,7 @@ struct Texture {
 		(const std::string& fnametempl, uint32_t frametime, const SDL_PixelFormat&);
 	~Texture();
 
-	const char * get_texture_picture() const {return m_texture_picture;}
+	const char * get_texture_image() const {return m_texture_image;}
 
 	uint8_t * get_pixels   () const {return m_pixels;}
 	uint8_t * get_curpixels() const {return m_curframe;}
@@ -64,7 +64,7 @@ private:
 	uint32_t   m_mmap_color[256];
 	uint8_t  * m_curframe;
 	int32_t    m_frame_num;
-	char     * m_texture_picture;
+	char     * m_texture_image;
 	uint32_t   m_nrframes;
 	uint32_t   m_frametime;
 	bool       is_32bit;

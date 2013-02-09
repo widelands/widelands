@@ -80,14 +80,6 @@ struct GraphicCaps
 
 /**
  * A renderer to get pixels to a 16bit framebuffer.
- *
- * Picture IDs can be allocated using \ref get_picture() and used in
- * \ref RenderTarget::blit().
- *
- * Pictures are only loaded from disk once and thrown out of memory when the
- * graphics system is unloaded, or when \ref flush() is called with the
- * appropriate module flag; the user can request to flush one single picture
- * alone, but this is only used (and useful) in the editor.
  */
 struct Graphic {
 	Graphic
@@ -113,7 +105,7 @@ struct Graphic {
 	SurfaceCache& surface_cache() const {return *surface_cache_.get();}
 	void flush_animations();
 
-	void save_png(const IPicture*, StreamWrite*) const;
+	void save_png(const Image*, StreamWrite*) const;
 
 	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);

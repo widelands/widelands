@@ -64,7 +64,7 @@ private:
 	uint32_t    m_buth, m_fsize;
 	std::string m_fname;
 
-	std::map<std::string, const IPicture* > m_tribepics;
+	std::map<std::string, const Image* > m_tribepics;
 	std::map<std::string, std::string> m_tribenames;
 };
 

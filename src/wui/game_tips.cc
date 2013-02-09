@@ -106,7 +106,7 @@ void GameTips::stop() {
 
 void GameTips::show_tip(int32_t index) {
 	// try to load a background
-	const IPicture* pic_background = g_gr->imgcache().get(BG_IMAGE);
+	const Image* pic_background = g_gr->imgcache().get(BG_IMAGE);
 	assert(pic_background);
 
 	RenderTarget & rt = *g_gr->get_render_target();
@@ -119,7 +119,7 @@ void GameTips::show_tip(int32_t index) {
 	rt.blit(pt, pic_background);
 
 	Point center(tips_area.x + tips_area.w / 2, tips_area.y + tips_area.h / 2);
-	const IPicture* rendered_text = UI::g_fh1->render(as_game_tip(m_tips[index].text), tips_area.w);
+	const Image* rendered_text = UI::g_fh1->render(as_game_tip(m_tips[index].text), tips_area.w);
 	rt.blit(center - Point(rendered_text->width() / 2, rendered_text->height() / 2), rendered_text);
 
 	g_gr->update_rectangle(tips_area);

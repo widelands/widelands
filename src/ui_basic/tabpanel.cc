@@ -41,7 +41,7 @@ Tab::Tab
 	(Tab_Panel         * const parent,
 	 uint32_t            const id,
 	 std::string const &       name,
-	 const IPicture* gpic,
+	 const Image* gpic,
 	 std::string const &       gtooltip,
 	 Panel             * const gpanel)
 	:
@@ -77,7 +77,7 @@ void Tab::activate() {
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 const IPicture* background)
+	 const Image* background)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
@@ -87,7 +87,7 @@ Tab_Panel::Tab_Panel
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
-	 const IPicture* background)
+	 const Image* background)
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
@@ -149,7 +149,7 @@ void Tab_Panel::update_desired_size()
 */
 uint32_t Tab_Panel::add
 	(std::string const & name,
-	 const IPicture* pic,
+	 const Image* pic,
 	 Panel             * const panel,
 	 std::string const &       tooltip_text)
 {

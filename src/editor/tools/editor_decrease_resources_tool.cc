@@ -64,7 +64,7 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 			std::string str =
 			    map.world().get_resource(res)->get_editor_pic
 			    (mr.location().field->get_resources_amount());
-			const IPicture* pic = g_gr->imgcache().get(str);
+			const Image* pic = g_gr->imgcache().get(str);
 			map.overlay_manager().remove_overlay(mr.location(), pic);
 			if (!amount) {
 				mr.location().field->set_resources(0, 0);

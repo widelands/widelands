@@ -44,8 +44,8 @@ Panel * Panel::_g_mousein   = 0;
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::_g_allow_user_input = true;
-const IPicture* Panel::s_default_cursor = NULL;
-const IPicture* Panel::s_default_cursor_click = NULL;
+const Image* Panel::s_default_cursor = NULL;
+const Image* Panel::s_default_cursor_click = NULL;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -1119,7 +1119,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	}
 
 	static const uint32_t TIP_WIDTH_MAX = 360;
-	const IPicture* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
+	const Image* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
 	if (!rendered_text)
 		return;
 

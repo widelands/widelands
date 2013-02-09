@@ -41,7 +41,7 @@ Fullscreen_Menu_Base
 */
 
 struct Fullscreen_Menu_Base::Data {
-	const IPicture* res_background;
+	const Image* res_background;
 	UI::TextStyle textstyle_small;
 	UI::TextStyle textstyle_big;
 };

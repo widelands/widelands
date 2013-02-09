@@ -34,7 +34,7 @@
 #include <cstring>
 
 class RenderTarget;
-class IPicture;
+class Image;
 
 namespace UI {
 
@@ -275,7 +275,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	boost::scoped_ptr<const IPicture> _cache;
+	boost::scoped_ptr<const Image> _cache;
 	bool _needdraw;
 
 	/**
@@ -297,8 +297,8 @@ private:
 	static Panel * _g_mousegrab;
 	static Panel * _g_mousein;
 	static bool _g_allow_user_input;
-	static const IPicture* s_default_cursor;
-	static const IPicture* s_default_cursor_click;
+	static const Image* s_default_cursor;
+	static const Image* s_default_cursor_click;
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {

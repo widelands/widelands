@@ -23,9 +23,9 @@
 #include <boost/foreach.hpp>
 #include <boost/scoped_ptr.hpp>
 
+#include "image.h"
 #include "image_loader.h"
 #include "log.h"
-#include "picture.h"
 #include "surface.h"
 #include "surface_cache.h"
 
@@ -37,7 +37,7 @@ using namespace std;
 namespace  {
 
 // NOCOM(#sirver): documentation
-class FromDiskImage : public IPicture {
+class FromDiskImage : public Image {
 public:
 	FromDiskImage(const string& filename, SurfaceCache* surface_cache, IImageLoader* image_loader) :
 		filename_(filename),
@@ -48,7 +48,7 @@ public:
 			h_ = surf->height();
 		}
 
-	// Implements IPicture.
+	// Implements Image.
 	virtual uint16_t width() const {return w_; }
 	virtual uint16_t height() const {return h_;}
 	virtual const string& hash() const {return filename_;}
@@ -85,14 +85,14 @@ public:
 	virtual ~ImageCacheImpl();
 
 	// Implements ImageCache
-	const IPicture* insert(const IPicture*);
+	const Image* insert(const Image*);
 	bool has(const std::string& hash) const;
-	virtual const IPicture* get(const std::string& hash);
+	virtual const Image* get(const std::string& hash);
 
 private:
-	typedef map<string, const IPicture*> ImageMap;
+	typedef map<string, const Image*> ImageMap;
 
-	// hash of cached filename/picture pairs
+	// hash of cached filename/image pairs
 	ImageMap images_;
 
 	// None of these are owned.
@@ -111,13 +111,13 @@ bool ImageCacheImpl::has(const string& hash) const {
 	return images_.find(hash) != images_.end();
 }
 
-const IPicture* ImageCacheImpl::insert(const IPicture* pic) {
-	assert(!has(pic->hash()));
-	images_.insert(make_pair(pic->hash(), pic));
-	return pic;
+const Image* ImageCacheImpl::insert(const Image* image) {
+	assert(!has(image->hash()));
+	images_.insert(make_pair(image->hash(), image));
+	return image;
 }
 
-const IPicture* ImageCacheImpl::get(const string& hash) {
+const Image* ImageCacheImpl::get(const string& hash) {
 	ImageMap::const_iterator it = images_.find(hash);
 	if (it == images_.end()) {
 		images_.insert(make_pair(hash, new FromDiskImage(hash, surface_cache_, image_loader_)));

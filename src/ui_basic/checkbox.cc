@@ -33,7 +33,7 @@ namespace UI {
 Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
-	 const IPicture* pic,
+	 const Image* pic,
 	 std::string const &       tooltip_text)
 	:
 	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),

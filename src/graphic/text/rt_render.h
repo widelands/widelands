@@ -24,7 +24,7 @@
 #include <string>
 #include <set>
 
-#include "graphic/picture.h"
+#include "graphic/image.h"
 #include "rgbcolor.h"
 
 class SurfaceCache;

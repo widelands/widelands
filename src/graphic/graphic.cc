@@ -43,9 +43,9 @@
 
 #include "animation.h"
 #include "animation_gfx.h"
+#include "image.h"
 #include "image_loader_impl.h"
 #include "image_transformations.h"
-#include "picture.h"
 #include "render/gl_surface_screen.h"
 #include "render/sdl_surface.h"
 #include "rendertarget.h"
@@ -73,7 +73,6 @@ Graphic::Graphic
 	// NOCOM(#sirver): diagramm der abhängigkeiten zeichnen
 	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(new SurfaceCache()),
-	// NOCOM(#sirver): do not pass NULL, but solve cycle here
 	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
 {
 	ImageTransformations::initialize();
@@ -420,8 +419,8 @@ void Graphic::flush_animations() {
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const {
-	save_png_(*pic->surface(), sw);
+void Graphic::save_png(const Image* image, StreamWrite * sw) const {
+	save_png_(*image->surface(), sw);
 }
 void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 {
@@ -583,7 +582,7 @@ void Graphic::get_animation_size
 		log("WARNING: Animation %u does not exist\n", anim);
 		w = h = 0;
 	} else {
-		const IPicture& frame =
+		const Image& frame =
 			gfx->get_frame((time / data.frametime) % gfx->nr_frames());
 		w = frame.width();
 		h = frame.height();

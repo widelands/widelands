@@ -20,8 +20,6 @@
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
-// NOCOM(#sirver): check includes
-#include "graphic/image_cache.h"
 #include "graphic/render/sdl_helper.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"

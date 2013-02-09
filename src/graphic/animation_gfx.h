@@ -25,7 +25,7 @@
 #include "point.h"
 
 class AnimationData;
-class IPicture;
+class Image;
 class ImageCache;
 struct RGBColor;
 
@@ -34,12 +34,12 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 
 	size_t nr_frames() const {return m_frames.size();}
 	const Point& hotspot() const throw () {return m_hotspot;}
-	const IPicture& get_frame(size_t i, const RGBColor& playercolor);
-	const IPicture& get_frame(size_t i) const;
+	const Image& get_frame(size_t i, const RGBColor& playercolor);
+	const Image& get_frame(size_t i) const;
 
 private:
-	std::vector<const IPicture*> m_frames;
-	std::vector<const IPicture*> m_pcmasks;
+	std::vector<const Image*> m_frames;
+	std::vector<const Image*> m_pcmasks;
 	Point m_hotspot;
 	bool m_hasplrclrs;
 	ImageCache* const image_cache_; // Not owned.

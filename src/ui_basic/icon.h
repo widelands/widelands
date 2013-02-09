@@ -31,13 +31,13 @@ struct Icon : public Panel {
 	Icon
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 const IPicture* picture_id);
+		 const Image* picture_id);
 
-	void setIcon(const IPicture* picture_id);
+	void setIcon(const Image* picture_id);
 	virtual void draw(RenderTarget &);
 
 private:
-	const IPicture* m_pic;
+	const Image* m_pic;
 	int32_t   m_w, m_h;
 };
 

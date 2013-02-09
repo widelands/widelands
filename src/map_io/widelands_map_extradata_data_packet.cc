@@ -75,7 +75,7 @@ throw (_wexception)
 					if (!surf)
 						continue; //  Illegal pic. Skip it.
 
-					const IPicture* image =
+					const Image* image =
 					g_gr->imgcache().insert
 					(new_in_memory_image
 					 (std::string("map:") + FileSystem::FS_Filename(pname->c_str()), Surface::create(surf)));

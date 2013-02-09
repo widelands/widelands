@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PICTURE_H
-#define PICTURE_H
+#ifndef IMAGE_H
+#define IMAGE_H
 
 #include <stdint.h>
 #include <string>
@@ -30,17 +30,15 @@
  * operation.
  */
 class Surface;
-// TODO(#sirver): rename to Image ?
-// NOCOM(#sirver): move to image_cache!
-class IPicture : boost::noncopyable {
+
+class Image : boost::noncopyable {
 public:
-	virtual ~IPicture() {}
+	virtual ~Image() {}
 
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
 
-	// NOCOM(#sirver): this somewhat leaks the implementation.
-	// NOCOM(#sirver): Check if some casts become unnecessary now.
+	// Internal functions needed for caching.
 	virtual Surface* surface() const = 0;
 	virtual const std::string& hash() const = 0;
 };

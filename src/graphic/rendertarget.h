@@ -21,7 +21,7 @@
 #define RENDERTARGET_H
 
 #include "compositemode.h"
-#include "picture.h"
+#include "image.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
@@ -63,9 +63,9 @@ public:
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
 
-	void blit(const Point& dst, const IPicture* picture, Composite cm = CM_Normal);
-	void blitrect(Point dst, const IPicture* picture, Rect src, Composite cm = CM_Normal);
-	void tile(Rect, const IPicture* picture, Point ofs, Composite cm = CM_Normal);
+	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal);
+	void blitrect(Point dst, const Image* image, Rect src, Composite cm = CM_Normal);
+	void tile(Rect, const Image* image, Point ofs, Composite cm = CM_Normal);
 
 	void drawanim
 		(Point                     dst,
@@ -92,7 +92,7 @@ public:
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, const IPicture* src, Rect srcrc, Composite cm = CM_Normal);
+	void doblit(Point dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
 	Surface* m_surface;

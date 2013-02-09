@@ -30,7 +30,7 @@
 
 class RenderTarget;
 class FileSystem;
-class IPicture;
+class Image;
 class Graphic;
 
 namespace UI {
@@ -55,7 +55,7 @@ public:
 	 * ownership remains with this class.
 	 * // NOCOM(#sirver): comment
 	 */
-	virtual const IPicture* render(const std::string& text, uint16_t w = 0) = 0;
+	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
 };
 
 // NOCOM(#sirver): comment

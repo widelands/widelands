@@ -37,8 +37,7 @@ using namespace std;
 
 namespace {
 
-// This table is used by create_grayed_out_pic()
-// to map colors to grayscle
+// This table is used to transform colors.
 uint32_t luminance_table_r[0x100];
 uint32_t luminance_table_g[0x100];
 uint32_t luminance_table_b[0x100];
@@ -80,7 +79,7 @@ SDL_Surface* extract_sdl_surface(Surface & surf, Rect srcrect)
 }
 
 /**
- * Produces a resized version of the specified picture
+ * Produces a resized version of the specified image
  *
  * Might return same id if dimensions are the same
  */
@@ -145,10 +144,10 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 }
 
 /**
- * Create a grayed version of the given picture.
+ * Create a grayed version of the given image.
  *
- * @param picture to be grayed out
- * @return the gray version of the picture
+ * @param image to be grayed out
+ * @return the gray version of the image
  * // NOCOM(#sirver): docu
  */
 Surface* gray_out_surface(Surface* surf) {
@@ -169,7 +168,7 @@ Surface* gray_out_surface(Surface* surf) {
 
 			color.set(origfmt, surf->get_pixel(x, y));
 
-			//  Halve the opacity to give some difference for pictures that are
+			//  Halve the opacity to give some difference for image that are
 			//  grayscale to begin with.
 			color.a >>= 1;
 
@@ -190,12 +189,12 @@ Surface* gray_out_surface(Surface* surf) {
 }
 
 /**
- * Creates an picture with changed luminosity from the given picture.
+ * Creates an image with changed luminosity from the given image.
  *
- * @param picture to modify
+ * @param image to modify
  * @param factor the factor the luminosity should be changed by
  * @param half_alpha whether the opacity should be halved or not
- * @return a new picture with 50% luminosity
+ * @return a new image with 50% luminosity
  * // NOCOM(#sirver): docu
  */
 Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha) {
@@ -294,13 +293,13 @@ Surface* make_playerclr_surface(Surface& orig_surface, Surface& pcmask_surface, 
 }
 
 // NOCOM(#sirver): docu
-class DerivedImage : public IPicture {
+class DerivedImage : public Image {
 public:
-	DerivedImage(const string& hash, const IPicture& original, SurfaceCache* surface_cache) :
+	DerivedImage(const string& hash, const Image& original, SurfaceCache* surface_cache) :
 		hash_(hash), original_(original), surface_cache_(surface_cache) {}
 	virtual ~DerivedImage() {}
 
-	// Implements IPicture.
+	// Implements Image.
 	virtual uint16_t width() const {return original_.width();}
 	virtual uint16_t height() const {return original_.height();}
 	virtual const string& hash() const {return hash_;}
@@ -318,7 +317,7 @@ public:
 
 protected:
 	const string hash_;
-	const IPicture& original_;
+	const Image& original_;
 	SurfaceCache* const surface_cache_;  // not owned
 };
 
@@ -327,7 +326,7 @@ class ResizedImage : public DerivedImage {
 public:
 	// NOCOM(#sirver): reconsider arguments.
 	ResizedImage
-		(const string& hash, const IPicture& original,
+		(const string& hash, const Image& original,
 		 SurfaceCache* surface_cache, uint16_t w, uint16_t h)
 		: DerivedImage(hash, original, surface_cache), w_(w), h_(h) {
 			assert(w != original.width() || h != original.height());
@@ -347,10 +346,10 @@ private:
 	uint16_t w_, h_;
 };
 
-// NOCOM(#sirver): Mix between Pic and Image again.
-class GrayedOutPic : public DerivedImage {
+// NOCOM(#sirver): docu
+class GrayedOutImage : public DerivedImage {
 public:
-	GrayedOutPic(const string& hash, const IPicture& original, SurfaceCache* surface_cache) :
+	GrayedOutImage(const string& hash, const Image& original, SurfaceCache* surface_cache) :
 		DerivedImage(hash, original, surface_cache)
 	{}
 
@@ -361,10 +360,10 @@ public:
 };
 
 // NOCOM(#sirver): docu
-class ChangeLuminosityPic : public DerivedImage {
+class ChangeLuminosityImage : public DerivedImage {
 public:
-	ChangeLuminosityPic
-		(const string& hash, const IPicture& original,
+	ChangeLuminosityImage
+		(const string& hash, const Image& original,
 		 SurfaceCache* surface_cache, float factor, bool halve_alpha)
 		: DerivedImage(hash, original, surface_cache),
 		  factor_(factor),
@@ -385,8 +384,8 @@ private:
 class PlayerColoredImage : public DerivedImage {
 public:
 	PlayerColoredImage
-		(const string& hash, const IPicture& original,
-		 SurfaceCache* surface_cache, const RGBColor& color, const IPicture& mask)
+		(const string& hash, const Image& original,
+		 SurfaceCache* surface_cache, const RGBColor& color, const Image& mask)
 		: DerivedImage(hash, original, surface_cache), color_(color), mask_(mask)
 		{}
 
@@ -397,7 +396,7 @@ public:
 
 private:
 	const RGBColor& color_;
-	const IPicture& mask_;
+	const Image& mask_;
 };
 
 
@@ -406,7 +405,7 @@ private:
 namespace ImageTransformations {
 
 void initialize() {
-	// Initialize the table used to create grayed pictures
+	// Initialize the table used to create grayed image
 	for
 		(uint32_t i = 0, r = 0, g = 0, b = 0;
 		 i < 0x100;
@@ -418,7 +417,7 @@ void initialize() {
 		}
 }
 
-const IPicture* resize(const IPicture* original, uint16_t w, uint16_t h) {
+const Image* resize(const Image* original, uint16_t w, uint16_t h) {
 	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();
 	if (g_gr->imgcache().has(new_hash))
 		return g_gr->imgcache().get(new_hash);
@@ -426,25 +425,25 @@ const IPicture* resize(const IPicture* original, uint16_t w, uint16_t h) {
 		g_gr->imgcache().insert(new ResizedImage(new_hash, *original, &g_gr->surface_cache(), w, h));
 }
 
-const IPicture* gray_out(const IPicture* original) {
+const Image* gray_out(const Image* original) {
 	const string new_hash = original->hash() + ":greyed_out";
 	if (g_gr->imgcache().has(new_hash))
 		return g_gr->imgcache().get(new_hash);
 	return
-		g_gr->imgcache().insert(new GrayedOutPic(new_hash, *original, &g_gr->surface_cache()));
+		g_gr->imgcache().insert(new GrayedOutImage(new_hash, *original, &g_gr->surface_cache()));
 }
 
-const IPicture* change_luminosity(const IPicture* original, float factor, bool halve_alpha) {
+const Image* change_luminosity(const Image* original, float factor, bool halve_alpha) {
 	const string new_hash =
 		(boost::format("%s:%i:%i") % original->hash() % static_cast<int>(factor * 1000) % halve_alpha).str();
 	if (g_gr->imgcache().has(new_hash))
 		return g_gr->imgcache().get(new_hash);
 	return
 		g_gr->imgcache().insert
-			(new ChangeLuminosityPic(new_hash, *original, &g_gr->surface_cache(), factor, halve_alpha));
+			(new ChangeLuminosityImage(new_hash, *original, &g_gr->surface_cache(), factor, halve_alpha));
 }
 
-const IPicture* player_colored(const RGBColor& clr, const IPicture* original, const IPicture* mask) {
+const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask) {
 	const string new_hash =
 		(boost::format("%s:%02x%02x%02x") % original->hash() % clr.r % clr.g % clr.b).str();
 	if (g_gr->imgcache().has(new_hash))

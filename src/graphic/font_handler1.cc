@@ -24,15 +24,14 @@
 #include "wexception.h"
 
 #include "graphic.h"
+#include "image.h"
 #include "image_cache.h"
-#include "picture.h"
 #include "rendertarget.h"
 #include "surface.h"
 #include "surface_cache.h"
 #include "text/rt_errors.h"
 #include "text/rt_render.h"
 #include "text/sdl_ttf_font.h"
-// NOCOM(#sirver): check includes
 
 #include "font_handler1.h"
 
@@ -41,7 +40,7 @@ using namespace boost;
 
 namespace {
 
-class RTImage : public IPicture {
+class RTImage : public Image {
 public:
 	RTImage
 		(const string& hash, SurfaceCache* surface_cache, RT::IRenderer*
@@ -52,7 +51,7 @@ public:
 		  text_(text), width_(width)
 	{}
 
-	// Implements IPicture.
+	// Implements Image.
 	virtual uint16_t width() const {return surface()->width();}
 	virtual uint16_t height() const {return surface()->height();}
 	virtual const string& hash() const {return hash_;}
@@ -96,7 +95,7 @@ public:
 		 uint16_t = 0,
 		 Align = Align_TopLeft);
 
-	const IPicture* render(const string& text, uint16_t w = 0);
+	const Image* render(const string& text, uint16_t w = 0);
 
 private:
 	SurfaceCache* const surface_cache_;  // not owned
@@ -107,7 +106,7 @@ private:
 Font_Handler1::~Font_Handler1() {
 }
 
-const IPicture* Font_Handler1::render(const string& text, uint16_t w) {
+const Image* Font_Handler1::render(const string& text, uint16_t w) {
 	const string hash = boost::lexical_cast<string>(w) + text;
 
 	if (image_cache_->has(hash))
@@ -116,14 +115,13 @@ const IPicture* Font_Handler1::render(const string& text, uint16_t w) {
 	return image_cache_->insert(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
 }
 
-// NOCOM(#sirver): get rid of this function first.
 void Font_Handler1::draw_text
 		(RenderTarget & dst, Point dstpoint, const std::string & text, uint16_t w, Align align)
 {
 	if (text.empty())
 		return;
 
-	const IPicture* p = render(text, w);
+	const Image* p = render(text, w);
 	if (!p)
 		return;
 

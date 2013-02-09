@@ -103,7 +103,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
-			const IPicture* pic =
+			const Image* pic =
 			    g_gr->imgcache().get
 			    (world.get_resource(res)->get_editor_pic
 			     (mr.location().field->get_resources_amount()));

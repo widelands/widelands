@@ -51,7 +51,7 @@ Slider::Slider
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const int32_t min_value, const int32_t max_value, const int32_t value,
-	 const IPicture* background_picture_id,
+	 const Image* background_picture_id,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled,
@@ -552,7 +552,7 @@ DiscreteSlider::DiscreteSlider
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const std::vector<std::string> labels_in,
 	 uint32_t m_value,
-	 const IPicture* background_picture_id,
+	 const Image* background_picture_id,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled)

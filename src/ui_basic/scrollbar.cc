@@ -249,7 +249,7 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 	dst.tile(r, m_pic_buttons, Point(get_x(), get_y()));
 
 	// Draw the picture
-	const IPicture* pic = NULL;
+	const Image* pic = NULL;
 	if (area == Minus)
 		pic = m_pic_minus;
 	else if (area == Plus)

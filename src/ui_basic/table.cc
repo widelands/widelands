@@ -271,7 +271,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			uint32_t const curw      = column.width;
 			Align    const alignment = column.alignment;
 
-			const IPicture* entry_picture = er.get_picture(i);
+			const Image* entry_picture = er.get_picture(i);
 			std::string const &       entry_string  = er.get_string (i);
 			uint32_t picw = 0;
 			uint32_t pich = 0;
@@ -586,7 +586,7 @@ Table<void *>::Entry_Record::Entry_Record(void * const e)
 {}
 
 void Table<void *>::Entry_Record::set_picture
-	(uint8_t const col, const IPicture* pic, std::string const & str)
+	(uint8_t const col, const Image* pic, std::string const & str)
 {
 	assert(col < m_data.size());
 
@@ -601,7 +601,7 @@ void Table<void *>::Entry_Record::set_string
 	m_data.at(col).d_picture = NULL;
 	m_data.at(col).d_string  = str;
 }
-const IPicture* Table<void *>::Entry_Record::get_picture(uint8_t const col) const
+const Image* Table<void *>::Entry_Record::get_picture(uint8_t const col) const
 {
 	assert(col < m_data.size());
 

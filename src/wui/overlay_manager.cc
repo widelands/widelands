@@ -155,7 +155,7 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
  */
 void Overlay_Manager::register_overlay
 	(Widelands::TCoords<> const c,
-	 const IPicture* pic,
+	 const Image* pic,
 	 int32_t              const level,
 	 Point                      hotspot,
 	 Job_Id               const jobid)
@@ -213,7 +213,7 @@ void Overlay_Manager::register_overlay
  * remove one (or many) overlays from a node or triangle
  */
 void Overlay_Manager::remove_overlay
-	(Widelands::TCoords<> const c, const IPicture* pic)
+	(Widelands::TCoords<> const c, const Image* pic)
 {
 	assert(c.t <= 2);
 

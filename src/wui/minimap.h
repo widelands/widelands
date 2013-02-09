@@ -77,7 +77,7 @@ private:
 	private:
 		Interactive_Base & m_ibase;
 		int32_t                m_viewx, m_viewy;
-		const IPicture* m_pic_map_spot;
+		const Image* m_pic_map_spot;
 	public:
 		int8_t * m_flags;
 	};

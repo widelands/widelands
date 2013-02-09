@@ -126,7 +126,7 @@ void Editor_Interactive::register_overlays() {
 	iterate_player_numbers(p, nr_players) {
 		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const IPicture* pic = g_gr->imgcache().get(fname);
+			const Image* pic = g_gr->imgcache().get(fname);
 			assert(pic);
 			map.overlay_manager().register_overlay
 				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));

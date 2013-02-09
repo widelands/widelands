@@ -412,7 +412,7 @@ void GameView::rendermap
 								if (csinf->totaltime)
 									lines /= csinf->totaltime;
 								assert(h * cur_frame <= lines);
-								lines -= h * cur_frame; //  This won't work if pictures have various sizes.
+								lines -= h * cur_frame; //  This won't work if images have various sizes.
 
 								if (cur_frame) // not the first frame
 									// draw the prev frame from top to where next image will be drawing
@@ -420,7 +420,7 @@ void GameView::rendermap
 										(f_pos, anim, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
 								else if (csinf->was) {
 									// Is the first frame, but there was another building here before,
-									// get its last build picture and draw it instead.
+									// get its last build images and draw it instead.
 									uint32_t a;
 									try {
 										a = csinf->was->get_animation("unoccupied");

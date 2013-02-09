@@ -148,7 +148,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 GameSettingsProvider * const settings,
 		 NetworkPlayerSettingsBackend * const npsb,
 		 UI::Font * font,
-		 std::map<std::string, const IPicture* > & tp,
+		 std::map<std::string, const Image* > & tp,
 		 std::map<std::string, std::string> & tn)
 		 :
 		 UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
@@ -376,7 +376,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	GameSettingsProvider         * const s;
 	NetworkPlayerSettingsBackend * const n;
 	uint8_t                        const m_id;
-	std::map<std::string, const IPicture* >   & m_tribepics;
+	std::map<std::string, const Image* >   & m_tribepics;
 	std::map<std::string, std::string> & m_tribenames;
 };
 

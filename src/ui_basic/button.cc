@@ -23,8 +23,8 @@
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/image.h"
 #include "graphic/image_transformations.h"
-#include "graphic/picture.h"
 #include "graphic/rendertarget.h"
 #include "log.h"
 #include "wlapplication.h"
@@ -36,7 +36,7 @@ Button::Button //  for textual buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 const IPicture* bg_pic,
+	 const Image* bg_pic,
 	 std::string const & title_text,
 	 std::string const & tooltip_text,
 	 bool const _enabled, bool const flat)
@@ -69,8 +69,8 @@ Button::Button //  for pictorial buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const IPicture* bg_pic,
-	 const IPicture* fg_pic,
+	 const Image* bg_pic,
+	 const Image* fg_pic,
 	 const std::string & tooltip_text,
 	 bool const _enabled, bool const flat)
 	:
@@ -105,7 +105,7 @@ Button::~Button()
 /**
  * Sets a new picture for the Button.
 */
-void Button::set_pic(const IPicture* pic)
+void Button::set_pic(const Image* pic)
 {
 	m_title.clear();
 

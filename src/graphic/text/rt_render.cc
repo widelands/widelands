@@ -437,13 +437,13 @@ public:
 	virtual bool is_expanding() {return m_expanding;}
 	virtual void set_w(uint16_t w) {m_w = w;}
 
-	void set_background(const IPicture* s) {
+	void set_background(const Image* s) {
 		m_bg = s; m_h = s->height();
 	}
 
 private:
 	uint16_t m_w, m_h;
-	const IPicture* m_bg;  // not owned
+	const Image* m_bg;  // not owned
 	bool m_expanding;
 };
 
@@ -517,7 +517,7 @@ public:
 		m_bg_clr = clr;
 		m_bg_clr_set = true;
 	}
-	void set_background(const IPicture* img) {m_bg_img = img;}
+	void set_background(const Image* img) {m_bg_img = img;}
 	void set_nodes_to_render(vector<RenderNode*>& n) {m_nodes_to_render = n;}
 	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, const string& s) {
 		Reference r = {Rect(x, y, w, h), s};
@@ -530,13 +530,13 @@ private:
 	Borders m_margin;
 	RGBColor m_bg_clr;
 	bool m_bg_clr_set;
-	const IPicture* m_bg_img; // Not owned.
+	const Image* m_bg_img; // Not owned.
 	vector<Reference> m_refs;
 };
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle& ns, const IPicture& image) : RenderNode(ns), m_image(image) {
+	ImgRenderNode(NodeStyle& ns, const Image& image) : RenderNode(ns), m_image(image) {
 	}
 
 	virtual uint16_t width() {return m_image.width();}
@@ -545,7 +545,7 @@ public:
 	virtual Surface* render(SurfaceCache* surface_cache);
 
 private:
-	const IPicture& m_image;
+	const Image& m_image;
 };
 
 Surface* ImgRenderNode::render(SurfaceCache* surface_cache) {
@@ -790,7 +790,7 @@ public:
 
 private:
 	string m_fill_text;
-	const IPicture* m_bg;
+	const Image* m_bg;
 	uint16_t m_space;
 };
 

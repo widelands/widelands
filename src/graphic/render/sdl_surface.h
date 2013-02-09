@@ -40,7 +40,7 @@ public:
 	{}
 	virtual ~SDLSurface();
 
-	// Implements IPicture
+	// Implements Image
 	virtual uint16_t width() const {return m_w;}
 	virtual uint16_t height() const {return m_h;}
 

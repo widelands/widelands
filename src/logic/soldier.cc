@@ -576,10 +576,10 @@ void Soldier::draw_info_icon
 	uint32_t w;
 	w = SOLDIER_HP_BAR_WIDTH;
 
-	const IPicture* hppic = get_hp_level_pic();
-	const IPicture* attackpic = get_attack_level_pic();
-	const IPicture* defensepic = get_defense_level_pic();
-	const IPicture* evadepic = get_evade_level_pic();
+	const Image* hppic = get_hp_level_pic();
+	const Image* attackpic = get_attack_level_pic();
+	const Image* defensepic = get_defense_level_pic();
+	const Image* evadepic = get_evade_level_pic();
 
 	uint16_t hpw = hppic->width();
 	uint16_t hph = hppic->height();
@@ -638,10 +638,10 @@ void Soldier::calc_info_icon_size
 {
 	const Soldier_Descr * soldierdesc = static_cast<const Soldier_Descr *>
 		(tribe.get_worker_descr(tribe.worker_index("soldier")));
-	const IPicture* hppic = soldierdesc->get_hp_level_pic(0);
-	const IPicture* attackpic = soldierdesc->get_attack_level_pic(0);
-	const IPicture* defensepic = soldierdesc->get_defense_level_pic(0);
-	const IPicture* evadepic = soldierdesc->get_evade_level_pic(0);
+	const Image* hppic = soldierdesc->get_hp_level_pic(0);
+	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
+	const Image* defensepic = soldierdesc->get_defense_level_pic(0);
+	const Image* evadepic = soldierdesc->get_evade_level_pic(0);
 	uint16_t hpw = hppic->width();
 	uint16_t hph = hppic->height();
 	uint16_t atw = attackpic->width();

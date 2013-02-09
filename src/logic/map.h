@@ -40,7 +40,7 @@
 
 struct Overlay_Manager;
 struct S2_Map_Loader;
-class IPicture;
+class Image;
 
 namespace Widelands {
 
@@ -404,7 +404,7 @@ private:
 		enum Type {
 			PIC,
 		};
-		const IPicture* data;
+		const Image* data;
 		std::string filename;
 		Type        type;
 	};

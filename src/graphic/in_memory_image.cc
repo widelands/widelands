@@ -19,7 +19,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
-#include "picture.h"
+#include "image.h"
 #include "surface.h"
 
 #include "in_memory_image.h"
@@ -27,12 +27,12 @@
 using namespace std;
 
 // NOCOM(#sirver): documnent me
-class InMemoryImage : public IPicture {
+class InMemoryImage : public Image {
 public:
 	InMemoryImage(const string& hash, Surface* surf) :
 		hash_(hash), surf_(surf) {}
 
-	// Implements IPicture.
+	// Implements Image.
 	virtual uint16_t width() const {return surf_->width();}
 	virtual uint16_t height() const {return surf_->height();}
 	virtual const string& hash() const {return hash_;}
@@ -43,7 +43,7 @@ private:
 	boost::scoped_ptr<Surface> surf_;
 };
 
-const IPicture* new_in_memory_image(const string& hash, Surface* surf) {
+const Image* new_in_memory_image(const string& hash, Surface* surf) {
 	return new InMemoryImage(hash, surf);
 }
 

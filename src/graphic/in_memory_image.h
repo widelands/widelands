@@ -22,10 +22,10 @@
 
 #include <string>
 
-class IPicture;
+class Image;
 class Surface;
 
-const IPicture* new_in_memory_image(const std::string& hash, Surface* surf);
+const Image* new_in_memory_image(const std::string& hash, Surface* surf);
 
 #endif /* end of include guard: IN_MEMORY_IMAGE_H */
 

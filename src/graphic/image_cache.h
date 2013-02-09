@@ -24,45 +24,36 @@
 
 #include <boost/utility.hpp>
 
-#include "picture.h"
+#include "image.h"
 
 class IImageLoader;
 class RGBColor;
 class Surface;
 class SurfaceCache;
 
-// NOCOM(#sirver): replace permanent image through a function that takes a IPicture which
-// is an image implementation.
-
-// NOCOM(#sirver): check comment
 // This class can load and cache images, so that they are already available
 // when requested the next time. When another part of the program generates a
-// new picture, it can also choose to insert it into this cache. The pictures
-// in the cache are associated with a Picture Module. When a part of the
-// program knows that it no longer needs pictures from a certain module, it can
+// new image, it can also choose to insert it into this cache. The images
+// in the cache are associated with a Image Module. When a part of the
+// program knows that it no longer needs images from a certain module, it can
 // call flush to delete the images from the cache. The cache holds ownership
 // over each image it contains.
+// // NOCOM(#sirver): no longer correct
 class ImageCache : boost::noncopyable {
 public:
 	virtual ~ImageCache() {}
 
-	/// Inserts this entry into the ImageCache. Overwrites existing entries /
-	//without freeing the image first, so be careful. Returns the picture just
-	//inserted / for convenience.
-	// // NOCOM(#sirver): ownership is taken.
-	// // NOCOM(#sirver): all methods return object and ownership is retained
-	// NOCOM(#sirver): maybe new_temporary_picture that might get deleted for rich text.
-
 
 	// NOCOM(#sirver): comment
-	virtual const IPicture* insert(const IPicture*) = 0;
-	virtual bool has(const std::string& hash) const = 0;
-
 	/// Returns the image associated with the given hash. If no image by this hash is known,
 	/// it will try to load one from disk with the filename = hash. If this fails, it will throw an
 	/// error.
 	// NOCOM(#sirver): document this
-	virtual const IPicture* get(const std::string& hash) = 0;
+	// // NOCOM(#sirver): ownership is taken
+	virtual const Image* insert(const Image*) = 0;
+	virtual bool has(const std::string& hash) const = 0;
+	virtual const Image* get(const std::string& hash) = 0;
+
 };
 
 // NOCOM(#sirver): Should not take owernshi
