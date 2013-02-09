@@ -20,6 +20,7 @@
 #include "singleplayer.h"
 
 #include "constants.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 
 Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer() :

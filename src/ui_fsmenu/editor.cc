@@ -20,6 +20,7 @@
 #include "editor.h"
 
 #include "constants.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 
 Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :

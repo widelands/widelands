@@ -19,19 +19,20 @@
 
 #include "buildingconfirm.h"
 #include "game_debug_ui.h"
+#include "graphic/graphic.h"
 #include "graphic/picture.h"
 #include "graphic/rendertarget.h"
 #include "interactive_player.h"
+#include "logic/dismantlesite.h"
 #include "logic/maphollowregion.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
-#include "logic/dismantlesite.h"
+#include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
-#include "ui_basic/helpwindow.h"
 
 #include "buildingwindow.h"
 
@@ -265,7 +266,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->imgcache().get("pics/but4.png"),
-				 g_gr->imgcache().get( "pics/workarea3cumulative.png"),
+				 g_gr->imgcache().get("pics/workarea3cumulative.png"),
 				 _("Hide workarea"));
 			m_toggle_workarea->sigclicked.connect
 				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
@@ -280,7 +281,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				new UI::Button
 					(capsbuttons, "debug", 0, 0, 34, 34,
 					 g_gr->imgcache().get("pics/but4.png"),
-					 g_gr->imgcache().get( pic_debug),
+					 g_gr->imgcache().get(pic_debug),
 					 _("Debug"));
 			debugbtn->sigclicked.connect(boost::bind(&Building_Window::act_debug, boost::ref(*this)));
 			capsbuttons->add

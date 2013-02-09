@@ -29,6 +29,7 @@
 #include "animation.h"
 #include "animation_gfx.h"
 #include "graphic.h"
+#include "image_transformations.h"
 #include "surface.h"
 
 #include "rendertarget.h"
@@ -305,23 +306,12 @@ void RenderTarget::drawstatic
 	}
 
 	// Get the frame and its data
-	const IPicture& frame =
-		player ?
-		gfx->get_frame
-			(0, player->get_playercolor())
-		:
-		gfx->get_frame
-			(0);
-
-	// NOCOM(#sirver): this is currently broken
-	// const IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
+	const IPicture& frame = player ? gfx->get_frame(0, player->get_playercolor()) : gfx->get_frame(0);
+	const IPicture* dark_frame = ImageTransformations::change_luminosity(&frame, 1.22, true);
 
 	dst -= Point(frame.width() / 2, frame.height() / 2);
-
 	Rect srcrc(Point(0, 0), frame.width(), frame.height());
-
-	// NOCOM(#sirver): this is currently broken
-	// doblit(Rect(dst, 0, 0), dark_frame, srcrc);
+	doblit(Rect(dst, 0, 0), dark_frame, srcrc);
 }
 
 /**

@@ -26,7 +26,6 @@
 #include <boost/signals/trackable.hpp>
 
 #include "point.h"
-#include "graphic/graphic.h"
 
 #include <SDL_keyboard.h>
 
@@ -35,6 +34,7 @@
 #include <cstring>
 
 class RenderTarget;
+class IPicture;
 
 namespace UI {
 
@@ -275,7 +275,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	boost::scoped_ptr<IPicture> _cache;
+	boost::scoped_ptr<const IPicture> _cache;
 	bool _needdraw;
 
 	/**

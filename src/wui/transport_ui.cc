@@ -19,11 +19,12 @@
 
 #include "economy/economy.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "interactive_gamebase.h"
 #include "logic/item_ware_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "graphic/rendertarget.h"
 #include "logic/tribe.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"

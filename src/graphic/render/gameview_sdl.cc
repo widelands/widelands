@@ -31,7 +31,6 @@
 #include "logic/map.h"
 #include "logic/player.h"
 
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "graphic/texture.h"

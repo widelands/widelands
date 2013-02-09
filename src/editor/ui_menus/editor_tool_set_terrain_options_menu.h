@@ -41,7 +41,7 @@ struct Editor_Tool_Set_Terrain_Options_Menu : public Editor_Tool_Options_Menu {
 private:
 	// When we are using an offscreen surface, we have to delete it,
 	// when we are closed. So we keep a pointer around.
-	std::vector<IPicture*>  offscreen_images_;
+	std::vector<const IPicture*>  offscreen_images_;
 	UI::Textarea                m_cur_selection;
 	Editor_Set_Terrain_Tool   & m_tool;
 	void selected(int32_t, bool);

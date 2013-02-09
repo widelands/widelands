@@ -29,6 +29,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"

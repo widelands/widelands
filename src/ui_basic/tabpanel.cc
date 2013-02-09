@@ -21,7 +21,6 @@
 
 #include "mouse_constants.h"
 
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 
 #include "compile_assert.h"

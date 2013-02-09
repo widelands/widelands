@@ -26,8 +26,6 @@
 #include "logic/wareworker.h"
 #include "logic/tribe.h"
 
-#include "graphic/graphic.h"
-
 #include "ui_basic/textarea.h"
 
 #include <vector>

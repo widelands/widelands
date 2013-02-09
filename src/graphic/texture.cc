@@ -23,7 +23,6 @@
 
 #include "io/filesystem/layered_filesystem.h"
 #include "io/fileread.h"
-#include "graphic.h"
 
 #include "log.h"
 #include "constants.h"
@@ -32,6 +31,7 @@
 
 #include "texture.h"
 
+extern bool g_opengl;
 
 using namespace std;
 

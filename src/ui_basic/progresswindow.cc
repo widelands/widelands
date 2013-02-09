@@ -22,6 +22,8 @@
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -65,8 +67,7 @@ void ProgressWindow::draw_background
 
 	if (!m_background_pic or xres != m_xres or yres != m_yres) {
 		// (Re-)Load background graphics
-		m_background_pic = g_gr->imgcache().resize(
-				g_gr->imgcache().get(m_background), xres, yres);
+		m_background_pic = ImageTransformations::resize(g_gr->imgcache().get(m_background), xres, yres);
 
 		const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 		m_label_rectangle.x = xres / 4;

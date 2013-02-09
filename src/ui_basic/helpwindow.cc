@@ -23,13 +23,14 @@
 #include "scripting/scripting.h"
 #include "io/filesystem/layered_filesystem.h"
 
-#include "log.h"
-#include "constants.h"
-#include "i18n.h"
-#include "window.h"
 #include "button.h"
+#include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "log.h"
+#include "window.h"
 #include "wlapplication.h"
 
 #include "helpwindow.h"

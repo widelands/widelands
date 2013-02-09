@@ -20,6 +20,7 @@
 #include <SDL_image.h>
 
 #include "graphic/graphic.h"
+#include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -74,9 +75,10 @@ throw (_wexception)
 					if (!surf)
 						continue; //  Illegal pic. Skip it.
 
-					const IPicture* image = g_gr->imgcache().new_permanent_picture(
-							std::string("map:") +
-								FileSystem::FS_Filename(pname->c_str()), Surface::create(surf));
+					const IPicture* image =
+					g_gr->imgcache().insert
+					(new_in_memory_image
+					 (std::string("map:") + FileSystem::FS_Filename(pname->c_str()), Surface::create(surf)));
 
 					//  OK, the pic is now known to the game. But when the game is
 					//  saved, this data has to be regenerated.

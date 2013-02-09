@@ -23,6 +23,8 @@
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"
+#include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "interactive_gamebase.h"
 #include "logic/player.h"
@@ -61,9 +63,7 @@ m_show_only(show_only)
 	set_tooltip(ware.descname().c_str());
 
 	m_icon = ware.icon();
-
-	m_icon_grey = g_gr->imgcache().change_luminosity(
-			g_gr->imgcache().gray_out(m_icon), 0.65, false);
+	m_icon_grey = ImageTransformations::change_luminosity(ImageTransformations::gray_out(m_icon), 0.65, false);
 
 	uint16_t ph = m_max_fill_indicator->height();
 
@@ -172,16 +172,13 @@ void WaresQueueDisplay::update_priority_buttons()
 	pos.y = Border + (m_total_height - 2 * Border - 3 * PriorityButtonSize) / 2;
 
 	m_priority_radiogroup->add_button
-		(this, pos, g_gr->imgcache().get( pic_priority_high),
-		 _("Highest priority"));
+		(this, pos, g_gr->imgcache().get(pic_priority_high), _("Highest priority"));
 	pos.y += PriorityButtonSize;
 	m_priority_radiogroup->add_button
-			(this, pos, g_gr->imgcache().get( pic_priority_normal),
-			 _("Normal priority"));
+			(this, pos, g_gr->imgcache().get(pic_priority_normal), _("Normal priority"));
 	pos.y += PriorityButtonSize;
 	m_priority_radiogroup->add_button
-			(this, pos, g_gr->imgcache().get( pic_priority_low),
-			 _("Lowest priority"));
+			(this, pos, g_gr->imgcache().get(pic_priority_low), _("Lowest priority"));
 
 	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
 	switch (priority) {

@@ -20,14 +20,15 @@
 #include "base.h"
 
 #include "constants.h"
-#include "io/filesystem/filesystem.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
+#include "graphic/rendertarget.h"
+#include "io/filesystem/filesystem.h"
 #include "log.h"
 #include "profile/profile.h"
-#include "graphic/rendertarget.h"
-#include "wlapplication.h"
 #include "wexception.h"
+#include "wlapplication.h"
 
 #include <cstdio>
 
@@ -57,8 +58,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	// Load background graphics
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
-	d->res_background = g_gr->imgcache().resize(
-			g_gr->imgcache().get(buffer), get_w(), get_h());
+	d->res_background = ImageTransformations::resize(g_gr->imgcache().get(buffer), get_w(), get_h());
 
 	d->textstyle_small = UI::TextStyle::ui_small();
 	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());

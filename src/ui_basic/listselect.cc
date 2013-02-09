@@ -22,9 +22,10 @@
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "wlapplication.h"
 #include "log.h"
+#include "wlapplication.h"
 
 #include "container_iterate.h"
 
@@ -70,7 +71,7 @@ BaseListselect::BaseListselect
 
 	if (show_check) {
 		uint32_t pic_h;
-		m_check_pic = g_gr->imgcache().get( "pics/list_selected.png");
+		m_check_pic = g_gr->imgcache().get("pics/list_selected.png");
 		m_max_pic_width = m_check_pic->width();
 		pic_h = m_check_pic->height();
 		if (pic_h > m_lineheight)

@@ -428,8 +428,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					te.set_string(0, buf);
 					i18n::Textdomain td("maps");
 					te.set_picture
-						(1,  g_gr->imgcache().get(dynamic_cast<WL_Map_Loader const *>(ml) ? (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
-						:
+						(1,  g_gr->imgcache().get
+						 (dynamic_cast<WL_Map_Loader const *>(ml) ?
+							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
 						_(mapdata.name));
 				} catch (const std::exception & e) {
@@ -513,7 +514,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				sprintf(buf, "(%i)", mapdata.nrplayers);
 				te.set_string(0, buf);
 				te.set_picture
-					(1, g_gr->imgcache().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
+					(1, g_gr->imgcache().get
+					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
 			}
 
 			delete ml;

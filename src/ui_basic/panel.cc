@@ -22,6 +22,8 @@
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
+#include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "log.h"
@@ -137,8 +139,8 @@ int32_t Panel::run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->imgcache().get( "pics/cursor.png");
-	s_default_cursor_click = g_gr->imgcache().get( "pics/cursor_click.png");
+	s_default_cursor = g_gr->imgcache().get("pics/cursor.png");
+	s_default_cursor_click = g_gr->imgcache().get("pics/cursor_click.png");
 
 	// Loop
 	_running = true;
@@ -838,7 +840,7 @@ void Panel::do_draw(RenderTarget & dst)
 			 _cache.get()->width() != innerw ||
 			 _cache.get()->height() != innerh)
 		{
-			_cache.reset(new_uncached_image(Surface::create(innerw, innerh)));
+			_cache.reset(new_in_memory_image("dummy_hash", Surface::create(innerw, innerh)));
 			_needdraw = true;
 		}
 

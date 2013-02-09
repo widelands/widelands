@@ -22,6 +22,7 @@
 #include "waresqueuedisplay.h"
 
 #include "economy/request.h"
+#include "graphic/graphic.h"
 #include "logic/constructionsite.h"
 #include "logic/militarysite.h"
 #include "logic/trainingsite.h"

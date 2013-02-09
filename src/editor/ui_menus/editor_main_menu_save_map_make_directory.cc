@@ -20,6 +20,7 @@
 #include "editor_main_menu_save_map_make_directory.h"
 
 #include "constants.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 
 #include "ui_basic/button.h"

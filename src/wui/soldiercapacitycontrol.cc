@@ -19,6 +19,7 @@
 
 #include "soldiercapacitycontrol.h"
 
+#include "graphic/graphic.h"
 #include "interactive_gamebase.h"
 #include "logic/player.h"
 #include "logic/soldiercontrol.h"

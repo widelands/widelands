@@ -21,17 +21,17 @@
 #include <boost/lexical_cast.hpp>
 #include <cstdio>
 
-#include "text_layout.h"
-#include "graphic/font.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
+#include "text_layout.h"
 #include "wexception.h"
 
 #include "waresdisplay.h"

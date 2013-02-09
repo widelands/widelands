@@ -19,12 +19,13 @@
 
 #include "loadreplay.h"
 
-#include "logic/game.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/game.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
 

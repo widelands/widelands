@@ -22,11 +22,12 @@
 #include "ui_basic/box.h"
 
 #include "economy/portdock.h"
-#include "logic/warehouse.h"
+#include "economy/ware_instance.h"
+#include "graphic/graphic.h"
 #include "interactive_gamebase.h"
 #include "itemwaresdisplay.h"
-#include <economy/ware_instance.h>
-#include <logic/worker.h>
+#include "logic/warehouse.h"
+#include "logic/worker.h"
 
 static const char pic_goto[] = "pics/menu_ship_goto.png";
 static const char pic_destination[] = "pics/menu_ship_destination.png";

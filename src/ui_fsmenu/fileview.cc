@@ -20,8 +20,9 @@
 #include "fileview.h"
 
 #include "constants.h"
-#include "io/filesystem/filesystem.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
+#include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
 
 

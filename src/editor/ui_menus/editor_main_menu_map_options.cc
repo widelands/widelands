@@ -20,6 +20,7 @@
 #include "editor_main_menu_map_options.h"
 
 #include "editor/editorinteractive.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
 #include "profile/profile.h"

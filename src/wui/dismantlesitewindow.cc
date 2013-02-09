@@ -19,6 +19,7 @@
 
 
 #include "buildingwindow.h"
+#include "graphic/graphic.h"
 #include "logic/dismantlesite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"

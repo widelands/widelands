@@ -23,6 +23,8 @@
 #include "align.h"
 #include "button.h"
 
+#include "graphic/graphic.h"
+
 #include <boost/scoped_ptr.hpp>
 #include <boost/signal.hpp>
 #include <SDL_keyboard.h>
@@ -40,9 +42,7 @@ struct EditBox : public Panel {
 	EditBox
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const IPicture* background =
-		 	g_gr->imgcache().get("pics/but2.png"),
-		 Align align = Align_Center);
+		 const IPicture* background = g_gr->imgcache().get("pics/but2.png"), Align align = Align_Center);
 	virtual ~EditBox();
 
 	boost::signal<void ()> changed;

@@ -19,13 +19,11 @@
 
 // TODO(#sirver): rt test cases are broken again
 
-#include <config.h>
-
 #include <cstring>
 #include <iostream>
 
 #include <SDL_image.h>
-#include <SDL_rotozoom.h>
+#include <config.h>
 
 #include "build_info.h"
 #include "compile_diagnostics.h"
@@ -45,14 +43,12 @@
 
 #include "animation.h"
 #include "animation_gfx.h"
-#include "font_handler.h"
 #include "image_loader_impl.h"
+#include "image_transformations.h"
 #include "picture.h"
 #include "render/gl_surface_screen.h"
 #include "render/sdl_surface.h"
 #include "rendertarget.h"
-#include "text/rt_render.h"
-#include "text/sdl_ttf_font.h"
 #include "texture.h"
 
 #include "graphic.h"
@@ -61,13 +57,6 @@ using namespace std;
 
 Graphic * g_gr;
 bool g_opengl;
-
-// This table is used by create_grayed_out_pic()
-// to map colors to grayscle
-uint32_t luminance_table_r[0x100];
-uint32_t luminance_table_g[0x100];
-uint32_t luminance_table_b[0x100];
-
 
 /**
  * Initialize the SDL video mode.
@@ -87,16 +76,7 @@ Graphic::Graphic
 	// NOCOM(#sirver): do not pass NULL, but solve cycle here
 	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
 {
-	// Initialize the table used to create grayed pictures
-	for
-		(uint32_t i = 0, r = 0, g = 0, b = 0;
-		 i < 0x100;
-		 ++i, r += 5016388U, g += 9848226U, b += 1912603U)
-	{
-		luminance_table_r[i] = r;
-		luminance_table_g[i] = g;
-		luminance_table_b[i] = b;
-	}
+	ImageTransformations::initialize();
 
 	//fastOpen tries to use mmap
 	FileRead fr;
@@ -435,107 +415,6 @@ void Graphic::flush_animations() {
 }
 
 /**
- * Produces a resized version of the specified picture
- *
- * Might return same id if dimensions are the same
- */
-Surface* Graphic::resize_surface(Surface* src, uint32_t w, uint32_t h) {
-	assert(w != src->width() || h != src->height());
-
-	// First step: compute scaling factors
-	Rect srcrect = Rect(Point(0, 0), src->width(), src->height());
-
-	// Second step: get source material
-	SDL_Surface * srcsdl = 0;
-	bool free_source = true;
-	if (upcast(const SDLSurface, sdlsrcsurf, src)) {
-		srcsdl = sdlsrcsurf->get_sdl_surface();
-		free_source = false;
-	} else {
-		// This is in OpenGL
-		srcsdl = extract_sdl_surface(*src, srcrect);
-	}
-
-	// Third step: perform the zoom and placement
-	SDL_Surface * zoomed = zoomSurface
-		(srcsdl, double(w) / srcsdl->w, double(h) / srcsdl->h, 1);
-	if (free_source)
-		SDL_FreeSurface(srcsdl);
-
-	if (uint32_t(zoomed->w) != w || uint32_t(zoomed->h) != h) {
-		const SDL_PixelFormat & fmt = *zoomed->format;
-		SDL_Surface * placed = SDL_CreateRGBSurface
-			(SDL_SWSURFACE, w, h,
-			 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
-		SDL_Rect srcrc =
-			{0, 0,
-			 static_cast<Uint16>(zoomed->w), static_cast<Uint16>(zoomed->h)
-			};  // For some reason SDL_Surface and SDL_Rect express w,h in different types
-		SDL_Rect dstrc = {0, 0, 0, 0};
-		SDL_SetAlpha(zoomed, 0, 0);
-		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc); // Updates dstrc
-
-		Uint32 fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
-
-		if (zoomed->w < placed->w) {
-			dstrc.x = zoomed->w;
-			dstrc.y = 0;
-			dstrc.w = placed->w - zoomed->w;
-			dstrc.h = zoomed->h;
-			SDL_FillRect(placed, &dstrc, fillcolor);
-		}
-		if (zoomed->h < placed->h) {
-			dstrc.x = 0;
-			dstrc.y = zoomed->h;
-			dstrc.w = placed->w;
-			dstrc.h = placed->h - zoomed->h;
-			SDL_FillRect(placed, &dstrc, fillcolor);
-		}
-
-		SDL_FreeSurface(zoomed);
-		zoomed = placed;
-	}
-
-	return Surface::create(zoomed);
-}
-
-/**
- * Create and return an \ref SDL_Surface that contains the given sub-rectangle
- * of the given pixel region.
- */
-SDL_Surface * Graphic::extract_sdl_surface(Surface & surf, Rect srcrect) const
-{
-	assert(srcrect.x >= 0);
-	assert(srcrect.y >= 0);
-	assert(srcrect.x + srcrect.w <= surf.width());
-	assert(srcrect.y + srcrect.h <= surf.height());
-
-	const SDL_PixelFormat & fmt = surf.format();
-	SDL_Surface * dest = SDL_CreateRGBSurface
-		(SDL_SWSURFACE, srcrect.w, srcrect.h,
-		 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
-
-	surf.lock(Surface::Lock_Normal);
-	SDL_LockSurface(dest);
-
-	uint32_t srcpitch = surf.get_pitch();
-	uint32_t rowsize = srcrect.w * fmt.BytesPerPixel;
-	uint8_t * srcpix = surf.get_pixels() + srcpitch * srcrect.y + fmt.BytesPerPixel * srcrect.x;
-	uint8_t * dstpix = static_cast<uint8_t *>(dest->pixels);
-
-	for (uint32_t y = 0; y < srcrect.h; ++y) {
-		memcpy(dstpix, srcpix, rowsize);
-		srcpix += srcpitch;
-		dstpix += dest->pitch;
-	}
-
-	SDL_UnlockSurface(dest);
-	surf.unlock(Surface::Unlock_NoChange);
-
-	return dest;
-}
-
-/**
  * Saves a pixel region to a png. This can be a file or part of a stream.
  *
  * @param surf The Surface to save
@@ -616,94 +495,6 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 	// End write
 	png_write_end(png_ptr, info_ptr);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
-}
-
-/**
- * Create a grayed version of the given picture.
- *
- * @param picture to be grayed out
- * @return the gray version of the picture
- * // NOCOM(#sirver): docu
- */
-Surface* Graphic::gray_out_surface(Surface* surf) {
-	assert(surf);
-
-	uint16_t w = surf->width();
-	uint16_t h = surf->height();
-	const SDL_PixelFormat & origfmt = surf->format();
-
-	Surface* dest = Surface::create(w, h);
-	const SDL_PixelFormat & destfmt = dest->format();
-
-	surf->lock(Surface::Lock_Normal);
-	dest->lock(Surface::Lock_Discard);
-	for (uint32_t y = 0; y < h; ++y) {
-		for (uint32_t x = 0; x < w; ++x) {
-			RGBAColor color;
-
-			color.set(origfmt, surf->get_pixel(x, y));
-
-			//  Halve the opacity to give some difference for pictures that are
-			//  grayscale to begin with.
-			color.a >>= 1;
-
-			color.r = color.g = color.b =
-				(luminance_table_r[color.r] +
-				 luminance_table_g[color.g] +
-				 luminance_table_b[color.b] +
-				 8388608U) //  compensate for truncation:  .5 * 2^24
-				>> 24;
-
-			dest->set_pixel(x, y, color.map(destfmt));
-		}
-	}
-	surf->unlock(Surface::Unlock_NoChange);
-	dest->unlock(Surface::Unlock_Update);
-
-	return dest;
-}
-
-/**
- * Creates an picture with changed luminosity from the given picture.
- *
- * @param picture to modify
- * @param factor the factor the luminosity should be changed by
- * @param half_alpha whether the opacity should be halved or not
- * @return a new picture with 50% luminosity
- * // NOCOM(#sirver): docu
- */
-Surface* Graphic::change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha) {
-	assert(surf);
-
-	uint16_t w = surf->width();
-	uint16_t h = surf->height();
-	const SDL_PixelFormat & origfmt = surf->format();
-
-	Surface* dest = Surface::create(w, h);
-	const SDL_PixelFormat & destfmt = dest->format();
-
-	surf->lock(Surface::Lock_Normal);
-	dest->lock(Surface::Lock_Discard);
-	for (uint32_t y = 0; y < h; ++y) {
-		for (uint32_t x = 0; x < w; ++x) {
-			RGBAColor color;
-
-			color.set(origfmt, surf->get_pixel(x, y));
-
-			if (halve_alpha)
-				color.a >>= 1;
-
-			color.r = color.r * factor > 255 ? 255 : color.r * factor;
-			color.g = color.g * factor > 255 ? 255 : color.g * factor;
-			color.b = color.b * factor > 255 ? 255 : color.b * factor;
-
-			dest->set_pixel(x, y, color.map(destfmt));
-		}
-	}
-	surf->unlock(Surface::Unlock_NoChange);
-	dest->unlock(Surface::Unlock_Update);
-
-	return dest;
 }
 
 

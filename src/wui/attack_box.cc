@@ -19,6 +19,7 @@
 
 #include "attack_box.h"
 
+#include "graphic/graphic.h"
 #include "logic/soldier.h"
 
 #include "upcast.h"

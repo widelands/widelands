@@ -17,6 +17,7 @@
  *
  */
 
+#include "graphic/graphic.h"
 #include "logic/trainingsite.h"
 #include "productionsitewindow.h"
 #include "soldiercapacitycontrol.h"

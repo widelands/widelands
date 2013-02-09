@@ -19,6 +19,7 @@
 
 #include "buildingconfirm.h"
 
+#include "graphic/graphic.h"
 #include "interactive_player.h"
 #include "logic/building.h"
 #include "logic/player.h"

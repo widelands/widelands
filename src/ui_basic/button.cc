@@ -23,10 +23,11 @@
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/image_transformations.h"
 #include "graphic/picture.h"
 #include "graphic/rendertarget.h"
-#include "wlapplication.h"
 #include "log.h"
+#include "wlapplication.h"
 
 
 namespace UI {
@@ -84,7 +85,7 @@ Button::Button //  for pictorial buttons
 	m_time_nextact  (0),
 	m_pic_background(bg_pic),
 	m_pic_custom    (fg_pic),
-	m_pic_custom_disabled(fg_pic ? g_gr->imgcache().gray_out(fg_pic) : NULL),
+	m_pic_custom_disabled(fg_pic ? ImageTransformations::gray_out(fg_pic) : NULL),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -112,7 +113,7 @@ void Button::set_pic(const IPicture* pic)
 		return;
 
 	m_pic_custom = pic;
-	m_pic_custom_disabled = g_gr->imgcache().gray_out(pic);
+	m_pic_custom_disabled = ImageTransformations::gray_out(pic);
 
 	update();
 }

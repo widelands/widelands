@@ -20,6 +20,7 @@
 #include "multiplayersetupgroup.h"
 
 #include "gamesettings.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "log.h"
 #include "logic/game.h"

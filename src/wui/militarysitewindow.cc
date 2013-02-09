@@ -18,6 +18,7 @@
  */
 
 #include "buildingwindow.h"
+#include "graphic/graphic.h"
 #include "logic/militarysite.h"
 #include "soldiercapacitycontrol.h"
 #include "soldierlist.h"

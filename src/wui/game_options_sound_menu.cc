@@ -18,8 +18,9 @@
 
 #include "game_options_sound_menu.h"
 
-#include "sound/sound_handler.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
+#include "sound/sound_handler.h"
 
 GameOptionsSoundMenu::GameOptionsSoundMenu
 	(Interactive_GameBase & gb, UI::UniqueWindow::Registry & registry)

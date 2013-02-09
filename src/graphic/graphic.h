@@ -45,14 +45,6 @@ struct SDL_Surface;
 struct StreamWrite;
 struct Texture;
 
-//@{
-/// This table is used by create_grayed_out_pic()to map colors to grayscale. It
-/// is initialized in Graphic::Graphic().
-extern uint32_t luminance_table_r[0x100];
-extern uint32_t luminance_table_g[0x100];
-extern uint32_t luminance_table_b[0x100];
-//@}
-
 /// Stores the capabilities of opengl
 struct GLCaps
 {
@@ -123,12 +115,6 @@ struct Graphic {
 
 	void save_png(const IPicture*, StreamWrite*) const;
 
-	// NOCOM(#sirver): those below are now internal to graphic/
-	// NOCOM(#sirver): halve_alpha was defaulted to false
-	Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha);
-	Surface* gray_out_surface(Surface* surf);
-	Surface* resize_surface(Surface*, uint32_t w, uint32_t h);
-
 	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
@@ -150,7 +136,6 @@ struct Graphic {
 	const GraphicCaps& caps() const throw () {return m_caps;}
 
 private:
-	SDL_Surface * extract_sdl_surface(Surface & surf, Rect srcrect) const;
 	void save_png_(Surface & surf, StreamWrite*) const;
 
 protected:

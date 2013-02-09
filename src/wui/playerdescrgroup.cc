@@ -21,10 +21,11 @@
 
 #include "constants.h"
 #include "gamesettings.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "logic/tribe.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #include "ui_basic/button.h"

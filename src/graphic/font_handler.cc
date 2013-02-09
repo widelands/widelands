@@ -27,6 +27,7 @@
 #include "log.h"
 #include "rendertarget.h"
 #include "surface.h"
+#include "in_memory_image.h"
 #include "wexception.h"
 #include "wordwrap.h"
 
@@ -47,7 +48,7 @@ struct LineCacheEntry {
 	/*@}*/
 
 	/*@{*/
-	IPicture* image;
+	const IPicture* image;
 	uint32_t width;
 	uint32_t height;
 	/*@}*/
@@ -158,7 +159,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 		return;
 	}
 
-	lce.image = new_uncached_image(Surface::create(text_surface));
+	lce.image = new_in_memory_image("dummy_hash", Surface::create(text_surface));
 	lce.width = lce.image->width();
 	lce.height = lce.image->height();
 }

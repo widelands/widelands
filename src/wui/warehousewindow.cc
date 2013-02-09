@@ -18,6 +18,7 @@
  */
 
 #include "buildingwindow.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"

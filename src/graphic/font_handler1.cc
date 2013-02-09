@@ -24,6 +24,7 @@
 #include "wexception.h"
 
 #include "graphic.h"
+#include "image_cache.h"
 #include "picture.h"
 #include "rendertarget.h"
 #include "surface.h"
@@ -112,7 +113,7 @@ const IPicture* Font_Handler1::render(const string& text, uint16_t w) {
 	if (image_cache_->has(hash))
 		return image_cache_->get(hash);
 
-	return image_cache_->insert(hash, new RTImage(hash, surface_cache_, renderer_.get(), text, w));
+	return image_cache_->insert(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
 }
 
 // NOCOM(#sirver): get rid of this function first.

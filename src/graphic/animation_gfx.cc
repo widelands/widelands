@@ -25,6 +25,7 @@
 #include "log.h"
 #include "wexception.h"
 
+#include "image_transformations.h"
 #include "animation.h"
 #include "animation_gfx.h"
 #include "image_cache.h"
@@ -158,7 +159,7 @@ const IPicture& AnimationGfx::get_frame(size_t i, const RGBColor& playercolor) {
 
 	assert(m_frames.size() == m_pcmasks.size());
 
-	return *image_cache_->player_colored(playercolor, &original, m_pcmasks[i]);
+	return *ImageTransformations::player_colored(playercolor, &original, m_pcmasks[i]);
 }
 
 const IPicture& AnimationGfx::get_frame(size_t i) const {

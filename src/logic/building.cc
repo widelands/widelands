@@ -25,15 +25,16 @@
 
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "text_layout.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
+#include "text_layout.h"
 #include "wui/interactive_player.h"
 
 #include "constructionsite.h"

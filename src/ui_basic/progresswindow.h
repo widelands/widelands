@@ -20,11 +20,15 @@
 #ifndef UI_PROGRESSWINDOW_H
 #define UI_PROGRESSWINDOW_H
 
-#include "graphic/graphic.h"
-
 #include <string>
 #include <cstring>
 #include <vector>
+
+#include "point.h"
+#include "rect.h"
+
+class IPicture;
+class RenderTarget;
 
 namespace UI {
 

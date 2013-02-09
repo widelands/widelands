@@ -23,6 +23,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "graphic/graphic.h"
+#include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "graphic/texture.h"
@@ -95,8 +96,8 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			}
 
 			Surface* surf = Surface::create(64, 64);
-			const IPicture* tex = g_gr->imgcache().get(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
-						->get_texture_picture());
+			const IPicture* tex = g_gr->imgcache().get
+				(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())->get_texture_picture());
 			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()));
 
 			Point pt(1, 64 - small_pich - 1);
@@ -125,7 +126,8 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 				if (ter_is & TERRAIN_DRY)
 					surf->blit(pt, dry->surface(), Rect(0, 0, dry->width(), dry->height()));
 			}
-			offscreen_images_.push_back(new_uncached_image(surf)); // Make sure we delete this later on.
+			// Make sure we delete this later on.
+			offscreen_images_.push_back(new_in_memory_image("dummy_hash", surf));
 
 			UI::Checkbox & cb = *new UI::Checkbox(this, pos, offscreen_images_.back());
 			cb.set_size(TEXTURE_WIDTH + 1, TEXTURE_HEIGHT + 1);
@@ -161,7 +163,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 
 Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu()
 {
-	BOOST_FOREACH(IPicture* pic, offscreen_images_)
+	BOOST_FOREACH(const IPicture* pic, offscreen_images_)
 		delete pic;
 	offscreen_images_.clear();
 }

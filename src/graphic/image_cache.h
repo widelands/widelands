@@ -51,12 +51,11 @@ public:
 	//inserted / for convenience.
 	// // NOCOM(#sirver): ownership is taken.
 	// // NOCOM(#sirver): all methods return object and ownership is retained
-	virtual const IPicture* new_permanent_picture(const std::string& hash, Surface*) = 0;
 	// NOCOM(#sirver): maybe new_temporary_picture that might get deleted for rich text.
 
 
 	// NOCOM(#sirver): comment
-	virtual const IPicture* insert(const std::string& hash, IPicture*) = 0;
+	virtual const IPicture* insert(const IPicture*) = 0;
 	virtual bool has(const std::string& hash) const = 0;
 
 	/// Returns the image associated with the given hash. If no image by this hash is known,
@@ -64,19 +63,12 @@ public:
 	/// error.
 	// NOCOM(#sirver): document this
 	virtual const IPicture* get(const std::string& hash) = 0;
-	virtual const IPicture* resize(const IPicture*, uint16_t w, uint16_t h) = 0;
-	virtual const IPicture* gray_out(const IPicture*) = 0;
-	virtual const IPicture* change_luminosity(const IPicture*, float factor, bool halve_alpha) = 0;
-	virtual const IPicture* player_colored(const RGBColor&, const IPicture*, const IPicture*) = 0;
 };
 
 // NOCOM(#sirver): Should not take owernshi
 //  of nothing
 // Takes ownership of image_loader, but not of SurfaceCache.
 ImageCache* create_image_cache(IImageLoader*, SurfaceCache*);
-
-// NOCOM(#sirver): refactor and offer direct acces to InMemoryImage
-IPicture* new_uncached_image(Surface* surf);
 
 #endif /* end of include guard: IMAGE_CACHE_H */
 

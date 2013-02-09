@@ -22,6 +22,7 @@
 
 #include "waresqueuedisplay.h"
 
+#include "graphic/graphic.h"
 #include "logic/constructionsite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"

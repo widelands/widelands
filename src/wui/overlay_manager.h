@@ -24,10 +24,11 @@
 #include "boost/function.hpp"
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
-#include "graphic/graphic.h"
 
 #include <map>
 #include <set>
+
+class IPicture;
 
 /*
  * The Overlay Manager is responsible for the map overlays. He

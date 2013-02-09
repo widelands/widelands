@@ -331,7 +331,7 @@ uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
 Surface* TextNode::render(SurfaceCache* surface_cache) {
-	const Surface& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, &g_gr->surface_cache());
+	const Surface& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
 	Surface* rv = Surface::create(img.width(), img.height());
 	rv->blit(Point(0, 0), &img, Rect(0, 0, img.width(), img.height()), CM_Copy);
 	return rv;
@@ -357,7 +357,7 @@ private:
 	bool m_expanding;
 };
 Surface* FillingTextNode::render(SurfaceCache* surface_cache) {
-	const Surface& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, &g_gr->surface_cache());
+	const Surface& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
 	Surface* rv = Surface::create(m_w, m_h);
 	for (uint16_t x = 0; x < m_w; x += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - x), m_h);

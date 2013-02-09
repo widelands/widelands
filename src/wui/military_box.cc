@@ -19,8 +19,9 @@
 
 #include "military_box.h"
 
-#include "logic/game.h"
+#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "logic/playercommand.h"
 
 #include "upcast.h"
