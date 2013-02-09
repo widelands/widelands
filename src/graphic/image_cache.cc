@@ -36,7 +36,6 @@
 #include "image_loader.h"
 #include "log.h"
 #include "picture.h"
-#include "picture_impl.h"
 #include "graphic.h"   // NOCOM(#sirver): cyclic dependency ftw.
 #include "surface.h"
 #include "surface_cache.h"
@@ -49,7 +48,7 @@ using namespace std;
 namespace  {
 
 // NOCOM(#sirver): documentation
-class FromDiskImage : public ImageImpl {
+class FromDiskImage : public IPicture {
 public:
 	FromDiskImage(const string& filename, SurfaceCache* surface_cache, bool alpha, IImageLoader* image_loader) :
 		filename_(filename),
@@ -61,7 +60,7 @@ public:
 			h_ = surf->get_h();
 		}
 
-	// Implements ImageImpl.
+	// Implements IPicture.
 	virtual uint32_t get_w() const { return w_; }
 	virtual uint32_t get_h() const { return h_; }
 	virtual const string& hash() const { return filename_; }
@@ -89,12 +88,12 @@ private:
 };
 
 // NOCOM(#sirver): documnent me
-class InMemoryImage : public ImageImpl {
+class InMemoryImage : public IPicture {
 public:
 	InMemoryImage(const string& hash, Surface* surf) :
 		hash_(hash), surf_(surf) {}
 
-	// Implements ImageImpl.
+	// Implements IPicture.
 	virtual uint32_t get_w() const { return surf_->get_w(); }
 	virtual uint32_t get_h() const { return surf_->get_h(); }
 	virtual const string& hash() const { return hash_; }
@@ -106,13 +105,13 @@ private:
 };
 
 // NOCOM(#sirver): docu
-class DerivedImage : public ImageImpl {
+class DerivedImage : public IPicture {
 public:
-	DerivedImage(const string& hash, const ImageImpl& original, SurfaceCache* surface_cache) :
+	DerivedImage(const string& hash, const IPicture& original, SurfaceCache* surface_cache) :
 		hash_(hash), original_(original), surface_cache_(surface_cache) {}
 	virtual ~DerivedImage() {}
 
-	// Implements ImageImpl.
+	// Implements IPicture.
 	virtual uint32_t get_w() const {return original_.get_w();}
 	virtual uint32_t get_h() const {return original_.get_h();}
 	virtual const string& hash() const { return hash_; }
@@ -130,14 +129,14 @@ public:
 
 protected:
 	const string hash_;
-	const ImageImpl& original_;
+	const IPicture& original_;
 	SurfaceCache* const surface_cache_;  // not owned
 };
 // NOCOM(#sirver): docu
 class ResizedImage : public DerivedImage {
 public:
 	// NOCOM(#sirver): reconsider arguments.
-	ResizedImage(const string& hash, const ImageImpl& original, SurfaceCache* surface_cache, uint32_t w, uint32_t h) :
+	ResizedImage(const string& hash, const IPicture& original, SurfaceCache* surface_cache, uint32_t w, uint32_t h) :
 		DerivedImage(hash, original, surface_cache), w_(w), h_(h) {
 			log("#sirver original_.hash(): %s\n", original_.hash().c_str());
 			assert(w != original.get_w() || h != original.get_h());
@@ -160,7 +159,7 @@ private:
 // NOCOM(#sirver): Mix between Pic and Image again.
 class GrayedOutPic : public DerivedImage {
 public:
-	GrayedOutPic(const string& hash, const ImageImpl& original, SurfaceCache* surface_cache) :
+	GrayedOutPic(const string& hash, const IPicture& original, SurfaceCache* surface_cache) :
 		DerivedImage(hash, original, surface_cache)
 	{}
 
@@ -174,7 +173,7 @@ public:
 
 class ChangeLuminosityPic : public DerivedImage {
 public:
-	ChangeLuminosityPic(const string& hash, const ImageImpl& original, SurfaceCache* surface_cache, float factor, bool halve_alpha) :
+	ChangeLuminosityPic(const string& hash, const IPicture& original, SurfaceCache* surface_cache, float factor, bool halve_alpha) :
 		DerivedImage(hash, original, surface_cache), factor_(factor), halve_alpha_(halve_alpha)
 	{}
 
@@ -189,7 +188,7 @@ private:
 };
 
 // NOCOM(#sirver): rename to ImageTrove
-class RTImage : public ImageImpl {
+class RTImage : public IPicture {
 public:
 	RTImage(const string& hash, SurfaceCache* surface_cache, RT::IRenderer* rt_renderer,
 			const string& text, uint32_t width) :
@@ -197,7 +196,7 @@ public:
 		text_(text), width_(width)
 	{}
 
-	// Implements ImageImpl.
+	// Implements IPicture.
 	virtual uint32_t get_w() const {return surface()->get_w();}
 	virtual uint32_t get_h() const {return surface()->get_h();}
 	virtual const string& hash() const { return hash_; }
@@ -241,7 +240,7 @@ public:
 	virtual const IPicture* change_luminosity(const IPicture*, float factor, bool halve_alpha);
 
 private:
-	typedef map<string, ImageImpl*> ImageMap;
+	typedef map<string, IPicture*> ImageMap;
 
 	// hash of cached filename/picture pairs
 	ImageMap images_;
@@ -267,22 +266,20 @@ const IPicture* ImageCacheImpl::get(const string& hash, bool alpha) {
 	return it->second;
 }
 
-const IPicture* ImageCacheImpl::resize(const IPicture* goriginal, uint32_t w, uint32_t h) {
-	const ImageImpl *original = static_cast<const ImageImpl*>(goriginal);
+const IPicture* ImageCacheImpl::resize(const IPicture* original, uint32_t w, uint32_t h) {
 	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();
 	// NOCOM(#sirver): a simple 'contains' would be good here. count?
 	ImageMap::const_iterator it = images_.find(new_hash);
 	if (it == images_.end()) {
-		if (goriginal->get_w() == w and goriginal->get_h() == h) {
-			return goriginal;
+		if (original->get_w() == w and original->get_h() == h) {
+			return original;
 		}
 		images_.insert(make_pair(new_hash, new ResizedImage(new_hash, *original, surface_cache_, w, h)));
 	}
 	return get(new_hash);
 }
 
-const IPicture* ImageCacheImpl::gray_out(const IPicture* goriginal) {
-	const ImageImpl *original = static_cast<const ImageImpl*>(goriginal);
+const IPicture* ImageCacheImpl::gray_out(const IPicture* original) {
 	const string new_hash = original->hash() + ":greyed_out";
 	// NOCOM(#sirver): a simple 'contains' would be good here. count?
 	ImageMap::const_iterator it = images_.find(new_hash);
@@ -291,8 +288,7 @@ const IPicture* ImageCacheImpl::gray_out(const IPicture* goriginal) {
 	}
 	return get(new_hash);
 }
-const IPicture* ImageCacheImpl::change_luminosity(const IPicture* goriginal, float factor, bool halve_alpha) {
-	const ImageImpl *original = static_cast<const ImageImpl*>(goriginal);
+const IPicture* ImageCacheImpl::change_luminosity(const IPicture* original, float factor, bool halve_alpha) {
 	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % static_cast<int>(factor*1000) % halve_alpha).str();
 	// NOCOM(#sirver): a simple 'contains' would be good here. count?
 	ImageMap::const_iterator it = images_.find(new_hash);

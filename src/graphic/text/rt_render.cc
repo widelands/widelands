@@ -29,7 +29,6 @@
 #include <boost/scoped_ptr.hpp>
 
 #include "graphic/image_cache.h"
-#include "graphic/picture_impl.h"
 
 #include "rt_parse.h"
 #include "textstream.h"

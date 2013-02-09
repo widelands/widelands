@@ -26,35 +26,10 @@
 #include "graphic.h"
 #include "log.h"
 #include "rendertarget.h"
-#include "picture_impl.h"
 #include "wexception.h"
 #include "wordwrap.h"
 
 #include "font_handler.h"
-
-namespace {
-class TextCachingImage : public ImageImpl {
-public:
-	TextCachingImage(Surface *surf) : surf_(surf) {}
-	virtual ~TextCachingImage() {}
-
-	// Implements IPicture.
-	virtual uint32_t get_w() const {return surf_->get_w();}
-	virtual uint32_t get_h() const {return surf_->get_h();}
-
-	virtual const std::string& hash() const {
-		// This should never ever be called, it is only needed for ImageImpl
-		// that are managed by ImageCache.
-		assert(0);
-	}
-	virtual Surface* surface() const {
-		return surf_.get();
-	}
-
-private:
-	boost::scoped_ptr<Surface> surf_;
-};
-}
 
 namespace UI {
 
@@ -71,7 +46,7 @@ struct LineCacheEntry {
 	/*@}*/
 
 	/*@{*/
-	TextCachingImage* image;
+	IPicture* image;
 	uint32_t width;
 	uint32_t height;
 	/*@}*/
@@ -182,7 +157,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 		return;
 	}
 
-	lce.image = new TextCachingImage(g_gr->create_surface(text_surface, true));
+	lce.image = new_uncached_image(g_gr->create_surface(text_surface, true));
 	lce.width = lce.image->get_w();
 	lce.height = lce.image->get_h();
 }

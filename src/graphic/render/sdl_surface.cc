@@ -21,8 +21,6 @@
 
 #include <SDL.h>
 
-#include "graphic/picture_impl.h"
-
 #include "sdl_surface.h"
 
 SDLSurface::~SDLSurface() {

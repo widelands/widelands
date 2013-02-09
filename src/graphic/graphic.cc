@@ -46,7 +46,6 @@
 #include "font_handler.h"
 #include "image_loader_impl.h"
 #include "picture.h"
-#include "picture_impl.h"
 #include "render/gl_surface_screen.h"
 #include "render/sdl_surface.h"
 #include "rendertarget.h"

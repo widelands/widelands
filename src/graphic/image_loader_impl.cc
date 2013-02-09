@@ -25,7 +25,6 @@
 #include "wexception.h"
 
 #include "graphic.h"
-#include "picture_impl.h"
 
 #include "image_loader_impl.h"
 

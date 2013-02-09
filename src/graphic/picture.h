@@ -42,6 +42,7 @@ public:
 	// NOCOM(#sirver): this somewhat leaks the implementation.
 	// NOCOM(#sirver): Check if some casts become unnecessary now.
 	virtual IBlitableSurface* surface() const = 0;
+	virtual const std::string& hash() const = 0;
 };
 
 

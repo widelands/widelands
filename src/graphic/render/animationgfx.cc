@@ -22,7 +22,6 @@
 #include "io/streamwrite.h"
 
 #include "graphic/graphic.h"
-#include "graphic/picture_impl.h"
 #include "graphic/image_loader_impl.h"
 #include "graphic/picture.h"
 

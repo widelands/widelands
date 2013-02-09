@@ -24,7 +24,6 @@
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "graphic/graphic.h"
 #include "graphic/iblitable_surface.h"
-#include "graphic/picture_impl.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "i18n.h"

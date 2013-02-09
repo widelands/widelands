@@ -27,14 +27,13 @@
 #include "picture.h"
 
 class IImageLoader;
-class IPicture;
 class Surface;
 class SurfaceCache;
 namespace RT {
 class IRenderer;
 }
 
-// NOCOM(#sirver): replace permanent image through a function that takes a CachableImage which
+// NOCOM(#sirver): replace permanent image through a function that takes a IPicture which
 // is an image implementation.
 
 // NOCOM(#sirver): check comment

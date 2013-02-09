@@ -22,7 +22,6 @@
 
 class ImageLoaderImpl;
 
-#include "picture_impl.h"
 #include "animation.h"
 #include "logic/widelands.h"
 #include "rgbcolor.h"
