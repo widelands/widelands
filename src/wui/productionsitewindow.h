@@ -36,9 +36,11 @@ struct ProductionSite_Window : public Building_Window {
 
 protected:
 	virtual void think();
+	void evict_worker();
 
 private:
 	UI::Table<uintptr_t> * m_worker_table;
+	UI::Box * m_worker_caps;
 };
 
 #endif // _PRODUCTIONSITEWINDOW_H_

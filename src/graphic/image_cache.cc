@@ -82,7 +82,6 @@ private:
 	const string filename_;
 	const bool alpha_;
 	// Nothing owned
-	// NOCOM(#sirver): image_loader is really loading surfaces. Rename that sucker.
 	IImageLoader* const image_loader_;
 	SurfaceCache* const surface_cache_;
 };

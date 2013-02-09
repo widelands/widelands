@@ -20,8 +20,6 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
-#include "log.h" // NOCOM(#sirver): remove again
-
 #include <vector>
 #include <map>
 

@@ -782,6 +782,13 @@ void Game::send_player_enhance_building
 		 	(get_gametime(), building.owner().player_number(), building, id));
 }
 
+void Game::send_player_evict_worker(Worker & worker)
+{
+	send_player_command
+		(*new Cmd_EvictWorker
+			(get_gametime(), worker.owner().player_number(), worker));
+}
+
 void Game::send_player_set_ware_priority
 	(PlayerImmovable &       imm,
 	 int32_t           const type,
