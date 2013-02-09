@@ -20,6 +20,7 @@
 #ifndef WARE_STATISTICS_MENU_H
 #define WARE_STATISTICS_MENU_H
 
+#include "logic/widelands.h"
 #include "ui_basic/unique_window.h"
 #include "plot_area.h"
 #include "differential_plot_area.h"

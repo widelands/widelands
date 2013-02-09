@@ -402,7 +402,7 @@ void GameView::rendermap
 										anim = csinf->becomes->get_animation("idle");
 									}
 								}
-								const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
+								const size_t nr_frames = g_gr->nr_frames(anim);
 								uint32_t cur_frame =
 									csinf->totaltime ? csinf->completedtime * nr_frames / csinf->totaltime : 0;
 								uint32_t tanim = cur_frame * FRAME_LENGTH;

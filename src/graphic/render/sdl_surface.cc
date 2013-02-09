@@ -153,8 +153,8 @@ void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
-	assert(rc.w >= 1);
-	assert(rc.h >= 1);
+	assert(rc.w >= 0);
+	assert(rc.h >= 0);
 	const uint32_t color = clr.map(format());
 
 	const Point bl = rc.bottom_right() - Point(1, 1);
@@ -179,8 +179,8 @@ void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
-	assert(rc.w >= 1);
-	assert(rc.h >= 1);
+	assert(rc.w >= 0);
+	assert(rc.h >= 0);
 	const uint32_t color = clr.map(format());
 
 	SDL_Rect r = {

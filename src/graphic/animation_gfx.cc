@@ -17,27 +17,23 @@
  *
  */
 
+#include <cassert>
+
 #include <SDL.h>
 
-#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "io/streamwrite.h"
 #include "log.h"
+#include "wexception.h"
 
-#include "graphic/graphic.h"
-#include "graphic/image_loader_impl.h"
-#include "graphic/picture.h"
-#include "graphic/surface.h"
-
-
+#include "animation.h"
+#include "animation_gfx.h"
+#include "image_cache.h"
+#include "picture.h"
 
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
-AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, const AnimationData& data) :
-	m_hotspot(data.hotspot)
-{
-	m_hasplrclrs = data.hasplrclrs;
-
+AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* img_cache)
+	: m_hotspot(data.hotspot), m_hasplrclrs(data.hasplrclrs), img_cache_(img_cache) {
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
 	//  replaced with "idle_00". Then the code looks if there is a file with
@@ -78,7 +74,7 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, const AnimationData& data)
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					Surface* pic = il.load(filename, true);
+					const IPicture* pic = img_cache->get(filename);
 					if (width == 0) { //  This is the first frame.
 						width  = pic->width();
 						height = pic->height();
@@ -88,7 +84,7 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, const AnimationData& data)
 							 "first frame",
 							 pic->width(), pic->height(), width, height);
 					//  Get a new AnimFrame.
-					m_plrframes[0].push_back(pic);
+					m_frames.push_back(pic);
 				} catch (std::exception const & e) {
 					throw wexception
 						("could not load animation frame %s: %s\n",
@@ -108,7 +104,7 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, const AnimationData& data)
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						Surface* picture = il.load(filename, true);
+						const IPicture* picture = img_cache->get(filename);
 						if (width != picture->width() or height != picture->height())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
@@ -132,7 +128,7 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, const AnimationData& data)
 			if (digit_to_increment == before_first_digit)
 				goto end; //  The number wrapped around to all zeros.
 			assert('0' <= *digit_to_increment);
-			assert        (*digit_to_increment <= '9');
+			assert(*digit_to_increment <= '9');
 			if (*digit_to_increment == '9') {
 				*digit_to_increment = '0';
 				--digit_to_increment;
@@ -143,94 +139,31 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, const AnimationData& data)
 		}
 	}
 end:
-	if (m_plrframes[0].empty())
+	if (m_frames.empty())
 		throw wexception
 			("animation %s has no frames", data.picnametempl.c_str());
 
-	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
+	if (m_pcmasks.size() and m_pcmasks.size() < m_frames.size())
 		throw wexception
 			("animation has %"PRIuS" frames but playercolor mask has only %"PRIuS" frames",
-			 m_plrframes[0].size(), m_pcmasks.size());
+			 m_frames.size(), m_pcmasks.size());
 }
 
+const IPicture& AnimationGfx::get_frame(size_t i, const RGBColor& playercolor) {
+	assert(i < nr_frames());
 
-AnimationGfx::~AnimationGfx()
-{
+	const IPicture& original = get_frame(i);
+	if (!m_hasplrclrs)
+		return original;
+
+	assert(m_frames.size() == m_pcmasks.size());
+
+	return *img_cache_->player_colored(playercolor, &original, m_pcmasks[i]);
 }
 
-
-/*
-===============
-Encodes the given surface into a frame
-===============
-*/
-void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
-{
-	assert(m_plrframes[0].size() == m_pcmasks.size());
-	std::vector<Surface* > & frames = m_plrframes[plr];
-
-	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
-		//  Copy the old surface.
-		uint16_t w = m_plrframes[0][i]->width();
-		uint16_t h = m_plrframes[0][i]->height();
-		Surface& orig_surface = *m_plrframes[0][i];
-		Surface& pcmask_surface = *m_pcmasks[i];
-
-		Surface* new_surface = g_gr->create_surface(w, h, true);
-
-		const SDL_PixelFormat & fmt = orig_surface.format();
-		const SDL_PixelFormat & fmt_pc = pcmask_surface.format();
-		const SDL_PixelFormat & destfmt = new_surface->format();
-
-		orig_surface.lock(Surface::Lock_Normal);
-		pcmask_surface.lock(Surface::Lock_Normal);
-		new_surface->lock(Surface::Lock_Discard);
-		// This could be done significantly faster, but since we
-		// cache the result, let's keep it simple for now.
-		for (uint32_t y = 0; y < h; ++y) {
-			for (uint32_t x = 0; x < w; ++x) {
-				RGBAColor source;
-				RGBAColor mask;
-				RGBAColor product;
-
-				source.set(fmt, orig_surface.get_pixel(x, y));
-				mask.set(fmt_pc, pcmask_surface.get_pixel(x, y));
-
-				if
-					(uint32_t const influence =
-					 	static_cast<uint32_t>(mask.r) * mask.a)
-				{
-					uint32_t const intensity =
-						(luminance_table_r[source.r] +
-						 luminance_table_g[source.g] +
-						 luminance_table_b[source.b] +
-						 8388608U) //  compensate for truncation:  .5 * 2^24
-						>> 24;
-					RGBAColor plrclr;
-
-					plrclr.r = (player_color.r * intensity) >> 8;
-					plrclr.g = (player_color.g * intensity) >> 8;
-					plrclr.b = (player_color.b * intensity) >> 8;
-
-					product.r =
-						(plrclr.r * influence + source.r * (65536 - influence)) >> 16;
-					product.g =
-						(plrclr.g * influence + source.g * (65536 - influence)) >> 16;
-					product.b =
-						(plrclr.b * influence + source.b * (65536 - influence)) >> 16;
-					product.a = source.a;
-				} else {
-					product = source;
-				}
-
-				new_surface->set_pixel(x, y, product.map(destfmt));
-			}
-		}
-		orig_surface.unlock(Surface::Unlock_NoChange);
-		pcmask_surface.unlock(Surface::Unlock_NoChange);
-		new_surface->unlock(Surface::Unlock_Update);
-
-		frames.push_back(new_surface);
-	}
+const IPicture& AnimationGfx::get_frame(size_t i) const {
+	assert(i < nr_frames());
+	return *m_frames[i];
 }
+
 

@@ -21,16 +21,17 @@
 #ifndef UI_LISTSELECT_H
 #define UI_LISTSELECT_H
 
+#include <limits>
+#include <deque>
+
 #include <boost/signal.hpp>
 
 #include "align.h"
 #include "panel.h"
+#include "rgbcolor.h"
 #include "scrollbar.h"
 
 #include "compile_assert.h"
-
-#include <limits>
-#include <deque>
 
 namespace UI {
 struct Scrollbar;

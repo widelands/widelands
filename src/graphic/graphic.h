@@ -23,10 +23,10 @@
 #include <vector>
 #include <map>
 
+#include <SDL.h>
 #include <boost/scoped_ptr.hpp>
 #include <png.h>
 
-#include "animation_gfx.h"
 #include "igraphic.h"
 #include "image_cache.h"
 #include "rect.h"
@@ -35,16 +35,16 @@
 
 namespace UI {struct ProgressWindow;}
 
+class AnimationGfx;
+class ImageLoaderImpl;
 class RenderTarget;
-class SurfaceCache;
+class Screen;
 class Surface;
+class SurfaceCache;
 struct Road_Textures;
-struct SDL_Rect;
 struct SDL_Surface;
 struct StreamWrite;
 struct Texture;
-class Screen;
-class ImageLoaderImpl;
 namespace RT {
 class IRenderer;
 }
@@ -142,7 +142,7 @@ struct Graphic : public IGraphic {
 
 	void load_animations();
 	void ensure_animation_loaded(uint32_t anim);
-	AnimationGfx::Index nr_frames(uint32_t anim = 0);
+	size_t nr_frames(uint32_t anim = 0);
 	uint32_t get_animation_frametime(uint32_t anim) const;
 	void get_animation_size (uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h);
 

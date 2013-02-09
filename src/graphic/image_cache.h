@@ -27,6 +27,7 @@
 #include "picture.h"
 
 class IImageLoader;
+class RGBColor;
 class Surface;
 class SurfaceCache;
 namespace RT {
@@ -65,6 +66,7 @@ public:
 	virtual const IPicture* resize(const IPicture*, uint16_t w, uint16_t h) = 0;
 	virtual const IPicture* gray_out(const IPicture*) = 0;
 	virtual const IPicture* change_luminosity(const IPicture*, float factor, bool halve_alpha) = 0;
+	virtual const IPicture* player_colored(const RGBColor&, const IPicture*, const IPicture*) = 0;
 };
 
 // NOCOM(#sirver): Should not take owernshi

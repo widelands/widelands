@@ -17,20 +17,21 @@
  *
  */
 
-#include "rendertarget.h"
 
-#include "graphic.h"
+#include "log.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "upcast.h"
+#include "vertex.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/overlay_manager.h"
 
-#include "logic/player.h"
-#include "logic/tribe.h"
-#include "vertex.h"
-
+#include "animation.h"
+#include "animation_gfx.h"
+#include "graphic.h"
 #include "surface.h"
 
-#include "log.h"
-#include "upcast.h"
+#include "rendertarget.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;
@@ -169,7 +170,7 @@ void RenderTarget::blit(const Point& dst, const IPicture* picture, Composite cm)
 {
 	doblit
 		(dst,
-		 picture->surface(), Rect(Point(0, 0), picture->width(), picture->height()), cm);
+		 picture, Rect(Point(0, 0), picture->width(), picture->height()), cm);
 }
 
 /**
@@ -181,7 +182,7 @@ void RenderTarget::blitrect
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	doblit(dst, picture->surface(), srcrc, cm);
+	doblit(dst, picture, srcrc, cm);
 }
 
 /**
@@ -277,19 +278,14 @@ void RenderTarget::drawanim
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
-	const Surface* frame =
-		player ?
-		gfx->get_frame
-			(framenumber, player->player_number(), player->get_playercolor())
-		:
-		gfx->get_frame
-			(framenumber);
+	const IPicture& frame =
+		player ? gfx->get_frame(framenumber, player->get_playercolor()) : gfx->get_frame(framenumber);
 
-	dst -= gfx->get_hotspot();
+	dst -= gfx->hotspot();
 
-	Rect srcrc(Point(0, 0), frame->width(), frame->height());
+	Rect srcrc(Point(0, 0), frame.width(), frame.height());
 
-	doblit(dst, frame, srcrc);
+	doblit(dst, &frame, srcrc);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
@@ -309,10 +305,10 @@ void RenderTarget::drawstatic
 	}
 
 	// Get the frame and its data
-	const Surface* frame =
+	const IPicture& frame =
 		player ?
 		gfx->get_frame
-			(0, player->player_number(), player->get_playercolor())
+			(0, player->get_playercolor())
 		:
 		gfx->get_frame
 			(0);
@@ -320,9 +316,9 @@ void RenderTarget::drawstatic
 	// NOCOM(#sirver): this is currently broken
 	// const IPicture* dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
 
-	dst -= Point(frame->width() / 2, frame->height() / 2);
+	dst -= Point(frame.width() / 2, frame.height() / 2);
 
-	Rect srcrc(Point(0, 0), frame->width(), frame->height());
+	Rect srcrc(Point(0, 0), frame.width(), frame.height());
 
 	// NOCOM(#sirver): this is currently broken
 	// doblit(Rect(dst, 0, 0), dark_frame, srcrc);
@@ -347,19 +343,19 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
-	const Surface* frame =
+	const IPicture& frame =
 		player ?
 		gfx->get_frame
-			(framenumber, player->player_number(), player->get_playercolor())
+			(framenumber, player->get_playercolor())
 		:
 		gfx->get_frame
 			(framenumber);
 
-	dst -= g_gr->get_animation(animation)->get_hotspot();
+	dst -= g_gr->get_animation(animation)->hotspot();
 
 	dst += srcrc;
 
-	doblit(dst, frame, srcrc);
+	doblit(dst, &frame, srcrc);
 }
 
 /**
@@ -422,7 +418,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Point dst, const Surface* src, Rect srcrc, Composite cm)
+	(Point dst, const IPicture* src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -459,5 +455,5 @@ void RenderTarget::doblit
 
 	dst += m_rect;
 
-	m_surface->blit(dst, src, srcrc, cm);
+	m_surface->blit(dst, src->surface(), srcrc, cm);
 }

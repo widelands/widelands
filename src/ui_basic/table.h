@@ -21,15 +21,17 @@
 #ifndef UI_TABLE_H
 #define UI_TABLE_H
 
-#include "align.h"
-#include "panel.h"
-
-#include "compile_assert.h"
-
 #include <limits>
 #include <vector>
+
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
+
+#include "align.h"
+#include "compile_assert.h"
+#include "panel.h"
+#include "rgbcolor.h"
+
 
 namespace UI {
 struct Scrollbar;

@@ -43,14 +43,16 @@
 #include "upcast.h"
 #include "wexception.h"
 
+#include "animation.h"
+#include "animation_gfx.h"
 #include "font_handler.h"
 #include "image_loader_impl.h"
 #include "picture.h"
 #include "render/gl_surface_screen.h"
 #include "render/sdl_surface.h"
 #include "rendertarget.h"
-#include "text/sdl_ttf_font.h"
 #include "text/rt_render.h"
+#include "text/sdl_ttf_font.h"
 #include "texture.h"
 
 #include "graphic.h"
@@ -828,14 +830,14 @@ void Graphic::ensure_animation_loaded(uint32_t anim) {
 	if (!m_animations.at(anim - 1))
 	{
 	  m_animations.at(anim - 1) =
-		  new AnimationGfx(*img_loader_.get(), g_anim.get_animation(anim));
+		  new AnimationGfx(g_anim.get_animation(anim), img_cache_.get());
 	}
 }
 
 /**
  * Return the number of frames in this animation
  */
-AnimationGfx::Index Graphic::nr_frames(uint32_t anim)
+size_t Graphic::nr_frames(uint32_t anim)
 {
 	return get_animation(anim)->nr_frames();
 }
@@ -853,10 +855,10 @@ void Graphic::get_animation_size
 		log("WARNING: Animation %u does not exist\n", anim);
 		w = h = 0;
 	} else {
-		const Surface* frame =
+		const IPicture& frame =
 			gfx->get_frame((time / data.frametime) % gfx->nr_frames());
-		w = frame->width();
-		h = frame->height();
+		w = frame.width();
+		h = frame.height();
 	}
 }
 

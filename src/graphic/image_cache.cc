@@ -137,7 +137,6 @@ public:
 	// NOCOM(#sirver): reconsider arguments.
 	ResizedImage(const string& hash, const IPicture& original, SurfaceCache* surface_cache, uint16_t w, uint16_t h) :
 		DerivedImage(hash, original, surface_cache), w_(w), h_(h) {
-			log("#sirver original_.hash(): %s\n", original_.hash().c_str());
 			assert(w != original.width() || h != original.height());
 	}
 
@@ -182,6 +181,80 @@ public:
 private:
 	float factor_;
 	bool halve_alpha_;
+};
+
+class PlayerColoredImage : public DerivedImage {
+public:
+	PlayerColoredImage(const string& hash, const IPicture& original, SurfaceCache* surface_cache, const RGBColor& color, const IPicture& mask) :
+		DerivedImage(hash, original, surface_cache), color_(color), mask_(mask) {}
+
+	// Implements DerivedImage.
+	virtual Surface* recalculate_surface() const {
+		// Encodes the given Image into the corresponding image for player color.
+		// Takes the neutral set of images and the player color mask.
+		Surface& orig_surface = *original_.surface();
+		Surface& pcmask_surface = *mask_.surface();
+
+		Surface* new_surface = g_gr->create_surface(orig_surface.width(), orig_surface.height(), true);
+
+		const SDL_PixelFormat & fmt = orig_surface.format();
+		const SDL_PixelFormat & fmt_pc = pcmask_surface.format();
+		const SDL_PixelFormat & destfmt = new_surface->format();
+
+		orig_surface.lock(Surface::Lock_Normal);
+		pcmask_surface.lock(Surface::Lock_Normal);
+		new_surface->lock(Surface::Lock_Discard);
+		// This could be done significantly faster, but since we
+		// cache the result, let's keep it simple for now.
+		for (uint32_t y = 0; y < orig_surface.height(); ++y) {
+			for (uint32_t x = 0; x < orig_surface.width(); ++x) {
+				RGBAColor source;
+				RGBAColor mask;
+				RGBAColor product;
+
+				source.set(fmt, orig_surface.get_pixel(x, y));
+				mask.set(fmt_pc, pcmask_surface.get_pixel(x, y));
+
+				if
+					(uint32_t const influence =
+					 static_cast<uint32_t>(mask.r) * mask.a)
+					{
+						uint32_t const intensity =
+							(luminance_table_r[source.r] +
+							 luminance_table_g[source.g] +
+							 luminance_table_b[source.b] +
+							 8388608U) //  compensate for truncation:  .5 * 2^24
+							>> 24;
+						RGBAColor plrclr;
+
+						plrclr.r = (color_.r * intensity) >> 8;
+						plrclr.g = (color_.g * intensity) >> 8;
+						plrclr.b = (color_.b * intensity) >> 8;
+
+						product.r =
+							(plrclr.r * influence + source.r * (65536 - influence)) >> 16;
+						product.g =
+							(plrclr.g * influence + source.g * (65536 - influence)) >> 16;
+						product.b =
+							(plrclr.b * influence + source.b * (65536 - influence)) >> 16;
+						product.a = source.a;
+					} else {
+						product = source;
+					}
+
+				new_surface->set_pixel(x, y, product.map(destfmt));
+			}
+		}
+		orig_surface.unlock(Surface::Unlock_NoChange);
+		pcmask_surface.unlock(Surface::Unlock_NoChange);
+		new_surface->unlock(Surface::Unlock_Update);
+
+		return new_surface;
+	}
+
+private:
+	const RGBColor& color_;
+	const IPicture& mask_;
 };
 
 // NOCOM(#sirver): rename to ImageTrove
@@ -235,6 +308,7 @@ public:
 	virtual const IPicture* resize(const IPicture*, uint16_t w, uint16_t h);
 	virtual const IPicture* gray_out(const IPicture*);
 	virtual const IPicture* change_luminosity(const IPicture*, float factor, bool halve_alpha);
+	virtual const IPicture* player_colored(const RGBColor&, const IPicture*, const IPicture*);
 
 private:
 	typedef map<string, IPicture*> ImageMap;
@@ -295,6 +369,16 @@ const IPicture* ImageCacheImpl::change_luminosity(const IPicture* original, floa
 	return get(new_hash);
 }
 
+const IPicture* ImageCacheImpl::player_colored(const RGBColor& clr, const IPicture* original, const IPicture* mask) {
+	const string hash = (boost::format("%s:%02x%02x%02x") % original->hash() % clr.r % clr.g % clr.b).str();
+	ImageMap::const_iterator it = images_.find(hash);
+	if (it == images_.end()) {
+		images_.insert(make_pair(hash,
+					new PlayerColoredImage(hash, *original, surface_cache_, clr, *mask)));
+	}
+	return get(hash);
+}
+
 const IPicture* ImageCacheImpl::new_permanent_picture(const string& hash, Surface* surf) {
 	assert(images_.find(hash) == images_.end());
 	images_.insert(make_pair(hash, new InMemoryImage(hash, surf)));
@@ -311,6 +395,8 @@ const IPicture* ImageCacheImpl::render_text(const std::string& text, uint16_t wi
 	}
 	return get(hash);
 }
+
+
 
 }  // namespace
 

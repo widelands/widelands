@@ -17,7 +17,6 @@
  *
  */
 
-#include "log.h" // NOCOM(#sirver): remove again
 #include <queue>
 #include <string>
 #include <vector>
@@ -469,9 +468,6 @@ public:
 	virtual uint16_t height() {return m_h + m_margin.top + m_margin.bottom;}
 	virtual uint16_t hotspot_y() {return height();}
 	virtual Surface* render(IGraphic& gr) {
-		if (!width() || !height()) {
-			return 0;
-		}
 		Surface* rv = gr.create_surface(width(), height(), true);
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
@@ -983,24 +979,23 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	if (!width)
 		width = INFINITE_WIDTH;
 
-	log("#sirver rt.get(): %p\n", rt.get());
-	log("#sirver width: %i\n", width);
-	gr_.imgcache();
 	RTTagHandler rtrn(*rt, m_fc, default_style, gr_.imgcache(), width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);
 
 	assert(nodes.size() == 1);
+	assert(nodes[0]);
 	return nodes[0];
 }
 
 // NOCOM(#sirver): describe what kind of caching is done.
 Surface* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	log("#sirver text: %s,width: %i\n", text.c_str(), width);
 	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 
-	return node->render(gr_);
+	Surface* rv = node->render(gr_);
+	assert(rv);
+	return rv;
 }
 
 IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {
