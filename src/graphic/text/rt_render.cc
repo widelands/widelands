@@ -333,7 +333,7 @@ uint16_t TextNode::hotspot_y() {
 }
 Surface* TextNode::render(IGraphic& gr) {
 	const Surface& img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	Surface* rv = gr.create_surface(img.width(), img.height(), false);
+	Surface* rv = gr.create_surface(img.width(), img.height());
 	rv->blit(Point(0, 0), &img, Rect(0, 0, img.width(), img.height()), CM_Copy);
 	return rv;
 }
