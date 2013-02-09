@@ -47,17 +47,17 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_advanced_options
 		(this, "advanced_options",
 		 get_w() * 9 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("Advanced Options"), std::string(), true, false),
 	m_cancel
 		(this, "cancel",
 		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -65,18 +65,18 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this,
 		 (get_w() / 2) - (m_vbutw * 2), get_h() * 3833 / 10000, get_w() / 5, m_vbutw,
 		 opt.maxfps, 0, 100, "",
-		 g_gr->imgcache().get("pics/but1.png")),
+		 g_gr->images().get("pics/but1.png")),
 	m_sb_autosave
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8167 / 10000, get_w() / 4, m_vbutw,
 		 opt.autosave / 60, 0, 100, _("min."),
-		 g_gr->imgcache().get("pics/but1.png"), true),
+		 g_gr->images().get("pics/but1.png"), true),
 
 	m_sb_remove_replays
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
 		 opt.remove_replays, 0, 365, _("days"),
-		 g_gr->imgcache().get("pics/but1.png"), true),
+		 g_gr->images().get("pics/but1.png"), true),
 
 // Title
 	m_title
@@ -418,12 +418,12 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_cancel
 		(this, "cancel",
 		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() / 4,   get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->imgcache().get("pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -431,17 +431,17 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this,
 		 get_w() * 18 / 25, get_h() * 63 / 100, get_w() / 4, m_vbutw,
 		 opt.speed_of_new_game / 1000, 0, 100, _("x"),
-		 g_gr->imgcache().get("pics/but1.png")),
+		 g_gr->images().get("pics/but1.png")),
 	m_sb_dis_panel
 		(this,
 		 get_w() * 18 / 25, get_h() * 6768 / 10000, get_w() / 4, m_vbutw,
 		 opt.panel_snap_distance, 0, 100, _("px."),
-		 g_gr->imgcache().get("pics/but1.png")),
+		 g_gr->images().get("pics/but1.png")),
 	m_sb_dis_border
 		(this,
 		 get_w() * 18 / 25, get_h() * 7235 / 10000, get_w() / 4, m_vbutw,
 		 opt.border_snap_distance, 0, 100, _("px."),
-		 g_gr->imgcache().get("pics/but1.png")),
+		 g_gr->images().get("pics/but1.png")),
 
 
 // Title

@@ -126,16 +126,16 @@ BuildingActionConfirm::BuildingActionConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 g_gr->imgcache().get("pics/but4.png"),
-			 g_gr->imgcache().get("pics/menu_okay.png"));
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("pics/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&BuildingActionConfirm::ok, this));
 
 	UI::Button * cancelbtn =
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 g_gr->imgcache().get("pics/but4.png"),
-			 g_gr->imgcache().get("pics/menu_abort.png"));
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("pics/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&BuildingActionConfirm::die, this));
 
 	center_to_parent();

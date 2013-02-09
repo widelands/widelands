@@ -80,7 +80,7 @@ Building_Window::Building_Window
 	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
 	for (Workarea_Info::size_type i = 0; i < NUMBER_OF_WORKAREA_PICS; ++i) {
 		++filename[13];
-		workarea_cumulative_pic[i] = g_gr->imgcache().get(filename);
+		workarea_cumulative_pic[i] = g_gr->images().get(filename);
 	}
 
 	show_workarea();
@@ -170,8 +170,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				UI::Button * stopbtn =
 					new UI::Button
 						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
-						 g_gr->imgcache().get("pics/but4.png"),
-						 g_gr->imgcache().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
+						 g_gr->images().get("pics/but4.png"),
+						 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
 						 is_stopped ? _("Continue") : _("Stop"));
 				stopbtn->sigclicked.connect(boost::bind(&Building_Window::act_start_stop, boost::ref(*this)));
 				capsbuttons->add
@@ -201,7 +201,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * enhancebtn =
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
-							 g_gr->imgcache().get("pics/but4.png"),
+							 g_gr->images().get("pics/but4.png"),
 							 building_descr.get_buildicon(),
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 								 waremap_to_richtext(tribe, building_descr.buildcost())); //  button id = building id
@@ -221,8 +221,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * destroybtn =
 				new UI::Button
 					(capsbuttons, "destroy", 0, 0, 34, 34,
-					 g_gr->imgcache().get("pics/but4.png"),
-					 g_gr->imgcache().get(pic_bulldoze),
+					 g_gr->images().get("pics/but4.png"),
+					 g_gr->images().get(pic_bulldoze),
 					 _("Destroy"));
 			destroybtn->sigclicked.connect
 				(boost::bind(&Building_Window::act_bulldoze, boost::ref(*this)));
@@ -239,8 +239,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
-					 g_gr->imgcache().get("pics/but4.png"),
-					 g_gr->imgcache().get(pic_dismantle),
+					 g_gr->images().get("pics/but4.png"),
+					 g_gr->images().get(pic_dismantle),
 					 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
 						 waremap_to_richtext(owner.tribe(), wares));
 			dismantlebtn->sigclicked.connect(boost::bind(&Building_Window::act_dismantle, boost::ref(*this)));
@@ -265,8 +265,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			m_toggle_workarea = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
-				 g_gr->imgcache().get("pics/but4.png"),
-				 g_gr->imgcache().get("pics/workarea3cumulative.png"),
+				 g_gr->images().get("pics/but4.png"),
+				 g_gr->images().get("pics/workarea3cumulative.png"),
 				 _("Hide workarea"));
 			m_toggle_workarea->sigclicked.connect
 				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
@@ -280,8 +280,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * debugbtn =
 				new UI::Button
 					(capsbuttons, "debug", 0, 0, 34, 34,
-					 g_gr->imgcache().get("pics/but4.png"),
-					 g_gr->imgcache().get(pic_debug),
+					 g_gr->images().get("pics/but4.png"),
+					 g_gr->images().get(pic_debug),
 					 _("Debug"));
 			debugbtn->sigclicked.connect(boost::bind(&Building_Window::act_debug, boost::ref(*this)));
 			capsbuttons->add
@@ -292,8 +292,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		UI::Button * gotobtn =
 			new UI::Button
 				(capsbuttons, "goto", 0, 0, 34, 34,
-				 g_gr->imgcache().get("pics/but4.png"),
-				 g_gr->imgcache().get("pics/menu_goto.png"), _("Center view on this"));
+				 g_gr->images().get("pics/but4.png"),
+				 g_gr->images().get("pics/menu_goto.png"), _("Center view on this"));
 		gotobtn->sigclicked.connect(boost::bind(&Building_Window::clicked_goto, boost::ref(*this)));
 		capsbuttons->add
 			(gotobtn,
@@ -309,8 +309,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * helpbtn =
 				new UI::Button
 					(capsbuttons, "help", 0, 0, 34, 34,
-					 g_gr->imgcache().get("pics/but4.png"),
-					 g_gr->imgcache().get("pics/menu_help.png"),
+					 g_gr->images().get("pics/but4.png"),
+					 g_gr->images().get("pics/menu_help.png"),
 					 _("Help"));
 			helpbtn->sigclicked.connect
 				(boost::bind(&Building_Window::help_clicked, boost::ref(*this)));

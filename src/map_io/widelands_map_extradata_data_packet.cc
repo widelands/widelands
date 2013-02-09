@@ -76,7 +76,7 @@ throw (_wexception)
 						continue; //  Illegal pic. Skip it.
 
 					const Image* image =
-					g_gr->imgcache().insert
+					g_gr->images().insert
 					(new_in_memory_image
 					 (std::string("map:") + FileSystem::FS_Filename(pname->c_str()), Surface::create(surf)));
 

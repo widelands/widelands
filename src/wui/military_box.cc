@@ -65,7 +65,7 @@ UI::Slider & MilitaryBox::add_slider
 			 0, 0,
 			 width, height,
 			 min, max, initial,
-			 g_gr->imgcache().get(picname),
+			 g_gr->images().get(picname),
 			 hint);
 	parent.add(&result, UI::Box::AlignTop);
 	return result;
@@ -95,7 +95,7 @@ UI::Button & MilitaryBox::add_button
 		new UI::Button
 			(&parent, name,
 			 8, 8, 26, 26,
-			 g_gr->imgcache().get("pics/but2.png"),
+			 g_gr->images().get("pics/but2.png"),
 			 text,
 			 tooltip_text);
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));

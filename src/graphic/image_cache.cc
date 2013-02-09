@@ -73,9 +73,6 @@ private:
 	SurfaceCache* const surface_cache_;
 };
 
-// NOCOM(#sirver): rename to ImageTrove
-
-// NOCOM(#sirver): try to fix some of the cycles in image_cache, graphic and image_loader.
 class ImageCacheImpl : public ImageCache {
 public:
 	// No ownership is taken here.
@@ -107,8 +104,7 @@ ImageCacheImpl::~ImageCacheImpl() {
 }
 
 bool ImageCacheImpl::has(const string& hash) const {
-	// NOCOM(#sirver): a simple 'contains' would be good here. count?
-	return images_.find(hash) != images_.end();
+	return images_.count(hash);
 }
 
 const Image* ImageCacheImpl::insert(const Image* image) {
@@ -125,8 +121,6 @@ const Image* ImageCacheImpl::get(const string& hash) {
 	}
 	return it->second;
 }
-
-// NOCOM(#sirver): maybe add a pruning step so that unused images are killed when possible.
 
 }  // namespace
 

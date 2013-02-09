@@ -99,10 +99,9 @@ struct Graphic {
 	bool need_update() const;
 	void refresh(bool force = true);
 
-	// NOCOM(#sirver): rename imgcache or make it a function?
-	ImageCache& imgcache() const {return *image_cache_.get();}
-	// NOCOM(#sirver): who needs direct access to this? should be passed down.
-	SurfaceCache& surface_cache() const {return *surface_cache_.get();}
+	ImageCache& images() const {return *image_cache_.get();}
+	SurfaceCache& surfaces() const {return *surface_cache_.get();}
+
 	void flush_animations();
 
 	void save_png(const Image*, StreamWrite*) const;

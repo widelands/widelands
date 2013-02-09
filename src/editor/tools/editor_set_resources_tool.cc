@@ -58,7 +58,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 
 		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res)) {
 			//  Ok, we're doing something. First remove the current overlays.
-			const Image* pic = g_gr->imgcache().get
+			const Image* pic = g_gr->images().get
 				(world.get_resource(res)->get_editor_pic (mr.location().field->get_resources_amount()));
 			overlay_manager.remove_overlay(mr.location(), pic);
 
@@ -70,7 +70,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 				mr.location().field->set_starting_res_amount(amount);
 				//  set new overlay
 				pic =
-				    g_gr->imgcache().get(world.get_resource(args.cur_res)->get_editor_pic(amount));
+				    g_gr->images().get(world.get_resource(args.cur_res)->get_editor_pic(amount));
 				overlay_manager.register_overlay(mr.location(), pic, 4);
 				map.recalc_for_field_area
 				(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
@@ -102,7 +102,7 @@ int32_t Editor_Set_Resources_Tool::handle_undo_impl
 			amount = max_amount;
 
 		const Image* pic =
-		    g_gr->imgcache().get
+		    g_gr->images().get
 		    (world.get_resource(res)->get_editor_pic(mr.location().field->get_resources_amount()));
 		overlay_manager.remove_overlay(mr.location(), pic);
 
@@ -113,7 +113,7 @@ int32_t Editor_Set_Resources_Tool::handle_undo_impl
 			mr.location().field->set_resources(*it, amount);
 			mr.location().field->set_starting_res_amount(amount);
 			//  set new overlay
-			pic = g_gr->imgcache().get(world.get_resource(*it)->get_editor_pic(amount));
+			pic = g_gr->images().get(world.get_resource(*it)->get_editor_pic(amount));
 			overlay_manager.register_overlay(mr.location(), pic, 4);
 			map.recalc_for_field_area
 			(Widelands::Area<Widelands::FCoords>(mr.location(), 0));

@@ -324,7 +324,6 @@ protected:
 // NOCOM(#sirver): docu
 class ResizedImage : public DerivedImage {
 public:
-	// NOCOM(#sirver): reconsider arguments.
 	ResizedImage
 		(const string& hash, const Image& original,
 		 SurfaceCache* surface_cache, uint16_t w, uint16_t h)
@@ -419,38 +418,38 @@ void initialize() {
 
 const Image* resize(const Image* original, uint16_t w, uint16_t h) {
 	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();
-	if (g_gr->imgcache().has(new_hash))
-		return g_gr->imgcache().get(new_hash);
+	if (g_gr->images().has(new_hash))
+		return g_gr->images().get(new_hash);
 	return
-		g_gr->imgcache().insert(new ResizedImage(new_hash, *original, &g_gr->surface_cache(), w, h));
+		g_gr->images().insert(new ResizedImage(new_hash, *original, &g_gr->surfaces(), w, h));
 }
 
 const Image* gray_out(const Image* original) {
 	const string new_hash = original->hash() + ":greyed_out";
-	if (g_gr->imgcache().has(new_hash))
-		return g_gr->imgcache().get(new_hash);
+	if (g_gr->images().has(new_hash))
+		return g_gr->images().get(new_hash);
 	return
-		g_gr->imgcache().insert(new GrayedOutImage(new_hash, *original, &g_gr->surface_cache()));
+		g_gr->images().insert(new GrayedOutImage(new_hash, *original, &g_gr->surfaces()));
 }
 
 const Image* change_luminosity(const Image* original, float factor, bool halve_alpha) {
 	const string new_hash =
 		(boost::format("%s:%i:%i") % original->hash() % static_cast<int>(factor * 1000) % halve_alpha).str();
-	if (g_gr->imgcache().has(new_hash))
-		return g_gr->imgcache().get(new_hash);
+	if (g_gr->images().has(new_hash))
+		return g_gr->images().get(new_hash);
 	return
-		g_gr->imgcache().insert
-			(new ChangeLuminosityImage(new_hash, *original, &g_gr->surface_cache(), factor, halve_alpha));
+		g_gr->images().insert
+			(new ChangeLuminosityImage(new_hash, *original, &g_gr->surfaces(), factor, halve_alpha));
 }
 
 const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask) {
 	const string new_hash =
 		(boost::format("%s:%02x%02x%02x") % original->hash() % clr.r % clr.g % clr.b).str();
-	if (g_gr->imgcache().has(new_hash))
-		return g_gr->imgcache().get(new_hash);
+	if (g_gr->images().has(new_hash))
+		return g_gr->images().get(new_hash);
 	return
-		g_gr->imgcache().insert
-			(new PlayerColoredImage(new_hash, *original, &g_gr->surface_cache(), clr, *mask));
+		g_gr->images().insert
+			(new PlayerColoredImage(new_hash, *original, &g_gr->surfaces(), clr, *mask));
 }
 
 }  // namespace ImageTransformations

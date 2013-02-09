@@ -67,7 +67,7 @@ void ProgressWindow::draw_background
 
 	if (!m_background_pic or xres != m_xres or yres != m_yres) {
 		// (Re-)Load background graphics
-		m_background_pic = ImageTransformations::resize(g_gr->imgcache().get(m_background), xres, yres);
+		m_background_pic = ImageTransformations::resize(g_gr->images().get(m_background), xres, yres);
 
 		const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 		m_label_rectangle.x = xres / 4;

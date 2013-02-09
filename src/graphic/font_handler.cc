@@ -237,7 +237,7 @@ void Font_Handler::draw_caret
 
 	int caret_x = style.calc_bare_width(sub);
 
-	const Image* caret_image = g_gr->imgcache().get("pics/caret.png");
+	const Image* caret_image = g_gr->images().get("pics/caret.png");
 	Point caretpt;
 	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
 	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;

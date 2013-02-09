@@ -99,7 +99,7 @@ void Table<void *>::add_column
 				new Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
-					 g_gr->imgcache().get("pics/but3.png"),
+					 g_gr->images().get("pics/but3.png"),
 					 title, "", true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
@@ -149,7 +149,7 @@ void Table<void *>::set_column_title
 			new Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
-				 g_gr->imgcache().get("pics/but3.png"),
+				 g_gr->images().get("pics/but3.png"),
 				 title, "", true, false);
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
@@ -179,7 +179,7 @@ void Table<void *>::Entry_Record::set_checked
 
 	cell.d_checked = checked;
 	cell.d_picture =
-		g_gr->imgcache().get(checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
+		g_gr->images().get(checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
 }
 
 void Table<void *>::Entry_Record::toggle(uint8_t const col)
@@ -465,7 +465,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 		 i; ++i)
 		if (m_columns.at(i.current).is_checkbox_column) {
 			result.m_data.at(i.current).d_picture =
-				g_gr->imgcache().get("pics/checkbox_empty.png");
+				g_gr->images().get("pics/checkbox_empty.png");
 		}
 
 	m_scrollbar->set_steps

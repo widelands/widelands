@@ -17,8 +17,6 @@
  *
  */
 
-// TODO(#sirver): rt test cases are broken again
-
 #include <cstring>
 #include <iostream>
 
@@ -70,7 +68,6 @@ Graphic::Graphic
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
-	// NOCOM(#sirver): diagramm der abhängigkeiten zeichnen
 	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(new SurfaceCache()),
 	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
@@ -629,7 +626,6 @@ void Graphic::m_png_flush_function
  * @param anim the number of the animation
  * @return the AnimationGfs object of the given number
  */
-// NOCOM(#sirver): should be const&
 AnimationGfx * Graphic::get_animation(uint32_t anim)
 {
 	if (!anim)

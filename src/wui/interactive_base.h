@@ -183,7 +183,7 @@ private:
 	UI::UniqueWindow::Registry m_debugconsole;
 };
 
-#define PIC2 g_gr->imgcache().get("pics/but2.png")
+#define PIC2 g_gr->images().get("pics/but2.png")
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
     &m_toolbar, name, 0, 0, 34U, 34U, PIC2
 

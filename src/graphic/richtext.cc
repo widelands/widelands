@@ -337,7 +337,7 @@ void RichText::parse(const std::string & rtext)
 			 image_it != cur_block_images.end();
 			 ++image_it)
 		{
-			const Image* image = g_gr->imgcache().get(*image_it);
+			const Image* image = g_gr->images().get(*image_it);
 			if (!image)
 				continue;
 

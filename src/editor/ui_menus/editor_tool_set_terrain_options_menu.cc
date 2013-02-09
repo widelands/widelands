@@ -66,17 +66,17 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	m_checkboxes.resize(nr_terrains);
 
 	const Image* green =
-		g_gr->imgcache().get("pics/terrain_green.png");
+		g_gr->images().get("pics/terrain_green.png");
 	const Image* water =
-		g_gr->imgcache().get("pics/terrain_water.png");
+		g_gr->images().get("pics/terrain_water.png");
 	const Image* mountain =
-		g_gr->imgcache().get("pics/terrain_mountain.png");
+		g_gr->images().get("pics/terrain_mountain.png");
 	const Image* dead =
-		g_gr->imgcache().get("pics/terrain_dead.png");
+		g_gr->images().get("pics/terrain_dead.png");
 	const Image* unpassable =
-		g_gr->imgcache().get("pics/terrain_unpassable.png");
+		g_gr->images().get("pics/terrain_unpassable.png");
 	const Image* dry =
-		g_gr->imgcache().get("pics/terrain_dry.png");
+		g_gr->images().get("pics/terrain_dry.png");
 
 	static const int small_pich = 20;
 	static const int small_picw = 20;
@@ -96,7 +96,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			}
 
 			Surface* surf = Surface::create(64, 64);
-			const Image* tex = g_gr->imgcache().get
+			const Image* tex = g_gr->images().get
 				(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())->get_texture_image());
 			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()));
 
