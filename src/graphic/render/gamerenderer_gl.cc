@@ -33,6 +33,8 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
 
+#include <SDL_image.h>
+
 using namespace Widelands;
 
 static const uint32_t PatchSize = 4;
@@ -47,6 +49,28 @@ GameRendererGL::GameRendererGL() :
 
 GameRendererGL::~GameRendererGL()
 {
+}
+
+const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture(const Widelands::World & world)
+{
+	char fname[256];
+	snprintf(fname, sizeof(fname), "%s/pics/edge.png", world.basedir().c_str());
+	std::string cachename = std::string("gltex#") + fname;
+
+	const GLSurfaceTexture * edgetexture =
+		dynamic_cast<const GLSurfaceTexture *>(g_gr->imgcache().get(PicMod_Game, cachename));
+	if (!edgetexture) {
+		FileRead fr;
+		fr.fastOpen(*g_fs, fname);
+
+		SDL_Surface * sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+		if (!sdlsurf)
+			throw wexception("%s", IMG_GetError());
+
+		edgetexture = new GLSurfaceTexture(sdlsurf, true);
+		g_gr->imgcache().insert(PicMod_Game, cachename, edgetexture);
+	}
+	return edgetexture;
 }
 
 uint32_t GameRendererGL::patch_index(const Coords & f) const
@@ -434,8 +458,7 @@ void GameRendererGL::draw_terrain_dither()
 	glClientActiveTextureARB(GL_TEXTURE1_ARB);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].edgex);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	GLuint edge = dynamic_cast<GLSurfaceTexture const &>
-		(*g_gr->get_edge_texture()).get_gl_texture();
+	GLuint edge = get_dither_edge_texture(world)->get_gl_texture();
 	glBindTexture(GL_TEXTURE_2D, edge);
 	glEnable(GL_TEXTURE_2D);
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);

@@ -72,7 +72,7 @@ public:
 	ImageLoader(Graphic& gr) : gr_(gr) {}
 	virtual ~ImageLoader() {}
 
-	IPicture* load(const string& fname, bool alpha, bool intensity) const {
+	IPicture* load(const string& fname, bool alpha) const {
 		FileRead fr;
 		SDL_Surface * sdlsurf;
 
@@ -84,7 +84,7 @@ public:
 		if (!sdlsurf)
 			throw wexception("%s", IMG_GetError());
 
-		return gr_.convert_sdl_surface_to_picture(sdlsurf, alpha, intensity);
+		return gr_.convert_sdl_surface_to_picture(sdlsurf, alpha);
 	}
 private:
 	Graphic& gr_;
@@ -649,14 +649,13 @@ void Graphic::save_png(const IPicture* pic, StreamWrite * sw) const
  * @param surf a SDL_Surface from which the Surface will be created; this function
  * takes ownership of surf
  * @param alpha if true the surface is created with alpha channel
- * @param intensity if true the surface is created as an intensity texture in OpenGL mode
  * @return the new Surface created from the SDL_Surface
  */
-IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha, bool intensity) const
+IPicture* Graphic::convert_sdl_surface_to_picture(SDL_Surface * surf, bool alpha) const
 {
 #ifdef USE_OPENGL
 	if (g_opengl) {
-		return new GLSurfaceTexture(surf, intensity);
+		return new GLSurfaceTexture(surf);
 	}
 #endif
 	SDL_Surface * surface;
@@ -971,10 +970,6 @@ void Graphic::set_world(string worldname) {
 	m_roadtextures->pic_road_normal = imgcache().load(PicMod_Game, buf, false);
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
 	m_roadtextures->pic_road_busy = imgcache().load(PicMod_Game, buf, false);
-
-	// load edge texture
-	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
-	m_edgetexture = imgcache().load(PicMod_Game, buf, false, true);
 }
 
 /**
@@ -986,13 +981,4 @@ const IPicture* Graphic::get_road_texture(int32_t roadtex)
 {
 	return
 		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
-}
-
-/**
- * Returns the alpha mask texture for edges.
- * \return The edge texture (alpha mask)
- */
-const IPicture* Graphic::get_edge_texture()
-{
-	return m_edgetexture;
 }

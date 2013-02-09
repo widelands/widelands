@@ -65,7 +65,7 @@ public:
 
 	/// Loads an Image from disk and caches it. If it was already
 	/// cached, it is simply returned.
-	virtual const IPicture* load(PicMod, const std::string& fn, bool alpha = true, bool intensity = false) = 0;
+	virtual const IPicture* load(PicMod, const std::string& fn, bool alpha = true) = 0;
 
 	/// Clears the Cache for the given PicMod
 	virtual void flush(PicMod) = 0;

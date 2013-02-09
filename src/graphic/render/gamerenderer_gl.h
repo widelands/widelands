@@ -33,9 +33,11 @@
 namespace Widelands {
 struct Coords;
 struct FCoords;
+struct World;
 }
 
 class GLSurface;
+class GLSurfaceTexture;
 
 /**
  * OpenGL implementation of @ref GameRenderer.
@@ -65,6 +67,8 @@ private:
 		uint8_t color[4];
 		uint32_t pad[1];
 	};
+
+	const GLSurfaceTexture * get_dither_edge_texture(const Widelands::World & world);
 
 	void draw();
 	void prepare_terrain_base();

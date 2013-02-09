@@ -120,7 +120,7 @@ struct Graphic : public IGraphic {
 	void save_png(const IPicture*, StreamWrite*) const;
 
 	virtual IPicture* convert_sdl_surface_to_picture
-		(SDL_Surface *, bool alpha = false, bool intensity = false) const;
+		(SDL_Surface *, bool alpha = false) const;
 
 	Surface* create_surface(int32_t w, int32_t h, bool alpha = false) const;
 
@@ -145,7 +145,6 @@ struct Graphic : public IGraphic {
 
 	void set_world(std::string);
 	const IPicture* get_road_texture(int32_t roadtex);
-	const IPicture* get_edge_texture();
 
 	const GraphicCaps& caps() const throw () {return m_caps;}
 
@@ -179,7 +178,6 @@ protected:
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 	Road_Textures * m_roadtextures;
-	const IPicture* m_edgetexture;
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
 

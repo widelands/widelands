@@ -34,8 +34,7 @@ public:
 
 	virtual IPicture* convert_sdl_surface_to_picture
 		(SDL_Surface*,
-		 bool alpha = false,
-		 bool intensity = false) const = 0;
+		 bool alpha = false) const = 0;
 	virtual IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const = 0;
 
 	virtual ImageCache& imgcache() const = 0;
