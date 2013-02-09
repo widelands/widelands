@@ -30,8 +30,8 @@
 
 class RenderTarget;
 class FileSystem;
-
 class IPicture;
+class Graphic;
 
 namespace UI {
 
@@ -46,18 +46,20 @@ public:
 		(RenderTarget &,
 		 Point dstpoint,
 		 const std::string & text,
-		 uint32_t w = 0,
+		 uint16_t w = 0,
 		 Align = Align_TopLeft) = 0;
 
 	/*
 	 * Renders the given text into an image. Will return NULL on error or if the
 	 * resulting image would have no size. The image is cached and therefore
 	 * ownership remains with this class.
+	 * // NOCOM(#sirver): comment
 	 */
-	virtual const IPicture* render(const std::string& text, uint32_t w = 0) = 0;
+	virtual const IPicture* render(const std::string& text, uint16_t w = 0) = 0;
 };
 
-IFont_Handler1 * create_fonthandler(FileSystem* lfs);
+// NOCOM(#sirver): comment
+IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs);
 
 extern IFont_Handler1 * g_fh1;
 

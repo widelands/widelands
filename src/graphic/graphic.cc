@@ -85,8 +85,7 @@ Graphic::Graphic
 	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(new SurfaceCache()),
 	// NOCOM(#sirver): do not pass NULL, but solve cycle here
-	rt_renderer_(RT::setup_renderer(NULL, surface_cache_.get(), RT::ttf_fontloader_from_filesystem(g_fs))),
-	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get(), rt_renderer_.get()))
+	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
 {
 	// Initialize the table used to create grayed pictures
 	for
@@ -98,7 +97,6 @@ Graphic::Graphic
 		luminance_table_g[i] = g;
 		luminance_table_b[i] = b;
 	}
-
 
 	//fastOpen tries to use mmap
 	FileRead fr;

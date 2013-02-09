@@ -29,8 +29,6 @@
 
 #include "wexception.h"
 
-#include "text/rt_render.h"
-#include "text/rt_errors.h"
 #include "io/filesystem/layered_filesystem.h"
 
 #include "image_loader.h"
@@ -60,9 +58,9 @@ public:
 		}
 
 	// Implements IPicture.
-	virtual uint16_t width() const { return w_; }
-	virtual uint16_t height() const { return h_; }
-	virtual const string& hash() const { return filename_; }
+	virtual uint16_t width() const {return w_; }
+	virtual uint16_t height() const {return h_;}
+	virtual const string& hash() const {return filename_;}
 	virtual Surface* surface() const {
 		Surface* surf = surface_cache_->get(filename_);
 		if (surf)
@@ -91,10 +89,10 @@ public:
 		hash_(hash), surf_(surf) {}
 
 	// Implements IPicture.
-	virtual uint16_t width() const { return surf_->width(); }
-	virtual uint16_t height() const { return surf_->height(); }
-	virtual const string& hash() const { return hash_; }
-	virtual Surface* surface() const { return surf_.get(); }
+	virtual uint16_t width() const {return surf_->width();}
+	virtual uint16_t height() const {return surf_->height();}
+	virtual const string& hash() const {return hash_;}
+	virtual Surface* surface() const {return surf_.get();}
 
 private:
 	const string hash_;
@@ -111,7 +109,7 @@ public:
 	// Implements IPicture.
 	virtual uint16_t width() const {return original_.width();}
 	virtual uint16_t height() const {return original_.height();}
-	virtual const string& hash() const { return hash_; }
+	virtual const string& hash() const {return hash_;}
 	virtual Surface* surface() const {
 		Surface* surf = surface_cache_->get(hash_);
 		if (surf)
@@ -133,14 +131,16 @@ protected:
 class ResizedImage : public DerivedImage {
 public:
 	// NOCOM(#sirver): reconsider arguments.
-	ResizedImage(const string& hash, const IPicture& original, SurfaceCache* surface_cache, uint16_t w, uint16_t h) :
-		DerivedImage(hash, original, surface_cache), w_(w), h_(h) {
+	ResizedImage
+		(const string& hash, const IPicture& original,
+		 SurfaceCache* surface_cache, uint16_t w, uint16_t h)
+		: DerivedImage(hash, original, surface_cache), w_(w), h_(h) {
 			assert(w != original.width() || h != original.height());
 	}
 
 	// Overwrites DerivedImage.
-	virtual uint16_t width() const { return w_; }
-	virtual uint16_t height() const { return h_; }
+	virtual uint16_t width() const {return w_;}
+	virtual uint16_t height() const {return h_;}
 
 	// Implements DerivedImage.
 	virtual Surface* recalculate_surface() const {
@@ -167,8 +167,12 @@ public:
 
 class ChangeLuminosityPic : public DerivedImage {
 public:
-	ChangeLuminosityPic(const string& hash, const IPicture& original, SurfaceCache* surface_cache, float factor, bool halve_alpha) :
-		DerivedImage(hash, original, surface_cache), factor_(factor), halve_alpha_(halve_alpha)
+	ChangeLuminosityPic
+		(const string& hash, const IPicture& original,
+		 SurfaceCache* surface_cache, float factor, bool halve_alpha)
+		: DerivedImage(hash, original, surface_cache),
+		  factor_(factor),
+		  halve_alpha_(halve_alpha)
 	{}
 
 	// Implements DerivedImage.
@@ -183,8 +187,11 @@ private:
 
 class PlayerColoredImage : public DerivedImage {
 public:
-	PlayerColoredImage(const string& hash, const IPicture& original, SurfaceCache* surface_cache, const RGBColor& color, const IPicture& mask) :
-		DerivedImage(hash, original, surface_cache), color_(color), mask_(mask) {}
+	PlayerColoredImage
+		(const string& hash, const IPicture& original,
+		 SurfaceCache* surface_cache, const RGBColor& color, const IPicture& mask)
+		: DerivedImage(hash, original, surface_cache), color_(color), mask_(mask)
+		{}
 
 	// Implements DerivedImage.
 	virtual Surface* recalculate_surface() const {
@@ -256,53 +263,21 @@ private:
 };
 
 // NOCOM(#sirver): rename to ImageTrove
-class RTImage : public IPicture {
-public:
-	RTImage(const string& hash, SurfaceCache* surface_cache, RT::IRenderer* rt_renderer,
-			const string& text, uint16_t width) :
-		hash_(hash), surface_cache_(surface_cache), rt_renderer_(rt_renderer),
-		text_(text), width_(width)
-	{}
-
-	// Implements IPicture.
-	virtual uint16_t width() const {return surface()->width();}
-	virtual uint16_t height() const {return surface()->height();}
-	virtual const string& hash() const { return hash_; }
-	virtual Surface* surface() const {
-		Surface* surf = surface_cache_->get(hash_);
-		if (surf)
-			return surf;
-
-		try {
-			surf = rt_renderer_->render(text_, width_);
-			surface_cache_->insert(hash_, surf);
-		} catch (RT::Exception& e) {
-			throw wexception("Richtext rendering error: %s", e.what());
-		}
-		return surf;
-	}
-
-private:
-	const string hash_;
-	SurfaceCache* surface_cache_;
-	RT::IRenderer* rt_renderer_;
-	const string text_;
-	uint16_t width_;
-};
 
 // NOCOM(#sirver): try to fix some of the cycles in image_cache, graphic and image_loader.
 class ImageCacheImpl : public ImageCache {
 public:
 	// No ownership is taken here.
-	ImageCacheImpl(IImageLoader* loader, SurfaceCache* surface_cache, RT::IRenderer* rt_renderer)
-		: image_loader_(loader), surface_cache_(surface_cache), rt_renderer_(rt_renderer) {
+	ImageCacheImpl(IImageLoader* loader, SurfaceCache* surface_cache)
+		: image_loader_(loader), surface_cache_(surface_cache) {
 		}
 	virtual ~ImageCacheImpl();
 
 	// Implements ImageCache
+	const IPicture* insert(const std::string& hash, IPicture*);
+	bool has(const std::string& hash) const;
 	virtual const IPicture* new_permanent_picture(const std::string& hash, Surface*);
 	virtual const IPicture* get(const std::string& hash);
-	virtual const IPicture* render_text(const std::string& text, uint16_t w);
 	virtual const IPicture* resize(const IPicture*, uint16_t w, uint16_t h);
 	virtual const IPicture* gray_out(const IPicture*);
 	virtual const IPicture* change_luminosity(const IPicture*, float factor, bool halve_alpha);
@@ -317,13 +292,23 @@ private:
 	// None of these are owned.
 	IImageLoader* const image_loader_;
 	SurfaceCache* const surface_cache_;
-	RT::IRenderer* const rt_renderer_;
 };
 
 ImageCacheImpl::~ImageCacheImpl() {
 	BOOST_FOREACH(ImageMap::value_type& p, images_)
 		delete p.second;
 	images_.clear();
+}
+
+bool ImageCacheImpl::has(const string& hash) const {
+	// NOCOM(#sirver): a simple 'contains' would be good here. count?
+	return images_.find(hash) != images_.end();
+}
+
+const IPicture* ImageCacheImpl::insert(const string& hash, IPicture* pic) {
+	assert(!has(hash));
+	images_.insert(make_pair(hash, pic));
+	return get(hash);
 }
 
 const IPicture* ImageCacheImpl::get(const string& hash) {
@@ -337,14 +322,8 @@ const IPicture* ImageCacheImpl::get(const string& hash) {
 
 const IPicture* ImageCacheImpl::resize(const IPicture* original, uint16_t w, uint16_t h) {
 	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();
-	// NOCOM(#sirver): a simple 'contains' would be good here. count?
-	ImageMap::const_iterator it = images_.find(new_hash);
-	if (it == images_.end()) {
-		if (original->width() == w and original->height() == h) {
-			return original;
-		}
-		images_.insert(make_pair(new_hash, new ResizedImage(new_hash, *original, surface_cache_, w, h)));
-	}
+	if (!has(new_hash))
+		return insert(new_hash, new ResizedImage(new_hash, *original, surface_cache_, w, h));
 	return get(new_hash);
 }
 
@@ -359,7 +338,8 @@ const IPicture* ImageCacheImpl::gray_out(const IPicture* original) {
 	return get(new_hash);
 }
 const IPicture* ImageCacheImpl::change_luminosity(const IPicture* original, float factor, bool halve_alpha) {
-	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % static_cast<int>(factor*1000) % halve_alpha).str();
+	const string new_hash =
+		(boost::format("%s:%i:%i") % original->hash() % static_cast<int>(factor * 1000) % halve_alpha).str();
 	// NOCOM(#sirver): a simple 'contains' would be good here. count?
 	ImageMap::const_iterator it = images_.find(new_hash);
 	if (it == images_.end()) {
@@ -385,22 +365,11 @@ const IPicture* ImageCacheImpl::new_permanent_picture(const string& hash, Surfac
 }
 
 // NOCOM(#sirver): maybe add a pruning step so that unused images are killed when possible.
-const IPicture* ImageCacheImpl::render_text(const std::string& text, uint16_t width) {
-	const string hash = boost::lexical_cast<string>(width) + text;
-	ImageMap::const_iterator it = images_.find(hash);
-	if (it == images_.end()) {
-		images_.insert(make_pair(hash,
-					new RTImage(hash, surface_cache_, rt_renderer_, text, width)));
-	}
-	return get(hash);
-}
-
-
 
 }  // namespace
 
-ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache, RT::IRenderer* rt_renderer) {
-	return new ImageCacheImpl(loader, surface_cache, rt_renderer);
+ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache) {
+	return new ImageCacheImpl(loader, surface_cache);
 }
 
 IPicture* new_uncached_image(Surface* surf) {

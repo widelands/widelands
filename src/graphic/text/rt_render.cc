@@ -17,7 +17,6 @@
  *
  */
 
-#include "graphic/graphic.h"  // NOCOM(#sirver): rm
 #include <queue>
 #include <string>
 #include <vector>
@@ -979,9 +978,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	if (!width)
 		width = INFINITE_WIDTH;
 
-	// NOCOM(#sirver): remove all references to g_gr again
-	assert(image_cache_ == NULL);
-	RTTagHandler rtrn(*rt, m_fc, default_style, &g_gr->imgcache(), width);
+	RTTagHandler rtrn(*rt, m_fc, default_style, image_cache_, width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);

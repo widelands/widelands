@@ -1117,7 +1117,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	}
 
 	static const uint32_t TIP_WIDTH_MAX = 360;
-	const IPicture* rendered_text = g_gr->imgcache().render_text(text_to_render, TIP_WIDTH_MAX);
+	const IPicture* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
 	if (!rendered_text)
 		return;
 

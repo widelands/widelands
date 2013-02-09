@@ -44,9 +44,6 @@ struct Road_Textures;
 struct SDL_Surface;
 struct StreamWrite;
 struct Texture;
-namespace RT {
-class IRenderer;
-}
 
 //@{
 /// This table is used by create_grayed_out_pic()to map colors to grayscale. It
@@ -187,8 +184,6 @@ protected:
 	boost::scoped_ptr<ImageLoaderImpl> image_loader_;
 	// NOCOM(#sirver): document me
 	boost::scoped_ptr<SurfaceCache> surface_cache_;
-	// NOCOM(#sirver): document me
-	boost::scoped_ptr<RT::IRenderer> rt_renderer_;
 	// The cache holding the images.
 	boost::scoped_ptr<ImageCache> image_cache_;
 

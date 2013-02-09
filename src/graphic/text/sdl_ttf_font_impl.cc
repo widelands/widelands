@@ -59,7 +59,8 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16
 	*gw = w; *gh = h;
 }
 
-const Surface& SDLTTF_Font::render(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
+const Surface& SDLTTF_Font::render
+	(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
 	// TODO(#sirver): Make this cheaper!
 	SimpleMD5Checksum checksum;
 	checksum.Data(font_name_.c_str(), font_name_.size());

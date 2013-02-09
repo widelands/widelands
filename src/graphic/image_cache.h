@@ -30,9 +30,6 @@ class IImageLoader;
 class RGBColor;
 class Surface;
 class SurfaceCache;
-namespace RT {
-class IRenderer;
-}
 
 // NOCOM(#sirver): replace permanent image through a function that takes a IPicture which
 // is an image implementation.
@@ -57,12 +54,16 @@ public:
 	virtual const IPicture* new_permanent_picture(const std::string& hash, Surface*) = 0;
 	// NOCOM(#sirver): maybe new_temporary_picture that might get deleted for rich text.
 
+
+	// NOCOM(#sirver): comment
+	virtual const IPicture* insert(const std::string& hash, IPicture*) = 0;
+	virtual bool has(const std::string& hash) const = 0;
+
 	/// Returns the image associated with the given hash. If no image by this hash is known,
 	/// it will try to load one from disk with the filename = hash. If this fails, it will throw an
 	/// error.
 	// NOCOM(#sirver): document this
 	virtual const IPicture* get(const std::string& hash) = 0;
-	virtual const IPicture* render_text(const std::string& text, uint16_t w) = 0;
 	virtual const IPicture* resize(const IPicture*, uint16_t w, uint16_t h) = 0;
 	virtual const IPicture* gray_out(const IPicture*) = 0;
 	virtual const IPicture* change_luminosity(const IPicture*, float factor, bool halve_alpha) = 0;
@@ -72,7 +73,7 @@ public:
 // NOCOM(#sirver): Should not take owernshi
 //  of nothing
 // Takes ownership of image_loader, but not of SurfaceCache.
-ImageCache* create_image_cache(IImageLoader*, SurfaceCache*, RT::IRenderer*);
+ImageCache* create_image_cache(IImageLoader*, SurfaceCache*);
 
 // NOCOM(#sirver): refactor and offer direct acces to InMemoryImage
 IPicture* new_uncached_image(Surface* surf);

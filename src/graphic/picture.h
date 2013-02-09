@@ -29,7 +29,7 @@
  * Interface to a bitmap that can act as the source of a rendering
  * operation.
  */
-class Surface; // // NOCOM(#sirver): remove again?
+class Surface;
 // TODO(#sirver): rename to Image ?
 // NOCOM(#sirver): move to image_cache!
 class IPicture : boost::noncopyable {

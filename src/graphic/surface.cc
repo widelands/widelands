@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,27 +18,38 @@
  */
 
 #include <SDL.h>
-#include <SDL_image.h>
 
-#include "io/fileread.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "wexception.h"
+#include "render/gl_surface_texture.h"
+#include "render/sdl_helper.h"
+#include "render/sdl_surface.h"
 
 #include "surface.h"
 
-#include "image_loader_impl.h"
+extern bool g_opengl;
 
-using namespace std;
-
-Surface* ImageLoaderImpl::load(const string& fname) const {
-	FileRead fr;
-
-	fr.fastOpen(*g_fs, fname.c_str());
-	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-
-	if (!sdlsurf)
-		throw wexception("Could not open image %s: %s", fname.c_str(), IMG_GetError());
-
-	return Surface::create(sdlsurf);
+Surface* Surface::create(SDL_Surface* surf) {
+#ifdef USE_OPENGL
+	if (g_opengl) {
+		return new GLSurfaceTexture(surf);
+	}
+#endif
+	SDL_Surface * surface = SDL_DisplayFormatAlpha(surf);
+	SDL_FreeSurface(surf);
+	return new SDLSurface(*surface);
 }
+
+Surface* Surface::create(uint16_t w, uint16_t h) {
+#ifdef USE_OPENGL
+	if (g_opengl) {
+		return new GLSurfaceTexture(w, h);
+	} else
+#endif
+	{
+		SDL_Surface* tsurf = empty_sdl_surface(w, h);
+		SDL_Surface* surf = SDL_DisplayFormatAlpha(tsurf);
+		SDL_FreeSurface(tsurf);
+		return new SDLSurface(*surf);
+	}
+}
+
 
