@@ -527,7 +527,7 @@ void Immovable::draw_construction
 		done = total;
 
 	const AnimationGfx::Index nr_frames = g_gr->nr_frames(m_anim);
-	uint32_t frametime = g_anim.get_animation(m_anim)->frametime;
+	uint32_t frametime = g_anim.get_animation(m_anim).frametime;
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const AnimationGfx::Index current_frame = done / units_per_frame;
 	uint32_t curw, curh;

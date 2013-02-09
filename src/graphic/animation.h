@@ -71,7 +71,7 @@ struct AnimationManager {
 
 	// for use by the graphics subsystem
 	uint32_t get_nranimations() const;
-	AnimationData const * get_animation(uint32_t id) const;
+	const AnimationData& get_animation(uint32_t id) const;
 
 private:
 	std::vector<AnimationData> m_animations;

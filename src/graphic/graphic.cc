@@ -846,16 +846,15 @@ AnimationGfx::Index Graphic::nr_frames(uint32_t anim)
 void Graphic::get_animation_size
 	(uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h)
 {
-	const AnimationData* data = g_anim.get_animation(anim);
+	const AnimationData& data = g_anim.get_animation(anim);
 	const AnimationGfx* gfx  =        get_animation(anim);
 
-	if (!data || !gfx) {
+	if (!gfx) {
 		log("WARNING: Animation %u does not exist\n", anim);
 		w = h = 0;
 	} else {
-		// Get the frame and its data. Ignore playerclrs.
 		const Surface* frame =
-			gfx->get_frame((time / data->frametime) % gfx->nr_frames());
+			gfx->get_frame((time / data.frametime) % gfx->nr_frames());
 		w = frame->width();
 		h = frame->height();
 	}
@@ -901,6 +900,7 @@ void Graphic::m_png_flush_function
  * @param anim the number of the animation
  * @return the AnimationGfs object of the given number
  */
+// NOCOM(#sirver): should be const&
 AnimationGfx * Graphic::get_animation(uint32_t anim)
 {
 	if (!anim)

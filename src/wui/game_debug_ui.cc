@@ -342,12 +342,13 @@ void FieldDebugWindow::think()
 		switch (vision) {
 		case 0: str += "  never seen\n"; break;
 		case 1: {
-			AnimationData const * data = 0;
-			if (player_field.map_object_descr[Widelands::TCoords<>::None])
-				data =
-					g_anim.get_animation
-						(player_field.map_object_descr[Widelands::TCoords<>::None]
-						 ->main_animation());
+			std::string animation_name = "(none)";
+			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
+				animation_name = g_anim.get_animation
+					(player_field.map_object_descr[Widelands::TCoords<>::None]
+					 ->main_animation()).picnametempl;
+			}
+
 			snprintf
 				(buffer, sizeof(buffer),
 				 "  last seen at %u:\n"
@@ -356,7 +357,7 @@ void FieldDebugWindow::think()
 				 "      ",
 				 player_field.time_node_last_unseen,
 				 player_field.owner,
-				 data ? data->picnametempl.c_str() : "(none)");
+				 animation_name.c_str());
 			str += buffer;
 			break;
 		}

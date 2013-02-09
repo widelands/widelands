@@ -44,7 +44,7 @@
 ///
 /// \sa RenderTarget::drawanim
 void AnimationData::trigger_soundfx
-	(uint32_t const framenumber, uint32_t const stereo_position) const
+	(uint32_t framenumber, uint32_t stereo_position) const
 {
 	std::map<uint32_t, std::string>::const_iterator const sfx_cue =
 		sfx_cues.find(framenumber);
@@ -181,16 +181,15 @@ uint32_t AnimationManager::get_nranimations() const
 
 /*
 ===============
-Return AnimationData for this animation.
-Returns 0 if the animation doesn't exist.
+Return AnimationData for this animation or throws if this id is unknown.
 ===============
 */
-AnimationData const * AnimationManager::get_animation(uint32_t const id) const
+const AnimationData& AnimationManager::get_animation(uint32_t id) const
 {
 	if (!id || id > m_animations.size())
-		return 0;
+		throw wexception("Requested unknown animation with id: %i", id);
 
-	return &m_animations[id - 1];
+	return m_animations[id - 1];
 }
 
 

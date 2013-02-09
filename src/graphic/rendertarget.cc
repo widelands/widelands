@@ -268,16 +268,15 @@ void RenderTarget::drawanim
 	 uint32_t       const time,
 	 Player const * const player)
 {
-	//log("RenderTarget::drawanim()\n");
-	AnimationData const * const data = g_anim.get_animation(animation);
+	const AnimationData& data = g_anim.get_animation(animation);
 	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!data || !g_gr) {
+	if (!gfx) {
 		log("WARNING: Animation %u does not exist\n", animation);
 		return;
 	}
 
 	// Get the frame and its data
-	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
+	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
 	const Surface* frame =
 		player ?
 		gfx->get_frame
@@ -294,7 +293,7 @@ void RenderTarget::drawanim
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
-	data->trigger_soundfx(framenumber, 128);
+	data.trigger_soundfx(framenumber, 128);
 }
 
 void RenderTarget::drawstatic
@@ -302,9 +301,9 @@ void RenderTarget::drawstatic
 	 uint32_t       const animation,
 	 Player const * const player)
 {
-	AnimationData const * const data = g_anim.get_animation(animation);
+	const AnimationData& data = g_anim.get_animation(animation);
 	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!data || !g_gr) {
+	if (!gfx) {
 		log("WARNING: Animation %u does not exist\n", animation);
 		return;
 	}
@@ -339,16 +338,15 @@ void RenderTarget::drawanimrect
 	 Player const * const player,
 	 Rect                 srcrc)
 {
-	//log("RenderTarget::drawanimrect()\n");
-	AnimationData const * const data = g_anim.get_animation(animation);
+	const AnimationData& data = g_anim.get_animation(animation);
 	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!data || !g_gr) {
+	if (!gfx) {
 		log("WARNING: Animation %u does not exist\n", animation);
 		return;
 	}
 
 	// Get the frame and its data
-	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
+	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
 	const Surface* frame =
 		player ?
 		gfx->get_frame

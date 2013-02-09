@@ -920,7 +920,7 @@ void Building::send_message
 	 uint32_t throttle_radius)
 {
 	std::string const & picnametempl =
-		g_anim.get_animation(descr().get_ui_anim())->picnametempl;
+		g_anim.get_animation(descr().get_ui_anim()).picnametempl;
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + picnametempl.size() + 1 +

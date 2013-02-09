@@ -17,40 +17,26 @@
  *
  */
 
+#include <SDL.h>
+
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
+#include "log.h"
 
 #include "graphic/graphic.h"
 #include "graphic/image_loader_impl.h"
 #include "graphic/picture.h"
 #include "graphic/surface.h"
 
-#include "log.h"
 
-#include <SDL.h>
 
-/*
-==============================================================================
-
-AnimationGfx -- contains graphics data for an animtion
-
-==============================================================================
-*/
-
-/*
-===============
-AnimationGfx::AnimationGfx
-
-Load the animation
-===============
-*/
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
-AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, AnimationData const * const data) :
-	m_hotspot(data->hotspot)
+AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, const AnimationData& data) :
+	m_hotspot(data.hotspot)
 {
-	m_hasplrclrs = data->hasplrclrs;
+	m_hasplrclrs = data.hasplrclrs;
 
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
@@ -66,12 +52,12 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, AnimationData const * cons
 	//  masks, the extension (4 characters including the dot) and the null
 	//  terminator. Copy the picture name template into the buffer.
 	char filename[256];
-	std::string::size_type const picnametempl_size = data->picnametempl.size();
+	std::string::size_type const picnametempl_size = data.picnametempl.size();
 	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
 		throw wexception
 			("buffer too small (%lu) for picture name temlplate of size %lu\n",
 			 static_cast<long unsigned>(sizeof(filename)), static_cast<long unsigned>(picnametempl_size));
-	strcpy(filename, data->picnametempl.c_str());
+	strcpy(filename, data.picnametempl.c_str());
 
 	//  Find out where in the picture name template the number is. Search
 	//  backwards from the end.
@@ -85,13 +71,6 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, AnimationData const * cons
 		--before_first_digit;
 	}
 	unsigned int width = 0, height = 0;
-#ifndef NDEBUG
-	//#define VALIDATE_ANIMATION_CROPPING
-#endif
-#ifdef VALIDATE_ANIMATION_CROPPING
-	bool data_in_x_min = false, data_in_x_max = false;
-	bool data_in_y_min = false, data_in_y_max = false;
-#endif
 
 	for (;;) {
 		// Load the base image
@@ -110,56 +89,6 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, AnimationData const * cons
 							 pic->width(), pic->height(), width, height);
 					//  Get a new AnimFrame.
 					m_plrframes[0].push_back(pic);
-#ifdef VALIDATE_ANIMATION_CROPPING
-					if (not data_in_x_min)
-						for (int y = 0; y < height; ++y) {
-							uint8_t r, g, b, a;
-							SDL_GetRGBA
-								(frame.get_pixel(0,         y),
-								 surface.format,
-								 &r, &g, &b, &a);
-							if (a) {
-								data_in_x_min = true;
-								break;
-							}
-						}
-					if (not data_in_x_max)
-						for (int y = 0; y < height; ++y) {
-							uint8_t r, g, b, a;
-							SDL_GetRGBA
-								(frame.get_pixel(width - 1, y),
-								 surface.format,
-								 &r, &g, &b, &a);
-							if (a) {
-								data_in_x_max = true;
-								break;
-							}
-						}
-					if (not data_in_y_min)
-						for (int x = 0; x < width; ++x) {
-							uint8_t r, g, b, a;
-							SDL_GetRGBA
-								(frame.get_pixel(x,         0),
-								 surface.format,
-								 &r, &g, &b, &a);
-							if (a) {
-								data_in_y_min = true;
-								break;
-							}
-						}
-					if (not data_in_y_max)
-						for (int x = 0; x < width; ++x) {
-							uint8_t r, g, b, a;
-							SDL_GetRGBA
-								(frame.get_pixel(x,         height - 1),
-								 surface.format,
-								 &r, &g, &b, &a);
-							if (a) {
-								data_in_y_max = true;
-								break;
-							}
-						}
-#endif
 				} catch (std::exception const & e) {
 					throw wexception
 						("could not load animation frame %s: %s\n",
@@ -216,28 +145,12 @@ AnimationGfx::AnimationGfx(const ImageLoaderImpl& il, AnimationData const * cons
 end:
 	if (m_plrframes[0].empty())
 		throw wexception
-			("animation %s has no frames", data->picnametempl.c_str());
+			("animation %s has no frames", data.picnametempl.c_str());
 
 	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
 		throw wexception
 			("animation has %"PRIuS" frames but playercolor mask has only %"PRIuS" frames",
 			 m_plrframes[0].size(), m_pcmasks.size());
-#ifdef VALIDATE_ANIMATION_CROPPING
-	if
-		(char const * const where =
-		 	not data_in_x_min ? "left column"  :
-		 	not data_in_x_max ? "right column" :
-		 	not data_in_y_min ? "top row"      :
-		 	not data_in_y_max ? "bottom row"   :
-		 	0)
-		log
-			("The animation %s is not properly cropped (the %s has only fully "
-			 "transparent pixels in each frame. Therefore the %s should be "
-			 "removed (and the hotspot adjusted accordingly). Otherwise "
-			 "rendering will be slowed down by needless painting of fully "
-			 "transparent pixels.\n",
-			 data->picnametempl.c_str(), where, where);
-#endif
 }
 
 
