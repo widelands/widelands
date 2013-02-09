@@ -17,7 +17,7 @@
  *
  */
 
-//#ifdef USE_OPENGL
+#ifdef USE_OPENGL
 #include "gamerenderer_gl.h"
 
 #include "gl_surface.h"
@@ -666,4 +666,4 @@ void GameRendererGL::draw_roads()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-//#endif // USE_OPENGL
+#endif // USE_OPENGL
