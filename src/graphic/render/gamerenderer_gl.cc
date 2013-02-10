@@ -234,7 +234,7 @@ void GameRendererGL::collect_terrain_base(bool onlyscan)
 
 void GameRendererGL::prepare_terrain_base()
 {
-	assert(sizeof(basevertex) == 32);
+	compile_assert(sizeof(basevertex) == 32);
 
 	uint32_t reqsize = m_patch_size.w * m_patch_size.h;
 	if (reqsize > 0x10000)
@@ -409,7 +409,7 @@ void GameRendererGL::collect_terrain_dither(bool onlyscan)
  */
 void GameRendererGL::prepare_terrain_dither()
 {
-	assert(sizeof(dithervertex) == 32);
+	compile_assert(sizeof(dithervertex) == 32);
 
 	if (m_terrain_edge_freq.size() < 16)
 		m_terrain_edge_freq.resize(16);

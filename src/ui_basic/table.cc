@@ -80,7 +80,6 @@ void Table<void *>::add_column
 	 Align               const alignment,
 	 bool                const is_checkbox_column)
 {
-
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
