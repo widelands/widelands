@@ -395,12 +395,10 @@ void BaseListselect::draw(RenderTarget & dst)
 			m_max_pic_width         ? m_max_pic_width + 10 :
 			1;
 
-		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
-
 		// Horizontal center the string
 		UI::g_fh->draw_text
 			(dst,
-			 TextStyle::makebold(Font::get(m_fontname, m_fontsize), col),
+			 TextStyle::makebold(Font::get(m_fontname, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
 			 Point
 			 	(x,
 			 	 y +

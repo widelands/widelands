@@ -266,11 +266,11 @@ void Editor_Interactive::toggle_mainmenu() {
 		new Editor_Main_Menu(*this, m_mainmenu);
 }
 
-void Editor_Interactive::map_clicked(bool draw) {
+void Editor_Interactive::map_clicked(bool should_draw) {
 	m_history.do_action
 		(tools.current(),
 		 tools.use_tool, egbase().map(),
-	     get_sel_pos(), *this, draw);
+	     get_sel_pos(), *this, should_draw);
 	need_complete_redraw();
 	set_need_save(true);
 }

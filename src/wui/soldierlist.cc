@@ -104,11 +104,11 @@ private:
 
 SoldierPanel::SoldierPanel
 	(UI::Panel & parent,
-	 Widelands::Editor_Game_Base & egbase,
+	 Widelands::Editor_Game_Base & gegbase,
 	 Widelands::Building & building)
 :
 Panel(&parent, 0, 0, 0, 0),
-m_egbase(egbase),
+m_egbase(gegbase),
 m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
 m_last_animate_time(0)
 {

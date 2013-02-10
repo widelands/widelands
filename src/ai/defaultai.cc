@@ -58,8 +58,8 @@ DefaultAI::NormalImpl DefaultAI::normalImpl;
 DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
-DefaultAI::DefaultAI(Game & game, Player_Number const pid, uint8_t const t) :
-	Computer_Player              (game, pid),
+DefaultAI::DefaultAI(Game & ggame, Player_Number const pid, uint8_t const t) :
+	Computer_Player              (ggame, pid),
 	type                         (t),
 	m_buildable_changed          (true),
 	m_mineable_changed           (true),

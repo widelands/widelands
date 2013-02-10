@@ -232,7 +232,7 @@ template<typename T> static void render_triangle
 	polygon.nrpoints = 3;
 
 	// Determine a top vertex
-	int32_t top, topy;
+	int32_t top = 0, topy = 0;
 
 	topy = 0x7fffffff;
 	for (uint8_t i = 0; i < polygon.nrpoints; ++i) {

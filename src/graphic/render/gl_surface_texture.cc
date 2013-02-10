@@ -260,10 +260,10 @@ void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
 }
 
 void GLSurfaceTexture::draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width)
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
 	setup_gl();
-	GLSurface::draw_line(x1, y1, x2, y2, color, width);
+	GLSurface::draw_line(x1, y1, x2, y2, color, gwidth);
 	reset_gl();
 }
 

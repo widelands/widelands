@@ -273,7 +273,7 @@ void SDLSurface::brighten_rect(const Rect& rc, const int32_t factor) {
 * access instead of the set_pixel() function
 */
 void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-		const RGBColor& color, uint8_t width)
+		const RGBColor& color, uint8_t gwidth)
 {
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
 	int32_t dy = y2 - y1;      /* the vertical distance of the line */
@@ -297,7 +297,7 @@ void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 			}
 
 			p.x += sdx;
-			for (int32_t w = 0; w < width; ++w) {
+			for (int32_t w = 0; w < gwidth; ++w) {
 				set_pixel(p.x, p.y + w, color.map(format()));
 			}
 		}
@@ -311,7 +311,7 @@ void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 			}
 
 			p.y += sdy;
-			for (int32_t w = 0; w < width; ++w) {
+			for (int32_t w = 0; w < gwidth; ++w) {
 				set_pixel(p.x + w, p.y, color.map(format()));
 			}
 		}

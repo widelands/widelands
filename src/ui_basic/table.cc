@@ -263,8 +263,6 @@ void Table<void *>::draw(RenderTarget & dst)
 				 -ms_darken_value);
 		}
 
-		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
-
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			Column const & column    = m_columns[i];
@@ -301,7 +299,7 @@ void Table<void *>::draw(RenderTarget & dst)
 
 			UI::g_fh->draw_text
 				(dst,
-				 TextStyle::makebold(Font::get(m_fontname, m_fontsize), col),
+				 TextStyle::makebold(Font::get(m_fontname, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
 				 point +
 				 Point
 				 	(picw,

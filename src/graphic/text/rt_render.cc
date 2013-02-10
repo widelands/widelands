@@ -130,9 +130,9 @@ public:
 	Floating get_floating() {return m_floating;}
 	void set_floating(Floating f) {m_floating = f;}
 	HAlign halign() {return m_halign;}
-	void set_halign(HAlign halign) {m_halign = halign;}
+	void set_halign(HAlign ghalign) {m_halign = ghalign;}
 	VAlign valign() {return m_valign;}
-	void set_valign(VAlign valign) {m_valign = valign;}
+	void set_valign(VAlign gvalign) {m_valign = gvalign;}
 	void set_x(uint16_t nx) {m_x = nx;}
 	void set_y(uint16_t ny) {m_y = ny;}
 	uint16_t x() {return m_x;}
@@ -359,9 +359,9 @@ private:
 Surface* FillingTextNode::render(SurfaceCache* surface_cache) {
 	const Surface& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
 	Surface* rv = Surface::create(m_w, m_h);
-	for (uint16_t x = 0; x < m_w; x += t.width()) {
-		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - x), m_h);
-		rv->blit(Point(x, 0), &t, srcrect, CM_Solid);
+	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
+		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
+		rv->blit(Point(curx, 0), &t, srcrect, CM_Solid);
 	}
 	return rv;
 }
@@ -424,10 +424,10 @@ public:
 		if (m_bg) {
 			Point dst;
 			Rect srcrect(Point(0, 0), 1, 1);
-			for (uint16_t x = 0; x < m_w; x += m_bg->width()) {
-				dst.x = x;
+			for (uint16_t curx = 0; curx < m_w; curx += m_bg->width()) {
+				dst.x = curx;
 				dst.y = 0;
-				srcrect.w = min<int>(m_bg->width(), m_w - x);
+				srcrect.w = min<int>(m_bg->width(), m_w - curx);
 				srcrect.h = m_h;
 				rv->blit(dst, m_bg->surface(), srcrect, CM_Solid);
 			}
@@ -482,11 +482,11 @@ public:
 			Point dst;
 			Rect src(0, 0, 0, 0);
 
-			for (uint16_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->height()) {
-				for (uint16_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->width()) {
-					dst.x = x; dst.y = y;
-					src.w = min<int>(m_bg_img->width(), m_w + m_margin.left - x);
-					src.h = min<int>(m_bg_img->height(), m_h + m_margin.top - y);
+			for (uint16_t cury = m_margin.top; cury < m_h + m_margin.top; cury += m_bg_img->height()) {
+				for (uint16_t curx = m_margin.left; curx < m_w + m_margin.left; curx += m_bg_img->width()) {
+					dst.x = curx; dst.y = cury;
+					src.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
+					src.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
 					rv->blit(dst, m_bg_img->surface(), src, CM_Solid);
 				}
 			}
@@ -519,8 +519,8 @@ public:
 	}
 	void set_background(const Image* img) {m_bg_img = img;}
 	void set_nodes_to_render(vector<RenderNode*>& n) {m_nodes_to_render = n;}
-	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, const string& s) {
-		Reference r = {Rect(x, y, w, h), s};
+	void add_reference(int16_t gx, int16_t gy, uint16_t w, uint16_t h, const string& s) {
+		Reference r = {Rect(gx, gy, w, h), s};
 		m_refs.push_back(r);
 	}
 

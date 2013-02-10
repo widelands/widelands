@@ -38,9 +38,9 @@ static const uint32_t IWD_WareBaseLine = -6;
 /**
  * Create an ItemWaresDisplay with no items and zero capacity.
  */
-ItemWaresDisplay::ItemWaresDisplay(Panel * parent, const Widelands::Player & player) :
+ItemWaresDisplay::ItemWaresDisplay(Panel * parent, const Widelands::Player & gplayer) :
 	Panel(parent, 0, 0, 0, 0),
-	m_player(player),
+	m_player(gplayer),
 	m_capacity(0),
 	m_itemsperrow(IWD_DefaultItemsPerRow)
 {

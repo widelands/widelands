@@ -59,15 +59,15 @@ IMPLEMENTATION
 */
 
 
-DismantleSite::DismantleSite(const DismantleSite_Descr & descr) :
-Partially_Finished_Building(descr)
+DismantleSite::DismantleSite(const DismantleSite_Descr & gdescr) :
+Partially_Finished_Building(gdescr)
 {}
 
 DismantleSite::DismantleSite
-	(const DismantleSite_Descr & descr, Editor_Game_Base & egbase, Coords const c,
+	(const DismantleSite_Descr & gdescr, Editor_Game_Base & egbase, Coords const c,
 	 Player & plr, const Building_Descr & bdscr, bool loading)
 :
-Partially_Finished_Building(descr)
+Partially_Finished_Building(gdescr)
 {
 	set_building(bdscr);
 

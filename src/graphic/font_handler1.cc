@@ -45,9 +45,9 @@ namespace {
 class RTImage : public Image {
 public:
 	RTImage
-		(const string& hash, SurfaceCache* surface_cache, RT::IRenderer*
-		 rt_renderer, const string& text, uint16_t width)
-		: hash_(hash), text_(text), width_(width), surface_cache_(surface_cache),
+		(const string& ghash, SurfaceCache* surface_cache, RT::IRenderer*
+		 rt_renderer, const string& text, uint16_t gwidth)
+		: hash_(ghash), text_(text), width_(gwidth), surface_cache_(surface_cache),
 		  rt_renderer_(rt_renderer)
 	{}
 	virtual ~RTImage() {}

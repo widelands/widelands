@@ -284,8 +284,8 @@ Surface* make_playerclr_surface(Surface& orig_surface, Surface& pcmask_surface, 
 // ownerships are taken.
 class TransformedImage : public Image {
 public:
-	TransformedImage(const string& hash, const Image& original, SurfaceCache* surface_cache) :
-		hash_(hash), original_(original), surface_cache_(surface_cache) {}
+	TransformedImage(const string& ghash, const Image& original, SurfaceCache* surface_cache) :
+		hash_(ghash), original_(original), surface_cache_(surface_cache) {}
 	virtual ~TransformedImage() {}
 
 	// Implements Image.
@@ -314,9 +314,9 @@ protected:
 class ResizedImage : public TransformedImage {
 public:
 	ResizedImage
-		(const string& hash, const Image& original,
+		(const string& ghash, const Image& original,
 		 SurfaceCache* surface_cache, uint16_t w, uint16_t h)
-		: TransformedImage(hash, original, surface_cache), w_(w), h_(h) {
+		: TransformedImage(ghash, original, surface_cache), w_(w), h_(h) {
 			assert(w != original.width() || h != original.height());
 	}
 	virtual ~ResizedImage() {}
@@ -338,8 +338,8 @@ private:
 // A grayed out copy of an Image.
 class GrayedOutImage : public TransformedImage {
 public:
-	GrayedOutImage(const string& hash, const Image& original, SurfaceCache* surface_cache) :
-		TransformedImage(hash, original, surface_cache)
+	GrayedOutImage(const string& ghash, const Image& original, SurfaceCache* surface_cache) :
+		TransformedImage(ghash, original, surface_cache)
 	{}
 	virtual ~GrayedOutImage() {}
 
@@ -353,9 +353,9 @@ public:
 class ChangeLuminosityImage : public TransformedImage {
 public:
 	ChangeLuminosityImage
-		(const string& hash, const Image& original,
+		(const string& ghash, const Image& original,
 		 SurfaceCache* surface_cache, float factor, bool halve_alpha)
-		: TransformedImage(hash, original, surface_cache),
+		: TransformedImage(ghash, original, surface_cache),
 		  factor_(factor),
 		  halve_alpha_(halve_alpha)
 	{}
@@ -376,9 +376,9 @@ private:
 class PlayerColoredImage : public TransformedImage {
 public:
 	PlayerColoredImage
-		(const string& hash, const Image& original,
+		(const string& ghash, const Image& original,
 		 SurfaceCache* surface_cache, const RGBColor& color, const Image& mask)
-		: TransformedImage(hash, original, surface_cache), color_(color), mask_(mask)
+		: TransformedImage(ghash, original, surface_cache), color_(color), mask_(mask)
 		{}
 	virtual ~PlayerColoredImage() {}
 

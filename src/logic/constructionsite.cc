@@ -178,11 +178,11 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		Building & building =
+		Building & b =
 			m_building->create(egbase, owner(), m_position, false);
 		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
-			builder->set_location(&building);
+			builder->set_location(&b);
 		}
 	}
 }

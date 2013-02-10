@@ -1289,15 +1289,15 @@ bool Immovable::construct_ware_item(Game & game, Ware_Index index)
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
 
-	const ImmovableProgram::ActConstruction * act =
+	const ImmovableProgram::ActConstruction * action =
 		dynamic_cast<const ImmovableProgram::ActConstruction *>(&(*m_program)[m_program_ptr]);
-	assert(act != 0);
+	assert(action != 0);
 
 	if (remaining.empty()) {
 		// Wait for the last building animation to finish.
-		m_program_step = schedule_act(game, act->buildtime());
+		m_program_step = schedule_act(game, action->buildtime());
 	} else {
-		m_program_step = schedule_act(game, act->decaytime());
+		m_program_step = schedule_act(game, action->decaytime());
 	}
 
 	return true;

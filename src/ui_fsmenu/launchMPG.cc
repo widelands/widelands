@@ -296,11 +296,11 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 
 		try {
 
-			std::string n = t->get_string("name");
-			std::string d = t->get_string("description");
+			std::string name = t->get_string("name");
+			std::string descr = t->get_string("description");
 
-			m_wincondition.set_title(n);
-			m_wincondition.set_tooltip(d.c_str());
+			m_wincondition.set_title(name);
+			m_wincondition.set_tooltip(descr.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
 			win_condition_clicked();

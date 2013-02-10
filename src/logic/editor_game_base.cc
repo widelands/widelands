@@ -59,9 +59,9 @@ Editor_Game_Base::Editor_Game_Base()
 initialization
 ============
 */
-Editor_Game_Base::Editor_Game_Base(LuaInterface * lua) :
+Editor_Game_Base::Editor_Game_Base(LuaInterface * lua_interface) :
 m_gametime          (0),
-m_lua               (lua),
+m_lua               (lua_interface),
 m_ibase             (0),
 m_map               (0),
 m_lasttrackserial   (0)

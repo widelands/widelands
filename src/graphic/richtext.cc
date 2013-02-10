@@ -151,9 +151,9 @@ void RichTextImpl::clear()
  * Set the width for the rich text field.
  * Default width is undefined. This must be called before @ref parse.
  */
-void RichText::set_width(uint32_t width)
+void RichText::set_width(uint32_t gwidth)
 {
-	m->width = width;
+	m->width = gwidth;
 }
 
 /**

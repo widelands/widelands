@@ -130,12 +130,12 @@ int32_t RenderTarget::height() const
  */
 void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
-	 const RGBColor& color, uint8_t width)
+	 const RGBColor& color, uint8_t gwidth)
 {
 	m_surface->draw_line
 		(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,
 		 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color,
-		 width);
+		 gwidth);
 }
 
 /**

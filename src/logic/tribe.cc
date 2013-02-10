@@ -221,9 +221,9 @@ Tribe_Descr::Tribe_Descr
 					(column_s, boost::token_finder(boost::is_any_of(","))); \
 				It2 != boost::split_iterator<string::iterator>(); \
 				++It2) { \
-				std::string name = boost::copy_range<std::string>(*It2); \
-				boost::trim(name); \
-				Ware_Index id = safe_##w##_index(name); \
+				std::string instance_name = boost::copy_range<std::string>(*It2); \
+				boost::trim(instance_name); \
+				Ware_Index id = safe_##w##_index(instance_name); \
 				column.push_back(id); \
 				/* it has been added to the column, but the column not */ \
 				/* yet to the array */ \
@@ -626,10 +626,10 @@ Building_Index Tribe_Descr::safe_building_index
  * If there is a savegame compatibility information string concerning the
  * given immovable name, return it. Otherwise, return an empty string.
  */
-const std::vector<std::string> & Tribe_Descr::compatibility_immovable(const std::string & name) const
+const std::vector<std::string> & Tribe_Descr::compatibility_immovable(const std::string & imm_name) const
 {
 	static const std::vector<std::string> empty;
-	Compatibility::const_iterator it = m_compatibility_immovable.find(name);
+	Compatibility::const_iterator it = m_compatibility_immovable.find(imm_name);
 	if (it != m_compatibility_immovable.end())
 		return it->second;
 	return empty;
