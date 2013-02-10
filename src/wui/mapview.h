@@ -27,6 +27,7 @@
 
 #include "ui_basic/panel.h"
 
+class GameRenderer;
 struct Interactive_Base;
 
 /**
@@ -45,6 +46,7 @@ struct Map_View : public UI::Panel {
 		(UI::Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 Interactive_Base &);
+	virtual ~Map_View();
 
 	void set_changeview(const ChangeViewFn & fn);
 
@@ -83,6 +85,7 @@ protected:
 private:
 	void stop_dragging();
 
+	boost::scoped_ptr<GameRenderer> m_renderer;
 	Interactive_Base & m_intbase;
 	ChangeViewFn m_changeview;
 	Point              m_viewpoint;

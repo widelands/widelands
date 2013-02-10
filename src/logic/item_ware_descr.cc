@@ -17,24 +17,25 @@
  *
  */
 
-#include "item_ware_descr.h"
-
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "profile/profile.h"
 
+#include "item_ware_descr.h"
+
 namespace Widelands {
 
 Item_Ware_Descr::Item_Ware_Descr
-	(const Tribe_Descr & tribe, char const * const _name,
+	(const Tribe_Descr & gtribe, char const * const _name,
 	 char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_tribe(tribe),
+	m_tribe(gtribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
-	m_icon(g_gr ? g_gr->imgcache().load(PicMod_UI, "pics/but0.png") : 0) // because of dedicated
+	m_icon(g_gr ? g_gr->images().get("pics/but0.png") : 0) // because of dedicated
 {
 	m_default_target_quantity =
 		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
@@ -51,7 +52,7 @@ Item_Ware_Descr::Item_Ware_Descr
  */
 void Item_Ware_Descr::load_graphics()
 {
-	m_icon = g_gr->imgcache().load(PicMod_Game, m_icon_fname);
+	m_icon = g_gr->images().get(m_icon_fname);
 }
 
 }

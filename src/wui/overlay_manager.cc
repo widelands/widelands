@@ -155,7 +155,7 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
  */
 void Overlay_Manager::register_overlay
 	(Widelands::TCoords<> const c,
-	 const IPicture* pic,
+	 const Image* pic,
 	 int32_t              const level,
 	 Point                      hotspot,
 	 Job_Id               const jobid)
@@ -164,7 +164,7 @@ void Overlay_Manager::register_overlay
 	assert(level != 5); //  level == 5 is undefined behavior
 
 	if (hotspot == Point::invalid()) {
-		hotspot = Point(pic->get_w() / 2, pic->get_h() / 2);
+		hotspot = Point(pic->width() / 2, pic->height() / 2);
 	}
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
@@ -213,7 +213,7 @@ void Overlay_Manager::register_overlay
  * remove one (or many) overlays from a node or triangle
  */
 void Overlay_Manager::remove_overlay
-	(Widelands::TCoords<> const c, const IPicture* pic)
+	(Widelands::TCoords<> const c, const Image* pic)
 {
 	assert(c.t <= 2);
 
@@ -308,8 +308,8 @@ void Overlay_Manager::load_graphics() {
 	const char * const * filename = filenames;
 
 	//  Special case for flag, which has a different formula for hotspot_y.
-	buildhelp_info->pic = g_gr->imgcache().load(PicMod_Game, *filename);
-	buildhelp_info->hotspot = Point(buildhelp_info->pic->get_w() / 2, buildhelp_info->pic->get_h() - 1);
+	buildhelp_info->pic = g_gr->images().get(*filename);
+	buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
 
 	const Overlay_Info * const buildhelp_infos_end =
 		buildhelp_info + Widelands::Field::Buildhelp_None;
@@ -317,8 +317,8 @@ void Overlay_Manager::load_graphics() {
 		++buildhelp_info, ++filename;
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
-		buildhelp_info->pic = g_gr->imgcache().load(PicMod_Game, *filename);
-		buildhelp_info->hotspot = Point(buildhelp_info->pic->get_w() / 2, buildhelp_info->pic->get_h() / 2);
+		buildhelp_info->pic = g_gr->images().get(*filename);
+		buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
 	}
 
 	m_are_graphics_loaded = true;

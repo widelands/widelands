@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,29 +17,31 @@
  *
  */
 
-#ifndef IBLITABLE_SURFACE_H
-#define IBLITABLE_SURFACE_H
+#ifndef IMAGE_H
+#define IMAGE_H
+
+#include <stdint.h>
+#include <string>
 
 #include <boost/noncopyable.hpp>
 
-#include "compositemode.h"
-#include "picture.h"
-#include "point.h"
-#include "rgbcolor.h"
-#include "rect.h"
-
 /**
- * Interface to a basic surfaces that can be used as destination for blitting.
+ * Interface to a bitmap that can act as the source of a rendering
+ * operation.
  */
-class IBlitableSurface : public IPicture {
+class Surface;
+
+class Image : boost::noncopyable {
 public:
-	virtual ~IBlitableSurface() {}
+	virtual ~Image() {}
 
-	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
+	virtual uint16_t width() const = 0;
+	virtual uint16_t height() const = 0;
 
-	/// Draws a filled rect to the surface.
-	virtual void fill_rect(const Rect&, RGBAColor) = 0;
+	// Internal functions needed for caching.
+	virtual Surface* surface() const = 0;
+	virtual const std::string& hash() const = 0;
 };
+
 
 #endif

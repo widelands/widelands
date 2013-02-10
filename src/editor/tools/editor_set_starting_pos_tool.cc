@@ -89,7 +89,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 		char picname[] = "pics/editor_player_00_starting_pos.png";
 		picname[19] += m_current_player / 10;
 		picname[20] += m_current_player % 10;
-		const IPicture* pic = g_gr->imgcache().load(PicMod_Game,  picname);
+		const Image* pic = g_gr->images().get(picname);
 
 		//  check if field is valid
 		if
@@ -102,7 +102,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 
 			//  add new overlay
 			overlay_manager.register_overlay
-			(center.node, pic, 8, Point(pic->get_w() / 2, STARTING_POS_HOTSPOT_Y));
+			(center.node, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
 			map.set_starting_pos(m_current_player, center.node);

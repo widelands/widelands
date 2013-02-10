@@ -44,7 +44,7 @@ typedef unordered_map<string, TagConstraint> TagConstraints;
 // Interface Stuff {{{
 class Attr : public IAttr {
 public:
-	Attr(string name, string value) : m_name(name), m_value(value) {};
+	Attr(string gname, string value) : m_name(gname), m_value(value) {};
 	virtual ~Attr() {};
 
 	virtual const string & name() const {return m_name;}
@@ -153,13 +153,13 @@ void Tag::m_parse_closing_tag(TextStream & ts) {
 }
 
 void Tag::m_parse_attribute(TextStream & ts, unordered_set<string> & allowed_attrs) {
-	string name = ts.till_any("=");
-	if (!allowed_attrs.count(name))
-		throw SyntaxError_Impl(ts.line(), ts.col(), "an allowed attribute", name, ts.peek(100));
+	string aname = ts.till_any("=");
+	if (!allowed_attrs.count(aname))
+		throw SyntaxError_Impl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
 
 	ts.skip(1);
 
-	m_am.add_attribute(name, new Attr(name, ts.parse_string()));
+	m_am.add_attribute(aname, new Attr(aname, ts.parse_string()));
 }
 
 void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & allowed_tags)

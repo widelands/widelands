@@ -21,7 +21,6 @@
 
 #include "mouse_constants.h"
 
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 
 #include "compile_assert.h"
@@ -42,7 +41,7 @@ Tab::Tab
 	(Tab_Panel         * const parent,
 	 uint32_t            const id,
 	 std::string const &       name,
-	 const IPicture* gpic,
+	 const Image* gpic,
 	 std::string const &       gtooltip,
 	 Panel             * const gpanel)
 	:
@@ -78,7 +77,7 @@ void Tab::activate() {
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 const IPicture* background)
+	 const Image* background)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
@@ -88,7 +87,7 @@ Tab_Panel::Tab_Panel
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
-	 const IPicture* background)
+	 const Image* background)
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
@@ -150,7 +149,7 @@ void Tab_Panel::update_desired_size()
 */
 uint32_t Tab_Panel::add
 	(std::string const & name,
-	 const IPicture* pic,
+	 const Image* pic,
 	 Panel             * const panel,
 	 std::string const &       tooltip_text)
 {
@@ -231,8 +230,8 @@ void Tab_Panel::draw(RenderTarget & dst)
 
 		// Draw the icon
 		assert(m_tabs[idx]->pic);
-		uint32_t cpw = m_tabs[idx]->pic->get_w();
-		uint32_t cph = m_tabs[idx]->pic->get_h();
+		uint16_t cpw = m_tabs[idx]->pic->width();
+		uint16_t cph = m_tabs[idx]->pic->height();
 		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
 			 m_tabs[idx]->pic);

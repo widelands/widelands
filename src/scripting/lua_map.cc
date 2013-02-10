@@ -162,8 +162,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 				container_iterate_const
 					(PlayerImmovable::Workers, pi->get_workers(), w)
 				{
-					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-					if (i == sp->first) {
+					if (tribe.worker_index((*w.current)->descr().name()) == sp->first) {
 						const_cast<Worker *>(*w.current)->remove(egbase);
 						++d;
 						break;
@@ -305,8 +304,8 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 		int d = sp->second - cur;
 		if (d < 0) {
 			while (d) {
-				std::vector<Soldier *> curs = sc->stationedSoldiers();
-				container_iterate_const(std::vector<Soldier *>, curs, s)
+				std::vector<Soldier *> stationed_soldiers = sc->stationedSoldiers();
+				container_iterate_const(std::vector<Soldier *>, stationed_soldiers, s)
 				{
 					SoldierDescr is
 						((*s.current)->get_hp_level(),
@@ -1373,8 +1372,7 @@ int L_Flag::set_wares(lua_State * L)
 			while (d) {
 				Flag::Wares current_items = f->get_items();
 				container_iterate_const(Flag::Wares, current_items, w) {
-					Ware_Index i = tribe.ware_index((*w.current)->descr().name());
-					if (i == sp->first) {
+					if (tribe.ware_index((*w.current)->descr().name()) == sp->first) {
 						const_cast<WareInstance *>(*w.current)->remove(egbase);
 						++d;
 						break;
@@ -1384,7 +1382,7 @@ int L_Flag::set_wares(lua_State * L)
 		} else if (d > 0) {
 			// add items
 			Item_Ware_Descr const & wd = *tribe.get_ware_descr(sp->first);
-			for (int32_t i = 0; i < d; i++) {
+			for (int32_t j = 0; j < d; j++) {
 				WareInstance & item = *new WareInstance(sp->first, &wd);
 				item.init(egbase);
 				f->add_item(egbase, item);

@@ -22,13 +22,15 @@
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
-#include "graphic/iblitable_surface.h"
+#include "graphic/graphic.h"
+#include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/surface.h"
 #include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "wlapplication.h"
 #include "text_layout.h"
+#include "wlapplication.h"
 
 #include "panel.h"
 
@@ -42,8 +44,8 @@ Panel * Panel::_g_mousein   = 0;
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::_g_allow_user_input = true;
-const IPicture* Panel::s_default_cursor = NULL;
-const IPicture* Panel::s_default_cursor_click = NULL;
+const Image* Panel::s_default_cursor = NULL;
+const Image* Panel::s_default_cursor_click = NULL;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -137,8 +139,8 @@ int32_t Panel::run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->imgcache().load(PicMod_UI,  "pics/cursor.png");
-	s_default_cursor_click = g_gr->imgcache().load(PicMod_UI,  "pics/cursor_click.png");
+	s_default_cursor = g_gr->images().get("pics/cursor.png");
+	s_default_cursor_click = g_gr->images().get("pics/cursor_click.png");
 
 	// Loop
 	_running = true;
@@ -835,15 +837,15 @@ void Panel::do_draw(RenderTarget & dst)
 
 		if
 			(!_cache ||
-			 _cache.get()->get_w() != innerw ||
-			 _cache.get()->get_h() != innerh)
+			 _cache.get()->width() != innerw ||
+			 _cache.get()->height() != innerh)
 		{
-			_cache.reset(g_gr->create_surface(innerw, innerh, false));
+			_cache.reset(new_in_memory_image("dummy_hash", Surface::create(innerw, innerh)));
 			_needdraw = true;
 		}
 
 		if (_needdraw) {
-			RenderTarget inner(_cache.get());
+			RenderTarget inner(_cache->surface());
 			do_draw_inner(inner);
 
 			_needdraw = false;
@@ -1079,8 +1081,8 @@ void Panel::ui_mousemove
 		return;
 
 	Panel * p;
-	uint32_t w = s_default_cursor->get_w();
-	uint32_t h = s_default_cursor->get_h();
+	uint16_t w = s_default_cursor->width();
+	uint16_t h = s_default_cursor->height();
 
 	g_gr->update_rectangle(x - xdiff, y - ydiff, w, h);
 	g_gr->update_rectangle(x, y, w, h);
@@ -1117,12 +1119,12 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	}
 
 	static const uint32_t TIP_WIDTH_MAX = 360;
-	const IPicture* rendered_text = UI::g_fh1->render(text_to_render, TIP_WIDTH_MAX);
+	const Image* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
 	if (!rendered_text)
 		return;
 
-	uint32_t tip_width = rendered_text->get_w() + 4;
-	uint32_t tip_height = rendered_text->get_h() + 4;
+	uint16_t tip_width = rendered_text->width() + 4;
+	uint16_t tip_height = rendered_text->height() + 4;
 
 	Rect r
 		(WLApplication::get()->get_mouse_position() + Point(2, 32),

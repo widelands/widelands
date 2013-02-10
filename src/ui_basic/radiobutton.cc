@@ -29,7 +29,7 @@ namespace UI {
 Radiobutton::Radiobutton
 	(Panel      * const parent,
 	 Point        const p,
-	 const IPicture* pic,
+	 const Image* pic,
 	 Radiogroup &       group,
 	 int32_t      const id)
 	:
@@ -96,7 +96,7 @@ Radiogroup::~Radiogroup() {while (m_buttons) delete m_buttons;}
 int32_t Radiogroup::add_button
 	(Panel      * const parent,
 	 Point        const p,
-	 const IPicture* pic,
+	 const Image* pic,
 	 const std::string& tooltip,
 	 Radiobutton **     ret_btn)
 {

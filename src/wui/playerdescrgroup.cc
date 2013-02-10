@@ -21,10 +21,11 @@
 
 #include "constants.h"
 #include "gamesettings.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "logic/tribe.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #include "ui_basic/button.h"
@@ -70,7 +71,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerType = new UI::Button
 		(this, "player_type",
 		 xplayertype, 0, xplayerteam - xplayertype - 2, h,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerType->sigclicked.connect
@@ -79,7 +80,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTeam = new UI::Button
 		(this, "player_team",
 		 xplayerteam, 0, xplayertribe - xplayerteam - 2, h,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerTeam->sigclicked.connect
@@ -88,7 +89,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTribe = new UI::Button
 		(this, "player_tribe",
 		 xplayertribe, 0, xplayerinit - xplayertribe - 2, h,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerTribe->sigclicked.connect
@@ -97,7 +98,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerInit = new UI::Button
 		(this, "player_initialization",
 		 xplayerinit, 0, w - xplayerinit, h,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 std::string(), _("Initialization"),
 		 true, false);
 	d->btnPlayerInit->sigclicked.connect

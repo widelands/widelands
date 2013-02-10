@@ -20,6 +20,7 @@
 #ifndef WARE_STATISTICS_MENU_H
 #define WARE_STATISTICS_MENU_H
 
+#include "logic/widelands.h"
 #include "ui_basic/unique_window.h"
 #include "plot_area.h"
 #include "differential_plot_area.h"
@@ -60,7 +61,7 @@ struct WUIPlot_Generic_Area_Slider : public UI::DiscreteSlider {
 		 WUIPlot_Area & plot_area,
 		 Ware_Statistics_Menu * signal_listener,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const IPicture* background_picture_id,
+		 const Image* background_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,
 		 const bool enabled = true)

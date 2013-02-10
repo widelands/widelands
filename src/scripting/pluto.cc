@@ -1063,8 +1063,8 @@ static void unpersistproto(int, UnpersistInfo * upi)
 	{
 		p->sizecode = upi->fr->Signed32();
 		pdep_reallocvector(upi->L, p->code, 1, p->sizecode, Instruction);
-		for (int32_t i = 0; i < p->sizecode; i++)
-			p->code[i] = upi->fr->Unsigned32();
+		for (int32_t j = 0; j < p->sizecode; j++)
+			p->code[j] = upi->fr->Unsigned32();
 	}
 
 	/* Read in upvalue names */
@@ -1116,8 +1116,8 @@ static void unpersistproto(int, UnpersistInfo * upi)
 		if (p->sizelineinfo)
 		{
 			pdep_reallocvector(upi->L, p->lineinfo, 0, p->sizelineinfo, int);
-			for (int32_t i = 0; i < p->sizelineinfo; i++)
-				p->lineinfo[i] = upi->fr->Signed32();
+			for (int32_t j = 0; j < p->sizelineinfo; j++)
+				p->lineinfo[j] = upi->fr->Signed32();
 		}
 	}
 

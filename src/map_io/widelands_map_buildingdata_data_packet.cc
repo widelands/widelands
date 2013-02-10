@@ -763,8 +763,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 		{
 			ProductionSite::Working_Position & wp_begin =
 				*productionsite.m_working_positions;
-			ProductionSite_Descr const & descr = productionsite.descr();
-			Ware_Types const & working_positions = descr.working_positions();
+			ProductionSite_Descr const & pr_descr = productionsite.descr();
+			Ware_Types const & working_positions = pr_descr.working_positions();
 
 			uint16_t nr_worker_requests = fr.Unsigned16();
 			for (uint16_t i = nr_worker_requests; i; --i) {
@@ -815,7 +815,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				Worker * worker = &mol.get<Worker>(fr.Unsigned32());
 
 				const std::vector<std::string> & compat =
-					descr.compatibility_working_positions(worker->descr().name());
+					pr_descr.compatibility_working_positions(worker->descr().name());
 				if (!compat.empty()) {
 					if (compat[0] == "flash") {
 						if (compat.size() != 2)
@@ -837,14 +837,14 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 							 tribe.name().c_str(),
 							 worker->descr().name().c_str(), worker->serial(),
 							 compat[1].c_str(),
-							 descr.name().c_str(), productionsite.serial());
+							 pr_descr.name().c_str(), productionsite.serial());
 
 						mol.schedule_destroy(*worker);
 
-						const Worker_Descr & descr =
+						const Worker_Descr & worker_descr =
 							*tribe.get_worker_descr
 							(tribe.safe_worker_index(compat[1]));
-						worker = &descr.create
+						worker = &worker_descr.create
 							(game,
 							 productionsite.owner(),
 							 &productionsite,
@@ -885,7 +885,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				wp->worker = worker;
 			}
 
-			if (nr_worker_requests + nr_workers < descr.nr_working_positions())
+			if (nr_worker_requests + nr_workers < pr_descr.nr_working_positions())
 				throw game_data_error
 					("number of worker requests and workers are fewer than the "
 					 "number of working positions");
@@ -897,7 +897,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			uint32_t const gametime = game.get_gametime();
 			for (uint8_t i = 3 <= packet_version ? fr.Unsigned8() : 0; i; --i) {
 				char const * const program_name = fr.CString();
-				if (descr.programs().count(program_name)) {
+				if (pr_descr.programs().count(program_name)) {
 					uint32_t const skip_time = fr.Unsigned32();
 					if (gametime < skip_time)
 						throw game_data_error
@@ -923,7 +923,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				std::transform
 					(program_name.begin(), program_name.end(), program_name.begin(),
 					 tolower);
-				const std::vector<std::string> & compat = descr.compatibility_program(program_name);
+				const std::vector<std::string> & compat = pr_descr.compatibility_program(program_name);
 				if (!compat.empty()) {
 					if (compat[0] == "replace") {
 						if (compat.size() != 2)

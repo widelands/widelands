@@ -33,8 +33,8 @@
 namespace Widelands {
 
 Partially_Finished_Building::Partially_Finished_Building
-	(const Building_Descr & descr) :
-Building         (descr),
+	(const Building_Descr & gdescr) :
+Building         (gdescr),
 m_building       (0),
 m_builder_request(0),
 m_working        (false),

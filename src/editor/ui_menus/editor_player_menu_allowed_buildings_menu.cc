@@ -19,10 +19,11 @@
 
 #include "editor_player_menu_allowed_buildings_menu.h"
 
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "logic/tribe.h"
 #include "logic/player.h"
+#include "logic/tribe.h"
 
 using Widelands::Building_Index;
 
@@ -79,7 +80,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 m_allowed.get_y()
 		 + (list_height - middle_button_height * 2 - vspacing) / 2,
 		 middle_button_width, middle_button_height,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 ("->"),
 		 _("Forbid"),
 		 false),
@@ -88,7 +89,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 m_forbid_button.get_x(),
 		 m_forbid_button.get_y() + middle_button_height + vspacing,
 		 middle_button_width, middle_button_height,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("<-"),
 		 _("Allow"),
 		 false)

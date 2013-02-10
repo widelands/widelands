@@ -22,6 +22,7 @@
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "log.h"
 #include "text_layout.h"
@@ -86,15 +87,15 @@ Window::Window
 		_drag_start_win_x(0), _drag_start_win_y(0),
 		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
 		m_pic_lborder
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_l_border.png")),
+			(g_gr->images().get("pics/win_l_border.png")),
 		m_pic_rborder
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_r_border.png")),
+			(g_gr->images().get("pics/win_r_border.png")),
 		m_pic_top
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_top.png")),
+			(g_gr->images().get("pics/win_top.png")),
 		m_pic_bottom
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_bot.png")),
+			(g_gr->images().get("pics/win_bot.png")),
 		m_pic_background
-			(g_gr->imgcache().load(PicMod_UI, "pics/win_bg.png")),
+			(g_gr->images().get("pics/win_bg.png")),
 		m_center_panel(0),
 		m_fastclick_panel(0)
 {
@@ -319,11 +320,13 @@ void Window::draw_border(RenderTarget & dst)
 	}
 
 	// draw the title if we have one
-	if (!m_title.empty())
-		UI::g_fh1->draw_text
-			(dst,
-			 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-			 m_title, 0, Align_Center);
+	if (!m_title.empty()) {
+		dst.blit
+			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
+				UI::g_fh1->render(m_title),
+				CM_Normal,
+				Align_Center);
+	}
 
 	if (not _is_minimal) {
 		const int32_t vt_bar_end = get_h() -
@@ -527,9 +530,9 @@ bool Window::handle_mousemove
 			const int32_t max_x = parent->get_inner_w();
 			const int32_t max_y = parent->get_inner_h();
 
-			left = min(static_cast<int32_t>(max_x - get_lborder()), left);
-			top  = min(static_cast<int32_t>(max_y - get_tborder()), top);
-			left = max(-static_cast<int32_t>(w - get_rborder()), left);
+			left = min<int32_t>(max_x - get_lborder(), left);
+			top  = min<int32_t>(max_y - get_tborder(), top);
+			left = max<int32_t>(get_rborder() - w, left);
 			top  = max
 				(-static_cast<int32_t>(h - ((_is_minimal) ? get_tborder() : get_bborder())), top);
 			new_left = left; new_top = top;

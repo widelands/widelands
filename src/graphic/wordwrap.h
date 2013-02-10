@@ -21,9 +21,10 @@
 
 #include <string>
 
-#include "font.h"
 #include "point.h"
-#include "ui_basic/align.h"
+#include "align.h"
+
+#include "font.h"
 
 class RenderTarget;
 

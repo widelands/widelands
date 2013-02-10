@@ -529,11 +529,11 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 		else if (cmd == IGPCMD_ERROR) {
 			// Client received an ERROR message - seems something went wrong
-			std::string cmd    (packet.String());
+			std::string subcmd    (packet.String());
 			std::string reason (packet.String());
 			std::string message(_("ERROR: "));
 
-			if (cmd == IGPCMD_CHAT) {
+			if (subcmd == IGPCMD_CHAT) {
 				// Something went wrong with the chat message the user sent.
 				message += _("Chat message could not be sent. ");
 				if (reason == "NO_SUCH_USER")
@@ -543,7 +543,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 						.str();
 			}
 
-			else if (cmd == IGPCMD_GAME_OPEN) {
+			else if (subcmd == IGPCMD_GAME_OPEN) {
 				// Something went wrong with the newly opened game
 				message += InternetGamingMessages::get_message(reason);
 				// we got our answer, so no need to wait anymore

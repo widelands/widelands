@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,17 +17,15 @@
  *
  */
 
-#ifndef SDL_HELPER_H
-#define SDL_HELPER_H
+#ifndef IN_MEMORY_IMAGE_H
+#define IN_MEMORY_IMAGE_H
 
-struct SDL_Surface;
+#include <string>
 
-namespace RT {
+class Image;
+class Surface;
 
-SDL_Surface * empty_sdl_surface(int32_t w, int32_t h, bool alpha);
+const Image* new_in_memory_image(const std::string& hash, Surface* surf);
 
-};
-
-#endif /* end of include guard: SDL_HELPER_H */
-
+#endif /* end of include guard: IN_MEMORY_IMAGE_H */
 

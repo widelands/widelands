@@ -18,5 +18,11 @@
  */
 
 #ifndef compile_assert
-#define compile_assert(x) typedef bool COMPILE_ASSERT[(x) ? 1 : -1]
+// gnu needs to append a unique number to the assert, otherwise it complains
+// about this shadowing the last assert. This is not too easy, so we use the
+// line number - collisions are not that probable anymore.
+// The concatenation magic is from: http://stackoverflow.com/a/1597129/200945
+#define TOKENPASTE(x, y) x ## y
+#define TOKENPASTE2(x, y) TOKENPASTE(x, y)
+#define compile_assert(x) typedef bool TOKENPASTE2(COMPILE_ASSERT_, __LINE__)[(x) ? 1 : -1]
 #endif

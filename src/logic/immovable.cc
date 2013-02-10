@@ -526,10 +526,10 @@ void Immovable::draw_construction
 	if (done > total)
 		done = total;
 
-	const AnimationGfx::Index nr_frames = g_gr->nr_frames(m_anim);
-	uint32_t frametime = g_anim.get_animation(m_anim)->frametime;
+	const size_t nr_frames = g_gr->nr_frames(m_anim);
+	uint32_t frametime = g_anim.get_animation(m_anim).frametime;
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
-	const AnimationGfx::Index current_frame = done / units_per_frame;
+	const size_t current_frame = done / units_per_frame;
 	uint32_t curw, curh;
 	g_gr->get_animation_size(m_anim, current_frame * frametime, curw, curh);
 
@@ -1289,15 +1289,15 @@ bool Immovable::construct_ware_item(Game & game, Ware_Index index)
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
 
-	const ImmovableProgram::ActConstruction * act =
+	const ImmovableProgram::ActConstruction * action =
 		dynamic_cast<const ImmovableProgram::ActConstruction *>(&(*m_program)[m_program_ptr]);
-	assert(act != 0);
+	assert(action != 0);
 
 	if (remaining.empty()) {
 		// Wait for the last building animation to finish.
-		m_program_step = schedule_act(game, act->buildtime());
+		m_program_step = schedule_act(game, action->buildtime());
 	} else {
-		m_program_step = schedule_act(game, act->decaytime());
+		m_program_step = schedule_act(game, action->decaytime());
 	}
 
 	return true;

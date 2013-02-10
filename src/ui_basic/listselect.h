@@ -21,16 +21,17 @@
 #ifndef UI_LISTSELECT_H
 #define UI_LISTSELECT_H
 
+#include <limits>
+#include <deque>
+
 #include <boost/signal.hpp>
 
 #include "align.h"
-#include "panel.h"
-#include "scrollbar.h"
-
 #include "compile_assert.h"
 
-#include <limits>
-#include <deque>
+#include "panel.h"
+#include "rgbcolor.h"
+#include "scrollbar.h"
 
 namespace UI {
 struct Scrollbar;
@@ -63,12 +64,12 @@ struct BaseListselect : public Panel {
 	void add
 		(const char * const name,
 		 uint32_t value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string());
 	void add_front
 		(const char * const name,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string());
 	void remove(uint32_t);
@@ -133,7 +134,7 @@ private:
 		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
-		const IPicture* pic;
+		const Image* pic;
 		std::string name;
 		std::string tooltip;
 	};
@@ -149,7 +150,7 @@ private:
 	int32_t m_last_click_time;
 	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
-	const IPicture* m_check_pic;
+	const Image* m_check_pic;
 
 	std::string m_fontname;
 	uint32_t    m_fontsize;
@@ -170,7 +171,7 @@ struct Listselect : public BaseListselect {
 	void add
 		(const char * const name,
 		 Entry value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string())
 	{
@@ -180,7 +181,7 @@ struct Listselect : public BaseListselect {
 	void add_front
 		(const char * const name,
 		 Entry value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string())
 	{
@@ -225,7 +226,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add
 		(const char * const name,
 		 Entry      &       value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string())
 	{
@@ -234,7 +235,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add_front
 		(const char * const name,
 		 Entry      &       value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
 		 std::string const & tooltip_text = std::string())
 	{

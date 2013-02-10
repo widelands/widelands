@@ -37,7 +37,7 @@ struct DirAnimations {
 
 	void parse
 		(Widelands::Map_Object_Descr &,
-		 std::string           const & directory,
+		 const std::string           & directory,
 		 Profile                     &,
 		 char                  const * sectnametempl,
 		 Section                     * defaults    = 0);

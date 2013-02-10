@@ -352,7 +352,7 @@ uint32_t WUIPlot_Area::draw_diagram
 	// first, tile the background
 	dst.tile
 		(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
-		 g_gr->imgcache().load(PicMod_Game, BG_PIC), Point(0, 0));
+		 g_gr->images().get(BG_PIC), Point(0, 0));
 
 	// Draw coordinate system
 	// X Axis

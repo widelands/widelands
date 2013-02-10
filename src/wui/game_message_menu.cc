@@ -21,6 +21,7 @@
 
 #include <boost/bind.hpp>
 
+#include "graphic/graphic.h"
 #include "interactive_player.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
@@ -60,7 +61,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "clear_selection",
 			 5, 5, 70, 25,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Clear"), _("Clear selection"));
 	clearselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_clear_selection, this));
@@ -69,7 +70,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "invert_selection",
 			 80, 5, 70, 25,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Invert"), _("Invert selection"));
 	invertselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_invert_selection, this));
@@ -78,8 +79,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
 			 155, 5, 25, 25,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
-			 g_gr->imgcache().load(PicMod_Game, "pics/message_archive.png"),
+			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("pics/message_archive.png"),
 			 _("Archive selected messages"));
 	m_archivebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::archive_or_restore, this));
@@ -88,7 +89,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
 			 185, 5, 100, 25,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+			 g_gr->images().get("pics/but2.png"),
 			 _("Show Archive"));
 	m_togglemodebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::toggle_mode, this));
@@ -97,8 +98,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "center_main_mapview_on_location",
 			 340, 5, 25, 25,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
-			 g_gr->imgcache().load(PicMod_Game, "pics/menu_goto.png"),
+			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("pics/menu_goto.png"),
 			 _("center main mapview on location"),
 			 false);
 	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
@@ -196,7 +197,7 @@ void GameMessageMenu::update_record
 {
 	er.set_picture
 		(ColStatus,
-		 g_gr->imgcache().load(PicMod_UI, status_picture_filename[message.status()]));
+		 g_gr->images().get(status_picture_filename[message.status()]));
 	er.set_string(ColTitle, message.title());
 
 	uint32_t time = message.sent();
@@ -368,14 +369,14 @@ void GameMessageMenu::toggle_mode()
 	case Inbox:
 		mode = Archive;
 		set_title(_("Message Menu: Archive"));
-		m_archivebtn->set_pic(g_gr->imgcache().load(PicMod_Game, "pics/message_restore.png"));
+		m_archivebtn->set_pic(g_gr->images().get("pics/message_restore.png"));
 		m_archivebtn->set_tooltip(_("Restore selected messages"));
 		m_togglemodebtn->set_title(_("Show Inbox"));
 		break;
 	case Archive:
 		mode = Inbox;
 		set_title(_("Message Menu: Inbox"));
-		m_archivebtn->set_pic(g_gr->imgcache().load(PicMod_Game, "pics/message_archive.png"));
+		m_archivebtn->set_pic(g_gr->images().get("pics/message_archive.png"));
 		m_archivebtn->set_tooltip(_("Archive selected messages"));
 		m_togglemodebtn->set_title(_("Show Archive"));
 		break;

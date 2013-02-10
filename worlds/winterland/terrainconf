@@ -7,77 +7,93 @@
 name="Tundra"
 def_resources=water 5
 is=green
+dither_layer=50
 
 [mountain1]
 name="Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
+dither_layer=70
 
 [ice_flows]
 name="Ice flows"
 is=water
 fps=5
+dither_layer=10
 
 [ice_flows2]
 name="Ice flows2"
 is=water
 fps=5
+dither_layer=20
 
 [ice]
 name="Ice"
 is=dry
 #### of course ice is not dry, but this disallows the users, to build on snow. only flags are allowed. ;-)
+dither_layer=30
 
 [water]
 name="Water"
 def_resources=fish 4
 is=water
 fps=8
+dither_layer=0
 
 [tundra_taiga]
 name="Tundra taiga"
 def_resources=water 10
 is=green
+dither_layer=50
 
 [tundra2]
 name="Tundra2"
 def_resources=water 10
 is=green
+dither_layer=50
 
 [tundra3]
 name="Tundra3"
 def_resources=water 10
 is=green
+dither_layer=50
 
 [mountain2]
 name="Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
+dither_layer=70
 
 [mountain3]
 name="Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
+dither_layer=70
 
 [mountain4]
 name="Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
+dither_layer=70
 
 [strand]
 name="Beach"
 is=dry
+dither_layer=40
 
 [taiga]
 name="Taiga"
 def_resources=water 10
 is=green
+dither_layer=50
 
 [lava]
 name="Lava"
 is=acid
+dither_layer=80
 
 [snow]
 name="Snow"
 def_resources=water 30
 is=green
+dither_layer=60

@@ -20,14 +20,15 @@
 #include "base.h"
 
 #include "constants.h"
-#include "io/filesystem/filesystem.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
+#include "graphic/rendertarget.h"
+#include "io/filesystem/filesystem.h"
 #include "log.h"
 #include "profile/profile.h"
-#include "graphic/rendertarget.h"
-#include "wlapplication.h"
 #include "wexception.h"
+#include "wlapplication.h"
 
 #include <cstdio>
 
@@ -40,7 +41,7 @@ Fullscreen_Menu_Base
 */
 
 struct Fullscreen_Menu_Base::Data {
-	const IPicture* res_background;
+	const Image* res_background;
 	UI::TextStyle textstyle_small;
 	UI::TextStyle textstyle_big;
 };
@@ -57,13 +58,7 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	// Load background graphics
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
-	const IPicture* background = g_gr->imgcache().load(PicMod_Menu, buffer, false);
-	if (!background)
-		throw wexception
-			("could not open splash screen; make sure that all data files are "
-			 "installed");
-
-	d->res_background = g_gr->get_resized_picture(background, get_w(), get_h());
+	d->res_background = ImageTransformations::resize(g_gr->images().get(buffer), get_w(), get_h());
 
 	d->textstyle_small = UI::TextStyle::ui_small();
 	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());

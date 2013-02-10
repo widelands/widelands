@@ -87,7 +87,7 @@ struct RightEdge {
  * The edge lists will be overwritten with undefined values.
  */
 template<typename T> static void render_edge_lists
-	(SDLSurface & dst, Texture const & tex,
+	(SDLSurface & dst, const Texture & tex,
 	 int32_t y, int32_t height,
 	 LeftEdge * left, RightEdge * right,
 	 int32_t dbdx, int32_t dtydx)
@@ -131,10 +131,10 @@ template<typename T> static void render_edge_lists
 	}
 
 	// Cut off lines below screen
-	if (y + height > static_cast<int32_t>(dst.get_h()))
-		height = dst.get_h() - y;
+	if (y + height > static_cast<int32_t>(dst.height()))
+		height = dst.height() - y;
 
-	int32_t dstw = dst.get_w();
+	int32_t dstw = dst.width();
 	while (height > 0) {
 		int32_t leftx = FIXTOI(left->x0);
 		int32_t rightx = FIXTOI(right->x0);
@@ -217,8 +217,8 @@ struct WLPolygon {
  */
 template<typename T> static void render_triangle
 	(SDLSurface & dst,
-	 Vertex const & p1, Vertex const & p2, Vertex const & p3,
-	 Texture const & tex)
+	 const Vertex & p1, const Vertex & p2, const Vertex & p3,
+	 const Texture & tex)
 {
 	if (p1.y == p2.y && p2.y == p3.y)
 		return; // degenerate triangle
@@ -232,7 +232,7 @@ template<typename T> static void render_triangle
 	polygon.nrpoints = 3;
 
 	// Determine a top vertex
-	int32_t top, topy;
+	int32_t top = 0, topy = 0;
 
 	topy = 0x7fffffff;
 	for (uint8_t i = 0; i < polygon.nrpoints; ++i) {
@@ -347,8 +347,8 @@ template<typename T> static void render_triangle
 */
 template<typename T> static void dither_edge_horiz
 	(SDLSurface & dst,
-	 Vertex const & start, Vertex const & end,
-	 Texture const & ttex, Texture const & btex)
+	 const Vertex & start, const Vertex & end,
+	 const Texture & ttex, const Texture & btex)
 {
 	uint8_t * tpixels, * bpixels;
 	T * tcolormap, * bcolormap;
@@ -370,8 +370,8 @@ template<typename T> static void dither_edge_horiz
 	// TODO: seed this depending on field coordinates
 	uint32_t rnd = 0;
 
-	const int32_t dstw = dst.get_w();
-	const int32_t dsth = dst.get_h();
+	const int32_t dstw = dst.width();
+	const int32_t dsth = dst.height();
 
 	int32_t ydiff = ITOFIX(end.y - start.y) / (end.x - start.x);
 	int32_t centery = ITOFIX(start.y);
@@ -444,8 +444,8 @@ template<typename T> static void dither_edge_horiz
  */
 template<typename T> static void dither_edge_vert
 	(SDLSurface & dst,
-	 Vertex const & start, Vertex const & end,
-	 Texture const & ltex, Texture const & rtex)
+	 const Vertex & start, const Vertex & end,
+	 const Texture & ltex, const Texture & rtex)
 {
 	uint8_t * lpixels, * rpixels;
 	T * lcolormap, * rcolormap;
@@ -467,8 +467,8 @@ template<typename T> static void dither_edge_vert
 	// TODO: seed this depending on field coordinates
 	uint32_t rnd = 0;
 
-	const int32_t dstw = dst.get_w();
-	const int32_t dsth = dst.get_h();
+	const int32_t dstw = dst.width();
+	const int32_t dsth = dst.height();
 
 	int32_t xdiff = ITOFIX(end.x - start.x) / (end.y - start.y);
 	int32_t centerx = ITOFIX(start.x);
@@ -533,10 +533,10 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-	(SDLSurface & dst, Point const start, Point const end, SDLSurface const & src)
+	(SDLSurface & dst, Point const start, Point const end, const SDLSurface & src)
 {
-	int32_t const dstw = dst.get_w();
-	int32_t const dsth = dst.get_h();
+	int32_t const dstw = dst.width();
+	int32_t const dsth = dst.height();
 
 	int32_t const ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int32_t centery = start.y << 16;
@@ -560,10 +560,10 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-	(SDLSurface & dst, Point const start, Point const end, SDLSurface const & src)
+	(SDLSurface & dst, Point const start, Point const end, const SDLSurface & src)
 {
-	int32_t const dstw = dst.get_w();
-	int32_t const dsth = dst.get_h();
+	int32_t const dstw = dst.width();
+	int32_t const dsth = dst.height();
 
 	int32_t const xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int32_t centerx = start.x << 16;
@@ -588,20 +588,18 @@ template<typename T> static void render_road_vert
 
 template<typename T> static void draw_field_int
 	(SDLSurface       & dst,
-	 Vertex  const &  f_vert,
-	 Vertex  const &  r_vert,
-	 Vertex  const & bl_vert,
-	 Vertex  const & br_vert,
+	 const Vertex  &  f_vert,
+	 const Vertex  &  r_vert,
+	 const Vertex  & bl_vert,
+	 const Vertex  & br_vert,
 	 uint8_t         roads,
-	 Texture const & tr_d_texture,
-	 Texture const &  l_r_texture,
-	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture)
+	 const Texture & tr_d_texture,
+	 const Texture &  l_r_texture,
+	 const Texture &  f_d_texture,
+	 const Texture &  f_r_texture)
 {
-	SDLSurface* rt_busy = const_cast<SDLSurface*>
-		(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Busy)));
-	SDLSurface* rt_normal = const_cast<SDLSurface*>
-		(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Normal)));
+	SDLSurface& rt_busy = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Busy));
+	SDLSurface& rt_normal = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Normal));
 
 	dst.lock(Surface::Lock_Normal);
 
@@ -616,10 +614,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_horiz<T> (dst, f_vert, r_vert, *rt_normal);
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_horiz<T> (dst, f_vert, r_vert, *rt_busy);
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
 				break;
 			default:
 				assert(false);
@@ -635,10 +633,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, br_vert, *rt_normal);
+				render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, br_vert, *rt_busy);
+				render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
 				break;
 			default:
 				assert(false);
@@ -654,10 +652,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, bl_vert, *rt_normal);
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, bl_vert, *rt_busy);
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
 				break;
 			default:
 				assert(false);

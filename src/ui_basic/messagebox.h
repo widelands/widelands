@@ -21,6 +21,7 @@
 #define UI_MESSAGEBOX_H
 
 #include "align.h"
+
 #include "window.h"
 
 #include <boost/scoped_ptr.hpp>

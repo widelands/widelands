@@ -211,16 +211,16 @@ void Soldier_Descr::load_graphics() {
 	m_defense_pics.resize(m_max_defense_level + 1);
 	m_evade_pics  .resize(m_max_evade_level   + 1);
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i)
-		m_hp_pics[i] = g_gr->imgcache().load(PicMod_Game,  m_hp_pics_fn[i].c_str());
+		m_hp_pics[i] = g_gr->images().get(m_hp_pics_fn[i]);
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i)
 		m_attack_pics[i] =
-			g_gr->imgcache().load(PicMod_Game,  m_attack_pics_fn[i].c_str());
+			g_gr->images().get(m_attack_pics_fn[i]);
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i)
 		m_defense_pics[i] =
-			g_gr->imgcache().load(PicMod_Game,  m_defense_pics_fn[i].c_str());
+			g_gr->images().get(m_defense_pics_fn[i]);
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i)
 		m_evade_pics[i] =
-			g_gr->imgcache().load(PicMod_Game,  m_evade_pics_fn[i].c_str());
+			g_gr->images().get(m_evade_pics_fn[i]);
 	Worker_Descr::load_graphics();
 }
 
@@ -576,21 +576,22 @@ void Soldier::draw_info_icon
 	uint32_t w;
 	w = SOLDIER_HP_BAR_WIDTH;
 
-	const IPicture* hppic = get_hp_level_pic();
-	const IPicture* attackpic = get_attack_level_pic();
-	const IPicture* defensepic = get_defense_level_pic();
-	const IPicture* evadepic = get_evade_level_pic();
-	uint32_t hpw = hppic->get_w();
-	uint32_t hph = hppic->get_h();
-	uint32_t atw = attackpic->get_w();
-	uint32_t ath = attackpic->get_h();
-	uint32_t dew = defensepic->get_w();
-	uint32_t deh = defensepic->get_h();
-	uint32_t evw = evadepic->get_w();
-	uint32_t evh = evadepic->get_h();
+	const Image* hppic = get_hp_level_pic();
+	const Image* attackpic = get_attack_level_pic();
+	const Image* defensepic = get_defense_level_pic();
+	const Image* evadepic = get_evade_level_pic();
 
-	uint32_t totalwidth = std::max(std::max(atw + dew, hpw + evw), 2 * w);
-	uint32_t totalheight = 5 + std::max(hph + ath, evh + deh);
+	uint16_t hpw = hppic->width();
+	uint16_t hph = hppic->height();
+	uint16_t atw = attackpic->width();
+	uint16_t ath = attackpic->height();
+	uint16_t dew = defensepic->width();
+	uint16_t deh = defensepic->height();
+	uint16_t evw = evadepic->width();
+	uint16_t evh = evadepic->height();
+
+	uint32_t totalwidth = std::max<int>(std::max<int>(atw + dew, hpw + evw), 2 * w);
+	uint32_t totalheight = 5 + std::max<int>(hph + ath, evh + deh);
 
 	if (!anchor_below) {
 		pt.x += totalwidth / 2;
@@ -637,20 +638,20 @@ void Soldier::calc_info_icon_size
 {
 	const Soldier_Descr * soldierdesc = static_cast<const Soldier_Descr *>
 		(tribe.get_worker_descr(tribe.worker_index("soldier")));
-	const IPicture* hppic = soldierdesc->get_hp_level_pic(0);
-	const IPicture* attackpic = soldierdesc->get_attack_level_pic(0);
-	const IPicture* defensepic = soldierdesc->get_defense_level_pic(0);
-	const IPicture* evadepic = soldierdesc->get_evade_level_pic(0);
-	uint32_t hpw = hppic->get_w();
-	uint32_t hph = hppic->get_h();
-	uint32_t atw = attackpic->get_w();
-	uint32_t ath = attackpic->get_h();
-	uint32_t dew = defensepic->get_w();
-	uint32_t deh = defensepic->get_h();
-	uint32_t evw = evadepic->get_w();
-	uint32_t evh = evadepic->get_h();
+	const Image* hppic = soldierdesc->get_hp_level_pic(0);
+	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
+	const Image* defensepic = soldierdesc->get_defense_level_pic(0);
+	const Image* evadepic = soldierdesc->get_evade_level_pic(0);
+	uint16_t hpw = hppic->width();
+	uint16_t hph = hppic->height();
+	uint16_t atw = attackpic->width();
+	uint16_t ath = attackpic->height();
+	uint16_t dew = defensepic->width();
+	uint16_t deh = defensepic->height();
+	uint16_t evw = evadepic->width();
+	uint16_t evh = evadepic->height();
 
-	uint32_t animw;
+	uint16_t animw;
 	animw = SOLDIER_HP_BAR_WIDTH;
 
 	w = std::max(std::max(atw + dew, hpw + evw), 2 * animw);

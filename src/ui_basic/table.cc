@@ -21,8 +21,8 @@
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
 
 #include "button.h"
 #include "mouse_constants.h"
@@ -80,7 +80,6 @@ void Table<void *>::add_column
 	 Align               const alignment,
 	 bool                const is_checkbox_column)
 {
-
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -99,7 +98,7 @@ void Table<void *>::add_column
 				new Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
-					 g_gr->imgcache().load(PicMod_UI, "pics/but3.png"),
+					 g_gr->images().get("pics/but3.png"),
 					 title, "", true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
@@ -149,7 +148,7 @@ void Table<void *>::set_column_title
 			new Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
-				 g_gr->imgcache().load(PicMod_UI, "pics/but3.png"),
+				 g_gr->images().get("pics/but3.png"),
 				 title, "", true, false);
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
@@ -179,9 +178,7 @@ void Table<void *>::Entry_Record::set_checked
 
 	cell.d_checked = checked;
 	cell.d_picture =
-		g_gr->imgcache().load
-			(PicMod_UI,
-			 checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
+		g_gr->images().get(checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
 }
 
 void Table<void *>::Entry_Record::toggle(uint8_t const col)
@@ -265,23 +262,21 @@ void Table<void *>::draw(RenderTarget & dst)
 				 -ms_darken_value);
 		}
 
-		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
-
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			Column const & column    = m_columns[i];
 			uint32_t const curw      = column.width;
 			Align    const alignment = column.alignment;
 
-			const IPicture* entry_picture = er.get_picture(i);
+			const Image* entry_picture = er.get_picture(i);
 			std::string const &       entry_string  = er.get_string (i);
 			uint32_t picw = 0;
 			uint32_t pich = 0;
 			uint32_t stringw = 0;
 			uint32_t stringh = g_fh->get_fontheight(m_fontname, m_fontsize);
 			if (entry_picture) {
-				picw = entry_picture->get_w();
-				pich = entry_picture->get_h();
+				picw = entry_picture->width();
+				pich = entry_picture->height();
 			}
 			Point point =
 				Point(curx, y)
@@ -303,7 +298,7 @@ void Table<void *>::draw(RenderTarget & dst)
 
 			UI::g_fh->draw_text
 				(dst,
-				 TextStyle::makebold(Font::get(m_fontname, m_fontsize), col),
+				 TextStyle::makebold(Font::get(m_fontname, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
 				 point +
 				 Point
 				 	(picw,
@@ -467,7 +462,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 		 i; ++i)
 		if (m_columns.at(i.current).is_checkbox_column) {
 			result.m_data.at(i.current).d_picture =
-				g_gr->imgcache().load(PicMod_UI, "pics/checkbox_empty.png");
+				g_gr->images().get("pics/checkbox_empty.png");
 		}
 
 	m_scrollbar->set_steps
@@ -588,7 +583,7 @@ Table<void *>::Entry_Record::Entry_Record(void * const e)
 {}
 
 void Table<void *>::Entry_Record::set_picture
-	(uint8_t const col, const IPicture* pic, std::string const & str)
+	(uint8_t const col, const Image* pic, std::string const & str)
 {
 	assert(col < m_data.size());
 
@@ -603,7 +598,7 @@ void Table<void *>::Entry_Record::set_string
 	m_data.at(col).d_picture = NULL;
 	m_data.at(col).d_string  = str;
 }
-const IPicture* Table<void *>::Entry_Record::get_picture(uint8_t const col) const
+const Image* Table<void *>::Entry_Record::get_picture(uint8_t const col) const
 {
 	assert(col < m_data.size());
 

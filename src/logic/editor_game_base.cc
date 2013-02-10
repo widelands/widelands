@@ -29,6 +29,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
@@ -58,9 +59,9 @@ Editor_Game_Base::Editor_Game_Base()
 initialization
 ============
 */
-Editor_Game_Base::Editor_Game_Base(LuaInterface * lua) :
+Editor_Game_Base::Editor_Game_Base(LuaInterface * lua_interface) :
 m_gametime          (0),
-m_lua               (lua),
+m_lua               (lua_interface),
 m_ibase             (0),
 m_map               (0),
 m_lasttrackserial   (0)

@@ -151,8 +151,8 @@ void PortDock::draw
 
 std::string const & PortDock::name() const throw ()
 {
-	static std::string name("portdock");
-	return name;
+	static const std::string name_("portdock");
+	return name_;
 }
 
 void PortDock::init(Editor_Game_Base & egbase)
