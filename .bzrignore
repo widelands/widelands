@@ -23,3 +23,5 @@ VERSION
 /tribes/**/*.xhtml
 /global/**/*.xhtml
 
+# Local KDevelop settings files
+**/.kdev_include_paths

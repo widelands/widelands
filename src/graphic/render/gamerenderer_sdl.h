@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,30 +13,34 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
-#ifdef USE_OPENGL
-#ifndef GAMEVIEW_OPENGL_H_
-#define GAMEVIEW_OPENGL_H_
+#ifndef WIDELANDS_GAMERENDERER_SDL_H
+#define WIDELANDS_GAMERENDERER_SDL_H
 
-#include "gameview.h"
+#include "gamerenderer.h"
 
-class GameViewOpenGL : public GameView
-{
-public:
-	GameViewOpenGL(RenderTarget & rt):
-		GameView(rt) {}
-	~GameViewOpenGL() {}
+struct Texture;
+struct Vertex;
 
+/**
+ * Software-rendering implementation of @ref GameRenderer.
+ */
+class GameRendererSDL : public GameRenderer {
 protected:
+	void draw();
+
+private:
+	void draw_terrain();
+
 	/**
 	 * Helper function to draw two terrain triangles. This is called from the
 	 * rendermap() functions.
 	 */
 	void draw_field
-		(Rect          & subwin,
+		(RenderTarget & dst,
 		 Vertex  const &  f_vert,
 		 Vertex  const &  r_vert,
 		 Vertex  const & bl_vert,
@@ -46,11 +50,6 @@ protected:
 		 Texture const &  l_r_texture,
 		 Texture const &  f_d_texture,
 		 Texture const &  f_r_texture);
-
-	void rendermap_init();
-	void rendermap_deint();
 };
 
-
-#endif /* GAMEVIEW_OPENGL_H_ */
-#endif /* USE_OPENGL */
+#endif // WIDELANDS_GAMERENDERER_SDL_H

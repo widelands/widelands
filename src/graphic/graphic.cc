@@ -238,8 +238,7 @@ Graphic::Graphic
 
 		m_caps.gl.multitexture =
 			 ((strstr(extensions, "GL_ARB_multitexture") != 0) and
-			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0))
-			and (m_caps.gl.max_tex_combined >= 6);
+			  (strstr(extensions, "GL_ARB_texture_env_combine") != 0));
 		log("Graphics: OpenGL: Multitexture capabilities ");
 		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
@@ -971,10 +970,6 @@ void Graphic::set_world(string worldname) {
 	m_roadtextures->pic_road_normal = imgcache().load(PicMod_Game, buf, false);
 	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
 	m_roadtextures->pic_road_busy = imgcache().load(PicMod_Game, buf, false);
-
-	// load edge texture
-	snprintf(buf, sizeof(buf), "worlds/%s/pics/edge.png", worldname.c_str());
-	m_edgetexture = imgcache().load(PicMod_Game, buf, false);
 }
 
 /**
@@ -986,13 +981,4 @@ const IPicture* Graphic::get_road_texture(int32_t roadtex)
 {
 	return
 		(roadtex == Widelands::Road_Normal ? m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
-}
-
-/**
- * Returns the alpha mask texture for edges.
- * \return The edge texture (alpha mask)
- */
-const IPicture* Graphic::get_edge_texture()
-{
-	return m_edgetexture;
 }

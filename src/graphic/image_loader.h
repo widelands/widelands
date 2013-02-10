@@ -34,4 +34,3 @@ public:
 };
 
 #endif /* end of include guard: IMAGE_LOADER_H */
-

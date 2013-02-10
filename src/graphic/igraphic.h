@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,9 @@ class IGraphic {
 public:
 	virtual ~IGraphic() {};
 
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) const = 0;
+	virtual IPicture* convert_sdl_surface_to_picture
+		(SDL_Surface*,
+		 bool alpha = false) const = 0;
 	virtual IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const = 0;
 
 	virtual ImageCache& imgcache() const = 0;
