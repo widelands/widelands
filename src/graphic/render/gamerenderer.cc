@@ -40,9 +40,9 @@ GameRenderer::~GameRenderer()
 
 void GameRenderer::rendermap
 	(RenderTarget & dst,
-	 Widelands::Editor_Game_Base const &       egbase,
-	 Widelands::Player           const &       player,
-	 Point                       const &       viewofs)
+	 const Widelands::Editor_Game_Base &       egbase,
+	 const Widelands::Player           &       player,
+	 const Point                       &       viewofs)
 {
 	m_dst = &dst;
 	m_dst_offset = -viewofs;
@@ -54,8 +54,8 @@ void GameRenderer::rendermap
 
 void GameRenderer::rendermap
 	(RenderTarget & dst,
-	 Widelands::Editor_Game_Base const & egbase,
-	 Point                       const & viewofs)
+	 const Widelands::Editor_Game_Base & egbase,
+	 const Point                       & viewofs)
 {
 	m_dst = &dst;
 	m_dst_offset = -viewofs;
@@ -92,7 +92,7 @@ void GameRenderer::draw_objects()
 	static const uint32_t R = 1;
 	static const uint32_t BL = 2;
 	static const uint32_t BR = 3;
-	Map const & map = m_egbase->map();
+	const Map & map = m_egbase->map();
 
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
 		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
@@ -123,7 +123,7 @@ void GameRenderer::draw_objects()
 
 			if (m_player && !m_player->see_all()) {
 				for (uint32_t d = 0; d < 4; ++d) {
-					Player::Field const & pf = m_player->fields()[map.get_index(coords[d], map.get_width())];
+					const Player::Field & pf = m_player->fields()[map.get_index(coords[d], map.get_width())];
 					vision[d] = pf.vision;
 					if (pf.vision == 1) {
 						owner_number[d] = pf.owner;
@@ -133,7 +133,7 @@ void GameRenderer::draw_objects()
 			}
 
 			if (isborder[F]) {
-				Player const & owner = m_egbase->player(owner_number[F]);
+				const Player & owner = m_egbase->player(owner_number[F]);
 				uint32_t const anim = owner.frontier_anim();
 				if (vision[F])
 					m_dst->drawanim(pos[F], anim, 0, &owner);
@@ -157,7 +157,7 @@ void GameRenderer::draw_objects()
 					 bob = bob->get_next_bob())
 					bob->draw(*m_egbase, *m_dst, pos[F]);
 			} else if (vision[F] == 1) {
-				Player::Field const & f_pl = m_player->fields()[map.get_index(coords[F], map.get_width())];
+				const Player::Field & f_pl = m_player->fields()[map.get_index(coords[F], map.get_width())];
 				const Player * owner = owner_number[F] ? m_egbase->get_player(owner_number[F]) : 0;
 				if
 					(const Map_Object_Descr * const map_object_descr =

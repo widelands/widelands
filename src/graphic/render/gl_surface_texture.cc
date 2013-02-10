@@ -108,7 +108,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 		bpp = surface->format->BytesPerPixel;
 	}
 
-	SDL_PixelFormat const & fmt = *surface->format;
+	const SDL_PixelFormat & fmt = *surface->format;
 	GLenum pixels_format;
 
 	glPushAttrib(GL_PIXEL_MODE_BIT);

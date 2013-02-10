@@ -88,7 +88,7 @@ Font_Handler::~Font_Handler() {
  * Returns the height of the font, in pixels.
 */
 uint32_t Font_Handler::get_fontheight
-	(std::string const & name, int32_t const size)
+	(const std::string & name, int32_t const size)
 {
 	TTF_Font * const f = Font::get(name, size)->get_ttf_font();
 	const int32_t fontheight = TTF_FontHeight(f);
@@ -267,7 +267,7 @@ void Font_Handler::get_size
  * Calculates size of a given text.
  */
 void Font_Handler::get_size
-	(std::string const & fontname, int32_t const fontsize,
+	(const std::string & fontname, int32_t const fontsize,
 	 const std::string & text,
 	 uint32_t & w, uint32_t & h,
 	 uint32_t const wrap)

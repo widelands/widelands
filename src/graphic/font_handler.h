@@ -60,11 +60,11 @@ struct Font_Handler {
 		 uint32_t & w, uint32_t & h,
 		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
 	void get_size
-		(std::string const & fontname, int32_t size,
+		(const std::string & fontname, int32_t size,
 		 const std::string & text,
 		 uint32_t & w, uint32_t & h,
 		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
-	uint32_t get_fontheight(std::string const & name, int32_t size);
+	uint32_t get_fontheight(const std::string & name, int32_t size);
 	void do_align
 		(Align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
 

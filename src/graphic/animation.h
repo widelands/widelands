@@ -58,7 +58,7 @@ struct AnimationData {
 struct AnimationManager {
 	void flush();
 	uint32_t get
-		(std::string const & directory,
+		(const std::string & directory,
 		 Section           & s,
 		 char       const * picnametempl = 0)
 	{

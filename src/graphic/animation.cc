@@ -147,7 +147,7 @@ uint32_t AnimationManager::get
 					("redefinition for frame %u to \"%s\" (previously defined to "
 					 "\"%s\")",
 					 frame_number, parameters, it->second.c_str());
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception("sfx: %s", e.what());
 		}
 		ad.sfx_cues[frame_number] = parameters;
@@ -231,7 +231,7 @@ foowalk_??_nn.bmp are used.
 */
 void DirAnimations::parse
 	(Widelands::Map_Object_Descr &       b,
-	 std::string           const &       directory,
+	 const std::string           &       directory,
 	 Profile                     &       prof,
 	 char                  const * const sectnametempl,
 	 Section                     * const defaults)

@@ -98,7 +98,7 @@ public:
 	};
 
 	/// This returns the pixel format for direct pixel access.
-	virtual SDL_PixelFormat const & format() const = 0;
+	virtual const SDL_PixelFormat & format() const = 0;
 
 	/**
 	 * Lock/Unlock pairs must guard any of the direct pixel access using the

@@ -87,7 +87,7 @@ struct RightEdge {
  * The edge lists will be overwritten with undefined values.
  */
 template<typename T> static void render_edge_lists
-	(SDLSurface & dst, Texture const & tex,
+	(SDLSurface & dst, const Texture & tex,
 	 int32_t y, int32_t height,
 	 LeftEdge * left, RightEdge * right,
 	 int32_t dbdx, int32_t dtydx)
@@ -217,8 +217,8 @@ struct WLPolygon {
  */
 template<typename T> static void render_triangle
 	(SDLSurface & dst,
-	 Vertex const & p1, Vertex const & p2, Vertex const & p3,
-	 Texture const & tex)
+	 const Vertex & p1, const Vertex & p2, const Vertex & p3,
+	 const Texture & tex)
 {
 	if (p1.y == p2.y && p2.y == p3.y)
 		return; // degenerate triangle
@@ -347,8 +347,8 @@ template<typename T> static void render_triangle
 */
 template<typename T> static void dither_edge_horiz
 	(SDLSurface & dst,
-	 Vertex const & start, Vertex const & end,
-	 Texture const & ttex, Texture const & btex)
+	 const Vertex & start, const Vertex & end,
+	 const Texture & ttex, const Texture & btex)
 {
 	uint8_t * tpixels, * bpixels;
 	T * tcolormap, * bcolormap;
@@ -444,8 +444,8 @@ template<typename T> static void dither_edge_horiz
  */
 template<typename T> static void dither_edge_vert
 	(SDLSurface & dst,
-	 Vertex const & start, Vertex const & end,
-	 Texture const & ltex, Texture const & rtex)
+	 const Vertex & start, const Vertex & end,
+	 const Texture & ltex, const Texture & rtex)
 {
 	uint8_t * lpixels, * rpixels;
 	T * lcolormap, * rcolormap;
@@ -533,7 +533,7 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-	(SDLSurface & dst, Point const start, Point const end, SDLSurface const & src)
+	(SDLSurface & dst, Point const start, Point const end, const SDLSurface & src)
 {
 	int32_t const dstw = dst.width();
 	int32_t const dsth = dst.height();
@@ -560,7 +560,7 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-	(SDLSurface & dst, Point const start, Point const end, SDLSurface const & src)
+	(SDLSurface & dst, Point const start, Point const end, const SDLSurface & src)
 {
 	int32_t const dstw = dst.width();
 	int32_t const dsth = dst.height();
@@ -588,15 +588,15 @@ template<typename T> static void render_road_vert
 
 template<typename T> static void draw_field_int
 	(SDLSurface       & dst,
-	 Vertex  const &  f_vert,
-	 Vertex  const &  r_vert,
-	 Vertex  const & bl_vert,
-	 Vertex  const & br_vert,
+	 const Vertex  &  f_vert,
+	 const Vertex  &  r_vert,
+	 const Vertex  & bl_vert,
+	 const Vertex  & br_vert,
 	 uint8_t         roads,
-	 Texture const & tr_d_texture,
-	 Texture const &  l_r_texture,
-	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture)
+	 const Texture & tr_d_texture,
+	 const Texture &  l_r_texture,
+	 const Texture &  f_d_texture,
+	 const Texture &  f_r_texture)
 {
 	SDLSurface& rt_busy = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Busy));
 	SDLSurface& rt_normal = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Normal));

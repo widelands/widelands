@@ -53,7 +53,7 @@ RenderTarget::RenderTarget(Surface* surf)
 /**
  * Sets an arbitrary drawing window.
  */
-void RenderTarget::set_window(Rect const & rc, Point const & ofs)
+void RenderTarget::set_window(const Rect & rc, const Point & ofs)
 {
 	m_rect = rc;
 	m_offset = ofs;
@@ -91,7 +91,7 @@ void RenderTarget::set_window(Rect const & rc, Point const & ofs)
  * is not changed at all. Otherwise, the function returns true.
  */
 bool RenderTarget::enter_window
-	(Rect const & rc, Rect * const previous, Point * const prevofs)
+	(const Rect & rc, Rect* previous, Point* prevofs)
 {
 	Rect newrect = rc;
 

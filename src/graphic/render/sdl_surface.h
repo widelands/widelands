@@ -54,7 +54,7 @@ public:
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);
 	virtual void brighten_rect(const Rect&, int32_t factor);
 
-	virtual SDL_PixelFormat const & format() const;
+	virtual const SDL_PixelFormat & format() const;
 	virtual void lock(LockMode);
 	virtual void unlock(UnlockMode);
 	virtual uint32_t get_pixel(uint16_t x, uint16_t y);

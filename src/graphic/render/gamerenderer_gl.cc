@@ -152,7 +152,7 @@ void GameRendererGL::draw()
 template<typename vertex>
 void GameRendererGL::compute_basevertex(const Coords & coords, vertex & vtx) const
 {
-	Map const & map = m_egbase->map();
+	const Map & map = m_egbase->map();
 	Coords ncoords(coords);
 	map.normalize_coords(ncoords);
 	FCoords fcoords = map.get_fcoords(ncoords);
@@ -190,7 +190,7 @@ void GameRendererGL::add_terrain_base_triangle
 
 void GameRendererGL::collect_terrain_base(bool onlyscan)
 {
-	Map const & map = m_egbase->map();
+	const Map & map = m_egbase->map();
 
 	uint32_t index = 0;
 	for (uint32_t outery = 0; outery < m_patch_size.h / PatchSize; ++outery) {
@@ -276,8 +276,8 @@ void GameRendererGL::prepare_terrain_base()
 
 void GameRendererGL::draw_terrain_base()
 {
-	Map const & map = m_egbase->map();
-	World const & world = map.world();
+	const Map & map = m_egbase->map();
+	const World & world = map.world();
 
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
@@ -342,8 +342,8 @@ void GameRendererGL::add_terrain_dither_triangle
 
 void GameRendererGL::collect_terrain_dither(bool onlyscan)
 {
-	Map const & map = m_egbase->map();
-	World const & world = map.world();
+	const Map & map = m_egbase->map();
+	const World & world = map.world();
 
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
 		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
@@ -442,8 +442,8 @@ void GameRendererGL::prepare_terrain_dither()
 
 void GameRendererGL::draw_terrain_dither()
 {
-	Map const & map = m_egbase->map();
-	World const & world = map.world();
+	const Map & map = m_egbase->map();
+	const World & world = map.world();
 
 	if (m_edge_vertices_size == 0)
 		return;

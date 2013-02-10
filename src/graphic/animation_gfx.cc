@@ -86,7 +86,7 @@ AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* image_cache)
 							 image->width(), image->height(), width, height);
 					//  Get a new AnimFrame.
 					m_frames.push_back(image);
-				} catch (std::exception const & e) {
+				} catch (const std::exception & e) {
 					throw wexception
 						("could not load animation frame %s: %s\n",
 						 filename, e.what());
@@ -113,7 +113,7 @@ AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* image_cache)
 								 image->width(), image->height(), width, height);
 						m_pcmasks.push_back(image);
 						break;
-					} catch (std::exception const & e) {
+					} catch (const std::exception & e) {
 						throw wexception
 							("error while reading \"%s\": %s", filename, e.what());
 					}
