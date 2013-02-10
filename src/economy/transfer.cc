@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -168,8 +168,12 @@ PlayerImmovable * Transfer::get_next_step
 		return &locflag == location ? destination : &locflag;
 
 	// Brute force: recalculate the best route every time
-	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item ? wwWARE : wwWORKER))
-		throw wexception("Transfer::get_next_step: inconsistent economy");
+	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item ? wwWARE : wwWORKER)) {
+		tlog("destination appears to have become split from current location -> fail\n");
+		Economy::check_split(locflag, destflag);
+		success = false;
+		return 0;
+	}
 
 	if (m_route.get_nrsteps() >= 1)
 		if (upcast(Road const, road, location))
