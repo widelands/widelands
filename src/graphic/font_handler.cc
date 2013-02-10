@@ -152,7 +152,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 
 	lce.style.setup();
 
-	SDL_Surface *text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
+	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
 	if (!text_surface) {
 		log
 			("Font_Handler::render_line, an error : %s\n",

@@ -86,7 +86,7 @@ Surface* SurfaceCacheImpl::insert(const std::string& hash, Surface* surf) {
 		drop();
 
 	// Record hash as most-recently-used.
-	AccessHistory::iterator it = hist_.insert(hist_.end(),hash);
+	AccessHistory::iterator it = hist_.insert(hist_.end(), hash);
 	used_memory_ += surface_size;
 	map_.insert(make_pair(hash, new Entry(surf, it)));
 
@@ -104,7 +104,8 @@ void SurfaceCacheImpl::drop() {
 	uint32_t surface_size = it->second->surface->width() * it->second->surface->height() * 4;
 	used_memory_ -= surface_size;
 
-	log("SurfaceCache: dropping %s, which was unused for %.2f sec. Now using %.2f mb.\n",
+	log
+		("SurfaceCache: dropping %s, which was unused for %.2f sec. Now using %.2f mb.\n",
 			hist_.front().c_str(), (SDL_GetTicks() - it->second->last_access) / 1000., used_memory_ / 1048576.0);
 
 	// Erase both elements to completely purge record

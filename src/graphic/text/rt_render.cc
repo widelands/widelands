@@ -81,7 +81,7 @@ struct Reference {
 	// There is a small difference...
 	// Rect::contains() excludes the bottom and right edges.
 	// Reference::contains() includes the bottom and right edges
-	// TODO(#sirver): check this, likely that it is.
+	// TODO: check this, likely that it is with the test cases
 	inline bool contains(int16_t x, int16_t y) const {
 		return
 			dim.x <= x && x <= dim.x + static_cast<int32_t>(dim.w) &&
@@ -988,13 +988,10 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	return nodes[0];
 }
 
-// NOCOM(#sirver): describe what kind of caching is done.
 Surface* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 
-	Surface* rv = node->render(surface_cache_);
-	assert(rv);
-	return rv;
+	return node->render(surface_cache_);
 }
 
 IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {

@@ -41,15 +41,13 @@ public:
 	virtual ~IFont_Handler1() {};
 
 	/*
-	 * Renders the given text into an image. Will return NULL on error or if the
-	 * resulting image would have no size. The image is cached and therefore
-	 * ownership remains with this class.
-	 * // NOCOM(#sirver): comment
+	 * Renders the given text into an image. The image is cached and therefore
+	 * ownership remains with this class. Will throw on error.
 	 */
 	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
 };
 
-// NOCOM(#sirver): comment
+// Create a new Font_Handler1. Ownership for the objects is not taken.
 IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs);
 
 extern IFont_Handler1 * g_fh1;

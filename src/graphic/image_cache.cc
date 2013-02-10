@@ -36,7 +36,8 @@ using namespace std;
 
 namespace  {
 
-// NOCOM(#sirver): documentation
+// Image Implementation that loads images from disc when they should be drawn.
+// Uses SurfaceCache. These images are meant to be cached in ImageCache.
 class FromDiskImage : public Image {
 public:
 	FromDiskImage(const string& filename, SurfaceCache* surface_cache, IImageLoader* image_loader) :
@@ -82,7 +83,7 @@ public:
 		}
 	virtual ~ImageCacheImpl();
 
-	// Implements ImageCache
+	// Implements ImageCache.
 	const Image* insert(const Image*);
 	bool has(const std::string& hash) const;
 	virtual const Image* get(const std::string& hash);

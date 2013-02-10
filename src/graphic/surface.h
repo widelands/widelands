@@ -33,8 +33,11 @@
  */
 class Surface : boost::noncopyable {
 public:
-	// NOCOM(#sirver): docu
+	// Create a new surface from an SDL_Surface. Ownership is taken.
 	static Surface* create(SDL_Surface*);
+
+	// Create a new empty (that is randomly filled) Surface with the given
+	// dimensions.
 	static Surface* create(uint16_t w, uint16_t h);
 
 	virtual ~Surface() {}

@@ -89,10 +89,8 @@ public:
 	virtual ~IRenderer() {};
 
 	// Render the given string in the given width. Restricts the allowed tags to
-	// the ones in TagSet. The returned image is cached with the key (width,
-	// text, number of entries in the tagse), therefore never delete the return
-	// value and mind key collisions when using same string and text with
-	// another tag set with the same number of entries.
+	// the ones in TagSet. The renderer does not do caching in the SurfaceCache
+	// for its individual nodes, but the font render does.
 	virtual Surface* render(const std::string&, uint16_t, const TagSet & = TagSet()) = 0;
 
 	// Returns a reference map of the clickable hyperlinks in the image. This

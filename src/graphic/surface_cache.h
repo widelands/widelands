@@ -39,12 +39,14 @@ public:
 	/// Returns an entry if it is cached, NULL otherwise.
 	virtual Surface* get(const std::string& hash) = 0;
 
-	/// Inserts this entry into the SurfaceCache. Overwrites existing entries /
-	/// without freeing them so be careful.
-	/// // NOCOM(#sirver): crashes if hash is present.
+	// Inserts this entry into the SurfaceCache. asserts() that there is no entry
+	// with this hash already cached. Returns the given Surface for convenience.
 	virtual Surface* insert(const std::string& hash, Surface*) = 0;
 };
 
+// Create a new Cache whichs combined pixels in all Surfaces are always below
+// the given limit (Note: there is overhead for class members which is not
+// counted as the pixels make up the bulk of the size of a surface).
 SurfaceCache* create_surface_cache(uint32_t memory_in_bytes);
 
 #endif /* end of include guard: SURFACE_CACHE_H */

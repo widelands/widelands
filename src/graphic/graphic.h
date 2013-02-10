@@ -158,9 +158,10 @@ protected:
 
 	/// The class that gets images from disk.
 	boost::scoped_ptr<ImageLoaderImpl> image_loader_;
-	// NOCOM(#sirver): document me
+	/// Volatile cache of Hardware dependant surfaces.
 	boost::scoped_ptr<SurfaceCache> surface_cache_;
-	// The cache holding the images.
+	/// Non-volatile cache of hardware independent images. The use the
+	/// surface_cache_ to cache their pixel data.
 	boost::scoped_ptr<ImageCache> image_cache_;
 
 	// The texture needed to draw roads.

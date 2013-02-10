@@ -80,8 +80,6 @@ SDL_Surface* extract_sdl_surface(Surface & surf, Rect srcrect)
 
 /**
  * Produces a resized version of the specified image
- *
- * Might return same id if dimensions are the same
  */
 Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 	assert(w != src->width() || h != src->height());
@@ -144,11 +142,7 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 }
 
 /**
- * Create a grayed version of the given image.
- *
- * @param image to be grayed out
- * @return the gray version of the image
- * // NOCOM(#sirver): docu
+ * Create a grayed version of the given surface.
  */
 Surface* gray_out_surface(Surface* surf) {
 	assert(surf);
@@ -189,13 +183,7 @@ Surface* gray_out_surface(Surface* surf) {
 }
 
 /**
- * Creates an image with changed luminosity from the given image.
- *
- * @param image to modify
- * @param factor the factor the luminosity should be changed by
- * @param half_alpha whether the opacity should be halved or not
- * @return a new image with 50% luminosity
- * // NOCOM(#sirver): docu
+ * Creates an image with changed luminosity from the given surface.
  */
 Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha) {
 	assert(surf);
@@ -230,7 +218,6 @@ Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_al
 
 	return dest;
 }
-
 
 // Encodes the given Image into the corresponding image for player color.
 // Takes the neutral set of images and the player color mask.
@@ -292,12 +279,14 @@ Surface* make_playerclr_surface(Surface& orig_surface, Surface& pcmask_surface, 
 	return new_surface;
 }
 
-// NOCOM(#sirver): docu
-class DerivedImage : public Image {
+// An Image implementation that is the transformation of another Image. Uses
+// the SurfaceCache to avoid recalculating the transformation too often. No
+// ownerships are taken.
+class TransformedImage : public Image {
 public:
-	DerivedImage(const string& hash, const Image& original, SurfaceCache* surface_cache) :
+	TransformedImage(const string& hash, const Image& original, SurfaceCache* surface_cache) :
 		hash_(hash), original_(original), surface_cache_(surface_cache) {}
-	virtual ~DerivedImage() {}
+	virtual ~TransformedImage() {}
 
 	// Implements Image.
 	virtual uint16_t width() const {return original_.width();}
@@ -321,22 +310,22 @@ protected:
 	SurfaceCache* const surface_cache_;  // not owned
 };
 
-// NOCOM(#sirver): docu
-class ResizedImage : public DerivedImage {
+// A resized copy of an Image.
+class ResizedImage : public TransformedImage {
 public:
 	ResizedImage
 		(const string& hash, const Image& original,
 		 SurfaceCache* surface_cache, uint16_t w, uint16_t h)
-		: DerivedImage(hash, original, surface_cache), w_(w), h_(h) {
+		: TransformedImage(hash, original, surface_cache), w_(w), h_(h) {
 			assert(w != original.width() || h != original.height());
 	}
 	virtual ~ResizedImage() {}
 
-	// Overwrites DerivedImage.
+	// Overwrites TransformedImage.
 	virtual uint16_t width() const {return w_;}
 	virtual uint16_t height() const {return h_;}
 
-	// Implements DerivedImage.
+	// Implements TransformedImage.
 	virtual Surface* recalculate_surface() const {
 		Surface* rv = resize_surface(original_.surface(), w_, h_);
 		return rv;
@@ -346,33 +335,33 @@ private:
 	uint16_t w_, h_;
 };
 
-// NOCOM(#sirver): docu
-class GrayedOutImage : public DerivedImage {
+// A grayed out copy of an Image.
+class GrayedOutImage : public TransformedImage {
 public:
 	GrayedOutImage(const string& hash, const Image& original, SurfaceCache* surface_cache) :
-		DerivedImage(hash, original, surface_cache)
+		TransformedImage(hash, original, surface_cache)
 	{}
 	virtual ~GrayedOutImage() {}
 
-	// Implements DerivedImage.
+	// Implements TransformedImage.
 	virtual Surface* recalculate_surface() const {
 		return gray_out_surface(original_.surface());
 	}
 };
 
-// NOCOM(#sirver): docu
-class ChangeLuminosityImage : public DerivedImage {
+// A copy with another luminosity and maybe half the opacity.
+class ChangeLuminosityImage : public TransformedImage {
 public:
 	ChangeLuminosityImage
 		(const string& hash, const Image& original,
 		 SurfaceCache* surface_cache, float factor, bool halve_alpha)
-		: DerivedImage(hash, original, surface_cache),
+		: TransformedImage(hash, original, surface_cache),
 		  factor_(factor),
 		  halve_alpha_(halve_alpha)
 	{}
 	virtual ~ChangeLuminosityImage() {}
 
-	// Implements DerivedImage.
+	// Implements TransformedImage.
 	virtual Surface* recalculate_surface() const {
 		return change_luminosity_of_surface(original_.surface(), factor_, halve_alpha_);
 	}
@@ -382,17 +371,18 @@ private:
 	bool halve_alpha_;
 };
 
-// NOCOM(#sirver): docu
-class PlayerColoredImage : public DerivedImage {
+// A copy with applied player colors. Also needs a mask - ownership is not
+// taken.
+class PlayerColoredImage : public TransformedImage {
 public:
 	PlayerColoredImage
 		(const string& hash, const Image& original,
 		 SurfaceCache* surface_cache, const RGBColor& color, const Image& mask)
-		: DerivedImage(hash, original, surface_cache), color_(color), mask_(mask)
+		: TransformedImage(hash, original, surface_cache), color_(color), mask_(mask)
 		{}
 	virtual ~PlayerColoredImage() {}
 
-	// Implements DerivedImage.
+	// Implements TransformedImage.
 	virtual Surface* recalculate_surface() const {
 		return make_playerclr_surface(*original_.surface(), *mask_.surface(), color_);
 	}
@@ -401,7 +391,6 @@ private:
 	const RGBColor& color_;
 	const Image& mask_;
 };
-
 
 }
 
@@ -449,7 +438,8 @@ const Image* change_luminosity(const Image* original, float factor, bool halve_a
 const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask) {
 	const string new_hash =
 		(boost::format("%s:%02x%02x%02x") % original->hash() % static_cast<int>(clr.r) %
-		 static_cast<int>(clr.g) % static_cast<int>(clr.b)).str();
+		 static_cast<int>(clr.g) % static_cast<int>(clr.b))
+			.str();
 	if (g_gr->images().has(new_hash))
 		return g_gr->images().get(new_hash);
 	return
@@ -458,4 +448,3 @@ const Image* player_colored(const RGBColor& clr, const Image* original, const Im
 }
 
 }  // namespace ImageTransformations
-

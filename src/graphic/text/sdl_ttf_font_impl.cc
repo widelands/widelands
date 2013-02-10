@@ -23,7 +23,6 @@
 #include "graphic/render/sdl_helper.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
-#include "md5.h"
 #include "rt_errors.h"
 
 #include "sdl_ttf_font_impl.h"
@@ -59,19 +58,11 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16
 
 const Surface& SDLTTF_Font::render
 	(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
-	// TODO(#sirver): Make this cheaper!
-	SimpleMD5Checksum checksum;
-	checksum.Data(font_name_.c_str(), font_name_.size());
-	checksum.Data(&ptsize_, sizeof(ptsize_));
-	checksum.Data(txt.c_str(), txt.size());
-	checksum.Data(&clr.r, 1);
-	checksum.Data(&clr.g, 1);
-	checksum.Data(&clr.b, 1);
-	checksum.Data(&style, sizeof(style));
-	checksum.FinishChecksum();
-	const string cs = checksum.GetChecksum().str();
-
-	const Surface* rv = surface_cache->get(cs);
+	const string hash =
+		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
+		 static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
+			.str();
+	const Surface* rv = surface_cache->get(hash);
 	if (rv) return *rv;
 
 	m_set_style(style);
@@ -123,7 +114,7 @@ const Surface& SDLTTF_Font::render
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *surface_cache->insert(cs, Surface::create(text_surface));
+	return *surface_cache->insert(hash, Surface::create(text_surface));
 }
 
 uint16_t SDLTTF_Font::ascent(int style) const {

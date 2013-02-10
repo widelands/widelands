@@ -26,17 +26,27 @@
 
 using namespace std;
 
-// NOCOM(#sirver): documnent me
+// An Image implementation the does !not! cache its Surface in the
+// SurfaceCache. Avoid using this whenever possible and also do not store it in
+// the ImageCache.
+//
+// This is only used when the surface can not be easily recalculated on the fly
+// or if ownership of the image is managed by the caller itself. Note that this
+// is always tricky because Widelands assumes in many places that Images can be
+// relied to exist forever. So when you pass out a pointer to your
+// InMemoryImage, be prepared to keep it valid forever, or check all callsites
+// or prepare for core dumps.
 class InMemoryImage : public Image {
 public:
 	InMemoryImage(const string& hash, Surface* surf) :
 		hash_(hash), surf_(surf) {}
 	virtual ~InMemoryImage() {}
 
-
 	// Implements Image.
 	virtual uint16_t width() const {return surf_->width();}
 	virtual uint16_t height() const {return surf_->height();}
+	// Note: hash will mostly be dummy values for this implementation. It should
+	// not wind up in ImageCache, otherwise the ownership question is not clear.
 	virtual const string& hash() const {return hash_;}
 	virtual Surface* surface() const {return surf_.get();}
 

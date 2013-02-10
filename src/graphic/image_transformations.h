@@ -23,15 +23,33 @@
 struct RGBColor;
 class Image;
 
+// A set of image transformations used in Widelands.
 namespace ImageTransformations {
 
-// NOCOM(#sirver): docu
+// This must be called once before any of the functions below are called. This
+// is done when the graphics system is initialized.
 void initialize();
-const Image* resize(const Image* original, uint16_t w, uint16_t h);
-const Image* gray_out(const Image* original);
-const Image* change_luminosity(const Image* original, float factor, bool halve_alpha);
-const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask);
 
+// All of the functions below take an original image, transform it, cache the
+// newly created image in the global ImageCache and return it. It is therefore
+// safe to call the methods with the same arguments multiple times without
+// construction cost.
+
+// Returns a resized image of the original.
+const Image* resize(const Image* original, uint16_t w, uint16_t h);
+
+// Returns a grayed out image of the original.
+const Image* gray_out(const Image* original);
+
+// Returns an image with a modified luminosity by 'factor' and alpha value than
+// the original. If 'halve_alpha' is true, the opacity will be halfed,
+// otherwise it will not be touched.
+const Image* change_luminosity(const Image* original, float factor, bool halve_alpha);
+
+// Encodes the given Image into the corresponding image with a player color.
+// Takes the image and the player color mask and the new color the image should
+// be tainted in.
+const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask);
 }
 
 
