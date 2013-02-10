@@ -210,7 +210,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 			m_list.add
 				(FileSystem::FS_FilenameWoExt(pname->c_str()).c_str(), *pname);
-		} catch (_wexception const &) {} //  we simply skip illegal entries
+		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 
 	if (m_list.size())

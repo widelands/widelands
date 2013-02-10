@@ -94,7 +94,7 @@ struct NetClientImpl {
 };
 
 NetClient::NetClient
-	(IPaddress * const svaddr, std::string const & playername, bool internet)
+	(IPaddress * const svaddr, const std::string & playername, bool internet)
 : d(new NetClientImpl), m_internet(internet), m_dedicated_access(false), m_dedicated_temp_scenario(false)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
@@ -301,7 +301,7 @@ std::string NetClient::getGameDescription()
 	return buf;
 }
 
-GameSettings const & NetClient::settings()
+const GameSettings & NetClient::settings()
 {
 	return d->settings;
 }
@@ -401,8 +401,8 @@ bool NetClient::canLaunch()
 }
 
 void NetClient::setMap
-	(std::string const & name,
-	 std::string const & path,
+	(const std::string & name,
+	 const std::string & path,
 	 uint32_t /* players */,
 	 bool savegame)
 {
@@ -423,7 +423,7 @@ void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
 	// client is not allowed to do this
 }
 
-void NetClient::setPlayerAI(uint8_t, std::string const &, bool const /* random_ai */)
+void NetClient::setPlayerAI(uint8_t, const std::string &, bool const /* random_ai */)
 {
 	// client is not allowed to do this
 }
@@ -493,7 +493,7 @@ void NetClient::setPlayerInit(uint8_t number, uint8_t)
 	s.send(d->sock);
 }
 
-void NetClient::setPlayerName(uint8_t, std::string const &)
+void NetClient::setPlayerName(uint8_t, const std::string &)
 {
 	// until now the name is set before joining - if you allow a change in
 	// launchgame-menu, here properly should be a set_name function
@@ -618,7 +618,7 @@ void NetClient::recvOneUser
 	}
 }
 
-void NetClient::send(std::string const & msg)
+void NetClient::send(const std::string & msg)
 {
 	SendPacket s;
 	s.Unsigned8(NETCMD_CHAT);
@@ -626,7 +626,7 @@ void NetClient::send(std::string const & msg)
 	s.send(d->sock);
 }
 
-std::vector<ChatMessage> const & NetClient::getMessages() const
+const std::vector<ChatMessage> & NetClient::getMessages() const
 {
 	return d->chatmessages;
 }
@@ -1060,18 +1060,18 @@ void NetClient::handle_network ()
 				handle_packet(packet);
 			}
 		}
-	} catch (DisconnectException const & e) {
+	} catch (const DisconnectException & e) {
 		disconnect(e.what());
-	} catch (ProtocolException const & e) {
+	} catch (const ProtocolException & e) {
 		disconnect("PROTOCOL_EXCEPTION", boost::lexical_cast<std::string>(e.number()));
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		disconnect("SOMETHING_WRONG", e.what());
 	}
 }
 
 
 void NetClient::disconnect
-	(std::string const & reason, std::string const & arg, bool const sendreason, bool const showmsg)
+	(const std::string & reason, const std::string & arg, bool const sendreason, bool const showmsg)
 {
 	log("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
 

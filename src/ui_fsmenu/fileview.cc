@@ -27,7 +27,7 @@
 
 
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
-	(std::string const & filename)
+	(const std::string & filename)
 	:
 	Fullscreen_Menu_Base("fileviewmenu.jpg"),
 
@@ -75,7 +75,7 @@ struct FileViewWindow : public UI::UniqueWindow {
 	FileViewWindow
 		(UI::Panel                  & parent,
 		 UI::UniqueWindow::Registry & reg,
-		 std::string          const & filename);
+		 const std::string          & filename);
 private:
 	UI::Multiline_Textarea textview;
 };
@@ -83,7 +83,7 @@ private:
 FileViewWindow::FileViewWindow
 	(UI::Panel                  & parent,
 	 UI::UniqueWindow::Registry & reg,
-	 std::string          const & filename)
+	 const std::string          & filename)
 	:
 	UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
 	textview(this, 0, 0, 560, 240)
@@ -109,7 +109,7 @@ FileViewWindow::FileViewWindow
 void fileview_window
 	(UI::Panel                  & parent,
 	 UI::UniqueWindow::Registry & reg,
-	 std::string          const & filename)
+	 const std::string          & filename)
 {
 	new FileViewWindow(parent, reg, filename);
 }

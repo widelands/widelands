@@ -645,7 +645,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	} while (rr != m_port_roundrobin);
 }
 
-void Fleet::log_general_info(Editor_Game_Base const & egbase)
+void Fleet::log_general_info(const Editor_Game_Base & egbase)
 {
 	Map_Object::log_general_info(egbase);
 

@@ -85,7 +85,7 @@ void ConstructionSite_Window::think()
 {
 	Building_Window::think();
 
-	Widelands::ConstructionSite const & cs =
+	const Widelands::ConstructionSite & cs =
 		ref_cast<Widelands::ConstructionSite, Widelands::Building>(building());
 
 	m_progress->set_state(cs.get_built_per64k());

@@ -60,7 +60,7 @@ struct Textarea : public Panel {
 	Textarea
 		(Panel * parent,
 		 int32_t x, int32_t y,
-		 std::string const & text = std::string(),
+		 const std::string & text = std::string(),
 		 Align align = Align_Left);
 	Textarea
 		(Panel * parent,

@@ -55,7 +55,7 @@ void WareList::add(Ware_Index const i, const count_type count) {
 }
 
 
-void WareList::add(WareList const & wl)
+void WareList::add(const WareList & wl)
 {
 	Ware_Index const nr_wares = wl.get_nrwareids();
 	if (m_wares.size() < nr_wares.value())
@@ -81,7 +81,7 @@ void WareList::remove(Ware_Index const i, const count_type count) {
 }
 
 
-void WareList::remove(WareList const & wl)
+void WareList::remove(const WareList & wl)
 {
 	Ware_Index const nr_wares = wl.get_nrwareids();
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i)
@@ -101,7 +101,7 @@ WareList::count_type WareList::stock(Ware_Index const id) const {
  * Two WareLists are only equal when they contain the exact same stock of
  * all wares types.
 */
-bool WareList::operator== (WareList const & wl) const
+bool WareList::operator== (const WareList & wl) const
 {
 	uint32_t i = 0;
 

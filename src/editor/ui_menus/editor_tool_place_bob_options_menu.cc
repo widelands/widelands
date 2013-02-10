@@ -50,7 +50,7 @@ m_pit               (pit),
 m_click_recursion_protect(false)
 {
 	int32_t const space  =  5;
-	Widelands::World const & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().map().world();
 	int32_t const nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
 		std::max
@@ -86,7 +86,7 @@ m_click_recursion_protect(false)
 			m_tabpanel.add("icons", tab_icon, box);
 		}
 
-		Widelands::Bob::Descr const & descr = *world.get_bob_descr(i);
+		const Widelands::Bob::Descr & descr = *world.get_bob_descr(i);
 		upcast(Widelands::Critter_Bob_Descr const, critter_descr, &descr);
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,

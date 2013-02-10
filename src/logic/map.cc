@@ -345,7 +345,7 @@ the given data
 */
 void Map::create_empty_map
 	(uint32_t const w, uint32_t const h,
-	 std::string const & worldname,
+	 const std::string & worldname,
 	 char const * const name,
 	 char const * const author,
 	 char const * const description)
@@ -580,7 +580,7 @@ bool Map::get_scenario_player_closeable(const Player_Number p) const
 	return m_scenario_closeables[p - 1];
 }
 
-void Map::set_scenario_player_tribe(Player_Number const p, std::string const & tribename)
+void Map::set_scenario_player_tribe(Player_Number const p, const std::string & tribename)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -588,7 +588,7 @@ void Map::set_scenario_player_tribe(Player_Number const p, std::string const & t
 	m_scenario_tribes[p - 1] = tribename;
 }
 
-void Map::set_scenario_player_name(Player_Number const p, std::string const & playername)
+void Map::set_scenario_player_name(Player_Number const p, const std::string & playername)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -596,7 +596,7 @@ void Map::set_scenario_player_name(Player_Number const p, std::string const & pl
 	m_scenario_names[p - 1] = playername;
 }
 
-void Map::set_scenario_player_ai(Player_Number const p, std::string const & ainame)
+void Map::set_scenario_player_ai(Player_Number const p, const std::string & ainame)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -740,7 +740,7 @@ Functor is of the form: functor(Map*, FCoords)
 */
 template<typename functorT>
 void Map::find_reachable
-	(Area<FCoords> const area, CheckStep const & checkstep, functorT & functor)
+	(Area<FCoords> const area, const CheckStep & checkstep, functorT & functor)
 {
 	std::vector<Coords> queue;
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
@@ -806,7 +806,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 ===============
 */
 struct FindBobsCallback {
-	FindBobsCallback(std::vector<Bob *> * const list, FindBob const & functor)
+	FindBobsCallback(std::vector<Bob *> * const list, const FindBob & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
@@ -848,7 +848,7 @@ Returns the number of objects found.
 uint32_t Map::find_bobs
 	(Area<FCoords>        const area,
 	 std::vector<Bob *> * const list,
-	 FindBob      const &       functor)
+	 const FindBob      &       functor)
 {
 	FindBobsCallback cb(list, functor);
 
@@ -873,8 +873,8 @@ Returns the number of objects found.
 uint32_t Map::find_reachable_bobs
 	(Area<FCoords>        const area,
 	 std::vector<Bob *> * const list,
-	 CheckStep    const &       checkstep,
-	 FindBob      const &       functor)
+	 const CheckStep    &       checkstep,
+	 const FindBob      &       functor)
 {
 	FindBobsCallback cb(list, functor);
 
@@ -893,7 +893,7 @@ The actual logic behind find_immovables and find_reachable_immovables.
 */
 struct FindImmovablesCallback {
 	FindImmovablesCallback
-		(std::vector<ImmovableFound> * const list, FindImmovable const & functor)
+		(std::vector<ImmovableFound> * const list, const FindImmovable & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
@@ -931,7 +931,7 @@ If list is not 0, found immovables are stored in list.
 uint32_t Map::find_immovables
 	(Area<FCoords>                 const area,
 	 std::vector<ImmovableFound> * const list,
-	 FindImmovable const         &       functor)
+	 const FindImmovable         &       functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
@@ -954,8 +954,8 @@ Returns the number of immovables we found.
 uint32_t Map::find_reachable_immovables
 	(Area<FCoords>                 const area,
 	 std::vector<ImmovableFound> * const list,
-	 CheckStep             const &       checkstep,
-	 FindImmovable         const &       functor)
+	 const CheckStep             &       checkstep,
+	 const FindImmovable         &       functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
@@ -1002,7 +1002,7 @@ The actual logic behind find_fields and find_reachable_fields.
 */
 struct FindNodesCallback {
 	FindNodesCallback
-		(std::vector<Coords> * const list, FindNode const & functor)
+		(std::vector<Coords> * const list, const FindNode & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map & map, const FCoords cur) {
@@ -1032,7 +1032,7 @@ Note that list can be 0.
 uint32_t Map::find_fields
 	(Area<FCoords>         const area,
 	 std::vector<Coords> *       list,
-	 FindNode const      &       functor)
+	 const FindNode      &       functor)
 {
 	FindNodesCallback cb(list, functor);
 
@@ -1054,8 +1054,8 @@ Note that list can be 0.
 uint32_t Map::find_reachable_fields
 	(Area<FCoords>         const area,
 	 std::vector<Coords> *       list,
-	 CheckStep     const &       checkstep,
-	 FindNode      const &       functor)
+	 const CheckStep     &       checkstep,
+	 const FindNode      &       functor)
 {
 	FindNodesCallback cb(list, functor);
 
@@ -1378,7 +1378,7 @@ void Map::recalc_nodecaps_pass2(FCoords const f)
 				 &objectlist,
 				 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
 			for (uint32_t i = 0; i < objectlist.size(); ++i) {
-				BaseImmovable const & obj = *objectlist[i].object;
+				const BaseImmovable & obj = *objectlist[i].object;
 				Coords const objpos = objectlist[i].coords;
 				int32_t const dist = calc_distance(f, objpos);
 				bool main_location = true; //  large buildings occupy 3 extra nodes
@@ -1709,7 +1709,7 @@ with the cost of walking in said direction.
 ===============
 */
 void Map::calc_cost
-	(Path const & path, int32_t * const forward, int32_t * const backward) const
+	(const Path & path, int32_t * const forward, int32_t * const backward) const
 {
 	Coords coords = path.get_start();
 
@@ -1825,7 +1825,7 @@ int32_t Map::findpath
 	 Coords                  inend,
 	 int32_t           const persist,
 	 Path            &       path,
-	 CheckStep const &       checkstep,
+	 const CheckStep &       checkstep,
 	 uint32_t          const flags)
 {
 	FCoords start;

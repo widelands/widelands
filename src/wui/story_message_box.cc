@@ -30,9 +30,9 @@
  */
 Story_Message_Box::Story_Message_Box
 	(UI::Panel * const parent,
-	 std::string const & title,
-	 std::string const & body,
-	 std::string const & button_text,
+	 const std::string & title,
+	 const std::string & body,
+	 const std::string & button_text,
 	 int32_t  const gposx, int32_t  const gposy,
 	 uint32_t const w,     uint32_t const h)
 	: UI::Window(parent, "story_message_box", 0, 0, 600, 400, title.c_str())

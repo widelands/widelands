@@ -33,7 +33,7 @@
 void fileview_window
 	(UI::Panel                  & parent,
 	 UI::UniqueWindow::Registry & reg,
-	 std::string          const & filename);
+	 const std::string          & filename);
 
 /**
  * Shows a Text in a Fullscreen Menu. Waits for the button Ok to be clicked.
@@ -55,7 +55,7 @@ private:
  * to be clicked.
  */
 struct Fullscreen_Menu_FileView : public Fullscreen_Menu_TextView {
-	Fullscreen_Menu_FileView(std::string const & filename);
+	Fullscreen_Menu_FileView(const std::string & filename);
 };
 
 

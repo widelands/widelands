@@ -62,11 +62,11 @@ public:
 	/// A column that has a title is sortable (by clicking on the title).
 	void add_column
 		(uint32_t width,
-		 std::string const & title = std::string(),
+		 const std::string & title = std::string(),
 		 Align                                  = Align_Left,
 		 bool                is_checkbox_column = false);
 
-	void set_column_title(uint8_t col, std::string const & title);
+	void set_column_title(uint8_t col, const std::string & title);
 
 	void clear();
 	void set_sort_column(uint8_t col) throw ();
@@ -117,10 +117,10 @@ public:
 		Entry_Record(void * entry);
 
 		void set_picture
-			(uint8_t col, const Image* pic, std::string const & = std::string());
-		void set_string(uint8_t col, std::string const &);
+			(uint8_t col, const Image* pic, const std::string & = std::string());
+		void set_string(uint8_t col, const std::string &);
 		const Image* get_picture(uint8_t col) const;
-		std::string const & get_string(uint8_t col) const;
+		const std::string & get_string(uint8_t col) const;
 		void * entry() const throw () {return m_entry;}
 		void set_color(const  RGBColor c) {
 			use_clr = true;
@@ -167,11 +167,11 @@ public:
 
 	void add_column
 		(uint32_t width,
-		 std::string const & title = std::string(),
+		 const std::string & title = std::string(),
 		 Align                                  = Align_Left,
 		 bool                is_checkbox_column = false);
 
-	void set_column_title(uint8_t col, std::string const & title);
+	void set_column_title(uint8_t col, const std::string & title);
 	void set_column_compare(uint8_t col, const CompareFn & fn);
 
 	void clear();
@@ -184,7 +184,7 @@ public:
 	void set_sort_descending(bool const descending) {
 		m_sort_descending = descending;
 	}
-	void set_font(std::string const & fontname, int32_t const fontsize) {
+	void set_font(const std::string & fontname, int32_t const fontsize) {
 		m_fontname = fontname;
 		m_fontsize = fontsize;
 		m_headerheight = fontsize * 6 / 5;
@@ -213,7 +213,7 @@ public:
 		assert(n < m_entry_records.size());
 		return *m_entry_records[n];
 	}
-	static void * get(Entry_Record const & er) {return er.entry();}
+	static void * get(const Entry_Record & er) {return er.entry();}
 	Entry_Record * find(const void * entry) const throw ();
 
 	void select(uint32_t);
@@ -333,7 +333,7 @@ public:
 		return static_cast<Entry *>(Base::operator[](i));
 	}
 
-	static Entry * get(Entry_Record const & er) {
+	static Entry * get(const Entry_Record & er) {
 		return static_cast<Entry *>(er.entry());
 	}
 
@@ -352,23 +352,23 @@ public:
 		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add(Entry const & entry, bool const select_this = false) {
+	Entry_Record & add(const Entry & entry, bool const select_this = false) {
 		return Base::add(&const_cast<Entry &>(entry), select_this);
 	}
 
-	Entry const & operator[](uint32_t const i) const {
+	const Entry & operator[](uint32_t const i) const {
 		return *static_cast<Entry const *>(Base::operator[](i));
 	}
 
-	static Entry const & get(Entry_Record const & er) {
+	static const Entry & get(const Entry_Record & er) {
 		return *static_cast<Entry const *>(er.entry());
 	}
 
-	Entry_Record * find(Entry const & entry) const {
+	Entry_Record * find(const Entry & entry) const {
 		return Base::find(&entry);
 	}
 
-	Entry const & get_selected() const {
+	const Entry & get_selected() const {
 		return *static_cast<Entry const *>(Base::get_selected());
 	}
 };
@@ -391,7 +391,7 @@ public:
 		return *static_cast<Entry *>(Base::operator[](i));
 	}
 
-	static Entry & get(Entry_Record const & er) {
+	static Entry & get(const Entry_Record & er) {
 		return *static_cast<Entry *>(er.entry());
 	}
 
@@ -420,7 +420,7 @@ public:
 	uintptr_t operator[](uint32_t const i) const throw () {
 		return reinterpret_cast<uintptr_t>(Base::operator[](i));
 	}
-	static uintptr_t get(Entry_Record const & er) {
+	static uintptr_t get(const Entry_Record & er) {
 		return reinterpret_cast<uintptr_t>(er.entry());
 	}
 

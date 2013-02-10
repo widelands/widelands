@@ -48,7 +48,7 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
 		 uint32_t butw, uint32_t buth,
-		 std::string const & fname = UI_FONT_NAME,
+		 const std::string & fname = UI_FONT_NAME,
 		 uint32_t fsize = UI_FONT_SIZE_SMALL);
 	~MultiPlayerSetupGroup();
 

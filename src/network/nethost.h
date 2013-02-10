@@ -37,11 +37,11 @@ struct Client;
  * launch, as well as dealing with the actual network protocol.
  */
 struct NetHost : public GameController, private SyncCallback {
-	NetHost (std::string const & playername, bool internet = false);
+	NetHost (const std::string & playername, bool internet = false);
 	virtual ~NetHost ();
 
 	void run(bool autostart = false);
-	std::string const & getLocalPlayername() const;
+	const std::string & getLocalPlayername() const;
 	int16_t getLocalPlayerposition();
 
 	// GameController interface
@@ -58,19 +58,19 @@ struct NetHost : public GameController, private SyncCallback {
 	// End GameController interface
 
 	// Pregame-related stuff
-	GameSettings const & settings();
+	const GameSettings & settings();
 	bool canLaunch();
 	void setScenario(bool);
 	void setMap
-		(std::string const & mapname,
-		 std::string const & mapfilename,
+		(const std::string & mapname,
+		 const std::string & mapfilename,
 		 uint32_t            maxplayers,
 		 bool                savegame = false);
 	void setPlayerState    (uint8_t number, PlayerSettings::State state, bool host = false);
-	void setPlayerTribe    (uint8_t number, std::string const & tribe, bool const random_tribe = false);
+	void setPlayerTribe    (uint8_t number, const std::string & tribe, bool const random_tribe = false);
 	void setPlayerInit     (uint8_t number, uint8_t index);
-	void setPlayerAI       (uint8_t number, std::string const & name, bool const random_ai = false);
-	void setPlayerName     (uint8_t number, std::string const & name);
+	void setPlayerAI       (uint8_t number, const std::string & name, bool const random_ai = false);
+	void setPlayerName     (uint8_t number, const std::string & name);
 	void setPlayer         (uint8_t number, PlayerSettings);
 	void setPlayerNumber   (uint8_t number);
 	void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team);
@@ -113,8 +113,8 @@ private:
 	NetTransferFile * file;
 
 	void sendSystemMessageCode
-		(std::string const &,
-		 std::string const & a = "", std::string const & b = "", std::string const & c = "");
+		(const std::string &,
+		 const std::string & a = "", const std::string & b = "", const std::string & c = "");
 	void requestSyncReports();
 	void checkSyncReports();
 	void syncreport();
@@ -133,7 +133,7 @@ private:
 
 	std::string getComputerPlayerName(uint8_t playernum);
 	bool haveUserName
-		(std::string const & name,
+		(const std::string & name,
 		 uint8_t             ignoreplayer = UserSettings::none());
 	void welcomeClient(uint32_t number, std::string & playername);
 	void committedNetworkTime(int32_t time);
@@ -149,12 +149,12 @@ private:
 
 	void disconnectPlayerController
 		(uint8_t number,
-		 std::string const & name);
+		 const std::string & name);
 	void disconnectClient
 		(uint32_t number,
-		 std::string const & reason,
+		 const std::string & reason,
 		 bool sendreason = true,
-		 std::string const & arg = "");
+		 const std::string & arg = "");
 	void reaper();
 
 	NetHostImpl * d;

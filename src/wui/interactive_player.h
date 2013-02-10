@@ -86,10 +86,10 @@ struct Interactive_Player : public Interactive_GameBase
 		m_flag_to_connect = location;
 	}
 
-	void popup_message(Widelands::Message_Id, Widelands::Message const &);
+	void popup_message(Widelands::Message_Id, const Widelands::Message &);
 
 private:
-	void cmdSwitchPlayer(std::vector<std::string> const & args);
+	void cmdSwitchPlayer(const std::vector<std::string> & args);
 
 	Widelands::Player_Number m_player_number;
 	bool                     m_auto_roadbuild_mode;

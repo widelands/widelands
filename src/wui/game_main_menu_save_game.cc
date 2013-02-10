@@ -119,7 +119,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
  * called when a item is selected
  */
 void Game_Main_Menu_Save_Game::selected(uint32_t) {
-	std::string const & name = m_ls.get_selected();
+	const std::string & name = m_ls.get_selected();
 
 	Widelands::Game_Loader gl(name, igbase().game());
 	Widelands::Game_Preload_Data_Packet gpdp;
@@ -176,7 +176,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 			Widelands::Game_Loader gl(name, igbase().game());
 			gl.preload_game(gpdp);
 			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
-		} catch (_wexception const &) {} //  we simply skip illegal entries
+		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 
 	if (m_ls.size())
@@ -191,7 +191,7 @@ void Game_Main_Menu_Save_Game::edit_box_changed() {
 }
 
 static void dosave
-	(Interactive_GameBase & igbase, std::string const & complete_filename)
+	(Interactive_GameBase & igbase, const std::string & complete_filename)
 {
 	Widelands::Game & game = igbase.game();
 
@@ -210,7 +210,7 @@ static void dosave
 
 struct SaveWarnMessageBox : public UI::WLMessageBox {
 	SaveWarnMessageBox
-		(Game_Main_Menu_Save_Game & parent, std::string const & filename)
+		(Game_Main_Menu_Save_Game & parent, const std::string & filename)
 		:
 		UI::WLMessageBox
 			(&parent,
@@ -269,7 +269,7 @@ void Game_Main_Menu_Save_Game::ok()
 
 struct DeletionMessageBox : public UI::WLMessageBox {
 	DeletionMessageBox
-		(Game_Main_Menu_Save_Game & parent, std::string const & filename)
+		(Game_Main_Menu_Save_Game & parent, const std::string & filename)
 		:
 		UI::WLMessageBox
 			(&parent,

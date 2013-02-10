@@ -56,8 +56,8 @@ struct ProductionSite_Descr : public Building_Descr {
 
 	ProductionSite_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr &);
 	virtual ~ProductionSite_Descr();
 
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -71,7 +71,7 @@ struct ProductionSite_Descr : public Building_Descr {
 			result += i.current->second;
 		return result;
 	}
-	Ware_Types const & working_positions() const throw () {
+	const Ware_Types & working_positions() const throw () {
 		return m_working_positions;
 	}
 	bool is_output_ware_type  (Ware_Index const i) const throw () {
@@ -80,13 +80,13 @@ struct ProductionSite_Descr : public Building_Descr {
 	bool is_output_worker_type(Ware_Index const i) const throw () {
 		return m_output_worker_types.count(i);
 	}
-	Ware_Types const & inputs() const throw () {return m_inputs;}
+	const Ware_Types & inputs() const throw () {return m_inputs;}
 	typedef std::set<Ware_Index>                       Output;
-	Output   const & output_ware_types  () const {return m_output_ware_types;}
-	Output   const & output_worker_types() const {return m_output_worker_types;}
+	const Output   & output_ware_types  () const {return m_output_ware_types;}
+	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
 	typedef std::map<std::string, ProductionProgram *> Programs;
-	Programs const & programs() const throw () {return m_programs;}
+	const Programs & programs() const throw () {return m_programs;}
 
 	const std::vector<std::string> & compatibility_program(const std::string & progname) const;
 	const std::vector<std::string> & compatibility_working_positions(const std::string & workername) const;
@@ -132,7 +132,7 @@ public:
 	ProductionSite(const ProductionSite_Descr & descr);
 	virtual ~ProductionSite();
 
-	void log_general_info(Editor_Game_Base const &);
+	void log_general_info(const Editor_Game_Base &);
 
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);
@@ -170,8 +170,8 @@ public:
 	virtual void set_economy(Economy *);
 
 	typedef std::vector<WaresQueue *> Input_Queues;
-	Input_Queues const & warequeues() const {return m_input_queues;}
-	std::vector<Worker *> const & workers() const;
+	const Input_Queues & warequeues() const {return m_input_queues;}
+	const std::vector<Worker *>& workers() const;
 
 	bool can_start_working() const throw ();
 
@@ -225,7 +225,7 @@ protected:
 	/// duration.
 	void program_step(Game &, uint32_t delay = 10, uint32_t phase = 0);
 
-	void program_start(Game &, std::string const & program_name);
+	void program_start(Game &, const std::string & program_name);
 	virtual void program_end(Game &, Program_Result);
 
 	void calc_statistics();

@@ -40,7 +40,7 @@ struct NetClient :
 	private SyncCallback,
 	public  ChatProvider
 {
-	NetClient (IPaddress *, std::string const & playername, bool internet = false);
+	NetClient (IPaddress *, const std::string & playername, bool internet = false);
 	virtual ~NetClient ();
 
 	void run();
@@ -59,7 +59,7 @@ struct NetClient :
 	// End GameController interface
 
 	// GameSettingsProvider interface
-	virtual GameSettings const & settings();
+	virtual const GameSettings & settings();
 
 	virtual void setScenario(bool);
 	virtual bool canChangeMap();
@@ -71,16 +71,16 @@ struct NetClient :
 	virtual bool canLaunch();
 
 	virtual void setMap
-		(std::string const & mapname,
-		 std::string const & mapfilename,
+		(const std::string & mapname,
+		 const std::string & mapfilename,
 		 uint32_t maxplayers,
 		 bool savegame = false);
 	virtual void setPlayerState    (uint8_t number, PlayerSettings::State state);
-	virtual void setPlayerAI       (uint8_t number, std::string const & ai, bool const random_ai = false);
+	virtual void setPlayerAI       (uint8_t number, const std::string & ai, bool const random_ai = false);
 	virtual void nextPlayerState   (uint8_t number);
-	virtual void setPlayerTribe   (uint8_t number, std::string const & tribe, bool const random_tribe = false);
+	virtual void setPlayerTribe   (uint8_t number, const std::string & tribe, bool const random_tribe = false);
 	virtual void setPlayerInit     (uint8_t number, uint8_t index);
-	virtual void setPlayerName     (uint8_t number, std::string const & name);
+	virtual void setPlayerName     (uint8_t number, const std::string & name);
 	virtual void setPlayer         (uint8_t number, PlayerSettings ps);
 	virtual void setPlayerNumber   (uint8_t number);
 	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team);
@@ -91,8 +91,8 @@ struct NetClient :
 	virtual std::string getWinCondition();
 
 	// ChatProvider interface
-	void send(std::string const & msg);
-	std::vector<ChatMessage> const & getMessages() const;
+	void send(const std::string & msg);
+	const std::vector<ChatMessage> & getMessages() const;
 
 private:
 	/// for unique backupname
@@ -108,7 +108,7 @@ private:
 	void recvOnePlayer(uint8_t  number, Widelands::StreamRead &);
 	void recvOneUser  (uint32_t number, Widelands::StreamRead &);
 	void disconnect
-		(std::string const & reason, std::string const & arg = "", bool sendreason = true, bool showmsg = true);
+		(const std::string & reason, const std::string & arg = "", bool sendreason = true, bool showmsg = true);
 
 	NetClientImpl * d;
 	bool m_internet;

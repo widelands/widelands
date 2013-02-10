@@ -40,8 +40,8 @@ namespace Widelands {
 
 Worker_Descr::Worker_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _tribe)
 	:
 	Bob::Descr(_name, _descname, directory, prof, global_s, &_tribe),
 	m_helptext(global_s.get_string("help", "")),
@@ -76,7 +76,7 @@ Worker_Descr::Worker_Descr
 				if (count != value)
 					throw wexception("count is out of range 1 .. 255");
 				m_buildcost.insert(std::pair<std::string, uint8_t>(input, value));
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw wexception
 					("[buildcost] \"%s=%s\": %s",
 					 val->get_name(), val->get_string(), e.what());
@@ -132,7 +132,7 @@ Worker_Descr::Worker_Descr
 			m_programs[program_name.c_str()] = program;
 		}
 
-		catch (std::exception const & e) {
+		catch (const std::exception & e) {
 			delete program;
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
@@ -168,7 +168,7 @@ void Worker_Descr::load_graphics()
  * Get a program from the workers description.
  */
 WorkerProgram const * Worker_Descr::get_program
-	(std::string const & programname) const
+	(const std::string & programname) const
 {
 	Programs::const_iterator it = m_programs.find(programname);
 
@@ -233,7 +233,7 @@ bool Worker_Descr::can_act_as(Ware_Index const index) const {
 		return true;
 
 	// if requested worker type can be promoted, compare with that type
-	Worker_Descr const & descr = *tribe().get_worker_descr(index);
+	const Worker_Descr & descr = *tribe().get_worker_descr(index);
 	Ware_Index const becomes_index = descr.becomes();
 	return becomes_index ? can_act_as(becomes_index) : false;
 }

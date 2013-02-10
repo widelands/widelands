@@ -37,8 +37,8 @@ Button::Button //  for textual buttons
 	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 const Image* bg_pic,
-	 std::string const & title_text,
-	 std::string const & tooltip_text,
+	 const std::string & title_text,
+	 const std::string & tooltip_text,
 	 bool const _enabled, bool const flat)
 	:
 	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
@@ -122,7 +122,7 @@ void Button::set_pic(const Image* pic)
 /**
  * Set a text title for the Button
 */
-void Button::set_title(std::string const & title) {
+void Button::set_title(const std::string & title) {
 	if (m_title == title)
 		return;
 

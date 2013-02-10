@@ -49,13 +49,13 @@ struct EditBox : public Panel {
 	boost::signal<void ()> ok;
 	boost::signal<void ()> cancel;
 
-	std::string const & text() const;
-	void setText(std::string const &);
+	const std::string & text() const;
+	void setText(const std::string &);
 	uint32_t maxLength() const;
 	void setMaxLength(uint32_t);
 	Align align() const;
 	void setAlign(Align);
-	void set_font(std::string const & name, int32_t size, RGBColor color);
+	void set_font(const std::string & name, int32_t size, RGBColor color);
 
 	void activate_history(bool activate) {m_history_active = activate;}
 

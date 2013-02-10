@@ -84,7 +84,7 @@ struct Player :
 
 	void allocate_map();
 
-	MessageQueue const & messages() const {return m_messages;}
+	const MessageQueue & messages() const {return m_messages;}
 	MessageQueue       & messages()       {return m_messages;}
 
 	/// Adds the message to the queue. Takes ownership of the message. Assumes
@@ -107,7 +107,7 @@ struct Player :
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	Player_Number     player_number() const throw () {return m_plnum;}
 	TeamNumber team_number() const {return m_team_number;}
-	RGBColor const & get_playercolor() const {return Colors[m_plnum - 1];}
+	const RGBColor & get_playercolor() const {return Colors[m_plnum - 1];}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
 	const std::string & get_name() const throw () {return m_name;}
@@ -120,7 +120,7 @@ struct Player :
 
 	NodeCaps get_buildcaps(FCoords) const;
 
-	bool is_hostile(Player const &) const;
+	bool is_hostile(const Player &) const;
 
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
@@ -367,7 +367,7 @@ struct Player :
 	 * those of the 6 surrounding edges/triangles that are not seen from another
 	 * node.
 	 */
-	void rediscover_node(Map const &, Widelands::Field const &, FCoords)
+	void rediscover_node(const Map &, const Widelands::Field &, FCoords)
 		throw ();
 
 	bool has_view_changed() {
@@ -452,8 +452,8 @@ struct Player :
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
 	Flag *   build_flag(Coords);      /// Build a flag if it is allowed.
-	Road & force_road(Path const &);
-	Road * build_road(Path const &); /// Build a road if it is allowed.
+	Road & force_road(const Path &);
+	Road * build_road(const Path &); /// Build a road if it is allowed.
 	Building & force_building
 		(Coords,
 		 Building_Index,
@@ -529,7 +529,7 @@ struct Player :
 	}
 
 	// Statistics
-	Building_Stats_vector const & get_building_statistics
+	const Building_Stats_vector & get_building_statistics
 		(Building_Index const i) const
 	{
 		return m_building_stats[i];
@@ -552,11 +552,11 @@ struct Player :
 	void ware_consumed(Ware_Index, uint8_t);
 	void next_ware_production_period();
 
-	void receive(NoteImmovable const &);
-	void receive(NoteFieldPossession     const &);
-	void receive(NoteFieldTransformed     const &);
+	void receive(const NoteImmovable &);
+	void receive(const NoteFieldPossession     &);
+	void receive(const NoteFieldTransformed     &);
 
-	void setAI(std::string const &);
+	void setAI(const std::string &);
 	const std::string & getAI() const;
 
 	// used in shared kingdom mode
@@ -588,7 +588,7 @@ private:
 	bool                   m_see_all;
 	bool                   m_view_changed;
 	const Player_Number    m_plnum;
-	Tribe_Descr const    & m_tribe; // buildings, wares, workers, sciences
+	const Tribe_Descr    & m_tribe; // buildings, wares, workers, sciences
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;

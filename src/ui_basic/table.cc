@@ -76,7 +76,7 @@ Table<void *>::~Table()
 /// Add a new column to this table.
 void Table<void *>::add_column
 	(uint32_t            const width,
-	 std::string const &       title,
+	 const std::string &       title,
 	 Align               const alignment,
 	 bool                const is_checkbox_column)
 {
@@ -136,7 +136,7 @@ void Table<void *>::add_column
 }
 
 void Table<void *>::set_column_title
-	(uint8_t const col, std::string const & title)
+	(uint8_t const col, const std::string & title)
 {
 	assert(col < m_columns.size());
 	Column & column = m_columns.at(col);
@@ -188,7 +188,7 @@ void Table<void *>::Entry_Record::toggle(uint8_t const col)
 
 
 bool Table<void *>::Entry_Record::is_checked(uint8_t const col) const {
-	_data const & cell = m_data.at(col);
+	const _data & cell = m_data.at(col);
 
 	return cell.d_checked;
 }
@@ -264,12 +264,12 @@ void Table<void *>::draw(RenderTarget & dst)
 
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
-			Column const & column    = m_columns[i];
+			const Column & column    = m_columns[i];
 			uint32_t const curw      = column.width;
 			Align    const alignment = column.alignment;
 
 			const Image* entry_picture = er.get_picture(i);
-			std::string const &       entry_string  = er.get_string (i);
+			const std::string &       entry_string  = er.get_string (i);
 			uint32_t picw = 0;
 			uint32_t pich = 0;
 			uint32_t stringw = 0;
@@ -370,7 +370,7 @@ bool Table<void *>::handle_mousepress
 			select(row);
 			Columns::size_type const nr_cols = m_columns.size();
 			for (uint8_t col = 0; col < nr_cols; ++col) {
-				Column const & column = m_columns.at(col);
+				const Column & column = m_columns.at(col);
 				x -= column.width;
 				if (x <= 0) {
 					if (column.is_checkbox_column) {
@@ -583,7 +583,7 @@ Table<void *>::Entry_Record::Entry_Record(void * const e)
 {}
 
 void Table<void *>::Entry_Record::set_picture
-	(uint8_t const col, const Image* pic, std::string const & str)
+	(uint8_t const col, const Image* pic, const std::string & str)
 {
 	assert(col < m_data.size());
 
@@ -591,7 +591,7 @@ void Table<void *>::Entry_Record::set_picture
 	m_data.at(col).d_string  = str;
 }
 void Table<void *>::Entry_Record::set_string
-	(uint8_t const col, std::string const & str)
+	(uint8_t const col, const std::string & str)
 {
 	assert(col < m_data.size());
 

@@ -109,7 +109,7 @@ int main(int argc, char * argv[])
 		delete g_app;
 
 		return 0;
-	} catch (Parameter_error const & e) {
+	} catch (const Parameter_error & e) {
 		//  handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
 		WLApplication::show_usage();
@@ -118,7 +118,7 @@ int main(int argc, char * argv[])
 		return 0;
 	}
 #ifndef DEBUG
-	catch (_wexception const & e) {
+	catch (const _wexception & e) {
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()
@@ -128,7 +128,7 @@ int main(int argc, char * argv[])
 		delete g_app;
 
 		return 1;
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()

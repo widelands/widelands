@@ -36,7 +36,7 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
 {
 	assert(data);
-	Widelands::Map const & map = *static_cast<Widelands::Map const *>(data);
+	const Widelands::Map & map = *static_cast<Widelands::Map const *>(data);
 
 	// Area around already placed players
 	Widelands::Player_Number const nr_players = map.get_nrplayers();

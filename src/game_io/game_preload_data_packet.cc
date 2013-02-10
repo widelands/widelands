@@ -61,7 +61,7 @@ void Game_Preload_Data_Packet::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("preload: %s"), e.what());
 	}
 }
@@ -80,7 +80,7 @@ void Game_Preload_Data_Packet::Write
 
 	//  save some kind of header.
 	s.set_int   ("gametime",       game.get_gametime());
-	Map const & map = game.map();
+	const Map & map = game.map();
 	s.set_string("mapname",        map.get_name());  // Name of map
 	if (ipl) {
 		// player that saved the game.

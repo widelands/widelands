@@ -78,7 +78,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 	Editor_Interactive         &         /* parent */,
 	Editor_Action_Args         &         args)
 {
-	Widelands::World const & world = map.world();
+	const Widelands::World & world = map.world();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,

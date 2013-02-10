@@ -44,7 +44,7 @@ throw (_wexception)
 	Profile prof;
 	try {
 		prof.read("allowed_building_types", 0, fs);
-	} catch (_wexception const &) {
+	} catch (const _wexception &) {
 		try {
 			prof.read("allowed_buildings", 0, fs);
 		} catch (...) {
@@ -62,7 +62,7 @@ throw (_wexception)
 
 			//  Now read all players and buildings.
 			iterate_players_existing(p, nr_players, egbase, player) {
-				Tribe_Descr const & tribe = player->tribe();
+				const Tribe_Descr & tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).
 				if (game)
@@ -84,7 +84,7 @@ throw (_wexception)
 								("tribe %s does not define building type \"%s\"",
 								 tribe.name().c_str(), name);
 					}
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
@@ -92,7 +92,7 @@ throw (_wexception)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("allowed buildings: %s"), e.what());
 	}
 }

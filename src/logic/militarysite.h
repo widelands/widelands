@@ -32,8 +32,8 @@ class Soldier;
 struct MilitarySite_Descr : public ProductionSite_Descr {
 	MilitarySite_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &,  Section & global_s,
-		 Tribe_Descr const & tribe);
+		 const std::string & directory, Profile &,  Section & global_s,
+		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const;
 
@@ -58,7 +58,7 @@ class MilitarySite :
 	MO_DESCR(MilitarySite_Descr);
 
 public:
-	MilitarySite(MilitarySite_Descr const &);
+	MilitarySite(const MilitarySite_Descr &);
 	virtual ~MilitarySite();
 
 	char const * type_name() const throw () {return "militarysite";}
@@ -97,9 +97,9 @@ public:
 	void sendAttacker(Soldier &, Building &, uint8_t);
 
 	/// This methods are helper for use at configure this site.
-	void set_requirements  (Requirements const &);
+	void set_requirements  (const Requirements &);
 	void clear_requirements();
-	Requirements const & get_requirements () const {
+	const Requirements & get_requirements () const {
 		return m_soldier_requirements;
 	}
 

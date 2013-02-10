@@ -58,7 +58,7 @@ struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {
 	/**
 	 * \return the name chosen by the player
 	 */
-	std::string const & get_playername();
+	const std::string & get_playername();
 
 private:
 	uint32_t m_butx;

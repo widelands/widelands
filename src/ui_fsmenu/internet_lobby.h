@@ -69,8 +69,8 @@ private:
 	const char * password;
 	bool         reg;
 
-	void fillGamesList (std::vector<INet_Game> const &);
-	void fillClientList(std::vector<INet_Client> const &);
+	void fillGamesList (const std::vector<INet_Game> &);
+	void fillClientList(const std::vector<INet_Client> &);
 
 	void connectToMetaserver();
 

@@ -34,7 +34,7 @@ namespace Widelands {
 template <typename Area_type = Area<> > struct MapHollowRegion {
 	MapHollowRegion(const Map & map, const HollowArea<Area_type> hollow_area);
 
-	typename Area_type::Coords_type const & location() const {
+	const typename Area_type::Coords_type& location() const {
 		return m_hollow_area;
 	}
 

@@ -37,7 +37,7 @@ Richtext_Block::Richtext_Block() :
 	m_text_align (Align_Left)
 {}
 
-Richtext_Block::Richtext_Block(Richtext_Block const & src) {
+Richtext_Block::Richtext_Block(const Richtext_Block & src) {
 	m_images.clear();
 	m_text_blocks.clear();
 	for (uint32_t i = 0; i < src.m_images.size(); ++i)
@@ -58,7 +58,7 @@ Text_Block::Text_Block() {
 	m_line_spacing = 0;
 }
 
-Text_Block::Text_Block(Text_Block const & src) {
+Text_Block::Text_Block(const Text_Block & src) {
 	m_words.clear();
 	m_line_breaks.clear();
 	for (uint32_t i = 0; i < src.m_words.size(); ++i)
@@ -188,9 +188,9 @@ bool Text_Parser::extract_format_block
 	(std::string       & block,
 	 std::string       & block_text,
 	 std::string       & block_format,
-	 std::string const & block_start,
-	 std::string const & format_end,
-	 std::string const & block_end)
+	 const std::string & block_start,
+	 const std::string & format_end,
+	 const std::string & block_end)
 {
 	if (block.compare(0, block_start.size(), block_start)) {
 		const std::string::size_type format_begin_pos = block.find(block_start);
@@ -309,7 +309,7 @@ void Text_Parser::parse_text_attributes
 	}
 }
 
-Align Text_Parser::set_align(std::string const & align) {
+Align Text_Parser::set_align(const std::string & align) {
 	return
 		align == "right"  ? Align_Right   :
 		align == "center" ? Align_HCenter :

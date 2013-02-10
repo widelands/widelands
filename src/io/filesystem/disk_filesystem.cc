@@ -57,7 +57,7 @@ struct FileSystemPath: public std::string
 	bool m_exists;
 	bool m_isDirectory;
 
-	FileSystemPath(std::string const & path)
+	FileSystemPath(const std::string & path)
 	: std::string(path)
 	{
 		struct stat st;
@@ -70,7 +70,7 @@ struct FileSystemPath: public std::string
 /**
  * Initialize the real file-system
  */
-RealFSImpl::RealFSImpl(std::string const & Directory)
+RealFSImpl::RealFSImpl(const std::string & Directory)
 : m_directory(Directory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
@@ -87,7 +87,7 @@ bool RealFSImpl::IsWritable() const {
 }
 
 /// returns true, if the file is writeable
-bool RealFSImpl::FileIsWriteable(std::string const & path) {
+bool RealFSImpl::FileIsWriteable(const std::string & path) {
 	std::string fullname;
 	fullname = FS_CanonicalizeName(path);
 
@@ -107,8 +107,8 @@ bool RealFSImpl::FileIsWriteable(std::string const & path) {
  */
 // note: the Win32 version may be broken, feel free to fix it
 int32_t RealFSImpl::FindFiles
-	(std::string const & path,
-	 std::string const & pattern,
+	(const std::string & path,
+	 const std::string & pattern,
 	 filenameset_t     * results,
 	 uint32_t)
 {
@@ -186,7 +186,7 @@ int32_t RealFSImpl::FindFiles
  * \e can't exist then)
  * \todo Can this be rewritten to just using exceptions? Should it?
  */
-bool RealFSImpl::FileExists(std::string const & path) {
+bool RealFSImpl::FileExists(const std::string & path) {
 	return FileSystemPath(FS_CanonicalizeName(path)).m_exists;
 }
 
@@ -195,14 +195,14 @@ bool RealFSImpl::FileExists(std::string const & path) {
  * Also returns false if the pathname is invalid (obviously, because the file
  * \e can't exist then)
  */
-bool RealFSImpl::IsDirectory(std::string const & path) {
+bool RealFSImpl::IsDirectory(const std::string & path) {
 	return FileSystemPath(FS_CanonicalizeName(path)).m_isDirectory;
 }
 
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem & RealFSImpl::MakeSubFileSystem(std::string const & path) {
+FileSystem & RealFSImpl::MakeSubFileSystem(const std::string & path) {
 	FileSystemPath fspath(FS_CanonicalizeName(path));
 	assert(fspath.m_exists); //TODO: throw an exception instead
 	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n",
@@ -218,7 +218,7 @@ FileSystem & RealFSImpl::MakeSubFileSystem(std::string const & path) {
  * Create a sub filesystem out of this filesystem
  */
 FileSystem & RealFSImpl::CreateSubFileSystem
-	(std::string const & path, Type const fs)
+	(const std::string & path, Type const fs)
 {
 	FileSystemPath fspath(FS_CanonicalizeName(path));
 	if (fspath.m_exists)
@@ -236,7 +236,7 @@ FileSystem & RealFSImpl::CreateSubFileSystem
 /**
  * Remove a number of files
  */
-void RealFSImpl::Unlink(std::string const & file) {
+void RealFSImpl::Unlink(const std::string & file) {
 	FileSystemPath fspath(FS_CanonicalizeName(file));
 	if (!fspath.m_exists)
 		return;
@@ -250,7 +250,7 @@ void RealFSImpl::Unlink(std::string const & file) {
 /**
  * Remove a single directory or file
  */
-void RealFSImpl::m_unlink_file(std::string const & file) {
+void RealFSImpl::m_unlink_file(const std::string & file) {
 	FileSystemPath fspath(FS_CanonicalizeName(file));
 	assert(fspath.m_exists);  //TODO: throw an exception instead
 	assert(!fspath.m_isDirectory); //TODO: throw an exception instead
@@ -265,7 +265,7 @@ void RealFSImpl::m_unlink_file(std::string const & file) {
 /**
  * Recursively remove a directory
  */
-void RealFSImpl::m_unlink_directory(std::string const & file) {
+void RealFSImpl::m_unlink_directory(const std::string & file) {
 	FileSystemPath fspath(FS_CanonicalizeName(file));
 	assert(fspath.m_exists);  //TODO: throw an exception instead
 	assert(fspath.m_isDirectory);  //TODO: throw an exception instead
@@ -304,7 +304,7 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
-void RealFSImpl::EnsureDirectoryExists(std::string const & dirname)
+void RealFSImpl::EnsureDirectoryExists(const std::string & dirname)
 {
 	try {
 		std::string::size_type it = 0;
@@ -338,7 +338,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname)
  * MakeDirectory("onedir/otherdir/onemoredir") will fail
  * if either onedir or otherdir is missing
  */
-void RealFSImpl::MakeDirectory(std::string const & dirname) {
+void RealFSImpl::MakeDirectory(const std::string & dirname) {
 	FileSystemPath fspath(FS_CanonicalizeName(dirname));
 	if (fspath.m_exists)
 		throw wexception
@@ -471,7 +471,7 @@ GCC_DIAG_ON("-Wold-style-cast")
  * that file.
  * Throws an exception if it fails.
  */
-void RealFSImpl::Write(std::string const & fname, void const * const data, int32_t const length, bool append)
+void RealFSImpl::Write(const std::string & fname, void const * const data, int32_t const length, bool append)
 {
 	std::string fullname;
 
@@ -492,7 +492,7 @@ void RealFSImpl::Write(std::string const & fname, void const * const data, int32
 
 // rename a file or directory
 void RealFSImpl::Rename
-	(std::string const & old_name, std::string const & new_name)
+	(const std::string & old_name, const std::string & new_name)
 {
 	const std::string fullname1 = FS_CanonicalizeName(old_name);
 	const std::string fullname2 = FS_CanonicalizeName(new_name);
@@ -509,7 +509,7 @@ Implementation of OpenStreamRead
 namespace {
 
 struct RealFSStreamRead : public StreamRead {
-	RealFSStreamRead(std::string const & fname)
+	RealFSStreamRead(const std::string & fname)
 		: m_file(fopen(fname.c_str(), "rb"))
 	{
 		if (!m_file)
@@ -536,7 +536,7 @@ private:
 
 };
 
-StreamRead * RealFSImpl::OpenStreamRead(std::string const & fname) {
+StreamRead * RealFSImpl::OpenStreamRead(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
 
 	return new RealFSStreamRead(fullname);
@@ -552,7 +552,7 @@ Implementation of OpenStreamWrite
 namespace {
 
 struct RealFSStreamWrite : public StreamWrite {
-	RealFSStreamWrite(std::string const & fname)
+	RealFSStreamWrite(const std::string & fname)
 		: m_filename(fname)
 	{
 		m_file = fopen(fname.c_str(), "wb");
@@ -582,7 +582,7 @@ private:
 
 };
 
-StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
+StreamWrite * RealFSImpl::OpenStreamWrite(const std::string & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
 
 	return new RealFSStreamWrite(fullname);

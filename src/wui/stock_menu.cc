@@ -93,7 +93,7 @@ void Stock_Menu::fill_total_waresdisplay
 	(WaresDisplay * waresdisplay, Widelands::WareWorker type)
 {
 	waresdisplay->remove_all_warelists();
-	Widelands::Player const & player = *m_player.get_player();
+	const Widelands::Player & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay->add_warelist
@@ -110,7 +110,7 @@ void Stock_Menu::fill_warehouse_waresdisplay
 	(WaresDisplay * waresdisplay, Widelands::WareWorker type)
 {
 	waresdisplay->remove_all_warelists();
-	Widelands::Player const & player = *m_player.get_player();
+	const Widelands::Player & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i) {
 		const std::vector<Widelands::Warehouse *> & warehouses =

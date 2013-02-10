@@ -103,7 +103,7 @@ struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	 *
 	 * The message may or may not appear in subsequent calls to \ref getMessages.
 	 */
-	virtual void send(std::string const &) = 0;
+	virtual void send(const std::string &) = 0;
 
 	/**
 	 * \return a (chronological) list of received chat messages.
@@ -111,10 +111,10 @@ struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	 * subsequent calls to this functions may return a smaller or
 	 * greater number of chat messages.
 	 */
-	virtual std::vector<ChatMessage> const & getMessages() const = 0;
+	virtual const std::vector<ChatMessage> & getMessages() const = 0;
 
 protected:
-	void send(ChatMessage const & c) {
+	void send(const ChatMessage & c) {
 		Widelands::NoteSender<ChatMessage>::send(c);
 	}
 };

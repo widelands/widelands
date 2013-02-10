@@ -58,9 +58,9 @@ struct IdleWareSupply : public Supply {
 	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
 	virtual void send_to_storage(Game &, Warehouse * wh);
 
-	virtual uint32_t nr_supplies(Game const &, Request const &) const;
-	virtual WareInstance & launch_item(Game &, Request const &);
-	virtual Worker & launch_worker(Game &, Request const &);
+	virtual uint32_t nr_supplies(const Game &, const Request &) const;
+	virtual WareInstance & launch_item(Game &, const Request &);
+	virtual Worker & launch_worker(Game &, const Request &);
 
 private:
 	WareInstance & m_ware;
@@ -136,7 +136,7 @@ void IdleWareSupply::get_ware_type(WareWorker & type, Ware_Index & ware) const
 	ware = m_ware.descr_index();
 }
 
-uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
+uint32_t IdleWareSupply::nr_supplies(const Game &, const Request & req) const
 {
 	if
 		(req.get_type() == wwWARE &&
@@ -149,7 +149,7 @@ uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
 /**
  * The item is already "launched", so we only need to return it.
 */
-WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
+WareInstance & IdleWareSupply::launch_item(Game &, const Request & req) {
 	if (req.get_type() != wwWARE)
 		throw wexception
 			("IdleWareSupply::launch_item : called for non-item request");
@@ -163,7 +163,7 @@ WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
 	return m_ware;
 }
 
-Worker & IdleWareSupply::launch_worker(Game &, Request const &)
+Worker & IdleWareSupply::launch_worker(Game &, const Request &)
 {
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }

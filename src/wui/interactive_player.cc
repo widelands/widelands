@@ -338,7 +338,7 @@ void Interactive_Player::postload()
 
 
 void Interactive_Player::popup_message
-	(Widelands::Message_Id const id, Widelands::Message const & message)
+	(Widelands::Message_Id const id, const Widelands::Message & message)
 {
 	m_message_menu.create();
 	ref_cast<GameMessageMenu, UI::UniqueWindow>(*m_message_menu.window)
@@ -371,7 +371,7 @@ Widelands::Player_Number Interactive_Player::player_number() const
 /// Player has clicked on the given node; bring up the context menu.
 void Interactive_Player::node_action()
 {
-	Map const & map = egbase().map();
+	const Map & map = egbase().map();
 	if (1 < player().vision(Map::get_index(get_sel_pos().node, map.get_width())))
 	{
 		// Special case for buildings
@@ -482,7 +482,7 @@ void Interactive_Player::set_player_number(uint32_t const n) {
  */
 void Interactive_Player::cleanup_for_load() {}
 
-void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
+void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 {
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");

@@ -39,20 +39,20 @@ struct Font;
 struct Button : public NamedPanel {
 	Button /// for textual buttons
 		(Panel * const parent,
-		 std::string const & name,
+		 const std::string & name,
 		 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 		 const Image* background_pictute_id,
-		 std::string const & title_text,
-		 std::string const & tooltip_text = std::string(),
+		 const std::string & title_text,
+		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat    = false);
 	Button /// for pictorial buttons
 		(Panel * const parent,
-		 std::string const & name,
+		 const std::string & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const Image* background_pictute_id,
 		 const Image* foreground_picture_id,
-		 std::string const & tooltip_text = std::string(),
+		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat     = false);
 	~Button();

@@ -30,7 +30,7 @@ typedef std::vector<std::pair<Ware_Index, uint32_t> > Ware_Types;
 // range structure for iterating ware range with index
 struct ware_range
 {
-	ware_range(Ware_Types const & range) :
+	ware_range(const Ware_Types & range) :
 		i(0), current(range.begin()), end(range.end()) {}
 	ware_range & operator++ () {
 		++i; ++current; return *this;

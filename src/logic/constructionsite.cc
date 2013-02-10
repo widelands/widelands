@@ -40,8 +40,8 @@ namespace Widelands {
 
 ConstructionSite_Descr::ConstructionSite_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _tribe)
 : Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
@@ -149,7 +149,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	//  TODO figure out whether planing is necessary
 
 	//  initialize the wares queues
-	std::map<Ware_Index, uint8_t> const & buildcost = m_building->buildcost();
+	const std::map<Ware_Index, uint8_t> & buildcost = m_building->buildcost();
 	size_t const buildcost_size = buildcost.size();
 	m_wares.resize(buildcost_size);
 	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
@@ -268,7 +268,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		WaresQueue * queue = *iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			Item_Ware_Descr const & wd = *tribe().get_ware_descr(queue->get_ware());
+			const Item_Ware_Descr & wd = *tribe().get_ware_descr(queue->get_ware());
 			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
 			item.init(game);
 			worker.start_task_dropoff(game, item);
@@ -332,7 +332,7 @@ Draw the construction site.
 ===============
 */
 void ConstructionSite::draw
-	(Editor_Game_Base const & game,
+	(const Editor_Game_Base & game,
 	 RenderTarget           & dst,
 	 FCoords          const   coords,
 	 Point            const   pos)

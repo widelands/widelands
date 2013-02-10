@@ -143,7 +143,7 @@ void Fullscreen_Menu_NetSetupLAN::think ()
 bool Fullscreen_Menu_NetSetupLAN::get_host_address
 	(uint32_t & addr, uint16_t & port)
 {
-	std::string const & host = hostname.text();
+	const std::string & host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
 	for (uint32_t i = 0; i < opengames_size; ++i) {
@@ -166,7 +166,7 @@ GCC_DIAG_ON("-Wold-style-cast")
 		return false;
 }
 
-std::string const & Fullscreen_Menu_NetSetupLAN::get_playername()
+const std::string & Fullscreen_Menu_NetSetupLAN::get_playername()
 {
 	return playername.text();
 }
@@ -187,7 +187,7 @@ void Fullscreen_Menu_NetSetupLAN::game_doubleclicked (uint32_t) {
 
 void Fullscreen_Menu_NetSetupLAN::update_game_info
 	(UI::Table<Net_Open_Game const * const>::Entry_Record & er,
-	 Net_Game_Info const & info)
+	 const Net_Game_Info & info)
 {
 	er.set_string (0, info.hostname);
 	er.set_string (1, info.map);

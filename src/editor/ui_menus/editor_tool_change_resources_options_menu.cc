@@ -124,7 +124,7 @@ Editor_Tool_Change_Resources_Options_Menu
 	m_change_by_decrease.set_repeating(true);
 	m_set_to_increase   .set_repeating(true);
 	m_set_to_decrease   .set_repeating(true);
-	Widelands::World const & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().map().world();
 	Widelands::Resource_Index const nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.

@@ -35,7 +35,7 @@ namespace Widelands
 {
 
 MapGenerator::MapGenerator
-	(Map & map, UniqueRandomMapInfo const & mapInfo,
+	(Map & map, const UniqueRandomMapInfo & mapInfo,
 	 Editor_Game_Base & egbase)
 	: m_map(map), m_mapInfo(mapInfo), m_egbase(egbase)
 {
@@ -69,7 +69,7 @@ void MapGenerator::generate_bobs
 
 	// Figure out if we really need to set a bob here...
 
-	MapGenBobArea const & bobArea = mapGenInfo.getBobArea(found);
+	const MapGenBobArea & bobArea = mapGenInfo.getBobArea(found);
 
 	const MapGenBobKind * bobKind = bobArea.getBobKind(terrType);
 
@@ -960,8 +960,8 @@ Return value: true if the map-id-string was valid, false otherwise
 */
 
 bool UniqueRandomMapInfo::setFromIdString
-	(UniqueRandomMapInfo & mapInfo_out, std::string const & mapIdString,
-	 std::vector<std::string> const & worlds)
+	(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString,
+	 const std::vector<std::string> & worlds)
 {
 	//  check string
 
@@ -1073,7 +1073,7 @@ mapInfo:     Information about the random map currently
 ===============
 */
 void UniqueRandomMapInfo::generateIdString
-	(std::string & mapIdsString_out, UniqueRandomMapInfo const & mapInfo)
+	(std::string & mapIdsString_out, const UniqueRandomMapInfo & mapInfo)
 {
 	//  Init
 	assert(mapInfo.w <= 560);
@@ -1164,7 +1164,7 @@ void UniqueRandomMapInfo::generateIdString
 
 
 uint16_t Widelands::UniqueRandomMapInfo::generateWorldNameHash
-	(std::string const & name)
+	(const std::string & name)
 {
 	// This is only a simple digest algorithm. Thats enough for our purposes.
 

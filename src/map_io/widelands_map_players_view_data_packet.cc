@@ -108,7 +108,7 @@ struct Map_Object_Data {
 };
 
 inline static Map_Object_Data * read_unseen_immovable
-	(Editor_Game_Base const & egbase,
+	(const Editor_Game_Base & egbase,
 	 BitInBuffer<2>         & immovable_kinds_file,
 	 FileRead               & immovables_file,
 	 uint8_t                & version
@@ -139,7 +139,7 @@ inline static Map_Object_Data * read_unseen_immovable
 			}
 			break;
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("unseen immovable: %s"), e.what());
 	}
 	return m;
@@ -150,7 +150,7 @@ inline static Map_Object_Data * read_unseen_immovable
    snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
    filetype file;                                                             \
    try {(file).Open(fs, filename);}                                           \
-   catch (File_error const &) {                                               \
+   catch (const File_error &) {                                               \
       throw game_data_error                                                   \
          ("Map_Players_View_Data_Packet::Read: player %u:Could not open "     \
           "\"%s\" for reading. This file should exist when \"%s\" exists",    \
@@ -193,7 +193,7 @@ void Map_Players_View_Data_Packet::Read
 	if (skip)
 		return;
 
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
 	Field & first_field = map[0];
@@ -770,7 +770,7 @@ void Map_Players_View_Data_Packet::Write
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
 	// \todo make first_field const when FCoords has been templatized so it can

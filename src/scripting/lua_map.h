@@ -230,9 +230,9 @@ struct L_HasWares {
 
 protected:
 	WaresSet m_parse_get_wares_arguments
-		(lua_State *, Widelands::Tribe_Descr const &, bool *);
+		(lua_State *, const Widelands::Tribe_Descr &, bool *);
 	WaresMap m_parse_set_wares_arguments
-		(lua_State *, Widelands::Tribe_Descr const &);
+		(lua_State *, const Widelands::Tribe_Descr &);
 };
 struct L_HasWorkers {
 	virtual ~L_HasWorkers() {}
@@ -246,9 +246,9 @@ struct L_HasWorkers {
 
 protected:
 	WorkersSet m_parse_get_workers_arguments
-		(lua_State *, Widelands::Tribe_Descr const &, bool *);
+		(lua_State *, const Widelands::Tribe_Descr &, bool *);
 	WorkersMap m_parse_set_workers_arguments
-		(lua_State *, Widelands::Tribe_Descr const &);
+		(lua_State *, const Widelands::Tribe_Descr &);
 };
 
 struct L_HasSoldiers {
@@ -292,9 +292,9 @@ struct L_HasSoldiers {
 
 protected:
 	int m_handle_get_soldiers
-		(lua_State *, Widelands::Soldier_Descr const &, SoldiersList const &);
+		(lua_State *, const Widelands::Soldier_Descr &, const SoldiersList &);
 	SoldiersMap m_parse_set_soldiers_arguments
-		(lua_State *, Widelands::Soldier_Descr const &);
+		(lua_State *, const Widelands::Soldier_Descr &);
 	int m_get_soldier_levels
 		(lua_State *, int, const Widelands::Soldier_Descr &, SoldierDescr &);
 };

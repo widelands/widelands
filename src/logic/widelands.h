@@ -71,7 +71,7 @@ typedef uint32_t Serial; /// Serial number for Map_Object.
 /// validity and upper limit can be tested using "if (index < nrItems)".
 template <typename T> struct _Index {
 	typedef uint8_t value_t;
-	_Index(_Index const & other = Null()) : i(other.i) {}
+	_Index(const _Index & other = Null()) : i(other.i) {}
 	explicit _Index(value_t const I) : i(I) {}
 	explicit _Index(size_t  const I)
 		: i(static_cast<value_t>(I))
@@ -118,7 +118,7 @@ private:
 
 #define DEFINE_INDEX(NAME)                                                    \
    struct NAME : public _Index<NAME> {                                        \
-      NAME(NAME const & other = Null()) : _Index<NAME>(other) {}              \
+      NAME(const NAME & other = Null()) : _Index<NAME>(other) {}              \
       explicit NAME(value_t const I) : _Index<NAME>(I) {}                     \
       explicit NAME(size_t  const I) : _Index<NAME>(I) {}                     \
       explicit NAME(int32_t const I) __attribute__((deprecated));             \

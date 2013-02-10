@@ -79,7 +79,7 @@ void DismantleSite_Window::think()
 {
 	Building_Window::think();
 
-	Widelands::DismantleSite const & ds =
+	const Widelands::DismantleSite & ds =
 		ref_cast<Widelands::DismantleSite, Widelands::Building>(building());
 
 	m_progress->set_state(ds.get_built_per64k());

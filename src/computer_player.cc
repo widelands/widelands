@@ -48,7 +48,7 @@ struct EmptyAI : Computer_Player {
 
 EmptyAI::EmptyAIImpl EmptyAI::implementation;
 
-Computer_Player::ImplementationVector const &
+const Computer_Player::ImplementationVector &
 Computer_Player::getImplementations()
 {
 	static std::vector<Computer_Player::Implementation const *> impls;
@@ -66,7 +66,7 @@ Computer_Player::getImplementations()
 const Computer_Player::Implementation * Computer_Player::getImplementation
 	(const std::string & name)
 {
-	ImplementationVector const & vec = getImplementations();
+	const ImplementationVector & vec = getImplementations();
 
 	container_iterate_const(ImplementationVector, vec, i)
 		if ((*i.current)->name == name)

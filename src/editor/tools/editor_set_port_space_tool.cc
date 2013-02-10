@@ -33,7 +33,7 @@ int32_t Editor_Tool_Set_Port_Space_Callback
 	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
 {
 	assert(data);
-	Map const & map = *static_cast<Map const *>(data);
+	const Map & map = *static_cast<Map const *>(data);
 	NodeCaps const caps = c.field->nodecaps();
 	FCoords f = map.get_fcoords(*c.field);
 	if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {

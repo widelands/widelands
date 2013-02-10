@@ -62,7 +62,7 @@ std::string localedir;
 char const * translate(char const * const str) {
 	return gettext(str);
 }
-char const * translate(std::string const & str) {
+char const * translate(const std::string & str) {
 	return gettext(str.c_str());
 }
 
@@ -81,7 +81,7 @@ void set_localedir(std::string dname) {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(std::string const & domain)
+void grab_textdomain(const std::string & domain)
 {
 	char const * const dom = domain.c_str();
 	char const * const ldir = localedir.c_str();
@@ -248,6 +248,6 @@ void set_locale(std::string name) {
 	}
 }
 
-std::string const & get_locale() {return locale;}
+const std::string & get_locale() {return locale;}
 
 }

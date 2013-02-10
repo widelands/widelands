@@ -188,7 +188,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
 			if (m_plotdata[plot].showplot) {
 
-				std::vector<uint32_t> const & dataset = *m_plotdata[plot].dataset;
+				const std::vector<uint32_t> & dataset = *m_plotdata[plot].dataset;
 
 				uint32_t add = 0;
 				//  Relative data, first entry is always zero.

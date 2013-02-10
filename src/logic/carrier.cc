@@ -553,7 +553,7 @@ int32_t Carrier::find_closest_flag(Game & game)
 bool Carrier::start_task_walktoflag
 	(Game & game, int32_t const flag, bool const offset)
 {
-	Path const & path =
+	const Path & path =
 		ref_cast<Road, PlayerImmovable>(*get_location(game)).get_path();
 	int32_t idx;
 

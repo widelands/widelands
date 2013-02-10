@@ -369,9 +369,9 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_load_game(m_filename.c_str());
-		} catch (Widelands::game_data_error const & e) {
+		} catch (const Widelands::game_data_error & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
@@ -380,9 +380,9 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct(m_filename.c_str());
-		} catch (Widelands::game_data_error const & e) {
+		} catch (const Widelands::game_data_error & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
@@ -395,12 +395,12 @@ void WLApplication::run()
 
 			// setup some details of the dedicated server
 			Section & s = g_options.pull_section      ("global");
-			std::string const & meta   = s.get_string ("metaserver",     INTERNET_GAMING_METASERVER.c_str());
+			const std::string & meta   = s.get_string ("metaserver",     INTERNET_GAMING_METASERVER.c_str());
 			uint32_t            port   = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-			std::string const & name   = s.get_string ("nickname",       "dedicated");
-			std::string const & server = s.get_string ("servername",     name.c_str());
+			const std::string & name   = s.get_string ("nickname",       "dedicated");
+			const std::string & server = s.get_string ("servername",     name.c_str());
 			const bool registered      = s.get_bool   ("registered",     false);
-			std::string const & pwd    = s.get_string ("password",       "");
+			const std::string & pwd    = s.get_string ("password",       "");
 			uint32_t            maxcl  = s.get_natural("maxclients",     8);
 			for (;;) { // endless loop
 				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
@@ -411,7 +411,7 @@ void WLApplication::run()
 				bool name_valid = false;
 				while (not name_valid) {
 					name_valid = true;
-					std::vector<INet_Game> const & hosts = InternetGaming::ref().games();
+					const std::vector<INet_Game> & hosts = InternetGaming::ref().games();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
 						if (hosts.at(i).name == realservername)
 							name_valid = false;
@@ -455,7 +455,7 @@ void WLApplication::run()
 
 				InternetGaming::ref().logout();
 			}
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
@@ -505,7 +505,7 @@ restart:
 	if (journal->is_playingback()) {
 		try {
 			haveevent = journal->read_event(ev);
-		} catch (Journalfile_error const & e) {
+		} catch (const Journalfile_error & e) {
 			// An error might occur here when playing back a file that
 			// was not finalized due to a crash etc.
 			// Since playbacks are intended precisely for debugging such
@@ -922,7 +922,7 @@ void WLApplication::shutdown_settings()
 
 	try { //  overwrite the old config file
 		g_options.write("config", true);
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		log("WARNING: could not save configuration: %s\n", e.what());
 	} catch (...)                      {
 		log("WARNING: could not save configuration");
@@ -1560,7 +1560,7 @@ void WLApplication::mainmenu()
 					Widelands::Game game;
 					try {
 						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
-					} catch (std::exception const & e) {
+					} catch (const std::exception & e) {
 						log("Fata exception: %s\n", e.what());
 						emergency_save(game);
 						throw;
@@ -1598,16 +1598,16 @@ void WLApplication::mainmenu()
 			case Fullscreen_Menu_Main::mm_exit:
 				return;
 			}
-		} catch (warning const & e) {
+		} catch (const warning & e) {
 			messagetitle = _("Warning: ");
 			messagetitle += e.title();
 			message = e.what();
-		} catch (Widelands::game_data_error const & e) {
+		} catch (const Widelands::game_data_error & e) {
 			messagetitle = _("Game data error");
 			message = e.what();
 		}
 #ifndef DEBUG
-		catch (std::exception const & e) {
+		catch (const std::exception & e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
@@ -1794,7 +1794,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual void setScenario(bool const set) {s.scenario = set;}
 
-	virtual GameSettings const & settings() {return s;}
+	virtual const GameSettings & settings() {return s;}
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t number) {
@@ -1813,8 +1813,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setMap
-		(std::string const &       mapname,
-		 std::string const &       mapfilename,
+		(const std::string &       mapname,
+		 const std::string &       mapfilename,
 		 uint32_t            const maxplayers,
 		 bool                const savegame)
 	{
@@ -1838,7 +1838,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			player.team = 0;
 			// Set default computerplayer ai type
 			if (player.state == PlayerSettings::stateComputer) {
-				Computer_Player::ImplementationVector const & impls =
+				const Computer_Player::ImplementationVector & impls =
 					Computer_Player::getImplementations();
 				if (impls.size() > 1) {
 					player.ai = impls.at(0)->name;
@@ -1861,7 +1861,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = state;
 	}
 
-	virtual void setPlayerAI(uint8_t const number, std::string const & ai, bool const random_ai) {
+	virtual void setPlayerAI(uint8_t const number, const std::string & ai, bool const random_ai) {
 		if (number < s.players.size()) {
 			s.players[number].ai = ai;
 			s.players[number].random_ai = random_ai;
@@ -1872,7 +1872,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		if (number == s.playernum || number >= s.players.size())
 			return;
 
-		Computer_Player::ImplementationVector const & impls =
+		const Computer_Player::ImplementationVector & impls =
 			Computer_Player::getImplementations();
 		if (impls.size() > 1) {
 			Computer_Player::ImplementationVector::const_iterator it =
@@ -1898,7 +1898,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
+	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe)
 	{
 		if (number >= s.players.size())
 			return;
@@ -1950,7 +1950,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		// nothing to do
 	}
 
-	virtual void setPlayerName(uint8_t const number, std::string const & name) {
+	virtual void setPlayerName(uint8_t const number, const std::string & name) {
 		if (number < s.players.size())
 			s.players[number].name = name;
 	}
@@ -2003,7 +2003,7 @@ bool WLApplication::new_game()
 	if (code == 2) { // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.getMap().c_str());
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
@@ -2031,7 +2031,7 @@ bool WLApplication::new_game()
 				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(&loaderUI, sp.settings());
 			game.run(&loaderUI, Widelands::Game::NewNonScenario);
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
@@ -2062,7 +2062,7 @@ bool WLApplication::load_game()
 	try {
 		if (game.run_load_game(filename))
 			return true;
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
@@ -2105,7 +2105,7 @@ bool WLApplication::campaign_game()
 		// Load selected campaign-map-file
 		if (filename.size())
 			return game.run_splayer_scenario_direct(filename.c_str());
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
@@ -2114,7 +2114,7 @@ bool WLApplication::campaign_game()
 }
 
 struct ReplayGameController : public GameController {
-	ReplayGameController(Widelands::Game & game, std::string const & filename) :
+	ReplayGameController(Widelands::Game & game, const std::string & filename) :
 		m_game     (game),
 		m_lastframe(WLApplication::get()->get_time()),
 		m_time     (m_game.get_gametime()),
@@ -2227,7 +2227,7 @@ void WLApplication::replay()
 		ReplayGameController rgc(game, m_filename);
 
 		game.run(&loaderUI, Widelands::Game::Loaded);
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
 		m_filename.clear();

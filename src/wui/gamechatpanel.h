@@ -50,12 +50,12 @@ struct GameChatPanel :
 	 */
 	boost::signal<void ()> aborted;
 
-	std::string const & get_edit_text() const {return editbox.text();}
-	void set_edit_text(std::string const & text) {editbox.setText(text);}
+	const std::string & get_edit_text() const {return editbox.text();}
+	void set_edit_text(const std::string & text) {editbox.setText(text);}
 
 	void focusEdit();
 
-	void receive(ChatMessage const &);
+	void receive(const ChatMessage &);
 
 private:
 	void recalculate();

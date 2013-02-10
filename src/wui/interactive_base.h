@@ -173,8 +173,8 @@ protected:
 
 
 private:
-	void cmdMapObject(std::vector<std::string> const & args);
-	void cmdLua(std::vector<std::string> const & args);
+	void cmdMapObject(const std::vector<std::string> & args);
+	void cmdLua(const std::vector<std::string> & args);
 	void update_speedlabel();
 
 	UI::Textarea m_label_speed_shadow;

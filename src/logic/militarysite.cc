@@ -47,8 +47,8 @@ namespace Widelands {
 MilitarySite_Descr::MilitarySite_Descr
 	(char        const * const _name,
 	 char        const * const _descname,
-	 std::string const & directory, Profile & prof,  Section & global_s,
-	 Tribe_Descr const & _tribe)
+	 const std::string & directory, Profile & prof,  Section & global_s,
+	 const Tribe_Descr & _tribe)
 :
 	ProductionSite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe),
@@ -136,7 +136,7 @@ void MilitarySite::init(Editor_Game_Base & egbase)
 
 	upcast(Game, game, &egbase);
 
-	std::vector<Worker *> const & ws = get_workers();
+	const std::vector<Worker*>& ws = get_workers();
 	container_iterate_const(std::vector<Worker *>, ws, i)
 		if (upcast(Soldier, soldier, *i.current)) {
 			soldier->set_location_initially(*this);
@@ -401,7 +401,7 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
-	std::vector<Worker *> const & w = get_workers();
+	const std::vector<Worker *>& w = get_workers();
 	container_iterate_const(std::vector<Worker *>, w, i)
 		if (upcast(Soldier, soldier, *i.current))
 			if (isPresent(*soldier))
@@ -414,7 +414,7 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
-	std::vector<Worker *> const & w = get_workers();
+	const std::vector<Worker *>& w = get_workers();
 	container_iterate_const(std::vector<Worker *>, w, i)
 		if (upcast(Soldier, soldier, *i.current))
 			soldiers.push_back(soldier);
@@ -691,7 +691,7 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 
    Easy to use, overwrite with given requirements.
 */
-void MilitarySite::set_requirements (Requirements const & r)
+void MilitarySite::set_requirements (const Requirements & r)
 {
 	m_soldier_requirements = r;
 }

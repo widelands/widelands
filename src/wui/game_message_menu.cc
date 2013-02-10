@@ -136,7 +136,7 @@ static char const * const status_picture_filename[] = {
 };
 
 void GameMessageMenu::show_new_message
-	(Message_Id const id, Widelands::Message const & message)
+	(Message_Id const id, const Widelands::Message & message)
 {
 	assert(iplayer().player().messages()[id] == &message);
 	assert(not list->find(id.value()));
@@ -168,7 +168,7 @@ void GameMessageMenu::think()
 	// Add new messages to the list
 	container_iterate_const(MessageQueue, mq, i) {
 		Message_Id      const id      =  i.current->first;
-		Message const &       message = *i.current->second;
+		const Message &       message = *i.current->second;
 		Message::Status const status  = message.status();
 		if ((mode == Archive) != (status == Message::Archived))
 			continue;

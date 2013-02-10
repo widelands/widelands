@@ -199,7 +199,7 @@ Journal::~Journal()
  * \param filename File the events should be written to
  * \todo set the filename somewhere else
  */
-void Journal::start_recording(std::string const & filename)
+void Journal::start_recording(const std::string & filename)
 {
 	assert(!m_recordstream.is_open());
 
@@ -247,7 +247,7 @@ void Journal::stop_recording()
  * \param filename File to get events from
  * \todo set the filename somewhere else
  */
-void Journal::start_playback(std::string const & filename)
+void Journal::start_playback(const std::string & filename)
 {
 	assert(!m_playbackstream.is_open());
 
@@ -297,7 +297,7 @@ void Journal::stop_playback()
  *
  * \param e The event to be recorded
  */
-void Journal::record_event(SDL_Event const & e)
+void Journal::record_event(const SDL_Event & e)
 {
 	if (!m_record)
 		return;
@@ -364,7 +364,7 @@ void Journal::record_event(SDL_Event const & e)
 			break;
 		}
 	}
-	catch (std::ofstream::failure const &) {
+	catch (const std::ofstream::failure &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to write to record file. Recording deactivated.\n");
@@ -445,7 +445,7 @@ bool Journal::read_event(SDL_Event & e)
 			throw BadRecord_error(m_playbackname, recordtype, RFC_INVALID);
 			break;
 		}
-	} catch (std::ifstream::failure const &) {
+	} catch (const std::ifstream::failure &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");

@@ -342,7 +342,7 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 
 	m_settings->setScenario(code == 2);
 
-	MapData const & mapdata = *msm.get_map();
+	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
 
 	// If the same map was selected again, maybe the state of the "scenario" check box was changed
@@ -440,7 +440,7 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
  */
 void Fullscreen_Menu_LaunchMPG::refresh()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 
 	if (settings.mapfilename != m_filename_proof) {
 		if (!g_fs->FileExists(settings.mapfilename)) {
@@ -508,7 +508,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
  */
 void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 	if (settings.mapfilename.empty())
 		throw wexception
 			("settings()->scenario was set to true, but no map is available");

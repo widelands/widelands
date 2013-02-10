@@ -135,7 +135,7 @@ GCC_DIAG_ON("-Wold-style-cast")
 
 /// Login to metaserver
 bool InternetGaming::login
-	(std::string const & nick, std::string const & pwd, bool reg, std::string const & meta, uint32_t port)
+	(const std::string & nick, const std::string & pwd, bool reg, const std::string & meta, uint32_t port)
 {
 	assert(m_state == OFFLINE);
 
@@ -238,7 +238,7 @@ bool InternetGaming::relogin()
 
 /// logout of the metaserver
 /// \note \arg msgcode should be a message from the list of InternetGamingMessages
-void InternetGaming::logout(std::string const & msgcode) {
+void InternetGaming::logout(const std::string & msgcode) {
 
 	// Just in case the metaserver is listening on the socket - tell him we break up with him ;)
 	SendPacket s;
@@ -297,7 +297,7 @@ void InternetGaming::handle_metaserver_communication() {
 				handle_packet(packet);
 			}
 		}
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		std::string reason = _("Something went wrong: ");
 		reason += e.what();
 		logout(reason);
@@ -661,7 +661,7 @@ bool InternetGaming::updateForGames() {
 
 
 /// \returns the tables in the room, if no error occured
-std::vector<INet_Game> const & InternetGaming::games() {
+const std::vector<INet_Game> & InternetGaming::games() {
 	return error() ? * (new std::vector<INet_Game>()) : gamelist;
 }
 
@@ -678,14 +678,14 @@ bool InternetGaming::updateForClients() {
 
 
 /// \returns the players in the room, if no error occured
-std::vector<INet_Client> const & InternetGaming::clients() {
+const std::vector<INet_Client> & InternetGaming::clients() {
 	return error() ? * (new std::vector<INet_Client>()) : clientlist;
 }
 
 
 
 /// ChatProvider: sends a message via the metaserver.
-void InternetGaming::send(std::string const & msg) {
+void InternetGaming::send(const std::string & msg) {
 	if (!logged_in()) {
 		formatAndAddChat
 			("", "", true, _("Message could not be sent: You are not connected to the metaserver!"));

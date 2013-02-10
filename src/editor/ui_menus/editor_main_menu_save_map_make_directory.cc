@@ -77,7 +77,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
  * Editbox changed
  */
 void Main_Menu_Save_Map_Make_Directory::edit_changed() {
-	std::string const & text = m_edit->text();
+	const std::string & text = m_edit->text();
 	if (text.size()) {
 		m_ok_button->set_enabled(true);
 		m_dirname = text;

@@ -100,7 +100,7 @@ EditBox::~EditBox()
 /**
  * \return the current text entered in the edit box
  */
-std::string const & EditBox::text() const
+const std::string & EditBox::text() const
 {
 	return m->text;
 }
@@ -108,7 +108,7 @@ std::string const & EditBox::text() const
 /**
  * Set the font used by the edit box.
  */
-void EditBox::set_font(std::string const & name, int32_t size, RGBColor color)
+void EditBox::set_font(const std::string & name, int32_t size, RGBColor color)
 {
 	m->fontname = name;
 	m->fontsize = size;
@@ -121,7 +121,7 @@ void EditBox::set_font(std::string const & name, int32_t size, RGBColor color)
  * The text is truncated if it is longer than the maximum length set by
  * \ref setMaxLength().
  */
-void EditBox::setText(std::string const & t)
+void EditBox::setText(const std::string & t)
 {
 	if (t == m->text)
 		return;

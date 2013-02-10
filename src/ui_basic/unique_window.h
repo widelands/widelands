@@ -55,10 +55,10 @@ struct UniqueWindow : public Window {
 
 	UniqueWindow
 		(Panel             * parent,
-		 std::string const & name,
+		 const std::string & name,
 		 Registry          *,
 		 int32_t w, int32_t h,
-		 std::string const & title);
+		 const std::string & title);
 	virtual ~UniqueWindow();
 
 	bool get_usedefaultpos() {return m_usedefaultpos;}

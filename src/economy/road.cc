@@ -88,7 +88,7 @@ Road::~Road()
 */
 Road & Road::create
 	(Editor_Game_Base & egbase,
-	 Flag & start, Flag & end, Path const & path)
+	 Flag & start, Flag & end, const Path & path)
 {
 	assert(start.get_position() == path.get_start());
 	assert(end  .get_position() == path.get_end  ());
@@ -143,7 +143,7 @@ BaseImmovable::PositionList Road::get_positions
 }
 
 static std::string const road_name = "road";
-std::string const & Road::name() const throw () {return road_name;}
+const std::string & Road::name() const throw () {return road_name;}
 
 
 Flag & Road::base_flag()
@@ -163,7 +163,7 @@ int32_t Road::get_cost(FlagId fromflag)
  * Set the new path, calculate costs.
  * You have to set start and end flags before calling this function.
 */
-void Road::_set_path(Editor_Game_Base & egbase, Path const & path)
+void Road::_set_path(Editor_Game_Base & egbase, const Path & path)
 {
 	assert(path.get_nsteps() >= 2);
 	assert(path.get_start() == m_flags[FlagStart]->get_position());
@@ -657,7 +657,7 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 	return false;
 }
 
-void Road::log_general_info(Editor_Game_Base const & egbase)
+void Road::log_general_info(const Editor_Game_Base & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);
 	molog("m_busyness: %i\n", m_busyness);

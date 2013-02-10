@@ -116,7 +116,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
  * set values
 */
 void Main_Menu_Map_Options::update() {
-	Widelands::Map const & map = eia().egbase().map();
+	const Widelands::Map & map = eia().egbase().map();
 
 	char buf[200];
 	sprintf(buf, "%ix%i", map.get_width(), map.get_height());

@@ -78,7 +78,7 @@ private:
 		TargetWaresDisplay
 			(UI::Panel * const parent,
 			 int32_t const x, int32_t const y,
-			 Widelands::Tribe_Descr const & tribe,
+			 const Widelands::Tribe_Descr & tribe,
 			 Widelands::WareWorker type,
 			 bool selectable,
 			 Economy & economy)
@@ -160,7 +160,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					Economy::Target_Quantity const & tq =
+					const Economy::Target_Quantity & tq =
 						m_economy.ware_target_quantity(id);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
@@ -183,7 +183,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					Economy::Target_Quantity const & tq =
+					const Economy::Target_Quantity & tq =
 						m_economy.ware_target_quantity(id);
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
@@ -257,7 +257,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					Economy::Target_Quantity const & tq =
+					const Economy::Target_Quantity & tq =
 						m_economy.worker_target_quantity(id);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
@@ -280,7 +280,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					Economy::Target_Quantity const & tq =
+					const Economy::Target_Quantity & tq =
 						m_economy.worker_target_quantity(id);
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());

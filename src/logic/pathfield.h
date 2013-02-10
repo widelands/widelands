@@ -78,7 +78,7 @@ struct PathfieldManager {
 	boost::shared_ptr<Pathfields> allocate();
 
 private:
-	void clear(boost::shared_ptr<Pathfields> const & pf);
+	void clear(const boost::shared_ptr<Pathfields> & pf);
 
 	typedef std::vector<boost::shared_ptr<Pathfields> > List;
 

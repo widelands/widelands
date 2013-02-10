@@ -59,13 +59,13 @@ public:
 	void set_chat_provider(ChatProvider &);
 	ChatProvider * get_chat_provider();
 
-	std::string const & building_census_format      () const {
+	const std::string & building_census_format      () const {
 		return m_building_census_format;
 	}
-	std::string const & building_statistics_format  () const {
+	const std::string & building_statistics_format  () const {
 		return m_building_statistics_format;
 	}
-	std::string const & building_tooltip_format     () const {
+	const std::string & building_tooltip_format     () const {
 		return m_building_tooltip_format;
 	}
 

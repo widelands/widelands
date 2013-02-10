@@ -34,7 +34,7 @@ Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
 	 const Image* pic,
-	 std::string const &       tooltip_text)
+	 const std::string &       tooltip_text)
 	:
 	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
 	m_flags(Is_Enabled)

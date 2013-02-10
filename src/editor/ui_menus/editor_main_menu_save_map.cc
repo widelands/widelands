@@ -332,7 +332,7 @@ void Main_Menu_Save_Map::fill_list() {
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
-			} catch (_wexception const &) {} //  we simply skip illegal entries
+			} catch (const _wexception &) {} //  we simply skip illegal entries
 			delete ml;
 		}
 	}
@@ -395,7 +395,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	try {
 		wms.save();
 		eia().set_need_save(false);
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		std::string s =
 			_
 			("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason "

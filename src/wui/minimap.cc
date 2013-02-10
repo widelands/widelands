@@ -102,7 +102,7 @@ bool MiniMap::View::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 }
 
 void MiniMap::View::set_zoom(int32_t z) {
-	Widelands::Map const & map = m_ibase.egbase().map();
+	const Widelands::Map & map = m_ibase.egbase().map();
 	set_size((map.get_width() * z), (map.get_height()) * z);
 }
 

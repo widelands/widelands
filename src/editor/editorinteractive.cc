@@ -135,12 +135,12 @@ void Editor_Interactive::register_overlays() {
 
 	//  Resources: we do not calculate default resources, therefore we do not
 	//  expect to meet them here.
-	Widelands::World const    &    world           = map.world();
+	const Widelands::World    &    world           = map.world();
 	Overlay_Manager        &       overlay_manager = map.overlay_manager();
 	Widelands::Extent        const extent          = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {
-			std::string const & immname =
+			const std::string & immname =
 			    world.get_resource(fc.field->get_resources())->get_editor_pic
 			    (amount);
 			if (immname.size())
@@ -153,7 +153,7 @@ void Editor_Interactive::register_overlays() {
 }
 
 
-void Editor_Interactive::load(std::string const & filename) {
+void Editor_Interactive::load(const std::string & filename) {
 	assert(filename.size());
 
 	Widelands::Map & map = egbase().map();
@@ -571,7 +571,7 @@ void Editor_Interactive::change_world() {
  * Public static method to create an instance of the editor
  * and run it. This takes care of all the setup and teardown.
  */
-void Editor_Interactive::run_editor(std::string const & filename) {
+void Editor_Interactive::run_editor(const std::string & filename) {
 	Widelands::Editor_Game_Base editor(0);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); // TODO get rid of this

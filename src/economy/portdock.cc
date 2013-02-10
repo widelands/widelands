@@ -149,7 +149,7 @@ void PortDock::draw
 	// do nothing
 }
 
-std::string const & PortDock::name() const throw ()
+const std::string & PortDock::name() const throw ()
 {
 	static const std::string name_("portdock");
 	return name_;
@@ -344,7 +344,7 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 	return count;
 }
 
-void PortDock::log_general_info(Editor_Game_Base const & egbase)
+void PortDock::log_general_info(const Editor_Game_Base & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);
 

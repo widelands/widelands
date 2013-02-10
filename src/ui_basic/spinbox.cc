@@ -76,7 +76,7 @@ SpinBox::SpinBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 int32_t const startval, int32_t const minval, int32_t const maxval,
-	 std::string const &       unit,
+	 const std::string &       unit,
 	 const Image* background,
 	 bool                const big,
 	 Align               const alignm)
@@ -224,7 +224,7 @@ void SpinBox::setInterval(int32_t const min, int32_t const max)
 /**
  * manually sets the used unit to a given string
  */
-void SpinBox::setUnit(std::string const & unit)
+void SpinBox::setUnit(const std::string & unit)
 {
 	sbi->unit = unit;
 	update();
@@ -274,7 +274,7 @@ void SpinBox::setAlign(Align alignm)
  *
  * @deprecated, see set_textstyle
  */
-void SpinBox::set_font(std::string const & name, int32_t size, RGBColor color)
+void SpinBox::set_font(const std::string & name, int32_t size, RGBColor color)
 {
 	set_textstyle(TextStyle::makebold(Font::get(name, size), color));
 }

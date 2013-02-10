@@ -48,7 +48,7 @@ ProductionSite_Window::ProductionSite_Window
 	 UI::Window *         & registry)
 	: Building_Window(parent, ps, registry)
 {
-	std::vector<Widelands::WaresQueue *> const & warequeues = ps.warequeues();
+	const std::vector<Widelands::WaresQueue*>& warequeues = ps.warequeues();
 
 	if (warequeues.size()) {
 		// Add the wares tab

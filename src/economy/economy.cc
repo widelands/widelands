@@ -44,7 +44,7 @@ Economy::Economy(Player & player) :
 	m_rebuilding     (false),
 	m_request_timerid(0)
 {
-	Tribe_Descr const & tribe = player.tribe();
+	const Tribe_Descr & tribe = player.tribe();
 	Ware_Index const nr_wares   = tribe.get_nrwares();
 	Ware_Index const nr_workers = tribe.get_nrworkers();
 	m_wares.set_nrwares(nr_wares);
@@ -603,7 +603,7 @@ void Economy::_start_request_timer(int32_t const delta)
  * \return 0 if no supply is found, the best supply otherwise
 */
 Supply * Economy::_find_best_supply
-	(Game & game, Request const & req, int32_t & cost)
+	(Game & game, const Request & req, int32_t & cost)
 {
 	assert(req.is_open());
 
@@ -666,7 +666,7 @@ struct RequestSupplyPair {
 
 	struct Compare {
 		bool operator()
-			(RequestSupplyPair const & p1, RequestSupplyPair const & p2)
+			(const RequestSupplyPair & p1, const RequestSupplyPair & p2)
 		{
 			return
 				p1.priority == p2.priority ? p1.pairid < p2.pairid :
@@ -809,9 +809,9 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	// We have worker demand that is not fulfilled by supplies
 	// Find warehouses where we can create the required workers,
 	// and collect stats about existing build prerequisites
-	Tribe_Descr const & tribe = owner().tribe();
-	Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
-	Worker_Descr::Buildcost const & cost = w_desc.buildcost();
+	const Tribe_Descr & tribe = owner().tribe();
+	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
+	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 	std::vector<uint32_t> total_available;
 	uint32_t total_planned = 0;
 
@@ -890,7 +890,7 @@ void Economy::_create_requested_workers(Game & game)
 	if (!warehouses().size())
 		return;
 
-	Tribe_Descr const & tribe = owner().tribe();
+	const Tribe_Descr & tribe = owner().tribe();
 	for
 		(Ware_Index index = Ware_Index::First();
 		 index < tribe.get_nrworkers(); ++index)

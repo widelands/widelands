@@ -38,22 +38,22 @@ CheckStep::CheckStep()
 
 struct CheckStepAlwaysFalse {
 	bool allowed
-		(Map &, FCoords const &, FCoords const &, int32_t, CheckStep::StepId)
+		(Map &, const FCoords &, const FCoords &, int32_t, CheckStep::StepId)
 		const
 	{
 		return false;
 	}
-	bool reachabledest(Map &, FCoords const &) const {return false;}
+	bool reachabledest(Map &, const FCoords &) const {return false;}
 };
 
-CheckStep const & CheckStep::alwaysfalse()
+const CheckStep & CheckStep::alwaysfalse()
 {
 	static const CheckStep cstep = CheckStep(CheckStepAlwaysFalse());
 	return cstep;
 }
 
 
-void CheckStepAnd::add(CheckStep const & sub)
+void CheckStepAnd::add(const CheckStep & sub)
 {
 	subs.push_back(sub);
 }

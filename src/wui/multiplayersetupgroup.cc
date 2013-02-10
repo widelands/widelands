@@ -234,7 +234,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 	/// Refresh all user interfaces
 	void refresh() {
-		GameSettings const & settings = s->settings();
+		const GameSettings & settings = s->settings();
 
 		if (m_id >= settings.players.size()) {
 			set_visible(false);
@@ -245,7 +245,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		set_visible(true);
 
-		PlayerSettings const & player_setting = settings.players[m_id];
+		const PlayerSettings & player_setting = settings.players[m_id];
 		bool typeaccess       = s->canChangePlayerState(m_id);
 		bool tribeaccess      = s->canChangePlayerTribe(m_id);
 		bool const initaccess = s->canChangePlayerInit(m_id);
@@ -385,7 +385,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 GameSettingsProvider * const settings,
 	 uint32_t /* butw */, uint32_t buth,
-	 std::string const & fname, uint32_t const fsize)
+	 const std::string & fname, uint32_t const fsize)
 :
 UI::Panel(parent, x, y, w, h),
 s(settings),
@@ -486,7 +486,7 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup()
  */
 void MultiPlayerSetupGroup::refresh()
 {
-	GameSettings const & settings = s->settings();
+	const GameSettings & settings = s->settings();
 
 	// Update / initialize client groups
 	for (uint32_t i = 0; (i < settings.users.size()) && (i < MAXCLIENTS); ++i) {

@@ -40,7 +40,7 @@ struct Statebox : public Panel {
 		(Panel * parent,
 		 Point,
 		 const Image* pic                  = 0,
-		 std::string const & tooltip_text = std::string());
+		 const std::string & tooltip_text = std::string());
 	~Statebox();
 
 	boost::signal<void ()> changed;
@@ -96,7 +96,7 @@ struct Checkbox : public Statebox {
 		(Panel             * const parent,
 		 Point               const p,
 		 const Image* pic        = 0,
-		 std::string const &       tooltip_text = std::string())
+		 const std::string &       tooltip_text = std::string())
 		: Statebox(parent, p, pic, tooltip_text)
 	{}
 

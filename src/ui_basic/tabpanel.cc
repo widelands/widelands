@@ -40,9 +40,9 @@ namespace UI {
 Tab::Tab
 	(Tab_Panel         * const parent,
 	 uint32_t            const id,
-	 std::string const &       name,
+	 const std::string &       name,
 	 const Image* gpic,
-	 std::string const &       gtooltip,
+	 const std::string &       gtooltip,
 	 Panel             * const gpanel)
 	:
 	NamedPanel
@@ -148,10 +148,10 @@ void Tab_Panel::update_desired_size()
  * Add a new tab
 */
 uint32_t Tab_Panel::add
-	(std::string const & name,
+	(const std::string & name,
 	 const Image* pic,
 	 Panel             * const panel,
-	 std::string const &       tooltip_text)
+	 const std::string &       tooltip_text)
 {
 	assert(panel);
 	assert(panel->get_parent() == this);
@@ -182,7 +182,7 @@ void Tab_Panel::activate(uint32_t idx)
 	update_desired_size();
 }
 
-void Tab_Panel::activate(std::string const & name)
+void Tab_Panel::activate(const std::string & name)
 {
 	for (uint32_t t = 0; t < m_tabs.size(); ++t)
 		if (m_tabs[t]->get_name() == name)

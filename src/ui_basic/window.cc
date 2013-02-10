@@ -75,7 +75,7 @@ namespace UI {
  */
 Window::Window
 	(Panel * const parent,
-	 string const & name,
+	 const string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 const string& title)
 	:

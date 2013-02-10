@@ -44,7 +44,7 @@ struct Songset {
 	Songset();
 	~Songset();
 
-	void add_song(std::string const & filename);
+	void add_song(const std::string & filename);
 	Mix_Music * get_song();
 	bool empty() {return m_songs.empty();}
 

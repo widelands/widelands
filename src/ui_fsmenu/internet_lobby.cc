@@ -199,7 +199,7 @@ void Fullscreen_Menu_Internet_Lobby::think ()
 void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 {
 	Section & s = g_options.pull_section("global");
-	std::string const & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	const std::string & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
 
 
@@ -212,7 +212,7 @@ void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 
 
 /// fills the server list
-void Fullscreen_Menu_Internet_Lobby::fillGamesList(std::vector<INet_Game> const & games)
+void Fullscreen_Menu_Internet_Lobby::fillGamesList(const std::vector<INet_Game> & games)
 {
 	// List and button cleanup
 	opengames.clear();
@@ -265,7 +265,7 @@ bool Fullscreen_Menu_Internet_Lobby::compare_clienttype(unsigned int rowa, unsig
 }
 
 /// fills the client list
-void Fullscreen_Menu_Internet_Lobby::fillClientList(std::vector<INet_Client> const & clients)
+void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<INet_Client> & clients)
 {
 	clientsonline.clear();
 	for (uint32_t i = 0; i < clients.size(); ++i) {
@@ -356,7 +356,7 @@ void Fullscreen_Menu_Internet_Lobby::change_servername()
 
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
-	std::vector<INet_Game> const & games = InternetGaming::ref().games();
+	const std::vector<INet_Game> & games = InternetGaming::ref().games();
 	for (uint32_t i = 0; i < games.size(); ++i) {
 		if (games.at(i).name == servername.text())
 			hostgame.set_enabled(false);

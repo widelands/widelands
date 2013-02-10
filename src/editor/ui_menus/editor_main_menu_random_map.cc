@@ -90,7 +90,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	// ---------- Width  ----------
 
 
-	Widelands::Map const & map = parent.egbase().map();
+	const Widelands::Map & map = parent.egbase().map();
 	{
 		Widelands::Extent const map_extent = map.extent();
 

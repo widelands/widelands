@@ -60,7 +60,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	typedef Ware_Index::value_t Index;
 	Item_Ware_Descr
 		(const Tribe_Descr & tribe, char const * const name,
-		 char const * const descname, std::string const & directory,
+		 char const * const descname, const std::string & directory,
 		 Profile &, Section & global_s);
 
 	virtual ~Item_Ware_Descr() {};
@@ -72,7 +72,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	std::string icon_name() const throw () {return m_icon_fname;}
 
 	/// \return ware's localized descriptive text
-	std::string const & helptext() const throw () {return m_helptext;}
+	const std::string & helptext() const throw () {return m_helptext;}
 
 	/// How much of the ware type that an economy should store in warehouses.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the

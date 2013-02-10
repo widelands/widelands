@@ -38,9 +38,9 @@ struct Tab : public NamedPanel {
 	Tab
 		(Tab_Panel * parent,
 		 uint32_t,
-		 std::string const & name,
+		 const std::string & name,
 		 const Image*,
-		 std::string const & gtooltip,
+		 const std::string & gtooltip,
 		 Panel             * gpanel);
 
 	bool active();
@@ -76,16 +76,16 @@ struct Tab_Panel : public Panel {
 		 const Image* background);
 
 	uint32_t add
-		(std::string const & name,
+		(const std::string & name,
 		 const Image* pic,
 		 Panel             * panel,
-		 std::string const & tooltip = std::string());
+		 const std::string & tooltip = std::string());
 
 	typedef std::vector<Tab *> TabList;
 
 	const TabList & tabs();
 	void activate(uint32_t idx);
-	void activate(std::string const &);
+	void activate(const std::string &);
 	uint32_t active() {return m_active;}
 
 protected:

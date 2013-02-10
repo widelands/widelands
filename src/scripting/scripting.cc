@@ -125,7 +125,7 @@ protected:
 		virtual ~LuaInterface_Impl();
 
 		virtual void interpret_string(std::string);
-		virtual std::string const & get_last_error() const {return m_last_error;}
+		virtual const std::string & get_last_error() const {return m_last_error;}
 
 		virtual void register_scripts
 			(FileSystem &, std::string, std::string = "scripting");

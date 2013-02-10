@@ -202,8 +202,8 @@ void Fullscreen_Menu_MapSelect::think()
 bool Fullscreen_Menu_MapSelect::compare_maprows
 	(uint32_t rowa, uint32_t rowb)
 {
-	MapData const & r1 = m_maps_data[m_table[rowa]];
-	MapData const & r2 = m_maps_data[m_table[rowb]];
+	const MapData & r1 = m_maps_data[m_table[rowa]];
+	const MapData & r2 = m_maps_data[m_table[rowb]];
 
 	if (!r1.width and !r2.width) {
 		return r1.name < r2.name;
@@ -230,7 +230,7 @@ MapData const * Fullscreen_Menu_MapSelect::get_map() const
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-	MapData const & mapdata = m_maps_data[m_table.get_selected()];
+	const MapData & mapdata = m_maps_data[m_table.get_selected()];
 
 	if (!mapdata.width) {
 		m_curdir = mapdata.filename;
@@ -247,7 +247,7 @@ void Fullscreen_Menu_MapSelect::ok()
  */
 void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
-	MapData const & map = m_maps_data[m_table.get_selected()];
+	const MapData & map = m_maps_data[m_table.get_selected()];
 
 	if (map.width) {
 		char buf[256];

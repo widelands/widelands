@@ -54,7 +54,7 @@ using namespace std;
 namespace Widelands {
 
 Tribe_Descr::Tribe_Descr
-	(std::string const & tribename, Editor_Game_Base & egbase)
+	(const std::string & tribename, Editor_Game_Base & egbase)
 	: m_name(tribename), m_world(egbase.map().world())
 {
 	assert(&m_world);
@@ -267,7 +267,7 @@ Tribe_Descr::Tribe_Descr
 				}
 				if (m_anim_frontier.empty())
 					throw game_data_error(_("none found"));
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw game_data_error(_("frontier styles: %s"), e.what());
 			}
 			try {
@@ -288,7 +288,7 @@ Tribe_Descr::Tribe_Descr
 				}
 				if (m_anim_flag.empty())
 					throw game_data_error(_("none found"));
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw game_data_error(_("flag styles: %s"), e.what());
 			}
 
@@ -316,13 +316,13 @@ Tribe_Descr::Tribe_Descr
 						 ++i)
 							if (i->name == init.name)
 								throw game_data_error("duplicated");
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						("Initializations: \"%s\": %s",
 						 init.name.c_str(), e.what());
 				}
 			}
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			throw game_data_error("root conf: %s", e.what());
 		}
 
@@ -330,7 +330,7 @@ Tribe_Descr::Tribe_Descr
 			while (const Section::Value * v = compatibility_s->get_next_val())
 				m_compatibility_immovable[v->get_name()] = split_string(v->get_string(), " ");
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("tribe %s: %s"), tribename.c_str(), e.what());
 	}
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -383,7 +383,7 @@ void Tribe_Descr::load_graphics()
  * does this tribe exist?
  */
 bool Tribe_Descr::exists_tribe
-	(std::string const & name, TribeBasicInfo * const info)
+	(const std::string & name, TribeBasicInfo * const info)
 {
 	std::string buf = "tribes/";
 	buf            += name;
@@ -413,7 +413,7 @@ bool Tribe_Descr::exists_tribe
 						(TribeBasicInfo::Initialization
 						 	(s->first, t->get_string("name")));
 				}
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				delete lua;
 				throw game_data_error
 					("reading basic info for tribe \"%s\": %s",
@@ -429,7 +429,7 @@ bool Tribe_Descr::exists_tribe
 }
 
 struct TribeBasicComparator {
-	bool operator()(TribeBasicInfo const & t1, TribeBasicInfo const & t2) {
+	bool operator()(const TribeBasicInfo & t1, const TribeBasicInfo & t2) {
 		return t1.uiposition < t2.uiposition;
 	}
 };
@@ -543,7 +543,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 /*
  * Return the given ware or die trying
  */
-Ware_Index Tribe_Descr::safe_ware_index(std::string const & warename) const {
+Ware_Index Tribe_Descr::safe_ware_index(const std::string & warename) const {
 	if (Ware_Index const result = ware_index(warename))
 		return result;
 	else
@@ -558,7 +558,7 @@ Ware_Index Tribe_Descr::safe_ware_index(const char * const warename) const {
 		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename);
 }
 
-Ware_Index Tribe_Descr::ware_index(std::string const & warename) const {
+Ware_Index Tribe_Descr::ware_index(const std::string & warename) const {
 	Ware_Index const wi = m_wares.get_index(warename);
 	if (!wi) {
 		// try to find the ware in compatibility wares std::map
@@ -589,7 +589,7 @@ Ware_Index Tribe_Descr::ware_index(char const * const warename) const {
 /*
  * Return the given worker or die trying
  */
-Ware_Index Tribe_Descr::safe_worker_index(std::string const & workername) const
+Ware_Index Tribe_Descr::safe_worker_index(const std::string & workername) const
 {
 	if (Ware_Index const result = worker_index(workername))
 		return result;

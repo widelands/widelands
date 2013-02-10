@@ -42,14 +42,14 @@ struct MapObjectDebugPanel
 {
 	MapObjectDebugPanel
 		(UI::Panel                   & parent,
-		 Widelands::Editor_Game_Base const &,
+		 const Widelands::Editor_Game_Base &,
 		 Widelands::Map_Object       &);
 	~MapObjectDebugPanel();
 
 	virtual void log(std::string str);
 
 private:
-	Widelands::Editor_Game_Base const & m_egbase;
+	const Widelands::Editor_Game_Base & m_egbase;
 	Widelands::Object_Ptr         m_object;
 
 	UI::Multiline_Textarea        m_log;
@@ -58,7 +58,7 @@ private:
 
 MapObjectDebugPanel::MapObjectDebugPanel
 	(UI::Panel                   & parent,
-	 Widelands::Editor_Game_Base const & egbase,
+	 const Widelands::Editor_Game_Base & egbase,
 	 Widelands::Map_Object       & obj)
 :
 UI::Panel(&parent, 0, 0, 350, 200),
@@ -100,7 +100,7 @@ building_ui.cc).
 ===============
 */
 void Widelands::Map_Object::create_debug_panels
-	(Widelands::Editor_Game_Base const & egbase, UI::Tab_Panel & tabs)
+	(const Widelands::Editor_Game_Base & egbase, UI::Tab_Panel & tabs)
 {
 	tabs.add
 		("debug", g_gr->images().get("pics/menu_debug.png"),
@@ -274,7 +274,7 @@ void FieldDebugWindow::think()
 	UI::Window::think();
 
 	// Select information about the field itself
-	Widelands::Editor_Game_Base const & egbase =
+	const Widelands::Editor_Game_Base & egbase =
 		ref_cast<Interactive_Base const, UI::Panel const>(*get_parent())
 		.egbase();
 	{
@@ -307,7 +307,7 @@ void FieldDebugWindow::think()
 	Widelands::Map_Index const i = m_coords.field - &m_map[0];
 	Widelands::Player_Number const nr_players = m_map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
-		Widelands::Player::Field const & player_field = player->fields()[i];
+		const Widelands::Player::Field & player_field = player->fields()[i];
 		snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
 		str += buffer;
 		snprintf

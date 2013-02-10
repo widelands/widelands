@@ -317,15 +317,15 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
  */
 struct NamedPanel : public Panel {
 	NamedPanel
-		(Panel * const nparent, std::string const & name,
+		(Panel * const nparent, const std::string & name,
 		 int32_t  const nx, int32_t  const ny,
 		 uint32_t const nw, uint32_t const nh,
-		 std::string const & tooltip_text = std::string())
+		 const std::string & tooltip_text = std::string())
 		: Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
 	{
 	}
 
-	std::string const & get_name() const throw () {return m_name;}
+	const std::string & get_name() const throw () {return m_name;}
 
 private:
 	std::string m_name;

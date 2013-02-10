@@ -39,7 +39,7 @@ struct SpinBox : public Panel {
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 int32_t startval, int32_t minval, int32_t maxval,
-		 std::string const & unit             = std::string(),
+		 const std::string & unit             = std::string(),
 		 const Image* buttonbackground =
 		 	g_gr->images().get("pics/but2.png"),
 		 bool big = false,
@@ -48,12 +48,12 @@ struct SpinBox : public Panel {
 
 	void setValue(int32_t);
 	void setInterval(int32_t min, int32_t max);
-	void setUnit(std::string const &);
+	void setUnit(const std::string &);
 	int32_t getValue();
 	std::string getUnit();
 	Align align() const;
 	void setAlign(Align);
-	void set_font(std::string const &, int32_t, RGBColor);
+	void set_font(const std::string &, int32_t, RGBColor);
 	void set_textstyle(const TextStyle & style);
 	void add_replacement(int32_t, std::string);
 	void remove_replacement(int32_t);

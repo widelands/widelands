@@ -199,7 +199,7 @@ void Editor_Tool_Set_Terrain_Options_Menu::selected
 		select_correct_tool();
 
 		std::string buf = _("Current:");
-		Widelands::World const & world =
+		const Widelands::World & world =
 			ref_cast<Editor_Interactive, UI::Panel>(*get_parent())
 			.egbase().map().world();
 		uint32_t j = m_tool.get_nr_enabled();

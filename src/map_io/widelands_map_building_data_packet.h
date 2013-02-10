@@ -41,7 +41,7 @@ struct Map_Building_Data_Packet : public Map_Data_Packet {
 
 protected:
 	void read_priorities (Building       &, FileRead  &);
-	void write_priorities(Building const &, FileWrite &);
+	void write_priorities(const Building &, FileWrite &);
 };
 
 }

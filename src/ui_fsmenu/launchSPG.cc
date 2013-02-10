@@ -278,7 +278,7 @@ void Fullscreen_Menu_LaunchSPG::start_clicked()
  */
 void Fullscreen_Menu_LaunchSPG::refresh()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 
 	{
 		// Translate the maps name
@@ -302,7 +302,7 @@ void Fullscreen_Menu_LaunchSPG::refresh()
 	// "Choose Position" Buttons in frond of PDG
 	for (uint8_t i = 0; i < m_nr_players; ++i) {
 		m_pos[i]->set_visible(true);
-		PlayerSettings const & player = settings.players[i];
+		const PlayerSettings & player = settings.players[i];
 		if
 			(player.state == PlayerSettings::stateOpen or
 			 player.state == PlayerSettings::stateComputer)
@@ -341,7 +341,7 @@ void Fullscreen_Menu_LaunchSPG::select_map()
 	m_is_scenario = code == 2;
 	m_settings->setScenario(m_is_scenario);
 
-	MapData const & mapdata = *msm.get_map();
+	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
 
 	safe_place_for_host(m_nr_players);

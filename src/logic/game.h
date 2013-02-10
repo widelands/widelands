@@ -101,8 +101,8 @@ struct Game : Editor_Game_Base {
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame (UI::ProgressWindow *, GameSettings const &);
-	void init_savegame(UI::ProgressWindow *, GameSettings const &);
+	void init_newgame (UI::ProgressWindow *, const GameSettings &);
+	void init_savegame(UI::ProgressWindow *, const GameSettings &);
 	bool run_splayer_scenario_direct(char const * mapname);
 	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
@@ -125,9 +125,9 @@ struct Game : Editor_Game_Base {
 		(const bool flush_graphics = true, const bool flush_animations = true);
 
 	// in-game logic
-	Cmd_Queue const & cmdqueue() const {return m_cmdqueue;}
+	const Cmd_Queue & cmdqueue() const {return m_cmdqueue;}
 	Cmd_Queue       & cmdqueue()       {return m_cmdqueue;}
-	RNG       const & rng     () const {return m_rng;}
+	const RNG       & rng     () const {return m_rng;}
 	RNG             & rng     ()       {return m_rng;}
 
 	uint32_t logic_rand();
@@ -163,7 +163,7 @@ struct Game : Editor_Game_Base {
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
-		(Flag const &, Player_Number, uint32_t count, uint8_t retreat);
+		(const Flag &, Player_Number, uint32_t count, uint8_t retreat);
 	void send_player_changemilitaryconfig(Player_Number, uint8_t);
 
 	Interactive_Player * get_ipl();
@@ -203,7 +203,7 @@ private:
 		///
 		/// Note that this file is deleted at the end of the game, unless
 		/// \ref m_syncstreamsave has been set.
-		void StartDump(std::string const & fname);
+		void StartDump(const std::string & fname);
 
 		void Data(void const * data, size_t size);
 

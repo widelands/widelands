@@ -52,8 +52,8 @@ namespace Widelands {
 
 Soldier_Descr::Soldier_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _tribe)
 	: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::SOLDIER);
@@ -79,7 +79,7 @@ Soldier_Descr::Soldier_Descr
 			throw game_data_error
 				(_("expected positive integer >= %u but found \"%s\""),
 				 m_min_attack, list[1].c_str());
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error("attack: %s", e.what());
 	}
 
@@ -171,7 +171,7 @@ Soldier_Descr::Soldier_Descr
 }
 
 std::vector<std::string> Soldier_Descr::load_animations_from_string
-	(std::string const & directory, Profile & prof,
+	(const std::string & directory, Profile & prof,
 	 Section & global_s, const char * anim_name)
 {
 	std::vector<std::string> list;
@@ -195,7 +195,7 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 				((*i.current).c_str(),
 				 g_anim.get (directory, anim_s, "idle_00.png"));
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error("%s : %s", anim_name, e.what());
 	}
 
@@ -544,7 +544,7 @@ Point Soldier::calc_drawpos
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
 void Soldier::draw
-	(Editor_Game_Base const & game, RenderTarget & dst, Point const pos) const
+	(const Editor_Game_Base & game, RenderTarget & dst, Point const pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
 
@@ -771,7 +771,7 @@ Bob::Task const Soldier::taskAttack = {
 void Soldier::start_task_attack
 	(Game & game, Building & building, uint8_t retreat)
 {
-	//dynamic_cast<Attackable const &>(building);
+	//dynamic_cast<const Attackable &>(building);
 
 	push_task(game, taskAttack);
 	State & state  = top_state();
@@ -1593,7 +1593,7 @@ struct FindBobSoldierOnBattlefield : public FindBob {
  * As long as we're on the battlefield, check for other soldiers.
  */
 bool Soldier::checkNodeBlocked
-	(Game & game, FCoords const & field, bool const commit)
+	(Game & game, const FCoords & field, bool const commit)
 {
 	State * attackdefense = get_state(taskAttack);
 
@@ -1706,7 +1706,7 @@ void Soldier::sendSpaceSignals(Game & game)
 }
 
 
-void Soldier::log_general_info(Editor_Game_Base const & egbase)
+void Soldier::log_general_info(const Editor_Game_Base & egbase)
 {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");

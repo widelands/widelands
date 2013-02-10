@@ -39,8 +39,8 @@ namespace Widelands {
 
 DismantleSite_Descr::DismantleSite_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _tribe)
 : Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE); // Yep, this is correct.
@@ -128,13 +128,13 @@ void DismantleSite::count_returned_wares
 	(const Widelands::Building_Descr & building,
 	 std::map<Ware_Index, uint8_t>   & res)
 {
-	Tribe_Descr const & t = building.tribe();
+	const Tribe_Descr & t = building.tribe();
 	Building_Descr const * bd = &building;
 	Building_Index bd_idx = t.building_index(bd->name());
 
 	bool done = false;
 	while (not done) {
-		std::map<Ware_Index, uint8_t> const & buildcost = bd->buildcost();
+		const std::map<Ware_Index, uint8_t> & buildcost = bd->buildcost();
 		for (std::map<Ware_Index, uint8_t>::const_iterator i = buildcost.begin(); i != buildcost.end(); ++i)
 			res[i->first] += i->second;
 
@@ -203,7 +203,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			//update statistics
 			owner().ware_produced(wq.get_ware());
 
-			Item_Ware_Descr const & wd = *tribe().get_ware_descr(wq.get_ware());
+			const Item_Ware_Descr & wd = *tribe().get_ware_descr(wq.get_ware());
 			WareInstance & item = *new WareInstance(wq.get_ware(), &wd);
 			item.init(game);
 			worker.start_task_dropoff(game, item);
@@ -234,7 +234,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw
-	(Editor_Game_Base const & game,
+	(const Editor_Game_Base & game,
 	 RenderTarget           & dst,
 	 FCoords          const   coords,
 	 Point            const   pos)

@@ -261,7 +261,7 @@ void Main_Menu_Load_Map::fill_list() {
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WL_Map_Loader const *>(m_ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (_wexception const &) {} //  we simply skip illegal entries
+			} catch (const _wexception &) {} //  we simply skip illegal entries
 			delete m_ml;
 		}
 	}

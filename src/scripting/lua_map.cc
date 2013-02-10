@@ -181,7 +181,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 int _WorkerEmployer::get_workers(lua_State * L)
 {
 	PlayerImmovable * pi = get(L, get_egbase(L));
-	Tribe_Descr const & tribe = pi->owner().tribe();
+	const Tribe_Descr & tribe = pi->owner().tribe();
 
 	bool return_number = false;
 	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
@@ -225,7 +225,7 @@ int _WorkerEmployer::get_workers(lua_State * L)
 
 int _WorkerEmployer::get_valid_workers(lua_State * L) {
 	PlayerImmovable * pi = get(L, get_egbase(L));
-	Tribe_Descr const & tribe = pi->owner().tribe();
+	const Tribe_Descr & tribe = pi->owner().tribe();
 
 	WorkersMap valid_workers = _valid_workers(*pi);
 
@@ -250,9 +250,9 @@ int _SoldierEmployer::get_max_soldiers(lua_State * L) {
 int _SoldierEmployer::get_soldiers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	SoldierControl * sc = get_sc(L, egbase);
-	Tribe_Descr const & tribe = get(L, egbase)->owner().tribe();
+	const Tribe_Descr & tribe = get(L, egbase)->owner().tribe();
 
-	Soldier_Descr const & soldier_descr =  //  soldiers
+	const Soldier_Descr & soldier_descr =  //  soldiers
 			 ref_cast<Soldier_Descr const, Worker_Descr const>
 						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
@@ -267,9 +267,9 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	SoldierControl * sc = get_sc(L, egbase);
 	Building * building = get(L, egbase);
-	Tribe_Descr const & tribe = building->owner().tribe();
+	const Tribe_Descr & tribe = building->owner().tribe();
 
-	Soldier_Descr const & soldier_descr =  //  soldiers
+	const Soldier_Descr & soldier_descr =  //  soldiers
 		ref_cast<Soldier_Descr const, Worker_Descr const>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
@@ -462,7 +462,7 @@ HasWorkers
 
 #define GET_INDEX(type) \
 	static Ware_Index _get_ ## type ## _index \
-		(lua_State * L, Tribe_Descr const & tribe,  const std::string & what) \
+		(lua_State * L, const Tribe_Descr & tribe,  const std::string & what) \
 	{ \
 		Ware_Index idx = tribe. type ## _index(what); \
 		if (!idx) \
@@ -476,7 +476,7 @@ GET_INDEX(worker);
 #define PARSERS(type, btype) \
 L_Has ##btype ## s:: btype ##sSet L_Has ## btype ##s \
 	::m_parse_get_##type##s_arguments \
-		(lua_State * L, Tribe_Descr const & tribe, bool * return_number) \
+		(lua_State * L, const Tribe_Descr & tribe, bool * return_number) \
 { \
 	 /* takes either "all", a name or an array of names */ \
 	int32_t nargs = lua_gettop(L); \
@@ -509,7 +509,7 @@ L_Has ##btype ## s:: btype ##sSet L_Has ## btype ##s \
 \
 L_Has##btype##s::btype##sMap L_Has##btype##s:: \
 	m_parse_set_##type##s_arguments \
-	(lua_State * L, Tribe_Descr const & tribe) \
+	(lua_State * L, const Tribe_Descr & tribe) \
 { \
 	int32_t nargs = lua_gettop(L); \
 	if (nargs != 2 and nargs != 3) \
@@ -687,7 +687,7 @@ int L_HasSoldiers::m_get_soldier_levels
 	return 0;
 }
 L_HasSoldiers::SoldiersMap L_HasSoldiers::m_parse_set_soldiers_arguments
-		(lua_State * L, Soldier_Descr const & soldier_descr)
+		(lua_State * L, const Soldier_Descr & soldier_descr)
 {
 	SoldiersMap rv;
 	uint32_t count;
@@ -712,8 +712,8 @@ L_HasSoldiers::SoldiersMap L_HasSoldiers::m_parse_set_soldiers_arguments
 	return rv;
 }
 int L_HasSoldiers::m_handle_get_soldiers
-		(lua_State * L, Soldier_Descr const & soldier_descr,
-		 SoldiersList const & soldiers)
+		(lua_State * L, const Soldier_Descr & soldier_descr,
+		 const SoldiersList & soldiers)
 {
 	if (lua_gettop(L) != 2)
 		return report_error(L, "Invalid arguments!");
@@ -892,7 +892,7 @@ int L_Map::place_immovable(lua_State * const L) {
 	BaseImmovable * m = 0;
 	if (from_where != "world") {
 		try {
-			Widelands::Tribe_Descr const & tribe =
+			const Widelands::Tribe_Descr & tribe =
 				egbase.manually_load_tribe(from_where);
 
 			int32_t const imm_idx = tribe.get_immovable_index(objname);
@@ -1325,7 +1325,7 @@ const PropertyType<L_Flag> L_Flag::Properties[] = {
  LUA METHODS
  ==========================================================
  */
-static L_Flag::WaresMap _count_wares(Flag & f, Tribe_Descr const & tribe) {
+static L_Flag::WaresMap _count_wares(Flag & f, const Tribe_Descr & tribe) {
 	L_Flag::WaresMap rv;
 	Flag::Wares current_wares = f.get_items();
 	container_iterate_const(Flag::Wares, current_wares, w) {
@@ -1342,7 +1342,7 @@ int L_Flag::set_wares(lua_State * L)
 {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Flag * f = get(L, egbase);
-	Tribe_Descr const & tribe = f->owner().tribe();
+	const Tribe_Descr & tribe = f->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 	WaresMap c_items = _count_wares(*f, tribe);
@@ -1381,7 +1381,7 @@ int L_Flag::set_wares(lua_State * L)
 			}
 		} else if (d > 0) {
 			// add items
-			Item_Ware_Descr const & wd = *tribe.get_ware_descr(sp->first);
+			const Item_Ware_Descr & wd = *tribe.get_ware_descr(sp->first);
 			for (int32_t j = 0; j < d; j++) {
 				WareInstance & item = *new WareInstance(sp->first, &wd);
 				item.init(egbase);
@@ -1395,7 +1395,7 @@ int L_Flag::set_wares(lua_State * L)
 
 // Documented in parent Class
 int L_Flag::get_wares(lua_State * L) {
-	Tribe_Descr const & tribe = get(L, get_egbase(L))->owner().tribe();
+	const Tribe_Descr & tribe = get(L, get_egbase(L))->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
@@ -1714,7 +1714,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 #define WH_SET(type, btype) \
 int L_Warehouse::set_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_egbase(L)); \
-	Tribe_Descr const & tribe = wh->owner().tribe(); \
+	const Tribe_Descr & tribe = wh->owner().tribe(); \
 	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
 	container_iterate_const(btype##sMap, setpoints, i) { \
@@ -1736,7 +1736,7 @@ WH_SET(worker, Worker);
 #define WH_GET(type, btype) \
 int L_Warehouse::get_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_egbase(L)); \
-	Tribe_Descr const & tribe = wh->owner().tribe(); \
+	const Tribe_Descr & tribe = wh->owner().tribe(); \
 	bool return_number = false; \
 	btype##sSet set = m_parse_get_##type##s_arguments \
 		(L, tribe, &return_number); \
@@ -1799,7 +1799,7 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 int L_ProductionSite::get_valid_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
 
-	Tribe_Descr const & tribe = ps->owner().tribe();
+	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	lua_newtable(L);
 	container_iterate_const(Ware_Types, ps->descr().inputs(), i) {
@@ -1867,7 +1867,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 // documented in parent class
 int L_ProductionSite::get_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
-	Tribe_Descr const & tribe = ps->owner().tribe();
+	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);

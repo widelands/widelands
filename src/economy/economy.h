@@ -107,7 +107,7 @@ struct Economy {
 
 	void    add_warehouse(Warehouse &);
 	void remove_warehouse(Warehouse &);
-	std::vector<Warehouse *> const & warehouses() const {return m_warehouses;}
+	const std::vector<Warehouse *>& warehouses() const {return m_warehouses;}
 
 	void    add_request(Request &);
 	void remove_request(Request &);
@@ -133,13 +133,13 @@ struct Economy {
 	/// ware type by overproducing a worker type from it.
 	bool needs_worker(Ware_Index) const;
 
-	Target_Quantity const & ware_target_quantity  (Ware_Index const i) const {
+	const Target_Quantity & ware_target_quantity  (Ware_Index const i) const {
 		return m_ware_target_quantities[i.value()];
 	}
 	Target_Quantity       & ware_target_quantity  (Ware_Index const i)       {
 		return m_ware_target_quantities[i.value()];
 	}
-	Target_Quantity const & worker_target_quantity(Ware_Index const i) const {
+	const Target_Quantity & worker_target_quantity(Ware_Index const i) const {
 		return m_worker_target_quantities[i.value()];
 	}
 	Target_Quantity       & worker_target_quantity(Ware_Index const i)       {
@@ -150,8 +150,8 @@ struct Economy {
 	UI::UniqueWindow::Registry m_optionswindow_registry;
 
 
-	WareList const & get_wares  () const {return m_wares;}
-	WareList const & get_workers() const {return m_workers;}
+	const WareList & get_wares  () const {return m_wares;}
+	const WareList & get_workers() const {return m_workers;}
 
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);
@@ -170,7 +170,7 @@ private:
 
 	void _start_request_timer(int32_t delta = 200);
 
-	Supply * _find_best_supply(Game &, Request const &, int32_t & cost);
+	Supply * _find_best_supply(Game &, const Request &, int32_t & cost);
 	void _process_requests(Game &, RSPairStruct &);
 	void _balance_requestsupply(Game &);
 	void _handle_active_supplies(Game &);

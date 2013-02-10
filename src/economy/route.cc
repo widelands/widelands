@@ -107,7 +107,7 @@ void Route::load_pointers(const LoadData & data, Map_Map_Object_Loader & mol) {
 		uint32_t const flag_serial = data.flags.size();
 		try {
 			m_route.push_back(&mol.get<Flag>(flag_serial));
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception("Route flag #%u (%u): %s", i, flag_serial, e.what());
 		}
 	}

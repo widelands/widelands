@@ -119,7 +119,7 @@ void BaseListselect::add
 	 uint32_t             entry,
 	 const Image*   pic,
 	 bool         const   sel,
-	 std::string  const & tooltip_text)
+	 const std::string  & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 
@@ -157,7 +157,7 @@ void BaseListselect::add_front
 	(char const * const   name,
 	 const Image*   pic,
 	 bool         const   sel,
-	 std::string  const & tooltip_text)
+	 const std::string  & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 

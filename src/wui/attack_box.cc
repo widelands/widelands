@@ -93,7 +93,7 @@ UI::Textarea & AttackBox::add_text
 	(UI::Box           & parent,
 	 std::string   str,
 	 uint32_t      alignment,
-	 std::string const & fontname,
+	 const std::string & fontname,
 	 uint32_t      fontsize)
 {
 	UI::Textarea & result = *new UI::Textarea(&parent, str.c_str());
@@ -110,7 +110,7 @@ UI::Button & AttackBox::add_button
 	(UI::Box           & parent,
 	 char        const * const text,
 	 void         (AttackBox::*fn)(),
-	 std::string const & tooltip_text)
+	 const std::string & tooltip_text)
 {
 	UI::Button * button =
 		new UI::Button

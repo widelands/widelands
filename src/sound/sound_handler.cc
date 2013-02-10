@@ -238,7 +238,7 @@ void Sound_Handler::load_system_sounds()
  * \param recursive  Whether to recurse into subdirectories
 */
 void Sound_Handler::load_fx
-	(std::string const & dir, std::string const & fxname, bool const recursive)
+	(const std::string & dir, const std::string & fxname, bool const recursive)
 {
 	filenameset_t dirs, files;
 	filenameset_t::const_iterator i;
@@ -278,7 +278,7 @@ void Sound_Handler::load_fx
  * until the game is finished.
 */
 void Sound_Handler::load_one_fx
-	(char const * const filename, std::string const & fx_name)
+	(char const * const filename, const std::string & fx_name)
 {
 	FileRead fr;
 
@@ -328,7 +328,7 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	assert(m_egbase);
 	assert(position);
 
-	Interactive_Base const & ibase = *m_egbase->get_ibase();
+	const Interactive_Base & ibase = *m_egbase->get_ibase();
 	Point const vp = ibase.get_viewpoint();
 
 	int32_t const xres = g_gr->get_xres();
@@ -351,7 +351,7 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
  * \todo What is the selection algorithm? cf class documentation
 */
 bool Sound_Handler::play_or_not
-	(std::string const &       fx_name,
+	(const std::string &       fx_name,
 	 int32_t             const stereo_pos,
 	 uint8_t             const priority)
 {
@@ -436,7 +436,7 @@ bool Sound_Handler::play_or_not
  *         (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-	(std::string const &       fx_name,
+	(const std::string &       fx_name,
 	 Widelands::Coords   const map_position,
 	 uint8_t             const priority)
 {
@@ -454,7 +454,7 @@ void Sound_Handler::play_fx
  *                         played? (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-	(std::string const &       fx_name,
+	(const std::string &       fx_name,
 	 int32_t             const stereo_pos,
 	 uint8_t             const priority)
 {
@@ -515,7 +515,7 @@ void Sound_Handler::play_fx
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
 */
 void Sound_Handler::register_song
-	(std::string const & dir, std::string const & basename,
+	(const std::string & dir, const std::string & basename,
 	 bool const recursive)
 {
 	filenameset_t files;
@@ -552,7 +552,7 @@ void Sound_Handler::register_song
  * or \ref change_music() this function will block until the fadeout is complete
 */
 void Sound_Handler::start_music
-	(std::string const & songset_name, int32_t fadein_ms)
+	(const std::string & songset_name, int32_t fadein_ms)
 {
 	if (get_disable_music() or m_nosound)
 		return;
@@ -603,7 +603,7 @@ void Sound_Handler::stop_music(int32_t fadeout_ms)
  * be selected
 */
 void Sound_Handler::change_music
-	(std::string const & songset_name,
+	(const std::string & songset_name,
 	 int32_t const fadeout_ms, int32_t const fadein_ms)
 {
 	if (m_nosound)

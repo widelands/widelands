@@ -65,22 +65,22 @@ struct UniqueRandomMapInfo {
 
 	//  other stuff
 	static bool setFromIdString
-		(UniqueRandomMapInfo & mapInfo_out, std::string const & mapIdString,
-		 std::vector<std::string> const & worlds);
+		(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString,
+		 const std::vector<std::string> & worlds);
 	static void generateIdString
-		(std::string & mapIdsString_out, UniqueRandomMapInfo const & mapInfo);
+		(std::string & mapIdsString_out, const UniqueRandomMapInfo & mapInfo);
 
 private:
 	static int  mapIdCharToNumber(char);
 	static char mapIdNumberToChar(int32_t);
-	static uint16_t generateWorldNameHash(std::string const &);
+	static uint16_t generateWorldNameHash(const std::string &);
 };
 
 
 struct MapGenerator {
 
 	MapGenerator
-		(Map & map, UniqueRandomMapInfo const & mapInfo,
+		(Map & map, const UniqueRandomMapInfo & mapInfo,
 		 Editor_Game_Base & egbase);
 
 	void create_random_map();
@@ -116,7 +116,7 @@ private:
 		 MapGenAreaInfo::MapGenTerrainType & terrType);
 
 	Map &                        m_map;
-	UniqueRandomMapInfo const & m_mapInfo;
+	const UniqueRandomMapInfo & m_mapInfo;
 	Editor_Game_Base &           m_egbase;
 };
 

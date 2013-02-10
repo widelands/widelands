@@ -75,7 +75,7 @@ UI::Textarea & MilitaryBox::add_text
 	(UI::Box           & parent,
 	 std::string   str,
 	 uint32_t      alignment,
-	 std::string const & fontname,
+	 const std::string & fontname,
 	 uint32_t      fontsize)
 {
 	UI::Textarea & result = *new UI::Textarea(&parent, 0, 0, str.c_str());
@@ -89,7 +89,7 @@ UI::Button & MilitaryBox::add_button
 	 char        const * const name,
 	 char        const * const text,
 	 void         (MilitaryBox::*fn)(),
-	 std::string const & tooltip_text)
+	 const std::string & tooltip_text)
 {
 	UI::Button * button =
 		new UI::Button

@@ -176,7 +176,7 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				 	 map[center.node].get_immovable()))
 			{
 				if (upcast(Interactive_Player const, iplayer, igbase)) {
-					Widelands::Player const & player = iplayer->player();
+					const Widelands::Player & player = iplayer->player();
 					if
 						(not player.see_all()
 						 and
@@ -602,8 +602,8 @@ void Interactive_Base::finish_build_road()
 			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
 		{
 			//  place flags
-			Map const & map = egbase().map();
-			std::vector<Coords>         const &       c_vector =
+			const Map & map = egbase().map();
+			const std::vector<Coords>         &       c_vector =
 				m_buildroad->get_coords();
 			std::vector<Coords>::const_iterator const first    =
 				c_vector.begin() + 2;
@@ -652,7 +652,7 @@ bool Interactive_Base::append_build_road(Coords const field) {
 	assert(m_buildroad);
 
 	Map & map = egbase().map();
-	Widelands::Player const & player = egbase().player(m_road_build_player);
+	const Widelands::Player & player = egbase().player(m_road_build_player);
 
 	{ //  find a path to the clicked-on node
 		Widelands::Path path;
@@ -674,7 +674,7 @@ bool Interactive_Base::append_build_road(Coords const field) {
 		{
 			Widelands::CheckStepLimited cstep;
 			{
-				std::vector<Coords> const & road_cp = m_buildroad->get_coords();
+				const std::vector<Coords> & road_cp = m_buildroad->get_coords();
 				container_iterate_const(std::vector<Coords>, road_cp, i)
 					cstep.add_allowed_location(*i.current);
 			}
@@ -893,7 +893,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 	return Map_View::handle_key(down, code);
 }
 
-void Interactive_Base::cmdLua(std::vector<std::string> const & args)
+void Interactive_Base::cmdLua(const std::vector<std::string> & args)
 {
 	std::string cmd;
 

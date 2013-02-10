@@ -36,7 +36,7 @@
 
 namespace Widelands {
 
-Game_Loader::Game_Loader(std::string const & path, Game & game) :
+Game_Loader::Game_Loader(const std::string & path, Game & game) :
 	m_fs(g_fs->MakeSubFileSystem(path)), m_game(game)
 {}
 
@@ -94,7 +94,7 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 	log("Game: Enqueuing comands to expire player's messages ... ");
 	Player_Number const nr_players = m_game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, m_game, player) {
-		MessageQueue const & messages = player->messages();
+		const MessageQueue & messages = player->messages();
 		container_iterate_const(MessageQueue, messages, i) {
 			Duration const duration = i.current->second->duration();
 			if (duration != Forever())

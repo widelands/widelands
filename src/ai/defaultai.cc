@@ -197,7 +197,7 @@ void DefaultAI::think ()
 }
 
 /// called by Widelands game engine when an immovable changed
-void DefaultAI::receive(NoteImmovable const & note)
+void DefaultAI::receive(const NoteImmovable & note)
 {
 	if (note.lg == LOSE)
 		lose_immovable(*note.pi);
@@ -206,7 +206,7 @@ void DefaultAI::receive(NoteImmovable const & note)
 }
 
 /// called by Widelands game engine when a field changed
-void DefaultAI::receive(NoteFieldPossession const & note)
+void DefaultAI::receive(const NoteFieldPossession & note)
 {
 	if (note.lg == GAIN)
 		unusable_fields.push_back(note.fc);
@@ -240,9 +240,9 @@ void DefaultAI::late_initialization ()
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
 	const World & world = game().map().world();
 	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
-		Building_Descr const & bld = *tribe->get_building_descr(i);
+		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
-		BuildingHints const & bh = bld.hints();
+		const BuildingHints & bh = bld.hints();
 
 		buildings.resize (buildings.size() + 1);
 
@@ -1347,7 +1347,7 @@ bool DefaultAI::improve_roads (int32_t gametime)
 	// actually we do not care for loss of building capabilities - normal maps
 	// should have enough space and the computer can expand it's territory.
 	if (!roads.empty()) {
-		Path const & path = roads.front()->get_path();
+		const Path & path = roads.front()->get_path();
 
 		if (path.get_nsteps() > 3) {
 			const Map & map = game().map();
@@ -1383,7 +1383,7 @@ bool DefaultAI::improve_roads (int32_t gametime)
 		EconomyObserver * eco = economies.front();
 		if (!eco->flags.empty()) {
 			bool finish = false;
-			Flag const & flag = *eco->flags.front();
+			const Flag & flag = *eco->flags.front();
 
 			// try to connect to another economy
 			if (economies.size() > 1)
@@ -1560,7 +1560,7 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 bool DefaultAI::check_economies ()
 {
 	while (!new_flags.empty()) {
-		Flag const & flag = *new_flags.front();
+		const Flag & flag = *new_flags.front();
 		new_flags.pop_front();
 		get_economy_observer(flag.economy())->flags.push_back (&flag);
 	}
@@ -1606,7 +1606,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
 
-	Workarea_Info const & workarea_info = site.bo->desc->m_workarea_info;
+	const Workarea_Info & workarea_info = site.bo->desc->m_workarea_info;
 	container_iterate_const(Workarea_Info, workarea_info, i)
 		if (radius < i.current->first)
 			radius = i.current->first;
@@ -1710,7 +1710,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
 		// Only enhance buildings that are allowed (scenario mode)
 		if (player->is_building_type_allowed(*x.current)) {
-			Building_Descr const & bld = *tribe->get_building_descr(*x.current);
+			const Building_Descr & bld = *tribe->get_building_descr(*x.current);
 			BuildingObserver & en_bo = get_building_observer(bld.name().c_str());
 
 			// Don't enhance this building, if there is already one of same type
@@ -2047,7 +2047,7 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 
 
 void DefaultAI::consider_productionsite_influence
-	(BuildableField & field, Coords coords, BuildingObserver const & bo)
+	(BuildableField & field, Coords coords, const BuildingObserver & bo)
 {
 	if
 		(bo.space_consumer
@@ -2103,7 +2103,7 @@ void DefaultAI::gain_immovable(PlayerImmovable & pi)
 }
 
 /// this is called whenever we lose ownership of a PlayerImmovable
-void DefaultAI::lose_immovable(PlayerImmovable const & pi)
+void DefaultAI::lose_immovable(const PlayerImmovable & pi)
 {
 	if        (upcast(Building const, building, &pi))
 		lose_building (*building);
@@ -2174,7 +2174,7 @@ void DefaultAI::gain_building(Building & b)
 }
 
 /// this is called whenever we lose a building
-void DefaultAI::lose_building(Building const & b)
+void DefaultAI::lose_building(const Building & b)
 {
 	BuildingObserver & bo = get_building_observer(b.name().c_str());
 
@@ -2244,7 +2244,7 @@ void DefaultAI::lose_building(Building const & b)
 /// Recurcsively verify that all inputs have a producer.
 // TODO: this function leads to periodic freezes of ~1 second on big games on my system.
 // TODO: It needs profiling and optimization.
-bool DefaultAI::check_supply(BuildingObserver const & bo)
+bool DefaultAI::check_supply(const BuildingObserver & bo)
 {
 	size_t supplied = 0;
 	container_iterate_const(std::vector<int16_t>, bo.inputs, i)
