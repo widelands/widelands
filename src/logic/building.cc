@@ -225,7 +225,7 @@ Called whenever building graphics need to be loaded.
 void Building_Descr::load_graphics()
 {
 	if (m_buildicon_fname.size())
-		m_buildicon = g_gr->images().get(m_buildicon_fname.c_str());
+		m_buildicon = g_gr->images().get(m_buildicon_fname);
 }
 
 /*

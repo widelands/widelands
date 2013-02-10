@@ -145,7 +145,7 @@ void Editor_Interactive::register_overlays() {
 			    (amount);
 			if (immname.size())
 				overlay_manager.register_overlay
-				(fc, g_gr->images().get(immname.c_str()), 4);
+				(fc, g_gr->images().get(immname), 4);
 		}
 	}
 

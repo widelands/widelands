@@ -79,7 +79,10 @@ struct GraphicCaps
 };
 
 /**
- * A renderer to get pixels to a 16bit framebuffer.
+ * This class is a kind of Swiss Army knife for your graphics need. It
+ * initializes the graphic system and provides access to resolutions. It has an
+ * Image and a Surface cache and holds the data of all animations and the road
+ * textures. It also offers functionality to save a screenshot.
  */
 class Graphic {
 public:
