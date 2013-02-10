@@ -20,10 +20,12 @@
 #ifndef UI_SPINBOX_H
 #define UI_SPINBOX_H
 
-#include "align.h"
-#include "button.h"
-#include "graphic/graphic.h"
 #include <cstring>
+
+#include "align.h"
+#include "graphic/graphic.h"
+
+#include "button.h"
 
 namespace UI {
 

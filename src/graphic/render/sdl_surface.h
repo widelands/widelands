@@ -33,10 +33,10 @@
 */
 class SDLSurface : public Surface {
 public:
-	SDLSurface(SDL_Surface & surface) :
-		m_surface(&surface),
+	SDLSurface(SDL_Surface* surface) :
+		m_surface(surface),
 		m_offsx(0), m_offsy(0),
-		m_w(surface.w), m_h(surface.h)
+		m_w(surface->w), m_h(surface->h)
 	{}
 	virtual ~SDLSurface();
 
@@ -62,8 +62,6 @@ public:
 	virtual uint16_t get_pitch() const {return m_surface->pitch;}
 	virtual uint8_t * get_pixels() const;
 
-	/// Set surface, only call once
-	void set_sdl_surface(SDL_Surface & surface);
 	SDL_Surface * get_sdl_surface() const {return m_surface;}
 
 	void set_subwin(const Rect& r);

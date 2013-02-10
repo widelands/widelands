@@ -27,11 +27,11 @@
 #include <boost/signal.hpp>
 
 #include "align.h"
+#include "compile_assert.h"
+
 #include "panel.h"
 #include "rgbcolor.h"
 #include "scrollbar.h"
-
-#include "compile_assert.h"
 
 namespace UI {
 struct Scrollbar;

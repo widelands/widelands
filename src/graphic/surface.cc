@@ -35,7 +35,7 @@ Surface* Surface::create(SDL_Surface* surf) {
 #endif
 	SDL_Surface * surface = SDL_DisplayFormatAlpha(surf);
 	SDL_FreeSurface(surf);
-	return new SDLSurface(*surface);
+	return new SDLSurface(surface);
 }
 
 Surface* Surface::create(uint16_t w, uint16_t h) {
@@ -48,7 +48,7 @@ Surface* Surface::create(uint16_t w, uint16_t h) {
 		SDL_Surface* tsurf = empty_sdl_surface(w, h);
 		SDL_Surface* surf = SDL_DisplayFormatAlpha(tsurf);
 		SDL_FreeSurface(tsurf);
-		return new SDLSurface(*surf);
+		return new SDLSurface(surf);
 	}
 }
 

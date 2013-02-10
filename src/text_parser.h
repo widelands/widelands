@@ -23,7 +23,7 @@
 #include <vector>
 #include <string>
 
-#include "ui_basic/align.h"
+#include "align.h"
 #include "rgbcolor.h"
 
 namespace UI {

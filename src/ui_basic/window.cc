@@ -320,11 +320,13 @@ void Window::draw_border(RenderTarget & dst)
 	}
 
 	// draw the title if we have one
-	if (!m_title.empty())
-		UI::g_fh1->draw_text
-			(dst,
-			 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-			 m_title, 0, Align_Center);
+	if (!m_title.empty()) {
+		dst.blit
+			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
+				UI::g_fh1->render(m_title),
+				CM_Normal,
+				Align_Center);
+	}
 
 	if (not _is_minimal) {
 		const int32_t vt_bar_end = get_h() -

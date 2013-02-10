@@ -40,6 +40,8 @@ using namespace boost;
 
 namespace {
 
+// An Image implementation that recreates a rich text surface when needed on
+// the fly. It is meant to be saved into the ImageCache.
 class RTImage : public Image {
 public:
 	RTImage
@@ -50,6 +52,7 @@ public:
 		  rt_renderer_(rt_renderer),
 		  text_(text), width_(width)
 	{}
+	virtual ~RTImage() {}
 
 	// Implements Image.
 	virtual uint16_t width() const {return surface()->width();}
@@ -71,67 +74,41 @@ public:
 
 private:
 	const string hash_;
-	SurfaceCache* surface_cache_;
-	RT::IRenderer* rt_renderer_;
 	const string text_;
 	uint16_t width_;
+
+	// Nothing owned.
+	SurfaceCache* const surface_cache_;
+	RT::IRenderer* const rt_renderer_;
 };
 
 }
 
 namespace UI {
 
-// NOCOM(#sirver): better docu, especially ownership
+// Utility class to render a rich text string. The returned string is cached in
+// the ImageCache, so repeated calls to render with the same arguments should not
+// be a problem.
 class Font_Handler1 : public IFont_Handler1 {
 public:
 	Font_Handler1(ImageCache* image_cache, SurfaceCache* surface_cache, RT::IRenderer* renderer) :
 		surface_cache_(surface_cache), image_cache_(image_cache), renderer_(renderer) {};
-	virtual ~Font_Handler1();
+	virtual ~Font_Handler1() {}
 
-	void draw_text
-		(RenderTarget & dst,
-		 Point dstpoint,
-		 const std::string & text,
-		 uint16_t = 0,
-		 Align = Align_TopLeft);
+	const Image* render(const string& text, uint16_t w = 0) {
+		const string hash = boost::lexical_cast<string>(w) + text;
 
-	const Image* render(const string& text, uint16_t w = 0);
+		if (image_cache_->has(hash))
+			return image_cache_->get(hash);
+
+		return image_cache_->insert(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
+	}
 
 private:
 	SurfaceCache* const surface_cache_;  // not owned
 	ImageCache* const image_cache_;  // not owned
 	boost::scoped_ptr<RT::IRenderer> renderer_;
 };
-
-Font_Handler1::~Font_Handler1() {
-}
-
-const Image* Font_Handler1::render(const string& text, uint16_t w) {
-	const string hash = boost::lexical_cast<string>(w) + text;
-
-	if (image_cache_->has(hash))
-		return image_cache_->get(hash);
-
-	return image_cache_->insert(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
-}
-
-void Font_Handler1::draw_text
-		(RenderTarget & dst, Point dstpoint, const std::string & text, uint16_t w, Align align)
-{
-	if (text.empty())
-		return;
-
-	const Image* p = render(text, w);
-	if (!p)
-		return;
-
-	if (align & Align_HCenter) dstpoint.x -= p->width() / 2;
-	else if (align & Align_Right) dstpoint.x -= p->width();
-	if (align & Align_VCenter) dstpoint.y -= p->height() / 2;
-	else if (align & Align_Bottom) dstpoint.y -= p->height();
-
-	dst.blit(Point(dstpoint.x, dstpoint.y), p);
-}
 
 IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs) {
 	return
@@ -143,4 +120,4 @@ IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs) {
 
 IFont_Handler1 * g_fh1 = 0;
 
-} // namespace UIae
+} // namespace UI

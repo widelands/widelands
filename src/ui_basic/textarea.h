@@ -23,6 +23,7 @@
 #include "align.h"
 #include "constants.h"
 #include "graphic/font.h"
+
 #include "panel.h"
 
 namespace UI {

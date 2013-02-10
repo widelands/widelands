@@ -121,11 +121,13 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
 	LineCache::iterator it = linecache.insert(linecache.begin(), LineCacheEntry());
 	it->style = style;
 	it->text = text;
-	it->image = 0;
+	it->image = NULL;
 	render_line(*it);
 
-	while (linecache.size() > MaxLineCacheSize)
+	while (linecache.size() > MaxLineCacheSize) {
+		delete linecache.back().image;
 		linecache.pop_back();
+	}
 
 	return *it;
 }
@@ -150,7 +152,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 
 	lce.style.setup();
 
-	SDL_Surface * text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
+	SDL_Surface *text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
 	if (!text_surface) {
 		log
 			("Font_Handler::render_line, an error : %s\n",
@@ -177,7 +179,7 @@ void Font_Handler::draw_text
 {
 	const LineCacheEntry & lce = d->get_line(style, text);
 
-	do_align(align, dstpoint.x, dstpoint.y, lce.width + 2 * LINE_MARGIN, lce.height);
+	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
 	if (lce.image)
 		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image);
@@ -243,30 +245,6 @@ void Font_Handler::draw_caret
 	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
 
 	dst.blit(caretpt, caret_image);
-}
-
-
-//Sets dstx and dsty to values for a specified align
-void Font_Handler::do_align
-	(Align const align,
-	 int32_t & dstx, int32_t & dsty,
-	 int32_t const w, int32_t const h)
-{
-	//Vertical Align
-	if (align & (Align_VCenter | Align_Bottom)) {
-		if (align & Align_VCenter)
-			dsty -= (h + 1) / 2; //  +1 for slight bias to top
-		else
-			dsty -= h;
-	}
-
-	//Horizontal Align
-	if ((align & Align_Horizontal) != Align_Left) {
-		if (align & Align_HCenter)
-			dstx -= w / 2;
-		else if (align & Align_Right)
-			dstx -= w;
-	}
 }
 
 /**

@@ -20,12 +20,14 @@
 #ifndef RENDERTARGET_H
 #define RENDERTARGET_H
 
-#include "compositemode.h"
-#include "image.h"
+#include <vector>
+
+#include "align.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
-#include <vector>
+#include "compositemode.h"
+#include "image.h"
 
 class Surface;
 
@@ -63,7 +65,7 @@ public:
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
 
-	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal);
+	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
 	void blitrect(Point dst, const Image* image, Rect src, Composite cm = CM_Normal);
 	void tile(Rect, const Image* image, Point ofs, Composite cm = CM_Normal);
 

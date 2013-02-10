@@ -29,6 +29,7 @@
 class GLSurfaceScreen : public GLSurface {
 public:
 	GLSurfaceScreen(uint16_t w, uint16_t h);
+	virtual ~GLSurfaceScreen() {}
 
 	/// Interface implementations
 	virtual void lock(LockMode);

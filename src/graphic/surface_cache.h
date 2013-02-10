@@ -20,8 +20,9 @@
 #ifndef SURFACE_CACHE_H
 #define SURFACE_CACHE_H
 
-#include <string>
 #include <boost/scoped_ptr.hpp>
+#include <boost/utility.hpp>
+#include <string>
 
 class Surface;
 
@@ -30,22 +31,21 @@ class Surface;
 // surfaces that have been used the longest time ago. Users of this class
 // should therefore not hold onto the Surface they get back, instead, they
 // should use it only temporarily and request it whenever they need it.
-class SurfaceCache {  // noncopyable through scoped_ptr.
+class SurfaceCache : boost::noncopyable {
 public:
-	SurfaceCache();
-	~SurfaceCache();
+	SurfaceCache() {};
+	virtual ~SurfaceCache() {};
 
 	/// Returns an entry if it is cached, NULL otherwise.
-	Surface* get(const std::string& hash);
+	virtual Surface* get(const std::string& hash) = 0;
 
 	/// Inserts this entry into the SurfaceCache. Overwrites existing entries /
 	/// without freeing them so be careful.
-	Surface* insert(const std::string& hash, Surface*);
-
-private:
-	class Impl;
-	boost::scoped_ptr<Impl> p_;
+	/// // NOCOM(#sirver): crashes if hash is present.
+	virtual Surface* insert(const std::string& hash, Surface*) = 0;
 };
+
+SurfaceCache* create_surface_cache(uint32_t memory_in_bytes);
 
 #endif /* end of include guard: SURFACE_CACHE_H */
 

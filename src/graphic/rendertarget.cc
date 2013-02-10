@@ -17,7 +17,6 @@
  *
  */
 
-
 #include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
@@ -167,11 +166,12 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
  * If the source surface contains a alpha channel this is used during
  * the blit.
  */
-void RenderTarget::blit(const Point& dst, const Image* image, Composite cm)
+void RenderTarget::blit(const Point& dst, const Image* image, Composite cm, UI::Align align)
 {
-	doblit
-		(dst,
-		 image, Rect(Point(0, 0), image->width(), image->height()), cm);
+	Point dstpoint(dst);
+
+	UI::correct_for_align(align, image->width(), image->height(), &dstpoint);
+	doblit(dstpoint, image, Rect(Point(0, 0), image->width(), image->height()), cm);
 }
 
 /**

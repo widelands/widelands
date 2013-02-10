@@ -24,18 +24,9 @@
 #include "sdl_surface.h"
 
 SDLSurface::~SDLSurface() {
-	if (m_surface)
-		SDL_FreeSurface(m_surface);
-}
+	assert(m_surface);
 
-void SDLSurface::set_sdl_surface(SDL_Surface & surface)
-{
-	if (m_surface)
-		SDL_FreeSurface(m_surface);
-
-	m_surface = &surface;
-	m_w = m_surface->w;
-	m_h = m_surface->h;
+	SDL_FreeSurface(m_surface);
 }
 
 const SDL_PixelFormat & SDLSurface::format() const {
@@ -153,8 +144,7 @@ void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
-	assert(rc.w >= 0);
-	assert(rc.h >= 0);
+
 	const uint32_t color = clr.map(format());
 
 	const Point bl = rc.bottom_right() - Point(1, 1);
@@ -179,8 +169,7 @@ void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
-	assert(rc.w >= 0);
-	assert(rc.h >= 0);
+
 	const uint32_t color = clr.map(format());
 
 	SDL_Rect r = {

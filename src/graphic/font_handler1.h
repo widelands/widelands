@@ -25,10 +25,8 @@
 #include <boost/noncopyable.hpp>
 
 #include "point.h"
+#include "align.h"
 
-#include "ui_basic/align.h"
-
-class RenderTarget;
 class FileSystem;
 class Image;
 class Graphic;
@@ -41,13 +39,6 @@ namespace UI {
 class IFont_Handler1 : boost::noncopyable {
 public:
 	virtual ~IFont_Handler1() {};
-
-	virtual void draw_text
-		(RenderTarget &,
-		 Point dstpoint,
-		 const std::string & text,
-		 uint16_t w = 0,
-		 Align = Align_TopLeft) = 0;
 
 	/*
 	 * Renders the given text into an image. Will return NULL on error or if the

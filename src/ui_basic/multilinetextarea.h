@@ -22,6 +22,7 @@
 
 #include "rgbcolor.h"
 #include "align.h"
+
 #include "panel.h"
 #include "scrollbar.h"
 

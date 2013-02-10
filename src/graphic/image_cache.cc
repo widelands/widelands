@@ -47,6 +47,7 @@ public:
 			w_ = surf->width();
 			h_ = surf->height();
 		}
+	virtual ~FromDiskImage() {}
 
 	// Implements Image.
 	virtual uint16_t width() const {return w_; }

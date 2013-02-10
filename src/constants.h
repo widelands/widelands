@@ -20,6 +20,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <stdint.h>
+
 /**
  * \file constants.h
  * \brief Global compile time configuration and important constants
@@ -126,5 +128,10 @@ enum {
  * recognized as a valid value of type Workarea_Info::size_type without a cast.
  */
 #define NUMBER_OF_WORKAREA_PICS static_cast<Workarea_Info::size_type>(3)
+
+/// The size of the surface cache in bytes. This is the amount of graphics
+/// memory widelands uses  approximately. Note that not every Surface is also in
+/// the cache, so the actual value will be different - but not by much.
+const uint32_t SURFACE_CACHE_SIZE=30 << 20;   // 30MB
 
 #endif

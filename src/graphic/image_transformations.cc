@@ -330,6 +330,7 @@ public:
 		: DerivedImage(hash, original, surface_cache), w_(w), h_(h) {
 			assert(w != original.width() || h != original.height());
 	}
+	virtual ~ResizedImage() {}
 
 	// Overwrites DerivedImage.
 	virtual uint16_t width() const {return w_;}
@@ -351,6 +352,7 @@ public:
 	GrayedOutImage(const string& hash, const Image& original, SurfaceCache* surface_cache) :
 		DerivedImage(hash, original, surface_cache)
 	{}
+	virtual ~GrayedOutImage() {}
 
 	// Implements DerivedImage.
 	virtual Surface* recalculate_surface() const {
@@ -368,6 +370,7 @@ public:
 		  factor_(factor),
 		  halve_alpha_(halve_alpha)
 	{}
+	virtual ~ChangeLuminosityImage() {}
 
 	// Implements DerivedImage.
 	virtual Surface* recalculate_surface() const {
@@ -387,6 +390,7 @@ public:
 		 SurfaceCache* surface_cache, const RGBColor& color, const Image& mask)
 		: DerivedImage(hash, original, surface_cache), color_(color), mask_(mask)
 		{}
+	virtual ~PlayerColoredImage() {}
 
 	// Implements DerivedImage.
 	virtual Surface* recalculate_surface() const {
@@ -444,7 +448,8 @@ const Image* change_luminosity(const Image* original, float factor, bool halve_a
 
 const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask) {
 	const string new_hash =
-		(boost::format("%s:%02x%02x%02x") % original->hash() % clr.r % clr.g % clr.b).str();
+		(boost::format("%s:%02x%02x%02x") % original->hash() % static_cast<int>(clr.r) %
+		 static_cast<int>(clr.g) % static_cast<int>(clr.b)).str();
 	if (g_gr->images().has(new_hash))
 		return g_gr->images().get(new_hash);
 	return

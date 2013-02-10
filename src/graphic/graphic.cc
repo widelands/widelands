@@ -25,6 +25,7 @@
 
 #include "build_info.h"
 #include "compile_diagnostics.h"
+#include "constants.h"
 #include "container_iterate.h"
 #include "diranimations.h"
 #include "i18n.h"
@@ -69,7 +70,7 @@ Graphic::Graphic
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	image_loader_(new ImageLoaderImpl()),
-	surface_cache_(new SurfaceCache()),
+	surface_cache_(create_surface_cache(SURFACE_CACHE_SIZE)),
 	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
 {
 	ImageTransformations::initialize();
@@ -286,7 +287,7 @@ GCC_DIAG_ON ("-Wold-style-cast")
 	else
 #endif
 	{
-		screen_.reset(new SDLSurface(*sdlsurface));
+		screen_.reset(new SDLSurface(sdlsurface));
 	}
 
 	m_sdl_screen = sdlsurface;
@@ -337,8 +338,14 @@ RenderTarget * Graphic::get_render_target()
 */
 void Graphic::toggle_fullscreen()
 {
-	log("Try DL_WM_ToggleFullScreen...\n");
-	//ToDo Make this work again
+	log("Try SDL_WM_ToggleFullScreen...\n");
+	// TODO: implement proper fullscreening here. The way it can work is to
+	// recreate SurfaceCache but keeping ImageCache around. Then exiting and
+	// reinitalizing the SDL Video Mode should just work: all surface are
+	// recreated dynamically and correctly.
+	// Note: Not all Images are cached in the ImageCache, at time of me writing
+	// this, only InMemoryImage does not safe itself in the ImageCache. And this
+	// should only be a problem for Images loaded from maps.
 	SDL_WM_ToggleFullScreen(m_sdl_screen);
 }
 

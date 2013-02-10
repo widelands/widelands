@@ -20,14 +20,14 @@
 #ifndef UI_EDITBOX_H
 #define UI_EDITBOX_H
 
-#include "align.h"
-#include "button.h"
-
-#include "graphic/graphic.h"
-
+#include <SDL_keyboard.h>
 #include <boost/scoped_ptr.hpp>
 #include <boost/signal.hpp>
-#include <SDL_keyboard.h>
+
+#include "button.h"
+
+#include "align.h"
+#include "graphic/graphic.h"
 
 #define CHAT_HISTORY_SIZE 5
 
