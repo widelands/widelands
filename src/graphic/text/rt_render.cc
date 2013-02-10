@@ -28,7 +28,9 @@
 #include <boost/scoped_ptr.hpp>
 
 #include "graphic/image_cache.h"
+#include "graphic/surface.h"
 
+#include "rect.h"
 #include "rt_parse.h"
 #include "textstream.h"
 
@@ -41,7 +43,7 @@ using namespace boost;
 
 namespace RT {
 
-static const uint32_t INFINITE_WIDTH = 2147483647; // 2^31-1
+static const uint16_t INFINITE_WIDTH = 65535; // 2^16-1
 
 // Helper Stuff
 enum HAlign {
@@ -79,7 +81,7 @@ struct Reference {
 	// There is a small difference...
 	// Rect::contains() excludes the bottom and right edges.
 	// Reference::contains() includes the bottom and right edges
-	// TODO(sirver): check this, likely that it is.
+	// TODO: check this, likely that it is with the test cases
 	inline bool contains(int16_t x, int16_t y) const {
 		return
 			dim.x <= x && x <= dim.x + static_cast<int32_t>(dim.w) &&
@@ -114,14 +116,14 @@ public:
 		: m_floating(NO_FLOAT), m_halign(ns.halign), m_valign(ns.valign), m_x(0), m_y(0) {}
 	virtual ~RenderNode() {};
 
-	virtual uint32_t width() = 0;
-	virtual uint32_t height() = 0;
-	virtual uint32_t hotspot_y() = 0;
-	virtual IBlitableSurface* render(IGraphic& gr) = 0;
+	virtual uint16_t width() = 0;
+	virtual uint16_t height() = 0;
+	virtual uint16_t hotspot_y() = 0;
+	virtual Surface* render(SurfaceCache* surface_cache) = 0;
 
 	virtual bool is_non_mandatory_space() {return false;}
 	virtual bool is_expanding() {return false;}
-	virtual void set_w(uint32_t) {} // Only, when expanding
+	virtual void set_w(uint16_t) {} // Only, when expanding
 
 	virtual const vector<Reference> get_references() {return vector<Reference>();}
 
@@ -131,16 +133,16 @@ public:
 	void set_halign(HAlign halign) {m_halign = halign;}
 	VAlign valign() {return m_valign;}
 	void set_valign(VAlign valign) {m_valign = valign;}
-	void set_x(uint32_t nx) {m_x = nx;}
-	void set_y(uint32_t ny) {m_y = ny;}
-	uint32_t x() {return m_x;}
-	uint32_t y() {return m_y;}
+	void set_x(uint16_t nx) {m_x = nx;}
+	void set_y(uint16_t ny) {m_y = ny;}
+	uint16_t x() {return m_x;}
+	uint16_t y() {return m_y;}
 
 private:
 	Floating m_floating;
 	HAlign m_halign;
 	VAlign m_valign;
-	uint32_t m_x, m_y;
+	uint16_t m_x, m_y;
 };
 
 class Layout {
@@ -148,15 +150,15 @@ public:
 	Layout(vector<RenderNode*>& all) : m_h(0), m_idx(0), m_all_nodes(all) {}
 	virtual ~Layout() {}
 
-	uint32_t height() {return m_h;}
-	uint32_t fit_nodes(vector<RenderNode*>& rv, uint32_t w, Borders p);
+	uint16_t height() {return m_h;}
+	uint16_t fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p);
 
 private:
 	// Represents a change in the rendering constraints. For example when an
 	// Image is inserted, the width will become wider after it. This is a
 	// constraint change.
 	struct ConstraintChange {
-		uint32_t at_y;
+		uint16_t at_y;
 		int32_t delta_w;
 		int32_t delta_offset_x;
 
@@ -165,22 +167,22 @@ private:
 		}
 	};
 
-	uint32_t m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders&);
+	uint16_t m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders&);
 
-	uint32_t m_h;
+	uint16_t m_h;
 	size_t m_idx;
 	vector<RenderNode*>& m_all_nodes;
 	priority_queue<ConstraintChange> m_constraint_changes;
 };
-uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& p) {
+uint16_t Layout::m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders& p) {
 	while (m_idx < m_all_nodes.size() and m_all_nodes[m_idx]->is_non_mandatory_space())
 		delete m_all_nodes[m_idx++];
 
-	uint32_t x = p.left;
+	uint16_t x = p.left;
 	size_t first_idx = rv.size();
 	while (m_idx < m_all_nodes.size()) {
 		RenderNode* n = m_all_nodes[m_idx];
-		uint32_t nw = n->width();
+		uint16_t nw = n->width();
 		if (x + nw + p.right > w or n->get_floating())
 			break;
 
@@ -195,7 +197,7 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
 	}
 
 	// Remaining space in this line
-	uint32_t rem_space = w - p.right - x;
+	uint16_t rem_space = w - p.right - x;
 
 	// Find expanding nodes
 	vector<size_t> expanding_nodes;
@@ -204,7 +206,7 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
 			expanding_nodes.push_back(idx);
 
 	if (expanding_nodes.size()) { // If there are expanding nodes, we fill the space
-		uint32_t individual_w = rem_space / expanding_nodes.size();
+		uint16_t individual_w = rem_space / expanding_nodes.size();
 		foreach(size_t idx, expanding_nodes) {
 			rv[idx]->set_w(individual_w);
 			for (size_t nidx = idx + 1; nidx < rv.size(); ++nidx)
@@ -221,7 +223,7 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
 	}
 
 	// Find the biggest hotspot of the truly remaining items.
-	uint32_t cur_line_hotspot = 0;
+	uint16_t cur_line_hotspot = 0;
 	for (size_t idx = first_idx; idx < rv.size(); ++idx)
 		cur_line_hotspot = max(cur_line_hotspot, rv[idx]->hotspot_y());
 
@@ -231,24 +233,24 @@ uint32_t Layout::m_fit_line(vector<RenderNode*>& rv, uint32_t w, const Borders& 
  * Take ownership of all nodes, delete those that we do not render anyways (for
  * example unneeded spaces), append the rest to the vector we got.
  */
-uint32_t Layout::fit_nodes(vector<RenderNode*>& rv, uint32_t w, Borders p) {
+uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p) {
 	m_h = p.top;
 
-	uint32_t max_line_width = 0;
+	uint16_t max_line_width = 0;
 	while (m_idx < m_all_nodes.size()) {
 		size_t first_idx = rv.size();
-		uint32_t biggest_hotspot = m_fit_line(rv, w, p);
-		uint32_t line_height = 0;
+		uint16_t biggest_hotspot = m_fit_line(rv, w, p);
+		int line_height = 0;
 		for (size_t j = first_idx; j < rv.size(); ++j) {
 			RenderNode* n = rv[j];
 			line_height = max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 			n->set_y(m_h + biggest_hotspot - n->hotspot_y());
-			max_line_width = max(max_line_width, n->x() + n->width() + p.right);
+			max_line_width = max<int>(max_line_width, n->x() + n->width() + p.right);
 		}
 
 		// Go over again and adjust position for VALIGN
 		for (size_t j = first_idx; j < rv.size(); ++j) {
-			uint32_t space = line_height - rv[j]->height();
+			uint16_t space = line_height - rv[j]->height();
 			if (!space or rv[j]->valign() == VALIGN_BOTTOM)
 				continue;
 			if (rv[j]->valign() == VALIGN_CENTER)
@@ -272,7 +274,7 @@ uint32_t Layout::fit_nodes(vector<RenderNode*>& rv, uint32_t w, Borders p) {
 				n->set_x(p.left);
 				p.left += n->width();
 				cc.delta_offset_x = -n->width();
-				max_line_width = max(max_line_width, n->x() + n->width() + p.right);
+				max_line_width = max<int>(max_line_width, n->x() + n->width() + p.right);
 			} else {
 				n->set_x(w - n->width() - p.right);
 				w -= n->width();
@@ -299,9 +301,9 @@ public:
 	TextNode(IFont& font, NodeStyle&, const string& txt);
 	virtual ~TextNode() {};
 
-	virtual uint32_t width() {return m_w;}
-	virtual uint32_t height() {return m_h + m_s.spacing;}
-	virtual uint32_t hotspot_y();
+	virtual uint16_t width() {return m_w;}
+	virtual uint16_t height() {return m_h + m_s.spacing;}
+	virtual uint16_t hotspot_y();
 	virtual const vector<Reference> get_references() {
 		vector<Reference> rv;
 		if (!m_s.reference.empty()) {
@@ -311,10 +313,10 @@ public:
 		return rv;
 	}
 
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual Surface* render(SurfaceCache* surface_cache);
 
 protected:
-	uint32_t m_w, m_h;
+	uint16_t m_w, m_h;
 	const string m_txt;
 	NodeStyle m_s;
 	IFont& m_font;
@@ -325,13 +327,13 @@ TextNode::TextNode(IFont& font, NodeStyle& ns, const string& txt)
 {
 	m_font.dimensions(m_txt, ns.font_style, &m_w, &m_h);
 }
-uint32_t TextNode::hotspot_y() {
+uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
-IBlitableSurface* TextNode::render(IGraphic& gr) {
-	const IPicture& img = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	IBlitableSurface* rv = gr.create_surface(img.get_w(), img.get_h(), true);
-	rv->blit(Point(0, 0), &img, Rect(0, 0, img.get_w(), img.get_h()), CM_Copy);
+Surface* TextNode::render(SurfaceCache* surface_cache) {
+	const Surface& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
+	Surface* rv = Surface::create(img.width(), img.height());
+	rv->blit(Point(0, 0), &img, Rect(0, 0, img.width(), img.height()), CM_Copy);
 	return rv;
 }
 
@@ -341,24 +343,24 @@ IBlitableSurface* TextNode::render(IGraphic& gr) {
  */
 class FillingTextNode : public TextNode {
 public:
-	FillingTextNode(IFont& font, NodeStyle& ns, uint32_t w, const string& txt, bool expanding = false) :
+	FillingTextNode(IFont& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
 		TextNode(font, ns, txt), m_expanding(expanding) {
 			m_w = w;
 		};
 	virtual ~FillingTextNode() {};
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual Surface* render(SurfaceCache*);
 
 	virtual bool is_expanding() {return m_expanding;}
-	virtual void set_w(uint32_t w) {m_w = w;}
+	virtual void set_w(uint16_t w) {m_w = w;}
 
 private:
 	bool m_expanding;
 };
-IBlitableSurface* FillingTextNode::render(IGraphic& gr) {
-	const IPicture& t = m_font.render(gr, m_txt, m_s.font_color, m_s.font_style);
-	IBlitableSurface* rv = gr.create_surface(m_w, m_h, true);
-	for (uint32_t x = 0; x < m_w; x += t.get_w()) {
-		Rect srcrect(Point(0, 0), min(static_cast<uint32_t>(t.get_w()), m_w - x), m_h);
+Surface* FillingTextNode::render(SurfaceCache* surface_cache) {
+	const Surface& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
+	Surface* rv = Surface::create(m_w, m_h);
+	for (uint16_t x = 0; x < m_w; x += t.width()) {
+		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - x), m_h);
 		rv->blit(Point(x, 0), &t, srcrect, CM_Solid);
 	}
 	return rv;
@@ -373,13 +375,13 @@ public:
 	WordSpacerNode(IFont& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
-	virtual IBlitableSurface* render(IGraphic& gr) {
+	virtual Surface* render(SurfaceCache* surface_cache) {
 		if (m_show_spaces) {
-			IBlitableSurface* rv = gr.create_surface(m_w, m_h, true);
+			Surface* rv = Surface::create(m_w, m_h);
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
 			return rv;
 		}
-		return TextNode::render(gr);
+		return TextNode::render(surface_cache);
 	}
 	virtual bool is_non_mandatory_space() {return true;}
 
@@ -395,10 +397,10 @@ bool WordSpacerNode::m_show_spaces;
 class NewlineNode : public RenderNode {
 public:
 	NewlineNode(NodeStyle& ns) : RenderNode(ns) {}
-	virtual uint32_t height() {return 0;}
-	virtual uint32_t width() {return INFINITE_WIDTH; }
-	virtual uint32_t hotspot_y() {return 0;}
-	virtual IBlitableSurface* render(IGraphic& /* gr */) {
+	virtual uint16_t height() {return 0;}
+	virtual uint16_t width() {return INFINITE_WIDTH; }
+	virtual uint16_t hotspot_y() {return 0;}
+	virtual Surface* render(SurfaceCache* surface_cache) {
 		assert(false); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
@@ -409,39 +411,39 @@ public:
  */
 class SpaceNode : public RenderNode {
 public:
-	SpaceNode(NodeStyle& ns, uint32_t w, uint32_t h = 0, bool expanding = false) :
+	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false) :
 		RenderNode(ns), m_w(w), m_h(h), m_bg(NULL), m_expanding(expanding) {}
 
-	virtual uint32_t height() {return m_h;}
-	virtual uint32_t width() {return m_w;}
-	virtual uint32_t hotspot_y() {return m_h;}
-	virtual IBlitableSurface* render(IGraphic& gr) {
-		IBlitableSurface* rv = gr.create_surface(m_w, m_h, m_bg != NULL);
+	virtual uint16_t height() {return m_h;}
+	virtual uint16_t width() {return m_w;}
+	virtual uint16_t hotspot_y() {return m_h;}
+	virtual Surface* render(SurfaceCache* surface_cache) {
+		Surface* rv = Surface::create(m_w, m_h);
 
 		// Draw background image (tiling)
 		if (m_bg) {
 			Point dst;
 			Rect srcrect(Point(0, 0), 1, 1);
-			for (uint32_t x = 0; x < m_w; x += m_bg->get_w()) {
+			for (uint16_t x = 0; x < m_w; x += m_bg->width()) {
 				dst.x = x;
 				dst.y = 0;
-				srcrect.w = min(static_cast<uint32_t>(m_bg->get_w()), m_w - x);
+				srcrect.w = min<int>(m_bg->width(), m_w - x);
 				srcrect.h = m_h;
-				rv->blit(dst, m_bg, srcrect, CM_Solid);
+				rv->blit(dst, m_bg->surface(), srcrect, CM_Solid);
 			}
 		}
 		return rv;
 	}
 	virtual bool is_expanding() {return m_expanding;}
-	virtual void set_w(uint32_t w) {m_w = w;}
+	virtual void set_w(uint16_t w) {m_w = w;}
 
-	void set_background(const IPicture* s) {
-		m_bg = s; m_h = s->get_h();
+	void set_background(const Image* s) {
+		m_bg = s; m_h = s->height();
 	}
 
 private:
-	uint32_t m_w, m_h;
-	const IPicture* m_bg;  // not owned
+	uint16_t m_w, m_h;
+	const Image* m_bg;  // not owned
 	bool m_expanding;
 };
 
@@ -460,15 +462,12 @@ public:
 		m_nodes_to_render.clear();
 	}
 
-	virtual uint32_t width() {return m_w + m_margin.left + m_margin.right;}
-	virtual uint32_t height() {return m_h + m_margin.top + m_margin.bottom;}
-	virtual uint32_t hotspot_y() {return height();}
-	virtual IBlitableSurface* render(IGraphic& gr) {
-		if (!width() || !height()) {
-			return 0;
-		}
-		IBlitableSurface* rv = gr.create_surface(width(), height(), true);
-		rv->fill_rect(Rect(0, 0, rv->get_w(), rv->get_h()), RGBAColor(255, 255, 255, 0));
+	virtual uint16_t width() {return m_w + m_margin.left + m_margin.right;}
+	virtual uint16_t height() {return m_h + m_margin.top + m_margin.bottom;}
+	virtual uint16_t hotspot_y() {return height();}
+	virtual Surface* render(SurfaceCache* surface_cache) {
+		Surface* rv = Surface::create(width(), height());
+		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
 		// Draw Solid background Color
 		bool set_alpha = true;
@@ -483,22 +482,22 @@ public:
 			Point dst;
 			Rect src(0, 0, 0, 0);
 
-			for (uint32_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->get_h()) {
-				for (uint32_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->get_w()) {
+			for (uint16_t y = m_margin.top; y < m_h + m_margin.top; y += m_bg_img->height()) {
+				for (uint16_t x = m_margin.left; x < m_w + m_margin.left; x += m_bg_img->width()) {
 					dst.x = x; dst.y = y;
-					src.w = min(static_cast<uint32_t>(m_bg_img->get_w()), m_w + m_margin.left - x);
-					src.h = min(static_cast<uint32_t>(m_bg_img->get_h()), m_h + m_margin.top - y);
-					rv->blit(dst, m_bg_img, src, CM_Solid);
+					src.w = min<int>(m_bg_img->width(), m_w + m_margin.left - x);
+					src.h = min<int>(m_bg_img->height(), m_h + m_margin.top - y);
+					rv->blit(dst, m_bg_img->surface(), src, CM_Solid);
 				}
 			}
 			set_alpha = false;
 		}
 
 		foreach(RenderNode* n, m_nodes_to_render) {
-			IBlitableSurface* nsur = n->render(gr);
+			Surface* nsur = n->render(surface_cache);
 			if (nsur) {
 				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
-				Rect src = Rect(0, 0, nsur->get_w(), nsur->get_h());
+				Rect src = Rect(0, 0, nsur->width(), nsur->height());
 
 				rv->blit(dst, nsur, src, set_alpha ? CM_Solid : CM_Normal);
 				delete nsur;
@@ -511,14 +510,14 @@ public:
 		return rv;
 	}
 	virtual const vector<Reference> get_references() {return m_refs;}
-	void set_dimensions(uint32_t inner_w, uint32_t inner_h, Borders margin) {
+	void set_dimensions(uint16_t inner_w, uint16_t inner_h, Borders margin) {
 		m_w = inner_w; m_h = inner_h; m_margin = margin;
 	}
 	void set_background(RGBColor clr) {
 		m_bg_clr = clr;
 		m_bg_clr_set = true;
 	}
-	void set_background(const IPicture* img) {m_bg_img = img;}
+	void set_background(const Image* img) {m_bg_img = img;}
 	void set_nodes_to_render(vector<RenderNode*>& n) {m_nodes_to_render = n;}
 	void add_reference(int16_t x, int16_t y, uint16_t w, uint16_t h, const string& s) {
 		Reference r = {Rect(x, y, w, h), s};
@@ -526,32 +525,32 @@ public:
 	}
 
 private:
-	uint32_t m_w, m_h;
+	uint16_t m_w, m_h;
 	vector<RenderNode*> m_nodes_to_render;
 	Borders m_margin;
 	RGBColor m_bg_clr;
 	bool m_bg_clr_set;
-	const IPicture* m_bg_img; // Not owned.
+	const Image* m_bg_img; // Not owned.
 	vector<Reference> m_refs;
 };
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle& ns, const IPicture& sur) : RenderNode(ns), m_picture(sur) {
+	ImgRenderNode(NodeStyle& ns, const Image& image) : RenderNode(ns), m_image(image) {
 	}
 
-	virtual uint32_t width() {return m_picture.get_w();}
-	virtual uint32_t height() {return m_picture.get_h();}
-	virtual uint32_t hotspot_y() {return m_picture.get_h();}
-	virtual IBlitableSurface* render(IGraphic& gr);
+	virtual uint16_t width() {return m_image.width();}
+	virtual uint16_t height() {return m_image.height();}
+	virtual uint16_t hotspot_y() {return m_image.height();}
+	virtual Surface* render(SurfaceCache* surface_cache);
 
 private:
-	const IPicture& m_picture;
+	const Image& m_image;
 };
 
-IBlitableSurface* ImgRenderNode::render(IGraphic& gr) {
-	IBlitableSurface* rv = gr.create_surface(m_picture.get_w(), m_picture.get_h(), true);
-	rv->blit(Point(0, 0), &m_picture, Rect(0, 0, m_picture.get_w(), m_picture.get_h()), CM_Copy);
+Surface* ImgRenderNode::render(SurfaceCache* surface_cache) {
+	Surface* rv = Surface::create(m_image.width(), m_image.height());
+	rv->blit(Point(0, 0), m_image.surface(), Rect(0, 0, m_image.width(), m_image.height()), CM_Copy);
 	return rv;
 }
 // End: Helper Stuff
@@ -606,12 +605,12 @@ IFont& FontCache::get_font(NodeStyle& ns) {
 
 
 class TagHandler;
-TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache& img_cache);
+TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache);
 
 class TagHandler {
 public:
-	TagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache) :
-		m_tag(tag), m_fc(fc), m_ns(ns), img_cache_(img_cache) {}
+	TagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+		m_tag(tag), m_fc(fc), m_ns(ns), image_cache_(image_cache) {}
 	virtual ~TagHandler() {};
 
 	virtual void enter() {};
@@ -624,7 +623,7 @@ protected:
 	ITag& m_tag;
 	FontCache& m_fc;
 	NodeStyle m_ns;
-	ImageCache& img_cache_;
+	ImageCache* image_cache_;  // Not owned
 };
 
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
@@ -645,7 +644,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 void TagHandler::emit(vector<RenderNode*>& nodes) {
 	foreach(Child* c, m_tag.childs()) {
 		if (c->tag) {
-			boost::scoped_ptr<TagHandler> th(create_taghandler(*c->tag, m_fc, m_ns, img_cache_));
+			boost::scoped_ptr<TagHandler> th(create_taghandler(*c->tag, m_fc, m_ns, image_cache_));
 			th->enter();
 			th->emit(nodes);
 		} else
@@ -655,8 +654,8 @@ void TagHandler::emit(vector<RenderNode*>& nodes) {
 
 class FontTagHandler : public TagHandler {
 public:
-	FontTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache)
-		: TagHandler(tag, fc, ns, img_cache) {}
+	FontTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
+		: TagHandler(tag, fc, ns, image_cache) {}
 
 	void enter() {
 		const IAttrMap& a = m_tag.attrs();
@@ -673,8 +672,8 @@ public:
 
 class PTagHandler : public TagHandler {
 public:
-	PTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache)
-		: TagHandler(tag, fc, ns, img_cache), m_indent(0) {
+	PTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
+		: TagHandler(tag, fc, ns, image_cache), m_indent(0) {
 	}
 
 	void enter() {
@@ -705,18 +704,18 @@ public:
 	}
 
 private:
-	uint32_t m_indent;
+	uint16_t m_indent;
 };
 
 class ImgTagHandler : public TagHandler {
 public:
-	ImgTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache) :
-		TagHandler(tag, fc, ns, img_cache) {
+	ImgTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+		TagHandler(tag, fc, ns, image_cache) {
 	}
 
 	void enter() {
 		const IAttrMap& a = m_tag.attrs();
-		m_rn = new ImgRenderNode(m_ns, *img_cache_.load(PicMod_RichText, a["src"].get_string(), true));
+		m_rn = new ImgRenderNode(m_ns, *image_cache_->get(a["src"].get_string()));
 	}
 	void emit(vector<RenderNode*>& nodes) {
 		nodes.push_back(m_rn);
@@ -728,8 +727,8 @@ private:
 
 class VspaceTagHandler : public TagHandler {
 public:
-	VspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache) :
-		TagHandler(tag, fc, ns, img_cache), m_space(0) {}
+	VspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+		TagHandler(tag, fc, ns, image_cache), m_space(0) {}
 
 	void enter() {
 		const IAttrMap& a = m_tag.attrs();
@@ -742,13 +741,13 @@ public:
 	}
 
 private:
-	uint32_t m_space;
+	uint16_t m_space;
 };
 
 class HspaceTagHandler : public TagHandler {
 public:
-	HspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache) :
-		TagHandler(tag, fc, ns, img_cache), m_bg(NULL), m_space(0) {}
+	HspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+		TagHandler(tag, fc, ns, image_cache), m_bg(NULL), m_space(0) {}
 
 	void enter() {
 		const IAttrMap& a = m_tag.attrs();
@@ -761,7 +760,7 @@ public:
 		if (a.has("fill")) {
 			m_fill_text = a["fill"].get_string();
 			try {
-				m_bg = img_cache_.load(PicMod_RichText, m_fill_text, true);
+				m_bg = image_cache_->get(m_fill_text);
 				m_fill_text = "";
 			} catch (BadImage&) {
 			}
@@ -791,14 +790,14 @@ public:
 
 private:
 	string m_fill_text;
-	const IPicture* m_bg;
-	uint32_t m_space;
+	const Image* m_bg;
+	uint16_t m_space;
 };
 
 class BrTagHandler : public TagHandler {
 public:
-	BrTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache) :
-		TagHandler(tag, fc, ns, img_cache) {
+	BrTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
+		TagHandler(tag, fc, ns, image_cache) {
 	}
 
 	void emit(vector<RenderNode*>& nodes) {
@@ -810,14 +809,15 @@ public:
 class SubTagHandler : public TagHandler {
 public:
 	SubTagHandler
-		(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache,
-		 uint32_t max_w = 0, bool shrink_to_fit = false)
+		(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
+		 uint16_t max_w = 0, bool shrink_to_fit = false)
 		:
-			TagHandler(tag, fc, ns, img_cache),
+			TagHandler(tag, fc, ns, image_cache),
 			shrink_to_fit_(shrink_to_fit),
 			m_w(max_w),
 			m_rn(new SubTagRenderNode(ns))
-	{}
+	{
+	}
 
 	void enter() {
 		Borders padding, margin;
@@ -830,7 +830,7 @@ public:
 				clr = a["background"].get_color();
 				m_rn->set_background(clr);
 			} catch (InvalidColor&) {
-				m_rn->set_background(img_cache_.load(PicMod_RichText, a["background"].get_string(), false));
+				m_rn->set_background(image_cache_->get(a["background"].get_string()));
 			}
 		}
 		if (a.has("padding")) {
@@ -853,22 +853,23 @@ public:
 			foreach(RenderNode* n, subnodes) {
 				if (n->width() >= INFINITE_WIDTH)
 					continue;
-				m_w = max(m_w, n->width() + padding.left + padding.right);
+				m_w = max<int>(m_w, n->width() + padding.left + padding.right);
 			}
 		}
 
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
-		uint32_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding);
+		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, m_w, padding);
 		if (shrink_to_fit_) {
 			m_w = min(m_w, max_line_width);
 		}
 
 		// Collect all tags from children
-		foreach(RenderNode* rn, nodes_to_render)
-			foreach(const Reference& r, rn->get_references()) {
-				m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
-			}
+	foreach(RenderNode* rn, nodes_to_render) {
+		foreach(const Reference& r, rn->get_references()) {
+			m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
+		}
+	}
 
 		m_rn->set_dimensions(m_w, layout.height(), margin);
 		m_rn->set_nodes_to_render(nodes_to_render);
@@ -899,14 +900,14 @@ public:
 
 private:
 	bool shrink_to_fit_;
-	uint32_t m_w;
+	uint16_t m_w;
 	SubTagRenderNode* m_rn;
 };
 
 class RTTagHandler : public SubTagHandler {
 public:
-	RTTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache& img_cache, uint32_t w) :
-		SubTagHandler(tag, fc, ns, img_cache, w, true) {
+	RTTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache, uint16_t w) :
+		SubTagHandler(tag, fc, ns, image_cache, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in sub.
@@ -917,13 +918,13 @@ public:
 };
 
 template<typename T> TagHandler* create_taghandler
-	(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache& gr)
+	(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)
 {
-	return new T(tag, fc, ns, gr);
+	return new T(tag, fc, ns, image_cache);
 }
 typedef map<const string, TagHandler* (*)
-	(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache& img_cache)> TagHandlerMap;
-TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache& img_cache) {
+	(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)> TagHandlerMap;
+TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache) {
 	static TagHandlerMap map;
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
@@ -938,36 +939,37 @@ TagHandler* create_taghandler(ITag& tag, FontCache& fc, NodeStyle& ns, ImageCach
 	if (i == map.end())
 		throw RenderError
 			((format("No Tag handler for %s. This is a bug, please submit a report.") % tag.name()).str());
-	return i->second(tag, fc, ns, img_cache);
+	return i->second(tag, fc, ns, image_cache);
 }
 
 class Renderer : public IRenderer {
 public:
-	Renderer(IGraphic& gr, IFontLoader* fl, IParser* p);
+	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IFontLoader* fl, IParser* p);
 	virtual ~Renderer();
 
-	virtual const IPicture* render(const string&, uint32_t, const TagSet&);
-	virtual IRefMap* make_reference_map(const std::string&, uint32_t, const TagSet&);
+	virtual Surface* render(const string&, uint16_t, const TagSet&);
+	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet&);
 
 private:
-	RenderNode* layout_(const string& text, uint32_t width, const TagSet& allowed_tags);
+	RenderNode* layout_(const string& text, uint16_t width, const TagSet& allowed_tags);
 
-	IGraphic& gr_;
 	FontCache m_fc;
 	scoped_ptr<IParser> m_p;
+	ImageCache* const image_cache_;  // Not owned.
+	SurfaceCache* const surface_cache_;  // Not owned.
 };
 
-Renderer::Renderer(IGraphic& gr, IFontLoader* fl, IParser* p) :
-	gr_(gr), m_fc(fl), m_p(p) {
+Renderer::Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IFontLoader* fl, IParser* p) :
+	image_cache_(image_cache), surface_cache_(surface_cache), m_fc(fl), m_p(p) {
 }
 
 Renderer::~Renderer() {
 }
 
-RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& allowed_tags) {
+RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	boost::scoped_ptr<ITag> rt(m_p->parse(text, allowed_tags));
 
-	NodeStyle default_fs = {
+	NodeStyle default_style = {
 		"DejaVuSerif", 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
@@ -976,34 +978,30 @@ RenderNode* Renderer::layout_(const string& text, uint32_t width, const TagSet& 
 	if (!width)
 		width = INFINITE_WIDTH;
 
-	RTTagHandler rtrn(*rt, m_fc, default_fs, gr_.imgcache(), width);
+	RTTagHandler rtrn(*rt, m_fc, default_style, image_cache_, width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);
 
 	assert(nodes.size() == 1);
+	assert(nodes[0]);
 	return nodes[0];
 }
 
-const IPicture* Renderer::render(const string& text, uint32_t width, const TagSet& allowed_tags) {
-	const string cs = boost::lexical_cast<string>(width) + text;
-	const IPicture* rv = gr_.imgcache().get(PicMod_RichText, cs);
-	if (rv) {
-		return rv;
-	}
-
+Surface* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
-	return gr_.imgcache().insert(PicMod_RichText, cs, node->render(gr_));
+
+	return node->render(surface_cache_);
 }
 
-IRefMap* Renderer::make_reference_map(const string& text, uint32_t width, const TagSet& allowed_tags) {
+IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {
 
 	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 	return new RefMap(node->get_references());
 }
 
-IRenderer* setup_renderer(IGraphic& gr, IFontLoader* fl) {
-	return new Renderer(gr, fl, setup_parser());
+IRenderer* setup_renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IFontLoader* fl) {
+	return new Renderer(image_cache, surface_cache, fl, setup_parser());
 }
 
 };

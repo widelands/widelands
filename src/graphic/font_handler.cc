@@ -26,6 +26,8 @@
 #include "graphic.h"
 #include "log.h"
 #include "rendertarget.h"
+#include "surface.h"
+#include "in_memory_image.h"
 #include "wexception.h"
 #include "wordwrap.h"
 
@@ -46,7 +48,7 @@ struct LineCacheEntry {
 	/*@}*/
 
 	/*@{*/
-	IPicture* picture;
+	const Image* image;
 	uint32_t width;
 	uint32_t height;
 	/*@}*/
@@ -115,21 +117,23 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
 		return *it;
 	}
 
-	// Cache miss; render a new picture
+	// Cache miss; render a new image.
 	LineCache::iterator it = linecache.insert(linecache.begin(), LineCacheEntry());
 	it->style = style;
 	it->text = text;
-	it->picture = 0;
+	it->image = NULL;
 	render_line(*it);
 
-	while (linecache.size() > MaxLineCacheSize)
+	while (linecache.size() > MaxLineCacheSize) {
+		delete linecache.back().image;
 		linecache.pop_back();
+	}
 
 	return *it;
 }
 
 /**
- * Render the picture of a \ref LineCacheEntry whose key data has
+ * Render the image of a \ref LineCacheEntry whose key data has
  * already been filled in.
  */
 void Font_Handler::Data::render_line(LineCacheEntry & lce)
@@ -148,7 +152,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 
 	lce.style.setup();
 
-	SDL_Surface * text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
+	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
 	if (!text_surface) {
 		log
 			("Font_Handler::render_line, an error : %s\n",
@@ -157,9 +161,9 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 		return;
 	}
 
-	lce.picture = g_gr->convert_sdl_surface_to_picture(text_surface, true);
-	lce.width = lce.picture->get_w();
-	lce.height = lce.picture->get_h();
+	lce.image = new_in_memory_image("dummy_hash", Surface::create(text_surface));
+	lce.width = lce.image->width();
+	lce.height = lce.image->height();
 }
 
 /**
@@ -175,10 +179,10 @@ void Font_Handler::draw_text
 {
 	const LineCacheEntry & lce = d->get_line(style, text);
 
-	do_align(align, dstpoint.x, dstpoint.y, lce.width + 2 * LINE_MARGIN, lce.height);
+	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
-	if (lce.picture)
-		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.picture);
+	if (lce.image)
+		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image);
 
 	if (caret <= text.size())
 		draw_caret(dst, style, dstpoint, text, caret);
@@ -214,8 +218,8 @@ uint32_t Font_Handler::draw_text_raw
 {
 	const LineCacheEntry & lce = d->get_line(style, text);
 
-	if (lce.picture)
-		dst.blit(dstpoint, lce.picture);
+	if (lce.image)
+		dst.blit(dstpoint, lce.image);
 
 	return lce.width;
 }
@@ -235,36 +239,12 @@ void Font_Handler::draw_caret
 
 	int caret_x = style.calc_bare_width(sub);
 
-	const IPicture* caretpic = g_gr->imgcache().load(PicMod_UI, "pics/caret.png");
+	const Image* caret_image = g_gr->images().get("pics/caret.png");
 	Point caretpt;
-	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caretpic->get_w();
-	caretpt.y = dstpoint.y + (style.font->height() - caretpic->get_h()) / 2;
+	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
+	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
 
-	dst.blit(caretpt, caretpic);
-}
-
-
-//Sets dstx and dsty to values for a specified align
-void Font_Handler::do_align
-	(Align const align,
-	 int32_t & dstx, int32_t & dsty,
-	 int32_t const w, int32_t const h)
-{
-	//Vertical Align
-	if (align & (Align_VCenter | Align_Bottom)) {
-		if (align & Align_VCenter)
-			dsty -= (h + 1) / 2; //  +1 for slight bias to top
-		else
-			dsty -= h;
-	}
-
-	//Horizontal Align
-	if ((align & Align_Horizontal) != Align_Left) {
-		if (align & Align_HCenter)
-			dstx -= w / 2;
-		else if (align & Align_Right)
-			dstx -= w;
-	}
+	dst.blit(caretpt, caret_image);
 }
 
 /**

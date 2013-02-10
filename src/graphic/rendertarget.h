@@ -20,12 +20,14 @@
 #ifndef RENDERTARGET_H
 #define RENDERTARGET_H
 
-#include "compositemode.h"
-#include "picture.h"
+#include <vector>
+
+#include "align.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
-#include <vector>
+#include "compositemode.h"
+#include "image.h"
 
 class Surface;
 
@@ -54,8 +56,8 @@ public:
 	void set_window(Rect const & rc, Point const & ofs);
 	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
 
-	int32_t get_w() const;
-	int32_t get_h() const;
+	int32_t width() const;
+	int32_t height() const;
 
 	void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
@@ -63,9 +65,9 @@ public:
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
 
-	void blit(const Point& dst, const IPicture* picture, Composite cm = CM_Normal);
-	void blitrect(Point dst, const IPicture* picture, Rect src, Composite cm = CM_Normal);
-	void tile(Rect, const IPicture* picture, Point ofs, Composite cm = CM_Normal);
+	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
+	void blitrect(Point dst, const Image* image, Rect src, Composite cm = CM_Normal);
+	void tile(Rect, const Image* image, Point ofs, Composite cm = CM_Normal);
 
 	void drawanim
 		(Point                     dst,
@@ -94,7 +96,7 @@ public:
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, const IPicture* src, Rect srcrc, Composite cm = CM_Normal);
+	void doblit(Point dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
 	Surface* m_surface;

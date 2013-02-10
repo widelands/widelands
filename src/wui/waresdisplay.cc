@@ -21,17 +21,17 @@
 #include <boost/lexical_cast.hpp>
 #include <cstdio>
 
-#include "text_layout.h"
-#include "graphic/font.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
+#include "text_layout.h"
 #include "wexception.h"
 
 #include "waresdisplay.h"
@@ -240,16 +240,13 @@ void AbstractWaresDisplay::draw_ware
 	Point p = ware_position(id);
 
 	//  draw a background
-	const IPicture* bgpic =
-		g_gr->imgcache().load
-			(PicMod_Game,
-			 ware_selected(id) ?  "pics/ware_list_bg_selected.png"
-			                   :  "pics/ware_list_bg.png");
-	uint32_t w = bgpic->get_w();
+	const Image* bgpic =
+		g_gr->images().get(ware_selected(id) ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png");
+	uint16_t w = bgpic->width();
 
 	dst.blit(p, bgpic);
 
-	const IPicture* icon = m_type == Widelands::wwWORKER ? m_tribe.get_worker_descr(id)->icon()
+	const Image* icon = m_type == Widelands::wwWORKER ? m_tribe.get_worker_descr(id)->icon()
 		: m_tribe.get_ware_descr(id)->icon();
 
 	dst.blit(p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
@@ -258,11 +255,11 @@ void AbstractWaresDisplay::draw_ware
 		(Rect(p + Point(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
 		 info_color_for_ware(id));
 
-	const IPicture* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
+	const Image* text = UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
 	if (text) // might be zero when there is no info text.
 		dst.blit
 			(p + Point
-				(w - text->get_w() - 1, WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->get_h()), text);
+				(w - text->width() - 1, WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 - text->height()), text);
 }
 
 // Wares highlighting/selecting

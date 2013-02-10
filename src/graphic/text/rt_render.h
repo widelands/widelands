@@ -24,10 +24,11 @@
 #include <string>
 #include <set>
 
-#include "graphic/iblitable_surface.h"
-#include "graphic/igraphic.h"
-#include "graphic/picture.h"
+#include "graphic/image.h"
 #include "rgbcolor.h"
+
+class SurfaceCache;
+class ImageCache;
 
 namespace RT {
 /**
@@ -49,10 +50,10 @@ public:
 	};
 	virtual ~IFont() {};
 
-	virtual void dimensions(const std::string&, int, uint32_t *, uint32_t *) = 0;
-	virtual const IPicture& render(IGraphic &, const std::string&, const RGBColor& clr, int) = 0;
+	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
+	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) = 0;
 
-	virtual uint32_t ascent(int) const = 0;
+	virtual uint16_t ascent(int) const = 0;
 };
 
 /**
@@ -78,8 +79,8 @@ public:
 };
 
 /**
- * This is the rendering engine. It caches heavily using ImageCache and
- * therefore, the returned images are not owned by the caller.
+ * This is the rendering engine. The returned images are not owned by the
+ * caller.
  */
 typedef std::set<std::string> TagSet;
 class IRenderer {
@@ -88,20 +89,18 @@ public:
 	virtual ~IRenderer() {};
 
 	// Render the given string in the given width. Restricts the allowed tags to
-	// the ones in TagSet. The returned image is cached with the key (width,
-	// text, number of entries in the tagse), therefore never delete the return
-	// value and mind key collisions when using same string and text with
-	// another tag set with the same number of entries.
-	virtual const IPicture* render(const std::string&, uint32_t, const TagSet & = TagSet()) = 0;
+	// the ones in TagSet. The renderer does not do caching in the SurfaceCache
+	// for its individual nodes, but the font render does.
+	virtual Surface* render(const std::string&, uint16_t, const TagSet & = TagSet()) = 0;
 
 	// Returns a reference map of the clickable hyperlinks in the image. This
 	// will do no caching and needs to do all layouting, so do not call this too
 	// often. The returned object must be freed.
-	virtual IRefMap* make_reference_map(const std::string&, uint32_t, const TagSet & = TagSet()) = 0;
+	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet & = TagSet()) = 0;
 };
 
-// Setup a renderer, takes ownership of fl but not of gr.
-IRenderer* setup_renderer(IGraphic& gr, IFontLoader* fl);
+// Setup a renderer, takes ownership of fl but of nothing else.
+IRenderer* setup_renderer(ImageCache* gr, SurfaceCache*, IFontLoader* fl);
 };
 
 #endif /* end of include guard: RT_RENDER_H */

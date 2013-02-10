@@ -47,7 +47,7 @@ struct Icon_Grid : public Panel {
 
 	int32_t add
 		(std::string const & name,
-		 const IPicture* pic,
+		 const Image* pic,
 		 void              * data,
 		 const std::string & tooltip_text = "");
 	void * get_data(int32_t idx);

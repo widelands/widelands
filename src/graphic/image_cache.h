@@ -24,55 +24,38 @@
 
 #include <boost/utility.hpp>
 
-class IPicture;
+#include "image.h"
 class IImageLoader;
+class SurfaceCache;
 
-/**
- * Picture caches (modules).
- *
- * This cache is separated into different modules, and can be flushed
- * per-module.
- */
-enum PicMod {
-	PicMod_UI = 0,
-	PicMod_Menu,
-	PicMod_Game,
-	PicMod_Text,
-	PicMod_RichText,
-
-	// Must be last
-	PicMod_Last
-};
-
-// This class can load and cache images, so that they are already available
-// when requested the next time. When another part of the program generates a
-// new picture, it can also choose to insert it into this cache. The pictures
-// in the cache are associated with a Picture Module. When a part of the
-// program knows that it no longer needs pictures from a certain module, it can
-// call flush to delete the images from the cache. The cache holds ownership
-// over each image it contains.
+// For historic reasons, most part of the Widelands code base expect that an
+// Image stays valid for the whole duration of the program run. This class is
+// the one that keeps ownership of all Images to ensure that this is true. Also
+// for historic reasons, this class will try to load in Image from disk when
+// its hash is not found. Other parts of Widelands will create images when they
+// do not exist in the cache yet and then put it into the cache and therefore
+// releasing their ownership.
 class ImageCache : boost::noncopyable {
 public:
 	virtual ~ImageCache() {}
 
-	/// Returns an entry if it is cached, NULL otherwise.
-	virtual const IPicture* get(PicMod, const std::string& hash) const = 0;
+	// Insert the given Image into the cache. The hash is defined by Image's hash()
+	// function. Ownership of the Image is taken. Will return a pointer to the freshly inserted
+	// image for convenience.
+	virtual const Image* insert(const Image*) = 0;
 
-	/// Inserts this entry into the ImageCache. Overwrites existing entries /
-	//without freeing the image first, so be careful. Returns the picture just
-	//inserted / for convenience.
-	virtual const IPicture* insert(PicMod, const std::string& hash, const IPicture*) = 0;
+	// Returns the image associated with the given hash. If no image by this
+	// hash is known, it will try to load one from disk with the filename =
+	// hash. If this fails, it will throw an error.
+	virtual const Image* get(const std::string& hash) = 0;
 
-	/// Loads an Image from disk and caches it. If it was already
-	/// cached, it is simply returned.
-	virtual const IPicture* load(PicMod, const std::string& fn, bool alpha = true) = 0;
+	// Returns true if the given hash is stored in the cache.
+	virtual bool has(const std::string& hash) const = 0;
 
-	/// Clears the Cache for the given PicMod
-	virtual void flush(PicMod) = 0;
 };
 
-// Takes ownership of img_loader
-ImageCache* create_image_cache(IImageLoader*);
+// Create a new ImageCache. Takes no ownership.
+ImageCache* create_image_cache(IImageLoader*, SurfaceCache*);
 
 #endif /* end of include guard: IMAGE_CACHE_H */
 

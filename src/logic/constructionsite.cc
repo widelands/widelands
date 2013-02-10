@@ -372,7 +372,7 @@ void ConstructionSite::draw
 			anim = building().get_animation("idle");
 		}
 	}
-	const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
+	const size_t nr_frames = g_gr->nr_frames(anim);
 	cur_frame = m_info->totaltime ? m_info->completedtime * nr_frames / m_info->totaltime : 0;
 	// Redefine tanim
 	tanim = cur_frame * FRAME_LENGTH;

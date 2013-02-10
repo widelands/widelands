@@ -23,7 +23,7 @@
 #include <boost/scoped_ptr.hpp>
 
 #include "point.h"
-#include "ui_basic/align.h"
+#include "align.h"
 
 class RenderTarget;
 

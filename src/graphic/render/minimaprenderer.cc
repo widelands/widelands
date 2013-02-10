@@ -380,7 +380,6 @@ void MiniMapRenderer::draw_minimap
 
 	SDL_UnlockSurface(surface);
 
-	IPicture* picture = g_gr->convert_sdl_surface_to_picture(surface);
-
-	m_surface->blit(Point(rc.x, rc.y), picture, rc2);
+	boost::scoped_ptr<Surface> minimap_surface(Surface::create(surface));
+	m_surface->blit(Point(rc.x, rc.y), minimap_surface.get(), rc2);
 }

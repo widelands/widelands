@@ -19,16 +19,17 @@
 
 #include "sound_handler.h"
 
-#include "io/fileread.h"
-#include "logic/game.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
-#include "wui/interactive_base.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game.h"
 #include "logic/map.h"
-#include "wui/mapview.h"
-#include "wui/mapviewpixelfunctions.h"
 #include "profile/profile.h"
 #include "songset.h"
+#include "wui/interactive_base.h"
+#include "wui/mapview.h"
+#include "wui/mapviewpixelfunctions.h"
 
 #include "log.h"
 

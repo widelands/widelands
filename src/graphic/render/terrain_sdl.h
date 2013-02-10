@@ -131,10 +131,10 @@ template<typename T> static void render_edge_lists
 	}
 
 	// Cut off lines below screen
-	if (y + height > static_cast<int32_t>(dst.get_h()))
-		height = dst.get_h() - y;
+	if (y + height > static_cast<int32_t>(dst.height()))
+		height = dst.height() - y;
 
-	int32_t dstw = dst.get_w();
+	int32_t dstw = dst.width();
 	while (height > 0) {
 		int32_t leftx = FIXTOI(left->x0);
 		int32_t rightx = FIXTOI(right->x0);
@@ -370,8 +370,8 @@ template<typename T> static void dither_edge_horiz
 	// TODO: seed this depending on field coordinates
 	uint32_t rnd = 0;
 
-	const int32_t dstw = dst.get_w();
-	const int32_t dsth = dst.get_h();
+	const int32_t dstw = dst.width();
+	const int32_t dsth = dst.height();
 
 	int32_t ydiff = ITOFIX(end.y - start.y) / (end.x - start.x);
 	int32_t centery = ITOFIX(start.y);
@@ -467,8 +467,8 @@ template<typename T> static void dither_edge_vert
 	// TODO: seed this depending on field coordinates
 	uint32_t rnd = 0;
 
-	const int32_t dstw = dst.get_w();
-	const int32_t dsth = dst.get_h();
+	const int32_t dstw = dst.width();
+	const int32_t dsth = dst.height();
 
 	int32_t xdiff = ITOFIX(end.x - start.x) / (end.y - start.y);
 	int32_t centerx = ITOFIX(start.x);
@@ -535,8 +535,8 @@ template<typename T> static void dither_edge_vert
 template<typename T> static void render_road_horiz
 	(SDLSurface & dst, Point const start, Point const end, SDLSurface const & src)
 {
-	int32_t const dstw = dst.get_w();
-	int32_t const dsth = dst.get_h();
+	int32_t const dstw = dst.width();
+	int32_t const dsth = dst.height();
 
 	int32_t const ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int32_t centery = start.y << 16;
@@ -562,8 +562,8 @@ template<typename T> static void render_road_horiz
 template<typename T> static void render_road_vert
 	(SDLSurface & dst, Point const start, Point const end, SDLSurface const & src)
 {
-	int32_t const dstw = dst.get_w();
-	int32_t const dsth = dst.get_h();
+	int32_t const dstw = dst.width();
+	int32_t const dsth = dst.height();
 
 	int32_t const xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int32_t centerx = start.x << 16;
@@ -598,10 +598,8 @@ template<typename T> static void draw_field_int
 	 Texture const &  f_d_texture,
 	 Texture const &  f_r_texture)
 {
-	SDLSurface* rt_busy = const_cast<SDLSurface*>
-		(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Busy)));
-	SDLSurface* rt_normal = const_cast<SDLSurface*>
-		(static_cast<const SDLSurface*>(g_gr->get_road_texture(Widelands::Road_Normal)));
+	SDLSurface& rt_busy = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Busy));
+	SDLSurface& rt_normal = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Normal));
 
 	dst.lock(Surface::Lock_Normal);
 
@@ -616,10 +614,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_horiz<T> (dst, f_vert, r_vert, *rt_normal);
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_horiz<T> (dst, f_vert, r_vert, *rt_busy);
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
 				break;
 			default:
 				assert(false);
@@ -635,10 +633,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, br_vert, *rt_normal);
+				render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, br_vert, *rt_busy);
+				render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
 				break;
 			default:
 				assert(false);
@@ -654,10 +652,10 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, bl_vert, *rt_normal);
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, bl_vert, *rt_busy);
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
 				break;
 			default:
 				assert(false);

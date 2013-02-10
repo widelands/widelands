@@ -221,8 +221,8 @@ uint8_t MapGenerator::make_node_elevation
 	if (m_mapInfo.islandMode) {
 		int32_t const border_dist =
 			std::min
-				(std::min(c.x, static_cast<X_Coordinate>(m_mapInfo.w - c.x)),
-				 std::min(c.y, static_cast<Y_Coordinate>(m_mapInfo.h - c.y)));
+				(std::min<X_Coordinate>(c.x, m_mapInfo.w - c.x),
+				 std::min<Y_Coordinate>(c.y, m_mapInfo.h - c.y));
 		if (border_dist <= ISLAND_BORDER) {
 			res_h =
 				static_cast<uint8_t>

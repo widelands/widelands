@@ -45,7 +45,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 :
 Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs Menu")),
 
-m_tabpanel          (this, 0, 0, g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
+m_tabpanel          (this, 0, 0, g_gr->images().get("pics/but1.png")),
 m_pit               (pit),
 m_click_recursion_protect(false)
 {
@@ -63,17 +63,17 @@ m_click_recursion_protect(false)
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
-		const IPicture* pic = g_gr->imgcache().load(PicMod_Game, world.get_bob_descr(j)->get_picture());
-		uint32_t w = pic->get_w();
-		uint32_t h = pic->get_h();
+		const Image* pic = g_gr->images().get(world.get_bob_descr(j)->get_picture());
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		if (w > width)
 			width = w;
 		if (h > height)
 			height = h;
 	}
 
-	const IPicture* tab_icon =
-		g_gr->imgcache().load(PicMod_Game, "pics/list_first_entry.png");
+	const Image* tab_icon =
+		g_gr->images().get("pics/list_first_entry.png");
 	Point pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;
@@ -91,7 +91,7 @@ m_click_recursion_protect(false)
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,
 			 pos,
-			 g_gr->imgcache().load(PicMod_Game, descr.get_picture()),
+			 g_gr->images().get(descr.get_picture()),
 			 critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);

@@ -22,9 +22,10 @@
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "wlapplication.h"
 #include "log.h"
+#include "wlapplication.h"
 
 #include "container_iterate.h"
 
@@ -70,9 +71,9 @@ BaseListselect::BaseListselect
 
 	if (show_check) {
 		uint32_t pic_h;
-		m_check_pic = g_gr->imgcache().load(PicMod_Game,  "pics/list_selected.png");
-		m_max_pic_width = m_check_pic->get_w();
-		pic_h = m_check_pic->get_h();
+		m_check_pic = g_gr->images().get("pics/list_selected.png");
+		m_max_pic_width = m_check_pic->width();
+		pic_h = m_check_pic->height();
 		if (pic_h > m_lineheight)
 			m_lineheight = pic_h;
 	}
@@ -116,7 +117,7 @@ void BaseListselect::clear() {
 void BaseListselect::add
 	(char const * const   name,
 	 uint32_t             entry,
-	 const IPicture*   pic,
+	 const Image*   pic,
 	 bool         const   sel,
 	 std::string  const & tooltip_text)
 {
@@ -131,8 +132,8 @@ void BaseListselect::add
 	if (!pic) {
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	} else {
-		uint32_t w = pic->get_w();
-		uint32_t h = pic->get_h();
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
 			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
 		if (m_max_pic_width < w)
@@ -154,7 +155,7 @@ void BaseListselect::add
 
 void BaseListselect::add_front
 	(char const * const   name,
-	 const IPicture*   pic,
+	 const Image*   pic,
 	 bool         const   sel,
 	 std::string  const & tooltip_text)
 {
@@ -173,8 +174,8 @@ void BaseListselect::add_front
 	if (!pic)
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	else {
-		uint32_t w = pic->get_w();
-		uint32_t h = pic->get_h();
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
 			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
 		if (m_max_pic_width < w)
@@ -411,7 +412,7 @@ void BaseListselect::draw(RenderTarget & dst)
 
 		// Now draw pictures
 		if (er.pic) {
-			uint32_t h = er.pic->get_h();
+			uint16_t h = er.pic->height();
 			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.pic);
 		}
 

@@ -22,7 +22,6 @@
 
 #include "interactive_base.h"
 #include "logic/game.h"
-#include "graphic/graphic.h"
 #include "general_statistics_menu.h"
 
 struct ChatOverlay;

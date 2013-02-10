@@ -27,6 +27,7 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/surface_cache.h"
 #include "graphic/texture.h"
 
 #include "wui/mapviewpixelconstants.h"
@@ -53,23 +54,21 @@ GameRendererGL::~GameRendererGL()
 
 const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture(const Widelands::World & world)
 {
-	char fname[256];
-	snprintf(fname, sizeof(fname), "%s/pics/edge.png", world.basedir().c_str());
-	std::string cachename = std::string("gltex#") + fname;
+	const std::string fname = world.basedir() + "/pics/edge.png";
+	const std::string cachename = std::string("gltex#") + fname;
 
-	const GLSurfaceTexture * edgetexture =
-		dynamic_cast<const GLSurfaceTexture *>(g_gr->imgcache().get(PicMod_Game, cachename));
-	if (!edgetexture) {
-		FileRead fr;
-		fr.fastOpen(*g_fs, fname);
+	if (Surface* surface = g_gr->surfaces().get(cachename))
+		return dynamic_cast<GLSurfaceTexture *>(surface);
 
-		SDL_Surface * sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-		if (!sdlsurf)
-			throw wexception("%s", IMG_GetError());
+	FileRead fr;
+	fr.fastOpen(*g_fs, fname.c_str());
 
-		edgetexture = new GLSurfaceTexture(sdlsurf, true);
-		g_gr->imgcache().insert(PicMod_Game, cachename, edgetexture);
-	}
+	SDL_Surface * sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+	if (!sdlsurf)
+		throw wexception("%s", IMG_GetError());
+
+	GLSurfaceTexture * edgetexture = new GLSurfaceTexture(sdlsurf, true);
+	g_gr->surfaces().insert(cachename, edgetexture);
 	return edgetexture;
 }
 
@@ -131,7 +130,7 @@ void GameRendererGL::draw()
 	m_patch_size.h = ((m_maxfy - m_minfy + 1 + PatchSize) / PatchSize) * PatchSize;
 
 	glScissor
-		(m_rect.x, m_surface->get_h() - m_rect.y - m_rect.h,
+		(m_rect.x, m_surface->height() - m_rect.y - m_rect.h,
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
@@ -636,11 +635,11 @@ void GameRendererGL::draw_roads()
 		return;
 
 	GLuint rt_normal =
-		dynamic_cast<GLSurfaceTexture const &>
-		(*g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
+		dynamic_cast<const GLSurfaceTexture &>
+		(g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
 	GLuint rt_busy =
-		dynamic_cast<GLSurfaceTexture const &>
-		(*g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
+		dynamic_cast<const GLSurfaceTexture &>
+		(g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
 
 	glVertexPointer(2, GL_FLOAT, sizeof(basevertex), &m_road_vertices[0].x);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(basevertex), &m_road_vertices[0].tcx);

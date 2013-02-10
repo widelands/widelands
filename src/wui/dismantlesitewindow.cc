@@ -19,6 +19,7 @@
 
 
 #include "buildingwindow.h"
+#include "graphic/graphic.h"
 #include "logic/dismantlesite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
@@ -65,7 +66,7 @@ DismantleSite_Window::DismantleSite_Window
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
-	get_tabs()->add("wares", g_gr->imgcache().load(PicMod_UI, pic_tab_wares), &box, _("Building materials"));
+	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }
 
 

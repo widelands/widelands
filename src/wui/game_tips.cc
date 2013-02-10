@@ -20,13 +20,14 @@
 #include "game_tips.h"
 
 #include "constants.h"
-#include "io/fileread.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
-#include "text_layout.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
+#include "io/fileread.h"
 #include "profile/profile.h"
+#include "text_layout.h"
 
 #define DEFAULT_INTERVAL 5  // seconds
 #define BG_IMAGE "pics/tips_bg.png"
@@ -105,21 +106,21 @@ void GameTips::stop() {
 
 void GameTips::show_tip(int32_t index) {
 	// try to load a background
-	const IPicture* pic_background = g_gr->imgcache().load(PicMod_Menu, BG_IMAGE);
+	const Image* pic_background = g_gr->images().get(BG_IMAGE);
 	assert(pic_background);
 
 	RenderTarget & rt = *g_gr->get_render_target();
 	Rect tips_area;
 
-	uint32_t w = pic_background->get_w();
-	uint32_t h = pic_background->get_h();
+	uint16_t w = pic_background->width();
+	uint16_t h = pic_background->height();
 	Point pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
 	tips_area = Rect(pt, w, h);
 	rt.blit(pt, pic_background);
 
 	Point center(tips_area.x + tips_area.w / 2, tips_area.y + tips_area.h / 2);
-	const IPicture* rendered_text = UI::g_fh1->render(as_game_tip(m_tips[index].text), tips_area.w);
-	rt.blit(center - Point(rendered_text->get_w() / 2, rendered_text->get_h() / 2), rendered_text);
+	const Image* rendered_text = UI::g_fh1->render(as_game_tip(m_tips[index].text), tips_area.w);
+	rt.blit(center - Point(rendered_text->width() / 2, rendered_text->height() / 2), rendered_text);
 
 	g_gr->update_rectangle(tips_area);
 }

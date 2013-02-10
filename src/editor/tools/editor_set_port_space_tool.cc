@@ -21,7 +21,6 @@
 
 #include "logic/building.h"
 #include "editor_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/mapfringeregion.h"
 #include "wui/overlay_manager.h"

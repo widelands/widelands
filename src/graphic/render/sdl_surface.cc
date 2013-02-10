@@ -24,18 +24,9 @@
 #include "sdl_surface.h"
 
 SDLSurface::~SDLSurface() {
-	if (m_surface)
-		SDL_FreeSurface(m_surface);
-}
+	assert(m_surface);
 
-void SDLSurface::set_sdl_surface(SDL_Surface & surface)
-{
-	if (m_surface)
-		SDL_FreeSurface(m_surface);
-
-	m_surface = &surface;
-	m_w = m_surface->w;
-	m_h = m_surface->h;
+	SDL_FreeSurface(m_surface);
 }
 
 const SDL_PixelFormat & SDLSurface::format() const {
@@ -64,12 +55,12 @@ void SDLSurface::unlock(UnlockMode) {
 		SDL_UnlockSurface(m_surface);
 }
 
-uint32_t SDLSurface::get_pixel(uint32_t x, uint32_t y) {
+uint32_t SDLSurface::get_pixel(uint16_t x, uint16_t y) {
 	x += m_offsx;
 	y += m_offsy;
 
-	assert(x < get_w());
-	assert(y < get_h());
+	assert(x < width());
+	assert(y < height());
 	assert(m_surface);
 
 	// Locking not needed: reading only
@@ -106,11 +97,11 @@ uint32_t SDLSurface::get_pixel(uint32_t x, uint32_t y) {
 	return 0; // Should never be here
 }
 
-void SDLSurface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
+void SDLSurface::set_pixel(uint16_t x, uint16_t y, const Uint32 clr) {
 	x += m_offsx;
 	y += m_offsy;
 
-	if (x >= get_w() || y >= get_h())
+	if (x >= width() || y >= height())
 		return;
 	assert(m_surface);
 
@@ -153,8 +144,7 @@ void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
-	assert(rc.w >= 1);
-	assert(rc.h >= 1);
+
 	const uint32_t color = clr.map(format());
 
 	const Point bl = rc.bottom_right() - Point(1, 1);
@@ -179,8 +169,7 @@ void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
-	assert(rc.w >= 1);
-	assert(rc.h >= 1);
+
 	const uint32_t color = clr.map(format());
 
 	SDL_Rect r = {
@@ -330,9 +319,9 @@ void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 
 
 void SDLSurface::blit
-	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm)
+	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm)
 {
-	const SDLSurface* sdlsurf = static_cast<const SDLSurface*>(src);
+	SDL_Surface* sdlsurf = static_cast<const SDLSurface*>(src)->get_sdl_surface();
 	SDL_Rect srcrect = {
 		static_cast<Sint16>(srcrc.x), static_cast<Sint16>(srcrc.y),
 		static_cast<Uint16>(srcrc.w), static_cast<Uint16>(srcrc.h)
@@ -345,14 +334,14 @@ void SDLSurface::blit
 	bool alpha;
 	uint8_t alphaval;
 	if (cm == CM_Solid || cm == CM_Copy) {
-		alpha = sdlsurf->get_sdl_surface()->flags & SDL_SRCALPHA;
-		alphaval = sdlsurf->get_sdl_surface()->format->alpha;
-		SDL_SetAlpha(sdlsurf->get_sdl_surface(), 0, 0);
+		alpha = sdlsurf->flags & SDL_SRCALPHA;
+		alphaval = sdlsurf->format->alpha;
+		SDL_SetAlpha(sdlsurf, 0, 0);
 	}
 
-	SDL_BlitSurface(sdlsurf->get_sdl_surface(), &srcrect, m_surface, &dstrect);
+	SDL_BlitSurface(sdlsurf, &srcrect, m_surface, &dstrect);
 
 	if (cm == CM_Solid || cm == CM_Copy) {
-		SDL_SetAlpha(sdlsurf->get_sdl_surface(), alpha?SDL_SRCALPHA:0, alphaval);
+		SDL_SetAlpha(sdlsurf, alpha?SDL_SRCALPHA:0, alphaval);
 	}
 }

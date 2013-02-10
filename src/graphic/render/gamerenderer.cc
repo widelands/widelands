@@ -17,17 +17,16 @@
  *
  */
 
-#include "gamerenderer.h"
-
-#include "graphic/rendertarget.h"
-
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
-
+#include "upcast.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
 
-#include "upcast.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+
+#include "gamerenderer.h"
 
 using namespace Widelands;
 
@@ -179,7 +178,7 @@ void GameRenderer::draw_objects()
 								anim = csinf->becomes->get_animation("idle");
 							}
 						}
-						const AnimationGfx::Index nr_frames = g_gr->nr_frames(anim);
+						const size_t nr_frames = g_gr->nr_frames(anim);
 						uint32_t cur_frame =
 							csinf->totaltime ? csinf->completedtime * nr_frames / csinf->totaltime : 0;
 						uint32_t tanim = cur_frame * FRAME_LENGTH;

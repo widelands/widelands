@@ -20,12 +20,13 @@
 #ifndef MULTIPLAYERSETUPGROUP_H
 #define MULTIPLAYERSETUPGROUP_H
 
+#include <map>
+#include <string>
+
 #include "constants.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
-
-#include <string>
 
 #define MAXCLIENTS 64
 
@@ -63,7 +64,7 @@ private:
 	uint32_t    m_buth, m_fsize;
 	std::string m_fname;
 
-	std::map<std::string, const IPicture* > m_tribepics;
+	std::map<std::string, const Image* > m_tribepics;
 	std::map<std::string, std::string> m_tribenames;
 };
 

@@ -19,17 +19,18 @@
 
 #include "widelands_map_building_data_packet.h"
 
+#include "economy/request.h"
+#include "graphic/graphic.h"
 #include "logic/constructionsite.h"
 #include "logic/editor_game_base.h"
-#include "wui/interactive_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "economy/request.h"
 #include "logic/tribe.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
+#include "wui/interactive_base.h"
 
 #include "upcast.h"
 

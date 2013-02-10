@@ -25,15 +25,16 @@
 
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "text_layout.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
+#include "text_layout.h"
 #include "wui/interactive_player.h"
 
 #include "constructionsite.h"
@@ -224,7 +225,7 @@ Called whenever building graphics need to be loaded.
 void Building_Descr::load_graphics()
 {
 	if (m_buildicon_fname.size())
-		m_buildicon = g_gr->imgcache().load(PicMod_Game, m_buildicon_fname.c_str());
+		m_buildicon = g_gr->images().get(m_buildicon_fname.c_str());
 }
 
 /*
@@ -757,11 +758,9 @@ void Building::draw_help
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
-		UI::g_fh1->draw_text
-			(dst, pos - Point(0, 48),
-			 info_string(igbase.building_census_format()),
-			 0,
-			 UI::Align_Center);
+		dst.blit
+			(pos - Point(0, 48), UI::g_fh1->render(info_string(igbase.building_census_format())),
+			 CM_Normal, UI::Align_Center);
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
@@ -770,11 +769,9 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		UI::g_fh1->draw_text
-			(dst, pos - Point(0, 35),
-			 info_string(igbase.building_statistics_format()),
-			 0,
-			 UI::Align_Center);
+		dst.blit
+			(pos - Point(0, 35), UI::g_fh1->render(info_string(igbase.building_statistics_format())),
+			 CM_Normal, UI::Align_Center);
 	}
 }
 
@@ -920,7 +917,7 @@ void Building::send_message
 	 uint32_t throttle_radius)
 {
 	std::string const & picnametempl =
-		g_anim.get_animation(descr().get_ui_anim())->picnametempl;
+		g_anim.get_animation(descr().get_ui_anim()).picnametempl;
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + picnametempl.size() + 1 +

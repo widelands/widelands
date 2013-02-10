@@ -103,7 +103,7 @@ void Widelands::Map_Object::create_debug_panels
 	(Widelands::Editor_Game_Base const & egbase, UI::Tab_Panel & tabs)
 {
 	tabs.add
-		("debug", g_gr->imgcache().load(PicMod_Game, "pics/menu_debug.png"),
+		("debug", g_gr->images().get("pics/menu_debug.png"),
 		 new MapObjectDebugPanel(tabs, egbase, *this));
 }
 
@@ -148,7 +148,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	m_object          (&obj),
 	m_tabs
 		(this, 0, 0,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"))
+		 g_gr->images().get("pics/but1.png"))
 {
 	char buffer[128];
 
@@ -243,7 +243,7 @@ FieldDebugWindow::FieldDebugWindow
 	m_ui_immovable
 		(this, "immovable",
 		 0, 280, 214, 24,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 ""),
 
 	m_ui_bobs(this, 0, 304, 214, 96)
@@ -342,12 +342,12 @@ void FieldDebugWindow::think()
 		switch (vision) {
 		case 0: str += "  never seen\n"; break;
 		case 1: {
-			AnimationData const * data = 0;
-			if (player_field.map_object_descr[Widelands::TCoords<>::None])
-				data =
-					g_anim.get_animation
-						(player_field.map_object_descr[Widelands::TCoords<>::None]
-						 ->main_animation());
+			std::string animation_name = "(none)";
+			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
+				animation_name = g_anim.get_animation
+					(player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation()).picnametempl;
+			}
+
 			snprintf
 				(buffer, sizeof(buffer),
 				 "  last seen at %u:\n"
@@ -356,7 +356,7 @@ void FieldDebugWindow::think()
 				 "      ",
 				 player_field.time_node_last_unseen,
 				 player_field.owner,
-				 data ? data->picnametempl.c_str() : "(none)");
+				 animation_name.c_str());
 			str += buffer;
 			break;
 		}

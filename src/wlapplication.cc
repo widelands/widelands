@@ -309,7 +309,7 @@ m_redirected_stdio(false)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
 
 	UI::g_fh = new UI::Font_Handler();
-	UI::g_fh1 = UI::create_fonthandler(*g_gr, g_fs);
+	UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();

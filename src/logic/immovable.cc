@@ -526,10 +526,10 @@ void Immovable::draw_construction
 	if (done > total)
 		done = total;
 
-	const AnimationGfx::Index nr_frames = g_gr->nr_frames(m_anim);
-	uint32_t frametime = g_anim.get_animation(m_anim)->frametime;
+	const size_t nr_frames = g_gr->nr_frames(m_anim);
+	uint32_t frametime = g_anim.get_animation(m_anim).frametime;
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
-	const AnimationGfx::Index current_frame = done / units_per_frame;
+	const size_t current_frame = done / units_per_frame;
 	uint32_t curw, curh;
 	g_gr->get_animation_size(m_anim, current_frame * frametime, curw, curh);
 

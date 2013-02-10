@@ -20,8 +20,9 @@
 #include "fileview.h"
 
 #include "constants.h"
-#include "io/filesystem/filesystem.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
+#include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
 
 
@@ -40,7 +41,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 	close_button
 		(this, "close",
 		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
 	close_button.sigclicked.connect(boost::bind(&Fullscreen_Menu_TextView::end_modal, boost::ref(*this), 0));

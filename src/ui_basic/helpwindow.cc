@@ -23,13 +23,14 @@
 #include "scripting/scripting.h"
 #include "io/filesystem/layered_filesystem.h"
 
-#include "log.h"
-#include "constants.h"
-#include "i18n.h"
-#include "window.h"
 #include "button.h"
+#include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "log.h"
+#include "window.h"
 #include "wlapplication.h"
 
 #include "helpwindow.h"
@@ -79,7 +80,7 @@ HelpWindow::HelpWindow
 		(this, "ok",
 		 in_width / 3, in_height - but_height * 3 / 2,
 		 in_width / 3, but_height,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::pressedOk, boost::ref(*this)));
 	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));

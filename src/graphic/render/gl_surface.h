@@ -33,13 +33,13 @@ public:
 	virtual ~GLSurface() {}
 
 	/// Interface implementations
-	virtual uint32_t get_w() const;
-	virtual uint32_t get_h() const;
+	virtual uint16_t width() const;
+	virtual uint16_t height() const;
 	virtual uint8_t * get_pixels() const;
-	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr);
-	virtual uint32_t get_pixel(uint32_t x, uint32_t y);
+	virtual void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
+	virtual uint32_t get_pixel(uint16_t x, uint16_t y);
 
-	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
+	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm);
 	virtual void fill_rect(const Rect&, RGBAColor);
 	virtual void draw_rect(const Rect&, RGBColor);
 	virtual void brighten_rect(const Rect&, int32_t factor);
@@ -50,7 +50,7 @@ public:
 protected:
 
 	/// Logical width and height of the surface
-	uint32_t m_w, m_h;
+	uint16_t m_w, m_h;
 
 	/// Pixel data, while the texture is locked
 	boost::scoped_array<uint8_t> m_pixels;

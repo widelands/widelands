@@ -34,7 +34,6 @@
 #include "game.h"
 #include "game_data_error.h"
 #include "gamecontroller.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
 #include "map_io/widelands_map_map_object_loader.h"

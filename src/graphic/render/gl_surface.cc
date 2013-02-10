@@ -25,11 +25,11 @@
 
 #include "gl_surface.h"
 
-uint32_t GLSurface::get_w() const {
+uint16_t GLSurface::width() const {
 	return m_w;
 }
 
-uint32_t GLSurface::get_h() const {
+uint16_t GLSurface::height() const {
 	return m_h;
 }
 
@@ -38,7 +38,7 @@ uint8_t * GLSurface::get_pixels() const
 	return m_pixels.get();
 }
 
-uint32_t GLSurface::get_pixel(uint32_t x, uint32_t y) {
+uint32_t GLSurface::get_pixel(uint16_t x, uint16_t y) {
 	assert(m_pixels);
 	assert(x < m_w);
 	assert(y < m_h);
@@ -47,7 +47,7 @@ uint32_t GLSurface::get_pixel(uint32_t x, uint32_t y) {
 	return *(reinterpret_cast<uint32_t *>(data));
 }
 
-void GLSurface::set_pixel(uint32_t x, uint32_t y, uint32_t clr) {
+void GLSurface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 	assert(m_pixels);
 	assert(x < m_w);
 	assert(y < m_h);
@@ -169,14 +169,14 @@ void GLSurface::draw_line
 }
 
 void GLSurface::blit
-	(const Point& dst, const IPicture* pic, const Rect& srcrc, Composite cm)
+	(const Point& dst, const Surface* image, const Rect& srcrc, Composite cm)
 {
 	// Note: This function is highly optimized and therefore does not restore
 	// all state. It also assumes that all other glStuff restores state to make
 	// this function faster.
 
 	assert(g_opengl);
-	const GLSurfaceTexture* src = static_cast<const GLSurfaceTexture*>(pic);
+	const GLSurfaceTexture& surf = *static_cast<const GLSurfaceTexture*>(image);
 
 	/* Set a texture scaling factor. Normally texture coordinates
 	* (see glBegin()...glEnd() Block below) are given in the range 0-1
@@ -189,8 +189,8 @@ void GLSurface::blit
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
 	glScalef
-		(1.0f / static_cast<GLfloat>(src->get_tex_w()),
-		 1.0f / static_cast<GLfloat>(src->get_tex_h()), 1);
+		(1.0f / static_cast<GLfloat>(surf.get_tex_w()),
+		 1.0f / static_cast<GLfloat>(surf.get_tex_h()), 1);
 
 	// Enable Alpha blending
 	if (cm == CM_Normal) {
@@ -200,7 +200,7 @@ void GLSurface::blit
 		glDisable(GL_BLEND);
 	}
 
-	glBindTexture(GL_TEXTURE_2D, src->get_gl_texture());
+	glBindTexture(GL_TEXTURE_2D, surf.get_gl_texture());
 
 	glBegin(GL_QUADS); {
 		// set color white, otherwise textures get mixed with color

@@ -24,10 +24,11 @@
 #include "boost/function.hpp"
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
-#include "graphic/graphic.h"
 
 #include <map>
 #include <set>
+
+class Image;
 
 /*
  * The Overlay Manager is responsible for the map overlays. He
@@ -75,7 +76,7 @@ struct Overlay_Manager {
 		uint32_t id;
 	};
 	struct Overlay_Info {
-		const IPicture* pic;
+		const Image* pic;
 		Point hotspot;
 	};
 
@@ -120,13 +121,13 @@ struct Overlay_Manager {
 	 */
 	void register_overlay
 		(Widelands::TCoords<>,
-		 const IPicture* pic,
+		 const Image* pic,
 		 int32_t level,
 		 Point   hotspot = Point::invalid(),
 		 Job_Id          = Job_Id::Null());
 
 	// removes all overlays when pic is zero
-	void remove_overlay(Widelands::TCoords<>, const IPicture* pic);
+	void remove_overlay(Widelands::TCoords<>, const Image* pic);
 	void remove_overlay(Job_Id);
 
 	uint8_t get_overlays(Widelands::FCoords c, Overlay_Info *) const;
@@ -167,7 +168,7 @@ private:
 	struct Registered_Overlays {
 		Registered_Overlays
 			(const Job_Id    Jobid,
-			 const IPicture* Picid,
+			 const Image* Picid,
 			 const Point     Hotspot,
 			 const int32_t   Level)
 			:
@@ -178,7 +179,7 @@ private:
 			jobids.insert(Jobid);
 		}
 		std::set<Job_Id> jobids;
-		const IPicture*  pic;
+		const Image*  pic;
 		Point            hotspot;
 		int32_t level;
 	};

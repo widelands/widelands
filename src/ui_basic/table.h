@@ -21,15 +21,18 @@
 #ifndef UI_TABLE_H
 #define UI_TABLE_H
 
-#include "align.h"
-#include "panel.h"
-
-#include "compile_assert.h"
-
 #include <limits>
 #include <vector>
+
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
+
+#include "align.h"
+#include "compile_assert.h"
+#include "rgbcolor.h"
+
+#include "panel.h"
+
 
 namespace UI {
 struct Scrollbar;
@@ -114,9 +117,9 @@ public:
 		Entry_Record(void * entry);
 
 		void set_picture
-			(uint8_t col, const IPicture* pic, std::string const & = std::string());
+			(uint8_t col, const Image* pic, std::string const & = std::string());
 		void set_string(uint8_t col, std::string const &);
-		const IPicture* get_picture(uint8_t col) const;
+		const Image* get_picture(uint8_t col) const;
 		std::string const & get_string(uint8_t col) const;
 		void * entry() const throw () {return m_entry;}
 		void set_color(const  RGBColor c) {
@@ -137,7 +140,7 @@ public:
 		bool     use_clr;
 		RGBColor clr;
 		struct _data {
-			const IPicture* d_picture;
+			const Image* d_picture;
 			std::string d_string;
 			bool d_checked;
 
