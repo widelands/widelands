@@ -216,7 +216,7 @@ m_toggle_help
 		 boost::ref(*this),
 		 boost::ref(m_mainm_windows.stock));
 
-#ifdef DEBUG //  only in debug builds
+#ifndef NDEBUG //  only in debug builds
 	addCommand
 		("switchplayer",
 		 boost::bind(&Interactive_Player::cmdSwitchPlayer, this, _1));

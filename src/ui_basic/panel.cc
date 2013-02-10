@@ -198,7 +198,7 @@ int32_t Panel::run()
 		if (_flags & pf_child_die)
 			check_child_death();
 
-#ifdef DEBUG
+#ifndef NDEBUG
 #ifndef WIN32
 		WLApplication::yield_double_game ();
 #endif

@@ -1408,7 +1408,7 @@ int Warehouse::outcorporateSoldier(Editor_Game_Base & /* egbase */, Soldier & so
 		soldiers.erase(i);
 		m_supply->remove_workers(ware, 1);
 	}
-#ifdef DEBUG
+#ifndef NDEBUG
 	else
 		throw wexception("outcorporateSoldier: soldier not in this warehouse!");
 #endif

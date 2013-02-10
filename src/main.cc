@@ -117,7 +117,7 @@ int main(int argc, char * argv[])
 
 		return 0;
 	}
-#ifndef DEBUG
+#ifdef NDEBUG
 	catch (const _wexception & e) {
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()

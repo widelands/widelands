@@ -802,7 +802,7 @@ void NetHost::run(bool const autorun)
 	broadcast(s);
 
 	Widelands::Game game;
-#ifdef DEBUG
+#ifndef NDEBUG
 	game.set_write_syncstream(true);
 #endif
 

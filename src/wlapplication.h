@@ -201,7 +201,7 @@ struct WLApplication {
 	bool campaign_game();
 	void replay();
 
-#ifdef DEBUG
+#ifndef NDEBUG
 #ifndef WIN32
 	//not all of these need to be public, but I consider signal handling
 	//a public interface

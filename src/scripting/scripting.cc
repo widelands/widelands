@@ -196,7 +196,7 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	m_L = lua_open();
 
 	// Open the Lua libraries
-#ifdef DEBUG
+#ifndef NDEBUG
 	static const luaL_Reg lualibs[] = {
 		{"", luaopen_base},
 		{LUA_LOADLIBNAME, luaopen_package},

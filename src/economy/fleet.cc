@@ -82,7 +82,7 @@ void Fleet::set_economy(Economy * e)
 		if (!m_ports.empty()) {
 			e = m_ports[0]->get_economy();
 		}
-#ifdef DEBUG
+#ifndef NDEBUG
 		else
 			assert(e == 0);
 #endif

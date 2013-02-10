@@ -329,7 +329,7 @@ void Map::cleanup() {
 
 	//  Remove all extra data. Pay attention here, maybe some freeing would be
 	//  needed.
-#ifdef DEBUG
+#ifndef NDEBUG
 	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
 		assert(m_extradatainfos[i].type == Extradata_Info::PIC);
 	}

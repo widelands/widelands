@@ -181,7 +181,7 @@ void NetClient::run ()
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
-#ifdef DEBUG
+#ifndef NDEBUG
 	game.set_write_syncstream(true);
 #endif
 

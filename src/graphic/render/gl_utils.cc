@@ -63,7 +63,7 @@ const SDL_PixelFormat & gl_rgba_format()
 GLenum _handle_glerror(const char * file, unsigned int line)
 {
 	GLenum err = glGetError();
-#ifdef DEBUG
+#ifndef NDEBUG
 	if (err == GL_NO_ERROR)
 		return err;
 

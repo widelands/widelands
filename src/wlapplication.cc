@@ -87,7 +87,7 @@
 #include <mach-o/dyld.h>
 #endif
 
-#ifdef DEBUG
+#ifndef NDEBUG
 #ifndef WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
@@ -1211,7 +1211,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("double")) {
-#ifdef DEBUG
+#ifndef NDEBUG
 #ifndef WIN32
 		init_double_game();
 #else
@@ -1432,7 +1432,7 @@ void WLApplication::show_usage()
 			 "                      if the window is overlapping with the\n"
 			 "                      panel.\n"
 			 "\n");
-#ifdef DEBUG
+#ifndef NDEBUG
 #ifndef WIN32
 	wout
 		<<
@@ -1451,7 +1451,7 @@ void WLApplication::show_usage()
 			 "Hope you enjoy this game!\n\n");
 }
 
-#ifdef DEBUG
+#ifndef NDEBUG
 #ifndef WIN32
 /**
  * Fork off a second game to test network gaming
@@ -1606,7 +1606,7 @@ void WLApplication::mainmenu()
 			messagetitle = _("Game data error");
 			message = e.what();
 		}
-#ifndef DEBUG
+#ifdef NDEBUG
 		catch (const std::exception & e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();

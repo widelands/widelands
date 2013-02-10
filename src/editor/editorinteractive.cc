@@ -106,10 +106,10 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	m_undo.set_enabled(false);
 	m_redo.set_enabled(false);
 
-#ifndef DEBUG
-	set_display_flag(Interactive_Base::dfDebug, false);
-#else
+#ifndef NDEBUG
 	set_display_flag(Interactive_Base::dfDebug, true);
+#else
+	set_display_flag(Interactive_Base::dfDebug, false);
 #endif
 
 	fieldclicked.connect(boost::bind(&Editor_Interactive::map_clicked, this, false));

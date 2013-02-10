@@ -77,7 +77,7 @@ Interactive_Base::Interactive_Base
 		(new InteractiveBaseInternals
 		 (new QuickNavigation(the_egbase, get_w(), get_h()))),
 	m_egbase                      (the_egbase),
-#ifdef DEBUG //  not in releases
+#ifndef NDEBUG //  not in releases
 	m_display_flags               (dfDebug),
 #else
 	m_display_flags               (0),
@@ -878,7 +878,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 					ctrl->setDesiredSpeed(1000 < speed ? speed - 1000 : 0);
 				}
 		return true;
-#ifdef DEBUG //  only in debug builds
+#ifndef NDEBUG //  only in debug builds
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
 				new GameChatMenu
