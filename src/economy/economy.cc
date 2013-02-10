@@ -139,12 +139,31 @@ void Economy::check_split(Flag & f1, Flag & f2)
 
 void Economy::_check_splits()
 {
+	Map & map = owner().egbase().map();
+
 	while (m_split_checks.size()) {
 		Flag * f1 = m_split_checks.back().first.get(owner().egbase());
 		Flag * f2 = m_split_checks.back().second.get(owner().egbase());
 		m_split_checks.pop_back();
-		if (!f1 || !f2)
+
+		if (!f1 || !f2) {
+			if (!f1 && !f2)
+				continue;
+			if (!f1)
+				f1 = f2;
+			if (f1->get_economy() != this)
+				continue;
+
+			// Handle the case when two or more roads are removed simultaneously
+			RouteAStar<AStarZeroEstimator> astar(*m_router, wwWORKER, AStarZeroEstimator());
+			astar.push(*f1);
+			std::set<OPtr<Flag> > reachable;
+			while (RoutingNode * current = astar.step())
+				reachable.insert(&current->base_flag());
+			if (reachable.size() != m_flags.size())
+				_split(reachable);
 			continue;
+		}
 
 		// If one (or both) of the flags have already been split off, we do not need to re-check
 		if (f1->get_economy() != this || f2->get_economy() != this)
@@ -154,7 +173,6 @@ void Economy::_check_splits()
 		// If f2 is not reached, split off all the nodes that have been reached from f1.
 		// This policy means that the newly created economy, which contains all the
 		// flags that have been split, is already connected.
-		Map & map = owner().egbase().map();
 		RouteAStar<AStarEstimator> astar(*m_router, wwWORKER, AStarEstimator(map, *f2));
 		astar.push(*f1);
 		std::set<OPtr<Flag> > reachable;
