@@ -2761,8 +2761,9 @@ bool Worker::run_scout(Game & game, State & state, Action const & action)
 		("  Try scouting for %i ms with search in radius of %i\n",
 		 action.iparam2, action.iparam1);
 
-	start_task_scout(game, action.iparam1, action.iparam2);
 	++state.ivar1;
+	start_task_scout(game, action.iparam1, action.iparam2);
+	// state reference may be invalid now
 	return true;
 }
 
