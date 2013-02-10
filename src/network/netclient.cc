@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2012 by the Widelands Development Team
+ * Copyright (C) 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -386,7 +386,7 @@ bool NetClient::canLaunch()
 
 	// if there is one client that is currently receiving a file, we can not launch.
 	for (uint8_t i = 0; i < d->settings.users.size(); ++i) {
-		if (d->settings.users[i].position = d->settings.users[i].notConnected())
+		if (d->settings.users[i].position == d->settings.users[i].notConnected())
 			continue;
 		if (!d->settings.users[i].ready)
 			return false;
@@ -708,6 +708,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		log
 			("[Client] SETTING_MAP '%s' '%s'\n",
 			 d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
+
+		// New map was set, so we clean up the buffer of a previously requested file
+		if (file)
+			delete file;
 		break;
 	}
 
@@ -749,7 +753,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 					char * complete = complete_buf.get();
 #endif
 					fr.DataComplete(complete, bytes);
-					MD5Checksum<FileRead> md5sum;
+					SimpleMD5Checksum md5sum;
 					md5sum.Data(complete, bytes);
 					md5sum.FinishChecksum();
 					std::string localmd5 = md5sum.GetChecksum().str();
@@ -783,6 +787,12 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_FILE_PART: {
+		// Only go on, if we are waiting for a file part at the moment. It can happen, that an "unrequested"
+		// part is send by the server if the map was changed just a moment ago and there was an outstanding
+		// request from the client.
+		if (!file)
+			return; // silently ignore
+
 		uint32_t part = packet.Unsigned32();
 		uint32_t size = packet.Unsigned32();
 
@@ -834,7 +844,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			char * complete = complete_buf.get();
 #endif
 			fr.DataComplete(complete, file->bytes);
-			MD5Checksum<FileRead> md5sum;
+			SimpleMD5Checksum md5sum;
 			md5sum.Data(complete, file->bytes);
 			md5sum.FinishChecksum();
 			std::string localmd5 = md5sum.GetChecksum().str();

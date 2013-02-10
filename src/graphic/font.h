@@ -20,8 +20,6 @@
 #ifndef FONT_H
 #define FONT_H
 
-#include <boost/shared_ptr.hpp>
-
 #include <SDL_ttf.h>
 
 #include "io/fileread.h"

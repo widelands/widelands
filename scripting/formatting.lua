@@ -37,7 +37,7 @@ end
 --
 --    :returns: A paragraph with s formatted as heading.
 function h1(s)
-   return "<p font-size=18 font-weight=bold font-color=D1D1D1>" --font-face=FreeSerif
+   return "<p font-size=18 font-weight=bold font-color=D1D1D1>" --font-face=DejaVuSerif
       ..  s .. "<br></p><p font-size=8> <br></p>"
 end
 
@@ -48,7 +48,7 @@ end
 --
 --    :returns: A paragraph with s formatted as heading.
 function h2(s)
-   return "<p font-size=14 font-weight=bold font-color=D1D1D1>" --font-face=FreeSerif
+   return "<p font-size=14 font-weight=bold font-color=D1D1D1>" --font-face=DejaVuSerif
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
@@ -60,7 +60,7 @@ end
 --    :returns: A paragraph with s formatted as heading.
 --
 function h3(s)
-   return "<p font-size=13 font-color=D1D1D1>" --font-face=FreeSerif font-style=italic
+   return "<p font-size=13 font-color=D1D1D1>" --font-face=DejaVuSerif font-style=italic
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
@@ -72,7 +72,7 @@ end
 --    :returns: A paragraph with s formatted as heading.
 --
 function h4(s)
-   return "<p font-size=12 font-style=italic font-color=D1D1D1>" --font-face=FreeSerif
+   return "<p font-size=12 font-style=italic font-color=D1D1D1>" --font-face=DejaVuSerif
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
@@ -126,7 +126,7 @@ function speech(img, clr, g_title, g_text)
 
    local s = ""
    if title then
-      s = rt("<p font-size=20 font-weight=bold font-face=FreeSerif " ..
+      s = rt("<p font-size=20 font-weight=bold font-face=DejaVuSerif " ..
          ("font-color=%s>"):format(clr) .. title ..
          "</p><p font-size=8> <br></p>"
       )

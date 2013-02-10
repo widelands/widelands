@@ -21,19 +21,20 @@
 #define RENDERTARGET_H
 
 #include "compositemode.h"
-#include "picture_id.h"
-#include "surfaceptr.h"
+#include "picture.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
 #include <vector>
+
+class Surface;
 
 namespace Widelands {
 struct Player;
 };
 
 /**
- * This abstract class represents anything that can be rendered to.
+ * This class represents anything that can be rendered to.
  *
  * It supports windows, which are composed of a clip rectangle and a drawing
  * offset:
@@ -47,9 +48,9 @@ struct Player;
  * \note If the sub-window would be empty/invisible, \ref enter_window() returns
  * false and doesn't change the window state at all.
 */
-struct RenderTarget {
-	RenderTarget(SurfacePtr);
-	RenderTarget(OffscreenSurfacePtr);
+class RenderTarget {
+public:
+	RenderTarget(Surface*);
 	void set_window(Rect const & rc, Point const & ofs);
 	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
 
@@ -57,19 +58,14 @@ struct RenderTarget {
 	int32_t get_h() const;
 
 	void draw_line
-		(int32_t x1,
-		 int32_t y1,
-		 int32_t x2,
-		 int32_t y2,
-		 RGBColor color, uint8_t width = 1);
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
 	void draw_rect(Rect, RGBColor);
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
-	void clear();
 
-	void blit(Point dst, PictureID picture, Composite cm = CM_Normal);
-	void blitrect(Point dst, PictureID picture, Rect src, Composite cm = CM_Normal);
-	void tile(Rect, PictureID picture, Point ofs, Composite cm = CM_Normal);
+	void blit(const Point& dst, const IPicture* picture, Composite cm = CM_Normal);
+	void blitrect(Point dst, const IPicture* picture, Rect src, Composite cm = CM_Normal);
+	void tile(Rect, const IPicture* picture, Point ofs, Composite cm = CM_Normal);
 
 	void drawanim
 		(Point                     dst,
@@ -91,20 +87,19 @@ struct RenderTarget {
 
 	void reset();
 
-	SurfacePtr get_surface() {return m_surface;}
+	Surface* get_surface() {return m_surface;}
 
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, PictureID src, Rect srcrc, Composite cm = CM_Normal);
+	void doblit(Point dst, const IPicture* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
-	SurfacePtr m_surface;
+	Surface* m_surface;
 	///The current clip rectangle
 	Rect m_rect;
 	///Drawing offset
 	Point m_offset;
-
 };
 
 #endif

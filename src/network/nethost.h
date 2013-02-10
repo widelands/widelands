@@ -135,7 +135,7 @@ private:
 	bool haveUserName
 		(std::string const & name,
 		 uint8_t             ignoreplayer = UserSettings::none());
-	void welcomeClient(uint32_t number, std::string const & playername);
+	void welcomeClient(uint32_t number, std::string & playername);
 	void committedNetworkTime(int32_t time);
 	void recvClientTime(uint32_t number, int32_t time);
 

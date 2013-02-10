@@ -1,0 +1,12 @@
+<rt padding=15>
+<p>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+<font italic=yes bold=yes underline=true ref="all_three">crazy world</font><font underline=1>no link no</font><font underline=1 ref="sub link">this is a link</font>
+magna aliquyam erat, sed diam voluptua. At
+<font italic=yes bold=yes ref="italic/bold">crazy world</font>
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+<font underline=yes bold=yes ref="underline://bold">crazy world</font>
+no sea takimata sanctus est Lorem ipsum dolor sit amet
+<font italic=yes ref="#underlined&'italic" underline=yes>crazy world</font>.
+</p>
+</rt>

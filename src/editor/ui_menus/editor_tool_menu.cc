@@ -59,7 +59,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tool Menu"))
    m_radioselect.add_button                                                   \
       (this,                                                                  \
        pos,                                                                   \
-       g_gr->get_picture                                                      \
+       g_gr->imgcache().load                                                      \
           (PicMod_Game, "pics/editor_menu_tool_" pic ".png"),                 \
        tooltip);                                                              \
    pos.x += width + spacing;                                                  \

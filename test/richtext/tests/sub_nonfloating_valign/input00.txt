@@ -1,0 +1,7 @@
+<rt db_show_spaces=1>
+<p><img src="wl-ico-128.png"><sub valign=center width=100 padding=5 background="ffffff">
+   <p align=center>
+		<font size=10>lorem larum loeffestiel blad lorem lorem loerm ljsdf kljs df</font>
+	</p>
+</sub><img src="wl-ico-128.png"></p>
+</rt>

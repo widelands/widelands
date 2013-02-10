@@ -20,7 +20,6 @@
 #ifndef _ATTACK_BOX_H_
 #define _ATTACK_BOX_H_
 
-#include "graphic/picture_id.h"
 #include "logic/attackable.h"
 #include "logic/bob.h"
 #include "logic/soldier.h"

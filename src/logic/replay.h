@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2009,2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,22 +40,22 @@ struct md5_checksum;
 namespace Widelands {
 struct Command;
 struct Game;
-struct PlayerCommand;
+class PlayerCommand;
 struct StreamRead;
 struct StreamWrite;
 
 /**
  * Read game replays from disk.
  */
-struct ReplayReader {
-	ReplayReader(Game &, std::string const & filename);
+class ReplayReader {
+public:
+	ReplayReader(Game & game, const std::string & filename);
 	~ReplayReader();
 
 	Command * GetNextCommand(uint32_t time);
 	bool EndOfReplay();
 
 private:
-	Game       & m_game;
 	StreamRead * m_cmdlog;
 
 	uint32_t m_replaytime;
@@ -64,12 +64,13 @@ private:
 /**
  * Write game replays to disk.
  */
-struct ReplayWriter {
-	ReplayWriter(Game &, std::string const & filename);
+class ReplayWriter {
+public:
+	ReplayWriter(Game &, const std::string & filename);
 	~ReplayWriter();
 
 	void SendPlayerCommand(PlayerCommand *);
-	void SendSync(md5_checksum const &);
+	void SendSync(const md5_checksum &);
 
 private:
 	Game        & m_game;

@@ -68,8 +68,6 @@ protected:
 	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();
-	void show_costPrev(WaresMapDisplay::maptype const & cost, std::string text);
-	void hide_costPrev();
 
 	void create_ware_queue_panel
 		(UI::Box *, Widelands::Building &, Widelands::WaresQueue *, bool = false);
@@ -84,9 +82,6 @@ private:
 
 	UI::Tab_Panel * m_tabs;
 
-	UI::Textarea * m_prevtext;
-	WaresMapDisplay * m_enhancecostPrev;
-
 	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
 	UI::Button * m_toggle_workarea;
 
@@ -96,7 +91,7 @@ private:
 	bool m_caps_setup;
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
-	PictureID workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
+	const IPicture* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
 };
 
 #endif // _BUILDINGWINDOW_H_

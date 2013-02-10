@@ -247,7 +247,7 @@ std::string ProductionSite::get_statistics_string()
 	else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
 		char buffer[1000];
 		snprintf
-			(buffer, sizeof(buffer),
+			(buffer, sizeof(buffer), "%s",
 			 ngettext("Worker missing", "Workers missing", nr_requests));
 		return buffer;
 	}
@@ -597,21 +597,26 @@ void ProductionSite::act(Game & game, uint32_t const data)
 	{
 		m_program_timer = false;
 
-		if (m_stack.empty()) {
-			m_working_positions[0].worker->update_task_buildingwork(game);
-			return;
+		if (!can_start_working()) {
+			while (!m_stack.empty())
+				program_end(game, Failed);
+		} else {
+			if (m_stack.empty()) {
+				m_working_positions[0].worker->update_task_buildingwork(game);
+				return;
+			}
+
+			State & state = top_state();
+			if (state.program->get_size() <= state.ip)
+				return program_end(game, Completed);
+
+			if (m_anim != descr().get_animation(m_default_anim)) {
+				// Restart idle animation, which is the default
+				start_animation(game, descr().get_animation(m_default_anim));
+			}
+
+			return program_act(game);
 		}
-
-		State & state = top_state();
-		if (state.program->get_size() <= state.ip)
-			return program_end(game, Completed);
-
-		if (m_anim != descr().get_animation(m_default_anim)) {
-			// Restart idle animation, which is the default
-			start_animation(game, descr().get_animation(m_default_anim));
-		}
-
-		return program_act(game);
 	}
 }
 

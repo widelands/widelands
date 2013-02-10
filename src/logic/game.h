@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,9 +58,9 @@ enum {
 
 struct Player;
 struct Map_Loader;
-struct PlayerCommand;
-struct ReplayReader;
-struct ReplayWriter;
+class PlayerCommand;
+class ReplayReader;
+class ReplayWriter;
 
 struct Game : Editor_Game_Base {
 	struct General_Stats {
@@ -155,6 +155,7 @@ struct Game : Editor_Game_Base {
 	void send_player_start_stop_building (Building &);
 	void send_player_start_or_cancel_expedition    (Building &);
 	void send_player_enhance_building (Building &, Building_Index);
+	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority
 		(PlayerImmovable &, int32_t type, Ware_Index index, int32_t prio);
 	void send_player_set_ware_max_fill

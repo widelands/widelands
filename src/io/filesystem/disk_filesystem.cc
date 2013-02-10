@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
+#include "compile_diagnostics.h"
 
 #include "disk_filesystem.h"
 
@@ -115,14 +116,11 @@ int32_t RealFSImpl::FindFiles
 	std::string buf;
 	struct _finddata_t c_file;
 	long hFile;
-	int32_t count;
 
 	if (path.size())
 		buf = m_directory + '\\' + path + '\\' + pattern;
 	else
 		buf = m_directory + '\\' + pattern;
-
-	count = 0;
 
 	hFile = _findfirst(buf.c_str(), &c_file);
 	if (hFile == -1)
@@ -405,9 +403,8 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		if (size and (result != 1)) {
 			assert(false);
 			throw wexception
-				("RealFSImpl::Load: read failed for %s (%s) with size %lu",
-				 fname.c_str(), fullname.c_str(),
-				 static_cast<long unsigned int>(size));
+				("RealFSImpl::Load: read failed for %s (%s) with size %"PRIuS"",
+				 fname.c_str(), fullname.c_str(), size);
 		}
 		static_cast<int8_t *>(data)[size] = 0;
 
@@ -425,12 +422,6 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	return data;
 }
 
-#ifndef _MSC_VER
-/// \note The MAP_FAILED macro from glibc uses old-style cast. We can not fix
-/// this ourselves, so we temporarily turn the error into a warning. It is
-/// turned back into an error after this function.
-#pragma GCC diagnostic warning "-Wold-style-cast"
-#endif
 void * RealFSImpl::fastLoad
 	(const std::string & fname, size_t & length, bool & fast)
 {
@@ -455,22 +446,24 @@ void * RealFSImpl::fastLoad
 	data = mmap(0, length, PROT_READ, MAP_PRIVATE, file, 0);
 
 	//if mmap doesn't work for some strange reason try the old way
-	if (data == MAP_FAILED)
+GCC_DIAG_OFF("-Wold-style-cast")
+	if (data == MAP_FAILED) {
+GCC_DIAG_ON("-Wold-style-cast")
 		return Load(fname, length);
+	}
 
 	fast = true;
 
 	assert(data);
+GCC_DIAG_OFF("-Wold-style-cast")
 	assert(data != MAP_FAILED);
+GCC_DIAG_ON("-Wold-style-cast")
 
 	close(file);
 
 	return data;
 #endif
 }
-#ifndef _MSC_VER
-#pragma GCC diagnostic error "-Wold-style-cast"
-#endif
 
 /**
  * Write the given block of memory to the repository.

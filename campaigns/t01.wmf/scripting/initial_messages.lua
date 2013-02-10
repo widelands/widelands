@@ -5,7 +5,7 @@
 function briefing_messages() 
 -- Briefing message
 title = _"The story begins"
-msg = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+msg = "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Thron sighs..." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lie awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees." ]] .. 

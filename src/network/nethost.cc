@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2012 by the Widelands Development Team
+ * Copyright (C) 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,6 +64,10 @@ using boost::format;
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(0), m_cur_wincondition(0) {}
+	~HostGameSettingsProvider() {
+		delete m_lua;
+		m_lua = 0;
+	}
 
 	virtual void setScenario(bool is_scenario) {h->setScenario(is_scenario);}
 
@@ -286,7 +290,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual void nextWinCondition() {
 		if (m_win_conditions.size() < 1) {
 			// Register win condition scripts
-			m_lua = create_LuaInterface();
+			if (!m_lua)
+				m_lua = create_LuaInterface();
 			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 
 			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
@@ -642,6 +647,7 @@ NetHost::NetHost (std::string const & playername, bool internet)
 	UserSettings hostuser;
 	hostuser.name = playername;
 	hostuser.position = UserSettings::none();
+	hostuser.ready = true;
 	d->settings.users.push_back(hostuser);
 	file = 0; //  Initialize as 0 pointer - unfortunately needed in struct.
 }
@@ -888,6 +894,8 @@ void NetHost::run(bool const autorun)
 			(loaderUI,
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+
+		delete tips;
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (m_internet)
@@ -1295,6 +1303,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 					info.players  = map.get_nrplayers();
 					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
 					d->settings.maps.push_back(info);
+					delete ml;
 				} else {
 					if
 						(g_fs->IsDirectory(name)
@@ -1443,8 +1452,13 @@ void NetHost::setMap
 	SendPacket s;
 
 	// Care about the host
-	if (static_cast<int32_t>(maxplayers) <= d->settings.playernum)
+	if
+		(static_cast<int32_t>(maxplayers) <= d->settings.playernum
+		 &&
+		 d->settings.playernum != UserSettings::none())
+	{
 		setPlayerNumber(UserSettings::none());
+	}
 
 	while (oldplayers > maxplayers) {
 		--oldplayers;
@@ -1519,7 +1533,7 @@ void NetHost::setMap
 		std::vector<char> complete(file->bytes);
 		fr.SetFilePos(0);
 		fr.DataComplete(&complete[0], file->bytes);
-		MD5Checksum<FileRead> md5sum;
+		SimpleMD5Checksum md5sum;
 		md5sum.Data(&complete[0], file->bytes);
 		md5sum.FinishChecksum();
 		file->md5sum = md5sum.GetChecksum().str();
@@ -1996,7 +2010,7 @@ bool NetHost::haveUserName(std::string const & name, uint8_t ignoreplayer) {
 
 
 /// Respond to a client's Hello message.
-void NetHost::welcomeClient (uint32_t const number, std::string const & playername)
+void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 {
 	assert(number < d->clients.size());
 
@@ -2027,14 +2041,14 @@ void NetHost::welcomeClient (uint32_t const number, std::string const & playerna
 		UserSettings newuser;
 		newuser.winner = false;
 		newuser.points = 0;
+		newuser.ready  = true;
 		d->settings.users.push_back(newuser);
 	}
 
 	// Assign the player a name, preferably the name chosen by the client
+	if (playername.empty()) // Make sure there is at least a name base.
+		playername = _("Player");
 	std::string effective_name = playername;
-
-	if (effective_name.empty())
-		effective_name = _("Player");
 
 	if (haveUserName(effective_name, client.usernum)) {
 		uint32_t i = 2;
@@ -2328,6 +2342,9 @@ void NetHost::updateNetworkSpeed()
 			if (d->clients.at(i).playernum <= UserSettings::highestPlayernum())
 				speeds.push_back(d->clients.at(i).desiredspeed);
 		}
+		if (speeds.empty()) // Possible in dedicated server games with only spectators
+			return;
+
 		std::sort(speeds.begin(), speeds.end());
 
 		// Abuse prevention for 2 players
@@ -2467,7 +2484,8 @@ void NetHost::handle_network ()
 		InternetGaming::ref().handle_metaserver_communication();
 		// Maybe an important message was send on the metaserver,
 		// that we should show in game as well.
-		std::vector<ChatMessage> msgs = InternetGaming::ref().getIngameSystemMessages();
+		std::vector<ChatMessage> msgs;
+		InternetGaming::ref().getIngameSystemMessages(msgs);
 		for (uint8_t i = 0; i < msgs.size(); ++i)
 			send(msgs.at(i));
 	}
@@ -2623,6 +2641,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 						ml->preload_map(true);
 						d->settings.scenario = scenario;
 						d->hp.setMap(map.get_name(), path, map.get_nrplayers(), false);
+						delete ml;
 					}
 				}
 			}

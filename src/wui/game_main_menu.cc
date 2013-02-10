@@ -46,26 +46,26 @@ m_windows     (windows),
 general_stats
 	(this, "general_stats",
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
+	 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+	 g_gr->imgcache().load(PicMod_Game, "pics/menu_general_stats.png"),
 	 _("General Statistics")),
 ware_stats
 	(this, "ware_stats",
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
+	 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+	 g_gr->imgcache().load(PicMod_Game, "pics/menu_ware_stats.png"),
 	 _("Ware Statistics")),
 building_stats
 	(this, "building_stats",
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
+	 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+	 g_gr->imgcache().load(PicMod_Game, "pics/menu_building_stats.png"),
 	 _("Building Statistics")),
 stock
 	(this, "stock",
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
+	 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+	 g_gr->imgcache().load(PicMod_Game, "pics/menu_stock.png"),
 	 _("Stock"))
 {
 	general_stats.sigclicked.connect

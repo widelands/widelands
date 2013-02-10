@@ -179,8 +179,15 @@ struct WLApplication {
 	//@}
 
 	void init_graphics
-		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool opengl);
+		(const int32_t w, const int32_t h, const int32_t bpp,
+		 const bool fullscreen, const bool opengl);
+
+	/**
+	 * Refresh the graphics from the latest options.
+	 *
+	 * \note See caveats for \ref init_graphics()
+	 */
+	void refresh_graphics();
 
 	void handle_input(InputCallback const *);
 
@@ -281,6 +288,9 @@ protected:
 
 	///The Widelands window's height in pixels
 	int32_t    m_gfx_h;
+
+	///The Widelands window's bits per pixel
+	int32_t    m_gfx_bpp;
 
 	///If true Widelands is (should be, we never know ;-) running
 	///in a fullscreen window

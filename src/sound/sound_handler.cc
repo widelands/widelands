@@ -161,6 +161,8 @@ void Sound_Handler::shutdown()
 	char * text = new char[15];
 	SDL_AudioDriverName(text, 20);
 	log("SDL_AUDIODRIVER %s\n", text);
+	delete text;
+	text = 0;
 
 	if (numtimesopened != 1) {
 		log (_("PROBLEM: sound device opened multiple times, trying to close"));
@@ -328,8 +330,8 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	Interactive_Base const & ibase = *m_egbase->get_ibase();
 	Point const vp = ibase.get_viewpoint();
 
-	int32_t const xres = ibase.get_xres();
-	int32_t const yres = ibase.get_yres();
+	int32_t const xres = g_gr->get_xres();
+	int32_t const yres = g_gr->get_yres();
 
 	MapviewPixelFunctions::get_pix(m_egbase->map(), position, sx, sy);
 	sx -= vp.x;

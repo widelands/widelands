@@ -21,14 +21,17 @@
 
 #include "constants.h"
 #include "graphic/font.h"
-#include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "wlapplication.h"
 #include "log.h"
+#include "text_layout.h"
+#include "wlapplication.h"
 
 #include "compile_assert.h"
 
 #include <SDL_keysym.h>
+
+using namespace std;
 
 namespace UI {
 /// Width the horizontal border graphics must have.
@@ -71,9 +74,9 @@ namespace UI {
  */
 Window::Window
 	(Panel * const parent,
-	 std::string const & name,
+	 string const & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 char const * const title)
+	 const string& title)
 	:
 		NamedPanel
 			(parent, name, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
@@ -83,20 +86,19 @@ Window::Window
 		_drag_start_win_x(0), _drag_start_win_y(0),
 		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
 		m_pic_lborder
-			(g_gr->get_picture(PicMod_UI, "pics/win_l_border.png")),
+			(g_gr->imgcache().load(PicMod_UI, "pics/win_l_border.png")),
 		m_pic_rborder
-			(g_gr->get_picture(PicMod_UI, "pics/win_r_border.png")),
+			(g_gr->imgcache().load(PicMod_UI, "pics/win_r_border.png")),
 		m_pic_top
-			(g_gr->get_picture(PicMod_UI, "pics/win_top.png")),
+			(g_gr->imgcache().load(PicMod_UI, "pics/win_top.png")),
 		m_pic_bottom
-			(g_gr->get_picture(PicMod_UI, "pics/win_bot.png")),
+			(g_gr->imgcache().load(PicMod_UI, "pics/win_bot.png")),
 		m_pic_background
-			(g_gr->get_picture(PicMod_UI, "pics/win_bg.png")),
+			(g_gr->imgcache().load(PicMod_UI, "pics/win_bg.png")),
 		m_center_panel(0),
 		m_fastclick_panel(0)
 {
-	if (title)
-		set_title(title);
+	set_title(title);
 
 	set_border
 		(VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS,
@@ -110,9 +112,9 @@ Window::Window
 /**
  * Replace the current title with a new one
 */
-void Window::set_title(const std::string & text)
+void Window::set_title(const string & text)
 {
-	m_title = text;
+	m_title = is_richtext(text) ? text : as_window_title(text);
 	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
 }
 
@@ -317,11 +319,11 @@ void Window::draw_border(RenderTarget & dst)
 	}
 
 	// draw the title if we have one
-	if (m_title.length())
-		UI::g_fh->draw_text
-			(dst, UI::TextStyle::ui_small(),
+	if (!m_title.empty())
+		UI::g_fh1->draw_text
+			(dst,
 			 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-			 m_title, Align_Center);
+			 m_title, 0, Align_Center);
 
 	if (not _is_minimal) {
 		const int32_t vt_bar_end = get_h() -
@@ -525,10 +527,10 @@ bool Window::handle_mousemove
 			const int32_t max_x = parent->get_inner_w();
 			const int32_t max_y = parent->get_inner_h();
 
-			left = std::min(static_cast<int32_t>(max_x - get_lborder()), left);
-			top  = std::min(static_cast<int32_t>(max_y - get_tborder()), top);
-			left = std::max(-static_cast<int32_t>(w - get_rborder()), left);
-			top  = std::max
+			left = min(static_cast<int32_t>(max_x - get_lborder()), left);
+			top  = min(static_cast<int32_t>(max_y - get_tborder()), top);
+			left = max(-static_cast<int32_t>(w - get_rborder()), left);
+			top  = max
 				(-static_cast<int32_t>(h - ((_is_minimal) ? get_tborder() : get_bborder())), top);
 			new_left = left; new_top = top;
 
@@ -571,13 +573,13 @@ bool Window::handle_mousemove
 				nearest_snap_distance_x = psnap;
 			else {
 				assert(nearest_snap_distance_x < bsnap);
-				nearest_snap_distance_x = std::min(nearest_snap_distance_x, psnap);
+				nearest_snap_distance_x = min(nearest_snap_distance_x, psnap);
 			}
 			if (nearest_snap_distance_y == bsnap)
 				nearest_snap_distance_y = psnap;
 			else {
 				assert(nearest_snap_distance_y < bsnap);
-				nearest_snap_distance_y = std::min(nearest_snap_distance_y, psnap);
+				nearest_snap_distance_y = min(nearest_snap_distance_y, psnap);
 			}
 
 			{ //  Snap to other Panels.

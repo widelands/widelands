@@ -24,6 +24,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/editor_mapselect.h"
@@ -262,7 +263,7 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_gfx_w(0), m_gfx_h(0),
+m_gfx_w(0), m_gfx_h(0), m_gfx_bpp(0),
 m_gfx_fullscreen       (false),
 m_gfx_opengl           (true),
 m_default_datadirs     (true),
@@ -274,7 +275,6 @@ m_homedir(FileSystem::GetHomedir() + "/.widelands"),
 m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
-	UI::g_fh = new UI::Font_Handler();
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 
@@ -301,6 +301,16 @@ m_redirected_stdio(false)
 	else
 		g_gr = 0;
 
+	if (TTF_Init() == -1)
+		throw wexception
+			("True Type library did not initialize: %s\n", TTF_GetError());
+
+	if (SDLNet_Init() == -1)
+		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
+
+	UI::g_fh = new UI::Font_Handler();
+	UI::g_fh1 = UI::create_fonthandler(*g_gr, g_fs);
+
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
 }
@@ -319,6 +329,14 @@ WLApplication::~WLApplication()
 	assert(UI::g_fh);
 	delete UI::g_fh;
 	UI::g_fh = 0;
+
+	assert(UI::g_fh1);
+	delete UI::g_fh1;
+	UI::g_fh1 = 0;
+
+	SDLNet_Quit();
+
+	TTF_Quit(); // TODO not here
 
 	assert(g_fs);
 	delete g_fs;
@@ -353,7 +371,8 @@ void WLApplication::run()
 			game.run_load_game(m_filename.c_str());
 		} catch (Widelands::game_data_error const & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -363,7 +382,8 @@ void WLApplication::run()
 			game.run_splayer_scenario_direct(m_filename.c_str());
 		} catch (Widelands::game_data_error const & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -409,8 +429,7 @@ void WLApplication::run()
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
 				map.set_filename(m_filename.c_str());
-				Widelands::Map_Loader * const ml = map.get_correct_loader
-					(m_filename.c_str());
+				Widelands::Map_Loader * const ml = map.get_correct_loader(m_filename.c_str());
 				ml->preload_map(true);
 
 				// fill in the mapdata structure
@@ -431,9 +450,13 @@ void WLApplication::run()
 				// -> autostarts when a player sends "/start" as pm to the server.
 				netgame.run(true);
 
+				// Cleanup
+				delete ml;
+
 				InternetGaming::ref().logout();
 			}
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -637,7 +660,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 						snprintf(buffer, sizeof(buffer), SCREENSHOT_DIR "/shot%04u.png", nr);
 						if (g_fs->FileExists(buffer))
 							continue;
-						g_gr->screenshot(*buffer);
+						g_gr->screenshot(buffer);
 						break;
 					}
 				}
@@ -767,11 +790,11 @@ void WLApplication::set_input_grab(bool grab)
  */
 
 void WLApplication::init_graphics
-	(int32_t const w, int32_t const h, int32_t const bpp,
-	 bool const fullscreen, bool const opengl)
+	(const int32_t w, const int32_t h, const int32_t bpp,
+	 const bool fullscreen, const bool opengl)
 {
 	if
-		(w == m_gfx_w && h == m_gfx_h &&
+		(w == m_gfx_w && h == m_gfx_h && bpp == m_gfx_bpp &&
 		 fullscreen == m_gfx_fullscreen &&
 		 opengl == m_gfx_opengl)
 		return;
@@ -781,6 +804,7 @@ void WLApplication::init_graphics
 
 	m_gfx_w = w;
 	m_gfx_h = h;
+	m_gfx_bpp = bpp;
 	m_gfx_fullscreen = fullscreen;
 	m_gfx_opengl = opengl;
 
@@ -790,6 +814,23 @@ void WLApplication::init_graphics
 		g_gr = new Graphic
 			(w, h, bpp, fullscreen, opengl);
 	}
+}
+
+void WLApplication::refresh_graphics()
+{
+	Section & s = g_options.pull_section("global");
+
+	//  Switch to the new graphics system now, if necessary.
+	init_graphics
+		(s.get_int("xres", XRES),
+		 s.get_int("yres", YRES),
+		 s.get_int("depth", 16),
+		 s.get_bool("fullscreen", false),
+#if USE_OPENGL
+		 s.get_bool("opengl", true));
+#else
+		 false);
+#endif
 }
 
 /**
@@ -1055,7 +1096,6 @@ void WLApplication::shutdown_hardware()
 			<< endl;
 
 	init_graphics(0, 0, 0, false, false);
-
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
@@ -1493,6 +1533,9 @@ void WLApplication::mainmenu()
 	std::string message;
 
 	for (;;) {
+		// Refresh graphics system in case we just changed resolution.
+		refresh_graphics();
+
 		Fullscreen_Menu_Main mm;
 
 		if (message.size()) {
@@ -1517,7 +1560,8 @@ void WLApplication::mainmenu()
 					Widelands::Game game;
 					try {
 						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
-					} catch (...) {
+					} catch (std::exception const & e) {
+						log("Fata exception: %s\n", e.what());
 						emergency_save(game);
 						throw;
 					}
@@ -1626,14 +1670,6 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-#ifdef WIN32
-	//  The Winsock2 library needs to get called through WSAStartup, to initiate
-	//  the use of the Winsock DLL by Widelands.
-	WSADATA wsaData;
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-		throw wexception("initialization of Wsock2-library failed");
-#endif // WIN32
-
 	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
@@ -1707,10 +1743,6 @@ void WLApplication::mainmenu_multiplayer()
 			}
 		}
 	}
-#ifdef WIN32
-	// Clean up winsock2 data
-	WSACleanup();
-#endif
 }
 
 void WLApplication::mainmenu_editor()
@@ -1971,7 +2003,8 @@ bool WLApplication::new_game()
 	if (code == 2) { // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.getMap().c_str());
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -1998,7 +2031,8 @@ bool WLApplication::new_game()
 				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(&loaderUI, sp.settings());
 			game.run(&loaderUI, Widelands::Game::NewNonScenario);
-		} catch (...) {
+		} catch (std::exception const & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -2028,7 +2062,8 @@ bool WLApplication::load_game()
 	try {
 		if (game.run_load_game(filename))
 			return true;
-	} catch (...) {
+	} catch (std::exception const & e) {
+		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -2070,7 +2105,8 @@ bool WLApplication::campaign_game()
 		// Load selected campaign-map-file
 		if (filename.size())
 			return game.run_splayer_scenario_direct(filename.c_str());
-	} catch (...) {
+	} catch (std::exception const & e) {
+		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -2191,7 +2227,8 @@ void WLApplication::replay()
 		ReplayGameController rgc(game, m_filename);
 
 		game.run(&loaderUI, Widelands::Game::Loaded);
-	} catch (...) {
+	} catch (std::exception const & e) {
+		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
 		m_filename.clear();
 		throw;

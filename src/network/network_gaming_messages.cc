@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 by the Widelands Development Team
+ * Copyright (C) 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
 static std::map <std::string, std::string> ngmessages;
 
 /// Returns a translated message fitting to the message code \arg code
-const std::string & NetworkGamingMessages::get_message(const std::string & code) {
+const std::string NetworkGamingMessages::get_message(const std::string & code) {
 	if (ngmessages.find(code) != ngmessages.end())
 		return ngmessages[code];
 	// if no message for code was found, just return code
@@ -37,14 +37,13 @@ const std::string & NetworkGamingMessages::get_message(const std::string & code)
 }
 
 /// Returns a translated message fitting to the message code \arg code and all arguments
-const std::string & NetworkGamingMessages::get_message
+const std::string NetworkGamingMessages::get_message
 	(const std::string & code, const std::string & arg1, const std::string & arg2, const std::string & arg3)
 {
 	if (ngmessages.find(code) == ngmessages.end()) {
-		std::string & rv = * new std::string
+		return
 			((boost::format("%s, %s, %s, %s") % code % get_message(arg1) % get_message(arg2) % get_message(arg3))
 			.str());
-		return rv;
 	}
 
 	// push code and all arguments - if existing - in a vector for easier handling
@@ -103,14 +102,13 @@ const std::string & NetworkGamingMessages::get_message
 
 	// Check if merging succeded
 	if (strings.size() == 1)
-		return * new std::string(strings.at(0));
+		return strings.at(0);
 
 	// No, it did not
-	std::string & rv = * new std::string
+	return
 		((boost::format("%s, %s, %s, %s")
-		  %  get_message(code) % get_message(arg1) % get_message(arg2) % get_message(arg3))
+		  % get_message(code) % get_message(arg1) % get_message(arg2) % get_message(arg3))
 		.str());
-	return rv;
 
 }
 

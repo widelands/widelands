@@ -74,7 +74,7 @@ std::string ChatMessage::toPrintable() const
 	strftime(ts, sizeof(ts), "[%H:%M] </p>", localtime(&time));
 	message += ts;
 
-	message += "<p font-size=14 font-face=FreeSerif font-color=#";
+	message += "<p font-size=14 font-face=DejaVuSerif font-color=#";
 	message += color();
 
 	if (recipient.size() && sender.size()) {
@@ -84,13 +84,13 @@ std::string ChatMessage::toPrintable() const
 			message += sender;
 			message += " @ ";
 			message += recipient;
-			message += ":</p><p font-size=14 font-face=FreeSerif> ";
+			message += ":</p><p font-size=14 font-face=DejaVuSerif> ";
 			message += sanitized;
 		} else {
 			message += ">@";
 			message += recipient;
 			message += " >> </p><p font-size=14";
-			message += " font-face=FreeSerif font-color=#";
+			message += " font-face=DejaVuSerif font-color=#";
 			message += color();
 			message += " font-style=italic> ";
 			message += sender;
@@ -108,7 +108,7 @@ std::string ChatMessage::toPrintable() const
 		} else if (sender.size()) {
 			message += " font-decoration=underline>";
 			message += sender;
-			message += ":</p><p font-size=14 font-face=FreeSerif> ";
+			message += ":</p><p font-size=14 font-face=DejaVuSerif> ";
 			message += sanitized;
 		} else {
 			message += " font-weight=bold>*** ";
@@ -130,7 +130,7 @@ std::string ChatMessage::color() const
 	if ((playern >= 0) && playern < MAX_PLAYERS) {
 		const RGBColor & clr = Player::Colors[playern];
 		char buf[sizeof("ffffff")];
-		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r(), clr.g(), clr.b());
+		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r, clr.g, clr.b);
 		return buf;
 	}
 	return "999999";

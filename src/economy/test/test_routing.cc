@@ -57,7 +57,7 @@ public:
 		return _neighbours[idx];
 	}
 
-	virtual Flag & base_flag() { return _flag;}
+	virtual Flag & base_flag() {return _flag;}
 	void set_waitcost(int32_t const wc) {_waitcost = wc;}
 	int32_t get_waitcost() const {return _waitcost;}
 	Coords get_position() const {return _position;}
@@ -75,11 +75,11 @@ private:
 	Coords _position;
 	Flag _flag;
 };
-void TestingRoutingNode::get_neighbours(WareWorker type,RoutingNodeNeighbours & n) {
+void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours & n) {
 	container_iterate_const(Neigbours, _neighbours, i)
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n.push_back(RoutingNodeNeighbour(*i.current, 1000 *((type==wwWARE)?1+_waitcost:1)));
+		n.push_back(RoutingNodeNeighbour(*i.current, 1000 * ((type == wwWARE)?1 + _waitcost:1)));
 }
 bool TestingRoutingNode::all_members_zeroed() {
 	bool integers_zero =
@@ -94,7 +94,7 @@ class TestingTransportCostCalculator : public ITransportCostCalculator {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
 		double xd = (c1.x - c2.x);
-		double yd = (c2.y - c2.y);
+		double yd = (c1.y - c2.y);
 		return static_cast<int32_t>((xd * xd + yd * yd) * 1000);
 	}
 };
@@ -591,7 +591,7 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	BOOST_CHECK(route.has_chain(chain));
 
 	// Make the middle node on the short path very expensive
-	d1->set_waitcost(6);
+	d1->set_waitcost(8);
 
 	// Same result without wait
 	rval = r.find_route

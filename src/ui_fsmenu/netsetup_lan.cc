@@ -18,6 +18,8 @@
  */
 
 #include "netsetup_lan.h"
+
+#include "compile_diagnostics.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -55,32 +57,32 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 	joingame
 		(this, "join_game",
 		 get_w() * 16 / 25, get_h() * 5333 / 10000, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
 		 _("Join this game"), std::string(), true, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 16 / 25, get_h() * 6083 / 10000, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
 		 _("Host a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 16 / 25, get_h() * 8333 / 10000, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	loadlasthost
 		(this, "load_previous_host",
 		 get_w() * 171 / 200, get_h() * 19 / 40, m_buth, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/menu_load_game.png"),
 		 _("Load previous host"), true, false),
 
 // Edit boxes
 	playername
 		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,       m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png")),
 	hostname
 		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png")),
 
 // List
 	opengames
@@ -156,7 +158,9 @@ bool Fullscreen_Menu_NetSetupLAN::get_host_address
 
 	if (hostent * const he = gethostbyname(host.c_str())) {
 		addr = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
+GCC_DIAG_OFF("-Wold-style-cast")
 		port = htons(WIDELANDS_PORT);
+GCC_DIAG_ON("-Wold-style-cast")
 		return true;
 	} else
 		return false;

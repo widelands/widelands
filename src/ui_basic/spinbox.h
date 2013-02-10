@@ -38,10 +38,11 @@ struct SpinBox : public Panel {
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 int32_t startval, int32_t minval, int32_t maxval,
 		 std::string const & unit             = std::string(),
-		 PictureID           buttonbackground =
-		 	g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 const IPicture* buttonbackground =
+		 	g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 bool big = false,
 		 Align align = Align_Center);
+	~SpinBox();
 
 	void setValue(int32_t);
 	void setInterval(int32_t min, int32_t max);

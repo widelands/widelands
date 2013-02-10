@@ -20,7 +20,6 @@
 #ifndef _MILITARY_BOX_H_
 #define _MILITARY_BOX_H_
 
-#include "graphic/picture_id.h"
 #include "logic/attackable.h"
 #include "logic/player.h"
 

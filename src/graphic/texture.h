@@ -20,21 +20,19 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "colormap.h"
-#include "picture_id.h"
-
-#include "graphic/render/gl_picture_texture.h"
-
-#include <boost/shared_ptr.hpp>
 #include <stdint.h>
+#include <string>
 #include <vector>
+
+#include "colormap.h"
+#include "graphic/render/gl_surface_texture.h"
 
 /**
  * This contains all the road textures needed to render roads
  */
 struct Road_Textures {
-	PictureID pic_road_normal;
-	PictureID pic_road_busy;
+	const IPicture* pic_road_normal;
+	const IPicture* pic_road_busy;
 };
 
 /** struct Texture
@@ -49,7 +47,7 @@ struct Road_Textures {
 */
 struct Texture {
 	Texture
-		(char const & fnametempl, uint32_t frametime, const SDL_PixelFormat &);
+		(const std::string& fnametempl, uint32_t frametime, const SDL_PixelFormat&);
 	~Texture();
 
 	const char * get_texture_picture() const {return m_texture_picture;}
@@ -80,7 +78,7 @@ private:
 	bool       is_32bit;
 	bool       m_was_animated;
 #ifdef USE_OPENGL
-	std::vector<boost::shared_ptr<GLPictureTexture> > m_glFrames;
+	std::vector<GLSurfaceTexture*> m_glFrames;
 #endif
 };
 

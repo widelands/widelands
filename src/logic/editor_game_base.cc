@@ -287,7 +287,7 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 
 	// TODO: load player graphics? (maybe)
 
-	g_gr->load_animations(loader_ui);
+	g_gr->load_animations();
 }
 
 /**

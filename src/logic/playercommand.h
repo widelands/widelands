@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "path.h"
 #include "trainingsite.h"
 #include "warehouse.h"
+#include "worker.h"
 
 namespace Widelands {
 
@@ -38,7 +39,8 @@ namespace Widelands {
  * reasonably unique (to be precise, they must be unique per duetime) and
  * the same across all hosts, to ensure parallel simulation.
  */
-struct PlayerCommand : public GameLogicCommand {
+class PlayerCommand : public GameLogicCommand {
+public:
 	PlayerCommand (int32_t time, Player_Number);
 
 	/// For savegame loading
@@ -46,7 +48,7 @@ struct PlayerCommand : public GameLogicCommand {
 
 	Player_Number sender   () const {return m_sender;}
 	uint32_t      cmdserial() const {return m_cmdserial;}
-	void set_cmdserial(uint32_t const s) {m_cmdserial = s;}
+	void set_cmdserial(const uint32_t s) {m_cmdserial = s;}
 
 	virtual void serialize (StreamWrite &) = 0;
 	static Widelands::PlayerCommand * deserialize (StreamRead &);
@@ -63,9 +65,9 @@ private:
 struct Cmd_Bulldoze:public PlayerCommand {
 	Cmd_Bulldoze() : PlayerCommand(), serial(0), recurse(0) {} // For savegame loading
 	Cmd_Bulldoze
-		(int32_t const t, int32_t const p,
+		(const int32_t t, const int32_t p,
 		 PlayerImmovable & pi,
-		 bool const _recurse = false)
+		 const bool _recurse = false)
 		: PlayerCommand(t, p), serial(pi.serial()), recurse(_recurse)
 	{}
 
@@ -87,10 +89,10 @@ private:
 struct Cmd_Build:public PlayerCommand {
 	Cmd_Build() : PlayerCommand() {} // For savegame loading
 	Cmd_Build
-		(int32_t        const _duetime,
-		 int32_t        const p,
-		 Coords         const c,
-		 Building_Index const i)
+		(const int32_t        _duetime,
+		 const int32_t        p,
+		 const Coords         c,
+		 const Building_Index i)
 		: PlayerCommand(_duetime, p), coords(c), bi(i)
 	{}
 
@@ -111,7 +113,7 @@ private:
 
 struct Cmd_BuildFlag:public PlayerCommand {
 	Cmd_BuildFlag() : PlayerCommand() {} // For savegame loading
-	Cmd_BuildFlag (int32_t const t, int32_t const p, Coords const c) :
+	Cmd_BuildFlag (const int32_t t, const int32_t p, const Coords c) :
 		PlayerCommand(t, p), coords(c)
 	{}
 
@@ -153,7 +155,7 @@ private:
 
 struct Cmd_FlagAction:public PlayerCommand {
 	Cmd_FlagAction() : PlayerCommand(), serial(0) {} // For savegame loading
-	Cmd_FlagAction (int32_t const t, int32_t const p, Flag const & f) :
+	Cmd_FlagAction (const int32_t t, const int32_t p, const Flag & f) :
 		PlayerCommand(t, p), serial(f.serial())
 	{}
 
@@ -174,7 +176,7 @@ private:
 
 struct Cmd_StartStopBuilding : public PlayerCommand {
 	Cmd_StartStopBuilding() : PlayerCommand(), serial(0) {} // For savegame loading
-	Cmd_StartStopBuilding (int32_t const t, Player_Number const p, Building & b)
+	Cmd_StartStopBuilding (const int32_t t, const Player_Number p, Building & b)
 		: PlayerCommand(t, p), serial(b.serial())
 	{}
 
@@ -215,10 +217,10 @@ private:
 struct Cmd_EnhanceBuilding:public PlayerCommand {
 	Cmd_EnhanceBuilding() : PlayerCommand(), serial(0) {} // For savegame loading
 	Cmd_EnhanceBuilding
-		(int32_t        const _duetime,
-		 int32_t        const p,
-		 Building     &       b,
-		 Building_Index const i)
+		(const int32_t        _duetime,
+		 const int32_t        p,
+		 Building           & b,
+		 const Building_Index i)
 		: PlayerCommand(_duetime, p), serial(b.serial()), bi(i)
 	{}
 
@@ -241,7 +243,7 @@ private:
 struct Cmd_DismantleBuilding:public PlayerCommand {
 	Cmd_DismantleBuilding() : PlayerCommand(), serial(0) {} // For savegame loading
 	Cmd_DismantleBuilding
-		(int32_t const t, int32_t const p,
+		(const int32_t t, const int32_t p,
 		 PlayerImmovable & pi)
 		: PlayerCommand(t, p), serial(pi.serial())
 	{}
@@ -253,6 +255,29 @@ struct Cmd_DismantleBuilding:public PlayerCommand {
 	virtual uint8_t id() const {return QUEUE_CMD_DISMANTLEBUILDING;}
 
 	Cmd_DismantleBuilding (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+};
+
+struct Cmd_EvictWorker : public PlayerCommand {
+	Cmd_EvictWorker() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_EvictWorker
+		(const int32_t t, const int32_t p,
+		 Worker & w)
+		: PlayerCommand(t, p), serial(w.serial())
+	{}
+
+	// Write these commands to a file (for savegames)
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_EVICTWORKER;}
+
+	Cmd_EvictWorker (StreamRead &);
 
 	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
@@ -364,7 +389,7 @@ private:
 };
 
 struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
-	Cmd_ResetWareTargetQuantity() : Cmd_ChangeTargetQuantity(), m_economy(0), m_ware_type() {}
+	Cmd_ResetWareTargetQuantity() : Cmd_ChangeTargetQuantity(), m_ware_type() {}
 	Cmd_ResetWareTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index);
@@ -381,7 +406,6 @@ struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
 	virtual void serialize (StreamWrite &);
 
 private:
-	uint32_t m_economy;
 	Ware_Index m_ware_type;
 };
 
@@ -408,7 +432,7 @@ private:
 };
 
 struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
-	Cmd_ResetWorkerTargetQuantity() : Cmd_ChangeTargetQuantity(), m_economy(0), m_ware_type() {}
+	Cmd_ResetWorkerTargetQuantity() : Cmd_ChangeTargetQuantity(), m_ware_type() {}
 	Cmd_ResetWorkerTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index);
@@ -425,18 +449,17 @@ struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
 	virtual void serialize (StreamWrite &);
 
 private:
-	uint32_t m_economy;
 	Ware_Index m_ware_type;
 };
 
 struct Cmd_ChangeTrainingOptions : public PlayerCommand {
 	Cmd_ChangeTrainingOptions() : PlayerCommand(), serial(0), attribute(0), value(0) {} // For savegame loading
 	Cmd_ChangeTrainingOptions
-		(int32_t    const t,
-		 Player_Number  const p,
-		 TrainingSite &       ts,
-		 int32_t    const at,
-		 int32_t    const val)
+		(const int32_t    t,
+		 const Player_Number p,
+		 TrainingSite &   ts,
+		 const int32_t    at,
+		 const int32_t    val)
 		: PlayerCommand(t, p), serial(ts.serial()), attribute(at), value(val)
 	{}
 
@@ -460,10 +483,10 @@ private:
 struct Cmd_DropSoldier : public PlayerCommand {
 	Cmd_DropSoldier () : PlayerCommand(), serial(0), soldier(0) {} //  for savegames
 	Cmd_DropSoldier
-		(int32_t    const t,
-		 int32_t    const p,
+		(const int32_t    t,
+		 const int32_t    p,
 		 Building &       b,
-		 int32_t    const _soldier)
+		 const int32_t    _soldier)
 		: PlayerCommand(t, p), serial(b.serial()), soldier(_soldier)
 	{}
 
@@ -486,7 +509,7 @@ private:
 struct Cmd_ChangeSoldierCapacity : public PlayerCommand {
 	Cmd_ChangeSoldierCapacity () : PlayerCommand(), serial(0), val(0) {} //  for savegames
 	Cmd_ChangeSoldierCapacity
-		(int32_t const t, int32_t const p, Building & b, int32_t const i)
+		(const int32_t t, const int32_t p, Building & b, const int32_t i)
 		: PlayerCommand(t, p), serial(b.serial()), val(i)
 	{}
 
@@ -510,11 +533,11 @@ private:
 struct Cmd_EnemyFlagAction : public PlayerCommand {
 	Cmd_EnemyFlagAction() : PlayerCommand(), serial(0), number(0), retreat(0) {} // For savegame loading
 	Cmd_EnemyFlagAction
-		(int32_t      const t,
-		 int32_t      const p,
-		 Flag const &       f,
-		 uint32_t     const num,
-		 uint32_t     const ret)
+		(const int32_t      t,
+		 const int32_t      p,
+		 const Flag &       f,
+		 const uint32_t     num,
+		 const uint32_t     ret)
 		: PlayerCommand(t, p), serial(f.serial()), number(num), retreat(ret)
 	{}
 
@@ -537,12 +560,12 @@ private:
 
 // This is at very early stage, more vars should be added
 struct Cmd_ChangeMilitaryConfig : public PlayerCommand {
-	Cmd_ChangeMilitaryConfig() : PlayerCommand(), serial(0), retreat(0) {} // For savegame loading
+	Cmd_ChangeMilitaryConfig() : PlayerCommand(), retreat(0) {} // For savegame loading
 	Cmd_ChangeMilitaryConfig
-		(int32_t      const t,
-		 int32_t      const p,
-		 uint32_t     const ret)
-		: PlayerCommand(t, p), serial(0), retreat(ret)
+		(const int32_t      t,
+		 const int32_t      p,
+		 const uint32_t     ret)
+		: PlayerCommand(t, p), retreat(ret)
 	{}
 
 	// Write these commands to a file (for savegames)
@@ -557,7 +580,6 @@ struct Cmd_ChangeMilitaryConfig : public PlayerCommand {
 	virtual void serialize (StreamWrite &);
 
 private:
-	Serial        serial;
 	// By now only retreat info is stored
 	uint8_t       retreat;
 };
@@ -567,7 +589,7 @@ private:
 struct PlayerMessageCommand : public PlayerCommand {
 	PlayerMessageCommand () : PlayerCommand() {} //  for savegames
 	PlayerMessageCommand
-		(uint32_t const t, Player_Number const p, Message_Id const i)
+		(const uint32_t t, const Player_Number p, const Message_Id i)
 		: PlayerCommand(t, p), m_message_id(i)
 	{}
 
@@ -585,7 +607,7 @@ private:
 struct Cmd_MessageSetStatusRead : public PlayerMessageCommand {
 	Cmd_MessageSetStatusRead () : PlayerMessageCommand() {}
 	Cmd_MessageSetStatusRead
-		(uint32_t const t, Player_Number const p, Message_Id const i)
+		(const uint32_t t, const Player_Number p, const Message_Id i)
 		: PlayerMessageCommand(t, p, i)
 	{}
 
@@ -600,7 +622,7 @@ struct Cmd_MessageSetStatusRead : public PlayerMessageCommand {
 struct Cmd_MessageSetStatusArchived : public PlayerMessageCommand {
 	Cmd_MessageSetStatusArchived () : PlayerMessageCommand() {}
 	Cmd_MessageSetStatusArchived
-		(uint32_t const t, Player_Number const p, Message_Id const i)
+		(const uint32_t t, const Player_Number p, const Message_Id i)
 		: PlayerMessageCommand(t, p, i)
 	{}
 

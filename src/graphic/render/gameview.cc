@@ -33,7 +33,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "surface_sdl.h"
 #include "graphic/texture.h"
 
 #include "wui/overlay_manager.h"
@@ -369,7 +368,7 @@ void GameView::rendermap
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
 							 it < end;
 							 ++it)
-							blit(f_pos - it->hotspot, it->picid);
+							blit(f_pos - it->hotspot, it->pic);
 					} else if (f_vision == 1) {
 						const Player * owner = f_player_field.owner ? egbase.get_player(f_player_field.owner) : 0;
 						if (owner) {
@@ -435,15 +434,15 @@ void GameView::rendermap
 								drawanimrect(f_pos, anim, tanim, owner, Rect(Point(0, h - lines), w, lines));
 							} else if (upcast(const Building_Descr, building, map_object_descr)) {
 								// this is a building therefore we either draw unoccupied or idle animation
-								uint32_t picid;
+								uint32_t pic;
 								try {
-									picid = building->get_animation("unoccupied");
+									pic = building->get_animation("unoccupied");
 								} catch (Map_Object_Descr::Animation_Nonexistent & e) {
-									picid = building->get_animation("idle");
+									pic = building->get_animation("idle");
 								}
-								drawanim(f_pos, picid, 0, owner);
-							} else if (const uint32_t picid = map_object_descr->main_animation()) {
-								drawanim(f_pos, picid, 0, owner);
+								drawanim(f_pos, pic, 0, owner);
+							} else if (const uint32_t pic = map_object_descr->main_animation()) {
+								drawanim(f_pos, pic, 0, owner);
 							} else if (map_object_descr == &Widelands::g_flag_descr) {
 								drawanim(f_pos, owner->flag_anim(), 0, owner);
 							}
@@ -516,7 +515,7 @@ void GameView::rendermap
 								 	 3)
 								 -
 								 it->hotspot,
-								 it->picid);
+								 it->pic);
 					}
 				}
 			}
@@ -581,7 +580,7 @@ void GameView::rendermap
 								 	 3)
 								 -
 								 it->hotspot,
-								 it->picid);
+								 it->pic);
 					}
 				}
 			}
@@ -821,7 +820,7 @@ void GameView::rendermap
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
 							 it < end;
 							 ++it)
-							blit(f_pos - it->hotspot, it->picid);
+							blit(f_pos - it->hotspot, it->pic);
 					}
 				}
 			}
@@ -887,7 +886,7 @@ void GameView::rendermap
 								 	 3)
 								 -
 								 it->hotspot,
-								 it->picid);
+								 it->pic);
 					}
 				}
 			}
@@ -950,7 +949,7 @@ void GameView::rendermap
 								 	 3)
 								 -
 								 it->hotspot,
-								 it->picid);
+								 it->pic);
 					}
 				}
 			}
@@ -1078,7 +1077,7 @@ inline static uint32_t calc_minimap_color
 			pixelcolor = blend_color
 				(format,
 				 pixelcolor,
-				 player_color.r(),  player_color.g(), player_color.b());
+				 player_color.r,  player_color.g, player_color.b);
 		}
 	}
 
@@ -1306,7 +1305,7 @@ void GameView::draw_minimap
 	//       necesary. The created surface could be cached and only redrawn two
 	//       or three times per second
 	const SDL_PixelFormat & fmt =
-		g_gr->get_render_target()->get_surface()->pixelaccess().format();
+		g_gr->get_render_target()->get_surface()->format();
 	SDL_Surface * surface =
 		SDL_CreateRGBSurface
 			(SDL_SWSURFACE,
@@ -1346,7 +1345,7 @@ void GameView::draw_minimap
 
 	SDL_UnlockSurface(surface);
 
-	PictureID picture = g_gr->convert_sdl_surface_to_picture(surface);
+	IPicture* picture = g_gr->convert_sdl_surface_to_picture(surface);
 
 	m_surface->blit(Point(rc.x, rc.y), picture, rc2);
 }

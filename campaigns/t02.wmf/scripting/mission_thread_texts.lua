@@ -15,12 +15,12 @@ end
 
 -- Headings
 function h1(s)
-   return "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+   return "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=8> <br></p>"
 end
 
 function h2(s)
-   return "<p font=FreeSerif font-size=12 font-weight=bold font-color=D1D1D1>"
+   return "<p font=DejaVuSerif font-size=12 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
@@ -40,7 +40,7 @@ function speech(img, clr, g_title, g_text)
      
    local s = ""
    if title then
-      s = rt("<p font-size=20 font-weight=bold font-face=FreeSerif " .. 
+      s = rt("<p font-size=20 font-weight=bold font-face=DejaVuSerif " .. 
          ("font-color=%s>"):format(clr) .. title ..
          "</p><p font-size=8> <br></p>"
       )
@@ -65,7 +65,7 @@ end
 
 function new_objectives(...) 
    local s = rt(
-   "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+   "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
    .. _"New Objectives" .. "</p>")
 
    for idx,obj in ipairs{...} do

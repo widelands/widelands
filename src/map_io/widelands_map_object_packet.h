@@ -24,7 +24,7 @@
 
 #include <set>
 
-struct FileSystem;
+class FileSystem;
 
 namespace Widelands {
 

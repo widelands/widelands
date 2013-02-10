@@ -21,8 +21,8 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 
-#include "surface_sdl.h"
 #include "graphic/graphic.h"
+#include "graphic/image_loader.h"
 #include "graphic/picture.h"
 
 #include "log.h"
@@ -47,7 +47,7 @@ Load the animation
 */
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
-AnimationGfx::AnimationGfx(AnimationData const * const data) :
+AnimationGfx::AnimationGfx(const IImageLoader& il, AnimationData const * const data) :
 	m_hotspot(data->hotspot)
 {
 	m_hasplrclrs = data->hasplrclrs;
@@ -99,7 +99,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 			strcpy(after_basename, extensions[extnr]);
 			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
 				try {
-					PictureID pic = g_gr->load_image(filename, true);
+					IPicture* pic = il.load(filename, true);
 					if (width == 0) { //  This is the first frame.
 						width  = pic->get_w();
 						height = pic->get_h();
@@ -179,7 +179,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 				strcpy(after_basename + 3, extensions[extnr]);
 				if (g_fs->FileExists(filename)) {
 					try {
-						PictureID picture = g_gr->load_image(filename, true);
+						IPicture* picture = il.load(filename, true);
 						if (width != picture->get_w() or height != picture->get_h())
 							throw wexception
 								("playercolor mask has wrong size: (%u, %u), should "
@@ -220,7 +220,7 @@ end:
 
 	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
 		throw wexception
-			("animation has %zu frames but playercolor mask has only %zu frames",
+			("animation has %"PRIuS" frames but playercolor mask has only %"PRIuS" frames",
 			 m_plrframes[0].size(), m_pcmasks.size());
 #ifdef VALIDATE_ANIMATION_CROPPING
 	if
@@ -254,26 +254,25 @@ Encodes the given surface into a frame
 void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 {
 	assert(m_plrframes[0].size() == m_pcmasks.size());
-	std::vector<PictureID> & frames = m_plrframes[plr];
+	std::vector<IPicture* > & frames = m_plrframes[plr];
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
-		PictureID origpic = m_plrframes[0][i];
+		IPicture* origpic = m_plrframes[0][i];
 		uint32_t w = origpic->get_w();
 		uint32_t h = origpic->get_h();
-		IPixelAccess & origpix = m_plrframes[0][i]->pixelaccess();
-		IPixelAccess & pcmask = m_pcmasks[i]->pixelaccess();
+		upcast(Surface, orig_surface, m_plrframes[0][i]);
+		upcast(Surface, pcmask_surface, m_pcmasks[i]);
 
-		PictureID newpicture = g_gr->create_picture(w, h, true);
-		IPixelAccess & newpix = newpicture->pixelaccess();
+		Surface* new_surface = g_gr->create_surface(w, h, true);
 
-		const SDL_PixelFormat & fmt = origpix.format();
-		const SDL_PixelFormat & fmt_pc = pcmask.format();
-		const SDL_PixelFormat & destfmt = newpix.format();
+		const SDL_PixelFormat & fmt = orig_surface->format();
+		const SDL_PixelFormat & fmt_pc = pcmask_surface->format();
+		const SDL_PixelFormat & destfmt = new_surface->format();
 
-		origpix.lock(IPixelAccess::Lock_Normal);
-		pcmask.lock(IPixelAccess::Lock_Normal);
-		newpix.lock(IPixelAccess::Lock_Discard);
+		orig_surface->lock(Surface::Lock_Normal);
+		pcmask_surface->lock(Surface::Lock_Normal);
+		new_surface->lock(Surface::Lock_Discard);
 		// This could be done significantly faster, but since we
 		// cache the result, let's keep it simple for now.
 		for (uint32_t y = 0; y < h; ++y) {
@@ -282,8 +281,8 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 				RGBAColor mask;
 				RGBAColor product;
 
-				source.set(fmt, origpix.get_pixel(x, y));
-				mask.set(fmt_pc, pcmask.get_pixel(x, y));
+				source.set(fmt, orig_surface->get_pixel(x, y));
+				mask.set(fmt_pc, pcmask_surface->get_pixel(x, y));
 
 				if
 					(uint32_t const influence =
@@ -297,9 +296,9 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 						>> 24;
 					RGBAColor plrclr;
 
-					plrclr.r = (player_color.r() * intensity) >> 8;
-					plrclr.g = (player_color.g() * intensity) >> 8;
-					plrclr.b = (player_color.b() * intensity) >> 8;
+					plrclr.r = (player_color.r * intensity) >> 8;
+					plrclr.g = (player_color.g * intensity) >> 8;
+					plrclr.b = (player_color.b * intensity) >> 8;
 
 					product.r =
 						(plrclr.r * influence + source.r * (65536 - influence)) >> 16;
@@ -312,14 +311,14 @@ void AnimationGfx::encode(uint8_t const plr, const RGBColor & player_color)
 					product = source;
 				}
 
-				newpix.set_pixel(x, y, product.map(destfmt));
+				new_surface->set_pixel(x, y, product.map(destfmt));
 			}
 		}
-		origpix.unlock(IPixelAccess::Unlock_NoChange);
-		pcmask.unlock(IPixelAccess::Unlock_NoChange);
-		newpix.unlock(IPixelAccess::Unlock_Update);
+		orig_surface->unlock(Surface::Unlock_NoChange);
+		pcmask_surface->unlock(Surface::Unlock_NoChange);
+		new_surface->unlock(Surface::Unlock_Update);
 
-		frames.push_back(newpicture);
+		frames.push_back(new_surface);
 	}
 }
 

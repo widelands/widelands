@@ -17,7 +17,9 @@
  *
  */
 
-#include "texture.h"
+#include <boost/foreach.hpp>
+
+#include <SDL_image.h>
 
 #include "io/filesystem/layered_filesystem.h"
 #include "io/fileread.h"
@@ -28,28 +30,26 @@
 #include "wexception.h"
 #include "container_iterate.h"
 
-#include <SDL_image.h>
+#include "texture.h"
+
+
+using namespace std;
 
 /**
  * Create a texture, taking the pixel data from a Pic.
  * Currently it converts a 16 bit pic to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
-Texture::Texture
-	(char            const &       fnametmpl,
-	 uint32_t                const frametime,
-	 SDL_PixelFormat const &       format)
-	:
-	m_colormap (0),
-	m_pixels   (0),
-	m_curframe (0),
-	m_frame_num(0),
-	m_nrframes (0),
-	m_frametime(frametime),
-	is_32bit   (format.BytesPerPixel == 4),
-	m_was_animated(false)
+Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFormat& format)
+	: m_colormap (0),
+		m_pixels   (0),
+		m_curframe (0),
+		m_frame_num(0),
+		m_nrframes (0),
+		m_frametime(frametime),
+		is_32bit   (format.BytesPerPixel == 4),
+		m_was_animated(false)
 {
-
 	// Load the pictures one by one
 	char fname[256];
 
@@ -57,7 +57,7 @@ Texture::Texture
 		int32_t nr = m_nrframes;
 
 		// create the file name by reverse-scanning for '?' and replacing
-		snprintf(fname, sizeof(fname), "%s", &fnametmpl);
+		snprintf(fname, sizeof(fname), "%s", fnametmpl.c_str());
 		char * p = fname + strlen(fname);
 		while (p > fname) {
 			if (*--p != '?')
@@ -104,14 +104,14 @@ Texture::Texture
 #ifdef USE_OPENGL
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
-			boost::shared_ptr<GLPictureTexture> surface(new GLPictureTexture(surf));
+			GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
 			m_glFrames.push_back(surface);
 
 			// calculate shades on the first frame
 			if (!m_nrframes) {
-				surface->lock(IPixelAccess::Lock_Normal);
+				surface->lock(Surface::Lock_Normal);
 				uint32_t mmap_color_base = surface->get_pixel(0, 0);
-				surface->unlock(IPixelAccess::Unlock_NoChange);
+				surface->unlock(Surface::Unlock_NoChange);
 
 				int32_t i, shade, r, g, b, a;
 				for (i = -128; i < 128; i++) {
@@ -195,7 +195,7 @@ Texture::Texture
 	}
 
 	if (!m_nrframes)
-		throw wexception("%s: texture has no frames", &fnametmpl);
+		throw wexception("%s: texture has no frames", fnametmpl.c_str());
 }
 
 
@@ -204,15 +204,16 @@ Texture::~Texture ()
 	delete m_colormap;
 	free(m_pixels);
 	free(m_texture_picture);
+
+	BOOST_FOREACH(GLSurfaceTexture* surf, m_glFrames)
+		delete surf;
+	m_glFrames.clear();
 }
 
 /**
  * Return the basic terrain colour to be used in the minimap.
 */
-Uint32 Texture::get_minimap_color(const char shade) {
-	assert(shade >= -128);
-	assert(shade <= 127);
-
+Uint32 Texture::get_minimap_color(char shade) {
 	if (not m_pixels)
 		return m_mmap_color[128 + shade];
 

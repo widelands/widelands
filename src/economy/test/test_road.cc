@@ -51,12 +51,11 @@ struct WlTestFixture {
 	WlTestFixture() {
 	g_fs = new LayeredFileSystem();
 	}
-	~WlTestFixture() { delete g_fs; g_fs=0;}
-
+	~WlTestFixture() {delete g_fs; g_fs = 0;}
 };
 
 struct SimpleRoadTestsFixture : public WlTestFixture {
-	SimpleRoadTestsFixture() : 
+	SimpleRoadTestsFixture() :
 		g(0),
 		path(Coords(5, 5))
 	{

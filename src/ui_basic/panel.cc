@@ -17,18 +17,20 @@
  *
  */
 
-#include "panel.h"
+#include <boost/concept_check.hpp>
 
 #include "constants.h"
 #include "graphic/font_handler.h"
-#include "graphic/offscreensurface.h"
+#include "graphic/font_handler1.h"
+#include "graphic/iblitable_surface.h"
 #include "graphic/rendertarget.h"
-#include "graphic/wordwrap.h"
 #include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-#include <boost/concept_check.hpp>
+#include "text_layout.h"
+
+#include "panel.h"
 
 namespace UI {
 
@@ -40,8 +42,8 @@ Panel * Panel::_g_mousein   = 0;
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::_g_allow_user_input = true;
-PictureID Panel::s_default_cursor = g_gr->get_no_picture();
-PictureID Panel::s_default_cursor_click = g_gr->get_no_picture();
+const IPicture* Panel::s_default_cursor = NULL;
+const IPicture* Panel::s_default_cursor_click = NULL;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -59,7 +61,7 @@ Panel::Panel
 	_border_snap_distance(0), _panel_snap_distance(0),
 	_desired_w(nw), _desired_h(nh),
 	_running(false),
-	_tooltip(tooltip_text.size() ? strdup(tooltip_text.c_str()) : 0)
+	_tooltip(tooltip_text)
 {
 	assert(nparent != this);
 	if (_parent) {
@@ -107,8 +109,6 @@ Panel::~Panel()
 		else
 			_parent->_lchild = _prev;
 	}
-
-	free(_tooltip);
 }
 
 
@@ -137,8 +137,8 @@ int32_t Panel::run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->get_picture(PicMod_UI,  "pics/cursor.png");
-	s_default_cursor_click = g_gr->get_picture(PicMod_UI,  "pics/cursor_click.png");
+	s_default_cursor = g_gr->imgcache().load(PicMod_UI,  "pics/cursor.png");
+	s_default_cursor_click = g_gr->imgcache().load(PicMod_UI,  "pics/cursor_click.png");
 
 	// Loop
 	_running = true;
@@ -187,8 +187,7 @@ int32_t Panel::run()
 			if (Panel * lowest = _mousein) {
 				while (Panel * const mousein = lowest->_mousein)
 					lowest = mousein;
-				if (char const * const text = lowest->tooltip())
-					draw_tooltip(rt, text);
+				draw_tooltip(rt, lowest->tooltip());
 			}
 
 			g_gr->refresh();
@@ -261,11 +260,6 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	_w = nw;
 	_h = nh;
 
-	if (_cache) {
-		// The old surface is freed automatically
-		_cache = g_gr->create_offscreen_surface(_w, _h);
-	}
-
 	if (_parent)
 		move_inside_parent();
 
@@ -311,8 +305,6 @@ void Panel::set_desired_size(uint32_t w, uint32_t h)
 	if (_desired_w == w && _desired_h == h)
 		return;
 
-	assert(w >= 0);
-	assert(h >= 0);
 	assert(w < 3000);
 	assert(h < 3000);
 
@@ -533,21 +525,17 @@ void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
  * Enable/Disable the drawing cache.
  * When the drawing cache is enabled, draw() is only called after an update()
  * has been called explicitly. Otherwise, the contents of the panel are copied
- * from an \ref IOffscreenSurface containing the cached image, provided that
- * the graphics system supports it.
+ * from an \ref Surface containing the cached image.
  *
  * \note Caching only works properly for solid panels that have no transparency.
  */
 void Panel::set_cache(bool cache)
 {
-	if (!g_gr->caps().offscreen_rendering)
-		return;
-
 	if (cache) {
 		_flags |= pf_cache;
 	} else {
 		_flags &= ~pf_cache;
-		_cache.reset();
+		_cache.reset(NULL);
 	}
 }
 
@@ -647,7 +635,7 @@ bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
  */
 bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t)
 {
-	return _tooltip;
+	return !_tooltip.empty();
 }
 
 /**
@@ -846,22 +834,22 @@ void Panel::do_draw(RenderTarget & dst)
 		uint32_t innerh = _h - (_tborder + _bborder);
 
 		if
-			(!_cache || !_cache->valid() ||
-			 static_cast<Surface *>(_cache.get())->get_w() != innerw ||
-			 static_cast<Surface *>(_cache.get())->get_h() != innerh)
+			(!_cache ||
+			 _cache.get()->get_w() != innerw ||
+			 _cache.get()->get_h() != innerh)
 		{
-			_cache = g_gr->create_offscreen_surface(innerw, innerh);
+			_cache.reset(g_gr->create_surface(innerw, innerh, false));
 			_needdraw = true;
 		}
 
 		if (_needdraw) {
-			RenderTarget inner(_cache);
+			RenderTarget inner(_cache.get());
 			do_draw_inner(inner);
 
 			_needdraw = false;
 		}
 
-		dst.blit(Point(_lborder, _tborder), _cache);
+		dst.blit(Point(_lborder, _tborder), _cache.get(), CM_Copy);
 	} else {
 		Rect innerwindow
 			(Point(_lborder, _tborder),
@@ -1091,8 +1079,8 @@ void Panel::ui_mousemove
 		return;
 
 	Panel * p;
-	uint32_t w, h;
-	g_gr->get_picture_size(s_default_cursor, w, h);
+	uint32_t w = s_default_cursor->get_w();
+	uint32_t h = s_default_cursor->get_h();
 
 	g_gr->update_rectangle(x - xdiff, y - ydiff, w, h);
 	g_gr->update_rectangle(x, y, w, h);
@@ -1116,39 +1104,28 @@ void Panel::ui_key(bool const down, SDL_keysym const code)
 }
 
 /**
- * Set the tooltip for the panel.
- */
-void Panel::set_tooltip(const char * const text) {
-	assert(not text or *text);
-	if (_tooltip != text) {
-		free(_tooltip);
-		_tooltip = text ? strdup(text) : 0;
-	}
-}
-
-/**
  * Draw the tooltip.
  */
 void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 {
-	static const uint32_t TIP_WIDTH_MAX = 360;
-	static TextStyle tooltip_style;
-	if (!tooltip_style.font) {
-		tooltip_style.font = Font::get(UI_FONT_TOOLTIP);
-		tooltip_style.fg = UI_FONT_TOOLTIP_CLR;
-		tooltip_style.bold = true;
+	if (text.empty())
+		return;
+
+	std::string text_to_render = text;
+	if (!is_richtext(text_to_render)) {
+		text_to_render = as_tooltip(text);
 	}
 
-	WordWrap ww(tooltip_style, TIP_WIDTH_MAX);
+	static const uint32_t TIP_WIDTH_MAX = 360;
+	const IPicture* rendered_text = UI::g_fh1->render(text_to_render, TIP_WIDTH_MAX);
+	if (!rendered_text)
+		return;
 
-	ww.wrap(text);
+	uint32_t tip_width = rendered_text->get_w() + 4;
+	uint32_t tip_height = rendered_text->get_h() + 4;
 
-	uint32_t tip_width = ww.width() + 4;
-	uint32_t tip_height = ww.height() + 4;
-
-	const WLApplication & wlapplication = *WLApplication::get();
 	Rect r
-		(wlapplication.get_mouse_position() + Point(2, 32),
+		(WLApplication::get()->get_mouse_position() + Point(2, 32),
 		 tip_width, tip_height);
 	const Point tooltip_bottom_right = r.bottom_right();
 	const Point screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
@@ -1159,8 +1136,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-
-	ww.draw(dst, r + Point(2, 2));
+	dst.blit(r + Point(2, 2), rendered_text);
 }
 
 std::string Panel::ui_fn() {

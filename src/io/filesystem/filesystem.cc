@@ -321,8 +321,8 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
  * Returns the filename of this path, everything after the last
  * / or \  (or the whole string)
  */
-char const * FileSystem::FS_Filename(char const * p) {
-	char const * result = p;
+const char * FileSystem::FS_Filename(const char * p) {
+	const char * result = p;
 
 	while (*p != '\0') {
 		if (*p == '/' || *p == '\\')
@@ -333,32 +333,22 @@ char const * FileSystem::FS_Filename(char const * p) {
 	return result;
 }
 
-char const * FileSystem::FS_Filename(char const * p, char const * & extension)
+std::string FileSystem::FS_FilenameExt(const std::string & f)
 {
-	extension = 0;
-	char const * result = p;
+	// Find last '.' - denotes start of extension
+	size_t ext_start = f.rfind('.');
 
-	while (*p != '\0') {
-		if (*p == '/' || *p == '\\') {
-			extension = 0;
-			result = p + 1;
-		} else if (*p == '.')
-			extension = p;
-		++p;
-	}
-
-
-	if (not extension)
-		extension = p;
-	return result;
+	if (std::string::npos == ext_start)
+		return "";
+	else
+		return f.substr(ext_start);
 }
 
-std::string FileSystem::FS_FilenameWoExt(char const * const p)
+std::string FileSystem::FS_FilenameWoExt(const char * const p)
 {
-	char const * extension;
-	std::string fname(p ? FileSystem::FS_Filename(p, extension) : "");
-	return
-		extension ? fname.substr(0, fname.length() - strlen(extension)) : fname;
+	std::string fname(p ? FileSystem::FS_Filename(p) : "");
+	std::string ext(FileSystem::FS_FilenameExt(fname));
+	return fname.substr(0, fname.length() - ext.length());
 }
 
 /// Create a filesystem from a zipfile or a real directory

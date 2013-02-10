@@ -20,21 +20,12 @@
 #ifndef FONT_HANDLER_H
 #define FONT_HANDLER_H
 
-#include "ui_basic/align.h"
-#include "point.h"
-#include "rgbcolor.h"
-#include "graphic.h"
-#include "picture_id.h"
-
-#include <SDL_ttf.h>
-
 #include <boost/scoped_ptr.hpp>
 
-#include <list>
-#include <cstring>
-#include <vector>
+#include "point.h"
+#include "ui_basic/align.h"
 
-struct RenderTarget;
+class RenderTarget;
 
 namespace UI {
 
@@ -62,14 +53,6 @@ struct Font_Handler {
 		 Align align = Align_CenterLeft,
 		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 	uint32_t draw_text_raw(RenderTarget &, const TextStyle &, Point dstpoint, const std::string & text);
-	void draw_multiline
-		(RenderTarget &,
-		 const TextStyle &,
-		 Point dstpoint,
-		 const std::string & text,
-		 Align align = Align_CenterLeft,
-		 uint32_t wrap = std::numeric_limits<uint32_t>::max(),
-		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 
 	void get_size
 		(const TextStyle &,
@@ -84,10 +67,6 @@ struct Font_Handler {
 	uint32_t get_fontheight(std::string const & name, int32_t size);
 	void do_align
 		(Align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
-	// This deletes all cached pictures, it is called
-	// from the graphics code before the graphics are flushed,
-	// to make sure that everything is forgotten
-	void flush_cache();
 
 private:
 	struct Data;

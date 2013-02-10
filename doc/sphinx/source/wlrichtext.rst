@@ -59,7 +59,7 @@ font-size
 
 font-face
    Name of the font to use. The valid fonts can be found in the ``fonts/``
-   directory inside the widelands directory. The default is ``FreeSans``.
+   directory inside the widelands directory. The default is ``DejaVuSans``.
 
 font-color
    The color of this font as a RGB hex tuple. That means 000000 is completely

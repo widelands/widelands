@@ -47,7 +47,7 @@ Worker_Descr::Worker_Descr
 	m_helptext(global_s.get_string("help", "")),
 	m_ware_hotspot(global_s.get_Point("ware_hotspot", Point(0, 15))),
 	m_icon_fname(directory + "/menu.png"),
-	m_icon(g_gr->get_no_picture()),
+	m_icon(NULL),
 	m_buildable     (false),
 	m_level_experience(-1),
 	m_becomes (Ware_Index::Null())
@@ -160,7 +160,7 @@ Worker_Descr::~Worker_Descr()
  */
 void Worker_Descr::load_graphics()
 {
-	m_icon = g_gr->get_picture(PicMod_Game, m_icon_fname.c_str());
+	m_icon = g_gr->imgcache().load(PicMod_Game, m_icon_fname.c_str());
 }
 
 

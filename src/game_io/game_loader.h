@@ -23,7 +23,7 @@
 #include <stdint.h>
 #include <string>
 
-struct FileSystem;
+class FileSystem;
 
 namespace Widelands {
 

@@ -93,13 +93,13 @@ m_flag_to_connect(Widelands::Coords::Null()),
 
 #define INIT_BTN_this(picture, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ g_gr->imgcache().load(PicMod_Game, "pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ g_gr->imgcache().load(PicMod_Game, "pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 
@@ -211,6 +211,10 @@ m_toggle_help
 		(boost::lambda::new_ptr<GameMessageMenu>(),
 		 boost::ref(*this),
 		 boost::ref(m_message_menu));
+	m_mainm_windows.stock.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<Stock_Menu>(),
+		 boost::ref(*this),
+		 boost::ref(m_mainm_windows.stock));
 
 #ifdef DEBUG //  only in debug builds
 	addCommand
@@ -296,7 +300,7 @@ void Interactive_Player::think()
 				 nr_new_messages);
 			msg_tooltip = buffer;
 		}
-		m_toggle_message_menu.set_pic(g_gr->get_picture(PicMod_UI, msg_icon));
+		m_toggle_message_menu.set_pic(g_gr->imgcache().load(PicMod_UI, msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
 	}
 }
@@ -388,6 +392,7 @@ void Interactive_Player::node_action()
 /**
  * Global in-game keypresses:
  * \li Space: toggles buildhelp
+ * \li i: show stock (inventory)
  * \li m: show minimap
  * \li o: show objectives window
  * \li c: toggle census
@@ -399,10 +404,14 @@ void Interactive_Player::node_action()
 */
 bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 {
-	if (down)
+	if (down) {
 		switch (code.sym) {
 		case SDLK_SPACE:
 			toggle_buildhelp();
+			return true;
+
+		case SDLK_i:
+			m_mainm_windows.stock.toggle();
 			return true;
 
 		case SDLK_m:
@@ -453,6 +462,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 		default:
 			break;
 		}
+	}
 
 	return Interactive_GameBase::handle_key(down, code);
 }

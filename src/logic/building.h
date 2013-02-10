@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,17 +29,17 @@
 #include "ware_types.h"
 #include "widelands.h"
 
-#include "graphic/picture_id.h"
 #include "io/filewrite.h"
 
 #include <string>
 #include <cstring>
 #include <vector>
 
-namespace UI {struct Window;}
+namespace UI {class Window;}
 struct BuildingHints;
-struct Interactive_GameBase;
+class Interactive_GameBase;
 struct Profile;
+class IPicture;
 
 namespace Widelands {
 
@@ -68,7 +68,7 @@ struct Building_Descr : public Map_Object_Descr {
 	bool is_enhanced    () const {return m_enhanced_building;}
 	bool global() const {return m_global;}
 	Buildcost const & buildcost() const throw () {return m_buildcost;}
-	PictureID get_buildicon() const {return m_buildicon;}
+	const IPicture* get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
@@ -121,7 +121,7 @@ private:
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
 	Buildcost     m_buildcost;
-	PictureID     m_buildicon;       // if buildable: picture in the build dialog
+	const IPicture*     m_buildicon;       // if buildable: picture in the build dialog
 	std::string   m_buildicon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
 	bool          m_mine;

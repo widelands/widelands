@@ -22,15 +22,16 @@
  */
 
 #include "md5.h"
+#include <cstdio>
 
-#include <cassert>
+using namespace std;
 
 /**
  * Create a hex string out of the MD5 checksum.
  */
-std::string md5_checksum::str() const
+string md5_checksum::str() const
 {
-	std::string s;
+	string s;
 
 	for (uint32_t i = 0; i < sizeof(data); ++i) {
 		char buf[3];

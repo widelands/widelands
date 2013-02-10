@@ -20,7 +20,8 @@
 #ifndef WARESDISPLAY_H
 #define WARESDISPLAY_H
 
-#include "observer.h"
+#include <boost/signal.hpp>
+
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
 #include "logic/tribe.h"
@@ -44,20 +45,21 @@ struct WareList;
  *
  * For practical purposes, use one of the derived classes, e.g. @ref WaresDisplay.
  */
-struct AbstractWaresDisplay : public UI::Panel, virtual public Observer {
+class AbstractWaresDisplay : public UI::Panel {
+public:
 	AbstractWaresDisplay
 		(UI::Panel * const parent,
-		 int32_t const x, int32_t const y,
-		 Widelands::Tribe_Descr const &,
+		 int32_t x, int32_t y,
+		 const Widelands::Tribe_Descr &,
 		 Widelands::WareWorker type,
 		 bool selectable,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = NULL,
 		 bool horizontal = true);
 
 	bool handle_mousemove
-		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 
 
 	// Wares may be selected (highlighted)
@@ -81,18 +83,15 @@ struct AbstractWaresDisplay : public UI::Panel, virtual public Observer {
 	Widelands::Ware_Index ware_at_point(int32_t x, int32_t y) const;
 	Widelands::WareWorker get_type() const {return m_type;}
 
-	// implements Observer
-	void observed_changed() {update();}
-
 protected:
 	virtual void layout();
 
-	virtual std::string info_for_ware(Widelands::Ware_Index const) = 0;
+	virtual std::string info_for_ware(Widelands::Ware_Index) = 0;
 
 	virtual RGBColor info_color_for_ware(Widelands::Ware_Index);
 
-	Widelands::Tribe_Descr::WaresOrder const & icons_order() const;
-	Widelands::Tribe_Descr::WaresOrderCoords const & icons_order_coords() const;
+	const Widelands::Tribe_Descr::WaresOrder & icons_order() const;
+	const Widelands::Tribe_Descr::WaresOrderCoords & icons_order_coords() const;
 	virtual Point ware_position(Widelands::Ware_Index) const;
 	virtual void draw(RenderTarget &);
 	virtual void draw_ware
@@ -100,10 +99,10 @@ protected:
 		 Widelands::Ware_Index);
 
 private:
-	typedef std::vector<Widelands::WareList const *> vector_type;
+	typedef std::vector<const Widelands::WareList *> vector_type;
 	typedef std::vector<bool> selection_type;
 
-	Widelands::Tribe_Descr const & m_tribe;
+	const Widelands::Tribe_Descr & m_tribe;
 	Widelands::WareWorker m_type;
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
@@ -114,57 +113,36 @@ private:
 };
 
 /*
-struct WaresDisplay
+class WaresDisplay
 ------------------
-Panel that displays the contents of a WareList.
+Panel that displays the contents of many WareLists. The ware_lists
+must be valid while they are registered with this class.
 */
-struct WaresDisplay : public AbstractWaresDisplay {
+class WaresDisplay : public AbstractWaresDisplay {
+public:
 	WaresDisplay
 		(UI::Panel * const parent,
-		 int32_t const x, int32_t const y,
-		 Widelands::Tribe_Descr const &,
+		 int32_t x, int32_t y,
+		 const Widelands::Tribe_Descr &,
 		 Widelands::WareWorker type,
 		 bool selectable);
 
 	virtual ~WaresDisplay();
 
-	void add_warelist(Widelands::WareList const &);
+	void add_warelist(const Widelands::WareList &);
 	void remove_all_warelists();
 
 protected:
 	virtual std::string info_for_ware(Widelands::Ware_Index);
 
 private:
-	typedef std::vector<Widelands::WareList const *> vector_type;
+	typedef std::vector<const Widelands::WareList *> vector_type;
 	vector_type         m_warelists;
+	std::vector<boost::signals::connection> connections_;
 };
 
-
-/**
- * Displays the build costs of a given building
- */
-
-struct WaresMapDisplay : public UI::Panel {
-	typedef std::map<Widelands::Ware_Index, uint8_t> maptype;
-
-	WaresMapDisplay
-		(UI::Panel * const parent,
-		 int32_t const x, int32_t const y,
-		 int32_t columns,
-		 Widelands::Tribe_Descr const & tribe,
-		 maptype const * map = NULL);
-
-	virtual ~WaresMapDisplay();
-
-	void set_map(maptype const * map);
-
-private:
-	virtual void draw(RenderTarget &);
-
-private:
-	Widelands::Tribe_Descr const & m_tribe;
-	maptype const * m_map;
-	int32_t m_columns;
-};
+std::string waremap_to_richtext
+		(const Widelands::Tribe_Descr & tribe,
+		 const std::map<Widelands::Ware_Index, uint8_t> & map);
 
 #endif

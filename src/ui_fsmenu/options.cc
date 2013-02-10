@@ -47,17 +47,17 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_advanced_options
 		(this, "advanced_options",
 		 get_w() * 9 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 _("Advanced Options"), std::string(), true, false),
 	m_cancel
 		(this, "cancel",
 		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -65,18 +65,18 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this,
 		 (get_w() / 2) - (m_vbutw * 2), get_h() * 3833 / 10000, get_w() / 5, m_vbutw,
 		 opt.maxfps, 0, 100, "",
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 	m_sb_autosave
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8167 / 10000, get_w() / 4, m_vbutw,
 		 opt.autosave / 60, 0, 100, _("min."),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"), true),
 
 	m_sb_remove_replays
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
 		 opt.remove_replays, 0, 365, _("days"),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"), true),
 
 // Title
 	m_title
@@ -236,37 +236,47 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	// take a copy to not change real video info structure
-	SDL_PixelFormat  fmt = *SDL_GetVideoInfo()->vfmt;
+	SDL_PixelFormat fmt = *SDL_GetVideoInfo()->vfmt;
+
 	fmt.BitsPerPixel = 16;
-	if
-		(SDL_Rect const * const * const modes =
-		 	SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
-		for (uint32_t i = 0; modes[i]; ++i)
-			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
-				res const this_res = {modes[i]->w, modes[i]->h, 16};
+	for
+		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
+		 modes && *modes;
+		 ++modes)
+	{
+		const SDL_Rect & mode = **modes;
+		if (640 <= mode.w and 480 <= mode.h)
+		{
+			const Resolution this_res = {mode.w, mode.h, fmt.BitsPerPixel};
 			if
 				(m_resolutions.empty()
-				 or
-				 this_res.xres != m_resolutions.rbegin()->xres
-				 or
-				 this_res.yres != m_resolutions.rbegin()->yres)
+				 || this_res.xres != m_resolutions.rbegin()->xres
+				 || this_res.yres != m_resolutions.rbegin()->yres)
+			{
 				m_resolutions.push_back(this_res);
 			}
+		}
+	}
+
 	fmt.BitsPerPixel = 32;
-	if
-		(SDL_Rect const * const * const modes =
-		 	SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN))
-		for (uint32_t i = 0; modes[i]; ++i)
-			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
-				res const this_res = {modes[i]->w, modes[i]->h, 32};
-				if
-					(m_resolutions.empty()
-					 or
-					 this_res.xres != m_resolutions.rbegin()->xres
-					 or
-					 this_res.yres != m_resolutions.rbegin()->yres)
-					m_resolutions.push_back(this_res);
+	for
+		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
+		 modes && *modes;
+		 ++modes)
+	{
+		const SDL_Rect & mode = **modes;
+		if (640 <= mode.w and 480 <= mode.h)
+		{
+			const Resolution this_res = {mode.w, mode.h, fmt.BitsPerPixel};
+			if
+				(m_resolutions.empty()
+				 || this_res.xres != m_resolutions.rbegin()->xres
+				 || this_res.yres != m_resolutions.rbegin()->yres)
+			{
+				m_resolutions.push_back(this_res);
 			}
+		}
+	}
 
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
@@ -279,12 +289,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 			m_resolutions[i].yres  == opt.yres and
 			m_resolutions[i].depth == opt.depth;
 		did_select_a_res |= selected;
-		m_reslist.add(buf, 0, g_gr->get_no_picture(), selected);
+		m_reslist.add(buf, 0, NULL, selected);
 	}
 	if (not did_select_a_res) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", opt.xres, opt.yres, opt.depth);
-		m_reslist.add(buf, 0, g_gr->get_no_picture(), true);
+		m_reslist.add(buf, 0, NULL, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
 		m_resolutions[entry].xres  = opt.xres;
@@ -295,11 +305,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	// Fill language list
 	m_language_list.add
 		(_("Try system language"), "", // "try", as many translations are missing.
-		 g_gr->get_no_picture(), "" == opt.language);
+		 NULL, "" == opt.language);
 
 	m_language_list.add
 		("English", "en",
-		 g_gr->get_no_picture(), "en" == opt.language);
+		 NULL, "en" == opt.language);
 
 	filenameset_t files;
 	Section * s = &g_options.pull_section("global");
@@ -325,14 +335,14 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		char const * const abbrev = FileSystem::FS_Filename(path);
 		m_language_list.add
 			(s->get_string(abbrev, abbrev), abbrev,
-			 g_gr->get_no_picture(), abbrev == opt.language);
+			 NULL, abbrev == opt.language);
 		own_selected |= abbrev == opt.language;
 	}
 	// Add currently used language manually
 	if (!own_selected)
 		m_language_list.add
 			(s->get_string(opt.language.c_str(), opt.language.c_str()),
-			 opt.language, g_gr->get_no_picture(), true);
+			 opt.language, NULL, true);
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
@@ -343,6 +353,26 @@ void Fullscreen_Menu_Options::advanced_options() {
 	}
 }
 
+bool Fullscreen_Menu_Options::handle_key(bool down, SDL_keysym code)
+{
+	if (down)
+	{
+		switch (code.sym)
+		{
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				end_modal(static_cast<int32_t>(om_ok));
+				return true;
+			case SDLK_ESCAPE:
+				end_modal(static_cast<int32_t>(om_cancel));
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+
+	return Fullscreen_Menu_Base::handle_key(down, code);
+}
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
@@ -388,12 +418,12 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_cancel
 		(this, "cancel",
 		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() / 4,   get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
@@ -401,17 +431,17 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		(this,
 		 get_w() * 18 / 25, get_h() * 63 / 100, get_w() / 4, m_vbutw,
 		 opt.speed_of_new_game / 1000, 0, 100, _("x"),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 	m_sb_dis_panel
 		(this,
 		 get_w() * 18 / 25, get_h() * 6768 / 10000, get_w() / 4, m_vbutw,
 		 opt.panel_snap_distance, 0, 100, _("px."),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 	m_sb_dis_border
 		(this,
 		 get_w() * 18 / 25, get_h() * 7235 / 10000, get_w() / 4, m_vbutw,
 		 opt.border_snap_distance, 0, 100, _("px."),
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png")),
 
 
 // Title
@@ -523,15 +553,15 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
 		did_select_a_font = cmpbool;
 		m_ui_font_list.add
-			(_("FreeSerif (Default)"), "serif", g_gr->get_no_picture(), cmpbool);
+			(_("DejaVuSerif (Default)"), "serif", NULL, cmpbool);
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
-			("FreeSans", "sans", g_gr->get_no_picture(), cmpbool);
+			("DejaVuSans", "sans", NULL, cmpbool);
 		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
-			("Widelands", UI_FONT_NAME_WIDELANDS, g_gr->get_no_picture(), cmpbool);
+			("Widelands", UI_FONT_NAME_WIDELANDS, NULL, cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
 		filenameset_t files;
@@ -553,13 +583,35 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 			cmpbool = !strcmp(name, opt.ui_font.c_str());
 			did_select_a_font |= cmpbool;
 			m_ui_font_list.add
-				(name, name, g_gr->get_no_picture(), cmpbool);
+				(name, name, NULL, cmpbool);
 		}
 
 		if (!did_select_a_font)
 			m_ui_font_list.select(0);
 	}
 }
+
+bool Fullscreen_Menu_Advanced_Options::handle_key(bool down, SDL_keysym code)
+{
+	if (down)
+	{
+		switch (code.sym)
+		{
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				end_modal(static_cast<int32_t>(om_ok));
+				return true;
+			case SDLK_ESCAPE:
+				end_modal(static_cast<int32_t>(om_cancel));
+				return true;
+			default:
+				break; // not handled
+		}
+	}
+
+	return Fullscreen_Menu_Base::handle_key(down, code);
+}
+
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	// Write all remaining data from UI elements
