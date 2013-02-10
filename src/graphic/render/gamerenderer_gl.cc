@@ -501,7 +501,7 @@ void GameRendererGL::draw_terrain_dither()
 
 uint8_t GameRendererGL::field_roads(const FCoords & coords) const
 {
-	if (m_player) {
+	if (m_player && !m_player->see_all()) {
 		const Map & map = m_egbase->map();
 		const Player::Field & pf = m_player->fields()[Map::get_index(coords, map.get_width())];
 		return pf.roads | map.get_overlay_manager().get_road_overlay(coords);

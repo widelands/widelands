@@ -63,7 +63,6 @@ public:
 
 private:
 	Surface* reload_image_() const {
-		log("Loading image %s.\n", filename_.c_str());
 		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_));
 		return surf;
 	}
