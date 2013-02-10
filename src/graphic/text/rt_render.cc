@@ -400,7 +400,7 @@ public:
 	virtual uint16_t height() {return 0;}
 	virtual uint16_t width() {return INFINITE_WIDTH; }
 	virtual uint16_t hotspot_y() {return 0;}
-	virtual Surface* render(SurfaceCache* surface_cache) {
+	virtual Surface* render(SurfaceCache* /* surface_cache */) {
 		assert(false); // This should never be called
 	}
 	virtual bool is_non_mandatory_space() {return true;}
@@ -417,7 +417,7 @@ public:
 	virtual uint16_t height() {return m_h;}
 	virtual uint16_t width() {return m_w;}
 	virtual uint16_t hotspot_y() {return m_h;}
-	virtual Surface* render(SurfaceCache* surface_cache) {
+	virtual Surface* render(SurfaceCache* /* surface_cache */) {
 		Surface* rv = Surface::create(m_w, m_h);
 
 		// Draw background image (tiling)
@@ -452,8 +452,8 @@ private:
  */
 class SubTagRenderNode : public RenderNode {
 public:
-	SubTagRenderNode(NodeStyle& ns) : RenderNode(ns), m_bg_clr_set(false),
-		m_bg_clr(0, 0, 0), m_bg_img(0) {
+	SubTagRenderNode(NodeStyle& ns) : RenderNode(ns),
+		m_bg_clr(0, 0, 0), m_bg_clr_set(false), m_bg_img(0) {
 	}
 	virtual ~SubTagRenderNode() {
 		foreach(RenderNode* n, m_nodes_to_render) {
@@ -548,7 +548,7 @@ private:
 	const Image& m_image;
 };
 
-Surface* ImgRenderNode::render(SurfaceCache* surface_cache) {
+Surface* ImgRenderNode::render(SurfaceCache* /* surface_cache */) {
 	Surface* rv = Surface::create(m_image.width(), m_image.height());
 	rv->blit(Point(0, 0), m_image.surface(), Rect(0, 0, m_image.width(), m_image.height()), CM_Copy);
 	return rv;
@@ -960,7 +960,7 @@ private:
 };
 
 Renderer::Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IFontLoader* fl, IParser* p) :
-	image_cache_(image_cache), surface_cache_(surface_cache), m_fc(fl), m_p(p) {
+	m_fc(fl), m_p(p), image_cache_(image_cache), surface_cache_(surface_cache) {
 }
 
 Renderer::~Renderer() {

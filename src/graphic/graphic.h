@@ -34,7 +34,7 @@
 
 namespace UI {struct ProgressWindow;}
 
-class AnimationGfx;
+struct AnimationGfx;
 class ImageLoaderImpl;
 class RenderTarget;
 class Screen;
@@ -81,7 +81,8 @@ struct GraphicCaps
 /**
  * A renderer to get pixels to a 16bit framebuffer.
  */
-struct Graphic {
+class Graphic {
+public:
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
 		 bool fullscreen, bool opengl);

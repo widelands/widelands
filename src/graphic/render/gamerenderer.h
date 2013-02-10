@@ -29,7 +29,7 @@ namespace Widelands {
 	struct Editor_Game_Base;
 };
 
-struct RenderTarget;
+class RenderTarget;
 
 /**
  * This abstract base class renders the main game view into an

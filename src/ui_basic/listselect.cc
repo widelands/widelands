@@ -479,16 +479,16 @@ bool BaseListselect::handle_mousemove(Uint8, int32_t, int32_t y, int32_t, int32_
 
 bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 	if (down) {
-		uint32_t selected;
+		uint32_t selected_idx;
 		switch (code.sym) {
 		case SDLK_KP2:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
 		case SDLK_DOWN:
-			selected = selection_index() + 1;
-			if (selected < size())
-				select(selected);
+			selected_idx = selection_index() + 1;
+			if (selected_idx < size())
+				select(selected_idx);
 			if ((selection_index() + 1) * get_lineheight() - get_inner_h() > m_scrollpos) {
 				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
 				m_scrollpos = (scrollpos < 0) ? 0 : scrollpos;
@@ -500,9 +500,9 @@ bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 				break;
 			/* no break */
 		case SDLK_UP:
-			selected = selection_index();
-			if (selected > 0)
-				select(selected - 1);
+			selected_idx = selection_index();
+			if (selected_idx > 0)
+				select(selected_idx - 1);
 			if (selection_index() * get_lineheight() < m_scrollpos) {
 				m_scrollpos = selection_index() * get_lineheight();
 				m_scrollbar.set_scrollpos(m_scrollpos);

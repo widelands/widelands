@@ -161,9 +161,9 @@ void NetClient::run ()
 		int32_t code = lgm.run();
 		d->modal = 0;
 		if (code == 1) { // Only possible if server is dedicated - client pressed "start game" button
-			SendPacket s;
-			s.Unsigned8(NETCMD_LAUNCH);
-			s.send(d->sock);
+			SendPacket subs;
+			subs.Unsigned8(NETCMD_LAUNCH);
+			subs.send(d->sock);
 
 			// Reopen the menu - perhaps the start is denied or other problems occur
 			d->modal = &lgm;

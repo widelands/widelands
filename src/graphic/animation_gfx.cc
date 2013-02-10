@@ -34,7 +34,7 @@
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
 AnimationGfx::AnimationGfx(const AnimationData& data, ImageCache* image_cache)
-	: m_hotspot(data.hotspot), m_hasplrclrs(data.hasplrclrs), image_cache_(image_cache) {
+	: m_hotspot(data.hotspot), m_hasplrclrs(data.hasplrclrs) {
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
 	//  replaced with "idle_00". Then the code looks if there is a file with

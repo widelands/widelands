@@ -1131,8 +1131,8 @@ void Bob::Loader::load(FileRead & fr)
 
 		if (fr.Unsigned8()) {
 			uint32_t anims[6];
-			for (int i = 0; i < 6; ++i)
-				anims[i] = bob.descr().get_animation(fr.CString());
+			for (int j = 0; j < 6; ++j)
+				anims[j] = bob.descr().get_animation(fr.CString());
 			state.diranims = new DirAnimations
 				(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
 		}

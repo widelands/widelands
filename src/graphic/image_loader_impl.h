@@ -24,8 +24,6 @@
 
 #include "image_loader.h"
 
-class Graphic;
-
 class ImageLoaderImpl : public IImageLoader {
 public:
 	virtual ~ImageLoaderImpl() {}

@@ -24,9 +24,9 @@
 
 #include "point.h"
 
-class AnimationData;
 class Image;
 class ImageCache;
+struct AnimationData;
 struct RGBColor;
 
 struct AnimationGfx { /// The graphics belonging to an animation.
@@ -42,7 +42,6 @@ private:
 	std::vector<const Image*> m_pcmasks;
 	Point m_hotspot;
 	bool m_hasplrclrs;
-	ImageCache* const image_cache_; // Not owned.
 };
 
 #endif

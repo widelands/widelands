@@ -71,10 +71,6 @@ private:
 	/// Keep the size of the opengl texture. This is necessary because some
 	/// systems support only a power of two for texture sizes.
 	uint16_t m_tex_w, m_tex_h;
-
-	/// Internally, all surfaces are with alpha channel. We can ignore it, when
-	/// we should not have one, though.
-	bool has_alpha_;
 };
 
 #endif //GL_SURFACE_TEXTURE_H

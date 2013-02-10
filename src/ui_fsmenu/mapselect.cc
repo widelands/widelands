@@ -461,7 +461,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				map.set_filename(name);
 				ml->preload_map(true);
 
-				MapData mapdata;
 				mapdata.filename    = name;
 				mapdata.name        = map.get_name();
 				mapdata.author      = map.get_author();

@@ -298,7 +298,6 @@ void RenderTarget::drawstatic
 	 uint32_t       const animation,
 	 Player const * const player)
 {
-	const AnimationData& data = g_anim.get_animation(animation);
 	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
 	if (!gfx) {
 		log("WARNING: Animation %u does not exist\n", animation);

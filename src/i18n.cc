@@ -107,10 +107,9 @@ void release_textdomain() {
 	//just got dropped
 	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
-		char const * const localedir = textdomains.back().second.c_str();
 
 		bind_textdomain_codeset(domain, "UTF-8");
-		bindtextdomain(domain, localedir);
+		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
 }
@@ -242,9 +241,9 @@ void set_locale(std::string name) {
 
 	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
-		char const * const localedir = textdomains.back().second.c_str();
+
 		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain(domain, localedir);
+		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
 }

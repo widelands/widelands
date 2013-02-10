@@ -47,10 +47,8 @@ public:
 	RTImage
 		(const string& hash, SurfaceCache* surface_cache, RT::IRenderer*
 		 rt_renderer, const string& text, uint16_t width)
-		: hash_(hash),
-		surface_cache_(surface_cache),
-		  rt_renderer_(rt_renderer),
-		  text_(text), width_(width)
+		: hash_(hash), text_(text), width_(width), surface_cache_(surface_cache),
+		  rt_renderer_(rt_renderer)
 	{}
 	virtual ~RTImage() {}
 

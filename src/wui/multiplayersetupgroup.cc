@@ -245,14 +245,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		set_visible(true);
 
-		PlayerSettings const & player = settings.players[m_id];
+		PlayerSettings const & player_setting = settings.players[m_id];
 		bool typeaccess       = s->canChangePlayerState(m_id);
 		bool tribeaccess      = s->canChangePlayerTribe(m_id);
 		bool const initaccess = s->canChangePlayerInit(m_id);
 		bool teamaccess       = s->canChangePlayerTeam(m_id);
 
 		type->set_enabled(typeaccess);
-		if (player.state == PlayerSettings::stateClosed) {
+		if (player_setting.state == PlayerSettings::stateClosed) {
 			type ->set_tooltip(_("Closed"));
 			type ->set_pic(g_gr->images().get("pics/stop.png"));
 			team ->set_visible(false);
@@ -263,7 +263,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init ->set_visible(false);
 			init ->set_enabled(false);
 			return;
-		} else if (player.state == PlayerSettings::stateOpen) {
+		} else if (player_setting.state == PlayerSettings::stateOpen) {
 			type ->set_tooltip(_("Open"));
 			type ->set_pic(g_gr->images().get("pics/continue.png"));
 			team ->set_visible(false);
@@ -274,13 +274,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init ->set_visible(false);
 			init ->set_enabled(false);
 			return;
-		} else if (player.state == PlayerSettings::stateShared) {
+		} else if (player_setting.state == PlayerSettings::stateShared) {
 			type ->set_tooltip(_("Shared in"));
 			type ->set_pic(g_gr->images().get("pics/shared_in.png"));
 
 			char pic[42], hover[128];
-			snprintf(pic, sizeof(pic), "pics/fsel_editor_set_player_0%i_pos.png", player.shared_in);
-			snprintf(hover, sizeof(hover), _("Player %i"), player.shared_in);
+			snprintf(pic, sizeof(pic), "pics/fsel_editor_set_player_0%i_pos.png", player_setting.shared_in);
+			snprintf(hover, sizeof(hover), _("Player %i"), player_setting.shared_in);
 
 			tribe->set_pic(g_gr->images().get(pic));
 			tribe->set_tooltip(hover);
@@ -293,18 +293,18 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			std::string title;
 			std::string pic = "pics/";
-			if (player.state == PlayerSettings::stateComputer) {
-				if (player.ai.empty()) {
+			if (player_setting.state == PlayerSettings::stateComputer) {
+				if (player_setting.ai.empty()) {
 					title = _("Computer");
 					pic += "novalue.png";
 				} else {
 					title = _("AI: ");
-					if (player.random_ai) {
+					if (player_setting.random_ai) {
 						title += _("Random");
 						pic += "ai_Random.png";
 					} else {
-						title += _(player.ai);
-						pic += "ai_" + player.ai + ".png";
+						title += _(player_setting.ai);
+						pic += "ai_" + player_setting.ai + ".png";
 					}
 				}
 			} else { // PlayerSettings::stateHuman
@@ -313,30 +313,30 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			}
 			type->set_tooltip(title.c_str());
 			type->set_pic(g_gr->images().get(pic));
-			if (player.random_tribe) {
+			if (player_setting.random_tribe) {
 				std::string random = _("Random");
 				if (!m_tribenames["random"].size())
 					m_tribepics[random] = g_gr->images().get("pics/random.png");
 				tribe->set_tooltip(random.c_str());
 				tribe->set_pic(m_tribepics[random]);
 			} else {
-				std::string tribepath("tribes/" + player.tribe);
-				if (!m_tribenames[player.tribe].size()) {
+				std::string tribepath("tribes/" + player_setting.tribe);
+				if (!m_tribenames[player_setting.tribe].size()) {
 					// get tribes name and picture
-					Profile prof((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
+					Profile prof((tribepath + "/conf").c_str(), 0, "tribe_" + player_setting.tribe);
 					Section & global = prof.get_safe_section("tribe");
-					m_tribenames[player.tribe] = global.get_safe_string("name");
-					m_tribepics[player.tribe] =
+					m_tribenames[player_setting.tribe] = global.get_safe_string("name");
+					m_tribepics[player_setting.tribe] =
 						g_gr->images().get((tribepath + "/") + global.get_safe_string("icon"));
 				}
-				tribe->set_tooltip(m_tribenames[player.tribe].c_str());
-				tribe->set_pic(m_tribepics[player.tribe]);
+				tribe->set_tooltip(m_tribenames[player_setting.tribe].c_str());
+				tribe->set_pic(m_tribepics[player_setting.tribe]);
 			}
 			tribe->set_flat(false);
 
-			if (player.team) {
+			if (player_setting.team) {
 				char buf[64];
-				snprintf(buf, sizeof(buf), "%i", player.team);
+				snprintf(buf, sizeof(buf), "%i", player_setting.team);
 				team->set_title(buf);
 			} else {
 				team->set_title("--");
@@ -354,13 +354,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		else if (settings.savegame)
 			init->set_title(_("Savegame"));
 		else {
-			std::string tribepath("tribes/" + player.tribe);
+			std::string tribepath("tribes/" + player_setting.tribe);
 			i18n::Textdomain td(tribepath); // for translated initialisation
 			container_iterate_const
 				 (std::vector<TribeBasicInfo>, settings.tribes, i)
 			{
-				if (i.current->name == player.tribe) {
-					init->set_title(_(i.current->initializations.at(player.initialization_index).second));
+				if (i.current->name == player_setting.tribe) {
+					init->set_title(_(i.current->initializations.at(player_setting.initialization_index).second));
 					break;
 				}
 			}

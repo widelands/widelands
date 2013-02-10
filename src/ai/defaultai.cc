@@ -827,10 +827,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 		// Continue if field is blocked at the moment
 		for
-			(std::list<BlockedField *>::iterator i = blocked_fields.begin();
-			 i != blocked_fields.end();
-			 ++i)
-			if ((*i)->coords == bf->coords)
+			(std::list<BlockedField *>::iterator j = blocked_fields.begin();
+			 j != blocked_fields.end();
+			 ++j)
+			if ((*j)->coords == bf->coords)
 				continue;
 
 		assert(player);
@@ -1183,10 +1183,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 			// Continue if field is blocked at the moment
 			for
-				(std::list<BlockedField *>::iterator i = blocked_fields.begin();
-				 i != blocked_fields.end();
-				 ++i)
-				if ((*i)->coords == (*j)->coords)
+				(std::list<BlockedField *>::iterator k = blocked_fields.begin();
+				 k != blocked_fields.end();
+				 ++k)
+				if ((*k)->coords == (*k)->coords)
 					continue;
 
 			// Check if current economy can supply enough food for production.
@@ -1472,10 +1472,10 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 	container_iterate(std::list<Widelands::Coords>, flags_to_be_removed, i) {
 		// Maybe the flag was already removed?
 		FCoords f = game().map().get_fcoords(*(i.current));
-		if (upcast(Flag, flag, f.field->get_immovable())) {
+		if (upcast(Flag, other_flag, f.field->get_immovable())) {
 			// Check if building is dismantled, but don't waste precious wares
-			if (!flag->get_building() && flag->current_items() == 0) {
-				game().send_player_bulldoze(*flag);
+			if (!other_flag->get_building() && other_flag->current_items() == 0) {
+				game().send_player_bulldoze(*other_flag);
 				flags_to_be_removed.erase(i.current);
 				break;
 			}
