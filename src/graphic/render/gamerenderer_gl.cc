@@ -60,6 +60,8 @@ const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture(const Widelands
 	if (Surface* surface = g_gr->surfaces().get(cachename))
 		return dynamic_cast<GLSurfaceTexture *>(surface);
 
+	// TODO: This duplicates code from the ImageLoader, but as we cannot convert
+	// a GLSurface into another format currently, we have to eat this frog.
 	FileRead fr;
 	fr.fastOpen(*g_fs, fname.c_str());
 
