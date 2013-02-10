@@ -410,7 +410,7 @@ void initialize() {
 }
 
 const Image* resize(const Image* original, uint16_t w, uint16_t h) {
-	if (original->w() == w and original->h() == h)
+	if (original->width() == w and original->height() == h)
 		return original;
 
 	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();
