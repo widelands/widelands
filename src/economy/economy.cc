@@ -773,8 +773,6 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
  */
 void Economy::_balance_requestsupply(Game & game)
 {
-	_check_splits();
-
 	RSPairStruct rsps;
 	rsps.nexttimer = -1;
 
@@ -1026,6 +1024,8 @@ void Economy::balance(uint32_t const timerid)
 
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 
+	_check_splits();
+
 	_create_requested_workers (game);
 
 	_balance_requestsupply(game);
@@ -1034,4 +1034,3 @@ void Economy::balance(uint32_t const timerid)
 }
 
 }
-
