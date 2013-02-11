@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -131,8 +131,15 @@ struct FindImmovableByDescr {
 
 	const Immovable_Descr & descr;
 };
+struct FindFlagOf {
+	FindFlagOf(const FindImmovable & finder) : finder_(finder) {}
+
+	bool accept(const BaseImmovable &) const;
+
+	FindImmovable finder_;
+};
 
 
-}
+} // namespace Widelands
 
 #endif

@@ -797,22 +797,22 @@ uint32_t Player::findAttackSoldiers
 		soldiers->clear();
 
 	Map & map = egbase().map();
-	std::vector<BaseImmovable *> immovables;
+	std::vector<BaseImmovable *> flags;
 
 	map.find_reachable_immovables_unique
 		(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
-		 immovables,
-		 CheckStepWalkOn(MOVECAPS_WALK, false),
-		 FindImmovablePlayerMilitarySite(*this));
+		 flags,
+		 CheckStepDefault(MOVECAPS_WALK),
+		 FindFlagOf(FindImmovablePlayerMilitarySite(*this)));
 
-	if (immovables.empty())
+	if (flags.empty())
 		return 0;
 
-	container_iterate_const(std::vector<BaseImmovable *>, immovables, i) {
-		const MilitarySite & ms =
-			ref_cast<MilitarySite, BaseImmovable>(**i.current);
-		std::vector<Soldier *> const present = ms.presentSoldiers();
-		uint32_t const nr_staying = ms.minSoldierCapacity();
+	container_iterate_const(std::vector<BaseImmovable *>, flags, i) {
+		const Flag * flag = static_cast<Flag *>(*i.current);
+		const MilitarySite * ms = static_cast<MilitarySite *>(flag->get_building());
+		std::vector<Soldier *> const present = ms->presentSoldiers();
+		uint32_t const nr_staying = ms->minSoldierCapacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken =
