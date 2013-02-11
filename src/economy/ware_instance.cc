@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -261,12 +261,16 @@ void WareInstance::set_location
 	if (location) {
 		Economy * eco = 0;
 
-		if (upcast(PlayerImmovable const, playerimmovable, location))
-			eco = playerimmovable->get_economy();
+		if (upcast(Flag const, flag, location))
+			eco = flag->get_economy();
 		else if (upcast(Worker const, worker, location))
 			eco = worker->get_economy();
+		else if (upcast(PortDock const, portdock, location))
+			eco = portdock->get_economy();
 		else if (upcast(Ship const, ship, location))
 			eco = ship->get_economy();
+		else
+			throw wexception("WareInstance delivered to bad location %u", location->serial());
 
 		if (oldlocation && get_economy()) {
 			if (get_economy() != eco)
@@ -306,7 +310,7 @@ void WareInstance::update(Game & game)
 {
 	Map_Object * const loc = m_location.get(game);
 
-	if (!m_descr) // Upsy, we're not even intialized. Happens on load
+	if (!m_descr) // Upsy, we're not even initialized. Happens on load
 		return;
 
 	// Reset our state if we're not on location or outside an economy
@@ -316,7 +320,8 @@ void WareInstance::update(Game & game)
 	}
 
 	if (!loc) {
-		remove(game);
+		// If our location gets lost, our owner is supposed to destroy us
+		log("Warning(%u): WareInstance::update has no location\n", serial());
 		return;
 	}
 
@@ -361,38 +366,7 @@ void WareInstance::update(Game & game)
 			}
 		}
 
-		if (upcast(Building, building, location)) {
-			if (nextstep != &location->base_flag()) {
-				if (upcast(PortDock, pd, nextstep)) {
-					pd->add_shippingitem(game, *this);
-					return;
-				}
-
-				throw wexception
-					("MO(%u): ware: move from building to non-baseflag", serial());
-			}
-
-			// There are some situations where we might end up in a warehouse
-			// as part of a requested route, and we need to move out of it
-			// again, e.g.:
-			//  - we were requested just when we were being carried into the
-			//    warehouse
-			//  - we were carried into a harbour/warehouse to be
-			//    shipped across the sea, but a better, land-based route has been
-			//    found
-			if (upcast(Warehouse, warehouse, building)) {
-				warehouse->do_launch_item(game, *this);
-				return;
-			}
-
-			throw wexception
-				("MO(%u): ware(%s): can not move from building %u (%s at (%u,%u)) "
-				 "to %u (%s) -> not a warehouse!",
-				 serial(), m_descr->name().c_str(), location->serial(),
-				 building->name().c_str(), building->get_position().x,
-				 building->get_position().y, nextstep->serial(),
-				 nextstep->name().c_str());
-		} else if (upcast(Flag, flag, location)) {
+		if (upcast(Flag, flag, location)) {
 			flag->call_carrier
 				(game,
 				 *this,
@@ -403,7 +377,76 @@ void WareInstance::update(Game & game)
 				 &nextstep->base_flag() : nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);
+		} else {
+			throw wexception("Ware_Instance::update in bad type of PlayerImmovable %u", location->serial());
 		}
+	}
+}
+
+/**
+ * Called by a worker when it carries the ware into the given building.
+ */
+void WareInstance::enter_building(Game & game, Building & building)
+{
+	if (m_transfer) {
+		if (m_transfer->get_destination(game) == &building) {
+			Transfer * t = m_transfer;
+
+			m_transfer = 0;
+			m_transfer_nextstep = 0;
+
+			t->has_finished();
+			return;
+		}
+
+		bool success;
+		PlayerImmovable * const nextstep =
+			m_transfer->get_next_step(&building, success);
+		m_transfer_nextstep = nextstep;
+
+		if (success) {
+			assert(nextstep);
+
+			if (upcast(PortDock, pd, nextstep)) {
+				pd->add_shippingitem(game, *this);
+				return;
+			}
+
+			// There are some situations where we might end up in a warehouse
+			// as part of a requested route, and we need to move out of it
+			// again, e.g.:
+			//  - we were requested just when we were being carried into the
+			//    warehouse
+			//  - we were carried into a harbour/warehouse to be
+			//    shipped across the sea, but a better, land-based route has been
+			//    found
+			if (upcast(Warehouse, warehouse, &building)) {
+				warehouse->do_launch_item(game, *this);
+				return;
+			}
+
+			throw wexception
+				("MO(%u): ware(%s): do not know how to move from building %u (%s at (%u,%u)) "
+				 "to %u (%s) -> not a warehouse!",
+				 serial(), m_descr->name().c_str(), building.serial(),
+				 building.name().c_str(), building.get_position().x,
+				 building.get_position().y, nextstep->serial(),
+				 nextstep->name().c_str());
+		} else {
+			Transfer * t = m_transfer;
+
+			m_transfer = 0;
+			m_transfer_nextstep = 0;
+
+			t->has_failed();
+			cancel_moving();
+			update(game);
+			return;
+		}
+	} else {
+		// We don't have a transfer, so just enter the building
+		building.receive_ware(game, m_descr_index);
+		remove(game);
 	}
 }
 

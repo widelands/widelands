@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -241,8 +241,16 @@ void Fleet::check_merge_economy()
 void Fleet::cleanup(Editor_Game_Base & egbase)
 {
 	while (!m_ports.empty()) {
-		m_ports.back()->set_fleet(0);
+		PortDock * pd = m_ports.back();
 		m_ports.pop_back();
+
+		pd->set_fleet(0);
+		if (!m_ports.empty()) {
+			// This is required when, during end-of-game cleanup,
+			// the fleet gets removed before the ports
+			Flag & base = m_ports[0]->base_flag();
+			Economy::check_split(base, pd->base_flag());
+		}
 	}
 	m_portpaths.clear();
 
@@ -380,7 +388,7 @@ void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 				// since two ports can be connected by land, it is possible that
 				// disconnecting a previous port also disconnects later ports
 				if (base.get_economy() == m_ports[i]->base_flag().get_economy())
-					base.get_economy()->check_split(base, m_ports[i]->base_flag());
+					Economy::check_split(base, m_ports[i]->base_flag());
 			}
 		}
 	}
@@ -532,7 +540,7 @@ void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
 	} else {
 		set_economy(m_ports[0]->get_economy());
 		if (!m_ships.empty())
-			m_ports[0]->get_economy()->check_split(m_ports[0]->base_flag(), port->base_flag());
+			Economy::check_split(m_ports[0]->base_flag(), port->base_flag());
 	}
 
 	if (m_ships.empty() && m_ports.empty())

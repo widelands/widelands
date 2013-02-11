@@ -492,7 +492,7 @@ void Request::start_transfer(Game & game, Supply & supp)
 	} else {
 		//  Begin the transfer of an item. The item itself is passive.
 		//  launch_item() ensures the WareInstance is transported out of the
-		//  warehouse Once it's on the flag, the flag code will decide what to
+		//  warehouse. Once it's on the flag, the flag code will decide what to
 		//  do with it.
 		WareInstance & item = supp.launch_item(game, *this);
 		ss.Unsigned32(item.serial());

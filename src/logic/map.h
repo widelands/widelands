@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -149,8 +149,8 @@ struct Map :
 	Map ();
 	virtual ~Map();
 
-	Overlay_Manager * get_overlay_manager()       {return  m_overlay_manager;}
-	Overlay_Manager & get_overlay_manager() const {return *m_overlay_manager;}
+	Overlay_Manager * get_overlay_manager()       {return m_overlay_manager;}
+	Overlay_Manager * get_overlay_manager() const {return m_overlay_manager;}
 	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
 	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
 

@@ -73,8 +73,12 @@ void ShippingItem::set_location(Game & game, Map_Object * obj)
 	Worker * worker;
 	get(game, ware, worker);
 
-	if (ware)
-		ware->set_location(game, obj);
+	if (ware) {
+		if (upcast(Building, building, obj))
+			ware->enter_building(game, *building);
+		else
+			ware->set_location(game, obj);
+	}
 	if (worker) {
 		worker->set_location(dynamic_cast<PlayerImmovable *>(obj));
 		if (upcast(Building, building, obj)) {

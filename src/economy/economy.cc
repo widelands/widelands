@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,8 +120,8 @@ void Economy::check_merge(Flag & f1, Flag & f2)
 }
 
 /**
- * Check whether the given flags can still reach each other (pathfinding!).
- * If not, the economy is split in two.
+ * Notify the economy that there may no longer be a connection between
+ * the given flags in the road and seafaring network.
  */
 void Economy::check_split(Flag & f1, Flag & f2)
 {
@@ -133,35 +133,59 @@ void Economy::check_split(Flag & f1, Flag & f2)
 	if (not e)
 		return;
 
-	// Start an A-star search from f1 towards f2.
-	// Keep track of which flags are reachable from f1,
-	// so that we do not have to re-scan everything in case
-	// the economy really does split
-	Map & map = e->owner().egbase().map();
-	RouteAStar<AStarEstimator> astar(*e->m_router, wwWORKER, AStarEstimator(map, f2));
-	astar.push(f1);
+	e->m_split_checks.push_back(std::make_pair(OPtr<Flag>(&f1), OPtr<Flag>(&f2)));
+	e->rebalance_supply(); // the real split-checking is done during rebalance
+}
 
-	std::set<OPtr<Flag> > reachable;
-	while (RoutingNode * current = astar.step()) {
-		Flag * curflag = static_cast<Flag *>(current);
-		if (curflag == &f2)
-			return;
+void Economy::_check_splits()
+{
+	Map & map = owner().egbase().map();
 
-		reachable.insert(curflag);
-	}
+	while (m_split_checks.size()) {
+		Flag * f1 = m_split_checks.back().first.get(owner().egbase());
+		Flag * f2 = m_split_checks.back().second.get(owner().egbase());
+		m_split_checks.pop_back();
 
-	// When we get to this point, a split really did occur
-	// Attempt to split off only a reasonably small part of the economy
-	// for performance reasons
-	if (reachable.size() <= e->m_flags.size() * 3 / 5) {
-		e->_split(reachable);
-	} else {
-		std::set<OPtr<Flag> > others;
-		container_iterate_const(Flags, e->m_flags, it) {
-			if (reachable.count(*it.current) == 0)
-				others.insert(*it.current);
+		if (!f1 || !f2) {
+			if (!f1 && !f2)
+				continue;
+			if (!f1)
+				f1 = f2;
+			if (f1->get_economy() != this)
+				continue;
+
+			// Handle the case when two or more roads are removed simultaneously
+			RouteAStar<AStarZeroEstimator> astar(*m_router, wwWORKER, AStarZeroEstimator());
+			astar.push(*f1);
+			std::set<OPtr<Flag> > reachable;
+			while (RoutingNode * current = astar.step())
+				reachable.insert(&current->base_flag());
+			if (reachable.size() != m_flags.size())
+				_split(reachable);
+			continue;
 		}
-		e->_split(others);
+
+		// If one (or both) of the flags have already been split off, we do not need to re-check
+		if (f1->get_economy() != this || f2->get_economy() != this)
+			continue;
+
+		// Start an A-star searches from f1 towards f2.
+		// If f2 is not reached, split off all the nodes that have been reached from f1.
+		// This policy means that the newly created economy, which contains all the
+		// flags that have been split, is already connected.
+		RouteAStar<AStarEstimator> astar(*m_router, wwWORKER, AStarEstimator(map, *f2));
+		astar.push(*f1);
+		std::set<OPtr<Flag> > reachable;
+
+		for (;;) {
+			RoutingNode * current = astar.step();
+			if (!current) {
+				_split(reachable);
+				break;
+			} else if (current == f2)
+				break;
+			reachable.insert(&current->base_flag());
+		}
 	}
 }
 
@@ -544,6 +568,8 @@ void Economy::_merge(Economy & e)
 
 	// Fix up Supply/Request after rebuilding
 	m_rebuilding = false;
+
+	m_split_checks.insert(m_split_checks.end(), e.m_split_checks.begin(), e.m_split_checks.end());
 
 	// implicitly delete the economy
 	delete &e;
@@ -998,6 +1024,8 @@ void Economy::balance(uint32_t const timerid)
 
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 
+	_check_splits();
+
 	_create_requested_workers (game);
 
 	_balance_requestsupply(game);
@@ -1006,4 +1034,3 @@ void Economy::balance(uint32_t const timerid)
 }
 
 }
-

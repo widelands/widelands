@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 
 namespace Widelands {
 
+struct Building;
 struct Economy;
 struct Editor_Game_Base;
 struct Game;
@@ -42,11 +43,15 @@ struct Transfer;
  * The WareInstance never draws itself; the carrying worker or the current flag
  * location are responsible for that.
  *
- * The location of a ware can be one of the following:
- * \li a flag
- * \li a worker that is currently carrying the ware
- * \li a building; this should only be temporary until the ware is incorporated
- *     into the building somehow
+ * For robustness reasons, a WareInstance can only exist in a location that
+ * assumes responsible for updating the instance's economy via \ref set_economy,
+ * and that destroys the WareInstance when the location is destroyed.
+ *
+ * Currently, the location of a ware can be one of the following:
+ * \li a \ref Flag
+ * \li a \ref Worker that is currently carrying the ware
+ * \li a \ref PortDock or \ref Ship where the ware is encapsulated in a \ref ShippingItem
+ *     for seafaring
  */
 class WareInstance : public Map_Object {
 	friend struct Map_Waredata_Data_Packet;
@@ -73,6 +78,8 @@ public:
 
 	void set_location(Editor_Game_Base &, Map_Object * loc);
 	void set_economy(Economy *);
+
+	void enter_building(Game &, Building & building);
 
 	bool is_moving() const throw ();
 	void cancel_moving();

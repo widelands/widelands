@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -919,14 +919,9 @@ WareInstance & Warehouse::launch_item(Game & game, Ware_Index const ware) {
 	WareInstance & item =
 		*new WareInstance(ware, tribe().get_ware_descr(ware));
 	item.init(game);
+	do_launch_item(game, item);
 
 	m_supply->remove_wares(ware, 1);
-
-	// Schedule a call of WareInstance::update, which will either carry the
-	// item out of the warehouse via do_launch_item, or move it into the attached
-	// dock.
-	item.set_location(game, this);
-	item.schedule_act(game, 1);
 
 	return item;
 }

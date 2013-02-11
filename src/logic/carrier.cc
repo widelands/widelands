@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -226,7 +226,7 @@ void Carrier::deliver_to_building(Game & game, State & state)
 	if (dynamic_cast<Flag const *>(pos))
 		return pop_task(game); //  we are done
 	else if (upcast(Building, building, pos)) {
-		// Drop all items addresed to this building
+		// Drop all items addressed to this building
 		while (WareInstance * const item = get_carried_item(game)) {
 			// If the building has disappeared and immediately been replaced
 			// with another building, we might have to return without dropping
@@ -235,8 +235,7 @@ void Carrier::deliver_to_building(Game & game, State & state)
 
 			if (next == pos) {
 				fetch_carried_item(game);
-				item->set_location(game, building);
-				item->update      (game);
+				item->enter_building(game, *building);
 			} else {
 				molog
 					("[Carrier]: Building switch from under us, return to road.\n");
