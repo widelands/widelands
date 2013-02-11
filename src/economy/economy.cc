@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -330,6 +330,7 @@ void Economy::add_wares(Ware_Index const id, uint32_t const count)
 	//log("%p: add(%i, %i)\n", this, id, count);
 
 	m_wares.add(id, count);
+	_start_request_timer();
 
 	// TODO: add to global player inventory?
 }
@@ -338,6 +339,7 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
 	//log("%p: add(%i, %i)\n", this, id, count);
 
 	m_workers.add(id, count);
+	_start_request_timer();
 
 	// TODO: add to global player inventory?
 }
