@@ -132,6 +132,6 @@ enum {
 /// The size of the surface cache in bytes. This is the amount of graphics
 /// memory widelands uses  approximately. Note that not every Surface is also in
 /// the cache, so the actual value will be different - but not by much.
-const uint32_t SURFACE_CACHE_SIZE = 30 << 20;   // 30MB
+const uint32_t SURFACE_CACHE_SIZE = 150 << 20;   // shifting converts to MB
 
 #endif
