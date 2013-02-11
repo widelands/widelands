@@ -60,7 +60,7 @@ boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 	return pf;
 }
 
-void PathfieldManager::clear(boost::shared_ptr<Pathfields> const & pf)
+void PathfieldManager::clear(const boost::shared_ptr<Pathfields> & pf)
 {
 	for (uint32_t i = 0; i < m_nrfields; ++i)
 		pf->fields[i].cycle = 0;

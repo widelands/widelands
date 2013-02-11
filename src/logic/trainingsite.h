@@ -31,8 +31,8 @@ namespace Widelands {
 struct TrainingSite_Descr : public ProductionSite_Descr {
 	TrainingSite_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const & tribe);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const;
 
@@ -110,7 +110,7 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 	};
 
 public:
-	TrainingSite(TrainingSite_Descr const &);
+	TrainingSite(const TrainingSite_Descr &);
 
 	char const * type_name() const throw () {return "trainingsite";}
 	virtual std::string get_statistics_string();
@@ -162,7 +162,7 @@ private:
 
 	void find_and_start_next_program(Game &);
 	void start_upgrade(Game &, Upgrade &);
-	void add_upgrade(tAttribute, std::string const & prefix);
+	void add_upgrade(tAttribute, const std::string & prefix);
 	void calc_upgrades();
 
 	void drop_unupgradable_soldiers(Game &);

@@ -51,22 +51,22 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_select_map
 		(this, "select_map",
 		 get_w() * 7 / 10, get_h() * 3 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("Select map"), std::string(), false, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 7 / 10, get_h() * 4 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 "", std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 7 / 10, get_h() * 9 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 7 / 10, get_h() * 1 / 2, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
@@ -155,8 +155,8 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
-				 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
-				 g_gr->imgcache().load(PicMod_Game, posIco),
+				 g_gr->images().get("pics/but1.png"),
+				 g_gr->images().get(posIco),
 				 _("Switch to position"), false);
 		m_pos[i]->sigclicked.connect
 			(boost::bind(&Fullscreen_Menu_LaunchSPG::switch_to_position, boost::ref(*this), i));
@@ -237,11 +237,11 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 
 		try {
 
-			std::string n = t->get_string("name");
-			std::string d = t->get_string("description");
+			std::string name = t->get_string("name");
+			std::string descr = t->get_string("description");
 
-			m_wincondition.set_title(n);
-			m_wincondition.set_tooltip(d.c_str());
+			m_wincondition.set_title(name);
+			m_wincondition.set_tooltip(descr.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
 			win_condition_clicked();
@@ -278,7 +278,7 @@ void Fullscreen_Menu_LaunchSPG::start_clicked()
  */
 void Fullscreen_Menu_LaunchSPG::refresh()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 
 	{
 		// Translate the maps name
@@ -302,7 +302,7 @@ void Fullscreen_Menu_LaunchSPG::refresh()
 	// "Choose Position" Buttons in frond of PDG
 	for (uint8_t i = 0; i < m_nr_players; ++i) {
 		m_pos[i]->set_visible(true);
-		PlayerSettings const & player = settings.players[i];
+		const PlayerSettings & player = settings.players[i];
 		if
 			(player.state == PlayerSettings::stateOpen or
 			 player.state == PlayerSettings::stateComputer)
@@ -341,7 +341,7 @@ void Fullscreen_Menu_LaunchSPG::select_map()
 	m_is_scenario = code == 2;
 	m_settings->setScenario(m_is_scenario);
 
-	MapData const & mapdata = *msm.get_map();
+	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
 
 	safe_place_for_host(m_nr_players);

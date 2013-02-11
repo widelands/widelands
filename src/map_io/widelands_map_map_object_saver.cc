@@ -53,7 +53,7 @@ m_lastserial   (0)
  * Create a record if that hasn't been done yet.
  */
 Map_Map_Object_Saver::MapObjectRec &
-Map_Map_Object_Saver::get_object_record(Map_Object const & obj)
+Map_Map_Object_Saver::get_object_record(const Map_Object & obj)
 {
 	Map_Object_Map::iterator it = m_objects.find(&obj);
 
@@ -80,7 +80,7 @@ Map_Map_Object_Saver::get_object_record(Map_Object const & obj)
  * Returns true if this object has already been registered.
  * \deprecated since get_object_file_index supports unregistered objects now
  */
-bool Map_Map_Object_Saver::is_object_known(Map_Object const & obj) const
+bool Map_Map_Object_Saver::is_object_known(const Map_Object & obj) const
 {
 	Map_Object_Map::const_iterator it = m_objects.find(&obj);
 
@@ -90,7 +90,7 @@ bool Map_Map_Object_Saver::is_object_known(Map_Object const & obj) const
 	return it->second.registered;
 }
 
-bool Map_Map_Object_Saver::is_object_saved(Map_Object const & obj) throw ()
+bool Map_Map_Object_Saver::is_object_saved(const Map_Object & obj) throw ()
 {
 	return get_object_record(obj).saved;
 }
@@ -99,7 +99,7 @@ bool Map_Map_Object_Saver::is_object_saved(Map_Object const & obj) throw ()
 /*
  * Registers this object as a new one
  */
-Serial Map_Map_Object_Saver::register_object(Map_Object const & obj) {
+Serial Map_Map_Object_Saver::register_object(const Map_Object & obj) {
 	MapObjectRec & rec = get_object_record(obj);
 
 	assert(!rec.registered);
@@ -125,7 +125,7 @@ Serial Map_Map_Object_Saver::register_object(Map_Object const & obj) {
  * Returns the file index for this map object. This is used on load
  * to regenerate the dependencies between the objects.
  */
-uint32_t Map_Map_Object_Saver::get_object_file_index(Map_Object const & obj)
+uint32_t Map_Map_Object_Saver::get_object_file_index(const Map_Object & obj)
 {
 	return get_object_record(obj).fileserial;
 }
@@ -144,7 +144,7 @@ uint32_t Map_Map_Object_Saver::get_object_file_index_or_zero
 /*
  * mark this object as saved
  */
-void Map_Map_Object_Saver::mark_object_as_saved(Map_Object const & obj) {
+void Map_Map_Object_Saver::mark_object_as_saved(const Map_Object & obj) {
 	MapObjectRec & rec = get_object_record(obj);
 	assert(rec.registered);
 	rec.saved = true;

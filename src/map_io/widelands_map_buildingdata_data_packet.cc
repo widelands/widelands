@@ -96,7 +96,7 @@ throw (_wexception)
 						try {
 							building.m_anim =
 								building.descr().get_animation(animation_name);
-						} catch (Map_Object_Descr::Animation_Nonexistent const &) {
+						} catch (const Map_Object_Descr::Animation_Nonexistent &) {
 							log
 								("WARNING: %s %s does not have animation \"%s\"; "
 								 "using animation \"idle\" instead\n",
@@ -121,7 +121,7 @@ throw (_wexception)
 									//  worker (with his stack of tasks) has been fully
 									//  loaded.
 									*i.current = &mol.get<Worker>(leaver_serial);
-								} catch (_wexception const & e) {
+								} catch (const _wexception & e) {
 									throw game_data_error
 										("leave queue item #%lu (%u): %s",
 										 static_cast<long int>
@@ -138,7 +138,7 @@ throw (_wexception)
 						try {
 							building.m_leave_allow =
 								&mol.get<Map_Object>(leaver_serial);
-						} catch (_wexception const & e) {
+						} catch (const _wexception & e) {
 							throw game_data_error
 								("leave allow item (%u): %s", leaver_serial, e.what());
 						}
@@ -214,14 +214,14 @@ throw (_wexception)
 
 
 					mol.mark_object_as_loaded(building);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("building %u: %s"), serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("buildingdata: %s"), e.what());
 	}
 }
@@ -235,7 +235,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PARTIALLYFB_PACKET_VERSION) {
-			Tribe_Descr const & tribe = pfb.tribe();
+			const Tribe_Descr & tribe = pfb.tribe();
 			pfb.m_building =
 				tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 
@@ -254,7 +254,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 			if (uint32_t const builder_serial = fr.Unsigned32()) {
 				try {
 					pfb.m_builder = &mol.get<Worker>(builder_serial);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						("builder (%u): %s", builder_serial, e.what());
 				}
@@ -271,7 +271,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 						(pfb, Ware_Index::Null(), 0);
 					pfb.m_wares[i]->Read(fr, game, mol);
 				}
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw game_data_error(_("wares: %s"), e.what());
 			}
 
@@ -282,7 +282,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("partially_constructed_buildings: %s"), e.what());
 	}
 }
@@ -301,7 +301,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 		if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
 
-			Tribe_Descr const & tribe = constructionsite.tribe();
+			const Tribe_Descr & tribe = constructionsite.tribe();
 
 			container_iterate
 				(ConstructionSite::Wares, constructionsite.m_wares, cur)
@@ -319,7 +319,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("constructionsite: %s"), e.what());
 	}
 }
@@ -330,7 +330,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 	 Game                  & game,
 	 Map_Map_Object_Loader & mol)
 {
-	Tribe_Descr const & tribe = constructionsite.tribe();
+	const Tribe_Descr & tribe = constructionsite.tribe();
 	constructionsite.m_building =
 		tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 	if (fr.Unsigned8()) {
@@ -355,7 +355,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 	if (uint32_t const builder_serial = fr.Unsigned32()) {
 		try {
 			constructionsite.m_builder = &mol.get<Worker>(builder_serial);
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw game_data_error
 				("builder (%u): %s", builder_serial, e.what());
 		}
@@ -374,7 +374,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 				(ConstructionSite::wares_queue_callback, &constructionsite);
 			constructionsite.m_wares[i]->Read(fr, game, mol);
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("wares: %s"), e.what());
 	}
 
@@ -401,7 +401,7 @@ void Map_Buildingdata_Data_Packet::read_dismantlesite
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("dismantlesite: %s"), e.what());
 	}
 }
@@ -428,7 +428,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				(nr_tribe_workers.value(), Warehouse::SP_Normal);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
-			Tribe_Descr const & tribe = warehouse.tribe();
+			const Tribe_Descr & tribe = warehouse.tribe();
 			while (fr.Unsigned8()) {
 				Ware_Index const id = tribe.ware_index(fr.CString());
 				if (packet_version >= 5) {
@@ -499,7 +499,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						if (!warehouse.m_incorporated_workers.count(worker_index))
 							warehouse.m_incorporated_workers[worker_index] = std::vector<Worker *>();
 						warehouse.m_incorporated_workers[worker_index].push_back(&worker);
-					} catch (_wexception const & e) {
+					} catch (const _wexception & e) {
 						throw game_data_error
 							("incorporated worker #%u (%u): %s",
 							 i, worker_serial, e.what());
@@ -507,7 +507,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				}
 			}
 
-			std::vector<Ware_Index> const & worker_types_without_cost =
+			const std::vector<Ware_Index> & worker_types_without_cost =
 				tribe.worker_types_without_cost();
 
 			if (1 == packet_version) { //  a single next_spawn time for "carrier"
@@ -641,10 +641,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 
 			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
 				//  Add to map of military influence.
-				Map const & map = game.map();
+				const Map & map = game.map();
 				Area<FCoords> a
 					(map.get_fcoords(warehouse.get_position()), conquer_radius);
-				Field const & first_map_field = map[0];
+				const Field & first_map_field = map[0];
 				Player::Field * const player_fields =
 					warehouse.owner().m_fields;
 				MapRegion<Area<FCoords> > mr(map, a);
@@ -663,7 +663,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("warehouse: %s"), e.what());
 	}
 }
@@ -696,11 +696,11 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 
 			if ((militarysite.m_didconquer = fr.Unsigned8())) {
 				//  Add to map of military influence.
-				Map const & map = game.map();
+				const Map & map = game.map();
 				Area<FCoords> a
 					(map.get_fcoords(militarysite.get_position()),
 					 militarysite.get_conquers());
-				Field const & first_map_field = map[0];
+				const Field & first_map_field = map[0];
 				Player::Field * const player_fields =
 					militarysite.owner().m_fields;
 				MapRegion<Area<FCoords> > mr(map, a);
@@ -744,7 +744,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 				 militarysite.m_capacity, militarysite.maxSoldierCapacity());
 			militarysite.m_capacity = militarysite.maxSoldierCapacity();
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("militarysite: %s"), e.what());
 	}
 }
@@ -763,8 +763,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 		{
 			ProductionSite::Working_Position & wp_begin =
 				*productionsite.m_working_positions;
-			ProductionSite_Descr const & descr = productionsite.descr();
-			Ware_Types const & working_positions = descr.working_positions();
+			const ProductionSite_Descr & pr_descr = productionsite.descr();
+			const Ware_Types & working_positions = pr_descr.working_positions();
 
 			uint16_t nr_worker_requests = fr.Unsigned16();
 			for (uint16_t i = nr_worker_requests; i; --i) {
@@ -815,7 +815,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				Worker * worker = &mol.get<Worker>(fr.Unsigned32());
 
 				const std::vector<std::string> & compat =
-					descr.compatibility_working_positions(worker->descr().name());
+					pr_descr.compatibility_working_positions(worker->descr().name());
 				if (!compat.empty()) {
 					if (compat[0] == "flash") {
 						if (compat.size() != 2)
@@ -837,14 +837,14 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 							 tribe.name().c_str(),
 							 worker->descr().name().c_str(), worker->serial(),
 							 compat[1].c_str(),
-							 descr.name().c_str(), productionsite.serial());
+							 pr_descr.name().c_str(), productionsite.serial());
 
 						mol.schedule_destroy(*worker);
 
-						const Worker_Descr & descr =
+						const Worker_Descr & worker_descr =
 							*tribe.get_worker_descr
 							(tribe.safe_worker_index(compat[1]));
-						worker = &descr.create
+						worker = &worker_descr.create
 							(game,
 							 productionsite.owner(),
 							 &productionsite,
@@ -858,7 +858,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				}
 
 				//  Find a working position that matches this worker.
-				Worker_Descr const & worker_descr = worker->descr();
+				const Worker_Descr & worker_descr = worker->descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
 					(wl_const_range<Ware_Types> j(working_positions);;
@@ -885,7 +885,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				wp->worker = worker;
 			}
 
-			if (nr_worker_requests + nr_workers < descr.nr_working_positions())
+			if (nr_worker_requests + nr_workers < pr_descr.nr_working_positions())
 				throw game_data_error
 					("number of worker requests and workers are fewer than the "
 					 "number of working positions");
@@ -897,7 +897,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			uint32_t const gametime = game.get_gametime();
 			for (uint8_t i = 3 <= packet_version ? fr.Unsigned8() : 0; i; --i) {
 				char const * const program_name = fr.CString();
-				if (descr.programs().count(program_name)) {
+				if (pr_descr.programs().count(program_name)) {
 					uint32_t const skip_time = fr.Unsigned32();
 					if (gametime < skip_time)
 						throw game_data_error
@@ -923,7 +923,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				std::transform
 					(program_name.begin(), program_name.end(), program_name.begin(),
 					 tolower);
-				const std::vector<std::string> & compat = descr.compatibility_program(program_name);
+				const std::vector<std::string> & compat = pr_descr.compatibility_program(program_name);
 				if (!compat.empty()) {
 					if (compat[0] == "replace") {
 						if (compat.size() != 2)
@@ -1016,7 +1016,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error
 			("productionsite (%s): %s",
 			 productionsite.descname().c_str(), e.what());
@@ -1099,7 +1099,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 				 trainingsite.m_capacity, trainingsite.maxSoldierCapacity());
 			trainingsite.m_capacity = trainingsite.maxSoldierCapacity();
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("trainingsite: %s"), e.what());
 	}
 }
@@ -1211,7 +1211,7 @@ throw (_wexception)
 }
 
 void Map_Buildingdata_Data_Packet::write_partially_finished_building
-	(Partially_Finished_Building const & pfb,
+	(const Partially_Finished_Building & pfb,
 	 FileWrite              & fw,
 	 Game                   & game,
 	 Map_Map_Object_Saver   & mos)
@@ -1247,7 +1247,7 @@ void Map_Buildingdata_Data_Packet::write_partially_finished_building
 }
 
 void Map_Buildingdata_Data_Packet::write_constructionsite
-	(ConstructionSite const & constructionsite,
+	(const ConstructionSite & constructionsite,
 	 FileWrite              & fw,
 	 Game                   & game,
 	 Map_Map_Object_Saver   & mos)
@@ -1267,7 +1267,7 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 }
 
 void Map_Buildingdata_Data_Packet::write_dismantlesite
-	(DismantleSite const & dms,
+	(const DismantleSite & dms,
 	 FileWrite              & fw,
 	 Game                   & game,
 	 Map_Map_Object_Saver   & mos)
@@ -1282,7 +1282,7 @@ void Map_Buildingdata_Data_Packet::write_dismantlesite
 
 
 void Map_Buildingdata_Data_Packet::write_warehouse
-	(Warehouse      const & warehouse,
+	(const Warehouse      & warehouse,
 	 FileWrite            & fw,
 	 Game                 & game,
 	 Map_Map_Object_Saver & mos)
@@ -1290,8 +1290,8 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
 	//  supply
-	Tribe_Descr const & tribe = warehouse.tribe();
-	WareList const & wares = warehouse.m_supply->get_wares();
+	const Tribe_Descr & tribe = warehouse.tribe();
+	const WareList & wares = warehouse.m_supply->get_wares();
 	for (Ware_Index i = Ware_Index::First(); i < wares.get_nrwareids  (); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_ware_descr(i)->name());
@@ -1299,7 +1299,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		fw.Unsigned8(warehouse.get_ware_policy(i));
 	}
 	fw.Unsigned8(0);
-	WareList const & workers = warehouse.m_supply->get_workers();
+	const WareList & workers = warehouse.m_supply->get_workers();
 	for (Ware_Index i = Ware_Index::First(); i < workers.get_nrwareids(); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_worker_descr(i)->name());
@@ -1318,7 +1318,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	TWorkerMap workermap;
 	container_iterate_const(Warehouse::IncorporatedWorkers, warehouse.m_incorporated_workers, cwt) {
 		container_iterate_const(Warehouse::WorkerList, cwt->second, i) {
-			Worker const & w = *(*i);
+			const Worker & w = *(*i);
 			assert(mos.is_object_known(w));
 			workermap.insert
 				(std::pair<uint32_t, const Worker *>
@@ -1328,13 +1328,13 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 
 	container_iterate_const(TWorkerMap, workermap, i)
 	{
-		Worker const & obj = *i.current->second;
+		const Worker & obj = *i.current->second;
 		assert(mos.is_object_known(obj));
 		fw.Unsigned32(mos.get_object_file_index(obj));
 	}
 
 	{
-		std::vector<Ware_Index> const & worker_types_without_cost =
+		const std::vector<Ware_Index> & worker_types_without_cost =
 			tribe.worker_types_without_cost();
 		for (uint8_t i = worker_types_without_cost.size(); i;) {
 			uint32_t const next_spawn =
@@ -1372,7 +1372,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 
 
 void Map_Buildingdata_Data_Packet::write_militarysite
-	(MilitarySite   const & militarysite,
+	(const MilitarySite   & militarysite,
 	 FileWrite            & fw,
 	 Game                 & game,
 	 Map_Map_Object_Saver & mos)
@@ -1394,7 +1394,7 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 
 
 void Map_Buildingdata_Data_Packet::write_productionsite
-	(ProductionSite const & productionsite,
+	(const ProductionSite & productionsite,
 	 FileWrite            & fw,
 	 Game                 & game,
 	 Map_Map_Object_Saver & mos)
@@ -1403,9 +1403,9 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 
 	uint32_t const nr_working_positions =
 		productionsite.descr().nr_working_positions();
-	ProductionSite::Working_Position const & begin =
+	const ProductionSite::Working_Position & begin =
 		productionsite.m_working_positions[0];
-	ProductionSite::Working_Position const & end =
+	const ProductionSite::Working_Position & end =
 		(&begin)[nr_working_positions];
 	uint32_t nr_workers = 0;
 	for (ProductionSite::Working_Position const * i = &begin; i < &end; ++i)
@@ -1473,7 +1473,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
  * write for trainingsite
  */
 void Map_Buildingdata_Data_Packet::write_trainingsite
-	(TrainingSite   const & trainingsite,
+	(const TrainingSite   & trainingsite,
 	 FileWrite            & fw,
 	 Game                 & game,
 	 Map_Map_Object_Saver & mos)
@@ -1497,7 +1497,7 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	// upgrades
 	fw.Unsigned8(trainingsite.m_upgrades.size());
 	for (uint8_t i = 0; i < trainingsite.m_upgrades.size(); ++i) {
-		TrainingSite::Upgrade const & upgrade = trainingsite.m_upgrades[i];
+		const TrainingSite::Upgrade & upgrade = trainingsite.m_upgrades[i];
 		fw.Unsigned8(upgrade.attribute);
 		fw.Unsigned8(upgrade.prio);
 		fw.Unsigned8(upgrade.credit);

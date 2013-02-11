@@ -54,7 +54,7 @@ Map_View::~Map_View()
 
 /// Moves the mouse cursor so that it is directly above the given node
 void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
-	Widelands::Map const & map = intbase().egbase().map();
+	const Widelands::Map & map = intbase().egbase().map();
 	Point p;
 	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
 	p -= m_viewpoint;

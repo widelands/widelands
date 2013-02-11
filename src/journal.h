@@ -71,17 +71,17 @@ public:
 	Journal();
 	~Journal();
 
-	void start_recording(std::string const & filename = "widelands.jnl");
+	void start_recording(const std::string & filename = "widelands.jnl");
 	void stop_recording();
 	///True if events are being recorded
 	bool is_recording() const {return m_record;}
 
-	void start_playback (std::string const & filename = "widelands.jnl");
+	void start_playback (const std::string & filename = "widelands.jnl");
 	void stop_playback();
 	///True if events are being played back
 	bool is_playingback() const {return m_playback;}
 
-	void record_event(SDL_Event const &);
+	void record_event(const SDL_Event &);
 	bool read_event(SDL_Event &);
 
 	void timestamp_handler(uint32_t & stamp);

@@ -133,7 +133,7 @@ std::string SaveHandler::create_file_name
  */
 bool SaveHandler::save_game
 	(Widelands::Game   &       game,
-	 std::string const &       complete_filename,
+	 const std::string &       complete_filename,
 	 std::string       * const error)
 {
 	bool const binary =
@@ -153,7 +153,7 @@ bool SaveHandler::save_game
 	Game_Saver gs(*fs, game);
 	try {
 		gs.save();
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		if (error)
 			*error = e.what();
 		result = false;

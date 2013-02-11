@@ -46,8 +46,8 @@ struct Icon_Grid : public Panel {
 	boost::signal<void (int32_t)> mousein;
 
 	int32_t add
-		(std::string const & name,
-		 const IPicture* pic,
+		(const std::string & name,
+		 const Image* pic,
 		 void              * data,
 		 const std::string & tooltip_text = "");
 	void * get_data(int32_t idx);

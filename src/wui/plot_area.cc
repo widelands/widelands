@@ -188,7 +188,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
 			if (m_plotdata[plot].showplot) {
 
-				std::vector<uint32_t> const & dataset = *m_plotdata[plot].dataset;
+				const std::vector<uint32_t> & dataset = *m_plotdata[plot].dataset;
 
 				uint32_t add = 0;
 				//  Relative data, first entry is always zero.
@@ -352,7 +352,7 @@ uint32_t WUIPlot_Area::draw_diagram
 	// first, tile the background
 	dst.tile
 		(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
-		 g_gr->imgcache().load(PicMod_Game, BG_PIC), Point(0, 0));
+		 g_gr->images().get(BG_PIC), Point(0, 0));
 
 	// Draw coordinate system
 	// X Axis

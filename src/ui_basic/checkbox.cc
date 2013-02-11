@@ -33,15 +33,15 @@ namespace UI {
 Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
-	 const IPicture* pic,
-	 std::string const &       tooltip_text)
+	 const Image* pic,
+	 const std::string &       tooltip_text)
 	:
 	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
 	m_flags(Is_Enabled)
 {
 	if (pic) {
-		uint32_t w = pic->get_w();
-		uint32_t h = pic->get_h();
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		set_desired_size(w, h);
 		set_size(w, h);
 
@@ -49,7 +49,7 @@ Statebox::Statebox
 		m_pic_graphics = pic;
 	} else
 		m_pic_graphics =
-			g_gr->imgcache().load(PicMod_UI, "pics/checkbox_light.png");
+			g_gr->images().get("pics/checkbox_light.png");
 }
 
 
@@ -72,9 +72,7 @@ void Statebox::set_enabled(bool const enabled)
 	set_flags(Is_Enabled, enabled);
 
 	if (not (m_flags & Has_Custom_Picture)) {
-		m_pic_graphics = g_gr->imgcache().load
-			(PicMod_UI,
-			 enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
+		m_pic_graphics = g_gr->images().get(enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
 		set_flags
 			(Is_Highlighted, (m_flags & Is_Highlighted) and (m_flags & Is_Enabled));
 	}
@@ -105,8 +103,8 @@ void Statebox::draw(RenderTarget & dst)
 {
 	if (m_flags & Has_Custom_Picture) {
 		// center picture
-		uint32_t w = m_pic_graphics->get_w();
-		uint32_t h = m_pic_graphics->get_h();
+		uint16_t w = m_pic_graphics->width();
+		uint16_t h = m_pic_graphics->height();
 
 		dst.blit
 			(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2),

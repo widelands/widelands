@@ -68,8 +68,8 @@ void GameRendererSDL::draw_terrain()
 	if (m_player && !m_player->see_all())
 		m_dst->get_surface()->fill_rect(m_dst->get_rect(), RGBAColor(0, 0, 0, 255));
 
-	Map const & map = m_egbase->map();
-	World const & world = map.world();
+	const Map & map = m_egbase->map();
+	const World & world = map.world();
 	uint32_t const mapwidth = map.get_width();
 
 #define get_terrain_texture(ter) \
@@ -241,15 +241,15 @@ void GameRendererSDL::draw_terrain()
  */
 void GameRendererSDL::draw_field
 	(RenderTarget & dst,
-	 Vertex  const &  f_vert,
-	 Vertex  const &  r_vert,
-	 Vertex  const & bl_vert,
-	 Vertex  const & br_vert,
+	 const Vertex  &  f_vert,
+	 const Vertex  &  r_vert,
+	 const Vertex  & bl_vert,
+	 const Vertex  & br_vert,
 	 uint8_t         roads,
-	 Texture const & tr_d_texture,
-	 Texture const &  l_r_texture,
-	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture)
+	 const Texture & tr_d_texture,
+	 const Texture &  l_r_texture,
+	 const Texture &  f_d_texture,
+	 const Texture &  f_r_texture)
 {
 	upcast(SDLSurface, sdlsurf, dst.get_surface());
 	if (sdlsurf)

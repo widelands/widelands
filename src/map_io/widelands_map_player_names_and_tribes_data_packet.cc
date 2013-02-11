@@ -77,7 +77,7 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("player names and tribes: %s"), e.what());
 	}
 }
@@ -92,7 +92,7 @@ throw (_wexception)
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	std::string name, tribe;
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {

@@ -39,25 +39,25 @@ struct Font;
 struct Button : public NamedPanel {
 	Button /// for textual buttons
 		(Panel * const parent,
-		 std::string const & name,
+		 const std::string & name,
 		 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-		 const IPicture* background_pictute_id,
-		 std::string const & title_text,
-		 std::string const & tooltip_text = std::string(),
+		 const Image* background_pictute_id,
+		 const std::string & title_text,
+		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat    = false);
 	Button /// for pictorial buttons
 		(Panel * const parent,
-		 std::string const & name,
+		 const std::string & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const IPicture* background_pictute_id,
-		 const IPicture* foreground_picture_id,
-		 std::string const & tooltip_text = std::string(),
+		 const Image* background_pictute_id,
+		 const Image* foreground_picture_id,
+		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat     = false);
 	~Button();
 
-	void set_pic(const IPicture* pic);
+	void set_pic(const Image* pic);
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
 
@@ -105,9 +105,9 @@ protected:
 
 	std::string m_title;          //  title string used when _mypic == 0
 
-	const IPicture* m_pic_background; //  background texture (picture ID)
-	const IPicture* m_pic_custom;     //  custom icon on the button
-	const IPicture* m_pic_custom_disabled;
+	const Image* m_pic_background; //  background texture (picture ID)
+	const Image* m_pic_custom;     //  custom icon on the button
+	const Image* m_pic_custom_disabled;
 	Font * m_font;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"

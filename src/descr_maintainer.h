@@ -41,7 +41,7 @@ template <typename T> struct Descr_Maintainer {
 
 	struct Nonexistent {};
 
-	int32_t get_index(std::string const & name) const throw (Nonexistent)
+	int32_t get_index(const std::string & name) const throw (Nonexistent)
 	{
 		for (typename T::Index i = 0; i < nitemsw; ++i)
 			if (name == items[i]->name())
@@ -118,7 +118,7 @@ private Descr_Maintainer<T>
 	T_Index get_nitems() const throw () {
 		return T_Index(Descr_Maintainer<T>::get_nitems());
 	}
-	T_Index get_index(std::string const & name) const throw () {
+	T_Index get_index(const std::string & name) const throw () {
 		int32_t idx = Descr_Maintainer<T>::get_index(name);
 		return
 			idx == -1 ? T_Index::Null() :

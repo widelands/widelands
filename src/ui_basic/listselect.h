@@ -21,16 +21,17 @@
 #ifndef UI_LISTSELECT_H
 #define UI_LISTSELECT_H
 
+#include <limits>
+#include <deque>
+
 #include <boost/signal.hpp>
 
 #include "align.h"
-#include "panel.h"
-#include "scrollbar.h"
-
 #include "compile_assert.h"
 
-#include <limits>
-#include <deque>
+#include "panel.h"
+#include "rgbcolor.h"
+#include "scrollbar.h"
 
 namespace UI {
 struct Scrollbar;
@@ -63,14 +64,14 @@ struct BaseListselect : public Panel {
 	void add
 		(const char * const name,
 		 uint32_t value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
-		 std::string const & tooltip_text = std::string());
+		 const std::string & tooltip_text = std::string());
 	void add_front
 		(const char * const name,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
-		 std::string const & tooltip_text = std::string());
+		 const std::string & tooltip_text = std::string());
 	void remove(uint32_t);
 	void remove(const char * name);
 
@@ -78,7 +79,7 @@ struct BaseListselect : public Panel {
 
 	void set_entry_color(uint32_t, RGBColor) throw ();
 	void set_align(Align);
-	void set_font(std::string const & fontname, int32_t const fontsize) {
+	void set_font(const std::string & fontname, int32_t const fontsize) {
 		m_fontname = fontname;
 		m_fontsize = fontsize;
 	}
@@ -133,7 +134,7 @@ private:
 		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
-		const IPicture* pic;
+		const Image* pic;
 		std::string name;
 		std::string tooltip;
 	};
@@ -149,7 +150,7 @@ private:
 	int32_t m_last_click_time;
 	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
-	const IPicture* m_check_pic;
+	const Image* m_check_pic;
 
 	std::string m_fontname;
 	uint32_t    m_fontsize;
@@ -170,9 +171,9 @@ struct Listselect : public BaseListselect {
 	void add
 		(const char * const name,
 		 Entry value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
-		 std::string const & tooltip_text = std::string())
+		 const std::string & tooltip_text = std::string())
 	{
 		m_entry_cache.push_back(value);
 		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text);
@@ -180,20 +181,20 @@ struct Listselect : public BaseListselect {
 	void add_front
 		(const char * const name,
 		 Entry value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
-		 std::string const & tooltip_text = std::string())
+		 const std::string & tooltip_text = std::string())
 	{
 		m_entry_cache.push_front(value);
 		BaseListselect::add_front(name, pic, select_this, tooltip_text);
 	}
 
-	Entry const & operator[](uint32_t const i) const throw ()
+	const Entry & operator[](uint32_t const i) const throw ()
 	{
 		return m_entry_cache[BaseListselect::operator[](i)];
 	}
 
-	Entry const & get_selected() const
+	const Entry & get_selected() const
 	{
 		return m_entry_cache[BaseListselect::get_selected()];
 	}
@@ -225,18 +226,18 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add
 		(const char * const name,
 		 Entry      &       value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
-		 std::string const & tooltip_text = std::string())
+		 const std::string & tooltip_text = std::string())
 	{
 		Base::add(name, &value, pic, select_this, tooltip_text);
 	}
 	void add_front
 		(const char * const name,
 		 Entry      &       value,
-		 const IPicture* pic = NULL,
+		 const Image* pic = NULL,
 		 const bool select_this = false,
-		 std::string const & tooltip_text = std::string())
+		 const std::string & tooltip_text = std::string())
 	{
 		Base::add_front(name, &value, pic, select_this, tooltip_text);
 	}

@@ -162,7 +162,7 @@ int L_Player::get_allowed_buildings(lua_State * L) {
 		a new item, use :meth:`add_objective`.
 */
 int L_Player::get_objectives(lua_State * L) {
-	Manager<Objective> const & mom = get_egbase(L).map().mom();
+	const Manager<Objective> & mom = get_egbase(L).map().mom();
 
 	lua_newtable(L);
 	for (Manager<Objective>::Index i = 0; i < mom.size(); i++) {
@@ -854,11 +854,11 @@ int L_Player::allow_workers(lua_State * L) {
 	const Tribe_Descr & tribe = get(L, game).tribe();
 	Player & player = get(L, game);
 
-	std::vector<Ware_Index> const & worker_types_without_cost =
+	const std::vector<Ware_Index> & worker_types_without_cost =
 		tribe.worker_types_without_cost();
 
 	for (Ware_Index i = Ware_Index::First(); i < tribe.get_nrworkers(); ++i) {
-		Worker_Descr const & worker_descr = *tribe.get_worker_descr(i);
+		const Worker_Descr & worker_descr = *tribe.get_worker_descr(i);
 		if (not worker_descr.is_buildable())
 			continue;
 
@@ -1086,7 +1086,7 @@ int L_Objective::remove(lua_State * L) {
 }
 
 int L_Objective::__eq(lua_State * L) {
-	Manager<Objective> const & mom = get_game(L).map().mom();
+	const Manager<Objective> & mom = get_game(L).map().mom();
 
 	const Objective * me = mom[m_name];
 	const Objective * you = mom[(*get_user_class<L_Objective>(L, 2))->m_name];

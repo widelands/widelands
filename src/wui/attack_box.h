@@ -66,13 +66,13 @@ struct AttackBox : public UI::Box {
 			(UI::Box           & parent,
 			 std::string         str,
 			 uint32_t            alignment = UI::Box::AlignTop,
-			 std::string const & fontname = UI_FONT_NAME,
+			 const std::string & fontname = UI_FONT_NAME,
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
 		UI::Button & add_button
 			(UI::Box           & parent,
 			 char const * picname,
 			 void (AttackBox::*fn)(),
-			 std::string const & tooltip_text);
+			 const std::string & tooltip_text);
 
 		void update_attack();
 		void send_less_soldiers();

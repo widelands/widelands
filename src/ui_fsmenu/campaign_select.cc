@@ -69,12 +69,12 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	b_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Campaign list
@@ -225,7 +225,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 			m_list.add
 				(s.get_string(cname, _("[No value found]")),
 				 s.get_string(csection),
-				 g_gr->imgcache().load(PicMod_Game, dif_picture_filenames[dif]));
+				 g_gr->images().get(dif_picture_filenames[dif]));
 
 		}
 
@@ -276,12 +276,12 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 	b_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Campaign map list
@@ -418,7 +418,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 			m_list.add
 				(s->get_string("name", _("[No value found]")),
 				 s->get_string("path"),
-				 g_gr->imgcache().load(PicMod_Game, "pics/ls_wlmap.png"));
+				 g_gr->images().get("pics/ls_wlmap.png"));
 		}
 
 		++i;

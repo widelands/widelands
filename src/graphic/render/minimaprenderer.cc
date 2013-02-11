@@ -50,7 +50,7 @@ using namespace Widelands;
  * The entire clipping rect will be used for drawing.
  */
 void MiniMapRenderer::renderminimap
-	(Widelands::Editor_Game_Base const &       egbase,
+	(const Widelands::Editor_Game_Base &       egbase,
 	 Player                      const * const player,
 	 Point                               const viewpoint,
 	 uint32_t                            const flags)
@@ -61,13 +61,12 @@ void MiniMapRenderer::renderminimap
 				viewpoint, flags);
 }
 
-
 /*
  * Blend to colors; only needed for calc_minimap_color below
  */
 
 inline static uint32_t blend_color
-	(SDL_PixelFormat const &       format,
+	(const SDL_PixelFormat &       format,
 	 uint32_t                const clr1,
 	 Uint8 const r2, Uint8 const g2, Uint8 const b2)
 {
@@ -86,8 +85,8 @@ Return the color to be used in the minimap for the given field.
 */
 
 inline static uint32_t calc_minimap_color
-	(SDL_PixelFormat             const &       format,
-	 Widelands::Editor_Game_Base const &       egbase,
+	(const SDL_PixelFormat             &       format,
+	 const Widelands::Editor_Game_Base &       egbase,
 	 Widelands::FCoords                  const f,
 	 uint32_t                            const flags,
 	 Widelands::Player_Number            const owner,
@@ -218,16 +217,16 @@ template<typename T>
 static void draw_minimap_int
 	(Uint8                             * const pixels,
 	 uint16_t                            const pitch,
-	 SDL_PixelFormat             const &       format,
+	 const SDL_PixelFormat             &       format,
 	 int32_t                            const mapwidth,
-	 Widelands::Editor_Game_Base const &       egbase,
+	 const Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
 	 Point                               const viewpoint,
 	 Point                               const framepoint,
 	 uint32_t                            const flags)
 {
-	Widelands::Map const & map = egbase.map();
+	const Widelands::Map & map = egbase.map();
 
 	int32_t mapheight = map.get_height();
 
@@ -297,7 +296,7 @@ static void draw_minimap_int
 						(SDL_MapRGB
 							(&const_cast<SDL_PixelFormat &>(format), 255, 0, 0));
 				} else {
-					Widelands::Player::Field const & player_field = player_fields[i];
+					const Widelands::Player::Field & player_field = player_fields[i];
 					Widelands::Vision const vision = player_field.vision;
 
 					*reinterpret_cast<T *>(pix) =
@@ -326,7 +325,7 @@ viewpt is the field at the top left of the rectangle.
 ===============
 */
 void MiniMapRenderer::draw_minimap
-	(Widelands::Editor_Game_Base const &       egbase,
+	(const Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
 	 Point                               const viewpt,
@@ -380,7 +379,6 @@ void MiniMapRenderer::draw_minimap
 
 	SDL_UnlockSurface(surface);
 
-	IPicture* picture = g_gr->convert_sdl_surface_to_picture(surface);
-
-	m_surface->blit(Point(rc.x, rc.y), picture, rc2);
+	boost::scoped_ptr<Surface> minimap_surface(Surface::create(surface));
+	m_surface->blit(Point(rc.x, rc.y), minimap_surface.get(), rc2);
 }

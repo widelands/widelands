@@ -42,7 +42,7 @@ public:
 	 * point of view.
 	 */
 	void renderminimap
-		(Widelands::Editor_Game_Base const & egbase,
+		(const Widelands::Editor_Game_Base & egbase,
 		 Widelands::Player           const * player,
 		 Point                               viewpoint,
 		 uint32_t                            flags);
@@ -51,7 +51,7 @@ protected:
 	/// A helper function to draw the minimap. This is called from
 	/// renderminimap().
 	void draw_minimap
-		(Widelands::Editor_Game_Base const &,
+		(const Widelands::Editor_Game_Base &,
 		 Widelands::Player           const *,
 		 Rect                                rc,
 		 Point                               viewpt,

@@ -45,7 +45,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	/// Shows a newly created message. Assumes that the message is not yet in
 	/// the list (the message was added to the queue after the last time think()
 	/// was executed.
-	void show_new_message(Widelands::Message_Id, Widelands::Message const &);
+	void show_new_message(Widelands::Message_Id, const Widelands::Message &);
 
 	enum Mode {Inbox, Archive};
 	void think();
@@ -64,7 +64,7 @@ private:
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
-	void update_record(UI::Table<uintptr_t>::Entry_Record & er, Widelands::Message const &);
+	void update_record(UI::Table<uintptr_t>::Entry_Record & er, const Widelands::Message &);
 
 	UI::Table<uintptr_t> * list;
 	UI::Multiline_Textarea message_body;

@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+"""
+Prefer DEBUG.
+"""
+
+error_msg="Do not use DEBUG, use #ifndef NDEBUG because this is what disable assert()s as well."
+
+regexp=r"""\bDEBUG\b"""
+
+forbidden = [
+    "#ifdef DEBUG //  only in debug builds",
+]
+
+allowed = [
+    "#ifndef NDEBUG"
+]

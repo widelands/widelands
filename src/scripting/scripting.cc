@@ -125,7 +125,7 @@ protected:
 		virtual ~LuaInterface_Impl();
 
 		virtual void interpret_string(std::string);
-		virtual std::string const & get_last_error() const {return m_last_error;}
+		virtual const std::string & get_last_error() const {return m_last_error;}
 
 		virtual void register_scripts
 			(FileSystem &, std::string, std::string = "scripting");
@@ -196,7 +196,7 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	m_L = lua_open();
 
 	// Open the Lua libraries
-#ifdef DEBUG
+#ifndef NDEBUG
 	static const luaL_Reg lualibs[] = {
 		{"", luaopen_base},
 		{LUA_LOADLIBNAME, luaopen_package},

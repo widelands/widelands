@@ -71,8 +71,8 @@ struct DefaultAI : Computer_Player {
 	~DefaultAI();
 	virtual void think ();
 
-	virtual void receive(Widelands::NoteImmovable const &);
-	virtual void receive(Widelands::NoteFieldPossession     const &);
+	virtual void receive(const Widelands::NoteImmovable &);
+	virtual void receive(const Widelands::NoteFieldPossession     &);
 
 	enum {
 		AGGRESSIVE = 2,
@@ -140,17 +140,17 @@ private:
 	int32_t calculate_need_for_ps(BuildingObserver &, int32_t);
 
 	void consider_productionsite_influence
-		(BuildableField &, Widelands::Coords, BuildingObserver const &);
+		(BuildableField &, Widelands::Coords, const BuildingObserver &);
 
 	EconomyObserver  * get_economy_observer (Widelands::Economy &);
 	BuildingObserver & get_building_observer(char const *);
 
 	void gain_immovable (Widelands::PlayerImmovable       &);
-	void lose_immovable (Widelands::PlayerImmovable const &);
+	void lose_immovable (const Widelands::PlayerImmovable &);
 	void gain_building  (Widelands::Building              &);
-	void lose_building  (Widelands::Building        const &);
+	void lose_building  (const Widelands::Building        &);
 
-	bool check_supply (BuildingObserver const &);
+	bool check_supply (const BuildingObserver &);
 
 	bool consider_attack (int32_t);
 

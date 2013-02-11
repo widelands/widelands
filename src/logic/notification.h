@@ -57,7 +57,7 @@ public:
 	}
 
 protected:
-	void send(T const & note) {
+	void send(const T & note) {
 		container_iterate_const(Links, m_links, i)
 			(*i.current)->receive(note);
 	}
@@ -96,7 +96,7 @@ public:
 			m_links.erase(it);
 	}
 
-	virtual void receive(T const & note) = 0;
+	virtual void receive(const T & note) = 0;
 
 private:
 	Links m_links;
@@ -117,14 +117,14 @@ struct NoteFieldPossession {
 	FCoords fc;
 	losegain_t lg;
 
-	NoteFieldPossession(FCoords const & _fc, losegain_t const _lg)
+	NoteFieldPossession(const FCoords & _fc, losegain_t const _lg)
 		: fc(_fc), lg(_lg) {}
 };
 
 struct NoteFieldTransformed {
 	FCoords fc;
 
-	NoteFieldTransformed(FCoords const & _fc)
+	NoteFieldTransformed(const FCoords & _fc)
 		: fc(_fc) {}
 };
 

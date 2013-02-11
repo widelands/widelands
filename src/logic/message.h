@@ -30,11 +30,11 @@ namespace Widelands {
 struct Message {
 	enum Status {New, Read, Archived};
 	Message
-		(std::string const &       msgsender,
+		(const std::string &       msgsender,
 		 uint32_t                  sent_time,
 		 Duration                  d,
-		 std::string const &       t,
-		 std::string const &       b,
+		 const std::string &       t,
+		 const std::string &       b,
 		 Widelands::Coords   const c = Coords::Null(),
 		 Status                    s = New)
 		:
@@ -51,7 +51,7 @@ struct Message {
 	uint32_t            sent    () const            {return m_sent;}
 	Duration            duration() const            {return m_duration;}
 	const std::string & title() const throw ()      {return m_title;}
-	std::string const & body () const               {return m_body;}
+	const std::string & body () const               {return m_body;}
 	Widelands::Coords   position() const            {return m_position;}
 	Status              status  () const {return m_status;}
 	Status set_status(Status const s) {return m_status = s;}

@@ -123,7 +123,7 @@ void Multiline_Editbox::Data::update()
 /**
  * Return the text currently stored by the editbox.
  */
-std::string const & Multiline_Editbox::get_text() const
+const std::string & Multiline_Editbox::get_text() const
 {
 	return d->text;
 }

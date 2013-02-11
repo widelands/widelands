@@ -130,7 +130,7 @@ struct GameSettings {
 struct GameSettingsProvider {
 	virtual ~GameSettingsProvider() {}
 
-	virtual GameSettings const & settings() = 0;
+	virtual const GameSettings & settings() = 0;
 
 	virtual void setScenario(bool set) = 0;
 	virtual bool canChangeMap() = 0;
@@ -142,17 +142,17 @@ struct GameSettingsProvider {
 	virtual bool canLaunch() = 0;
 
 	virtual void setMap
-		(std::string const & mapname,
-		 std::string const & mapfilename,
+		(const std::string & mapname,
+		 const std::string & mapfilename,
 		 uint32_t maxplayers,
 		 bool                savegame = false)
 		= 0;
 	virtual void setPlayerState    (uint8_t number, PlayerSettings::State) = 0;
-	virtual void setPlayerAI       (uint8_t number, std::string const &, bool const random_ai = false) = 0;
+	virtual void setPlayerAI       (uint8_t number, const std::string &, bool const random_ai = false) = 0;
 	virtual void nextPlayerState   (uint8_t number) = 0;
-	virtual void setPlayerTribe    (uint8_t number, std::string const &, bool const random_tribe = false) = 0;
+	virtual void setPlayerTribe    (uint8_t number, const std::string &, bool const random_tribe = false) = 0;
 	virtual void setPlayerInit     (uint8_t number, uint8_t index) = 0;
-	virtual void setPlayerName     (uint8_t number, std::string const &) = 0;
+	virtual void setPlayerName     (uint8_t number, const std::string &) = 0;
 	virtual void setPlayer         (uint8_t number, PlayerSettings) = 0;
 	virtual void setPlayerNumber   (uint8_t number) = 0;
 	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) = 0;
@@ -163,7 +163,7 @@ struct GameSettingsProvider {
 	virtual std::string getWinCondition() = 0;
 
 	struct No_Tribe {};
-	std::string const & getPlayersTribe() {
+	const std::string & getPlayersTribe() {
 		if (UserSettings::highestPlayernum() < settings().playernum)
 			throw No_Tribe();
 		return settings().players[settings().playernum].tribe;

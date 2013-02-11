@@ -49,7 +49,7 @@ class Worker : public Bob {
 	MO_DESCR(Worker_Descr);
 
 	struct Action {
-		typedef bool (Worker::*execute_t)(Game &, Bob::State &, Action const &);
+		typedef bool (Worker::*execute_t)(Game &, Bob::State &, const Action &);
 
 		enum {
 			walkObject = 1, //  walk to objvar1
@@ -71,7 +71,7 @@ class Worker : public Bob {
 
 		std::vector<std::string> sparamv;
 #ifdef WRITE_GAME_DATA_AS_HTML
-		void writeHTML(::FileWrite &, Worker_Descr const &) const;
+		void writeHTML(::FileWrite &, const Worker_Descr &) const;
 #endif
 	};
 
@@ -89,11 +89,11 @@ public:
 	uint32_t get_animation(char const * const str) const {
 		return descr().get_animation(str);
 	}
-	const IPicture* icon() const throw () {return descr().icon();}
+	const Image* icon() const throw () {return descr().icon();}
 	Ware_Index becomes() const throw () {return descr().becomes();}
 	Ware_Index worker_index() const throw () {return descr().worker_index();}
 	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}
-	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
+	const Tribe_Descr & tribe() const throw () {return descr().tribe();}
 	const std::string & descname() const throw () {return descr().descname();}
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
@@ -121,7 +121,7 @@ public:
 	WareInstance       * get_carried_item(Editor_Game_Base       & egbase) {
 		return m_carried_item.get(egbase);
 	}
-	WareInstance const * get_carried_item(Editor_Game_Base const & egbase) const
+	WareInstance const * get_carried_item(const Editor_Game_Base & egbase) const
 	{
 		return m_carried_item.get(egbase);
 	}
@@ -158,7 +158,7 @@ public:
 	bool needs_experience() const {return get_needed_experience() != -1;}
 
 	// debug
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	// worker-specific tasks
 	void start_task_transfer(Game &, Transfer *);
@@ -173,7 +173,7 @@ public:
 	void update_task_buildingwork(Game &);
 
 	void start_task_return(Game & game, bool dropitem);
-	void start_task_program(Game & game, std::string const & programname);
+	void start_task_program(Game & game, const std::string & programname);
 
 	void start_task_gowarehouse(Game &);
 	void start_task_dropoff(Game &, WareInstance &);
@@ -187,13 +187,13 @@ public:
 	void start_task_geologist
 		(Game &,
 		 uint8_t attempts, uint8_t radius,
-		 std::string const & subcommand);
+		 const std::string & subcommand);
 
 	void start_task_scout(Game &, uint16_t, uint32_t);
 
 protected:
-	void draw_inner(Editor_Game_Base const &, RenderTarget &, Point) const;
-	virtual void draw(Editor_Game_Base const &, RenderTarget &, Point) const;
+	void draw_inner(const Editor_Game_Base &, RenderTarget &, Point) const;
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, Point) const;
 	virtual void init_auto_task(Game &);
 
 	bool does_carry_ware() {return m_carried_item.is_set();}
@@ -230,7 +230,7 @@ private:
 	void gowarehouse_signalimmediate
 		(Game &,
 		 State &,
-		 std::string const & signal);
+		 const std::string & signal);
 	void gowarehouse_pop(Game & game, State & state);
 	void dropoff_update(Game &, State &);
 	void releaserecruit_update(Game &, State &);
@@ -244,25 +244,25 @@ private:
 	void scout_update(Game &, State &);
 
 	// Program commands
-	bool run_mine             (Game &, State &, Action const &);
-	bool run_breed            (Game &, State &, Action const &);
-	bool run_createitem       (Game &, State &, Action const &);
-	bool run_setdescription   (Game &, State &, Action const &);
-	bool run_setbobdescription(Game &, State &, Action const &);
-	bool run_findobject       (Game &, State &, Action const &);
-	bool run_findspace        (Game &, State &, Action const &);
-	bool run_walk             (Game &, State &, Action const &);
-	bool run_animation        (Game &, State &, Action const &);
-	bool run_return           (Game &, State &, Action const &);
-	bool run_object           (Game &, State &, Action const &);
-	bool run_plant            (Game &, State &, Action const &);
-	bool run_create_bob       (Game &, State &, Action const &);
-	bool run_removeobject     (Game &, State &, Action const &);
-	bool run_geologist        (Game &, State &, Action const &);
-	bool run_geologist_find   (Game &, State &, Action const &);
-	bool run_scout            (Game &, State &, Action const &);
-	bool run_playFX           (Game &, State &, Action const &);
-	bool run_construct        (Game &, State &, Action const &);
+	bool run_mine             (Game &, State &, const Action &);
+	bool run_breed            (Game &, State &, const Action &);
+	bool run_createitem       (Game &, State &, const Action &);
+	bool run_setdescription   (Game &, State &, const Action &);
+	bool run_setbobdescription(Game &, State &, const Action &);
+	bool run_findobject       (Game &, State &, const Action &);
+	bool run_findspace        (Game &, State &, const Action &);
+	bool run_walk             (Game &, State &, const Action &);
+	bool run_animation        (Game &, State &, const Action &);
+	bool run_return           (Game &, State &, const Action &);
+	bool run_object           (Game &, State &, const Action &);
+	bool run_plant            (Game &, State &, const Action &);
+	bool run_create_bob       (Game &, State &, const Action &);
+	bool run_removeobject     (Game &, State &, const Action &);
+	bool run_geologist        (Game &, State &, const Action &);
+	bool run_geologist_find   (Game &, State &, const Action &);
+	bool run_scout            (Game &, State &, const Action &);
+	bool run_playFX           (Game &, State &, const Action &);
+	bool run_construct        (Game &, State &, const Action &);
 
 	// Displays a message to the player if a find... program can't be
 	// executed

@@ -287,7 +287,7 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (game_data_error const & e) {
+	} catch (const game_data_error & e) {
 		throw game_data_error(_("waresqueue: %s"), e.what());
 	}
 }

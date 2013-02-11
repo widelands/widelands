@@ -185,7 +185,7 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 		default:
 			throw wexception("Unknown packet %u", pkt);
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		log("REPLAY: Caught exception %s\n", e.what());
 		delete m_cmdlog;
 		m_cmdlog = 0;

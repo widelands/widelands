@@ -66,8 +66,8 @@ void DifferentialPlot_Area::draw(RenderTarget & dst) {
 		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
 			if (m_plotdata[plot].showplot) {
 
-				std::vector<uint32_t> const & dataset = *m_plotdata[plot].dataset;
-				std::vector<uint32_t> const & ndataset = *m_negative_plotdata[plot].dataset;
+				const std::vector<uint32_t> & dataset = *m_plotdata[plot].dataset;
+				const std::vector<uint32_t> & ndataset = *m_negative_plotdata[plot].dataset;
 
 				int32_t add = 0;
 				//  Relative data, first entry is always zero.

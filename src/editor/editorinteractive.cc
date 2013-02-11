@@ -54,7 +54,7 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 
 #define INIT_BUTTON(picture, name, tooltip)                         \
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
-	g_gr->imgcache().load(PicMod_Game, "pics/" picture ".png"),                      \
+	g_gr->images().get("pics/" picture ".png"),                      \
 	tooltip                                                                      \
 
 	m_toggle_main_menu
@@ -106,10 +106,10 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	m_undo.set_enabled(false);
 	m_redo.set_enabled(false);
 
-#ifndef DEBUG
-	set_display_flag(Interactive_Base::dfDebug, false);
-#else
+#ifndef NDEBUG
 	set_display_flag(Interactive_Base::dfDebug, true);
+#else
+	set_display_flag(Interactive_Base::dfDebug, false);
 #endif
 
 	fieldclicked.connect(boost::bind(&Editor_Interactive::map_clicked, this, false));
@@ -126,26 +126,26 @@ void Editor_Interactive::register_overlays() {
 	iterate_player_numbers(p, nr_players) {
 		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const IPicture* pic = g_gr->imgcache().load(PicMod_Game, fname);
+			const Image* pic = g_gr->images().get(fname);
 			assert(pic);
 			map.overlay_manager().register_overlay
-				(sp, pic, 8, Point(pic->get_w() / 2, STARTING_POS_HOTSPOT_Y));
+				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 
 	//  Resources: we do not calculate default resources, therefore we do not
 	//  expect to meet them here.
-	Widelands::World const    &    world           = map.world();
+	const Widelands::World    &    world           = map.world();
 	Overlay_Manager        &       overlay_manager = map.overlay_manager();
 	Widelands::Extent        const extent          = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {
-			std::string const & immname =
+			const std::string & immname =
 			    world.get_resource(fc.field->get_resources())->get_editor_pic
 			    (amount);
 			if (immname.size())
 				overlay_manager.register_overlay
-				(fc, g_gr->imgcache().load(PicMod_Menu, immname.c_str()), 4);
+				(fc, g_gr->images().get(immname), 4);
 		}
 	}
 
@@ -153,7 +153,7 @@ void Editor_Interactive::register_overlays() {
 }
 
 
-void Editor_Interactive::load(std::string const & filename) {
+void Editor_Interactive::load(const std::string & filename) {
 	assert(filename.size());
 
 	Widelands::Map & map = egbase().map();
@@ -266,11 +266,11 @@ void Editor_Interactive::toggle_mainmenu() {
 		new Editor_Main_Menu(*this, m_mainmenu);
 }
 
-void Editor_Interactive::map_clicked(bool draw) {
+void Editor_Interactive::map_clicked(bool should_draw) {
 	m_history.do_action
 		(tools.current(),
 		 tools.use_tool, egbase().map(),
-	     get_sel_pos(), *this, draw);
+	     get_sel_pos(), *this, should_draw);
 	need_complete_redraw();
 	set_need_save(true);
 }
@@ -571,7 +571,7 @@ void Editor_Interactive::change_world() {
  * Public static method to create an instance of the editor
  * and run it. This takes care of all the setup and teardown.
  */
-void Editor_Interactive::run_editor(std::string const & filename) {
+void Editor_Interactive::run_editor(const std::string & filename) {
 	Widelands::Editor_Game_Base editor(0);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); // TODO get rid of this
@@ -580,7 +580,6 @@ void Editor_Interactive::run_editor(std::string const & filename) {
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);
-		g_gr->imgcache().flush(PicMod_Menu);
 
 		{
 			Widelands::Map & map = *new Widelands::Map;
@@ -618,7 +617,6 @@ void Editor_Interactive::run_editor(std::string const & filename) {
 
 	editor.cleanup_objects();
 
-	g_gr->imgcache().flush(PicMod_Game);
 	g_gr->flush_animations();
 	g_anim.flush();
 }

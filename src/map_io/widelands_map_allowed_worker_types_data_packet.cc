@@ -48,7 +48,7 @@ throw (_wexception)
 	} catch (...) {
 		//  Could not read data, must allow buildable worker types for players.
 		iterate_players_existing(p, nr_players, egbase, player) {
-			Tribe_Descr const & tribe = player->tribe();
+			const Tribe_Descr & tribe = player->tribe();
 			for (Ware_Index i = tribe.get_nrworkers(); Ware_Index::First() < i;)
 				if (tribe.get_worker_descr(--i)->is_buildable())
 					player->allow_worker_type(i, true);
@@ -60,19 +60,19 @@ throw (_wexception)
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, nr_players, egbase, player) {
-				Tribe_Descr const & tribe = player->tribe();
+				const Tribe_Descr & tribe = player->tribe();
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				try {
 					Section & s = prof.get_safe_section(buffer);
 					Ware_Index const nr_workers = tribe.get_nrworkers();
 					for (Ware_Index w = Ware_Index::First(); w < nr_workers; ++w) {
-						Worker_Descr const & w_descr = *tribe.get_worker_descr(w);
+						const Worker_Descr & w_descr = *tribe.get_worker_descr(w);
 						if (w_descr.is_buildable())
 							player->allow_worker_type
 								(w, s.get_bool(w_descr.name().c_str(), false));
 					}
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
@@ -80,7 +80,7 @@ throw (_wexception)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("allowed worker types: %s"), e.what());
 	}
 }

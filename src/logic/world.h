@@ -48,15 +48,15 @@ struct Resource_Descr : boost::noncopyable {
 	Resource_Descr() : m_is_detectable(true), m_max_amount(0) {}
 	~Resource_Descr() {}
 
-	void parse(Section &, std::string const &);
+	void parse(Section &, const std::string &);
 
 	const std::string & name     () const throw () {return m_name;}
-	std::string const & descname() const throw () {return m_descname;}
+	const std::string & descname() const throw () {return m_descname;}
 
 	bool is_detectable() const throw () {return m_is_detectable;}
 	int32_t get_max_amount() const throw () {return m_max_amount;}
 
-	std::string const & get_editor_pic(uint32_t amount) const;
+	const std::string & get_editor_pic(uint32_t amount) const;
 
 private:
 	struct Indicator {
@@ -191,10 +191,10 @@ struct MapGenBobKind {
 	size_t getNumImmovableBobs() const {return m_ImmovableBobs.size();}
 	size_t getNumMoveableBobs() const {return m_MoveableBobs.size();}
 
-	std::string const & getImmovableBob(size_t index) const {
+	const std::string & getImmovableBob(size_t index) const {
 		return m_ImmovableBobs[index];
 	};
-	std::string const & getMoveableBob(size_t index) const {
+	const std::string & getMoveableBob(size_t index) const {
 		return m_MoveableBobs[index];
 	};
 
@@ -254,7 +254,7 @@ struct MapGenInfo {
 	uint32_t getSumLandWeight() const;
 
 	size_t getNumBobAreas() const;
-	MapGenBobArea const & getBobArea(size_t index) const;
+	const MapGenBobArea & getBobArea(size_t index) const;
 	uint32_t getSumBobAreaWeight() const;
 
 private:
@@ -300,7 +300,7 @@ struct World : boost::noncopyable {
 		ERR_WRONGVERSION
 	};
 
-	World(std::string const & name);
+	World(const std::string & name);
 
 	static bool exists_world(std::string); ///  check if a world really exists
 	static void get_all_worlds(std::vector<std::string> &);
@@ -317,7 +317,7 @@ struct World : boost::noncopyable {
 	Terrain_Descr & terrain_descr(Terrain_Index const i) const {
 		return *ters.get(i);
 	}
-	Terrain_Descr const & get_ter(Terrain_Index const i) const {
+	const Terrain_Descr & get_ter(Terrain_Index const i) const {
 		assert(i < ters.get_nitems());
 		return *ters.get(i);
 	}
@@ -351,7 +351,7 @@ struct World : boost::noncopyable {
 	}
 	int32_t get_nr_resources() const {return m_resources.get_nitems();}
 	int32_t safe_resource_index(const char * const warename) const;
-	std::string const & basedir() const {return m_basedir;}
+	const std::string & basedir() const {return m_basedir;}
 
 	MapGenInfo & getMapGenInfo();
 
@@ -367,7 +367,7 @@ private:
 	//  TODO: Should this be a description-maintainer?
 	MapGenInfo m_mapGenInfo;
 
-	void parse_root_conf(std::string const & name, Profile & root_conf);
+	void parse_root_conf(const std::string & name, Profile & root_conf);
 	void parse_resources();
 	void parse_terrains ();
 	void parse_bobs     (std::string & directory, Profile & root_conf);

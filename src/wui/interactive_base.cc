@@ -77,7 +77,7 @@ Interactive_Base::Interactive_Base
 		(new InteractiveBaseInternals
 		 (new QuickNavigation(the_egbase, get_w(), get_h()))),
 	m_egbase                      (the_egbase),
-#ifdef DEBUG //  not in releases
+#ifndef NDEBUG //  not in releases
 	m_display_flags               (dfDebug),
 #else
 	m_display_flags               (0),
@@ -116,7 +116,7 @@ Interactive_Base::Interactive_Base
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
-	m_sel.pic = g_gr->imgcache().load(PicMod_Game, "pics/fsel.png");
+	m_sel.pic = g_gr->images().get("pics/fsel.png");
 
 	m_label_speed.set_visible(false);
 	m_label_speed_shadow.set_visible(false);
@@ -176,7 +176,7 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				 	 map[center.node].get_immovable()))
 			{
 				if (upcast(Interactive_Player const, iplayer, igbase)) {
-					Widelands::Player const & player = iplayer->player();
+					const Widelands::Player & player = iplayer->player();
 					if
 						(not player.see_all()
 						 and
@@ -210,7 +210,7 @@ void Interactive_Base::set_sel_radius(const uint32_t n) {
  * Set/Unset sel picture
  */
 void Interactive_Base::set_sel_picture(const char * const file) {
-	m_sel.pic = g_gr->imgcache().load(PicMod_Game, file);
+	m_sel.pic = g_gr->images().get(file);
 	set_sel_pos(get_sel_pos()); //  redraw
 }
 void Interactive_Base::unset_sel_picture() {
@@ -602,8 +602,8 @@ void Interactive_Base::finish_build_road()
 			 (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)))
 		{
 			//  place flags
-			Map const & map = egbase().map();
-			std::vector<Coords>         const &       c_vector =
+			const Map & map = egbase().map();
+			const std::vector<Coords>         &       c_vector =
 				m_buildroad->get_coords();
 			std::vector<Coords>::const_iterator const first    =
 				c_vector.begin() + 2;
@@ -652,7 +652,7 @@ bool Interactive_Base::append_build_road(Coords const field) {
 	assert(m_buildroad);
 
 	Map & map = egbase().map();
-	Widelands::Player const & player = egbase().player(m_road_build_player);
+	const Widelands::Player & player = egbase().player(m_road_build_player);
 
 	{ //  find a path to the clicked-on node
 		Widelands::Path path;
@@ -674,7 +674,7 @@ bool Interactive_Base::append_build_road(Coords const field) {
 		{
 			Widelands::CheckStepLimited cstep;
 			{
-				std::vector<Coords> const & road_cp = m_buildroad->get_coords();
+				const std::vector<Coords> & road_cp = m_buildroad->get_coords();
 				container_iterate_const(std::vector<Coords>, road_cp, i)
 					cstep.add_allowed_location(*i.current);
 			}
@@ -805,7 +805,7 @@ void Interactive_Base::roadb_add_overlay()
 
 		egbase().map().overlay_manager().register_overlay
 			(neighb,
-			 g_gr->imgcache().load(PicMod_Game, name),
+			 g_gr->images().get(name),
 			 7,
 			 Point::invalid(),
 			 m_road_buildhelp_overlay_jobid);
@@ -878,7 +878,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 					ctrl->setDesiredSpeed(1000 < speed ? speed - 1000 : 0);
 				}
 		return true;
-#ifdef DEBUG //  only in debug builds
+#ifndef NDEBUG //  only in debug builds
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
 				new GameChatMenu
@@ -893,7 +893,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 	return Map_View::handle_key(down, code);
 }
 
-void Interactive_Base::cmdLua(std::vector<std::string> const & args)
+void Interactive_Base::cmdLua(const std::vector<std::string> & args)
 {
 	std::string cmd;
 

@@ -40,7 +40,7 @@
 
 struct Overlay_Manager;
 struct S2_Map_Loader;
-class IPicture;
+class Image;
 
 namespace Widelands {
 
@@ -84,7 +84,7 @@ CheckStep
 Predicates used in path finding and find functions.
 */
 struct FindImmovable;
-FindImmovable const & FindImmovableAlwaysTrue();
+const FindImmovable & FindImmovableAlwaysTrue();
 
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
@@ -160,7 +160,7 @@ struct Map :
 
 	void create_empty_map // for editor
 		(uint32_t w = 64, uint32_t h = 64,
-		 std::string const & worldname   =   "greenland",
+		 const std::string & worldname   =   "greenland",
 		 char        const * name        = _("No Name"),
 		 char        const * author      = _("Unknown"),
 		 char        const * description = _("no description defined"));
@@ -348,7 +348,7 @@ struct Map :
 	//  change terrain of a triangle, recalculate buildcaps
 	int32_t change_terrain(TCoords<FCoords>, Terrain_Index);
 
-	Manager<Objective>  const & mom() const {return m_mom;}
+	const Manager<Objective>  & mom() const {return m_mom;}
 	Manager<Objective>        & mom()       {return m_mom;}
 
 	/// Returns the military influence on a location from an area.
@@ -404,7 +404,7 @@ private:
 		enum Type {
 			PIC,
 		};
-		const IPicture* data;
+		const Image* data;
 		std::string filename;
 		Type        type;
 	};
@@ -419,7 +419,7 @@ private:
 	void check_neighbour_heights(FCoords, uint32_t & radius);
 
 	template<typename functorT>
-		void find_reachable(Area<FCoords>, CheckStep const &, functorT &);
+		void find_reachable(Area<FCoords>, const CheckStep &, functorT &);
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 };

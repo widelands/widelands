@@ -68,10 +68,10 @@ struct Section {
 		char * m_value;
 
 		Value(char const * nname, char const * nval);
-		Value(Value const &);
+		Value(const Value &);
 		~Value();
 
-		Value & operator= (Value const &);
+		Value & operator= (const Value &);
 
 		char const * get_name() const {return m_name;}
 
@@ -96,7 +96,7 @@ struct Section {
 	Section(const Section &);
 	~Section();
 
-	Section & operator= (Section const &);
+	Section & operator= (const Section &);
 
 	/// \returns whether a value with the given name exists.
 	/// Does not mark the value as used.
@@ -154,13 +154,13 @@ struct Section {
 	Widelands::Player_Number  get_safe_Player_Number
 		(char const * name,
 		 Widelands::Player_Number nr_players);
-	Widelands::Immovable_Descr const & get_safe_Immovable_Type
+	const Widelands::Immovable_Descr & get_safe_Immovable_Type
 		(char const * tribe, char const * name,
 		 Widelands::Editor_Game_Base &);
 	Widelands::Building_Index get_safe_Building_Index
 		(char const * name,
 		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
-	Widelands::Building_Descr const & get_safe_Building_Type
+	const Widelands::Building_Descr & get_safe_Building_Type
 		(char const * name,
 		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
 
@@ -178,12 +178,12 @@ struct Section {
 	void set_string_duplicate
 		(char const *       name, char        const *       value);
 	void set_string
-		(char const * const name, std::string const &       value)
+		(char const * const name, const std::string &       value)
 	{
 		set_string(name, value.c_str());
 	}
 	void set_string_duplicate
-		(char const * const name, std::string const &       value)
+		(char const * const name, const std::string &       value)
 	{
 		set_string_duplicate(name, value.c_str());
 	}
@@ -191,7 +191,7 @@ struct Section {
 		(char const * name, Widelands::Coords value);
 	void set_Immovable_Type
 		(char const * tribe, char const * name,
-		 Widelands::Immovable_Descr const &);
+		 const Widelands::Immovable_Descr &);
 	void set_Building_Index
 		(char const * name,
 		 Widelands::Building_Index value,

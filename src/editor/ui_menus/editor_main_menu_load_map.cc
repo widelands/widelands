@@ -116,7 +116,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	m_ok_btn = new UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("OK"),
 		 std::string(),
 		 false);
@@ -125,7 +125,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 posx, posy, 80, 20,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Load_Map::die, this));
 
@@ -222,7 +222,7 @@ void Main_Menu_Load_Map::fill_list() {
 		m_ls->add
 			(_("<parent>"),
 			 m_parentdir.c_str(),
-			 g_gr->imgcache().load(PicMod_Game, "pics/ls_dir.png"));
+			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
@@ -241,7 +241,7 @@ void Main_Menu_Load_Map::fill_list() {
 		m_ls->add
 			(FileSystem::FS_Filename(name),
 			 name,
-			 g_gr->imgcache().load(PicMod_Game, "pics/ls_dir.png"));
+			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	Widelands::Map map;
@@ -259,11 +259,9 @@ void Main_Menu_Load_Map::fill_list() {
 				m_ls->add
 					(FileSystem::FS_Filename(name),
 					 name,
-					 g_gr->imgcache().load
-					 	(PicMod_Game,
-					 	 dynamic_cast<WL_Map_Loader const *>(m_ml) ?
-					 	 "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (_wexception const &) {} //  we simply skip illegal entries
+					 g_gr->images().get
+						 (dynamic_cast<WL_Map_Loader const *>(m_ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+			} catch (const _wexception &) {} //  we simply skip illegal entries
 			delete m_ml;
 		}
 	}

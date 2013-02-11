@@ -35,7 +35,7 @@
 
 #define PARSE_MAP_OBJECT_TYPES_END                                            \
             prof.check_used();                                                \
-         } catch (std::exception const & e) {                                 \
+         } catch (const std::exception & e) {                                 \
             throw game_data_error                                             \
                ("%s=\"%s\": %s", _name, _descname, e.what());                 \
          }                                                                    \

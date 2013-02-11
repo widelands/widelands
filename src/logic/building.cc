@@ -25,15 +25,16 @@
 
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "text_layout.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
+#include "text_layout.h"
 #include "wui/interactive_player.h"
 
 #include "constructionsite.h"
@@ -52,8 +53,8 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 Building_Descr::Building_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _descr)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _descr)
 	:
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
@@ -84,7 +85,7 @@ Building_Descr::Building_Descr
 			throw game_data_error
 				(_("expected %s but found \"%s\""),
 				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error("size: %s", e.what());
 	}
 
@@ -110,7 +111,7 @@ Building_Descr::Building_Descr
 
 				//  Merge the enhancements workarea info into this building's
 				//  workarea info.
-				Building_Descr const & enhancement =
+				const Building_Descr & enhancement =
 					*tribe().get_building_descr(en_i);
 				container_iterate_const
 					(Workarea_Info, enhancement.m_workarea_info, j)
@@ -124,7 +125,7 @@ Building_Descr::Building_Descr
 				throw wexception
 					("\"%s\" has not been defined as a building type (wrong declaration order?)",
 					 target_name.c_str());
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception("\"enhancements=%s\": %s", v->get_string(), e.what());
 		}
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
@@ -191,7 +192,7 @@ Building & Building_Descr::create
 }
 
 
-int32_t Building_Descr::suitability(Map const &, FCoords const fc) const {
+int32_t Building_Descr::suitability(const Map &, FCoords const fc) const {
 	return m_size <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
@@ -224,7 +225,7 @@ Called whenever building graphics need to be loaded.
 void Building_Descr::load_graphics()
 {
 	if (m_buildicon_fname.size())
-		m_buildicon = g_gr->imgcache().load(PicMod_Game, m_buildicon_fname.c_str());
+		m_buildicon = g_gr->images().get(m_buildicon_fname);
 }
 
 /*
@@ -345,7 +346,7 @@ uint32_t Building::get_playercaps() const throw () {
 }
 
 
-std::string const & Building::name() const throw () {return descr().name();}
+const std::string & Building::name() const throw () {return descr().name();}
 
 
 void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
@@ -491,7 +492,7 @@ void Building::destroy(Editor_Game_Base & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	Tribe_Descr const & t = tribe();
+	const Tribe_Descr & t = tribe();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -511,7 +512,7 @@ uint32_t Building::get_ui_anim() const {return descr().get_ui_anim();}
 
 
 #define FORMAT(key, value) case key: result << value; break
-std::string Building::info_string(std::string const & format) {
+std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
 	container_iterate_const(std::string, format, i)
 		if (*i.current == '%') {
@@ -723,7 +724,7 @@ Draw the building.
 ===============
 */
 void Building::draw
-	(Editor_Game_Base const &       game,
+	(const Editor_Game_Base &       game,
 	 RenderTarget           &       dst,
 	 FCoords                  const coords,
 	 Point                    const pos)
@@ -746,22 +747,20 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_help
-	(Editor_Game_Base const &       game,
+	(const Editor_Game_Base &       game,
 	 RenderTarget           &       dst,
 	 FCoords,
 	 Point                    const pos)
 {
-	Interactive_GameBase const & igbase =
+	const Interactive_GameBase & igbase =
 		ref_cast<Interactive_GameBase const, Interactive_Base const>
 			(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
-		UI::g_fh1->draw_text
-			(dst, pos - Point(0, 48),
-			 info_string(igbase.building_census_format()),
-			 0,
-			 UI::Align_Center);
+		dst.blit
+			(pos - Point(0, 48), UI::g_fh1->render(info_string(igbase.building_census_format())),
+			 CM_Normal, UI::Align_Center);
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
@@ -770,11 +769,9 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		UI::g_fh1->draw_text
-			(dst, pos - Point(0, 35),
-			 info_string(igbase.building_statistics_format()),
-			 0,
-			 UI::Align_Center);
+		dst.blit
+			(pos - Point(0, 35), UI::g_fh1->render(info_string(igbase.building_statistics_format())),
+			 CM_Normal, UI::Align_Center);
 	}
 }
 
@@ -837,7 +834,7 @@ void Building::set_priority
 }
 
 
-void Building::log_general_info(Editor_Game_Base const & egbase) {
+void Building::log_general_info(const Editor_Game_Base & egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
@@ -913,14 +910,14 @@ void Building::set_seeing(bool see)
  */
 void Building::send_message
 	(Game & game,
-	 std::string const & msgsender,
-	 std::string const & title,
-	 std::string const & description,
+	 const std::string & msgsender,
+	 const std::string & title,
+	 const std::string & description,
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	std::string const & picnametempl =
-		g_anim.get_animation(descr().get_ui_anim())->picnametempl;
+	const std::string & picnametempl =
+		g_anim.get_animation(descr().get_ui_anim()).picnametempl;
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + picnametempl.size() + 1 +

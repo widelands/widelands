@@ -36,7 +36,7 @@ struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
 	Radiobutton
-		(Panel * parent, Point, const IPicture* pic, Radiogroup &, int32_t id);
+		(Panel * parent, Point, const Image* pic, Radiogroup &, int32_t id);
 	~Radiobutton();
 
 private:
@@ -62,7 +62,7 @@ struct Radiogroup {
 	boost::signal<void ()> clicked; //  clicked without things changed
 
 	int32_t add_button
-		(Panel * parent, Point, const IPicture* pic, const std::string& tooltip = "", Radiobutton ** = NULL);
+		(Panel * parent, Point, const Image* pic, const std::string& tooltip = "", Radiobutton ** = NULL);
 
 	int32_t get_state() const throw () {return m_state;}
 	void set_state(int32_t state);

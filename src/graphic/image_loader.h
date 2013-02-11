@@ -22,16 +22,15 @@
 
 #include <string>
 
-class IPicture;
+class Surface;
 
-/// This only knows how to load an image. It is the only thing that is
-/// implementation dependant in the ImageCache.
+/// A thin interface that can load an Image from anywhere and turn it into a
+/// surface.
 class IImageLoader {
 public:
 	virtual ~IImageLoader() {}
 
-	virtual IPicture* load(const std::string& fn, bool alpha, bool intensity = false) const = 0;
+	virtual Surface* load(const std::string& fn) const = 0;
 };
 
 #endif /* end of include guard: IMAGE_LOADER_H */
-

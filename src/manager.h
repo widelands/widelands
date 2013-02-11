@@ -80,7 +80,7 @@ template<typename T> struct Manager {
 			}
 		throw Nonexistent();
 	}
-	void remove(std::string const & name) {
+	void remove(const std::string & name) {
 		container_iterate(container, items, i)
 			if (name == (*i.current)->name()) {
 				delete *i.current;
@@ -94,7 +94,7 @@ template<typename T> struct Manager {
 	typedef std::vector<T *> container;
 	typedef typename container::size_type Index;
 	Index size() const {return items.size();}
-	T const & operator[](Index const i) const {
+	const T & operator[](Index const i) const {
 		assert(i < size());
 		return *items[i];
 	}
@@ -114,13 +114,13 @@ template<typename T> struct Manager {
 				return *i.current;
 		return 0;
 	}
-	T const * operator[](std::string const & name) const {
+	T const * operator[](const std::string & name) const {
 		container_iterate_const(container, items, i)
 			if (name == (*i.current)->name())
 				return *i.current;
 		return 0;
 	}
-	T       * operator[](std::string const & name)       {
+	T       * operator[](const std::string & name)       {
 		container_iterate_const(container, items, i)
 			if (name == (*i.current)->name())
 				return *i.current;

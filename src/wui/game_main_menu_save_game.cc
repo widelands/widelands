@@ -73,7 +73,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	m_editbox =
 		new UI::EditBox
 			(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"));
+			 g_gr->images().get("pics/but1.png"));
 	m_editbox->changed.connect(boost::bind(&Game_Main_Menu_Save_Game::edit_box_changed, this));
 	m_editbox->ok.connect(boost::bind(&Game_Main_Menu_Save_Game::ok, this));
 
@@ -81,7 +81,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		new UI::Button
 			(this, "ok",
 			 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+			 g_gr->images().get("pics/but4.png"),
 			 _("OK"),
 			 std::string(),
 			 false);
@@ -91,7 +91,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		new UI::Button
 			(this, "cancel",
 			 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+			 g_gr->images().get("pics/but4.png"),
 			 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&Game_Main_Menu_Save_Game::die, this));
 
@@ -99,7 +99,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		new UI::Button
 			(this, "delete",
 			 DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
+			 g_gr->images().get("pics/but4.png"),
 			 _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&Game_Main_Menu_Save_Game::delete_clicked, this));
 
@@ -119,7 +119,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
  * called when a item is selected
  */
 void Game_Main_Menu_Save_Game::selected(uint32_t) {
-	std::string const & name = m_ls.get_selected();
+	const std::string & name = m_ls.get_selected();
 
 	Widelands::Game_Loader gl(name, igbase().game());
 	Widelands::Game_Preload_Data_Packet gpdp;
@@ -176,7 +176,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 			Widelands::Game_Loader gl(name, igbase().game());
 			gl.preload_game(gpdp);
 			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
-		} catch (_wexception const &) {} //  we simply skip illegal entries
+		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 
 	if (m_ls.size())
@@ -191,7 +191,7 @@ void Game_Main_Menu_Save_Game::edit_box_changed() {
 }
 
 static void dosave
-	(Interactive_GameBase & igbase, std::string const & complete_filename)
+	(Interactive_GameBase & igbase, const std::string & complete_filename)
 {
 	Widelands::Game & game = igbase.game();
 
@@ -210,7 +210,7 @@ static void dosave
 
 struct SaveWarnMessageBox : public UI::WLMessageBox {
 	SaveWarnMessageBox
-		(Game_Main_Menu_Save_Game & parent, std::string const & filename)
+		(Game_Main_Menu_Save_Game & parent, const std::string & filename)
 		:
 		UI::WLMessageBox
 			(&parent,
@@ -269,7 +269,7 @@ void Game_Main_Menu_Save_Game::ok()
 
 struct DeletionMessageBox : public UI::WLMessageBox {
 	DeletionMessageBox
-		(Game_Main_Menu_Save_Game & parent, std::string const & filename)
+		(Game_Main_Menu_Save_Game & parent, const std::string & filename)
 		:
 		UI::WLMessageBox
 			(&parent,

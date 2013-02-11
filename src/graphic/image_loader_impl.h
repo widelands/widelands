@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,29 +13,24 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#ifndef PICTURE_H
-#define PICTURE_H
+#ifndef IMAGE_LOADER_IMPL_H
+#define IMAGE_LOADER_IMPL_H
 
-#include <stdint.h>
 #include <string>
 
-#include <boost/noncopyable.hpp>
+#include "image_loader.h"
 
-/**
- * Interface to a bitmap that can act as the source of a rendering
- * operation.
- */
-class IPicture : boost::noncopyable {
+class ImageLoaderImpl : public IImageLoader {
 public:
-	IPicture() {}
-	virtual ~IPicture() {}
+	virtual ~ImageLoaderImpl() {}
 
-	virtual uint32_t get_w() const = 0;
-	virtual uint32_t get_h() const = 0;
+	Surface* load(const std::string& fname) const;
 };
 
-#endif
+
+#endif /* end of include guard: IMAGE_LOADER_IMPL_H */
+

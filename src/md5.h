@@ -47,11 +47,11 @@ struct md5_checksum {
 
 	std::string str() const;
 
-	bool operator== (md5_checksum const & o) const {
+	bool operator== (const md5_checksum & o) const {
 		return memcmp(data, o.data, sizeof(data)) == 0;
 	}
 
-	bool operator!= (md5_checksum const & o) const {return not (*this == o);}
+	bool operator!= (const md5_checksum & o) const {return not (*this == o);}
 };
 
 // Note that the implementation of MD5Checksum is basically just

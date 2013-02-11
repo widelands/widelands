@@ -250,8 +250,8 @@ static char const * const atlantean_worker_types[] = {
 };
 
 Ware_Index ware_index
-	(Tribe_Descr const &       tribe,
-	 std::string const &       name,
+	(const Tribe_Descr &       tribe,
+	 const std::string &       name,
 	 char        const * const relation,
 	 uint32_t            const legacy_index)
 {
@@ -295,8 +295,8 @@ Ware_Index ware_index
 }
 
 Ware_Index safe_ware_index
-	(Tribe_Descr const &       tribe,
-	 std::string const &       name,
+	(const Tribe_Descr &       tribe,
+	 const std::string &       name,
 	 char        const * const relation,
 	 uint32_t            const legacy_index)
 {
@@ -309,8 +309,8 @@ Ware_Index safe_ware_index
 }
 
 Ware_Index worker_index
-	(Tribe_Descr const &       tribe,
-	 std::string const &       name,
+	(const Tribe_Descr &       tribe,
+	 const std::string &       name,
 	 char        const * const relation,
 	 uint32_t            const legacy_index)
 {
@@ -363,7 +363,7 @@ struct FakeAttackController : public BaseImmovable {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	virtual int32_t get_size() const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return true;}
-	virtual void draw (Editor_Game_Base const &, RenderTarget &, FCoords, Point)
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, FCoords, Point)
 	{}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
 	{
@@ -402,7 +402,7 @@ struct FakeAttackController : public BaseImmovable {
 				uint32_t numInMs = fr.Unsigned32();
 				for (uint32_t j = 0; j < numInMs; ++j)
 					fr.Unsigned32();
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw wexception
 					("Error in legacy AttackController: binary/mapobjects:%s",
 					 e.what());
@@ -429,7 +429,7 @@ Map_Object::Loader * loadAttackController
 
 		loader->init(egbase, mol, *new FakeAttackController);
 		loader->load(fr, version);
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		throw wexception("Loading legacy AttackController: %s", e.what());
 	}
 
@@ -445,7 +445,7 @@ struct FakeBattle : public BaseImmovable {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	virtual int32_t get_size() const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return true;}
-	virtual void draw (Editor_Game_Base const &, RenderTarget &, FCoords, Point)
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, FCoords, Point)
 	{}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
 	{

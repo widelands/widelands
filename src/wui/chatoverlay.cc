@@ -99,7 +99,7 @@ void ChatOverlay::Impl::recompute()
 
 	havemessages = false;
 
-	std::vector<ChatMessage> const & msgs = chat->getMessages();
+	const std::vector<ChatMessage> & msgs = chat->getMessages();
 	uint32_t idx = msgs.size();
 	std::string richtext;
 	while (idx && now - msgs[idx - 1].time <= CHAT_DISPLAY_TIME) {

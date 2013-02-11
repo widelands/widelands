@@ -45,8 +45,8 @@ class DismantleSite;
 struct DismantleSite_Descr : public Building_Descr {
 	DismantleSite_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const & tribe);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const;
 };
@@ -81,7 +81,7 @@ protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
 
-	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
 };
 
 }

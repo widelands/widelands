@@ -23,7 +23,6 @@
 
 #include "io/filesystem/layered_filesystem.h"
 #include "io/fileread.h"
-#include "graphic.h"
 
 #include "log.h"
 #include "constants.h"
@@ -32,12 +31,13 @@
 
 #include "texture.h"
 
+extern bool g_opengl;
 
 using namespace std;
 
 /**
- * Create a texture, taking the pixel data from a Pic.
- * Currently it converts a 16 bit pic to a 8 bit texture. This should
+ * Create a texture, taking the pixel data from an Image.
+ * Currently it converts a 16 bit image to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
 Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFormat& format)
@@ -50,7 +50,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 		is_32bit   (format.BytesPerPixel == 4),
 		m_was_animated(false)
 {
-	// Load the pictures one by one
+	// Load the images one by one
 	char fname[256];
 
 	for (;;) {
@@ -75,7 +75,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 
 		SDL_Surface * surf;
 
-		m_texture_picture = strdup(fname);
+		m_texture_image = strdup(fname);
 
 		FileRead fr;
 
@@ -203,7 +203,7 @@ Texture::~Texture ()
 {
 	delete m_colormap;
 	free(m_pixels);
-	free(m_texture_picture);
+	free(m_texture_image);
 
 	BOOST_FOREACH(GLSurfaceTexture* surf, m_glFrames)
 		delete surf;

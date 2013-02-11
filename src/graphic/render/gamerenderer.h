@@ -20,6 +20,8 @@
 #ifndef WIDELANDS_GAMERENDERER_H
 #define WIDELANDS_GAMERENDERER_H
 
+#include <boost/utility.hpp>
+
 #include "point.h"
 
 namespace Widelands {
@@ -27,7 +29,7 @@ namespace Widelands {
 	struct Editor_Game_Base;
 };
 
-struct RenderTarget;
+class RenderTarget;
 
 /**
  * This abstract base class renders the main game view into an
@@ -39,7 +41,7 @@ struct RenderTarget;
  * so that target-specific optimizations (such as caching data) can
  * be effective.
  */
-struct GameRenderer {
+class GameRenderer : boost::noncopyable {
 public:
 	GameRenderer();
 	virtual ~GameRenderer();
@@ -53,9 +55,9 @@ public:
 	 */
 	void rendermap
 		(RenderTarget & dst,
-		 Widelands::Editor_Game_Base const &       egbase,
-		 Widelands::Player           const &       player,
-		 Point                                     viewofs);
+		 const Widelands::Editor_Game_Base &       egbase,
+		 const Widelands::Player           &       player,
+		 const Point                       &       viewofs);
 
 	/**
 	 * Renders the map from an omniscient perspective.
@@ -63,8 +65,8 @@ public:
 	 */
 	void rendermap
 		(RenderTarget & dst,
-		 Widelands::Editor_Game_Base const & egbase,
-		 Point                               viewofs);
+		 const Widelands::Editor_Game_Base & egbase,
+		 const Point                       & viewofs);
 
 protected:
 	virtual void draw() = 0;

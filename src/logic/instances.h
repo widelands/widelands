@@ -57,8 +57,8 @@ struct Map_Object_Descr : boost::noncopyable {
 	{}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-	std::string const &     name() const throw () {return m_name;}
-	std::string const & descname() const throw () {return m_descname;}
+	const std::string &     name() const throw () {return m_name;}
+	const std::string & descname() const throw () {return m_descname;}
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
@@ -76,8 +76,8 @@ struct Map_Object_Descr : boost::noncopyable {
 
 	std::string get_animation_name(uint32_t) const; ///< needed for save, debug
 	bool has_attribute(uint32_t) const throw ();
-	static uint32_t get_attribute_id(std::string const & name);
-	static std::string get_attribute_name(uint32_t const & id);
+	static uint32_t get_attribute_id(const std::string & name);
+	static std::string get_attribute_name(uint32_t id);
 
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
@@ -224,13 +224,13 @@ public:
 
 	// implementation is in game_debug_ui.cc
 	virtual void create_debug_panels
-		(Editor_Game_Base const & egbase, UI::Tab_Panel & tabs);
+		(const Editor_Game_Base & egbase, UI::Tab_Panel & tabs);
 
 	LogSink * get_logsink() {return m_logsink;}
 	void set_logsink(LogSink *);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	// saving and loading
 	/**
@@ -389,8 +389,8 @@ struct Object_Ptr {
 
 	// dammit... without a Editor_Game_Base object, we can't implement a
 	// Map_Object* operator (would be _really_ nice)
-	Map_Object * get(Editor_Game_Base const &);
-	Map_Object * get(Editor_Game_Base const & egbase) const;
+	Map_Object * get(const Editor_Game_Base &);
+	Map_Object * get(const Editor_Game_Base & egbase) const;
 
 	bool operator<  (const Object_Ptr & other) const throw () {
 		return m_serial < other.m_serial;
@@ -419,16 +419,16 @@ struct OPtr {
 
 	bool is_set() const {return m.is_set();}
 
-	T * get(Editor_Game_Base const &       egbase) {
+	T * get(const Editor_Game_Base &       egbase) {
 		return static_cast<T *>(m.get(egbase));
 	}
-	T * get(Editor_Game_Base const &       egbase) const {
+	T * get(const Editor_Game_Base &       egbase) const {
 		return static_cast<T *>(m.get(egbase));
 	}
 
-	bool operator<  (OPtr<T> const & other) const {return m <  other.m;}
-	bool operator== (OPtr<T> const & other) const {return m == other.m;}
-	bool operator!= (OPtr<T> const & other) const {return m != other.m;}
+	bool operator<  (const OPtr<T> & other) const {return m <  other.m;}
+	bool operator== (const OPtr<T> & other) const {return m == other.m;}
+	bool operator!= (const OPtr<T> & other) const {return m != other.m;}
 
 	Serial serial() const {return m.serial();}
 

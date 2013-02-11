@@ -16,10 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <algorithm>
+
 #include "gl_utils.h"
 #include "gl_surface_screen.h"
 
-GLSurfaceScreen::GLSurfaceScreen(uint32_t w, uint32_t h)
+GLSurfaceScreen::GLSurfaceScreen(uint16_t w, uint16_t h)
 {
 	m_w = w;
 	m_h = h;
@@ -36,7 +38,7 @@ void GLSurfaceScreen::swap_rows()
 	uint8_t * end_row = m_pixels.get() + (m_w * (m_h - 1) * 4);
 
 	while (begin_row < end_row) {
-		for (uint32_t x = 0; x < m_w * 4; ++x)
+		for (uint16_t x = 0; x < m_w * 4; ++x)
 			std::swap(begin_row[x], end_row[x]);
 
 		begin_row += m_w * 4;
@@ -45,7 +47,7 @@ void GLSurfaceScreen::swap_rows()
 }
 
 const SDL_PixelFormat & GLSurfaceScreen::format() const {
-	return gl_rgb_format();
+	return gl_rgba_format();
 }
 
 void GLSurfaceScreen::lock(Surface::LockMode mode)

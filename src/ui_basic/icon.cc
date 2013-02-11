@@ -17,16 +17,16 @@
  *
  */
 
-#include "icon.h"
+#include "graphic/image.h"
 #include "graphic/rendertarget.h"
-#include "graphic/picture.h"
+#include "icon.h"
 
 namespace UI {
 
 Icon::Icon
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const int32_t w, const int32_t h,
-	 const IPicture* picture_id)
+	 const Image* picture_id)
 	:
 	Panel(parent, x, y, w, h),
 	m_pic(picture_id),
@@ -37,15 +37,15 @@ Icon::Icon
 	set_think(false);
 }
 
-void Icon::setIcon(const IPicture* picture_id) {
+void Icon::setIcon(const Image* picture_id) {
 	m_pic = picture_id;
 	update();
 }
 
 void Icon::draw(RenderTarget & dst) {
 	assert(m_pic);
-	int32_t w = (m_w - m_pic->get_w()) / 2;
-	int32_t h = (m_h - m_pic->get_h()) / 2;
+	int32_t w = (m_w - m_pic->width()) / 2;
+	int32_t h = (m_h - m_pic->height()) / 2;
 	dst.blit(Point(w, h), m_pic);
 }
 

@@ -49,18 +49,18 @@ private:
 	struct BaseCapsule {
 		virtual ~BaseCapsule() {}
 
-		virtual bool check(Map_Object const &) const = 0;
+		virtual bool check(const Map_Object &) const = 0;
 		virtual void write
 			(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver &) const
 			= 0;
-		virtual RequirementsStorage const & storage() const = 0;
+		virtual const RequirementsStorage & storage() const = 0;
 	};
 
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(T const & _m) : m(_m) {}
+		Capsule(const T & _m) : m(_m) {}
 
-		bool check(Map_Object const & obj) const {return m.check(obj);}
+		bool check(const Map_Object & obj) const {return m.check(obj);}
 
 		void write
 			(FileWrite            & fw,
@@ -71,7 +71,7 @@ private:
 			m.write(fw, egbase, mos);
 		}
 
-		RequirementsStorage const & storage() const {return T::storage;}
+		const RequirementsStorage & storage() const {return T::storage;}
 
 		T m;
 	};
@@ -79,12 +79,12 @@ private:
 public:
 	Requirements() {}
 
-	template<typename T> Requirements(T const & req) : m(new Capsule<T>(req)) {}
+	template<typename T> Requirements(const T & req) : m(new Capsule<T>(req)) {}
 
 	/**
 	 * \return \c true if the object satisfies the requirements.
 	 */
-	bool check(Map_Object const &) const;
+	bool check(const Map_Object &) const;
 
 	// For Save/Load Games
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
@@ -135,9 +135,9 @@ private:
  * is met. Defaults to \c false if no sub-requirement is added.
  */
 struct RequireOr {
-	void add(Requirements const &);
+	void add(const Requirements &);
 
-	bool check(Map_Object const &) const;
+	bool check(const Map_Object &) const;
 	void write
 		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
 
@@ -153,9 +153,9 @@ private:
  * Defaults to \c true if no sub-requirement is added.
  */
 struct RequireAnd {
-	void add(Requirements const &);
+	void add(const Requirements &);
 
-	bool check(Map_Object const &) const;
+	bool check(const Map_Object &) const;
 	void write
 		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
 
@@ -174,7 +174,7 @@ struct RequireAttribute {
 		(tAttribute const _at, int32_t const _min, int32_t const _max)
 		: at(_at), min(_min), max(_max) {}
 
-	bool check(Map_Object const &) const;
+	bool check(const Map_Object &) const;
 	void write
 		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
 

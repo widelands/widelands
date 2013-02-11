@@ -33,8 +33,8 @@ struct Carrier : public Worker {
 	struct Descr : public Worker_Descr {
 		Descr
 			(char const * const _name, char const * const _descname,
-			 std::string const & directory, Profile & prof, Section & global_s,
-			 Tribe_Descr const & _tribe)
+			 const std::string & directory, Profile & prof, Section & global_s,
+			 const Tribe_Descr & _tribe)
 			:
 				Worker_Descr
 					(_name, _descname, directory,
@@ -60,7 +60,7 @@ struct Carrier : public Worker {
 	void start_task_transport(Game &, int32_t fromflag);
 	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 private:
 	MO_DESCR(Descr);

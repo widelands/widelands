@@ -101,12 +101,12 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 
 // Checkbox
@@ -202,8 +202,8 @@ void Fullscreen_Menu_MapSelect::think()
 bool Fullscreen_Menu_MapSelect::compare_maprows
 	(uint32_t rowa, uint32_t rowb)
 {
-	MapData const & r1 = m_maps_data[m_table[rowa]];
-	MapData const & r2 = m_maps_data[m_table[rowb]];
+	const MapData & r1 = m_maps_data[m_table[rowa]];
+	const MapData & r2 = m_maps_data[m_table[rowb]];
 
 	if (!r1.width and !r2.width) {
 		return r1.name < r2.name;
@@ -230,7 +230,7 @@ MapData const * Fullscreen_Menu_MapSelect::get_map() const
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-	MapData const & mapdata = m_maps_data[m_table.get_selected()];
+	const MapData & mapdata = m_maps_data[m_table.get_selected()];
 
 	if (!mapdata.width) {
 		m_curdir = mapdata.filename;
@@ -247,7 +247,7 @@ void Fullscreen_Menu_MapSelect::ok()
  */
 void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
-	MapData const & map = m_maps_data[m_table.get_selected()];
+	const MapData & map = m_maps_data[m_table.get_selected()];
 
 	if (map.width) {
 		char buf[256];
@@ -341,7 +341,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 			te.set_string(0, "");
 			te.set_picture
-				(1,  g_gr->imgcache().load(PicMod_Game, "pics/ls_dir.png"),
+				(1,  g_gr->images().get("pics/ls_dir.png"),
 				_("<parent>"));
 
 			++ndirs;
@@ -372,7 +372,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 			te.set_string(0, "");
 			te.set_picture
-				(1,  g_gr->imgcache().load(PicMod_Game, "pics/ls_dir.png"),
+				(1,  g_gr->images().get("pics/ls_dir.png"),
 				FileSystem::FS_Filename(name));
 
 			++ndirs;
@@ -428,11 +428,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					te.set_string(0, buf);
 					i18n::Textdomain td("maps");
 					te.set_picture
-						(1,  g_gr->imgcache().load
-						(PicMod_Game,
-						dynamic_cast<WL_Map_Loader const *>(ml) ?
-						(mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
-						:
+						(1,  g_gr->images().get
+						 (dynamic_cast<WL_Map_Loader const *>(ml) ?
+							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
 						_(mapdata.name));
 				} catch (const std::exception & e) {
@@ -463,7 +461,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				map.set_filename(name);
 				ml->preload_map(true);
 
-				MapData mapdata;
 				mapdata.filename    = name;
 				mapdata.name        = map.get_name();
 				mapdata.author      = map.get_author();
@@ -489,8 +486,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				sprintf(buf, "(%i)", mapdata.nrplayers);
 				te.set_string(0, buf);
 				te.set_picture
-					(1, g_gr->imgcache().load
-						(PicMod_Game, (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
+					(1, g_gr->images().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
 					 mapdata.name.c_str());
 
 			} catch (...) {
@@ -517,9 +513,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				sprintf(buf, "(%i)", mapdata.nrplayers);
 				te.set_string(0, buf);
 				te.set_picture
-					(1, g_gr->imgcache().load
-						(PicMod_Game, (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
-					 mapdata.name.c_str());
+					(1, g_gr->images().get
+					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
 			}
 
 			delete ml;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,30 +17,30 @@
  *
  */
 
-#ifndef IGRAPHIC_H
-#define IGRAPHIC_H
+#include <SDL.h>
+#include <SDL_image.h>
 
-#include <string>
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "wexception.h"
 
-#include "iblitable_surface.h"
-#include "picture.h"
+#include "surface.h"
 
-struct SDL_Surface;
-class ImageCache;
+#include "image_loader_impl.h"
 
-class IGraphic {
-public:
-	virtual ~IGraphic() {};
+using namespace std;
 
-	virtual IPicture* convert_sdl_surface_to_picture
-		(SDL_Surface*,
-		 bool alpha = false,
-		 bool intensity = false) const = 0;
-	virtual IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const = 0;
+Surface* ImageLoaderImpl::load(const string& fname) const {
+	FileRead fr;
+	log("Loading image %s.\n", fname.c_str());
 
-	virtual ImageCache& imgcache() const = 0;
-};
+	fr.fastOpen(*g_fs, fname.c_str());
+	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
+	if (!sdlsurf)
+		throw wexception("Could not open image %s: %s", fname.c_str(), IMG_GetError());
 
-#endif /* end of include guard: IGRAPHIC_H */
+	return Surface::create(sdlsurf);
+}
 

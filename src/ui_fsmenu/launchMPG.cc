@@ -61,7 +61,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -71,7 +71,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 2 * space + butw, y, butw, buth,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Saved game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -81,7 +81,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 3 * space + 2 * butw, y, butw, buth,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+			 g_gr->images().get("pics/but1.png"),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -117,29 +117,29 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_change_map_or_save
 		(this, "change_map_or_save",
 		 get_w() * 37 / 50 + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
-		 g_gr->imgcache().load(PicMod_UI, "pics/menu_toggle_minimap.png"),
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 37 / 50, get_h() * 12 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 37 / 50, get_h() * 218 / 240, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 37 / 50, get_h() * 11 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 get_w() * 37 / 50 + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
-		 g_gr->imgcache().load(PicMod_UI, "pics/menu_help.png"),
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/menu_help.png"),
 		 _("Show the help window"), true, false),
 
 // Text labels
@@ -296,11 +296,11 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 
 		try {
 
-			std::string n = t->get_string("name");
-			std::string d = t->get_string("description");
+			std::string name = t->get_string("name");
+			std::string descr = t->get_string("description");
 
-			m_wincondition.set_title(n);
-			m_wincondition.set_tooltip(d.c_str());
+			m_wincondition.set_title(name);
+			m_wincondition.set_tooltip(descr.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
 			win_condition_clicked();
@@ -342,7 +342,7 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 
 	m_settings->setScenario(code == 2);
 
-	MapData const & mapdata = *msm.get_map();
+	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
 
 	// If the same map was selected again, maybe the state of the "scenario" check box was changed
@@ -440,7 +440,7 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
  */
 void Fullscreen_Menu_LaunchMPG::refresh()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 
 	if (settings.mapfilename != m_filename_proof) {
 		if (!g_fs->FileExists(settings.mapfilename)) {
@@ -508,7 +508,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
  */
 void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 	if (settings.mapfilename.empty())
 		throw wexception
 			("settings()->scenario was set to true, but no map is available");

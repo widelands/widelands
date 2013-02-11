@@ -38,7 +38,7 @@ void Game_Player_Economies_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
 {
 	try {
-		Map   const &       map        = game.map();
+		const Map   &       map        = game.map();
 		Map_Index     const max_index  = map.max_index();
 		Player_Number const nr_players = map.get_nrplayers();
 
@@ -64,13 +64,13 @@ void Game_Player_Economies_Data_Packet::Read
 						} else
 							throw game_data_error
 								(_("there is no flag at the specified location"));
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("player %u: %s"), p, e.what());
 				}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("economies: %s"), e.what());
 	}
 }
@@ -85,11 +85,11 @@ void Game_Player_Economies_Data_Packet::Write
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Map const & map = game.map();
-	Field const & field_0 = map[0];
+	const Map & map = game.map();
+	const Field & field_0 = map[0];
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
-		Player::Economies const & economies = player->m_economies;
+		const Player::Economies & economies = player->m_economies;
 		container_iterate_const(Player::Economies, economies, i) {
 			// Walk the map so that we find a representant.
 			for (Field const * field = &field_0;; ++field) {

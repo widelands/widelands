@@ -19,11 +19,12 @@
 
 #include "economy/economy.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "interactive_gamebase.h"
 #include "logic/item_ware_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "graphic/rendertarget.h"
 #include "logic/tribe.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
@@ -49,18 +50,18 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 		UI::UniqueWindow
 			(&parent, "economy_options", &economy.m_optionswindow_registry, 0, 0,
 			 _("Economy options")),
-		m_tabpanel(this, 0, 0, g_gr->imgcache().load(PicMod_UI, "pics/but1.png"))
+		m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png"))
 	{
 		set_center_panel(&m_tabpanel);
 
 		m_tabpanel.add
 			("wares",
-			 g_gr->imgcache().load(PicMod_UI, pic_tab_wares),
+			 g_gr->images().get(pic_tab_wares),
 			 new Economy_Options_Ware_Panel(&m_tabpanel, parent, economy),
 			 _("Wares"));
 		m_tabpanel.add
 			("workers",
-			 g_gr->imgcache().load(PicMod_UI, pic_tab_workers),
+			 g_gr->images().get(pic_tab_workers),
 			 new Economy_Options_Worker_Panel(&m_tabpanel, parent, economy),
 			 _("Workers"));
 
@@ -77,7 +78,7 @@ private:
 		TargetWaresDisplay
 			(UI::Panel * const parent,
 			 int32_t const x, int32_t const y,
-			 Widelands::Tribe_Descr const & tribe,
+			 const Widelands::Tribe_Descr & tribe,
 			 Widelands::WareWorker type,
 			 bool selectable,
 			 Economy & economy)
@@ -139,7 +140,7 @@ private:
 	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
-		  g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),            \
+		  g_gr->images().get("pics/but4.png"),            \
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&Economy_Options_Ware_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
@@ -159,7 +160,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					Economy::Target_Quantity const & tq =
+					const Economy::Target_Quantity & tq =
 						m_economy.ware_target_quantity(id);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
@@ -182,7 +183,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					Economy::Target_Quantity const & tq =
+					const Economy::Target_Quantity & tq =
 						m_economy.ware_target_quantity(id);
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
@@ -234,7 +235,7 @@ private:
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
-		  g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),              \
+		  g_gr->images().get("pics/but4.png"),              \
 		  text, tooltip, m_can_act);                                  \
 	b->sigclicked.connect(boost::bind(&Economy_Options_Worker_Panel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
@@ -256,7 +257,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					Economy::Target_Quantity const & tq =
+					const Economy::Target_Quantity & tq =
 						m_economy.worker_target_quantity(id);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
@@ -279,7 +280,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					Economy::Target_Quantity const & tq =
+					const Economy::Target_Quantity & tq =
 						m_economy.worker_target_quantity(id);
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());

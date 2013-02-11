@@ -77,7 +77,7 @@ throw (_wexception)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("terrain: %s"), e.what());
 	}
 }
@@ -94,7 +94,7 @@ throw (_wexception)
 
 	//  This is a bit more complicated saved so that the order of loading of the
 	//  terrains at run time does not matter. This is slow like hell.
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	const World & world = map.world();
 	Terrain_Index const nr_terrains = world.get_nr_terrains();
 	fw.Unsigned16(nr_terrains);

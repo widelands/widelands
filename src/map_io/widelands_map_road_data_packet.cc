@@ -58,14 +58,14 @@ throw (_wexception)
 					//  If this is already known, get it.
 					//  Road data is read somewhere else
 					mol.register_object(serial, *new Road()).init(egbase);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error("%u: %s", serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("road: %s"), e.what());
 	}
 }
@@ -81,7 +81,7 @@ throw (_wexception)
 
 	//  Write roads. Register this with the map_object_saver so that its data
 	//  can be saved later.
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	Field * field = &map[0];
 	Field const * const fields_end = field + map.max_index();
 	for (; field < fields_end; ++field)

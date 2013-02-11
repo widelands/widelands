@@ -210,7 +210,7 @@ void Textarea::expand()
 	int32_t x = get_x();
 	int32_t y = get_y();
 	uint32_t w = m_textstyle.calc_bare_width(m_text);
-	uint32_t h = m_textstyle.font->height();
+	uint16_t h = m_textstyle.font->height();
 
 	if      (m_align & Align_HCenter)
 		x -= w >> 1;
@@ -232,7 +232,7 @@ void Textarea::expand()
 void Textarea::update_desired_size()
 {
 	uint32_t w = m_textstyle.calc_bare_width(m_text);
-	uint32_t h = m_textstyle.font->height();
+	uint16_t h = m_textstyle.font->height();
 
 	set_desired_size(w, h);
 }
@@ -244,7 +244,7 @@ void Textarea::update_desired_size()
 void Textarea::set_fixed_size(const std::string & /* text */)
 {
 	uint32_t w = m_textstyle.calc_bare_width(m_text);
-	uint32_t h = m_textstyle.font->height();
+	uint16_t h = m_textstyle.font->height();
 	set_size(w, h);
 	set_desired_size(w, h);
 }

@@ -27,7 +27,7 @@
 
 #include "ui_basic/panel.h"
 
-struct GameRenderer;
+class GameRenderer;
 struct Interactive_Base;
 
 /**

@@ -20,10 +20,10 @@
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
-#include "graphic/image_cache.h"
-#include "md5.h"
+#include "graphic/render/sdl_helper.h"
+#include "graphic/surface.h"
+#include "graphic/surface_cache.h"
 #include "rt_errors.h"
-#include "sdl_helper.h"
 
 #include "sdl_ttf_font_impl.h"
 
@@ -44,7 +44,7 @@ SDLTTF_Font::~SDLTTF_Font() {
 	font_ = 0;
 }
 
-void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32_t * gh) {
+void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16_t * gh) {
 	m_set_style(style);
 
 	int w, h;
@@ -56,20 +56,13 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint32_t * gw, uint32
 	*gw = w; *gh = h;
 }
 
-const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBColor& clr, int style) {
-	// TODO(sirver): Make this cheaper!
-	SimpleMD5Checksum checksum;
-	checksum.Data(font_name_.c_str(), font_name_.size());
-	checksum.Data(&ptsize_, sizeof(ptsize_));
-	checksum.Data(txt.c_str(), txt.size());
-	checksum.Data(&clr.r, 1);
-	checksum.Data(&clr.g, 1);
-	checksum.Data(&clr.b, 1);
-	checksum.Data(&style, sizeof(style));
-	checksum.FinishChecksum();
-	const string cs = checksum.GetChecksum().str();
-
-	const IPicture* rv = gr.imgcache().get(PicMod_Text, cs);
+const Surface& SDLTTF_Font::render
+	(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
+	const string hash =
+		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
+		 static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
+			.str();
+	const Surface* rv = surface_cache->get(hash);
 	if (rv) return *rv;
 
 	m_set_style(style);
@@ -80,7 +73,7 @@ const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 	if (style & SHADOW) {
 		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface * shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
-		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET, true);
+		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
 
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
@@ -121,12 +114,11 @@ const IPicture& SDLTTF_Font::render(IGraphic & gr, const string& txt, const RGBC
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return
-		*gr.imgcache().insert(PicMod_Text, cs, gr.convert_sdl_surface_to_picture(text_surface, true));
+	return *surface_cache->insert(hash, Surface::create(text_surface));
 }
 
-uint32_t SDLTTF_Font::ascent(int style) const {
-	uint32_t rv = TTF_FontAscent(font_);
+uint16_t SDLTTF_Font::ascent(int style) const {
+	uint16_t rv = TTF_FontAscent(font_);
 	if (style & SHADOW)
 		rv += SHADOW_OFFSET;
 	return rv;

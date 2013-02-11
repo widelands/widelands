@@ -57,32 +57,32 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 	joingame
 		(this, "join_game",
 		 get_w() * 16 / 25, get_h() * 5333 / 10000, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("Join this game"), std::string(), true, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 16 / 25, get_h() * 6083 / 10000, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("Host a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 16 / 25, get_h() * 8333 / 10000, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	loadlasthost
 		(this, "load_previous_host",
 		 get_w() * 171 / 200, get_h() * 19 / 40, m_buth, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but1.png"),
-		 g_gr->imgcache().load(PicMod_UI, "pics/menu_load_game.png"),
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/menu_load_game.png"),
 		 _("Load previous host"), true, false),
 
 // Edit boxes
 	playername
 		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,       m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png")),
+		 g_gr->images().get("pics/but2.png")),
 	hostname
 		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png")),
+		 g_gr->images().get("pics/but2.png")),
 
 // List
 	opengames
@@ -143,7 +143,7 @@ void Fullscreen_Menu_NetSetupLAN::think ()
 bool Fullscreen_Menu_NetSetupLAN::get_host_address
 	(uint32_t & addr, uint16_t & port)
 {
-	std::string const & host = hostname.text();
+	const std::string & host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
 	for (uint32_t i = 0; i < opengames_size; ++i) {
@@ -166,7 +166,7 @@ GCC_DIAG_ON("-Wold-style-cast")
 		return false;
 }
 
-std::string const & Fullscreen_Menu_NetSetupLAN::get_playername()
+const std::string & Fullscreen_Menu_NetSetupLAN::get_playername()
 {
 	return playername.text();
 }
@@ -187,7 +187,7 @@ void Fullscreen_Menu_NetSetupLAN::game_doubleclicked (uint32_t) {
 
 void Fullscreen_Menu_NetSetupLAN::update_game_info
 	(UI::Table<Net_Open_Game const * const>::Entry_Record & er,
-	 Net_Game_Info const & info)
+	 const Net_Game_Info & info)
 {
 	er.set_string (0, info.hostname);
 	er.set_string (1, info.map);

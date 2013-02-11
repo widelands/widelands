@@ -37,7 +37,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	Editor_Interactive         &         parent,
 	Editor_Action_Args         &         /* args */)
 {
-	Widelands::World const & world = map.world();
+	const Widelands::World & world = map.world();
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,
@@ -79,8 +79,8 @@ int32_t Editor_Info_Tool::handle_click_impl
 
 	buf += _("2) Terrain Info\n Name: ");
 	{
-		Widelands::Field         const & tf  = map[center.triangle];
-		Widelands::Terrain_Descr const & ter = world.terrain_descr
+		const Widelands::Field         & tf  = map[center.triangle];
+		const Widelands::Terrain_Descr & ter = world.terrain_descr
 		                                       (center.triangle.t == Widelands::TCoords<>::D ?
 		                                        tf.terrain_d() : tf.terrain_r());
 		buf += ter.descname();

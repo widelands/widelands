@@ -23,34 +23,27 @@
 #include <vector>
 #include <map>
 
+#include <SDL.h>
 #include <boost/scoped_ptr.hpp>
 #include <png.h>
 
-#include "animation_gfx.h"
-#include "igraphic.h"
 #include "image_cache.h"
 #include "rect.h"
-#include "surface.h"
 
 #define MAX_RECTS 20
 
 namespace UI {struct ProgressWindow;}
 
+struct AnimationGfx;
+class ImageLoaderImpl;
 class RenderTarget;
+class Screen;
+class Surface;
+class SurfaceCache;
 struct Road_Textures;
-struct SDL_Rect;
 struct SDL_Surface;
 struct StreamWrite;
 struct Texture;
-class Screen;
-
-//@{
-/// This table is used by create_grayed_out_pic()to map colors to grayscale. It
-/// is initialized in Graphic::Graphic().
-extern uint32_t luminance_table_r[0x100];
-extern uint32_t luminance_table_g[0x100];
-extern uint32_t luminance_table_b[0x100];
-//@}
 
 /// Stores the capabilities of opengl
 struct GLCaps
@@ -86,21 +79,17 @@ struct GraphicCaps
 };
 
 /**
- * A renderer to get pixels to a 16bit framebuffer.
- *
- * Picture IDs can be allocated using \ref get_picture() and used in
- * \ref RenderTarget::blit().
- *
- * Pictures are only loaded from disk once and thrown out of memory when the
- * graphics system is unloaded, or when \ref flush() is called with the
- * appropriate module flag; the user can request to flush one single picture
- * alone, but this is only used (and useful) in the editor.
+ * This class is a kind of Swiss Army knife for your graphics need. It
+ * initializes the graphic system and provides access to resolutions. It has an
+ * Image and a Surface cache and holds the data of all animations and the road
+ * textures. It also offers functionality to save a screenshot.
  */
-struct Graphic : public IGraphic {
+class Graphic {
+public:
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
 		 bool fullscreen, bool opengl);
-	virtual ~Graphic();
+	~Graphic();
 
 	int32_t get_xres() const;
 	int32_t get_yres() const;
@@ -114,20 +103,12 @@ struct Graphic : public IGraphic {
 	bool need_update() const;
 	void refresh(bool force = true);
 
-	ImageCache& imgcache() const {return *img_cache_.get();}
+	ImageCache& images() const {return *image_cache_.get();}
+	SurfaceCache& surfaces() const {return *surface_cache_.get();}
+
 	void flush_animations();
 
-	void save_png(const IPicture*, StreamWrite*) const;
-
-	virtual IPicture* convert_sdl_surface_to_picture
-		(SDL_Surface *, bool alpha = false, bool intensity = false) const;
-
-	Surface* create_surface(int32_t w, int32_t h, bool alpha = false) const;
-
-	const IPicture* create_grayed_out_pic(const IPicture* pic);
-	const IPicture* create_changed_luminosity_pic
-		(const IPicture* pic, float factor, bool halve_alpha = false);
-	const IPicture* get_resized_picture(const IPicture*, uint32_t w, uint32_t h);
+	void save_png(const Image*, StreamWrite*) const;
 
 	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
@@ -135,7 +116,7 @@ struct Graphic : public IGraphic {
 
 	void load_animations();
 	void ensure_animation_loaded(uint32_t anim);
-	AnimationGfx::Index nr_frames(uint32_t anim = 0);
+	size_t nr_frames(uint32_t anim = 0);
 	uint32_t get_animation_frametime(uint32_t anim) const;
 	void get_animation_size (uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h);
 
@@ -144,13 +125,12 @@ struct Graphic : public IGraphic {
 	AnimationGfx * get_animation(uint32_t);
 
 	void set_world(std::string);
-	const IPicture* get_road_texture(int32_t roadtex);
-	const IPicture* get_edge_texture();
+	Surface& get_road_texture(int32_t roadtex);
 
 	const GraphicCaps& caps() const throw () {return m_caps;}
 
 private:
-	SDL_Surface * extract_sdl_surface(Surface & surf, Rect srcrect) const;
+	void save_png_(Surface & surf, StreamWrite*) const;
 
 protected:
 	// Static helper function for png writing
@@ -178,15 +158,21 @@ protected:
 	bool m_update_fullscreen;
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
-	Road_Textures * m_roadtextures;
-	const IPicture* m_edgetexture;
-	std::vector<Texture *> m_maptextures;
-	std::vector<AnimationGfx *> m_animations;
 
 	/// The class that gets images from disk.
-	boost::scoped_ptr<IImageLoader> img_loader_;
-	// The cache holding the images.
-	boost::scoped_ptr<ImageCache> img_cache_;
+	boost::scoped_ptr<ImageLoaderImpl> image_loader_;
+	/// Volatile cache of Hardware dependant surfaces.
+	boost::scoped_ptr<SurfaceCache> surface_cache_;
+	/// Non-volatile cache of hardware independent images. The use the
+	/// surface_cache_ to cache their pixel data.
+	boost::scoped_ptr<ImageCache> image_cache_;
+
+	// The texture needed to draw roads.
+	boost::scoped_ptr<Surface> pic_road_normal_;
+	boost::scoped_ptr<Surface> pic_road_busy_;
+
+	std::vector<Texture *> m_maptextures;
+	std::vector<AnimationGfx *> m_animations;
 };
 
 extern Graphic * g_gr;

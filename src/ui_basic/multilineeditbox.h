@@ -39,8 +39,8 @@ struct Multiline_Editbox : public Panel {
 
 	boost::signal<void ()> changed;
 
-	std::string const & get_text() const;
-	void set_text(std::string const &);
+	const std::string & get_text() const;
+	void set_text(const std::string &);
 	void set_textstyle(const TextStyle &);
 
 	void set_maximum_bytes(uint32_t n);

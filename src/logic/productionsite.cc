@@ -60,8 +60,8 @@ ProductionSite BUILDING
 
 ProductionSite_Descr::ProductionSite_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _tribe)
 	:
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
@@ -78,7 +78,7 @@ ProductionSite_Descr::ProductionSite_Descr
 				m_output_worker_types.insert(idx);
 			} else
 				throw wexception("tribe does not define a ware or worker type with this name");
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception("output \"%s\": %s", op->get_string(), e.what());
 		}
 
@@ -96,7 +96,7 @@ ProductionSite_Descr::ProductionSite_Descr
 				} else
 					throw wexception
 						("tribe does not define a ware type with this name");
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw wexception("input \"%s=%s\": %s", val->get_name(), val->get_string(), e.what());
 			}
 
@@ -112,7 +112,7 @@ ProductionSite_Descr::ProductionSite_Descr
 					m_working_positions.push_back(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
 				} else
 					throw wexception("invalid");
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
 	if (working_positions().empty() and not global_s.has_val("max_soldiers"))
@@ -131,7 +131,7 @@ ProductionSite_Descr::ProductionSite_Descr
 			m_programs[program_name] =
 				new ProductionProgram
 					(directory, prof, program_name, v->get_string(), this);
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
@@ -160,7 +160,7 @@ ProductionSite_Descr::~ProductionSite_Descr()
  * Get the program of the given name.
  */
 const ProductionProgram * ProductionSite_Descr::get_program
-	(std::string const & program_name) const
+	(const std::string & program_name) const
 {
 	Programs::const_iterator const it = programs().find(program_name);
 	if (it == m_programs.end())
@@ -344,7 +344,7 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 	Building::init(egbase);
 
 
-	Ware_Types const & inputs = descr().inputs();
+	const Ware_Types & inputs = descr().inputs();
 	m_input_queues.resize(inputs.size());
 	for (ware_range i(inputs); i; ++i)
 		m_input_queues[i.i] =
@@ -597,21 +597,26 @@ void ProductionSite::act(Game & game, uint32_t const data)
 	{
 		m_program_timer = false;
 
-		if (m_stack.empty()) {
-			m_working_positions[0].worker->update_task_buildingwork(game);
-			return;
+		if (!can_start_working()) {
+			while (!m_stack.empty())
+				program_end(game, Failed);
+		} else {
+			if (m_stack.empty()) {
+				m_working_positions[0].worker->update_task_buildingwork(game);
+				return;
+			}
+
+			State & state = top_state();
+			if (state.program->get_size() <= state.ip)
+				return program_end(game, Completed);
+
+			if (m_anim != descr().get_animation(m_default_anim)) {
+				// Restart idle animation, which is the default
+				start_animation(game, descr().get_animation(m_default_anim));
+			}
+
+			return program_act(game);
 		}
-
-		State & state = top_state();
-		if (state.program->get_size() <= state.ip)
-			return program_end(game, Completed);
-
-		if (m_anim != descr().get_animation(m_default_anim)) {
-			// Restart idle animation, which is the default
-			start_animation(game, descr().get_animation(m_default_anim));
-		}
-
-		return program_act(game);
 	}
 }
 
@@ -655,7 +660,7 @@ bool ProductionSite::fetch_from_flag(Game & game)
 }
 
 
-void ProductionSite::log_general_info(Editor_Game_Base const & egbase) {
+void ProductionSite::log_general_info(const Editor_Game_Base & egbase) {
 	Building::log_general_info(egbase);
 
 	molog("m_is_stopped: %u\n", m_is_stopped);
@@ -725,7 +730,7 @@ bool ProductionSite::get_building_work
 			*m_produced_items.rbegin();
 		{
 			Ware_Index const ware_index = ware_type_with_count.first;
-			Item_Ware_Descr const & item_ware_descr =
+			const Item_Ware_Descr & item_ware_descr =
 				*tribe().get_ware_descr(ware_type_with_count.first);
 			{
 				WareInstance & item =
@@ -747,7 +752,7 @@ bool ProductionSite::get_building_work
 		std::pair<Ware_Index, uint8_t> & worker_type_with_count =
 			*m_recruited_workers.rbegin();
 		{
-			Worker_Descr const & worker_descr =
+			const Worker_Descr & worker_descr =
 				*tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker & recruit =
@@ -771,7 +776,7 @@ bool ProductionSite::get_building_work
 		WaresQueue * queue = *iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			Item_Ware_Descr const & wd = *tribe().get_ware_descr(queue->get_ware());
+			const Item_Ware_Descr & wd = *tribe().get_ware_descr(queue->get_ware());
 			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
 			item.init(game);
 			worker.start_task_dropoff(game, item);
@@ -790,7 +795,7 @@ bool ProductionSite::get_building_work
 		find_and_start_next_program(game);
 		// m_program_time = schedule_act(game, 10);
 	} else if (state->ip < state->program->get_size()) {
-		ProductionProgram::Action const & action = (*state->program)[state->ip];
+		const ProductionProgram::Action & action = (*state->program)[state->ip];
 		return action.get_building_work(game, *this, worker);
 	}
 
@@ -816,7 +821,7 @@ void ProductionSite::program_step
  * Push the given program onto the stack and schedule acting.
  */
 void ProductionSite::program_start
-	(Game & game, std::string const & program_name)
+	(Game & game, const std::string & program_name)
 {
 	State state;
 
@@ -849,7 +854,7 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 {
 	assert(m_stack.size());
 
-	std::string const & program_name = top_state().program->name();
+	const std::string & program_name = top_state().program->name();
 
 	m_stack.pop_back();
 	if (!m_stack.empty())

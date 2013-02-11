@@ -34,7 +34,6 @@
 #include "game.h"
 #include "game_data_error.h"
 #include "gamecontroller.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
 #include "map_io/widelands_map_map_object_loader.h"
@@ -60,7 +59,7 @@ namespace Widelands {
  *
  * sparam1 = ware name
  */
-bool Worker::run_createitem(Game & game, State & state, Action const & action)
+bool Worker::run_createitem(Game & game, State & state, const Action & action)
 {
 
 	if (WareInstance * const item = fetch_carried_item(game)) {
@@ -96,7 +95,7 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
  *
  * \todo Lots of magic numbers in here
  */
-bool Worker::run_mine(Game & game, State & state, Action const & action)
+bool Worker::run_mine(Game & game, State & state, const Action & action)
 {
 	Map & map = game.map();
 
@@ -196,7 +195,7 @@ bool Worker::run_mine(Game & game, State & state, Action const & action)
  * \todo Lots of magic numbers in here
  * \todo Document parameters g and state
  */
-bool Worker::run_breed(Game & game, State & state, Action const & action)
+bool Worker::run_breed(Game & game, State & state, const Action & action)
 {
 	molog(" Breed(%s, %i)\n", action.sparam1.c_str(), action.iparam1);
 
@@ -302,7 +301,7 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
  * sparamv = possible bobs
  */
 bool Worker::run_setdescription
-	(Game & game, State & state, Action const &)
+	(Game & game, State & state, const Action &)
 {
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -319,7 +318,7 @@ bool Worker::run_setdescription
  * sparamv = possible bobs
  */
 bool Worker::run_setbobdescription
-	(Game & game, State & state, Action const & action)
+	(Game & game, State & state, const Action & action)
 {
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
@@ -372,7 +371,7 @@ bool Worker::run_setbobdescription
  * iparam2 = attribute predicate (if >= 0)
  * sparam1 = type
  */
-bool Worker::run_findobject(Game & game, State & state, Action const & action)
+bool Worker::run_findobject(Game & game, State & state, const Action & action)
 {
 	CheckStepWalkOn cstep(descr().movecaps(), false);
 
@@ -507,7 +506,7 @@ struct FindNodeSpace {
 	FindNodeSpace(BaseImmovable * const ignoreimm)
 		: ignoreimmovable(ignoreimm) {}
 
-	bool accept(Map const & map, FCoords const & coords) const {
+	bool accept(const Map & map, const FCoords & coords) const {
 		if (!(coords.field->nodecaps() & MOVECAPS_WALK))
 			return false;
 
@@ -527,7 +526,7 @@ private:
 	BaseImmovable * ignoreimmovable;
 };
 
-bool Worker::run_findspace(Game & game, State & state, Action const & action)
+bool Worker::run_findspace(Game & game, State & state, const Action & action)
 {
 	std::vector<Coords> list;
 	Map & map = game.map();
@@ -589,7 +588,7 @@ void Worker::informPlayer
 		return;
 
 	// Translate the Resource name (if it is defined by the world)
-	World const & world = game.map().world();
+	const World & world = game.map().world();
 	int32_t residx = world.get_resource(res_type.c_str());
 	if (residx != -1)
 		res_type = world.get_resource(residx)->descname();
@@ -618,7 +617,7 @@ void Worker::informPlayer
  *
  * iparam1 = walkXXX
  */
-bool Worker::run_walk(Game & game, State & state, Action const & action)
+bool Worker::run_walk(Game & game, State & state, const Action & action)
 {
 	BaseImmovable const * const imm = game.map()[get_position()].get_immovable();
 	Coords dest(Coords::Null());
@@ -694,7 +693,7 @@ bool Worker::run_walk(Game & game, State & state, Action const & action)
  * iparam1 = anim id
  * iparam2 = duration
  */
-bool Worker::run_animation(Game & game, State & state, Action const & action)
+bool Worker::run_animation(Game & game, State & state, const Action & action)
 {
 	set_animation(game, action.iparam1);
 
@@ -710,7 +709,7 @@ bool Worker::run_animation(Game & game, State & state, Action const & action)
  *
  * iparam1 = 0: don't drop item on flag, 1: do drop item on flag
  */
-bool Worker::run_return(Game & game, State & state, Action const & action)
+bool Worker::run_return(Game & game, State & state, const Action & action)
 {
 	++state.ivar1;
 	start_task_return(game, action.iparam1);
@@ -725,7 +724,7 @@ bool Worker::run_return(Game & game, State & state, Action const & action)
  *
  * sparam1 = object command name
  */
-bool Worker::run_object(Game & game, State & state, Action const & action)
+bool Worker::run_object(Game & game, State & state, const Action & action)
 {
 	Map_Object * const obj = state.objvar1.get(game);
 
@@ -763,7 +762,7 @@ bool Worker::run_object(Game & game, State & state, Action const & action)
  * Plant an immovable on the current position. The immovable type must have
  * been selected by a previous command (i.e. setdescription)
  */
-bool Worker::run_plant(Game & game, State & state, Action const & action)
+bool Worker::run_plant(Game & game, State & state, const Action & action)
 {
 	assert(action.sparamv.size());
 
@@ -871,7 +870,7 @@ bool Worker::run_plant(Game & game, State & state, Action const & action)
  * Plants a bob (critter usually, maybe also worker later on). The immovable
  * type must have been selected by a previous command (i.e. setbobdescription).
  */
-bool Worker::run_create_bob(Game & game, State & state, Action const &)
+bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
 	game.create_bob
 		(get_position(), state.ivar2, state.svar1 == "world" ? 0 : &tribe());
@@ -884,7 +883,7 @@ bool Worker::run_create_bob(Game & game, State & state, Action const &)
 /**
  * Simply remove the currently selected object - make no fuss about it.
  */
-bool Worker::run_removeobject(Game & game, State & state, Action const &)
+bool Worker::run_removeobject(Game & game, State & state, const Action &)
 {
 	if (Map_Object * const obj = state.objvar1.get(game)) {
 		obj->remove(game);
@@ -907,7 +906,7 @@ bool Worker::run_removeobject(Game & game, State & state, Action const &)
  * iparam2 = radius
  * sparam1 = subcommand
  */
-bool Worker::run_geologist(Game & game, State & state, Action const & action)
+bool Worker::run_geologist(Game & game, State & state, const Action & action)
 {
 	// assert that location is of the right type.
 	ref_cast<Flag const, PlayerImmovable const>(*get_location(game));
@@ -926,12 +925,12 @@ bool Worker::run_geologist(Game & game, State & state, Action const & action)
  * Check resources at the current position, and plant a marker object when
  * possible.
  */
-bool Worker::run_geologist_find(Game & game, State & state, Action const &)
+bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 {
-	Map const & map = game.map();
+	const Map & map = game.map();
 	const FCoords position = map.get_fcoords(get_position());
 	BaseImmovable const * const imm = position.field->get_immovable();
-	World const & world = map.world();
+	const World & world = map.world();
 
 	if (imm && imm->get_size() > BaseImmovable::NONE) {
 		//NoLog("  Field is no longer empty\n");
@@ -962,7 +961,7 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 				 300000, 8);
 		}
 
-		Tribe_Descr const & t = tribe();
+		const Tribe_Descr & t = tribe();
 		game.create_immovable
 			(position,
 			 t.get_resource_indicator
@@ -981,7 +980,7 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
  * Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
-bool Worker::run_playFX(Game & game, State & state, Action const & action)
+bool Worker::run_playFX(Game & game, State & state, const Action & action)
 {
 	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
 
@@ -994,7 +993,7 @@ bool Worker::run_playFX(Game & game, State & state, Action const & action)
  * If we are currently carrying some ware item, hand it off to the currently
  * selected immovable (\ref objvar1) for construction.
  */
-bool Worker::run_construct(Game & game, State & state, Action const & /* action */)
+bool Worker::run_construct(Game & game, State & state, const Action & /* action */)
 {
 	Immovable * imm = dynamic_cast<Immovable *>(state.objvar1.get(game));
 	if (!imm) {
@@ -1050,7 +1049,7 @@ Worker::~Worker()
 
 
 /// Log basic information.
-void Worker::log_general_info(Editor_Game_Base const & egbase)
+void Worker::log_general_info(const Editor_Game_Base & egbase)
 {
 	Bob::log_general_info(egbase);
 
@@ -1543,7 +1542,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 	} else if (upcast(Road,     road,     location)) {
 		// Road to Flag
 		if (nextstep->get_type() == FLAG) {
-			Path const & path = road->get_path();
+			const Path & path = road->get_path();
 			int32_t const index =
 				nextstep == &road->get_flag(Road::FlagStart) ? 0                 :
 				nextstep == &road->get_flag(Road::FlagEnd)   ? path.get_nsteps() :
@@ -1874,7 +1873,7 @@ const Bob::Task Worker::taskProgram = {
 /**
  * Start the given program.
  */
-void Worker::start_task_program(Game & game, std::string const & programname)
+void Worker::start_task_program(Game & game, const std::string & programname)
 {
 	push_task(game, taskProgram);
 	State & state = top_state();
@@ -1898,13 +1897,13 @@ void Worker::program_update(Game & game, State & state)
 	}
 
 	for (;;) {
-		WorkerProgram const & program =
+		const WorkerProgram & program =
 			ref_cast<WorkerProgram const, BobProgramBase const>(*state.program);
 
 		if (static_cast<uint32_t>(state.ivar1) >= program.get_size())
 			return pop_task(game);
 
-		Action const & action = *program.get_action(state.ivar1);
+		const Action & action = *program.get_action(state.ivar1);
 
 		if ((this->*(action.function))(game, state, action))
 			return;
@@ -2021,7 +2020,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 }
 
 void Worker::gowarehouse_signalimmediate
-	(Game &, State & /* state */, std::string const & signal)
+	(Game &, State & /* state */, const std::string & signal)
 {
 	if (signal == "transfer") {
 		// We are assigned a transfer, make sure our supply disappears immediately
@@ -2464,8 +2463,8 @@ void Worker::start_task_fugitive(Game & game)
 }
 
 struct FindFlagWithPlayersWarehouse {
-	FindFlagWithPlayersWarehouse(Player const & owner) : m_owner(owner) {}
-	bool accept(BaseImmovable const & imm) const {
+	FindFlagWithPlayersWarehouse(const Player & owner) : m_owner(owner) {}
+	bool accept(const BaseImmovable & imm) const {
 		if (upcast(Flag const, flag, &imm))
 			if (&flag->owner() == &m_owner)
 				if (flag->economy().warehouses().size())
@@ -2473,7 +2472,7 @@ struct FindFlagWithPlayersWarehouse {
 		return false;
 	}
 private:
-	Player const & m_owner;
+	const Player & m_owner;
 };
 
 void Worker::fugitive_update(Game & game, State & state)
@@ -2602,7 +2601,7 @@ const Bob::Task Worker::taskGeologist = {
 void Worker::start_task_geologist
 	(Game & game,
 	 uint8_t const attempts, uint8_t const radius,
-	 std::string const & subcommand)
+	 const std::string & subcommand)
 {
 	push_task(game, taskGeologist);
 	State & state = top_state();
@@ -2755,7 +2754,7 @@ const Bob::Task Worker::taskScout = {
  * iparam1 = radius where the scout initially searches for unseen fields
  * iparam2 = maximum search time (in msecs)
  */
-bool Worker::run_scout(Game & game, State & state, Action const & action)
+bool Worker::run_scout(Game & game, State & state, const Action & action)
 {
 	molog
 		("  Try scouting for %i ms with search in radius of %i\n",
@@ -2877,7 +2876,7 @@ void Worker::scout_update(Game & game, State & state)
 }
 
 void Worker::draw_inner
-	(Editor_Game_Base const &       game,
+	(const Editor_Game_Base &       game,
 	 RenderTarget           &       dst,
 	 Point                    const drawpos)
 	const
@@ -2901,7 +2900,7 @@ void Worker::draw_inner
  * Draw the worker, taking the carried item into account.
  */
 void Worker::draw
-	(Editor_Game_Base const & game, RenderTarget & dst, Point const pos) const
+	(const Editor_Game_Base & game, RenderTarget & dst, Point const pos) const
 {
 	if (get_current_anim())
 		draw_inner(game, dst, calc_drawpos(game, pos));

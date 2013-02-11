@@ -23,6 +23,8 @@
 
 #include "gamerenderer.h"
 
+#include "logic/widelands.h"
+
 #include "rect.h"
 
 #include <vector>
@@ -31,14 +33,17 @@
 namespace Widelands {
 struct Coords;
 struct FCoords;
+struct World;
 }
 
 class GLSurface;
+class GLSurfaceTexture;
 
 /**
  * OpenGL implementation of @ref GameRenderer.
  */
-struct GameRendererGL : GameRenderer {
+class GameRendererGL : public GameRenderer {
+public:
 	GameRendererGL();
 	virtual ~GameRendererGL();
 
@@ -63,15 +68,27 @@ private:
 		uint32_t pad[1];
 	};
 
+	const GLSurfaceTexture * get_dither_edge_texture(const Widelands::World & world);
+
 	void draw();
 	void prepare_terrain_base();
+	void collect_terrain_base(bool onlyscan);
+	void count_terrain_base(Widelands::Terrain_Index ter);
+	void add_terrain_base_triangle
+		(Widelands::Terrain_Index ter,
+		 const Widelands::Coords & p1, const Widelands::Coords & p2, const Widelands::Coords & p3);
 	void draw_terrain_base();
 	void prepare_terrain_dither();
+	void collect_terrain_dither(bool onlyscan);
+	void add_terrain_dither_triangle
+		(bool onlyscan, Widelands::Terrain_Index ter,
+		 const Widelands::Coords & edge1, const Widelands::Coords & edge2,
+		 const Widelands::Coords & opposite);
 	void draw_terrain_dither();
 	void prepare_roads();
 	void draw_roads();
 
-	uint32_t patch_index(int32_t fx, int32_t fy) const;
+	uint32_t patch_index(const Widelands::Coords & f) const;
 	uint8_t field_brightness(const Widelands::FCoords & coords) const;
 	uint8_t field_roads(const Widelands::FCoords & coords) const;
 	template<typename vertex>
@@ -96,12 +113,14 @@ private:
 	uint32_t m_patch_vertices_size;
 	boost::scoped_array<uint16_t> m_patch_indices;
 	uint32_t m_patch_indices_size;
+	std::vector<uint32_t> m_patch_indices_indexs;
 	std::vector<uint32_t> m_terrain_freq;
 	std::vector<uint32_t> m_terrain_freq_cum;
 	boost::scoped_array<dithervertex> m_edge_vertices;
 	uint32_t m_edge_vertices_size;
 	std::vector<uint32_t> m_terrain_edge_freq;
 	std::vector<uint32_t> m_terrain_edge_freq_cum;
+	std::vector<uint32_t> m_terrain_edge_indexs;
 
 	uint32_t m_road_freq[2];
 	boost::scoped_array<basevertex> m_road_vertices;

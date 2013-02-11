@@ -76,7 +76,7 @@ void Military_Data::parse(Section & s)
 				 m_min_retreat,
 				 m_max_retreat,
 				 m_retreat);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error ("retreat: %s", e.what());
 	}
 

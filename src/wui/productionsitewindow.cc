@@ -22,6 +22,7 @@
 #include "waresqueuedisplay.h"
 
 #include "economy/request.h"
+#include "graphic/graphic.h"
 #include "logic/constructionsite.h"
 #include "logic/militarysite.h"
 #include "logic/trainingsite.h"
@@ -47,7 +48,7 @@ ProductionSite_Window::ProductionSite_Window
 	 UI::Window *         & registry)
 	: Building_Window(parent, ps, registry)
 {
-	std::vector<Widelands::WaresQueue *> const & warequeues = ps.warequeues();
+	const std::vector<Widelands::WaresQueue*>& warequeues = ps.warequeues();
 
 	if (warequeues.size()) {
 		// Add the wares tab
@@ -62,7 +63,7 @@ ProductionSite_Window::ProductionSite_Window
 				 UI::Box::AlignLeft);
 
 		get_tabs()->add
-			("wares", g_gr->imgcache().load(PicMod_Game, pic_tab_wares),
+			("wares", g_gr->images().get(pic_tab_wares),
 			 prod_box, _("Wares"));
 	}
 
@@ -70,7 +71,11 @@ ProductionSite_Window::ProductionSite_Window
 	if (!productionsite().descr().nr_working_positions()) {
 		m_worker_table = 0;
 	} else {
-		m_worker_table = new UI::Table<uintptr_t>(get_tabs(), 0, 0, 0, 100);
+		UI::Box * worker_box = new UI::Box
+			(get_tabs(),
+			 0, 0, UI::Box::Vertical);
+		m_worker_table = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
+		m_worker_caps = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
 		m_worker_table->add_column(150, _("Worker"));
 		m_worker_table->add_column(40, _("Exp"));
@@ -81,9 +86,23 @@ ProductionSite_Window::ProductionSite_Window
 			 i < productionsite().descr().nr_working_positions(); ++i)
 			m_worker_table->add(i);
 
+		if (igbase().can_act(building().owner().player_number())) {
+			m_worker_caps->add_inf_space();
+			UI::Button * evict_button = new UI::Button
+							(m_worker_caps, "evict", 0, 0, 34, 34,
+							 g_gr->images().get("pics/but4.png"),
+							 g_gr->images().get("pics/menu_drop_soldier.png"),
+							 _("Terminate the employment of the selected worker"));
+			evict_button->sigclicked.connect
+					(boost::bind(&ProductionSite_Window::evict_worker, boost::ref(*this)));
+			m_worker_caps->add(evict_button, UI::Box::AlignCenter);
+		}
+
+		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
+		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
 		get_tabs()->add
-			("workers", g_gr->imgcache().load(PicMod_UI, pic_tab_workers),
-			 m_worker_table,
+			("workers", g_gr->images().get(pic_tab_workers),
+			 worker_box,
 			 productionsite().descr().nr_working_positions() > 1 ?
 			 _("Workers") : _("Worker"));
 	}
@@ -159,4 +178,14 @@ void ProductionSite::create_options_window
 	(Interactive_GameBase & parent, UI::Window * & registry)
 {
 	new ProductionSite_Window(parent, *this, registry);
+}
+
+void ProductionSite_Window::evict_worker() {
+	if (m_worker_table->has_selection()) {
+		Widelands::Worker * worker =
+			productionsite().working_positions()[m_worker_table->get_selected()].worker;
+		if (worker) {
+			igbase().game().send_player_evict_worker(*worker);
+		}
+	}
 }

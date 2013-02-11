@@ -32,7 +32,7 @@
 
 struct HTMLReferences {
 	enum Role {Input, Output, Madeof, Become, Employ, End};
-	std::set<std::string> const & operator[] (size_t const i) const {
+	const std::set<std::string> & operator[] (size_t const i) const {
 		assert(i < End);
 		return references[i];
 	}

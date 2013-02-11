@@ -22,17 +22,35 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "iblitable_surface.h"
 #include "rect.h"
 #include "rgbcolor.h"
+
+#include "compositemode.h"
 
 /**
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
  * It also allows low level pixel access.
  */
-class Surface : public IBlitableSurface {
+class Surface : boost::noncopyable {
 public:
+	// Create a new surface from an SDL_Surface. Ownership is taken.
+	static Surface* create(SDL_Surface*);
+
+	// Create a new empty (that is randomly filled) Surface with the given
+	// dimensions.
+	static Surface* create(uint16_t w, uint16_t h);
+
 	virtual ~Surface() {}
+
+	/// Dimensions.
+	virtual uint16_t width() const = 0;
+	virtual uint16_t height() const = 0;
+
+	/// This draws a part of another surface to this surface
+	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
+
+	/// Draws a filled rect to the surface.
+	virtual void fill_rect(const Rect&, RGBAColor) = 0;
 
 	/// Draws a rect (frame only) to the surface.
 	virtual void draw_rect(const Rect&, RGBColor) = 0;
@@ -80,7 +98,7 @@ public:
 	};
 
 	/// This returns the pixel format for direct pixel access.
-	virtual SDL_PixelFormat const & format() const = 0;
+	virtual const SDL_PixelFormat & format() const = 0;
 
 	/**
 	 * Lock/Unlock pairs must guard any of the direct pixel access using the
@@ -94,8 +112,8 @@ public:
 	//@}
 
 	//@{
-	virtual uint32_t get_pixel(uint32_t x, uint32_t y) = 0;
-	virtual void set_pixel(uint32_t x, uint32_t y, uint32_t clr) = 0;
+	virtual uint32_t get_pixel(uint16_t x, uint16_t y) = 0;
+	virtual void set_pixel(uint16_t x, uint16_t y, uint32_t clr) = 0;
 	//@}
 
 	/**

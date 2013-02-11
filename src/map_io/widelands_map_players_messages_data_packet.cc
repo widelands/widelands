@@ -36,7 +36,7 @@ void Map_Players_Messages_Data_Packet::Read
 	throw (_wexception)
 {
 	uint32_t      const gametime   = egbase.get_gametime ();
-	Map   const &       map        = egbase.map          ();
+	const Map   &       map        = egbase.map          ();
 	Extent        const extent     = map   .extent       ();
 	Player_Number const nr_players = map   .get_nrplayers();
 	iterate_players_existing(p, nr_players, egbase, player)
@@ -129,7 +129,7 @@ void Map_Players_Messages_Data_Packet::Read
 								throw game_data_error
 									(_("expected %s but found \"%s\""),
 									 "{new|read}", status_string);
-						} catch (_wexception const & e) {
+						} catch (const _wexception & e) {
 							throw game_data_error("status: %s", e.what());
 						}
 					messages.add_message
@@ -145,12 +145,12 @@ void Map_Players_Messages_Data_Packet::Read
 					//  duration) after the command queue has been loaded (in
 					//  Game_Loader::load_game).
 					previous_message_sent = sent;
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						(_("\"%s\": %s"), s->get_name(), e.what());
 				}
 				prof.check_used();
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw game_data_error
 				(_("messages for player %u: %s"), p, e.what());
 		}
@@ -166,11 +166,11 @@ throw (_wexception)
 		Profile prof;
 		prof.create_section("global").set_int
 			("packet_version", CURRENT_PACKET_VERSION);
-		MessageQueue const & messages = player->messages();
+		const MessageQueue & messages = player->messages();
 		Map_Message_Saver & message_saver = mos.message_savers[p - 1];
 		container_iterate_const(MessageQueue, messages, i) {
 			message_saver.add         (i.current->first);
-			Message const & message = *i.current->second;
+			const Message & message = *i.current->second;
 			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));
 			assert
 				(message.duration() == Forever() or

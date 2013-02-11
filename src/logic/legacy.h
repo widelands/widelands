@@ -36,18 +36,18 @@ namespace Legacy {
 ///  table and then use that name to look up the real index that the
 ///  ware/worker type with that name has.
 Ware_Index safe_ware_index
-	(Tribe_Descr const &,
-	 std::string const & owner,
+	(const Tribe_Descr &,
+	 const std::string & owner,
 	 char        const * relation,
 	 uint32_t            legacy_index);
 Ware_Index ware_index
-	(Tribe_Descr const &,
-	 std::string const & owner,
+	(const Tribe_Descr &,
+	 const std::string & owner,
 	 char        const * relation,
 	 uint32_t            legacy_index);
 Ware_Index worker_index
-	(Tribe_Descr const &,
-	 std::string const & owner,
+	(const Tribe_Descr &,
+	 const std::string & owner,
 	 char        const * relation,
 	 uint32_t            legacy_index);
 

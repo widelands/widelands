@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-bool Requirements::check(Map_Object const & obj) const
+bool Requirements::check(const Map_Object & obj) const
 {
 	return !m or m->check(obj);
 }
@@ -48,7 +48,7 @@ void Requirements::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw wexception("requirements: %s", e.what());
 	}
 }
@@ -109,12 +109,12 @@ RequirementsStorage::StorageMap & RequirementsStorage::storageMap()
 }
 
 
-void RequireOr::add(Requirements const & req)
+void RequireOr::add(const Requirements & req)
 {
 	m.push_back(req);
 }
 
-bool RequireOr::check(Map_Object const & obj) const
+bool RequireOr::check(const Map_Object & obj) const
 {
 	container_iterate_const(std::vector<Requirements>, m, i)
 		if (i.current->check(obj))
@@ -152,12 +152,12 @@ static Requirements readOr
 const RequirementsStorage RequireOr::storage(requirementIdOr, readOr);
 
 
-void RequireAnd::add(Requirements const & req)
+void RequireAnd::add(const Requirements & req)
 {
 	m.push_back(req);
 }
 
-bool RequireAnd::check(Map_Object const & obj) const
+bool RequireAnd::check(const Map_Object & obj) const
 {
 	container_iterate_const(std::vector<Requirements>, m, i)
 		if (!i.current->check(obj))
@@ -195,7 +195,7 @@ static Requirements readAnd
 const RequirementsStorage RequireAnd::storage(requirementIdAnd, readAnd);
 
 
-bool RequireAttribute::check(Map_Object const & obj) const
+bool RequireAttribute::check(const Map_Object & obj) const
 {
 	int32_t const value = obj.get_tattribute(at);
 
