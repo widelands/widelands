@@ -41,7 +41,6 @@ namespace Widelands {
 
 Economy::Economy(Player & player) :
 	m_owner(player),
-	m_rebuilding     (false),
 	m_request_timerid(0)
 {
 	const Tribe_Descr & tribe = player.tribe();
@@ -75,8 +74,6 @@ Economy::Economy(Player & player) :
 
 Economy::~Economy()
 {
-	assert(!m_rebuilding);
-
 	m_owner.remove_economy(*this);
 
 	if (m_requests.size())
@@ -139,11 +136,12 @@ void Economy::check_split(Flag & f1, Flag & f2)
 
 void Economy::_check_splits()
 {
-	Map & map = owner().egbase().map();
+	Editor_Game_Base & egbase = owner().egbase();
+	Map & map = egbase.map();
 
 	while (m_split_checks.size()) {
-		Flag * f1 = m_split_checks.back().first.get(owner().egbase());
-		Flag * f2 = m_split_checks.back().second.get(owner().egbase());
+		Flag * f1 = m_split_checks.back().first.get(egbase);
+		Flag * f2 = m_split_checks.back().second.get(egbase);
 		m_split_checks.pop_back();
 
 		if (!f1 || !f2) {
@@ -169,9 +167,11 @@ void Economy::_check_splits()
 		if (f1->get_economy() != this || f2->get_economy() != this)
 			continue;
 
-		// Start an A-star searches from f1 towards f2.
-		// If f2 is not reached, split off all the nodes that have been reached from f1.
-		// This policy means that the newly created economy, which contains all the
+		// Start an A-star searches from f1 with a heuristic bias towards f2,
+		// because we do not need to do anything if f1 is still connected to f2.
+		// If f2 is not reached by the search, split off all the nodes that have been
+		// reached from f1. These nodes induce a connected subgraph.
+		// This means that the newly created economy, which contains all the
 		// flags that have been split, is already connected.
 		RouteAStar<AStarEstimator> astar(*m_router, wwWORKER, AStarEstimator(map, *f2));
 		astar.push(*f1);
@@ -554,23 +554,16 @@ void Economy::_merge(Economy & e)
 		show_options_window();
 	}
 
-
-	m_rebuilding = true;
-
-	// Be careful around here. The last e->remove_flag() will cause the other
-	// economy to delete itself.
 	for (std::vector<Flag *>::size_type i = e.get_nrflags() + 1; --i;) {
 		assert(i == e.get_nrflags());
 
 		Flag & flag = *e.m_flags[0];
 
-		e._remove_flag(flag);
+		e._remove_flag(flag); // do not delete other economy yet!
 		add_flag(flag);
 	}
 
-	// Fix up Supply/Request after rebuilding
-	m_rebuilding = false;
-
+	// Remember that the other economy may not have been connected before the merge
 	m_split_checks.insert(m_split_checks.end(), e.m_split_checks.begin(), e.m_split_checks.end());
 
 	// implicitly delete the economy
@@ -595,18 +588,11 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
 	}
 
-	m_rebuilding = true;
-	e.m_rebuilding = true;
-
 	container_iterate_const(std::set<OPtr<Flag> >, flags, it) {
 		Flag & flag = *it.current->get(owner().egbase());
 		remove_flag(flag);
 		e.add_flag(flag);
 	}
-
-	// Fix Supply/Request after rebuilding
-	m_rebuilding = false;
-	e.m_rebuilding = false;
 
 	// As long as rebalance commands are tied to specific flags, we
 	// need this, because the flag that rebalance commands for us were

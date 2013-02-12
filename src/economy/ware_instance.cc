@@ -321,8 +321,7 @@ void WareInstance::update(Game & game)
 
 	if (!loc) {
 		// If our location gets lost, our owner is supposed to destroy us
-		log("Warning(%u): WareInstance::update has no location\n", serial());
-		return;
+		throw wexception("WARE(%u): WareInstance::update has no location\n", serial());
 	}
 
 	// Update whether we have a Supply or not
