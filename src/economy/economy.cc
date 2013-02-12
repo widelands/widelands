@@ -354,6 +354,7 @@ void Economy::add_wares(Ware_Index const id, uint32_t const count)
 	//log("%p: add(%i, %i)\n", this, id, count);
 
 	m_wares.add(id, count);
+	_start_request_timer();
 
 	// TODO: add to global player inventory?
 }
@@ -362,6 +363,7 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
 	//log("%p: add(%i, %i)\n", this, id, count);
 
 	m_workers.add(id, count);
+	_start_request_timer();
 
 	// TODO: add to global player inventory?
 }
