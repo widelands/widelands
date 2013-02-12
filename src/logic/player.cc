@@ -809,8 +809,8 @@ uint32_t Player::findAttackSoldiers
 		return 0;
 
 	container_iterate_const(std::vector<BaseImmovable *>, flags, i) {
-		const Flag * flag = static_cast<Flag *>(*i.current);
-		const MilitarySite * ms = static_cast<MilitarySite *>(flag->get_building());
+		const Flag * attackerflag = static_cast<Flag *>(*i.current);
+		const MilitarySite * ms = static_cast<MilitarySite *>(attackerflag->get_building());
 		std::vector<Soldier *> const present = ms->presentSoldiers();
 		uint32_t const nr_staying = ms->minSoldierCapacity();
 		uint32_t const nr_present = present.size();

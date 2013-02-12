@@ -136,7 +136,7 @@ struct FindFlagOf {
 
 	bool accept(const BaseImmovable &) const;
 
-	FindImmovable finder_;
+	const FindImmovable finder_;
 };
 
 
