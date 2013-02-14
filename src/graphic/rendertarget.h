@@ -52,36 +52,37 @@ struct Player;
 */
 class RenderTarget {
 public:
+	// NOCOM(#sirver): const checks here
 	RenderTarget(Surface*);
-	void set_window(const Rect & rc, const Point & ofs);
-	bool enter_window(const Rect & rc, Rect * previous, Point * prevofs);
+	void set_window(const Rect &rc, const Point& ofs);
+	bool enter_window(const Rect &rc, Rect * previous, Point* prevofs);
 
 	int32_t width() const;
 	int32_t height() const;
 
 	void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
-	void draw_rect(Rect, RGBColor);
-	void fill_rect(Rect, RGBAColor);
-	void brighten_rect(Rect, int32_t factor);
+	void draw_rect(const Rect&, const RGBColor&);
+	void fill_rect(const Rect&, const RGBAColor&);
+	void brighten_rect(const Rect&, int32_t factor);
 
 	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
-	void blitrect(Point dst, const Image* image, Rect src, Composite cm = CM_Normal);
-	void tile(Rect, const Image* image, Point ofs, Composite cm = CM_Normal);
+	void blitrect(const Point& dst, const Image* image, const Rect& src, Composite cm = CM_Normal);
+	void tile(const Rect&, const Image* image, const Point& ofs, Composite cm = CM_Normal);
 
 	void drawanim
-		(Point                     dst,
+		(const Point&                     dst,
 		 uint32_t                  animation,
 		 uint32_t                  time,
-		 Widelands::Player const * = 0);
+		 Widelands::Player const * = 0); // NOCOM(#sirver): should only take a color
 
 	void drawstatic
-			(Point                     dst,
+			(const Point&                     dst,
 			 uint32_t                  animation,
 			 Widelands::Player const * = 0);
 
 	void drawanimrect
-		(Point                     dst,
+		(const Point&                     dst,
 		 uint32_t                  animation,
 		 uint32_t                  time,
 		 Widelands::Player const *,
@@ -90,13 +91,12 @@ public:
 	void reset();
 
 	Surface* get_surface() {return m_surface;}
-	const Rect & get_rect() const {return m_rect;}
-	const Point & get_offset() const {return m_offset;}
+	const Rect& get_rect() const {return m_rect;}
+	const Point& get_offset() const {return m_offset;}
 
 protected:
 	bool clip(Rect & r) const throw ();
-
-	void doblit(Point dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
+	void to_surface_geometry(Point* dst, Rect* srcrc) const;
 
 	///The target surface
 	Surface* m_surface;
