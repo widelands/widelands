@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,8 @@
 #include "immovable.h"
 #include "militarysite.h"
 #include "upcast.h"
+
+#include "economy/flag.h"
 
 namespace Widelands {
 
@@ -71,4 +73,14 @@ bool FindImmovableByDescr::accept(const BaseImmovable & baseimm) const {
 	return false;
 }
 
+bool FindFlagOf::accept(const BaseImmovable & baseimm) const {
+	if (upcast(const Flag, flag, &baseimm)) {
+		if (Building * building = flag->get_building()) {
+			if (finder_.accept(*building))
+				return true;
+		}
+	}
+	return false;
 }
+
+} // namespace Widelands

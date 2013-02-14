@@ -27,6 +27,8 @@
 #include "instances.h"
 #include "walkingdir.h"
 
+struct Profile;
+
 namespace Widelands {
 struct Map;
 struct Route;

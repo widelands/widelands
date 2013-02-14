@@ -20,29 +20,34 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "point.h"
-
 #include <cstring>
 #include <map>
 #include <string>
 #include <vector>
 
-namespace Widelands {struct Map_Object_Descr;}
+#include <boost/utility.hpp>
 
-struct Profile;
+#include "point.h"
+
+class Image;
+struct RGBColor;
 struct Section;
 
-struct AnimationData {
-	uint32_t frametime;
-	Point hotspot;
-	bool hasplrclrs;
-	std::string picnametempl;
+// NOCOM(#sirver): docu
+class Animation : boost::noncopyable {
+public:
+	Animation() {}
+	virtual ~Animation() {}
 
-	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
+	// NOCOM(#sirver): most of these should be const one day
+	virtual uint16_t width() = 0;
+	virtual uint16_t height() = 0;
+	virtual const Image& get_frame(uint32_t time) = 0;
+	virtual const Image& get_frame(uint32_t i, const RGBColor& playercolor) = 0;
+	virtual const Point& hotspot() const  = 0;
+	virtual uint16_t nr_frames() const = 0;
 
-	/** mapping of soundeffect name to frame number, indexed by frame number
-	 * \sa AnimationManager::trigger_sfx */
-	std::map<uint32_t, std::string> sfx_cues;
+	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const = 0;
 };
 
 /**
@@ -70,14 +75,15 @@ struct AnimationManager {
 		 char       const * picnametempl = 0);
 
 	// for use by the graphics subsystem
-	uint32_t get_nranimations() const;
-	const AnimationData& get_animation(uint32_t id) const;
+	// NOCOM(#sirver): Make const again
+	Animation& get_animation(uint32_t id) const;
 
 private:
-	std::vector<AnimationData> m_animations;
+	std::vector<Animation*> m_animations;
 };
 
 
+// NOCOM(#sirver): kill and make part of graphics (animations()).
 extern AnimationManager g_anim;
 
 #endif

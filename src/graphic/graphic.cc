@@ -41,7 +41,6 @@
 #include "wexception.h"
 
 #include "animation.h"
-#include "animation_gfx.h"
 #include "image.h"
 #include "image_loader_impl.h"
 #include "image_transformations.h"
@@ -409,11 +408,8 @@ void Graphic::refresh(bool force)
 }
 
 
-/// flushes the animations in m_animations
 void Graphic::flush_animations() {
-	container_iterate_const(vector<AnimationGfx *>, m_animations, i)
-		delete *i.current;
-	m_animations.clear();
+	// NOCOM(#sirver): remove function
 }
 
 /**
@@ -548,20 +544,11 @@ void Graphic::reset_texture_animation_reminder()
  * Load all animations that are registered with the AnimationManager
 */
 void Graphic::load_animations() {
-	assert(m_animations.empty());
-
-	m_animations.reserve(g_anim.get_nranimations());
+// NOCOM(#sirver): remove
 }
 
 void Graphic::ensure_animation_loaded(uint32_t anim) {
-	if (anim >= m_animations.size()) {
-		m_animations.resize(anim + 1);
-	}
-	if (!m_animations.at(anim - 1))
-	{
-	  m_animations.at(anim - 1) =
-		  new AnimationGfx(g_anim.get_animation(anim), image_cache_.get());
-	}
+	g_anim.get_animation(anim).get_frame(0); // NOCOM(#sirver): hack
 }
 
 /**
@@ -569,7 +556,8 @@ void Graphic::ensure_animation_loaded(uint32_t anim) {
  */
 size_t Graphic::nr_frames(uint32_t anim)
 {
-	return get_animation(anim)->nr_frames();
+	// NOCOM(#sirver): remove function
+	return g_anim.get_animation(anim).nr_frames();
 }
 
 /**
@@ -578,18 +566,11 @@ size_t Graphic::nr_frames(uint32_t anim)
 void Graphic::get_animation_size
 	(uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h)
 {
-	const AnimationData& data = g_anim.get_animation(anim);
-	const AnimationGfx* gfx  =        get_animation(anim);
-
-	if (!gfx) {
-		log("WARNING: Animation %u does not exist\n", anim);
-		w = h = 0;
-	} else {
-		const Image& frame =
-			gfx->get_frame((time / data.frametime) % gfx->nr_frames());
-		w = frame.width();
-		h = frame.height();
-	}
+	// NOCOM(#sirver): remove
+	Animation& animation = g_anim.get_animation(anim);
+	// NOCOM(#sirver): should assert and or crash and should return const&
+	w = animation.width();
+	h = animation.height();
 }
 
 /**
@@ -632,13 +613,13 @@ void Graphic::m_png_flush_function
  * @param anim the number of the animation
  * @return the AnimationGfs object of the given number
  */
-AnimationGfx * Graphic::get_animation(uint32_t anim)
+Animation * Graphic::get_animation(uint32_t anim)
 {
 	if (!anim)
 		return 0;
 
 	ensure_animation_loaded(anim);
-	return m_animations[anim - 1];
+	return &g_anim.get_animation(anim);
 }
 
 /**

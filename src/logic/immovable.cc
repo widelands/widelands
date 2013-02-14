@@ -29,7 +29,6 @@
 #include "map.h"
 #include "mapfringeregion.h"
 #include "profile/profile.h"
-#include "graphic/animation_gfx.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
@@ -527,7 +526,7 @@ void Immovable::draw_construction
 		done = total;
 
 	const size_t nr_frames = g_gr->nr_frames(m_anim);
-	uint32_t frametime = g_anim.get_animation(m_anim).frametime;
+	uint32_t frametime = FRAME_LENGTH; // // NOCOM(#sirver): fix this g_anim.get_animation(m_anim).frametime;
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
 	uint32_t curw, curh;

@@ -34,7 +34,7 @@
 
 namespace UI {struct ProgressWindow;}
 
-struct AnimationGfx;
+class Animation;  // // NOCOM(#sirver): should not be here
 class ImageLoaderImpl;
 class RenderTarget;
 class Screen;
@@ -122,7 +122,7 @@ public:
 
 	void screenshot(const std::string& fname) const;
 	Texture * get_maptexture_data(uint32_t id);
-	AnimationGfx * get_animation(uint32_t);
+	Animation * get_animation(uint32_t);
 
 	void set_world(std::string);
 	Surface& get_road_texture(int32_t roadtex);
@@ -172,7 +172,7 @@ protected:
 	boost::scoped_ptr<Surface> pic_road_busy_;
 
 	std::vector<Texture *> m_maptextures;
-	std::vector<AnimationGfx *> m_animations;
+	std::vector<Animation *> m_animations;
 };
 
 extern Graphic * g_gr;

@@ -916,8 +916,7 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const std::string & picnametempl =
-		g_anim.get_animation(descr().get_ui_anim()).picnametempl;
+	const std::string & picnametempl = ""; // NOCOM(#sirver): fix again g_anim.get_animation(descr().get_ui_anim()).picnametempl;
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + picnametempl.size() + 1 +

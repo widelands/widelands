@@ -26,7 +26,6 @@
 #include "wui/overlay_manager.h"
 
 #include "animation.h"
-#include "animation_gfx.h"
 #include "graphic.h"
 #include "image_transformations.h"
 #include "surface.h"
@@ -270,19 +269,13 @@ void RenderTarget::drawanim
 	 uint32_t       const time,
 	 Player const * const player)
 {
-	const AnimationData& data = g_anim.get_animation(animation);
-	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!gfx) {
-		log("WARNING: Animation %u does not exist\n", animation);
-		return;
-	}
+	Animation& anim = g_anim.get_animation(animation);
 
 	// Get the frame and its data
-	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
 	const Image& frame =
-		player ? gfx->get_frame(framenumber, player->get_playercolor()) : gfx->get_frame(framenumber);
+		player ? anim.get_frame(time, player->get_playercolor()) : anim.get_frame(time);
 
-	dst -= gfx->hotspot();
+	dst -= anim.hotspot();
 
 	Rect srcrc(Point(0, 0), frame.width(), frame.height());
 
@@ -290,7 +283,8 @@ void RenderTarget::drawanim
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
-	data.trigger_soundfx(framenumber, 128);
+	// NOCOM(#sirver): should take 'time'
+	// data.trigger_soundfx(time, 128);
 }
 
 void RenderTarget::drawstatic
@@ -298,14 +292,10 @@ void RenderTarget::drawstatic
 	 uint32_t       const animation,
 	 Player const * const player)
 {
-	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!gfx) {
-		log("WARNING: Animation %u does not exist\n", animation);
-		return;
-	}
+	Animation& anim = g_anim.get_animation(animation);
 
 	// Get the frame and its data
-	const Image& frame = player ? gfx->get_frame(0, player->get_playercolor()) : gfx->get_frame(0);
+	const Image& frame = player ? anim.get_frame(0, player->get_playercolor()) : anim.get_frame(0);
 	const Image* dark_frame = ImageTransformations::change_luminosity(&frame, 1.22, true);
 
 	dst -= Point(frame.width() / 2, frame.height() / 2);
@@ -323,25 +313,13 @@ void RenderTarget::drawanimrect
 	 Player const * const player,
 	 Rect                 srcrc)
 {
-	const AnimationData& data = g_anim.get_animation(animation);
-	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!gfx) {
-		log("WARNING: Animation %u does not exist\n", animation);
-		return;
-	}
+	Animation& anim = g_anim.get_animation(animation);
 
 	// Get the frame and its data
-	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
-	const Image& frame =
-		player ?
-		gfx->get_frame
-			(framenumber, player->get_playercolor())
-		:
-		gfx->get_frame
-			(framenumber);
+	const Image& frame = player ? anim.get_frame(time, player->get_playercolor())
+		: anim.get_frame(time);
 
-	dst -= g_gr->get_animation(animation)->hotspot();
-
+	dst -= anim.hotspot();
 	dst += srcrc;
 
 	doblit(dst, &frame, srcrc);

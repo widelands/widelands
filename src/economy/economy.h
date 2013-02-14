@@ -201,9 +201,6 @@ private:
 
 	Player & m_owner;
 
-	/// True while rebuilding Economies (i.e. during split/merge)
-	bool m_rebuilding;
-
 	typedef std::vector<Flag *> Flags;
 	Flags m_flags;
 	WareList m_wares;     ///< virtual storage with all wares in this Economy

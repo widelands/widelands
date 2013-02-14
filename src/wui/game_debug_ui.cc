@@ -344,8 +344,9 @@ void FieldDebugWindow::think()
 		case 1: {
 			std::string animation_name = "(none)";
 			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
-				animation_name = g_anim.get_animation
-					(player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation()).picnametempl;
+				// NOCOM(#sirver): fix this ?
+				// animation_name = g_anim.get_animation
+					// (player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation()).picnametempl;
 			}
 
 			snprintf
