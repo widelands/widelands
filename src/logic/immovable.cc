@@ -526,7 +526,7 @@ void Immovable::draw_construction
 		done = total;
 
 	const size_t nr_frames = g_gr->nr_frames(m_anim);
-	uint32_t frametime = FRAME_LENGTH; // // NOCOM(#sirver): fix this g_anim.get_animation(m_anim).frametime;
+	uint32_t frametime = FRAME_LENGTH; // // NOCOM(#sirver): fix this g_gr->animations().get_animation(m_anim).frametime;
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
 	uint32_t curw, curh;
@@ -809,7 +809,7 @@ ImmovableProgram::ActAnimate::ActAnimate
 			m_id = descr.get_animation(animation_name);
 		else {
 			m_id =
-				g_anim.get
+				g_gr->animations().get
 					(directory.c_str(),
 					 prof.get_safe_section(animation_name),
 					 0);
@@ -1151,7 +1151,7 @@ ImmovableProgram::ActConstruction::ActConstruction
 			m_animid = descr.get_animation(animation_name);
 		else {
 			m_animid =
-				g_anim.get
+				g_gr->animations().get
 					(directory.c_str(),
 					 prof.get_safe_section(animation_name),
 					 0);

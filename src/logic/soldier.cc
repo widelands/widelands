@@ -193,7 +193,7 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 
 			add_animation
 				((*i.current).c_str(),
-				 g_anim.get (directory, anim_s, "idle_00.png"));
+				 g_gr->animations().get (directory, anim_s, "idle_00.png"));
 		}
 	} catch (const _wexception & e) {
 		throw game_data_error("%s : %s", anim_name, e.what());

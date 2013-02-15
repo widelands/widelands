@@ -140,7 +140,7 @@ Building_Descr::Building_Descr
 			if (build_s->get_int("fps", -1) != -1)
 				throw wexception("fps defined for build animation!");
 			if (!is_animation_known("build"))
-				add_animation("build", g_anim.get(directory.c_str(), *build_s, 0));
+				add_animation("build", g_gr->animations().get(directory.c_str(), *build_s, 0));
 		}
 
 		// Get costs
@@ -155,13 +155,13 @@ Building_Descr::Building_Descr
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
-			add_animation("idle", g_anim.get(directory.c_str(), idle_s, 0));
+			add_animation("idle", g_gr->animations().get(directory.c_str(), idle_s, 0));
 		if (Section * unoccupied = prof.get_section("unoccupied"))
 			if (!is_animation_known("unoccupied"))
-				add_animation("unoccupied", g_anim.get(directory.c_str(), *unoccupied, 0));
+				add_animation("unoccupied", g_gr->animations().get(directory.c_str(), *unoccupied, 0));
 		if (Section * empty = prof.get_section("empty"))
 			if (!is_animation_known("empty"))
-				add_animation("empty", g_anim.get(directory.c_str(), *empty, 0));
+				add_animation("empty", g_gr->animations().get(directory.c_str(), *empty, 0));
 	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
@@ -916,7 +916,7 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const std::string & picnametempl = ""; // NOCOM(#sirver): fix again g_anim.get_animation(descr().get_ui_anim()).picnametempl;
+	const std::string & picnametempl = ""; // NOCOM(#sirver): fix again g_gr->animations().get_animation(descr().get_ui_anim()).picnametempl;
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + picnametempl.size() + 1 +

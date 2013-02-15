@@ -17,13 +17,14 @@
  *
  */
 
-#include "worker_program.h"
-
-#include "profile/profile.h"
 #include "findnode.h"
 #include "game_data_error.h"
+#include "graphic/graphic.h"
 #include "helper.h"
+#include "profile/profile.h"
 #include "tribe.h"
+
+#include "worker_program.h"
 
 namespace Widelands {
 
@@ -446,7 +447,7 @@ void WorkerProgram::parse_animation
 		// dynamically allocate animations here
 		descr->add_animation
 			(cmd[1].c_str(),
-			 (g_anim.get
+			 (g_gr->animations().get
 			  	(parser->directory.c_str(),
 			  	 parser->prof->get_safe_section(cmd[1].c_str()),
 			  	 0)));

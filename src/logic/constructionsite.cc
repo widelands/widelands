@@ -51,7 +51,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 		if (!is_animation_known("idle_with_worker"))
 			add_animation
 				("idle_with_worker",
-				 g_anim.get(directory.c_str(), sec, 0));
+				 g_gr->animations().get(directory.c_str(), sec, 0));
 	}
 }
 

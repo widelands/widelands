@@ -17,7 +17,8 @@
  *
  */
 
-#include "tribe.h"
+#include <iostream>
+#include <boost/algorithm/string.hpp>
 
 #include "carrier.h"
 #include "constructionsite.h"
@@ -26,9 +27,11 @@
 #include "editor_game_base.h"
 #include "game.h"
 #include "game_data_error.h"
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "militarysite.h"
 #include "parse_map_object_types.h"
@@ -37,17 +40,14 @@
 #include "ship.h"
 #include "soldier.h"
 #include "trainingsite.h"
+#include "upcast.h"
 #include "warehouse.h"
 #include "widelands_fileread.h"
 #include "worker.h"
 #include "world.h"
 
-#include "io/filesystem/disk_filesystem.h"
+#include "tribe.h"
 
-#include "upcast.h"
-
-#include <iostream>
-#include <boost/algorithm/string.hpp>
 
 using namespace std;
 
@@ -262,7 +262,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0)));
+							 	 g_gr->animations().get(path, *s, 0)));
 					}
 				}
 				if (m_anim_frontier.empty())
@@ -283,7 +283,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0)));
+							 	 g_gr->animations().get(path, *s, 0)));
 					}
 				}
 				if (m_anim_flag.empty())

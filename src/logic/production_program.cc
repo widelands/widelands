@@ -17,7 +17,10 @@
  *
  */
 
-#include "production_program.h"
+#include <config.h>
+
+#include <boost/format.hpp>
+#include <libintl.h>
 
 #include "checkstep.h"
 #include "economy/economy.h"
@@ -27,6 +30,7 @@
 #include "findnode.h"
 #include "game.h"
 #include "game_data_error.h"
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "mapregion.h"
 #include "message_queue.h"
@@ -40,10 +44,7 @@
 #include "upcast.h"
 #include "worker_program.h"
 
-#include <libintl.h>
-#include <boost/format.hpp>
-
-#include <config.h>
+#include "production_program.h"
 
 namespace Widelands {
 
@@ -715,7 +716,7 @@ ProductionProgram::ActAnimate::ActAnimate
 		if (descr.is_animation_known(animation_name))
 			m_id = descr.get_animation(animation_name);
 		else {
-			m_id = g_anim.get
+			m_id = g_gr->animations().get
 				(directory.c_str(),
 				 prof.get_safe_section(animation_name),
 				 0);

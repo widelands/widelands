@@ -70,7 +70,8 @@ Graphic::Graphic
 	m_update_fullscreen(true),
 	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(create_surface_cache(SURFACE_CACHE_SIZE)),
-	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
+	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get())),
+	animation_manager_(new AnimationManager())
 {
 	ImageTransformations::initialize();
 
@@ -537,7 +538,7 @@ void Graphic::reset_texture_animation_reminder()
 }
 
 void Graphic::ensure_animation_loaded(uint32_t anim) {
-	g_anim.get_animation(anim).get_frame(0); // NOCOM(#sirver): hack
+	animation_manager_->get_animation(anim).get_frame(0); // NOCOM(#sirver): hack
 }
 
 /**
@@ -546,7 +547,7 @@ void Graphic::ensure_animation_loaded(uint32_t anim) {
 size_t Graphic::nr_frames(uint32_t anim)
 {
 	// NOCOM(#sirver): remove function
-	return g_anim.get_animation(anim).nr_frames();
+	return animation_manager_->get_animation(anim).nr_frames();
 }
 
 /**
@@ -556,7 +557,7 @@ void Graphic::get_animation_size
 	(uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h)
 {
 	// NOCOM(#sirver): remove
-	Animation& animation = g_anim.get_animation(anim);
+	Animation& animation = animation_manager_->get_animation(anim);
 	// NOCOM(#sirver): should assert and or crash and should return const&
 	w = animation.width();
 	h = animation.height();
@@ -608,7 +609,7 @@ Animation * Graphic::get_animation(uint32_t anim)
 		return 0;
 
 	ensure_animation_loaded(anim);
-	return &g_anim.get_animation(anim);
+	return &animation_manager_->get_animation(anim);
 }
 
 /**

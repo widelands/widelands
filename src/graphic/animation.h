@@ -87,8 +87,4 @@ private:
 	std::vector<Animation*> m_animations;
 };
 
-
-// NOCOM(#sirver): kill and make part of graphics (animations()).
-extern AnimationManager g_anim;
-
 #endif

@@ -35,6 +35,7 @@
 namespace UI {struct ProgressWindow;}
 
 class Animation;  // // NOCOM(#sirver): should not be here
+class AnimationManager;
 class ImageLoaderImpl;
 class RenderTarget;
 class Screen;
@@ -103,8 +104,9 @@ public:
 	bool need_update() const;
 	void refresh(bool force = true);
 
-	ImageCache& images() const {return *image_cache_.get();}
 	SurfaceCache& surfaces() const {return *surface_cache_.get();}
+	ImageCache& images() const {return *image_cache_.get();}
+	AnimationManager& animations() const {return *animation_manager_.get();}
 
 	void save_png(const Image*, StreamWrite*) const;
 
@@ -163,6 +165,8 @@ protected:
 	/// Non-volatile cache of hardware independent images. The use the
 	/// surface_cache_ to cache their pixel data.
 	boost::scoped_ptr<ImageCache> image_cache_;
+	/// This holds all animations.
+	boost::scoped_ptr<AnimationManager> animation_manager_;
 
 	// The texture needed to draw roads.
 	boost::scoped_ptr<Surface> pic_road_normal_;

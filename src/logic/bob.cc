@@ -17,30 +17,32 @@
  *
  */
 
-#include "bob.h"
+#include <cstdlib>
 
-#include "critter_bob.h"
-
+#include "backtrace.h"
 #include "checkstep.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "findbob.h"
 #include "game.h"
 #include "game_data_error.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wui/mapviewpixelconstants.h"
 #include "path.h"
 #include "player.h"
 #include "profile/profile.h"
-#include "graphic/rendertarget.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include <cstdlib>
+#include "wui/mapviewpixelconstants.h"
 
-#include "backtrace.h"
+#include "critter_bob.h"
+
+#include "bob.h"
+
 
 namespace Widelands {
 
@@ -74,7 +76,7 @@ Bob::Descr::Descr
 		Section & idle_s = prof.get_safe_section("idle");
 
 		add_animation
-			("idle", g_anim.get (directory, idle_s, "idle.png"));
+			("idle", g_gr->animations().get (directory, idle_s, "idle.png"));
 	}
 
 	// Parse attributes

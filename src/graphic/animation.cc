@@ -341,9 +341,6 @@ AnimationManager IMPLEMENTATION
 ==============================================================================
 */
 
-// NOCOM(#sirver): kill this sucker
-AnimationManager g_anim;
-
 /**
  * Read in basic information about the animation.
  * The graphics are loaded later by the graphics subsystem.
@@ -487,7 +484,7 @@ void DirAnimations::parse
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir]);
-		m_animations[dir] = g_anim.get(directory, *s, sectname);
+		m_animations[dir] = g_gr->animations().get(directory, *s, sectname);
 		b.add_animation(anim_name.c_str(), m_animations[dir]);
 	}
 }

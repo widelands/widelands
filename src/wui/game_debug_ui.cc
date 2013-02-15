@@ -345,7 +345,7 @@ void FieldDebugWindow::think()
 			std::string animation_name = "(none)";
 			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
 				// NOCOM(#sirver): fix this ?
-				// animation_name = g_anim.get_animation
+				// animation_name = g_gr->animations().get_animation
 					// (player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation()).picnametempl;
 			}
 
