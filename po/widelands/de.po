@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-01-25 08:23+0100\n"
-"PO-Revision-Date: 2013-01-25 07:51+0000\n"
-"Last-Translator: wl-zocker <Unknown>\n"
+"PO-Revision-Date: 2013-02-14 20:06+0000\n"
+"Last-Translator: raymond <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-01-26 04:37+0000\n"
-"X-Generator: Launchpad (build 16451)\n"
+"X-Launchpad-Export-Date: 2013-02-15 04:31+0000\n"
+"X-Generator: Launchpad (build 16491)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -3879,7 +3879,7 @@ msgstr "Abbrechen"
 
 #: ../../src/wui/buildingwindow.cc:245
 msgid "Returns:"
-msgstr ""
+msgstr "Ergibt:"
 
 #: ../../src/wui/buildingwindow.cc:271 ../../src/wui/buildingwindow.cc:480
 msgid "Hide workarea"
