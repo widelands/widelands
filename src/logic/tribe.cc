@@ -261,8 +261,7 @@ Tribe_Descr::Tribe_Descr
 					} catch (Nonexistent) {
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
-							 	(style_name,
-							 	 g_gr->animations().get(path, *s, 0)));
+							 	(style_name, g_gr->animations().load(path, *s)));
 					}
 				}
 				if (m_anim_frontier.empty())
@@ -283,7 +282,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_gr->animations().get(path, *s, 0)));
+							 	 g_gr->animations().load(path, *s)));
 					}
 				}
 				if (m_anim_flag.empty())

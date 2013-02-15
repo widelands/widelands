@@ -20,6 +20,8 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include <string.h>
+
 #include <boost/noncopyable.hpp>
 
 //TODO: as soon as g_fs is not needed anymore, next include can be changed
@@ -94,7 +96,6 @@ struct Section {
 
 	Section(Profile *, char const * name);
 	Section(const Section &);
-	~Section();
 
 	Section & operator= (const Section &);
 
@@ -107,6 +108,7 @@ struct Section {
 	uint32_t get_num_values() const {return m_values.size();}
 
 	char const * get_name() const;
+	void set_name(const std::string&);
 
 	bool is_used() const;
 	void mark_used();
@@ -207,7 +209,7 @@ struct Section {
 private:
 	Profile  * m_profile;
 	bool       m_used;
-	char     * m_section_name;
+	std::string m_section_name;
 	Value_list m_values;
 };
 

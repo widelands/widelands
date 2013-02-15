@@ -716,10 +716,7 @@ ProductionProgram::ActAnimate::ActAnimate
 		if (descr.is_animation_known(animation_name))
 			m_id = descr.get_animation(animation_name);
 		else {
-			m_id = g_gr->animations().get
-				(directory.c_str(),
-				 prof.get_safe_section(animation_name),
-				 0);
+			m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
 			descr.add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.

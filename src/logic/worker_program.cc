@@ -447,10 +447,8 @@ void WorkerProgram::parse_animation
 		// dynamically allocate animations here
 		descr->add_animation
 			(cmd[1].c_str(),
-			 (g_gr->animations().get
-			  	(parser->directory.c_str(),
-			  	 parser->prof->get_safe_section(cmd[1].c_str()),
-			  	 0)));
+			 (g_gr->animations().load(parser->directory,
+			  	 parser->prof->get_safe_section(cmd[1].c_str()))));
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 

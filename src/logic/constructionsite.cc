@@ -50,8 +50,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 		Section & sec = prof.get_safe_section("idle_with_worker");
 		if (!is_animation_known("idle_with_worker"))
 			add_animation
-				("idle_with_worker",
-				 g_gr->animations().get(directory.c_str(), sec, 0));
+				("idle_with_worker", g_gr->animations().load(directory, sec));
 	}
 }
 

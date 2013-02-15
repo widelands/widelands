@@ -810,10 +810,7 @@ ImmovableProgram::ActAnimate::ActAnimate
 			m_id = descr.get_animation(animation_name);
 		else {
 			m_id =
-				g_gr->animations().get
-					(directory.c_str(),
-					 prof.get_safe_section(animation_name),
-					 0);
+				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
 
 			descr.add_animation(animation_name, m_id);
 		}
@@ -1152,10 +1149,7 @@ ImmovableProgram::ActConstruction::ActConstruction
 			m_animid = descr.get_animation(animation_name);
 		else {
 			m_animid =
-				g_gr->animations().get
-					(directory.c_str(),
-					 prof.get_safe_section(animation_name),
-					 0);
+				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
 
 			descr.add_animation(animation_name, m_animid);
 		}

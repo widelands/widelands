@@ -75,8 +75,7 @@ Bob::Descr::Descr
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
 
-		add_animation
-			("idle", g_gr->animations().get (directory, idle_s, "idle.png"));
+		add_animation("idle", g_gr->animations().load(directory, idle_s));
 	}
 
 	// Parse attributes

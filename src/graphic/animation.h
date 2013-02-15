@@ -44,14 +44,11 @@ public:
 
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
-	virtual const Image& get_frame(uint32_t time) const = 0;
-	virtual const Image& get_frame(uint32_t i, const RGBColor& playercolor) const = 0;
 	virtual const Point& hotspot() const = 0;
 	virtual uint16_t nr_frames() const = 0;
-
-	// NOCOM(#sirver): should take 'time'
+	virtual const Image& get_frame(uint32_t time, const RGBColor& playercolor) const = 0;
+	virtual const Image& get_frame(uint32_t time) const = 0;
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const = 0;
-
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;
 };
 
@@ -66,17 +63,7 @@ public:
 * counted from 0.
 */
 struct AnimationManager {
-	uint32_t get
-		(const std::string & directory,
-		 Section           & s,
-		 char       const * picnametempl = 0)
-	{
-		return get(directory.c_str(), s, picnametempl);
-	}
-	uint32_t get
-		(char       const * directory,
-		 Section          &,
-		 char       const * picnametempl = 0);
+	uint32_t load(const std::string & directory, Section& s);
 
 	// for use by the graphics subsystem
 	const Animation& get_animation(uint32_t id) const;

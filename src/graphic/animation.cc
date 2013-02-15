@@ -26,7 +26,10 @@
 #include <cassert>
 
 #include <SDL.h>
+#include <boost/algorithm/string/replace.hpp>
+#include <boost/foreach.hpp>
 #include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
@@ -54,22 +57,56 @@ using namespace std;
 
 namespace  {
 
+// NOCOM(#sirver): this should not be here
+// // NOCOM(#sirver): documentation
+class NumberGlob : boost::noncopyable {
+public:
+   typedef uint32_t type;
+	NumberGlob(const string& pictmp) : templ_(pictmp), cur_(0) {
+		int nchars = std::count(pictmp.begin(), pictmp.end(), '?');
+		fmtstr_ = "%0" + boost::lexical_cast<string>(nchars) + "i";
+
+		max_ = 1;
+		for (int i = 0; i < nchars; ++i) {
+			max_ *= 10;
+			replstr_ += "?";
+		}
+		max_ -= 1;
+	}
+
+	bool next(string* s) {
+		if (cur_ > max_)
+			return false;
+
+		if (max_) {
+			*s = boost::replace_last_copy(templ_, replstr_, (boost::format(fmtstr_) % cur_).str());
+		} else {
+			*s = templ_;
+		}
+		++cur_;
+		return true;
+	}
+
+private:
+	string templ_;
+	string fmtstr_;
+	string replstr_;
+	uint32_t cur_;
+	uint32_t max_;
+};
+
 class AnimationImpl : public Animation {
 public:
 	virtual ~AnimationImpl() {}
 	// NOCOM(#sirver): ugly!
 	AnimationImpl
-		(char       const * const directory,
-		 Section          &       s,
-		 char       const *       picnametempl);
+		(const string& directory, Section & s);
 
 	// Implements Animation.
 	virtual uint16_t width() const {return get_frame(0).width();}
 	virtual uint16_t height() const {return get_frame(0).height();}
 	virtual const Point& hotspot() const {return hotspot_;};
 	virtual uint16_t nr_frames() const {return frames_.size();}
-	// NOCOM(#sirver): should be const one day
-	// // NOCOM(#sirver): update definitons in header
 	virtual const Image& get_frame(uint32_t time, const RGBColor& playercolor) const {
 		return get_frame(time); // NOCOM(#sirver): todo: support playercolors again
 	}
@@ -81,7 +118,6 @@ private:
 	uint32_t frametime_;
 	Point hotspot_;
 	bool hasplrclrs_;
-	string picnametempl;
 
 	vector<const Image*> frames_;
 	vector<const Image*> pcmasks_;
@@ -92,28 +128,9 @@ private:
 };
 
 AnimationImpl::AnimationImpl
-	(char       const * const directory,
-	 Section          &       s,
-	 char       const *       given_picnametempl) :
-	frametime_(FRAME_LENGTH) {
-
-	// NOCOM(#sirver): make 'pics' implicit and drop the name.
-	string templbuf = given_picnametempl ? given_picnametempl : "";
-	if (char const * const pics = s.get_string("pics"))
-		templbuf = pics;
-	else if (templbuf.empty()) {
-		templbuf = string(s.get_name()) + ".png";
-	}
-	// NOCOM(#sirver): no need to support non pngs these days.
-	{
-		char pictempl[256];
-		snprintf(pictempl, sizeof(pictempl), "%s%s", directory, templbuf.c_str());
-		assert(4 <= strlen(pictempl));
-		uint32_t const len = strlen(pictempl) - 4;
-		if (pictempl[len] == '.')
-			pictempl[len] = '\0'; // delete extension
-		picnametempl = pictempl;
-	}
+	(const string& directory,
+	 Section& s)
+	: frametime_(FRAME_LENGTH) {
 
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
@@ -153,6 +170,7 @@ AnimationImpl::AnimationImpl
 
 	ImageCache* image_cache = &g_gr->images();  // NOCOM(#sirver): ugly
 
+	// NOCOM(#sirver): check text
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
 	//  replaced with "idle_00". Then the code looks if there is a file with
@@ -166,100 +184,63 @@ AnimationImpl::AnimationImpl
 	//  image name template, the "_pc" (3 characters) part for playercolor
 	//  masks, the extension (4 characters including the dot) and the null
 	//  terminator. Copy the image name template into the buffer.
-	char filename[256];
-	string::size_type const picnametempl_size = picnametempl.size();
-	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
-		throw wexception
-			("buffer too small (%lu) for image name template of size %lu\n",
-			 static_cast<long unsigned>(sizeof(filename)), static_cast<long unsigned>(picnametempl_size));
-	strcpy(filename, picnametempl.c_str());
-
-	//  Find out where in the image name template the number is. Search
-	//  backwards from the end.
-	char * const after_basename = filename + picnametempl_size;
-	char * last_digit = after_basename;
-	while (filename <= last_digit and *last_digit != '?')
-		--last_digit;
-	char * before_first_digit = last_digit;
-	while (filename <= before_first_digit and *before_first_digit == '?') {
-		*before_first_digit = '0';
-		--before_first_digit;
+	// NOCOM(#sirver): this should go easier.
+	string picnametempl;
+	if (char const * const pics = s.get_string("pics")) {
+		picnametempl = directory + pics;
+	} else {
+		picnametempl = directory + s.get_name();
 	}
-	unsigned int imgwidth = 0, imgheight = 0;
+	// Strip the .png extension if it has one.
+	boost::replace_all(picnametempl, ".png", "");
 
-	static const uint32_t nextensions = 2;
-	static const char extensions[nextensions][5] = {".png", ".jpg"};
-	for (;;) {
+	NumberGlob glob(picnametempl);
+	string filename_wo_ext;
+	while(glob.next(&filename_wo_ext)) {
+		string filename = filename_wo_ext + ".png";
+		log("#sirver filename: %s\n", filename.c_str());
 		// Load the base image
-		for (uint32_t extnr = 0;;) {
-			strcpy(after_basename, extensions[extnr]);
-			if (g_fs->FileExists(filename)) { //  Is the frame actually there?
-				try {
-					const Image* image = image_cache->get(filename);
-					if (imgwidth == 0) { //  This is the first frame.
-						imgwidth  = image->width();
-						imgheight = image->height();
-					} else if (imgwidth != image->width() or imgheight != image->height())
-						throw wexception
-							("wrong size: (%u, %u), should be (%u, %u) like the "
-							 "first frame",
-							 image->width(), image->height(), imgwidth, imgheight);
-					//  Get a new AnimFrame.
-					frames_.push_back(image);
-				} catch (const exception & e) {
-					throw wexception
-						("could not load animation frame %s: %s\n",
-						 filename, e.what());
-				}
-				//  Successfully loaded the frame.
-				break;  //  No need to look for files with other extensions.
-			} else if (++extnr == nextensions) //  Tried all extensions.
-				goto end;  //  This frame does not exist. No more frames in anim.
+		// strcpy(after_basename, extensions[extnr]);
+		if (!g_fs->FileExists(filename))
+			break;
+
+		try {
+			const Image* image = image_cache->get(filename);
+			if (frames_.size() && (frames_[0]->width() != image->width() or frames_[0]->height() != image->height()))
+				throw wexception
+					("wrong size: (%u, %u), should be (%u, %u) like the "
+					 "first frame",
+					 image->width(), image->height(), frames_[0]->width(), frames_[0]->height());
+			//  Get a new AnimFrame.
+			frames_.push_back(image);
+		} catch (const exception & e) {
+			throw wexception
+				("could not load animation frame %s: %s\n",
+				 filename.c_str(), e.what());
 		}
 
 		if (hasplrclrs_) {
 			//TODO Do not load playercolor mask as opengl texture or use it as
 			//     opengl texture.
-			strcpy(after_basename, "_pc");
-			for (uint32_t extnr = 0;;) {
-				strcpy(after_basename + 3, extensions[extnr]);
-				if (g_fs->FileExists(filename)) {
-					try {
-						const Image* image = image_cache->get(filename);
-						if (imgwidth != image->width() or imgheight != image->height())
-							throw wexception
-								("playercolor mask has wrong size: (%u, %u), should "
-								 "be (%u, %u) like the animation frame",
-								 image->width(), image->height(), imgwidth, imgheight);
-						pcmasks_.push_back(image);
-						break;
-					} catch (const exception & e) {
+			string pc_filename = filename_wo_ext + "_pc.png";
+
+			if (g_fs->FileExists(pc_filename)) {
+				try {
+					const Image* image = image_cache->get(pc_filename);
+					if (frames_[0]->width() != image->width() or frames_[0]->height() != image->height())
 						throw wexception
-							("error while reading \"%s\": %s", filename, e.what());
-					}
-				} else if (++extnr == nextensions) {
-					after_basename[3] = '\0'; //  cut off the extension
-					throw wexception("\"%s\" is missing", filename);
+							("playercolor mask has wrong size: (%u, %u), should "
+							 "be (%u, %u) like the animation frame",
+							 image->width(), image->height(), frames_[0]->width(), frames_[0]->height());
+					pcmasks_.push_back(image);
+				} catch (const exception & e) {
+					throw wexception
+						("error while reading \"%s\": %s", pc_filename.c_str(), e.what());
 				}
 			}
 		}
-
-		//  Increment the number in the filename.
-		for (char * digit_to_increment = last_digit;;) {
-			if (digit_to_increment == before_first_digit)
-				goto end; //  The number wrapped around to all zeros.
-			assert('0' <= *digit_to_increment);
-			assert(*digit_to_increment <= '9');
-			if (*digit_to_increment == '9') {
-				*digit_to_increment = '0';
-				--digit_to_increment;
-			} else {
-				++*digit_to_increment;
-				break;
-			}
-		}
 	}
-end:
+
 	if (frames_.empty())
 		throw wexception
 			("animation %s has no frames", picnametempl.c_str());
@@ -342,12 +323,10 @@ AnimationManager IMPLEMENTATION
  * \param s             conffile section to search for data on this animation
  * \param picnametempl  a template for the image names
 */
-uint32_t AnimationManager::get
-	(char       const * const directory,
-	 Section          &       s,
-	 char       const *       picnametempl)
+uint32_t AnimationManager::load(const string& directory, Section & s)
+	 // char       const *       picnametempl) // NOCOM(#sirver): what
 {
-	m_animations.push_back(new AnimationImpl(directory, s, picnametempl));
+	m_animations.push_back(new AnimationImpl(directory, s));
 	uint32_t const id = m_animations.size();
 
 	return id;
@@ -405,11 +384,11 @@ foowalk_??_nn.png are used.
 ===============
 */
 void DirAnimations::parse
-	(Widelands::Map_Object_Descr &       b,
-	 const string           &       directory,
-	 Profile                     &       prof,
-	 char                  const * const sectnametempl,
-	 Section                     * const defaults)
+	(Widelands::Map_Object_Descr & b,
+	 const string & directory,
+	 Profile & prof,
+	 char const * const sectnametempl,
+	 Section * const defaults)
 {
 	char dirpictempl[256];
 	char sectnamebase[256];
@@ -440,7 +419,7 @@ void DirAnimations::parse
 
 		strncpy(repl, "%s", 2);
 	} else {
-		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.png", sectnamebase);
+		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??", sectnamebase);
 	}
 
 	for (int32_t dir = 0; dir < 6; ++dir) {
@@ -463,7 +442,8 @@ void DirAnimations::parse
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir]);
-		m_animations[dir] = g_gr->animations().get(directory, *s, sectname);
+		s->set_name(sectname); // NOCOM(#sirver): what
+		m_animations[dir] = g_gr->animations().load(directory, *s);
 		b.add_animation(anim_name.c_str(), m_animations[dir]);
 	}
 }
