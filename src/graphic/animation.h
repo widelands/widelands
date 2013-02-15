@@ -42,18 +42,17 @@ public:
 	Animation() {}
 	virtual ~Animation() {}
 
-	// NOCOM(#sirver): most of these should be const one day
-	virtual uint16_t width() = 0;
-	virtual uint16_t height() = 0;
-	virtual const Image& get_frame(uint32_t time) = 0;
-	virtual const Image& get_frame(uint32_t i, const RGBColor& playercolor) = 0;
-	virtual const Point& hotspot() const  = 0;
+	virtual uint16_t width() const = 0;
+	virtual uint16_t height() const = 0;
+	virtual const Image& get_frame(uint32_t time) const = 0;
+	virtual const Image& get_frame(uint32_t i, const RGBColor& playercolor) const = 0;
+	virtual const Point& hotspot() const = 0;
 	virtual uint16_t nr_frames() const = 0;
 
 	// NOCOM(#sirver): should take 'time'
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const = 0;
 
-	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) = 0;
+	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;
 };
 
 /**
@@ -80,8 +79,7 @@ struct AnimationManager {
 		 char       const * picnametempl = 0);
 
 	// for use by the graphics subsystem
-	// NOCOM(#sirver): Make const again
-	Animation& get_animation(uint32_t id) const;
+	const Animation& get_animation(uint32_t id) const;
 
 private:
 	std::vector<Animation*> m_animations;

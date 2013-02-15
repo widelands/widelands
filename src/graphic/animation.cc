@@ -64,22 +64,20 @@ public:
 		 char       const *       picnametempl);
 
 	// Implements Animation.
-	virtual uint16_t width() {return get_frame(0).width();}
-	virtual uint16_t height() {return get_frame(0).height();}
+	virtual uint16_t width() const {return get_frame(0).width();}
+	virtual uint16_t height() const {return get_frame(0).height();}
 	virtual const Point& hotspot() const {return hotspot_;};
 	virtual uint16_t nr_frames() const {return frames_.size();}
 	// NOCOM(#sirver): should be const one day
 	// // NOCOM(#sirver): update definitons in header
-	virtual const Image& get_frame(uint32_t time, const RGBColor& playercolor) {
+	virtual const Image& get_frame(uint32_t time, const RGBColor& playercolor) const {
 		return get_frame(time); // NOCOM(#sirver): todo: support playercolors again
 	}
-	virtual const Image& get_frame(uint32_t time);
+	virtual const Image& get_frame(uint32_t time) const;
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
-	void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*);
+	void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const;
 
 private:
-	void load_graphics();
-
 	uint32_t frametime_;
 	Point hotspot_;
 	bool hasplrclrs_;
@@ -96,28 +94,20 @@ private:
 AnimationImpl::AnimationImpl
 	(char       const * const directory,
 	 Section          &       s,
-	 char       const *       given_picnametempl)
-{
-	frametime_ = FRAME_LENGTH;
-	hotspot_.x = 0;
-	hotspot_.y = 0;
-	picnametempl = "";
-
-	// Determine image name template
+	 char       const *       given_picnametempl) :
+	frametime_(FRAME_LENGTH) {
 
 	// NOCOM(#sirver): make 'pics' implicit and drop the name.
-	string templbuf = s.get_string("pics", "");
-	string gpicnametempl = given_picnametempl ? given_picnametempl : "";
-
+	string templbuf = given_picnametempl ? given_picnametempl : "";
 	if (char const * const pics = s.get_string("pics"))
-		gpicnametempl = pics;
-	else if (gpicnametempl.empty()) {
-		gpicnametempl = string(s.get_name()) + ".png";
+		templbuf = pics;
+	else if (templbuf.empty()) {
+		templbuf = string(s.get_name()) + ".png";
 	}
 	// NOCOM(#sirver): no need to support non pngs these days.
 	{
 		char pictempl[256];
-		snprintf(pictempl, sizeof(pictempl), "%s%s", directory, gpicnametempl.c_str());
+		snprintf(pictempl, sizeof(pictempl), "%s%s", directory, templbuf.c_str());
 		assert(4 <= strlen(pictempl));
 		uint32_t const len = strlen(pictempl) - 4;
 		if (pictempl[len] == '.')
@@ -160,37 +150,7 @@ AnimationImpl::AnimationImpl
 		frametime_ = 1000 / fps;
 
 	hotspot_ = s.get_Point("hotspot");
-}
 
-/// Find out if there is a sound effect registered for the animation's frame
-/// and try to play it. This is used to have sound effects that are tightly
-/// synchronized to an animation, for example when a geologist is shown
-/// hammering on rocks.
-///
-/// \par framenumber  The framenumber currently on display.
-///
-/// \note uint32_t animation is an ID number that starts at 1, not a vector
-///       index that starts at 0 !
-void AnimationImpl::trigger_soundfx
-	(uint32_t framenumber, uint32_t stereo_position) const
-{
-	const map<uint32_t, string>::const_iterator sfx_cue =
-		sfx_cues.find(framenumber);
-	if (sfx_cue != sfx_cues.end())
-		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
-}
-
-// NOCOM(#sirver): ignores hotspot (for clipping reasons).
-void AnimationImpl::blit(uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) {
-	assert(target);
-
-	const Image& frame = clr ? get_frame(time, *clr) : get_frame(time);
-	target->blit(dst, frame.surface(), srcrc);
-}
-
-static const uint32_t nextensions = 2;
-static const char extensions[nextensions][5] = {".png", ".jpg"};
-void AnimationImpl::load_graphics() {
 	ImageCache* image_cache = &g_gr->images();  // NOCOM(#sirver): ugly
 
 	//  In the filename template, the last sequence of '?' characters (if any)
@@ -227,6 +187,8 @@ void AnimationImpl::load_graphics() {
 	}
 	unsigned int imgwidth = 0, imgheight = 0;
 
+	static const uint32_t nextensions = 2;
+	static const char extensions[nextensions][5] = {".png", ".jpg"};
 	for (;;) {
 		// Load the base image
 		for (uint32_t extnr = 0;;) {
@@ -308,6 +270,32 @@ end:
 			 frames_.size(), pcmasks_.size());
 }
 
+/// Find out if there is a sound effect registered for the animation's frame
+/// and try to play it. This is used to have sound effects that are tightly
+/// synchronized to an animation, for example when a geologist is shown
+/// hammering on rocks.
+///
+/// \par framenumber  The framenumber currently on display.
+///
+/// \note uint32_t animation is an ID number that starts at 1, not a vector
+///       index that starts at 0 !
+void AnimationImpl::trigger_soundfx
+	(uint32_t framenumber, uint32_t stereo_position) const
+{
+	const map<uint32_t, string>::const_iterator sfx_cue =
+		sfx_cues.find(framenumber);
+	if (sfx_cue != sfx_cues.end())
+		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
+}
+
+// NOCOM(#sirver): ignores hotspot (for clipping reasons).
+void AnimationImpl::blit(uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) const {
+	assert(target);
+
+	const Image& frame = clr ? get_frame(time, *clr) : get_frame(time);
+	target->blit(dst, frame.surface(), srcrc);
+}
+
 // NOCOM(#sirver): // NOCOM(#sirver): what
 // const Image& AnimationGfx::get_frame(uint32_t i, const RGBColor& playercolor) {
 	// assert(i < nr_frames());
@@ -321,9 +309,7 @@ end:
 	// return *ImageTransformations::player_colored(playercolor, &original, pcmasks_[i]);
 // }
 
-const Image& AnimationImpl::get_frame(uint32_t time) {
-	if (frames_.empty())
-		load_graphics();
+const Image& AnimationImpl::get_frame(uint32_t time) const {
 	uint32_t const framenumber = time / frametime_ % nr_frames();
 	assert(framenumber < nr_frames());
 	return *frames_[framenumber];
@@ -342,22 +328,15 @@ AnimationManager IMPLEMENTATION
 */
 
 /**
- * Read in basic information about the animation.
- * The graphics are loaded later by the graphics subsystem.
- *
- * Read in sound effects associated with the animation as well as the
- * framenumber on which the effect should be played
+ * Loads an animation, graphics sound and everything.
  *
  * The animation resides in the given directory and is described by the given
  * section.
  *
- * The sound effects reside in the given directory and are described by
- * the given section.
- *
  * This function looks for image files in this order:
  *    key 'pics', if present
  *    picnametempl, if not null
- *    \<sectionname\>_??.bmp
+ *    \<sectionname\>_??.png
  *
  * \param directory     which directory to look in for image and sound files
  * \param s             conffile section to search for data on this animation
@@ -380,7 +359,7 @@ uint32_t AnimationManager::get
 Return AnimationData for this animation or throws if this id is unknown.
 ===============
 */
-Animation& AnimationManager::get_animation(uint32_t id) const
+const Animation& AnimationManager::get_animation(uint32_t id) const
 {
 	if (!id || id > m_animations.size())
 		throw wexception("Requested unknown animation with id: %i", id);
@@ -422,7 +401,7 @@ nw, ne, e, se, sw and w to get the section names for the animations.
 
 If defaults is not zero, the additional sections are not actually necessary.
 If they don't exist, the data is taken from defaults and the bitmaps
-foowalk_??_nn.bmp are used.
+foowalk_??_nn.png are used.
 ===============
 */
 void DirAnimations::parse

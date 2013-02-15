@@ -547,17 +547,8 @@ void Soldier::draw
 	(const Editor_Game_Base & game, RenderTarget & dst, Point const pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
-
 		const Point drawpos = calc_drawpos(game, pos);
-
-		uint32_t w, h;
-		g_gr->get_animation_size
-			(anim,
-			 game.get_gametime() - get_animstart(),
-			 w,
-			 h);
-
-		draw_info_icon(dst, Point(drawpos.x, drawpos.y - h - 7), true);
+		draw_info_icon(dst, Point(drawpos.x, drawpos.y - g_gr->animations().get_animation(anim).height() - 7), true);
 
 		draw_inner(game, dst, drawpos);
 	}

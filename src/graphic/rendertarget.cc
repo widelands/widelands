@@ -277,7 +277,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 void RenderTarget::drawanim
 	(const Point& dst, uint32_t animation, uint32_t time, const Player * player)
 {
-	Animation& anim = g_gr->animations().get_animation(animation);
+	const Animation& anim = g_gr->animations().get_animation(animation);
 
 	Point dstpt = dst - anim.hotspot();
 	Rect srcrc(Point(0, 0), anim.width(), anim.height());
@@ -295,7 +295,7 @@ void RenderTarget::drawstatic
 	(const Point& dst, uint32_t animation, const Player * player)
 {
 	// NOCOM(#sirver): get_frame must disappear from here if possible
-	Animation& anim = g_gr->animations().get_animation(animation);
+	const Animation& anim = g_gr->animations().get_animation(animation);
 
 	// Get the frame and its data
 	const Image& frame = player ? anim.get_frame(0, player->get_playercolor()) : anim.get_frame(0);
@@ -314,7 +314,7 @@ void RenderTarget::drawstatic
 void RenderTarget::drawanimrect
 	(const Point& dst, uint32_t animation, uint32_t time, const Player* player, const Rect& gsrcrc)
 {
-	Animation& anim = g_gr->animations().get_animation(animation);
+	const Animation& anim = g_gr->animations().get_animation(animation);
 
 	// Get the frame and its data
 	const Image& frame = player ? anim.get_frame(time, player->get_playercolor())

@@ -82,8 +82,8 @@ struct GraphicCaps
 /**
  * This class is a kind of Swiss Army knife for your graphics need. It
  * initializes the graphic system and provides access to resolutions. It has an
- * Image and a Surface cache and holds the data of all animations and the road
- * textures. It also offers functionality to save a screenshot.
+ * Animation, Image and Surface cache and owns the road textures. It also
+ * offers functionality to save a screenshot.
  */
 class Graphic {
 public:
@@ -114,14 +114,8 @@ public:
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
-	void ensure_animation_loaded(uint32_t anim);
-	size_t nr_frames(uint32_t anim = 0);
-	uint32_t get_animation_frametime(uint32_t anim) const;
-	void get_animation_size (uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h);
-
 	void screenshot(const std::string& fname) const;
 	Texture * get_maptexture_data(uint32_t id);
-	Animation * get_animation(uint32_t);
 
 	void set_world(std::string);
 	Surface& get_road_texture(int32_t roadtex);
@@ -173,7 +167,6 @@ protected:
 	boost::scoped_ptr<Surface> pic_road_busy_;
 
 	std::vector<Texture *> m_maptextures;
-	std::vector<Animation *> m_animations;
 };
 
 extern Graphic * g_gr;

@@ -498,8 +498,8 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
  *
  * fnametempl is a filename with possible wildcard characters '?'. The function
  * fills the wildcards with decimal numbers to get the different frames of a
- * texture animation. For example, if fnametempl is "foo_??.bmp", it tries
- * "foo_00.bmp", "foo_01.bmp" etc...
+ * texture animation. For example, if fnametempl is "foo_??.png", it tries
+ * "foo_00.png", "foo_01.png" etc...
  * frametime is in milliseconds.
  * \return 0 if the texture couldn't be loaded.
  * \note Terrain textures are not reused, even if fnametempl matches.
@@ -537,32 +537,6 @@ void Graphic::reset_texture_animation_reminder()
 	}
 }
 
-void Graphic::ensure_animation_loaded(uint32_t anim) {
-	animation_manager_->get_animation(anim).get_frame(0); // NOCOM(#sirver): hack
-}
-
-/**
- * Return the number of frames in this animation
- */
-size_t Graphic::nr_frames(uint32_t anim)
-{
-	// NOCOM(#sirver): remove function
-	return animation_manager_->get_animation(anim).nr_frames();
-}
-
-/**
- * writes the size of an animation frame to w and h
-*/
-void Graphic::get_animation_size
-	(uint32_t anim, uint32_t time, uint32_t & w, uint32_t & h)
-{
-	// NOCOM(#sirver): remove
-	Animation& animation = animation_manager_->get_animation(anim);
-	// NOCOM(#sirver): should assert and or crash and should return const&
-	w = animation.width();
-	h = animation.height();
-}
-
 /**
  * Save a screenshot to the given file.
 */
@@ -595,21 +569,6 @@ void Graphic::m_png_flush_function
 	(png_structp png_ptr)
 {
 	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Flush();
-}
-
-/**
- * Retrieve the animation with the given number.
- *
- * @param anim the number of the animation
- * @return the AnimationGfs object of the given number
- */
-Animation * Graphic::get_animation(uint32_t anim)
-{
-	if (!anim)
-		return 0;
-
-	ensure_animation_loaded(anim);
-	return &animation_manager_->get_animation(anim);
 }
 
 /**

@@ -160,7 +160,7 @@ Immovable_Descr IMPLEMENTATION
  * Parse an immovable from its conf file.
  *
  * Section [global]:
- * picture (default = $NAME_00.bmp): name of picture used in editor
+ * picture (default = $NAME_00.png): name of picture used in editor
  * size = none|small|medium|big (default = none): influences build options
  *
  * Section [program] (optional)
@@ -514,23 +514,24 @@ void Immovable::draw_construction
 			(&(*m_program)[m_program_ptr]);
 
 	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
-	uint32_t total = m_anim_construction_total * steptime;
-	uint32_t done = 0;
 
+	uint32_t done = 0;
 	if (m_anim_construction_done > 0) {
 		done = steptime * (m_anim_construction_done - 1);
 		done += std::min(steptime, game.get_gametime() - m_animstart);
 	}
 
+	uint32_t total = m_anim_construction_total * steptime;
 	if (done > total)
 		done = total;
 
-	const size_t nr_frames = g_gr->nr_frames(m_anim);
+	const Animation& anim = g_gr->animations().get_animation(m_anim);
+	const size_t nr_frames = anim.nr_frames();
 	uint32_t frametime = FRAME_LENGTH; // // NOCOM(#sirver): fix this g_gr->animations().get_animation(m_anim).frametime;
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
-	uint32_t curw, curh;
-	g_gr->get_animation_size(m_anim, current_frame * frametime, curw, curh);
+	const uint16_t curw = anim.width();
+	const uint16_t curh = anim.height();
 
 	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
 
