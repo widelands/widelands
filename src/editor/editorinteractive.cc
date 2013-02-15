@@ -160,7 +160,7 @@ void Editor_Interactive::load(const std::string & filename) {
 
 	// TODO: get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
-	egbase().cleanup_for_load(true, false);
+	egbase().cleanup_for_load();
 	m_history.reset();
 
 	std::auto_ptr<Widelands::Map_Loader> const ml
@@ -616,8 +616,5 @@ void Editor_Interactive::run_editor(const std::string & filename) {
 	eia.run();
 
 	editor.cleanup_objects();
-
-	g_gr->flush_animations();
-	g_anim.flush();
 }
 

@@ -70,23 +70,11 @@ public:
 	void blitrect(const Point& dst, const Image* image, const Rect& src, Composite cm = CM_Normal);
 	void tile(const Rect&, const Image* image, const Point& ofs, Composite cm = CM_Normal);
 
-	void drawanim
-		(const Point&                     dst,
-		 uint32_t                  animation,
-		 uint32_t                  time,
-		 Widelands::Player const * = 0); // NOCOM(#sirver): should only take a color
-
-	void drawstatic
-			(const Point&                     dst,
-			 uint32_t                  animation,
-			 Widelands::Player const * = 0);
-
+	// NOCOM(#sirver): should only take a color
+	void drawanim(const Point& dst, uint32_t animation, uint32_t time, Widelands::Player const * = 0);
+	void drawstatic(const Point& dst, uint32_t animation, Widelands::Player const * = 0);
 	void drawanimrect
-		(const Point&                     dst,
-		 uint32_t                  animation,
-		 uint32_t                  time,
-		 Widelands::Player const *,
-		 Rect                      srcrc);
+		(const Point& dst, uint32_t animation, uint32_t time, Widelands::Player const *, const Rect& srcrc);
 
 	void reset();
 
@@ -95,7 +83,7 @@ public:
 	const Point& get_offset() const {return m_offset;}
 
 protected:
-	bool clip(Rect & r) const throw ();
+	bool clip(Rect & r) const;
 	void to_surface_geometry(Point* dst, Rect* srcrc) const;
 
 	///The target surface

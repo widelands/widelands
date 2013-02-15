@@ -128,7 +128,7 @@ int32_t RenderTarget::height() const
  * This functions draws a line in the target
  */
 void RenderTarget::draw_line
-	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
+	(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 	 const RGBColor& color, uint8_t gwidth)
 {
 	m_surface->draw_line
@@ -154,7 +154,7 @@ void RenderTarget::fill_rect(const Rect& rect, const RGBAColor& clr)
 		m_surface->fill_rect(r, clr);
 }
 
-void RenderTarget::brighten_rect(const Rect& rect, const int32_t factor)
+void RenderTarget::brighten_rect(const Rect& rect, int32_t factor)
 {
 	Rect r(rect);
 	if (clip(r))
@@ -275,23 +275,15 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
  * What if the game runs very slowly or very quickly?
  */
 void RenderTarget::drawanim
-	(const Point&                dst,
-	 uint32_t       const animation,
-	 uint32_t       const time,
-	 Player const * const player)
+	(const Point& dst, uint32_t animation, uint32_t time, const Player * player)
 {
 	Animation& anim = g_anim.get_animation(animation);
 
-	// Get the frame and its data
-	const Image& frame =
-		player ? anim.get_frame(time, player->get_playercolor()) : anim.get_frame(time);
-
 	Point dstpt = dst - anim.hotspot();
-
-	Rect srcrc(Point(0, 0), frame.width(), frame.height());
+	Rect srcrc(Point(0, 0), anim.width(), anim.height());
 
 	to_surface_geometry(&dstpt, &srcrc);
-	m_surface->blit(dstpt, frame.surface(), srcrc);
+	anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
@@ -300,10 +292,9 @@ void RenderTarget::drawanim
 }
 
 void RenderTarget::drawstatic
-	(const Point&                dst,
-	 uint32_t       const animation,
-	 Player const * const player)
+	(const Point& dst, uint32_t animation, const Player * player)
 {
+	// NOCOM(#sirver): get_frame must disappear from here if possible
 	Animation& anim = g_anim.get_animation(animation);
 
 	// Get the frame and its data
@@ -321,11 +312,7 @@ void RenderTarget::drawstatic
  * Draws a part of a frame of an animation at the given location
  */
 void RenderTarget::drawanimrect
-	(const Point&               dst,
-	 uint32_t       const animation,
-	 uint32_t       const time,
-	 Player const * const player,
-	 Rect                 srcrc)
+	(const Point& dst, uint32_t animation, uint32_t time, const Player* player, const Rect& gsrcrc)
 {
 	Animation& anim = g_anim.get_animation(animation);
 
@@ -334,8 +321,9 @@ void RenderTarget::drawanimrect
 		: anim.get_frame(time);
 
 	Point dstpt = dst - anim.hotspot();
-	dstpt += srcrc;
+	dstpt += gsrcrc;
 
+	Rect srcrc(gsrcrc);
 	to_surface_geometry(&dstpt, &srcrc);
 	m_surface->blit(dstpt, frame.surface(), srcrc);
 }
@@ -359,7 +347,7 @@ void RenderTarget::reset()
  * If true is returned, r a valid rectangle that can be used.
  * If false is returned, r may not be used and may be partially modified.
  */
-bool RenderTarget::clip(Rect & r) const throw ()
+bool RenderTarget::clip(Rect & r) const
 {
 	r += m_offset;
 

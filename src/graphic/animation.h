@@ -28,9 +28,12 @@
 #include <boost/utility.hpp>
 
 #include "point.h"
+#include "rect.h"
 
+// NOCOM(#sirver): check includes and decls
 class Image;
 struct RGBColor;
+class Surface;
 struct Section;
 
 // NOCOM(#sirver): docu
@@ -47,7 +50,10 @@ public:
 	virtual const Point& hotspot() const  = 0;
 	virtual uint16_t nr_frames() const = 0;
 
+	// NOCOM(#sirver): should take 'time'
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const = 0;
+
+	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) = 0;
 };
 
 /**
@@ -61,7 +67,6 @@ public:
 * counted from 0.
 */
 struct AnimationManager {
-	void flush();
 	uint32_t get
 		(const std::string & directory,
 		 Section           & s,

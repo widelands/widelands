@@ -408,10 +408,6 @@ void Graphic::refresh(bool force)
 }
 
 
-void Graphic::flush_animations() {
-	// NOCOM(#sirver): remove function
-}
-
 /**
  * Saves a pixel region to a png. This can be a file or part of a stream.
  *
@@ -538,13 +534,6 @@ void Graphic::reset_texture_animation_reminder()
 	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
 		m_maptextures[i]->reset_was_animated();
 	}
-}
-
-/**
- * Load all animations that are registered with the AnimationManager
-*/
-void Graphic::load_animations() {
-// NOCOM(#sirver): remove
 }
 
 void Graphic::ensure_animation_loaded(uint32_t anim) {

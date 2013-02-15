@@ -100,8 +100,7 @@ struct Editor_Game_Base :
 	void allocate_player_maps();
 	virtual void postload();
 	void load_graphics(UI::ProgressWindow & loader_ui);
-	virtual void cleanup_for_load
-		(bool flush_graphics = true, bool flush_animations = true);
+	virtual void cleanup_for_load();
 
 	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 

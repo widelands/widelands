@@ -21,10 +21,12 @@
 
 // NOCOM(#sirver): check and order includes
 #include "animation.h"
+#include "surface.h"
 #include "graphic.h"
 #include <cassert>
 
 #include <SDL.h>
+#include <boost/format.hpp>
 
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
@@ -46,6 +48,9 @@
 #include "helper.h"
 
 #include <cstdio>
+
+using namespace std;
+
 
 namespace  {
 
@@ -70,6 +75,7 @@ public:
 	}
 	virtual const Image& get_frame(uint32_t time);
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
+	void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*);
 
 private:
 	void load_graphics();
@@ -77,20 +83,20 @@ private:
 	uint32_t frametime_;
 	Point hotspot_;
 	bool hasplrclrs_;
-	std::string picnametempl;
+	string picnametempl;
 
-	std::vector<const Image*> frames_;
-	std::vector<const Image*> pcmasks_;
+	vector<const Image*> frames_;
+	vector<const Image*> pcmasks_;
 
 	/** mapping of soundeffect name to frame number, indexed by frame number
 	 * \sa AnimationManager::trigger_sfx */
-	std::map<uint32_t, std::string> sfx_cues;
+	map<uint32_t, string> sfx_cues;
 };
 
 AnimationImpl::AnimationImpl
 	(char       const * const directory,
 	 Section          &       s,
-	 char       const *       gpicnametempl)
+	 char       const *       given_picnametempl)
 {
 	frametime_ = FRAME_LENGTH;
 	hotspot_.x = 0;
@@ -100,17 +106,18 @@ AnimationImpl::AnimationImpl
 	// Determine image name template
 
 	// NOCOM(#sirver): make 'pics' implicit and drop the name.
-	char templbuf[256];
+	string templbuf = s.get_string("pics", "");
+	string gpicnametempl = given_picnametempl ? given_picnametempl : "";
+
 	if (char const * const pics = s.get_string("pics"))
 		gpicnametempl = pics;
-	else if (!gpicnametempl) {
-		snprintf(templbuf, sizeof(templbuf), "%s.png", s.get_name());
-		gpicnametempl = templbuf;
+	else if (gpicnametempl.empty()) {
+		gpicnametempl = string(s.get_name()) + ".png";
 	}
 	// NOCOM(#sirver): no need to support non pngs these days.
 	{
 		char pictempl[256];
-		snprintf(pictempl, sizeof(pictempl), "%s%s", directory, gpicnametempl);
+		snprintf(pictempl, sizeof(pictempl), "%s%s", directory, gpicnametempl.c_str());
 		assert(4 <= strlen(pictempl));
 		uint32_t const len = strlen(pictempl) - 4;
 		if (pictempl[len] == '.')
@@ -131,7 +138,7 @@ AnimationImpl::AnimationImpl
 			parameters = endp;
 			force_skip(parameters);
 			g_sound_handler.load_fx(directory, parameters);
-			std::map<uint32_t, std::string>::const_iterator const it =
+			map<uint32_t, string>::const_iterator const it =
 				sfx_cues.find(frame_number);
 			if (it != sfx_cues.end())
 				throw wexception
@@ -167,13 +174,19 @@ AnimationImpl::AnimationImpl
 void AnimationImpl::trigger_soundfx
 	(uint32_t framenumber, uint32_t stereo_position) const
 {
-	const std::map<uint32_t, std::string>::const_iterator sfx_cue =
+	const map<uint32_t, string>::const_iterator sfx_cue =
 		sfx_cues.find(framenumber);
 	if (sfx_cue != sfx_cues.end())
 		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
 }
 
-}  // namespace
+// NOCOM(#sirver): ignores hotspot (for clipping reasons).
+void AnimationImpl::blit(uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) {
+	assert(target);
+
+	const Image& frame = clr ? get_frame(time, *clr) : get_frame(time);
+	target->blit(dst, frame.surface(), srcrc);
+}
 
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};
@@ -194,7 +207,7 @@ void AnimationImpl::load_graphics() {
 	//  masks, the extension (4 characters including the dot) and the null
 	//  terminator. Copy the image name template into the buffer.
 	char filename[256];
-	std::string::size_type const picnametempl_size = picnametempl.size();
+	string::size_type const picnametempl_size = picnametempl.size();
 	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
 		throw wexception
 			("buffer too small (%lu) for image name template of size %lu\n",
@@ -231,7 +244,7 @@ void AnimationImpl::load_graphics() {
 							 image->width(), image->height(), imgwidth, imgheight);
 					//  Get a new AnimFrame.
 					frames_.push_back(image);
-				} catch (const std::exception & e) {
+				} catch (const exception & e) {
 					throw wexception
 						("could not load animation frame %s: %s\n",
 						 filename, e.what());
@@ -258,7 +271,7 @@ void AnimationImpl::load_graphics() {
 								 image->width(), image->height(), imgwidth, imgheight);
 						pcmasks_.push_back(image);
 						break;
-					} catch (const std::exception & e) {
+					} catch (const exception & e) {
 						throw wexception
 							("error while reading \"%s\": %s", filename, e.what());
 					}
@@ -317,6 +330,8 @@ const Image& AnimationImpl::get_frame(uint32_t time) {
 }
 
 
+}  // namespace
+
 
 /*
 ==============================================================================
@@ -326,17 +341,8 @@ AnimationManager IMPLEMENTATION
 ==============================================================================
 */
 
+// NOCOM(#sirver): kill this sucker
 AnimationManager g_anim;
-
-/*
-===============
-Remove all animations
-===============
-*/
-void AnimationManager::flush()
-{
-	m_animations.clear();
-}
 
 /**
  * Read in basic information about the animation.
@@ -424,7 +430,7 @@ foowalk_??_nn.bmp are used.
 */
 void DirAnimations::parse
 	(Widelands::Map_Object_Descr &       b,
-	 const std::string           &       directory,
+	 const string           &       directory,
 	 Profile                     &       prof,
 	 char                  const * const sectnametempl,
 	 Section                     * const defaults)
@@ -468,7 +474,7 @@ void DirAnimations::parse
 
 		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir]);
 
-		std::string const anim_name = sectname;
+		string const anim_name = sectname;
 
 		Section * s = prof.get_section(sectname);
 		if (!s) {

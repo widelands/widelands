@@ -106,15 +106,12 @@ public:
 	ImageCache& images() const {return *image_cache_.get();}
 	SurfaceCache& surfaces() const {return *surface_cache_.get();}
 
-	void flush_animations();
-
 	void save_png(const Image*, StreamWrite*) const;
 
 	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
 
-	void load_animations();
 	void ensure_animation_loaded(uint32_t anim);
 	size_t nr_frames(uint32_t anim = 0);
 	uint32_t get_animation_frametime(uint32_t anim) const;
