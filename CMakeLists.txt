@@ -161,7 +161,6 @@ set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wall -Wextra")
 set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wshadow -Wsign-promo -Wundef -Wunused -Wformat -Wformat-nonliteral -Wformat-security")
 set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op -Wsync-nand -Wtrampolines")
 set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   include(CheckCXXCompilerFlag) #this include should be safe
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
   IF (Compiler_old-style-cast_supported)
@@ -191,9 +190,15 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
       message("===================================================================")
       set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST}") #the space is on purpose!
     ELSE (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
-      set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED}") #the space is on purpose!
+      IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+        set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED}") #the space is on purpose!
+      ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
+        include_directories(SYSTEM path ${Boost_INCLUDE_DIR})
+      ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
     ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
   ENDIF (Compiler_old-style-cast_supported)
+
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)
   IF (Compiler_generic_warnings_supported)
