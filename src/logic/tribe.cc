@@ -98,7 +98,7 @@ Tribe_Descr::Tribe_Descr
 			if (Section * const section = root_conf.get_section("compatibility_wares")) {
 				while (Section::Value const * const v = section->get_next_val()) {
 					log("Compatibility ware \"%s\"=\"%s\" loaded.\n", v->get_name(), v->get_string());
-					m_compatibility_wares[* new std::string(v->get_name())] = * new std::string(v->get_string());
+					m_compatibility_wares[std::string(v->get_name())] = std::string(v->get_string());
 				}
 			}
 
