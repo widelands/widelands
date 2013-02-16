@@ -35,6 +35,9 @@ Songset::~Songset()
 
 	if (m_m)
 		Mix_FreeMusic(m_m);
+
+	if (m_rwops)
+		SDL_FreeRW(m_rwops);
 }
 
 /** Append a song to the end of the songset
@@ -73,7 +76,13 @@ Mix_Music * Songset::get_song()
 	//first, close the previous song and remove it from memory
 	if (m_m) {
 		Mix_FreeMusic(m_m);
-		m_fr.Close();
+		m_m = 0;
+	}
+
+	if (m_rwops) {
+		SDL_FreeRW(m_rwops);
+		m_rwops = 0;
+		m_fr.Close();  //TODO: make sure it's open, because otherwise this is a false assert
 	}
 
 	//then open the new song
@@ -82,7 +91,8 @@ Mix_Music * Songset::get_song()
 	else
 		return 0;
 
-	m_m = Mix_LoadMUS_RW(m_rwops);
+	if (m_rwops)
+		m_m = Mix_LoadMUS_RW(m_rwops);
 
 	if (m_m)
 		log("Sound_Handler: loaded song \"%s\"\n", filename.c_str());
