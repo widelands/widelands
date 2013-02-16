@@ -48,6 +48,7 @@
 
 #include <iostream>
 #include <boost/algorithm/string.hpp>
+#include <boost/scoped_ptr.hpp>
 
 using namespace std;
 
@@ -293,9 +294,11 @@ Tribe_Descr::Tribe_Descr
 			}
 
 			// Register Lua scripts
-			if (g_fs->IsDirectory(path + "scripting"))
+			if (g_fs->IsDirectory(path + "scripting")) {
+				boost::scoped_ptr<FileSystem> sub_fs(&g_fs->MakeSubFileSystem(path));
 				egbase.lua().register_scripts
-					(g_fs->MakeSubFileSystem(path), "tribe_" + tribename);
+					(*sub_fs.get(), "tribe_" + tribename);
+			}
 
 			// Read initializations -- all scripts are initializations currently
 			ScriptContainer & scripts =
