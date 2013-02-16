@@ -417,6 +417,8 @@ private:
 	void recalc_nodecaps_pass1(FCoords);
 	void recalc_nodecaps_pass2(FCoords);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
+	bool is_cycle_connected
+		(const FCoords & start, uint32_t length, const WalkingDir * dirs);
 
 	template<typename functorT>
 		void find_reachable(Area<FCoords>, const CheckStep &, functorT &);

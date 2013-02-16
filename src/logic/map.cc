@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1485,12 +1485,61 @@ void Map::recalc_nodecaps_pass2(FCoords const f)
 				if ((building == BUILDCAPS_BIG) && port)
 					caps |= BUILDCAPS_PORT;
 			}
+
+			//  9) Reduce building size if it would block connectivity
+			if (building == BUILDCAPS_BIG) {
+				static const WalkingDir cycledirs[10] = {
+					WALK_NE, WALK_NE, WALK_NW,
+					WALK_W, WALK_W, WALK_SW, WALK_SW,
+					WALK_SE, WALK_E, WALK_E
+				};
+				if (!is_cycle_connected(br, 10, cycledirs))
+					building = BUILDCAPS_MEDIUM;
+			}
+			{
+				static const WalkingDir cycledirs[6] = {
+					WALK_NE, WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E
+				};
+				if (!is_cycle_connected(br, 6, cycledirs))
+					goto end;
+			}
 			caps |= building;
 		}
 	}
 end: //  9) That's it, store the collected information.
 	f.field->caps = static_cast<NodeCaps>(caps);
 }
+
+/**
+ * We call a cycle on the map simply connected
+ * if the subgraph of the cycle which can be walked on is connected.
+ *
+ * The cycle is described as a \p start point plus
+ * a description of the directions in which to walk from the starting point.
+ * The array \p dirs must have length \p length, where \p length is
+ * the length of the cycle.
+ */
+bool Map::is_cycle_connected
+	(const FCoords & start, uint32_t length, const WalkingDir * dirs)
+{
+	FCoords f = start;
+	bool prev_walkable = start.field->get_caps() & MOVECAPS_WALK;
+	uint32_t alternations = 0;
+
+	for (uint32_t i = 0; i < length; ++i) {
+		f = get_neighbour(f, dirs[i]);
+		const bool walkable = f.field->get_caps() & MOVECAPS_WALK;
+		alternations += walkable != prev_walkable;
+		if (alternations > 2)
+			return false;
+		prev_walkable = walkable;
+	}
+
+	assert(start == f);
+
+	return true;
+}
+
 
 /// \returns true, if Coordinates are in port space list
 bool Map::is_port_space(Coords c) {
