@@ -322,6 +322,10 @@ void Table<void *>::draw(RenderTarget & dst)
 bool Table<void *>::handle_key(bool down, SDL_keysym code)
 {
 	if (down) {
+
+//Will complain about 200+ SDL_ enums not checked if not silenced.
+GCC_DIAG_OFF("-Wswitch-enum")
+CLANG_DIAG_OFF("-Wswitch-enum")
 		switch (code.sym) {
 		case SDLK_UP:
 		case SDLK_KP8:
@@ -336,6 +340,9 @@ bool Table<void *>::handle_key(bool down, SDL_keysym code)
 		default:
 			break; // not handled
 		}
+CLANG_DIAG_ON("-Wswitch-enum")
+GCC_DIAG_ON("-Wswitch-enum")
+
 	}
 
 	return UI::Panel::handle_key(down, code);

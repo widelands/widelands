@@ -223,6 +223,10 @@ bool EditBox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 bool EditBox::handle_key(bool const down, SDL_keysym const code)
 {
 	if (down) {
+
+//Will complain about 200+ SDL_ enums not checked if not silenced.
+GCC_DIAG_OFF("-Wswitch-enum")
+CLANG_DIAG_OFF("-Wswitch-enum")
 		switch (code.sym) {
 		case SDLK_ESCAPE:
 			cancel();
@@ -392,6 +396,9 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 		}
+CLANG_DIAG_ON("-Wswitch-enum")
+GCC_DIAG_ON("-Wswitch-enum")
+
 	}
 
 	return Panel::handle_key(down, code);

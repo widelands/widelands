@@ -20,6 +20,7 @@
 #include "messagebox.h"
 
 #include "button.h"
+#include "compile_diagnostics.h"
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -146,6 +147,9 @@ bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 	if (!down)
 		return false;
 
+//Will complain about 200+ SDL_ enums not checked if not silenced.
+GCC_DIAG_OFF("-Wswitch-enum")
+CLANG_DIAG_OFF("-Wswitch-enum")
 	switch (code.sym)
 	{
 	case SDLK_KP_ENTER:
@@ -160,6 +164,8 @@ bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 	default:
 		return false;
 	}
+CLANG_DIAG_ON("-Wswitch-enum")
+GCC_DIAG_ON("-Wswitch-enum")
 
 	return UI::Panel::handle_key(down, code);
 }

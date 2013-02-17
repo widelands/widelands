@@ -222,6 +222,9 @@ bool Fullscreen_Menu_LoadReplay::handle_key(bool down, SDL_keysym code)
 	if (!down)
 		return false;
 
+//Will complain about 200+ SDL_ enums not checked if not silenced.
+GCC_DIAG_OFF("-Wswitch-enum")
+CLANG_DIAG_OFF("-Wswitch-enum")
 	switch (code.sym)
 	{
 	case SDLK_KP2:
@@ -253,6 +256,8 @@ bool Fullscreen_Menu_LoadReplay::handle_key(bool down, SDL_keysym code)
 	default:
 		break; // not handled
 	}
+CLANG_DIAG_ON("-Wswitch-enum")
+GCC_DIAG_ON("-Wswitch-enum")
 
 	return Fullscreen_Menu_Base::handle_key(down, code);
 }

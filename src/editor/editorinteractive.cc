@@ -333,8 +333,12 @@ void Editor_Interactive::set_sel_radius_and_update_menu(uint32_t const val) {
 bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 	bool handled = Interactive_Base::handle_key(down, code);
 
-	if (down)
+	if (down) {
 		// only on down events
+
+//Will complain about 200+ SDL_ enums not checked if not silenced.
+GCC_DIAG_OFF("-Wswitch-enum")
+CLANG_DIAG_OFF("-Wswitch-enum")
 		switch (code.sym) {
 			// Sel radius
 		case SDLK_1:
@@ -463,8 +467,15 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 			break;
 
 		}
-	else
+CLANG_DIAG_ON("-Wswitch-enum")
+GCC_DIAG_ON("-Wswitch-enum")
+
+	} else {
 		// key up events
+
+//Will complain about 200+ SDL_ enums not checked if not silenced.
+GCC_DIAG_OFF("-Wswitch-enum")
+CLANG_DIAG_OFF("-Wswitch-enum")
 		switch (code.sym) {
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
@@ -478,7 +489,10 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 		default:
 			break;
 		}
+CLANG_DIAG_ON("-Wswitch-enum")
+GCC_DIAG_ON("-Wswitch-enum")
 
+	}
 	return handled;
 }
 

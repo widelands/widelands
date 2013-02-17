@@ -478,6 +478,10 @@ bool BaseListselect::handle_mousemove(Uint8, int32_t, int32_t y, int32_t, int32_
 bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 	if (down) {
 		uint32_t selected_idx;
+
+//Will complain about 200+ SDL_ enums not checked if not silenced.
+GCC_DIAG_OFF("-Wswitch-enum")
+CLANG_DIAG_OFF("-Wswitch-enum")
 		switch (code.sym) {
 		case SDLK_KP2:
 			if (code.mod & KMOD_NUM)
@@ -509,6 +513,9 @@ bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 		default:
 			break; // not handled
 		}
+CLANG_DIAG_ON("-Wswitch-enum")
+GCC_DIAG_ON("-Wswitch-enum")
+
 	}
 
 	return UI::Panel::handle_key(down, code);
