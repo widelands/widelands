@@ -72,7 +72,6 @@ public:
 
 	// NOCOM(#sirver): should only take a color
 	void drawanim(const Point& dst, uint32_t animation, uint32_t time, Widelands::Player const * = 0);
-	void drawstatic(const Point& dst, uint32_t animation, Widelands::Player const * = 0);
 	void drawanimrect
 		(const Point& dst, uint32_t animation, uint32_t time, Widelands::Player const *, const Rect& srcrc);
 

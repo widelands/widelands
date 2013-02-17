@@ -27,7 +27,6 @@
 
 #include "animation.h"
 #include "graphic.h"
-#include "image_transformations.h"
 #include "surface.h"
 
 #include "rendertarget.h"
@@ -289,23 +288,6 @@ void RenderTarget::drawanim
 	//  the effect (see Sound_Handler::stereo_position).
 	// NOCOM(#sirver): should take 'time'
 	// data.trigger_soundfx(time, 128);
-}
-
-void RenderTarget::drawstatic
-	(const Point& dst, uint32_t animation, const Player * player)
-{
-	// NOCOM(#sirver): get_frame must disappear from here if possible
-	const Animation& anim = g_gr->animations().get_animation(animation);
-
-	// Get the frame and its data
-	const Image& frame = player ? anim.get_frame(0, player->get_playercolor()) : anim.get_frame(0);
-	const Image* dark_frame = ImageTransformations::change_luminosity(&frame, 1.22, true);
-
-	Point dstpt = dst - Point(frame.width() / 2, frame.height() / 2);
-	Rect srcrc(Point(0, 0), frame.width(), frame.height());
-
-	to_surface_geometry(&dstpt, &srcrc);
-	m_surface->blit(dstpt, dark_frame->surface(), srcrc);
 }
 
 /**

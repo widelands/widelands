@@ -21,6 +21,7 @@
 #include "game_debug_ui.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "interactive_player.h"
 #include "logic/dismantlesite.h"
@@ -111,10 +112,10 @@ void Building_Window::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
-	dst.drawstatic
-			(Point(get_inner_w() / 2, get_inner_h() / 2),
-			 building().get_ui_anim(),
-			 &building().owner());
+	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
+
+	const Image* dark_frame = ImageTransformations::change_luminosity(&anim.get_frame(0), 1.22, true);
+	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, CM_Normal, UI::Align_Center);
 }
 
 /*
