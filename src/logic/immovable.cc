@@ -527,7 +527,7 @@ void Immovable::draw_construction
 
 	const Animation& anim = g_gr->animations().get_animation(m_anim);
 	const size_t nr_frames = anim.nr_frames();
-	uint32_t frametime = FRAME_LENGTH; // // NOCOM(#sirver): fix this g_gr->animations().get_animation(m_anim).frametime;
+	uint32_t frametime = g_gr->animations().get_animation(m_anim).frametime();
 	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
 	const size_t current_frame = done / units_per_frame;
 	const uint16_t curw = anim.width();

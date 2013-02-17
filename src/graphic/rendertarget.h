@@ -52,10 +52,9 @@ struct Player;
 */
 class RenderTarget {
 public:
-	// NOCOM(#sirver): const checks here
 	RenderTarget(Surface*);
 	void set_window(const Rect &rc, const Point& ofs);
-	bool enter_window(const Rect &rc, Rect * previous, Point* prevofs);
+	bool enter_window(const Rect &rc, Rect* previous, Point* prevofs);
 
 	int32_t width() const;
 	int32_t height() const;
@@ -70,14 +69,13 @@ public:
 	void blitrect(const Point& dst, const Image* image, const Rect& src, Composite cm = CM_Normal);
 	void tile(const Rect&, const Image* image, const Point& ofs, Composite cm = CM_Normal);
 
-	// NOCOM(#sirver): should only take a color
-	void drawanim(const Point& dst, uint32_t animation, uint32_t time, Widelands::Player const * = 0);
+	void drawanim(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player* = 0);
 	void drawanimrect
-		(const Point& dst, uint32_t animation, uint32_t time, Widelands::Player const *, const Rect& srcrc);
+		(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player*, const Rect& srcrc);
 
 	void reset();
 
-	Surface* get_surface() {return m_surface;}
+	Surface* get_surface() const {return m_surface;}
 	const Rect& get_rect() const {return m_rect;}
 	const Point& get_offset() const {return m_offset;}
 

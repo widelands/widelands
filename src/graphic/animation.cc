@@ -19,7 +19,6 @@
 
 // NOCOM(#sirver): check for ME also in conf files and therelike.
 
-// NOCOM(#sirver): check and order includes
 #include "animation.h"
 #include "surface.h"
 #include "graphic.h"
@@ -49,6 +48,7 @@
 #include "wexception.h"
 
 #include "helper.h"
+// NOCOM(#sirver): check and order includes
 
 #include <cstdio>
 
@@ -98,23 +98,22 @@ private:
 class AnimationImpl : public Animation {
 public:
 	virtual ~AnimationImpl() {}
-	// NOCOM(#sirver): ugly!
-	AnimationImpl
-		(const string& directory, Section & s);
+	AnimationImpl(const string& directory, Section & s);
 
 	// Implements Animation.
-	virtual uint16_t width() const {return get_frame(0).width();}
-	virtual uint16_t height() const {return get_frame(0).height();}
-	virtual const Point& hotspot() const {return hotspot_;};
+	virtual uint16_t width() const {return frames_[0]->width();}
+	virtual uint16_t height() const {return frames_[0]->height();}
 	virtual uint16_t nr_frames() const {return frames_.size();}
-	virtual const Image& get_frame(uint32_t time, const RGBColor& playercolor) const {
-		return get_frame(time); // NOCOM(#sirver): todo: support playercolors again
-	}
-	virtual const Image& get_frame(uint32_t time) const;
-	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
+	virtual uint32_t frametime() const {return frametime_;}
+	virtual const Point& hotspot() const {return hotspot_;};
+	virtual const Image& representative_image(const RGBColor& clr) const {return get_frame(0, clr);}
 	void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const;
+	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
 
 private:
+	const Image& get_frame(uint32_t time, const RGBColor& playercolor) const;
+	const Image& get_frame(uint32_t time) const;
+
 	uint32_t frametime_;
 	Point hotspot_;
 	bool hasplrclrs_;
@@ -122,8 +121,7 @@ private:
 	vector<const Image*> frames_;
 	vector<const Image*> pcmasks_;
 
-	/** mapping of soundeffect name to frame number, indexed by frame number
-	 * \sa AnimationManager::trigger_sfx */
+	/// mapping of soundeffect name to frame number, indexed by frame number .
 	map<uint32_t, string> sfx_cues;
 };
 
@@ -168,8 +166,6 @@ AnimationImpl::AnimationImpl
 
 	hotspot_ = s.get_Point("hotspot");
 
-	ImageCache* image_cache = &g_gr->images();  // NOCOM(#sirver): ugly
-
 	// NOCOM(#sirver): check text
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
@@ -205,7 +201,7 @@ AnimationImpl::AnimationImpl
 			break;
 
 		try {
-			const Image* image = image_cache->get(filename);
+			const Image* image = g_gr->images().get(filename);
 			if (frames_.size() && (frames_[0]->width() != image->width() or frames_[0]->height() != image->height()))
 				throw wexception
 					("wrong size: (%u, %u), should be (%u, %u) like the "
@@ -226,7 +222,7 @@ AnimationImpl::AnimationImpl
 
 			if (g_fs->FileExists(pc_filename)) {
 				try {
-					const Image* image = image_cache->get(pc_filename);
+					const Image* image = g_gr->images().get(pc_filename);
 					if (frames_[0]->width() != image->width() or frames_[0]->height() != image->height())
 						throw wexception
 							("playercolor mask has wrong size: (%u, %u), should "
@@ -256,20 +252,15 @@ AnimationImpl::AnimationImpl
 /// synchronized to an animation, for example when a geologist is shown
 /// hammering on rocks.
 ///
-/// \par framenumber  The framenumber currently on display.
-///
-/// \note uint32_t animation is an ID number that starts at 1, not a vector
-///       index that starts at 0 !
+/// \par time  The time currently on display.
 void AnimationImpl::trigger_soundfx
-	(uint32_t framenumber, uint32_t stereo_position) const
-{
-	const map<uint32_t, string>::const_iterator sfx_cue =
-		sfx_cues.find(framenumber);
+	(uint32_t time, uint32_t stereo_position) const {
+	uint32_t const framenumber = time / frametime_ % nr_frames();
+	const map<uint32_t, string>::const_iterator sfx_cue = sfx_cues.find(framenumber);
 	if (sfx_cue != sfx_cues.end())
 		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
 }
 
-// NOCOM(#sirver): ignores hotspot (for clipping reasons).
 void AnimationImpl::blit(uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) const {
 	assert(target);
 
@@ -277,21 +268,18 @@ void AnimationImpl::blit(uint32_t time, const Point& dst, const Rect& srcrc, con
 	target->blit(dst, frame.surface(), srcrc);
 }
 
-// NOCOM(#sirver): // NOCOM(#sirver): what
-// const Image& AnimationGfx::get_frame(uint32_t i, const RGBColor& playercolor) {
-	// assert(i < nr_frames());
+const Image& AnimationImpl::get_frame(uint32_t time, const RGBColor& playercolor) const {
+	const Image& original = get_frame(time);
+	if (!hasplrclrs_)
+		return original;
 
-	// const Image& original = get_frame(i);
-	// if (!hasplrclrs_)
-		// return original;
-
-	// assert(frames_.size() == pcmasks_.size());
-
-	// return *ImageTransformations::player_colored(playercolor, &original, pcmasks_[i]);
-// }
+	assert(frames_.size() == pcmasks_.size());
+	const uint32_t framenumber = time / frametime_ % nr_frames();
+	return *ImageTransformations::player_colored(playercolor, &original, pcmasks_[framenumber]);
+}
 
 const Image& AnimationImpl::get_frame(uint32_t time) const {
-	uint32_t const framenumber = time / frametime_ % nr_frames();
+	const uint32_t framenumber = time / frametime_ % nr_frames();
 	assert(framenumber < nr_frames());
 	return *frames_[framenumber];
 }
@@ -442,7 +430,7 @@ void DirAnimations::parse
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir]);
-		s->set_name(sectname); // NOCOM(#sirver): what
+		s->set_name(sectname); // NOCOM(#sirver): comment
 		m_animations[dir] = g_gr->animations().load(directory, *s);
 		b.add_animation(anim_name.c_str(), m_animations[dir]);
 	}

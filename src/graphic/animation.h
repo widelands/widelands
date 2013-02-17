@@ -20,8 +20,6 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include <cstring>
-#include <map>
 #include <string>
 #include <vector>
 
@@ -30,26 +28,53 @@
 #include "point.h"
 #include "rect.h"
 
-// NOCOM(#sirver): check includes and decls
 class Image;
-struct RGBColor;
 class Surface;
+struct RGBColor;
 struct Section;
 
-// NOCOM(#sirver): docu
+/**
+ * Representation of an Animation in the game. An animation is a looping set of
+ * image frames and their corresponding sound effects. This class makes no
+ * guarantees on how the graphics are represented in memory - but knows how to
+ * render itself at a given time to the given place.
+ *
+ * The dimensions of an animation is constant and can not change from frame to
+ * frame.
+ */
 class Animation : boost::noncopyable {
 public:
 	Animation() {}
 	virtual ~Animation() {}
 
+	/// The dimensions of this animation.
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
-	virtual const Point& hotspot() const = 0;
+
+	/// The number of animation frames of this animation.
 	virtual uint16_t nr_frames() const = 0;
-	virtual const Image& get_frame(uint32_t time, const RGBColor& playercolor) const = 0;
-	virtual const Image& get_frame(uint32_t time) const = 0;
-	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const = 0;
+
+	/// The number of milliseconds each frame will be displayed.
+	virtual uint32_t frametime() const = 0;
+
+	/// The hotspot of this animation. Note that this is ignored when blitting,
+	/// so the caller has to adjust for the hotspot himself.
+	virtual const Point& hotspot() const = 0;
+
+	/// An image frame that shows a singular animation frame. This can be used in
+	/// the UI (e.g. buildingwindow to represent this image.
+	virtual const Image& representative_image(const RGBColor& clr) const = 0;
+
+	/// Blit the animation frame that should be displayed at the given time index
+	/// so that the given point is at the top left of the frame. Srcrc defines
+	/// the part of the animation that should be blitted. The 'clr' is the player
+	/// color used for blitting - the parameter can be NULL in which case the
+	/// neutral image will be blitted. The Surface is the target for the blit
+	/// operation and must be non-null.
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;
+
+	/// Play the sound effect associated with this animation at the given time.
+	virtual void trigger_soundfx(uint32_t time, uint32_t stereo_position) const = 0;
 };
 
 /**

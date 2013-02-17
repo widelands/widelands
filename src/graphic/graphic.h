@@ -21,7 +21,6 @@
 #define GRAPHIC_H
 
 #include <vector>
-#include <map>
 
 #include <SDL.h>
 #include <boost/scoped_ptr.hpp>
@@ -32,16 +31,11 @@
 
 #define MAX_RECTS 20
 
-namespace UI {struct ProgressWindow;}
-
-class Animation;  // // NOCOM(#sirver): should not be here
 class AnimationManager;
 class ImageLoaderImpl;
 class RenderTarget;
-class Screen;
 class Surface;
 class SurfaceCache;
-struct Road_Textures;
 struct SDL_Surface;
 struct StreamWrite;
 struct Texture;

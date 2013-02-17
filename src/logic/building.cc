@@ -916,22 +916,22 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const std::string & picnametempl = ""; // NOCOM(#sirver): fix again g_gr->animations().get_animation(descr().get_ui_anim()).picnametempl;
+	const std::string& img = g_gr->animations().get_animation
+		(descr().get_ui_anim()).representative_image(owner().get_playercolor()).hash();
 	std::string rt_description;
 	rt_description.reserve
-		(strlen("<rt image=") + picnametempl.size() + 1 +
+		(strlen("<rt image=") + img.size() + 1 +
 		 strlen("<p font-size=14 font-face=DejaVuSerif></p>") +
 		 description.size() +
 		 strlen("</rt>"));
 	rt_description  = "<rt image=";
-	rt_description += picnametempl;
+	rt_description += img;
 	{
 		std::string::iterator it = rt_description.end() - 1;
 		for (; it != rt_description.begin() and *it != '?'; --it) {}
 		for (;                                  *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description += ".png";
 	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
 	rt_description += description;
 	rt_description += "</p></rt>";

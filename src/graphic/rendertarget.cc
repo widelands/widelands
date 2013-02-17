@@ -274,20 +274,20 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
  * What if the game runs very slowly or very quickly?
  */
 void RenderTarget::drawanim
-	(const Point& dst, uint32_t animation, uint32_t time, const Player * player)
+	(const Point& dst, uint32_t animation, uint32_t time, const Player* player)
 {
 	const Animation& anim = g_gr->animations().get_animation(animation);
 
 	Point dstpt = dst - anim.hotspot();
-	Rect srcrc(Point(0, 0), anim.width(), anim.height());
 
+	Rect srcrc(Point(0, 0), anim.width(), anim.height());
 	to_surface_geometry(&dstpt, &srcrc);
+
 	anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
-	// NOCOM(#sirver): should take 'time'
-	// data.trigger_soundfx(time, 128);
+	anim.trigger_soundfx(time, 128);
 }
 
 /**
@@ -298,16 +298,13 @@ void RenderTarget::drawanimrect
 {
 	const Animation& anim = g_gr->animations().get_animation(animation);
 
-	// Get the frame and its data
-	const Image& frame = player ? anim.get_frame(time, player->get_playercolor())
-		: anim.get_frame(time);
-
 	Point dstpt = dst - anim.hotspot();
 	dstpt += gsrcrc;
 
 	Rect srcrc(gsrcrc);
 	to_surface_geometry(&dstpt, &srcrc);
-	m_surface->blit(dstpt, frame.surface(), srcrc);
+
+	anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 }
 
 /**
@@ -369,7 +366,6 @@ bool RenderTarget::clip(Rect & r) const
 /**
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
-// NOCOM(#sirver): only do geometric clipping here, blit in original calls
 void RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 {
 	assert(0 <= srcrc->x);
