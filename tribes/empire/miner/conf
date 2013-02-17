@@ -9,16 +9,13 @@ pick=1
 [idle]
 pics=idle_??.png
 hotspot=3 23
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=9 24
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=7 24
-playercolor=true
 fps=10

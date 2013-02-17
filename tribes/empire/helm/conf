@@ -7,5 +7,4 @@ preciousness=2
 
 [idle]
 pics=idle_??.png
-playercolor=true
 hotspot=5 10

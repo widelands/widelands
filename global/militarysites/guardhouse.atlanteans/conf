@@ -7,4 +7,3 @@ buildable=no
 [idle]
 pics=../../../tribes/atlanteans/guardhouse/guardhouse_i_??.png
 hotspot=35 42
-playercolor=true

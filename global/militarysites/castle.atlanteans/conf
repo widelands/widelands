@@ -7,4 +7,3 @@ buildable=no
 [idle]
 pics=../../../tribes/atlanteans/castle/castle_i_??.png
 hotspot=92 90
-playercolor=true

@@ -14,4 +14,3 @@ transform=bob tribe:ship
 [idle]
 pics=build_??.png
 hotspot=115 82
-playercolor=true

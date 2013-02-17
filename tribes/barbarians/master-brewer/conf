@@ -3,16 +3,13 @@ help=_Produces the finest ales to keep warriors strong and happy in training.
 [idle]
 pics=idle_??.png
 hotspot=8 26
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=15 26
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=11 24
-playercolor=true
 fps=10

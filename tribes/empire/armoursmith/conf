@@ -7,16 +7,13 @@ hammer=1
 [idle]
 pics=idle_??.png
 hotspot=8 24
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=8 24
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=8 24
-playercolor=true
 fps=10

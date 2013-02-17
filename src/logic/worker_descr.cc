@@ -92,14 +92,16 @@ Worker_Descr::Worker_Descr
 	m_walk_anims.parse
 		(*this, directory, prof, "walk_??", prof.get_section("walk"));
 
-	//  Soldiers have no walkload.
-	if (not global_s.has_val("max_hp_level"))
+	// Some workers have no workload. If this is the case, do not try to
+	// load it.
+	if (prof.get_section("walkload")) {
 		m_walkload_anims.parse
 			(*this,
 			 directory,
 			 prof,
 			 "walkload_??",
 			 prof.get_section("walkload"));
+	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
 		g_sound_handler.load_fx(directory, v->get_string());

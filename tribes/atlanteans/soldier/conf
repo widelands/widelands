@@ -51,70 +51,58 @@ carrier=1
 pics=idle_??.png
 hotspot=10 36
 fps=5
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=20 34
 fps=10
-playercolor=true
 
 [atk_ok_e]
 pics=atk_ok_e_??.png
 hotspot=36 40
 fps=10
-playercolor=true
 
 [atk_fail_e]
 pics=atk_fail_e_??.png
 hotspot=36 40
 fps=10
-playercolor=true
 
 [eva_ok_e]
 pics=eva_ok_e_??.png
 hotspot=36 40
 fps=20
-playercolor=true
 
 [eva_fail_e]
 pics=eva_fail_e_??.png
 hotspot=36 40
 fps=10
-playercolor=true
 
 [atk_ok_w]
 pics=atk_ok_w_??.png
 hotspot=36 40
 fps=10
-playercolor=true
 
 [atk_fail_w]
 pics=atk_fail_w_??.png
 hotspot=36 40
 fps=10
-playercolor=true
 
 [eva_ok_w]
 pics=eva_ok_w_??.png
 hotspot=36 40
 fps=20
-playercolor=true
 
 [eva_fail_w]
 pics=eva_fail_w_??.png
 hotspot=36 40
 fps=10
-playercolor=true
 
 [die_w]
 pics=die_??.png
 hotspot=10 36
 fps=10
-playercolor=true
 
 [die_e]
 pics=die_??.png
 hotspot=10 36
 fps=10
-playercolor=true

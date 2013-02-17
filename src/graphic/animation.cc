@@ -80,7 +80,8 @@ private:
 };
 
 NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
-		: frametime_(FRAME_LENGTH) {
+		: frametime_(FRAME_LENGTH),
+		  hasplrclrs_(false) {
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
@@ -104,8 +105,6 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 		}
 		sfx_cues[frame_number] = parameters;
 	}
-
-	hasplrclrs_ = s.get_bool("playercolor", false);
 
 	int32_t const fps = s.get_int("fps");
 	if (fps < 0)
@@ -145,26 +144,18 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 						 image->width(), image->height(), frames_[0]->width(), frames_[0]->height());
 		frames_.push_back(image);
 
-		// NOCOM(#sirver): kill this conditional
-		if (hasplrclrs_) {
-			//TODO Do not load playercolor mask as opengl texture or use it as
-			//     opengl texture.
-			string pc_filename = filename_wo_ext + "_pc.png";
-
-			if (g_fs->FileExists(pc_filename)) {
-				try {
-					const Image* pc_image = g_gr->images().get(pc_filename);
-					if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height())
-						throw wexception
-							("playercolor mask has wrong size: (%u, %u), should "
-							 "be (%u, %u) like the animation frame",
-							 pc_image->width(), pc_image->height(), frames_[0]->width(), frames_[0]->height());
-					pcmasks_.push_back(pc_image);
-				} catch (const exception & e) {
-					throw wexception
-						("error while reading \"%s\": %s", pc_filename.c_str(), e.what());
-				}
-			}
+		//TODO Do not load playercolor mask as opengl texture or use it as
+		//     opengl texture.
+		const string pc_filename = filename_wo_ext + "_pc.png";
+		if (g_fs->FileExists(pc_filename)) {
+			hasplrclrs_ = true;
+			const Image* pc_image = g_gr->images().get(pc_filename);
+			if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height())
+				throw wexception
+					("playercolor mask has wrong size: (%u, %u), should "
+					 "be (%u, %u) like the animation frame",
+					 pc_image->width(), pc_image->height(), frames_[0]->width(), frames_[0]->height());
+			pcmasks_.push_back(pc_image);
 		}
 	}
 

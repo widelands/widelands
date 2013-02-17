@@ -22,4 +22,3 @@ worker=harvest
 [idle]
 pics=woodcutter_i_??.png
 hotspot=37 44
-playercolor=true

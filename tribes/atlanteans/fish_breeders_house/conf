@@ -23,4 +23,3 @@ worker=breed
 [idle]
 pics=fish_breeder_i_??.png  # ???
 hotspot=34 42
-playercolor=true

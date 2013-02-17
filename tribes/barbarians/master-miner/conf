@@ -3,16 +3,13 @@ help=_Works deep in the mines to obtain coal, iron or gold.
 [idle]
 pics=idle_??.png
 hotspot=3 24
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=9 25
-playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=6 23
-playercolor=true
 fps=10
