@@ -18,87 +18,41 @@
  */
 
 // NOCOM(#sirver): check for ME also in conf files and therelike.
-
-#include "animation.h"
-#include "surface.h"
-#include "graphic.h"
 #include <cassert>
 
-#include <SDL.h>
 #include <boost/algorithm/string/replace.hpp>
-#include <boost/foreach.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
+#include "constants.h"
+#include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
-#include "wexception.h"
-
-#include "animation.h"
-#include "image.h"
-#include "image_cache.h"
-#include "image_transformations.h"
-
-#include "diranimations.h"
-#include "logic/bob.h"
-#include "constants.h"
-#include "i18n.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wexception.h"
 
-#include "helper.h"
-// NOCOM(#sirver): check and order includes
+#include "diranimations.h"
+#include "graphic.h"
+#include "image.h"
+#include "image_cache.h"
+#include "image_transformations.h"
+#include "logic/instances.h"  // For Map_Object_Descr.
+#include "surface.h"
 
-#include <cstdio>
+#include "animation.h"
 
 using namespace std;
 
 
 namespace  {
 
-// NOCOM(#sirver): this should not be here
-// // NOCOM(#sirver): documentation
-class NumberGlob : boost::noncopyable {
+/**
+ * Implements the Animation inferface for an animation that is unpacked on disk, that
+ * is every frame and every pc color frame is an singular file on disk.
+ */
+class NonPackedAnimation : public Animation {
 public:
-   typedef uint32_t type;
-	NumberGlob(const string& pictmp) : templ_(pictmp), cur_(0) {
-		int nchars = std::count(pictmp.begin(), pictmp.end(), '?');
-		fmtstr_ = "%0" + boost::lexical_cast<string>(nchars) + "i";
-
-		max_ = 1;
-		for (int i = 0; i < nchars; ++i) {
-			max_ *= 10;
-			replstr_ += "?";
-		}
-		max_ -= 1;
-	}
-
-	bool next(string* s) {
-		if (cur_ > max_)
-			return false;
-
-		if (max_) {
-			*s = boost::replace_last_copy(templ_, replstr_, (boost::format(fmtstr_) % cur_).str());
-		} else {
-			*s = templ_;
-		}
-		++cur_;
-		return true;
-	}
-
-private:
-	string templ_;
-	string fmtstr_;
-	string replstr_;
-	uint32_t cur_;
-	uint32_t max_;
-};
-
-class AnimationImpl : public Animation {
-public:
-	virtual ~AnimationImpl() {}
-	AnimationImpl(const string& directory, Section & s);
+	virtual ~NonPackedAnimation() {}
+	NonPackedAnimation(const string& directory, Section & s);
 
 	// Implements Animation.
 	virtual uint16_t width() const {return frames_[0]->width();}
@@ -106,13 +60,13 @@ public:
 	virtual uint16_t nr_frames() const {return frames_.size();}
 	virtual uint32_t frametime() const {return frametime_;}
 	virtual const Point& hotspot() const {return hotspot_;};
-	virtual const Image& representative_image(const RGBColor& clr) const {return get_frame(0, clr);}
+	virtual const Image& representative_image(const RGBColor& clr) const {return get_frame(0, &clr);}
 	void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const;
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
 
 private:
-	const Image& get_frame(uint32_t time, const RGBColor& playercolor) const;
-	const Image& get_frame(uint32_t time) const;
+	// Returns the given frame image with the given clr (if not NULL).
+	const Image& get_frame(uint32_t time, const RGBColor* playercolor = NULL) const;
 
 	uint32_t frametime_;
 	Point hotspot_;
@@ -125,11 +79,8 @@ private:
 	map<uint32_t, string> sfx_cues;
 };
 
-AnimationImpl::AnimationImpl
-	(const string& directory,
-	 Section& s)
-	: frametime_(FRAME_LENGTH) {
-
+NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
+		: frametime_(FRAME_LENGTH) {
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
@@ -137,9 +88,7 @@ AnimationImpl::AnimationImpl
 		uint32_t const frame_number = value;
 		try {
 			if (endp == parameters or frame_number != value)
-				throw wexception
-					(_("expected %s but found \"%s\""),
-					 _("frame number"), parameters);
+				throw wexception("expected %s but found \"%s\"", "frame number", parameters);
 			parameters = endp;
 			force_skip(parameters);
 			g_sound_handler.load_fx(directory, parameters);
@@ -166,21 +115,11 @@ AnimationImpl::AnimationImpl
 
 	hotspot_ = s.get_Point("hotspot");
 
-	// NOCOM(#sirver): check text
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
-	//  replaced with "idle_00". Then the code looks if there is a file with
-	//  that name + any extension in the list above. Assuming that it finds a
-	//  file, it increments the number so that the filename is "idle_01" and
-	//  looks for a file with that name + extension, and so on until it can not
-	//  find any file. Then it is assumed that there are no more frames in the
-	//  animation.
-
-	//  Allocate a buffer for the filename. It must be large enough to hold the
-	//  image name template, the "_pc" (3 characters) part for playercolor
-	//  masks, the extension (4 characters including the dot) and the null
-	//  terminator. Copy the image name template into the buffer.
-	// NOCOM(#sirver): this should go easier.
+	//  replaced with "idle_00". Then the code looks if there is a PNG with that
+	//  name, increments the number and continues . on until it can not find any
+	//  file. Then it is assumed that there are no more frames in the animation.
 	string picnametempl;
 	if (char const * const pics = s.get_string("pics")) {
 		picnametempl = directory + pics;
@@ -192,29 +131,21 @@ AnimationImpl::AnimationImpl
 
 	NumberGlob glob(picnametempl);
 	string filename_wo_ext;
-	while(glob.next(&filename_wo_ext)) {
-		string filename = filename_wo_ext + ".png";
-		log("#sirver filename: %s\n", filename.c_str());
-		// Load the base image
-		// strcpy(after_basename, extensions[extnr]);
+	while (glob.next(&filename_wo_ext)) {
+		const string filename = filename_wo_ext + ".png";
 		if (!g_fs->FileExists(filename))
 			break;
 
-		try {
-			const Image* image = g_gr->images().get(filename);
-			if (frames_.size() && (frames_[0]->width() != image->width() or frames_[0]->height() != image->height()))
-				throw wexception
-					("wrong size: (%u, %u), should be (%u, %u) like the "
-					 "first frame",
-					 image->width(), image->height(), frames_[0]->width(), frames_[0]->height());
-			//  Get a new AnimFrame.
-			frames_.push_back(image);
-		} catch (const exception & e) {
-			throw wexception
-				("could not load animation frame %s: %s\n",
-				 filename.c_str(), e.what());
-		}
+		const Image* image = g_gr->images().get(filename);
+		if
+			(frames_.size() &&
+			 (frames_[0]->width() != image->width() or frames_[0]->height() != image->height()))
+					throw wexception
+						("wrong size: (%u, %u), should be (%u, %u) like the first frame",
+						 image->width(), image->height(), frames_[0]->width(), frames_[0]->height());
+		frames_.push_back(image);
 
+		// NOCOM(#sirver): kill this conditional
 		if (hasplrclrs_) {
 			//TODO Do not load playercolor mask as opengl texture or use it as
 			//     opengl texture.
@@ -222,13 +153,13 @@ AnimationImpl::AnimationImpl
 
 			if (g_fs->FileExists(pc_filename)) {
 				try {
-					const Image* image = g_gr->images().get(pc_filename);
-					if (frames_[0]->width() != image->width() or frames_[0]->height() != image->height())
+					const Image* pc_image = g_gr->images().get(pc_filename);
+					if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height())
 						throw wexception
 							("playercolor mask has wrong size: (%u, %u), should "
 							 "be (%u, %u) like the animation frame",
-							 image->width(), image->height(), frames_[0]->width(), frames_[0]->height());
-					pcmasks_.push_back(image);
+							 pc_image->width(), pc_image->height(), frames_[0]->width(), frames_[0]->height());
+					pcmasks_.push_back(pc_image);
 				} catch (const exception & e) {
 					throw wexception
 						("error while reading \"%s\": %s", pc_filename.c_str(), e.what());
@@ -238,22 +169,15 @@ AnimationImpl::AnimationImpl
 	}
 
 	if (frames_.empty())
-		throw wexception
-			("animation %s has no frames", picnametempl.c_str());
+		throw wexception("animation %s has no frames", picnametempl.c_str());
 
-	if (pcmasks_.size() and pcmasks_.size() < frames_.size())
+	if (pcmasks_.size() and pcmasks_.size() != frames_.size())
 		throw wexception
-			("animation has %"PRIuS" frames but playercolor mask has only %"PRIuS" frames",
+			("animation has %"PRIuS" frames but playercolor mask has %"PRIuS" frames",
 			 frames_.size(), pcmasks_.size());
 }
 
-/// Find out if there is a sound effect registered for the animation's frame
-/// and try to play it. This is used to have sound effects that are tightly
-/// synchronized to an animation, for example when a geologist is shown
-/// hammering on rocks.
-///
-/// \par time  The time currently on display.
-void AnimationImpl::trigger_soundfx
+void NonPackedAnimation::trigger_soundfx
 	(uint32_t time, uint32_t stereo_position) const {
 	uint32_t const framenumber = time / frametime_ % nr_frames();
 	const map<uint32_t, string>::const_iterator sfx_cue = sfx_cues.find(framenumber);
@@ -261,29 +185,26 @@ void AnimationImpl::trigger_soundfx
 		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
 }
 
-void AnimationImpl::blit(uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) const {
+void NonPackedAnimation::blit
+	(uint32_t time, const Point& dst, const Rect& srcrc, const RGBColor* clr, Surface* target) const
+{
 	assert(target);
 
-	const Image& frame = clr ? get_frame(time, *clr) : get_frame(time);
+	const Image& frame = get_frame(time, clr);
 	target->blit(dst, frame.surface(), srcrc);
 }
 
-const Image& AnimationImpl::get_frame(uint32_t time, const RGBColor& playercolor) const {
-	const Image& original = get_frame(time);
-	if (!hasplrclrs_)
-		return original;
-
-	assert(frames_.size() == pcmasks_.size());
-	const uint32_t framenumber = time / frametime_ % nr_frames();
-	return *ImageTransformations::player_colored(playercolor, &original, pcmasks_[framenumber]);
-}
-
-const Image& AnimationImpl::get_frame(uint32_t time) const {
+const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {
 	const uint32_t framenumber = time / frametime_ % nr_frames();
 	assert(framenumber < nr_frames());
-	return *frames_[framenumber];
-}
+	const Image* original = frames_[framenumber];
 
+	if (!hasplrclrs_ || !playercolor)
+		return *original;
+
+	assert(frames_.size() == pcmasks_.size());
+	return *ImageTransformations::player_colored(*playercolor, original, pcmasks_[framenumber]);
+}
 
 }  // namespace
 
@@ -296,36 +217,13 @@ AnimationManager IMPLEMENTATION
 ==============================================================================
 */
 
-/**
- * Loads an animation, graphics sound and everything.
- *
- * The animation resides in the given directory and is described by the given
- * section.
- *
- * This function looks for image files in this order:
- *    key 'pics', if present
- *    picnametempl, if not null
- *    \<sectionname\>_??.png
- *
- * \param directory     which directory to look in for image and sound files
- * \param s             conffile section to search for data on this animation
- * \param picnametempl  a template for the image names
-*/
-uint32_t AnimationManager::load(const string& directory, Section & s)
-	 // char       const *       picnametempl) // NOCOM(#sirver): what
-{
-	m_animations.push_back(new AnimationImpl(directory, s));
+uint32_t AnimationManager::load(const string& directory, Section & s) {
+	m_animations.push_back(new NonPackedAnimation(directory, s));
 	uint32_t const id = m_animations.size();
 
 	return id;
 }
 
-
-/*
-===============
-Return AnimationData for this animation or throws if this id is unknown.
-===============
-*/
 const Animation& AnimationManager::get_animation(uint32_t id) const
 {
 	if (!id || id > m_animations.size())
@@ -371,6 +269,8 @@ If they don't exist, the data is taken from defaults and the bitmaps
 foowalk_??_nn.png are used.
 ===============
 */
+// NOCOM(#sirver): eventually kill this method as well - it seems unnecessary when
+// so much data has to be given for each walk animation anyway.
 void DirAnimations::parse
 	(Widelands::Map_Object_Descr & b,
 	 const string & directory,
@@ -430,7 +330,10 @@ void DirAnimations::parse
 		}
 
 		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir]);
-		s->set_name(sectname); // NOCOM(#sirver): comment
+
+		// Fake the section name here, so that the animation loading code is
+		// using the correct glob pattern to load the images from.
+		s->set_name(sectname);
 		m_animations[dir] = g_gr->animations().load(directory, *s);
 		b.add_animation(anim_name.c_str(), m_animations[dir]);
 	}

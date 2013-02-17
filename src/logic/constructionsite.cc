@@ -401,7 +401,8 @@ void ConstructionSite::draw
 		const Animation& prev_building_anim = g_gr->animations().get_animation(prev_building_anim_idx);
 		dst.drawanimrect
 			(pos, prev_building_anim_idx, tanim - FRAME_LENGTH, get_owner(),
-			 Rect(Point(0, 0), prev_building_anim.width(), std::min<int>(prev_building_anim.height(), h - lines)));
+			 Rect
+			 (Point(0, 0), prev_building_anim.width(), std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);

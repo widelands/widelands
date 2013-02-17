@@ -53,8 +53,8 @@ struct Player;
 class RenderTarget {
 public:
 	RenderTarget(Surface*);
-	void set_window(const Rect &rc, const Point& ofs);
-	bool enter_window(const Rect &rc, Rect* previous, Point* prevofs);
+	void set_window(const Rect& rc, const Point& ofs);
+	bool enter_window(const Rect& rc, Rect* previous, Point* prevofs);
 
 	int32_t width() const;
 	int32_t height() const;

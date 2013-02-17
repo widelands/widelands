@@ -79,18 +79,24 @@ public:
 
 /**
 * The animation manager manages a list of all active animations.
-* They are flushed after a game is finished and loaded at gfxload time by the
-* Game code.
-* get() only works properly before gfxload. This means that all animations must
-* be loaded before the game starts.
-*
-* Note that animation IDs are counted from 1, while the m_animations array is
-* counted from 0.
 */
 struct AnimationManager {
+	/**
+	 * Loads an animation, graphics sound and everything.
+	 *
+	 * The animation resides in the given directory and is described by the
+	 * given section.
+	 *
+	 * This function looks for image files as defined by the 'pics' key. If this
+	 * is not present, it will try \<sectionname\>_??.png
+	 *
+	 * \param directory     which directory to look in for image and sound files
+	 * \param s             conffile section to search for data on this animation
+	*/
 	uint32_t load(const std::string & directory, Section& s);
 
-	// for use by the graphics subsystem
+	/// Returns the animation with the given ID or throws an exception if it is
+	/// unknown.
 	const Animation& get_animation(uint32_t id) const;
 
 private:

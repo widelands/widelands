@@ -114,8 +114,8 @@ void Building_Window::draw(RenderTarget & dst)
 
 	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
 
-	const Image* dark_frame = ImageTransformations::change_luminosity(
-			&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
+	const Image* dark_frame = ImageTransformations::change_luminosity
+		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
 	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, CM_Normal, UI::Align_Center);
 }
 
