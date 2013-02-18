@@ -493,50 +493,10 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 	molog("Setting up port dock fields\n");
 
 	Map & map = egbase.map();
-	std::vector<Coords> shore;
-
-	shore.resize(3);
-	map.get_neighbour(get_position(), WALK_W, &shore[0]);
-	map.get_neighbour(get_position(), WALK_NW, &shore[1]);
-	map.get_neighbour(get_position(), WALK_NE, &shore[2]);
-
-	map.find_fields
-		(Area<FCoords>(map.get_fcoords(get_position()), 2),
-		 &shore, FindNodeShore());
-
-	std::vector<Coords> water;
-	container_iterate_const(std::vector<Coords>, shore, shoreit) {
-		FCoords cur = map.get_fcoords(*shoreit.current);
-		for (int dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords neighb = map.get_neighbour(cur, dir);
-			if ((neighb.field->nodecaps() & (MOVECAPS_WALK|MOVECAPS_SWIM)) != MOVECAPS_SWIM)
-				continue;
-
-			if (std::find(water.begin(), water.end(), neighb) == water.end())
-				water.push_back(neighb);
-		}
-	}
-	if (water.empty()) {
+	std::vector<Coords> dock = map.find_portdock(get_position());
+	if (dock.empty()) {
 		log("Attempting to setup port without neighboring water.\n");
 		return;
-	}
-
-	std::vector<FCoords> dock;
-	std::vector<Coords>::size_type nrscanned = 0;
-	dock.push_back(map.get_fcoords(water[0]));
-
-	while (nrscanned < dock.size()) {
-		for (int dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords neighb = map.get_neighbour(dock[nrscanned], dir);
-
-			if (std::find(dock.begin(), dock.end(), neighb) != dock.end())
-				continue;
-			if (std::find(water.begin(), water.end(), neighb) == water.end())
-				continue;
-
-			dock.push_back(neighb);
-		}
-		nrscanned++;
 	}
 
 	molog("Found %"PRIuS" fields for the dock\n", dock.size());
@@ -545,7 +505,7 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 	m_portdock->set_owner(get_owner());
 	m_portdock->set_warehouse(this);
 	m_portdock->set_economy(get_economy());
-	container_iterate_const(std::vector<FCoords>, dock, it) {
+	container_iterate_const(std::vector<Coords>, dock, it) {
 		m_portdock->add_position(*it.current);
 	}
 	m_portdock->init(egbase);

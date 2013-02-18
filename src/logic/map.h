@@ -361,6 +361,7 @@ struct Map :
 	bool is_port_space(Coords c);
 	void set_port_space(Coords c, bool allowed);
 	std::vector<Coords> get_port_spaces() {return m_port_spaces;}
+	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);

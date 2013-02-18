@@ -1340,7 +1340,7 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
 			} while (mr.advance(*this));
 		}
 
-		if ((buildsize == BaseImmovable::BIG) && is_port_space(f))
+		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) && !find_portdock(f).empty())
 			f.field->caps |= BUILDCAPS_PORT;
 
 		f.field->caps |= buildsize;
@@ -1444,6 +1444,47 @@ bool Map::is_cycle_connected
 	return true;
 }
 
+/**
+ * Returns a list of portdock fields (if any) that a port built at \p c should have.
+ */
+std::vector<Coords> Map::find_portdock(const Coords & c) const
+{
+	static const WalkingDir cycledirs[16] = {
+		WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW,
+		WALK_W, WALK_W, WALK_W,
+		WALK_SW, WALK_SW, WALK_SW, WALK_SE, WALK_SE,
+		WALK_E, WALK_E, WALK_E
+	};
+	const FCoords start = br_n(br_n(get_fcoords(c)));
+	FCoords f[16];
+	bool iswater[16];
+	int firstwater = -1;
+	int lastnonwater = -1;
+	f[0] = start;
+	for (uint32_t i = 0; i < 16; ++i) {
+		iswater[i] = (f[i].field->get_caps() & (MOVECAPS_SWIM|MOVECAPS_WALK)) == MOVECAPS_SWIM;
+		if (iswater[i]) {
+			if (firstwater < 0)
+				firstwater = i;
+		} else {
+			lastnonwater = i;
+		}
+		if (i < 15)
+			f[i + 1] = get_neighbour(f[i], cycledirs[i]);
+	}
+
+	std::vector<Coords> portdock;
+	if (firstwater >= 0) {
+		for (uint32_t i = firstwater; i < 16 && iswater[i]; ++i)
+			portdock.push_back(f[i]);
+		if (firstwater == 0 && lastnonwater >= 0) {
+			for (uint32_t i = lastnonwater + 1; i < 16; ++i)
+				portdock.push_back(f[i]);
+		}
+	}
+
+	return portdock;
+}
 
 /// \returns true, if Coordinates are in port space list
 bool Map::is_port_space(Coords c) {
