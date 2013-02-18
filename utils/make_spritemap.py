@@ -65,8 +65,9 @@ class Rect(object):
         return False
 
 class ImageWrapper(object):
-    def __init__(self, img, r, id):
+    def __init__(self, img, pc_img, r, id):
         self.img = img
+        self.pc_img = pc_img
         self.id = tuple(id)
         self.node = None
 
@@ -156,6 +157,7 @@ class Packer(object):
 
     def get_result(self):
         img = np.empty((self.root['h'], self.root['w'], 4), np.uint8)
+        pc_img = np.empty((self.root['h'], self.root['w'], 4), np.uint8)
         offsets = {}
 
         for b in self.blocks:
@@ -163,9 +165,13 @@ class Packer(object):
             n = b.node
             x, y = n['x'], n['y']
             img[y:y+b.h,x:x+b.w] = b.img.astype(np.uint8)
+            if b.pc_img is not None:
+                pc_img[y:y+b.h,x:x+b.w] = b.pc_img.astype(np.uint8)
+            else:
+                pc_img = None
             for id in b.id:
                 offsets[id] = (x, y)
-        return offsets, img
+        return offsets, img, pc_img
 
 # TODO: Merge in crop_animations.py script. It does not matter so much anymore though.
 def load_animations(anims):
@@ -224,6 +230,7 @@ def pack_animations(anims):
 
     imgs, pc_imgs = load_animations(anims)
     base_pic = imgs[0][0]
+    pc_base_pic = pc_imgs[0]
 
     pics_to_fit = []
 
@@ -245,7 +252,10 @@ def pack_animations(anims):
     assert(len(regions) > 0)
 
     pics_to_fit.append(ImageWrapper(
-        cut_out_main(base_pic, regions), Rect(0, base_pic.shape[0], 0, base_pic.shape[1]), [("base",-1, -1)])
+        cut_out_main(base_pic, regions),
+        cut_out_main(pc_base_pic, regions) if pc_base_pic is not None else None,
+        Rect(0, base_pic.shape[0], 0, base_pic.shape[1]),
+        [("base",-1, -1)])
     )
     for ridx,r in enumerate(regions):
         reg_imgs = []
@@ -260,17 +270,16 @@ def pack_animations(anims):
 
         # Find out if some images are exactly the same
         for subimg, pc_img, id in reg_imgs:
-            pics_to_fit.append(ImageWrapper(subimg, r, id))
+            pc_subimg = None
             if pc_img is not None:
                 pc_subimg = pc_img[r.top:r.bottom+1, r.left:r.right+1]
-                pc_ids = [ (anim + "_pc",  ridx, framenr) for anim, ridx, framenr in id]
-                pics_to_fit.append(ImageWrapper(pc_subimg, r, pc_ids))
+            pics_to_fit.append(ImageWrapper(subimg, pc_subimg, r, id))
 
     pics_to_fit.sort(reverse=True)
     p = Packer()
     p.fit(pics_to_fit)
-    offsets_by_id, result_img = p.get_result()
-    return regions, base_pic.shape[1], base_pic.shape[0], offsets_by_id, result_img
+    offsets_by_id, result_img, pc_result_img = p.get_result()
+    return regions, base_pic.shape[1], base_pic.shape[0], offsets_by_id, result_img, pc_result_img
 
 # NOCOM(#sirver): should take a file descriptor
 def output_results(anim, img_name, w, h, regions, offsets_by_id):
@@ -318,11 +327,15 @@ def parse_args():
 def main():
     args = parse_args()
 
-    regions, w, h, offsets_by_id, result_img = pack_animations(args.anim)
+    regions, w, h, offsets_by_id, result_img, pc_result_img = pack_animations(args.anim)
     for anim in args.anim:
         output_results(anim, args.output, w, h, regions, offsets_by_id)
 
     Image.fromarray(result_img).save(args.output)
+    if pc_result_img is not None:
+        pc_fn = os.path.splitext(args.output)[0] + "_pc.png"
+        Image.fromarray(pc_result_img).save(pc_fn)
+
 
 if __name__ == '__main__':
     main()
