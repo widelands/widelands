@@ -415,8 +415,9 @@ private:
 
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(FCoords);
-	void recalc_nodecaps_pass2(FCoords);
+	void recalc_nodecaps_pass2(const FCoords & f);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
+	int calc_buildsize(const Widelands::FCoords& f, bool* ismine = 0);
 	bool is_cycle_connected
 		(const FCoords & start, uint32_t length, const WalkingDir * dirs);
 

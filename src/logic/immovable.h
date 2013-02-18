@@ -48,10 +48,10 @@ class Worker;
  */
 struct BaseImmovable : public Map_Object {
 	enum {
-		NONE,   ///< not robust (i.e. removable by building something over it)
-		SMALL,  ///< small building or robust map element, including trees
-		MEDIUM, ///< medium size building
-		BIG     ///< big building
+		NONE = 0, ///< not robust (i.e. removable by building something over it)
+		SMALL,    ///< small building or robust map element, including trees
+		MEDIUM,   ///< medium size building
+		BIG       ///< big building
 	};
 
 	BaseImmovable(const Map_Object_Descr &);
