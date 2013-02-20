@@ -501,13 +501,16 @@ void GameRendererGL::draw_terrain_dither()
 
 uint8_t GameRendererGL::field_roads(const FCoords & coords) const
 {
+	uint8_t roads;
+	const Map & map = m_egbase->map();
 	if (m_player && !m_player->see_all()) {
-		const Map & map = m_egbase->map();
 		const Player::Field & pf = m_player->fields()[Map::get_index(coords, map.get_width())];
-		return pf.roads | map.overlay_manager().get_road_overlay(coords);
+		roads = pf.roads | map.overlay_manager().get_road_overlay(coords);
 	} else {
-		return coords.field->get_roads();
+		roads = coords.field->get_roads();
 	}
+	roads |= map.overlay_manager().get_road_overlay(coords);
+	return roads;
 }
 
 void GameRendererGL::prepare_roads()

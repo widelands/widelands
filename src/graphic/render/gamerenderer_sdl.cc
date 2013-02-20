@@ -151,7 +151,7 @@ void GameRendererSDL::draw_terrain()
 				f_d_texture = get_terrain_texture(f_pf.terrains.d);
 				tr_d_texture = get_terrain_texture(tr_pf.terrains.d);
 
-				roads = f_pf.roads | map.overlay_manager().get_road_overlay(f);
+				roads = f_pf.roads;
 
 				f_brightness = node_brightness
 				 	(gametime, f_pf.time_node_last_unseen,
@@ -177,6 +177,7 @@ void GameRendererSDL::draw_terrain()
 				bl_brightness = bl.field->get_brightness();
 				br_brightness = br.field->get_brightness();
 			}
+			roads |= map.overlay_manager().get_road_overlay(f);
 
 			Vertex f_vert
 				(f_posx, posy - f.field->get_height() * HEIGHT_FACTOR,
