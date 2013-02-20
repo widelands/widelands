@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,11 +37,8 @@ int32_t Editor_Tool_Set_Port_Space_Callback
 	NodeCaps const caps = c.field->nodecaps();
 	FCoords f = map.get_fcoords(*c.field);
 	if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
-		MapFringeRegion<Area<FCoords> > mr(map, Area<FCoords>(f, 2));
-		do {
-			if (mr.location().field->get_caps() & MOVECAPS_SWIM)
-				return caps;
-		} while (mr.advance(map));
+		if (!map.find_portdock(f).empty())
+			return caps;
 	}
 	return 0;
 }
