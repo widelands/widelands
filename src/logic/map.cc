@@ -1264,16 +1264,16 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
 		return;
 
 	bool mine;
-	uint8_t buildsize = calc_buildsize(f, &mine);
+	uint8_t buildsize = calc_buildsize(f, true, &mine);
 	if (buildsize < BaseImmovable::SMALL)
 		return;
 	assert(buildsize >= BaseImmovable::SMALL && buildsize <= BaseImmovable::BIG);
 
 	if (buildsize == BaseImmovable::BIG) {
 		if
-			(calc_buildsize(l_n(f)) < BaseImmovable::BIG ||
-			 calc_buildsize(tl_n(f)) < BaseImmovable::BIG ||
-			 calc_buildsize(tr_n(f)) < BaseImmovable::BIG)
+			(calc_buildsize(l_n(f), false) < BaseImmovable::BIG ||
+			 calc_buildsize(tl_n(f), false) < BaseImmovable::BIG ||
+			 calc_buildsize(tr_n(f), false) < BaseImmovable::BIG)
 			buildsize = BaseImmovable::MEDIUM;
 	}
 
@@ -1353,7 +1353,7 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
  * Sets \p ismine depending on whether the field is on mountaineous terrain
  * or not.
  */
-int Map::calc_buildsize(const FCoords & f, bool * ismine)
+int Map::calc_buildsize(const FCoords & f, bool avoidnature, bool * ismine)
 {
 	if (!(f.field->get_caps() & MOVECAPS_WALK))
 		return BaseImmovable::NONE;
@@ -1403,8 +1403,12 @@ int Map::calc_buildsize(const FCoords & f, bool * ismine)
 		 &objectlist,
 		 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
 	for (uint32_t i = 0; i < objectlist.size(); ++i) {
-		const BaseImmovable & obj = *objectlist[i].object;
-		const int objsize = obj.get_size();
+		const BaseImmovable * obj = objectlist[i].object;
+		int objsize = obj->get_size();
+		if (objsize == BaseImmovable::NONE)
+			continue;
+		if (avoidnature && obj->get_type() == Map_Object::IMMOVABLE)
+			objsize += 1;
 		if (objsize + buildsize > BaseImmovable::BIG)
 			buildsize = BaseImmovable::BIG - objsize + 1;
 	}
