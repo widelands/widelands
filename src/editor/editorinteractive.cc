@@ -336,9 +336,6 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 	if (down) {
 		// only on down events
 
-//Will complain about 200+ SDL_ enums not checked if not silenced.
-GCC_DIAG_OFF("-Wswitch-enum")
-CLANG_DIAG_OFF("-Wswitch-enum")
 		switch (code.sym) {
 			// Sel radius
 		case SDLK_1:
@@ -467,15 +464,8 @@ CLANG_DIAG_OFF("-Wswitch-enum")
 			break;
 
 		}
-CLANG_DIAG_ON("-Wswitch-enum")
-GCC_DIAG_ON("-Wswitch-enum")
-
 	} else {
 		// key up events
-
-//Will complain about 200+ SDL_ enums not checked if not silenced.
-GCC_DIAG_OFF("-Wswitch-enum")
-CLANG_DIAG_OFF("-Wswitch-enum")
 		switch (code.sym) {
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
@@ -489,9 +479,6 @@ CLANG_DIAG_OFF("-Wswitch-enum")
 		default:
 			break;
 		}
-CLANG_DIAG_ON("-Wswitch-enum")
-GCC_DIAG_ON("-Wswitch-enum")
-
 	}
 	return handled;
 }

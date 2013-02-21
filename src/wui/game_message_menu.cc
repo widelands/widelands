@@ -253,10 +253,6 @@ void GameMessageMenu::double_clicked(uint32_t const /* t */) {
 bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 {
 	if (down) {
-
-//Will complain about 200+ SDL_ enums not checked if not silenced.
-GCC_DIAG_OFF("-Wswitch-enum")
-CLANG_DIAG_OFF("-Wswitch-enum")
 		switch (code.sym) {
 		case SDLK_g:
 			if (m_centerviewbtn->enabled())
@@ -274,9 +270,6 @@ CLANG_DIAG_OFF("-Wswitch-enum")
 		default:
 			break; // not handled
 		}
-CLANG_DIAG_ON("-Wswitch-enum")
-GCC_DIAG_ON("-Wswitch-enum")
-
 	}
 
 	return list->handle_key(down, code);
