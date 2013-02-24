@@ -18,6 +18,7 @@
  */
 
 // NOCOM(#sirver): check for ME also in conf files and therelike.
+// // NOCOM(#sirver): add progress bar in loading screen back in.
 #include <cassert>
 
 #include <boost/algorithm/string/replace.hpp>
@@ -84,7 +85,7 @@ public:
 	// Implements Animation.
 	virtual uint16_t width() const {return width_;}
 	virtual uint16_t height() const {return height_;}
-	virtual uint16_t nr_frames() const {return nframes_;}
+	virtual uint16_t nr_frames() const {return nr_frames_;}
 	virtual uint32_t frametime() const {return frametime_;}
 	virtual const Point& hotspot() const {return hotspot_;};
 	virtual const Image& representative_image(const RGBColor& clr) const;
@@ -100,9 +101,10 @@ private:
 	};
 
 	uint16_t width_, height_;
-	uint16_t nframes_;
+	uint16_t nr_frames_;
 	uint32_t frametime_;
 	Point hotspot_;
+	Point base_offset_;
 
 	const Image* image_;
 	const Image* pcmask_;
@@ -113,7 +115,7 @@ private:
 };
 
 PackedAnimation::PackedAnimation(const string& directory, Section& s)
-		: width_(0), height_(0), nframes_(0), frametime_(FRAME_LENGTH), image_(NULL), pcmask_(NULL) {
+		: width_(0), height_(0), nr_frames_(0), frametime_(FRAME_LENGTH), image_(NULL), pcmask_(NULL) {
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
@@ -159,6 +161,9 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 	width_ = p.x;
 	height_ = p.y;
 
+	// Parse base_offset.
+	parse_point(s.get_string("base_offset"), &base_offset_);
+
 	// Parse regions
 	NumberGlob glob("region_??");
 	string region_name;
@@ -175,11 +180,11 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 
 		vector<string> offset_strings;
 		boost::split(offset_strings, split_vector[1], boost::is_any_of(";"));
-		if (nframes_ && nframes_ != offset_strings.size())
+		if (nr_frames_ && nr_frames_ != offset_strings.size())
 			throw wexception
 				("%s: region has different number of frames than previous (%i != %"PRIuS").",
-				 region_name.c_str(), nframes_, offset_strings.size());
-		nframes_ = offset_strings.size();
+				 region_name.c_str(), nr_frames_, offset_strings.size());
+		nr_frames_ = offset_strings.size();
 
 		Rect region_rect;
 		parse_rect(split_vector[0], &region_rect);
@@ -195,6 +200,9 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 		}
 		regions_.push_back(r);
 	}
+
+	if (!regions_.size())  // No regions? Only one frame then.
+		nr_frames_ = 1;
 	log("#sirver regions_.size(): %u\n", regions_.size());
 	log("#sirver nr_frames(): %u\n", nr_frames());
 }
@@ -224,12 +232,9 @@ void PackedAnimation::blit
 	}
 
 	// NOCOM(#sirver): do not ignore srcrc
-	target->blit(dst, use_image->surface(), Rect(0, 0, width_, height_));
+	target->blit(dst, use_image->surface(), Rect(base_offset_.x, base_offset_.y, width_, height_));
 
 	BOOST_FOREACH(const Region& r, regions_) {
-		log("#sirver r.target_offset.x: %i\n", r.target_offset.x);
-		log("#sirver r.target_offset.y: %i\n", r.target_offset.y);
-		log("#sirver r.w: %i,r.h: %i\n", r.w, r.h);
 		target->blit(dst + r.target_offset, use_image->surface(), Rect(r.source_offsets[framenumber], r.w, r.h));
 	}
 }

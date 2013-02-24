@@ -2,6 +2,8 @@
 # encoding: utf-8
 
 from glob import glob
+from itertools import chain, combinations, permutations
+import re
 import argparse
 import os
 import sys
@@ -9,6 +11,25 @@ import sys
 import Image
 import numpy as np
 from scipy import ndimage
+
+# Set partition: http://code.activestate.com/recipes/576795/
+def set_partition(iterable, chain=chain, map=map):
+    """Returns all set partitions of iteratable"""
+    s = iterable if hasattr(iterable, '__getslice__') else tuple(iterable)
+    n = len(s)
+    first, middle, last = [0], range(1, n), [n]
+    getslice = s.__getslice__
+    return list(map(getslice, chain(first, div), chain(div, last)) for i in
+            range(n) for div in combinations(middle, i))
+
+def set_partitions_all_permutation(iterable):
+    """Returns all unique set partitions in all permutations of iteratable"""
+    def _sub():
+        for partition in set_partition(iterable):
+            for idx in range(len(partition)):
+                for c in permutations(partition[idx], len(partition[idx])):
+                    yield tuple(map(tuple, partition[:idx] + [list(c)] + partition[idx+1:]))
+    return sorted(set(_sub()))
 
 
 class Point(object):
@@ -177,10 +198,8 @@ class Packer(object):
 def load_animations(anims):
     rv = []
     rv_pc = []
-    seen_shape = None
 
-    def _load(fn):
-        print "Loading %s" % fn
+    def _load(fn, seen_shape):
         img = np.asarray(Image.open(fn))
         if seen_shape and seen_shape != rv[0][0].shape:
             print "This file has different dimensions than the others before. Terminating."
@@ -188,13 +207,30 @@ def load_animations(anims):
         return img
 
     for anim in anims:
+        seen_shape = None
         for idx, fn in enumerate(sorted(glob(anim + "??.png"))):
-            rv.append((_load(fn), anim, idx))
+            rv.append((_load(fn, seen_shape), anim, idx))
             if seen_shape is None:
                 seen_shape = rv[0][0].shape
             pc_fn = os.path.splitext(fn)[0] + "_pc.png"
             if os.path.exists(pc_fn):
-                rv_pc.append(_load(pc_fn))
+                rv_pc.append(_load(pc_fn, seen_shape))
+
+    # Crop the Images.
+    line_x_all_alpha = lambda x,idx: (rv[idx][0][x,:,-1] == 0).all()
+    col_x_all_alpha = lambda x,idx: (rv[idx][0][:,x,-1] == 0).all()
+    while all(line_x_all_alpha(0,i) for i in range(len(rv))):
+        rv = [(img[1:], anim, idx) for img, anim, idx in rv]
+        rv_pc = [img[1:] for img in rv_pc]
+    while all(line_x_all_alpha(-1,i) for i in range(len(rv))):
+        rv = [(img[:-1], anim, idx) for img, anim, idx in rv]
+        rv_pc = [img[:-1] for img in rv_pc]
+    while all(col_x_all_alpha(0,i) for i in range(len(rv))):
+        rv = [(img[:,1:], anim, idx) for img, anim, idx in rv]
+        rv_pc = [img[:,1:] for img in rv_pc]
+    while all(col_x_all_alpha(-1,i) for i in range(len(rv))):
+        rv = [(img[:,:-1], anim, idx) for img, anim, idx in rv]
+        rv_pc = [img[:,:-1] for img in rv_pc]
 
     return rv, rv_pc
 
@@ -225,13 +261,12 @@ def eliminate_duplicates(imgs):
                 return True
     return False
 
-def pack_animations(anims):
-    base_pic = None
 
+def prepare_animations(anims):
     imgs, pc_imgs = load_animations(anims)
-    base_pic = imgs[0][0]
-    pc_base_pic = pc_imgs[0]
 
+    base_pic = imgs[0][0]
+    pc_base_pic = pc_imgs[0] if pc_imgs else None
     pics_to_fit = []
 
     # Find the regions that differ over all frames
@@ -249,13 +284,12 @@ def pack_animations(anims):
 
     while merge_overlapping(regions):
         pass
-    assert(len(regions) > 0)
 
     pics_to_fit.append(ImageWrapper(
         cut_out_main(base_pic, regions),
         cut_out_main(pc_base_pic, regions) if pc_base_pic is not None else None,
         Rect(0, base_pic.shape[0], 0, base_pic.shape[1]),
-        [("base",-1, -1)])
+        [(anim, -1, -1) for anim in anims])
     )
     for ridx,r in enumerate(regions):
         reg_imgs = []
@@ -268,68 +302,108 @@ def pack_animations(anims):
         while eliminate_duplicates(reg_imgs):
             pass
 
-        # Find out if some images are exactly the same
         for subimg, pc_img, id in reg_imgs:
             pc_subimg = None
             if pc_img is not None:
                 pc_subimg = pc_img[r.top:r.bottom+1, r.left:r.right+1]
             pics_to_fit.append(ImageWrapper(subimg, pc_subimg, r, id))
+    return pics_to_fit, regions, base_pic.shape[1], base_pic.shape[0]
+
+
+def pack_animations(anim_sets):
+    pics_to_fit = []
+    dimensions = {}
+    regions = {}
+    for anims in anim_sets:
+        new_pics_to_fit, anim_regions, w, h = prepare_animations(anims)
+        pics_to_fit.extend(new_pics_to_fit)
+        for anim in anims:
+            dimensions[anim] = (w, h)
+            regions[anim] = anim_regions
 
     pics_to_fit.sort(reverse=True)
     p = Packer()
     p.fit(pics_to_fit)
     offsets_by_id, result_img, pc_result_img = p.get_result()
-    return regions, base_pic.shape[1], base_pic.shape[0], offsets_by_id, result_img, pc_result_img
+    return regions, dimensions, offsets_by_id, result_img, pc_result_img
 
-# NOCOM(#sirver): should take a file descriptor
-def output_results(anim, img_name, w, h, regions, offsets_by_id):
-    print "[%s]" % anim
-    print "pics=%s" % img_name
-    print "dimensions=%i,%i" % (w,h)
-    has_plr_clr = False
-    if len(regions) and (anim + "_pc", 0, 0) in offsets_by_id:
-        has_plr_clr = True
+def output_results(anim, img_name, dimensions, regions, offsets_by_id, args):
+    with open("conf", "a") as f:
+        f.write("[%s]\n" % anim)
+        f.write("packed=true\n")  # NOCOM(#sirver): get rid of this again.
+        f.write("pics=%s\n" % img_name)
+        f.write("dimensions=%i,%i\n" % (dimensions[0], dimensions[1]))
+        has_plr_clr = False
+        if len(regions) and (anim + "_pc", 0, 0) in offsets_by_id:
+            has_plr_clr = True
 
-    def _find_offsets(anim, ridx):
-        cur_fr = 0
-        rv = []
-        while True:
-            id = (anim, ridx, cur_fr)
-            if id not in offsets_by_id:
-                break
-            rv.append("%i,%i" % offsets_by_id[id])
-            cur_fr += 1
-        return ";".join(rv)
+        def _find_offsets(anim, ridx):
+            cur_fr = 0
+            rv = []
+            while True:
+                id = (anim, ridx, cur_fr)
+                if id not in offsets_by_id:
+                    break
+                rv.append("%i,%i" % offsets_by_id[id])
+                cur_fr += 1
+            return ";".join(rv)
 
-    for ridx,r in enumerate(regions):
-        print "region_%02i=%i,%i,%i,%i:%s" % (
-            ridx, r.left, r.top, r.right - r.left + 1,
-            r.bottom - r.top + 1, _find_offsets(anim, ridx)
-            )
+        f.write("base_offset=%i,%i\n" % offsets_by_id[anim, -1, -1])
 
-    print "fps=10"
-    print "hotspot=?? ??"
-    print
+        for ridx,r in enumerate(regions):
+            f.write("region_%02i=%i,%i,%i,%i:%s\n" % (
+                ridx, r.left, r.top, r.right - r.left + 1,
+                r.bottom - r.top + 1, _find_offsets(anim, ridx)
+                ))
+
+        if args.fps:
+            f.write("fps=%s\n" % args.fps)
+        if args.hotspot:
+            f.write("hotspot=%s\n" % args.hotspot)
+        f.write("\n")
 
 # NOCOM(#sirver): support for dirpics.
 def parse_args():
     p = argparse.ArgumentParser(description=
-        "Creates a Spritemap of a given set of images."
+        "Creates a Spritemap of the animation pictures found in the current directory."
     )
-    p.add_argument("anim", nargs='+', help = "nocom") # NOCOM(#sirver): help
-    p.add_argument("-o", "--output", type=str, default=None, help = "nocom") # NOCOM(#sirver): help
+
+    p.add_argument("-o", "--output", type=str, default=None, help = "Output picture name. Default is <current dir>.png")
+    p.add_argument("-f", "--fps", type=str, default=None, help="Specify frames per second for all the animations. This will be outputted into the conf file and is just there to spare typing.")
+    p.add_argument("-s", "--hotspot", type=str, default=None, help="Specify hotspot as 'x y' for all the animations. This will be outputted into the conf file and is just there to spare typing.")
 
     args = p.parse_args()
+
+    # Find the animations in the current directory
+    anims = set()
+    for fn in glob('*.png'):
+        m = re.match(r'(.*?)\d+\.png', fn)
+        if m is None: continue
+        anims.add(m.group(1))
+    args.anim = sorted(anims)
+
     if args.output is None:
-        args.output = args.anim[0] + "spritemap.png"
+        args.output = os.path.basename(os.getcwd()) + '.png'
     return args
 
 def main():
     args = parse_args()
 
-    regions, w, h, offsets_by_id, result_img, pc_result_img = pack_animations(args.anim)
+    best = 10000**2
+    best_result = None
+    for anim_sets in set_partitions_all_permutation(args.anim):
+        print "Trying: ", anim_sets
+        regions, dimensions, offsets_by_id, result_img, pc_result_img = pack_animations(anim_sets)
+        size = result_img.shape[0]*result_img.shape[1]
+        print "Size: %i x %i = %i pixels" % (result_img.shape[1],result_img.shape[0], size)
+        if size < best:
+            best = size
+            best_result = regions, dimensions, offsets_by_id, result_img, pc_result_img
+
+    regions, dimensions, offsets_by_id, result_img, pc_result_img = best_result
     for anim in args.anim:
-        output_results(anim, args.output, w, h, regions, offsets_by_id)
+        output_results(anim, args.output, dimensions[anim], regions[anim], offsets_by_id, args)
+    print "Results were appended to conf."
 
     Image.fromarray(result_img).save(args.output)
     if pc_result_img is not None:
