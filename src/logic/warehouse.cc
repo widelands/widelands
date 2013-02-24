@@ -218,11 +218,9 @@ uint32_t WarehouseSupply::nr_supplies
 /// Launch a ware as item.
 WareInstance & WarehouseSupply::launch_item(Game & game, const Request & req) {
 	if (req.get_type() != wwWARE)
-		throw wexception
-			("WarehouseSupply::launch_item: called for non-ware request");
+		throw wexception("WarehouseSupply::launch_item: called for non-ware request");
 	if (!m_wares.stock(req.get_index()))
-		throw wexception
-			("WarehouseSupply::launch_item: called for non-existing ware");
+		throw wexception("WarehouseSupply::launch_item: called for non-existing ware");
 
 	return m_warehouse->launch_item(game, req.get_index());
 }
@@ -876,8 +874,7 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 /// carried out of the warehouse.
 WareInstance & Warehouse::launch_item(Game & game, Ware_Index const ware) {
 	// Create the item
-	WareInstance & item =
-		*new WareInstance(ware, tribe().get_ware_descr(ware));
+	WareInstance & item = *new WareInstance(ware, tribe().get_ware_descr(ware));
 	item.init(game);
 	do_launch_item(game, item);
 
@@ -1302,10 +1299,7 @@ void Warehouse::set_worker_policy
 void Warehouse::check_remove_stock(Game & game)
 {
 	if (base_flag().current_items() < base_flag().total_capacity() / 2) {
-		for
-			(Ware_Index ware = Ware_Index::First();
-			 ware.value() < m_ware_policy.size(); ++ware)
-		{
+		for (Ware_Index ware = Ware_Index::First(); ware.value() < m_ware_policy.size(); ++ware) {
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
 
@@ -1314,10 +1308,7 @@ void Warehouse::check_remove_stock(Game & game)
 		}
 	}
 
-	for
-		(Ware_Index widx = Ware_Index::First();
-		 widx.value() < m_worker_policy.size(); ++widx)
-	{
+	for (Ware_Index widx = Ware_Index::First(); widx.value() < m_worker_policy.size(); ++widx) {
 		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
 			continue;
 
