@@ -174,8 +174,9 @@ void RenderTarget::blit(const Point& dst, const Image* image, Composite cm, UI::
 	UI::correct_for_align(align, image->width(), image->height(), &dstpoint);
 
 	Rect srcrc(Point(0, 0), image->width(), image->height());
-	to_surface_geometry(&dstpoint, &srcrc);
-	m_surface->blit(dstpoint, image->surface(), srcrc, cm);
+
+	if (to_surface_geometry(&dstpoint, &srcrc))
+		m_surface->blit(dstpoint, image->surface(), srcrc, cm);
 }
 
 /**
@@ -189,8 +190,9 @@ void RenderTarget::blitrect
 
 	Rect srcrc(gsrcrc);
 	Point dstpt(dst);
-	to_surface_geometry(&dstpt, &srcrc);
-	m_surface->blit(dstpt, image->surface(), srcrc, cm);
+
+	if(to_surface_geometry(&dstpt, &srcrc))
+		m_surface->blit(dstpt, image->surface(), srcrc, cm);
 }
 
 /**
@@ -281,9 +283,9 @@ void RenderTarget::drawanim
 	Point dstpt = dst - anim.hotspot();
 
 	Rect srcrc(Point(0, 0), anim.width(), anim.height());
-	to_surface_geometry(&dstpt, &srcrc);
 
-	anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
+	if (to_surface_geometry(&dstpt, &srcrc))
+		anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
@@ -302,9 +304,9 @@ void RenderTarget::drawanimrect
 	dstpt += gsrcrc;
 
 	Rect srcrc(gsrcrc);
-	to_surface_geometry(&dstpt, &srcrc);
 
-	anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
+	if (to_surface_geometry(&dstpt, &srcrc))
+		anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 }
 
 /**
@@ -364,9 +366,10 @@ bool RenderTarget::clip(Rect & r) const
 }
 
 /**
- * Clip against window and source bitmap, then call the Bitmap blit routine.
+ * Clip against window and source bitmap, returns false if blitting is
+ * unnecessary because image is not inside the target surface.
  */
-void RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
+bool RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 {
 	assert(0 <= srcrc->x);
 	assert(0 <= srcrc->y);
@@ -375,7 +378,7 @@ void RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 	// Clipping
 	if (dst->x < 0) {
 		if (srcrc->w <= static_cast<uint32_t>(-dst->x))
-			return;
+			return false;
 		srcrc->x -= dst->x;
 		srcrc->w += dst->x;
 		dst->x = 0;
@@ -383,13 +386,13 @@ void RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 
 	if (dst->x + srcrc->w > m_rect.w) {
 		if (static_cast<int32_t>(m_rect.w) <= dst->x)
-			return;
+			return false;
 		srcrc->w = m_rect.w - dst->x;
 	}
 
 	if (dst->y < 0) {
 		if (srcrc->h <= static_cast<uint32_t>(-dst->y))
-			return;
+			return false;
 		srcrc->y -= dst->y;
 		srcrc->h += dst->y;
 		dst->y = 0;
@@ -397,9 +400,10 @@ void RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 
 	if (dst->y + srcrc->h > m_rect.h) {
 		if (static_cast<int32_t>(m_rect.h) <= dst->y)
-			return;
+			return false;
 		srcrc->h = m_rect.h - dst->y;
 	}
 
 	*dst += m_rect;
+	return true;
 }

@@ -81,7 +81,7 @@ public:
 
 protected:
 	bool clip(Rect & r) const;
-	void to_surface_geometry(Point* dst, Rect* srcrc) const;
+	bool to_surface_geometry(Point* dst, Rect* srcrc) const;
 
 	///The target surface
 	Surface* m_surface;
