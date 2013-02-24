@@ -248,8 +248,7 @@ void WareInstance::set_economy(Economy * const e)
  * Once you've assigned a ware to its new location, you usually have to call
  * \ref update() as well.
 */
-void WareInstance::set_location
-	(Editor_Game_Base & egbase, Map_Object * const location)
+void WareInstance::set_location(Editor_Game_Base & egbase, Map_Object * const location)
 {
 	Map_Object * const oldlocation = m_location.get(egbase);
 
@@ -274,14 +273,11 @@ void WareInstance::set_location
 
 		if (oldlocation && get_economy()) {
 			if (get_economy() != eco)
-				throw wexception
-					("WareInstance::set_location() implies change of economy");
+				throw wexception("WareInstance::set_location() implies change of economy");
 		} else {
 			set_economy(eco);
 		}
-	}
-	else
-	{
+	} else {
 		set_economy(0);
 	}
 }

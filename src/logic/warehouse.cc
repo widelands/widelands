@@ -218,11 +218,9 @@ uint32_t WarehouseSupply::nr_supplies
 /// Launch a ware as item.
 WareInstance & WarehouseSupply::launch_item(Game & game, const Request & req) {
 	if (req.get_type() != wwWARE)
-		throw wexception
-			("WarehouseSupply::launch_item: called for non-ware request");
+		throw wexception("WarehouseSupply::launch_item: called for non-ware request");
 	if (!m_wares.stock(req.get_index()))
-		throw wexception
-			("WarehouseSupply::launch_item: called for non-existing ware");
+		throw wexception("WarehouseSupply::launch_item: called for non-existing ware");
 
 	return m_warehouse->launch_item(game, req.get_index());
 }
@@ -493,50 +491,10 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 	molog("Setting up port dock fields\n");
 
 	Map & map = egbase.map();
-	std::vector<Coords> shore;
-
-	shore.resize(3);
-	map.get_neighbour(get_position(), WALK_W, &shore[0]);
-	map.get_neighbour(get_position(), WALK_NW, &shore[1]);
-	map.get_neighbour(get_position(), WALK_NE, &shore[2]);
-
-	map.find_fields
-		(Area<FCoords>(map.get_fcoords(get_position()), 2),
-		 &shore, FindNodeShore());
-
-	std::vector<Coords> water;
-	container_iterate_const(std::vector<Coords>, shore, shoreit) {
-		FCoords cur = map.get_fcoords(*shoreit.current);
-		for (int dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords neighb = map.get_neighbour(cur, dir);
-			if ((neighb.field->nodecaps() & (MOVECAPS_WALK|MOVECAPS_SWIM)) != MOVECAPS_SWIM)
-				continue;
-
-			if (std::find(water.begin(), water.end(), neighb) == water.end())
-				water.push_back(neighb);
-		}
-	}
-	if (water.empty()) {
+	std::vector<Coords> dock = map.find_portdock(get_position());
+	if (dock.empty()) {
 		log("Attempting to setup port without neighboring water.\n");
 		return;
-	}
-
-	std::vector<FCoords> dock;
-	std::vector<Coords>::size_type nrscanned = 0;
-	dock.push_back(map.get_fcoords(water[0]));
-
-	while (nrscanned < dock.size()) {
-		for (int dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords neighb = map.get_neighbour(dock[nrscanned], dir);
-
-			if (std::find(dock.begin(), dock.end(), neighb) != dock.end())
-				continue;
-			if (std::find(water.begin(), water.end(), neighb) == water.end())
-				continue;
-
-			dock.push_back(neighb);
-		}
-		nrscanned++;
 	}
 
 	molog("Found %"PRIuS" fields for the dock\n", dock.size());
@@ -545,7 +503,7 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 	m_portdock->set_owner(get_owner());
 	m_portdock->set_warehouse(this);
 	m_portdock->set_economy(get_economy());
-	container_iterate_const(std::vector<FCoords>, dock, it) {
+	container_iterate_const(std::vector<Coords>, dock, it) {
 		m_portdock->add_position(*it.current);
 	}
 	m_portdock->init(egbase);
@@ -916,8 +874,7 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 /// carried out of the warehouse.
 WareInstance & Warehouse::launch_item(Game & game, Ware_Index const ware) {
 	// Create the item
-	WareInstance & item =
-		*new WareInstance(ware, tribe().get_ware_descr(ware));
+	WareInstance & item = *new WareInstance(ware, tribe().get_ware_descr(ware));
 	item.init(game);
 	do_launch_item(game, item);
 
@@ -1342,10 +1299,7 @@ void Warehouse::set_worker_policy
 void Warehouse::check_remove_stock(Game & game)
 {
 	if (base_flag().current_items() < base_flag().total_capacity() / 2) {
-		for
-			(Ware_Index ware = Ware_Index::First();
-			 ware.value() < m_ware_policy.size(); ++ware)
-		{
+		for (Ware_Index ware = Ware_Index::First(); ware.value() < m_ware_policy.size(); ++ware) {
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
 
@@ -1354,10 +1308,7 @@ void Warehouse::check_remove_stock(Game & game)
 		}
 	}
 
-	for
-		(Ware_Index widx = Ware_Index::First();
-		 widx.value() < m_worker_policy.size(); ++widx)
-	{
+	for (Ware_Index widx = Ware_Index::First(); widx.value() < m_worker_policy.size(); ++widx) {
 		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
 			continue;
 
